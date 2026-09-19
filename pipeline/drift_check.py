@@ -19,6 +19,10 @@ Two things it deliberately handles:
   decode uses the console codepage and corrupts multi-byte characters
   (em dashes etc.), producing a false diff that has nothing to do with the
   pipeline.
+- Line endings are normalized (CRLF -> LF) on both sides, at byte level. On
+  Windows with core.autocrlf, pandas writes CRLF but git stores LF, so a
+  regenerated CSV would otherwise always look like drift. Git normalizes the
+  same way on commit, so this matches what actually gets committed.
 
 It re-runs against the raw files already in data/<city>/raw/ - it does NOT
 re-download. It prints each raw input's size and modified time so a reader
@@ -37,8 +41,12 @@ ROOT = Path(__file__).resolve().parent.parent
 FOLIUM_ID = re.compile(rb"_[0-9a-f]{32}")
 
 
+def normalize_eol(raw: bytes) -> bytes:
+    return raw.replace(b"\r\n", b"\n")
+
+
 def normalize(raw: bytes) -> bytes:
-    return FOLIUM_ID.sub(b"_ID", raw)
+    return FOLIUM_ID.sub(b"_ID", normalize_eol(raw))
 
 
 def git(*args) -> bytes:
@@ -95,12 +103,12 @@ def compare_outputs(city: str) -> bool:
             print(f"     MISSING now (committed but not regenerated): {path}")
             clean = False
             continue
-        current = (ROOT / path).read_bytes()
+        current = normalize_eol((ROOT / path).read_bytes())
         if path not in committed:
             print(f"     NEW (not in HEAD): {path}")
             clean = False
             continue
-        base = git("show", f"HEAD:{path}")
+        base = normalize_eol(git("show", f"HEAD:{path}"))
         if current == base:
             print(f"     identical: {path}")
         elif path.endswith(".html") and normalize(current) == normalize(base):

@@ -16,6 +16,29 @@ Newest first. All dates below are from the project's first working day,
 
 ### 2026-09-18 - Hygiene: shared modules, tooling, and making the project standalone
 
+- **Ran the full pipeline from scratch for both cities against the first
+  commit: zero drift. This is the row-count baseline for
+  `pipeline/drift_check.py`.** San Diego: 59,684 raw -> 43,563 in-city ->
+  12,988 storefront -> 12,886 with coordinates -> 12,886 after bounds ->
+  12,886 after dedup; 47 stations; 2,971 of 12,886 businesses within a ring.
+  San Francisco: 295,151 raw -> 260,103 active -> 20,562 storefront ->
+  20,093 with coordinates -> 20,067 after bounds -> 20,067 after dedup (8
+  blank business names filled from the owner name); 147 line-stops thinned
+  to 49 stations (J 12 of 23, K 14 of 20, L 14 of 24, M 16 of 26, N 15 of
+  32, T 11 of 22 kept), 65 stops cut; 13,874 of 20,067 businesses within a
+  ring. Both raw inputs were unchanged since download (2026-09-18), so
+  this is a code-drift result. Both `heatmap.html` files differed only in
+  Folium's random element IDs; those cosmetic diffs were reverted rather
+  than committed.
+- **Fixed a false positive in the new drift check: line endings.** The first
+  run flagged `excluded_stations.csv` as drift. Cause: on Windows with
+  `core.autocrlf=true`, pandas writes CRLF while git stores LF, so a
+  regenerated CSV always differed from `HEAD` - confirmed by comparing 66
+  CRLFs on disk against 0 in `HEAD` and byte-identical content after
+  normalizing. `drift_check.py` now normalizes CRLF to LF at byte level on
+  both sides, matching what git does on commit; still never decodes text.
+  The check earned its keep on its first run by finding a real
+  environment-dependent bug in itself.
 - **Made the repo standalone: nothing depends on, or needs to be read
   alongside, the earlier prototype.** Removed
   `docs/starting_briefing.md` (the hand-off document; its architecture

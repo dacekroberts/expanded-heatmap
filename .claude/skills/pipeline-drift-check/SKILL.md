@@ -33,7 +33,10 @@ Why the normalization exists: Folium/Leaflet assigns a random 32-hex-char
 id to every element on every save, so a raw diff of `heatmap.html` shows a
 change even when nothing real changed. Files are compared as raw bytes,
 never decoded text - a Windows text decode uses the console codepage and
-corrupts multi-byte characters, producing a false diff.
+corrupts multi-byte characters, producing a false diff. Line endings are
+also normalized (CRLF -> LF, at byte level): on Windows with
+`core.autocrlf`, pandas writes CRLF while git stores LF, so a regenerated
+CSV would otherwise always look like drift.
 
 ## 2. Code drift vs source drift - the distinction this project needs
 
