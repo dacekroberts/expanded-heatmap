@@ -20,15 +20,20 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [~] **Next city: Chicago** (ease rank 4). Follow `add-city` from Step 0.
-  Its taxonomy (`chicago_license`) is a skeleton: pull the full
-  `SELECT DISTINCT license_description` (and `business_activity`) from
-  Socrata `r5kz-chrr` and fill in the mapping, with a hand-sample of
-  catch-all categories, before building the city. CTA 'L' is large (145
-  stations) - check whether it has the central-plus-offshoot shape. Los
-  Angeles' lessons apply: check what the city field holds, check
-  coordinates for corruption (not just null-ness), and investigate any
-  filter that drops more than a few percent.
+- [ ] **Next city: Chicago** (ease rank 4). Step 0 probe done 2026-09-19
+  (see `DECISIONS.md`); build it after the weekly reset (Sunday
+  2026-09-20 18:59 UTC), following `add-city` from Step 1. Its taxonomy
+  (`chicago_license`) is a skeleton: fill it from the 150
+  `license_description` values, and use `business_activity` (4,120 values)
+  for the two catch-alls ("Limited Business License", "Regulated Business
+  License", about 39% of active rows), with a hand-sample. Filter the
+  1.2M-row history to status `AAI` and unexpired licenses (the expiry field
+  has junk dates), then dedupe by account and site. CTA 'L' is large (145
+  stations) - check whether it has the central-plus-offshoot shape, and
+  decide on Metra (feed at `schedules.metrarail.com/gtfs/schedule.zip`).
+  Still to check, per the Los Angeles lessons: coordinate corruption (not
+  just nulls; about 8% are null) and any in-city rows with another `city`
+  value.
 
 ## Next cities, in ease order
 

@@ -14,6 +14,52 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-19 - Chicago Step 0 probe (schema and counts only; no pipeline code)
+
+- **Ran the Step 0 live check on Chicago's Business Licenses (Socrata
+  `r5kz-chrr`, `data.cityofchicago.org`), capped at schema, null rates and
+  category counts, to lower the cost of the build.** Nothing was built.
+- **The dataset is every license term since 2002, not a current registry.**
+  1,207,156 rows, `date_issued` 2002-01-02 to 2026-09-18, and
+  `expiration_date` values that include junk (year 0206 and 9999). Of those,
+  1,126,817 have status `AAI` (issued). Filtering to status `AAI` with
+  `expiration_date` on or after 2026-09-19 leaves 53,043 rows; with
+  `city = 'CHICAGO'` and coordinates present, 48,617. Those 53,043-row
+  filters were checked with counts only; the expiration junk still has to be
+  handled in the real filter. One account can hold several licenses at a
+  site (32,875 distinct active accounts in the city against 48,617 rows),
+  so the build must dedupe by account and site, as the earlier cities
+  deduped.
+- **Coordinates and city.** 93,098 of the 1,207,156 rows (about 8%) have a
+  null `latitude`. 1,116,247 rows say `CHICAGO`; the rest are suburbs
+  (Cicero, Skokie, Des Plaines and others), so the `city` field is usable
+  as a first filter. Addresses are redacted (`[REDACTED FOR PRIVACY]`) on
+  2,417 active Chicago rows (home-based licenses). Not yet checked, per the
+  Los Angeles lesson: whether coordinates are corrupt (bounding-box test)
+  and whether any in-city rows carry a different `city` value.
+- **Classification is the hard part, and it is smaller than feared but
+  trickier.** There are 150 distinct `license_description` values and 4,120
+  distinct `business_activity` values. The biggest active buckets are
+  "Limited Business License" (15,245), "Retail Food Establishment" (11,150),
+  "Regulated Business License" (5,573), "Consumption on Premises - Incidental
+  Activity" (2,845), "Tobacco" (1,834), and "Motor Vehicle Services License"
+  (1,537). "Limited Business License" and "Regulated Business License" are
+  catch-alls, together about 39% of active rows, so `license_description`
+  alone would misclassify the largest groups; the `chicago_license`
+  mapping will need `business_activity` for those two, with a hand-sample.
+  Many other descriptions (Peddler, Raffles, Valet Parking Operator,
+  Pharmaceutical Representative, Shared Housing Unit Operator) are not
+  storefronts and will be excluded.
+- **Transit data.** CTA's GTFS downloads (HTTP 200, 68.7 MB). Metra's feed
+  did not respond at `gtfs.metrarail.com` but downloads at
+  `schedules.metrarail.com/gtfs/schedule.zip` (HTTP 200, 705 KB); it was not
+  opened. Whether to include Metra, and whether the 'L' (145 stations, 8
+  lines) has a central-plus-offshoot shape, are still decisions for the
+  build. The city boundary is Socrata "Boundaries - City - Map" (`ewy2-6yfk`),
+  not yet downloaded or checked.
+- **Not done:** the `chicago_license` mapping, any pipeline code, station
+  selection, and the coordinate-quality check.
+
 ### 2026-09-18 - City scaffolding: threshold met, build deferred
 
 - **The rule-of-three condition for a shared config loader is met, but the
