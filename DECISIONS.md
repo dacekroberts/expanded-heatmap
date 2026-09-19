@@ -14,6 +14,15 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-18 - Remote
+
+- **Pointed the repository at https://github.com/dacekroberts/expanded-heatmap
+  (`origin`) and pushed all seven existing commits on `master`.** The
+  remote was empty, so nothing was overwritten. This confirms the GitHub
+  account behind the commit identity (`dacekroberts`, noreply address)
+  chosen earlier; the branch was kept as `master` rather than renamed to
+  `main`. Future commits go to this remote.
+
 ### 2026-09-18 - Los Angeles (third city)
 
 - **Added Los Angeles: 565,498 raw rows with coordinates -> 463,356 in-city
