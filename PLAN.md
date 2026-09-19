@@ -23,10 +23,11 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 - [ ] **Next city: Chicago** (ease rank 4). Step 0 probe done 2026-09-19
   (see `DECISIONS.md`); build it after the weekly reset (Sunday
   2026-09-20 18:59 UTC), following `add-city` from Step 1. Its taxonomy
-  (`chicago_license`) is a skeleton: fill it from the 150
-  `license_description` values, and use `business_activity` (4,120 values)
-  for the two catch-alls ("Limited Business License", "Regulated Business
-  License", about 39% of active rows), with a hand-sample. Filter the
+  (`chicago_license`) is partly done: the two catch-alls ("Limited
+  Business License", "Regulated Business License", about 39% of active rows)
+  are classified by `business_activity`. Still to map: the other ~148
+  `license_description` values (Retail Food Establishment, Tavern, Tobacco,
+  Package Goods and so on), with a hand-sample. Filter the
   1.2M-row history to status `AAI` and unexpired licenses (the expiry field
   has junk dates), then dedupe by account and site. CTA 'L' is large (145
   stations) - check whether it has the central-plus-offshoot shape, and

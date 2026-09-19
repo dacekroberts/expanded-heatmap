@@ -14,6 +14,48 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-19 - Chicago catch-all license types classified by activity
+
+- **Classified Chicago's two catch-all license types by `business_activity`,
+  in `pipeline/taxonomies/chicago_license.py`.** "Limited Business License"
+  and "Regulated Business License" (about 39% of active licenses) say nothing
+  about the business, so they use the activity text. Rules, approved before
+  writing: Retail = retail sales activities (general merchandise, clothing,
+  jewelry, cell phones, flowers, furniture, art, vehicle parts, funeral items)
+  plus vehicle sales; Personal services = hair, nail, skincare, waxing, massage,
+  tattoo, laundromat, dry-cleaning drop-off, clothing alterations and
+  "Miscellaneous Personal Services". The buckets follow what the `naics`
+  taxonomy counts (44/45 and 812), so cities stay comparable. A multi-activity
+  value (parts joined by " | ") takes the first part that matches a bucket.
+- **Exclusions and the calls behind them.** Anything marked "(Home Based
+  Business)" is excluded (not a storefront). A catch-all row with no activity
+  (2,678 rows) is excluded: nothing shows what it is. Gyms, yoga and fitness
+  classes are excluded because NAICS puts them outside the three buckets
+  (713940, 611620), though they are visible storefronts. Also excluded:
+  administrative and financial offices, consulting, tax preparation,
+  wholesale, staffing, travel, shipping and printing, car washes, hotels and
+  vacation rentals, hazardous-materials storage, scavenger vehicles, and
+  "Miscellaneous Commercial Services". The activity rules apply to both
+  catch-alls, so the Regulated bucket keeps its few storefront services
+  (massage, tattoo, laundromat, alterations) instead of being dropped whole.
+- **Checked against live data.** Applied to the 20,727 active Chicago
+  catch-all rows with coordinates (pulled 2026-09-19): 3,739 Personal
+  services, 5,104 Retail, 11,884 excluded (Limited: 2,916 / 4,837 / 7,419;
+  Regulated: 823 / 267 / 4,465). The largest excluded activities were the
+  null activity, administrative offices (1,098), "Miscellaneous Commercial
+  Services" (721), home-based businesses, and tax preparation (309), as
+  intended. Nine spot cases (multi-activity, null, home-based, health club)
+  all classified as expected.
+- **The taxonomy is still incomplete.** The other ~148 `license_description`
+  values (Retail Food Establishment, Tavern, Tobacco, Package Goods and the
+  rest) are unmapped and still need their own mapping before Chicago is built.
+  Revisit as part of the Chicago build.
+- **Shared-code change.** `filter_to_storefront()` now also passes any
+  columns a taxonomy lists in an optional `EXTRA_COLUMNS` attribute to
+  `classify()`, because Chicago's rule needs two fields; single-column
+  taxonomies (`naics`) are unaffected. Drift check across San Diego, San
+  Francisco and Los Angeles: zero drift.
+
 ### 2026-09-19 - Chicago Step 0 probe (schema and counts only; no pipeline code)
 
 - **Ran the Step 0 live check on Chicago's Business Licenses (Socrata

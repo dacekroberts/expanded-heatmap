@@ -85,5 +85,12 @@ def filter_to_storefront(df, system: str):
             f"{system!r} taxonomy expects a {col!r} column; got {list(df.columns)[:8]}... "
             "Rename the city's raw classification column to it before filtering."
         )
-    keep = df[col].map(lambda v: module.classify({col: v}) is not None)
+    # A taxonomy whose classify() needs more than one field (Chicago's catch-all
+    # license types are classified by business_activity) lists the extra columns
+    # in EXTRA_COLUMNS; single-column taxonomies (NAICS) don't define it.
+    cols = [col, *getattr(module, "EXTRA_COLUMNS", ())]
+    missing = [c for c in cols if c not in df.columns]
+    if missing:
+        raise KeyError(f"{system!r} taxonomy also needs column(s) {missing}; got {list(df.columns)[:8]}...")
+    keep = [module.classify(dict(zip(cols, values))) is not None for values in zip(*(df[c] for c in cols))]
     return df[keep]
