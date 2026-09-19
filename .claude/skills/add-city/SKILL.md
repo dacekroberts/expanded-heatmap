@@ -202,17 +202,20 @@ right.
 - `app/pages/N_<City>_Heatmap.py`: the static-HTML-embed pattern
   (`st.components.v1.html()`, UTF-8 read, fixed size matching the map), not
   `streamlit-folium`. Call `components.set_base_font()`.
-- Add the city to the `CITIES` list in `app/Overview_&_Introduction.py`
-  (name, centre lat/lon, page path, blurb). If a page file is ever renamed,
-  update its `page` path there and any `st.page_link` to it.
+- Add the city to the `CITIES` list in `app/cities.py` (name, marker lat/lon,
+  page path, blurb). That one entry feeds the clickable macro map on the
+  Overview, its fallback link list, and every city page's switcher. In the
+  new page, call `components.render_city_nav("<City name>")` (the name must
+  match the entry) instead of a bare back-link. If a page file is ever
+  renamed, update its `page` path in `cities.py`.
 - **Grep the city page for hardcoded prose** - words like "six lines",
   station counts, "half mile" are literal text, not computed values, and go
   stale when the pipeline changes. Prefer wording that doesn't restate
   numbers; where it must, re-check it each time the city's pipeline changes.
 - **Never let the city's name become the project's identity.**
 
-Then run the `deploy-verify` agent (lean venv; Overview lists every city,
-each page-link navigates, each map renders).
+Then run the `deploy-verify` agent (lean venv; the macro map shows every city,
+clicking each marker opens its page, each switcher works, each map renders).
 
 ## Step 9 - Commit, log, plan
 

@@ -14,6 +14,61 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-18 - Macro map and city navigation
+
+- **Built the macro map: the Overview is now a clickable map of every mapped
+  city, and clicking a marker opens that city's page.** This is the
+  area-selector macro level of the hybrid architecture (see the "Project
+  origin" entry), built now that three cities exist. It uses `st.pydeck_chart`
+  with `on_select="rerun"` and `st.switch_page`. pydeck ships with Streamlit,
+  so it adds no dependency and keeps folium out of the deployed runtime, the
+  same constraint that ruled out `streamlit-folium`. Rejected alternatives:
+  a pre-rendered static folium map with links (a click would have to
+  navigate the parent page from inside the sandboxed iframe, causing a full
+  reload and losing the session) and keeping the plain `st.map` (no
+  click-to-navigate). Markers have permanent name labels, a hover tooltip
+  with the city's line names, and a plain list of page links below the map as
+  a fallback (keyboard access, or if the map fails to load).
+- **Added a city switcher to every city page** (`components.render_city_nav`):
+  a link back to the map, then every city, with the current one shown as
+  plain bold text, so a visitor can hop city to city without returning to
+  the map. On a phone-width screen the row stacks vertically.
+- **Moved the city list to `app/cities.py`, one source for the map, the
+  fallback list and every switcher.** It had been inline on the Overview
+  page; with the switcher it had three consumers. Adding a city now means
+  one entry there plus its page. It stays app-side and tiny on purpose: the
+  fuller per-city registry (map centre, CRS, taxonomy, data sources) is still
+  open in `PLAN.md` and would live with the pipeline, since the deployed app
+  must not depend on pipeline code.
+- **Fixed three real bugs found by looking at the running map, not by
+  reading the code.** (1) pydeck serialized `radius_units="pixels"` as the
+  expression `"@@=pixels"` (an undefined variable), so markers rendered as a
+  wrong-sized fill across the map; passing `pdk.types.String("pixels")`
+  fixes it (the same applies to the label font). (2) pydeck's `compute_view`
+  chose a zoom that cropped San Diego and San Francisco out of the same view;
+  replaced with a small Web-Mercator fit (`fit_view`) that works for any
+  number of cities, and corrected it once for 512 px world tiles (the first
+  version was one zoom level too tight). (3) On a 375 px viewport the map
+  cropped the outer cities and the fallback links were clipped; the fit is now
+  sized for a phone width and city descriptions are wrapping captions.
+- **Raised the tested minimum to `streamlit>=1.64`.** Click selection and
+  `switch_page` exist in 1.40 (checked in a clean venv), but 1.40 needs the
+  now-deprecated `use_container_width` for full width, which Streamlit
+  warns will be removed; 1.64 defaults to full width, so the argument is
+  dropped instead.
+- **Verified against the lean venv, desktop and phone width.** A real click
+  on the San Diego marker navigated to its page; the switcher moved San Diego
+  to Los Angeles; the map link returned to the Overview and stayed there over
+  8 seconds with an empty selection (no bounce back from a stale click); no
+  sideways scroll at 375 px. Two earlier failed click attempts were my own
+  pixel-mapping errors (the screenshot is scaled relative to the page), not
+  app bugs: a synthetic hover at the computed position showed the correct
+  tooltip.
+- **Basemap: Carto's public vector style (`positron`) for the macro map.**
+  pydeck's default style needs a Mapbox token. This adds Carto's tile
+  service to the tile-provider decision already open in `PLAN.md` (the
+  per-city maps use OpenStreetMap's raster tiles).
+
 ### 2026-09-18 - Remote
 
 - **Pointed the repository at https://github.com/dacekroberts/expanded-heatmap

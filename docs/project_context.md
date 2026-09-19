@@ -45,7 +45,9 @@ Each has its rationale in `DECISIONS.md`.
 - **Pipeline/app split:** an offline pipeline writes small static files; the
   deployed app only reads `outputs/`. The app never runs the pipeline.
 - **Maps are pre-rendered static HTML** embedded with
-  `st.components.v1.html()`, not `streamlit-folium`.
+  `st.components.v1.html()`, not `streamlit-folium`. The macro map is the one
+  exception in kind: a pydeck map (bundled with Streamlit), so clicks can
+  navigate without folium.
 - **City viability is verified live**, against the real API/schema and
   sample rows, before any pipeline work. Titles and search summaries are
   not evidence.
@@ -79,7 +81,8 @@ pipeline/
   census_geocoder.py          shared: Census bulk geocoder with a content-hash cache
                               (for cities whose data lacks usable coordinates)
 app/
-  Overview_&_Introduction.py  macro page: city picker
+  Overview_&_Introduction.py  macro page: clickable map of every city
+  cities.py                   the app's city list (map, fallback list, switchers)
   pages/N_<City>_Heatmap.py   one embedded map per city
   components.py               shared styling (font)
 docs/                         this file, city research, filter pattern
@@ -128,9 +131,13 @@ Washington D.C. carry caveats. See `city_shortlist.md` and
 `PLAN.md`. Row counts, station counts and per-run figures are in
 `DECISIONS.md`.
 
-Not built yet: the area-selector macro map (the Overview currently uses a
-plain `st.map` marker view with page links), a shared city registry, and
-deployment.
+**Navigation.** The Overview is the macro map: a pydeck map (pydeck ships
+with Streamlit; no folium) with a labelled marker per city, where clicking a
+marker opens that city's page (`st.switch_page`), plus a plain link list as a
+fallback. Every city page has a switcher row to jump to another city or back
+to the map. The city list lives in `app/cities.py`.
+
+Not built yet: a shared pipeline-side city registry, and deployment.
 
 ## Standing requirements for a city's map
 

@@ -48,11 +48,6 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Structure
 
-- [ ] **Area-selector macro map.** The intended macro level is an area
-  selector followed by per-city renders. Two cities now exist; the current
-  Overview is a plain `st.map` marker view with page links. Build the real
-  selector once the user confirms scope (must not put folium in the
-  deployed runtime - see `DECISIONS.md`).
 - [ ] **Shared `data/registry.yaml` and per-city config loader.** Deferred
   until more than two cities show the common shape (rule of three).
 - [ ] Fill in the three local taxonomy skeletons before any of those cities
@@ -62,7 +57,8 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 ## Before deploying
 
 - [ ] **Tile provider decision** - OpenStreetMap's usage policy is a risk
-  for a live public map.
+  for a live public map. The per-city maps use OSM raster tiles; the macro
+  map uses Carto's public vector basemap. Decide both together.
 - [ ] **Streamlit Cloud main-file path** - fixed at app creation and not
   editable afterward, so settle the entry-point filename first.
 - [ ] **Project name** - "Expanded Heatmap" is a placeholder.
@@ -87,6 +83,10 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   per-city hand-sample; not yet done for either built city.
 
 ## Later / maybe
+
+- [ ] Macro map at scale: with ~10+ cities, consider grouping nearby cities
+  (markers will overlap at the fitted zoom), and showing each city's mapped
+  extent or a one-line summary in the tooltip.
 
 - [ ] Non-US cities (NACE for the EU, national CRS such as EPSG:27700 for the
   UK) - one taxonomy module and a per-city CRS each.

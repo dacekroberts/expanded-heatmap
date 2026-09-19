@@ -51,24 +51,37 @@ sure is the fresh one.
    actually started (a failed import shows up here, not as a browser
    error - and an import of folium/geopandas failing here is a *real
    finding*, not noise).
-3. **Overview page**: confirm it loads and lists **every city** in the
-   `CITIES` list in `app/Overview_&_Introduction.py` (read that list, then
-   check each name and its page-link is present in the DOM). Click each
-   page-link and confirm navigation.
+3. **Overview page (the macro map)**: confirm it loads and shows **every
+   city** in `app/cities.py` (read that list, then check each name appears in
+   the fallback link list and as a tooltip on its marker). Then test the
+   real click path, not just the links: the map is a canvas, so read the
+   canvas rect, compute a marker's pixel from the map's view (or hover a grid
+   and wait for the tooltip), click it with a real mouse click, and confirm
+   the URL changes to that city's page. Note that a screenshot is scaled
+   relative to the page - a click that "does nothing" is usually a
+   coordinate mismatch; confirm with a hover tooltip before calling it an app
+   bug. Also click each fallback link. After returning to the Overview via a
+   city page's map link, wait several seconds and confirm it stays put (no
+   bounce from a stale selection). Check the city switcher on each city
+   page: every other city links correctly, the current one is plain text.
 4. **Each city page** (one per `app/pages/*_Heatmap.py`): the embedded map
    iframe is present and loaded, the page title matches, no error/
    exception block on the page.
 5. **Each standalone heatmap** via `heatmap-static`: the legend lists the
    category buckets and one row per transit line; permanent line labels
    render; no console errors.
-6. **In this order per page**: `read_console_messages` (errors only) first
+6. **In this order per page** (the console buffer keeps messages from any
+   earlier, now-stopped server - e.g. `ERR_CONNECTION_REFUSED` on
+   `/_stcore/health` - so navigate fresh and treat only messages that match the
+   current server as findings): `read_console_messages` (errors only) first
    - JS exceptions can hide behind a visually fine page; then `read_page`/
    `find` to confirm the expected text/elements are in the DOM; a
    screenshot last, as visual confirmation, never alone (several real bugs
    here were invisible in a screenshot but present in the DOM/console).
 7. **Responsive/theme**, only if the change touches layout or styling:
-   `resize_window` to mobile and back to desktop; check light and dark.
-   Always restore the viewport to `desktop` when done.
+   `resize_window` to mobile and back to desktop; check light and dark. On
+   mobile check no sideways scroll, and that the macro map shows every city
+   uncropped. Always restore the viewport to `desktop` when done.
 8. **Tear down**: stop every server you started, clear `__pycache__`.
 9. **Report**: pass/fail per check with specific evidence (an error
    message, a DOM query result, a screenshot reference) - not "looks good".
