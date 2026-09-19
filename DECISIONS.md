@@ -116,6 +116,14 @@ Newest first. All dates below are from the project's first working day,
   invisible to the storefront filter; the LA map is 5.8 MB (San Francisco
   2.6 MB) - it embeds and renders correctly under the lean venv but is worth
   watching before deployment (open in `PLAN.md`).
+- **Ran the drift check across all three cities after committing: zero
+  drift, every count unchanged** (San Diego and San Francisco exactly as in
+  the earlier baseline entry below; Los Angeles as listed above). LA's
+  geocoding step replayed from its content-hash cache rather than the
+  network, and the excluded-stations files were byte-identical. All three
+  `heatmap.html` files differed from HEAD only in Folium's random IDs, and
+  those cosmetic diffs were reverted. This is the current three-city
+  baseline.
 - **Verified all three cities against the lean venv:** Overview lists all
   three; each city page loads its map iframe with Leaflet, that city's full
   legend and every line label, no Streamlit exception blocks, clean console.
