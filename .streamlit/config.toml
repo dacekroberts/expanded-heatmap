@@ -1,0 +1,13 @@
+# Sets the default theme visitors see on first load. They can still
+# switch themselves via the hamburger menu > Settings - this only
+# changes the default, not a hard lock.
+#
+# A light base with a teal accent, rather than Streamlit's default look, so
+# the app has its own identity (see app/components.py for the matching font
+# choice, and DECISIONS.md for why).
+[theme]
+base = "light"
+primaryColor = "#0d9488"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f1f5f4"
+textColor = "#1c2b2a"
