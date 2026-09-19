@@ -4,5 +4,8 @@
 # live in requirements-pipeline.txt and are only needed locally, to
 # regenerate outputs/. The app only reads pre-built files from outputs/.
 # Add charting libraries here only when the app actually draws charts.
-streamlit>=1.40
+# streamlit>=1.64: the macro map uses st.pydeck_chart click selection with its
+# default full width (older releases need the now-deprecated use_container_width).
+# pydeck itself ships with Streamlit, so it needs no line of its own.
+streamlit>=1.64
 pandas>=2.2

@@ -8,6 +8,24 @@ rather than duplicated per page.
 
 import streamlit as st
 
+from cities import CITIES
+
+OVERVIEW_PAGE = "Overview_&_Introduction.py"
+
+
+def render_city_nav(current: str):
+    """A row at the top of a city page: a link back to the macro map, then
+    every mapped city (the current one shown as plain bold text). Lets a
+    visitor hop city to city without returning to the map each time.
+    `current` must match a name in cities.CITIES."""
+    cols = st.columns([1.6] + [1] * len(CITIES))
+    cols[0].page_link(OVERVIEW_PAGE, label="← All cities (map)")
+    for col, city in zip(cols[1:], CITIES):
+        if city["name"] == current:
+            col.markdown(f"**{city['name']}**")
+        else:
+            col.page_link(city["page"], label=city["name"])
+
 
 def set_base_font():
     """Swaps Streamlit's default typeface for Space Grotesk on base page

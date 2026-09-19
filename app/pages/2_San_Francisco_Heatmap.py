@@ -13,12 +13,12 @@ import streamlit.components.v1 as components
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.san_francisco.config import HEATMAP_HTML  # noqa: E402
-from components import set_base_font  # noqa: E402
+from components import render_city_nav, set_base_font  # noqa: E402
 
 st.set_page_config(page_title="San Francisco Heatmap", page_icon="\U0001f5fa️", layout="wide")
 set_base_font()
 
-st.page_link("Overview_&_Introduction.py", label="← Back to city picker")
+render_city_nav("San Francisco")
 
 st.title("San Francisco: commercial density around Muni Metro station areas")
 
