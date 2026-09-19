@@ -42,6 +42,34 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   just nulls; about 8% are null) and any in-city rows with another `city`
   value.
 
+  **Start-up checklist for the Chicago build** (Socrata `r5kz-chrr` on
+  `data.cityofchicago.org`; active filter used so far:
+  `license_status='AAI' AND expiration_date >= <today> AND city='CHICAGO' AND
+  latitude IS NOT NULL`):
+  1. Pull active row counts per `license_description` (about 150 values,
+     one grouped query). Map the top ~30 by hand and default the tail to
+     excluded (the top 25 hold about 92% of active rows).
+  2. Sample `business_activity` for "Retail Food Establishment" (11,150
+     rows, another catch-all): split Food service (dining, food preparation)
+     from Retail (selling packaged food and groceries). Add it to
+     `chicago_license.py` alongside the two done catch-alls.
+  3. Decide the adjunct-license rule (Consumption on Premises, Outdoor Patio,
+     Tobacco, Package Goods): the primary license sets the bucket, adjuncts
+     count only where the site has no primary license; dedupe by account and
+     site after classifying. Open calls: Commercial Garage (589), Motor
+     Vehicle Services (1,537), Shared Kitchen User (540).
+  4. Coordinate quality: bounding-box test on latitude/longitude (LA had
+     corrupt coordinates hidden behind non-null values), and check for
+     in-city rows carrying another `city` value.
+  5. Download the CTA GTFS (`transitchicago.com/downloads/sch_data/
+     google_transit.zip`, 68.7 MB) and the city boundary (Socrata
+     "Boundaries - City - Map", `ewy2-6yfk`). Compute stop spacing per line
+     and stations inside the boundary; confirm the expected uniformly sparse
+     shape, then apply the chopping-block order above if needed.
+  6. Then follow `add-city` from Step 1 (config, step files, map, app page),
+     run `python pipeline/drift_check.py`, verify with `deploy-verify`,
+     and log each judgment call in `DECISIONS.md`.
+
 ## Next cities, in ease order
 
 - [ ] New York - needs `nyc_dca` filled (Socrata `w7w3-xahh`,
