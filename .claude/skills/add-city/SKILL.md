@@ -51,6 +51,14 @@ Only proceed once all three are confirmed live. If a city fails, record the
 real reason (cite the endpoint and response) in `docs/city_shortlist.md` and
 a `DECISIONS.md` entry, and move to the next candidate.
 
+If it passes but the build won't start right away (a usage limit, a new
+session), turn what the probe found and left open into an ordered checklist
+under that city's item in `PLAN.md` before stopping. Write it from the
+findings, not from a template: it holds only what is specific to this city
+(catch-all license types, adjunct licenses, scope decisions, checks still to
+run), and points back to these steps for everything generic. Chicago's is the
+model. Skip it when the probe and build happen in the same session.
+
 ## Step 1 - Taxonomy
 
 - NAICS: nothing to build; `pipeline/taxonomies/naics.py` is complete.
