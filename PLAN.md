@@ -54,8 +54,14 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Structure
 
-- [ ] **Shared `data/registry.yaml` and per-city config loader.** Deferred
-  until more than two cities show the common shape (rule of three).
+- [ ] **Scaffold a new city's `config.py`, map script and app wiring** (the
+  `cities.py` entry, page file and docs stubs), and with it the shared
+  `data/registry.yaml` / config loader. The rule of three is met (three
+  cities), but build it after the first non-NAICS city (Chicago), so the
+  shared fields are chosen from a case that differs from the three built
+  ones. Scope: not `step1_stations.py` or `step2_clean_businesses.py`, which
+  differ per city and hold most of the per-city effort. Expected saving is
+  modest (roughly 10% of a city's cost, an estimate).
 - [ ] Fill in the three local taxonomy skeletons before any of those cities
   is built (each needs a full `SELECT DISTINCT` of its classification
   field, plus a hand-sample of catch-all categories).

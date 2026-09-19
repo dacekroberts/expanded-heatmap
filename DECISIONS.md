@@ -14,6 +14,26 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-18 - City scaffolding: threshold met, build deferred
+
+- **The rule-of-three condition for a shared config loader is met, but the
+  scaffold is deferred until after the first non-NAICS city (Chicago).** The
+  earlier deferral in `PLAN.md` was "until more than two cities show the
+  common shape"; three cities now exist. Comparing them: `config.py`, the
+  map script and the app wiring share a shape (paths, CRS, rings, taxonomy
+  name, thin call into `render_heatmap()`, a `cities.py` entry and page),
+  while `step1_stations.py` (spatial filter, sub-line spacing filter, or
+  cities-boundary join plus Census geocoding) and `step2_clean_businesses.py`
+  differ per city and hold most of the per-city effort.
+- **Why wait rather than build now.** All three built cities have GTFS and
+  NAICS, so the shared fields were drawn from cases that resemble each
+  other; Chicago is the first with a local taxonomy and possibly commuter
+  rail, and would show which config fields are truly universal. Building it
+  also needed budget that was not available in the session. Expected saving
+  is modest, roughly 10% of a city's cost (an estimate, not measured), so it
+  is medium priority. Scope is config, the map script and app wiring only,
+  not steps 1 and 2.
+
 ### 2026-09-18 - San Diego excluded-stations audit file
 
 - **San Diego now writes `outputs/san_diego/excluded_stations.csv`, as San
