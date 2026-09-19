@@ -74,7 +74,8 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 - [ ] **Streamlit Cloud main-file path** - fixed at app creation and not
   editable afterward, so settle the entry-point filename first.
 - [ ] **Project name** - "Expanded Heatmap" is a placeholder.
-- [ ] `README.md` (none yet).
+- [ ] `README.md`: first draft written; revise before deploying (add the
+  deployed URL, a licence, and the final project name).
 
 ## Data quality follow-ups
 
