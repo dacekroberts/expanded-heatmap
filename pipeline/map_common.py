@@ -118,8 +118,12 @@ def add_line_label(feature_group, coords, label, color, offset_deg=0.006):
     """A permanent, always-visible line-name label - NOT a hover tooltip.
     Use the line's real public-facing name."""
     label_lat, label_lon = line_label_position(coords, offset_deg=offset_deg)
+    # zIndexOffset lifts the label above the business-cluster badges: without
+    # it a large downtown cluster is drawn on top of the label and hides it,
+    # which defeats a "permanent" label (seen in San Diego and Los Angeles).
     folium.Marker(
         location=[label_lat, label_lon],
+        zIndexOffset=1000,
         icon=folium.DivIcon(html=f"""
             <div style="
                 font-size: 14px; font-weight: bold; color: {color};
@@ -243,16 +247,36 @@ def build_legend(bucket_colors, legend_label, lines):
     )
 
 
+def _label_anchor_coords(coords, label_focus):
+    """The part of a line to anchor its label on: the stretch inside
+    `label_focus` (a shapely geometry in lon/lat, normally the city's
+    boundary), if at least two points fall inside it, else the whole line.
+    Lines that run far beyond the city (a regional light-rail line) would
+    otherwise get their label at the midpoint of the entire route, off-screen
+    in the city's default view."""
+    if label_focus is None:
+        return coords
+    from shapely.geometry import Point
+    from shapely.prepared import prep
+
+    focus = prep(label_focus)
+    inside = [c for c in coords if focus.contains(Point(c[1], c[0]))]
+    return inside if len(inside) >= 2 else coords
+
+
 def render_heatmap(*, output_path, center, zoom, map_title, city_name, system_name,
                    stations, businesses, taxonomy_system, lines,
-                   crs_geographic, crs_projected, ring_edges_meters, ring_labels):
+                   crs_geographic, crs_projected, ring_edges_meters, ring_labels,
+                   label_focus=None):
     """Render one city's heatmap to a standalone HTML file.
 
     stations: DataFrame(station, latitude, longitude). businesses: the
     city's businesses_clean.csv as a DataFrame (needs latitude, longitude,
     business_name and the taxonomy's VALUE_COLUMN). lines: output of
     load_line_shapes. system_name prefixes each line's layer name (e.g.
-    "Trolley", "Muni Metro").
+    "Trolley", "Muni Metro"). label_focus: optional shapely geometry (lon/lat)
+    - line labels are anchored on the part of each line inside it (see
+    _label_anchor_coords); omit for cities whose lines stay within the view.
     """
     taxonomy = load_taxonomy_module(taxonomy_system)
     bucket_colors = dict(CATEGORY_BUCKETS)
@@ -309,7 +333,7 @@ def render_heatmap(*, output_path, center, zoom, map_title, city_name, system_na
     for _key, (coords, color, label, offset) in lines.items():
         rail_layer = folium.FeatureGroup(name=f"{system_name}: {label}", show=True, control=False)
         folium.PolyLine(coords, color=color, weight=4, opacity=0.85).add_to(rail_layer)
-        add_line_label(rail_layer, coords, label, color, offset_deg=offset)
+        add_line_label(rail_layer, _label_anchor_coords(coords, label_focus), label, color, offset_deg=offset)
         rail_layer.add_to(m)
 
     # Category grouping via the city's own taxonomy, never a hardcoded one.

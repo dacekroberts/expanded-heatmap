@@ -1,0 +1,55 @@
+station,latitude,longitude,lines,located_in
+Atlantic Station,34.033398,-118.154469,E Line,(unincorporated area)
+Del Amo Station,33.848222,-118.211017,A Line,(unincorporated area)
+East LA Civic Center Station,34.033364,-118.161206,E Line,(unincorporated area)
+Firestone Station,33.959611,-118.243205,A Line,(unincorporated area)
+Florence Station,33.97374,-118.243271,A Line,(unincorporated area)
+Indiana Station,34.0343,-118.192182,E Line,(unincorporated area)
+Maravilla Station,34.033319,-118.16814,E Line,(unincorporated area)
+Slauson Station,33.98876,-118.243398,A Line,(unincorporated area)
+Vermont / Athens Station,33.928683,-118.291733,C Line,(unincorporated area)
+Willowbrook - Rosa Parks Station,33.928152999999995,-118.2378035,A Line / C Line,(unincorporated area)
+Arcadia Station,34.14286,-118.029199,A Line,ARCADIA
+APU / Citrus College Station,34.136814,-117.891636,A Line,AZUSA
+Azusa Downtown Station,34.135863,-117.906631,A Line,AZUSA
+Wilshire / La Cienega Station,34.06483444,-118.3747009,D Line,BEVERLY HILLS
+Artesia Station,33.876082,-118.222503,A Line,COMPTON
+Compton Station,33.89749,-118.224249,A Line,COMPTON
+Culver City Station,34.027896,-118.388986,E Line,CULVER CITY
+Lakewood Blvd Station,33.91307,-118.1406,C Line,DOWNEY
+Duarte / City of Hope Station,34.132518,-117.96768,A Line,DUARTE
+Douglas Station,33.905299,-118.383113,K Line,EL SEGUNDO
+El Segundo Station,33.916063,-118.386539,K Line,EL SEGUNDO
+Mariposa Station,33.9232,-118.387572,K Line,EL SEGUNDO
+Glendora Station,34.1319,-117.8663,A Line,GLENDORA
+Crenshaw C-Line Station,33.925201,-118.32655,C Line,HAWTHORNE
+Hawthorne / Lennox Station,33.933408,-118.351602,C Line,HAWTHORNE
+Redondo Beach Station,33.89464,-118.369196,K Line,HAWTHORNE
+Downtown Inglewood Station,33.96715635,-118.3514966,K Line,INGLEWOOD
+Fairview Heights Station,33.97525155,-118.3360716,K Line,INGLEWOOD
+Westchester / Veterans Station,33.96203144,-118.374378,K Line,INGLEWOOD
+Irwindale Station,34.129048,-117.932506,A Line,IRWINDALE
+La Verne / Fairplex Station,34.0972,-117.7681,A Line,LA VERNE
+1st Street Station,33.76874,-118.189362,A Line,LONG BEACH
+5th Street Station,33.773598,-118.189412,A Line,LONG BEACH
+Anaheim Street Station,33.78183,-118.189384,A Line,LONG BEACH
+Downtown Long Beach Station,33.768071,-118.192921,A Line,LONG BEACH
+Pacific Ave Station,33.772258,-118.1937,A Line,LONG BEACH
+Pacific Coast Hwy Station,33.78909,-118.189382,A Line,LONG BEACH
+Wardlow Station,33.819865,-118.19609,A Line,LONG BEACH
+Willow Street Station,33.807079,-118.189834,A Line,LONG BEACH
+Lynwood Station,33.92488,-118.209945,C Line,LYNWOOD
+Monrovia Station,34.133155,-118.003473,A Line,MONROVIA
+Norwalk Station,33.914033,-118.104717,C Line,NORWALK
+Allen Station,34.152417,-118.114348,A Line,PASADENA
+Del Mar Station,34.14191,-118.148214,A Line,PASADENA
+Fillmore Station,34.133521,-118.148126,A Line,PASADENA
+Lake Station,34.151806,-118.13139,A Line,PASADENA
+Memorial Park Station,34.148356,-118.147512,A Line,PASADENA
+Sierra Madre Villa Station,34.147752,-118.081212,A Line,PASADENA
+Pomona North Station,34.094,-117.7522,A Line,POMONA
+San Dimas Station,34.1052,-117.8058,A Line,SAN DIMAS
+17th Street / SMC Station,34.023155,-118.480372,E Line,SANTA MONICA
+26th Street / Bergamot Station,34.027995,-118.46912,E Line,SANTA MONICA
+Downtown Santa Monica Station,34.01401,-118.491384,E Line,SANTA MONICA
+South Pasadena Station,34.115186,-118.157886,A Line,SOUTH PASADENA
