@@ -14,6 +14,18 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-19 - Pin line endings with .gitattributes
+
+- **Added `.gitattributes` (`* text=auto eol=lf`) to stop the recurring
+  "LF will be replaced by CRLF" warnings.** The repository already stores LF
+  in every tracked file; the warnings came from `core.autocrlf=true` on the
+  Windows machine converting to CRLF in the working copy (37 tracked files
+  were CRLF on disk). Pinning LF removes the mismatch without changing what
+  is committed. Checked: `git status` showed only the new file, and the drift
+  check across the three cities still shows zero drift (it already normalizes
+  CRLF to LF at byte level, so it was unaffected either way). Git config was
+  not touched.
+
 ### 2026-09-19 - Chicago transit scope: CTA only, Metra deferred
 
 - **The first Chicago build maps the CTA 'L' only; Metra is recorded as a
