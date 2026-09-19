@@ -14,6 +14,37 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-18 - Line labels at tail ends, auto-fitted view, collapsible legend
+
+- **Line labels now sit at each line's tail end, chosen automatically.** The
+  end used is the one farthest from every other line, measured on the stretch
+  inside the city (`label_focus`, now passed by all three cities). This
+  replaced the per-line degree offsets (San Diego's Silver Line at 0.016, Los
+  Angeles's D Line at -0.012), which had been hand-tuned against one rendering
+  each and could not be reused for a new city. The label is offset in pixels
+  by its own box size along the line's outward direction, so it clears the
+  line at any angle and stays put at any zoom. The line spec's fourth element
+  changed from an offset to a label end (`None` = automatic, or `"start"` /
+  `"end"` to force).
+- **Labels that would land on the same spot disperse along their lines.**
+  The first version put Muni's J Church, K Ingleside and M Ocean View at the
+  same south end, where they overlapped. A layout pass now tries, per label,
+  the tail tip pointing out (and swung up to 80 degrees either way), then
+  spots further along the line from that tail with the label beside the line,
+  taking the first that clears the other labels, the open legend, the map
+  controls and the map edge. Longest names are placed first.
+- **The default view is now fitted rather than hand-picked.** The same layout
+  pass picks centre and zoom to show every station and every label, zooming
+  out in quarter steps and shifting away from the legend only if labels
+  cannot otherwise be separated. Hand-picked centre/zoom constants were
+  removed from the three city scripts; `center`/`zoom` can still be passed to
+  override. Checked on all three maps in a browser: no line label overlaps
+  another, hides under the legend, or falls out of view (labels do draw over
+  cluster badges by design).
+- **The legend is collapsible.** It is a native `<details open>`, so it
+  starts open, collapses to a small "Legend" tab with a click, and needs no
+  script. Rejected: a custom JavaScript toggle (more code, no benefit).
+
 ### 2026-09-18 - Macro map and city navigation
 
 - **Built the macro map: the Overview is now a clickable map of every mapped

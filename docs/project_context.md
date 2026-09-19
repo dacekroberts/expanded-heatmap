@@ -145,8 +145,10 @@ Not built yet: a shared pipeline-side city registry, and deployment.
   lines between stations.
 - Each line: permanent label with its real public name (verify it - a GTFS
   short name is not automatically what riders call it) plus a legend
-  swatch. Label placement is automatic; override a line's offset if a
-  rendered map shows it landing on a cluster.
+  swatch. Labels sit at each line's tail end (the end farthest from other
+  lines) and disperse along their lines if several would collide; force a
+  line's end with `"start"`/`"end"` in its spec only if a rendered map shows
+  it landing badly. The legend is collapsible (`<details>`).
 - Stations always on, not toggleable; rings, heat layers and category pins
   toggleable. The whole-city heat layer is an opt-in; the default view is
   businesses within a ring.
@@ -155,7 +157,8 @@ Not built yet: a shared pipeline-side city registry, and deployment.
   stretch (`label_focus`).
 - Pin clusters use the scaled cluster icon; pin layers are wrapped in a
   `FeatureGroup` for `show`; free text in tooltips is HTML-escaped.
-- Map centred on the station spread, at a fixed pixel size.
+- Default view fitted automatically to the stations and every label; fixed
+  pixel size.
 
 ## Lessons that apply to every city
 

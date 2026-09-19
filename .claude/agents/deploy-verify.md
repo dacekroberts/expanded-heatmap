@@ -69,7 +69,10 @@ sure is the fresh one.
    exception block on the page.
 5. **Each standalone heatmap** via `heatmap-static`: the legend lists the
    category buckets and one row per transit line; permanent line labels
-   render; no console errors.
+   render; no console errors. Via JS, check every line label (the bold 14px
+   divs in `.leaflet-marker-icon`, ignoring numeric cluster badges) is inside
+   the map box, clear of the legend and not overlapping another label; click
+   the legend's "Legend" summary and confirm it collapses and re-expands.
 6. **In this order per page** (the console buffer keeps messages from any
    earlier, now-stopped server - e.g. `ERR_CONNECTION_REFUSED` on
    `/_stcore/health` - so navigate fresh and treat only messages that match the

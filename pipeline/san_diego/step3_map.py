@@ -14,6 +14,7 @@ Run:  python pipeline/san_diego/step3_map.py
 import sys
 from pathlib import Path
 
+import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
@@ -22,6 +23,8 @@ from pipeline.san_diego.config import (  # noqa: E402
     STATIONS_CSV,
     BUSINESSES_CLEAN_CSV,
     GTFS_ZIP,
+    MUNICIPAL_BOUNDARIES_GEOJSON,
+    CITY_BOUNDARY_NAME,
     HEATMAP_HTML,
     CRS_GEOGRAPHIC,
     CRS_PROJECTED,
@@ -30,24 +33,28 @@ from pipeline.san_diego.config import (  # noqa: E402
     TAXONOMY_SYSTEM,
 )
 
-SAN_DIEGO_CENTER = [32.7157, -117.1611]
-
-# key -> (shape_id, color, real-world public-facing name, label offset in
-# degrees). shape_id is each line's single most-used trip shape (counted
-# per route, 2026-09-18) - re-derive if the GTFS feed is
-# re-downloaded. The name is what MTS itself uses on signage (confirmed via
-# Wikipedia's "<Color> Line (San Diego Trolley)" articles), not the GTFS
-# route_short_name, which lacks "Line". Offset defaults to 0.006 deg
-# (~650m); Silver gets a larger one because its whole route is the short
-# downtown loop, where the default landed the label on the dense downtown
-# business-cluster markers.
+# key -> (shape_id, color, real-world public-facing name, label end).
+# shape_id is each line's single most-used trip shape (counted per route,
+# 2026-09-18) - re-derive if the GTFS feed is re-downloaded. The name is what
+# MTS itself uses on signage (confirmed via Wikipedia's "<Color> Line (San
+# Diego Trolley)" articles), not the GTFS route_short_name, which lacks
+# "Line". Label end: None = automatic (the tail end farthest from the other
+# lines, on the stretch inside the city); "start"/"end" forces one.
 TROLLEY_LINE_SHAPES = {
-    "Blue": ("510_0_352", "#0071bc", "Blue Line", 0.006),
-    "Orange": ("520_3_283", "#f7941d", "Orange Line", 0.006),
-    "Green": ("530_3_355", "#39b54a", "Green Line", 0.006),
-    "Copper": ("535_2_2", "#b87333", "Copper Line", 0.006),
-    "Silver": ("550_8_3", "#a6a6a6", "Silver Line", 0.016),
+    "Blue": ("510_0_352", "#0071bc", "Blue Line", None),
+    "Orange": ("520_3_283", "#f7941d", "Orange Line", None),
+    "Green": ("530_3_355", "#39b54a", "Green Line", None),
+    "Copper": ("535_2_2", "#b87333", "Copper Line", None),
+    "Silver": ("550_8_3", "#a6a6a6", "Silver Line", None),
 }
+
+
+def city_geometry():
+    """San Diego's city limits, so each line's label goes at the tail of the
+    stretch inside the city (the Trolley runs on to El Cajon and Santee)."""
+    boundary = gpd.read_file(MUNICIPAL_BOUNDARIES_GEOJSON)
+    boundary = boundary.set_crs(CRS_GEOGRAPHIC) if boundary.crs is None else boundary.to_crs(CRS_GEOGRAPHIC)
+    return boundary[boundary["Name"] == CITY_BOUNDARY_NAME].geometry.union_all()
 
 
 def main():
@@ -57,8 +64,6 @@ def main():
 
     render_heatmap(
         output_path=HEATMAP_HTML,
-        center=SAN_DIEGO_CENTER,
-        zoom=12,
         map_title="San Diego Trolley Business Density Heatmap",
         city_name="San Diego",
         system_name="Trolley",
@@ -70,6 +75,7 @@ def main():
         crs_projected=CRS_PROJECTED,
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
+        label_focus=city_geometry(),
     )
 
 

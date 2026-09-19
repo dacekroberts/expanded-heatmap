@@ -37,11 +37,6 @@ from pipeline.los_angeles.config import (  # noqa: E402
     TAXONOMY_SYSTEM,
 )
 
-# Centred on the in-city station spread (station latitudes 33.93-34.17,
-# longitudes -118.45 to -118.19), not the city's geographic centre - LA is
-# huge and mostly not on a rail line.
-LOS_ANGELES_CENTER = [34.05, -118.31]
-
 # key (route_id) -> (shape_id, colour). shape_id is each line's single
 # most-used trip shape (counted per route, 2026-09-18; where the two
 # directions tie, either is the same alignment). Colours are Metro's own
@@ -55,15 +50,14 @@ LINE_SHAPES = {
     "805": ("805WB_PLE1_260423", "#A05DA5"),    # D Line
     "807": ("807SB_241015", "#E56DB1"),         # K Line
 }
-# Per-line label offset override (degrees); default 0.006. Bump a line here
-# if a rendered map shows its label on a cluster or another line. A negative
-# value puts the label on the opposite side of the track. The B and D Lines
-# share the same subway corridor, so their default labels landed 9 px apart;
-# D's goes to the other side.
-LINE_LABEL_OFFSETS = {"805": -0.012}
+# Per-line label end override: "start" or "end" forces which end of a line its
+# label goes at; the default (automatic) picks the tail end farthest from the
+# other lines, on the stretch inside the city - override only if a rendered map
+# shows that landing badly.
+LINE_LABEL_ENDS = {}
 
 LINE_SPECS = {
-    key: (shape_id, color, LA_METRO_LINE_NAMES[key], LINE_LABEL_OFFSETS.get(key, 0.006))
+    key: (shape_id, color, LA_METRO_LINE_NAMES[key], LINE_LABEL_ENDS.get(key))
     for key, (shape_id, color) in LINE_SHAPES.items()
 }
 
@@ -79,8 +73,6 @@ def main():
 
     render_heatmap(
         output_path=HEATMAP_HTML,
-        center=LOS_ANGELES_CENTER,
-        zoom=11,
         map_title="Los Angeles Metro Rail Business Density Heatmap",
         city_name="Los Angeles",
         system_name="Metro Rail",

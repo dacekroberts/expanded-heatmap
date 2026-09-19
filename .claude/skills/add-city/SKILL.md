@@ -168,10 +168,10 @@ Don't copy map code - call `render_heatmap()` from `pipeline/map_common.py`.
 It owns everything generic (heat layers, rings, stations, clustered
 per-category pins with the scaled cluster icon, line labels, legend). Copy a
 built city's thin `step3_map.py` and change only what's city-specific: map
-centre and zoom (centre on the *station spread*, not the city's geographic
-centre), the transit-line specs `{key: (shape_id, colour, real public name,
-label offset)}` for `load_line_shapes`, the config paths and the taxonomy
-name. Each line's `shape_id` is its single most-used trip shape - count trips
+transit-line specs `{key: (shape_id, colour, real public name, label end)}`
+for `load_line_shapes` (label end `None` = automatic), the city boundary for
+`label_focus`, the config paths and the taxonomy name. Don't hand-pick a map
+centre or zoom: the view is fitted to the stations and labels. Each line's `shape_id` is its single most-used trip shape - count trips
 per shape for the route and take the mode. **Nothing in `map_common.py` may
 name a taxonomy;** if a city needs behaviour it lacks, extend the module
 rather than forking a per-city copy.
@@ -180,11 +180,13 @@ rather than forking a per-city copy.
 `shapes.txt` geometry, and give every line BOTH a permanent on-map label
 using its real public name (verify it - a GTFS short name is not
 automatically what riders call it) AND a legend swatch. Label placement is
-automatic (labels already sit above the pins; for lines that run far beyond
-the city, pass `label_focus` - the city's boundary geometry - so labels
-anchor on the in-city stretch and not the off-screen midpoint of the whole
-route); if a rendered map shows a label on another line,
-override that line's offset (San Diego's Silver Line needed one). If the
+automatic: each label goes at its line's tail end (the end farthest from the
+other lines), labels that would collide disperse along their lines, and they
+sit above the pins. Always pass `label_focus` - the city's boundary geometry
+- so tails are taken on the in-city stretch of lines that run far beyond it.
+If a rendered map still shows a label landing badly, force that line's end
+with `"start"`/`"end"` in its spec. The legend collapses by itself; check
+both in the browser. If the
 agency's official line colours are ambiguous or shared, use a palette of
 your own that stays distinct from the business-category colours.
 
