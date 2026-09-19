@@ -56,6 +56,13 @@ CITIES = [
         "page": "pages/2_San_Francisco_Heatmap.py",
         "blurb": "Muni Metro (J Church, K Ingleside, L Taraval, M Ocean View, N Judah, T Third Street)",
     },
+    {
+        "name": "Los Angeles",
+        "lat": 34.05,
+        "lon": -118.31,
+        "page": "pages/3_Los_Angeles_Heatmap.py",
+        "blurb": "Metro Rail (A, B, C, D, E, K Lines)",
+    },
 ]
 
 st.subheader("Covered cities")

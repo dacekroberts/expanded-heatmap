@@ -14,6 +14,112 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-18 - Los Angeles (third city)
+
+- **Added Los Angeles: 565,498 raw rows with coordinates -> 463,356 in-city
+  -> 101,436 storefront -> 92,270 with usable coordinates + 9,166 flagged
+  -> 9,039 recovered by geocoding -> 101,309 final (127 dropped); 56
+  stations; 23,839 of 101,309 businesses within a ring.** Source: LA Office
+  of Finance "Listing of Active Businesses" (Socrata `6rrh-rzua`,
+  `data.lacity.org`), downloaded server-filtered to rows with coordinates
+  and only the columns step 2 uses, ordered by `location_account` so the
+  file is reproducible (the full dataset is 631,925 rows). About 9% of rows
+  carry no NAICS code and so are excluded from the storefront filter - a
+  floor on density, like San Francisco's.
+- **Found that ~9% of in-city storefront rows have corrupt coordinates,
+  that the loss is heavily biased toward recent registrations, and
+  recovered nearly all of them by geocoding instead of dropping them.** The
+  first version of step 2 dropped everything outside the city's coordinate
+  bounds and lost 9,166 of 101,436 rows (9.0%) - too many to accept
+  unexamined. They were: 8,657 rows whose longitude is a copy of the
+  latitude (e.g. 34.0468, 34.0468), 470 at (0, 0) or whole-degree
+  placeholders, and 39 elsewhere outside the city. The loss is even across
+  council districts (8.2-9.9%) and moderately uneven across categories
+  (Retail 8.4%, Personal services 9.0%, Food service 11.4%), but very
+  uneven by age: 22.5% of businesses that started in 2020 or later were
+  affected versus 0.7-1.5% of older ones, so dropping them would have
+  systematically under-counted new openings. Each row still has a street
+  address, so step 2 now flags them (`coord_status = needs_geocode`,
+  coordinates blanked) and a new step 3 geocodes them with the Census
+  bulk geocoder: 9,066 of 9,166 matched (98.9%; 4,869 exact, 4,197
+  non-exact), 27 rejected for landing outside the city's bounds, and 99.5%
+  of the 9,039 accepted points fall inside the City of LA polygon.
+  Residual loss is 127 rows (0.1%), 80 of them among the 37,066 businesses
+  started 2020+ (0.2%). Every output row records its source
+  (`geocode_source` = source | census). Rejected alternative: keep dropping
+  them and document the bias - a 9% loss concentrated in new businesses is
+  too large and too systematic to leave in.
+- **Identified in-city businesses by `council_district` 1-15, not by the
+  `city` field.** `city` holds postal community names (Van Nuys, North
+  Hollywood, San Pedro, ...), all part of the City of LA; only 295,738 of
+  631,925 rows say "LOS ANGELES", so an exact match would have kept about
+  half the city. `council_district` is the city's own field: 1-15 are the
+  council districts and 0 (151,427 rows) marks businesses registered with
+  LA but located elsewhere. Independent check against the boundary
+  polygon: 99.9% (92,169 of 92,270) of source-coordinate points fall inside.
+- **Inserted geocoding as step 3, making the map step 4, and built
+  `pipeline/census_geocoder.py` as a shared module.** This is the renumbering
+  the `add-city` skill describes; `drift_check.py` needed no change. The
+  module caches Census responses under `data/<city>/raw/geocode_cache/`
+  keyed by a hash of each batch's contents (not just the batch number), so a
+  changed input can never be served a stale answer and re-runs (and drift
+  checks) stay deterministic and off the network. `requests` returned to
+  `requirements-pipeline.txt`. First tested on 200 rows (95% matched)
+  before the full run.
+- **Kept every in-city station; the sub-transit-line filters were not
+  needed.** Median spacing between in-city stations is ~0.55 mi with no
+  dense street-running offshoots (unlike Muni Metro), measured before
+  collapsing duplicate complex names.
+- **Scoped to the City of LA: 56 of 110 stations kept, 54 excluded across 23
+  other places.** Metro Rail serves Long Beach (8 stations), Pasadena (6),
+  El Segundo, Hawthorne, Inglewood and Santa Monica (3 each), Azusa and
+  Compton (2 each), 15 more cities with 1 each, and 10 stations in
+  unincorporated areas. Covering them would need those cities' own business
+  registries, sourced and verified separately - a new project, not a
+  config change. All 54 are listed with the city they are in in
+  `outputs/los_angeles/excluded_stations.csv`. Four per-line complex names
+  (8 feed names) were collapsed into single stations after a pairwise
+  distance check (Metro Center, Union Station, Expo/Crenshaw,
+  Willowbrook/Rosa Parks): 114 feed names -> 110 stations.
+- **Used LA County Planning's incorporated-city boundary layer and Metro's
+  own rail GTFS.** The City of LA's own boundary service (`maps.lacity.org`)
+  was unreachable from this environment (connection failure, other hosts
+  fine), so the county layer on `services.arcgis.com` (88 incorporated
+  cities, LA = the `LOS ANGELES` record) was used; it also let step 1 name
+  the city of every excluded station. The GTFS is Metro's official
+  rail-only feed (gitlab.com/LACMTA/gtfs_rail), current as of this run
+  (calendar to 2026-10-02; includes the 2026 D Line extension shape).
+- **Named lines by Metro's letters (A, B, C, D, E, K Line) and used Metro's
+  official colours from the feed's `route_color`.** Names verified against
+  Metro's own line-letters post and Wikipedia; the feed's "Metro A Line" has
+  the brand prefix dropped, as San Diego's "Blue Line" lacks "MTS". Unlike
+  San Francisco's, LA's official colours are unambiguous, so they are used.
+- **Fixed line labels being hidden under big cluster badges, in the shared
+  code.** Downtown LA's clusters (3,796 and 5,222 businesses) were drawn over
+  the B and D Line labels, defeating a "permanent" label; San Diego's Silver
+  Line had hit the same problem earlier and was worked around with a larger
+  offset. Root-cause fix: label markers get `zIndexOffset=1000` in
+  `map_common.add_line_label`. San Diego and San Francisco were regenerated
+  (only the z-index and Folium IDs changed).
+- **Added `label_focus` to `render_heatmap` so labels anchor on the in-city
+  stretch of each line.** LA's lines run far beyond the city (the A Line to
+  Azusa and Long Beach), so the midpoint of the whole route would fall
+  off-screen in the default view. Other cities pass nothing and are
+  unchanged. The B and D Lines share a subway corridor, so their labels
+  landed 9 px apart; the D Line's label takes a -0.012 offset to the other
+  side of the track (now 32 px apart).
+- **Centred the default view on the in-city station spread at zoom 11**
+  (34.05, -118.31): LA is huge and mostly not on a rail line.
+- **Known limitations:** the source rounds coordinates to 4 decimals (~11 m),
+  fine for ring bands of 160 m and up; recovered points are Census
+  interpolations (about half non-exact); ~9% of rows have no NAICS and are
+  invisible to the storefront filter; the LA map is 5.8 MB (San Francisco
+  2.6 MB) - it embeds and renders correctly under the lean venv but is worth
+  watching before deployment (open in `PLAN.md`).
+- **Verified all three cities against the lean venv:** Overview lists all
+  three; each city page loads its map iframe with Leaflet, that city's full
+  legend and every line label, no Streamlit exception blocks, clean console.
+
 ### 2026-09-18 - Hygiene: shared modules, tooling, and making the project standalone
 
 - **Ran the full pipeline from scratch for both cities against the first

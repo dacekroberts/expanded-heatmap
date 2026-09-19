@@ -76,6 +76,8 @@ pipeline/
   <city_slug>/step1_stations.py         GTFS -> station list (city-limits filtered)
   <city_slug>/step2_clean_businesses.py raw export -> clean, filtered CSV
   <city_slug>/step3_map.py              thin: centre, line specs, calls render_heatmap
+  census_geocoder.py          shared: Census bulk geocoder with a content-hash cache
+                              (for cities whose data lacks usable coordinates)
 app/
   Overview_&_Introduction.py  macro page: city picker
   pages/N_<City>_Heatmap.py   one embedded map per city
@@ -94,10 +96,11 @@ local modules (`nyc_dca`, `chicago_license`, `phl_licensetype`) are
 **skeletons**: they map only values seen in sample rows and need a full
 `SELECT DISTINCT` pull of the city's classification field before use.
 
-**Steps.** Each city has steps 1 (stations), 2 (clean businesses) and 3
-(map). A city that needs geocoding inserts a step and renumbers; nothing
-hardcodes the numbers. If a city's data ships pre-geocoded, there is no
-geocoding step.
+**Steps.** Each city has steps 1 (stations), 2 (clean businesses) and a
+final map step. A city that needs geocoding inserts a step and renumbers;
+nothing hardcodes the numbers. San Diego and San Francisco ship
+pre-geocoded, so their map is step 3; Los Angeles needs a Census-geocoding
+step 3, so its map is step 4.
 
 **Config is per-city, not yet a shared registry.** A shared
 `data/registry.yaml` waits until more cities show the real common shape
@@ -113,9 +116,15 @@ Cities built and running end to end (pipeline, map, app page):
 - **San Francisco** - Muni Metro (J, K, L, M, N, T). NAICS. Stations
   thinned with the sub-transit-line filters; cut stations are documented in
   `outputs/san_francisco/excluded_stations.csv`. Data ships pre-geocoded.
+- **Los Angeles** - Metro Rail (A, B, C, D, E, K Lines), only the stations
+  inside the City of LA (the lines serve 23 other places). NAICS.
+  Businesses are identified by the registry's own council-district field,
+  not its postal-community `city` field. About 9% of rows had corrupt
+  coordinates, concentrated in recent registrations; they are recovered by
+  Census geocoding rather than dropped. Line colours are Metro's own.
 
-Next by ease ranking: Los Angeles, then Chicago, New York, Philadelphia;
-Boston and Washington D.C. carry caveats. See `city_shortlist.md` and
+Next by ease ranking: Chicago, then New York and Philadelphia; Boston and
+Washington D.C. carry caveats. See `city_shortlist.md` and
 `PLAN.md`. Row counts, station counts and per-run figures are in
 `DECISIONS.md`.
 
@@ -134,6 +143,9 @@ deployment.
 - Stations always on, not toggleable; rings, heat layers and category pins
   toggleable. The whole-city heat layer is an opt-in; the default view is
   businesses within a ring.
+- Line labels sit above the pins (a big cluster must not hide a label) and,
+  for lines that run far beyond the city, are anchored on the in-city
+  stretch (`label_focus`).
 - Pin clusters use the scaled cluster icon; pin layers are wrapped in a
   `FeatureGroup` for `show`; free text in tooltips is HTML-escaped.
 - Map centred on the station spread, at a fixed pixel size.
@@ -145,9 +157,17 @@ deployment.
   zone from the city's longitude (San Diego 11N, San Francisco 10N; Chicago
   16N and NYC 18N; non-US cities may need a national system, e.g. UK
   EPSG:27700).
-- **Geocoding will not always be free.** Both built cities ship
-  pre-geocoded, which isn't guaranteed. Otherwise budget a geocoder (the
-  Census bulk geocoder is US-only) and expect a lower match rate.
+- **Coordinates that exist can still be wrong.** Los Angeles' registry had
+  ~9% corrupt coordinates (longitude copied from latitude, (0,0), whole-
+  degree placeholders), concentrated in recent registrations. Check values,
+  not just non-null-ness; recover rather than drop when the loss is large or
+  biased; when a filter drops more than a few percent, find out why and
+  whether the loss is uniform before accepting it. The Census bulk geocoder
+  (`pipeline/census_geocoder.py`, US-only) recovered 98.9%.
+- **A city field may not mean "in the city".** LA's `city` holds postal
+  community names; its `council_district` field is the reliable in-city
+  marker. Look for an authoritative district/boundary field, and cross-check
+  with the boundary polygon.
 - **Classification isn't universal.** NAICS is US-specific; each non-NAICS
   city needs its taxonomy decided explicitly. Catch-all codes (e.g. NAICS
   812990 "All Other Personal Services", 459999 "All Other Miscellaneous

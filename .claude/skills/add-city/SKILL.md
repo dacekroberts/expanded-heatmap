@@ -5,8 +5,8 @@ description: Add a new city to the expanded-heatmap project - live-verify its re
 
 # Adding a city to expanded-heatmap
 
-Distilled from the two cities actually built (San Diego, then San Francisco)
-- not a hypothetical plan. Every step either caught a real problem or is a
+Distilled from the three cities actually built (San Diego, San Francisco, Los
+Angeles) - not a hypothetical plan. Every step either caught a real problem or is a
 design decision already made (see `docs/project_context.md`; the reasoning
 trail is in `DECISIONS.md`). If this is a fresh session, read those, plus
 `docs/city_shortlist.md` and `PLAN.md`, first.
@@ -26,8 +26,16 @@ schema verification. Do this for every candidate before scaffolding:
    real non-null sample values: (a) *some* classification field - NAICS or
    the city's own taxonomy, both fine; and (b) a street address and/or
    lat/long that actually has data, not merely a column that exists. Also
-   note whether the data ships pre-geocoded (both built cities do) and
-   whether it has an "active" flag or an end date to filter on.
+   note whether the data ships pre-geocoded (both San Diego and San
+   Francisco do) and whether it has an "active" flag or an end date to
+   filter on. Then check *validity*, not just population: count how many
+   coordinates fall inside the city's bounds and look at the ones that
+   don't. A populated field can still be corrupt - Los Angeles' registry had
+   ~9% bad coordinates (longitude copied from latitude, (0,0), whole-degree
+   placeholders), concentrated in recent registrations. And look at what the
+   dataset's city field actually holds: LA's holds postal community names
+   (Van Nuys, San Pedro...), so an exact match keeps about half the city;
+   find the authoritative in-city marker (LA's `council_district`) instead.
 2. **Transit data.** Find the real GTFS feed URL and confirm it downloads
    and unzips (`curl -sL <url> -o gtfs.zip`). A URL from search can still
    time out or 404 - San Francisco's official feed host timed out from this
@@ -82,8 +90,10 @@ Per-city, not shared, until more cities show the common shape (see
 - Ring edges: reuse `[0.0, 0.1, 0.2, 0.3, 0.6]` miles unless station spacing
   is meaningfully different.
 - Station scope: which lines count and why. Document the choice.
-- `CITY_KEEP`: the exact string the dataset's city field uses; note any
-  neighbourhood it undercounts (San Diego's La Jolla).
+- How in-city rows are identified: `CITY_KEEP` (the exact string the dataset's
+  city field uses; note any neighbourhood it undercounts - San Diego's La
+  Jolla) or, better where the dataset has one, an authoritative district
+  field (Los Angeles' `council_district` 1-15).
 - `TAXONOMY_SYSTEM` (a key from `TAXONOMY_MODULES`) and a sanity bounding
   box for coordinates.
 
@@ -106,7 +116,10 @@ central stations drops whole districts. For that shape use the
 stations always kept, terminals always kept, surface stops thinned to a
 target spacing measured along the real route, interchanges force-kept.
 Document every cut station (name, line, reason, nearest kept station) to
-`outputs/<city>/excluded_stations.csv`.
+`outputs/<city>/excluded_stations.csv`. Stations dropped by the boundary
+filter deserve the same record, with the city each lies in (Los Angeles: 54
+of 110 stations, across 23 other places) - use a multi-city boundary layer
+so the city can be named.
 
 **Measure inter-station distances against the 0.6 mi outer ring.** Where
 several stations sit closer than that (downtown clusters), their rings
@@ -131,7 +144,23 @@ primary key (not business name - chains share names). Rename to the shared
 columns the map expects (`business_name`, `latitude`, `longitude`, plus the
 `VALUE_COLUMN`). Read the printed row counts at every filter - that is how a
 scope mistake surfaces, and they become the baseline in `DECISIONS.md`.
-**Only add geocoding if Step 0 found the data isn't pre-geocoded.**
+
+**Never silently drop a large share of rows.** If a filter drops more than a
+few percent, find out why and whether the loss is uniform (by start year,
+category, district) before accepting it. Los Angeles' coordinate check
+dropped 9% of storefront rows, 22% of businesses started since 2020 versus
+~1% of older ones; dropping them would have systematically under-counted new
+openings. If the rows are recoverable (they still have street addresses),
+flag them instead - blank the bad coordinates and set a `coord_status` - and
+recover them in a geocoding step with `pipeline/census_geocoder.py` (US
+only; responses cached by content hash so re-runs and drift checks stay
+deterministic). Accept geocoded points only inside the city's bounds,
+record `geocode_source` on every row, and report the residual loss and its
+bias. Cross-check in-city identification against the boundary polygon.
+
+**Only add a geocoding step if Step 0 found coordinates missing or unusable;**
+when you do, it becomes step 3 and the map step 4 (LA is the worked
+example).
 
 ## Step 6 - `step3_map.py`
 
@@ -151,7 +180,10 @@ rather than forking a per-city copy.
 `shapes.txt` geometry, and give every line BOTH a permanent on-map label
 using its real public name (verify it - a GTFS short name is not
 automatically what riders call it) AND a legend swatch. Label placement is
-automatic; if a rendered map shows a label on a cluster or another line,
+automatic (labels already sit above the pins; for lines that run far beyond
+the city, pass `label_focus` - the city's boundary geometry - so labels
+anchor on the in-city stretch and not the off-screen midpoint of the whole
+route); if a rendered map shows a label on another line,
 override that line's offset (San Diego's Silver Line needed one). If the
 agency's official line colours are ambiguous or shared, use a palette of
 your own that stays distinct from the business-category colours.

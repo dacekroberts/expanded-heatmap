@@ -20,18 +20,18 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [~] **Next city: Los Angeles** (ease rank 3). NAICS-based; Socrata
-  `data.lacity.org` id `6rrh-rzua` (`naics`, `street_address`,
-  `location_1`). Live-verify again first. Rail is larger (Metro heavy +
-  light, ~110 stations): check whether it has the central-corridor plus
-  surface-offshoot shape before choosing between "keep every station" and
-  the sub-transit-line filters, and measure how close downtown stations
-  sit relative to the 0.6 mi outer ring.
+- [~] **Next city: Chicago** (ease rank 4). Follow `add-city` from Step 0.
+  Its taxonomy (`chicago_license`) is a skeleton: pull the full
+  `SELECT DISTINCT license_description` (and `business_activity`) from
+  Socrata `r5kz-chrr` and fill in the mapping, with a hand-sample of
+  catch-all categories, before building the city. CTA 'L' is large (145
+  stations) - check whether it has the central-plus-offshoot shape. Los
+  Angeles' lessons apply: check what the city field holds, check
+  coordinates for corruption (not just null-ness), and investigate any
+  filter that drops more than a few percent.
 
 ## Next cities, in ease order
 
-- [ ] Chicago - needs `chicago_license` filled from a full distinct-value
-  pull of `license_description` (Socrata `r5kz-chrr`); CTA 'L' is large.
 - [ ] New York - needs `nyc_dca` filled (Socrata `w7w3-xahh`,
   `business_category`); the largest rail system, so station scope is the
   biggest decision.
@@ -40,8 +40,9 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 - [ ] Boston - real NAICS+address but only a 978-row certified-vendor
   directory; decide whether that is enough data to be worth mapping.
 - [ ] Washington D.C. - `LATITUDE`/`LONGITUDE` are truncated to whole
-  degrees; needs address geocoding or the state-plane `X_COORDINATE`/
-  `Y_COORDINATE` fields, and a taxonomy module.
+  degrees; use `pipeline/census_geocoder.py` on `PREMISEADDRESS` (or the
+  state-plane `X_COORDINATE`/`Y_COORDINATE` fields), and add a taxonomy
+  module.
 - [ ] San Jose and Denver: ruled out (no usable dataset). Revisit only if a
   new source appears.
 
@@ -68,6 +69,14 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 - [ ] `README.md` (none yet).
 
 ## Data quality follow-ups
+
+- [ ] San Diego: add an `excluded_stations.csv` audit file (16 stations in
+  other cities), as San Francisco and Los Angeles have.
+- [ ] Los Angeles map size (5.8 MB vs 2.6 MB for San Francisco): decide
+  whether to shrink it (e.g. thin the whole-city heat layer, which holds all
+  ~101k points) before deploying.
+- [ ] Los Angeles: ~9% of registry rows have no NAICS code; consider whether
+  the caveat needs to be visible on the city page.
 
 - [ ] San Diego: exact `address_city == "SAN DIEGO"` undercounts
   neighbourhoods recorded under their own name (La Jolla foremost); decide
