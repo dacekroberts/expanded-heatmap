@@ -1,0 +1,66 @@
+station,line,latitude,longitude,reason,nearest_kept_station,miles_since_nearest_kept
+Church St & 16th St,J,37.764621,-122.428722,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Metro Church Station,0.185
+Church St & 18th St,J,37.761467,-122.428416,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Metro Church Station,0.404
+Church St & 22nd St,J,37.754607,-122.42775,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Right Of Way/20th St,0.279
+Church St & 24th St,J,37.7518,-122.427497,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Right Of Way/20th St,0.474
+Church St & 28th St,J,37.745398,-122.426955,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Church St & 26th St,0.222
+Church St & Day St,J,37.742811,-122.426654,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Church St & 26th St,0.402
+Right Of Way/21st St,J,37.756643,-122.426922,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Right Of Way/20th St,0.132
+Right Of Way/Liberty St,J,37.757451,-122.426999,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Right Of Way/20th St,0.076
+San Jose Ave & Ocean Ave,J,37.723085,-122.444699,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",San Jose Ave & Santa Ynez Ave,0.231
+San Jose Ave & Randall St,J,37.739385,-122.42432,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",30th St & Dolores St,0.193
+San Jose Ave & Santa Rosa Ave,J,37.728996,-122.440016,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",San Jose Ave/Glen Park Station,0.411
+Junipero Serra Blvd & Ocean Ave,K,37.731271,-122.471818,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",West Portal/Sloat/St Francis Circle,0.245
+Ocean Ave & Jules Ave,K,37.724955,-122.46139,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Ocean Ave & Aptos Ave,0.43
+Ocean Ave & Lee St,K,37.723397,-122.454423,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Ocean Ave & Miramar Ave,0.22
+Ocean Ave & San Leandro Way,K,37.729945,-122.469475,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",West Portal/Sloat/St Francis Circle,0.402
+Ocean Ave & Victoria St,K,37.726029,-122.464337,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Ocean Ave & Aptos Ave,0.252
+Ocean Ave/CCSF Pedestrian Bridge,K,37.722947,-122.450866,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Ocean Ave & Miramar Ave,0.417
+15th Ave & Taraval St,L,37.743124,-122.471297,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",West Portal Station,0.376
+46th Ave & Ulloa St,L,37.739998,-122.504579,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Taraval St & 40th Ave,0.478
+Taraval St & 23rd Ave,L,37.742872,-122.48045,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Taraval St & 19th Ave,0.274
+Taraval St & 26th Ave,L,37.742777,-122.483083,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Taraval St & 19th Ave,0.418
+Taraval St & 32nd Ave,L,37.742491,-122.489505,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Taraval St & 30th Ave,0.119
+Taraval St & 42nd Ave,L,37.742021,-122.500202,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Taraval St & 40th Ave,0.118
+Taraval St & 44th Ave,L,37.741924,-122.502346,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Taraval St & 40th Ave,0.235
+Taraval St & 46th Ave,L,37.741823,-122.50449,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Taraval St & 40th Ave,0.352
+Taraval St & Sunset Blvd,L,37.742287,-122.494361,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Taraval St & 30th Ave,0.384
+Ulloa St & 14th Ave,L,37.7415,-122.469969,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",West Portal Station,0.243
+19th Ave & Holloway Ave,M,37.721342,-122.475176,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",19th Ave & Junipero Serra Blvd,0.346
+19th Ave & Randolph St,M,37.714856,-122.470249,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Broad St & Orizaba Ave,0.478
+Broad St & Capitol Ave,M,37.713191,-122.458921,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",San Jose Ave & Farallones St,0.38
+Broad St & Plymouth Ave,M,37.713222,-122.455927,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",San Jose Ave & Farallones St,0.216
+Randolph St & Arch St,M,37.714342,-122.466982,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Broad St & Orizaba Ave,0.296
+Randolph St & Bright St,M,37.714348,-122.463392,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Broad St & Orizaba Ave,0.099
+Right Of Way/Eucalyptus Dr,M,37.730987,-122.474366,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",19th Ave & Winston Dr,0.263
+Right Of Way/Ocean Ave,M,37.731808,-122.473815,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",19th Ave & Winston Dr,0.328
+San Jose Ave & Geneva Ave,M,37.720096,-122.447196,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",San Jose Ave & Geneva Ave,0.051
+San Jose Ave & Lakeview Ave,M,37.71633,-122.450368,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",San Jose Ave & Geneva Ave,0.364
+9th Ave & Irving St,N,37.763307,-122.466344,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Irving St & 6th Ave,0.194
+Carl St & Hillway Ave,N,37.765003,-122.456561,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Carl St & Cole St,0.374
+Carl St & Stanyan St,N,37.765495,-122.45259,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Carl St & Cole St,0.154
+Duboce St/Noe St/Duboce Park,N,37.769357,-122.433557,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Duboce Ave & Church St,0.227
+Irving St & 2nd Ave,N,37.764441,-122.458643,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Carl St & Cole St,0.494
+Judah St & 12th Ave,N,37.762069,-122.469324,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Irving St & 6th Ave,0.416
+Judah St & 19th Ave,N,37.761743,-122.476921,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Judah St & 16th Ave,0.18
+Judah St & 23rd Ave,N,37.761547,-122.481164,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Judah St & 16th Ave,0.412
+Judah St & 28th Ave,N,37.76131,-122.48651,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Judah St & 25th Ave,0.176
+Judah St & 31st Ave,N,37.761172,-122.489719,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Judah St & 25th Ave,0.351
+Judah St & 40th Ave,N,37.760743,-122.499359,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Judah St & 34th Ave,0.352
+Judah St & 46th Ave,N,37.760493,-122.505832,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Judah St & 43rd Ave,0.178
+Judah St & 9th Ave,N,37.762227,-122.466688,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Irving St & 6th Ave,0.271
+Judah St & Funston Ave,N,37.762075,-122.470329,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Irving St & 6th Ave,0.471
+Judah St & Sunset Blvd,N,37.760917,-122.495668,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Judah St & 34th Ave,0.15
+King St & 2nd St,N,37.779621,-122.389824,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",4th St & King St,0.328
+The Embarcadero & Folsom St,N,37.790749,-122.389841,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",The Embarcadero & Brannan St,0.435
+Bayshore Blvd & Areta Ave,T,37.712226,-122.402339,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Bayshore Blvd & Sunnydale Ave,0.271
+Fourth Street & Brannan,T,37.778403,-122.39659,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",4th St & King St,0.209
+Third Street & 23rd St,T,37.755414,-122.388001,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Third Street & Marin St,0.444
+Third Street & Carroll Ave,T,37.725491,-122.394222,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Third Street & Le Conte Ave,0.495
+Third Street & Evans Ave,T,37.742726,-122.38792,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Third Street/Kirkwood/La Salle,0.364
+Third Street & Mission Rock St,T,37.772984,-122.389683,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",UCSF / Chase Center (16th St),0.311
+Third Street/Gilman/Paul,T,37.722449,-122.39561,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Third Street & Le Conte Ave,0.271
+Third Street/Hudson/Innes,T,37.739916,-122.388884,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Third Street/Kirkwood/La Salle,0.163
+Third Street/Oakdale/Palou,T,37.734358,-122.390836,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Third Street & Williams Ave,0.363
+Third Street/Revere/Shafter,T,37.732262,-122.391502,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Third Street & Williams Ave,0.214
+UCSF Medical Center (Mariposa),T,37.764391,-122.388853,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Third Street & 20th St,0.268

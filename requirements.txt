@@ -1,0 +1,8 @@
+# Streamlit Cloud installs from this file.
+# Keep it lean: no geopandas, no GDAL, no compiled geo stack - the geo stack
+# can't be a runtime dependency on Streamlit Cloud. The heavy dependencies
+# live in requirements-pipeline.txt and are only needed locally, to
+# regenerate outputs/. The app only reads pre-built files from outputs/.
+# Add charting libraries here only when the app actually draws charts.
+streamlit>=1.40
+pandas>=2.2

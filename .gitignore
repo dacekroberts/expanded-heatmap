@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.venv-lean/
+.venv-lean-install.log
+
+# Local-only dev server config (machine-specific ports/paths); the
+# deploy-verify agent recreates it when missing.
+.claude/launch.json
+
+# Per-city raw downloads and pipeline intermediates - regenerable, not
+# committed (see docs/project_context.md, "Architecture").
+data/*/raw/
+data/*/processed/
+
+# outputs/<city>/ IS committed - the deployed app only ever reads from
+# there, per the pipeline/app split.
