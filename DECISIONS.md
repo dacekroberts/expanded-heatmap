@@ -14,6 +14,32 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-19 - Chicago transit scope: CTA only, Metra deferred
+
+- **The first Chicago build maps the CTA 'L' only; Metra is recorded as a
+  possible later addition.** Each built city maps one agency's rail-transit
+  system (the San Diego Trolley without the Coaster or Sprinter, Muni Metro
+  without Caltrain or BART, LA Metro Rail without Metrolink), and Metra would
+  break that. It would also add a second agency and feed, 11 more lines (about
+  19 in the legend and label layout), low-frequency and rush-hour-only
+  stations, and Metra Electric's closely spaced South Side stops, which could
+  reopen the spacing-filter question. The extra effort was estimated at
+  roughly 40-50% (a guess).
+- **Expected 'L' shape (from general knowledge, not yet checked against the
+  GTFS): uniformly sparse, so no San Francisco-style spacing filter.** All
+  lines are grade-separated with stops roughly a half to a mile apart and no
+  street-level streetcar offshoots. Instead, five lines share the downtown
+  Loop (their polylines overlap and the station rings overlap heavily there),
+  and the Purple and Yellow lines run mostly outside Chicago (Evanston,
+  Wilmette, Skokie), as do stops on Green, Pink and Blue (Oak Park, Cicero,
+  Forest Park). To be verified in the build by computing stop spacing per
+  line and counting stations inside the city boundary.
+- **Chopping-block order if the map is too much:** Yellow and possibly Purple
+  first (a line with essentially no in-city stations is dropped rather than
+  drawn, since every drawn line needs a label and a legend entry), then
+  suburban stops (removed automatically by the boundary filter). The core six
+  lines (Red, Blue, Brown, Green, Orange, Pink) stay.
+
 ### 2026-09-19 - Chicago catch-all license types classified by activity
 
 - **Classified Chicago's two catch-all license types by `business_activity`,

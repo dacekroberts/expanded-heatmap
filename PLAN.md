@@ -30,8 +30,14 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   Package Goods and so on), with a hand-sample. Filter the
   1.2M-row history to status `AAI` and unexpired licenses (the expiry field
   has junk dates), then dedupe by account and site. CTA 'L' is large (145
-  stations) - check whether it has the central-plus-offshoot shape, and
-  decide on Metra (feed at `schedules.metrarail.com/gtfs/schedule.zip`).
+  stations) - check its shape from the GTFS (stop spacing per line, stations
+  inside the boundary; expected uniformly sparse, so no SF-style spacing
+  filter). **Decided: CTA only for the first build** (one agency's rail
+  system per city, as in the built cities); Metra
+  (`schedules.metrarail.com/gtfs/schedule.zip`) is a possible later
+  addition. Chopping-block order if the map is too much: Yellow and possibly
+  Purple (drop a line with essentially no in-city stations), then suburban
+  stops (the boundary filter removes them); the core six lines stay.
   Still to check, per the Los Angeles lessons: coordinate corruption (not
   just nulls; about 8% are null) and any in-city rows with another `city`
   value.
