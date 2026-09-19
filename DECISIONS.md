@@ -14,6 +14,38 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-18 - Live check of Dallas, Austin, Charlotte and Fort Worth
+
+- **Checked the four cities left "not yet live-verified" against their real
+  APIs, to widen the pool beyond the ranked list.** Search summaries were not
+  treated as evidence (the Denver and San Jose lesson); schemas, counts,
+  date ranges and null rates were pulled directly.
+- **Dallas: marginal, kept as an unranked candidate.** Certificates of
+  Occupancy (Socrata `9qet-qt9e`) has a real classification (`land_use`, 143
+  values, plus an `occupancy` code), business names, and coordinates (2 of
+  23,731 rows null), and DART's GTFS downloads. But the data ends 2022-11-15
+  and covers only certificates issued 2018-2022, so it shows new occupancies,
+  not a registry; a city page would have to say so. This corrects the earlier
+  search-level note that the dataset lacked a classification field. Its
+  effort rank sits after Boston (needs a new taxonomy module) and would be
+  set when it is built.
+- **Fort Worth: ruled out on rail, though the data is workable.** The
+  certificate table (72,065 rows since ~2002, `JobUse` with 48 values,
+  coordinates, current through 2026) has ~19% of rows without coordinates,
+  null city and address fields on most rows, and repeats a business when it
+  relocates. With only TEXRail and the Trinity Railway Express, the map would
+  have few stations. Revisit if rail expands.
+- **Austin: ruled out.** The dataset named "Certificates Of Occupancy" is
+  291,759 construction permits with a yes/no flag and no business name or
+  classification; the business datasets found are small (64-row credit-access
+  list, vendor lists). One MetroRail line.
+- **Charlotte: ruled out.** The city hub has no business or license dataset
+  (zoning, permit-review, and hand-curated grocery/pharmacy/medical points
+  only), and Mecklenburg County's GIS page listed none. Rail is small.
+- **Not checked:** Dallas's Commercial Permits Activity Dashboard
+  (`ync5-xnfn`), and Trinity Metro, Austin and Charlotte GTFS. The Austin and
+  Charlotte rail sizes are from memory.
+
 ### 2026-09-18 - Line labels at tail ends, auto-fitted view, collapsible legend
 
 - **Line labels now sit at each line's tail end, chosen automatically.** The

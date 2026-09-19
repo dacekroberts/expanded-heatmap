@@ -43,8 +43,14 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   degrees; use `pipeline/census_geocoder.py` on `PREMISEADDRESS` (or the
   state-plane `X_COORDINATE`/`Y_COORDINATE` fields), and add a taxonomy
   module.
-- [ ] San Jose and Denver: ruled out (no usable dataset). Revisit only if a
-  new source appears.
+- [ ] Dallas (marginal, unranked) - Socrata `9qet-qt9e` has `land_use` and
+  coordinates, but the data ends 2022-11-15 and covers only 2018-2022
+  certificates, so the city page must say it shows new occupancies. Needs a
+  new taxonomy module. First check the Commercial Permits Activity Dashboard
+  (`ync5-xnfn`) for something fresher.
+- [ ] San Jose, Denver, Austin, Charlotte, Fort Worth: ruled out (no usable
+  dataset, or too little rail). Revisit only if a new source appears; see
+  `docs/city_shortlist.md`.
 
 ## Structure
 

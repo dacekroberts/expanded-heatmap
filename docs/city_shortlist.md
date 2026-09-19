@@ -37,16 +37,20 @@ bigger system means a bigger station-scope decision).
 | 5 | New York | Subway (472 stations) + LIRR/Metro-North | DCA Issued Licenses (Socrata `w7w3-xahh`): address, `latitude`/`longitude` | `nyc_dca` (skeleton) | Needs `business_category` distinct-value pull. Largest system - biggest station-scope decision |
 | 6 | Philadelphia | SEPTA Metro + Regional Rail | L&I Business Licenses (Carto SQL API `phl.carto.com`, table `business_licenses`): address, `the_geom` (WKB), `geocode_x`/`geocode_y` | `phl_licensetype` (skeleton) | Needs `licensetype` pull, plus Carto queries and WKB parsing |
 | - | Boston | MBTA (subway, Green Line, commuter rail) | Certified Business Directory (CKAN, `data.boston.gov`): `naics_codes1`, address | `naics` | **Caveat:** 978 rows of certified vendors only, not a general registry. Decide whether that is enough data |
+| - | Dallas | DART light rail (GTFS downloads, HTTP 200) | Building Inspection Certificates of Occupancy (Socrata `9qet-qt9e`, `dallasopendata.com`): `business_name`, `address`, `land_use` (143 values), `occupancy`, `geolocation` (2 of 23,731 rows null) | new module needed (`land_use`) | **Caveat:** the data ends 2022-11-15 and holds only certificates issued 2018-2022 (~4-5.6k a year), so it shows new occupancies, not a registry. A city page would need that stated. Other Dallas CO sets are archived FY2015-17 copies |
 | - | Washington D.C. | WMATA Metrorail, 6 lines, 98 stations | Basic Business Licenses (`maps2.dcgis.dc.gov/dcgis/rest/services/FEEDS/DCRA/FeatureServer/0`): `PREMISEADDRESS`, `BUSINESSACTIVITY`, `CATEGORYSERVICETYPE` | new module needed | **Caveat:** no NAICS field, and `LATITUDE`/`LONGITUDE` are truncated to whole degrees (use address geocoding or the state-plane `X_COORDINATE`/`Y_COORDINATE`) |
 
-## Ruled out on data
+## Ruled out
 
 | City | Reason |
 |---|---|
 | San Jose | No bulk business-tax dataset on either official portal (CKAN `data.sanjoseca.gov`, ArcGIS `gisdata-csj.opendata.arcgis.com`). The only source found, `opendatasanjose.com`, is a third-party lookup tool with no export. |
+| Fort Worth | Live-verified 2026-09-18. Data is workable but rail is not: TEXRail plus the Trinity Railway Express, both small (their GTFS not checked). Certificates of Occupancy (ArcGIS `CFW_Open_Data_Certificates_of_Occupancy_Table_view`, table 0): 72,065 rows since ~2002 with `Occupant`, `JobUse` (48 values), `Latitude`/`Longitude`, and current through 2026. But 13,343 rows (~19%) have no coordinates, city and address fields are null on most rows, and it is a running history of certificates (a relocated business appears more than once). Revisit if rail expands or a thin-network map is acceptable. |
+| Austin | Live-verified 2026-09-18. The dataset titled "Certificates Of Occupancy" (Socrata `f9mz-m6dy`, 291,759 rows) is construction permits with a yes/no flag: no business name or classification. The business sets found are small (Active Credit Access Business Licenses `3buj-7jze`, 64 rows; vendor lists). Rail is one MetroRail line (from memory, not checked). |
+| Charlotte | Live-verified 2026-09-18. The city hub (`data.charlottenc.gov`) holds zoning, permit-review and planning layers plus hand-curated point sets (grocery stores, pharmacies, medical facilities) and no general business or license dataset; Mecklenburg County's GIS open-data page listed none either. Rail is the LYNX Blue Line plus a streetcar (from memory, not checked). |
 | Denver | "Active Business Licenses" (Denver ArcGIS hub and its Colorado Information Marketplace mirror) has no address, no classification and no geometry: only `License_Num, License_Type, License_Sub_Type, License_Status, Entity_Name, Trade_Name, Expiration_Date`. All 347 datasets in Denver's catalog were searched for an alternative; none qualified. |
 
-Revisit either only if a new source appears.
+Revisit San Jose and Denver only if a new source appears.
 
 ## Screened out on rail (search-level, not live-verified)
 
@@ -59,9 +63,9 @@ monorail).
 
 ## Not yet live-verified
 
-Dallas (extensive rail; its Certificates of Occupancy dataset appears to
-lack a classification field), Austin (one commuter line, light rail
-planned), Charlotte (light rail plus streetcar; no single countywide
-license dataset found), and Fort Worth (one commuter line) scored
-medium-or-below on search results only. They are candidates for a later
-pass, verified live first.
+None. Dallas, Austin, Charlotte and Fort Worth were verified live on
+2026-09-18 (see the tables above). The search-level guess that Dallas's
+Certificates of Occupancy lacked a classification field was wrong: it has
+`land_use`. Still unchecked: Dallas's Commercial Permits Activity Dashboard
+(Socrata `ync5-xnfn`), and the GTFS feeds for Trinity Metro, Austin and
+Charlotte.
