@@ -14,6 +14,18 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-18 - San Diego excluded-stations audit file
+
+- **San Diego now writes `outputs/san_diego/excluded_stations.csv`, as San
+  Francisco and Los Angeles already did.** It lists the 16 Trolley stations
+  outside city limits with the municipality each is in (La Mesa 5, Chula
+  Vista 3, El Cajon 3, Lemon Grove 2, National City 2, Santee 1). The city
+  filter now joins against every municipality in the SANDAG layer once, so
+  the same join both keeps San Diego and labels the excluded stations; the
+  kept set is unchanged (47 of 63). Drift check: only the new file differs.
+  The file has the same columns as Los Angeles's (`station`, `latitude`,
+  `longitude`, `located_in`).
+
 ### 2026-09-18 - Live check of Dallas, Austin, Charlotte and Fort Worth
 
 - **Checked the four cities left "not yet live-verified" against their real

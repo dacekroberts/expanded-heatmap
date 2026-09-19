@@ -5,6 +5,7 @@ Input:  data/san_diego/raw/gtfs.zip                  (MTS GTFS feed)
         data/san_diego/raw/municipal_boundaries.geojson  (SANDAG regional
                                                            municipal boundaries)
 Output: data/san_diego/processed/stations.csv
+        outputs/san_diego/excluded_stations.csv   (audit record)
 
 The Trolley (Blue/Orange/Green/Copper/Silver lines) runs through several
 cities besides San Diego - El Cajon, La Mesa, Lemon Grove, Santee, National
@@ -31,6 +32,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.san_diego.config import (  # noqa: E402
     GTFS_ZIP,
     MUNICIPAL_BOUNDARIES_GEOJSON,
+    EXCLUDED_STATIONS_CSV,
     STATIONS_CSV,
     TROLLEY_ROUTE_SHORT_NAMES,
     GTFS_NAME_ALIASES,
@@ -103,32 +105,37 @@ def main():
 
     # --- Spatial filter to San Diego city limits ---------------------------
     boundary = gpd.read_file(MUNICIPAL_BOUNDARIES_GEOJSON)
-    sd_boundary = boundary[boundary["Name"] == CITY_BOUNDARY_NAME].dissolve()
-    if sd_boundary.crs is None:
-        sd_boundary = sd_boundary.set_crs(CRS_GEOGRAPHIC)
-    else:
-        sd_boundary = sd_boundary.to_crs(CRS_GEOGRAPHIC)
+    boundary = boundary.set_crs(CRS_GEOGRAPHIC) if boundary.crs is None else boundary.to_crs(CRS_GEOGRAPHIC)
 
     stations_gdf = gpd.GeoDataFrame(
         stations,
         geometry=gpd.points_from_xy(stations["longitude"], stations["latitude"]),
         crs=CRS_GEOGRAPHIC,
     )
-    joined = gpd.sjoin(stations_gdf, sd_boundary[["geometry"]], predicate="within", how="left")
-    in_city = joined[~joined["index_right"].isna()].drop(columns=["geometry", "index_right"])
-    out_city = joined[joined["index_right"].isna()]
+    # Which municipality is each station in? (one join against every county
+    # municipality, used both to keep San Diego and to label the excluded ones.)
+    located = gpd.sjoin(
+        stations_gdf, boundary[["Name", "geometry"]], predicate="within", how="left"
+    ).drop(columns=["index_right", "geometry"])
+    located["city"] = located["Name"].fillna("(unincorporated area)")
+    located = located.drop(columns=["Name"])
+
+    in_city = located[located["city"] == CITY_BOUNDARY_NAME].drop(columns=["city"])
+    excluded = located[located["city"] != CITY_BOUNDARY_NAME].sort_values(["city", "station"])
 
     print(f"\n{len(in_city)} of {len(stations)} Trolley stations fall within "
           f"{CITY_BOUNDARY_NAME} city limits.")
-    print(f"Excluded (other cities the Trolley also serves): "
-          f"{sorted(out_city['station'].tolist())}")
+    print("Excluded, by the city they are in:")
+    print(excluded["city"].value_counts().to_string())
 
     in_city = in_city.sort_values("station").reset_index(drop=True)
     print(f"\nKept stations:\n{in_city.to_string(index=False)}")
 
+    EXCLUDED_STATIONS_CSV.parent.mkdir(parents=True, exist_ok=True)
+    excluded.rename(columns={"city": "located_in"}).to_csv(EXCLUDED_STATIONS_CSV, index=False)
     STATIONS_CSV.parent.mkdir(parents=True, exist_ok=True)
     in_city.to_csv(STATIONS_CSV, index=False)
-    print(f"\nWrote {STATIONS_CSV}")
+    print(f"\nWrote {STATIONS_CSV}\nWrote {EXCLUDED_STATIONS_CSV}")
 
 
 if __name__ == "__main__":

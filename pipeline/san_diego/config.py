@@ -16,6 +16,7 @@ DATA_PROCESSED = ROOT / "data" / "san_diego" / "processed"
 OUTPUTS = ROOT / "outputs" / "san_diego"
 
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
+EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"
 
 STATIONS_CSV = DATA_PROCESSED / "stations.csv"
 BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"

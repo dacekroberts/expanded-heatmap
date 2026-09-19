@@ -72,8 +72,6 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Data quality follow-ups
 
-- [ ] San Diego: add an `excluded_stations.csv` audit file (16 stations in
-  other cities), as San Francisco and Los Angeles have.
 - [ ] Los Angeles map size (5.8 MB vs 2.6 MB for San Francisco): decide
   whether to shrink it (e.g. thin the whole-city heat layer, which holds all
   ~101k points) before deploying.
