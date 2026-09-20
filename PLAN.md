@@ -63,6 +63,15 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Before deploying
 
+- [ ] **`st.components.v1.html` is deprecated** (in favor of `st.iframe`; its
+  removal date, 2026-06-01, has passed, though it still works in Streamlit
+  1.64 and only logs a warning). Every city page embeds its map with it, and the
+  macro map's Dark Mode script uses it. `requirements.txt` says `streamlit>=1.64`
+  with no upper bound, so Streamlit Cloud installs the newest release and a
+  future one could remove it, breaking every city page at deploy time. Before
+  deploying: migrate the city pages and the macro-map script to `st.iframe`
+  and verify with `deploy-verify`, or at least pin an upper bound. Found by
+  `deploy-verify` in its startup log; it predates the Dark Mode work.
 - [ ] **Tile provider decision** - OpenStreetMap's usage policy is a risk
   for a live public map. The per-city maps use OSM raster tiles; the macro
   map uses Carto's public vector basemap. Decide both together.
