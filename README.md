@@ -7,7 +7,7 @@ businesses by distance from the nearest station (0-0.1, 0.1-0.2, 0.2-0.3 and
 Every transit line is drawn from real GTFS geometry, labelled with its public
 name, and listed in a collapsible legend.
 
-Mapped so far: San Diego, San Francisco, Los Angeles.
+Mapped so far: San Diego, San Francisco, Los Angeles, Chicago.
 
 ## How it works
 

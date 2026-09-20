@@ -95,9 +95,11 @@ a registry of taxonomy modules. Each module exposes `classify(row)`,
 with `filter_to_storefront()` and the map groups, labels and builds its
 legend through the module, so adding a taxonomy - including a non-US one
 such as NACE - means adding one module. `naics.py` is complete. The three
-local modules (`nyc_dca`, `chicago_license`, `phl_licensetype`) are
-**skeletons**: they map only values seen in sample rows and need a full
-`SELECT DISTINCT` pull of the city's classification field before use.
+local modules `nyc_dca` and `phl_licensetype` are **skeletons**: they map
+only values seen in sample rows and need a full `SELECT DISTINCT` pull of the
+city's classification field before use. `chicago_license` is complete; it is
+the model for a taxonomy that classifies some values by a second field
+(`EXTRA_COLUMNS`).
 
 **Steps.** Each city has steps 1 (stations), 2 (clean businesses) and a
 final map step. A city that needs geocoding inserts a step and renumbers;
@@ -125,8 +127,16 @@ Cities built and running end to end (pipeline, map, app page):
   not its postal-community `city` field. About 9% of rows had corrupt
   coordinates, concentrated in recent registrations; they are recovered by
   Census geocoding rather than dropped. Line colours are Metro's own.
+- **Chicago** - CTA 'L' (Red, Blue, Brown, Green, Orange, Pink, Purple), only
+  the stations inside the City of Chicago (Yellow is left out: its only
+  in-city station is Howard); Metra is not included. First city on a local
+  taxonomy (`chicago_license`, not NAICS): several license types are
+  classified by their business activity, and a site holding several licenses
+  counts once, the primary license deciding. The source is a license-term
+  history, filtered to currently active licenses. Data ships pre-geocoded
+  with valid coordinates, so its map is step 3.
 
-Next by ease ranking: Chicago, then New York and Philadelphia; Boston and
+Next by ease ranking: New York and Philadelphia; Boston and
 Washington D.C. carry caveats. See `city_shortlist.md` and
 `PLAN.md`. Row counts, station counts and per-run figures are in
 `DECISIONS.md`.

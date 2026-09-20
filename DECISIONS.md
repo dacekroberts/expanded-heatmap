@@ -14,6 +14,98 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-20 - Chicago built
+
+- **Added Chicago: the CTA 'L', City of Chicago stations only, on the city's
+  own license taxonomy.** Pipeline `pipeline/chicago/` (config, step 1
+  stations, step 2 clean businesses, step 3 map), page `app/pages/
+  4_Chicago_Heatmap.py`, `app/cities.py` entry, and `outputs/chicago/`.
+  Verified in a browser: 7 line labels in view with none overlapping, legend
+  collapses, no console errors. Baseline counts, run 2026-09-20 against the
+  raw snapshot taken that day:
+  - Step 1: 141 stations across the seven lines; 123 in the city, 18
+    suburban stops excluded (Austin, Cicero, Davis, Dempster, Forest Park,
+    Foster, both Harlems, Central, Linden, Main, Noyes, both Oak Parks,
+    Ridgeland, Rosemont, South Boulevard, 54th/Cermak), listed in
+    `excluded_stations.csv` as "Outside Chicago city limits" (the boundary
+    layer holds Chicago only, so the suburb is not named). In-city stations
+    per line: Red 33, Brown 26, Blue 28, Green 27, Pink 19, Purple 17, Orange
+    15. Spacing: median nearest-neighbour distance 740 m, 10th percentile 284
+    m, minimum 137 m; 11 stations are within 250 m of another (the Loop area).
+  - Step 2: 53,039 active rows (server-filtered, snapshot 2026-09-20) ->
+    49,066 with `city = CHICAGO` -> 24,612 storefront -> 24,504 with
+    coordinates (108 without, none of them redacted) -> 24,504 inside the
+    bounding box -> 20,686 after one row per site. Boundary cross-check:
+    20,671 of the 20,686 fall inside the Chicago polygon (15 outside, kept).
+    Buckets: Retail 10,321, Food service 6,573, Personal services 3,792.
+  - Step 3: 123 stations; 11,796 businesses within a ring, 8,890 beyond; map
+    file about 3.0 MB.
+- **Transit scope, as decided: CTA only, Metra deferred** (see the "Chicago
+  transit scope" entry). Yellow Line dropped, following the chopping-block
+  rule: it has 3 stations and its only in-city one, Howard, is also served by
+  Red and Purple.
+- **Corrections to the earlier expectations, from the GTFS.** Purple is not a
+  near-empty line: it has 17 in-city stations (its rush-hour Loop express runs
+  on Brown's stations). But its most-used trip shapes are the Linden-Howard
+  stub in Evanston (1% inside the city), so the drawn shape is the Loop-express
+  shape (shape 309200024, 58 trips, 40% inside), the only one reaching the
+  city; it overlaps Red and Brown between Howard and the Loop. Every other
+  line uses its single most-used shape. The feed has 143 parent stations
+  against CTA's stated 145. There are only 55 active license descriptions,
+  not the 150 in the full history.
+- **'L' shape: uniformly sparse, so no spacing filter,** as expected. The
+  Loop and Loop subway are the exception: Jackson and Monroe each have a Blue
+  and a Red station about 140 m apart, and LaSalle and LaSalle/Van Buren are
+  137 m apart. CTA counts them as separate stations and they were kept as CTA
+  counts them; their rings overlap, a conscious choice (each business is
+  assigned to its nearest station, so nothing is double-counted). A station
+  is a GTFS parent station, so no name-alias list was needed.
+- **Full license mapping** (approved before writing; `pipeline/taxonomies/
+  chicago_license.py`, 21 test cases pass). Direct: Tavern is Food service;
+  Package Goods, Filling Station, Secondhand Dealer and Tobacco are Retail.
+  By business activity: Limited and Regulated Business License (rules in the
+  "catch-all license types" entry); Retail Food Establishment (11,100 active
+  rows) is Food service when any part prepares or serves food (6,295) and
+  Retail otherwise (4,802), and the 949 mixed rows (a grocery with a deli) go
+  to Food service, a rule that does not depend on the order the city lists
+  activities; Animal Care License (395) is Personal services for grooming and
+  Retail for retail sales, with veterinary hospitals, boarding and shelters
+  excluded. Excluded outright: the adjunct licenses Consumption on Premises
+  (2,820 rows), Outdoor Patio (731), Late Hour (119) and Music and Dance (46),
+  because they attach to a business already counted (only 110, 15, 3 and 3
+  sites respectively have no primary license, a trivial loss); Motor Vehicle
+  Services (1,536, body and repair shops) and Commercial Garage (581, parking
+  operators); and Pawnbroker, Pop-Up Retail User, shared kitchens, mobile and
+  event food, Peddler, Public Place of Amusement, Children's Services,
+  Manufacturing, Wholesale Food, Raffles, Valet, Shared Housing and the
+  remaining long tail.
+- **One row per site, primary license first.** A site (account number plus
+  site number) can hold several licenses, so after classification the rows
+  are reduced to one per site, taking the license earliest in
+  `LICENSE_PRIORITY` (Retail Food Establishment, Tavern, Limited, Regulated,
+  Package Goods, Filling Station, Secondhand Dealer, Tobacco). This collapsed
+  24,504 rows to 20,686. Tobacco therefore counts only where a site has no
+  primary license: 222 sites, real smoke shops and dollar stores.
+- **No geocoding step.** Coordinates are valid (all 48,614 active in-city rows
+  with coordinates were inside the bounding box, unlike Los Angeles), and 108
+  storefront rows (0.4%) have none; their addresses are not redacted. That
+  loss is small, but its bias was not analyzed (by start year, category or
+  area), so the loss is recorded as a known limitation and not dismissed. If
+  it matters later, add a Census-geocoding step as Los Angeles did.
+- **Shared-code change.** `pipeline/map_common.py` now passes a taxonomy's
+  `EXTRA_COLUMNS` to `classify()` when grouping pins by category, as
+  `filter_to_storefront()` already did; without it Chicago's activity-classified
+  rows would have matched no bucket. Drift check on San Diego, San Francisco
+  and Los Angeles: zero drift.
+- **Known limitations.** The `raw` file is a dated snapshot (`AS_OF_DATE` in
+  config), and re-downloading it changes the counts. Chicago's Retail and Food
+  service buckets come from local license types and activity text, so they
+  are comparable to the NAICS cities' 44/45 and 722 only approximately; the
+  mixed grocery-with-deli rule and the exclusion of gyms and fitness (NAICS
+  713940 and 611620 are outside the three buckets) are the main judgment
+  calls. Home-based businesses are excluded as not being storefronts. Tooltips
+  show the license type ("Retail Food Establishment"), not the activity.
+
 ### 2026-09-19 - Pin line endings with .gitattributes
 
 - **Added `.gitattributes` (`* text=auto eol=lf`) to stop the recurring

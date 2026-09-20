@@ -563,9 +563,12 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
         rail_layer.add_to(m)
 
     # Category grouping via the city's own taxonomy, never a hardcoded one.
-    in_rings["_bucket"] = in_rings.apply(
-        lambda r: taxonomy.classify({taxonomy.VALUE_COLUMN: r[taxonomy.VALUE_COLUMN]}), axis=1
-    )
+    # A multi-field taxonomy (Chicago) lists its extra columns in EXTRA_COLUMNS.
+    class_cols = [taxonomy.VALUE_COLUMN, *getattr(taxonomy, "EXTRA_COLUMNS", ())]
+    in_rings["_bucket"] = [
+        taxonomy.classify(dict(zip(class_cols, values)))
+        for values in zip(*(in_rings[c] for c in class_cols))
+    ]
     unmatched = in_rings["_bucket"].isna().sum()
     if unmatched:
         print(f"WARNING: {unmatched} businesses matched no category bucket.")

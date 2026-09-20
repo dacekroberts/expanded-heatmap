@@ -20,55 +20,25 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [ ] **Next city: Chicago** (ease rank 4). Step 0 probe done 2026-09-19
-  (see `DECISIONS.md`); build it after the weekly reset (Sunday
-  2026-09-20 18:59 UTC), following `add-city` from Step 1. Its taxonomy
-  (`chicago_license`) is partly done: the two catch-alls ("Limited
-  Business License", "Regulated Business License", about 39% of active rows)
-  are classified by `business_activity`. Still to map: the other ~148
-  `license_description` values (Retail Food Establishment, Tavern, Tobacco,
-  Package Goods and so on), with a hand-sample. Filter the
-  1.2M-row history to status `AAI` and unexpired licenses (the expiry field
-  has junk dates), then dedupe by account and site. CTA 'L' is large (145
-  stations) - check its shape from the GTFS (stop spacing per line, stations
-  inside the boundary; expected uniformly sparse, so no SF-style spacing
-  filter). **Decided: CTA only for the first build** (one agency's rail
-  system per city, as in the built cities); Metra
-  (`schedules.metrarail.com/gtfs/schedule.zip`) is a possible later
-  addition. Chopping-block order if the map is too much: Yellow and possibly
-  Purple (drop a line with essentially no in-city stations), then suburban
-  stops (the boundary filter removes them); the core six lines stay.
-  Still to check, per the Los Angeles lessons: coordinate corruption (not
-  just nulls; about 8% are null) and any in-city rows with another `city`
-  value.
-
-  **Start-up checklist for the Chicago build** (Socrata `r5kz-chrr` on
-  `data.cityofchicago.org`; active filter used so far:
-  `license_status='AAI' AND expiration_date >= <today> AND city='CHICAGO' AND
-  latitude IS NOT NULL`):
-  1. Pull active row counts per `license_description` (about 150 values,
-     one grouped query). Map the top ~30 by hand and default the tail to
-     excluded (the top 25 hold about 92% of active rows).
-  2. Sample `business_activity` for "Retail Food Establishment" (11,150
-     rows, another catch-all): split Food service (dining, food preparation)
-     from Retail (selling packaged food and groceries). Add it to
-     `chicago_license.py` alongside the two done catch-alls.
-  3. Decide the adjunct-license rule (Consumption on Premises, Outdoor Patio,
-     Tobacco, Package Goods): the primary license sets the bucket, adjuncts
-     count only where the site has no primary license; dedupe by account and
-     site after classifying. Open calls: Commercial Garage (589), Motor
-     Vehicle Services (1,537), Shared Kitchen User (540).
-  4. Coordinate quality: bounding-box test on latitude/longitude (LA had
-     corrupt coordinates hidden behind non-null values), and check for
-     in-city rows carrying another `city` value.
-  5. Download the CTA GTFS (`transitchicago.com/downloads/sch_data/
-     google_transit.zip`, 68.7 MB) and the city boundary (Socrata
-     "Boundaries - City - Map", `ewy2-6yfk`). Compute stop spacing per line
-     and stations inside the boundary; confirm the expected uniformly sparse
-     shape, then apply the chopping-block order above if needed.
-  6. Then follow `add-city` from Step 1 (config, step files, map, app page),
-     run `python pipeline/drift_check.py`, verify with `deploy-verify`,
-     and log each judgment call in `DECISIONS.md`.
+- [~] **Chicago is built** (2026-09-20; see `DECISIONS.md`). Left: verify the
+  macro map and the Chicago page with `deploy-verify`, then the post-commit
+  `python pipeline/drift_check.py chicago`. Delete this item once both pass.
+- [ ] **Next (requested): the city-scaffolding skill/script**, now that
+  Chicago, the first local-taxonomy city, exists. It scaffolds a new city's
+  `config.py`, map script, app page and `cities.py` entry, and docs stubs, and
+  must account for custom taxonomies: what Chicago showed to be
+  taxonomy-specific rather than universal is `EXTRA_COLUMNS` (a second field
+  that classifies some values), activity-classified license types, a
+  per-site license-priority list to dedupe multi-license sites
+  (`LICENSE_PRIORITY`), a dated raw snapshot (`AS_OF_DATE`), station scope
+  from GTFS parent stations (one boundary layer that holds only the city, so
+  excluded stations cannot be named by suburb), and a per-city
+  `RAW_CLASSIFICATION_COLUMN` that may already equal the taxonomy's
+  `VALUE_COLUMN`. Scope stays config, map script and app wiring, not steps 1
+  and 2 (they differ per city). Decide where it lives (a script, or an
+  extension of the `add-city` skill), and fold in the shared
+  `data/registry.yaml` question. Expected saving is modest (roughly 10% of a
+  city's cost, an estimate).
 
 ## Next cities, in ease order
 
@@ -94,17 +64,10 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Structure
 
-- [ ] **Scaffold a new city's `config.py`, map script and app wiring** (the
-  `cities.py` entry, page file and docs stubs), and with it the shared
-  `data/registry.yaml` / config loader. The rule of three is met (three
-  cities), but build it after the first non-NAICS city (Chicago), so the
-  shared fields are chosen from a case that differs from the three built
-  ones. Scope: not `step1_stations.py` or `step2_clean_businesses.py`, which
-  differ per city and hold most of the per-city effort. Expected saving is
-  modest (roughly 10% of a city's cost, an estimate).
-- [ ] Fill in the three local taxonomy skeletons before any of those cities
-  is built (each needs a full `SELECT DISTINCT` of its classification
-  field, plus a hand-sample of catch-all categories).
+- [ ] Fill in the two remaining local taxonomy skeletons (`nyc_dca`,
+  `phl_licensetype`) before those cities are built (each needs a full
+  `SELECT DISTINCT` of its classification field, plus a hand-sample of
+  catch-all categories). Chicago's `chicago_license` is the model.
 
 ## Before deploying
 

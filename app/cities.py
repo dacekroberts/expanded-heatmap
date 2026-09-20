@@ -35,4 +35,11 @@ CITIES = [
         "page": "pages/3_Los_Angeles_Heatmap.py",
         "blurb": "Metro Rail (A, B, C, D, E, K Lines)",
     },
+    {
+        "name": "Chicago",
+        "lat": 41.8781,
+        "lon": -87.6298,
+        "page": "pages/4_Chicago_Heatmap.py",
+        "blurb": "CTA 'L' (Red, Blue, Brown, Green, Orange, Pink, Purple Lines)",
+    },
 ]
