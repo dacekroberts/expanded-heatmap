@@ -7,7 +7,9 @@ architecture, current state, lessons). `PLAN.md` is the open work,
 the city research.
 
 **Adding a city? Use the `add-city` skill** (`.claude/skills/add-city/`) -
-the process the built cities actually followed.
+the process the built cities actually followed - and the `scaffold-city` skill
+(`scripts/scaffold_city.py`) to generate its config, map script, page and
+`cities.py` entry once Step 0 passes.
 
 ## Invariants
 
@@ -62,6 +64,7 @@ python pipeline/<city_slug>/step1_stations.py
 python pipeline/<city_slug>/step2_clean_businesses.py
 python pipeline/<city_slug>/step3_map.py
 python pipeline/drift_check.py [city_slug]
+python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon>   # add --dry-run first
 .venv-lean/Scripts/python.exe -m streamlit run "app/Overview_&_Introduction.py"
 ```
 

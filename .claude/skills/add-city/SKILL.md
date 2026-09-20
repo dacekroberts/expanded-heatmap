@@ -73,6 +73,12 @@ model. Skip it when the probe and build happen in the same session.
 
 ## Step 2 - Scaffold
 
+**Use `scripts/scaffold_city.py` (the `scaffold-city` skill)** to write the
+folders below, `config.py`, the map script, the app page and the `cities.py`
+entry (Steps 2, 3, 6 and 8's files) instead of creating them by hand; it also
+scaffolds a new local taxonomy. Steps 4 and 5 (`step1`, `step2`) are still
+copied from the nearest built city. What it produces:
+
 ```
 data/<city_slug>/raw/          gitignored downloads
 data/<city_slug>/processed/    gitignored intermediates

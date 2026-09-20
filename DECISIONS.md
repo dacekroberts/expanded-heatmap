@@ -14,6 +14,53 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-20 - City scaffolding skill built
+
+- **Built `scripts/scaffold_city.py` and the `scaffold-city` skill.** This was
+  deferred until after Chicago so the shared fields could be chosen with a
+  local-taxonomy city in hand (see "City scaffolding: threshold met, build
+  deferred"). The script writes what is identical in every built city: the
+  `pipeline/<slug>/` package with `config.py` and the map script, the
+  `data/` and `outputs/` folders, the app page (next free number), and the
+  `app/cities.py` entry. The projected CRS is derived from the marker longitude
+  and its derivation written into the config (Dallas 32614, New York 32618,
+  Boston 32619 in tests; Chicago's 32616 matches). Every value only the city's
+  data can supply is a `TODO`, including the page prose and the blurb, and the
+  map script refuses to run while `LINE_SHAPES` is empty, so a drawn line cannot
+  lack a label and legend entry.
+- **Custom taxonomies are handled three ways.** A NAICS city leaves the raw
+  column as a `TODO`. A built local taxonomy is reused: the config takes its
+  `VALUE_COLUMN` and, if it defines `EXTRA_COLUMNS`, notes that those columns
+  must survive step 2. A new local taxonomy is scaffolded with `--new-taxonomy`
+  as an empty, registered skeleton module. What Chicago showed to be
+  taxonomy-specific rather than universal (a second classifying field,
+  one-row-per-site with a license priority list, a dated snapshot of a term
+  history) is written up in the skill as guidance, not generated.
+- **Scope, as planned: not steps 1 and 2.** `step1_stations.py` and
+  `step2_clean_businesses.py` differ per city (a spatial boundary filter,
+  sub-transit-line filters, a cities-boundary join plus geocoding, per-site
+  logic) and hold most of the effort, so the skill maps each situation to the
+  built city to copy (San Diego, Los Angeles, San Francisco, Chicago) rather
+  than generating a stub that would be mostly rewritten.
+- **Shared `data/registry.yaml` still not built.** The scaffold delivers what
+  the registry was for (one place a new city's shared fields come from) as
+  generated files, so nothing needs a runtime loader; the deployed app must
+  stay free of pipeline dependencies, and a loader would have meant rewriting
+  four cities' configs. Revisit only if something has to read city settings at
+  run time.
+- **Tested against a scratch copy of the repo structure, not the real repo.**
+  Dry run, real run and re-run (a first version created a duplicate page on
+  re-run; fixed so an existing city's page is kept); a two-word name with
+  `--map-step 4`; a reused local taxonomy with `EXTRA_COLUMNS`; a new
+  taxonomy skeleton, importable and registered; an unknown taxonomy is
+  refused; all generated files compile and every generated `config.py`
+  imports; the map script exits with its message while `LINE_SHAPES` is empty.
+  A dry run against the real repo for Chicago skips every existing file.
+  Not tested: a full city built end to end from the scaffold (the next
+  city build is that test).
+- **Saving.** Expected to be modest, roughly 10% of a city's cost (an estimate,
+  not measured); the next city build should record whether it held.
+
 ### 2026-09-20 - Macro map and switcher adjusted for a fourth, distant city
 
 - **Adding Chicago broke the macro map on a phone and clipped the switcher; both

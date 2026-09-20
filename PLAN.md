@@ -20,22 +20,11 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [ ] **Next (requested): the city-scaffolding skill/script**, now that
-  Chicago, the first local-taxonomy city, exists. It scaffolds a new city's
-  `config.py`, map script, app page and `cities.py` entry, and docs stubs, and
-  must account for custom taxonomies: what Chicago showed to be
-  taxonomy-specific rather than universal is `EXTRA_COLUMNS` (a second field
-  that classifies some values), activity-classified license types, a
-  per-site license-priority list to dedupe multi-license sites
-  (`LICENSE_PRIORITY`), a dated raw snapshot (`AS_OF_DATE`), station scope
-  from GTFS parent stations (one boundary layer that holds only the city, so
-  excluded stations cannot be named by suburb), and a per-city
-  `RAW_CLASSIFICATION_COLUMN` that may already equal the taxonomy's
-  `VALUE_COLUMN`. Scope stays config, map script and app wiring, not steps 1
-  and 2 (they differ per city). Decide where it lives (a script, or an
-  extension of the `add-city` skill), and fold in the shared
-  `data/registry.yaml` question. Expected saving is modest (roughly 10% of a
-  city's cost, an estimate).
+- [ ] **Next city** - pick from the list below. Start with the `add-city`
+  Step 0, then `scripts/scaffold_city.py` (the `scaffold-city` skill). That
+  build is also the first real test of the scaffold: record in `DECISIONS.md`
+  whether it saved effort (estimated at about 10%) and fix any template that
+  needed rewriting.
 
 ## Next cities, in ease order
 

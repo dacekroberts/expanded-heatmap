@@ -107,9 +107,10 @@ nothing hardcodes the numbers. San Diego and San Francisco ship
 pre-geocoded, so their map is step 3; Los Angeles needs a Census-geocoding
 step 3, so its map is step 4.
 
-**Config is per-city, not yet a shared registry.** A shared
-`data/registry.yaml` waits until more cities show the real common shape
-(see `PLAN.md`).
+**Config is per-city, generated from a template.** Each city has its own
+`config.py`; `scripts/scaffold_city.py` (the `scaffold-city` skill) writes the
+shared shape of a new one. A runtime `data/registry.yaml` loader is not built:
+the scaffold covers what it was for (see `DECISIONS.md`).
 
 ## Current state
 
