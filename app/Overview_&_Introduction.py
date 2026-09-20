@@ -43,12 +43,24 @@ cities = pd.DataFrame(CITIES)
 TEAL = [13, 148, 136, 235]
 DARK = [28, 43, 42, 255]
 
+# Which side of its marker each name sits on (cities.py "label", default top),
+# as a text anchor plus a pixel offset for the TextLayer.
+LABEL_SIDES = {
+    "top": ("middle", 0, -20),
+    "left": ("end", -10, 0),
+    "right": ("start", 10, 0),
+}
+sides = cities["label"].fillna("top") if "label" in cities else pd.Series("top", index=cities.index)
+cities["anchor"] = sides.map(lambda s: LABEL_SIDES[s][0])
+cities["dx"] = sides.map(lambda s: LABEL_SIDES[s][1])
+cities["dy"] = sides.map(lambda s: LABEL_SIDES[s][2])
+
 markers = pdk.Layer(
     "ScatterplotLayer",
     id="cities",
     data=cities,
     get_position="[lon, lat]",
-    get_radius=11,
+    get_radius=6,
     # pdk.types.String, not a bare str: pydeck would serialize "pixels" as the
     # expression "@@=pixels" (an undefined variable) and break the radius.
     radius_units=pdk.types.String("pixels"),
@@ -68,9 +80,10 @@ labels = pdk.Layer(
     data=cities,
     get_position="[lon, lat]",
     get_text="name",
-    get_size=15,
+    get_size=14,
     get_color=DARK,
-    get_pixel_offset=[0, -24],
+    get_text_anchor="anchor",
+    get_pixel_offset="[dx, dy]",
     # Same typeface as the rest of the app (components.set_base_font). String()
     # for the same reason as radius_units above.
     font_family=pdk.types.String("Space Grotesk, sans-serif"),
@@ -78,19 +91,21 @@ labels = pdk.Layer(
     pickable=False,
 )
 
-def fit_view(lats, lons, width_px=340, height_px=460, fill=0.7):
+def fit_view(lats, lons, width_px=320, height_px=460, fill=0.7):
     """A view that shows every city with some margin, for any number of
     cities. Web-Mercator maths on the bounding box (512 px world tiles, as in
     Mapbox/Carto vector maps), sized for a phone-width (~340 px) container so
     nothing is cropped there; on a wide screen the same view just has more
     margin. (pydeck's own compute_view assumes a different viewport and
-    cropped San Diego and San Francisco out of the same view.)"""
+    cropped San Diego and San Francisco out of the same view.) The zoom floor
+    is low enough for cities a continent apart: at 3.0 a phone-width map
+    cropped San Francisco and Chicago."""
     lat_span = max(max(lats) - min(lats), 0.5)
     lon_span = max(max(lons) - min(lons), 0.5)
     centre_lat = (max(lats) + min(lats)) / 2
     z_lon = math.log2(width_px * 360 * fill / (512 * lon_span))
     z_lat = math.log2(height_px * 360 * fill * math.cos(math.radians(centre_lat)) / (512 * lat_span))
-    zoom = max(3.0, min(z_lon, z_lat, 9.0))
+    zoom = max(1.0, min(z_lon, z_lat, 9.0))
     return pdk.ViewState(latitude=centre_lat, longitude=(max(lons) + min(lons)) / 2, zoom=zoom)
 
 

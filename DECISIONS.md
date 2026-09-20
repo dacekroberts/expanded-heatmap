@@ -14,6 +14,32 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-20 - Macro map and switcher adjusted for a fourth, distant city
+
+- **Adding Chicago broke the macro map on a phone and clipped the switcher; both
+  fixed.** The `deploy-verify` run on the Chicago commit found: (1) at 375 px
+  wide, San Francisco and Chicago fell outside the map, because the fitted
+  view's zoom floor (3.0) was tighter than the 2.3 that Chicago plus California
+  need; (2) at the fitted zoom the Los Angeles and San Diego markers, about 180
+  km apart, touched, and their names collided; (3) at 1024 px wide the city
+  switcher's fixed columns clipped "San Francisco" and "Los Angeles".
+- **Changes.** The zoom floor is now 1.0 and the fit assumes a 320 px canvas.
+  Markers shrank from radius 11 to 6 pixels. Each city may set an optional
+  `label` side in `app/cities.py` ("top" by default; San Diego "right", Los
+  Angeles "left"), so the three California names read cleanly. The switcher is
+  a wrapping horizontal container (`st.container(horizontal=True)`, available
+  in the minimum Streamlit, 1.64) instead of fixed columns, so a long name
+  wraps to a second line instead of being cut.
+- **Checked in a browser** (lean venv): all four cities visible and named on
+  desktop and at 375 px; real clicks on the San Diego, San Francisco, Los
+  Angeles and Chicago markers each open their own page; no switcher item clipped
+  at 1024 px (Chicago wraps to a second line).
+- **Known limitation.** On a phone-width map the Los Angeles and San Diego dots
+  still touch (about 7 px apart), so tapping the right one is fiddly; the
+  fallback link list below the map is the reliable route. Grouping nearby
+  cities on the macro map (already in `PLAN.md` under "Later") would remove it.
+  The dark theme and widths between 375 and 1024 px were not tested.
+
 ### 2026-09-20 - Chicago built
 
 - **Added Chicago: the CTA 'L', City of Chicago stations only, on the city's

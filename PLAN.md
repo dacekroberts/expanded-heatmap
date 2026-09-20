@@ -20,9 +20,6 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [~] **Chicago is built** (2026-09-20; see `DECISIONS.md`). Left: verify the
-  macro map and the Chicago page with `deploy-verify`, then the post-commit
-  `python pipeline/drift_check.py chicago`. Delete this item once both pass.
 - [ ] **Next (requested): the city-scaffolding skill/script**, now that
   Chicago, the first local-taxonomy city, exists. It scaffolds a new city's
   `config.py`, map script, app page and `cities.py` entry, and docs stubs, and
@@ -99,7 +96,7 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 ## Later / maybe
 
 - [ ] Macro map at scale: with ~10+ cities, consider grouping nearby cities
-  (markers will overlap at the fitted zoom), and showing each city's mapped
+  (markers already touch at phone width: Los Angeles and San Diego), and showing each city's mapped
   extent or a one-line summary in the tooltip.
 
 - [ ] Non-US cities (NACE for the EU, national CRS such as EPSG:27700 for the

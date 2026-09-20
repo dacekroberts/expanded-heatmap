@@ -18,13 +18,16 @@ def render_city_nav(current: str):
     every mapped city (the current one shown as plain bold text). Lets a
     visitor hop city to city without returning to the map each time.
     `current` must match a name in cities.CITIES."""
-    cols = st.columns([1.6] + [1] * len(CITIES))
-    cols[0].page_link(OVERVIEW_PAGE, label="← All cities (map)")
-    for col, city in zip(cols[1:], CITIES):
-        if city["name"] == current:
-            col.markdown(f"**{city['name']}**")
-        else:
-            col.page_link(city["page"], label=city["name"])
+    # A horizontal container sizes each item to its content and wraps onto a
+    # second line when the row is too narrow; fixed-width columns clipped the
+    # longer city names once a fourth city was added.
+    with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
+        st.page_link(OVERVIEW_PAGE, label="← All cities (map)")
+        for city in CITIES:
+            if city["name"] == current:
+                st.markdown(f"**{city['name']}**")
+            else:
+                st.page_link(city["page"], label=city["name"])
 
 
 def set_base_font():

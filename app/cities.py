@@ -11,6 +11,10 @@ Deliberately app-side and tiny: a fuller per-city registry (map centre,
 CRS, taxonomy, data sources) is still open in PLAN.md and would live with
 the pipeline, not here - the deployed app must stay free of pipeline
 dependencies.
+
+Optional `label` ("top" by default, or "left" / "right") sets which side of
+its marker the city's name sits on the macro map; set it only where markers
+are close together (the three California cities) so their names don't collide.
 """
 
 CITIES = [
@@ -20,6 +24,7 @@ CITIES = [
         "lon": -117.1611,
         "page": "pages/1_San_Diego_Heatmap.py",
         "blurb": "MTS Trolley (Blue, Orange, Green, Copper, Silver lines)",
+        "label": "right",
     },
     {
         "name": "San Francisco",
@@ -34,6 +39,7 @@ CITIES = [
         "lon": -118.31,
         "page": "pages/3_Los_Angeles_Heatmap.py",
         "blurb": "Metro Rail (A, B, C, D, E, K Lines)",
+        "label": "left",
     },
     {
         "name": "Chicago",
