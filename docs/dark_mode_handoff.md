@@ -1,24 +1,37 @@
-# Dark Mode for the city heatmaps - handoff from link-station-commercial
+# Dark Mode for the city heatmaps and the macro map - implementation notes
 
-Source: `link-station-commercial` commit `3fe1d57` ("Heatmap: Dark Mode base
-layer, dark-styled controls, layer order"), file `src/step5_map.py`. It is
-built, browser-verified and live on that project. This note carries it over
-to `pipeline/map_common.py`'s `render_heatmap()` (shared by every city, so it
-is implemented once). It is a proposal, not a decision: nothing here has
-been applied to this repo. Log the go/no-go and palette choice in
-`DECISIONS.md` when it is made.
+A proposal, not a decision: nothing here has been applied or verified in this
+repo. It describes a way to add a Dark Mode toggle to `pipeline/map_common.py`'s
+`render_heatmap()` (shared by every city, so it is implemented once) and to the
+macro map. Log the go/no-go, the toggle placement and the palette choice in
+`DECISIONS.md` when they are made.
 
-## What it does
+## Scope
 
-The Leaflet layer control gets a second **base map** radio option:
-"Light Mode" (default, today's map) and "Dark Mode". Dark Mode is the same
-OpenStreetMap tiles recoloured in the browser by a CSS filter. No new tile
-provider and no API key (CartoDB and other dark styles were ruled out on
-keys/licensing in the first project). Rings, heat, pins and lines are
-overlays in other panes, so the filter does not touch them. While Dark Mode
-is on, a `dark-base` class on `<body>` restyles the map chrome (legend, zoom
-buttons, layer control, attribution, hover tooltip) and lightens the ring
-outlines. Not persisted: every visitor starts on Light.
+- **Every city map and the macro map** get a Dark Mode, and **every UI element
+  is recoloured** on it: legend, zoom buttons, layer control, attribution, hover
+  tooltips, ring outlines, and (for the macro map) markers, labels and tooltip.
+- **The toggle** is either a base-map radio in the Leaflet layer control (the
+  mechanism below) or a separate button in the top-right of the map UI. Open
+  question; the trade-offs are for a decision before building.
+- The macro map is a pydeck map, not Leaflet: the CSS mechanism below does not
+  apply to it. Carto's public basemap (already used there) has a `dark` style,
+  so its Dark Mode is a basemap style plus recoloured markers and labels, not a
+  CSS filter.
+- Not decided: whether the choice persists between maps and pages, and whether
+  the surrounding Streamlit page also goes dark (it stays light/teal today).
+
+## What it does (city maps)
+
+The Leaflet layer control gets a second **base map** radio option: "Light Mode"
+(default, today's map) and "Dark Mode". Dark Mode is the same OpenStreetMap
+tiles recoloured in the browser by a CSS filter. No new tile provider and no
+API key (CartoDB and other dark raster styles were ruled out on
+keys/licensing). Rings, heat, pins and lines are overlays in other panes, so
+the filter does not touch them. While Dark Mode is on, a `dark-base` class on
+`<body>` restyles the map chrome (legend, zoom buttons, layer control,
+attribution, hover tooltip) and lightens the ring outlines. As written it is
+not persisted: every visitor starts on Light.
 
 ## How the mechanism works (read this before copying)
 
@@ -46,20 +59,18 @@ outlines. Not persisted: every visitor starts on Light.
    fixes it. `color-scheme: dark` on the expanded control darkens its
    scrollbar.
 
-## What is different in this repo (adapt, don't paste blindly)
+## Things to adapt in this repo
 
 - **Legend is a `<details>`, not a `<div>`.** Add `class="map-legend"` to
   the `<details ...>` in `LEGEND_HTML` (line ~37). The `<summary>` inherits
   the colour, so no separate rule is needed.
-- **The site theme is light/teal, the first project's is warm charcoal.**
-  The dark palette should be *this* project's, not copied. The values below
-  are suggestions tinted toward the teal theme; substitute freely. Everything
-  is a CSS variable, so the palette lives in one block.
+- **The site theme is light/teal.** The dark palette should suit it; the values
+  below are suggestions tinted toward teal, and substitute freely. Everything is
+  a CSS variable, so the palette lives in one block.
 - **Base layer naming.** Here the base layer is named `map_title`
-  (`folium.TileLayer(tiles="OpenStreetMap", name=map_title)`). In the first
-  project the user chose to replace that label with "Light Mode" / "Dark
-  Mode". Decide whether to do the same (simple, unambiguous) or keep
-  `map_title` for the light option and use e.g. `f"{map_title} (dark)"`. If
+  (`folium.TileLayer(tiles="OpenStreetMap", name=map_title)`). Decide whether to
+  replace that label with "Light Mode" / "Dark Mode" (simple, unambiguous) or
+  keep `map_title` for the light option and use e.g. `f"{map_title} (dark)"`. If
   you rename, keep the name in one constant so the JS check cannot drift
   from it.
 - **Each city has its own committed `outputs/<city>/heatmap.html`.** The
@@ -71,11 +82,12 @@ outlines. Not persisted: every visitor starts on Light.
   lighter variant while Dark Mode is on (a `.dark-base path[stroke="#..."]`
   override per colour, or skip if legible).
 - **Station dots are `#1a5490`** (dark blue, line ~552) and the on-map line
-  labels use a white text-shadow halo (`add_line_label`, ~line 177). Neither
-  was a problem on the first project's dark map, but station dots on dark
-  tiles should be eyeballed, and a lighter dot stroke may help.
-- **The surrounding Streamlit page stays light.** Dark Mode restyles only
-  the map iframe. That is fine, but expect a dark rectangle on a light page.
+  labels use a white text-shadow halo (`add_line_label`). Station dots on dark
+  tiles should be eyeballed, and a lighter dot stroke may help; the label halo
+  needs a dark variant.
+- **The surrounding Streamlit page stays light** unless it is included in
+  the scope above. Dark Mode restyles only the map iframe, so expect a dark
+  rectangle on a light page.
 - **`requirements.txt` is untouched.** `jinja2` (for `Template`) ships with
   folium and this is pipeline-only code, so nothing changes for the deploy.
 
@@ -175,8 +187,7 @@ Palette variables are suggestions; the *structure* is what carries over.
 .dark-base .leaflet-tooltip-right:before  { border-right-color: var(--dm-border); }
 ```
 
-(The first project wrote the raw hex values inline instead of variables;
-variables make retheming a one-block edit.)
+Variables make retheming a one-block edit.
 
 ### 5. The toggle handler (after the `<style>` Element, before `m.save`)
 
@@ -192,17 +203,21 @@ dark_toggle._template = Template("""
 m.add_child(dark_toggle)
 ```
 
-(Needs `import json`. The original hardcoded `'Dark Mode'` in the JS. Use
-`.replace`, not `%` formatting: the template contains literal `{% ... %}`
-tags that `%` formatting would choke on.)
+(Needs `import json`. Hardcoding `'Dark Mode'` in the JS would let it drift from
+the constant, so it is filled in with `.replace`, not `%` formatting: the
+template contains literal `{% ... %}` tags that `%` formatting would choke on.)
 
-## Optional: layer-control order (separate from dark mode)
+## If the toggle is a separate top-right button instead
 
-The first project also grouped its three bold category layers together with
-sub-layers below. That was specific to its NAICS sub-splits and does not
-apply here as-is. Mentioned only so it isn't mistaken for part of this task.
+A Leaflet custom control (`L.Control` at `topright`) holding a button that
+toggles the same `dark-base` class on `<body>` and swaps the tile layer's
+visibility. Trade-offs to weigh before choosing: a button is more discoverable
+than a radio inside a collapsed layer control, and one button style can be
+shared with the macro map; but it is more code than the built-in radios, needs
+its own dark styling, and has to keep the tile layer and the class in step
+(the radio approach gets that for free from Leaflet).
 
-## Verify (what worked on the first project)
+## Verify
 
 Use the `deploy-verify` agent per CLAUDE.md, plus these map-specific checks
 in the embedded iframe (`document.querySelector('iframe').contentDocument`):
@@ -224,15 +239,17 @@ in the embedded iframe (`document.querySelector('iframe').contentDocument`):
 5. Check the heat layer (Reds gradient here) reads well on the dark base,
    every city's line colours are legible, and station dots (`#1a5490`) are
    visible.
-6. Console: only Streamlit's `_stcore/health` and `host-config` 404s when
+6. The macro map: Dark Mode basemap, marker and label contrast, tooltip
+   styling, and that the click-to-open behaviour still works.
+7. Console: only Streamlit's `_stcore/health` and `host-config` 404s when
    previewing at a `/Page` path are expected; those are unrelated.
 
-Regenerate all four city maps, commit per the "commit after each green
-step" rule, and remember `outputs/<city>/heatmap.html` is committed.
+Regenerate all city maps, commit per the "commit after each green step" rule,
+and remember `outputs/<city>/heatmap.html` is committed.
 
 ## Copy to update
 
-The Heatmap page prose says features are "toggleable via the layer control
-in the top left". The first project added "Dark Mode, " to that underlined
-sentence. Whether to mention it on the four city pages is a copy decision
-(draft it in chat first per CLAUDE.md), not part of the implementation.
+The Heatmap page prose says features are "toggleable via the layer control in
+the top left". Whether to mention Dark Mode there (and on which pages) is a
+copy decision (draft it in chat first per CLAUDE.md), not part of the
+implementation.
