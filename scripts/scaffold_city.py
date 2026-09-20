@@ -212,7 +212,6 @@ import sys
 from pathlib import Path
 
 import streamlit as st
-import streamlit.components.v1 as components
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.@@SLUG@@.config import HEATMAP_HTML  # noqa: E402
@@ -248,8 +247,9 @@ cluster."
 )
 
 if HEATMAP_HTML.exists():
-    heatmap_html = HEATMAP_HTML.read_text(encoding="utf-8")
-    components.html(heatmap_html, width=1000, height=650, scrolling=True)
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
 else:
     st.info("No map yet. Run `python pipeline/@@SLUG@@/step@@STEP@@_map.py` to generate it.")
 '''

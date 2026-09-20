@@ -25,7 +25,7 @@ the process the built cities actually followed - and the `scaffold-city` skill
 - **`outputs/<city>/` is committed; `data/<city>/raw/` and `processed/` are
   not.** The deployed app only reads `outputs/`, never runs the pipeline.
 - **Maps are pre-rendered static HTML** embedded with
-  `st.components.v1.html()`, not `streamlit-folium`.
+  `st.iframe()`, not `streamlit-folium`.
 - **Map rendering is shared:** `pipeline/map_common.py`'s
   `render_heatmap()`. City `step3_map.py` files are thin and must not fork
   it. It never names a taxonomy - category grouping, tooltip label and

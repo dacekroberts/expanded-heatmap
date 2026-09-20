@@ -45,7 +45,7 @@ Each has its rationale in `DECISIONS.md`.
 - **Pipeline/app split:** an offline pipeline writes small static files; the
   deployed app only reads `outputs/`. The app never runs the pipeline.
 - **Maps are pre-rendered static HTML** embedded with
-  `st.components.v1.html()`, not `streamlit-folium`. The macro map is the one
+  `st.iframe()`, not `streamlit-folium`. The macro map is the one
   exception in kind: a pydeck map (bundled with Streamlit), so clicks can
   navigate without folium.
 - **City viability is verified live**, against the real API/schema and

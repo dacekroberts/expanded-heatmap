@@ -107,8 +107,9 @@ def render_macro_map_theme():
     CSS that darkens its basemap and controls. Shares its stored choice with
     the city maps (see _MACRO_THEME_JS). Call once on the Overview page."""
     st.markdown(_MACRO_THEME_CSS.replace("@@CONTROLS@@", _MACRO_CONTROLS_CSS), unsafe_allow_html=True)
-    # height=0: the script only needs to run, not to show anything.
-    st.components.v1.html(_MACRO_THEME_JS.replace("@@KEY@@", MACRO_THEME_KEY), height=0)
+    # st.iframe rejects a height of 0, so the script-only frame is 1 px tall; it only
+    # needs to run (same-origin access to the page is what lets it add the button).
+    st.iframe(_MACRO_THEME_JS.replace("@@KEY@@", MACRO_THEME_KEY), height=1)
 
 
 def set_base_font():

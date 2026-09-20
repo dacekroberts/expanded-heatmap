@@ -7,5 +7,7 @@
 # streamlit>=1.64: the macro map uses st.pydeck_chart click selection with its
 # default full width (older releases need the now-deprecated use_container_width).
 # pydeck itself ships with Streamlit, so it needs no line of its own.
-streamlit>=1.64
+# <2: a guard against a major release changing the APIs the app relies on
+# (st.iframe, st.pydeck_chart selection, st.container(horizontal=True)).
+streamlit>=1.64,<2
 pandas>=2.2

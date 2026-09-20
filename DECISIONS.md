@@ -14,6 +14,41 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-20 - Migrated from st.components.v1.html to st.iframe
+
+- **Replaced the deprecated `st.components.v1.html` with `st.iframe` in all four
+  city pages, the macro map's Dark Mode script and the scaffold template.** The
+  deploy-verify startup log had flagged that `components.v1.html` is deprecated
+  in favor of `st.iframe` with a removal date (2026-06-01) already past; it still
+  worked in Streamlit 1.64 and only logged a warning, but `requirements.txt` had
+  no upper bound, so Streamlit Cloud installing a newer release could have removed
+  it and broken every city page at deploy time. The dependency predated the Dark
+  Mode work.
+- **What `st.iframe` does, read from the installed source (1.64).** An HTML string
+  or a `.html` `Path` is embedded as a same-origin iframe that allows scripts (the
+  sandbox includes `allow-same-origin` and `allow-scripts`), read as UTF-8, and
+  always scrollable. That is exactly what the pages needed, so each page now
+  passes the map's `Path` (`st.iframe(HEATMAP_HTML, width=1000, height=650)`)
+  and the manual `read_text(encoding="utf-8")` is gone. A fixed width is capped
+  to the column, as before. The one difference: `st.iframe` rejects a height of 0,
+  so the macro map's script-only frame is 1 px tall (it renders with a 1 px
+  element container, no border).
+- **Also added an upper bound: `streamlit>=1.64,<2`.** A cheap guard against a
+  major release; it does not protect against a minor release removing an API
+  (that is what the migration is for), so `deploy-verify` should still be run on
+  each Streamlit upgrade.
+- **A slip while migrating:** one script edit matched three pages but not San
+  Diego's (its comments differ), so that page was briefly left calling the
+  removed import; caught by grepping for leftovers before the first run and
+  fixed by hand.
+- **Checked in a browser** (lean venv, clean tree): all four city pages show the
+  map in a 554x650 iframe (the column's width; fixed 1000 px map inside, as
+  before), same-origin access holds, the maps and their Dark Mode buttons are
+  present (line labels 5, 6, 6 and Chicago's page loads; no exception blocks);
+  the macro map's button works from the 1 px iframe; Dark on the macro map opens
+  Chicago dark, and Light on Chicago's map makes the macro map open light; the
+  server log shows no deprecation warning on any page.
+
 ### 2026-09-20 - Dark Mode on the macro map
 
 - **Added Dark Mode to the macro map, sharing the city maps' choice.** Decided

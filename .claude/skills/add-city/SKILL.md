@@ -216,7 +216,7 @@ right.
 ## Step 8 - Wire into the app
 
 - `app/pages/N_<City>_Heatmap.py`: the static-HTML-embed pattern
-  (`st.components.v1.html()`, UTF-8 read, fixed size matching the map), not
+  (`st.iframe(HEATMAP_HTML, width=1000, height=650)`, fixed size matching the map; not the deprecated `st.components.v1.html`), not
   `streamlit-folium`. Call `components.set_base_font()`.
 - Add the city to the `CITIES` list in `app/cities.py` (name, marker lat/lon,
   page path, blurb). That one entry feeds the clickable macro map on the

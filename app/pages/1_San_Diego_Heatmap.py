@@ -11,7 +11,6 @@ import sys
 from pathlib import Path
 
 import streamlit as st
-import streamlit.components.v1 as components
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.san_diego.config import HEATMAP_HTML  # noqa: E402
@@ -40,13 +39,8 @@ things cluster."
 )
 
 if HEATMAP_HTML.exists():
-    # folium always saves this file as UTF-8. On Windows, Path.read_text()
-    # without an explicit encoding falls back to the OS codepage, which
-    # mangles multi-byte characters - not a bug in the saved file, only in
-    # how it's read back here.
-    heatmap_html = HEATMAP_HTML.read_text(encoding="utf-8")
-    # Matches the Folium map's own fixed pixel size (width=1000, height=650
-    # in pipeline/san_diego/step3_map.py) exactly.
-    components.html(heatmap_html, width=1000, height=650, scrolling=True)
+    # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
+    # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
+    st.iframe(HEATMAP_HTML, width=1000, height=650)
 else:
     st.info("No map yet. Run `python pipeline/san_diego/step3_map.py` to generate it.")
