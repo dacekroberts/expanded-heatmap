@@ -14,6 +14,52 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-20 - Dark Mode on the city maps (top-right button, persisted)
+
+- **Added a Dark Mode toggle to every city map, through the shared renderer
+  (`THEME_TOGGLE_HTML` in `pipeline/map_common.py`); all four maps
+  regenerated.** Decided with the user: a separate top-right button (not the
+  layer control), remembered between maps, city maps first. The macro map and
+  the surrounding Streamlit page are not done (see below).
+- **Why the button is `position: fixed`, not a Leaflet control.** The map is a
+  fixed 1000 px wide (the Leaflet.heat init workaround) and Streamlit's content
+  area is often narrower, which pushes anything anchored to the map's own
+  corners off-screen. Measured in the running app: at 1024 px the iframe is 554
+  px wide and Leaflet's top-right corner sits at x=1000, off-screen; a fixed
+  element stays inside the visible frame, as the legend already does. At 375 px
+  (iframe 343 px) the button spans x=293-333, visible. This is why an earlier
+  sister project's top-right placement had been avoided.
+- **Mechanism.** A `<button>` toggles a `dark-base` class on `<body>`; the
+  choice is saved in `localStorage` under one key, so it carries from one city
+  to another (the embedded map iframes share the app's origin; checked:
+  opening San Francisco after choosing Dark on Chicago came up dark with no
+  click, and switching back restored every style). Only the tile pane is
+  filtered (`invert` plus `hue-rotate`, so water stays blue), so no second base
+  layer and no new tile provider or key. Recoloured: legend, zoom and layer
+  controls, attribution, tooltips, ring outlines (lightened), station dots
+  (lightened), transit lines (brightened), line-name labels (brightened, with
+  a dark halo) and the legend's line swatches. The palette is one CSS
+  variable block, tinted toward the teal theme. The legend gained a
+  `map-legend` class.
+- **Checked in a browser.** In the embedded Chicago map at 1024 px: the button
+  is visible in the narrow iframe; clicking flips the class, label,
+  `aria-pressed`, stored value, legend, tiles, rings, station dots and the
+  button itself. All four standalone maps pass `scripts/check_map_labels.js`
+  in light mode (labels in view, no overlaps, none under the legend or the
+  button); Chicago and Los Angeles were also viewed in dark; no console
+  errors. Not viewed in dark: San Diego and San Francisco (same code).
+- **Known limitations.** The Brown and Purple lines are brightened, not
+  swapped for a dark-mode palette, so they read but are not ideal. The
+  legend's category dots keep their light-mode colours. The toggle does not
+  follow the operating system's dark preference (every visitor starts light
+  until they choose). The button text is not translated or localized. The
+  macro map (pydeck) and the Streamlit page stay light: the map's basemap has
+  a `dark` style but the choice would have to be shared between Streamlit's
+  Python state and the browser's `localStorage`, which needs its own design;
+  the page chrome is deferred because a custom theme may replace it.
+- **Verification script.** `scripts/check_map_labels.js` now also checks the
+  button is in view, not over a label, and flips and restores the theme.
+
 ### 2026-09-20 - City scaffolding skill built
 
 - **Built `scripts/scaffold_city.py` and the `scaffold-city` skill.** This was

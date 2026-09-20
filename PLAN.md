@@ -26,6 +26,13 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   whether it saved effort (estimated at about 10%) and fix any template that
   needed rewriting.
 
+- [ ] **Dark Mode, remaining parts.** City maps are done (see `DECISIONS.md`).
+  Left: the macro map (pydeck; Carto's `dark` basemap plus recoloured markers,
+  labels and tooltip, and a way to share the choice with the city maps'
+  `localStorage` value - the design is the open question), and later the
+  surrounding Streamlit page, if it is not replaced by a custom theme first.
+  Notes: `docs/dark_mode_handoff.md`.
+
 ## Next cities, in ease order
 
 - [ ] New York - needs `nyc_dca` filled (Socrata `w7w3-xahh`,

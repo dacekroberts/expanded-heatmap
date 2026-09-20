@@ -1,7 +1,11 @@
 # Dark Mode for the city heatmaps and the macro map - implementation notes
 
-A proposal, not a decision: nothing here has been applied or verified in this
-repo. It describes a way to add a Dark Mode toggle to `pipeline/map_common.py`'s
+**Status (2026-09-20): the city maps are implemented, differently from the
+sketch below** (a fixed-position top-right button and one filtered tile pane
+instead of a second base layer; see `DECISIONS.md`). The macro map and the
+Streamlit page are not done, and the mechanism notes and code below are kept
+as background, not as the current code (that is `THEME_TOGGLE_HTML` in
+`pipeline/map_common.py`). It describes a way to add a Dark Mode toggle to `pipeline/map_common.py`'s
 `render_heatmap()` (shared by every city, so it is implemented once) and to the
 macro map. Log the go/no-go, the toggle placement and the palette choice in
 `DECISIONS.md` when they are made.

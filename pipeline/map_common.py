@@ -30,11 +30,97 @@ HEAT_BLUR = 10
 HEAT_MIN_OPACITY = 0.35
 HEAT_GRADIENT = {0.3: "#fee0d2", 0.5: "#fc9272", 0.7: "#fb6a4a", 0.85: "#de2d26", 1.0: "#a50f15"}
 
+# Dark Mode toggle: a plain fixed-position button, NOT a Leaflet control. The
+# map is a fixed 1000 px wide and Streamlit's content area is often narrower,
+# so anything positioned against the map (Leaflet's top-right corner sits at
+# x=1000) can be off-screen; `position: fixed` anchors to the visible iframe,
+# as the legend does (checked at 1024 px and 375 px wide). It toggles a
+# `dark-base` class on <body> and remembers the choice in localStorage (shared
+# by every map served from the same origin, so Dark carries from map to map).
+# Only the tile pane is filtered (invert + hue-rotate keeps water blue), so no
+# second base layer or tile provider is needed; overlays are recoloured by the
+# rules below. Palette is one variable block: retheme it there.
+THEME_TOGGLE_HTML = """
+<style>
+    #theme-toggle {
+        position: fixed; top: 10px; right: 10px; z-index: 10000;
+        font: 600 13px sans-serif; padding: 6px 12px; cursor: pointer;
+        background: #fff; color: #1c2b2a; border: 1px solid #999;
+        border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+    #theme-toggle:focus-visible { outline: 2px solid #0d9488; outline-offset: 2px; }
+    .dark-base { color-scheme: dark;
+        --dm-page: #0f1716; --dm-surface: #182322; --dm-surface-hover: #1f2d2c;
+        --dm-surface-disabled: #131c1b; --dm-border: #2e403e; --dm-text: #e6efee;
+        --dm-muted: #8fa3a1; --dm-disabled-text: #4a5b59; --dm-accent: #5eead4;
+        --dm-ring: #cfe0de; --dm-station: #7cc0ff;
+        background: var(--dm-page); }
+    .dark-base .leaflet-tile-pane {
+        filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9) saturate(0.7); }
+    .dark-base #theme-toggle { background: var(--dm-surface); color: var(--dm-text);
+        border-color: var(--dm-border); }
+    .dark-base #theme-toggle:hover { background: var(--dm-surface-hover); }
+    .dark-base path.leaflet-interactive[stroke="#2c3e50"] { stroke: var(--dm-ring); }
+    .dark-base path.leaflet-interactive[stroke="#1a5490"] {
+        stroke: var(--dm-station); fill: var(--dm-station); }
+    .dark-base .leaflet-overlay-pane path[stroke-width="4"] { filter: brightness(1.55) saturate(0.9); }
+    .dark-base .map-legend span[style*="height:3px"] { filter: brightness(1.55) saturate(0.9); }
+    .dark-base .leaflet-marker-icon div[style*="text-shadow"] {
+        filter: brightness(1.8);
+        text-shadow: -1px -1px 0 #0f1716, 1px -1px 0 #0f1716, -1px 1px 0 #0f1716,
+                     1px 1px 0 #0f1716, 0 0 6px #0f1716 !important; }
+    .dark-base .map-legend { background: var(--dm-surface) !important;
+        color: var(--dm-text) !important; border-color: var(--dm-border) !important; }
+    .dark-base .leaflet-bar, .dark-base .leaflet-control-layers {
+        border: 1px solid var(--dm-border); box-shadow: none; }
+    .dark-base .leaflet-bar a, .dark-base .leaflet-control-layers {
+        background-color: var(--dm-surface); color: var(--dm-text); }
+    .dark-base .leaflet-bar a { border-bottom-color: var(--dm-border); }
+    .dark-base .leaflet-bar a:hover, .dark-base .leaflet-bar a:focus {
+        background-color: var(--dm-surface-hover); }
+    .dark-base .leaflet-bar a.leaflet-disabled {
+        background-color: var(--dm-surface-disabled); color: var(--dm-disabled-text); }
+    .dark-base .leaflet-control-layers-toggle { filter: invert(1); }
+    .dark-base .leaflet-control-layers-separator { border-top-color: var(--dm-border); }
+    .dark-base .leaflet-control-attribution { background: rgba(15,23,22,0.8); color: var(--dm-muted); }
+    .dark-base .leaflet-control-attribution a { color: var(--dm-accent); }
+    .dark-base .leaflet-tooltip { background: var(--dm-surface); color: var(--dm-text);
+        border-color: var(--dm-border); box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+    .dark-base .leaflet-tooltip-top:before { border-top-color: var(--dm-border); }
+    .dark-base .leaflet-tooltip-bottom:before { border-bottom-color: var(--dm-border); }
+    .dark-base .leaflet-tooltip-left:before { border-left-color: var(--dm-border); }
+    .dark-base .leaflet-tooltip-right:before { border-right-color: var(--dm-border); }
+</style>
+<button id="theme-toggle" type="button" aria-pressed="false">&#9790; Dark mode</button>
+<script>
+(function () {
+    var KEY = 'expanded-heatmap-theme';
+    var btn = document.getElementById('theme-toggle');
+    function saved() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function save(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+    function apply(dark) {
+        document.body.classList.toggle('dark-base', dark);
+        btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+        btn.textContent = dark ? '\\u2600 Light mode' : '\\u263E Dark mode';
+    }
+    apply(saved() === 'dark');
+    btn.addEventListener('click', function () {
+        var dark = !document.body.classList.contains('dark-base');
+        apply(dark);
+        save(dark ? 'dark' : 'light');
+    });
+    window.addEventListener('storage', function (e) {
+        if (e.key === KEY) apply(e.newValue === 'dark');
+    });
+})();
+</script>
+"""
+
 # A native <details>/<summary>, so the legend collapses and expands with a
 # click and needs no script. Open by default; collapsed it shrinks to a small
 # "Legend" tab and stops covering the map.
 LEGEND_HTML = """
-<details open style="
+<details open class="map-legend" style="
     position: fixed; bottom: 24px; right: 24px; z-index: 9999;
     background: white; padding: 8px 14px; border: 1px solid #999;
     border-radius: 4px; font-family: sans-serif; font-size: 13px;
@@ -596,6 +682,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
             }
         </style>
     """))
+    m.get_root().html.add_child(folium.Element(THEME_TOGGLE_HTML))
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     m.save(str(output_path))

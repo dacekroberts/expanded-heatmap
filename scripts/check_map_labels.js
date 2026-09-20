@@ -5,7 +5,8 @@
 // Checks: every line label (the bold 14px divs inside .leaflet-marker-icon;
 // the numeric cluster badges are ignored) is inside the map box, clear of the
 // open legend, and not overlapping another line label; each label has a legend
-// row; and the legend collapses and re-expands.
+// row; the legend collapses and re-expands; and the Dark Mode button is in
+// view and flips and restores the theme.
 await new Promise(r => setTimeout(r, 1500));
 const box = document.querySelector('.folium-map').getBoundingClientRect();
 const legend = document.querySelector('details');
@@ -29,4 +30,20 @@ legend.open = false;
 const closedH = legend.getBoundingClientRect().height;
 legend.open = true;
 if (!(closedH < openH)) problems.push('legend does not collapse');
-JSON.stringify({ labels: labels.map(l => l.text), problems, legendOpenHeight: Math.round(openH), legendClosedHeight: Math.round(closedH) });
+// Dark Mode button: inside the visible viewport (it is position: fixed, unlike
+// Leaflet's top-right corner), not over a label, and it toggles and restores.
+const toggle = document.getElementById('theme-toggle');
+let darkWorks = null;
+if (!toggle) problems.push('no theme toggle');
+else {
+  const tr = toggle.getBoundingClientRect();
+  if (tr.left < 0 || tr.right > innerWidth || tr.top < 0) problems.push('theme toggle out of view');
+  for (const l of labels) if (overlaps(l.r, tr)) problems.push(`under theme toggle: ${l.text}`);
+  const was = document.body.classList.contains('dark-base');
+  toggle.click();
+  const flipped = document.body.classList.contains('dark-base') !== was;
+  toggle.click();
+  darkWorks = flipped && document.body.classList.contains('dark-base') === was;
+  if (!darkWorks) problems.push('theme toggle does not flip and restore');
+}
+JSON.stringify({ labels: labels.map(l => l.text), problems, legendOpenHeight: Math.round(openH), legendClosedHeight: Math.round(closedH), darkToggleWorks: darkWorks });
