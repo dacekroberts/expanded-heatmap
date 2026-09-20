@@ -30,13 +30,13 @@ legend.open = false;
 const closedH = legend.getBoundingClientRect().height;
 legend.open = true;
 if (!(closedH < openH)) problems.push('legend does not collapse');
-// Dark Mode button: inside the visible viewport (it is position: fixed, unlike
+// Top-right buttons ("All cities" when embedded, and Dark Mode): inside the visible viewport (it is position: fixed, unlike
 // Leaflet's top-right corner), not over a label, and it toggles and restores.
 const toggle = document.getElementById('theme-toggle');
 let darkWorks = null;
 if (!toggle) problems.push('no theme toggle');
 else {
-  const tr = toggle.getBoundingClientRect();
+  const tr = (document.getElementById('map-actions') || toggle).getBoundingClientRect();
   if (tr.left < 0 || tr.right > innerWidth || tr.top < 0) problems.push('theme toggle out of view');
   for (const l of labels) if (overlaps(l.r, tr)) problems.push(`under theme toggle: ${l.text}`);
   const was = document.body.classList.contains('dark-base');

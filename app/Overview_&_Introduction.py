@@ -18,7 +18,7 @@ import pandas as pd
 import pydeck as pdk
 import streamlit as st
 
-from cities import CITIES
+from cities import CITIES, MAP_ONLY_NAV
 from components import render_macro_map_theme, set_base_font
 
 st.set_page_config(page_title="Expanded Heatmap", page_icon="\U0001f5fa️", layout="wide")
@@ -27,14 +27,18 @@ render_macro_map_theme()
 
 st.title("Commercial density near transit, city by city")
 
+_FOLLOW_UP = (
+    'each city map has an "All cities" button to come back here.'
+    if MAP_ONLY_NAV
+    else "each city page also has a switcher to jump straight to another city."
+)
 st.markdown(
-    """
+    f"""
 This project maps commercial/business density around rail transit station
 areas, one city at a time. Each city has its own independently scoped detail
 map - its own map instance, its own data, its own viewport bounds - rather
 than one shared map instance loading every city's business points at once.
-**Click a city on the map to open its detail map**; each city page also has a
-switcher to jump straight to another city.
+**Click a city on the map to open its detail map**; {_FOLLOW_UP}
 """
 )
 

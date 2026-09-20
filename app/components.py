@@ -8,7 +8,7 @@ rather than duplicated per page.
 
 import streamlit as st
 
-from cities import CITIES
+from cities import CITIES, MAP_ONLY_NAV
 
 OVERVIEW_PAGE = "Overview_&_Introduction.py"
 
@@ -17,7 +17,15 @@ def render_city_nav(current: str):
     """A row at the top of a city page: a link back to the macro map, then
     every mapped city (the current one shown as plain bold text). Lets a
     visitor hop city to city without returning to the map each time.
-    `current` must match a name in cities.CITIES."""
+    `current` must match a name in cities.CITIES.
+
+    In the map-only pilot (cities.MAP_ONLY_NAV) there is no visible switcher.
+    One link to the Overview is still rendered, hidden (see set_base_font),
+    because the city map's own "All cities" button navigates by clicking it."""
+    if MAP_ONLY_NAV:
+        with st.container(key="map-only-back-link"):
+            st.page_link(OVERVIEW_PAGE, label="All cities")
+        return
     # A horizontal container sizes each item to its content and wraps onto a
     # second line when the row is too narrow; fixed-width columns clipped the
     # longer city names once a fourth city was added.
@@ -112,6 +120,16 @@ def render_macro_map_theme():
     st.iframe(_MACRO_THEME_JS.replace("@@KEY@@", MACRO_THEME_KEY), height=1)
 
 
+# Map-only pilot: hide Streamlit's sidebar (its page list is the other way to reach
+# a city) and its expand control, and the one link kept for the map's back button.
+# Turned off by cities.MAP_ONLY_NAV = False; see docs/navigation_sidebar_and_city_links.md.
+_MAP_ONLY_CSS = """
+[data-testid="stSidebar"], [data-testid="stSidebarCollapsedControl"],
+[data-testid="stExpandSidebarButton"] { display: none !important; }
+.st-key-map-only-back-link { display: none; }
+"""
+
+
 def set_base_font():
     """Swaps Streamlit's default typeface for Space Grotesk on base page
     text only.
@@ -160,3 +178,7 @@ def set_base_font():
         """,
         unsafe_allow_html=True,
     )
+    if MAP_ONLY_NAV:
+        # A separate call, not appended to the block above: that block is indented,
+        # so text added after it is rendered as a Markdown code block.
+        st.markdown(f"<style>{_MAP_ONLY_CSS}</style>", unsafe_allow_html=True)

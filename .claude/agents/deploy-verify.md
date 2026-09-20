@@ -63,7 +63,12 @@ sure is the fresh one.
    bug. Also click each fallback link. After returning to the Overview via a
    city page's map link, wait several seconds and confirm it stays put (no
    bounce from a stale selection). Check the city switcher on each city
-   page: every other city links correctly, the current one is plain text.
+   page: every other city links correctly, the current one is plain text -
+   but only when `MAP_ONLY_NAV` in `app/cities.py` is False. In the map-only
+   pilot (True) there is no sidebar or switcher: check instead that the sidebar
+   is hidden and that each city map's "All cities" button (top-right, left of
+   the Dark Mode button, inside the map iframe) returns to the Overview in
+   place, carrying the light/dark mode both ways.
 4. **Each city page** (one per `app/pages/*_Heatmap.py`): the embedded map
    iframe is present and loaded, the page title matches, no error/
    exception block on the page.

@@ -14,6 +14,54 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-20 - "All cities" button and a map-only navigation pilot
+
+- **Added an "All cities" button to every city map, and started a pilot that makes
+  the macro map the only navigation.** The button (top-right, left of the Dark
+  Mode button, in the shared renderer `pipeline/map_common.py`) takes a visitor
+  back to the macro map. With it in place, the sidebar page list and the city
+  switcher are hidden on every city page (`MAP_ONLY_NAV = True` in
+  `app/cities.py`). Requested by the user, who wants to see whether a map-only
+  site can work ("more novel"); the sidebar and city-link code is **kept** and
+  documented in `docs/navigation_sidebar_and_city_links.md`, so reverting is one
+  line.
+- **How the button navigates.** The map is a sandboxed `st.iframe` (scripts and
+  same-origin access allowed, top-level navigation not), so it cannot set the
+  parent's location. It clicks the parent page's own link to the Overview, and
+  Streamlit navigates in place. In map-only mode `render_city_nav()` therefore
+  still renders that one link, inside a CSS-hidden `st.container(key=...)`; the
+  sidebar is hidden with CSS rather than switched off in `config.toml`, so the
+  link stays reachable and the change stays reversible from Python. The button
+  shows only when the map is embedded (`window.parent !== window`), so a map
+  opened on its own has no dead button.
+- **The light/dark mode travels both ways.** The shared `localStorage` key
+  already carried it; the button also saves the current mode before navigating.
+  Checked: Dark on a city map, then "All cities", opens the macro map dark;
+  from the dark macro map, a real click on the Chicago marker opens Chicago dark,
+  Light there, then "All cities", opens the macro map light.
+- **Kept: the Overview's fallback link list** (one link per city under the map).
+  It is the keyboard and no-map route to a city (see the "Macro map and city
+  navigation" entry). "Only keeping the main page" could also mean dropping it;
+  that is left as an open question for the user rather than assumed.
+- **Checked in a browser** (lean venv, clean tree). City page at 1024 px: sidebar
+  hidden (`display: none`), no visible switcher, the two buttons side by side
+  inside the map iframe with no overlap; navigating with the button left the
+  browser window object intact (in-place, no reload) and the Overview showed the
+  updated intro sentence. At 375 px: both buttons fit inside the 343 px frame
+  (x 125-221 and 229-333), no sideways page scroll, sidebar hidden. All four
+  standalone maps: `problems` empty, the back button hidden, no console errors.
+  Not run: the independent `deploy-verify` agent (the user chose not to for now).
+- **A slip fixed on the way:** the map-only CSS was first appended inside the
+  existing indented Markdown block, where it rendered as a code block and hid
+  nothing; it is now emitted in its own `st.markdown` call. And a JS regex in the
+  button script used `\/` inside a non-raw Python string (an invalid escape
+  warning); rewritten with string methods.
+- **Known gaps.** A visitor arriving by URL sees only the map's button, with no
+  way to hop city to city except through the macro map. The button does nothing
+  if the hidden link was not rendered (the scaffold template includes the call).
+  `deploy-verify`'s switcher check applies only when `MAP_ONLY_NAV` is False; its
+  instructions now say what to check instead.
+
 ### 2026-09-20 - Migrated from st.components.v1.html to st.iframe
 
 - **Replaced the deprecated `st.components.v1.html` with `st.iframe` in all four

@@ -26,6 +26,12 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   whether it saved effort (estimated at about 10%) and fix any template that
   needed rewriting.
 
+- [~] **Evaluate the map-only navigation pilot** (started 2026-09-20; see
+  `DECISIONS.md` and `docs/navigation_sidebar_and_city_links.md`). Open: keep the
+  Overview's fallback link list (accessibility) or drop it for a pure map-only
+  site; whether visitors need a way to hop city to city without going back to
+  the map; and a final go/no-go. To revert, set `MAP_ONLY_NAV = False` in
+  `app/cities.py`.
 - [ ] **Dark Mode, remaining part: the surrounding Streamlit page** (background,
   text, switcher, sidebar). City maps and the macro map are done and share one
   stored choice (see `DECISIONS.md`). Deferred while a custom theme for the page

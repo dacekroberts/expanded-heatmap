@@ -145,8 +145,11 @@ Washington D.C. carry caveats. See `city_shortlist.md` and
 **Navigation.** The Overview is the macro map: a pydeck map (pydeck ships
 with Streamlit; no folium) with a labelled marker per city, where clicking a
 marker opens that city's page (`st.switch_page`), plus a plain link list as a
-fallback. Every city page has a switcher row to jump to another city or back
-to the map. The city list lives in `app/cities.py`.
+fallback. In the map-only pilot (`MAP_ONLY_NAV` in `app/cities.py`) the sidebar page
+list and the city switcher are hidden, and each city map has an "All cities"
+button back to the macro map; with the flag off, every city page has a switcher
+row to jump to another city or back to the map (see
+`docs/navigation_sidebar_and_city_links.md`). The city list lives in `app/cities.py`.
 
 Not built yet: a shared pipeline-side city registry, and deployment.
 

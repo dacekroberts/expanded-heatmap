@@ -42,13 +42,15 @@ HEAT_GRADIENT = {0.3: "#fee0d2", 0.5: "#fc9272", 0.7: "#fb6a4a", 0.85: "#de2d26"
 # rules below. Palette is one variable block: retheme it there.
 THEME_TOGGLE_HTML = """
 <style>
-    #theme-toggle {
-        position: fixed; top: 10px; right: 10px; z-index: 10000;
+    #map-actions { position: fixed; top: 10px; right: 10px; z-index: 10000;
+        display: flex; gap: 8px; }
+    .map-btn {
         font: 600 13px sans-serif; padding: 6px 12px; cursor: pointer;
         background: #fff; color: #1c2b2a; border: 1px solid #999;
         border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.3);
     }
-    #theme-toggle:focus-visible { outline: 2px solid #0d9488; outline-offset: 2px; }
+    .map-btn[hidden] { display: none; }
+    .map-btn:focus-visible { outline: 2px solid #0d9488; outline-offset: 2px; }
     .dark-base { color-scheme: dark;
         --dm-page: #0f1716; --dm-surface: #182322; --dm-surface-hover: #1f2d2c;
         --dm-surface-disabled: #131c1b; --dm-border: #2e403e; --dm-text: #e6efee;
@@ -57,9 +59,9 @@ THEME_TOGGLE_HTML = """
         background: var(--dm-page); }
     .dark-base .leaflet-tile-pane {
         filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9) saturate(0.7); }
-    .dark-base #theme-toggle { background: var(--dm-surface); color: var(--dm-text);
+    .dark-base .map-btn { background: var(--dm-surface); color: var(--dm-text);
         border-color: var(--dm-border); }
-    .dark-base #theme-toggle:hover { background: var(--dm-surface-hover); }
+    .dark-base .map-btn:hover { background: var(--dm-surface-hover); }
     .dark-base path.leaflet-interactive[stroke="#2c3e50"] { stroke: var(--dm-ring); }
     .dark-base path.leaflet-interactive[stroke="#1a5490"] {
         stroke: var(--dm-station); fill: var(--dm-station); }
@@ -91,7 +93,11 @@ THEME_TOGGLE_HTML = """
     .dark-base .leaflet-tooltip-left:before { border-left-color: var(--dm-border); }
     .dark-base .leaflet-tooltip-right:before { border-right-color: var(--dm-border); }
 </style>
-<button id="theme-toggle" type="button" aria-pressed="false">&#9790; Dark mode</button>
+<div id="map-actions">
+    <button id="back-to-map" class="map-btn" type="button" hidden
+        aria-label="Back to the map of all cities">&larr; All cities</button>
+    <button id="theme-toggle" class="map-btn" type="button" aria-pressed="false">&#9790; Dark mode</button>
+</div>
 <script>
 (function () {
     var KEY = 'expanded-heatmap-theme';
@@ -112,6 +118,33 @@ THEME_TOGGLE_HTML = """
     window.addEventListener('storage', function (e) {
         if (e.key === KEY) apply(e.newValue === 'dark');
     });
+
+    // "All cities" button: only when this map is embedded in the app (it has a
+    // parent page to go back to); opened on its own it stays hidden. It clicks
+    // the app's own link to the Overview, so Streamlit navigates in place, and
+    // saves the current theme first so the macro map opens in the same mode.
+    var back = document.getElementById('back-to-map');
+    function trimSlash(p) { while (p.length > 1 && p.charAt(p.length - 1) === '/') p = p.slice(0, -1); return p; }
+    function overviewLink() {
+        var doc = window.parent.document, links = doc.querySelectorAll('a[href]');
+        for (var i = 0; i < links.length; i++) {          // the page's own link to the Overview
+            if (links[i].textContent.indexOf('All cities') !== -1) return links[i];
+        }
+        var here = window.parent.location.pathname;      // else the link to the app's root
+        var root = trimSlash(here.substring(0, here.lastIndexOf('/') + 1));
+        for (var j = 0; j < links.length; j++) {
+            if (trimSlash(links[j].pathname) === root) return links[j];
+        }
+        return null;
+    }
+    if (window.parent !== window) {
+        back.hidden = false;
+        back.addEventListener('click', function () {
+            save(document.body.classList.contains('dark-base') ? 'dark' : 'light');
+            var link = overviewLink();
+            if (link) link.click();
+        });
+    }
 })();
 </script>
 """
