@@ -73,7 +73,11 @@ sure is the fresh one.
    contents with `javascript_tool` on each map: it checks every line label is
    in view, clear of the legend, not overlapping another label and present in
    the legend, and that the legend collapses and re-expands. `problems` in
-   its result must be empty.
+   its result must be empty (it also checks the Dark Mode button). On the
+   Overview, also check its Dark Mode button sits inside the map frame without
+   covering the zoom controls, flips the basemap (only `.mapboxgl-canvas` is
+   filtered, not `#deckgl-overlay`), survives a reload, still lets a marker click
+   open its city, and fits at phone width with every name fully visible.
 6. **In this order per page** (the console buffer keeps messages from any
    earlier, now-stopped server - e.g. `ERR_CONNECTION_REFUSED` on
    `/_stcore/health` - so navigate fresh and treat only messages that match the

@@ -30,6 +30,87 @@ def render_city_nav(current: str):
                 st.page_link(city["page"], label=city["name"])
 
 
+MACRO_THEME_KEY = "expanded-heatmap-theme"   # the same key the city maps use
+
+_MACRO_THEME_CSS = """
+<style>
+[data-testid="stDeckGlJsonChart"] { position: relative; }
+#macro-theme-toggle {
+    position: absolute; top: 10px; right: 52px; z-index: 20;
+    font: 600 13px sans-serif; padding: 6px 12px; cursor: pointer;
+    background: #fff; color: #1c2b2a; border: 1px solid #999;
+    border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+#macro-theme-toggle:focus-visible { outline: 2px solid #0d9488; outline-offset: 2px; }
+body.dark-base #macro-theme-toggle { background: #182322; color: #e6efee; border-color: #2e403e; }
+body.dark-base #macro-theme-toggle:hover { background: #1f2d2c; }
+/* Only the basemap canvas is filtered; the markers and labels are a separate
+   canvas, so they keep their colours. Same filter as the city maps. */
+body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-canvas {
+    filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9) saturate(0.7); }
+@@CONTROLS@@
+</style>
+"""
+
+# JS: put a toggle button on the map's frame, keep the choice in localStorage
+# (shared with the city maps: the embedded map iframes and this page share an
+# origin) and toggle a `dark-base` class on the page's <body>. The button is
+# re-added by a MutationObserver if Streamlit re-renders the chart; if the
+# chart container is not found there is simply no button and the map stays light.
+_MACRO_THEME_JS = """
+<script>
+(function () {
+    var KEY = '@@KEY@@';
+    var doc = window.parent.document;
+    function saved() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function save(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+    function label(btn, dark) {
+        btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+        btn.textContent = dark ? '\\u2600 Light mode' : '\\u263E Dark mode';
+    }
+    function apply(dark) {
+        doc.body.classList.toggle('dark-base', dark);
+        var b = doc.getElementById('macro-theme-toggle');
+        if (b) label(b, dark);
+    }
+    function ensure() {
+        var host = doc.querySelector('[data-testid="stDeckGlJsonChart"]');
+        if (!host || doc.getElementById('macro-theme-toggle')) return;
+        var b = doc.createElement('button');
+        b.id = 'macro-theme-toggle'; b.type = 'button';
+        b.addEventListener('click', function () {
+            var dark = !doc.body.classList.contains('dark-base');
+            apply(dark); save(dark ? 'dark' : 'light');
+        });
+        host.appendChild(b);
+        label(b, doc.body.classList.contains('dark-base'));
+    }
+    apply(saved() === 'dark');
+    ensure();
+    new window.parent.MutationObserver(ensure).observe(doc.body, { childList: true, subtree: true });
+})();
+</script>
+"""
+
+# Dark styling for the pydeck/mapbox controls (zoom buttons, attribution).
+_MACRO_CONTROLS_CSS = """
+/* Invert the whole zoom group (white -> near-black, dark glyph -> light); the
+   glyph is the button's own background image, so it cannot be inverted alone. */
+body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-group { filter: invert(0.9); }
+body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib { background: rgba(15,23,22,0.8) !important; color: #8fa3a1; }
+body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib a { color: #5eead4; }
+"""
+
+
+def render_macro_map_theme():
+    """Dark Mode for the macro map: the toggle button on the map's frame and the
+    CSS that darkens its basemap and controls. Shares its stored choice with
+    the city maps (see _MACRO_THEME_JS). Call once on the Overview page."""
+    st.markdown(_MACRO_THEME_CSS.replace("@@CONTROLS@@", _MACRO_CONTROLS_CSS), unsafe_allow_html=True)
+    # height=0: the script only needs to run, not to show anything.
+    st.components.v1.html(_MACRO_THEME_JS.replace("@@KEY@@", MACRO_THEME_KEY), height=0)
+
+
 def set_base_font():
     """Swaps Streamlit's default typeface for Space Grotesk on base page
     text only.

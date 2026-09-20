@@ -14,6 +14,48 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-20 - Dark Mode on the macro map
+
+- **Added Dark Mode to the macro map, sharing the city maps' choice.** Decided
+  with the user after a side-by-side comparison (real deck.gl renders of the
+  four cities, opened in the browser pane): the button top-right, offset left of
+  the zoom controls; a white pill behind each city name; and the same filtered
+  basemap look as the city maps rather than Carto's native dark style.
+  `components.render_macro_map_theme()` is called once from the Overview page.
+- **Mechanism.** The pydeck chart is two canvases (`.mapboxgl-canvas`, the
+  basemap, and `#deckgl-overlay`, the markers and labels), so the same dark
+  filter is applied to the basemap canvas only, by page CSS scoped to the chart
+  (`body.dark-base [data-testid="stDeckGlJsonChart"] ...`). A small script, run
+  from a zero-height `components.html` iframe, adds the button to the chart's
+  frame and toggles `dark-base` on the page `<body>`; a MutationObserver re-adds
+  the button if Streamlit re-renders the chart. The choice is stored under the
+  same `localStorage` key as the city maps (all are same-origin), so it works in
+  both directions: verified that Dark on the macro map opens Chicago's map dark,
+  and Light on Chicago's map makes the macro map open light. If the chart
+  container is missing there is no button and the map stays light. It depends on
+  Streamlit's `stDeckGlJsonChart` test id (stable in 1.64, an internal name), so
+  re-check with `deploy-verify` on a Streamlit upgrade.
+- **Findings from the comparison and testing.** A white halo around the labels
+  (my first pick) smeared the letters at 14 px; the pill was crisp on both
+  themes, so it was used, with slightly larger label offsets so pills do not
+  touch their markers. Inverting only the zoom buttons' icon also inverted their
+  background (the glyph is the button's own image), so the whole zoom group is
+  inverted instead. At phone width the west-side "Los Angeles" pill was clipped,
+  so the fitted view is padded 12% on the west. `components.py` is served
+  stale by a running Streamlit after an edit (a known issue), so the server was
+  restarted from a clean tree before each check.
+- **Checked in a browser.** Desktop: the button is inside the frame with a 10 px
+  gap to the zoom controls; clicking flips the class, label, `aria-pressed`,
+  stored value, basemap filter and zoom styling, and does not touch the marker
+  canvas; the choice survives a reload; a real marker click in dark mode still
+  opens the city. Phone width (375 px): everything fits, no sideways scroll, all
+  four names fully visible. No exception on the page.
+- **Not done / limitations.** The surrounding Streamlit page stays light (deferred
+  while a custom theme is considered). The page keeps the `dark-base` class on
+  `<body>` after navigating to a city page (harmless: nothing there uses it) and
+  resets it when the macro page loads again. Not tested: widths between 375 and
+  1024 px, and the (i) attribution icon is only lightly restyled.
+
 ### 2026-09-20 - Dark Mode on the city maps (top-right button, persisted)
 
 - **Added a Dark Mode toggle to every city map, through the shared renderer
