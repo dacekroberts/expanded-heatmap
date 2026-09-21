@@ -31,6 +31,30 @@ because every candidate city has rail - there, **question 2 is the cheapest
 disqualifier and should run first**, and rail becomes a confirmation step. The
 2026-09-21 global screen ran rail first out of habit and wasted the step.
 
+## Evidence discipline - three rules that cost a day to learn
+
+**Build the exhaustive base before filtering.** Start from the full universe -
+the 2026-09-21 screen began with every country in the Mobility Database
+catalogue, 87 of them - so a candidate can be **ruled out but never missed by
+omission**. Istanbul, Sofia, Bucharest and Santiago all surfaced that way, and
+none was on the original Europe-and-East-Asia guess the screen started from.
+
+**A negative from one method is not a finding.** Positives are cheap to trust;
+a negative silently ends a line of inquiry, so it earns a second,
+differently-shaped probe before it is recorded. Re-testing the ruled-out group
+by **operator name across the whole catalogue with no country filter** - a
+different method from the country-then-guess passes - found Tokyo's Toei feed
+and Buenos Aires' SUBTE, both missed the first time. Mark a negative
+**ASSERTED** until two methods agree.
+
+**A pattern justifies deprioritising, never ruling out.** Germany, Italy,
+Sweden and Portugal were put in the "ruled out" tier as EU company registers -
+asserted from the regional pattern, **never probed for any of them** - while
+Berlin, Naples, Stockholm and Lisbon were simultaneously being rail-confirmed
+into the tier above. They sat in two tiers at once, and it was caught only by
+rebuilding the table by hand. If a country has not been probed, it stays in
+the running with an ASSERTED label on it.
+
 ### 1. Does urban rail exist, in DATA YOU CAN READ - which is not the same as a GTFS feed
 
 **Read this before touching the Mobility Database.** The 2026-09-21 global
@@ -92,16 +116,40 @@ All four happened in one day.
   a nested zip; Dubai's catalogue entry is an anonymous personal GitLab job
   artefact. Absent and broken are different findings.
 
-### 2. Does the country license businesses MUNICIPALLY, and publish it?
+### 2. Does the country record WHERE COMMERCE HAPPENS, or only where companies are REGISTERED?
 
-This is the biggest structural discriminator and it splits the world unevenly.
-North America and Australia: yes. Much of Europe: business registration is
-national, and address-level openness varies enormously.
+The biggest structural discriminator, and the sharp form of the question. An
+earlier version of this skill asked "does the country license businesses
+*municipally*", which is Canada's framing and mis-sorts half the world:
+municipal-vs-national turns out to be an unreliable *proxy* for the question
+that actually decides things.
 
-A country where registration is national but *open with addresses* (France's
-SIRENE is the candidate) is a different and possibly better shape - one source
-covering every city - but it is **not** the shape this project is built for,
-and the taxonomy and scoping would need rethinking rather than copying.
+A **company register** publishes a **registered office** - frequently an
+accountant's address or a holding company's mailbox. Mapping those produces a
+map of bookkeepers. Companies House, Australia's ABN, Japan's corporate-number
+system and most of the EU's registers are this, and they fail here however
+open they are.
+
+Four shapes qualify. Sort a candidate into one before going further:
+
+| Shape | Examples | Notes |
+|---|---|---|
+| **Municipal licence register** | US, Canada, **South Korea** (195 permit types) | The shape this project is built for |
+| **National establishment register** | **France** SIRET, **Mexico** DENUE, **Norway** `beliggenhetsadresse` | One source covering every city - see the caveat below |
+| **Premises field survey** | Montréal `locaux-commerciaux`, **Barcelona** `cens de locals` | Records what is on the street rather than who registered; arguably the best answer to this project's premise |
+| **Sector inspection register** | UK FSA food hygiene | **One bucket only** - Boston's shape, and a ceiling not a floor |
+
+**Look for the field name that proves it.** Norway's register keeps
+`beliggenhetsadresse` (location address) deliberately distinct from the
+registered business address; that distinction *is* the answer. France's
+`établissement` is not the same object as its `unité légale`.
+
+**The caveat on national registers.** One source covering every city is a
+different and possibly better shape, but it is **not** the shape this project
+is built for: scoping and taxonomy were both designed around per-city
+municipal registers, and a national register includes every office, depot and
+administrative site alongside the shopfronts. That is a design decision to take
+before a profile, not a fact to discover during one.
 
 ### 3. What portal software, and does it refuse automated fetches?
 
