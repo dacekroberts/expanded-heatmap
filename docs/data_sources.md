@@ -127,12 +127,13 @@ user indemnifies the city for claims arising from their use of it.
 | **NYS retail food (`9a8c-vfzj`), NYS salons (`y3u4-jbgh`)** | The datasets declare no licence field, but the portal's "OPEN-NY Terms of Use" (dataset `77gx-ii52`, last modified 2013-03-08) is explicit: "At their core, the OPEN-NY Terms of Service are among the least restrictive of any terms of service … The OPEN-NY Terms of Service do **not** contain restrictions requiring members of the public to use attribution, to re-post the license terms with any re-uses of the data, to impose share-alike or technical restrictions, nor require the public to obtain pre-approval before re-use of the data." And: "So long as you are not doing anything malicious with NYS data, you may use it as you wish, subject to no other requirements." Conditions: lawful use; the State may require you in writing to stop displaying its content if it believes you are in breach. |
 | **Chicago businesses (`r5kz-chrr`), Chicago boundary (`qqq8-j68g`)** | Reuse and derivative applications are contemplated, but **conditionally** — see the required notice below. The city "may require a user of this data to terminate any and all display, distribution or other use … for any reason", reserves all intellectual-property rights, and requires the user to indemnify it. |
 
+| **NYC DOHMH (`43nn-pn8j`), NYC DCWP (`w7w3-xahh`), NYC boroughs (`gthc-hcne`)** | **The absent licence field is required by law, not an oversight.** NYC's Open Data Technical Standards Manual states that Local Law 11 of 2012 "requires that data sets must be available **without registration requirement, license requirement, or usage restrictions**". The city therefore cannot attach a licence to these datasets. The "All Rights Reserved" notice in the nyc.gov footer covers nyc.gov's own website content, not datasets published under the Open Data Law. One condition does attach — see the notice below. |
+
 ### Still not established
 
 | Source | Status |
 |---|---|
-| **NYC DOHMH (`43nn-pn8j`), NYC DCWP (`w7w3-xahh`), NYC boroughs (`gthc-hcne`)** | **The one genuinely open question.** These declare no licence field, NYC Open Data's only "Terms of use" link points at the general nyc.gov terms, and those terms are a website copyright notice that runs the other way: materials "displayed on NYC.gov … are the property of the City of New York. All rights are reserved." Publication is mandated by NYC's Open Data Law (Local Law 11 of 2012), which compels release but is not a licence grant. Whether US law treats these factual records as copyrightable at all is a legal question this project is not in a position to answer. **Resolve by asking NYC Open Data directly** (`opendata@cityofnewyork.us` route via their contact page) before publishing New York. |
-| **US Census bulk geocoder** | Terms page not read. A US federal government work, used only to derive coordinates stored in this project's own outputs. Low priority. |
+| **US Census bulk geocoder** | Terms page not read. A US federal government work, used only to derive coordinates stored in this project's own outputs. Low priority, and the only item left unread.
 
 Note the shape of this. **The business registries are mostly permissive and the
 transit feeds are mostly not** — and the two are inverted within Los Angeles,
@@ -155,19 +156,24 @@ leaves it empty, pointing to its developer terms instead.
 | **CTA** | Permitted: "use, reproduce, distribute, display, process and create derivative works" | Optional but encouraged: "Data provided by Chicago Transit Authority", "Data provided by CTA" or "Powered by CTA data" | **Purpose-limited** — the licence is granted to "assist mass transit riders or promote public transportation"; may not sell CTA Data separate from the application; may not imply affiliation or endorsement |
 | **MTA** (New York) | "Our data feeds are free to use." No API key needed for the static subway feed | Not specified for the GTFS data | Logos, maps and symbols need a separate licence application (free of charge but must be applied for) |
 
-**Two of these need a judgment call rather than just a notice**, and both are
-recorded here rather than assumed away:
+**Two of these needed a judgment call rather than just a notice. Both were
+decided by the project owner on 2026-09-21**, and the reasoning is recorded so
+the position is a stated one rather than an assumption:
 
-- **LA Metro** forbids modifying the Transport Information, and this project
-  redraws its rail alignment from `shapes.txt` rather than reproducing the
-  feed. Whether redrawing geometry is "modifying" it or is an ordinary
-  derivative display is not obvious from the text. This is the tightest
-  licence in the project.
+- **LA Metro** forbids modifying the "Transport Information". **Decided: this
+  project does not modify it.** The rail alignment is drawn from the feed's
+  own `shapes.txt` geometry and displayed as that line; nothing in the
+  transport information is altered, augmented or misrepresented. The clause
+  reads as protecting against passing off changed schedule or route data as
+  Metro's, which is not what happens here. Metro is credited as the provider
+  per the notice below. This remains the tightest licence in the project, so
+  revisit it if Metro clarifies the clause.
 - **CTA**'s licence is granted for assisting riders or promoting public
-  transport. This project maps commercial density around stations — adjacent
-  to that purpose, but it is an analysis and portfolio piece, not a rider
-  tool. Worth deciding deliberately rather than reading the clause
-  generously.
+  transport. **Decided: the project falls within that purpose.** It shows
+  people in the city what businesses are near their station, which is
+  rider-facing information about using the system, not merely an abstract
+  analysis. It is also not sold, not advertising, and claims no affiliation —
+  the clauses the purpose limitation sits beside.
 
 ### Basemap tiles — one active compliance item
 
@@ -235,7 +241,23 @@ provider of the transit information and must not claim ownership of it. No
 exact wording is prescribed; "Rail alignment data provided by LA Metro" would
 meet the stated requirement.
 
-**5. CTA — encouraged, not required.** If credited, use one of CTA's own
+**5. New York City — conditional, and largely already met.** Local Law 11
+forbids licence requirements, but the Technical Standards Manual reserves one
+condition: "DoITT may require third party entities such as application
+developers to explicitly identify the **source, version, and modifications**
+made to a public data set" where it is "publicly re-publish[ed] … elsewhere or
+incorporate[d] … into an application."
+
+This project already produces all three, which is a good argument for
+surfacing both documents rather than only one:
+
+- **source** — this file, with endpoint and download filter per dataset;
+- **version** — the retrieval date per source, and `AS_OF_DATE` for the
+  snapshot-based feeds;
+- **modifications** — `excluded_categories.md`, which is precisely a
+  statement of what was removed and why.
+
+**6. CTA — encouraged, not required.** If credited, use one of CTA's own
 forms: "Data provided by Chicago Transit Authority", "Data provided by CTA",
 or "Powered by CTA data".
 
@@ -247,16 +269,25 @@ pages' prose: naming each business registry's publishing agency.
 1. ~~Read Chicago's data terms of use~~ — **done 2026-09-21**, and it produced
    a mandatory notice (above).
 2. ~~Read the Open NY Terms of Use document~~ — **done**, explicitly permissive.
-3. **Establish the reuse position for NYC Open Data**, which declares no
-   licence and whose general terms reserve all rights. Needs a direct enquiry.
-   **The one remaining substantive unknown.**
+3. ~~Establish the reuse position for NYC Open Data~~ — **done**. Local Law 11
+   of 2012 forbids licence requirements and usage restrictions on NYC open
+   data, so the missing licence field is compliance, not an omission. One
+   condition attaches (identify source, version and modifications), which this
+   project already satisfies in substance.
 4. ~~Check the five GTFS feeds' terms~~ — **done**, and three of the five carry
    conditions worth acting on.
-5. **Display the required notices** (above) — blocks publishing, and is part
-   of the same app job as surfacing this page.
-6. **Decide the tile provider deliberately**, given that OSM's tile service is
+5. ~~Decide LA Metro's "modification" clause and CTA's purpose limitation~~ —
+   **decided 2026-09-21**, see the notes under the GTFS table.
+6. **Display the required notices** (above) — the one thing that still blocks
+   publishing, and part of the same app job as surfacing this page.
+7. **Decide the tile provider deliberately**, given that OSM's tile service is
    explicitly best-effort with no SLA.
-7. Optionally, read the Census geocoder's terms.
+8. Optionally, read the Census geocoder's terms — the only source left unread.
+
+**Where this leaves the project:** every source's position is now established
+except the Census geocoder, and nothing found forbids what this project does.
+What remains is not a permission question but an implementation one — four
+notices to display before the site goes public.
 
 ## Gaps
 

@@ -92,16 +92,16 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     published". Part of the same app job as surfacing the two doc pages, and
     it **blocks the public deploy** - publishing without them breaches terms
     this project has now read.
-  - [ ] **Establish NYC Open Data's reuse position** - the one source whose
-    terms could not be established. It declares no licence and the general
-    nyc.gov terms reserve all rights. Needs a direct enquiry to NYC Open Data,
-    and it covers three datasets including New York's food-service backbone.
-  - [ ] **Decide whether LA Metro's GTFS terms permit what this project does.**
-    They forbid modifying the "Transport Information"; the project redraws its
-    rail alignment from `shapes.txt`. Tightest licence in the project.
-  - [ ] **Decide whether CTA's purpose limitation fits.** Its licence is for
-    assisting riders or promoting public transport; this is an analysis and
-    portfolio map.
+  - [x] **NYC Open Data's reuse position** - resolved 2026-09-21 from the
+    primary source. Local Law 11 of 2012 "requires that data sets must be
+    available without registration requirement, license requirement, or usage
+    restrictions", so the absent licence field is compliance rather than an
+    omission. One condition attaches (identify source, version and
+    modifications when republishing), which this project already satisfies in
+    substance via `data_sources.md` and `excluded_categories.md`.
+  - [x] **LA Metro's "modification" clause and CTA's purpose limitation** -
+    both decided 2026-09-21 by the project owner; reasoning recorded in
+    `docs/data_sources.md` and `DECISIONS.md`.
 - [ ] **Find San Francisco's boundary-layer endpoint.** It is recorded nowhere,
   and the file is gitignored, so that city cannot currently be rebuilt from
   scratch (surfaced while writing `docs/data_sources.md`).

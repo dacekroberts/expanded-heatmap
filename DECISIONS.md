@@ -14,6 +14,56 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Licence review closed: every source established but one
+
+- **Source-by-source review of all 19 inputs** (8 business registries, 5 GTFS
+  feeds, 5 boundary layers, the geocoder) recorded in
+  `docs/data_sources.md`. The working assumption going in - that a government
+  open-data portal implies permissive terms - did not survive: terms ranged
+  from public-domain dedications to a feed that forbids modifying its data,
+  and the two extremes are the *same city* (Los Angeles' business registry is
+  CC0; its GTFS is the tightest licence in the project).
+- **New York City: the absent licence is required by law, not an oversight.**
+  Its three datasets declare no licence, and the only terms link on the portal
+  points at the general nyc.gov footer, which reserves all rights - so the
+  first reading was that no reuse grant existed. The primary source settles it
+  the other way: NYC's Open Data Technical Standards Manual states that Local
+  Law 11 of 2012 "requires that data sets must be available without
+  registration requirement, license requirement, or usage restrictions". The
+  city cannot attach a licence. The nyc.gov "All Rights Reserved" notice
+  covers that website's own content, not datasets published under the Open
+  Data Law. One condition does attach: DoITT "may require third party entities
+  such as application developers to explicitly identify the source, version,
+  and modifications made to a public data set" when republishing - which this
+  project already produces (`data_sources.md` for source and version,
+  `excluded_categories.md` for modifications).
+- **Two clauses were judgment calls, decided by the project owner** after
+  being raised rather than read generously:
+  - **LA Metro forbids modifying the "Transport Information".** Decided: this
+    project does not modify it. The alignment is drawn from the feed's own
+    `shapes.txt` and displayed as that line; nothing is altered, augmented or
+    misrepresented, and the clause reads as protecting against passing off
+    changed route or schedule data as Metro's. Revisit if Metro clarifies.
+  - **CTA licenses its data to "assist mass transit riders or promote public
+    transportation".** Decided: the project falls within that purpose - it
+    shows people what businesses are near their station, which is
+    rider-facing information about using the system. It is also not sold, not
+    advertising, and claims no affiliation, which are the clauses the purpose
+    limitation sits beside.
+- **The operative finding is four notices the site must display**, now listed
+  with exact wording in `docs/data_sources.md`. OpenStreetMap's is already
+  satisfied by the maps' tile attribution; Chicago's verbatim disclaimer,
+  SFMTA's permission notice and an acknowledgement of LA Metro as provider are
+  not yet shown. Keeping the OSM attribution is now a `CLAUDE.md` invariant,
+  including the point that changing tile provider swaps that attribution
+  rather than removing it.
+- **Only the Census geocoder's terms remain unread**, and it is used only to
+  derive coordinates into this project's own outputs.
+- **What this changes about the deploy:** the remaining licence work is no
+  longer a permission question but an implementation one - display four
+  notices - which is why it was folded into the same deferred app job as
+  surfacing `excluded_categories.md` and `data_sources.md`.
+
 ### 2026-09-21 - The legend collapses itself when the frame is too narrow for the map
 
 - **Found by the `deploy-verify` agent**, not by looking at a map at desktop
