@@ -14,6 +14,55 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Philadelphia: ask for permission, stay up on a reasoned position meanwhile
+
+- **The owner's decision**, taken after reading the prohibition in the City's
+  incorporated Terms of Use: **ask the City for written permission, and keep
+  the Philadelphia map live under a reasoned position while that is
+  outstanding.** Both halves matter, and the second is only defensible because
+  of the first and because the footer already discloses the question.
+- **The reasoned position, stated so it can be judged rather than assumed.**
+  The "City of Philadelphia License" is the dataset-specific instrument and
+  contains no prohibition on reuse. The phila.gov Terms of Use, which the
+  dataset page incorporates by reference, are drafted from beginning to end for
+  web pages: they permit residents "to copy electronically and to print single
+  pages from the Website" and require that pages be shared "exactly as
+  presented on the Website". That language cannot sensibly be applied to a CSV
+  or a GeoJSON feed, and the prohibition sits in the same paragraph as the
+  permission it qualifies. Alongside it: the City Limits dataset is marked
+  "Usage: Public use; Free", and the Open Data Program was established by
+  executive order in 2012 for public reuse. **On that reading the dataset
+  licence governs and the map is permitted.**
+- **What makes this a position rather than a conclusion.** It is a reading of
+  an ambiguous instrument, reached by the party that benefits from it. The
+  project does not claim the City agrees, does not claim a request is
+  outstanding until one is sent, and does not treat silence as consent. The
+  footer names Philadelphia, quotes the prohibition, and says the question "has
+  not been resolved in this project's favour" - which stays true under this
+  position.
+- **The request is drafted but NOT SENT**, at
+  `docs/licenses/phila-permission-request.md`. It goes to `ligisteam@phila.gov`,
+  the maintainer contact on the L&I Business Licenses dataset, and asks the two
+  questions that actually decide it: whether the phila.gov Terms of Use apply
+  to OpenDataPhilly datasets at all, and if they do, whether the City will
+  permit this non-commercial use in writing. It describes exactly what the
+  project does with the data - filters, classifies, drops non-storefronts,
+  publishes a derived map with trade names at mapped locations, commits the
+  generated output to a public repository - because a permission granted
+  against a vague description would be worth little. It commits in the letter
+  itself to removing Philadelphia promptly if the answer is no.
+  Drafted with placeholders rather than the owner's name, email and links:
+  those are the owner's to fill in, and this file is in a public repository.
+- **Sending it is the owner's to do, not this project's.** Correspondence on
+  someone's behalf is theirs to send.
+- **What happens on each reply is written down in advance**, in that same file,
+  so the answer does not have to be re-litigated under time pressure: on
+  permission, the footer clause loses its only live subject and comes out
+  entirely; on refusal, Philadelphia's page, `cities.py` entry,
+  `outputs/philadelphia/` and macro-map marker all go, and the remaining
+  eastern cities' label offsets need re-checking at 854 and 1200 px because
+  removing a marker moves `fit_view`'s bounds.
+
 ### 2026-09-21 - The three licence questions, read: two close, one gets worse
 
 - **The framing they were recorded under was wrong, and that is the finding.**

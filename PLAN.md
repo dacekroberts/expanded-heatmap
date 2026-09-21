@@ -585,9 +585,22 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     Data Program established by executive order in 2012 whose purpose is
     public reuse, and beside a City boundary dataset marked "Usage: Public
     use; Free" - it does. **This project has NOT resolved it in its own
-    favour.** The options are to ask the City for written permission, to
-    remove Philadelphia, or to record a reasoned position that the dataset
-    licence governs; the owner decides.
+    favour.** **DECIDED 2026-09-21: ask for written permission, and keep the
+    map live under a reasoned position while that is outstanding** - the
+    dataset licence governs, the Terms of Use are web-page terms, and the
+    footer discloses the question either way. See `DECISIONS.md` for the
+    position and for what makes it a position rather than a conclusion.
+    - [ ] **Send the drafted request.** Written and waiting at
+      `docs/licenses/phila-permission-request.md`, addressed to
+      `ligisteam@phila.gov`, with placeholders for the owner's name, email and
+      links. Sending it is the owner's to do. **Nothing in this project may
+      claim a request is outstanding until it has actually been sent**, and
+      silence must never harden into a claim that permission was given.
+    - [ ] On a reply, follow the branch already written into that file: on
+      permission the footer clause loses its only live subject and comes out
+      entirely; on refusal Philadelphia comes off the site, and the remaining
+      eastern cities' macro-map label offsets need re-checking at 854 and
+      1200 px, because removing a marker moves `fit_view`'s bounds.
 - [x] **Repo visibility - DECIDED 2026-09-21: it stays PUBLIC**, accepting a
   real but unlikely residual. Nothing found in any licence forbids what the
   project displays, the browsable code is much of a portfolio's value, and
