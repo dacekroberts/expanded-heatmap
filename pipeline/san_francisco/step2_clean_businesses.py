@@ -19,12 +19,19 @@ import re
 import sys
 from pathlib import Path
 
+import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline.residence import flag_home_based, report  # noqa: E402
 from pipeline.san_francisco.config import (  # noqa: E402
+    ASSESSOR_ROLL_CSV,
     BUSINESSES_RAW_CSV,
     BUSINESSES_CLEAN_CSV,
+    CRS_GEOGRAPHIC,
+    CRS_PROJECTED,
+    PARCEL_RESIDENTIAL,
+    PARCEL_TOLERANCE_M,
     SAN_FRANCISCO_BBOX,
     NAICS_EXCLUDE_CODES,
     TAXONOMY_SYSTEM,
@@ -33,6 +40,33 @@ from pipeline.san_francisco.config import (  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # noqa: E402
 
 POINT_PATTERN = re.compile(r"POINT \(([-\d.]+) ([-\d.]+)\)")
+# the_geom arrives as a string in the roll's CSV export; pull the pair out
+# rather than depending on which of WKT or GeoJSON Socrata emits.
+COORD_PATTERN = re.compile(r"(-?\d+\.\d+)[ ,]+(-?\d+\.\d+)")
+
+
+def parcel_points():
+    """The Assessor roll as projected points, one row per block+lot.
+
+    Where an address carries several roll rows (condominiums), the one with
+    the largest homeowner's exemption is kept, so the join errs toward
+    FINDING an owner-occupied home rather than hiding one.
+    """
+    roll = pd.read_csv(ASSESSOR_ROLL_CSV, dtype=str, low_memory=False)
+    coord = roll["the_geom"].astype(str).str.extract(COORD_PATTERN)
+    roll["lon"] = pd.to_numeric(coord[0], errors="coerce")
+    roll["lat"] = pd.to_numeric(coord[1], errors="coerce")
+    roll = roll.dropna(subset=["lon", "lat"])
+    roll["exemption"] = pd.to_numeric(
+        roll["homeowner_exemption_value"], errors="coerce").fillna(0)
+    roll = roll.sort_values("exemption", ascending=False).drop_duplicates(
+        subset=["block", "lot"])
+    print(f"  assessor roll: {len(roll):,} parcels with a point")
+    return gpd.GeoDataFrame(
+        roll[["use_definition", "number_of_units", "exemption"]],
+        geometry=gpd.points_from_xy(roll["lon"], roll["lat"]),
+        crs=CRS_GEOGRAPHIC,
+    ).to_crs(CRS_PROJECTED)
 
 
 def parse_point(value):
@@ -112,6 +146,47 @@ def main():
     if blank_name.any():
         print(f"Filling {blank_name.sum()} blank dba_name(s) from ownership_name")
         df.loc[blank_name, "business_name"] = df.loc[blank_name, "ownership_name"]
+
+    # --- Home-based businesses, against the Assessor's own classification ----
+    # A scope filter first: a caterer or hairdresser working from the house
+    # they own is not a storefront. That it also removes this city's largest
+    # personal-name exposure is the second reason, not the first - the same
+    # framing as the 812990 exclusion above.
+    #
+    # Both conditions are required. Land use alone flags 12.4% of person-like
+    # pins here, and this city's largest category under its pins is
+    # Multi-Family Residential (5,733) because San Francisco puts ground-floor
+    # retail in residential buildings. See pipeline/residence.py.
+    if ASSESSOR_ROLL_CSV.exists():
+        before = len(df)
+        pts = gpd.GeoDataFrame(
+            df, geometry=gpd.points_from_xy(df["longitude"], df["latitude"]),
+            crs=CRS_GEOGRAPHIC).to_crs(CRS_PROJECTED)
+        joined = gpd.sjoin_nearest(
+            pts, parcel_points(), how="left",
+            max_distance=PARCEL_TOLERANCE_M, distance_col="parcel_dist_m")
+        # sjoin_nearest emits a row per tie; keep one per business.
+        joined = joined[~joined.index.duplicated(keep="first")]
+        matched = joined["use_definition"].notna()
+        print(f"  parcel match within {PARCEL_TOLERANCE_M:.0f} m: "
+              f"{int(matched.sum()):,} of {len(joined):,} "
+              f"({100 * matched.mean():.1f}%), median "
+              f"{joined['parcel_dist_m'].median():.1f} m")
+
+        at_home = flag_home_based(
+            joined["business_name"],
+            residential=joined["use_definition"].isin(PARCEL_RESIDENTIAL),
+            owner_occupied=joined["exemption"].fillna(0) > 0,
+        )
+        report("person-like name + single-family parcel + homeowner's exemption",
+               at_home, before,
+               extra={"NAICS": joined[value_column],
+                      "use_definition": joined["use_definition"]})
+        df = df[~at_home.reindex(df.index, fill_value=False)]
+    else:
+        print(f"  WARNING: no assessor roll at {ASSESSOR_ROLL_CSV.name}; the "
+              f"home-business filter did NOT run. Run "
+              f"pipeline/san_francisco/fetch_sources.py")
 
     df = df.reset_index(drop=True)
     df["record_id"] = df.index.astype(str)

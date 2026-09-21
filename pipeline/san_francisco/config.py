@@ -169,3 +169,44 @@ SAN_FRANCISCO_BBOX = {
     "lon_min": -122.52,
     "lon_max": -122.35,
 }
+
+# --- Assessor property roll, for the home-business filter -------------------
+# Measured 2026-09-21: 217 pins (1.19%) displayed a person's name at a parcel
+# the Assessor calls Single Family Residential *and* which claims a
+# homeowner's exemption - California's homestead analogue, granted only on an
+# owner-occupied primary residence. Mostly home caterers and home
+# beauty/nail/pet-care businesses (NAICS 722320, 812112, 812910, 812199) -
+# codes that are entirely legitimate for a real storefront, which is why the
+# 812990 exclusion above could not reach them. See DECISIONS.md.
+#
+# NOTE THE DOMAIN. `data.sf.gov` works; `data.sfgov.org` returns 403 on
+# `/resource/` while `/api/views/` succeeds, which makes the dataset look
+# unavailable when it is not.
+ASSESSOR_ROLL_CSV = DATA_RAW / "sf_assessor_roll.csv"
+ASSESSOR_ROLL_URL = "https://data.sf.gov/resource/wv5m-vpq2.csv"
+ASSESSOR_ROLL_YEAR = "2025"
+# `the_geom` is a POINT per parcel, which is what makes this a spatial join
+# instead of an address join. An address join reaches only 43.8%, because
+# `property_location` is a fixed-width composite
+# ('0000 2801 LEAVENWORTH         ST0000') and because stripping direction
+# words destroys "North Point" and "South Van Ness" on both sides. 43.8% is
+# not enough to filter on: it would remove home businesses only where the
+# address text happened to match, which is arbitrary but looks complete.
+ASSESSOR_ROLL_PARAMS = {
+    "$select": ("block, lot, use_definition, number_of_units, "
+                "homeowner_exemption_value, the_geom"),
+    "$where": f"closed_roll_year = '{ASSESSOR_ROLL_YEAR}' "
+              "AND the_geom IS NOT NULL",
+    "$limit": 400000,
+}
+
+# Purely residential use_definitions. "Multi-Family Residential" is
+# DELIBERATELY ABSENT: it is the largest category under this city's pins
+# (5,733) because San Francisco puts ground-floor retail in residential
+# buildings, exactly like Philadelphia's apartment parcels and New York's
+# multi-family lots. Including it would delete real storefronts.
+PARCEL_RESIDENTIAL = frozenset({"Single Family Residential"})
+
+# Nearest-parcel tolerance for the spatial join. At 40 m the match rate is
+# 93.4% with a median distance of 1.4 m.
+PARCEL_TOLERANCE_M = 40.0
