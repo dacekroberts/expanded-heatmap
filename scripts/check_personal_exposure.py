@@ -64,6 +64,18 @@ REGISTRIES = {
     "new_york": dict(raw=None, trade=None, owner=None,
                      processed="businesses_geocoded.csv",
                      address=("address", "unit")),
+    # Philadelphia likewise never loads a registrant-name column (its step 2
+    # asserts six of them stay absent), and its business_name is never blank,
+    # so there is no fallback pair to join against either. What it adds that no
+    # other city has is `legalentitytype`: Individual vs a corporate entity,
+    # recorded by the registry itself. That is a STRUCTURAL signal, so here the
+    # person-like-name regex is the cross-check and this column is the measure
+    # - the other way round from every city above.
+    "philadelphia": dict(raw=None, trade=None, owner=None,
+                         processed="businesses_clean.csv",
+                         address=("address", "unit_type", "unit_num"),
+                         entity_type="legalentitytype",
+                         entity_individual="Individual"),
 }
 
 # Unit designators that suggest a residence, as opposed to a commercial suite.
@@ -89,6 +101,99 @@ ORG = re.compile(
 NOT_A_NAME = re.compile(r"[&/,\d\.]")
 PERSON = re.compile(r"^[A-Z][A-Za-z'\-]{1,}(?:\s+[A-Z])?\s+[A-Z][A-Za-z'\-]{1,}$")
 UNIT = re.compile(r"\b(APT|UNIT|STE|SUITE|SPC|#)\b")
+
+# --- Contact details -------------------------------------------------------
+# A different exposure from a name, and a worse one: a name at a commercial
+# address identifies a business, while an email address or mobile number is a
+# direct line to a person. Added 2026-09-21 after a repo grep - not this script
+# - found a Gmail address published as a New York pin's business name. Neither
+# test above could have caught it: an email fails PERSON and contains an "@",
+# and NOT_A_NAME does not list "@", so it was reported as clean.
+EMAIL = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}")
+# Conservative on purpose: a 10-digit run with separators, not any long number
+# (a licence number or a street number must not match).
+PHONE = re.compile(r"(?:\+?1[ .\-]?)?\(?\d{3}\)?[ .\-]\d{3}[ .\-]\d{4}")
+# "C/O JOHN SMITH" names a person who is not the business. The separator is
+# MANDATORY: an optional one (`C[/.]?O`) matches the bare abbreviation "CO" and
+# flagged every "SAUSAGE CO" and "TYPEWRITER CO" in the project - 567 false
+# positives across five cities before this was tightened.
+CARE_OF = re.compile(r"\bC[/.]O\b|\bCARE\s+OF\b|\bATTN\b")
+
+# "Andrew Polhemus (Molto Bene Ravioli Co)" - a registry that formats
+# business_name as "LEGAL NAME (TRADE NAME)" publishes the licence holder's own
+# name whenever the legal entity is an individual. PERSON cannot match it (the
+# parenthesis and any digits fail NOT_A_NAME), so this form is invisible to
+# every test above while displaying a person's name in full.
+PERSON_THEN_TRADE = re.compile(
+    r"^([A-Z][A-Za-z'\-]{1,}(?:\s+[A-Z]\.?)?\s+[A-Z][A-Za-z'\-]{1,})\s*\(")
+
+# Registries record a licence holder surname-first, and NOT_A_NAME's comma rule
+# treats that as evidence the string is NOT a person - backwards for exactly
+# this form. Reported as its own number rather than folded into the PERSON
+# count, so the older figures stay comparable across entries in DECISIONS.md.
+PERSON_COMMA = re.compile(
+    r"^[A-Z][A-Za-z'\-]{1,},\s*[A-Z][A-Za-z'\-]{1,}(?:\s+[A-Z]\.?)?$")
+
+
+def mask_email(addr):
+    local, _, domain = addr.partition("@")
+    keep = local[:2] if len(local) > 2 else local[:1]
+    return f"{keep}{'*' * max(len(local) - len(keep), 1)}@{domain}"
+
+
+def mask_phone(num):
+    digits = re.sub(r"\D", "", num)
+    return f"***-***-{digits[-4:]}" if len(digits) >= 4 else "***"
+
+
+def report_contact_details(rows, names):
+    """Contact details and surname-first names in the DISPLAYED pin text.
+    Prints masked values: the point is to find and count them, not reprint
+    them."""
+    emails, phones, commas, care_of = [], [], [], []
+    for row, name in zip(rows, names):
+        category = html.unescape(str(row[3])) if len(row) > 3 else ""
+        for m in EMAIL.findall(name):
+            emails.append((mask_email(m), category))
+        # An email's digits must not also be counted as a phone number.
+        stripped = EMAIL.sub("", name)
+        for m in PHONE.findall(stripped):
+            phones.append((mask_phone(m), category))
+        if CARE_OF.search(name.upper()):
+            care_of.append((name, category))
+        if PERSON_COMMA.match(name) and not ORG.search(name.upper()):
+            commas.append((name, category))
+
+    print(f"  contact details in the displayed name: {len(emails)} email(s), "
+          f"{len(phones)} phone number(s), {len(care_of)} 'c/o' marker(s)")
+    for masked, cat in emails:
+        print(f"    EMAIL {masked}  [{cat}]")
+    for masked, cat in phones:
+        print(f"    PHONE {masked}  [{cat}]")
+    for name, cat in care_of[:5]:
+        print(f"    C/O   {name!r}  [{cat}]")
+
+    print(f"  surname-first names (\"Smith, John\"): {len(commas):,} "
+          f"({100 * len(commas) / max(len(rows), 1):.1f}%)  "
+          f"[NOT counted by the person-name heuristic - its comma rule "
+          f"excludes them]")
+    if commas:
+        by_class = pd.Series([c for _, c in commas]).value_counts().head(5)
+        print(f"    their top classifications: {by_class.to_dict()}")
+
+    composite = []
+    for row, name in zip(rows, names):
+        m = PERSON_THEN_TRADE.match(name)
+        if m and not ORG.search(m.group(1).upper()):
+            composite.append((m.group(1), html.unescape(str(row[3]))
+                              if len(row) > 3 else ""))
+    print(f"  person's name followed by a trade name in brackets: "
+          f"{len(composite):,} ({100 * len(composite) / max(len(rows), 1):.1f}%)"
+          f"  [also invisible to the heuristic]")
+    if composite:
+        by_class = pd.Series([c for _, c in composite]).value_counts().head(5)
+        print(f"    their top classifications: {by_class.to_dict()}")
+    return len(emails) + len(phones), len(commas) + len(composite)
 
 
 def pins(slug):
@@ -132,6 +237,8 @@ def check(slug):
     elif raw_path is not None:
         print(f"  raw file missing ({raw_path.name}); skipping the fallback join")
 
+    report_contact_details(rows, names)
+
     personal = [(html.unescape(r[2]).strip(), html.unescape(str(r[3]))) for r in rows
                 if looks_personal(html.unescape(r[2]).strip())]
     print(f"  pins whose name looks like a person: {len(personal):,} "
@@ -141,6 +248,27 @@ def check(slug):
         print(f"  their top classifications: {by_class.to_dict()}")
 
     proc = ROOT / "data" / slug / "processed" / spec["processed"]
+
+    # Where the registry records the entity type itself, report that first: it
+    # is what the publisher asserts, not what a regex guesses.
+    if spec.get("entity_type") and proc.exists():
+        d = pd.read_csv(proc, dtype=str, low_memory=False)
+        col, individual = spec["entity_type"], spec["entity_individual"]
+        if col in d.columns:
+            is_individual = d[col].fillna("").str.strip() == individual
+            print(f"  {col}: {int(is_individual.sum()):,} of {len(d):,} mapped "
+                  f"rows are {individual!r} "
+                  f"({100 * is_individual.mean():.1f}%)  [structural]")
+            # The overlap is the population that actually matters: a row the
+            # registry calls an individual AND whose displayed name reads as a
+            # person's, rather than a trade name an individual registered.
+            want = {n.upper() for n, _ in personal}
+            named = d["business_name"].fillna("").str.strip().str.upper().isin(want)
+            both = is_individual & named
+            print(f"    {individual} AND a person-like displayed name: "
+                  f"{int(both.sum()):,} of {len(rows):,} pins "
+                  f"({100 * int(both.sum()) / len(rows):.2f}%)")
+
     if personal and spec["address"] and proc.exists():
         d = pd.read_csv(proc, dtype=str, low_memory=False)
         cols = [c for c in spec["address"] if c in d.columns]

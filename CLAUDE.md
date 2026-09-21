@@ -93,6 +93,16 @@ needed four sources; Philadelphia's is 79% landlord registrations).
   batch. Skip it entirely for pipeline-only work (taxonomies, step 2 filters,
   exclusions) and doc edits - `drift_check.py`, a grep of `app/` for
   folium/geopandas/shapely/pyproj imports, and one browser render cover those.
+- **Write probe and scratch output to the session scratchpad directory, never
+  to the working directory or the home directory.** Step 0 research is mostly
+  `curl`/`requests` dumps, and `-o la.json` with no path writes wherever the
+  shell happens to be. The 2026-09-18 city screening left eight such files
+  (`la.json`, `phila_sample.json`, a saved 404, a 283 KB saved HTML page, a
+  file named `.json` that was HTML) sitting in the home directory until
+  2026-09-21. Give every probe an explicit path under the scratchpad, or under
+  a gitignored `data/<city>/raw/`. Nothing in this category is ever committed:
+  the findings belong in `docs/data_sources.md` and `docs/city_shortlist.md`,
+  which is where they can be trusted and the raw capture cannot.
 - Draft interpretive prose in chat before writing it to a file.
 
 ## Commands

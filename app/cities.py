@@ -67,4 +67,12 @@ CITIES = [
                  "Island Railway",
         "label": "left",
     },
+    {
+        "name": "Philadelphia",
+        "lat": 39.9526,
+        "lon": -75.1652,
+        "page": "pages/6_Philadelphia_Heatmap.py",
+        "blurb": "SEPTA Metro — the Market–Frankford and Broad Street Lines, "
+                 "plus the subway-surface and Girard Avenue trolleys",
+    },
 ]

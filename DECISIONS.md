@@ -14,6 +14,227 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - One published email address, and a gap in the exposure check
+
+- **Found exactly one email address published across all six maps**, in New
+  York: a DCWP "Tobacco Retail Dealer" pin whose registered business name *is*
+  a personal Gmail address, displayed at a mapped coordinate. Found while
+  grepping the repo for an unrelated reason, not by any check the project runs.
+- **`scripts/check_personal_exposure.py` could not have caught it.** It tests
+  whether a displayed name looks like a *person's name* and whether the address
+  carries a unit indicator. An email address matches neither test: it fails the
+  `PERSON` regex and contains an `@`, which `NOT_A_NAME` does not list. So the
+  check reported this city as clean on its own terms and was right to - the
+  terms were incomplete. Contact details are a different exposure from names,
+  and arguably a worse one: a name at a commercial address identifies a
+  business, while an email address is a direct line to a person.
+- **Counted first, across every city, before deciding anything**: 1 email and
+  0 phone numbers in 91,000 pins. So this is one row, not a pattern - which is
+  why it is recorded as its own decision rather than folded into a sweep.
+- **Decided: scrub contact details in shared code.** A displayed name holding
+  an email address or phone number is treated as a row with no usable public
+  trade name and dropped, the way a blank one would be - masking to
+  `JO***@GMAIL.COM` would still leak a partial. Implemented as
+  `drop_contact_details()` in `pipeline/map_common.py` and applied inside
+  `render_heatmap`, deliberately **not** in the step 2 of the city that
+  happened to have the problem: that is the one place every city's pins pass
+  through, so a city added later cannot reintroduce it by forgetting.
+- **It was 3 rows, not 1.** The first count came from scanning the rendered
+  pin arrays, which hold only the within-ring layer; two more sat in the
+  all-city toggle set. New York went from 44,361 to 44,360 within-ring pins and
+  62,444 to 62,441 available. Every other city dropped nothing, so the
+  shared-code placement cost five cities a re-render and changed none of them.
+- **Decided: keep New York's 161 surname-first names.** They are DCWP licence
+  holders - Newsstand 92, Tobacco Retail Dealer 35, Secondhand Dealer 16 -
+  trading at licensed commercial premises where the registry holds no separate
+  trade name, which is the situation San Diego's 903 sole proprietorships were
+  kept for. Removing them would delete real licensed businesses from an
+  already-thin Retail category. Recorded rather than actioned.
+- **Extended `scripts/check_personal_exposure.py` to screen four things it
+  could not see before**, at the project owner's instruction: contact details
+  (email, phone), surname-first names, a person's name followed by a trade name
+  in brackets, and `ATTN:`/`c/o` markers naming a person. Each is reported as
+  its own line rather than folded into the existing person-name percentage, so
+  the figures quoted in earlier entries stay comparable.
+- **The first version of the `c/o` pattern was wrong, and measuring caught
+  it.** `\bC[/.]?O\b` makes the separator optional, so it matched the bare
+  abbreviation "CO" and flagged 567 company names across five cities
+  ("ROMANIAN KOSHER SAUSAGE CO", "GRAMERCY TYPEWRITER CO"). Requiring the
+  separator took it to 6 genuine hits. A privacy check that cries wolf 567
+  times is worse than none, because the real hit is unfindable in the noise.
+
+### 2026-09-21 - Philadelphia built: two buckets, one registry, two station rules
+
+- **Built Philadelphia as the sixth city, and the first with only two of the
+  three buckets.** One registry (L&I Business Licenses via the Carto SQL API),
+  94 in-city SEPTA Metro stations across 4 drawn lines, 8,512 mapped sites -
+  Food service 7,485 and Retail 1,715 - from 9,200 downloaded rows. Rendered
+  map 1.19 MB.
+- **Personal services is absent, and no source exists to add.** Philadelphia
+  licenses no salon, barber, nail, cosmetology, massage or laundry business:
+  an `ILIKE` sweep across both Carto licence tables returns nothing.
+  Pennsylvania publishes professional licensees only as county aggregates
+  (`fwj2-whnj`, no addresses) and its PALS system answers one licence at a time
+  with no bulk export. **Decided: build the city and state the gap** on its
+  page and in `docs/excluded_categories.md` under what is *missing* rather than
+  *excluded*, because everything else on that page was a choice and this was
+  not. The alternative considered and rejected was skipping the city to keep
+  every built city at three buckets.
+- **The multi-source approach was attempted and failed, which is the finding.**
+  All four candidates were checked live and each is recorded in
+  `docs/data_sources.md` so the search is not repeated: PA Agriculture's food
+  inspections relay the city's own data (`organization_name` is "City of
+  Philadelphia"); the Commercial Activity License file - the general licence
+  every city business needs - has **0 of 528,413 active rows with geometry**,
+  no business address, and `licensetype` fixed at the single value "Activity";
+  `li_business_licenses` is a stale copy of the registry used (360,192 rows vs
+  435,143). So the `multi-source-city` skill's conclusion for this city was
+  "there is no second source", which is a valid answer to its Step 1.
+- **Two licence types were misread from their names, and sampling caught both.**
+  `Vendor - Motor Vehicle Sales` is not car dealers - it licenses vending
+  *from* a vehicle, and its holders are food trucks ("CHA CHA LUNCH TRUCK",
+  "FOOD TRUCK COLLECTIVE LLC"), so it is excluded as mobile rather than counted
+  as Retail. Conversely `Food Establishment, Retail Perm Location (Large)` is
+  not supermarkets only but the general-retail tier - Target, CVS, Dollar Tree,
+  Staples, Ross Dress For Less - which hold a food licence because they sell
+  packaged food, and are the only way this city's data sees a chain clothing or
+  office-supply store at all. All 50 active types now carry an explicit verdict
+  in `pipeline/taxonomies/phl_licensetype.py`.
+- **Excluded `Rental`, 79% of the file, as a scope error first.** 93,471
+  residential landlord registrations, on which the registry's business-name
+  field holds the owner's own name at their property with
+  `legalentitytype='Individual'`. Mapping active licences unfiltered would have
+  published ~94,000 individuals at their homes. Framed as scope (not
+  businesses, not storefronts) because that is the easier call to justify and
+  it fixes the privacy problem as a consequence - the same shape as the
+  project-wide NAICS 454 exclusion. `Limited Lodging Operator` (589) went with
+  it.
+- **Corrected a Step 0 measurement error: coverage is 97.6%, not 100%.** The
+  probe counted `the_geom IS NOT NULL` and got every row, but 218 rows hold an
+  *empty* point geometry, on which `ST_X`/`ST_Y` return NULL. **Decided: drop
+  them without a geocoding step.** The loss is not uniform - it takes 61 of the
+  75 newsstands - but geocoding cannot fix that bias, because 60 of those 61
+  carry no street address either; the 79 rows that are recoverable are 0.86% of
+  the file, which does not justify a geocoder, a cache and a step renumber.
+  Step 2 prints the drop by licence type so the bias is visible in every run
+  rather than only in this entry.
+- **Line scope: L, B, T and G; Regional Rail excluded.** M1 (Norristown High
+  Speed Line) and D1/D2 (routes 101/102) needed no decision - both begin at
+  69th Street in Upper Darby and have **zero** in-city stops. Regional Rail has
+  52 well-spaced in-city stations (857 m median) and was still excluded, to
+  match Chicago leaving out Metra and New York leaving out the LIRR and
+  Metro-North; SEPTA's own branding separates it from SEPTA Metro. It is the
+  obvious later addition, and needs no thinning if that call changes. The
+  rejected alternative was L + B alone (47 stations), which would have drawn
+  only two lines and left West Philadelphia and Girard Avenue blank.
+- **First city needing two station rules at once.** L and B are grade-separated
+  at 711 m and 681 m median spacing, so every in-city station is kept, as in
+  San Diego. T (five trolley branches) and G (Girard) are street-running at
+  134-137 m median with a 10th percentile of 17-19 m - San Francisco's shape -
+  so they take the four-filter thinning in `docs/sub_transit_line_filters.md`.
+  Result: 261 trolley stops to 90, T1-T5 keeping 13/14/15/16/17 of 38/29/39/46/42
+  and G 15 of 57. All 167 cut or out-of-city stops are documented in
+  `outputs/philadelphia/excluded_stations.csv`.
+- **Generalised filter 4 from routes to line groups, which changed the
+  result.** San Francisco's version force-keeps any stop shared by 2+ routes as
+  a transfer point; there, every route was its own line, so the two readings
+  were identical. In Philadelphia all five T branches share the Center City
+  tunnel and T4/T5 additionally share the whole Woodland Avenue segment, so the
+  route-level reading force-kept five consecutive stops inside 400 m and
+  quietly defeated the thinning. Group-level interchange (2+ of L/B/T/G) gives
+  6 real transfer points and drops T4/T5 from 20/21 kept to 16/17.
+- **The near-duplicate distance check earned its place.** It flagged
+  `Girard Av & Front St` 6.7 m from `Front-Girard` and `Girard Av & Broad St`
+  18.4 m from `Broad-Girard` - a trolley stop sitting on top of the
+  rapid-transit station it interchanges with, under names sharing no detectable
+  suffix pattern. Both are now hand-curated aliases, exactly the residue
+  `docs/sub_transit_line_filters.md` predicted would be left after the regex
+  pass.
+- **Deduplicated on address AND name, adjunct licences ranked last.** One
+  storefront can hold several licences, so there is one row per normalised
+  address + business name with the most specific licence deciding: 8,982 rows
+  to 8,512 sites. Of 317 adjunct rows (sidewalk cafe, streetery, outdoor
+  seating), 243 collapsed into the restaurant that also holds a primary licence
+  and 74 survive as the only licence at their site. All 8,512 fall inside the
+  city polygon.
+- **Display the trading name, not the licence holder.** This registry formats
+  `business_name` as "LEGAL NAME (TRADE NAME)", so where the legal entity is an
+  individual the raw field publishes their own name in full: "BRIAN WANG (FOUR
+  SEASON JUICE BAR #89)", "Andrew Polhemus (Molto Bene Ravioli Co)", and
+  "CVS PHARMACY INC (ATTN: JOANNE P. AMITRANO)" naming a corporate employee.
+  Step 2 now chooses the displayed name instead of copying it: prefer a
+  bracketed name that is neither a contact nor a person, else the text outside
+  the brackets, else the registered name as it stands. Rewrote 2,900 of 8,512
+  rows, **456 of which removed a licence holder's own name from a pin.** It is
+  also the better label - "AZAAN GROCERY STORE" beats "A AND A II INC" - which
+  is why the bracket is preferred rather than merely stripped.
+  - **A bare personal name with no alternative is still published** ("Amanda
+    Girard"): that is the trade name the owner registered, a deliberate public
+    commercial act, per the San Diego reasoning in `naics.py`.
+  - **The person-shape regex alone was not enough**, and getting it wrong was
+    instructive: "STARBUCKS CORPORATION" is two alphabetic words, so without an
+    organisation-token guard the rule classed it a person and preferred the
+    bracket. That inflated the rewrite rate before the guard was added.
+- **Privacy verdict: publish.** `scripts/check_personal_exposure.py` (with
+  Philadelphia added, and extended to read a structured entity-type column):
+  4,958 pins, no registrant-name fallback *possible* - six name-bearing columns
+  are never downloaded and step 2 asserts their absence, and `business_name` is
+  never blank in this registry. 296 pins (6.0%) read as a person's name and
+  **all sit in food-service categories**, i.e. premises that must be inspected,
+  with no catch-all sweeping in home-based sole traders. 1,270 of 8,512 rows
+  are `legalentitytype='Individual'` (14.9%), 190 pins are both Individual and
+  person-like (3.83%), and **0.00% sit at a residential unit indicator**.
+- **That person-like count went UP after the rename, from 207 to 296, and the
+  increase is honest rather than a regression.** A composite string like
+  "Brian Wang (…)" always displayed a person's name; the bracket simply
+  defeated the heuristic, which rejects any string containing punctuation.
+  Removing the bracket let the check see what was already on the map. The
+  measured exposure rose because the measurement improved, and the structural
+  facts did not move: no residential units, no registrant fallback, all
+  inspected premises.
+- **One blind spot named rather than closed:** the residence test only fires on
+  an `APT`/`FL`/`RM`/`#` indicator, so a sole trader at a *detached house* reads
+  as clean - which is part of why this city scores 0.00%. Two unused signals
+  could close it, both available here: `business_mailing_address` matching the
+  premises address (not currently downloaded), and parcel land-use via
+  `opa_account_num`. Logged as future work, not claimed as done.
+- **Wired `legalentitytype` into the exposure check as a general mechanism.**
+  Philadelphia is the first city whose registry records entity type
+  structurally, so for it the name heuristic is the cross-check and the
+  publisher's own field is the measure - the reverse of every city before it.
+  Added as `entity_type`/`entity_individual` keys in `REGISTRIES` so a later
+  city with the same signal needs no new code.
+- **Two licence questions raised and left open**, per the `multi-source-city`
+  skill's instruction not to read a clause generously: SEPTA's bar on using its
+  "trademarks and copyrighted materials for any commercial or profit-making
+  use" (the map uses its real line names and official `route_color` values, and
+  no logo or route-bullet artwork), and the "City of Philadelphia License",
+  which reserves all database rights, grants nothing explicitly, forbids
+  nothing explicitly and requires no notice. Neither blocks the build; both
+  should be settled before the public deploy. Philadelphia added **no new
+  mandatory notice**, so that count stays at four.
+
+### 2026-09-21 - Probe output belongs in the scratchpad, not the home directory
+
+- **Deleted eight Step 0 research captures from the home directory**, left
+  there by the 2026-09-18 city screening: `la.json`, `la_sample.json`,
+  `phila_sample.json` (raw WKB hex for geometry that turned out not to need
+  parsing), `phila_tables.json` (41 bytes of
+  `{"error":["system tables are forbidden"]}`), `phila_search.json` (HTML under
+  a `.json` name), and three saved OpenDataPhilly pages including a 404 and a
+  283 KB dataset listing.
+- **Decided not to integrate them into the repo.** They are raw API and HTML
+  captures - the category this project already gitignores as
+  `data/<city>/raw/` - and every finding in them is superseded and now recorded
+  properly in `docs/data_sources.md` and `docs/city_shortlist.md`. Committing a
+  saved 404 and a misnamed file to a public repository would be worse than
+  having nothing.
+- **Added the rule that prevents a repeat** to `CLAUDE.md`'s working rules and
+  the `add-city` skill's Step 0: every probe gets an explicit output path under
+  the session scratchpad or a gitignored raw folder, because `curl -o la.json`
+  writes wherever the shell happens to be. Two unrelated personal files in the
+  same directory were identified, left untouched, and deliberately not read.
+
 ### 2026-09-21 - Overview colour sweep: one real fix, two non-defects
 
 - **Swept the last hardcoded colours in `app/`.** All seven literals in

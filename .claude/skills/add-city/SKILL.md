@@ -56,6 +56,14 @@ Only proceed once all three are confirmed live. If a city fails, record the
 real reason (cite the endpoint and response) in `docs/city_shortlist.md` and
 a `DECISIONS.md` entry, and move to the next candidate.
 
+**Give every probe an explicit output path under the session scratchpad.** The
+commands above are `curl`/`requests` dumps, and `-o la.json` writes wherever
+the shell happens to be: the 2026-09-18 screening left eight captures in the
+home directory, including a saved 404 and a file named `.json` that was HTML.
+Write probe output to the scratchpad (or a gitignored `data/<city>/raw/`), and
+put the *findings* in `docs/data_sources.md` and `docs/city_shortlist.md` - a
+raw capture is not a record, and it goes stale the moment the endpoint changes.
+
 **Record every confirmed source in `docs/data_sources.md` as you verify it** -
 endpoint, the server-side filter applied at download, and the date. That file
 is the project's master provenance list and the only way a build can be

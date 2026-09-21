@@ -1,0 +1,168 @@
+station,line,latitude,longitude,reason,nearest_kept_station,miles_since_nearest_kept
+69th St Transit Center,,39.962338,-75.258555,outside Philadelphia city limits,,
+Chester Av & 65th St,,39.929359,-75.244762,outside Philadelphia city limits,,
+Darby Transit Center,,39.919085,-75.262376,outside Philadelphia city limits,,
+Main St & 3rd St,,39.916892,-75.251534,outside Philadelphia city limits,,
+Millbourne,,39.96432,-75.252243,outside Philadelphia city limits,,
+Yeadon,,39.924525,-75.252542,outside Philadelphia city limits,,
+Girard Av & 11th St,G1,39.970845,-75.154021,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 7th St,0.319
+Girard Av & 12th St,G1,39.971045,-75.155603,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 7th St,0.404
+Girard Av & 16th St,G1,39.971908,-75.162605,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Broad-Girard,0.179
+Girard Av & 17th St,G1,39.972116,-75.164151,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Broad-Girard,0.262
+Girard Av & 19th St,G1,39.972507,-75.167339,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Broad-Girard,0.433
+Girard Av & 24th St,G1,39.972453,-75.175844,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 20th St,0.372
+Girard Av & 27th St,G1,39.974202,-75.18028,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 26th St,0.083
+Girard Av & 28th St,G1,39.974375,-75.181756,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 26th St,0.162
+Girard Av & 29th St,G1,39.974574,-75.183361,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 26th St,0.249
+Girard Av & 2nd St,G1,39.9695,-75.13945,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Front-Girard,0.183
+Girard Av & 31st St,G1,39.975009,-75.186549,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 26th St,0.42
+Girard Av & 33rd St,G1,39.975199,-75.188002,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 26th St,0.498
+Girard Av & 39th St,G1,39.974511,-75.201683,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 34th St,0.279
+Girard Av & 3rd St,G1,39.969799,-75.141386,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Front-Girard,0.288
+Girard Av & 40th St,G1,39.974159,-75.204543,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 34th St,0.433
+Girard Av & 42nd St,G1,39.973658,-75.208797,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 41st St,0.136
+Girard Av & 49th St,G1,39.972917,-75.219064,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & Merion Av,0.148
+Girard Av & 4th St,G1,39.96999,-75.142968,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Front-Girard,0.373
+Girard Av & 51st St,G1,39.971987,-75.223438,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & Merion Av,0.388
+Girard Av & 54th St,G1,39.971165,-75.228614,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 52nd St,0.151
+Girard Av & 56th St,G1,39.970761,-75.232477,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 52nd St,0.357
+Girard Av & 57th St,G1,39.970585,-75.234096,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 52nd St,0.444
+Girard Av & 5th St,G1,39.970218,-75.144905,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Front-Girard,0.477
+Girard Av & 60th St,G1,39.970039,-75.238988,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 59th St,0.089
+Girard Av & 8th St,G1,39.970568,-75.149853,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 7th St,0.097
+Girard Av & Belmont Av,G1,39.973315,-75.212094,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 41st St,0.312
+Girard Av & Columbia Av,G1,39.970265,-75.130423,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & Berks St,0.267
+Girard Av & Corinthian Av,G1,39.972888,-75.17022,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 20th St,0.072
+Girard Av & Frankford Av,G1,39.968891,-75.134397,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & Berks St,0.498
+Girard Av & Palmer St,G1,39.970983,-75.1284,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & Berks St,0.149
+Girard Av & Ridge Av,G1,39.97238,-75.166217,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Broad-Girard,0.373
+Haverford Av & 61st St,G1,39.970899,-75.240781,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 59th St,0.201
+Haverford Av & 62nd St,G1,39.971642,-75.242704,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 59th St,0.315
+Haverford Av & 63rd St,G1,39.971895,-75.244641,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 59th St,0.419
+Poplar St & 25th St,G1,39.972492,-75.177403,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Girard Av & 20th St,0.454
+Richmond St & Allegheny Av,G1,39.983053,-75.101437,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Richmond St & Westmoreland St Loop,0.13
+Richmond St & Cambria St,G1,39.979092,-75.108862,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Richmond St & Ann St,0.101
+Richmond St & Clearfield St,G1,39.981783,-75.103782,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Richmond St & Westmoreland St Loop,0.282
+Richmond St & Cumberland St,G1,39.974331,-75.118038,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Richmond St & Huntingdon St,0.159
+Richmond St & Girard Av,G1,39.973068,-75.119591,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Richmond St & Huntingdon St,0.279
+Richmond St & Lehigh Av,G1,39.976907,-75.113101,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Richmond St & Ann St,0.372
+Richmond St & Somerset St,G1,39.978159,-75.110697,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Richmond St & Ann St,0.218
+36th St & Market St,T1,39.956281,-75.194218,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lancaster Av & 38th St,0.367
+36th St Portal,T1,39.955335,-75.194162,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lancaster Av & 38th St,0.432
+63rd St & Jefferson St,T1,39.97835,-75.246184,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",63rd-Malvern,0.429
+63rd St & Lebanon Av,T1,39.980912,-75.246661,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",63rd-Malvern,0.25
+Lancaster Av & 36th St,T1,39.958565,-75.193786,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lancaster Av & 38th St,0.208
+Lancaster Av & 40th St,T1,39.963151,-75.20244,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lancaster Av & 41st St,0.213
+Lancaster Av & 42nd St,T1,39.966391,-75.207662,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lancaster Av & 45th St,0.362
+Lancaster Av & 43th St,T1,39.967725,-75.209878,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lancaster Av & 45th St,0.213
+Lancaster Av & 44th St,T1,39.968772,-75.211541,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lancaster Av & 45th St,0.099
+Lancaster Av & 47th St,T1,39.971555,-75.216115,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lancaster Av & 50th St,0.426
+Lancaster Av & Bible Way,T1,39.976855,-75.226176,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lansdowne Av & 57th St,0.5
+Lancaster Av & Girard Av,T1,39.973059,-75.218615,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lancaster Av & 50th St,0.258
+Lancaster Av & Powelton Av,T1,39.959774,-75.19612,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lancaster Av & 38th St,0.058
+Lancaster Av & Spring Garden St,T1,39.962004,-75.200353,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lancaster Av & 41st St,0.349
+Lancaster Av & Thompson St,T1,39.973748,-75.219747,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lancaster Av & 50th St,0.181
+Lansdowne Av & 54th St,T1,39.977013,-75.229908,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lansdowne Av & 57th St,0.294
+Lansdowne Av & 55th St,T1,39.976811,-75.231858,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lansdowne Av & 57th St,0.19
+Lansdowne Av & 56th St,T1,39.976591,-75.233761,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lansdowne Av & 57th St,0.088
+Lansdowne Av & 58th St,T1,39.976248,-75.236904,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lansdowne Av & 63rd,0.433
+Lansdowne Av & 59th St,T1,39.976054,-75.238653,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lansdowne Av & 63rd,0.339
+Lansdowne Av & 60th St,T1,39.975851,-75.240378,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lansdowne Av & 63rd,0.247
+Lansdowne Av & 61st St,T1,39.975693,-75.241879,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lansdowne Av & 63rd,0.166
+Lansdowne Av & 62nd St,T1,39.975499,-75.243651,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lansdowne Av & 63rd,0.072
+Lansdowne Av & Lancaster Av,T1,39.977295,-75.227451,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lansdowne Av & 57th St,0.426
+Malvern Av & 63rd St,T1,39.983697,-75.247009,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",63rd-Malvern,0.057
+Baltimore Av & 43rd St,T2,39.949481,-75.20932,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Baltimore Av & 47th St,0.422
+Baltimore Av & 44th St,T2,39.949181,-75.21127,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Baltimore Av & 47th St,0.317
+Baltimore Av & 45th St,T2,39.949006,-75.213018,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Baltimore Av & 47th St,0.223
+Baltimore Av & 46th St,T2,39.948786,-75.215061,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Baltimore Av & 47th St,0.114
+Baltimore Av & 49th St,T2,39.948101,-75.221404,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Baltimore Av & Broomall St,0.346
+Baltimore Av & 50th St,T2,39.947872,-75.223377,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Baltimore Av & Broomall St,0.241
+Baltimore Av & 51st St,T2,39.947715,-75.225456,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Baltimore Av & Broomall St,0.13
+Baltimore Av & 53rd St,T2,39.947766,-75.229612,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Baltimore Av & 57th St,0.423
+Baltimore Av & 54th St,T2,39.947742,-75.231466,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Baltimore Av & 57th St,0.324
+Baltimore Av & 55th St,T2,39.947246,-75.233746,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Baltimore Av & 57th St,0.199
+Baltimore Av & 56th St,T2,39.946785,-75.235602,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Baltimore Av & 57th St,0.095
+Baltimore Av & 58th St,T2,39.945783,-75.240304,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",61st-Baltimore,0.345
+Baltimore Av & 59th St,T2,39.945197,-75.241899,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",61st-Baltimore,0.252
+Baltimore Av & 60th St,T2,39.944299,-75.244429,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",61st-Baltimore,0.104
+Baltimore Av & Florence Av,T2,39.948312,-75.219503,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Baltimore Av & Broomall St,0.448
+60th St & Chester Av,T3,39.933632,-75.231399,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Mt. Moriah,0.467
+65th St & Belmar Av,T3,39.92905,-75.24108,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Chester Av & 65th St,0.196
+65th St & Chester Av,T3,39.928628,-75.238897,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Chester Av & 65th St,0.316
+65th St & Kingsessing Av,T3,39.927902,-75.23714,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Chester Av & 65th St,0.421
+Chester Av & 42nd St,T3,39.948424,-75.207151,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Chester Av & 47th St,0.419
+Chester Av & 43rd St,T3,39.948356,-75.209135,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Chester Av & 47th St,0.313
+Chester Av & 45th St,T3,39.9477,-75.211428,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Chester Av & 47th St,0.184
+Chester Av & 46th St,T3,39.946827,-75.212682,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Chester Av & 47th St,0.094
+Chester Av & 48th St,T3,39.944958,-75.215344,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Chester Av & 53rd St,0.447
+Chester Av & 49th St,T3,39.944041,-75.216622,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Chester Av & 53rd St,0.354
+Chester Av & 51st St,T3,39.942349,-75.219048,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Chester Av & 53rd St,0.181
+Chester Av & 52nd St,T3,39.941539,-75.220184,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Chester Av & 53rd St,0.098
+Chester Av & 54th St,T3,39.939607,-75.222952,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Chester Av & 59th St,0.5
+Chester Av & 55th St,T3,39.938654,-75.224301,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Chester Av & 59th St,0.403
+Chester Av & 56th St,T3,39.937701,-75.225661,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Chester Av & 59th St,0.305
+Chester Av & 57th St,T3,39.936642,-75.227187,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Chester Av & 59th St,0.196
+Chester Av & 58th St,T3,39.935653,-75.228572,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Chester Av & 59th St,0.096
+Chester Av & Church Ln,T3,39.92631,-75.246565,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Yeadon,0.34
+Chester Av & Duncan Av,T3,39.925617,-75.249175,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Yeadon,0.194
+Chester Av & Stetser Av,T3,39.925102,-75.250817,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Yeadon,0.1
+Chester Av & Yeadon Av,T3,39.92607,-75.247486,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Yeadon,0.289
+Kingsessing Av & 60th St,T3,39.932479,-75.230316,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Mt. Moriah,0.369
+Kingsessing Av & 61st St,T3,39.931045,-75.232386,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Mt. Moriah,0.221
+Kingsessing Av & 62nd St,T3,39.929994,-75.233888,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Mt. Moriah,0.113
+Main St & 2nd St,T4,39.916614,-75.250319,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 71st St,0.463
+Main St & 4th St,T4,39.917171,-75.252737,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Main St & 3rd St,0.067
+Main St & 5th St,T4,39.91753,-75.254295,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Main St & 3rd St,0.153
+Main St & 6th St,T4,39.917808,-75.255486,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Main St & 3rd St,0.219
+Main St & Front St,T4,39.916451,-75.248915,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 71st St,0.388
+Main St & Powell Av,T4,39.918244,-75.260608,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Main St & 3rd St,0.494
+Main St & Summit St,T4,39.91815,-75.25709,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Main St & 3rd St,0.307
+Woodland Av & 42nd St,T4,39.946987,-75.206907,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",40th St Portal,0.261
+Woodland Av & 43rd St,T4,39.945767,-75.20834,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",40th St Portal,0.375
+Woodland Av & 46th St,T4,39.944537,-75.209725,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",40th St Portal,0.487
+Woodland Av & 49th St,T4,39.940955,-75.212582,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 48th St,0.096
+Woodland Av & 50th St,T4,39.940064,-75.213848,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 48th St,0.187
+Woodland Av & 51st St,T4,39.939192,-75.215102,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 48th St,0.277
+Woodland Av & 52nd St,T4,39.938408,-75.216214,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 48th St,0.357
+Woodland Av & 53rd St,T4,39.937438,-75.217598,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 48th St,0.456
+Woodland Av & 55th St,T4,39.935524,-75.220308,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 54th St,0.098
+Woodland Av & 56th St,T4,39.934553,-75.221703,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 54th St,0.198
+Woodland Av & 57th St,T4,39.933485,-75.223218,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 54th St,0.307
+Woodland Av & 58th St,T4,39.93263,-75.224448,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 54th St,0.395
+Woodland Av & 61st St,T4,39.929282,-75.229191,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 60th St,0.12
+Woodland Av & 62nd St,T4,39.928267,-75.230599,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 60th St,0.222
+Woodland Av & 63rd St,T4,39.927519,-75.231675,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 60th St,0.299
+Woodland Av & 64th St,T4,39.926557,-75.233047,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 60th St,0.397
+Woodland Av & 65th St,T4,39.925684,-75.234289,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 60th St,0.487
+Woodland Av & 67th St,T4,39.923886,-75.236856,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 66th St,0.095
+Woodland Av & 68th St,T4,39.922817,-75.23837,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 66th St,0.204
+Woodland Av & 69th St,T4,39.921641,-75.240037,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 66th St,0.324
+Woodland Av & 70th St,T4,39.920688,-75.241397,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 66th St,0.421
+Woodland Av & 72nd St,T4,39.918622,-75.244342,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 71st St,0.099
+Woodland Av & Island Av,T4,39.917304,-75.246245,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 71st St,0.235
+49th St & Paschall Av,T5,39.93998,-75.211652,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 48th St,0.179
+Elmwood Av & 56th St,T5,39.931173,-75.217711,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lindbergh Blvd & Grays Av,0.333
+Elmwood Av & 57th St,T5,39.930131,-75.219202,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lindbergh Blvd & Grays Av,0.44
+Elmwood Av & 59th St,T5,39.928226,-75.221958,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Elmwood Av & 58th St,0.099
+Elmwood Av & 61st St,T5,39.926241,-75.224844,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Elmwood Av & 58th St,0.304
+Elmwood Av & 62nd St,T5,39.925065,-75.226441,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Elmwood Av & 58th St,0.421
+Elmwood Av & 64th St,T5,39.923204,-75.229067,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Elmwood Av & 63rd St,0.099
+Elmwood Av & 65th St,T5,39.922305,-75.230285,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Elmwood Av & 63rd St,0.189
+Elmwood Av & 66th St,T5,39.921432,-75.231562,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Elmwood Av & 63rd St,0.279
+Elmwood Av & 67th St,T5,39.920524,-75.23284,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Elmwood Av & 63rd St,0.372
+Elmwood Av & 68th St,T5,39.919446,-75.234401,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Elmwood Av & 63rd St,0.483
+Elmwood Av & 70th St,T5,39.917327,-75.237428,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Elmwood Av & 69th St,0.099
+Elmwood Av & 71st St,T5,39.916249,-75.238965,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Elmwood Av & 69th St,0.209
+Elmwood Av & 72nd St,T5,39.915305,-75.240349,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Elmwood Av & 69th St,0.307
+Elmwood Av & 73rd St,T5,39.914335,-75.241732,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Elmwood Av & 69th St,0.407
+Elmwood Av & Edgewood Av,T5,39.926935,-75.22385,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Elmwood Av & 58th St,0.233
+Grays Av & 51st St,T5,39.937188,-75.212227,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 48th St,0.375
+Grays Av & Lindbergh Blvd,T5,39.936128,-75.213682,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 48th St,0.481
+Island Av & Suffolk Av,T5,39.899525,-75.239352,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Island Av & Lindbergh Blvd,0.304
+Island Av & Tanager St,T5,39.909132,-75.2421,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Elmwood Av & Island Av,0.292
+Lindbergh Blvd & 54th St,T5,39.933588,-75.215579,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Lindbergh Blvd & Grays Av,0.132
+Woodland Av & 42nd St,T5,39.946987,-75.206907,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",40th St Portal,0.261
+Woodland Av & 43rd St,T5,39.945767,-75.20834,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",40th St Portal,0.375
+Woodland Av & 46th St,T5,39.944537,-75.209725,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",40th St Portal,0.487
+Woodland Av & 49th St,T5,39.940955,-75.212582,"spacing filter (street-running stop, < 0.5mi since nearest kept stop)",Woodland Av & 48th St,0.096

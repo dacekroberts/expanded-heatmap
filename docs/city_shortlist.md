@@ -35,7 +35,7 @@ bigger system means a bigger station-scope decision).
 | 3 | Los Angeles | Metro Rail (A, B, C, D, E, K), 110 stations, 56 in the city | Listing of Active Businesses (Socrata `6rrh-rzua`, `data.lacity.org`): `naics`, `street_address`, `location_1`, `council_district` | `naics` | **Built.** ~9% of coordinates were corrupt (recovered by Census geocoding); in-city rows identified by `council_district`, not `city` |
 | 4 | Chicago | CTA 'L' (7 lines drawn, 123 in-city stations; Metra not included) | Business Licenses (Socrata `r5kz-chrr`): address, `latitude`/`longitude` | `chicago_license` | **Built 2026-09-20.** No NAICS field: own license taxonomy, with catch-all license types classified by business activity; the source is a license-term history, filtered to active licenses and one row per site. Metra is a possible later addition |
 | 5 | New York | Subway + Staten Island Railway (496 parent stations, drawn as 11 trunk lines; LIRR/Metro-North not included) | **Four** registries, because the city has no general business licence: DOHMH restaurant inspections (`43nn-pn8j`), NYS Retail Food Stores (`9a8c-vfzj`), NYS Appearance Enhancement & Barber businesses (`y3u4-jbgh`), DCWP premises licences (`w7w3-xahh`) | `new_york` (dispatches per source) | **Built 2026-09-21.** The DCA-only plan recorded here was wrong: that file is a regulated-activity licence list with no restaurants, grocery, clothing or salons in it. Only city needing multiple sources, and the only one not using the shared ring edges (496 stations, median 482 m apart). Retail is less complete than elsewhere |
-| 6 | Philadelphia | SEPTA Metro + Regional Rail | L&I Business Licenses (Carto SQL API `phl.carto.com`, table `business_licenses`): 435,143 rows, 118,535 Active, 48 fields | `phl_licensetype` (skeleton) | **Step 0 done 2026-09-21, see notes below.** Easier than expected on geometry, harder on categories |
+| 6 | Philadelphia | SEPTA Metro: L, B, T and G (94 in-city stations, 4 lines drawn; Regional Rail not included) | L&I Business Licenses (Carto SQL API `phl.carto.com`, table `business_licenses`): 435,143 rows, 118,535 Active, 48 fields | `phl_licensetype` (verified, all 50 types) | **Built 2026-09-21.** The only **two-bucket** city: no personal-service licence exists in Philadelphia and Pennsylvania publishes none with addresses, so Personal services is absent rather than thin. The multi-source hunt came back empty — one registry, two buckets. First city needing two station rules at once (subway/el kept whole, street-running trolleys thinned) |
 | - | Boston | MBTA (subway, Green Line, commuter rail) | **Not just the certified directory** - `data.boston.gov` also has "Licensing Board Licenses" (CSV/XLSX), "Active Food Establishment Licenses" (CSV), "Annual Entertainment Licenses", "Food Establishment Inspections" | TBD | **Re-probed 2026-09-21 and no longer ruled thin.** The 978-row certified-vendor set is NOT the only option; real licence registries exist. Needs a proper Step 0 on those (coverage of Retail / Personal services, and whether they carry coordinates) |
 | - | Dallas | DART light rail (GTFS downloads, HTTP 200) | Building Inspection Certificates of Occupancy (Socrata `9qet-qt9e`, `dallasopendata.com`): `business_name`, `address`, `land_use` (143 values), `occupancy`, `geolocation` (2 of 23,731 rows null) | new module needed (`land_use`) | **Caveat:** the data ends 2022-11-15 and holds only certificates issued 2018-2022 (~4-5.6k a year), so it shows new occupancies, not a registry. A city page would need that stated. Other Dallas CO sets are archived FY2015-17 copies |
 | - | Washington D.C. | WMATA Metrorail, 6 lines, 98 stations | Basic Business Licenses (`maps2.dcgis.dc.gov/dcgis/rest/services/FEEDS/DCRA/FeatureServer/0`): `PREMISEADDRESS`, `BUSINESSACTIVITY`, `CATEGORYSERVICETYPE` | new module needed | **Caveat:** no NAICS field, and `LATITUDE`/`LONGITUDE` are truncated to whole degrees (use address geocoding or the state-plane `X_COORDINATE`/`Y_COORDINATE`) |
@@ -97,6 +97,41 @@ coordinates. There is also a `geocode_x`/`geocode_y` pair (state plane) on
 So Philadelphia is either a food-service-dominated map or a multi-source city
 like New York. That decision comes before any build.
 
+**RESOLVED 2026-09-21: neither.** The full 50-type pull and a source hunt for
+each missing bucket settled it:
+
+- **Multi-source was attempted and failed.** Every archetype in the
+  `multi-source-city` skill was checked live and none works here — PA's
+  professional-licensee file is county aggregates with no addresses, PA
+  Agriculture's food inspections just relay the city's own, the Commercial
+  Activity License file has **zero** geometry and no classification, and
+  `li_business_licenses` is a stale copy of the same table. All four are
+  recorded in `data_sources.md` so the search is not repeated.
+- **It is not food-dominated either, because of a distinction the top-30 view
+  hid.** Philadelphia separates `Food Preparing and Serving` (restaurants) from
+  `Food Establishment, Retail` (shops that sell food) — the grocery slice New
+  York needed a whole state registry for is already in this one file. And
+  `Food Establishment, Retail Perm Location (Large)` turned out to be the
+  general-retail tier: Target, CVS, Dollar Tree, **Staples, Ross Dress For
+  Less**, which hold a food licence because they sell packaged food.
+
+Final shape: **one registry, two buckets** — Food service 7,485 and Retail
+1,715 of 9,200 downloaded rows, collapsing to 8,512 sites. Personal services
+has no source at all, which is stated on the city page and in
+`excluded_categories.md` under what is *missing* rather than *excluded*.
+
+Two corrections to record, both cases of a licence type's name being
+misleading:
+
+- **`Vendor - Motor Vehicle Sales` is not car dealers.** It licenses vending
+  *from* a vehicle; sampled holders are "CHA CHA LUNCH TRUCK", "FOOD TRUCK
+  COLLECTIVE LLC". Mobile, so excluded.
+- **"100% geometry" was wrong.** The Step 0 probe counted `the_geom IS NOT
+  NULL`, but 218 rows hold an *empty* point geometry on which `ST_X` returns
+  NULL. Real usable-coordinate rate is 97.6%, and the 2.4% loss is not uniform
+  — it takes 61 of the 75 newsstands, 60 of which have no street address
+  either, so geocoding cannot recover them.
+
 **Excluding `Rental` is a privacy fix as well as a scope fix** - the same
 shape as the national NAICS 454 exclusion. `business_name` is never blank
 (0 of 118,535), but on rental licences it holds the *owner's own name*:
@@ -110,5 +145,8 @@ structurally, so the person-like-name heuristic is a cross-check here rather
 than the primary measure. Worth wiring into
 `scripts/check_personal_exposure.py` for this city.
 
-Still to do before building: the full `SELECT DISTINCT licensetype` pull, a
-bucket mapping, the SEPTA GTFS feed, and a city boundary layer.
+~~Still to do before building: the full `SELECT DISTINCT licensetype` pull, a
+bucket mapping, the SEPTA GTFS feed, and a city boundary layer.~~ **All done
+2026-09-21.** The SEPTA feed is a zip of zips whose *bus* member holds the
+subway, el and trolleys (the "rail" one is Regional Rail); the boundary is
+OpenDataPhilly's City Limits. Both are recorded in `data_sources.md`.

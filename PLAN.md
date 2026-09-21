@@ -82,10 +82,26 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - Retail is less complete here than elsewhere (a clothing shop needs no
     licence from any of the four registries). Said plainly on the city page;
     worth repeating in `docs/excluded_categories.md`.
-- [ ] Philadelphia - needs `phl_licensetype` filled; data source is a Carto
-  SQL API with WKB geometry, so it needs extra parsing.
-- [ ] Boston - real NAICS+address but only a 978-row certified-vendor
-  directory; decide whether that is enough data to be worth mapping.
+- [x] **Philadelphia - built 2026-09-21.** The WKB parsing this item predicted
+  was never needed (the Carto SQL API evaluates `ST_X`/`ST_Y` server-side), and
+  `phl_licensetype` is filled from the full 50-type pull. What it left behind:
+  - Two open licence questions, both to settle before the public deploy:
+    SEPTA's trademark/commercial clause, and the "City of Philadelphia
+    License", which reserves all database rights while granting nothing
+    explicitly. See `docs/data_sources.md`.
+  - Personal services is **absent**, not thin - the only such city. Stated on
+    the city page and in `docs/excluded_categories.md`.
+  - Regional Rail (52 well-spaced in-city stations, no thinning needed) is the
+    obvious later addition if the commuter-rail exclusion is revisited.
+  - The Girard Avenue Trolley's label uses SEPTA's own `#FFD700`, which is the
+    lowest-contrast of the four over the orange heat wash. Cosmetic; swap for a
+    darker gold if it reads badly on a real screen.
+- [ ] Boston - **re-probed 2026-09-21 and no longer ruled thin.** The 978-row
+  certified-vendor directory is not the only option: `data.boston.gov` also has
+  "Licensing Board Licenses", "Active Food Establishment Licenses" and
+  "Annual Entertainment Licenses". Needs a proper Step 0 on those - whether
+  they cover Retail and Personal services, and whether they carry coordinates.
+  Expect the `multi-source-city` path.
 - [ ] Washington D.C. - `LATITUDE`/`LONGITUDE` are truncated to whole
   degrees; use `pipeline/census_geocoder.py` on `PREMISEADDRESS` (or the
   state-plane `X_COORDINATE`/`Y_COORDINATE` fields), and add a taxonomy
@@ -101,12 +117,19 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Structure
 
-- [ ] Fill in the remaining local taxonomy skeleton (`phl_licensetype`) before
-  Philadelphia is built: it needs a full `SELECT DISTINCT` of `licensetype`,
-  plus a hand-sample of catch-all categories. Chicago's `chicago_license` is
-  the model. (`nyc_dca` was retired rather than filled - see `DECISIONS.md`,
-  2026-09-21. Check Philadelphia's registry actually covers all three buckets
-  before assuming one source is enough; that assumption failed for New York.)
+- [x] ~~Fill in the remaining local taxonomy skeleton (`phl_licensetype`)~~ -
+  **done 2026-09-21** from the full `SELECT DISTINCT licensetype` pull; all 50
+  active types carry an explicit verdict. No taxonomy skeletons remain.
+  (`nyc_dca` was retired rather than filled - see `DECISIONS.md`, 2026-09-21.)
+  The check this item asked for paid off twice: New York needed four sources,
+  and Philadelphia turned out to have **no source at all** for one bucket.
+- [ ] **Close the residence blind spot in `check_personal_exposure.py`.** It
+  detects a home only by an `APT`/`FL`/`RM`/`#` indicator, so a sole trader at
+  a detached house reads as clean - which is why Philadelphia scores 0.00%.
+  Two unused signals could close it: the licence's mailing address matching its
+  premises address (Philadelphia has `business_mailing_address`, not currently
+  downloaded), and parcel land-use via a parcel id such as `opa_account_num`.
+  Worth doing before the deploy, since it applies to every city.
 - [x] **Record each data source's licence and terms of use** - done
   2026-09-21 in `docs/data_sources.md`, covering all 8 registries, all 5 GTFS
   feeds, the boundary layers and the basemap. Permissive terms were NOT the

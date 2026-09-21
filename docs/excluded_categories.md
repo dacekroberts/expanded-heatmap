@@ -117,6 +117,34 @@ amusements, child care, and licences that merely attach to a business already
 counted (an outdoor-patio or late-hour permit, for instance). A business holding
 several licences is counted once.
 
+### Philadelphia — landlord registrations, and non-storefront permits
+
+Philadelphia licenses activities rather than businesses, so its exclusions are
+about separating premises-based trade from everything else the city happens to
+license. Of the 50 licence types active in the register, 13 are mapped.
+
+The one that matters most is **`Rental`, which is 79% of all active licences**
+— 93,471 residential landlord registrations. These are not businesses and not
+storefronts, and on those rows the registry's own business-name field holds
+**the owner's personal name at their property address**, recorded as
+`Individual`. Mapping active licences unfiltered would have published roughly
+94,000 individuals at their homes. It is excluded as a scope error first: these
+are not what this map is about. That it also removes the largest privacy
+exposure in the dataset is a consequence, not the justification — the same
+shape as the NAICS 454 exclusion. **`Limited Lodging Operator`** (short-let
+hosts, also at their homes) is out for the same reason, as are the vacant-
+property registrations.
+
+Also left out: mobile and pavement trade of every kind (pushcarts, on-foot
+vendors, sidewalk sales, and — despite its name — `Vendor - Motor Vehicle
+Sales`, which licenses vending *from* a vehicle and whose holders are food
+trucks); vehicle repair, towing, wrecking and parking; permits that attach to a
+building rather than a business (dumpsters, hazardous materials, high-rise, hot
+work); food manufacturing and wholesale; child care; assembly venues; games of
+chance; and handbill distribution. A business holding several licences is
+counted once, so a restaurant with pavement seating appears as a restaurant
+rather than twice.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found
@@ -132,9 +160,10 @@ several licences is counted once.
 
 ## What is missing rather than excluded
 
-One thing on this map is absent for a different reason, and it is worth
+Two things on this map are absent for a different reason, and they are worth
 separating from everything above. Every exclusion so far was a choice. In **New
-York**, a large part of ordinary retail was never available to choose.
+York** and **Philadelphia**, some of what is missing was never available to
+choose.
 
 Because the city has no general business licence, a shop is only in this map if
 some regulator happens to license it. Restaurants are inspected, so they are
@@ -148,6 +177,26 @@ The practical effect is that New York's Retail category is thinner than its
 Food service one, and thinner than Retail in the other four cities, which draw
 on registries that cover all trades. **Read the balance between categories in
 New York as a fact about the city's licensing, not about its high streets.**
+
+**Philadelphia is the same problem one step further: a whole category is
+missing.** New York's four registries at least covered all three — its Retail
+was thin, not absent. Philadelphia licenses no personal-service business of any
+kind. There is no salon, barber, nail, cosmetology, massage or laundry licence
+in the city's register, and Pennsylvania publishes its cosmetology licensees
+only as **county totals with no addresses**, while the State Board's
+verification system answers one licence at a time with no bulk export. Every
+alternative was checked live and each failed for a different reason; they are
+listed in `data_sources.md` so the search is not repeated from scratch.
+
+So **Philadelphia's map has two categories, not three, and Personal services is
+absent entirely.** Its Retail is narrow for New York's reason as well: what the
+city licenses is *food* retail, so Retail there means bodegas, mini-markets and
+beer distributors, plus a big-box tier (Target, CVS, Dollar Tree, Ross) that
+appears only because those stores also sell packaged food. Pavement newsstands
+are largely absent too — the register holds neither a coordinate nor a street
+address for 60 of the 75 licensed. None of this is a choice this project made,
+and the city page says so on its face rather than leaving a reader to infer
+something about Philadelphia's high streets from a fact about its licensing.
 
 ## Honest limits
 
@@ -169,6 +218,19 @@ New York as a fact about the city's licensing, not about its high streets.**
   across ordinary storefront categories rather than concentrated in one.
 - No individual business record was checked against any other source, and
   nobody was contacted.
+- **Contact details are removed, not displayed.** A registry's business-name
+  field occasionally holds an email address or phone number instead of a trade
+  name. Any such row is dropped from every map, because it has no usable public
+  name and an email address is a direct line to a person rather than a
+  description of a business. This is enforced once in the shared renderer, so
+  it applies to every city including ones added later. Three rows in New York
+  were removed this way on 2026-09-21; no other city had any.
+- **Where a registry records a licence holder and a trading name in one field,
+  the trading name is what is shown.** Philadelphia formats these as "LEGAL
+  NAME (TRADE NAME)", so 456 pins that would have displayed a licence holder's
+  own name now show the name above the shop instead. A person trading under
+  their own name with no trading name recorded is still shown as they
+  registered.
 - These decisions concern what is *appropriate* to publish. What each dataset's
   licence *permits* is a separate question and is still open.
 

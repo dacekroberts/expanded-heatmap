@@ -16,6 +16,7 @@ entry (build_legend). render_heatmap does both for every line passed in.
 
 import html
 import json
+import re
 import zipfile
 
 import folium
@@ -867,6 +868,49 @@ def _label_anchor_coords(coords, label_focus):
     return inside if len(inside) >= 2 else coords
 
 
+# Contact details that must never reach a published pin. A registry's
+# business-name field sometimes holds an email address or phone number instead
+# of a trade name, which is a different exposure from a person's NAME and a
+# worse one: a name at a commercial address identifies a business, an email
+# address is a direct line to a person.
+#
+# Found 2026-09-21 by grepping the repo for an unrelated reason, not by any
+# check this project ran - scripts/check_personal_exposure.py tested for
+# person-like names and an email matches none of its patterns. One pin in
+# 91,000 (a New York "Tobacco Retail Dealer" registered under a Gmail address).
+#
+# Enforced HERE, in the shared renderer, rather than in the city's step 2 that
+# happened to have the problem: this is the one place every city's pins pass
+# through, so a city added later cannot reintroduce it by forgetting. Decided
+# 2026-09-21; see DECISIONS.md.
+_CONTACT_EMAIL = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}")
+# Conservative: a 10-digit run with separators, so a licence number or a long
+# street number cannot match.
+_CONTACT_PHONE = re.compile(r"(?:\+?1[ .\-]?)?\(?\d{3}\)?[ .\-]\d{3}[ .\-]\d{4}")
+
+
+def _has_contact_details(name) -> bool:
+    if pd.isna(name):
+        return False
+    text = str(name)
+    return bool(_CONTACT_EMAIL.search(text)
+                or _CONTACT_PHONE.search(_CONTACT_EMAIL.sub("", text)))
+
+
+def drop_contact_details(businesses):
+    """Remove rows whose displayed name carries an email address or phone
+    number. Such a row has no usable public trade name, so it is dropped the
+    way a blank one would be - masking would still leak a partial."""
+    if "business_name" not in businesses.columns:
+        return businesses
+    flagged = businesses["business_name"].map(_has_contact_details)
+    if int(flagged.sum()):
+        print(f"Contact-detail scrub: dropped {int(flagged.sum()):,} row(s) "
+              f"whose business name holds an email address or phone number "
+              f"(no usable public trade name).")
+    return businesses[~flagged]
+
+
 def render_heatmap(*, output_path, map_title, city_name, system_name,
                    stations, businesses, taxonomy_system, lines,
                    crs_geographic, crs_projected, ring_edges_meters, ring_labels,
@@ -896,6 +940,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     bucket_colors = dict(CATEGORY_BUCKETS)
 
     businesses = businesses.dropna(subset=["latitude", "longitude"]).copy()
+    businesses = drop_contact_details(businesses)
     businesses["nearest_station"], businesses["ring_band"] = nearest_station_and_ring(
         businesses, stations, crs_geographic, crs_projected, ring_edges_meters, ring_labels
     )

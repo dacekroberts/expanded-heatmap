@@ -154,12 +154,38 @@ Cities built and running end to end (pipeline, map, app page):
   restaurants are near-complete. Its map is step 4 (a geocoding step recovers
   DCA's missing coordinates).
 
-Next by ease ranking: Philadelphia; Boston and Washington D.C. carry caveats.
+- **Philadelphia** - SEPTA Metro: the Market-Frankford and Broad Street Lines
+  (with the Ridge Spur), the five subway-surface trolley branches and the
+  Girard Avenue trolley, drawn as four line groups. Regional Rail is a separate
+  feed and is not included; the Norristown and Media/Sharon Hill lines have no
+  stations inside the city at all. Distinctive in three ways. It is the only
+  **two-bucket** city: Philadelphia licenses no personal-service business and
+  Pennsylvania publishes no licensee addresses, so Personal services is
+  **absent rather than thin**, and the multi-source approach that rescued New
+  York was tried here and found nothing to add. It is the first city needing
+  **two station rules at once** - the grade-separated lines keep every in-city
+  station, while the street-running trolleys (a 134 m median) take San
+  Francisco's four-filter thinning. And it is the first registry whose
+  business-name field is **"LEGAL NAME (TRADE NAME)"**, so step 2 chooses the
+  trading half rather than copying the field, which keeps licence holders'
+  own names off the pins. Its own `legalentitytype` field gives a structural
+  Individual/corporate signal no other city has.
+
+Next by ease ranking: Boston and Washington D.C., both carrying caveats.
 **Check a candidate's registry actually covers all three buckets before
-assuming one source is enough** - that assumption failed for New York. See
+assuming one source is enough** - that assumption failed for New York, and in
+Philadelphia a whole bucket had no source at any level of government. See
 `city_shortlist.md`, `data_sources.md` (every source's endpoint and filter) and
 `PLAN.md`. Row counts, station counts and per-run figures are in
 `DECISIONS.md`.
+
+**Published names are screened, not trusted.** `render_heatmap` drops any row
+whose displayed name carries an email address or phone number - enforced in the
+shared renderer so a city added later cannot reintroduce it - and
+`scripts/check_personal_exposure.py` reports contact details, surname-first
+names, person-plus-trade composites and `ATTN:`/`c/o` markers alongside the
+person-name heuristic. Its one known blind spot is a sole trader at a detached
+house, which carries no unit indicator to detect.
 
 **Navigation.** The Overview is the macro map: a pydeck map (pydeck ships
 with Streamlit; no folium) with a labelled marker per city, where clicking a

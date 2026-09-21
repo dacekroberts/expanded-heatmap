@@ -54,9 +54,28 @@ purchased, or behind a login.
 | New York | NYS Retail Food Stores (Socrata `9a8c-vfzj`, data.ny.gov) | **Retail** — grocery, bodegas, delis, supermarkets | `https://data.ny.gov/resource/9a8c-vfzj.csv` | `county in('KINGS','QUEENS','BRONX','NEW YORK','RICHMOND')` | 2026-09-21 |
 | New York | NYS Active Appearance Enhancement & Barber *Business* Licensees (Socrata `y3u4-jbgh`, data.ny.gov) | **Personal services** — salons, nail, skin care, barbers | `https://data.ny.gov/resource/y3u4-jbgh.csv` | selected columns; **`license_holder_name` deliberately not selected** (it is an individual's name) | 2026-09-21 |
 | New York | DCWP Issued Licenses (Socrata `w7w3-xahh`) | **Retail**, a narrow regulated slice | `https://data.cityofnewyork.us/resource/w7w3-xahh.csv` | `license_status='Active' AND license_type='Premises'` | 2026-09-21 |
+| Philadelphia | L&I Business Licenses (Carto SQL API, table `business_licenses`) | **Food service** and **Retail** only — see below | `https://phl.carto.com/api/v2/sql` (`format=csv`) | `licensestatus='Active' AND licensetype IN (…13 types…)`, built from `config.KEPT_LICENSETYPES`; selected columns, **no registrant-name column** (`legalfirstname`, `legallastname`, `legalname`, `opa_owner`, `ownercontact*name` are all deliberately unselected and asserted absent in step 2) | 2026-09-21 |
 
 New York needs four because it has **no general business licence** — see
 `pipeline/taxonomies/new_york.py`. Every other city needed one.
+
+Philadelphia is the opposite lesson: a **multi-source hunt that came back
+empty**, which is why it maps two buckets from one registry rather than three
+from several. Each archetype in the `multi-source-city` skill was checked live
+on 2026-09-21 and failed, and each is recorded here so it is not re-checked
+from scratch:
+
+| Candidate for Philadelphia's missing buckets | Why it is unusable |
+|---|---|
+| PA Professional Licensee Data (Socrata `fwj2-whnj`, data.pa.gov) | Aggregate `active_count` **by county**, with no addresses. Pennsylvania does not publish licensee locations; the State Board of Cosmetology's PALS system is a per-licence lookup with no bulk export |
+| PA Agriculture food inspections (Socrata `etb6-jzdg`, data.pa.gov) | Does reach Philadelphia, but `organization_name` is "City of Philadelphia" — it relays the city's own inspections, so it duplicates the registry above rather than adding to it |
+| Philadelphia Commercial Activity Licenses (Carto `com_act_licenses`) | The general licence every city business needs, and unusable on three counts: **0 of 528,413 active rows have geometry**, there is no business address at all (only the owner's *mailing* address), and `licensetype` is the single value "Activity" with no classification. It also carries `legalfirstname`/`legallastname` |
+| Carto `li_business_licenses` | A **stale copy** of the registry above — 360,192 rows vs 435,143, "Towing" where the current table says "Tow Truck", and missing `unit_type`. Not a second source |
+
+An `ILIKE` sweep for hair / barber / salon / nail / cosmet / massage / tattoo /
+laundry across both Carto licence tables returns nothing, so **Personal
+services has no source in Philadelphia at all**. That is recorded in
+`docs/excluded_categories.md` under what is *missing* rather than *excluded*.
 
 ## Transit feeds (GTFS)
 
@@ -67,6 +86,7 @@ New York needs four because it has **no general business licence** — see
 | Los Angeles | LA Metro Rail | `https://gitlab.com/LACMTA/gtfs_rail/raw/master/gtfs_rail.zip` | ≈2026-09-19 | Metro's rail-only feed |
 | Chicago | CTA | `https://www.transitchicago.com/downloads/sch_data/google_transit.zip` | 2026-09-20 | |
 | New York | MTA subway + Staten Island Railway | `https://rrgtfsfeeds.s3.amazonaws.com/gtfs_subway.zip` | 2026-09-21 | The `web.mta.info/developers/data/nyct/subway/google_transit.zip` path is **dead** |
+| Philadelphia | SEPTA Metro | `https://github.com/septadev/GTFS/releases/latest/download/gtfs_public.zip` | 2026-09-21 | **A zip of zips.** Contains `google_bus.zip` and `google_rail.zip`; `fetch_sources.py` extracts the **bus** one, because SEPTA's City Transit Division — and therefore the Market-Frankford Line, Broad Street Line and every trolley — is in that feed, not the "rail" one. `google_rail.zip` is Regional Rail, which this project does not draw. The naming is not guessable; both route tables were read to establish it |
 
 ## Boundary layers
 
@@ -81,6 +101,7 @@ in 23 other municipalities.
 | Los Angeles | LA County Planning, incorporated cities | `https://services.arcgis.com/RmCCgQtiZLDCtblq/arcgis/rest/services/admin_dist_SDE_DIST_DRP_CITY_COMM_BDY/FeatureServer/0/query` (`JURISDICTION='INCORPORATED CITY'`, `outSR=4326`, `f=geojson`) | `LOS ANGELES` |
 | Chicago | Socrata "Boundaries - City" (`qqq8-j68g`) | `https://data.cityofchicago.org/resource/qqq8-j68g.geojson?$limit=10` | whole city |
 | New York | Borough Boundaries (`gthc-hcne`) | `https://data.cityofnewyork.us/resource/gthc-hcne.geojson?$limit=10` | all five boroughs = the city |
+| Philadelphia | OpenDataPhilly "City Limits" (Dept of Planning and Development) | `https://services.arcgis.com/fLeGjb7u4uXqeF9q/arcgis/rest/services/City_Limits/FeatureServer/0/query` (`where=1=1`, `outSR=4326`, `f=geojson`) | whole city (one polygon, 2,957 vertices) |
 
 Chicago note: the sibling asset `ewy2-6yfk` ("Boundaries - City - Map") has
 null geometry; `qqq8-j68g` is the usable one.
@@ -139,6 +160,8 @@ user indemnifies the city for claims arising from their use of it.
 | **NYS retail food (`9a8c-vfzj`), NYS salons (`y3u4-jbgh`)** | The datasets declare no licence field, but the portal's "OPEN-NY Terms of Use" (dataset `77gx-ii52`, last modified 2013-03-08) is explicit: "At their core, the OPEN-NY Terms of Service are among the least restrictive of any terms of service … The OPEN-NY Terms of Service do **not** contain restrictions requiring members of the public to use attribution, to re-post the license terms with any re-uses of the data, to impose share-alike or technical restrictions, nor require the public to obtain pre-approval before re-use of the data." And: "So long as you are not doing anything malicious with NYS data, you may use it as you wish, subject to no other requirements." Conditions: lawful use; the State may require you in writing to stop displaying its content if it believes you are in breach. |
 | **Chicago businesses (`r5kz-chrr`), Chicago boundary (`qqq8-j68g`)** | Reuse and derivative applications are contemplated, but **conditionally** — see the required notice below. The city "may require a user of this data to terminate any and all display, distribution or other use … for any reason", reserves all intellectual-property rights, and requires the user to indemnify it. |
 
+| **Philadelphia businesses (`business_licenses`), Philadelphia boundary (`City_Limits`)** | Both carry a **named licence, "City of Philadelphia License"**, whose text is a rights reservation and disclaimer rather than a grant: the City "reserves all rights in the database and any data contained therein", the data is "as is" without warranty, the user "will assume complete responsibility for any and all occurrences resulting from its use or display" and holds the City harmless, and "browsing City data on this site constitutes acceptance". **Nothing forbids display or redistribution, and no attribution or notice is required.** The clearest affirmative signal is on the boundary dataset, which states **"Usage: Public use; Free"**; the business-licence dataset's page carries no such field, so that statement covers the boundary layer specifically. Both sit in the City's Open Data Program, whose stated purpose is public reuse. **One judgment call follows — see below.** |
+
 | **NYC DOHMH (`43nn-pn8j`), NYC DCWP (`w7w3-xahh`), NYC boroughs (`gthc-hcne`)** | **The absent licence field is required by law, not an oversight.** NYC's Open Data Technical Standards Manual states that Local Law 11 of 2012 "requires that data sets must be available **without registration requirement, license requirement, or usage restrictions**". The city therefore cannot attach a licence to these datasets. The "All Rights Reserved" notice in the nyc.gov footer covers nyc.gov's own website content, not datasets published under the Open Data Law. One condition does attach — see the notice below. |
 
 ### Still not established
@@ -167,6 +190,7 @@ leaves it empty, pointing to its developer terms instead.
 | **LA Metro** | **Restricted** — prohibits "unauthorized redistribution and publication" and requires you "not change, tamper, dismantle, augment, misrepresent or otherwise modify the Transport Information" | **Required** — must "acknowledge Metro as the provider of the Transport Information" and not claim ownership | No Metro trademark; must not "integrate Transport Information as part of any advertisement"; on termination you "shall immediately remove the Transport Information and all references to it" |
 | **CTA** | Permitted: "use, reproduce, distribute, display, process and create derivative works" | Optional but encouraged: "Data provided by Chicago Transit Authority", "Data provided by CTA" or "Powered by CTA data" | **Purpose-limited** — the licence is granted to "assist mass transit riders or promote public transportation"; may not sell CTA Data separate from the application; may not imply affiliation or endorsement |
 | **MTA** (New York) | "Our data feeds are free to use." No API key needed for the static subway feed | Not specified for the GTFS data | Logos, maps and symbols need a separate licence application (free of charge but must be applied for) |
+| **SEPTA** (Philadelphia) | Permitted: a "non-exclusive, non-assignable, non-transferable, limited and **revocable** right to use, reproduce and redistribute the datasets" | **Not required** — no attribution or notice clause anywhere in the agreement | "Licensee may not use SEPTA's trademarks and copyrighted materials for any commercial or profit-making use and may not alter them in any way." SEPTA "maintains title, ownership, rights and interest in and to the datasets", may revoke or modify the agreement at any time, and "reserves the right to institute a license fee at any time". As-is, no warranty, indemnification required; governed by Pennsylvania law, venue Philadelphia County. Note the agreement's own URL is misspelled in SEPTA's repo README (`wwww.septa.org`) |
 
 **Two of these needed a judgment call rather than just a notice. Both were
 decided by the project owner on 2026-09-21**, and the reasoning is recorded so
@@ -186,6 +210,34 @@ the position is a stated one rather than an assumption:
   rider-facing information about using the system, not merely an abstract
   analysis. It is also not sold, not advertising, and claims no affiliation —
   the clauses the purpose limitation sits beside.
+
+**Philadelphia added two more, both still OPEN as of 2026-09-21.** Recorded
+unresolved rather than read generously, per the `multi-source-city` skill's
+Step 3. Neither blocks building the city; both should be settled before the
+public deploy, alongside the required notices:
+
+- **SEPTA's trademark clause.** "Licensee may not use SEPTA's trademarks and
+  copyrighted materials for any commercial or profit-making use and may not
+  alter them in any way." Note what it does and does not cover: the sentence
+  is about *trademarks and copyrighted materials* — it points to SEPTA's
+  Copyright and Trademark Notice — while the *datasets* are covered by the
+  redistribution grant in the paragraph above it. The map uses SEPTA's real
+  public line names ("Market-Frankford Line") and its own `route_color`
+  values from `routes.txt`, and reproduces no SEPTA logo, wordmark or route
+  bullet artwork. **Open question:** whether the line names and official
+  colours count as trademarks being "used", and whether a portfolio site is
+  "commercial or profit-making". The conservative fallback if the answer is
+  yes: keep the geometry and substitute this project's own palette and
+  descriptive names.
+- **The "City of Philadelphia License" reserves all rights in the database.**
+  It grants nothing explicitly, forbids nothing explicitly, and requires no
+  notice. The affirmative signals are the City's Open Data Program and the
+  boundary dataset's "Usage: Public use; Free"; the business-licence dataset
+  carries no equivalent statement. **Open question:** whether a rights
+  reservation with no grant is a sufficient basis to publish a derived map of
+  that data. This is the same shape as the NYC question but with the opposite
+  paperwork — NYC is *forbidden* from imposing a licence, whereas Philadelphia
+  has imposed one that says only "we keep our rights".
 
 ### Basemap tiles — one active compliance item
 
@@ -326,16 +378,22 @@ pages' prose: naming each business registry's publishing agency.
    conditions worth acting on.
 5. ~~Decide LA Metro's "modification" clause and CTA's purpose limitation~~ —
    **decided 2026-09-21**, see the notes under the GTFS table.
+5b. **Decide SEPTA's trademark clause and the City of Philadelphia License's
+   rights reservation** — raised 2026-09-21, both still open. See the notes
+   under the GTFS table.
 6. **Display the required notices** (above) — the one thing that still blocks
    publishing, and part of the same app job as surfacing this page.
 7. **Decide the tile provider deliberately**, given that OSM's tile service is
    explicitly best-effort with no SLA.
 8. Optionally, read the Census geocoder's terms — the only source left unread.
 
-**Where this leaves the project:** every source's position is now established
+**Where this leaves the project:** every source's position is established
 except the Census geocoder, and nothing found forbids what this project does.
-What remains is not a permission question but an implementation one — four
-notices to display before the site goes public.
+Philadelphia added no new mandatory notice — SEPTA requires no attribution at
+all and the City of Philadelphia License requires none either — so the count of
+notices to display is still four. It did add **two open judgment calls** (see
+above), which are questions about permission rather than implementation and are
+the only items of that kind still outstanding.
 
 ## Gaps
 
