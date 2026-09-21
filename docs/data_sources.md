@@ -404,28 +404,46 @@ silence mean?**
   does not arise for Miami, and nothing in the rendered output reproduces
   County branding.
 
-**A fourth open question, and it is shared by three agencies rather than
-one: official route colours.** SEPTA's clause above is the specific case; the
-general one is that the maps draw each line in the agency's own `route_color`
-value from `routes.txt`, and more than one agency treats its map symbology as
-protected:
+**A fourth open question: agency branding — official route colours, and the
+line names beside them.** This was first written up as affecting three
+agencies. **Corrected 2026-09-21 after checking every city's config: it is
+FIVE**, and the two that were missing have the strictest wording of the set.
+The maps draw each line in the agency's own `route_color` from `routes.txt` and
+label it with the agency's own public line name, and most of these agencies
+treat their marks as protected:
 
-- **MTA** — logos, maps and symbols need a separate licence application, free
-  of charge but it must be applied for.
-- **SEPTA** — the trademark clause above.
-- **WMATA**, relevant only if D.C. is built — "prohibited from using WMATA
-  Intellectual Property, including any confusingly similar variants, in
-  association with the Transit Data or API unless you have entered into a
-  separate, written license agreement".
+| Agency | City | What its terms say about marks |
+|---|---|---|
+| **MTS** | San Diego | MTS trademarks **"may not be used in association with GTFS Data"** — a flat prohibition, not an application process, and the tightest wording here |
+| **LA Metro** | Los Angeles | **"No Metro trademark"**, alongside the modification clause already decided |
+| **CTA** | Chicago | May not imply affiliation or endorsement |
+| **MTA** | New York | Logos, maps and symbols need a separate licence application — free of charge, but it must be applied for |
+| **SEPTA** | Philadelphia | The trademark clause above, which also raises whether the line NAMES count |
+| **WMATA** | only if D.C. is built | "prohibited from using WMATA Intellectual Property, including any confusingly similar variants, in association with the Transit Data or API unless you have entered into a separate, written license agreement" |
+
+Two cities are **out of scope** because they already draw their own palette:
+San Francisco (a custom six-colour set, not Muni's) and Miami (purple/teal/
+brown, because Miami-Dade's orange and two greens collide with the
+business-category colours). So the question touches five of the seven built
+cities, not two.
+
+**It has two halves, and only one of them is optional.** The colours are a free
+choice — the project has already departed from an official value twice on its
+own initiative (San Francisco throughout, and Staten Island Railway's `#08179C`
+lightened for legibility). The **names are not**: a standing invariant requires
+every drawn line to carry its real public name on the map and in the legend, so
+"Red Line", "Market-Frankford Line" and "Metrorail" cannot simply be
+substituted without changing what the project promises a reader. If an
+agency's answer covers names as well as colours, that is a harder change than
+a palette swap.
 
 **Decided by the owner on 2026-09-21: keep the official colours and record this
-as an open question**, rather than pre-emptively substituting a palette. It is
-on the pre-deploy list with the two above and blocks nothing now. Two facts
-make it cheap to reverse if the answer comes back unfavourable: the colours
-live in one dict per city (`LINE_NAMES`), and the project has already departed
-from an official colour once on its own initiative — Staten Island Railway's
-`#08179C` was lightened for legibility — so nothing in the rendering depends on
-the values being the agency's.
+as an open question**, rather than pre-emptively substituting a palette. It
+blocks nothing now. What makes it cheap to reverse on the colour side is that
+each city's values live in one dict (`LINE_NAMES`, or the `LINE_SPECS` in its
+map step) and nothing in the rendering depends on them being the agency's.
+Nothing in the project reproduces a logo, wordmark or route-bullet artwork from
+any agency, which is the part every one of these clauses most clearly covers.
 
 ### Basemap tiles — one active compliance item
 
@@ -588,12 +606,19 @@ pages' prose: naming each business registry's publishing agency.
    first — it is also the only one of the three where no agency document exists
    to read, so settling it may mean asking the County rather than reading
    anything.
-5c. **Decide the official route-colour question** (MTA, SEPTA, and WMATA if
-   D.C. is built) — the owner chose on 2026-09-21 to keep the agencies' own
-   `route_color` values and record this rather than pre-emptively substituting
-   a palette. Cheap to reverse: the colours live in one dict per city, and two
-   cities already use this project's own palette (Miami by necessity, Staten
-   Island Railway for contrast).
+5c. **Decide the agency-branding question — official route colours AND the
+   line names beside them.** Affects **five of the seven built cities**: San
+   Diego (MTS), Los Angeles (LA Metro), Chicago (CTA), New York (MTA) and
+   Philadelphia (SEPTA), plus WMATA if D.C. is built. San Francisco and Miami
+   are out of scope, already drawing their own palettes. **MTS's wording is the
+   tightest in the project** — its trademarks "may not be used in association
+   with GTFS Data", a flat prohibition rather than an application process — so
+   start there rather than with MTA's, which merely needs a free application.
+   The owner chose on 2026-09-21 to keep the official colours and record this
+   rather than pre-emptively substituting palettes. Colours are cheap to
+   reverse (one dict per city); **line names are not**, because a standing
+   invariant requires every drawn line to carry its real public name. See the
+   table under the GTFS notes.
 6. **Display the required notices** (above) — the one thing that still blocks
    publishing, and part of the same app job as surfacing this page.
 7. **Decide the tile provider deliberately**, given that OSM's tile service is
