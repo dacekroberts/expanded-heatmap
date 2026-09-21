@@ -96,12 +96,39 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - The Girard Avenue Trolley's label uses SEPTA's own `#FFD700`, which is the
     lowest-contrast of the four over the orange heat wash. Cosmetic; swap for a
     darker gold if it reads badly on a real screen.
-- [ ] Boston - **re-probed 2026-09-21 and no longer ruled thin.** The 978-row
-  certified-vendor directory is not the only option: `data.boston.gov` also has
-  "Licensing Board Licenses", "Active Food Establishment Licenses" and
-  "Annual Entertainment Licenses". Needs a proper Step 0 on those - whether
-  they cover Retail and Personal services, and whether they carry coordinates.
-  Expect the `multi-source-city` path.
+- [ ] Boston - **Step 0 PASSED 2026-09-21. Viable, and the thinnest and
+  narrowest candidate in the project; whether to build it is an open decision.**
+  Full findings and every endpoint are in `docs/data_sources.md`, "Boston -
+  Step 0 findings". The shape: a **two-bucket** city like Philadelphia, with
+  Food service 2,237 premises, Retail 385 unambiguous plus 306 overlapping
+  package stores and 43 cannabis, and **Personal services absent** rather than
+  thin. That is ~2,740 sites over 71 in-city stations - roughly 2.3x thinner
+  per station than Philadelphia - and it is really *food* density, because
+  Boston licenses food and alcohol and no other trade. If it is built:
+  - Use the **902,651-row Food Establishment Inspections** history, filtered to
+    `licstatus='Active'` and collapsed to one row per `property_id`. Do **not**
+    use the official "Active Food Establishment Licenses" extract: it silently
+    drops the `RF` Retail Food category, which is the entire Retail bucket.
+  - `businessname` is the trade-name column, not `dbaname` - `dbaname` is blank
+    on 99.0% of rows, the reverse of every other city. A copied step 2 will
+    quietly produce almost nothing.
+  - Dedup **across** sources on address: package stores hold both an `RF`
+    licence and a `Retail All Alc.` licence at the same premises.
+  - Decide the `FT+RF` premises (31 of them, e.g. "Hyde Park Market",
+    "Shaw's Supermarkets No. 1208") - takeaway counter inside a grocer. Sample
+    and record the verdict, as Chicago's catch-alls were.
+  - `gpsx`/`gpsy` on the Licensing Board sets are **EPSG:2249** (Mass. State
+    Plane, US survey feet), verified by transformation, not assumed. Boston's
+    own projected CRS is **EPSG:32619** (UTM 19N), derived from longitude.
+  - Green Line = 4 street-running branches on a shared central subway, San
+    Francisco's exact shape, so `docs/sub_transit_line_filters.md` applies;
+    Red/Orange/Blue are well spaced and need no thinning.
+  - Get a **MassGIS multi-town boundary layer** as well as Boston's own outline,
+    so the 54 out-of-city stations can be named by municipality and the four
+    borderline ones (Boston College at 6.7 m is really in Boston) resolved.
+  - Add MassDOT's acknowledgement to the required notices (already listed).
+  - `Business Inventory` is recorded as available and **deliberately unused**;
+    revisit only if the city extends the survey city-wide.
 - [ ] Washington D.C. - `LATITUDE`/`LONGITUDE` are truncated to whole
   degrees; use `pipeline/census_geocoder.py` on `PREMISEADDRESS` (or the
   state-plane `X_COORDINATE`/`Y_COORDINATE` fields), and add a taxonomy

@@ -14,6 +14,107 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Boston Step 0: passed, and narrower than the shortlist assumed
+
+- **Verdict: viable, two buckets, not built.** Boston passes all three Step 0
+  requirements - business data, transit, boundary - and is the thinnest and
+  narrowest candidate the project has evaluated. Recorded rather than built:
+  the project owner chose to probe the remaining candidates (D.C., Dallas and
+  the rest of the list) for licensing and viability dealbreakers first, then
+  decide which to build and which to exclude. No pipeline code was written.
+- **The whole catalogue matters, not the search hits.** Seven search terms
+  against CKAN's `package_search` returned 48 packages; `package_list` returns
+  **247**. The extra 199 held the city boundary layer, the SAM address points
+  and the Property Assessment roll - all three directly relevant, none of them
+  surfaced by the obvious queries. Pull the full list.
+- **Boston licenses food and alcohol, and no other trade.** Inspectional
+  Services covers food; the Licensing Board covers alcohol, lodging, billiards
+  and bowling. Deduplicated to premises: Food service 2,237, Retail 385
+  unambiguous (`RF`-only), plus 306 package stores and 43 cannabis shops that
+  *overlap* the `RF` set. So a "commercial density" map of Boston built from
+  licences is really a **food density** map - a narrowing of the project's
+  premise that had to be named rather than absorbed.
+- **The official "Active" extract is the wrong file, and the reason is a
+  silently missing category.** `Active Food Establishment Licenses` (3,345
+  rows) is exactly `FS` 1,762 + `FT` 1,583 licences and contains no `RF`
+  (Retail Food) at all - which would have made Boston a **one-bucket** city and
+  probably disqualified it. The 902,651-row inspections history carries the
+  same `licensecat` field including `RF`'s 504 active premises, and has better
+  coordinates too: 99.9% of active premises versus 93.8%. Found by asking the
+  history for `SELECT DISTINCT licensecat` rather than trusting the extract's
+  own two values - the same move that filled Philadelphia's taxonomy.
+- **Personal services is absent, not thin - and that was verified, not
+  inferred.** Massachusetts licenses cosmetology and barbering at state level
+  and publishes no address-bearing export; its register is a per-licence
+  ePLACE/MADOL lookup. Checked three independent ways: Socrata's cross-domain
+  discovery API returns **no Massachusetts source** for cosmetology, barber,
+  salon, hair, nail salon, body art or tattoo (the only MA domains indexed are
+  an education portal and state spending); `data.mass.gov` is not a data portal
+  at all, returning HTML 404 from both Socrata and CKAN entry points; and
+  `opendata.mass.gov` does not resolve. Same structural cause as Philadelphia,
+  and the second city where a bucket has no source in the entire jurisdiction.
+- **Rejected the one source that would have made Boston a three-bucket city,
+  on coverage grounds.** `Business Inventory` is a summer-2025 field census
+  with almost exactly this project's taxonomy - `Beauty_Services` 243
+  (Hair_Salon 101, Barber_Shop 46, Nail_Salon 32), Clothing_Store,
+  Jewelry_Store, Laundry, Tailor - carrying WGS84 coordinates on 99.8% of rows
+  and even a vacancy flag. Its own notes state the limit: "every storefront in
+  downtown Boston, as well as comprehensive data on 3 major commercial
+  corridors in Mattapan, Jamaica Plain, and Allston." Measured: 37 occupied
+  0.01-degree cells, 18 ZIPs, 14 rows in Brookline. **A heat surface built on a
+  partial survey shows where surveyors walked, not where commerce is**, and
+  mixing it into the heat layer would make four areas read as three-bucket and
+  the rest as two. Recorded in `docs/data_sources.md` as available and
+  deliberately unused, with the trigger for revisiting it (a city-wide survey).
+  It is also the only dataset on the portal whose licence is `notspecified`, so
+  using it would require establishing terms first.
+- **Trade-name convention is inverted here, which would have broken a copied
+  step 2 quietly.** In the food data `dbaname` is blank on **99.0%** of rows
+  while `businessname` is never blank and holds the trade name. Every built
+  city prefers the `dba` column, so a copied step 2 would have fallen back to
+  near-nothing rather than failing loudly. Measured because the `add-city`
+  skill requires checking the trade-name blank rate - the check that caught Los
+  Angeles' 68% and ~4,000 individuals' names. (The Licensing Board sets use the
+  normal convention, so the two cannot share one rule.)
+- **CRS verified by transformation, not by inspection.** `gpsx`/`gpsy` look
+  like Massachusetts State Plane and are: EPSG:2249 puts Copley Square at
+  (42.3486, -71.0788) and Brighton Avenue in Allston, while EPSG:26986 - the
+  metre-based sibling of the same state plane, the plausible wrong answer -
+  lands everything near 60 degrees north. Boston's own projected CRS would be
+  EPSG:32619 (UTM 19N), derived from longitude rather than copied.
+- **71 of 125 rapid-transit stations are inside Boston.** The other 54 lie in
+  Brookline, Cambridge, Somerville, Newton, Medford, Malden, Quincy, Revere and
+  Milton - the entire Green Line C corridor is Brookline. Consistent with San
+  Diego's 16 of 63 and Los Angeles' 54 of 110: the boundary filter is not
+  optional. Four stations fall marginally outside because the boundary layer
+  excludes water, and they do not all resolve the same way - Boston College at
+  6.7 m is genuinely a Boston station, Central Avenue at 29.7 m is genuinely
+  Milton - so a distance tolerance cannot separate them and a MassGIS multi-town
+  layer is needed to name the municipality. Green Line is four street-running
+  branches on a shared central subway: San Francisco's shape, so
+  `docs/sub_transit_line_filters.md` would apply. The 14 `CR-*` Regional Rail
+  lines would be excluded, as commuter rail has been in every built city.
+- **Licences: the cleanest city so far, with one obligation.** Every source
+  used is **ODC-PDDL**, a public-domain dedication declared per dataset. The
+  MBTA feed declares no licence in `feed_info.txt`, so the MassDOT Developers
+  License Agreement was read in full: it grants use, reproduction and
+  redistribution, **expressly permits combining the data with other data**
+  (§4.2), and contains **no restriction on modification** - the direct opposite
+  of LA Metro's clause, the tightest in the project. It requires one notice,
+  "Clearly acknowledge MassDOT as the provider of the Data" (§4.1), and forbids
+  reproducing MBTA logos or trademarks, which this project satisfies by
+  construction since it draws its own geometry and reproduces no roundel. Added
+  to the required-notices list as conditional on Boston actually being built,
+  so it is not mistaken for an outstanding compliance item today. Reading it
+  needed the browser and then a local PDF extraction, because `mass.gov`
+  returns 403 to automated fetches and the agreement is a PDF the browser
+  downloads rather than renders.
+- **Corrected a stale count in `docs/data_sources.md`.** The required-notices
+  preamble said "three sources require specific text, and one of the three is
+  already satisfied", which had not matched its own list since LA Metro was
+  added as item 4. Now states four required with one satisfied, and separates
+  the conditional ones (New York, MassDOT) from the encouraged one (CTA).
+
 ### 2026-09-21 - San Diego, done properly: 315 pins, not 42
 
 - **The 42 was a method artifact, as suspected, and the corrected figure is

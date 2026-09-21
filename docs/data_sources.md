@@ -56,6 +56,10 @@ purchased, or behind a login.
 | New York | DCWP Issued Licenses (Socrata `w7w3-xahh`) | **Retail**, a narrow regulated slice | `https://data.cityofnewyork.us/resource/w7w3-xahh.csv` | `license_status='Active' AND license_type='Premises'` | 2026-09-21 |
 | Philadelphia | L&I Business Licenses (Carto SQL API, table `business_licenses`) | **Food service** and **Retail** only — see below | `https://phl.carto.com/api/v2/sql` (`format=csv`) | `licensestatus='Active' AND licensetype IN (…13 types…)`, built from `config.KEPT_LICENSETYPES`; selected columns, **no registrant-name column** (`legalfirstname`, `legallastname`, `legalname`, `opa_owner`, `ownercontact*name` are all deliberately unselected and asserted absent in step 2) | 2026-09-21 |
 | Philadelphia | OPA Property Assessments (Carto SQL API, table `opa_properties_public`, 583,779 rows) | Not businesses — **joined** to the above for the residence check | same endpoint, `LEFT JOIN opa_properties_public p ON b.opa_account_num = p.parcel_number` (matches 94% of licences) | 2026-09-21 |
+| Boston — **Step 0 only, NOT BUILT** | Food Establishment Inspections (CKAN resource `4582bec6-2b4f-4f9e-bc55-cbaa73117f4c`) | **Food service** and **Retail** only — see below | `https://data.boston.gov/api/3/action/datastore_search_sql` (CKAN datastore; `datastore_search` for paging) | `licstatus='Active'`, then collapsed to one row per `property_id` — it is a violation-level inspection history, 902,651 rows | 2026-09-21 |
+| Boston — **Step 0 only, NOT BUILT** | Licensing Board Licenses (CKAN resource `04dc653b-1789-4374-9669-b07df7233344`, 3,587 rows) | **Retail** — package stores, via `license_type LIKE 'Retail%'` | same endpoint | `status='Active'` (the file is already active-only); coordinates are `gpsx`/`gpsy` in **EPSG:2249**, not lat/lon | 2026-09-21 |
+| Boston — **Step 0 only, NOT BUILT** | Cannabis Active Licenses (CKAN resource `e395fd88-0f81-4399-a57a-3e94a74b145c`, 43 rows) | **Retail** — dispensaries | same endpoint | none (whole file) | 2026-09-21 |
+| Boston — **recorded, deliberately NOT used** | Business Inventory (CKAN resource `47bd8208-f648-4309-8f65-de7416d63157`, 2,634 rows) | Would cover **all three buckets**, and is the only Boston source that reaches Personal services | same endpoint | — | 2026-09-21 |
 
 The Philadelphia parcel join exists to answer one privacy question the address
 text cannot: **is this "business" someone's home?** Only two derived values are
@@ -87,6 +91,56 @@ laundry across both Carto licence tables returns nothing, so **Personal
 services has no source in Philadelphia at all**. That is recorded in
 `docs/excluded_categories.md` under what is *missing* rather than *excluded*.
 
+### Boston — Step 0 findings, 2026-09-21
+
+Probed but **not built**; the verdict on whether to build it is open in
+`PLAN.md`. Four things here are worth not rediscovering.
+
+**Boston licenses food, and almost nothing else.** Inspectional Services
+licenses food; the Licensing Board licenses alcohol, lodging, billiards and
+bowling. There is no general business licence and no personal-service licence.
+Deduplicated to premises: **Food service 2,237**, **Retail 385** unambiguous
+(`RF`-only), plus 306 package stores and 43 cannabis shops that *overlap* the
+`RF` set — "Go Fresh 365 / Ming's Supermarket" holds both an `RF` licence and a
+`Retail All Alc.` licence at 1102 Washington St, so cross-source dedup is
+mandatory rather than optional.
+
+**The official "Active Food Establishment Licenses" extract silently drops a
+category, so do not use it.** Resource `f1e13724-284d-478c-b8bc-ef042aa5b70b`
+(3,345 rows) is exactly `FS` 1,762 + `FT` 1,583 licences and contains no `RF`
+(Retail Food) at all — which would make Boston a one-bucket city. The
+902,651-row inspections history carries the same `licensecat` field, including
+`RF`'s 504 active premises, and has better coordinates: **99.9%** of active
+premises carry a usable `location` versus 93.8% in the extract. There are no
+*corrupt* coordinates in either, unlike Los Angeles' ~9% — the only bad rows
+are honest NULLs.
+
+**`dbaname` is blank on 99.0% of the food rows and `businessname` is never
+blank and holds the trade name** — the reverse of every other city's
+convention. A step 2 that prefers the `dba` column, as every built city's does,
+would get almost nothing here. (The Licensing Board sets use the normal
+convention: `dba_name` is the trade name, `business_name` the legal entity.)
+
+| Candidate for Boston's missing Personal services | Why it is unusable |
+|---|---|
+| Massachusetts Board of Registration of Cosmetology and Barbering | The state licenses salons, barbershops and manicuring shops, and publishes **no address-bearing export**. Its register is the ePLACE / MADOL portal (`occupationallicensingandpermitting.mass.gov/madol/s/license-search-page`), a per-licence lookup with no bulk download — the same shape as San Jose's rejected third-party tool and Pennsylvania's PALS |
+| Any Socrata-hosted Massachusetts dataset | Checked via Socrata's cross-domain discovery API (`api.us.socrata.com/api/catalog/v1`) for cosmetology / barber / salon / hair / nail salon / body art / tattoo. **No Massachusetts source appears for any of them**; the only MA domains indexed at all are `educationtocareer.data.mass.gov` and `cthru.data.socrata.com` (state spending). New York's equivalent (`y3u4-jbgh`) has no Massachusetts counterpart |
+| `data.mass.gov` as a portal | Not a data portal. Both the Socrata (`/api/views/metadata/v1`) and CKAN (`/api/3/action/package_list`) entry points return an HTML 404; `opendata.mass.gov` does not resolve |
+| Boston "Certified Business Directory" (979 rows) | The source the shortlist originally recorded, and correctly ruled out: a **vendor certification** directory (MBE/WBE/veteran), not a storefront list. Its addresses are regional rather than in-city (the first sampled row is in Milton), and it carries `contact_name`, `phone`, `fax` and `email` — personal contact details this project strips |
+
+**The one source that would cover all three buckets is a partial survey.**
+`Business Inventory` is a summer-2025 field census with exactly this project's
+taxonomy — `Beauty_Services` 243 (Hair_Salon 101, Barber_Shop 46, Nail_Salon
+32), plus Clothing_Store, Jewelry_Store, Laundry, Tailor — with WGS84
+`x_coord`/`y_coord` on 99.8% of rows and even a `vacant` flag. Its own notes
+give the limit: "every storefront in downtown Boston, as well as comprehensive
+data on 3 major commercial corridors in Mattapan, Jamaica Plain, and Allston."
+Measured: 37 occupied 0.01° cells, 18 ZIPs, and 14 rows in **Brookline**, a
+different municipality. A heat surface built on it would show where surveyors
+walked rather than where commerce is, so it is recorded as available and
+deliberately unused. Its licence is also the only "not specified" one on the
+portal.
+
 ## Transit feeds (GTFS)
 
 | City | Agency / system | Endpoint | Retrieved | Note |
@@ -96,6 +150,7 @@ services has no source in Philadelphia at all**. That is recorded in
 | Los Angeles | LA Metro Rail | `https://gitlab.com/LACMTA/gtfs_rail/raw/master/gtfs_rail.zip` | ≈2026-09-19 | Metro's rail-only feed |
 | Chicago | CTA | `https://www.transitchicago.com/downloads/sch_data/google_transit.zip` | 2026-09-20 | |
 | New York | MTA subway + Staten Island Railway | `https://rrgtfsfeeds.s3.amazonaws.com/gtfs_subway.zip` | 2026-09-21 | The `web.mta.info/developers/data/nyct/subway/google_transit.zip` path is **dead** |
+| Boston — **Step 0 only, NOT BUILT** | MBTA rapid transit | `https://cdn.mbta.com/MBTA_GTFS.zip` | 2026-09-21 | 24.9 MB, HTTP 200, 32 files. Rapid transit is `Red`, `Orange`, `Blue`, `Mattapan` and `Green-B`/`-C`/`-D`/`-E`; the 14 `CR-*` Regional Rail routes are commuter rail and would be excluded as in every built city. `feed_info.txt` declares **no licence field at all** |
 | Philadelphia | SEPTA Metro | `https://github.com/septadev/GTFS/releases/latest/download/gtfs_public.zip` | 2026-09-21 | **A zip of zips.** Contains `google_bus.zip` and `google_rail.zip`; `fetch_sources.py` extracts the **bus** one, because SEPTA's City Transit Division — and therefore the Market-Frankford Line, Broad Street Line and every trolley — is in that feed, not the "rail" one. `google_rail.zip` is Regional Rail, which this project does not draw. The naming is not guessable; both route tables were read to establish it |
 
 ## Boundary layers
@@ -112,11 +167,23 @@ in 23 other municipalities.
 | Chicago | Socrata "Boundaries - City" (`qqq8-j68g`) | `https://data.cityofchicago.org/resource/qqq8-j68g.geojson?$limit=10` | whole city |
 | New York | Borough Boundaries (`gthc-hcne`) | `https://data.cityofnewyork.us/resource/gthc-hcne.geojson?$limit=10` | all five boroughs = the city |
 | Philadelphia | OpenDataPhilly "City Limits" (Dept of Planning and Development) | `https://services.arcgis.com/fLeGjb7u4uXqeF9q/arcgis/rest/services/City_Limits/FeatureServer/0/query` (`where=1=1`, `outSR=4326`, `f=geojson`) | whole city (one polygon, 2,957 vertices) |
+| Boston — **Step 0 only, NOT BUILT** | "City of Boston Outline Boundary (Water Excluded)" | `https://data.boston.gov/dataset/a70595d2-fd38-4bcb-8a81-6f7807621d38/resource/dade0744-a486-44c7-be7d-07240a89dca4/download/city_of_boston_outline_boundary_water_excluded.geojson` | whole city (one polygon) |
 
 Chicago note: the sibling asset `ewy2-6yfk` ("Boundaries - City - Map") has
 null geometry; `qqq8-j68g` is the usable one.
 New York note: `tqmj-j8zm`, the borough-boundary ID still in wide circulation,
 now returns 404.
+Boston note: the boundary **excludes water**, which is the right choice for
+scoping but puts four rapid-transit stations marginally outside it — Boston
+College at 6.7 m (genuinely a Boston station, in Brighton), Mattapan's Central
+Avenue at 29.7 m, Longwood at 51.8 m and Saint Mary's Street at 58.4 m (the
+last two genuinely Brookline). A tolerance that recovers Boston College also
+admits Central Avenue, so naming the *municipality* is what separates them, and
+that needs a multi-town layer (MassGIS) rather than Boston's own outline.
+Measured with this layer: **71 of 125** rapid-transit stations fall inside the
+city, with the other 54 in Brookline, Cambridge, Somerville, Newton, Medford,
+Malden, Quincy, Revere and Milton — the whole Green Line C corridor is in
+Brookline.
 San Francisco note: `wamw-vt4s` is a **nine-county** Bay Area layer, so the
 `county` filter is not optional — unfiltered it would scope the city to the
 whole region. This endpoint was recovered on 2026-09-21 (it had been recorded
@@ -154,6 +221,7 @@ independent of what is *permitted*. That is in `docs/excluded_categories.md`.
 | San Francisco boundary (`wamw-vt4s`) | **Open Data Commons PDDL 1.0** | none declared |
 | Los Angeles businesses (`6rrh-rzua`) | **CC0 1.0 Universal** (public domain dedication) | "Office of Finance" |
 | San Diego businesses | Portal terms explicitly permit use and **"Derivative Work"**, defined as "a work that is based in any way or to any extent on the Data". No attribution requirement stated | — |
+| Boston — every source used above (food inspections, Licensing Board, cannabis, city boundary, plus the neighbourhood, SAM address and Property Assessment layers) | **Open Data Commons PDDL** (public domain dedication), declared per-dataset in CKAN's `license_id` as `odc-pddl` | none declared |
 
 PDDL and CC0 are both public-domain dedications, so neither compels
 attribution; the maps credit these agencies anyway, which is good practice.
@@ -179,6 +247,7 @@ user indemnifies the city for claims arising from their use of it.
 | Source | Status |
 |---|---|
 | **US Census bulk geocoder** | Terms page not read. A US federal government work, used only to derive coordinates stored in this project's own outputs. Low priority, and the only item left unread.
+| **Boston "Business Inventory" (`47bd8208`)** | The one dataset on `data.boston.gov` whose `license_id` is `notspecified` rather than `odc-pddl`. Not established, and not pursued, because the source is deliberately unused (its coverage is downtown plus three corridors). **If it is ever used, the governing terms must be established first** — the portal's own "Open and Protected Data Policy" and the 2014 open-data executive order are the documents to read, not the boston.gov site footer. That is the NYC lesson: the parent site's notice covers the website, not the datasets.
 
 Note the shape of this. **The business registries are mostly permissive and the
 transit feeds are mostly not** — and the two are inverted within Los Angeles,
@@ -200,6 +269,7 @@ leaves it empty, pointing to its developer terms instead.
 | **LA Metro** | **Restricted** — prohibits "unauthorized redistribution and publication" and requires you "not change, tamper, dismantle, augment, misrepresent or otherwise modify the Transport Information" | **Required** — must "acknowledge Metro as the provider of the Transport Information" and not claim ownership | No Metro trademark; must not "integrate Transport Information as part of any advertisement"; on termination you "shall immediately remove the Transport Information and all references to it" |
 | **CTA** | Permitted: "use, reproduce, distribute, display, process and create derivative works" | Optional but encouraged: "Data provided by Chicago Transit Authority", "Data provided by CTA" or "Powered by CTA data" | **Purpose-limited** — the licence is granted to "assist mass transit riders or promote public transportation"; may not sell CTA Data separate from the application; may not imply affiliation or endorsement |
 | **MTA** (New York) | "Our data feeds are free to use." No API key needed for the static subway feed | Not specified for the GTFS data | Logos, maps and symbols need a separate licence application (free of charge but must be applied for) |
+| **MBTA / MassDOT** (Boston) | Permitted: §3.1 grants "non-exclusive, limited, and revocable rights to use, reproduce, and redistribute the Data" | **Required** — §4.1 "Clearly acknowledge MassDOT as the provider of the Data" | §4.2 **expressly permits** combining the Data with other data. §4.1 forbids reproducing "MassDOT or any of its agencies or authorities logos or trademarks in connection with the Data", misrepresenting the Data, claiming ownership of it, or representing yourself as MassDOT or its agent. As-is with "all faults"; MassDOT may alter the terms or revoke the Data at any time without notice; Massachusetts law, venue Suffolk County. Document dated 2009-11-13, at `https://cdn.mbta.com/sites/default/files/2023-08/mbta-massdot-develop-license-agreement.pdf` — reachable from `mbta.com/developers/gtfs`, and the only route to the terms, since `feed_info.txt` declares none |
 | **SEPTA** (Philadelphia) | Permitted: a "non-exclusive, non-assignable, non-transferable, limited and **revocable** right to use, reproduce and redistribute the datasets" | **Not required** — no attribution or notice clause anywhere in the agreement | "Licensee may not use SEPTA's trademarks and copyrighted materials for any commercial or profit-making use and may not alter them in any way." SEPTA "maintains title, ownership, rights and interest in and to the datasets", may revoke or modify the agreement at any time, and "reserves the right to institute a license fee at any time". As-is, no warranty, indemnification required; governed by Pennsylvania law, venue Philadelphia County. Note the agreement's own URL is misspelled in SEPTA's repo README (`wwww.septa.org`) |
 
 **Two of these needed a judgment call rather than just a notice. Both were
@@ -220,6 +290,19 @@ the position is a stated one rather than an assumption:
   rider-facing information about using the system, not merely an abstract
   analysis. It is also not sold, not advertising, and claims no affiliation —
   the clauses the purpose limitation sits beside.
+
+**MassDOT needed no judgment call, which is worth stating positively.** Its
+agreement is the same family as MTS's and SEPTA's — a revocable grant to use,
+reproduce and redistribute — but it is the only transit licence here that
+*expressly permits* combining the data with other data (§4.2), and it contains
+**no restriction on modification at all**. That is the direct opposite of LA
+Metro's clause, the tightest in the project, and it means redrawing
+`shapes.txt` into a map raises no question. The obligations are mechanical: one
+acknowledgement notice, and no MBTA logos or trademarks. Since this project
+draws its own line geometry and labels lines with their real public names while
+reproducing no roundel or T mark, the trademark clause is satisfied by
+construction rather than by interpretation — unlike SEPTA's, which remains
+open.
 
 **Philadelphia added two more, both still OPEN as of 2026-09-21.** Recorded
 unresolved rather than read generously, per the `multi-source-city` skill's
@@ -309,9 +392,13 @@ want something removed should be able to see it without asking first.
 
 ## Notices this project MUST display when published
 
-This is the operative output of the licence review: three sources require
-specific text, and one of the three is already satisfied. These are
-obligations, not courtesies. They belong with the app work that surfaces this
+This is the operative output of the licence review. As of 2026-09-21, for the
+six cities actually built: **four sources require specific text or
+acknowledgement, and one of the four is already satisfied** (OpenStreetMap);
+Chicago, SFMTA and LA Metro are outstanding. New York adds a conditional
+identification requirement that is largely already met, CTA encourages but does
+not require credit, and MassDOT's acknowledgement activates only if Boston is
+built. These are obligations, not courtesies. They belong with the app work that surfaces this
 page and `excluded_categories.md` (see `PLAN.md`) — publishing the maps
 without them would breach terms this project has now read.
 
@@ -370,6 +457,14 @@ surfacing both documents rather than only one:
 **6. CTA — encouraged, not required.** If credited, use one of CTA's own
 forms: "Data provided by Chicago Transit Authority", "Data provided by CTA",
 or "Powered by CTA data".
+
+**7. MassDOT / MBTA — required IF Boston is ever built; not applicable today.**
+§4.1 of the MassDOT Developers License Agreement requires the licensee to
+"Clearly acknowledge MassDOT as the provider of the Data". No exact wording is
+prescribed, so "Rail alignment data provided by MassDOT/MBTA" would meet it —
+the same shape as LA Metro's obligation. Boston is Step 0 only, so **this is
+not an outstanding compliance item yet**; it becomes one the moment a Boston
+map is committed. Listed here so it cannot be missed later.
 
 Not required by anyone, but good practice and already partly done in the city
 pages' prose: naming each business registry's publishing agency.
