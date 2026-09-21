@@ -9,7 +9,10 @@ the city research.
 **Adding a city? Use the `add-city` skill** (`.claude/skills/add-city/`) -
 the process the built cities actually followed - and the `scaffold-city` skill
 (`scripts/scaffold_city.py`) to generate its config, map script, page and
-`cities.py` entry once Step 0 passes.
+`cities.py` entry once Step 0 passes. **If one registry does not cover all
+three buckets, use `multi-source-city`** - most large US cities do not license
+general retail, so this is the common case rather than the exception (New York
+needed four sources; Philadelphia's is 79% landlord registrations).
 
 ## Invariants
 

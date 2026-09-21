@@ -105,13 +105,19 @@ hides the fact that dataset IDs get retired.
    weaken it for a source with tighter terms; the answer to tight terms is to
    record them and comply, not to hedge the commitment.
 
-**One source need not be enough.** New York has no general business licence,
-so no single registry covers it; its coverage is assembled from four, each
-authoritative for one bucket, unioned in step 2 with a `source` column and
-dispatched by a wrapper taxonomy. If a city's best registry turns out to cover
-only part of the subject, check for a per-bucket source before either
-accepting a skewed map or dropping the city - and say plainly on the city's
-page which buckets are less complete.
+**One source need not be enough - and for most large US cities it is not.**
+Pull the category *distribution* here, not just the schema, and read it against
+the three buckets: could a reader find a restaurant, a grocer, a clothes shop
+and a hairdresser in this data? New York's recorded source held zero
+restaurants, grocery, clothing or salons; 79% of Philadelphia's active licences
+are residential landlord registrations. Both passed a schema check and answered
+a different question, and a big row count hid it in each case.
+
+**If any bucket comes back empty or thin, use the `multi-source-city` skill**
+(`.claude/skills/multi-source-city/`). It carries the diagnosis, the source
+archetype per bucket, the dispatching-taxonomy architecture, the cross-source
+dedup rules, and - the part most easily skipped - the licence and privacy
+checks that every added source multiplies.
 
 If it passes but the build won't start right away (a usage limit, a new
 session), turn what the probe found and left open into an ordered checklist
