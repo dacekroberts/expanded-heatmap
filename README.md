@@ -3,10 +3,7 @@
 *(The repository is `expanded-heatmap`; the site is called Storefronts Near
 Transit. A standing rule is that this project is never named after a city.)*
 
-**Live site: TODO — paste the Streamlit Cloud URL here once the app is
-created.** The subdomain is chosen at app creation and cannot be derived
-in advance; this line and the `PLAN.md` entry beside it are the only two
-places that need it.
+**Live site: <https://expanded-heatmap-daceroberts.streamlit.app>**
 
 A multi-city map of how commercial activity clusters around rail-transit
 stations. For each city it shows retail, food-service and personal-service

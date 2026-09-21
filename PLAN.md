@@ -613,10 +613,12 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     the modifications half that some of those terms require a re-publisher
     to state. The copyright line reads `dacekroberts`, the identity this
     project commits under - change it if a legal name is wanted.
-  - [ ] **Deployed URL** - placeholder in place. The Streamlit Cloud
-    subdomain is chosen at app creation and cannot be derived, so there is
-    a marked `TODO` at the top of `README.md`; that line and this one are
-    the only two places that need it.
+  - [x] **Deployed URL - LIVE 2026-09-21:**
+    <https://expanded-heatmap-daceroberts.streamlit.app>, in `README.md`.
+    Note the subdomain carries the REPOSITORY name while the site is titled
+    "Storefronts Near Transit". Unlike the main-file path, a Streamlit Cloud
+    app's URL CAN be changed later from the app's settings, so this is
+    reversible if the mismatch ever grates.
 
 ## Data quality follow-ups
 
