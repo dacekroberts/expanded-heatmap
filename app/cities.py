@@ -3,7 +3,16 @@ macro map, its fallback link list, and every city page's city switcher.
 
 Adding a city means adding its entry here (plus its page under app/pages/).
 `page` is relative to the entry script (app/Overview.py), which is what
-st.page_link and st.switch_page expect. `lat`/`lon` place the
+st.page_link and st.switch_page expect.
+
+PAGE NUMBERING: cities are numbered 1..N in the order they were IMPLEMENTED,
+and the two information pages sit at 90 and 91 so they never compete for a
+city's slot and always sort last in the sidebar. Vancouver is 10 as the tenth
+city; **11 is the next free city slot**, which
+`scripts/scaffold_city.py`'s `next_page_number()` already returns on its own
+because it globs `*_Heatmap.py` and so does not see 90 or 91. Nothing needs
+reserving by hand - just do not renumber a city page without updating its
+`page` value here, since these two are the only link between them. `lat`/`lon` place the
 city's marker on the macro map; they only need to be a sensible centre of its
 mapped area, not the exact centre of the city's own map.
 
@@ -181,7 +190,7 @@ CITIES = [
         "name": "Vancouver (Regional)",
         "lat": 49.2827,
         "lon": -123.1207,
-        "page": "pages/12_Vancouver_Heatmap.py",
+        "page": "pages/10_Vancouver_Heatmap.py",
         "blurb": "SkyTrain (24 stations across Vancouver and Surrey)",
         # OUTSIDE THE DEFAULT VIEW - the first city to be, and the reason the
         # flag exists. See IN_DEFAULT_VIEW below.
