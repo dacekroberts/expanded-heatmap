@@ -80,11 +80,17 @@ than a fact to discover during one.
 
 ### Tier 2 — one leg excellent, the other genuinely open
 
-| | Status |
-|---|---|
-| **Mexico** | **The best business data found anywhere** — DENUE, 6M+ establishments, coordinates, **SCIAN = NAICS** so the taxonomy may transfer — and **a licence that clears** (INEGI, commercial use explicit). **But Mexico City's feed is unreachable:** the S3 mirror returns **403** and the city portal **times out**. **Guadalajara works** — *Mi Tren* / SITEUR, **3 LRT lines**, measured — so Mexico is viable through its second city even if CDMX stays shut. |
-| **Spain** / Barcelona | **Now both legs measured — promote on the next pass.** Business: the 68,024-premises ground-floor census. Rail: **FGC subway 4 + funicular 3** in Barcelona, and Spain additionally has **Madrid subway 13**, Bilbao, Málaga, Valencia and Sevilla metros — **six metro cities in one country**, more than any other candidate. The only gap is that TMB's own feed 404s, and TMB runs Barcelona's L1–L5; FGC alone understates the city. |
-| **South Korea** | Business **MEASURED and ideal** — 195 municipal permit types, KOGL Type 1. **Zero transit feeds in the catalogue.** Everything rests on whether the national transport source serves something readable. |
+| | Data | Rail | What is missing |
+|---|---|---|---|
+| **Spain** | **MEASURED** — Barcelona's 68,024-premises ground-floor census | **MEASURED** — Madrid subway 13, Barcelona FGC subway 4 + funicular 3, plus Bilbao, Málaga, Valencia, Sevilla: **six metro cities, more than any other candidate** | **The licence.** Open Data Barcelona's terms have not been read. That is the only gap, and it is one document |
+| **Mexico** | **MEASURED** — DENUE, 6M+ establishments, coordinates, **SCIAN = NAICS** so the taxonomy may transfer | **Partial** — Guadalajara LRT 3 measured and current; **Mexico City unreachable** (S3 403, city portal refuses connections) | A working CDMX feed. Viable through Guadalajara regardless |
+| **South Korea** | **MEASURED** — 195 municipal permit types, KOGL Type 1 | **Nothing** — zero feeds in the catalogue | Everything rests on whether the national transport source serves something readable |
+
+**Spain overtook Mexico this round.** Its business leg was already the
+Montréal model and its rail leg is now the deepest measured anywhere in this
+screen — six metro cities in one country, against Canada's six *candidate*
+cities of which only two had a metro. What stands between Spain and Tier 1 is
+a single unread licence, not a data question.
 
 ### Tier 3 — rail measured, business data unknown
 
@@ -101,46 +107,75 @@ Rotterdam** (subway 14, tram 46), **Berlin** (urban rail 9, tram 48),
 funicular 3). Each still needs its business register probed, and **each sits
 under GDPR**, which is the expensive half.
 
-| City | Rail (MEASURED) |
-|---|---|
-| **Santiago**, Chile | **subway 7**, tram 2, bus 418 — current DTPM feed |
-| **Sofia**, Bulgaria | **subway 4**, tram 24, trolleybus 30 |
-| **Bucharest**, Romania | **subway 5**, tram 15, trolleybus 16 |
-| **Bangkok**, Thailand | **subway 4**, LRT 5 (+189 commuter, excluded) |
-| **Athens**, Greece | **subway 3**, tram 2 — a dedicated rail feed on `data.gov.gr` |
-| **Budapest**, Hungary | **subway 4**, tram 42 — but **feed expired 20260704**, so treat as unconfirmed |
-| **Singapore** | **subway 13** — but a city-state, and its business data is likely registered-office shaped |
-| **Hyderabad / Kochi**, India | **subway 3 / subway 1** — real metro feeds |
-| **Cairo**, Egypt | **subway 2** — but **feed expired 20251027**, eleven months stale |
+| City | Country | Rail (MEASURED) |
+|---|---|---|
+| **Vienna** | AT | **subway 35**, tram 185 — the deepest measured in this screen |
+| **Amsterdam / Rotterdam** | NL | subway 14, tram 46 |
+| **Berlin** | DE | urban rail 9, tram 48 |
+| **Stockholm** | SE | metro 7, tram 21 |
+| **Santiago** | CL | **subway 7**, tram 2 |
+| **São Paulo** | BR | **subway 6** |
+| **Bucharest** | RO | subway 5, tram 15 |
+| **Oslo** | NO | metro 5, tram 9 |
+| **Lisbon** | PT | **subway 10** |
+| **Singapore** | SG | **subway 13** — but a city-state, and its register is likely registered-office shaped |
+| **Sofia** | BG | subway 4, tram 24 |
+| **Copenhagen** | DK | subway 4, tram 4 |
+| **Bangkok** | TH | subway 4, LRT 5 |
+| **Helsinki** | FI | subway 4, tram 26 — *feed expired* |
+| **Budapest** | HU | subway 4, tram 42 — *feed expired* |
+| **Hamburg** | DE | underground 4 — *feed expired* |
+| **Prague** | CZ | subway 3, tram 40 — *feed expired* |
+| **Athens** | GR | subway 3 |
+| **Naples** | IT | subway 3, tram 3, funicular 3 |
+| **Hyderabad / Kochi** | IN | subway 3 / subway 1 |
+| **Cairo** | EG | subway 2 — *feed 11 months expired* |
+| **Tokyo** | JP | **subway 4, tram 1** (Toei) — rail is fine; **Japan's blocker is its business data** |
+| Tram-only | — | Riga 7, Tallinn 5, Zagreb 19, Bratislava 6, Poznań 22, Messina 1 |
 
-### Tier 4 — ruled out, with the reason
+**Germany, Italy, Sweden and Portugal were moved here from Tier 4.** They had
+been ruled out on the EU-default company-register pattern — which was
+**ASSERTED and never probed for any of them** — while Berlin, Naples,
+Stockholm and Lisbon were simultaneously being rail-confirmed into this tier.
+They were in two tiers at once. Ruling a country out on a pattern rather than
+a probe is exactly the error this file exists to avoid.
 
-| | Why |
-|---|---|
-| **United Kingdom** | Business data is the wrong object — VOA is property without names, Companies House is registered offices, FSA is food-only |
-| **Japan** | Business data is **aggregate counts**; and JR/Tokyo Metro absent from the catalogue |
-| **Dubai** | **The catalogue's Dubai feed is an anonymous personal GitLab repository**, not an agency publication, and it does not return a valid zip. The transitland fallback 404s. No usable official feed found |
-| **Hong Kong** | The Transport Department feed has **tram/LRT 7 and no subway** — the MTR is absent |
-| **Manila** | The LRTA feed codes its four rail lines as **commuter rail (type 2)**, which this project excludes. A coding question rather than an absence, but it fails as published |
-| **Jakarta** | Transjakarta is BRT; the MRT is not in the catalogue |
-| **Belgium** | Establishment units exist but bulk access **requires application and payment** |
-| **Germany, Italy, Sweden, Ireland, Portugal** | Company registers, mostly behind a fee |
-| **Australia, New Zealand** | Good feeds; business licensing is not municipal in the US/Canada sense |
-| **Russia, Ukraine** | Excluded on access and conflict grounds, not on data |
+### Tier 4 — ruled out, with the evidence
 
-### Four results here are feed artefacts, not findings
+| | Why | Basis |
+|---|---|---|
+| **United Kingdom** | Business data is the wrong object — VOA is property without names, Companies House is registered offices, FSA is food-only | MEASURED |
+| **Japan** | Business data is **aggregate counts by area**, not an establishment register. Its transit is *not* the problem — see Tokyo above | MEASURED |
+| **Taiwan** | **Nothing for Taipei, Kaohsiung, Taoyuan or TDX anywhere in the catalogue.** The 9 Taiwanese feeds are rural bus operators | MEASURED |
+| **Hong Kong** | **No MTR feed anywhere in the catalogue.** The Transport Department feed carries tram/LRT 7 and no subway | MEASURED |
+| **Jakarta** | **No MRT Jakarta or LRT Jakarta feed anywhere.** Transjakarta is BRT | MEASURED |
+| **Rio de Janeiro** | **No MetrôRio or SuperVia feed anywhere** | MEASURED |
+| **Kuala Lumpur, Tel Aviv, Lima, Medellín, Bogotá** | No metro operator feed anywhere in the catalogue | MEASURED |
+| **Dubai** | The catalogue's feed is an **anonymous personal GitLab job artefact** returning a non-zip; the transitland fallback 404s | MEASURED |
+| **Manila** | The LRTA feed codes its four rail lines as **commuter rail (type 2)**, which this project excludes. A coding question, but it fails as published | MEASURED |
+| **Belgium** | Establishment units exist; **bulk access requires application and payment** | MEASURED |
+| **Australia, New Zealand** | Auckland is commuter-only. **Melbourne's PTV feed is a nested zip** the screen cannot read, so its rail is *unverified rather than absent*. Business licensing is not municipal — **ASSERTED** | MIXED |
+| **Russia, Ukraine** | Access and conflict, not data | — |
 
-Recorded so nobody re-reads the table as fact:
+### What in these tables is an artefact rather than a finding
 
-- **Barcelona and Madrid** were tested against *bus* operators, because a
-  keyword match picked the first feed naming the city. TMB and Metro de Madrid
-  were never tested.
-- **Manila's** rail exists and is typed 2.
-- **Hong Kong's** MTR exists and is not in that feed.
-- **Mexico City's** feed exists and would not download today.
+Kept visible so nobody reads the tables as settled fact:
 
-Every one is the Toronto lesson again: **what a catalogue says about a city is
-not what the city runs.**
+- **Resolved.** Barcelona and Madrid were first tested against *bus* operators.
+  Both have since been measured properly — Madrid subway 13, Barcelona FGC
+  subway 4. **TMB's own feed still 404s**, so Barcelona is understated.
+- **Resolved.** Berlin, Hamburg, Stockholm and Oslo were reported rail-free by
+  a tool that could not read extended route types. Fixed.
+- **Still open.** Mexico City's feed exists and will not download.
+  Buenos Aires' SUBTE feed exists at the city's own CDN and **contains no
+  `routes.txt`**. Melbourne's is a nested zip. Istanbul's IETT URL is a
+  landing page, not a file.
+- **Still open.** Manila's rail exists and is typed 2; Hong Kong's MTR exists
+  and is published nowhere the catalogue reaches.
+
+Every one is the Toronto lesson: **what a catalogue says about a city is not
+what the city runs** — and, added this round, **what a screening tool cannot
+parse, it reports as absent.**
 
 ## Probe log — every city rail-screened, 2026-09-21
 
