@@ -35,8 +35,8 @@ bigger system means a bigger station-scope decision).
 | 3 | Los Angeles | Metro Rail (A, B, C, D, E, K), 110 stations, 56 in the city | Listing of Active Businesses (Socrata `6rrh-rzua`, `data.lacity.org`): `naics`, `street_address`, `location_1`, `council_district` | `naics` | **Built.** ~9% of coordinates were corrupt (recovered by Census geocoding); in-city rows identified by `council_district`, not `city` |
 | 4 | Chicago | CTA 'L' (7 lines drawn, 123 in-city stations; Metra not included) | Business Licenses (Socrata `r5kz-chrr`): address, `latitude`/`longitude` | `chicago_license` | **Built 2026-09-20.** No NAICS field: own license taxonomy, with catch-all license types classified by business activity; the source is a license-term history, filtered to active licenses and one row per site. Metra is a possible later addition |
 | 5 | New York | Subway + Staten Island Railway (496 parent stations, drawn as 11 trunk lines; LIRR/Metro-North not included) | **Four** registries, because the city has no general business licence: DOHMH restaurant inspections (`43nn-pn8j`), NYS Retail Food Stores (`9a8c-vfzj`), NYS Appearance Enhancement & Barber businesses (`y3u4-jbgh`), DCWP premises licences (`w7w3-xahh`) | `new_york` (dispatches per source) | **Built 2026-09-21.** The DCA-only plan recorded here was wrong: that file is a regulated-activity licence list with no restaurants, grocery, clothing or salons in it. Only city needing multiple sources, and the only one not using the shared ring edges (496 stations, median 482 m apart). Retail is less complete than elsewhere |
-| 6 | Philadelphia | SEPTA Metro + Regional Rail | L&I Business Licenses (Carto SQL API `phl.carto.com`, table `business_licenses`): address, `the_geom` (WKB), `geocode_x`/`geocode_y` | `phl_licensetype` (skeleton) | Needs `licensetype` pull, plus Carto queries and WKB parsing |
-| - | Boston | MBTA (subway, Green Line, commuter rail) | Certified Business Directory (CKAN, `data.boston.gov`): `naics_codes1`, address | `naics` | **Caveat:** 978 rows of certified vendors only, not a general registry. Decide whether that is enough data |
+| 6 | Philadelphia | SEPTA Metro + Regional Rail | L&I Business Licenses (Carto SQL API `phl.carto.com`, table `business_licenses`): 435,143 rows, 118,535 Active, 48 fields | `phl_licensetype` (skeleton) | **Step 0 done 2026-09-21, see notes below.** Easier than expected on geometry, harder on categories |
+| - | Boston | MBTA (subway, Green Line, commuter rail) | **Not just the certified directory** - `data.boston.gov` also has "Licensing Board Licenses" (CSV/XLSX), "Active Food Establishment Licenses" (CSV), "Annual Entertainment Licenses", "Food Establishment Inspections" | TBD | **Re-probed 2026-09-21 and no longer ruled thin.** The 978-row certified-vendor set is NOT the only option; real licence registries exist. Needs a proper Step 0 on those (coverage of Retail / Personal services, and whether they carry coordinates) |
 | - | Dallas | DART light rail (GTFS downloads, HTTP 200) | Building Inspection Certificates of Occupancy (Socrata `9qet-qt9e`, `dallasopendata.com`): `business_name`, `address`, `land_use` (143 values), `occupancy`, `geolocation` (2 of 23,731 rows null) | new module needed (`land_use`) | **Caveat:** the data ends 2022-11-15 and holds only certificates issued 2018-2022 (~4-5.6k a year), so it shows new occupancies, not a registry. A city page would need that stated. Other Dallas CO sets are archived FY2015-17 copies |
 | - | Washington D.C. | WMATA Metrorail, 6 lines, 98 stations | Basic Business Licenses (`maps2.dcgis.dc.gov/dcgis/rest/services/FEEDS/DCRA/FeatureServer/0`): `PREMISEADDRESS`, `BUSINESSACTIVITY`, `CATEGORYSERVICETYPE` | new module needed | **Caveat:** no NAICS field, and `LATITUDE`/`LONGITUDE` are truncated to whole degrees (use address geocoding or the state-plane `X_COORDINATE`/`Y_COORDINATE`) |
 
@@ -69,3 +69,46 @@ Certificates of Occupancy lacked a classification field was wrong: it has
 `land_use`. Still unchecked: Dallas's Commercial Permits Activity Dashboard
 (Socrata `ync5-xnfn`), and the GTFS feeds for Trinity Metro, Austin and
 Charlotte.
+
+## Philadelphia - Step 0 findings (2026-09-21)
+
+Probed live against the Carto SQL API before writing any pipeline code.
+
+**Easier than `PLAN.md` assumed.** It recorded "needs Carto queries and WKB
+parsing"; no WKB parsing is needed. `the_geom` is populated on **all** 118,535
+active licences, and the Carto SQL API evaluates PostGIS server-side, so
+`SELECT ST_X(the_geom) AS lon, ST_Y(the_geom) AS lat` returns plain
+coordinates. There is also a `geocode_x`/`geocode_y` pair (state plane) on
+116,243 of them, which is not needed.
+
+**Harder than assumed on categories, and in the way New York was.**
+`licensetype` is activity-specific permits, not a general business register:
+
+- **79% of active licences are `Rental`** - 93,471 residential landlord
+  registrations. Not businesses, and not storefronts.
+- Food service is well covered: ~9,059 across five types (`Food Preparing and
+  Serving`, `... (30+ SEATS)`, `Food Establishment, Retail Permanent
+  Location`, `... Non-Permanent`, `... (Large)`).
+- **General retail and personal services are essentially absent** from the top
+  30 types. There is no "retail store" or "salon/barber" licence. The nearest
+  are `Tire Dealer` (83), `Precious Metal Dealer` (78), `Vendor - Newsstand`
+  (75).
+
+So Philadelphia is either a food-service-dominated map or a multi-source city
+like New York. That decision comes before any build.
+
+**Excluding `Rental` is a privacy fix as well as a scope fix** - the same
+shape as the national NAICS 454 exclusion. `business_name` is never blank
+(0 of 118,535), but on rental licences it holds the *owner's own name*:
+sampled rows returned "ROY E EGNER", "PETER MIRABELLI", "HOA THUY QUACH" at
+their property addresses, with `legalentitytype = 'Individual'`. Mapping
+active licences unfiltered would publish ~93k individuals at their addresses.
+
+**A better privacy signal than any other city has so far:**
+`legalentitytype` distinguishes `Individual` from corporate entities
+structurally, so the person-like-name heuristic is a cross-check here rather
+than the primary measure. Worth wiring into
+`scripts/check_personal_exposure.py` for this city.
+
+Still to do before building: the full `SELECT DISTINCT licensetype` pull, a
+bucket mapping, the SEPTA GTFS feed, and a city boundary layer.
