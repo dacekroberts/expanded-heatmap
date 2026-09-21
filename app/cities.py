@@ -86,4 +86,11 @@ CITIES = [
         "page": "pages/7_Miami_Heatmap.py",
         "blurb": "Metrorail and Metromover (42 stations across six municipalities)",
     },
+    {
+        "name": "Boston",
+        "lat": 42.3601,
+        "lon": -71.0589,
+        "page": "pages/8_Boston_Heatmap.py",
+        "blurb": "MBTA rapid transit (Red, Orange, Blue, Green Lines and the Mattapan Trolley)",
+    },
 ]

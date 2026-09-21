@@ -1,0 +1,69 @@
+station,line,latitude,longitude,reason,located_in,nearest_kept_station,miles_since_nearest_kept
+Allston Street,Green Line,42.348701,-71.137955,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Harvard Avenue,0.372
+Amory Street,Green Line,42.350992,-71.114748,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Boston University Central,0.407
+Blandford Street,Green Line,42.349293,-71.100258,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Kenmore,0.261
+Boston University East,Green Line,42.349735,-71.103889,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Kenmore,0.449
+Chestnut Hill Avenue,Green Line,42.338169,-71.15316,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Sutherland Road,0.458
+Chiswick Road,Green Line,42.340805,-71.150711,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Sutherland Road,0.237
+Coolidge Corner,Green Line,42.342116,-71.121263,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Saint Paul Street,0.233
+Dean Road,Green Line,42.337656,-71.142156,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Tappan Street,0.185
+Englewood Avenue,Green Line,42.337104,-71.144852,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Tappan Street,0.328
+Fairbanks Street,Green Line,42.339725,-71.131073,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Brandon Hall,0.104
+Fenwood Road,Green Line,42.333706,-71.105728,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Brigham Circle,0.068
+Griggs Street,Green Line,42.348545,-71.134949,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Harvard Avenue,0.218
+Hawes Street,Green Line,42.344906,-71.111145,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Saint Mary's Street,0.207
+Kent Street,Green Line,42.344074,-71.114197,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Saint Mary's Street,0.373
+Longwood,Green Line,42.341702,-71.109956,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Fenway,0.389
+Longwood Medical Area,Green Line,42.33596,-71.100052,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Museum of Fine Arts,0.262
+Magoun Square,Green Line,42.393682,-71.1063879,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Ball Square,0.489
+Mission Park,Green Line,42.333195,-71.109756,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Brigham Circle,0.276
+Northeastern University,Green Line,42.340401,-71.088806,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Symphony,0.248
+Packard's Corner,Green Line,42.351967,-71.125031,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Babcock Street,0.262
+Reservoir,Green Line,42.335088,-71.148758,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Beaconsfield,0.427
+Riverway,Green Line,42.331684,-71.111931,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Brigham Circle,0.429
+Summit Avenue,Green Line,42.34111,-71.12561,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Saint Paul Street,0.466
+Washington Square,Green Line,42.339394,-71.13533,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Brandon Hall,0.322
+Washington Street,Green Line,42.343864,-71.142853,"Green Line spacing filter (surface stop, under 0.5 mi since the nearest kept stop)",,Warren Street,0.333
+Alewife,Red Line,42.39583,-71.141287,outside the City of Boston (the network is regional),CAMBRIDGE,,
+Assembly,Orange Line,42.392811,-71.077257,outside the City of Boston (the network is regional),SOMERVILLE,,
+Ball Square,Green Line,42.399889,-71.111003,outside the City of Boston (the network is regional),MEDFORD,,
+Beachmont,Blue Line,42.3975423,-70.9923194,outside the City of Boston (the network is regional),REVERE,,
+Beaconsfield,Green Line,42.335765,-71.140455,outside the City of Boston (the network is regional),BROOKLINE,,
+Boston College,Green Line,42.340081,-71.166769,outside the City of Boston (the network is regional),NEWTON,,
+Braintree,Red Line,42.2078543,-71.0011385,outside the City of Boston (the network is regional),BRAINTREE,,
+Brandon Hall,Green Line,42.340023,-71.129082,outside the City of Boston (the network is regional),BROOKLINE,,
+Brookline Hills,Green Line,42.331316,-71.126683,outside the City of Boston (the network is regional),BROOKLINE,,
+Brookline Village,Green Line,42.332608,-71.116857,outside the City of Boston (the network is regional),BROOKLINE,,
+Capen Street,Mattapan Trolley,42.267563,-71.087338,outside the City of Boston (the network is regional),MILTON,,
+Central,Red Line,42.365486,-71.103802,outside the City of Boston (the network is regional),CAMBRIDGE,,
+Central Avenue,Mattapan Trolley,42.270027,-71.073444,outside the City of Boston (the network is regional),MILTON,,
+Chestnut Hill,Green Line,42.326753,-71.164699,outside the City of Boston (the network is regional),NEWTON,,
+Davis,Red Line,42.39674,-71.121815,outside the City of Boston (the network is regional),SOMERVILLE,,
+East Somerville,Green Line,42.379467,-71.086625,outside the City of Boston (the network is regional),SOMERVILLE,,
+Eliot,Green Line,42.319045,-71.216684,outside the City of Boston (the network is regional),NEWTON,,
+Gilman Square,Green Line,42.387928,-71.096766,outside the City of Boston (the network is regional),SOMERVILLE,,
+Harvard,Red Line,42.373362,-71.118956,outside the City of Boston (the network is regional),CAMBRIDGE,,
+Kendall/MIT,Red Line,42.3624908,-71.0861765,outside the City of Boston (the network is regional),CAMBRIDGE,,
+Lechmere,Green Line,42.371572,-71.076584,outside the City of Boston (the network is regional),CAMBRIDGE,,
+Malden Center,Orange Line,42.426632,-71.07411,outside the City of Boston (the network is regional),MALDEN,,
+Medford/Tufts,Green Line,42.407975,-71.117044,outside the City of Boston (the network is regional),MEDFORD,,
+Milton,Mattapan Trolley,42.270349,-71.067266,outside the City of Boston (the network is regional),MILTON,,
+Newton Centre,Green Line,42.329443,-71.192414,outside the City of Boston (the network is regional),NEWTON,,
+Newton Highlands,Green Line,42.322381,-71.205509,outside the City of Boston (the network is regional),NEWTON,,
+North Quincy,Red Line,42.275275,-71.029583,outside the City of Boston (the network is regional),QUINCY,,
+Oak Grove,Orange Line,42.43668,-71.071097,outside the City of Boston (the network is regional),MALDEN,,
+Porter,Red Line,42.3884,-71.119149,outside the City of Boston (the network is regional),CAMBRIDGE,,
+Quincy Adams,Red Line,42.233391,-71.007153,outside the City of Boston (the network is regional),QUINCY,,
+Quincy Center,Red Line,42.251809,-71.005409,outside the City of Boston (the network is regional),QUINCY,,
+Revere Beach,Blue Line,42.4078425,-70.9925332,outside the City of Boston (the network is regional),REVERE,,
+Riverside,Green Line,42.337352,-71.252685,outside the City of Boston (the network is regional),NEWTON,,
+Saint Mary's Street,Green Line,42.345974,-71.107353,outside the City of Boston (the network is regional),BROOKLINE,,
+Saint Paul Street,Green Line,42.343327,-71.116997,outside the City of Boston (the network is regional),BROOKLINE,,
+Tappan Street,Green Line,42.338459,-71.138702,outside the City of Boston (the network is regional),BROOKLINE,,
+Union Square,Green Line,42.377359,-71.094761,outside the City of Boston (the network is regional),SOMERVILLE,,
+Valley Road,Mattapan Trolley,42.268347,-71.081343,outside the City of Boston (the network is regional),MILTON,,
+Waban,Green Line,42.325845,-71.230609,outside the City of Boston (the network is regional),NEWTON,,
+Wellington,Orange Line,42.40237,-71.077082,outside the City of Boston (the network is regional),MEDFORD,,
+Wollaston,Red Line,42.2665139,-71.0203369,outside the City of Boston (the network is regional),QUINCY,,
+Wonderland,Blue Line,42.41342,-70.991648,outside the City of Boston (the network is regional),REVERE,,
+Woodland,Green Line,42.332902,-71.243362,outside the City of Boston (the network is regional),NEWTON,,

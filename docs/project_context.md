@@ -201,7 +201,31 @@ Cities built and running end to end (pipeline, map, app page):
   do. Its map is step 3; its line colours are this project's own, because
   Miami-Dade's orange and two greens collide with the category colours.
 
-Next by ease ranking: Boston and Washington D.C., both carrying caveats.
+- **Boston** - MBTA rapid transit: the Red, Orange and Blue Lines, the Green
+  Line's four branches and the Mattapan Trolley, drawn as five line groups.
+  Regional Rail and the ferries are not included. Distinctive in four ways.
+
+  It is the **second two-bucket city**, and the narrowest map here: Boston
+  licenses food and alcohol and essentially no other trade, so Personal
+  services is **absent rather than thin** (Massachusetts licenses cosmetology
+  at state level and publishes no address-bearing export, verified three ways)
+  and Retail means retail *food*, package stores and cannabis. The city page
+  leads with that rather than burying it. It assembles **three registries**,
+  dispatched on a `source` column like New York's, and deduplicates ACROSS them
+  as well as within - 27 premises held licences in more than one, mostly
+  package stores that also hold a food licence. It needs **two station rules at
+  once**, as Philadelphia does: the grade-separated heavy rail keeps every
+  in-city station while the Green Line's street-running branches take San
+  Francisco's four-filter thinning. And its two smaller sources publish
+  **`gpsx`/`gpsy` in EPSG:2249** - state plane in US survey feet - which step 2
+  reprojects; that is a different CRS from the city's own EPSG:32619.
+
+  Its licensing is the cleanest of any city here (every source ODC-PDDL), and
+  it is the first city to activate a transit notice: MassDOT requires that it
+  be acknowledged as the provider, which takes the mandatory-notice count from
+  four to five.
+
+Next by ease ranking: Washington D.C., carrying caveats.
 **Check a candidate's registry actually covers all three buckets before
 assuming one source is enough** - that assumption failed for New York, and in
 Philadelphia a whole bucket had no source at any level of government. See

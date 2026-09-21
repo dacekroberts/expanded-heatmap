@@ -54,6 +54,10 @@ TAXONOMY_MODULES = {
     # retired into it on 2026-09-21 when Step 0 showed the DCA licence file is
     # a regulated-activity list, not a business registry. See new_york.py.
     "new_york": "pipeline.taxonomies.new_york",
+    # Boston: three registries dispatched on a `source` column, like New York.
+    # Two buckets only - Massachusetts licenses cosmetology at state level and
+    # publishes no address-bearing export, so Personal services has no source.
+    "boston_licensecat": "pipeline.taxonomies.boston_licensecat",
     # Miami-Dade's Local Business Tax CATGRYNAME. Its file has a NAICS column
     # that is NULL on every row, so NAICS is unavailable despite being in the
     # schema - see miami_catgryname.py.

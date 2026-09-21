@@ -195,6 +195,32 @@ this map is about, but NAICS 441 sits inside the 44/45 range every NAICS city
 here counts as Retail, so excluding it in Miami alone would make the buckets
 mean different things in different cities.
 
+### Boston — everything that is not food, drink or a package store
+
+Boston's three registries license food, alcohol and cannabis, so the exclusions
+here are mostly about not double-counting rather than about scope.
+
+**The Licensing Board's 2,578 Common Victualler licences are excluded, and they
+are restaurants.** That is not a judgment about restaurants — they are already
+in the Inspectional Services food data, which is the authoritative source for
+them, so keeping both would count the same premises twice from two registries.
+Only the off-premises retail types are taken from that register: `Retail All
+Alc.` (238), `Retail Malt Wine` (68) and a single `Druggist`. 27 premises did
+turn out to hold licences in more than one registry and are counted once.
+
+Also excluded from it: **436 residential licences** (`Dormitory` 282, `Lodging
+Houses (Frat/Dorm)` 154), which are not businesses — the same category of row
+that is 79% of Philadelphia's register; **204 lodging and members' clubs**
+(`Inn. All Alc.`, `Innholder No Liquor`, `Clb. All Alc.` and variants); and
+about 90 recreation and production licences (`Billiards/Sippio` 38, `Bowling
+Alley` 10, seven Farmer Brewery/Winery/Distillery pouring licences, and five
+`Fortune Teller`), which are NAICS 713/312 territory that no bucket covers in
+any city here.
+
+From the food data, `MFW` (Mobile Food Walk On, 10 premises) is out as mobile
+trade is everywhere else, and the cannabis register's one `Delivery (operator)`
+is out for the same reason — neither has a shopfront.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found
@@ -210,10 +236,10 @@ mean different things in different cities.
 
 ## What is missing rather than excluded
 
-Two things on this map are absent for a different reason, and they are worth
+Some things on this map are absent for a different reason, and they are worth
 separating from everything above. Every exclusion so far was a choice. In **New
-York** and **Philadelphia**, some of what is missing was never available to
-choose.
+York**, **Philadelphia** and **Boston**, some of what is missing was never
+available to choose.
 
 Because the city has no general business licence, a shop is only in this map if
 some regulator happens to license it. Restaurants are inspected, so they are
@@ -247,6 +273,38 @@ are largely absent too — the register holds neither a coordinate nor a street
 address for 60 of the 75 licensed. None of this is a choice this project made,
 and the city page says so on its face rather than leaving a reader to infer
 something about Philadelphia's high streets from a fact about its licensing.
+
+**Boston is Philadelphia's case again, for the same structural reason and in
+a narrower form.** It licenses food and alcohol and essentially no other
+trade, so its map has two categories rather than three and Personal services
+is absent entirely. The cause is identical: Massachusetts licenses cosmetology
+and barbering at **state** level, through the Board of Registration of
+Cosmetology and Barbering, whose register is a per-licence ePLACE/MADOL lookup
+with no bulk export and no addresses. That was verified three independent ways
+rather than assumed - Socrata's cross-domain discovery API returns no
+Massachusetts source for cosmetology, barber, salon, hair, nail salon, body art
+or tattoo; `data.mass.gov` is not a data portal at all, answering HTML 404 from
+both the Socrata and CKAN entry points; and `opendata.mass.gov` does not
+resolve.
+
+Boston's Retail is narrower still than Philadelphia's. What exists is retail
+**food** (groceries, convenience stores, bodegas), package stores and cannabis
+dispensaries - so a clothes shop, a bookshop or a hardware store is absent for
+New York's reason on top of Philadelphia's. The honest description of Boston's
+map is **food-and-drink density with a retail-food edge**, not commercial
+density, and its city page leads with that rather than burying it.
+
+One source could have changed this and was deliberately not used. Boston's
+`Business Inventory` is a summer-2025 field survey carrying exactly this
+project's three buckets - 243 beauty services among them, plus clothing,
+jewellery and tailoring. Its own notes give the reason it cannot be used: it
+covers "every storefront in downtown Boston, as well as comprehensive data on
+3 major commercial corridors in Mattapan, Jamaica Plain, and Allston", which is
+37 grid cells of a city. A density surface built on a partial survey shows
+where surveyors walked rather than where commerce is, and mixing it in would
+have made four neighbourhoods read as three-bucket and the rest as two. It is
+recorded in `data_sources.md` as available and unused, with the trigger for
+revisiting it: a city-wide survey.
 
 ## Honest limits
 

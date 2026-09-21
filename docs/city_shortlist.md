@@ -36,7 +36,7 @@ bigger system means a bigger station-scope decision).
 | 4 | Chicago | CTA 'L' (7 lines drawn, 123 in-city stations; Metra not included) | Business Licenses (Socrata `r5kz-chrr`): address, `latitude`/`longitude` | `chicago_license` | **Built 2026-09-20.** No NAICS field: own license taxonomy, with catch-all license types classified by business activity; the source is a license-term history, filtered to active licenses and one row per site. Metra is a possible later addition |
 | 5 | New York | Subway + Staten Island Railway (496 parent stations, drawn as 11 trunk lines; LIRR/Metro-North not included) | **Four** registries, because the city has no general business licence: DOHMH restaurant inspections (`43nn-pn8j`), NYS Retail Food Stores (`9a8c-vfzj`), NYS Appearance Enhancement & Barber businesses (`y3u4-jbgh`), DCWP premises licences (`w7w3-xahh`) | `new_york` (dispatches per source) | **Built 2026-09-21.** The DCA-only plan recorded here was wrong: that file is a regulated-activity licence list with no restaurants, grocery, clothing or salons in it. Only city needing multiple sources, and the only one not using the shared ring edges (496 stations, median 482 m apart). Retail is less complete than elsewhere |
 | 6 | Philadelphia | SEPTA Metro: L, B, T and G (94 in-city stations, 4 lines drawn; Regional Rail not included) | L&I Business Licenses (Carto SQL API `phl.carto.com`, table `business_licenses`): 435,143 rows, 118,535 Active, 48 fields | `phl_licensetype` (verified, all 50 types) | **Built 2026-09-21.** The only **two-bucket** city: no personal-service licence exists in Philadelphia and Pennsylvania publishes none with addresses, so Personal services is absent rather than thin. The multi-source hunt came back empty — one registry, two buckets. First city needing two station rules at once (subway/el kept whole, street-running trolleys thinned) |
-| - | Boston | MBTA rapid transit: Red, Orange, Blue, Mattapan, Green B/C/D/E (**71 of 125 stations in-city**; 14 `CR-*` Regional Rail lines not counted) | Food Establishment Inspections (CKAN `4582bec6`, 902,651 rows -> 2,628 active premises, 99.9% with coordinates), + Licensing Board `04dc653b` and Cannabis `e395fd88` for package stores | new module needed (`licensecat`: FS/FT/RF/MFW) | **Step 0 PASSED 2026-09-21, not built.** A **two-bucket** city like Philadelphia: Food service 2,237, Retail 385 unambiguous (+306 package stores and 43 cannabis that *overlap* it), **Personal services absent** - Massachusetts licenses cosmetology at state level with no address-bearing export. The thinnest candidate yet: ~2,740 sites over 71 stations, ~2.3x thinner per station than Philadelphia, and genuinely *food* density rather than commercial density. Do NOT use the official "Active Food Establishment Licenses" extract - it drops the `RF` Retail Food category entirely. Green Line is 4 street-running branches on a shared subway, San Francisco's shape, so it needs the sub-transit-line filters. All sources ODC-PDDL; MBTA needs one acknowledgement notice. See `docs/data_sources.md`, "Boston - Step 0 findings" |
+| 8 | Boston | MBTA rapid transit: Red, Orange, Blue, Green (4 branches) and the Mattapan Trolley, drawn as 5 line groups (**57 in-city stations**; Regional Rail and ferries not included) | **Three** registries: ISD Food Establishment Inspections (CKAN `4582bec6`, 902,651 rows collapsed in SQL to ~2,900 active premises), Licensing Board `04dc653b` for package stores, Cannabis `e395fd88` | `boston_licensecat` (dispatches per source) | **Built 2026-09-21.** The second **two-bucket** city and the thinnest map here: 3,164 premises, 2,410 within a ring. **Personal services is absent, not thin** — Massachusetts licenses cosmetology at state level with no address-bearing export, verified three ways — and Retail is narrow (retail food, package stores, cannabis only), so this is food-and-drink density rather than commercial density, said plainly on the city page. Two station rules at once, as in Philadelphia: heavy rail keeps every in-city station, the Green Line's street-running branches are thinned. All sources **ODC-PDDL**, the cleanest licensing of any city here; MassDOT requires one acknowledgement notice, now active |
 | - | Washington D.C. | WMATA Metrorail, 6 lines, 98 stations (in-city share not yet measured; much of the system is in Virginia and Maryland) | Basic Business Licenses (`maps2.dcgis.dc.gov/dcgis/rest/services/FEEDS/DCRA/FeatureServer/0`): 278,747 rows, **76,107 Active**, 40 fields. `BUSINESSACTIVITY` (102 values), `CATEGORYSERVICETYPE` (17), `ENTITYTRADENAME`, `ENTITYTYPE`, `PREMISEINDC`, `WARD`, `SSL` (parcel), `MAR_ID` | new module needed | **Step 0 mostly done 2026-09-21; the strongest remaining candidate.** The only non-NAICS city so far with **all three buckets** from one registry: Food Services 4,901, Beauty and Grooming 486, and ~1,550 real retail. Three things settled: 49% of active rows are **residential rentals** (One Family Rental 25,587, Apartment 6,106 …) and must go; **`General Business` (14,770) is an office/professional catch-all** — law firms, engineering, consultancies — and must be excluded like LA's NAICS 812990; `LATITUDE`/`LONGITUDE` are **literally `39` and `-77` on every row** (0 rows in DC bounds), but `X_COORDINATE`/`Y_COORDINATE` are real **EPSG:26985**, verified by transformation, on 77% of storefront rows, with `MAR_ID` to recover the rest. Watch: trade name missing on 49% of storefront rows (the LA trap), and `BUSINESSOWNER*`/`AGENT*` name columns must never be published. **WMATA GTFS needs a free API key** (`api.wmata.com` returns 401); a keyless Mobility Database mirror exists |
 | - | Seattle | Sound Transit Link (1 Line + 2 Line) | "Seattle Business License" (ArcGIS `services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/Seattle_Business_License/FeatureServer/0`, layer "Business Locations (Active)"): **54,604 rows**, point geometry, `BUSLIC_NAICS_CODE` + `BUSLIC_NAICS_DESC`, `BUSLIC_SIC_CODE` + `BUSLIC_SIC_DESC`, `BUSLIC_TRADE_NAME`, `BUSLIC_LEGAL_NAME`, `BUSLIC_LOCATION_ADRS_TEXT` | `naics` (already built) | **DEFERRED by the owner 2026-09-21 — to be implemented later, not excluded.** Findings kept so returning to it costs nothing. On the evidence it is the **best-equipped candidate found**: an official nightly export from Finance & Administrative Services that is **active-only by construction**, carries real NAICS (so no new taxonomy module), a trade name, and point geometry — no geocoding step. Not on Socrata, which is why earlier screens missed it; it lives on ArcGIS under owner `SeattleData`. Still to do: the category distribution, the in-city check, `BUSLIC_LOCATION_TYPE` (values include "HEADER QUARTER" — headquarters vs branch needs a verdict), and the licence, whose `licenseInfo` is an as-is accuracy disclaimer rather than a grant. Privacy flags: `BUSLIC_CONTACT_NAME` is a person and `BUSLIC_PHONE_NUM` a phone number — both must stay unpublished (`drop_contact_details()` already covers the phone). Note this project's original prototype was Seattle's Link light rail |
 | 7 | Miami | **Metrorail + both Metromover loops, 42 stations across SIX municipalities** (23 Metrorail, 19 Metromover; MIA Airport People Mover and Tri-Rail not drawn) | Miami-Dade County Local Business Tax (ArcGIS `Local_Business_Tax_Feature_Layer_View`): 194,099 rows all `YEAR`=2026, 175,982 Active, `CATGRYNAME` (150 values), `LAT`/`LON`, `FOLIO`, `MUNBUSLOC` | `miami_catgryname` (verified, all 150 values) | **Built 2026-09-21.** The project's first **REGIONAL** city and the first proof of the multi-jurisdiction idea: Metrorail leaves the City of Miami, and the county licenses all 34 of its municipalities in ONE file with one schema and one publisher, so full-line coverage needed no extra sources, no cross-source dedup and no second licence review. **Its `BUSNAICSCD` is NULL on all 194,099 rows**, so NAICS was unusable despite being in the schema. Best coordinate quality in the project (100% present, zero placeholders) and the only registry whose trade name is never blank. First city to need a PREMISES dedup: `RECEIPTNO` is per row, `ACCOUNTNO` per account and `FOLIO` per *parcel*, so 1,944 premises holding several category licences collapse on name-plus-address |
@@ -87,6 +87,68 @@ rail), Columbus (no rail), Oklahoma City and El Paso (streetcar only),
 Nashville (one commuter line), Indianapolis (bus rapid transit only),
 Jacksonville (a 2.5-mile people mover), Las Vegas (a short private
 monorail).
+
+## Canada - live-verified 2026-09-21 (rail first, then business data)
+
+Screened in the order that kills candidates cheapest: urban rail, then
+business data. `routes.txt` was read from each agency's live GTFS via the
+Mobility Database catalogue, counting route_type 0/1/5/7/12 and **excluding 2
+(commuter rail)**, as every built city does.
+
+**Viable - five cities:**
+
+| City | Rail | Business data | Cost to build |
+|---|---|---|---|
+| **Montreal** | Metro, 4 lines | `locaux-commerciaux`: 28,621 surveyed premises, 100% coords, `SCIAN` (NAICS) 99.6%, trade name 100%, vacancy flag. CC-BY 4.0 | Lowest - may need **no new taxonomy module**, since SCIAN 72/44+45/81 are the prefixes `naics.py` already uses |
+| **Vancouver** | SkyTrain, 3 lines | `business-licences`: 205,943 rows, `geo_point_2d`, `businesstype`/`businesssubtype`, legal + trade name. OGL-Vancouver | Low - needs a local taxonomy module |
+| **Calgary** | CTrain, 2 lines | `vdjc-pybd`: `point`, `tradename`, `licencetypes`, `jobstatusdesc`, and **`homeoccind`** - a home-occupation flag handed over directly, as Chicago's `business_activity` is | Low |
+| **Edmonton** | LRT, 3 lines | `qhi4-bdpu`: `latitude`/`longitude`, `business_licence_category`, `business_name` | Low |
+| **Toronto** | 17 rail routes | 159,872 rows, `Category`, `Operating Name` - but **no coordinates at all** | **Highest.** Needs a geocoding pass like D.C.; licence field reads "not specified" so the terms must be read; and `Client Name` is a person or company, so LA's privacy discipline applies from the start |
+
+**Toronto has a trap worth knowing before Step 3: it codes its subway as
+`route_type 0`, not 1.** Its 4 subway lines and ~13 streetcar routes are
+indistinguishable by type - San Francisco's exact shape, so
+`docs/sub_transit_line_filters.md` applies and lines must be selected by route
+id. Toronto also has `bodysafe` (personal services inspections) and `dinesafe`
+(food) as a two-bucket fallback if geocoding proves painful.
+
+**Ruled out on data:** Ottawa has 6 LRT routes but **no general business
+register** - 697 catalogue entries scanned on a wide net, and the only
+address-level commercial data is food-safety inspections.
+
+**Ruled out on rail (live-verified, bus-only in their own `routes.txt`):**
+Winnipeg, Hamilton, Quebec City (tramway under construction), Halifax
+(bus + 2 ferries), Mississauga, Brampton.
+
+### Brampton - blocked on rail, NOT on data. Revisit ~mid-2027.
+
+Do not re-screen Brampton's data; it was checked on 2026-09-21 and is
+**better than most US cities in this project**: 6,059 businesses, **X/Y on
+100%**, **`NAICS_DETAIL` on 97.3%** with 614 distinct six-digit codes already
+split into `NAIC_2/3/4/6`, an `OPERATIONAL` flag, employee bands and gross
+floor area - and described as "an employer census of all brick and mortar
+businesses", so a census rather than a sample.
+
+The only blocker is that **no urban rail reaches it**. The Miami regional
+precedent does *not* apply: Metrorail physically extends into Hialeah and
+Coral Gables, whereas TTC Line 2 terminates at Kipling inside Toronto, and the
+only rail serving Brampton is GO commuter rail, which this project excludes
+everywhere.
+
+That changes when the **Hurontario LRT (Hazel McCallion Line)** opens.
+Per the project owner 2026-09-21, from a web search and **not independently
+verified here**: repeated delays put civil infrastructure completion at
+2027-2028, with passenger service following testing and commissioning.
+
+**Revisit trigger: mid-2027, and the question is "has an opening date been
+announced?", not "is it open?"** - an announced date is actionable months
+ahead, whereas checking for service in mid-2027 would likely just return
+"still building". If it opens, both Brampton *and* Mississauga come into
+scope together, since the line runs between them - though Mississauga needs a
+different source than Brampton: its Business Directory lists **only businesses
+that agreed to be included** (opt-in, so it would map who filled in a form,
+not where commerce is - the Boston survey problem in a purer form), and its
+Licensed Eateries set is food-only, 2,225 rows, with no coordinates.
 
 ## Not yet live-verified
 

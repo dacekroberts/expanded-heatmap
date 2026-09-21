@@ -101,39 +101,25 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - The Girard Avenue Trolley's label uses SEPTA's own `#FFD700`, which is the
     lowest-contrast of the four over the orange heat wash. Cosmetic; swap for a
     darker gold if it reads badly on a real screen.
-- [ ] Boston - **Step 0 PASSED 2026-09-21. Viable, and the thinnest and
-  narrowest candidate in the project; whether to build it is an open decision.**
-  Full findings and every endpoint are in `docs/data_sources.md`, "Boston -
-  Step 0 findings". The shape: a **two-bucket** city like Philadelphia, with
-  Food service 2,237 premises, Retail 385 unambiguous plus 306 overlapping
-  package stores and 43 cannabis, and **Personal services absent** rather than
-  thin. That is ~2,740 sites over 71 in-city stations - roughly 2.3x thinner
-  per station than Philadelphia - and it is really *food* density, because
-  Boston licenses food and alcohol and no other trade. If it is built:
-  - Use the **902,651-row Food Establishment Inspections** history, filtered to
-    `licstatus='Active'` and collapsed to one row per `property_id`. Do **not**
-    use the official "Active Food Establishment Licenses" extract: it silently
-    drops the `RF` Retail Food category, which is the entire Retail bucket.
-  - `businessname` is the trade-name column, not `dbaname` - `dbaname` is blank
-    on 99.0% of rows, the reverse of every other city. A copied step 2 will
-    quietly produce almost nothing.
-  - Dedup **across** sources on address: package stores hold both an `RF`
-    licence and a `Retail All Alc.` licence at the same premises.
-  - Decide the `FT+RF` premises (31 of them, e.g. "Hyde Park Market",
-    "Shaw's Supermarkets No. 1208") - takeaway counter inside a grocer. Sample
-    and record the verdict, as Chicago's catch-alls were.
-  - `gpsx`/`gpsy` on the Licensing Board sets are **EPSG:2249** (Mass. State
-    Plane, US survey feet), verified by transformation, not assumed. Boston's
-    own projected CRS is **EPSG:32619** (UTM 19N), derived from longitude.
-  - Green Line = 4 street-running branches on a shared central subway, San
-    Francisco's exact shape, so `docs/sub_transit_line_filters.md` applies;
-    Red/Orange/Blue are well spaced and need no thinning.
-  - Get a **MassGIS multi-town boundary layer** as well as Boston's own outline,
-    so the 54 out-of-city stations can be named by municipality and the four
-    borderline ones (Boston College at 6.7 m is really in Boston) resolved.
-  - Add MassDOT's acknowledgement to the required notices (already listed).
-  - `Business Inventory` is recorded as available and **deliberately unused**;
-    revisit only if the city extends the survey city-wide.
+- [x] **Boston - BUILT 2026-09-21.** 3,164 premises, 2,410 within a ring
+  across 57 in-city stations; see `DECISIONS.md`. What it left behind:
+  - **MassDOT's acknowledgement notice is now ACTIVE**, not conditional, which
+    takes the mandatory-notice count from four to five. The city page carries
+    "Rail alignment data provided by MassDOT/MBTA"; the site-level placement is
+    part of the same job as the other four.
+  - **The residence check is blind here and the 0.00% reading is a measurement
+    gap, not a clean result.** Boston's addresses carry no unit designators at
+    all, so there is nothing for it to read - the same shape as San Diego's old
+    0.03%, which became 2.80% once a parcel join replaced address text. What
+    limits the real exposure is that a food-service or package-store licence
+    requires commercial premises. The ISD table's `property_id` IS Boston's
+    assessing parcel id, so a parcel join against the city's Property
+    Assessment data (ODC-PDDL) is available if that is ever not enough.
+  - `Business Inventory` stays recorded as available and deliberately unused;
+    revisit only if the city extends that survey city-wide.
+  - Regional Rail (52 well-spaced in-city stations) is the obvious later
+    addition if the commuter-rail exclusion is ever revisited - the same
+    follow-up Philadelphia has.
 - [ ] **Washington D.C. - the strongest remaining candidate. Step 0 mostly
   done 2026-09-21;** full findings in `docs/city_shortlist.md`. 76,107 active
   licences and the first non-NAICS city with **all three buckets** from one

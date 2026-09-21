@@ -14,6 +14,185 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Boston built: two buckets, three registries, two station rules
+
+- **Eighth city, and the narrowest map here.** 3,164 premises (Food service
+  2,373, Retail 791) of which **2,410 fall within a ring across 57 in-city
+  stations**. Built after being parked: it passed Step 0 on 2026-09-21 and was
+  then superseded in the queue rather than rejected, and the owner returned to
+  it before D.C. with the instruction to state its limitations on the city page.
+- **Better than Step 0 predicted, because of the cross-source dedup.** Step 0
+  estimated ~2,740 sites with Retail at 385 unambiguous plus overlaps. The
+  build gets **791 Retail**, because deduplicating the three registries against
+  each other preserved more distinct package stores than the overlap estimate
+  assumed - 27 premises appeared in more than one registry, not the hundreds a
+  naive reading of the overlap would imply.
+- **Three registries, dispatched on a `source` column like New York's**, and
+  deduplicated ACROSS sources as well as within them. The overlap this exists
+  for is package stores: a shop can hold both an ISD `RF` food licence and a
+  Licensing Board `Retail All Alc.` licence, as "Go Fresh 365" / "Ming's
+  Supermarket" does at 1102 Washington St. The Licensing Board's 2,578 Common
+  Victualler licences are **excluded** - they are the same restaurants as the
+  ISD source, so keeping them would double-count from a second registry.
+- **Address normalisation was load-bearing, not cosmetic.** ISD writes "1102
+  WASHINGTON ST" and the Licensing Board writes "1102-  WASHINGTON ST" for the
+  same premises. Without collapsing the trailing hyphen and padding, no package
+  store would ever have matched its own food licence and every one would have
+  been counted twice - the dedup would have reported zero cross-registry
+  duplicates and looked like it was working.
+- **Two buckets. Personal services is ABSENT, not thin**, and that was verified
+  three ways rather than assumed: Socrata's cross-domain discovery API returns
+  no Massachusetts source for cosmetology, barber, salon, hair, nail salon,
+  body art or tattoo; `data.mass.gov` is not a data portal at all (HTML 404
+  from both the Socrata and CKAN entry points); `opendata.mass.gov` does not
+  resolve. Massachusetts licenses cosmetology at state level through a
+  per-licence lookup with no bulk export. Second city with a whole category
+  missing, after Philadelphia, for the identical structural reason.
+- **The trap that would have made this a one-bucket city, avoided.** Boston
+  publishes an "Active Food Establishment Licenses" extract that looks like the
+  obvious source and holds only `FS` + `FT` - no `RF` (Retail Food) at all,
+  which is the entire Retail bucket. The 902,651-row inspection history carries
+  the same `licensecat` field including RF's 504 premises, and has better
+  coordinates too (99.9% of active premises against 93.8%). The history is used,
+  collapsed to one row per premises **in SQL** via CKAN's `datastore_search_sql`
+  so the download is ~2,900 rows rather than ~900,000.
+- **Two station rules at once, as in Philadelphia.** Red, Orange and Blue are
+  grade-separated heavy rail and keep every in-city station. The Green Line is
+  a central subway plus four street-running branches - San Francisco's exact
+  shape - and takes the four sub-transit-line filters: 93 stops across its four
+  branch shapes down to 68, with the 13 central-subway stations, each branch's
+  terminals and all 7 interchanges force-kept.
+- **Mattapan was NOT thinned, and that is a measurement rather than a
+  judgment.** It is a street-running trolley, so the obvious guess was that it
+  needed the same treatment. Measured instead: its 8 stops sit 433-804 m apart,
+  **median 518 m** - comparable to New York's 482 m and nowhere near San
+  Francisco's 134 m trolley median. Left whole on the number rather than on the
+  street-running label.
+- **57 of 100 stations are in Boston.** The 43 dropped are in Newton (8),
+  Brookline (7), Cambridge (6), Somerville (5), Milton (4), Quincy (4), Medford
+  (3), Revere (3), Malden (2) and Braintree (1). `excluded_stations.csv`
+  therefore carries **two kinds of exclusion** and names which is which - 43
+  out-of-town and 25 thinned - which no other city's does.
+- **A config bug caught by validating the config against the feed, not by
+  reading it.** `STATION_SUFFIX_PATTERN` stripped a trailing " Station", which
+  turned **"North Station" into "North"** - so filter 1 stopped recognising one
+  of the Green Line's own central-subway stations and would have silently
+  thinned it as a surface stop. "North Station" is the station's name, not a
+  name plus a suffix. Step 1 now ASSERTS every configured subway station exists
+  in the feed and exits if one does not, which is what surfaced it. A second,
+  smaller error surfaced the same way: "South Station" had been added to that
+  list speculatively and is a Red Line station, so it would never have matched.
+- **A Step 0 assertion of mine was wrong, and two independent layers settled
+  it.** Step 0 recorded four stations as marginally outside Boston's own
+  water-excluded outline and asserted that **Boston College at 6.7 m "is really
+  a Boston station"**, concluding that a distance tolerance could not separate
+  the four. MassGIS places Boston College in **NEWTON**, 6.6 m outside - two
+  independent boundary layers agreeing on the same distance and one of them
+  naming the town. Four of the 43 out-of-town stations do sit within 100 m of
+  Boston, but every one is unambiguously *named*, so no tolerance is needed at
+  all. **Naming beat measuring**, which is why the multi-town layer was the
+  right choice.
+- **One boundary layer rather than two, against the Step 0 plan.** Step 0 said
+  to fetch Boston's own outline for filtering plus a MassGIS layer for naming.
+  MassGIS's municipalities layer does both - filter on `TOWN='BOSTON'`, name
+  every other station's town from the same join - so Boston's own outline is
+  recorded as considered and unused. Downloaded with a spatial envelope around
+  the network rather than all 351 towns statewide: 61 polygons.
+- **`gpsx`/`gpsy` are EPSG:2249**, state plane in US survey feet, reprojected
+  in step 2. Verified by transformation during Step 0, not assumed - the
+  metre-based sibling EPSG:26986 lands every point near 60 degrees north, and
+  the coordinate bounds check in step 2 is what would catch that mistake if the
+  CRS were ever changed.
+- **`businessname`, not `dbaname`.** In the ISD table `dbaname` is blank on
+  99.0% of rows while `businessname` always holds the trade name - the reverse
+  of every other city here, so a step 2 copied from elsewhere would have
+  produced almost nothing without failing. The two smaller sources use the
+  normal convention, so step 2 reads a different column per source.
+- **Privacy: no personal-name column is ever loaded, and the residual reading
+  is a MEASUREMENT GAP rather than a clean result.** The ISD table carries
+  `legalowner`, `namelast` and `namefirst`; the Licensing Board table carries
+  `applicant`, `manager` and two phone columns. None is selected and step 2
+  asserts all eight stay absent. The screening reports 0 emails, 0 phone
+  numbers, 0 care-of markers, and 0.00% person-like-name-at-a-dwelling - but
+  **565 of 2,410 pins (23.4%) read as a person's name, the highest share of any
+  city**, and 0 of them carry any unit designator because Boston's addresses
+  contain none at all. So the 0.00% is the check having nothing to read, the
+  same shape as San Diego's old 0.03% that became 2.80% once a parcel join
+  replaced address text. What actually limits the exposure is the sources: a
+  food-service licence and a package-store licence both require commercial
+  premises, so a home cannot hold one. `property_id` IS Boston's assessing
+  parcel id, so the Philadelphia-style parcel join is available if that ever
+  stops being enough. Recorded in the check script and in `PLAN.md` rather than
+  reported as a win.
+- **MassDOT's notice is now ACTIVE, taking the mandatory count from four to
+  five.** It had been recorded as conditional on Boston being built. The city
+  page carries "Rail alignment data provided by MassDOT/MBTA"; the outstanding
+  part is the same as for Chicago, SFMTA and LA Metro - it must appear where the
+  site is accessed, not only on one city page. Every Boston data source is
+  ODC-PDDL, the cleanest licensing of any city here.
+- **Rings stay ON here**, unlike New York's and Miami's. That is the payoff for
+  having thinned the Green Line rather than reaching for the rings-off lever:
+  the kept stations are grade-separated heavy rail plus a thinned surface line,
+  so they are separated enough to read individually.
+
+### 2026-09-21 - Canada screened live: five viable cities, and Montreal nearly lost to a keyword filter
+
+- **The rail screen killed half the list before any data question was asked,
+  which is why it ran first.** `routes.txt` was read from each agency's live
+  GTFS via the Mobility Database catalogue. Urban rail (route_type 0/1/5/7/12,
+  excluding 2 = commuter): **Toronto** 17, **Montreal** 4 subway, **Vancouver**
+  3 subway, **Ottawa** 6 LRT, **Edmonton** 3, **Calgary** 2. **None at all**:
+  Winnipeg, Mississauga, Brampton, Hamilton, Quebec City, Halifax - bus only.
+  **Toronto codes its subway as route_type 0, not 1**, so its 4 subway lines
+  and ~13 streetcar routes are indistinguishable by type: San Francisco's exact
+  shape, needing `docs/sub_transit_line_filters.md` and route-id selection.
+  Cheap to know now, expensive to discover at Step 3.
+- **Montreal was nearly ruled out by a keyword filter, and is instead probably
+  the best data in the project.** A first pass over the full 447-package list
+  filtered by keywords concluded "food-only". Wrong: **`locaux-commerciaux`**
+  contains none of the words *business*, *licence*, *permis*, *entreprise* or
+  *commerce*. It is a 2025 field survey of street-level commerce across the
+  agglomeration, CC-BY 4.0, annual since 2021: **28,621 premises, 100%
+  coordinates** (both `LAT`/`LONG` and projected), **`NOM_ETAB` on 100%**,
+  **`SCIAN` - NAICS in French - on 99.6%**, plus a vacancy flag. Buckets are
+  present twice over: `USAGE1` gives Food 6,565 / Retail 8,421 / Personal
+  services 2,453, while SCIAN gives 72 -> 6,301, 44+45 -> 8,283, 81 -> 4,343 -
+  **the prefixes `pipeline/taxonomies/naics.py` already uses**, so Montreal may
+  need no new taxonomy module.
+- **It passes the exact coverage test Boston's own survey failed.** Boston's
+  Business Inventory was rejected for occupying 37 cells of 0.01 degrees;
+  Montreal's occupies **441**, spanning the whole island. The clinching detail
+  is the bottom of the distribution, not the top: Ville-Marie has 4,316
+  premises and **Senneville has 1**. A partial survey does not walk a village
+  of 900 people. So this is a census - and a field survey of actual storefronts
+  is arguably a *better* answer to this project's premise than a licence
+  register, which records who registered rather than what is on the street.
+- **Verified schemas for the rest.** **Vancouver** 205,943 rows with
+  `geo_point_2d`, `businesstype`/`businesssubtype`, both legal and trade names,
+  OGL-Vancouver, updated the same day - the strongest licence register.
+  **Calgary** and **Edmonton** both ship coordinates; Calgary additionally has
+  **`homeoccind`**, a home-occupation flag handed over directly, the signal
+  this project derives by hand elsewhere (as Chicago's `business_activity`
+  does). **Toronto** 159,872 rows but **no coordinates at all** - addresses
+  only, so it needs a geocoding pass like D.C. - and its licence field reads
+  **"not specified"**, which by `docs/data_sources.md`'s own rule means go read
+  the terms. Toronto's `bodysafe` (personal services) and `dinesafe` (food) are
+  a two-bucket fallback if geocoding proves painful. **Ottawa is out**: 697
+  catalogue entries scanned on a wide net, and the only address-level
+  commercial data is food-safety inspections.
+- **Brampton is blocked on rail, not on data, and the Miami regional precedent
+  does not rescue it.** Its directory is an employer census of brick-and-mortar
+  businesses: 6,059 rows, **X/Y on 100%**, **`NAICS_DETAIL` on 97.3%** across
+  614 six-digit codes, plus an `OPERATIONAL` flag and floor area - better than
+  most US cities here. But Metrorail physically extends into Hialeah and Coral
+  Gables, whereas TTC Line 2 terminates at Kipling *inside* Toronto, and the
+  only rail serving Brampton is GO commuter rail, excluded everywhere. Recorded
+  in `docs/city_shortlist.md` with a mid-2027 revisit tied to the Hurontario
+  LRT, asking "has an opening date been announced?" rather than "is it open?".
+  Mississauga would arrive with it, but needs a different source: its Business
+  Directory lists **only businesses that agreed to be included**, which would
+  map who filled in a form rather than where commerce is.
+
 ### 2026-09-21 - Source encoding declared per city, and the catalogue rule tightened
 
 - **Read a new city's whole catalogue, never grep it.**

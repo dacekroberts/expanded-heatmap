@@ -90,6 +90,25 @@ REGISTRIES = {
     "miami": dict(raw=None, trade=None, owner=None,
                   processed="businesses_clean.csv",
                   address=("address",)),
+    # Boston never loads a personal-name column either: the ISD table carries
+    # legalowner/namelast/namefirst and the Licensing Board table carries
+    # applicant/manager/day_phone, and fetch_sources.py selects none of them -
+    # step 2 asserts all eight stay absent. So the fallback measure reports as
+    # structurally absent here too.
+    #
+    # READ ITS RESIDENCE FIGURE WITH CARE. Boston's addresses carry NO unit
+    # designators at all - 0 of its person-like rows have an APT, UNIT, STE or
+    # # - so a 0.00% residential reading is a MEASUREMENT GAP, not a verified
+    # clean result. Same shape as San Diego's old 0.03%, which turned out to be
+    # 2.80% once a parcel join replaced the address text. What limits the real
+    # exposure here is the sources rather than the check: a food-service
+    # licence and a package-store licence both require commercial premises, so
+    # a home cannot hold one. The ISD table's `property_id` IS Boston's
+    # assessing parcel id, so a parcel join against the city's Property
+    # Assessment data (ODC-PDDL) is available if that is ever not enough.
+    "boston": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv",
+                   address=("address",)),
 }
 
 # Unit designators that suggest a residence, as opposed to a commercial suite.

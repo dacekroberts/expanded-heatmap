@@ -76,9 +76,9 @@ purchased, or behind a login.
 | Philadelphia | L&I Business Licenses (Carto SQL API, table `business_licenses`) | **Food service** and **Retail** only — see below | `https://phl.carto.com/api/v2/sql` (`format=csv`) | `licensestatus='Active' AND licensetype IN (…13 types…)`, built from `config.KEPT_LICENSETYPES`; selected columns, **no registrant-name column** (`legalfirstname`, `legallastname`, `legalname`, `opa_owner`, `ownercontact*name` are all deliberately unselected and asserted absent in step 2) | 2026-09-21 |
 | Philadelphia | OPA Property Assessments (Carto SQL API, table `opa_properties_public`, 583,779 rows) | Not businesses — **joined** to the above for the residence check | same endpoint, `LEFT JOIN opa_properties_public p ON b.opa_account_num = p.parcel_number` (matches 94% of licences) | 2026-09-21 |
 | Miami | Miami-Dade County **Local Business Tax** (ArcGIS FeatureServer, 194,099 rows, all `YEAR`=2026) | All three buckets, via the county's own `CATGRYNAME` (150 values). **Its `BUSNAICSCD` column is NULL on all 194,099 rows**, so NAICS is unavailable despite being in the schema | `https://services.arcgis.com/8Pc9XBTAsYuxx9Ny/arcgis/rest/services/Local_Business_Tax_Feature_Layer_View/FeatureServer/0/query` | `ACCSTATUS='Active'` (175,982 rows), selected columns, `orderByFields=OBJECTID` for stable deep paging. **`OWNERNAME` and every `MAIL*` column are deliberately NOT downloaded** — `OWNERNAME` is populated on 100% of rows and is frequently a person; step 2 asserts all eight stay absent | 2026-09-21 |
-| Boston — **Step 0 only, NOT BUILT** | Food Establishment Inspections (CKAN resource `4582bec6-2b4f-4f9e-bc55-cbaa73117f4c`) | **Food service** and **Retail** only — see below | `https://data.boston.gov/api/3/action/datastore_search_sql` (CKAN datastore; `datastore_search` for paging) | `licstatus='Active'`, then collapsed to one row per `property_id` — it is a violation-level inspection history, 902,651 rows | 2026-09-21 |
-| Boston — **Step 0 only, NOT BUILT** | Licensing Board Licenses (CKAN resource `04dc653b-1789-4374-9669-b07df7233344`, 3,587 rows) | **Retail** — package stores, via `license_type LIKE 'Retail%'` | same endpoint | `status='Active'` (the file is already active-only); coordinates are `gpsx`/`gpsy` in **EPSG:2249**, not lat/lon | 2026-09-21 |
-| Boston — **Step 0 only, NOT BUILT** | Cannabis Active Licenses (CKAN resource `e395fd88-0f81-4399-a57a-3e94a74b145c`, 43 rows) | **Retail** — dispensaries | same endpoint | none (whole file) | 2026-09-21 |
+| Boston | Food Establishment Inspections (CKAN resource `4582bec6-2b4f-4f9e-bc55-cbaa73117f4c`, 902,651 rows) | **Food service** (`FS`, `FT`) and **Retail** (`RF`) — see below | `https://data.boston.gov/api/3/action/datastore_search_sql` | `licstatus='Active'`, **collapsed to one row per `property_id` + `licensecat` in SQL** with `GROUP BY`, so the download is ~2,900 rows rather than ~900,000. `legalowner`, `namelast` and `namefirst` exist in this table and are deliberately NOT selected; step 2 asserts they and five more stay absent | 2026-09-21 |
+| Boston | Licensing Board Licenses (CKAN resource `04dc653b-1789-4374-9669-b07df7233344`, 3,587 rows) | **Retail** — package stores only | same endpoint | `status='Active' AND (license_type LIKE 'Retail%' OR license_type = 'Druggist')` → 307 rows. Its 2,578 Common Victualler licences are the same restaurants as the ISD source and are excluded to avoid double-counting. Coordinates are `gpsx`/`gpsy` in **EPSG:2249** (state plane, US survey feet), reprojected in step 2 — not lat/lon. `applicant`, `manager`, `day_phone` and `evening_phone` are NOT selected | 2026-09-21 |
+| Boston | Cannabis Active Licenses (CKAN resource `e395fd88-0f81-4399-a57a-3e94a74b145c`, 43 rows) | **Retail** — dispensaries | same endpoint | `status='Active'`; same `gpsx`/`gpsy` convention as the Licensing Board set. The one `Delivery (operator)` row is excluded — no shopfront | 2026-09-21 |
 | Boston — **recorded, deliberately NOT used** | Business Inventory (CKAN resource `47bd8208-f648-4309-8f65-de7416d63157`, 2,634 rows) | Would cover **all three buckets**, and is the only Boston source that reaches Personal services | same endpoint | — | 2026-09-21 |
 
 The Philadelphia parcel join exists to answer one privacy question the address
@@ -170,7 +170,7 @@ portal.
 | Los Angeles | LA Metro Rail | `https://gitlab.com/LACMTA/gtfs_rail/raw/master/gtfs_rail.zip` | ≈2026-09-19 | Metro's rail-only feed |
 | Chicago | CTA | `https://www.transitchicago.com/downloads/sch_data/google_transit.zip` | 2026-09-20 | |
 | New York | MTA subway + Staten Island Railway | `https://rrgtfsfeeds.s3.amazonaws.com/gtfs_subway.zip` | 2026-09-21 | The `web.mta.info/developers/data/nyct/subway/google_transit.zip` path is **dead** |
-| Boston — **Step 0 only, NOT BUILT** | MBTA rapid transit | `https://cdn.mbta.com/MBTA_GTFS.zip` | 2026-09-21 | 24.9 MB, HTTP 200, 32 files. Rapid transit is `Red`, `Orange`, `Blue`, `Mattapan` and `Green-B`/`-C`/`-D`/`-E`; the 14 `CR-*` Regional Rail routes are commuter rail and would be excluded as in every built city. `feed_info.txt` declares **no licence field at all** |
+| Boston | MBTA rapid transit | `https://cdn.mbta.com/MBTA_GTFS.zip` | 2026-09-21 | 24.9 MB, 32 files. Drawn: `Red`, `Orange`, `Blue`, `Mattapan` and `Green-B`/`-C`/`-D`/`-E` as five line groups; the 14 `CR-*` Regional Rail routes and the ferries are not. `feed_info.txt` declares **no licence field at all**, so the terms are the MassDOT agreement — which requires a notice, now ACTIVE. Branching lines need several shapes each (Red splits to Ashmont and Braintree; Green is four branches), and `parent_station` is populated so platforms collapse cleanly |
 | Washington D.C. — **Step 0 only, NOT BUILT** | WMATA Metrorail | `https://api.wmata.com/gtfs/rail-gtfs-static.zip` | 2026-09-21 | **The only feed in this project behind an API key** — 401 unauthenticated. Free developer account at `developer.wmata.com`, subscribe to the **GTFS** product, key sent as an `api_key` header. Take the **`Rail GTFS Static`** operation, *not* `Rail & Bus Combined GTFS Static` (bus routes this project never draws) and not any `RT` feed. Verified 2026-09-21: 6 routes (Red, Blue, Green, Yellow, Orange, Silver, all `route_type 1`, `network_id Metrorail`), **98 parent stations, all with coordinates**, 270,784 `stop_times` rows, 340 shape_ids, no bus contamination. **`feed_info.txt` declares `feed_start_date 20260915`, `feed_end_date 20260925` — a ten-day validity window, the shortest of any feed here, so a rebuild must re-download rather than reuse a stored copy.** Terms are the WMATA Transit Data Terms of Use, stored at `docs/licenses/wmata-transit-data-terms-of-use.html`; the key is WMATA's property, must stay out of the repo, and cannot be sold, transferred or sublicensed (§5) |
 | Miami | Miami-Dade Transit (Metrorail + Metromover) | `https://www.miamidade.gov/transit/googletransit/current/google_transit.zip` | 2026-09-21 | 8.4 MB. **Note the host**: `transitdata.miamidade.gov` does not resolve; this URL is also the one the Mobility Database lists as official. Four rail routes; three are drawn (`31009` Metrorail, `14457`/`14456` the Metromover loops) and the MIA Airport People Mover `14458` is not. **No `feed_info.txt` at all**, so no licence is declared in the feed. Metrorail publishes NINE shapes because the line branches, and has **no `parent_station`** — its 46 stop_ids are 23 stations x 2 directions |
 | Philadelphia | SEPTA Metro | `https://github.com/septadev/GTFS/releases/latest/download/gtfs_public.zip` | 2026-09-21 | **A zip of zips.** Contains `google_bus.zip` and `google_rail.zip`; `fetch_sources.py` extracts the **bus** one, because SEPTA's City Transit Division — and therefore the Market-Frankford Line, Broad Street Line and every trolley — is in that feed, not the "rail" one. `google_rail.zip` is Regional Rail, which this project does not draw. The naming is not guessable; both route tables were read to establish it |
@@ -189,24 +189,16 @@ in 23 other municipalities.
 | Chicago | Socrata "Boundaries - City" (`qqq8-j68g`) | `https://data.cityofchicago.org/resource/qqq8-j68g.geojson?$limit=10` | whole city |
 | New York | Borough Boundaries (`gthc-hcne`) | `https://data.cityofnewyork.us/resource/gthc-hcne.geojson?$limit=10` | all five boroughs = the city |
 | Philadelphia | OpenDataPhilly "City Limits" (Dept of Planning and Development) | `https://services.arcgis.com/fLeGjb7u4uXqeF9q/arcgis/rest/services/City_Limits/FeatureServer/0/query` (`where=1=1`, `outSR=4326`, `f=geojson`) | whole city (one polygon, 2,957 vertices) |
-| Boston — **Step 0 only, NOT BUILT** | "City of Boston Outline Boundary (Water Excluded)" | `https://data.boston.gov/dataset/a70595d2-fd38-4bcb-8a81-6f7807621d38/resource/dade0744-a486-44c7-be7d-07240a89dca4/download/city_of_boston_outline_boundary_water_excluded.geojson` | whole city (one polygon) |
+| Boston | **MassGIS Massachusetts Municipalities**, layer 1 ("Areas") — 351 town polygons statewide, with a `TOWN` field | `https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/Massachusetts_Municipalities/FeatureServer/1/query` (`outFields=TOWN`, `outSR=4326`, `f=geojson`) | a spatial **envelope** around the rapid-transit network rather than all 351 towns → 61 polygons. Used both to filter to `TOWN='BOSTON'` and to NAME the 43 out-of-town stations |
+| Boston — **considered, not used** | "City of Boston Outline Boundary (Water Excluded)" | `https://data.boston.gov/dataset/a70595d2-fd38-4bcb-8a81-6f7807621d38/resource/dade0744-a486-44c7-be7d-07240a89dca4/download/city_of_boston_outline_boundary_water_excluded.geojson` | whole city, one polygon. Would filter but could not NAME the other towns, which is the bigger job here — see the note below |
 | Miami | Miami-Dade County **municipal boundaries** (same publisher as its business data) | `https://services.arcgis.com/8Pc9XBTAsYuxx9Ny/arcgis/rest/services/Municipalitypoly_gdb/FeatureServer/0/query` (`outFields=MUNICID,NAME`, `outSR=4326`, `f=geojson`) | **not filtered — used to NAME, not to exclude.** 77 polygons across 34 municipalities; `MUNICID` joins to the business file's `MUNBUSLOC` prefix |
 
 Chicago note: the sibling asset `ewy2-6yfk` ("Boundaries - City - Map") has
 null geometry; `qqq8-j68g` is the usable one.
 New York note: `tqmj-j8zm`, the borough-boundary ID still in wide circulation,
 now returns 404.
-Boston note: the boundary **excludes water**, which is the right choice for
-scoping but puts four rapid-transit stations marginally outside it — Boston
-College at 6.7 m (genuinely a Boston station, in Brighton), Mattapan's Central
-Avenue at 29.7 m, Longwood at 51.8 m and Saint Mary's Street at 58.4 m (the
-last two genuinely Brookline). A tolerance that recovers Boston College also
-admits Central Avenue, so naming the *municipality* is what separates them, and
-that needs a multi-town layer (MassGIS) rather than Boston's own outline.
-Measured with this layer: **71 of 125** rapid-transit stations fall inside the
-city, with the other 54 in Brookline, Cambridge, Somerville, Newton, Medford,
-Malden, Quincy, Revere and Milton — the whole Green Line C corridor is in
-Brookline.
+Boston note: **MassGIS's multi-town layer is used rather than Boston's own outline**, because naming the other towns is the bigger job here — the network is regional and 43 of 100 stations are in another municipality, a scale of exclusion that has to be citable as it is for San Diego's 16 and Los Angeles' 54. One layer then does both jobs.
+This also settled a question Step 0 had left open. Boston's own water-excluded outline put four stations marginally outside the city (Boston College 6.7 m, Central Avenue 29.7 m, Longwood 51.8 m, Saint Mary's Street 58.4 m) and the Step 0 note asserted that **Boston College was "really a Boston station"** and so a distance tolerance could not separate them. That assertion was wrong: MassGIS places Boston College in **NEWTON**, 6.6 m outside Boston — two independent boundary layers agreeing on the same ~6.6 m. Four of the 43 out-of-town stations sit within 100 m of Boston, but every one is unambiguously *named*, so no tolerance is needed at all. Naming beat measuring.
 San Francisco note: **use the host `data.sf.gov`, never `data.sfgov.org`.**
 This row said `data.sfgov.org` until 2026-09-21, when re-running the recorded
 command showed the old host **301-redirects** and the documented `curl -sG`
@@ -525,12 +517,11 @@ want something removed should be able to see it without asking first.
 ## Notices this project MUST display when published
 
 This is the operative output of the licence review. As of 2026-09-21, for the
-six cities actually built: **four sources require specific text or
-acknowledgement, and one of the four is already satisfied** (OpenStreetMap);
-Chicago, SFMTA and LA Metro are outstanding. New York adds a conditional
-identification requirement that is largely already met, CTA encourages but does
-not require credit, and MassDOT's acknowledgement activates only if Boston is
-built. These are obligations, not courtesies. They belong with the app work that surfaces this
+**eight** cities built: **five sources require specific text or
+acknowledgement, and one of the five is already satisfied** (OpenStreetMap);
+Chicago, SFMTA, LA Metro and — since Boston was built — MassDOT are
+outstanding. New York adds a conditional identification requirement that is
+largely already met, and CTA encourages but does not require credit. These are obligations, not courtesies. They belong with the app work that surfaces this
 page and `excluded_categories.md` (see `PLAN.md`) — publishing the maps
 without them would breach terms this project has now read.
 
@@ -590,13 +581,10 @@ surfacing both documents rather than only one:
 forms: "Data provided by Chicago Transit Authority", "Data provided by CTA",
 or "Powered by CTA data".
 
-**7. MassDOT / MBTA — required IF Boston is ever built; not applicable today.**
+**7. MassDOT / MBTA — required, NOT YET DISPLAYED. Boston was built on 2026-09-21, so this is now ACTIVE rather than conditional.**
 §4.1 of the MassDOT Developers License Agreement requires the licensee to
 "Clearly acknowledge MassDOT as the provider of the Data". No exact wording is
-prescribed, so "Rail alignment data provided by MassDOT/MBTA" would meet it —
-the same shape as LA Metro's obligation. Boston is Step 0 only, so **this is
-not an outstanding compliance item yet**; it becomes one the moment a Boston
-map is committed. Listed here so it cannot be missed later. The agreement
+prescribed. Boston's city page already carries **"Rail alignment data provided by MassDOT/MBTA"**, which meets the requirement for that page; the outstanding part is the same as for the other three — it must appear where the *site* is accessed, not only on one city page. Same shape as LA Metro's obligation. The agreement
 itself is kept at `docs/licenses/mbta-massdot-develop-license-agreement.pdf`.
 
 Not required by anyone, but good practice and already partly done in the city
