@@ -14,6 +14,65 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Residence exposure checked across all six cities
+
+- **Philadelphia's finding made every other city's residence figure suspect, so
+  all five were checked before moving on.** Result: **three are now settled and
+  need nothing, and none of the three needed a filter except Philadelphia.** The
+  work was worth doing mainly for what it ruled out.
+- **New York: measured 0.02%, no filter needed.** Two of its four registries
+  carry `bbl` (NYC's tax-lot id) - DOHMH on 99.4% of rows, DCWP on 80.8% - so
+  PLUTO (`64uk-42ks`, 858,284 lots) joins **by key rather than spatially**,
+  which is far cheaper than Philadelphia's. 62.6% of mapped rows joined (the
+  two NYS state registries carry no BBL). Of 62,444 rows, only **115 sit on a
+  "One & Two Family" lot (0.18%)**, and just **10 of those display a
+  person-like name (0.02%)** - all with `units_res=2` and all ordinary trades
+  (Pizza, Coffee/Tea, Caribbean, Electronics Store, Secondhand Dealer), i.e.
+  shops in two-family rowhouses.
+- **That also turned the decision to keep New York's 161 surname-first DCWP
+  names from a precedent-based call into an evidence-based one: exactly ONE of
+  them is on a residential lot.** The earlier entry justified keeping them by
+  analogy to San Diego; this measures it.
+- **The mixed-use trap reproduced at scale.** New York's single largest
+  land-use category is `4 Mixed Residential & Commercial` with **20,257 pins**,
+  ahead of `5 Commercial & Office` at 14,251. Had the Philadelphia filter used
+  land use alone, or counted mixed use as residential, it would have removed a
+  third of New York's map.
+- **Chicago: already clean, and the recorded claim verified.** Its
+  `business_activity` field marks home-based businesses explicitly ("Other Home
+  Based Businesses", "Home Repair Services (Home Based Business)" - 4,207 raw
+  rows mention home or residential), and **zero** survive into
+  `businesses_clean.csv`: the `chicago_license` taxonomy already drops them.
+  The 20 residual mentions are "Home Repair Services" as a *service offered* by
+  merchandise retailers, which are real storefronts.
+- **Signals found but not yet built, with endpoints recorded** so the work is
+  scoped rather than researched again:
+  - **San Francisco** - "Assessor Historical Secured Property Tax Rolls"
+    (`wv5m-vpq2`, PDDL) carries `use_definition`, `property_class_code`,
+    `number_of_units` and `exemption_code_definition`, the homeowner's
+    exemption that is California's homestead analogue. Its registry has no
+    block/lot, so it needs a spatial join via Parcels (`acdm-wktn`, PDDL)
+    first. The standalone Land Use layer (`fdfd-xptc`) is **[ARCHIVED]** and
+    should not be the primary source.
+  - **Los Angeles** - `public.gis.lacounty.gov/public/rest/services/
+    LACounty_Cache/LACounty_Parcel/MapServer/0` exposes AIN/APN and address but
+    not owner data (restricted by California Government Code s7928.205), and
+    the use-type attribute lives in the separate Assessor Parcels tabular
+    dataset, joinable by AIN. Two steps, so medium effort.
+  - **San Diego** - the weakest position and the one with no signal at all
+    today. SANDAG/SanGIS parcels carry `ASR_LANDUSE` (91 types) and
+    `NUCLEUS_USE_CD` (225 types), but the hosted layers are split
+    geographically (`Parcels_South` and siblings) and the registry has no
+    parcel id, so it needs a spatial join across several layers.
+- **Decided: leave those three to the pre-deploy batch, San Diego first.** The
+  measured prior across the three cities that could be checked is 0.02%, 0.00%
+  and 8 pins, so the expected exposure elsewhere is small - but San Diego is
+  ranked first because its residence figure is not merely low, it is
+  **unmeasurable**: its `address_suite` holds bare values ("A", "101") with no
+  APT/STE token, and 903 of its pins display a name identical to the owner's.
+  A low number and no number are different things, and only San Diego has the
+  latter.
+
 ### 2026-09-21 - Testing the residence signals: one works, one is worthless
 
 - **Tested the two signals the previous entry proposed, instead of trusting

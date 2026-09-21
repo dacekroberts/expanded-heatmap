@@ -151,10 +151,37 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     `check_personal_exposure.py` reports the land-use and owner-occupancy
     signals. The homestead exemption is reported but **not** filtered on - it
     over-fires on mixed-use rowhouses.
-  - Still open for the other five cities: each needs its own property register
-    found (or ruled out) before its residence figure can be trusted. San Diego
-    is the most affected, since its unit values are bare ("A", "101") and its
-    address text cannot flag a residence at all.
+  - **All six cities checked 2026-09-21. Three are settled; three are scoped
+    work for the pre-deploy batch.** Per-city status:
+    - [x] **Philadelphia** - parcel join built, 8 pins filtered.
+    - [x] **New York** - measured via `bbl` -> PLUTO (`64uk-42ks`), a key join
+      because DOHMH and DCWP both carry a BBL. **0.02%** (10 pins of 62,444 on
+      a One & Two Family lot with a person-like name). **No filter needed**, and
+      it confirmed that only 1 of the 161 surname-first DCWP names is on a
+      residential lot.
+    - [x] **Chicago** - nothing to do: `business_activity` marks home-based
+      businesses and the taxonomy already drops all of them (zero reach the
+      map). Verified, not assumed.
+    - [ ] **San Diego - do this one first.** Not low exposure but *unmeasured*:
+      bare `address_suite` values ("A", "101") mean address text cannot flag a
+      residence, there is no parcel id, and 903 pins show a name identical to
+      the owner's. Needs a spatial join to SANDAG/SanGIS parcels
+      (`ASR_LANDUSE`, 91 types; `NUCLEUS_USE_CD`, 225 types), whose hosted
+      layers are split geographically (`Parcels_South` and siblings).
+    - [ ] **San Francisco** - "Assessor Historical Secured Property Tax Rolls"
+      (`wv5m-vpq2`, PDDL) has `use_definition` and `exemption_code_definition`
+      (the homeowner's exemption). No block/lot in the registry, so spatially
+      join Parcels (`acdm-wktn`) first. Do NOT use the Land Use layer
+      `fdfd-xptc` as primary - it is **[ARCHIVED]**.
+    - [ ] **Los Angeles** - `public.gis.lacounty.gov/public/rest/services/
+      LACounty_Cache/LACounty_Parcel/MapServer/0` gives AIN/APN and address but
+      no use type (and no owner data, restricted by Cal. Gov. Code s7928.205);
+      the use type is in the separate Assessor Parcels tabular dataset, joined
+      by AIN.
+    - **Carry the mixed-use lesson into each.** New York's largest land-use
+      category is Mixed Residential & Commercial at 20,257 pins, ahead of
+      Commercial & Office. Counting mixed use as residential would delete a
+      third of that map.
 - [x] **Record each data source's licence and terms of use** - done
   2026-09-21 in `docs/data_sources.md`, covering all 8 registries, all 5 GTFS
   feeds, the boundary layers and the basemap. Permissive terms were NOT the
