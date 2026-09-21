@@ -51,8 +51,7 @@ button and makes the change reversible from Python alone.
    from the list", a `st.page_link` plus a caption per city). This is **kept in
    the pilot** on purpose: it is the keyboard and screen-reader route to a city
    and the route if the map fails to load (see the "Macro map and city
-   navigation" entry in `DECISIONS.md`). Whether a map-only site should drop it
-   too is an open question (see below).
+   navigation" entry in `DECISIONS.md`). Decided 2026-09-21: keep it.
 3. **The intro sentence** on the Overview, which mentions the switcher; it now
    reads "each city map has an 'All cities' button to come back here" while
    `MAP_ONLY_NAV` is on.
@@ -93,9 +92,9 @@ sentence. The "All cities" button stays (it finds the switcher's "All cities
 
 ## Open questions and known gaps in the pilot
 
-- **The Overview's fallback link list is still there.** For a pure map-only
-  site it is the one remaining list of city links; dropping it removes the
-  keyboard and no-map route. Undecided.
+- **The Overview's fallback link list is kept** (decided 2026-09-21, after
+  viewing the pilot). For a pure map-only site it would be the one remaining list
+  of city links; dropping it later removes the keyboard and no-map route.
 - **No visible way to hop city to city** except via the macro map. A visitor
   who lands on a city page by URL sees only the map's "All cities" button.
 - **Deep links still work:** a city page's URL opens it directly.

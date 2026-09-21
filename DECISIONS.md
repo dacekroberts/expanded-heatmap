@@ -14,6 +14,18 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-21 - Keep the Overview's fallback link list in the map-only pilot
+
+- **Decided to keep the list of city links under the macro map for now.** It was
+  the one open question from the map-only pilot (see the previous entry). The
+  user viewed the running build (`8c59cb4`, `MAP_ONLY_NAV` on) and judged the
+  list worth keeping. It stays the keyboard and screen-reader route to a city,
+  and the route if the map fails to load.
+- **Still open:** the pilot's overall go/no-go and whether visitors need a way to
+  hop from one city to another without returning to the map. The list can be
+  revisited (it is one block at the bottom of the Overview page) if the pilot
+  is judged on how intuitive the map alone is.
+
 ### 2026-09-20 - "All cities" button and a map-only navigation pilot
 
 - **Added an "All cities" button to every city map, and started a pilot that makes
