@@ -627,8 +627,44 @@ per-category hygiene registers become a cross-check rather than the plan.
 
 **Third-party mirrors exist** (a Seoul extract dated 202506 is on Hugging
 Face). **Do not build on one** — that is exactly how the Toronto error
-happened. A mirror is acceptable to confirm a schema, never to source a build,
-and there is now no reason to use one.
+happened. A mirror is acceptable to confirm a schema, never to source a build.
+
+**How to actually get it, traced 2026-09-21.** `data.go.kr` *catalogues* this
+dataset but does not host the file — its own metadata says `atachFileYn = N`,
+and the bulk CSV lives on **`bigdata.sbiz.or.kr`, which is down** (connection
+refused in 0.65s, twice, an hour apart, while `www.sbiz.or.kr` answers 302).
+
+The **Open API is live**:
+`apis.data.go.kr/B553077/api/open/sdsc2/storeListInDong` returns **401**, i.e.
+the endpoint exists and wants a key. `B553077` is 소상공인시장진흥공단's
+institution code, matching the `insttCode` in the dataset's own metadata.
+
+So the business leg needs **a free API key** — WMATA's gate, already cleared
+once by this project — not a bulk download.
+
+#### Korea's transit leg — MEASURED, and it is excellent
+
+`전국도시철도역사정보표준데이터` (dataset **15013205**), from
+**국가철도공단** under MOLIT, legal basis 도시철도법:
+
+| | |
+|---|---|
+| Rows | **1,073 stations** |
+| Scope | Urban railway nationwide, **including 광역철도** (metropolitan rail), so beyond Seoul Metro's own lines |
+| Fields | 역번호, 역사명, 노선번호, 노선명, English and Hanja names, **환승역 여부 및 환승 노선** (transfer flag and lines), **역의 위도·경도**, 운영기관명, 도로명주소, 데이터기준일자 |
+| Format | XLSX |
+| Update | 연간 (annual) |
+| Cost / licence | **무료**, **이용허락범위 제한 없음** |
+| Host | `data.kric.go.kr` — **HTTP 200**, and the dataset page `id=32` also 200 |
+
+A companion line dataset (**15013203**) supplies line information.
+
+**So both Korean legs are reachable and unrestricted**, and the only gate left
+is a free API key for the business register. That moves Korea into Tier 1
+contention: premises-level business data with coordinates and a 247-category
+standard, national station points with coordinates and transfer information,
+and **"제한 없음" on both** — a lighter licence position than any other
+candidate in this screen.
 
 **Two corrections to the earlier Tier 2 entry.** Korea was recorded as having
 "the ideal single-register shape"; at the scope this project actually works at,
