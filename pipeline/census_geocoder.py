@@ -62,14 +62,20 @@ def _geocode_batch(payload: pd.DataFrame, cache_dir: Path, batch_num: int) -> pd
 
 
 def geocode_addresses(df: pd.DataFrame, *, id_col: str, street_col: str, zip_col: str,
-                      city: str, state: str, cache_dir: Path) -> pd.DataFrame:
+                      city, state: str, cache_dir: Path) -> pd.DataFrame:
     """Geocode df's addresses. Returns DataFrame[id, latitude, longitude,
     match_type] for matched rows only (Census returns "lon,lat" in one field;
-    it is split here, in that order)."""
+    it is split here, in that order).
+
+    `city` is either one name for every row (Los Angeles) or a Series aligned
+    to df's index, for a city whose addresses carry several postal city names -
+    New York's boroughs are separate postal cities (Brooklyn, Bronx, Staten
+    Island), and sending them all as "New York" loses matches.
+    """
     payload = pd.DataFrame({
         "id": df[id_col].astype(str),
         "street": df[street_col].map(normalize_street),
-        "city": city,
+        "city": city if isinstance(city, str) else city.loc[df.index].fillna("").astype(str),
         "state": state,
         "zip": df[zip_col].fillna("").astype(str).str[:5],
     })

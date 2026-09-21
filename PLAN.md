@@ -40,9 +40,23 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Next cities, in ease order
 
-- [ ] New York - needs `nyc_dca` filled (Socrata `w7w3-xahh`,
-  `business_category`); the largest rail system, so station scope is the
-  biggest decision.
+- [x] **New York - built 2026-09-21.** The premise recorded here was wrong:
+  DCWP `w7w3-xahh` is a regulated-activity licence list, not a business
+  registry (no restaurants, grocery, clothing or salons in it at all), and New
+  York has no general business licence. Coverage is assembled from four
+  registries instead, the `nyc_dca` skeleton was retired, and 29 subway
+  services are drawn as the 11 trunk lines MTA itself signs. See `DECISIONS.md`.
+  Open follow-ups:
+  - Its map is **10.3 MB**, against 3.5 MB for Los Angeles - 44,361 pins,
+    because dense stations put 71% of businesses inside a ring (Los Angeles:
+    24%). Measured levers: rounding coordinates to 5 dp saves 1.4 MB and loses
+    nothing (Folium emits 17 significant digits for a 5-pixel dot, and it would
+    re-baseline all five cities' committed outputs); indexing repeated station
+    and ring strings saves ~1.2 MB; dropping the opt-in all-city heat layer
+    saves 2.0 MB. Decide before the public deploy.
+  - Retail is less complete here than elsewhere (a clothing shop needs no
+    licence from any of the four registries). Said plainly on the city page;
+    worth repeating in `docs/excluded_categories.md`.
 - [ ] Philadelphia - needs `phl_licensetype` filled; data source is a Carto
   SQL API with WKB geometry, so it needs extra parsing.
 - [ ] Boston - real NAICS+address but only a 978-row certified-vendor
@@ -62,10 +76,21 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Structure
 
-- [ ] Fill in the two remaining local taxonomy skeletons (`nyc_dca`,
-  `phl_licensetype`) before those cities are built (each needs a full
-  `SELECT DISTINCT` of its classification field, plus a hand-sample of
-  catch-all categories). Chicago's `chicago_license` is the model.
+- [ ] Fill in the remaining local taxonomy skeleton (`phl_licensetype`) before
+  Philadelphia is built: it needs a full `SELECT DISTINCT` of `licensetype`,
+  plus a hand-sample of catch-all categories. Chicago's `chicago_license` is
+  the model. (`nyc_dca` was retired rather than filled - see `DECISIONS.md`,
+  2026-09-21. Check Philadelphia's registry actually covers all three buckets
+  before assuming one source is enough; that assumption failed for New York.)
+- [ ] **Record each data source's licence and terms of use** in the new
+  `docs/data_sources.md` (licence name, link, attribution requirement, whether
+  redistribution of derived data is permitted). Every source is a government
+  open-data portal, which is a reason to expect permissive terms, not evidence
+  of them. Separate from what is *appropriate* to publish, which is settled in
+  `docs/excluded_categories.md`.
+- [ ] **Find San Francisco's boundary-layer endpoint.** It is recorded nowhere,
+  and the file is gitignored, so that city cannot currently be rebuilt from
+  scratch (surfaced while writing `docs/data_sources.md`).
 
 ## Before deploying
 

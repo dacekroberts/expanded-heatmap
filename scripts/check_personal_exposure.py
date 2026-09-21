@@ -54,7 +54,24 @@ REGISTRIES = {
     "chicago": dict(raw="business_licenses_active.csv", trade="doing_business_as_name",
                     owner="legal_name", processed="businesses_clean.csv",
                     address=("address",)),
+    # New York assembles four registries and NEVER loads a registrant-name
+    # column (the salon file's license_holder_name is not even downloaded; its
+    # step 2 asserts that). So there is no trade/owner fallback pair to join
+    # against - raw and owner are None and the fallback measure is reported as
+    # structurally absent, which is a stronger statement than a low count.
+    # Its `unit` column is structured (DCA gives APT/STE/FL/RM as their own
+    # values), so unlike San Diego the residence check here is real.
+    "new_york": dict(raw=None, trade=None, owner=None,
+                     processed="businesses_geocoded.csv",
+                     address=("address", "unit")),
 }
+
+# Unit designators that suggest a residence, as opposed to a commercial suite.
+# Splitting these is why Los Angeles' jewellery district stopped reading as 42%
+# "residential" (DECISIONS.md, 2026-09-21): STE in the Diamond District is an
+# office, APT is someone's home.
+UNIT_RESIDENTIAL = re.compile(r"\b(APT|APARTMENT|UNIT|RM|ROOM|FL|FLOOR|PH|BSMT|REAR|LOWR)\b")
+UNIT_COMMERCIAL = re.compile(r"\b(STE|SUITE|BLDG|FRNT|SPC|LBBY|OFC)\b")
 
 # Tokens that make a name read as an organisation rather than a person. Kept
 # broad on purpose: a false "organisation" only makes the report conservative.
@@ -94,8 +111,14 @@ def check(slug):
     names = [html.unescape(r[2]).strip() for r in rows]
     print(f"\n=== {slug}: {len(rows):,} pins, {len(set(names)):,} distinct names")
 
-    raw_path = ROOT / "data" / slug / "raw" / spec["raw"]
-    if raw_path.exists():
+    if spec["raw"] is None:
+        print("  no registrant-name fallback exists for this city: its step 2 "
+              "never loads an owner/licence-holder column, so no pin can be "
+              "one. Only registered trade names are displayed.")
+        raw_path = None
+    else:
+        raw_path = ROOT / "data" / slug / "raw" / spec["raw"]
+    if raw_path is not None and raw_path.exists():
         raw = pd.read_csv(raw_path, dtype=str, low_memory=False)
         trade = raw[spec["trade"]].fillna("").str.strip()
         owner = raw[spec["owner"]].fillna("").str.strip()
@@ -106,7 +129,7 @@ def check(slug):
               f"({100 * (trade == '').mean():.1f}%)")
         print(f"  pins that can ONLY be the {spec['owner']} fallback: {len(only_fb):,} "
               f"({100 * len(only_fb) / len(rows):.1f}%)")
-    else:
+    elif raw_path is not None:
         print(f"  raw file missing ({raw_path.name}); skipping the fallback join")
 
     personal = [(html.unescape(r[2]).strip(), html.unescape(str(r[3]))) for r in rows
@@ -126,11 +149,23 @@ def check(slug):
             want = {n.upper() for n, _ in personal}
             hit = d["business_name"].fillna("").str.strip().str.upper().isin(want)
             if int(hit.sum()):
-                flagged = UNIT.search  # noqa: F841 - readability
                 unit_hits = addr[hit].map(lambda a: bool(UNIT.search(a)))
                 print(f"  of {int(hit.sum()):,} matching processed rows, "
                       f"{int(unit_hits.sum()):,} ({100 * unit_hits.mean():.1f}%) have an "
                       "APT/UNIT/STE/# in the address (possible residence)")
+                # Residential and commercial unit designators mean different
+                # things; reported apart where the city carries a unit column.
+                # Both are shares of the same base - the matching processed
+                # rows - and NOT of the line above, whose regex is narrower
+                # (it has no FL/RM/PH), so the residential count can exceed it.
+                resid = addr[hit].map(lambda a: bool(UNIT_RESIDENTIAL.search(a)))
+                comm = addr[hit].map(lambda a: bool(UNIT_COMMERCIAL.search(a)))
+                print(f"    of the same {int(hit.sum()):,} rows: "
+                      f"{int(resid.sum()):,} ({100 * resid.mean():.1f}%) at a "
+                      f"residential unit (APT/UNIT/FL/RM/PH) and {int(comm.sum()):,} "
+                      f"({100 * comm.mean():.1f}%) at a commercial one (STE/BLDG/FRNT)")
+                print(f"    PERSON-LIKE NAME AT A RESIDENTIAL UNIT: {int(resid.sum()):,} "
+                      f"of {len(rows):,} pins ({100 * int(resid.sum()) / len(rows):.2f}%)")
 
 
 def main():

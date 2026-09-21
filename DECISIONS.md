@@ -14,6 +14,145 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - New York added: the first city assembled from four registries
+
+- **Step 0 disproved the plan's premise for this city.** `PLAN.md` and
+  `docs/city_shortlist.md` both had New York down as "needs `nyc_dca` filled
+  (Socrata `w7w3-xahh`, `business_category`)". Live verification showed DCWP's
+  "Issued Licenses" file is a **regulated-activity licence list, not a business
+  registry**: of 35,245 active premises licences, 13,385 (38%) are home
+  improvement contractors, and the file contains zero restaurants, zero grocery
+  stores, zero clothing shops, zero pharmacies and zero salons. New York City
+  has no general business licence, so there is nothing for a
+  one-registry pipeline to read. Built on DCA alone the map would have shown
+  ~15k tobacco shops, secondhand dealers and electronics stores with two of the
+  three legend buckets empty. The `nyc_dca` taxonomy skeleton was retired
+  (removed from `TAXONOMY_MODULES`; it had never been used by a build).
+- **Coverage is assembled from four public registries**, each authoritative for
+  one bucket, live-verified the same day: DOHMH restaurant inspections
+  (`43nn-pn8j`) for Food service; NYS Retail Food Stores (`9a8c-vfzj`) for
+  grocery Retail; NYS Appearance Enhancement & Barber *business* licences
+  (`y3u4-jbgh`) for Personal services; and DCWP premises licences for a narrow
+  regulated Retail slice. Rejected alternatives: two registries only (drops
+  Personal services entirely), and DCA alone (a misleading map of New York).
+- **The architecture absorbed this without touching the shared map code.**
+  `pipeline/taxonomies/new_york.py` dispatches `classify()` on a `source`
+  column carried through `EXTRA_COLUMNS` - the same mechanism Chicago already
+  used for `business_activity` - so `map_common.py` needed no change for
+  multi-source. Category verdicts followed `chicago_license.py`'s stated
+  standard (buckets track NAICS 44/45, 722, 812, so cities stay comparable)
+  rather than fresh per-category judgment: that is what excluded pawnbrokers,
+  appliance repair, car washes and hotels, each of which Chicago already
+  excludes by name.
+- **DCA's 8,854 active `Individual` licences are excluded wholesale** by
+  filtering to `license_type='Premises'`. They are licences held by a person -
+  sightseeing guides, locksmiths, pedicab drivers, process servers - not
+  storefronts, and frequently at the licensee's home. Same reasoning as the
+  national NAICS 454 exclusion. The three DCA adjunct categories (tobacco,
+  e-cigarette, stoop line stand) are a permission a business holds rather than
+  the business, so they are ranked last in the dedup and add a pin only where
+  no other registry names that site - the treatment Chicago gives its own
+  TOBACCO licence.
+- **Lines, not services, and the legend obstacle forced it.** The feed carries
+  29 routes, which are service patterns over ~11 physical lines. The label
+  layout treats the legend as an obstacle `178 + 19*n_lines` px tall in a 650 px
+  map, so 29 lines gives a 729 px obstacle - taller than the map, leaving no
+  clear space, and every label collides. MTA's own `route_color` groups the 29
+  into exactly the trunks it signs and prints, which is both the fix and the
+  more honest geography (the 4, 5 and 6 are one line up Lexington Avenue).
+  11 entries -> a 387 px obstacle, and all 11 labels placed without collision
+  on the first render. Two deliberate departures from the colour grouping: the
+  L is split from the three shuttles (MTA paints all four grey, but the
+  14 St-Canarsie line is a full line), and the shuttles share one entry rather
+  than three legend rows for 2, 4 and 5 stations.
+- **One shared-code change**, generic rather than New York-specific: a line's
+  geometry may now be several polylines under one label, colour and legend
+  entry (`load_line_shapes` accepts a tuple of shape_ids and returns segments,
+  longest first; the label anchors to the longest). A trunk is one line through
+  the core and branches outside it. All four existing cities re-rendered
+  **byte-identical**, which is how the change was verified non-breaking.
+- **New York is the only city that does not use the shared ring edges.**
+  Stations sit a median 482 m apart - almost exactly the 0.6 mi outer ring used
+  elsewhere - so those rings would reach past the next two stations in every
+  direction. Edges halved to `[0, 0.05, 0.1, 0.2, 0.3]` mi, which is what the
+  add-city skill's "unless station spacing is meaningfully different" clause
+  was written for. Stations were **not** thinned: unlike San Francisco's
+  street-running Muni stops, every NYC subway station is a full station, so the
+  sub-transit-line filters do not apply.
+- **Rings start switched off here, rather than being removed.** Even halved,
+  253 of 496 stations are closer together than the outer ring, and a rendered
+  check showed the rings merging into an indistinct wash over Manhattan - but
+  reading cleanly around the outer-borough and Staten Island stations. So
+  `render_heatmap` gained a `rings_shown` flag (default True, False for New
+  York) and the rings stay in the layer control. Preferred over dropping them,
+  which would have lost real information for ~243 stations.
+- **Staten Island Railway included**, on the condition that it be properly
+  covered by data: it is, across all four registries (1,114 DOHMH
+  establishments, 2,078 DCA premises licences, 654 salon licences, 520 retail
+  food stores - more businesses than San Diego's entire mapped set), with 21
+  clean GTFS stations and full shape geometry.
+- **Two coordinate problems that looked like one.** 16,692 rows had source
+  coordinates outside the city's bounding box, and the first pass wrongly sent
+  all of them to the geocoder. They are two populations: 16,073 are valid New
+  York State points that are simply not in the city (15,387 of them upstate
+  salons in Watertown, Buffalo, Utica - the two NYS registries are statewide
+  and carry no NYC marker), and 619 are not valid New York points at all, 409
+  of them exactly (0,0), belonging to real New York businesses. The first are
+  dropped as out of scope; only the second are geocoded. Conflating them would
+  have wasted ~16k geocoder calls and risked placing an upstate salon back
+  inside the city on a same-named street. `NY_STATE_BBOX` is the discriminator.
+- **Cross-source dedup merges on address AND name, not address alone.** One
+  New York address routinely holds many distinct storefronts, so address-only
+  merging would delete real businesses; 14,830 rows share an address with
+  another row. Keying on address plus a normalised name under-merges instead -
+  a spelling difference between two registries leaves a business counted twice -
+  which inflates density slightly rather than erasing storefronts. Both numbers
+  are printed by step 2 so the trade-off stays visible, and the city page says
+  so.
+- **Counts.** 104,366 rows across four registries -> 84,331 storefront rows
+  with a name -> 15,454 dropped as out of scope -> 64,092 after one-row-per-site
+  -> 63,311 inside the borough polygons. Step 3 recovered 582 of 1,449 missing
+  coordinates by Census geocoding (57.6% match rate on 1,390 geocodable rows,
+  161 rejected as out of bounds, 57 more dropped as outside the boroughs) and
+  lost 867 rows (1.4%), spread evenly across sources (0.3%-2.2%) and all three
+  buckets - no systematic bias. Final: **62,444 businesses, 44,361 pins within
+  a ring, 496 stations, 11 trunk lines, 24 shapes drawn.** Buckets: Food
+  service 29,910, Retail 22,614, Personal services 10,787.
+- **Exposure check: the cleanest large city so far, and the first where the
+  measurement is real.** `scripts/check_personal_exposure.py` reports 84 pins
+  (0.19%) with a person-like name at a residential unit, against Los Angeles
+  5.67%, San Francisco 1.95%, Chicago 0.09%. Two reasons, both structural
+  rather than lucky: **no registrant-name column is ever loaded** (the salon
+  registry's `license_holder_name` is not even downloaded, and step 2 asserts
+  it never arrives), so no pin can be one; and DCA supplies a **structured**
+  `unit_type` (APT, STE, FL, RM as separate values), which is carried into the
+  processed file as a `unit` column. That last point matters because San
+  Diego's 0.04% was a measurement gap - its unit values are bare ("A", "101")
+  with no token to match - whereas New York's number is measured. The 16.8%
+  person-like-name rate sits at the documented false-positive floor and is
+  concentrated in restaurants, coffee shops and grocers: the benign shape.
+  The exposure script also now reports residential and commercial unit
+  designators separately for every city, which revised the recorded figures
+  slightly (Los Angeles 5.49% -> 5.67%, San Francisco 1.48% -> 1.95%) because
+  FL/RM/PH/BSMT had not previously been counted as residential; the ranking is
+  unchanged and the script's output is now the canonical measure.
+- **Stated as a limitation on the city's page, not buried: New York's Retail
+  bucket is less complete than the other cities'.** A clothing shop or bookshop
+  needs no licence from any of the four registries and is therefore absent,
+  while restaurants are close to fully covered because every one is inspected.
+  The balance between categories here is a fact about New York's licensing, not
+  about its high streets.
+- **`docs/data_sources.md` created** as the master provenance list for all five
+  cities - 8 business registries, 5 GTFS feeds, 5 boundary layers and the
+  geocoder, each with its endpoint, download filter and retrieval date - and
+  recording sources was added to the `add-city` skill. Two findings from
+  writing it: `tqmj-j8zm`, the New York borough-boundary dataset ID in wide
+  circulation, now returns 404 (`gthc-hcne` is live), and MTA's
+  `web.mta.info/developers` GTFS path is dead (an S3 bucket replaced it). It
+  also surfaced that **San Francisco's boundary layer has no recorded endpoint
+  anywhere**, so that city cannot currently be rebuilt from scratch; logged as
+  a gap in that file.
+
 ### 2026-09-21 - Legend stays broad; the exclusions page carries the detail
 
 - **The map legends keep their broad labels** ("Retail - NAICS Code: 44/45",

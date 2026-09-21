@@ -137,8 +137,27 @@ Cities built and running end to end (pipeline, map, app page):
   history, filtered to currently active licenses. Data ships pre-geocoded
   with valid coordinates, so its map is step 3.
 
-Next by ease ranking: New York and Philadelphia; Boston and
-Washington D.C. carry caveats. See `city_shortlist.md` and
+- **New York** - the MTA subway plus the Staten Island Railway, every station
+  in the five boroughs (nothing excluded: the network does not leave its own
+  city). Distinctive in four ways. It is the only city whose businesses come
+  from **more than one registry** - New York has no general business licence,
+  so Food service, grocery Retail and Personal services each come from their
+  own source, and `pipeline/taxonomies/new_york.py` dispatches on a `source`
+  column rather than reading one classification field. It draws **lines, not
+  services**: 29 subway services grouped into the 11 trunks the MTA itself
+  signs, so a trunk's geometry is several polylines under one label. It is the
+  only city **not using the shared ring edges** (stations sit a median 482 m
+  apart, so the rings are halved and start switched off, remaining in the
+  layer control where they still read - the outer boroughs and Staten Island).
+  And its **Retail bucket is knowingly less complete** than other cities': a
+  shop needing no licence from any of the four registries is absent, while
+  restaurants are near-complete. Its map is step 4 (a geocoding step recovers
+  DCA's missing coordinates).
+
+Next by ease ranking: Philadelphia; Boston and Washington D.C. carry caveats.
+**Check a candidate's registry actually covers all three buckets before
+assuming one source is enough** - that assumption failed for New York. See
+`city_shortlist.md`, `data_sources.md` (every source's endpoint and filter) and
 `PLAN.md`. Row counts, station counts and per-run figures are in
 `DECISIONS.md`.
 

@@ -46,9 +46,14 @@ CATEGORY_BUCKETS = [
 #       the bucket name).
 TAXONOMY_MODULES = {
     "naics": "pipeline.taxonomies.naics",
-    "nyc_dca": "pipeline.taxonomies.nyc_dca",
     "chicago_license": "pipeline.taxonomies.chicago_license",
     "phl_licensetype": "pipeline.taxonomies.phl_licensetype",
+    # New York dispatches over four registries rather than reading one
+    # classification field - it is the first city whose coverage could not come
+    # from a single source. `nyc_dca` (a skeleton, never used by a build) was
+    # retired into it on 2026-09-21 when Step 0 showed the DCA licence file is
+    # a regulated-activity list, not a business registry. See new_york.py.
+    "new_york": "pipeline.taxonomies.new_york",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

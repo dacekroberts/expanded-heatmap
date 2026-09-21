@@ -56,6 +56,23 @@ Only proceed once all three are confirmed live. If a city fails, record the
 real reason (cite the endpoint and response) in `docs/city_shortlist.md` and
 a `DECISIONS.md` entry, and move to the next candidate.
 
+**Record every confirmed source in `docs/data_sources.md` as you verify it** -
+endpoint, the server-side filter applied at download, and the date. That file
+is the project's master provenance list and the only way a build can be
+reproduced, because raw downloads are gitignored. Do it now, while the
+endpoints are in front of you: recording them later is how San Francisco's
+boundary layer ended up with no recorded URL at all. If an endpoint you tried
+is dead, record that too, with its date - a replaced URL that leaves no trace
+hides the fact that dataset IDs get retired.
+
+**One source need not be enough.** New York has no general business licence,
+so no single registry covers it; its coverage is assembled from four, each
+authoritative for one bucket, unioned in step 2 with a `source` column and
+dispatched by a wrapper taxonomy. If a city's best registry turns out to cover
+only part of the subject, check for a per-bucket source before either
+accepting a skewed map or dropping the city - and say plainly on the city's
+page which buckets are less complete.
+
 If it passes but the build won't start right away (a usage limit, a new
 session), turn what the probe found and left open into an ordered checklist
 under that city's item in `PLAN.md` before stopping. Write it from the

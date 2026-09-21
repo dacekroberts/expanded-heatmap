@@ -57,4 +57,14 @@ CITIES = [
         "page": "pages/4_Chicago_Heatmap.py",
         "blurb": "CTA 'L' (Red, Blue, Brown, Green, Orange, Pink, Purple Lines)",
     },
+    {
+        "name": "New York",
+        "lat": 40.7128,
+        "lon": -74.006,
+        "page": "pages/5_New_York_Heatmap.py",
+        "blurb": "Subway trunk lines (8 Av, 6 Av, 7 Av, Lexington Av, Broadway, "
+                 "Nassau St, Flushing, Crosstown, 14 St-Canarsie) and the Staten "
+                 "Island Railway",
+        "label": "left",
+    },
 ]

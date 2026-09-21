@@ -247,8 +247,18 @@ def load_line_shapes(gtfs_zip, line_specs, system_name):
 
     line_specs: {key: (shape_id, color, real-world public name, label end)}
     where label end is None (automatic), "start" or "end" - which end of the
-    line its label goes at (see add_line_label). Returns {key: (coords, color,
-    label, end)}.
+    line its label goes at (see add_line_label).
+
+    `shape_id` may instead be a tuple/list of shape_ids, for a line that is one
+    named thing to riders but several alignments in the feed. New York needs
+    this: a subway trunk (the "6 Av (B/D/F/M)" line) runs as one line through
+    the core and branches outside it, so its geometry is several shapes sharing
+    one label, one colour and one legend entry. A single shape_id behaves
+    exactly as before.
+
+    Returns {key: (segments, color, label, end)} where `segments` is a list of
+    coordinate lists, longest first - so `segments[0]` is the line's primary
+    alignment, which is what the label is anchored to.
     """
     if not gtfs_zip.exists():
         print(f"No GTFS feed at {gtfs_zip} - skipping the {system_name} line overlay.")
@@ -259,13 +269,22 @@ def load_line_shapes(gtfs_zip, line_specs, system_name):
 
     lines = {}
     for key, (shape_id, color, label, end) in line_specs.items():
-        pts = shapes[shapes["shape_id"] == shape_id].sort_values("shape_pt_sequence")
-        if pts.empty:
-            print(f"WARNING: shape_id {shape_id!r} for the {label} not in this "
-                  "GTFS feed - check trips.txt for its current most-used shape_id.")
+        shape_ids = [shape_id] if isinstance(shape_id, str) else list(shape_id)
+        segments = []
+        for sid in shape_ids:
+            pts = shapes[shapes["shape_id"] == sid].sort_values("shape_pt_sequence")
+            if pts.empty:
+                print(f"WARNING: shape_id {sid!r} for the {label} not in this "
+                      "GTFS feed - check trips.txt for its current most-used shape_id.")
+                continue
+            segments.append(list(zip(pts["shape_pt_lat"].astype(float),
+                                     pts["shape_pt_lon"].astype(float))))
+        if not segments:
             continue
-        coords = list(zip(pts["shape_pt_lat"].astype(float), pts["shape_pt_lon"].astype(float)))
-        lines[key] = (coords, color, label, end)
+        # Longest first: the trunk's main alignment anchors the label, and a
+        # short branch never captures it.
+        segments.sort(key=len, reverse=True)
+        lines[key] = (segments, color, label, end)
     return lines
 
 
@@ -648,7 +667,7 @@ def _label_anchor_coords(coords, label_focus):
 def render_heatmap(*, output_path, map_title, city_name, system_name,
                    stations, businesses, taxonomy_system, lines,
                    crs_geographic, crs_projected, ring_edges_meters, ring_labels,
-                   center=None, zoom=None, label_focus=None):
+                   center=None, zoom=None, label_focus=None, rings_shown=True):
     """Render one city's heatmap to a standalone HTML file.
 
     stations: DataFrame(station, latitude, longitude). businesses: the
@@ -661,6 +680,14 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     center/zoom: leave None (the default) to fit the view to the stations and
     every line label together, so all labels are visible on first load; pass
     either to override.
+
+    rings_shown: whether the concentric ring layers start switched on. True for
+    every city whose stations are far enough apart for the rings to read
+    individually. New York passes False: with 496 stations at a median 482 m
+    apart, the rings merge into one indistinct wash over Manhattan and downtown
+    Brooklyn, though they still read cleanly around the outer-borough and
+    Staten Island stations - so they stay in the layer control to be switched
+    on, rather than being dropped. Decided 2026-09-21; see DECISIONS.md.
     """
     taxonomy = load_taxonomy_module(taxonomy_system)
     bucket_colors = dict(CATEGORY_BUCKETS)
@@ -676,7 +703,9 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # Where each line's label goes: the tail end of its in-city stretch,
     # chosen against the other lines' stretches. Worked out first so the
     # default view can be fitted to include every label.
-    anchors = {key: _label_anchor_coords(coords, label_focus) for key, (coords, *_rest) in lines.items()}
+    # segments[0] is the line's primary alignment (load_line_shapes sorts them
+    # longest first); a multi-segment line is labelled against that.
+    anchors = {key: _label_anchor_coords(segments[0], label_focus) for key, (segments, *_rest) in lines.items()}
     tips = {
         key: _tail_end(anchors[key], [a for k, a in anchors.items() if k != key], forced=end)
         for key, (_coords, _color, _label, end) in lines.items()
@@ -710,7 +739,8 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
             show=False).add_to(m)
 
     for i, label in enumerate(ring_labels):
-        layer = folium.FeatureGroup(name=f"Concentric Ring {i + 1}: {label}", show=True)
+        layer = folium.FeatureGroup(name=f"Concentric Ring {i + 1}: {label}",
+                                    show=rings_shown)
         for _, station in stations.iterrows():
             folium.Circle(
                 location=[station["latitude"], station["longitude"]],
@@ -730,9 +760,12 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
 
     # Transit lines: always-on context, permanent label + legend entry each
     # (label tips were worked out above, before the map was created).
-    for key, (coords, color, label, _end) in lines.items():
+    for key, (segments, color, label, _end) in lines.items():
         rail_layer = folium.FeatureGroup(name=f"{system_name}: {label}", show=True, control=False)
-        folium.PolyLine(coords, color=color, weight=4, opacity=0.85).add_to(rail_layer)
+        # One polyline per alignment; a branching trunk keeps one label and one
+        # legend entry (see load_line_shapes).
+        for segment in segments:
+            folium.PolyLine(segment, color=color, weight=4, opacity=0.85).add_to(rail_layer)
         add_line_label(rail_layer, tips[key], label, color)
         rail_layer.add_to(m)
 
