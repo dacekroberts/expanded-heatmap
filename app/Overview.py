@@ -19,16 +19,25 @@ import pydeck as pdk
 import streamlit as st
 
 from cities import CITIES, MAP_ONLY_NAV
-from components import render_macro_map_theme, set_base_font
+from components import (
+    SITE_NAME,
+    render_macro_map_theme,
+    render_site_notices,
+    set_base_font,
+)
 # components.py has already put the repo root on sys.path; pipeline/theme.py
 # imports nothing, so it is safe under the lean deploy venv.
 from pipeline.theme import DARK as DARK_PALETTE, LIGHT, rgb_list
 
-st.set_page_config(page_title="Expanded Heatmap", page_icon="\U0001f5fa️", layout="wide")
+st.set_page_config(page_title=SITE_NAME, page_icon="\U0001f5fa️", layout="wide")
 set_base_font()
 render_macro_map_theme()
 
-st.title("Commercial density near transit, city by city")
+# The public name lives in components.SITE_NAME; the repository keeps its own
+# name (`expanded-heatmap`), which is a directory, not a title.
+st.title(SITE_NAME)
+st.caption("Storefront commercial density around rail-transit stations, "
+           "city by city.")
 
 _FOLLOW_UP = (
     'each city map has an "All cities" button to come back here.'
@@ -66,17 +75,17 @@ OUTLINE = rgb_list(LIGHT["surface"], 255)  # ring around each marker
 # both the teal marker and the category colours to read as "this one".
 HIGHLIGHT = [251, 191, 36, 255]
 
-# Which side of its marker each name sits on (cities.py "label", default top),
-# as a text anchor plus a pixel offset for the TextLayer.
-LABEL_SIDES = {
-    "top": ("middle", 0, -22),
-    "left": ("end", -16, 0),
-    "right": ("start", 16, 0),
-}
-sides = cities["label"].fillna("top") if "label" in cities else pd.Series("top", index=cities.index)
-cities["anchor"] = sides.map(lambda s: LABEL_SIDES[s][0])
-cities["dx"] = sides.map(lambda s: LABEL_SIDES[s][1])
-cities["dy"] = sides.map(lambda s: LABEL_SIDES[s][2])
+# Where each name sits relative to its marker: an explicit (anchor, dx, dy) in
+# pixels from cities.py's `label_offset`. See that file's docstring for why this
+# is per-city rather than a three-sided enum, and for the rule that a label
+# overflow is fixed by moving the label and never by padding fit_view's box.
+DEFAULT_OFFSET = ("middle", 0, -22)
+offsets = (cities["label_offset"] if "label_offset" in cities
+           else pd.Series([None] * len(cities), index=cities.index))
+offsets = offsets.map(lambda v: DEFAULT_OFFSET if v is None else tuple(v))
+cities["anchor"] = offsets.map(lambda o: o[0])
+cities["dx"] = offsets.map(lambda o: o[1])
+cities["dy"] = offsets.map(lambda o: o[2])
 
 markers = pdk.Layer(
     "ScatterplotLayer",
@@ -117,7 +126,16 @@ labels = pdk.Layer(
     # for the same reason as radius_units above.
     font_family=pdk.types.String("Space Grotesk, sans-serif"),
     font_weight=600,
-    pickable=False,
+    # PICKABLE, and that is the point rather than a nicety. This map is the
+    # app's only navigation (MAP_ONLY_NAV), and the dots are a 12 px target
+    # whose centres are 6.0 px apart for New York/Philadelphia and 9.0 px for
+    # Philadelphia/Washington D.C. - they physically overlap, so a click there
+    # cannot reliably say which city was meant. The name pill is 56-133 px
+    # wide and, since the 2026-09-21 offsets, never overlaps another, so it is
+    # an unambiguous target. The selection handler below reads BOTH layers.
+    pickable=True,
+    auto_highlight=True,
+    highlight_color=HIGHLIGHT,
 )
 
 def fit_view(lats, lons, width_px=320, height_px=460, fill=0.7, west_pad=0.12):
@@ -175,7 +193,11 @@ event = st.pydeck_chart(
     height=460,
 )
 
-picked = (event.selection.objects or {}).get("cities", []) if event else []
+# Either the dot or its name pill opens the city - see the labels layer above
+# for why the pill matters more. Both layers carry the same `name`, so the
+# lookup is identical; whichever layer deck.gl picked, the first hit wins.
+objects = (event.selection.objects or {}) if event else {}
+picked = objects.get("cities", []) or objects.get("city-labels", [])
 if picked:
     target = next((c for c in CITIES if c["name"] == picked[0].get("name")), None)
     if target:
@@ -185,3 +207,6 @@ st.caption("Or pick a city from the list:")
 for city in CITIES:
     st.page_link(city["page"], label=f"**{city['name']}**")
     st.caption(city["blurb"])  # a caption wraps; a long page_link label is clipped on a phone
+
+# Site-level notices, required on every page - see components._NOTICES.
+render_site_notices()

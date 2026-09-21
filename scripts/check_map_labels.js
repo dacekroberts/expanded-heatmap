@@ -25,11 +25,28 @@ for (const l of labels) {
 for (let i = 0; i < labels.length; i++)
   for (let j = i + 1; j < labels.length; j++)
     if (overlaps(labels[i].r, labels[j].r)) problems.push(`overlap: ${labels[i].text} / ${labels[j].text}`);
+// DO NOT assume the legend starts open. It does not at narrow widths: on a
+// fresh load at 854px, Chicago's and Boston's legends both report
+// `open: false` with no `open` attribute and a height of 37px. The previous
+// version of this check read the height as-found, called that `openH`, then
+// set `open = false` and compared - so it measured 37 against 37 and reported
+// "legend does not collapse" on EVERY city. A false failure, found 2026-09-21
+// while verifying nine maps before a deploy.
+//
+// So drive both states explicitly and restore whatever the page chose, since
+// the label/legend overlap checks above depend on the real rendered state.
+// The awaits are for reflow after setting `open`.
+const wasOpen = legend.open;
+legend.open = true;
+await new Promise(r => setTimeout(r, 250));
 const openH = legend.getBoundingClientRect().height;
 legend.open = false;
+await new Promise(r => setTimeout(r, 250));
 const closedH = legend.getBoundingClientRect().height;
-legend.open = true;
-if (!(closedH < openH)) problems.push('legend does not collapse');
+legend.open = wasOpen;
+await new Promise(r => setTimeout(r, 250));
+if (!(closedH < openH)) problems.push(`legend does not collapse (open ${Math.round(openH)}px, closed ${Math.round(closedH)}px)`);
+if (legend.open !== wasOpen) problems.push('legend state not restored');
 // Top-right buttons ("All cities" when embedded, and Dark Mode): inside the visible viewport (it is position: fixed, unlike
 // Leaflet's top-right corner), not over a label, and it toggles and restores.
 const toggle = document.getElementById('theme-toggle');

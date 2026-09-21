@@ -14,6 +14,221 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Code licence, and disclosing the unsettled licence positions on the page
+
+- **The code is MIT; the data explicitly is not.** `LICENSE` carries the MIT
+  text verbatim, then a separate scope section - kept separate so the licence
+  body is unmodified - stating what the grant does NOT cover. This mattered:
+  a bare MIT file at the repo root would have purported to license the 19 MB
+  of third-party-derived content in `outputs/`, which this project cannot
+  sublicense. WMATA prohibits redistributing its transit data to third
+  parties, LA Metro forbids modifying its data, and the business records come
+  from registers whose terms run from CC0 to a licence that reserves every
+  right. The carve-out names the three categories of embedded material
+  (redrawn `shapes.txt` geometry, station names and positions, business trade
+  names and coordinates) and points at `docs/data_sources.md` for terms and
+  `docs/excluded_categories.md` for the modifications half that some of those
+  terms require a re-publisher to state. Copyright line: `dacekroberts`, the
+  identity this project commits under; flagged to the owner in case a legal
+  name is preferred.
+- **The deployed URL is a marked placeholder, not an omission.** Streamlit
+  Cloud fixes the subdomain at app creation, so it cannot be derived in
+  advance; `README.md` carries a `TODO` line and `PLAN.md` the matching item,
+  and those are deliberately the only two places that need it.
+- **THE THREE "WHAT DOES SILENCE MEAN?" QUESTIONS ARE NOW DISCLOSED ON THE
+  SITE RATHER THAN BLOCKING IT.** The owner's decision: write the neutrality
+  into the page beside the attributions instead of waiting on third parties
+  who may never answer. `components._UNSETTLED_TERMS` renders in the footer of
+  every page and does four things - names Miami-Dade and Philadelphia rather
+  than gesturing at "some sources"; distinguishes their opposite shapes
+  (Miami-Dade publishes no reuse position at all, while Philadelphia's licence
+  reserves every right and grants none, with SEPTA's trademark clause of
+  unclear reach alongside); states plainly that nothing found in either forbids
+  what the maps show, because these are questions about the absence of
+  permission rather than a prohibition; and commits to removal.
+- **The removal commitment gained a SECOND, BROADER TRIGGER.** The standing
+  one fires when a publisher *asks*. This one fires on finding out: **if either
+  publisher states a position that does not permit this use, that city comes
+  off the site without waiting to be asked.** Recorded in all three places
+  that carry this promise - the page footer, `docs/data_sources.md`'s
+  commitment section, and `docs/excluded_categories.md`'s reader-facing
+  version - because CLAUDE.md requires the last two to stay consistent with
+  each other, and the footer is now a third copy of the same sentence.
+- **New Orleans is deferred post-deploy**, with Seattle's multi-municipality
+  build. The owner's call: the pre-deploy city scope is the nine that are
+  built. New Orleans was screened (CC0, the cleanest licence of any candidate)
+  but still needs a real Step 0, and its streetcar-only network is a scope
+  question rather than a data one.
+
+### 2026-09-21 - Pre-deploy gate: name, branding, tiles, notices, and the two data pages
+
+- **Project name: "Storefronts Near Transit"**, decided by the owner. The
+  repository, directory and git remote stay `expanded-heatmap` - the new name
+  is the SITE title only, so no path, checkout or remote changes. It lives in
+  `components.SITE_NAME` and feeds the Overview heading and every browser tab.
+  The standing invariant that the project is never named after a city is why
+  the name describes the measurement instead.
+- **Agency branding: keep the official route colours AND the real line names,
+  and state non-affiliation plainly.** The owner's call, on the reading that
+  what those clauses actually prohibit is stating or implying affiliation,
+  sponsorship or endorsement - which `components._NON_AFFILIATION` now does
+  head-on on every page. Nothing in the project reproduces a logo, wordmark or
+  route-bullet artwork, which is the part every one of those clauses most
+  clearly covers, and for WMATA the colour IS the line's name. Affects six of
+  nine cities (MTS, LA Metro, CTA, MTA, SEPTA, WMATA); no re-render needed.
+  The alternative - swapping all six to this project's own palette - was
+  costed at one dict per city plus a re-render of all nine maps, and would
+  have removed the weaker half of the exposure while leaving the line names,
+  which a standing invariant requires.
+- **TILE PROVIDER: change nothing, and the research REVERSED the
+  recommendation I had given.** I had recommended moving the nine city maps
+  from OSM raster onto Carto, to match the macro map. The owner asked whether
+  Carto runs into API or paid walls - flagged in a sibling project - and both
+  policies were then read rather than assumed:
+  - **OSM raster** (`tile.openstreetmap.org`, the nine city maps): keyless, no
+    stated volume cap, and it explicitly permits "normal interactive viewing
+    by a human where the client requests only the tiles needed for the current
+    viewport". Requires attribution (already in every map corner), a valid
+    User-Agent and a Referer - and the policy itself notes that "modern
+    browsers, with default settings, already satisfy these technical
+    requirements". Forbids prefetch, bulk download and offline use, none of
+    which this project does. Best-effort, no SLA, may be blocked without
+    notice.
+  - **Carto** (the macro map only): free to a fair-use limit of **5 million
+    tile requests a month**, and "all you need is an API key" - so a key is
+    now expected. Above the limit, non-commercial projects "usually just get a
+    higher limit" and commercial use needs an Enterprise licence.
+  So the owner's instinct was right and my recommendation was backwards on
+  exactly the axis they flagged: it would have moved nine maps off the
+  keyless, quota-free service onto the metered one. **Residual risk, recorded
+  and accepted:** the macro map uses Carto's keyless CDN, which that policy no
+  longer documents. If it is withdrawn, the macro basemap goes blank while the
+  markers, name pills, clicks and the text-link list all keep working -
+  degraded, not broken. `pydeck` 0.9.3 does accept `api_keys={"carto": ...}`
+  (env `CARTO_API_KEY`), so requesting the free key is available as an owner
+  task; it needs their own account, so it is not something to do on their
+  behalf.
+- **Repository stays PUBLIC.** The owner's call, accepting a real but unlikely
+  residual: four transit licences (WMATA section 9, LA Metro, SEPTA, MassDOT)
+  are revocable without notice and a public repo cannot be un-published.
+  Nothing found in any licence forbids what the project displays, and the
+  standing commitment - a removal request is honoured, not argued - is the
+  answer if a revocation ever comes.
+- **Entry point renamed `app/Overview_&_Introduction.py` to `app/Overview.py`.**
+  Streamlit Cloud fixes the main-file path permanently at app creation, and an
+  `&` in a path is a live hazard in URLs and shell commands. Renamed with
+  `git mv`; every reference updated, including `scripts/scaffold_city.py`,
+  which GENERATES new city pages and so would have propagated the old name to
+  every future city. `DECISIONS.md` and `docs/passover_opus5.md` keep the old
+  spelling deliberately: they are history, not configuration.
+- **The five required notices are now DISPLAYED, site-wide.** This was the one
+  item that actually blocked publishing. `components.render_site_notices()` is
+  called from all twelve pages and renders Chicago's and SFMTA's paragraphs
+  **verbatim** (their terms prescribe exact wording), LA Metro's and MassDOT's
+  acknowledgements in this project's own words (they prescribe none), CTA's
+  encouraged credit, and OSM's basemap credit alongside Carto's.
+- **A MISTAKE WORTH NAMING: I first put those notices inside a collapsed
+  `st.expander`.** Streamlit keeps a collapsed expander's contents out of the
+  DOM, so the notices were not merely small - they were absent until a reader
+  clicked. Chicago's terms require its paragraph "at the site where the
+  software application ... can be accessed", and this project's own rule for
+  the OSM attribution is that it must not sit "beneath UI, behind toggles, or
+  off-screen". A required notice behind a toggle is not displayed. Caught by
+  probing the rendered DOM for each notice's text rather than eyeballing the
+  page; they now render inline, always, in small type. The comment in
+  `components.py` says so, to stop the expander coming back as a tidiness
+  improvement.
+- **`data_sources.md` and `excluded_categories.md` are now reachable in the
+  app**, as `pages/10_About_the_Data.py` and `pages/11_What_Is_Excluded.py`.
+  Each renders its document AS COMMITTED rather than as a hand-maintained web
+  copy, which would drift from the file the pipeline's authors actually read.
+  Both are linked from the footer on every page. This closes three obligations
+  at once: New York's "source, version, and modifications" condition, the
+  site-level placement of the four agency notices, and the fact that a legend
+  reading "Retail - NAICS Code: 44/45" overstates its own contents until the
+  exclusions are reachable from it.
+- **The accuracy sweep found two real claims, both on the New York page - the
+  MTA city.** It described its restaurant coverage as "close to fully
+  covered", and said Retail was "less complete ... than in the other cities",
+  which implied the other eight WERE complete. Both reworded; a note in that
+  page's docstring records why, as D.C.'s already did. Everything else was
+  clean - the only "accurate" left in a rendered map belongs to a pharmacy
+  called Accurate Pharmacy, and the remaining matches are code comments. The
+  positive form now appears site-wide: every map is "a snapshot of a public
+  register as it stood on the retrieval date", not a census of what is open.
+- **Still open, and all of them are the owner's to settle with third parties:**
+  the three "what does silence mean?" questions (Miami-Dade, SEPTA's trademark
+  clause, the City of Philadelphia License), a licence for this project's own
+  code, the deployed URL in the README, and the optional Carto key.
+
+### 2026-09-21 - Macro-map labels: per-city pixel offsets, and the pills made clickable
+
+- **The deferred macro-map polish pass, done because D.C.'s marker forced it.**
+  It had been held deliberately until D.C. existed so the east-coast cluster
+  could be fixed once. With nine cities there were **11 label collisions**, the
+  worst being "Philadelphia" and "Washington D.C." overlapping by 102x13 px -
+  one unreadable smear. Now **zero** at 854 and 1200 px.
+- **The three-sided "top"/"left"/"right" enum is gone**, replaced by an explicit
+  per-city `label_offset` of `(anchor, dx, dy)` in pixels. Three sides at a
+  ~20 px offset cannot separate four dots that sit 6-15 px apart carrying pills
+  56-126 px wide, which is the east-coast cluster's actual geometry.
+- **An east pad on `fit_view` was proposed and withdrawn as counterproductive.**
+  This view is LONGITUDE-bound (z_lon 1.453 against z_lat 3.499), so widening
+  the bounding box lowers the zoom and pulls the cluster TIGHTER: an east pad
+  of 0.30 would take the New York/Philadelphia dots from 6.0 px apart to 4.7.
+  The rule recorded in `cities.py` is to move the label, never the box.
+- **The first fix was a vertical stack, and the owner's screenshot killed it.**
+  The four eastern names were stacked at dy -130/-102/-74/-46 in latitude
+  order: collision-free at every width including phones, and wrong the moment
+  anyone zoomed in, because **the offsets are in pixels and the map is
+  zoomable** - the dots spread apart on zoom while the names stay put, leaving
+  "Boston" adrift 130 px from a dot that had moved.
+- **The owner's fix was better: east of the dot, y-axis parallel.** Measured,
+  the minimum collision-free spread is `dx +14, dy -24/-8/+8/+24`, which cuts
+  worst-case drift from **130 px to 24 px** - 5.4x - because the dots' own
+  6-15 px of vertical spread adds to the offsets. Verified by zooming the live
+  map: each name now sits beside its own dot at every zoom level tested.
+- **The map stays zoomable, which is what settled the layout.** The owner's
+  reasoning (2026-09-21): non-US cities are a real possibility, and a fixed
+  view would force continent-specific maps and a layer of extra pages. Locking
+  the view was the alternative and would have allowed the vertical stack,
+  since nothing could then drift. That trade was declined, so the layout has
+  to survive zooming.
+- **The accepted cost is phone-width clipping.** At 340-390 px the two widest
+  eastern names are cut by the right edge ("Washington", "Philadelph" - still
+  recognisable; Boston and New York fit whole). This is structural, not
+  tuning: "Washington D.C." is a 126 px pill whose dot sits ~69 px from the
+  right edge, so no `dx` fits it, "middle" is the only anchor that would (which
+  is what the stack was doing), and west placement collides with Chicago. The
+  clipped pills stay clickable and the Overview lists every city as a text link
+  directly beneath the map.
+- **THE REAL PRIZE WAS PICKING, NOT TIDINESS.** The `TextLayer` is now
+  `pickable` and the selection handler reads `city-labels` as well as
+  `cities`. This map is the app's ONLY navigation (`MAP_ONLY_NAV`), and the
+  dots are a 12 px target whose centres are **6.0 px** apart for New
+  York/Philadelphia and **9.0 px** for Philadelphia/Washington D.C. - they
+  physically overlap, so a click there could not reliably say which city was
+  meant. A name pill is 56-133 px wide and never overlaps another, so it is an
+  unambiguous target. Verified by clicking: the "Washington D.C." pill opens
+  D.C., the "Philadelphia" pill opens Philadelphia, and the San Francisco dot
+  still opens San Francisco.
+- **Markers stay at radius 6.** Shrinking them was considered and rejected:
+  once the pill is the click target the dot is a position indicator, so a
+  smaller dot would only make the true locations harder to see.
+- **Chicago's label went back to the default.** It had to move west while the
+  vertical stack reached across it; with the eastern four beside their own dots
+  it is unremarkable again. One fewer special case.
+- **A known issue this leaves standing:** with the controller enabled,
+  scrolling the page while the cursor is over the macro map zooms the MAP
+  instead of scrolling the page, and the resulting view persists across
+  reloads via the widget key. Found by doing it accidentally. Recorded in
+  `PLAN.md` rather than fixed, because fixing it means locking the view, which
+  the owner declined for the reason above.
+- **Leader lines are no longer planned.** They were the next step while the
+  names sat 130 px from their dots; at 14 px east and 24 px of vertical drift
+  each name is visually adjacent to its own dot, so a leader would add clutter
+  for very little gain.
+
 ### 2026-09-21 - Washington D.C. built: one register, three buckets, a feed that expires
 
 - **Ninth city, and the first non-NAICS registry in the project that covers all

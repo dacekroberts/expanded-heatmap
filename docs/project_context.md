@@ -81,7 +81,7 @@ pipeline/
   census_geocoder.py          shared: Census bulk geocoder with a content-hash cache
                               (for cities whose data lacks usable coordinates)
 app/
-  Overview_&_Introduction.py  macro page: clickable map of every city
+  Overview.py  macro page: clickable map of every city
   cities.py                   the app's city list (map, fallback list, switchers)
   pages/N_<City>_Heatmap.py   one embedded map per city
   components.py               shared styling (font)

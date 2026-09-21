@@ -2,7 +2,7 @@
 
 Reading the saved file as a raw component is faster than re-rendering the
 map through streamlit-folium, and avoids pulling folium into the deployed
-app's dependencies - see Overview_&_Introduction.py's docstring for why
+app's dependencies - see Overview.py's docstring for why
 this is the decided pattern for every city's detail page, not just this
 one.
 """
@@ -14,7 +14,11 @@ import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.san_diego.config import HEATMAP_HTML  # noqa: E402
-from components import render_city_nav, set_base_font  # noqa: E402
+from components import (  # noqa: E402
+    render_city_nav,
+    render_site_notices,
+    set_base_font,
+)
 
 st.set_page_config(page_title="San Diego Heatmap", page_icon="\U0001f5fa️", layout="wide")
 set_base_font()
@@ -49,3 +53,8 @@ if HEATMAP_HTML.exists():
     st.iframe(HEATMAP_HTML, width=1000, height=650)
 else:
     st.info("No map yet. Run `python pipeline/san_diego/step3_map.py` to generate it.")
+
+# The notices that publishing requires, on EVERY page rather than one -
+# Chicago's terms say "at the site where the software application ... can
+# be accessed". See components._NOTICES.
+render_site_notices()

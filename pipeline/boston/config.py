@@ -154,7 +154,21 @@ LINE_NAMES = {
     "Mattapan": ("Mattapan Trolley", "#8C1810"),
 }
 
-LINE_LABEL_ENDS = {}
+# Force the Blue Line's label to the Bowdoin (downtown) end of its shape.
+#
+# Automatic placement puts it at the Wonderland (north-east) end, which lands
+# in the top-right corner of the frame - exactly where the map's own fixed
+# "Light mode" and "All cities" buttons sit. Measured 2026-09-21 while
+# verifying all nine maps before the first deploy: at a frame width of 854px,
+# the width a 1024px browser window gives the app's column, the label
+# overlapped that button box by 16x15px and rendered as "Blue Li". Confirmed
+# by screenshot, not by rects alone. Clean at 1000px and 1280px, so the fault
+# is specific to frames NARROWER than the map's own 1000px layout width.
+#
+# Note "start" and the automatic choice are the SAME end here - setting it
+# changed nothing, which is worth knowing before trying it on another line.
+# "end" is the one that moves this label.
+LINE_LABEL_ENDS = {"Blue": "end"}
 
 # One representative shape per group, read from real trip counts. A tuple is
 # one line whose physical extent needs several shapes, which both branching

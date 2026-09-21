@@ -56,7 +56,7 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     and C (remove the in-map button when embedded) were rejected - see
     `DECISIONS.md`.
   - [ ] Sweep the remaining hardcoded colours in `app/` now that a dark page
-    exists: `Overview_&_Introduction.py` still has literal `white` and
+    exists: `Overview.py` still has literal `white` and
     `#1c2b2a` (lines ~90, ~139) for the macro map's markers and labels. Check
     contrast numerically against `#0B1220`, not by eye - a 1.01:1 label looks
     like empty space rather than a bug.
@@ -177,7 +177,11 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - Ring coverage is 12.6%, the lowest here, because the business set is
     county-wide while the rail is one line plus a loop. Consider whether the
     all-businesses toggle should be scoped to station municipalities.
-- [ ] **New Orleans - screened 2026-09-21, needs a real Step 0.** `iqay-p646`
+- [ ] **New Orleans - DEFERRED POST-DEPLOY by the owner (2026-09-21),
+  alongside Seattle.** The pre-deploy city scope is the nine that are
+  built; this and Seattle's multi-municipality build come after. Findings
+  kept so returning costs nothing. Screened 2026-09-21, needs a real
+  Step 0.** `iqay-p646`
   "Active Occupational Licenses", 16,396 rows, and the **cleanest licence of
   any candidate: CC0 1.0, explicitly declared**. Has `businesstype`,
   `businessaddress`, `the_geom`. Two sibling datasets exist (`abc4-h3u3`, an
@@ -447,7 +451,17 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Before deploying
 
-- [ ] **Sweep every city page for "accurate, complete, or timely" claims.**
+- [x] **Sweep every city page for "accurate, complete, or timely" claims** -
+  DONE 2026-09-21. Two real hits, both on the New York page (the MTA city):
+  it called its restaurant coverage "close to fully covered", and said Retail
+  was "less complete ... than in the other cities", which implied the other
+  eight WERE complete. Both reworded, and a note in that page's docstring
+  says why. Everything else was clean: the only "accurate" left in a
+  rendered map is a pharmacy called Accurate Pharmacy, and the remaining
+  matches are code comments. A positive statement now appears site-wide via
+  `components.render_site_notices()` - every map is "a snapshot of a public
+  register as it stood on the retrieval date". Original item:
+- [x] (reference) The rule this implements:
   **Two** transit licences now forbid it in nearly identical words - MTA's
   "You will not state or imply that the data you provide through your
   Application is accurate, complete, or timely" and WMATA §6's - so this is a
@@ -455,7 +469,14 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   D.C.** are both built and affected today. Check the city pages, the Overview
   and the map legends, and prefer "as recorded by <agency> on <date>" phrasings over
   anything implying completeness. Both texts are in `docs/licenses/`.
-- [ ] **Decide the agency-branding question: official route colours, AND the
+- [x] **Agency branding - DECIDED 2026-09-21 by the owner: keep the official
+  route colours AND the real line names, and state non-affiliation plainly.**
+  What those clauses actually prohibit is stating or implying affiliation,
+  sponsorship or endorsement, which `components._NON_AFFILIATION` now does
+  head-on on every page; nothing in the project reproduces a logo, wordmark
+  or route-bullet artwork, and for WMATA the colour IS the line's name. No
+  re-render was needed. Original item:
+- [x] (reference) **The branding question: official route colours, AND the
   line names beside them.** Now **six** of the nine built cities, since D.C.
   draws WMATA's six published `route_color` values - and WMATA's is the clause
   that names "confusingly similar variants", which also rules out the obvious
@@ -480,10 +501,24 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     materially harder change than a palette swap. Know that before asking.
   - Nothing in the project reproduces a logo, wordmark or route-bullet artwork,
     which is the part every one of these clauses most clearly covers.
-- [ ] **Settle the three "what does silence mean?" licence questions.** All
-  three are sources that neither grant nor forbid reuse, and all three are
-  recorded unresolved rather than read generously. Detail in
-  `docs/data_sources.md`, item 5b.
+- [ ] **Settle the three "what does silence mean?" licence questions** -
+  still open with the publishers, but **no longer a deploy blocker as of
+  2026-09-21.** The owner's decision was to disclose the gap on the site
+  rather than wait on third parties: `components._UNSETTLED_TERMS` names
+  Miami-Dade and Philadelphia in the footer of every page, says plainly
+  that nothing found in either forbids what is displayed, and commits to
+  removing a city **without waiting to be asked** if its publisher states
+  a position that does not permit this use. That is a BROADER trigger than
+  the standing commitment, which fires on a publisher asking, and the same
+  wording is now in `docs/data_sources.md` and `docs/excluded_categories.md`
+  so all three agree. What remains is the underlying enquiry:
+  - [ ] Ask Miami-Dade County directly - it is the only one of the three
+    with **no document to read**, so this cannot be resolved by reading.
+  - [ ] SEPTA: whether line names and official colours count as trademarks
+    being "used", and whether a portfolio site is "commercial or
+    profit-making". Overlaps the branding decision, which the owner settled
+    on 2026-09-21 by keeping both and stating non-affiliation.
+  - [ ] The City of Philadelphia License's rights reservation.
   - **Miami-Dade is the weakest paperwork in the project and should go first.**
     Its business registry and boundary layer carry an `licenseInfo` that is
     purely an accuracy disclaimer, and its GTFS ships **no `feed_info.txt` at
@@ -502,7 +537,12 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     this project does.** These are questions about the absence of permission,
     not about a prohibition, which is why they gate a public deploy rather than
     the builds.
-- [ ] **Decide whether to make the repo private before the first full deploy.**
+- [x] **Repo visibility - DECIDED 2026-09-21: it stays PUBLIC**, accepting a
+  real but unlikely residual. Nothing found in any licence forbids what the
+  project displays, the browsable code is much of a portfolio's value, and
+  the standing commitment (a removal request is honoured, not argued) is
+  the answer if a revocation ever comes. The reasoning against, kept
+  because it is still true:
   Raised 2026-09-21 on survivability grounds, not compliance alone: four
   transit licences (WMATA §9, LA Metro, SEPTA, MassDOT) are revocable without
   notice and carry removal obligations, and **a public repo cannot be
@@ -518,14 +558,65 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   the pipeline. Cost: the code stops being browsable, which matters for a
   portfolio piece. Interacts with the `outputs/`-in-git ceiling in
   `docs/scaling_thresholds.md`, since Git LFS quotas apply either way.
-- [ ] **Tile provider decision** - OpenStreetMap's usage policy is a risk
-  for a live public map. The per-city maps use OSM raster tiles; the macro
-  map uses Carto's public vector basemap. Decide both together.
-- [ ] **Streamlit Cloud main-file path** - fixed at app creation and not
-  editable afterward, so settle the entry-point filename first.
-- [ ] **Project name** - "Expanded Heatmap" is a placeholder.
-- [ ] `README.md`: first draft written; revise before deploying (add the
-  deployed URL, a licence, and the final project name).
+- [x] **Tile provider - DECIDED 2026-09-21: change nothing, and the research
+  reversed the original recommendation.** Both policies were read rather
+  than assumed:
+  - **OSM raster** (the nine city maps) is keyless, has no stated volume
+    cap, and explicitly permits "normal interactive viewing by a human".
+    Its requirements are attribution (already in every map corner), a valid
+    User-Agent and Referer - and the policy itself notes "modern browsers,
+    with default settings, already satisfy these technical requirements".
+    It forbids prefetch, bulk download and offline use, none of which this
+    project does. Best-effort, no SLA, may be blocked without notice.
+  - **Carto** (the macro map only) is the one with a wall: free to a fair
+    use limit of **5 million tile requests a month**, and "all you need is
+    an API key" - so a key is now expected, with non-commercial projects
+    "usually just get a higher limit" and commercial use needing an
+    Enterprise licence.
+  So moving the city maps onto Carto - the earlier recommendation - would
+  have moved nine maps from the keyless, quota-free service onto the metered
+  one. Reversed. **Residual risk, accepted:** the macro map uses Carto's
+  keyless CDN, which that policy no longer documents. If it is withdrawn the
+  macro basemap goes blank while the markers, name pills, clicks and the
+  text-link list all keep working. `pydeck` 0.9.3 does accept
+  `api_keys={"carto": ...}` (env `CARTO_API_KEY`), so requesting the free
+  key is a one-minute owner task if that degradation is ever unwelcome -
+  it needs the owner's own account, so it is not something this project can
+  do on their behalf.
+  - [ ] Optional: request a free Carto API key and set `CARTO_API_KEY` in
+    the Streamlit Cloud secrets.
+- [x] **Streamlit Cloud main-file path - SETTLED 2026-09-21.** The entry
+  point was `app/Overview_&_Introduction.py`; an `&` in a path that Cloud
+  fixes permanently at app creation is a live hazard in URLs and shells, so
+  it is now **`app/Overview.py`**. Renamed with `git mv` and every reference
+  updated - `components.OVERVIEW_PAGE`, all eleven page docstrings,
+  `pipeline/theme.py`, `scripts/scaffold_city.py` (it generates new pages,
+  so it had to follow), `.claude/launch.json`, the deploy-verify agent,
+  CLAUDE.md, README and project_context. `DECISIONS.md` and
+  `docs/passover_opus5.md` keep the old name: they are history.
+- [x] **Project name - DECIDED 2026-09-21: "Storefronts Near Transit".**
+  The owner kept `expanded-heatmap` as the repository and directory name and
+  took the new name as the site title only, so nothing about the checkout,
+  the remote or any path changes. It lives in `components.SITE_NAME` and
+  feeds the Overview title and every page's browser tab.
+- [x] `README.md` - revised 2026-09-21: the new name, all nine cities, the
+  snapshot-not-a-census caveat, the non-affiliation statement, and D.C.'s
+  API key and ten-day feed window.
+  - [x] **Code licence: MIT, added 2026-09-21** (`LICENSE`), with an
+    explicit scope section stating what it does NOT cover. A bare MIT file
+    at the repo root would have purported to license the 19 MB of
+    third-party-derived content in `outputs/` - redrawn GTFS geometry and
+    register-derived business records - which this project cannot
+    sublicense: WMATA prohibits third-party redistribution and LA Metro
+    forbids modifying its data. The carve-out points at
+    `docs/data_sources.md` for terms and `docs/excluded_categories.md` for
+    the modifications half that some of those terms require a re-publisher
+    to state. The copyright line reads `dacekroberts`, the identity this
+    project commits under - change it if a legal name is wanted.
+  - [ ] **Deployed URL** - placeholder in place. The Streamlit Cloud
+    subdomain is chosen at app creation and cannot be derived, so there is
+    a marked `TODO` at the top of `README.md`; that line and this one are
+    the only two places that need it.
 
 ## Data quality follow-ups
 
@@ -540,8 +631,13 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   whether to include them.
 - [ ] San Francisco: only ~37% of rows carry a NAICS code; consider whether
   the caveat needs to be visible on the city page.
-- [ ] **Surface `docs/excluded_categories.md` AND `docs/data_sources.md` in the
-  app**, together (a page each, or one "About the data" section, linked from
+- [x] **Surface `docs/excluded_categories.md` AND `docs/data_sources.md` in
+  the app - DONE 2026-09-21**, as `pages/10_About_the_Data.py` and
+  `pages/11_What_Is_Excluded.py`, each rendering its document as committed
+  rather than a hand-maintained web copy that would drift. Both are linked
+  from the footer on every page, which is also where the required notices
+  now render. Original item:
+- [x] (reference) Surface both docs, together (a page each, or one "About the data" section, linked from
   every city page). Deliberately paired and deferred as one job (2026-09-21):
   both are external necessities for a live site rather than development work,
   both are already written to be published as-is, and surfacing the exclusions
@@ -589,9 +685,24 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Later / maybe
 
-- [ ] Macro map at scale: with ~10+ cities, consider grouping nearby cities
-  (markers already touch at phone width: Los Angeles and San Diego), and showing each city's mapped
-  extent or a one-line summary in the tooltip.
+- [ ] Macro map at scale: with ~10+ cities, consider grouping nearby cities,
+  and showing each city's mapped extent or a one-line summary in the tooltip.
+  **The label half of this was done on 2026-09-21** - per-city pixel
+  `label_offset`s in `cities.py`, 11 collisions to 0 - but the MARKERS still
+  overlap and no label placement can fix that: New York/Philadelphia dots sit
+  6.0 px apart and Philadelphia/Washington D.C. 9.0 px, against a 6 px radius,
+  and because `fit_view` pins the zoom to a 320 px reference those separations
+  are identical at 340 px and 1200 px. Extra screen width becomes margin, not
+  separation. Clicking is no longer blocked by it (the name pills are pickable
+  now), so what remains is cosmetic.
+  - **Known issue, accepted rather than fixed:** scrolling the page with the
+    cursor over the macro map zooms the MAP instead of scrolling the page, and
+    that view then persists across reloads via the widget key. The fix is to
+    lock the controller, which the owner declined on 2026-09-21 because
+    non-US cities would then need continent-specific maps and extra pages.
+  - Its label offsets are in PIXELS and the map zooms, so any new city in the
+    eastern cluster needs its offset checked at 854 and 1200 px AND at a
+    zoomed-in level - see `cities.py`'s docstring for the measurements.
   **`docs/scaling_thresholds.md` holds the full list of what breaks at what
   city count** (written 2026-09-21 at 7 cities): this macro map at ~10, the
   committed `outputs/` in git at ~20 — the real ceiling — and hosting at 40+.

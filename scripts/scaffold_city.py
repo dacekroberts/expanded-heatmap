@@ -204,7 +204,7 @@ if __name__ == "__main__":
 PAGE = '''"""@@NAME@@ heatmap page - embeds the pre-rendered Folium HTML.
 
 Same static-HTML-embed pattern as pages/1_San_Diego_Heatmap.py - see
-Overview_&_Introduction.py's docstring for why this is the decided pattern
+Overview.py's docstring for why this is the decided pattern
 for every city's detail page. Scaffolded by scripts/scaffold_city.py.
 """
 

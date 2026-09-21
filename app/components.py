@@ -20,7 +20,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 # maps' own CSS so a reskin cannot leave the macro map on the old palette.
 from pipeline.theme import AMBIENT_THEME_JS, DARK, LIGHT, rgba  # noqa: E402
 
-OVERVIEW_PAGE = "Overview_&_Introduction.py"
+OVERVIEW_PAGE = "Overview.py"
 
 
 def render_city_nav(current: str):
@@ -243,3 +243,149 @@ def set_base_font():
         # A separate call, not appended to the block above: that block is indented,
         # so text added after it is rendered as a Markdown code block.
         st.markdown(f"<style>{_MAP_ONLY_CSS}</style>", unsafe_allow_html=True)
+
+
+# --- Site identity and the notices that publishing requires ----------------
+
+# The public name. The repository stays `expanded-heatmap` (that is the
+# directory and the git remote); this is what a reader sees. Chosen
+# 2026-09-21; a standing invariant is that the project is never named after a
+# city, which is why this describes the measurement instead.
+SITE_NAME = "Storefronts Near Transit"
+
+ABOUT_DATA_PAGE = "pages/10_About_the_Data.py"
+EXCLUSIONS_PAGE = "pages/11_What_Is_Excluded.py"
+
+# Verbatim where verbatim is required. Each entry is (heading, text, verbatim?)
+# and the sources are recorded in docs/data_sources.md, "Notices this project
+# MUST display when published" - read that before editing any of these.
+#
+# THESE ARE OBLIGATIONS, NOT CREDITS. Chicago's terms require its paragraph
+# "at the site where the software application ... can be accessed", and
+# SFMTA's licence requires its sentence in derivative works, so both are
+# reproduced word for word and must not be paraphrased, trimmed or summarised.
+# LA Metro's and MassDOT's prescribe no wording, only that they be
+# acknowledged as the provider, so those two are this project's own phrasing.
+#
+# A notice on one city's page is NOT enough: the requirement is site-level,
+# which is why render_site_notices() is called from every page including the
+# Overview.
+_NOTICES = [
+    ("City of Chicago",
+     "This site provides applications using data that has been modified for "
+     "use from its original source, www.cityofchicago.org, the official "
+     "website of the City of Chicago. The City of Chicago makes no claims as "
+     "to the content, accuracy, timeliness, or completeness of any of the "
+     "data provided at this site. The data provided at this site is subject "
+     "to change at any time. It is understood that the data provided at this "
+     "site is being used at one's own risk.",
+     True),
+    ("San Francisco Municipal Transportation Agency",
+     "Reproduced with permission granted by the City and County of San "
+     "Francisco. The information has been provided by means of a "
+     "nonexclusive, limited, and revocable license granted by the City and "
+     "County of San Francisco.",
+     True),
+    ("LA Metro",
+     "Rail alignment data for Los Angeles provided by LA Metro. This project "
+     "claims no ownership of that data.",
+     False),
+    ("MassDOT / MBTA",
+     "Rail alignment data for Boston provided by MassDOT/MBTA.",
+     False),
+    ("Chicago Transit Authority",
+     "Data provided by Chicago Transit Authority.",
+     False),
+]
+
+# The owner's branding decision (2026-09-21): keep each agency's official route
+# colours and real line names, and say plainly that this is not affiliated with
+# them. That is what those clauses actually prohibit - MTS, LA Metro, CTA, MTA,
+# SEPTA and WMATA all bar stating or implying affiliation, sponsorship or
+# endorsement, and WMATA's also names "confusingly similar variants". Nothing
+# here reproduces a logo, wordmark or route-bullet artwork.
+_NON_AFFILIATION = (
+    "This is an independent project. It is not affiliated with, sponsored by "
+    "or endorsed by any transit agency or city government named here. Line "
+    "names and route colours are used only to identify each line as its "
+    "riders know it. No agency logo, wordmark or route symbol is reproduced."
+)
+
+# Two cities' sources neither grant nor forbid reuse, and this says so on the
+# page rather than waiting on third parties to answer. The owner's decision
+# (2026-09-21): disclose the gap alongside the attributions, and commit in
+# advance to removing a city if its publisher's position turns out not to
+# permit this use.
+#
+# That last part is BROADER than the standing removal commitment in
+# docs/data_sources.md, which triggers on a publisher *asking*. This one
+# triggers on finding out - no request needed. Keep the wording here
+# consistent with that document and with docs/excluded_categories.md; all
+# three are meant to say the same thing.
+_UNSETTLED_TERMS = (
+    "**Two cities rest on terms that are unresolved, and that is stated "
+    "rather than glossed.** Miami-Dade County publishes no position on reuse "
+    "at all: the terms attached to its business register and boundary layer "
+    "are an accuracy disclaimer and nothing more, and its transit feed "
+    "carries no licence file and no developer terms that could be located. "
+    "Philadelphia's position is the opposite shape — the City of "
+    "Philadelphia License reserves all rights in its data while granting none "
+    "explicitly and requiring no notice, and SEPTA's licence adds a trademark "
+    "clause whose reach over line names and route colours is unclear. Nothing "
+    "found in any of them forbids what these maps show: these are questions "
+    "about the absence of permission, not about a prohibition, and they are "
+    "recorded as unresolved rather than read generously. **If either "
+    "publisher states a position that does not permit this use, that city "
+    "comes off the site** — the same way a request about a single listing "
+    "is honoured rather than argued."
+)
+
+# MTA's terms and WMATA's §6 both forbid stating or implying that the data an
+# application provides is "accurate, complete, or timely". This sentence is the
+# positive form of that: it says what the maps ARE.
+_AS_RECORDED = (
+    "Every map here is a snapshot of a public register as it stood on the "
+    "retrieval date recorded for that source, redrawn and filtered. Registers "
+    "lag the street: a shop that closed last month may still appear, and one "
+    "that opened last month may not. Read each map as what a city's own "
+    "licence records showed on that date, not as a census of what is open."
+)
+
+
+def render_site_notices(show_links: bool = True):
+    """The site-level footer: the two data documents, then every notice that
+    publishing these maps requires.
+
+    Called from EVERY page. See _NOTICES above for why a single city page
+    carrying its own credit does not discharge these.
+    """
+    st.divider()
+    if show_links:
+        with st.container(horizontal=True, gap="medium",
+                          vertical_alignment="center"):
+            st.page_link(ABOUT_DATA_PAGE, label="Where this data comes from")
+            st.page_link(EXCLUSIONS_PAGE, label="What is counted, and what is not")
+    st.caption(_AS_RECORDED)
+    st.caption(_NON_AFFILIATION)
+
+    # NOT in an st.expander, and that was a real mistake worth naming: these
+    # were briefly collapsed behind one, which kept them out of the DOM until
+    # a reader clicked. Chicago's terms require its paragraph "at the site
+    # where the software application ... can be accessed", and this project's
+    # own rule for the OSM attribution is that it must not sit "beneath UI,
+    # behind toggles, or off-screen". A required notice behind a toggle is not
+    # displayed. So they render inline, always, in small type.
+    st.caption(
+        "**Required source notices.** Reproduced as each source's terms "
+        "require. Full provenance, with endpoints and retrieval dates, is on "
+        "the \u201cWhere this data comes from\u201d page."
+    )
+    for heading, text, verbatim in _NOTICES:
+        st.caption(f"**{heading}** \u2014 {text}")
+    st.caption(
+        "**OpenStreetMap** \u2014 basemap \u00a9 OpenStreetMap contributors, "
+        "available under the Open Database License. The attribution also "
+        "appears in the corner of every map, where its licence requires it to "
+        "stay visible. The overview map's basemap is \u00a9 CARTO."
+    )
+    st.caption(_UNSETTLED_TERMS)

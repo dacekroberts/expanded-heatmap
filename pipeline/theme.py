@@ -143,7 +143,7 @@ def css_vars(palette, prefix="dm"):
 def rgb_list(hex_color, alpha=255):
     """"#0d9488", 235 -> [13, 148, 136, 235]. For pydeck/WebGL layers, which
     take colour channels rather than CSS, and which CSS therefore cannot
-    restyle - see the note in app/Overview_&_Introduction.py."""
+    restyle - see the note in app/Overview.py."""
     h = hex_color.lstrip("#")
     return [int(h[i:i + 2], 16) for i in (0, 2, 4)] + [alpha]
 

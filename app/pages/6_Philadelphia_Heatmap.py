@@ -1,7 +1,7 @@
 """Philadelphia heatmap page - embeds the pre-rendered Folium HTML.
 
 Same static-HTML-embed pattern as pages/1_San_Diego_Heatmap.py - see
-Overview_&_Introduction.py's docstring for why this is the decided pattern
+Overview.py's docstring for why this is the decided pattern
 for every city's detail page. Scaffolded by scripts/scaffold_city.py.
 
 The prose below says TWO categories, not three, on purpose: Philadelphia is the
@@ -17,7 +17,11 @@ import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.philadelphia.config import HEATMAP_HTML  # noqa: E402
-from components import render_city_nav, set_base_font  # noqa: E402
+from components import (  # noqa: E402
+    render_city_nav,
+    render_site_notices,
+    set_base_font,
+)
 
 st.set_page_config(page_title="Philadelphia Heatmap", page_icon="\U0001f5fa\ufe0f", layout="wide")
 set_base_font()
@@ -89,3 +93,8 @@ if HEATMAP_HTML.exists():
     st.iframe(HEATMAP_HTML, width=1000, height=650)
 else:
     st.info("No map yet. Run `python pipeline/philadelphia/step3_map.py` to generate it.")
+
+# The notices that publishing requires, on EVERY page rather than one -
+# Chicago's terms say "at the site where the software application ... can
+# be accessed". See components._NOTICES.
+render_site_notices()

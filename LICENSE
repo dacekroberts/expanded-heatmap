@@ -1,0 +1,70 @@
+MIT License
+
+Copyright (c) 2026 dacekroberts
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================================================================================
+
+SCOPE OF THE ABOVE LICENCE -- WHAT IT COVERS, AND WHAT IT CANNOT
+
+The MIT licence above applies to this project's OWN work: the code in
+`pipeline/`, `app/` and `scripts/`, and the prose in `docs/`, `README.md`,
+`PLAN.md` and `DECISIONS.md`.
+
+IT DOES NOT APPLY TO THE DATA IN `outputs/`, AND IT COULD NOT.
+
+`outputs/<city>/` is committed to this repository because the deployed app
+reads it directly and never runs the pipeline. Each `heatmap.html` embeds
+material derived from third-party sources that this project does not own and
+therefore cannot license to anyone:
+
+  * transit line geometry, redrawn from each agency's GTFS `shapes.txt`, and
+    station names and positions from `stops.txt`;
+  * business trade names and mapped coordinates, derived from municipal and
+    state licence registers;
+  * basemap tiles, fetched at view time from their provider rather than
+    stored here.
+
+Those sources carry their own terms, and they are not uniform. They range from
+public-domain dedications (CC0, ODC-PDDL) through licences that require
+specific notices to be displayed, to a feed that forbids modifying its data
+and one that prohibits redistributing it to third parties. At least two are
+revocable without notice. Two more say nothing about reuse at all.
+
+**Every source, its endpoint, its retrieval date and its terms are recorded in
+`docs/data_sources.md`. Read that before reusing anything under `outputs/`.**
+`docs/excluded_categories.md` records what was filtered out and why, which is
+the "modifications" half of what some of those terms require a re-publisher to
+state.
+
+Nothing in the MIT grant above should be read as permission to redistribute
+any third party's data. For this project's code, take it and use it freely.
+For the data, go to the source.
+
+================================================================================
+
+REMOVAL REQUESTS
+
+This project commits in advance to honouring a removal request from a data
+publisher, a business owner, or anyone raising a privacy concern about a
+specific listing -- without argument, and without requiring the requester to
+justify themselves. The full commitment is in `docs/data_sources.md`
+("Commitment: removal requests are honoured, not argued") and, addressed to
+the people it concerns, in `docs/excluded_categories.md`.

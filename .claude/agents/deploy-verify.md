@@ -85,7 +85,7 @@ not) and start them with `preview_start`, stop with `preview_stop`:
 
 - `streamlit-app-lean`: `runtimeExecutable` = the venv's python
   (`.venv-lean/Scripts/python.exe`), `runtimeArgs` = `["-m", "streamlit",
-  "run", "app/Overview_&_Introduction.py", "--server.port", "8812",
+  "run", "app/Overview.py", "--server.port", "8812",
   "--server.headless", "true"]`, `port` 8812.
 - `heatmap-static`: `python -m http.server 8813 --directory outputs`,
   `port` 8813 - serves every city's standalone `heatmap.html`

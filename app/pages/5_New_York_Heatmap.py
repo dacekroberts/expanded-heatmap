@@ -1,8 +1,17 @@
 """New York heatmap page - embeds the pre-rendered Folium HTML.
 
 Same static-HTML-embed pattern as pages/1_San_Diego_Heatmap.py - see
-Overview_&_Introduction.py's docstring for why this is the decided pattern
+Overview.py's docstring for why this is the decided pattern
 for every city's detail page. Scaffolded by scripts/scaffold_city.py.
+
+NOTE FOR ANY EDIT TO THE PROSE BELOW: MTA's transit-data terms state "You will
+not state or imply that the data you provide through your Application is
+accurate, complete, or timely", and WMATA §6 carries the identical clause for
+Washington D.C. This page previously said its restaurant coverage was "close to
+fully covered" and that Retail was "less complete ... than in the other
+cities"; both were reworded on 2026-09-21, the second because it implied the
+OTHER eight cities were complete. Describe what a register recorded on a date,
+never how much of reality it captures.
 """
 
 import sys
@@ -12,7 +21,11 @@ import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.new_york.config import HEATMAP_HTML  # noqa: E402
-from components import render_city_nav, set_base_font  # noqa: E402
+from components import (  # noqa: E402
+    render_city_nav,
+    render_site_notices,
+    set_base_font,
+)
 
 st.set_page_config(page_title="New York Heatmap", page_icon="\U0001f5fa\ufe0f", layout="wide")
 set_base_font()
@@ -46,12 +59,12 @@ from the State's appearance-enhancement licences, and a narrow slice of
 regulated retail from the city's own Consumer and Worker Protection licences.
 No other city here needed more than one source.
 
-That has a consequence worth stating plainly: **the Retail category is less
-complete in New York than in the other cities.** A clothing shop or a bookshop
-needs no licence from any of these four registries, so it is simply absent,
-while restaurants — which every one of which is inspected — are close to fully
-covered. Read the balance between categories as a fact about New York's
-licensing, not about its high streets. Where one business appears in two
+That has a consequence worth stating plainly: **the Retail category here covers
+less of the trade than it does in the other cities on this site.** A clothing
+shop or a bookshop needs no licence from any of these four registries, so it is
+simply absent, while restaurants appear because the city inspects them. Read
+the balance between categories as a fact about New York's licensing, not about
+its high streets. Where one business appears in two
 registries it is counted once, matched on address and name; a spelling
 difference between two registries can leave it counted twice.
 
@@ -75,3 +88,8 @@ if HEATMAP_HTML.exists():
     st.iframe(HEATMAP_HTML, width=1000, height=650)
 else:
     st.info("No map yet. Run `python pipeline/new_york/step4_map.py` to generate it.")
+
+# The notices that publishing requires, on EVERY page rather than one -
+# Chicago's terms say "at the site where the software application ... can
+# be accessed". See components._NOTICES.
+render_site_notices()

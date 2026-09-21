@@ -445,3 +445,14 @@ The same commitment is made to the agencies whose data this project uses: if a
 publisher asks for its data to stop being displayed, it stops. That is written
 out in full in `data_sources.md`, under "Commitment: removal requests are
 honoured, not argued".
+
+**And a city can come off for a reason nobody raised.** Two of the sources
+behind these maps say nothing about whether their data may be reused:
+Miami-Dade County's business register, boundary layer and transit feed carry
+no reuse position at all, and Philadelphia's data licence reserves every right
+while granting none explicitly. Nothing in either forbids what is shown here,
+and neither publisher has objected - the question is the absence of
+permission, not a prohibition. It is recorded as unresolved rather than read
+generously, and if either states a position that does not permit this use,
+**that city is removed without waiting for a request.** The same sentence
+appears in the footer of every page on the site.

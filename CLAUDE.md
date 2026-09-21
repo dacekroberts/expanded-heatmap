@@ -113,7 +113,7 @@ python pipeline/<city_slug>/step2_clean_businesses.py
 python pipeline/<city_slug>/step3_map.py
 python pipeline/drift_check.py [city_slug]
 python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon>   # add --dry-run first
-.venv-lean/Scripts/python.exe -m streamlit run "app/Overview_&_Introduction.py"
+.venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"
 ```
 
 Environments: the full pipeline environment (`requirements-pipeline.txt`)

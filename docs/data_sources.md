@@ -494,6 +494,22 @@ content; LA Metro says that on termination you "shall immediately remove the
 Transport Information and all references to it". The remedy contemplated
 throughout is a request to stop.
 
+**A second trigger, added 2026-09-21: an unresolved licence position is
+enough.** Points 1-5 below all fire on a publisher *asking*. Two sources here
+neither grant nor forbid reuse - Miami-Dade County, whose business register,
+boundary layer and GTFS carry no reuse position at all, and Philadelphia,
+whose City of Philadelphia License reserves all rights while granting none,
+alongside SEPTA's trademark clause of unclear reach. Nothing in any of them
+forbids what this project displays, and none has been asked. The commitment is
+therefore made in the other direction too: **if either publisher states a
+position that does not permit this use, that city comes off the site without
+waiting to be asked.** This is disclosed on the site itself rather than kept
+here - `app/components.py`'s `render_site_notices()` carries the same wording
+in the footer of every page, beside the required attributions, so a reader
+learns it at the same moment they learn where the data came from. Keep those
+two wordings and `excluded_categories.md` consistent; all three are one
+promise.
+
 **This project commits, in advance, to honouring such a request.** Stated so
 that it is a standing position rather than a decision made under pressure:
 
@@ -525,8 +541,13 @@ want something removed should be able to see it without asking first.
 This is the operative output of the licence review. As of 2026-09-21, for the
 **nine** cities built: **five sources require specific text or
 acknowledgement, and one of the five is already satisfied** (OpenStreetMap);
-Chicago, SFMTA, LA Metro and — since Boston was built — MassDOT are
-outstanding. New York adds a conditional identification requirement that is
+Chicago, SFMTA, LA Metro and — since Boston was built — MassDOT were
+outstanding until **2026-09-21, when all five were put on every page**
+by `app/components.py`'s `render_site_notices()` — Chicago's and
+SFMTA's verbatim, LA Metro's and MassDOT's in this project's own words
+because neither prescribes any. They render inline rather than inside a
+collapsible: Streamlit keeps a collapsed expander's contents out of the
+DOM, and a notice behind a toggle is not displayed. New York adds a conditional identification requirement that is
 largely already met, and CTA encourages but does not require credit.
 **Building Washington D.C. added no sixth notice**, correcting what an
 earlier note in this file predicted: WMATA requires no attribution and no
