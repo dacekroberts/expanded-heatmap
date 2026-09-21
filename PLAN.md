@@ -718,8 +718,32 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   2026-09-21, and page-number ordering was verified *not* to be a problem
   (Streamlit sorts the prefix numerically), so neither needs re-raising.
 
-- [ ] Non-US cities (NACE for the EU, national CRS such as EPSG:27700 for the
-  UK) - one taxonomy module and a per-city CRS each.
+- [~] Non-US cities. **Canada is screened and ready to build - see
+  `docs/canada_step0_endpoints.md` and the 2026-09-21 `DECISIONS.md` entry.**
+  Six viable cities, Step 0 complete on all three legs, licences and privacy
+  documented in `docs/licenses/`. Ranked by sites per in-city station:
+  **Vancouver 861** (densest measured anywhere in this project), **Surrey 549**
+  (a regional pair with Vancouver - it has no rail of its own), **Montreal
+  252**, **Edmonton 153**, **Calgary 103**, **Toronto 41** (a two-bucket city,
+  Boston's shape, weakest despite being largest). Decided already: Montreal at
+  agglomeration scope; TransLink needs no prior contact. Build-time work that
+  remains, per city rather than in general:
+  - **Taxonomy modules.** Calgary 173 real categories, Surrey 210, Vancouver
+    93, Edmonton 67, Toronto 72 - and **three of the six store several
+    categories per row**, with a different delimiter each (Calgary `,\n`,
+    Edmonton `;`, Surrey `\n`). Splitting is not optional and a multi-licence
+    premises needs a dispatch rule, as Boston's `FT+RF` did.
+  - **Montreal:** decide `SCIAN` (NAICS, 99.6%) versus the 10-value `USAGE1`.
+    Keying off SCIAN may need **no new taxonomy module at all**.
+  - **Vancouver:** the only city needing a residence filter built - a two-hop
+    spatial join, business point to `property-parcel-polygons` to the tax
+    roll's zoning. Verified 99.9% point-in-parcel; the filter is ~232 rows
+    (0.78%), of which 174 are rentals excluded anyway.
+  - **Toronto:** geocode against the City's own 525,440-point address
+    repository (71.4% on exact match, no normalisation) rather than any
+    external geocoder.
+  Beyond Canada, the EU/UK remain unscreened - NACE, and a national CRS such
+  as EPSG:27700 for the UK.
 - [ ] Ridership (out of scope; revisit only if asked).
 - [ ] Adopt `safe-rename` (or fold its checklist into `add-city`) once a
   README, deployment or devcontainer exists to keep in sync.
