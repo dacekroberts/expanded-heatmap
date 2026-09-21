@@ -84,6 +84,20 @@ body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-canvas {
 # re-added by a MutationObserver if Streamlit re-renders the chart; if the
 # chart container is not found there is simply no button and the map stays light.
 _MACRO_THEME_JS = """
+<!-- This frame is script-only and exists to run JS, not to be seen. st.iframe
+     rejects height=0, so it renders 1 px tall - and that 1 px WAS VISIBLE on
+     the deployed site (reported 2026-09-21): a faint dash above the page
+     title, because a document with no background paints the browser's default
+     canvas colour, white, and one row of white on a dark page reads as a mark.
+
+     Fixed here rather than with CSS in the parent page. Streamlit gives this
+     iframe no `height` attribute and no inline style - its 1 px comes from a
+     hashed emotion class that changes between versions - so any selector
+     written against the parent DOM would be version-fragile, and `display:
+     none` on an iframe risks its script never running, which would cost the
+     theme button. Making the frame's own canvas transparent is
+     version-independent and leaves the script untouched. -->
+<style>html, body { margin: 0; padding: 0; background: transparent; }</style>
 <script>
 (function () {
     var KEY = '@@KEY@@';
