@@ -353,7 +353,9 @@ _UNSETTLED_TERMS = (
     "reuse — it would. **That question is open, it has not been resolved "
     "in this project's favour, and if the City confirms the restrictive "
     "reading Philadelphia comes off this site** — the same way a request "
-    "about a single listing is honoured rather than argued."
+    "about a single listing is honoured rather than argued. A written request "
+    "for the City's position was sent on 21 September 2026. Whatever comes "
+    "back, silence will not be treated as permission."
 )
 
 # MTA's terms and WMATA's §6 both forbid stating or implying that the data an

@@ -1,9 +1,14 @@
-# Philadelphia: drafted permission request (NOT YET SENT)
+# Philadelphia: permission request — SENT 2026-09-21
 
-**Status: drafted 2026-09-21, awaiting the owner to send.** Nothing in this
-project claims a request is outstanding until it actually is — the site footer
-and `data_sources.md` say only that the question is unresolved, which stays
-accurate either way.
+**Status: drafted and SENT 2026-09-21** by the owner, to `maps@phila.gov`
+copying `LIGISTEAM@phila.gov`. No reply yet.
+
+**Follow-up due 2026-09-28** — one week, at the owner's request. If there is
+no reply by then, the options are to wait longer, to chase once, or to escalate
+to the Open Data Program by phone (the Planning custodian's number is on the
+City Limits dataset page). **Silence is not consent:** the interim position
+holds because it is a reasoned reading disclosed on the site, not because the
+City failed to object, and that does not change however long the silence runs.
 
 ## Why this exists
 

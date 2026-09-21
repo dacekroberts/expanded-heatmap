@@ -449,7 +449,10 @@ silence mean?**
   terms name that as the route - and keep the map live under the reasoned
   position meanwhile, with the footer disclosing the question. The drafted
   request is at `docs/licenses/phila-permission-request.md`, addressed to
-  `maps@phila.gov` copying `LIGISTEAM@phila.gov`, and is **not sent yet**.
+  `maps@phila.gov` copying `LIGISTEAM@phila.gov`, and was **SENT 2026-09-21**.
+  No reply as of that date; follow-up due a week later. Silence will not be
+  treated as consent - the interim position rests on the reasoned reading and
+  the disclosure, not on the City having failed to object.
   For contrast, this is the same shape as the NYC question but with the opposite
   paperwork — NYC is *forbidden* from imposing a licence, whereas Philadelphia
   has imposed one that says only "we keep our rights".

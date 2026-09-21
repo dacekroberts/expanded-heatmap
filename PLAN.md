@@ -590,13 +590,17 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     dataset licence governs, the Terms of Use are web-page terms, and the
     footer discloses the question either way. See `DECISIONS.md` for the
     position and for what makes it a position rather than a conclusion.
-    - [ ] **Send the drafted request.** Written and waiting at
-      `docs/licenses/phila-permission-request.md`, addressed to
-      **`maps@phila.gov`** (the City's own Open Data Program contact) copying
-      **`LIGISTEAM@phila.gov`** (the Business Licenses custodian), with
-      placeholders for the owner's name, email and links. An earlier draft
-      addressed the custodian alone - the right address for the wrong desk,
-      since a dataset maintainer cannot speak to what the City's terms cover. Sending it is the owner's to do. **Nothing in this project may
+    - [x] **Request SENT 2026-09-21** by the owner, to **`maps@phila.gov`**
+      (the City's own Open Data Program contact) copying
+      **`LIGISTEAM@phila.gov`** (the Business Licenses custodian). Text kept at
+      `docs/licenses/phila-permission-request.md`. An earlier draft addressed
+      the custodian alone - the right address for the wrong desk, since a
+      dataset maintainer cannot speak to what the City's terms cover.
+    - [ ] **Follow up on 2026-09-28** (one week), at the owner's request. No
+      reply as of 2026-09-21. If still silent: wait, chase once, or ring the Open
+      Data Program. **Silence is not consent** - the interim position holds on
+      the reasoned reading and the disclosure, not on the absence of an
+      objection, and it does not strengthen with time. Sending it is the owner's to do. **Nothing in this project may
       claim a request is outstanding until it has actually been sent**, and
       silence must never harden into a claim that permission was given.
     - [ ] On a reply, follow the branch already written into that file: on
