@@ -168,16 +168,44 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
       the owner's. Needs a spatial join to SANDAG/SanGIS parcels
       (`ASR_LANDUSE`, 91 types; `NUCLEUS_USE_CD`, 225 types), whose hosted
       layers are split geographically (`Parcels_South` and siblings).
-    - [ ] **San Francisco** - "Assessor Historical Secured Property Tax Rolls"
-      (`wv5m-vpq2`, PDDL) has `use_definition` and `exemption_code_definition`
-      (the homeowner's exemption). No block/lot in the registry, so spatially
-      join Parcels (`acdm-wktn`) first. Do NOT use the Land Use layer
-      `fdfd-xptc` as primary - it is **[ARCHIVED]**.
-    - [ ] **Los Angeles** - `public.gis.lacounty.gov/public/rest/services/
-      LACounty_Cache/LACounty_Parcel/MapServer/0` gives AIN/APN and address but
-      no use type (and no owner data, restricted by Cal. Gov. Code s7928.205);
-      the use type is in the separate Assessor Parcels tabular dataset, joined
-      by AIN.
+    - [ ] **San Francisco - MEASURED 2026-09-21, and it is the real one: 217
+      pins (1.19%) to remove.** A person-like name on a Single Family
+      Residential parcel that claims a homeowner's exemption. Mostly home
+      caterers and home beauty/nail/pet-care businesses (NAICS 722320, 812112,
+      812910, 812199). **This is required pre-deploy work, not optional** - it
+      is 27x Philadelphia's 8 pins and the largest exposure in the project.
+      Method that works, so it need not be rediscovered:
+      - Source: "Assessor Historical Secured Property Tax Rolls"
+        (`wv5m-vpq2`, PDDL), `closed_roll_year = '2025'`, selecting
+        `use_definition`, `number_of_units`, `homeowner_exemption_value` and
+        **`the_geom`**.
+      - **Use the domain `data.sf.gov`.** `data.sfgov.org` returns 403 on
+        `/resource/` while `/api/views/` works, which makes the data look
+        unavailable.
+      - **Join spatially, not by address.** `the_geom` is a point, so a
+        nearest-parcel join in EPSG:32610 with a 40 m tolerance matches 93.4%
+        at a median 1.4 m. An address join reaches only 43.8%, because
+        `property_location` is a fixed-width composite
+        (`'0000 2801 LEAVENWORTH         ST0000'`) and because stripping
+        direction words breaks "North Point" and "South Van Ness".
+      - Exclude **Multi-Family Residential** from the residential set (5,733
+        pins - ground-floor retail in residential buildings).
+      - Do NOT use the Land Use layer `fdfd-xptc` - it is **[ARCHIVED]**.
+    - [ ] **Los Angeles - MEASURED 2026-09-21 and the largest of the three:
+      ~1,000-2,000 pins.** The earlier note here was wrong: the MapServer layer
+      `public.gis.lacounty.gov/public/rest/services/LACounty_Cache/
+      LACounty_Parcel/MapServer/0` **does** carry `UseType`, `UseDescription`,
+      `Roll_HomeOwnersExemp`, `Units1` and `Bedrooms1` - 92 fields - so no
+      second dataset is needed. Method:
+      - Query point-in-parcel per pin with `returnGeometry=false`; a batched
+        multipoint query returns polygons and is far too slow.
+      - A 400-point sample put 7.2% of person-like pins on a Residential parcel
+        with a homeowner's exemption (13.6% of the 53.2% that matched).
+      - **Expect a ~47% non-match** and investigate it before filtering: the ~9%
+        of LA coordinates recovered by Census geocoding sit on street
+        centrelines, outside any parcel. Filtering only matched rows would be
+        the same partial-coverage mistake San Francisco's address join nearly
+        caused.
     - **Carry the mixed-use lesson into each.** New York's largest land-use
       category is Mixed Residential & Commercial at 20,257 pins, ahead of
       Commercial & Office. Counting mixed use as residential would delete a

@@ -14,6 +14,77 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - The California cities have a systemic home-business exposure
+
+- **Los Angeles is worse than San Francisco, and this is now a workstream
+  rather than a footnote.** A random sample of 400 of its person-like pins
+  (seed 20260921) put **7.2% on a Residential parcel claiming a homeowner's
+  exemption**, which extrapolates to **~1,081 of 14,921 person-like pins
+  (~1.77% of 61,208)**. Only 53.2% of the sample matched a parcel at all, and
+  among those that did the rate is 13.6%, so the honest range is **~1,000-2,000
+  pins**. The unmatched are expected to be the ~9% of LA coordinates recovered
+  by Census geocoding, which land on street centrelines rather than inside a
+  parcel.
+- **The same signature as San Francisco**: NAICS 812111/812112 barber and
+  beauty, 812910 pet care, 812190, 722320 caterers, 453220 gift shops, 452000
+  general merchandise - with `UseDescription` "Single" on 27 of the 29 hits.
+- **Both cities already excluded NAICS 812990 on 2026-09-21 for this exact
+  reason.** That exclusion worked on the code that *names* itself a catch-all;
+  what is left is the same home-based pattern hiding under codes that are
+  entirely legitimate for a real storefront, which is why no blanket NAICS
+  exclusion can reach it and a property join is the only way to see it.
+- **So the unit-indicator test was not slightly optimistic, it was blind in the
+  two largest NAICS cities.** Philadelphia's 8 pins made this look like a
+  rounding error; California's two cities put it at four orders of magnitude
+  more. San Diego - also California, also NAICS, with 24,974 SOLE
+  proprietorships and no residence signal of any kind - is now the most likely
+  to be worse still, and remains unmeasured.
+- **Recommended sequencing change: fix these before adding Boston.** Each new
+  city otherwise adds to a known, live exposure on a public repository, and the
+  method is now proven on three cities. Raised for the project owner rather
+  than acted on, because it re-orders the agreed roadmap.
+
+### 2026-09-21 - San Francisco has a real home-business exposure: 217 pins
+
+- **Checked San Francisco "just to be sure" and it is the one city where the
+  answer changed.** 217 pins (1.19% of 18,242) display a person-like name at a
+  parcel the Assessor classifies **Single Family Residential** *and* which
+  claims a **homeowner's exemption** - California's homestead analogue, granted
+  only on an owner-occupied primary residence. That is 27x Philadelphia's 8,
+  and the largest personal-data exposure found anywhere in this project.
+- **What they are leaves little doubt**, from the NAICS of the affected rows:
+  722320 caterers (16), 812112 beauty salons (15), 812910 pet care (10),
+  812199 other personal care (8), 458110 clothing (11), 722511 restaurants
+  (11). Home caterers, home hairdressers, home nail technicians - exactly the
+  pattern that got NAICS 812990 excluded in this city and in Los Angeles on
+  2026-09-21, reappearing under codes that are perfectly legitimate for a
+  storefront and so were never candidates for a blanket exclusion.
+- **The measurement took three attempts, and the first two were wrong in ways
+  worth recording.** v1 joined on `data.sfgov.org`, which returns 403 on
+  `/resource/` while `/api/views/` works - it looked as though the datasets
+  were unavailable when the project's own recorded domain is `data.sf.gov`. v2
+  joined by address and reached only 43.8%, because the Assessor's
+  `property_location` is a **fixed-width composite**
+  (`'0000 2801 LEAVENWORTH         ST0000'` is
+  `<secondary> <house no> <padded street> <type><4 digits>`), and because
+  stripping direction words destroyed "North Point" and "South Van Ness" on
+  both sides. v3 abandoned addresses entirely: the roll carries `the_geom` as a
+  **point**, so a nearest-parcel join in EPSG:32610 matched **93.4% at a median
+  distance of 1.4 m**.
+- **43.8% was not good enough to filter on, and that mattered.** A filter
+  running off a partial address join would have removed home businesses only
+  where the address text happened to match - arbitrary in a way that is worse
+  than not filtering, because it looks complete.
+- **The mixed-use lesson held for a third city.** San Francisco's largest
+  category under its pins is **Multi-Family Residential at 5,733** - ground-
+  floor retail in residential buildings - so it is excluded from the filter
+  exactly as Philadelphia's `APARTMENTS > 4 UNITS` and New York's
+  `Multi-Family` were.
+- **Not yet filtered.** The fix needs the Assessor roll added as a San
+  Francisco source and a spatial join in its step 2, which is a real change to
+  a built city rather than a line of config. Raised with the measured numbers
+  rather than actioned in passing; see `PLAN.md`.
+
 ### 2026-09-21 - Residence exposure checked across all six cities
 
 - **Philadelphia's finding made every other city's residence figure suspect, so
