@@ -45,6 +45,15 @@ NAICS_GROUPS = [
 #     non-storefront (home-based sole proprietors, professional offices,
 #     services that travel to the customer) and excluded it. Re-sample per
 #     city: the real profile depends on local registration patterns.
+#     VERDICT SO FAR - Los Angeles: EXCLUDED (2026-09-21). Sampled against
+#     the rendered map, not a row list: 812990 supplied 2,255 of the ~4,100
+#     mapped pins whose displayed name looked like an individual's, and 37%
+#     of those had an APT/UNIT/STE/# in the street address. Excluded on two
+#     grounds - mostly not a storefront, and a personal-name/home-address
+#     exposure on a public map. Set in that city's NAICS_EXCLUDE_CODES.
+#     San Diego and San Francisco: still unsampled, still included (San
+#     Diego's codes are variable length, so match on the 81299 prefix there,
+#     not the 6-digit code).
 #   459999  All Other Miscellaneous Retailers
 #     The same prior hand-sample (25 rows) found ~70% plausible walk-in
 #     storefronts (niche independent shops without their own code) and kept

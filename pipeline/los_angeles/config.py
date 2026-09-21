@@ -123,6 +123,27 @@ TAXONOMY_SYSTEM = "naics"
 # taxonomy's VALUE_COLUMN, then filters via pipeline.taxonomies.
 RAW_CLASSIFICATION_COLUMN = "naics"
 
+# NAICS catch-all codes excluded for THIS city, after sampling its own
+# registrants (the verdict is per city - see NAICS_CATCHALL_CODES_TO_CHECK in
+# pipeline/taxonomies/naics.py). Applied as its own printed filter in step 2,
+# so the drop is visible in the run output rather than hidden in classify().
+#
+#   812990  All Other Personal Services
+#     Sampled 2026-09-21 against the rendered map: of the 23,839 mapped pins,
+#     7,540 (31.6%) carried a catch-all code and 812990 alone accounted for
+#     2,255 of the ~4,100 pins whose displayed name looked like an
+#     individual's. 68.1% of LA's raw rows have no dba_name, so those rows
+#     display the registrant's own name, and 37% of the sampled ones had an
+#     APT/UNIT/STE/# in the street address. That matches the national note on
+#     this code (~90% non-storefront: home-based sole proprietors), so it is
+#     excluded here on BOTH grounds: it is mostly not a storefront, and
+#     publishing it puts individuals' names at their home addresses on a
+#     public map.
+#
+# Still open for this city (not sampled): 812930 Parking Lots and Garages,
+# 459999 All Other Miscellaneous Retailers.
+NAICS_EXCLUDE_CODES = {"812990"}
+
 # Sanity bounds for the supplied lat/lng (the City of LA spans roughly
 # 33.70-34.34 N, -118.67 to -118.15 W). The source rounds coordinates to 4
 # decimals (~11 m) - fine for ring bands of 160 m and up, but a limitation.

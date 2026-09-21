@@ -7,12 +7,85 @@ the *current* state and is rewritten as things change; this file is the
 trail behind it. Format and voice: see the `decisions-entry` skill (neutral
 past tense; entries were reconstructed from session context).
 
-Newest first. All dates below are from the project's first working day,
-2026-09-18, split by phase.
+Newest first. Entries run from the project's first working day, 2026-09-18,
+onwards; the early ones are split by phase rather than by hour.
 
 ---
 
 ## Changes
+
+### 2026-09-21 - Privacy line: excluded NAICS 812990 in Los Angeles, and a standing exposure check
+
+- **The principle, decided here and standing for every city: publish public
+  commercial information, not personal information.** A trade name someone chose
+  for their shop is commercial and deliberately public, and mapping it is the
+  point of this project. A registrant's own name at what looks like their home is
+  not, even when the registry that holds it is public. "It is in a public dataset"
+  settles the licence question, not the publishing question: this project
+  re-publishes the data in a new, more usable form (a searchable map pin at a
+  precise coordinate), which is a different act from the registry's own listing.
+  Where the two conflict, the map loses the row.
+- **Why it came up.** A verification pass over the committed
+  `outputs/<city>/heatmap.html` files (they are committed to a public repository
+  and meant to be served publicly) measured what each pin actually exposes: a
+  business NAME at a mapped COORDINATE. Los Angeles was the outlier. 68.1% of its
+  raw rows carry no `dba_name`, so `step2_clean_businesses.py` fell back to the
+  registry's `business_name` (the registrant) for 12,465 of 23,839 pins (52.3%);
+  about 3,998 of those matched a conservative personal-name pattern, and 37% of
+  the sampled rows had an APT/UNIT/STE/# in the street address. San Diego (0
+  fallback pins), San Francisco (7) and Chicago (3) had no equivalent problem -
+  their registries almost always carry a trade name.
+- **The mechanism was already designed, and this is its first use.**
+  `pipeline/taxonomies/naics.py` had recorded since the start that 812990 "All
+  Other Personal Services" is a national catch-all, that a prior single-city
+  hand-sample found **~90% non-storefront (home-based sole proprietors)**, that the
+  verdict must be re-sampled per city, and that a city's verdict belongs in its
+  own step 2. The privacy finding and that open data-quality item turned out to be
+  the same rows: 812990 supplied 2,255 of the ~4,100 person-like pins. So one
+  exclusion fixes both.
+- **The change.** `NAICS_EXCLUDE_CODES = {"812990"}` in
+  `pipeline/los_angeles/config.py`, applied as its own printed filter in that
+  city's step 2 (visible in the run output, not hidden inside `classify()`), with
+  the reasoning and sample recorded beside it and in `naics.py`. Scoped to Los
+  Angeles: San Diego and San Francisco keep 812990 (unsampled; San Diego's codes
+  are variable length, so a check there must match the `81299` prefix, not the
+  6-digit code), and Chicago uses its own license taxonomy. Rejected as heavier
+  than needed: dropping the registrant fallback everywhere (loses real storefronts
+  whose registry simply has no dba), and removing names from tooltips entirely
+  (guts the map's usefulness).
+- **Effect, re-run 2026-09-21.** Step 2: 463,356 in-city rows -> 101,436
+  storefront -> **70,257 after the exclusion (31,179 rows, 30.7%, removed)**.
+  Geocoding: 5,986 addresses to recover (was 9,166), 5,910 matched (98.7%), 5,897
+  inside the bounds, 89 unrecovered and dropped (0.1%; 0.2% among businesses
+  started 2020 or later - the residual bias). Final: 70,168 rows available,
+  **17,257 within-ring pins (was 23,839)**, map **4.0 MB (was 5.6 MB)**, which also
+  reduces the open map-size item. Exposure: person-like pins traceable to the
+  fallback **3,998 -> 1,803**; person-like pins overall **6,436 -> 3,948**; the
+  APT/UNIT share of those 37.0% -> 33.9%. The other three cities are untouched and
+  byte-identical (drift check re-run).
+- **A standing check, not a one-off:** `scripts/check_personal_exposure.py` runs
+  over any city's rendered map and reports the fallback-only pins (joined back to
+  the raw trade-name column - the authoritative measure), the person-like names (a
+  heuristic), their classifications, and how many sit at an address with a unit
+  indicator. A new city must be added to its `REGISTRIES` table. It is wired into
+  `add-city` and `CLAUDE.md` as a pre-publish gate. It deliberately prints numbers
+  rather than a pass/fail: the judgment is per city and belongs in this log.
+- **Honest limits of what was done.** The personal-name test is a regex heuristic:
+  it flags "Jane Smith" and misses "J Smith Consulting", and it cannot tell a sole
+  proprietor trading under their own name (a real storefront) from a registrant at
+  home. The APT/UNIT indicator is a proxy for a residence, not proof. No row was
+  individually verified against any other source, and no individual was contacted.
+  The dataset licences and terms of use are **still unread** (open in `PLAN.md`) -
+  this entry is about what is appropriate to publish, not about what the licences
+  permit.
+- **Left open, and now visible.** After the exclusion, Los Angeles's largest
+  person-like group is NAICS **454390 "Other Direct Selling Establishments" (419
+  pins)** - direct selling is inherently not a storefront and often home-based, so
+  it is the obvious next candidate, along with the still-unsampled 812930 (parking)
+  and 459999. San Francisco retains 113 person-like 812990 pins and a 14.7%
+  unit-indicator share; San Diego 27 (`81299` prefix) and 0.1%. Chicago's
+  person-like pins are trade names in storefront license types (Retail Food
+  Establishment, Tavern) with a 0.8% unit share, which is the benign shape.
 
 ### 2026-09-21 - A "Cities" dropdown on each city map (closing the hop gap)
 

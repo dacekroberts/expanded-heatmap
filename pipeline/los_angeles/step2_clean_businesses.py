@@ -42,6 +42,7 @@ from pipeline.los_angeles.config import (  # noqa: E402
     CRS_GEOGRAPHIC,
     IN_CITY_COUNCIL_DISTRICTS,
     LOS_ANGELES_BBOX,
+    NAICS_EXCLUDE_CODES,
     TAXONOMY_SYSTEM,
     RAW_CLASSIFICATION_COLUMN,
 )
@@ -82,6 +83,13 @@ def main():
     before = len(df)
     df = filter_to_storefront(df, TAXONOMY_SYSTEM)
     print(f"Storefront filter ({TAXONOMY_SYSTEM}): {before:,} -> {len(df):,} rows")
+
+    # --- Excluded catch-all codes (per-city verdict; see config.py) ----------
+    if NAICS_EXCLUDE_CODES:
+        before = len(df)
+        df = df[~df[value_column].astype(str).isin(NAICS_EXCLUDE_CODES)]
+        print(f"Excluded catch-all codes {sorted(NAICS_EXCLUDE_CODES)}: "
+              f"{before:,} -> {len(df):,} rows")
 
     # --- Parse coordinates; FLAG (don't drop) unusable ones -----------------
     lat_lon = df["location_1"].map(parse_latlon)

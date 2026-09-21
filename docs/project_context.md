@@ -94,7 +94,7 @@ a registry of taxonomy modules. Each module exposes `classify(row)`,
 `FIELD_LABEL`, `VALUE_COLUMN` and `legend_label(bucket)`. Step 2 filters
 with `filter_to_storefront()` and the map groups, labels and builds its
 legend through the module, so adding a taxonomy - including a non-US one
-such as NACE - means adding one module. `naics.py` is complete. The three
+such as NACE - means adding one module. `naics.py` is complete. The two
 local modules `nyc_dca` and `phl_licensetype` are **skeletons**: they map
 only values seen in sample rows and need a full `SELECT DISTINCT` pull of the
 city's classification field before use. `chicago_license` is complete; it is
@@ -181,6 +181,12 @@ Not built yet: a shared pipeline-side city registry, and deployment.
   zone from the city's longitude (San Diego 11N, San Francisco 10N; Chicago
   16N and NYC 18N; non-US cities may need a national system, e.g. UK
   EPSG:27700).
+- **Publish commercial information, not personal information.** Each pin
+  carries a business name at a precise coordinate, so a city whose registry
+  lacks trade names will otherwise publish registrants' own names at what may
+  be their homes. `scripts/check_personal_exposure.py` measures this per city;
+  catch-all classification codes are the usual culprit (Los Angeles excludes
+  NAICS 812990). A trade name is public commercial information and stays.
 - **Coordinates that exist can still be wrong.** Los Angeles' registry had
   ~9% corrupt coordinates (longitude copied from latitude, (0,0), whole-
   degree placeholders), concentrated in recent registrations. Check values,

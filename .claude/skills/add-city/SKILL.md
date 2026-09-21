@@ -5,8 +5,8 @@ description: Add a new city to the expanded-heatmap project - live-verify its re
 
 # Adding a city to expanded-heatmap
 
-Distilled from the three cities actually built (San Diego, San Francisco, Los
-Angeles) - not a hypothetical plan. Every step either caught a real problem or is a
+Distilled from the four cities actually built (San Diego, San Francisco, Los
+Angeles, Chicago) - not a hypothetical plan. Every step either caught a real problem or is a
 design decision already made (see `docs/project_context.md`; the reasoning
 trail is in `DECISIONS.md`). If this is a fresh session, read those, plus
 `docs/city_shortlist.md` and `PLAN.md`, first.
@@ -28,7 +28,12 @@ schema verification. Do this for every candidate before scaffolding:
    lat/long that actually has data, not merely a column that exists. Also
    note whether the data ships pre-geocoded (both San Diego and San
    Francisco do) and whether it has an "active" flag or an end date to
-   filter on. Then check *validity*, not just population: count how many
+   filter on. **Also check how often the trade-name column is blank**, and what
+   the pipeline would fall back to: Los Angeles has no `dba_name` on 68% of rows,
+   so it fell back to the registrant's own name and would have published ~4,000
+   individuals' names at their premises (see Step 5 and `DECISIONS.md`,
+   2026-09-21 "Privacy line"). A registry that nearly always carries a trade
+   name (San Diego, San Francisco, Chicago) has no such problem. Then check *validity*, not just population: count how many
    coordinates fall inside the city's bounds and look at the ones that
    don't. A populated field can still be corrupt - Los Angeles' registry had
    ~9% bad coordinates (longitude copied from latitude, (0,0), whole-degree
@@ -159,6 +164,16 @@ columns the map expects (`business_name`, `latitude`, `longitude`, plus the
 `VALUE_COLUMN`). Read the printed row counts at every filter - that is how a
 scope mistake surfaces, and they become the baseline in `DECISIONS.md`.
 
+**Sample the catch-all classification codes for this city, and decide.**
+`pipeline/taxonomies/naics.py` lists the NAICS catch-alls (812990, 812930,
+459999) and why each needs a per-city verdict; a local taxonomy has its own
+equivalents (Chicago's "Limited"/"Regulated Business License"). These codes sweep
+in home-based sole proprietors, which is both a data-quality problem (not
+storefronts) and a privacy one (a person's name at their home on a public map).
+Put the verdict in the city's own config as `NAICS_EXCLUDE_CODES` (Los Angeles is
+the worked example), applied as its own printed filter in step 2, and record the
+sample and reasoning in `DECISIONS.md`.
+
 **Never silently drop a large share of rows.** If a filter drops more than a
 few percent, find out why and whether the loss is uniform (by start year,
 category, district) before accepting it. Los Angeles' coordinate check
@@ -206,7 +221,14 @@ your own that stays distinct from the business-category colours.
 
 ## Step 7 - Run it for real, then look at it
 
-Run steps 1-3 and read the counts. Then open the rendered map in a browser
+Run steps 1-3 and read the counts. Then **run
+`python scripts/check_personal_exposure.py <city_slug>`** (add the city to its
+`REGISTRIES` table first: the trade-name and fallback columns are per registry).
+It reports how many pins show a registrant's name rather than a trade name, how
+many look like an individual's name, and how many of those sit at an address with
+a unit indicator. There is no pass mark - read the numbers, decide, and record the
+verdict in `DECISIONS.md`. The project's line: publish public commercial
+information, not personal information. Then open the rendered map in a browser
 before calling it done: serve `outputs/<city_slug>/` (or use the
 `deploy-verify` agent's `heatmap-static` config) and confirm the heat layer,
 rings, line labels, legend and clustered pins render over real geography,

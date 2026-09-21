@@ -41,6 +41,13 @@ the process the built cities actually followed - and the `scaffold-city` skill
   Diego) don't.
 - **The project is never named after a city.** A city name labels only that
   city's own page.
+- **Publish public commercial information, not personal information.** A trade
+  name is fair game; a registrant's own name at what looks like their home is
+  not, even from a public registry. Run
+  `python scripts/check_personal_exposure.py <city>` before publishing a city
+  and after any change to its step 2 or taxonomy, and record the verdict in
+  `DECISIONS.md`. Catch-all classification codes are the usual culprit (Los
+  Angeles excludes NAICS 812990 for this reason).
 - **Ridership and deep analysis are out of scope** until asked (see
   `docs/project_context.md`). Flag scope additions rather than building
   them.
