@@ -20,11 +20,14 @@ def render_city_nav(current: str):
     `current` must match a name in cities.CITIES.
 
     In the map-only pilot (cities.MAP_ONLY_NAV) there is no visible switcher.
-    One link to the Overview is still rendered, hidden (see set_base_font),
-    because the city map's own "All cities" button navigates by clicking it."""
+    The links are still rendered, hidden (see set_base_font): one to the Overview
+    and one per city, because the city map's own "All cities" button and city
+    menu navigate by clicking them (and read the city names from them)."""
     if MAP_ONLY_NAV:
-        with st.container(key="map-only-back-link"):
+        with st.container(key="map-only-nav"):
             st.page_link(OVERVIEW_PAGE, label="All cities")
+            for city in CITIES:
+                st.page_link(city["page"], label=city["name"])
         return
     # A horizontal container sizes each item to its content and wraps onto a
     # second line when the row is too narrow; fixed-width columns clipped the
@@ -121,12 +124,12 @@ def render_macro_map_theme():
 
 
 # Map-only pilot: hide Streamlit's sidebar (its page list is the other way to reach
-# a city) and its expand control, and the one link kept for the map's back button.
+# a city) and its expand control, and the hidden links the map's buttons click.
 # Turned off by cities.MAP_ONLY_NAV = False; see docs/navigation_sidebar_and_city_links.md.
 _MAP_ONLY_CSS = """
 [data-testid="stSidebar"], [data-testid="stSidebarCollapsedControl"],
 [data-testid="stExpandSidebarButton"] { display: none !important; }
-.st-key-map-only-back-link { display: none; }
+.st-key-map-only-nav { display: none; }
 """
 
 

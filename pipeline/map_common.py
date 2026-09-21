@@ -43,7 +43,8 @@ HEAT_GRADIENT = {0.3: "#fee0d2", 0.5: "#fc9272", 0.7: "#fb6a4a", 0.85: "#de2d26"
 THEME_TOGGLE_HTML = """
 <style>
     #map-actions { position: fixed; top: 10px; right: 10px; z-index: 10000;
-        display: flex; gap: 8px; }
+        display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end;
+        max-width: calc(100% - 56px); }   /* clear of the zoom control on a phone */
     .map-btn {
         font: 600 13px sans-serif; padding: 6px 12px; cursor: pointer;
         background: #fff; color: #1c2b2a; border: 1px solid #999;
@@ -51,6 +52,12 @@ THEME_TOGGLE_HTML = """
     }
     .map-btn[hidden] { display: none; }
     .map-btn:focus-visible { outline: 2px solid #0d9488; outline-offset: 2px; }
+    #city-menu { width: 84px; text-overflow: ellipsis; }
+    @media (max-width: 480px) {
+        #map-actions { gap: 6px; }
+        .map-btn { padding: 6px 7px; font-size: 12px; }
+        #city-menu { width: 78px; }
+    }
     .dark-base { color-scheme: dark;
         --dm-page: #0f1716; --dm-surface: #182322; --dm-surface-hover: #1f2d2c;
         --dm-surface-disabled: #131c1b; --dm-border: #2e403e; --dm-text: #e6efee;
@@ -94,6 +101,9 @@ THEME_TOGGLE_HTML = """
     .dark-base .leaflet-tooltip-right:before { border-right-color: var(--dm-border); }
 </style>
 <div id="map-actions">
+    <select id="city-menu" class="map-btn" hidden aria-label="Go to another city">
+        <option value="" selected disabled>Cities</option>
+    </select>
     <button id="back-to-map" class="map-btn" type="button" hidden
         aria-label="Back to the map of all cities">&larr; All cities</button>
     <button id="theme-toggle" class="map-btn" type="button" aria-pressed="false">&#9790; Dark mode</button>
@@ -137,12 +147,57 @@ THEME_TOGGLE_HTML = """
         }
         return null;
     }
+    // City menu: the other cities, read from the hidden links the app page renders
+    // (one per city, from app/cities.py), so a new city appears here without
+    // regenerating any map. The city this page belongs to is left out.
+    var menu = document.getElementById('city-menu');
+    function cityLinks() {
+        var box = window.parent.document.querySelector('.st-key-map-only-nav');
+        var out = [];
+        if (!box) return out;
+        var links = box.querySelectorAll('a');
+        for (var i = 0; i < links.length; i++) {
+            if (links[i].textContent.indexOf('All cities') === -1) out.push(links[i]);
+        }
+        return out;
+    }
+    function currentCity() {                    // /Chicago_Heatmap -> Chicago
+        var parts = window.parent.location.pathname.split('/').filter(Boolean);
+        var seg = decodeURIComponent(parts.length ? parts[parts.length - 1] : '');
+        var tail = '_Heatmap';
+        if (seg.slice(-tail.length) === tail) seg = seg.slice(0, -tail.length);
+        return seg.split('_').join(' ');
+    }
+    function fillMenu() {
+        if (menu.options.length > 1) return;    // already built
+        var here = currentCity(), links = cityLinks();
+        for (var i = 0; i < links.length; i++) {
+            var name = links[i].textContent.trim();
+            if (name === here) continue;
+            var o = document.createElement('option');
+            o.value = name; o.textContent = name;
+            menu.appendChild(o);
+        }
+        menu.hidden = menu.options.length < 2;
+    }
+    function goTo(link) {
+        save(document.body.classList.contains('dark-base') ? 'dark' : 'light');
+        if (link) link.click();
+    }
     if (window.parent !== window) {
         back.hidden = false;
-        back.addEventListener('click', function () {
-            save(document.body.classList.contains('dark-base') ? 'dark' : 'light');
-            var link = overviewLink();
-            if (link) link.click();
+        back.addEventListener('click', function () { goTo(overviewLink()); });
+        fillMenu();
+        setTimeout(fillMenu, 800);              // the page's links may render just after this frame
+        setTimeout(fillMenu, 2500);
+        menu.addEventListener('mousedown', fillMenu);
+        menu.addEventListener('change', function () {
+            var links = cityLinks(), want = menu.value, hit = null;
+            for (var i = 0; i < links.length; i++) {
+                if (links[i].textContent.trim() === want) hit = links[i];
+            }
+            menu.selectedIndex = 0;
+            goTo(hit);
         });
     }
 })();

@@ -7,7 +7,7 @@ between the two modes, so restoring the older navigation is a one-line change.
 
 | | Sidebar page list | City switcher row | Macro map + "All cities" button |
 |---|---|---|---|
-| `MAP_ONLY_NAV = True` (now) | hidden | not shown | the way in and out |
+| `MAP_ONLY_NAV = True` (now) | hidden | not shown | the way in, out, and between cities |
 | `MAP_ONLY_NAV = False` | shown | shown on every city page | still there, alongside |
 
 ## What the sidebar is
@@ -61,8 +61,15 @@ button and makes the change reversible from Python alone.
 - **In:** clicking a city marker on the macro map opens that city's page
   (`st.switch_page`; works without a sidebar).
 - **Out:** each city map has an **"All cities"** button, top-right, left of the
-  Dark Mode button (both live in `THEME_TOGGLE_HTML` in `pipeline/map_common.py`,
-  so every city gets them from the shared renderer). The button only appears when
+  Dark Mode button (all the top-right controls live in `THEME_TOGGLE_HTML` in
+  `pipeline/map_common.py`, so every city gets them from the shared renderer).
+- **Between cities:** a **"Cities" dropdown** (a native `<select>`, so it works
+  with a keyboard and gets the phone's own picker) at the left of that group. It
+  lists the other cities, leaving out the one you are on, and picking one opens
+  it in place. It reads the city names from the hidden links below, so adding a
+  city to `app/cities.py` adds it to every menu with no map to regenerate. The
+  current city is worked out from the page URL (`/<Name>_Heatmap`), so a city
+  page file must keep that naming. The button only appears when
   the map is embedded in the app (`window.parent !== window`); a map opened on
   its own has nowhere to go back to, so it is hidden.
 - **The button navigates by clicking a link on the page.** The map is a
@@ -72,10 +79,10 @@ button and makes the change reversible from Python alone.
   navigates in place, with no reload (checked: the browser window object
   survives the click). The link is found by its text ("All cities"), falling
   back to the link whose path is the app's root.
-- **That link must exist on every city page.** With the switcher off,
-  `render_city_nav()` still renders one link to the Overview inside a
-  `st.container(key="map-only-back-link")` that CSS hides. Do not remove that call
-  from a city page in map-only mode, or the button will do nothing.
+- **Those links must exist on every city page.** With the switcher off,
+  `render_city_nav()` still renders a link to the Overview and one per city inside a
+  `st.container(key="map-only-nav")` that CSS hides. Do not remove that call
+  from a city page in map-only mode, or the button and menu will do nothing.
   (The scaffold template already includes the call.)
 - **The light/dark choice travels with it.** Both directions share one
   `localStorage` key, and the button also saves the current mode before it
@@ -95,10 +102,11 @@ sentence. The "All cities" button stays (it finds the switcher's "All cities
 - **The Overview's fallback link list is kept** (decided 2026-09-21, after
   viewing the pilot). For a pure map-only site it would be the one remaining list
   of city links; dropping it later removes the keyboard and no-map route.
-- **No visible way to hop city to city** except via the macro map. A visitor
-  who lands on a city page by URL sees only the map's "All cities" button.
+- **Hopping between cities** was a gap (two steps through the macro map); the
+  "Cities" dropdown closes it (added 2026-09-21). A visitor who lands on a city
+  page by URL now has the dropdown and the "All cities" button.
 - **Deep links still work:** a city page's URL opens it directly.
-- **A missing link means a dead button:** it silently does nothing if the
-  hidden link was not rendered.
+- **A missing link means a dead control:** the buttons do nothing, and the
+  dropdown stays hidden or empty, if the hidden links were not rendered.
 - **`deploy-verify`** checks the switcher on each city page; in map-only mode
   it should check the button instead (its instructions say so).

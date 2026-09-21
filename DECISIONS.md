@@ -14,6 +14,55 @@ Newest first. All dates below are from the project's first working day,
 
 ## Changes
 
+### 2026-09-21 - A "Cities" dropdown on each city map (closing the hop gap)
+
+- **Added a city menu next to the "All cities" button on every city map, so a
+  visitor can go straight from one city to another.** Decided with the user from
+  the options laid out for the pilot's one recorded gap (two steps through the
+  macro map to change city): a small dropdown, top-right, listing the other
+  cities, keeping the map-only look. Alternatives not taken: previous/next arrows
+  (an arbitrary order) and restoring the switcher on city pages (brings back the
+  city links the pilot removes).
+- **Built as a native `<select>`** in the shared renderer's control group
+  (`THEME_TOGGLE_HTML`), so it is keyboard-accessible and uses the phone's own
+  picker; a placeholder "Cities" is shown until one is chosen. It lists the
+  other three cities and leaves out the current one, and it is hidden outside the
+  app like the "All cities" button.
+- **The city names come from the page, not the map.** The city page's hidden
+  container (`map-only-nav`, renamed from `map-only-back-link`) now holds a link to
+  the Overview and one per city, all generated from `app/cities.py`; the menu
+  reads those links and clicks the chosen one, exactly as "All cities" does.
+  Because the static map HTML does not embed the city list, **adding a city
+  needs no map regenerated to appear in every menu**. The current city is worked
+  out from the page URL (`/Chicago_Heatmap` -> Chicago), which relies on the
+  `<Name>_Heatmap` page naming already used by every city and the scaffold. The
+  menu is filled when the map loads, again after 0.8 s and 2.5 s (the page's links
+  can render just after the frame), and when it is opened.
+- **Light/dark travels with it**, as with the back button: the current mode is
+  saved before navigating.
+- **Layout.** The three controls form one right-aligned group that wraps and is
+  capped to leave the zoom control clear (`max-width: calc(100% - 56px)`); at
+  480 px or narrower the buttons are a little smaller.
+- **Checked in a browser** (lean venv, clean tree). Chicago's menu lists San Diego,
+  San Francisco and Los Angeles; the three controls sit side by side without
+  overlapping (x 690-774, 782-878, 886-990 in a 1000 px frame). With Chicago in
+  dark, choosing San Francisco opened it in place (the browser window object
+  survived) and in dark, with a menu of the other three including Chicago; light
+  from there to Los Angeles, then "All cities", stayed in place and in light. At
+  375 px (343 px frame): one row at x 75-333, clear of the zoom control at
+  x 10-44, no sideways scroll. All four standalone maps: no label problems, the
+  menu hidden, no console errors. The closed dropdown is dark in dark mode (its
+  computed colours and colour scheme); the open native list was not inspected.
+- **A slip fixed on the way.** My first edit script updated the map renderer but
+  aborted before the app page (a comment I matched had been wrapped differently),
+  so for a moment the maps carried a menu with no links to read. Caught because
+  I tested the running app before anything was committed; the page edit was then
+  redone against the exact text.
+- **Known gaps.** The open dropdown list is the browser's native one, so its look
+  varies by browser (Opera GX, not tested, should match Chromium). If the app's
+  page ever renders the hidden links late, the menu waits for them (2.5 s) and
+  otherwise stays hidden. `deploy-verify` was not run.
+
 ### 2026-09-21 - Keep the Overview's fallback link list in the map-only pilot
 
 - **Decided to keep the list of city links under the macro map for now.** It was

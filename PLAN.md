@@ -28,8 +28,8 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 - [~] **Evaluate the map-only navigation pilot** (started 2026-09-20; see
   `DECISIONS.md` and `docs/navigation_sidebar_and_city_links.md`). The
-  Overview's fallback link list is kept (decided 2026-09-21). Open: whether
-  visitors need a way to hop city to city without going back to the map, and a
+  Overview's fallback link list is kept (decided 2026-09-21). The hop-between-cities
+  gap is closed with a "Cities" dropdown on each city map (2026-09-21). Open: the
   final go/no-go. To revert, set `MAP_ONLY_NAV = False` in
   `app/cities.py`.
 - [ ] **Dark Mode, remaining part: the surrounding Streamlit page** (background,
