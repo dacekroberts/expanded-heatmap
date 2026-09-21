@@ -139,6 +139,24 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   licences and the first non-NAICS city with **all three buckets** from one
   registry (Food Services 4,901, Beauty and Grooming 486, ~1,550 real retail).
   What the probe settled, and what is left:
+  - **MEASURED 2026-09-21: 40 of 98 Metrorail stations are inside D.C.
+    (40.8%)** - a deeper cut than this item predicted, and second only to San
+    Diego's 25% (Boston 57%, Los Angeles 51%). **But the shape is good, and
+    that is the finding.** All six lines keep real in-city presence (Red 16,
+    Silver 15, Orange 14, Blue 13, Green 13, Yellow 9), so none drops out of
+    the map. At roughly 6,900 sites across the three buckets that is **~173
+    sites per in-city station, against Boston's ~39** - so the low share is
+    misleading on its own, and D.C. is a far denser map than Boston despite
+    having 31 fewer in-city stations.
+  - **The boundary is clean - no MassGIS-style multi-town layer needed.** Only
+    one station is even arguably marginal (Southern Av, 40.1 m outside, almost
+    certainly genuinely in Maryland); the next are Capitol Heights at 111 m and
+    Arlington Cemetery at 130 m, both unambiguous. Contrast Boston's four
+    ambiguous cases that a distance tolerance could not separate.
+  - **Boundary layer: `DC Boundary`, layer 10** of
+    `maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Administrative_Other_Boundaries_WebMercator/MapServer`
+    - a single clean polygon, `outSR=4326`. Measured in **EPSG:32618** (UTM
+    18N), derived from longitude.
   - **Exclude `BUSINESSACTIVITY = 'General Business'` (14,770).** Sampled: it
     is the office/professional catch-all - Nossaman LLP, Gannett Fleming
     Engineers, Voith & Mactavish Architects, consultancies, tech firms - and it
@@ -432,12 +450,55 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - [x] **LA Metro's "modification" clause and CTA's purpose limitation** -
     both decided 2026-09-21 by the project owner; reasoning recorded in
     `docs/data_sources.md` and `DECISIONS.md`.
-- [ ] **Find San Francisco's boundary-layer endpoint.** It is recorded nowhere,
-  and the file is gitignored, so that city cannot currently be rebuilt from
-  scratch (surfaced while writing `docs/data_sources.md`).
+- [x] ~~**Find San Francisco's boundary-layer endpoint.**~~ **Found - it was
+  recorded all along, and this item was stale.** `wamw-vt4s` is in
+  `pipeline/san_francisco/config.py` with a full comment block and in
+  `docs/data_sources.md` in three places, all added 2026-09-21. But re-checking
+  it 2026-09-21 found the recorded command **does not work**, so San Francisco
+  still could not be rebuilt - the item was closed by identifying the dataset,
+  never by running the command end to end:
+  - **`data.sfgov.org` now 301-redirects**, and the documented `curl -sG` has
+    no `-L`. It writes a **654-byte HTML redirect stub** into
+    `sf_county_boundary.geojson` and exits 0. The failure surfaces much later
+    as a confusing geopandas parse error.
+  - **Fixed 2026-09-21** to `data.sf.gov`, which returns 200 and reproduces the
+    stored file byte-for-byte (38,822 bytes, sha256 `ecf625b5…`). Changed in
+    `config.py` (`COUNTY_BOUNDARY_URL` and its comment) and in
+    `docs/data_sources.md`.
+  - **The general lesson, now true twice for this city:** use `data.sf.gov`,
+    not `data.sfgov.org`. The assessor roll hits the same host with a different
+    symptom (403 on `/resource/`, recorded in `docs/data_sources.md`). Treat it
+    as one rule for San Francisco rather than two separate gotchas.
+  - **Worth generalising:** an endpoint recorded but never re-run is not
+    verified. Consider a smoke check that re-fetches every recorded endpoint
+    and asserts a plausible content type, rather than trusting the rows.
 
 ## Before deploying
 
+- [ ] **Sweep every city page for "accurate, complete, or timely" claims.**
+  **Two** transit licences now forbid it in nearly identical words - MTA's
+  "You will not state or imply that the data you provide through your
+  Application is accurate, complete, or timely" and WMATA §6's - so this is a
+  cross-city prose rule, not a per-city footnote. New York is **built** and
+  affected today; D.C. would be. Check the city pages, the Overview and the
+  map legends, and prefer "as recorded by <agency> on <date>" phrasings over
+  anything implying completeness. Both texts are in `docs/licenses/`.
+- [ ] **Decide whether to make the repo private before the first full deploy.**
+  Raised 2026-09-21 on survivability grounds, not compliance alone: four
+  transit licences (WMATA §9, LA Metro, SEPTA, MassDOT) are revocable without
+  notice and carry removal obligations, and **a public repo cannot be
+  un-published** - forks and history survive deletion, so a revocation could
+  not be complied with in good faith. Private keeps the deployed map as the
+  only distribution surface, which is the "within your Application" scope each
+  licence actually grants. **Verified it does not block deployment:** Streamlit
+  Community Cloud supports private repos on the free tier, though it needs the
+  broader `repo` OAuth scope plus a deploy key, and the one-private-app limit
+  should be checked against "app from a private repo" specifically, since that
+  likely means restricted *viewers* rather than a private source. **No middle
+  path** - `outputs/` must stay committed, because the deployed app never runs
+  the pipeline. Cost: the code stops being browsable, which matters for a
+  portfolio piece. Interacts with the `outputs/`-in-git ceiling in
+  `docs/scaling_thresholds.md`, since Git LFS quotas apply either way.
 - [ ] **Tile provider decision** - OpenStreetMap's usage policy is a risk
   for a live public map. The per-city maps use OSM raster tiles; the macro
   map uses Carto's public vector basemap. Decide both together.
@@ -512,6 +573,12 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 - [ ] Macro map at scale: with ~10+ cities, consider grouping nearby cities
   (markers already touch at phone width: Los Angeles and San Diego), and showing each city's mapped
   extent or a one-line summary in the tooltip.
+  **`docs/scaling_thresholds.md` holds the full list of what breaks at what
+  city count** (written 2026-09-21 at 7 cities): this macro map at ~10, the
+  committed `outputs/` in git at ~20 — the real ceiling — and hosting at 40+.
+  Two entries there are already settled: `drift_check.py` went incremental on
+  2026-09-21, and page-number ordering was verified *not* to be a problem
+  (Streamlit sorts the prefix numerically), so neither needs re-raising.
 
 - [ ] Non-US cities (NACE for the EU, national CRS such as EPSG:27700 for the
   UK) - one taxonomy module and a per-city CRS each.

@@ -8,8 +8,28 @@ nobody re-runs it. This is the check that catches that.
 Usage:
     python pipeline/drift_check.py                 # every city
     python pipeline/drift_check.py san_diego       # just one
+    python pipeline/drift_check.py --changed       # only the cities your
+                                                   #   changes can affect
+    python pipeline/drift_check.py --changed --list    # show them, run nothing
+    python pipeline/drift_check.py --since HEAD~3  # cities affected since a ref
 
 Exit code 0 = zero drift, 1 = real drift (or a step failed).
+
+--changed exists because the full sweep is O(number of cities) on a gate
+that is supposed to run after every pipeline change, and the project keeps
+adding cities. It maps changed files to the cities they can actually reach:
+
+    pipeline/<city>/**        -> that city
+    outputs/<city>/**         -> that city
+    pipeline/taxonomies/<t>.py-> every city whose config sets
+                                 TAXONOMY_SYSTEM = "<t>"
+    anything else in pipeline/-> every city (map_common.py, theme.py and
+                                 taxonomies/__init__.py are shared by all)
+
+It is deliberately conservative: a shared file means the full sweep, because
+a wrong "nothing to do" here is invisible until a deploy shows stale output.
+--changed is the fast gate for ordinary work; the unfiltered sweep is still
+what you run before a deploy or when recording a baseline in DECISIONS.md.
 
 Two things it deliberately handles:
 - Folium writes a random 32-hex-char id into every element on each save, so
@@ -58,6 +78,48 @@ def cities_with_pipelines():
         p.name for p in (ROOT / "pipeline").iterdir()
         if p.is_dir() and any(p.glob("step*.py"))
     )
+
+
+def taxonomy_of(city: str) -> str | None:
+    """Which taxonomy system a city's config declares, or None."""
+    config = ROOT / "pipeline" / city / "config.py"
+    if not config.exists():
+        return None
+    m = re.search(r'^TAXONOMY_SYSTEM\s*=\s*["\']([^"\']+)', config.read_text(encoding="utf-8"), re.M)
+    return m.group(1) if m else None
+
+
+def changed_paths(ref: str) -> list[str]:
+    """Repo-relative paths differing from `ref`, including untracked files."""
+    tracked = git("diff", "--name-only", ref).decode("utf-8").split()
+    untracked = git("ls-files", "--others", "--exclude-standard").decode("utf-8").split()
+    return sorted(set(tracked) | set(untracked))
+
+
+def cities_affected(paths, all_cities) -> tuple[set, list]:
+    """Map changed paths to the cities they can reach. Returns (cities, why)."""
+    affected, why = set(), []
+    for path in paths:
+        parts = path.split("/")
+        if parts[0] == "outputs" and len(parts) > 1 and parts[1] in all_cities:
+            affected.add(parts[1])
+            why.append(f"{path} -> {parts[1]}")
+        elif parts[0] != "pipeline" or len(parts) < 2:
+            continue
+        elif parts[1] in all_cities:
+            affected.add(parts[1])
+            why.append(f"{path} -> {parts[1]}")
+        elif parts[1] == "taxonomies" and len(parts) > 2 and parts[2] != "__init__.py":
+            system = parts[2].removesuffix(".py")
+            hit = {c for c in all_cities if taxonomy_of(c) == system}
+            affected |= hit
+            why.append(f"{path} -> {', '.join(sorted(hit)) or 'no city uses it'}")
+        elif parts[-1] == "drift_check.py":
+            why.append(f"{path} -> (this script; affects no output)")
+        else:
+            affected |= set(all_cities)
+            why.append(f"{path} -> SHARED, every city")
+    return affected, why
 
 
 def show_raw_inputs(city: str):
@@ -119,8 +181,58 @@ def compare_outputs(city: str) -> bool:
     return clean
 
 
+def resolve_changed(ref: str, all_cities) -> list:
+    paths = changed_paths(ref)
+    touches_pipeline = any(p.startswith(("pipeline/", "outputs/")) for p in paths)
+    if ref == "HEAD" and not touches_pipeline:
+        # Nothing uncommitted reaches the pipeline. The usual reason is that the
+        # change was just committed - which is exactly when "commit after each
+        # green step" says to run this - so look one commit back rather than
+        # reporting nothing to do and being trusted.
+        try:
+            paths = changed_paths("HEAD~1")
+            print("  nothing uncommitted touches pipeline/ - falling back to HEAD~1")
+        except subprocess.CalledProcessError:
+            return []
+    cities, why = cities_affected(paths, all_cities)
+    for line in why:
+        print(f"  {line}")
+    return sorted(cities)
+
+
 def main():
-    requested = sys.argv[1:] or cities_with_pipelines()
+    args = sys.argv[1:]
+    list_only = "--list" in args
+    args = [a for a in args if a != "--list"]
+
+    all_cities = cities_with_pipelines()
+    ref = None
+    if "--changed" in args:
+        args.remove("--changed")
+        ref = "HEAD"
+    if "--since" in args:
+        i = args.index("--since")
+        ref = args[i + 1] if i + 1 < len(args) else "HEAD"
+        del args[i:i + 2]
+
+    if ref is not None:
+        print(f"=== cities affected by changes vs {ref} ===")
+        requested = resolve_changed(ref, all_cities)
+        if not requested:
+            print("\nRESULT: no city's pipeline can be affected - nothing to check.")
+            sys.exit(0)
+        print(f"\n  -> checking {len(requested)} of {len(all_cities)}: {', '.join(requested)}")
+    else:
+        requested = args or all_cities
+
+    unknown = [c for c in requested if c not in all_cities]
+    if unknown:
+        sys.exit(f"No pipeline for: {', '.join(unknown)}")
+
+    if list_only:
+        print("\n".join(requested))
+        sys.exit(0)
+
     all_clean = True
     for city in requested:
         print(f"\n=== {city} ===")
@@ -132,6 +244,10 @@ def main():
             all_clean = False
 
     print("\nRESULT:", "zero drift" if all_clean else "DRIFT or failure - see above")
+    if len(requested) < len(all_cities):
+        skipped = sorted(set(all_cities) - set(requested))
+        print(f"PARTIAL: {len(requested)} of {len(all_cities)} cities. Not checked: {', '.join(skipped)}.")
+        print("Run without a filter before a deploy, or when recording a baseline.")
     print("Compare the step row counts above against the latest baseline entry in DECISIONS.md.")
     sys.exit(0 if all_clean else 1)
 

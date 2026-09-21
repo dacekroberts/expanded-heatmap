@@ -38,14 +38,19 @@ BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 #   sf_county_boundary.geojson  Socrata "Bay Area County Polygons"
 #     (wamw-vt4s) - a nine-county Bay Area layer, so it MUST be filtered to
 #     the one county:
-#       curl -sG https://data.sfgov.org/resource/wamw-vt4s.geojson
+#       curl -sG https://data.sf.gov/resource/wamw-vt4s.geojson
 #         --data-urlencode "$where=county='San Francisco'"
 #         --data-urlencode '$limit=10'
+#     USE data.sf.gov, NOT data.sfgov.org. Corrected 2026-09-21: the old host
+#     now 301-redirects, and this curl has no -L, so it silently wrote a
+#     654-byte HTML stub here and failed later inside geopandas. Same host,
+#     same rule as the assessor roll, which 403s on /resource/. Verified: the
+#     URL below returns the stored file byte-for-byte (38,822 bytes).
 GTFS_ZIP = DATA_RAW / "gtfs.zip"
 BUSINESSES_RAW_CSV = DATA_RAW / "sf_business_locations.csv"
 COUNTY_BOUNDARY_GEOJSON = DATA_RAW / "sf_county_boundary.geojson"
 COUNTY_BOUNDARY_URL = (
-    "https://data.sfgov.org/resource/wamw-vt4s.geojson"
+    "https://data.sf.gov/resource/wamw-vt4s.geojson"
     "?$where=county%3D%27San%20Francisco%27&$limit=10"
 )
 

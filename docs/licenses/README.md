@@ -21,6 +21,7 @@ as-is; do not transcribe, reformat or trim them.
 | `cta-developer-license-agreement.html` | **CTA** (Chicago) | `https://www.transitchicago.com/developers/terms/` | 2026-09-21 |
 | `mta-terms-and-conditions.txt` | **MTA** (New York) | `https://new.mta.info/developers/terms-and-conditions` | 2026-09-21 |
 | `septa-license-agreement.html` | **SEPTA** (Philadelphia) | `https://wwww.septa.org/license-agreement/` | 2026-09-21 |
+| `wmata-transit-data-terms-of-use.html` | **WMATA** (Washington D.C.) — *not yet a row; D.C. is unbuilt* | `https://developer.wmata.com/license` | 2026-09-21 |
 
 ## SHA-256, as retrieved
 
@@ -31,6 +32,7 @@ e791e24e86b9e974de060c3b238abfc392260cad54ccc0d2d3d4f0a61846b91a  mbta-massdot-d
 6aa68ab9d19242d275fda71f36e2cb3165d23d545eb5494a9bea9597439ae746  mta-terms-and-conditions.txt
 f7c07583af9880189c1df55fac2349378dc659016b7ce927dbd3f2900c3c220a  septa-license-agreement.html
 ad6db26b111e58813aa41747c4b958d844befc664609cc7e2147b955a12c04b8  sfmta-transit-data-license-agreement.html
+9df073bf2819a257e44cd9ad7961cac9d418c7fc4e100a625c8e4605dff516d3  wmata-transit-data-terms-of-use.html
 ```
 
 Re-fetch and compare to detect a changed agreement. The HTML files are whole

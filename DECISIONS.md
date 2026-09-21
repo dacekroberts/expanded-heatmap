@@ -14,6 +14,113 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - WMATA's terms read in full, and San Francisco's recorded endpoint found broken
+
+- **WMATA needs no written authorization, and the summary that said otherwise
+  was mis-scoped.** A third-party summary of the Transit Data Terms of Use
+  presented §8's conditions - prior written authorization, commingling data,
+  exposing user data to WMATA for statistical research, a third-party
+  kill-switch - as standing obligations. They are not. §8(b) triggers only "In
+  the event you desire to re-use the Transit Data for the purpose of providing
+  that data to third parties **through your own application programming
+  interface**", and this project has no API: it downloads a static zip once and
+  renders HTML. §7 expressly grants a licence to "download, use, reproduce, and
+  redistribute WMATA's Transit Data **within your Application**", and §8(a)
+  carves out sharing "(except with your Application's users)". Read in full
+  rather than trusted second-hand, which is the same discipline that caught
+  MTA's landing page earlier the same day.
+- **Two WMATA clauses do bite, and one of them is now a cross-city rule.** §6
+  forbids stating or implying that the data an Application provides "is
+  accurate, complete, or timely" - **identical in substance to MTA's**, making
+  it the second feed to constrain city-page prose that way, so it is a sweep
+  across every page rather than a D.C. footnote, and New York is already built.
+  §9 is the sharpest termination clause in the project: on termination "you
+  must permanently delete all Transit Data or other data which you stored", and
+  "WMATA may request that you certify in writing your compliance". LA Metro
+  requires removal; only WMATA asks for written certification.
+- **WMATA is also the first feed in the project behind an API key**, obtained by
+  the project owner (a free developer account; the key is WMATA's property,
+  cannot be sold or transferred, and stays out of the repo). The correct
+  operation is **`Rail GTFS Static`**, not `Rail & Bus Combined GTFS Static`
+  and not any `RT` feed. Verified on download: 6 routes, all `route_type 1`,
+  `network_id Metrorail`; **98 parent stations, all with coordinates**; 270,784
+  `stop_times` rows; 340 shape_ids; no bus contamination. `feed_info.txt`
+  declares `feed_end_date 20260925` - a **ten-day validity window**, the
+  shortest of any feed here, so a rebuild must re-download rather than reuse a
+  stored copy.
+- **D.C. keeps 40 of 98 Metrorail stations (40.8%) - a deeper cut than
+  predicted, and it does not matter.** Second only to San Diego's 25% (Boston
+  57%, Los Angeles 51%), because Metrorail is a regional system that passes
+  through the District. But all six lines keep real in-city presence (Red 16,
+  Silver 15, Orange 14, Blue 13, Green 13, Yellow 9), and at roughly 6,900
+  sites across the three buckets that is **~173 sites per in-city station
+  against Boston's ~39**. The share is the least interesting thing about D.C.'s
+  viability. The boundary is also clean, unlike Boston's: one arguably marginal
+  station (Southern Av, 40.1 m out), then a jump to 111 m and 130 m, so no
+  multi-town layer is needed. Measured in EPSG:32618, derived from longitude.
+- **An endpoint that is recorded but never re-run is not verified - San
+  Francisco proved it.** `PLAN.md` carried "Find San Francisco's boundary-layer
+  endpoint - it is recorded nowhere" as open; it had in fact been recorded in
+  three places on 2026-09-21. But running the recorded command found
+  `data.sfgov.org` now **301-redirects**, and the documented `curl -sG` has no
+  `-L`: it writes a **654-byte HTML stub** into `sf_county_boundary.geojson`
+  and exits 0, so San Francisco still could not be rebuilt. The earlier item was
+  closed by identifying the dataset, never by running the command. Fixed to
+  `data.sf.gov`, which reproduces the stored file byte-for-byte (38,822 bytes,
+  sha256 `ecf625b5…`). This is the **second** symptom of one host rule for this
+  city - the assessor roll 403s on `/resource/` at the same old host - so it is
+  now recorded as a single rule rather than two gotchas.
+
+### 2026-09-21 - drift_check goes incremental, and the scaling ceilings are written down
+
+- **`drift_check.py` grew `--changed`, because the full sweep is O(cities) on
+  a gate the project runs constantly.** It maps changed files to the cities
+  they can actually reach: `pipeline/<city>/**` and `outputs/<city>/**` to that
+  city, `pipeline/taxonomies/<t>.py` to every city whose config declares
+  `TAXONOMY_SYSTEM = "<t>"`, and anything else under `pipeline/` to every city.
+  Verified against synthetic paths: a Philadelphia step file resolves to 1 of 7
+  cities, `taxonomies/naics.py` to exactly the 3 bound to NAICS (Los Angeles,
+  San Diego, San Francisco), `map_common.py` to all 7, and doc or app changes
+  to none. **Deliberately conservative**: a shared file still triggers the full
+  sweep, because a wrong "nothing to do" is invisible until a deploy serves
+  stale output, and a filtered run prints a `PARTIAL:` line naming what it
+  skipped. The unfiltered sweep remains what runs before a deploy and when
+  recording a baseline. Also added `--since REF` and `--list`, and a fallback
+  to `HEAD~1` when nothing uncommitted touches the pipeline - the common case
+  right after "commit after each green step". Verified end to end on
+  Philadelphia: zero drift, 8,512 -> 8,504 rows, 4,954 points across 94
+  stations, same as the committed baseline.
+- **The page-numbering fear is unfounded, and is recorded so it is not raised
+  again.** `app/pages/10_*.py` does *not* sort before `2_*.py`: Streamlit's
+  `source_util.page_sort_key` applies `PAGE_FILENAME_REGEX` and returns
+  `(float(number), label)`, a numeric sort. Checked against the Streamlit
+  installed in `.venv-lean`. No zero-padding is needed at ten cities. This
+  corrects an earlier claim made in this session before it was checked.
+- **Wrote `docs/scaling_thresholds.md`** at 7 cities, after the owner asked how
+  far the project could scale. The finding that reframes the question: **per-page
+  rendering does not scale with city count at all** - each page embeds one
+  city's map, so the cost is bounded by the largest city (New York, 10.3 MB)
+  rather than by how many exist. What does break, in order: the Overview macro
+  map at ~10, **committed `outputs/` in git at ~20 - the real ceiling**, and
+  hosting at 40+. The escape from the `outputs/` problem is closed by two
+  existing invariants at once (the app never runs the pipeline; geopandas
+  breaks the lean deploy), so the answer has to be storage-side, probably LFS.
+- **The binding constraint is none of those: it is the per-city research
+  cost.** Seven cities took about four days, and the expensive parts were Step
+  0, taxonomy modules, privacy checks and licence review - one agency's terms
+  consumed much of one session today and turned up a clause affecting an
+  already-built city. So "more cities" is a cost-per-city problem, not a
+  frontend one, which argues for depth per country over breadth across
+  countries: the portal licence, privacy regime and often the classification
+  amortise across a country's cities.
+- **Measured the cost of a no-op re-render, which is the `outputs/` ceiling in
+  miniature.** Re-running Philadelphia for the end-to-end test rewrote
+  `outputs/philadelphia/heatmap.html` with fresh Folium element ids: a
+  1,149,401-byte file showing **1,120 changed lines** against HEAD with no
+  semantic difference at all. Reverted rather than committed. Every such run is
+  a megabyte of history for nothing, which is precisely why the threshold doc
+  puts committed outputs at ~20 cities.
+
 ### 2026-09-21 - Miami built, as the project's first REGIONAL city
 
 - **Seventh city. Regional scope, decided by the owner**, and the first working
