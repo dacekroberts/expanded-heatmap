@@ -337,21 +337,23 @@ _NON_AFFILIATION = (
 # consistent with that document and with docs/excluded_categories.md; all
 # three are meant to say the same thing.
 _UNSETTLED_TERMS = (
-    "**Two cities rest on terms that are unresolved, and that is stated "
-    "rather than glossed.** Miami-Dade County publishes no position on reuse "
-    "at all: the terms attached to its business register and boundary layer "
-    "are an accuracy disclaimer and nothing more, and its transit feed "
-    "carries no licence file and no developer terms that could be located. "
-    "Philadelphia's position is the opposite shape — the City of "
-    "Philadelphia License reserves all rights in its data while granting none "
-    "explicitly and requiring no notice, and SEPTA's licence adds a trademark "
-    "clause whose reach over line names and route colours is unclear. Nothing "
-    "found in any of them forbids what these maps show: these are questions "
-    "about the absence of permission, not about a prohibition, and they are "
-    "recorded as unresolved rather than read generously. **If either "
-    "publisher states a position that does not permit this use, that city "
-    "comes off the site** — the same way a request about a single listing "
-    "is honoured rather than argued."
+    "**One city rests on terms that are unresolved, and that is stated rather "
+    "than glossed.** Philadelphia's business licences and city limits carry "
+    "the “City of Philadelphia License”, which reserves the City's "
+    "rights without granting any — and the dataset page also binds a "
+    "reader to the City's separate Terms of Use, which permit residents to "
+    "print single pages of the City's website and otherwise state that "
+    "“distribution or republication in any other form or for any other "
+    "purpose … and any modification whatsoever, are strictly prohibited "
+    "without the prior written permission of the City”. Read literally "
+    "and applied to a dataset, that would not permit this map, which filters "
+    "and redraws what it publishes. Read as what it appears to be — terms "
+    "written for web pages, sitting beside a dataset licence that contains no "
+    "such prohibition, under an Open Data Program whose purpose is public "
+    "reuse — it would. **That question is open, it has not been resolved "
+    "in this project's favour, and if the City confirms the restrictive "
+    "reading Philadelphia comes off this site** — the same way a request "
+    "about a single listing is honoured rather than argued."
 )
 
 # MTA's terms and WMATA's §6 both forbid stating or implying that the data an

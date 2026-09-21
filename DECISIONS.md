@@ -14,6 +14,93 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - The three licence questions, read: two close, one gets worse
+
+- **The framing they were recorded under was wrong, and that is the finding.**
+  All three had been grouped as "what does silence mean?" - sources that
+  neither grant nor forbid - with the summary "nothing found in any of the
+  three forbids what this project does. These are questions about the absence
+  of permission, not about a prohibition." Reading the actual documents
+  settled two and inverted the third.
+- **SEPTA: CLOSED, and it was never a silence question at all.** Its licence
+  expressly grants "a non-exclusive, non-assignable, non-transferable, limited
+  and revocable right to **use, reproduce and redistribute** the datasets".
+  The dataset was licensed all along; the open question was only ever about the
+  trademark sentence beside it, "Licensee may not use SEPTA's trademarks and
+  copyrighted materials for any commercial or profit-making use". That sentence
+  points at SEPTA's Copyright and Trademark Notice, which **had never been
+  read**. Its entire Trademark Notice is one sentence: "**The SEPTA Logo** is a
+  registered trademark of featured words or symbols, used to identify the
+  source of its goods and services." Line names are not claimed. Route colours
+  are not claimed. This project reproduces no logo, so the clause has nothing
+  to bite on, and the fallback held in reserve - swap in an own palette and
+  descriptive names - is recorded as considered and unnecessary.
+  The "informational and non-commercial purposes only" wording that had made
+  the portfolio-site question look live turns out to sit in the same notice's
+  "Web Contents and Materials" section, scoped to "documents and related
+  graphics from this ... Server" - septa.org's own pages. **It never reached
+  the datasets.** Exactly the distinction NYC taught, where the nyc.gov "All
+  Rights Reserved" footer covered the website and not the open data.
+- **Miami-Dade: CLOSED by reading, not by asking - and the note saying that
+  was impossible was wrong.** This project had recorded Miami-Dade as "the
+  only one of the three where no agency document exists to read, so settling it
+  likely means asking the County". A document does exist: the Open Data Hub's
+  own designated Terms of Use at
+  `opendata.miamidade.gov/pages/terms-of-use`, reachable in two clicks from the
+  portal footer. Its entire substance is the accuracy disclaimer. The
+  county-wide "Liability Disclaimer and User Agreement" was read too and is
+  liability terms only, with no copyright claim and no reuse restriction. So
+  **three County documents now say nothing whatever about reuse,
+  redistribution, modification or attribution** - which is a definitive
+  absence of restriction from the County's authoritative pages rather than an
+  unexamined gap, and a materially stronger position than "we could not find
+  anything". No enquiry to the County is needed.
+- **PHILADELPHIA: NOT CLOSED, AND IT IS NOW A PROHIBITION QUESTION RATHER THAN
+  A SILENCE ONE.** The "City of Philadelphia License" still grants nothing and
+  forbids nothing. What had not been read is the sentence its dataset page
+  opens with: "Browsing City data on this site constitutes acceptance of the
+  license, **the City's terms of use** and your agreement to be bound by
+  them." That incorporates `phila.gov/terms-of-use` by reference, and those
+  terms are emphatically not silent. They grant permission only "to residents
+  and citizens of the City of Philadelphia to copy electronically and to print
+  single pages from the Website ... exactly as presented on the Website,
+  without any addition or modification", and then state: "**Distribution or
+  republication in any other form or for any other purpose, including any
+  commercial purpose or use, and any modification whatsoever, are strictly
+  prohibited without the prior written permission of the City.**" A separate
+  sentence adds "Commercial use is prohibited without the prior written
+  permission of the City."
+  Read literally and applied to the datasets, **that does not permit this
+  project's Philadelphia map**, which filters the register and redraws it -
+  modification and republication both. The contrary reading is strong but it
+  is a reading, not a grant: the terms are drafted throughout for web pages
+  ("print single pages", "exactly as presented on the Website"); the
+  dataset-specific licence beside them contains no such prohibition; the
+  boundary dataset is marked "Usage: Public use; Free"; and the Open Data
+  Program was established by executive order in 2012 for public reuse.
+- **The site's own neutrality statement was corrected the same day, because it
+  had become false.** `components._UNSETTLED_TERMS` said "Nothing found in any
+  of them forbids what these maps show" and named Miami-Dade and Philadelphia
+  as a matched pair. It now names Philadelphia alone, quotes the prohibition,
+  says plainly that the question "has not been resolved in this project's
+  favour", and keeps the commitment: if the City confirms the restrictive
+  reading, Philadelphia comes off the site. Leaving the old wording up would
+  have been a false claim on a live public page - which is why this was fixed
+  before anything else, rather than waiting on a decision.
+- **Three ways forward on Philadelphia, all the owner's to choose:** ask the
+  City for written permission, which its own terms name as the route; remove
+  Philadelphia; or record a reasoned position that the dataset licence governs
+  and accept the residual. Recorded as open in `PLAN.md`, with SEPTA's and
+  Miami-Dade's sub-items closed.
+- **The general lesson, which has now cost three separate corrections in this
+  project:** a dataset's terms are not the publishing body's website terms, and
+  neither is necessarily the whole instrument. NYC's licence turned out to be
+  forbidden by statute; SEPTA's "non-commercial" wording turned out to belong
+  to its website; Philadelphia's dataset page turned out to incorporate a
+  second document by reference. **Follow every pointer a licence makes before
+  calling the position established** - all three of these were resolved by
+  opening a page the earlier review had merely cited.
+
 ### 2026-09-21 - Canada screened end to end: six viable cities, and the largest is the weakest
 
 Screened in parallel with the Boston, D.C. and deploy work, writing only to

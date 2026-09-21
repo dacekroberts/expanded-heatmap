@@ -533,10 +533,61 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     granting nothing explicitly and requiring no notice. Same shape as the NYC
     question with the opposite paperwork: NYC is *forbidden* from imposing a
     licence, Philadelphia has imposed one that says only "we keep our rights".
-  - Worth stating plainly: **nothing found in any of the three forbids what
-    this project does.** These are questions about the absence of permission,
-    not about a prohibition, which is why they gate a public deploy rather than
-    the builds.
+  - **THAT CLAIM WAS TESTED ON 2026-09-21 AND IS NO LONGER TRUE OF ALL
+    THREE.** It read: "nothing found in any of the three forbids what this
+    project does ... questions about the absence of permission, not about a
+    prohibition". Reading the documents settled two of the three and made the
+    third worse than silence:
+    - **SEPTA: RESOLVED, and it was never really a silence question.** Its
+      licence expressly grants "a non-exclusive, non-assignable,
+      non-transferable, limited and revocable right to **use, reproduce and
+      redistribute** the datasets". The trademark sentence carves out
+      "SEPTA's trademarks and copyrighted materials", not the data - and
+      SEPTA's own Trademark Notice claims exactly one thing: "**The SEPTA Logo**
+      is a registered trademark". Line names and route colours are not claimed
+      anywhere in it, and this project reproduces no logo. The
+      "informational and non-commercial purposes only" wording sits in the
+      Copyright Notice's *Web Contents and Materials* section, governing
+      documents and graphics from septa.org - the same site-footer-versus-
+      dataset distinction NYC already taught. Nothing to ask anyone.
+    - **Miami-Dade: RESOLVED by reading, not by asking**, which corrects this
+      file's claim that "no agency document exists to read". One does:
+      `opendata.miamidade.gov/pages/terms-of-use`, the Open Data Hub's own
+      designated Terms of Use. Its entire substance is the accuracy
+      disclaimer. Three documents now read - the dataset `licenseInfo`, that
+      Terms of Use page, and the county-wide "Liability Disclaimer and User
+      Agreement" - and **not one of them says anything about reuse,
+      redistribution, modification or attribution.** That is a definitive
+      absence of restriction from the County's own authoritative pages, which
+      is a stronger position than an unexamined gap.
+    - **Philadelphia: NOT resolved, and sharper than recorded.** See below.
+  - [x] SEPTA - settled 2026-09-21, no action needed.
+  - [x] Miami-Dade - settled 2026-09-21 by reading the County's own Terms of
+    Use. No enquiry to the County is needed after all.
+  - [ ] **Philadelphia - the one real question, and it is a PROHIBITION rather
+    than a silence.** The dataset page says "Browsing City data on this site
+    constitutes acceptance of the license, **the City's terms of use** and
+    your agreement to be bound by them", which incorporates
+    `phila.gov/terms-of-use` by reference. Those terms grant permission only
+    "to residents and citizens of the City of Philadelphia to copy
+    electronically and to print single pages from the Website ... exactly as
+    presented ... without any addition or modification", and then state:
+    "**Distribution or republication in any other form or for any other
+    purpose, including any commercial purpose or use, and any modification
+    whatsoever, are strictly prohibited without the prior written permission
+    of the City.**" A separate sentence adds "Commercial use is prohibited
+    without the prior written permission of the City."
+    Read literally and applied to the datasets, that does not permit this
+    project's Philadelphia map, which filters and redraws what it publishes.
+    Read as what it appears to be - terms drafted for web pages ("print single
+    pages", "exactly as presented on the Website"), sitting beside a
+    dataset-specific licence that contains no such prohibition, under an Open
+    Data Program established by executive order in 2012 whose purpose is
+    public reuse, and beside a City boundary dataset marked "Usage: Public
+    use; Free" - it does. **This project has NOT resolved it in its own
+    favour.** The options are to ask the City for written permission, to
+    remove Philadelphia, or to record a reasoned position that the dataset
+    licence governs; the owner decides.
 - [x] **Repo visibility - DECIDED 2026-09-21: it stays PUBLIC**, accepting a
   real but unlikely residual. Nothing found in any licence forbids what the
   project displays, the browsable code is much of a portfolio's value, and

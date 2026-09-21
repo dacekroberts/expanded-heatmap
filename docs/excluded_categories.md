@@ -446,13 +446,24 @@ publisher asks for its data to stop being displayed, it stops. That is written
 out in full in `data_sources.md`, under "Commitment: removal requests are
 honoured, not argued".
 
-**And a city can come off for a reason nobody raised.** Two of the sources
-behind these maps say nothing about whether their data may be reused:
-Miami-Dade County's business register, boundary layer and transit feed carry
-no reuse position at all, and Philadelphia's data licence reserves every right
-while granting none explicitly. Nothing in either forbids what is shown here,
-and neither publisher has objected - the question is the absence of
-permission, not a prohibition. It is recorded as unresolved rather than read
-generously, and if either states a position that does not permit this use,
-**that city is removed without waiting for a request.** The same sentence
-appears in the footer of every page on the site.
+**And a city can come off for a reason nobody raised.** One city's terms
+are unresolved, and it is Philadelphia. The dataset page there binds a reader
+to the City's separate Terms of Use, which let residents print single pages of
+the City's website and otherwise prohibit "distribution or republication in
+any other form or for any other purpose ... and any modification whatsoever"
+without the City's written permission. Applied to a dataset, that would not
+permit this map, which filters and redraws what it publishes; read as terms
+written for web pages - sitting beside a dataset licence containing no such
+prohibition, under an Open Data Program meant for public reuse - it would.
+**That has not been resolved in this project's favour, and if the City
+confirms the restrictive reading, Philadelphia is removed without waiting for
+a request.** The same statement appears in the footer of every page.
+
+Two sibling questions were investigated at the same time and closed, which is
+worth recording because both had been assumed to be the same shape:
+**SEPTA** expressly licenses its datasets for use, reproduction and
+redistribution, and claims only its Logo as a trademark - not line names, not
+route colours. **Miami-Dade County** does publish a Terms of Use for its Open
+Data Hub, contrary to an earlier note here that no document existed; it
+contains an accuracy disclaimer and nothing about reuse, as do the dataset's
+own licence field and the county-wide user agreement.

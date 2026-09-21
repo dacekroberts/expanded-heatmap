@@ -266,7 +266,7 @@ user indemnifies the city for claims arising from their use of it.
 | **NYS retail food (`9a8c-vfzj`), NYS salons (`y3u4-jbgh`)** | The datasets declare no licence field, but the portal's "OPEN-NY Terms of Use" (dataset `77gx-ii52`, last modified 2013-03-08) is explicit: "At their core, the OPEN-NY Terms of Service are among the least restrictive of any terms of service … The OPEN-NY Terms of Service do **not** contain restrictions requiring members of the public to use attribution, to re-post the license terms with any re-uses of the data, to impose share-alike or technical restrictions, nor require the public to obtain pre-approval before re-use of the data." And: "So long as you are not doing anything malicious with NYS data, you may use it as you wish, subject to no other requirements." Conditions: lawful use; the State may require you in writing to stop displaying its content if it believes you are in breach. |
 | **Chicago businesses (`r5kz-chrr`), Chicago boundary (`qqq8-j68g`)** | Reuse and derivative applications are contemplated, but **conditionally** — see the required notice below. The city "may require a user of this data to terminate any and all display, distribution or other use … for any reason", reserves all intellectual-property rights, and requires the user to indemnify it. |
 
-| **Philadelphia businesses (`business_licenses`), Philadelphia boundary (`City_Limits`)** | Both carry a **named licence, "City of Philadelphia License"**, whose text is a rights reservation and disclaimer rather than a grant: the City "reserves all rights in the database and any data contained therein", the data is "as is" without warranty, the user "will assume complete responsibility for any and all occurrences resulting from its use or display" and holds the City harmless, and "browsing City data on this site constitutes acceptance". **Nothing forbids display or redistribution, and no attribution or notice is required.** The clearest affirmative signal is on the boundary dataset, which states **"Usage: Public use; Free"**; the business-licence dataset's page carries no such field, so that statement covers the boundary layer specifically. Both sit in the City's Open Data Program, whose stated purpose is public reuse. **One judgment call follows — see below.** |
+| **Philadelphia businesses (`business_licenses`), Philadelphia boundary (`City_Limits`)** | Both carry a **named licence, "City of Philadelphia License"**, whose text is a rights reservation and disclaimer rather than a grant: the City "reserves all rights in the database and any data contained therein", the data is "as is" without warranty, the user "will assume complete responsibility for any and all occurrences resulting from its use or display" and holds the City harmless, and "browsing City data on this site constitutes acceptance". Its own text forbids nothing and requires no notice — **but the dataset page also binds a reader to the City's separate Terms of Use, which DO prohibit republication and modification without written permission (read 2026-09-21; see the open question below). This is the one source in the project whose terms, read literally, do not permit what is built here.** The clearest affirmative signal is on the boundary dataset, which states **"Usage: Public use; Free"**; the business-licence dataset's page carries no such field, so that statement covers the boundary layer specifically. Both sit in the City's Open Data Program, whose stated purpose is public reuse. **One judgment call follows — see below.** |
 
 | **NYC DOHMH (`43nn-pn8j`), NYC DCWP (`w7w3-xahh`), NYC boroughs (`gthc-hcne`)** | **The absent licence field is required by law, not an oversight.** NYC's Open Data Technical Standards Manual states that Local Law 11 of 2012 "requires that data sets must be available **without registration requirement, license requirement, or usage restrictions**". The city therefore cannot attach a licence to these datasets. The "All Rights Reserved" notice in the nyc.gov footer covers nyc.gov's own website content, not datasets published under the Open Data Law. One condition does attach — see the notice below. |
 
@@ -278,7 +278,7 @@ user indemnifies the city for claims arising from their use of it.
 |---|---|
 | **US Census bulk geocoder** | Terms page not read. A US federal government work, used only to derive coordinates stored in this project's own outputs. Low priority, and the only item left unread.
 | **Boston "Business Inventory" (`47bd8208`)** | The one dataset on `data.boston.gov` whose `license_id` is `notspecified` rather than `odc-pddl`. Not established, and not pursued, because the source is deliberately unused (its coverage is downtown plus three corridors). **If it is ever used, the governing terms must be established first** — the portal's own "Open and Protected Data Policy" and the 2014 open-data executive order are the documents to read, not the boston.gov site footer. That is the NYC lesson: the parent site's notice covers the website, not the datasets.
-| **Miami-Dade Local Business Tax, its municipal boundary layer, and Miami-Dade Transit's GTFS** | All three carry a disclaimer and no grant. The ArcGIS items' `licenseInfo` is purely about ACCURACY — “Miami-Dade County provides this data for use 'as is'… not accurate to surveying or engineering standards… assumes no responsibility for errors or omissions” — and says nothing whatever about reuse, redistribution, modification or attribution. The GTFS has no `feed_info.txt`, and no separate MDT developer terms were located. **Not established, and the same shape as the Philadelphia and NYC questions: silence rather than either a grant or a prohibition.** The affirmative signals are that all three are published by the County's own ITD Geospatial group on its public open-data portal, in formats meant for reuse. Settle before the public deploy, alongside Philadelphia's two. |
+| **Miami-Dade Local Business Tax, its municipal boundary layer, and Miami-Dade Transit's GTFS** | All three carry a disclaimer and no grant. The ArcGIS items' `licenseInfo` is purely about ACCURACY — “Miami-Dade County provides this data for use 'as is'… not accurate to surveying or engineering standards… assumes no responsibility for errors or omissions” — and says nothing whatever about reuse, redistribution, modification or attribution. The GTFS has no `feed_info.txt`, and no separate MDT developer terms were located. **ESTABLISHED 2026-09-21, by reading rather than asking — and this row's earlier claim that no document existed was wrong.** One does: the Open Data Hub's own designated Terms of Use at `https://opendata.miamidade.gov/pages/terms-of-use`. Its entire substance is the accuracy disclaimer quoted above. The county-wide "Liability Disclaimer and User Agreement" at `miamidade.gov/global/disclaimer/disclaimer.page` was read too, and is liability terms only — no copyright claim, no reuse restriction. So three County documents now say nothing whatever about reuse, redistribution, modification or attribution, which is a **definitive absence of restriction from the County's own authoritative pages** rather than an unexamined gap. No enquiry to the County is needed. The affirmative signals stand: all three sources are published by the County's own ITD Geospatial group on its public open-data portal, in formats meant for reuse. |
 
 Note the shape of this. **The business registries are mostly permissive and the
 transit feeds are mostly not** — and the two are inverted within Los Angeles,
@@ -376,26 +376,61 @@ its city; all three should be settled before the public deploy, alongside the
 required notices. They are the same question in three forms: **what does
 silence mean?**
 
-- **SEPTA's trademark clause.** "Licensee may not use SEPTA's trademarks and
-  copyrighted materials for any commercial or profit-making use and may not
-  alter them in any way." Note what it does and does not cover: the sentence
-  is about *trademarks and copyrighted materials* — it points to SEPTA's
-  Copyright and Trademark Notice — while the *datasets* are covered by the
-  redistribution grant in the paragraph above it. The map uses SEPTA's real
+- **SEPTA's trademark clause — ANSWERED 2026-09-21 by reading the notice it
+  points to, and it is not a question any more.** The clause is "Licensee may
+  not use SEPTA's trademarks and copyrighted materials for any commercial or
+  profit-making use and may not alter them in any way", and it points to
+  SEPTA's Copyright and Trademark Notice at `www.septa.org/copyright/`. That
+  notice had never been read. Its **entire Trademark Notice is one sentence**:
+  "**The SEPTA Logo** is a registered trademark of featured words or symbols,
+  used to identify the source of its goods and services." Line names are not
+  claimed; route colours are not claimed; this project reproduces no logo, so
+  the clause has nothing to bite on.
+  The same page's Copyright Notice, and its "Web Contents and Materials"
+  permission — "for informational and non-commercial purposes only" — are
+  scoped to "this World Wide website" and "documents and related graphics from
+  this ... Server", i.e. septa.org's own pages. That is the septa.org footer,
+  not the Open Data Portal's terms: the identical distinction NYC taught, where
+  the nyc.gov "All Rights Reserved" notice covered the website and not the
+  datasets. **So the non-commercial wording never reached the datasets**, which
+  have their own express grant.
+  What the sentence *does* cover: the datasets are separately and expressly
+  licensed by the paragraph above it. The map uses SEPTA's real
   public line names ("Market-Frankford Line") and its own `route_color`
   values from `routes.txt`, and reproduces no SEPTA logo, wordmark or route
-  bullet artwork. **Open question:** whether the line names and official
-  colours count as trademarks being "used", and whether a portfolio site is
-  "commercial or profit-making". The conservative fallback if the answer is
-  yes: keep the geometry and substitute this project's own palette and
-  descriptive names.
-- **The "City of Philadelphia License" reserves all rights in the database.**
-  It grants nothing explicitly, forbids nothing explicitly, and requires no
-  notice. The affirmative signals are the City's Open Data Program and the
-  boundary dataset's "Usage: Public use; Free"; the business-licence dataset
-  carries no equivalent statement. **Open question:** whether a rights
-  reservation with no grant is a sufficient basis to publish a derived map of
-  that data. This is the same shape as the NYC question but with the opposite
+  bullet artwork. **No longer an open question** — the Trademark Notice claims
+  only the Logo, so there is nothing here to substitute. The fallback that was
+  held in reserve (keep the geometry, swap in this project's own palette and
+  descriptive names) is recorded as considered and unnecessary.
+- **The "City of Philadelphia License" reserves all rights in the database —
+  and on 2026-09-21 this stopped being a silence question and became a
+  PROHIBITION question.** The licence itself still grants nothing explicitly
+  and requires no notice. What had not been read is the sentence the dataset
+  page opens with: "Browsing City data on this site constitutes acceptance of
+  the license, **the City's terms of use** and your agreement to be bound by
+  them." That incorporates `phila.gov/terms-of-use` by reference, and those
+  terms are not silent. They grant permission only "to residents and citizens
+  of the City of Philadelphia to copy electronically and to print single pages
+  from the Website ... exactly as presented on the Website, without any
+  addition or modification", and then say: "**Distribution or republication in
+  any other form or for any other purpose, including any commercial purpose or
+  use, and any modification whatsoever, are strictly prohibited without the
+  prior written permission of the City.**" A separate sentence adds
+  "Commercial use is prohibited without the prior written permission of the
+  City."
+  **Applied to the datasets, read literally, that does not permit this
+  project's Philadelphia map**, which filters the register and redraws it —
+  modification and republication both. The contrary reading is strong but it
+  is a reading: the terms are drafted throughout for web pages ("print single
+  pages", "exactly as presented on the Website"), the dataset-specific licence
+  beside them contains no such prohibition, the boundary dataset is marked
+  "Usage: Public use; Free", and the Open Data Program was established by
+  executive order in 2012 for public reuse. **This project has not resolved it
+  in its own favour, and the footer on every page says so.** Three ways
+  forward, all the owner's: ask the City for written permission (the terms
+  name that as the route), remove Philadelphia, or record a reasoned position
+  that the dataset licence governs and accept the residual.
+  For contrast, this is the same shape as the NYC question but with the opposite
   paperwork — NYC is *forbidden* from imposing a licence, whereas Philadelphia
   has imposed one that says only "we keep our rights".
 - **Miami-Dade states no reuse position at all, for all three of its sources.**
@@ -435,7 +470,7 @@ treat their marks as protected:
 | **LA Metro** | Los Angeles | **"No Metro trademark"**, alongside the modification clause already decided |
 | **CTA** | Chicago | May not imply affiliation or endorsement |
 | **MTA** | New York | Logos, maps and symbols need a separate licence application — free of charge, but it must be applied for |
-| **SEPTA** | Philadelphia | The trademark clause above, which also raises whether the line NAMES count |
+| **SEPTA** | Philadelphia | **Answered 2026-09-21:** its Trademark Notice claims only "The SEPTA Logo", so neither the line names nor the route colours are trademarks it asserts, and no logo is reproduced here |
 | **WMATA** | Washington D.C. | "prohibited from using WMATA Intellectual Property, including any confusingly similar variants, in association with the Transit Data or API unless you have entered into a separate, written license agreement" |
 
 Two cities are **out of scope** because they already draw their own palette:
@@ -495,15 +530,17 @@ Transport Information and all references to it". The remedy contemplated
 throughout is a request to stop.
 
 **A second trigger, added 2026-09-21: an unresolved licence position is
-enough.** Points 1-5 below all fire on a publisher *asking*. Two sources here
-neither grant nor forbid reuse - Miami-Dade County, whose business register,
-boundary layer and GTFS carry no reuse position at all, and Philadelphia,
-whose City of Philadelphia License reserves all rights while granting none,
-alongside SEPTA's trademark clause of unclear reach. Nothing in any of them
-forbids what this project displays, and none has been asked. The commitment is
-therefore made in the other direction too: **if either publisher states a
-position that does not permit this use, that city comes off the site without
-waiting to be asked.** This is disclosed on the site itself rather than kept
+enough.** Points 1-5 below all fire on a publisher *asking*. This one fires on
+finding out. **It now has exactly one live subject, Philadelphia** - the three
+questions this was written for were investigated on 2026-09-21 and two closed:
+SEPTA expressly grants the right to use, reproduce and redistribute its
+datasets and claims only its Logo as a trademark, and Miami-Dade's own Open
+Data Hub Terms of Use turns out to exist and to contain nothing but an accuracy
+disclaimer. Philadelphia is different in kind: its dataset page incorporates
+the City's Terms of Use, which prohibit republication and modification without
+written permission. So the commitment stands and is aimed where it belongs:
+**if the City of Philadelphia confirms that those terms govern its datasets,
+Philadelphia comes off the site without waiting to be asked.** This is disclosed on the site itself rather than kept
 here - `app/components.py`'s `render_site_notices()` carries the same wording
 in the footer of every page, beside the required attributions, so a reader
 learns it at the same moment they learn where the data came from. Keep those
