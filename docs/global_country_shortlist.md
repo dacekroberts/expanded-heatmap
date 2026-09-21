@@ -180,6 +180,48 @@ Stockholm and Lisbon were simultaneously being rail-confirmed into this tier.
 They were in two tiers at once. Ruling a country out on a pattern rather than
 a probe is exactly the error this file exists to avoid.
 
+### RE-ANALYSIS under the corrected framework — most of Tier 4 is not safe
+
+Applying the rules that came out of this screen to the screen itself. Korea is
+the proof: it sat in Tier 2 on "**zero feeds in the catalogue**", and the
+national standard dataset turned out to hold **1,099 stations with WGS84
+coordinates, free and unrestricted**. The catalogue was simply the wrong place
+to look.
+
+**Every Tier 4 entry ruled out on "no feed anywhere in the catalogue" was
+tested against a transit catalogue — the wrong source for a GIS question.**
+Those rulings are therefore **ASSERTED, not measured**, and the countries below
+move back into the running pending a national-mapping-agency probe:
+
+| Country | Ruled out on | Where to actually look |
+|---|---|---|
+| **Hong Kong** | no MTR feed | Lands Department **iB1000** topographic map (transport layer), CSDI portal |
+| **Taiwan** | no Taipei/Kaohsiung feed | **NLSC**, and **TDX** (MOTC) |
+| **Indonesia** | no MRT Jakarta feed | Badan Informasi Geospasial |
+| **Brazil / Rio** | no MetrôRio feed | IBGE |
+| **Malaysia** | no Prasarana feed | JUPEM |
+| **Israel** | no Tel Aviv feed | Survey of Israel, `data.gov.il` |
+| **Peru, Colombia** | no Lima/Medellín/Bogotá feed | IGN, IGAC |
+
+**None of these has been probed at its national mapping agency.** Given Japan
+and Korea both flipped on exactly this, the prior should be that several of
+them flip too.
+
+#### A refinement the Korea probe produced: stations are not lines
+
+Japan's N02 carries **both** — 10,235 station points *and* 21,932 line
+segments. Korea's station standard dataset carries **stations only**, and this
+project draws and labels every transit line, which is an invariant.
+
+So the national-GIS check is **two questions, not one**:
+
+1. Does the layer carry **station points** with coordinates?
+2. Does it carry **line geometry**?
+
+A country can pass the first and fail the second, and a screen that asks only
+the first will record a false pass. Add the line question to `add-country`
+before the next country is profiled.
+
 ### Tier 4 — ruled out, with the evidence
 
 | | Why | Basis |
@@ -657,7 +699,37 @@ once by this project — not a bulk download.
 | Cost / licence | **무료**, **이용허락범위 제한 없음** |
 | Host | `data.kric.go.kr` — **HTTP 200**, and the dataset page `id=32` also 200 |
 
-A companion line dataset (**15013203**) supplies line information.
+**Downloaded and parsed 2026-09-21** — `전체_도시철도역사정보_20260630`, via
+`data.kric.go.kr/rips/dataset/download.file?type=filedata&id=32&operation=1`
+(313 KB XLSX, no key, no login):
+
+**1,099 stations.** Columns exactly as advertised:
+
+| Column | Verified content |
+|---|---|
+| `역위도` / `역경도` | **WGS84 to 15 dp** — e.g. `37.516125263312901, 127.019760916726` |
+| `역사명` / **`영문역사명`** / `한자역사명` | Korean, **English** and Hanja names |
+| `노선번호` / `노선명` | line number and name |
+| `환승역구분` / `환승노선번호` / `환승노선명` | transfer flag and the lines transferred to |
+| `운영기관명` | operating body |
+| `역사도로명주소` | road address |
+
+Sample rows are 신분당선 (Shinbundang) stations tagged 수도권 광역철도, so
+coverage extends past Seoul Metro to private and metropolitan operators, as
+the metadata claimed.
+
+**`영문역사명` is an unplanned win.** It answers the foreign-language label
+question for free — Montréal needed a taxonomy decision about label language,
+and Korea ships English station names in the file.
+
+**THE REMAINING GAP: this is stations only, with no line geometry.** This
+project *draws* every transit line and labels it — an invariant — and in a
+GTFS city that geometry comes from `shapes.txt`. A companion dataset
+(**15013203**) supplies line *information*, but whether it carries geometry or
+only attributes is **unverified**. If it does not, Korea needs a line-shape
+source before a build, most likely from 국가공간정보포털. That is the one
+open question on this leg, and it is a build blocker rather than a screening
+one.
 
 **So both Korean legs are reachable and unrestricted**, and the only gate left
 is a free API key for the business register. That moves Korea into Tier 1
