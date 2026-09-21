@@ -14,6 +14,45 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Two theme handoffs merged into docs/theming.md
+
+- **Decision: one theming document, not two.** `dark_mode_handoff.md` and
+  `midnight_slate_theme_handoff.md` described the same surface from different
+  moments and disagreed in places - the older one still specified a
+  base-layer-radio toggle that was never built, while the newer one referenced
+  its `--dm-*` table as if it were current. That is the same
+  two-sources-of-truth failure that left San Francisco's boundary endpoint
+  recorded nowhere: harmless until someone needs it, then actively misleading.
+- **`docs/theming.md` is now the single reference**, ordered by usefulness
+  rather than chronology: current implemented state, the decided palette,
+  what is not yet built, the traps, the verification checklist, and
+  superseded designs last and explicitly labelled "provenance only, do not
+  implement".
+- **The superseded design is summarised, not deleted, and its code is not
+  reproduced.** The base-layer approach and *why the fixed button beat it* are
+  worth keeping - the map is 1000px wide while Streamlit's column is often
+  narrower, so a control anchored to Leaflet's top-right corner can sit
+  off-screen, which is the same root cause as the legend and phone-width work.
+  The code itself lives in git history rather than in a file that reads like
+  instructions.
+- **What the merge preserved from the older document**, because it was still
+  true and would have been lost: `dark-base` belongs on `<body>` not the map
+  container (the legend is outside it); the legend's light styling is inline so
+  dark rules need `!important`; ring outlines are the only `#2c3e50` and
+  station dots the only `#1a5490`, which is what makes the attribute selectors
+  work and means changing either light colour silently breaks its dark rule;
+  and the script-ordering trap - Folium renders body HTML before the figure's
+  script block, so a script added there runs before the map object exists. That
+  last one is the same class of bug as this session's `toggle`-event defect and
+  is why `PHONE_FIT_SCRIPT` polls.
+- **Both originals were committed before being merged** (`d4c3095`), so the
+  received form of the midnight-slate handoff is in history exactly as handed
+  over, including the two corrections made on receipt.
+- **Also confirmed:** the three post-`map-chrome` fixes are verified by
+  screenshot on four cities but not by an agent pass. Rather than spend another
+  scoped run, they fold into the mandatory `full` run before deploy - which is
+  the batching the scope policy was written to encourage.
+
 ### 2026-09-21 - Staying on Streamlit, and theming it as one palette
 
 - **Decision: keep Streamlit.** The question was raised because a theme

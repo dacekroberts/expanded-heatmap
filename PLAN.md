@@ -34,13 +34,14 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   `app/cities.py`.
 - [ ] **Midnight slate theme: the Streamlit page AND the map palette, as one
   change.** No longer deferred - the blocker was the assumption that an
-  explicit theme forces the site dark-only, and `docs/midnight_slate_theme_handoff.md`
-  reports (tested) that separate `[theme.light]`/`[theme.dark]` blocks keep the
-  toggle. Decided 2026-09-21 to stay on Streamlit rather than go static; see
-  `DECISIONS.md` for why, and for the measurement showing a map-chrome reskin
-  alone is not worth doing (it is ~15% of a city page's pixels; the tiles are
-  filtered and the data colours are fixed, so no `--dm-*` variable touches
-  them).
+  explicit theme forces the site dark-only, and separate
+  `[theme.light]`/`[theme.dark]` blocks keep the toggle (tested). Decided
+  2026-09-21 to stay on Streamlit rather than go static; see `DECISIONS.md` for
+  why, and for the measurement showing a map-chrome reskin alone is not worth
+  doing (it is ~15% of a city page's pixels; the tiles are filtered and the
+  data colours are fixed, so no `--dm-*` variable touches them).
+  **Everything needed to build it - palette, both value sets, the traps, the
+  verification checklist - is in `docs/theming.md`.**
   - Page first: `.streamlit/config.toml` with both light and dark blocks, then
     the map's eleven `--dm-*` values swapped to match, verified against the
     page behind them.
@@ -54,8 +55,8 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     need lifting into variables if the light look changes.
   - Decide whether to follow `prefers-color-scheme` with a manual override
     winning once used (currently manual-only).
-  - Reconcile `docs/dark_mode_handoff.md` with the midnight-slate handoff into
-    one document rather than keeping two overlapping ones.
+  - [x] Reconciled the two overlapping handoffs into `docs/theming.md`
+    (2026-09-21). Both originals are in git history.
 
 ## Next cities, in ease order
 
@@ -157,6 +158,12 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   without the provenance would be half an answer. **Blocks the public deploy:**
   the legends were left broad, so "Retail - NAICS Code: 44/45" overstates what
   the maps contain until the exclusions page is reachable from them.
+- [ ] **Carry into the mandatory `full` `deploy-verify` run before deploy:** the
+  three fixes made after the 2026-09-21 scoped `map-chrome` run (legend
+  breakpoint dead on a wide load, container ~15px short, fit bounds excluding
+  label anchors) are verified by screenshot on four cities but not by an agent
+  pass. Confirmed 2026-09-21 to batch them into that run rather than spend
+  another scoped one - which is the batching the scope policy encourages.
 - [x] **Phone-width city pages** - largely fixed 2026-09-21. The map keeps its
   fixed 1000px layout for initialisation (which is what dodges the Leaflet.heat
   `IndexSizeError`) and is resized to the frame immediately afterwards, then

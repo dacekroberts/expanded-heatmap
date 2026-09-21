@@ -75,7 +75,12 @@ requirements-pipeline.txt     pipeline set: pandas, geopandas, shapely, pyproj, 
 .gitattributes                * text=auto eol=lf   (repo stores LF; Windows checkouts may show CRLF warnings)
 docs/                         project_context.md (stable briefing), city_shortlist.md,
                               sub_transit_line_filters.md, navigation_sidebar_and_city_links.md,
-                              dark_mode_handoff.md (partly historical), this file
+                              data_sources.md (every source's endpoint + licence),
+                              excluded_categories.md (publishable), theming.md,
+                              passover_name_filtering_skill.md, this file
+                              NOTE: dark_mode_handoff.md and
+                              midnight_slate_theme_handoff.md were merged into
+                              theming.md on 2026-09-21; both are in git history.
 .claude/skills/               add-city, scaffold-city, pipeline-drift-check, decisions-entry
 .claude/agents/               deploy-verify (browser-driven verification of the app)
 scripts/                      scaffold_city.py (generates a new city's shared skeleton),
@@ -338,9 +343,11 @@ verified only by the session's own browser checks, not by the agent: the
       2026-09-21.
     - `.claude/skills/add-city/SKILL.md` line 8 says "the three cities actually
       built"; there are four.
-    - `docs/dark_mode_handoff.md` opens with a correct status banner but its Scope
-      and mechanism sections still describe a different (base-layer) design and an
-      undecided toggle placement; it is historical.
+    - ~~`docs/dark_mode_handoff.md` mixes a correct status banner with a
+      superseded base-layer design.~~ **Resolved 2026-09-21:** merged with the
+      midnight-slate handoff into `docs/theming.md`, which separates current
+      state from the decided palette, from what is unbuilt, from superseded
+      provenance.
     - `README.md` does not mention dark mode, the map-only navigation or the
       scaffold script.
     - `PLAN.md` "Data quality follow-ups" says catch-all classification hand-samples
