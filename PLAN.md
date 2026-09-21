@@ -129,18 +129,118 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - Add MassDOT's acknowledgement to the required notices (already listed).
   - `Business Inventory` is recorded as available and **deliberately unused**;
     revisit only if the city extends the survey city-wide.
-- [ ] Washington D.C. - `LATITUDE`/`LONGITUDE` are truncated to whole
-  degrees; use `pipeline/census_geocoder.py` on `PREMISEADDRESS` (or the
-  state-plane `X_COORDINATE`/`Y_COORDINATE` fields), and add a taxonomy
-  module.
-- [ ] Dallas (marginal, unranked) - Socrata `9qet-qt9e` has `land_use` and
-  coordinates, but the data ends 2022-11-15 and covers only 2018-2022
-  certificates, so the city page must say it shows new occupancies. Needs a
-  new taxonomy module. First check the Commercial Permits Activity Dashboard
-  (`ync5-xnfn`) for something fresher.
-- [ ] San Jose, Denver, Austin, Charlotte, Fort Worth: ruled out (no usable
-  dataset, or too little rail). Revisit only if a new source appears; see
+- [ ] **Washington D.C. - the strongest remaining candidate. Step 0 mostly
+  done 2026-09-21;** full findings in `docs/city_shortlist.md`. 76,107 active
+  licences and the first non-NAICS city with **all three buckets** from one
+  registry (Food Services 4,901, Beauty and Grooming 486, ~1,550 real retail).
+  What the probe settled, and what is left:
+  - **Exclude `BUSINESSACTIVITY = 'General Business'` (14,770).** Sampled: it
+    is the office/professional catch-all - Nossaman LLP, Gannett Fleming
+    Engineers, Voith & Mactavish Architects, consultancies, tech firms - and it
+    is 14,729 of the 16,282 rows in "General Sales and Services". Same role as
+    LA's NAICS 812990. Record the sample in `DECISIONS.md` as LA's was.
+  - **Drop the residential rentals: 49% of active rows.** One Family Rental
+    25,587, Apartment 6,106, Two Family Rental 2,560, Short Term Rental 2,197,
+    Vacation Rental 803, Rooming/Boarding House 65. The Philadelphia pattern.
+  - **Ignore `LATITUDE`/`LONGITUDE` entirely** - they are literally `39` and
+    `-77` on every row, 0 of 76,107 inside DC. Use `X_COORDINATE`/
+    `Y_COORDINATE`, which are **EPSG:26985**, verified by transforming 312
+    Pennsylvania Ave SE to (38.88715, -77.00153). Present on 77% of storefront
+    rows; `MAR_ID` (Master Address Repository) should recover the rest without
+    the Census geocoder.
+  - **Trade name is missing on 49% of storefront rows** (11,079 of 21,669 have
+    `ENTITYTRADENAME`). That is the Los Angeles trap at half LA's severity, so
+    apply LA's answer, and never publish `BUSINESSOWNERFIRSTNAME`/
+    `BUSINESSOWNERLASTNAME`/`AGENT*`, which are populated on ~34k rows.
+  - Use `PREMISEINDC = 'Yes'` (61,329) for in-city scope, **not** `WARD` -
+    `WARD` is null on 16,806 rows and mixes "Ward 2" with "2".
+  - `SSL` (Square/Suffix/Lot) on 45,476 rows is the parcel join for the
+    residence check, and `ENTITYTYPE = 'Sole Proprietorship'` is the
+    sole-trader signal, as in San Diego.
+  - **WMATA GTFS needs a free API key** - `api.wmata.com/gtfs/rail-gtfs-static.zip`
+    returns **401** unauthenticated, the only feed in the project that does.
+    A keyless Mobility Database mirror exists (`urls.latest` for mdb source
+    1847, a GCS object needing `?alt=media`). Decide which, and **read
+    `https://developer.wmata.com/license`** - unread, and the transit feeds
+    have been the loosest end of every licence review.
+  - Measure the in-city station share before committing: Metrorail is 98
+    stations but reaches far into Virginia and Maryland, so expect an
+    LA-scale boundary cut.
+- [ ] **Miami - screened 2026-09-21, needs a real Step 0.** Miami-Dade "Local
+  Business Tax" ArcGIS layer: 194,099 rows, `ACCSTATUS`, NAICS via
+  `BUSNAICSCD` (so no new taxonomy module), `CLASSDESC`/`CATGRYNAME`/`OCCDESC`,
+  real `LAT`/`LON`, and `FOLIO` parcel IDs for the residence check. Filter
+  county-wide data to the city with `MUNBUSLOC = '01 - MIAMI'`. Left to do: the
+  category distribution, the in-city count, the licence (its `licenseInfo` is
+  an as-is disclaimer), and a privacy pass - `OWNERNAME` is present and some
+  `BUSNAME` values are people ("LEON RAUL APRN").
+- [ ] **New Orleans - screened 2026-09-21, needs a real Step 0.** `iqay-p646`
+  "Active Occupational Licenses", 16,396 rows, and the **cleanest licence of
+  any candidate: CC0 1.0, explicitly declared**. Has `businesstype`,
+  `businessaddress`, `the_geom`. Two sibling datasets exist (`abc4-h3u3`, an
+  application-workflow file that also carries `naics`, `category` and an
+  `ishome` flag; `hjcd-grvu`, 37,902 rows) - pick one deliberately rather than
+  merging them. Rail is streetcar-only, which is a **scope** question for the
+  owner, not a data one. Privacy flags: `ownername` and `businessphone`
+  columns, and the name fields are inverted on some rows (blank `businessname`
+  with the trade name sitting in `ownername`) - Boston's trap again.
+- [ ] **Seattle - deferred by the owner 2026-09-21, and scoped as the project's
+  first MULTI-MUNICIPALITY city.** Do not re-probe the Seattle registry itself;
+  the findings are in `docs/city_shortlist.md`. On that evidence Seattle's own
+  data is the best-equipped of any candidate - an official nightly export,
+  **active-only by construction**, 54,604 rows with real NAICS (no new taxonomy
+  module), a trade name, and point geometry (no geocoding step). It is on
+  ArcGIS rather than Socrata, which is why earlier screens missed it.
+
+  **The owner's intent (2026-09-21): full line coverage, not just the city.**
+  This is deliberately the first test of merging several jurisdictions'
+  business data into one map, and it **supersedes the standing rule that
+  stations in another city are a new project rather than a config change** -
+  for Seattle specifically, by the owner's decision. The named jurisdictions
+  are Seattle, Shoreline, Lynnwood, Tukwila, Federal Way, Bellevue and
+  Redmond. What to check before scoping the work:
+  - **The station list is wider than seven jurisdictions.** Link also stops in
+    **Mountlake Terrace** and **SeaTac** on the 1 Line and **Mercer Island** on
+    the 2 Line; if Federal Way is in scope then the extension also runs through
+    **Des Moines** and **Kent**. So plan for roughly ten to twelve, and settle
+    the list from the real GTFS stop set against a Washington municipal
+    boundary layer rather than from memory - the same discipline that caught
+    16 Trolley stations in San Diego and 54 in Los Angeles.
+  - **Each jurisdiction is an independent Step 0**, with its own registry,
+    schema, classification, coordinate quality, licence and privacy profile.
+    Seattle's own data says nothing about Lynnwood's. Expect some to have no
+    usable registry at all, and decide up front what the map does where data is
+    missing - a gap in coverage is the failure mode that made Boston's
+    `Business Inventory` unusable, and it would appear here as whole
+    suburbs reading as empty rather than as unsurveyed.
+  - **The architecture already supports the taxonomy side.** Taxonomy plurality
+    means each jurisdiction can carry its own module mapping into the shared
+    three buckets, and `map_common.py` never names a taxonomy, so the map layer
+    needs no fork. If several use NAICS (likely in Washington), they share
+    `naics` and the merge is mostly plumbing.
+  - **What genuinely does not exist yet** is multi-polygon scope: `CITY_KEEP`
+    and the boundary filter assume one city. A multi-jurisdiction build needs a
+    boundary *set*, per-jurisdiction row provenance on every business (so the
+    map can say which registry a pin came from, and so a single city's data
+    going stale is visible), and a cross-registry dedup rule for businesses
+    licensed in more than one jurisdiction.
+  - **Naming stays neutral**: this would be a region, and the project is never
+    named after a city - so the page name needs deciding too ("Link light rail"
+    rather than "Seattle" may be the honest label if it spans twelve cities).
+- [ ] San Jose, Denver, Austin, Charlotte, Fort Worth, **Dallas, Houston**:
+  ruled out. Dallas was ruled out 2026-09-21 on **currency** - its
+  certificate-of-occupancy feed froze on 2022-11-15 and the dashboard this plan
+  pointed to is not a dataset at all (HTTP 403, 0 columns). See
   `docs/city_shortlist.md`.
+- [ ] **Fifteen further rail cities were screened shallowly and nothing
+  surfaced - that is NOT a disqualification.** Atlanta, Baltimore, Portland OR,
+  Phoenix, Minneapolis, St. Louis, Cleveland, Pittsburgh, Detroit, Jersey City,
+  Tucson, Sacramento, Salt Lake City, Honolulu, Buffalo. Twelve of those
+  returned HTTP 404 from Socrata's discovery API, which means "not a Socrata
+  domain", and the ArcGIS pass searched titles only. **Seattle proves the
+  point**: it came back "no matching datasets" on Socrata and has a 54,604-row
+  official layer on ArcGIS. Any of these needs a proper per-portal check before
+  being written off.
 
 ## Structure
 
@@ -286,6 +386,29 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     published". Part of the same app job as surfacing the two doc pages, and
     it **blocks the public deploy** - publishing without them breaches terms
     this project has now read.
+  - [x] **Store the transit licence texts locally** - done 2026-09-21. All six
+    are in `docs/licenses/` with source URLs, retrieval dates and SHA-256 in
+    that directory's `README.md`. The stated position (unaltered,
+    non-commercial, for compliance) is in `DECISIONS.md`.
+  - [ ] **DECIDE: does this project satisfy MTA's "You will not modify or
+    delete any of the data"?** Found 2026-09-21 while storing the texts, and it
+    **blocks the public deploy** because New York is already built. The terms at
+    `mta.info/developers/terms-and-conditions` were never read - `data_sources.md`
+    recorded the landing page's "Our data feeds are free to use" instead - and
+    they are substantive. Three clauses to weigh:
+    - **"You will not modify or delete any of the data."** Same shape as LA
+      Metro's clause, which the owner decided 2026-09-21 this project does not
+      breach because it draws `shapes.txt` geometry unaltered. The argument is
+      *stronger* here: MTA's very next sentence says "You may, however, create
+      an app that uses some but not all of the data", which is exactly the
+      29-services-drawn-as-11-trunk-lines choice. Likely the same verdict, but
+      it needs to be stated rather than assumed.
+    - **"You will not state or imply that the data is accurate, complete, or
+      timely."** Check the New York page's prose against this before deploying.
+    - **"You will not state or imply in any manner that your app is licensed by
+      MTA."** Satisfied by construction, but note it when writing the notice.
+    Also confirm the non-MTA-server requirement, which this project satisfies
+    trivially: `outputs/` is committed and the app never fetches from MTA.
   - [x] **NYC Open Data's reuse position** - resolved 2026-09-21 from the
     primary source. Local Law 11 of 2012 "requires that data sets must be
     available without registration requirement, license requirement, or usage

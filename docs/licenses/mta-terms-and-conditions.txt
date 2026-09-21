@@ -1,0 +1,93 @@
+Terms and conditions for MTA data feeds
+Retrieved 2026-09-21 from https://new.mta.info/developers/terms-and-conditions
+Page states: "Updated Mar 13, 2024"
+
+CAPTURE NOTE: this is a rendered-text capture, not the raw HTML the other
+files in this directory hold. mta.info returns HTTP 403 to curl even with
+full browser headers, so the page was read in the browser pane and its text
+copied here unaltered. Same situation as the MassDOT PDF, which also needed
+the browser. Re-verify against the live page rather than trusting this file
+alone if a clause is ever load-bearing.
+
+---
+
+Terms and conditions for MTA data feeds
+Updated Mar 13, 2024
+
+The MTA's data for the transportation services of MTA's operating agencies is
+made available as a public service to application developers who agree to the
+provisions of this access agreement and comply with its requirements.
+
+By accessing our data feeds, you are agreeing to these Terms and Conditions.
+This agreement authorizes you to download and host the data on a non-MTA
+server (maintained by you or a third party) and to make the data available to
+others who will access that non-MTA server.
+
+MTA prohibits the development of an app that would make the data available to
+others directly from MTA's server(s).
+
+Terms of Agreement
+
+The MTA's data feeds are provided without charge to users who agree to the
+following:
+
+In developing your app, you will provide that the MTA data feed is available
+to others only from a non-MTA server. Accordingly, you will download and store
+the MTA data feed on a non-MTA server which users of your app will access in
+order to obtain data. MTA prohibits the development of an app that would make
+the data available to others directly from MTA's server(s).
+
+Unless you have an MTA license for your app, you will not state or imply in
+any manner that your app is licensed by MTA or that the data is provided by an
+MTA server. You may, however, indicate the data was obtained by you from an
+MTA server and is stored on your own server. When using MTA Real-Time data
+feeds, if there is a lag time of more than 1 minute between the real time of
+the MTA data and the actual time of the MTA data as accessed from your server,
+you will also indicate the information provided by your app to the end-user
+may not be real time because of the lag time between the real time of the MTA
+data and the MTA data as provided by you.
+
+You will not state or imply that the data is accurate, complete, or timely.
+You may however, state that you obtained the data from MTA and, through your
+own server, are redistributing it.
+
+You will not use the data or make it available in any manner that is
+inaccurate, misleading, false, or unlawful.
+
+You will not modify or delete any of the data. You may, however, create an app
+that uses some but not all of the data.
+
+You will access and review MTA's requirements for when you need a license from
+MTA in order to distribute your app. If MTA's requirements require that you
+have a license, you agree to promptly request a license.
+
+MTA provides you with and you accept the data and the data feed "as is" and
+without any MTA warranty or representation that the data or the data feed is
+merchantable, accurate or complete, suitable or fit for a particular purpose,
+compatible, available, reliable, non-infringing, secure, or virus free.
+
+Your access to and receipt of the data feed is entirely at your own risk. You
+are solely responsible for the development and use of your app, including but
+not limited to determining and providing within and as part of the development
+of your app for its design, functionality, and security features.
+
+It is your responsibility to comply with all applicable laws including any laws
+dealing with the ability of a person with a disability to access and use your
+app. Even if such laws do not apply, MTA recommends and requests that insofar
+as applicable and relevant, you include such accessibility and use in the
+development of your app.
+
+MTA reserves the right at any time for any reason or no reason and without
+notice to you to:
+
+Terminate or suspend the availability of the data feed.
+
+Permanently or temporarily terminate your access to the data feed because MTA
+has determined in its sole discretion that you have violated this agreement.
+
+Change any or all of the provisions of this access agreement, including a
+change which would require you to change your app or result in you not being
+eligible to continue to access the data feed.
+
+MTA will endeavor to inform you in advance of any of the above actions but has
+no obligation to do so.

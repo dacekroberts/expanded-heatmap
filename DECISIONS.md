@@ -14,6 +14,204 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Licence texts now kept in the repo
+
+- **Started storing licence agreements locally, beginning with MassDOT's.** The
+  MassDOT Developers License Agreement (4 pages, dated 2009-11-13, 87 KB) was
+  moved from the repository root to `docs/licenses/`. It is the first licence
+  text the project stores - `git ls-files "*.pdf"` returned nothing before this,
+  and the transit licences in `docs/data_sources.md` were quoted from sources
+  the file did not even record: grepping the whole licences section for URLs
+  returned **one**, MassDOT's, for six agreements. A quote cannot be re-read
+  against a source that changed - still less against one with no address -
+  and this agreement's §5.1 lets MassDOT "alter the Terms of this License
+  Agreement at any time without notice" while §8 reserves the right to "modify
+  or revoke this Agreement at any time" - so the URL alone does not preserve
+  what was actually agreed to. Re-fetching is not routine either: `mass.gov`
+  returns 403 to automated fetches, which is why reading it needed the browser
+  and a local PDF extraction. Rejected leaving it at the repository root, and
+  rejected converting it to Markdown, which would make the stored copy a
+  transcription rather than the document. Changes no compliance state: the
+  MassDOT acknowledgement is still required only if Boston is built (required
+  notice 7 in `docs/data_sources.md`), and no Boston pipeline code exists.
+- **Stated position on storing third-party licence texts: unaltered,
+  non-commercial, for compliance reference.** Decided by the project owner
+  2026-09-21, because the grant each agency makes covers *the Data* and says
+  nothing about its own agreement document, which is a separate copyrighted
+  work - SEPTA's explicitly so ("Licensee may not use SEPTA's trademarks and
+  copyrighted materials for any commercial or profit-making use and may not
+  alter them in any way"). Keeping an unaltered copy for compliance satisfies
+  both halves of that clause, and nothing is republished: the repository is the
+  archive, not a distribution channel. Rejected the safer alternative of storing
+  only SHA-256 hashes and retrieval dates - it detects that an agreement changed
+  but leaves you without the wording you actually agreed to, which is the whole
+  point. Hashes are recorded *as well*, in `docs/licenses/README.md`.
+- **All six texts retrieved and stored the same day, and three retrieval facts
+  were wrong in `docs/data_sources.md`.** `docs/licenses/` now holds MassDOT
+  (PDF, 87 KB), SFMTA, LA Metro, CTA and SEPTA (whole HTML pages, 37-233 KB)
+  and MTA (4.6 KB rendered text). Corrections found in the process: **SEPTA's
+  host really is `wwww.septa.org` with four w's** - not the repo README's typo
+  the file called it, since `www` and `wwww` each return 200 independently with
+  no redirect between them; **SFMTA's licence page is `/reports/gtfs-transit-
+  data`**, with the agreement inline above the download link and no separate
+  document (`/reports-documents/...` is a 404); and **`mta.info` returns 403 to
+  curl even with full browser headers**, so its terms were captured from the
+  browser pane as text, the same way the MassDOT PDF needed the browser.
+- **The exercise immediately paid for itself: MTA's actual terms had never been
+  read, and they are not permissive.** `docs/data_sources.md` recorded New York
+  as "Our data feeds are free to use ... Not specified for the GTFS data",
+  which is the blurb on `mta.info/developers` - not the agreement at
+  `/developers/terms-and-conditions`, which was never opened. That agreement
+  carries real obligations, including **"You will not modify or delete any of
+  the data"** - the same shape as LA Metro's clause, the one the project treated
+  as its tightest - plus "You will not state or imply that the data is accurate,
+  complete, or timely" and a prohibition on implying MTA licensed the app. New
+  York is a **built** city, so this is not hypothetical. Recorded as an open
+  decision in `PLAN.md` rather than settled here; the fact that the terms say
+  what they say is not a judgment call, but whether this project satisfies them
+  is.
+
+### 2026-09-21 - Screened every remaining candidate city, and found three the shortlist never had
+
+- **Why this happened before the next build**, rather than building Boston: the
+  owner chose to screen the whole remaining list for licensing and viability
+  dealbreakers first, then decide which cities to build and which to exclude.
+  That ordering paid for itself immediately - Dallas fell, and three candidates
+  appeared that were not on the list at all.
+- **Washington D.C. is the strongest remaining candidate, and the first
+  non-NAICS city with all three buckets from one registry.** 76,107 active
+  licences: Food Services 4,901, Beauty and Grooming 486, and ~1,550 real
+  retail once the catch-all is removed. Three findings decide how it must be
+  built, and all three came from the distribution check the 2026-09-18 pass
+  never ran:
+  - **`BUSINESSACTIVITY = 'General Business'` (14,770 rows) is an
+    office/professional catch-all and must be excluded.** Sampled 40 rows:
+    Nossaman LLP, Gannett Fleming Engineers and Architects, Voith & Mactavish
+    Architects, Brown and Caldwell, consultancies, investment and tech firms.
+    It is 14,729 of the 16,282 rows in "General Sales and Services", so
+    including it would have inflated D.C.'s retail roughly tenfold with law
+    offices. Same role as Los Angeles' NAICS 812990.
+  - **49% of active rows are residential rentals** - One Family Rental 25,587,
+    Apartment 6,106, Two Family Rental 2,560, Short Term Rental 2,197, Vacation
+    Rental 803. Philadelphia's landlord-registration pattern, at half the share.
+  - **The recorded "truncated to whole degrees" caveat is worse than recorded,
+    and also harmless.** `LATITUDE` is literally `39` and `LONGITUDE` `-77` on
+    every row: **0 of 76,107 fall inside D.C.** But `X_COORDINATE`/
+    `Y_COORDINATE` are real, present on 77% of storefront rows, and are
+    **EPSG:26985** - verified by transforming 312 Pennsylvania Ave SE to
+    (38.88715, -77.00153), with the three plausible datum variants agreeing to
+    sub-metre. `MAR_ID` should recover the remaining 23% without the Census
+    geocoder, so the old caveat's "use address geocoding" is now the fallback
+    rather than the plan.
+  - Also measured: trade name missing on **49%** of storefront rows (the Los
+    Angeles trap at half severity), `PREMISEINDC='Yes'` on 61,329 rows as a
+    better in-city marker than `WARD` (null on 16,806 and mixing "Ward 2" with
+    "2"), `SSL` parcel IDs on 45,476 for the residence check, and
+    `BUSINESSOWNER*`/`AGENT*` person-name columns on ~34k rows that must never
+    be published.
+- **WMATA is the first transit feed in the project that cannot simply be
+  downloaded.** `api.wmata.com/gtfs/rail-gtfs-static.zip` returns **401**
+  without a registered API key. That is an access question rather than a
+  licence one, and it has two answers: a free key from
+  `developer.wmata.com/signup` (which would put a secret in the pipeline,
+  something no other city needs) or the keyless Mobility Database mirror. Not
+  decided here. `developer.wmata.com/license` is **unread**, and transit terms
+  have been the loosest end of every licence review, so it is flagged rather
+  than assumed.
+- **Dallas ruled out, on currency rather than schema - a different reason from
+  the one recorded on 2026-09-18.** Its only source with a classification, a
+  business name and coordinates (`9qet-qt9e`, PDDL, 23,731 rows, `land_use`) is
+  frozen: `date_issued` spans 2018-01-02 to **2022-11-15**, rows last changed
+  2022-11-16. `ync5-xnfn`, the dashboard `PLAN.md` told us to check for
+  something fresher, **is not a dataset** - HTTP 403 "no row or column access
+  to non-tabular tables", 0 columns - which closes that open question with a
+  negative. The fresher food file (`dri5-wcct`) is named "October 2016 to
+  January 2024", declares no licence, and has no business-name column. Of 1,087
+  assets on the domain, nothing business-classified is current. Texas requires
+  no general city business licence, so the certificate of occupancy *is*
+  Dallas's registry and it stopped publishing. **Reasoning: a four-year-old
+  snapshot beside six current cities is a worse comparability problem than any
+  thinness**, and unlike thinness it cannot be disclosed away on a city page.
+  Houston fails the same way and for the same structural reason (zero results).
+- **Three candidates found that were never on the list**, all from widening the
+  screen past the "25 largest cities" frame to rail cities of any size:
+  - **Miami** - Miami-Dade "Local Business Tax" ArcGIS layer, **194,099 rows**,
+    `ACCSTATUS`, NAICS via `BUSNAICSCD` (so no new taxonomy module), real
+    `LAT`/`LON`, `FOLIO` parcel IDs, and `MUNBUSLOC` to cut county data down to
+    "01 - MIAMI". Needs a real Step 0.
+  - **New Orleans** - `iqay-p646` "Active Occupational Licenses", 16,396 rows,
+    and **CC0 1.0, the cleanest declared licence of any candidate**. Rail is
+    streetcar-only, which is a scope question for the owner rather than a data
+    one.
+  - **Kansas City** - explicitly PUBLIC_DOMAIN, 15,895 rows, geocoded, all
+    three buckets in readable categories (Beauty Salons 662, Barber Shops 146,
+    Clothing Retailers 192, Supermarkets 154): the best data-to-effort ratio
+    found. **Recommended for exclusion on rail, not data** - one short
+    streetcar line, well under the bar every built city meets. Recorded that
+    way deliberately, because "no usable data" and "not enough rail" are
+    different verdicts and only one of them can be reversed by a better dataset.
+- **Recorded fifteen cities as "screened and not found", explicitly NOT as
+  disqualified.** Atlanta, Baltimore, Portland OR, Phoenix, Minneapolis, St.
+  Louis, Cleveland, Pittsburgh, Detroit, Jersey City, Tucson, Sacramento, Salt
+  Lake City, Honolulu and Buffalo. Twelve of those domains returned HTTP 404
+  from Socrata's discovery API, which means **"not a Socrata domain", not "no
+  data"**, and the ArcGIS pass searched dataset titles only. **Seattle is the
+  proof that the distinction matters**: it returned "no matching datasets" on
+  Socrata and then turned out to have an official 54,604-row active
+  business-licence layer on ArcGIS. This is the Denver and San Jose lesson
+  pointing the other way - a shallow check is as unreliable for ruling a city
+  *out* as for ruling one *in* - so the list is kept as a to-check queue rather
+  than a rejection pile.
+- **Method note worth keeping: Socrata's cross-domain discovery API
+  (`api.us.socrata.com/api/catalog/v1`) answers "does any public portal publish
+  this" in one request**, including the declared licence and the last-updated
+  date. It is what established that no Massachusetts salon source exists
+  anywhere, and what surfaced New Orleans and Kansas City. Its blind spot is
+  everything not on Socrata - which is most cities, and which is why the ArcGIS
+  Online search API (`arcgis.com/sharing/rest/search`) is a necessary second
+  pass.
+
+### 2026-09-21 - Seattle: deferred, then scoped as the first multi-municipality city
+
+- **Sequence, because it changed twice in one session.** Seattle was first
+  "ignored" during the candidate screen, then clarified to "we will return to
+  implementing Seattle later on", then scoped by the owner as the project's
+  first test of merging several jurisdictions' business data into one map, with
+  **full line coverage** of Link's 1 and 2 Lines. Its own registry findings
+  were kept rather than discarded, so returning to it costs no re-probe.
+- **This supersedes the standing rule that stations in another city are a new
+  project rather than a config change.** That rule was set when San Diego
+  dropped 16 Trolley stations in neighbouring cities, on the grounds that
+  including them would need those cities' own business data sourced and
+  verified separately. The rule stands for every other city - Seattle is an
+  owner-decided exception, and the deliberate test of whether the multi-source
+  idea works.
+- **The jurisdiction list is wider than the seven named**, which is a sizing
+  fact rather than a change of intent. The owner named Seattle, Shoreline,
+  Lynnwood, Tukwila, Federal Way, Bellevue and Redmond. Link also stops in
+  **Mountlake Terrace** and **SeaTac** on the 1 Line and **Mercer Island** on
+  the 2 Line, and a Federal Way scope brings the extension through **Des
+  Moines** and **Kent** - about **ten to twelve** jurisdictions. To be settled
+  from the real GTFS stop set against a Washington municipal boundary layer
+  rather than from memory, which is the discipline that caught San Diego's 16
+  and Los Angeles' 54. The corrected list is written into the probe script so
+  it is not re-derived.
+- **What the architecture already supports, and what it does not.** Supported:
+  per-jurisdiction taxonomy modules mapping into the shared three buckets,
+  because `map_common.py` never names a taxonomy; if several Washington cities
+  use NAICS they share the existing module. Not yet existing: multi-polygon
+  scope (`CITY_KEEP` and the boundary filter assume one city),
+  per-jurisdiction provenance on each business row (so the map can say which
+  registry a pin came from, and so one city's data going stale is visible), and
+  a cross-registry dedup rule for businesses licensed in more than one
+  jurisdiction.
+- **Two risks recorded now.** A jurisdiction with no usable registry would
+  render as an empty suburb rather than an unsurveyed one - the same failure
+  that made Boston's `Business Inventory` unusable as a heat layer, so decide
+  up front what the map does where data is missing. And the page name needs a
+  decision: the project is never named after a city, and a map spanning twelve
+  of them is honestly "Link light rail" rather than "Seattle".
+
 ### 2026-09-21 - Boston Step 0: passed, and narrower than the shortlist assumed
 
 - **Verdict: viable, two buckets, not built.** Boston passes all three Step 0
