@@ -153,22 +153,64 @@ Matching `--dm-*` values:
 ## Not yet built
 
 Done 2026-09-21: `.streamlit/config.toml` with both blocks, the `--dm-*` swap,
-the shared palette module, and ambient-following with a manual override.
-Remaining:
+the shared palette module, ambient-following with a manual override, and the
+hardcoded-colour sweep across `app/`. Remaining:
 
-1. **The hardcoded-colour sweep — the real work, and only partly done.**
-   `app/components.py` is clean (it now builds from `pipeline/theme.py`), but
-   `app/Overview_&_Introduction.py` still has literal `white` and `#1c2b2a`
-   for the macro map's markers and labels. Check those numerically against
-   `#0B1220` rather than by eye: doing this once elsewhere produced a label at
-   **1.01:1** — invisible, and nobody caught it by looking — and icons at
-   **2.77:1**, below the 3:1 non-text minimum.
-2. The city pages' prose says features are "toggleable via the layer control in
+1. The city pages' prose says features are "toggleable via the layer control in
    the top left" — decide whether to mention the theme toggle, and draft the
    wording in chat first per `CLAUDE.md`.
-3. Consider whether the light palette in `pipeline/theme.py` should drive
+2. Consider whether the light palette in `pipeline/theme.py` should drive
    `[theme.light]` more closely; today only the four Streamlit keys are
    checked against it by `scripts/check_theme_sync.py`.
+
+## The WebGL constraint on the macro map
+
+Worth understanding before touching the Overview's colours, because it is a
+hard limit rather than a preference.
+
+The macro map is pydeck. Its **marker and label layers are WebGL**, so CSS
+cannot restyle them — the dark-mode filter deliberately hits only
+`.mapboxgl-canvas`, never `#deckgl-overlay`. One set of colours therefore has
+to work on both the light basemap and the inverted dark one.
+
+**No single colour can clear 3:1 against both**, because the two basemaps sit
+at opposite ends of the luminance range (measured: land is `#f2efe9` light,
+`#191c22` dark). That is not a thing to fix; it is why the design gives every
+city name its own **opaque pill**. The pill supplies its own background, so
+the text only needs contrast against the pill (14.7:1), not against whatever
+is behind it.
+
+Measured 2026-09-21, against both basemaps:
+
+| Element | Colour | vs light | vs dark | Verdict |
+|---|---|---|---|---|
+| Marker fill | `#0d9488` | 3.26 | 4.56 | **Clears 3:1 on both — load-bearing** |
+| Label text on its pill | `#1c2b2a` | 14.70 | 14.70 | Fine; pill makes the basemap irrelevant |
+| Tooltip text (light / dark) | `#ffffff` / `#E6EDF7` | 14.70 | 14.45 | Fine |
+| Pill + marker ring | `#ffffff` | 1.15 | 17.07 | Fine — see below |
+| Hover highlight | `#fbbf24` | 1.45 | 10.22 | Accepted — see below |
+
+**Two of those low numbers are not defects, and a future pass should not
+"fix" them:**
+
+- The **pill's** 1.15 against the light basemap is the wrong criterion. A text
+  background does not need to contrast with what is behind it; its text does.
+- The **marker ring** is decorative on the light basemap and load-bearing on
+  the dark one. The marker stays discernible either way through its *fill*.
+- The **highlight** at 1.45 is real but low-stakes, and unfixable within one
+  colour set for the reason above. Hover also enlarges the marker and opens a
+  tooltip, and amber differs from teal by hue rather than luminance, which
+  WCAG ratios do not capture.
+
+**The one thing to re-check if the palette changes:** the marker fill is the
+only element clearing the floor on both basemaps, and it does so with little
+margin on the light side (3.26). A darker or lighter teal would break one end.
+
+The tooltip is the exception to all of this — it is an HTML overlay
+(`.deck-tooltip`), so CSS *can* reach it, and `app/components.py` overrides
+pydeck's inline colours under `body.dark-base` so it matches the city maps
+instead of staying the light-mode green-grey. pydeck writes those colours
+inline, hence the `!important`.
 
 ---
 

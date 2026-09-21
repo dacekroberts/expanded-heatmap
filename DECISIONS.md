@@ -14,6 +14,46 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Overview colour sweep: one real fix, two non-defects
+
+- **Swept the last hardcoded colours in `app/`.** All seven literals in
+  `Overview_&_Introduction.py` now derive from `pipeline/theme.py` via a new
+  `rgb_list()` helper (pydeck takes channel lists, not CSS), so the macro map
+  cannot drift from the rest of the chrome. The only literal deliberately left
+  outside the palette is the amber hover highlight, which exists to differ from
+  both the teal marker and the category colours.
+- **One real inconsistency fixed: the macro map's tooltip.** It was baked at
+  `#1c2b2a` on white - the light theme's *text* colour used as a background -
+  so in dark mode it stayed green-grey while every city map's tooltip was
+  slate. It is the one macro-map element CSS can reach, because deck.gl renders
+  it as an HTML overlay (`.deck-tooltip`) rather than in WebGL, so
+  `app/components.py` now overrides it under `body.dark-base`. Verified it
+  beats pydeck's inline styles: measured `#131C2E` / `#E6EDF7` / `#23304A`
+  against a synthetic tooltip carrying the inline values.
+- **The constraint that shapes the whole macro map, now written down.** Marker
+  and label layers are WebGL, so CSS cannot restyle them, and one colour set
+  must serve both basemaps. The light basemap's land is `#f2efe9` and the
+  inverted dark one `#191c22` - opposite ends of the luminance range - so **no
+  single colour can clear 3:1 against both.** That is why each city name gets
+  an opaque pill: the pill supplies its own background, and the text only needs
+  contrast against the pill (14.7:1). It is a design answer to a hard limit,
+  not a stylistic choice, and it should not be "simplified" away.
+- **Two flagged failures were my measurement criterion being wrong, and are
+  recorded so a later pass does not chase them.** The pill reads 1.15 against
+  the light basemap, but a text background does not need to contrast with what
+  is behind it - its text does. The marker's white ring is likewise decorative
+  on the light basemap and load-bearing on the dark one, with the marker
+  discernible either way through its fill. Checking contrast numerically was
+  right; applying a text criterion to a background was not.
+- **One accepted weakness, stated rather than hidden:** the amber hover
+  highlight is 1.45 against the light basemap. Unfixable within a single colour
+  set for the reason above, and hover also enlarges the marker and opens a
+  tooltip, with amber differing from teal by hue rather than luminance - which
+  a WCAG ratio does not capture.
+- **What to re-check if the palette ever changes:** the teal marker fill is the
+  only element that clears 3:1 on both basemaps (3.26 light, 4.56 dark), and
+  its margin on the light side is thin. A darker or lighter teal breaks one end.
+
 ### 2026-09-21 - Maps follow the page's theme; an explicit click still wins
 
 - **Closes the two-controls gap** opened by giving the page a theme. Chosen

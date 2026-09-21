@@ -61,6 +61,9 @@ _MACRO_THEME_CSS = """
     font: 600 13px sans-serif; padding: 6px 12px; cursor: pointer;
     background: @@LIGHT_SURFACE@@; color: @@LIGHT_TEXT@@;
     border: 1px solid @@LIGHT_BORDER@@;
+    /* The only colour here deliberately left outside pipeline/theme.py: a
+       black drop shadow is theme-agnostic, and it simply stops mattering on a
+       dark surface rather than looking wrong. Same value in map_common.py. */
     border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
 #macro-theme-toggle:focus-visible { outline: 2px solid @@LIGHT_ACCENT@@; outline-offset: 2px; }
@@ -138,6 +141,14 @@ _MACRO_CONTROLS_CSS = """
 body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-group { filter: invert(0.9); }
 body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib { background: @@DARK_ATTRIB_BG@@ !important; color: @@DARK_MUTED@@; }
 body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib a { color: @@DARK_ACCENT@@; }
+/* deck.gl's tooltip is an HTML overlay (class `deck-tooltip`), so unlike the
+   marker and label layers it CAN be themed. pydeck writes its colours inline
+   from the `tooltip` style dict, hence !important. Without this the macro
+   map's tooltip stayed the light-mode green-grey while every city map's
+   tooltip was slate. */
+body.dark-base [data-testid="stDeckGlJsonChart"] .deck-tooltip {
+    background: @@DARK_SURFACE@@ !important; color: @@DARK_TEXT@@ !important;
+    border: 1px solid @@DARK_BORDER@@; border-radius: 4px; }
 """
 
 

@@ -20,6 +20,9 @@ import streamlit as st
 
 from cities import CITIES, MAP_ONLY_NAV
 from components import render_macro_map_theme, set_base_font
+# components.py has already put the repo root on sys.path; pipeline/theme.py
+# imports nothing, so it is safe under the lean deploy venv.
+from pipeline.theme import DARK as DARK_PALETTE, LIGHT, rgb_list
 
 st.set_page_config(page_title="Expanded Heatmap", page_icon="\U0001f5fa️", layout="wide")
 set_base_font()
@@ -45,8 +48,23 @@ than one shared map instance loading every city's business points at once.
 st.subheader("Covered cities")
 
 cities = pd.DataFrame(CITIES)
-TEAL = [13, 148, 136, 235]
-DARK = [28, 43, 42, 255]
+
+# These are WebGL layer colours, so unlike every other colour in the app they
+# CANNOT be restyled by CSS - the dark-mode filter deliberately hits only
+# `.mapboxgl-canvas`, never `#deckgl-overlay`, so markers and labels keep
+# whatever is baked in here. That is why the design gives each name its own
+# opaque pill rather than relying on the basemap behind it: one set of colours
+# has to read on both the light basemap and the inverted dark one.
+#
+# Derived from pipeline/theme.py rather than written as literals, so they
+# cannot drift from the rest of the chrome. Alpha is appended per use.
+TEAL = rgb_list(LIGHT["accent"], 235)      # marker fill
+DARK = rgb_list(LIGHT["text"], 255)        # label text, on the pill below
+PILL = rgb_list(LIGHT["surface"], 235)     # the pill behind each name
+OUTLINE = rgb_list(LIGHT["surface"], 255)  # ring around each marker
+# Interaction feedback, deliberately outside the palette: it has to differ from
+# both the teal marker and the category colours to read as "this one".
+HIGHLIGHT = [251, 191, 36, 255]
 
 # Which side of its marker each name sits on (cities.py "label", default top),
 # as a text anchor plus a pixel offset for the TextLayer.
@@ -70,12 +88,12 @@ markers = pdk.Layer(
     # expression "@@=pixels" (an undefined variable) and break the radius.
     radius_units=pdk.types.String("pixels"),
     get_fill_color=TEAL,
-    get_line_color=[255, 255, 255, 255],
+    get_line_color=OUTLINE,
     stroked=True,
     line_width_min_pixels=2,
     pickable=True,
     auto_highlight=True,
-    highlight_color=[251, 191, 36, 255],
+    highlight_color=HIGHLIGHT,
 )
 # Permanent city-name labels (not hover-only), consistent with the per-city
 # maps' rule that things a reader needs to identify are always visible.
@@ -87,11 +105,11 @@ labels = pdk.Layer(
     get_text="name",
     get_size=14,
     get_color=DARK,
-    # A white pill behind each name so it reads on both the light basemap and
+    # An opaque pill behind each name so it reads on both the light basemap and
     # the dark-mode one (WebGL text can't be recoloured by CSS); a halo outline
     # smeared the letters at this size.
     background=True,
-    get_background_color=[255, 255, 255, 235],
+    get_background_color=PILL,
     background_padding=[5, 2],
     get_text_anchor="anchor",
     get_pixel_offset="[dx, dy]",
@@ -134,9 +152,18 @@ deck = pdk.Deck(
     initial_view_state=view,
     map_provider="carto",
     map_style="light",
+    # Unlike the layers above this tooltip is an HTML overlay, so CSS CAN reach
+    # it: the values here are the light-mode look, and components.py overrides
+    # them under `body.dark-base` so it matches the city maps' tooltips instead
+    # of staying this green-grey. A dark tooltip on the light basemap is
+    # deliberate - it reads better than a pale one over map detail.
     tooltip={
         "html": "<b>{name}</b><br/>{blurb}",
-        "style": {"backgroundColor": "#1c2b2a", "color": "white", "fontSize": "13px"},
+        "style": {
+            "backgroundColor": LIGHT["text"],
+            "color": LIGHT["surface"],
+            "fontSize": "13px",
+        },
     },
 )
 

@@ -140,6 +140,14 @@ def css_vars(palette, prefix="dm"):
     )
 
 
+def rgb_list(hex_color, alpha=255):
+    """"#0d9488", 235 -> [13, 148, 136, 235]. For pydeck/WebGL layers, which
+    take colour channels rather than CSS, and which CSS therefore cannot
+    restyle - see the note in app/Overview_&_Introduction.py."""
+    h = hex_color.lstrip("#")
+    return [int(h[i:i + 2], 16) for i in (0, 2, 4)] + [alpha]
+
+
 def rgba(hex_color, alpha):
     """"#0B1220", 0.8 -> "rgba(11, 18, 32, 0.8)". For the one place a colour
     needs transparency (the map attribution strip), so the page colour is not
