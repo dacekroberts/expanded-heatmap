@@ -18,11 +18,15 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline.residence import flag_home_based, report  # noqa: E402
 from pipeline.san_diego.config import (  # noqa: E402
     BUSINESSES_RAW_CSV,
     BUSINESSES_CLEAN_CSV,
+    BUSINESSES_PREFILTER_CSV,
     CITY_KEEP,
+    PARCEL_RESIDENCE_CSV,
     SAN_DIEGO_BBOX,
+    SOLE_OWNERSHIP_TYPE,
     TAXONOMY_SYSTEM,
     RAW_CLASSIFICATION_COLUMN,
 )
@@ -96,6 +100,50 @@ def main():
 
     df = df.reset_index(drop=True)
     df["record_id"] = df.index.astype(str)
+
+    # The unfiltered population, written before the filter below so
+    # fetch_parcel_residence.py always has the full set to look up (see
+    # config.BUSINESSES_PREFILTER_CSV).
+    BUSINESSES_PREFILTER_CSV.parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(BUSINESSES_PREFILTER_CSV, index=False)
+
+    # --- Home-based businesses, against SanGIS's own classification ----------
+    # This city had NO residence signal before: its address_suite holds bare
+    # values ("A", "101") with no APT/STE token, so its old 0.03% reading was a
+    # measurement gap rather than a clean result.
+    #
+    # Four conditions, the most conservative filter of the three cities that
+    # needed one: a person-like displayed name, a sole proprietorship in the
+    # registry's own ownership_type, a single-family parcel, and owner
+    # occupancy. `asr_landuse` 17 (condominium) is deliberately not in
+    # PARCEL_RESIDENTIAL_CODES - see config.py, and pipeline/residence.py for
+    # why land use alone is not a signal.
+    if PARCEL_RESIDENCE_CSV.exists():
+        before = len(df)
+        parcels = pd.read_csv(PARCEL_RESIDENCE_CSV, dtype=str)
+        m = df.merge(parcels, on="account_key", how="left")
+        looked_up = m["n_parcels"].notna()
+        matched = pd.to_numeric(m["n_parcels"], errors="coerce").fillna(0) > 0
+        print(f"Parcel lookups available for {int(looked_up.sum()):,} "
+              f"person-like rows; {int(matched.sum()):,} matched a parcel "
+              f"({100 * matched.sum() / max(int(looked_up.sum()), 1):.1f}%)")
+
+        at_home = flag_home_based(
+            m["business_name"],
+            residential=m["all_residential"].eq("true"),
+            owner_occupied=m["all_owner_occupied"].eq("true"),
+            individual=m["ownership_type"].fillna("").str.strip()
+                        .eq(SOLE_OWNERSHIP_TYPE),
+        )
+        report("person-like name + sole proprietorship + single-family parcel "
+               "+ owner-occupied", at_home, before,
+               extra={"NAICS": m["naics"], "land_uses": m["land_uses"]})
+        df = df[~at_home.reindex(df.index, fill_value=False)].reset_index(drop=True)
+        df["record_id"] = df.index.astype(str)
+    else:
+        print(f"NOTE: no {PARCEL_RESIDENCE_CSV.name}, so the home-business "
+              f"filter did NOT run. Build it with "
+              f"pipeline/san_diego/fetch_parcel_residence.py, then re-run.")
 
     BUSINESSES_CLEAN_CSV.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(BUSINESSES_CLEAN_CSV, index=False)

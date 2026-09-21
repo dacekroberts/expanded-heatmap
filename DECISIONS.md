@@ -14,6 +14,56 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Los Angeles filtered; two of my own bugs, and a WAF block
+
+- **Los Angeles: 1,252 pins removed** (61,208 -> 59,956, 2.05%), the largest of
+  the three. NAICS 453990 misc retail (120), 452000 general merchandise (87),
+  812112 beauty (86), 812111 barber (75), 812190 other personal care (72).
+  Lookup coverage 99.9%, zero request failures.
+- **Bug 1: a buffer changed the question, not just the coverage.** An exact
+  point-in-parcel test matches only 49% of LA's pins, because the 9% of
+  coordinates recovered by Census geocoding land on street centrelines. I
+  buffered to 25 m to fix that - but a buffer returns SEVERAL parcels, and
+  requiring all of them to be owner-occupied means one rented neighbour clears
+  a genuine home. It removed **95** rows where the exact test implied ~1,000.
+  Corrected to use the containing parcel where there is one (8,433 pins) and
+  the buffer only otherwise (6,474), which is 1,252. **Caught only because the
+  sample measurement and the implementation disagreed tenfold** - which is the
+  argument for measuring before building, not after.
+- **Bug 2: the fetcher read its own consumer's output.** It loaded step 3's
+  filtered file, so the cache would have omitted the rows already removed and
+  they would have silently returned on the next run. Step 3 now always writes
+  an unfiltered `businesses_geocoded_prefilter.csv` that the fetcher reads, so
+  the two cannot get out of order whatever someone runs first. Same pattern
+  added to San Diego.
+- **A real bug in `scripts/check_personal_exposure.py`, corrected.** Its
+  residential/commercial unit lists contradicted their own source write-up,
+  `docs/passover_name_filtering_skill.md`, on three designators: FL/FLOOR and
+  RM/ROOM were residential here and commercial there, and SPC was reversed. An
+  office floor is not a dwelling, so **every city's residential share was
+  overstated in the same direction**. Corrected shares: LA 5.81%, SF 1.55%,
+  Chicago 0.20%, NY 0.09%, San Diego 0.04%, Philadelphia 0.00%. A bare `LOT`
+  is deliberately NOT adopted as residential despite the source listing it: in
+  these registries it is at least as likely to be a parking lot, and it could
+  not be verified either way, so adopting it would trade a known error for an
+  unknown one.
+- **San Diego: blocked by SANDAG's WAF, and nothing was shipped.** An 8-worker
+  run drew HTTP 403 from an Azure Application Gateway after ~750 requests. The
+  lookup swallowed every exception alike, so it reported "1,706 failures"
+  rather than "we are blocked", and wrote a 757-row cache covering 31% of the
+  population. **That cache was discarded rather than used**: a filter built on
+  it would have removed home businesses only where the lookup happened to
+  succeed - the same partial-coverage error already rejected for San
+  Francisco's 43.8% address join. The fetcher now treats 403/429 as their own
+  signal, defaults to 2 workers with a delay, and aborts after 25 refusals
+  writing nothing. San Diego's map is unchanged and its filter is inert until
+  a complete lookup exists.
+- **Still outstanding: the apartment population.** The parcel filters catch
+  people at *houses*. A person-like name at an APT/UNIT address in a
+  multi-family building is a different population the single-family test
+  cannot reach, and after the parcel filters it is still 844 pins in Los
+  Angeles (5.81%) and 194 in San Francisco (1.55%).
+
 ### 2026-09-21 - Home-business filters built, starting with San Francisco
 
 - **Decided to fix the already-mapped cities before adding Boston**, at the
