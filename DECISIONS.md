@@ -14,6 +14,67 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Staying on Streamlit, and theming it as one palette
+
+- **Decision: keep Streamlit.** The question was raised because a theme
+  implementation was wanted and Streamlit looked like the obstacle - the
+  page-level dark mode has been deferred in `PLAN.md` precisely because of it.
+  Three things settled it:
+  - The handoff's item 1, which it marks as *tested rather than assumed*:
+    separate `[theme.light]` and `[theme.dark]` blocks keep Streamlit's own
+    toggle. So an explicit theme does NOT force the site dark-only, which was
+    the assumed penalty.
+  - The biggest trap the handoff names - "a light Folium map on a slate page is
+    a white box" - is already solved here. The maps carry their own theme and
+    share one `localStorage` key.
+  - Three of its seven implementation notes are already closed in this project
+    (the `st.components.v1.html` migration, the `streamlit>=1.64,<2` bound, and
+    the map-iframe problem above).
+- **Rejected for now: replacing Streamlit with a static site.** Measured
+  coupling is small - `app/` is 693 lines including comments, the API surface
+  is `st.iframe`/`markdown`/`title`/`page_link`/`switch_page`/`pydeck_chart`,
+  and the pipeline imports Streamlit zero times. The maps are pre-rendered
+  standalone HTML and were tested all session on a plain `http.server` with no
+  Streamlit running. So the rewrite is feasible and its only real work is the
+  pydeck macro map. It was rejected because **it is not required for the
+  theme**, and because the dependency runs one way only - the app reads
+  `outputs/`, `outputs/` depends on nothing - so going static later costs
+  exactly what going static now costs. No lock-in was accepted by deciding
+  this way.
+- **The evidence that redirected the work.** Rendering the candidate palette on
+  New York and comparing it against the current one from an identical view
+  showed the difference is confined to the legend, buttons, controls and the
+  background strip. The map body is essentially unchanged, for structural
+  reasons: the dark basemap comes from a CSS filter
+  (`invert(1) hue-rotate(180deg)`) that no `--dm-*` variable touches, and the
+  pin and line colours are fixed category values deliberately outside the
+  theme. The eleven variables drive roughly 15% of a city page's pixels.
+  **So a map-chrome reskin on its own is not worth doing**, and the payoff is
+  page-level - which is the tier that needs Streamlit.
+- **Therefore: one palette, landed together.** `.streamlit/config.toml` with
+  both light and dark blocks, and the map's `--dm-*` values swapped to the
+  matching slate values in the same change. An earlier framing offered "map
+  palette now, or wait for the page" as a choice; that was wrong. The handoff
+  supplies both sets from a single palette, `#0B1220` page against `#131C2E`
+  surface is a designed relationship, and the map surface can only be judged
+  against the page behind it. Page first, so there is something to match.
+- **Two deviations from the handoff, both measured rather than preferred:**
+  - **Keep our teal accent `#5eead4`** (12.7:1 on the new page) rather than its
+    `#4C9AFF`, which the file itself calls a placeholder that "reads as another
+    project's look".
+  - **Do not use `#4A5A78` for `--dm-disabled-text`** - it measures 2.7:1 on
+    page and 2.5:1 on surface, below the 3:1 non-text floor. It is one of the
+    four values the file marked "(suggested)" rather than designed, so its own
+    caveat flagged the right one. The preview used `#5A6B8C`.
+  - Every contrast figure the handoff states was recomputed and matched to the
+    stated decimal, which is why its untested palette was trusted this far.
+- **Still to decide when this is built:** whether to follow the visitor's
+  system theme (`prefers-color-scheme`) with a manual override winning once
+  used, which the handoff reports as implemented and verified elsewhere. This
+  project is manual-only today. Its trap comes free with it: devtools
+  colour-scheme emulation updates `matchMedia().matches` without dispatching
+  `change` inside an iframe, so it cannot be tested that way.
+
 ### 2026-09-21 - Three fixes from a scoped verify, and a measurement lesson
 
 - **The legend breakpoint was broken on a wide load - my bug, found by the

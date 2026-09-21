@@ -32,11 +32,30 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   gap is closed with a "Cities" dropdown on each city map (2026-09-21). Open: the
   final go/no-go. To revert, set `MAP_ONLY_NAV = False` in
   `app/cities.py`.
-- [ ] **Dark Mode, remaining part: the surrounding Streamlit page** (background,
-  text, switcher, sidebar). City maps and the macro map are done and share one
-  stored choice (see `DECISIONS.md`). Deferred while a custom theme for the page
-  is considered; a page-level toggle would also need to follow that stored
-  choice. Notes: `docs/dark_mode_handoff.md`.
+- [ ] **Midnight slate theme: the Streamlit page AND the map palette, as one
+  change.** No longer deferred - the blocker was the assumption that an
+  explicit theme forces the site dark-only, and `docs/midnight_slate_theme_handoff.md`
+  reports (tested) that separate `[theme.light]`/`[theme.dark]` blocks keep the
+  toggle. Decided 2026-09-21 to stay on Streamlit rather than go static; see
+  `DECISIONS.md` for why, and for the measurement showing a map-chrome reskin
+  alone is not worth doing (it is ~15% of a city page's pixels; the tiles are
+  filtered and the data colours are fixed, so no `--dm-*` variable touches
+  them).
+  - Page first: `.streamlit/config.toml` with both light and dark blocks, then
+    the map's eleven `--dm-*` values swapped to match, verified against the
+    page behind them.
+  - Keep the teal accent `#5eead4`; do NOT use the handoff's `#4A5A78` for
+    `--dm-disabled-text` (2.7:1, below the 3:1 floor).
+  - The real work is hardcoded colours outside `config.toml` - the handoff
+    measured a label at 1.01:1 and icons at 2.77:1 doing this once. Grep
+    `app/components.py` and the pages for hex, `rgba`, `white`, `#fff`, and
+    check contrast numerically, not by eye. Light-mode values in
+    `map_common.py` are hardcoded too (`background: #fff; color: #1c2b2a`) and
+    need lifting into variables if the light look changes.
+  - Decide whether to follow `prefers-color-scheme` with a manual override
+    winning once used (currently manual-only).
+  - Reconcile `docs/dark_mode_handoff.md` with the midnight-slate handoff into
+    one document rather than keeping two overlapping ones.
 
 ## Next cities, in ease order
 
