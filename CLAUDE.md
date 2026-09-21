@@ -6,6 +6,11 @@ architecture, current state, lessons). `PLAN.md` is the open work,
 `DECISIONS.md` the append-only reasoning trail, `docs/city_shortlist.md`
 the city research.
 
+**Adding a city in a country this project has never built in? Start with
+`add-country`** (`.claude/skills/add-country/`) - the national facts that
+disqualify every city at once, profiled once instead of per city. Canada is the
+worked example; `docs/canada_retrospective.md` is what it cost.
+
 **Adding a city? Use the `add-city` skill** (`.claude/skills/add-city/`) -
 the process the built cities actually followed - and the `scaffold-city` skill
 (`scripts/scaffold_city.py`) to generate its config, map script, page and
