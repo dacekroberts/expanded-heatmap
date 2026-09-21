@@ -257,8 +257,51 @@ Cities built and running end to end (pipeline, map, app page):
   rather than merely counted, which is why a Census TIGERweb layer is
   downloaded alongside the District's own boundary.
 
+- **Vancouver (Regional)** - TransLink SkyTrain: the Expo, Millennium and
+  Canada Lines. **The first city outside the United States, and the first
+  built from two municipalities' own registries.** Distinctive in five ways.
+
+  It is **regional by choice, covering Vancouver AND Surrey**, because SkyTrain
+  is regional and Surrey has no rail of its own. Miami is the precedent but the
+  easy version of it: Miami-Dade licenses all 34 of its municipalities in one
+  file, whereas Vancouver and Surrey are two publishers, two schemas and two
+  licences. So the taxonomy dispatches on a `source` column, as New York's and
+  Boston's do - but with **no cross-source dedup**, because the two registries
+  cover disjoint municipalities and no premises can appear in both.
+
+  Its **classification is two vocabularies at once**: Vancouver's 89
+  single-valued `businesstype` values and Surrey's 210 `BusinessCategory`
+  values, which are **newline-separated with several per licence**, so a
+  premises holding more than one is resolved by `BUCKET_PRIORITY`. Buckets are
+  anchored on `naics.py` rather than invented, which is what keeps this city
+  comparable with the five NAICS cities.
+
+  It is the only city whose **registry marks individual registrants itself**:
+  Vancouver wraps a sole proprietor's own name in parentheses. That is a
+  structural signal of D.C.'s `ENTITYTYPE` kind, and it is what the
+  name-suppression policy runs on - where a licence has no trade name and the
+  legal name reads as a person, the pin shows its business type instead.
+
+  Its **residence filter was built and removes nothing**, which is a measured
+  result: the parcel-to-zoning join works, but the pairing it exists for leaves
+  one row and that row is a false positive. Zoning alone is unusable there
+  because Vancouver has real corner shops on residentially-zoned land. Surrey
+  needs no inference at all - it **states home occupation on the licence**,
+  which is better evidence than any US city's parcel join, and that is half its
+  register.
+
+  And it is the **first city to add more than one required notice**: OGL -
+  Vancouver, OGL - Surrey (whose wordings are not interchangeable) and
+  TransLink's Legend, which has to be the GTFS text rather than the Open API
+  one. Its boundary layer also has a **hole at Stanley Park**, so the boundary
+  is a check rather than a filter.
+
 Next by ease ranking: New Orleans and Seattle, both needing decisions before
-code - a streetcar-only scope question and a multi-municipality build.
+code - a streetcar-only scope question and a multi-municipality build. For
+Canada, **re-rank the remaining four cities on storefront counts before
+choosing one** - the published ranking counted every mappable licence for five
+of the six and only storefronts for Toronto, so it is not internally
+comparable (see `PLAN.md`).
 **Check a candidate's registry actually covers all three buckets before
 assuming one source is enough** - that assumption failed for New York, and in
 Philadelphia a whole bucket had no source at any level of government. See

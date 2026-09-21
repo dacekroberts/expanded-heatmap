@@ -307,6 +307,96 @@ means selling goods over a counter, so Retail is right — but they are why the
 premises dedup matters here: 121 licensees hold exactly those first and third
 plus Patent Medicine, which is one corner shop and not three businesses.
 
+### Vancouver and Surrey - mobile trade, a regional catch-all, and two cities of offices
+
+The first regional pair here, and the first non-US entry. Vancouver's register
+carries **89** business types that reach the map; Surrey's carries **210**
+categories, newline-separated, several per licence. Every one of the 299 has an
+explicit verdict in `pipeline/taxonomies/vancouver.py`, which **raises** on an
+unknown value rather than defaulting to None. Buckets were anchored on
+`naics.py` (Retail 44-45 less 454, Food service 722, Personal services 812 less
+81293) so this city stays comparable with the five NAICS cities instead of
+drawing its own line.
+
+**Mobile trade is not a storefront.** Vancouver's `Street Vendor` (116 mappable
+rows) and Surrey's `Portable Food Vendor` (9), `Catering/Coffee Truck` (3),
+`Vending Machine` (40), `Mail Order` (24), `Pedlar` and `Ice Cream Vendor` are
+excluded, on the same reasoning as the project-wide NAICS 454 exclusion above:
+NAICS itself calls these "nonstore". Street Vendor is the largest single
+row-count given up to that consistency, and the category is genuinely mixed -
+Vancouver licenses food carts and merchandise vendors under one label with no
+subtype to separate them.
+
+**Surrey's catch-all is a regional permission, not a premises.**
+`Inter-Municipal Business License Metro` (758) and `Inter-Municipal Business
+License FV` (715) are **1,473 rows, 11.3% of Surrey's commercial licences**.
+An IMBL lets a business trade ACROSS Metro Vancouver or the Fraser Valley and
+is held mostly by contractors; the address on one is the holder's base, not a
+shop. Chicago's "Limited Business License" is the same problem, excluded the
+same way.
+
+**Home occupations are excluded, and Surrey states them outright.** Surrey's
+`LicenseType` reads `Home Occupation` on **14,015 of 27,082 rows (51.8%)**, and
+those never enter the pipeline. This is the strongest home-business evidence
+anywhere in this project, because the city asserts it rather than the pipeline
+inferring it - contrast every US city, which infers it from a parcel join.
+Vancouver publishes no equivalent flag, and its parcel-based substitute removes
+nothing (see "Honest limits").
+
+**Repair is excluded; personal care is not.** NAICS puts repair in 811 and
+personal care in 812, and only 812 is a bucket here, so **a hairdresser counts
+and a shoe repairer does not**. Out: Surrey's `Tailor`, `Dressmaker`,
+`Upholstery`, `Locksmith`, `Sharpening Service`, `Repair Service`,
+`Automotive Repair Service`, `Auto Body/Painting`,
+`Automobile Cleaning/Car Wash/Detailing`; and Vancouver's
+`General Repair and Maintenance` and
+`Vehicle Repair Detailing and Washing Services`. This is the least intuitive
+line on this page, and it is applied consistently to both cities.
+
+**Offices, clinics and professional practice are the bulk of both registers.**
+Vancouver's single largest category is `Health Care Professionals and Services`
+at **4,544** mappable rows, with `Legal Services` (1,796),
+`Business Support Services` (993), `Financial Services` (858),
+`Consulting and Management Services` (797) and `Real Estate Services` (678)
+adding most of the rest. Surrey's `Professional Practitioner-*` series,
+`Administration Office`, `Consultant`, `Immigration Consultant` and its
+headcount-banded `Real Estate` types are the same shape. Also excluded, as in
+every city here: `Long-term Rental` (3,451 in Vancouver - the Philadelphia
+`Rental` shape), wholesale, manufacturing, warehousing, construction trades,
+education, `Fitness Centre` and the arts/recreation and accommodation groups,
+and `Parking Area / Garage` (423) and Surrey's `Parking Lot` (103) under the
+project-wide NAICS 81293 exclusion.
+
+Four smaller calls worth naming, because each could reasonably have gone the
+other way:
+
+- **BC-regulated health professions are health care; unregulated body-care is a
+  personal service.** Surrey's `Massage Therapy (RMT)` (155) and `Acupuncture`
+  (56) are regulated professions in British Columbia and are excluded with the
+  clinicians. `Holistic Health Care` (58), `Reflexology` (4), `Acupressure`
+  (3), `Shiatsu Massage` (2), `Tanning Salon` (10) and `Tattoo Parlour` (13)
+  are not regulated, read as NAICS 812199, and count. **Vancouver draws the
+  same line itself**, between `Health Care Professionals and Services` and
+  `Health Enhancement Services` (111, kept), which is why the rule is the
+  registries' rather than this project's invention.
+- **A funeral parlour counts; a cemetery does not.** Both are NAICS 812, so the
+  prefix alone would keep both. Surrey's `Funeral Parlour` (4) is a walk-in
+  commercial premises; `Cemetery` (2) is land. A deliberate departure from the
+  prefix, on storefront grounds.
+- **Licence applications are not businesses.** Vancouver's
+  `Liquor License Application` (50), `Temp Liquor Licence Amendment` (30) and
+  `Cannabis Licence Application` (1) are administrative rows, not premises.
+- **`Printing Imaging and Photo Services` (80) is the least comfortable
+  exclusion here.** It spans NAICS 323 printing (manufacturing) and 812921
+  photofinishing (a personal service), and the label leads with the
+  manufacturing reading. Left out rather than split on a guess; worth revisiting
+  if the City ever publishes a subtype for it.
+
+**A category that is mostly individuals is a scope error first**, and both
+cities' exclusions were justified that way before any privacy argument -
+consistent with how Los Angeles' and Philadelphia's were framed. Vancouver's
+name-suppression policy is separate and is described under "Honest limits".
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found
@@ -339,6 +429,24 @@ The practical effect is that New York's Retail category is thinner than its
 Food service one, and thinner than Retail in the other four cities, which draw
 on registries that cover all trades. **Read the balance between categories in
 New York as a fact about the city's licensing, not about its high streets.**
+
+**Vancouver loses about half its register to missing coordinates, and no
+geocoder exists to recover it.** Of 58,346 current-year Issued licences, only
+29,660 carry coordinates. Most of the remainder is categories excluded anyway -
+long-term and short-term rentals, general and trade contractors, consulting,
+which between them account for 20,915 of the unmappable rows - but **1,583 rows
+have a real street address and no coordinates**, and they are simply absent.
+There is no Canadian equivalent of the US Census bulk geocoder, which is what
+recovers those rows in Los Angeles and Washington D.C. Vancouver does publish a
+`property-addresses` layer that could serve the same purpose, but it has never
+been match-tested, so the loss is recorded rather than quietly closed. A row
+missing coordinates is not automatically a row needing geocoding.
+
+**Surrey's four stations reach much less of their city than Vancouver's twenty
+do**, and that is geography rather than data. 15% of Surrey's storefronts fall
+within the outer ring, against 51% in Vancouver, because Surrey's commerce sits
+along arterial roads the SkyTrain does not follow. Read the two cities on that
+map as two measurements sharing a frame, not one continuous surface.
 
 **Philadelphia is the same problem one step further: a whole category is
 missing.** New York's four registries at least covered all three — its Retail
@@ -397,7 +505,35 @@ revisiting it: a city-wide survey.
 - Whether a name belongs to a person is judged by pattern, not verified. The
   test spots "Jane Smith" and misses "J Smith Consulting", and it cannot
   distinguish a sole trader legitimately named after themselves from a
-  registrant sitting at home.
+  registrant sitting at home. **Vancouver is the exception**, and the only city
+  where the registry answers this itself: it wraps a sole proprietor's own name
+  in PARENTHESES - "(Qi Liu)" - so the primary signal there is the City's own
+  marking rather than a guess. The pattern test is still run alongside it,
+  because each catches people the other misses: the parentheses find 63
+  storefront rows the pattern misses, mostly three-part and non-Anglo names,
+  and the pattern finds about 10 registrants who did not use parentheses.
+  **88 pins across Vancouver and Surrey display their business type instead of
+  a name.** No pin shows a name the pipeline substituted for a missing trade
+  name.
+- **Vancouver's residence filter finds nothing, and that is a measurement
+  rather than a gap.** Its two-hop parcel join (business point to parcel to the
+  tax roll's zoning) places 99.9% of points and reaches a zoning class for
+  99.7%, but the pairing it exists for - residential zoning AND a substituted
+  personal name - leaves **one row**, and that row is a false positive: a real
+  corner grocery whose name reads as a surname plus a word. Zoning alone is
+  deliberately NOT used, because the 146 residentially-zoned storefronts there
+  are Restaurant 32, Limited Service Food 29, Retail Dealer 23 and so on -
+  Vancouver's legal non-conforming corner shops and neighbourhood restaurants,
+  which a zoning filter would delete wholesale. The join is kept because it is
+  what justifies not filtering.
+- **Vancouver's unit designators cannot indicate a residence at all**, so the
+  usual APT/UNIT proxy must not be read there. The city uses "Unit" generically
+  for commercial suites: 12,803 of 29,660 mappable rows say `Unit` against
+  **two** that say `Apt`. `scripts/check_personal_exposure.py` therefore
+  reports a 6.73% "person-like name at a residential unit" figure for Vancouver
+  that is an artifact of the city's conventions - San Diego's measurement gap
+  inverted, a false high rather than a false low. The zoning measure above is
+  the one its verdict rests on.
 - A residential address is inferred from indicators like "APT" or a space
   number. It is a proxy. In San Diego it cannot be measured at all: that
   registry stores unit values as bare numbers with no label, so the text gives

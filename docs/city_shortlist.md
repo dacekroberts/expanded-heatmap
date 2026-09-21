@@ -100,7 +100,7 @@ Mobility Database catalogue, counting route_type 0/1/5/7/12 and **excluding 2
 | City | Rail | Business data | Cost to build |
 |---|---|---|---|
 | **Montreal** | Metro, 4 lines | `locaux-commerciaux`: 28,621 surveyed premises, 100% coords, `SCIAN` (NAICS) 99.6%, trade name 100%, vacancy flag. CC-BY 4.0 | Lowest - may need **no new taxonomy module**, since SCIAN 72/44+45/81 are the prefixes `naics.py` already uses |
-| **Vancouver** | SkyTrain, 3 lines | `business-licences`: 205,943 rows, `geo_point_2d`, `businesstype`/`businesssubtype`, legal + trade name. OGL-Vancouver | Low - needs a local taxonomy module |
+| **Vancouver - BUILT 2026-09-21, regionally with Surrey** | SkyTrain, 3 lines | `business-licences`: 205,943 rows, `geo_point_2d`, `businesstype`/`businesssubtype`, legal + trade name. OGL-Vancouver | Low - needs a local taxonomy module |
 | **Calgary** | CTrain, 2 lines | `vdjc-pybd`: `point`, `tradename`, `licencetypes`, `jobstatusdesc`, and **`homeoccind`** - a home-occupation flag handed over directly, as Chicago's `business_activity` is | Low |
 | **Edmonton** | LRT, 3 lines | `qhi4-bdpu`: `latitude`/`longitude`, `business_licence_category`, `business_name` | Low |
 | **Toronto** | 17 rail routes | 159,872 rows, `Category`, `Operating Name` - but **no coordinates at all** | **Highest.** Needs a geocoding pass like D.C.; licence field reads "not specified" so the terms must be read; and `Client Name` is a person or company, so LA's privacy discipline applies from the start |
