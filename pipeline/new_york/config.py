@@ -202,7 +202,14 @@ LINE_NAMES = {
     "crosstown": ("Crosstown (G)", "#799534"),
     "canarsie":  ("14 St-Canarsie (L)", "#7C858C"),
     "shuttles":  ("Shuttles (S)", "#A7ADB2"),
-    "sir":       ("Staten Island Railway", "#08179C"),
+    # SIR is the one line NOT using the MTA's own colour. Theirs is #08179C, a
+    # navy so dark (L* ~17) that the on-map label - which takes the line's
+    # colour - is hard to read on the light basemap and nearly invisible in
+    # dark mode. Lightened within the same navy family so it still reads as
+    # SIR, and kept violet enough not to be confused with 8 Av's azure
+    # (#0062CF); the two never appear near each other anyway, Staten Island
+    # being its own separate system.
+    "sir":       ("Staten Island Railway", "#4358D4"),
 }
 
 # Which end of each trunk carries its label; None = automatic (the end farthest

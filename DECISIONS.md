@@ -14,6 +14,27 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Staten Island Railway drawn in a lighter blue than the MTA's own
+
+- **The one line on any city map not using its agency's official colour.**
+  Every other New York trunk uses the MTA's `route_color` from the feed, which
+  is the project's rule because those colours are unambiguous and what riders
+  recognise. SIR's is `#08179C`, a navy at roughly L* 17. Because a line's
+  permanent on-map label takes the line's own colour, that made the "Staten
+  Island Railway" label hard to read on the light basemap and nearly invisible
+  in dark mode, where the basemap inverts and the label does not.
+- **Changed to `#4358D4`**, lightened within the same navy family so it still
+  reads as SIR rather than becoming a different line. Kept violet enough to
+  separate from 8 Av's azure `#0062CF` in the legend, where the two sit near
+  each other; on the map itself they never appear together, Staten Island being
+  a physically separate system. Checked rendered in both themes before
+  committing.
+- Alternatives considered and rejected: giving the label its own colour
+  independent of the line (keeps MTA's navy authentic, but adds a second
+  colour concept to `map_common.py` for one line), and moving SIR to a
+  distinct hue such as teal (too close to the Personal services bucket's
+  `#1baf7a`).
+
 ### 2026-09-21 - Map files cut ~28% by removing emitted waste, not content
 
 - **Every city's map shrank, and no city lost anything from it.** New York's
