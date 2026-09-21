@@ -84,7 +84,7 @@ than a fact to discover during one.
 |---|---|---|---|
 | **Spain** | **MEASURED** — Barcelona's 68,024-premises ground-floor census | **MEASURED** — Madrid subway 13, Barcelona FGC subway 4 + funicular 3, plus Bilbao, Málaga, Valencia, Sevilla: **six metro cities, more than any other candidate** | **The licence.** Open Data Barcelona's terms have not been read. That is the only gap, and it is one document |
 | **Mexico** | **MEASURED** — DENUE, 6M+ establishments, coordinates, **SCIAN = NAICS** so the taxonomy may transfer | **Partial** — Guadalajara LRT 3 measured and current; **Mexico City unreachable** (S3 403, city portal refuses connections) | A working CDMX feed. Viable through Guadalajara regardless |
-| **South Korea** | **MEASURED** — 195 municipal permit types, KOGL Type 1 | **Nothing** — zero feeds in the catalogue | Everything rests on whether the national transport source serves something readable |
+| **South Korea** | **MEASURED** — 195 permit types nationally; at Seoul scope they resolve into **separate per-category registers**, so this is a multi-source city. Food service has a direct file; Personal services exists; **Retail not yet located** | **MEASURED via Seoul** — `data.go.kr` is unreachable, but `data.seoul.go.kr` serves lines 1–9 station data, updated 2026-09-22, **Open API with a free key** (WMATA's gate) | A free API key, and the Retail bucket |
 
 **Spain overtook Mexico this round.** Its business leg was already the
 Montréal model and its rail leg is now the deepest measured anywhere in this
@@ -520,6 +520,47 @@ best structural match to what this project already does.
 **ASSERTED:** that coordinates are published in EPSG:5174 (Korea Central Belt
 TM). This came from documentation of the *closed* system. The project would
 reproject to per-city UTM regardless — Seoul ≈ 127°E is UTM 52N, EPSG:32652.
+
+#### Seoul's own portal, probed 2026-09-21 — the route around the blocker
+
+With `data.go.kr` unreachable, **`data.seoul.go.kr` answers 200** and carries
+both legs. MEASURED:
+
+| | |
+|---|---|
+| Catalogue size | **8,258 datasets** (6,479 data, 1,779 statistics) |
+| Direct file downloads | **1,179** carry a `FILE` tab; 5,646 offer `OPENAPI` |
+| Freshness | The licensing datasets were updated **2026-09-21**; the subway dataset **2026-09-22** |
+| Publisher | Seoul Metropolitan Government, © *Some Rights Reserved* |
+
+**Transit — exists, but API-gated.** `서울교통공사_노선별 지하철역 정보`
+(Seoul Transportation Corporation, stations by line, `OA-15442`) covers **lines
+1–8 plus line 9 stages 2–3**, published 2018 and updated 2026-09-22. Its file
+tab reads **파일이 없습니다** — *no file* — so it is **Open API only, with a
+free key**. That is WMATA's gate exactly, which this project has cleared once
+before. Note the scope: Seoul Transportation Corporation runs lines 1–9, not
+the Korail and Shinbundang lines that also serve the metropolitan network.
+
+**Business — present, and it is a MULTI-SOURCE city.** The national "195 permit
+types" resolve at city level into separate per-category datasets, not one
+register:
+
+- `서울시 식품위생업소 현황` — food service premises, **and it has a `FILE`
+  tab**, the one bucket that is directly downloadable
+- `서울시 공중위생업소 현황` — 이·미용 (hair and beauty), 숙박 (lodging),
+  목욕업 (bath houses): **the Personal services bucket**
+- `서울시 위생처리업`, `세척제 제조업`, `기타 위생용품 제조업`, `대부업체`
+  and others
+
+**So Seoul is Boston's and New York's shape, not Vancouver's** — coverage has
+to be assembled from several registers via `multi-source-city`, and **the
+Retail bucket has not yet been located**. `상권` (commercial district) is a
+top-ten search term on the portal and is the obvious place to look next.
+
+**Two corrections to the earlier Tier 2 entry.** Korea was recorded as having
+"the ideal single-register shape"; at the scope this project actually works at,
+it is multi-source. And its transit leg is reachable but key-gated rather than
+absent.
 
 ### Spain / Barcelona — the strongest single city
 
