@@ -82,12 +82,26 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   the model. (`nyc_dca` was retired rather than filled - see `DECISIONS.md`,
   2026-09-21. Check Philadelphia's registry actually covers all three buckets
   before assuming one source is enough; that assumption failed for New York.)
-- [ ] **Record each data source's licence and terms of use** in the new
-  `docs/data_sources.md` (licence name, link, attribution requirement, whether
-  redistribution of derived data is permitted). Every source is a government
-  open-data portal, which is a reason to expect permissive terms, not evidence
-  of them. Separate from what is *appropriate* to publish, which is settled in
-  `docs/excluded_categories.md`.
+- [x] **Record each data source's licence and terms of use** - done
+  2026-09-21 in `docs/data_sources.md`, covering all 8 registries, all 5 GTFS
+  feeds, the boundary layers and the basemap. Permissive terms were NOT the
+  default they were expected to be. What came out of it:
+  - [ ] **Display the required notices before publishing.** Chicago, SFMTA and
+    LA Metro each require specific text; OSM's is already satisfied. Exact
+    wording is in that file under "Notices this project MUST display when
+    published". Part of the same app job as surfacing the two doc pages, and
+    it **blocks the public deploy** - publishing without them breaches terms
+    this project has now read.
+  - [ ] **Establish NYC Open Data's reuse position** - the one source whose
+    terms could not be established. It declares no licence and the general
+    nyc.gov terms reserve all rights. Needs a direct enquiry to NYC Open Data,
+    and it covers three datasets including New York's food-service backbone.
+  - [ ] **Decide whether LA Metro's GTFS terms permit what this project does.**
+    They forbid modifying the "Transport Information"; the project redraws its
+    rail alignment from `shapes.txt`. Tightest licence in the project.
+  - [ ] **Decide whether CTA's purpose limitation fits.** Its licence is for
+    assisting riders or promoting public transport; this is an analysis and
+    portfolio map.
 - [ ] **Find San Francisco's boundary-layer endpoint.** It is recorded nowhere,
   and the file is gitignored, so that city cannot currently be rebuilt from
   scratch (surfaced while writing `docs/data_sources.md`).

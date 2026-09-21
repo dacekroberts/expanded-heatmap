@@ -48,6 +48,19 @@ the process the built cities actually followed - and the `scaffold-city` skill
   and after any change to its step 2 or taxonomy, and record the verdict in
   `DECISIONS.md`. Catch-all classification codes are the usual culprit (Los
   Angeles excludes NAICS 812990 for this reason).
+- **Never remove the basemap attribution.** Every rendered map carries
+  `© OpenStreetMap contributors` linked to the OSM copyright page; ODbL 1.0
+  requires it to stay visible, not hidden behind UI or a toggle. Changing tile
+  provider swaps that attribution for the new provider's - it never just
+  disappears. Three other sources also require specific notices once the site
+  is public (Chicago, SFMTA, LA Metro): the exact wording is in
+  `docs/data_sources.md`, "Notices this project MUST display when published",
+  and those are obligations rather than courtesies.
+- **Record a new data source's licence when you add it**, in
+  `docs/data_sources.md`. A government open-data portal is a reason to expect
+  permissive terms, not evidence of them: LA Metro's GTFS forbids modifying its
+  data while LA's business registry is CC0, and New York City's datasets
+  declare no licence at all.
 - **Ridership and deep analysis are out of scope** until asked (see
   `docs/project_context.md`). Flag scope additions rather than building
   them.

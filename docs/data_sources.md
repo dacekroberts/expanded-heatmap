@@ -120,21 +120,54 @@ San Diego's terms carry a strong disclaimer worth knowing about: the data is
 the information contained in the Data is accurate, true or correct", and the
 user indemnifies the city for claims arising from their use of it.
 
-### Licence not declared, or terms not retrievable — NOT established
+### Permissive on reading the terms themselves
 
-| Source | What it declares | Status |
-|---|---|---|
-| Chicago businesses (`r5kz-chrr`), Chicago boundary (`qqq8-j68g`) | `licenseId: SEE_TERMS_OF_USE`, attribution "City of Chicago" | The referenced terms page (`chicago.gov/.../data_disclaimer.html`) returns **403** to an automated request. **Needs a manual read in a browser.** |
-| NYC DOHMH (`43nn-pn8j`), NYC DCWP (`w7w3-xahh`), NYC boroughs (`gthc-hcne`) | **No `license` field at all.** Attribution names the agency | NYC Open Data publishes no dataset-level licence, and the general nyc.gov Terms of Use does not address dataset reuse, so **no explicit grant of reuse rights was found**. Governed in practice by NYC's Open Data Law (Local Law 11 of 2012), which mandates publication but is not a licence. |
-| NYS retail food (`9a8c-vfzj`), NYS salons (`y3u4-jbgh`) | **No `license` field.** Attribution names the department | `data.ny.gov` points to an "OPEN-NY Terms Of Use" document (dataset `77gx-ii52`) whose text could not be retrieved automatically. **Needs a manual read.** |
-| All five GTFS feeds | not checked | **The largest remaining gap.** Line geometry from `shapes.txt` is redrawn in every map, so these terms matter. MTS, SFMTA, LA Metro (GitLab), CTA and MTA each need checking. |
-| US Census bulk geocoder | not checked | A US federal government work, but its terms page was not read. Used only to derive coordinates stored in this project's own outputs. |
+| Source | What its terms say |
+|---|---|
+| **NYS retail food (`9a8c-vfzj`), NYS salons (`y3u4-jbgh`)** | The datasets declare no licence field, but the portal's "OPEN-NY Terms of Use" (dataset `77gx-ii52`, last modified 2013-03-08) is explicit: "At their core, the OPEN-NY Terms of Service are among the least restrictive of any terms of service … The OPEN-NY Terms of Service do **not** contain restrictions requiring members of the public to use attribution, to re-post the license terms with any re-uses of the data, to impose share-alike or technical restrictions, nor require the public to obtain pre-approval before re-use of the data." And: "So long as you are not doing anything malicious with NYS data, you may use it as you wish, subject to no other requirements." Conditions: lawful use; the State may require you in writing to stop displaying its content if it believes you are in breach. |
+| **Chicago businesses (`r5kz-chrr`), Chicago boundary (`qqq8-j68g`)** | Reuse and derivative applications are contemplated, but **conditionally** — see the required notice below. The city "may require a user of this data to terminate any and all display, distribution or other use … for any reason", reserves all intellectual-property rights, and requires the user to indemnify it. |
 
-Note the shape of this: **the two cities whose terms are clearest (San
-Francisco, Los Angeles) are public-domain dedications, and the two newest
-sources (both New York State) declare nothing at all.** New York contributes
-four of the eight business registries and is the least certain of the five
-cities on this question.
+### Still not established
+
+| Source | Status |
+|---|---|
+| **NYC DOHMH (`43nn-pn8j`), NYC DCWP (`w7w3-xahh`), NYC boroughs (`gthc-hcne`)** | **The one genuinely open question.** These declare no licence field, NYC Open Data's only "Terms of use" link points at the general nyc.gov terms, and those terms are a website copyright notice that runs the other way: materials "displayed on NYC.gov … are the property of the City of New York. All rights are reserved." Publication is mandated by NYC's Open Data Law (Local Law 11 of 2012), which compels release but is not a licence grant. Whether US law treats these factual records as copyrightable at all is a legal question this project is not in a position to answer. **Resolve by asking NYC Open Data directly** (`opendata@cityofnewyork.us` route via their contact page) before publishing New York. |
+| **US Census bulk geocoder** | Terms page not read. A US federal government work, used only to derive coordinates stored in this project's own outputs. Low priority. |
+
+Note the shape of this. **The business registries are mostly permissive and the
+transit feeds are mostly not** — and the two are inverted within Los Angeles,
+whose business data is CC0 while its GTFS terms are the most restrictive of
+anything here. New York contributes four of the eight registries and is the
+only source whose reuse position could not be established at all.
+
+### Transit feeds (GTFS) — checked 2026-09-21
+
+Line geometry is redrawn from each feed's `shapes.txt` into every map, so these
+terms bear directly on what is published. No feed declares a licence in
+`feed_info.txt`; LA Metro's feed even includes a `feed_license` column and
+leaves it empty, pointing to its developer terms instead.
+
+| Agency | Redistribution | Attribution | Other conditions |
+|---|---|---|---|
+| **MTS** (San Diego) | Permitted: "non-exclusive, limited and revocable rights to use, reproduce, and redistribute" | Not required | MTS trademarks "may not be used in association with GTFS Data". As-is, no liability; may withdraw the data at any time |
+| **SFMTA** | Permitted: "use, reproduce, and redistribute" | **Required, in specific wording** (below) | Must also display liability disclaimers; no trademarks or logos without written permission |
+| **LA Metro** | **Restricted** — prohibits "unauthorized redistribution and publication" and requires you "not change, tamper, dismantle, augment, misrepresent or otherwise modify the Transport Information" | **Required** — must "acknowledge Metro as the provider of the Transport Information" and not claim ownership | No Metro trademark; must not "integrate Transport Information as part of any advertisement"; on termination you "shall immediately remove the Transport Information and all references to it" |
+| **CTA** | Permitted: "use, reproduce, distribute, display, process and create derivative works" | Optional but encouraged: "Data provided by Chicago Transit Authority", "Data provided by CTA" or "Powered by CTA data" | **Purpose-limited** — the licence is granted to "assist mass transit riders or promote public transportation"; may not sell CTA Data separate from the application; may not imply affiliation or endorsement |
+| **MTA** (New York) | "Our data feeds are free to use." No API key needed for the static subway feed | Not specified for the GTFS data | Logos, maps and symbols need a separate licence application (free of charge but must be applied for) |
+
+**Two of these need a judgment call rather than just a notice**, and both are
+recorded here rather than assumed away:
+
+- **LA Metro** forbids modifying the Transport Information, and this project
+  redraws its rail alignment from `shapes.txt` rather than reproducing the
+  feed. Whether redrawing geometry is "modifying" it or is an ordinary
+  derivative display is not obvious from the text. This is the tightest
+  licence in the project.
+- **CTA**'s licence is granted for assisting riders or promoting public
+  transport. This project maps commercial density around stations — adjacent
+  to that purpose, but it is an analysis and portfolio piece, not a rider
+  tool. Worth deciding deliberately rather than reading the clause
+  generously.
 
 ### Basemap tiles — one active compliance item
 
@@ -158,14 +191,72 @@ The maps render **OpenStreetMap** tiles, fetched directly from
   decision already open in `PLAN.md` as "tile provider"; it should be settled
   deliberately before launch rather than by default.
 
+## Notices this project MUST display when published
+
+This is the operative output of the licence review: three sources require
+specific text, and one of the three is already satisfied. These are
+obligations, not courtesies. They belong with the app work that surfaces this
+page and `excluded_categories.md` (see `PLAN.md`) — publishing the maps
+without them would breach terms this project has now read.
+
+**1. OpenStreetMap — required, and ALREADY SATISFIED.** ODbL 1.0 requires
+visible credit and a licence link, "not beneath UI, behind toggles, or
+off-screen". Every rendered map emits, in the map corner:
+
+> `© OpenStreetMap contributors` — linked to
+> `https://www.openstreetmap.org/copyright`
+
+This comes from Folium's default tile attribution and is present in every
+committed `heatmap.html`. **Do not remove or restyle it away.** If the tile
+provider ever changes, its own attribution replaces this one — it does not
+simply disappear.
+
+**2. City of Chicago — required, NOT YET DISPLAYED.** Chicago's Data Terms of
+Use require any "secondary or derivative application" to carry this disclaimer,
+verbatim, "at the site where the software application … can be accessed":
+
+> "This site provides applications using data that has been modified for use
+> from its original source, www.cityofchicago.org, the official website of the
+> City of Chicago. The City of Chicago makes no claims as to the content,
+> accuracy, timeliness, or completeness of any of the data provided at this
+> site. The data provided at this site is subject to change at any time. It is
+> understood that the data provided at this site is being used at one's own
+> risk."
+
+**3. SFMTA — required, NOT YET DISPLAYED.** Its transit-data licence requires
+derivative works to include:
+
+> "Reproduced with permission granted by the City and County of San Francisco.
+> The information has been provided by means of a nonexclusive, limited, and
+> revocable license granted by the City and County of San Francisco."
+
+**4. LA Metro — required, NOT YET DISPLAYED.** Must acknowledge Metro as the
+provider of the transit information and must not claim ownership of it. No
+exact wording is prescribed; "Rail alignment data provided by LA Metro" would
+meet the stated requirement.
+
+**5. CTA — encouraged, not required.** If credited, use one of CTA's own
+forms: "Data provided by Chicago Transit Authority", "Data provided by CTA",
+or "Powered by CTA data".
+
+Not required by anyone, but good practice and already partly done in the city
+pages' prose: naming each business registry's publishing agency.
+
 ### What closing this fully requires
 
-1. Read Chicago's data terms of use in a browser (403 to automated fetch).
-2. Read the Open NY Terms of Use document (`77gx-ii52`).
-3. Establish the reuse position for NYC Open Data, which declares no licence.
-4. Check the five GTFS feeds' terms — the biggest gap, and directly relevant
-   because line geometry is redrawn from them.
-5. Decide the tile provider deliberately.
+1. ~~Read Chicago's data terms of use~~ — **done 2026-09-21**, and it produced
+   a mandatory notice (above).
+2. ~~Read the Open NY Terms of Use document~~ — **done**, explicitly permissive.
+3. **Establish the reuse position for NYC Open Data**, which declares no
+   licence and whose general terms reserve all rights. Needs a direct enquiry.
+   **The one remaining substantive unknown.**
+4. ~~Check the five GTFS feeds' terms~~ — **done**, and three of the five carry
+   conditions worth acting on.
+5. **Display the required notices** (above) — blocks publishing, and is part
+   of the same app job as surfacing this page.
+6. **Decide the tile provider deliberately**, given that OSM's tile service is
+   explicitly best-effort with no SLA.
+7. Optionally, read the Census geocoder's terms.
 
 ## Gaps
 
