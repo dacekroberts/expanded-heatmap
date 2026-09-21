@@ -16,3 +16,9 @@ data/*/processed/
 
 # outputs/<city>/ IS committed - the deployed app only ever reads from
 # there, per the pipeline/app split.
+
+# Local-only working notes (session logs, scratch write-ups). This repo is
+# public, so anything that is not meant to be published gets this suffix
+# rather than relying on nobody running `git add .` - a broad add once swept
+# an unreviewed file into a public commit.
+*.local.md
