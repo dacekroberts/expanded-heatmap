@@ -158,6 +158,35 @@ Run only the steps your scope lists (see Scope above).
    message, a DOM query result, a screenshot reference) - not "looks good".
    If something failed, say exactly what and where.
 
+## Measuring on-map label geometry: screenshots are the ground truth
+
+**`getBoundingClientRect()` on a line label is unreliable in this browser
+pane, and it produces convincing false failures.** Measured 2026-09-21: a
+label's marker element reported a rect at x=490 while its own
+`style.transform` said `translate3d(212px, ...)`, with the map pane at
+identity and no page scaling (`clientWidth === getBoundingClientRect().width`).
+A screenshot of the same frame showed every label on screen and legible. The
+pane is not always compositing, so rects can reflect a pre-fit state while the
+rendered output is correct.
+
+So, for any claim about whether a label is visible, clipped or overlapping:
+
+- **Take a screenshot and look.** That is the authority.
+- Treat rect-derived counts as a hint, and never report "N labels off-screen"
+  from rects alone - say the rects disagree with the render and trust the
+  render.
+- Properties rather than geometry ARE reliable: `details.open`, a computed
+  `color`, `style.width`, `checked` on a layer-control input, cluster leaf
+  counts, `scrollWidth` vs `clientWidth`. Prefer those wherever a check can be
+  expressed that way.
+- `scripts/check_map_labels.js` runs in the page and has the same exposure;
+  an empty `problems` list is good evidence, a non-empty one needs a
+  screenshot before it is reported as a defect.
+
+This is the opposite of the usual advice in this file (DOM over screenshots),
+and it is specific to on-map label positions. For colour, contrast and text
+presence, computed styles remain better than screenshots.
+
 ## Guardrails
 
 - Never leave a server running, even on a failure path.

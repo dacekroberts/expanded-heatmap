@@ -14,6 +14,52 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Three fixes from a scoped verify, and a measurement lesson
+
+- **The legend breakpoint was broken on a wide load - my bug, found by the
+  first scoped `map-chrome` run.** Chrome queues a `toggle` event for a
+  `<details open>` element that lands *after* an inline script attaches its
+  listener. On a narrow load `fit()` had already set the guard flag, so the
+  stray event was consumed; on a wide load `fit()` returned early without
+  setting it, the stray event hit the "user touched it" branch, and the
+  breakpoint was dead for the life of the page. A reader who loaded wide and
+  then narrowed still got four of New York's labels covered - the original
+  defect, reachable by a different route.
+  **Fix:** detect reader ownership from a `click` on the `<summary>`, not from
+  `toggle`. `toggle` fires for programmatic changes too, which was the whole
+  ambiguity; a click is unambiguous and keyboard activation dispatches one.
+  Verified: load at 1200 (legend open, 403px) -> narrow to 854 -> collapsed to
+  37px, zero labels under it.
+- **The container landed ~15px short of the frame.** At load the 1000px map
+  forces a horizontal scrollbar, which costs enough height to force a vertical
+  one, so `clientWidth` reads short - and nothing dispatches a resize event
+  afterwards to correct it once the scrollbars go away. Fixed by applying the
+  fit more than once (rAF plus 120/400/1200ms); `apply()` returns immediately
+  when the width already matches, so the extra passes cost nothing. Container
+  now reaches the full frame width on every city.
+- **Line labels were cropped off narrow frames because the fit used STATION
+  bounds.** A label sits beyond its line's tip, outside those bounds.
+  `_choose_view` already fits the desktop view to stations *and* labels
+  together; the phone fit now does the same, with padding raised to [26, 18]
+  because the emitted bounds hold label anchors and a label's text box extends
+  past its anchor.
+- **The measurement lesson, which is the most reusable part.**
+  `getBoundingClientRect()` on a line label is unreliable in the browser pane
+  and produces convincing false failures: a marker element reported a rect at
+  x=490 while its own `style.transform` said 212px, with the map pane at
+  identity and no page scaling. The scoped run reported "three of San
+  Francisco's six labels entirely off screen" and "two of Los Angeles' six" on
+  that basis; screenshots of the same frames show **every** label on every
+  city rendered and legible, a few clipped at an edge. The rects were stale
+  because the pane was not compositing.
+  So: screenshots are the authority for label geometry, rect-derived counts are
+  a hint, and properties (`details.open`, computed colour, `style.width`,
+  cluster leaf counts) are reliable where a check can be expressed that way.
+  Written into the `deploy-verify` agent, because it is the opposite of that
+  file's usual DOM-over-screenshots advice and would otherwise keep generating
+  false findings. It also means the earlier "1 of 11 visible" reading that
+  nearly went into a report was the same artifact twice over.
+
 ### 2026-09-21 - Phone-width maps fixed by resizing after init, not before
 
 - **The problem `deploy-verify` found:** at 375px the iframe showed a ~343px

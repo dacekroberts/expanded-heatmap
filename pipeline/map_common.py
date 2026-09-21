@@ -255,18 +255,31 @@ LEGEND_AUTOFIT_SCRIPT = """
     var legend = document.querySelector('details.map-legend');
     if (!legend) return;
     var touched = false;
-    legend.addEventListener('toggle', function () {
-        if (legend.dataset.auto === '1') { delete legend.dataset.auto; return; }
-        touched = true;
-    });
+
+    // Reader ownership is detected from an actual user gesture, NOT from the
+    // `toggle` event. `toggle` also fires for programmatic changes, and Chrome
+    // queues one for a <details open> element that lands AFTER this script
+    // attaches its listener - on a wide load `fit()` returns early, so that
+    // stray event used to set `touched` permanently and kill the breakpoint
+    // for the rest of the page's life (found by deploy-verify, 2026-09-21: the
+    // legend then covered four of New York's labels for anyone who narrowed
+    // their window rather than loading narrow). A click on the <summary> is
+    // unambiguous, and keyboard activation dispatches a click too.
+    var summary = legend.querySelector('summary');
+    if (summary) {
+        summary.addEventListener('click', function () { touched = true; });
+    }
+
     function fit() {
         if (touched) return;
         var narrow = (document.documentElement.clientWidth || window.innerWidth) < MAP_W;
-        if (narrow === !legend.open) return;
-        legend.dataset.auto = '1';
-        legend.open = !narrow;
+        if (narrow !== !legend.open) legend.open = !narrow;
     }
     fit();
+    // Second pass: the 1000px map forces scrollbars at load, so the first
+    // measurement can read ~15px short; once PHONE_FIT_SCRIPT has resized the
+    // container they are gone and the width is accurate.
+    requestAnimationFrame(fit);
     window.addEventListener('resize', fit);
 })();
 </script>
@@ -316,7 +329,9 @@ PHONE_FIT_SCRIPT = """
         document.body.style.width = target + "px";
         m.invalidateSize();
         if (target < MAP_W && BOUNDS) {
-            m.fitBounds(L.latLngBounds(BOUNDS), {padding: [12, 12], animate: false});
+            // Generous padding because BOUNDS holds label ANCHORS, and a label's
+            // text box extends past its anchor by up to ~70px.
+            m.fitBounds(L.latLngBounds(BOUNDS), {padding: [26, 18], animate: false});
         }
     }
 
@@ -326,7 +341,20 @@ PHONE_FIT_SCRIPT = """
             if (tries++ < 60) return setTimeout(start, 100);
             return;
         }
+        // Applied more than once on purpose. At load the 1000px-wide map forces
+        // a horizontal scrollbar, which costs enough height to force a vertical
+        // one, so `clientWidth` reads ~15px short; once the first pass has
+        // shrunk the container both scrollbars go away and the measurement is
+        // right, but no resize event is dispatched to notice that. The later
+        // passes also settle a transient seen on the heaviest map at phone
+        // width, where the pane transform lagged a correct fit. apply() returns
+        // immediately once the width already matches, so the extra passes are
+        // free. (deploy-verify, 2026-09-21)
         apply(m);
+        requestAnimationFrame(function () { apply(m); });
+        [120, 400, 1200].forEach(function (d) {
+            setTimeout(function () { apply(m); }, d);
+        });
         var t = null;
         window.addEventListener("resize", function () {
             clearTimeout(t);
@@ -951,9 +979,17 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
         .replace("__MAP_W__", str(_MAP_W))
         .replace("__MAP_H__", str(_MAP_H))
         .replace("__MAP_NAME__", m.get_name())
+        # Bounds include the LINE LABEL anchors, not just the stations. A label
+        # sits beyond its line's tip, so fitting to stations alone crops labels
+        # off a narrow frame - deploy-verify measured only 2 of San Francisco's
+        # 6 and 4 of Los Angeles' 6 visible at 375px when this fitted stations
+        # only. `_choose_view` already fits the desktop view to stations and
+        # labels together; this matches it.
         .replace("__BOUNDS__", json.dumps([
-            [float(stations["latitude"].min()), float(stations["longitude"].min())],
-            [float(stations["latitude"].max()), float(stations["longitude"].max())],
+            [min([float(stations["latitude"].min())] + [float(t[0]) for t in tips.values()]),
+             min([float(stations["longitude"].min())] + [float(t[1]) for t in tips.values()])],
+            [max([float(stations["latitude"].max())] + [float(t[0]) for t in tips.values()]),
+             max([float(stations["longitude"].max())] + [float(t[1]) for t in tips.values()])],
         ]))
     ))
 
