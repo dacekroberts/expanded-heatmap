@@ -31,6 +31,19 @@ does not.**
 - **The choice persists** in `localStorage` under one key,
   `expanded-heatmap-theme`, shared by the app page and every same-origin map
   iframe — so dark carries from map to map and from the Overview into a city.
+- **With no stored choice, a map follows the page it is embedded in**, so a map
+  never opens as a white rectangle on a dark page. An explicit click wins from
+  then on. A standalone map (served from `outputs/`, no host page) follows the
+  OS `prefers-color-scheme` instead. The rule lives once, in
+  `AMBIENT_THEME_JS` (`pipeline/theme.py`), used by both the city maps and the
+  macro map.
+  **Why it reads a background colour rather than asking Streamlit:** Streamlit
+  exposes no theme signal at all — no `data-theme` on `<html>` or `<body>`, no
+  CSS custom property (checked 2026-09-21). But the page background reflects
+  whichever of System / Light / Dark the visitor picked, and a map iframe is
+  same-origin with its host, so reading it detects all three.
+  `prefers-color-scheme` alone would only match the default System case and
+  would be wrong the moment someone chose Light or Dark explicitly.
 - **The palette is eleven CSS variables** in a single block on `.dark-base` in
   `THEME_TOGGLE_HTML` (`pipeline/map_common.py`). Retheming is a one-block
   edit, by design.
@@ -139,20 +152,23 @@ Matching `--dm-*` values:
 
 ## Not yet built
 
-1. `.streamlit/config.toml` with both light and dark blocks.
-2. The `--dm-*` swap above, verified against the themed page behind it.
-3. **The hardcoded-colour sweep — this is the real work, not the palette.**
-   Grep `app/components.py` and every page for hex, `rgba`, `white`, `#fff`,
-   `background`, and check contrast numerically. Doing this once elsewhere
-   produced a sidebar label at **1.01:1** (invisible, and not noticed by eye)
-   and icons at **2.77:1**, below the 3:1 non-text minimum.
-4. Decide whether to follow the visitor's system theme:
-   `window.matchMedia('(prefers-color-scheme: dark)')` for the initial state
-   plus a `change` listener, with a manual toggle that wins once used. This
-   project is manual-only today.
-5. The city pages' prose says features are "toggleable via the layer control in
+Done 2026-09-21: `.streamlit/config.toml` with both blocks, the `--dm-*` swap,
+the shared palette module, and ambient-following with a manual override.
+Remaining:
+
+1. **The hardcoded-colour sweep — the real work, and only partly done.**
+   `app/components.py` is clean (it now builds from `pipeline/theme.py`), but
+   `app/Overview_&_Introduction.py` still has literal `white` and `#1c2b2a`
+   for the macro map's markers and labels. Check those numerically against
+   `#0B1220` rather than by eye: doing this once elsewhere produced a label at
+   **1.01:1** — invisible, and nobody caught it by looking — and icons at
+   **2.77:1**, below the 3:1 non-text minimum.
+2. The city pages' prose says features are "toggleable via the layer control in
    the top left" — decide whether to mention the theme toggle, and draft the
    wording in chat first per `CLAUDE.md`.
+3. Consider whether the light palette in `pipeline/theme.py` should drive
+   `[theme.light]` more closely; today only the four Streamlit keys are
+   checked against it by `scripts/check_theme_sync.py`.
 
 ---
 
@@ -194,6 +210,18 @@ Each of these was paid for once already.
   they are brightened in dark mode rather than replaced. Staten Island Railway
   is the one line not using its agency's colour, because MTA's `#08179C` was
   too dark for its on-map label (see `DECISIONS.md`).
+
+**Editing an imported module and testing it**
+
+- **Streamlit serves a stale `components.py` across a rerun.** Editing a module
+  the entry script imports and reloading the page is not enough — Python's
+  bytecode cache and Streamlit's watcher combine to keep the old version. This
+  cost a full debugging cycle on 2026-09-21: the theme-following code was
+  correct, but the live iframe's `srcdoc` did not contain it, which read
+  exactly like a logic bug. **Stop the server, delete `__pycache__` under
+  `app/` and `pipeline/`, restart.** Confirm the new code is actually live
+  before debugging behaviour — `iframe.getAttribute('srcdoc').includes(...)`
+  for an injected script is a two-second check that would have saved the cycle.
 
 **Measuring**
 

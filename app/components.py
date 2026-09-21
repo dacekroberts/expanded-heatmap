@@ -18,7 +18,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 # (streamlit + pandas only) - the same rule the city pages' config imports
 # follow. It is the single source for every chrome colour, shared with the city
 # maps' own CSS so a reskin cannot leave the macro map on the old palette.
-from pipeline.theme import DARK, LIGHT, rgba  # noqa: E402
+from pipeline.theme import AMBIENT_THEME_JS, DARK, LIGHT, rgba  # noqa: E402
 
 OVERVIEW_PAGE = "Overview_&_Introduction.py"
 
@@ -108,9 +108,25 @@ _MACRO_THEME_JS = """
         host.appendChild(b);
         label(b, doc.body.classList.contains('dark-base'));
     }
-    apply(saved() === 'dark');
+@@AMBIENT_JS@@
+    // A remembered click wins; otherwise follow the page this map sits on, so
+    // the macro map matches the Streamlit theme the visitor chose instead of
+    // opening light on a dark page. `ambientPrefersDark` reads window.parent,
+    // which from this 1px script frame is that page.
+    var choice = saved();
+    apply(choice === 'dark' || choice === 'light'
+          ? choice === 'dark'
+          : ambientPrefersDark());
     ensure();
     new window.parent.MutationObserver(ensure).observe(doc.body, { childList: true, subtree: true });
+    if (window.matchMedia) {
+        var mq = window.matchMedia('(prefers-color-scheme: dark)');
+        if (mq.addEventListener) {
+            mq.addEventListener('change', function (e) {
+                if (!saved()) apply(e.matches);
+            });
+        }
+    }
 })();
 </script>
 """
@@ -147,7 +163,11 @@ def render_macro_map_theme():
     st.markdown(css, unsafe_allow_html=True)
     # st.iframe rejects a height of 0, so the script-only frame is 1 px tall; it only
     # needs to run (same-origin access to the page is what lets it add the button).
-    st.iframe(_MACRO_THEME_JS.replace("@@KEY@@", MACRO_THEME_KEY), height=1)
+    js = (_MACRO_THEME_JS
+          .replace("@@KEY@@", MACRO_THEME_KEY)
+          .replace("@@AMBIENT_JS@@", AMBIENT_THEME_JS))
+    assert "@@" not in js, "unresolved placeholder in _MACRO_THEME_JS"
+    st.iframe(js, height=1)
 
 
 # Map-only pilot: hide Streamlit's sidebar (its page list is the other way to reach

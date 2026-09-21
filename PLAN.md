@@ -47,24 +47,14 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - [x] The map's `--dm-*` values swapped to slate, the macro map's duplicate
     copy removed, and everything sourced from the new `pipeline/theme.py`.
     `scripts/check_theme_sync.py` guards the one unavoidable TOML duplicate.
-  - [ ] **DECIDE: two theme controls now exist on one page** - Streamlit's
-    chooser drives the page, our button drives the maps, and they can disagree
-    (measured: dark page, light map, white button). Options:
-    - **(A, recommended)** Maps default to the ambient theme and a manual
-      click still wins. Detect it by luminance of the parent page's
-      background - Streamlit exposes no `data-theme` attribute, and
-      `prefers-color-scheme` alone only matches the default System case.
-      Standalone maps fall back to `prefers-color-scheme`. Keeps both controls
-      meaningful, needs no fighting of Streamlit's widget CSS, and is the same
-      mechanism the handoff's item 5 wanted anyway.
-    - **(B)** Drop Streamlit's chooser again (bare `[theme]`) and let our
-      button drive the page too, styling Streamlit's chrome from
-      `body.dark-base`. One control, but it means overriding framework widget
-      colours by hand - the thing the handoff measured as the real cost.
-    - **(C)** Remove the in-map button when embedded, leaving Streamlit's
-      chooser as the only control; standalone maps keep their button. Cleanest
-      conceptually, but loses the in-map toggle the `#map-actions` group is
-      built around.
+  - [x] **Two theme controls reconciled (option A, 2026-09-21).** With no
+    stored choice a map follows the page it is embedded in; an explicit click
+    wins from then on; a standalone map follows the OS preference. Verified
+    all three: ambient-dark page gives a dark map (`storedTheme: null`), a
+    click stores `light`, and that survives a reload on a dark page. Options B
+    (our button drives the page, overriding Streamlit's widget CSS by hand)
+    and C (remove the in-map button when embedded) were rejected - see
+    `DECISIONS.md`.
   - [ ] Sweep the remaining hardcoded colours in `app/` now that a dark page
     exists: `Overview_&_Introduction.py` still has literal `white` and
     `#1c2b2a` (lines ~90, ~139) for the macro map's markers and labels. Check

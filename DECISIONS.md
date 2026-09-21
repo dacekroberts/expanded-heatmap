@@ -14,6 +14,48 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Maps follow the page's theme; an explicit click still wins
+
+- **Closes the two-controls gap** opened by giving the page a theme. Chosen
+  from three options (recorded in the previous entry's `PLAN.md` note):
+  **maps default to the ambient theme, a manual click wins from then on.**
+  - Rejected **(B)**, letting our button drive the page and styling Streamlit's
+    chrome from `body.dark-base`: it means overriding framework widget colours
+    by hand, which is exactly the cost the handoff measured as the real work,
+    and it would have meant throwing away the theme chooser we had just
+    recovered.
+  - Rejected **(C)**, removing the in-map button when embedded: conceptually
+    the cleanest - one control per context - but it discards the in-map toggle
+    the `#map-actions` group is built around, and standalone maps would still
+    need their own, so the mechanism was needed either way.
+- **Detection reads the host page's background brightness, not a framework
+  API, because there is no API.** Streamlit exposes no theme signal: no
+  `data-theme` on `<html>` or `<body>`, no CSS custom property. The page
+  background does reflect whichever of System / Light / Dark the visitor chose,
+  and a map iframe is same-origin with its host, so one luminance read covers
+  all three. `prefers-color-scheme` alone was rejected as the primary signal -
+  it only matches the default System case and is wrong the moment someone picks
+  Light or Dark explicitly - but it is the fallback for a standalone map, which
+  has no host to read.
+- **The rule lives once**, as `AMBIENT_THEME_JS` in `pipeline/theme.py`, used
+  by both the city maps and the macro map, consistent with that module already
+  being the single source for colours.
+- **Verified all three behaviours**, not just the happy path: with no stored
+  choice on a dark page the embedded map opens dark and its body background
+  matches the page exactly (`#0B1220`, `storedTheme: null`); a click stores
+  `light` and flips the map; and after a reload on a still-dark page the map
+  stays light. The macro map behaves the same way from its 1px script frame.
+- **A debugging lesson worth more than the feature.** The first test showed the
+  code apparently not working - maps stayed light on a dark page. The code was
+  correct; **Streamlit was serving a cached `components.py`**, and the live
+  iframe's `srcdoc` did not contain the new function at all. Editing an
+  imported module and reloading the page is not enough: stop the server, clear
+  `__pycache__`, restart. The `deploy-verify` agent's procedure already says
+  this, which is why it clears caches at step 1 - the instruction existed and
+  was not followed. Now also in `docs/theming.md`, with the two-second check
+  that would have caught it immediately: assert the injected script is present
+  in the rendered `srcdoc` before debugging its behaviour.
+
 ### 2026-09-21 - Midnight slate: page themed, palette unified, one gap left
 
 - **The page theme is in, and Streamlit's theme chooser is back.** Verified

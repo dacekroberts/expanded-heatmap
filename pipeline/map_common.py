@@ -25,7 +25,7 @@ import pandas as pd
 from folium.plugins import HeatMap, FastMarkerCluster
 
 from pipeline.taxonomies import CATEGORY_BUCKETS, load_taxonomy_module
-from pipeline.theme import DARK, LIGHT, css_vars, rgba
+from pipeline.theme import AMBIENT_THEME_JS, DARK, LIGHT, css_vars, rgba
 
 # Decimal places every coordinate is rounded to before it reaches the HTML.
 # Folium emits a float's full repr - "40.76248502732357", 17 significant
@@ -133,7 +133,13 @@ _THEME_TOGGLE_TEMPLATE = """
         btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
         btn.textContent = dark ? '\\u2600 Light mode' : '\\u263E Dark mode';
     }
-    apply(saved() === 'dark');
+@@AMBIENT_JS@@
+    // A remembered click wins; otherwise follow the surrounding page, so a map
+    // embedded in a dark app page does not open as a white rectangle.
+    var choice = saved();
+    apply(choice === 'dark' || choice === 'light'
+          ? choice === 'dark'
+          : ambientPrefersDark());
     btn.addEventListener('click', function () {
         var dark = !document.body.classList.contains('dark-base');
         apply(dark);
@@ -142,6 +148,18 @@ _THEME_TOGGLE_TEMPLATE = """
     window.addEventListener('storage', function (e) {
         if (e.key === KEY) apply(e.newValue === 'dark');
     });
+    // Follow the OS preference while the visitor has made no explicit choice.
+    // NOTE: devtools colour-scheme emulation updates matchMedia().matches
+    // WITHOUT dispatching this event inside an iframe, so this listener can
+    // only be tested with a real OS theme switch (docs/theming.md).
+    if (window.matchMedia) {
+        var mq = window.matchMedia('(prefers-color-scheme: dark)');
+        if (mq.addEventListener) {
+            mq.addEventListener('change', function (e) {
+                if (!saved()) apply(e.matches);
+            });
+        }
+    }
 
     // "All cities" button: only when this map is embedded in the app (it has a
     // parent page to go back to); opened on its own it stays hidden. It clicks
@@ -223,6 +241,7 @@ _THEME_TOGGLE_TEMPLATE = """
 # of literal CSS and JS braces.
 THEME_TOGGLE_HTML = (
     _THEME_TOGGLE_TEMPLATE
+    .replace("@@AMBIENT_JS@@", AMBIENT_THEME_JS)
     .replace("@@DARK_VARS@@", css_vars(DARK))
     .replace("@@DARK_ATTRIB_BG@@", rgba(DARK["page"], 0.8))
     .replace("@@LIGHT_SURFACE@@", LIGHT["surface"])

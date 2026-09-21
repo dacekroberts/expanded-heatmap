@@ -87,6 +87,47 @@ STREAMLIT_DARK = {
 }
 
 
+# Shared JS: decide the theme a map should START in, when the visitor has not
+# chosen one. Used by both the city maps (THEME_TOGGLE_HTML) and the macro map
+# (_MACRO_THEME_JS), so the rule is written once.
+#
+# Why read a background colour rather than ask a framework. Streamlit exposes
+# no theme signal at all - no `data-theme` on <html> or <body>, no CSS custom
+# property (checked 2026-09-21). But whichever of System / Light / Dark the
+# visitor picks, the page's own background reflects it, and a map iframe is
+# same-origin with its host, so reading that background detects all three.
+# `prefers-color-scheme` alone would only match the default System case and
+# would be wrong the moment someone picks Light or Dark explicitly.
+#
+# A standalone map has no host to read - `window.parent === window` and its own
+# background is the thing being decided - so it falls back to the OS
+# preference.
+#
+# An explicit click always wins over this, and is remembered; see the callers.
+AMBIENT_THEME_JS = """
+    function ambientPrefersDark() {
+        try {
+            if (window.parent !== window) {
+                var bg = window.parent.getComputedStyle(
+                    window.parent.document.body).backgroundColor;
+                var n = bg && bg.match(/[\\d.]+/g);
+                if (n && n.length >= 3) {
+                    var alpha = n.length > 3 ? parseFloat(n[3]) : 1;
+                    if (alpha > 0.1) {          // transparent tells us nothing
+                        // Perceived brightness, 0-255; a binary decision does
+                        // not need full WCAG gamma expansion.
+                        var b = 0.299 * +n[0] + 0.587 * +n[1] + 0.114 * +n[2];
+                        return b < 128;
+                    }
+                }
+            }
+        } catch (e) { /* cross-origin or no parent: fall through */ }
+        return !!(window.matchMedia
+                  && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    }
+"""
+
+
 def css_vars(palette, prefix="dm"):
     """A palette as CSS custom-property declarations.
 
