@@ -65,6 +65,46 @@ boundary layer ended up with no recorded URL at all. If an endpoint you tried
 is dead, record that too, with its date - a replaced URL that leaves no trace
 hides the fact that dataset IDs get retired.
 
+4. **Licence and required notices, per source, in the same pass.** A city is
+   not verified until this is recorded in `docs/data_sources.md` alongside its
+   endpoint. "It's on a government open-data portal" is not an answer: the
+   2026-09-21 review found terms ranging from public-domain dedications to a
+   feed that forbids modifying its data, and both extremes inside Los Angeles
+   (its business registry is CC0; its GTFS is the most restrictive licence in
+   the project). For each source capture:
+   - **The declared licence.** Socrata exposes it directly - fetch
+     `<domain>/api/views/<id>.json` and read `license`, `licenseId`,
+     `attribution` and `attributionLink`. `SEE_TERMS_OF_USE` means go read the
+     terms page; a missing `license` does NOT mean permissive.
+   - **The governing terms where no licence is declared.** Look for a portal
+     terms document, not the parent site's general footer - that mistake made
+     NYC look prohibited when Local Law 11 in fact *forbids* it from imposing
+     a licence, while the nyc.gov footer's "All Rights Reserved" covers only
+     that website's own content.
+   - **The transit feed's own terms, separately.** `feed_info.txt` almost never
+     carries a licence (LA Metro's has an empty `feed_license` column), so go
+     to the agency's developer terms. Line geometry is redrawn from
+     `shapes.txt` into the map, so these bear directly on what is published,
+     and they were the loosest end of the whole review.
+   - **Anything the project must DISPLAY.** This is the part that becomes work
+     rather than a note: Chicago requires a verbatim disclaimer, SFMTA
+     requires specific attribution wording, LA Metro requires acknowledgement
+     as provider. Add any new one to the "Notices this project MUST display
+     when published" section - that list gates the public deploy.
+   - **Anything that needs a human decision**, such as a purpose limitation or
+     a bar on modification. Raise it rather than reading the clause
+     generously, record the verdict and its reasoning in `DECISIONS.md`, and
+     attribute the call.
+
+   If a page blocks automated fetching (Chicago's data terms return 403), use
+   the browser rather than giving up or guessing - every item in that review
+   was resolvable that way except one.
+
+   The standing commitment in `docs/data_sources.md` - that removal requests
+   are honoured without argument - covers new cities automatically. Do not
+   weaken it for a source with tighter terms; the answer to tight terms is to
+   record them and comply, not to hedge the commitment.
+
 **One source need not be enough.** New York has no general business licence,
 so no single registry covers it; its coverage is assembled from four, each
 authoritative for one bucket, unioned in step 2 with a `source` column and
@@ -285,4 +325,9 @@ clicking each marker opens its page, each switcher works, each map renders).
 - Update `docs/project_context.md` (current state only - which cities exist,
   what's distinctive; no counts), `docs/city_shortlist.md`, and tick or add
   items in `PLAN.md`.
+- **Confirm the city's licence rows are actually in `docs/data_sources.md`**
+  (Step 0 item 4) before calling the city done - endpoint, filter, retrieval
+  date, licence, and any notice the source requires. A city whose data is
+  mapped but whose terms are unrecorded is not finished, because the gap is
+  invisible afterwards: it looks exactly like a city that was checked.
 - Keep the honesty convention: mark what's verified vs. still a skeleton.

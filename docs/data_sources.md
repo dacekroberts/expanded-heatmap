@@ -16,11 +16,23 @@ purchased, or behind a login.
 
 ## How to keep this current
 
-- **Adding a city adds its rows here, in the same commit.** The `add-city`
-  skill lists this as a step; a city is not finished until its sources are
-  recorded.
+- **Adding a city adds its rows here, in the same commit** — provenance *and*
+  licence together. The `add-city` skill makes both a Step 0 requirement and
+  re-checks them at Step 9; a city whose data is mapped but whose terms are
+  unrecorded is not finished, because afterwards that gap is invisible — it
+  looks exactly like a city that was checked.
 - Record the **endpoint**, the **server-side filter** (the download is often
   filtered — that filter is part of the provenance), and the **date retrieved**.
+- Record the **licence, and anything the source requires this project to
+  display**. Do not infer permissive terms from the fact that a source is
+  government open data: the review below found everything from public-domain
+  dedications to a feed that forbids modifying its data, and both extremes
+  inside one city. Socrata states a licence directly at
+  `<domain>/api/views/<id>.json` (`license`, `licenseId`, `attribution`); a
+  missing value there means "go read the terms", not "no restrictions".
+- **A new required notice goes in the notices section below**, which gates the
+  public deploy. A new clause needing a human decision goes to the owner and
+  then to `DECISIONS.md` — not resolved by reading it generously.
 - When an endpoint dies, leave the old row and mark it dead with the date,
   rather than overwriting it. Dataset IDs get retired: New York's borough
   boundaries moved from `tqmj-j8zm` (now 404) to `gthc-hcne`, and the MTA

@@ -138,14 +138,20 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   without the provenance would be half an answer. **Blocks the public deploy:**
   the legends were left broad, so "Retail - NAICS Code: 44/45" overstates what
   the maps contain until the exclusions page is reachable from them.
-- [ ] **Phone-width city pages.** Found by `deploy-verify` 2026-09-21: at 375px
-  the iframe shows ~343px of the 1000px map, so most line labels start outside
-  the visible area (10 of 11 in New York, 7 of 7 in Chicago) and the reader has
-  to scroll inside the iframe. Affects every city. Same root cause as the
-  legend overlap - the map's fixed 1000px layout, which exists to dodge the
-  Leaflet.heat `IndexSizeError` - but unlike the legend this needs a deliberate
-  mobile approach, not a breakpoint. Options not yet weighed: a narrower
-  phone-specific render, a scroll hint, or accepting it and saying so. **Blocks the public deploy:** the legends were deliberately left
+- [x] **Phone-width city pages** - largely fixed 2026-09-21. The map keeps its
+  fixed 1000px layout for initialisation (which is what dodges the Leaflet.heat
+  `IndexSizeError`) and is resized to the frame immediately afterwards, then
+  re-fitted to the station bounds. At 375px: New York went from 1 of 11 line
+  labels visible to **9 of 11 fully visible, 0 off-screen**, Chicago from 0 of 7
+  to 6 of 7, and the horizontal scroll inside the iframe is gone. Desktop is
+  unchanged (11 of 11, original view). What remains:
+  - [ ] **Label placement is still computed for a 1000x650 canvas**, so at phone
+    width labels can crowd each other and the cluster badges, and one or two
+    clip at an edge (New York: "Lexington Av (4/5/6)" right, "Staten Island
+    Railway" left). Laying them out correctly for a phone needs a **second
+    render at phone dimensions** - a per-city phone HTML plus viewport
+    selection in the page. That roughly doubles `outputs/` and render time, so
+    it is worth doing only if phone traffic matters. Not started. **Blocks the public deploy:** the legends were deliberately left
   broad (2026-09-21), so "Retail - NAICS Code: 44/45" overstates what the map
   now contains until this page is reachable from it.
 - [x] Catch-all and non-storefront classifications: swept 2026-09-21 and

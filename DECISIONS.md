@@ -14,6 +14,57 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Phone-width maps fixed by resizing after init, not before
+
+- **The problem `deploy-verify` found:** at 375px the iframe showed a ~343px
+  slice of a 1000px map, so the reader had to scroll inside the iframe to find
+  anything. 1 of New York's 11 line labels was visible, 0 of Chicago's 7.
+- **The fixed 1000px width could not simply be dropped** - it is what avoids
+  Leaflet.heat's uncaught `IndexSizeError` on init with an unresolved container
+  size, which silently kills every layer added afterwards. The insight is that
+  the bug is about an *unresolved* size at construction, not a *small* one: the
+  container can keep its fixed size through initialisation and be resized
+  immediately afterwards via Leaflet's own `invalidateSize()`, then re-fitted to
+  the station bounds. Prototyped in the browser on a rendered map before writing
+  any code, which is how the approach was confirmed rather than assumed.
+- **Result at 375px:** New York 1 -> **9 of 11 labels fully visible, 0
+  off-screen**; Chicago 0 -> 6 of 7; horizontal scroll inside the iframe gone;
+  heat layer intact. Desktop unchanged - at 1200px the container is still
+  1000px, the view is the original, and all 11 labels show. The station bounds
+  come from Python rather than the script sniffing marker colours.
+- **What it does not fix, stated rather than glossed:** `_layout_labels` picks
+  label positions server-side against a 1000x650 canvas, so at phone width
+  labels can crowd each other and the cluster badges, and one or two clip at an
+  edge. Correct phone layout needs a second render at phone dimensions, which
+  would roughly double `outputs/` and render time - logged in `PLAN.md`, not
+  started, and worth doing only if phone traffic matters.
+- A measurement note, since it nearly produced a wrong report: label counts
+  taken in the same batch as the page load read 1 of 11, because the fit script
+  polls and had not settled. The settled figure is 9. Measure after the state
+  settles, not in the same round trip.
+
+### 2026-09-21 - Licence checking is now part of adding a city
+
+- **The review was retrospective; this makes it routine.** Recording endpoints
+  was already an `add-city` Step 0 requirement, but recording *licences* was
+  not, so the next city would have repeated the same gap the 2026-09-21 review
+  had to close for five cities at once.
+- Step 0 gained a fourth item covering, per source: the declared licence (and
+  where Socrata exposes it), the governing terms when none is declared, the
+  transit feed's terms *separately* (they were the loosest end of the review,
+  and `feed_info.txt` almost never carries a licence), anything the project
+  must display, and anything needing a human decision. Step 9 re-checks that
+  the rows actually landed.
+- Two traps from the review are written into the skill so they are not
+  repeated: a missing Socrata `license` field does not mean permissive, and a
+  parent site's general footer is not the data's terms - reading nyc.gov's
+  "All Rights Reserved" as governing NYC Open Data produced exactly the wrong
+  conclusion, when Local Law 11 in fact forbids the city from imposing a
+  licence at all.
+- The standing removal-request commitment covers new cities automatically, and
+  the skill says not to weaken it for a source with tighter terms: the answer
+  to tight terms is to record and comply, not to hedge the commitment.
+
 ### 2026-09-21 - A standing commitment to honour removal requests
 
 - **Checked whether the agencies showcase third-party work, and they do not.**

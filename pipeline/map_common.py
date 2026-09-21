@@ -271,6 +271,72 @@ LEGEND_AUTOFIT_SCRIPT = """
 })();
 </script>
 """
+# The map is laid out at a fixed _MAP_W x _MAP_H because Leaflet.heat throws an
+# uncaught IndexSizeError when its container's size is unresolved at init
+# (github.com/Leaflet/Leaflet.heat/issues/95), which silently kills every layer
+# added after it. That fixed width is correct at init and wrong afterwards: in a
+# frame narrower than the map, the reader sees a 343px slice of a 1000px map and
+# has to scroll inside the iframe to find anything. Measured 2026-09-21 at 375px:
+# 1 of New York's 11 line labels visible, 0 of Chicago's 7.
+#
+# So the container keeps its fixed size for initialisation and is resized to the
+# frame immediately afterwards. Resizing AFTER init is safe - the bug is about an
+# unresolved size at construction, not a small one - and `invalidateSize()` is
+# Leaflet's own supported way to do it. The view is then re-fitted to the station
+# bounds, which Python supplies rather than the script sniffing marker colours.
+#
+# What this does NOT fix: label PLACEMENT. `_layout_labels` chooses label
+# positions server-side against a _MAP_W x _MAP_H canvas, so at phone width they
+# can overlap each other and the cluster badges. Going from "one label visible"
+# to "most labels visible but some crowded" is the improvement; laying them out
+# correctly for a phone would need a second render at phone dimensions. See
+# PLAN.md.
+PHONE_FIT_SCRIPT = """
+<script>
+(function () {
+    var MAP_W = __MAP_W__, MAP_H = __MAP_H__;
+    var BOUNDS = __BOUNDS__;            // [[south, west], [north, east]]
+    var NAME = "__MAP_NAME__";
+    var tries = 0;
+
+    // Folium renders body HTML before the figure's script block, so this runs
+    // before the map exists - poll for it rather than assuming.
+    function ready() {
+        var m = window[NAME];
+        if (m && m.invalidateSize) return m;
+        return null;
+    }
+
+    function apply(m) {
+        var el = m.getContainer();
+        var w = document.documentElement.clientWidth || window.innerWidth;
+        var target = Math.min(w, MAP_W);
+        if (Math.abs(el.getBoundingClientRect().width - target) < 1) return;
+        el.style.width = target + "px";
+        document.body.style.width = target + "px";
+        m.invalidateSize();
+        if (target < MAP_W && BOUNDS) {
+            m.fitBounds(L.latLngBounds(BOUNDS), {padding: [12, 12], animate: false});
+        }
+    }
+
+    function start() {
+        var m = ready();
+        if (!m) {
+            if (tries++ < 60) return setTimeout(start, 100);
+            return;
+        }
+        apply(m);
+        var t = null;
+        window.addEventListener("resize", function () {
+            clearTimeout(t);
+            t = setTimeout(function () { apply(m); }, 150);
+        });
+    }
+    start();
+})();
+</script>
+"""
 LEGEND_ROW = """
   <div style="display:flex; align-items:center; margin:3px 0;">
     <span style="display:inline-block; width:11px; height:11px;
@@ -877,6 +943,19 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
         </style>
     """))
     m.get_root().html.add_child(folium.Element(THEME_TOGGLE_HTML))
+
+    # Fit the map to a frame narrower than its own fixed layout width (phones,
+    # and the app's column on a small laptop). See PHONE_FIT_SCRIPT.
+    m.get_root().html.add_child(folium.Element(
+        PHONE_FIT_SCRIPT
+        .replace("__MAP_W__", str(_MAP_W))
+        .replace("__MAP_H__", str(_MAP_H))
+        .replace("__MAP_NAME__", m.get_name())
+        .replace("__BOUNDS__", json.dumps([
+            [float(stations["latitude"].min()), float(stations["longitude"].min())],
+            [float(stations["latitude"].max()), float(stations["longitude"].max())],
+        ]))
+    ))
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     m.save(str(output_path))
