@@ -24,6 +24,12 @@ EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"
 STATIONS_CSV = DATA_PROCESSED / "stations.csv"
 BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 BUSINESSES_GEOCODED_CSV = DATA_PROCESSED / "businesses_geocoded.csv"
+# Step 3's output BEFORE the home-business filter, written every run purely so
+# fetch_parcel_residence.py has a stable, unfiltered population to look up.
+# Without it the two feed each other: the fetcher would read the filtered file,
+# build a cache missing the rows already removed, and those rows would silently
+# come back on the next run. Gitignored, like everything in processed/.
+BUSINESSES_PREFILTER_CSV = DATA_PROCESSED / "businesses_geocoded_prefilter.csv"
 
 # Raw inputs. Download commands (all public):
 #   gtfs_rail.zip  curl -sL https://gitlab.com/LACMTA/gtfs_rail/raw/master/gtfs_rail.zip
@@ -153,3 +159,30 @@ LOS_ANGELES_BBOX = {
     "lon_min": -118.72,
     "lon_max": -118.10,
 }
+
+# --- Assessor parcels, for the home-business filter ------------------------
+# Measured 2026-09-21: a 400-point sample put 7.2% of this city's person-like
+# pins on a Residential parcel claiming a homeowner's exemption - roughly
+# 1,000-2,000 pins, the largest such exposure in the project. Mostly home
+# beauty/barber/pet-care and catering (NAICS 812111, 812112, 812910, 722320),
+# codes that are legitimate for a real storefront, which is why the 812990
+# exclusion already applied here could not reach them. See DECISIONS.md.
+#
+# The county's own parcel layer carries everything needed - 92 fields
+# including UseType, UseDescription and Roll_HomeOwnersExemp - so no second
+# dataset is required. Owner names are absent by law (Cal. Gov. Code
+# s7928.205), which is convenient: there is nothing here to publish by
+# accident.
+PARCEL_SERVICE_URL = (
+    "https://public.gis.lacounty.gov/public/rest/services/"
+    "LACounty_Cache/LACounty_Parcel/MapServer/0/query"
+)
+# An exact point-in-parcel test matches only ~49% of these pins, because the
+# 9% of LA coordinates recovered by Census geocoding sit on street centrelines
+# rather than inside a parcel. A 25 m buffer matched 120/120 in testing.
+# Filtering on the unbuffered 49% would have been the same partial-coverage
+# mistake San Francisco's 43.8% address join nearly caused.
+PARCEL_BUFFER_M = 25.0
+# Written by fetch_parcel_residence.py (not a step*.py, so the drift check
+# stays offline). Absent rows are simply not flagged.
+PARCEL_RESIDENCE_CSV = DATA_RAW / "parcel_residence.csv"

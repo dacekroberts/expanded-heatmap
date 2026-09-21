@@ -14,6 +14,37 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Home-business filters built, starting with San Francisco
+
+- **Decided to fix the already-mapped cities before adding Boston**, at the
+  project owner's direction, rather than carry a known live exposure on a
+  public repository while the city list grows.
+- **San Francisco: 217 pins removed** (18,242 -> 18,025), exactly matching the
+  measurement. A person-like displayed name at a parcel the Assessor calls
+  Single Family Residential which also claims a homeowner's exemption. Mostly
+  NAICS 722320 caterers, 812112 beauty, 812910 pet care, 458110 clothing.
+- **Shared logic now lives in `pipeline/residence.py`** rather than being
+  written three times. It holds the person-name test - which was already
+  duplicated between Philadelphia's step 2 and
+  `scripts/check_personal_exposure.py` - plus `flag_home_based()`, which takes
+  each city's own residential / owner-occupied / individual columns and
+  requires all supplied conditions together. The module docstring carries the
+  measured counts from every city, because the mistake it exists to prevent
+  (treating land use alone as a privacy signal) is the one a future reader is
+  most likely to make.
+- **Each city's property download lives in a non-`step*.py` script** writing
+  into gitignored `raw/`, so `drift_check.py` stays offline and deterministic.
+  San Francisco's `fetch_sources.py` deliberately fetches ONLY the new
+  Assessor roll: re-downloading its business export would change every count
+  recorded in this file and should be a deliberate act, not a side effect.
+- **Two things recorded so they are not rediscovered.** San Francisco's roll
+  must be fetched from `data.sf.gov` - `data.sfgov.org` returns 403 on
+  `/resource/` while `/api/views/` succeeds, which makes the dataset look
+  unavailable. And the join must be spatial: an address join reaches 43.8%,
+  which was rejected outright rather than used, because a filter running off a
+  partial join removes home businesses only where the address text happened to
+  match - arbitrary while appearing complete.
+
 ### 2026-09-21 - The California cities have a systemic home-business exposure
 
 - **Los Angeles is worse than San Francisco, and this is now a workstream

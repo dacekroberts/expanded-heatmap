@@ -162,12 +162,30 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     - [x] **Chicago** - nothing to do: `business_activity` marks home-based
       businesses and the taxonomy already drops all of them (zero reach the
       map). Verified, not assumed.
-    - [ ] **San Diego - do this one first.** Not low exposure but *unmeasured*:
-      bare `address_suite` values ("A", "101") mean address text cannot flag a
-      residence, there is no parcel id, and 903 pins show a name identical to
-      the owner's. Needs a spatial join to SANDAG/SanGIS parcels
-      (`ASR_LANDUSE`, 91 types; `NUCLEUS_USE_CD`, 225 types), whose hosted
-      layers are split geographically (`Parcels_South` and siblings).
+    - [ ] **San Diego - Step 0 done 2026-09-21, implementation still to do.**
+      Better placed than expected: it has all three signals after all.
+      - Layer: `https://geo.sandag.org/server/rest/services/Hosted/Parcels/
+        FeatureServer/0` - **one countywide layer, 1,089,758 polygons**, so the
+        geographically split `Parcels_South`/`_North`/`_East` siblings are not
+        needed.
+      - **`ownerocc`** is an owner-occupancy flag (`'Y'` on 472,498 parcels,
+        null otherwise) - the occupancy signal this city was thought to lack.
+      - Land use is `asr_landuse` (numeric) with **no coded-value domain**, so
+        the codes were verified empirically rather than guessed:
+        **`11` = single-family detached** (571,236 parcels, `nucleus_use_cd`
+        110/111, `unitqty` 1, mostly `ownerocc='Y'`) and **`17` = condominium**
+        (199,972, `nucleus_use_cd` 171). Use **11 only**; exclude 17 for the
+        same reason as San Francisco's Multi-Family and New York's
+        multi-family lots.
+      - Also available: `apn`, `unitqty`, `situs_community`,
+        `nucleus_use_cd` (225 types, more granular if ever needed).
+      - The registry adds a fourth condition for free: `ownership_type='SOLE'`
+        (24,974 rows), the same kind of structural signal as Philadelphia's
+        `legalentitytype`. Requiring person-like name + SOLE + `asr_landuse=11`
+        + `ownerocc='Y'` makes this the most conservative of the three filters.
+      - Use the buffered-point approach from Los Angeles
+        (`fetch_parcel_residence.py`): an exact point-in-parcel test misses
+        pins whose coordinates sit on a street centreline.
     - [ ] **San Francisco - MEASURED 2026-09-21, and it is the real one: 217
       pins (1.19%) to remove.** A person-like name on a Single Family
       Residential parcel that claims a homeowner's exemption. Mostly home

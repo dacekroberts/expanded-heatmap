@@ -82,8 +82,26 @@ REGISTRIES = {
 # Splitting these is why Los Angeles' jewellery district stopped reading as 42%
 # "residential" (DECISIONS.md, 2026-09-21): STE in the Diamond District is an
 # office, APT is someone's home.
-UNIT_RESIDENTIAL = re.compile(r"\b(APT|APARTMENT|UNIT|RM|ROOM|FL|FLOOR|PH|BSMT|REAR|LOWR)\b")
-UNIT_COMMERCIAL = re.compile(r"\b(STE|SUITE|BLDG|FRNT|SPC|LBBY|OFC)\b")
+#
+# CORRECTED 2026-09-21. These lists contradicted their own source write-up,
+# `docs/passover_name_filtering_skill.md`, on three designators, and the
+# contradiction inflated every city's reported residential share:
+#   FL / FLOOR and RM / ROOM were listed as RESIDENTIAL here and COMMERCIAL
+#     there. "FL 3" and "RM 200" are an office floor and a room in a
+#     commercial building; a dwelling is APT or UNIT. Moved to commercial.
+#   SPC was listed as COMMERCIAL here and RESIDENTIAL there. A "space" is a
+#     mobile-home or trailer space, which is a home. Moved to residential,
+#     with SPACE and TRLR added alongside it.
+# The source's list also includes a bare LOT as residential (a trailer lot).
+# That is deliberately NOT adopted: in these registries "LOT" is at least as
+# likely to appear in a parking-lot address, and it could not be verified
+# either way, so adopting it would trade a known error for an unknown one.
+# PH / BSMT / REAR / LOWR are kept as residential - secondary dwelling units,
+# a refinement the source write-up predates rather than contradicts.
+UNIT_RESIDENTIAL = re.compile(
+    r"\b(APT|APARTMENT|UNIT|PH|BSMT|REAR|LOWR|SPC|SPACE|TRLR)\b")
+UNIT_COMMERCIAL = re.compile(
+    r"\b(STE|SUITE|BLDG|BUILDING|FRNT|LBBY|OFC|FL|FLOOR|RM|ROOM)\b")
 
 # Tokens that make a name read as an organisation rather than a person. Kept
 # broad on purpose: a false "organisation" only makes the report conservative.
@@ -310,8 +328,9 @@ def check(slug):
                 comm = addr[hit].map(lambda a: bool(UNIT_COMMERCIAL.search(a)))
                 print(f"    of the same {int(hit.sum()):,} rows: "
                       f"{int(resid.sum()):,} ({100 * resid.mean():.1f}%) at a "
-                      f"residential unit (APT/UNIT/FL/RM/PH) and {int(comm.sum()):,} "
-                      f"({100 * comm.mean():.1f}%) at a commercial one (STE/BLDG/FRNT)")
+                      f"residential unit (APT/UNIT/PH/SPC) and {int(comm.sum()):,} "
+                      f"({100 * comm.mean():.1f}%) at a commercial one "
+                      f"(STE/BLDG/FL/RM)")
                 print(f"    PERSON-LIKE NAME AT A RESIDENTIAL UNIT: {int(resid.sum()):,} "
                       f"of {len(rows):,} pins ({100 * int(resid.sum()) / len(rows):.2f}%)")
 
