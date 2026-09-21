@@ -42,19 +42,34 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   data colours are fixed, so no `--dm-*` variable touches them).
   **Everything needed to build it - palette, both value sets, the traps, the
   verification checklist - is in `docs/theming.md`.**
-  - Page first: `.streamlit/config.toml` with both light and dark blocks, then
-    the map's eleven `--dm-*` values swapped to match, verified against the
-    page behind them.
-  - Keep the teal accent `#5eead4`; do NOT use the handoff's `#4A5A78` for
-    `--dm-disabled-text` (2.7:1, below the 3:1 floor).
-  - The real work is hardcoded colours outside `config.toml` - the handoff
-    measured a label at 1.01:1 and icons at 2.77:1 doing this once. Grep
-    `app/components.py` and the pages for hex, `rgba`, `white`, `#fff`, and
-    check contrast numerically, not by eye. Light-mode values in
-    `map_common.py` are hardcoded too (`background: #fff; color: #1c2b2a`) and
-    need lifting into variables if the light look changes.
-  - Decide whether to follow `prefers-color-scheme` with a manual override
-    winning once used (currently manual-only).
+  - [x] `.streamlit/config.toml` with both light and dark blocks; the chooser
+    Streamlit had been suppressing is back (System / Light / Dark).
+  - [x] The map's `--dm-*` values swapped to slate, the macro map's duplicate
+    copy removed, and everything sourced from the new `pipeline/theme.py`.
+    `scripts/check_theme_sync.py` guards the one unavoidable TOML duplicate.
+  - [ ] **DECIDE: two theme controls now exist on one page** - Streamlit's
+    chooser drives the page, our button drives the maps, and they can disagree
+    (measured: dark page, light map, white button). Options:
+    - **(A, recommended)** Maps default to the ambient theme and a manual
+      click still wins. Detect it by luminance of the parent page's
+      background - Streamlit exposes no `data-theme` attribute, and
+      `prefers-color-scheme` alone only matches the default System case.
+      Standalone maps fall back to `prefers-color-scheme`. Keeps both controls
+      meaningful, needs no fighting of Streamlit's widget CSS, and is the same
+      mechanism the handoff's item 5 wanted anyway.
+    - **(B)** Drop Streamlit's chooser again (bare `[theme]`) and let our
+      button drive the page too, styling Streamlit's chrome from
+      `body.dark-base`. One control, but it means overriding framework widget
+      colours by hand - the thing the handoff measured as the real cost.
+    - **(C)** Remove the in-map button when embedded, leaving Streamlit's
+      chooser as the only control; standalone maps keep their button. Cleanest
+      conceptually, but loses the in-map toggle the `#map-actions` group is
+      built around.
+  - [ ] Sweep the remaining hardcoded colours in `app/` now that a dark page
+    exists: `Overview_&_Introduction.py` still has literal `white` and
+    `#1c2b2a` (lines ~90, ~139) for the macro map's markers and labels. Check
+    contrast numerically against `#0B1220`, not by eye - a 1.01:1 label looks
+    like empty space rather than a bug.
   - [x] Reconciled the two overlapping handoffs into `docs/theming.md`
     (2026-09-21). Both originals are in git history.
 

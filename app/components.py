@@ -6,9 +6,19 @@ identically on every page lives here once and gets called from each page,
 rather than duplicated per page.
 """
 
+import sys
+from pathlib import Path
+
 import streamlit as st
 
 from cities import CITIES, MAP_ONLY_NAV
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+# pipeline/theme.py imports nothing, so it is safe for the lean deploy venv
+# (streamlit + pandas only) - the same rule the city pages' config imports
+# follow. It is the single source for every chrome colour, shared with the city
+# maps' own CSS so a reskin cannot leave the macro map on the old palette.
+from pipeline.theme import DARK, LIGHT, rgba  # noqa: E402
 
 OVERVIEW_PAGE = "Overview_&_Introduction.py"
 
@@ -49,12 +59,14 @@ _MACRO_THEME_CSS = """
 #macro-theme-toggle {
     position: absolute; top: 10px; right: 52px; z-index: 20;
     font: 600 13px sans-serif; padding: 6px 12px; cursor: pointer;
-    background: #fff; color: #1c2b2a; border: 1px solid #999;
+    background: @@LIGHT_SURFACE@@; color: @@LIGHT_TEXT@@;
+    border: 1px solid @@LIGHT_BORDER@@;
     border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
-#macro-theme-toggle:focus-visible { outline: 2px solid #0d9488; outline-offset: 2px; }
-body.dark-base #macro-theme-toggle { background: #182322; color: #e6efee; border-color: #2e403e; }
-body.dark-base #macro-theme-toggle:hover { background: #1f2d2c; }
+#macro-theme-toggle:focus-visible { outline: 2px solid @@LIGHT_ACCENT@@; outline-offset: 2px; }
+body.dark-base #macro-theme-toggle { background: @@DARK_SURFACE@@; color: @@DARK_TEXT@@;
+    border-color: @@DARK_BORDER@@; }
+body.dark-base #macro-theme-toggle:hover { background: @@DARK_SURFACE_HOVER@@; }
 /* Only the basemap canvas is filtered; the markers and labels are a separate
    canvas, so they keep their colours. Same filter as the city maps. */
 body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-canvas {
@@ -108,8 +120,8 @@ _MACRO_CONTROLS_CSS = """
 /* Invert the whole zoom group (white -> near-black, dark glyph -> light); the
    glyph is the button's own background image, so it cannot be inverted alone. */
 body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-group { filter: invert(0.9); }
-body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib { background: rgba(15,23,22,0.8) !important; color: #8fa3a1; }
-body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib a { color: #5eead4; }
+body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib { background: @@DARK_ATTRIB_BG@@ !important; color: @@DARK_MUTED@@; }
+body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib a { color: @@DARK_ACCENT@@; }
 """
 
 
@@ -117,7 +129,22 @@ def render_macro_map_theme():
     """Dark Mode for the macro map: the toggle button on the map's frame and the
     CSS that darkens its basemap and controls. Shares its stored choice with
     the city maps (see _MACRO_THEME_JS). Call once on the Overview page."""
-    st.markdown(_MACRO_THEME_CSS.replace("@@CONTROLS@@", _MACRO_CONTROLS_CSS), unsafe_allow_html=True)
+    css = (
+        _MACRO_THEME_CSS.replace("@@CONTROLS@@", _MACRO_CONTROLS_CSS)
+        .replace("@@LIGHT_SURFACE@@", LIGHT["surface"])
+        .replace("@@LIGHT_TEXT@@", LIGHT["text"])
+        .replace("@@LIGHT_BORDER@@", LIGHT["border"])
+        .replace("@@LIGHT_ACCENT@@", LIGHT["accent"])
+        .replace("@@DARK_SURFACE@@", DARK["surface"])
+        .replace("@@DARK_SURFACE_HOVER@@", DARK["surface_hover"])
+        .replace("@@DARK_TEXT@@", DARK["text"])
+        .replace("@@DARK_BORDER@@", DARK["border"])
+        .replace("@@DARK_MUTED@@", DARK["muted"])
+        .replace("@@DARK_ACCENT@@", DARK["accent"])
+        .replace("@@DARK_ATTRIB_BG@@", rgba(DARK["page"], 0.8))
+    )
+    assert "@@" not in css, "unresolved placeholder in _MACRO_THEME_CSS"
+    st.markdown(css, unsafe_allow_html=True)
     # st.iframe rejects a height of 0, so the script-only frame is 1 px tall; it only
     # needs to run (same-origin access to the page is what lets it add the button).
     st.iframe(_MACRO_THEME_JS.replace("@@KEY@@", MACRO_THEME_KEY), height=1)

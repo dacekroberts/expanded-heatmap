@@ -1,13 +1,37 @@
-# Sets the default theme visitors see on first load. They can still
-# switch themselves via the hamburger menu > Settings - this only
-# changes the default, not a hard lock.
+# The app's page theme. The MAPS are themed separately, in
+# `THEME_TOGGLE_HTML` (pipeline/map_common.py) and `_MACRO_THEME_CSS`
+# (app/components.py), both of which read their palette from
+# `pipeline/theme.py`. TOML cannot import, so the values below are the one
+# unavoidable duplicate: **if you change a colour here, change it in
+# pipeline/theme.py too.** `scripts/check_theme_sync.py` verifies they agree.
 #
-# A light base with a teal accent, rather than Streamlit's default look, so
-# the app has its own identity (see app/components.py for the matching font
-# choice, and DECISIONS.md for why).
+# Both a [theme.light] and a [theme.dark] block are defined on purpose. A bare
+# [theme] block removes Streamlit's own theme chooser from the main menu, which
+# is what happened here before 2026-09-21: the previous version of this file
+# carried a comment claiming visitors could still switch via the hamburger
+# menu, and they could not - there was no Settings item at all. Defining both
+# variants restores the choice. See docs/theming.md.
+#
+# Light is the default: a white base with a teal accent, so the app has its own
+# identity rather than Streamlit's default look. Dark is "midnight slate", a
+# cool blue-navy chrome that sits naturally beside the maps' dark basemap
+# (which is an invert + hue-rotate filter, so it renders blue-grey).
+
 [theme]
 base = "light"
+
+[theme.light]
 primaryColor = "#0d9488"
 backgroundColor = "#ffffff"
 secondaryBackgroundColor = "#f1f5f4"
 textColor = "#1c2b2a"
+
+[theme.dark]
+# Teal accent lightened for a dark ground: #0d9488 reaches only 5.0:1 on
+# #0B1220, while #2dd4bf reaches 10.1:1. Measured, not estimated.
+primaryColor = "#2dd4bf"
+backgroundColor = "#0B1220"
+secondaryBackgroundColor = "#131C2E"
+textColor = "#E6EDF7"
+linkColor = "#7CB7FF"
+borderColor = "#23304A"

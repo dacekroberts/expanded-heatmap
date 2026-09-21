@@ -14,6 +14,56 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Midnight slate: page themed, palette unified, one gap left
+
+- **The page theme is in, and Streamlit's theme chooser is back.** Verified
+  empirically rather than assumed, because the handoff's warning was written
+  about another project: with the previous bare `[theme]` block the main menu
+  offered only Rerun / Auto rerun / Clear cache / Print / Record screen - **no
+  Settings item at all**, so the old comment in `config.toml` claiming visitors
+  could switch via the hamburger menu was **already false before this change**,
+  not made false by it. Defining `[theme.light]` and `[theme.dark]` restored a
+  System / Light / Dark chooser, and the page now renders `#0B1220`.
+- **The palette had a second, undocumented home.** `app/components.py` carried
+  its own literal copies of `#182322`, `#e6efee`, `#2e403e`, `#1f2d2c`,
+  `#8fa3a1`, `#5eead4` and `rgba(15,23,22,0.8)` for the macro map's chrome,
+  mirroring `map_common.py` with no shared source - so a reskin of one would
+  have produced a navy city map beside a teal macro map. Found by grepping for
+  hardcoded colour before editing, which is what the handoff said the real work
+  would be.
+- **`pipeline/theme.py` is now the single source** for every chrome colour,
+  light and dark. It imports nothing, so `app/` can read it under the lean
+  deploy venv, the same rule the city pages' config imports already follow.
+  Both the map CSS and the macro-map CSS build from it, with an assertion that
+  no placeholder is left unresolved. Business-category and transit-line colours
+  are deliberately NOT in it: those are data, not chrome.
+- **Two selector traps made structurally impossible.** The dark rules match on
+  `[stroke="#2c3e50"]` (rings) and `[stroke="#1a5490"]` (stations), which only
+  works because each colour is used nowhere else - and `docs/theming.md`
+  records that changing either light value silently breaks its dark rule. The
+  selector and the drawing code now read the same `LIGHT` entry, so they cannot
+  drift. The dark label halo and attribution strip also stopped re-typing the
+  page colour as literal channel values (`rgba(15,23,22,0.8)`); they derive it.
+- **`scripts/check_theme_sync.py`** exists because TOML cannot import, making
+  `.streamlit/config.toml` the one unavoidable duplicate. It compares both
+  variants against `pipeline/theme.py` and fails on a mismatch, a missing
+  variant, or a colour set on the bare `[theme]` table where it would silently
+  apply to both. Currently: 10 values in sync.
+- **The gap, stated plainly: there are now two independent theme controls on
+  one page.** Streamlit's chooser drives the page; our own button drives the
+  maps. Measured immediately after the change: page background `#0B1220`
+  (dark), `body.dark-base` absent (maps light), and a white map button on a
+  dark page. Nothing is broken - no error blocks - but it is visibly
+  incoherent, and it is a direct consequence of giving the page a theme at all.
+  Options and a recommendation are in `PLAN.md`; not resolved unilaterally
+  because it changes visitor-facing behaviour.
+- Useful finding for whichever option is chosen: **Streamlit exposes no theme
+  signal** - no `data-theme` attribute on `<html>` or `<body>`, no CSS custom
+  property. But the page background reflects whichever of System / Light / Dark
+  the visitor picked, and the map iframes are same-origin, so a luminance read
+  of the parent's background detects all three. `prefers-color-scheme` alone
+  would only match the default System case.
+
 ### 2026-09-21 - Two theme handoffs merged into docs/theming.md
 
 - **Decision: one theming document, not two.** `dark_mode_handoff.md` and

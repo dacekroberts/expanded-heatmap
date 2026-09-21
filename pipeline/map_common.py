@@ -25,6 +25,7 @@ import pandas as pd
 from folium.plugins import HeatMap, FastMarkerCluster
 
 from pipeline.taxonomies import CATEGORY_BUCKETS, load_taxonomy_module
+from pipeline.theme import DARK, LIGHT, css_vars, rgba
 
 # Decimal places every coordinate is rounded to before it reaches the HTML.
 # Folium emits a float's full repr - "40.76248502732357", 17 significant
@@ -51,44 +52,46 @@ HEAT_GRADIENT = {0.3: "#fee0d2", 0.5: "#fc9272", 0.7: "#fb6a4a", 0.85: "#de2d26"
 # Only the tile pane is filtered (invert + hue-rotate keeps water blue), so no
 # second base layer or tile provider is needed; overlays are recoloured by the
 # rules below. Palette is one variable block: retheme it there.
-THEME_TOGGLE_HTML = """
+_THEME_TOGGLE_TEMPLATE = """
 <style>
     #map-actions { position: fixed; top: 10px; right: 10px; z-index: 10000;
         display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end;
         max-width: calc(100% - 56px); }   /* clear of the zoom control on a phone */
     .map-btn {
         font: 600 13px sans-serif; padding: 6px 12px; cursor: pointer;
-        background: #fff; color: #1c2b2a; border: 1px solid #999;
+        background: @@LIGHT_SURFACE@@; color: @@LIGHT_TEXT@@;
+        border: 1px solid @@LIGHT_BORDER@@;
         border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.3);
     }
     .map-btn[hidden] { display: none; }
-    .map-btn:focus-visible { outline: 2px solid #0d9488; outline-offset: 2px; }
+    .map-btn:focus-visible { outline: 2px solid @@LIGHT_ACCENT@@; outline-offset: 2px; }
     #city-menu { width: 84px; text-overflow: ellipsis; }
     @media (max-width: 480px) {
         #map-actions { gap: 6px; }
         .map-btn { padding: 6px 7px; font-size: 12px; }
         #city-menu { width: 78px; }
     }
-    .dark-base { color-scheme: dark;
-        --dm-page: #0f1716; --dm-surface: #182322; --dm-surface-hover: #1f2d2c;
-        --dm-surface-disabled: #131c1b; --dm-border: #2e403e; --dm-text: #e6efee;
-        --dm-muted: #8fa3a1; --dm-disabled-text: #4a5b59; --dm-accent: #5eead4;
-        --dm-ring: #cfe0de; --dm-station: #7cc0ff;
+    .dark-base { color-scheme: dark; @@DARK_VARS@@
         background: var(--dm-page); }
     .dark-base .leaflet-tile-pane {
         filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9) saturate(0.7); }
     .dark-base .map-btn { background: var(--dm-surface); color: var(--dm-text);
         border-color: var(--dm-border); }
     .dark-base .map-btn:hover { background: var(--dm-surface-hover); }
-    .dark-base path.leaflet-interactive[stroke="#2c3e50"] { stroke: var(--dm-ring); }
-    .dark-base path.leaflet-interactive[stroke="#1a5490"] {
+    /* These two selectors match on the LIGHT ring and station colours, which
+       is only safe because each is used nowhere else on the map. Both the
+       selector and the drawing code below read the same LIGHT value, so they
+       cannot drift apart - changing one used to silently break the other. */
+    .dark-base path.leaflet-interactive[stroke="@@LIGHT_RING@@"] { stroke: var(--dm-ring); }
+    .dark-base path.leaflet-interactive[stroke="@@LIGHT_STATION@@"] {
         stroke: var(--dm-station); fill: var(--dm-station); }
     .dark-base .leaflet-overlay-pane path[stroke-width="4"] { filter: brightness(1.55) saturate(0.9); }
     .dark-base .map-legend span[style*="height:3px"] { filter: brightness(1.55) saturate(0.9); }
     .dark-base .leaflet-marker-icon div[style*="text-shadow"] {
         filter: brightness(1.8);
-        text-shadow: -1px -1px 0 #0f1716, 1px -1px 0 #0f1716, -1px 1px 0 #0f1716,
-                     1px 1px 0 #0f1716, 0 0 6px #0f1716 !important; }
+        text-shadow: -1px -1px 0 var(--dm-page), 1px -1px 0 var(--dm-page),
+                     -1px 1px 0 var(--dm-page), 1px 1px 0 var(--dm-page),
+                     0 0 6px var(--dm-page) !important; }
     .dark-base .map-legend { background: var(--dm-surface) !important;
         color: var(--dm-text) !important; border-color: var(--dm-border) !important; }
     .dark-base .leaflet-bar, .dark-base .leaflet-control-layers {
@@ -102,7 +105,7 @@ THEME_TOGGLE_HTML = """
         background-color: var(--dm-surface-disabled); color: var(--dm-disabled-text); }
     .dark-base .leaflet-control-layers-toggle { filter: invert(1); }
     .dark-base .leaflet-control-layers-separator { border-top-color: var(--dm-border); }
-    .dark-base .leaflet-control-attribution { background: rgba(15,23,22,0.8); color: var(--dm-muted); }
+    .dark-base .leaflet-control-attribution { background: @@DARK_ATTRIB_BG@@; color: var(--dm-muted); }
     .dark-base .leaflet-control-attribution a { color: var(--dm-accent); }
     .dark-base .leaflet-tooltip { background: var(--dm-surface); color: var(--dm-text);
         border-color: var(--dm-border); box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
@@ -214,6 +217,22 @@ THEME_TOGGLE_HTML = """
 })();
 </script>
 """
+
+# Resolved once, from pipeline/theme.py, so no colour is written twice. The
+# template uses @@NAME@@ placeholders rather than str.format because it is full
+# of literal CSS and JS braces.
+THEME_TOGGLE_HTML = (
+    _THEME_TOGGLE_TEMPLATE
+    .replace("@@DARK_VARS@@", css_vars(DARK))
+    .replace("@@DARK_ATTRIB_BG@@", rgba(DARK["page"], 0.8))
+    .replace("@@LIGHT_SURFACE@@", LIGHT["surface"])
+    .replace("@@LIGHT_TEXT@@", LIGHT["text"])
+    .replace("@@LIGHT_BORDER@@", LIGHT["border"])
+    .replace("@@LIGHT_ACCENT@@", LIGHT["accent"])
+    .replace("@@LIGHT_RING@@", LIGHT["ring"])
+    .replace("@@LIGHT_STATION@@", LIGHT["station"])
+)
+assert "@@" not in THEME_TOGGLE_HTML, "unresolved placeholder in THEME_TOGGLE_HTML"
 
 # A native <details>/<summary>, so the legend collapses and expands with a
 # click and needs no script. Open by default; collapsed it shrinks to a small
@@ -911,7 +930,8 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
                 location=[round(station["latitude"], COORD_DP),
                           round(station["longitude"], COORD_DP)],
                 radius=ring_edges_meters[i + 1],
-                color="#2c3e50", weight=1, fill=False, opacity=0.5,
+                # Same LIGHT value the dark-mode selector matches on.
+                color=LIGHT["ring"], weight=1, fill=False, opacity=0.5,
             ).add_to(layer)
         layer.add_to(m)
 
@@ -920,7 +940,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
         folium.CircleMarker(
             location=[round(station["latitude"], COORD_DP),
                       round(station["longitude"], COORD_DP)],
-            radius=5, color="#1a5490", fill=True, fill_opacity=0.9,
+            radius=5, color=LIGHT["station"], fill=True, fill_opacity=0.9,
             tooltip=folium.Tooltip(f"<b>{html.escape(station['station'])}</b>", sticky=True),
         ).add_to(station_layer)
     station_layer.add_to(m)
