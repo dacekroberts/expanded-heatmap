@@ -195,7 +195,9 @@ at the page.
 
 ## 4. Skills and subagents worth building
 
-Each tied to an incident above rather than invented.
+Each tied to an incident above rather than invented. **Three of these were
+built on 2026-09-21 and two were deliberately dropped — see §7 for what
+landed and why.**
 
 ### 4.1 `read-licence` (skill) — highest value
 
@@ -290,3 +292,80 @@ Worth recording so it is not accidentally dropped:
 - **Vancouver**, briefed by the staging session and not yet started — the first
   non-US city, so `add-country` applies and the brief's ASSERTED claims need
   verifying before anything is built on them.
+
+---
+
+## 7. What was built from §4, and what was dropped
+
+Acted on the same day the retrospective was written, in the build session
+rather than staging, because staging was mid-research. Every edit was kept
+**additive** so a merge with staging's own skill work stays clean — and that
+caution earned itself immediately: staging had already expanded the same
+`add-city` section (the `screen_rail.py` traps), which moved an anchor and cost
+one retry. That is the collision `session_roles.md` predicts, appearing in
+miniature.
+
+Committed as `7b7f356`. Note `.claude/skills/` is staging's path under the
+roles scheme; built here at the owner's request.
+
+### Built: `read-licence` (new skill)
+
+Structured as one failure mode turned into a procedure, since every licence
+correction in this project came from not opening a page an earlier review had
+merely *cited*. It leads with the four worked cases from §3.2 so the shape is
+recognisable before the steps, and its two load-bearing steps are the ones a
+reader will skip:
+
+- **grep the dataset page for incorporation language** — "constitutes
+  acceptance", "agree to be bound", "subject to" — which is where
+  Philadelphia's prohibition was hiding, behind a licence that forbids nothing;
+- **ask of every document whether its language describes web pages or data** —
+  "print single pages", "exactly as presented" is a site footer; "datasets",
+  "redistribute", "derivative works" is reuse terms.
+
+It also records the trap that caught me within the hour of raising it: checking
+whether the portal is the publisher can *backfire*, because Philadelphia's own
+`metadata.phila.gov` links the same Terms of Use, which killed the third-party
+argument. And it forces one of four stated outcomes — PERMITTED, PERMITTED WITH
+CONDITIONS, SILENT (naming which pages were read, so it is an established
+absence rather than an unexamined gap), or NOT PERMITTED — with the last
+explicitly **not resolvable in this project's favour**.
+
+Wired into `CLAUDE.md`'s licence invariant and `add-city` Step 0.4, so it is
+reachable from both places a licence question actually arises.
+
+### Built: four `add-city` amendments
+
+1. **Every Step 0 percentage must name the set it was measured on**, and that
+   set must be the one reaching the map (§3.1).
+2. **Check `feed_info.txt` for a validity window** on the feed actually used,
+   and where it is short, re-check `feed_end_date` on every fetch including runs
+   that skip the download — because an expired feed still parses, still has the
+   right station count, and still builds a map.
+3. **Keyed feeds** read from the environment and never echo the key, so the 401
+   path prints that the key was rejected rather than the key itself.
+4. **The download boundary is the privacy control**: omit personal columns from
+   the request rather than filtering later, then assert in step 2 that they
+   stayed absent. D.C. omits eight, including `BILLINGADDRESS`.
+
+### Built: `deploy-verify` extended, not duplicated
+
+The §4.2 lessons went into the existing agent definition rather than a parallel
+`verify-render` skill, so there is one place to drift from: a collapsed
+`st.expander` is not in the DOM; the deployed site returns empty DOM probes
+while rendering fine; identify the default theme before measuring any colour.
+
+### Dropped: the batched browser-verification subagent
+
+It was the session's largest token cost, but the cheaper fix needs no agent —
+serve `check_map_labels.js` over the existing static server and `fetch` it from
+inside the page, which removes the per-city payload entirely. Recorded here so
+the subagent idea is not revived without first trying the one-line version.
+
+### Dropped: `check_colour_contrast.py`
+
+Written ad hoc twice, but both times for the same one-off question. Two uses of
+one question is not yet a pattern. The measurements it produced are preserved
+where they are actually needed — in `pipeline/washington_dc/config.py`'s
+`LINE_NAMES` comment and in `deploy-verify` — which is where a future reader
+would look.
