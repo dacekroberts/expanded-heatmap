@@ -766,14 +766,19 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 - [ ] Macro map at scale: with ~10+ cities, consider grouping nearby cities,
   and showing each city's mapped extent or a one-line summary in the tooltip.
-  **The label half of this was done on 2026-09-21** - per-city pixel
-  `label_offset`s in `cities.py`, 11 collisions to 0 - but the MARKERS still
-  overlap and no label placement can fix that: New York/Philadelphia dots sit
-  6.0 px apart and Philadelphia/Washington D.C. 9.0 px, against a 6 px radius,
-  and because `fit_view` pins the zoom to a 320 px reference those separations
-  are identical at 340 px and 1200 px. Extra screen width becomes margin, not
-  separation. Clicking is no longer blocked by it (the name pills are pickable
-  now), so what remains is cosmetic.
+  **Both halves were done on 2026-09-21.** The labels got per-city pixel
+  `label_offset`s in `cities.py` (11 collisions to 0), and the markers were
+  shrunk from radius 6 with a 2 px ring to radius 4 with a 1 px ring - outer
+  diameter 16 px to 10 px - which separates New York/Boston and New York/D.C.
+  outright and cuts the worst overlap, New York/Philadelphia, from 10 px to
+  4 px. Radius 3 was tried and rejected as too faint.
+  **What cannot be fixed, with the arithmetic so nobody retries it:** at the
+  fitted zoom 1 px is about 21.7 km at New York's latitude, so displacing New
+  York enough to clear Philadelphia would take **217 km** and put its dot west
+  of Pittsburgh. The separations are also width-independent, because `fit_view`
+  pins the zoom to a 320 px reference and spends extra width as margin. The
+  residual touching is cosmetic only: the name pills are pickable, so clicking
+  never depends on hitting a dot.
   - **Known issue, accepted rather than fixed:** scrolling the page with the
     cursor over the macro map zooms the MAP instead of scrolling the page, and
     that view then persists across reloads via the widget key. The fix is to

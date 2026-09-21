@@ -92,14 +92,36 @@ markers = pdk.Layer(
     id="cities",
     data=cities,
     get_position="[lon, lat]",
-    get_radius=6,
+    # 4 px with a 1 px ring, reduced from 6 px with a 2 px ring on 2026-09-21.
+    #
+    # WHY THE DOTS ARE SMALL: at the fitted continental zoom the eastern cities
+    # are a few pixels apart, and at 16 px outer diameter they merged into one
+    # teal blob. Measured separations: New York/Philadelphia 6.0 px,
+    # Philadelphia/Washington D.C. 9.0 px, New York/Boston 14.4 px, New
+    # York/D.C. 15.0 px, San Diego/Los Angeles 7.7 px. Those numbers are the
+    # same at 340 px and 1200 px, because fit_view pins the zoom to a 320 px
+    # reference and spends extra width as margin.
+    #
+    # At 10 px outer this separates New York/Boston and New York/D.C. outright
+    # and cuts the worst overlap from 10 px to 4 px, so the cluster reads as
+    # distinct dots. 3 px was tried and rejected: it separates one more pair
+    # but the dots stop working as position indicators, reading as specks for
+    # the isolated cities.
+    #
+    # DO NOT TRY TO FIX THIS BY MOVING THE MARKERS. At this zoom 1 px is about
+    # 21.7 km at New York's latitude, so separating New York from Philadelphia
+    # would take **217 km** of displacement - New York's dot would land west of
+    # Pittsburgh. Displacement was considered and is arithmetically dead. The
+    # remaining overlap is cosmetic only: since the name pills became pickable,
+    # clicking no longer depends on hitting a dot.
+    get_radius=4,
     # pdk.types.String, not a bare str: pydeck would serialize "pixels" as the
     # expression "@@=pixels" (an undefined variable) and break the radius.
     radius_units=pdk.types.String("pixels"),
     get_fill_color=TEAL,
     get_line_color=OUTLINE,
     stroked=True,
-    line_width_min_pixels=2,
+    line_width_min_pixels=1,
     pickable=True,
     auto_highlight=True,
     highlight_color=HIGHLIGHT,

@@ -14,6 +14,50 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Macro-map markers shrunk; displacing them is arithmetically dead
+
+- **The last item in the deferred macro-map pass, and the only one that was
+  still genuinely open.** The label half was fixed earlier the same day (11
+  collisions to 0) and the clicking half was fixed by making the name pills
+  pickable. What remained was purely visual: at the fitted continental zoom the
+  eastern dots merged into one teal blob.
+- **Radius 6 with a 2 px ring becomes radius 4 with a 1 px ring** - outer
+  diameter 16 px down to 10 px. That separates New York/Boston and New
+  York/Washington D.C. outright and cuts the worst overlap, New
+  York/Philadelphia, from 10 px to 4 px, so the cluster reads as distinct dots
+  instead of a smear. Verified by screenshot at 1000 px.
+- **Radius 3 was tried and rejected.** It separates one more pair
+  (Philadelphia/D.C.) but the dots stop functioning as position indicators -
+  for the isolated cities they read as specks. The measured separations are
+  unchanged by width, because `fit_view` pins the zoom to a 320 px reference
+  and spends extra screen width as margin: New York/Philadelphia 6.0 px,
+  Philadelphia/D.C. 9.0 px, New York/Boston 14.4 px, New York/D.C. 15.0 px,
+  San Diego/Los Angeles 7.7 px, identical at 340 px and 1200 px.
+- **MOVING THE MARKERS IS ARITHMETICALLY IMPOSSIBLE, and this is the number
+  worth keeping.** At the fitted zoom the world is 1,401 px wide, so 1 px is
+  0.257 degrees of longitude - about **21.7 km** at New York's latitude.
+  Separating New York from Philadelphia would therefore need **217 km** of
+  displacement, putting New York's dot west of Pittsburgh. Philadelphia/D.C.
+  would need 152 km and San Diego/Los Angeles 180 km. Dot displacement is a
+  real cartographic technique and it is simply not available at a continental
+  zoom. Recorded in `app/Overview.py` beside the radius so the idea is not
+  revived.
+- **A note on how this came up, because the misremembering is instructive.**
+  The owner asked to tackle the marker overlap believing it had already been
+  solved "when we moved east coast coordinates to atlantic ocean". Nothing was
+  ever moved into the Atlantic: that was a proposal about where to put the
+  *labels*, withdrawn the same day because the Atlantic space only exists at
+  desktop width (315 px there against 58 px on a phone). What shipped was
+  labels placed 14 px EAST of their own dots, and the markers were never
+  touched - as the report at the time said: "five marker overlaps remain that
+  labels can't fix". Two adjacent decisions about the same cluster, one
+  adopted and one withdrawn, are easy to merge in memory; the arithmetic above
+  is the durable answer either way.
+- **Clicking re-verified after shrinking**, because a smaller dot is a smaller
+  target: San Francisco's 4 px dot still opens its page, and Boston's name pill
+  still opens Boston. The pills remain the reliable target inside the cluster,
+  which is why shrinking the dots costs nothing functionally.
+
 ### 2026-09-21 - Philadelphia: ask for permission, stay up on a reasoned position meanwhile
 
 - **The owner's decision**, taken after reading the prohibition in the City's
