@@ -198,19 +198,27 @@ _THEME_TOGGLE_TEMPLATE = """
         }
         return out;
     }
-    function currentCity() {                    // /Chicago_Heatmap -> Chicago
-        var parts = window.parent.location.pathname.split('/').filter(Boolean);
-        var seg = decodeURIComponent(parts.length ? parts[parts.length - 1] : '');
-        var tail = '_Heatmap';
-        if (seg.slice(-tail.length) === tail) seg = seg.slice(0, -tail.length);
-        return seg.split('_').join(' ');
+    // Identify "which page is this" by PAGE SLUG, not by display label.
+    //
+    // This used to derive a city name from the URL ("/Miami_Heatmap" -> "Miami")
+    // and compare it to the link's text. That breaks as soon as a city's
+    // display name is not its filename: Miami's label is "Miami (Regional)",
+    // so the comparison never matched and Miami's own map listed Miami in its
+    // "Cities" dropdown. Comparing slug to slug is immune to the label, which
+    // matters because a regional map's name will keep diverging from its
+    // filename (a Seattle build spanning twelve municipalities is the next).
+    function lastSegment(path) {
+        var parts = String(path || '').split('?')[0].split('#')[0]
+            .split('/').filter(Boolean);
+        return decodeURIComponent(parts.length ? parts[parts.length - 1] : '');
     }
     function fillMenu() {
         if (menu.options.length > 1) return;    // already built
-        var here = currentCity(), links = cityLinks();
+        var here = lastSegment(window.parent.location.pathname);
+        var links = cityLinks();
         for (var i = 0; i < links.length; i++) {
             var name = links[i].textContent.trim();
-            if (name === here) continue;
+            if (lastSegment(links[i].getAttribute('href')) === here) continue;
             var o = document.createElement('option');
             o.value = name; o.textContent = name;
             menu.appendChild(o);
