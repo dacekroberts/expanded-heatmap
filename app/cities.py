@@ -93,4 +93,12 @@ CITIES = [
         "page": "pages/8_Boston_Heatmap.py",
         "blurb": "MBTA rapid transit (Red, Orange, Blue, Green Lines and the Mattapan Trolley)",
     },
+    {
+        "name": "Washington D.C.",
+        "lat": 38.9072,
+        "lon": -77.0369,
+        "page": "pages/9_Washington_DC_Heatmap.py",
+        "blurb": "WMATA Metrorail (Red, Blue, Green, Yellow, Orange, Silver "
+                 "Lines; the 40 stations inside the District)",
+    },
 ]

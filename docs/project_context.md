@@ -225,7 +225,40 @@ Cities built and running end to end (pipeline, map, app page):
   be acknowledged as the provider, which takes the mandatory-notice count from
   four to five.
 
-Next by ease ranking: Washington D.C., carrying caveats.
+- **Washington D.C.** - WMATA Metrorail: the Red, Blue, Green, Yellow,
+  Orange and Silver Lines, six lines drawn from six route_ids. Distinctive in
+  four ways.
+
+  It is the **first non-NAICS registry in the project to cover all three
+  buckets on its own**. New York needed four sources and Boston three;
+  Philadelphia and Boston each ended up with a category missing entirely.
+  D.C.'s Basic Business License register licenses restaurants, shops and salons
+  in one file, so there is no `source` column to dispatch on and no
+  cross-source dedup. What it needs instead is a **verdict on all 95 licence
+  categories**, because `classify()` raises rather than defaulting: 61% of the
+  in-District register is residential rentals and a further 11,074 rows are
+  `General Business`, the office catch-all.
+
+  It is the **only feed behind an API key**, and the only one that **expires**:
+  WMATA declares a ten-day validity window, so `fetch_sources.py` re-checks
+  `feed_end_date` on every run, including runs that skip the download, and
+  treats an expired copy as an error. The key is read from the environment and
+  never printed.
+
+  Its **published coordinates are useless** - `LATITUDE` is 39 and `LONGITUDE`
+  is -77 on every row in the register - so step 2 reprojects
+  `X_COORDINATE`/`Y_COORDINATE` from EPSG:26985 instead, a third CRS distinct
+  from the city's own EPSG:32618. That leaves 6.9% of storefront rows with no
+  coordinates at all, which makes this the second city after Los Angeles to
+  need a **geocoding step**, so its map is step 4.
+
+  And **58 of its 98 stations are outside the District** - the second-largest
+  station exclusion here after San Diego's. The states they lie in are NAMED
+  rather than merely counted, which is why a Census TIGERweb layer is
+  downloaded alongside the District's own boundary.
+
+Next by ease ranking: New Orleans and Seattle, both needing decisions before
+code - a streetcar-only scope question and a multi-municipality build.
 **Check a candidate's registry actually covers all three buckets before
 assuming one source is enough** - that assumption failed for New York, and in
 Philadelphia a whole bucket had no source at any level of government. See

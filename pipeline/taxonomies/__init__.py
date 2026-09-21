@@ -62,6 +62,10 @@ TAXONOMY_MODULES = {
     # that is NULL on every row, so NAICS is unavailable despite being in the
     # schema - see miami_catgryname.py.
     "miami_catgryname": "pipeline.taxonomies.miami_catgryname",
+    # Washington D.C.'s Basic Business License BUSINESSACTIVITY - the first
+    # non-NAICS source here that covers all three buckets on its own, so unlike
+    # New York's and Boston's it dispatches over no `source` column.
+    "dc_businessactivity": "pipeline.taxonomies.dc_businessactivity",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

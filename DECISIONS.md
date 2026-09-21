@@ -14,6 +14,191 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Washington D.C. built: one register, three buckets, a feed that expires
+
+- **Ninth city, and the first non-NAICS registry in the project that covers all
+  three buckets on its own.** 5,230 premises (Food service 3,285, Retail 1,415,
+  Personal services 530) of which **3,860 fall within a ring across the 40
+  in-District stations** - **73.8% ring coverage, the highest here**, against
+  Miami's 12.6% and Boston's 76%. New York needed four registries and Boston
+  three; Philadelphia and Boston each lost a whole category. D.C.'s Basic
+  Business License register licenses restaurants, shops and salons in one file,
+  so there is no `source` column to dispatch on and no cross-source dedup.
+- **Every one of the 95 licence categories has a written verdict, and
+  `classify()` RAISES on an unknown one** rather than defaulting to None. A new
+  licence category appearing upstream is a thing to look at, not to drop
+  silently, and step 2 reports the whole unseen set at once rather than
+  surfacing them one exception at a time.
+- **Most of the register is not a business, and that is the Philadelphia
+  lesson applied.** 37,195 of the 61,329 active in-District rows (61%) are
+  residential rentals - One Family Rental 25,557, Apartment 6,081, Two Family
+  Rental 2,558, Short Term Rental 2,196, Vacation Rental 803 - dropped
+  server-side at download. A further **11,074 are `General Business`**, the
+  office and professional catch-all: law firms, engineering practices,
+  architects, developers, home-care agencies. That is the single largest
+  category exclusion in the project.
+- **The `General Business` exclusion was checked, not assumed.** A sample of it
+  held a Wawa and a Cava Mezze Grill alongside the law firms, which looked like
+  evidence against excluding it. Measured instead: **692 of its rows (6%) share
+  a licensee with a kept storefront licence and 2,975 (27%) share a MAR_ID**, so
+  a shop that landed in this category keeps its pin through its real activity
+  licence. What the exclusion removes is offices.
+- **THREE STEP 0 FINDINGS WERE WRONG, and the corrections are the useful part
+  of this build.**
+  - *"Trade name is missing on 49% of storefront rows ... the Los Angeles trap
+    at half LA's severity."* That 49% was measured before the category
+    exclusions, and `General Business` - 11,074 office rows, mostly with no
+    trade name - is most of it. On the rows that reach the map the gap is
+    **26.9%**, and **85.6% of those carry a company-shaped `ENTITYNAME`**. The
+    person-like residual is **75 rows, of which 72 are incorporated entities**
+    (LLC, corporation, LP) registered under a founder's name - San Diego's case
+    exactly, a deliberate public commercial act rather than a fallback the
+    pipeline substituted. **Three** are sole proprietorships, and each holds a
+    licence (Grocery Store, Barber Shop, Delicatessen) that requires commercial
+    premises. The LA trap does not materialise here.
+  - *"`MAR_ID` should recover the rest [of the missing coordinates] without the
+    Census geocoder."* It cannot: **the 452 rows with no coordinates are the
+    same rows that lack `MAR_ID`**, because both are what the District's own
+    geocoder failed on - which is also why 409 of them have a blank `WARD`. So
+    a geocoding step was needed after all, and this is the second city after
+    Los Angeles whose map is step **4**.
+  - *"`General Business` (14,770)."* Scoped to active and in-District it is
+    **11,074**. Three wrong numbers from one probe, all from measuring on a
+    different denominator than the build uses.
+- **The geocoding recovery, and its bias check.** 451 premises had no
+  coordinates (8.5% after dedup); the Census geocoder matched **387 (85.8%)**,
+  and **all 387 fell inside the District polygon**, not merely its bounding box.
+  The residual loss is **64 rows, 1.2%**, spread evenly (Food service 0.9%,
+  Retail 2.1%, Personal services 0.6%) - so it distorts nothing. Different in
+  kind from Los Angeles', where the flagged rows had CORRUPT coordinates biased
+  towards recent registrations; D.C.'s simply have none.
+- **`LATITUDE` and `LONGITUDE` are ignored entirely.** They are literally `39`
+  and `-77` on all 76,107 active rows - 0 inside the District. The real
+  coordinates are `X_COORDINATE`/`Y_COORDINATE` in **EPSG:26985**, NAD83
+  Maryland state plane in METRES (not the US-survey-feet variant Boston's
+  sources use), verified by transformation rather than assumed. That is a
+  **third** CRS in one city, distinct from the city's own EPSG:32618. 6,052 of
+  6,052 reprojected points land inside the District's bounds, which is the check
+  that would catch a wrong EPSG.
+- **The premises key is a real address id for once.** `MAR_ID` is the
+  District's Master Address Repository identifier, paired with `CUSTOMERNUMBER`,
+  the register's own per-licensee id - better than Boston's and Miami's
+  name-plus-address fallback. 812 licensees hold more than one kept licence
+  type; **121 hold exactly Cigarette Sales + Food Products + Patent Medicine**,
+  which is one corner shop and not three businesses. Rows with no `MAR_ID` key
+  on their own `record_id` so they cannot collapse into one another.
+- **The bucket tie-break was chosen by measuring the alternative.** 345
+  premises hold licences in more than one bucket, and every one of them crosses
+  Food service <-> Retail: **no licensee anywhere in the register mixes Personal
+  services with another bucket**, so that entry in `BUCKET_PRIORITY` never
+  decides anything. Food service first, consistent with Boston. A more
+  elaborate rule ranking a licence that names what the premises IS
+  ("Restaurant", "Grocery Store") above an endorsement it merely holds
+  ("Cigarette Sales", "Patent Medicine") produces an **identical** split, so
+  the simple rule costs nothing; Retail-first would move 368 premises (7%).
+- **`Delicatessen` is ambiguous in the source, and stays ambiguous.** D.C.
+  issues it to sandwich shops and cafés AND to corner shops: a sample of 25 held
+  Julia's Empanadas and Call Your Mother Deli next to a 7-Eleven, a Safeway and
+  a convenience store. Counted as Food service, which fits the plurality, but
+  **~180 premises hold it with no other descriptive licence and could honestly
+  read either way**. Excluding it would remove a fifth of the city's food
+  service; splitting it needs trade-name classification the source does not
+  support. Kept, counted as food, and said out loud on the city page.
+- **THE SILVER LINE COLOUR WAS DECIDED TWICE, AND THE FIRST MEASUREMENT WAS
+  AGAINST THE WRONG BASEMAP.** WMATA's `#919D9D` is grey, and against the LIGHT
+  basemap it is the weakest colour in the project: Delta-E 31.4 from OSM's land
+  fill, 36.5 from road fill, 22.0 from unpaved track. On that measurement it was
+  darkened to `#5F6A6A` (51.0 / 56.3 / 41.0) - the treatment New York's Staten
+  Island Railway and Boston's Mattapan Trolley already carry - and **the owner
+  approved that change on those numbers**.
+  The numbers were incomplete. **This map opens in DARK mode**, where
+  `map_common.py` does not invert the line strokes but BRIGHTENS them
+  (`brightness(1.55) saturate(0.9)`) while inverting the tiles underneath. Both
+  sides of the comparison move, in opposite directions:
+
+      | colour            | dark mode (default) | light mode (toggle) |
+      | #919D9D official  |        75.4         |        22.0         |
+      | #5F6A6A darkened  |        47.2         |        41.0         |
+      | for scale: Blue   |        81.7         |        54.3         |
+
+  So darkening made the Silver Line the **worst-contrast line in the city in
+  the mode every reader sees first**, to fix the mode they have to ask for -
+  and in the render it was untraceable, legend swatch included. Eight
+  hue-shifted slates were measured too; the ones beating `#5F6A6A`'s worst case
+  did it by drifting towards the Blue Line's hue (Delta-E 30.7 from Blue against
+  the official colour's 42.0), trading one confusion for a worse one. **All six
+  colours are therefore WMATA's own, as published**, and the residual is
+  recorded rather than engineered around: in light mode the Silver Line is
+  harder to trace than the other five. Reported to the owner as a correction to
+  an approved decision.
+- **58 of 98 stations are outside the District, and they are NAMED.** 32 in
+  Virginia, 26 in Maryland - the second-largest station exclusion here after
+  San Diego's 25%. D.C.'s own boundary layer can say "outside" and nothing more,
+  so a **Census TIGERweb states layer** (three polygons, requested by name) was
+  added for the naming alone. At that scale the exclusion has to be citable, as
+  San Diego's 16 and Los Angeles' 54 are. Census TIGER products are US federal
+  works and carry no copyright.
+- **No multi-jurisdiction disambiguation was needed, which is the contrast with
+  Boston.** Only one station is even arguably marginal - Southern Av at 40.1 m
+  outside - and the next two are Capitol Heights at 111.2 m and Arlington
+  Cemetery at 130.0 m. Boston needed MassGIS because four of its stations sat
+  within 60 m of the line.
+- **No thinning, on a measurement rather than a label.** Metrorail is
+  grade-separated end to end, and the in-District stations sit a **median 962 m**
+  apart against a 966 m outer ring (min 212 m at the Farragut West/North pair,
+  max 3,020 m). That is New York's and San Diego's shape, not San Francisco's
+  134 m. 20 of 40 stations are closer to a neighbour than the outer ring, all in
+  the downtown cluster, and each business is assigned to its nearest station so
+  nothing is double-counted. Rings stay ON, as in Boston. `step1_stations.py`
+  exits if `THINNED_GROUPS` is ever set, rather than leaving the setting inert.
+- **The only feed in the project behind an API key, and the only one that
+  expires.** `api.wmata.com` returns 401 unauthenticated. The key is the
+  owner's, is WMATA's property under §5, is read from `WMATA_API_KEY` and is
+  **never echoed - not even in the 401 error message**. `feed_info.txt` declares
+  a **ten-day** window (`20260915`-`20260925`), so `fetch_sources.py` re-checks
+  `feed_end_date` on EVERY run including runs that skip the download, and treats
+  an expired copy as an error rather than a warning: a stale feed still parses,
+  still has 98 stations and still builds a map, so nothing downstream would
+  catch it.
+- **Shape selection needed care no other feed has.** WMATA publishes 26 to 101
+  shapes per route, so "the most-used shape" could easily be a short turn - the
+  Yellow Line's second-most-used stops at Mt Vernon Square, **nine stations
+  short of Greenbelt**. Each drawn shape is the most-used among those serving
+  the route's full stop count, checked rather than assumed.
+- **Privacy: the download boundary is the control.** `BUSINESSOWNERFIRSTNAME`,
+  `BUSINESSOWNERLASTNAME`, `BUSINESSOWNERMIDDLENAME`, `AGENTFIRSTNAME`,
+  `AGENTLASTNAME`, `AGENTMIDDLENAME`, `AGENTENTITY` and **`BILLINGADDRESS`**
+  all exist in this layer, populated on tens of thousands of rows. None is
+  requested in `outFields`, so none is ever on this machine; step 2 asserts all
+  eight stay absent, and `fetch_sources.py` exits if the server returns any
+  column it did not ask for.
+  The screening reports **0 emails, 0 phone numbers, 0 care-of markers**, 560
+  pins (14.5%) whose displayed name reads as a person's, and **0.00%
+  person-like-name-at-a-residential-unit**. That last figure is a **MEASUREMENT
+  GAP**, as Boston's was: D.C.'s addresses carry almost no unit designators
+  (4 commercial, 0 residential across 581 matching rows). What replaces it here
+  is a structural signal Boston lacked - `ENTITYTYPE` - giving **14 pins
+  (0.36%) that are a sole proprietorship displaying a person-like name**, each
+  holding a licence that requires commercial premises. `SSL` is on **91.1%** of
+  mapped rows, better than Miami's `FOLIO` at 45.7%, so a Philadelphia-style
+  parcel join is available if that ever stops being enough.
+  `check_personal_exposure.py` gained one small capability for this city:
+  `entity_individual` now accepts a tuple, because D.C. spells sole trading two
+  ways ("Sole Proprietorship", "Domestic Sole Proprietor") and matching one
+  would have undercounted.
+- **WMATA adds NO mandatory notice, correcting a prediction in
+  `docs/data_sources.md`.** That file said a sixth notice "would come with
+  WMATA if D.C. is [built]". It does not: WMATA requires no attribution and no
+  acknowledgement of any kind. The mandatory count stays at **five** (MassDOT's
+  became active with Boston). What D.C. does add is a second copy of MTA's §6
+  accuracy clause - so the city page deliberately avoids "accurate",
+  "complete", "current", "up to date" and "official", and its docstring says
+  why - and a sixth agency to the branding question, whose wording is the one
+  that names "confusingly similar variants".
+- **Verified:** no console errors, all six lines carrying a permanent on-map
+  label AND a legend entry, three buckets in the legend, OSM attribution
+  intact, no TODOs shipped.
+
 ### 2026-09-21 - Boston built: two buckets, three registries, two station rules
 
 - **Eighth city, and the narrowest map here.** 3,164 premises (Food service

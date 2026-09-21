@@ -221,6 +221,92 @@ From the food data, `MFW` (Mobile Food Walk On, 10 premises) is out as mobile
 trade is everywhere else, and the cannabis register's one `Delivery (operator)`
 is out for the same reason — neither has a shopfront.
 
+### Washington D.C. — an office catch-all, and a register that is mostly homes
+
+D.C.'s single register covers all three categories on its own, so the
+exclusions here are about separating businesses from everything else a
+"business licence" happens to cover in the District. Every one of the 95
+licence categories present has a written verdict in
+`pipeline/taxonomies/dc_businessactivity.py`; nothing is excluded by omission.
+
+**61% of the active in-District register is residential rentals**, and they are
+dropped before anything is downloaded: One Family Rental 25,557, Apartment
+6,081, Two Family Rental 2,558, Short Term Rental 2,196, Vacation Rental 803 —
+37,195 rows of 61,329. This is the Philadelphia pattern, where 79% of the
+register was landlord registrations, and the reason a raw licence count for a
+city means nothing until its distribution is read.
+
+**`General Business` — 11,074 rows — is excluded, and it is the single largest
+category exclusion in this project.** It is the District's default for offices
+and professional practice: law firms, engineering consultancies, architects,
+developers, healthcare and home-care agencies, a locksmith, a police relief
+association. Same role as Los Angeles' NAICS 812990 and Chicago's "Limited
+Business License".
+
+That exclusion was checked rather than assumed, because a sample of it held a
+Wawa and a Cava Mezze Grill next to the law firms. **692 of its rows (6%) share
+a licensee with a kept storefront licence and 2,975 (27%) share a Master
+Address Repository id** — so a shop that landed in this category keeps its pin
+through its real activity licence. What the exclusion removes is offices.
+
+**Three categories are food-adjacent and still excluded**, which is worth
+stating plainly because each is a real business:
+
+- **`School Cafeteria (DC)` (242) and `School Cafeteria` (5).** Every sampled
+  row is a school — Janney, Marie Reed Elementary, a dozen charter schools. A
+  cafeteria behind a school's doors is not premises a passer-by can enter, and
+  including it would put a food-service pin on every school in the District.
+  Only 3% share an address with a kept storefront, so these are 242 distinct
+  school sites rather than shops counted twice.
+- **`Caterers` (279).** The closest call here. The sample mixed real
+  restaurants that also cater with commissary-kitchen tenants — four separate
+  licensees at 2800 10th St NE alone. Measured: 54 (19%) share a licensee with
+  a kept storefront licence and stay on the map through it. The rest are
+  production kitchens with no counter, so they go the way mobile food goes in
+  every other city here.
+- **`Food Vending Machine` (60), `Street Vending Business` (273) and
+  `Mobile Delicatessen` (1).** Unattended or mobile trade — the same call as
+  Boston's `MFW` and the project-wide NAICS 454 "nonstore" carve-out.
+
+**`Health Spa` (22) is gyms, not personal care.** The sampled rows are VIDA
+Fitness, Equinox, Gold's Gym, Solidcore, CrossFit and New York Sports Club, so
+it is NAICS 713940 and outside every bucket — the same verdict Boston's
+Billiards and Bowling Alley licences got. `Health Spa Sales` (22), which is
+selling gym memberships, goes with it, as do `Swimming Pool` (165+32), the
+theatres and the one bowling alley.
+
+Also excluded, each for the reason the NAICS cities already use: **lodging**
+(Hotel 141, Bed and Breakfast 88, Inn and Motel 46, Rooming House 46, Boarding
+House 19 — NAICS 721, as in Boston); **construction** (General
+Contractor/Construction Manager 991, Home Improvement Salesperson 320, Home
+Improvement Contractor 152 — NAICS 23); **vehicular services** (Parking
+Facility 263 and its attendants, excluded project-wide; Consumer Goods (Auto
+Repair) 78 and Auto Wash 17, because NAICS 811 is repair and only 812 is a
+tracked bucket — the same reason Miami's `SERVICE BUSINESS` went);
+**charitable and membership bodies** (Charitable Solicitation 1,683, Charitable
+Exempt 440, Cooperative Association 176); **wholesale** (NAICS 42); and
+**individual rather than premises licences** (Motor Vehicle Salesperson 263,
+Auctioneer 15, Tour Guide 3 — a licence attached to a person, not a shopfront).
+
+**One category is kept despite being ambiguous, and it is a large one.**
+`Delicatessen` (1,065) is D.C.'s prepared-food catch-all, issued to sandwich
+shops and cafés but also to corner shops and convenience stores: a sample of 25
+held Julia's Empanadas and Call Your Mother Deli alongside a 7-Eleven, a
+Safeway and a convenience store. It is counted as **Food service**, which fits
+most of them, but about 180 premises hold it with no other descriptive licence
+and could honestly read either way. Excluding it would have removed a fifth of
+the city's food service; splitting it would need free-text work the source does
+not support. So it is kept, counted as food, and said out loud on the city page.
+
+**Three licence types are endorsements rather than descriptions**, and they are
+kept as Retail for that reason: `Cigarette Sales (Retail)` (848),
+`Patent Medicine` (610, D.C.'s term for over-the-counter drug sales) and
+`Food Products` (656). The sampled Patent Medicine rows included CVS, Whole
+Foods and Safeway; a sampled Food Products row was a hardware shop. Holding one
+means selling goods over a counter, so Retail is right — but they are why the
+premises dedup matters here: 121 licensees hold exactly those first and third
+plus Patent Medicine, which is one corner shop and not three businesses.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

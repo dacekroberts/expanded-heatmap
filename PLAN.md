@@ -120,61 +120,47 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - Regional Rail (52 well-spaced in-city stations) is the obvious later
     addition if the commuter-rail exclusion is ever revisited - the same
     follow-up Philadelphia has.
-- [ ] **Washington D.C. - the strongest remaining candidate. Step 0 mostly
-  done 2026-09-21;** full findings in `docs/city_shortlist.md`. 76,107 active
-  licences and the first non-NAICS city with **all three buckets** from one
-  registry (Food Services 4,901, Beauty and Grooming 486, ~1,550 real retail).
-  What the probe settled, and what is left:
-  - **MEASURED 2026-09-21: 40 of 98 Metrorail stations are inside D.C.
-    (40.8%)** - a deeper cut than this item predicted, and second only to San
-    Diego's 25% (Boston 57%, Los Angeles 51%). **But the shape is good, and
-    that is the finding.** All six lines keep real in-city presence (Red 16,
-    Silver 15, Orange 14, Blue 13, Green 13, Yellow 9), so none drops out of
-    the map. At roughly 6,900 sites across the three buckets that is **~173
-    sites per in-city station, against Boston's ~39** - so the low share is
-    misleading on its own, and D.C. is a far denser map than Boston despite
-    having 31 fewer in-city stations.
-  - **The boundary is clean - no MassGIS-style multi-town layer needed.** Only
-    one station is even arguably marginal (Southern Av, 40.1 m outside, almost
-    certainly genuinely in Maryland); the next are Capitol Heights at 111 m and
-    Arlington Cemetery at 130 m, both unambiguous. Contrast Boston's four
-    ambiguous cases that a distance tolerance could not separate.
-  - **Boundary layer: `DC Boundary`, layer 10** of
-    `maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Administrative_Other_Boundaries_WebMercator/MapServer`
-    - a single clean polygon, `outSR=4326`. Measured in **EPSG:32618** (UTM
-    18N), derived from longitude.
-  - **Exclude `BUSINESSACTIVITY = 'General Business'` (14,770).** Sampled: it
-    is the office/professional catch-all - Nossaman LLP, Gannett Fleming
-    Engineers, Voith & Mactavish Architects, consultancies, tech firms - and it
-    is 14,729 of the 16,282 rows in "General Sales and Services". Same role as
-    LA's NAICS 812990. Record the sample in `DECISIONS.md` as LA's was.
-  - **Drop the residential rentals: 49% of active rows.** One Family Rental
-    25,587, Apartment 6,106, Two Family Rental 2,560, Short Term Rental 2,197,
-    Vacation Rental 803, Rooming/Boarding House 65. The Philadelphia pattern.
-  - **Ignore `LATITUDE`/`LONGITUDE` entirely** - they are literally `39` and
-    `-77` on every row, 0 of 76,107 inside DC. Use `X_COORDINATE`/
-    `Y_COORDINATE`, which are **EPSG:26985**, verified by transforming 312
-    Pennsylvania Ave SE to (38.88715, -77.00153). Present on 77% of storefront
-    rows; `MAR_ID` (Master Address Repository) should recover the rest without
-    the Census geocoder.
-  - **Trade name is missing on 49% of storefront rows** (11,079 of 21,669 have
-    `ENTITYTRADENAME`). That is the Los Angeles trap at half LA's severity, so
-    apply LA's answer, and never publish `BUSINESSOWNERFIRSTNAME`/
-    `BUSINESSOWNERLASTNAME`/`AGENT*`, which are populated on ~34k rows.
-  - Use `PREMISEINDC = 'Yes'` (61,329) for in-city scope, **not** `WARD` -
-    `WARD` is null on 16,806 rows and mixes "Ward 2" with "2".
-  - `SSL` (Square/Suffix/Lot) on 45,476 rows is the parcel join for the
-    residence check, and `ENTITYTYPE = 'Sole Proprietorship'` is the
-    sole-trader signal, as in San Diego.
-  - **WMATA GTFS needs a free API key** - `api.wmata.com/gtfs/rail-gtfs-static.zip`
-    returns **401** unauthenticated, the only feed in the project that does.
-    A keyless Mobility Database mirror exists (`urls.latest` for mdb source
-    1847, a GCS object needing `?alt=media`). Decide which, and **read
-    `https://developer.wmata.com/license`** - unread, and the transit feeds
-    have been the loosest end of every licence review.
-  - Measure the in-city station share before committing: Metrorail is 98
-    stations but reaches far into Virginia and Maryland, so expect an
-    LA-scale boundary cut.
+- [x] **Washington D.C. - BUILT 2026-09-21** as the ninth city; see
+  `DECISIONS.md`. 5,230 premises, 3,860 within a ring across the 40 in-District
+  stations - the highest ring coverage in the project at 73.8%. The first
+  non-NAICS registry here to cover all three buckets on its own. Follow-ups it
+  leaves behind:
+  - **Three Step 0 findings recorded in this file were wrong, and the
+    corrections are the useful part.** (a) "Trade name is missing on 49% of
+    storefront rows ... the Los Angeles trap at half LA's severity" was
+    measured before the category exclusions; on the rows that reach the map the
+    gap is **26.9%**, 85.6% of those carry a company-shaped `ENTITYNAME`, and
+    the residual is **14 pins / 0.36%**. (b) "`MAR_ID` should recover the rest"
+    was wrong - the 452 rows with no coordinates are the **same rows** that
+    lack `MAR_ID`, because they are what the District's own geocoder failed on,
+    so a Census geocoding step was needed after all (it recovered 387). (c) The
+    catch-all count was 14,770 for `General Business`; scoped to active and
+    in-District it is **11,074**. The lesson is the one this file keeps
+    relearning: a Step 0 percentage measured on the wrong denominator is worse
+    than no percentage.
+  - **`Delicatessen` is ambiguous in the source and stays ambiguous.** D.C.
+    issues it to sandwich shops and to corner shops alike, so ~180 premises
+    could honestly read as Food service or Retail. Recoverable only by
+    classifying trade names, which is a project of its own - the same shape as
+    Miami's `SERVICE BUSINESS`. Stated on the city page rather than hidden.
+  - **A parcel-based residence rule is available and unused.** `SSL` is on
+    **91.1%** of mapped rows - better coverage than Miami's `FOLIO` at 45.7%
+    and comparable to what Philadelphia joins against. D.C.'s addresses carry
+    almost no unit designators, so the address-text residence check reports
+    0.00% and that is a measurement gap, exactly as in Boston. The structural
+    signal that partly replaces it is `ENTITYTYPE`: 14 pins are a sole
+    proprietorship with a person-like displayed name. Do the parcel join if
+    that ever stops being enough.
+  - **The feed expires in ten days and the key is not in the repo**, so this
+    city cannot be rebuilt from a clean checkout without `WMATA_API_KEY` set
+    and a fresh download. `outputs/washington_dc/` is committed, so the app
+    does not care; `drift_check.py` does, and will report a missing raw input
+    rather than drift. Worth deciding whether the drift check should say so
+    more clearly for key-gated cities.
+  - **The Silver Line is harder to trace in LIGHT mode than the other five**,
+    and that is accepted rather than engineered around. See `config.py`'s
+    `LINE_NAMES` comment for the measurements in both modes and the two
+    alternatives that were rejected.
 - [x] **Miami - BUILT 2026-09-21** as the project's first regional city; see
   `DECISIONS.md`. 3,775 within-ring pins across 42 stations in six
   municipalities. Follow-ups it left behind:
@@ -465,12 +451,15 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   **Two** transit licences now forbid it in nearly identical words - MTA's
   "You will not state or imply that the data you provide through your
   Application is accurate, complete, or timely" and WMATA §6's - so this is a
-  cross-city prose rule, not a per-city footnote. New York is **built** and
-  affected today; D.C. would be. Check the city pages, the Overview and the
-  map legends, and prefer "as recorded by <agency> on <date>" phrasings over
+  cross-city prose rule, not a per-city footnote. New York and **Washington
+  D.C.** are both built and affected today. Check the city pages, the Overview
+  and the map legends, and prefer "as recorded by <agency> on <date>" phrasings over
   anything implying completeness. Both texts are in `docs/licenses/`.
 - [ ] **Decide the agency-branding question: official route colours, AND the
-  line names beside them.** Full detail and the clause wording per agency are
+  line names beside them.** Now **six** of the nine built cities, since D.C.
+  draws WMATA's six published `route_color` values - and WMATA's is the clause
+  that names "confusingly similar variants", which also rules out the obvious
+  workaround of shifting a colour slightly. Full detail and the clause wording per agency are
   in `docs/data_sources.md` (item 5c, and the table under the GTFS notes).
   Recorded here because it is a permission question, not implementation work,
   and it was previously visible only in the provenance doc.

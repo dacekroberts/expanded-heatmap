@@ -109,6 +109,31 @@ REGISTRIES = {
     "boston": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv",
                    address=("address",)),
+    # Washington D.C. is the first city since Chicago where the trade/owner
+    # fallback pair genuinely EXISTS and has to be measured rather than
+    # reported as structurally absent. Its step 2 falls back from
+    # ENTITYTRADENAME to ENTITYNAME, which is the legal entity's name - a
+    # company name for a corporation, and sometimes a person's.
+    #
+    # Step 0 read that as "the Los Angeles trap at half LA's severity", on a
+    # 49% blank-trade-name rate. That rate was measured before the category
+    # exclusions, and General Business - 11,074 office rows, mostly with no
+    # trade name - is most of it. On the rows that reach the map the gap is
+    # 26.9%, and 85.6% of those carry a company-shaped ENTITYNAME.
+    #
+    # It also carries a STRUCTURAL entity-type signal, like Philadelphia's:
+    # ENTITYTYPE names the legal form, and it spells sole trading two ways, so
+    # entity_individual is a TUPLE here. That distinction is what the
+    # measurement turns on - an LLC registered under its founder's name is a
+    # deliberate public commercial act (San Diego's reasoning), whereas a sole
+    # proprietorship displaying a person's name is the case to look at.
+    "washington_dc": dict(raw="basic_business_licenses.csv",
+                          trade="ENTITYTRADENAME", owner="ENTITYNAME",
+                          processed="businesses_geocoded.csv",
+                          address=("street_address",),
+                          entity_type="ENTITYTYPE",
+                          entity_individual=("Sole Proprietorship",
+                                             "Domestic Sole Proprietor")),
 }
 
 # Unit designators that suggest a residence, as opposed to a commercial suite.
@@ -305,10 +330,15 @@ def check(slug):
     if spec.get("entity_type") and proc.exists():
         d = pd.read_csv(proc, dtype=str, low_memory=False)
         col, individual = spec["entity_type"], spec["entity_individual"]
+        # A registry may spell one legal form several ways - D.C. has both
+        # "Sole Proprietorship" and "Domestic Sole Proprietor" - so this
+        # accepts a tuple as well as a single string.
+        wanted = (individual,) if isinstance(individual, str) else tuple(individual)
         if col in d.columns:
-            is_individual = d[col].fillna("").str.strip() == individual
+            is_individual = d[col].fillna("").str.strip().isin(wanted)
+            label = " / ".join(wanted)
             print(f"  {col}: {int(is_individual.sum()):,} of {len(d):,} mapped "
-                  f"rows are {individual!r} "
+                  f"rows are {label!r} "
                   f"({100 * is_individual.mean():.1f}%)  [structural]")
             # The overlap is the population that actually matters: a row the
             # registry calls an individual AND whose displayed name reads as a
@@ -316,7 +346,7 @@ def check(slug):
             want = {n.upper() for n, _ in personal}
             named = d["business_name"].fillna("").str.strip().str.upper().isin(want)
             both = is_individual & named
-            print(f"    {individual} AND a person-like displayed name: "
+            print(f"    {label} AND a person-like displayed name: "
                   f"{int(both.sum()):,} of {len(rows):,} pins "
                   f"({100 * int(both.sum()) / len(rows):.2f}%)")
 
