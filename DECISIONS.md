@@ -71,6 +71,136 @@ onwards; the early ones are split by phase rather than by hour.
   what they say is not a judgment call, but whether this project satisfies them
   is.
 
+### 2026-09-21 - Transit geometry no longer rounded; the clause it was meant to satisfy turned out to be moot
+
+- **Where this came from.** A concurrent session read MTA's actual terms and
+  found **"You will not modify or delete any of the data"** (with a carve-out:
+  "You may, however, create an app that uses some but not all of the data") -
+  where this project had previously recorded only the "free to use" line from
+  MTA's landing page. That raised a real question, because
+  `map_common.COORD_DP` rounded **every** coordinate to 6 decimal places
+  (0.11 m) before it reached the HTML, transit geometry included.
+- **The question was wider than MTA.** The same rounding applied to **LA
+  Metro's** `shapes.txt`, and LA Metro's clause is the tighter one - "not
+  change, tamper, dismantle, augment, misrepresent or otherwise modify the
+  Transport Information". The verdict recorded earlier on 2026-09-21 said the
+  project "does not modify it" because "the rail alignment is drawn from the
+  feed's own `shapes.txt` geometry and displayed as that line", and rounding
+  would have made that sentence true only with an asterisk.
+- **Decision: stop rounding transit coordinates; keep rounding business
+  coordinates.** Station points, ring centres, line-label anchors and every
+  `shapes.txt` vertex now go out at full source precision, via a
+  `_transit_coord()` helper that exists so the reason sits at each call site
+  rather than only in a comment. `COORD_DP` still applies to business pins and
+  both heat layers, which is where the size saving actually is: heat layers are
+  33-57% of a rendered map, line geometry 4-6%.
+- **MTA's clause, which prompted all of this, turned out to be moot - and a
+  first measurement of LA Metro's was wrong in the other direction.** An
+  initial check sampled the first few thousand characters of each city's line
+  geometry and concluded that MTA, LA Metro, SFMTA and SEPTA all published at
+  6 dp, making the rounding a no-op for every restrictive feed. Measuring
+  **every vertex** instead:
+
+  | Feed | Max dp | Coords over 6 dp | Was the rounding altering it? |
+  |---|---|---|---|
+  | **LA Metro** | **10** | **2,606 of 12,426 (21.0%)** | **Yes** |
+  | MTS (San Diego) | 8 | 2,499 of 2,518 (99.2%) | Yes |
+  | CTA (Chicago) | 8 | 6,359 of 6,410 (99.2%) | Yes |
+  | MTA (New York) | 6 | 0 (0.0%) | No - no-op |
+  | SFMTA | 6 | 0 (0.0%) | No - no-op |
+  | SEPTA | 6 | 0 (0.0%) | No - no-op |
+
+  **So the change was necessary rather than merely prudent, for LA Metro
+  specifically** - the tightest licence in the project, being altered on a
+  fifth of its vertices. The recorded LA Metro verdict was *not* literally true
+  before this; it is now. MTA's feed is genuinely already 6 dp, so the clause
+  that triggered the investigation never bit. MTS and CTA were being altered
+  too, and neither restricts modification - CTA expressly permits "create
+  derivative works" and MTS has no modification clause.
+- **Sampling is what produced the wrong first answer, and it is worth naming:**
+  LA Metro's feed is mixed-precision, 6 dp for the first stretch of its
+  geometry and up to 10 dp later, so any check that reads the beginning of the
+  file gets a clean-looking result. The same trap as Philadelphia's "100%
+  geometry" reading, which counted non-null values and missed 218 empty ones.
+- **Scope was corrected mid-implementation, after the first attempt exempted
+  too much.** Exempting *station* coordinates as well made them emit **15
+  decimal places** of floating-point noise - because most cities derive a
+  station's position by averaging its platform stops
+  (`.agg(latitude=("stop_lat", "mean"))`), so those are the project's own
+  computed values, not agency data. Station points, ring centres and line
+  labels are therefore still rounded; **only the `shapes.txt` vertices are
+  exempt**, which is the one place an agency's data is reproduced verbatim.
+  That narrowing also removed most of the size cost.
+- **Cost, measured after the correction: +23,788 bytes across 16.5 MB
+  (0.14%).** New York, San Francisco and Philadelphia are **byte-identical**
+  to before; San Diego +5,012, Chicago +12,879, Los Angeles +5,897.
+- **Verified before and after implementing, as the owner required:** visually a
+  no-op (0.11 m is half a pixel at OSM zoom 19), and structurally a no-op - the
+  unrounded vertices also feed the label-placement geometry, where a 0.11 m
+  perturbation cannot flip a tail-end choice between line ends kilometres
+  apart. Every city re-rendered with **identical row counts and station
+  counts**, so only coordinate precision moved. All six committed outputs were
+  re-baselined.
+- **Also keeps a future foot-gun closed.** `PLAN.md` carries a live
+  optimisation for New York's oversized map: "rounding coordinates to 5 dp
+  saves 1.4 MB". At 5 dp the old behaviour would have begun altering MTA's
+  geometry too, silently, as a side effect of a size tweak by someone not
+  thinking about licences. With the exemption in place that optimisation is
+  safe to adopt for business points only.
+- **One incidental discovery while checking the diffs:** the five
+  `excluded_stations.csv` files show as modified in `git status` after a
+  re-render but have **zero content change** - it is purely CRLF-vs-LF, which
+  git normalises on commit. `drift_check.py` already handles both that and
+  Folium's random 32-hex element ids (which change every save, and are why a
+  raw diff of `heatmap.html` is meaningless). Neither is drift.
+- **The route-colour question is recorded as OPEN, by the owner's decision**,
+  rather than resolved by substituting a palette. Three agencies' terms bear on
+  it: MTA ("logos, maps and symbols need a separate licence application", free
+  but must be applied for), SEPTA (the trademark clause already open), and -
+  for a future D.C. - WMATA ("prohibited from using WMATA Intellectual
+  Property, including any confusingly similar variants, in association with the
+  Transit Data or API unless you have entered into a separate, written license
+  agreement"). The project currently uses each agency's own `route_color`
+  values for line strokes and labels, with one deliberate exception already
+  recorded: Staten Island Railway, lightened for contrast. It joins the
+  pre-deploy licence list rather than blocking anything now.
+
+### 2026-09-21 - WMATA's licence read: it does not rule out D.C., but it does rule out the mirror
+
+- **Why it was read now.** WMATA is the first transit feed in the project that
+  cannot simply be downloaded - `api.wmata.com/gtfs/rail-gtfs-static.zip`
+  returns **401** without a registered key - and the owner asked whether the
+  licence might disqualify D.C. on its own before any effort went into getting
+  access.
+- **It does not. It is more permissive than LA Metro's on the point that
+  matters most.** The grant is "a limited, non-exclusive, non-assignable,
+  non-transferrable, non-sublicensable, revocable license to download, use,
+  reproduce, and redistribute WMATA's Transit Data within your Application",
+  there is **no modification clause at all**, and **no attribution is
+  required** - unlike MassDOT, SFMTA and LA Metro.
+- **But it rules out the Mobility Database mirror, which reverses the easier of
+  the two options originally offered.** Redistribution is restricted:
+  "prohibited from: sharing (except with your Application's users),
+  transferring, sublicensing, selling or leasing any Transit Data, directly or
+  indirectly...to any other person", with an exception needing prior written
+  authorisation and data "inseparably commingled" with your own. Publishing a
+  map to the site's own visitors is sharing with the Application's users and is
+  fine. Taking the feed from a third-party mirror is not the safe shortcut it
+  looked like: it relies on a redistribution the terms appear to prohibit, and
+  it means obtaining the data **outside** the licence rather than accepting it.
+  **The key is the correct route; the mirror is the worse one.**
+- **The "secret in the pipeline" objection was overstated and is withdrawn.**
+  GTFS fetching already lives in non-`step*.py` scripts so that
+  `drift_check.py` stays offline and deterministic, so a WMATA key would be a
+  local environment variable used for an occasional manual refresh. It never
+  reaches Streamlit Cloud, which only reads `outputs/`. That is a much smaller
+  change than first described.
+- **What remains true and worth knowing:** keys "remain WMATA's property and
+  may be revoked or otherwise limited at any time", cannot be sold,
+  transferred or sublicensed, and "enable WMATA to associate your API activity
+  with your Application". Registration is the owner's action - an account
+  cannot be created on their behalf.
+
 ### 2026-09-21 - Screened every remaining candidate city, and found three the shortlist never had
 
 - **Why this happened before the next build**, rather than building Boston: the

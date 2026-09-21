@@ -76,7 +76,12 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     because dense stations put 71% of businesses inside a ring (Los Angeles:
     24%). Measured levers: rounding coordinates to 5 dp saves 1.4 MB and loses
     nothing (Folium emits 17 significant digits for a 5-pixel dot, and it would
-    re-baseline all five cities' committed outputs); indexing repeated station
+    re-baseline all five cities' committed outputs) — **and as of 2026-09-21
+    this is now safe to do, but only for business points.** Transit coordinates
+    are exempt from `COORD_DP` (see `pipeline/map_common.py` and
+    `DECISIONS.md`): at 5 dp the old behaviour would have started modifying
+    MTA's and LA Metro's geometry as a silent side effect of a size tweak,
+    which their terms restrict. Keep the exemption if you lower `COORD_DP`; indexing repeated station
     and ring strings saves ~1.2 MB; dropping the opt-in all-city heat layer
     saves 2.0 MB. Decide before the public deploy.
   - Retail is less complete here than elsewhere (a clothing shop needs no

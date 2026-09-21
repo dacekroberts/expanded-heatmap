@@ -278,6 +278,17 @@ in that directory's `README.md`. Every one of them is revocable and amendable
 without notice, so the clauses quoted above are checkable against the text that
 was actually agreed to rather than against a URL that may have moved on.
 
+| **WMATA** (Washington D.C. — **Step 0 only, NOT BUILT**) | Permitted within your own app: "a limited, non-exclusive, non-assignable, non-transferrable, non-sublicensable, revocable license to download, use, reproduce, and redistribute WMATA's Transit Data within your Application". **Third-party redistribution is prohibited** — "sharing (except with your Application's users), transferring, sublicensing, selling or leasing any Transit Data, directly or indirectly...to any other person", unless authorised in writing and "inseparably commingled with or supplemented by additional data that you have provided" | **Not required** — no attribution or notice clause | **No modification clause at all**, which makes it more permissive than LA Metro's on the point that matters most. Access is gated: `api.wmata.com/gtfs/rail-gtfs-static.zip` returns **401** without a registered key from `developer.wmata.com/signup`; keys "remain WMATA's property and may be revoked or otherwise limited at any time", cannot be sold, transferred or sublicensed, and "enable WMATA to associate your API activity with your Application". Trademarks: "prohibited from using WMATA Intellectual Property, including any confusingly similar variants, in association with the Transit Data or API unless you have entered into a separate, written license agreement", and must not "state or imply affiliation, sponsorship or endorsement". Read 2026-09-21 from `https://developer.wmata.com/license` |
+
+**Do not take WMATA's feed from a third-party mirror.** The Mobility Database
+carries a keyless copy, and using it would be the worse option rather than the
+convenient one: it relies on a redistribution these terms appear to prohibit,
+and it means obtaining the data *outside* the licence instead of accepting it.
+The registered key is the compliant route. Because GTFS fetching lives in
+non-`step*.py` scripts, that key is a local environment variable for an
+occasional manual refresh — it never reaches the deployed app, which reads only
+`outputs/`.
+
 **Two of these needed a judgment call rather than just a notice. Both were
 decided by the project owner on 2026-09-21**, and the reasoning is recorded so
 the position is a stated one rather than an assumption:
@@ -290,6 +301,23 @@ the position is a stated one rather than an assumption:
   Metro's, which is not what happens here. Metro is credited as the provider
   per the notice below. This remains the tightest licence in the project, so
   revisit it if Metro clarifies the clause.
+  **Checked in detail on 2026-09-21, and the statement above did NOT hold
+  literally until a fix was made that day.** `map_common.COORD_DP` rounded
+  every coordinate to 6 decimal places before it reached the HTML, transit
+  geometry included. Measured over every vertex, **LA Metro's `shapes.txt`
+  reaches 10 dp and 21.0% of its coordinates (2,606 of 12,426) exceed 6 dp** —
+  so the published alignment genuinely differed from the feed, on a fifth of
+  its points, for the tightest licence in the project. An initial check that
+  sampled only the start of the geometry reported a clean 6 dp and was wrong:
+  the feed is mixed-precision, 6 dp early and finer later.
+  **Fixed:** `shapes.txt` vertices are now emitted unrounded, so the alignment
+  is the feed's own geometry as stated. Station points stay rounded on purpose
+  — most cities derive them by averaging a parent station's platform stops, so
+  they are this project's own computed values rather than Metro's data. See the
+  note in `load_line_shapes()` in `pipeline/map_common.py`, and `DECISIONS.md`
+  for the full measurement. The same check clears MTA's "you will not modify or
+  delete any of the data": its feed is already 6 dp throughout, so that clause
+  was never engaged.
 - **CTA**'s licence is granted for assisting riders or promoting public
   transport. **Decided: the project falls within that purpose.** It shows
   people in the city what businesses are near their station, which is
@@ -337,6 +365,29 @@ public deploy, alongside the required notices:
   that data. This is the same shape as the NYC question but with the opposite
   paperwork — NYC is *forbidden* from imposing a licence, whereas Philadelphia
   has imposed one that says only "we keep our rights".
+
+**A third open question, and it is now shared by three agencies rather than
+one: official route colours.** SEPTA's clause above is the specific case; the
+general one is that the maps draw each line in the agency's own `route_color`
+value from `routes.txt`, and more than one agency treats its map symbology as
+protected:
+
+- **MTA** — logos, maps and symbols need a separate licence application, free
+  of charge but it must be applied for.
+- **SEPTA** — the trademark clause above.
+- **WMATA**, relevant only if D.C. is built — "prohibited from using WMATA
+  Intellectual Property, including any confusingly similar variants, in
+  association with the Transit Data or API unless you have entered into a
+  separate, written license agreement".
+
+**Decided by the owner on 2026-09-21: keep the official colours and record this
+as an open question**, rather than pre-emptively substituting a palette. It is
+on the pre-deploy list with the two above and blocks nothing now. Two facts
+make it cheap to reverse if the answer comes back unfavourable: the colours
+live in one dict per city (`LINE_NAMES`), and the project has already departed
+from an official colour once on its own initiative — Staten Island Railway's
+`#08179C` was lightened for legibility — so nothing in the rendering depends on
+the values being the agency's.
 
 ### Basemap tiles — one active compliance item
 

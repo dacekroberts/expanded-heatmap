@@ -28,14 +28,18 @@ from folium.plugins import HeatMap, FastMarkerCluster
 from pipeline.taxonomies import CATEGORY_BUCKETS, load_taxonomy_module
 from pipeline.theme import AMBIENT_THEME_JS, DARK, LIGHT, css_vars, rgba
 
-# Decimal places every coordinate is rounded to before it reaches the HTML.
+# Decimal places BUSINESS coordinates are rounded to before reaching the HTML.
 # Folium emits a float's full repr - "40.76248502732357", 17 significant
 # digits - for something drawn as a 5-pixel dot, and a city's map repeats that
-# once per pin, per heat point and per ring. Six places is 0.11 m, which is
-# half a pixel at OpenStreetMap's deepest zoom (19), so nothing is visibly
-# moved; five would be 1.1 m, about 5 px there, which is why it is not five.
-# Worth ~1.2 MB on New York's map and ~0.4 MB on Los Angeles'. Changing this
+# once per pin and per heat point. Six places is 0.11 m, which is half a pixel
+# at OpenStreetMap's deepest zoom (19), so nothing is visibly moved; five would
+# be 1.1 m, about 5 px there, which is why it is not five. Changing this
 # re-renders every city: re-baseline the committed outputs and drift check.
+#
+# One thing is deliberately exempt: the LINE GEOMETRY drawn from a GTFS
+# `shapes.txt`, which is emitted at full source precision. See the note in
+# load_line_shapes(). Everything else here - business pins, both heat layers,
+# station markers, ring centres, line labels - is rounded.
 COORD_DP = 6
 
 HEAT_RADIUS = 8
@@ -459,8 +463,49 @@ def load_line_shapes(gtfs_zip, line_specs, system_name):
                 print(f"WARNING: shape_id {sid!r} for the {label} not in this "
                       "GTFS feed - check trips.txt for its current most-used shape_id.")
                 continue
-            segments.append(list(zip(pts["shape_pt_lat"].astype(float).round(COORD_DP),
-                                     pts["shape_pt_lon"].astype(float).round(COORD_DP))))
+            # NOT rounded to COORD_DP, unlike every other coordinate in this
+            # module, and the reason is licensing rather than precision.
+            #
+            # These vertices are the one place the project reproduces an
+            # agency's data verbatim: a polyline IS the feed's own geometry.
+            # Two agencies restrict altering it - LA Metro requires you "not
+            # change, tamper, dismantle, augment, misrepresent or otherwise
+            # modify the Transport Information", and the MTA's terms say "You
+            # will not modify or delete any of the data" (while permitting "an
+            # app that uses some but not all of the data", which is what
+            # dropping commuter rail and drawing 29 services as 11 trunks is).
+            # Rounding to 0.11 m is invisible and would almost certainly never
+            # be anyone's idea of modifying a transit feed, but the project's
+            # rule is to comply rather than to read such a clause generously.
+            #
+            # Measured 2026-09-21, over EVERY vertex rather than a sample -
+            # sampling the first few thousand characters gave the wrong answer
+            # for the one feed that matters:
+            #   LA Metro  max 10 dp, 21.0% of coords over 6 dp  <- WAS rounded
+            #   MTS       max  8 dp, 99.2% over 6 dp            <- WAS rounded
+            #   CTA       max  8 dp, 99.2% over 6 dp            <- WAS rounded
+            #   MTA       max  6 dp,  0.0% over 6 dp            <- no-op
+            #   SFMTA     max  6 dp,  0.0% over 6 dp            <- no-op
+            #   SEPTA     max  6 dp,  0.0% over 6 dp            <- no-op
+            # So the old rounding really was altering LA Metro's geometry, on a
+            # fifth of its vertices - the tightest licence in the project - and
+            # this exemption is what makes the recorded verdict ("the rail
+            # alignment is the feed's own geometry, displayed as that line")
+            # literally true. MTA's clause, which prompted the check, turned
+            # out to be moot: its feed is already 6 dp. MTS and CTA were being
+            # rounded too, and neither restricts modification.
+            #
+            # PLAN.md also carries a live proposal to lower COORD_DP to 5 dp to
+            # shrink New York's map. Keep this exemption if you do: at 5 dp the
+            # old behaviour would have begun altering MTA's geometry as well,
+            # as a silent side effect of a size tweak.
+            #
+            # Station coordinates deliberately stay rounded: most cities derive
+            # them by averaging a parent station's platform stops, so they are
+            # this project's own computed values rather than agency data - and
+            # unrounded they emit 15 dp of floating-point noise.
+            segments.append(list(zip(pts["shape_pt_lat"].astype(float),
+                                     pts["shape_pt_lon"].astype(float))))
         if not segments:
             continue
         # Longest first: the trunk's main alignment anchors the label, and a
