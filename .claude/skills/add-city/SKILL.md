@@ -60,6 +60,19 @@ schema verification. Do this for every candidate before scaffolding:
    and unzips (`curl -sL <url> -o gtfs.zip`). A URL from search can still
    time out or 404 - San Francisco's official feed host timed out from this
    environment and a mirror linked from the agency's own page worked.
+   **Screening several candidates at once? Run `scripts/screen_rail.py`
+   first, before any business-data research.** Rail is the cheapest
+   disqualifier here - a city with no urban rail is out however good its
+   registry turns out to be - and the script reads `route_type` counts
+   straight from each agency's live `routes.txt`. It removed 6 of 13
+   Canadian cities in one pass on 2026-09-21, before a catalogue was opened.
+   Feed URLs come from the Mobility Database catalogue (`bit.ly/catalogs-csv`),
+   one CSV covering most of the world's feeds. Two traps it exists to catch:
+   **an agency may code its subway as `route_type 0`** (Toronto does, so its
+   subway and streetcars are indistinguishable by type - San Francisco's
+   shape), and **a regional feed covers cities with no rail of their own**
+   (TransLink's carries Surrey's SkyTrain stations). Commuter rail
+   (`route_type 2`) is not counted, matching every city built so far.
 3. **City boundary polygon.** Find a real GIS boundary layer (a regional
    MPO/COG portal is often the source, e.g. SANDAG). Not optional: San
    Diego's Trolley serves six other cities and 16 of 63 stations were
