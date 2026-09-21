@@ -14,6 +14,53 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Concurrent sessions split by role and by path, not by window
+
+- **Two sessions sharing one working tree was ended in favour of a worktree
+  per session.** The shared tree had a measurable cost: commit `38d4bd0` swept
+  one session's uncommitted work in via a broad `git add -A`, every commit
+  needed explicit-path staging plus an authorship check on each diff, and work
+  was held at least five times waiting for a build or deploy to land. Each
+  non-primary session now takes `.claude/worktrees/<role>` on its own branch
+  and merges at natural boundaries. Git refuses to check out `master` twice,
+  so the branch is forced - and that is the gain, since the merge becomes an
+  explicit review step instead of an implicit race. Rejected: keeping one tree
+  and relying on discipline, which is what had just failed.
+- **Roles are claimed, not assigned to a window, and ownership is by PATH.**
+  A session declares its role in its first message and gains a path set -
+  staging/research owns `docs/`, `.claude/skills/` and screening `scripts/`;
+  a build session owns `pipeline/<city>/`, `outputs/<city>/` and that city's
+  app page and taxonomy module; an app/chrome session owns `app/`,
+  `map_common.py` and `theme.py`. Path ownership was chosen over naming
+  specific windows because it survives a restart and scales: two build
+  sessions can run concurrently provided they hold different cities.
+  `DECISIONS.md`, `PLAN.md` and `CLAUDE.md` stay unowned and append-only, so
+  same-day conflicts resolve as "keep both" - a visible conflict being a
+  better failure than the silent overwrite the shared tree produced.
+- **Written so a single session ignores all of it.** `docs/session_roles.md`
+  opens with the solo case, because the real risk in a process document of
+  this kind is that a lone session reads a coordination convention as a
+  capability limit and stalls waiting for a staging session that does not
+  exist. For the same reason a build brief is defined as a cache of Step 0,
+  never a prerequisite.
+- **Claims handed between sessions are now labelled MEASURED or ASSERTED.**
+  The Canada screen reversed five conclusions, every one of them asserted from
+  a column's existence, a dataset title or a plausible-looking flag rather
+  than measured, and a receiving session cannot tell the two apart by reading.
+  MEASURED carries a number and the check that produced it; ASSERTED is
+  verified before being built on. An open-questions section is mandatory in a
+  handoff - a brief with no unknowns listed is one that has not been audited.
+- **`docs/build_briefs/vancouver.md` is the first instance**, handing the
+  densest city measured in this project (861 sites/station) to a build
+  session: scaffold arguments settled, all three endpoints with their traps,
+  EPSG:32610, the rejected address join (6.5%) against the two-hop spatial
+  join that works (99.9%), the rejected STRATA refinement, both required
+  notices with exact wording, and seven open questions - of which the
+  trade-name fallback (blank on 63%, person-pattern 16.94% on storefront
+  types) is flagged as the largest and as an owner decision rather than a
+  build one. Files: `docs/session_roles.md`, `docs/build_briefs/vancouver.md`,
+  `CLAUDE.md`, `.gitignore`.
+
 ### 2026-09-21 - Philadelphia: ask for permission, stay up on a reasoned position meanwhile
 
 - **The owner's decision**, taken after reading the prohibition in the City's

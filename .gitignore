@@ -9,6 +9,12 @@ venv/
 # deploy-verify agent recreates it when missing.
 .claude/launch.json
 
+# Per-session git worktrees, when more than one session is working at once
+# (see docs/session_roles.md). Worth adding to .git/info/exclude too on a
+# working machine: this line only protects a tree that already has this
+# commit, and the main checkout may not yet.
+.claude/worktrees/
+
 # Per-city raw downloads and pipeline intermediates - regenerable, not
 # committed (see docs/project_context.md, "Architecture").
 data/*/raw/
