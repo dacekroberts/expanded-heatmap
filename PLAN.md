@@ -25,6 +25,16 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   build is also the first real test of the scaffold: record in `DECISIONS.md`
   whether it saved effort (estimated at about 10%) and fix any template that
   needed rewriting.
+  **Vancouver has a build brief ready** - `docs/build_briefs/vancouver.md`
+  banks Step 0's answers (all three endpoints with their traps, EPSG:32610,
+  the rejected address join against the spatial one that works, both required
+  notices with exact wording), so that build starts at the scaffold command
+  rather than at Step 0. **One of its seven open questions is an owner
+  decision rather than a build one:** `businesstradename` is blank on 63% of
+  rows, and restricted to the categories this project maps, 16.94% of
+  displayed names match the person pattern - the storefront filter makes it
+  worse, not better. What a pin displays on that fallback wants settling
+  before the map renders, not after.
 
 - [~] **Evaluate the map-only navigation pilot** (started 2026-09-20; see
   `DECISIONS.md` and `docs/navigation_sidebar_and_city_links.md`). The
