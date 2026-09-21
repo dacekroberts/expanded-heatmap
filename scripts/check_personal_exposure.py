@@ -269,6 +269,26 @@ def check(slug):
                   f"{int(both.sum()):,} of {len(rows):,} pins "
                   f"({100 * int(both.sum()) / len(rows):.2f}%)")
 
+    # A property register beats address text for "is this a home?": the unit
+    # indicator below cannot see a detached house. Reported where a city's
+    # step 2 carries the columns (Philadelphia joins the City's own parcel
+    # data). See docs/data_sources.md and the add-city skill's Step 0.
+    if proc.exists():
+        d = pd.read_csv(proc, dtype=str, low_memory=False)
+        if "parcel_landuse" in d.columns:
+            occupied = d["parcel_owner_occupied"].astype(str).str.lower().eq("true")
+            want = {n.upper() for n, _ in personal}
+            named = d["business_name"].fillna("").str.strip().str.upper().isin(want)
+            print(f"  parcel land use of mapped rows: "
+                  f"{d['parcel_landuse'].value_counts(dropna=False).head(4).to_dict()}")
+            print(f"    owner-occupied (homestead exemption): "
+                  f"{int(occupied.sum()):,} of {len(d):,} "
+                  f"({100 * occupied.mean():.1f}%)  [structural]")
+            print(f"    person-like name AND owner-occupied parcel: "
+                  f"{int((named & occupied).sum()):,}"
+                  f"  - NOT filtered: most are mixed-use rowhouses where the "
+                  f"owner lives above their own shop")
+
     if personal and spec["address"] and proc.exists():
         d = pd.read_csv(proc, dtype=str, low_memory=False)
         cols = [c for c in spec["address"] if c in d.columns]

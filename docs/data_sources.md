@@ -55,6 +55,16 @@ purchased, or behind a login.
 | New York | NYS Active Appearance Enhancement & Barber *Business* Licensees (Socrata `y3u4-jbgh`, data.ny.gov) | **Personal services** — salons, nail, skin care, barbers | `https://data.ny.gov/resource/y3u4-jbgh.csv` | selected columns; **`license_holder_name` deliberately not selected** (it is an individual's name) | 2026-09-21 |
 | New York | DCWP Issued Licenses (Socrata `w7w3-xahh`) | **Retail**, a narrow regulated slice | `https://data.cityofnewyork.us/resource/w7w3-xahh.csv` | `license_status='Active' AND license_type='Premises'` | 2026-09-21 |
 | Philadelphia | L&I Business Licenses (Carto SQL API, table `business_licenses`) | **Food service** and **Retail** only — see below | `https://phl.carto.com/api/v2/sql` (`format=csv`) | `licensestatus='Active' AND licensetype IN (…13 types…)`, built from `config.KEPT_LICENSETYPES`; selected columns, **no registrant-name column** (`legalfirstname`, `legallastname`, `legalname`, `opa_owner`, `ownercontact*name` are all deliberately unselected and asserted absent in step 2) | 2026-09-21 |
+| Philadelphia | OPA Property Assessments (Carto SQL API, table `opa_properties_public`, 583,779 rows) | Not businesses — **joined** to the above for the residence check | same endpoint, `LEFT JOIN opa_properties_public p ON b.opa_account_num = p.parcel_number` (matches 94% of licences) | 2026-09-21 |
+
+The Philadelphia parcel join exists to answer one privacy question the address
+text cannot: **is this "business" someone's home?** Only two derived values are
+selected — the City's own `category_code_description` land-use category, and a
+boolean for whether a homestead exemption is claimed (Philadelphia grants that
+only on an owner's primary residence). The exemption *amount* is not
+downloaded, and no mailing address is downloaded at all. Neither value is ever
+published: the rendered map emits only name, category, station and ring. Same
+"City of Philadelphia License" as the licence data, already recorded below.
 
 New York needs four because it has **no general business licence** — see
 `pipeline/taxonomies/new_york.py`. Every other city needed one.

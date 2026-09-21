@@ -14,6 +14,56 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Testing the residence signals: one works, one is worthless
+
+- **Tested the two signals the previous entry proposed, instead of trusting
+  them.** The unit-indicator residence test can only fire on an
+  `APT`/`FL`/`RM`/`#`, so a sole trader at a detached house reads as clean -
+  which is why Philadelphia measured 0.00%. Both candidates were checked
+  against the City's own property register (`opa_properties_public`, 583,779
+  rows, joined on `opa_account_num`, matching 94% of licences).
+- **A mailing address matching the premises is worthless as a signal: 41.9% of
+  mapped pins.** A shop's mailing address is normally its own premises. It was
+  removed from `PLAN.md` as a thing to build rather than left there to mislead
+  someone later, and Philadelphia's pipeline downloads no mailing address at
+  all.
+- **Parcel land use works, but is NOT a privacy signal on its own, and this is
+  the generalisable part.** In a dense city, shops sit inside residential
+  buildings: "purely residential parcel" flags 7.95% of pins, including **147
+  thirty-plus-seat restaurants on `APARTMENTS > 4 UNITS` parcels** and 92 on
+  `MULTI FAMILY`. Acting on land use alone would have deleted hundreds of real
+  storefronts to remove a few dozen homes.
+- **The best signal was one not proposed: the homestead exemption**, which
+  Philadelphia grants only on an owner's primary residence - a claim the owner
+  made to the City, not an inference. It also over-fires alone (2.22% of pins,
+  of which 162 are `MIXED USE`).
+- **So 0.00% was a false negative, and the corrected figure is ~0.1-0.5%.** The
+  model's *conclusion* survived - the exposure is still negligible and every
+  affected row is a licensed food premises - but its *precision* did not, and
+  the number it reported was wrong.
+- **Filtered the narrow, defensible set: 8 pins.** A person-like displayed name
+  AND an `Individual` entity AND a parcel the City classifies as purely
+  residential. All 8 are `SINGLE FAMILY`; 5 are "Food Preparing and Serving"
+  and 2 are caterers, i.e. home kitchens. Framed as **scope first** - a food
+  licence at a house the owner lives in is not a storefront - which is the same
+  framing as `Rental` and the project-wide NAICS 454 exclusion.
+- **Reversed course on including the homestead exemption as a filter
+  condition.** An earlier version used it as an alternative to the land-use
+  test and removed 17 rows - but 8 of those sat on `MIXED USE` parcels, the
+  rowhouse with a shop below and the owner's flat above, which is a real
+  storefront and arguably Philadelphia's most characteristic one. Deleting
+  those contradicted both the filter's own justification and the reasoning that
+  kept San Diego's sole proprietorships. The exemption is now **reported by
+  `check_personal_exposure.py`, not acted on**: it names 11 person-like pins on
+  owner-occupied parcels and says in the output why they are kept.
+- **`MIXED USE` and `APARTMENTS > 4 UNITS` are deliberately absent from
+  `PARCEL_RESIDENTIAL`**, with the counts that justify it in the config
+  comment, because that is the mistake a future reader is most likely to
+  "correct".
+- **Written into the `add-city` skill's Step 0**, since it applies to every
+  city: check for a joinable property register, and pair an occupancy signal
+  with a name or entity-type test rather than acting on either alone.
+
 ### 2026-09-21 - One published email address, and a gap in the exposure check
 
 - **Found exactly one email address published across all six maps**, in New

@@ -235,6 +235,31 @@ columns the map expects (`business_name`, `latitude`, `longitude`, plus the
 `VALUE_COLUMN`). Read the printed row counts at every filter - that is how a
 scope mistake surfaces, and they become the baseline in `DECISIONS.md`.
 
+**Check whether the city has a property register you can join to, and read the
+result carefully.** The residence test in `check_personal_exposure.py` only
+fires on an `APT`/`FL`/`RM`/`#` indicator, so a sole trader at a detached house
+reads as clean. Where the registry carries a parcel id (Philadelphia's
+`opa_account_num`), an assessor/property layer usually carries the city's own
+land-use category and an owner-occupancy flag, which tests directly for a
+business at a home. Tested on Philadelphia 2026-09-21, with three lessons that
+save repeating the work:
+
+- **A mailing address matching the premises is NOT a signal.** It matched 41.9%
+  of mapped pins - a shop's mailing address is normally its own premises.
+- **Land use alone is not a signal either, and this is the important one.** In a
+  dense city, shops sit inside residential buildings: "purely residential
+  parcel" flagged 7.95% of Philadelphia's pins, including 147 thirty-plus-seat
+  restaurants on `APARTMENTS > 4 UNITS` parcels. Filtering on it would delete
+  hundreds of real storefronts. Mixed-use parcels in particular - the rowhouse
+  with a shop below and a flat above - are the most characteristic storefront
+  in some cities, and their owners often claim an owner-occupancy exemption on
+  them.
+- **Combine a name or entity-type signal with an occupancy one.** A person-like
+  name AND an individual entity AND (a purely residential parcel OR an
+  owner-occupancy exemption) gave 0.39%, against the 0.00% the unit indicator
+  reported. Treat what it finds as a **scope** question first - a home food
+  business is not a storefront - which is easier to justify and fixes both.
+
 **Sample the catch-all classification codes for this city, and decide.**
 `pipeline/taxonomies/naics.py` lists the NAICS catch-alls (812990, 812930,
 459999) and why each needs a per-city verdict; a local taxonomy has its own

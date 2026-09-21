@@ -23,6 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from pipeline.philadelphia.config import (  # noqa: E402
     BUSINESSES_ENDPOINT,
+    BUSINESSES_FROM,
     BUSINESSES_RAW_CSV,
     BUSINESSES_SELECT,
     CITY_BOUNDARY_GEOJSON,
@@ -61,10 +62,11 @@ def get(url, dest: Path, force: bool, label: str, params=None) -> bool:
 
 def business_query() -> str:
     """The server-side filter, built from the taxonomy's kept licence types so
-    the two can never drift apart."""
+    the two can never drift apart. The FROM clause joins the City's property
+    register for the residence check - see config.BUSINESSES_SELECT."""
     quoted = ", ".join("'" + t.replace("'", "''") + "'" for t in KEPT_LICENSETYPES)
-    return (f"SELECT {BUSINESSES_SELECT} FROM business_licenses "
-            f"WHERE licensestatus = 'Active' AND licensetype IN ({quoted})")
+    return (f"SELECT {BUSINESSES_SELECT} FROM {BUSINESSES_FROM} "
+            f"WHERE b.licensestatus = 'Active' AND b.licensetype IN ({quoted})")
 
 
 def fetch_gtfs(force: bool):

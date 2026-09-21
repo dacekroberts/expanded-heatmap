@@ -43,6 +43,7 @@ from pipeline.philadelphia.config import (  # noqa: E402
     CITY_BOUNDARY_GEOJSON,
     CRS_GEOGRAPHIC,
     LICENSE_PRIORITY,
+    PARCEL_RESIDENTIAL,
     PHILADELPHIA_BBOX,
     RAW_CLASSIFICATION_COLUMN,
     TAXONOMY_SYSTEM,
@@ -304,8 +305,54 @@ def main():
           f"{int(was_person.sum()):,} of those removed a licence holder's own "
           f"name from the pin")
 
+    # --- Home-based businesses, tested against the City's property register --
+    # A scope filter first: a food licence at a single-family house the owner
+    # lives in is not a storefront. That it also removes the only residential
+    # personal-name exposure this city has is the second reason, not the first -
+    # the same framing as the `Rental` exclusion and the project-wide NAICS 454
+    # one.
+    #
+    # All THREE conditions are required, and the pairing is the point. Measured
+    # 2026-09-21: a purely residential parcel on its own flags 7.95% of pins, a
+    # homestead exemption on its own 2.22%, and both over-fire on real
+    # storefronts - ground-floor restaurants in apartment blocks, and mixed-use
+    # rowhouses whose owner lives upstairs. Requiring a person-like displayed
+    # name and an Individual entity as well is what makes it precise.
+    # The homestead exemption is NOT one of the three conditions, and that was a
+    # deliberate reversal. Using it as an alternative to the land-use test
+    # removed 17 rows, but 8 of them sat on MIXED USE parcels - a rowhouse with
+    # a shop below and the owner's flat above, which is a real storefront and
+    # arguably the most characteristic one in Philadelphia. Removing those
+    # contradicts the very justification for this filter (that the row is not a
+    # storefront) and the reasoning that kept San Diego's sole proprietorships.
+    # So the City's own land-use classification decides, and the exemption stays
+    # in the data as a signal for scripts/check_personal_exposure.py to report
+    # rather than one that silently deletes shops.
+    before = len(df)
+    owner_occupied = (df["parcel_owner_occupied"].astype(str).str.lower()
+                      == "true")
+    residential = df["parcel_landuse"].isin(PARCEL_RESIDENTIAL)
+    at_home = (
+        df["business_name"].map(_is_person)
+        & df["legalentitytype"].fillna("").str.strip().eq("Individual")
+        & residential
+    )
+    print(f"Residence filter (person-like name + Individual entity + a parcel "
+          f"the City classifies as purely residential): "
+          f"{before:,} -> {before - int(at_home.sum()):,} rows "
+          f"({int(at_home.sum()):,} removed; "
+          f"{int((at_home & owner_occupied).sum()):,} of them also claim the "
+          f"homestead exemption)")
+    if int(at_home.sum()):
+        print(f"  by licence type: "
+              f"{df.loc[at_home, value_column].value_counts().to_dict()}")
+        print(f"  parcel land use: "
+              f"{df.loc[at_home, 'parcel_landuse'].value_counts(dropna=False).to_dict()}")
+    df = df[~at_home]
+
     keep = ["licensenum", "business_name", value_column, "legalentitytype",
             "address", "unit_type", "unit_num", "zip", "council_district",
+            "parcel_landuse", "parcel_owner_occupied",
             "latitude", "longitude", "site"]
     df = df[keep].sort_values("licensenum").reset_index(drop=True)
     df["record_id"] = df.index.astype(str)

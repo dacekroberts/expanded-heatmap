@@ -66,11 +66,51 @@ BUSINESSES_ENDPOINT = "https://phl.carto.com/api/v2/sql"
 # York's salon registry needed.
 # `legalentitytype` is kept: it is Individual/Company, a structured privacy
 # signal rather than a name, and a better one than any name heuristic.
+# The last two columns come from the City's property register, joined
+# server-side on the licence's parcel id (94% of licences match). They exist to
+# answer one question the address text cannot: is this "business" someone's
+# home? The unit-indicator test in scripts/check_personal_exposure.py only
+# fires on an APT/FL/RM/# and so cannot see a detached house, which is why this
+# city first measured 0.00% residential.
+#
+# `homestead_exemption` is the sharp one: Philadelphia grants it only on an
+# owner's PRIMARY RESIDENCE, so it is a claim the owner made to the City rather
+# than an inference. It comes back as a boolean; the exemption amount is not
+# downloaded because only its presence matters.
+#
+# Neither column is ever published - the rendered map emits only name,
+# category, station and ring - and no mailing address is downloaded at all
+# (tested 2026-09-21: matching it against the premises flagged 41.9% of pins
+# and has no discriminating power).
 BUSINESSES_SELECT = (
-    "licensenum, licensetype, business_name, legalentitytype, address, "
-    "unit_type, unit_num, zip, council_district, "
-    "ST_X(the_geom) AS longitude, ST_Y(the_geom) AS latitude"
+    "b.licensenum, b.licensetype, b.business_name, b.legalentitytype, "
+    "b.address, b.unit_type, b.unit_num, b.zip, b.council_district, "
+    "ST_X(b.the_geom) AS longitude, ST_Y(b.the_geom) AS latitude, "
+    "p.category_code_description AS parcel_landuse, "
+    "(COALESCE(p.homestead_exemption, 0) > 0) AS parcel_owner_occupied"
 )
+BUSINESSES_FROM = (
+    "business_licenses b "
+    "LEFT JOIN opa_properties_public p ON b.opa_account_num = p.parcel_number"
+)
+
+# Land-use categories that are purely residential, so a licensed business at
+# one is probably operating from a home.
+#
+# MIXED USE IS DELIBERATELY NOT HERE, and neither is APARTMENTS > 4 UNITS.
+# Mixed use is Philadelphia's signature storefront - a rowhouse with a shop
+# below and a flat above, 3,378 mapped pins, whose owner routinely claims the
+# homestead exemption on it (162 of them). And "residential" parcels carry
+# ground-floor commercial in quantity: 147 thirty-plus-seat restaurants sit on
+# APARTMENTS > 4 UNITS parcels and 92 on MULTI FAMILY. Treating land use alone
+# as a privacy signal would delete hundreds of real storefronts to remove a few
+# dozen homes, which is why the filter in step 2 pairs it with a name and
+# entity-type test rather than acting on it alone.
+PARCEL_RESIDENTIAL = frozenset({
+    "SINGLE FAMILY",
+    "GARAGE - RESIDENTIAL",
+    "VACANT LAND - RESIDENTIAL",
+})
 
 # The licence types the taxonomy maps to a bucket. Filtering at download keeps
 # the raw file to the ~9k rows this project uses instead of 435k, and means the

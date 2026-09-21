@@ -126,10 +126,35 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 - [ ] **Close the residence blind spot in `check_personal_exposure.py`.** It
   detects a home only by an `APT`/`FL`/`RM`/`#` indicator, so a sole trader at
   a detached house reads as clean - which is why Philadelphia scores 0.00%.
-  Two unused signals could close it: the licence's mailing address matching its
-  premises address (Philadelphia has `business_mailing_address`, not currently
-  downloaded), and parcel land-use via a parcel id such as `opa_account_num`.
-  Worth doing before the deploy, since it applies to every city.
+  **Tested both candidate signals against Philadelphia's property register on
+  2026-09-21, and the results corrected this item** (see `DECISIONS.md`):
+  - **Mailing address == premises does NOT work. Do not build it.** It matches
+    41.9% of mapped pins, because a shop's mailing address is normally its own
+    premises. No discriminating power at all.
+  - **Parcel land use works, but only combined with owner-occupancy.** Joining
+    `opa_account_num` to `opa_properties_public` succeeds on 94% of licences
+    and is a real signal - but "residential parcel" alone flags 7.95% of pins,
+    including **147 thirty-plus-seat restaurants on `APARTMENTS > 4 UNITS`
+    parcels**. In a dense city, shops sit in residential buildings; land use
+    alone would delete hundreds of real storefronts.
+  - **The best signal was one not listed here: a homestead exemption**, which
+    Philadelphia grants only on an owner's primary residence. Also over-fires
+    alone (162 of its 189 hits are `MIXED USE`, the rowhouse-with-a-shop where
+    the owner lives upstairs), so it needs pairing too.
+  - **Usable rule: a person-like name AND an Individual entity AND (a purely
+    residential parcel OR a homestead exemption)** - 33 pins, 0.39%. The
+    corrected exposure for Philadelphia is ~0.2-0.5%, not the 0.00% the unit
+    test reported.
+  - **Done for Philadelphia 2026-09-21.** The parcel join is folded into the
+    existing Carto query rather than being a separate download, step 2 removes
+    the 8 pins that are a person-like name at a purely residential parcel, and
+    `check_personal_exposure.py` reports the land-use and owner-occupancy
+    signals. The homestead exemption is reported but **not** filtered on - it
+    over-fires on mixed-use rowhouses.
+  - Still open for the other five cities: each needs its own property register
+    found (or ruled out) before its residence figure can be trusted. San Diego
+    is the most affected, since its unit values are bare ("A", "101") and its
+    address text cannot flag a residence at all.
 - [x] **Record each data source's licence and terms of use** - done
   2026-09-21 in `docs/data_sources.md`, covering all 8 registries, all 5 GTFS
   feeds, the boundary layers and the basemap. Permissive terms were NOT the
