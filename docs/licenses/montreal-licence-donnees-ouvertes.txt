@@ -1,0 +1,122 @@
+Licence d'utilisation des données ouvertes de la Ville de Montréal
+Retrieved 2026-09-21 from https://donnees.montreal.ca/pages/licence-d-utilisation
+Creative Commons Attribution 4.0 International, plus the portal conditions below.
+Adopted 2014-02-27 by resolution CG14 0091 of the Conseil d'agglomération.
+
+CAPTURE NOTE: rendered-text capture, not raw HTML. donnees.montreal.ca returns
+"RBAC: access denied" to curl without browser headers, and its page routes are
+JavaScript-rendered, so the page was read in the browser pane and its text
+copied unaltered. Re-verify against the live page rather than trusting this
+file alone if a clause is ever load-bearing.
+
+WHY THIS FILE EXISTS: every dataset used here declares `cc-by` with the
+canonical creativecommons.org URL, which alone would need no local copy. But
+the portal layers **additional conditions** on top of CC-BY 4.0 — including an
+attribution requirement broader than CC-BY's and a prohibition on attempts to
+identify a person, a business or an organisation. Those are the operative
+terms for this project, so they are stored.
+
+THE CLAUSES THAT BEAR ON THIS PROJECT (summary, not a substitute for the text):
+  - Commercial use, adaptation and redistribution are all permitted.
+  - Attribution must state **whether modifications were made OR
+    interpretations drawn** — broader than standard CC-BY, and this project
+    plainly draws interpretations (ring density, category buckets).
+  - No suggestion that the Ville de Montréal supports or endorses the use.
+  - The attribution condition applies also to integrating the data into a
+    database you or your organisation own.
+  - You may not restrict access to the ORIGINAL data by legal or technical
+    means. (Note for the private-repo question: this constrains the original
+    data, which stays freely available from the City; it does not obviously
+    reach a derived map. Flagged, not resolved.)
+  - Malicious or abusive use is prohibited, "notamment toute tentative
+    d'identifier une personne, une entreprise ou une organisation". Unusual in
+    naming businesses and organisations alongside persons. Reads as a
+    re-identification prohibition rather than a bar on republishing data that
+    is already identified at source — `locaux-commerciaux` ships `NOM_ETAB`
+    for every premises — but it is a judgment call, not a settled reading.
+
+---
+
+Licence d'utilisation des données ouvertes de la Ville de Montréal
+
+Les données ouvertes de la Ville de Montréal sont rendues disponibles sous la
+licence publique Creative Commons Attribution 4.0 International. En accédant
+aux données et aux contenus libérés par la Ville de Montréal, vous vous engagez
+à respecter cette licence d'utilisation. Les données sont ainsi libres de
+réutilisation, à condition d'attribuer leur provenance à la Ville de Montréal.
+
+Certaines données publiées sur notre site web par d'autres organisations sont
+soumises à une licence différente. Référez-vous aux informations additionnelles
+disponibles sur chaque fiche descriptive pour en savoir plus.
+
+LIBRES DE RÉUTILISATION
+
+Nous diffusons nos données pour qu'elles soient réutilisées. Vous êtes
+autorisé(e) à :
+
+  - Partager, copier, distribuer et communiquer les données et les contenus par
+    tous moyens et sous tous formats;
+  - Adapter, transformer et créer à partir des données et des contenus pour
+    toute utilisation, y compris commerciale.
+
+Nous proscrivons tout usage malveillant ou abusif de nos données, notamment
+toute tentative d'identifier une personne, une entreprise ou une organisation.
+La Ville de Montréal accorde une grande importance au respect du droit à la vie
+privée et encourage le respect des principes déclinés dans sa Charte des
+données numériques.
+
+La Ville de Montréal ne peut retirer les autorisations concédées par la licence
+tant que vous appliquez les termes de cette licence.
+
+ATTRIBUTION DE LA SOURCE À LA VILLE DE MONTRÉAL
+
+Lorsque vous réutilisez nos données et contenus, vous devez respecter les
+conditions suivantes :
+
+Vous devez créditer les données et les contenus que vous utilisez et préciser
+si des modifications ont été effectuées ou si des interprétations en ont été
+tirées.
+
+Vous ne pouvez pas indiquer ou suggérer que la Ville de Montréal vous soutient
+ou endosse votre usage de ses données et ses contenus.
+
+Cette condition s'applique également à l'intégration des données de la Ville de
+Montréal à une base de données dont vous ou votre organisation êtes
+propriétaire.
+
+Vous ne pouvez pas restreindre l'accès aux données et contenus originaux
+partagés par la Ville de Montréal, que ce soit sous la forme de conditions
+légales ou de mesures techniques.
+
+Notre licence s'inspire et est conforme aux principes et à la définition du
+Savoir Libre de l'Open Knowledge Foundation. Elle a été adoptée par les
+instances de la Ville de Montréal le 27 février 2014 par la résolution
+CG14 0091 du Conseil d'agglomération. Ce choix vise à faciliter la réutilisation
+des données et à encourager les utilisateurs et utilisatrices des données
+ouvertes à redonner les bénéfices qu'ils en retirent à la communauté.
+
+COMMENT CITER LES DONNÉES OUVERTES
+
+Rapports et documents académiques :
+Ville de Montréal. (Date de la dernière mise à jour de la ressource). Nom de
+l'ensemble de données [Ensemble de données]. Données ouvertes de la Ville de
+Montréal. Lien vers l'ensemble de données
+
+Articles de presse :
+Les données présentées dans cet article sont tirées de l'ensemble de données
+Nom de l'ensemble de données du site web des données ouvertes de la Ville de
+Montréal en date du Date de consultation.
+
+Tout autre usage (incluant les solutions numériques) :
+Avec les données Nom de l'ensemble de données tirées du site web des données
+ouvertes de la Ville de Montréal en date du Date de consultation.
+
+UTILISATION DES DONNÉES PAR OPENSTREETMAP
+
+La Ville de Montréal autorise explicitement la réutilisation de ses données
+ouvertes par OpenStreetMap en échange de son inscription à titre de
+contributrice. Par le biais de son équipe des données ouvertes, la Ville a
+autorisé l'importation de ses données ouvertes dans la base de données du
+projet par les contributeurs et contributrices d'OpenStreetMap, notamment sa
+communauté montréalaise. Cette décision a été corroborée par le représentant
+politique alors en fonction le 15 août 2014.

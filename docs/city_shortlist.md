@@ -105,12 +105,28 @@ Mobility Database catalogue, counting route_type 0/1/5/7/12 and **excluding 2
 | **Edmonton** | LRT, 3 lines | `qhi4-bdpu`: `latitude`/`longitude`, `business_licence_category`, `business_name` | Low |
 | **Toronto** | 17 rail routes | 159,872 rows, `Category`, `Operating Name` - but **no coordinates at all** | **Highest.** Needs a geocoding pass like D.C.; licence field reads "not specified" so the terms must be read; and `Client Name` is a person or company, so LA's privacy discipline applies from the start |
 
-**Toronto has a trap worth knowing before Step 3: it codes its subway as
-`route_type 0`, not 1.** Its 4 subway lines and ~13 streetcar routes are
-indistinguishable by type - San Francisco's exact shape, so
-`docs/sub_transit_line_filters.md` applies and lines must be selected by route
-id. Toronto also has `bodysafe` (personal services inspections) and `dinesafe`
-(food) as a two-bucket fallback if geocoding proves painful.
+**CORRECTED 2026-09-21 - an earlier version of this section said Toronto
+"codes its subway as `route_type 0`, not 1". That is false**, and the cause
+matters more than the error: the Mobility Database mirror of the TTC feed was
+**three months expired** (`feed_end_date 20260606`) and contained **no subway
+at all** - 209 bus, 17 tram, 2 ferry, zero `route_type 1`, with the only
+subway-named entries being shuttle *buses*. The agency's own feed (Toronto CKAN
+`ttc-routes-and-schedules`) has **3 subway lines as `route_type 1`** - Line 1
+Yonge-University, Line 2 Bloor-Danforth, Line 4 Sheppard - plus **Line 5
+Eglinton and Line 6 Finch West** LRT among 20 type-0 routes. Separating rail
+from streetcar is trivial, not the San Francisco problem described here.
+`scripts/screen_rail.py` now flags stale feeds.
+
+**Toronto was also measured after geocoding, and it is the WEAKEST of the six,
+not the strongest.** 37,563 active licences (23.5% of 159,872), of which 71.4%
+geocode against the City's own address repository. Across 234 stations that is
+**41 storefront sites per station - Boston's 39**, because **Toronto is a
+two-bucket city**: within a ring, Food service 7,249, Personal services 1,973,
+**Retail 357**. The city licenses food, personal services and specific trades,
+not general retail; its largest categories are Taxicab Owner, Public Garage and
+Building Renovator. `bodysafe` and `dinesafe` do not help - they are inspection
+programmes over the same premises, not a retail source. Full measurements and
+every endpoint are in `docs/canada_step0_endpoints.md`.
 
 **Ruled out on data:** Ottawa has 6 LRT routes but **no general business
 register** - 697 catalogue entries scanned on a wide net, and the only

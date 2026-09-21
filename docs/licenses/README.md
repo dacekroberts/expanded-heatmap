@@ -23,6 +23,23 @@ as-is; do not transcribe, reformat or trim them.
 | `septa-license-agreement.html` | **SEPTA** (Philadelphia) | `https://wwww.septa.org/license-agreement/` | 2026-09-21 |
 | `wmata-transit-data-terms-of-use.html` | **WMATA** (Washington D.C.) — *not yet a row; D.C. is unbuilt* | `https://developer.wmata.com/license` | 2026-09-21 |
 
+### Canada — screened 2026-09-21, none built
+
+Gathered during the Canadian screen, before any build. Four of the five
+municipal licences are the same Open Government Licence template; Edmonton and
+TransLink are the outliers.
+
+| File | Source | Source URL | Retrieved |
+|---|---|---|---|
+| `toronto-open-government-licence.txt` | **City of Toronto** — business licences *and* TTC GTFS, both of which declare "License not specified" at dataset level | `https://open.toronto.ca/open-data-licence/` | 2026-09-21 |
+| `vancouver-open-government-licence.txt` | **City of Vancouver** — business licences | `https://opendata.vancouver.ca/pages/licence/` | 2026-09-21 |
+| `calgary-open-government-licence.txt` | **City of Calgary** — business licences *and* Calgary Transit scheduling data | `https://data.calgary.ca/stories/s/Open-Calgary-Terms-of-Use/u45n-7awa/` | 2026-09-21 |
+| `edmonton-open-data-terms-of-use.pdf` | **City of Edmonton** — business licences *and* ETS GTFS | `https://www.edmonton.ca/public-files/assets/document?path=Web-version2.1-OpenDataAgreement.pdf` | 2026-09-21 |
+| `montreal-licence-donnees-ouvertes.txt` | **Ville de Montréal** — CC-BY 4.0 **plus portal conditions**; also governs STM GTFS, but STM requires attribution to *itself*, not the City | `https://donnees.montreal.ca/pages/licence-d-utilisation` | 2026-09-21 |
+| `translink-gtfs-static-terms-of-use.txt` | **TransLink** (Vancouver *and* Surrey) — **the operative one.** Static GTFS has its own terms: no key, no approval gate, no request cap | `https://developer.translink.ca/ServicesGtfs/GtfsData` | 2026-09-21 |
+| `translink-open-api-terms-of-use.txt` | **TransLink** Open API — *not* what governs the feed this project uses. Kept because it looked like it did, and because it requires discretionary approval | `https://www.translink.ca/about-us/doing-business-with-translink/app-developer-resources/terms-of-use` | 2026-09-21 |
+| `surrey-open-government-licence.txt` | **City of Surrey** — Business Directory. Covers Surrey's own data only; its rail is TransLink's | `https://opendata-surrey.hub.arcgis.com/pages/surrey::open-data-license` | 2026-09-21 |
+
 ## SHA-256, as retrieved
 
 ```
@@ -33,7 +50,59 @@ e791e24e86b9e974de060c3b238abfc392260cad54ccc0d2d3d4f0a61846b91a  mbta-massdot-d
 f7c07583af9880189c1df55fac2349378dc659016b7ce927dbd3f2900c3c220a  septa-license-agreement.html
 ad6db26b111e58813aa41747c4b958d844befc664609cc7e2147b955a12c04b8  sfmta-transit-data-license-agreement.html
 9df073bf2819a257e44cd9ad7961cac9d418c7fc4e100a625c8e4605dff516d3  wmata-transit-data-terms-of-use.html
+dec36b71e5a02476bc633bb2959e5a3b970ac62520ab3f15d0ccec6dd0ec733b  toronto-open-government-licence.txt
+05ee1aeea7df733ffe7d775de73841e9d79028fe7462deb2cbf8f11f5b4820bf  vancouver-open-government-licence.txt
+99e69435cb5200e6f6af7a317e6cd82678f0f16b8ef0dd1469b6be28138de0d2  calgary-open-government-licence.txt
+44e3fe0cf057fbdae30014eef02f9bc82952722388dcbc5c979befc19483e158  edmonton-open-data-terms-of-use.pdf
+b01f632def2c6d4d56211dfb4519f1238c458ab188c1d4483bb12375465453a3  montreal-licence-donnees-ouvertes.txt
+db8ad88e1e4a4b61f5c7fae7a1c593cf605402ebaed9886102dbdca0f97f3a08  translink-open-api-terms-of-use.txt
+c389fcab88815aee4b2b39b76350a5bac85e080c52ccd794f9c647911fbeae37  translink-gtfs-static-terms-of-use.txt
+7030261bb53846ed58187b724f23b343e692c7a34bff01e3f69042848e44a472  ipc-ontario-interpretation-bulletin-personal-information.pdf
+6da9228708efa429399ad12f2fd028eb27be453adb71ae2fce68cf5fe75425e5  surrey-open-government-licence.txt
 ```
+
+## Two files here are NOT licences
+
+`canada-privacy-regimes-note.md` works through what each province's statute
+actually says, because every Canadian licence here carves out Personal
+Information and defines it by pointing at its own province — and **the four
+provinces do not say the same thing**. Ontario and BC exclude business-capacity
+information from the definition outright (Ontario expressly covering a business
+run from a dwelling; BC not). Alberta's licence cites a statute **repealed in
+June 2025**. Québec narrows the Act's reach rather than excluding the
+information, and frames its exemption around a function *within* a business,
+which does not obviously reach a sole trader. Read it before building any
+Canadian city.
+
+The second is:
+
+`ipc-ontario-interpretation-bulletin-personal-information.pdf` is the Ontario
+Information and Privacy Commissioner's interpretation bulletin on "personal
+information". It is kept here because every Canadian Open Government Licence
+carves **Personal Information** out of the grant and defines it by reference to
+the province's own access-and-privacy statute — so the carve-out cannot be read
+without it.
+
+It is load-bearing, and it corrected a wrong reading made during the screen.
+MFIPPA s.2(2.1) / FIPPA s.2(3) say personal information "does not include the
+name, title, contact information or designation of an individual that
+identifies the individual in a business, professional or official capacity",
+and s.2(2.2) / s.2(4) add that this applies "even if an individual carries out
+business, professional or official responsibilities from their dwelling and the
+contact information for the individual relates to that dwelling". So a
+home-based sole trader's business name at their home address is **inside** the
+Ontario grant, not outside it — the opposite of what was first assumed.
+
+What survives is the IPC's second limb: information in a business capacity can
+still be personal "if disclosed, [it] would reveal something of a personal
+nature about the individual". So this project's residence filtering stays a
+deliberate choice above the legal floor, which is how `DECISIONS.md` already
+frames it for the US cities — not a compliance obligation.
+
+**Ontario only.** British Columbia, Alberta and Québec carve out Personal
+Information the same way but define it under their own statutes, and those
+definitions are not verified. Québec is the least safe to assume, being civil
+law with Law 25 layered on, and it governs the strongest candidate (Montréal).
 
 Re-fetch and compare to detect a changed agreement. The HTML files are whole
 pages, so an unrelated site redesign changes the hash without changing the

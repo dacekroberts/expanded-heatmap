@@ -1,0 +1,119 @@
+TransLink - GTFS Static Data, Terms and Conditions
+Retrieved 2026-09-21 from https://developer.translink.ca/ServicesGtfs/GtfsData
+(resolves to https://www.translink.ca/.../gtfs-static-data)
+No version number or date is stated on the page.
+
+CAPTURE NOTE: rendered-text capture, not raw HTML. The page was read in the
+browser pane and its text copied unaltered. Re-verify against the live page
+rather than trusting this file alone if a clause is ever load-bearing.
+
+WHY THIS FILE EXISTS, AND WHAT IT SETTLES: `translink-open-api-terms-of-use.txt`
+recorded an unresolved question - do the Open API terms, which require
+TransLink's discretionary approval before use, also govern the STATIC GTFS
+feed? They do not. **The static GTFS has its own terms, reproduced here, and
+they are materially looser.** The feed itself carries no `feed_info.txt` at
+all, so it declares no licence of its own; this page is the only source.
+
+WHAT IS THE SAME AS THE OPEN API TERMS
+  - A limited, revocable, non-exclusive licence to use, reproduce and
+    redistribute the Data.
+  - TransLink retains all right, title and interest.
+  - No use of TransLink's domain name or marks beyond the required legend.
+  - Indemnification, "as is", no warranty.
+  - An obligation to provide identifying information on request.
+
+WHAT IS DIFFERENT, AND IT IS THE DIFFERENCE THAT MATTERS
+  - **No API key.** The consideration is "TransLink providing you with a copy
+    of the Data", not the issuing of a key. Files download directly from the
+    page, which is consistent with the keyless download observed on 2026-09-21.
+  - **No approval gate.** The Open API terms continue "In the event that
+    TransLink, in its entire discretion, approves you as a user of the Data,
+    you will be issued an API Key". That sentence has no counterpart here, so
+    the information obligation reads as responsive to a request rather than as
+    a precondition of use. This is a judgment call, of the same kind already
+    made for LA Metro's modification clause and CTA's purpose limitation - it
+    should be recorded as a stated position, not assumed.
+  - **No 1,000-requests-per-day cap.**
+  - **No ten-day termination notice clause.**
+  - **A DIFFERENT required legend.** The API terms mandate "Some of the data
+    used in this product or service...". The GTFS terms mandate "Route and
+    arrival data used in this product or service...". If this project ever
+    uses both, it needs both notices; using the API wording for GTFS data
+    would not satisfy this.
+
+OPERATIONAL NOTE: TransLink posts a new GTFS Static Data file every week,
+typically by Friday, with a minimum of four schedule changes per year and
+files updated two weeks before a change. The download page lists dated
+versions, where the date shown is the published date, not the effective date
+of the schedule.
+
+---
+
+GTFS Static Data - Terms and Conditions
+
+These Terms of Use set out the terms and conditions "the Terms" which governs
+your use of TransLink's General Transit Feed Specification (GTFS) Data (the
+"Data").
+
+You must provide TransLink sufficient information as TransLink may request to
+identify you, your organization or company, who will be using the Data, where
+it will be distributed and whether the use of the data is for non-commercial or
+commercial purposes. TransLink reserves the right to impose conditions or
+restrictions on your use of the Data.
+
+In consideration of TransLink providing you with a copy of the Data, you are
+deemed to accept and agree to the following Terms:
+
+TransLink retains all right, title, and interest in the Data, and any
+intellectual property rights embodied in the Data, including any copyright, and
+any and all improvements or modifications to the Data and that you acquire no
+such proprietary rights from the use or distribution of the Data, and that you
+will not attempt to restrict, limit or prevent TransLink's use of the Data or
+TransLink's trademarks or official marks in association with the Data.
+
+TransLink grants you a limited, revocable and non-exclusive license to use,
+reproduce, and redistribute the Data in accordance with these Terms.
+
+In the event you are a commercial user and you charge an end user a direct or
+indirect fee to use the Data, TransLink reserves the right to impose additional
+terms and conditions for use of the Data, including, but not limited to
+requiring you to pay a fee or other compensation for the use of the Data.
+
+You must, unless otherwise agreed to by TransLink in writing, at all times
+present and identify the Data with the following legend, prominently displayed:
+
+    "Route and arrival data used in this product or service is provided by
+    permission of TransLink. TransLink assumes no responsibility for the
+    accuracy or currency of the Data used in this product or service."
+
+("The Legend"). Other than displaying the Legend, you are not authorized and
+are prohibited from, making use of TransLink's domain name or any trademarks or
+official marks, which are owned by TransLink or any confusingly similar
+variation of the domain name or those marks.
+
+The Data is provided to you on "as is" and "as available" basis, without any
+express or implied warranty of any kind, including without limitation, the
+implied warranties of merchantability, fitness for a particular purpose,
+accuracy and non-infringement. Under no circumstances will TransLink be liable
+for any direct or indirect damages, even if TransLink is aware of the
+possibility of such damages, including without limitation damages, loss of
+profits or for any other special, economic loss, consequential, exemplary or
+incidental damages, however caused, whether based upon contract, including
+negligence, strict liability in tort, warranty or contractual claims, or any
+other legal theory, arising out of or related to your use of the Data. You
+agree with TransLink that this limitation should apply even if it the Data, is
+faulty or inaccurate or otherwise fails. You agree that the use of the Data is
+at your own risk, and you assume the risk that the Data may provide incorrect
+information to you or your users, as well as the risk that the Data may cause
+loss of data or damage to your computer system.
+
+You agree to indemnify, defend and hold harmless TransLink and its officers,
+directors, employees, and agents from and against all demands, claims, causes
+of action, suits, actions or proceedings, or liabilities of any kind or of any
+nature arising out of or in connection with your use or distribution of the
+Data to any end user.
+
+These Terms sets forth the entire agreement between you and TransLink and
+supersedes all previous discussions, representations and agreements between you
+and TransLink, whether written or oral, and may be amended only with the
+written consent of TransLink.

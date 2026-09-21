@@ -1,0 +1,124 @@
+TransLink Open API - Terms of Use
+Retrieved 2026-09-21 from
+https://www.translink.ca/about-us/doing-business-with-translink/app-developer-resources/terms-of-use
+No version number or date is stated on the page.
+
+CAPTURE NOTE: rendered-text capture, not raw HTML. The page was read in the
+browser pane and its text copied unaltered. Re-verify against the live page
+rather than trusting this file alone if a clause is ever load-bearing.
+
+WHY THIS MATTERS: this is the tightest transit licence found in Canada, and
+the only one anywhere in this project that requires **prior written contact
+and discretionary approval before use**, rather than issuing access
+automatically. WMATA gates on a key but issues it on sign-up; TransLink does
+not.
+
+RESOLVED 2026-09-21 - THIS DOCUMENT DOES NOT GOVERN THE STATIC GTFS FEED.
+These Terms govern "any Open API (the 'Data')". The question was whether they
+also reached the static GTFS feed, which would have made Vancouver and Surrey
+conditional on TransLink's discretionary approval. They do not: **the static
+GTFS has its own, materially looser terms**, captured in
+`translink-gtfs-static-terms-of-use.txt`. Those have no API key, no approval
+gate, no request cap, no termination-notice clause, and a **differently worded
+required legend**. This file remains the governing document only if this
+project ever uses TransLink's Open API - which it has no reason to, since it
+needs static schedule and geometry, not real-time.
+
+IF THESE TERMS DO APPLY, the operative obligations are:
+  - Written contact identifying who will use the Data, where it will be
+    distributed, and whether use is commercial or non-commercial; TransLink
+    approves "in its entire discretion".
+  - A maximum of 1,000 requests per day, reducible at any time.
+  - Termination on ten (10) days written notice.
+  - A prominently displayed disclaimer, in the exact wording below.
+  - No use of TransLink's domain name or marks beyond that disclaimer.
+  - Indemnification of TransLink.
+
+---
+
+Open API - Terms of Use
+
+For Terms of Use of the API data, please refer to TransLink Terms and
+Conditions.
+
+These Terms of Use set out the terms and conditions which governs your use of
+any Open API (the "Data") provided by TransLink.
+
+You must contact TransLink in writing and provide sufficient information as
+TransLink may request to identify you, your organization or company, who will
+be using the Data, where it will be distributed and whether the use of the data
+is for non-commercial or commercial purposes. TransLink reserves the right to
+impose conditions or restrictions on your use of the Data. In the event that
+TransLink, in its entire discretion, approves you as a user of the Data, you
+will be issued an API Key and access to the interface.
+
+In consideration of TransLink issuing you with an API Key and by using the API
+Key and the Data, you are deemed to accept and agree to the following Terms.
+
+TransLink retains all right, title, and interest in the Data, and any
+intellectual property rights embodied in the Data, including any copyright, and
+any and all improvements or modifications to the Data and that you acquire no
+such proprietary rights from the use or distribution of the Data, and that you
+will not attempt to restrict, limit or prevent TransLink's use of the Data or
+TransLink's trade-marks or official marks in association with the Data.
+
+TransLink grants you a limited, revocable and non-exclusive license to use,
+reproduce, and redistribute the Data in accordance with these Terms.
+
+Your API Key will authorize you to offer a maximum of 1,000 requests per day
+for use of the Data. TransLink reserves the right, at any time after the API
+Key is issued, to limit the number of maximum requests in any one day.
+
+In the event you are a commercial user and you charge an end user a direct or
+indirect fee to use the Data, TransLink reserves the right to impose additional
+terms and conditions for use of the Data, including, but not limited to
+requiring you to pay a fee or other compensation for the use of the Data and
+impose further restrictions on the number of requests per day for the Data.
+
+This licence and the API Key may be terminated by TransLink by providing you
+with ten (10) days written notice to the last known address provided to
+TransLink at the time of the application for the API Key.
+
+You must, unless otherwise agreed to by TransLink in writing, at all times
+present and identify the Data with the following disclaimer, prominently
+displayed:
+
+    "Some of the data used in this product or service is provided by permission
+    of TransLink. TransLink assumes no responsibility for the accuracy or
+    currency of the Data used in this product or service."
+
+Other than displaying the above disclaimer, you are not authorized and are
+prohibited from making use of TransLink's domain name or any trade-marks or
+official marks which are owned by TransLink or any confusingly similar
+variation of the domain name or those marks.
+
+The Data is provided to you on "as is" and "as available" basis, without any
+express or implied warranty of any kind, including without limitation, the
+implied warranties of merchantability, fitness for a particular purpose,
+accuracy and non-infringement. Under no circumstances will TransLink be liable
+for any direct or indirect damages, even if TransLink is aware of the
+possibility of such damages, including without limitation damages, loss of
+profits or for any other special, economic loss, consequential, exemplary or
+incidental damages, however caused, whether based upon contract, including
+negligence, strict liability in tort, warranty or contractual claims, or any
+other legal theory, arising out of or related to your use of the Data. You
+agree with TransLink that this limitation should apply even if it the Data, is
+faulty or inaccurate or otherwise fails. You agree that the use the API Key and
+the Data is at your own risk, and you assume the risk that the Data may provide
+incorrect information to you or your users, as well as the risk that the Data
+may cause loss of data or damage to your computer system.
+
+You agree to indemnify, defend and hold harmless TransLink and its officers,
+directors, employees, and agents from and against all demands, claims, causes
+of action, suits, actions or proceedings, or liabilities of any kind or of any
+nature arising out of or in connection with your use or distribution of the
+Data to any end user.
+
+In the event of any conflict between these Terms and other terms governing
+general use of the TransLink Developer Site (translink.ca/developer), these
+Terms will be controlling as to matters expressly addressed herein.
+
+These Terms sets forth the entire agreement between you and TransLink and
+supersedes all previous discussions, representations and agreements between you
+and TransLink, whether written or oral, and may be amended only with the
+written consent of TransLink.

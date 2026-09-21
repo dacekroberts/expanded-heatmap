@@ -14,6 +14,120 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Canada screened end to end: six viable cities, and the largest is the weakest
+
+Screened in parallel with the Boston, D.C. and deploy work, writing only to
+`docs/licenses/` and `docs/canada_step0_endpoints.md` so nothing collided. No
+Canadian city is built; this is Step 0 evidence, not a build.
+
+- **Rail first, and it removed 6 of 13 before a catalogue was opened.** The
+  order matters: rail is the cheapest disqualifier, so a city with no urban
+  rail is out however good its registry is. Out on rail, live-verified from
+  each agency's own `routes.txt`: Winnipeg, Hamilton, Quebec City, Halifax,
+  **Mississauga and Brampton**. The last two matter because Miami's regional
+  precedent does *not* rescue them - Metrorail physically extends into Hialeah,
+  whereas TTC Line 2 stops at Kipling inside Toronto and the only rail reaching
+  Brampton is GO commuter rail, excluded everywhere. Brampton's data is
+  excellent (6,059 businesses, NAICS on 97.3%, X/Y on 100%) and unusable until
+  the Hurontario LRT opens; recorded in `docs/city_shortlist.md` with a
+  mid-2027 revisit asking "has an opening date been announced?" rather than "is
+  it open?".
+- **Montreal was nearly lost to a keyword filter, and is the best-documented
+  source in the project.** A keyword scan of the full 447-package list
+  concluded "food-only". Wrong: **`locaux-commerciaux`** contains none of the
+  words *business*, *licence*, *permis*, *entreprise* or *commerce*. It is an
+  agglomeration-wide field survey of street-level commerce - 28,621 premises,
+  **100% coordinates**, `NOM_ETAB` 100%, **`SCIAN` (NAICS) 99.6%**, plus a
+  vacancy flag - and it passes the exact coverage test Boston's survey failed:
+  **441 occupied 0.01-degree cells against Boston's 37**, with Ville-Marie at
+  4,316 premises and Senneville at 1. Nobody surveys a village of 900 as part
+  of a sample. The rule that followed is now in `add-city` Step 0: read a new
+  city's whole catalogue, never grep it.
+- **Station density decided the ranking, as it did for D.C. against Boston.**
+  Sites within the outermost ring per in-city station: **Vancouver 861**
+  (the densest measured anywhere in this project), **Surrey 549**, **Montreal
+  252**, **Edmonton 153**, **Calgary 103**, **Toronto 41**. Vancouver keeps only
+  20 of 53 stations in-city - 38%, which looks alarming and is the least
+  interesting number, exactly as with D.C.
+- **Toronto is the weakest of the six despite being the largest, and that is
+  worth stating before anyone picks it on population.** After geocoding, 41
+  storefront sites per station - Boston's 39 - because **it is a two-bucket
+  city**: within a ring, Food service 7,249, Personal services 1,973, **Retail
+  357**. Toronto licenses food, personal services and specific trades, not
+  general retail; its biggest categories are Taxicab Owner 4,212, Public Garage
+  3,023, Building Renovator 1,461.
+- **No Canadian geocoder is needed, and only one city needed geocoding at
+  all.** Montreal, Surrey and Calgary are 100% coordinates; Edmonton has 111
+  rows with an address and no coordinates (its 47% "missing" are placeholders -
+  `<Home Based Business>` 14,114, `<REDACTED FOR PRIVACY>` 4,074,
+  `<Non-Resident Business>` 2,108); Vancouver has 1,583, the rest having no
+  address either and being rentals and contractors this project excludes.
+  Toronto has none, and is solved by **a local join against the City's own
+  525,440-point address repository - 71.4% on exact match with no street
+  normalisation**, which also returns `MUNICIPALITY_NAME` and so doubles as the
+  in-city filter.
+
+### 2026-09-21 - A stale catalogue mirror produced a false finding about Toronto
+
+- **The claim "Toronto codes its subway as `route_type 0`" was wrong, and it
+  reached three files before it was caught.** `scripts/screen_rail.py`, the
+  `add-city` skill and `docs/city_shortlist.md` all carried it; all three are
+  corrected.
+- **The cause is worse than a misreading.** The Mobility Database mirror of the
+  TTC feed had `feed_end_date 20260606` - **three months expired** when read on
+  2026-09-21 - and contained **no subway at all**: 209 bus, 17 tram, 2 ferry,
+  zero `route_type 1`, the only subway-named entries being shuttle *buses*. The
+  17 trams are the streetcars. The agency's own feed, from Toronto's CKAN
+  package `ttc-routes-and-schedules`, has **3 subway lines as `route_type 1`**
+  plus **Line 5 Eglinton and Line 6 Finch West** LRT among 20 type-0 routes.
+  Toronto's system is richer than the screen said and separating rail from
+  streetcar is trivial.
+- **`screen_rail.py` now reads `feed_info.txt` and flags expiry**, printing
+  `[FEED EXPIRED yyyymmdd]` per feed and a `STALE FEEDS` block at the end.
+  Verified against the feed that caused this: it fires on Toronto's mirror and
+  stays silent on Calgary's live one. **A mirror can be missing an entire mode
+  and the screen had no way to tell** - that is the lesson, not the date.
+
+### 2026-09-21 - Montreal will be built at AGGLOMERATION scope
+
+- **The owner's call, and the first argument for it was wrong.** The initial
+  case - that the Metro "serves Westmount and Mont-Royal directly", so city
+  scope would strand stations whose commerce was filtered away - is false on
+  its facts. **Westmount has no Metro station**; Mont-Royal has one. Measured:
+  63 of 68 stations sit in arrondissements, 1 in a ville liee (Acadie), and 4
+  outside the agglomeration entirely (three in Laval, one in Longueuil, which
+  are excluded under *either* scope).
+- **The real argument is the reverse of the first, and it survives.** Buffering
+  every in-agglomeration station by the 0.6 mi ring, **659 of the 2,827
+  linked-city premises (23.3%) fall inside a ring drawn around Montreal's own
+  stations** - Westmount 399, Mont-Royal 214, Cote-Saint-Luc 46. The failure is
+  not stations outside the city; it is **commerce immediately across the city
+  line sitting inside rings drawn from stations inside it**. City scope would
+  cut a visible hole beside Atwater, Vendome and Guy-Concordia while keeping
+  the stations, which reads as a bug rather than a scope choice.
+- **Cost, stated plainly:** the city page must say it maps the agglomeration,
+  not the city. Miami is the precedent. The three Laval stations are a second,
+  larger regional question left open behind this one.
+
+### 2026-09-21 - TransLink's static GTFS terms read as not requiring prior approval
+
+- **The owner's stated position, in the same family as LA Metro's modification
+  clause and CTA's purpose limitation**, both decided the same way earlier.
+  TransLink publishes the static GTFS under a **different document** from its
+  Open API terms. The API terms gate on "In the event that TransLink, **in its
+  entire discretion**, approves you as a user of the Data" - the GTFS terms
+  have no counterpart to that sentence, no API key, no 1,000-requests-per-day
+  cap and no ten-day termination clause. Their information obligation - "You
+  must provide TransLink sufficient information as TransLink may request" -
+  reads as responsive to a request, not a precondition of use. **Decided: no
+  prior contact is required**; contacting them would be a courtesy, not a gate.
+- **Three obligations if Vancouver or Surrey is built**, and one is a trap: the
+  Legend must use the **GTFS wording** ("Route and arrival data used in this
+  product or service...") and **not** the API wording ("Some of the data..."),
+  which would not satisfy these terms. Plus no TransLink marks beyond that
+  legend, and responsiveness if asked. Surrey inherits all three, having no
+  rail of its own - one regional build, one Legend.
+
 ### 2026-09-21 - Concentric rings start switched OFF for every city
 
 - **The owner's call, for a cleaner first view.** `map_common.render_heatmap`'s

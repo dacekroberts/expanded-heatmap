@@ -27,13 +27,20 @@ else. **route_type 2 is commuter rail and is deliberately NOT urban rail** -
 this project excludes it in every city built so far, so a city whose only rail
 is type 2 reads as "no urban rail" here, which is the intended answer.
 
-Two traps this exists to catch, both real:
+Three traps this exists to catch, all real:
 
-- **An agency may code its subway as type 0.** Toronto does: its 4 subway
-  lines and ~13 streetcar routes are indistinguishable by type, which is San
-  Francisco's shape and means `docs/sub_transit_line_filters.md` applies and
-  lines must be picked by route id. A high type-0 count is a prompt to look at
-  route names, not a finished answer.
+- **A catalogue mirror can be STALE and silently missing a whole mode.** This
+  is the one that actually bit, on 2026-09-21. The Mobility Database copy of
+  Toronto's TTC feed had `feed_end_date 20260606` - expired three months
+  earlier - and contained **no subway at all**: 209 bus, 17 tram, 2 ferry, zero
+  route_type 1, with the only subway-named entries being shuttle *buses*. The
+  screen read 17 trams and concluded Toronto "codes its subway as type 0",
+  which is false. The agency's own feed has 3 subway lines as route_type 1 plus
+  20 trams. **This script now prints each feed's expiry and flags stale ones -
+  heed it, and prefer the agency's own feed wherever one is published.**
+- **An agency may genuinely code its subway as type 0.** San Francisco's Muni
+  Metro is route_type 0. A high type-0 count is a prompt to read the route
+  names, never a finished answer.
 - **A regional agency's feed covers cities that have no rail of their own.**
   TransLink's feed carries Surrey's SkyTrain stations; Vancouver's own city
   screen would miss that. Check whether rail physically reaches a candidate
@@ -43,6 +50,7 @@ Read-only: nothing is written, and feeds are fetched to memory, never to disk.
 """
 
 import csv
+import datetime
 import io
 import sys
 import urllib.request
@@ -111,20 +119,37 @@ def open_feed(url):
         return buf, "full download"
 
 
+def feed_expiry(z):
+    """`feed_end_date` from feed_info.txt, or None if the feed declares none.
+
+    A stale mirror is invisible otherwise, and a stale mirror can be missing an
+    entire mode - see the Toronto note in the module docstring.
+    """
+    name = next((n for n in z.namelist() if n.endswith("feed_info.txt")), None)
+    if name is None:
+        return None
+    for row in csv.DictReader(io.StringIO(z.read(name).decode("utf-8-sig", errors="replace"))):
+        end = (row.get("feed_end_date") or "").strip()
+        if len(end) == 8 and end.isdigit():
+            return end
+    return None
+
+
 def route_types(url):
-    """-> (counts by route_type, how it was fetched, zip size in bytes)."""
+    """-> (counts by route_type, how it was fetched, zip size, feed_end_date)."""
     handle, mode = open_feed(url)
     with zipfile.ZipFile(handle) as z:
+        expiry = feed_expiry(z)
         name = next((n for n in z.namelist() if n.endswith("routes.txt")), None)
         if name is None:
-            return None, mode, handle.size
+            return None, mode, handle.size, expiry
         raw = z.read(name).decode("utf-8-sig", errors="replace")
     counts = {}
     for row in csv.DictReader(io.StringIO(raw)):
         value = (row.get("route_type") or "").strip()
         if value.isdigit():
             counts[int(value)] = counts.get(int(value), 0) + 1
-    return counts, mode, handle.size
+    return counts, mode, handle.size, expiry
 
 
 def read_targets(stream):
@@ -147,13 +172,16 @@ def main():
     else:
         targets = list(read_targets(sys.stdin))
 
-    passed = []
+    today = datetime.date.today().strftime("%Y%m%d")
+    passed, stale = [], []
     for city, agency, url in targets:
         try:
-            counts, mode, size = route_types(url)
+            counts, mode, size, expiry = route_types(url)
         except Exception as exc:
             print(f"{city:<14} {agency:<30} ERROR {type(exc).__name__}: {exc}")
             continue
+        if expiry and expiry < today:
+            stale.append(f"{city} (expired {expiry})")
         if counts is None:
             print(f"{city:<14} {agency:<30} no routes.txt in the zip")
             continue
@@ -168,11 +196,17 @@ def main():
         print(
             f"{city:<14} {agency:<30} {verdict:<14} [{rail_desc}]  "
             f"other: {other}  ({size // 1024} KB, {mode})"
+            + (f"  [FEED EXPIRED {expiry}]" if expiry and expiry < today else "")
         )
 
     print(f"\n{len(passed)} of {len(targets)} have urban rail: {', '.join(passed) or 'none'}")
     print("Commuter rail (route_type 2) is not counted - this project excludes it.")
     print("A high tram/LRT count may hide a subway: check route names before concluding.")
+    if stale:
+        print(f"\nSTALE FEEDS - do not trust these counts: {', '.join(stale)}")
+        print("A stale mirror can be missing an entire mode, not just old times.")
+        print("Toronto's mirror was three months expired and had no subway at all.")
+        print("Fetch the agency's own feed and re-run before believing any of this.")
 
 
 if __name__ == "__main__":

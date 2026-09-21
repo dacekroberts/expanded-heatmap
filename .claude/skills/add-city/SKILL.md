@@ -67,10 +67,18 @@ schema verification. Do this for every candidate before scaffolding:
    straight from each agency's live `routes.txt`. It removed 6 of 13
    Canadian cities in one pass on 2026-09-21, before a catalogue was opened.
    Feed URLs come from the Mobility Database catalogue (`bit.ly/catalogs-csv`),
-   one CSV covering most of the world's feeds. Two traps it exists to catch:
-   **an agency may code its subway as `route_type 0`** (Toronto does, so its
-   subway and streetcars are indistinguishable by type - San Francisco's
-   shape), and **a regional feed covers cities with no rail of their own**
+   one CSV covering most of the world's feeds. Three traps it exists to catch.
+   **A catalogue mirror can be STALE and silently missing an entire mode** -
+   the Mobility Database copy of Toronto's TTC feed was three months expired
+   (`feed_end_date 20260606`) and contained **no subway at all**, only 17 trams
+   and the shuttle buses; the screen read that as "Toronto codes its subway as
+   route_type 0", which is **false**. The agency's own feed has 3 subway lines
+   as `route_type 1`. `screen_rail.py` now prints each feed's expiry and flags
+   stale ones: heed it, and prefer the agency's own feed. Separately,
+   **an agency may genuinely code its subway as `route_type 0`** (San
+   Francisco's Muni Metro does, so a high type-0 count is a prompt to read the
+   route names, never a finished answer), and **a regional feed covers cities
+   with no rail of their own**
    (TransLink's carries Surrey's SkyTrain stations). Commuter rail
    (`route_type 2`) is not counted, matching every city built so far.
 3. **City boundary polygon.** Find a real GIS boundary layer (a regional
