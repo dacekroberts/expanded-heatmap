@@ -65,7 +65,7 @@ in 23 other municipalities.
 | City | Layer | Endpoint | Filtered to |
 |---|---|---|---|
 | San Diego | SANDAG regional municipal boundaries | `https://geo.sandag.org/server/rest/directories/downloads/Municipal_Boundaries.geojson` | `SAN DIEGO` |
-| San Francisco | County boundary | **NOT RECORDED** — see Gaps | `San Francisco` |
+| San Francisco | Socrata "Bay Area County Polygons" (`wamw-vt4s`) | `https://data.sfgov.org/resource/wamw-vt4s.geojson?$where=county='San Francisco'&$limit=10` | `San Francisco` |
 | Los Angeles | LA County Planning, incorporated cities | `https://services.arcgis.com/RmCCgQtiZLDCtblq/arcgis/rest/services/admin_dist_SDE_DIST_DRP_CITY_COMM_BDY/FeatureServer/0/query` (`JURISDICTION='INCORPORATED CITY'`, `outSR=4326`, `f=geojson`) | `LOS ANGELES` |
 | Chicago | Socrata "Boundaries - City" (`qqq8-j68g`) | `https://data.cityofchicago.org/resource/qqq8-j68g.geojson?$limit=10` | whole city |
 | New York | Borough Boundaries (`gthc-hcne`) | `https://data.cityofnewyork.us/resource/gthc-hcne.geojson?$limit=10` | all five boroughs = the city |
@@ -74,6 +74,13 @@ Chicago note: the sibling asset `ewy2-6yfk` ("Boundaries - City - Map") has
 null geometry; `qqq8-j68g` is the usable one.
 New York note: `tqmj-j8zm`, the borough-boundary ID still in wide circulation,
 now returns 404.
+San Francisco note: `wamw-vt4s` is a **nine-county** Bay Area layer, so the
+`county` filter is not optional — unfiltered it would scope the city to the
+whole region. This endpoint was recovered on 2026-09-21 (it had been recorded
+nowhere) by identifying the raw file from its own fields, `objectid` /
+`fipsstco` / `county` with FIPS `06075`; the endpoint reproduces the file
+byte-for-byte at 38,822 bytes with identical geometry, so it is the confirmed
+original source and not a lookalike.
 
 ## Geocoding
 
@@ -105,9 +112,10 @@ derived data is permitted. Socrata portals usually state terms per dataset;
 
 ## Gaps
 
-- **San Francisco's boundary layer endpoint is not recorded anywhere.** The
-  file (`sf_county_boundary.geojson`) is in the gitignored raw folder, so it
-  cannot currently be re-fetched from scratch. Needs identifying and adding.
+- ~~San Francisco's boundary layer endpoint is not recorded anywhere.~~
+  **Closed 2026-09-21:** identified as `wamw-vt4s` and confirmed byte-for-byte
+  against the raw file. All five cities can now be rebuilt from scratch from
+  this document alone.
 - Retrieval dates marked ≈ are inferred from commit history, not recorded at
   download time. Dates for cities added from now on are recorded exactly.
-- Licences, as above.
+- Licences, as above — the one substantive gap left.
