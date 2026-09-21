@@ -23,7 +23,11 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-from pipeline.residence import flag_home_based, report  # noqa: E402
+from pipeline.residence import (  # noqa: E402
+    flag_home_based,
+    has_residential_unit,
+    report,
+)
 from pipeline.san_francisco.config import (  # noqa: E402
     ASSESSOR_ROLL_CSV,
     BUSINESSES_RAW_CSV,
@@ -173,15 +177,46 @@ def main():
               f"({100 * matched.mean():.1f}%), median "
               f"{joined['parcel_dist_m'].median():.1f} m")
 
-        at_home = flag_home_based(
+        # Rule 1 - a house. Owner occupancy is required: a single-family parcel
+        # alone does not establish that the business IS the home.
+        at_house = flag_home_based(
             joined["business_name"],
             residential=joined["use_definition"].isin(PARCEL_RESIDENTIAL),
             owner_occupied=joined["exemption"].fillna(0) > 0,
         )
         report("person-like name + single-family parcel + homeowner's exemption",
-               at_home, before,
+               at_house, before,
                extra={"NAICS": joined[value_column],
                       "use_definition": joined["use_definition"]})
+
+        # Rule 2 - a flat, which rule 1 cannot reach: a block of flats is
+        # classified multi-family whether or not a shop occupies its ground
+        # floor, so the parcel says nothing on its own. Here the DWELLING-UNIT
+        # DESIGNATOR in the business's own address is the evidence, and no
+        # owner-occupancy test is needed - a rented flat is still someone's
+        # home.
+        #
+        # The building check is what makes it safe, and it is not optional: of
+        # 272 person-like pins at an apartment address, 188 sit on a purely
+        # residential building but **51 sit on a commercial or industrial
+        # one** - real tenancies in a unit-numbered commercial building.
+        # Filtering on the address designator alone would have deleted those 51.
+        at_flat = flag_home_based(
+            joined["business_name"],
+            residential=(
+                joined["full_business_address"].map(has_residential_unit)
+                & joined["use_definition"].fillna("").str.contains(
+                    "Residential|Dwelling", case=False, na=False)
+            ),
+        )
+        report("person-like name + dwelling-unit address + residential "
+               "building", at_flat, before,
+               extra={"NAICS": joined[value_column],
+                      "use_definition": joined["use_definition"]})
+
+        at_home = at_house | at_flat
+        print(f"  combined: {int(at_home.sum()):,} removed "
+              f"({int((at_house & at_flat).sum()):,} matched both rules)")
         df = df[~at_home.reindex(df.index, fill_value=False)]
     else:
         print(f"  WARNING: no assessor roll at {ASSESSOR_ROLL_CSV.name}; the "

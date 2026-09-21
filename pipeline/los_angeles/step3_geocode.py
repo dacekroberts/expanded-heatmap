@@ -35,7 +35,11 @@ from pipeline.los_angeles.config import (  # noqa: E402
     LOS_ANGELES_BBOX,
     PARCEL_RESIDENCE_CSV,
 )
-from pipeline.residence import flag_home_based, report  # noqa: E402
+from pipeline.residence import (  # noqa: E402
+    flag_home_based,
+    has_residential_unit,
+    report,
+)
 
 
 def main():
@@ -130,14 +134,40 @@ def main():
               f"within the buffer "
               f"({100 * matched.sum() / max(int(looked_up.sum()), 1):.1f}%)")
 
-        at_home = flag_home_based(
+        # Rule 1 - a house. Owner occupancy is required: a residential parcel
+        # alone does not establish that the business IS the home.
+        at_house = flag_home_based(
             m["business_name"],
             residential=m["all_residential"].eq("true"),
             owner_occupied=m["all_owner_occupied"].eq("true"),
         )
         report("person-like name + residential parcel + homeowner's exemption",
-               at_home, before,
+               at_house, before,
                extra={"NAICS": m["naics"], "use_types": m["use_types"]})
+
+        # Rule 2 - a flat, which rule 1 cannot reach: an apartment block is
+        # classified Residential whether or not a shop occupies its ground
+        # floor, and a rented flat carries no homeowner's exemption. Here the
+        # DWELLING-UNIT DESIGNATOR in the business's own address is the
+        # evidence, so no occupancy test is needed.
+        #
+        # The building check is still required and is not optional: in San
+        # Francisco, 51 of 272 person-like pins at an apartment address sat on
+        # a COMMERCIAL building - real tenancies in a unit-numbered commercial
+        # block - and filtering on the address designator alone would have
+        # deleted them.
+        at_flat = flag_home_based(
+            m["business_name"],
+            residential=(m["street_address"].map(has_residential_unit)
+                         & m["all_residential"].eq("true")),
+        )
+        report("person-like name + dwelling-unit address + residential "
+               "building", at_flat, before,
+               extra={"NAICS": m["naics"], "use_types": m["use_types"]})
+
+        at_home = at_house | at_flat
+        print(f"  combined: {int(at_home.sum()):,} removed "
+              f"({int((at_house & at_flat).sum()):,} matched both rules)")
         out = out[~at_home.reindex(out.index, fill_value=False)]
         out = out.reset_index(drop=True)
     else:

@@ -72,6 +72,29 @@ def looks_personal(name) -> bool:
             and not _NOT_A_NAME.search(s.upper()))
 
 
+# A unit designator in the BUSINESS'S OWN registered address. This is the
+# signal for the second population: people working from a FLAT, which the
+# parcel test cannot reach, because a block of flats is classified
+# multi-family whether or not it has a shop on the ground floor.
+#
+# It works because a storefront's address is "1042 Irving St" - only a home is
+# "1042 Irving St Apt 1". No shop has an apartment number.
+#
+# FL/FLOOR and RM/ROOM are deliberately COMMERCIAL, matching
+# docs/passover_name_filtering_skill.md and against what
+# scripts/check_personal_exposure.py said until 2026-09-21: "FL 3" is an
+# office floor, not a dwelling. SPC/SPACE/TRLR are residential (a mobile-home
+# space is a home). A bare LOT is omitted: in these registries it is as likely
+# to be a parking lot, and it could not be verified.
+RESIDENTIAL_UNIT = re.compile(
+    r"\b(APT|APARTMENT|UNIT|PH|BSMT|REAR|LOWR|SPC|SPACE|TRLR)\b")
+
+
+def has_residential_unit(address) -> bool:
+    """Does this address carry a dwelling-unit designator?"""
+    return bool(RESIDENTIAL_UNIT.search(str(address or "").upper()))
+
+
 def flag_home_based(names, *, residential, owner_occupied=None,
                     individual=None):
     """Rows that are a person's name at what the city says is a home.
