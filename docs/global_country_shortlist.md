@@ -80,11 +80,17 @@ than a fact to discover during one.
 
 ### Tier 2 — one leg excellent, the other genuinely open
 
-| | Status |
-|---|---|
-| **Mexico** | **The best business data found anywhere** — DENUE, 6M+ establishments, coordinates, **SCIAN = NAICS** so the taxonomy may transfer — and **a licence that clears** (INEGI, commercial use explicit). **But Mexico City's feed is unreachable:** the S3 mirror returns **403** and the city portal **times out**. **Guadalajara works** — *Mi Tren* / SITEUR, **3 LRT lines**, measured — so Mexico is viable through its second city even if CDMX stays shut. |
-| **Spain** / Barcelona | **Now both legs measured — promote on the next pass.** Business: the 68,024-premises ground-floor census. Rail: **FGC subway 4 + funicular 3** in Barcelona, and Spain additionally has **Madrid subway 13**, Bilbao, Málaga, Valencia and Sevilla metros — **six metro cities in one country**, more than any other candidate. The only gap is that TMB's own feed 404s, and TMB runs Barcelona's L1–L5; FGC alone understates the city. |
-| **South Korea** | Business **MEASURED and ideal** — 195 municipal permit types, KOGL Type 1. **Zero transit feeds in the catalogue.** Everything rests on whether the national transport source serves something readable. |
+| | Data | Rail | What is missing |
+|---|---|---|---|
+| **Spain** | **MEASURED** — Barcelona's 68,024-premises ground-floor census | **MEASURED** — Madrid subway 13, Barcelona FGC subway 4 + funicular 3, plus Bilbao, Málaga, Valencia, Sevilla: **six metro cities, more than any other candidate** | **The licence.** Open Data Barcelona's terms have not been read. That is the only gap, and it is one document |
+| **Mexico** | **MEASURED** — DENUE, 6M+ establishments, coordinates, **SCIAN = NAICS** so the taxonomy may transfer | **Partial** — Guadalajara LRT 3 measured and current; **Mexico City unreachable** (S3 403, city portal refuses connections) | A working CDMX feed. Viable through Guadalajara regardless |
+| **South Korea** ↑↑ | **MEASURED and the best found anywhere** — `상가(상권)정보`: active premises nationwide, 상호명 + 업종 + both address forms + **경도/위도**, KSIC 10/75/247, quarterly, CSV UTF-8, free, **이용허락범위 제한 없음 (no restriction)**. One register, all three buckets | **MEASURED** — national urban-railway **station** and **line** standard datasets on `data.go.kr` (15013205 / 15013203), plus Seoul's own lines 1–9 set updated 2026-09-22 (Open API, free key) | Download and verify the schema live; confirm the station datasets carry coordinates |
+
+**Spain overtook Mexico this round.** Its business leg was already the
+Montréal model and its rail leg is now the deepest measured anywhere in this
+screen — six metro cities in one country, against Canada's six *candidate*
+cities of which only two had a metro. What stands between Spain and Tier 1 is
+a single unread licence, not a data question.
 
 ### Tier 3 — rail measured, business data unknown
 
@@ -101,46 +107,227 @@ Rotterdam** (subway 14, tram 46), **Berlin** (urban rail 9, tram 48),
 funicular 3). Each still needs its business register probed, and **each sits
 under GDPR**, which is the expensive half.
 
-| City | Rail (MEASURED) |
+| City | Country | Rail (MEASURED) |
+|---|---|---|
+| **Vienna** | AT | **subway 35**, tram 185 — the deepest measured in this screen |
+| **Amsterdam / Rotterdam** | NL | subway 14, tram 46 |
+| **Berlin** | DE | urban rail 9, tram 48 |
+| **Stockholm** | SE | metro 7, tram 21 |
+| **Santiago** | CL | **subway 7**, tram 2 |
+| **São Paulo** | BR | **subway 6** |
+| **Bucharest** | RO | subway 5, tram 15 |
+| **Oslo** | NO | metro 5, tram 9 |
+| **Lisbon** | PT | **subway 10** |
+| **Singapore** | SG | **subway 13** — but a city-state, and its register is likely registered-office shaped |
+| **Sofia** | BG | subway 4, tram 24 |
+| **Copenhagen** | DK | subway 4, tram 4 |
+| **Bangkok** | TH | subway 4, LRT 5 |
+| **Helsinki** | FI | subway 4, tram 26 — *feed expired* |
+| **Budapest** | HU | subway 4, tram 42 — *feed expired* |
+| **Hamburg** | DE | underground 4 — *feed expired* |
+| **Prague** | CZ | subway 3, tram 40 — *feed expired* |
+| **Athens** | GR | subway 3 |
+| **Naples** | IT | subway 3, tram 3, funicular 3 |
+| **Hyderabad / Kochi** | IN | subway 3 / subway 1 |
+| **Cairo** | EG | subway 2 — *feed 11 months expired* |
+| **Tokyo** | JP | **subway 4, tram 1** (Toei) — rail is fine; **Japan's blocker is its business data** |
+| Tram-only | — | Riga 7, Tallinn 5, Zagreb 19, Bratislava 6, Poznań 22, Messina 1 |
+
+#### Tier 3 business probes — started 2026-09-21
+
+Two countries moved materially; the rest are still asserted.
+
+**Norway — MEASURED, and it is premises-level.** The Brønnøysund open API
+answers with **no key, no login, no registration**:
+
+```
+https://data.brreg.no/enhetsregisteret/api/underenheter?kommunenummer=0301
+```
+
+**152,060 sub-units in Oslo alone.** Each record carries `navn`,
+`naeringskode1` (NACE code *and* description), `organisasjonsform`,
+`oppstartsdato`, and critically **`beliggenhetsadresse`** — the *physical
+location* address, which the register keeps distinct from the registered
+business address. That distinction is the whole filter-3 question, and Norway
+answers it the right way.
+
+**No coordinates**, so a geocoding leg would be needed. Kartverket publishes an
+open national address register, untested. Oslo measures metro 5, tram 9.
+GDPR applies, and the sample already shows the familiar shape — a law firm
+named after a person, at what reads like a house.
+
+**Austria — a strong lead, not yet a finding.** GISA
+(*Gewerbeinformationssystem Austria*) is a national **business licence**
+register — the US/Canada model, not a company register — carrying the name,
+**the location**, and the wording of each licence. Reportedly published on
+`data.gv.at` as **open data in CSV and JSON, with personal data removed at
+source**, free and without registration. That combination, paired with
+**Vienna's subway 35 / tram 185 — the deepest rail in this screen** — would
+make Austria a Tier 1 candidate.
+
+**ASSERTED: the dataset URL guessed for it returned 404.** Find the real
+resource before believing any of this.
+
+**Still asserted, unprobed:** Denmark's CVR *produktionsenheder*, Czechia's
+ARES (3.4M subjects, open, NACE — but subjects, not premises), Poland's
+CEIDG/REGON, Sweden's Bolagsverket (company-level), Germany, Italy, Portugal,
+Greece, Finland, the Netherlands.
+
+**Germany, Italy, Sweden and Portugal were moved here from Tier 4.** They had
+been ruled out on the EU-default company-register pattern — which was
+**ASSERTED and never probed for any of them** — while Berlin, Naples,
+Stockholm and Lisbon were simultaneously being rail-confirmed into this tier.
+They were in two tiers at once. Ruling a country out on a pattern rather than
+a probe is exactly the error this file exists to avoid.
+
+### Tier 4 — ruled out, with the evidence
+
+| | Why | Basis |
+|---|---|---|
+| **United Kingdom** | Business data is the wrong object — VOA is property without names, Companies House is registered offices, FSA is food-only | MEASURED |
+| **Japan** | Business data is **aggregate counts by area**, not an establishment register. **Its transit is fully solved** — see below | MEASURED |
+| **Taiwan** | **Nothing for Taipei, Kaohsiung, Taoyuan or TDX anywhere in the catalogue.** The 9 Taiwanese feeds are rural bus operators | MEASURED |
+| **Hong Kong** | **No MTR feed anywhere in the catalogue.** The Transport Department feed carries tram/LRT 7 and no subway | MEASURED |
+| **Jakarta** | **No MRT Jakarta or LRT Jakarta feed anywhere.** Transjakarta is BRT | MEASURED |
+| **Rio de Janeiro** | **No MetrôRio or SuperVia feed anywhere** | MEASURED |
+| **Kuala Lumpur, Tel Aviv, Lima, Medellín, Bogotá** | No metro operator feed anywhere in the catalogue | MEASURED |
+| **Dubai** | The catalogue's feed is an **anonymous personal GitLab job artefact** returning a non-zip; the transitland fallback 404s | MEASURED |
+| **Manila** | The LRTA feed codes its four rail lines as **commuter rail (type 2)**, which this project excludes. A coding question, but it fails as published | MEASURED |
+| **Belgium** | Establishment units exist; **bulk access requires application and payment** | MEASURED |
+| **Australia, New Zealand** | Auckland is commuter-only. **Melbourne's PTV feed is a nested zip** the screen cannot read, so its rail is *unverified rather than absent*. Business licensing is not municipal — **ASSERTED** | MIXED |
+| **Russia, Ukraine** | Access and conflict, not data | — |
+
+### Japan's rail data is solved, and not by GTFS
+
+Worth stating separately because it breaks the screen's own assumption. This
+project needs **station coordinates and line geometry**, not timetables, and
+GTFS is only one vehicle for those. Japan publishes a better one.
+
+**国土数値情報 N02 鉄道データ** (MLIT National Land Numerical Information,
+railway data), verified by download 2026-09-21:
+
+| | MEASURED |
 |---|---|
-| **Santiago**, Chile | **subway 7**, tram 2, bus 418 — current DTPM feed |
-| **Sofia**, Bulgaria | **subway 4**, tram 24, trolleybus 30 |
-| **Bucharest**, Romania | **subway 5**, tram 15, trolleybus 16 |
-| **Bangkok**, Thailand | **subway 4**, LRT 5 (+189 commuter, excluded) |
-| **Athens**, Greece | **subway 3**, tram 2 — a dedicated rail feed on `data.gov.gr` |
-| **Budapest**, Hungary | **subway 4**, tram 42 — but **feed expired 20260704**, so treat as unconfirmed |
-| **Singapore** | **subway 13** — but a city-state, and its business data is likely registered-office shaped |
-| **Hyderabad / Kochi**, India | **subway 3 / subway 1** — real metro feeds |
-| **Cairo**, Egypt | **subway 2** — but **feed expired 20251027**, eleven months stale |
+| Endpoint | `https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-24/N02-24_GML.zip` (12.4 MB; 2020–2024 all return `application/zip`) |
+| Stations | **10,235**, across **178 operators** |
+| Line segments | **21,932**, across 179 operators |
+| JR coverage | JR East **1,803 stations**, JR West 1,264, JR Kyushu 621, JR Central 439, JR Hokkaido 343, JR Shikoku — **all six JR companies** |
+| Also | Tokyo Metro, Toei, Osaka Metro, Kintetsu, Meitetsu, Tobu |
+| Attributes | `N02_001` rail class, `N02_002` operator category, `N02_003` line name, `N02_004` operating company, `N02_005` station name |
+| CRS | **EPSG:6668** (JGD2011) |
+| Formats | Shapefile **and GeoJSON**, supplied in **both Shift-JIS and UTF-8** — so no encoding trap |
+| Licence | **PDL 1.0**, the Japanese Government Standard Terms — commercial use, redistribution and derived works all permitted |
 
-### Tier 4 — ruled out, with the reason
+Attribution: `出典：国土交通省国土数値情報ダウンロードサイト`, and for a derived
+work `「国土数値情報（鉄道データ）」（国土交通省）をもとに作成`.
 
-| | Why |
+**THE TRAP: station geometry is `LineString`, not `Point`** — all 10,235 of
+them. A Japanese station record is the platform centreline, so it must be
+centroided before any ring buffer. A pipeline that assumed points would fail
+or, worse, silently buffer from a line end.
+
+ODPT (`api-public.odpt.org`) is the second route and also works — Toei's feed
+downloaded without a key — but N02 is national, covers JR, and needs no
+registration.
+
+**So Japan is ruled out on business data alone.** Only the Economic Census was
+checked, and it is aggregate. Japanese municipalities publish
+食品関係営業許可施設 (food-business permit premises) as open data, which would
+be a one-bucket source at best — worth a probe before the ruling is final.
+
+### THE METHOD THIS SCREEN GOT WRONG: transit data is not GTFS
+
+The single most useful thing to come out of this screen, and it invalidates
+part of the screen itself.
+
+**This project uses no timetables.** It needs **station coordinates and line
+geometry**. GTFS carries those, but so does any national railway GIS layer —
+and national mapping agencies publish those routinely, at better quality, with
+national coverage and clearer licences.
+
+Every country ruled out above for "no readable feed" was ruled out on a
+**GTFS** question, when the real question is a **GIS** one. Japan proves the
+gap is real and large: the Mobility Database has 18 Japanese feeds, almost all
+volunteer-run village buses, and **no JR at all** — while MLIT publishes every
+railway station in the country, JR included, for free.
+
+**So the probe order for transit should be:**
+
+1. The national mapping or statistics agency's railway layer — MLIT in Japan,
+   and its equivalent elsewhere. Usually shapefile/GeoJSON, usually a clear
+   government licence, usually national.
+2. The national open-data portal's transit standard datasets.
+3. The city or agency's own GTFS.
+4. The Mobility Database catalogue — **last**, being a mirror of a mirror,
+   and demonstrably incomplete and stale.
+
+The screen ran that list backwards.
+
+#### Countries this reopens
+
+| Blocked on GTFS | The GIS route to check |
 |---|---|
-| **United Kingdom** | Business data is the wrong object — VOA is property without names, Companies House is registered offices, FSA is food-only |
-| **Japan** | Business data is **aggregate counts**; and JR/Tokyo Metro absent from the catalogue |
-| **Dubai** | **The catalogue's Dubai feed is an anonymous personal GitLab repository**, not an agency publication, and it does not return a valid zip. The transitland fallback 404s. No usable official feed found |
-| **Hong Kong** | The Transport Department feed has **tram/LRT 7 and no subway** — the MTR is absent |
-| **Manila** | The LRTA feed codes its four rail lines as **commuter rail (type 2)**, which this project excludes. A coding question rather than an absence, but it fails as published |
-| **Jakarta** | Transjakarta is BRT; the MRT is not in the catalogue |
-| **Belgium** | Establishment units exist but bulk access **requires application and payment** |
-| **Germany, Italy, Sweden, Ireland, Portugal** | Company registers, mostly behind a fee |
-| **Australia, New Zealand** | Good feeds; business licensing is not municipal in the US/Canada sense |
-| **Russia, Ukraine** | Excluded on access and conflict grounds, not on data |
+| **South Korea** | `data.go.kr` carries **전국도시철도역사정보표준데이터** (national urban railway *station* standard data, ID 15013205) and **전국도시철도노선정보표준데이터** (*line* standard data, ID 15013203) |
+| **Hong Kong** | Lands Department **iB1000** digital topographic map, which includes a transportation layer, via the CSDI portal and `data.gov.hk` |
+| **Taiwan** | NLSC and TDX, neither in the catalogue |
+| Jakarta, Kuala Lumpur, Rio, Lima, Bogotá, Medellín, Tel Aviv | National spatial agencies, all unchecked |
 
-### Four results here are feed artefacts, not findings
+#### Reachability is its own finding — and a transient outage is not one
 
-Recorded so nobody re-reads the table as fact:
+Three government portals refused connections, tested from **two independent
+networks** on 2026-09-21 to separate "site is down" from "this path is
+blocked". **One of those readings was wrong within the hour**, and the
+correction matters more than the original table.
 
-- **Barcelona and Madrid** were tested against *bus* operators, because a
-  keyword match picked the first feed naming the city. TMB and Metro de Madrid
-  were never tested.
-- **Manila's** rail exists and is typed 2.
-- **Hong Kong's** MTR exists and is not in that feed.
-- **Mexico City's** feed exists and would not download today.
+| Host | First reading | Retested ~1h later |
+|---|---|---|
+| `www.data.go.kr` | unreachable, 21s timeout, both networks | **HTTP 200 in 1.15s** |
+| `apis.data.go.kr` | not tested | HTTP 400 — live, wants parameters |
+| `datos.cdmx.gob.mx` | unreachable, 21s timeout | **still 000 at 21s** — four attempts over two hours |
+| `s3.amazonaws.com/setravi/…` | 403 | still 403 |
+| `www.inegi.org.mx` | — | HTTP 200 |
+| `data.seoul.go.kr` | HTTP 200 | HTTP 200 |
+| `nlftp.mlit.go.jp` | HTTP 200 | HTTP 200 |
 
-Every one is the Toronto lesson again: **what a catalogue says about a city is
-not what the city runs.**
+**Korea's national portal was suffering a transient outage and is fine.** It
+was recorded here as a hard finding, on evidence from two networks, and it was
+wrong about an hour later.
+
+**Mexico City's is not transient** — four failures across two hours, while
+INEGI on the same day answered instantly. That one is a durable finding *as of
+2026-09-21*, and still not a permanent one.
+
+**The lesson, and it is the same one this file keeps producing.** A negative
+result is a measurement of *one moment* as well as one method. Two networks
+agreeing says nothing about two *times*. The evidence-discipline rule in
+`add-country` — treat a negative as ASSERTED until a second differently-shaped
+probe agrees — needs "differently-*timed*" alongside "differently-shaped", and
+an infrastructure failure should never be written down as a property of the
+data.
+
+**Do not record a country as "no data" on the strength of an unreachable
+portal.** Retry it, and try the city portal, which is this project's scope
+anyway.
+
+### What in these tables is an artefact rather than a finding
+
+Kept visible so nobody reads the tables as settled fact:
+
+- **Resolved.** Barcelona and Madrid were first tested against *bus* operators.
+  Both have since been measured properly — Madrid subway 13, Barcelona FGC
+  subway 4. **TMB's own feed still 404s**, so Barcelona is understated.
+- **Resolved.** Berlin, Hamburg, Stockholm and Oslo were reported rail-free by
+  a tool that could not read extended route types. Fixed.
+- **Still open.** Mexico City's feed exists and will not download.
+  Buenos Aires' SUBTE feed exists at the city's own CDN and **contains no
+  `routes.txt`**. Melbourne's is a nested zip. Istanbul's IETT URL is a
+  landing page, not a file.
+- **Still open.** Manila's rail exists and is typed 2; Hong Kong's MTR exists
+  and is published nowhere the catalogue reaches.
+
+Every one is the Toronto lesson: **what a catalogue says about a city is not
+what the city runs** — and, added this round, **what a screening tool cannot
+parse, it reports as absent.**
 
 ## Probe log — every city rail-screened, 2026-09-21
 
@@ -347,6 +534,106 @@ best structural match to what this project already does.
 **ASSERTED:** that coordinates are published in EPSG:5174 (Korea Central Belt
 TM). This came from documentation of the *closed* system. The project would
 reproject to per-city UTM regardless — Seoul ≈ 127°E is UTM 52N, EPSG:32652.
+
+#### Seoul's own portal, probed 2026-09-21 — the route around the blocker
+
+With `data.go.kr` unreachable, **`data.seoul.go.kr` answers 200** and carries
+both legs. MEASURED:
+
+| | |
+|---|---|
+| Catalogue size | **8,258 datasets** (6,479 data, 1,779 statistics) |
+| Direct file downloads | **1,179** carry a `FILE` tab; 5,646 offer `OPENAPI` |
+| Freshness | The licensing datasets were updated **2026-09-21**; the subway dataset **2026-09-22** |
+| Publisher | Seoul Metropolitan Government, © *Some Rights Reserved* |
+
+**Transit — exists, but API-gated.** `서울교통공사_노선별 지하철역 정보`
+(Seoul Transportation Corporation, stations by line, `OA-15442`) covers **lines
+1–8 plus line 9 stages 2–3**, published 2018 and updated 2026-09-22. Its file
+tab reads **파일이 없습니다** — *no file* — so it is **Open API only, with a
+free key**. That is WMATA's gate exactly, which this project has cleared once
+before. Note the scope: Seoul Transportation Corporation runs lines 1–9, not
+the Korail and Shinbundang lines that also serve the metropolitan network.
+
+**Business — present, and it is a MULTI-SOURCE city.** The national "195 permit
+types" resolve at city level into separate per-category datasets, not one
+register:
+
+- `서울시 식품위생업소 현황` — food service premises, **and it has a `FILE`
+  tab**, the one bucket that is directly downloadable
+- `서울시 공중위생업소 현황` — 이·미용 (hair and beauty), 숙박 (lodging),
+  목욕업 (bath houses): **the Personal services bucket**
+- `서울시 위생처리업`, `세척제 제조업`, `기타 위생용품 제조업`, `대부업체`
+  and others
+
+**So at Seoul-portal scope this is Boston's and New York's shape** — coverage
+assembled from several registers via `multi-source-city`. But the Retail probe
+below found something better, and something worse.
+
+#### The Retail probe — one trap avoided, one source found, and it is out of reach
+
+**REJECTED: `서울시 우리마을가게 상권분석서비스`.** It looks perfect — a
+100-category taxonomy split natively into **외식업 10 (food service),
+서비스업 47 (services), 소매업 43 (retail)**, the project's own three buckets,
+with GRS80TM coordinates. It is **aggregate**: "aggregated by commercial
+district (상권) per quarter, not individual store-level data… **no individual
+store coordinates**", and its spatial unit changed again in 2024. Seoul's
+portal also carries a 소상공인시장진흥공단 extract at **행정동 단위**
+(administrative-dong level) — aggregate for the same reason.
+
+That is Istanbul's defect and Japan's Economic Census defect, and this one was
+better disguised than either, because the category split matched what this
+project needs exactly.
+
+**FOUND: `소상공인시장진흥공단_상가(상권)정보`** — the Small Enterprise and
+Market Service's store register, and it is premises-level:
+
+| Field | |
+|---|---|
+| `상호명` | business name |
+| `업종코드` / `업종명` | category code and name |
+| `지번주소` / `도로명주소` | lot address and road address |
+| **`위도` / `경도`** | **latitude / longitude** |
+| `표준산업분류명` | KSIC standard industrial classification |
+
+Nationwide, CSV in UTF-8, on a **10 major / 75 middle / 247 subcategory**
+hierarchy. That is one register covering all three buckets with real
+coordinates — **comparable to Mexico's DENUE**, and far better than assembling
+Seoul's per-category hygiene registers.
+
+**Dataset `15083033` on `data.go.kr` — and the portal came back up, so this is
+now MEASURED from the source page rather than from search results:**
+
+| | |
+|---|---|
+| Title | `소상공인시장진흥공단_상가(상권)정보_20260630` |
+| Scope | **영업 중인 전국 상가업소** — active commercial premises, nationwide |
+| Classification | KSIC-based (표준산업분류 10th revision), **대분류 10 / 중분류 75 / 소분류 247** |
+| Update cycle | **분기** — quarterly. Registered 2026-08-05 |
+| Format | **CSV, UTF-8**, explicitly stated, with reading instructions shipped in the zip |
+| Legal basis | 소상공인 보호 및 지원에 관한 법률 제13조 |
+| Cost | **무료** — free |
+| **이용허락범위** | **제한 없음 — no restriction on use** |
+
+**That is the strongest business source found anywhere in this screen.** It is
+premises-level with real coordinates, nationally complete, classified on a
+247-subcategory standard, refreshed quarterly, and its stated licence scope is
+*unrestricted* — which is a lighter obligation than Mexico's DENUE, whose terms
+require attribution **and** disclosure of any transformation.
+
+It also **collapses the multi-source problem**: one register covers all three
+buckets, so Seoul does not need `multi-source-city` after all, and the
+per-category hygiene registers become a cross-check rather than the plan.
+
+**Third-party mirrors exist** (a Seoul extract dated 202506 is on Hugging
+Face). **Do not build on one** — that is exactly how the Toronto error
+happened. A mirror is acceptable to confirm a schema, never to source a build,
+and there is now no reason to use one.
+
+**Two corrections to the earlier Tier 2 entry.** Korea was recorded as having
+"the ideal single-register shape"; at the scope this project actually works at,
+it is multi-source. And its transit leg is reachable but key-gated rather than
+absent.
 
 ### Spain / Barcelona — the strongest single city
 

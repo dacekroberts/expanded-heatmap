@@ -35,6 +35,21 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   displayed names match the person pattern - the storefront filter makes it
   worse, not better. What a pin displays on that fallback wants settling
   before the map renders, not after.
+  - [ ] **After the Vancouver build lands: add two clause families to the
+    `read-licence` skill.** Deferred deliberately so the skill settles first
+    (it was written 2026-09-21). Both recur and both were found by the global
+    country screen. **(a) Licences that require disclosing TRANSFORMATION, not
+    just crediting the source** - INEGI demands you "notificar al usuario final
+    de cualquier análisis o transformación que haga a la información", and
+    Montréal requires stating whether modifications were made *or
+    interpretations drawn*. This project always triggers these (ring density,
+    bucketing, storefront filtering), so a bare source credit does not comply.
+    **(b) Registers that do the privacy work upstream** - France masks
+    non-diffusible records including geolocation, Edmonton publishes
+    `<REDACTED FOR PRIVACY>` on 9.3% of rows, Austria's GISA strips personal
+    data before release. Worth checking before building a residence filter,
+    because the work may already be done. Evidence for both is in
+    `docs/global_country_shortlist.md`.
 
 - [~] **Evaluate the map-only navigation pilot** (started 2026-09-20; see
   `DECISIONS.md` and `docs/navigation_sidebar_and_city_links.md`). The

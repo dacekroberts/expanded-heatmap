@@ -22,28 +22,134 @@ cities in one country is cheaper than five countries with one city each.
 
 ## Run the questions in this order - cheapest disqualifier first
 
-Each one can end the profile. Do not research business data before rail.
+Each one can end the profile.
 
-### 1. Does urban rail exist, in a feed you can read?
+**Which one is cheapest depends on the region, so choose the order rather than
+inheriting it.** In Canada, rail-first removed 6 of 13 cities for the cost of
+reading `routes.txt`. In Europe and East Asia it removes almost nothing,
+because every candidate city has rail - there, **question 2 is the cheapest
+disqualifier and should run first**, and rail becomes a confirmation step. The
+2026-09-21 global screen ran rail first out of habit and wasted the step.
 
-`scripts/screen_rail.py` against the Mobility Database catalogue
-(`bit.ly/catalogs-csv`). **In Canada this removed 6 of 13 cities before a
-single data catalogue was opened**, which is the whole argument for the
-ordering.
+## Evidence discipline - three rules that cost a day to learn
 
-Commuter rail (`route_type 2`) is not urban rail here, matching every built
-city. A country whose only rail is intercity is out.
+**Build the exhaustive base before filtering.** Start from the full universe -
+the 2026-09-21 screen began with every country in the Mobility Database
+catalogue, 87 of them - so a candidate can be **ruled out but never missed by
+omission**. Istanbul, Sofia, Bucharest and Santiago all surfaced that way, and
+none was on the original Europe-and-East-Asia guess the screen started from.
 
-### 2. Does the country license businesses MUNICIPALLY, and publish it?
+**A negative from one method is not a finding.** Positives are cheap to trust;
+a negative silently ends a line of inquiry, so it earns a second,
+differently-shaped probe before it is recorded. Re-testing the ruled-out group
+by **operator name across the whole catalogue with no country filter** - a
+different method from the country-then-guess passes - found Tokyo's Toei feed
+and Buenos Aires' SUBTE, both missed the first time. Mark a negative
+**ASSERTED** until two methods agree.
 
-This is the biggest structural discriminator and it splits the world unevenly.
-North America and Australia: yes. Much of Europe: business registration is
-national, and address-level openness varies enormously.
+**A pattern justifies deprioritising, never ruling out.** Germany, Italy,
+Sweden and Portugal were put in the "ruled out" tier as EU company registers -
+asserted from the regional pattern, **never probed for any of them** - while
+Berlin, Naples, Stockholm and Lisbon were simultaneously being rail-confirmed
+into the tier above. They sat in two tiers at once, and it was caught only by
+rebuilding the table by hand. If a country has not been probed, it stays in
+the running with an ASSERTED label on it.
 
-A country where registration is national but *open with addresses* (France's
-SIRENE is the candidate) is a different and possibly better shape - one source
-covering every city - but it is **not** the shape this project is built for,
-and the taxonomy and scoping would need rethinking rather than copying.
+### 1. Does urban rail exist, in DATA YOU CAN READ - which is not the same as a GTFS feed
+
+**Read this before touching the Mobility Database.** The 2026-09-21 global
+screen got this backwards and had to be corrected.
+
+**This project uses no timetables.** It needs **station coordinates and line
+geometry**. GTFS carries those, but so does any national railway GIS layer,
+and national mapping agencies publish those routinely - national coverage,
+better quality, clearer licence.
+
+Japan is the proof. The Mobility Database holds **18 Japanese feeds, almost
+all volunteer-run village buses, and no JR at all**. MLIT's National Land
+Numerical Information `N02` layer holds **10,235 stations and 21,932 line
+segments across 178 operators**, every JR company included, shapefile *and*
+GeoJSON, Shift-JIS *and* UTF-8, under PDL 1.0 with commercial use permitted.
+Same country, opposite answers, because the wrong source was asked.
+
+**Probe in this order. The catalogue is LAST.**
+
+1. **The national mapping or statistics agency's railway layer** - MLIT in
+   Japan, and its equivalent elsewhere.
+2. **The national open-data portal's transit standard datasets** - Korea
+   publishes nationwide urban-railway *station* and *line* standard datasets.
+3. **The agency's own GTFS**, where one is published.
+4. **The Mobility Database catalogue** - a mirror of a mirror, demonstrably
+   stale and incomplete. Useful for breadth, not for a verdict.
+
+Commuter rail is not urban rail here, matching every built city: basic
+`route_type 2`, and extended `109` (Suburban Railway, the S-Bahn family).
+
+**Rail-first is right for a country already known to publish transit data,
+and wrong as a global filter.** In Canada it removed 6 of 13 cities before a
+catalogue was opened. Across Europe and East Asia it removes almost nothing,
+because every candidate city has rail - so the business-data question does the
+work instead, and should run first.
+
+#### Four ways this step returns a confident wrong answer
+
+All four happened in one day.
+
+- **Extended route types.** An agency may publish only the TPEG-derived 3- and
+  4-digit set, where a metro is `401`, an underground `402`, a tram `900`.
+  Reading only basic 0-12 reported **Berlin, Hamburg, Stockholm and Oslo as
+  having no urban rail**. `screen_rail.py` handles both sets now.
+- **Wrong-feed selection.** Picking "a feed that names the city" is not
+  picking the rail operator. Barcelona and Madrid were tested against bus
+  companies, Dublin against airport coaches, Malaysia against a bus operator
+  in Kuala Terengganu. In a country with 169 feeds that is close to random -
+  **search by operator name across the whole catalogue, with no country
+  filter**, which is also how two feeds missed by country-filtered passes were
+  found.
+- **A national portal that is unreachable.** `data.go.kr` and
+  `datos.cdmx.gob.mx` both time out from multiple networks, while
+  `data.seoul.go.kr` answers 200. **Never record "no data" on the strength of
+  an unreachable national portal** - try the city's own portal, which is the
+  scope this project works at anyway.
+- **A feed that exists and is broken.** Buenos Aires' SUBTE feed is published
+  on the city's own CDN and contains no `routes.txt`; Melbourne's PTV feed is
+  a nested zip; Dubai's catalogue entry is an anonymous personal GitLab job
+  artefact. Absent and broken are different findings.
+
+### 2. Does the country record WHERE COMMERCE HAPPENS, or only where companies are REGISTERED?
+
+The biggest structural discriminator, and the sharp form of the question. An
+earlier version of this skill asked "does the country license businesses
+*municipally*", which is Canada's framing and mis-sorts half the world:
+municipal-vs-national turns out to be an unreliable *proxy* for the question
+that actually decides things.
+
+A **company register** publishes a **registered office** - frequently an
+accountant's address or a holding company's mailbox. Mapping those produces a
+map of bookkeepers. Companies House, Australia's ABN, Japan's corporate-number
+system and most of the EU's registers are this, and they fail here however
+open they are.
+
+Four shapes qualify. Sort a candidate into one before going further:
+
+| Shape | Examples | Notes |
+|---|---|---|
+| **Municipal licence register** | US, Canada, **South Korea** (195 permit types) | The shape this project is built for |
+| **National establishment register** | **France** SIRET, **Mexico** DENUE, **Norway** `beliggenhetsadresse` | One source covering every city - see the caveat below |
+| **Premises field survey** | Montréal `locaux-commerciaux`, **Barcelona** `cens de locals` | Records what is on the street rather than who registered; arguably the best answer to this project's premise |
+| **Sector inspection register** | UK FSA food hygiene | **One bucket only** - Boston's shape, and a ceiling not a floor |
+
+**Look for the field name that proves it.** Norway's register keeps
+`beliggenhetsadresse` (location address) deliberately distinct from the
+registered business address; that distinction *is* the answer. France's
+`établissement` is not the same object as its `unité légale`.
+
+**The caveat on national registers.** One source covering every city is a
+different and possibly better shape, but it is **not** the shape this project
+is built for: scoping and taxonomy were both designed around per-city
+municipal registers, and a national register includes every office, depot and
+administrative site alongside the shopfronts. That is a design decision to take
+before a profile, not a fact to discover during one.
 
 ### 3. What portal software, and does it refuse automated fetches?
 
@@ -243,6 +349,15 @@ was measured. Expect them.
 - **An opt-in dataset presented as a directory.** Mississauga's lists "only the
   businesses that agreed to be included" - the Boston survey problem, which
   maps who filled in a form rather than where commerce is.
+
+- **Asking the wrong SOURCE, not just the wrong question.** A transit
+  catalogue answers "is there a GTFS feed", which is not what this project
+  needs. Japan looked feed-poor and is data-rich. Check the national mapping
+  agency before believing any transit verdict - see question 1.
+- **A screening tool reporting what it cannot parse as absent.** Extended
+  route types cost four European capitals; a nested zip cost Melbourne; a
+  `LineString` where a `Point` was expected would have cost Japan, whose
+  10,235 station records are platform centrelines needing centroids.
 
 The single recurring cause: **asserting from a column's existence, a dataset
 title, or a plausible-looking flag instead of measuring.** Five separate
