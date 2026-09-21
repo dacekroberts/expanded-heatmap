@@ -268,9 +268,27 @@ which is a company register with the registered-office defect.
   any geocode match. A quiet trap of exactly the kind Toronto's title-case
   `ADDRESS_FULL` was.
 
-**Transit leg still unprobed.** `tdx.transportdata.tw` answers 200; whether it
-serves static station and **line geometry**, and whether it is registration-
-gated, is unknown. That is Taiwan's open question.
+**Transit leg — MEASURED, complete, and NOT registration-gated.** TDX's
+`v2/Rail/Metro/*` endpoints answered plain unauthenticated requests:
+
+| Endpoint | MEASURED |
+|---|---|
+| `Station/TRTC` | **122 stations**, each with `StationPosition.PositionLat/Lon` (WGS84), `StationAddress`, city and town codes, and `StationName` in **Zh_tw, En, Ja and Ko** |
+| **`Shape/TRTC`** | **5 lines as `MULTILINESTRING` WKT**, plus `EncodedPolyline` |
+| `Line/TRTC` | 5 lines with `LineName`, `LineSectionName`, `IsBranch` and **`LineColor`** |
+| `StationOfLine/TRTC` | station-to-line mapping |
+| `Network/TRTC` | operator and network metadata |
+
+**This passes both halves of the points-and-lines check**, and gives more than
+GTFS would: official **line colours**, which this project otherwise researches
+by hand per city, and English station names, which removes the label-language
+question exactly as Korea's `영문역사명` did.
+
+**So Taiwan's ruling is reversed.** It was in Tier 4 on "the 9 Taiwanese feeds
+are all rural bus operators" — true of the catalogue, and irrelevant, because
+the national transport exchange publishes a first-class rail API that the
+catalogue does not mirror. **Taiwan's only real cost is the business leg:
+geocoding, and per-category assembly.**
 
 Taiwan's food-hygiene register (`食品業者登錄資料集`, dataset `8938`) is
 separately available as CSV/JSON/XML from `data.fda.gov.tw`.
