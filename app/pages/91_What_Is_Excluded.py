@@ -1,6 +1,6 @@
 """What is counted, and what is not - renders docs/excluded_categories.md.
 
-The companion to 10_About_the_Data.py, and the half that the map legends
+The companion to 90_About_the_Data.py, and the half that the map legends
 actually need. A legend row reading "Retail - NAICS Code: 44/45" claims more
 than any of these maps contain: nonstore retailers are excluded everywhere,
 parking is excluded everywhere, and several cities exclude a catch-all code

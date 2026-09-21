@@ -267,8 +267,12 @@ def set_base_font():
 # city, which is why this describes the measurement instead.
 SITE_NAME = "Storefronts Near Transit"
 
-ABOUT_DATA_PAGE = "pages/10_About_the_Data.py"
-EXCLUSIONS_PAGE = "pages/11_What_Is_Excluded.py"
+# Numbered 90/91, not 10/11: Streamlit sorts pages numerically, and city pages
+# take 1..n. At nine cities the next city would be page 10 - which these two
+# already occupied. Moving them to the 90s leaves 10-89 free for cities and
+# keeps them last in the sidebar, which is where they belong.
+ABOUT_DATA_PAGE = "pages/90_About_the_Data.py"
+EXCLUSIONS_PAGE = "pages/91_What_Is_Excluded.py"
 
 # Verbatim where verbatim is required. Each entry is (heading, text, verbatim?)
 # and the sources are recorded in docs/data_sources.md, "Notices this project

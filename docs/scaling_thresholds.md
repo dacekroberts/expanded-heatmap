@@ -1,13 +1,41 @@
 # What breaks as cities are added, and at roughly what count
 
-Written 2026-09-21 at **7 built cities** (San Diego, San Francisco, Los
-Angeles, Chicago, New York, Philadelphia, Miami), when the question came up of
-how far this could go — Canadian cities, then other countries. These are
-reminders to act on as the counts approach, not work to do now.
+Written 2026-09-21 at **7 built cities**, and **re-measured the same day at 9**
+(adding Boston and Washington D.C.). These are reminders to act on as the
+counts approach, not work to do now.
 
 Each entry says what actually breaks, the number where it starts to hurt, and
 what to do about it. Where a claim was measured or verified, that is stated;
 where it is an estimate, it says so.
+
+## Correction, 2026-09-21 — the headline number was wrong by about 3x
+
+The first version of this file estimated **3–10 MB per city** and concluded
+`outputs/` in git was "the real ceiling" at around **20 cities**. Both were
+estimates, and measurement does not support either.
+
+**Measured across all 9 cities:**
+
+| City | Map HTML | | City | Map HTML |
+|---|---|---|---|---|
+| New York | **7.4 MB** | | Philadelphia | 1.1 MB |
+| Los Angeles | 2.7 MB | | Washington D.C. | 0.7 MB |
+| Chicago | 2.2 MB | | San Diego | 0.7 MB |
+| San Francisco | 1.7 MB | | Boston | 0.5 MB |
+| Miami | 1.2 MB | | | |
+
+**`outputs/` total: 19 MB. Mean 2.1 MB per city, median 1.2 MB.** New York has
+itself fallen from 10.3 MB to 7.4 MB, the coordinate-rounding lever having been
+applied.
+
+**History growth, measured:** 32 of 108 commits touch `outputs/` — about **3.5
+outputs-commits per city**. Folium HTML is highly repetitive (coordinate
+arrays, repeated JS) and zlib-compresses roughly 3–5x.
+
+Projected at 50 cities: ~105 MB working tree, ~370 MB of raw blobs,
+**~75–125 MB packed** — against GitHub's 1 GB soft limit, about 8x headroom.
+**Storage is not the binding constraint**, and the sections below are corrected
+accordingly.
 
 ## The thing that does not break: per-page rendering
 
@@ -19,32 +47,71 @@ page embeds exactly one city's pre-rendered map, so the cost is bounded by the
 This is worth stating explicitly because it is the intuitive worry and it is
 the wrong one. Adding cities does not slow down any page a visitor loads.
 
-## Verified NOT a problem: page-number ordering
+## Page numbering — one myth and one real bug
 
-The obvious fear is that `app/pages/10_*.py` sorts before `2_*.py`, breaking
-the sidebar at exactly ten cities. **It does not.** Streamlit's
-`source_util.page_sort_key` applies `PAGE_FILENAME_REGEX` and returns
-`(float(number), label)` — a numeric sort, not lexicographic. Checked against
-the installed Streamlit in `.venv-lean` on 2026-09-21.
+**NOT a problem: sort order.** The obvious fear is that `app/pages/10_*.py`
+sorts before `2_*.py`, breaking the sidebar at exactly ten cities. **It does
+not.** Streamlit's `source_util.page_sort_key` applies `PAGE_FILENAME_REGEX`
+and returns `(float(number), label)` — a numeric sort, not lexicographic.
+Checked against the installed Streamlit in `.venv-lean` on 2026-09-21. No
+zero-padding needed.
 
-Recorded here so it is not raised again. No zero-padding needed.
+**REAL, and fixed 2026-09-21: the tenth city had no slot.** Different problem,
+same number, and the first one masked it. The two info pages occupied
+`10_About_the_Data.py` and `11_What_Is_Excluded.py`, while
+`scaffold_city.py`'s `next_page_number()` globs `*_Heatmap.py` only — so with
+nine cities built it would have generated `10_<Name>_Heatmap.py`, **straight
+into the About page's slot.**
 
-## ~10 cities — the Overview macro map
+Fixed by renumbering the info pages to **90** and **91**, which leaves 10–89
+free for cities and keeps them last in the sidebar where they belong.
+`next_page_number()` needed no change, since it never counted them.
+`app/components.py`'s `ABOUT_DATA_PAGE` and `EXCLUSIONS_PAGE` constants were
+updated with it.
+
+The lesson worth keeping: **"verified not a problem" was true of the question
+asked and hid a real defect one layer down.** The sort was fine; the slot was
+not.
+
+## ~12–15 cities — the Overview macro map
 
 The one page whose cost genuinely scales with city count, because it draws
 every city at once. Markers already touch at phone width for Los Angeles and
-San Diego, which is noted in `PLAN.md`.
+San Diego, which is noted in `PLAN.md`, and the arithmetic showing the markers
+**cannot** be displaced at a continental zoom is in `DECISIONS.md` — 1 px is
+about 21.7 km there, so separating New York from Philadelphia would need
+217 km.
 
-**What to do:** cluster or group nearby markers, and consider showing each
-city's mapped extent or a one-line summary in the tooltip rather than a bare
-pin. Cosmetic and solvable; it does not threaten the architecture.
+**The owner's answer, decided 2026-09-21: open the macro map on a default
+region rather than fitting the whole world, and make the global coverage
+obvious in the UI.** Once the map spans continents, a single fitted view is
+unreadable no matter how the markers are drawn — so the fix is to stop trying
+to fit everything at once.
 
-## ~20 cities — `outputs/` committed to git
+Two things that must come with it, or the feature costs more than it gains:
 
-**This is the real ceiling.** At 3–10 MB per city, 50 cities is 150–500 MB
-*before history*, and every re-render commits a fresh multi-megabyte HTML blob
-that diffs terribly. Twenty cities with a few re-renders each puts the
-repository in the high hundreds of megabytes.
+- **Signal the other regions explicitly.** A visitor landing on a
+  region-scoped map must be able to see at a glance that other regions exist —
+  otherwise the default silently hides most of the site. A region switcher plus
+  a count ("9 more cities in Europe") is the minimum.
+- **Do not make the default a per-visitor guess.** Geolocating the visitor
+  adds a privacy surface this project has no reason to take on. A fixed
+  default, changeable in one click, is simpler and defensible.
+
+Cosmetic and solvable, and **it does not threaten the architecture** — which
+is the whole reason it sits here rather than in `PLAN.md` as urgent work.
+
+## ~150+ cities — `outputs/` committed to git — **CORRECTED, this is not the ceiling**
+
+Originally recorded as "the real ceiling" at ~20 cities, on an estimate of
+3–10 MB per city. **Measured, the mean is 2.1 MB**, and the projection above
+puts 50 cities at ~75–125 MB packed against a 1 GB soft limit. The pressure is
+real but it arrives far later than stated — on these figures, somewhere past
+**150 cities**, which the research process will never reach.
+
+The mitigations below stay recorded because they are still the right answers
+*if* per-city size grows (a denser city than New York, or the opt-in all-city
+layer being restored everywhere) — not because the limit is near.
 
 The obvious escape — build at deploy time instead of committing outputs — is
 closed by two invariants at once: the deployed app never runs the pipeline,
@@ -84,6 +151,27 @@ plus the one-private-app limit if the repository goes private, start arguing
 for a different story. The likely shape is vector tiles rather than per-city
 static HTML with embedded pins — a much larger change than anything above, and
 one that would revisit the pre-rendered-HTML invariant itself.
+
+## The stated allowance
+
+Agreed 2026-09-21, on the measurements above:
+
+- **20–25 cities is the planning ceiling.** Nothing in the stack forces it —
+  it is set by the Overview macro map and by research cost per city.
+- **~40 cities is the architectural line.** Past it, Streamlit Community
+  Cloud's ~1 GB memory, its sleep-on-inactivity behaviour and repo-clone time
+  on deploy start arguing for vector tiles instead of per-city static HTML —
+  which would revisit the pre-rendered-HTML invariant itself.
+- **Storage is not a constraint at any count this project will reach.**
+
+Ordered by when each actually bites:
+
+| Where | What | Severity |
+|---|---|---|
+| **City #10** | Page-slot collision | **Fixed 2026-09-21** |
+| **~12–15** | Overview macro map legibility | Cosmetic, solvable |
+| **~40+** | Streamlit Cloud memory, sleep, deploy clone time | Architectural |
+| **~150+** | GitHub 1 GB soft limit | Not reachable in practice |
 
 ## The constraint that actually binds
 

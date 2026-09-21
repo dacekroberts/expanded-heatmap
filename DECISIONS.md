@@ -14,6 +14,61 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - The scaling ceiling, measured: 20-25 cities, and storage is not the limit
+
+- **The previously recorded ceiling was wrong by about 3x, and it was an
+  estimate presented as a finding.** `docs/scaling_thresholds.md` had put
+  `outputs/` in git as "the real ceiling" at ~20 cities, on an assumed 3-10 MB
+  per city. Measured across all nine built cities: **19 MB total, mean 2.1 MB,
+  median 1.2 MB** - New York 7.4 MB (itself down from 10.3 MB since the
+  coordinate-rounding lever was applied), Los Angeles 2.7, Chicago 2.2, San
+  Francisco 1.7, Miami 1.2, Philadelphia 1.1, Washington D.C. 0.7, San Diego
+  0.7, Boston 0.5. History growth measured too: **32 of 108 commits touch
+  `outputs/`**, about 3.5 per city, and Folium HTML compresses roughly 3-5x.
+  Projected at 50 cities that is ~75-125 MB packed against GitHub's 1 GB soft
+  limit - **about 8x headroom, reached somewhere past 150 cities**, which the
+  research process will never approach.
+- **The owner's stated allowance: 20-25 cities as the planning ceiling, ~40 as
+  the architectural line.** Nothing in the stack forces 20-25; it is set by the
+  Overview macro map and by research cost per city. Past ~40, Streamlit
+  Community Cloud's ~1 GB memory, sleep-on-inactivity and repo-clone time on
+  deploy start arguing for vector tiles rather than per-city static HTML, which
+  would revisit the pre-rendered-HTML invariant itself. Rejected: treating
+  storage as the governing limit, which the measurements do not support.
+- **Per-page weight does not scale with city count and this keeps being the
+  wrong worry.** Each page embeds exactly one city's map, so a visitor's cost
+  is bounded by the largest city, not by how many exist. A 50-city site loads
+  identically to this nine-city one.
+- **The macro map's answer is to stop fitting the whole world.** Decided: open
+  on a default region rather than a fitted global view, and make global
+  coverage obvious in the UI. This supersedes the earlier suggestion of
+  clustering markers, which does not help once the map spans continents - and
+  it follows the arithmetic recorded the same day showing displacement is
+  impossible at continental zoom (1 px is ~21.7 km; separating New York from
+  Philadelphia would need 217 km). Two conditions attach: the other regions
+  must be visible at a glance, and the default must **not** be a geolocated
+  per-visitor guess, which would add a privacy surface for no benefit.
+
+### 2026-09-21 - The tenth city had nowhere to go, behind a "verified not a problem"
+
+- **`app/pages/` had no free slot for city ten, and the earlier all-clear
+  concealed it.** A 2026-09-21 entry recorded that `10_*.py` does *not* sort
+  before `2_*.py` - true, verified against Streamlit's `page_sort_key`, and it
+  answered the wrong question. The two info pages **occupied** `10_` and `11_`,
+  while `scripts/scaffold_city.py`'s `next_page_number()` globs `*_Heatmap.py`
+  only and so never counted them. At nine cities it would have generated
+  `10_<Name>_Heatmap.py` directly into `10_About_the_Data.py`'s slot.
+- **Fixed by renumbering the info pages to 90 and 91**, leaving 10-89 free for
+  cities and keeping them last in the sidebar, which is where they belong.
+  `next_page_number()` needed no change. `app/components.py`'s
+  `ABOUT_DATA_PAGE` and `EXCLUSIONS_PAGE` were updated with it, and the
+  docstring cross-reference in `91_What_Is_Excluded.py`. Rejected:
+  zero-padding the city pages, which solves a sort problem that does not
+  exist.
+- **The lesson, which is the reason this is logged separately:** "verified NOT
+  a problem" was accurate about the question asked and hid a real defect one
+  layer down. A negative result answers only the question actually put to it.
+
 ### 2026-09-21 - Macro-map markers shrunk; displacing them is arithmetically dead
 
 - **The last item in the deferred macro-map pass, and the only one that was
