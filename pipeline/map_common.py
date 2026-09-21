@@ -15,6 +15,7 @@ entry (build_legend). render_heatmap does both for every line passed in.
 """
 
 import html
+import json
 import zipfile
 
 import folium
@@ -24,6 +25,16 @@ import pandas as pd
 from folium.plugins import HeatMap, FastMarkerCluster
 
 from pipeline.taxonomies import CATEGORY_BUCKETS, load_taxonomy_module
+
+# Decimal places every coordinate is rounded to before it reaches the HTML.
+# Folium emits a float's full repr - "40.76248502732357", 17 significant
+# digits - for something drawn as a 5-pixel dot, and a city's map repeats that
+# once per pin, per heat point and per ring. Six places is 0.11 m, which is
+# half a pixel at OpenStreetMap's deepest zoom (19), so nothing is visibly
+# moved; five would be 1.1 m, about 5 px there, which is why it is not five.
+# Worth ~1.2 MB on New York's map and ~0.4 MB on Los Angeles'. Changing this
+# re-renders every city: re-baseline the committed outputs and drift check.
+COORD_DP = 6
 
 HEAT_RADIUS = 8
 HEAT_BLUR = 10
@@ -277,8 +288,8 @@ def load_line_shapes(gtfs_zip, line_specs, system_name):
                 print(f"WARNING: shape_id {sid!r} for the {label} not in this "
                       "GTFS feed - check trips.txt for its current most-used shape_id.")
                 continue
-            segments.append(list(zip(pts["shape_pt_lat"].astype(float),
-                                     pts["shape_pt_lon"].astype(float))))
+            segments.append(list(zip(pts["shape_pt_lat"].astype(float).round(COORD_DP),
+                                     pts["shape_pt_lon"].astype(float).round(COORD_DP))))
         if not segments:
             continue
         # Longest first: the trunk's main alignment anchors the label, and a
@@ -357,7 +368,7 @@ def add_line_label(feature_group, tip, label, color):
     # zIndexOffset lifts the label above the business-cluster badges: without
     # it a large downtown cluster is drawn on top of the label and hides it.
     folium.Marker(
-        location=[lat, lon],
+        location=[round(lat, COORD_DP), round(lon, COORD_DP)],
         zIndexOffset=1000,
         icon=folium.DivIcon(
             icon_size=(0, 0),
@@ -578,26 +589,48 @@ def _esc(value):
 def add_pin_layer(m, rows, group_name, color, tooltip_field_label, value_column, show=True):
     """One toggleable, clustered, coloured pin layer for a category bucket.
     Returns the number of points (0 = nothing added)."""
-    data = [
-        [row.latitude, row.longitude, _esc(row.business_name),
-         _esc(getattr(row, value_column)), _esc(row.nearest_station), _esc(row.ring_band)]
-        for row in rows.itertuples()
-    ]
+    # Station name and ring band repeat once per pin - New York has 44k pins
+    # over 496 stations and 4 bands - so each is emitted ONCE in a lookup table
+    # and referenced by integer index. Nothing is lost: the callback resolves
+    # them before display. Worth ~1.2 MB on New York's map. The business name
+    # is deliberately NOT indexed: it is nearly unique per pin (38k distinct of
+    # 44k), so a lookup table would only add a second copy.
+    #
+    # row[3] stays the raw category STRING, not an index:
+    # scripts/check_personal_exposure.py parses these arrays out of the
+    # rendered HTML and reads row[2] and row[3] directly.
+    stations, bands, data = {}, {}, []
+    for row in rows.itertuples():
+        station = _esc(row.nearest_station)
+        band = _esc(row.ring_band)
+        data.append([
+            round(row.latitude, COORD_DP), round(row.longitude, COORD_DP),
+            _esc(row.business_name), _esc(getattr(row, value_column)),
+            stations.setdefault(station, len(stations)),
+            bands.setdefault(band, len(bands)),
+        ])
     if not data:
         return 0
+    # An IIFE returning the function, so the two tables are built once when
+    # `var callback = ...` is assigned - NOT once per pin. FastMarkerCluster
+    # injects this as a statement and then calls callback(row) in its loop.
     callback = f"""
-        function (row) {{
-            var marker = L.circleMarker(new L.LatLng(row[0], row[1]), {{
-                radius: 5, color: '{color}', fillColor: '{color}',
-                fillOpacity: 0.85, weight: 1
-            }});
-            var html = '<b>' + row[2] + '</b><br>' +
-                '{tooltip_field_label}: ' + row[3] + '<br>' +
-                'Nearest station: ' + row[4] + '<br>' +
-                row[5];
-            marker.bindTooltip(html, {{sticky: true}});
-            return marker;
-        }}
+        (function () {{
+            var STATIONS = {json.dumps(list(stations))};
+            var BANDS = {json.dumps(list(bands))};
+            return function (row) {{
+                var marker = L.circleMarker(new L.LatLng(row[0], row[1]), {{
+                    radius: 5, color: '{color}', fillColor: '{color}',
+                    fillOpacity: 0.85, weight: 1
+                }});
+                var html = '<b>' + row[2] + '</b><br>' +
+                    '{tooltip_field_label}: ' + row[3] + '<br>' +
+                    'Nearest station: ' + STATIONS[row[4]] + '<br>' +
+                    BANDS[row[5]];
+                marker.bindTooltip(html, {{sticky: true}});
+                return marker;
+            }};
+        }})()
     """
     # Leaflet.markercluster's default cluster icon is a fixed 40x40px no
     # matter the count, so a small cluster's oversized hit area blocks
@@ -729,11 +762,11 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
 
     # Two heat layers, same tuning, different universe: within-rings is the
     # default; the whole-city one is an opt-in for context.
-    HeatMap(in_rings[["latitude", "longitude"]].values.tolist(),
+    HeatMap(in_rings[["latitude", "longitude"]].round(COORD_DP).values.tolist(),
             radius=HEAT_RADIUS, blur=HEAT_BLUR, min_opacity=HEAT_MIN_OPACITY,
             gradient=HEAT_GRADIENT, name="Commercial Density (Within Station Proximity)",
             show=True).add_to(m)
-    HeatMap(businesses[["latitude", "longitude"]].values.tolist(),
+    HeatMap(businesses[["latitude", "longitude"]].round(COORD_DP).values.tolist(),
             radius=HEAT_RADIUS, blur=HEAT_BLUR, min_opacity=HEAT_MIN_OPACITY,
             gradient=HEAT_GRADIENT, name=f"Commercial Density (All {city_name} Businesses)",
             show=False).add_to(m)
@@ -743,7 +776,8 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
                                     show=rings_shown)
         for _, station in stations.iterrows():
             folium.Circle(
-                location=[station["latitude"], station["longitude"]],
+                location=[round(station["latitude"], COORD_DP),
+                          round(station["longitude"], COORD_DP)],
                 radius=ring_edges_meters[i + 1],
                 color="#2c3e50", weight=1, fill=False, opacity=0.5,
             ).add_to(layer)
@@ -752,7 +786,8 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     station_layer = folium.FeatureGroup(name="Stations", control=False)
     for _, station in stations.iterrows():
         folium.CircleMarker(
-            location=[station["latitude"], station["longitude"]],
+            location=[round(station["latitude"], COORD_DP),
+                      round(station["longitude"], COORD_DP)],
             radius=5, color="#1a5490", fill=True, fill_opacity=0.9,
             tooltip=folium.Tooltip(f"<b>{html.escape(station['station'])}</b>", sticky=True),
         ).add_to(station_layer)

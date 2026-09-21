@@ -14,6 +14,44 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Map files cut ~28% by removing emitted waste, not content
+
+- **Every city's map shrank, and no city lost anything from it.** New York's
+  10.33 MB was the trigger (44,361 pins, because dense stations put 71% of its
+  businesses inside a ring against Los Angeles' 24%), but both fixes were
+  waste in the shared renderer rather than anything New York-specific:
+  New York 10.33 -> **7.42 MB**, Los Angeles 3.49 -> **2.79**, Chicago
+  2.90 -> **2.14**, San Francisco 2.40 -> **1.74**, San Diego 0.90 -> **0.69**.
+- **Coordinates are rounded before they reach the HTML** (`COORD_DP` in
+  `map_common.py`). Folium emits a float's full repr - `40.76248502732357`, 17
+  significant digits - for something drawn as a 5-pixel dot, once per pin, per
+  heat point, per ring and per line vertex. **Six** decimal places, not the
+  five originally proposed: six is 0.11 m, half a pixel at OpenStreetMap's
+  deepest zoom (19), so nothing is visibly moved, whereas five is 1.1 m and
+  about 5 px there - a pin could sit visibly off its building. The extra digit
+  costs ~0.2 MB and makes "loses nothing" literally true.
+- **Station and ring-band strings are emitted once and referenced by index.**
+  They repeated per pin: 44,361 pins over 496 stations and 4 bands in New
+  York. The callback became an IIFE returning the marker function, so the two
+  lookup tables are built once at `var callback = ...` rather than once per
+  pin - FastMarkerCluster injects the callback as a statement and then calls
+  it in a loop, so a naive array literal inside the function would have been
+  re-evaluated 44,361 times. The business name is deliberately NOT indexed:
+  at 38,167 distinct values of 44,361 a lookup table would just add a second
+  copy. The raw category also stays a string, because
+  `scripts/check_personal_exposure.py` parses these arrays out of the rendered
+  HTML and reads that field directly.
+- **Verified rather than assumed.** After the change New York's map reports 3
+  cluster layers and exactly 44,361 pins with no console errors, a sampled
+  tooltip resolves its station and ring correctly through the index tables,
+  and the exposure check re-parses the rewritten arrays to the same numbers
+  (7,431 person-like names, 84 at a residential unit, 0.19%).
+- **The committed outputs of all five cities were re-baselined** in one
+  commit, since the renderer is shared. The all-city heat layer was kept: it
+  would have saved another 2.0 MB but is a feature the other cities have.
+  Further size work, if New York still loads slowly on the deploy, would have
+  to reduce what is shown rather than how it is written.
+
 ### 2026-09-21 - New York added: the first city assembled from four registries
 
 - **Step 0 disproved the plan's premise for this city.** `PLAN.md` and
