@@ -133,6 +133,46 @@ under GDPR**, which is the expensive half.
 | **Tokyo** | JP | **subway 4, tram 1** (Toei) — rail is fine; **Japan's blocker is its business data** |
 | Tram-only | — | Riga 7, Tallinn 5, Zagreb 19, Bratislava 6, Poznań 22, Messina 1 |
 
+#### Tier 3 business probes — started 2026-09-21
+
+Two countries moved materially; the rest are still asserted.
+
+**Norway — MEASURED, and it is premises-level.** The Brønnøysund open API
+answers with **no key, no login, no registration**:
+
+```
+https://data.brreg.no/enhetsregisteret/api/underenheter?kommunenummer=0301
+```
+
+**152,060 sub-units in Oslo alone.** Each record carries `navn`,
+`naeringskode1` (NACE code *and* description), `organisasjonsform`,
+`oppstartsdato`, and critically **`beliggenhetsadresse`** — the *physical
+location* address, which the register keeps distinct from the registered
+business address. That distinction is the whole filter-3 question, and Norway
+answers it the right way.
+
+**No coordinates**, so a geocoding leg would be needed. Kartverket publishes an
+open national address register, untested. Oslo measures metro 5, tram 9.
+GDPR applies, and the sample already shows the familiar shape — a law firm
+named after a person, at what reads like a house.
+
+**Austria — a strong lead, not yet a finding.** GISA
+(*Gewerbeinformationssystem Austria*) is a national **business licence**
+register — the US/Canada model, not a company register — carrying the name,
+**the location**, and the wording of each licence. Reportedly published on
+`data.gv.at` as **open data in CSV and JSON, with personal data removed at
+source**, free and without registration. That combination, paired with
+**Vienna's subway 35 / tram 185 — the deepest rail in this screen** — would
+make Austria a Tier 1 candidate.
+
+**ASSERTED: the dataset URL guessed for it returned 404.** Find the real
+resource before believing any of this.
+
+**Still asserted, unprobed:** Denmark's CVR *produktionsenheder*, Czechia's
+ARES (3.4M subjects, open, NACE — but subjects, not premises), Poland's
+CEIDG/REGON, Sweden's Bolagsverket (company-level), Germany, Italy, Portugal,
+Greece, Finland, the Netherlands.
+
 **Germany, Italy, Sweden and Portugal were moved here from Tier 4.** They had
 been ruled out on the EU-default company-register pattern — which was
 **ASSERTED and never probed for any of them** — while Berlin, Naples,
@@ -145,7 +185,7 @@ a probe is exactly the error this file exists to avoid.
 | | Why | Basis |
 |---|---|---|
 | **United Kingdom** | Business data is the wrong object — VOA is property without names, Companies House is registered offices, FSA is food-only | MEASURED |
-| **Japan** | Business data is **aggregate counts by area**, not an establishment register. Its transit is *not* the problem — see Tokyo above | MEASURED |
+| **Japan** | Business data is **aggregate counts by area**, not an establishment register. **Its transit is fully solved** — see below | MEASURED |
 | **Taiwan** | **Nothing for Taipei, Kaohsiung, Taoyuan or TDX anywhere in the catalogue.** The 9 Taiwanese feeds are rural bus operators | MEASURED |
 | **Hong Kong** | **No MTR feed anywhere in the catalogue.** The Transport Department feed carries tram/LRT 7 and no subway | MEASURED |
 | **Jakarta** | **No MRT Jakarta or LRT Jakarta feed anywhere.** Transjakarta is BRT | MEASURED |
@@ -156,6 +196,104 @@ a probe is exactly the error this file exists to avoid.
 | **Belgium** | Establishment units exist; **bulk access requires application and payment** | MEASURED |
 | **Australia, New Zealand** | Auckland is commuter-only. **Melbourne's PTV feed is a nested zip** the screen cannot read, so its rail is *unverified rather than absent*. Business licensing is not municipal — **ASSERTED** | MIXED |
 | **Russia, Ukraine** | Access and conflict, not data | — |
+
+### Japan's rail data is solved, and not by GTFS
+
+Worth stating separately because it breaks the screen's own assumption. This
+project needs **station coordinates and line geometry**, not timetables, and
+GTFS is only one vehicle for those. Japan publishes a better one.
+
+**国土数値情報 N02 鉄道データ** (MLIT National Land Numerical Information,
+railway data), verified by download 2026-09-21:
+
+| | MEASURED |
+|---|---|
+| Endpoint | `https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-24/N02-24_GML.zip` (12.4 MB; 2020–2024 all return `application/zip`) |
+| Stations | **10,235**, across **178 operators** |
+| Line segments | **21,932**, across 179 operators |
+| JR coverage | JR East **1,803 stations**, JR West 1,264, JR Kyushu 621, JR Central 439, JR Hokkaido 343, JR Shikoku — **all six JR companies** |
+| Also | Tokyo Metro, Toei, Osaka Metro, Kintetsu, Meitetsu, Tobu |
+| Attributes | `N02_001` rail class, `N02_002` operator category, `N02_003` line name, `N02_004` operating company, `N02_005` station name |
+| CRS | **EPSG:6668** (JGD2011) |
+| Formats | Shapefile **and GeoJSON**, supplied in **both Shift-JIS and UTF-8** — so no encoding trap |
+| Licence | **PDL 1.0**, the Japanese Government Standard Terms — commercial use, redistribution and derived works all permitted |
+
+Attribution: `出典：国土交通省国土数値情報ダウンロードサイト`, and for a derived
+work `「国土数値情報（鉄道データ）」（国土交通省）をもとに作成`.
+
+**THE TRAP: station geometry is `LineString`, not `Point`** — all 10,235 of
+them. A Japanese station record is the platform centreline, so it must be
+centroided before any ring buffer. A pipeline that assumed points would fail
+or, worse, silently buffer from a line end.
+
+ODPT (`api-public.odpt.org`) is the second route and also works — Toei's feed
+downloaded without a key — but N02 is national, covers JR, and needs no
+registration.
+
+**So Japan is ruled out on business data alone.** Only the Economic Census was
+checked, and it is aggregate. Japanese municipalities publish
+食品関係営業許可施設 (food-business permit premises) as open data, which would
+be a one-bucket source at best — worth a probe before the ruling is final.
+
+### THE METHOD THIS SCREEN GOT WRONG: transit data is not GTFS
+
+The single most useful thing to come out of this screen, and it invalidates
+part of the screen itself.
+
+**This project uses no timetables.** It needs **station coordinates and line
+geometry**. GTFS carries those, but so does any national railway GIS layer —
+and national mapping agencies publish those routinely, at better quality, with
+national coverage and clearer licences.
+
+Every country ruled out above for "no readable feed" was ruled out on a
+**GTFS** question, when the real question is a **GIS** one. Japan proves the
+gap is real and large: the Mobility Database has 18 Japanese feeds, almost all
+volunteer-run village buses, and **no JR at all** — while MLIT publishes every
+railway station in the country, JR included, for free.
+
+**So the probe order for transit should be:**
+
+1. The national mapping or statistics agency's railway layer — MLIT in Japan,
+   and its equivalent elsewhere. Usually shapefile/GeoJSON, usually a clear
+   government licence, usually national.
+2. The national open-data portal's transit standard datasets.
+3. The city or agency's own GTFS.
+4. The Mobility Database catalogue — **last**, being a mirror of a mirror,
+   and demonstrably incomplete and stale.
+
+The screen ran that list backwards.
+
+#### Countries this reopens
+
+| Blocked on GTFS | The GIS route to check |
+|---|---|
+| **South Korea** | `data.go.kr` carries **전국도시철도역사정보표준데이터** (national urban railway *station* standard data, ID 15013205) and **전국도시철도노선정보표준데이터** (*line* standard data, ID 15013203) |
+| **Hong Kong** | Lands Department **iB1000** digital topographic map, which includes a transportation layer, via the CSDI portal and `data.gov.hk` |
+| **Taiwan** | NLSC and TDX, neither in the catalogue |
+| Jakarta, Kuala Lumpur, Rio, Lima, Bogotá, Medellín, Tel Aviv | National spatial agencies, all unchecked |
+
+#### Reachability is its own finding
+
+Three government portals refused connections. Tested from **two independent
+networks** on 2026-09-21 to separate "site is down" from "this path is
+blocked":
+
+| Host | Result |
+|---|---|
+| `www.data.go.kr` | **unreachable**, 21s timeout, both networks |
+| `datos.cdmx.gob.mx` | **unreachable**, 21s timeout, both networks |
+| `localdata.go.kr` | connection refused |
+| `data.seoul.go.kr` | **HTTP 200** |
+| `nlftp.mlit.go.jp` | HTTP 200 |
+
+**Korea's national portal is unreachable from here; Seoul's own city portal is
+not.** That is the Mexico pattern exactly — CDMX blocked, Guadalajara fine —
+and it suggests both countries are workable **city-first rather than
+nationally**, which is in any case the shape this project is built around.
+Seoul publishes its own subway station data and its own licensing data.
+
+**Do not record either country as "no data" on the strength of an unreachable
+national portal.**
 
 ### What in these tables is an artefact rather than a finding
 
