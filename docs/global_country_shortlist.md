@@ -83,13 +83,23 @@ than a fact to discover during one.
 | | Status |
 |---|---|
 | **Mexico** | **The best business data found anywhere** — DENUE, 6M+ establishments, coordinates, **SCIAN = NAICS** so the taxonomy may transfer — and **a licence that clears** (INEGI, commercial use explicit). **But Mexico City's feed is unreachable:** the S3 mirror returns **403** and the city portal **times out**. **Guadalajara works** — *Mi Tren* / SITEUR, **3 LRT lines**, measured — so Mexico is viable through its second city even if CDMX stays shut. |
-| **Spain** / Barcelona | Business **MEASURED and excellent** — the 68,024-premises ground-floor census. **Rail not yet properly tested:** the catalogue's Barcelona entry is a *bus* operator (Autos Castellbisbal, feed expired), not TMB, so the bus-only result is a feed-selection artefact and says nothing about the metro. |
+| **Spain** / Barcelona | **Now both legs measured — promote on the next pass.** Business: the 68,024-premises ground-floor census. Rail: **FGC subway 4 + funicular 3** in Barcelona, and Spain additionally has **Madrid subway 13**, Bilbao, Málaga, Valencia and Sevilla metros — **six metro cities in one country**, more than any other candidate. The only gap is that TMB's own feed 404s, and TMB runs Barcelona's L1–L5; FGC alone understates the city. |
 | **South Korea** | Business **MEASURED and ideal** — 195 municipal permit types, KOGL Type 1. **Zero transit feeds in the catalogue.** Everything rests on whether the national transport source serves something readable. |
 
 ### Tier 3 — rail measured, business data unknown
 
 All confirmed to have real urban rail; none has had its business register
 probed. These are cheap to advance and could move up or out quickly.
+
+**The widened re-probe added ten European capitals to this tier**, several of
+which were initially and wrongly reported rail-free: **Vienna** (subway 35,
+tram 185 — the largest measured anywhere in this screen), **Amsterdam /
+Rotterdam** (subway 14, tram 46), **Berlin** (urban rail 9, tram 48),
+**Stockholm** (metro 7, tram 21), **Copenhagen** (subway 4, tram 4),
+**Oslo** (metro 5, tram 9), **Prague** (subway 3, tram 40), **Helsinki**
+(subway 4, tram 26), **Lisbon** (subway 10) and **Naples** (subway 3, tram 3,
+funicular 3). Each still needs its business register probed, and **each sits
+under GDPR**, which is the expensive half.
 
 | City | Rail (MEASURED) |
 |---|---|
@@ -131,6 +141,97 @@ Recorded so nobody re-reads the table as fact:
 
 Every one is the Toronto lesson again: **what a catalogue says about a city is
 not what the city runs.**
+
+## Probe log — every city rail-screened, 2026-09-21
+
+`scripts/screen_rail.py` against real `routes.txt`. **77 feeds fetched across
+40 countries.** Counts are route counts in the feed, not stations. Commuter
+rail (basic type 2, extended 109) is excluded throughout, as in every built
+city.
+
+### Urban rail confirmed
+
+| City | Country | Measured | Feed health |
+|---|---|---|---|
+| **Paris** | FR | subway 16, tram 17, funicular 1 | current |
+| **Vienna** | AT | **subway 35**, tram 185 | current |
+| **Madrid** | ES | **subway 13** | current |
+| **Singapore** | SG | **subway 13** | current |
+| **Lisbon** | PT | subway 10 | current |
+| **Amsterdam / Rotterdam** | NL | subway 14, tram 46 | current |
+| **Berlin** | DE | urban rail 9, tram 48 | current |
+| **Stockholm** | SE | metro 7, tram 21 | current |
+| **Santiago** | CL | subway 7, tram 2 | current |
+| **São Paulo** | BR | subway 6 | current |
+| **Bucharest** | RO | subway 5, tram 15 | current |
+| **Oslo** | NO | metro 5, tram 9 | current |
+| **Barcelona** | ES | **FGC subway 4, funicular 3** | current — *TMB 404s* |
+| **Sofia** | BG | subway 4, tram 24 | current |
+| **Hamburg** | DE | underground 4 | **expired 20251213** |
+| **Helsinki** | FI | subway 4, tram 26 | **expired 20260731** |
+| **Copenhagen** | DK | subway 4, tram 4 | current |
+| **Budapest** | HU | subway 4, tram 42 | **expired 20260704** |
+| **Bangkok** | TH | subway 4, LRT 5 | current |
+| **Prague** | CZ | subway 3, tram 40 | **expired 20260616** |
+| **Athens** | GR | subway 3 | current |
+| **Naples** | IT | subway 3, tram 3, funicular 3 | current |
+| **Hyderabad** | IN | subway 3 | current |
+| **Málaga** | ES | subway 2 | **expired 20250226** |
+| **Cairo** | EG | subway 2 | **expired 20251027** |
+| **Bilbao** | ES | subway 1 | current |
+| **Kochi** | IN | subway 1 | current |
+| **Guadalajara** | MX | tram/LRT 3 | current |
+| **Zagreb** | HR | tram 19 | **expired 20190616** |
+| **Poznań** | PL | tram 22 | **expired 20260605** |
+| **Riga** | LV | tram 7 | current |
+| **Bratislava** | SK | tram 6 | **expired 20221231** |
+| **Tallinn** | EE | tram 5 | **expired 20260831** |
+| **Hong Kong** | HK | tram/LRT 7, funicular 1 | current — **no MTR in feed** |
+| **Messina** | IT | tram 1 | current |
+
+### No urban rail in the feed tested
+
+| City | Country | What came back |
+|---|---|---|
+| **Manila** | PH | **commuter rail 4** — the LRT/MRT lines, typed as commuter and so excluded |
+| **Rio de Janeiro** | BR | bus only — MetrôRio is a separate operator, absent |
+| **Auckland** | NZ | commuter rail 5, bus 194 |
+| **Jakarta** | ID | bus 252 — Transjakarta is BRT; the MRT is absent |
+| **Bogotá** | CO | bus 1000, aerial 1 |
+| **Buenos Aires** | AR | bus 1052 — *and the Subte feed has no `routes.txt` at all* |
+| **Vilnius, Ljubljana, Belgrade** | LT/SI/RS | bus and trolleybus |
+
+### Fetch failed
+
+**TMB Barcelona**, **MetroValencia**, **Metro de Sevilla**, **SL Stockholm**,
+**Istanbul IETT**, **Kyiv**, **Casablanca**, **Mexico City** (403 on S3;
+`datos.cdmx.gob.mx` **would not connect**, twice, 21s each), **Dubai RTA**
+(the catalogue URL is an anonymous personal GitLab job artefact returning a
+non-zip).
+
+### The tool was wrong, and is now fixed
+
+Berlin, Hamburg, Stockholm and Oslo first came back **"no urban rail"**.
+They publish **GTFS Extended Route Types** — the TPEG-derived 3- and 4-digit
+set where a metro is `401`, an underground `402` and a tram `900` — and
+`screen_rail.py` knew only the basic 0–12 values, so it silently discarded
+them into "other".
+
+Decoded, the counts matched the real networks exactly: Berlin `400:9` against
+9 U-Bahn lines, Hamburg `402:4` against 4, Stockholm `401:7` against 7
+tunnelbana lines, Oslo `401:5` against 5 T-bane lines. Four European capitals
+were one dictionary away from being wrongly ruled out.
+
+`screen_rail.py` now handles both sets, and treats extended `109` (Suburban
+Railway, the S-Bahn family) as commuter rail — excluded, for the same reason
+basic type 2 is.
+
+**Wrong-feed selection is the other recurring fault.** Barcelona and Madrid
+were first tested against bus operators; Dublin against two airport coach
+services; Malaysia against a bus company in Kuala Terengganu rather than
+anything in Kuala Lumpur; Australia against Magnetic Island and Maryborough.
+Picking "a feed that names the city" is not the same as picking the rail
+operator, and in a country with 169 feeds it is close to random.
 
 ## Filter 3 — transit feeds, MEASURED 2026-09-21
 

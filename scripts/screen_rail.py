@@ -41,6 +41,10 @@ Three traps this exists to catch, all real:
 - **An agency may genuinely code its subway as type 0.** San Francisco's Muni
   Metro is route_type 0. A high type-0 count is a prompt to read the route
   names, never a finished answer.
+- **An agency may publish only GTFS EXTENDED route types**, the 3- and 4-digit
+  TPEG-derived set, in which a metro is 401 rather than 1. Reading only the
+  basic 0-12 values reported Berlin, Hamburg, Stockholm and Oslo as having no
+  urban rail on 2026-09-21, when all four have one. Both sets are handled now.
 - **A regional agency's feed covers cities that have no rail of their own.**
   TransLink's feed carries Surrey's SkyTrain stations; Vancouver's own city
   screen would miss that. Check whether rail physically reaches a candidate
@@ -58,6 +62,42 @@ import zipfile
 
 URBAN_RAIL = {0: "tram/LRT", 1: "subway", 5: "cable", 7: "funicular", 12: "monorail"}
 OTHER = {2: "commuter rail", 3: "bus", 4: "ferry", 6: "aerial", 11: "trolleybus"}
+
+# GTFS EXTENDED route types - the TPEG-derived 3- and 4-digit set. Many
+# European agencies publish ONLY these, and a screen that knows just the basic
+# 0-12 values reports "no urban rail" for a city with a working metro. That is
+# not hypothetical: on 2026-09-21 this script called Berlin, Hamburg, Stockholm
+# and Oslo rail-free. Decoded, their counts were Berlin 400:9 (the U-Bahn has 9
+# lines), Hamburg 402:4 (4), Stockholm 401:7 (the tunnelbana has 7) and Oslo
+# 401:5 (the T-bane has 5) - every one an exact match for the real network.
+#
+# 109 (Suburban Railway) is the S-Bahn family and is deliberately NOT urban
+# rail here, for the same reason basic type 2 is not: this project excludes
+# commuter rail in every city built so far.
+for _code, _label in {
+    400: "urban rail", 401: "metro", 402: "underground",
+    403: "urban rail", 404: "urban rail", 405: "monorail", 1400: "funicular",
+}.items():
+    URBAN_RAIL[_code] = _label
+for _code in range(900, 907):           # 900-906, the Tram Service block
+    URBAN_RAIL[_code] = "tram/LRT"
+
+for _code in range(100, 118):           # Railway Service - intercity/regional
+    OTHER[_code] = "rail"
+OTHER[109] = "suburban rail"            # S-Bahn; commuter, so not urban rail
+for _code in range(200, 210):
+    OTHER[_code] = "coach"
+for _code in range(700, 717):
+    OTHER[_code] = "bus"
+OTHER[800] = "trolleybus"
+for _code in range(1000, 1022):
+    OTHER[_code] = "water"
+OTHER[1100] = "air"
+OTHER[1200] = "ferry"
+for _code in range(1300, 1308):
+    OTHER[_code] = "aerial"
+for _code in range(1500, 1508):
+    OTHER[_code] = "taxi"
 UA = "Mozilla/5.0 (compatible; transit-density-research/1.0)"
 
 
