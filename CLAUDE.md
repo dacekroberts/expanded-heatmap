@@ -19,6 +19,15 @@ three buckets, use `multi-source-city`** - most large US cities do not license
 general retail, so this is the common case rather than the exception (New York
 needed four sources; Philadelphia's is 79% landlord registrations).
 
+**Check `docs/build_briefs/<city>.md` first** - if one exists, Step 0's answers
+are already banked there (endpoints, columns, CRS, traps, required notices, and
+an explicit list of what is still unknown). It is a cache, not a prerequisite:
+no brief means `add-city` Step 0 as usual, never waiting for one.
+
+**More than one session working at once? Read `docs/session_roles.md`** - which
+paths each role owns, and the worktree-per-session split that keeps them from
+colliding. A single session does all of it and can ignore that file.
+
 ## Invariants
 
 - **Live-verify a city's real data schema before writing any pipeline code
