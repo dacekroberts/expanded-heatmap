@@ -874,6 +874,26 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     external geocoder.
   Beyond Canada, the EU/UK remain unscreened - NACE, and a national CRS such
   as EPSG:27700 for the UK.
+- [ ] **Korea: register for a `data.go.kr` API key** (owner action - account
+  creation is not something Claude does). Free. Then the business schema can be
+  verified in one call against
+  `apis.data.go.kr/B553077/api/open/sdsc2/storeListInDong`, which currently
+  returns **401**, i.e. the endpoint is live and wants a key. `B553077` is
+  소상공인시장진흥공단's institution code and matches the dataset metadata.
+  This is WMATA's gate, already cleared once for D.C.
+  Context: `상가(상권)정보` is premises-level, nationwide, with 상호명,
+  업종코드/명, both address forms and 경도/위도 on a KSIC 10/75/247 hierarchy,
+  quarterly, CSV UTF-8, **free with 이용허락범위 제한 없음** - the lightest
+  licence position of any candidate screened. The bulk-CSV host
+  (`bigdata.sbiz.or.kr`) is down, so the API is the route. Korea's station
+  data needed no key and is already verified: **1,099 stations with WGS84
+  coordinates and English names**. Full detail in
+  `docs/global_country_shortlist.md`.
+  - [ ] Also open, and a build blocker rather than a screening one:
+    **Korea has no line geometry yet.** The station file carries points only,
+    and this project draws and labels every transit line. Check dataset
+    `15013203`, then 국가공간정보포털.
+
 - [ ] Ridership (out of scope; revisit only if asked).
 - [ ] Adopt `safe-rename` (or fold its checklist into `add-city`) once a
   README, deployment or devcontainer exists to keep in sync.

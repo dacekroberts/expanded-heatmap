@@ -75,7 +75,14 @@ Same country, opposite answers, because the wrong source was asked.
 **Probe in this order. The catalogue is LAST.**
 
 1. **The national mapping or statistics agency's railway layer** - MLIT in
-   Japan, and its equivalent elsewhere.
+   Japan, and its equivalent elsewhere. **Ask TWO questions of it, not one:**
+   does it carry **station points with coordinates**, and does it carry **line
+   geometry**? This project draws and labels every transit line, so stations
+   alone are not enough. Japan's N02 has both - 10,235 stations and 21,932
+   line segments. Korea's station standard dataset has **1,099 stations with
+   WGS84 coordinates and no lines at all**, which passes the first question and
+   fails the second. A screen that asks only about stations records a false
+   pass.
 2. **The national open-data portal's transit standard datasets** - Korea
    publishes nationwide urban-railway *station* and *line* standard datasets.
 3. **The agency's own GTFS**, where one is published.

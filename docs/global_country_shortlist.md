@@ -180,6 +180,79 @@ Stockholm and Lisbon were simultaneously being rail-confirmed into this tier.
 They were in two tiers at once. Ruling a country out on a pattern rather than
 a probe is exactly the error this file exists to avoid.
 
+### RE-ANALYSIS under the corrected framework — most of Tier 4 is not safe
+
+Applying the rules that came out of this screen to the screen itself. Korea is
+the proof: it sat in Tier 2 on "**zero feeds in the catalogue**", and the
+national standard dataset turned out to hold **1,099 stations with WGS84
+coordinates, free and unrestricted**. The catalogue was simply the wrong place
+to look.
+
+**Every Tier 4 entry ruled out on "no feed anywhere in the catalogue" was
+tested against a transit catalogue — the wrong source for a GIS question.**
+Those rulings are therefore **ASSERTED, not measured**, and the countries below
+move back into the running pending a national-mapping-agency probe:
+
+| Country | Ruled out on | Where to actually look |
+|---|---|---|
+| **Hong Kong** | no MTR feed | Lands Department **iB1000** topographic map (transport layer), CSDI portal |
+| **Taiwan** | no Taipei/Kaohsiung feed | **NLSC**, and **TDX** (MOTC) |
+| **Indonesia** | no MRT Jakarta feed | Badan Informasi Geospasial |
+| **Brazil / Rio** | no MetrôRio feed | IBGE |
+| **Malaysia** | no Prasarana feed | JUPEM |
+| **Israel** | no Tel Aviv feed | Survey of Israel, `data.gov.il` |
+| **Peru, Colombia** | no Lima/Medellín/Bogotá feed | IGN, IGAC |
+
+**None of these has been probed at its national mapping agency.** Given Japan
+and Korea both flipped on exactly this, the prior should be that several of
+them flip too.
+
+#### Sweep status, 2026-09-21 — routing established, schemas not yet
+
+Reachability tested; **no schema has been verified for any of the eight**, so
+every row below is a *route*, not a finding.
+
+| Host | Result |
+|---|---|
+| `tdx.transportdata.tw` | **200** — Taiwan's transport exchange is live |
+| `data.gov.tw` (and dataset `102985`) | **200** |
+| `www.csdi.gov.hk` | **200** — Hong Kong's official spatial data infrastructure, "free download, machine-readable" |
+| `data.gov.hk` | 302 |
+| `portal.nlsc.gov.tw` | **000** — down; TDX is the route for Taiwan, not NLSC |
+
+**Taiwan is the one worth doing first**, and the reason is business data rather
+than transit: it is **the only one of the eight with plausible premises-level
+business data *and* a metro**. `data.gov.tw` carries 商業登記 (commercial
+registration) exports with business addresses, so a transit flip there could
+move a whole country rather than just correcting a table. Expect TDX to be
+registration-gated, like Korea's and WMATA's.
+
+**Hong Kong is the opposite case and should be deprioritised despite CSDI being
+live.** Its business data is the FEHD food-licence register — **food only**,
+so Hong Kong is a two-bucket city at best whatever its rail data shows. Fixing
+its transit would not fix its ceiling.
+
+**Still entirely unprobed:** Indonesia (BIG), Malaysia (JUPEM), Israel
+(`data.gov.il`), Peru (IGN/IDEP), Colombia (IGAC), Brazil (IBGE). The Latin
+American geoportals were confirmed to exist but **not** confirmed to carry
+railway station layers — which is the "a dataset title is not evidence" trap,
+and the reason none of them is recorded as a pass here.
+
+#### A refinement the Korea probe produced: stations are not lines
+
+Japan's N02 carries **both** — 10,235 station points *and* 21,932 line
+segments. Korea's station standard dataset carries **stations only**, and this
+project draws and labels every transit line, which is an invariant.
+
+So the national-GIS check is **two questions, not one**:
+
+1. Does the layer carry **station points** with coordinates?
+2. Does it carry **line geometry**?
+
+A country can pass the first and fail the second, and a screen that asks only
+the first will record a false pass. Add the line question to `add-country`
+before the next country is profiled.
+
 ### Tier 4 — ruled out, with the evidence
 
 | | Why | Basis |
@@ -328,6 +401,76 @@ Kept visible so nobody reads the tables as settled fact:
 Every one is the Toronto lesson: **what a catalogue says about a city is not
 what the city runs** — and, added this round, **what a screening tool cannot
 parse, it reports as absent.**
+
+## What screening 87 countries showed — five patterns
+
+Synthesis rather than findings. Each is drawn from the measurements above and
+each changes how the next screen should be run.
+
+### 1. The transit catalogue has a Western bias, and it distorted this screen
+
+**US 1,180 feeds. South Korea 0.** That is not a fact about transit.
+
+Korea runs one of the world's best metro systems and publishes **1,099
+stations with WGS84 coordinates, free and unrestricted**, from its own
+government, the whole time. Japan shows 18 feeds of volunteer-run village
+buses while MLIT publishes **10,235 stations and 21,932 line segments**.
+
+The Mobility Database measures **GTFS adoption**, which tracks Anglophone and
+European open-transit advocacy culture — not transit, and not data
+availability. Screening on it **systematically underrates exactly those
+countries with the strongest state data infrastructure**.
+
+The screen opened on an instinct that Europe and East Asia were the targets.
+That instinct was right; the catalogue made it look wrong.
+
+### 2. The best business registers are national, not municipal
+
+This project's US and Canadian experience taught "municipal licence register"
+as the shape to look for. The three strongest sources found globally are all
+**national statistical or small-business agencies**: **DENUE** (INEGI),
+**SIRENE** (INSEE), **상가(상권)정보** (소상공인시장진흥공단).
+
+All three come from states that run a serious economic census. **The
+municipal-licensing model is a North American peculiarity rather than the
+norm**, which is why `add-country`'s question 2 mis-sorted half the world
+until it was rewritten.
+
+### 3. Licence burden correlates with nothing predictable
+
+| | |
+|---|---|
+| **Korea** | **이용허락범위 제한 없음** — no restriction at all |
+| **Mexico** | attribution **and** disclosure of any transformation |
+| **Canada** | OGL, **automatic termination on breach** |
+| **UK, much of the EU** | fee-gated registers |
+
+All comparable democracies with strong open-data programmes. Licence looseness
+is a **policy choice, not a development indicator**, so it cannot be predicted
+from region or wealth — only read. That is the entire case for the
+`read-licence` skill.
+
+### 4. The aggregate trap is the most common single failure
+
+Istanbul (counts per district), Japan's Economic Census (counts per area),
+Seoul's 상권분석서비스 (per commercial district per quarter), the UK's VOA
+(property without names). **Every one looked viable from its title and
+description.**
+
+Seoul's was the best disguised, because its categories split into **외식업 10
+/ 서비스업 47 / 소매업 43** — this project's own three buckets, exactly.
+
+**The tell is always the same question: is a row a premises, or a summary?**
+
+### 5. Screening cost is highest where the payoff is highest
+
+The cheapest countries to screen — the UK, Australia — **failed**. The richest
+— Korea, Japan, Mexico — cost the most, because their data sits outside the
+channels the screen knew about and often behind another language.
+
+That argues directly against breadth-first screening and reinforces the
+existing depth-per-country rule: the marginal country is expensive precisely
+when it is worth having.
 
 ## Probe log — every city rail-screened, 2026-09-21
 
@@ -627,8 +770,74 @@ per-category hygiene registers become a cross-check rather than the plan.
 
 **Third-party mirrors exist** (a Seoul extract dated 202506 is on Hugging
 Face). **Do not build on one** — that is exactly how the Toronto error
-happened. A mirror is acceptable to confirm a schema, never to source a build,
-and there is now no reason to use one.
+happened. A mirror is acceptable to confirm a schema, never to source a build.
+
+**How to actually get it, traced 2026-09-21.** `data.go.kr` *catalogues* this
+dataset but does not host the file — its own metadata says `atachFileYn = N`,
+and the bulk CSV lives on **`bigdata.sbiz.or.kr`, which is down** (connection
+refused in 0.65s, twice, an hour apart, while `www.sbiz.or.kr` answers 302).
+
+The **Open API is live**:
+`apis.data.go.kr/B553077/api/open/sdsc2/storeListInDong` returns **401**, i.e.
+the endpoint exists and wants a key. `B553077` is 소상공인시장진흥공단's
+institution code, matching the `insttCode` in the dataset's own metadata.
+
+So the business leg needs **a free API key** — WMATA's gate, already cleared
+once by this project — not a bulk download.
+
+#### Korea's transit leg — MEASURED, and it is excellent
+
+`전국도시철도역사정보표준데이터` (dataset **15013205**), from
+**국가철도공단** under MOLIT, legal basis 도시철도법:
+
+| | |
+|---|---|
+| Rows | **1,073 stations** |
+| Scope | Urban railway nationwide, **including 광역철도** (metropolitan rail), so beyond Seoul Metro's own lines |
+| Fields | 역번호, 역사명, 노선번호, 노선명, English and Hanja names, **환승역 여부 및 환승 노선** (transfer flag and lines), **역의 위도·경도**, 운영기관명, 도로명주소, 데이터기준일자 |
+| Format | XLSX |
+| Update | 연간 (annual) |
+| Cost / licence | **무료**, **이용허락범위 제한 없음** |
+| Host | `data.kric.go.kr` — **HTTP 200**, and the dataset page `id=32` also 200 |
+
+**Downloaded and parsed 2026-09-21** — `전체_도시철도역사정보_20260630`, via
+`data.kric.go.kr/rips/dataset/download.file?type=filedata&id=32&operation=1`
+(313 KB XLSX, no key, no login):
+
+**1,099 stations.** Columns exactly as advertised:
+
+| Column | Verified content |
+|---|---|
+| `역위도` / `역경도` | **WGS84 to 15 dp** — e.g. `37.516125263312901, 127.019760916726` |
+| `역사명` / **`영문역사명`** / `한자역사명` | Korean, **English** and Hanja names |
+| `노선번호` / `노선명` | line number and name |
+| `환승역구분` / `환승노선번호` / `환승노선명` | transfer flag and the lines transferred to |
+| `운영기관명` | operating body |
+| `역사도로명주소` | road address |
+
+Sample rows are 신분당선 (Shinbundang) stations tagged 수도권 광역철도, so
+coverage extends past Seoul Metro to private and metropolitan operators, as
+the metadata claimed.
+
+**`영문역사명` is an unplanned win.** It answers the foreign-language label
+question for free — Montréal needed a taxonomy decision about label language,
+and Korea ships English station names in the file.
+
+**THE REMAINING GAP: this is stations only, with no line geometry.** This
+project *draws* every transit line and labels it — an invariant — and in a
+GTFS city that geometry comes from `shapes.txt`. A companion dataset
+(**15013203**) supplies line *information*, but whether it carries geometry or
+only attributes is **unverified**. If it does not, Korea needs a line-shape
+source before a build, most likely from 국가공간정보포털. That is the one
+open question on this leg, and it is a build blocker rather than a screening
+one.
+
+**So both Korean legs are reachable and unrestricted**, and the only gate left
+is a free API key for the business register. That moves Korea into Tier 1
+contention: premises-level business data with coordinates and a 247-category
+standard, national station points with coordinates and transfer information,
+and **"제한 없음" on both** — a lighter licence position than any other
+candidate in this screen.
 
 **Two corrections to the earlier Tier 2 entry.** Korea was recorded as having
 "the ideal single-register shape"; at the scope this project actually works at,
