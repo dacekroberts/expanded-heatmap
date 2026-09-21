@@ -233,6 +233,44 @@ LEGEND_HTML = """
   {line_rows}
 </details>
 """
+# The legend is position:fixed so it stays put while the map scrolls inside its
+# iframe (the map lays out at _MAP_W, which is wider than the app's column).
+# That has a cost: "fixed" anchors to the frame's VISIBLE width, so when the
+# frame is narrower than the map the legend slides left, away from the
+# bottom-right corner the label layout reserved for it (_layout_labels' legend
+# obstacle is computed at _MAP_W). Measured 2026-09-21: at a 1024px browser
+# window the frame is 854px, the legend shifts ~146px left, and it covers four
+# of New York's line labels.
+#
+# So: collapse the legend exactly when the frame is too narrow to show the map
+# at its true width. Collapsed it is a small "Legend" tab that covers nothing,
+# and it is still one click from open. Wide frames are unaffected.
+#
+# A reader who opens or closes it themselves owns it from then on - the
+# breakpoint stops fighting them (`touched`).
+LEGEND_AUTOFIT_SCRIPT = """
+<script>
+(function () {
+    var MAP_W = __MAP_W__;
+    var legend = document.querySelector('details.map-legend');
+    if (!legend) return;
+    var touched = false;
+    legend.addEventListener('toggle', function () {
+        if (legend.dataset.auto === '1') { delete legend.dataset.auto; return; }
+        touched = true;
+    });
+    function fit() {
+        if (touched) return;
+        var narrow = (document.documentElement.clientWidth || window.innerWidth) < MAP_W;
+        if (narrow === !legend.open) return;
+        legend.dataset.auto = '1';
+        legend.open = !narrow;
+    }
+    fit();
+    window.addEventListener('resize', fit);
+})();
+</script>
+"""
 LEGEND_ROW = """
   <div style="display:flex; align-items:center; margin:3px 0;">
     <span style="display:inline-block; width:11px; height:11px;
@@ -677,7 +715,7 @@ def build_legend(bucket_colors, legend_label, lines):
             LEGEND_LINE_ROW.format(color=color, label=html.escape(label))
             for _coords, color, label, _end in lines.values()
         ),
-    )
+    ) + LEGEND_AUTOFIT_SCRIPT.replace("__MAP_W__", str(_MAP_W))
 
 
 def _label_anchor_coords(coords, label_focus):

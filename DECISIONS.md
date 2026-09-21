@@ -14,6 +14,49 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - The legend collapses itself when the frame is too narrow for the map
+
+- **Found by the `deploy-verify` agent**, not by looking at a map at desktop
+  width. Below roughly a 1130 px browser window the legend slid over the map
+  and covered line labels: at a 1024 px window the app's column gives the
+  iframe 854 px, and at that width four of New York's eleven labels were
+  hidden (Flushing, Shuttles, Nassau St, 14 St-Canarsie).
+- **The cause is the interaction of two earlier decisions, each still right.**
+  The map lays out at a fixed 1000 px because Leaflet.heat throws an uncaught
+  `IndexSizeError` when its container size is unresolved
+  (github.com/Leaflet/Leaflet.heat/issues/95), which silently kills every
+  later layer. The overlay controls are `position: fixed` so they stay visible
+  while the map scrolls inside its iframe. But "fixed" anchors to the frame's
+  *visible* width, whereas `_layout_labels` reserves the legend's obstacle at
+  the bottom-right of the full 1000 px. Narrow the frame and the legend moves
+  off the space reserved for it and onto space given to labels.
+- **Fix: collapse the legend exactly when the frame is narrower than the map**
+  (`LEGEND_AUTOFIT_SCRIPT`, threshold read from `_MAP_W` so there is one
+  source of truth). Collapsed it is a 76x37 px "Legend" tab that covers
+  nothing and is one click from open. Chosen over the alternatives: making the
+  legend `position: absolute` would put it back in its reserved corner but
+  require scrolling right to see it at all on a narrow frame; widening the
+  label obstacle to cover every possible legend position would permanently
+  spend space that is only contested sometimes.
+- **A reader who opens or closes the legend owns it from then on** - the
+  breakpoint stops adjusting it, so it never fights a deliberate click.
+- **Verified at three widths, on two cities, and for the manual override.**
+  At an 839 px frame: New York's legend auto-collapses to 37 px and covers
+  **0** labels (was 4), Chicago's likewise with its 7 labels. At 1200 px it is
+  open at its full 403 px and covers 0. After a hand-close at a wide width it
+  stays closed across a resize event. Label positions are untouched - the
+  Python-side obstacle maths did not change - so this is a script-only change
+  to the rendered HTML.
+- Still open, and NOT addressed here: at phone width the frame shows ~343 px of
+  the 1000 px map, so most labels start outside the visible area and the reader
+  must scroll inside the iframe. That is the same fixed-width cause but needs a
+  deliberate mobile approach, not a breakpoint (`PLAN.md`).
+- Also noted while in this code, not changed: the label layout treats only the
+  legend and the top-LEFT zoom/layer controls as obstacles. The top-RIGHT
+  button group (Cities / All cities / theme) is not an obstacle, so a label
+  could in principle land under it; no rendered map currently shows this, and
+  adding it would move labels in all five cities.
+
 ### 2026-09-21 - Staten Island Railway drawn in a lighter blue than the MTA's own
 
 - **The one line on any city map not using its agency's official colour.**
