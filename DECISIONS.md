@@ -14,6 +14,90 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Canada re-ranked on storefront counts: Montreal is next, not Surrey
+
+- **Done on the owner's instruction, after the Vancouver build showed the
+  published ranking was not internally comparable.** Recomputed by
+  `scripts/rank_canada_storefront_density.py`, which is committed so the
+  measurement is reproducible rather than a one-off. Every figure is
+  storefronts - buckets anchored on `naics.py` - inside the UNION of the
+  0.6 mi rings, divided by in-city stations, which is the basis D.C.'s ~173
+  and Boston's ~39 use.
+
+      | city      | in ring | stations | per station | published | inflation |
+      | Vancouver |   4,129 |       20 |     **206** |       861 |     4.2x  |
+      | Montreal  |   9,695 |       64 |     **151** |       252 |     1.7x  |
+      | Surrey    |     539 |        4 |     **135** |       549 |     4.1x  |
+      | Edmonton  |   2,520 |       33 |      **76** |       153 |     2.0x  |
+      | Calgary   |   6,243 |       83 |      **75** |       103 |     1.4x  |
+      | Toronto   |       - |      234 |      **41** |        41 |     1.0x  |
+
+- **The inflation is NOT uniform, and that is the whole problem.** It runs from
+  1.0x to 4.2x, because it depends on how much of each register is not
+  storefront: Vancouver's and Surrey's licence files are full of residential
+  rentals and contractors, while Montreal's source is a commerce survey. The
+  published ranking therefore flattered licence-register cities against
+  Montreal by roughly 2.5x.
+- **One position actually changes: Montreal and Surrey swap.** Published,
+  Surrey (549) sat well above Montreal (252); measured, **Montreal 151 beats
+  Surrey 135**. Edmonton and Calgary also collapse from 153-vs-103 into a tie
+  at 76 and 75.
+- **A correction to my own earlier claim.** I had said Toronto's last place was
+  "the least trustworthy number in the table" and that a common basis would
+  narrow the gap "substantially". It narrows - Calgary/Toronto goes from 2.5x
+  to 1.8x - but **Toronto stays last, clearly**, because its 41 was already
+  storefront-filtered. The order was directionally right all along; the
+  magnitudes were not.
+- **Only Vancouver beats D.C. (~173).** Montreal lands just under it, Surrey
+  below that, and Calgary and Edmonton at roughly twice Boston.
+- **Montreal is the recommended next build, on three grounds that agree.** It
+  is the densest remaining (151); it is the **cheapest**, because its `SCIAN`
+  IS NAICS so `naics.py` applies unchanged and it needs **no taxonomy module
+  at all** - against Calgary's 96 categories and Edmonton's 60; and its source
+  is the **best-matched in the project**, a street-level commerce survey where
+  **69.4% of non-vacant rows are storefronts** against Vancouver's 28.2%. Its
+  agglomeration scope was already decided.
+
+### 2026-09-21 - Five more corrections to the Canada profile, found while re-ranking
+
+- **Montreal publishes 3,500 VACANT units and nobody had recorded it.**
+  `USAGE1 = 'VACANT'` on 3,500 of 28,621 survey rows, plus a separate
+  `VACANT_A_LOUER` flag (Oui on 712). An empty shopfront is not a business and
+  they are excluded. Also `SCIAN` is a **1-character placeholder on 294 of the
+  non-vacant rows**, so usable 6-digit codes cover 98.8% of them rather than
+  the recorded 99.6% of everything.
+- **Calgary has 96 real categories, not 173.** The recorded figure came from
+  splitting `licencetypes` on a bare `"\n"` when the delimiter is `",\n"`,
+  which shreds each value and counts the fragments. Edmonton is the same
+  mistake: **60 real categories, not 67**, on `";"`. Both are far smaller and
+  cleaner than recorded, which makes both cheaper than the profile suggests.
+- **Edmonton HAS a licence-level home-business flag, which the profile missed.**
+  `licencetype` splits Commercial 25,105 / Home Based 14,114 / Non-Resident
+  2,108 / Massage Practitioner 1,582 / Adult Services 763. That is Surrey's
+  shape - the city STATES it - so Edmonton needs no residence inference either.
+  The profile had recorded only the `<Home Based Business>` address
+  placeholder, which is the same fact seen through a weaker signal.
+- **Edmonton's coordinate coverage is 92.7% where it matters, not 53.3%.** The
+  53.3% was measured across the whole file including the Home Based rows,
+  whose addresses are placeholders. On the Commercial rows this project would
+  actually map, 23,265 of 25,105 carry coordinates, and of its storefront
+  subset 99.3% do. **The denominator error again**, now the fourth instance in
+  this project.
+- **Two of the three catalogue feeds are STALE.** Montreal's Mobility Database
+  mirror is 29 days expired and Edmonton's is **93 days** expired; Calgary's
+  carries no `feed_info.txt` at all. Station counts still reproduced exactly
+  (68 / 83 / 33), so the ranking stands - but Edmonton's Valley Line is
+  actively extending, and a 93-day-old feed is exactly how the Toronto mirror
+  hid an entire mode. **Any build must take the agency's own feed.** The
+  committed script prints each feed's expiry for this reason.
+- **A bug in my own first measurement, recorded because the number was
+  plausible.** Summing per-station counts gave Montreal **440** per station.
+  The correct figure is **151**: the Metro's stations are close enough that one
+  business sits inside several rings, so the sum counts it repeatedly. Only the
+  UNION of the rings is the number of distinct businesses near rail, and it is
+  what every other figure in this project means. The script now does the union
+  and says why in its docstring.
+
 ### 2026-09-21 - The macro map's opening view frames the US instead of every city
 
 - **The owner's call, made mid-build and it retires a problem rather than

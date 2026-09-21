@@ -819,21 +819,20 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   2026-09-21, and page-number ordering was verified *not* to be a problem
   (Streamlit sorts the prefix numerically), so neither needs re-raising.
 
-- [ ] **RE-RANK the remaining Canadian cities on STOREFRONT counts before
-  choosing the next one.** Found while building Vancouver: the ranking below is
-  not internally comparable. Only Toronto's figure was storefront-filtered;
-  the other five counted every mappable licence, including the rentals,
-  contractors and consultancies this project never maps. Vancouver's published
-  861 re-measures to **206 per station** on the storefront set (its unfiltered
-  figure reproduces at 862, confirming the cause), and Surrey's 549 becomes
-  **135**. So Toronto's 41 was being compared against five numbers roughly 4x
-  too large, and the profile's conclusion that "the largest city came last"
-  rests on a comparison that was never like-for-like. Vancouver was still the
-  right city to build first - at 206 it beats D.C.'s ~173 - but the margin was
-  4x overstated. Montreal, Edmonton, Calgary and Toronto all need re-measuring
-  the same way. `docs/` belongs to the staging role, so the numbers below are
-  left as published rather than edited here; see `DECISIONS.md`, 2026-09-21,
-  "The Canada ranking table is not internally comparable".
+- [x] **RE-RANKED on storefront counts, 2026-09-21** (was: do this before
+  choosing the next city).
+  `scripts/rank_canada_storefront_density.py` is committed so it is
+  reproducible. Result, storefronts in the 0.6 mi ring per in-city station:
+  **Vancouver 206, Montreal 151, Surrey 135, Edmonton 76, Calgary 75,
+  Toronto 41** - against D.C. ~173 and Boston ~39. Published inflation ran
+  1.0x-4.2x and was NOT uniform, so **Montreal and Surrey swap** and
+  Edmonton/Calgary become a tie. Toronto stays last. **Next build: MONTREAL** -
+  densest remaining, cheapest (SCIAN is NAICS, so no taxonomy module at all),
+  and the best-matched source in the project at 69.4% storefront. Five further
+  corrections to the profile are in `DECISIONS.md`, including that Edmonton has
+  a licence-level home flag and that two of three catalogue feeds are stale.
+  The original, non-comparable figures are left in place below rather than
+  edited, since `docs/` belongs to the staging role.
 
 - [x] Vancouver + Surrey, built 2026-09-21 at REGIONAL scope. 11,724
   storefronts on 24 stations (20 Vancouver, 4 Surrey), two registries
