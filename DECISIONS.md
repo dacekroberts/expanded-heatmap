@@ -14,6 +14,67 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - San Diego, done properly: 315 pins, not 42
+
+- **The 42 was a method artifact, as suspected, and the corrected figure is
+  315 (2.80%)** - 7.5x higher, and in line with San Francisco's 1.19% and Los
+  Angeles' 2.05% for a city that is far more suburban and single-family than
+  either.
+- **The right question here is "which parcel is NEAREST", not "which parcel
+  contains this point".** San Diego's business coordinates sit 5-15 m outside
+  their own lot - placed at the street frontage, and SanGIS parcels exclude
+  road right-of-way - so a point-in-parcel test matched 1 of 30 sampled pins.
+  The earlier filter fell back to "every parcel within 25 m must be
+  residential and owner-occupied", which is a different question and clears
+  any home with a rental next door.
+- **Two wrong turns before the working method, both recorded in
+  `fetch_parcels.py` so they are not retried.** `PLAN.md`'s own advice - bulk
+  download the parcel centroids - was wrong in practice: `orderByFields`
+  sorts 664,662 rows and `resultOffset` deep-pages through them, costing ~26 s
+  per 2,000-row page, about two hours. Abandoned at 2.7%. The advice has been
+  corrected in place rather than left to mislead.
+- **What works: `returnCentroid=true` on a per-point BUFFERED query.** This
+  layer supports centroid-only responses, so one request per point returns the
+  candidate parcels' centroids and the nearest is chosen locally - true
+  nearest semantics in 2,463 requests rather than ~5,000, with no deep paging.
+  95.5% found a parcel, zero failures.
+- **Checked the obvious flaw in that shortcut rather than assuming it away.**
+  The query buffer measures to the parcel BOUNDARY while ranking uses the
+  CENTROID, so a large parcel whose edge is within 25 m can have a centroid
+  hundreds of metres away - which could misattribute a business to a small
+  neighbouring house. Measured: every one of the 315 flagged rows has its
+  chosen centroid within **39.1 m** (mean 22.2, median 21.6), because
+  single-family lots are small. The 1,406 m outlier in the overall
+  distribution belongs to *unflagged* rows on large non-residential parcels -
+  the harmless direction.
+- **The removed rows validate the filter by their own classifications**, which
+  is stronger evidence than any distance statistic: 286 of 315 carry no
+  suite or unit, and the NAICS descriptions include **23 "COTTAGE FOOD
+  OPERATOR"** - California's licence category for food produced in a *home
+  kitchen*, definitionally a home business - plus 20 "BEAUTY SHOPS - BOOTH
+  RENTAL" (a chair renter, not a premises, the same pattern the
+  `multi-source-city` skill flags for New York's `DOSAERENTER`), 66 "other
+  personal services" and 20 beauty salons.
+- **Rate limit measured rather than guessed.** SANDAG's gateway sustains
+  roughly 2 requests/second for a run this long: ~7 req/s completed once, a
+  marginally faster attempt was refused after ~500. The script now defaults to
+  1 worker at 0.4 s (~20 minutes) and **aborts after 25 refusals writing
+  nothing** - which it did, once, costing only time. A partial cache is the
+  one outcome worth avoiding, because it filters only where the lookup
+  happened to succeed.
+- **Reintroduced and then re-fixed the prefilter bug**, an hour after fixing
+  it in Los Angeles. When the bulk fetcher stopped reading business data the
+  prefilter snapshot looked like dead code and was deleted; the per-point
+  version then read step 2's *filtered* output, on the reasoning that "the
+  filter only removes rows, so the candidate set can only shrink". True, and
+  beside the point: the shrinkage is exactly the rows that must stay removed,
+  and without cache entries they return. Restored, with the reason stated in
+  all three files.
+- **No apartment rule for this city**, stated in the code rather than left
+  looking like an omission: that rule reads a dwelling-unit designator out of
+  the address, and this registry's `address_suite` holds bare values ("A",
+  "101") with no APT/UNIT token. Residual: 1 pin (0.04%).
+
 ### 2026-09-21 - Los Angeles filtered; two of my own bugs, and a WAF block
 
 - **Los Angeles: 1,252 pins removed** (61,208 -> 59,956, 2.05%), the largest of

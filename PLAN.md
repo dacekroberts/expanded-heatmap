@@ -171,11 +171,18 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
       frontage and SanGIS parcels exclude road right-of-way. So 2,227 of 2,454
       lookups fall back to the buffer, where the conservative "every parcel
       within 25 m" test quietly clears any home with a rental next door.
-      **To finish it:** bulk-download parcel centroids with `asr_landuse` and
-      `ownerocc` (paginate the layer with `resultOffset`, ~250k rows for the
-      city area) and nearest-join locally with a distance column, exactly as
-      San Francisco does - that reached 93.4% at a median 1.4 m. Per-point
-      queries are the wrong tool here and also risk another WAF block.
+      **RESOLVED 2026-09-21 - and the bulk-download advice this item used to
+      give is wrong; do not follow it.** Paginating the layer costs ~26 s per
+      2,000-row page, because `orderByFields` sorts 664,662 rows and
+      `resultOffset` deep-pages through them: about two hours, abandoned at
+      2.7%. The working method is `pipeline/san_diego/fetch_parcels.py` -
+      **one buffered query per point with `returnCentroid=true`** (this layer
+      supports centroid-only responses), picking the nearest centroid locally.
+      That gives true nearest semantics in 2,463 requests rather than ~5,000.
+      - **Rate limit, measured:** SANDAG's gateway sustains roughly 2
+        requests/second for a run this long. ~7 req/s completed once; slightly
+        faster was refused after ~500. Defaults are now 1 worker at 0.4 s,
+        about 20 minutes. A refusal aborts and writes nothing.
       Original Step 0 notes, all still valid:
       Better placed than expected: it has all three signals after all.
       - Layer: `https://geo.sandag.org/server/rest/services/Hosted/Parcels/

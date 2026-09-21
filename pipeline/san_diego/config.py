@@ -20,6 +20,13 @@ EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"
 
 STATIONS_CSV = DATA_PROCESSED / "stations.csv"
 BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
+# Step 2's output BEFORE its home-business filter. fetch_parcels.py reads THIS,
+# never businesses_clean.csv. Reading the filtered file leaves the already
+# removed rows out of the cache, and without a cache row they are not flagged,
+# so they return on the next run. Removed once on the mistaken reasoning that
+# "the filter only removes rows, so the candidate set can only shrink" - true,
+# but the shrinkage is exactly the rows that must stay removed.
+BUSINESSES_PREFILTER_CSV = DATA_PROCESSED / "businesses_clean_prefilter.csv"
 
 GTFS_ZIP = DATA_RAW / "gtfs.zip"
 BUSINESSES_RAW_CSV = DATA_RAW / "sd_businesses_active_datasd.csv"
@@ -116,32 +123,40 @@ PARCEL_SERVICE_URL = (
 #       multi-family lots: a unit in a shared building may be ground-floor
 #       retail, and filtering it would delete real storefronts.
 PARCEL_RESIDENTIAL_CODES = (11,)
-# Same buffered fallback as Los Angeles, but it does far more work here, and
-# the reason matters for how the result should be read.
-#
+# WHY THIS CITY NEEDS A NEAREST JOIN RATHER THAN A POINT-IN-PARCEL TEST.
 # San Diego's business coordinates sit SYSTEMATICALLY 5-15 m from their own
 # parcel: measured on 30 sampled pins, an exact point-in-parcel test matched
-# 1/30, a 5 m buffer 9/30, 10 m 21/30 and 25 m 30/30. It is not a precision
-# problem - these coordinates carry 8 decimal places, more than Los Angeles'
-# 4 - but a placement one: they sit at the street frontage, and SanGIS parcels
-# exclude road right-of-way. So 2,227 of 2,454 lookups are answered by the
-# buffer rather than by a containing parcel, which means the conservative
-# unanimity test ("every parcel within 25 m") is doing nearly all the work.
+# 1/30, a 5 m buffer 9/30, 10 m 21/30 and 25 m 30/30. Not a precision problem -
+# these carry 8 decimal places against Los Angeles' 4 - but a placement one:
+# they sit at the street frontage, and SanGIS parcels exclude road
+# right-of-way. So "which parcel contains this point?" has almost no answers
+# here, and the question to ask is "which parcel is nearest?".
 #
-# CONSEQUENCE: this city's count is a FLOOR, not a measurement. In a suburban
-# single-family street the neighbours usually are also single-family and
-# owner-occupied, so unanimity holds often enough to be useful - but anywhere
-# a rental sits next door, a genuine home business survives. The rows it does
-# remove are high confidence; the ones it misses are unknown.
-#
-# To get a real number, do what San Francisco does: bulk-download the parcel
-# centroids and nearest-join locally with a distance, instead of asking the
-# service per point. See PLAN.md.
-PARCEL_BUFFER_M = 25.0
-PARCEL_RESIDENCE_CSV = DATA_RAW / "parcel_residence.csv"
-# Step 2's output BEFORE the filter, so fetch_parcel_residence.py always has
-# the unfiltered population to look up (see los_angeles/config.py for why).
-BUSINESSES_PREFILTER_CSV = DATA_PROCESSED / "businesses_clean_prefilter.csv"
+# REPLACED the per-point lookup on 2026-09-21. Per-point queries were the
+# wrong tool for this city twice over: they answered the unanimity question
+# rather than the nearest-parcel one (because these coordinates sit 5-15 m
+# outside their own parcel), and ~5,000 of them got the service to block us.
+# A single bulk download plus a local nearest join is both correct and politer,
+# and it is what San Francisco already does.
+PARCELS_CENTROIDS_CSV = DATA_RAW / "parcels_centroids.csv"
+# The layer returns 2,000 features per page and supports centroid-only
+# responses (supportsReturningGeometryCentroid), so no polygon geometry is
+# transferred. Paging needs a stable sort - `apn` is the layer's own key.
+PARCEL_PAGE_SIZE = 2000
+# Covers every mapped business point plus ~400 m, measured from the data
+# rather than reusing SAN_DIEGO_BBOX, which is a deliberately loose sanity
+# box reaching far into the back country (861k parcels against 665k here).
+PARCEL_QUERY_BBOX = {
+    "lon_min": -117.280,
+    "lon_max": -116.914,
+    "lat_min": 32.540,
+    "lat_max": 33.134,
+}
+# Nearest-parcel tolerance for the local join. Chosen from the measured
+# offset: on 30 sampled pins an exact point-in-parcel test matched 1, a 5 m
+# buffer 9, 10 m 21 and 25 m 30. 25 m accepts the frontage parcel without
+# reaching across a street.
+PARCEL_TOLERANCE_M = 25.0
 # The registry's own structural signal, the same kind as Philadelphia's
 # legalentitytype: 24,974 rows are sole proprietorships. Requiring this as
 # well as a person-like name, a single-family parcel and owner occupancy makes

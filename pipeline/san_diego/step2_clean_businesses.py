@@ -24,7 +24,8 @@ from pipeline.san_diego.config import (  # noqa: E402
     BUSINESSES_CLEAN_CSV,
     BUSINESSES_PREFILTER_CSV,
     CITY_KEEP,
-    PARCEL_RESIDENCE_CSV,
+    PARCEL_RESIDENTIAL_CODES,
+    PARCELS_CENTROIDS_CSV,
     SAN_DIEGO_BBOX,
     SOLE_OWNERSHIP_TYPE,
     TAXONOMY_SYSTEM,
@@ -101,9 +102,9 @@ def main():
     df = df.reset_index(drop=True)
     df["record_id"] = df.index.astype(str)
 
-    # The unfiltered population, written before the filter below so
-    # fetch_parcel_residence.py always has the full set to look up (see
-    # config.BUSINESSES_PREFILTER_CSV).
+    # The unfiltered population, for fetch_parcels.py to look up. Written
+    # before the filter below, and it must stay that way - see
+    # config.BUSINESSES_PREFILTER_CSV.
     BUSINESSES_PREFILTER_CSV.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(BUSINESSES_PREFILTER_CSV, index=False)
 
@@ -118,32 +119,48 @@ def main():
     # occupancy. `asr_landuse` 17 (condominium) is deliberately not in
     # PARCEL_RESIDENTIAL_CODES - see config.py, and pipeline/residence.py for
     # why land use alone is not a signal.
-    if PARCEL_RESIDENCE_CSV.exists():
+    #
+    # NO apartment rule here, unlike San Francisco and Los Angeles: that rule
+    # reads a dwelling-unit designator out of the address, and this registry's
+    # address_suite holds bare values ("A", "101") with no APT/UNIT token to
+    # read. Measured residual: 1 pin (0.04%).
+    #
+    # NEAREST parcel, not containing parcel, and that is specific to this city:
+    # its coordinates sit 5-15 m outside their own lot, so a point-in-parcel
+    # test matched 1 of 30 sampled pins. fetch_parcels.py resolves the nearest
+    # parcel per pin and caches the result; this step only reads it, so the
+    # pipeline stays offline and deterministic.
+    if PARCELS_CENTROIDS_CSV.exists():
         before = len(df)
-        parcels = pd.read_csv(PARCEL_RESIDENCE_CSV, dtype=str)
+        parcels = pd.read_csv(PARCELS_CENTROIDS_CSV, dtype=str)
         m = df.merge(parcels, on="account_key", how="left")
-        looked_up = m["n_parcels"].notna()
-        matched = pd.to_numeric(m["n_parcels"], errors="coerce").fillna(0) > 0
+        looked_up = m["apn"].notna()
+        found = m["asr_landuse"].fillna("").ne("")
+        dist = pd.to_numeric(m["dist_m"], errors="coerce")
         print(f"Parcel lookups available for {int(looked_up.sum()):,} "
-              f"person-like rows; {int(matched.sum()):,} matched a parcel "
-              f"({100 * matched.sum() / max(int(looked_up.sum()), 1):.1f}%)")
+              f"person-like rows; nearest parcel found for "
+              f"{int(found.sum()):,} "
+              f"({100 * found.sum() / max(int(looked_up.sum()), 1):.1f}%), "
+              f"median distance {dist.median():.1f} m")
 
+        landuse = pd.to_numeric(m["asr_landuse"], errors="coerce")
         at_home = flag_home_based(
             m["business_name"],
-            residential=m["all_residential"].eq("true"),
-            owner_occupied=m["all_owner_occupied"].eq("true"),
+            residential=landuse.isin(PARCEL_RESIDENTIAL_CODES),
+            owner_occupied=m["ownerocc"].fillna("").str.strip().str.upper()
+                            .eq("Y"),
             individual=m["ownership_type"].fillna("").str.strip()
                         .eq(SOLE_OWNERSHIP_TYPE),
         )
         report("person-like name + sole proprietorship + single-family parcel "
                "+ owner-occupied", at_home, before,
-               extra={"NAICS": m["naics"], "land_uses": m["land_uses"]})
+               extra={"NAICS": m["naics"], "asr_landuse": m["asr_landuse"]})
         df = df[~at_home.reindex(df.index, fill_value=False)].reset_index(drop=True)
         df["record_id"] = df.index.astype(str)
     else:
-        print(f"NOTE: no {PARCEL_RESIDENCE_CSV.name}, so the home-business "
+        print(f"NOTE: no {PARCELS_CENTROIDS_CSV.name}, so the home-business "
               f"filter did NOT run. Build it with "
-              f"pipeline/san_diego/fetch_parcel_residence.py, then re-run.")
+              f"pipeline/san_diego/fetch_parcels.py, then re-run.")
 
     BUSINESSES_CLEAN_CSV.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(BUSINESSES_CLEAN_CSV, index=False)
