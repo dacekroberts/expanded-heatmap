@@ -371,6 +371,76 @@ Every one is the Toronto lesson: **what a catalogue says about a city is not
 what the city runs** — and, added this round, **what a screening tool cannot
 parse, it reports as absent.**
 
+## What screening 87 countries showed — five patterns
+
+Synthesis rather than findings. Each is drawn from the measurements above and
+each changes how the next screen should be run.
+
+### 1. The transit catalogue has a Western bias, and it distorted this screen
+
+**US 1,180 feeds. South Korea 0.** That is not a fact about transit.
+
+Korea runs one of the world's best metro systems and publishes **1,099
+stations with WGS84 coordinates, free and unrestricted**, from its own
+government, the whole time. Japan shows 18 feeds of volunteer-run village
+buses while MLIT publishes **10,235 stations and 21,932 line segments**.
+
+The Mobility Database measures **GTFS adoption**, which tracks Anglophone and
+European open-transit advocacy culture — not transit, and not data
+availability. Screening on it **systematically underrates exactly those
+countries with the strongest state data infrastructure**.
+
+The screen opened on an instinct that Europe and East Asia were the targets.
+That instinct was right; the catalogue made it look wrong.
+
+### 2. The best business registers are national, not municipal
+
+This project's US and Canadian experience taught "municipal licence register"
+as the shape to look for. The three strongest sources found globally are all
+**national statistical or small-business agencies**: **DENUE** (INEGI),
+**SIRENE** (INSEE), **상가(상권)정보** (소상공인시장진흥공단).
+
+All three come from states that run a serious economic census. **The
+municipal-licensing model is a North American peculiarity rather than the
+norm**, which is why `add-country`'s question 2 mis-sorted half the world
+until it was rewritten.
+
+### 3. Licence burden correlates with nothing predictable
+
+| | |
+|---|---|
+| **Korea** | **이용허락범위 제한 없음** — no restriction at all |
+| **Mexico** | attribution **and** disclosure of any transformation |
+| **Canada** | OGL, **automatic termination on breach** |
+| **UK, much of the EU** | fee-gated registers |
+
+All comparable democracies with strong open-data programmes. Licence looseness
+is a **policy choice, not a development indicator**, so it cannot be predicted
+from region or wealth — only read. That is the entire case for the
+`read-licence` skill.
+
+### 4. The aggregate trap is the most common single failure
+
+Istanbul (counts per district), Japan's Economic Census (counts per area),
+Seoul's 상권분석서비스 (per commercial district per quarter), the UK's VOA
+(property without names). **Every one looked viable from its title and
+description.**
+
+Seoul's was the best disguised, because its categories split into **외식업 10
+/ 서비스업 47 / 소매업 43** — this project's own three buckets, exactly.
+
+**The tell is always the same question: is a row a premises, or a summary?**
+
+### 5. Screening cost is highest where the payoff is highest
+
+The cheapest countries to screen — the UK, Australia — **failed**. The richest
+— Korea, Japan, Mexico — cost the most, because their data sits outside the
+channels the screen knew about and often behind another language.
+
+That argues directly against breadth-first screening and reinforces the
+existing depth-per-country rule: the marginal country is expensive precisely
+when it is worth having.
+
 ## Probe log — every city rail-screened, 2026-09-21
 
 `scripts/screen_rail.py` against real `routes.txt`. **77 feeds fetched across
