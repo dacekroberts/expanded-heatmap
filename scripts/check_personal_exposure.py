@@ -134,6 +134,34 @@ REGISTRIES = {
                           entity_type="ENTITYTYPE",
                           entity_individual=("Sole Proprietorship",
                                              "Domestic Sole Proprietor")),
+    # Vancouver is REGIONAL (Vancouver + Surrey) and the only entry here whose
+    # processed file mixes two registries. `raw` points at Vancouver's own
+    # export, because Surrey's has no trade/owner pair to join against: it
+    # publishes a single BusinessName and no second name column, so Surrey
+    # rows cannot be a substituted fallback by construction.
+    #
+    # Vancouver's fallback pair genuinely exists, as D.C.'s does:
+    # businesstradename -> businessname, blank on 49.6% of MAPPABLE rows (the
+    # 63.0% in the build brief was measured before the coordinate and category
+    # exclusions - the denominator error this project keeps re-learning).
+    #
+    # ITS STRUCTURAL SIGNAL IS A NAME FORMAT, NOT A COLUMN, which is why
+    # entity_type is absent here even though the city has a structural signal
+    # as good as Philadelphia's or D.C.'s: Vancouver WRAPS A SOLE PROPRIETOR'S
+    # OWN NAME IN PARENTHESES - "(Christopher Colonia)", "(Qi Liu)". Step 2
+    # uses it as the primary signal, unioned with the person-name regex, and
+    # records the result in two columns of the processed file:
+    # `registrant_name` and `name_suppressed`. Those are reported below
+    # instead of an entity_type.
+    #
+    # So read this city's person-like-name percentage as a CROSS-CHECK of a
+    # structural measure, the same way round as Philadelphia's.
+    #
+    # Its `sep` is ";" - see the read_csv note in check().
+    "vancouver": dict(raw="vancouver_business_licences.csv", sep=";",
+                      trade="businesstradename", owner="businessname",
+                      processed="businesses_clean.csv",
+                      address=("address",)),
 }
 
 # Unit designators that suggest a residence, as opposed to a commercial suite.
@@ -300,7 +328,11 @@ def check(slug):
     else:
         raw_path = ROOT / "data" / slug / "raw" / spec["raw"]
     if raw_path is not None and raw_path.exists():
-        raw = pd.read_csv(raw_path, dtype=str, low_memory=False)
+        # `sep` per registry: Opendatasoft exports CSV SEMICOLON-delimited
+        # (Vancouver), and read_csv's default comma parses such a file as one
+        # single column, so every column lookup below would KeyError.
+        raw = pd.read_csv(raw_path, dtype=str, low_memory=False,
+                          sep=spec.get("sep", ","))
         trade = raw[spec["trade"]].fillna("").str.strip()
         owner = raw[spec["owner"]].fillna("").str.strip()
         fallback = set(owner[(trade == "") & (owner != "")].str.upper())

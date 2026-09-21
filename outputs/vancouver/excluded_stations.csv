@@ -1,0 +1,31 @@
+station,latitude,longitude,lines,located_in,distance_outside_m
+Brentwood Town Centre,49.2663915,-123.001813,Millennium Line,City of Burnaby,1581.8
+Edmonds,49.211927,-122.959098,Expo Line,City of Burnaby,3892.7
+Gilmore,49.2649665,-123.01353449999999,Millennium Line,City of Burnaby,729.9
+Holdom,49.264729,-122.98215350000001,Millennium Line,City of Burnaby,3013.0
+Lake City Way,49.2546315,-122.939183,Millennium Line,City of Burnaby,5742.1
+Lougheed Town Centre,49.248548,-122.896883,"Expo Line, Millennium Line",City of Burnaby,3503.3
+Metrotown,49.2258165,-123.003908,Expo Line,City of Burnaby,1425.1
+Patterson,49.229755,-123.01264549999999,Expo Line,City of Burnaby,792.7
+Production Way-University,49.2534145,-122.9182045,"Expo Line, Millennium Line",City of Burnaby,4687.2
+Royal Oak,49.2200615,-122.9884575,Expo Line,City of Burnaby,2544.7
+Sperling-Burnaby Lake,49.259183500000006,-122.9639865,Millennium Line,City of Burnaby,4335.1
+Burquitlam,49.261398,-122.8898185,Millennium Line,City of Coquitlam,4716.1
+Coquitlam Central,49.2748285,-122.800597,Millennium Line,City of Coquitlam,6051.8
+Lafarge Lake-Douglas,49.285718,-122.791529,Millennium Line,City of Coquitlam,7311.9
+Lincoln,49.2804135,-122.79395099999999,Millennium Line,City of Coquitlam,6706.0
+22nd Street,49.200052,-122.9489555,Expo Line,City of New Westminster,2670.6
+Braid,49.233236,-122.8827745,Expo Line,City of New Westminster,1549.1
+Columbia,49.2048185,-122.9061525,Expo Line,City of New Westminster,463.2
+New Westminster,49.201432499999996,-122.912601,Expo Line,City of New Westminster,507.6
+Sapperton,49.2246605,-122.8893675,Expo Line,City of New Westminster,868.7
+Inlet Centre,49.277206,-122.82817349999999,Millennium Line,City of Port Moody,6348.1
+Moody Centre,49.2779605,-122.8456085,Millennium Line,City of Port Moody,6414.0
+Aberdeen,49.183995499999995,-123.136309,Canada Line,City of Richmond,1665.3
+Bridgeport,49.195536000000004,-123.126041,Canada Line,City of Richmond,425.3
+Capstan,49.189147000000006,-123.1319125,Canada Line,City of Richmond,1088.7
+Lansdowne,49.174763999999996,-123.1364145,Canada Line,City of Richmond,2690.4
+Richmond-Brighouse,49.168092,-123.1362105,Canada Line,City of Richmond,3430.9
+Sea Island Centre,49.1929915,-123.1578675,Canada Line,City of Richmond,1434.6
+Templeton,49.196685,-123.146321,Canada Line,City of Richmond,572.1
+YVR-Airport,49.194183,-123.1781795,Canada Line,City of Richmond,2292.6

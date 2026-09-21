@@ -173,4 +173,42 @@ CITIES = [
         # of the four, and the widest name, so it clips first on a phone.
         "label_offset": ("start", 14, 24),
     },
+    {
+        # "(Regional)" for Miami's reason: this map spans Vancouver AND
+        # Surrey, and a map covering two municipalities cannot honestly be
+        # called Vancouver. The name must match render_city_nav()'s argument
+        # on the page.
+        "name": "Vancouver (Regional)",
+        "lat": 49.2827,
+        "lon": -123.1207,
+        "page": "pages/12_Vancouver_Heatmap.py",
+        "blurb": "SkyTrain (24 stations across Vancouver and Surrey)",
+        # OUTSIDE THE DEFAULT VIEW - the first city to be, and the reason the
+        # flag exists. See IN_DEFAULT_VIEW below.
+        "in_default_view": False,
+        # Its name sits north-east of its dot, over open water, where nothing
+        # can collide with it at any zoom a reader would stop at.
+        "label_offset": ("start", 12, -10),
+    },
 ]
+
+# THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
+#
+# The owner's decision (2026-09-21), and it retires a problem rather than
+# tuning it. `fit_view` used to frame every entry, which meant each new city
+# outside the existing box re-fitted the whole map: adding Vancouver alone took
+# the longitude span from 57.55 to 58.31 degrees, dropped the zoom from 1.4525
+# to 1.4336, and pulled the east-coast cluster tighter - New York to
+# Philadelphia from 5.95 px to 5.87 px. Every label offset in this file was
+# measured at the old zoom, so every non-US city would have meant re-measuring
+# all of them, and a European city would have forced continent-specific maps
+# and a layer of extra pages.
+#
+# Framing the default view on the well-distributed US set fixes the zoom at
+# 1.4525 for good. Cities outside it are still fully on the map, found by
+# zooming out and panning, and every one of them is in the text-link list
+# beneath it - which is the real navigation guarantee, not the view.
+#
+# A city is in the default view unless it says otherwise, so US cities need no
+# flag and nothing here changed for them.
+IN_DEFAULT_VIEW = [c for c in CITIES if c.get("in_default_view", True)]

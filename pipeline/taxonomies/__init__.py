@@ -66,6 +66,7 @@ TAXONOMY_MODULES = {
     # non-NAICS source here that covers all three buckets on its own, so unlike
     # New York's and Boston's it dispatches over no `source` column.
     "dc_businessactivity": "pipeline.taxonomies.dc_businessactivity",
+    "vancouver": "pipeline.taxonomies.vancouver",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

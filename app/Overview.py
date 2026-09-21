@@ -18,7 +18,7 @@ import pandas as pd
 import pydeck as pdk
 import streamlit as st
 
-from cities import CITIES, MAP_ONLY_NAV
+from cities import CITIES, IN_DEFAULT_VIEW, MAP_ONLY_NAV
 from components import (
     SITE_NAME,
     render_macro_map_theme,
@@ -182,7 +182,15 @@ def fit_view(lats, lons, width_px=320, height_px=460, fill=0.7, west_pad=0.12):
     return pdk.ViewState(latitude=centre_lat, longitude=(max(lons) + lon_min) / 2, zoom=zoom)
 
 
-view = fit_view(cities["lat"].tolist(), cities["lon"].tolist())
+# FITTED TO THE DEFAULT-VIEW CITIES ONLY, not to every city on the map.
+# See cities.IN_DEFAULT_VIEW for why: fitting all of them made each new
+# non-US city re-zoom the map and re-tighten the east-coast cluster, so every
+# label offset in cities.py would have needed re-measuring per city. Framing
+# the US set pins the zoom at 1.4525 permanently. Cities outside the frame are
+# still drawn - they are simply found by zooming out, and they are all in the
+# link list below.
+view = fit_view([c["lat"] for c in IN_DEFAULT_VIEW],
+                [c["lon"] for c in IN_DEFAULT_VIEW])
 
 # Carto basemap: pydeck's own default style needs a Mapbox token; Carto's
 # public styles don't. (Tile provider is still an open decision before
@@ -224,6 +232,19 @@ if picked:
     target = next((c for c in CITIES if c["name"] == picked[0].get("name")), None)
     if target:
         st.switch_page(target["page"])
+
+# Deliberately does NOT say cities are "outside the view": the frame is
+# computed for a 320 px reference and spends extra width as margin, so at
+# 854 px the canvas covers far more latitude than the US box and Vancouver's
+# dot is visible near the top. Whether a given city falls just inside or just
+# beyond the edge depends on the container width, so the wording covers both
+# and the list below is named as the guarantee.
+if any(c.get("in_default_view", True) is False for c in CITIES):
+    st.caption(
+        "The opening view is framed on the United States, so cities elsewhere "
+        "sit toward the edge or beyond it. Zoom out and pan to explore — "
+        "or use the list below, which always has every city."
+    )
 
 st.caption("Or pick a city from the list:")
 for city in CITIES:

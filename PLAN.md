@@ -804,6 +804,29 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   2026-09-21, and page-number ordering was verified *not* to be a problem
   (Streamlit sorts the prefix numerically), so neither needs re-raising.
 
+- [ ] **RE-RANK the remaining Canadian cities on STOREFRONT counts before
+  choosing the next one.** Found while building Vancouver: the ranking below is
+  not internally comparable. Only Toronto's figure was storefront-filtered;
+  the other five counted every mappable licence, including the rentals,
+  contractors and consultancies this project never maps. Vancouver's published
+  861 re-measures to **206 per station** on the storefront set (its unfiltered
+  figure reproduces at 862, confirming the cause), and Surrey's 549 becomes
+  **135**. So Toronto's 41 was being compared against five numbers roughly 4x
+  too large, and the profile's conclusion that "the largest city came last"
+  rests on a comparison that was never like-for-like. Vancouver was still the
+  right city to build first - at 206 it beats D.C.'s ~173 - but the margin was
+  4x overstated. Montreal, Edmonton, Calgary and Toronto all need re-measuring
+  the same way. `docs/` belongs to the staging role, so the numbers below are
+  left as published rather than edited here; see `DECISIONS.md`, 2026-09-21,
+  "The Canada ranking table is not internally comparable".
+
+- [x] Vancouver + Surrey, built 2026-09-21 at REGIONAL scope. 11,724
+  storefronts on 24 stations (20 Vancouver, 4 Surrey), two registries
+  dispatched on a `source` column. The residence filter below was built and
+  **drops nothing**, which is a measured result rather than a shortcut - see
+  `DECISIONS.md`. Three required notices went onto the deploy gate, the first
+  city to add more than one.
+
 - [~] Non-US cities. **Canada is screened and ready to build - see
   `docs/canada_step0_endpoints.md` and the 2026-09-21 `DECISIONS.md` entry.**
   Six viable cities, Step 0 complete on all three legs, licences and privacy
@@ -821,10 +844,16 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     premises needs a dispatch rule, as Boston's `FT+RF` did.
   - **Montreal:** decide `SCIAN` (NAICS, 99.6%) versus the 10-value `USAGE1`.
     Keying off SCIAN may need **no new taxonomy module at all**.
-  - **Vancouver:** the only city needing a residence filter built - a two-hop
-    spatial join, business point to `property-parcel-polygons` to the tax
-    roll's zoning. Verified 99.9% point-in-parcel; the filter is ~232 rows
-    (0.78%), of which 174 are rentals excluded anyway.
+  - **Vancouver: DONE, and the filter turned out to be empty.** The two-hop
+    join works (99.9% point-in-parcel, 99.7% to a zoning class), but the
+    conjunction it was built for - residential zoning AND a substituted
+    personal name - leaves **1 row**, and that row is a false positive (a real
+    corner grocery). The predicted ~232/0.78% was measured across all mappable
+    rows rather than the storefront set. Zoning alone is NOT usable: the 146
+    residentially-zoned storefronts are Vancouver's legal non-conforming corner
+    shops and neighbourhood restaurants. Also: Vancouver DOES have a structural
+    name signal, contrary to the brief - the registry parenthesises a sole
+    proprietor's own name.
   - **Toronto:** geocode against the City's own 525,440-point address
     repository (71.4% on exact match, no normalisation) rather than any
     external geocoder.

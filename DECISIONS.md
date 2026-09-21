@@ -14,6 +14,338 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - The macro map's opening view frames the US instead of every city
+
+- **The owner's call, made mid-build and it retires a problem rather than
+  tuning it**: "we can focus in on a region that's already well distributed
+  like the US and just state there are more global cities around the map if you
+  zoom out and scroll around", to "make sure we aren't wasting extra effort
+  re-drawing labels and maps trying to get all cities to fit in one view".
+- **The problem was real and measured, not hypothetical.** `fit_view` framed
+  every entry in `cities.py`, so any city outside the existing box re-fitted
+  the whole map. Adding Vancouver alone took the longitude span from 57.55 to
+  58.31 degrees and the zoom from **1.4525 to 1.4336**, pulling the east-coast
+  cluster tighter - New York to Philadelphia from 5.95 px to 5.87 px. Since
+  every label offset in that file is a PIXEL offset measured at the old zoom,
+  each new non-US city would have meant re-measuring all of them at three
+  widths. A European city would have forced continent-specific maps and a
+  layer of extra pages, which is the cost the zoomable-map decision was taken
+  to avoid in the first place.
+- **The fix is one flag.** A city carries `in_default_view: False` and
+  `cities.IN_DEFAULT_VIEW` filters the list `fit_view` is given. US cities need
+  no flag and nothing changed for them: the default zoom is **1.4525 exactly**,
+  and all five documented separations reproduce (5.95 / 8.99 / 14.32 / 14.93 /
+  7.66 px against the recorded 6.0 / 9.0 / 14.4 / 15.0 / 7.7). So no label was
+  re-drawn, which was the point.
+- **A correction to my own first attempt at the caption.** It said the other
+  cities sit "outside" the opening view. They do not, necessarily: `fit_view`
+  is computed for a 320 px reference and spends extra width as MARGIN, so at
+  854 px the canvas covers far more latitude than the US box and Vancouver's
+  dot is visible at x=336, y=150 - on canvas at 400, 854 and 1200 px alike.
+  Whether a city falls just inside or just beyond the edge depends on container
+  width, so the wording now covers both and names the text-link list as the
+  guarantee. The list has always held every city, which is why the view can be
+  a framing choice rather than a completeness requirement.
+- **`app/Overview.py` and `app/cities.py` belong to the app/chrome role under
+  `session_roles.md`** and were edited by this build session on the owner's
+  direct instruction. Recorded so the ownership departure is visible rather
+  than inferred.
+
+### 2026-09-21 - Vancouver + Surrey built: 11,724 storefronts, 24 stations
+
+- **The ninth build and the first outside the US.** 11,724 storefronts -
+  Vancouver 8,133, Surrey 3,591 - across Retail 4,848, Food service 4,400 and
+  Personal services 2,476, on 24 stations (20 Vancouver, 4 Surrey). 4,668 fall
+  within the 0.6 mi outer ring. Per-step counts: Vancouver 58,346 current-year
+  Issued -> 29,660 with coordinates -> 8,415 storefront; Surrey 27,082 ->
+  13,066 Commercial/Industrial -> 3,654 storefront; 345 duplicate licences at
+  one premises removed.
+- **All three buckets are well covered in both cities**, so unlike New York and
+  Boston there is no thin bucket to disclose. Both municipalities license
+  general retail, which is what most large US cities do not.
+- **The taxonomy is a dispatching module over two registries** - Vancouver's 89
+  single-valued `businesstype` values and Surrey's 210 newline-separated
+  `BusinessCategory` values, all 299 mapped with no unmapped value and no dead
+  entry. Buckets were anchored on `naics.py` (Retail 44-45 less 454, Food
+  service 722, Personal services 812 less 81293) rather than invented, so this
+  city stays comparable with the five NAICS cities. Five judgment calls are
+  recorded in the module: mobile trade excluded as nonstore (Vancouver's 116
+  Street Vendor rows are the largest single sacrifice to that consistency);
+  Surrey's 1,473 Inter-Municipal Business Licences excluded as its catch-all;
+  BC-regulated health professions treated as health care while unregulated
+  body-care counts; a funeral parlour counts and a cemetery does not; and
+  NAICS 811 repair excluded throughout, so a hairdresser counts and a shoe
+  repairer does not.
+- **`businesssubtype` was tested as a disambiguator and REJECTED.** It looked
+  like Chicago's `business_activity` and is empty on every row of the largest
+  categories - all 4,544 Health Care, all 651 Retail Dealer - Food, all 116
+  Street Vendor. It splits only Limited Service Food Establishment into
+  With/Without Liquor, which changes no bucket.
+- **THE BRIEF SAID VANCOUVER HAS NO STRUCTURAL NAME SIGNAL. IT HAS ONE.** The
+  registry wraps a sole proprietor's own name in PARENTHESES -
+  "(Christopher Colonia)", "(Qi Liu)" - on 4,383 of 29,660 mappable rows and
+  750 of the storefront set. That is the City's own marking of an individual
+  registrant, this city's equivalent of D.C.'s `ENTITYTYPE`, and it is used as
+  the primary signal with `residence.looks_personal` unioned in because they
+  catch different people: the parentheses find 63 storefront rows the regex
+  misses (three-part and non-Anglo names), the regex finds ~10 registrants who
+  did not use parentheses. `looks_organisational` vetoes both.
+- **Only 88 pins display a business type instead of a name**, because 665 of
+  the 750 parenthesised rows already carry a trade name. Every storefront
+  stays on the map and no individual's name is published.
+- **THE RESIDENCE FILTER DROPS NOTHING, AND THAT IS A MEASURED RESULT.** Built
+  because `unittype` failed (see the earlier entry) and zoning was the only
+  signal left. The two-hop join works as the brief promised - 99.9% of points
+  inside a parcel, 99.7% reaching a zoning class. But the conjunction it was
+  built to find - residential zoning AND a substituted personal name - leaves
+  **1 row**: "Mcgill Groceries" at 2691 McGill St, a false positive of
+  `looks_personal` (a surname followed by a word) and a real corner grocery.
+  Meanwhile the 146 residentially-zoned storefronts are Restaurant 32, Limited
+  Service Food 29, Retail Dealer - Food 25, Retail Dealer 23, Liquor
+  Establishment 10 - Vancouver's legal non-conforming corner shops and
+  neighbourhood restaurants. A zoning filter would have deleted them wholesale.
+  **An intermediate version of step 2 did exactly that**, dropping 32 rows
+  because it omitted the no-trade-name condition and so acted on trade names
+  that merely looked personal. Caught by inspecting the rows instead of the
+  count - the San Diego "42 pins became 315" lesson, arriving from the
+  opposite direction. The join is kept because it is the measurement that
+  JUSTIFIES not filtering; delete it and this becomes an assumption again.
+- **Stanley Park is a hole in the local-area boundary layer.** A containment
+  filter dropped 12 real storefronts - the Teahouse, Prospect Point, the
+  Rowing Club, the Brew Pub, the Lawn Bowling Club and the Vancouver Aquarium -
+  because the 22 local areas are neighbourhoods and none of them covers the
+  park. The 118.8 km2 area check passes regardless. So the boundary is a CHECK
+  here, not a filter, which is defensible independently: Vancouver's `city`
+  column reads 'Vancouver' on all 29,660 mappable rows and Surrey's file is
+  Surrey's own, so both registries are already scoped by their publishers.
+  Miami uses its boundary the same way.
+- **No cross-source dedup, deliberately.** The two registries cover disjoint
+  municipalities, so no premises can appear in both; dedup is per source.
+  Recorded because an absent dedup step is otherwise indistinguishable from a
+  forgotten one.
+- **Two lines needed a TUPLE of shape_ids.** The Canada Line branches for
+  YVR-Airport and Richmond-Brighouse, the Expo Line for King George and
+  Production Way-University, so the single most-used shape would have drawn one
+  branch and silently dropped the other. Verified to cover every station on
+  each line: Expo 24, Millennium 17, Canada 17.
+- **No colour disclosure is needed, unlike D.C.** Official TransLink colours
+  measured in both modes, dark first, as minimum CIE76 Delta-E from OSM's land
+  and road fills with `map_common`'s own filter chains applied: Expo 98.0 dark
+  / 99.6 light, Millennium 127.2 / 82.8, Canada 76.2 / **57.5**. The weakest is
+  the Canada Line's teal in light mode, still 1.8x D.C.'s Silver Line at 31.4.
+  **Caveat recorded rather than hidden:** this method reproduces D.C.'s
+  published LIGHT figures exactly (Silver 31.4 land, darkened 51.0 land) but
+  NOT its dark ones, whose model was never written down - offsets of +9.3,
+  +9.1 and -10.2 on the three scale colours, so not a constant. Two sessions
+  now cannot reproduce each other's dark numbers, which is an argument for the
+  `check_colour_contrast.py` the retrospective dropped.
+
+### 2026-09-21 - Vancouver privacy verdict: the shared check reads HIGH here, and why
+
+- **`python scripts/check_personal_exposure.py vancouver`, run on the rendered
+  map** (4,668 pins, 4,262 distinct names), as `CLAUDE.md` requires. Verdict:
+  **publishable**, and the headline number it prints is an artifact.
+- **It reports "PERSON-LIKE NAME AT A RESIDENTIAL UNIT: 314 of 4,668 pins
+  (6.73%)" - higher than San Francisco's 217 and far above Philadelphia's 8.
+  That figure should not be read as this project's other cities' are.** It
+  counts an APT/UNIT/PH/SPC token in the address, and **Vancouver uses "Unit"
+  as its generic designator for commercial suites**: 12,803 of 29,660 mappable
+  rows say 'Unit' against **2** that say 'Apt'. So the token separates nothing
+  here. This is San Diego's and Boston's measurement gap INVERTED - a false
+  high rather than a false low - and it is the second time this check's address
+  heuristic has been wrong about a city in a direction the city's own
+  conventions explain.
+- **The better measure exists for this city and was used instead:** the parcel
+  zoning join. Of the storefront set, 146 sit on residentially-zoned land and
+  exactly **1** of those has a substituted personal name - and that one is a
+  false positive. That is the number this verdict rests on.
+- **0 email addresses, 0 phone numbers, 0 "c/o" markers, 0 surname-first
+  names** in any displayed name. `PhoneNumber` exists in Surrey's export and is
+  dropped at load with an assertion that it stays absent; neither registry
+  publishes a registrant-name column at all, so unlike New York there was
+  nothing to omit at the download boundary.
+- **The 30 names of the form "X (Y)" were inspected individually** - the check
+  flags them as invisible to its heuristic. About 14 are a person's name
+  registered as the TRADE name ("Mandy Y C Tsung (Mandy Tsung)", "Patricia
+  Dawn Amey (Patricia Amey)", mostly Beauty Services) and about 16 are company
+  names with a branch qualifier ("Regency Toyota (Vancouver)", "Sula Indian
+  Restaurant (Main St)"). The first group is left as published on **San
+  Diego's precedent**: a trade name the owner chose to register under their own
+  name is a deliberate public commercial act, not a fallback this pipeline
+  substituted. No change made; recorded so a future reader has the verdict
+  rather than the flag.
+- **`scripts/check_personal_exposure.py` gained a per-registry `sep`**, because
+  Opendatasoft exports semicolon-delimited CSV and `read_csv`'s default comma
+  parsed Vancouver's raw file as a single column.
+
+### 2026-09-21 - The Canada ranking table is not internally comparable
+
+- **Found while building Vancouver, and it affects which city is built next,
+  so it is recorded separately from the build.** `docs/canada_step0_endpoints.md`
+  ranks the six Canadian candidates on "businesses within the outermost 0.6 mi
+  ring, divided by in-city stations": Vancouver 861, Surrey 549, Montreal 252,
+  Edmonton 153, Calgary 103, **Toronto 41**. Only Toronto's is labelled
+  "41 **storefront**".
+- **That label is the whole problem: Toronto's number is storefront-filtered
+  and the other five are not.** Re-measured on the built pipeline, Vancouver's
+  ring holds **17,233 of all mappable licences across its 20 stations = 862 per
+  station**, which reproduces the brief's 861 to within one. On the
+  **storefront** set - the same basis as D.C.'s ~173 and Boston's ~39 - it is
+  **206 per station**. The published figure was inflated **4.2x** by counting
+  licences this project never maps: rentals, contractors, consultants, offices.
+- **Surrey moves much further.** Its published 549 becomes **135 per station**
+  on the storefront set, so it sits BELOW D.C. rather than second in the
+  country. Its 4 stations reach only 15% of its own storefronts, against
+  Vancouver's 51% - Surrey's commerce is spread along arterials the SkyTrain
+  does not follow.
+- **Vancouver's ranking survives; the margin does not.** At 206 it is still the
+  densest storefront city in this project, ahead of D.C.'s ~173 - so the
+  decision to build it first was right, for a reason 4x weaker than stated.
+- **What this does NOT establish: that Toronto is the weakest.** Toronto's 41
+  was already storefront-filtered, so it was being compared against five
+  numbers roughly 4x too large. On a common basis the gap narrows
+  substantially, and the profile's conclusion that "the largest city came last"
+  rests on a comparison that was never like-for-like. **The remaining Canadian
+  cities should be re-ranked on storefront counts before the next one is
+  chosen.** Left for the session that owns `docs/` rather than edited here;
+  noted in `PLAN.md`.
+- **The cause is the denominator rule this project already wrote down** after
+  D.C. (see the `add-city` amendment of 2026-09-21: "every percentage Step 0
+  records must name the set it was measured on, and that set must be the one
+  that reaches the map"). The rule was about percentages; this is a rate, and
+  it went wrong the same way. The rule should say "every percentage OR RATE".
+
+### 2026-09-21 - Vancouver Step 0 verified: six claims held, five were wrong
+
+- **The build brief's ASSERTED claims were re-measured rather than trusted,
+  per `session_roles.md`.** Six reproduced exactly: `folderyear='26'` is still
+  the current vintage (73,075 rows against 69,889 for '25'), 58,346 current-year
+  Issued, 29,660 with coordinates, 63.0% trade-name blank, the 22 local-area
+  polygons dissolving to ONE Polygon of 118.8 km2, and **20 in-city stations** -
+  a count the brief held but a list it had never written down. Surrey's leg
+  reproduced to the unit: 27,082 rows, 628 naive categories against 210 true
+  distinct on `\n`, 13,066 Commercial/Industrial, and **1,444 of those within
+  0.6 mi of its 4 stations - 361 per station**.
+- **Five were wrong, and two of them would have changed the pipeline.**
+  - **TransLink's feed DOES carry `feed_info.txt`** - `feed_start_date`
+    20260907, `feed_end_date` **20270103**, version `26SEP_20260918`. The brief
+    said it carries none, so the city "declares no expiry". It has a 118-day
+    validity window, so D.C.'s `feed_end_date` check applies here too. The
+    brief's claim was almost certainly measured on the Mobility Database
+    mirror; the agency's own feed has the file. **This is the Toronto stale-
+    mirror lesson recurring in a new form** - not staleness this time, but a
+    mirror missing a file the source has. The "declares no licence of its own"
+    half stands: there is no `feed_license` column.
+  - **`zoning_classification` has been re-coded and the brief's values no
+    longer exist.** It recorded One-Family Dwelling 202,740, Two-Family
+    Dwelling 48,300, Multiple Dwelling 87,557, Commercial 132,576. On
+    `report_year='2026'` the classes are Comprehensive Development 84,292,
+    Residential Inclusive 65,706, Residential 51,152, Commercial 19,782,
+    Industrial 5,122, Historical Area 2,621. The old labels are Vancouver's
+    pre-2024 scheme, and the brief's counts were taken across all seven years
+    in the file at once - **the D.C. denominator error, in a new place.** Every
+    residence-filter number derived from them has to be re-measured.
+  - **89 `businesstype` values reach the map, not 93.** 93 is the whole-dataset
+    count; 89 is the count on current-year Issued rows with coordinates, which
+    is the set that gets bucketed.
+  - **Trade-name blank is 49.6% on mappable rows, not 63.0%.** The 63%
+    includes the rentals and contractors that carry no coordinates and are
+    excluded anyway. Same denominator lesson, on the number the brief calls its
+    largest open decision.
+  - **54 stations system-wide, not 53.** Capstan, in Richmond, is the extra - a
+    recent Canada Line addition.
+- **Two facts the brief did not carry, both load-bearing.** Surrey's `x`/`y`
+  arrive only in the CSV export (the layer's attribute schema has neither) and
+  are **EPSG:26910 metres**, the service's native SR - reading them as degrees
+  would place Surrey in the Gulf of Guinea. And `route_short_name` is **empty
+  on all three rail lines**, so routes must be matched by `route_id`; the
+  public names live in `route_long_name`.
+- **The boundary CRS trap the brief warns about is avoidable, not inevitable.**
+  Querying Surrey's FeatureServer with `f=geojson` returns real degrees
+  (-122.96..-122.68, 49.00..49.22), correctly reprojected from its native
+  EPSG:26910. The declared-4326-containing-UTM-metres problem belongs to the
+  Hub's *file* export, not the service, so this build reads the service and
+  needs no `set_crs(..., allow_override=True)` anywhere.
+- **The 34 excluded stations were named from a boundary layer, not guessed**
+  (`add-city` Step 4): Burnaby 11, Richmond 8, New Westminster 5, Coquitlam 4,
+  Surrey 4, Port Moody 2, via the BC ABMS municipalities layer. That WFS
+  returned zero features until its bbox was given in **lat,lon** order - a
+  `urn:ogc:def:crs:EPSG::4326` CRS means axis order is the authority's, not
+  lon,lat.
+- **SkyTrain needs no sub-transit-line filters.** It is fully grade-separated
+  with no street-running stops, so all 20 in-city stations are kept - the same
+  verdict as D.C. and for the same reason. Downtown spacing is tight (median
+  nearest-neighbour 841 m, minimum 201 m between Granville and Vancouver City
+  Centre, 17 of 20 inside the 965 m outer ring), so rings overlap visibly;
+  nearest-station assignment means nothing is double-counted.
+
+### 2026-09-21 - Vancouver is built at REGIONAL scope, with Surrey
+
+- **The owner's call, taking the Miami precedent deliberately** - "let's attempt
+  2 since we built the infrastructure to accommodate it. if we run into trouble
+  we can rescope to 1". Surrey has no rail of its own, shares SkyTrain and
+  therefore shares one TransLink licence, and contributes 4 stations at 361
+  Commercial/Industrial sites each.
+- **But it is a harder case than Miami, and the difference matters.**
+  Miami-Dade publishes all 34 of its municipalities in ONE file, with one
+  schema, one publisher and one set of terms, so its regional map needed no
+  extra source, no cross-source dedup and no second licence review. Vancouver
+  and Surrey are **two publishers, two schemas and two licences** - the
+  `multi-source-city` shape applied across municipalities rather than across
+  buckets.
+- **Cross-source dedup is nevertheless unnecessary, which is the one way this
+  is easier than New York.** The two registries cover disjoint municipalities,
+  so no premises can appear in both. Dedup is per-source only. Recorded because
+  the absence of a dedup step is otherwise indistinguishable from a forgotten
+  one.
+- **The page is labelled "Vancouver (Regional)"**, on Miami's reasoning: a map
+  spanning two municipalities cannot honestly be called Vancouver. The slug
+  and directory stay `vancouver`.
+- **Both licences' notices are required, and their wording is not
+  interchangeable.** Vancouver's is `Contains information licensed under the
+  Open Government Licence - Vancouver.` (en dash, British "Licence"); Surrey's
+  is `Contains information licensed under the Open Government License - City of
+  Surrey.` (hyphen, American "License"). Both terminate automatically on
+  breach, as does Toronto's and Calgary's. The TransLink Legend is inherited
+  once, in its **GTFS** wording, and the position that no prior contact is
+  required was already recorded earlier today.
+- **The rescope path is kept open.** Surrey enters through a `SOURCES` table
+  and its own taxonomy branch, so dropping back to Vancouver alone means
+  removing one table entry and one boundary, not unpicking the pipeline.
+
+### 2026-09-21 - A blank trade name yields a neutral label, never a person's name
+
+- **The owner's call on the brief's largest open question.** Vancouver's
+  `businesstradename` is blank on 49.6% of mappable rows, so the pin label
+  falls back to `businessname` - which for a sole proprietor IS a person's
+  name. Los Angeles met this at 68% and answered by excluding the category
+  driving it; D.C. answered with a structural `ENTITYTYPE` signal. **Vancouver
+  has neither**, so the answer is at the label: fall back to the legal name,
+  but where that name matches `residence.looks_personal`, display the row's
+  business type instead. Every storefront stays on the map; no individual's
+  name is published.
+- **Rejected: always falling back to the legal name** (what LA declined, and
+  it would publish thousands of individuals at their premises); **showing the
+  business type for every blank trade name** (discards real information on
+  about half of mappable pins, including firms that simply registered under
+  their legal name); and **dropping pins with no trade name** (loses ~50% of
+  the mappable set and biases the density map wherever registering under a
+  legal name is common).
+- **`unittype` was tested as a second signal and REJECTED.** It looked like
+  NYC's `unit_type`, which separates APT from STE and FL. Vancouver's is 'Unit'
+  on 12,803 of 29,660 rows - one generic designator covering strip-mall suites,
+  office floors and flats alike - against 'Apt' on **2**. It cannot separate a
+  dwelling from a commercial unit, which is San Diego's measurement-gap result
+  rather than a clean one. **So zoning is Vancouver's only residence signal**,
+  and that is the justification for building the two-hop parcel join rather
+  than treating it as optional.
+- **The registry helps here in one structural way worth recording**: it
+  publishes no registrant-name column at all. `businessname` and
+  `businesstradename` are the only name fields, so unlike New York there is no
+  column to omit at the download boundary - the exposure is confined to sole
+  proprietors registering under their own name, which is exactly what the
+  person-pattern check addresses.
+
 ### 2026-09-21 - Macro-map markers shrunk; displacing them is arithmetically dead
 
 - **The last item in the deferred macro-map pass, and the only one that was

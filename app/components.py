@@ -310,6 +310,35 @@ _NOTICES = [
     ("Chicago Transit Authority",
      "Data provided by Chicago Transit Authority.",
      False),
+    # Canada, added with Vancouver (2026-09-21). All three are VERBATIM.
+    #
+    # The two municipal notices use each city's OWN wording and are not
+    # interchangeable - Vancouver's is "Licence" with an en dash, Surrey's is
+    # "License" with a hyphen. Both licences TERMINATE AUTOMATICALLY on breach
+    # ("if you fail to comply with any of them, the rights granted to you
+    # under this licence... will end automatically"), so these are not
+    # cosmetic.
+    ("City of Vancouver",
+     "Contains information licensed under the Open Government "
+     "Licence – Vancouver.",
+     True),
+    ("City of Surrey",
+     "Contains information licensed under the Open Government License - "
+     "City of Surrey.",
+     True),
+    # TransLink's Legend, required "prominently displayed" in exactly this
+    # wording. THE TRAP: TransLink mandates TWO different legends and this is
+    # the GTFS STATIC one. Its Open API terms mandate a different text
+    # beginning "Some of the data used in this product or service...", which
+    # would NOT satisfy the GTFS terms. This project uses static GTFS. See
+    # docs/licenses/translink-gtfs-static-terms-of-use.txt - the other file in
+    # that directory is kept only because it looks like it governs and does
+    # not. One Legend covers both cities: Surrey has no rail of its own.
+    ("TransLink",
+     "Route and arrival data used in this product or service is provided by "
+     "permission of TransLink. TransLink assumes no responsibility for the "
+     "accuracy or currency of the Data used in this product or service.",
+     True),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

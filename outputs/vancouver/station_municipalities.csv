@@ -1,0 +1,25 @@
+station,latitude,longitude,lines,municipality,nearest_station_m
+Gateway,49.198950499999995,-122.8506075,Expo Line,Surrey,1063.6
+King George,49.1827835,-122.8447175,Expo Line,Surrey,786.7
+Scott Road,49.204415499999996,-122.874178,Expo Line,Surrey,1821.4
+Surrey Central,49.189555,-122.84785500000001,Expo Line,Surrey,786.7
+29th Avenue,49.244273,-123.046108,Expo Line,Vancouver,841.3
+Broadway-City Hall,49.2627045,-123.11480449999999,Canada Line,Vancouver,433.5
+Burrard,49.285607,-123.1195565,Expo Line,Vancouver,368.9
+Commercial-Broadway,49.26263,-123.06879325,"Expo Line, Millennium Line",Vancouver,827.1
+Granville,49.2831645,-123.11570900000001,Expo Line,Vancouver,200.6
+Joyce-Collingwood,49.2383915,-123.031793,Expo Line,Vancouver,1230.1
+King Edward,49.249179,-123.11547200000001,Canada Line,Vancouver,1504.4
+Langara-49th Avenue,49.225726,-123.11652050000001,Canada Line,Vancouver,890.9
+Main Street-Science World,49.2731355,-123.1003745,Expo Line,Vancouver,931.0
+Marine Drive,49.209661999999994,-123.1169995,Canada Line,Vancouver,1786.2
+Nanaimo,49.2483085,-123.055886,Expo Line,Vancouver,841.3
+Oakridge-41st Avenue,49.233739,-123.116299,Canada Line,Vancouver,890.9
+Olympic Village,49.2665865,-123.1153725,Canada Line,Vancouver,433.5
+Renfrew,49.2589095,-123.045361,Millennium Line,Vancouver,934.0
+Rupert,49.260774,-123.03284500000001,Millennium Line,Vancouver,934.0
+Stadium-Chinatown,49.2792245,-123.109161,Expo Line,Vancouver,647.0
+VCC-Clark,49.265836,-123.07905149999999,Millennium Line,Vancouver,827.1
+Vancouver City Centre,49.282407000000006,-123.118213,Canada Line,Vancouver,200.6
+Waterfront,49.28552525,-123.11285975,"Canada Line, Expo Line",Vancouver,334.4
+Yaletown-Roundhouse,49.2744875,-123.12206950000001,Canada Line,Vancouver,924.0

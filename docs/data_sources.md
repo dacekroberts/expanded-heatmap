@@ -736,6 +736,58 @@ attribution and no acknowledgement — its constraints are on what may be SAID
 (§6 accuracy, §9 deletion on termination, the trademark clause), not on what
 must be shown.
 
+**8. City of Vancouver — required, and DISPLAYED.** The Open Government
+Licence – Vancouver requires this exact sentence wherever its information is
+used:
+
+> `Contains information licensed under the Open Government Licence – Vancouver.`
+
+Note the British spelling "Licence" and the EN DASH. This licence
+**terminates automatically on breach** — "if you fail to comply with any of
+them, the rights granted to you under this licence… will end automatically" —
+so the notice is not cosmetic. In `app/components.py`'s `_NOTICES` since
+2026-09-21, when Vancouver was built.
+
+**9. City of Surrey — required, and DISPLAYED.** The same OGL template, with
+Surrey's own wording, which is **not interchangeable with Vancouver's**:
+
+> `Contains information licensed under the Open Government License - City of Surrey.`
+
+Note the American spelling "License" and the HYPHEN. Surrey's OGL also
+terminates automatically on breach. Required because the Vancouver map is
+regional and includes Surrey's own business licences.
+
+**10. TransLink — required, and DISPLAYED. Its wording is a TRAP.** The GTFS
+Static Terms of Use require the Legend to be "prominently displayed" in
+exactly this text:
+
+> "Route and arrival data used in this product or service is provided by
+> permission of TransLink. TransLink assumes no responsibility for the accuracy
+> or currency of the Data used in this product or service."
+
+**TransLink mandates TWO different legends and this is the GTFS STATIC one.**
+Its Open API terms mandate a different text beginning "Some of the data used in
+this product or service…", which would **not** satisfy the GTFS terms. This
+project uses static GTFS, so the "Route and arrival data" wording is the
+correct one. Both texts are stored in `docs/licenses/`;
+`translink-gtfs-static-terms-of-use.txt` is the operative file and
+`translink-open-api-terms-of-use.txt` is kept only because it looks like it
+governs and does not.
+
+One Legend covers both cities: Surrey has no rail of its own, so the regional
+build inherits TransLink's terms once rather than twice. Two further
+obligations come with it and are not notices: **no TransLink marks beyond the
+Legend** (satisfied by construction — this project draws its own geometry from
+`shapes.txt` and reproduces no roundel), and **responsiveness if TransLink asks
+who is using the data**, which was read as an obligation to answer rather than
+a precondition of use (`DECISIONS.md`, 2026-09-21).
+
+So for the **ten** cities now built there are **eight** sources requiring
+specific text or acknowledgement, all of them displayed. Building Vancouver
+added three at once — the first city to add more than one — because it is
+regional across two municipalities and every Canadian Open Government Licence
+prescribes its own sentence, where the US sources mostly prescribed none.
+
 What has grown instead is the pile of **permission questions**, now four: three
 "what does silence mean?" calls and the route-colour one. They are questions
 about permission rather than implementation, and they are the only items of
