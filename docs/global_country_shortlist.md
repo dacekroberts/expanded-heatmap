@@ -84,7 +84,7 @@ than a fact to discover during one.
 |---|---|---|---|
 | **Spain** | **MEASURED** — Barcelona's 68,024-premises ground-floor census | **MEASURED** — Madrid subway 13, Barcelona FGC subway 4 + funicular 3, plus Bilbao, Málaga, Valencia, Sevilla: **six metro cities, more than any other candidate** | **The licence.** Open Data Barcelona's terms have not been read. That is the only gap, and it is one document |
 | **Mexico** | **MEASURED** — DENUE, 6M+ establishments, coordinates, **SCIAN = NAICS** so the taxonomy may transfer | **Partial** — Guadalajara LRT 3 measured and current; **Mexico City unreachable** (S3 403, city portal refuses connections) | A working CDMX feed. Viable through Guadalajara regardless |
-| **South Korea** | **MEASURED** — 195 permit types nationally; at Seoul scope they resolve into **separate per-category registers**, so this is a multi-source city. Food service has a direct file; Personal services exists; **Retail not yet located** | **MEASURED via Seoul** — `data.go.kr` is unreachable, but `data.seoul.go.kr` serves lines 1–9 station data, updated 2026-09-22, **Open API with a free key** (WMATA's gate) | A free API key, and the Retail bucket |
+| **South Korea** ↑↑ | **MEASURED and the best found anywhere** — `상가(상권)정보`: active premises nationwide, 상호명 + 업종 + both address forms + **경도/위도**, KSIC 10/75/247, quarterly, CSV UTF-8, free, **이용허락범위 제한 없음 (no restriction)**. One register, all three buckets | **MEASURED** — national urban-railway **station** and **line** standard datasets on `data.go.kr` (15013205 / 15013203), plus Seoul's own lines 1–9 set updated 2026-09-22 (Open API, free key) | Download and verify the schema live; confirm the station datasets carry coordinates |
 
 **Spain overtook Mexico this round.** Its business leg was already the
 Montréal model and its rail leg is now the deepest measured anywhere in this
@@ -272,28 +272,42 @@ The screen ran that list backwards.
 | **Taiwan** | NLSC and TDX, neither in the catalogue |
 | Jakarta, Kuala Lumpur, Rio, Lima, Bogotá, Medellín, Tel Aviv | National spatial agencies, all unchecked |
 
-#### Reachability is its own finding
+#### Reachability is its own finding — and a transient outage is not one
 
-Three government portals refused connections. Tested from **two independent
+Three government portals refused connections, tested from **two independent
 networks** on 2026-09-21 to separate "site is down" from "this path is
-blocked":
+blocked". **One of those readings was wrong within the hour**, and the
+correction matters more than the original table.
 
-| Host | Result |
-|---|---|
-| `www.data.go.kr` | **unreachable**, 21s timeout, both networks |
-| `datos.cdmx.gob.mx` | **unreachable**, 21s timeout, both networks |
-| `localdata.go.kr` | connection refused |
-| `data.seoul.go.kr` | **HTTP 200** |
-| `nlftp.mlit.go.jp` | HTTP 200 |
+| Host | First reading | Retested ~1h later |
+|---|---|---|
+| `www.data.go.kr` | unreachable, 21s timeout, both networks | **HTTP 200 in 1.15s** |
+| `apis.data.go.kr` | not tested | HTTP 400 — live, wants parameters |
+| `datos.cdmx.gob.mx` | unreachable, 21s timeout | **still 000 at 21s** — four attempts over two hours |
+| `s3.amazonaws.com/setravi/…` | 403 | still 403 |
+| `www.inegi.org.mx` | — | HTTP 200 |
+| `data.seoul.go.kr` | HTTP 200 | HTTP 200 |
+| `nlftp.mlit.go.jp` | HTTP 200 | HTTP 200 |
 
-**Korea's national portal is unreachable from here; Seoul's own city portal is
-not.** That is the Mexico pattern exactly — CDMX blocked, Guadalajara fine —
-and it suggests both countries are workable **city-first rather than
-nationally**, which is in any case the shape this project is built around.
-Seoul publishes its own subway station data and its own licensing data.
+**Korea's national portal was suffering a transient outage and is fine.** It
+was recorded here as a hard finding, on evidence from two networks, and it was
+wrong about an hour later.
 
-**Do not record either country as "no data" on the strength of an unreachable
-national portal.**
+**Mexico City's is not transient** — four failures across two hours, while
+INEGI on the same day answered instantly. That one is a durable finding *as of
+2026-09-21*, and still not a permanent one.
+
+**The lesson, and it is the same one this file keeps producing.** A negative
+result is a measurement of *one moment* as well as one method. Two networks
+agreeing says nothing about two *times*. The evidence-discipline rule in
+`add-country` — treat a negative as ASSERTED until a second differently-shaped
+probe agrees — needs "differently-*timed*" alongside "differently-shaped", and
+an infrastructure failure should never be written down as a property of the
+data.
+
+**Do not record a country as "no data" on the strength of an unreachable
+portal.** Retry it, and try the city portal, which is this project's scope
+anyway.
 
 ### What in these tables is an artefact rather than a finding
 
@@ -552,10 +566,69 @@ register:
 - `서울시 위생처리업`, `세척제 제조업`, `기타 위생용품 제조업`, `대부업체`
   and others
 
-**So Seoul is Boston's and New York's shape, not Vancouver's** — coverage has
-to be assembled from several registers via `multi-source-city`, and **the
-Retail bucket has not yet been located**. `상권` (commercial district) is a
-top-ten search term on the portal and is the obvious place to look next.
+**So at Seoul-portal scope this is Boston's and New York's shape** — coverage
+assembled from several registers via `multi-source-city`. But the Retail probe
+below found something better, and something worse.
+
+#### The Retail probe — one trap avoided, one source found, and it is out of reach
+
+**REJECTED: `서울시 우리마을가게 상권분석서비스`.** It looks perfect — a
+100-category taxonomy split natively into **외식업 10 (food service),
+서비스업 47 (services), 소매업 43 (retail)**, the project's own three buckets,
+with GRS80TM coordinates. It is **aggregate**: "aggregated by commercial
+district (상권) per quarter, not individual store-level data… **no individual
+store coordinates**", and its spatial unit changed again in 2024. Seoul's
+portal also carries a 소상공인시장진흥공단 extract at **행정동 단위**
+(administrative-dong level) — aggregate for the same reason.
+
+That is Istanbul's defect and Japan's Economic Census defect, and this one was
+better disguised than either, because the category split matched what this
+project needs exactly.
+
+**FOUND: `소상공인시장진흥공단_상가(상권)정보`** — the Small Enterprise and
+Market Service's store register, and it is premises-level:
+
+| Field | |
+|---|---|
+| `상호명` | business name |
+| `업종코드` / `업종명` | category code and name |
+| `지번주소` / `도로명주소` | lot address and road address |
+| **`위도` / `경도`** | **latitude / longitude** |
+| `표준산업분류명` | KSIC standard industrial classification |
+
+Nationwide, CSV in UTF-8, on a **10 major / 75 middle / 247 subcategory**
+hierarchy. That is one register covering all three buckets with real
+coordinates — **comparable to Mexico's DENUE**, and far better than assembling
+Seoul's per-category hygiene registers.
+
+**Dataset `15083033` on `data.go.kr` — and the portal came back up, so this is
+now MEASURED from the source page rather than from search results:**
+
+| | |
+|---|---|
+| Title | `소상공인시장진흥공단_상가(상권)정보_20260630` |
+| Scope | **영업 중인 전국 상가업소** — active commercial premises, nationwide |
+| Classification | KSIC-based (표준산업분류 10th revision), **대분류 10 / 중분류 75 / 소분류 247** |
+| Update cycle | **분기** — quarterly. Registered 2026-08-05 |
+| Format | **CSV, UTF-8**, explicitly stated, with reading instructions shipped in the zip |
+| Legal basis | 소상공인 보호 및 지원에 관한 법률 제13조 |
+| Cost | **무료** — free |
+| **이용허락범위** | **제한 없음 — no restriction on use** |
+
+**That is the strongest business source found anywhere in this screen.** It is
+premises-level with real coordinates, nationally complete, classified on a
+247-subcategory standard, refreshed quarterly, and its stated licence scope is
+*unrestricted* — which is a lighter obligation than Mexico's DENUE, whose terms
+require attribution **and** disclosure of any transformation.
+
+It also **collapses the multi-source problem**: one register covers all three
+buckets, so Seoul does not need `multi-source-city` after all, and the
+per-category hygiene registers become a cross-check rather than the plan.
+
+**Third-party mirrors exist** (a Seoul extract dated 202506 is on Hugging
+Face). **Do not build on one** — that is exactly how the Toronto error
+happened. A mirror is acceptable to confirm a schema, never to source a build,
+and there is now no reason to use one.
 
 **Two corrections to the earlier Tier 2 entry.** Korea was recorded as having
 "the ideal single-register shape"; at the scope this project actually works at,
