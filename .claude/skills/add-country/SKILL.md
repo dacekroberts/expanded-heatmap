@@ -22,17 +22,75 @@ cities in one country is cheaper than five countries with one city each.
 
 ## Run the questions in this order - cheapest disqualifier first
 
-Each one can end the profile. Do not research business data before rail.
+Each one can end the profile.
 
-### 1. Does urban rail exist, in a feed you can read?
+**Which one is cheapest depends on the region, so choose the order rather than
+inheriting it.** In Canada, rail-first removed 6 of 13 cities for the cost of
+reading `routes.txt`. In Europe and East Asia it removes almost nothing,
+because every candidate city has rail - there, **question 2 is the cheapest
+disqualifier and should run first**, and rail becomes a confirmation step. The
+2026-09-21 global screen ran rail first out of habit and wasted the step.
 
-`scripts/screen_rail.py` against the Mobility Database catalogue
-(`bit.ly/catalogs-csv`). **In Canada this removed 6 of 13 cities before a
-single data catalogue was opened**, which is the whole argument for the
-ordering.
+### 1. Does urban rail exist, in DATA YOU CAN READ - which is not the same as a GTFS feed
 
-Commuter rail (`route_type 2`) is not urban rail here, matching every built
-city. A country whose only rail is intercity is out.
+**Read this before touching the Mobility Database.** The 2026-09-21 global
+screen got this backwards and had to be corrected.
+
+**This project uses no timetables.** It needs **station coordinates and line
+geometry**. GTFS carries those, but so does any national railway GIS layer,
+and national mapping agencies publish those routinely - national coverage,
+better quality, clearer licence.
+
+Japan is the proof. The Mobility Database holds **18 Japanese feeds, almost
+all volunteer-run village buses, and no JR at all**. MLIT's National Land
+Numerical Information `N02` layer holds **10,235 stations and 21,932 line
+segments across 178 operators**, every JR company included, shapefile *and*
+GeoJSON, Shift-JIS *and* UTF-8, under PDL 1.0 with commercial use permitted.
+Same country, opposite answers, because the wrong source was asked.
+
+**Probe in this order. The catalogue is LAST.**
+
+1. **The national mapping or statistics agency's railway layer** - MLIT in
+   Japan, and its equivalent elsewhere.
+2. **The national open-data portal's transit standard datasets** - Korea
+   publishes nationwide urban-railway *station* and *line* standard datasets.
+3. **The agency's own GTFS**, where one is published.
+4. **The Mobility Database catalogue** - a mirror of a mirror, demonstrably
+   stale and incomplete. Useful for breadth, not for a verdict.
+
+Commuter rail is not urban rail here, matching every built city: basic
+`route_type 2`, and extended `109` (Suburban Railway, the S-Bahn family).
+
+**Rail-first is right for a country already known to publish transit data,
+and wrong as a global filter.** In Canada it removed 6 of 13 cities before a
+catalogue was opened. Across Europe and East Asia it removes almost nothing,
+because every candidate city has rail - so the business-data question does the
+work instead, and should run first.
+
+#### Four ways this step returns a confident wrong answer
+
+All four happened in one day.
+
+- **Extended route types.** An agency may publish only the TPEG-derived 3- and
+  4-digit set, where a metro is `401`, an underground `402`, a tram `900`.
+  Reading only basic 0-12 reported **Berlin, Hamburg, Stockholm and Oslo as
+  having no urban rail**. `screen_rail.py` handles both sets now.
+- **Wrong-feed selection.** Picking "a feed that names the city" is not
+  picking the rail operator. Barcelona and Madrid were tested against bus
+  companies, Dublin against airport coaches, Malaysia against a bus operator
+  in Kuala Terengganu. In a country with 169 feeds that is close to random -
+  **search by operator name across the whole catalogue, with no country
+  filter**, which is also how two feeds missed by country-filtered passes were
+  found.
+- **A national portal that is unreachable.** `data.go.kr` and
+  `datos.cdmx.gob.mx` both time out from multiple networks, while
+  `data.seoul.go.kr` answers 200. **Never record "no data" on the strength of
+  an unreachable national portal** - try the city's own portal, which is the
+  scope this project works at anyway.
+- **A feed that exists and is broken.** Buenos Aires' SUBTE feed is published
+  on the city's own CDN and contains no `routes.txt`; Melbourne's PTV feed is
+  a nested zip; Dubai's catalogue entry is an anonymous personal GitLab job
+  artefact. Absent and broken are different findings.
 
 ### 2. Does the country license businesses MUNICIPALLY, and publish it?
 
@@ -243,6 +301,15 @@ was measured. Expect them.
 - **An opt-in dataset presented as a directory.** Mississauga's lists "only the
   businesses that agreed to be included" - the Boston survey problem, which
   maps who filled in a form rather than where commerce is.
+
+- **Asking the wrong SOURCE, not just the wrong question.** A transit
+  catalogue answers "is there a GTFS feed", which is not what this project
+  needs. Japan looked feed-poor and is data-rich. Check the national mapping
+  agency before believing any transit verdict - see question 1.
+- **A screening tool reporting what it cannot parse as absent.** Extended
+  route types cost four European capitals; a nested zip cost Melbourne; a
+  `LineString` where a `Point` was expected would have cost Japan, whose
+  10,235 station records are platform centrelines needing centroids.
 
 The single recurring cause: **asserting from a column's existence, a dataset
 title, or a plausible-looking flag instead of measuring.** Five separate
