@@ -162,7 +162,21 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     - [x] **Chicago** - nothing to do: `business_activity` marks home-based
       businesses and the taxonomy already drops all of them (zero reach the
       map). Verified, not assumed.
-    - [ ] **San Diego - Step 0 done 2026-09-21, implementation still to do.**
+    - [ ] **San Diego - filter BUILT and applied 2026-09-21, but its number is
+      a floor.** It removes 42 pins (0.37%), against San Francisco's 1.19% and
+      Los Angeles' 2.05%, and the gap is a method artifact rather than a fact
+      about the city. This city's coordinates sit systematically 5-15 m from
+      their own parcel (exact point-in-parcel matched 1 of 30 sampled pins; a
+      25 m buffer matched 30 of 30) because they are placed at the street
+      frontage and SanGIS parcels exclude road right-of-way. So 2,227 of 2,454
+      lookups fall back to the buffer, where the conservative "every parcel
+      within 25 m" test quietly clears any home with a rental next door.
+      **To finish it:** bulk-download parcel centroids with `asr_landuse` and
+      `ownerocc` (paginate the layer with `resultOffset`, ~250k rows for the
+      city area) and nearest-join locally with a distance column, exactly as
+      San Francisco does - that reached 93.4% at a median 1.4 m. Per-point
+      queries are the wrong tool here and also risk another WAF block.
+      Original Step 0 notes, all still valid:
       Better placed than expected: it has all three signals after all.
       - Layer: `https://geo.sandag.org/server/rest/services/Hosted/Parcels/
         FeatureServer/0` - **one countywide layer, 1,089,758 polygons**, so the

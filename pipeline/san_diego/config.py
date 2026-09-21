@@ -116,9 +116,27 @@ PARCEL_SERVICE_URL = (
 #       multi-family lots: a unit in a shared building may be ground-floor
 #       retail, and filtering it would delete real storefronts.
 PARCEL_RESIDENTIAL_CODES = (11,)
-# Same buffered fallback as Los Angeles: an exact point-in-parcel test misses
-# pins whose coordinates sit on a street centreline. The containing parcel is
-# used where there is one; the buffer only otherwise.
+# Same buffered fallback as Los Angeles, but it does far more work here, and
+# the reason matters for how the result should be read.
+#
+# San Diego's business coordinates sit SYSTEMATICALLY 5-15 m from their own
+# parcel: measured on 30 sampled pins, an exact point-in-parcel test matched
+# 1/30, a 5 m buffer 9/30, 10 m 21/30 and 25 m 30/30. It is not a precision
+# problem - these coordinates carry 8 decimal places, more than Los Angeles'
+# 4 - but a placement one: they sit at the street frontage, and SanGIS parcels
+# exclude road right-of-way. So 2,227 of 2,454 lookups are answered by the
+# buffer rather than by a containing parcel, which means the conservative
+# unanimity test ("every parcel within 25 m") is doing nearly all the work.
+#
+# CONSEQUENCE: this city's count is a FLOOR, not a measurement. In a suburban
+# single-family street the neighbours usually are also single-family and
+# owner-occupied, so unanimity holds often enough to be useful - but anywhere
+# a rental sits next door, a genuine home business survives. The rows it does
+# remove are high confidence; the ones it misses are unknown.
+#
+# To get a real number, do what San Francisco does: bulk-download the parcel
+# centroids and nearest-join locally with a distance, instead of asking the
+# service per point. See PLAN.md.
 PARCEL_BUFFER_M = 25.0
 PARCEL_RESIDENCE_CSV = DATA_RAW / "parcel_residence.csv"
 # Step 2's output BEFORE the filter, so fetch_parcel_residence.py always has
