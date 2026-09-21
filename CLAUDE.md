@@ -60,8 +60,14 @@ the process the built cities actually followed - and the `scaffold-city` skill
   `decisions-entry` skill has the format). Never edit an old entry; add a
   new one. Keep `docs/project_context.md` to current state, no counts.
 - **Run `python pipeline/drift_check.py` after any pipeline change.**
-- **Verify app changes with the `deploy-verify` agent** - it runs against
-  `.venv-lean` (what Streamlit Cloud installs), not the full environment.
+- **Verify app changes with the `deploy-verify` agent**, and **always state a
+  scope**: `city-added`, `map-chrome`, `app-deps` or `full`. It runs against
+  `.venv-lean` (what Streamlit Cloud installs), not the full environment. A
+  full sweep costs ~186k tokens and ~27 minutes, so it is reserved for
+  before a real deploy, or for clearing a backlog of unverified changes in one
+  batch. Skip it entirely for pipeline-only work (taxonomies, step 2 filters,
+  exclusions) and doc edits - `drift_check.py`, a grep of `app/` for
+  folium/geopandas/shapely/pyproj imports, and one browser render cover those.
 - Draft interpretive prose in chat before writing it to a file.
 
 ## Commands

@@ -94,21 +94,78 @@ Rendered maps use Folium's default OpenStreetMap tiles. Attribution is in the
 rendered HTML. Choosing a tile provider deliberately is still open in
 `PLAN.md`.
 
-## Licences and terms of use — OPEN
+## Licences and terms of use
 
-**This is the one part of this document that is not yet done, and it is
-deliberately not papered over.** No source's licence or terms of use has been
-read. Every dataset above is published by a government agency on an open-data
-portal, which is a reason to expect permissive terms, not evidence of them.
+Reviewed 2026-09-21. This records what each source's own published terms say,
+and what could not be established. It is a developer's reading of public
+documents, not legal advice, and none of it has been reviewed by a lawyer.
 
-What is already settled is a separate question: what is *appropriate* to
-publish, independent of what is *permitted*. That work is complete and written
-up in `docs/excluded_categories.md`.
+A separate question is already settled: what is *appropriate* to publish,
+independent of what is *permitted*. That is in `docs/excluded_categories.md`.
 
-To close this, each source needs: its licence name, a link to the licence text,
-whether attribution is required and in what form, and whether redistribution of
-derived data is permitted. Socrata portals usually state terms per dataset;
-`data.ny.gov` and `data.cityofnewyork.us` have site-wide terms as well.
+### Explicit and permissive — confirmed
+
+| Source | Licence | Attribution declared |
+|---|---|---|
+| San Francisco businesses (`g8m3-pdis`) | **Open Data Commons PDDL 1.0** (public domain dedication) | "City and County of San Francisco" |
+| San Francisco boundary (`wamw-vt4s`) | **Open Data Commons PDDL 1.0** | none declared |
+| Los Angeles businesses (`6rrh-rzua`) | **CC0 1.0 Universal** (public domain dedication) | "Office of Finance" |
+| San Diego businesses | Portal terms explicitly permit use and **"Derivative Work"**, defined as "a work that is based in any way or to any extent on the Data". No attribution requirement stated | — |
+
+PDDL and CC0 are both public-domain dedications, so neither compels
+attribution; the maps credit these agencies anyway, which is good practice.
+
+San Diego's terms carry a strong disclaimer worth knowing about: the data is
+"as is" and "as available", the city "makes no representation or warranty that
+the information contained in the Data is accurate, true or correct", and the
+user indemnifies the city for claims arising from their use of it.
+
+### Licence not declared, or terms not retrievable — NOT established
+
+| Source | What it declares | Status |
+|---|---|---|
+| Chicago businesses (`r5kz-chrr`), Chicago boundary (`qqq8-j68g`) | `licenseId: SEE_TERMS_OF_USE`, attribution "City of Chicago" | The referenced terms page (`chicago.gov/.../data_disclaimer.html`) returns **403** to an automated request. **Needs a manual read in a browser.** |
+| NYC DOHMH (`43nn-pn8j`), NYC DCWP (`w7w3-xahh`), NYC boroughs (`gthc-hcne`) | **No `license` field at all.** Attribution names the agency | NYC Open Data publishes no dataset-level licence, and the general nyc.gov Terms of Use does not address dataset reuse, so **no explicit grant of reuse rights was found**. Governed in practice by NYC's Open Data Law (Local Law 11 of 2012), which mandates publication but is not a licence. |
+| NYS retail food (`9a8c-vfzj`), NYS salons (`y3u4-jbgh`) | **No `license` field.** Attribution names the department | `data.ny.gov` points to an "OPEN-NY Terms Of Use" document (dataset `77gx-ii52`) whose text could not be retrieved automatically. **Needs a manual read.** |
+| All five GTFS feeds | not checked | **The largest remaining gap.** Line geometry from `shapes.txt` is redrawn in every map, so these terms matter. MTS, SFMTA, LA Metro (GitLab), CTA and MTA each need checking. |
+| US Census bulk geocoder | not checked | A US federal government work, but its terms page was not read. Used only to derive coordinates stored in this project's own outputs. |
+
+Note the shape of this: **the two cities whose terms are clearest (San
+Francisco, Los Angeles) are public-domain dedications, and the two newest
+sources (both New York State) declare nothing at all.** New York contributes
+four of the eight business registries and is the least certain of the five
+cities on this question.
+
+### Basemap tiles — one active compliance item
+
+The maps render **OpenStreetMap** tiles, fetched directly from
+`https://tile.openstreetmap.org/{z}/{x}/{y}.png`.
+
+- **Data licence: ODbL 1.0.** Attribution is required — credit OpenStreetMap
+  and link to the licence, visibly, not "beneath UI, behind toggles, or
+  off-screen".
+- **This requirement is met.** Every rendered map emits
+  `© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>
+  contributors` in the map corner, and the link is present in the committed
+  HTML.
+- **The tile service itself is the open question.** The OSMF Tile Usage Policy
+  makes availability "best-effort: there is no SLA or guarantee", forbids
+  "bulk downloading … any pre-emptive fetching of tiles other than those a
+  user is actively viewing", requires HTTPS (this project uses HTTPS) and a
+  caching-respectful client. A portfolio site drawing tiles only for what a
+  visitor is looking at is ordinary interactive use, not bulk use — but the
+  policy is explicit that there is no guarantee behind it. This is the same
+  decision already open in `PLAN.md` as "tile provider"; it should be settled
+  deliberately before launch rather than by default.
+
+### What closing this fully requires
+
+1. Read Chicago's data terms of use in a browser (403 to automated fetch).
+2. Read the Open NY Terms of Use document (`77gx-ii52`).
+3. Establish the reuse position for NYC Open Data, which declares no licence.
+4. Check the five GTFS feeds' terms — the biggest gap, and directly relevant
+   because line geometry is redrawn from them.
+5. Decide the tile provider deliberately.
 
 ## Gaps
 

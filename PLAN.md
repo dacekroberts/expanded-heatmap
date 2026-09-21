@@ -116,10 +116,22 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   whether to include them.
 - [ ] San Francisco: only ~37% of rows carry a NAICS code; consider whether
   the caveat needs to be visible on the city page.
-- [ ] **Surface `docs/excluded_categories.md` in the app** (a page, or a link
-  from each city page). It is written to be published as-is; right now it is
-  only in the repository. Also decide whether each city page should name its own
-  exclusions. **Blocks the public deploy:** the legends were deliberately left
+- [ ] **Surface `docs/excluded_categories.md` AND `docs/data_sources.md` in the
+  app**, together (a page each, or one "About the data" section, linked from
+  every city page). Deliberately paired and deferred as one job (2026-09-21):
+  both are external necessities for a live site rather than development work,
+  both are already written to be published as-is, and surfacing the exclusions
+  without the provenance would be half an answer. **Blocks the public deploy:**
+  the legends were left broad, so "Retail - NAICS Code: 44/45" overstates what
+  the maps contain until the exclusions page is reachable from them.
+- [ ] **Phone-width city pages.** Found by `deploy-verify` 2026-09-21: at 375px
+  the iframe shows ~343px of the 1000px map, so most line labels start outside
+  the visible area (10 of 11 in New York, 7 of 7 in Chicago) and the reader has
+  to scroll inside the iframe. Affects every city. Same root cause as the
+  legend overlap - the map's fixed 1000px layout, which exists to dodge the
+  Leaflet.heat `IndexSizeError` - but unlike the legend this needs a deliberate
+  mobile approach, not a breakpoint. Options not yet weighed: a narrower
+  phone-specific render, a scroll hint, or accepting it and saying so. **Blocks the public deploy:** the legends were deliberately left
   broad (2026-09-21), so "Retail - NAICS Code: 44/45" overstates what the map
   now contains until this page is reachable from it.
 - [x] Catch-all and non-storefront classifications: swept 2026-09-21 and
