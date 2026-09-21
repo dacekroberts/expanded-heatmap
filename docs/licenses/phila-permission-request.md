@@ -38,10 +38,48 @@ mean?".
 
 ## Where to send it
 
-`ligisteam@phila.gov` — the maintainer contact listed on the L&I Business
-Licenses dataset. Copying the Open Data Program (via
-<https://www.phila.gov/programs/open-data-program/>) would not hurt, since the
-question is about policy rather than one dataset.
+**To: `maps@phila.gov`** — the contact the City publishes on its Open Data
+Program page (1234 Market St, 15th Floor). This is a question about City-wide
+terms, so it belongs with the programme rather than with one dataset's
+custodian.
+
+**CC: `LIGISTEAM@phila.gov`** — the L&I GIS team, maintainer of the Business
+Licenses dataset, so the custodian of the data actually used sees it.
+
+Checked 2026-09-21. An earlier draft of this file sent it to `LIGISTEAM` alone,
+which was the right address for the wrong desk: a dataset maintainer cannot
+speak to what the City's terms of use cover. The other dataset used, City
+Limits, has a different custodian again — a named officer in the Department of
+Planning and Development, listed publicly on its dataset page with a phone
+number — who is worth contacting only if Planning specifically needs to weigh
+in. That dataset is also the one marked "Usage: Public use; Free".
+
+**Do NOT send this to `info@opendataphilly.org`.** OpenDataPhilly is not the
+City: by its own About page it is "built by Azavea, a Philadelphia-based
+geospatial software firm" and catalogues "both municipal and non-municipal
+data". It cannot grant or interpret the City's permissions — and see the note
+below, because that fact cuts the other way too.
+
+## A factor that came out of checking the contacts, and then collapsed
+
+**Raised and then withdrawn the same day — recorded because the withdrawal is
+the useful part.** The sentence this question rests on ("Browsing City data on
+this site constitutes acceptance of the license, the City's terms of use ...")
+appears on an **OpenDataPhilly** dataset page, and OpenDataPhilly is not the
+City: it is "built by Azavea, a Philadelphia-based geospatial software firm".
+That looked like it weakened the hook — terms asserted by a private catalogue
+rather than by the City in its own voice.
+
+**It does not hold up.** The City runs its own data catalogue at
+`metadata.phila.gov`, a phila.gov subdomain on the City's own infrastructure,
+and that catalogue's own "Terms of use" link points straight at
+<https://www.phila.gov/terms-of-use/> — the same document containing the
+prohibition. So the City does make the connection in its own voice, on its own
+property, independently of Azavea. The third-party-portal argument is dead and
+should not be revived.
+
+**This made the case for asking stronger, not weaker**, which is the opposite of
+what checking it was expected to do.
 
 ## Draft
 

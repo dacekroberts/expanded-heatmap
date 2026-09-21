@@ -426,10 +426,30 @@ silence mean?**
   beside them contains no such prohibition, the boundary dataset is marked
   "Usage: Public use; Free", and the Open Data Program was established by
   executive order in 2012 for public reuse. **This project has not resolved it
-  in its own favour, and the footer on every page says so.** Three ways
-  forward, all the owner's: ask the City for written permission (the terms
-  name that as the route), remove Philadelphia, or record a reasoned position
-  that the dataset licence governs and accept the residual.
+  in its own favour, and the footer on every page says so.**
+  **A factor was raised here and withdrawn the same day; the withdrawal is
+  worth keeping.** The sentence that does the incorporating appears on an
+  **OpenDataPhilly** page, and OpenDataPhilly is not the City - it is "built by
+  Azavea, a Philadelphia-based geospatial software firm". That looked like it
+  weakened the hook. **It does not: the City runs its own catalogue at
+  `metadata.phila.gov`, on a phila.gov subdomain, and that catalogue's own
+  "Terms of use" link points straight at `www.phila.gov/terms-of-use/`** - the
+  document with the prohibition in it. The City makes the connection in its own
+  voice, on its own property. The third-party-portal argument is dead.
+  **Which way the wider probe points, stated plainly, because it was tested
+  hopefully and came back the other way:** the only unambiguous permission
+  anywhere in Philadelphia's paperwork is the "Usage: Public use; Free" field on
+  **City Limits** - the boundary layer. The Business Licenses dataset, which is
+  the one carrying trade names at mapped addresses, has **no Usage field at
+  all**. So the permissive signal covers the harmless half of what this project
+  takes and not the sensitive half, and the City's own catalogue points at the
+  restrictive terms. **Asking is more warranted after the check than before
+  it.**
+  **DECIDED 2026-09-21 (the owner):** ask the City for written permission - its
+  terms name that as the route - and keep the map live under the reasoned
+  position meanwhile, with the footer disclosing the question. The drafted
+  request is at `docs/licenses/phila-permission-request.md`, addressed to
+  `maps@phila.gov` copying `LIGISTEAM@phila.gov`, and is **not sent yet**.
   For contrast, this is the same shape as the NYC question but with the opposite
   paperwork — NYC is *forbidden* from imposing a licence, whereas Philadelphia
   has imposed one that says only "we keep our rights".

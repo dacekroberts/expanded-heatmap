@@ -592,8 +592,11 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     position and for what makes it a position rather than a conclusion.
     - [ ] **Send the drafted request.** Written and waiting at
       `docs/licenses/phila-permission-request.md`, addressed to
-      `ligisteam@phila.gov`, with placeholders for the owner's name, email and
-      links. Sending it is the owner's to do. **Nothing in this project may
+      **`maps@phila.gov`** (the City's own Open Data Program contact) copying
+      **`LIGISTEAM@phila.gov`** (the Business Licenses custodian), with
+      placeholders for the owner's name, email and links. An earlier draft
+      addressed the custodian alone - the right address for the wrong desk,
+      since a dataset maintainer cannot speak to what the City's terms cover. Sending it is the owner's to do. **Nothing in this project may
       claim a request is outstanding until it has actually been sent**, and
       silence must never harden into a claim that permission was given.
     - [ ] On a reply, follow the branch already written into that file: on
