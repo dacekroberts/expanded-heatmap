@@ -250,6 +250,14 @@ DOHMH_CLOSED_ACTIONS = ("ESTABLISHMENT CLOSED BY DOHMH", "ESTABLISHMENT RE-CLOSE
 # 3,075), and the NYS files have no NYC marker at all.
 CITY_KEEP = None
 
+# Encoding of this city's RAW source files, declared rather than inferred.
+# pandas defaults to UTF-8 and raises on anything else - safe, but it leaves
+# the next person to guess, and reaching for latin-1 to silence a
+# UnicodeDecodeError corrupts accented names without ever failing. Declaring it
+# makes the choice reviewable and part of the provenance. See the encoding rule
+# in docs/data_sources.md; non-US cities are where this bites.
+SOURCE_ENCODING = "utf-8"
+
 TAXONOMY_SYSTEM = "new_york"
 # Step 2 writes each source's own category column into this name.
 RAW_CLASSIFICATION_COLUMN = "business_category"

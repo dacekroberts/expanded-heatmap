@@ -14,6 +14,31 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Source encoding declared per city, and the catalogue rule tightened
+
+- **Read a new city's whole catalogue, never grep it.**
+  Boston already proved search hits are not the catalogue (48 vs 247 packages);
+  Montreal proves a keyword filter over the full list reintroduces the same
+  bias. ~450 names costs about a minute and ~3 KB. Written into `add-city`
+  Step 0 and `docs/data_sources.md`. The evidence behind it is a live screen
+  logged separately.
+- **`SOURCE_ENCODING` is now declared per city rather than inferred**, and
+  passed at all 11 raw third-party reads (one each for Chicago, Los Angeles,
+  Miami, Philadelphia, San Diego; four for New York's registries; two for San
+  Francisco). Scoped deliberately to third-party bytes - reads of this
+  project's own processed CSVs and of GTFS members inside zips are untouched,
+  since those are bytes we wrote or a spec that mandates UTF-8. **The earlier
+  justification was overstated and is corrected here:** pandas does not
+  silently guess latin-1, it defaults to UTF-8 and *raises*. The real hazard is
+  one step later - the `UnicodeDecodeError` lands on whoever adds the next
+  city, and reaching for `latin-1` to silence it corrupts accented characters
+  **without failing**, so nothing downstream catches it. Declaring the encoding
+  makes that a reviewable decision instead of a silent patch. All seven cities
+  are `utf-8`; Quebec is where this will first bite. Passing the default
+  explicitly is behaviourally a no-op, and **`drift_check --changed` confirmed
+  it**: the change touched all seven cities' configs, the filter correctly
+  escalated to 7 of 7, and every city came back zero drift.
+
 ### 2026-09-21 - WMATA's terms read in full, and San Francisco's recorded endpoint found broken
 
 - **WMATA needs no written authorization, and the summary that said otherwise

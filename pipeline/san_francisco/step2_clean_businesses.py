@@ -40,6 +40,7 @@ from pipeline.san_francisco.config import (  # noqa: E402
     NAICS_EXCLUDE_CODES,
     TAXONOMY_SYSTEM,
     RAW_CLASSIFICATION_COLUMN,
+    SOURCE_ENCODING,
 )
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # noqa: E402
 
@@ -56,7 +57,7 @@ def parcel_points():
     the largest homeowner's exemption is kept, so the join errs toward
     FINDING an owner-occupied home rather than hiding one.
     """
-    roll = pd.read_csv(ASSESSOR_ROLL_CSV, dtype=str, low_memory=False)
+    roll = pd.read_csv(ASSESSOR_ROLL_CSV, dtype=str, low_memory=False, encoding=SOURCE_ENCODING)
     coord = roll["the_geom"].astype(str).str.extract(COORD_PATTERN)
     roll["lon"] = pd.to_numeric(coord[0], errors="coerce")
     roll["lat"] = pd.to_numeric(coord[1], errors="coerce")
@@ -92,7 +93,7 @@ def main():
             "?$where=city='San Francisco'&$limit=400000"
         )
 
-    df = pd.read_csv(BUSINESSES_RAW_CSV, dtype=str, low_memory=False)
+    df = pd.read_csv(BUSINESSES_RAW_CSV, dtype=str, low_memory=False, encoding=SOURCE_ENCODING)
     print(f"Loaded {len(df):,} rows (already filtered to San Francisco at download time)")
 
     # Name the classification column the way the city's taxonomy expects,

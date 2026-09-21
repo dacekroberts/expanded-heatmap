@@ -58,6 +58,7 @@ from pipeline.new_york.config import (  # noqa: E402
     NY_STATE_BBOX,
     SOURCES,
     TAXONOMY_SYSTEM,
+    SOURCE_ENCODING,
 )
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # noqa: E402
 from pipeline.taxonomies.new_york import (  # noqa: E402
@@ -139,7 +140,7 @@ def _finish(df, source, spec, category, name, address, zip_col, lat, lon,
 
 def load_dohmh(spec):
     """DOHMH restaurant inspections -> one row per establishment (camis)."""
-    df = pd.read_csv(spec["file"], dtype=str, low_memory=False)
+    df = pd.read_csv(spec["file"], dtype=str, low_memory=False, encoding=SOURCE_ENCODING)
     print(f"  loaded {len(df):,} inspection rows")
 
     df["_date"] = pd.to_datetime(df["inspection_date"], errors="coerce")
@@ -181,7 +182,7 @@ def load_dohmh(spec):
 
 def load_nys_store(spec):
     """NYS Retail Food Stores -> retail food stores in the five boroughs."""
-    df = pd.read_csv(spec["file"], dtype=str, low_memory=False)
+    df = pd.read_csv(spec["file"], dtype=str, low_memory=False, encoding=SOURCE_ENCODING)
     print(f"  loaded {len(df):,} rows (NYC counties, filtered at download)")
 
     before = len(df)
@@ -207,7 +208,7 @@ def load_nys_store(spec):
 
 def load_nys_salon(spec):
     """NYS appearance-enhancement / barber BUSINESS licences."""
-    df = pd.read_csv(spec["file"], dtype=str, low_memory=False)
+    df = pd.read_csv(spec["file"], dtype=str, low_memory=False, encoding=SOURCE_ENCODING)
     print(f"  loaded {len(df):,} statewide rows")
 
     # The registrant's own name must never reach the map.
@@ -233,7 +234,7 @@ def load_nys_salon(spec):
 
 def load_dca(spec):
     """DCWP issued licences -> active premises licences only."""
-    df = pd.read_csv(spec["file"], dtype=str, low_memory=False)
+    df = pd.read_csv(spec["file"], dtype=str, low_memory=False, encoding=SOURCE_ENCODING)
     print(f"  loaded {len(df):,} rows (Active + Premises, filtered at download)")
 
     before = len(df)

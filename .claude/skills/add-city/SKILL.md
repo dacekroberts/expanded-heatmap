@@ -22,7 +22,22 @@ schema verification. Do this for every candidate before scaffolding:
    for columns, then `<domain>/resource/<id>.json?$limit=3` for sample rows.
    ArcGIS FeatureServer: `<service-url>?f=json` for fields, then
    `<service-url>/query?where=1=1&outFields=*&resultRecordCount=3&f=json`.
-   CKAN: `<domain>/api/3/action/package_search?q=<terms>`. Confirm, with
+   CKAN: **`<domain>/api/3/action/package_list`, printed in full and read** -
+   never `package_search?q=<terms>`, and never a keyword filter over the full
+   list either. Search hits and keyword greps both miss the dataset that is
+   named in the city's own vocabulary rather than yours. Boston proved the
+   first half (48 packages from seven search terms; 247 from `package_list`,
+   and the extra 199 held the boundary layer, the address points and the
+   property roll). Montréal proved the second on 2026-09-21: a keyword scan of
+   the full 447-name list wrongly concluded the city was food-only, because
+   **`locaux-commerciaux`** - a 28,621-row, agglomeration-wide field survey of
+   street-level commerce with NAICS (`SCIAN`) codes, 100% coordinates, trade
+   names and a vacancy flag - contains none of the words *business*, *licence*,
+   *permis*, *entreprise* or *commerce*. Nor does `unités d'évaluation
+   foncière`, the property roll that would serve as its residence-check join.
+   Printing ~450 names costs about a minute and ~3 KB of context. Read them.
+   Also record the **source encoding** as `SOURCE_ENCODING` in the city's
+   config (see `docs/data_sources.md`) - declared, never inferred. Confirm, with
    real non-null sample values: (a) *some* classification field - NAICS or
    the city's own taxonomy, both fine; and (b) a street address and/or
    lat/long that actually has data, not merely a column that exists. Also

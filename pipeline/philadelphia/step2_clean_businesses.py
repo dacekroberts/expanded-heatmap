@@ -47,6 +47,7 @@ from pipeline.philadelphia.config import (  # noqa: E402
     PHILADELPHIA_BBOX,
     RAW_CLASSIFICATION_COLUMN,
     TAXONOMY_SYSTEM,
+    SOURCE_ENCODING,
 )
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # noqa: E402
 
@@ -177,7 +178,7 @@ def main():
         sys.exit(f"No file at {BUSINESSES_RAW_CSV}.\n"
                  "Run: python pipeline/philadelphia/fetch_sources.py")
 
-    df = pd.read_csv(BUSINESSES_RAW_CSV, dtype=str, low_memory=False)
+    df = pd.read_csv(BUSINESSES_RAW_CSV, dtype=str, low_memory=False, encoding=SOURCE_ENCODING)
     print(f"Loaded {len(df):,} rows (Active + kept licence types, filtered at "
           f"download time)")
 

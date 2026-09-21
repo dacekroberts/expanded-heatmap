@@ -261,6 +261,14 @@ STATION_NAME_ALIASES = {
 # coordinates against the boundary polygon instead.
 CITY_KEEP = None
 
+# Encoding of this city's RAW source files, declared rather than inferred.
+# pandas defaults to UTF-8 and raises on anything else - safe, but it leaves
+# the next person to guess, and reaching for latin-1 to silence a
+# UnicodeDecodeError corrupts accented names without ever failing. Declaring it
+# makes the choice reviewable and part of the provenance. See the encoding rule
+# in docs/data_sources.md; non-US cities are where this bites.
+SOURCE_ENCODING = "utf-8"
+
 TAXONOMY_SYSTEM = "phl_licensetype"
 # Already the taxonomy's VALUE_COLUMN, so step 2's rename is a no-op.
 RAW_CLASSIFICATION_COLUMN = "licensetype"

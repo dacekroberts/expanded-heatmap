@@ -41,6 +41,25 @@ purchased, or behind a login.
 - Raw downloads are **not** committed (`data/<city>/raw/` is gitignored). Only
   the rendered `outputs/` are. So these endpoints plus the recorded filters are
   the only way to reproduce a build.
+- **Declare the source encoding.** Every city's `config.py` sets
+  `SOURCE_ENCODING` and every raw read passes it, rather than relying on the
+  default. pandas defaults to UTF-8 and *raises* on anything else, which is
+  safe — but the failure lands on whoever adds the next city, and the tempting
+  fix (reach for `latin-1` to make the `UnicodeDecodeError` go away) corrupts
+  accented characters **without failing**, so nothing catches it downstream.
+  Declaring it makes the choice reviewable and part of the provenance. Every
+  built city so far is `utf-8`; this bites on non-US cities, where Quebec data
+  in particular is still often published in `latin-1`. Note that mojibake
+  in a *terminal* is usually the Windows console codepage, not the file — check
+  the bytes before changing the declaration.
+- **Read a new city's whole catalogue, do not grep it.** Listing every package
+  name and reading them costs about a minute and ~3 KB; keyword-filtering the
+  list reintroduces exactly the bias that pulling the full list was meant to
+  remove. Montréal proved it on 2026-09-21: `locaux-commerciaux`, a 28,621-row
+  agglomeration-wide survey of street-level commerce with NAICS codes and 100%
+  coordinates, contains none of the words *business*, *licence*, *permis*,
+  *entreprise* or *commerce*, and a keyword scan wrongly concluded the city was
+  food-only. Neither does `unités d'évaluation foncière`, its property roll.
 
 ## Business registries
 

@@ -30,6 +30,7 @@ from pipeline.san_diego.config import (  # noqa: E402
     SOLE_OWNERSHIP_TYPE,
     TAXONOMY_SYSTEM,
     RAW_CLASSIFICATION_COLUMN,
+    SOURCE_ENCODING,
 )
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # noqa: E402
 
@@ -42,7 +43,7 @@ def main():
             "sd_businesses_active_datasd.csv"
         )
 
-    df = pd.read_csv(BUSINESSES_RAW_CSV, dtype=str, low_memory=False)
+    df = pd.read_csv(BUSINESSES_RAW_CSV, dtype=str, low_memory=False, encoding=SOURCE_ENCODING)
     print(f"Loaded {len(df):,} rows")
 
     # Name the classification column the way the city's taxonomy expects,

@@ -42,6 +42,7 @@ from pipeline.miami.config import (  # noqa: E402
     PREMISES_KEY,
     RAW_CLASSIFICATION_COLUMN,
     TAXONOMY_SYSTEM,
+    SOURCE_ENCODING,
 )
 from pipeline.residence import (  # noqa: E402
     flag_home_based,
@@ -116,7 +117,7 @@ def main():
         sys.exit(f"No file at {BUSINESSES_RAW_CSV}.\n"
                  "Run pipeline/miami/fetch_sources.py first.")
 
-    df = pd.read_csv(BUSINESSES_RAW_CSV, dtype=str, low_memory=False)
+    df = pd.read_csv(BUSINESSES_RAW_CSV, dtype=str, low_memory=False, encoding=SOURCE_ENCODING)
     df.columns = [c.strip().lower() for c in df.columns]
     print(f"Loaded {len(df):,} rows (already ACCSTATUS='Active' at download)")
 
