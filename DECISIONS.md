@@ -14,6 +14,21 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Legend stays broad; the exclusions page carries the detail
+
+- **The map legends keep their broad labels** ("Retail - NAICS Code: 44/45",
+  "Personal services - NAICS Code: 812") even though `454` and `81293` are now
+  carved out of those prefixes. Precise labels were drafted and rejected as
+  clutter on the map itself: "Retail - NAICS 44/45 (excl. 454 nonstore)" reads
+  badly in a legend and would need re-editing every time a verdict changes.
+- **`docs/excluded_categories.md` is the single place the detail lives**, and it
+  is written to be published as prose. Surfacing it in the app (a page, or a
+  link from each city page) is deliberately deferred - open in `PLAN.md`.
+- **The gap this leaves, stated plainly:** until that page is surfaced in the
+  app, a visitor reading the legend would infer the map covers all of NAICS
+  44/45 and 812, which it no longer does. That is acceptable while the site is
+  unpublished and is a blocker for the public deploy, not for development.
+
 ### 2026-09-21 - Nonstore retailers and parking excluded everywhere; solo massage in SF
 
 - **A full sweep of every city's mapped categories found the remaining problem

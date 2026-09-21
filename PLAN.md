@@ -94,7 +94,9 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 - [ ] **Surface `docs/excluded_categories.md` in the app** (a page, or a link
   from each city page). It is written to be published as-is; right now it is
   only in the repository. Also decide whether each city page should name its own
-  exclusions.
+  exclusions. **Blocks the public deploy:** the legends were deliberately left
+  broad (2026-09-21), so "Retail - NAICS Code: 44/45" overstates what the map
+  now contains until this page is reachable from it.
 - [x] Catch-all and non-storefront classifications: swept 2026-09-21 and
   resolved. Excluded everywhere: NAICS `454` (nonstore retailers) and `81293`
   (parking). Excluded per city: 812990 in Los Angeles and in San Francisco (for
