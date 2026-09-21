@@ -26,6 +26,7 @@ from pipeline.san_francisco.config import (  # noqa: E402
     BUSINESSES_RAW_CSV,
     BUSINESSES_CLEAN_CSV,
     SAN_FRANCISCO_BBOX,
+    NAICS_EXCLUDE_CODES,
     TAXONOMY_SYSTEM,
     RAW_CLASSIFICATION_COLUMN,
 )
@@ -72,6 +73,13 @@ def main():
     before = len(df)
     df = filter_to_storefront(df, TAXONOMY_SYSTEM)
     print(f"Storefront filter ({TAXONOMY_SYSTEM}): {before:,} -> {len(df):,} rows")
+
+    # --- Excluded catch-all codes (per-city verdict; see config.py) ----------
+    if NAICS_EXCLUDE_CODES:
+        before = len(df)
+        df = df[~df[value_column].astype(str).isin(NAICS_EXCLUDE_CODES)]
+        print(f"Excluded catch-all codes {sorted(NAICS_EXCLUDE_CODES)}: "
+              f"{before:,} -> {len(df):,} rows")
 
     # --- Parse coordinates, drop rows without usable ones -------------------
     before = len(df)

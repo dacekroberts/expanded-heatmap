@@ -14,6 +14,74 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Nonstore retailers and parking excluded everywhere; solo massage in SF
+
+- **A full sweep of every city's mapped categories found the remaining problem
+  was definitional, not a privacy carve-out.** Ranking every classification by
+  personal-name-plus-residential-address signal (rather than only checking the
+  three codes already named) surfaced NAICS **454 "Nonstore retailers"** -
+  electronic shopping, mail-order, direct selling, vending operators, fuel
+  dealers. NAICS itself calls these nonstore; the `45` retail prefix in
+  `NAICS_GROUPS` had been pulling in the whole family. They were 10.1% of Los
+  Angeles's pins, 9.0% of San Diego's and 1.7% of San Francisco's, and `454390`
+  (direct selling) was the largest remaining group of mapped personal names at
+  residential addresses. Excluding it makes the project more correct about its
+  own subject and removes the exposure as a side effect - an easier thing to
+  justify than a privacy exception.
+- **Two national exclusions, as `NAICS_EXCLUDE_PREFIXES` in `naics.py`, applied
+  inside `naics_group()` so they win over `NAICS_GROUPS`:** `454` (above) and
+  `81293` parking lots and garages. Parking was a **scope** call, not a privacy
+  one (~4% residential): a parking trip is planned rather than incidental
+  station foot traffic, so it sits outside this project's question. A sibling
+  project had already excluded parking on the same reasoning, which the user
+  confirmed. It was 888 pins in Los Angeles, 637 in San Francisco, 104 in San
+  Diego.
+- **San Francisco: 812990 excluded** (`NAICS_EXCLUDE_CODES` in its config, same
+  printed-filter pattern as Los Angeles). Same code number as LA's exclusion but
+  a different decision: San Francisco's licence data labels it "SOLO MASSAGE
+  ESTABLISHMENT", not the generic "All Other Personal Services". 414 mapped
+  pins, 31 (7%) with a person-like name at a residential address - the highest
+  residential share of any category there, and a sensitive category (a sole
+  operator working from home). Small share of the total, so the loss is marginal.
+- **Counts after the rebuild.** San Diego 12,886 -> 11,270 available,
+  2,971 -> 2,600 pins, map 1.0 -> 0.9 MB. San Francisco 20,067 -> 18,242
+  available, 13,874 -> 12,625 pins, map 2.6 -> 2.4 MB. Los Angeles 70,168 ->
+  61,208 available, 17,257 -> 14,632 pins, map 4.0 -> 3.5 MB (5.6 MB before any
+  of this work, so the open map-size item is largely resolved). Chicago is
+  untouched: it uses its own licence taxonomy. Los Angeles geocoding re-ran on
+  4,594 addresses, 98.6% matched, 77 unrecovered (0.1%).
+- **Exposure after:** person-like name at a residential address fell to 850
+  (5.49% of mapped rows) in Los Angeles from 1,070, and to 201 (1.48%) in San
+  Francisco from 249. Chicago 12 (0.09%) and San Diego 1 unchanged. The residual
+  is now spread thinly across ordinary storefront categories (general
+  merchandise, restaurants, beauty salons) rather than concentrated in one code,
+  which is the shape expected from sole traders legitimately trading under their
+  own names.
+- **Two measurement corrections worth recording, because the first pass was
+  wrong.** (1) The "looks like a person" regex flags 17-23% of pins in *every*
+  city and *every* category, including full-service restaurants and taverns -
+  that is the heuristic's false-positive floor (trade names that read like
+  people), not exposure, and it must only be used intersected with a residential
+  signal. (2) The residential test originally counted `STE`/`SUITE` alongside
+  `APT`, which reported Los Angeles jewellery stores at 42% "residential"; they
+  are downtown suites in the jewellery district. Splitting commercial from
+  residential indicators dropped that category to 6% and moved the real offender
+  to the top of the list.
+- **San Diego, checked as asked and left in.** Its address text cannot carry the
+  signal: `address_suite` is populated on 1,356 of 3,117 mapped rows but holds
+  bare values ("A", "101") with no APT/STE token, so the 0.04% reading is a
+  measurement gap, not a clean bill of health. Its better signal is
+  `ownership_type`: 1,298 of 3,117 mapped rows are SOLE proprietorships, and 903
+  (29%) display a name identical to the owner's. That is materially different
+  from Los Angeles: San Diego's `dba_name` is never blank, so nothing was
+  substituted by the pipeline - those owners chose to register their own name as
+  the trading name, a deliberate public commercial act. Left in on that basis;
+  revisit if a better residence signal appears.
+- **`docs/excluded_categories.md`** now lists every exclusion, per city, in
+  plain prose written to be published alongside the maps, including what is kept
+  and why, the honest limits of the method, and an offer to remove a listing on
+  the owner's request. Still open: the dataset licences and terms of use.
+
 ### 2026-09-21 - Privacy line: excluded NAICS 812990 in Los Angeles, and a standing exposure check
 
 - **The principle, decided here and standing for every city: publish public

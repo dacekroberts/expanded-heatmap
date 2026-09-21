@@ -80,10 +80,9 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Data quality follow-ups
 
-- [ ] Los Angeles map size: now **4.0 MB** (was 5.8) after the 812990 exclusion
-  on 2026-09-21, against 2.6 MB for San Francisco. Decide whether that is small
-  enough or whether to thin the whole-city heat layer (it holds all ~70k points)
-  before deploying.
+- [x] Los Angeles map size: **3.5 MB** after the 2026-09-21 exclusions (was
+  5.8), against 2.4 MB for San Francisco. Largely resolved; revisit only if a
+  deploy shows it is still slow.
 - [ ] Los Angeles: ~9% of registry rows have no NAICS code; consider whether
   the caveat needs to be visible on the city page.
 
@@ -92,19 +91,23 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   whether to include them.
 - [ ] San Francisco: only ~37% of rows carry a NAICS code; consider whether
   the caveat needs to be visible on the city page.
-- [ ] Catch-all classification codes need a per-city verdict (see
-  `pipeline/taxonomies/naics.py`). **Done: Los Angeles 812990, excluded
-  2026-09-21** on data-quality and privacy grounds. Open:
-  - Los Angeles 454390 "Other Direct Selling Establishments" - now its largest
-    person-like group (419 pins); direct selling is inherently not a storefront.
-    The strongest remaining candidate.
-  - Los Angeles 812930 (parking) and 459999, still unsampled.
-  - San Francisco: 113 person-like 812990 pins, 14.7% of person-like rows at an
-    address with a unit indicator.
-  - San Diego: 27 pins on the `81299` prefix (its codes are variable length, so
-    match the prefix, not the 6-digit code); 0.1% unit share.
-  - Chicago: its own license catch-alls; person-like pins are trade names in
-    storefront types with a 0.8% unit share - the benign shape.
+- [ ] **Surface `docs/excluded_categories.md` in the app** (a page, or a link
+  from each city page). It is written to be published as-is; right now it is
+  only in the repository. Also decide whether each city page should name its own
+  exclusions.
+- [x] Catch-all and non-storefront classifications: swept 2026-09-21 and
+  resolved. Excluded everywhere: NAICS `454` (nonstore retailers) and `81293`
+  (parking). Excluded per city: 812990 in Los Angeles and in San Francisco (for
+  different reasons - see `DECISIONS.md`). Kept: 459999 (~70% plausible
+  storefronts). San Diego left in, with its measurement limit recorded. All
+  listed in `docs/excluded_categories.md`. Remaining open questions:
+  - A residual ~850 rows in Los Angeles and ~201 in San Francisco carry a
+    person-like name at a residential address, spread across ordinary storefront
+    categories. Probably sole traders named after themselves (legitimate), but
+    unverified row by row.
+  - San Diego has no usable residence signal in its address text; its
+    `ownership_type` (1,298 SOLE of 3,117 mapped) is the better proxy if this is
+    revisited.
 - [ ] **Run `python scripts/check_personal_exposure.py` before publishing any
   city**, and after any change to a city's step 2 or taxonomy. It is a
   pre-publish gate in `CLAUDE.md` and `add-city` Step 7.

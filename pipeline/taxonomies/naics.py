@@ -1,6 +1,6 @@
 """NAICS taxonomy - the mapping used by every city whose open-data export
-carries a NAICS field (San Diego and San Francisco so far; Los Angeles is
-next).
+carries a NAICS field (San Diego, San Francisco and Los Angeles so far;
+Chicago uses its own licence taxonomy instead).
 
 What is national and reusable: NAICS_GROUPS below - which broad NAICS
 prefixes count as storefront commercial, and which shared bucket each feeds.
@@ -32,14 +32,40 @@ NAICS_GROUPS = [
     ("Personal services", ("812",)),
 ]
 
+# Prefixes carved back OUT of the groups above, for every city, because they are
+# not storefronts by their own definition - not a privacy carve-out but a
+# correction to what "storefront commercial density" means. A broad prefix match
+# is what swept them in. Decided 2026-09-21; see DECISIONS.md and
+# docs/excluded_categories.md.
+#
+#   454    Nonstore retailers - electronic shopping, mail-order, direct selling,
+#          vending-machine operators, fuel dealers. NAICS itself calls these
+#          "nonstore", yet the "45" prefix pulled them into Retail. They were
+#          10.1% of Los Angeles's pins, 9.0% of San Diego's, 1.7% of San
+#          Francisco's, and 454390 (direct selling) was the largest remaining
+#          group of mapped personal names at residential addresses.
+#   81293  Parking lots and garages. A parking trip is planned, not incidental
+#          foot traffic from a station, so it sits outside this project's
+#          question. (Excluded on the same reasoning in a sibling project.)
+#          Low privacy signal (~4% residential) - this one is about scope.
+#
+# A prefix here always wins over NAICS_GROUPS, so "454" beats "45" and "81293"
+# beats "812". Anything added here changes every NAICS city's counts: re-run the
+# pipelines, the drift check and scripts/check_personal_exposure.py.
+NAICS_EXCLUDE_PREFIXES = ("454", "81293")
+
 # Individual 6-digit NAICS codes worth hand-sampling per city before trusting
 # the prefix filter alone. Each is a national NAICS catch-all (it sweeps a
 # large, undifferentiated bucket into its prefix), so the *need to check* is
 # national even though the *verdict* varies by city:
 #
 #   812930  Parking Lots and Garages
-#     A planned trip decision, not incidental foot traffic - likely to be
-#     excluded everywhere, but unverified for the cities built so far.
+#     RESOLVED 2026-09-21: excluded for every city, via the 81293 prefix in
+#     NAICS_EXCLUDE_PREFIXES above. A parking trip is planned rather than
+#     incidental station foot traffic, which puts it outside this project's
+#     question; a sibling project excluded it on the same reasoning. It was
+#     888 mapped pins in Los Angeles, 637 in San Francisco, 104 in San Diego.
+#     This was a scope call, not a privacy one (~4% residential).
 #   812990  All Other Personal Services
 #     A prior single-city hand-sample (Seattle, 40 rows) found ~90%
 #     non-storefront (home-based sole proprietors, professional offices,
@@ -51,18 +77,32 @@ NAICS_GROUPS = [
 #     of those had an APT/UNIT/STE/# in the street address. Excluded on two
 #     grounds - mostly not a storefront, and a personal-name/home-address
 #     exposure on a public map. Set in that city's NAICS_EXCLUDE_CODES.
-#     San Diego and San Francisco: still unsampled, still included (San
-#     Diego's codes are variable length, so match on the 81299 prefix there,
-#     not the 6-digit code).
+#     San Francisco: EXCLUDED (2026-09-21). Its own licence data labels this
+#     code "SOLO MASSAGE ESTABLISHMENT" rather than the generic name: 414
+#     mapped pins, 31 (7%) with a person-like name at a residential address -
+#     the highest residential share of any category there, and a sensitive one
+#     (a sole operator working from home). Set in that city's
+#     NAICS_EXCLUDE_CODES.
+#     San Diego: still included, and its residual is small but NOT measurable
+#     the same way - its address_suite holds bare values ("A", "101") with no
+#     APT/STE token, so address text cannot flag a residence there. Its better
+#     signal is ownership_type: of 3,117 mapped rows, 1,298 are SOLE
+#     proprietorships and 903 (29%) display a name identical to the owner's.
+#     That is a dba the owner chose to register under their own name - a
+#     deliberate public commercial act - not a fallback the pipeline
+#     substituted, so it was left in. Revisit if a better residence signal
+#     appears. (Its codes are variable length: match the 81299 prefix there,
+#     not the 6-digit code.)
 #   459999  All Other Miscellaneous Retailers
 #     The same prior hand-sample (25 rows) found ~70% plausible walk-in
 #     storefronts (niche independent shops without their own code) and kept
 #     it. Also worth re-sampling per city.
 #
-# Neither built city has been hand-sampled yet (see PLAN.md). When a city is
-# sampled, record the verdict and sample size in DECISIONS.md and add
-#   NAICS_STOREFRONT_EXCLUDE = {code: (label, reasoning + sample size)}
-# here, applied in that city's step 2.
+# Verdicts so far are recorded per code above. When a city is sampled, record
+# the sample size and reasoning in DECISIONS.md, add the code to that city's
+# NAICS_EXCLUDE_CODES in its own config.py (applied as a printed filter in its
+# step 2), and list it in docs/excluded_categories.md. Use
+# NAICS_EXCLUDE_PREFIXES above only for exclusions that hold for every city.
 NAICS_CATCHALL_CODES_TO_CHECK = {
     "812930": "Parking Lots and Garages",
     "812990": "All Other Personal Services",
@@ -87,8 +127,11 @@ def legend_label(bucket: str) -> str:
 
 def naics_group(code: str):
     """A NAICS code -> its bucket name, or None if it's not a tracked
-    storefront category."""
+    storefront category (including the non-storefront prefixes carved out by
+    NAICS_EXCLUDE_PREFIXES, which win over NAICS_GROUPS)."""
     code = str(code)
+    if code.startswith(NAICS_EXCLUDE_PREFIXES):
+        return None
     for name, prefixes in NAICS_GROUPS:
         if code.startswith(prefixes):
             return name

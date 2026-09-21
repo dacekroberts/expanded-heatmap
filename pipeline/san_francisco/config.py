@@ -118,6 +118,19 @@ COUNTY_BOUNDARY_NAME = "San Francisco"
 # --- Business filtering ------------------------------------------------
 
 CITY_KEEP = "San Francisco"
+# NAICS catch-all codes excluded for THIS city (the verdict is per city - see
+# NAICS_CATCHALL_CODES_TO_CHECK in pipeline/taxonomies/naics.py). Applied as its
+# own printed filter in step 2.
+#
+#   812990  In San Francisco's own licence data this code is labelled "SOLO
+#     MASSAGE ESTABLISHMENT", not the generic "All Other Personal Services".
+#     Sampled 2026-09-21: 414 mapped pins, of which 31 (7%) carried a
+#     person-like name at an address with a residential indicator - the highest
+#     residential share of any category in this city. A sole operator working
+#     from home is a sensitive thing to pin on a public map, and the category is
+#     a small share of the total, so it is excluded here.
+NAICS_EXCLUDE_CODES = {"812990"}
+
 TAXONOMY_SYSTEM = "naics"
 # The raw export's own classification column (self-reported by the
 # business). Step 2 renames it to the taxonomy's VALUE_COLUMN, then
