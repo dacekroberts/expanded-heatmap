@@ -238,6 +238,43 @@ American geoportals were confirmed to exist but **not** confirmed to carry
 railway station layers — which is the "a dataset title is not evidence" trap,
 and the reason none of them is recorded as a pass here.
 
+#### Taiwan, probed 2026-09-21 — business leg MEASURED
+
+`data.gov.tw`'s catalogue API answers **GET by dataset id without a key**;
+only search needs one (`ER0001: API Key錯誤`).
+
+**`商業登記(依營業項目別)`** (dataset `102985`, Ministry of Economic Affairs),
+downloaded and parsed — **45,819 rows for the single category 其他餐飲 (other
+food service)**, monthly updates:
+
+| Column | Content |
+|---|---|
+| `統一編號` | unified business number |
+| `商業名稱` | business name |
+| **`商業地址`** | **premises address**, e.g. `高雄市鼓山區濱海一路２３號１樓` — down to floor |
+| `登記狀態` | `核准設立` (approved) / `歇業／撤銷` (closed or revoked) — so active filtering works |
+
+**It is premises-level.** 商業登記 registers sole proprietorships and
+partnerships **at their operating address**, unlike 公司登記 (dataset `13861`),
+which is a company register with the registered-office defect.
+
+**Three costs, none fatal:**
+
+- **No coordinates.** Address only, so Taiwan needs a geocoding leg — the
+  Toronto problem. TGOS (內政部) is the candidate; NLSC is down.
+- **Split one dataset per category** (`依營業項目別`), so coverage is an
+  assembly job — `multi-source-city`, at national scale.
+- **Full-width numerals** in addresses (`２３號`) will need normalising before
+  any geocode match. A quiet trap of exactly the kind Toronto's title-case
+  `ADDRESS_FULL` was.
+
+**Transit leg still unprobed.** `tdx.transportdata.tw` answers 200; whether it
+serves static station and **line geometry**, and whether it is registration-
+gated, is unknown. That is Taiwan's open question.
+
+Taiwan's food-hygiene register (`食品業者登錄資料集`, dataset `8938`) is
+separately available as CSV/JSON/XML from `data.fda.gov.tw`.
+
 #### A refinement the Korea probe produced: stations are not lines
 
 Japan's N02 carries **both** — 10,235 station points *and* 21,932 line
