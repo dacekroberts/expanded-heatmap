@@ -81,6 +81,26 @@ schema verification. Do this for every candidate before scaffolding:
    with no rail of their own**
    (TransLink's carries Surrey's SkyTrain stations). Commuter rail
    (`route_type 2`) is not counted, matching every city built so far.
+
+   **Check `feed_info.txt` for a validity window, on the feed you will
+   actually use.** WMATA declares `feed_start_date`/`feed_end_date` **ten days
+   apart** - the shortest here, short enough that a stored copy goes stale
+   inside a fortnight. Where the window is short, that city's
+   `fetch_sources.py` must re-check `feed_end_date` on EVERY run, including
+   runs that skip the download, and treat an expired copy as an error rather
+   than a warning. The failure mode is silent: an expired feed still parses,
+   still has the right station count, and still builds a map - it is just not
+   the current network. See `pipeline/washington_dc/fetch_sources.py`. (This is
+   the same field `screen_rail.py` prints for staleness; the difference is that
+   screening reads it once and a build must re-read it forever.)
+
+   **If the feed needs a key** - WMATA is the only one so far, returning 401
+   unauthenticated - read it from an environment variable, exit with
+   registration instructions when absent, and **never echo it, not even in an
+   error message**, so the 401 path prints "the key was rejected" rather than
+   the key. It is the agency's property and stays out of the repo. Record in
+   `docs/data_sources.md` that the city cannot be rebuilt from a clean checkout
+   without it.
 3. **City boundary polygon.** Find a real GIS boundary layer (a regional
    MPO/COG portal is often the source, e.g. SANDAG). Not optional: San
    Diego's Trolley serves six other cities and 16 of 63 stations were
@@ -111,7 +131,14 @@ hides the fact that dataset IDs get retired.
 
 4. **Licence and required notices, per source, in the same pass.** A city is
    not verified until this is recorded in `docs/data_sources.md` alongside its
-   endpoint. "It's on a government open-data portal" is not an answer: the
+   endpoint. **Use the `read-licence` skill** - it carries the procedure plus
+   the three corrections that motivated it, each of which came from not opening
+   a page an earlier review had merely cited. The two steps most easily skipped:
+   grepping the dataset page for terms incorporated **by reference**
+   ("constitutes acceptance of the license, **the City's terms of use** ..." is
+   how Philadelphia's prohibition was hiding behind a licence that forbids
+   nothing), and asking of every document whether its language describes **web
+   pages or data**. "It's on a government open-data portal" is not an answer: the
    2026-09-21 review found terms ranging from public-domain dedications to a
    feed that forbids modifying its data, and both extremes inside Los Angeles
    (its business registry is CC0; its GTFS is the most restrictive licence in
@@ -148,6 +175,21 @@ hides the fact that dataset IDs get retired.
    are honoured without argument - covers new cities automatically. Do not
    weaken it for a source with tighter terms; the answer to tight terms is to
    record them and comply, not to hedge the commitment.
+
+**THE DOWNLOAD BOUNDARY IS THE PRIVACY CONTROL, where the source lets you
+choose columns.** Do not download a personal-name column and filter it later -
+omit it from the request, so it is never on the machine to leak into a
+processed file, a cache or a commit. Washington D.C.'s ArcGIS query names 16
+`outFields` and omits eight that exist and are populated on tens of thousands
+of rows: `BUSINESSOWNERFIRSTNAME`, `BUSINESSOWNERLASTNAME`,
+`BUSINESSOWNERMIDDLENAME`, `AGENTFIRSTNAME`, `AGENTLASTNAME`,
+`AGENTMIDDLENAME`, `AGENTENTITY` and **`BILLINGADDRESS`** - that last being a
+mailing address, i.e. frequently a home. Boston does the same in SQL; Miami
+omits `OWNERNAME` and every `MAIL*` field.
+
+Then **assert in step 2 that they stayed absent**, and have the fetch script
+exit if the server returns a column it did not ask for. The assertion is what
+makes the omission a guarantee rather than an intention.
 
 **One source need not be enough - and for most large US cities it is not.**
 Pull the category *distribution* here, not just the schema, and read it against

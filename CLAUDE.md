@@ -74,10 +74,14 @@ colliding. A single session does all of it and can ignore that file.
   `docs/data_sources.md`, "Notices this project MUST display when published",
   and those are obligations rather than courtesies.
 - **Record a new data source's licence when you add it**, in
-  `docs/data_sources.md`. A government open-data portal is a reason to expect
-  permissive terms, not evidence of them: LA Metro's GTFS forbids modifying its
-  data while LA's business registry is CC0, and New York City's datasets
-  declare no licence at all.
+  `docs/data_sources.md`, using the **`read-licence` skill**. A government
+  open-data portal is a reason to expect permissive terms, not evidence of
+  them: LA Metro's GTFS forbids modifying its data while LA's business registry
+  is CC0, and New York City's datasets declare no licence at all. The skill
+  exists because every licence correction in this project came from not opening
+  a page an earlier review had merely cited - and the step most easily skipped
+  is checking what a dataset page incorporates **by reference**, which is how
+  Philadelphia's prohibition hid behind a licence that forbids nothing.
 - **A removal request is honoured, not argued** - from a data publisher, a
   business owner, or anyone raising a privacy concern about a specific pin.
   Take it down first (the layer, or the whole city, as the request requires),

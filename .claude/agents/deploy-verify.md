@@ -187,6 +187,50 @@ This is the opposite of the usual advice in this file (DOM over screenshots),
 and it is specific to on-map label positions. For colour, contrast and text
 presence, computed styles remain better than screenshots.
 
+## Three ways this app defeats a DOM check
+
+Learned 2026-09-21, each after a check reported the wrong thing.
+
+### A collapsed `st.expander` is not in the DOM
+
+Streamlit keeps a collapsed expander's contents out of the document entirely.
+So "is this text present?" and "can a reader see this text?" are different
+questions, and a `read_page` grep answers neither on its own.
+
+This mattered legally, not cosmetically: the five mandatory source notices were
+briefly placed inside a collapsed expander, which meant they were **absent**
+until a reader clicked. Chicago's terms require its disclaimer "at the site
+where the software application ... can be accessed", and this project's own rule
+for the OSM attribution is that it must not sit "beneath UI, behind toggles, or
+off-screen". **When verifying a required notice, confirm it is present with the
+page in its default state** - do not expand anything first.
+
+### On the DEPLOYED site, DOM probes come back empty while the page renders
+
+Against `*.streamlit.app`, `document.body.innerText` has returned 0 characters
+and `querySelectorAll('canvas')` 0 matches on a page that a screenshot shows
+fully rendered - four times in one session. Do not read that as "still
+booting", and do not report a deployed page as broken on a DOM probe alone.
+
+**On the hosted site, screenshot first and treat `innerText` as unavailable.**
+Locally (`localhost`/`127.0.0.1`) DOM probes work normally, so this is a
+hosted-only rule.
+
+### Identify the default theme BEFORE measuring any colour
+
+The maps open in **dark** mode, where `map_common.py` inverts the tile pane but
+*brightens* the line strokes (`brightness(1.55) saturate(0.9)`). Both sides of
+any contrast comparison therefore move, and in opposite directions.
+
+A colour measured against the light basemap alone produced a recommendation
+that was exactly backwards: WMATA's grey Silver Line scores Delta-E 22.0
+against the light tiles (the weakest in the project) but 75.4 in dark mode,
+while the "fix" of darkening it scored 41.0 light and **47.2 dark** - making it
+the worst-contrast line in the city in the mode every reader sees first.
+
+**Measure every mode a reader can reach, and say which is the default.** The
+theme toggle is in the map's top-right.
+
 ## Guardrails
 
 - Never leave a server running, even on a failure path.
