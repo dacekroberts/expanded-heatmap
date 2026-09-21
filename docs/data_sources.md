@@ -197,6 +197,42 @@ The maps render **OpenStreetMap** tiles, fetched directly from
   decision already open in `PLAN.md` as "tile provider"; it should be settled
   deliberately before launch rather than by default.
 
+## Commitment: removal requests are honoured, not argued
+
+Every licence reviewed here enforces the same way. Chicago's terms say the
+city "may require a user of this data to terminate any and all display,
+distribution or other use"; Open NY says the State may require you, "by
+providing you with a notice in writing", to cease using or displaying its
+content; LA Metro says that on termination you "shall immediately remove the
+Transport Information and all references to it". The remedy contemplated
+throughout is a request to stop.
+
+**This project commits, in advance, to honouring such a request.** Stated so
+that it is a standing position rather than a decision made under pressure:
+
+1. **If a data publisher asks this project to stop displaying its data, it
+   will stop.** The affected layer, or the whole city, comes down. No case
+   will be argued first, no justification will be requested, and compliance
+   will not be made conditional on the publisher explaining itself.
+2. **If a business owner asks for their listing to be removed, it will be
+   removed** — see `excluded_categories.md`, which says the same thing to the
+   people it concerns. They do not have to give a reason.
+3. **If anyone raises a privacy concern about a specific pin**, it is treated
+   as a removal request under point 2 and actioned first; any disagreement
+   about whether the concern was well-founded is separate from taking the pin
+   down.
+4. **A request is honoured even if this project believes it is in the right.**
+   The licence review found nothing forbidding what is built here, and that
+   conclusion does not change the answer to a request. Being permitted to
+   display something is not a reason to insist on displaying it.
+5. **Removal is the immediate action; the reasoning gets recorded afterwards**
+   in `DECISIONS.md`, with what was removed and who asked, so the trail stays
+   honest.
+
+This is not a legal position and it does not waive or create anything. It is
+a statement of how this project behaves, published because a reader who might
+want something removed should be able to see it without asking first.
+
 ## Notices this project MUST display when published
 
 This is the operative output of the licence review: three sources require

@@ -61,6 +61,15 @@ the process the built cities actually followed - and the `scaffold-city` skill
   permissive terms, not evidence of them: LA Metro's GTFS forbids modifying its
   data while LA's business registry is CC0, and New York City's datasets
   declare no licence at all.
+- **A removal request is honoured, not argued** - from a data publisher, a
+  business owner, or anyone raising a privacy concern about a specific pin.
+  Take it down first (the layer, or the whole city, as the request requires),
+  then record what was removed and who asked in `DECISIONS.md`. Do not ask the
+  requester to justify themselves, and do not weigh it against the fact that
+  the licence review found nothing forbidding what is published: being
+  permitted to display something is not a reason to insist on it. The standing
+  commitment is published in `docs/data_sources.md` and
+  `docs/excluded_categories.md` - keep those two consistent with each other.
 - **Ridership and deep analysis are out of scope** until asked (see
   `docs/project_context.md`). Flag scope additions rather than building
   them.

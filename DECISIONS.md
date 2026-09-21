@@ -14,6 +14,36 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - A standing commitment to honour removal requests
+
+- **Checked whether the agencies showcase third-party work, and they do not.**
+  The idea was to find positive precedent for how publishers interpret their
+  own terms - stronger evidence than the absence of takedowns, which proves
+  nothing because every licence here enforces by private written notice and
+  small projects do not publicise receiving one. It was close to a dead end:
+  the MTA's apps page lists only its own two apps, LA Metro's developer site
+  shows only its own experimental tools, and CTA has no gallery. What the
+  search did yield is each agency's own framing of intent - Metro "invite[s]
+  you to use this information to help us improve *your* system"; CTA's
+  Developer Center launch describes enabling third parties to build
+  applications "designed to improve travel". Supportive context, not evidence,
+  and recorded as such.
+- **The useful conclusion was about the shape of the risk, not the precedent.**
+  Every licence reviewed contemplates the same remedy: a request to stop
+  displaying the data. Not damages - removal. That bounds the realistic
+  downside of this project to an email asking for a layer to come down.
+- **So the protection is a commitment rather than a search for reassurance.**
+  Published in `docs/data_sources.md` and, in the form that speaks to business
+  owners, in `docs/excluded_categories.md`: a removal request from a
+  publisher, a business owner, or anyone raising a privacy concern about a
+  specific pin is honoured without argument and without the requester having
+  to give a reason; the pin, layer or city comes down first and the reasoning
+  is recorded afterwards. Explicitly including the case where the project
+  believes it is in the right - "being permitted to display something is not a
+  reason to insist on displaying it" - because that is the case where a
+  commitment made in advance actually does work. Also a `CLAUDE.md` invariant,
+  so it binds future sessions rather than living only in published prose.
+
 ### 2026-09-21 - Licence review closed: every source established but one
 
 - **Source-by-source review of all 19 inputs** (8 business registries, 5 GTFS

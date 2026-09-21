@@ -178,3 +178,14 @@ Every business shown is drawn from a public municipal registry and is displayed
 with its registered name and address location only. If you are the owner of a
 listing and would like it removed, that is a reasonable request and it will be
 honoured.
+
+**You do not have to give a reason, and the request will not be argued.** The
+listing comes down first; anything else is a separate conversation. The same
+applies if you are not the owner but believe a particular pin identifies a
+person rather than a business — raise it and it will be treated as a removal
+request, not as a question to be debated first.
+
+The same commitment is made to the agencies whose data this project uses: if a
+publisher asks for its data to stop being displayed, it stops. That is written
+out in full in `data_sources.md`, under "Commitment: removal requests are
+honoured, not argued".
