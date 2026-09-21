@@ -174,13 +174,17 @@ Read `CLAUDE.md` for the project rules. Beyond it:
   with a broad `git add docs`.
 - **Pacing.** Check usage before proposing big work
   (`mcp__ccd_session_mgmt__get_usage`, load via ToolSearch). The user holds work
-  when a limit is close rather than leaving half-built state; the 5-hour limit is
-  the usual constraint. Give effort estimates as relative guesses, not measurements.
-  As of 2026-09-21: Pro plan with a 5-hour and a weekly window; the weekly window
-  resets **Sundays about 19:00 UTC** (next: 2026-09-27); extra usage is **disabled**,
-  so reaching 100% stops work instead of billing. (The previous session's two saved
-  memory notes, on pacing and on recommend-then-confirm, are fully reflected in this
-  section; there is no need to import them.)
+  when a limit is close rather than leaving half-built state. Give effort estimates
+  as relative guesses, not measurements. **Read the live limits from the usage tool;
+  do not trust numbers in this file.** State as of 2026-09-21: the user is now on the
+  **Max** plan (they said so; the usage tool still reported "Pro" at that moment, so
+  it may lag). Its windows are a 5-hour limit, a weekly limit for all models and a
+  weekly per-model limit; the weekly windows reset **Sundays about 19:00 UTC**
+  (next: 2026-09-27); extra usage was **disabled** (reaching 100% stops work instead
+  of billing). The earlier advice that the 5-hour window was the usual constraint was
+  learned on the previous plan and may no longer hold. (The previous session's two
+  saved memory notes, on pacing and on recommend-then-confirm, are fully reflected in
+  this section; there is no need to import them.)
 - **Servers.** Start test servers with `mcp__Claude_Browser__preview_start`
   (`streamlit-app-lean` on 8812, `heatmap-static` on 8813, defined in the
   gitignored `.claude/launch.json`); stop them when asked and confirm the ports
