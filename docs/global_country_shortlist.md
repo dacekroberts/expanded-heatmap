@@ -207,6 +207,37 @@ move back into the running pending a national-mapping-agency probe:
 and Korea both flipped on exactly this, the prior should be that several of
 them flip too.
 
+#### Sweep status, 2026-09-21 — routing established, schemas not yet
+
+Reachability tested; **no schema has been verified for any of the eight**, so
+every row below is a *route*, not a finding.
+
+| Host | Result |
+|---|---|
+| `tdx.transportdata.tw` | **200** — Taiwan's transport exchange is live |
+| `data.gov.tw` (and dataset `102985`) | **200** |
+| `www.csdi.gov.hk` | **200** — Hong Kong's official spatial data infrastructure, "free download, machine-readable" |
+| `data.gov.hk` | 302 |
+| `portal.nlsc.gov.tw` | **000** — down; TDX is the route for Taiwan, not NLSC |
+
+**Taiwan is the one worth doing first**, and the reason is business data rather
+than transit: it is **the only one of the eight with plausible premises-level
+business data *and* a metro**. `data.gov.tw` carries 商業登記 (commercial
+registration) exports with business addresses, so a transit flip there could
+move a whole country rather than just correcting a table. Expect TDX to be
+registration-gated, like Korea's and WMATA's.
+
+**Hong Kong is the opposite case and should be deprioritised despite CSDI being
+live.** Its business data is the FEHD food-licence register — **food only**,
+so Hong Kong is a two-bucket city at best whatever its rail data shows. Fixing
+its transit would not fix its ceiling.
+
+**Still entirely unprobed:** Indonesia (BIG), Malaysia (JUPEM), Israel
+(`data.gov.il`), Peru (IGN/IDEP), Colombia (IGAC), Brazil (IBGE). The Latin
+American geoportals were confirmed to exist but **not** confirmed to carry
+railway station layers — which is the "a dataset title is not evidence" trap,
+and the reason none of them is recorded as a pass here.
+
 #### A refinement the Korea probe produced: stations are not lines
 
 Japan's N02 carries **both** — 10,235 station points *and* 21,932 line
