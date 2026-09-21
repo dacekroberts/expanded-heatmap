@@ -483,6 +483,50 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   affected today; D.C. would be. Check the city pages, the Overview and the
   map legends, and prefer "as recorded by <agency> on <date>" phrasings over
   anything implying completeness. Both texts are in `docs/licenses/`.
+- [ ] **Decide the agency-branding question: official route colours, AND the
+  line names beside them.** Full detail and the clause wording per agency are
+  in `docs/data_sources.md` (item 5c, and the table under the GTFS notes).
+  Recorded here because it is a permission question, not implementation work,
+  and it was previously visible only in the provenance doc.
+  - **It affects five of the seven built cities**, not the two first assumed:
+    San Diego (MTS), Los Angeles (LA Metro), Chicago (CTA), New York (MTA) and
+    Philadelphia (SEPTA). San Francisco and Miami are out of scope - both
+    already draw this project's own palette.
+  - **Start with MTS, not MTA.** MTS's is the tightest wording in the project -
+    its trademarks "may not be used in association with GTFS Data", a flat
+    prohibition rather than an application process - while MTA's merely needs a
+    free application. The first agency found is not the strictest.
+  - **Two halves, and only one is cheap.** Colours are a free choice: each
+    city's values live in one dict, and the project has already departed from an
+    official palette twice on its own initiative (San Francisco throughout,
+    Staten Island Railway for contrast). **Line names are not** - a standing
+    invariant requires every drawn line to carry its real public name on the map
+    and in the legend, so an answer covering names as well as colours is a
+    materially harder change than a palette swap. Know that before asking.
+  - Nothing in the project reproduces a logo, wordmark or route-bullet artwork,
+    which is the part every one of these clauses most clearly covers.
+- [ ] **Settle the three "what does silence mean?" licence questions.** All
+  three are sources that neither grant nor forbid reuse, and all three are
+  recorded unresolved rather than read generously. Detail in
+  `docs/data_sources.md`, item 5b.
+  - **Miami-Dade is the weakest paperwork in the project and should go first.**
+    Its business registry and boundary layer carry an `licenseInfo` that is
+    purely an accuracy disclaimer, and its GTFS ships **no `feed_info.txt` at
+    all** with no locatable developer terms. It is also the only one of the
+    three where **no agency document exists to read**, so settling it likely
+    means asking the County rather than reading anything - which makes it the
+    longest lead time, not the smallest job.
+  - **SEPTA's trademark clause** - whether line names and official colours
+    count as trademarks being "used", and whether a portfolio site is
+    "commercial or profit-making". Overlaps the branding item above.
+  - **The "City of Philadelphia License"** reserves all database rights while
+    granting nothing explicitly and requiring no notice. Same shape as the NYC
+    question with the opposite paperwork: NYC is *forbidden* from imposing a
+    licence, Philadelphia has imposed one that says only "we keep our rights".
+  - Worth stating plainly: **nothing found in any of the three forbids what
+    this project does.** These are questions about the absence of permission,
+    not about a prohibition, which is why they gate a public deploy rather than
+    the builds.
 - [ ] **Decide whether to make the repo private before the first full deploy.**
   Raised 2026-09-21 on survivability grounds, not compliance alone: four
   transit licences (WMATA §9, LA Metro, SEPTA, MassDOT) are revocable without
