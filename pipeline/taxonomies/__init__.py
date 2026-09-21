@@ -54,6 +54,10 @@ TAXONOMY_MODULES = {
     # retired into it on 2026-09-21 when Step 0 showed the DCA licence file is
     # a regulated-activity list, not a business registry. See new_york.py.
     "new_york": "pipeline.taxonomies.new_york",
+    # Miami-Dade's Local Business Tax CATGRYNAME. Its file has a NAICS column
+    # that is NULL on every row, so NAICS is unavailable despite being in the
+    # schema - see miami_catgryname.py.
+    "miami_catgryname": "pipeline.taxonomies.miami_catgryname",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

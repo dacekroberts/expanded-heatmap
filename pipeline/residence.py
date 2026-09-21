@@ -72,6 +72,22 @@ def looks_personal(name) -> bool:
             and not _NOT_A_NAME.search(s.upper()))
 
 
+def looks_organisational(name) -> bool:
+    """Does this name carry a positive organisation signal?
+
+    NOT the inverse of looks_personal(). That function answers "is this
+    *shaped* like a person's name", and a name can fail both: "ANDREW L LEWIS
+    TRS" is a trustee, so it is neither confidently a person (the TRS suffix
+    defeats the two-token shape test) nor confidently a company.
+
+    This exists for the case where two candidate names must be RANKED rather
+    than tested - picking the trade name out of "ANDREW L LEWIS TRS C/O MARRIOT
+    HOTEL SERVICES LLC". Preferring a side with a positive company signal gets
+    that right; asking only "which side is not a person" does not.
+    """
+    return bool(_ORG.search(str(name or "").upper()))
+
+
 # A unit designator in the BUSINESS'S OWN registered address. This is the
 # signal for the second population: people working from a FLAT, which the
 # parcel test cannot reach, because a block of flats is classified

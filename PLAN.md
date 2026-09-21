@@ -171,14 +171,22 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - Measure the in-city station share before committing: Metrorail is 98
     stations but reaches far into Virginia and Maryland, so expect an
     LA-scale boundary cut.
-- [ ] **Miami - screened 2026-09-21, needs a real Step 0.** Miami-Dade "Local
-  Business Tax" ArcGIS layer: 194,099 rows, `ACCSTATUS`, NAICS via
-  `BUSNAICSCD` (so no new taxonomy module), `CLASSDESC`/`CATGRYNAME`/`OCCDESC`,
-  real `LAT`/`LON`, and `FOLIO` parcel IDs for the residence check. Filter
-  county-wide data to the city with `MUNBUSLOC = '01 - MIAMI'`. Left to do: the
-  category distribution, the in-city count, the licence (its `licenseInfo` is
-  an as-is disclaimer), and a privacy pass - `OWNERNAME` is present and some
-  `BUSNAME` values are people ("LEON RAUL APRN").
+- [x] **Miami - BUILT 2026-09-21** as the project's first regional city; see
+  `DECISIONS.md`. 3,775 within-ring pins across 42 stations in six
+  municipalities. Follow-ups it left behind:
+  - **Its licence position is not established** - Miami-Dade's `licenseInfo` is
+    purely an accuracy disclaimer and says nothing about reuse, and its GTFS has
+    no `feed_info.txt` and no developer terms were found. Same shape as the
+    Philadelphia and NYC questions. Settle before the public deploy.
+  - **`SERVICE BUSINESS` (28,010 rows) is excluded and contains some genuine
+    repair shops**, so the map undercounts small repair and service premises.
+    Recoverable only by classifying free-text `OCCDESC` - a project of its own.
+  - A **parcel-based residence rule is available but unused**: `FOLIO` is on
+    100% of City of Miami rows and only 45.7% of the regional set, so it would
+    apply to half the map. Revisit if the coverage improves.
+  - Ring coverage is 12.6%, the lowest here, because the business set is
+    county-wide while the rail is one line plus a loop. Consider whether the
+    all-businesses toggle should be scoped to station municipalities.
 - [ ] **New Orleans - screened 2026-09-21, needs a real Step 0.** `iqay-p646`
   "Active Occupational Licenses", 16,396 rows, and the **cleanest licence of
   any candidate: CC0 1.0, explicitly declared**. Has `businesstype`,

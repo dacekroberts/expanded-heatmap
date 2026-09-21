@@ -76,6 +76,20 @@ REGISTRIES = {
                          address=("address", "unit_type", "unit_num"),
                          entity_type="legalentitytype",
                          entity_individual="Individual"),
+    # Miami never loads a registrant-name column either: OWNERNAME is populated
+    # on 100% of rows and is frequently a person, so fetch_sources.py does not
+    # download it and step 2 asserts it and every MAIL* field stay absent.
+    # There is therefore no trade/owner fallback pair to join against, and -
+    # unlike Los Angeles (68% blank dba_name) and D.C. (49%) - none is needed,
+    # because BUSNAME is present on every row. So `raw`, `trade` and `owner`
+    # are None and the fallback measure reports as structurally absent, which
+    # is a stronger statement than a low count.
+    #
+    # Its address is one free-text field, so the unit check is a regex over
+    # BUSADDR rather than a structured column the way New York's is.
+    "miami": dict(raw=None, trade=None, owner=None,
+                  processed="businesses_clean.csv",
+                  address=("address",)),
 }
 
 # Unit designators that suggest a residence, as opposed to a commercial suite.

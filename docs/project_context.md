@@ -171,6 +171,36 @@ Cities built and running end to end (pipeline, map, app page):
   own names off the pins. Its own `legalentitytype` field gives a structural
   Individual/corporate signal no other city has.
 
+- **Miami** - Metrorail plus both Metromover loops, 42 stations. **The only
+  REGIONAL map here**, and the project's first working proof of the
+  multi-jurisdiction idea Seattle is planned around. Metrorail leaves the City
+  of Miami, and everywhere else that ends the discussion - a station in another
+  city needs that city's own business data, sourced separately. Miami is the
+  exception because Miami-Dade County licenses all 34 of its municipalities in
+  ONE file, one schema, one publisher, one set of terms, so full-line coverage
+  needed no extra sources, no cross-source dedup and no second licence review.
+  Six municipalities hold stations; the boundary layer NAMES where each station
+  is rather than filtering any out, recorded in
+  `outputs/miami/station_municipalities.csv`.
+
+  Distinctive in four further ways. Its file **has a NAICS column that is null
+  on every one of 194,099 rows**, so it runs on the county's own `CATGRYNAME`
+  (`miami_catgryname`, all 150 values verified) - the first city where NAICS
+  was present in the schema and unusable in fact. It is the first city needing
+  a **premises dedup**: none of the obvious keys is a premises, because
+  `RECEIPTNO` is per row, `ACCOUNTNO` per account and `FOLIO` per *parcel* (a
+  mall is one parcel holding dozens of shops), so rows collapse on
+  name-plus-address with the taxonomy's bucket priority deciding. It has the
+  **best coordinate quality in the project** - 100% present, inside the county,
+  no placeholders - and is the only registry whose trade name is *never* blank,
+  so unlike Los Angeles and D.C. it never has to consider a registrant's name.
+  And it needs **two station rules' worth of care from one lever**: Metrorail's
+  stations are a median 1.1 km apart while the Metromover's nineteen are 235 m
+  apart and all inside a neighbour's ring, so the shared ring edges are kept
+  (Metrorail needs them) and the rings simply start switched off, as New York's
+  do. Its map is step 3; its line colours are this project's own, because
+  Miami-Dade's orange and two greens collide with the category colours.
+
 Next by ease ranking: Boston and Washington D.C., both carrying caveats.
 **Check a candidate's registry actually covers all three buckets before
 assuming one source is enough** - that assumption failed for New York, and in

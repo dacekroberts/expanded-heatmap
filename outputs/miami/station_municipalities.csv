@@ -1,0 +1,43 @@
+station,latitude,longitude,lines,municipality,nearest_station_m
+University,25.7147935,-80.2770795,Metrorail,CORAL GABLES,1613.5
+Hialeah,25.8411885,-80.27899099999999,Metrorail,HIALEAH,2001.0
+Okeechobee,25.8398555,-80.3015455,Metrorail,HIALEAH,2263.3
+Tri-Rail,25.8455,-80.2596015,Metrorail,HIALEAH,1080.2
+Palmetto,25.8433925,-80.3237885,Metrorail,MEDLEY,2263.3
+Adrienne Arsht Center,25.789456,-80.187998,Metromover Omni/Brickell Loops,MIAMI,391.9
+Allapattah,25.8087205,-80.21547699999999,Metrorail,MIAMI,1430.3
+Bayfront Park,25.773099,-80.187323,"Metromover Inner Loop, Metromover Omni/Brickell Loops",MIAMI,385.8
+Brickell,25.76324725,-80.1953685,"Metromover Omni/Brickell Loops, Metrorail",MIAMI,294.2
+Brickell City Centre,25.766888,-80.192121,Metromover Omni/Brickell Loops,MIAMI,252.5
+Coconut Grove,25.739829,-80.238885,Metrorail,MIAMI,1780.7
+College North,25.778926,-80.192085,"Metromover Inner Loop, Metromover Omni/Brickell Loops",MIAMI,235.1
+College/Bayside,25.777584,-80.189915,"Metromover Inner Loop, Metromover Omni/Brickell Loops",MIAMI,205.9
+Culmer,25.7845695,-80.20757499999999,Metrorail,MIAMI,940.3
+Douglas Road,25.7328005,-80.254852,Metrorail,MIAMI,1780.7
+Eleventh Street,25.784866,-80.19079,Metromover Omni/Brickell Loops,MIAMI,265.1
+Fifth Street,25.769165,-80.192248,Metromover Omni/Brickell Loops,MIAMI,211.2
+Financial District,25.760381,-80.192881,Metromover Omni/Brickell Loops,MIAMI,403.7
+First Street,25.775726000000002,-80.189849,"Metromover Inner Loop, Metromover Omni/Brickell Loops",MIAMI,205.9
+Freedom Tower,25.780544,-80.190567,Metromover Omni/Brickell Loops,MIAMI,214.1
+Government Center,25.775985000000002,-80.19609333333334,"Metromover Inner Loop, Metromover Omni/Brickell Loops, Metrorail",MIAMI,322.4
+Historic Overtown/Lyric Theatre,25.7810055,-80.196285,Metrorail,MIAMI,260.4
+Knight Center,25.771865000000002,-80.191377,"Metromover Inner Loop, Metromover Omni/Brickell Loops",MIAMI,148.8
+Miami Avenue,25.773391,-80.193582,Metromover Inner Loop,MIAMI,151.6
+Miami Worldcenter,25.782476,-80.190643,Metromover Omni/Brickell Loops,MIAMI,214.1
+Museum Park,25.785918,-80.187934,Metromover Omni/Brickell Loops,MIAMI,309.2
+Riverwalk,25.771051,-80.192558,Metromover Omni/Brickell Loops,MIAMI,143.8
+Santa Clara,25.795808,-80.21520100000001,Metrorail,MIAMI,674.8
+School Board,25.789376,-80.193145,Metromover Omni/Brickell Loops,MIAMI,516.1
+Tenth Street/Promenade,25.764016,-80.19256,Metromover Omni/Brickell Loops,MIAMI,294.2
+Third Street,25.772024,-80.193508,Metromover Omni/Brickell Loops,MIAMI,143.8
+UHealth Jackson,25.7897165,-80.215034,Metrorail,MIAMI,674.8
+Vizcaya,25.7497275,-80.21177700000001,Metrorail,MIAMI,2224.9
+Wilkie D. Ferguson Jr.,25.778815,-80.195341,"Metromover Inner Loop, Metromover Omni/Brickell Loops",MIAMI,260.4
+South Miami,25.705057500000002,-80.28904299999999,Metrorail,SOUTH MIAMI,1613.5
+Brownsville,25.822053,-80.24072050000001,Metrorail,UNINCORPORATED MIAMI-DADE,1149.0
+Dadeland North,25.691902499999998,-80.30517499999999,Metrorail,UNINCORPORATED MIAMI-DADE,1144.2
+Dadeland South,25.685039,-80.31369799999999,Metrorail,UNINCORPORATED MIAMI-DADE,1144.2
+Earlington Heights,25.812482000000003,-80.229946,Metrorail,UNINCORPORATED MIAMI-DADE,1509.1
+M.L. King,25.8324195,-80.24117799999999,Metrorail,UNINCORPORATED MIAMI-DADE,1149.0
+Miami International Airport,25.7979835,-80.258668,Metrorail,UNINCORPORATED MIAMI-DADE,3216.0
+Northside,25.8458365,-80.2488295,Metrorail,UNINCORPORATED MIAMI-DADE,1080.2

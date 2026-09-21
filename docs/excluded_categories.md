@@ -145,6 +145,56 @@ chance; and handbill distribution. A business holding several licences is
 counted once, so a restaurant with pavement seating appears as a restaurant
 rather than twice.
 
+### Miami — offices, wholesale, and one very large service catch-all
+
+Miami-Dade's Local Business Tax receipt is issued to every business of any
+kind, so most of the file is not storefront trade. All 150 of its `CATGRYNAME`
+values carry an explicit verdict in `pipeline/taxonomies/miami_catgryname.py`;
+these are the ones worth naming.
+
+**`SERVICE BUSINESS` (28,010 active rows) is excluded, and it is the largest
+single judgment call in this city.** Sampling it found paralegals, management
+consultancies, media and tech agencies, tour guides and dispatch services —
+offices, not shops — alongside some genuine trade repair, and a number of
+COTTAGE FOOD operators working from apartments. It fills the same role as Los
+Angeles' NAICS 812990 and D.C.'s "General Business". Excluding it certainly
+discards some real storefront repair shops; the honest alternative is
+classifying 28,010 rows of free-text `OCCDESC`, which is a project of its own.
+Said plainly because the direction of the error is knowable: this map
+undercounts small repair and service premises in Miami.
+
+Also excluded: **professional practice** (`PROFESSIONAL`, `ATTORNEY`,
+`P.A./CORP/PARTNERSHIP/FIRM`, `CONSULTANT` — about 50,000 rows between them);
+**`APARTMENTS`** and the rest of the lodging categories, which are residential;
+**`TANGIBLE PERSONAL PROP DLR`** (12,623 rows), which reads like retail and is
+not — its sampled holders are wholesale distributors, import/export and online
+sellers, many at apartment addresses; contracting and the building trades;
+automotive *service* (NAICS 811, where the other cities also draw the line,
+while car *sales* are kept as NAICS 441); health, care and education; and
+manufacturing and wholesale.
+
+Two exclusions rest on a sample rather than a name, and would be wrong the
+other way round without it. **`LAUNDRY MACHINE`** is a machine licence, not a
+laundromat: its holders include Paradise Apartments, Camelot Court Apartments
+("LAUNDRY ROOM") and Parque Apartments ("10 WASHERS / 10 DRYERS"), so counting
+it would drop pins on apartment blocks — real laundries are in
+`CLEANER/LAUNDRY/ALTERATIONS`, which is kept. **`UNCLASSIFIED BUSINESS`** is
+infrastructure, not shops: Crown Castle and Pinnacle Towers cell sites, with
+`OCCDESC` "OTHER MEMO".
+
+Mobile and itinerant trade is out as everywhere else — `LUNCH WAGON / TRUCK`,
+`ICE CREAM VENDOR`, `PEDDLER`, carnivals, and the machine licences (`A T M /
+POINT OF SALE`, `VENDING MACHINE`). Fitness centres, cinemas and other
+recreation venues (NAICS 713/711) are out because no bucket covers them in any
+city here.
+
+One category is kept on a cross-project consistency argument rather than a
+local one, and is flagged so the choice is visible: **`AUTO / TRUCK / VAN
+SALES`** (car dealers). A car lot is not a storefront in the walkable sense
+this map is about, but NAICS 441 sits inside the 44/45 range every NAICS city
+here counts as Retail, so excluding it in Miami alone would make the buckets
+mean different things in different cities.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

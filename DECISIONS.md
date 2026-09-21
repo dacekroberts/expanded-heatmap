@@ -14,6 +14,159 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Miami built, as the project's first REGIONAL city
+
+- **Seventh city. Regional scope, decided by the owner**, and the first working
+  proof of the multi-jurisdiction idea Seattle is planned around. Metrorail
+  leaves the City of Miami - 13 of its 42 stations are in Hialeah, Medley,
+  Coral Gables, South Miami or unincorporated Miami-Dade - and the standing
+  rule says a station in another city is a new project, because it needs that
+  city's own business data sourced and verified separately. **Miami is the
+  exception because that cost is absent: Miami-Dade County licenses all 34 of
+  its municipalities in ONE file**, one schema, one publisher, one set of
+  terms. So full-line coverage needed no extra sources, no cross-source dedup
+  and no second licence review. Where Seattle will cost 10-12 registries, this
+  cost none.
+- **Consequences carried through rather than left implicit.** There is no
+  `CITY_KEEP`; the boundary layer NAMES each station's municipality instead of
+  filtering (recorded in `outputs/miami/station_municipalities.csv`, with
+  `excluded_stations.csv` kept and empty because the network never leaves the
+  county); and the page is labelled **"Miami (Regional)"** in `app/cities.py`
+  and its title, because a map spanning six municipalities cannot honestly be
+  called Miami. The owner asked for that label explicitly.
+- **Final figures.** 175,982 active rows -> 32,398 storefront -> 29,979
+  premises after dedup -> **29,878 after the residence filter**. Rendered:
+  **3,775 within-ring pins across 42 stations** (Retail 1,960, Food service
+  1,254, Personal services 561), with 29,878 available on the all-Miami-Dade
+  toggle. Buckets before ring assignment: Retail 15,750, Food service 8,061,
+  Personal services 6,067. Map is 1.2 MB.
+- **The file has a NAICS column and it is NULL on all 194,099 rows.** Checked
+  county-wide, not sampled. This is the first city where NAICS was present in
+  the schema and unusable in fact, and it is why the Step 0 screen's claim that
+  Miami needed no taxonomy module was wrong. `miami_catgryname` maps the
+  county's own `CATGRYNAME` instead - all 150 active values given an explicit
+  verdict, verified against the full distinct pull, with step 2 reporting any
+  value it has never seen so an upstream rename surfaces instead of silently
+  dropping rows.
+- **Five taxonomy findings that the category NAMES do not give you**, each from
+  hand-sampling:
+  - **`SERVICE BUSINESS` (28,010 rows) is excluded, and it is the largest
+    single judgment call here.** Sampled: paralegals, management consultancies,
+    media and tech agencies, tour guides, dispatch services - offices, not
+    shops - plus some genuine trade repair and a number of COTTAGE FOOD
+    operators working from apartments. Same role as LA's NAICS 812990 and
+    D.C.'s "General Business". **Stated as a known bias rather than hidden:
+    this map undercounts small repair and service premises in Miami.**
+  - **`DANCING OR ENTERTAINMENT` is not venues, it is bars and restaurants**
+    holding an entertainment endorsement (Gramps, Neme Gastro Bar, Biscayne Bay
+    Brewing, "BAR WITH ENTERTAINMENT"). Food service.
+  - **`LAUNDRY MACHINE` is a machine licence, not a laundromat.** Its holders
+    include Paradise Apartments, Camelot Court Apartments ("LAUNDRY ROOM") and
+    Parque Apartments ("10 WASHERS / 10 DRYERS") alongside real coin laundries,
+    so counting it would have put pins on apartment blocks. Excluded;
+    `CLEANER/LAUNDRY/ALTERATIONS` covers the real premises.
+  - **`TANGIBLE PERSONAL PROP DLR` (12,623 rows) reads like retail and is
+    not**: wholesale distributors, export/import and online sellers, many at
+    apartment addresses.
+  - **`UNCLASSIFIED BUSINESS` is infrastructure**: Crown Castle and Pinnacle
+    Towers cell sites, `OCCDESC` "OTHER MEMO".
+- **One category kept on a cross-project consistency argument, flagged so the
+  choice is visible.** `AUTO / TRUCK / VAN SALES` (car dealers - Braman
+  Cadillac, used-car lots) is not a storefront in the walkable sense this map
+  is about, but NAICS 441 sits inside the 44/45 range every NAICS city here
+  counts as Retail. Excluding it in Miami alone would make the buckets mean
+  different things in different cities.
+- **First city needing a PREMISES dedup, because none of the obvious keys is
+  one.** `RECEIPTNO` is unique per row (6,631 rows = 6,631 receipts),
+  `ACCOUNTNO` is per account (6,167), and **`FOLIO` is the PARCEL** - those
+  6,631 rows shared only 1,849 folios, because a mall or an office tower is one
+  parcel holding dozens of businesses. So rows collapse on name-plus-address,
+  and 1,944 premises held licences in more than one category. Bucket priority
+  is **Food service > Personal services > Retail**, because `RETAIL SALES` is
+  the category a premises picks up SECONDARILY (a restaurant selling
+  merchandise, a salon selling product) - letting it win would relabel
+  restaurants and salons as shops.
+- **Station scope: all 42 kept, no thinning, decided on measurement.** The
+  owner's instruction was to keep every station unless density was a concern.
+  Measured: Metrorail's 23 sit a median 1,149 m apart (min 260 m) with only
+  6/23 inside the 966 m outer ring - fine. The Metromover's 19 sit a median
+  235 m apart and **all 19** are inside a neighbour's ring. That is San
+  Francisco's shape, but thinning it would discard ~12 of 19 stations in the
+  densest commercial district on the map. **Chosen instead: keep every station
+  and start the rings switched OFF**, as New York does, keeping the shared ring
+  edges because Metrorail needs them. Each business is assigned to its nearest
+  station either way, so the cost of the overlap was never double-counting -
+  only legibility, and the rings lever fixes exactly that.
+- **Two phantom stations found by MEASUREMENT, not by reading names.** Metrorail
+  has **no `parent_station` at all**, so its 46 stop_ids are 23 stations x 2
+  directions, spelled four different ways. After collapsing, two pairs still
+  sat absurdly close: "Government Ctr." (Metrorail) and "Government Center"
+  (Metromover) at 20.1 m, and "BISCAYNE BD@E FLAGLER ST" at **0.0 m** from
+  Bayfront Park. The first is one interchange under two spellings. The second
+  settled a question the config had recorded as unanswerable - MDT labels that
+  inner-loop stop by its cross-streets, and rather than guess which station it
+  was, the 0.0 m distance proved it IS Bayfront Park. 44 stations became 42.
+- **Metrorail is drawn once, though MDT signs it as two lines.** Green and
+  Orange share the trunk and split north of Earlington Heights, but the GTFS
+  publishes a single route ("REGULAR METRORAIL SERVICE") for both, so there is
+  no route_id per line. Inventing a split the feed does not contain is worse
+  than using the name every station sign carries. This is the mirror image of
+  New York, where 29 GTFS services had to be grouped into 11 signed trunks.
+  Nine shapes exist because the line branches and MDT ships single-track
+  working variants; the drawn pair is the Green trunk plus the airport spur,
+  which together are the whole physical network.
+- **Line colours are this project's own, which is the documented fallback
+  rather than a departure.** MDT publishes Metrorail as `FF8040` (orange,
+  against Food service's `#eb6834`) and the two Metromover loops as `008080`
+  and `008000` (both against Personal services' `#1baf7a`, and barely
+  distinguishable from each other). Purple / teal / brown are distinct from the
+  category colours and from one another. Incidentally this also sidesteps the
+  open route-colour trademark question for one city.
+- **Privacy: two real exposures found by the screening and fixed, not just
+  reported.** First run: 6 displayed names carried a person via a `C/O` or
+  `ATTN` clause, and **28 of 3,797 pins (0.74%) were a person-like name at a
+  residential unit** - second-worst in the project after Los Angeles. After
+  fixing: **0 care-of markers and 0.00% person-like-name-at-a-dwelling**, level
+  with Philadelphia as the best. `OWNERNAME` is populated on 100% of rows and
+  is frequently a person, so `fetch_sources.py` never downloads it and step 2
+  asserts it and all seven `MAIL*` columns stay absent; `BUSNAME` is present on
+  every row, so unlike Los Angeles (68% blank) and D.C. (49%) this city never
+  has to consider a registrant's name at all.
+- **Only ONE residence rule, because only one signal is trustworthy at this
+  scope.** San Francisco and Los Angeles run two, joining a parcel roll for
+  land use and a homeowner's exemption. Miami-Dade's `FOLIO` would allow the
+  same and is present on 100% of active City of Miami rows - but on only
+  **45.7% of the regional storefront set**. A parcel rule would therefore apply
+  to half the map and not the other half, which is worse than not running it,
+  so the address rule (person-like name + a dwelling-unit designator) runs
+  alone and removed 101 rows (0.34%). The parcel route is recorded in
+  `config.PARCEL_COLUMN` as available, with the coverage caveat attached.
+- **Three bugs written and caught in one small function, all by reading its
+  actual output rather than trusting it.** The care-of scrubber:
+  1. A `C.?\s?O.?`-style pattern matched a bare "CO" and turned "STARBUCKS
+     COFFEE CO 9699" into "9699" - **the same bare-CO mistake
+     `check_personal_exposure.py` made in this project once already**, where it
+     matched 567 company names. Now only "C/O", a fully-dotted "C.O." and
+     ATTN/ATTENTION are accepted.
+  2. "keep the longest side that is not a person" inverted the intent on real
+     rows, turning "EL PATIO DE LOS JUGOS USA CORP C/O YOEL HERNANDEZ / ILEANA
+     MARTINEZ" into the two people's names - `looks_personal()` does not flag a
+     slash-joined pair, and that side was two characters longer.
+  3. "keep the first side that is not a person" then kept the trustee in
+     "ANDREW L LEWIS TRS C/O MARRIOT HOTEL SERVICES LLC", because a TRS suffix
+     defeats the two-token shape test.
+  The rule that works ranks sides by a POSITIVE organisation signal and only
+  falls back to position, which needed a new shared helper,
+  `residence.looks_organisational()` - deliberately **not** the inverse of
+  `looks_personal()`, since a name can fail both tests.
+- **Ring coverage is the lowest in the project, and that is a scope
+  consequence, not a fault.** 3,775 of 29,878 businesses (12.6%) fall inside a
+  ring, against New York's 71% and Chicago's 57%. The reason is that the
+  regional business set spans all of Miami-Dade - Homestead to Aventura - while
+  the rail is one north-south line plus a downtown loop. The within-ring figure
+  is the map's real content; the all-businesses toggle is county-wide and
+  labelled as such.
+
 ### 2026-09-21 - Licence texts now kept in the repo
 
 - **Started storing licence agreements locally, beginning with MassDOT's.** The

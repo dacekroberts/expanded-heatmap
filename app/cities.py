@@ -75,4 +75,15 @@ CITIES = [
         "blurb": "SEPTA Metro — the Market–Frankford and Broad Street Lines, "
                  "plus the subway-surface and Girard Avenue trolleys",
     },
+    {
+        # The only entry whose name is not just a city: this map covers the
+        # whole Metrorail/Metromover network, which runs through six
+        # municipalities, so "Miami" alone would overstate its scope. The name
+        # must match render_city_nav()'s argument on the page.
+        "name": "Miami (Regional)",
+        "lat": 25.7743,
+        "lon": -80.1937,
+        "page": "pages/7_Miami_Heatmap.py",
+        "blurb": "Metrorail and Metromover (42 stations across six municipalities)",
+    },
 ]
