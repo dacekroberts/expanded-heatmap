@@ -34,6 +34,10 @@ the layer control in the top left. When enabled, business density will
 display as numbered circles summing areas when zoomed out. Zooming in will
 show individual dots; hover over those to see further details.
 
+Top right: a **Cities** menu and an **All cities** button for moving between
+maps, and a light/dark switch. The map opens in whichever mode the page is
+using; once you pick one, it carries across the other city maps.
+
 Some businesses in the city's registry carry corrupt coordinates, mostly
 recent registrations; these were placed by geocoding their street address
 instead of being dropped.

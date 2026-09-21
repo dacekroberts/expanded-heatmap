@@ -38,6 +38,10 @@ business density will display as numbered circles summing areas when zoomed
 out. Zooming in will show individual dots; hover over those to see further
 details.
 
+Top right: a **Cities** menu and an **All cities** button for moving between
+maps, and a light/dark switch. The map opens in whichever mode the page is
+using; once you pick one, it carries across the other city maps.
+
 The data is Chicago's business-license registry, limited to currently
 active licenses. Some licenses carry no coordinates (mostly home-based
 businesses with redacted addresses) and are left off the map.
