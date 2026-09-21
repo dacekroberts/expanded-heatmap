@@ -54,13 +54,13 @@ commuter rail, excluded here as in every other city. The line colours are this
 project's own rather than the agency's: Miami-Dade's own orange and two greens
 collide with the business-category colours and with each other.
 
-**The concentric rings start switched off, which is unusual here.** Metrorail's
-stations are far apart — a median 1.1 km — so their rings read cleanly. The
-Metromover's nineteen sit a median 235 m apart, and every one of them falls
-inside a neighbour's outer ring, so downtown would otherwise be one
-indistinguishable wash. Each business is assigned to its nearest station either
-way, so nothing is double-counted; turn the rings on from the layer control if
-you want them.
+**The rings are worth turning on selectively here.** They start switched off,
+as they do on every city on this site. Metrorail's stations are far apart — a
+median 1.1 km — so their rings read cleanly. The Metromover's nineteen sit a
+median 235 m apart, and every one of them falls inside a neighbour's outer
+ring, so switching the rings on makes downtown one indistinguishable wash while
+the Metrorail corridor stays legible. Each business is assigned to its nearest
+station either way, so nothing is double-counted.
 
 **The classification is the county's own, because its NAICS column is empty.**
 The file carries a `BUSNAICSCD` field and it is null on all 194,099 rows, so

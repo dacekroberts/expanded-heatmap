@@ -967,7 +967,7 @@ def drop_contact_details(businesses):
 def render_heatmap(*, output_path, map_title, city_name, system_name,
                    stations, businesses, taxonomy_system, lines,
                    crs_geographic, crs_projected, ring_edges_meters, ring_labels,
-                   center=None, zoom=None, label_focus=None, rings_shown=True):
+                   center=None, zoom=None, label_focus=None, rings_shown=False):
     """Render one city's heatmap to a standalone HTML file.
 
     stations: DataFrame(station, latitude, longitude). businesses: the
@@ -981,13 +981,20 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     every line label together, so all labels are visible on first load; pass
     either to override.
 
-    rings_shown: whether the concentric ring layers start switched on. True for
-    every city whose stations are far enough apart for the rings to read
-    individually. New York passes False: with 496 stations at a median 482 m
-    apart, the rings merge into one indistinct wash over Manhattan and downtown
-    Brooklyn, though they still read cleanly around the outer-borough and
-    Staten Island stations - so they stay in the layer control to be switched
-    on, rather than being dropped. Decided 2026-09-21; see DECISIONS.md.
+    rings_shown: whether the concentric ring layers start switched on.
+    **FALSE for every city since 2026-09-21** - the owner's call, for a cleaner
+    first view. The rings stay in the layer control, one click away, and each
+    business is still assigned to its NEAREST station whatever the rings show,
+    so nothing about the counts depends on this.
+
+    It had been True by default, with New York and Miami the two exceptions on
+    measured grounds: New York's 496 stations sit a median 482 m apart and
+    Miami's nineteen Metromover stations a median 235 m, so in both the rings
+    merged into one indistinct wash downtown. That reasoning is kept here
+    because it is why the toggle exists at all - but it turned out to describe
+    the general case rather than two special ones, since every city's downtown
+    cluster does some of this. Passing True is still supported for a city whose
+    stations are sparse enough to want them on.
     """
     taxonomy = load_taxonomy_module(taxonomy_system)
     bucket_colors = dict(CATEGORY_BUCKETS)

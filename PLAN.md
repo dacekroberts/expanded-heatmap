@@ -622,6 +622,12 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Data quality follow-ups
 
+- [x] **Rings start switched off on every city (2026-09-21, owner's call)** for a
+  cleaner first view. `rings_shown` defaults to False in `map_common.py`; New
+  York's and Miami's explicit overrides are removed as redundant. The counts
+  are unaffected - businesses are assigned to their nearest station whatever
+  the rings show - and the rings remain in each map's layer control.
+
 - [x] Los Angeles map size: **3.5 MB** after the 2026-09-21 exclusions (was
   5.8), against 2.4 MB for San Francisco. Largely resolved; revisit only if a
   deploy shows it is still slow.

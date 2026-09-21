@@ -45,12 +45,13 @@ the lettered Brooklyn and Queens lines, the three shuttles and the Staten Island
 Railway — is labelled directly on the map and in the legend, and a trunk's
 branches are drawn wherever its services diverge.
 
-**The station rings are smaller here, and start switched off.** Stations sit a
-median 480 m apart, so the half-mile rings used elsewhere would reach past the
-next two stations in every direction and merge into one wash over Manhattan.
-These rings run to 0.3 mi instead. They still read cleanly around the
-outer-borough and Staten Island stations, so they remain available in the layer
-control at the top left, along with the three business categories.
+**The station rings are smaller here.** Stations sit a median 480 m apart, so
+the half-mile rings used elsewhere would reach past the next two stations in
+every direction and merge into one wash over Manhattan. These rings run to
+0.3 mi instead. Like every city on this site they start switched off, and they
+read most clearly around the outer-borough and Staten Island stations — turn
+them on from the layer control at the top left, along with the three business
+categories.
 
 **Four registries, because New York has no general business licence.** Food
 service comes from the Health Department's restaurant permits, grocery and

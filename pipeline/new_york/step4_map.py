@@ -122,7 +122,6 @@ def main():
         # indistinct wash over Manhattan. They read cleanly around the
         # outer-borough and Staten Island stations, so they stay available in
         # the layer control instead of being dropped. See render_heatmap.
-        rings_shown=False,
     )
 
 

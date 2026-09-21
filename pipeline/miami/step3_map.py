@@ -85,15 +85,13 @@ def main():
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
         label_focus=mapped_region(),
-        # Rings start OFF, as in New York and for the same measured reason:
-        # 25 of 42 stations sit closer to a neighbour than the 966 m outer
-        # ring, and all 19 Metromover stations do (median 235 m apart), so the
-        # rings merge into one wash over downtown. Metrorail's own stations are
-        # well separated (median 1,149 m), which is why the shared ring edges
-        # are kept rather than reduced the way New York's were - the overlap is
-        # confined to the Metromover loops. Businesses are assigned to their
-        # NEAREST station regardless, so nothing is double-counted either way.
-        rings_shown=False,
+        # Rings start off for every city now (map_common's default), so this
+        # no longer needs saying here. The measurement that first justified it
+        # for Miami is still worth keeping: 25 of 42 stations sit closer to a
+        # neighbour than the 966 m outer ring, and all 19 Metromover stations
+        # do (median 235 m apart). Metrorail's own are well separated (median
+        # 1,149 m), which is why the shared ring edges were kept rather than
+        # reduced the way New York's were.
     )
 
 

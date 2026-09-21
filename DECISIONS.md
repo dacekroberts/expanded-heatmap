@@ -14,6 +14,42 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Concentric rings start switched OFF for every city
+
+- **The owner's call, for a cleaner first view.** `map_common.render_heatmap`'s
+  `rings_shown` default flips from True to False, so all nine maps now open
+  without the four ring layers drawn. They stay in the layer control, one click
+  away, and every city page still says so.
+- **Nothing about the numbers changes.** Each business is assigned to its
+  NEAREST station regardless of what the rings display, so the within-ring
+  counts, the per-bucket totals and the "all businesses" toggle are all
+  identical - the within-ring figures in every step's output are unchanged
+  after the re-render, which is the check that confirms it.
+- **It generalised two per-city exceptions into the default, and that is the
+  interesting part.** New York and Miami already passed `rings_shown=False` on
+  measured grounds: New York's 496 stations sit a median 482 m apart and
+  Miami's nineteen Metromover stations a median 235 m, so in both the rings
+  merged into one indistinct wash downtown. Every city has a downtown cluster
+  that does some of this - Washington D.C. has 20 of 40 stations closer to a
+  neighbour than the 966 m outer ring, Boston kept its rings only because the
+  Green Line was thinned first - so what looked like two special cases was
+  really the general one. The two explicit overrides are now removed as
+  redundant, with their measurements kept as comments because they are why the
+  toggle exists at all.
+- **Two city pages described rings-off as a local quirk and were wrong after
+  this.** New York's said "The station rings are smaller here, and start
+  switched off" and Miami's "The concentric rings start switched off, which is
+  unusual here." Both reworded: New York's now leads on the rings being
+  SMALLER (0.3 mi rather than 0.6), which is still true and still unique to it,
+  and Miami's on the rings being worth turning on selectively, since its
+  Metrorail corridor reads cleanly with them while its Metromover loops do not.
+- **Verified after re-rendering all nine:** each map's layer control lists four
+  `Concentric Ring` entries and every one is unchecked on load, while the heat
+  layer, the within-station density layer and the three business-category
+  layers stay checked. The label checker reports an empty `problems` list on
+  New York, Chicago, Boston and Washington D.C. at 854px, so the re-render did
+  not disturb line-label placement.
+
 ### 2026-09-21 - Code licence, and disclosing the unsettled licence positions on the page
 
 - **The code is MIT; the data explicitly is not.** `LICENSE` carries the MIT
