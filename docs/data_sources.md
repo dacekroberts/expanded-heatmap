@@ -165,7 +165,7 @@ in 23 other municipalities.
 | City | Layer | Endpoint | Filtered to |
 |---|---|---|---|
 | San Diego | SANDAG regional municipal boundaries | `https://geo.sandag.org/server/rest/directories/downloads/Municipal_Boundaries.geojson` | `SAN DIEGO` |
-| San Francisco | Socrata "Bay Area County Polygons" (`wamw-vt4s`) | `https://data.sfgov.org/resource/wamw-vt4s.geojson?$where=county='San Francisco'&$limit=10` | `San Francisco` |
+| San Francisco | Socrata "Bay Area County Polygons" (`wamw-vt4s`) | `https://data.sf.gov/resource/wamw-vt4s.geojson?$where=county='San Francisco'&$limit=10` | `San Francisco` |
 | Los Angeles | LA County Planning, incorporated cities | `https://services.arcgis.com/RmCCgQtiZLDCtblq/arcgis/rest/services/admin_dist_SDE_DIST_DRP_CITY_COMM_BDY/FeatureServer/0/query` (`JURISDICTION='INCORPORATED CITY'`, `outSR=4326`, `f=geojson`) | `LOS ANGELES` |
 | Chicago | Socrata "Boundaries - City" (`qqq8-j68g`) | `https://data.cityofchicago.org/resource/qqq8-j68g.geojson?$limit=10` | whole city |
 | New York | Borough Boundaries (`gthc-hcne`) | `https://data.cityofnewyork.us/resource/gthc-hcne.geojson?$limit=10` | all five boroughs = the city |
@@ -188,7 +188,16 @@ Measured with this layer: **71 of 125** rapid-transit stations fall inside the
 city, with the other 54 in Brookline, Cambridge, Somerville, Newton, Medford,
 Malden, Quincy, Revere and Milton — the whole Green Line C corridor is in
 Brookline.
-San Francisco note: `wamw-vt4s` is a **nine-county** Bay Area layer, so the
+San Francisco note: **use the host `data.sf.gov`, never `data.sfgov.org`.**
+This row said `data.sfgov.org` until 2026-09-21, when re-running the recorded
+command showed the old host **301-redirects** and the documented `curl -sG`
+carries no `-L` — so it silently wrote a 654-byte HTML redirect stub into
+`sf_county_boundary.geojson` and exited 0, with the failure surfacing later
+inside geopandas. That is the same host rule the assessor roll already needed
+for a different symptom (403 on `/resource/`), so treat it as one rule for this
+city. Unfiltered, the same request returns 989,873 bytes of all nine counties.
+
+`wamw-vt4s` is a **nine-county** Bay Area layer, so the
 `county` filter is not optional — unfiltered it would scope the city to the
 whole region. This endpoint was recovered on 2026-09-21 (it had been recorded
 nowhere) by identifying the raw file from its own fields, `objectid` /
@@ -343,10 +352,12 @@ reproducing no roundel or T mark, the trademark clause is satisfied by
 construction rather than by interpretation — unlike SEPTA's, which remains
 open.
 
-**Philadelphia added two more, both still OPEN as of 2026-09-21.** Recorded
-unresolved rather than read generously, per the `multi-source-city` skill's
-Step 3. Neither blocks building the city; both should be settled before the
-public deploy, alongside the required notices:
+**Three permission questions are OPEN as of 2026-09-21** — two from
+Philadelphia and one from Miami. All are recorded unresolved rather than read
+generously, per the `multi-source-city` skill's Step 3. None blocks building
+its city; all three should be settled before the public deploy, alongside the
+required notices. They are the same question in three forms: **what does
+silence mean?**
 
 - **SEPTA's trademark clause.** "Licensee may not use SEPTA's trademarks and
   copyrighted materials for any commercial or profit-making use and may not
@@ -370,8 +381,30 @@ public deploy, alongside the required notices:
   that data. This is the same shape as the NYC question but with the opposite
   paperwork — NYC is *forbidden* from imposing a licence, whereas Philadelphia
   has imposed one that says only "we keep our rights".
+- **Miami-Dade states no reuse position at all, for all three of its sources.**
+  Added 2026-09-21 with the Miami build. The business registry and the
+  municipal boundary layer carry an `licenseInfo` that is purely about
+  ACCURACY — data provided "as is", "not accurate to surveying or engineering
+  standards", the County "assumes no responsibility for errors or omissions" —
+  and say nothing whatever about reuse, redistribution, modification or
+  attribution. Miami-Dade Transit's GTFS is worse served: it ships **no
+  `feed_info.txt` at all**, and no separate MDT developer terms could be
+  located. **Open question:** whether a disclaimer with no grant and no
+  prohibition is a sufficient basis to publish a derived map. The affirmative
+  signals are that all three are published by the County's own ITD Geospatial
+  group on its public open-data portal, in reuse-ready formats (GeoJSON, a
+  queryable FeatureServer, a GTFS zip).
 
-**A third open question, and it is now shared by three agencies rather than
+  This is the **weakest paperwork of any city in the project**, and worth
+  distinguishing from the two above. Philadelphia at least names a licence and
+  reserves rights under it; NYC's silence is legally *required*. Miami-Dade
+  simply never addresses the question — which is not the same as permitting it.
+  Two things reduce the exposure meanwhile: the map already uses this project's
+  own line colours rather than MDT's, so the trademark half of the question
+  does not arise for Miami, and nothing in the rendered output reproduces
+  County branding.
+
+**A fourth open question, and it is shared by three agencies rather than
 one: official route colours.** SEPTA's clause above is the specific case; the
 general one is that the maps draw each line in the agency's own `route_color`
 value from `routes.txt`, and more than one agency treats its map symbology as
@@ -546,22 +579,41 @@ pages' prose: naming each business registry's publishing agency.
    conditions worth acting on.
 5. ~~Decide LA Metro's "modification" clause and CTA's purpose limitation~~ —
    **decided 2026-09-21**, see the notes under the GTFS table.
-5b. **Decide SEPTA's trademark clause and the City of Philadelphia License's
-   rights reservation** — raised 2026-09-21, both still open. See the notes
-   under the GTFS table.
+5b. **Decide the three "what does silence mean?" questions** — raised
+   2026-09-21, all still open. SEPTA's trademark clause; the City of
+   Philadelphia License's rights reservation; and **Miami-Dade's total absence
+   of a reuse position** across its business registry, its boundary layer and
+   its GTFS (which has no `feed_info.txt`). See the notes under the GTFS table.
+   Miami's is the weakest paperwork in the project and should be decided
+   first — it is also the only one of the three where no agency document exists
+   to read, so settling it may mean asking the County rather than reading
+   anything.
+5c. **Decide the official route-colour question** (MTA, SEPTA, and WMATA if
+   D.C. is built) — the owner chose on 2026-09-21 to keep the agencies' own
+   `route_color` values and record this rather than pre-emptively substituting
+   a palette. Cheap to reverse: the colours live in one dict per city, and two
+   cities already use this project's own palette (Miami by necessity, Staten
+   Island Railway for contrast).
 6. **Display the required notices** (above) — the one thing that still blocks
    publishing, and part of the same app job as surfacing this page.
 7. **Decide the tile provider deliberately**, given that OSM's tile service is
    explicitly best-effort with no SLA.
 8. Optionally, read the Census geocoder's terms — the only source left unread.
 
-**Where this leaves the project:** every source's position is established
-except the Census geocoder, and nothing found forbids what this project does.
-Philadelphia added no new mandatory notice — SEPTA requires no attribution at
-all and the City of Philadelphia License requires none either — so the count of
-notices to display is still four. It did add **two open judgment calls** (see
-above), which are questions about permission rather than implementation and are
-the only items of that kind still outstanding.
+**Where this leaves the project:** nothing found anywhere forbids what this
+project does, and the count of **mandatory notices to display is still four** —
+neither Philadelphia nor Miami added one, because SEPTA, the City of
+Philadelphia License and Miami-Dade all require no attribution at all. (A fifth
+notice, MassDOT's acknowledgement, activates only if Boston is ever built; a
+sixth would come with WMATA if D.C. is.)
+
+What has grown instead is the pile of **permission questions**, now four: three
+"what does silence mean?" calls and the route-colour one. They are questions
+about permission rather than implementation, and they are the only items of
+that kind outstanding. Two sources' positions remain formally unestablished —
+the Census geocoder, whose terms are simply unread, and **Miami-Dade, whose
+terms do not address reuse at all.** Those two are different in kind: one is a
+document nobody has opened, the other is a document that does not exist.
 
 ## Gaps
 
