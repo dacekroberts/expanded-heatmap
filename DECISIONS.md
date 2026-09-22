@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**144 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**145 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Category B reaches its floor: 74 to 35, and the rest are not defects](#2026-09-22---category-b-reaches-its-floor-74-to-35-and-the-rest-are-not-defects)
 - [Category B, sixth pass: the master list's counts are right, and that is the finding](#2026-09-22---category-b-sixth-pass-the-master-lists-counts-are-right-and-that-is-the-finding)
 - [The `osm_route_refs` check, and the correction it immediately made to the entry above](#2026-09-22---the-osm_route_refs-check-and-the-correction-it-immediately-made-to-the-entry-above)
 - [Category B, fifth pass: the add-city skill's header still said four cities](#2026-09-22---category-b-fifth-pass-the-add-city-skills-header-still-said-four-cities)
@@ -180,6 +181,41 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Category B reaches its floor: 74 to 35, and the rest are not defects
+
+- **Last two edits in `data_sources.md`, both this session's own prose from
+  earlier today.** "Vancouver is the only one of **the six Canadian cities**
+  with no licence-level home-business flag" and "the only Canadian city **of
+  the six** needing no taxonomy module" - in both the claim is *only*, and the
+  denominator carries none of the meaning while ageing on every Canadian
+  build. Same treatment as "the fourteen agency-sourced cities" three passes
+  ago: correct today is not a reason to keep a hand-kept number.
+
+- **All eleven `data_sources.md` hits were read; nine stay, with reasons.**
+  "All three buckets" is this project's fixed vocabulary; "the six pre-1998
+  municipalities" is a fact about Toronto's 1998 amalgamation; "all five
+  boroughs = the city" holds as long as New York has five; Miami-Dade's "all
+  three sources" is scoped to one county's three datasets; "the five GTFS
+  feeds" sits inside a struck-through completed gate item and records what was
+  checked then. One is the known multi-line-quote false positive - this
+  session's own correction of the "four of the eight registries" claim.
+
+- **Category B: 74 -> 35 over seven passes, and this is its floor for now.**
+  What remains is dominated by correctly scoped facts, dated evidence in the
+  two country trails, and three false positives from the tool's own
+  single-line quote matching. **Continuing would mean tuning the checker to
+  silence rather than finding defects**, which is the failure mode the report
+  format was chosen to avoid - so it stops here rather than at a number.
+
+- **The seven passes found, in total:** three notices in the deploy gate marked
+  NOT YET DISPLAYED that were displayed; "the five NAICS cities" when there
+  were four, in a file linked from every page of the site; `add-city`'s header
+  still claiming four built cities when there were sixteen; "All seven
+  agreements" against a directory past twenty; a settled sourcing question
+  still written as open; and Madrid's status understated in the file the
+  project reads its counts off. Plus one error this session had introduced
+  hours earlier - Madrid filed under OpenStreetMap - which the list caught.
 
 ### 2026-09-22 - Category B, sixth pass: the master list's counts are right, and that is the finding
 
