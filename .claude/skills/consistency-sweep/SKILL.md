@@ -113,6 +113,14 @@ let a check own the number. A count maintained by hand beside the list it counts
 will drift again, and it is most dangerous in a section that gates something -
 a deploy, a licence position, a privacy claim.
 
+**But first ask whether the document is CURRENT-STATE or DATED**, because the
+answer inverts the action. `DECISIONS.md`, a handover pinned to a commit, a
+retrospective - their counts are evidence of what was true when written, and
+**updating one destroys the record**. Only a document that claims to describe
+the present has a count worth deleting. `check_stale_claims.py` excludes the
+dated ones by name and pattern for exactly this reason, and a sweep that
+"corrects" a retrospective has done damage, not work.
+
 ### 3. Cross-references broken by renumbering
 
 A numbered list that other files cite by number is a coupling nobody declares.

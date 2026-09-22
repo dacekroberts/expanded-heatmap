@@ -24,10 +24,15 @@ WHAT KEEPS THE NOISE DOWN, AND WHY EACH RULE IS THERE
 -----------------------------------------------------
 Every rule below was added because the version without it was unusable.
 
-  - **`DECISIONS.md` and `PLAN.md` are excluded.** The first is append-only
-    history, where "no Canadian city is built" is a correct record of what was
-    true that day; the second is open work, where "not yet" is the point.
-    Scanning either floods the report with correct sentences.
+  - **`DECISIONS.md`, `PLAN.md`, handovers and retrospectives are excluded.**
+    The first is append-only history, where "no Canadian city is built" is a
+    correct record of what was true that day; the second is open work, where
+    "not yet" is the point; the rest are dated records pinned to a commit.
+    **A count in a dated document is evidence, and updating it would destroy
+    the record** - it is a defect only if it was wrong on that date, which this
+    check cannot know. That is the distinction the category turns on: a
+    current-state document carrying a count has a maintenance burden, a dated
+    one does not.
   - **A future-tense marker only counts when the same line names something that
     IS built.** "Not yet a row" beside Washington D.C. matters; the identical
     phrase beside an unscreened country is a plan, not a defect.
@@ -59,6 +64,18 @@ ROOT = Path(__file__).parent.parent
 # Append-only history and open work. See the docstring - this is not an
 # oversight, and re-including them is how this check becomes unreadable.
 EXCLUDE_NAMES = {"DECISIONS.md", "PLAN.md"}
+
+# POINT-IN-TIME RECORDS, and the reason they are excluded is stronger than
+# "noisy": their counts are correct as of a stated date, and **updating one
+# would destroy the record**. `passover_opus5.md` pins itself to commit
+# 520c165 and says in its own opening that it is "a map and a set of claims to
+# test, not a source of truth"; a retrospective describes what was true when it
+# was written. A count in one of these is evidence, not drift - it is only a
+# defect if it was wrong ON THAT DATE, which this check cannot know.
+#
+# This is the distinction the whole category turns on: a CURRENT-STATE document
+# that carries a count has a maintenance burden, and a DATED one does not.
+EXCLUDE_PATTERNS = ("passover_*.md", "*retrospective*.md", "*_addendum.md")
 
 # The sweep skill teaches these defects by quoting real instances, so it reports
 # as stale prose about Canada and D.C. It is documentation OF the markers.
@@ -152,6 +169,8 @@ def scan_files():
             if not p.is_file() or p.name in EXCLUDE_NAMES:
                 continue
             if p.relative_to(ROOT).as_posix() in EXCLUDE_PATHS:
+                continue
+            if any(p.match(pat) for pat in EXCLUDE_PATTERNS):
                 continue
             if p.resolve() in seen:
                 continue

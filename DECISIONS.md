@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**138 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**139 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [The distinction category B turns on: a dated document's count is evidence, not drift](#2026-09-22---the-distinction-category-b-turns-on-a-dated-documents-count-is-evidence-not-drift)
 - [Category B, first pass: Madrid was filed under OpenStreetMap, and three counts had drifted](#2026-09-22---category-b-first-pass-madrid-was-filed-under-openstreetmap-and-three-counts-had-drifted)
 - [The stale-prose check found three notices in the deploy gate marked undisplayed that were displayed](#2026-09-22---the-stale-prose-check-found-three-notices-in-the-deploy-gate-marked-undisplayed-that-were-displayed)
 - [A third session role: auditing what the forward-facing sessions leave behind](#2026-09-22---a-third-session-role-auditing-what-the-forward-facing-sessions-leave-behind)
@@ -174,6 +175,37 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - The distinction category B turns on: a dated document's count is evidence, not drift
+
+- **Excluded handovers and retrospectives from `check_stale_claims.py`, and the
+  reason is stronger than noise.** `docs/passover_opus5.md` pins itself to
+  commit `520c165` and opens by saying it is "a map and a set of claims to
+  test, not a source of truth"; `us_build_retrospective.md` and
+  `canada_retrospective.md` describe what was true when written. **Their counts
+  are evidence, and updating one would destroy the record** - a count there is
+  a defect only if it was wrong ON THAT DATE, which no script can know.
+
+- **That is the distinction the whole category turns on, and it was not stated
+  until now:** a CURRENT-STATE document carrying a count has a maintenance
+  burden; a DATED one does not. A sweep that "corrects" a retrospective to
+  match the present has done damage, not work. Written into both the script's
+  docstring and the sweep skill, because the obvious instinct on seeing "all
+  four cities" in a handover is to fix it.
+
+- **Report after two passes: A 3 -> 1, B 74 -> 52, C 0.** The single remaining
+  A hit is a coincidence - a New Orleans row whose line happens to contain both
+  "not yet" and the word Boston - and is not worth another exclusion rule.
+
+- **Read and deliberately KEPT, which is as much the output as the edits.**
+  `docs/project_context.md` carries four counts and three are correctly scoped
+  and stable: "the four registries" is New York's, "the two registries" is
+  Vancouver and Surrey's, "the six pre-1998 municipalities" is a fact about
+  Toronto's amalgamation. Only "comparable with the five NAICS cities" can
+  drift, and it is left for the next pass rather than changed in a hurry.
+  `docs/city_master_list.md` is exempt in spirit for a different reason -
+  `CLAUDE.md` designates it the current global list and says to read counts off
+  it, so its numbers are maintained by design rather than drifting.
 
 ### 2026-09-22 - Category B, first pass: Madrid was filed under OpenStreetMap, and three counts had drifted
 
