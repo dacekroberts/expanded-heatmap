@@ -386,15 +386,15 @@ waiting on research at all.
 |---|---|---|---|
 | **Seoul** 🇰🇷 | 407 stations (1,099 national), WGS84, English, line geometry | **197,276 active premises**, 8 datasets, EPSG:5174 coords, status field, **KOGL Type 1** | Build work only: partial geocoding for 일반음식점 (90.7%) and a Korean-aware `check_personal_exposure.py` |
 | **Paris** 🇫🇷 | subway 16, tram 17, funicular 1 | SIRENE, établissement-level, geolocated, Licence Ouverte 2.0, non-diffusible masked at source | **An owner decision, not a probe:** a national register is not the per-city municipal shape this project is built around |
-| **Mexico City** 🇲🇽 | subway 12, via `mdb-latest` | DENUE, 6M+ establishments, coordinates, **SCIAN = NAICS**, INEGI licence cleared | Nothing |
-| **Guadalajara** 🇲🇽 | LRT 3, current feed | Same DENUE source | Nothing |
+| ❌ **Mexico City** 🇲🇽 → **OUT, 2026-09-22** | ~~subway 12, via `mdb-latest`~~ **all four routes now dead** | DENUE, 6M+ establishments, coordinates, **SCIAN = NAICS**, INEGI licence cleared | **Its feed.** Business leg is fine; there is no reachable feed. See "The Mobility Database moved its files" |
+| **Guadalajara** 🇲🇽 | **LRT 3 re-verified 2026-09-22** — Líneas 1–3 at `route_type 0`, **12,231 stops 100% coordinated, `shapes.txt` present** | Same DENUE source | Nothing |
 
 **Promoted into Band A on 2026-09-22 by the nine-item sweep** — all three had
 exactly one question and all three answered:
 
 | City | Rail | Business | What remains |
 |---|---|---|---|
-| **Madrid** 🇪🇸 | subway 13 | **148,814 open classified premises; 119,070 with valid coordinates.** Three-level classification, `rotulo` 100%, status field, EPSG:25830, semicolon CSV | Nothing. **Larger than Barcelona and needs no geocoding** |
+| **Madrid** 🇪🇸 | subway 13 | **148,814 open classified premises; 119,070 with valid coordinates.** Three-level classification, `rotulo` 100%, status field, EPSG:25830, semicolon CSV. **Licence read 2026-09-22: CC BY 4.0 + binding general conditions, PERMITTED WITH CONDITIONS** | Nothing. **Larger than Barcelona and needs no geocoding** |
 | **Barcelona** 🇪🇸 | FGC subway 4 + funicular 3 | 68,024-premises ground-floor census, **CC-BY-4.0** | One residual: the portal's general legal notice is CAPTCHA-walled and unread |
 | **Milan** 🇮🇹 | subway 5, tram 17 | 28,131 premises 99.1% coords, CC-BY — **and Personal services confirmed** in GeoJSON | Schemas of the two new layers, which is Step 0 rather than screening |
 
@@ -569,10 +569,16 @@ Six tried, applying the CDMX rule that a feed has at least three:
 | `metro-sevilla.es/gtfs.zip` | **000** |
 
 The two **403s are new information**: previously recorded as "the mirror 404s",
-but `files.mobilitydatabase.org` now *refuses* rather than missing, which
-suggests the host moved behind authentication. That would affect every feed
-sourced that way, not just Sevilla — worth one check before the next rail
-screen. **Sevilla stays out; Spain is five cities plus Madrid.**
+but `files.mobilitydatabase.org` now *refuses* rather than missing.
+
+> **FOLLOWED UP the same day, and the first framing was too broad.** See
+> "The Mobility Database moved its files" below. `files.mobilitydatabase.org`
+> is 403 **host-wide** — but the `mdb-latest` bucket on
+> `storage.googleapis.com` is a **different host and still public**, so
+> "every feed sourced that way" was wrong. And Sevilla is **not dead**: the
+> catalogue's own record gives a route never tried here — Spain's National
+> Access Point — which answers **401**, i.e. registration-gated rather than
+> missing.
 
 #### Items 4, 6, 7 — the negatives, each with a working control
 
@@ -629,6 +635,69 @@ in its own output. Only two failed: `ign.gob.pe` (TLS, curl rc=60) and
 needed the curl fallback** (requests SSLError, 232 KB via curl) — the fourth
 time Python's TLS has reported a live government host as dead. Finding the
 actual layer on each portal is the next pass.
+
+### THE MOBILITY DATABASE MOVED ITS FILES — and the catalogue repo is the durable route
+
+Followed up 2026-09-22 because "the mirror 404s" turned out to be a 403. The
+result corrects **three** things, one of them a Band A entry.
+
+**What is actually broken.** `files.mobilitydatabase.org` returns
+`<Error><Code>AccessDenied</Code></Error>` for **every** path tried — the host
+root, `mdb-<id>/...` and `mdb-latest/...`, across CDMX, Guadalajara, Sevilla
+and Toronto alike. That is an object-store ACL denial, **not** an IP block: the
+body names no IP and carries no WAF id, which by this file's own rule (a block
+page that prints your address is IP-level) makes it an authentication wall.
+`api.mobilitydatabase.org` answers **413 Request Entity Too Large** on every
+path including bare GETs, which is its own kind of broken.
+
+**What still works, and why "every feed sourced that way" was wrong.** The
+`mdb-latest` mirror this project used to unblock CDMX is on
+**`storage.googleapis.com`**, a different host, and it is **still public** —
+Guadalajara downloaded from it cleanly (2,542,046 b). The earlier 404 there was
+a **wrong filename guess** (`es-andalusia-metro-de-sevilla…` for the real
+`es-andalusia-seville-metro-de-sevilla…`), i.e. a fact about the guess again.
+
+**The durable route is the catalogue's GitHub repo, which nobody here had
+used.** `MobilityData/mobility-database-catalogs` is public, and each feed's
+JSON carries the **agency's own** `urls.direct_download` plus the GCS
+`urls.latest`. Reading the repo tree (3,555 blobs) is one request and gives
+every feed's real addresses without touching the files host at all. **This
+should be the first stop in the next rail screen**, not the files host.
+
+| Feed | Route | Result |
+|---|---|---|
+| **Guadalajara** `mdb-2366` | GCS `mdb-latest` | ✅ **200, 2.54 MB** |
+| Guadalajara | agency `datos.jalisco.gob.mx` | 000 |
+| **CDMX** `mdb-3126` (SEMOVI, the *combined* feed) | GCS `mdb-latest` | **404** |
+| CDMX `mdb-3126` | agency `datos.cdmx.gob.mx` | **000** |
+| CDMX `mdb-1099` | agency `s3.amazonaws.com/setravi` | **403** |
+| **Sevilla** `mdb-2781` | **`nap.transportes.gob.es/api/Fichero/download/1583`** | **401 — gated, not absent** |
+
+**Correction 1 — CDMX drops OUT of Band A.** Every one of its four routes is
+dead: the city portal, the S3 bucket, the GCS mirror and the files host. The
+"MEXICO CITY IS UNBLOCKED" finding above was true when made and is **no longer
+true**. Mexico is a one-city country again until a route reappears.
+
+**Correction 2 — Guadalajara is confirmed, with line geometry.** Screened from
+the downloaded feed: **3 urban-rail routes** at `route_type 0` — *Línea 1
+Periférico Sur–Auditorio*, *Línea 2 Juárez–Tetlán*, *Línea 3 Arcos Zapopan–
+Central Camionera* — **12,231 stops, 100% with coordinates, and `shapes.txt`
+present**, so this project's every-line-gets-drawn-and-labelled invariant is
+satisfiable. Guadalajara stands alone in Band A for Mexico.
+
+**Correction 3 — Sevilla was recorded dead and is actually registration-gated.**
+Spain's **National Access Point** (`nap.transportes.gob.es`) is the publisher
+of record for `mdb-2781` and answers 401. That is the WMATA shape — a free
+account the owner can create — rather than an absence. It moves from "out" back
+to Band D with a named, cheap blocker.
+
+**A note on `mdb-3126` worth carrying forward.** The catalogue lists a CDMX feed
+this project had never seen, covering *Metro, Metrobús, Tren Ligero,
+Ferrocarriles Suburbanos, Trolebús, Cablebus and Pumabús* together — a better
+feed than `mdb-1099` (*corredores concesionados*, i.e. bus corridors) which is
+what the earlier "subway 12" screen actually used. **If CDMX comes back, use
+3126.** Worth re-checking `datos.cdmx.gob.mx` periodically, since the whole
+domain has been intermittent rather than permanently dead.
 
 ### The ceiling is no longer the binding constraint
 

@@ -283,6 +283,69 @@ San Diego's terms carry a strong disclaimer worth knowing about: the data is
 the information contained in the Data is accurate, true or correct", and the
 user indemnifies the city for claims arising from their use of it.
 
+#### Madrid — `censo de locales`, read 2026-09-22 (CANDIDATE, not built)
+
+**PERMITTED WITH CONDITIONS.** Two documents apply and both were read.
+
+**1. The declared licence.** `datos.madrid.es` CKAN gives `license_id = "cc-by"`,
+`"Creative Commons Attribution 4.0 International (CC BY 4.0)"`, `isopen: true`,
+author `Ayuntamiento de Madrid`, on both `200085-0-censo-locales` and its
+historical twin. **A deliberate choice**: the portal's `license_list` also
+offers `cc-by-nc` and `cc-by-nc-sa`, which would forbid this project, plus four
+bespoke restrictive sets (Madrid Destino, Bibliotecas, EMT, the general
+conditions below).
+
+**2. The general conditions, which bind by conduct.** *Condiciones de uso*
+links *"Condiciones generales para la modalidad general de puesta a disposición
+de los documentos reutilizables del Ayuntamiento de Madrid"*, and that document
+opens by making itself binding **without any acceptance step**:
+
+> "Las presentes condiciones generales **obligan a cualquier persona y/o empresa
+> que reutilice datos por el mero hecho de hacer uso** de los documentos
+> sometidos a ellas."
+
+Structurally this is Philadelphia's shape — terms incorporated by the act of
+use rather than by a licence field. **The content is the opposite.** The grant
+is broad and explicit:
+
+> "permiten la reutilización de los documentos y datos sometidos a ellas **para
+> fines comerciales y no comerciales** … la reutilización autorizada incluye
+> actividades como la **copia, difusión, modificación, adaptación, extracción,
+> reordenación y combinación** de la información."
+
+plus a free, non-exclusive assignment of any IP rights, worldwide, for the
+maximum term the law allows. It expressly covers data "en sus niveles más
+desagregados o 'en bruto'".
+
+**Six obligations, and four of them go beyond CC-BY:**
+
+| | Obligation |
+|---|---|
+| 1 | **Prescribed attribution wording** — *"Origen de los datos: Ayuntamiento de Madrid"*. CC-BY wants attribution; Madrid says what it must say |
+| 2 | **State the last-update date** of the documents reused, where the original carried one. **CC-BY does not require this** |
+| 3 | **No implied endorsement** — must not "indicar, insinuar o sugerir que el Ayuntamiento de Madrid participa, patrocina o apoya" the reuse |
+| 4 | **Do not distort the meaning** — *"Está prohibido desnaturalizar el sentido de la información"* |
+| 5 | **Preserve the metadata** on update date and reuse conditions; do not alter or delete it |
+| 6 | **Re-identification is expressly prohibited** — "está expresamente prohibido realizar labores de re-identificación de personas a partir de estos datos y otras fuentes" |
+
+**Obligation 4 is the fourth appearance of the transformation family** — after
+INEGI, Montréal and Seoul's KOGL. Ring density, bucketing and storefront
+filtering are all interpretation, so the notice must say the map interprets the
+data rather than merely crediting the source. **Obligation 6 is the first time
+a licence has contractually forbidden what this project's privacy invariant
+already forbids voluntarily**, and it bears directly on the `rotulo` field:
+combining a trade name with a precise address is exactly the operation the
+clause is about, so the existing `check_personal_exposure.py` gate is a licence
+obligation here, not only a house rule.
+
+Also recorded: the disclaimer is ordinary (no warranty, no guarantee of
+continuity, reuser bears the risk), and reusers are placed under the sanctions
+regime of **article 11 of Ley 37/2007** on public-sector information reuse.
+
+**6b — privacy work already done at source?** Not applicable in the French or
+Edmonton sense: the census carries premises, not people. `rotulo` is a shop
+sign. Obligation 6 above makes the project's own residence check contractual.
+
 #### Seoul — eight `인허가 정보` datasets, read 2026-09-22 (CANDIDATE, not built)
 
 Recorded now because the licence was read now; **no Korean city is built, so

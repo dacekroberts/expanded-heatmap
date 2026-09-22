@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**106 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**107 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Madrid's licence read; the Mobility Database moved its files, and Mexico City drops out of Band A](#2026-09-22---madrids-licence-read-the-mobility-database-moved-its-files-and-mexico-city-drops-out-of-band-a)
 - [Nine-item probe sweep: Madrid, Barcelona and Milan promote; Band A is seven cities](#2026-09-22---nine-item-probe-sweep-madrid-barcelona-and-milan-promote-band-a-is-seven-cities)
 - [Master city list rebanded, and eleven cities were discarded on a reason this project's own file contradicts](#2026-09-22---master-city-list-rebanded-and-eleven-cities-were-discarded-on-a-reason-this-projects-own-file-contradicts)
 - [Seoul's screening is finished: 197,276 active premises, KOGL Type 1, no open questions](#2026-09-22---seouls-screening-is-finished-197276-active-premises-kogl-type-1-no-open-questions)
@@ -142,6 +143,70 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Madrid's licence read; the Mobility Database moved its files, and Mexico City drops out of Band A
+
+- **Madrid is PERMITTED WITH CONDITIONS, and the second document was the one
+  that mattered.** CKAN declares `license_id="cc-by"` (CC BY 4.0, `isopen:
+  true`) on the censo de locales - a deliberate choice, since the portal also
+  offers `cc-by-nc` and `cc-by-nc-sa`. But *Condiciones de uso* links
+  *Condiciones generales para la modalidad general…*, which binds **without any
+  acceptance step**: "obligan a cualquier persona y/o empresa que reutilice
+  datos **por el mero hecho de hacer uso**". Structurally that is Philadelphia's
+  incorporation-by-conduct; the content is the opposite, granting reuse "para
+  fines comerciales y no comerciales" including "copia, difusión, modificación,
+  adaptación, extracción, reordenación y combinación", plus a free non-exclusive
+  worldwide IP assignment covering data "en sus niveles más desagregados o 'en
+  bruto'". **Four of its six obligations go beyond CC-BY**: prescribed
+  attribution wording ("Origen de los datos: Ayuntamiento de Madrid"), a
+  requirement to state the **last-update date**, preservation of the reuse-terms
+  metadata, and an express prohibition on **re-identification of persons**.
+  Obligation 4, "está prohibido desnaturalizar el sentido de la información", is
+  the **fourth appearance of the transformation family** after INEGI, Montréal
+  and KOGL - so a bare source credit does not discharge it. The
+  re-identification clause is the **first time a licence has contractually
+  required what this project's privacy invariant already does voluntarily**,
+  and it bears on `rotulo`: trade name plus precise address is the operation the
+  clause names, making `check_personal_exposure.py` a licence obligation here
+  rather than only a house rule. Recorded in `docs/data_sources.md`.
+- **`files.mobilitydatabase.org` is 403 host-wide, and my first framing of that
+  was too broad.** Every path returns `<Error><Code>AccessDenied</Code></Error>`
+  - host root, `mdb-<id>/…` and `mdb-latest/…`, for CDMX, Guadalajara, Sevilla
+  and Toronto alike; `api.mobilitydatabase.org` answers **413** on every path
+  including bare GETs. The body names no IP and carries no WAF id, so by this
+  project's own rule it is an **authentication wall, not an IP block**. But the
+  claim that this "affects every feed sourced that way" was **wrong**: the
+  `mdb-latest` mirror used to unblock CDMX lives on `storage.googleapis.com`, a
+  **different host**, and is still public - Guadalajara downloaded from it
+  cleanly at 2,542,046 b. The earlier 404 there had been a wrong filename guess.
+- **The durable route is the catalogue's GitHub repo, which this project had
+  never used.** `MobilityData/mobility-database-catalogs` is public and each
+  feed's JSON carries the **agency's own** `urls.direct_download` alongside the
+  GCS `urls.latest`; one request for the repo tree returns all 3,555 blobs.
+  **This becomes the first stop in the next rail screen**, ahead of the files
+  host, because it survives the files host changing access policy.
+- **Mexico City drops OUT of Band A.** All four of its routes are dead: the city
+  portal (`datos.cdmx.gob.mx`, 000, consistent with the standing domain-wide
+  outage), the S3 bucket `s3.amazonaws.com/setravi` (403), the GCS mirror (404)
+  and the files host (403). The 2026-09-21 "MEXICO CITY IS UNBLOCKED" finding
+  was true when made and is no longer true, so **Mexico is a one-city country
+  again**. Noted for when it returns: the catalogue lists **`mdb-3126`**, a
+  SEMOVI feed covering Metro, Metrobús, Tren Ligero, Ferrocarriles Suburbanos,
+  Trolebús, Cablebus and Pumabús together, which is a better feed than the
+  `mdb-1099` *corredores concesionados* that the earlier "subway 12" screen
+  actually used.
+- **Guadalajara re-verified and it carries line geometry.** Screened from the
+  downloaded feed: **3 urban-rail routes** at `route_type 0` (Líneas 1-3 of the
+  Tren Ligero), **12,231 stops, 100% with coordinates, and `shapes.txt`
+  present** - so the every-line-drawn-and-labelled invariant is satisfiable. It
+  is now the only Mexican city in Band A, and the recommended next build.
+- **Sevilla was recorded dead and is actually registration-gated**, which is a
+  different finding. The catalogue names Spain's **National Access Point**
+  (`nap.transportes.gob.es/api/Fichero/download/1583`) as the publisher of
+  record for `mdb-2781`, and it answers **401** rather than 404 - the WMATA
+  shape, a free account the owner can create. Moved from "out" back to Band D
+  with a named cheap blocker. Files touched:
+  `docs/data_sources.md`, `docs/global_country_shortlist.md`.
 
 ### 2026-09-22 - Nine-item probe sweep: Madrid, Barcelona and Milan promote; Band A is seven cities
 
