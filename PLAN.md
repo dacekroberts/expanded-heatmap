@@ -348,6 +348,27 @@ Desktop is unaffected — the label is fully visible there.
 
 ## Structure
 
+- [x] ~~Finish the `check_stale_claims.py` category-B pass~~ - **done
+  2026-09-22**, seven passes, **74 flagged counts to 35**, files scanned 39 to
+  27 as dated records were recognised. Stopped at the floor rather than at
+  zero: what remains is correctly scoped facts ("all five boroughs", "the six
+  pre-1998 municipalities"), dated evidence in the two country trails, and
+  three false positives from single-line quote matching. **Continuing would
+  mean tuning the checker to silence rather than finding defects.** Real finds
+  are listed in that day's `DECISIONS.md` entries. If a future pass wants more
+  signal, the lever is a new detector - not a narrower category B.
+
+- [x] ~~Write `scripts/check_stale_claims.py`~~ - **done 2026-09-22.**
+  Reports and always exits 0. On its first real run it found three notices in
+  the deploy gate marked NOT YET DISPLAYED - Chicago, SFMTA and LA Metro - that
+  were all in `_NOTICES` and had been displayed for some time, so the list that
+  gates the public deploy was understating this project's compliance. Tuning
+  history is in the module docstring and the sweep skill: digits matched 1,012
+  measurements, undetermined counts 265 mostly-correct scoped facts, and
+  requiring a determiner cut it to 74. **Known blind spot:** category A matches
+  on built CITY names, so agency names miss - two of the three notices above
+  were found by a follow-up grep rather than by the tool.
+
 - [x] ~~Fill in the remaining local taxonomy skeleton (`phl_licensetype`)~~ -
   **done 2026-09-21** from the full `SELECT DISTINCT licensetype` pull; all 50
   active types carry an explicit verdict. No taxonomy skeletons remain.

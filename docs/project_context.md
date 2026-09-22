@@ -274,7 +274,9 @@ Cities built and running end to end (pipeline, map, app page):
   values, which are **newline-separated with several per licence**, so a
   premises holding more than one is resolved by `BUCKET_PRIORITY`. Buckets are
   anchored on `naics.py` rather than invented, which is what keeps this city
-  comparable with the five NAICS cities.
+  comparable with every city sharing that anchor. (Named, not counted: this
+  said "the five NAICS cities" until 2026-09-22, when there were four.
+  `CLAUDE.md` asks this file to carry no counts, and that is why.)
 
   It is the only city whose **registry marks individual registrants itself**:
   Vancouver wraps a sole proprietor's own name in parentheses. That is a
