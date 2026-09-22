@@ -83,9 +83,9 @@ its way, and the column says what.
 | **2** | **Mexico** / Guadalajara | Guadalajara LRT 3 verified | **DENUE**, 6M+ establishments, **SCIAN = NAICS**, INEGI licence clears | **CDMX is domain-wide unreachable**; Guadalajara carries it meanwhile |
 | **2** | **Brazil** / São Paulo | **94 stations + 6 lines**, EPSG:31983 already correct, metro/trem discriminator, built/planned separate | CNPJ, ~72M, trade name + address + CNAE | **No coordinates** → geocoding past Toronto's scale |
 | **3** | **Norway** / Oslo | metro 5, tram 9 | **MEASURED premises-level** — 152,060 Oslo sub-units, `beliggenhetsadresse`, NACE, open API no key | No coordinates → geocoding |
-| **3** | **Israel** / Tel Aviv | 332 station points + **27 lines**, CC-BY | **Mismatch** — the national portal's only register is Be'er Sheva, which has no rail | **Tel Aviv's own portal is bot-protected** (HTTP 472); needs the browser |
-| **3** | **Peru** / Lima | ODC-BY station set | unprobed | **2018 vintage, Line 1 only** — Line 2 absent |
-| **3** | **Japan** / Tokyo | **solved**: 10,235 stations + 21,932 line segments, PDL 1.0 | **Aggregate counts only** | **The business data** — this is the blocker, not transit |
+| **3** | **Japan** / Tokyo | **solved**: 10,235 stations + 21,932 line segments, PDL 1.0 | **UPGRADED — premises-level food permits with coordinates**, on the national standard schema, CC BY | **A two-bucket ceiling** — no general retail permit exists in Japan |
+
+**Israel and Peru moved to Tier 4** (2026-09-21) — see below.
 
 **Tier 3 continues** with rail measured and business unprobed: Vienna
 (subway 35, tram 185 — deepest in the screen), Amsterdam/Rotterdam (14/46),
@@ -480,8 +480,10 @@ before the next country is profiled.
 
 | | Why | Basis |
 |---|---|---|
-| **United Kingdom** | Business data is the wrong object — VOA is property without names, Companies House is registered offices, FSA is food-only | MEASURED |
-| **Japan** | Business data is **aggregate counts by area**, not an establishment register. **Its transit is fully solved** — see below | MEASURED |
+| **United Kingdom** | **Re-checked 2026-09-21 and still out, for a sharper reason.** Beyond VOA (property without names), Companies House (registered offices) and the FSA (food only), councils publish **NNDR business-rates** data under the Local Government Transparency Code — premises address, rateable value, property description and ratepayer name. It fails on three counts: **names are given only for limited companies and redacted for sole traders and partnerships under GDPR**; the only classification is a property description (`shop`) which **cannot produce this project's three buckets**; and it is published **per council across 300+ authorities** in separate bespoke spreadsheets. The best UK source is premises without a usable category | MEASURED |
+| **Israel** | Transit measured and good — 332 points, 27 lines, CC-BY — but **the business leg has no route**. The national portal's only business-licensing register is Be'er Sheva's, a city with no rail; Tel Aviv's own portal returns **HTTP 472**, refusing automated requests. Moved here 2026-09-21: good rail with no reachable matching business data is not a candidate | MEASURED |
+| **Peru** | The Lima Line 1 station set is real and ODC-BY, but **dated March 2018 and Line 1 only** — Line 2 has been opening since 2023 and is absent, so the source understates the city and is seven years stale. Moved here 2026-09-21 | MEASURED |
+| ~~**Japan**~~ | **MOVED UP to Tier 3, 2026-09-21.** The earlier ruling rested on the Economic Census being aggregate — true, and the wrong source. Japanese municipalities publish **食品営業許可 (food business permits) as premises-level open data with coordinates**: Minato Ward alone is **5,723 premises**, CC BY, carrying `施設名称`, **`施設名称_英字`** (English name), `営業の種類`, a full address plus split components, **`緯度`/`経度`**, `法人番号`, and permit and closure dates. Crucially it follows Japan's **national 推奨データセット standard schema** (`全国地方公共団体コード`, `町字ID`), so every municipality publishing it uses identical columns and the per-ward assembly is mechanical rather than bespoke. **The real ceiling is two buckets** — Japan has no general retail permit, so retail would be absent, which is Toronto's and Boston's shape. 生活衛生関係営業 permits (理容所, 美容所) are the likely Personal services source and are unprobed | MEASURED |
 | **Taiwan** | **Nothing for Taipei, Kaohsiung, Taoyuan or TDX anywhere in the catalogue.** The 9 Taiwanese feeds are rural bus operators | MEASURED |
 | **Hong Kong** | **No MTR feed anywhere in the catalogue.** The Transport Department feed carries tram/LRT 7 and no subway | MEASURED |
 | **Jakarta** | **No MRT Jakarta or LRT Jakarta feed anywhere.** Transjakarta is BRT | MEASURED |
