@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**107 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**108 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Mexico nationwide GIS probe: no new route, but CDMX is a retry rather than a loss](#2026-09-22---mexico-nationwide-gis-probe-no-new-route-but-cdmx-is-a-retry-rather-than-a-loss)
 - [Madrid's licence read; the Mobility Database moved its files, and Mexico City drops out of Band A](#2026-09-22---madrids-licence-read-the-mobility-database-moved-its-files-and-mexico-city-drops-out-of-band-a)
 - [Nine-item probe sweep: Madrid, Barcelona and Milan promote; Band A is seven cities](#2026-09-22---nine-item-probe-sweep-madrid-barcelona-and-milan-promote-band-a-is-seven-cities)
 - [Master city list rebanded, and eleven cities were discarded on a reason this project's own file contradicts](#2026-09-22---master-city-list-rebanded-and-eleven-cities-were-discarded-on-a-reason-this-projects-own-file-contradicts)
@@ -143,6 +144,57 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Mexico nationwide GIS probe: no new route, but CDMX is a retry rather than a loss
+
+- **Ran the Mexico probe as a GIS question rather than a feed question**, since
+  that reframing flipped Japan, Korea and Taiwan, and since DENUE already
+  supplies every Mexican city's business leg with coordinates under a cleared
+  licence. **It produced no new rail route**, which is itself worth recording
+  given how often this reframing has paid: it is not a universal key.
+  Probed: INEGI (portal, mapas, datos abiertos, Red Nacional de Caminos, temas
+  - all reachable, but its site search returned 108 results for *vías férreas*
+  that were all public-security censuses, so the term was not applied);
+  `gaia.inegi.org.mx` (200 but **0 bytes**); SICT and ARTF (~1 KB shells,
+  `geoportal.sct.gob.mx` unreachable); `datos.gob.mx` (live, not CKAN at the
+  documented path).
+- **The single most useful result was `ecobici.cdmx.gob.mx` answering 200 with
+  152 KB** while datos, portal, sig, adip, metro and semovi on the same domain
+  all time out. That discriminates: **the network path from here is fine and
+  those hosts are individually down**, so this is neither a domain-wide block
+  nor an IP-level refusal. It **corrects the earlier finding** that "every
+  `*.cdmx.gob.mx` host times out, which is a more durable finding than one
+  portal being down" - the domain is not uniformly dead, and CDMX is therefore a
+  **retry candidate rather than a permanent loss**. This project has already
+  recorded a transient outage as a durable fact once (`data.go.kr`, 21 s
+  timeouts from two networks, HTTP 200 an hour later), which is the reason to
+  hold the line here.
+- **Monterrey is now a measured negative at the publisher, not an absence from a
+  catalogue.** `datos.nl.gob.mx` is live and is a **WordPress brochure site** -
+  `wp-content`, `portfolio_page`, `comments/feed`, publishing PDFs and
+  statistics pages. No catalogue, no API, no Metrorrey data. Previously recorded
+  only as "not in the catalogue under any of `monterrey`, `metrorrey`, `nuevo
+  león`"; this is the stronger form of the same conclusion.
+  `datos.monterrey.gob.mx` returns a 1 KB shell.
+- **Rejected the third-party GTFS mirrors on consistency grounds.** GitHub
+  carries `CarlosGiles/gtfs-cdmx`, `CelesteBJ/gtfs_cdmx` and others, and no
+  official CDMX government org exists (`SEMOVI-CDMX`, `datos-cdmx` and `LabCDMX`
+  404; `CDMX-ADIP` and `adip-cdmx` have zero repos). These are the same shape as
+  **Dubai's catalogue entry, "an anonymous personal GitLab job artefact", which
+  this project already rejected** - publishing a city's transit geometry on an
+  individual's untracked repository, with no licence and no provenance. Ruled
+  out rather than treated as a find.
+- **Raised, and deliberately not decided: whether OpenStreetMap is an acceptable
+  source for the rail leg.** It is the only option that would unblock CDMX,
+  Monterrey and every future city at once; CDMX's Metro and Monterrey's
+  Metrorrey are both comprehensively mapped; the data is ODbL and **this project
+  already displays OSM attribution on every map**, so it adds no new licence
+  obligation. Against it: community rather than agency data, and the invariant
+  that every drawn line carries its real public name would need per-city
+  verification instead of coming from `routes.txt`. **All fourteen built cities
+  used agency data for the transit leg, so this is a change of sourcing practice
+  and an owner decision rather than a measurement.** Flagged, not assumed.
+  Files touched: `docs/global_country_shortlist.md`.
 
 ### 2026-09-22 - Madrid's licence read; the Mobility Database moved its files, and Mexico City drops out of Band A
 

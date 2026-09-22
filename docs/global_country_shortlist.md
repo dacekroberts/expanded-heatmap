@@ -699,6 +699,78 @@ what the earlier "subway 12" screen actually used. **If CDMX comes back, use
 3126.** Worth re-checking `datos.cdmx.gob.mx` periodically, since the whole
 domain has been intermittent rather than permanently dead.
 
+### MEXICO NATIONWIDE PROBE, 2026-09-22 — the business leg is national, the rail leg is the wall
+
+Run as a **GIS** probe rather than a feed probe, since that framing flipped
+Japan, Korea and Taiwan, and since DENUE already covers every Mexican city with
+coordinates and a cleared licence. **Only rail geometry is missing — and it is
+missing for every Mexican city except Guadalajara.**
+
+**Mexican cities with actual urban rail** (BRT excluded, which rules out Puebla,
+Mérida and León): **CDMX** — Metro 12, Tren Ligero, Trolebús, Cablebús,
+Suburbano; **Guadalajara** — Tren Ligero 3, *already confirmed*; **Monterrey** —
+Metrorrey 3.
+
+| Route | Result |
+|---|---|
+| **INEGI** (portal, mapas, datos abiertos, RNC, temas) | All reachable. Its site search returned 108 results for *vías férreas* that were all **public-security censuses** — the term was not applied, and no rail layer was surfaced by this route |
+| `gaia.inegi.org.mx` (Mapa Digital web services) | 200 but **0 bytes** |
+| **SICT / ARTF** | Portals answer with ~1 KB shells; `geoportal.sct.gob.mx` **unreachable** |
+| `datos.gob.mx` | Live, but **not CKAN** at `/busca/api/3/...` |
+| **Every `*.cdmx.gob.mx`** — datos, portal, sig, adip, metro, semovi | **All time out** |
+| **`ecobici.cdmx.gob.mx`** | **200, 152 KB** |
+| `datos.nl.gob.mx` (Nuevo León) | Live — and a **WordPress brochure site** (`wp-content`, `portfolio_page`, `comments/feed`). Not a data portal |
+| `datos.monterrey.gob.mx` | 200, **1 KB** shell |
+| Internet Archive (for an archived CDMX `gtfs.zip`) | **429, then "Temporarily Offline"** — the archive itself is down |
+| GitHub, official CDMX orgs | `SEMOVI-CDMX`, `datos-cdmx`, `LabCDMX` **do not exist**; `CDMX-ADIP` and `adip-cdmx` have **0 repos** |
+
+**The `ecobici` result is the useful one.** It is the single host on
+`cdmx.gob.mx` that answers, which means **the network path from here is fine and
+the other hosts are individually down** — not a domain-wide block, not an
+IP-level refusal. That makes CDMX a *retry* candidate rather than a permanent
+loss, and it corrects the earlier "every `*.cdmx.gob.mx` host times out, which
+is a more durable finding than one portal being down" — the domain is not
+uniformly dead.
+
+**Monterrey is a real negative and a cheap one.** The state's "open data"
+portal is a WordPress site publishing PDFs and statistics pages; there is no
+catalogue, no API, and no Metrorrey data publication. Monterrey was previously
+recorded only as "not in the catalogue under any of `monterrey`, `metrorrey`,
+`nuevo león`" — this is the stronger finding, reached at the publisher.
+
+**Third-party GTFS mirrors exist and are not acceptable.** A GitHub search finds
+`CarlosGiles/gtfs-cdmx`, `CelesteBJ/gtfs_cdmx` and others. These are the same
+shape as **Dubai's catalogue entry — "an anonymous personal GitLab job
+artefact" — which this project already rejected.** Using one would mean
+publishing a city's transit geometry on the authority of an individual's
+untracked repository, with no licence and no provenance. Consistency says no.
+
+#### What is actually left, and one of the three is a decision rather than a probe
+
+1. **Retry CDMX's hosts.** They are individually down, not blocked, and this
+   project has already been wrong once by recording a transient outage as a
+   durable finding (`data.go.kr`, 21 s timeouts from two networks, 200 an hour
+   later). Cheap, and it is the route that yields `mdb-3126` — the SEMOVI feed
+   covering Metro, Metrobús, Tren Ligero, Suburbanos, Trolebús and Cablebús
+   together.
+2. **Retry the Internet Archive** for the archived `gtfs.zip`, once the archive
+   is back up. Untested rather than ruled out.
+3. **Decide whether OpenStreetMap is an acceptable source for rail geometry.**
+   **This is an owner decision, not a measurement**, and it is the only one that
+   unblocks CDMX *and* Monterrey *and* every future city at once.
+
+   For: CDMX's Metro and Monterrey's Metrorrey are both comprehensively mapped;
+   the data is ODbL, and **this project already displays OSM attribution on
+   every map**, so the licence adds no new obligation. Against: it is community
+   rather than agency data, so it is not authoritative in the way a published
+   feed is, and this project's invariant that **every drawn line carries its
+   real public name** would need verifying per city rather than being taken from
+   `routes.txt`.
+
+   It is a genuine change of sourcing practice — agency data for the transit
+   leg has been the rule for all fourteen built cities — so it is flagged here
+   rather than assumed either way.
+
 ### The ceiling is no longer the binding constraint
 
 An earlier version of this section argued for trimming, on
