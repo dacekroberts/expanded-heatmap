@@ -348,6 +348,10 @@ def add_city_entry(root, args, page_rel, dry_run):
     if f'"name": "{args.name}"' in text:
         print(f"  skip (already listed): app/cities.py has {args.name}")
         return
+    # The landing view frames the United States. Every city outside it declares
+    # False; a US city is in it. Derived from the region rather than defaulted,
+    # because the default is the bug - see the comment in the entry below.
+    default_view = args.region.startswith("United States")
     entry = (
         "    {\n"
         f'        "name": "{args.name}",\n'
@@ -361,6 +365,32 @@ def add_city_entry(root, args, page_rel, dry_run):
         # hard way. A region new to the project must ALSO be appended to
         # REGION_ORDER by hand - this only tags the city.
         f'        "region": "{args.region}",\n'
+        # BOTH KEYS BELOW ARE WRITTEN BECAUSE THEIR ABSENCE IS NOT NEUTRAL.
+        # Barcelona shipped without either on 2026-09-22 and both surfaced in
+        # check_deploy_imports, the second one disguised:
+        #
+        #   label_offset    - pd.DataFrame fills a missing key with
+        #                     float('nan'), which is not None AND is truthy.
+        #                     That took the whole Overview page down earlier
+        #                     the same day, via Mexico City.
+        #   in_default_view - IN_DEFAULT_VIEW reads `.get(..., True)`, so a
+        #                     missing key means INCLUDED. Barcelona silently
+        #                     joined the landing frame and stretched it from
+        #                     California to Catalonia; the five reported
+        #                     failures named Calgary, Toronto, Guadalajara and
+        #                     Los Angeles, and not one named a Spanish city.
+        #
+        # A defaulted key that is usually right is worse than a missing one,
+        # because the fifteen cities that happened to carry it are what hid
+        # the first of these.
+        f'        "in_default_view": {default_view},\n'
+        f'        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a\n'
+        f'        # pinned zoom. Run `python scripts/check_macro_labels.py`,\n'
+        f'        # which scores every city in every region at three widths -\n'
+        f'        # and which will first demand this city\'s label width be\n'
+        f'        # MEASURED in a real browser with Space Grotesk loaded, since\n'
+        f'        # it refuses a guessed one.\n'
+        f'        "label_offset": ("middle", 0, -22),\n'
         "    },\n"
     )
     # Find the end of the CITIES list specifically, NOT the last "]" in the
@@ -497,8 +527,16 @@ Still to do (nothing generated for these):
   2. pipeline/{args.slug}/step1_stations.py and step2_clean_businesses.py: copy the
      built city nearest in shape (see .claude/skills/scaffold-city/SKILL.md).
   3. Fill LINE_SHAPES / LINE_NAMES, the page prose and the cities.py blurb.
-  4. grep -rn TODO pipeline/{args.slug} app  ->  must be empty before commit.
-  5. Run the steps, look at the map, drift check, deploy-verify, DECISIONS entry.""")
+  4. grep -rn TODO pipeline/{args.slug} app  ->  must be empty before commit,
+     AND `grep -n TODO app/cities.py` - the blurb is written there, not in
+     pipeline/, so a pipeline-only grep misses it.
+  5. MEASURE this city's macro-map label width in a real browser with Space
+     Grotesk loaded, add it to check_macro_labels.py's TEXT_WIDTH, then run
+     that script. It refuses a guessed width. The label_offset written above
+     is a starting value and has not been scored against anything.
+  6. python scripts/check_deploy_imports.py --ref <branch>  ->  it catches what
+     a local run cannot, including a city that quietly joined the landing view.
+  7. Run the steps, look at the map, drift check, deploy-verify, DECISIONS entry.""")
 
 
 if __name__ == "__main__":
