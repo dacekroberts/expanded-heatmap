@@ -16,11 +16,18 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**136 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**143 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
 - [The `osm_route_refs` check, and the correction it immediately made to the entry above](#2026-09-22---the-osm_route_refs-check-and-the-correction-it-immediately-made-to-the-entry-above)
+- [Category B, fifth pass: the add-city skill's header still said four cities](#2026-09-22---category-b-fifth-pass-the-add-city-skills-header-still-said-four-cities)
+- [Category B, fourth pass: a flagged proposal that had already become practice](#2026-09-22---category-b-fourth-pass-a-flagged-proposal-that-had-already-become-practice)
+- ["The five NAICS cities" were four, in two current-state documents](#2026-09-22---the-five-naics-cities-were-four-in-two-current-state-documents)
+- [The distinction category B turns on: a dated document's count is evidence, not drift](#2026-09-22---the-distinction-category-b-turns-on-a-dated-documents-count-is-evidence-not-drift)
+- [Category B, first pass: Madrid was filed under OpenStreetMap, and three counts had drifted](#2026-09-22---category-b-first-pass-madrid-was-filed-under-openstreetmap-and-three-counts-had-drifted)
+- [The stale-prose check found three notices in the deploy gate marked undisplayed that were displayed](#2026-09-22---the-stale-prose-check-found-three-notices-in-the-deploy-gate-marked-undisplayed-that-were-displayed)
+- [A third session role: auditing what the forward-facing sessions leave behind](#2026-09-22---a-third-session-role-auditing-what-the-forward-facing-sessions-leave-behind)
 - [Barcelona's four owner decisions settled, and its brief's OSM breakdown corrected](#2026-09-22---barcelonas-four-owner-decisions-settled-and-its-briefs-osm-breakdown-corrected)
 - [Madrid's provenance recorded before its wiring lands, and the transit table stopped calling itself GTFS](#2026-09-22---madrids-provenance-recorded-before-its-wiring-lands-and-the-transit-table-stopped-calling-itself-gtfs)
 - [Mexico City and Guadalajara promoted into the provenance tables, and OSM rail gets its own subsection rather than a GTFS row](#2026-09-22---mexico-city-and-guadalajara-promoted-into-the-provenance-tables-and-osm-rail-gets-its-own-subsection-rather-than-a-gtfs-row)
@@ -227,6 +234,282 @@ onwards; the early ones are split by phase rather than by hour.
   Barcelona brief's OSM prose carries BOTH readings and the check pins the
   `overpass-api.de` one, so a disagreement surfaces rather than a number being
   quietly believed.
+### 2026-09-22 - Category B, fifth pass: the add-city skill's header still said four cities
+
+- **`.claude/skills/add-city/SKILL.md` opened "Distilled from the four cities
+  actually built (San Diego, San Francisco, Los Angeles, Chicago)".** Sixteen
+  are built across four countries, and most of what that skill has learned
+  since - multi-source cities, non-GTFS rail, licence notices per source,
+  personal-column omission at the download boundary - came from the later ones.
+  The header now names no number and points at `app/cities.py` for the current
+  list, while keeping the original four as the origin story, which is the part
+  that was actually worth saying. **An instruction file is the worst place for
+  a stale count**, because it is read by someone who does not yet know the
+  project well enough to doubt it.
+
+- **Two counts that were CORRECT were still removed, both written earlier
+  today, both mine.** `CLAUDE.md` and the same skill said the provenance rule
+  "was followed for the nine US cities and silently skipped for the eight that
+  arrived through a country profile". Nine and eight are both right when
+  counting municipalities rather than map entries - Vancouver's regional build
+  is two. That subtlety is exactly the maintenance burden the category is
+  about: a number that needs a footnote to stay true will not survive the next
+  city. Both now say "the US cities" and "every city that arrived through a
+  country profile".
+
+- **Read and kept, with reasons:** `osm-rail`'s "All fourteen cities before
+  Mexico City read GTFS" is a dated historical statement and correct;
+  `add-country`'s "All six Canadian sources are UTF-8" is scoped to a country
+  whose build is finished; `multi-source-city`'s "the two diagnosed cities" is
+  New York and Philadelphia and will only change if a third is diagnosed, at
+  which point the skill is being edited anyway.
+
+- **Category B after five passes: 74 -> 37 flagged.** The `PLAN.md` resume note
+  from the fourth pass still describes what is left accurately, with the skills
+  line now closed.
+
+### 2026-09-22 - Category B, fourth pass: a flagged proposal that had already become practice
+
+- **`global_country_shortlist.md` said agency data "has been the rule for all
+  fourteen built cities", and it was stale twice over.** Numerically, sixteen
+  are built. More usefully, the paragraph was FLAGGING a possible change of
+  sourcing practice as a live question - and that change has since happened
+  three times: Mexico City and Guadalajara draw rail from OpenStreetMap, Madrid
+  from CRTM's ArcGIS services. It now has its own skill and its own subsection
+  in `data_sources.md`. **A count going stale was the symptom; the real defect
+  was a settled question still written as open.** That is a shape worth adding
+  to the sweep's vocabulary.
+
+- **One count was correct by coincidence and was still removed.** "The fourteen
+  agency-sourced cities" happened to be exactly right on 2026-09-22 - sixteen
+  built, two from OpenStreetMap - and would have been wrong on the next build
+  in either direction. Correct-today is not a reason to keep a hand-kept
+  number; it is the state every drifted count was in once.
+
+- **Category B after four passes: 74 -> 40 flagged, files scanned 39 -> 27.**
+  Stopped here against the owner's 98% instruction with the five-hour window at
+  92%, and `PLAN.md` now carries a precise resume note: which files remain,
+  how many hits each, and - for each - whether the next pass should expect to
+  EDIT or to READ AND KEEP. `city_master_list.md`'s eight are maintained by
+  design, since `CLAUDE.md` designates it the file counts are read off; the
+  survivors in `data_sources.md` are scoped facts plus this session's own
+  corrections quoting the text they replace.
+
+- **A false-positive class now named twice, so it is a real limitation:**
+  multi-line quotations. `QUOTED_RE` matches within one line, so a correction
+  that quotes the wrong sentence across a line break keeps reporting. Three of
+  the surviving hits are this session's own corrections. Left unfixed
+  deliberately - widening the regex to span lines would swallow real counts
+  inside long quoted blocks, which is the worse failure for a check whose whole
+  value is that people read its output.
+
+### 2026-09-22 - "The five NAICS cities" were four, in two current-state documents
+
+- **A verified count defect, in a user-facing file.** Both
+  `docs/excluded_categories.md` and `docs/project_context.md` said a city's
+  buckets are anchored on `naics.py` so it "stays comparable with **the five
+  NAICS cities**". Counted from the configs: `TAXONOMY_SYSTEM == "naics"` holds
+  for San Diego, San Francisco, Los Angeles and Montreal — **four**. Mexico
+  City and Guadalajara use `"scian"`, which is Mexico's own instrument and a
+  separate module. `excluded_categories.md` is linked from every page of the
+  site as "What is counted, and what is not", so this was a wrong number in
+  front of readers.
+
+- **Deleted rather than corrected, in both.** The sentence now names the
+  anchor — comparable with every city whose buckets come from `naics.py` —
+  because what matters is that the boundaries come from one module, not how
+  many cities currently use it. Writing "four" would have reset the clock until
+  the next NAICS city landed. `CLAUDE.md` already asks `project_context.md` to
+  carry no counts, and this is the case that shows why.
+
+- **Build briefs excluded from the count check, for the dated-record reason.**
+  `CLAUDE.md` says a brief "caches Step 0's mistakes as confidently as its
+  findings", and Calgary's calls itself "the biggest map of the four
+  remaining" — true during the Canada build, a snapshot rather than drift.
+  Briefs already have the right instrument in `scripts/brief_check.py`, which
+  re-runs their claims against live sources; this check cannot tell a stale
+  brief from an accurate record of a past probe.
+
+- **Report after three passes: A 3 -> 1, B 74 -> 42, C 0**, and the files
+  scanned fell from 39 to 27 as dated records were recognised as such. Most of
+  what is left is correctly scoped — "the two Alberta cities", "two of the
+  four registries", "the two City Boundary layers" — and the next pass is
+  `global_country_shortlist.md` and `city_master_list.md`, the second of which
+  `CLAUDE.md` designates as the place counts are SUPPOSED to live.
+
+### 2026-09-22 - The distinction category B turns on: a dated document's count is evidence, not drift
+
+- **Excluded handovers and retrospectives from `check_stale_claims.py`, and the
+  reason is stronger than noise.** `docs/passover_opus5.md` pins itself to
+  commit `520c165` and opens by saying it is "a map and a set of claims to
+  test, not a source of truth"; `us_build_retrospective.md` and
+  `canada_retrospective.md` describe what was true when written. **Their counts
+  are evidence, and updating one would destroy the record** - a count there is
+  a defect only if it was wrong ON THAT DATE, which no script can know.
+
+- **That is the distinction the whole category turns on, and it was not stated
+  until now:** a CURRENT-STATE document carrying a count has a maintenance
+  burden; a DATED one does not. A sweep that "corrects" a retrospective to
+  match the present has done damage, not work. Written into both the script's
+  docstring and the sweep skill, because the obvious instinct on seeing "all
+  four cities" in a handover is to fix it.
+
+- **Report after two passes: A 3 -> 1, B 74 -> 52, C 0.** The single remaining
+  A hit is a coincidence - a New Orleans row whose line happens to contain both
+  "not yet" and the word Boston - and is not worth another exclusion rule.
+
+- **Read and deliberately KEPT, which is as much the output as the edits.**
+  `docs/project_context.md` carries four counts and three are correctly scoped
+  and stable: "the four registries" is New York's, "the two registries" is
+  Vancouver and Surrey's, "the six pre-1998 municipalities" is a fact about
+  Toronto's amalgamation. Only "comparable with the five NAICS cities" can
+  drift, and it is left for the next pass rather than changed in a hurry.
+  `docs/city_master_list.md` is exempt in spirit for a different reason -
+  `CLAUDE.md` designates it the current global list and says to read counts off
+  it, so its numbers are maintained by design rather than drifting.
+
+### 2026-09-22 - Category B, first pass: Madrid was filed under OpenStreetMap, and three counts had drifted
+
+- **Started working the `check_stale_claims.py` category-B list.**
+  `docs/data_sources.md` went from 16 flagged counts to 11; the total from 74
+  to 69. Most of the remainder are NOT defects and should stay: "All three
+  buckets" is a fixed concept of this project, "the six pre-1998
+  municipalities" is a historical fact about Toronto's amalgamation, and "all
+  five boroughs = the city" will be true as long as New York has five. **The
+  report is a review list, not a defect list**, and saying which entries were
+  read and kept is as much the output as the edits.
+
+- **The list caught an error this session had introduced hours earlier.**
+  Madrid's transit row was anchored after Guadalajara's and so landed inside
+  `### Rail geometry from OpenStreetMap`, a subsection whose prose explains
+  ODbL, notice 1 and the absence of an agency holding the licence - none of
+  which is true of Madrid, whose rail is CRTM's own ArcGIS service under CRTM's
+  own licence. The heading is now `### Rail geometry that is not a GTFS feed`
+  and the prose separates the two reasons: OSM because **no usable feed
+  exists**, Madrid because a feed exists, downloads cleanly and is **rejected
+  on a licence currency clause**. An absence and a consequence are not the same
+  case and were being filed as one.
+
+- **The parent section's new intro was also wrong, and it was mine.** It said
+  "three of the rail sources here are not feeds at all", describing a table in
+  which all fourteen rows are GTFS - the non-feed rows live in the subsection,
+  where the Mexico build had deliberately put them. Rewritten to say the first
+  table is all GTFS and the subsection is not. The rename of the parent heading
+  to `## Transit feeds` stands: a parent that says GTFS while holding a
+  not-GTFS subsection is the mislabelling that started this.
+
+- **Three counts deleted rather than corrected**, per the rule this category
+  exists to enforce. "**All seven** of these agreements are stored locally" -
+  it had been corrected from six to seven by another session while the
+  directory grew past twenty, so it now points at that directory's README as
+  the list and carries no number. "Affects **six of the nine built cities**" -
+  nine was the US-only era; the denominator is gone and the cities are simply
+  named. "**All five cities** can now be rebuilt from scratch from this
+  document alone" - written when there were five, and now the claim is made
+  without a number and attributed to `check_provenance.py`, which actually
+  asserts it.
+
+- **A false-positive class worth knowing: multi-line quotations.**
+  `QUOTED_RE` matches within a single line, so a correction that quotes the
+  wrong sentence it replaces across a line break still reports. Line 782 is
+  this session's own correction of the "four of the eight registries" claim and
+  will keep appearing. Not worth fixing in the regex; worth knowing before
+  chasing it.
+
+### 2026-09-22 - The stale-prose check found three notices in the deploy gate marked undisplayed that were displayed
+
+- **Wrote `scripts/check_stale_claims.py`**, the heuristic half of the cleanup
+  role, and it earned itself on the first real run. `check_provenance.py`
+  decides things and fails; this one **reports and always exits 0**, because
+  every rule in it is a guess about English and a noisy gate gets ignored,
+  which is worse than no gate.
+
+- **The find: notices 2, 3 and 4 - Chicago, SFMTA and LA Metro - all said
+  "required, NOT YET DISPLAYED", and all three are the first three entries in
+  `app/components.py`'s `_NOTICES`**, rendered from every page. The labels were
+  written before the footer existed and nothing brought them forward when it
+  shipped. So the list that GATES THE PUBLIC DEPLOY understated this project's
+  own compliance, in the direction that makes a deploy look blocked when it is
+  not - the opposite failure from Edmonton's, and just as invisible. Corrected,
+  with the reason recorded in place rather than silently.
+
+- **The tuning is the interesting part, and all of it is recorded in the module
+  docstring because each step traded recall for a report anyone will read.**
+  Matching digits returned **1,012 hits**, almost every one a measurement
+  ("664,662 rows") that is data and belongs there. Restricting to spelled-out
+  numbers gave 265, mostly correct scoped facts - "three buckets" is a fixed
+  concept here, "six pre-1998 municipalities" is history. Requiring a
+  **totalising determiner** ("all six", "the eight") cut it to **74**, which is
+  a review list rather than noise. The insight is that a hand-kept count only
+  rots when it asserts how many of a thing the project has *right now*.
+
+- **`DECISIONS.md` and `PLAN.md` are excluded, and that is the single most
+  important rule in the file.** This log is append-only history where "no
+  Canadian city is built" is a correct record of what was true that day, and
+  `PLAN.md` is open work where "not yet" is the point. Scanning either floods
+  the report with correct sentences, which is how a check becomes something
+  people skip.
+
+- **A KNOWN BLIND SPOT, stated rather than discovered later: category A matches
+  on built CITY names, and agency names are not city names.** "SFMTA" is not
+  "San Francisco" and "LA Metro" is not "Los Angeles", so the tool found ONE of
+  the three stale notices and a follow-up grep found the other two. A clean A
+  section means "nothing obvious", not "nothing". Recorded in the skill as well,
+  because a check whose limits are unwritten gets trusted past them.
+
+- **The skill and `PLAN.md` were written yesterday saying this script did not
+  exist; both now say it does.** Shipping a skill that cites a script it does
+  not have would have been the exact defect the skill is about, which is why it
+  was deferred rather than promised.
+
+### 2026-09-22 - A third session role: auditing what the forward-facing sessions leave behind
+
+- **Added the cleanup/audit role**, with `.claude/skills/consistency-sweep/`,
+  an entry in `docs/session_roles.md` and a pointer in `CLAUDE.md`. The build
+  and research sessions are pointed forward - add a city, screen a country -
+  and both leave a wake that neither has a reason to look at. One day of
+  sweeping produced: three files stating Canada was unbuilt while six
+  municipalities were, a fourth saying the same of D.C., four wrong hand-kept
+  counts in one file, two item 8s and two item 15s in the list that gates the
+  public deploy, a provincial publisher whose data was on the site with no
+  licence read, four sources in use with no provenance row, and a heading that
+  no longer described half its contents.
+
+- **The role owns no paths, and that is the design rather than an oversight.**
+  `session_roles.md` allocates by path because that is what actually prevents
+  collisions, and cleanup is cross-cutting by nature: giving it `docs/` would
+  take that from the research session, and giving it nothing would leave it
+  unable to work. So it runs on different rules - sweep narrow, commit
+  immediately, never merge a branch it does not own, never edit a file another
+  session has uncommitted, hand real pipeline bugs over. What it does own is
+  `scripts/check_*.py`.
+
+- **Its stated preferred output is a CHECK, not a correction**, which is the
+  one principle worth keeping if everything else about the role is rewritten.
+  A reader found four Canadian cities missing from the provenance tables;
+  promoting them by hand would have been the whole job. Writing
+  `check_provenance.py` instead found **five more gaps nobody had noticed**,
+  and then caught a sixth the same day when a merge silently dropped an
+  endpoint URL while leaving the row looking correct. A correction fixes an
+  instance; a check keeps finding the class.
+
+- **"Verify against `origin/master`, never the tree you are in" is written in
+  as a rule**, because the role that reports on other sessions' work is the one
+  most likely to read a stale checkout. Three findings were relayed between
+  sessions that day and **two were stale rather than wrong** - both described a
+  file that had changed by 339 lines since the reporting session branched, and
+  acting on either would have meant redoing finished work or merging something
+  already in. The rule is symmetric: verify before acting on a claim and before
+  dismissing one. The third finding was real, and sat four rows above a line
+  this session had itself edited an hour earlier.
+
+- **Deferred `scripts/check_stale_claims.py` to `PLAN.md` rather than shipping
+  a skill that cites a script that does not exist.** That would have been the
+  exact defect the skill is about. Three classes - future-tense prose, drifted
+  counts, headings whose contents moved on - stay hand-swept until it is
+  written, and the skill says so plainly. Deferred on pacing at 87% of a
+  five-hour window, not on doubt; the design is settled and it is the test loop
+  that costs.
 
 ### 2026-09-22 - Barcelona's four owner decisions settled, and its brief's OSM breakdown corrected
 
