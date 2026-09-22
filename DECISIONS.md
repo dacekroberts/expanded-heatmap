@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**153 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**154 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [drift_check leaves outputs/ modified on Windows when nothing changed](#2026-09-22---drift_check-leaves-outputs-modified-on-windows-when-nothing-changed)
 - [Working the dead-constant list demonstrated, live, that drift_check is not offline for three cities](#2026-09-22---working-the-dead-constant-list-demonstrated-live-that-drift_check-is-not-offline-for-three-cities)
 - [Two probes came back clean, and the clean result is the record](#2026-09-22---two-probes-came-back-clean-and-the-clean-result-is-the-record)
 - [Sofia settled by enumerating Bulgaria's catalogue from outside the block](#2026-09-22---sofia-settled-by-enumerating-bulgarias-catalogue-from-outside-the-block)
@@ -189,6 +190,36 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - drift_check leaves outputs/ modified on Windows when nothing changed
+
+- **Found while verifying the previous entry's own work.** Running
+  `pipeline/drift_check.py` for Madrid, Mexico City and Guadalajara reported
+  **zero drift**, and `git status` then showed **six modified `outputs/`
+  files**. Both statements were true, which is the trap.
+
+- **Measured rather than guessed.** The three CSVs differ **only** in line
+  endings - committed blobs are LF, regenerated files CRLF, and
+  `blob.replace(CRLF, LF) == wt.replace(CRLF, LF)` for all three. The three
+  `heatmap.html` files show exactly **6,062 insertions against 6,062
+  deletions**, the signature of Folium's fresh random element ids per render
+  plus the same line-ending change. Not one byte of content differs.
+  `git checkout -- outputs/` restored all six.
+
+- **The consequence is worth naming: committing that churn would rewrite files
+  the DEPLOYED APP READS, for no change at all.** `outputs/` is committed
+  precisely so the app never runs the pipeline, and a line-ending rewrite of
+  every heatmap is a large, meaningless diff through which a real change could
+  pass unnoticed. It is a second, independent reason never to `git add -A` -
+  the existing reason being that another session may hold uncommitted work.
+
+- **Written into `CLAUDE.md` beside the drift-check rule and into the sweep
+  skill**, because it is a hazard of the command the project tells every
+  session to run, and the one place it would otherwise be learned is a
+  confusing `git status` at the end of a long session. Same root cause as the
+  stale licence digests earlier today: `.gitattributes` normalises line endings
+  and anything computed or written before that normalisation disagrees with
+  what git stores.
 
 ### 2026-09-22 - Working the dead-constant list demonstrated, live, that drift_check is not offline for three cities
 
