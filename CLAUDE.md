@@ -32,6 +32,18 @@ are already banked there (endpoints, columns, CRS, traps, required notices, and
 an explicit list of what is still unknown). It is a cache, not a prerequisite:
 no brief means `add-city` Step 0 as usual, never waiting for one.
 
+**Is the city's rail coming from OpenStreetMap rather than GTFS? Use
+`osm-rail`** (`.claude/skills/osm-rail/`). Mexico City and Guadalajara both
+needed it - one because every agency host is unreachable, one because the only
+feed expired in 2023 and predates a line that now carries passengers - and most
+of the remaining shortlist (Taipei, São Paulo, Israel) is not GTFS either. It
+also carries the meta-rule that skill exists for: **a lesson written in the
+previous city's config does not reach the next city.** Mexico City's config
+warns in capitals never to match stations on a network label; Guadalajara's
+first query did exactly that and lost a whole line. Put a lesson where the next
+city must pass through it - a raising check in shared code, then a skill - not
+in a sibling city's comments.
+
 **Then run `python scripts/brief_check.py <city>` before writing any code for
 it.** A brief caches Step 0's mistakes as confidently as its findings: Edmonton
 inherited three wrong claims from its own, each an HTTP call from being caught,
@@ -124,6 +136,14 @@ colliding. A single session does all of it and can ignore that file.
   it - the index is how. `--check` fails if it is stale. Keep
   `docs/project_context.md` to current state, no counts.
 - **Run `python pipeline/drift_check.py` after any pipeline change.**
+- **Run `python scripts/check_deploy_imports.py` before any push that touches
+  `app/`**, and **reboot the deployed app after any push that changes a module
+  it imports** - `app/cities.py` changes with every city. Streamlit Cloud's
+  "Updated app!" re-runs the entry script and leaves imported modules cached,
+  so the live site stayed down for over three hours on 2026-09-22 across five
+  pulls. Gate item 9 in `docs/data_sources.md` has the detail. `deploy-verify`
+  cannot catch either failure: it runs the working tree, and it always starts a
+  fresh process.
 - **Verify app changes with the `deploy-verify` agent**, and **always state a
   scope**: `city-added`, `map-chrome`, `app-deps` or `full`. It runs against
   `.venv-lean` (what Streamlit Cloud installs), not the full environment. A
@@ -143,6 +163,33 @@ colliding. A single session does all of it and can ignore that file.
   the findings belong in `docs/data_sources.md` and `docs/city_shortlist.md`,
   which is where they can be trusted and the raw capture cannot.
 - Draft interpretive prose in chat before writing it to a file.
+- **Write multi-line text with the Write tool, never a shell heredoc or an
+  inline quoted string.** Commit messages, `DECISIONS.md` entries, page prose,
+  generated Python. Bash command-substitutes backticks and mangles escapes
+  *inside* heredocs too: on 2026-09-22 it broke an f-string in generated code,
+  silently emptied every backticked phrase from a commit message, and turned a
+  `\n` into a literal newline mid-string - three times in one day, with the fix
+  already recorded in `DECISIONS.md` after each one. **That repetition is the
+  point of putting it here:** a lesson in the log describes what happened once,
+  and a working rule is in hand at the moment of typing. Same reasoning as
+  `osm-rail`'s opening section, which exists because a warning in one city's
+  config did not reach the next city.
+- **Resolve a conflicted append-only file with
+  `python scripts/merge_append_only.py DECISIONS.md`, never by rebuilding it
+  from one side.** Two sessions both append to the top of `DECISIONS.md`, so
+  every master/staging merge conflicts there and the conflict is never a real
+  disagreement. The tempting hand fix - take one side's file, re-append the
+  other side's new entries - **silently deletes entries**, because *a conflict
+  region shows where the two sides disagreed, not everything the other side
+  added*. On 2026-09-22 staging's "Japan is a BUILD" entry sat lower in the
+  file with no competing change beside it, so git auto-merged it outside the
+  markers and rebuilding from master's stage would have dropped it; an hour
+  later the France reversal arrived the same way, with the generated index as
+  the *only* conflict. The script edits just the conflict regions of git's own
+  merged file, dates each entry by the commit that introduced it so the two
+  sides interleave by real time, and refuses to write unless the result equals
+  the union of both sides' full stages. Run `scripts/decisions_index.py`
+  afterwards.
 
 ## Commands
 
@@ -152,7 +199,9 @@ python pipeline/<city_slug>/step2_clean_businesses.py
 python pipeline/<city_slug>/step3_map.py
 python pipeline/drift_check.py [city_slug] [--jobs N]   # --jobs 4 does all 13 in ~37s
 python scripts/brief_check.py [city_slug]               # re-run a brief's claims against live sources
+python scripts/check_deploy_imports.py [--ref REF]      # clean clone + lean venv: run before ANY push touching app/
 python scripts/decisions_index.py [--check]             # refresh DECISIONS.md's index
+python scripts/merge_append_only.py DECISIONS.md [--dry-run]   # resolve an append-only merge conflict
 python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon>   # add --dry-run first
 .venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"
 ```

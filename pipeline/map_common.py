@@ -627,6 +627,90 @@ def load_line_shapes(gtfs_zip, line_specs, system_name):
     return lines
 
 
+def load_osm_line_shapes(osm_routes_json, line_specs, system_name):
+    """Real line geometries from OpenStreetMap route relations - the same
+    return contract as load_line_shapes, for a city whose agency publishes no
+    reachable feed.
+
+    THIS EXISTS BECAUSE GTFS IS NOT THE ONLY SHAPE OF RAIL DATA, and all
+    fourteen cities built before Mexico City happened to use it. Every
+    `*.cdmx.gob.mx` host is unreachable, so CDMX's geometry is OSM's; Taipei's
+    TDX, Sao Paulo's GeoSampa WFS and Israel's shapefiles are all non-GTFS too.
+    Keeping both loaders here, returning the same thing, is what stops a city
+    forking render_heatmap - the project's standing rule.
+
+    line_specs: {key: (ref, color, real-world public name, label end)} - the
+    same 4-tuple as the GTFS loader, with OSM's `ref` tag standing in for a
+    shape_id. `ref` is what riders see on the line ("1", "A", "12"), and in
+    CDMX it is populated on all 26 relations.
+
+    Returns {key: (segments, color, label, end)}, segments longest first.
+    """
+    from shapely.geometry import MultiLineString
+    from shapely.ops import linemerge
+
+    if not osm_routes_json.exists():
+        print(f"No OSM route file at {osm_routes_json} - skipping the "
+              f"{system_name} line overlay.")
+        return {}
+    data = json.loads(osm_routes_json.read_text(encoding="utf-8"))
+    rels = [e for e in data.get("elements", []) if e.get("type") == "relation"]
+    if not rels:
+        raise ValueError(
+            f"{osm_routes_json} holds no route relations. An empty Overpass "
+            "result must not be read as 'this city has no lines'."
+        )
+
+    lines = {}
+    for key, (ref, color, label, end) in line_specs.items():
+        mine = [r for r in rels if r.get("tags", {}).get("ref") == ref]
+        if not mine:
+            print(f"WARNING: OSM ref {ref!r} for the {label} is not in "
+                  f"{osm_routes_json.name} - check the relation's tags.")
+            continue
+        # ONE ALIGNMENT PER LINE, chosen as the most complete of the direction
+        # relations. A route in OSM is usually two relations, one per
+        # direction, whose geometry is the same alignment traversed opposite
+        # ways - drawing both would lay a line on top of itself and double the
+        # vertex count for no visible gain. This mirrors what the GTFS cities
+        # already do by taking each route's single most-used trip shape rather
+        # than every shape it runs.
+        def total_points(rel):
+            return sum(len(m.get("geometry") or ())
+                       for m in rel.get("members", ())
+                       if m.get("type") == "way")
+
+        best = max(mine, key=total_points)
+        ways = [[(p["lat"], p["lon"]) for p in m["geometry"]]
+                for m in best.get("members", ())
+                if m.get("type") == "way" and m.get("geometry")]
+        if not ways:
+            print(f"WARNING: OSM ref {ref!r} ({label}) carried no way geometry.")
+            continue
+
+        # Stitch the member ways into as few continuous segments as possible.
+        # A relation's ways are ordered but not merged, and a gap (a way the
+        # mapper has not connected) legitimately splits a line into pieces -
+        # so this keeps whatever linemerge produces rather than assuming one.
+        merged = linemerge(MultiLineString([[(lon, lat) for lat, lon in w]
+                                            for w in ways]))
+        geoms = getattr(merged, "geoms", None)
+        pieces = list(geoms) if geoms is not None else [merged]
+        # Back to (lat, lon), which is what every other coordinate in this
+        # module and in Folium uses.
+        #
+        # NOT rounded to COORD_DP, for the same reason the GTFS branch above is
+        # not: these vertices are the source's own geometry. OSM is ODbL 1.0,
+        # which requires attribution rather than forbidding modification, so
+        # rounding would be permitted here - the exemption is kept anyway so
+        # both loaders behave identically and a reader does not have to know
+        # which source a city used to know what was done to its geometry.
+        segments = [[(lat, lon) for lon, lat in g.coords] for g in pieces]
+        segments.sort(key=len, reverse=True)
+        lines[key] = (segments, color, label, end)
+    return lines
+
+
 _M_PER_DEG_LAT = 110540.0
 _M_PER_DEG_LON_EQUATOR = 111320.0
 
@@ -917,23 +1001,37 @@ def _esc(value):
 def add_pin_layer(m, rows, group_name, color, tooltip_field_label, value_column, show=True):
     """One toggleable, clustered, coloured pin layer for a category bucket.
     Returns the number of points (0 = nothing added)."""
-    # Station name and ring band repeat once per pin - New York has 44k pins
-    # over 496 stations and 4 bands - so each is emitted ONCE in a lookup table
-    # and referenced by integer index. Nothing is lost: the callback resolves
-    # them before display. Worth ~1.2 MB on New York's map. The business name
-    # is deliberately NOT indexed: it is nearly unique per pin (38k distinct of
-    # 44k), so a lookup table would only add a second copy.
+    # Station name, ring band AND the classification value each repeat once per
+    # pin, so each is emitted ONCE in a lookup table and referenced by integer
+    # index. Nothing is lost: the callback resolves them before display.
     #
-    # row[3] stays the raw category STRING, not an index:
-    # scripts/check_personal_exposure.py parses these arrays out of the
-    # rendered HTML and reads row[2] and row[3] directly.
-    stations, bands, data = {}, {}, []
+    # The classification value was added to this 2026-09-22, and Mexico City is
+    # why. Its `scian_actividad` has **106 distinct values across 283,345
+    # rows**, averaging 55 characters - "Comercio al por menor en tiendas de
+    # abarrotes, ultramarinos y misceláneas" appears 12,462 times in one
+    # rendered file. Inline that is ~7 MB of a 19 MB map. Every city benefits:
+    # a classification field is a code or a category name drawn from a small
+    # vocabulary, which is the definition of a good index candidate. Station
+    # and band indexing was already worth ~1.2 MB on New York.
+    #
+    # The business name is deliberately NOT indexed: it is nearly unique per
+    # pin (Mexico City has 97,440 distinct names across 133,362 pins, New York
+    # 38k of 44k), so a lookup table would only add a second copy.
+    #
+    # COUPLED TO scripts/check_personal_exposure.py, which parses these arrays
+    # out of the rendered HTML and reads row[2] and row[3]. Its `pins()`
+    # resolves CATEGORIES by pairing the Nth table with the Nth `var data` in
+    # document order, and still accepts a bare string at row[3] so a map
+    # rendered before this change reads correctly. Change the two together.
+    stations, bands, cats, data = {}, {}, {}, []
     for row in rows.itertuples():
         station = _esc(row.nearest_station)
         band = _esc(row.ring_band)
+        cat = _esc(getattr(row, value_column))
         data.append([
             round(row.latitude, COORD_DP), round(row.longitude, COORD_DP),
-            _esc(row.business_name), _esc(getattr(row, value_column)),
+            _esc(row.business_name),
+            cats.setdefault(cat, len(cats)),
             stations.setdefault(station, len(stations)),
             bands.setdefault(band, len(bands)),
         ])
@@ -944,6 +1042,7 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label, value_column,
     # injects this as a statement and then calls callback(row) in its loop.
     callback = f"""
         (function () {{
+            var CATEGORIES = {json.dumps(list(cats))};
             var STATIONS = {json.dumps(list(stations))};
             var BANDS = {json.dumps(list(bands))};
             return function (row) {{
@@ -952,7 +1051,7 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label, value_column,
                     fillOpacity: 0.85, weight: 1
                 }});
                 var html = '<b>' + row[2] + '</b><br>' +
-                    '{tooltip_field_label}: ' + row[3] + '<br>' +
+                    '{tooltip_field_label}: ' + CATEGORIES[row[3]] + '<br>' +
                     'Nearest station: ' + STATIONS[row[4]] + '<br>' +
                     BANDS[row[5]];
                 marker.bindTooltip(html, {{sticky: true}});
@@ -1074,7 +1173,8 @@ def drop_contact_details(businesses):
 def render_heatmap(*, output_path, map_title, city_name, system_name,
                    stations, businesses, taxonomy_system, lines,
                    crs_geographic, crs_projected, ring_edges_meters, ring_labels,
-                   center=None, zoom=None, label_focus=None, rings_shown=False):
+                   center=None, zoom=None, label_focus=None, rings_shown=False,
+                   all_city_heat=True):
     """Render one city's heatmap to a standalone HTML file.
 
     stations: DataFrame(station, latitude, longitude). businesses: the
@@ -1159,10 +1259,18 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
             radius=HEAT_RADIUS, blur=HEAT_BLUR, min_opacity=HEAT_MIN_OPACITY,
             gradient=HEAT_GRADIENT, name="Commercial Density (Within Station Proximity)",
             show=True).add_to(m)
-    HeatMap(businesses[["latitude", "longitude"]].round(COORD_DP).values.tolist(),
-            radius=HEAT_RADIUS, blur=HEAT_BLUR, min_opacity=HEAT_MIN_OPACITY,
-            gradient=HEAT_GRADIENT, name=f"Commercial Density (All {city_name} Businesses)",
-            show=False).add_to(m)
+    # The whole-city layer is OPT-OUT PER CITY, because it carries one
+    # coordinate pair per business in the city and nothing filters it. In most
+    # cities that is a modest cost; in Mexico City it is 283,345 pairs against
+    # 133,362 in the default layer, and DENUE is an establishment census rather
+    # than a licence register, so the gap is structural rather than a quirk.
+    # Passing False drops the layer and says so on the city page - the map's
+    # own question is density AROUND stations, and this layer is context.
+    if all_city_heat:
+        HeatMap(businesses[["latitude", "longitude"]].round(COORD_DP).values.tolist(),
+                radius=HEAT_RADIUS, blur=HEAT_BLUR, min_opacity=HEAT_MIN_OPACITY,
+                gradient=HEAT_GRADIENT, name=f"Commercial Density (All {city_name} Businesses)",
+                show=False).add_to(m)
 
     for i, label in enumerate(ring_labels):
         layer = folium.FeatureGroup(name=f"Concentric Ring {i + 1}: {label}",
@@ -1258,5 +1366,15 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     output_path.parent.mkdir(parents=True, exist_ok=True)
     m.save(str(output_path))
     print(f"Wrote {output_path}")
-    print(f"{len(in_rings):,} points plotted (within-ring default) / "
-          f"{len(businesses):,} available (all-{city_name} toggle), across {len(stations)} stations")
+    if all_city_heat:
+        print(f"{len(in_rings):,} points plotted (within-ring default) / "
+              f"{len(businesses):,} available (all-{city_name} toggle), "
+              f"across {len(stations)} stations")
+    else:
+        # Do not advertise a toggle that was not built. This line said
+        # "283,345 available (all-Mexico City toggle)" for one render after
+        # the layer was dropped, which is the stale-prose failure this project
+        # greps city pages for.
+        print(f"{len(in_rings):,} points plotted (within-ring), across "
+              f"{len(stations)} stations. The all-{city_name} heat layer is "
+              f"OFF for this city ({len(businesses):,} businesses not drawn).")

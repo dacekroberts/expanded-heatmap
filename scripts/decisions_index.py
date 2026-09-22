@@ -107,7 +107,12 @@ def main():
         print(f"index is current ({len(HEADING.findall(text))} entries)")
         return
 
-    DECISIONS.write_text(new, encoding="utf-8")
+    # newline="\n" or this writes CRLF on Windows and the working copy then
+    # differs byte-for-byte from the blob git stores, while `git status` reads
+    # clean because git normalises on commit. That mismatch is what hid a
+    # CRLF-only change to .claude/agents/deploy-verify.md on 2026-09-22 and
+    # left the agent unregistered for a whole session.
+    DECISIONS.write_text(new, encoding="utf-8", newline="\n")
     count = index.count("\n- [")
     print(f"wrote index: {count} entries linked")
 

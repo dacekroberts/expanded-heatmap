@@ -87,7 +87,7 @@ MAP_ONLY_NAV = True
 CITIES = [
     {
         "name": "San Diego",
-        "region": "United States",
+        "region": "United States West",
         "lat": 32.7157,
         "lon": -117.1611,
         "page": "pages/1_San_Diego_Heatmap.py",
@@ -98,7 +98,7 @@ CITIES = [
     },
     {
         "name": "San Francisco",
-        "region": "United States",
+        "region": "United States West",
         "lat": 37.7509,
         "lon": -122.4414,
         "page": "pages/2_San_Francisco_Heatmap.py",
@@ -107,7 +107,7 @@ CITIES = [
     },
     {
         "name": "Los Angeles",
-        "region": "United States",
+        "region": "United States West",
         "lat": 34.05,
         "lon": -118.31,
         "page": "pages/3_Los_Angeles_Heatmap.py",
@@ -119,7 +119,7 @@ CITIES = [
     },
     {
         "name": "Chicago",
-        "region": "United States",
+        "region": "United States East",
         "lat": 41.8781,
         "lon": -87.6298,
         "page": "pages/4_Chicago_Heatmap.py",
@@ -143,7 +143,7 @@ CITIES = [
     },
     {
         "name": "New York",
-        "region": "United States",
+        "region": "United States East",
         "lat": 40.7128,
         "lon": -74.006,
         "page": "pages/5_New_York_Heatmap.py",
@@ -151,11 +151,26 @@ CITIES = [
                  "Nassau St, Flushing, Crosstown, 14 St-Canarsie) and the Staten "
                  "Island Railway",
         # East of its dot, second from the top of the eastern column.
-        "label_offset": ("start", 14, -8),
+        #
+        # dx IS 24 AND NOT 14, because at 14 this pill ERASED BOSTON'S MARKER -
+        # deploy-verify measured 0 teal pixels for Boston in the landing view at
+        # 1200 and 768 px, against 32-65 for every other city. Boston's dot
+        # lands at x 627.0 while this pill spanned x 624.5-695.9 at y
+        # 180.4-198.4, so the dot sat inside an opaque pill drawn above it. Same
+        # defect as Guadalajara's, one view over, and it went unseen because the
+        # check of the day scored pills against pills and not against markers.
+        #
+        # East rather than down: the eastern column's vertical slots are 16 px
+        # apart and +8 is Philadelphia's, so any dy that clears Boston's dot
+        # walks into another name. dx 22 is the arithmetic minimum (Boston's dot
+        # centre plus its 5 px radius); 24 leaves 2.5 px. It costs 10 px more
+        # clipping at 375 px - 27% of the pill against 13% - which is the same
+        # accepted trade-off as Washington D.C.'s 39% two rows below.
+        "label_offset": ("start", 24, -8),
     },
     {
         "name": "Philadelphia",
-        "region": "United States",
+        "region": "United States East",
         "lat": 39.9526,
         "lon": -75.1652,
         "page": "pages/6_Philadelphia_Heatmap.py",
@@ -170,7 +185,7 @@ CITIES = [
         # municipalities, so "Miami" alone would overstate its scope. The name
         # must match render_city_nav()'s argument on the page.
         "name": "Miami (Regional)",
-        "region": "United States",
+        "region": "United States East",
         "lat": 25.7743,
         "lon": -80.1937,
         "page": "pages/7_Miami_Heatmap.py",
@@ -182,7 +197,7 @@ CITIES = [
     },
     {
         "name": "Boston",
-        "region": "United States",
+        "region": "United States East",
         "lat": 42.3601,
         "lon": -71.0589,
         "page": "pages/8_Boston_Heatmap.py",
@@ -193,7 +208,7 @@ CITIES = [
     },
     {
         "name": "Washington D.C.",
-        "region": "United States",
+        "region": "United States East",
         "lat": 38.9072,
         "lon": -77.0369,
         "page": "pages/9_Washington_DC_Heatmap.py",
@@ -209,7 +224,7 @@ CITIES = [
         # called Vancouver. The name must match render_city_nav()'s argument
         # on the page.
         "name": "Vancouver (Regional)",
-        "region": "Canada",
+        "region": "Canada West",
         "lat": 49.2827,
         "lon": -123.1207,
         "page": "pages/10_Vancouver_Heatmap.py",
@@ -241,7 +256,7 @@ CITIES = [
         # render_city_nav()'s argument on the page must match each other;
         # neither has to match the filename.
         "name": "Montréal",
-        "region": "Canada",
+        "region": "Canada East",
         "lat": 45.5019,
         "lon": -73.5674,
         "page": "pages/11_Montreal_Heatmap.py",
@@ -271,7 +286,7 @@ CITIES = [
     },
     {
         "name": "Calgary",
-        "region": "Canada",
+        "region": "Canada West",
         "lat": 51.0447,
         "lon": -114.0719,
         "page": "pages/12_Calgary_Heatmap.py",
@@ -293,7 +308,7 @@ CITIES = [
     },
     {
         "name": "Edmonton",
-        "region": "Canada",
+        "region": "Canada West",
         "lat": 53.5444,
         "lon": -113.4909,
         "page": "pages/13_Edmonton_Heatmap.py",
@@ -311,7 +326,7 @@ CITIES = [
     },
     {
         "name": "Toronto",
-        "region": "Canada",
+        "region": "Canada East",
         "lat": 43.6532,
         "lon": -79.3832,
         "page": "pages/14_Toronto_Heatmap.py",
@@ -326,7 +341,79 @@ CITIES = [
         # recorded Toronto's dot at x 506.6, y 182.0 before this city existed.
         # Running east keeps it clear of Boston and New York, which sit east of
         # their own dots further south.
-        "label_offset": ("start", 12, -10),
+        # ABOVE and WEST of its dot. Its pill overlapped "Boston" by 30x12 px
+        # (measured from rendered pixels) and covered Montréal's marker; both
+        # went unnoticed because nothing checked either. ("end", 0, -16) clears
+        # Boston, clears Montréal's dot, and keeps Toronto's own dot visible.
+        "label_offset": ("end", 0, -16),
+    },
+    {
+        "name": "Mexico City",
+        "lat": 19.4326,
+        "lon": -99.1332,
+        "page": "pages/15_Mexico_City_Heatmap.py",
+        "blurb": "Metro CDMX (Líneas 1–9, A, B and 12) and the STE Tren Ligero",
+        "region": "Mexico",
+        # Outside the United States frame, like every Canadian city - see
+        # IN_DEFAULT_VIEW below. Mexico's centre sits 14.02 degrees SOUTH of the
+        # US centre and 1.41 degrees west, almost an exact mirror of Canada's
+        # 14.53 north and 1.49 east, so the switcher moves the view vertically
+        # and the pinned zoom is untouched.
+        "in_default_view": False,
+        # SOUTH of its dot, AND THIS KEY MUST EXIST AT ALL. Omitting it took the
+        # whole Overview page down from 2026-09-22 until deploy-verify caught it:
+        # pd.DataFrame fills a key some entries omit with float('nan'), the
+        # offset resolver tested `v is None`, and `tuple(nan)` raised
+        # TypeError on every load - map, city list, caption and site notices all
+        # replaced by a traceback. Overview.py is scalar-safe now, but every
+        # city still declares one, because fifteen cities happening to have one
+        # is what hid the bug.
+        #
+        # Above its dot (the old default) this pill measured x338-426 y264-281
+        # and collided with BOTH "Los Angeles" (13x1 px) and
+        # "Guadalajara (Regional)" (19x0 px). At dy +22 it sits y308-325 and
+        # clears both - including the Los Angeles overlap, which predated this
+        # city and was reported as out of scope.
+        "label_offset": ("middle", 0, 22),
+    },
+    {
+        # REGIONAL, like Miami and Vancouver: SITEUR's own description has
+        # Línea 3 connecting Zapopan, Guadalajara and Tlaquepaque, and Línea 4
+        # connecting Tlajomulco de Zúñiga, Tlaquepaque and Guadalajara. The
+        # display name carries "(Regional)"; the page file keeps the plain city
+        # name, as Miami's does.
+        "name": "Guadalajara (Regional)",
+        "lat": 20.6597,
+        "lon": -103.3496,
+        "page": "pages/16_Guadalajara_Heatmap.py",
+        "blurb": "Tren Ligero (Líneas 1–4, across four municipios)",
+        "region": "Mexico",
+        # Outside the United States frame, like Mexico City and every Canadian
+        # city - see IN_DEFAULT_VIEW below.
+        "in_default_view": False,
+        # West of its dot, ending AT the point rather than short of it. The
+        # first attempt, ("end", -14, 0), was measured by deploy-verify from
+        # real pixels as overlapping "Mexico City" by 19x0 px and, at 375 px,
+        # clipped 15 px by the west canvas edge - rendering as
+        # "uadalajara (Regional)". Dropping dx to 0 moves the pill 14 px east:
+        # it clears Mexico City outright and its west edge lands on-canvas at
+        # every width. Chosen against a projection model that reproduces four
+        # pixel-measured pills to within 2 px, not by eye.
+        #
+        # ABOVE its dot, and the dy is the whole point. ("end", 12, 0) put the
+        # pill's right edge 17 px right of the marker with dy 0 centring it
+        # vertically on that marker - so the opaque pill (alpha 235) ERASED
+        # Guadalajara's teal dot entirely. The owner spotted it on the rendered
+        # map; no check here was looking for a label covering a marker, only
+        # for labels covering each other.
+        #
+        # The three constraints conflict on dx alone: clearing the dot with an
+        # "end" anchor needs dx <= -10, and clearing the west canvas edge at
+        # 360 px needs dx >= +10. So dy has to do the work - a pill is 17 px
+        # tall and a marker 5 px in radius, which needs |dy| >= 14. At
+        # ("middle", 0, -16) the label sits above its dot, clears it, and also
+        # clears Mexico City and Miami at every width.
+        "label_offset": ("middle", 0, -16),
     },
 ]
 
@@ -380,11 +467,62 @@ IN_DEFAULT_VIEW = [c for c in CITIES if c.get("in_default_view", True)]
 DEFAULT_REGION = "United States"
 
 # Order is display order in the switcher. A new country appends here.
-REGION_ORDER = ["United States", "Canada"]
+# CANADA IS SPLIT WEST/EAST, and the reason is geographic rather than
+# political. Vancouver and Montréal are ~3,300 km apart - wider than the
+# contiguous United States - so a single "Canada" view centred between them put
+# every city near an edge with an empty prairie in the middle, which is the
+# "default silently hides most of the site" failure docs/scaling_thresholds.md
+# warns about. West is Vancouver, Calgary and Edmonton; East is Toronto and
+# Montréal. Owner's decision 2026-09-22.
+#
+# This is the first region that is not a country, and it sets the precedent:
+# a region is whatever groups cities into ONE readable view. Expect the same
+# question for the United States eventually, and for any country with a
+# comparable span.
+#
+# THE UNITED STATES IS SPLIT TOO, and it is a COMPOSITE rather than a third
+# tag. Owner's decision 2026-09-22: West is California (San Diego, San
+# Francisco, Los Angeles, and Seattle when it is built), East is Chicago and
+# everything from Miami to Boston. But splitting it alone would have removed
+# the landing view that shows the whole country - every region is fitted to its
+# own cities now, so whatever a visitor lands on is all they see - and six of
+# sixteen cities is a thin first impression for a portfolio.
+#
+# So "United States" survives as a region whose cities are the union of the two
+# halves. A city still carries exactly ONE tag; a composite is resolved at
+# lookup. That keeps the landing view byte-identical to the one this map has
+# always had, because fitting all nine US cities is what fit_view was already
+# doing.
+REGION_MEMBERS = {
+    "United States": ("United States West", "United States East"),
+}
+
+# Display order in the switcher, parent before its halves so a reader meets the
+# familiar view first. A new country appends here; a new composite adds a line
+# to REGION_MEMBERS as well.
+REGION_ORDER = [
+    "United States",
+    "United States West",
+    "United States East",
+    "Canada West",
+    "Canada East",
+    "Mexico",
+]
+
+# The regions a city may actually be TAGGED with: everything that is not a
+# composite. Tagging a city "United States" is now an error rather than a
+# shorthand, and the validator below says so.
+LEAF_REGIONS = [r for r in REGION_ORDER if r not in REGION_MEMBERS]
 
 
 def cities_in(region):
-    return [c for c in CITIES if c.get("region") == region]
+    """Cities in a region, resolving a composite to its members.
+
+    Order follows CITIES, not the member list, so the composite reads in
+    implementation order like every other region.
+    """
+    members = REGION_MEMBERS.get(region, (region,))
+    return [c for c in CITIES if c.get("region") in members]
 
 
 REGIONS = [
@@ -393,10 +531,12 @@ REGIONS = [
     if cities_in(name)
 ]
 
-_untagged = [c["name"] for c in CITIES if c.get("region") not in REGION_ORDER]
+_untagged = [c["name"] for c in CITIES if c.get("region") not in LEAF_REGIONS]
 if _untagged:
     raise ValueError(
-        f"cities.py: {_untagged} have no region, or one not in REGION_ORDER. "
+        f"cities.py: {_untagged} have no region, or one not in LEAF_REGIONS "
+        f"({LEAF_REGIONS}). A composite like 'United States' is a view, "
+        f"not a tag - tag the half the city is in. "
         f"Every city needs one - the macro map opens on a region and a city "
         f"without one would be reachable only from the text list."
     )

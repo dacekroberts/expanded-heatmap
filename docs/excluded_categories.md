@@ -684,6 +684,88 @@ SECOND HAND GOODS` (66) as people rather than premises, `SHORT TERM RENTAL
 COMPANY` (5, NAICS 721), and `** Class record not on file. (138)` (4), which is
 the register's own placeholder.
 
+### Mexico City - street stalls, a nonstore twin, and a heuristic that does not speak Spanish
+
+**Semifijo premises are excluded — 20,586 of 462,732 economic units (4.45%),
+of which 18,264 would otherwise have classified into a bucket.** DENUE records
+`tipoUniEco` as `Fijo` or `Semifijo`; a semi-fixed unit is a stall or street
+post rather than a storefront. This project maps storefronts, so the same
+reasoning that excludes nonstore retail everywhere excludes these. It is a
+scope decision, not a data-quality one: street commerce is a real and large
+part of Mexico City's retail geography, and **this map does not show it.**
+Owner's decision, 2026-09-22.
+
+**SCIAN 469 — nonstore retail — is excluded**, the exact twin of NAICS 454
+excluded in every US city: *"Comercio al por menor exclusivamente a través de
+Internet, y catálogos impresos, televisión y similares"*. Small here, 90 units
+in Mexico City against nonstore's 10.1% of Los Angeles' pins, and excluded on
+the same reasoning regardless of size.
+
+**SCIAN 812410 — parking — is excluded**, the twin of NAICS 81293. 2,230 units.
+A parking trip is planned rather than incidental foot traffic from a station.
+
+**Not excluded but absent by construction: 811 repair and 813 associations.**
+Personal services is anchored on **812**, not the whole of 81, so auto repair
+(27,216 units in Jalisco, the largest block inside 81) and civic, religious and
+professional associations never enter. Food service is anchored on **722**, not
+72, so 721 accommodation — hotels — never enters either. Both are the same
+precision the NAICS cities use; a two-digit prefix would have been the
+obvious-looking mistake.
+
+**The whole-city heat layer is OFF for this city.** Every other city offers an
+opt-in layer showing all of its businesses, not only those within a station
+ring. Mexico City's would carry 283,345 points against 133,362 in the default
+layer, and dropping it cut the rendered file from 25.7 MB to 19.0 MB. So the
+map shows density **around stations** and does not offer the whole-city
+comparison the other cities do.
+
+**What is NOT excluded, and is worth stating because the number looks
+alarming:** `scripts/check_personal_exposure.py` reports that 32.2% of Mexico
+City's pins "look like a person". A hand-sample of 26 found **none** that were
+a person presented as a person — every one was a shop sign in the Spanish
+convention of trade type plus a given name or brand (`ABARROTES LIZ`,
+`ESTETICA MARIFER`, `ZAPATERIA SOFI`), and `COCINA ECONOMICA` — two common
+nouns — also trips it. The heuristic is tuned for English "SMITH JOHN" forms
+and does not transfer; Mexico City is this project's first non-English city.
+Nothing is filtered on that number.
+
+### Guadalajara (Regional) - a municipio with no station, and the same Spanish-name artefact
+
+**Everything excluded in Mexico City is excluded here, for the same reasons and
+from the same register:** Semifijo premises (3,768 units, 1.9% - a smaller
+share than Mexico City's 4.45%, and excluded on the same reasoning regardless),
+SCIAN **469** nonstore retail, and SCIAN **812410** parking. Food service is
+anchored on **722** and personal services on **812**, so 721 accommodation, 811
+repair and 813 associations never enter. See the Mexico City section above for
+the measurements behind each.
+
+**Tonalá is excluded, and it is the only whole municipio this project has left
+out of a region it could have included.** DENUE holds **19,897** economic units
+there and they are already downloaded - entidad 14 is the whole of Jalisco. No
+Tren Ligero line reaches Tonalá, and a municipio with no station contributes
+businesses that no ring can ever contain, so including it would have inflated
+the city total while changing no ring. The four municipios kept -
+Guadalajara, Zapopan, San Pedro Tlaquepaque and Tlajomulco de Zúñiga - are the
+ones SITEUR's own line descriptions name.
+
+**The whole-city heat layer is OFF, as Mexico City's is.** The rings and the
+three categories toggle from the layer control; there is no option to show
+every business in the region at once.
+
+**An operating line is NOT excluded, and it nearly was.** The only GTFS feed
+available for Guadalajara expired on 28 January 2023 and contains three of the
+four lines - Línea 4 opened on 15 December 2025. Building from it would have
+silently omitted that line, its 8 stations and 21 km of route. The geometry
+comes from OpenStreetMap instead, which has all four. Recorded here because a
+missing line is the most consequential kind of omission a map like this can
+have, and this one was avoided rather than accepted.
+
+**The person-like reading is an artefact here too.** 30.7% of pins trip
+`scripts/check_personal_exposure.py`'s heuristic, against Mexico City's 32.2%,
+and for the same reason: it is tuned for English "SMITH JOHN" forms and the
+Spanish shop-sign convention pairs a trade type with a given name. Nothing is
+filtered on that number.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

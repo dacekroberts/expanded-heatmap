@@ -18,7 +18,14 @@ import pandas as pd
 import pydeck as pdk
 import streamlit as st
 
-from cities import CITIES, IN_DEFAULT_VIEW, MAP_ONLY_NAV
+from cities import (
+    CITIES,
+    DEFAULT_REGION,
+    IN_DEFAULT_VIEW,
+    MAP_ONLY_NAV,
+    REGION_MEMBERS,
+    REGIONS,
+)
 from components import (
     SITE_NAME,
     render_macro_map_theme,
@@ -56,6 +63,45 @@ than one shared map instance loading every city's business points at once.
 
 st.subheader("Covered cities")
 
+# The map opens on ONE region and re-centres on the others, rather than fitting
+# every city at once - see cities.py's REGIONS block, and
+# docs/scaling_thresholds.md for why a single fitted world view stops working
+# somewhere around 12-15 cities. The radio is hidden entirely while there is
+# only one region, so this costs nothing until a second country exists.
+_region_names = [r["name"] for r in REGIONS]
+_region_cities = {r["name"]: r["cities"] for r in REGIONS}
+if len(REGIONS) > 1:
+    region = st.radio(
+        "Region",
+        _region_names,
+        index=_region_names.index(DEFAULT_REGION),
+        format_func=lambda n: f"{n} ({len(_region_cities[n])})",
+        horizontal=True,
+        key="macro_region",
+    )
+else:
+    region = DEFAULT_REGION
+
+# CLEARING THE CHART'S STORED STATE IS THE WHOLE FIX, and without it the
+# switcher silently does nothing. st.pydeck_chart(on_select="rerun") persists
+# the viewer's current view under its widget key, and on a rerun Streamlit
+# restores that stored view and IGNORES initial_view_state - so a new centre
+# computed below would be discarded before it was ever drawn. Dropping the key
+# forces the chart to re-initialise from initial_view_state on this run.
+#
+# Keying the chart per region (macro_map_<region>) was tried first and does not
+# work: it creates a fresh widget, but Streamlit still restores the previous
+# key's state when the viewer switches back, so the map returns to wherever
+# they had dragged it rather than to the region's centre.
+#
+# WARNING FOR ANYONE EDITING THE VIEW BELOW: the same persistence makes a
+# changed initial_view_state invisible in a browser session that has already
+# rendered this page, across server restarts included. Test in a fresh session
+# (a new query string is enough) or you will debug correct code.
+if st.session_state.get("_macro_region_shown") != region:
+    st.session_state["_macro_region_shown"] = region
+    st.session_state.pop("macro_map", None)
+
 cities = pd.DataFrame(CITIES)
 
 # These are WebGL layer colours, so unlike every other colour in the app they
@@ -82,10 +128,60 @@ HIGHLIGHT = [251, 191, 36, 255]
 DEFAULT_OFFSET = ("middle", 0, -22)
 offsets = (cities["label_offset"] if "label_offset" in cities
            else pd.Series([None] * len(cities), index=cities.index))
-offsets = offsets.map(lambda v: DEFAULT_OFFSET if v is None else tuple(v))
+
+
+def _offset(value):
+    """A city's (anchor, dx, dy), or the default when it declares none.
+
+    `v is None` IS NOT ENOUGH, and assuming it was took the whole Overview page
+    down from 2026-09-22 (commit 0fa3e55) until it was caught: `pd.DataFrame`
+    fills a key that some dicts omit with **float('nan')**, not None, and
+    `nan is None` is False - so `tuple(nan)` raised `TypeError: 'float' object
+    is not iterable` and every load showed a traceback instead of the map, the
+    city list, the caption and the site notices.
+
+    It survived because the crash needs a city with NO `label_offset` at all,
+    and for fifteen cities every entry happened to have one. Mexico City was
+    the first without. So this is scalar-safe rather than None-safe.
+    """
+    if value is None or (isinstance(value, float) and pd.isna(value)):
+        return DEFAULT_OFFSET
+    return tuple(value)
+
+
+offsets = offsets.map(_offset)
 cities["anchor"] = offsets.map(lambda o: o[0])
 cities["dx"] = offsets.map(lambda o: o[1])
 cities["dy"] = offsets.map(lambda o: o[2])
+
+# A LEAF REGION LABELS ONLY ITS OWN CITIES; THE COMPOSITE LABELS EVERY ONE.
+# Owner's decision 2026-09-22, taking the narrow of two options.
+#
+# Every city is DRAWN in every region - the view is centred, never filtered -
+# which is what makes the caption's "every city is on the map" true, and that
+# does not change here: the markers layer below still gets the whole frame and
+# a non-member's dot stays visible and clickable. What is dropped is the
+# NAME PILL of a city the reader has just switched away from.
+#
+# It was a correctness fix before it was a tidiness one. A non-member sits at
+# the frame edge at a zoom its offsets were never measured at, and collides
+# there: "Los Angeles" covered San Diego's marker and overlapped its pill by
+# 20.5 x 11.3 px in United States East, where NEITHER is a member, and
+# "Philadelphia" hung 2.1 px below the canvas in Canada East. Tuning offsets
+# to fix that is unbounded work - each of the six regions would constrain
+# every city's single pixel offset - and the label being removed is one a
+# reader of that region has no use for.
+#
+# THE COMPOSITE IS EXCLUDED DELIBERATELY. "United States" is the landing view
+# and the portfolio's first impression; suppressing non-members there would
+# take seven labels off it to close one 1.1 px abutment. So the rule is keyed
+# on REGION_MEMBERS rather than on the region name, and a future composite
+# gets the same treatment without another edit.
+if region in REGION_MEMBERS:
+    label_cities = cities
+else:
+    _members = {c["name"] for c in _region_cities[region]}
+    label_cities = cities[cities["name"].isin(_members)]
 
 markers = pdk.Layer(
     "ScatterplotLayer",
@@ -131,7 +227,8 @@ markers = pdk.Layer(
 labels = pdk.Layer(
     "TextLayer",
     id="city-labels",
-    data=cities,
+    # Not `cities`: a leaf region labels only its own - see label_cities above.
+    data=label_cities,
     get_position="[lon, lat]",
     get_text="name",
     get_size=14,
@@ -200,8 +297,78 @@ def fit_view(lats, lons, width_px=320, height_px=460, fill=0.7, west_pad=0.12):
 # the US set pins the zoom at 1.4525 permanently. Cities outside the frame are
 # still drawn - they are simply found by zooming out, and they are all in the
 # link list below.
-view = fit_view([c["lat"] for c in IN_DEFAULT_VIEW],
-                [c["lon"] for c in IN_DEFAULT_VIEW])
+#
+# EACH REGION IS FITTED TO ITS OWN CITIES, which SUPERSEDES the 2026-09-22
+# decision that the switcher must "re-centre and never re-zoom".
+#
+# That rule existed to protect the pixel `label_offset` values in cities.py,
+# which were measured at the United States zoom of 1.4525 - the worry being
+# that a different zoom would change the pixel distance between cities and
+# invalidate all of them at once. Measured before changing it, and the worry
+# only runs one way: zooming IN spreads cities apart, so collisions get BETTER,
+# not worse. At each region's own fitted zoom - Canada West 3.868, Canada East
+# 4.596, Mexico 5.060 - there are zero label collisions and zero pills covering
+# their own marker. Zooming OUT would still be dangerous, and nothing here
+# does that.
+#
+# The United States view is UNCHANGED, and by construction rather than by
+# luck: IN_DEFAULT_VIEW is exactly the set of cities tagged "United States", so
+# fitting that region reproduces zoom 1.4525 and the same centre.
+#
+# Why it changed: re-centring alone left Canada and Mexico drawn at continental
+# zoom, which showed the same near-empty frame as the United States view and
+# gave a reader almost nothing. Vancouver to Montréal is ~3,300 km - wider than
+# the contiguous United States - which is also why Canada is split west/east.
+_here = _region_cities[region]
+view = fit_view([c["lat"] for c in _here], [c["lon"] for c in _here])
+
+# RE-CENTRE ON THE REGION'S OWN MIDPOINT, KEEPING THE FITTED ZOOM. The heading
+# on this block used to read "RE-CENTRE, NEVER RE-ZOOM", which stopped being
+# true when the line above started fitting each region; `view.zoom` is now that
+# region's own fitted zoom, not the pinned 1.4525, and this block preserves it.
+#
+# WHAT IT ACTUALLY DOES is drop fit_view's `west_pad` from the centre, because
+# that padding lives in the fitted longitude and recomputing the midpoint
+# discards it - so a region sits about 12 px east of its fitted frame. That
+# reads like a bug and was removed on 2026-09-22; REMOVING IT MADE THINGS
+# WORSE and it was restored, measured rather than argued:
+#
+#   phone-width (343 px canvas) label clipping, total across all regions
+#     with this block:     137.4 px   (Vancouver 89.9 W, San Diego 16.9 E,
+#                                      Edmonton 14.5 E, Guadalajara 9.8 W,
+#                                      Montréal 6.3 E)
+#     without it:          159.5 px   (Guadalajara fixed, every east-edge
+#                                      label worse, and a NEW 7.9 px clip on
+#                                      Boston in United States East)
+#
+# The west pad only ever helps a label running WEST off its dot, and in four
+# of the five regions the label at risk runs EAST. So the 12 px eastward shift
+# is doing real work here by accident, and the honest fix is to say so rather
+# than to tidy the block away.
+#
+# FITTING THE BOX TO THE LABELS was the other candidate and is arithmetically
+# dead: padding the longitude box by each edge label's pixel width drops Canada
+# West from zoom 3.868 to the 1.0 floor, United States East from 3.085 to
+# 1.273, and the composite from 1.4525 to 1.0 - it removes every clip by
+# throwing away the per-region zoom the clipping is a side effect of. This is
+# cities.py's standing rule ("do NOT solve a label overflow by padding
+# fit_view's bounding box") holding in a second place.
+#
+# The residual clipping is the SAME accepted trade-off cities.py already
+# documents for the composite at phone width, where Washington D.C. is 39%
+# clipped and Philadelphia 28%, with the full text-link list beneath the map as
+# the navigation guarantee. Every clipped pill stays clickable.
+#
+# A NEW ViewState rather than `view.zoom = ...`: pydeck does not serialise
+# attributes mutated after construction, so the assignment form silently ships
+# the old view.
+if region != DEFAULT_REGION:
+    _here = _region_cities[region]
+    view = pdk.ViewState(
+        latitude=(max(c["lat"] for c in _here) + min(c["lat"] for c in _here)) / 2,
+        longitude=(max(c["lon"] for c in _here) + min(c["lon"] for c in _here)) / 2,
+        zoom=view.zoom,
+    )
 
 # Carto basemap: pydeck's own default style needs a Mapbox token; Carto's
 # public styles don't. (Tile provider is still an open decision before
@@ -250,11 +417,20 @@ if picked:
 # dot is visible near the top. Whether a given city falls just inside or just
 # beyond the edge depends on the container width, so the wording covers both
 # and the list below is named as the guarantee.
-if any(c.get("in_default_view", True) is False for c in CITIES):
+# NAMES THE OTHER REGIONS RATHER THAN SAYING "SOME CITIES ARE ELSEWHERE".
+# docs/scaling_thresholds.md's failure mode is a default that silently hides
+# most of the site, and a reader cannot tell a deliberate frame from a broken
+# one unless the counts are stated. Every city is drawn at every region - the
+# view is centred, not filtered - so the wording is about where the view sits.
+if len(REGIONS) > 1:
+    _elsewhere = ", ".join(
+        f"{len(_region_cities[n])} in {n}" for n in _region_names if n != region
+    )
     st.caption(
-        "The opening view is framed on the United States, so cities elsewhere "
-        "sit toward the edge or beyond it. Zoom out and pan to explore — "
-        "or use the list below, which always has every city."
+        f"Showing {len(_region_cities[region])} cities in {region} — "
+        f"{_elsewhere} elsewhere. Every city is on the map: switch region "
+        "above to re-centre, or use the list below, which always has all of "
+        "them."
     )
 
 st.caption("Or pick a city from the list:")

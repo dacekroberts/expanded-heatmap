@@ -86,6 +86,7 @@ TAXONOMY_MODULES = {
     # licence, so its Retail bucket is the REGULATED slice alone (4.2% of its
     # storefronts) - New York's and Boston's shape rather than Calgary's.
     "toronto_mlscategory": "pipeline.taxonomies.toronto_mlscategory",
+    "scian": "pipeline.taxonomies.scian",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

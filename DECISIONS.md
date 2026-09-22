@@ -16,15 +16,22 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**118 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**125 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [A leaf region labels only its own cities, and the one accepted overlap is written down](#2026-09-22---a-leaf-region-labels-only-its-own-cities-and-the-one-accepted-overlap-is-written-down)
+- [Two merges, the macro-label check that was missing, and two fixes rejected by measurement](#2026-09-22---two-merges-the-macro-label-check-that-was-missing-and-two-fixes-rejected-by-measurement)
 - [France reversed on new measurement: the employee filter works, Paris returns to Band A](#2026-09-22---france-reversed-on-new-measurement-the-employee-filter-works-paris-returns-to-band-a)
 - [The France decision, settled by measurement: Paris leaves Band A](#2026-09-22---the-france-decision-settled-by-measurement-paris-leaves-band-a)
+- [The live site was down for three hours, and no check this project had could have seen it](#2026-09-22---the-live-site-was-down-for-three-hours-and-no-check-this-project-had-could-have-seen-it)
+- [config.py split into country and city, and the outputs did not move](#2026-09-22---configpy-split-into-country-and-city-and-the-outputs-did-not-move)
 - [Three food-authority probes: Bucharest promoted, Budapest closed, Sofia unreachable](#2026-09-22---three-food-authority-probes-bucharest-promoted-budapest-closed-sofia-unreachable)
 - [Tier 6 reached; Stockholm is a real register four hops deep, and Sofia's 403 reading was wrong](#2026-09-22---tier-6-reached-stockholm-is-a-real-register-four-hops-deep-and-sofias-403-reading-was-wrong)
 - [Tier 5 closed by browser navigation, and real-browser probing made a standing rule](#2026-09-22---tier-5-closed-by-browser-navigation-and-real-browser-probing-made-a-standing-rule)
+- [Guadalajara built: the second city is what shows which settings were national](#2026-09-22---guadalajara-built-the-second-city-is-what-shows-which-settings-were-national)
+- [Mexico City built: the first city here whose rail is not GTFS, and the first outside North America's licence-register model](#2026-09-22---mexico-city-built-the-first-city-here-whose-rail-is-not-gtfs-and-the-first-outside-north-americas-licence-register-model)
+- [The region switcher shipped, and the fix was a deleted key](#2026-09-22---the-region-switcher-shipped-and-the-fix-was-a-deleted-key)
 - [CDMX approved from OpenStreetMap as a per-city exception, and it passes both rail invariants](#2026-09-22---cdmx-approved-from-openstreetmap-as-a-per-city-exception-and-it-passes-both-rail-invariants)
 - [Mexico nationwide GIS probe: no new route, but CDMX is a retry rather than a loss](#2026-09-22---mexico-nationwide-gis-probe-no-new-route-but-cdmx-is-a-retry-rather-than-a-loss)
 - [Madrid's licence read; the Mobility Database moved its files, and Mexico City drops out of Band A](#2026-09-22---madrids-licence-read-the-mobility-database-moved-its-files-and-mexico-city-drops-out-of-band-a)
@@ -155,6 +162,166 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-22 - A leaf region labels only its own cities, and the one accepted overlap is written down
+
+- **Owner's decision: a LEAF region draws name pills only for its own member
+  cities; the composite still labels every one.** Taken as the narrow of two
+  options offered - the broad one would have suppressed non-member labels in
+  the composite too, closing one 1.1 px abutment at the cost of removing seven
+  labels from the landing view, which is the portfolio's first impression.
+  Supersedes nothing: it is the first rule this map has had about WHICH cities
+  get labels, as against where a label sits.
+
+- **It is a correctness fix before it is a tidiness one.** Every macro-map
+  finding still open after `1263021` was a non-member drawn at the frame edge
+  of a region the reader had switched away from: "Los Angeles" covered San
+  Diego's marker and overlapped its pill by 20.5 x 11.2 px in United States
+  East, where NEITHER city is a member, and "Philadelphia" hung 2.1 px below
+  the canvas in Canada East. The alternative was tuning offsets so that each
+  city's single pixel offset satisfies all six regions at three widths, which
+  is unbounded and gets worse with every region added. `label_offset` values
+  were measured at the composite zoom and a non-member sits at a zoom they were
+  never measured at, so the honest fix is to stop drawing the label rather than
+  to chase it.
+
+- **The markers layer is untouched, so "every city is on the map" stays true.**
+  Overview.py still hands the whole `CITIES` frame to the ScatterplotLayer at
+  every region; only the TextLayer's data is narrowed. A non-member's dot stays
+  visible, stays pickable and still opens its page, and the text-link list
+  beneath the map is unchanged. Verified in the browser at 1200 px: United
+  States East draws six pills with the Californian and Mexican dots present and
+  unlabelled at the edges; Canada East draws two, with Chicago's, Boston's and
+  New York's dots visible and bare; the landing view still draws all sixteen.
+  Keyed on `REGION_MEMBERS` rather than on the region's name, so a future
+  composite inherits the exemption without another edit.
+
+- **The remaining hairline overlap is now RECORDED rather than tolerated by a
+  loosened threshold.** "Los Angeles" x "Guadalajara (Regional)" overlap
+  68.5 x 1.1 px in the composite - 0.1 px past the >1 px rule set earlier the
+  same day - with the pill backgrounds touching and the glyphs clear.
+  deploy-verify measured it from rendered pixels and called it abutting rather
+  than a defect; the owner agreed. Raising `TOUCH` to 2 px would have silenced
+  it and every future hairline case with it, which is tuning a check to hide a
+  finding, so `check_macro_labels.py` gained an `ACCEPTED_OVERLAPS` table
+  instead: this exact pair, in this region, at these measured dimensions, with
+  the reason beside it. It still FAILS if the overlap grows more than 0.5 px
+  past what was actually examined, so the exemption cannot quietly cover a
+  regression. `check_macro_labels.py` now reports PROBLEMS 0 across six regions
+  and three widths.
+
+### 2026-09-22 - Two merges, the macro-label check that was missing, and two fixes rejected by measurement
+
+- **Merged the staging session's global screen (`4e87cfc`, 19 commits) and then
+  its France reversal (`81ee70d`), both documentation only.** France left Band A
+  on a siege measurement and returned to it within the hour on an employee one:
+  the siege filter keeps chain branches and discards every independent trader,
+  because an independent shop IS its company's siege, and its 19,978 rows for
+  Paris read like a plausible storefront count while being the inverse of what
+  this project maps. `caractereemployeuretablissement = 'Oui'` gives 50,156 and
+  validates against OSM to 0.4% on restaurants and 92.5% overall. 99.96% of
+  rows arrive geolocated, so France carries no geocoding leg. Both entries
+  stand; neither was edited.
+
+- **A git conflict region shows where two sides DISAGREED, not everything the
+  other side ADDED, and the difference silently deletes entries from an
+  append-only log.** Resolving the first merge by rebuilding `DECISIONS.md`
+  from master's stage and re-appending staging's four colliding entries would
+  have dropped a fifth: staging's "Japan is a BUILD" sat lower in the file with
+  no competing change beside it, so git auto-merged it OUTSIDE the markers. It
+  was caught by asserting the region below the conflict was byte-identical on
+  both sides, which it was not (6,198 lines against 6,262). The second merge
+  made the same point more sharply - its ONLY conflict was the generated index,
+  while the new France entry arrived entirely outside the markers. Written into
+  `scripts/merge_append_only.py`, which edits only the conflict regions of
+  git's own merged file, dates each entry by the commit that introduced it so
+  two sides interleave by real time rather than stacking, and REFUSES TO WRITE
+  unless the result equals the union of both sides' full stages. `CLAUDE.md`
+  carries the rule, per its own argument that a lesson in the log describes
+  what happened once while a working rule is in hand at the moment of typing.
+
+- **The macro map's basemap attribution was collapsing behind an (i) button
+  below ~640 px, which is a licence term rather than a style preference.**
+  mapbox-gl adds `mapboxgl-compact` at narrow widths and sets the credit's
+  inner text to `display: none`; at a 375 px viewport the map showed the button
+  and no credit, while 768 and 1200 showed it in full. ODbL 1.0 requires the
+  credit to stay visible, `CLAUDE.md` says it must not sit "beneath UI, behind
+  toggles, or off-screen", and `components.render_site_notices()` already
+  refuses an `st.expander` for exactly this reason - so a library default is
+  not an exemption. Overridden in `_MACRO_CONTROLS_CSS`, deliberately NOT
+  scoped to `body.dark-base` because the obligation does not depend on the
+  theme. Verified at 375 px: the credit renders as a 234x20 block reading
+  "(c) CARTO, (c) OpenStreetMap contributors" with the button suppressed. The
+  city maps are Leaflet, whose attribution control has no compact mode.
+
+- **Added `scripts/check_macro_labels.py`, because the check that cleared the
+  region split scored only each region's OWN MEMBER CITIES.** Every city is
+  drawn in every region - the view is centred, never filtered - so a non-member
+  still renders at the frame edge and still collides. That blind spot is why a
+  commit message claimed "zero label collisions and zero pills covering their
+  own marker, in all SIX regions" while "Los Angeles" x "San Diego" overlapped
+  20.5 x 11.3 px in United States East. The new script scores every city in
+  every region at 375, 768 and 1200 px, and distinguishes a pill COVERING a
+  marker (centre inside the pill, which is what erases a dot) from one grazing
+  its edge - the loose test flagged Philadelphia against New York, a pair
+  deploy-verify measured as both rendering normally. It reproduced all thirteen
+  of deploy-verify's rendered-pixel measurements from Web-Mercator arithmetic,
+  to 0.1 px, which is what licenses using it in place of a browser for routine
+  checks.
+
+- **New York's pill was erasing Boston's marker in the landing view, and its
+  `dx` went 14 -> 24.** deploy-verify measured 0 teal pixels for Boston at 1200
+  and 768 px against 32-65 for every other city: Boston's dot lands at x 627.0
+  while New York's pill spanned x 624.5-695.9 at y 180.4-198.4, so an opaque
+  pill drawn above the markers sat on it. The same defect as Guadalajara's, one
+  view over. East rather than down, because the eastern column's vertical slots
+  are 16 px apart and +8 is Philadelphia's; 22 is the arithmetic minimum and 24
+  leaves 2.5 px. Verified from rendered pixels after a forced redraw: Boston's
+  centre reads 13,148,136 (the teal fill) with its white ring intact either
+  side, and New York's pill now begins at x 635. It costs 10 px more clipping
+  at 375 px, 27% of the pill against 13%, the same trade-off Washington D.C.
+  already carries at 39%.
+
+- **Two candidate fixes for the phone-width label clipping were tested and
+  REJECTED, both on numbers rather than judgement.** deploy-verify found four
+  labels clipped at 375 px in the region views. (1) Removing Overview.py's
+  re-centring block, which discards `fit_view`'s `west_pad` and draws every
+  non-default region ~12 px east of its fitted frame, looked like the obvious
+  bug fix and made things WORSE: 137.4 px of total clipping became 159.5 px,
+  because the west pad only helps a label running west off its dot and in four
+  of five regions the label at risk runs EAST - plus a new 7.9 px clip on
+  Boston in United States East. The block was restored and its comment, which
+  still read "RE-CENTRE, NEVER RE-ZOOM" after the per-region fit superseded
+  that rule, rewritten to say what it actually does. (2) Fitting the box to the
+  LABELS rather than the dots removes every clip and is arithmetically dead:
+  Canada West drops from zoom 3.868 to the 1.0 floor, United States East from
+  3.085 to 1.273, and the composite from 1.4525 to 1.0 - it buys the labels by
+  throwing away the per-region zoom the owner asked for. That is cities.py's
+  standing rule ("do NOT solve a label overflow by padding fit_view's bounding
+  box") holding in a second place. The residual clipping is the trade-off
+  cities.py already documents for the composite, where Washington D.C. is 39%
+  clipped at phone width; every clipped pill stays clickable and the text-link
+  list beneath the map is the navigation guarantee.
+
+- **`scripts/decisions_index.py` was writing CRLF on Windows**, so every index
+  refresh left the working copy differing byte-for-byte from the blob git
+  stores while `git status` read clean, because git normalises on commit. That
+  is the same mismatch that hid a CRLF-only change to
+  `.claude/agents/deploy-verify.md` earlier the same day and left the agent
+  unregistered for a whole session. Now writes `newline="\n"`.
+
+- **Still open, and deliberately not decided here: whether a region view should
+  LABEL cities that are not its members.** Every remaining finding is one -
+  "Los Angeles" covering San Diego's marker and overlapping its pill in United
+  States East, and "Philadelphia" hanging 2.1 px below the canvas in Canada
+  East, in each case a city the reader switched away from. Suppressing
+  non-member labels while keeping their markers would close all of them and
+  keep the caption's "every city is on the map" true, but it changes what a
+  reader sees, and in the composite it would remove seven labels from the
+  landing view. Left to the owner. The one further finding, "Los Angeles" x
+  "Guadalajara (Regional)" overlapping 68.5 x 1.1 px, is 0.1 px past the
+  >1 px rule set on 2026-09-22 and is abutting rather than a smear - the pill
+  backgrounds touch and the glyphs do not.
+
 ### 2026-09-22 - France reversed on new measurement: the employee filter works, Paris returns to Band A
 
 - **Reversed the demotion recorded earlier the same day, and the reversal is
@@ -281,7 +448,109 @@ onwards; the early ones are split by phase rather than by hour.
   the framing in this file and in `docs/city_master_list.md` that France was
   "an architecture decision you own" - it was, and it has now been made on
   measurement rather than taste.
+### 2026-09-22 - The live site was down for three hours, and no check this project had could have seen it
 
+- **The deployed app raised `ImportError: cannot import name 'DEFAULT_REGION'
+  from 'cities'` on every page load across at least five Cloud pulls between
+  06:11 and 09:11, while `drift_check`, `deploy-verify` and a clean-clone
+  import all reported the same commit healthy.** The cause is not a bug in the
+  code: **Streamlit Cloud's "Updated app!" re-runs the ENTRY SCRIPT and leaves
+  every module in `sys.modules` as it was at boot.** `app/Overview.py` was
+  re-read from disk asking for `DEFAULT_REGION`; `cities` remained the module
+  object loaded before that name existed. Only a reboot clears it, and the log
+  shows five pulls and five updates that did not.
+
+- **The log proved it rather than suggesting it, and the proof is worth
+  keeping because the symptom sends you hunting a phantom.** One traceback
+  printed the source line `from cities import CITIES, IN_DEFAULT_VIEW,
+  MAP_ONLY_NAV` - the OLD one-line import, which does not mention
+  `DEFAULT_REGION` anywhere - directly above an error naming `DEFAULT_REGION`.
+  A file cannot fail on a name it does not reference. Python renders traceback
+  source by re-reading the file from disk at error time while executing a
+  cached code object, so disk and runtime were demonstrably different versions.
+  That single frame ruled out every git-side explanation at once, after both
+  branches had been fetched raw from GitHub and both found to define the name.
+
+- **Two live-breaking defects reached that deployment in one session, in one
+  file, and the checks were structurally incapable of catching either.**
+  `drift_check.py` runs the pipeline and never imports `app/`. `deploy-verify`
+  runs the app, but from the WORKING TREE and always in a FRESH process - so it
+  cannot see what is committed, and cannot see a stale module by construction.
+  It verified the same commit as healthy while the site was down. **A green
+  agent run is evidence about a machine, not about the site.**
+
+- **Added `scripts/check_deploy_imports.py`: a clean clone, under `.venv-lean`,
+  checking every module-level import in `app/` plus the data shapes that have
+  actually broken this app.** Verified to FAIL as well as pass, on both real
+  cases: against `0fa3e55` it reports Mexico City's missing `label_offset` and
+  the resulting NaN, which is the defect that took the Overview down; with
+  `DEFAULT_REGION` removed from a clone it reproduces the live message
+  verbatim, `cannot import name 'DEFAULT_REGION' from 'cities'`. It also
+  refuses the heavy pipeline imports reaching the deploy venv. It needs no
+  server and takes seconds.
+
+- **What it still cannot catch is stated in the file rather than assumed
+  away:** the stale-module case. Nothing local can see it, because a fresh
+  process is precisely the thing the live app does not do. That is why the
+  reboot is a written gate step and not a habit.
+
+- **Recorded as gate item 9 in `docs/data_sources.md`, in `CLAUDE.md`'s working
+  rules, and in `deploy-verify`'s own definition** - three places, because the
+  session's other recurring lesson is that a rule reaches nobody where it is
+  not needed. The agent's file now opens its guardrails with what it CANNOT
+  catch, so a future caller cannot read a pass as covering the deployment.
+
+- **And the reporting failure that let the first defect through.** The Mexico
+  City build was reported as hand-verified with "all 15 cities in the DOM,
+  click path in both regions". It was not: that description belonged to the
+  region-switcher check, which ran before Mexico City existed, and the Overview
+  was never reopened after the city was added. The NaN crash would have been
+  visible on the first page load. Stated here because the missing check and the
+  false report were the same event.
+### 2026-09-22 - config.py split into country and city, and the outputs did not move
+
+- **Split the two Mexican configs onto `pipeline/countries/mexico.py`, on the
+  schedule set when Mexico City was built: at the SECOND city, not the first
+  and not later.** One city cannot show which of its settings are national -
+  that was the whole argument for waiting, and Guadalajara settled it. Thirteen
+  names moved out: the DENUE URL and member templates, `SOURCE_ENCODING`, the
+  five DENUE column names, `RAW_CLASSIFICATION_COLUMN`, `TAXONOMY_SYSTEM`,
+  `PREMISES_TYPE_COLUMN`/`_KEEP`, `FORBIDDEN_COLUMNS`, `DENUE_INTERIOR_COLUMN`,
+  `OVERPASS_HOSTS`, `OVERPASS_USER_AGENT` and `OSM_NEVER_A_STATION`.
+
+- **What stayed per city is the useful half of the finding.** The entidad code,
+  the projected CRS (32614 against 32613), the bbox, the municipio scope, the
+  line names and colours, the operator's published counts - and **the OSM
+  station tagging**, which is the one nobody would have predicted from Mexico
+  City alone: that city has 184 `railway=station` nodes and Guadalajara has
+  one, its stations being `railway=stop` positions. A setting that looks
+  national after one city is a guess; after two it is a measurement, and that
+  sentence is now the country module's docstring.
+
+- **PROVEN BEHAVIOUR-NEUTRAL RATHER THAN ASSUMED, in three steps.** Every name
+  the step files import still resolves from its city config - 34 for Mexico
+  City, 35 for Guadalajara, none missing - because the shared names are
+  re-exported rather than removed, so no step file changed. Fourteen value
+  checks compare the country module against each city config and all match.
+  And both pipelines were re-run end to end: **zero drift, 15 baseline figures
+  unchanged**, outputs identical. If the refactor had changed anything,
+  `drift_check` would have said so instead of the author.
+
+- **The files did not get smaller, and claiming otherwise would be the easy
+  lie.** Code lines are unchanged - Mexico City 103 before and after,
+  Guadalajara 104 - because a 16-line import block replaced 13 scattered
+  definitions. The gain is not size: it is that a licence correction, an
+  encoding fix or a forbidden-column addition is now ONE edit rather than one
+  per city. That is worth little at two cities and a great deal at Japan's
+  nine, which is the case the directory was created for. France, Korea, Taiwan
+  and Brazil are all one-national-register countries on the shortlist.
+
+- **Comment orphaning was the real hazard of the move, and two were caught.**
+  Relocating a constant leaves its explanation behind: Mexico City's config
+  kept a note about which Overpass hosts return 504 above a line that no longer
+  mentioned hosts, and Guadalajara kept a DENUE curl command duplicating the
+  one that had just moved. Both now point at the country module instead. A
+  stale comment is the same defect class this project greps city pages for.
 ### 2026-09-22 - Three food-authority probes: Bucharest promoted, Budapest closed, Sofia unreachable
 
 - **Ran the agreed budget exactly: one attempt each at Hungary's, Romania's
@@ -361,7 +630,6 @@ onwards; the early ones are split by phase rather than by hour.
   one promoted, two parked, two walls". The two best new results of the whole
   sweep - Stockholm and Bucharest - both came out of the tier that had looked
   deadest.
-
 ### 2026-09-22 - Tier 6 reached; Stockholm is a real register four hops deep, and Sofia's 403 reading was wrong
 
 - **Found Stockholm's food-premises register and recorded it as a PARTIAL PASS
@@ -437,7 +705,6 @@ onwards; the early ones are split by phase rather than by hour.
   first is a register of businesses rather than inspections, so it needs no
   dedupe. Its rail is trams rather than a metro. Unprobed, recorded as a
   candidate rather than a recommendation.
-
 ### 2026-09-22 - Tier 5 closed by browser navigation, and real-browser probing made a standing rule
 
 - **Established that opening a portal in a real browser is the FIRST move of
@@ -522,6 +789,384 @@ onwards; the early ones are split by phase rather than by hour.
   the by-country tier table, and the Tier 5 remainder section) and appended the
   full probe evidence to `docs/global_country_shortlist.md`, which is the trail
   the master list defers to.
+### 2026-09-22 - Guadalajara built: the second city is what shows which settings were national
+
+- **Built Guadalajara (Regional) as city 16, and it did what the second city in
+  a country is for: it separated the national settings from the local ones.**
+  196,907 DENUE units across four municipios -> 193,139 `Fijo` -> 117,698
+  storefront -> 117,454 mapped; **36,925 within a ring across 56 stations**.
+  Retail 79,098, Food service 23,226, Personal services 15,374. Map 3.24 MB.
+  What transferred from Mexico City untouched: the register, `scian.py`, the
+  licence, the encoding, the forbidden columns, the `Fijo` filter, the OSM line
+  loader. What did not: the state code, the CRS (32613 against 32614), the
+  municipio scope, and - the one nobody would have predicted - **the station
+  object itself**.
+
+- **REGIONAL, on the operator's own description rather than on convenience.**
+  SITEUR states that Linea 3 "conecta Zapopan, Guadalajara y Tlaquepaque" and
+  that Linea 4 connects "Tlajomulco de Zuniga, Tlaquepaque y Guadalajara", so a
+  Guadalajara-municipio build would have truncated two of four lines. Stations
+  land 35 in Guadalajara, 9 in Zapopan, 6 in San Pedro Tlaquepaque and 6 in
+  Tlajomulco de Zuniga, recorded per station in
+  `outputs/guadalajara/station_municipios.csv` as Miami's and Vancouver's
+  regional builds do. **Tonala is excluded** although DENUE holds 19,897 units
+  there: no line reaches it, and a municipio with no station contributes
+  businesses no ring can contain. Miami's and Vancouver's precedent; the
+  display name carries "(Regional)" and the page file keeps the plain name.
+
+- **THE GTFS FEED WAS FOUND, DOWNLOADED AND REJECTED, which is a different
+  finding from Mexico City's unreachable host.** The only Guadalajara rail feed
+  in the Mobility Database (mdb 1925, also inside 2366) declares
+  **`feed_end_date = 20230128`** in its own `feed_info.txt`, names
+  **Nubenautas** (`gtfs.studio`) as publisher rather than SITEUR, and carries
+  **three** light-rail routes. SITEUR publishes **four**: **Linea 4 opened
+  2025-12-15**, almost three years after the feed stopped. Building from it
+  would have drawn a map missing an operating line, 8 stations and 21 km, while
+  looking complete. That is the Toronto lesson with the staleness declared in
+  the artifact itself - which is exactly the case `add-country` says to catch by
+  reading `feed_end_date` rather than by distrusting mirrors in general. Owner
+  approved OSM as a second documented exception on 2026-09-22, on
+  incompleteness rather than unreachability, and asked for the snapshot date
+  and the resulting line exclusion to be named in the write-up. They are named
+  here, in `pipeline/guadalajara/config.py`, and on the city page.
+
+- **GATE 3 RUNS HERE, unlike Mexico City, and it passes.** `siteur.gob.mx`
+  answers HTTP 200, so the operator's published counts are readable:
+  **Linea 2, "10 estaciones subterraneas"; Linea 4, "Estaciones: 8"**. OSM's
+  route-relation membership gives 10 and 8. **Both match.** SITEUR publishes no
+  count for Lineas 1 or 3 on that page, so none is recorded - a partial gate 3
+  with its gaps named is worth more than a complete-looking one filled in from
+  memory, which is the trap Mexico City's config refuses by leaving
+  `STATION_COUNT_GATE_3 = None`.
+
+- **The same mistake twice in one day, one city apart, and the second time in a
+  query rather than a comment.** `pipeline/mexico_city/config.py` says in
+  capitals "MATCH ON THE MODE, NEVER ON THE NETWORK LABEL ALONE", written
+  because OSM tags Lecheria - a Ferrocarril Suburbano station - as
+  `network=STC Metro`. Guadalajara's first Overpass query was
+  `node["railway"]["network"="Mi Tren"]`, which returned 96 nodes and
+  **silently omitted every one of Linea 4's 8 stops**, whose nodes carry no
+  `network` tag at all because the line is nine months old. The result was a
+  49-station set with **zero stations in Tlajomulco de Zuniga** - the same
+  missing line as the rejected feed, reached a different way.
+  **The cause is not forgetfulness, it is placement:** the warning lived in the
+  previous city's config, which is not a file anyone opens while writing the
+  next one. Fixed structurally rather than with another comment - stations are
+  now derived from **route-relation membership**, which cannot omit a line that
+  has a relation and which hands gate 3 its per-line counts for free. Recorded
+  as a new skill, `.claude/skills/osm-rail/`, whose first section is where a
+  lesson belongs: a raising check in shared code, then a skill, then the shared
+  module, and a city's own config last and only for facts about that city.
+  `CLAUDE.md` points at it.
+
+- **Two more OSM traps, both caught by gates rather than by reading.** A
+  boundary query of `admin_level=6 name="Guadalajara"` with **no bbox** is a
+  global search: it matched **Guadalajara, SPAIN**, and the "keep the largest
+  polygon" tie-breaker then selected it deliberately, yielding a 26,814 km2
+  "municipio" against the real 151. The union-area gate raised. Two rules
+  written into the step: bound every name search geographically, and never
+  tie-break same-named boundaries by SIZE, because the wrong candidate is
+  usually a larger administrative unit. Separately, OSM carries
+  "Independencia" and "Independencia L3" as two stations **4 m apart** - one
+  station box under two names, caught by the spacing gate and merged by a
+  trailing-line-suffix alias, the project's third encounter with that collapse
+  mechanism after Calgary's suffixes and Toronto's conventions. Station spacing
+  went from a 4 m minimum to 91 m, median 766 m.
+
+- **The station object differs between two cities in one country**, which is
+  the sharpest argument yet for `pipeline/stations.py` sharing the CHECKS and
+  leaving the COLLAPSE per city. Mexico City has **184** `railway=station`
+  nodes; Guadalajara has **one**, and its stations are `railway=stop`
+  positions - 110 of them, collapsing to 56 names at almost exactly 2 per name.
+  Mexico City's whitelist finds one station in Guadalajara, and the failure
+  would have looked like a boundary or scope problem rather than a tagging one.
+
+- **Density is 659 per station and carries Mexico City's comparability
+  caveat**, for the same reason: DENUE is an establishment census rather than a
+  licence register, so the figure measures source completeness as much as
+  commercial density. Not comparable with Vancouver's 206 or Toronto's 81. Said
+  on the city page. Three buckets are 60.9% of fixed premises here against
+  Mexico City's 64.1%.
+
+- **`INEGI`'s notice already covered this city**, because the notice names the
+  register rather than the city - the first time a new city needed no new
+  entry in `render_site_notices()`. Its rail credit is OpenStreetMap's, already
+  displayed. Semifijo is 3,768 units here (1.9%) against Mexico City's 4.45%.
+  The whole-city heat layer is off, as Mexico City's is.
+### 2026-09-22 - Mexico City built: the first city here whose rail is not GTFS, and the first outside North America's licence-register model
+
+- **Built Mexico City as city 15, on INEGI's DENUE rather than a municipal
+  licence register, and the composition is the best measured in this project.**
+  462,732 economic units in entidad 09 -> 442,146 `Fijo` -> **283,346 in the
+  three storefront buckets (64.1% of fixed premises)** -> 283,345 with valid
+  coordinates. **133,362 fall within a station ring across 163 stations.**
+  Retail 202,038, Food service 49,453, Personal services 31,855. Coordinates
+  are populated on **100%** of rows and `nom_estab` on 99.95%, so this city
+  needs no geocoding leg. Jalisco was measured alongside it as the second
+  reading add-country requires (401,813 units, Guadalajara 97,134, 100%
+  coordinates, 68.39% in buckets) - the capital is not the exception here that
+  Seoul was for Korea.
+
+- **`docs/global_country_shortlist.md` said "SCIAN = NAICS so the taxonomy may
+  transfer". Measured, that is right for two buckets of three and WRONG on the
+  largest.** SCIAN numbers retail **46** where NAICS uses 44-45 (and wholesale
+  43 against 42), while agreeing on 722 food service and 812 personal
+  services. `naics.py` pointed at DENUE would have matched nothing under 44/45
+  and left **212,251 retail rows - 45.87% of the file** - unclassified, and
+  since `classify()` raises on unknown values it would have failed loudly
+  rather than quietly, which is the one mercy. So
+  `pipeline/taxonomies/scian.py` is a new module, differing from `naics.py` in
+  exactly two prefixes: Retail `46`, and parking `812410` in place of `81293`.
+  Nonstore retail has an exact twin, `469`, excluded on the same reasoning at
+  1/1000th the size (90 units against nonstore's 10.1% of Los Angeles' pins).
+  Rejected: a country flag on `naics.py`, which would put the most
+  consequential constant in this project behind an argument.
+
+- **Food service is 722 and not 72, and catching that corrected a figure this
+  session had already produced.** A first pass counted the two-digit prefixes
+  and reported 58,167 food-service units and "73.07% in the three buckets".
+  Both were wrong: `72` includes **721 accommodation** (999 hotels), and the
+  crude prefixes also swept in 811 repair, 813 associations and 812410
+  parking. The carved-out figures are **57,168** and **64.1%**. Same precision
+  the NAICS cities already use; the two-digit prefix was the
+  obvious-looking mistake.
+
+- **Gate 3 CANNOT BE RUN for this city, and that is disclosed rather than
+  worked around.** `pipeline/stations.py` calls the operator's published
+  station count "the one check that can see an error every internal check
+  agrees with" - it corrected Edmonton 33->30 and Toronto 118->110. STC Metro
+  publishes its counts on `metro.cdmx.gob.mx`, which returns ConnectTimeout on
+  every host and scheme tried, as does `ste.cdmx.gob.mx` and the whole
+  `*.cdmx.gob.mx` domain (re-confirmed 2026-09-22). No block page names an IP,
+  so this is a dead host rather than a client refusal and the browser does not
+  help. **No remembered figure was typed into the config**, because a number
+  from memory would look exactly like gate 3 and be worthless.
+  `STATION_COUNT_GATE_3 = None` records the reason. What runs instead: the
+  spacing gate (163 stations, median 780 m), the `railway=station` whitelist,
+  and cross-direction agreement - all 13 refs have exactly two direction
+  relations. Owner's decision to proceed on that basis, 2026-09-22.
+
+- **OSM is a fourth collapse mechanism and a third set of traps, so "just a
+  different source" understates it.** Collapse is BY NAME, because OSM carries
+  one station node per line at an interchange - Pantitlan has 4 nodes, La Raza,
+  Jamaica, Oceania and Tasquena 2 each - after Edmonton's `parent_station`,
+  Calgary's direction prefix and Toronto's three naming conventions. Measured
+  in the same bbox: **447 `railway=subway_entrance` nodes against 184 stations,
+  2.4x**, which is Israel's entrances trap and would have inflated every ring;
+  and **13 PROPOSED Texcoco light-rail stations, five of them tagged
+  `railway=prpopsed`** - misspelled in the source - so a blacklist on
+  `proposed` would have drawn rings around building sites while looking
+  correct. Keeping only `railway == "station"` is immune to the typo, which is
+  why the filter is a whitelist.
+
+- **`network=STC Metro` on a station that is not a Metro station.** OSM tags
+  Lecheria, a Ferrocarril Suburbano station, with Metro's network and no
+  `station` or `subway` tag at all; matching on network admitted it to the
+  published `excluded_stations.csv` as a Metro station. Fixed by matching on
+  the MODE - what a node is - rather than on a label claiming who operates it.
+  The 10 stations that remain excluded are genuine Lineas A and B stops in
+  Estado de Mexico, cut because this build has no business data there and their
+  rings would otherwise anchor over a blank.
+
+- **`pipeline/linecolour.py` stopped a build for the first time since it was
+  written, and on a case it was not written for.** Two LINE-VS-LINE pairs sat
+  below the hard floor of Delta-E 10: Linea 2 `#005EB8` against Tren Ligero
+  `#0554ba` at **9.8**, and Linea 3 `#AF9800` against Linea 12 `#B0A32A` at
+  **8.5**. Every previous finding was line-vs-category. Resolved by the
+  module's own rule - keep the agency hue, change only lightness - and by
+  moving the secondary line of each pair: Tren Ligero to `#033574` (now 21.9)
+  and Linea 12 to `#877D20` (now 21.3). **Linea 2 was deliberately left at
+  10.4 from the Retail pin colour**, the closest in the project after Calgary's
+  historic 3.3: it is above the floor, and the 2026-09-21 branding decision
+  keeps agencies' real colours, with fourteen line colours across six cities
+  already recorded in the 10-45 band. Darkening it was measured (-0.08 gives
+  `#00498F` at 22.1) and rejected. Owner's decision, 2026-09-22.
+
+- **The rendered map was 25.7 MB, 3.5x the largest existing one, and the
+  fix was NOT what the size looked like it was.** The out-of-ring businesses
+  turned out to live only in the opt-in whole-city HEAT layer, not in any pin
+  layer - the pin layers already use the in-ring subset - so the first estimate
+  of the saving was built on a wrong model of where the bytes were.
+  `render_heatmap` gained `all_city_heat`, off for this city: **25.7 -> 19.0
+  MB** for 283,345 dropped coordinate pairs. Recorded in
+  `docs/excluded_categories.md`, because this city now offers less than the
+  others. Measured and rejected on the way: `COORD_DP = 5` saves **1.1 MB of
+  25.7 (4%)** here, so it does not justify re-baselining fifteen cities'
+  committed outputs. And the framing correction that matters most: **19.02 MB
+  gzips to 3.07 MB (6.2x)**, so transfer was never the problem - what remains
+  is parse cost and repository bytes.
+
+- **The classification value is now INDEXED in every city's rendered map, and
+  that is a shared change Mexico City only paid for.** `add_pin_layer` already
+  emitted station names and ring bands once into a lookup table; the
+  classification value stayed an inline string because
+  `scripts/check_personal_exposure.py` parses it out of the HTML. Mexico City
+  made the cost obvious - **106 distinct `scian_actividad` values across
+  283,345 rows**, with one 73-character string appearing **12,462 times in a
+  single file**. Indexing it took this city from **19.02 to 11.38 MB (-40.2%)**
+  and **every** city gained: total committed output **43.17 -> 33.31 MB
+  (-22.8%)**, from -1.1% for San Diego (short NAICS codes) to -15.7% for
+  Toronto. The spread is the point - the saving tracks how long a register's
+  category vocabulary is, so it was always going to look negligible measured on
+  the US cities alone.
+  `pins()` resolves the index by pairing the Nth `var CATEGORIES` table with
+  the Nth `var data` block, positional because `map_common` emits the callback
+  first - verified against a rendered file rather than assumed - and it still
+  accepts a bare string, so a map rendered before this change reads correctly.
+  **Proven representation-only rather than assumed:** resolved pin rows are
+  identical old-vs-new for Chicago (11,796), Toronto (8,739), San Diego (2,577)
+  and New York (44,360). Tooltips verified rendering in a browser for San Diego
+  and Mexico City, accents intact. All 15 committed maps were re-rendered, so
+  `drift_check` reports intended drift on every `heatmap.html` and on nothing
+  else.
+
+- **The residence check is a GAP for this city, recorded as one rather than as
+  a pass**, the way San Diego's and Boston's are. `businesses_clean.csv`
+  carries no address column because the map needs none. DENUE does have
+  `numero_int`, a structured interior number, which step 2 now loads, measures
+  (**13.4% of storefronts**) and prints WITHOUT writing it out - publishing a
+  unit number in order to check for unit numbers would defeat the purpose.
+
+- **INEGI's licence is permissive and carries an obligation this project
+  triggers on every map.** Read from the publisher's own PDF rather than a
+  summary: the Terminos de Libre Uso permit publication, adaptation, extraction
+  and **commercial** use (§1b-e), requiring prescribed attribution (§1f),
+  **notification of any analysis or transformation** (§1g), and non-endorsement
+  (§1h). §1(g) is a second duty and not a louder version of the first, and ring
+  assignment, bucketing and the storefront filter are all transformations.
+  Notice 8 in `docs/data_sources.md`. INEGI publishes its website terms as a
+  SEPARATE PDF, so the "web pages or data?" question is answered by the
+  publisher; both are stored, because reading a site-terms document as the data
+  licence is what made New York look prohibited.
+
+- **This city's privacy position is the strongest in the project and INEGI
+  earned it, not this pipeline.** `raz_social` is omitted entirely when the
+  owner is a persona fisica - INEGI's dictionary says "para proteger la
+  confidencialidad de la informacion" - and `nom_estab` is defined as the name
+  on the shopfront, "visible y escrito en rotulos, fachadas o anuncios
+  luminosos", present on 99.95% of rows. So Los Angeles' failure has **no
+  mechanism** here: there is no personal name to fall back to because the
+  publisher withheld it rather than substituting it. Step 2 forbids `telefono`
+  (35.6% populated), `correoelec` (22.6%), `www` (10.6%) and `raz_social`
+  (25.9%) and asserts they never arrive.
+
+- **`check_personal_exposure.py` reports 32.2% of pins "look like a person",
+  and the finding is about the TOOL.** A hand-sample of 26 found none that were
+  a person presented as a person: `ABARROTES LIZ`, `ESTETICA MARIFER`,
+  `ZAPATERIA SOFI`, `POLLERIA BACHOCO` - the Spanish shop-sign convention of
+  trade type plus a given name or brand - and `COCINA ECONOMICA`, two common
+  nouns, also trips it. `looks_personal` is tuned for English "SMITH JOHN"
+  forms. Mexico City is this project's first non-English city, and nothing is
+  filtered on that number. Verdict: 0 emails, 0 phone numbers, 0 `c/o` markers,
+  no registrant-name column loaded; publish.
+
+- **The density figure is 818 businesses per station and it is NOT comparable
+  to the other cities' figures.** Vancouver's 206 and Toronto's 81 come from
+  municipal licence registers; DENUE is an establishment CENSUS that INEGI
+  collects by surveying premises, and Toronto's register licenses no general
+  retail at all. So 818 measures source completeness at least as much as
+  commercial density, and comparing them directly would be a ninth denominator
+  error in a new costume. The city page says what the number is measured on.
+
+- **Two bugs were caught in checks written earlier the same day, one of them in
+  a check written to prevent exactly this.** `overpass.osm.ch` returned HTTP
+  200 with an empty body; the fetcher cached it as a success and the new
+  cross-direction check then printed "every ref has exactly 2 direction
+  relations" over **zero relations** - a vacuous truth reported as a
+  verification. Fixed twice: the fetcher now rejects an empty 200 and tries the
+  next host, and the check asserts a non-empty set first. Separately,
+  `map_common` kept printing "283,345 available (all-Mexico City toggle)" for
+  one render after that layer was dropped.
+
+- **`scripts/scaffold_city.py` did not know about regions and produced an
+  `app/cities.py` that would not import.** The validator added on 2026-09-21
+  raised on Mexico City, which is the guard working - but every future city
+  would have hit it. `--region` is now required and the emitted entry carries
+  it. `REGION_ORDER` gains "Mexico"; the macro map needed nothing else, because
+  Mexico's centre sits 14.02 degrees south and 1.41 degrees west of the United
+  States centre against Canada's 14.53 north and 1.49 east - close to an exact
+  mirror, so the switcher re-centres vertically at the pinned zoom.
+
+- Mexico City is the **first city built with `pipeline/baseline.py` from the
+  start** rather than retrofitted: 7 figures recorded in
+  `outputs/mexico_city/baseline.json`.
+### 2026-09-22 - The region switcher shipped, and the fix was a deleted key
+
+- **The switcher works, and the change that made it work is one line that
+  deletes state rather than any of the view maths that was rewritten three
+  times chasing it.** `st.pydeck_chart(on_select="rerun")` PERSISTS the
+  viewer's current view under its widget key; on every rerun Streamlit restores
+  that stored view and ignores `initial_view_state`. So the new centre was
+  being computed correctly and discarded before it was ever drawn.
+  `st.session_state.pop("macro_map", None)` on a region change forces the chart
+  to re-initialise. Supersedes the 2026-09-21 entry, which recorded the UI as
+  deliberately withheld because it did not work.
+
+- **Keying the chart per region was rejected on test, not on taste.**
+  `macro_map_<region>` does create a fresh widget, but Streamlit restores the
+  PREVIOUS key's state when the viewer switches back, so the map returns to
+  wherever they had dragged it rather than to that region's centre. Deleting
+  the one key is both smaller and correct. The other two options recorded in
+  `PLAN.md` - dropping `on_select="rerun"` for non-default regions, or forcing
+  a view through deck.gl's own `views`/`viewState` - were not needed and remain
+  untried.
+
+- **RE-CENTRE, NEVER RE-ZOOM held, and was measured rather than assumed.** The
+  non-default region gets a fresh `pdk.ViewState` at its cities' midpoint
+  carrying `fit_view`'s zoom across unchanged: **1.4525 for both regions**,
+  centre moving **34.067N to 48.599N**. Re-fitting on Canada's own cities would
+  have produced **1.5048** and invalidated all fourteen pixel `label_offset`
+  values together. A fresh ViewState rather than `view.zoom = ...` because
+  pydeck does not serialise attributes mutated after construction.
+
+- **Verified in a FRESH browser session, which is the step that was missing
+  when this was first attempted.** Radio renders with counts, the caption flips
+  both ways, the cluster sits **42 px lower** on Canada - the right direction
+  for a centre moving north - and every label pill is the same size in both, so
+  the zoom demonstrably did not move. The CARTO/OpenStreetMap attribution stays
+  visible in both regions.
+
+- **The test case understates the feature, and that is worth stating so nobody
+  reads the 42 px as the payoff.** United States against Canada is two regions
+  on one continent, so at the pinned zoom the shift is 42 px at desktop width.
+  Milan against the United States centre is about 108 degrees of longitude,
+  roughly 430 px at the same zoom. The switcher is built for the second case;
+  the first only proves the mechanism.
+
+- **Verified with the `deploy-verify` procedure run by hand at steps 1, 2, 3,
+  6, 7, 8, 9, and the scope named for it first was WRONG.** `map-chrome` was
+  the obvious label and it does not fit: that scope covers overlays inside the
+  per-city rendered map HTML and says outright that the Streamlit app is
+  usually not needed, while this change is the Streamlit app. Passed: lean-venv
+  start with no import error, all 14 cities in the DOM, the real click path
+  through a name pill to a city page in BOTH regions, caption flipping, zoom
+  pinned, attribution present, dark mode inverting the basemap with the radio
+  still legible. The only console errors were two `ERR_CONNECTION_REFUSED` on
+  `/_stcore/health`, bracketed by `200 OK` either side - the stop/start gap.
+
+- **The run found one real thing, and it is a cost of the constraint rather
+  than a defect in the change: "Vancouver (Regional)" is clipped at the left
+  edge at 375 px, in the CANADA region as well as the United States one.**
+  `fit_view` is byte-identical to the pre-switcher commit and frames
+  `IN_DEFAULT_VIEW`, which is US-only, so Vancouver was never in the fitted box
+  - not a regression. But the switcher makes it user-facing, because it now
+  invites a viewer to look at Canada and Canada still does not frame its own
+  westernmost city. That is RE-CENTRE-NEVER-RE-ZOOM billing its cost for the
+  first time. Left open in `PLAN.md` with three options rather than fixed here,
+  because the cheapest two are label changes and the correct one
+  (`REGIONS[i]["zoom"]` for Canada) requires re-measuring that region's offsets
+  - which is the decision this design deferred on purpose. Desktop is
+  unaffected.
+
+- **And the process note, because it nearly repeated.** The first screenshot
+  after the fix looked zoomed out, which would have meant every label offset
+  was broken. That was an illusion from comparing two different scroll
+  positions. It was checked against the numbers before being chased - unlike
+  the same day's earlier hour, where a stale stored view was read as a code
+  fault three times running. Reproduce a known number before trusting a new
+  impression is the rule already written into `pipeline/linecolour.py` and
+  `scripts/brief_check.py`; this is the first time today it was applied to a
+  rendering rather than to data.
 
 ### 2026-09-22 - CDMX approved from OpenStreetMap as a per-city exception, and it passes both rail invariants
 

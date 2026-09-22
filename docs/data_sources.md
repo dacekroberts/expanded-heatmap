@@ -980,6 +980,79 @@ provider of the Data". No exact wording is prescribed. Same shape as LA Metro's
 obligation. The agreement itself is kept at
 `docs/licenses/mbta-massdot-develop-license-agreement.pdf`.
 
+**8. INEGI (Mexico City) — required, and DISPLAYED since 2026-09-22. It is TWO
+obligations rather than one.** The Términos de Libre Uso de la Información del
+INEGI (`docs/licenses/inegi-terminos-libre-uso-informacion.pdf`, retrieved
+2026-09-22) grant more than most sources here — §1(b)-(e) permit publishing,
+adapting, extracting and even **commercial** exploitation — in exchange for:
+
+- **§1(f), attribution in a prescribed form:** credit INEGI as author and,
+  where technically possible, name the source as *"Fuente: INEGI, nombre del
+  producto de donde se extrae la información"* plus the update date. For this
+  project that is **"Fuente: INEGI, Directorio Estadístico Nacional de Unidades
+  Económicas (DENUE)"** with DENUE's own edition date.
+- **§1(g), DISCLOSURE OF TRANSFORMATION, which a source credit does not
+  satisfy.** The user must be notified of *"cualquier análisis o transformación
+  que haga a la información"*, and the presentation must not suggest INEGI
+  performed it. **This project triggers that clause on every map**: ring
+  assignment, bucketing into three categories, the storefront filter and the
+  `Fijo`-only filter are all transformations. Treat attribution and disclosure
+  as two separate duties — the Montréal licence has the same split, and it is
+  easy to satisfy the first and miss the second.
+- **§1(h), non-endorsement:** the use must not appear to represent an official
+  INEGI position, nor to be endorsed, integrated, sponsored or supported by the
+  source. The site-wide non-affiliation notice already covers the shape of
+  this; INEGI is named explicitly for safety.
+- **§1(a)** additionally forbids altering or suppressing the metadata of
+  distributed copies. This project distributes no copy of DENUE — only derived
+  points — so it does not bite, and is recorded so nobody has to re-derive it.
+
+Note the two-document split: `inegi-terminos-sitio.pdf` governs **inegi.org.mx
+as a website** and is NOT the data licence. Both are stored, because reading a
+site-terms document as though it governed the data is what made New York look
+prohibited.
+
+**Guadalajara (Regional) needed NO new notice, which is a first.** Its
+business data is the same register under the same licence, and notice 8 names
+INEGI and DENUE rather than a city - so a second Mexican city is covered by the
+text already displayed. Its rail credit is OpenStreetMap's, likewise already
+displayed. Recorded because every previous city added at least one line to
+`render_site_notices()`, and the reason this one does not is that the notice
+was written around the SOURCE instead of the city.
+
+**Guadalajara's endpoints, verified 2026-09-22:**
+
+- **Businesses** — INEGI DENUE, entidad federativa **14 (Jalisco)**, keyless
+  bulk CSV: `https://www.inegi.org.mx/contenidos/masiva/denue/denue_14_csv.zip`
+  (39,432,220 bytes, real ZIP by magic bytes; member
+  `conjunto_de_datos/denue_inegi_14_.csv`; **latin-1**). Scoped in step 2 to
+  four municipios by DENUE's own `municipio` spelling — note **"San Pedro
+  Tlaquepaque"**, not the "Tlaquepaque" SITEUR's prose uses; matching the
+  operator's wording would keep zero rows.
+- **Rail** — OpenStreetMap via Overpass, route relations tagged
+  `network="Mi Tren"`, `route` in (`light_rail`, `subway`). ODbL 1.0.
+- **Boundaries** — OpenStreetMap `admin_level=6` municipio relations, bounded
+  by bbox. ODbL 1.0.
+
+**A REJECTED SOURCE, recorded with its date because a replaced URL that leaves
+no trace hides why:** the only Guadalajara rail feed in the Mobility Database
+(mdb **1925**, also contained in **2366**) downloads cleanly and is **not
+used**. Its own `feed_info.txt` declares `feed_end_date = **20230128**`, its
+`feed_publisher_name` is **Nubenautas** (`gtfs.studio`) rather than SITEUR, and
+it carries **three** light-rail routes where SITEUR publishes **four** —
+**Línea 4 opened 2025-12-15**, almost three years after the feed stopped.
+Using it would have omitted an operating line, 8 stations and 21 km.
+`https://www.siteur.gob.mx/` itself answers HTTP 200 and is the source for this
+project's gate-3 station counts (Línea 2: 10; Línea 4: 8), but publishes no
+GTFS.
+
+**Mexico City's rail geometry is OpenStreetMap, so notice 1 now covers DATA and
+not only basemap tiles.** Every `*.cdmx.gob.mx` host is unreachable, so the
+lines are drawn from OSM route relations (owner-approved 2026-09-22 as a
+per-city exception). ODbL 1.0 attribution was already satisfied for the
+basemap; the same credit now also covers line geometry, and notice 1's wording
+should not imply it is only about tiles.
+
 **This heading read "NOT YET DISPLAYED" until 2026-09-21 and was stale**, which
 is worth leaving a note about because a compliance document that understates
 compliance invites someone to re-fix a closed item and to doubt the rest of the
@@ -1034,6 +1107,39 @@ pages' prose: naming each business registry's publishing agency.
 7. **Decide the tile provider deliberately**, given that OSM's tile service is
    explicitly best-effort with no SLA.
 8. Optionally, read the Census geocoder's terms — the only source left unread.
+9. **REBOOT THE APP AFTER ANY PUSH THAT CHANGES A MODULE THE APP IMPORTS** —
+   `app/cities.py`, `app/components.py`, or anything under `pipeline/` that
+   `app/` pulls in. This is an operational step, not a courtesy, and it is in
+   this gate because the live site spent **over three hours down** on
+   2026-09-22 for want of it.
+
+   **Streamlit Cloud's "🔄 Updated app!" re-runs the ENTRY SCRIPT only.** It
+   pulls the new files and re-executes `app/Overview.py`, but every module
+   already in `sys.modules` — `cities`, `components`, every `pipeline` config —
+   stays as it was when the process started. So a push that adds a name to
+   `cities.py` and imports it from `Overview.py` leaves the running process
+   with the new script and the old module, and every page load raises
+   `ImportError: cannot import name 'DEFAULT_REGION' from 'cities'`.
+
+   The log that proves it, because the symptom is confusing enough to send
+   anyone hunting a phantom: the traceback printed the **old** one-line
+   `from cities import CITIES, IN_DEFAULT_VIEW, MAP_ONLY_NAV` — which does not
+   mention `DEFAULT_REGION` at all — above an error naming `DEFAULT_REGION`.
+   Python renders traceback source by re-reading the file from disk while
+   executing a cached code object, so disk and runtime were different
+   versions. Five pulls and five "Updated app!" across three hours never
+   cleared it; only **Manage app → ⋮ → Reboot app** does.
+
+   **`app/cities.py` changes every time a city is added**, so every future city
+   carries this exact risk. Treat the reboot as the last step of adding a city,
+   alongside the drift check and the `DECISIONS.md` entry.
+
+   Before the push, run **`python scripts/check_deploy_imports.py`**, which
+   tests a clean clone under `.venv-lean` — the closest local approximation of
+   what the deploy pulls. It catches the mismatched-export case and the
+   missing-`label_offset` case that crashed the Overview the same day. It
+   cannot catch the stale-module case: nothing local can, because a fresh
+   process is the one thing the live app does not do.
 
 **Where this leaves the project:** nothing found anywhere forbids what this
 project does, and the count of **mandatory notices to display is five**.

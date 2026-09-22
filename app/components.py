@@ -148,8 +148,33 @@ _MACRO_THEME_JS = """
 </script>
 """
 
-# Dark styling for the pydeck/mapbox controls (zoom buttons, attribution).
+# Styling for the pydeck/mapbox controls (zoom buttons, attribution).
 _MACRO_CONTROLS_CSS = """
+/* THE ATTRIBUTION STAYS OPEN AT EVERY WIDTH, AND THIS IS A LICENCE TERM RATHER
+   THAN A STYLE CHOICE. Below ~640 px mapbox-gl adds `mapboxgl-compact` to its
+   attribution control, which sets the inner text to `display: none` and leaves
+   an (i) button that reveals it on tap. Measured 2026-09-22: at a 375 px
+   viewport the macro map showed the button and no credit, while 768 and 1200
+   showed the full text.
+
+   That is precisely the arrangement this project has committed not to ship.
+   ODbL 1.0 requires the credit to stay visible, CLAUDE.md states it must not
+   sit "beneath UI, behind toggles, or off-screen", and render_site_notices()
+   below already refuses an st.expander for the same reason - a required notice
+   behind a toggle is not displayed. A library default is not an exemption, so
+   the compact behaviour is overridden rather than accepted.
+
+   Not scoped to `body.dark-base`: the obligation does not depend on the theme.
+   The city maps are Leaflet, whose attribution control has no compact mode, so
+   they need no equivalent. */
+[data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib.mapboxgl-compact {
+    min-height: 0; padding: 0 5px; border-radius: 3px; margin: 0 10px 10px 0; }
+[data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib.mapboxgl-compact
+    .mapboxgl-ctrl-attrib-inner { display: block !important; }
+/* The (i) toggle itself, and the pseudo-element some versions draw it with. */
+[data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib-button,
+[data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib.mapboxgl-compact::after {
+    display: none !important; }
 /* Invert the whole zoom group (white -> near-black, dark glyph -> light); the
    glyph is the button's own background image, so it cannot be inverted alone. */
 body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-group { filter: invert(0.9); }
@@ -434,6 +459,69 @@ _NOTICES = [
      "categories, grouped into three categories of this project's own, and "
      "measured by distance from transit stations. The City of Edmonton does "
      "not endorse this project or its use of the data.",
+     False),
+    # Mexico City, added 2026-09-22. TWO OBLIGATIONS IN ONE NOTICE, and the
+    # second is the one a source credit does not discharge.
+    #
+    # INEGI's Terminos de Libre Uso (docs/licenses/
+    # inegi-terminos-libre-uso-informacion.pdf) are unusually generous -
+    # sections 1(b) to 1(e) permit publishing, adapting, extracting and even
+    # COMMERCIAL use - in exchange for three things:
+    #
+    #   1(f)  credit INEGI as author and, where technically possible, name the
+    #         source as "Fuente: INEGI, nombre del producto..." plus the update
+    #         date. The prescribed shape is followed below.
+    #   1(g)  "Asegurarse de notificar al usuario final de cualquier analisis o
+    #         transformacion que haga a la informacion y que la misma no sea
+    #         presentada de tal manera que sugiera que dicho analisis o
+    #         transformacion fue realizada por parte del INEGI."
+    #   1(h)  the use must not appear to represent an official INEGI position,
+    #         nor to be endorsed, sponsored or supported by the source.
+    #
+    # 1(g) IS A SEPARATE DUTY, NOT A LOUDER VERSION OF 1(f) - the same split as
+    # the Ville de Montreal's "ou si des interpretations en ont ete tirees", and
+    # this project triggers it on every map: ring assignment, bucketing into
+    # three categories, the storefront filter and the Fijo-only filter are all
+    # transformations. A bare "data from INEGI" would credit and not disclose.
+    #
+    # Not marked verbatim: INEGI prescribes the attribution FORM and the
+    # disclosure OBLIGATION, but no sentence for the latter.
+    #
+    # NAMES EVERY MEXICAN CITY, and it did not until 2026-09-22. This notice
+    # read "Business locations for Mexico City are from DENUE" while Guadalajara
+    # was also built from DENUE (entidad 14), so that city's use was covered by
+    # no notice at all - and the build write-up had claimed the notice "names
+    # the register rather than the city", which was wrong about text in this
+    # file. §1(f) and §1(g) are per-USE duties, so a city the notice does not
+    # name is a city whose transformation is undisclosed.
+    #
+    # ADD EACH NEW MEXICAN CITY TO THIS SENTENCE. It is the one notice here
+    # that has to grow with the country, because DENUE is one register serving
+    # many cities - every other source in this list serves exactly one.
+    ("INEGI",
+     "Fuente: INEGI, Directorio Estadístico Nacional de Unidades Económicas "
+     "(DENUE). Business locations for Mexico City and Guadalajara are from "
+     "DENUE, published by "
+     "the Instituto Nacional de Estadística y Geografía, used under the "
+     "Términos de Libre Uso de la Información del INEGI. The data has been "
+     "analysed and transformed by this project and not by INEGI: it is "
+     "filtered to fixed premises in storefront categories, grouped into three "
+     "categories of this project's own, and measured by distance from transit "
+     "stations. INEGI does not endorse this project or its use of the data, "
+     "and nothing here represents an official INEGI position.",
+     False),
+    # Mexico City's RAIL geometry is OpenStreetMap rather than the operator's
+    # feed, because every *.cdmx.gob.mx host is unreachable (see
+    # pipeline/mexico_city/config.py). ODbL 1.0 attribution was already
+    # satisfied for the basemap by every rendered map's "© OpenStreetMap
+    # contributors"; this line exists so the credit visibly covers the LINE
+    # GEOMETRY too, which is data rather than tiles.
+    ("OpenStreetMap (Mexican rail)",
+     "Rail route geometry and station locations for Mexico City (Metro CDMX "
+     "and Tren Ligero) and Guadalajara (Tren Ligero) are from OpenStreetMap, "
+     "© OpenStreetMap contributors, available "
+     "under the Open Database License. The alignments drawn are OSM's own "
+     "geometry; stations, rings and categories are this project's work.",
      False),
 ]
 
