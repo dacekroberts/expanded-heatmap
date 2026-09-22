@@ -35,7 +35,7 @@ pair**, and the first where the rail leg came from **OpenStreetMap** rather
 than an agency feed — the per-city exception approved for CDMX, which
 validated at 195/195 stops exact.
 
-## Candidates — 41
+## Candidates — 38
 
 Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 **Five cities moved to discarded on measurement** and **one was upgraded**.
@@ -43,10 +43,10 @@ Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 | Band | What is stopping it | Cities | Change |
 |---|---|---|---|
 | **A** | Nothing. Screening complete | **5** | ✅ −2 built; Paris out then back, **measured both ways** |
-| **B** | One narrow question each | **4** | ▲ **+Stockholm** |
+| **B** | One narrow question each | **1** | ▼ −3 — Spain's three measured out |
 | **C** | A geocoding leg — build work, not screening | **18** | ▲ **+Bucharest** |
-| **D** | Four sub-tiers, see below | **13** | ▼ −8 |
-| *Discarded* | Measured negative, evidence named | *19* | ▼ **+5** |
+| **D** | Four sub-tiers, see below | **14** | — *(header was 13; sub-tiers sum to 14, corrected)* |
+| *Discarded* | Measured negative, evidence named | *22* | ▼ **+8** |
 
 ✅ **Guadalajara and Mexico City left Band A by being built**, not by being
 ruled out. Their rows are kept below, marked, because a built city's Band A
@@ -78,7 +78,7 @@ and whether it held.
 | 3 | **Milan** 🇮🇹 | 28,131 premises 99.1% coords, `insegna`, `codice_ateco`, CC-BY. All three buckets confirmed | Step 0 schemas for the two newly found layers |
 | ✅ | ~~**Mexico City**~~ 🇲🇽 | Same DENUE. **Rail from OSM** — 195/195 stops exact, 6,468 geometry points | **BUILT 2026-09-22** — `pages/15_Mexico_City_Heatmap.py`. The ODbL share-alike decision was taken during the build; see `DECISIONS.md` |
 | 4 | **Paris** 🇫🇷 ▲ | SIRENE, établissement-level, **Licence Ouverte 2.0**, and **99.96% already geolocated** — 148,576 of 148,633. Storefront filter **validated against OpenStreetMap**: 50,156 rows vs OSM's 54,198, and on one class 10,595 vs 10,642 | **The `check_personal_exposure.py` run is load-bearing here**, not a formality — the filter removes home registrations by proxy, not by proof |
-| 5 | **Barcelona** 🇪🇸 | 68,024-premises ground-floor census, CC-BY-4.0 | One residual: the portal's general notice is CAPTCHA-walled and unread |
+| 5 | **Barcelona** 🇪🇸 | **58,908 active premises** (2022 census — the 2024 one is geographically incomplete), 0.00% bad coordinates, CC-BY-4.0. Build brief, 9/9 | **Licence now READ** (via the Internet Archive; the live page is CAPTCHA-walled). Two owner decisions remain: **which census year**, and whether trams are in scope. Plus a duty to **notify the Council** of the project |
 
 ⇄ **Paris left Band A and came back the same day, measured both times.**
 The demotion was right on the evidence then available (86.6% of the bucket are
@@ -95,13 +95,14 @@ a different objection and a measured one.
 in the screen with an empty "what remains" column, which makes it the next
 city if nothing else is prioritised.
 
-## Band B — one narrow question each (4 cities)
+## Band B — one narrow question each (1 city)
 
-**Valencia** 🇪🇸 *(subway 84, tram 37 — the largest Spanish system measured)* ·
-**Bilbao** 🇪🇸 · **Málaga** 🇪🇸
-
-Spain is bespoke per city, so each needs its own register — but **two of the
-three Spanish cities probed have had one**, which raises the prior sharply.
+▼ **Valencia, Bilbao and Málaga left this band on 2026-09-22** — all three
+probed, all three measured negative, all three now in *Discarded*. The
+reasoning that put them here was *"two of the three Spanish cities probed have
+had a register, which raises the prior sharply."* **The prior was wrong.**
+Madrid and Barcelona are the exceptions in Spain, not the rule — see
+"Spain is a two-city country" below.
 
 **▲ Stockholm** 🇸🇪 — **upgraded from D-c on 2026-09-22.** Screening is
 DONE: a public ArcGIS FeatureServer carrying **8,146 distinct food premises**
@@ -145,7 +146,7 @@ screen — against the worst geocoding problem and a two-bucket ceiling.
 **Still the biggest open decision in this list**, and a judgment call rather
 than a probe.
 
-## Band D — 13 cities, four sub-tiers
+## Band D — 14 cities, four sub-tiers
 
 ### D-a — one cheap question each (4)
 
@@ -290,13 +291,26 @@ firm negative and three are host or value decisions, not data negatives.
 | **Budapest** 🇭🇺 ✗ | **FIRM NEGATIVE — the food-authority route is closed too.** Nébih's FELIR is **CAPTCHA-gated** (`service.mtcaptcha.com`) and is a one-customer-at-a-time lookup, not a register. Its *Approved Establishments* list is **two PDFs of processing plants** — the page names them: slaughterhouses, meat-cutting plants, dairies, egg packers, fish and game processors, cold stores. Retail and catering are only *registered*, by county offices, unpublished. Separately, `kozadat.hu` is a search tool over data inventories, not a portal |
 | **Sofia** 🇧🇬 | **UNREACHABLE, still not a negative.** `data.egov.bg` returns **403 in the browser too**, correcting the earlier client-signature reading. The food authority (**BABH**) does not resolve at **any** domain tried — `babh.government.bg`, `www.babh.government.bg`, `babh.bg`, `bfsa.bg`, `babh.egov.bg` — and its parent ministry, which IS live, links no register. `www.sofia.bg` and `portal.registryagency.bg` remain live and unprobed |
 
-### D-d — one cheap gate (1)
+### D-d — UNREACHABLE, not a cheap gate (1)
 
-**Sevilla** 🇪🇸 — rail is **registration-gated, not absent**: Spain's National
-Access Point answers 401. The WMATA shape, a free account. Its business leg
-still needs its own Spanish source.
+▼ **Sevilla** 🇪🇸 — **downgraded 2026-09-22.** The rail half is unchanged
+and still cheap: Spain's National Access Point answers **401**, the WMATA
+shape, a free account. **The business half got worse.** Every route into the
+city's own data failed:
 
-## DISCARDED — 19 cities, each naming its evidence
+| Route | Result |
+|---|---|
+| `www.sevilla.org`, `sevilla.org` | **do not resolve** — curl *and* browser |
+| `datosabiertos.sevilla.org`, `.es` | do not resolve |
+| `sevilla-ayuntamientodesevilla.opendata.arcgis.com` | live, but **"Can't access this content … Sign In"** — the Medellín shape |
+| `datos.gob.es` federated catalogue | **no Ayuntamiento de Sevilla publisher exists.** The publishers returned for "Sevilla" are CIS (opinion surveys), **IGME (geological maps)** and the Junta de Andalucía |
+
+**This is unreachable, not a measured negative**, and the distinction is the
+one this list's maintenance rule exists to protect. Nothing has been learned
+about whether Sevilla licenses premises; only that four routes to asking
+failed.
+
+## DISCARDED — 22 cities, each naming its evidence
 
 | City | Why |
 |---|---|
@@ -319,6 +333,9 @@ still needs its own Spanish source.
 | **Medellín** 🇨🇴 ↓ | **Three closed doors.** The city's ArcGIS Hub is **credential-walled**; the chamber of commerce publishes comuna×CIIU **crosstabs**; RUES has **6,369,877** premises rows and **no address, municipality or city column at all** |
 | **Lima** 🇵🇪 ↓ | **Coverage.** 78 licence datasets under ODC-BY, keyless CSV — but licensing is per *distrito* and **1 of Línea 1's 9** publishes usable data. La Victoria's 135,982 rows are excellent and alone |
 | **Jakarta** 🇮🇩 ↓ | **No activity field.** The live OSS register has 53,827 rows and full street addresses across **exactly 9 columns**; the two that look like classification are legal form and business size |
+| **Valencia** 🇪🇸 ↓ | **No premises register.** `opendata.vlci.valencia.es` is CKAN with **290 packages**, read in full. The only commercial-adjacent names are container locations, noise-monitoring stations and *zones d'activitats* — zoning polygons, not businesses |
+| **Málaga** 🇪🇸 ↓ | **Business parks and facility layers only.** `datosabiertos.malaga.eu` is CKAN with **1,377 packages**. `empresas-y-sectores` is explicitly *"empresas que se encuentran en **parques empresariales**"*; `centros-comerciales` and `mercados` are `equipamientos` layers — a handful of malls and municipal markets. Licence is CC **BY-SA** |
+| **Bilbao** 🇪🇸 ↓ | **Aggregate barometers only.** Its own portal holds 344 datasets behind a paginated list with **no search** (its one form control is a sort order). Enumerated instead via `datos.gob.es`: **600 datasets** under publisher `A16003011`, whose entire commercial holding is *"Barómetro del comercio minorista"* — retail-trade survey aggregates by employment stratum, sector and territory |
 
 Plus the no-urban-rail set (Winnipeg, Hamilton, Québec City, Halifax,
 Mississauga, Ottawa, ~30 single-feed countries) and access-not-data
@@ -351,7 +368,7 @@ country.
 | Country | Cities | Source shape | Missing link |
 |---|---|---|---|
 | 🇲🇽 **Mexico** ✅ **COMPLETE** | **2** — Mexico City, Guadalajara (Regional) | **DENUE**, national, coordinates, SCIAN **is** NAICS — and the taxonomy **did** transfer from the US builds | **Nothing. Both cities are built and live in the app** (`pages/15_`, `pages/16_`, region *Mexico*), 2026-09-22. The ODbL share-alike decision was taken during the build |
-| 🇪🇸 **Spain** | **2 now, 6 total** — Madrid, Barcelona ready | Bespoke **per city**, but two of three probed had a premises census | Madrid and Barcelona are ready. Valencia, Bilbao and Málaga each need **their own register found**; Sevilla needs a **free NAP account** for rail |
+| 🇪🇸 **Spain** ▼ | **2, not 6** — Madrid and Barcelona, both with build briefs | Bespoke **per city**, and the bespoke-ness cuts both ways | **Re-scoped 2026-09-22.** Valencia, Bilbao and Málaga all probed and all measured negative. Sevilla is unreachable. **Nothing left to find; Spain is a two-city country.** Both remaining cities have briefs and 9/9 checks |
 | 🇰🇷 **South Korea** | **1** — Seoul | 8 datasets, EPSG:5174, KOGL Type 1, daily | **Two build items, not probes:** partial geocoding for 일반음식점 (90.7% coords) and a Korean-aware `check_personal_exposure.py` |
 | 🇮🇹 **Italy** | **1** — Milan | Bespoke per city. Naples and Messina measured out | **Step 0 schemas** for the two newly found Milan layers. Nothing to discover |
 
@@ -695,6 +712,33 @@ rest are host failures of varying finality.
 | 🇷🇴 **Romania** | Bucharest | `data.gov.ro` **times out** at the connection (21 s, both root and API); `portal.onrc.ro` does not resolve; `www.pmb.ro` is a 2,483-byte shell |
 | 🇧🇬 **Bulgaria** | Sofia | **CORRECTION: the browser fails too.** `data.egov.bg` returns the same **403** in a real browser as to curl, so the earlier reading — that a stock Apache page implied a *client-signature* refusal worth retrying — was wrong. `data.sofia.bg` and `opendata.sofia.bg` **do not resolve**. `www.sofia.bg` and `portal.registryagency.bg` are live and unprobed |
 
+### 🇪🇸 Spain is a TWO-city country — measured 2026-09-22
+
+Spain had been carried as *"2 now, 6 total"* on the reasoning that it licenses
+bespoke per city and **two of the three cities probed had a premises census**,
+which *"raises the prior sharply"*. That prior is now measured, and it was
+wrong: **Madrid and Barcelona are the exceptions, not the rule.**
+
+| City | Portal | Enumerated | Verdict |
+|---|---|---|---|
+| **Valencia** | `opendata.vlci.valencia.es` (CKAN) | **290 packages** | ✗ The only commercial-adjacent names are container locations, noise stations, and *zones d'activitats* — **zoning polygons, not businesses** |
+| **Málaga** | `datosabiertos.malaga.eu` (CKAN) | **1,377 packages** | ✗ `empresas-y-sectores` is explicitly businesses **in business parks**; `centros-comerciales` and `mercados` are `equipamientos` facility layers. CC **BY-SA** |
+| **Bilbao** | own portal + `datos.gob.es` | 344 own / **600 federated** | ✗ Entire commercial holding is **"Barómetro del comercio minorista"** — retail-trade survey aggregates by employment stratum, sector, territory |
+| **Sevilla** | — | — | **UNREACHABLE.** City domain does not resolve; ArcGIS Hub is sign-in walled; no Ayuntamiento publisher in the national catalogue |
+
+**A method note worth carrying.** Bilbao's own portal holds 344 datasets across
+35 pages and offers **no search** — its only form control is a sort order. Paging
+it 35 times would have been the obvious move and the wrong one. Spain federates
+every municipal portal into **`datos.gob.es`**, which speaks DCAT over a
+documented API, so one publisher enumeration (`/catalog/dataset/publisher/<id>`)
+covers any Spanish city at once. That is the primitive to reach for next time a
+Spanish city comes up.
+
+**And a caution about the national catalogue**: searching it by *title* returns
+almost entirely **INE** (publisher `EA0042823`) aggregate statistical tables —
+*Locales por provincia y condición jurídica*, hotel occupancy, and so on. Those
+look like premises data and are not. Enumerate by **publisher**, not by title.
+
 ### 🇸🇪 Stockholm — a real register, found four hops deep
 
 The route is the argument for navigating rather than guessing; no step of it
@@ -770,10 +814,11 @@ metro, so it is a weaker map for a stronger dataset. Unprobed.
    predicted. It was also the project's first country outside anglophone North
    America and its first OSM-sourced rail leg, so it proved two things the
    screen had only asserted.
-2. ▶ **Spain — NEXT.** Madrid and Barcelona ready *now*; the other three
-   likely rather than speculative. Madrid is the only unbuilt city in the whole
-   screen whose "what remains" column is empty — and since Paris left Band A on
-   2026-09-22, it is also the clearest next build by some distance.
+2. ▶ **Spain — NEXT, and it is exactly two cities.** Madrid and Barcelona are
+   ready now, each with a build brief whose claims re-run green. The "other
+   three likely rather than speculative" line was wrong: Valencia, Bilbao and
+   Málaga were probed on 2026-09-22 and are measured negatives, and Sevilla is
+   unreachable. **Plan Spain as two cities, not six.**
 3. **Korea** and **Italy** — one city each, nothing to discover, both with
    named build work rather than open questions.
 4. **Taiwan** — the first geocoding build, chosen because it is the cheapest:

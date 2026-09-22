@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**127 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**128 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Spain re-scoped from six cities to two: Valencia, Bilbao and Malaga measured out, Sevilla unreachable](#2026-09-22---spain-re-scoped-from-six-cities-to-two-valencia-bilbao-and-malaga-measured-out-sevilla-unreachable)
 - [Madrid's zero-coordinate question settled, and the rate was never the answer](#2026-09-22---madrids-zero-coordinate-question-settled-and-the-rate-was-never-the-answer)
 - [Spain profiled: Madrid is ready, both licences read, and one clause raised rather than resolved](#2026-09-22---spain-profiled-madrid-is-ready-both-licences-read-and-one-clause-raised-rather-than-resolved)
 - [A leaf region labels only its own cities, and the one accepted overlap is written down](#2026-09-22---a-leaf-region-labels-only-its-own-cities-and-the-one-accepted-overlap-is-written-down)
@@ -163,6 +164,77 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Spain re-scoped from six cities to two: Valencia, Bilbao and Malaga measured out, Sevilla unreachable
+
+- **Corrected a prior that had been carried as a reason rather than a
+  measurement.** Spain was listed as "2 now, 6 total" on the argument that it
+  licenses bespoke per city and *"two of the three Spanish cities probed have
+  had a premises census, which raises the prior sharply."* All three remaining
+  Band B cities were probed and all three are negatives. **Madrid and Barcelona
+  are the exceptions in Spain, not the rule.** Spain is a two-city country and
+  should be planned as one; both of its cities now have build briefs whose
+  claims re-run green.
+
+- **Valencia: no premises register.** `opendata.vlci.valencia.es` is CKAN with
+  **290 packages**, enumerated in full rather than keyword-searched. The only
+  commercial-adjacent names are container locations, noise-monitoring stations
+  and `zones-dactivitats` - zoning polygons, not businesses.
+
+- **Malaga: business parks and facility layers only.**
+  `datosabiertos.malaga.eu` is CKAN with **1,377 packages**. All three real
+  candidates fail on scope: `empresas-y-sectores` is explicitly *"empresas que
+  se encuentran en parques empresariales"*; `centros-comerciales` and
+  `mercados` are `equipamientos` layers covering a handful of malls and
+  municipal markets. Licence is CC BY-SA, which would have mattered had it
+  passed.
+
+- **Bilbao: retail-trade barometers, not a register.** Its own portal holds 344
+  datasets across 35 pages and offers **no search** - its only form control is
+  a sort order. Enumerated instead through `datos.gob.es`: **600 datasets**
+  under publisher `A16003011`, whose entire commercial holding is *"Barometro
+  del comercio minorista"*, survey aggregates by employment stratum, sector and
+  territory.
+
+- **Sevilla: UNREACHABLE, recorded as that rather than as a negative.** Four
+  routes failed. `www.sevilla.org` and `sevilla.org` do not resolve, to curl or
+  to the browser. `datosabiertos.sevilla.org` and `.es` do not resolve.
+  `sevilla-ayuntamientodesevilla.opendata.arcgis.com` is live but answers
+  *"Can't access this content ... Sign In"*, the Medellin shape. And
+  `datos.gob.es` has **no Ayuntamiento de Sevilla publisher at all** - the
+  publishers returned for "Sevilla" are CIS (opinion surveys), IGME (geological
+  maps) and the Junta de Andalucia. Nothing was learned about whether Sevilla
+  licenses premises, only that four ways of asking failed. Its rail half is
+  unchanged and still cheap: a free NAP account.
+
+- **Found the right primitive for any future Spanish city, and it is not the
+  city's own portal.** Spain federates every municipal portal into
+  `datos.gob.es`, which speaks DCAT over a documented API, so one publisher
+  enumeration (`/catalog/dataset/publisher/<id>`) reaches a city whose own site
+  is paginated, searchless or unreachable. **With a caution**: searching that
+  catalogue by *title* returns almost entirely INE (publisher `EA0042823`)
+  aggregate statistical tables - *Locales por provincia y condicion juridica*,
+  hotel occupancy - which look like premises data and are not. Enumerate by
+  publisher, never by title.
+
+- **Fixed an arithmetic error of mine that predated this change.** Band D's
+  sub-tiers sum to 14 (D-a 4, D-b 5, D-c 4, D-d 1) while its header read 13:
+  when Paris left D-a for Band A and then returned, the Band D total was
+  decremented twice. The 41-candidate headline was right; the Band D header was
+  not. Now corrected, and the bands reconcile: 5 + 1 + 18 + 14 = **38
+  candidates**, 22 discarded.
+
+- **Deconflicted Madrid's brief with the build session's work.** Both sessions
+  corrected the rail leg to CRTM's feature layers independently; theirs is kept
+  because it records the owner's decision, adds the `arcgis_layer` check kind,
+  explains why the `metro-feed-is-expired` tripwire missed it, and catches two
+  traps this session did not - `SENTIDO` 1/2 duplicating every stretch, and the
+  layers being natively EPSG:25830, the same CRS as the premises data. Also
+  removed a stale block of mine that survived the auto-merge: it said the
+  zero-coordinate rate was "NOT settled" directly above their block settling it
+  at 9.21%. A brief that contradicts itself is worse than one that is merely
+  wrong. `brief_check.py madrid` is 13/13, barcelona 9/9.
+
 
 ### 2026-09-22 - Madrid's zero-coordinate question settled, and the rate was never the answer
 

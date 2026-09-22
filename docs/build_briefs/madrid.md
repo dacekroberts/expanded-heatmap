@@ -14,9 +14,9 @@ ones Barcelona, Valencia, Bilbao, Málaga and Sevilla will inherit.
 
 ## The one-line summary
 
-Business leg is **excellent and ready**. Rail leg is **settled: Metro comes
-from OpenStreetMap**, because CRTM's Metro feed expired four months ago, no
-newer item exists, and CRTM's licence forbids displaying stale data.
+Business leg is **excellent and ready**. Rail leg is **settled: CRTM's public
+ArcGIS feature layers**, which are current (2026-06-05) even though the same
+agency's GTFS feed is stale — with OSM kept as the cross-check.
 
 ---
 
@@ -88,17 +88,12 @@ Africa — it vanishes silently on a station-radius map rather than erroring.
 "is this column populated?" test passes them, and so does the `ckan_fields`
 check in this very brief. Only a numeric or bounding-box test catches them.
 
-| | |
-|---|---|
-| Evidence trail, full file, 2026-09-22 | **29,744 of 148,814 = 19.99%** zero → **119,070 genuinely mappable** |
-| Re-measured 2026-09-22, first 4,000 `Abierto` rows via datastore | **234 = 5.85%** |
-
-**These disagree and the rate is NOT settled.** The datastore sample is the
-first 4,000 rows in `_id` order, not a random draw, so it is not
-representative and the trail's 19.99% is the safer planning figure. **Measure
-it on the full download before quoting any density number** — at 20% this
-moves Madrid's headline by a fifth, so the check has to run before the number
-is published, not after.
+Two early figures disagreed — **19.99%** from the evidence trail, and **5.85%**
+from the first 4,000 `Abierto` rows via the datastore, which is `_id` order
+rather than a random draw. **Both are superseded by the full-download
+measurement immediately below**, which settled the rate and then showed the
+rate was never the point: the zeros concentrate in activities this project
+does not map.
 
 > ### ✅ SETTLED 2026-09-22 on the full 124,987,034-byte download — and neither figure was the one that matters
 >
@@ -167,7 +162,80 @@ config explicitly — declared, never inferred.
 
 ---
 
-## Rail leg — CRTM, and the Metro feed is EXPIRED
+## Rail leg — CRTM's FEATURE LAYERS (corrected 2026-09-22)
+
+> **This section was wrong and has been rewritten.** It previously concluded
+> "no newer CRTM item exists, so use OSM". That was reached by searching the
+> CRTM org for **GTFS items only** and then making a claim about the whole
+> org. CRTM's **Feature Services are current** — and they are a better source
+> than either GTFS or OSM.
+>
+> **The generalisable error: "the rail leg" is not "a GTFS feed".** This
+> project draws station points and line geometry; it never reads a timetable.
+> So a stale GTFS feed says nothing about whether the agency route is open.
+> **Check the agency's GIS layers before concluding it is closed.**
+
+### ✅ USE THIS: `M4_Red` and `M4_Lineas` FeatureServers
+
+Both `access: public`, no account, `licenseInfo` = `crtm.es/licencia-de-uso`
+(already read — see `docs/data_sources.md`).
+
+**`M4_Red/FeatureServer`** — item `0a6c45e7…`, *Elementos de la Red de Metro*,
+**modified 2026-06-05**:
+
+| Layer | Geometry | Count | Use |
+|---|---|---|---|
+| 0 `M4_Estaciones` | point | **293 records** | **the stations** |
+| 1 `M4_Accesos` | point | 802 | street entrances — *not* stations |
+| 2 `M4_Vestibulos` | point | 354 | concourses |
+| 3 `M4_Andenes` | point | 599 | platforms |
+| 4 `M4_Tramos` | **polyline** | **560** | **the line geometry** |
+
+**`M4_Lineas/FeatureServer`** — item `63d4ed4b…`, **modified 2026-04-21** —
+carries the same content split per line and per direction (`M4_L1_S1_ESTACION`,
+`…_TRAMO`, …). Use `M4_Red` unless a per-line split is wanted; it is the same
+data.
+
+### ⚠️ 293 station records is 243 stations
+
+`CODIGOESTACION` is distinct on all 293, but **`DENOMINACION` has only 243
+distinct values** — and **243 is Madrid Metro's real station count**. The
+extra 50 are interchanges carrying one record per line. **Deduplicate on name**
+(or on `CODIGOCTMESTACIONREDMETRO`), not on `CODIGOESTACION`.
+
+### ⚠️ `SITUACION` is NOT a status field
+
+It reads `I` 278 / `S` 12 / `E` 1 / null 2, and the `S` rows include **Lago**
+and **Batán** — both open and in service. It appears to mean underground vs
+surface, not open vs closed. **Do not filter on it** without establishing what
+it means; there is no `OBSERVACIONES`-free status column here, unlike the
+business register's `desc_situacion_local`.
+
+### Lines: `NUMEROLINEAUSUARIO` gives 18 ids that collapse to 13
+
+```
+1  2  3  4  5  6-1  6-2  7a  7b  8  9A  9B  10a  10b  11  12-1  12-2  R
+```
+
+Branches (`7a`/`7b`, `9A`/`9B`, `10a`/`10b`) and loop directions (`6-1`/`6-2`,
+`12-1`/`12-2`) are split. Collapsing the suffixes gives **13 user-facing
+lines** — L1–L12 plus Ramal.
+
+### Three independent sources agree
+
+| | CRTM layers | OSM | GTFS `mdb-794` |
+|---|---|---|---|
+| Lines | **13** | **13** | **13** |
+| Stations | **243** | 236 | 230 boardable |
+
+CRTM is both the most complete and the most current, and it is agency data,
+which is this project's standing default. **OSM stays as the cross-check** —
+that is what caught the station-count question, and the 236-vs-243 gap is OSM
+undercounting, not CRTM overcounting.
+
+---
+
+## The GTFS feed, retained as evidence — and it IS expired
 
 Spain's National Access Point (`nap.transportes.gob.es`) is registration-gated
 — it answered 401 for Sevilla's feed. **Madrid does not need it.** The
@@ -282,13 +350,12 @@ cleanly, parses cleanly, and describes a service window that has already ended.
 precedent, which the owner approved as a documented per-city exception and
 which validated at 195/195 stops exact. Use the `osm-rail` skill.~~
 
-**One nuance worth keeping:** `GTFS Red de Metro Ligero` *is* current
-(2026-07-29, `mdb-792`, 4 × `route_type=0`, 96 stops). So Madrid could take
-Metro from OSM and Metro Ligero from the agency feed. That is a mixed-source
-rail leg for one city, which this project has not done before — simpler to
-take both from OSM, and the reason to choose otherwise would be that agency
-data is the standing default. **Left to the build; both inputs are known
-good.**
+**Metro Ligero, for whenever it is scoped in:** it has BOTH a current GTFS
+feed (`mdb-792`, 2026-07-29, 4 × `route_type=0`, 96 stops) AND its own current
+feature service (*Elementos de la Red de Metro Ligero*, 2026-06-05). With the
+Metro leg now coming from CRTM's layers, the consistent choice is the matching
+layer rather than the feed. Cercanías likewise has a current feature service
+(2026-06-04) though its GTFS is stale. **Neither is scoped in yet.**
 
 Cercanías (commuter rail) is stale too (2024-08-27) and is probably out of
 scope for a metro-density map, but that has not been decided either.
@@ -371,17 +438,17 @@ Plus whatever CRTM's licence turns out to require.
 
 ## Still unknown — the honest list
 
-- **Metro Ligero: agency feed or OSM?** The Metro question is settled
-  (OSM); this sub-question is not, and neither is whether Cercanías is in
-  scope at all.
+- **Metro Ligero and Cercanías**: both have their own current feature
+  layers (*Elementos de la Red de Metro Ligero*, 2026-06-05; *… de
+  Cercanías*, 2026-06-04). Whether either belongs on a metro-density map
+  is undecided, but the data question is closed.
+- **What `SITUACION` actually means** (above). Do not filter on it until
+  someone establishes it.
 - Whether `200085-5`'s activity duplication needs deduping for this map, which
   depends on a taxonomy choice not yet made.
 - Whether Madrid's system shape needs a sub-line filter
   (`docs/sub_transit_line_filters.md`) — 13 lines over 240 stations is dense
   and uniform, so probably not, but it has not been looked at.
-- **The real zero-coordinate rate** (above): 19.99% on the full file per
-  the trail, 5.85% on an unrepresentative datastore sample. Settle it on
-  the full download.
 - `check_personal_exposure.py` has never been run against a Spanish register.
   `rotulo` is a trade name, which is the safe field, but the epígrafe catch-all
   categories have not been reviewed the way LA's 812990 was.
@@ -414,6 +481,20 @@ Plus whatever CRTM's licence turns out to require.
     "resource_id": "200085-1-censo-locales",
     "expect": 203662,
     "tolerance": 12000
+  },
+  {
+    "id": "crtm-stations-layer",
+    "claim": "CRTM M4_Red FeatureServer is public and its M4_Estaciones layer holds 293 station records (243 distinct names) - the CURRENT agency source, unlike the GTFS feed",
+    "kind": "http_ok",
+    "url": "https://services5.arcgis.com/UxADft6QPcvFyDU1/arcgis/rest/services/M4_Red/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json",
+    "min_bytes": 10
+  },
+  {
+    "id": "crtm-lines-layer",
+    "claim": "CRTM M4_Red layer 4 (M4_Tramos) holds the line geometry as polylines - 560 segments",
+    "kind": "http_ok",
+    "url": "https://services5.arcgis.com/UxADft6QPcvFyDU1/arcgis/rest/services/M4_Red/FeatureServer/4/query?where=1%3D1&returnCountOnly=true&f=json",
+    "min_bytes": 10
   },
   {
     "id": "metro-feed-downloads",
