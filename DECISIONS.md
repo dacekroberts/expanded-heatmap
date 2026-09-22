@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**105 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**106 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Nine-item probe sweep: Madrid, Barcelona and Milan promote; Band A is seven cities](#2026-09-22---nine-item-probe-sweep-madrid-barcelona-and-milan-promote-band-a-is-seven-cities)
 - [Master city list rebanded, and eleven cities were discarded on a reason this project's own file contradicts](#2026-09-22---master-city-list-rebanded-and-eleven-cities-were-discarded-on-a-reason-this-projects-own-file-contradicts)
 - [Seoul's screening is finished: 197,276 active premises, KOGL Type 1, no open questions](#2026-09-22---seouls-screening-is-finished-197276-active-premises-kogl-type-1-no-open-questions)
 - [Korea: Seoul gets coordinates and needs no account; Busan and Daegu are closed](#2026-09-22---korea-seoul-gets-coordinates-and-needs-no-account-busan-and-daegu-are-closed)
@@ -141,6 +142,93 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Nine-item probe sweep: Madrid, Barcelona and Milan promote; Band A is seven cities
+
+- **MADRID PASSES, and it is the largest premises source measured in this
+  project.** `datos.madrid.es` **is** CKAN at the bare host - the earlier
+  "unreachable" was a wrong path (`/egob`), a fact about the guess rather than
+  the portal. Dataset `200085-0-censo-locales`, resource `200085-5`, downloaded
+  (125 MB) and counted: **225,667 rows, 47 columns**; `desc_situacion_local`
+  100% (Abierto 159,835 / Cerrado 40,407 / Baja 12,557 / Uso vivienda 8,486 /
+  Baja Reunificación 4,382); **148,814 open + classified + coordinated**, being
+  93.1% of Abierto; `rotulo` 100% on those; three-level classification
+  `desc_seccion` -> `desc_division` -> `desc_epigrafe`; 22 districts; EPSG:25830;
+  UTF-8 BOM and **semicolon**-delimited. All three buckets in one file - COMERCIO
+  45,951, HOSTELERÍA 27,932, OTROS SERVICIOS 14,887 (PELUQUERIA 6,012, CENTRO DE
+  ESTETICA 3,058). **2.2x Barcelona's 68,024 and needs no geocoding.** This makes
+  Spain a genuine multi-city country rather than the Barcelona-only one this
+  project had it as.
+- **19.99% of Madrid's coordinates are a literal zero although the column is
+  100% populated.** 29,744 of the 148,814, which from EPSG:25830 project into
+  the Atlantic off West Africa - they would have vanished off-map rather than
+  raised an error. **Genuinely mappable: 119,070.** `add-city` Step 0 already
+  required a validity check and already named this exact failure for Los Angeles
+  (~9%, "(0,0), whole-degree placeholders"), so this is corroboration rather
+  than a new rule - but two of the three pre-geocoded registries measured at
+  this depth now show it, so the bounding-box count was promoted from a
+  suspicion-driven check to an every-city one, to be run **before** a density
+  figure is quoted. At 20% it would have overstated Madrid by a fifth.
+- **Milan's third bucket exists, so its one blocker is closed.**
+  `dati.comune.milano.it`, control-verified: *Attività artigianali: servizi alla
+  persona (parrucchieri, estetisti...)* in CSV/**GEOJSON**/JSON, plus *Attività
+  commerciali: esercizi di vicinato in sede fissa* for Retail and *settore
+  alimentare* / *panificatori* for Food. GeoJSON means coordinates ship with it.
+  Schemas not yet counted - that is Step 0, not screening.
+- **Barcelona's census is CC-BY-4.0, read from the API because the portal is
+  CAPTCHA-walled.** `opendata-ajuntament.barcelona.cat` serves **hCaptcha** on
+  `/en/avis-legal`, `/ca/avis-legal` and `/es/aviso-legal` alike; this project
+  does not defeat CAPTCHAs. Its CKAN API is not walled and declares
+  `license_id="CC-BY-4.0"` per dataset on both the premises census and the
+  activity-code lookup. **It is a deliberate choice, not a portal default:**
+  `license_list` also offers CC-BY-ND and CC-BY-NC, the two that would forbid
+  this project. One residual, and it is the step this project most often skips -
+  what the dataset page incorporates **by reference** is what hid Philadelphia's
+  prohibition, and the general legal notice is precisely what sits behind the
+  CAPTCHA. Per-dataset licence MEASURED; general notice UNREAD, and reading it
+  is an owner action.
+- **Sevilla is dead at all six addresses a feed can have**, applying the CDMX
+  rule. Two are **403** from `files.mobilitydatabase.org` (both the versioned
+  path and `mdb-latest`), which is new information: previously recorded as "the
+  mirror 404s", so the host appears to have moved behind authentication. That
+  would affect every feed sourced that way and is worth one check before the
+  next rail screen. Sevilla dropped from the list.
+- **Three measured negatives, each with a working nonsense control.** **Berlin**:
+  the CKAN API is on `datenregister.berlin.de`, not the public host; `Gewerbe`
+  returns broadband coverage and electricity load profiles, **`Gaststätten`
+  returns 0**, `Betriebe` returns swimming pools and parliamentary papers - the
+  Gewerberegister is not open data. **Naples**: its only commercial dataset is
+  *Apertura e cessazione attività commerciali* **"per procedimento e
+  Municipalità"**, i.e. the aggregate trap. **Messina**: SCIA and DIA ship
+  GeoJSON but are business-*start notifications* - a flow, not a stock, so
+  mapping them shows where businesses opened rather than what is there now.
+- **Zurich is one bucket, and it came with a false friend worth recording.**
+  `Gastwirtschaftsbetriebe` is genuine premises data with a GeoJSON endpoint,
+  Food only. **`Betriebliche Bestandeskarten` is not a business inventory at
+  all** - its description is forest stand maps (Bestockung, Waldgesellschaften);
+  a title-level read would have recorded a three-bucket pass. And Switzerland's
+  national route is aggregate: opendata.swiss's STATENT / Betriebszählung /
+  Arbeitsstätten are all "nach Branche / Grössenklasse / Kanton / Gemeinde /
+  Quartier". **Fifth time the city portal beat the national one.**
+- **Dublin has one live lead and no finding yet.** `data.gov.ie` control 0;
+  `valuation` returns the Valuation Office API plus census tables, `commercial
+  rates` returns a *leases* register and Local Property Tax aggregates, `retail`
+  returns zoning polygons and central-bank interest rates. The Valuation Office
+  API is the Irish analogue of the UK's NNDR, which this project rejected for
+  carrying no category, so the single open question is whether the Irish one has
+  a use category.
+- **Items 8 and 9 are recorded as still open rather than as negatives.** The
+  seven never-reached countries were still not reached, mostly because the hosts
+  guessed were wrong - `data.kk.dk`, `opendata.budapest.hu` and `data.gov.ro`
+  resolve nowhere, `data.egov.bg` returns 403 again, and Stockholm, Estonia,
+  Croatia and Prague are live but not CKAN at the guessed path. **None of that
+  is a fact about their data.** Of the 22 mapping-agency hosts, 20 are reachable
+  and every one returned a landing page, which `probe_geodata.py` itself labels
+  a route rather than a finding; only `ign.gob.pe` (TLS) and
+  `geoportal.regionlima.gob.pe` failed. `jupem.gov.my` needed the curl fallback
+  after a `requests` SSLError - **the fourth time Python's TLS has reported a
+  live government host as dead.** Files touched:
+  `docs/global_country_shortlist.md`, `.claude/skills/add-city/SKILL.md`.
 
 ### 2026-09-22 - Master city list rebanded, and eleven cities were discarded on a reason this project's own file contradicts
 

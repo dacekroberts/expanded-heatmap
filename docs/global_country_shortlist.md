@@ -389,20 +389,37 @@ waiting on research at all.
 | **Mexico City** 🇲🇽 | subway 12, via `mdb-latest` | DENUE, 6M+ establishments, coordinates, **SCIAN = NAICS**, INEGI licence cleared | Nothing |
 | **Guadalajara** 🇲🇽 | LRT 3, current feed | Same DENUE source | Nothing |
 
+**Promoted into Band A on 2026-09-22 by the nine-item sweep** — all three had
+exactly one question and all three answered:
+
+| City | Rail | Business | What remains |
+|---|---|---|---|
+| **Madrid** 🇪🇸 | subway 13 | **148,814 open classified premises; 119,070 with valid coordinates.** Three-level classification, `rotulo` 100%, status field, EPSG:25830, semicolon CSV | Nothing. **Larger than Barcelona and needs no geocoding** |
+| **Barcelona** 🇪🇸 | FGC subway 4 + funicular 3 | 68,024-premises ground-floor census, **CC-BY-4.0** | One residual: the portal's general legal notice is CAPTCHA-walled and unread |
+| **Milan** 🇮🇹 | subway 5, tram 17 | 28,131 premises 99.1% coords, CC-BY — **and Personal services confirmed** in GeoJSON | Schemas of the two new layers, which is Step 0 rather than screening |
+
 **Mexico is the cheapest unbuilt country in the screen**: two cities, one
 national source, a cleared licence, coordinates included, and a taxonomy that
 may transfer from the US builds because SCIAN *is* NAICS.
+
+**Band A is now seven cities across five countries**, and Spain and Italy are
+multi-city countries rather than the one-city ones this file had them as.
 
 ### Band B — one narrow question each
 
 | City | What is measured | The one question |
 |---|---|---|
-| **Barcelona** 🇪🇸 | 68,024-premises ground-floor census; FGC subway 4 + funicular 3 | **The licence.** One document, unread |
-| **Milan** 🇮🇹 | 28,131 premises, **99.1% with coordinates**, `insegna`, `codice_ateco`, floor area, **CC-BY**; subway 5, tram 17 | **Is Personal services reachable?** Two buckets confirmed, the third not |
-| **Madrid** 🇪🇸 | subway 13 | **Its own business source.** Barcelona's census is Barcelona's — Spain is bespoke per city, so Madrid's register is unprobed |
-| **Valencia** 🇪🇸 | subway 84, tram 37 — the largest Spanish system measured | Same: its own source, unprobed |
+**Three of these closed on 2026-09-22** — see the nine-item sweep below.
+Barcelona, Milan and Madrid all move to **Band A**; Sevilla moves out entirely.
+
+| City | What is measured | The one question |
+|---|---|---|
+| ✅ **Barcelona** 🇪🇸 → **Band A** | 68,024-premises ground-floor census; FGC subway 4 + funicular 3 | ~~The licence~~ **CC-BY-4.0**, declared per dataset via the API. Residual: the portal's general notice is behind an hCaptcha |
+| ✅ **Milan** 🇮🇹 → **Band A** | 28,131 premises, **99.1% with coordinates**, `insegna`, `codice_ateco`, floor area, **CC-BY**; subway 5, tram 17 | ~~Is Personal services reachable?~~ **Yes** — *servizi alla persona* in CSV/**GeoJSON** |
+| ✅ **Madrid** 🇪🇸 → **Band A** | subway 13; **148,814 open classified premises, 119,070 with VALID coordinates**, three-level classification, EPSG:25830 | ~~Its own business source~~ **Found and measured.** 2.2× Barcelona, all three buckets, no geocoding |
+| **Valencia** 🇪🇸 | subway 84, tram 37 — the largest Spanish system measured | Its own source, unprobed. **Madrid's result raises the prior sharply**: Spanish cities do publish premises censuses |
 | **Bilbao / Málaga** 🇪🇸 | rail confirmed | Same |
-| **Sevilla** 🇪🇸 | Metro de Sevilla exists at mdb 2781 | **Its mirror 404s.** One retry from the agency host |
+| ❌ **Sevilla** 🇪🇸 → **out** | Metro de Sevilla exists at mdb 2781 | ~~Its mirror 404s~~ **Dead at all six addresses**, including two new 403s from `files.mobilitydatabase.org` |
 
 ### Band C — viable, but each needs a GEOCODING LEG (build work, not screening)
 
@@ -438,6 +455,180 @@ document itself contradicts.**
 | **Helsinki** 🇫🇮 | Measured: 89.8% carry street addresses, but composition is **53% real estate and 4.8% retail**. A real objection, unlike the n=1 one it replaced |
 | **Santiago** 🇨🇱 | National portal's copy is a decade stale; **municipal portals unprobed** |
 | **Hong Kong**, **Jakarta**, **Kuala Lumpur**, **Rio**, **Tel Aviv**, **Lima**, **Bogotá / Medellín** | Ruled out against a *transit catalogue*, which is the wrong source. **National mapping agency unprobed for all seven** |
+
+### THE NINE-ITEM SWEEP, run 2026-09-22 — three resolved, three negative, three partial
+
+Every open probe from the banding above, run as one pass. **Headline: Madrid
+and Milan both promote to Band A, which makes Spain and Italy real multi-city
+countries rather than one-city ones.**
+
+| # | Item | Verdict |
+|---|---|---|
+| 1 | Barcelona's licence | ✅ **CC-BY-4.0** |
+| 2 | Sevilla's feed | ❌ dead at all six addresses |
+| 3 | Milan Personal services | ✅ **reachable, with GeoJSON** |
+| 4 | Germany / Czechia / Singapore | ❌ Berlin measured negative; CZ + SG need another route |
+| 5 | Madrid's own source | ✅ **148,814 open premises, all three buckets** |
+| 6 | Dublin / Zurich | ⚠️ Dublin negative so far; Zurich one bucket only |
+| 7 | Naples / Messina | ❌ Naples aggregate; Messina flow-shaped |
+| 8 | Seven never reached | ⚠️ still not reached — wrong hosts, 403s |
+| 9 | Seven mapping agencies | ⚠️ 20/22 hosts live, but all landing pages |
+
+#### Item 5 — MADRID PASSES, and it is bigger than Barcelona
+
+`datos.madrid.es` **is** CKAN, at the bare host — the earlier "unreachable"
+was a wrong path (`/egob`), i.e. a fact about the guess. Dataset
+**`200085-0-censo-locales`**, *Censo de locales, sus actividades y terrazas de
+hostelería y restauración*, downloaded and counted:
+
+| | MEASURED |
+|---|---|
+| Rows (resource `200085-5`, the locales+actividades join) | **225,667**, 47 columns |
+| `desc_situacion_local` | **100%** — Abierto 159,835 · Cerrado 40,407 · Baja 12,557 · Uso vivienda 8,486 · Baja Reunificación 4,382 |
+| Open + classified + coordinates | **148,814** (93.1% of Abierto) |
+| `rotulo` (shop sign) on those | **100%** |
+| Classification | **three levels** — `desc_seccion` → `desc_division` → `desc_epigrafe` |
+| Districts | **22**, i.e. all of them |
+| CRS | **EPSG:25830** (ETRS89 / UTM 30N) |
+| Encoding / delimiter | UTF-8 BOM, **semicolon** |
+
+**All three buckets, in one file:** COMERCIO 45,951 (Retail) · HOSTELERÍA
+27,932 (Food) · OTROS SERVICIOS 14,887 (Personal services — SERVICIO DE
+PELUQUERIA 6,012, CENTRO DE ESTETICA 3,058). Madrid is **2.2× Barcelona's
+68,024** and needs no geocoding.
+
+> **A coordinate column can be 100% populated and still invalid.**
+> `coordenada_x_local` and `coordenada_y_local` are non-empty on every one of
+> the 148,814 rows — and **29,744 of them (19.99%) are a literal `0`.**
+> Projected from EPSG:25830 that is a point in the Atlantic off West Africa,
+> which on a station-radius map would silently vanish rather than error.
+> **Genuinely mappable: 119,070.**
+>
+> **`add-city` Step 0 already requires this check, and it named this exact
+> failure** — *"A populated field can still be corrupt - Los Angeles' registry
+> had ~9% bad coordinates (longitude copied from latitude, (0,0), whole-degree
+> placeholders)"*. So this is corroboration, not a new rule: **Madrid is the
+> second city with literal `(0,0)` rows, at 20% against LA's 9%.** Worth
+> recording because it shifts the prior — two of the three pre-geocoded
+> registries measured at this depth had the same defect, so a bounding-box
+> count belongs in every Step 0 rather than being reserved for suspicion. The
+> one thing to carry forward that the LA note does not say: at 20% this would
+> have moved Madrid's headline number by a fifth, so the check has to run
+> **before** a city's density is quoted, not after.
+
+#### Item 3 — MILAN'S THIRD BUCKET EXISTS
+
+`dati.comune.milano.it`, control-verified (nonsense term = 0):
+
+| Dataset | Bucket | Formats |
+|---|---|---|
+| **Attività artigianali: servizi alla persona** (parrucchieri, estetisti…) | **Personal services** | CSV, **GEOJSON**, JSON |
+| **Attività commerciali: esercizi di vicinato in sede fissa** | **Retail** | CSV, **GEOJSON**, JSON |
+| Attività artigianali: settore alimentare · panificatori | Food | CSV, **GEOJSON**, JSON |
+
+GeoJSON means coordinates ship with it. **Milan's one blocker is closed and it
+is a three-bucket city.** Schemas not yet counted — that is `add-city` Step 0,
+not screening.
+
+#### Item 1 — BARCELONA IS CC-BY-4.0, read from the API because the portal is CAPTCHA-walled
+
+`opendata-ajuntament.barcelona.cat` serves **hCaptcha** to the browser on
+`/en/avis-legal`, `/ca/avis-legal` and `/es/aviso-legal` alike (11,769 b,
+"PLEASE PROVE THAT YOU ARE HUMAN"). This project does not defeat CAPTCHAs, so
+the legal notice was not read that way. **Its CKAN API is not walled**, and it
+declares the licence per dataset:
+
+```
+"Census of premises on the ground floor intended for economic activity"
+  license_id  = "CC-BY-4.0"
+  license_url = "https://creativecommons.org/licenses/by/4.0/"
+```
+
+Same on the activity-code lookup table. **And it is a deliberate choice, not a
+portal default:** `license_list` offers CC-BY-ND and CC-BY-NC — the two that
+would forbid this project — so Barcelona picked the permissive one from a menu
+that contained restrictive options.
+
+**One residual, and it is the step this project most often skips:** what the
+dataset page incorporates **by reference** is exactly what hid Philadelphia's
+prohibition, and the general `avis-legal` page is the thing behind the CAPTCHA.
+The per-dataset declaration is MEASURED; the general notice is UNREAD. Reading
+it needs a human solving one challenge — an owner action, not a Claude one.
+
+#### Item 2 — Sevilla is dead at every address a feed has
+
+Six tried, applying the CDMX rule that a feed has at least three:
+
+| Address | Result |
+|---|---|
+| `files.mobilitydatabase.org/mdb-2781/…` | **403** (XML error body) |
+| `files.mobilitydatabase.org/mdb-latest/mdb-2781.zip` | **403** |
+| `storage.googleapis.com/…mdb-latest…2781.zip` | **404** |
+| `metro-sevilla.es/sites/default/files/gtfs/google_transit.zip` | **404** (HTML) |
+| `metrodesevilla.es/gtfs/google_transit.zip` | **000** |
+| `metro-sevilla.es/gtfs.zip` | **000** |
+
+The two **403s are new information**: previously recorded as "the mirror 404s",
+but `files.mobilitydatabase.org` now *refuses* rather than missing, which
+suggests the host moved behind authentication. That would affect every feed
+sourced that way, not just Sevilla — worth one check before the next rail
+screen. **Sevilla stays out; Spain is five cities plus Madrid.**
+
+#### Items 4, 6, 7 — the negatives, each with a working control
+
+- **Berlin — MEASURED NEGATIVE.** `daten.berlin.de`'s CKAN API is on
+  **`datenregister.berlin.de`** (the public site is not the API host).
+  Control = 0. `Gewerbe` returns 18 hits, all broadband coverage and
+  electricity standard-load profiles; **`Gaststätten` returns 0**; `Betriebe`
+  returns 107, being swimming pools and parliamentary papers. Berlin does not
+  publish its Gewerberegister as open data. Germany's route existed; the
+  register is not on it.
+- **Naples — MEASURED NEGATIVE, the aggregate trap.** `dati.comune.napoli.it`
+  is CKAN, control 0. Its only commercial dataset is *Apertura e cessazione
+  attività commerciali* — **"per procedimento e Municipalità"**, i.e. counts
+  per procedure per district. Everything else is Polizia Locale enforcement
+  activity.
+- **Messina — flow, not stock.** *Segnalazione Certificata Inizio Attività
+  (SCIA)* and *Denuncia Inizio Attività (DIA)* ship **GEOJSON/KML** — but they
+  are business-*start notifications*, a flow. Mapping them shows where
+  businesses opened, not what is there now. *Elenco imprese Messina* is
+  company-level (share capital). Italy stays a Milan-only country.
+- **Dublin — negative so far.** `data.gov.ie` control 0. `valuation` 76 →
+  Valuation Office API plus census tables; `commercial rates` 122 → PSRA
+  *Commercial Leases* register (leases), Local Property Tax statistics
+  (aggregate); `retail` 55 → Core Retail *Area* polygons and central-bank
+  interest rates. `data.smartdublin.ie` adds nothing premises-shaped. **The
+  Valuation Office API is the one live lead** and is the Irish analogue of the
+  UK's NNDR, which this project already rejected for carrying no category —
+  so the single question is whether the Irish one has a use category. Unprobed.
+- **Zurich — one bucket, and one false friend.** `Gastwirtschaftsbetriebe`
+  (hospitality licensed by the Stadtpolizei) is genuine premises data with a
+  **GeoJSON** endpoint — Food only. **`Betriebliche Bestandeskarten` is NOT a
+  business inventory**: read its description and it is *forest stand maps*
+  (Bestockung, Waldgesellschaften). A title-level read would have recorded a
+  three-bucket pass. And **Switzerland's national route is aggregate** —
+  opendata.swiss's STATENT / Betriebszählung / Arbeitsstätten are all "nach
+  Branche / Grössenklasse / Kanton / Gemeinde / Quartier". So the city-first
+  lesson pays off a **fifth** time, but only to one bucket.
+
+#### Items 8 and 9 — still open, and honestly so
+
+**Item 8: the seven were still not reached**, and mostly because my hosts were
+wrong, which is not a finding about the data. `data.kk.dk`,
+`opendata.budapest.hu` and `data.gov.ro` resolve nowhere; `data.egov.bg`
+returns **403** (the same refusal recorded before); `dataportalen.stockholm.se`,
+`avaandmed.eesti.ee` and `data.gov.hr` are live but not CKAN at the guessed
+path — Estonia's API answers *"There is an API here!"* without documentation at
+that URL. `opendata.praha.eu` serves HTML at its CKAN path, so Prague needs its
+real API. **None of these is a negative. They stay in Band D unchanged.**
+
+**Item 9: 20 of 22 mapping-agency hosts are reachable and every one returned a
+landing page.** That is a *route*, not a finding — `probe_geodata.py` says so
+in its own output. Only two failed: `ign.gob.pe` (TLS, curl rc=60) and
+`geoportal.regionlima.gob.pe` (connection refused). Notably **`jupem.gov.my`
+needed the curl fallback** (requests SSLError, 232 KB via curl) — the fourth
+time Python's TLS has reported a live government host as dead. Finding the
+actual layer on each portal is the next pass.
 
 ### The ceiling is no longer the binding constraint
 

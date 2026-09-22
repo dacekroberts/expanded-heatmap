@@ -52,7 +52,13 @@ schema verification. Do this for every candidate before scaffolding:
    coordinates fall inside the city's bounds and look at the ones that
    don't. A populated field can still be corrupt - Los Angeles' registry had
    ~9% bad coordinates (longitude copied from latitude, (0,0), whole-degree
-   placeholders), concentrated in recent registrations. And look at what the
+   placeholders), concentrated in recent registrations. **Madrid's premises
+   census is the second case and the worse one: `coordenada_x/y_local` are
+   non-empty on 100% of rows and 20% of them are a literal `0`.** Two of the
+   three pre-geocoded registries measured at this depth had the same defect, so
+   run the bounding-box count **on every city, before quoting its density** -
+   Madrid's headline would have been a fifth too high, and the bad rows vanish
+   off-map rather than raising an error. And look at what the
    dataset's city field actually holds: LA's holds postal community names
    (Van Nuys, San Pedro...), so an exact match keeps about half the city;
    find the authoritative in-city marker (LA's `council_district`) instead.
