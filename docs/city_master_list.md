@@ -42,10 +42,10 @@ Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 
 | Band | What is stopping it | Cities | Change |
 |---|---|---|---|
-| **A** | Nothing. Screening complete | **4** | ✅ −2 built, ▼ −1 Paris |
+| **A** | Nothing. Screening complete | **5** | ✅ −2 built; Paris out then back, **measured both ways** |
 | **B** | One narrow question each | **4** | ▲ **+Stockholm** |
 | **C** | A geocoding leg — build work, not screening | **18** | ▲ **+Bucharest** |
-| **D** | Four sub-tiers, see below | **14** | ▼ −7 |
+| **D** | Four sub-tiers, see below | **13** | ▼ −8 |
 | *Discarded* | Measured negative, evidence named | *19* | ▼ **+5** |
 
 ✅ **Guadalajara and Mexico City left Band A by being built**, not by being
@@ -64,7 +64,7 @@ results in the sweep.
 
 ---
 
-## Band A — screening COMPLETE (4 remaining + 2 ✅ BUILT)
+## Band A — screening COMPLETE (5 remaining + 2 ✅ BUILT)
 
 Ordered by how little stands in the way. **Built cities keep their row**,
 struck through and marked ✅, so the band still shows what screening promised
@@ -77,10 +77,15 @@ and whether it held.
 | 2 | **Seoul** 🇰🇷 | 197,276 active premises over 8 datasets, EPSG:5174, status field, KOGL Type 1 | Build work — partial geocoding for 일반음식점 (90.7%), Korean-aware `check_personal_exposure.py` |
 | 3 | **Milan** 🇮🇹 | 28,131 premises 99.1% coords, `insegna`, `codice_ateco`, CC-BY. All three buckets confirmed | Step 0 schemas for the two newly found layers |
 | ✅ | ~~**Mexico City**~~ 🇲🇽 | Same DENUE. **Rail from OSM** — 195/195 stops exact, 6,468 geometry points | **BUILT 2026-09-22** — `pages/15_Mexico_City_Heatmap.py`. The ODbL share-alike decision was taken during the build; see `DECISIONS.md` |
-| 4 | **Barcelona** 🇪🇸 | 68,024-premises ground-floor census, CC-BY-4.0 | One residual: the portal's general notice is CAPTCHA-walled and unread |
+| 4 | **Paris** 🇫🇷 ▲ | SIRENE, établissement-level, **Licence Ouverte 2.0**, and **99.96% already geolocated** — 148,576 of 148,633. Storefront filter **validated against OpenStreetMap**: 50,156 rows vs OSM's 54,198, and on one class 10,595 vs 10,642 | **The `check_personal_exposure.py` run is load-bearing here**, not a formality — the filter removes home registrations by proxy, not by proof |
+| 5 | **Barcelona** 🇪🇸 | 68,024-premises ground-floor census, CC-BY-4.0 | One residual: the portal's general notice is CAPTCHA-walled and unread |
 
-▼ **Paris left Band A on 2026-09-22**, measured rather than decided — see
-Band D-a. The architecture question it was holding ("national register vs
+⇄ **Paris left Band A and came back the same day, measured both times.**
+The demotion was right on the evidence then available (86.6% of the bucket are
+sièges, i.e. largely home addresses); the return is right on evidence that did
+not exist yet — an **employee filter validated against OpenStreetMap**. The
+reversal is recorded rather than tidied away, because the thing that changed
+was the measurement, not the opinion. See "Paris / SIRENE" below. The architecture question it was holding ("national register vs
 per-city") turned out to be **closed already**: Mexico shipped two cities from
 the national DENUE on the same day, so `pipeline/countries/` is the answer and
 national registers are fine. What fails is **SIRENE's composition**, which is
@@ -140,9 +145,9 @@ screen — against the worst geocoding problem and a two-bucket ceiling.
 **Still the biggest open decision in this list**, and a judgment call rather
 than a probe.
 
-## Band D — 14 cities, four sub-tiers
+## Band D — 13 cities, four sub-tiers
 
-### D-a — one cheap question each (5)
+### D-a — one cheap question each (4)
 
 | City | State |
 |---|---|
@@ -150,7 +155,6 @@ than a probe.
 | **Dublin** 🇮🇪 | `data.gov.ie` lists a **Valuation Office API**, but `api.valoff.ie` and `www.valoff.ie` both returned 000 twice — host down, so ASSERTED not measured. Does the Irish rateable register carry a **use category**, where the UK's NNDR did not? |
 | **Zurich** 🇨🇭 | **Food confirmed** — `Gastwirtschaftsbetriebe`, premises-level, GeoJSON. No second bucket found; the national STATENT is aggregate |
 | **Singapore** 🇸🇬 | API answers but its search is loose. One controlled query settles it. Suspected registered-office shaped |
-| **Paris** 🇫🇷 ▼ | **Demoted from Band A, 2026-09-22.** SIRENE is legally clean and établissement-level, and **fails on composition**: of 148,633 active Paris rows in NAF 47/56/96, **128,655 (86.6%) are *sièges***, and a French sole trader's siège is typically the home address. **20,542** carry NAF **47.91B, online retail** — no storefront by definition. The open question is narrow: **can a NAF + siège + employee filter produce a defensible storefront layer without mapping homes?** See below |
 
 ### D-b — rail ANSWERED, business leg is the blocker (5)
 
@@ -215,8 +219,55 @@ public procurement.
 commercial-premises survey, the Montréal `locaux-commerciaux` shape — is
 published anywhere. `apur.org`'s site search **silently ignores the query
 term**: `BDCom` returns **131 pages** of unrelated studies. So this is "could
-not confirm", not "absent", and it is the single check that would put Paris
-back in Band A.
+not confirm", not "absent". It is no longer needed, but it would still be a
+better source than a filtered register if it exists.
+
+#### ✅ RESOLVED the same day: the filter works, and Paris is back in Band A
+
+**The question was "can a NAF + siège + employee filter produce a defensible
+storefront layer without mapping homes?" The answer is yes — and the siège
+half of that question was the wrong lever.**
+
+| Candidate filter, Paris NAF 47/56/96 | Rows |
+|---|---|
+| base | 148,633 |
+| minus 47.91 online retail | 115,889 |
+| **non-siège only** | **19,978 — far too aggressive** |
+| not a sole trader, minus online | 79,359 |
+| **A: `caractereemployeuretablissement = "Oui"`, minus online** | **50,156** |
+| both employee and not-sole-trader | 47,833 |
+
+**Filtering on siège is wrong and would have been a quiet disaster.** An
+independent shop *is* its company's siège, so "non-siège only" keeps chain
+branches and discards every independent — the exact inverse of what this map
+is for. The **employee** filter is the right one: it keeps the boulangerie run
+as an *entreprise individuelle* with staff, and drops the consultant
+registered at home.
+
+**Validated against OpenStreetMap**, which has no relationship to SIRENE:
+
+| | OSM | SIRENE filtered | |
+|---|---|---|---|
+| One class — restaurants | **10,642** (`amenity=restaurant`) | **10,595** (56.10A + employer) | **0.4% apart** |
+| Whole layer | **54,198** (`shop=*` 34,801 + food amenities 19,397) | **50,156** (candidate A) | **92.5% of OSM** |
+
+Landing just *under* a volunteer map in a city as well-mapped as Paris is
+where a register-derived layer should sit. The ~4,000 gap is the price of
+dropping genuine zero-employee shops, and it is small next to the 65,733 rows
+the filter removes.
+
+**And there is no geocoding leg.** **148,576 of 148,633 (99.96%)** carry
+`geolocetablissement` coordinates. France was being priced as if addresses
+needed geocoding; they do not.
+
+**What is still owed, and it is not a formality.** `employer = Oui` removes
+home registrations **by proxy, not by proof** — a home-based business can
+employ someone. So `check_personal_exposure.py` is load-bearing for Paris in a
+way it is not for a municipal licence register, and a residential-address
+check belongs in its Step 2. Separately, the Opendatasoft mirror used here
+omits `enseigne1Etablissement` and `denominationusuelleEtablissement` — the
+shop-sign fields, which are the strongest storefront signal available. INSEE's
+own file carries them and would improve the filter further.
 
 > **The relation counts are upper bounds.** The construction filter flagged
 > unbuilt routes in Jakarta but returned **zero** for Tel Aviv, Bogotá and Rio —
@@ -304,11 +355,11 @@ country.
 | 🇰🇷 **South Korea** | **1** — Seoul | 8 datasets, EPSG:5174, KOGL Type 1, daily | **Two build items, not probes:** partial geocoding for 일반음식점 (90.7% coords) and a Korean-aware `check_personal_exposure.py` |
 | 🇮🇹 **Italy** | **1** — Milan | Bespoke per city. Naples and Messina measured out | **Step 0 schemas** for the two newly found Milan layers. Nothing to discover |
 
-## Tier 2 — ▼ DEMOTED 2026-09-22: the decision was made, and it went against (1 country)
+## Tier 2 — ⇄ France: demoted and restored the same day, measured both times (1 country)
 
 | Country | Cities | Missing link |
 |---|---|---|
-| 🇫🇷 **France** ▼ | **0 built-ready, 6 rail-confirmed** — Paris, Lyon, Marseille, Lille, Toulouse, Rennes | **The decision was taken on measurement, not taste, and it went against.** The architecture half is fine — Mexico proved national registers work. **SIRENE fails on composition:** 86.6% of Paris NAF 47/56/96 are *sièges*, i.e. largely home addresses, and 20,542 are online-retail. France is still a six-city prize, but it is now a **storefront-filter and privacy problem at national scale**, not a single integration. The one check that would reopen it: whether APUR **BDCom** is published |
+| 🇫🇷 **France** ▲ | **1 built-ready, 6 rail-confirmed** — Paris, Lyon, Marseille, Lille, Toulouse, Rennes | **RESOLVED 2026-09-22, and it went in favour.** Mexico closed the architecture half; the composition half was closed by an **employee filter validated against OpenStreetMap** — 50,156 rows vs OSM's 54,198, and 10,595 vs 10,642 on restaurants alone. **99.96% arrive geolocated, so there is no geocoding leg.** The filter is national, so it carries to all six cities. Owed: `check_personal_exposure.py` is load-bearing here, since the filter removes homes by proxy, not proof |
 
 ## Tier 3 — a geocoding leg buys several cities (5 countries, 18 cities)
 
@@ -733,11 +784,13 @@ metro, so it is a weaker map for a stronger dataset. Unprobed.
 6. ⏸ **Japan** — **last, by decision.** Ten cities, and by then the geocoding
    machinery is built.
 
-**France no longer sits outside this order awaiting a decision** — the
-decision was made on 2026-09-22 and it went against SIRENE as a primary
-source. France re-enters only if APUR BDCom turns out to be published, or if a
-NAF + siège + employee filter is shown to yield a defensible storefront layer.
-Recorded in Band D-a with the measurement.
+**France no longer sits outside this order awaiting a decision** — it was
+made on 2026-09-22 and, after one reversal, went **in favour**. The employee
+filter yields a defensible storefront layer, validated against OpenStreetMap,
+and SIRENE arrives geolocated. That makes France **six cities on one national
+integration with no geocoding leg** — on cities-per-unit-of-work, the
+strongest unbuilt country in this screen. It belongs in the order, and where
+it goes is the owner's call.
 
 Tier 4's four probes (**Czechia** strongest) are cheap enough to run alongside
 any of the above rather than competing with them.
