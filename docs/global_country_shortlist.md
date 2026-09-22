@@ -1456,6 +1456,44 @@ best structural match to what this project already does.
 TM). This came from documentation of the *closed* system. The project would
 reproject to per-city UTM regardless — Seoul ≈ 127°E is UTM 52N, EPSG:32652.
 
+#### Exhaustive Korean domain scrub, 2026-09-21 — 21 hosts
+
+Run instead of emailing the agency. **11 of 21 reachable.**
+
+| Dead | Alive |
+|---|---|
+| `bigdata.sbiz.or.kr` (**3 tests**, sub-second refusal) | **`semas.or.kr`** — the agency's own site |
+| `sg.sbiz.or.kr` — the 상권정보 system | **`sbiz.or.kr` → redirects to `sbiz24.kr`**, both 200 |
+| **`nsdi.go.kr` and `data.nsdi.go.kr`** — the national spatial infrastructure | `data.seoul.go.kr`, `golmok.seoul.go.kr` |
+| **`vworld.kr`** — the national GIS platform | **`data.busan.go.kr`**, **`data.daegu.go.kr`**, **`data.incheon.go.kr`** |
+| `localdata.kr` and `localdata.go.kr` | **`data.gg.go.kr`** (Gyeonggi) |
+| `openapi.seoul.go.kr`, `bigdata.busan.go.kr` | `kosis.kr`, `mdis.kostat.go.kr` |
+| `data.daejeon.go.kr`, `data.gwangju.go.kr` | |
+
+**Three of the six Korean metro cities run their own reachable portals** —
+Busan, Daegu and Incheon — plus Gyeonggi, which is the Seoul metropolitan
+province. **None is CKAN**, so there is no quick API route:
+
+- **Busan** and **Daegu** are file-based portals (`dataSet`, `파일` markers),
+  so a direct download may exist per dataset. Each needs its own probe.
+- **Incheon** answered `{"code":"257","msg":"NOT_EXIST_TOKEN"}` — a real JSON
+  API, token-gated.
+- **Gyeonggi** is a large portal with `인증키` / `회원가입`, so key-gated too.
+
+**The most useful finding is about the agency, and it argues FOR the enquiry
+rather than against it.** `sbiz.or.kr` redirects to `sbiz24.kr` and both answer
+200, so 소상공인시장진흥공단 is plainly operating — **only the `bigdata`
+subdomain that `data.go.kr` officially points at is broken.** That is a
+reportable fault on their side, not a policy, which makes "your published
+download link is dead, how should a non-resident obtain the file" a
+straightforward request rather than a favour.
+
+**Also worth recording as a method note:** the first run of this probe
+reported all four city portals as "not CKAN, no markers", which was **a
+`subprocess(text=True)` call decoding Korean bytes as cp1252 on Windows** —
+an invalid read presented as a negative finding. Same family as the XLSX
+empty-cell bug earlier the same day. Decode explicitly.
+
 #### Seoul's own portal, probed 2026-09-21 — the route around the blocker
 
 With `data.go.kr` unreachable, **`data.seoul.go.kr` answers 200** and carries
