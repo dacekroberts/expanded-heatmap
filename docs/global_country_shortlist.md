@@ -100,7 +100,7 @@ has addresses" is not sufficient.
 | Country | Verdict | Evidence |
 |---|---|---|
 | **Norway** | **PASSES** | `underenheter` with **`beliggenhetsadresse`** — the physical location address, kept distinct from the registered one. 152,060 Oslo sub-units, open API, no key. NACE codes. **No coordinates** → geocoding |
-| **Finland** | **FAILS — company-level** | PRH `avoindata` v3, open, no key, **89,816 companies in Helsinki**, NACE with English descriptions. But addresses are typed, and the first record returned is `"street": ""`, `postOfficeBox: 29`, `co: "c/o Suomen Säätiötilipalvelu Oy"` — **a PO box care of an accounting firm.** A visiting-address type exists; the register is still of companies, not premises |
+| **Finland** | **NOT RULED OUT — see the correction below** | PRH `avoindata` v3, open, no key, **89,816 companies in Helsinki**, NACE with English descriptions. **89.8% carry a real street address.** The obstacle is composition, not addressing |
 | **Austria** | **FAILS — no street** | GISA, 1,032,283 active licences, but location is NUTS/LAU/postcode/town. No street address |
 | **Chile** | **WEAK** | *Patentes comerciales* are the right model but published per municipality, unevenly, and **Santiago's national-portal copy is active licences as of May 2016** |
 | **Denmark** | **UNPROBED** | `datacvr.virk.dk` returns **403** behind bot protection; the third-party API is quota-limited. CVR *produktionsenheder* remain the right object to chase |
@@ -108,6 +108,52 @@ has addresses" is not sufficient.
 | **Netherlands, Portugal** | **UNPROBED** | Catalogues reachable (`data.overheid.nl` returns 64 hits for *bedrijven vestigingen*; `dados.gov.pt` answers) but no dataset inspected |
 | **Czechia, Estonia** | **UNPROBED** | Endpoint guesses returned 404; both have establishment concepts (`provozovny`, e-Business Register) worth a proper look |
 | **Germany, Sweden, Italy, Greece, Romania, Bulgaria, Hungary, Poland, Latvia, Croatia, Slovakia, Thailand, India, Egypt** | **UNPROBED** | None probed. The EU default is a company register, which the point above disqualifies — but that is a **pattern, not a probe**, and this file's own rule says a pattern deprioritises and never rules out |
+
+#### CORRECTION — Finland was ruled out on a sample of ONE
+
+Recorded first as "fails, company-level", on the strength of **the first
+record the API returned**: a financial holding company (`NACE 66190`) with an
+empty street, a PO box and `c/o Suomen Säätiötilipalvelu Oy`. That is n=1, not
+a random one, and the note even observed that a visiting-address type existed
+before dismissing it anyway.
+
+**Measured properly across 500 Helsinki companies:**
+
+| | |
+|---|---|
+| Carry a real street address | **449 of 500 — 89.8%** |
+| Address **type 1** (visiting) | 298 records, **298 with a street — 100%** |
+| Address type 2 (postal) | 499 records, 379 with a street |
+| PO box present | 109 records |
+
+**So the stated reason for ruling Finland out was false.** Addresses are there.
+
+**The real obstacle is composition, and it is a different objection:**
+
+| NACE | of 500 |
+|---|---|
+| **68 — real estate** | **265 (53%)** |
+| 46 — wholesale | 51 |
+| **47 — retail** | **24 (4.8%)** |
+| **56 — food & beverage** | not in the top 12 |
+| **96 — personal services** | not in the top 12 |
+
+Over half the register is property companies — `Kiinteistö Oy Espoon
+Aallonrivi`, `Heiset Oy` — because in Finland every apartment building is
+registered as a *Kiinteistö Oy* or *Asunto Oy*. **This is Philadelphia's
+landlord-registration problem (79%) and D.C.'s residential-rental problem
+(61%) in a third form**, and this project already filters both away by
+category.
+
+**Finland therefore stays in Tier 3 as UNRESOLVED, not Tier 4.** The open
+question is whether filtering to NACE 47/56/96 yields **shop premises or head
+offices** — the company-versus-premises question, which the composition
+measurement does not answer either way. That is one probe, not a verdict.
+
+**The lesson, which is this file's own rule turned on itself:** a negative
+from a single non-random record is not a finding. The evidence-discipline
+section demands two differently-shaped probes before recording a negative, and
+this one had one record.
 
 **Tier 3 continues** with rail measured and business unprobed: Vienna
 (subway 35, tram 185 — deepest in the screen), Amsterdam/Rotterdam (14/46),
