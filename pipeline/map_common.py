@@ -25,6 +25,7 @@ import numpy as np
 import pandas as pd
 from folium.plugins import HeatMap, FastMarkerCluster
 
+from pipeline.linecolour import check_line_colours
 from pipeline.taxonomies import CATEGORY_BUCKETS, load_taxonomy_module
 from pipeline.theme import AMBIENT_THEME_JS, DARK, FONT_STACK, LIGHT, css_vars, rgba
 
@@ -1104,6 +1105,17 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     """
     taxonomy = load_taxonomy_module(taxonomy_system)
     bucket_colors = dict(CATEGORY_BUCKETS)
+
+    # A line the reader cannot tell from the pins drawn on top of it is not a
+    # drawn line. Measured here, at render, because Calgary's Blue Line shipped
+    # Delta-E 3.3 from Retail blue - the same colour - and went unnoticed until
+    # a different city's build ran the check for the first time. Raises only in
+    # genuine-duplicate range; agency colours below the preferred figure are
+    # reported every render and kept, per the owner's branding decision. See
+    # pipeline/linecolour.py for why there are two thresholds.
+    check_line_colours(
+        {label: color for _coords, color, label, _end in lines.values()},
+        bucket_colors, city=city_name)
 
     businesses = businesses.dropna(subset=["latitude", "longitude"]).copy()
     businesses = drop_contact_details(businesses)

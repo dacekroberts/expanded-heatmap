@@ -78,6 +78,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline.counts import pct  # noqa: E402
 from pipeline.toronto.config import (  # noqa: E402
     ADDRESS_MUNICIPALITY_COLUMN,
     ADDRESS_POINTS_CSV,
@@ -162,8 +163,10 @@ def main():
     joined = biz.join(lookup, on="k")
     matched = joined["latitude"].notna()
     rate = matched.mean()
-    print(f"\nmatched: {int(matched.sum()):,} of {len(biz):,} "
-          f"({100 * rate:.1f}%)")
+    # The set is named because the unnamed version of this number - 71.4%,
+    # measured across all 159,872 licence rows including person-held ones with
+    # no premises to match - understated the city's coverage for a day.
+    print(f"\nmatched: {pct(int(matched.sum()), len(biz), 'storefront rows')}")
     print(f"  for contrast, WITHOUT stripping the unit the rate is ~48% - "
           f"that one line is the whole geocoder")
     if rate < GEOCODE_MATCH_RATE_MIN:
