@@ -16,11 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**134 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**135 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
 - [Barcelona's four owner decisions settled, and its brief's OSM breakdown corrected](#2026-09-22---barcelonas-four-owner-decisions-settled-and-its-briefs-osm-breakdown-corrected)
+- [Madrid's provenance recorded before its wiring lands, and the transit table stopped calling itself GTFS](#2026-09-22---madrids-provenance-recorded-before-its-wiring-lands-and-the-transit-table-stopped-calling-itself-gtfs)
 - [Mexico City and Guadalajara promoted into the provenance tables, and OSM rail gets its own subsection rather than a GTFS row](#2026-09-22---mexico-city-and-guadalajara-promoted-into-the-provenance-tables-and-osm-rail-gets-its-own-subsection-rather-than-a-gtfs-row)
 - [The unread-source table did not list an unread source, and two more hand-kept counts were wrong](#2026-09-22---the-unread-source-table-did-not-list-an-unread-source-and-two-more-hand-kept-counts-were-wrong)
 - [Madrid built: the pipeline is complete, and the app wiring is deliberately held back](#2026-09-22---madrid-built-the-pipeline-is-complete-and-the-app-wiring-is-deliberately-held-back)
@@ -242,6 +243,59 @@ onwards; the early ones are split by phase rather than by hour.
   documents, including the rule that an empty 200 is a host failure and must
   never be cached, and starting it against a session reset would have left it
   half-written.
+### 2026-09-22 - Madrid's provenance recorded before its wiring lands, and the transit table stopped calling itself GTFS
+
+- **`spain-app-wiring` is deliberately held off master and was NOT merged.** Its
+  own commit message says why: "landing `app/cities.py` there would publish the
+  city - and because `cities.py` is an imported module it would land BROKEN
+  until a reboot, which is exactly this morning's three-hour outage", and "the
+  owner's plan is to finish the Spanish cities and deploy them together, so
+  this waits for Barcelona". It lists three blockers: Barcelona, a full
+  `deploy-verify`, and the CRTM *siempre actualizada* clause. Its own tip
+  commit resolved the third. A branch that documents its own hold is a decision
+  to respect, not an abandoned branch to tidy away.
+
+- **Test-merged it without merging, and it is clean.** `git merge-tree
+  --write-tree origin/master spain-app-wiring` produced a tree with no
+  conflicts; the resulting `app/components.py` carries **18** `_NOTICES` entries
+  including both this session's Province of British Columbia and that branch's
+  Ayuntamiento de Madrid and CRTM, and parses. Worth checking rather than
+  assuming, because this session had edited the same list.
+
+- **But it WOULD have failed `check_provenance.py` the moment it landed.**
+  Madrid is documented at length in `data_sources.md` as PROSE - a whole
+  "### Madrid - endpoints and findings" section - with **no rows in any of the
+  three tables**, and none of its three endpoints appearing anywhere in the
+  file. Wiring Madrid into `app/cities.py` is what makes the check look at it.
+  So the rows were written now, from `pipeline/madrid/config.py` rather than
+  from the prose: the CKAN `package_show` resolution, the CRTM feature services,
+  and the `Termino_Municipal.zip` boundary. Madrid is now provenance-ready and
+  that blocker is gone before anyone hits it. **Prose is not a row** - a section
+  that describes a source in detail still leaves the tables unable to reproduce
+  the build.
+
+- **Renamed "## Transit feeds (GTFS)" to "## Transit feeds".** Three of its rows
+  are not feeds: Mexico City's and Guadalajara's rail comes from OpenStreetMap
+  via Overpass, and Madrid's from CRTM's ArcGIS feature services - the last
+  because CRTM's licence obliges currency and its own GTFS has not been
+  refreshed since 2025-05-30. `scripts/check_provenance.py`'s `TABLES` updated
+  to match. The sibling `### Transit feeds (GTFS) - checked 2026-09-21` licence
+  subsection keeps its name, because it really is a review of GTFS terms. Note
+  the anchoring trap this exposed: `t.count("## Transit feeds (GTFS)")` returns
+  **2**, because the `###` heading contains the `##` one, so a rename asserted
+  on that count fails.
+
+- **`check_provenance.py` now passes in `--strict` mode with an empty
+  `KNOWN_GAPS`**, the first fully-green state since it was written this
+  morning. Every one of the sixteen wired cities has rows in all three tables
+  and every URL its config resolves to is recorded, and Madrid is ready for the
+  seventeenth.
+
+- **Removed the empty `.claude/worktrees/sad-franklin-bace80` directory.** Its
+  branch, its git registration and its admin dir were all already gone and its
+  work had landed via `c9ab7eb`; only a 4 KB empty folder remained. The
+  worktree directory listing and `git worktree list` now agree exactly, which
+  they did not before.
 
 ### 2026-09-22 - Mexico City and Guadalajara promoted into the provenance tables, and OSM rail gets its own subsection rather than a GTFS row
 
