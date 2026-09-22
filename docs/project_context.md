@@ -386,6 +386,18 @@ Cities built and running end to end (pipeline, map, app page):
   matching "Toronto" would have kept 30% of the city. Los Angeles' `CITY_KEEP`
   trap, caught before it ran.
 
+- **Mexico City** - Metro CDMX (Lineas 1-9, A, B, 12) and the STE Tren
+  Ligero. SCIAN via `scian.py`. Businesses from INEGI's DENUE, an establishment
+  CENSUS rather than a licence register. **Rail geometry from OpenStreetMap**,
+  because every `*.cdmx.gob.mx` host is unreachable - an owner-approved
+  per-city exception, stated on the page. Gate 3 unavailable for the same
+  reason and recorded as unavailable.
+- **Guadalajara (Regional)** - Tren Ligero Lineas 1-4, across Guadalajara,
+  Zapopan, San Pedro Tlaquepaque and Tlajomulco de Zuniga. Miami's and
+  Vancouver's regional shape. Rail from OpenStreetMap again, this time because
+  the only GTFS feed expired 2023-01-28 and predates Linea 4. Gate 3 DOES run
+  here and passes against SITEUR's published counts.
+
 **Canada is closed at five built cities** - Vancouver (regional, with Surrey),
 Montréal, Calgary, Edmonton and Toronto - out of six candidates screened. The
 sixth, Surrey, is not pending: it shipped inside the Vancouver regional map.
@@ -395,9 +407,43 @@ six numbers moved during the builds, two of them by more than 1.8x, every time
 because a station count or a denominator was wrong rather than because the data
 changed.
 
-Next by ease ranking: New Orleans and Seattle, both needing decisions before
-code - a streetcar-only scope question and a multi-municipality build. Beyond
-that the open question is a new country rather than a new city: see
+**Mexico is complete at two cities**, and it is the first country here built on
+a NATIONAL register rather than municipal ones: INEGI's DENUE, downloaded per
+entidad federativa, covering every city. That shape produced
+`pipeline/countries/mexico.py` - the country/city config split, done at the
+second city on purpose, because one city cannot show which of its settings are
+national. What did NOT generalise between two cities in one country is the more
+useful half: the projected CRS, the municipio scope, and the OSM station
+tagging itself (Mexico City has 184 `railway=station` nodes; Guadalajara has
+one, its stations being `railway=stop` positions).
+
+**Neither Mexican city uses GTFS**, which makes OpenStreetMap a second rail
+source rather than a one-off. `.claude/skills/osm-rail/` carries when that is
+justified, how to derive stations from route-relation membership rather than
+node tags, and the traps - entrances outnumbering stations, proposed stations
+misspelled `prpopsed`, an unbounded name search matching Guadalajara, Spain.
+
+**The macro map is regional, and a region is whatever groups cities into one
+readable view** - not a country. There are six: United States (a COMPOSITE of
+West and East, and the default landing view), United States West, United States
+East, Canada West, Canada East, Mexico. Each is fitted to its own cities, so
+switching region zooms as well as re-centres. A city carries exactly one region
+tag and a composite is resolved at lookup; tagging a city with a composite is
+an error the validator names.
+
+**The deployed app must be REBOOTED, not merely updated, after any push that
+changes a module it imports.** Streamlit Cloud's "Updated app!" re-runs the
+entry script and leaves `sys.modules` as it was at boot, so a new name in
+`app/cities.py` breaks the live site until a reboot - it cost three hours of
+downtime on 2026-09-22. `app/cities.py` changes with every city.
+`python scripts/check_deploy_imports.py` tests a clean clone under the lean
+venv before pushing; it cannot catch the stale-module case, and says so.
+
+Next is a new COUNTRY rather than a new city. The shortlist's own ordering
+puts South Korea first - the only candidate needing neither a geocoding leg
+nor new pipeline code, and its supposed API-key blocker was withdrawn when
+`data.seoul.go.kr`'s export turned out to work logged-out. New Orleans and
+Seattle remain deferred, both needing decisions before code. See
 `docs/global_country_shortlist.md` and the `add-country` skill.
 
 **Briefs are now executable.** `scripts/brief_check.py <city>` re-runs a
