@@ -588,12 +588,32 @@ _NOTICES = [
     # satisfied for the basemap by every rendered map's "© OpenStreetMap
     # contributors"; this line exists so the credit visibly covers the LINE
     # GEOMETRY too, which is data rather than tiles.
-    ("OpenStreetMap (Mexican rail)",
+    ("OpenStreetMap (rail geometry)",
      "Rail route geometry and station locations for Mexico City (Metro CDMX "
-     "and Tren Ligero) and Guadalajara (Tren Ligero) are from OpenStreetMap, "
+     "and Tren Ligero), Guadalajara (Tren Ligero) and Barcelona (Metro de "
+     "Barcelona, including its FGC lines and both funiculars) are from "
+     "OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
      "geometry; stations, rings and categories are this project's work.",
+     False),
+    # Barcelona's terms prescribe the source wording AND require modifications
+    # to be identified at distribution - the disclosure-of-transformation
+    # family for the fourth time, after Montreal, INEGI and Madrid. A credit
+    # alone does not discharge the second. See docs/data_sources.md item 21.
+    #
+    # The separate duty to NOTIFY the Council of every derived project is an
+    # affirmative act owed to the publisher, not text on a page, so it is not
+    # dischargeable here and is tracked as an owner action instead.
+    ("Ajuntament de Barcelona",
+     "Source of the data: Barcelona City Council. The premises shown for "
+     "Barcelona are from the Cens de locals en planta baixa amb activitat "
+     "economica, 2022 survey, used under CC BY 4.0. The data has been "
+     "modified by this project and not by the Ajuntament: vacant premises are "
+     "removed, it is filtered to storefront categories, grouped into three "
+     "categories of this project's own, and measured by distance from metro "
+     "stations. The Ajuntament does not endorse this project or its use of "
+     "the data.",
      False),
 ]
 

@@ -443,7 +443,9 @@ CITIES = [
         "lat": 41.3874,
         "lon": 2.1686,
         "page": "pages/18_Barcelona_Heatmap.py",
-        "blurb": "Barcelona Metro (TODO: list the lines)",
+        "blurb": "Metro de Barcelona (L1–L12 across TMB and FGC, plus the "
+                 "Montjuïc and Vallvidrera funiculars, 112 stations inside "
+                 "the city)",
         "region": "Spain",
     },
 ]
