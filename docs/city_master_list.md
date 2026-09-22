@@ -164,7 +164,7 @@ country.
 
 | Country | Cities | Source shape | Missing link |
 |---|---|---|---|
-| 🇲🇽 **Mexico** | **2** — Guadalajara, Mexico City | **DENUE**, national, coordinates, SCIAN **is** NAICS so the taxonomy may transfer from the US builds | **None for Guadalajara.** CDMX needs one decision: offer the station extract under **ODbL share-alike**, since its rail comes from OSM. **Cheapest country in the screen** |
+| 🇲🇽 **Mexico** ▶ **IN PROGRESS** | **2** — Guadalajara, Mexico City | **DENUE**, national, coordinates, SCIAN **is** NAICS so the taxonomy may transfer from the US builds | **Being built now.** CDMX still needs one decision: offer the station extract under **ODbL share-alike**, since its rail comes from OSM |
 | 🇪🇸 **Spain** | **2 now, 6 total** — Madrid, Barcelona ready | Bespoke **per city**, but two of three probed had a premises census | Madrid and Barcelona are ready. Valencia, Bilbao and Málaga each need **their own register found**; Sevilla needs a **free NAP account** for rail |
 | 🇰🇷 **South Korea** | **1** — Seoul | 8 datasets, EPSG:5174, KOGL Type 1, daily | **Two build items, not probes:** partial geocoding for 일반음식점 (90.7% coords) and a Korean-aware `check_personal_exposure.py` |
 | 🇮🇹 **Italy** | **1** — Milan | Bespoke per city. Naples and Messina measured out | **Step 0 schemas** for the two newly found Milan layers. Nothing to discover |
@@ -182,7 +182,7 @@ cheap.
 
 | Country | Cities | Business leg | Missing link |
 |---|---|---|---|
-| 🇯🇵 **Japan** | **10** | Food permits, CC BY, **one national schema** | **The best marginal-city cost in the screen against the worst geocoding problem** — chōme/ban/gō, full-width numerals, `町字ID` 0% populated. Also a **two-bucket ceiling**: no general retail. **This trade is the biggest open decision in the whole list** |
+| 🇯🇵 **Japan** ⏸ **DECIDED — BUILD, BUT LAST** | **10** | Food permits, CC BY, **one national schema** | **Verdict taken 2026-09-22: do the hard geocode, but not yet.** Build the easier geocoding countries first and let the shared machinery accumulate. Its own obstacles are unchanged — chōme/ban/gō, full-width numerals, `町字ID` 0% populated, and a **two-bucket ceiling** with no general retail |
 | 🇹🇼 **Taiwan** | **4** | 商業登記, per-category assembly | A geocoding pass. **NLSC's geocoder is keyless**, so this is the cheapest Tier 3 entry |
 | 🇧🇷 **Brazil** | **2** — São Paulo, Rio | CNPJ, no coordinates | Geocoding **past Toronto's scale**. Rio's rail is confirmed (20 relations, all named and coloured) |
 | 🇳🇴 **Norway** | **1** — Oslo | 152,060 sub-units, `beliggenhetsadresse`, open API no key | A geocoding pass. Nothing else |
@@ -190,6 +190,47 @@ cheap.
 
 **If you write one geocoder, write Taiwan's** — keyless, systematic addresses,
 four cities. Japan's is a research project by comparison.
+
+### Japan's cost is not fixed — it falls as the others are built
+
+**Decided 2026-09-22: Japan gets built, and it goes last.** The reasoning is
+not "postpone the hard thing", it is that **the hard thing gets cheaper while
+you do the others**, so the same work costs less later.
+
+Geocoding machinery this project already owns, from **Toronto**
+(`pipeline/toronto/step3_geocode.py`) — the only Canadian city of six that
+needed it, because its register carries no coordinate field and **Canada has no
+national bulk geocoder**:
+
+- a geocode step that sits between clean and map, with its own processed output
+- the join-against-a-published-address-layer pattern, used instead of a geocoder
+- **match-rate measurement by row type**, which is what caught the brief's
+  71.4% being the wrong denominator: storefront rows matched **92.8%** while
+  person-held licences dragged the all-rows figure to 73.1%
+- the lesson that **the normalisation that matters is rarely street
+  normalisation** — Toronto's real obstacle was units written into the address
+  line (`"280 SPADINA AVE, #308"`), not abbreviations
+
+Each Tier 3 country adds to that pool before Japan needs it:
+
+| Build | What it contributes to Japan |
+|---|---|
+| **Taiwan** | A **keyless third-party geocoder** integration — request shaping, caching, rate limiting, failure handling. Japan's GSI geocoder is the same shape |
+| **Norway / Denmark** | European street addresses at national scale, and the **free-account** pattern for Denmark's CVR |
+| **Brazil** | **Scale** — CNPJ is ~72M rows, well past anything attempted so far |
+
+By the time Japan is reached, what is left that is genuinely Japan-specific is
+**block-address parsing** (chōme/ban/gō), **NFKC normalisation** of full-width
+numerals, and the **join on `町字` by name** because the `町字ID` that exists to
+make it machine-clean is 0% populated. That is a real problem, but it is a
+smaller one than "write geocoding for this project".
+
+**The risk to watch:** deferring is only cheaper if the machinery is actually
+built *shared* rather than per-city. Toronto's step is city-specific today. If
+Taiwan, Norway and Brazil each grow their own private copy, Japan inherits
+nothing and the argument collapses. **Whoever builds the second geocoding city
+should lift the common parts into `pipeline/` rather than copying Toronto's
+file** — that is the decision that makes this ordering pay.
 
 ## Tier 4 — one probe decides the country (4 countries, 4 cities)
 
@@ -236,16 +277,27 @@ negatives.
 🇦🇺 **Australia**, 🇳🇿 **New Zealand** *(licensing is not municipal)* ·
 🇧🇪 **Belgium** *(bulk access paid)* · 🇦🇪 **Dubai** *(no agency feed)*
 
-## If you are picking a country tomorrow
+## The order, as decided
 
-1. **Mexico** — two cities, one source, nothing to discover. Guadalajara ships first.
-2. **Spain** — Madrid and Barcelona are ready *now*, and the other three are likely rather than speculative.
-3. **Taiwan** — if you would rather invest once: four cities, keyless geocoder.
-4. **Czechia** — if you would rather probe once: one query decides it.
+1. ▶ **Mexico** — **in progress.** Two cities, one source, nothing to discover.
+2. **Spain** — Madrid and Barcelona ready *now*; the other three likely rather
+   than speculative.
+3. **Korea** and **Italy** — one city each, nothing to discover, both with
+   named build work rather than open questions.
+4. **Taiwan** — the first geocoding build, chosen because it is the cheapest:
+   keyless geocoder, systematic addresses, four cities. **Lift the shared parts
+   into `pipeline/` here**, not later.
+5. **Norway**, **Denmark**, **Brazil** — the rest of Tier 3, in rising
+   difficulty.
+6. ⏸ **Japan** — **last, by decision.** Ten cities, and by then the geocoding
+   machinery is built.
 
-**Japan is the one to decide deliberately rather than drift into.** Ten cities
-is the biggest prize on the board and the geocoding is a genuine project, not
-an afternoon.
+**France sits outside this order** because its blocker is an architecture
+decision rather than work: settle national-vs-per-city and six cities arrive at
+once.
+
+Tier 4's four probes (**Czechia** strongest) are cheap enough to run alongside
+any of the above rather than competing with them.
 
 ---
 

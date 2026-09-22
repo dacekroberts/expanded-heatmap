@@ -16,13 +16,14 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**112 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**113 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
 - [CDMX approved from OpenStreetMap as a per-city exception, and it passes both rail invariants](#2026-09-22---cdmx-approved-from-openstreetmap-as-a-per-city-exception-and-it-passes-both-rail-invariants)
 - [Mexico nationwide GIS probe: no new route, but CDMX is a retry rather than a loss](#2026-09-22---mexico-nationwide-gis-probe-no-new-route-but-cdmx-is-a-retry-rather-than-a-loss)
 - [Madrid's licence read; the Mobility Database moved its files, and Mexico City drops out of Band A](#2026-09-22---madrids-licence-read-the-mobility-database-moved-its-files-and-mexico-city-drops-out-of-band-a)
+- [Japan is a BUILD, and it goes last; the master list becomes its own file](#2026-09-22---japan-is-a-build-and-it-goes-last-the-master-list-becomes-its-own-file)
 - [Nine-item probe sweep: Madrid, Barcelona and Milan promote; Band A is seven cities](#2026-09-22---nine-item-probe-sweep-madrid-barcelona-and-milan-promote-band-a-is-seven-cities)
 - [Master city list rebanded, and eleven cities were discarded on a reason this project's own file contradicts](#2026-09-22---master-city-list-rebanded-and-eleven-cities-were-discarded-on-a-reason-this-projects-own-file-contradicts)
 - [Seoul's screening is finished: 197,276 active premises, KOGL Type 1, no open questions](#2026-09-22---seouls-screening-is-finished-197276-active-premises-kogl-type-1-no-open-questions)
@@ -314,6 +315,70 @@ onwards; the early ones are split by phase rather than by hour.
   shape, a free account the owner can create. Moved from "out" back to Band D
   with a named cheap blocker. Files touched:
   `docs/data_sources.md`, `docs/global_country_shortlist.md`.
+
+### 2026-09-22 - Japan is a BUILD, and it goes last; the master list becomes its own file
+
+- **Japan decided: build it, but after every easier country.** The owner's
+  verdict on what this file had called "the single biggest open decision in the
+  list" - ten cities from one national schema, against the worst geocoding
+  problem measured anywhere in the screen (chōme/ban/gō block addressing,
+  full-width numerals, and the `町字ID` join key 0% populated) plus a two-bucket
+  ceiling with no general retail. **The reasoning is not "postpone the hard
+  thing" but that the hard thing gets cheaper while the others are built**, so
+  the same work costs less later.
+- **The claim is checkable, and it rests on machinery this project already
+  owns.** `pipeline/toronto/step3_geocode.py` exists because Toronto was the
+  only Canadian city of six with no coordinate field and **Canada has no
+  national bulk geocoder**. It already established: a geocode step between
+  clean and map with its own processed output; the join-against-a-published-
+  address-layer pattern used *instead* of a geocoder; **match-rate measurement
+  by row type**, which is what caught the brief's 71.4% being the wrong
+  denominator (storefront rows 92.8%, all rows 73.1%); and the lesson that the
+  normalisation that matters is rarely street normalisation - Toronto's real
+  obstacle was units written into the address line (`"280 SPADINA AVE, #308"`).
+  Each Tier 3 build then adds: **Taiwan** a keyless third-party geocoder
+  integration (request shaping, caching, rate limiting - the same shape as
+  Japan's GSI), **Norway/Denmark** European addresses at national scale plus
+  Denmark's free-account pattern, **Brazil** scale at ~72M CNPJ rows. What is
+  left genuinely Japan-specific by then is block-address parsing, NFKC
+  normalisation and the `町字`-by-name join - a real problem, but a smaller one
+  than "write geocoding for this project".
+- **Recorded the risk that would invalidate the ordering.** Deferring is only
+  cheaper if the machinery is built **shared** rather than per-city. Toronto's
+  step is city-specific today; if Taiwan, Norway and Brazil each grow a private
+  copy, Japan inherits nothing and the argument collapses. So the decision comes
+  with a condition: **whoever builds the second geocoding city lifts the common
+  parts into `pipeline/` rather than copying Toronto's file.** Taiwan is named
+  as that city, being the cheapest Tier 3 entry.
+- **Set the build order and recorded Mexico as in progress:** Mexico (now) ->
+  Spain -> Korea and Italy -> Taiwan (first geocoding build, and where the
+  shared extraction happens) -> Norway, Denmark, Brazil -> **Japan last**.
+  France sits outside the order because its blocker is an architecture decision
+  rather than work - settling national-vs-per-city delivers six cities at once.
+  Tier 4's four probes are cheap enough to run alongside rather than compete.
+- **Promoted the master city list out of the evidence trail.** It was a section
+  inside `docs/global_country_shortlist.md`, which is now 2,900+ lines of probe
+  log. Split on the same principle as `project_context.md` versus
+  `DECISIONS.md`: **`docs/city_master_list.md` is current state and gets
+  rewritten**, the shortlist stays append-only evidence, and both files state
+  that the trail wins when they disagree. `CLAUDE.md` points at the new file.
+  It carries two views of the same 48 candidates - by city in bands A-D, and
+  **by country ordered by cities gained per unit of work**, which reorders
+  things sharply: France is one city by the first cut and six behind a single
+  decision by the second.
+- **Two defects in my own rewrite, both found by checking rather than by the
+  diffstat.** Splicing the new section in cut from the list header to the
+  nine-item sweep, which swallowed three D5 evidence blocks and the D4
+  corrected-target table that lived inside the old Band D section - 146 deleted
+  lines that looked like superseded summary and were not. Recovered from git.
+  A second, token-level check across every hostname, dataset id and 3+ digit
+  figure then found four hosts and Denmark's `industrycode 475220` still
+  missing, because they had been compressed out of the new tables; those went
+  back into the Copenhagen, Dublin and Budapest rows. **"Rewrite a summary
+  section" and "delete evidence" are indistinguishable in a diffstat**, which
+  is the argument for the token check on any large doc rewrite. Files touched:
+  `docs/city_master_list.md` (new), `docs/global_country_shortlist.md`,
+  `CLAUDE.md`.
 
 ### 2026-09-22 - Nine-item probe sweep: Madrid, Barcelona and Milan promote; Band A is seven cities
 
