@@ -128,10 +128,15 @@ nature about the individual". So this project's residence filtering stays a
 deliberate choice above the legal floor, which is how `DECISIONS.md` already
 frames it for the US cities — not a compliance obligation.
 
-**Ontario only.** British Columbia, Alberta and Québec carve out Personal
-Information the same way but define it under their own statutes, and those
-definitions are not verified. Québec is the least safe to assume, being civil
-law with Law 25 layered on, and it governs Montréal — which is now built.
+**Ontario only.** The other three provinces carve out Personal Information the
+same way but define it under their own statutes. British Columbia's is
+verified too — FIPPA Schedule 1, read from bclaws — though it leaves open the
+home-dwelling gap Ontario closes. **Alberta's and Québec's are the unsettled
+ones:** Alberta's cited statute was repealed and its successor's definition
+was never obtained, and Québec's text was read but narrows the Act's reach
+rather than excluding the information. Québec is the least safe to assume,
+being civil law with Law 25 layered on, and it governs Montréal — which is now
+built.
 
 Re-fetch and compare to detect a changed agreement. The HTML files are whole
 pages, so an unrelated site redesign changes the hash without changing the
