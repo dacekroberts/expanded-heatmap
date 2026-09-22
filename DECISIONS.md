@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**133 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**134 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Sofia settled by enumerating Bulgaria's catalogue from outside the block](#2026-09-22---sofia-settled-by-enumerating-bulgarias-catalogue-from-outside-the-block)
 - [Mexico City and Guadalajara promoted into the provenance tables, and OSM rail gets its own subsection rather than a GTFS row](#2026-09-22---mexico-city-and-guadalajara-promoted-into-the-provenance-tables-and-osm-rail-gets-its-own-subsection-rather-than-a-gtfs-row)
 - [The unread-source table did not list an unread source, and two more hand-kept counts were wrong](#2026-09-22---the-unread-source-table-did-not-list-an-unread-source-and-two-more-hand-kept-counts-were-wrong)
 - [Madrid built: the pipeline is complete, and the app wiring is deliberately held back](#2026-09-22---madrid-built-the-pipeline-is-complete-and-the-app-wiring-is-deliberately-held-back)
@@ -169,6 +170,88 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
+
+- **Discarded Sofia on DATA, after routing around the 403 that had it parked
+  as "unreachable, nothing learned".** `data.egov.bg` returns 403 to curl and
+  to a real browser alike, while DNS-over-HTTPS showed the host up and the
+  Internet Archive held a 2026-04-02 snapshot - so the refusal was aimed at
+  us and the portal was alive. `data.europa.eu`'s SPARQL endpoint harvests
+  that portal and is a different host: **11,635 Bulgarian datasets**
+  (ids 3-23,557) were enumerated without touching the blocked origin.
+  **141 instances of `Регистър на търговските обекти`** - the municipal
+  commercial-premises register this project needs - exist across roughly
+  fifty municipalities, plus **72** food-and-entertainment registers. Sofia's
+  **76** datasets contain neither: budgets, school and kindergarten lists,
+  parking and taxi permits, dams, war memorials, donations, municipal
+  enterprises. Rejected the alternative of leaving Sofia parked as blocked,
+  because the block is no longer what decides it. Band D drops to 11,
+  Discarded rises to 25. Touched `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md`, `.claude/skills/add-country/SKILL.md`.
+
+- **Bulgaria fails STRUCTURALLY, which is a stronger finding than Sofia
+  failing.** The ~50 municipalities that publish a premises register are all
+  small towns - Враца, Мадан, Костинброд, Карлово, Дупница, Тервел,
+  Етрополе, Драгоман. **Sofia is the only Bulgarian city with a metro.** The
+  data exists where there is no rail and the rail exists where there is no
+  data, so no improvement in access would produce a buildable Bulgarian city.
+  That is why this is a discard rather than a park: a parked city implies a
+  cheaper route might exist, and here none can.
+
+- **Recorded that the EU portal is a CATALOGUE, not a BYPASS - measured, not
+  assumed.** **0 of 20** sampled harvested records carry any
+  `dcat:distribution`: the harvest is metadata-only, titles and descriptions
+  with no download URLs. So the technique can establish what a blocked
+  country publishes, which is exactly what settled Sofia, and cannot supply
+  the file itself. Written into `add-country` as an explicit limit so the
+  next country is not screened optimistically on it. An earlier version of
+  this check reported "0 distributions" for a different and invalid reason -
+  the query carried `LIMIT 60` and each record holds ~24 machine-translated
+  `dct:title` rows, which exhausted the limit before any distribution could
+  appear. The right answer by the wrong method is still the wrong method.
+
+- **`dct:spatial` on data.europa.eu means COVERAGE, not provenance, and the
+  near-identical counts were the tell.** Filtering to `country/BGR` returned
+  8,157 and `country/EST` returned 8,158 - one apart, the same shape as the
+  REST endpoint's facet that returned 74 for both and turned out to be
+  ignored entirely. Here the filter is real (`country/ZZZ` and `country/QQQ`
+  both return 0), but it selects pan-European studies that *cover* a country:
+  **6,394 of Bulgaria's 8,157 are Eurostat**, and **zero** had a Bulgarian
+  publisher. Publisher enumeration then failed for a second reason worth
+  recording - every Bulgarian `dct:publisher` is a **blank node naming an
+  individual official**, so there is no organisation URI to enumerate by and
+  every per-publisher count is 1 by construction. The language tag proved the
+  usable proxy for provenance.
+
+- **Converted a search the server refuses into a lookup it cannot refuse.**
+  The endpoint holds ~1.9M datasets and 504s on anything that must see them
+  all: `COUNT`, `GROUP BY` and an unscoped `FILTER CONTAINS` all timed out,
+  the last one even for the nonsense control. `LIMIT` streams fine but
+  `OFFSET` dies between 500 and 2000, capping paging at ~560 rows. Dataset
+  URIs are sequential integers, so a `VALUES` block of 400 explicit URIs is
+  an indexed fetch that cannot time out - one sparse sweep to map the id
+  space, then dense sweeps of the bands that answer. Keyword matching was
+  done locally in Python because titles are machine-translated into ~24 EU
+  languages and a server-side match would hit one variant and miss the rest.
+
+- **Corrected a stale claim in `add-country` that would have mis-advised the
+  next country.** The skill stated Bulgaria's 403 was "a stock Apache page,
+  i.e. a client-signature refusal, not an IP-level one, so the browser is
+  worth trying". The browser returned the same 403. Replaced with the general
+  rule the episode actually supports: **a refusal's cosmetics say nothing
+  about its cause** - only trying it does. The surrounding advice to try the
+  browser first is unchanged and was not the error.
+
+- **Extended the "coverage trap" catch to my own sweep before it became a
+  finding.** The first dense sweep covered ids 16000-24000, found 2,721
+  datasets and 13 Sofia rows with no premises register - a publishable-looking
+  negative. Its own sparse probe had hit Bulgarian records at 6000 and 8000,
+  so the scope was wrong: a full sweep returned **11,635** datasets and
+  **76** Sofia rows. The conclusion held, but it would have been asserted on
+  23% of the evidence, which is the trap by its proper name - the right
+  shape at the wrong scale, catchable only by a row count.
+
 
 ### 2026-09-22 - Mexico City and Guadalajara promoted into the provenance tables, and OSM rail gets its own subsection rather than a GTFS row
 

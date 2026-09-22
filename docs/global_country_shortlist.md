@@ -206,7 +206,7 @@ them gained a usable register.
 | **Singapore** | v2 API works | **Inconclusive** — page 1 of the catalogue holds 10 datasets, none business-related. Not paginated through |
 | **Estonia** | `avaandmed.eesti.ee/api/datasets` answers | Returns **0 results**; the ariregister bulk CSV **404s** on two URL forms. Unresolved |
 | **Thailand** | **403 on every strategy** — including browser headers with a `Referer`, and the DBD register directly | **BLOCKED.** Consistent across paths; consistent with geo-blocking |
-| **Bulgaria** | **403**, and the registry agency refuses connections | **BLOCKED** |
+| **Bulgaria** | **403**, and the registry agency refuses connections | ~~**BLOCKED**~~ → **CLOSED 2026-09-22 on data**, enumerated around the block via `data.europa.eu` SPARQL: 141 municipal premises registers nationally, **none of them Sofia's**. See the superseding note below |
 | **Romania** | **ConnectTimeout** on `www.`/bare, https/http, and the ONRC portal | **UNREACHABLE** |
 | **Sweden** | Entryscape 404, Stockholm 500, Göteborg HTML | **NO ROUTE FOUND** |
 | **Hungary** | `kozadat.hu` 404, Budapest refuses connections | **NO ROUTE FOUND** |
@@ -526,6 +526,30 @@ than at a guessed open-data portal — which is where the previous pass failed.
 > trying*. Untested in a browser, so Sofia stays open with a cheaper next step
 > than it had. Two sessions recorded "403, consistent, plausibly IP" without
 > reading the 199 bytes.
+
+> **SUPERSEDED 2026-09-22 — the browser was tried, and the inference above was
+> wrong.** `data.egov.bg` returns **the same 403 in a real browser**, and
+> DNS-over-HTTPS resolves it fine (213.91.191.234), so the host is up and
+> refusing us deliberately. **The 199 bytes were a red herring: a refusal's
+> cosmetics say nothing about its cause.** The correction above was right
+> that the earlier sessions had not read the body, and wrong to read a
+> diagnosis out of it — replacing one unread assumption with one over-read
+> one. Only trying it settled it.
+>
+> **🇧🇬 BULGARIA IS NOW CLOSED, and on data rather than on access.**
+> `data.europa.eu`'s SPARQL endpoint harvests `data.egov.bg` from a different
+> host, so **11,635 Bulgarian datasets** (ids 3–23,557) were enumerated
+> without touching the blocked origin. **141 municipal
+> `Регистър на търговските обекти`** — the exact premises register this
+> project needs — exist across ~50 municipalities, plus **72** food-and-
+> entertainment registers. **Sofia's 76 datasets include neither.**
+>
+> The structural finding is the durable one: **every Bulgarian municipality
+> publishing this register is a small town, and Sofia is the country's only
+> metro city.** The data exists where there is no rail; the rail exists where
+> there is no data. Full details, including the Virtuoso timeout ladder and
+> the `dct:spatial`-means-coverage trap, are in `add-country` §3 and in
+> `docs/city_master_list.md`'s Sofia section.
 
 #### D5 — rail/GIS group: REACHABILITY ONLY, no layer probed (11 cities)
 

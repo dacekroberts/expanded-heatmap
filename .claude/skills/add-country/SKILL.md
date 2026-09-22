@@ -359,12 +359,66 @@ not the fallback after a round of 404s:
    into something enumerable - and a nonsense `q` still gave the control
    (`zzqqxx` -> 0 results, so that search genuinely filters).
 
-The same applies to a fetch that is *refused* rather than empty: Bulgaria's
-403 is a **stock Apache page**, i.e. a client-signature refusal, not an
-IP-level one, so the browser is worth trying before recording a negative.
-Record "could not reach" only once the browser has failed too - which is the
-rule `read-licence` step 7 already states for licence pages, generalised to
-the whole probe.
+The same applies to a fetch that is *refused* rather than empty. Record
+"could not reach" only once the browser has failed too - the rule
+`read-licence` step 7 states for licence pages, generalised to the whole
+probe.
+
+But **do not read a refusal's cosmetics as its cause.** Bulgaria's 403 was
+recorded here as a *stock Apache page, i.e. a client-signature refusal worth
+retrying in a browser*. The browser returned **the same 403**, and DNS-over-
+HTTPS showed the host up. The page's blandness said nothing about the
+reason; only trying it did.
+
+#### When the browser fails too, the portal is not the only copy
+
+**A blocked portal blocks a HOST, not a FACT.** Government open data is
+harvested upward - municipal into national, national into supranational -
+and each tier is a different host with a different opinion of you. Three
+routes, cheapest first:
+
+| Route | Use when | Worked on |
+|---|---|---|
+| **National catalogue** | a city portal is searchless, paginated, or down | `datos.gob.es` for Bilbao (600 federated vs 344 own) |
+| **`data.europa.eu`** | a whole EU country refuses you | **Bulgaria — see below** |
+| **Internet Archive** | a page is CAPTCHA-walled or retired | Barcelona's and Sevilla's licences |
+
+None of these is a bypass. They are *other publications of the same public
+record*, which is why they are fine where defeating the block would not be.
+
+**Bulgaria, 2026-09-22, as the worked example.** `data.egov.bg` 403s curl
+and browser alike. `data.europa.eu`'s SPARQL endpoint harvests it, so
+**11,635 Bulgarian datasets** were enumerated without touching the blocked
+host - enough to settle Sofia as a firm negative rather than an unknown.
+
+**The endpoint is a Virtuoso holding ~1.9M datasets, and it times out on
+anything that must see them all.** The ladder, measured:
+
+```
+COUNT / GROUP BY  over a filter   -> 504, every time
+FILTER CONTAINS   unscoped        -> 504, even the nonsense control
+LIMIT 15          streaming       -> works
+OFFSET                            -> works to ~500, dies by 2000
+VALUES <uri> <uri> ...            -> instant, any volume
+```
+
+So **convert the search into a lookup.** Dataset URIs there are sequential
+integers (`…/88u/dataset/18209`); one `VALUES` block of 400 explicit URIs is
+an indexed fetch that cannot time out. Map the id space with one sparse
+sweep, then densely sweep the bands that answer. **Match keywords locally in
+Python**, never server-side - titles are machine-translated into ~24 EU
+languages, so a server-side match hits one variant and misses the rest.
+
+Two traps this route carries, both measured:
+
+- **`dct:spatial` is COVERAGE, not provenance.** Filtering datasets to
+  `country/BGR` returns 8,157 - of which **6,394 are Eurostat** and *zero*
+  have a Bulgarian publisher. It means "this study covers Bulgaria". The
+  language tag is the better proxy for who published.
+- **The harvest is METADATA-ONLY.** 0 of 20 sampled records carried any
+  `dcat:distribution`. You learn what exists; the file stays behind the
+  wall. **Enough to screen a blocked country, not to build one** - so use it
+  to decide whether to spend more effort, never as the data source itself.
 
 ### 4. How does the country define PERSONAL INFORMATION, and does its licence carve it out?
 
