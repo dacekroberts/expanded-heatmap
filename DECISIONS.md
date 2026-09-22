@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**124 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**125 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [A leaf region labels only its own cities, and the one accepted overlap is written down](#2026-09-22---a-leaf-region-labels-only-its-own-cities-and-the-one-accepted-overlap-is-written-down)
 - [Two merges, the macro-label check that was missing, and two fixes rejected by measurement](#2026-09-22---two-merges-the-macro-label-check-that-was-missing-and-two-fixes-rejected-by-measurement)
 - [France reversed on new measurement: the employee filter works, Paris returns to Band A](#2026-09-22---france-reversed-on-new-measurement-the-employee-filter-works-paris-returns-to-band-a)
 - [The France decision, settled by measurement: Paris leaves Band A](#2026-09-22---the-france-decision-settled-by-measurement-paris-leaves-band-a)
@@ -160,6 +161,53 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - A leaf region labels only its own cities, and the one accepted overlap is written down
+
+- **Owner's decision: a LEAF region draws name pills only for its own member
+  cities; the composite still labels every one.** Taken as the narrow of two
+  options offered - the broad one would have suppressed non-member labels in
+  the composite too, closing one 1.1 px abutment at the cost of removing seven
+  labels from the landing view, which is the portfolio's first impression.
+  Supersedes nothing: it is the first rule this map has had about WHICH cities
+  get labels, as against where a label sits.
+
+- **It is a correctness fix before it is a tidiness one.** Every macro-map
+  finding still open after `1263021` was a non-member drawn at the frame edge
+  of a region the reader had switched away from: "Los Angeles" covered San
+  Diego's marker and overlapped its pill by 20.5 x 11.2 px in United States
+  East, where NEITHER city is a member, and "Philadelphia" hung 2.1 px below
+  the canvas in Canada East. The alternative was tuning offsets so that each
+  city's single pixel offset satisfies all six regions at three widths, which
+  is unbounded and gets worse with every region added. `label_offset` values
+  were measured at the composite zoom and a non-member sits at a zoom they were
+  never measured at, so the honest fix is to stop drawing the label rather than
+  to chase it.
+
+- **The markers layer is untouched, so "every city is on the map" stays true.**
+  Overview.py still hands the whole `CITIES` frame to the ScatterplotLayer at
+  every region; only the TextLayer's data is narrowed. A non-member's dot stays
+  visible, stays pickable and still opens its page, and the text-link list
+  beneath the map is unchanged. Verified in the browser at 1200 px: United
+  States East draws six pills with the Californian and Mexican dots present and
+  unlabelled at the edges; Canada East draws two, with Chicago's, Boston's and
+  New York's dots visible and bare; the landing view still draws all sixteen.
+  Keyed on `REGION_MEMBERS` rather than on the region's name, so a future
+  composite inherits the exemption without another edit.
+
+- **The remaining hairline overlap is now RECORDED rather than tolerated by a
+  loosened threshold.** "Los Angeles" x "Guadalajara (Regional)" overlap
+  68.5 x 1.1 px in the composite - 0.1 px past the >1 px rule set earlier the
+  same day - with the pill backgrounds touching and the glyphs clear.
+  deploy-verify measured it from rendered pixels and called it abutting rather
+  than a defect; the owner agreed. Raising `TOUCH` to 2 px would have silenced
+  it and every future hairline case with it, which is tuning a check to hide a
+  finding, so `check_macro_labels.py` gained an `ACCEPTED_OVERLAPS` table
+  instead: this exact pair, in this region, at these measured dimensions, with
+  the reason beside it. It still FAILS if the overlap grows more than 0.5 px
+  past what was actually examined, so the exemption cannot quietly cover a
+  regression. `check_macro_labels.py` now reports PROBLEMS 0 across six regions
+  and three widths.
 
 ### 2026-09-22 - Two merges, the macro-label check that was missing, and two fixes rejected by measurement
 

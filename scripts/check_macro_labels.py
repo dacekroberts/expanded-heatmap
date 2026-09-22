@@ -44,7 +44,7 @@ if hasattr(sys.stdout, "reconfigure"):   # "Montréal" is unprintable under cp12
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "app"))
-from cities import CITIES, REGIONS  # noqa: E402
+from cities import CITIES, REGION_MEMBERS, REGIONS  # noqa: E402
 
 # Measured in the browser at `600 14px "Space Grotesk", sans-serif`, the font
 # app/components.set_base_font() loads and the TextLayer renders with. Re-measure
@@ -68,6 +68,29 @@ REF_W, FILL = 320, 0.7
 # Abutting pills are not a defect: a shared edge reads as two pills, not one
 # smear. Only an overlap on BOTH axes greater than this counts.
 TOUCH = 1.0
+
+# KNOWN-ACCEPTED OVERLAPS, each with the numbers it was accepted at.
+#
+# This is deliberately NOT a raised TOUCH threshold. Loosening the rule to 2 px
+# to silence one hairline case would also silence every future one, which is
+# tuning a check to hide a finding. An entry here says: this exact pair, in
+# this region, at these measured dimensions, has been looked at and judged
+# harmless - and nothing else has.
+#
+# It still fails if the geometry MOVES. The recorded overlap is a ceiling plus
+# ACCEPTED_TOL, so a change that grows the overlap past what was actually
+# examined comes back as a problem rather than inheriting the exemption.
+#
+# Keyed (region, then the two names sorted).
+ACCEPTED_OVERLAPS = {
+    # Owner's call 2026-09-22, agreeing with deploy-verify, which measured this
+    # from rendered pixels and called it abutting rather than a defect: the pill
+    # BACKGROUNDS touch by 1.1 px on the vertical axis - 0.1 px past the >1 px
+    # rule set the same day - while the GLYPHS do not, and the screenshot is
+    # legible. Both names are readable; there is no smear to fix.
+    ("United States", "Guadalajara (Regional)", "Los Angeles"): (68.5, 1.1),
+}
+ACCEPTED_TOL = 0.5
 
 
 def fit_view(lats, lons, west_pad=0.12):
@@ -124,31 +147,38 @@ def main():
     args = ap.parse_args()
     widths = args.width or sorted(CANVAS)
 
-    problems, clips, near = [], [], []
+    problems, clips, near, accepted = [], [], [], []
     for region in REGIONS:
         clat, clon, zoom = region_view(region)
         for vw in widths:
             cw = CANVAS.get(vw, vw)
-            # EVERY CITY, NOT THE REGION'S MEMBERS. The view is centred, never
-            # filtered - Overview.py hands both layers the whole CITIES frame -
-            # so a non-member is still drawn, still labelled, and still
-            # collides. Scoring members only is the exact blind spot that let
-            # "Los Angeles" x "San Diego" overlap 20.5 x 11.2 px in United
-            # States East, where neither is a member, while a check reported
-            # that region clean.
-            placed = []
+            # MARKERS ARE EVERY CITY; LABELS ARE NOT. Overview.py draws the whole
+            # CITIES frame in the markers layer at every region - the view is
+            # centred, never filtered - but a LEAF region labels only its own
+            # members, so a non-member contributes a dot and no pill. Getting
+            # this wrong in either direction hides a defect: scoring LABELS for
+            # members only was the blind spot that let "Los Angeles" x "San
+            # Diego" overlap 20.5 x 11.2 px in United States East while a check
+            # called that region clean, and scoring every city's label now would
+            # report pills the app no longer draws.
+            labelled = ({c["name"] for c in CITIES}
+                        if region["name"] in REGION_MEMBERS
+                        else {c["name"] for c in region["cities"]})
+            markers, placed = [], []
             for city in CITIES:
                 x, y = project(city["lat"], city["lon"], clat, clon, zoom, cw, CANVAS_H)
+                on = 0 <= x <= cw and 0 <= y <= CANVAS_H
+                markers.append((city, x, y, on))   # a coverage target either way
+                if city["name"] not in labelled:
+                    continue
                 box = pill(city, x, y)
                 # A pill entirely off the canvas is not drawn and cannot collide
                 # with anything. A pill PARTLY on it can, so the test is
                 # intersection with the canvas rather than the marker being
-                # inside it - that is how a non-member at the frame edge stays
-                # in scope without dragging in a city the reader cannot see.
+                # inside it.
                 if (box[2] < 0 or box[0] > cw or box[3] < 0 or box[1] > CANVAS_H):
                     continue
-                placed.append((city, x, y, box,
-                               0 <= x <= cw and 0 <= y <= CANVAS_H))
+                placed.append((city, x, y, box, on))
 
             for city, x, y, box, marker_on in placed:
                 # A marker is ERASED when its CENTRE falls inside the pill: the
@@ -158,7 +188,7 @@ def main():
                 # is not that, and scoring it as such flags Philadelphia against
                 # New York, a pair deploy-verify measured as BOTH rendering
                 # normally. Grazing contact is listed under `near` instead.
-                for other, ox, oy, _, _ in placed:
+                for other, ox, oy, _ in markers:
                     who = ("its OWN marker" if other is city
                            else f"{other['name']}'s marker")
                     if box[0] < ox < box[2] and box[1] < oy < box[3]:
@@ -185,11 +215,29 @@ def main():
             for i, (a, _, _, ab, _) in enumerate(placed):
                 for b, _, _, bb, _ in placed[i + 1:]:
                     ox, oy = overlap(ab, bb)
-                    if ox > TOUCH and oy > TOUCH:
-                        problems.append(
+                    if ox <= TOUCH or oy <= TOUCH:
+                        continue
+                    key = (region["name"], *sorted((a["name"], b["name"])))
+                    ok = ACCEPTED_OVERLAPS.get(key)
+                    if ok and ox <= ok[0] + ACCEPTED_TOL and oy <= ok[1] + ACCEPTED_TOL:
+                        accepted.append(
                             f"{region['name']:<20} {vw:>4}px  "
                             f"{a['name']} x {b['name']} overlap "
-                            f"{ox:.1f} x {oy:.1f} px")
+                            f"{ox:.1f} x {oy:.1f} px (accepted at "
+                            f"{ok[0]:.1f} x {ok[1]:.1f})")
+                        continue
+                    problems.append(
+                        f"{region['name']:<20} {vw:>4}px  "
+                        f"{a['name']} x {b['name']} overlap "
+                        f"{ox:.1f} x {oy:.1f} px"
+                        + (f" - GREW past the accepted {ok[0]:.1f} x {ok[1]:.1f}"
+                           if ok else ""))
+
+    if accepted and args.verbose:
+        print(f"Known-accepted overlaps ({len(accepted)}) - see ACCEPTED_OVERLAPS:")
+        for line in accepted:
+            print(f"  {line}")
+        print()
 
     if near and args.verbose:
         print(f"Pills grazing a marker's edge ({len(near)}) - reported, not failed:")

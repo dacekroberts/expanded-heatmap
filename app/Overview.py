@@ -23,6 +23,7 @@ from cities import (
     DEFAULT_REGION,
     IN_DEFAULT_VIEW,
     MAP_ONLY_NAV,
+    REGION_MEMBERS,
     REGIONS,
 )
 from components import (
@@ -153,6 +154,35 @@ cities["anchor"] = offsets.map(lambda o: o[0])
 cities["dx"] = offsets.map(lambda o: o[1])
 cities["dy"] = offsets.map(lambda o: o[2])
 
+# A LEAF REGION LABELS ONLY ITS OWN CITIES; THE COMPOSITE LABELS EVERY ONE.
+# Owner's decision 2026-09-22, taking the narrow of two options.
+#
+# Every city is DRAWN in every region - the view is centred, never filtered -
+# which is what makes the caption's "every city is on the map" true, and that
+# does not change here: the markers layer below still gets the whole frame and
+# a non-member's dot stays visible and clickable. What is dropped is the
+# NAME PILL of a city the reader has just switched away from.
+#
+# It was a correctness fix before it was a tidiness one. A non-member sits at
+# the frame edge at a zoom its offsets were never measured at, and collides
+# there: "Los Angeles" covered San Diego's marker and overlapped its pill by
+# 20.5 x 11.3 px in United States East, where NEITHER is a member, and
+# "Philadelphia" hung 2.1 px below the canvas in Canada East. Tuning offsets
+# to fix that is unbounded work - each of the six regions would constrain
+# every city's single pixel offset - and the label being removed is one a
+# reader of that region has no use for.
+#
+# THE COMPOSITE IS EXCLUDED DELIBERATELY. "United States" is the landing view
+# and the portfolio's first impression; suppressing non-members there would
+# take seven labels off it to close one 1.1 px abutment. So the rule is keyed
+# on REGION_MEMBERS rather than on the region name, and a future composite
+# gets the same treatment without another edit.
+if region in REGION_MEMBERS:
+    label_cities = cities
+else:
+    _members = {c["name"] for c in _region_cities[region]}
+    label_cities = cities[cities["name"].isin(_members)]
+
 markers = pdk.Layer(
     "ScatterplotLayer",
     id="cities",
@@ -197,7 +227,8 @@ markers = pdk.Layer(
 labels = pdk.Layer(
     "TextLayer",
     id="city-labels",
-    data=cities,
+    # Not `cities`: a leaf region labels only its own - see label_cities above.
+    data=label_cities,
     get_position="[lon, lat]",
     get_text="name",
     get_size=14,
