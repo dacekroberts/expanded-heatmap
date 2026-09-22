@@ -17,6 +17,30 @@ station count CANNOT be checked, because the operator is unreachable.
 
 from pathlib import Path
 
+from pipeline.countries.mexico import (  # noqa: F401
+    DENUE_ACTIVITY_COLUMN,
+    DENUE_CODE_COLUMN,
+    DENUE_INTERIOR_COLUMN,
+    DENUE_NAME_COLUMN,
+    FORBIDDEN_COLUMNS,
+    OSM_NEVER_A_STATION,
+    OVERPASS_HOSTS,
+    OVERPASS_USER_AGENT,
+    PREMISES_TYPE_COLUMN,
+    PREMISES_TYPE_KEEP,
+    RAW_CLASSIFICATION_COLUMN,
+    SOURCE_ENCODING,
+    TAXONOMY_SYSTEM,
+    denue_member,
+    denue_url,
+)
+
+# Re-exported above rather than redefined: every one of those names is a fact
+# about DENUE or about OpenStreetMap, not about this city, and both Mexican
+# cities were measured to agree on all of them before the split. The `noqa`
+# is deliberate - these ARE unused here and are imported so that this city's
+# step files keep importing them from this module, unchanged.
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -36,47 +60,35 @@ BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 
 # --- Raw inputs -----------------------------------------------------------
 #
-# BUSINESSES: INEGI DENUE, bulk CSV per entidad federativa. Keyless, no token,
-# no CAPTCHA - verified 2026-09-22, 45,439,249 bytes, real ZIP by magic bytes.
-#   curl -L -o denue_09_csv.zip \
-#     https://www.inegi.org.mx/contenidos/masiva/denue/denue_09_csv.zip
-# The DENUE API at /app/api/denue/v1/consulta/ 404s without a token; the bulk
-# download is both keyless and more complete, so the API is not used.
+# BUSINESSES: INEGI DENUE. Measured for this entidad on 2026-09-22 -
+# 45,439,249 bytes, a real ZIP by magic bytes. The URL shape, the member path,
+# the keyless/no-CAPTCHA finding and the reason the DENUE API is not used are
+# all facts about DENUE and live in pipeline/countries/mexico.py.
 #
-# RAIL + BOUNDARY: OpenStreetMap via Overpass, fetched by step1 (see above for
-# why not the agency).
-DENUE_ZIP = DATA_RAW / "denue_09_csv.zip"
-DENUE_URL = "https://www.inegi.org.mx/contenidos/masiva/denue/denue_09_csv.zip"
-# The member inside the ZIP. INEGI also ships a data dictionary and a metadata
-# file; reading the dictionary by mistake returns 43 rows of column
-# documentation, which is a confusing near-miss rather than an error.
-DENUE_MEMBER = "conjunto_de_datos/denue_inegi_09_.csv"
-# 09 = Ciudad de Mexico. The file IS the state, so no city-name filter is
-# needed for businesses - the in-city question is answered by the download,
-# which is why CITY_KEEP does not exist for this city.
+# RAIL + BOUNDARY: OpenStreetMap via Overpass, fetched by step1 (see the module
+# docstring for why not the agency).
+#
+# 09 = Ciudad de Mexico. THE ONLY PER-CITY PART OF THE DOWNLOAD - the URL
+# shape, the member path and the near-miss dictionary member are all facts
+# about DENUE and live in pipeline/countries/mexico.py.
+#
+# The file IS the state, so no city-name filter is needed for businesses: the
+# in-city question is answered by which file is downloaded, which is why
+# CITY_KEEP does not exist for this city and does for Guadalajara.
 DENUE_STATE_CODE = "09"
+DENUE_URL = denue_url(DENUE_STATE_CODE)
+DENUE_MEMBER = denue_member(DENUE_STATE_CODE)
+DENUE_ZIP = DATA_RAW / f"denue_{DENUE_STATE_CODE}_csv.zip"
 
 OSM_STATIONS_JSON = DATA_RAW / "osm_stations.json"
 OSM_ROUTES_JSON = DATA_RAW / "osm_routes.json"
 OSM_BOUNDARY_JSON = DATA_RAW / "osm_boundary.json"
 
-# LATIN-1, NOT UTF-8. INEGI ships DENUE in latin-1; decoding as UTF-8 raises.
-# add-city requires this declared per city rather than guessed.
-SOURCE_ENCODING = "latin-1"
-
 # --- OpenStreetMap fetch --------------------------------------------------
 
-# overpass-api.de returned 504 on two of four probes and kumi.systems on one,
-# at different times - so more than one host, tried in order. A 504 from one is
-# not a fact about the data.
-OVERPASS_HOSTS = (
-    "https://overpass-api.de/api/interpreter",
-    "https://overpass.kumi.systems/api/interpreter",
-    "https://overpass.osm.ch/api/interpreter",
-)
-OVERPASS_USER_AGENT = (
-    "expanded-heatmap city profiling (github.com/dacekroberts/expanded-heatmap)"
-)
+# The host list and its 504 history moved to pipeline/countries/mexico.py -
+# which Overpass mirrors answer is a fact about Overpass, not about this city.
+#
 # Wide enough for Line A to La Paz and Line B to Ciudad Azteca, both in Estado
 # de Mexico. A tighter box (19.04-19.62) silently returned 159 station nodes
 # against 184 - the boundary filter, not the bbox, is what scopes this city.
@@ -209,39 +221,7 @@ LINE_COLOURS = {
 
 # --- Business filtering ------------------------------------------------
 
-TAXONOMY_SYSTEM = "scian"
-# DENUE's own column names. Step 2 renames these to the taxonomy's columns.
-DENUE_NAME_COLUMN = "nom_estab"          # the exterior sign, per INEGI's dictionary
-DENUE_ACTIVITY_COLUMN = "nombre_act"     # -> scian_actividad (the tooltip value)
-DENUE_CODE_COLUMN = "codigo_act"         # -> scian (what classify() reads)
-RAW_CLASSIFICATION_COLUMN = "scian_actividad"
 
-# FIJO ONLY. DENUE distinguishes Fijo (442,146, 95.55%) from Semifijo (20,586,
-# 4.45%) - a semi-fixed stall or street post rather than a storefront. This
-# project maps storefronts, so the same reasoning that excluded nonstore retail
-# and home-based businesses excludes these: 18,264 of them would otherwise have
-# classified into a bucket. Owner's decision 2026-09-22, stated on the city
-# page and in docs/excluded_categories.md rather than applied silently.
-PREMISES_TYPE_COLUMN = "tipoUniEco"
-PREMISES_TYPE_KEEP = "Fijo"
-
-# NEVER LOADED, and step 2 asserts they never arrive - New York's pattern,
-# which is what lets that city claim structurally that no pin can be a
-# registrant's name.
-#
-#   telefono    35.56% populated - a phone number at a sole trader's premises
-#   correoelec  22.64% - likewise an email
-#   www         10.60%
-#   raz_social  25.87% - the legal entity name. INEGI ALREADY omits it when the
-#               owner is a persona fisica, explicitly "para proteger la
-#               confidencialidad de la informacion", so what remains is
-#               corporate. It is still not loaded: `nom_estab` is populated on
-#               99.95% of rows, so no fallback to a legal name is ever needed,
-#               and Los Angeles' 4,000 published individual names came from
-#               exactly such a fallback. Forbidding the column structurally
-#               removes the failure mode rather than relying on the fallback
-#               never firing.
-FORBIDDEN_COLUMNS = ("telefono", "correoelec", "www", "raz_social")
 
 # Sanity bounds for coordinates, tightened to CDMX's real extent plus the
 # Estado de Mexico reach of Lines A and B (cut later by the boundary filter).

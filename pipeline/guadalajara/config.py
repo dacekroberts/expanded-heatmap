@@ -36,6 +36,30 @@ on both lines where SITEUR states one.
 
 from pathlib import Path
 
+from pipeline.countries.mexico import (  # noqa: F401
+    DENUE_ACTIVITY_COLUMN,
+    DENUE_CODE_COLUMN,
+    DENUE_INTERIOR_COLUMN,
+    DENUE_NAME_COLUMN,
+    FORBIDDEN_COLUMNS,
+    OSM_NEVER_A_STATION,
+    OVERPASS_HOSTS,
+    OVERPASS_USER_AGENT,
+    PREMISES_TYPE_COLUMN,
+    PREMISES_TYPE_KEEP,
+    RAW_CLASSIFICATION_COLUMN,
+    SOURCE_ENCODING,
+    TAXONOMY_SYSTEM,
+    denue_member,
+    denue_url,
+)
+
+# Re-exported above rather than redefined: every one of those names is a fact
+# about DENUE or about OpenStreetMap, not about this city, and both Mexican
+# cities were measured to agree on all of them before the split. The `noqa`
+# is deliberate - these ARE unused here and are imported so that this city's
+# step files keep importing them from this module, unchanged.
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -54,19 +78,22 @@ BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 
 # --- Raw inputs -----------------------------------------------------------
 #
-# DENUE state 14 = Jalisco. Keyless bulk CSV, same shape as Mexico City's 09.
-#   curl -L -o denue_14_csv.zip \
-#     https://www.inegi.org.mx/contenidos/masiva/denue/denue_14_csv.zip
-DENUE_ZIP = DATA_RAW / "denue_14_csv.zip"
-DENUE_URL = "https://www.inegi.org.mx/contenidos/masiva/denue/denue_14_csv.zip"
-DENUE_MEMBER = "conjunto_de_datos/denue_inegi_14_.csv"
+# 14 = Jalisco. The only per-city part of the download; see
+# pipeline/countries/mexico.py for the URL shape and the dictionary near-miss.
+#
+# UNLIKE MEXICO CITY, the entidad is NOT the city: Jalisco holds 125
+# municipios including Puerto Vallarta 300 km away, so this city scopes by
+# MUNICIPIOS_KEEP below. That difference is the clearest single reason the
+# state code stayed per-city while everything around it moved out.
 DENUE_STATE_CODE = "14"
+DENUE_URL = denue_url(DENUE_STATE_CODE)
+DENUE_MEMBER = denue_member(DENUE_STATE_CODE)
+DENUE_ZIP = DATA_RAW / f"denue_{DENUE_STATE_CODE}_csv.zip"
 
 OSM_STATIONS_JSON = DATA_RAW / "osm_stations.json"
 OSM_ROUTES_JSON = DATA_RAW / "osm_routes.json"
 OSM_BOUNDARY_JSON = DATA_RAW / "osm_boundary.json"
 
-SOURCE_ENCODING = "latin-1"
 
 # --- The regional scope ---------------------------------------------------
 #
@@ -104,14 +131,6 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 
 # --- OpenStreetMap fetch --------------------------------------------------
 
-OVERPASS_HOSTS = (
-    "https://overpass-api.de/api/interpreter",
-    "https://overpass.kumi.systems/api/interpreter",
-    "https://overpass.osm.ch/api/interpreter",
-)
-OVERPASS_USER_AGENT = (
-    "expanded-heatmap city profiling (github.com/dacekroberts/expanded-heatmap)"
-)
 OSM_BBOX = "20.35,-103.60,20.85,-103.15"
 
 # GUADALAJARA'S STATIONS ARE TAGGED DIFFERENTLY FROM MEXICO CITY'S, and this is
@@ -171,22 +190,10 @@ PUBLISHED_STATIONS_PER_LINE = {
 
 # --- Business filtering ------------------------------------------------
 
-TAXONOMY_SYSTEM = "scian"
-DENUE_NAME_COLUMN = "nom_estab"
-DENUE_ACTIVITY_COLUMN = "nombre_act"
-DENUE_CODE_COLUMN = "codigo_act"
-RAW_CLASSIFICATION_COLUMN = "scian_actividad"
 
-# Fijo only, as Mexico City. Jalisco is 97.94% Fijo against Mexico City's
-# 95.55% - street commerce is a smaller share here, and the filter is applied
-# for the same reason regardless of size.
-PREMISES_TYPE_COLUMN = "tipoUniEco"
-PREMISES_TYPE_KEEP = "Fijo"
-
-# Never loaded; step 2 asserts they never arrive. See Mexico City's config for
-# why raz_social is on this list even though INEGI already withholds it for a
-# persona física.
-FORBIDDEN_COLUMNS = ("telefono", "correoelec", "www", "raz_social")
+# Fijo only, and Jalisco is 97.94% Fijo against Ciudad de Mexico's
+# 95.55% - street commerce is a smaller share here. Both the column and
+# the kept value are shared; only this observation is local.
 
 GUADALAJARA_BBOX = {
     "lat_min": 20.35,

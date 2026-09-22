@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**115 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**116 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [config.py split into country and city, and the outputs did not move](#2026-09-22---configpy-split-into-country-and-city-and-the-outputs-did-not-move)
 - [Guadalajara built: the second city is what shows which settings were national](#2026-09-22---guadalajara-built-the-second-city-is-what-shows-which-settings-were-national)
 - [Mexico City built: the first city here whose rail is not GTFS, and the first outside North America's licence-register model](#2026-09-22---mexico-city-built-the-first-city-here-whose-rail-is-not-gtfs-and-the-first-outside-north-americas-licence-register-model)
 - [The region switcher shipped, and the fix was a deleted key](#2026-09-22---the-region-switcher-shipped-and-the-fix-was-a-deleted-key)
@@ -151,6 +152,51 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - config.py split into country and city, and the outputs did not move
+
+- **Split the two Mexican configs onto `pipeline/countries/mexico.py`, on the
+  schedule set when Mexico City was built: at the SECOND city, not the first
+  and not later.** One city cannot show which of its settings are national -
+  that was the whole argument for waiting, and Guadalajara settled it. Thirteen
+  names moved out: the DENUE URL and member templates, `SOURCE_ENCODING`, the
+  five DENUE column names, `RAW_CLASSIFICATION_COLUMN`, `TAXONOMY_SYSTEM`,
+  `PREMISES_TYPE_COLUMN`/`_KEEP`, `FORBIDDEN_COLUMNS`, `DENUE_INTERIOR_COLUMN`,
+  `OVERPASS_HOSTS`, `OVERPASS_USER_AGENT` and `OSM_NEVER_A_STATION`.
+
+- **What stayed per city is the useful half of the finding.** The entidad code,
+  the projected CRS (32614 against 32613), the bbox, the municipio scope, the
+  line names and colours, the operator's published counts - and **the OSM
+  station tagging**, which is the one nobody would have predicted from Mexico
+  City alone: that city has 184 `railway=station` nodes and Guadalajara has
+  one, its stations being `railway=stop` positions. A setting that looks
+  national after one city is a guess; after two it is a measurement, and that
+  sentence is now the country module's docstring.
+
+- **PROVEN BEHAVIOUR-NEUTRAL RATHER THAN ASSUMED, in three steps.** Every name
+  the step files import still resolves from its city config - 34 for Mexico
+  City, 35 for Guadalajara, none missing - because the shared names are
+  re-exported rather than removed, so no step file changed. Fourteen value
+  checks compare the country module against each city config and all match.
+  And both pipelines were re-run end to end: **zero drift, 15 baseline figures
+  unchanged**, outputs identical. If the refactor had changed anything,
+  `drift_check` would have said so instead of the author.
+
+- **The files did not get smaller, and claiming otherwise would be the easy
+  lie.** Code lines are unchanged - Mexico City 103 before and after,
+  Guadalajara 104 - because a 16-line import block replaced 13 scattered
+  definitions. The gain is not size: it is that a licence correction, an
+  encoding fix or a forbidden-column addition is now ONE edit rather than one
+  per city. That is worth little at two cities and a great deal at Japan's
+  nine, which is the case the directory was created for. France, Korea, Taiwan
+  and Brazil are all one-national-register countries on the shortlist.
+
+- **Comment orphaning was the real hazard of the move, and two were caught.**
+  Relocating a constant leaves its explanation behind: Mexico City's config
+  kept a note about which Overpass hosts return 504 above a line that no longer
+  mentioned hosts, and Guadalajara kept a DENUE curl command duplicating the
+  one that had just moved. Both now point at the country module instead. A
+  stale comment is the same defect class this project greps city pages for.
 
 ### 2026-09-22 - Guadalajara built: the second city is what shows which settings were national
 
