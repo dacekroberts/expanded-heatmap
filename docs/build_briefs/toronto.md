@@ -106,15 +106,62 @@ consistent station count it does not: Toronto is fourth. **Both the original
 suspicion and its rebuttal are left here**, because the sequence is the lesson —
 the suspicion was correct for a reason nobody had identified yet.
 
-**Its real soft spot is different, and it is a floor rather than a point
-estimate.** The 41 rests on geocoding **159,872** licence rows against the
-City's own address repository at a **71.4% exact-match rate, with no street
-normalisation**. The unmatched 29% are **ASSERTED** to be distributed evenly,
-and that has never been checked. If they are concentrated — in older
-addresses, in a borough, in a licence category — the true figure is higher, and
-plausibly by a lot. **Anyone tempted to build Toronto should test that before
-anything else**, because it is the single number that decides whether the city
-is Boston-thin or mid-table.
+### ANSWERED 2026-09-21: the 71.4% is the WRONG DENOMINATOR, and the answer is 92.8%
+
+**Open question 1 was "are the unmatched 29% biased?" — the one question the
+brief said could move Toronto. Tested, and the honest answer is that the
+question was built on a misleading number.**
+
+The 71.4% is measured across **all 159,872 licence rows**, and more than half of
+those are not storefronts at all — they are tow-truck owners, master plumbers,
+taxicab owners and driving instructors, licences held by a **person** with no
+premises address to match. Measured separately, with the unit suffix stripped
+(see below):
+
+| | rows | exact match |
+|---|---|---|
+| **Storefront categories** — the only rows a map uses | 80,110 | **92.8%** |
+| Everything else | 79,762 | 53.4% |
+| **All rows — the published figure** | 159,872 | **73.1%** |
+
+So this is **the sixth denominator error in the project**, and the first found
+in a brief's own statement of its weakest point. Toronto's density is not a
+floor resting on a 71.4% match; it rests on **92.8%** coverage of the rows that
+matter, and the true per-station figure is therefore roughly 7% above the
+measured 86 rather than "plausibly a lot" above it.
+
+**The normalisation that matters is one line, and it is not street
+normalisation.** A raw case-and-whitespace join matches only 48.1%, because the
+register writes the unit into the address (`280 SPADINA AVE, #308`, `1835
+EGLINTON AVE W, 2ND FLR`) and the address repository does not carry units.
+Dropping everything from the first comma takes it to 73.1% overall and 92.8% on
+storefronts. The brief's "with no street normalisation" was describing the
+wrong obstacle.
+
+**And the bias itself: NOT material.** Checked on the axes that would hurt:
+
+- **By ward** — the axis that would distort the map's spatial pattern, which is
+  the thing this project actually shows. Across the 26 wards with ≥200
+  storefront rows the match rate runs **73.6% to 97.8%, a 1.3x spread, standard
+  deviation 5.4 points**. Mild. *A first pass on the broken 48.1% join showed a
+  12x spread and looked disqualifying — it was an artefact of the join, not a
+  property of the data, and it is recorded here because it nearly became a
+  finding.*
+- **By issue year** — flat, 48–55% across 2017–2026 on the raw join, with no
+  trend, so no bias toward older or newer registrations.
+- **By category** — biased, and *in Toronto's favour*: the misses concentrate in
+  the non-storefront categories (`MASTER PLUMBER` 0%, `DRIVING INSTRUCTOR` 0%,
+  `TAXICAB OWNER` 11.5%), exactly as a person-licence with no premises should.
+
+**The residual 7.2% is benign and disclosable.** The 5,800 unmatched storefront
+rows concentrate on a handful of plaza and mall addresses that the address
+repository does not carry as a single string — `1571 SANDHURST CIR` (137 rows),
+`8 WESTMORE DR` (95), `45 FOUR WINDS DR` (52). That under-counts a few malls,
+not a district.
+
+**So Q1 is closed and it does NOT argue against building Toronto.** What
+remains is the two-bucket problem, and the category distribution below makes it
+worse than the brief did.
 
 ## Why it is structurally the weakest, independent of the number
 
@@ -125,6 +172,23 @@ and Philadelphia's had no personal-services source at any level of government.
 That is a coverage problem no amount of geocoding fixes, and it is why a
 reader would misread the map as a fact about Toronto's high streets rather than
 about its licensing.
+
+**MEASURED 2026-09-21, and it is starker than "two-bucket" conveys.** Of the
+80,110 storefront-relevant licence rows across 92 categories:
+
+| bucket | rows | share | what fills it |
+|---|---|---|---|
+| Food service | 62,901 | **78.5%** | `EATING OR DRINKING ESTABLISHMENT` 36,615, `TAKE-OUT OR RETAIL FOOD ESTABLISHMENT` 26,286 |
+| Personal services | 15,403 | 19.2% | `PERSONAL SERVICES SETTINGS` 11,105, `LAUNDRY PREMISES` 2,247, `HOLISTIC CENTRE` 2,051 |
+| **Retail** | **1,806** | **2.3%** | `SECOND HAND SHOP`, and that is the whole of it |
+
+**Retail is not thin here, it is absent.** One category, 2.3% of the
+storefronts, and it is second-hand goods — no grocer, no clothing, no
+pharmacy, no hardware. A Toronto map would be a **food map with a
+personal-services layer**, and the Retail legend entry would be close to empty
+across 111 stations. New York's page had to explain a thin Retail bucket; this
+is a further step again, and Boston — the existing comparison — at least has
+package stores and cannabis retail in its Retail bucket.
 
 **This, not the density, is the argument against building it** — and after
 the denominator correction it is the ONLY argument left. A city with 111
@@ -219,8 +283,9 @@ The most expensive of the six, and the reasons compound:
 
 - **A geocoding step** against the One Address Repository, plus a real answer
   on whether the unmatched 29% are biased.
-- **A taxonomy module** for its own licence categories (**ASSERTED: 72**,
-  recorded in `PLAN.md` but not re-measured in the 2026-09-21 pass).
+- **A taxonomy module** for its own licence categories — **MEASURED 2026-09-21:
+  92, not the 72 asserted** in `PLAN.md`. A fourth brief claim corrected by
+  measuring it.
 - **A missing-bucket disclosure** on the city page and in
   `docs/excluded_categories.md`, under what is *missing* rather than
   *excluded* — Boston and New York are the models.
@@ -347,8 +412,11 @@ the owner's call.
 
 ## Open questions
 
-1. **Are the 29% of unmatched addresses biased?** The one question that could
-   move Toronto up the ranking. Everything else is cost.
+1. ~~**Are the 29% of unmatched addresses biased?**~~ — **ANSWERED
+   2026-09-21, see above.** No, not materially: storefront coverage is 92.8%
+   (the 71.4% counted person-licences with no premises), the ward spread is
+   1.3x, and there is no temporal bias. It does not argue against building
+   Toronto.
 2. **Which `route_type 0` routes are LRT**, and does the map include
    streetcars?
 3. ~~**The real station count** from the agency feed~~ — **answered twice**:

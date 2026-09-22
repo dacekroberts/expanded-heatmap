@@ -840,10 +840,16 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   figures are **148 platforms / 72 stations** on the subway and **234 / 111**
   with the two LRT lines, which agree with the operator's own counts (38 + 31 +
   5 less 3 interchanges = 71) where 77 and 118 agree with nothing. So the
-  corrected order is **Vancouver 206, Calgary 137, Montreal 151, Surrey 135,
-  Toronto 86, Edmonton 79**. It does NOT change which city to build next: Toronto is a two-bucket
-  city with no general-retail source, which is a coverage problem no
-  denominator fixes. See `docs/build_briefs/toronto.md`. Published inflation ran
+  corrected order is **Vancouver 206, Montreal 151, Calgary 137, Surrey 135,
+  Toronto 86, Edmonton 79**. **Toronto's open question 1 is also closed**
+  (2026-09-21): the unmatched addresses are NOT materially biased - storefront
+  coverage is **92.8%**, not the 71.4% its brief quoted, because that figure
+  counted person-licences with no premises address to match; the ward spread is
+  1.3x and there is no temporal bias. Its category count is **92, not the 72
+  recorded here**. It does NOT change which city to build next: Toronto is a
+  two-bucket city with no general-retail source - **measured, Retail is 2.3% of
+  its storefronts and consists of the single category `SECOND HAND SHOP`** -
+  which is a coverage problem no denominator fixes. See `docs/build_briefs/toronto.md`. Published inflation ran
   1.0x-4.2x and was NOT uniform, so **Montreal and Surrey swap** and
   Edmonton/Calgary become a tie. Toronto stays last. **Next build: MONTREAL** -
   densest remaining, cheapest (SCIAN is NAICS, so no taxonomy module at all),

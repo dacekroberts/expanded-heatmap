@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**101 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**102 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-21**
 
+- [Toronto's open question 1 closed: the 71.4% was the wrong denominator](#2026-09-21---torontos-open-question-1-closed-the-714-was-the-wrong-denominator)
 - [DECISIONS.md got a generated index, because it is 100 entries long](#2026-09-21---decisionsmd-got-a-generated-index-because-it-is-100-entries-long)
 - [Briefs are executable now, and the first run corrected Toronto again](#2026-09-21---briefs-are-executable-now-and-the-first-run-corrected-toronto-again)
 - [Edmonton built: 30 stations, not 33, because three of them are garages](#2026-09-21---edmonton-built-30-stations-not-33-because-three-of-them-are-garages)
@@ -134,6 +135,62 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-21 - Toronto's open question 1 closed: the 71.4% was the wrong denominator
+
+- **Answered the question Toronto's brief called "the one question that could
+  move Toronto up the ranking", and the answer is that the question rested on a
+  misleading number.** The brief's stated soft spot was that its figure "rests
+  on geocoding 159,872 licence rows against the City's own address repository
+  at a 71.4% exact-match rate", with the unmatched 29% ASSERTED to be evenly
+  distributed. **More than half of those 159,872 rows are not storefronts** -
+  tow-truck owners, master plumbers, taxicab owners, driving instructors:
+  licences held by a person with no premises address to match. Measured apart:
+  **storefront categories 92.8% (80,110 rows), everything else 53.4%, all rows
+  73.1%.** So Toronto's density is not a floor resting on 71.4%; it rests on
+  92.8% coverage of the rows a map uses, and the true per-station figure is
+  roughly 7% above the measured 86. **The sixth denominator error in this
+  project, and the first found inside a brief's own statement of its weakest
+  point.**
+
+- **The normalisation that mattered was not the one the brief named.** It said
+  "with no street normalisation", implying abbreviation and suffix handling was
+  the obstacle. It is not: a raw case-and-whitespace join matches **48.1%**,
+  because the register writes the unit into the address line (`280 SPADINA AVE,
+  #308`, `1835 EGLINTON AVE W, 2ND FLR`, 20,091 such rows) and the address
+  repository carries no units. **Dropping everything from the first comma** -
+  one line - takes it to 73.1% overall and 92.8% on storefronts, reproducing
+  the brief's 71.4% and explaining it at the same time.
+
+- **And a near-miss worth recording, because it nearly became a finding.** The
+  first pass, on the broken 48.1% join, showed a **12x ward-level spread** in
+  match rate (7.1% to 84.9%) and read as disqualifying: a map whose whole
+  purpose is spatial pattern cannot survive under-sampling whole districts
+  six-fold. It was an artefact of the join. With the unit stripped, the 26
+  wards holding at least 200 storefront rows run **73.6% to 97.8% - a 1.3x
+  spread, standard deviation 5.4 points.** Mild. Issue year is flat across
+  2017-2026 with no trend, and the category bias runs in Toronto's favour. The
+  residual 5,800 unmatched storefront rows concentrate on a few plaza addresses
+  (`1571 SANDHURST CIR` 137 rows, `8 WESTMORE DR` 95) - a handful of
+  under-counted malls, not a district. **The lesson is the one this project
+  keeps relearning from the other side: a measurement taken through a broken
+  instrument is not evidence, and the check is whether the instrument
+  reproduces a known number first.**
+
+- **Toronto's licence vocabulary is 92 categories, not the 72 asserted** in
+  `PLAN.md` and its brief - the fourth of its claims corrected by measuring it.
+
+- **What the measurement did NOT rescue is the two-bucket problem, and it made
+  it worse.** Of the 80,110 storefront-relevant rows: **Food service 62,901
+  (78.5%)**, Personal services 15,403 (19.2%), and **Retail 1,806 (2.3%),
+  which is `SECOND HAND SHOP` and nothing else.** No grocer, no clothing, no
+  pharmacy, no hardware - Toronto licenses none of them. So a Toronto map is a
+  food map with a personal-services layer and an all-but-empty Retail legend
+  entry across 111 stations. New York's page explains a thin Retail bucket and
+  Boston's at least has package stores and cannabis retail; this is a further
+  step again. **Whether that is worth publishing is the owner's call** (the
+  brief's open question 5), and it is now the only argument left against
+  building the city - the density and the geocoding both came out fine.
 
 ### 2026-09-21 - DECISIONS.md got a generated index, because it is 100 entries long
 
