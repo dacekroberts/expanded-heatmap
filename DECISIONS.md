@@ -14,6 +14,94 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Three presentation changes, site-wide: legend affordance, magenta food, orange heat
+
+- **The owner's calls, batched into ONE regeneration** because each of the
+  three lives in shared code and each would otherwise re-render all eleven
+  cities on its own. Only `heatmap.html` changed; every city's
+  `excluded_stations.csv` and `station_municipalities.csv` came back
+  **identical**, so no data moved - this is presentation only.
+
+- **1. The legend header now says it is a control.** It reads "Legend ... ▾
+  Hide", becoming "▸ Show" when collapsed. A native `<summary>` triangle DID
+  already render - `list-style-type` computes to `disclosure-open` - but it is
+  a ~6 px glyph in the same colour and weight as the text beside it and reads
+  as punctuation on a dense map. A chevron alone would also have been
+  ambiguous here: the panel is anchored bottom-right, so its box grows UPWARD
+  while its content flows DOWNWARD, and no arrow direction is honestly
+  self-explanatory. Pairing it with a verb is.
+  - **Laid out so the marker sits INSIDE the existing width**, as a flex row
+    with `space-between`. That was the constraint worth finding: `_layout_labels`
+    models the open legend as a hardcoded **274 px** obstacle, and a wider
+    panel would start covering line labels it currently clears. Verified after
+    the change that the open width is still exactly 274 px; collapsed it is
+    130x37.
+  - **No script**: still the browser's own `<details>` behaviour, so
+    `scripts/check_map_labels.js` keeps working, and the marker uses
+    `currentColor` so it follows `.dark-base .map-legend`'s own colour without
+    a dark-mode rule (measured: `rgb(230,237,247)` dark, `rgb(51,51,51)` light).
+  - **One implementation trap, recorded because it fails loudly at render
+    time:** `LEGEND_HTML` goes through `.format()`, so a CSS brace inside it is
+    read as a replacement field and raises `KeyError` on the first selector.
+    Concatenating a CSS constant into the template does NOT help - the braces
+    are still there when `.format()` runs. The CSS is prepended INSIDE
+    `build_legend`, after formatting.
+
+- **2. Food service moves from orange `#eb6834` to magenta `#C2185B`, and this
+  fixed a LIVE collision rather than a predicted one.** The old orange sat
+  **3.1 degrees of hue and Delta-E 9.5 from the existing red ramp's midpoint**,
+  so a food-service pin was already nearly the same colour as the wash it was
+  drawn on. Against the new ramp it would have been 10.7. The magenta sits
+  **48.2 degrees off** the new midpoint at **Delta-E 49.6** - a 4.6x
+  separation, and it confirms the source's "47 degrees" figure.
+  - The three buckets stay distinct from each other: minimum pairwise Delta-E
+    **84**, down from 94, that pair being Retail's blue against the magenta.
+  - It reads strongly on both grounds (83.8 light, 73.8 dark). Pin fills are
+    **not** filtered in dark mode - the dark CSS touches the tile pane and
+    paths with `stroke-width="4"`, not circle markers - so only the basemap
+    moves.
+
+- **3. The heat ramp moves from ColorBrewer Reds to a single-hue burnt
+  orange**, adopted from the sister project that originated this map's
+  schematic. `HEAT_RADIUS`, `HEAT_BLUR` and `HEAT_MIN_OPACITY` **already
+  matched that source exactly** (8 / 10 / 0.35), so only the five stops
+  changed. The three non-obvious reasons are carried into `map_common.py`,
+  since none is recoverable from a hex list: single-hue is deliberate because
+  Leaflet.heat's blue-cyan-lime-yellow-red default reads as COLD for a density
+  layer; the floor is over-saturated on purpose because Leaflet.heat multiplies
+  opacity by density and so fades the palest stop twice; and radius/blur are
+  pixel-space values with no statistical meaning, tuned for a city-wide view.
+
+- **A SINGLE-HUE RAMP ALWAYS COLLIDES WITH LINES OF THAT HUE, and the useful
+  finding is that this collision got SMALLER rather than appearing.** Every
+  drawn line colour was measured against both ramps, in dark mode with
+  `map_common`'s own stroke filter applied:
+
+      | lines within Delta-E 25 of a ramp stop | old red ramp | new orange |
+      |                                        |    8 of 36   |   5 of 36  |
+
+  Seven line colours improve and three worsen. The wins are the ones that
+  mattered - **Boston's Red Line `#DA291C` goes 6.2 -> 24.2**, D.C.'s Red
+  `#C80F2D` 17.3 -> 42.1, D.C.'s Silver `#919D9D` 18.8 -> 51.5, New York's two
+  greys 16.0/21.9 -> 49.6/52.0. The losses are the agencies' orange lines:
+  **Montréal's Ligne 2 Orange `#D95700` 32.5 -> 13.5**, New York's brown
+  `#8E5C33` 18.4 -> 14.6, Philadelphia's `#F26100` 39.4 -> 21.9.
+- **The residual, recorded rather than engineered around** (as D.C.'s Silver
+  Line was): **Montréal's Ligne 2 is the least crisp line on the site** where
+  it crosses the dense centre. Confirmed by eye on the rendered map, not just
+  by arithmetic - it stays traceable, it has a permanent label, and the heat
+  layer can be switched off, but it is the one place this change is worse than
+  what it replaced.
+- **The dark-basemap question was raised, measured and CLOSED by looking.**
+  The source's own note says its over-saturated floor is a correction for
+  LIGHT tiles and that a dark basemap wants the opposite; this site defaults
+  to dark, where `#FBB878` measures Delta-E 85.3 against the dark land fill
+  against 44.8 on light - about **1.9x more prominent in the mode readers see
+  first**. Left as the source has it: on the rendered dark map the glow
+  concentrates along the corridors and streets, parks and water still read
+  through, so it does not wash out. Recorded so the next person does not
+  re-derive the concern from the comment alone.
+
 ### 2026-09-21 - Montreal built: 17,231 storefronts, and the cheapest build so far
 
 - **The eleventh city, the second outside the US, and the first whose source is

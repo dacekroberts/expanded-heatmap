@@ -23,7 +23,20 @@ into buckets.
 # over this fixed set.
 CATEGORY_BUCKETS = [
     ("Retail", "#2a78d6"),
-    ("Food service", "#eb6834"),
+    # MAGENTA, NOT ORANGE, and it is the heat layer that forced it. Changed
+    # 2026-09-21 together with map_common.HEAT_GRADIENT, because the two are
+    # one decision: the old `#eb6834` sat **3.1 degrees of hue and Delta-E 9.5**
+    # from the heat ramp's own midpoint, so a food-service pin was already
+    # nearly the same colour as the wash it was drawn on - a live problem, not
+    # a predicted one. Against the new burnt-orange ramp it would have been
+    # Delta-E 10.7.
+    #
+    # `#C2185B` sits 48.2 degrees off the new ramp's midpoint and Delta-E 49.6
+    # from its nearest stop: a 4.6x separation. The three buckets stay distinct
+    # from each other (minimum pairwise Delta-E 84, down from 94 - Retail's
+    # blue against this magenta), and it reads strongly on both basemaps
+    # (83.8 light, 73.8 dark) since pin fills are NOT filtered in dark mode.
+    ("Food service", "#C2185B"),
     ("Personal services", "#1baf7a"),
 ]
 

@@ -45,7 +45,34 @@ COORD_DP = 6
 HEAT_RADIUS = 8
 HEAT_BLUR = 10
 HEAT_MIN_OPACITY = 0.35
-HEAT_GRADIENT = {0.3: "#fee0d2", 0.5: "#fc9272", 0.7: "#fb6a4a", 0.85: "#de2d26", 1.0: "#a50f15"}
+# A SINGLE-HUE burnt-orange ramp, adopted 2026-09-21 from the sister project
+# that originated this map's schematic. It replaces a ColorBrewer Reds ramp,
+# and the change is inseparable from Food service moving to magenta (see
+# pipeline/taxonomies/CATEGORY_BUCKETS): the old red ramp sat 3.1 degrees of
+# hue from the old food orange, so pins and wash were nearly the same colour.
+#
+# Three things the hex list alone does not say, carried over from the source:
+#
+#   1. SINGLE-HUE IS THE POINT. Leaflet.heat's default runs blue -> cyan ->
+#      lime -> yellow -> red, and at realistic densities most of a map sits in
+#      blue/cyan, which reads as COLD for a density layer. One hue getting
+#      stronger reads as one quantity increasing.
+#   2. THE FLOOR IS DELIBERATELY MORE SATURATED THAN IT LOOKS LIKE IT SHOULD
+#      BE. Leaflet.heat multiplies opacity by density, so the palest stop is
+#      faded twice; the source's first attempt used #FDD0A2 and it vanished on
+#      light OSM tiles. #FBB878 is the corrected floor. **Its own note says a
+#      dark basemap wants the OPPOSITE correction, and this site defaults to
+#      dark** - measured here, #FBB878 scores Delta-E 44.8 against the light
+#      land fill and 85.3 against the dark one, so the floor is ~1.9x more
+#      prominent in the mode readers see first. Left as the source has it
+#      rather than re-tuned blind; revisit by eye, not by arithmetic.
+#   3. RADIUS AND BLUR ARE PIXEL-SPACE AND ZOOM-SPECIFIC, with no statistical
+#      meaning. HEAT_RADIUS/HEAT_BLUR above already match the source exactly
+#      (8/10, against Leaflet's 12/18 which collapsed into one wash), so
+#      nothing there had to change - but they are tuned for a city-wide view,
+#      and a city opening at a different zoom should re-tune by eye.
+HEAT_GRADIENT = {0.3: "#FBB878", 0.5: "#F97316", 0.7: "#DE6412",
+                 0.85: "#C0570F", 1.0: "#8F3A05"}
 
 # Dark Mode toggle: a plain fixed-position button, NOT a Leaflet control. The
 # map is a fixed 1000 px wide and Streamlit's content area is often narrower,
@@ -269,6 +296,43 @@ assert "@@" not in THEME_TOGGLE_HTML, "unresolved placeholder in THEME_TOGGLE_HT
 # A native <details>/<summary>, so the legend collapses and expands with a
 # click and needs no script. Open by default; collapsed it shrinks to a small
 # "Legend" tab and stops covering the map.
+# KEPT OUT OF LEGEND_HTML ON PURPOSE: that string goes through .format(), so
+# every CSS brace in it would have to be doubled, and a single missed one is a
+# KeyError at render time rather than a visible mistake. Concatenated instead.
+_LEGEND_CSS = """
+<style>
+/* THE HEADER IS THE CONTROL, AND IT HAS TO SAY SO. A native <summary> does
+   render a disclosure triangle - `list-style-type` computes to
+   `disclosure-open` here - but it is a ~6 px glyph in the same colour and
+   weight as the text beside it, and on a dense map it reads as punctuation
+   rather than as something to click. Replaced with an explicit chevron plus a
+   VERB, because the chevron alone is ambiguous: this panel is anchored
+   bottom-right, so its box grows upward while its content flows downward, and
+   no arrow direction is honestly self-explanatory. "Hide"/"Show" is.
+
+   Laid out as a flex row with space-between, which keeps the marker INSIDE the
+   legend's existing width rather than extending it. That matters: the label
+   layout in _layout_labels models the open legend as a hardcoded 274 px
+   obstacle, and a wider panel would start covering line labels it currently
+   clears. Verified after the change that the open width is unchanged.
+
+   No script: the collapse is still the browser's own <details> behaviour, so
+   this is presentation only and scripts/check_map_labels.js keeps working. The
+   colour is `currentColor`, so it follows .dark-base .map-legend's own
+   `color` and needs no dark-mode rule of its own. */
+.map-legend > summary { list-style: none; display: flex;
+    align-items: baseline; justify-content: space-between; gap: 12px; }
+.map-legend > summary::-webkit-details-marker { display: none; }
+.map-legend > summary::after {
+    content: "\\25BE\\00A0Hide"; font: 600 11px sans-serif;
+    opacity: 0.7; white-space: nowrap; }
+.map-legend:not([open]) > summary::after { content: "\\25B8\\00A0Show"; }
+.map-legend > summary:hover::after { opacity: 1; text-decoration: underline; }
+.map-legend > summary:focus-visible { outline: 2px solid currentColor;
+    outline-offset: 2px; }
+</style>
+"""
+
 LEGEND_HTML = """
 <details open class="map-legend" style="
     position: fixed; bottom: 24px; right: 24px; z-index: 9999;
@@ -892,7 +956,10 @@ def build_legend(bucket_colors, legend_label, lines):
     bucket_colors: [(bucket name, color)]; legend_label: bucket -> text;
     lines: {key: (coords, color, label, end)}.
     """
-    return LEGEND_HTML.format(
+    # _LEGEND_CSS is prepended AFTER formatting, not concatenated into
+    # LEGEND_HTML: .format() would otherwise try to read every CSS brace as a
+    # replacement field and raise KeyError on the first selector.
+    return _LEGEND_CSS + LEGEND_HTML.format(
         category_rows="".join(
             LEGEND_ROW.format(color=color, label=html.escape(legend_label(name)))
             for name, color in bucket_colors
