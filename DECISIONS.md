@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**137 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**138 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Category B, first pass: Madrid was filed under OpenStreetMap, and three counts had drifted](#2026-09-22---category-b-first-pass-madrid-was-filed-under-openstreetmap-and-three-counts-had-drifted)
 - [The stale-prose check found three notices in the deploy gate marked undisplayed that were displayed](#2026-09-22---the-stale-prose-check-found-three-notices-in-the-deploy-gate-marked-undisplayed-that-were-displayed)
 - [A third session role: auditing what the forward-facing sessions leave behind](#2026-09-22---a-third-session-role-auditing-what-the-forward-facing-sessions-leave-behind)
 - [Barcelona's four owner decisions settled, and its brief's OSM breakdown corrected](#2026-09-22---barcelonas-four-owner-decisions-settled-and-its-briefs-osm-breakdown-corrected)
@@ -173,6 +174,54 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Category B, first pass: Madrid was filed under OpenStreetMap, and three counts had drifted
+
+- **Started working the `check_stale_claims.py` category-B list.**
+  `docs/data_sources.md` went from 16 flagged counts to 11; the total from 74
+  to 69. Most of the remainder are NOT defects and should stay: "All three
+  buckets" is a fixed concept of this project, "the six pre-1998
+  municipalities" is a historical fact about Toronto's amalgamation, and "all
+  five boroughs = the city" will be true as long as New York has five. **The
+  report is a review list, not a defect list**, and saying which entries were
+  read and kept is as much the output as the edits.
+
+- **The list caught an error this session had introduced hours earlier.**
+  Madrid's transit row was anchored after Guadalajara's and so landed inside
+  `### Rail geometry from OpenStreetMap`, a subsection whose prose explains
+  ODbL, notice 1 and the absence of an agency holding the licence - none of
+  which is true of Madrid, whose rail is CRTM's own ArcGIS service under CRTM's
+  own licence. The heading is now `### Rail geometry that is not a GTFS feed`
+  and the prose separates the two reasons: OSM because **no usable feed
+  exists**, Madrid because a feed exists, downloads cleanly and is **rejected
+  on a licence currency clause**. An absence and a consequence are not the same
+  case and were being filed as one.
+
+- **The parent section's new intro was also wrong, and it was mine.** It said
+  "three of the rail sources here are not feeds at all", describing a table in
+  which all fourteen rows are GTFS - the non-feed rows live in the subsection,
+  where the Mexico build had deliberately put them. Rewritten to say the first
+  table is all GTFS and the subsection is not. The rename of the parent heading
+  to `## Transit feeds` stands: a parent that says GTFS while holding a
+  not-GTFS subsection is the mislabelling that started this.
+
+- **Three counts deleted rather than corrected**, per the rule this category
+  exists to enforce. "**All seven** of these agreements are stored locally" -
+  it had been corrected from six to seven by another session while the
+  directory grew past twenty, so it now points at that directory's README as
+  the list and carries no number. "Affects **six of the nine built cities**" -
+  nine was the US-only era; the denominator is gone and the cities are simply
+  named. "**All five cities** can now be rebuilt from scratch from this
+  document alone" - written when there were five, and now the claim is made
+  without a number and attributed to `check_provenance.py`, which actually
+  asserts it.
+
+- **A false-positive class worth knowing: multi-line quotations.**
+  `QUOTED_RE` matches within a single line, so a correction that quotes the
+  wrong sentence it replaces across a line break still reports. Line 782 is
+  this session's own correction of the "four of the eight registries" claim and
+  will keep appearing. Not worth fixing in the regex; worth knowing before
+  chasing it.
 
 ### 2026-09-22 - The stale-prose check found three notices in the deploy gate marked undisplayed that were displayed
 

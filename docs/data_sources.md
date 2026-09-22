@@ -406,12 +406,12 @@ three ways at once.
 
 ## Transit feeds
 
-**Titled “Transit feeds (GTFS)” until 2026-09-22, when it stopped being
-true.** Three of the rail sources here are not feeds at all — Mexico City's and
-Guadalajara's come from OpenStreetMap via Overpass, Madrid's from CRTM's ArcGIS
-feature services — and in Madrid's case that is a licence consequence rather
-than a preference. Most rows are still GTFS; the heading no longer claims all
-of them are.
+**Titled “Transit feeds (GTFS)” until 2026-09-22.** The table immediately below
+is still all GTFS and always was; what changed is that the section now also
+holds a subsection for rail that is **not** a feed, and a parent heading
+claiming GTFS would have misdescribed its own contents. Every row in the first
+table is a feed; everything under “Rail geometry that is not a GTFS feed” is
+not.
 
 | City | Agency / system | Endpoint | Retrieved | Note |
 |---|---|---|---|---|
@@ -430,18 +430,31 @@ of them are.
 | Montréal | STM Métro (4 lines) | `https://www.stm.info/sites/default/files/gtfs/gtfs_stm.zip` | 2026-09-21 | **STM's own host, and this city is the proof that it matters.** Measured 2026-09-21: the agency feed was valid to 20261025 (+34 days) while the Mobility Database mirror (id 2126) was **29 days EXPIRED**. The station counts happened to agree — but Toronto's mirror hid an entire mode, so a build never takes the mirror. It declares a validity window, so the `feed_end_date` guard applies as it does for D.C. and Vancouver. Routes match on exact `route_id` — `1` Verte, `2` Orange, `4` Jaune, `5` Bleue — and unlike Vancouver there is nothing to exclude: the STM runs the Métro and buses only, with no commuter-rail or ferry route in the feed. 68 parent stations, 64 of them on the island. The four that are not (Cartier, De la Concorde and Montmorency in Laval, Longueuil-Université de Sherbrooke in Longueuil) are dropped by the SPATIAL filter, never by name — but STM also marks them structurally, appending ` -Zone B` (its fare zone) to exactly the off-island set, and step 1 asserts the two agree so a silent change in either is caught |
 | Calgary | Calgary Transit CTrain (Red Line, Blue Line) | `https://data.calgary.ca/download/npk7-z3bj/application%2Fx-zip-compressed` | 2026-09-21 | Calgary Transit's own feed, not the Mobility Database mirror; verified 2026-09-21 to reproduce the mirror's rail half exactly (2 `route_type 0` routes, 83 served stops, 83 distinct names). **`route_id` EMBEDS A FEED VERSION and no other city here does that** — the mirror gives `201-20780`, the agency feed `201-20786` — so routes match on `route_short_name` (`201`, `202`); a config pinning the id matches nothing after the next release, and matches it silently. The other 258 routes are buses. **NEITHER Calgary copy carries `feed_info.txt`**, so unlike D.C., Montréal and Vancouver there is no validity window and the expiry guard cannot be written; staleness is judged from the Socrata resource's own `updatedAt`, which `fetch_sources.py` prints. **The feed publishes 83 PLATFORMS, not 83 stations, and the whole Canada ranking recorded the platform count.** There is no `parent_station` column and every stop name carries a direction prefix, so each name is unique and nothing looks wrong; they collapse to the CTrain's real 45. What caught it was the spacing — an uncollapsed nearest-neighbour median of 17 m. Collapse by normalised NAME, never by proximity: 7 Avenue downtown is a ONE-WAY COUPLET, so 7 of the 45 stations legitimately have one platform and `EB 3 Street SW` and `WB 4 Street SW` are different places on different streets |
 
-### Rail geometry from OpenStreetMap — the two cities that are not GTFS
+### Rail geometry that is not a GTFS feed
 
-**The table above is titled GTFS because that is how fourteen of sixteen cities
-get their rail. These two do not, and they are kept OUT of that table rather
-than filed under a heading that would misdescribe them.** An OSM source has no
-`feed_info.txt`, no validity window, no `route_id` and no agency holding the
-licence — four of the five things every note in that table turns on — so a row
-there would have meant four empty columns and a licence pointing at
-OpenStreetMap instead of at an operator. Same section, its own subsection and
-its own columns. Both are **ODbL 1.0**, covered by **notice 1**, which since
-these two builds covers *data* and not only basemap tiles. See
-`.claude/skills/osm-rail/` before adding a third.
+**These cities are kept OUT of the feed table rather than filed under a
+heading that would misdescribe them**, because a non-feed source has no
+`feed_info.txt`, no validity window and no `route_id` — three of the things
+every note in that table turns on — so a row there would have meant empty
+columns. Same section, its own subsection, its own columns.
+
+**Two different reasons land here, and they are not the same case.**
+
+- **Mexico City and Guadalajara come from OpenStreetMap via Overpass**, because
+  no usable feed exists. An OSM source also has no agency holding the licence:
+  both are **ODbL 1.0**, covered by **notice 1**, which since these builds
+  covers *data* and not only basemap tiles. See `.claude/skills/osm-rail/`
+  before adding another.
+- **Madrid comes from CRTM's own ArcGIS feature services**, and there the
+  operator's feed exists and downloads cleanly — it is rejected because CRTM's
+  licence obliges a reuser to keep displayed information *“siempre
+  actualizada”* and that feed has not been refreshed since 2025-05-30. A
+  licence consequence rather than an absence, and the licence is CRTM's own,
+  not OpenStreetMap's. **Madrid sat under the OpenStreetMap heading for part of
+  2026-09-22**, which was wrong in the way this subsection exists to prevent.
+
+Madrid's row is here although the city is not yet wired into `app/cities.py`;
+its pipeline is built and its wiring waits on Barcelona.
 
 | City | System / operator | Endpoint | Retrieved | Note |
 |---|---|---|---|---|
@@ -820,9 +833,10 @@ one.
 | **Edmonton Transit Service** (**BUILT 2026-09-21**) | Permitted under the City's Open Data Terms of Use | **Required — but NOT as a credit**, which is the trap. Notice 15 | **Recorded as needing nothing, and that was wrong.** The Terms say credit is "not required" but "encouraged", and both the Canada profile and `docs/build_briefs/edmonton.md` concluded from that sentence that Edmonton had no display obligation. The obligation is in a **different clause and is not about credit**: distributing the datasets "in original or modified form" requires including "a copy of, or this Uniform Resource Locator (URL) for, these Terms of Use" and ensuring downstream users are bound "without introducing any further restrictions of any kind". `outputs/edmonton/` is that dataset in modified form, so it engages. **Unlike the four municipal OGLs this does NOT terminate automatically** — the City may cancel access "at any time for any reason, in its sole discretion". The portal's own copy is now behind a sign-in; the PDF in `docs/licenses/` is the readable one |
 | **TTC** (Toronto — **BUILT 2026-09-21**) | Permitted: the Open Government Licence – Toronto grants a "worldwide, royalty-free, perpetual, non-exclusive licence to use the Information, including for commercial purposes", free to "Copy, modify, publish, translate, adapt, distribute or otherwise use" | **Required, in specific wording** — notice 16, and **one notice covers both** the MLS business register and the TTC feed | Both are City of Toronto CKAN resources under the same licence. **Both declare "License not specified" at dataset level**, which is exactly the case the standing rule is for — a missing licence field means "go read the terms", not "no restrictions" — so the text was captured from `open.toronto.ca/open-data-licence/` rather than read from a field. **Terminates automatically on breach.** No `feed_info.txt`, so no licence field and no validity window |
 
-**All seven of these agreements are stored locally**, in
+**The agreements quoted above are stored locally**, in
 [`licenses/`](licenses/) — source URL, retrieval date and SHA-256 for each are
-in that directory's `README.md`. Every one of them is revocable and amendable
+in that directory's `README.md`, **which is the list**; a count kept here said
+“six”, then “seven”, while the directory grew past twenty. Every one of them is revocable and amendable
 without notice, so the clauses quoted above are checkable against the text that
 was actually agreed to rather than against a URL that may have moved on.
 
@@ -1509,7 +1523,8 @@ pages' prose: naming each business registry's publishing agency.
    to read, so settling it may mean asking the County rather than reading
    anything.
 5c. **Decide the agency-branding question — official route colours AND the
-   line names beside them.** Affects **six of the nine built cities**: San
+   line names beside them.** Affects the cities whose agency prescribes a
+   palette: San
    Diego (MTS), Los Angeles (LA Metro), Chicago (CTA), New York (MTA),
    Philadelphia (SEPTA) and — since 2026-09-21 — Washington D.C. (WMATA),
    whose wording is the one that names "confusingly similar variants". San Francisco and Miami
@@ -1851,8 +1866,10 @@ document nobody has opened, the other is a document that does not exist.
 
 - ~~San Francisco's boundary layer endpoint is not recorded anywhere.~~
   **Closed 2026-09-21:** identified as `wamw-vt4s` and confirmed byte-for-byte
-  against the raw file. All five cities can now be rebuilt from scratch from
-  this document alone.
+  against the raw file. Every built city can now be rebuilt from scratch from
+  this document alone, which `scripts/check_provenance.py` asserts rather than
+  this sentence claiming it — it said “all five cities” until 2026-09-22, long
+  after there were sixteen.
 - Retrieval dates marked ≈ are inferred from commit history, not recorded at
   download time. Dates for cities added from now on are recorded exactly.
 - Licences, as above — the one substantive gap left.
