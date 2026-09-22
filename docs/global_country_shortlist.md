@@ -370,19 +370,88 @@ its 94 stations. And the first Korean count was silently wrong because **XLSX
 omits empty cells**: appending cells in document order shifted dates into the
 address column. Read the cell `r` reference, not the order.
 
-## DEFINITIVE keep / discard, 2026-09-21
+## MASTER CITY LIST — refreshed 2026-09-22
 
-The screen is closed. This is the list to carry forward; everything else below
-it is the evidence trail.
+**14 built:** San Diego, San Francisco, Los Angeles, Chicago, New York,
+Philadelphia, Miami, Boston, Washington D.C., Vancouver (with Surrey),
+Montréal, Calgary, Edmonton, Toronto. Canada is finished.
 
-**Why trim rather than extend.** `docs/scaling_thresholds.md` puts the planning
-ceiling at **20–25 cities**, set by research cost and the macro map. Counting
-what is already specified — **12 built**, 3 Canadian remaining (Surrey,
-Edmonton, Toronto), Paris, Milan, Madrid, Barcelona, Seoul, Taipei,
-Guadalajara, São Paulo — gives **≈23**. **The ceiling is already met from the
-existing list**, so a further country probed is work against a constraint that
-already binds. The valuable work is finishing what is specified, not finding
-more.
+Candidates are banded by **what is actually stopping each one**, because that
+is the only thing that decides what to do next. Three of the four bands are not
+waiting on research at all.
+
+### Band A — screening COMPLETE, no evidential gap (4 cities)
+
+| City | Rail | Business | What remains |
+|---|---|---|---|
+| **Seoul** 🇰🇷 | 407 stations (1,099 national), WGS84, English, line geometry | **197,276 active premises**, 8 datasets, EPSG:5174 coords, status field, **KOGL Type 1** | Build work only: partial geocoding for 일반음식점 (90.7%) and a Korean-aware `check_personal_exposure.py` |
+| **Paris** 🇫🇷 | subway 16, tram 17, funicular 1 | SIRENE, établissement-level, geolocated, Licence Ouverte 2.0, non-diffusible masked at source | **An owner decision, not a probe:** a national register is not the per-city municipal shape this project is built around |
+| **Mexico City** 🇲🇽 | subway 12, via `mdb-latest` | DENUE, 6M+ establishments, coordinates, **SCIAN = NAICS**, INEGI licence cleared | Nothing |
+| **Guadalajara** 🇲🇽 | LRT 3, current feed | Same DENUE source | Nothing |
+
+**Mexico is the cheapest unbuilt country in the screen**: two cities, one
+national source, a cleared licence, coordinates included, and a taxonomy that
+may transfer from the US builds because SCIAN *is* NAICS.
+
+### Band B — one narrow question each
+
+| City | What is measured | The one question |
+|---|---|---|
+| **Barcelona** 🇪🇸 | 68,024-premises ground-floor census; FGC subway 4 + funicular 3 | **The licence.** One document, unread |
+| **Milan** 🇮🇹 | 28,131 premises, **99.1% with coordinates**, `insegna`, `codice_ateco`, floor area, **CC-BY**; subway 5, tram 17 | **Is Personal services reachable?** Two buckets confirmed, the third not |
+| **Madrid** 🇪🇸 | subway 13 | **Its own business source.** Barcelona's census is Barcelona's — Spain is bespoke per city, so Madrid's register is unprobed |
+| **Valencia** 🇪🇸 | subway 84, tram 37 — the largest Spanish system measured | Same: its own source, unprobed |
+| **Bilbao / Málaga** 🇪🇸 | rail confirmed | Same |
+| **Sevilla** 🇪🇸 | Metro de Sevilla exists at mdb 2781 | **Its mirror 404s.** One retry from the agency host |
+
+### Band C — viable, but each needs a GEOCODING LEG (build work, not screening)
+
+No further probing will change these. They are real candidates whose cost is
+known and front-loaded.
+
+| City / group | Business leg | Geocoding difficulty |
+|---|---|---|
+| **Taipei, Kaohsiung, Taoyuan, Taichung** 🇹🇼 | 商業登記: premises addresses, active/closed status, per-category assembly | Moderate — Taiwanese addresses are systematic; **NLSC's geocoder is keyless** |
+| **Oslo** 🇳🇴 | **152,060 Oslo sub-units**, `beliggenhetsadresse` (physical, not registered), NACE, open API no key | Moderate — Norwegian street addresses |
+| **São Paulo** 🇧🇷 | CNPJ, ~72M, trade name + address + CNAE | **Hard — at a scale past Toronto's** |
+| **Tokyo** + Osaka, Nagoya, Yokohama, Sapporo, Fukuoka, Kyoto, Kobe, Sendai, Hiroshima 🇯🇵 | Premises-level food permits, CC BY, national standard schema. **Two buckets — no general retail** | **Hardest met so far** — chōme/ban/gō block addressing, full-width numerals, and the `町字ID` join key is 0% populated |
+
+Japan is ten cities from one schema, which is the best marginal-city cost in
+the screen — against the worst geocoding problem and a two-bucket ceiling.
+**That trade is the single biggest open decision in this list**, and it is a
+judgment call rather than a probe.
+
+### Band D — genuinely unprobed, and cheap to settle
+
+This is the only band where more screening changes anything. See the corrected
+discard list below: **several of these were written off on a reason this
+document itself contradicts.**
+
+| City | Country status |
+|---|---|
+| **Dublin** 🇮🇪, **Zurich** 🇨🇭 | **Neither leg ever probed.** The two remaining blanks in Western Europe |
+| **Berlin**, **Hamburg** 🇩🇪 | Germany: "working route, **unprobed** register" — *not* a failure |
+| **Prague** 🇨🇿 | Czechia: working route, unprobed register |
+| **Singapore** 🇸🇬 | Working route, unprobed; suspected registered-office shaped, which would be fatal — one probe settles it |
+| **Naples**, **Messina** 🇮🇹 | **Italy PASSES.** Their own comune sources are simply unprobed |
+| **Stockholm** 🇸🇪, **Copenhagen** 🇩🇰, **Budapest** 🇭🇺, **Tallinn** 🇪🇪, **Zagreb** 🇭🇷, **Bucharest** 🇷🇴, **Sofia** 🇧🇬 | **Never reached.** Blocked, behind SPA front ends, or not attempted |
+| **Helsinki** 🇫🇮 | Measured: 89.8% carry street addresses, but composition is **53% real estate and 4.8% retail**. A real objection, unlike the n=1 one it replaced |
+| **Santiago** 🇨🇱 | National portal's copy is a decade stale; **municipal portals unprobed** |
+| **Hong Kong**, **Jakarta**, **Kuala Lumpur**, **Rio**, **Tel Aviv**, **Lima**, **Bogotá / Medellín** | Ruled out against a *transit catalogue*, which is the wrong source. **National mapping agency unprobed for all seven** |
+
+### The ceiling is no longer the binding constraint
+
+An earlier version of this section argued for trimming, on
+`docs/scaling_thresholds.md`'s 20–25 ceiling and a count of ≈23 already
+specified. **That reasoning is superseded.** Measuring the architecture showed
+RAM is not count-sensitive (no caching, no cross-city data, ceiling = New York
+at 7.43 MB ≈ 0.7% of 1 GB) and roughly **80 page slots** are free. The real
+limiter was the `drift_check` sweep, and `--jobs N` addressed it.
+
+So slots are not scarce — **verification is**. The constraint is research and
+build hours per city, which is exactly what the banding above measures. The
+conclusion flips: there is no reason to trim the list, and good reason to
+finish Band A first because it costs almost nothing per city.
 
 ### Tier 2c closed out, 2026-09-21
 
@@ -459,9 +528,12 @@ written, which is build work rather than screening; Toronto's is the precedent.
 
 ### KEEP
 
-**Build-ready, one named blocker each**
-France (Paris) · **Italy (Milan)** · Spain (6 metro cities) · South Korea
-(Seoul) · Taiwan (Taipei) · Mexico (Guadalajara) · Brazil (São Paulo)
+**Superseded 2026-09-22 by the MASTER CITY LIST above**, which bands these by
+what actually blocks each one rather than asserting one blocker apiece. Kept
+for the trail: France (Paris) · **Italy (Milan)** · Spain (6 metro cities) ·
+South Korea (Seoul) · Taiwan (Taipei) · Mexico (Guadalajara) · Brazil (São
+Paulo). Two rows of that line were wrong — **Seoul now has no blocker at all**,
+and **Mexico has two cities, not one**, since CDMX was unblocked.
 
 #### CORRECTION — Japan's coordinates, English names and closure dates are ALL EMPTY
 
@@ -619,10 +691,50 @@ Zealand** (licensing is not municipal)
 **Mode mismatch**
 Manila (rail typed as commuter rail) · Jakarta (MRT absent; portal refuses)
 
-**Rail measured, but the COUNTRY's business leg failed — so the city goes too**
-Vienna · Amsterdam/Rotterdam · Berlin · Hamburg · Stockholm · Lisbon · Athens ·
-Budapest · Naples · Messina · Hyderabad · Kochi · Cairo · Riga · Tallinn ·
-Zagreb · Bratislava · Poznań · Santiago
+**Rail measured, and the COUNTRY's business leg genuinely failed on evidence**
+Vienna (Austria: GISA strips the street address by design) ·
+Amsterdam/Rotterdam (Netherlands: aggregate) · Athens (Greece: sector-only) ·
+Lisbon (Portugal: specific negative) · Poznań (Poland: specific negative) ·
+Riga (Latvia: addressed but unclassified) · Bratislava (Slovakia: no activity
+classification at all) · Cairo (Egypt: no open-data infrastructure)
+
+#### CORRECTION 2026-09-22 — eleven cities were discarded on a reason this file contradicts
+
+**The two-tiers-at-once error repeated, and this time against the document's
+own sweep results.** The list above previously also contained Berlin, Hamburg,
+Stockholm, Budapest, Naples, Messina, Hyderabad, Kochi, Tallinn, Zagreb and
+Santiago, all under the heading "the COUNTRY's business leg failed". Checked
+against "What the sweep actually settled", higher in this same file:
+
+| City | Discard said | The sweep actually said |
+|---|---|---|
+| **Naples, Messina** | country's business leg failed | **"1 passes both legs: Italy, via Milan"** — Italy *passed* |
+| **Berlin, Hamburg** | country's business leg failed | "4 have a working route and an **unprobed** register: **Germany**, …" |
+| **Stockholm** | country's business leg failed | "9 were not reached at all: … **Sweden** …" |
+| **Budapest** | country's business leg failed | "… not reached at all: … **Hungary**" |
+| **Tallinn** | country's business leg failed | "… not reached at all: … **Estonia**" |
+| **Zagreb** | country's business leg failed | "… **Croatia** … behind SPA front ends" — not reached |
+| **Hyderabad, Kochi** | country's business leg failed | "… not reached at all: … **India**" |
+| **Santiago** | country's business leg failed | National copy a decade stale; **municipal portals never probed** |
+
+The sweep section even states the correct conclusion in bold — *"Nine of twenty
+were never actually probed, and that is the honest headline. None of them
+belongs in Tier 4 on this evidence"* — and the discard list was written as
+though it said the opposite.
+
+**All eleven move to Band D.** Naples and Messina are the sharpest: they were
+discarded for their country failing, in a file whose headline finding is that
+their country is the one country that passed.
+
+**Why this happened twice.** The first instance (Germany, Italy, Sweden,
+Portugal asserted out from a regional pattern while Berlin, Naples, Stockholm
+and Lisbon were being rail-confirmed into the tier above) was caught by
+rebuilding the table by hand. This one survived because the discard list is
+**prose in a different section from the evidence**, so nothing forced the two to
+agree. The lesson for `add-country` is already recorded as "a pattern justifies
+deprioritising, never ruling out" — what it needed was the mechanical half:
+**a discard list must name its evidence per row**, which the corrected list
+above now does, so a contradiction is visible rather than inferable.
 
 **No urban rail at all** (from the original 13-country and 87-country screens)
 Winnipeg, Hamilton, Québec City, Halifax, Mississauga, Ottawa · Lithuania,
@@ -669,7 +781,7 @@ than a fact to discover during one.
 |---|---|---|---|
 | **Spain** | **MEASURED** — Barcelona's 68,024-premises ground-floor census | **MEASURED** — Madrid subway 13, Barcelona FGC subway 4 + funicular 3, plus Bilbao, Málaga, Valencia, Sevilla: **six metro cities, more than any other candidate** | **The licence.** Open Data Barcelona's terms have not been read. That is the only gap, and it is one document |
 | **Mexico** | **MEASURED** — DENUE, 6M+ establishments, coordinates, **SCIAN = NAICS** so the taxonomy may transfer | **Partial** — Guadalajara LRT 3 measured and current; **Mexico City unreachable** (S3 403, city portal refuses connections) | A working CDMX feed. Viable through Guadalajara regardless |
-| **South Korea** ↑↑ | **MEASURED and the best found anywhere** — `상가(상권)정보`: active premises nationwide, 상호명 + 업종 + both address forms + **경도/위도**, KSIC 10/75/247, quarterly, CSV UTF-8, free, **이용허락범위 제한 없음 (no restriction)**. One register, all three buckets | **MEASURED** — national urban-railway **station** and **line** standard datasets on `data.go.kr` (15013205 / 15013203), plus Seoul's own lines 1–9 set updated 2026-09-22 (Open API, free key) | Download and verify the schema live; confirm the station datasets carry coordinates |
+| **South Korea** — ~~Tier 2~~ **now Band A, see the master list** | This row described `상가(상권)정보`, which is **unobtainable** (the API needs a Korean-resident account). Superseded 2026-09-22: Seoul's 인허가 정보 datasets give **197,276 active premises with EPSG:5174 coordinates, KOGL Type 1, no account** — one city rather than six | **MEASURED** — national urban-railway **station** and **line** standard datasets on `data.go.kr` (15013205 / 15013203) | ~~Verify the schema live~~ **Done.** No open question |
 
 **Spain overtook Mexico this round.** Its business leg was already the
 Montréal model and its rail leg is now the deepest measured anywhere in this
@@ -1906,6 +2018,15 @@ institution code, matching the `insttCode` in the dataset's own metadata.
 So the business leg needs **a free API key** — WMATA's gate, already cleared
 once by this project — not a bulk download.
 
+> **SUPERSEDED 2026-09-22, twice over.** The key is **not free to this project**:
+> every `data.go.kr` account type requires a Korean resident ID or a Korean
+> business number, so the gate is a **residency** wall, not a registration
+> one. And it is moot — Seoul's own `인허가 정보` datasets provide the same
+> shape of data with **no account at all**. This paragraph is kept because the
+> reasoning "401 means it wants a key, and a key is cheap" was wrong in both
+> halves, and that is the instructive part: a 401 says nothing about who is
+> *allowed* to hold the key.
+
 #### Korea's transit leg — MEASURED, and it is excellent
 
 `전국도시철도역사정보표준데이터` (dataset **15013205**), from
@@ -1959,6 +2080,12 @@ contention: premises-level business data with coordinates and a 247-category
 standard, national station points with coordinates and transfer information,
 and **"제한 없음" on both** — a lighter licence position than any other
 candidate in this screen.
+
+> **SUPERSEDED 2026-09-22.** The conclusion held — Korea *is* Band A — but by a
+> different route, and one city instead of six. The API key is unobtainable
+> (residency-gated) and unnecessary: Seoul's `인허가 정보` SHEET export needs no
+> account, and its licence is **KOGL Type 1** rather than 제한 없음, so
+> attribution *is* required. Busan and Daegu fail on district-level coverage.
 
 **Two corrections to the earlier Tier 2 entry.** Korea was recorded as having
 "the ideal single-register shape"; at the scope this project actually works at,

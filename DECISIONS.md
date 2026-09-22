@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**104 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**105 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Master city list rebanded, and eleven cities were discarded on a reason this project's own file contradicts](#2026-09-22---master-city-list-rebanded-and-eleven-cities-were-discarded-on-a-reason-this-projects-own-file-contradicts)
 - [Seoul's screening is finished: 197,276 active premises, KOGL Type 1, no open questions](#2026-09-22---seouls-screening-is-finished-197276-active-premises-kogl-type-1-no-open-questions)
 - [Korea: Seoul gets coordinates and needs no account; Busan and Daegu are closed](#2026-09-22---korea-seoul-gets-coordinates-and-needs-no-account-busan-and-daegu-are-closed)
 
@@ -140,6 +141,68 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Master city list rebanded, and eleven cities were discarded on a reason this project's own file contradicts
+
+- **Rebuilt the master list around what BLOCKS each city rather than around a
+  tier number**, because the tiers had stopped discriminating: they mixed
+  "needs one document read" with "needs a geocoding pass written" with "never
+  probed", which are three different kinds of work. Four bands now, and **three
+  of the four are not waiting on research at all.** Band A, screening complete:
+  **Seoul, Paris, Mexico City, Guadalajara**. Band B, one narrow question each:
+  Barcelona (unread licence), Milan (is Personal services reachable), Madrid /
+  Valencia / Bilbao / Málaga (each needs its own source, since Spain is bespoke
+  per city and Barcelona's census does not transfer), Sevilla (feed mirror
+  404s). Band C, viable but each needs a geocoding leg, which is build work:
+  Taipei / Kaohsiung / Taoyuan / Taichung, Oslo, São Paulo, and Tokyo plus nine
+  more Japanese cities. Band D, genuinely unprobed. **Mexico is the cheapest
+  unbuilt country in the screen** - two cities, one national source, cleared
+  licence, coordinates included, and SCIAN *is* NAICS so the taxonomy may
+  transfer from the US builds.
+- **Found that the DISCARD list was wrong for eleven cities, and wrong against
+  evidence in the same file.** Berlin, Hamburg, Stockholm, Budapest, Naples,
+  Messina, Hyderabad, Kochi, Tallinn, Zagreb and Santiago all sat under the
+  heading "Rail measured, but the COUNTRY's business leg failed". The same
+  document's "What the sweep actually settled" section says Germany and Czechia
+  have **"a working route and an unprobed register"**, that Sweden, Hungary,
+  Estonia, Croatia and India were **"not reached at all"**, and - sharpest -
+  that **"1 passes both legs: Italy, via Milan"**. So Naples and Messina were
+  discarded for their country failing, in the file whose headline finding is
+  that their country is the one that passed. All eleven moved to Band D. The
+  discard list now carries **one row per city naming the finding that
+  disqualified it**, so eight remain: Vienna (GISA strips the street address),
+  Amsterdam/Rotterdam (aggregate), Athens (sector-only), Lisbon, Poznań, Riga
+  (addressed but unclassified), Bratislava (no activity classification), Cairo
+  (no open-data infrastructure).
+- **Why knowing the rule did not prevent it, which is the transferable part.**
+  "A pattern justifies deprioritising, never ruling out" was already written
+  into `add-country` after the first instance of exactly this error. It
+  recurred because the discard list was **prose in a different section from the
+  evidence**, so nothing forced the two to agree - a bare list of city names
+  cannot be checked, whereas a row reading `Vienna - Austria: GISA strips the
+  street address by design` can. Added the mechanical half to `add-country`: a
+  discard list names its evidence per row, and any row whose reason is "not
+  reached", "unprobed" or a regional pattern **is not a discard**.
+- **Retired the trim-the-list argument.** The previous version of that section
+  argued for trimming, from `scaling_thresholds.md`'s 20-25 ceiling and a count
+  of ~23 already specified. Superseded: RAM was measured as not count-sensitive
+  (ceiling = New York at 7.43 MB, ~0.7% of 1 GB), ~80 page slots are free, and
+  the real limiter was the `drift_check` sweep, which `--jobs N` addressed. So
+  slots are not scarce and **verification is** - which is what the banding
+  measures. There is no reason to trim, and good reason to finish Band A first.
+- **Cancelled the PLAN.md item telling the owner to register a `data.go.kr` API
+  key.** It was not merely stale but impossible and misleading: it read "Free"
+  and "This is WMATA's gate, already cleared once", when every `data.go.kr`
+  member type requires a Korean resident ID or business number. That is a
+  **residency** wall, so the WMATA precedent does not transfer, and the
+  underlying inference was wrong in both halves - **a 401 says the endpoint
+  wants a key, not that the caller is allowed to hold one.** Replaced with the
+  keyless Seoul route, the corrected licence (KOGL Type 1, not 제한 없음), the
+  corrected scope (Seoul only), and the two genuine build-time items. Also
+  closed its sub-item "Korea has no line geometry yet" - dataset `15013203` is
+  the line standard dataset. Files touched:
+  `docs/global_country_shortlist.md`, `PLAN.md`,
+  `.claude/skills/add-country/SKILL.md`.
 
 ### 2026-09-22 - Seoul's screening is finished: 197,276 active premises, KOGL Type 1, no open questions
 

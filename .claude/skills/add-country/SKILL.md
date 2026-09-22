@@ -55,6 +55,24 @@ into the tier above. They sat in two tiers at once, and it was caught only by
 rebuilding the table by hand. If a country has not been probed, it stays in
 the running with an ASSERTED label on it.
 
+**A discard list must name its evidence PER ROW.** The rule above was already
+written down when the same error happened again: eleven cities - Berlin,
+Hamburg, Stockholm, Budapest, Naples, Messina, Hyderabad, Kochi, Tallinn,
+Zagreb, Santiago - sat under the heading "the country's business leg failed" in
+a file whose own sweep section said Germany and Czechia were *unprobed*, Sweden,
+Hungary, Estonia, Croatia and India were *never reached*, and **Italy was the
+one country that passed**. Naples was discarded for its country failing, in the
+document announcing that its country succeeded.
+
+Knowing the rule did not prevent it, because the discard list was **prose in a
+different section from the evidence**, so nothing forced the two to agree. A
+bare list of names cannot be checked; a row reading
+`Vienna - Austria: GISA strips the street address by design` can. So: one row
+per city, each carrying the finding that disqualified it, and any row whose
+reason is "not reached", "unprobed" or a regional pattern **is not a discard at
+all** - it belongs in the still-open band. Re-read the discard list against the
+probe log whenever either changes.
+
 **The FIRST record an API returns is not a random one, and n=1 is not a
 measurement.** Finland was ruled out on a single record - the first the PRH
 API returned, a financial holding company with an empty street, a PO box and a
