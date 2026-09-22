@@ -14,9 +14,9 @@ ones Barcelona, Valencia, Bilbao, Málaga and Sevilla will inherit.
 
 ## The one-line summary
 
-Business leg is **excellent and ready**. Rail leg is **resolved but the Metro
-feed is four months expired**, and CRTM's licence — now read — forbids
-displaying stale data, so the build must find a current feed or use OSM.
+Business leg is **excellent and ready**. Rail leg is **settled: Metro comes
+from OpenStreetMap**, because CRTM's Metro feed expired four months ago, no
+newer item exists, and CRTM's licence forbids displaying stale data.
 
 ---
 
@@ -153,11 +153,24 @@ cleanly, parses cleanly, and describes a service window that has already ended.
 - **100% coordinates**, `shapes.txt` present — so
   every-line-drawn-and-labelled is satisfiable
 
-### The decision this build has to make
+### The decision this build has to make — RESOLVED 2026-09-22
 
-1. **Find a newer CRTM item.** The Mobility Database entry may simply point at
-   a superseded ArcGIS item id while CRTM publishes a current one elsewhere.
-   Cheapest first move.
+1. ~~**Find a newer CRTM item.**~~ **MEASURED OUT.** CRTM's ArcGIS org
+   (`orgId UxADft6QPcvFyDU1`, owner `ConsorcioRegional`) holds **exactly six
+   GTFS items**, and the Metro one is the stale one:
+
+   | Item | Last modified |
+   |---|---|
+   | GTFS Red de EMT | 2026-07-29 |
+   | GTFS Red de Autobuses Urbanos | 2026-07-29 |
+   | GTFS Red de Autobuses Interurbanos | 2026-07-29 |
+   | **GTFS Red de Metro Ligero** (`aaed26cc…`) | **2026-07-29** |
+   | **GTFS Red de Metro** (`5c7f2951…`) | **2025-05-30** |
+   | GTFS Red de Cercanías (`1a25440b…`) | 2024-08-27 |
+
+   **`5c7f2951…` is the current item.** The Mobility Database is not pointing
+   at something superseded; CRTM refreshes four of its six feeds and has
+   stopped refreshing Metro. There is nothing newer to find.
 2. **Use OSM for the Metro leg.** The precedent exists and is documented —
    CDMX, approved as a per-city exception, validated at 195/195 stops. The
    `osm-rail` skill covers it. Madrid's 13 subway relations are already
@@ -169,8 +182,60 @@ cleanly, parses cleanly, and describes a service window that has already ended.
    not going stale is beside the point; the condition is about what the
    reuser displays, and a feed CRTM has stopped refreshing cannot satisfy it.
 
-**So the choice is 1 or 2.** Try the newer-item search first because it is
-minutes; fall back to OSM, which has a documented precedent in CDMX.
+**So the answer is 2: take Madrid's Metro from OpenStreetMap**, the CDMX
+precedent, which the owner approved as a documented per-city exception and
+which validated at 195/195 stops exact. Use the `osm-rail` skill.
+
+**One nuance worth keeping:** `GTFS Red de Metro Ligero` *is* current
+(2026-07-29, `mdb-792`, 4 × `route_type=0`, 96 stops). So Madrid could take
+Metro from OSM and Metro Ligero from the agency feed. That is a mixed-source
+rail leg for one city, which this project has not done before — simpler to
+take both from OSM, and the reason to choose otherwise would be that agency
+data is the standing default. **Left to the build; both inputs are known
+good.**
+
+Cercanías (commuter rail) is stale too (2024-08-27) and is probably out of
+scope for a metro-density map, but that has not been decided either.
+
+### OSM validated for Madrid Metro — MEASURED 2026-09-22
+
+Run before committing the build to it, the way CDMX was. Metropolitan bbox
+`40.20,-3.95,40.65,-3.45`, wider than the municipality because lines 9, 10 and
+12 leave it.
+
+| | OSM | GTFS `mdb-794` | |
+|---|---|---|---|
+| Lines | **13 distinct `ref`** — L1–L12 + R | **13** `route_type=1` | **exact match** |
+| Stations | **236** `station=subway` nodes | **230** boardable | **2.6% apart** |
+
+Two independent sources agreeing exactly on line count and to within six
+stations is the strongest cross-validation available here, and it is what
+makes OSM safe for this city rather than merely available.
+
+- **All 28 relations are named. All 28 carry a `colour`.** So the
+  every-line-labelled-and-in-the-legend invariant is satisfiable directly from
+  OSM tags, with no hand-assigned palette — unlike Medellín, where only 2 of 6
+  were coloured.
+
+⚠️ **28 relations is NOT 28 lines.** They are **directional pairs** plus
+depot/variant branches — *"Línea 4: Pinar de Chamartín-Argüelles"* and
+*"Línea 4: Argüelles-Pinar de Chamartín"* are the same line, and *"Línea 6:
+Andén 2"* and *"Línea 12. Metrosur (Dirección Loranca - Andén 2)"* are
+platform-direction variants. **Deduplicate on `ref`, which gives 13.** Counting
+relations would draw and label Madrid as a 28-line system. This is the
+Guadalajara lesson in its other form: the first query there matched on a
+network label and lost a whole line; here a naive count invents fifteen.
+
+⚠️ **The construction filter returned 0, which is not the same as "none".**
+Per the Tel Aviv finding, a zero can mean *"nothing to flag"* or *"this
+convention is not used here"*. Madrid has no Metro line under construction
+today, so 0 is plausible — but it was not independently confirmed, and the
+filter's silence is not evidence.
+
+**The 6-station gap is unexplained** and worth a minute during the build: it is
+probably Metro Ligero stops tagged `station=subway`, or stations the expired
+feed dropped. 326 `railway=station` nodes exist in the same bbox, so the
+`station=subway` qualifier is doing real work — do not drop it.
 
 ### ✅ Licence — READ 2026-09-22
 
@@ -210,7 +275,9 @@ Plus whatever CRTM's licence turns out to require.
 
 ## Still unknown — the honest list
 
-- **Which rail route to take** (above). The only blocking question.
+- **Metro Ligero: agency feed or OSM?** The Metro question is settled
+  (OSM); this sub-question is not, and neither is whether Cercanías is in
+  scope at all.
 - Whether `200085-5`'s activity duplication needs deduping for this map, which
   depends on a taxonomy choice not yet made.
 - Whether Madrid's system shape needs a sub-line filter
