@@ -9,7 +9,7 @@ Those remain the authority; this is the operational layer.
 
 Claims are labelled **MEASURED** (a number and the check that produced it) or
 **ASSERTED** (plausible, unchecked — verify before building on it), per
-[`session_roles.md`](session_roles.md).
+[`session_roles.md`](../session_roles.md).
 
 **Vancouver would be the first Canadian city in this project**, so it also
 lands the two Canadian notices on the deploy gate. Read "Before you commit"

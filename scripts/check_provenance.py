@@ -42,6 +42,56 @@ WHAT IT CHECKS
   D. Notice numbers are unique and contiguous from 1. They were neither: the
      list carried two item 8s and two item 15s from 2026-09-21 to 2026-09-22,
      because each country's block was appended without renumbering.
+  J. Every `outputs/...` file NAMED in a page's prose or in the docs exists and
+     is committed. These are not files the app opens - it reads one
+     `heatmap.html` per city through an iframe - they are **promises to a
+     reader**: "the stations excluded are listed in
+     `outputs/montreal/excluded_stations.csv`". `outputs/` is committed and
+     `data/` is not, so a city added in a hurry can cite a file that never
+     leaves the machine it was built on, and nothing about the page looks
+     wrong. Clean when written, 17 paths; it exists for the seventeenth city.
+
+  I. Every markdown table in the provenance docs actually renders: no row
+     orphaned from its header by intervening prose, and no row whose cell
+     count differs from its header's. **Markdown fails silently here** - an
+     orphaned row renders as literal pipe-delimited text and looks fine in a
+     diff - and it has happened twice: Edmonton's and Toronto's rows were
+     orphaned in two tables at once, and Philadelphia's OPA row carried five
+     cells against a six-cell header. This check was written inline six times
+     during one sweep before being committed, which is the usual sign.
+
+  H. Every relative markdown link in the docs resolves. `vancouver.md` linked
+     `[session_roles.md](session_roles.md)` from inside `docs/build_briefs/`,
+     which pointed at a sibling that never existed - it needed `../`. Fenced
+     code is stripped first, because Overpass QL (`["network"="<Net>"](bbox)`)
+     reads exactly like a markdown link and is not one.
+
+  G. Every stored licence in `docs/licenses/` has a SHA-256 listed in that
+     directory's README, and it MATCHES. This is a compliance artefact, not
+     housekeeping: the hashes exist so the clauses quoted in `data_sources.md`
+     are checkable against the text that was actually agreed to, and a stale
+     one silently ends that. Two were stale on 2026-09-22 because
+     `.gitattributes` sets `* text=auto eol=lf` and git rewrote CRLF to LF
+     after the hash was taken - so the recorded digests described bytes that
+     existed nowhere. Two more files had no hash at all.
+
+  F. Every `notice N` / `item N` citation of the notices list still points at
+     the notice it MEANT. A range check cannot do this: renumbering on
+     2026-09-22 moved Edmonton from item 14 to 15, and
+     `docs/build_briefs/edmonton.md` went on saying "item 14 carries it" - a
+     citation that still RESOLVED, to Calgary. So the check compares the cited
+     notice's subject against the subjects named around the citation, and
+     fails when the neighbourhood is talking about a different notice's
+     subject than the one it cites.
+
+  E. `docs/city_master_list.md`'s built counts match `app/cities.py` - the
+     total and the per-country figures. That file is the one place `CLAUDE.md`
+     says to READ COUNTS OFF, so its numbers are load-bearing in a way no other
+     document's are. A sweep on 2026-09-22 verified them by hand and they were
+     right to the entry; this makes that verification repeatable instead of
+     annual. **A count in a file whose job is to carry counts gets checked; a
+     count anywhere else gets deleted** - which is why this lives here and not
+     in `check_stale_claims.py`.
 
 KNOWN_GAPS below is a list of DEFECTS, not exemptions. Entries are dated, the
 report prints them loudly, and a stale entry - one naming a city that is now
@@ -63,6 +113,33 @@ sys.path.insert(0, str(ROOT))
 DATA_SOURCES = ROOT / "docs" / "data_sources.md"
 CITIES_PY = ROOT / "app" / "cities.py"
 COMPONENTS_PY = ROOT / "app" / "components.py"
+MASTER_LIST = ROOT / "docs" / "city_master_list.md"
+LICENCE_DIR = ROOT / "docs" / "licenses"
+
+# Files whose `item N` citations are checked. DECISIONS.md is excluded for the
+# usual reason - it records what a citation said on a date.
+CITATION_GLOBS = ("docs/**/*.md", ".claude/**/*.md", "CLAUDE.md", "PLAN.md")
+CITATION_SKIP = {"DECISIONS.md"}
+# The sweep skill quotes the broken citation as a teaching example, and
+# check_provenance's own docstring does the same.
+CITATION_SKIP_PATHS = {
+    ".claude/skills/consistency-sweep/SKILL.md",
+    "scripts/check_provenance.py",
+}
+# "item N" IS AMBIGUOUS and the first version of this check ignored that. At
+# least three numbered namespaces exist: the notices list, the deploy-gate list
+# under "What closing this fully requires", and `global_country_shortlist.md`'s
+# own "#### Item N" probe sweep. Reporting all of them against the notices list
+# produced thirteen "unverifiable" notes, every one of which was a citation of
+# a DIFFERENT list - noise that would have taught people to skip the section.
+#
+# So only two forms are treated as notices citations:
+#   - "notice N", which is unambiguous; and
+#   - "item N" where the surrounding text also says "notice" or names
+#     data_sources.md, which is how a cross-file citation of that list reads.
+# Anything else is left alone rather than guessed at.
+CITATION_RE = re.compile(r"\b(?:item|notice)s?\s+(\d{1,2})\b", re.I)
+NOTICE_WORD_RE = re.compile(r"notice|data_sources", re.I)
 
 # Defects awaiting work, each with the date it was recorded. NOT an allowlist:
 # a city here is one whose provenance is missing and known to be missing. Delete
@@ -98,6 +175,10 @@ NOTICE_ALIASES = {
     "Chicago Transit Authority": "CTA",
     "OpenStreetMap (Mexican rail)": "OpenStreetMap",
 }
+
+# `app/cities.py` splits big countries into regions ("Canada West"); the master
+# list groups by country. Strip the direction word to get from one to the other.
+REGION_DIRECTIONS = (" West", " East", " North", " South", " Central")
 
 TABLES = (
     ("## Business registries", "business registries"),
@@ -189,6 +270,270 @@ def displayed_notices():
     return re.findall(r'^\s{4}\("([^"]+)"', src[start:end], re.M)
 
 
+def check_cited_outputs():
+    """J: outputs/ files promised in prose exist and are committed."""
+    import subprocess
+    try:
+        tracked = set(subprocess.run(
+            ["git", "ls-files"], cwd=ROOT, capture_output=True,
+            text=True, check=True).stdout.split("\n"))
+    except (OSError, subprocess.CalledProcessError):
+        return ["could not run `git ls-files` to check what is committed"]
+
+    cited = {}
+    globs = ("app/**/*.py", "docs/**/*.md", "CLAUDE.md")
+    for g in globs:
+        for q in sorted(ROOT.glob(g)):
+            # DECISIONS.md is excluded everywhere for the same reason; a past
+            # entry may name a file that has since been renamed, and that is
+            # an accurate record rather than a broken promise.
+            if not q.is_file() or q.name == "DECISIONS.md":
+                continue
+            for m in re.finditer(r"outputs/[A-Za-z0-9_./-]+\.(?:csv|html|json)",
+                                 read(q)):
+                cited.setdefault(m.group(0), set()).add(
+                    q.relative_to(ROOT).as_posix())
+
+    problems = []
+    for path in sorted(cited):
+        where = sorted(cited[path])[:2]
+        if not (ROOT / path).exists():
+            problems.append(f"{path}: named in {where} but does not exist")
+        elif path not in tracked:
+            problems.append(
+                f"{path}: named in {where}, exists locally but is NOT "
+                f"committed - a reader cloning this repository will not find "
+                f"it")
+    return problems
+
+
+TABLE_DOCS = ("docs/data_sources.md", "docs/excluded_categories.md",
+              "docs/city_master_list.md", "docs/session_roles.md")
+
+
+def check_tables():
+    """I: markdown tables that do not render, or whose rows are ragged."""
+    delim = re.compile(r"^\|[\s:|-]+\|\s*$")
+    problems = []
+    for rel in TABLE_DOCS:
+        q = ROOT / rel
+        if not q.exists():
+            continue
+        lines = read(q).split("\n")
+        cols = None
+        in_fence = False
+        for i, line in enumerate(lines, 1):
+            if line.lstrip().startswith("```"):
+                in_fence = not in_fence
+                continue
+            if in_fence:
+                continue
+            if not line.startswith("|"):
+                if not line.strip():
+                    cols = None        # a blank line ends a table
+                continue
+            n = line.count("|") - 1
+            if delim.match(line):
+                cols = n
+                continue
+            if cols is None:
+                # A HEADER row sits immediately above its own delimiter, so at
+                # this point it legitimately has no width yet. Look ahead one
+                # line before calling it orphaned - the inline version of this
+                # check flagged every header in the file.
+                nxt = lines[i] if i < len(lines) else ""
+                if delim.match(nxt):
+                    continue
+                problems.append(
+                    f"{rel}:{i}: table row with no header above it in the "
+                    f"same block - renders as literal text")
+            elif n != cols:
+                problems.append(
+                    f"{rel}:{i}: row has {n} cells, its header has {cols}")
+    return problems
+
+
+def check_links():
+    """H: relative markdown links that do not resolve."""
+    fence = re.compile(r"```.*?```", re.S)
+    inline = re.compile(r"`[^`\n]*`")
+    link = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
+    problems = []
+    seen = set()
+    for g in ("docs/**/*.md", ".claude/**/*.md", "*.md"):
+        for q in sorted(ROOT.glob(g)):
+            if not q.is_file() or q.resolve() in seen:
+                continue
+            seen.add(q.resolve())
+            text = read(q)
+            # Fenced blocks and inline code are not prose; a query that looks
+            # like a link is not a link.
+            text = inline.sub(" ", fence.sub(" ", text))
+            for m in link.finditer(text):
+                tgt = m.group(1).split("#")[0].strip()
+                if not tgt or tgt.startswith(("http://", "https://",
+                                              "mailto:", "<")):
+                    continue
+                if not (q.parent / tgt).resolve().exists():
+                    problems.append(
+                        f"{q.relative_to(ROOT).as_posix()}: "
+                        f"link to '{tgt}' does not resolve")
+    return problems
+
+
+def check_licence_hashes():
+    """G: docs/licenses/ SHA-256s against the files as committed."""
+    import hashlib
+    readme = LICENCE_DIR / "README.md"
+    if not readme.exists():
+        return ["docs/licenses/README.md not found"]
+    m = re.search(r"## SHA-256, as retrieved.*?```\n(.*?)```",
+                  read(readme), re.S)
+    if not m:
+        return ["no '## SHA-256, as retrieved' block in docs/licenses/README.md"]
+    listed = {}
+    for line in m.group(1).strip().split("\n"):
+        parts = line.split()
+        if len(parts) == 2:
+            listed[parts[1]] = parts[0]
+
+    problems = []
+    on_disk = {q.name: q for q in LICENCE_DIR.iterdir()
+               if q.is_file() and q.name != "README.md" and q.suffix != ".md"}
+    for name, digest in sorted(listed.items()):
+        q = on_disk.get(name)
+        if q is None:
+            problems.append(f"{name}: hash listed but the file is gone")
+            continue
+        actual = hashlib.sha256(q.read_bytes()).hexdigest()
+        if actual != digest:
+            problems.append(
+                f"{name}: listed {digest[:16]}... but the file hashes to "
+                f"{actual[:16]}... - recompute from the COMMITTED file, not "
+                f"the one you just fetched (.gitattributes normalises CRLF)")
+    for name in sorted(set(on_disk) - set(listed)):
+        problems.append(f"{name}: stored licence with NO hash listed")
+    return problems
+
+
+def notice_subjects(doc):
+    """{number: [keyword, ...]} for the notices list.
+
+    The keyword is what a document talking ABOUT that notice would say -
+    "Edmonton" rather than "City of Edmonton", "British Columbia" rather than
+    "Province of British Columbia".
+    """
+    out = {}
+    for n, heading in notice_headings(doc):
+        h = heading.strip().strip("*")
+        for prefix in ("City of ", "Province of ", "Ville de ",
+                       "Soci\u00e9t\u00e9 de transport de ", "Ayuntamiento de "):
+            if h.startswith(prefix):
+                h = h[len(prefix):]
+        h = re.sub(r"\s*\(.*?\)", "", h).strip()
+        if h:
+            out[n] = h
+    return out
+
+
+def check_citations(doc):
+    """F: does each `item N` still point at the notice it meant?"""
+    subjects = notice_subjects(doc)
+    if not subjects:
+        return [], []
+    hard, soft = [], []
+    for g in CITATION_GLOBS:
+        for p in sorted(ROOT.glob(g)):
+            if not p.is_file() or p.name in CITATION_SKIP:
+                continue
+            rel = p.relative_to(ROOT).as_posix()
+            if rel in CITATION_SKIP_PATHS:
+                continue
+            text = read(p)
+            for m in CITATION_RE.finditer(text):
+                n = int(m.group(1))
+                cited = m.group(0).lower()
+                lo = max(0, m.start() - 400)
+                window = text[lo:m.end() + 400] + " " + p.stem.replace("_", " ")
+                # Disambiguate the namespace before judging the number.
+                if not cited.startswith("notice"):
+                    # Three other namespaces say "item N" within a sentence
+                    # that also names data_sources.md, so the window test
+                    # alone is not enough: "Gate item 9" is the deploy-gate
+                    # list, "Step 0 item 4" is add-city's, and "#### Item 2"
+                    # is a heading in another document's own sweep.
+                    before = text[max(0, m.start() - 12):m.start()].lower()
+                    if before.endswith("gate ") or before.endswith("step 0 "):
+                        continue
+                    line_start = text.rfind(chr(10), 0, m.start()) + 1
+                    if text[line_start:m.start()].strip().startswith("#"):
+                        continue
+                    near = text[max(0, m.start() - 120):m.end() + 120]
+                    if not NOTICE_WORD_RE.search(near):
+                        continue        # some other list's item N
+                if n not in subjects:
+                    hard.append(f"{rel}: cites item {n}, but the notices list "
+                                f"stops at {max(subjects)}")
+                    continue
+                wl = window.lower()
+                here = subjects[n].lower()
+                if here in wl:
+                    continue                      # cites its own subject: fine
+                others = sorted({s for k, s in subjects.items()
+                                 if k != n and s.lower() in wl and len(s) > 4})
+                if others:
+                    hard.append(
+                        f"{rel}: cites item {n} ({subjects[n]}), but the text "
+                        f"around it names {others} and never {subjects[n]!r}")
+                else:
+                    soft.append(f"{rel}: item {n} ({subjects[n]}) - nothing "
+                                f"nearby names it, so it cannot be verified")
+    return hard, soft
+
+
+def check_master_list(names, regions):
+    """E: city_master_list.md's built counts against app/cities.py."""
+    if not MASTER_LIST.exists():
+        return ["docs/city_master_list.md not found"]
+    doc = read(MASTER_LIST)
+    problems = []
+
+    m = re.search(r"^##\s+Built\s*[\u2014-]\s*(\d+)", doc, re.M)
+    if not m:
+        return ["no '## Built - N' heading to check against"]
+    claimed_total = int(m.group(1))
+    if claimed_total != len(names):
+        problems.append(
+            f"'## Built - {claimed_total}' but app/cities.py has {len(names)}")
+
+    # per-country: "| **Canada** (5, complete) | ... |"
+    actual = {}
+    for r in regions:
+        country = r
+        for d in REGION_DIRECTIONS:
+            if country.endswith(d):
+                country = country[: -len(d)]
+                break
+        actual[country] = actual.get(country, 0) + 1
+
+    seen = set()
+    for row in re.finditer(r"^\|\s*\*\*([^*]+)\*\*\s*\((\d+)", doc, re.M):
+        country, claimed = row.group(1).strip(), int(row.group(2))
+        if country not in actual:
+            continue
+        seen.add(country)
+        if claimed != actual[country]:
+            problems.append(
+                f"'{country} ({claimed})' but app/cities.py has "
+                f"{actual[country]}")
+    for country, n in sorted(actual.items()):
+        if country not in seen:
+            problems.append(
+                f"'{country}' has {n} cities in app/cities.py and no counted "
+                f"row in the built table")
+    return problems
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--strict", action="store_true",
@@ -265,6 +610,62 @@ def main():
                 f"item in data_sources.md"]))
 
     print(f"\n  notices: {len(numbered)} numbered, {len(shown)} displayed")
+
+    # --- E, the master list's own counts -------------------------------------
+    regions = []
+    tree = ast.parse(read(CITIES_PY))
+    for node in tree.body:
+        if isinstance(node, ast.Assign) and any(
+                getattr(t_, "id", None) == "CITIES" for t_ in node.targets):
+            for d in node.value.elts:
+                pairs = {getattr(k, "value", None): getattr(v, "value", None)
+                         for k, v in zip(d.keys, d.values)}
+                if pairs.get("region"):
+                    regions.append(pairs["region"])
+    ml = check_master_list(names, regions)
+    if ml:
+        failures.append(("city_master_list.md", ml))
+    else:
+        print("  master list: built counts agree with app/cities.py")
+
+    # --- F, numbered citations still pointing where they meant ---------------
+    hard, soft = check_citations(doc)
+    if hard:
+        failures.append(("numbered citations", hard))
+    else:
+        print(f"  citations: every `item N` resolves to the notice it names "
+              f"({len(soft)} unverifiable)")
+    for s in soft:
+        print(f"      note: {s}")
+
+    # --- J, outputs/ files promised in prose ---------------------------------
+    cited = check_cited_outputs()
+    if cited:
+        failures.append(("cited outputs", cited))
+    else:
+        print("  outputs: every outputs/ file named in prose exists and is "
+              "committed")
+
+    # --- I, tables that actually render ---------------------------------------
+    tbl = check_tables()
+    if tbl:
+        failures.append(("markdown tables", tbl))
+    else:
+        print("  tables: every row sits under a header and matches its width")
+
+    # --- H, relative links in the docs ---------------------------------------
+    links = check_links()
+    if links:
+        failures.append(("markdown links", links))
+    else:
+        print("  links: every relative markdown link resolves")
+
+    # --- G, the licence store's own integrity -------------------------------
+    lic = check_licence_hashes()
+    if lic:
+        failures.append(("docs/licenses", lic))
+    else:
+        print("  licences: every stored licence's SHA-256 matches")
 
     # --- report ------------------------------------------------------------
     if gaps:

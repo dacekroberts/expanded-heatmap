@@ -76,8 +76,21 @@ changes is the **scope of an attribution the project already carries** - see
 
 ## SHA-256, as retrieved
 
+**Recompute these from the COMMITTED file, never from the file you just
+fetched.** `.gitattributes` sets `* text=auto eol=lf`, so git rewrites CRLF to
+LF on commit and the bytes change underneath a hash taken a moment earlier. Two
+of these were stale for exactly that reason until 2026-09-22 -
+`cta-developer-license-agreement.html`, fetched from a server that sent CRLF,
+and `bc-open-government-licence.txt`, written by a Python script on Windows.
+Both described bytes that no longer existed anywhere, which defeats the point
+of recording a hash at all: the clauses quoted in `data_sources.md` are
+supposed to be checkable against the text that was actually agreed to.
+
+`python scripts/check_provenance.py` verifies every hash here on every run, and
+fails on a mismatch or a licence file with no hash listed.
+
 ```
-03171dc15145af12c15781d121df4bac9713d025d57b919ae4798bdfb7acb473  cta-developer-license-agreement.html
+b9a80494197e06958f39356fb2cece75a55ce46cc594349dd7e94cad008bc195  cta-developer-license-agreement.html
 aaf555af500679ae73f72d5495896ed27f9bf51c75f922c08a24bdc13b2860ac  la-metro-terms-conditions.html
 e791e24e86b9e974de060c3b238abfc392260cad54ccc0d2d3d4f0a61846b91a  mbta-massdot-develop-license-agreement.pdf
 6aa68ab9d19242d275fda71f36e2cb3165d23d545eb5494a9bea9597439ae746  mta-terms-and-conditions.txt
@@ -93,9 +106,11 @@ db8ad88e1e4a4b61f5c7fae7a1c593cf605402ebaed9886102dbdca0f97f3a08  translink-open
 c389fcab88815aee4b2b39b76350a5bac85e080c52ccd794f9c647911fbeae37  translink-gtfs-static-terms-of-use.txt
 7030261bb53846ed58187b724f23b343e692c7a34bff01e3f69042848e44a472  ipc-ontario-interpretation-bulletin-personal-information.pdf
 6da9228708efa429399ad12f2fd028eb27be453adb71ae2fce68cf5fe75425e5  surrey-open-government-licence.txt
-21fbab65a693dc264d38f2cb7002ab1ecd1a4fd2d1276cbab9168192e980d113  bc-open-government-licence.txt
+1a037848765bf2d6ea9731f0ef450898876564a24846aea35684c620edf104ef  bc-open-government-licence.txt
 8900206bbe4a2b8cf461e7e7ff111564cf4de2f863c7cd00b99ac19a4b925d62  inegi-terminos-libre-uso-informacion.pdf
 4496431cc92fef99add789b6fdbb6d1494bd2397e4a05f79f49bd4fd0ab63359  inegi-terminos-sitio.pdf
+3827f51e8bea73b85e5b47e7524a0cc2011b6abb9a7505e5c15fd0c28d08d4df  crtm-licencia-de-uso.txt
+9426f1f649033f8c100d3a8e3b95da6aca8efd8011c93696fbf3b175eae26a2b  madrid-condiciones-generales-reutilizacion.txt
 ```
 
 ## Two files here are NOT licences

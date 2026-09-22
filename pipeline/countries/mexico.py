@@ -39,6 +39,13 @@ SOURCE_ENCODING = "latin-1"
 DENUE_NAME_COLUMN = "nom_estab"        # the exterior sign - see the note below
 DENUE_ACTIVITY_COLUMN = "nombre_act"   # -> the taxonomy's VALUE_COLUMN
 DENUE_CODE_COLUMN = "codigo_act"       # -> `scian`, what classify() reads
+# THESE TWO ARE NOT CONSUMED, and that is worth knowing rather than tidying
+# away. Guadalajara is the only city that scopes by state and municipio, and
+# its `step2_clean_businesses.py` writes the literals "cve_ent" and
+# "municipio" directly instead of importing these. So DENUE renaming a column
+# would be fixed here, in the national file, and Guadalajara would silently
+# keep the old spelling - precisely what profiling a country once is meant to
+# prevent. Noticed 2026-09-22; the change belongs to that city's owner.
 DENUE_STATE_COLUMN = "cve_ent"
 DENUE_MUNICIPIO_COLUMN = "municipio"
 
@@ -145,6 +152,13 @@ def denue_member(state_code):
 # to need no new notice entry at all.
 LICENCE_NAME = "Términos de Libre Uso de la Información del INEGI"
 LICENCE_STORED_AT = "docs/licenses/inegi-terminos-libre-uso-informacion.pdf"
+# NOT AUTHORITATIVE, and nothing read this until it was checked on
+# 2026-09-22. The string INEGI actually requires is displayed from
+# `app/components.py`'s `_NOTICES`, which carries its own verbatim copy; this
+# one is read by nothing. Two copies of a PRESCRIBED attribution with no
+# stated owner is how a displayed notice quietly stops matching the licence,
+# so: **the `_NOTICES` entry is the one that must be right.** Change that
+# first, and only then mirror it here.
 ATTRIBUTION_PRODUCT = (
     "Fuente: INEGI, Directorio Estadístico Nacional de Unidades Económicas (DENUE)"
 )

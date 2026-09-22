@@ -16,10 +16,21 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**143 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**154 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [drift_check leaves outputs/ modified on Windows when nothing changed](#2026-09-22---drift_check-leaves-outputs-modified-on-windows-when-nothing-changed)
+- [Working the dead-constant list demonstrated, live, that drift_check is not offline for three cities](#2026-09-22---working-the-dead-constant-list-demonstrated-live-that-drift_check-is-not-offline-for-three-cities)
+- [Two probes came back clean, and the clean result is the record](#2026-09-22---two-probes-came-back-clean-and-the-clean-result-is-the-record)
+- [Sofia settled by enumerating Bulgaria's catalogue from outside the block](#2026-09-22---sofia-settled-by-enumerating-bulgarias-catalogue-from-outside-the-block)
+- [The table check that had been written inline six times, and one probe that was correctly abandoned](#2026-09-22---the-table-check-that-had-been-written-inline-six-times-and-one-probe-that-was-correctly-abandoned)
+- [Two of nineteen licence hashes described bytes that existed nowhere](#2026-09-22---two-of-nineteen-licence-hashes-described-bytes-that-existed-nowhere)
+- [Category 7 has a check, and it found that the three newest cities fetch inside their steps](#2026-09-22---category-7-has-a-check-and-it-found-that-the-three-newest-cities-fetch-inside-their-steps)
+- [Category 3 has a check, and a range check would not have caught the bug it was built for](#2026-09-22---category-3-has-a-check-and-a-range-check-would-not-have-caught-the-bug-it-was-built-for)
+- [Category B closed: every item adjudicated, and the noisiest file became a hard check](#2026-09-22---category-b-closed-every-item-adjudicated-and-the-noisiest-file-became-a-hard-check)
+- [Category B reaches its floor: 74 to 35, and the rest are not defects](#2026-09-22---category-b-reaches-its-floor-74-to-35-and-the-rest-are-not-defects)
+- [Category B, sixth pass: the master list's counts are right, and that is the finding](#2026-09-22---category-b-sixth-pass-the-master-lists-counts-are-right-and-that-is-the-finding)
 - [The `osm_route_refs` check, and the correction it immediately made to the entry above](#2026-09-22---the-osm_route_refs-check-and-the-correction-it-immediately-made-to-the-entry-above)
 - [Category B, fifth pass: the add-city skill's header still said four cities](#2026-09-22---category-b-fifth-pass-the-add-city-skills-header-still-said-four-cities)
 - [Category B, fourth pass: a flagged proposal that had already become practice](#2026-09-22---category-b-fourth-pass-a-flagged-proposal-that-had-already-become-practice)
@@ -179,6 +190,537 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - drift_check leaves outputs/ modified on Windows when nothing changed
+
+- **Found while verifying the previous entry's own work.** Running
+  `pipeline/drift_check.py` for Madrid, Mexico City and Guadalajara reported
+  **zero drift**, and `git status` then showed **six modified `outputs/`
+  files**. Both statements were true, which is the trap.
+
+- **Measured rather than guessed.** The three CSVs differ **only** in line
+  endings - committed blobs are LF, regenerated files CRLF, and
+  `blob.replace(CRLF, LF) == wt.replace(CRLF, LF)` for all three. The three
+  `heatmap.html` files show exactly **6,062 insertions against 6,062
+  deletions**, the signature of Folium's fresh random element ids per render
+  plus the same line-ending change. Not one byte of content differs.
+  `git checkout -- outputs/` restored all six.
+
+- **The consequence is worth naming: committing that churn would rewrite files
+  the DEPLOYED APP READS, for no change at all.** `outputs/` is committed
+  precisely so the app never runs the pipeline, and a line-ending rewrite of
+  every heatmap is a large, meaningless diff through which a real change could
+  pass unnoticed. It is a second, independent reason never to `git add -A` -
+  the existing reason being that another session may hold uncommitted work.
+
+- **Written into `CLAUDE.md` beside the drift-check rule and into the sweep
+  skill**, because it is a hazard of the command the project tells every
+  session to run, and the one place it would otherwise be learned is a
+  confusing `git status` at the end of a long session. Same root cause as the
+  stale licence digests earlier today: `.gitattributes` normalises line endings
+  and anything computed or written before that normalisation disagrees with
+  what git stores.
+
+### 2026-09-22 - Working the dead-constant list demonstrated, live, that drift_check is not offline for three cities
+
+- **Triaged all 15 unexamined category-D constants.** Seven are documented
+  deliberate and stay, and saying so is the output: Edmonton's
+  `STALE_BOUNDARY_IDS` is "kept so the choice above reads as a decision rather
+  than an accident"; Mexico City's four `OSM_*_MEASURED` say in their own
+  comment that they are "observations of the source, not the operator's
+  figures"; Boston's `ISD_PREMISES_KEY` documents a per-source key whose
+  collapse actually happens in SQL at download; Madrid's
+  `COORD_ZERO_IS_MISSING` names a conclusion whose behaviour is real - step 2
+  drops the zeros unconditionally, verified at `step2_clean_businesses.py:148`.
+  Each is now annotated so the next reader does not re-derive it.
+
+- **Toronto's `STATIONS_COLLAPSED_EXPECTED = 110` is an assertion that was
+  written and never wired**, while its three siblings are used 10, 14 and 3
+  times. `pipeline/stations.py` does check the collapse, per line against the
+  TTC's published figures, and that is the stronger test - but it cannot cover
+  this number, because the per-line counts sum to **117**, not 110: an
+  interchange counts once on each of its lines. So the total is a record rather
+  than a check. Annotated; the one-line wiring belongs to that city's owner.
+
+- **Two national column constants are dead because the one city needing them
+  hardcodes the same strings.** `pipeline/countries/mexico.py` defines
+  `DENUE_STATE_COLUMN` and `DENUE_MUNICIPIO_COLUMN`; Guadalajara's step 2
+  writes `"cve_ent"` and `"municipio"` as literals. DENUE renaming a column
+  would be fixed in the national file while the city kept the old spelling -
+  **precisely what profiling a country once is meant to prevent.** The
+  provenance row itself was checked and is accurate: that city does scope by
+  those columns.
+
+- **A prescribed legal attribution exists in two places with no stated owner.**
+  `ATTRIBUTION_PRODUCT` in the national config is read by nothing; the string
+  INEGI actually requires is displayed from `app/components.py`'s `_NOTICES`,
+  which holds its own verbatim copy. Two copies of a prescribed attribution is
+  how a displayed notice quietly stops matching its licence, so the national
+  file now says plainly that **`_NOTICES` is the one that must be right**.
+
+- **THE HEADLINE, and it was demonstrated rather than argued.** Running
+  `python pipeline/drift_check.py` for the four affected cities in this
+  worktree: Toronto failed with "no data/<city>/raw/ - nothing to run
+  against", while **Madrid, Mexico City and Guadalajara all reported zero
+  drift** - because their steps fetched. Afterwards `data/` in this worktree
+  contained exactly those three cities and nothing else, every file written in
+  the preceding ten minutes: a 39 MB DENUE zip, a Madrid census CSV, Overpass
+  responses and CRTM layers. **The command `CLAUDE.md` tells every session to
+  run after any pipeline change went to the network.**
+
+- **And it changes what a passing drift check MEANS for those three.** A drift
+  check exists to ask "does the committed code still produce the committed
+  output". For a city that re-downloads first, it asks "does the CURRENT
+  UPSTREAM still produce the committed output" - a different question, which
+  passes today and would fail on an upstream edit that no commit here caused.
+  The earlier finding was that this would happen on a fresh clone; it happens
+  on any checkout without raw data, which is every new worktree. Handed to the
+  main session rather than fixed here: moving three cities' fetching into
+  `fetch_*.py` is build-session work needing each city's context.
+
+### 2026-09-22 - Two probes came back clean, and the clean result is the record
+
+- **Probe: does `app/` import anything `requirements.txt` does not declare?**
+  Two names came back - `pydeck` and `pipeline` - and **both are accounted
+  for**, which is the useful answer rather than a disappointing one.
+  `requirements.txt` says in a comment "pydeck itself ships with Streamlit, so
+  it needs no line of its own", and the lean-venv run earlier today confirmed
+  pydeck 0.9.3 present without a line. `pipeline` is a local package, and the
+  app imports only `pipeline/<city>/config.py` (for `HEATMAP_HTML`) and
+  `pipeline/theme.py` - **neither touches the geo stack**. `map_common.py` does
+  import it and the app never imports `map_common`. No check shipped: this
+  duplicates `check_deploy_imports.py`, which is strictly stronger because it
+  actually imports the app in a clean clone under the lean venv rather than
+  reasoning about names.
+
+- **Probe: is every `outputs/` file the docs and pages PROMISE actually there?**
+  17 distinct paths cited across `app/` and `docs/`; all 17 exist and all 17
+  are committed. Clean.
+
+- **Shipped a check for the second one anyway, because the risk is structural
+  rather than present.** These are not files the app opens - it reads one
+  `heatmap.html` per city through an iframe - they are **claims on behalf of a
+  reader who will go and look**: "the stations excluded are listed in
+  `outputs/montreal/excluded_stations.csv`". `outputs/` is committed and
+  `data/` is not, so a city added in a hurry can cite a file that never leaves
+  the machine it was built on, and nothing about the page looks wrong from the
+  inside. Check J fails on missing OR merely uncommitted, and was
+  negative-tested by citing an untracked file from the Montreal page.
+  **It exists for the seventeenth city, not for the sixteen already right.**
+
+- **Recording a clean probe is part of the job.** A sweep that reports only
+  findings teaches the next person nothing about what was examined, and the
+  cheapest way to waste an hour is to re-run a probe someone already ran and
+  did not write down.
+
+- **`check_provenance.py` now runs ten checks (A-J)** and `--strict` exits 0.
+
+### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
+
+- **Discarded Sevilla on measured data after its dead portal named its own
+  successor.** `datosabiertos.sevilla.org` is NXDOMAIN and `www.sevilla.org`
+  is unroutable from here, so the city had been parked as unreachable with the
+  note that *"one attempt from a different network settles it"*. What it
+  actually took was a different **host**. The final Internet Archive capture
+  of the retired portal - 2024-04-25, already serving 503 - carries in its own
+  JavaScript a KML link to `sevilla.idesevilla.opendata.arcgis.com`, naming
+  the ArcGIS organisation that replaced it. Enumerating owner accounts on
+  `www.arcgis.com/sharing/rest` returned **1,260 public items, 413 Feature
+  Services**, from org `hcmP7kr0Cx3AcTJk` served by `services1.arcgis.com`.
+  Rejected the alternative of leaving Sevilla parked, because the city is now
+  measured rather than merely unreached. Band D drops to 10 and sub-tier D-d
+  closes entirely. Touched `docs/city_master_list.md`,
+  `.claude/skills/add-country/SKILL.md`.
+
+- **The ArcGIS Hub sign-in wall was a front-end, not a verdict on the data,
+  and reading it as one cost this city several probes.** Sevilla's Hub says
+  *"Can't access this content ... Sign In"*, recorded here as "the Medellín
+  shape" - genuinely private. It is not: `sharing/rest/search` serves the same
+  organisation's items **anonymously**, and every FeatureServer layer answers
+  `?f=json` and `returnCountOnly` without credentials. **A Hub is a UI; the
+  REST API is the data.** Written into `add-country` with the exact calls, so
+  the next sign-in wall is tested rather than believed. Note also that
+  `owner:idesevilla` returned 0 while the correct account, `Ayto.Sevilla`, was
+  already sitting in a printed search result - the org id came from reading
+  output, not from a better guess.
+
+- **`Locales` is a false friend, and only the row count exposed it.** Sevilla
+  publishes a Feature Service called `Locales` plus ten per-district copies -
+  the same Spanish word Madrid's 225,660-row `censo de locales` uses. It holds
+  **150 rows city-wide, and 1 for Triana**. Its fields say what it is:
+  `USO = VACÍO`, `ENTIDAD_CESIÓN_USO`, `ADSCRITO_A`, `Editor = 6_Empleo`,
+  with observations like *"Estado de conservación en bruto"* - the city's
+  inventory of **vacant municipally-owned units offered for assignment**,
+  published by the Employment directorate. `BIENES INMUEBLES` (11 districts)
+  and `Naves Industriales` are the same family; `APP_Mercados` (18) and
+  `Centros_Comerciales` (120) are facility layers, the Málaga shape. The only
+  genuine premises signal is `Veladores_2023`: **389 pavement-terrace
+  licences** (2,897 furniture items), EPSG:25830 - one narrow hospitality
+  bucket, well under Stockholm's 8,146 food premises, which is itself only a
+  Band B city. All 413 Feature Services were scanned by title rather than
+  keyword-filtered, applying the same morning's Bulgarian lesson about partial
+  scopes to this sweep.
+
+- **Sevilla's rail leg is solved, which retires a blocker recorded against
+  it.** The city publishes `METRO_Estacion` (**21** rows, real `NOMBRE` values
+  - Ciudad Expo, Cavaleri, San Juan Alto) and `METRO_Linea` (**20** polylines
+  with `ID_EST_INI`/`ID_EST_FIN` segment topology), both public and account-
+  free. The prior position was that the rail half needed Spain's National
+  Access Point, which answers **401** and wants a free account - the WMATA
+  shape. **That is no longer on Sevilla's critical path**, and the finding is
+  recorded even though the city is discarded, because the NAP was carried as a
+  cost against other Spanish cities too.
+
+
+- **Discarded Sofia on DATA, after routing around the 403 that had it parked
+  as "unreachable, nothing learned".** `data.egov.bg` returns 403 to curl and
+  to a real browser alike, while DNS-over-HTTPS showed the host up and the
+  Internet Archive held a 2026-04-02 snapshot - so the refusal was aimed at
+  us and the portal was alive. `data.europa.eu`'s SPARQL endpoint harvests
+  that portal and is a different host: **11,635 Bulgarian datasets**
+  (ids 3-23,557) were enumerated without touching the blocked origin.
+  **141 instances of `Регистър на търговските обекти`** - the municipal
+  commercial-premises register this project needs - exist across roughly
+  fifty municipalities, plus **72** food-and-entertainment registers. Sofia's
+  **76** datasets contain neither: budgets, school and kindergarten lists,
+  parking and taxi permits, dams, war memorials, donations, municipal
+  enterprises. Rejected the alternative of leaving Sofia parked as blocked,
+  because the block is no longer what decides it. Band D drops to 11,
+  Discarded rises to 25. Touched `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md`, `.claude/skills/add-country/SKILL.md`.
+
+- **Bulgaria fails STRUCTURALLY, which is a stronger finding than Sofia
+  failing.** The ~50 municipalities that publish a premises register are all
+  small towns - Враца, Мадан, Костинброд, Карлово, Дупница, Тервел,
+  Етрополе, Драгоман. **Sofia is the only Bulgarian city with a metro.** The
+  data exists where there is no rail and the rail exists where there is no
+  data, so no improvement in access would produce a buildable Bulgarian city.
+  That is why this is a discard rather than a park: a parked city implies a
+  cheaper route might exist, and here none can.
+
+- **Recorded that the EU portal is a CATALOGUE, not a BYPASS - measured, not
+  assumed.** **0 of 20** sampled harvested records carry any
+  `dcat:distribution`: the harvest is metadata-only, titles and descriptions
+  with no download URLs. So the technique can establish what a blocked
+  country publishes, which is exactly what settled Sofia, and cannot supply
+  the file itself. Written into `add-country` as an explicit limit so the
+  next country is not screened optimistically on it. An earlier version of
+  this check reported "0 distributions" for a different and invalid reason -
+  the query carried `LIMIT 60` and each record holds ~24 machine-translated
+  `dct:title` rows, which exhausted the limit before any distribution could
+  appear. The right answer by the wrong method is still the wrong method.
+
+- **`dct:spatial` on data.europa.eu means COVERAGE, not provenance, and the
+  near-identical counts were the tell.** Filtering to `country/BGR` returned
+  8,157 and `country/EST` returned 8,158 - one apart, the same shape as the
+  REST endpoint's facet that returned 74 for both and turned out to be
+  ignored entirely. Here the filter is real (`country/ZZZ` and `country/QQQ`
+  both return 0), but it selects pan-European studies that *cover* a country:
+  **6,394 of Bulgaria's 8,157 are Eurostat**, and **zero** had a Bulgarian
+  publisher. Publisher enumeration then failed for a second reason worth
+  recording - every Bulgarian `dct:publisher` is a **blank node naming an
+  individual official**, so there is no organisation URI to enumerate by and
+  every per-publisher count is 1 by construction. The language tag proved the
+  usable proxy for provenance.
+
+- **Converted a search the server refuses into a lookup it cannot refuse.**
+  The endpoint holds ~1.9M datasets and 504s on anything that must see them
+  all: `COUNT`, `GROUP BY` and an unscoped `FILTER CONTAINS` all timed out,
+  the last one even for the nonsense control. `LIMIT` streams fine but
+  `OFFSET` dies between 500 and 2000, capping paging at ~560 rows. Dataset
+  URIs are sequential integers, so a `VALUES` block of 400 explicit URIs is
+  an indexed fetch that cannot time out - one sparse sweep to map the id
+  space, then dense sweeps of the bands that answer. Keyword matching was
+  done locally in Python because titles are machine-translated into ~24 EU
+  languages and a server-side match would hit one variant and miss the rest.
+
+- **Corrected a stale claim in `add-country` that would have mis-advised the
+  next country.** The skill stated Bulgaria's 403 was "a stock Apache page,
+  i.e. a client-signature refusal, not an IP-level one, so the browser is
+  worth trying". The browser returned the same 403. Replaced with the general
+  rule the episode actually supports: **a refusal's cosmetics say nothing
+  about its cause** - only trying it does. The surrounding advice to try the
+  browser first is unchanged and was not the error.
+
+- **Extended the "coverage trap" catch to my own sweep before it became a
+  finding.** The first dense sweep covered ids 16000-24000, found 2,721
+  datasets and 13 Sofia rows with no premises register - a publishable-looking
+  negative. Its own sparse probe had hit Bulgarian records at 6000 and 8000,
+  so the scope was wrong: a full sweep returned **11,635** datasets and
+  **76** Sofia rows. The conclusion held, but it would have been asserted on
+  23% of the evidence, which is the trap by its proper name - the right
+  shape at the wrong scale, catchable only by a row count.
+
+### 2026-09-22 - The table check that had been written inline six times, and one probe that was correctly abandoned
+
+- **`check_provenance.py` check I verifies that every markdown table in the
+  provenance docs actually renders**: no row orphaned from its header by
+  intervening prose, no row whose cell count differs from its header's.
+  Markdown fails silently at both - an orphaned row renders as literal
+  pipe-delimited text and looks correct in a diff - and both have happened
+  here: Edmonton's and Toronto's rows were orphaned in two tables at once, and
+  Philadelphia's OPA row carried five cells against a six-cell header.
+  **Written inline six times during one sweep before being committed**, which
+  is the usual sign that something belongs in a script.
+
+- **Negative-tested against both historical shapes**, by injecting prose above
+  a row and by deleting a cell from another; both are reported, and the file
+  restores clean. Two traps in writing it: a header row sits above its own
+  delimiter and so legitimately has no width at that point - without a one-line
+  look-ahead the check flags every header in the file, which the first version
+  did - and fenced code blocks contain pipe-delimited text that is not a table.
+
+- **One probe was run and DELIBERATELY NOT SHIPPED, which is worth recording as
+  much as the ones that were.** The idea: every source host in the three
+  provenance tables should have a licence position somewhere, which would have
+  caught the Province of British Columbia publishing into this site unread -
+  the most significant find of the day. In practice it returned **26 of 42
+  hosts as uncovered and nearly all were false**: the licence section keys on
+  publisher NAME, not host, so `muni-gtfs.apps.sfmta.com` reads as uncovered
+  while SFMTA plainly is not, and the same for MTS, STM and TransLink. The
+  coupling between a URL and its licence entry is a human-readable name a
+  script cannot match reliably.
+
+- **Shipping it anyway would have broken the rule this role runs on**: a check
+  that reports correct work as broken is worse than no check, because the next
+  reader learns to skip it. Making it work would need a convention change -
+  every provenance row naming its own licence - which is a bigger decision than
+  a sweep should take unilaterally. Recorded here so the next person does not
+  rediscover the idea and assume nobody tried it.
+
+- **`check_provenance.py` now runs nine checks** (A-I) and `--strict` exits 0.
+
+### 2026-09-22 - Two of nineteen licence hashes described bytes that existed nowhere
+
+- **Probed the licence store's SHA-256 block and found four defects in a
+  compliance artefact.** `cta-developer-license-agreement.html` and
+  `bc-open-government-licence.txt` were listed with digests that matched
+  neither the working tree nor the committed blob, and
+  `crtm-licencia-de-uso.txt` and
+  `madrid-condiciones-generales-reutilizacion.txt` had no hash at all. The
+  block exists so the clauses quoted in `data_sources.md` are "checkable
+  against the text that was actually agreed to" - a stale digest ends that
+  silently, which is the whole hazard of a compliance artefact.
+
+- **The cause was systemic, not four separate slips, which is why one of them
+  was mine from earlier today.** `.gitattributes` sets `* text=auto eol=lf`,
+  so git rewrites CRLF to LF **on commit** - after the hash has been taken.
+  CTA's was fetched from a server that sent CRLF; BC's was written by a Python
+  script on Windows. Verified rather than assumed: both files are now all-LF
+  with `blob == working tree`, so the recorded digests described bytes that
+  exist nowhere at all. **Compute a digest from the COMMITTED file.**
+
+- **`check_provenance.py` check G now verifies every stored licence's hash and
+  fails on a mismatch or a file with no hash listed**, with the CRLF cause
+  named in the failure message so the next person is not left guessing.
+  Negative-tested by corrupting CTA's digest: it reports the mismatch and both
+  hashes. The README carries the same warning above the block.
+
+- **A second probe found one broken relative link out of two candidates.**
+  `docs/build_briefs/vancouver.md` linked `[session_roles.md](session_roles.md)`
+  from inside `docs/build_briefs/`, pointing at a sibling that never existed -
+  it needed `../`. Check H now resolves every relative markdown link, stripping
+  fenced and inline code first, because Overpass QL
+  (`["network"="<Net>"](bbox)`) reads exactly like a markdown link and is not
+  one - which was the other candidate.
+
+- **A third probe came back clean and that is worth recording too:** every city
+  in `app/cities.py` has its page file and a matching `outputs/<slug>/heatmap.html`.
+  Sixteen for sixteen. A sweep that only reports findings teaches nothing about
+  what was examined.
+
+### 2026-09-22 - Category 7 has a check, and it found that the three newest cities fetch inside their steps
+
+- **`check_stale_claims.py` category D reports config constants no script
+  reads** - 17 of them - because the comment above a dead constant is usually
+  describing a plan that did not happen. It counts **reads, not mentions**:
+  comments and strings are stripped with `tokenize` first.
+
+- **That stripping is not a refinement, it is the difference between working
+  and not.** The first version counted raw text and returned San Diego's
+  `PARCEL_QUERY_BBOX` and `PARCEL_PAGE_SIZE` as CLEAN - the two constants the
+  check was written for - because **this check's own docstring names them as
+  the worked example**. The checker's documentation of the bug masked the bug.
+  A third instance of today's recurring shape: content that reads correctly and
+  is invisible to the tool looking at it.
+
+- **Two hits look like bugs and are not, both now recorded in the skill.** San
+  Francisco's `COUNTY_BOUNDARY_URL` is read by nothing, and its
+  `fetch_sources.py` says why in terms - the three older inputs "were
+  downloaded before this script existed" and are not re-fetched "because
+  re-downloading a business export changes every count in `DECISIONS.md`".
+  Vancouver's `MUNICIPALITIES_KEEP` is unread because that layer NAMES rather
+  than filters, which is what its provenance row says. **Reading the comment is
+  the step; deleting the constant is not.**
+
+- **Probing outward from those two found a real architectural drift that no
+  build session could see.** Surveying which cities have a fetch script at all:
+  **Madrid, Mexico City and Guadalajara have none**, and their `step1` and
+  `step2` files import `requests` directly - six step files in the three newest
+  cities. Every one of the other thirteen keeps fetching in a separate
+  `fetch_*.py`, and San Francisco's states the reason as an invariant:
+  *"a drift check must be deterministic and offline, and step 2 must therefore
+  never fetch anything itself."*
+
+- **The deviation is real but mild, and the distinction matters.** Both were
+  checked rather than assumed: Mexico City's `overpass()` returns the cached
+  file when it exists and only calls out on a miss, and Madrid's step 2 fetches
+  only `if not BUSINESSES_RAW_CSV.exists()`. So on a normal run, where
+  `data/<city>/raw/` is populated, they are offline and deterministic and
+  `drift_check.py` behaves. **On a fresh clone they would not be** - that
+  directory is gitignored, so the guard misses and the steps reach the network.
+  The invariant is now conditional rather than absolute, and the sentence in
+  San Francisco's docstring is no longer true of the whole project.
+
+- **Not fixed here, deliberately.** Moving three cities' fetching into
+  `fetch_*.py` is build-session work needing each city's context, and the
+  cleanup role hands those over rather than rewriting step logic. Recorded so
+  the next person reading San Francisco's confident invariant knows it has
+  three exceptions.
+
+### 2026-09-22 - Category 3 has a check, and a range check would not have caught the bug it was built for
+
+- **`check_provenance.py` check F verifies that every `item N` citation still
+  points at the notice it MEANT.** The defect it exists for is subtle in a way
+  that matters: renumbering moved Edmonton from item 14 to 15 on 2026-09-22,
+  and `docs/build_briefs/edmonton.md` went on saying "item 14 carries it" - a
+  citation that still **resolved**, to Calgary. **A range check would have
+  passed it.** So the check reads each notice's subject, then compares it
+  against the subjects named around the citation, and fails when the
+  neighbourhood is discussing a different notice than the one cited.
+
+- **Verified by reintroducing the real break**, not by reasoning about it:
+  reverting that line to "item 14" produces
+  `cites item 14 (Calgary), but the text around it names ['Edmonton'] and
+  never 'Calgary'`, exit 1; restoring it returns exit 0. A check that has never
+  been seen to fail is a check nobody has tested.
+
+- **The hard part was NAMESPACES, not numbers, and the first version got it
+  wrong.** "Item N" means at least three different lists in this repository:
+  the notices list, the deploy-gate list under "What closing this fully
+  requires", and `global_country_shortlist.md`'s own "#### Item N" probe sweep.
+  Checking all of them against the notices list produced **thirteen**
+  "unverifiable" notes, every one a correct citation of a different list. Now
+  only "notice N", and "item N" whose sentence also names `data_sources.md`,
+  are treated as notices citations; "Gate item N", "Step 0 item N" and
+  `#### Item N` headings are excluded explicitly. **Thirteen bogus notes down
+  to one**, and that one is a genuine multi-item citation ("Items 9, 10, 14,
+  16") that proximity cannot verify.
+
+- **The principle, because it will come up again:** a check that reports other
+  people's correct work as broken is worse than no check. The next reader
+  learns to skip the section, and then it catches nothing at all.
+
+- **Method note worth recording since it cost a cycle:** the namespace fix was
+  written through a shell heredoc and the `\n` in `text.rfind("\n", ...)`
+  arrived as a literal newline, producing an unterminated string literal.
+  `CLAUDE.md` warns about exactly this. Rewritten with `chr(10)`, which has no
+  escape to mangle.
+
+### 2026-09-22 - Category B closed: every item adjudicated, and the noisiest file became a hard check
+
+- **Finished category B properly rather than at a floor - all 74 originals are
+  now either fixed or explicitly read and kept with a reason.** The report
+  stands at **20**, and those twenty are adjudicated, not unexamined.
+
+- **The eight counts in `docs/city_master_list.md` became a DETERMINISTIC
+  check instead of a permanent heuristic flag.** `check_provenance.py` check E
+  now parses that file's `## Built - N` heading and its per-country rows and
+  compares them to `app/cities.py`, total and per country. Verified by
+  perturbation: changing the total to 15 and Canada to 4 produced exactly two
+  failures naming both. **This is the sweep skill's own first principle applied
+  to itself** - a correction fixes an instance, a check fixes the class - and
+  it settles the awkward case where a file's job IS to carry counts. **A count
+  in a file whose job is to carry counts gets checked; a count anywhere else
+  gets deleted.**
+
+- **The two evidence trails were excluded as dated records**, on the argument
+  already established for retrospectives: `CLAUDE.md` calls
+  `global_country_shortlist.md` "every probe logged", and
+  `canada_step0_endpoints.md` was relabelled an evidence trail earlier today.
+  Their counts are dated probe findings and updating them would damage the
+  trail.
+
+- **THE RULE THE WHOLE CATEGORY WAS REACHING FOR, now written into the skill:
+  the test for a count is its DENOMINATOR, not its accuracy.** All twenty
+  survivors are scoped to something that cannot grow without the sentence being
+  rewritten anyway - a constant of the world ("all five boroughs", "the six
+  pre-1998 municipalities"), fixed project vocabulary ("all three buckets" is a
+  definition, not a tally), a closed set ("the two Alberta cities", "all six
+  Canadian sources", "the two diagnosed cities"), or a dated statement ("all
+  fourteen cities before Mexico City read GTFS"). Every count that HAD rotted
+  counted something open: cities built, sources recorded, agreements stored,
+  registries in a table. So the question is never "is this right today" - a
+  rotted count was right once too - but **"can the thing this counts grow
+  without anyone touching this sentence?"**
+
+- **Category B, final: 74 flagged -> 20, files scanned 39 -> 24**, three of the
+  remaining twenty being the tool's own single-line-quote false positives on
+  this session's corrections. Nothing is left unexamined.
+
+### 2026-09-22 - Category B reaches its floor: 74 to 35, and the rest are not defects
+
+- **Last two edits in `data_sources.md`, both this session's own prose from
+  earlier today.** "Vancouver is the only one of **the six Canadian cities**
+  with no licence-level home-business flag" and "the only Canadian city **of
+  the six** needing no taxonomy module" - in both the claim is *only*, and the
+  denominator carries none of the meaning while ageing on every Canadian
+  build. Same treatment as "the fourteen agency-sourced cities" three passes
+  ago: correct today is not a reason to keep a hand-kept number.
+
+- **All eleven `data_sources.md` hits were read; nine stay, with reasons.**
+  "All three buckets" is this project's fixed vocabulary; "the six pre-1998
+  municipalities" is a fact about Toronto's 1998 amalgamation; "all five
+  boroughs = the city" holds as long as New York has five; Miami-Dade's "all
+  three sources" is scoped to one county's three datasets; "the five GTFS
+  feeds" sits inside a struck-through completed gate item and records what was
+  checked then. One is the known multi-line-quote false positive - this
+  session's own correction of the "four of the eight registries" claim.
+
+- **Category B: 74 -> 35 over seven passes, and this is its floor for now.**
+  What remains is dominated by correctly scoped facts, dated evidence in the
+  two country trails, and three false positives from the tool's own
+  single-line quote matching. **Continuing would mean tuning the checker to
+  silence rather than finding defects**, which is the failure mode the report
+  format was chosen to avoid - so it stops here rather than at a number.
+
+- **The seven passes found, in total:** three notices in the deploy gate marked
+  NOT YET DISPLAYED that were displayed; "the five NAICS cities" when there
+  were four, in a file linked from every page of the site; `add-city`'s header
+  still claiming four built cities when there were sixteen; "All seven
+  agreements" against a directory past twenty; a settled sourcing question
+  still written as open; and Madrid's status understated in the file the
+  project reads its counts off. Plus one error this session had introduced
+  hours earlier - Madrid filed under OpenStreetMap - which the list caught.
+
+### 2026-09-22 - Category B, sixth pass: the master list's counts are right, and that is the finding
+
+- **Verified `docs/city_master_list.md`'s built table against `app/cities.py`
+  rather than deleting its counts, and every number held.** "## Built — 16"
+  against 16 entries; "United States (9)" against 6 in *United States East*
+  plus 3 in *United States West*; "Canada (5, complete)" against 3 West plus 2
+  East; "Mexico (2)" against 2. **This is the opposite action from the rest of
+  category B and it is the right one here**, because `CLAUDE.md` designates
+  this file the current global list and says to read counts off it. A count in
+  a file whose job is to carry counts gets CHECKED; a count in a file whose job
+  is something else gets deleted. The sweep skill's rule stands either way:
+  decide which kind of document you are in first.
+
+- **Worth stating plainly: the instruction is working.** `CLAUDE.md` says its
+  own pointer "has gone stale twice by repeating them" and sends the reader to
+  the master list instead. Today the master list was accurate to the entry
+  while four other current-state documents were not, which is the argument for
+  the pattern - one file owns a number and everything else points at it.
+
+- **One line there WAS stale, and it changes what the next session picks up.**
+  "▶ **Madrid is being built now**" understated it: Madrid's pipeline,
+  outputs, taxonomy module and provenance rows are all merged to master, and
+  `check_provenance.py` reports it ready. What is held is only `app/cities.py`
+  and the page, on `spain-app-wiring`, deliberately - Streamlit Cloud pulls
+  master automatically and landing an imported module there would publish the
+  city and serve it broken until a reboot. Corrected to say exactly that, and
+  to name the branch's commit message as the authority on the hold rather than
+  restating the reasoning a third time.
 
 ### 2026-09-22 - The `osm_route_refs` check, and the correction it immediately made to the entry above
 
