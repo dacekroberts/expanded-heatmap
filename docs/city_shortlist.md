@@ -103,7 +103,7 @@ Mobility Database catalogue, counting route_type 0/1/5/7/12 and **excluding 2
 | **Vancouver - BUILT 2026-09-21, regionally with Surrey** | SkyTrain, 3 lines | `business-licences`: 205,943 rows, `geo_point_2d`, `businesstype`/`businesssubtype`, legal + trade name. OGL-Vancouver | Low - needs a local taxonomy module |
 | **Calgary - BUILT 2026-09-21** | CTrain, 2 lines | `vdjc-pybd`: `point`, `tradename`, `licencetypes`, `jobstatusdesc`, and **`homeoccind`** - a home-occupation flag handed over directly, as Chicago's `business_activity` is | Low |
 | **Edmonton - BUILT 2026-09-21** | LRT, 3 lines | `qhi4-bdpu`: `latitude`/`longitude`, `business_licence_category`, `business_name` | Low |
-| **Toronto** | 17 rail routes | 159,872 rows, `Category`, `Operating Name` - but **no coordinates at all** | **Highest.** Needs a geocoding pass like D.C.; licence field reads "not specified" so the terms must be read; and `Client Name` is a person or company, so LA's privacy discipline applies from the start |
+| **Toronto - BUILT 2026-09-21** | 17 rail routes | 159,872 rows, `Category`, `Operating Name` - but **no coordinates at all** | **Highest.** Needs a geocoding pass like D.C.; licence field reads "not specified" so the terms must be read; and `Client Name` is a person or company, so LA's privacy discipline applies from the start |
 
 **CORRECTED 2026-09-21 - an earlier version of this section said Toronto
 "codes its subway as `route_type 0`, not 1". That is false**, and the cause

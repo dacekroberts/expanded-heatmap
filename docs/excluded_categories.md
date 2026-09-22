@@ -597,6 +597,93 @@ livestock and salvage), bingo and casinos (11, NAICS 7132), cannabis processing
 (6) and cultivation (3), event production (3), carnivals (2) and one
 after-hours dance club that holds no alcohol category.
 
+### Toronto - endorsements, person-held licences, and a register that is mostly history
+
+**Toronto's exclusions are unusually large in share and unusually dull in
+substance**, because most of what its register contains is not premises at all.
+Of 159,872 licence rows, **122,301 are already cancelled** - this is a term
+history reaching back to 2005 rather than a snapshot - leaving 37,571 current
+licences, of which 19,575 are storefronts. Every one of the 92 categories has
+an explicit verdict in `pipeline/taxonomies/toronto_mlscategory.py`, which
+raises on an unknown rather than defaulting to None.
+
+**One row per licence, and `Category` is single-valued** - which is Calgary's
+double-counting problem without Calgary's delimiter to resolve it. A restaurant
+with a patio holds two licences and appears as two rows, so endorsements have
+to be dropped by category and step 2 then deduplicates on address plus
+normalised name.
+
+**Endorsements are excluded, and `NOISE EXEMPTION` is the largest single one.**
+`NOISE EXEMPTION` (4,960), `SIDEWALK CAFE` (2,473), `CURB LANE CAFE` (694),
+`EXPANDED EATING/DRINKING ESTABLISHMENT` (388) and `EXPANDED ENTERTAINMENT
+PLACE OF ASSEMBLY` (44) are permissions a premises holds, not premises. A
+restaurant with a patio and a noise exemption is one restaurant. Same call as
+Calgary's alcohol and patio endorsements and D.C.'s.
+
+**Person-held and vehicle licences are excluded, and they are most of the
+register's bulk**: `TAXICAB OWNER` (9,360), `TOW TRUCK OWNER` (4,959),
+`DRIVING INSTRUCTOR (V)` (3,130), `LIMOUSINE OWNER` (2,329), plus the broker,
+operator, pedicab and drive-self variants. These are the New York `Individual`
+distinction, and they are also why the register's blank-name rate looks
+alarming until it is read on the right subset: `Operating Name` is blank on
+21.4% of active rows and on **0.5%** of storefront rows, because a taxicab
+owner has no trade name and no shop.
+
+**Trades are excluded**: `BUILDING RENOVATOR` (9,065), `MASTER PLUMBER`
+(3,274), `PLUMBING CONTRACTOR` (2,365), `MASTER HEATING INSTALLER` (1,433) and
+the drain, paving, insulation and chimney variants. **Repair is excluded and
+personal care is not**, the NAICS 811-against-812 line every city here draws:
+`PUBLIC GARAGE` (11,767) is out, while `PERSONAL SERVICES SETTINGS` (11,105)
+and `LAUNDRY PREMISES` (2,247) count.
+
+**Signage and collection permits are excluded** - `TEMPORARY SIGN - MOBILE`
+(4,443), `CLOTHING DROP BOX LOCATION PERMIT` (1,246), `MARKETING DISPLAY` (765)
+and their variants - as is **parking** (`COMMERCIAL PARKING LOT` 2,058, NAICS
+81293, carved out of this project's personal-services anchor), and **nonstore
+and mobile trade** on the NAICS 454 reasoning (`MOTORIZED REFRESHMENT VEHICLE
+OWNER` 1,360, `HAWKER/PEDLAR` in three forms, `SIDEWALK VENDING` 212).
+
+**`PERMANENT FIREWORKS VENDOR` (31) counts and the four temporary ones do
+not**, because the City marks the distinction in the category name the way
+Calgary marks `- PREMISES`: `TEMPORARY FIREWORKS VENDOR (OVER 25 KG)` (296),
+`(UNDER 25 KG)` (167), `TEMPORARY MOBILE` (227) and `TEMPORARY LEASE` (57) are
+seasonal stands. Only the permanent one is a shop.
+
+**`HOLISTIC CENTRE` (2,051) counts, and Ontario's regulation of massage
+therapy is why that is clean here.** Ontario DOES regulate massage therapy
+(the College of Massage Therapists), so registered therapists are NAICS 621
+health care and are licensed provincially rather than appearing in this
+register. What Toronto licenses as a holistic centre is therefore the
+non-registered remainder, NAICS 812199 personal care. **This is the tidy side
+of a line Edmonton sits awkwardly across**: Alberta does not regulate the
+profession, so Edmonton's `Health Enhancement Centre (Accredited)` mixes
+physiotherapy and chiropractic clinics in and had to be counted with a
+disclosed 26% contamination. Toronto needs no such caveat.
+
+**`PET SHOP` (118) is Retail here, where Edmonton's `Animal Breeding and
+Boarding Facility` (77) is a Personal service.** Not an inconsistency: a pet
+shop sells animals and supplies (NAICS 459910 retail), while boarding and
+daycare is NAICS 81291 pet *care*. Toronto licenses the shop; Edmonton licensed
+the service.
+
+**And adult-services premises are excluded on sensitivity as well as scope** -
+`BODY RUB PARLOUR` (110), `ADULT ENTERTAINMENT CLUB` (51) and `BATH HOUSE`
+(14), **175 rows**. The reasoning is Calgary's and Edmonton's, confirmed by the
+owner on 2026-09-21: mapping adult-services premises adds exposure for the
+people working there without answering the question this project asks. Mapped
+to None rather than deleted, so it is one line to reverse.
+
+**Also excluded, without controversy:** entertainment and recreation
+(`ENTERTAINMENT PLACE OF ASSEMBLY` 445, `AMUSEMENT ESTABLISHMENT` 437,
+`BILLIARD HALL` 177, `ENTERTAINMENT ESTABLISHMENT/NIGHTCLUB` 170 - merged and
+leading with entertainment, so the same treatment as Edmonton's after-hours
+dance club - `THEATRE` 73, `BOWLING HOUSE` 38, `CARNIVAL` 16, `CIRCUS` 5,
+`SWIMMING POOL` 3), `PAYDAY LOAN` (187, NAICS 522291), `SECOND HAND SALVAGE
+YARD` (68, a yard rather than a shop), `AUCTIONEER` (251) and `COLLECTOR OF
+SECOND HAND GOODS` (66) as people rather than premises, `SHORT TERM RENTAL
+COMPANY` (5, NAICS 721), and `** Class record not on file. (138)` (4), which is
+the register's own placeholder.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found
@@ -611,6 +698,8 @@ after-hours dance club that holds no alcohol category.
   substituted. Its residual is small and it was left in.
 
 ## What is missing rather than excluded
+
+
 
 Some things on this map are absent for a different reason, and they are worth
 separating from everything above. Every exclusion so far was a choice. In **New
@@ -699,6 +788,45 @@ where surveyors walked rather than where commerce is, and mixing it in would
 have made four neighbourhoods read as three-bucket and the rest as two. It is
 recorded in `data_sources.md` as available and unused, with the trigger for
 revisiting it: a city-wide survey.
+
+
+**Toronto's general retail is ABSENT, and it is the most severe coverage gap
+on the site.** Everything else on this page was a choice; this was not.
+
+Toronto licenses food and trades, and not general retail. There is no licence
+category for a grocer, a clothing shop, a pharmacy, a hardware store or general
+merchandise, so none of them exists in any register to map. What the Retail
+bucket holds instead is the **regulated slice alone** - the trades a city
+licenses because it wants to watch them: `SECOND HAND SHOP` (1,806),
+`VAPOUR PRODUCT RETAILER` (539), `PRECIOUS METAL SHOP` (413), `SMOKE SHOP`
+(317), `PAWN SHOP` (218), `PET SHOP` (118), `SECOND HAND SALVAGE SHOP` (33) and
+`PERMANENT FIREWORKS VENDOR` (31).
+
+On the current licences that reach the map that is **870 of 19,575 storefront
+rows, 4.4%**, against 14,408 food service and 4,297 personal services. So
+**read Toronto's Retail layer as a narrow regulated slice of what is actually
+on the street, and the balance between its three categories as a fact about
+Toronto's licensing rather than about its high streets.** This is
+`multi-source-city`'s "Retail - regulated slice" archetype, and unlike New York
+- whose four registries at least covered all three buckets thinly - there is no
+second source at any level of government that would fill Toronto's gap.
+
+**The bucket is drawn rather than omitted**, decided by the owner on
+2026-09-21. The rejected alternative was leaving Retail out and drawing two
+buckets: it reads as a stronger statement but discards 870 real storefronts and
+would make Toronto the only city on the site whose legend differs from the
+other thirteen. New York's page is the model for the disclosure.
+
+**Toronto also loses about one storefront in sixteen to geocoding, and the loss
+is NOT spread by district.** Its register carries no coordinates at all, so
+every pin was placed by matching its address against the City's One Address
+Repository - 93.8% matched. The missing 6.2% concentrates on plaza and mall
+addresses the repository does not carry as a single string (`1571 SANDHURST
+CIR`, 44 rows; `8 WESTMORE DR`, 25), so a handful of shopping centres are
+under-counted rather than any district being missed. Checked on the axis that
+would distort the map: across the wards holding at least 200 storefront rows
+the match rate runs 75.4% to 99.3%, a **1.3x spread** with a standard deviation
+of 5.7 points.
 
 ## Honest limits
 

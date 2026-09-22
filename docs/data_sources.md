@@ -174,6 +174,24 @@ Edmonton needs no residence inference at all — and the City replaces the
 address with `<REDACTED FOR PRIVACY>` on 4,074 rows, **taking the coordinates
 with it** (redacted rows carrying coordinates: zero).
 
+| Toronto | Municipal Licensing & Standards (CKAN `169e90ba-3ae0-43dd-8b2f-919e87002f50`) | **Food service and Personal services**, via its own MLS `Category`. **NOT general retail** — see below | `https://ckan0.cf.opendata.inter.prod-toronto.ca/datastore/dump/169e90ba-3ae0-43dd-8b2f-919e87002f50?format=csv` | none at download; step 2 drops cancelled licences and reads only 6 of 19 columns | 2026-09-21 |
+| Toronto — **geocoder, not a business source** | One Address Repository (CKAN `64d4e54b-738f-4cd9-a9e7-8050fac8a52f`) | 525,440 address points, same licence as the business data | the package's `Address Points - 4326.csv` resource (~183 MB) | none (whole file) | 2026-09-21 |
+
+**Toronto is the only city here whose register carries NO coordinates**, so the
+address repository is a required input rather than a convenience — Canada has no
+national bulk geocoder. The join key is `Licence Address Line 1` with the unit
+stripped (the register writes `280 SPADINA AVE, #308`; the repository carries no
+units), which takes the match from 48.1% to **93.8%** of storefront rows.
+
+**Its `MUNICIPALITY_NAME` is NOT a city filter**, despite looking like one: it
+holds the six pre-1998 municipalities that amalgamated into Toronto, so matching
+"Toronto" keeps 30% of the city. Los Angeles' `CITY_KEEP` trap. The boundary
+polygon (`regional-municipal-boundary`, 641.4 km²) is the check.
+
+**Toronto also publishes THREE personal columns** — `Client Name`, `Business
+Phone`, `Business Phone Ext.` — and step 2 excludes them at `usecols`, so they
+never enter the process. The Canada profile recorded one of the three.
+
 **NOTE — a gap in these three tables, not in the builds.** Vancouver, Surrey,
 Montréal and Calgary were built with their endpoints recorded in
 [`canada_step0_endpoints.md`](canada_step0_endpoints.md) and their notices here,
@@ -196,6 +214,7 @@ should be promoted the same way; until they are, read
 | Miami | Miami-Dade Transit (Metrorail + Metromover) | `https://www.miamidade.gov/transit/googletransit/current/google_transit.zip` | 2026-09-21 | 8.4 MB. **Note the host**: `transitdata.miamidade.gov` does not resolve; this URL is also the one the Mobility Database lists as official. Four rail routes; three are drawn (`31009` Metrorail, `14457`/`14456` the Metromover loops) and the MIA Airport People Mover `14458` is not. **No `feed_info.txt` at all**, so no licence is declared in the feed. Metrorail publishes NINE shapes because the line branches, and has **no `parent_station`** — its 46 stop_ids are 23 stations x 2 directions |
 | Philadelphia | SEPTA Metro | `https://github.com/septadev/GTFS/releases/latest/download/gtfs_public.zip` | 2026-09-21 | **A zip of zips.** Contains `google_bus.zip` and `google_rail.zip`; `fetch_sources.py` extracts the **bus** one, because SEPTA's City Transit Division — and therefore the Market-Frankford Line, Broad Street Line and every trolley — is in that feed, not the "rail" one. `google_rail.zip` is Regional Rail, which this project does not draw. The naming is not guessable; both route tables were read to establish it |
 | Edmonton | Edmonton Transit Service LRT | `https://gtfs.edmonton.ca/TMGTFSRealTimeWebService/GTFS/gtfs.zip` | 2026-09-21 | **The URL is not published as a readable link.** The catalogue's entry for the feed (`urjq-fvmq`) is an `href`-type asset with no rows and no download button; the URL lives in its metadata under `accessPoints.DOWNLOAD`, which is why two guessed URLs 404'd during the Canada profile. 16.7 MB, 18 files, and it **declares a validity window** (`feed_start_date` 20260911, `feed_end_date` 20261128) where Calgary's and Toronto's do not. **Do not substitute either republication:** the eight individual Socrata GTFS tables (`d577-xky7`, `4vt2-8zrq`, `ctwr-tvrd`, `greh-g7ac`, `7f8n-igfx`, `f2sy-bth7`, `isug-45sj`, `hnhf-yaps`) expire 2026-08-29 and the Mobility Database mirror (id 714) expired 2026-06-20 |
+| Toronto | TTC subway (Lines 1/2/4) and LRT (Lines 5/6) | `https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/7795b45e-e65a-4465-81fc-c36b9dfff169/resource/cfb6b2b8-6191-41e3-bda1-b175c51148cb/download/opendata_ttc_schedules.zip` | 2026-09-21 | **The City's own CKAN package, and the Mobility Database mirror must NOT be substituted: its copy was three months expired and contained NO SUBWAY AT ALL** (209 bus, 17 tram, 2 ferry, zero `route_type 1`), which produced the false claim that Toronto codes its subway as route_type 0 and is why `screen_rail.py` now prints feed expiry. 36 MB, 8 files, no `feed_info.txt` — so like Calgary's there is no validity window to check. The 18 streetcar routes share `route_type 0` with the two LRT lines and are separated by `^Line \d` |
 
 ## Boundary layers
 
@@ -242,6 +261,8 @@ byte-for-byte at 38,822 bytes with identical geometry, so it is the confirmed
 original source and not a lookalike.
 
 | Edmonton | **City of Edmonton — Corporate Boundary (current)** (Socrata `qqvh-dp5m`) | `https://data.edmonton.ca/api/geospatial/qqvh-dp5m?method=export&format=GeoJSON` | Whole city, 1 Polygon, 783.1 km². **FOUR layers on this portal are named some variant of "Corporate Boundary" and they are not the same polygon:** `qqvh-dp5m` and `a62q-eaea` give 783.1 km², `3trg-p57p` and `gtx5-kghy` give 699.8 km². The 83.3 km² difference is Edmonton's 2019 annexation from Leduc County, so the smaller pair predates it and is stale. This is Calgary's two-boundary trap with twice the ways to get it wrong, so `fetch_sources.py` asserts the area rather than trusting the name. Also the vocabulary trap: a search for "city boundary" misses it, because Edmonton calls it *corporate* |
+
+| Toronto | **Regional Municipal Boundary** (CKAN `41bf97f0-da1a-46a9-ac25-5ce0078d6760`), a zipped shapefile geopandas reads directly | `https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/841fb820-46d0-46ac-8dcb-d20f27e57bcc/resource/41bf97f0-da1a-46a9-ac25-5ce0078d6760/download/toronto-boundary-wgs84.zip` | Whole city, 1 feature, 641.4 km² against Toronto's ~630 km² of land. It does real work here rather than being a formality: Line 1 runs past the city limit into York Region, so Highway 407 and Vaughan Metropolitan Centre are excluded by it |
 
 ## Geocoding
 
@@ -979,7 +1000,20 @@ any reason, in its sole discretion", which is discretionary rather than
 automatic. It also bars implying City endorsement or affiliation and bars use of
 its marks, which `render_site_notices()`'s standing non-affiliation line covers.
 
-So for the **thirteen** cities now built there are **twelve** sources requiring
+**15. City of Toronto — required, and DISPLAYED. ONE notice covers BOTH the
+business register and the TTC's GTFS**, as Calgary's does, because both are City
+of Toronto CKAN resources under the same licence:
+
+> `Contains information licensed under the Open Government Licence – Toronto.`
+
+En dash, British "Licence". Like Vancouver's, Surrey's and Calgary's, this
+licence **terminates automatically on breach**. Both datasets declare "License
+not specified" at dataset level, which is why the licence text was captured from
+`open.toronto.ca/open-data-licence/` and stored at
+`docs/licenses/toronto-open-government-licence.txt` rather than read from a
+field.
+
+So for the **fourteen** cities now built there are **thirteen** sources requiring
 specific text or acknowledgement, all of them displayed — and the three Canadian
 builds added six of the twelve between them, where the nine US cities needed
 five in total.

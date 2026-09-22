@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**102 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**103 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-21**
 
+- [Toronto built: Canada closes at five cities, and the station count was checked twice](#2026-09-21---toronto-built-canada-closes-at-five-cities-and-the-station-count-was-checked-twice)
 - [Toronto's open question 1 closed: the 71.4% was the wrong denominator](#2026-09-21---torontos-open-question-1-closed-the-714-was-the-wrong-denominator)
 - [DECISIONS.md got a generated index, because it is 100 entries long](#2026-09-21---decisionsmd-got-a-generated-index-because-it-is-100-entries-long)
 - [Briefs are executable now, and the first run corrected Toronto again](#2026-09-21---briefs-are-executable-now-and-the-first-run-corrected-toronto-again)
@@ -135,6 +136,149 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-21 - Toronto built: Canada closes at five cities, and the station count was checked twice
+
+- **Added Toronto as the fourteenth city and the last Canadian one: 19,384
+  storefronts, 18,186 geocoded, 8,739 within the 0.6 mi ring across 108
+  stations, 81 per station.** Per-step counts, as the drift baseline:
+
+  *step 1* - feed `route_type` counts `{3: 213, 0: 20, 1: 3}`; 3 subway routes
+  plus 2 LRT matched on `^Line \d` = 5 drawn, **18 streetcar routes excluded**
+  as out of scope; 234 served stops; `parent_station` not populated; 234 of 234
+  boardable, so **0 non-revenue stops**; collapsed to **110 stations**
+  (subway-only 148 platforms -> 71); nearest-neighbour median 635 m against 69 m
+  uncollapsed; boundary 641.4 km2; **108 in-city**, 2 excluded.
+
+  *step 2* - 159,872 licence rows, 19 columns of which 3 are personal and never
+  read; 122,301 already cancelled and 8 cancelled in the future so kept ->
+  37,571 active; 72 distinct categories on the active set; storefront filter
+  37,571 -> **19,575** (17,996 dropped, endorsements included); Food service
+  14,408, Personal services 4,297, Retail 870; `Operating Name` blank on 106 of
+  19,575 (0.5%); 0 blank addresses; deduplicated on address + normalised name
+  19,469 -> **19,384** (85 dropped; on address alone it would have been 18,401,
+  which would have deleted real storefronts).
+
+  *step 3* - 19,384 to geocode against 525,440 address points (522,246 distinct
+  normalised); matched **18,186, 93.8%**; 1,198 unmatched; ward match-rate
+  spread 1.3x (75.4% to 99.3%, std 5.7 points); 18,186 of 18,186 inside the
+  boundary.
+
+  *step 4* - 9,447 of 18,186 outside every ring, **8,739 within**, across 108
+  stations.
+
+- **Its station count was wrong twice before this build, and the collapse is
+  now checked two ways rather than trusted.** `parent_station` is populated on
+  no stop, so the names must be munged - and **THREE naming conventions live in
+  this one feed**, not the two the second correction found. The subway
+  hyphenates (`Finch Station - Southbound Platform`); the LRT does not (`Aga
+  Khan Park & Museum Station Eastbound Platform`, plus a bare `Finch West
+  Station LRT Platform`); and **Union Station names its DESTINATION** (`Union
+  Station - Northbound Platform Towards Finch` against `... Towards Vaughan
+  Metropolitan Centre`), which no pattern handled, so Union counted twice and
+  Line 1 read 39 stations against the TTC's 38. Three more stations appear twice
+  with a `- Subway` suffix. With all of it handled: 234 platforms -> 110
+  stations, and **every per-line count now matches the TTC's own published
+  figures exactly - 38, 31, 5, 25, 18.** The two checks that settle it are the
+  operator's counts and the spacing median (635 m at 110; an incomplete strip
+  gives 160 at 70 m, which is platform spacing). Supersedes the two corrections
+  earlier today.
+
+- **Two Line 1 stations are outside Toronto and are recorded rather than
+  dropped**: Highway 407 (876 m beyond the boundary) and Vaughan Metropolitan
+  Centre (2,113 m), both on the extension into York Region. This is San Diego's
+  situation, and mapping them would need York Region's own business data,
+  sourced separately - a new project rather than a config change.
+  `outputs/toronto/excluded_stations.csv` names both.
+
+- **Drew the Retail bucket and disclosed it, rather than omitting it.** The
+  owner's call, and it reversed an earlier answer of mine that rested on a bad
+  number: I reported Retail as "2.3%, the single category `SECOND HAND SHOP`",
+  which came from the screening bucket map written for the bias test rather
+  than from the taxonomy. Measured properly it is **8 categories and 4.2%** of
+  storefront rows (870 of 19,575 on the current licences) - second-hand, pawn,
+  precious metal, smoke, vape, pet, salvage and permanent fireworks. That is
+  New York's shape, and New York draws its thin Retail bucket with page prose,
+  so Toronto does too. Rejected: two buckets with Retail stated as missing,
+  which discards 870 real storefronts and would make Toronto the only city
+  whose legend differs from the other thirteen. **What survives from the
+  original framing is the substance** - Toronto licenses no grocer, clothing
+  shop, pharmacy or hardware store, so general retail is ABSENT rather than
+  thin, and the city page and `docs/excluded_categories.md` both say so under
+  *missing* rather than *excluded*.
+
+- **The geocoder is one line, and it is not street normalisation.** The brief
+  named the obstacle as matching "with no street normalisation". The real
+  obstacle is that the register writes the UNIT into the address line (`280
+  SPADINA AVE, #308`, `1835 EGLINTON AVE W, 2ND FLR`) and the address
+  repository carries no units: dropping everything from the first comma takes
+  the match from **48.1% to 93.8%**. `GEOCODE_MATCH_RATE_MIN` refuses anything
+  below 85%, because the first run of step 3 parsed the repository's geometry as
+  WKT when it is a GeoJSON `MultiPoint` string, produced a **0%** join, and the
+  guard is what caught it rather than a plausible-looking map.
+
+- **`MUNICIPALITY_NAME` is not a city filter, and reading it as one would have
+  been the worst error available here.** The brief says the address repository
+  "returns `MUNICIPALITY_NAME`, so it doubles as the in-city filter". The field
+  holds the **six pre-1998 municipalities** that amalgamated into Toronto -
+  former Toronto 156,172, Scarborough 123,897, North York 114,963, Etobicoke
+  73,807, York 32,463, East York 24,138 - so matching "Toronto" keeps 30% of
+  the city and would have silently dropped most of Line 2's eastern and western
+  halves. **This is Los Angeles' `CITY_KEEP` trap exactly**, and the fix is the
+  same: use the authoritative geometry. Every point in the repository is
+  in-city, so no municipal filter is needed at all.
+
+- **Four of five TTC line colours are the agency's own; only Line 2 changed.**
+  Measured against the category palette on the ~45 Delta-E threshold: Line 1
+  yellow 69.2, Line 4 purple 55.1, Line 5 orange 74.3 and Line 6 grey 53.0 all
+  pass and are kept, while **Line 2's `#008000` scores 37.2 against Personal
+  services' `#1baf7a`** - the same green that failed for Edmonton's Valley Line.
+  Darkened to `#173F1B` (48.2), which still reads as green. Worst line-vs-line
+  separation 42.2, acceptable because every line carries an on-map label and a
+  legend entry.
+
+- **Also corrected Calgary's Blue Line, on the owner's go-ahead.** It shipped
+  as Calgary Transit's `#0072CE`, which is **Delta-E 3.3 from Retail's
+  `#2a78d6`** - the same blue as the pins drawn over it. Nobody had measured it;
+  it surfaced while choosing Edmonton's palette, where the check ran for the
+  first time. Now `#082F49`, **deliberately the same navy as Edmonton's Capital
+  Line**, because colour separation is an intra-city constraint only. Calgary's
+  map regenerated; its counts are unchanged.
+
+- **Toronto's privacy verdict: publish, and no pin can be a registrant's
+  name.** The register publishes THREE personal columns - `Client Name`,
+  `Business Phone`, `Business Phone Ext.` - and step 2 excludes them at
+  `usecols`, so they never enter the process rather than being dropped after;
+  the load is asserted clean. `scripts/check_personal_exposure.py toronto`
+  reports 8,739 pins, 7,104 distinct names, 0 emails, 0 phone numbers, 0 `c/o`
+  markers. The heuristic flags 2,130 (24.4%) as person-like, but their top
+  classifications are eating/drinking and take-out - trade names that read as
+  names, the Vancouver false positive. The residential-unit intersection is
+  **23 rows, and every one is a `BSMT` or `REAR` commercial address** on Queen,
+  Yonge, Bathurst and Eglinton: DAKOTA TAVERN, KIKKA SUSHI, WONG'S AQUARIUM,
+  ARAMARK CANADA, OUTKASTS BARBERSHOP. As in Edmonton, `BSMT`/`REAR` are
+  commercial location descriptors here and the US-shaped regex reads them as
+  residential - a per-city reading caveat, not a reason to change it globally.
+
+- **Two of my own numbers today were denominator-sloppy, and both are corrected
+  here.** I "corrected" the brief's 72 licence categories to 92: **both are
+  right** - 92 across the full history, 72 on the active set the map uses - and
+  my correction did not name its set. And I reported `Operating Name` blank on
+  21.4% as a serious gap, which is true of active rows and false of the rows
+  that matter: on the storefront subset it is **0.5%**, so the brief's 0.8% was
+  close and my step 2 was ordering the filters wrong. Step 2 now filters to
+  storefront BEFORE reporting the blank rate, so the printed number is a fact
+  about the map. Fifth and sixth instances of this error class in the project.
+
+- **Toronto's brief checks were STALE AND PASSING, which is a flaw in
+  `brief_check.py`'s premise worth recording.** Written before the build, they
+  encoded the strip patterns the build then improved on, so they measured their
+  own worse method and reported 9/9 at 111 stations while the build produced
+  110. **A check can only test what it encodes.** So when a build improves on a
+  brief's method the checks have to be brought forward with it, and they were -
+  synced to `pipeline/toronto/config.py`'s `STATION_STRIP_PATTERNS`. The tool
+  still earned its place today (it is what found the 118), but "the checks pass"
+  is not the same claim as "the brief matches the build".
 
 ### 2026-09-21 - Toronto's open question 1 closed: the 71.4% was the wrong denominator
 
