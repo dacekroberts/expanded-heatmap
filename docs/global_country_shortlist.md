@@ -1547,8 +1547,46 @@ buckets, so Seoul does not need `multi-source-city` after all, and the
 per-category hygiene registers become a cross-check rather than the plan.
 
 **Third-party mirrors exist** (a Seoul extract dated 202506 is on Hugging
-Face). **Do not build on one** — that is exactly how the Toronto error
-happened. A mirror is acceptable to confirm a schema, never to source a build.
+Face), and the licence permits them — `제한 없음` places no restriction on
+redistribution, unlike WMATA, which forbids it outright.
+
+**Do not build on this one** — but the reason is NOT "mirrors are bad", and an
+earlier version of this file got that wrong. See the rule below.
+
+#### CORRECTED — the mirror rule was stated too broadly
+
+This file said, twice and inconsistently: *"a mirror is acceptable to confirm a
+schema, never to source a build"* — and then, for Mexico City, that **the
+mirror was the only working route** and the rule is to try every address. Both
+claims sat in the same document.
+
+**The two cases genuinely differ, and not in the way "mirror" suggests:**
+
+| | Toronto | Mexico City |
+|---|---|---|
+| Agency feed | correct | **host times out** |
+| S3 `direct_download` | — | **403** |
+| Mobility Database mirror | **3 months expired, zero subway routes** | **current, no expiry flag — the only route that worked** |
+
+**What distinguishes them is whether the artifact SELF-ATTESTS:**
+
+- **GTFS does.** `feed_info.txt` carries `feed_end_date`, so staleness is
+  machine-checkable, and mode counts are checkable against a known network —
+  "Toronto has a subway and this file has zero type-1 routes" is detectable.
+- **A business-register CSV does not.** There is no embedded validity date, and
+  the Hugging Face file's `202506` lives in its *filename* — the mirror's word,
+  not the data's. Completeness is worse: 28,000 rows against a true 31,000 is
+  **invisible**.
+
+**And this reframes the Toronto failure.** It was not "a mirror was used". It
+was **a stale mirror used without reading the expiry field that was already in
+the file.** The fix built in response was `screen_rail.py`'s expiry check — not
+abstinence — and that same check is what let Mexico City's mirror be trusted.
+
+**THE RULE, restated:** *a mirror is usable when the artifact self-attests to
+its own freshness and completeness; it is not when you must take the mirror's
+word for both.* That keeps Mexico City, rules out the Korean CSV, and says why
+rather than gesturing at a precedent.
 
 **How to actually get it, traced 2026-09-21.** `data.go.kr` *catalogues* this
 dataset but does not host the file — its own metadata says `atachFileYn = N`,
