@@ -405,7 +405,9 @@ _NOTICES = [
     # would not satisfy it.
     ("CRTM (Consorcio Regional de Transportes de Madrid)",
      "Powered by CRTM - www.crtm.es. Metro de Madrid station locations and "
-     "line geometry are from CRTM's open data, used here as datos explotados "
+     "line geometry are from CRTM's open data, last updated by CRTM on "
+     "5 June 2026 and shown here as recorded on that date. Used as datos "
+     "explotados "
      "rather than en bruto: the network has been redrawn, its 293 "
      "station-per-line records collapsed to one point per station, stations "
      "outside the termino municipal removed, and each line's eighteen "
