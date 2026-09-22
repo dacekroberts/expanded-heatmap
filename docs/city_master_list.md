@@ -9,7 +9,16 @@ what is stopping each one.** It is rewritten as things change, like
 behind it. That file is the trail; this file is the answer. When they disagree,
 the trail wins and this file is stale.
 
-Last reordered **2026-09-22**, after the Band D and D5 probes.
+Last reordered **2026-09-22**, after the browser sweep — Tier 5 closed
+(7 negatives, no survivors), Tier 6 reached for the first time, and three
+food-authority probes run. **Stockholm** and **Bucharest** were promoted out
+of the band that used to read *"never actually reached"*; five cities moved to
+discarded on measurement.
+
+**The method that produced all of it:** open the portal in a real browser
+*before* concluding anything about it, then enumerate providers rather than
+search keywords. Both are written up in `.claude/skills/add-country/`
+(§3 and §2) and `add-city` Step 0.
 
 ---
 
