@@ -550,17 +550,9 @@ is unambiguous:
 | **Kochi** 🇮🇳 | 2 | 2 | 2 | subway 2 | I |
 | **Bogotá** 🇨🇴 | **1** | 1 | **0** | subway 1 | *(none)* |
 
-> **THESE ARE UPPER BOUNDS, NOT OPERATING-LINE COUNTS.** The query does not
-> filter `construction`, `proposed` or `planned`, and OSM tags unbuilt routes
-> inconsistently — sometimes `route=construction`, sometimes the final route
-> with a state tag. **The filtering pass was attempted and all four mirrors
-> were busy, so it is NOT done.** Known inflation: **Tel Aviv**'s Red Line has
-> run since 2023 while Green and Purple are still being built, so `R1 R2 R3` is
-> very likely **one** operating line; **Bogotá**'s single unnamed-ref,
-> zero-colour relation is its under-construction Línea 1, and TransMilenio is
-> BRT, so Bogotá has **no operating metro**; **Jakarta**'s `TB` is plausibly
-> TransJakarta, also BRT. Treat every row as "at most this many" until the
-> status filter runs.
+> **THESE ARE UPPER BOUNDS, NOT OPERATING-LINE COUNTS** — and the filter that
+> was supposed to fix that only half works. See "The construction filter" below.
+> Treat every row as "at most this many".
 
 **What the screen does settle**, because these are robust to the caveat:
 
@@ -578,6 +570,50 @@ is unambiguous:
 **So D5's rail leg is largely answered and the business leg is now the
 binding question for all of them** — which is where the next pass should go,
 not back to the mapping agencies.
+
+#### The construction filter — RAN, and its failure mode is the finding
+
+Ran against the four suspect cities. **It flagged unbuilt routes in one of
+four, and returned zero in the other three — including two where unbuilt lines
+are known to exist.**
+
+| City | Total | Flagged | Result |
+|---|---|---|---|
+| **Jakarta** 🇮🇩 | 11 | **2** | Both `TB`, *"East-West Line (Tomang → Medan Satria)"*, tagged **`proposed`**. **9 operating**, refs `BK` `CB` `LRT` `M` |
+| **Tel Aviv** 🇮🇱 | 6 | **0** | `R1 R2 R3` all tagged as ordinary `light_rail` |
+| **Bogotá** 🇨🇴 | 1 | **0** | Its one relation is not construction-tagged either |
+| **Rio** 🇧🇷 | 20 | **0** | refs `1 2 3 4 ESFECO`, none flagged |
+
+> **A filter returning zero does not mean "nothing to flag" — it can mean "this
+> convention is not used here", and the two are indistinguishable from the
+> result alone.** Tel Aviv is the proof: its Red Line opened in 2023 and the
+> Green and Purple lines are **still under construction**, yet OSM carries all
+> three as plain `light_rail` with no status marker. The filter passed them
+> silently. Same for Bogotá, whose Línea 1 is years from opening.
+>
+> So **Tel Aviv and Bogotá keep their upper-bound label** despite a clean
+> filter run. Rio's zero is probably honest — Lines 1, 2 and 4 plus the VLT and
+> the Santa Teresa tram is a plausible 20 — but it is *unconfirmed* for exactly
+> the same reason. Resolving these needs a different signal: whether each
+> route's member **ways** are `railway=construction` rather than `railway=subway`,
+> which is a heavier query, or simply real-world knowledge.
+
+**One guess corrected by running it:** I had recorded Jakarta's `TB` as
+"plausibly TransJakarta, i.e. BRT". It is not — it is the **proposed MRT
+East-West Line**. Right conclusion (exclude it), wrong reason, and only the
+probe distinguished them.
+
+**Two transport lessons, both mine:**
+
+- **`overpass-api.de` returns HTTP 406 to every request from here** — not busy,
+  *rejecting*. It fronts on `lambert.openstreetmap.de`, and something in that
+  proxy dislikes this client. I read the failures as "mirrors busy" twice while
+  `/api/status` reported free slots on both hosts. **kumi.systems has done all
+  the work in this session**, and the fix was mirror order, not waiting.
+  `overpass.osm.jp` is worse: its TLS certificate is **expired**.
+- **`PYTHONIOENCODING=utf-8` is not optional on this machine.** Jakarta's result
+  arrived correctly and then crashed the print on the `→` in a route name, under
+  cp1252. Fourth time this session.
 
 #### D5 BUSINESS LEG — first pass on all eleven, 2026-09-22
 
