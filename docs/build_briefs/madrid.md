@@ -1,5 +1,41 @@
 # Madrid — build brief
 
+> ## ✅ GATE 3 RAN AND RECONCILES — 2026-09-22
+>
+> The operator's published count, which is the one check that can see an error
+> every internal check agrees with. Recorded here because this brief previously
+> had it as unavailable, as it genuinely is for Mexico City.
+>
+> **`metromadrid.es/es/quienes-somos/metro-de-madrid-en-cifras`: 303
+> estaciones, 296,78 km de red, "ACTUALIZADO EL 18 DE MAYO DE 2026".** Found by
+> navigating the site — a guessed `/conocenos/metro-en-cifras` 404s, which is a
+> fact about the guess.
+>
+> | | |
+> |---|---|
+> | Metro de Madrid publishes | **303** |
+> | CRTM `M4_Estaciones`, station-per-line records | 293 |
+> | CRTM `M10` line 1 (Metro Ligero ML1), distinct | 9 |
+> | **293 + 9** | **302** — residual **1** |
+>
+> **Two conventions have to be applied before the numbers are comparable, and
+> both are the operator's rather than ours.** Metro de Madrid counts a station
+> **once per line serving it**, so an interchange is counted several times —
+> which is why its 303 sits against only **242 distinct station names**. And it
+> **counts Metro Ligero ML1**, which it operates, while CRTM's `M4_Red` is
+> Metro only. Adding all 57 Metro Ligero stations instead gives 350, so it is
+> ML1 specifically, not the tram network.
+>
+> **The residual of one is consistent with Pinar de Chamartín** being counted
+> by the operator in both Metro and ML1 — it is a terminus of both — where CRTM
+> models it once. That fits the data and is **not confirmed**; it is recorded
+> as a residual rather than reasoned away.
+>
+> **⚠ DO NOT PUT 303 ON THE PAGE.** This project maps **193 distinct stations
+> inside the término municipal**, which is a different quantity from the
+> operator's network-wide per-line headline in three ways at once. The two
+> numbers should never appear as if they were comparable.
+
 **Step 0's answers, banked 2026-09-22.** Read this before `add-city` Step 0,
 then run `python scripts/brief_check.py madrid` before writing any code. A
 brief caches Step 0's mistakes as confidently as its findings — Edmonton's
