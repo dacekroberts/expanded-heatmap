@@ -81,6 +81,9 @@ purchased, or behind a login.
 | Boston | Licensing Board Licenses (CKAN resource `04dc653b-1789-4374-9669-b07df7233344`, 3,587 rows) | **Retail** — package stores only | same endpoint | `status='Active' AND (license_type LIKE 'Retail%' OR license_type = 'Druggist')` → 307 rows. Its 2,578 Common Victualler licences are the same restaurants as the ISD source and are excluded to avoid double-counting. Coordinates are `gpsx`/`gpsy` in **EPSG:2249** (state plane, US survey feet), reprojected in step 2 — not lat/lon. `applicant`, `manager`, `day_phone` and `evening_phone` are NOT selected | 2026-09-21 |
 | Boston | Cannabis Active Licenses (CKAN resource `e395fd88-0f81-4399-a57a-3e94a74b145c`, 43 rows) | **Retail** — dispensaries | same endpoint | `status='Active'`; same `gpsx`/`gpsy` convention as the Licensing Board set. The one `Delivery (operator)` row is excluded — no shopfront | 2026-09-21 |
 | Boston — **recorded, deliberately NOT used** | Business Inventory (CKAN resource `47bd8208-f648-4309-8f65-de7416d63157`, 2,634 rows) | Would cover **all three buckets**, and is the only Boston source that reaches Personal services | same endpoint | — | 2026-09-21 |
+| Edmonton | City of Edmonton Business Licences (Socrata `qhi4-bdpu`) | All three buckets, via its own `business_licence_category` taxonomy | `https://data.edmonton.ca/resource/qhi4-bdpu.csv` | none (`$limit=60000`; the whole file is 43,672 rows, so the raw capture stays a faithful snapshot and step 2 does the filtering) | 2026-09-21 |
+| Toronto | Municipal Licensing & Standards (CKAN `169e90ba-3ae0-43dd-8b2f-919e87002f50`) | **Food service and Personal services**, via its own MLS `Category`. **NOT general retail** — see below | `https://ckan0.cf.opendata.inter.prod-toronto.ca/datastore/dump/169e90ba-3ae0-43dd-8b2f-919e87002f50?format=csv` | none at download; step 2 drops cancelled licences and reads only 6 of 19 columns | 2026-09-21 |
+| Toronto — **geocoder, not a business source** | One Address Repository (CKAN `64d4e54b-738f-4cd9-a9e7-8050fac8a52f`) | 525,440 address points, same licence as the business data | the package's `Address Points - 4326.csv` resource (~183 MB) | none (whole file) | 2026-09-21 |
 
 The Philadelphia parcel join exists to answer one privacy question the address
 text cannot: **is this "business" someone's home?** Only two derived values are
@@ -111,6 +114,31 @@ An `ILIKE` sweep for hair / barber / salon / nail / cosmet / massage / tattoo /
 laundry across both Carto licence tables returns nothing, so **Personal
 services has no source in Philadelphia at all**. That is recorded in
 `docs/excluded_categories.md` under what is *missing* rather than *excluded*.
+
+**Edmonton is the only register here that publishes NO name column but the
+business's.** No registrant, owner, licensee or contact field exists, so its
+privacy position is structural rather than measured: no pin *can* be a person's
+name. `pipeline/edmonton/fetch_sources.py` asserts this at download rather than
+assuming it. Its `licencetype` field separates commercial premises from
+`Home Based` (14,114), `Non-Resident` (2,108) and two individual-held types, so
+Edmonton needs no residence inference at all — and the City replaces the
+address with `<REDACTED FOR PRIVACY>` on 4,074 rows, **taking the coordinates
+with it** (redacted rows carrying coordinates: zero).
+
+**Toronto is the only city here whose register carries NO coordinates**, so the
+address repository is a required input rather than a convenience — Canada has no
+national bulk geocoder. The join key is `Licence Address Line 1` with the unit
+stripped (the register writes `280 SPADINA AVE, #308`; the repository carries no
+units), which takes the match from 48.1% to **93.8%** of storefront rows.
+
+**Its `MUNICIPALITY_NAME` is NOT a city filter**, despite looking like one: it
+holds the six pre-1998 municipalities that amalgamated into Toronto, so matching
+"Toronto" keeps 30% of the city. Los Angeles' `CITY_KEEP` trap. The boundary
+polygon (`regional-municipal-boundary`, 641.4 km²) is the check.
+
+**Toronto also publishes THREE personal columns** — `Client Name`, `Business
+Phone`, `Business Phone Ext.` — and step 2 excludes them at `usecols`, so they
+never enter the process. The Canada profile recorded one of the three.
 
 ### Boston — Step 0 findings, 2026-09-21
 
@@ -162,36 +190,6 @@ walked rather than where commerce is, so it is recorded as available and
 deliberately unused. Its licence is also the only "not specified" one on the
 portal.
 
-| Edmonton | City of Edmonton Business Licences (Socrata `qhi4-bdpu`) | All three buckets, via its own `business_licence_category` taxonomy | `https://data.edmonton.ca/resource/qhi4-bdpu.csv` | none (`$limit=60000`; the whole file is 43,672 rows, so the raw capture stays a faithful snapshot and step 2 does the filtering) | 2026-09-21 |
-
-**Edmonton is the only register here that publishes NO name column but the
-business's.** No registrant, owner, licensee or contact field exists, so its
-privacy position is structural rather than measured: no pin *can* be a person's
-name. `pipeline/edmonton/fetch_sources.py` asserts this at download rather than
-assuming it. Its `licencetype` field separates commercial premises from
-`Home Based` (14,114), `Non-Resident` (2,108) and two individual-held types, so
-Edmonton needs no residence inference at all — and the City replaces the
-address with `<REDACTED FOR PRIVACY>` on 4,074 rows, **taking the coordinates
-with it** (redacted rows carrying coordinates: zero).
-
-| Toronto | Municipal Licensing & Standards (CKAN `169e90ba-3ae0-43dd-8b2f-919e87002f50`) | **Food service and Personal services**, via its own MLS `Category`. **NOT general retail** — see below | `https://ckan0.cf.opendata.inter.prod-toronto.ca/datastore/dump/169e90ba-3ae0-43dd-8b2f-919e87002f50?format=csv` | none at download; step 2 drops cancelled licences and reads only 6 of 19 columns | 2026-09-21 |
-| Toronto — **geocoder, not a business source** | One Address Repository (CKAN `64d4e54b-738f-4cd9-a9e7-8050fac8a52f`) | 525,440 address points, same licence as the business data | the package's `Address Points - 4326.csv` resource (~183 MB) | none (whole file) | 2026-09-21 |
-
-**Toronto is the only city here whose register carries NO coordinates**, so the
-address repository is a required input rather than a convenience — Canada has no
-national bulk geocoder. The join key is `Licence Address Line 1` with the unit
-stripped (the register writes `280 SPADINA AVE, #308`; the repository carries no
-units), which takes the match from 48.1% to **93.8%** of storefront rows.
-
-**Its `MUNICIPALITY_NAME` is NOT a city filter**, despite looking like one: it
-holds the six pre-1998 municipalities that amalgamated into Toronto, so matching
-"Toronto" keeps 30% of the city. Los Angeles' `CITY_KEEP` trap. The boundary
-polygon (`regional-municipal-boundary`, 641.4 km²) is the check.
-
-**Toronto also publishes THREE personal columns** — `Client Name`, `Business
-Phone`, `Business Phone Ext.` — and step 2 excludes them at `usecols`, so they
-never enter the process. The Canada profile recorded one of the three.
-
 **NOTE — a gap in these three tables, not in the builds.** Vancouver, Surrey,
 Montréal and Calgary were built with their endpoints recorded in
 [`canada_step0_endpoints.md`](canada_step0_endpoints.md) and their notices here,
@@ -235,6 +233,8 @@ in 23 other municipalities.
 | Washington D.C. | **DC Boundary**, layer 10 of the District's administrative-boundaries service — a single clean polygon | `https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Administrative_Other_Boundaries_WebMercator/MapServer/10/query` (`where=1=1`, `outFields=*`, `outSR=4326`, `f=geojson`) | whole District, one polygon. Used to filter: 40 of 98 Metrorail stations are inside it |
 | Washington D.C. — **naming layer** | **Census TIGERweb states** — three polygons, so an excluded station can be NAMED and not merely counted | `https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/0/query` (`NAME IN ('Maryland','Virginia','District of Columbia')`, `outSR=4326`, `f=geojson`) | the three jurisdictions Metrorail runs through. 58 stations are outside the District — 32 Virginia, 26 Maryland — the second-largest station exclusion here after San Diego's, which is why it has to be citable. Census TIGER products are US federal works and carry no copyright |
 | Miami | Miami-Dade County **municipal boundaries** (same publisher as its business data) | `https://services.arcgis.com/8Pc9XBTAsYuxx9Ny/arcgis/rest/services/Municipalitypoly_gdb/FeatureServer/0/query` (`outFields=MUNICID,NAME`, `outSR=4326`, `f=geojson`) | **not filtered — used to NAME, not to exclude.** 77 polygons across 34 municipalities; `MUNICID` joins to the business file's `MUNBUSLOC` prefix |
+| Edmonton | **City of Edmonton — Corporate Boundary (current)** (Socrata `qqvh-dp5m`) | `https://data.edmonton.ca/api/geospatial/qqvh-dp5m?method=export&format=GeoJSON` | Whole city, 1 Polygon, 783.1 km². **FOUR layers on this portal are named some variant of "Corporate Boundary" and they are not the same polygon:** `qqvh-dp5m` and `a62q-eaea` give 783.1 km², `3trg-p57p` and `gtx5-kghy` give 699.8 km². The 83.3 km² difference is Edmonton's 2019 annexation from Leduc County, so the smaller pair predates it and is stale. This is Calgary's two-boundary trap with twice the ways to get it wrong, so `fetch_sources.py` asserts the area rather than trusting the name. Also the vocabulary trap: a search for "city boundary" misses it, because Edmonton calls it *corporate* |
+| Toronto | **Regional Municipal Boundary** (CKAN `41bf97f0-da1a-46a9-ac25-5ce0078d6760`), a zipped shapefile geopandas reads directly | `https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/841fb820-46d0-46ac-8dcb-d20f27e57bcc/resource/41bf97f0-da1a-46a9-ac25-5ce0078d6760/download/toronto-boundary-wgs84.zip` | Whole city, 1 feature, 641.4 km² against Toronto's ~630 km² of land. It does real work here rather than being a formality: Line 1 runs past the city limit into York Region, so Highway 407 and Vaughan Metropolitan Centre are excluded by it |
 
 Chicago note: the sibling asset `ewy2-6yfk` ("Boundaries - City - Map") has
 null geometry; `qqq8-j68g` is the usable one.
@@ -259,10 +259,6 @@ nowhere) by identifying the raw file from its own fields, `objectid` /
 `fipsstco` / `county` with FIPS `06075`; the endpoint reproduces the file
 byte-for-byte at 38,822 bytes with identical geometry, so it is the confirmed
 original source and not a lookalike.
-
-| Edmonton | **City of Edmonton — Corporate Boundary (current)** (Socrata `qqvh-dp5m`) | `https://data.edmonton.ca/api/geospatial/qqvh-dp5m?method=export&format=GeoJSON` | Whole city, 1 Polygon, 783.1 km². **FOUR layers on this portal are named some variant of "Corporate Boundary" and they are not the same polygon:** `qqvh-dp5m` and `a62q-eaea` give 783.1 km², `3trg-p57p` and `gtx5-kghy` give 699.8 km². The 83.3 km² difference is Edmonton's 2019 annexation from Leduc County, so the smaller pair predates it and is stale. This is Calgary's two-boundary trap with twice the ways to get it wrong, so `fetch_sources.py` asserts the area rather than trusting the name. Also the vocabulary trap: a search for "city boundary" misses it, because Edmonton calls it *corporate* |
-
-| Toronto | **Regional Municipal Boundary** (CKAN `41bf97f0-da1a-46a9-ac25-5ce0078d6760`), a zipped shapefile geopandas reads directly | `https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/841fb820-46d0-46ac-8dcb-d20f27e57bcc/resource/41bf97f0-da1a-46a9-ac25-5ce0078d6760/download/toronto-boundary-wgs84.zip` | Whole city, 1 feature, 641.4 km² against Toronto's ~630 km² of land. It does real work here rather than being a formality: Line 1 runs past the city limit into York Region, so Highway 407 and Vaughan Metropolitan Centre are excluded by it |
 
 ## Geocoding
 
@@ -441,11 +437,8 @@ operating from a residential address is most plausible. **Flagged for
 |---|---|
 | **NYS retail food (`9a8c-vfzj`), NYS salons (`y3u4-jbgh`)** | The datasets declare no licence field, but the portal's "OPEN-NY Terms of Use" (dataset `77gx-ii52`, last modified 2013-03-08) is explicit: "At their core, the OPEN-NY Terms of Service are among the least restrictive of any terms of service … The OPEN-NY Terms of Service do **not** contain restrictions requiring members of the public to use attribution, to re-post the license terms with any re-uses of the data, to impose share-alike or technical restrictions, nor require the public to obtain pre-approval before re-use of the data." And: "So long as you are not doing anything malicious with NYS data, you may use it as you wish, subject to no other requirements." Conditions: lawful use; the State may require you in writing to stop displaying its content if it believes you are in breach. |
 | **Chicago businesses (`r5kz-chrr`), Chicago boundary (`qqq8-j68g`)** | Reuse and derivative applications are contemplated, but **conditionally** — see the required notice below. The city "may require a user of this data to terminate any and all display, distribution or other use … for any reason", reserves all intellectual-property rights, and requires the user to indemnify it. |
-
 | **Philadelphia businesses (`business_licenses`), Philadelphia boundary (`City_Limits`)** | Both carry a **named licence, "City of Philadelphia License"**, whose text is a rights reservation and disclaimer rather than a grant: the City "reserves all rights in the database and any data contained therein", the data is "as is" without warranty, the user "will assume complete responsibility for any and all occurrences resulting from its use or display" and holds the City harmless, and "browsing City data on this site constitutes acceptance". Its own text forbids nothing and requires no notice — **but the dataset page also binds a reader to the City's separate Terms of Use, which DO prohibit republication and modification without written permission (read 2026-09-21; see the open question below). This is the one source in the project whose terms, read literally, do not permit what is built here.** The clearest affirmative signal is on the boundary dataset, which states **"Usage: Public use; Free"**; the business-licence dataset's page carries no such field, so that statement covers the boundary layer specifically. Both sit in the City's Open Data Program, whose stated purpose is public reuse. **One judgment call follows — see below.** |
-
 | **NYC DOHMH (`43nn-pn8j`), NYC DCWP (`w7w3-xahh`), NYC boroughs (`gthc-hcne`)** | **The absent licence field is required by law, not an oversight.** NYC's Open Data Technical Standards Manual states that Local Law 11 of 2012 "requires that data sets must be available **without registration requirement, license requirement, or usage restrictions**". The city therefore cannot attach a licence to these datasets. The "All Rights Reserved" notice in the nyc.gov footer covers nyc.gov's own website content, not datasets published under the Open Data Law. One condition does attach — see the notice below. |
-
 | **Census TIGERweb state polygons** (used by Washington D.C. to name the 58 excluded stations' state) | A **US federal government work**, so not copyrightable — the Census Bureau's own terms say its data are in the public domain and may be used freely, asking only that the Bureau not be cited as endorsing a derived product. No attribution required, none claimed here beyond the endpoint record above. |
 
 ### Still not established
@@ -478,14 +471,13 @@ leaves it empty, pointing to its developer terms instead.
 | **MTA** (New York) | Permitted: the feeds are "provided without charge", and the agreement "authorizes you to download and host the data on a non-MTA server ... and to make the data available to others who will access that non-MTA server". No API key needed for the static subway feed | Not required, but you "will not state or imply in any manner that your app is licensed by MTA"; you may state the data was obtained from MTA and is redistributed from your own server | **Corrected 2026-09-21 — this row previously recorded only the "Our data feeds are free to use" line from `mta.info/developers`, which is the landing page, not the terms.** The actual agreement (`https://new.mta.info/developers/terms-and-conditions`, page dated 2024-03-13) says **"You will not modify or delete any of the data"**, though its next sentence permits "an app that uses some but not all of the data". Also: must not "state or imply that the data is accurate, complete, or timely"; must serve the data from a non-MTA server and never directly from MTA's; MTA may change or terminate the agreement at any time without notice. Logos, maps and symbols need a separate licence application (free of charge but must be applied for). **An open decision, not a settled one — see `PLAN.md`.** Local copy: `docs/licenses/mta-terms-and-conditions.txt` |
 | **MBTA / MassDOT** (Boston) | Permitted: §3.1 grants "non-exclusive, limited, and revocable rights to use, reproduce, and redistribute the Data" | **Required** — §4.1 "Clearly acknowledge MassDOT as the provider of the Data" | §4.2 **expressly permits** combining the Data with other data. §4.1 forbids reproducing "MassDOT or any of its agencies or authorities logos or trademarks in connection with the Data", misrepresenting the Data, claiming ownership of it, or representing yourself as MassDOT or its agent. As-is with "all faults"; MassDOT may alter the terms or revoke the Data at any time without notice; Massachusetts law, venue Suffolk County. Document dated 2009-11-13, at `https://cdn.mbta.com/sites/default/files/2023-08/mbta-massdot-develop-license-agreement.pdf` — reachable from `mbta.com/developers/gtfs`, and the only route to the terms, since `feed_info.txt` declares none. **A local copy is kept at `docs/licenses/mbta-massdot-develop-license-agreement.pdf`**, because MassDOT may alter or revoke the terms without notice (§5.1, §8) and `mass.gov` returns 403 to automated fetches |
 | **SEPTA** (Philadelphia) | Permitted: a "non-exclusive, non-assignable, non-transferable, limited and **revocable** right to use, reproduce and redistribute the datasets" | **Not required** — no attribution or notice clause anywhere in the agreement | "Licensee may not use SEPTA's trademarks and copyrighted materials for any commercial or profit-making use and may not alter them in any way." SEPTA "maintains title, ownership, rights and interest in and to the datasets", may revoke or modify the agreement at any time, and "reserves the right to institute a license fee at any time". As-is, no warranty, indemnification required; governed by Pennsylvania law, venue Philadelphia County. At `https://wwww.septa.org/license-agreement/` — the four-w host is **SEPTA's real domain, not the repo-README typo this row previously called it**: `www.septa.org` and `wwww.septa.org` each return 200 independently, with no redirect between them (checked 2026-09-21). Local copy: `docs/licenses/septa-license-agreement.html` |
+| **WMATA** (Washington D.C. — **BUILT 2026-09-21**) | Permitted within your own app: "a limited, non-exclusive, non-assignable, non-transferrable, non-sublicensable, revocable license to download, use, reproduce, and redistribute WMATA's Transit Data within your Application". **Third-party redistribution is prohibited** — "sharing (except with your Application's users), transferring, sublicensing, selling or leasing any Transit Data, directly or indirectly...to any other person", unless authorised in writing and "inseparably commingled with or supplemented by additional data that you have provided" | **Not required** — no attribution or notice clause | **No modification clause at all**, which makes it more permissive than LA Metro's on the point that matters most. Access is gated: `api.wmata.com/gtfs/rail-gtfs-static.zip` returns **401** without a registered key from `developer.wmata.com/signup`; keys "remain WMATA's property and may be revoked or otherwise limited at any time", cannot be sold, transferred or sublicensed, and "enable WMATA to associate your API activity with your Application". Trademarks: "prohibited from using WMATA Intellectual Property, including any confusingly similar variants, in association with the Transit Data or API unless you have entered into a separate, written license agreement", and must not "state or imply affiliation, sponsorship or endorsement". **§6 additionally forbids stating or implying that the data your Application provides "is accurate, complete, or timely"** — the identical clause MTA carries, making this the **second** feed to constrain city-page prose that way, so it is a cross-city sweep rather than a D.C. footnote. **§9 termination is the sharpest in the project:** on termination "you must permanently delete all Transit Data or other data which you stored pursuant to your use of the API or GTFS", and "WMATA may request that you certify in writing your compliance with this section" — LA Metro requires removal, but only WMATA asks for written certification. Read 2026-09-21 from `https://developer.wmata.com/license`; local copy at `docs/licenses/wmata-transit-data-terms-of-use.html` |
 
-**All six of these agreements are stored locally**, in
+**All seven of these agreements are stored locally**, in
 [`licenses/`](licenses/) — source URL, retrieval date and SHA-256 for each are
 in that directory's `README.md`. Every one of them is revocable and amendable
 without notice, so the clauses quoted above are checkable against the text that
 was actually agreed to rather than against a URL that may have moved on.
-
-| **WMATA** (Washington D.C. — **BUILT 2026-09-21**) | Permitted within your own app: "a limited, non-exclusive, non-assignable, non-transferrable, non-sublicensable, revocable license to download, use, reproduce, and redistribute WMATA's Transit Data within your Application". **Third-party redistribution is prohibited** — "sharing (except with your Application's users), transferring, sublicensing, selling or leasing any Transit Data, directly or indirectly...to any other person", unless authorised in writing and "inseparably commingled with or supplemented by additional data that you have provided" | **Not required** — no attribution or notice clause | **No modification clause at all**, which makes it more permissive than LA Metro's on the point that matters most. Access is gated: `api.wmata.com/gtfs/rail-gtfs-static.zip` returns **401** without a registered key from `developer.wmata.com/signup`; keys "remain WMATA's property and may be revoked or otherwise limited at any time", cannot be sold, transferred or sublicensed, and "enable WMATA to associate your API activity with your Application". Trademarks: "prohibited from using WMATA Intellectual Property, including any confusingly similar variants, in association with the Transit Data or API unless you have entered into a separate, written license agreement", and must not "state or imply affiliation, sponsorship or endorsement". **§6 additionally forbids stating or implying that the data your Application provides "is accurate, complete, or timely"** — the identical clause MTA carries, making this the **second** feed to constrain city-page prose that way, so it is a cross-city sweep rather than a D.C. footnote. **§9 termination is the sharpest in the project:** on termination "you must permanently delete all Transit Data or other data which you stored pursuant to your use of the API or GTFS", and "WMATA may request that you certify in writing your compliance with this section" — LA Metro requires removal, but only WMATA asks for written certification. Read 2026-09-21 from `https://developer.wmata.com/license`; local copy at `docs/licenses/wmata-transit-data-terms-of-use.html` |
 
 ### The owner's API-account practice, and what it interacts with
 
