@@ -1,0 +1,143 @@
+Ajuntament de Barcelona - Open Data BCN terms of use
+Live source: https://opendata-ajuntament.barcelona.cat/en/condicions-us
+READ FROM: https://web.archive.org/web/20250321/https://opendata-ajuntament.barcelona.cat/en/condicions-us
+Archive snapshot: 2025-03-21
+Retrieved: 2026-09-22
+WHY THE ARCHIVE: the live pages serve hCaptcha and this project does
+not defeat CAPTCHAs. These terms reserve the right to amend
+themselves with effect on publication, so this copy is EVIDENCE OF
+WHAT THEY SAID, not proof of what they say now. Confirm on the live
+page before publishing.
+==============================================================================
+
+Data using | Open Data BCN
+
+64 captures
+03 Mar 2017 - 13 Aug 2026
+
+Feb
+MAR
+Apr
+
+28
+
+2024
+2025
+2026
+
+success
+
+fail
+
+About this capture
+
+TIMESTAMPS
+
+The Wayback Machine - https://web.archive.org/web/20250328093226/https://opendata-ajuntament.barcelona.cat/en/condicions-us
+
+Skip to main content
+
+You are here
+Home / About this site / Data using
+
+Terms of use
+
+Introduction
+
+The Terms of use of the datasets provided by Barcelona City Council are enshrined under the current legislation in force, namely: Spanish Act 37/2007, of 16 November, on the reuse of public sector information, which implements Directive 2003/98/EC of the European Parliament and of Council of 17 November 2003 and Spanish Act 29/2010, of 3 August, on the use of electronic media in the public sector in Catalonia, the aim being to protect and promote Barcelona City Council's commitment to reusing public sector information.
+
+Any doubts or comments on these Terms of use may be forwarded to the following link .
+
+Definition of service user
+
+Open Data BCN service users - henceforth referred to simply as "users" - shall be understood as any person or entity that uses, copies, alters or distributes the data sets offered by the Open Data BCN service.
+
+"Users" shall also be understood as anyone who creates and/or offers applications or services that use data from the Open Data BCN service.
+
+Applicable licence for reusing data
+
+Using the services and data provided in this portal constitutes acceptance of these Terms of use , although such acceptance does not imply any assignment to users of any copyrights or intellectual property rights to the data sets.
+
+Every data set that is offered in the Open Data BCN service states its relevant Terms of use .
+
+Most data sets are published under the terms and conditions of Creative Commons- Attribution(CC-BY 4.0) licence, under which such data are allowed :
+
+to be copied, distributed and published
+
+to provide the basis for derived works as a result of their analysis or study
+
+to be used for commercial or non-commercial purposes , provided that such use does not constitute a public-authority activity
+
+to be amended, changed and adapted.
+
+so long as Barcelona City Council's authorship is cited (as explained below).
+
+However, any data involving third-party participation may be reused under a Creative Commons Attribution-NoDerivs (CC BY-ND 4.0) licence, under which such data are allowed:
+
+to be copied, distributed and published
+
+to be used for commercial or non-commercial purposes , provided that such use does not constitute a public authority activity
+
+to be amended, changed and adapted.
+
+where the authorship of those data is cited.
+
+In addition, under Article 8 of Spanish Act 37/2007, the following general terms and conditions apply to the reuse of any information contained in the data sets:
+
+the content of the information may not be altered
+
+the meaning of the information may not be distorted
+
+the source must be cited
+
+the most up-to-date data are referred to
+
+Barcelona City Council, for its part, reserves the right to publish the data sets under other specific terms and conditions of reuse, including the possibility of charging for them, in accordance with the provisions set down in Article 7 of Spanish Act 37/2007, for the purposes of receiving payment for expenses incurred from collecting, producing, copying and publishing the data sets.
+
+It must also be borne in mind that some types of information have specific legislation that affects them, such as geographic information or urban information, among others.
+
+Where authorship must be attributed and Barcelona City Council cited as the source of the data sets, the citation must be made in the following way:
+
+Source of the data: Barcelona City Council
+
+Should this citation be included in HTML format, the following markup may be used:
+
+Source of the data: <a href = "barcelona.cat/opendata" title = "Open Data BCN"> Barcelona City Council </ a>.
+
+Any amendment or change made to the data sets that are published by Barcelona City Council, shall be identified as such at the time of their distribution.
+
+Users are required to inform Barcelona City Council of every project relating to or derived from their use of the data sets, so that they are open to the public for the purpose of encouraging policies for reusing information from the public sector.
+
+Barcelona City Council may likewise require users to provide statistical data relating to products or services that arise through the information reused, so that it may know how the information is being reused and improve the catalogue of available data.
+
+Applicable licence to the denomination, logo and portal contents
+
+Relative to the denomination Open Data BCN and the logo , these are registered in the Oficina Española de Patentes y Marcas with the codes M 3713011 i M 3746181 respectively. As for the data published in the Open Data BCN portal as news and contents, they are published under a free culture licence, Creative Commons - Attribution (CC-BY 4.0) . All media contents such as images, icons and logos are excluded.
+
+Guarantee and liability for data sets
+
+Barcelona City Council supplies its available data sets as they appear in its archives; however, despite its best efforts to manage the data sets correctly, it is unable to offer any guarantees regarding their integrity, updating or accuracy, nor can it ensure uninterrupted access to them.
+
+Barcelona City Council may at all times add to, remove or amend the data sets published as well as these Terms of use . The announcement of such changes will be published on barcelona.cat/opendata . Unless stated otherwise, any change that is made shall take effect as soon as it is published.
+
+Barcelona City Council and all its bodies, entities or agents shall be wholly exempt from any liability for damage and/or loss - including economic loss, material loss and/or data loss - which arises or may arise, directly or indirectly, from using the data sets.
+
+User's or agent's liability for reuse
+
+Users are subject to Spanish Act 37/2007, of 16 November, on the reuse of public sector information, under its penalty system in particular, as well as all regulations that apply to the use of information, such as the Regulation (EU) 2016/679 of the European Parliament and of the Council, April 27th of 2016, General Regulation of Data Protection or RGPD and Spanish Legislative Royal Decree 1/1996, of 12 April, approving the Amended Text to the Spanish Act on Intellectual Property.
+
+Should Barcelona City Council or any of its bodies, entities, companies or agents, face any legal action and/or incur any fine, as a result of a breach of any of the conditions and Terms of use set down in this document and/or the licence under which the data sets are published, the user concerned shall be fully accountable to and indemnify Barcelona City Council or its bodies, entities, companies or agents, for all costs incurred, including any legal fees, fines and damages that may be declared.
+
+Users shall accordingly agree to indemnify, as well as exempt from any liability, Barcelona City Council and all its bodies, entities, companies and agents for any potential claims that may arise from a breach of any of these Terms of use and/or from using, copying, amending or distributing the information.
+
+Barcelona City Council, however, reserves the right to take the appropriate legal measures to ensure its own interests, without this implying any waiver of the user's liability or indemnification.
+
+Other legal restrictions
+
+Data sets may not be reused where their reuse is for illegal purposes or where they attack the principles of people or entities or the actions of public authorities.
+
+Barcelona City Council may of its own accord deny or discontinue data set access to any user without any prior notice where it deems that user, under its own criteria, to be in breach of these Terms of use and/or current legislation or to be harmfully or improperly using, copying, amending or distributing the data sets.
+
+Such denial or discontinuation shall not apply to any person or entity that has received the data sets in good faith from the person or entity subject to cancelled or discontinued access and that would otherwise be complying with these Terms of use .
+
+Users may not state, insinuate or suggest to end-users, through any medium, any participation or support from Barcelona City Council or its bodies, entities, companies or agents, in the activity for which the information or data set is being put to use.
