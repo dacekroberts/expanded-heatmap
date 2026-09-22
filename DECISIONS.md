@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**139 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**140 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- ["The five NAICS cities" were four, in two current-state documents](#2026-09-22---the-five-naics-cities-were-four-in-two-current-state-documents)
 - [The distinction category B turns on: a dated document's count is evidence, not drift](#2026-09-22---the-distinction-category-b-turns-on-a-dated-documents-count-is-evidence-not-drift)
 - [Category B, first pass: Madrid was filed under OpenStreetMap, and three counts had drifted](#2026-09-22---category-b-first-pass-madrid-was-filed-under-openstreetmap-and-three-counts-had-drifted)
 - [The stale-prose check found three notices in the deploy gate marked undisplayed that were displayed](#2026-09-22---the-stale-prose-check-found-three-notices-in-the-deploy-gate-marked-undisplayed-that-were-displayed)
@@ -175,6 +176,40 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - "The five NAICS cities" were four, in two current-state documents
+
+- **A verified count defect, in a user-facing file.** Both
+  `docs/excluded_categories.md` and `docs/project_context.md` said a city's
+  buckets are anchored on `naics.py` so it "stays comparable with **the five
+  NAICS cities**". Counted from the configs: `TAXONOMY_SYSTEM == "naics"` holds
+  for San Diego, San Francisco, Los Angeles and Montreal — **four**. Mexico
+  City and Guadalajara use `"scian"`, which is Mexico's own instrument and a
+  separate module. `excluded_categories.md` is linked from every page of the
+  site as "What is counted, and what is not", so this was a wrong number in
+  front of readers.
+
+- **Deleted rather than corrected, in both.** The sentence now names the
+  anchor — comparable with every city whose buckets come from `naics.py` —
+  because what matters is that the boundaries come from one module, not how
+  many cities currently use it. Writing "four" would have reset the clock until
+  the next NAICS city landed. `CLAUDE.md` already asks `project_context.md` to
+  carry no counts, and this is the case that shows why.
+
+- **Build briefs excluded from the count check, for the dated-record reason.**
+  `CLAUDE.md` says a brief "caches Step 0's mistakes as confidently as its
+  findings", and Calgary's calls itself "the biggest map of the four
+  remaining" — true during the Canada build, a snapshot rather than drift.
+  Briefs already have the right instrument in `scripts/brief_check.py`, which
+  re-runs their claims against live sources; this check cannot tell a stale
+  brief from an accurate record of a past probe.
+
+- **Report after three passes: A 3 -> 1, B 74 -> 42, C 0**, and the files
+  scanned fell from 39 to 27 as dated records were recognised as such. Most of
+  what is left is correctly scoped — "the two Alberta cities", "two of the
+  four registries", "the two City Boundary layers" — and the next pass is
+  `global_country_shortlist.md` and `city_master_list.md`, the second of which
+  `CLAUDE.md` designates as the place counts are SUPPOSED to live.
 
 ### 2026-09-22 - The distinction category B turns on: a dated document's count is evidence, not drift
 

@@ -315,8 +315,12 @@ categories, newline-separated, several per licence. Every one of the 299 has an
 explicit verdict in `pipeline/taxonomies/vancouver.py`, which **raises** on an
 unknown value rather than defaulting to None. Buckets were anchored on
 `naics.py` (Retail 44-45 less 454, Food service 722, Personal services 812 less
-81293) so this city stays comparable with the five NAICS cities instead of
-drawing its own line.
+81293) so this city stays comparable with every city whose buckets are
+anchored on `naics.py` instead of drawing its own line. **The anchor is named
+rather than counted** - this sentence said "the five NAICS cities" until
+2026-09-22, when there were four (San Diego, San Francisco, Los Angeles and
+Montreal). What matters is that the boundaries come from the same module, not
+how many cities currently use it.
 
 **Mobile trade is not a storefront.** Vancouver's `Street Vendor` (116 mappable
 rows) and Surrey's `Portable Food Vendor` (9), `Catering/Coffee Truck` (3),

@@ -77,6 +77,15 @@ EXCLUDE_NAMES = {"DECISIONS.md", "PLAN.md"}
 # that carries a count has a maintenance burden, and a DATED one does not.
 EXCLUDE_PATTERNS = ("passover_*.md", "*retrospective*.md", "*_addendum.md")
 
+# Build briefs are the same shape: each is Step 0's answers AS OF a date, and
+# `CLAUDE.md` says outright that a brief "caches Step 0's mistakes as
+# confidently as its findings". Calgary's says it is "the biggest map of the
+# four remaining", which was true during the Canada build and is a snapshot,
+# not drift. Their claims are re-verified by `scripts/brief_check.py` against
+# live sources, which is the right instrument - this one cannot tell a stale
+# brief from an accurate record of a past probe.
+EXCLUDE_DIRS = ("docs/build_briefs",)
+
 # The sweep skill teaches these defects by quoting real instances, so it reports
 # as stale prose about Canada and D.C. It is documentation OF the markers.
 EXCLUDE_PATHS = {".claude/skills/consistency-sweep/SKILL.md"}
@@ -171,6 +180,9 @@ def scan_files():
             if p.relative_to(ROOT).as_posix() in EXCLUDE_PATHS:
                 continue
             if any(p.match(pat) for pat in EXCLUDE_PATTERNS):
+                continue
+            rel = p.relative_to(ROOT).as_posix()
+            if any(rel.startswith(d + "/") for d in EXCLUDE_DIRS):
                 continue
             if p.resolve() in seen:
                 continue
