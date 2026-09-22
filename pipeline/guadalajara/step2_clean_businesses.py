@@ -29,7 +29,6 @@ from pathlib import Path
 
 import geopandas as gpd
 import pandas as pd
-import requests
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
@@ -44,12 +43,10 @@ from pipeline.guadalajara.config import (
     DENUE_MEMBER,
     DENUE_NAME_COLUMN,
     DENUE_STATE_CODE,
-    DENUE_URL,
     DENUE_ZIP,
     FORBIDDEN_COLUMNS,
     MUNICIPIOS_KEEP,
     GUADALAJARA_BBOX,
-    OVERPASS_USER_AGENT,
     PREMISES_TYPE_COLUMN,
     PREMISES_TYPE_KEEP,
     SOURCE_ENCODING,
@@ -80,31 +77,26 @@ USECOLS = (
 )
 
 
-def download():
-    if DENUE_ZIP.exists():
-        print(f"  cached {DENUE_ZIP.name} ({DENUE_ZIP.stat().st_size:,} bytes)")
-        return
-    print(f"  downloading {DENUE_URL}")
-    DENUE_ZIP.parent.mkdir(parents=True, exist_ok=True)
-    r = requests.get(DENUE_URL, timeout=900,
-                     headers={"User-Agent": OVERPASS_USER_AGENT})
-    r.raise_for_status()
-    # Magic bytes, not the filename the server claims - add-country's rule,
-    # learned from Busan serving a PNG under a CSV's Content-Disposition.
-    if not r.content.startswith(b"PK\x03\x04"):
+def require_denue():
+    """The DENUE export must already be there. NEVER downloads.
+
+    It used to download here behind a cache check, which is offline only when
+    the gitignored raw directory happens to be populated - so a fresh clone
+    would have gone to the network from inside a drift check. The download, and
+    its magic-bytes check, moved to fetch_sources.py on 2026-09-22.
+    """
+    if not DENUE_ZIP.exists():
         raise SystemExit(
-            f"DENUE download is not a ZIP (first bytes {r.content[:8]!r}). "
-            "Check what the server actually sent before trusting it."
-        )
-    DENUE_ZIP.write_bytes(r.content)
-    print(f"  wrote {DENUE_ZIP.stat().st_size:,} bytes")
+            f"{DENUE_ZIP.name} is missing, and a step never fetches.\n"
+            "  Run:  python pipeline/guadalajara/fetch_sources.py")
+    print(f"  cached {DENUE_ZIP.name} ({DENUE_ZIP.stat().st_size:,} bytes)")
 
 
 def main():
     print("=== Step 2: Mexico City storefronts (INEGI DENUE) ===\n")
     tax = load_taxonomy_module(TAXONOMY_SYSTEM)
 
-    download()
+    require_denue()
     zf = zipfile.ZipFile(DENUE_ZIP)
     if DENUE_MEMBER not in zf.namelist():
         raise SystemExit(

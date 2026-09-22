@@ -16,12 +16,10 @@ step checks OSM against them.
 
 import json
 import sys
-import time
 from pathlib import Path
 
 import geopandas as gpd
 import pandas as pd
-import requests
 from shapely.geometry import MultiLineString
 from shapely.ops import linemerge, polygonize, unary_union
 
@@ -34,15 +32,11 @@ from pipeline.guadalajara.config import (
     EXCLUDED_STATIONS_CSV,
     LINE_NAMES,
     MUNICIPIOS_KEEP,
-    OSM_BBOX,
     OSM_BOUNDARY_JSON,
     OSM_EXCLUDE_RAILWAY,
     OSM_ROUTES_JSON,
     OSM_STATIONS_JSON,
-    OSM_STATION_NETWORK,
     OSM_STATION_RAILWAY,
-    OVERPASS_HOSTS,
-    OVERPASS_USER_AGENT,
     PUBLISHED_STATIONS_PER_LINE,
     STATIONS_CSV,
     STATION_MUNICIPIOS_CSV,
@@ -56,92 +50,20 @@ BOUNDARY_AREA_KM2_MIN = 1_500.0
 BOUNDARY_AREA_KM2_MAX = 4_500.0
 
 
-def overpass(query, cache_path, label):
-    if cache_path.exists():
-        print(f"  {label}: cached {cache_path.name}")
-        return json.loads(cache_path.read_text(encoding="utf-8"))
-    last = None
-    for attempt in range(2):
-        for host in OVERPASS_HOSTS:
-            try:
-                r = requests.post(host, data={"data": query}, timeout=300,
-                                  headers={"User-Agent": OVERPASS_USER_AGENT})
-                print(f"  {label}: {host.split('/')[2]} HTTP {r.status_code} "
-                      f"{len(r.content):,} bytes")
-                if r.status_code == 200:
-                    payload = r.json()
-                    if not payload.get("elements"):
-                        print(f"  {label}: 200 but EMPTY - not cached, next host")
-                        last = "empty result"
-                        time.sleep(3)
-                        continue
-                    cache_path.parent.mkdir(parents=True, exist_ok=True)
-                    cache_path.write_text(r.text, encoding="utf-8")
-                    return payload
-                last = f"HTTP {r.status_code}"
-            except Exception as exc:                    # noqa: BLE001
-                print(f"  {label}: {host.split('/')[2]} {type(exc).__name__}")
-                last = type(exc).__name__
-            time.sleep(3)
-    raise SystemExit(
-        f"Every Overpass host failed for {label} (last: {last}). A fact about "
-        "Overpass, not about Guadalajara - retry before concluding anything."
-    )
+def cached(cache_path, label):
+    """Read one cached Overpass result. NEVER fetches.
 
-
-# STATIONS COME FROM ROUTE-RELATION MEMBERSHIP, NOT FROM NODE LABELS, and this
-# is the second time in two cities that a label filter lost real stations.
-#
-# The first version of this query was
-# `node["railway"]["network"="Mi Tren"](bbox)`, which returned 96 nodes and
-# **silently omitted every one of Línea 4's 8 stops**, because that line opened
-# 2025-12-15 and its stop nodes carry no `network` tag at all. The result was a
-# 49-station set with zero stations in Tlajomulco de Zúñiga - a map missing the
-# same line the rejected GTFS feed was missing, arrived at by a different
-# route. Mexico City's config says in capitals "MATCH ON THE MODE, NEVER ON THE
-# NETWORK LABEL ALONE"; that warning sat in the previous city's config, which
-# is not a file anyone opens while writing the next one.
-#
-# Membership in a named route relation is the strongest available evidence that
-# a node is a station on a line, and it cannot omit a line that has a relation.
-# The relations themselves ARE network-tagged (all 8 carry `Mi Tren`), so the
-# filter is safe at relation level - it was only ever wrong at node level.
-Q_STATIONS = f"""
-[out:json][timeout:280];
-relation["type"="route"]["route"~"^(light_rail|subway)$"]["network"="{OSM_STATION_NETWORK}"]({OSM_BBOX})->.routes;
-node(r.routes);
-out body;
-"""
-
-Q_ROUTES = f"""
-[out:json][timeout:280];
-(
-  relation["type"="route"]["route"~"^(light_rail|subway)$"]["network"="{OSM_STATION_NETWORK}"]({OSM_BBOX});
-);
-out geom;
-"""
-
-# Mexican municipios are admin_level 6 in OSM; 8 is asked for too rather than
-# assumed, because an empty result here would look like "no stations in scope"
-# three steps later.
-#
-# THE BBOX IS LOAD-BEARING, and leaving it off produced a confidently wrong
-# answer on the first run: an unbounded name search matched **Guadalajara in
-# SPAIN** - also admin_level 6, also named Guadalajara - and the "keep the
-# largest polygon" tie-breaker below then selected it on purpose, giving a
-# 26,814 km2 "Guadalajara" against the municipio's ~151. The union-area gate
-# caught it. Two lessons kept here rather than in a commit message: a name
-# search without a geographic filter is a global search, and a tie-breaker on
-# SIZE is exactly backwards when the wrong candidate is a province.
-_NAMES = "|".join(MUNICIPIOS_KEEP)
-Q_BOUNDARY = f"""
-[out:json][timeout:280];
-(
-  relation["boundary"="administrative"]["admin_level"="6"]["name"~"^({_NAMES})$"]({OSM_BBOX});
-  relation["boundary"="administrative"]["admin_level"="8"]["name"~"^({_NAMES})$"]({OSM_BBOX});
-);
-out geom;
-"""
+    Fetching lives in fetch_sources.py, so that drift_check.py - which re-runs
+    every step*.py - is deterministic and offline. It used to fetch here behind
+    a cache check, which is offline only when the gitignored raw directory
+    happens to be populated. Moved out 2026-09-22.
+    """
+    if not cache_path.exists():
+        raise SystemExit(
+            f"{cache_path.name} is missing ({label}), and a step never "
+            "fetches.\n  Run:  python pipeline/guadalajara/fetch_sources.py")
+    print(f"  {label}: cached {cache_path.name}")
+    return json.loads(cache_path.read_text(encoding="utf-8"))
 
 
 def _poly(rel):
@@ -156,7 +78,7 @@ def _poly(rel):
 
 def load_boundaries():
     """One polygon per municipio, plus their union."""
-    data = overpass(Q_BOUNDARY, OSM_BOUNDARY_JSON, "boundaries")
+    data = cached(OSM_BOUNDARY_JSON, "boundaries")
     rels = [e for e in data["elements"] if e["type"] == "relation"]
     by_name = {}
     for rel in rels:
@@ -170,7 +92,8 @@ def load_boundaries():
         # municipio and a locality inside it. Keep the SMALLEST that still
         # contains the bbox's centre of gravity... in practice, keep the
         # smallest, because the failure mode here was a PROVINCE matching the
-        # name (see Q_BOUNDARY) and size was what selected it. With the bbox
+        # name (see Q_BOUNDARY in fetch_sources.py) and size selected it. With
+        # the bbox
         # filter in place both candidates are local, and the municipio is the
         # larger of a municipio/locality pair - so assert instead of guessing.
         prev = by_name.get(name)
@@ -209,8 +132,8 @@ def load_boundaries():
 def main():
     print("=== Step 1: Guadalajara stations (OpenStreetMap) ===\n")
     print("Fetching OSM:")
-    st_data = overpass(Q_STATIONS, OSM_STATIONS_JSON, "stations")
-    rt_data = overpass(Q_ROUTES, OSM_ROUTES_JSON, "routes")
+    st_data = cached(OSM_STATIONS_JSON, "stations")
+    rt_data = cached(OSM_ROUTES_JSON, "routes")
     by_muni, boundary = load_boundaries()
 
     nodes = [e for e in st_data["elements"] if e["type"] == "node" and "tags" in e]
