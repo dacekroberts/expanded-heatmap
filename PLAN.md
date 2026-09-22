@@ -360,11 +360,13 @@ Desktop is unaffected — the label is fully visible there.
   three it asks "does the current upstream still produce the committed output"
   rather than "does the committed code". Build-session work - each city's
   context is needed.
-- [ ] **Wire Toronto's `STATIONS_COLLAPSED_EXPECTED`**, or delete it. It is
-  110 and asserted nowhere, while `PLATFORMS_EXPECTED`,
-  `IN_CITY_STATIONS_EXPECTED` and `SUBWAY_ONLY_STATIONS_EXPECTED` are all
-  checked. The per-line check in `pipeline/stations.py` cannot cover it: those
-  counts sum to 117 because an interchange counts on each of its lines.
+- [x] ~~Wire Toronto's `STATIONS_COLLAPSED_EXPECTED`~~ - **done 2026-09-22,
+  and it was a mis-wiring rather than a missing check.** Step 1 compared the
+  COLLAPSED count (110) against `IN_CITY_STATIONS_EXPECTED` (108), printing a
+  NOTE every run while the right constant sat unread. Both now guard what they
+  name, an in-city check was added after the boundary filter, and the docstring
+  no longer claims `excluded_stations.csv` is empty (it has two rows). Verified
+  by running step 1: 234 -> 110 -> 108, two excluded, zero NOTEs.
 - [ ] **Have Guadalajara's step 2 import `DENUE_STATE_COLUMN` and
   `DENUE_MUNICIPIO_COLUMN`** from `pipeline/countries/mexico.py` instead of
   writing `"cve_ent"` and `"municipio"` as literals, so a DENUE column rename

@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**155 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**156 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Toronto's collapse check guarded the wrong number, and re-running it showed a baseline can miss a content change](#2026-09-22---torontos-collapse-check-guarded-the-wrong-number-and-re-running-it-showed-a-baseline-can-miss-a-content-change)
 - [Surveyed CLAUDE.md's invariants for which ones nothing verifies, and nearly shipped a check that examined nothing](#2026-09-22---surveyed-claudemds-invariants-for-which-ones-nothing-verifies-and-nearly-shipped-a-check-that-examined-nothing)
 - [drift_check leaves outputs/ modified on Windows when nothing changed](#2026-09-22---drift_check-leaves-outputs-modified-on-windows-when-nothing-changed)
 - [Working the dead-constant list demonstrated, live, that drift_check is not offline for three cities](#2026-09-22---working-the-dead-constant-list-demonstrated-live-that-drift_check-is-not-offline-for-three-cities)
@@ -191,6 +192,46 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Toronto's collapse check guarded the wrong number, and re-running it showed a baseline can miss a content change
+
+- **The dead constant was a mis-wiring, not a redundancy.** Step 1 collapses
+  234 platforms to 110 stations, then filters to 108 in-city. Its check read
+  `if len(stations) != IN_CITY_STATIONS_EXPECTED` - comparing the COLLAPSED
+  count against the IN-CITY expectation, 110 against 108 - so it **printed a
+  NOTE on every single run** while `STATIONS_COLLAPSED_EXPECTED` sat unread.
+  That is why a dead-constant sweep found it: nothing read the constant because
+  the wrong one had been used in its place.
+
+- **Both constants now guard the quantity they name**, and a second check was
+  added after the boundary filter for the in-city count. **Verified by running
+  the step, not by reading it**: 234 platforms -> 110 stations, 108 inside, 2
+  excluded (Highway 407, Vaughan Metropolitan Centre), and **zero NOTEs** where
+  the old code emitted one every time. All three figures match the committed
+  `baseline.json`.
+
+- **The docstring also claimed `excluded_stations.csv` is "EMPTY - nothing
+  outside".** It has two rows and has had since the city was built. Corrected.
+
+- **AND RUNNING IT SURFACED SOMETHING LARGER, which is not this city's bug.**
+  To verify the fix, Toronto's raw data was fetched - and the regenerated
+  `heatmap.html` DRIFTED from the committed one: a storefront present in the
+  committed map ("KORDOG") is absent now, because the MLS register has changed
+  upstream since those outputs were built. The change is real data movement,
+  not a rendering artefact.
+
+- **The alarming part is that `baseline.json` reported IDENTICAL.** All five
+  figures it watches - `storefront_rows` 19,384, `geocoded_rows` 18,186 and the
+  three bucket totals - matched exactly while the map's contents differed. **A
+  row-count baseline cannot see a substitution**, and `drift_check` only caught
+  this because it also diffs the rendered HTML. Worth knowing before anyone
+  proposes trusting the counts alone, or trims the HTML diff for being noisy.
+
+- **`outputs/` was restored rather than committed.** The fix is a print
+  statement; the published map must not move because a sweep happened to
+  re-download a register on a Tuesday. Committing the regenerated file would
+  have baked today's upstream snapshot into the site under a commit message
+  about an assertion.
 
 ### 2026-09-22 - Surveyed CLAUDE.md's invariants for which ones nothing verifies, and nearly shipped a check that examined nothing
 
