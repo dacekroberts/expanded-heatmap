@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**154 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**155 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Barcelona built: a Catalan premises census, a two-operator metro, and two keys whose absence was not neutral](#2026-09-22---barcelona-built-a-catalan-premises-census-a-two-operator-metro-and-two-keys-whose-absence-was-not-neutral)
 - [drift_check leaves outputs/ modified on Windows when nothing changed](#2026-09-22---drift_check-leaves-outputs-modified-on-windows-when-nothing-changed)
 - [Working the dead-constant list demonstrated, live, that drift_check is not offline for three cities](#2026-09-22---working-the-dead-constant-list-demonstrated-live-that-drift_check-is-not-offline-for-three-cities)
 - [Two probes came back clean, and the clean result is the record](#2026-09-22---two-probes-came-back-clean-and-the-clean-result-is-the-record)
@@ -190,6 +191,136 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Barcelona built: a Catalan premises census, a two-operator metro, and two keys whose absence was not neutral
+
+- **Built Barcelona from the Ajuntament's 2022 Cens de locals en planta baixa,
+  rejecting the fresher 2024 resource as geographically incomplete.** Per-step
+  counts: 66,088 census rows -> 58,908 `Actiu` (7,180 vacant premises dropped,
+  10.9%) -> 58,908 with usable coordinates (zero bad, against Madrid's 9.21%)
+  -> 35,958 storefront (Retail 20,293, Food service 9,992, Personal services
+  5,673) across all 10 districts; 112 stations inside the city from 374 route
+  relation member nodes, 50 excluded; 35,936 premises within a ring. The 2024
+  resource holds 44,000 rows and its shortfall is wildly uneven - Sant Andreu
+  -83%, Nou Barris -76%, Horta-Guinardo -69% against Ciutat Vella's -5% - so a
+  map built on it would show the periphery as commercially dead, which is
+  roughly what a reader expects and therefore would not look broken. The
+  rejected alternative is two years fresher. The city page states the survey
+  year, which is also what reconciles the choice with Act 37/2007 Article 8's
+  "most up-to-date data" wording that Barcelona's terms incorporate expressly.
+
+- **Keyed the new `barcelona_activitat` taxonomy on `Nom_Activitat`, the FINEST
+  of the census's four levels - the opposite of Madrid, and for measured
+  reasons.** `Nom_Grup_Activitat` puts 20,693 of 58,908 active rows (35%) into
+  `Altres`, and its `Restaurants, bars i hotels` group is the HOSTELERIA trap in
+  Catalan: 10,722 rows of which **720 are `serveis d'allotjament`**, so keying
+  on the group would have published 720 hotels, hostals and pensions as food
+  service - the error the Mexico City build made once with SCIAN 72. All 75
+  values of `Nom_Activitat` are enumerated with an explicit home, verified
+  against the census rather than asserted.
+
+- **Let the publisher's own hierarchy settle two bucket calls that were about to
+  go the other way.** `Plats preparats (no degustacio)` (202 rows) sits under
+  `Quotidia alimentari` beside the butcher and the greengrocer, not under the
+  restaurants group, so Barcelona files prepared-food-to-carry-home as food
+  RETAIL; and `Fotografia` (144) sits under `Comerc al detall`, making it the
+  camera shop rather than the portrait studio. Both readings came off the
+  published hierarchy instead of a reading of the Catalan.
+
+- **Dispatched `Altres` on two further columns, because the value means five
+  different things depending on its parent.** 625 rows under `Quotidia
+  alimentari` are food retail, 458 under `Comerc al detall /Engros` are
+  retail/wholesale with no activity detail at all, 323 under sector `Altres` are
+  genuinely other, 115 under `Serveis` are services and 24 under the restaurants
+  group are food service. Chicago's `EXTRA_COLUMNS` mechanism, reused. The 458
+  are excluded rather than assigned to Retail: "it is in a sector whose name
+  contains retail" is not evidence about a premises, and that sector explicitly
+  mixes in wholesale.
+
+- **Kept mall, gallery and municipal-market interiors rather than excluding them
+  with the site-type flags Barcelona uniquely supplies.** A mall beside a
+  station is real commercial density a rider can reach, and excluding it would
+  make Barcelona measure something different from the other sixteen cities on a
+  map that invites comparison. `SN_CComercial`, `SN_Galeria` and `SN_Mercat` are
+  recorded as available-but-unused so a later decision can reach for them.
+
+- **Drew 16 lines - 14 metro refs plus funiculars FM and FV - using the
+  operators' own `network` tag as the scope test rather than a judgement about
+  what counts as a metro.** FM (Montjuic) is TMB's and tagged `Metro de
+  Barcelona`; FV (Vallvidrera) is FGC's, tagged `Metro del Valles`, and is route
+  `FV` in FGC's own GTFS. FT (Tibidabo) is operated by Barcelona de Serveis
+  Municipals - the municipal parks company - carries no network tag, and is
+  excluded; trams T1-T6 are `Trambaix` and `Trambesos`, neither a metro, and the
+  same test excludes them without a separate decision. Deciding by MODE would
+  have been wrong in both directions: FGC's three `route_type=7` routes are FV
+  plus `Cremallera Montserrat` and `Cremallera de Nuria`, rack railways 50 km
+  and 150 km from the city.
+
+- **Found that a PTv2 route relation and a `railway=station` node are different
+  objects, after a station query returned exactly zero.** 225 station nodes, 378
+  relation member nodes, **no overlap at all**: a relation holds `stop_position`
+  nodes while `railway=station` marks the station box on a `stop_area` relation.
+  The step raised rather than writing an empty map. This is also the third
+  distinct station object in three OSM cities - Mexico City 184
+  `railway=station`, Guadalajara one and 501 `railway=stop`, Barcelona 227 and
+  501 - which is the meta-rule `osm-rail` exists for, hit again.
+
+- **Collapsed two interchanges that FGC and TMB name differently, which the
+  median-spacing gate structurally cannot catch.** FGC writes
+  "Barcelona-Placa Catalunya" where TMB writes "Catalunya", 178 m apart, and the
+  same for Espanya at 198 m - two of the busiest interchanges in the city drawn
+  twice, with two markers and two overlapping ring sets. Two bad names out of
+  114 moved the median not at all and the set passed gate 1 at 520 m; the
+  nearest-neighbour MINIMUM showed it. `pipeline/stations.py` now prints that
+  minimum for every city as a prompt rather than a threshold, because Barcelona
+  also has a genuine 40 m pair (Sant Gervasi and Placa Molina). Stations: 114 ->
+  112, median 520 -> 534 m.
+
+- **Darkened three line colours along their own hue after `linecolour.py`
+  refused to render, and one of them is Calgary's bug on the identical hex.**
+  Barcelona's L5 is TMB's `#0072CE` - the same value Calgary shipped - at
+  Delta-E 3.3 from Retail; L9 Sud was Delta-E **0.0** from L9 Nord because TMB
+  brands the two disconnected segments as one line; L10 Sud was 5.8 from L10
+  Nord. Darkened to ~18 rather than to PREFERRED 45, because at 45 L5 becomes a
+  near-black navy and L9 Sud becomes brown, while ~18 sits inside the band six
+  built cities already occupy while keeping agency colours (New York 13.6,
+  Montreal 16.9, Boston 20.1 and 27.3).
+
+- **Two keys whose ABSENCE is not neutral, both caught by
+  `check_deploy_imports` and both from the same family.** Barcelona had no
+  `label_offset`, which `pd.DataFrame` fills with `float('nan')` - not None, and
+  truthy - the defect that took the Overview down earlier the same day. And it
+  had no `in_default_view`, which `IN_DEFAULT_VIEW` defaults to **True**, so
+  Barcelona silently joined the landing frame and stretched it from California
+  to Catalonia. **The symptom named innocent cities**: five failures reporting
+  Calgary/Toronto and Guadalajara/Los Angeles colliding and three labels clipped
+  off the west edge, none of them naming a Spanish city. `scaffold_city.py`
+  writes neither key.
+
+- **Measured Barcelona's macro-map label width in a real browser rather than
+  guessing it: 67.9 px.** `check_macro_labels.py` refuses a guessed width, which
+  is the point of it. Seven cities already in the table were measured in the
+  same pass and every one reproduced its recorded value exactly (Madrid 47.2,
+  Los Angeles 80.8, Guadalajara 152.7), proving the font had loaded and nothing
+  had drifted.
+
+- **Privacy verdict: publish.** `check_personal_exposure.py` reports no
+  registrant-name fallback exists for this city - step 2 never loads an owner
+  column and asserts as much - so no pin CAN be a person's name. No address is
+  published at all: `USECOLS` never requests one and `Referencia_Cadastral`, a
+  property-title reference that IS in the source, is in `FORBIDDEN_COLUMNS`.
+  Zero emails, phone numbers or `c/o` markers. The person-name heuristic flags
+  27.8% against Madrid's 44.8% on the same measure, and a 30-name sample is
+  trade names (FARMACIA COMTAL, LA TAGLIATELLA, SPEEDY WASH); the few reading as
+  personal are shops named after their proprietor, which is a sign on a street.
+
+- **Verified the rendered map visually as well as structurally.** 16/16 line
+  colours drawn, 16/16 on-map labels, OSM attribution present and linked to the
+  copyright page. The browser pane initially reported the map at 0 px wide,
+  which reproduced on Madrid too and turned out to be Leaflet latching a
+  zero-width container at load in a hidden window - not a defect: the committed
+  HTML declares `width: 1000.0px`, byte-identical in that respect to Toronto's,
+  which is live.
 
 ### 2026-09-22 - drift_check leaves outputs/ modified on Windows when nothing changed
 

@@ -348,18 +348,31 @@ Desktop is unaffected — the label is fully visible there.
 
 ## Structure
 
-- [ ] **Move Madrid's, Mexico City's and Guadalajara's fetching out of their
-  step files** into a `fetch_*.py`, as the other fourteen cities do.
-  Demonstrated 2026-09-22: `python pipeline/drift_check.py` in a worktree with
-  no `data/<city>/raw/` **fetched over the network for all three** - a 39 MB
-  DENUE zip, a Madrid census CSV, Overpass responses and CRTM layers - and
-  then reported zero drift. Toronto, by contrast, stopped with "no
+- [x] **Move Madrid's, Mexico City's and Guadalajara's fetching out of their
+  step files** into a `fetch_*.py`, as the other fourteen cities do. **DONE
+  2026-09-22 on `spain-app-wiring`**, so it reaches master when Spain merges.
+  Demonstrated by the cleanup session first: `python pipeline/drift_check.py`
+  in a worktree with no `data/<city>/raw/` **fetched over the network for all
+  three** - a 39 MB DENUE zip, a Madrid census CSV, Overpass responses and CRTM
+  layers - and then reported zero drift. Toronto, by contrast, stopped with "no
   data/<city>/raw/ - nothing to run against", which is the correct behaviour.
-  The calls are cache-guarded, so this is invisible on a machine that already
-  has the data. **It changes what a passing drift check means:** for those
-  three it asks "does the current upstream still produce the committed output"
-  rather than "does the committed code". Build-session work - each city's
-  context is needed.
+  The calls were cache-guarded, so this was invisible on a machine that already
+  had the data. **It changed what a passing drift check meant:** for those
+  three it asked "does the current upstream still produce the committed output"
+  rather than "does the committed code".
+
+  Six fetch sites moved into three new `fetch_sources.py` files. The step-side
+  functions keep their names and lose only the ability to fetch - `fetch_layer`
+  and `overpass` became cache readers that RAISE with the command to run,
+  `download` became `require_denue`. Two checks travelled with their downloads
+  rather than staying behind, because each guards the fetch and not the
+  parsing: ArcGIS `exceededTransferLimit`, and the DENUE magic-bytes test.
+  `grep -rln "requests.get\|requests.post\|urlopen" pipeline/*/step*.py` now
+  returns nothing, so **the invariant is absolute rather than conditional**.
+  Verified at zero drift across all 18 cities with every baseline figure
+  unchanged. The two Mexican cities also gained a rule their own code lacked,
+  via `pipeline/osm.py`: a mirror can return a PARTIAL result with HTTP 200 and
+  no `remark`, not only an empty one.
 - [ ] **Wire Toronto's `STATIONS_COLLAPSED_EXPECTED`**, or delete it. It is
   110 and asserted nowhere, while `PLATFORMS_EXPECTED`,
   `IN_CITY_STATIONS_EXPECTED` and `SUBWAY_ONLY_STATIONS_EXPECTED` are all
