@@ -73,7 +73,7 @@ and whether it held.
 | # | City | Business leg | What remains |
 |---|---|---|---|
 | ✅ | ~~**Guadalajara**~~ 🇲🇽 | DENUE, SCIAN = NAICS, INEGI licence cleared | **BUILT 2026-09-22** — `pages/16_Guadalajara_Heatmap.py`, region *Mexico*. Screening said "nothing outstanding" and that held |
-| 1 | **Madrid** 🇪🇸 | 148,814 open premises, 119,070 with valid coordinates, three-level classification, EPSG:25830. CC BY 4.0 + binding general conditions | **Nothing** |
+| ▶ | **Madrid** 🇪🇸 **IN PROGRESS** | **73,671 usable rows → 61,466 distinct premises** (settled on the full download; the earlier 148,814 counted zero-coordinate and non-storefront rows). Three-level taxonomy keyed on `division`, EPSG:25830, CC BY 4.0 | **Being built now.** Step 1 done — **193 stations, 13 lines, from CRTM's feature layers**, not the expired GTFS. Build brief 13/13 |
 | 2 | **Seoul** 🇰🇷 | 197,276 active premises over 8 datasets, EPSG:5174, status field, KOGL Type 1 | Build work — partial geocoding for 일반음식점 (90.7%), Korean-aware `check_personal_exposure.py` |
 | 3 | **Milan** 🇮🇹 | 28,131 premises 99.1% coords, `insegna`, `codice_ateco`, CC-BY. All three buckets confirmed | Step 0 schemas for the two newly found layers |
 | ✅ | ~~**Mexico City**~~ 🇲🇽 | Same DENUE. **Rail from OSM** — 195/195 stops exact, 6,468 geometry points | **BUILT 2026-09-22** — `pages/15_Mexico_City_Heatmap.py`. The ODbL share-alike decision was taken during the build; see `DECISIONS.md` |
@@ -91,9 +91,10 @@ the national DENUE on the same day, so `pipeline/countries/` is the answer and
 national registers are fine. What fails is **SIRENE's composition**, which is
 a different objection and a measured one.
 
-**Madrid now has nothing outstanding at all** — it is the only unbuilt city
-in the screen with an empty "what remains" column, which makes it the next
-city if nothing else is prioritised.
+▶ **Madrid is being built now**, so the next *unstarted* city is the question.
+**Barcelona** is the obvious answer — same country, brief done, licence read,
+and only owner decisions left. After that the screen has no city whose
+"what remains" column is empty.
 
 ## Band B — one narrow question each (1 city)
 
@@ -368,7 +369,7 @@ country.
 | Country | Cities | Source shape | Missing link |
 |---|---|---|---|
 | 🇲🇽 **Mexico** ✅ **COMPLETE** | **2** — Mexico City, Guadalajara (Regional) | **DENUE**, national, coordinates, SCIAN **is** NAICS — and the taxonomy **did** transfer from the US builds | **Nothing. Both cities are built and live in the app** (`pages/15_`, `pages/16_`, region *Mexico*), 2026-09-22. The ODbL share-alike decision was taken during the build |
-| 🇪🇸 **Spain** ▼ | **2, not 6** — Madrid and Barcelona, both with build briefs | Bespoke **per city**, and the bespoke-ness cuts both ways | **Re-scoped 2026-09-22.** Valencia, Bilbao and Málaga all probed and all measured negative. Sevilla is unreachable. **Nothing left to find; Spain is a two-city country.** Both remaining cities have briefs and 9/9 checks |
+| 🇪🇸 **Spain** ▶ **IN PROGRESS** | **2, not 6** — Madrid building now, Barcelona next | Bespoke **per city**, and the bespoke-ness cuts both ways | **Re-scoped 2026-09-22.** Valencia, Bilbao and Málaga all probed and all measured negative. Sevilla is unreachable. **Nothing left to find; Spain is a two-city country.** Both remaining cities have briefs and 9/9 checks |
 | 🇰🇷 **South Korea** | **1** — Seoul | 8 datasets, EPSG:5174, KOGL Type 1, daily | **Two build items, not probes:** partial geocoding for 일반음식점 (90.7% coords) and a Korean-aware `check_personal_exposure.py` |
 | 🇮🇹 **Italy** | **1** — Milan | Bespoke per city. Naples and Messina measured out | **Step 0 schemas** for the two newly found Milan layers. Nothing to discover |
 
