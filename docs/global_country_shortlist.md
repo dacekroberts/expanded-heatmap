@@ -87,6 +87,28 @@ its way, and the column says what.
 
 **Israel and Peru moved to Tier 4** (2026-09-21) — see below.
 
+### Tier 3 business probes, 2026-09-21 — and the distinction that decides them
+
+Probing the Tier 3 registers produced one pass, two clear failures, and a
+structural point that disposes of most of the rest.
+
+**The point: a COMPANY register lists companies, so a chain appears ONCE, at
+its head office.** This project maps shops. That is not a data-quality
+complaint — it is a category error, and it is why "the register is open and
+has addresses" is not sufficient.
+
+| Country | Verdict | Evidence |
+|---|---|---|
+| **Norway** | **PASSES** | `underenheter` with **`beliggenhetsadresse`** — the physical location address, kept distinct from the registered one. 152,060 Oslo sub-units, open API, no key. NACE codes. **No coordinates** → geocoding |
+| **Finland** | **FAILS — company-level** | PRH `avoindata` v3, open, no key, **89,816 companies in Helsinki**, NACE with English descriptions. But addresses are typed, and the first record returned is `"street": ""`, `postOfficeBox: 29`, `co: "c/o Suomen Säätiötilipalvelu Oy"` — **a PO box care of an accounting firm.** A visiting-address type exists; the register is still of companies, not premises |
+| **Austria** | **FAILS — no street** | GISA, 1,032,283 active licences, but location is NUTS/LAU/postcode/town. No street address |
+| **Chile** | **WEAK** | *Patentes comerciales* are the right model but published per municipality, unevenly, and **Santiago's national-portal copy is active licences as of May 2016** |
+| **Denmark** | **UNPROBED** | `datacvr.virk.dk` returns **403** behind bot protection; the third-party API is quota-limited. CVR *produktionsenheder* remain the right object to chase |
+| **Singapore** | **UNPROBED** | `data.gov.sg` API requires an auth token |
+| **Netherlands, Portugal** | **UNPROBED** | Catalogues reachable (`data.overheid.nl` returns 64 hits for *bedrijven vestigingen*; `dados.gov.pt` answers) but no dataset inspected |
+| **Czechia, Estonia** | **UNPROBED** | Endpoint guesses returned 404; both have establishment concepts (`provozovny`, e-Business Register) worth a proper look |
+| **Germany, Sweden, Italy, Greece, Romania, Bulgaria, Hungary, Poland, Latvia, Croatia, Slovakia, Thailand, India, Egypt** | **UNPROBED** | None probed. The EU default is a company register, which the point above disqualifies — but that is a **pattern, not a probe**, and this file's own rule says a pattern deprioritises and never rules out |
+
 **Tier 3 continues** with rail measured and business unprobed: Vienna
 (subway 35, tram 185 — deepest in the screen), Amsterdam/Rotterdam (14/46),
 Singapore (13), Lisbon (10), Berlin (9/48), Stockholm (7/21), Santiago (7),
