@@ -19,6 +19,13 @@ existing check could see, in a project whose every check was about data:
      itself two clauses later ("thirteen sources", then "six of the twelve").
   C. **Headings whose contents moved on.** `## Transit feeds (GTFS)` held three
      rail sources that were not GTFS.
+  D. **Config constants no script reads.** The comment above a dead constant is
+     usually describing a plan that did not happen.
+     `pipeline/san_diego/config.py` says a per-point lookup was "REPLACED" by a
+     bulk download; it was not - bulk was attempt 2 of 3 and was abandoned at
+     ~26 s per page, and `PARCEL_QUERY_BBOX` and `PARCEL_PAGE_SIZE` survive,
+     read by nothing. The constant is harmless; **the comment is the defect**,
+     because the next reader trusts it over the call.
 
 WHAT KEEPS THE NOISE DOWN, AND WHY EACH RULE IS THERE
 -----------------------------------------------------
@@ -264,11 +271,82 @@ def check_c():
     return hits
 
 
+def check_d():
+    """Module-level config constants that nothing outside their own file reads.
+
+    Deterministic enough to trust - these configs are imported by name - but it
+    REPORTS rather than fails, because a dead constant is a signal to go and
+    read the comment above it, not a defect in itself.
+    """
+    import ast as _ast
+    import io as _io
+    import tokenize as _tok
+
+    def code_only(src):
+        """Strip comments and strings, so a MENTION is not counted as a READ.
+
+        This is not a refinement, it is the difference between the check
+        working and not. The first version counted raw text, and the very
+        constants it was written to find - San Diego's PARCEL_QUERY_BBOX and
+        PARCEL_PAGE_SIZE - came back clean, because THIS FILE's own docstring
+        names them as the worked example. The checker's documentation of the
+        bug masked the bug.
+        """
+        try:
+            out = []
+            for tk in _tok.generate_tokens(_io.StringIO(src).readline):
+                if tk.type in (_tok.COMMENT, _tok.STRING):
+                    continue
+                out.append(tk.string)
+            return " ".join(out)
+        except (_tok.TokenError, IndentationError, SyntaxError):
+            return src
+
+    hits = []
+    configs = sorted(ROOT.glob("pipeline/*/config.py")) + \
+        sorted(ROOT.glob("pipeline/countries/*.py"))
+    # Everything that could read a config constant.
+    readers = []
+    for g in ("pipeline/**/*.py", "scripts/*.py", "app/**/*.py"):
+        readers += [q for q in ROOT.glob(g) if q.is_file()]
+    corpus = {q: code_only(q.read_text(encoding="utf-8", errors="replace"))
+              for q in readers}
+
+    for cfg in configs:
+        try:
+            src = cfg.read_text(encoding="utf-8")
+            tree = _ast.parse(src)
+        except (OSError, SyntaxError):
+            continue
+        names = []
+        for node in tree.body:
+            if isinstance(node, _ast.Assign):
+                for tgt in node.targets:
+                    nm = getattr(tgt, "id", None)
+                    if nm and nm.isupper() and not nm.startswith("_"):
+                        names.append((nm, node.lineno))
+        for nm, lineno in names:
+            pat = re.compile(r"\b" + re.escape(nm) + r"\b")
+            # references anywhere else, including later in its own file
+            external = 0
+            for q, text in corpus.items():
+                if q == cfg:
+                    # Its own file, comments already stripped: the assignment
+                    # itself is one occurrence, so anything beyond that is a
+                    # real internal use (building another constant from it).
+                    external += max(0, len(pat.findall(text)) - 1)
+                else:
+                    external += len(pat.findall(text))
+            if external == 0:
+                hits.append((cfg.relative_to(ROOT).as_posix(), lineno, nm))
+    return hits
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--verbose", action="store_true",
                     help="A: report markers even when no built place is named")
-    ap.add_argument("--only", choices=["A", "B", "C"])
+    ap.add_argument("--only", choices=["A", "B", "C", "D"])
     args = ap.parse_args()
 
     cities, vocab = built_vocabulary()
@@ -313,6 +391,18 @@ def main():
         for p, n, heading, token, miss, total in hits:
             print(f"   {p.relative_to(ROOT).as_posix()}:{n}  {heading}")
             print(f"      {miss} of {total} rows never mention '{token}'")
+        if not hits:
+            print("   none")
+        print()
+
+    if args.only in (None, "D"):
+        hits = check_d()
+        print(f"D. CONFIG CONSTANTS no script reads - {len(hits)}")
+        print("   Each one is a prompt to READ THE COMMENT ABOVE IT. A dead "
+              "constant is harmless;\n   a comment describing a plan that did "
+              "not happen is what misleads the next reader.")
+        for rel, lineno, nm in hits:
+            print(f"   {rel}:{lineno}  {nm}")
         if not hits:
             print("   none")
         print()

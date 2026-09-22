@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**147 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**148 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Category 7 has a check, and it found that the three newest cities fetch inside their steps](#2026-09-22---category-7-has-a-check-and-it-found-that-the-three-newest-cities-fetch-inside-their-steps)
 - [Category 3 has a check, and a range check would not have caught the bug it was built for](#2026-09-22---category-3-has-a-check-and-a-range-check-would-not-have-caught-the-bug-it-was-built-for)
 - [Category B closed: every item adjudicated, and the noisiest file became a hard check](#2026-09-22---category-b-closed-every-item-adjudicated-and-the-noisiest-file-became-a-hard-check)
 - [Category B reaches its floor: 74 to 35, and the rest are not defects](#2026-09-22---category-b-reaches-its-floor-74-to-35-and-the-rest-are-not-defects)
@@ -183,6 +184,55 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Category 7 has a check, and it found that the three newest cities fetch inside their steps
+
+- **`check_stale_claims.py` category D reports config constants no script
+  reads** - 17 of them - because the comment above a dead constant is usually
+  describing a plan that did not happen. It counts **reads, not mentions**:
+  comments and strings are stripped with `tokenize` first.
+
+- **That stripping is not a refinement, it is the difference between working
+  and not.** The first version counted raw text and returned San Diego's
+  `PARCEL_QUERY_BBOX` and `PARCEL_PAGE_SIZE` as CLEAN - the two constants the
+  check was written for - because **this check's own docstring names them as
+  the worked example**. The checker's documentation of the bug masked the bug.
+  A third instance of today's recurring shape: content that reads correctly and
+  is invisible to the tool looking at it.
+
+- **Two hits look like bugs and are not, both now recorded in the skill.** San
+  Francisco's `COUNTY_BOUNDARY_URL` is read by nothing, and its
+  `fetch_sources.py` says why in terms - the three older inputs "were
+  downloaded before this script existed" and are not re-fetched "because
+  re-downloading a business export changes every count in `DECISIONS.md`".
+  Vancouver's `MUNICIPALITIES_KEEP` is unread because that layer NAMES rather
+  than filters, which is what its provenance row says. **Reading the comment is
+  the step; deleting the constant is not.**
+
+- **Probing outward from those two found a real architectural drift that no
+  build session could see.** Surveying which cities have a fetch script at all:
+  **Madrid, Mexico City and Guadalajara have none**, and their `step1` and
+  `step2` files import `requests` directly - six step files in the three newest
+  cities. Every one of the other thirteen keeps fetching in a separate
+  `fetch_*.py`, and San Francisco's states the reason as an invariant:
+  *"a drift check must be deterministic and offline, and step 2 must therefore
+  never fetch anything itself."*
+
+- **The deviation is real but mild, and the distinction matters.** Both were
+  checked rather than assumed: Mexico City's `overpass()` returns the cached
+  file when it exists and only calls out on a miss, and Madrid's step 2 fetches
+  only `if not BUSINESSES_RAW_CSV.exists()`. So on a normal run, where
+  `data/<city>/raw/` is populated, they are offline and deterministic and
+  `drift_check.py` behaves. **On a fresh clone they would not be** - that
+  directory is gitignored, so the guard misses and the steps reach the network.
+  The invariant is now conditional rather than absolute, and the sentence in
+  San Francisco's docstring is no longer true of the whole project.
+
+- **Not fixed here, deliberately.** Moving three cities' fetching into
+  `fetch_*.py` is build-session work needing each city's context, and the
+  cleanup role hands those over rather than rewriting step logic. Recorded so
+  the next person reading San Francisco's confident invariant knows it has
+  three exceptions.
 
 ### 2026-09-22 - Category 3 has a check, and a range check would not have caught the bug it was built for
 

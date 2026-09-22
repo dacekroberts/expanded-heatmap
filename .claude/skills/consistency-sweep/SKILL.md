@@ -227,6 +227,21 @@ tells the true story.
 **Record what the code does, not what the comment claims**, and note the
 divergence rather than silently trusting either.
 
+**`check_stale_claims.py` category D finds the candidates**: config constants
+that no script reads, counting real reads rather than mentions. A dead constant
+is harmless in itself - it is a prompt to go and read the comment above it,
+which is where the stale claim lives.
+
+Two things that pass this check are worth knowing, because both look like bugs
+and are not. **San Francisco's `COUNTY_BOUNDARY_URL` is read by nothing**, and
+its `fetch_sources.py` says why in terms: the three older inputs "were
+downloaded before this script existed... and they are not re-fetched here,
+because re-downloading a business export changes every count in
+`DECISIONS.md`". A documented deliberate gap. **Vancouver's
+`MUNICIPALITIES_KEEP` is read by nothing** because that layer NAMES rather than
+filters, which is exactly what its provenance row says. Reading the comment is
+the step, not deleting the constant.
+
 ### 8. Repository artifacts that outlive their work
 
 Empty worktree directories, branches merged long ago, worktree registrations
@@ -291,7 +306,7 @@ it needs that session's context.
 | `python scripts/check_deploy_imports.py` | a clean clone imports under the lean venv |
 | `python scripts/brief_check.py <city>` | a build brief's claims still hold against live sources |
 | `python scripts/check_personal_exposure.py <city>` | no personal information in a city's published output |
-| `python scripts/check_stale_claims.py` | **reports, never fails.** Prose in the future tense about something that IS built; totalising hand-kept counts; headings whose rows no longer match the label |
+| `python scripts/check_stale_claims.py` | **reports, never fails.** Prose in the future tense about something that IS built; totalising hand-kept counts; headings whose rows no longer match the label; **config constants no script reads** |
 
 **Import configs, do not grep them.** `check_provenance.py` imports each city's
 `config.py` and walks its resolved values, because Vancouver builds four
