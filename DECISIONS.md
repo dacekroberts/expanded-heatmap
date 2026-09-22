@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**114 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**115 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Tier 6 reached; Stockholm is a real register four hops deep, and Sofia's 403 reading was wrong](#2026-09-22---tier-6-reached-stockholm-is-a-real-register-four-hops-deep-and-sofias-403-reading-was-wrong)
 - [Tier 5 closed by browser navigation, and real-browser probing made a standing rule](#2026-09-22---tier-5-closed-by-browser-navigation-and-real-browser-probing-made-a-standing-rule)
 - [CDMX approved from OpenStreetMap as a per-city exception, and it passes both rail invariants](#2026-09-22---cdmx-approved-from-openstreetmap-as-a-per-city-exception-and-it-passes-both-rail-invariants)
 - [Mexico nationwide GIS probe: no new route, but CDMX is a retry rather than a loss](#2026-09-22---mexico-nationwide-gis-probe-no-new-route-but-cdmx-is-a-retry-rather-than-a-loss)
@@ -150,6 +151,82 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Tier 6 reached; Stockholm is a real register four hops deep, and Sofia's 403 reading was wrong
+
+- **Found Stockholm's food-premises register and recorded it as a PARTIAL PASS
+  - the first Tier 6 positive and the best unbuilt result outside Band A.**
+  8,146 distinct premises with real WGS84 coordinates, 100% trade names,
+  addresses on 96.9% of rows, and a daily-updated public ArcGIS FeatureServer.
+  No step of the route was guessable: `dataportal.se` -> the organisation
+  Stockholms stad (291 datasets) -> its single commercial dataset
+  *Tillsynsverksamheter - Livsmedel* -> a link to the miljoforvaltning's ArcGIS
+  Hub -> the Hub item id resolved through `arcgis.com/sharing/rest` to
+  `services-eu1.arcgis.com/.../Livsmedelstillsyn/FeatureServer`, which reports
+  `access: public`.
+
+- **Corrected the row count from 289,742 to 8,146 before it could become a
+  claim.** The layer is *Livsmedelstillsyn* - food SUPERVISION - so a row is an
+  inspection event, not a premises: "Nyko Kitchen, Nybrogatan 61" repeats
+  across dozens of rows, each with its own `TillsynsDatum` and `Anmarkning`.
+  Distinct `ObjektId` is 8,146. Recorded the general form: the row-count check
+  that caught Malaysia's 372-row sample catches this too, from the opposite
+  direction - Malaysia's count was too small to be a register, Stockholm's too
+  large - and both are answered by asking what a row IS before trusting the
+  number.
+
+- **Established that Stockholm's activity field is recoverable, which is what
+  separates it from Jakarta.** `AnlaggningsTyp` is 0% populated - the field
+  exists and is entirely `'None'` - but `VerksamhetsTyp` carries 22 values on
+  29.5% of rows (*Restaurang-, catering- och barverksamhet* 65,858,
+  *Detaljhandel* 11,103, *Partihandel* 2,810). It is null on the rest because
+  it describes the inspection rather than the premises, so it lifts to premises
+  level by taking any non-null value per `ObjektId` during dedupe. Ordinary
+  work rather than a blocker, and the reason Jakarta failed where this does
+  not: there no activity field existed at all.
+
+- **Flagged two things that must be settled before Stockholm is built, neither
+  resolvable by this session.** First, it is **one bucket**: Stockholms stad
+  has 291 datasets and exactly one commercial register - `restaurang` and
+  `foretag` both return 0 within its own catalogue - and Sweden has no general
+  business licence, so retail and personal services have no municipal source.
+  A Stockholm page would be a food-density map, not the three-bucket map the
+  built cities carry; that is a scope call for the owner. Second, a **licence
+  conflict**: the `dataportal.se` record says `Atkomstrattigheter: Begransad`
+  (restricted) while the ArcGIS item says `access: public` and serves without
+  credentials, `licenseInfo` is empty, and `accessInformation` says only
+  "Stockholms stad, miljoforvaltningen". Per `read-licence` step 8 this is
+  ambiguous in a way that matters and is not resolved in the project's favour:
+  that the data fetches is not a finding that it is licensed.
+
+- **Corrected the standing read of Bulgaria's 403.** It had been recorded twice
+  as a stock Apache page and therefore a client-signature refusal, with "the
+  browser is the cheap next step" as the plan. The browser returns the **same
+  403**, so the earlier inference was wrong and Sofia is not cheap. Also
+  measured: `data.sofia.bg` and `opendata.sofia.bg` do not resolve at all,
+  while `www.sofia.bg` and `portal.registryagency.bg` are live and unprobed.
+
+- **Reached the other four Tier 6 countries and recorded what each actually
+  is**, replacing "never actually reached" with measurements. Estonia's API was
+  found by watching its own UI - `andmed.eesti.ee/api/datasets/search` with
+  `page`, `limit`, `search`, `type`, `sortBy`, `sortOrder`, `lang` - but it
+  returns HTTP 400 to an empty `search` and to `limit=1000`, so the parameter
+  contract is unpinned; `toitlustus` returns 16 datasets, all school-catering
+  statistics, and the real route is likely MTR, unprobed. Croatia's
+  `data.gov.hr` answers 200 at four different paths including `data.json` with
+  the **identical 1,291-byte** body - an SPA shell - so it still needs the
+  browser. Hungary was misidentified: `kozadat.hu` is a search tool over public
+  bodies' data inventories rather than a data portal, and `budapest.hu` loads
+  425 KB containing two data-ish links, one a privacy PDF. Romania's
+  `data.gov.ro` times out at the connection after 21 s on both root and API.
+
+- **Noted Gothenburg as a better Swedish dataset on a weaker rail system.**
+  `dataportal.se` shows Goteborgs stad publishing both `Livsmedelsverksamheter`
+  ("alla aktiva livsmedelsverksamheter", JSON and CSV) and `Restauranger med
+  serveringstillstand` (CSV) - two registers where Stockholm has one, and the
+  first is a register of businesses rather than inspections, so it needs no
+  dedupe. Its rail is trams rather than a metro. Unprobed, recorded as a
+  candidate rather than a recommendation.
 
 ### 2026-09-22 - Tier 5 closed by browser navigation, and real-browser probing made a standing rule
 

@@ -442,15 +442,79 @@ error — the same silent-ignore failure as `data.seoul.go.kr`, and the reason a
 control term is not optional. The first search read as "no results" when it was
 actually "no filter".
 
-## Tier 6 — never actually reached (6 countries, 6 cities)
+## Tier 6 — reached, 2026-09-22 (6 countries, 6 cities)
 
-**No finding either way.** These failed on hosts, not data, so they are not
-negatives.
+Previously "never actually reached". The browser sweep reached all six. One is
+a **partial pass** and the first Tier 6 positive; the rest are host failures of
+varying finality.
 
-🇪🇪 **Estonia** *(Tallinn — ariregister is company-shaped, suggestive but unmeasured)* ·
-🇸🇪 **Sweden** *(Stockholm)* · 🇭🇺 **Hungary** *(Budapest — both portals resolve nowhere)* ·
-🇭🇷 **Croatia** *(Zagreb — SPA shell)* · 🇷🇴 **Romania** *(Bucharest — resolves nowhere)* ·
-🇧🇬 **Bulgaria** *(Sofia — the 403 is a **stock Apache page**, not an IP block, so the browser is the cheap next step)*
+| Country | City | State after the browser |
+|---|---|---|
+| 🇸🇪 **Sweden** ▲ | **Stockholm** | **PARTIAL PASS — best unbuilt result outside Band A.** A public ArcGIS FeatureServer with **8,146 distinct food premises**, real WGS84 coordinates, trade names, addresses and a usable activity field. **One bucket only** (food), and one licence conflict to resolve. See below |
+| 🇪🇪 **Estonia** | Tallinn | API **found** — `andmed.eesti.ee/api/datasets/search?page&limit&search&type&sortBy&sortOrder&lang` — but it rejects an empty `search` and a large `limit` with **HTTP 400**, so the parameter contract is not pinned. `toitlustus` returns 16 datasets, all school-catering statistics. The real route is almost certainly **MTR** (Majandustegevuse register), which is unprobed. Lowest-value city in the tier: trams only, ~450k |
+| 🇭🇷 **Croatia** | Zagreb | `data.gov.hr` answers 200 at **every** path with the **identical 1,291-byte** body — an SPA shell. Confirmed by four paths including `data.json`. **Still needs the browser** |
+| 🇭🇺 **Hungary** | Budapest | **Misidentified until now.** `kozadat.hu` is not a data portal — it is a *search tool over public bodies' data inventories*. `budapest.hu` loads 425 KB with **two** data-ish links, one of them a privacy PDF. No catalogue found |
+| 🇷🇴 **Romania** | Bucharest | `data.gov.ro` **times out** at the connection (21 s, both root and API); `portal.onrc.ro` does not resolve; `www.pmb.ro` is a 2,483-byte shell |
+| 🇧🇬 **Bulgaria** | Sofia | **CORRECTION: the browser fails too.** `data.egov.bg` returns the same **403** in a real browser as to curl, so the earlier reading — that a stock Apache page implied a *client-signature* refusal worth retrying — was wrong. `data.sofia.bg` and `opendata.sofia.bg` **do not resolve**. `www.sofia.bg` and `portal.registryagency.bg` are live and unprobed |
+
+### 🇸🇪 Stockholm — a real register, found four hops deep
+
+The route is the argument for navigating rather than guessing; no step of it
+was predictable from the outside:
+
+`dataportal.se` → organisation **Stockholms stad** (291 datasets, 101 open,
+190 *skyddade*) → the **one** commercial hit, *Tillsynsverksamheter -
+Livsmedel* → its page links the miljöförvaltning's ArcGIS Hub → the Hub item
+id resolves through `arcgis.com/sharing/rest` to a **public** FeatureServer.
+
+| Measured | |
+|---|---|
+| Rows | **289,742** — but a row is an **inspection**, carrying `TillsynsDatum` and `Anmarkning`. "Nyko Kitchen, Nybrogatan 61" repeats across dozens |
+| **Distinct premises** (`ObjektId`) | **8,146** |
+| Geometry | `esriGeometryPoint`, real WGS84 — `(18.0804, 59.3388)` — plus SWEREF99 northings/eastings |
+| `Adress` | 280,760 of 289,742 rows non-empty (**96.9%**) |
+| `AnlaggningsNamn` | **100%** — trade names |
+| `VerksamhetsTyp` | 22 values, **29.5%** of rows non-null: *Restaurang-, catering- och barverksamhet* 65,858 · *Detaljhandel* 11,103 · *Partihandel* 2,810 |
+| `AnlaggningsTyp` | **0% — entirely `'None'`.** The field exists and is empty |
+| Update | daily/weekly, from Ecos 2 |
+
+**The row-count discipline cuts both ways.** Malaysia's count was too *small*
+to be a register; Stockholm's is too *large*. Both are answered by asking what
+a row **is** before trusting the number — and here the answer is good news,
+because 8,146 premises with coordinates is a real city leg.
+
+**The activity field is recoverable but not free.** `VerksamhetsTyp` is null on
+70.5% of rows because it describes the *inspection*, not the premises — so it
+has to be lifted to premises level by taking any non-null value per `ObjektId`
+during dedupe. That is ordinary work, not a blocker, but it is work, and it is
+the difference between this and Jakarta, where no activity field existed at all.
+
+**Two open questions before Stockholm could be built:**
+
+1. **One bucket.** This is food only. Stockholms stad has **291 datasets and
+   exactly one** commercial register — `restaurang` and `företag` both return
+   **0** within its catalogue. Sweden has no general business licence, so
+   retail and personal services have no municipal source to find. This is the
+   Hong Kong shape, improved: a real bulk route exists, but a Stockholm page
+   would be a **food-density map**, not the three-bucket map the built cities
+   carry. That is a scope call, not a data problem, and it belongs to the
+   owner. `multi-source-city` is the relevant process if a second source is
+   ever found.
+2. **A licence conflict that must not be resolved in this project's favour.**
+   The `dataportal.se` metadata record says `Åtkomsträttigheter: **Begränsad**`
+   (restricted); the ArcGIS item says `access: **public**` and serves the data
+   without credentials. `licenseInfo` is **empty**; `accessInformation` reads
+   only *"Stockholms stad, miljöförvaltningen"*. Per `read-licence` step 8 this
+   is **ambiguous in a way that matters** and needs the publisher asked — the
+   fact that it fetches is not a finding that it is licensed.
+
+**A second Swedish city worth noting:** `dataportal.se` shows **Göteborgs
+stad** publishing *both* `Livsmedelsverksamheter` ("alla aktiva
+livsmedelsverksamheter", JSON + CSV) and `Restauranger med serveringstillstånd`
+(CSV) — i.e. **two** food-adjacent registers where Stockholm has one, and
+`Livsmedelsverksamheter` is a register of *businesses* rather than of
+inspections, so it needs no dedupe. Gothenburg's rail is trams rather than a
+metro, so it is a weaker map for a stronger dataset. Unprobed.
 
 ## Countries ruled out
 
