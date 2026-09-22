@@ -209,7 +209,7 @@ CITIES = [
         # called Vancouver. The name must match render_city_nav()'s argument
         # on the page.
         "name": "Vancouver (Regional)",
-        "region": "Canada",
+        "region": "Canada West",
         "lat": 49.2827,
         "lon": -123.1207,
         "page": "pages/10_Vancouver_Heatmap.py",
@@ -241,7 +241,7 @@ CITIES = [
         # render_city_nav()'s argument on the page must match each other;
         # neither has to match the filename.
         "name": "Montréal",
-        "region": "Canada",
+        "region": "Canada East",
         "lat": 45.5019,
         "lon": -73.5674,
         "page": "pages/11_Montreal_Heatmap.py",
@@ -271,7 +271,7 @@ CITIES = [
     },
     {
         "name": "Calgary",
-        "region": "Canada",
+        "region": "Canada West",
         "lat": 51.0447,
         "lon": -114.0719,
         "page": "pages/12_Calgary_Heatmap.py",
@@ -293,7 +293,7 @@ CITIES = [
     },
     {
         "name": "Edmonton",
-        "region": "Canada",
+        "region": "Canada West",
         "lat": 53.5444,
         "lon": -113.4909,
         "page": "pages/13_Edmonton_Heatmap.py",
@@ -311,7 +311,7 @@ CITIES = [
     },
     {
         "name": "Toronto",
-        "region": "Canada",
+        "region": "Canada East",
         "lat": 43.6532,
         "lon": -79.3832,
         "page": "pages/14_Toronto_Heatmap.py",
@@ -326,7 +326,11 @@ CITIES = [
         # recorded Toronto's dot at x 506.6, y 182.0 before this city existed.
         # Running east keeps it clear of Boston and New York, which sit east of
         # their own dots further south.
-        "label_offset": ("start", 12, -10),
+        # ABOVE and WEST of its dot. Its pill overlapped "Boston" by 30x12 px
+        # (measured from rendered pixels) and covered Montréal's marker; both
+        # went unnoticed because nothing checked either. ("end", 0, -16) clears
+        # Boston, clears Montréal's dot, and keeps Toronto's own dot visible.
+        "label_offset": ("end", 0, -16),
     },
     {
         "name": "Mexico City",
@@ -381,14 +385,20 @@ CITIES = [
         # every width. Chosen against a projection model that reproduces four
         # pixel-measured pills to within 2 px, not by eye.
         #
-        # dx IS +12 AND NOT 0, and the 12 px buys a phone rather than tidiness.
-        # At dx 0 deploy-verify measured the pill's left edge at exactly x=0 on
-        # a 375 px viewport - full text, zero margin - and at a 360 px viewport
-        # (a common Android width) the leading "G" was cut. 375 was the
-        # threshold, not a margin. +12 gives +2.3 px at 360 px and still leaves
-        # 11.6 px to "Miami (Regional)", whose pill shares this one's y band;
-        # +24 collides with it. Measured, not nudged.
-        "label_offset": ("end", 12, 0),
+        # ABOVE its dot, and the dy is the whole point. ("end", 12, 0) put the
+        # pill's right edge 17 px right of the marker with dy 0 centring it
+        # vertically on that marker - so the opaque pill (alpha 235) ERASED
+        # Guadalajara's teal dot entirely. The owner spotted it on the rendered
+        # map; no check here was looking for a label covering a marker, only
+        # for labels covering each other.
+        #
+        # The three constraints conflict on dx alone: clearing the dot with an
+        # "end" anchor needs dx <= -10, and clearing the west canvas edge at
+        # 360 px needs dx >= +10. So dy has to do the work - a pill is 17 px
+        # tall and a marker 5 px in radius, which needs |dy| >= 14. At
+        # ("middle", 0, -16) the label sits above its dot, clears it, and also
+        # clears Mexico City and Miami at every width.
+        "label_offset": ("middle", 0, -16),
     },
 ]
 
@@ -442,7 +452,19 @@ IN_DEFAULT_VIEW = [c for c in CITIES if c.get("in_default_view", True)]
 DEFAULT_REGION = "United States"
 
 # Order is display order in the switcher. A new country appends here.
-REGION_ORDER = ["United States", "Canada", "Mexico"]
+# CANADA IS SPLIT WEST/EAST, and the reason is geographic rather than
+# political. Vancouver and Montréal are ~3,300 km apart - wider than the
+# contiguous United States - so a single "Canada" view centred between them put
+# every city near an edge with an empty prairie in the middle, which is the
+# "default silently hides most of the site" failure docs/scaling_thresholds.md
+# warns about. West is Vancouver, Calgary and Edmonton; East is Toronto and
+# Montréal. Owner's decision 2026-09-22.
+#
+# This is the first region that is not a country, and it sets the precedent:
+# a region is whatever groups cities into ONE readable view. Expect the same
+# question for the United States eventually, and for any country with a
+# comparable span.
+REGION_ORDER = ["United States", "Canada West", "Canada East", "Mexico"]
 
 
 def cities_in(region):

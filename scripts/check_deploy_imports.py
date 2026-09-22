@@ -125,6 +125,126 @@ for mod in HEAVY:
         problems.append(f"{mod} was imported by app code - it is not in "
                         "requirements.txt and will break the deploy")
 
+# --- page chrome: every one of these caught a real defect on 2026-09-22 -----
+import re as _re
+try:
+    from cities import CITIES as _C
+    by_page = {c["page"].split("/")[-1]: c for c in _C}
+    import pathlib as _p
+    for f in sorted(_p.Path("app/pages").glob("*_Heatmap.py")):
+        src = f.read_text(encoding="utf-8")
+        city = by_page.get(f.name)
+        if city is None:
+            problems.append(f"{f.name}: no cities.py entry points at this page")
+            continue
+        # Chicago's terms require its disclaimer wherever the app is accessed.
+        # Four pages shipped without this because the scaffold template omitted
+        # it; on those pages the notices were ABSENT, not collapsed.
+        if "render_site_notices()" not in src:
+            problems.append(f"{f.name}: never calls render_site_notices() - "
+                            "the five mandatory notices would be absent")
+        m = _re.search(r'render_city_nav\("([^"]+)"\)', src)
+        if not m:
+            problems.append(f"{f.name}: never calls render_city_nav()")
+        elif m.group(1) != city["name"]:
+            problems.append(
+                f"{f.name}: render_city_nav({m.group(1)!r}) does not match "
+                f"cities.py name {city['name']!r} - inert under MAP_ONLY_NAV, "
+                "wrong the moment that flag flips")
+        t = _re.search(r'page_title="([^"]+)"', src)
+        if t and not t.group(1).startswith(city["name"]):
+            problems.append(f"{f.name}: page_title {t.group(1)!r} does not "
+                            f"start with {city['name']!r}")
+    for d in sorted(_p.Path("outputs").iterdir()):
+        if d.is_dir() and not (d / "heatmap.html").exists():
+            problems.append(f"outputs/{d.name}/ has no heatmap.html")
+except Exception:
+    problems.append("page-chrome checks raised:\n" + traceback.format_exc())
+
+# --- macro-map label collisions --------------------------------------------
+# Label pills are placed by PIXEL offsets at a pinned zoom, so every added city
+# can collide with an existing one, and the failure is invisible until someone
+# looks at the map. Boston and Toronto overlapped by 30x12 px unnoticed. This
+# model reproduced four pixel-measured pills to within 2 px on 2026-09-22.
+try:
+    import math
+    from cities import CITIES as _CC, IN_DEFAULT_VIEW as _IDV
+
+    def _fit(lats, lons, w=320, h=460, fill=0.7, west_pad=0.12):
+        lon_min = min(lons) - west_pad * max(max(lons) - min(lons), 0.5)
+        lat_span = max(max(lats) - min(lats), 0.5)
+        lon_span = max(max(lons) - lon_min, 0.5)
+        clat = (max(lats) + min(lats)) / 2
+        zl = math.log2(w * 360 * fill / (512 * lon_span))
+        za = math.log2(h * 360 * fill * math.cos(math.radians(clat)) / (512 * lat_span))
+        return max(1.0, min(zl, za, 9.0)), clat, (max(lons) + lon_min) / 2
+
+    ZOOM, CLAT, CLON = _fit([c["lat"] for c in _IDV], [c["lon"] for c in _IDV])
+    SCALE = 512 * (2 ** ZOOM)
+    DEFAULT_OFFSET = ("middle", 0, -22)
+    CHAR_W, PAD_W, PILL_H = 7.0, 11.0, 17.0
+
+    def _mercy(lat):
+        return (1 - math.log(math.tan(math.radians(lat)) +
+                             1 / math.cos(math.radians(lat))) / math.pi) / 2
+
+    def _box(c, W):
+        off = c.get("label_offset") or DEFAULT_OFFSET
+        anchor, dx, dy = off
+        x = (c["lon"] - CLON) / 360 * SCALE + W / 2
+        y = (_mercy(c["lat"]) - _mercy(CLAT)) * SCALE + 460 / 2
+        w = CHAR_W * len(c["name"]) + PAD_W
+        cx = x + dx
+        # background_padding=[5,2]: the pill extends 5 px past the text anchor
+        x0 = cx - w / 2 if anchor == "middle" else (cx - 5 if anchor == "start"
+                                                   else cx + 5 - w)
+        y0 = y + dy - PILL_H / 2
+        return x0, x0 + w, y0, y0 + PILL_H
+
+    seen = set()
+    for W in (343, 726, 1030):          # 375 / 768 / 1200 px viewports
+        boxes = {c["name"]: _box(c, W) for c in _CC}
+        names = sorted(boxes)
+        for i, n1 in enumerate(names):
+            for n2 in names[i + 1:]:
+                a, b = boxes[n1], boxes[n2]
+                ox = min(a[1], b[1]) - max(a[0], b[0])
+                oy = min(a[3], b[3]) - max(a[2], b[2])
+                if ox > 0 and oy > 0 and (n1, n2) not in seen:
+                    seen.add((n1, n2))
+                    problems.append(
+                        f"macro map: {n1!r} and {n2!r} labels overlap by "
+                        f"{ox:.0f}x{oy:.0f} px - adjust label_offset in "
+                        "cities.py (offsets are PIXELS at a pinned zoom)")
+        for c in _CC:
+            if _box(c, W)[0] < 0 and c["name"] not in ("Vancouver (Regional)",):
+                problems.append(f"macro map: {c['name']!r} label is clipped by "
+                                f"the west edge at a {W}px canvas")
+            # A LABEL MUST NOT COVER ITS OWN MARKER. The pills are opaque
+            # (alpha 235), so a pill over a dot erases the dot - Guadalajara
+            # shipped with no visible marker on 2026-09-22 because
+            # ("end", 12, 0) put its pill across its own point, and the owner
+            # found it by looking at the map rather than any check finding it.
+            #
+            # Deliberately ONLY the city's own dot. Pills covering OTHER
+            # cities' dots happen in the east-coast cluster by design - the
+            # dots there are 6-15 px apart and cities.py documents that as an
+            # accepted trade-off - so flagging those would be noise.
+            x0, x1, y0, y1 = _box(c, W)
+            dx_, dy_ = ((c["lon"] - CLON) / 360 * SCALE + W / 2,
+                        (_mercy(c["lat"]) - _mercy(CLAT)) * SCALE + 230)
+            if (x0 - 5 < dx_ < x1 + 5) and (y0 - 5 < dy_ < y1 + 5):
+                key = ("owndot", c["name"])
+                if key not in seen:
+                    seen.add(key)
+                    problems.append(
+                        f"macro map: {c['name']!r} label pill covers its own "
+                        "marker - the dot will be invisible. A pill is 17 px "
+                        "tall and a marker 5 px in radius, so |dy| >= 14, or "
+                        "move it clear horizontally.")
+except Exception:
+    problems.append("label-collision check raised:\n" + traceback.format_exc())
+
 for p in problems:
     print("FAIL", p)
 print("PROBLEMS", len(problems))
