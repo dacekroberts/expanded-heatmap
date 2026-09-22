@@ -12,10 +12,12 @@ WRONG TWICE.
 project's four collapse mechanisms is unavailable and the names must be munged.
 Every Toronto figure before 2026-09-21 rested on **234 "stations" that were
 platforms**. The correction of that error then made a smaller one of the same
-kind, because **two naming conventions live in this one feed**:
+kind, because **three naming conventions live in this one feed**:
 
     subway HYPHENATES    "Finch Station - Southbound Platform"
     LRT DOES NOT         "Aga Khan Park & Museum Station Eastbound Platform"
+    Union names its
+    DESTINATION          "Union Station - Northbound Platform Towards Finch"
     and one bare form    "Finch West Station LRT Platform"
 
 A pattern written for the subway leaves all 86 LRT platforms uncollapsed, which
@@ -23,11 +25,12 @@ gives 160 "stations" at a 70 m nearest-neighbour median - platform spacing. And
 three stations appear TWICE, once plain and once suffixed `- Subway`
 (`Kipling Station` against `Kipling Station - Subway`, 33 m apart).
 
-**The collapse is checked two ways rather than trusted**, which is the actual
-lesson: against the operator's own published counts (Line 1 has 38 stations,
-Line 2 31, Line 4 5, sharing 3 interchanges = 71, against the measured 72) and
-against the spacing median (632 m at 111 stations). The old 77 and 118 agree
-with neither.
+**The collapse is checked by `pipeline/stations.py`, not here**, and that is
+the actual lesson: this check was written five separate times for five Canadian
+cities and was absent or wrong in four of them. Three gates - spacing,
+boardability, and the operator's own published counts. All five of Toronto's
+lines now match the TTC exactly (38/31/5/25/18); its old 77 and 118 matched
+nothing published.
 
 **Toronto also has NO non-revenue stops** - `pickup_type` and `drop_off_type`
 are boardable on every rail stop_time. Checked, because Edmonton's feed hid two
@@ -52,6 +55,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline.stations import nearest_neighbour_m, verify_stations  # noqa: E402
 from pipeline.toronto.config import (  # noqa: E402
     CITY_BOUNDARY_ZIP,
     CRS_GEOGRAPHIC,
@@ -65,6 +69,7 @@ from pipeline.toronto.config import (  # noqa: E402
     NON_REVENUE_STOPS_EXPECTED,
     PLATFORM_SPACING_MEDIAN_M_MAX,
     PLATFORMS_EXPECTED,
+    PUBLISHED_STATIONS_PER_LINE,
     RING_EDGES_METERS,
     ROUTE_IDS_EXPECTED,
     STATION_SPACING_MEDIAN_M_MIN,
@@ -78,14 +83,6 @@ from pipeline.toronto.config import (  # noqa: E402
 def load(zip_path, filename, **kw):
     with zipfile.ZipFile(zip_path) as z, z.open(filename) as f:
         return pd.read_csv(f, dtype=str, **kw)
-
-
-def nn_metres(lon, lat):
-    pts = gpd.GeoSeries(gpd.points_from_xy(lon, lat),
-                        crs=CRS_GEOGRAPHIC).to_crs(CRS_PROJECTED)
-    pts = pts.reset_index(drop=True)
-    return np.array([pts.drop(index=i).distance(pts.iloc[i]).min()
-                     for i in range(len(pts))])
 
 
 def collapse_names(names):
@@ -213,33 +210,7 @@ def main():
               f"160 here; check STATION_STRIP_PATTERNS against the spacing "
               f"below rather than adjusting this number.")
 
-    # --- the spacing diagnostic, BOTH ways --------------------------------
-    raw_nn = nn_metres(served["longitude"], served["latitude"])
-    st_nn = nn_metres(stations["longitude"], stations["latitude"])
-    stations["nearest_station_m"] = np.round(st_nn, 1)
-    print("\nNearest-neighbour spacing (the platform-vs-station diagnostic):")
-    print(f"  {len(served):>4} platforms : median {np.median(raw_nn):>6.0f} m  "
-          f"min {raw_nn.min():>5.0f}")
-    print(f"  {len(stations):>4} stations  : median {np.median(st_nn):>6.0f} m  "
-          f"min {st_nn.min():>5.0f}")
-    if np.median(st_nn) < STATION_SPACING_MEDIAN_M_MIN:
-        sys.exit(
-            f"  collapsed median {np.median(st_nn):.0f} m is too TIGHT for "
-            f"stations - these are still platforms. An incomplete strip gives "
-            f"160 stations at 70 m here; the LRT does NOT hyphenate its "
-            f"platform names and the subway does."
-        )
-    if np.median(raw_nn) > PLATFORM_SPACING_MEDIAN_M_MAX:
-        print(f"  NOTE: uncollapsed median {np.median(raw_nn):.0f} m is wide "
-              f"for platforms.")
-    outer = RING_EDGES_METERS[-1]
-    print(f"  closer than the {outer:.0f} m outer ring: "
-          f"{int((st_nn < outer).sum())}/{len(stations)}")
-    print("  tightest: " + ", ".join(
-        f"{r.station} ({r.nearest_station_m:.0f} m)"
-        for r in stations.nsmallest(4, "nearest_station_m").itertuples()))
-
-    # --- which lines serve each station -----------------------------------
+    # --- which lines serve each station, needed for gate 3 ----------------
     trip_to_route = dict(zip(keep["trip_id"], keep["route_id"]))
     stop_to_station = dict(zip(served["stop_id"], served["station"]))
     sl = st.assign(station=st["stop_id"].map(stop_to_station),
@@ -253,6 +224,36 @@ def main():
         print(f"  {name:<26}{n:>4}")
     print(f"  served by more than one: "
           f"{int(stations['lines'].fillna('').str.contains(',').sum())}")
+
+    # --- the three shared gates -------------------------------------------
+    # pipeline/stations.py rather than inline, because this check was written
+    # five separate times for five Canadian cities and was absent or wrong in
+    # four of them. The collapse above stays per-city - the feeds genuinely
+    # differ - but the verification does not.
+    actual_per_line = {
+        name: int(stations["lines"].fillna("").str.contains(name,
+                                                            regex=False).sum())
+        for name in LINE_NAMES.values()
+    }
+    st_nn = nearest_neighbour_m(stations["longitude"], stations["latitude"],
+                                CRS_PROJECTED)
+    stations["nearest_station_m"] = np.round(st_nn, 1)
+    print()
+    verify_stations(
+        city="Toronto", platforms=served, stations=stations,
+        crs_projected=CRS_PROJECTED,
+        expected_per_line=PUBLISHED_STATIONS_PER_LINE,
+        actual_per_line=actual_per_line,
+        non_revenue=len(non_rev),
+        spacing_min=STATION_SPACING_MEDIAN_M_MIN,
+        platform_max=PLATFORM_SPACING_MEDIAN_M_MAX,
+    )
+    outer = RING_EDGES_METERS[-1]
+    print(f"    closer than the {outer:.0f} m outer ring: "
+          f"{int((st_nn < outer).sum())}/{len(stations)}")
+    print("    tightest: " + ", ".join(
+        f"{r.station} ({r.nearest_station_m:.0f} m)"
+        for r in stations.nsmallest(4, "nearest_station_m").itertuples()))
 
     # --- the boundary: a CHECK ---------------------------------------------
     b = gpd.read_file(CITY_BOUNDARY_ZIP)
