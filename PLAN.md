@@ -35,7 +35,12 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   displayed names match the person pattern - the storefront filter makes it
   worse, not better. What a pin displays on that fallback wants settling
   before the map renders, not after.
-  - [ ] **After the Vancouver build lands: add two clause families to the
+  - [x] **DONE 2026-09-21 — two clause families added to `read-licence`**
+    (step 6's third adjacent category, and a new step 6b). Landed once
+    Vancouver was built, and timely: **Montréal is one of the two worked
+    examples**, and its build had just started.
+    Original item, kept until its `DECISIONS.md` entry exists:
+    **After the Vancouver build lands: add two clause families to the
     `read-licence` skill.** Deferred deliberately so the skill settles first
     (it was written 2026-09-21). Both recur and both were found by the global
     country screen. **(a) Licences that require disclosing TRANSFORMATION, not

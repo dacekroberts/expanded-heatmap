@@ -141,7 +141,7 @@ display when published", **verbatim where the terms prescribe wording**:
 - WMATA requires **nothing** — which corrected a prediction in this project's
   own notes that it would add a sixth notice.
 
-And two adjacent categories that are not notices but are still work:
+And three adjacent categories that are not notices but are still work:
 
 - **What may not be SAID.** MTA's and WMATA §6's identical clause forbids
   stating or implying the data an application provides "is accurate, complete,
@@ -150,6 +150,40 @@ And two adjacent categories that are not notices but are still work:
 - **Trademark and affiliation.** Six agencies here bar implying affiliation,
   sponsorship or endorsement. Check whether the terms claim **marks** (a logo)
   or something broader; SEPTA's claims only its Logo.
+- **What must be DISCLOSED about your own processing.** A recurring family,
+  found by the 2026-09-21 global country screen, and **this project triggers it
+  every time**: ring density, category bucketing and storefront filtering are
+  all transformations and interpretations.
+  - **Montréal** requires crediting the data *and* stating whether
+    modifications were made **"ou si des interprétations en ont été tirées"** —
+    or whether interpretations were drawn from it.
+  - **Mexico's INEGI** requires you to *"notificar al usuario final de
+    cualquier análisis o transformación que haga a la información"*, and
+    separately that the presentation must not suggest INEGI made the change.
+
+  **A bare source credit does not satisfy either.** The notice has to say that
+  the map interprets the data. Treat "attribution" and "disclosure of
+  transformation" as two different obligations and check for both, because a
+  licence can require the second while granting the first freely.
+
+### 6b. Check whether the publisher already did the privacy work
+
+Before designing a residence filter or a name-suppression rule, check whether
+the register is **already stripped at source**. Several are, and the work is
+then done:
+
+- **France** masks `diffusion status = P` records — the sole trader's name, the
+  commune address **and the geolocation**.
+- **Edmonton** publishes `<REDACTED FOR PRIVACY>` in place of the address on
+  **9.3%** of rows.
+- **Austria's GISA** publishes active trade licences **without personal data**
+  — and, as it turns out, without a street address either, which is why Austria
+  failed this project's premises test. Upstream stripping can remove what you
+  needed along with what you did not: **check what survived, not just what was
+  removed.**
+
+This cuts both ways and is worth a minute either way: it can save building a
+filter, or it can disqualify a source that looked complete.
 
 ### 7. Where a page blocks fetching, use the browser
 
