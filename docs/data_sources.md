@@ -330,22 +330,39 @@ owner's identity. It is a stronger position than storing a live key carefully.
    necessarily a fresh download, never a reuse. Budget the registration step
    into any D.C. or Korea re-run, and do not treat those pages as
    self-regenerating.
-2. **Termination may trigger WMATA's §9 deletion clause.** §9 requires that on
-   termination "you must permanently delete all Transit Data or other data
-   which you stored pursuant to your use of the API or GTFS", and WMATA "may
-   request that you certify in writing your compliance". Deleting the account
-   ends the agreement, so the clause plausibly engages.
-   **The clearest reading is already satisfied:** the raw GTFS lives in
-   `data/washington_dc/raw/`, which is **gitignored and never committed**, so
-   no Transit Data as supplied is stored in this repository.
-   **The grey area is the rendered map** — station coordinates drawn into
-   `outputs/washington_dc/heatmap.html`. That is a derived work rather than
-   stored Transit Data on a natural reading, and the licence grant expressly
-   permits redistribution "within your Application". **Recorded as a question,
-   not a finding**, and worth settling before the public deploy rather than
-   after a certification request. Note that the same practice raises no such
-   question for Korea, whose terms are `이용허락범위 제한 없음` — no
-   restriction, and no termination-deletion clause.
+2. **Terminating the account ends the LICENCE, and that is the point — not the
+   deletion clause.** Read from the stored copy rather than inferred. §9:
+   "Upon termination of these Terms **(i) all rights and licenses granted to
+   you will terminate immediately**; … and (iv) … you must permanently delete
+   all Transit Data **or other data which you stored pursuant to your use of
+   the API or GTFS**. WMATA may request that you certify in writing your
+   compliance."
+
+   "Termination of these Terms" is the **data licence**, nothing else — these
+   are API terms of use. Deleting the account ends the agreement.
+
+   **(i) is the operative clause.** The grant this project relies on is "a
+   limited… license to download, use, reproduce, and **redistribute** WMATA's
+   Transit Data **within your Application**". If that has terminated, the
+   question is not whether a rendered map counts as stored Transit Data — it is
+   that **the right to publish the page has lapsed.** An earlier version of
+   this note anchored on (iv) and the derived-work grey area, which was the
+   less important half.
+
+   **The resolution is simple and the owner's stated plan already does it:
+   re-register.** A new account creates a new agreement with a fresh grant, and
+   while that licence is live, redistribution within the Application is
+   expressly permitted — no grey area at all.
+
+   **So: hold a live WMATA account before the public deploy, and keep it alive
+   while the D.C. page is published.** This costs nothing extra, because the
+   ten-day `feed_end_date` window already means any rebuild needs a live
+   account. On (iv), the clearest obligation is met regardless:
+   `data/washington_dc/raw/` is gitignored and never committed.
+
+   **Korea raises none of this** — `이용허락범위 제한 없음`, no restriction and
+   no termination clause, so terminating that key has no licensing
+   consequence at all.
 
 **Do not take WMATA's feed from a third-party mirror.** The Mobility Database
 carries a keyless copy, and using it would be the worse option rather than the
