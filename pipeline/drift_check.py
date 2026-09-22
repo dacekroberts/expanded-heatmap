@@ -48,13 +48,26 @@ It re-runs against the raw files already in data/<city>/raw/ - it does NOT
 re-download. It prints each raw input's size and modified time so a reader
 can tell code drift (raw files unchanged, outputs changed) from source
 drift (raw files were refreshed since the baseline).
+
+`--jobs N` runs CITIES concurrently (default 1, unchanged). The full sweep is
+this project's only O(n)-in-pipeline-runs cost, so it is the binding
+operational limiter as the city count grows - see
+`docs/scaling_thresholds.md`. Steps WITHIN a city stay sequential, because
+step 2 consumes step 1's output; the parallelism is strictly across cities,
+which is safe since each touches only its own `data/<city>/` and
+`outputs/<city>/`, and the one shared call (`git ls-tree`) is read-only and
+takes no index lock. Opt-in rather than default because four cities' step 2
+means four geopandas datasets resident at once.
 """
 
+import concurrent.futures
 import datetime
+import io
 import os
 import re
 import subprocess
 import sys
+import threading
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -205,6 +218,17 @@ def main():
     list_only = "--list" in args
     args = [a for a in args if a != "--list"]
 
+    # --jobs N runs CITIES concurrently. Default 1, i.e. exactly the old
+    # behaviour on the default path - see the note at the parallel branch for
+    # why the default was not flipped.
+    jobs = 1
+    if "--jobs" in args:
+        i = args.index("--jobs")
+        if i + 1 >= len(args) or not args[i + 1].isdigit() or int(args[i + 1]) < 1:
+            sys.exit("--jobs needs a positive integer, e.g. --jobs 4")
+        jobs = int(args[i + 1])
+        del args[i:i + 2]
+
     all_cities = cities_with_pipelines()
     ref = None
     if "--changed" in args:
@@ -234,14 +258,94 @@ def main():
         sys.exit(0)
 
     all_clean = True
-    for city in requested:
-        print(f"\n=== {city} ===")
-        show_raw_inputs(city)
-        if not run_steps(city):
-            all_clean = False
-            continue
-        if not compare_outputs(city):
-            all_clean = False
+    if jobs == 1:
+        # The default path, unchanged: print straight to stdout as it goes, so
+        # a long sweep shows progress and the output is byte-identical to what
+        # this script has always produced.
+        for city in requested:
+            print(f"\n=== {city} ===")
+            show_raw_inputs(city)
+            if not run_steps(city):
+                all_clean = False
+                continue
+            if not compare_outputs(city):
+                all_clean = False
+    else:
+        # --jobs N: cities run concurrently. Safe because each city touches only
+        # its own data/<city>/ and outputs/<city>/, and the only shared call is
+        # `git ls-tree`, which is read-only and takes no index lock. The STEPS
+        # WITHIN a city stay sequential - step 2 consumes step 1's output - so
+        # the parallelism is strictly across cities.
+        #
+        # Threads rather than processes: the work is `subprocess.run`, which
+        # releases the GIL while it waits, so threads get the full speedup with
+        # no pickling and no re-import of the module per worker.
+        #
+        # Each city's output is buffered and printed as ONE block, in the
+        # requested order rather than the completion order. Interleaved prints
+        # from concurrent cities would make the report unreadable, and worse,
+        # would attach a step's row counts to the wrong city.
+        # WHY THE DEFAULT IS STILL 1. The full sweep is the pre-deploy gate and
+        # the only part of this project whose cost is O(n) in PIPELINE RUNS
+        # rather than file comparisons - which makes it the binding operational
+        # limiter as the city count grows (docs/scaling_thresholds.md). Running
+        # cities concurrently fixes that. It is opt-in anyway because each
+        # city's step 2 loads a full business dataset through geopandas, and
+        # four of those at once is four times the peak memory: New York's is the
+        # largest, so --jobs 4 on a small machine can swap or be killed, and a
+        # killed sweep before a deploy is worse than a slow one. Raise it
+        # deliberately: --jobs 4 is a reasonable pre-deploy setting on a machine
+        # with room, and the default stays the one that always works.
+        print(f"\n(running {len(requested)} cities with --jobs {jobs}; "
+              "each city's report is printed as a block when it finishes)")
+
+        # A THREAD-LOCAL stdout proxy, installed once. Swapping `sys.stdout`
+        # per worker instead would be a race: it is one global, so two threads
+        # assigning it concurrently clobber each other and a city's step row
+        # counts end up printed under a different city's heading - which is
+        # worse than no parallelism, because it looks fine.
+        real_stdout = sys.stdout
+
+        class _PerThreadOut:
+            def __init__(self):
+                self._local = threading.local()
+
+            def _target(self):
+                return getattr(self._local, "buf", None) or real_stdout
+
+            def bind(self, buf):
+                self._local.buf = buf
+
+            def write(self, s):
+                return self._target().write(s)
+
+            def flush(self):
+                return self._target().flush()
+
+        proxy = _PerThreadOut()
+
+        def one_city(city: str):
+            buf = io.StringIO()
+            proxy.bind(buf)          # touches only THIS thread's local
+            print(f"\n=== {city} ===")
+            show_raw_inputs(city)
+            ok = run_steps(city) and compare_outputs(city)
+            return city, ok, buf.getvalue()
+
+        sys.stdout = proxy
+        try:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=jobs) as pool:
+                results = dict(
+                    (city, (ok, text))
+                    for city, ok, text in pool.map(one_city, requested)
+                )
+        finally:
+            sys.stdout = real_stdout
+        for city in requested:
+            ok, text = results[city]
+            print(text, end="")
+            if not ok:
+                all_clean = False
 
     print("\nRESULT:", "zero drift" if all_clean else "DRIFT or failure - see above")
     if len(requested) < len(all_cities):

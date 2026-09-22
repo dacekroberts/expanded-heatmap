@@ -334,6 +334,71 @@ was actually agreed to rather than against a URL that may have moved on.
 
 | **WMATA** (Washington D.C. — **BUILT 2026-09-21**) | Permitted within your own app: "a limited, non-exclusive, non-assignable, non-transferrable, non-sublicensable, revocable license to download, use, reproduce, and redistribute WMATA's Transit Data within your Application". **Third-party redistribution is prohibited** — "sharing (except with your Application's users), transferring, sublicensing, selling or leasing any Transit Data, directly or indirectly...to any other person", unless authorised in writing and "inseparably commingled with or supplemented by additional data that you have provided" | **Not required** — no attribution or notice clause | **No modification clause at all**, which makes it more permissive than LA Metro's on the point that matters most. Access is gated: `api.wmata.com/gtfs/rail-gtfs-static.zip` returns **401** without a registered key from `developer.wmata.com/signup`; keys "remain WMATA's property and may be revoked or otherwise limited at any time", cannot be sold, transferred or sublicensed, and "enable WMATA to associate your API activity with your Application". Trademarks: "prohibited from using WMATA Intellectual Property, including any confusingly similar variants, in association with the Transit Data or API unless you have entered into a separate, written license agreement", and must not "state or imply affiliation, sponsorship or endorsement". **§6 additionally forbids stating or implying that the data your Application provides "is accurate, complete, or timely"** — the identical clause MTA carries, making this the **second** feed to constrain city-page prose that way, so it is a cross-city sweep rather than a D.C. footnote. **§9 termination is the sharpest in the project:** on termination "you must permanently delete all Transit Data or other data which you stored pursuant to your use of the API or GTFS", and "WMATA may request that you certify in writing your compliance with this section" — LA Metro requires removal, but only WMATA asks for written certification. Read 2026-09-21 from `https://developer.wmata.com/license`; local copy at `docs/licenses/wmata-transit-data-terms-of-use.html` |
 
+### The owner's API-account practice, and what it interacts with
+
+**Stated 2026-09-21: the owner registers an API account, takes the data, and
+then immediately terminates the account and revokes its keys.** This was done
+for WMATA and is the intended approach for Korea's `data.go.kr` key.
+
+**Why it is sound.** A key that no longer exists cannot leak, cannot be found
+in a shell history or an environment file, and cannot be used against the
+owner's identity. It is a stronger position than storing a live key carefully.
+
+**Two consequences to plan around, neither of them a problem but both real:**
+
+1. **A rebuild requires re-registering.** The city cannot be regenerated from a
+   clean checkout, or after a crash, or to refresh stale data, without creating
+   a new account and key first. For D.C. this is sharper than elsewhere because
+   **WMATA's `feed_end_date` window is ten days** — so any rebuild is
+   necessarily a fresh download, never a reuse. Budget the registration step
+   into any D.C. or Korea re-run, and do not treat those pages as
+   self-regenerating.
+2. **Terminating the account ends the LICENCE, and that is the point — not the
+   deletion clause.** Read from the stored copy rather than inferred. §9:
+   "Upon termination of these Terms **(i) all rights and licenses granted to
+   you will terminate immediately**; … and (iv) … you must permanently delete
+   all Transit Data **or other data which you stored pursuant to your use of
+   the API or GTFS**. WMATA may request that you certify in writing your
+   compliance."
+
+   "Termination of these Terms" is the **data licence**, nothing else — these
+   are API terms of use. Deleting the account ends the agreement.
+
+   **(i) is the operative clause.** The grant this project relies on is "a
+   limited… license to download, use, reproduce, and **redistribute** WMATA's
+   Transit Data **within your Application**". If that has terminated, the
+   question is not whether a rendered map counts as stored Transit Data — it is
+   that **the right to publish the page has lapsed.** An earlier version of
+   this note anchored on (iv) and the derived-work grey area, which was the
+   less important half.
+
+   **The resolution is simple and the owner's stated plan already does it:
+   re-register.** A new account creates a new agreement with a fresh grant, and
+   while that licence is live, redistribution within the Application is
+   expressly permitted — no grey area at all.
+
+   **So: hold a live WMATA account before the public deploy, and keep it alive
+   while the D.C. page is published.** This costs nothing extra, because the
+   ten-day `feed_end_date` window already means any rebuild needs a live
+   account. On (iv), the clearest obligation is met regardless:
+   `data/washington_dc/raw/` is gitignored and never committed.
+
+   **RESOLVED 2026-09-21: a valid WMATA account has been re-established**, so
+   the licence grant in §2 is live again and the D.C. page rests on a current
+   licence rather than a lapsed one. Nothing further is owed.
+
+   **The standing obligation this creates, and it is the only part that
+   outlives today:** the account must stay live for as long as the D.C. page is
+   published. Do not terminate it while the site is up. If it is terminated
+   later — deliberately or by WMATA, which "may revoke or otherwise limit"
+   keys at any time — then §9(i) applies again and **the D.C. page must come
+   down until a new account is registered.** That is now a deploy-gate
+   condition, not a background note.
+
+   **Korea raises none of this** — `이용허락범위 제한 없음`, no restriction and
+   no termination clause, so terminating that key has no licensing
+   consequence at all.
+
 **Do not take WMATA's feed from a third-party mirror.** The Mobility Database
 carries a keyless copy, and using it would be the worse option rather than the
 convenient one: it relies on a redistribution these terms appear to prohibit,
@@ -696,11 +761,20 @@ surfacing both documents rather than only one:
 forms: "Data provided by Chicago Transit Authority", "Data provided by CTA",
 or "Powered by CTA data".
 
-**7. MassDOT / MBTA — required, NOT YET DISPLAYED. Boston was built on 2026-09-21, so this is now ACTIVE rather than conditional.**
-§4.1 of the MassDOT Developers License Agreement requires the licensee to
-"Clearly acknowledge MassDOT as the provider of the Data". No exact wording is
-prescribed. Boston's city page already carries **"Rail alignment data provided by MassDOT/MBTA"**, which meets the requirement for that page; the outstanding part is the same as for the other three — it must appear where the *site* is accessed, not only on one city page. Same shape as LA Metro's obligation. The agreement
-itself is kept at `docs/licenses/mbta-massdot-develop-license-agreement.pdf`.
+**7. MassDOT / MBTA — required, and DISPLAYED.** §4.1 of the MassDOT Developers
+License Agreement requires the licensee to "Clearly acknowledge MassDOT as the
+provider of the Data". No exact wording is prescribed. Same shape as LA Metro's
+obligation. The agreement itself is kept at
+`docs/licenses/mbta-massdot-develop-license-agreement.pdf`.
+
+**This heading read "NOT YET DISPLAYED" until 2026-09-21 and was stale**, which
+is worth leaving a note about because a compliance document that understates
+compliance invites someone to re-fix a closed item and to doubt the rest of the
+gate. The outstanding part had been that the acknowledgement appeared only on
+Boston's own city page rather than "where the *site* is accessed"; that was
+closed when `app/components.py`'s `render_site_notices()` began carrying all
+five outstanding notices on **every** page, and this heading was not updated
+with the others. Verified against `_NOTICES` on 2026-09-21.
 
 Not required by anyone, but good practice and already partly done in the city
 pages' prose: naming each business registry's publishing agency.

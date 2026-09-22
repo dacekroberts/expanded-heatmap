@@ -241,6 +241,41 @@ onwards; the early ones are split by phase rather than by hour.
 - **This is presentation-only and it re-baselines every city**, which is why
   it is recorded: a reader diffing the outputs later would otherwise find
   twelve changed files and no reason for them.
+### 2026-09-21 - WMATA's licence re-established, and the clause that mattered was not the one first cited
+
+- **The owner's API practice was recorded, and reading the terms changed what
+  it implied.** The practice: register, take the data, then immediately
+  terminate the account and revoke the keys - done for WMATA, and intended for
+  Korea. It is sound on its own terms, since a key that no longer exists cannot
+  leak. The first note written about it anchored on WMATA §9**(iv)**, the
+  obligation to "permanently delete all Transit Data or other data which you
+  stored pursuant to your use of the API or GTFS", and spent itself on whether
+  a rendered map counts as stored Transit Data.
+- **Read from the stored copy, §9(i) is the operative clause and the question
+  is different.** "Upon termination of these Terms (i) all rights and licenses
+  granted to you will terminate immediately." The grant this project relies on
+  is §2's licence to "download, use, reproduce, and redistribute WMATA's
+  Transit Data within your Application". With that terminated, the issue is not
+  the status of the HTML file - it is that **the right to publish the D.C. page
+  had lapsed.** Rejected as the framing: the derived-work argument about clause
+  (iv), which is real but secondary and would not have licensed publication on
+  its own.
+- **Resolved the same day: the owner re-established a valid WMATA account**, so
+  the §2 grant is live and the page rests on a current licence. Nothing is
+  owed, and `data/washington_dc/raw/` was gitignored and never committed in any
+  case.
+- **What this leaves is a standing deploy-gate condition, which is the durable
+  part.** The account must stay live for as long as the D.C. page is published.
+  If it is terminated later - deliberately, or by WMATA, which "may revoke or
+  otherwise limit" keys at any time - §9(i) applies again and **the D.C. page
+  comes down until a new account exists.** Recorded in
+  `docs/data_sources.md` beside the notices gate rather than as a footnote,
+  because it is the only source in this project whose continued publication
+  depends on an account remaining open.
+- **Korea is unaffected by all of this.** Its terms are
+  `이용허락범위 제한 없음` - no restriction, no termination clause - so applying
+  the same terminate-after-capture practice there has no licensing
+  consequence. The practice is only load-bearing for WMATA.
 
 ### 2026-09-21 - Calgary built: 15,099 storefronts, and its ranking figure was PLATFORMS
 

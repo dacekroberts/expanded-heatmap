@@ -292,6 +292,242 @@ Bucharest (5/15), Sofia (4/24), Copenhagen (4/4), Bangkok (4/5), Helsinki
 (3/3/3), Hyderabad (3), Kochi (1), Cairo (2) — plus tram-only Riga, Tallinn,
 Zagreb, Bratislava, Poznań, Messina.
 
+## MULTI-CITY candidate lists, and the Tier 2b rail screen — 2026-09-21
+
+With ~80 page slots free and no RAM constraint (see
+`scaling_thresholds.md`), slots are not scarce. **Verification is.** So each
+passing country's *whole* set of rail cities is listed, not one representative.
+
+### Countries by marginal-city cost
+
+**One national source covers every city** — the second city costs a boundary
+file and a rail check:
+
+| Country | Rail cities | Source | Buckets |
+|---|---|---|---|
+| **Japan** | **10 confirmed** | 推奨データセット standard schema | 2 — no retail |
+| **South Korea** | **6 confirmed** | `상가(상권)정보` + 표준데이터 | 3 |
+| **France** | **6 confirmed** | SIRENE, Licence Ouverte 2.0 | 3 |
+| **Taiwan** | 4 | 商業登記 by category | 3, no coordinates |
+| **Mexico** | 3 | DENUE, SCIAN = NAICS | 3 |
+| **Brazil** | **1 confirmed** (not 6) | CNPJ | 3, no coordinates |
+
+**Multiple cities but bespoke per city** — each is its own integration:
+**Spain** 6 · **Italy** ~4 (Milan verified) · **Canada** 3 remaining
+
+**Single-city:** Singapore · Norway (Oslo) · Czechia (Prague) · Finland
+(Helsinki) · Denmark (Copenhagen) · Israel (Tel Aviv) · Peru (Lima) · Chile
+(Santiago) · Colombia (Bogotá/Medellín) · Thailand (Bangkok) · Bulgaria
+(Sofia) · Romania (Bucharest) · **Ireland (Dublin) and Switzerland (Zurich),
+both unprobed**
+
+### The batched screen, run 2026-09-21
+
+**Japan and Korea needed no GTFS at all** — their rail is one national file
+each, already downloaded, so per-city counts came free:
+
+| Japan | Stations | | Korea | Stations |
+|---|---|---|---|---|
+| **Tokyo** | **330** (Metro 181 + Toei 149) | | **Seoul** | **407** |
+| **Osaka** | 133 | | **Busan** | 126 |
+| **Nagoya** | 102 | | **Incheon** | 102 |
+| **Sapporo** | 49 | | **Daegu** | 94 |
+| **Yokohama** | 43 | | **Daejeon** | 22 |
+| **Fukuoka** | 38 | | **Gwangju** | 20 |
+| **Kyoto** | 32 | | | |
+| **Kobe** / **Sendai** | 30 each | | | |
+| **Hiroshima** | 22 (Astram) | | | |
+
+Japan's municipal figures *understate* each metro area, because the private
+railways are separate operators — Kintetsu 309, Meitetsu 295, Tobu 218,
+Tokyu 110, Hankyu 104, Keio 75.
+
+**France: all five remaining cities confirmed, so France has SIX.**
+
+| City | Measured |
+|---|---|
+| **Lyon** | **subway 12, tram 18, funicular 4** |
+| Marseille | subway 2, tram 3 |
+| Lille | subway 2, tram 1 |
+| Toulouse | subway 2, tram 1 |
+| Rennes | subway 2 — *feed expired 20250629* |
+
+**Spain: Valencia is large** — **subway 84, tram 37**. Sevilla's screen matched
+the wrong operator (a Dos Hermanas bus company, 404) and is unresolved.
+
+**Brazil collapses from 6 to 1.** Rio, Belo Horizonte and Porto Alegre all
+return **bus only**, and Brasília, Recife and Monterrey matched no feed at all.
+That is consistent with MetrôRio having been confirmed absent from the
+catalogue earlier: **Brazil's metro operators are not in it.** São Paulo, whose
+data came from GeoSampa rather than the catalogue, remains the only confirmed
+Brazilian city — and the lesson repeats, since GeoSampa is a *city GIS portal*,
+not a transit catalogue.
+
+**Two parsing lessons from the national files.** Korea's per-city grouping by
+address token **missed Daegu entirely** — its rows carry district names
+(수성구, 달서구) rather than the city name, and only operator grouping found
+its 94 stations. And the first Korean count was silently wrong because **XLSX
+omits empty cells**: appending cells in document order shifted dates into the
+address column. Read the cell `r` reference, not the order.
+
+## DEFINITIVE keep / discard, 2026-09-21
+
+The screen is closed. This is the list to carry forward; everything else below
+it is the evidence trail.
+
+**Why trim rather than extend.** `docs/scaling_thresholds.md` puts the planning
+ceiling at **20–25 cities**, set by research cost and the macro map. Counting
+what is already specified — **12 built**, 3 Canadian remaining (Surrey,
+Edmonton, Toronto), Paris, Milan, Madrid, Barcelona, Seoul, Taipei,
+Guadalajara, São Paulo — gives **≈23**. **The ceiling is already met from the
+existing list**, so a further country probed is work against a constraint that
+already binds. The valuable work is finishing what is specified, not finding
+more.
+
+### KEEP
+
+**Build-ready, one named blocker each**
+France (Paris) · **Italy (Milan)** · Spain (6 metro cities) · South Korea
+(Seoul) · Taiwan (Taipei) · Mexico (Guadalajara) · Brazil (São Paulo)
+
+**Japan is a MULTI-CITY country, and its second bucket is now confirmed**
+(probed 2026-09-21). Because the permit data follows a **national standard
+schema**, coverage is a question of which municipalities publish — not of
+parsing each one differently.
+
+| Portal | Found |
+|---|---|
+| **`catalog.data.metro.tokyo.lg.jp`** | **食品営業許可 279 datasets**, **理容所 916**, **美容所 917**, 公衆浴場 127 — all CSV |
+| **Minato Ward** | `理容所一覧` and `美容所一覧` in **CSV *and* GeoJSON** |
+| **Sapporo** (`ckan.pf-sapporo.jp`) | `札幌市内の食品営業許可施設一覧` **and** `札幌市内の環境衛生営業施設一覧` — a subway city |
+| **Yokohama** | `環境衛生関係施設一覧` (CSV/XLSX/ZIP) — a subway city |
+| **Kyoto** | `食品営業許可施設一覧`, confirmed earlier — a subway city |
+| Osaka, Nagoya, Kobe | **No CKAN at the guessed URLs — unresolved, not absent** |
+
+**Two things this settles.** First, **Personal services is real, not assumed** —
+理容所 (barbers) and 美容所 (beauty salons) are published at scale, 916 and 917
+datasets respectively across Tokyo's municipalities. This file previously
+recorded that bucket as "the likely source, unprobed". Second, Japan has
+**roughly nine subway cities** — Tokyo, Osaka, Nagoya, Yokohama, Kobe, Kyoto,
+Fukuoka, Sapporo, Sendai — which is **more than Spain's six**, and the
+standard schema means the marginal city is cheap.
+
+**The cap is unchanged and is specifically RETAIL.** Food service and personal
+services are both confirmed; Japan licenses no general retail, so the third
+bucket is structurally absent. That is Boston's shape — replicated across many
+cities rather than one.
+
+**Buildable but CAPPED — a fourth category, added for Japan**
+**Japan (Tokyo).** Rail solved and verified (10,235 stations, 21,932 line
+segments, PDL 1.0); business premises-level with coordinates on the national
+standard schema, CC BY. **The cap is two buckets** — Japan licenses no general
+retail. **Precedent exists:** Boston and Toronto are both built at two buckets.
+**The deciding number has never been measured** — Tokyo's food-plus-personal
+density per in-city station. Toronto's two buckets gave 41; Minato Ward alone
+holds 5,723 food premises, so Tokyo plausibly runs to 80–100k across 23 wards
+and could exceed Vancouver's 861. **Measure it before ranking Japan.**
+
+**One probe from resolution**
+Singapore (catalogue not paginated) · Finland (does NACE 47/56/96 yield shops
+or head offices?) · Estonia (bulk CSV URL) · Czechia (a bulk export for a
+register that *does* carry classification)
+
+**Keep warm — the blocker is timing or access, with a named trigger**
+Bogotá (Metro Line 1 opens) · Brampton (Hurontario LRT, mid-2027) · Denmark
+(Copenhagen publishing *produktionsenheder*, as Aarhus already does — and
+**DAWA is a free national geocoder worth having regardless**) · Peru (Line 2
+refresh) · **Israel, Thailand, Bulgaria — see the IP-block finding below; the
+trigger is a different NETWORK, not a different client** · Romania (host
+answers nothing at all)
+
+#### Bot-protection is not one thing, and the browser does not defeat it
+
+Recorded because a wrong claim was made here and then tested. This file had
+Israel kept warm on the grounds that its portal was "behind bot protection
+rather than absent" and that **the browser could get in** — reasoning borrowed
+from `read-licence`, which correctly says to use the browser when a page 403s a
+plain fetch (Chicago's data terms do exactly that).
+
+**Tested in the browser on 2026-09-21. Both refused it.**
+
+| Host | Result in the browser |
+|---|---|
+| `data.go.th` | *"Access Denied — your request has been blocked by our security systems"*, with a Cloudflare **Ray ID** and **`IP Address: 50.47.238.226`** printed on the page |
+| `opendata.tel-aviv.gov.il` | *"Access Denied"*, **`Client IP: 50.47.238.226`**, `Status Code: 472` |
+
+**The same IP, named back on both pages.** These are **IP-level blocks**, not
+client-signature blocks, so changing the client changes nothing — the browser
+shares the address.
+
+**So the refusal splits in two, and the tell is on the page:**
+
+- **Client-signature refusal** — a bare `requests` user agent is rejected and a
+  real browser is not. `read-licence`'s advice applies; use the browser. Chicago.
+- **IP-level refusal** — the block page **names your IP** or shows a WAF request
+  ID. The browser is useless. The trigger is a **different network or region**,
+  most likely in-country, which is plausibly geo-blocking of a US address by a
+  Thai and an Israeli government portal.
+
+**And a third case that is neither:** `ConnectTimeout` / `ConnectionError`, as
+with Romania and every `*.cdmx.gob.mx` host. Nothing answered at all, so there
+is no block page and no signal — a browser will not help there either.
+
+**The correction to carry:** "bot-protected, so try the browser" was applied
+from the licence workflow to data portals without testing it. It holds for
+licence pages and fails for these portals. **Read the block page: if it prints
+your IP, the client is not the problem.**
+
+**UNPROBED and therefore undecided — not dropped**
+**Ireland** (50 feeds; Dublin Luas and DART; the CRO is a company register but
+was never business-probed) and **Switzerland** (5 feeds; Zurich trams; never
+probed at all). Both appeared in an early "EU company registers" grouping and
+**neither was in the hard-line run** — they were lost to a pattern, which is
+the exact error this file forbids.
+
+### DISCARD
+
+**Structural data defect — will not change**
+**UK** (NNDR is a tax register and will never gain a category) · **Austria**
+(GISA strips the street address by design) · **Latvia**, **Slovakia** (no
+activity classification at all) · **Belgium** (bulk access paid) · **Hong
+Kong** (food-only ceiling *and* no MTR feed) · **Dubai** (no agency feed
+exists) · **Egypt** (no open-data infrastructure) · **Australia**, **New
+Zealand** (licensing is not municipal)
+
+**Mode mismatch**
+Manila (rail typed as commuter rail) · Jakarta (MRT absent; portal refuses)
+
+**Rail measured, but the COUNTRY's business leg failed — so the city goes too**
+Vienna · Amsterdam/Rotterdam · Berlin · Hamburg · Stockholm · Lisbon · Athens ·
+Budapest · Naples · Messina · Hyderabad · Kochi · Cairo · Riga · Tallinn ·
+Zagreb · Bratislava · Poznań · Santiago
+
+**No urban rail at all** (from the original 13-country and 87-country screens)
+Winnipeg, Hamilton, Québec City, Halifax, Mississauga, Ottawa · Lithuania,
+Cyprus, Slovenia, Luxembourg, North Macedonia, Moldova, Montenegro, Georgia,
+Bosnia, Serbia, Greenland · and the single-feed tail: Cameroon, Morocco,
+Nicaragua, Ethiopia, Albania, Ghana, Côte d'Ivoire, Tunisia, Rwanda, DR Congo,
+South Africa, Costa Rica, Bolivia, Algeria, Mali, Sierra Leone, Uganda, Kenya,
+Dominican Republic, Zimbabwe, Nigeria, Uruguay, Sri Lanka
+
+**Access and geopolitics, not data**
+Russia · Ukraine
+
+### The asymmetry this exposed in our own screening
+
+**Vienna was discarded for having unusable data behind the best rail in the
+screen. Japan was nearly discarded for having *usable* data behind a category
+gap. Those are not the same failure, and a three-way drop/keep/dead-weight
+split collapsed them.**
+
+Austria's register has no street address, so nothing can be mapped at any
+density. Japan's has coordinates, names and classification — it simply omits
+one of three buckets, which this project has already shipped twice.
+
+**The rule:** separate **unusable data** from **incomplete coverage**. The
+first is fatal at any scale; the second is a labelled caveat on a city page,
+and the project's own precedent says so. Conflating them discards working data.
+
 **All of them sit under GDPR** except Santiago, Bangkok, the Indian cities and
 Cairo, and that is the expensive half of any European profile.
 

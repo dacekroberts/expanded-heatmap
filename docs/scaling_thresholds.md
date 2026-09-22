@@ -140,9 +140,74 @@ It is deliberately conservative: a shared file still means the full sweep,
 because a wrong "nothing to do" is invisible until a deploy shows stale
 output. A filtered run prints a `PARTIAL:` line naming what it skipped.
 
-**Still true:** the unfiltered sweep is what runs before a deploy and when
-recording a baseline in `DECISIONS.md`, and *that* remains O(n). If it becomes
-painful, the next step is running cities in parallel rather than in sequence.
+**Also done, 2026-09-21: `--jobs N` runs cities in parallel.** The unfiltered
+sweep is the pre-deploy gate and was the project's only O(n)-in-*pipeline-runs*
+cost — the one thing whose price is paid repeatedly rather than once, which
+made it the **binding operational limiter** rather than RAM or repo size.
+
+Steps within a city stay sequential (step 2 consumes step 1's output); the
+parallelism is across cities, which is safe because each touches only its own
+`data/<city>/` and `outputs/<city>/`, and the one shared call — `git ls-tree` —
+is read-only and takes no index lock.
+
+**Default is still 1**, deliberately: each city's step 2 loads a full business
+dataset through geopandas, so `--jobs 4` is four times the peak memory and a
+killed sweep before a deploy is worse than a slow one. `--jobs 4` is a
+reasonable setting on a machine with room.
+
+**Not verified against a real sweep** — `data/*/raw/` is gitignored, so
+`drift_check` cannot run from a worktree. What *was* verified: the module
+compiles, `--list` is unchanged, `--jobs` validates and is stripped from the
+city list, and the thread-local stdout proxy was stress-tested at 12 cities ×
+4 workers with forced interleaving and **zero cross-contamination** — that
+last one matters because swapping the global `sys.stdout` per worker instead
+would race and print one city's row counts under another city's heading, which
+looks correct and is not.
+
+## CORRECTION, 2026-09-21 — RAM is NOT a function of city count
+
+The "~40 cities strains Streamlit's memory" line below was inherited from this
+file's first version and **was never verified**. It is wrong, and the reason is
+worth knowing because it also says what *would* make it right.
+
+**Measured, by reading the app rather than estimating:**
+
+- **There is no caching anywhere in `app/`.** No `@st.cache_data`, no
+  `@st.cache_resource` (grepped). So nothing accumulates across page visits or
+  sessions — each request reads what it needs and releases it.
+- **No city map contains another city's data.** The "All cities" control is a
+  navigation button, not a data layer. (The "all-city heat layer" noted for New
+  York is *city-wide* extent versus the ring subset — not cross-city.)
+- **`Overview.py` loads only `pd.DataFrame(CITIES)`** — the metadata list from
+  `app/cities.py`. It reads no `outputs/` file, so the macro map costs one row
+  per city, not one map per city.
+- **Streamlit runs only the visited page's script.** The other cities' pages
+  never execute.
+
+**Therefore the per-request memory ceiling is the LARGEST SINGLE map, not the
+sum.** That is **New York at 7.43 MB**, against a community-tier allowance
+around 1 GB — roughly 0.7% of it. Adding cities does not move that number at
+all; only making one city *bigger* does.
+
+**What the old claim conflated:** it bundled RAM with sleep-after-inactivity
+and the one-private-app limit. Neither of those is a count question either.
+
+**So RAM is not a constraint at any city count this project can reach.** The
+count-sensitive limits are the macro map (~12–15, cosmetic) and repo size
+driving deploy clone time (~150+).
+
+**THE GUARDRAIL THIS DEPENDS ON.** All of the above holds *only while nothing
+loads cross-city data*. Two plausible features would break it and make count
+matter immediately:
+
+1. **A combined map** drawing several cities' pins at once.
+2. **An Overview that reads each city's outputs** to show statistics — row
+   counts, densities, a leaderboard — rather than the static metadata in
+   `cities.py`.
+
+Either would turn a bounded per-request cost into one that grows with the city
+count, and **at that point the ~40 figure becomes worth re-deriving.** Until
+then it is not a limit, and should not be planned around as one.
 
 ## 40+ cities — hosting
 
