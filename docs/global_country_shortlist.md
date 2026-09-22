@@ -529,6 +529,56 @@ Two of these carry known business legs already, so only rail is open:
 **Rio** (Brazil, CNPJ — no coordinates, so a geocoding leg) and **Tel Aviv**
 (Israel's register, previously IP-refused).
 
+#### D5 RAIL SCREENED VIA OSM, 2026-09-22 — all 11, and the method transfers
+
+Rather than hunt eleven mapping-agency portals for a layer, the rail question
+was put to **OSM**, the route CDMX validated at 195/195 stops exact. Route
+relations per city, all four urban modes, control-free because an empty result
+is unambiguous:
+
+| City | Relations | named | colour | Modes | Refs |
+|---|---|---|---|---|---|
+| **Hong Kong** 🇭🇰 | **126** | 125 | 117 | subway 82, light_rail 31, tram 12, monorail 1 | 1–14 … |
+| **Santiago** 🇨🇱 | **30** | 30 | 30 | subway 30 | L1 L2 L3 L4 L4A L5 L6 |
+| **Rio de Janeiro** 🇧🇷 | **20** | 20 | 20 | subway 6, light_rail 2, tram 12 | 1 2 3 4, ESFECO |
+| **Kuala Lumpur** 🇲🇾 | **14** | 14 | 14 | light_rail 8, subway 4, monorail 2 | AG KJ MR SP … |
+| **Jakarta** 🇮🇩 | **11** | 11 | 10 | light_rail 6, subway 4, tram 1 | BK CB LRT M TB |
+| **Medellín** 🇨🇴 | 6 | 6 | **2** | subway 4, tram 2 | A B T-A |
+| **Tel Aviv** 🇮🇱 | 6 | 6 | 6 | light_rail 6 | R1 R2 R3 |
+| **Hyderabad** 🇮🇳 | 6 | 6 | 6 | subway 6 | 1 2 3 |
+| **Lima** 🇵🇪 | 4 | 4 | 4 | subway 4 | L1 L2 |
+| **Kochi** 🇮🇳 | 2 | 2 | 2 | subway 2 | I |
+| **Bogotá** 🇨🇴 | **1** | 1 | **0** | subway 1 | *(none)* |
+
+> **THESE ARE UPPER BOUNDS, NOT OPERATING-LINE COUNTS.** The query does not
+> filter `construction`, `proposed` or `planned`, and OSM tags unbuilt routes
+> inconsistently — sometimes `route=construction`, sometimes the final route
+> with a state tag. **The filtering pass was attempted and all four mirrors
+> were busy, so it is NOT done.** Known inflation: **Tel Aviv**'s Red Line has
+> run since 2023 while Green and Purple are still being built, so `R1 R2 R3` is
+> very likely **one** operating line; **Bogotá**'s single unnamed-ref,
+> zero-colour relation is its under-construction Línea 1, and TransMilenio is
+> BRT, so Bogotá has **no operating metro**; **Jakarta**'s `TB` is plausibly
+> TransJakarta, also BRT. Treat every row as "at most this many" until the
+> status filter runs.
+
+**What the screen does settle**, because these are robust to the caveat:
+
+- **Hong Kong, Santiago, Kuala Lumpur and Rio have large, mature, well-tagged
+  systems** — near-100% `name` and `colour`, which is the invariant that
+  matters. Hong Kong's 126 relations and Santiago's 30 are not construction
+  artefacts at that scale.
+- **Bogotá fails on rail** and can leave D5 — one unnamed relation, no colour,
+  and its only mass transit is BRT.
+- **Medellín is the one with a tagging gap**: 6 relations, all named, but only
+  **2 carry a colour**. This project draws every line with a legend entry, so
+  Medellín would need colours assigned by hand rather than taken from source —
+  the opposite of CDMX, where the real livery came free.
+
+**So D5's rail leg is largely answered and the business leg is now the
+binding question for all of them** — which is where the next pass should go,
+not back to the mapping agencies.
+
 #### Band D after ranking
 
 | | Cities |
