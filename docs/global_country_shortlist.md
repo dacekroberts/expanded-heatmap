@@ -312,6 +312,33 @@ more.
 France (Paris) · **Italy (Milan)** · Spain (6 metro cities) · South Korea
 (Seoul) · Taiwan (Taipei) · Mexico (Guadalajara) · Brazil (São Paulo)
 
+**Japan is a MULTI-CITY country, and its second bucket is now confirmed**
+(probed 2026-09-21). Because the permit data follows a **national standard
+schema**, coverage is a question of which municipalities publish — not of
+parsing each one differently.
+
+| Portal | Found |
+|---|---|
+| **`catalog.data.metro.tokyo.lg.jp`** | **食品営業許可 279 datasets**, **理容所 916**, **美容所 917**, 公衆浴場 127 — all CSV |
+| **Minato Ward** | `理容所一覧` and `美容所一覧` in **CSV *and* GeoJSON** |
+| **Sapporo** (`ckan.pf-sapporo.jp`) | `札幌市内の食品営業許可施設一覧` **and** `札幌市内の環境衛生営業施設一覧` — a subway city |
+| **Yokohama** | `環境衛生関係施設一覧` (CSV/XLSX/ZIP) — a subway city |
+| **Kyoto** | `食品営業許可施設一覧`, confirmed earlier — a subway city |
+| Osaka, Nagoya, Kobe | **No CKAN at the guessed URLs — unresolved, not absent** |
+
+**Two things this settles.** First, **Personal services is real, not assumed** —
+理容所 (barbers) and 美容所 (beauty salons) are published at scale, 916 and 917
+datasets respectively across Tokyo's municipalities. This file previously
+recorded that bucket as "the likely source, unprobed". Second, Japan has
+**roughly nine subway cities** — Tokyo, Osaka, Nagoya, Yokohama, Kobe, Kyoto,
+Fukuoka, Sapporo, Sendai — which is **more than Spain's six**, and the
+standard schema means the marginal city is cheap.
+
+**The cap is unchanged and is specifically RETAIL.** Food service and personal
+services are both confirmed; Japan licenses no general retail, so the third
+bucket is structurally absent. That is Boston's shape — replicated across many
+cities rather than one.
+
 **Buildable but CAPPED — a fourth category, added for Japan**
 **Japan (Tokyo).** Rail solved and verified (10,235 stations, 21,932 line
 segments, PDL 1.0); business premises-level with coordinates on the national
