@@ -21,13 +21,14 @@ as-is; do not transcribe, reformat or trim them.
 | `cta-developer-license-agreement.html` | **CTA** (Chicago) | `https://www.transitchicago.com/developers/terms/` | 2026-09-21 |
 | `mta-terms-and-conditions.txt` | **MTA** (New York) | `https://new.mta.info/developers/terms-and-conditions` | 2026-09-21 |
 | `septa-license-agreement.html` | **SEPTA** (Philadelphia) | `https://wwww.septa.org/license-agreement/` | 2026-09-21 |
-| `wmata-transit-data-terms-of-use.html` | **WMATA** (Washington D.C.) — *not yet a row; D.C. is unbuilt* | `https://developer.wmata.com/license` | 2026-09-21 |
+| `wmata-transit-data-terms-of-use.html` | **WMATA** (Washington D.C.) — a row in the GTFS terms table; D.C. built 2026-09-21 | `https://developer.wmata.com/license` | 2026-09-21 |
 
-### Canada — screened 2026-09-21, none built
+### Canada — screened 2026-09-21, five cities built
 
-Gathered during the Canadian screen, before any build. Four of the five
-municipal licences are the same Open Government Licence template; Edmonton and
-TransLink are the outliers.
+Gathered during the Canadian screen, before any build — Toronto, Vancouver,
+Calgary, Edmonton and Montréal have since been built, and Surrey has not. Four
+of the five municipal licences are the same Open Government Licence template;
+Edmonton and TransLink are the outliers.
 
 | File | Source | Source URL | Retrieved |
 |---|---|---|---|
@@ -40,7 +41,7 @@ TransLink are the outliers.
 | `translink-open-api-terms-of-use.txt` | **TransLink** Open API — *not* what governs the feed this project uses. Kept because it looked like it did, and because it requires discretionary approval | `https://www.translink.ca/about-us/doing-business-with-translink/app-developer-resources/terms-of-use` | 2026-09-21 |
 | `surrey-open-government-licence.txt` | **City of Surrey** — Business Directory. Covers Surrey's own data only; its rail is TransLink's | `https://opendata-surrey.hub.arcgis.com/pages/surrey::open-data-license` | 2026-09-21 |
 
-### Mexico — profiled 2026-09-22, CDMX being built
+### Mexico — profiled 2026-09-22, Mexico City and Guadalajara built
 
 **Two documents, and the split is the whole point.** INEGI publishes its
 website terms and its *information* terms as separate PDFs, so
@@ -55,12 +56,15 @@ made New York look prohibited.
 | `inegi-terminos-libre-uso-informacion.pdf` | **INEGI** — DENUE, and every other INEGI product. **The operative document.** Grants copying, publication, adaptation, extraction and *commercial* exploitation (§1a-e); requires prescribed attribution (§1f), **disclosure of any analysis or transformation** (§1g), and non-endorsement (§1h) | `https://www.inegi.org.mx/contenidos/inegi/doc/terminos_info.pdf` | 2026-09-22 |
 | `inegi-terminos-sitio.pdf` | **INEGI** — the *website* terms. NOT what governs the data; kept so the distinction is checkable rather than asserted | `https://www.inegi.org.mx/contenidos/inegi/doc/terminos_sitio.pdf` | 2026-09-22 |
 
-**Mexico City's rail geometry is OpenStreetMap, not an agency feed**, because
-every `*.cdmx.gob.mx` host times out and the feed's S3 `direct_download`
-returns 403 (re-confirmed 2026-09-22). OSM is ODbL 1.0. No file is stored here
-for it: ODbL is a published public licence rather than an agency document that
-can be revoked or rewritten without notice, which is the reason this directory
-exists. What it changes is the **scope of an attribution the project already
+**Both Mexican cities' rail geometry is OpenStreetMap, not an agency feed**,
+for different reasons. Mexico City: every `*.cdmx.gob.mx` host times out and
+the feed's S3 `direct_download` returns 403 (re-confirmed 2026-09-22).
+Guadalajara: the only feed in the Mobility Database expired
+(`feed_end_date 20230128`) and carries three light-rail routes where SITEUR
+runs four — Línea 4 opened 2025-12-15, so using it would have dropped an
+operating line. OSM is ODbL 1.0. No file is stored here for it: ODbL is a
+published public licence rather than an agency document that can be revoked or
+rewritten without notice, which is the reason this directory exists. What it changes is the **scope of an attribution the project already
 carries** - see `../data_sources.md`.
 
 ## SHA-256, as retrieved
@@ -127,7 +131,7 @@ frames it for the US cities — not a compliance obligation.
 **Ontario only.** British Columbia, Alberta and Québec carve out Personal
 Information the same way but define it under their own statutes, and those
 definitions are not verified. Québec is the least safe to assume, being civil
-law with Law 25 layered on, and it governs the strongest candidate (Montréal).
+law with Law 25 layered on, and it governs Montréal — which is now built.
 
 Re-fetch and compare to detect a changed agreement. The HTML files are whole
 pages, so an unrelated site redesign changes the hash without changing the
