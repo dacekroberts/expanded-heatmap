@@ -31,6 +31,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline.baseline import emit  # noqa: E402
 from pipeline.counts import pct  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # noqa: E402
 from pipeline.toronto.config import (  # noqa: E402
@@ -160,6 +161,9 @@ def main():
          WARD_COLUMN]]
     BUSINESSES_CLEAN_CSV.parent.mkdir(parents=True, exist_ok=True)
     out.sort_values(LICENCE_KEY).to_csv(BUSINESSES_CLEAN_CSV, index=False)
+    for bucket, n in buckets.value_counts().items():
+        emit("bucket_" + str(bucket).lower().replace(" ", "_"), int(n))
+    emit("storefront_rows", len(out))
     print(f"\nWrote {len(out):,} storefronts to {BUSINESSES_CLEAN_CSV}")
     print("  no coordinates yet - step 3 geocodes them against the One "
           "Address Repository")

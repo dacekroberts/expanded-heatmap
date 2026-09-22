@@ -55,6 +55,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline.baseline import emit  # noqa: E402
 from pipeline.stations import nearest_neighbour_m, verify_stations  # noqa: E402
 from pipeline.toronto.config import (  # noqa: E402
     CITY_BOUNDARY_ZIP,
@@ -282,6 +283,11 @@ def main():
     STATIONS_CSV.parent.mkdir(parents=True, exist_ok=True)
     kept.sort_values("station")[["station", "latitude", "longitude"]].to_csv(
         STATIONS_CSV, index=False)
+    # Watched by drift_check against outputs/toronto/baseline.json - these are
+    # the figures that can move while the rendered map still looks plausible.
+    emit("platforms", len(served))
+    emit("stations_collapsed", len(stations))
+    emit("stations_in_city", len(kept))
     print(f"\nWrote {len(kept)} stations to {STATIONS_CSV}")
     print(f"Wrote {EXCLUDED_STATIONS_CSV} ({len(outside)} excluded)")
 

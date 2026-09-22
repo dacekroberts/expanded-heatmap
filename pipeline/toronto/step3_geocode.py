@@ -78,6 +78,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline.baseline import emit  # noqa: E402
 from pipeline.counts import pct  # noqa: E402
 from pipeline.toronto.config import (  # noqa: E402
     ADDRESS_MUNICIPALITY_COLUMN,
@@ -230,6 +231,7 @@ def main():
                            if c in df.columns])
     BUSINESSES_GEOCODED_CSV.parent.mkdir(parents=True, exist_ok=True)
     out.to_csv(BUSINESSES_GEOCODED_CSV, index=False)
+    emit("geocoded_rows", len(out))
     print(f"\nWrote {len(out):,} geocoded storefronts to "
           f"{BUSINESSES_GEOCODED_CSV}")
 
