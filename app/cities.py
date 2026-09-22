@@ -87,7 +87,7 @@ MAP_ONLY_NAV = True
 CITIES = [
     {
         "name": "San Diego",
-        "region": "United States",
+        "region": "United States West",
         "lat": 32.7157,
         "lon": -117.1611,
         "page": "pages/1_San_Diego_Heatmap.py",
@@ -98,7 +98,7 @@ CITIES = [
     },
     {
         "name": "San Francisco",
-        "region": "United States",
+        "region": "United States West",
         "lat": 37.7509,
         "lon": -122.4414,
         "page": "pages/2_San_Francisco_Heatmap.py",
@@ -107,7 +107,7 @@ CITIES = [
     },
     {
         "name": "Los Angeles",
-        "region": "United States",
+        "region": "United States West",
         "lat": 34.05,
         "lon": -118.31,
         "page": "pages/3_Los_Angeles_Heatmap.py",
@@ -119,7 +119,7 @@ CITIES = [
     },
     {
         "name": "Chicago",
-        "region": "United States",
+        "region": "United States East",
         "lat": 41.8781,
         "lon": -87.6298,
         "page": "pages/4_Chicago_Heatmap.py",
@@ -143,7 +143,7 @@ CITIES = [
     },
     {
         "name": "New York",
-        "region": "United States",
+        "region": "United States East",
         "lat": 40.7128,
         "lon": -74.006,
         "page": "pages/5_New_York_Heatmap.py",
@@ -155,7 +155,7 @@ CITIES = [
     },
     {
         "name": "Philadelphia",
-        "region": "United States",
+        "region": "United States East",
         "lat": 39.9526,
         "lon": -75.1652,
         "page": "pages/6_Philadelphia_Heatmap.py",
@@ -170,7 +170,7 @@ CITIES = [
         # municipalities, so "Miami" alone would overstate its scope. The name
         # must match render_city_nav()'s argument on the page.
         "name": "Miami (Regional)",
-        "region": "United States",
+        "region": "United States East",
         "lat": 25.7743,
         "lon": -80.1937,
         "page": "pages/7_Miami_Heatmap.py",
@@ -182,7 +182,7 @@ CITIES = [
     },
     {
         "name": "Boston",
-        "region": "United States",
+        "region": "United States East",
         "lat": 42.3601,
         "lon": -71.0589,
         "page": "pages/8_Boston_Heatmap.py",
@@ -193,7 +193,7 @@ CITIES = [
     },
     {
         "name": "Washington D.C.",
-        "region": "United States",
+        "region": "United States East",
         "lat": 38.9072,
         "lon": -77.0369,
         "page": "pages/9_Washington_DC_Heatmap.py",
@@ -464,11 +464,50 @@ DEFAULT_REGION = "United States"
 # a region is whatever groups cities into ONE readable view. Expect the same
 # question for the United States eventually, and for any country with a
 # comparable span.
-REGION_ORDER = ["United States", "Canada West", "Canada East", "Mexico"]
+#
+# THE UNITED STATES IS SPLIT TOO, and it is a COMPOSITE rather than a third
+# tag. Owner's decision 2026-09-22: West is California (San Diego, San
+# Francisco, Los Angeles, and Seattle when it is built), East is Chicago and
+# everything from Miami to Boston. But splitting it alone would have removed
+# the landing view that shows the whole country - every region is fitted to its
+# own cities now, so whatever a visitor lands on is all they see - and six of
+# sixteen cities is a thin first impression for a portfolio.
+#
+# So "United States" survives as a region whose cities are the union of the two
+# halves. A city still carries exactly ONE tag; a composite is resolved at
+# lookup. That keeps the landing view byte-identical to the one this map has
+# always had, because fitting all nine US cities is what fit_view was already
+# doing.
+REGION_MEMBERS = {
+    "United States": ("United States West", "United States East"),
+}
+
+# Display order in the switcher, parent before its halves so a reader meets the
+# familiar view first. A new country appends here; a new composite adds a line
+# to REGION_MEMBERS as well.
+REGION_ORDER = [
+    "United States",
+    "United States West",
+    "United States East",
+    "Canada West",
+    "Canada East",
+    "Mexico",
+]
+
+# The regions a city may actually be TAGGED with: everything that is not a
+# composite. Tagging a city "United States" is now an error rather than a
+# shorthand, and the validator below says so.
+LEAF_REGIONS = [r for r in REGION_ORDER if r not in REGION_MEMBERS]
 
 
 def cities_in(region):
-    return [c for c in CITIES if c.get("region") == region]
+    """Cities in a region, resolving a composite to its members.
+
+    Order follows CITIES, not the member list, so the composite reads in
+    implementation order like every other region.
+    """
+    members = REGION_MEMBERS.get(region, (region,))
+    return [c for c in CITIES if c.get("region") in members]
 
 
 REGIONS = [
@@ -477,10 +516,12 @@ REGIONS = [
     if cities_in(name)
 ]
 
-_untagged = [c["name"] for c in CITIES if c.get("region") not in REGION_ORDER]
+_untagged = [c["name"] for c in CITIES if c.get("region") not in LEAF_REGIONS]
 if _untagged:
     raise ValueError(
-        f"cities.py: {_untagged} have no region, or one not in REGION_ORDER. "
+        f"cities.py: {_untagged} have no region, or one not in LEAF_REGIONS "
+        f"({LEAF_REGIONS}). A composite like 'United States' is a view, "
+        f"not a tag - tag the half the city is in. "
         f"Every city needs one - the macro map opens on a region and a city "
         f"without one would be reachable only from the text list."
     )
