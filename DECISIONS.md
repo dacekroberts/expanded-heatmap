@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**125 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**126 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Spain profiled: Madrid is ready, both licences read, and one clause raised rather than resolved](#2026-09-22---spain-profiled-madrid-is-ready-both-licences-read-and-one-clause-raised-rather-than-resolved)
 - [A leaf region labels only its own cities, and the one accepted overlap is written down](#2026-09-22---a-leaf-region-labels-only-its-own-cities-and-the-one-accepted-overlap-is-written-down)
 - [Two merges, the macro-label check that was missing, and two fixes rejected by measurement](#2026-09-22---two-merges-the-macro-label-check-that-was-missing-and-two-fixes-rejected-by-measurement)
 - [France reversed on new measurement: the employee filter works, Paris returns to Band A](#2026-09-22---france-reversed-on-new-measurement-the-employee-filter-works-paris-returns-to-band-a)
@@ -161,6 +162,87 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Spain profiled: Madrid is ready, both licences read, and one clause raised rather than resolved
+
+- **Profiled Spain per `add-country` and produced `docs/spain_step0_endpoints.md`.**
+  Fifth country screened to this depth and the first in Europe. Most of the
+  business and rail evidence was already banked by the staging session's global
+  screen and is cited rather than repeated; this pass added the licence leg read
+  END TO END, the boundary layer, and live re-verification that the endpoints
+  resolve. Owner chose Spain over France on the reasoning that the Mexico build
+  gives context strength with Spanish text - half right, and the half that is
+  wrong matters: SCIAN does not transfer (Madrid uses its own three-level
+  scheme), Barcelona is Catalan rather than Spanish, and Spain is BESPOKE PER
+  CITY where Mexico was one national register. What does transfer is the accent
+  and encoding discipline, `character_set="auto"` included.
+
+- **Rail comes from the regional authority, not a catalogue, and passes BOTH
+  halves of the question.** `datos.crtm.es` is an ArcGIS Hub site whose
+  `data.json` enumerates 280 datasets, including *Elementos de la Red de Metro*
+  (stations, entrances, platforms) and *Líneas de la Red de Metro* (line
+  geometry) as separate REST layers, plus the Metro Ligero equivalents and
+  GTFS. The skill's warning is that Korea's station dataset has 1,099 stations
+  and NO LINES, which passes a stations-only screen and fails this project;
+  Madrid publishes both. Three consequences: `accesos` is its own layer, so
+  `osm-rail`'s entrances-outnumbering-stations trap is avoided by layer choice
+  rather than de-duplication; Metro, Metro Ligero and Cercanías are separate
+  categories, so excluding commuter rail is a choice of layer rather than a
+  filter; and geometry arrives as GeoJSON from a REST API rather than a zip.
+
+- **Both licences read in full and both are PERMITTED WITH CONDITIONS, adding
+  TWO required notices and one disclosure duty.** Madrid's CKAN declares
+  `cc-by`, but CC BY is not the whole instrument: the portal's *Condiciones
+  generales* are binding by use - *"obligan a cualquier persona y/o empresa que
+  reutilice datos por el mero hecho de hacer uso"* - and require citing the
+  source (a form is offered verbatim: *"Origen de los datos: Ayuntamiento de
+  Madrid"*), STATING THE LAST-UPDATE DATE, not suggesting the Ayuntamiento
+  sponsors the reuse, and expressly PROHIBITING RE-IDENTIFICATION of anonymised
+  data. CRTM's is a Ley 37/2007 licencia-tipo permitting commercial reuse and
+  requiring **"Powered by CRTM"** with a link, plus citation *"especificando si
+  son datos en bruto o explotados"* - a disclosure-of-transformation duty in the
+  same family as Montréal's and INEGI's, which a bare credit does not satisfy.
+  Share-alike binds the DATA; value-added derivatives may carry a different
+  licence, which is what a rendered map is.
+
+- **Raised rather than resolved: CRTM requires that displayed information be
+  "siempre actualizada".** This site is a deliberately pre-rendered static
+  snapshot and `components._AS_RECORDED` already discloses an as-of date, so
+  the two are in tension. `add-city` Step 0.4 says to raise such a clause
+  instead of reading it generously, and the existing as-recorded notice is NOT
+  treated as automatically sufficient. Options recorded for the owner: state
+  the snapshot date beside the CRTM credit, commit to a refresh cadence, or ask
+  CRTM. Blocks publishing the transit leg, not starting the build.
+
+- **A cited licence URL that 404s is not an absent document.** CRTM's own
+  dataset metadata points at `datos.madrid.es/egob/catalogo/aviso-legal`, which
+  returns 404; the live pages are `/pages/aviso-legal` and
+  `/pages/condiciones-de-uso`. The same wrong-path class once made
+  `datos.madrid.es` itself look unreachable. Found by listing the portal's own
+  links rather than by guessing a second path.
+
+- **Madrid's residence signal is stated at source, and its trade name is 100%
+  populated.** `desc_situacion_local` carries `Uso vivienda` (8,486) as a
+  first-class value, so residential premises are excluded by filtering to
+  `Abierto` with no inference - Canada's licence-level pattern rather than the
+  US parcel join. `rotulo` is populated on 100% of the mappable rows, so there
+  is no registrant-name fallback of the kind that would have published ~4,000
+  individuals' names in Los Angeles. Strong enough to state, not strong enough
+  to skip `check_personal_exposure.py`.
+
+- **One measurement is deliberately deferred to step 2: the zero-coordinate
+  rate and its DISTRIBUTION.** `coordenada_x_local`/`_y_local` are non-empty on
+  every row and 29,744 are a literal `0`, which projects to the Atlantic off
+  West Africa and vanishes silently rather than erroring. The rate is disputed -
+  19.99% on the trail (29,744/148,814) against 5.85% on a later, explicitly
+  unrepresentative sample - and the two may both be right over different
+  denominators, since 29,744/225,667 is 13.2%. Settled on the full download in
+  step 2 rather than in a separate session, because step 2 downloads the file
+  anyway and the requirement is only that it land BEFORE a density is quoted.
+  **The rate is not the deliverable; the distribution is.** Los Angeles' bad
+  coordinates were 22% of businesses registered since 2020 against ~1% of older
+  ones, so if Madrid's zeros cluster by district or `desc_epigrafe` they cannot
+  simply be dropped, and Spain's geocoder question stops being moot.
 
 ### 2026-09-22 - A leaf region labels only its own cities, and the one accepted overlap is written down
 
