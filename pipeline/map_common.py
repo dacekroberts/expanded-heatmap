@@ -711,6 +711,76 @@ def load_osm_line_shapes(osm_routes_json, line_specs, system_name):
     return lines
 
 
+def load_geojson_line_shapes(geojson_path, line_specs, system_name,
+                             key_property="line"):
+    """Line geometries from a GeoJSON the city's own step 1 produced - the same
+    return contract as the GTFS and OSM loaders.
+
+    THE THIRD SHAPE OF RAIL DATA, and the reason it is here rather than in a
+    city's own file is the project's standing rule: a city that needs
+    behaviour map_common lacks EXTENDS it, so nothing forks render_heatmap.
+    GTFS came first, OSM second (Mexico City), and Madrid is the first city
+    whose operator publishes its network as an ArcGIS feature service - CRTM
+    stopped refreshing its Metro GTFS while still maintaining the layers, and
+    its licence obliges a reuser to display current data. Step 1 writes those
+    layers out as GeoJSON in WGS84; this reads them back.
+
+    Expects one feature per line, its geometry a LineString or MultiLineString
+    in lon/lat, identified by `key_property` (default "line") matching the keys
+    of `line_specs`.
+
+    line_specs: {key: (source_key, color, real-world public name, label end)} -
+    the same 4-tuple as the other two loaders. `source_key` is matched against
+    the feature property, standing in for a shape_id or an OSM ref.
+
+    Returns {key: (segments, color, label, end)}, segments longest first.
+    """
+    if not geojson_path.exists():
+        print(f"No line GeoJSON at {geojson_path} - skipping the "
+              f"{system_name} line overlay.")
+        return {}
+    data = json.loads(geojson_path.read_text(encoding="utf-8"))
+    feats = data.get("features") or []
+    if not feats:
+        # Same guard as the OSM loader's: an empty file is a failed step 1, not
+        # a city without lines, and reading it as the latter is how a vacuous
+        # pass gets recorded as a real one.
+        raise ValueError(f"{geojson_path} holds no features. An empty line file "
+                         "must not be read as 'this city has no lines'.")
+
+    by_key = {}
+    for f in feats:
+        by_key.setdefault(str((f.get("properties") or {}).get(key_property)), f)
+
+    lines = {}
+    for key, (source_key, color, label, end) in line_specs.items():
+        feat = by_key.get(str(source_key))
+        if feat is None:
+            print(f"WARNING: {key_property}={source_key!r} for the {label} is "
+                  f"not in {geojson_path.name} - check step 1's output.")
+            continue
+        geom = feat.get("geometry") or {}
+        if geom.get("type") == "LineString":
+            parts = [geom["coordinates"]]
+        elif geom.get("type") == "MultiLineString":
+            parts = geom["coordinates"]
+        else:
+            print(f"WARNING: {label} has geometry {geom.get('type')!r}, which "
+                  "is not a line - skipped.")
+            continue
+        # (lon, lat) -> (lat, lon), which is what the rest of this module and
+        # Folium use. NOT rounded to COORD_DP, for the same reason the other two
+        # loaders are not: these vertices are the source's own geometry.
+        segments = [[(lat, lon) for lon, lat, *_ in part]
+                    for part in parts if len(part) >= 2]
+        if not segments:
+            print(f"WARNING: {label} carried no drawable geometry.")
+            continue
+        segments.sort(key=len, reverse=True)
+        lines[key] = (segments, color, label, end)
+    return lines
+
+
 _M_PER_DEG_LAT = 110540.0
 _M_PER_DEG_LON_EQUATOR = 111320.0
 

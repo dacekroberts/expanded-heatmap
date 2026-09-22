@@ -109,6 +109,30 @@ REGISTRIES = {
     "boston": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv",
                    address=("address",)),
+    # MADRID IS THE STRONGEST STRUCTURAL CASE IN THIS PROJECT, and the reason
+    # differs from every city above. New York, Philadelphia, Miami and Boston
+    # all have a registrant-name column and decline to download it. Madrid's
+    # register HAS NONE TO DECLINE: all 47 columns of the Censo de locales were
+    # listed on 2026-09-22 and not one is an owner, titular, NIF/CIF, razon
+    # social or contact field. The only name-shaped column is
+    # `nombre_agrupacion`, which names a MARKET or SHOPPING CENTRE a unit sits
+    # inside. Step 2 asserts twelve personal column names stay absent, so a
+    # publisher widening the file raises rather than leaks.
+    #
+    # `rotulo` (the shop sign) is populated on 100% of kept premises and step 2
+    # RAISES if any is blank, so there is no fallback path even in principle.
+    #
+    # READ THE RESIDENCE FIGURE AS STRUCTURAL, not as a measurement. Madrid
+    # does not make this project infer whether a unit is a home: the register
+    # carries `Uso vivienda` (8,486 premises) as its own status value, meaning
+    # the unit reverted to residential use, and step 2 keeps only `Abierto`.
+    # The address text here is street and number with no unit designator, so a
+    # low unit-indicator count is the Boston measurement gap again - what
+    # limits exposure is the source's own commercial/residential distinction,
+    # not the regex.
+    "madrid": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv",
+                   address=("address",)),
     # Washington D.C. is the first city since Chicago where the trade/owner
     # fallback pair genuinely EXISTS and has to be measured rather than
     # reported as structurally absent. Its step 2 falls back from
