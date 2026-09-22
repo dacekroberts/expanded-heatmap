@@ -1,18 +1,49 @@
-# Notices Canada would require, if any Canadian city is built
+# Notices Canada requires — PROMOTED, and this file is now the trail
 
-Written 2026-09-21 during the screen, when **no Canadian city is built**.
-Nothing here is an outstanding compliance item today.
+**SUPERSEDED 2026-09-22.** Written 2026-09-21 during the screen, when no
+Canadian city was built. It is no longer the place to read a Canadian notice
+from: all six municipalities are built, and the live obligations are
+`docs/data_sources.md`, "Notices this project MUST display when published",
+**items 9–17**, with the exact strings in `app/components.py`'s `_NOTICES`.
+**Where this file and those disagree, those win.**
 
-**Where this belongs eventually:** `docs/data_sources.md`, "Notices this
-project MUST display when published", as items 8 onward. That section is the
-deploy gate, and it is numbered 1–7 today with MassDOT as item 7 — conditional
-until Boston was built on 2026-09-21, then flipped to ACTIVE. Canada follows
-the same pattern: **promote the relevant entries into that list the moment a
-Canadian city is committed**, and not before, so the gate stays a list of
-things that actually apply.
+The promotion it asked for happened, and it took a day longer than it should
+have, which is the part worth keeping. This file said: "**promote the relevant
+entries into that list the moment a Canadian city is committed**, and not
+before, so the gate stays a list of things that actually apply." The cities
+were committed on 2026-09-21 and the notices did go in that day. What did not
+was everything else — the endpoints never reached the three provenance tables,
+the feeds never reached the GTFS licence table, and one publisher was never
+read at all. **An instruction that names one artefact gets that one artefact
+done.** `scripts/check_provenance.py` now checks all of them at once, and
+`.claude/skills/add-country/` says to run it.
 
-Exact wording matters. Every notice below is quoted from the licence text
-stored alongside this file.
+**One notice was MISSING entirely, not merely unpromoted.** This file lists the
+municipal publishers and TransLink. It does not mention the **Province of
+British Columbia**, whose ABMS municipalities layer names the 30 out-of-city
+SkyTrain stations — because the screen looked for business, transit and
+boundary sources per city, and the naming layer is a fourth kind of input that
+belongs to no city. It is now item 17. That is the single most useful thing in
+this file's history: a country profile organised by city will miss a source
+that is not a city's.
+
+What is still worth reading below: the TransLink two-legends trap, the
+municipal OGL wording differences (en dash versus hyphen, "Licence" versus
+"License"), and Montréal's two-owners split. Those were right when written and
+are unchanged.
+
+---
+
+## What this file got right, and what the live list corrected
+
+| Claim here | Status |
+|---|---|
+| TransLink mandates two different legends; the GTFS one is "Route and arrival data…" | **Held.** Item 11 |
+| Four municipal OGLs, each with its own prescribed sentence, none interchangeable | **Held.** Items 9, 10, 14, 16 |
+| Montréal needs TWO credits, City and STM, because the owners differ | **Held.** Items 12 and 13 |
+| Toronto, Vancouver, Calgary and Surrey all terminate automatically on breach | **Held**, and BC's does too |
+| Edmonton requires nothing | **WRONG.** Corrected 2026-09-21: the obligation is the URL clause, not the credit clause. Item 15 |
+| Canada's publishers are municipal | **INCOMPLETE.** The Province of British Columbia is one too. Item 17 |
 
 ---
 

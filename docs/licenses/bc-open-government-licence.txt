@@ -1,0 +1,161 @@
+Open Government Licence - British Columbia, version 2.0
+Retrieved 2026-09-22 from
+https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61
+The page states "Last updated on April 11, 2025" and "This is version 2.0".
+
+CAPTURE NOTE: text extracted from the page's own HTML (tags stripped, list
+bullets preserved), not a summary. Re-verify against the live page rather than
+trusting this file alone if a clause is ever load-bearing.
+
+WHAT THIS GOVERNS HERE: the BC ABMS municipalities layer
+(WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP), read over WFS from
+openmaps.gov.bc.ca and used by the Vancouver/Surrey build to NAME the 30
+SkyTrain stations that fall outside both cities. It is the only PROVINCIAL
+source in that build - neither Vancouver's nor Surrey's municipal OGL covers
+it, which is why it needed its own reading.
+
+THREE THINGS THE READING TURNED UP, ALL OF THEM step-2-and-5 material.
+
+  1. **THREE BC LAYERS HAVE NEARLY THE SAME NAME AND TWO ARE "Access Only".**
+     A catalogue search for ABMS municipalities returns
+     `municipalities-legally-defined-administrative-areas-of-bc` (this one,
+     OGL-BC), `tantalis-municipalities` (**Access Only**, licence id 22) and
+     `legally-defined-administrative-areas-of-bc` (**Access Only**). "Access
+     Only" does not permit redistribution, so picking the wrong one would have
+     been a licence error rather than a geometry error - Calgary's two-boundary
+     trap with a different consequence. The build is on the right one, confirmed
+     not by name but because the OGL-BC package's own metadata names the exact
+     endpoint the build calls:
+     https://openmaps.gov.bc.ca/geo/pub/WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP/ows
+     and because `tantalis-municipalities` describes itself as superseded -
+     "[Replacement Dataset: ABMS_MUNICIPALITIES_SP]".
+
+  2. **THE LICENCE ONLY APPLIES WHERE THE CATALOGUE SAYS IT DOES.** The page
+     opens: "as per B.C. Government Copyright, the following licence only
+     applies to records in the B.C. Data Catalogue that specify it." So the
+     OGL is not a blanket provincial grant, and the catalogue record is the
+     thing that has to be checked - it was, and it declares
+     license_title "Open Government Licence - British Columbia".
+
+  3. **THERE IS A SECOND DOCUMENT, AND THE WFS IS AN API.** The licence page
+     links "API Terms of Use for OGL Information" at
+     https://www2.gov.bc.ca/gov/content/data/policy-standards/data-policies/open-data/api-terms-of-use-for-ogl-information
+     - read 2026-09-22. This project reads the layer over WFS, so that document
+     applies. It ADDS operational conditions and NO new notice: credentials, if
+     assigned, may be used only with the applicable API and may be revoked on
+     misuse; the Information Provider "may, without notice, impose and or
+     adjust limits on your access or use of the API"; the terms may change
+     "without notice to you"; and non-compliance ends the right to use the API
+     automatically. Attribution defers to the OGL's. No key is required for
+     this layer and none is used. This is TransLink's two-documents shape
+     again - static terms versus API terms - and the answer differs: TransLink's
+     two documents mandate DIFFERENT legends, BC's second document mandates
+     none.
+
+POSITION: **PERMITTED WITH CONDITIONS.** Commercial use granted expressly.
+The attribution statement below is REQUIRED and is reproduced verbatim in
+`app/components.py`'s `_NOTICES`. Note the EN DASH and the British "Licence" -
+the same trap as Calgary's and Vancouver's, and not interchangeable with
+Surrey's hyphen-and-"License" wording.
+
+Also note two exemptions that happen not to bite here but would elsewhere: the
+licence does not grant any right to use Personal Information, nor the names,
+crests, logos or other official marks of the Information Provider. A municipal
+boundary polygon and its ADMIN_AREA_NAME are neither.
+
+--- PAGE TEXT AS CAPTURED -------------------------------------------------
+
+Open Government Licence - British Columbia Last updated on April 11, 2025
+
+Find information about the open government licence in British Columbia.
+
+Note: as per B.C. Government Copyright, the following licence only applies to records in the B.C. Data Catalogue that specify it.
+
+You are encouraged to use the Information that is available under this licence with only a few conditions.
+
+Using Information under this licence
+
+* Use of any Information indicates your acceptance of the terms below
+ 
+* The Information Provider grants you a worldwide, royalty-free, perpetual, non-exclusive licence to use the Information, including for commercial purposes, subject to the terms below
+
+You are free to:
+
+* Copy, modify, publish, translate, adapt, distribute or otherwise use the Information in any medium, mode or format for any lawful purpose
+
+You must, where you do any of the above:
+
+* Acknowledge the source of the Information by including any attribution statement specified by the Information Provider(s) and, where possible, provide a link to this licence
+
+If the Information Provider does not provide a specific attribution statement, or if you are using Information from several Information Providers and multiple attributions are not practical for your product or application, you must use the following attribution statement:
+
+Contains information licensed under the Open Government Licence – British Columbia.
+
+* The terms of this licence are important, and if you fail to comply with any of them, the rights granted to you under this licence, or any similar licence granted by the Information Provider, will end automatically
+
+Exemptions
+
+* This licence does not grant you any right to use:
+
+* Personal Information
+ 
+* Information or Records not accessible under the Freedom of Information and Protection of Privacy Act (B.C.)
+ 
+* third party rights the Information Provider is not authorized to licence
+ 
+* the names, crests, logos, or other official marks of the Information Provider
+ 
+* Information subject to other intellectual property rights, including patents, trade-marks and official marks
+
+Non-endorsement
+
+* This licence does not grant you any right to use the Information in a way that suggests any official status or that the Information Provider endorses you or your use of the Information
+
+No warranty
+
+* The Information is licensed “as is”, and the Information Provider excludes all representations, warranties, obligations, and liabilities, whether express or implied, to the maximum extent permitted by law
+ 
+* The Information Provider is not liable for any errors or omissions in the Information, and will not under any circumstances be liable for any direct, indirect, special, incidental, consequential, or other loss, injury or damage caused by its use or otherwise arising in connection with this licence or the Information, even if specifically advised of the possibility of such loss, injury or damage
+
+Governing Law
+
+* This licence is governed by the laws of the province of British Columbia and the applicable laws of Canada
+ 
+* Legal proceedings related to this licence may only be brought in the courts of British Columbia
+
+Definitions
+
+* In this licence, the terms below have the following meanings:
+
+"Information"
+
+means information resources or Records protected by copyright or other information or Records that is are offered for use under the terms of this licence.
+
+"Information Provider"
+
+means Her Majesty the Queen in right of the Province of British Columbia.
+
+“Personal Information”
+
+has the meaning set out in Schedule 1 of the Freedom of Information and Protection of Privacy Act (B.C.).
+
+“Records”
+
+has the meaning set out in section 29 of the Interpretation Act (B.C.).
+
+"You"
+
+means the natural or legal person, or body of persons corporate or incorporate, acquiring rights under this licence.
+
+Versioning
+
+* This is version 2.0 of the Open Government Licence for Government of British Columbia Information. The Information Provider may make changes to the terms of this licence from time to time and issue a new version of the licence. Your use of the Information will be governed by the terms of the licence in force as of the date you accessed the Information
+
+* 
+
+* 
+
+Did you find what you were looking for?
+YesNo
+
+The B.C. Public Service acknowledges the territories of First Nations around B.C. and is grateful to carry out our work on these lands. We acknowledge the rights, interests, priorities, and concerns of all Indigenous Peoples - First Nations, Métis, and Inuit - respecting and acknowledging their distinct cultures, histories, rights, laws, and governments.

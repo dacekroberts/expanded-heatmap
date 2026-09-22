@@ -1,11 +1,20 @@
 # Canada — Step 0 endpoints, verified live 2026-09-21
 
 Companion to the Canada section of [`city_shortlist.md`](city_shortlist.md)
-and the licence store in [`licenses/`](licenses/). **No Canadian city is
-built.** When one is, these rows merge into
-[`data_sources.md`](data_sources.md) — business registries, transit feeds and
-boundary layers each into their own table there, as that file's "adding a city
-adds its rows here, in the same commit" rule requires.
+and the licence store in [`licenses/`](licenses/). **This is now the EVIDENCE
+TRAIL, not the provenance record.** Six Canadian municipalities are built, as
+five maps — Vancouver and Surrey together as one regional map, then Montréal,
+Calgary, Toronto and Edmonton — and every endpoint they use is in
+[`data_sources.md`](data_sources.md), promoted 2026-09-22 as that file's
+"adding a city adds its rows here, in the same commit" rule requires.
+**Where this file and `data_sources.md` disagree, `data_sources.md` wins:** it
+was written from each city's own `config.py` after the build, and three
+findings below did not survive it — Surrey's wrong-CRS trap turned out to
+belong to the Hub's file export rather than to the service the build reads,
+Calgary's real category count is 96 rather than 173, and TransLink's feed does
+carry `feed_info.txt` (it is the Mobility Database mirror that does not). Read
+this file for how each source was found and what was tried; read
+`data_sources.md` for what a rebuild should call.
 
 Every endpoint below was fetched, not inferred.
 

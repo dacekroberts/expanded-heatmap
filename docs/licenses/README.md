@@ -23,12 +23,13 @@ as-is; do not transcribe, reformat or trim them.
 | `septa-license-agreement.html` | **SEPTA** (Philadelphia) | `https://wwww.septa.org/license-agreement/` | 2026-09-21 |
 | `wmata-transit-data-terms-of-use.html` | **WMATA** (Washington D.C.) — a row in the GTFS terms table; D.C. built 2026-09-21 | `https://developer.wmata.com/license` | 2026-09-21 |
 
-### Canada — screened 2026-09-21, five cities built
+### Canada — screened 2026-09-21, six municipalities BUILT
 
-Gathered during the Canadian screen, before any build — Toronto, Vancouver,
-Calgary, Edmonton and Montréal have since been built, and Surrey has not. Four
-of the five municipal licences are the same Open Government Licence template;
-Edmonton and TransLink are the outliers.
+Gathered during the Canadian screen, before any build, and all of it now in
+use: Vancouver and Surrey as one regional map, plus Montréal, Calgary, Toronto
+and Edmonton. Four of the five municipal licences are the same Open Government
+Licence template; Edmonton and TransLink are the outliers, and the PROVINCE of
+British Columbia is a seventh publisher that no municipal licence covers.
 
 | File | Source | Source URL | Retrieved |
 |---|---|---|---|
@@ -40,6 +41,7 @@ Edmonton and TransLink are the outliers.
 | `translink-gtfs-static-terms-of-use.txt` | **TransLink** (Vancouver *and* Surrey) — **the operative one.** Static GTFS has its own terms: no key, no approval gate, no request cap | `https://developer.translink.ca/ServicesGtfs/GtfsData` | 2026-09-21 |
 | `translink-open-api-terms-of-use.txt` | **TransLink** Open API — *not* what governs the feed this project uses. Kept because it looked like it did, and because it requires discretionary approval | `https://www.translink.ca/about-us/doing-business-with-translink/app-developer-resources/terms-of-use` | 2026-09-21 |
 | `surrey-open-government-licence.txt` | **City of Surrey** — Business Directory. Covers Surrey's own data only; its rail is TransLink's | `https://opendata-surrey.hub.arcgis.com/pages/surrey::open-data-license` | 2026-09-21 |
+| `bc-open-government-licence.txt` | **Province of British Columbia** — the ABMS municipalities layer that NAMES the 30 out-of-city SkyTrain stations. The only provincial publisher in a Canadian build, so no municipal licence reaches it. **Three near-identically-named BC layers exist and two are "Access Only"** — see the file's own header | `https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61` | 2026-09-22 |
 
 ### Mexico — profiled 2026-09-22, Mexico City and Guadalajara built
 
@@ -55,6 +57,8 @@ made New York look prohibited.
 |---|---|---|---|
 | `inegi-terminos-libre-uso-informacion.pdf` | **INEGI** — DENUE, and every other INEGI product. **The operative document.** Grants copying, publication, adaptation, extraction and *commercial* exploitation (§1a-e); requires prescribed attribution (§1f), **disclosure of any analysis or transformation** (§1g), and non-endorsement (§1h) | `https://www.inegi.org.mx/contenidos/inegi/doc/terminos_info.pdf` | 2026-09-22 |
 | `inegi-terminos-sitio.pdf` | **INEGI** — the *website* terms. NOT what governs the data; kept so the distinction is checkable rather than asserted | `https://www.inegi.org.mx/contenidos/inegi/doc/terminos_sitio.pdf` | 2026-09-22 |
+| `crtm-licencia-de-uso.txt` | **CRTM** (Madrid) — Metro station and line geometry. A `Ley 37/2007` licencia-tipo; carries the **"Powered by CRTM"** wording and the *en bruto o explotados* disclosure duty | `https://www.crtm.es/licencia-de-uso` | 2026-09-22 |
+| `madrid-condiciones-generales-reutilizacion.txt` | **Ayuntamiento de Madrid** — the Censo de locales. The conditions CC BY 4.0 does NOT cover, **binding by use**, including the last-update-date duty and the re-identification prohibition | `https://datos.madrid.es/pages/condiciones-generales-ayuntamiento-de-madrid` | 2026-09-22 |
 
 **Both Mexican cities' rail geometry is OpenStreetMap, not an agency feed**,
 for different reasons. Mexico City: every `*.cdmx.gob.mx` host times out and
@@ -64,8 +68,9 @@ Guadalajara: the only feed in the Mobility Database expired
 runs four — Línea 4 opened 2025-12-15, so using it would have dropped an
 operating line. OSM is ODbL 1.0. No file is stored here for it: ODbL is a
 published public licence rather than an agency document that can be revoked or
-rewritten without notice, which is the reason this directory exists. What it changes is the **scope of an attribution the project already
-carries** - see `../data_sources.md`.
+rewritten without notice, which is the reason this directory exists. What it
+changes is the **scope of an attribution the project already carries** - see
+`../data_sources.md`.
 
 ## SHA-256, as retrieved
 
@@ -86,6 +91,7 @@ db8ad88e1e4a4b61f5c7fae7a1c593cf605402ebaed9886102dbdca0f97f3a08  translink-open
 c389fcab88815aee4b2b39b76350a5bac85e080c52ccd794f9c647911fbeae37  translink-gtfs-static-terms-of-use.txt
 7030261bb53846ed58187b724f23b343e692c7a34bff01e3f69042848e44a472  ipc-ontario-interpretation-bulletin-personal-information.pdf
 6da9228708efa429399ad12f2fd028eb27be453adb71ae2fce68cf5fe75425e5  surrey-open-government-licence.txt
+21fbab65a693dc264d38f2cb7002ab1ecd1a4fd2d1276cbab9168192e980d113  bc-open-government-licence.txt
 8900206bbe4a2b8cf461e7e7ff111564cf4de2f863c7cd00b99ac19a4b925d62  inegi-terminos-libre-uso-informacion.pdf
 4496431cc92fef99add789b6fdbb6d1494bd2397e4a05f79f49bd4fd0ab63359  inegi-terminos-sitio.pdf
 ```
@@ -142,14 +148,29 @@ Re-fetch and compare to detect a changed agreement. The HTML files are whole
 pages, so an unrelated site redesign changes the hash without changing the
 terms — a hash mismatch means *read it again*, not *the terms changed*.
 
-## Two files are not raw fetches, and why
+## Four files are not raw fetches, and why
+
+Every one of them says so at the top of the file itself, so this list is a
+convenience and the file's own header is the authority.
 
 - **`mta-terms-and-conditions.txt`** is a rendered-text capture. `mta.info`
   returns HTTP 403 to curl even with full browser headers, so the page was read
-  in the browser pane and its text copied unaltered. The file says so at the
-  top.
+  in the browser pane and its text copied unaltered.
 - **`mbta-massdot-develop-license-agreement.pdf`** is the raw PDF, but reaching
   it needed the browser: `mass.gov` also 403s automated fetches.
+- **`translink-gtfs-static-terms-of-use.txt`** and
+  **`translink-open-api-terms-of-use.txt`** are rendered-text captures of pages
+  that serve their terms inline.
+- **`bc-open-government-licence.txt`** is text extracted from the page's own
+  HTML — tags stripped and list bullets preserved, nothing transcribed or
+  summarised. `www2.gov.bc.ca` serves 145 KB of chrome around 4.9 KB of
+  licence, so storing the raw HTML would bury the thing being preserved.
+
+**This was a count of two until 2026-09-22**, which is worth naming rather than
+quietly fixing: TransLink's two files had carried their own CAPTURE NOTE since
+2026-09-21 and were never added here, so the section under-reported itself by
+half. A list that has to be maintained by hand alongside the thing it
+describes will drift — the file headers are what a reader should trust.
 
 ## Retrieval gotchas worth keeping
 

@@ -526,6 +526,78 @@ Carry this table into the first build; it is what actually changed.
 | Coordinate quality | LA had ~9% corrupt | **99.8-100% clean** in all six |
 | Transit licence | The loosest end of every review | Mostly the city's own OGL |
 
+## The country file is PROVISIONAL, and promoting it is a step, not a tidy-up
+
+This is the failure mode this skill has actually produced, twice, and it is
+invisible at the moment it happens.
+
+A country profile ends with `docs/<country>_step0_endpoints.md`: every endpoint
+fetched and verified, written in the future tense because no city is built yet.
+"When one is, these rows merge into `data_sources.md`." Then a city IS built,
+and the person building it is following `add-city`, which tells them to record
+*their city's* sources — so they record the notices, which are the visible
+obligation, and the country file goes on saying "no city is built" while five
+of them are.
+
+**Canada, 2026-09-21.** Six municipalities built. Notices recorded that day,
+correctly. The endpoints never reached the three provenance tables, the five
+transit feeds never reached the GTFS licence table, the Province of British
+Columbia's naming layer was never read at all, and three files — the country
+endpoints file, `docs/licenses/canada-required-notices.md` and the licence
+store's own README — all still said "none built". Found and closed 2026-09-22.
+
+**Mexico, 2026-09-22.** Mexico City and Guadalajara built the same week. Same
+omission, found the same day by `scripts/check_provenance.py`.
+
+So when the FIRST city in a profiled country is committed:
+
+1. **Run `python scripts/check_provenance.py`.** It fails until the city's
+   rows exist in all three provenance tables and every URL its `config.py`
+   resolves to is recorded. Do not add the city to `KNOWN_GAPS` to make it
+   pass — that list is for defects someone has decided to carry, with a date,
+   and it may only shrink.
+2. **Promote the country file's rows** into `docs/data_sources.md`, writing
+   them from each city's own `config.py` rather than copying them. The copy is
+   not the same document: for Canada, re-deriving corrected three Step 0
+   findings that had hardened into confident claims — a CRS trap that belonged
+   to a different endpoint than recorded, a category count that was an artefact
+   of splitting on the wrong delimiter, and a "this feed has no `feed_info.txt`"
+   that was true of the mirror and false of the agency.
+3. **Relabel the country file as the evidence trail**, with an explicit
+   precedence line ("where this file and `data_sources.md` disagree,
+   `data_sources.md` wins") and the corrections named. Do the same for any
+   `docs/licenses/<country>-required-notices.md` and for the licence store's
+   README section. **Grep the repo for the country's name plus "not built",
+   "none built", "if any", "would require" and "eventually"** — every one of
+   those is a sentence written in the future tense about a present that has
+   arrived.
+4. **Renumber the notices list if you appended a block to it.** Canada's block
+   went in after Mexico's without renumbering and produced two item 8s and two
+   item 15s in the list that gates the public deploy. `check_provenance.py`
+   fails on this now.
+
+## Profile by SOURCE KIND, not by city — there are more than three
+
+Questions 1, 2 and 5 below ask for rail, commerce and boundary, and a profile
+that answers them feels complete. It is not, and the gap is the same every
+time: **the sources that belong to no single city.**
+
+- A **naming layer** — the polygon set that says which municipality an excluded
+  station is in. Vancouver's is the Province of British Columbia's, which is a
+  different publisher from either city in the build and needed its own licence
+  read and its own required notice. D.C.'s is the US Census, which needed
+  neither, and drawing the general lesson from that one was the mistake.
+- A **residence join** — the parcel or assessor layer that decides whether a
+  licence is somebody's home. Four cities use one and it is published by a
+  county or a province, not by the city whose map it filters.
+- A **geocoder**, where the register carries no coordinates.
+
+For each, ask the same three questions as for the main three: who publishes it
+(often not the municipality), what does its licence require, and does it
+prescribe a notice. Budget **a notice per source**, never a notice per city —
+the US sources mostly prescribed no wording and the Canadian ones almost all
+prescribed their own.
+
 ## What to produce
 
 1. **`docs/<country>_step0_endpoints.md`** - every endpoint fetched, per leg

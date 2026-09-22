@@ -32,6 +32,7 @@ from shapely.geometry import LineString, Point
 
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent.parent.parent))
 
+from pipeline.baseline import emit  # noqa: E402
 from pipeline.madrid.config import (  # noqa: E402
     CITY_BOUNDARY_URL,
     CITY_BOUNDARY_ZIP,
@@ -54,6 +55,42 @@ from pipeline.madrid.config import (  # noqa: E402
 )
 
 UA = {"User-Agent": "expanded-heatmap (github.com/dacekroberts/expanded-heatmap)"}
+
+
+# Spanish words that stay lower case inside a name. `.title()` is wrong here -
+# it produces "Plaza De Castilla" and "Puerta Del Sur", which no sign in Madrid
+# says - and the register publishes every DENOMINACION in capitals, which shouts
+# on a map. This is the display half of the project's normalise-for-joins,
+# never-for-display rule, applied in the other direction: the source string is
+# kept in the raw cache and only what a reader sees is re-cased.
+_LOWER_WORDS = {"de", "del", "la", "las", "los", "el", "y", "e", "en", "a",
+                "al", "con", "por"}
+
+
+def display_name(raw: str) -> str:
+    """ARROYOFRESNO -> Arroyofresno; PUERTA DEL SUR -> Puerta del Sur."""
+    words = raw.strip().split()
+    out = []
+    for i, w in enumerate(words):
+        low = w.lower()
+        # A token with a digit or an inner hyphen is a designator, not a word:
+        # "T-4", "12", "1º". Left as the register wrote it.
+        if any(ch.isdigit() for ch in w):
+            out.append(w)
+        elif i > 0 and low in _LOWER_WORDS:
+            out.append(low)
+        else:
+            out.append("-".join(p.capitalize() for p in low.split("-")))
+    return " ".join(out)
+
+
+assert display_name("PUERTA DEL SUR") == "Puerta del Sur"
+assert display_name("PLAZA DE CASTILLA") == "Plaza de Castilla"
+assert display_name("AEROPUERTO T-4") == "Aeropuerto T-4"
+assert display_name("SAN BLAS") == "San Blas"
+assert display_name("ÓPERA") == "Ópera"
+# The first word is capitalised even when it is a stop word.
+assert display_name("LOS ESPARTALES") == "Los Espartales"
 
 
 def fetch_layer(layer, cache):
@@ -134,6 +171,7 @@ def main():
         })
     st = pd.DataFrame(rows)
     print(f"  {len(st)} station-per-line records fetched")
+    emit("station_line_records", len(st))
 
     # THE UNNAMED RECORDS, handled explicitly rather than dropped by a filter
     # that does not mention them. Two rows (CODIGOESTACION 347, 348, both added
@@ -149,6 +187,7 @@ def main():
     # 293 records -> physical stations. An interchange is one place; averaging
     # its per-line points puts the marker between the platforms rather than on
     # an arbitrary one.
+    emit("stations_named_network", st["name"].nunique())
     print(f"  {st['name'].nunique()} distinct station names "
           f"(from {len(st)} records - interchanges repeat per line)")
     grouped = (st.groupby("name")
@@ -186,6 +225,9 @@ def main():
 
     kept = gdf[gdf["in_city_spatial"]].copy()
     outside = gdf[~gdf["in_city_spatial"]].copy()
+    emit("stations_in_city", len(kept))
+    emit("stations_excluded", len(outside))
+    emit("station_filter_disagreements", len(disagree))
 
     # Excluded stations are a scoping RECORD, not a silent filter: San Diego
     # dropped 16 and Los Angeles 54, each named with the city it lies in.
@@ -221,6 +263,8 @@ def main():
                 segs.setdefault(line, []).append(LineString(path))
     print(f"  {len(codes)} distinct line codes -> {len(segs)} lines "
           f"(codes: {' '.join(sorted(codes))})")
+    emit("metro_lines", len(segs))
+    emit("tramo_line_codes", len(codes))
     if len(segs) != 13:
         raise SystemExit(f"expected 13 Metro lines, collapsed to {len(segs)} - "
                          "the GTFS and OSM screens both say 13")
@@ -254,7 +298,10 @@ def main():
 
     out = kept.to_crs(CRS_GEOGRAPHIC)
     st_out = pd.DataFrame({
-        "station": out["name"],
+        # Re-cased for display; the register's capitals live on in the
+        # raw cache, which is what "keep the source string" means here.
+        "station": [display_name(n) for n in out["name"]],
+        "station_source": out["name"].values,
         "latitude": out.geometry.y,
         "longitude": out.geometry.x,
     }).sort_values("station")
