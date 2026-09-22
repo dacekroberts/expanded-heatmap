@@ -415,6 +415,29 @@ CITIES = [
         # clears Mexico City and Miami at every width.
         "label_offset": ("middle", 0, -16),
     },
+    {
+        "name": "Madrid",
+        "lat": 40.4168,
+        "lon": -3.7038,
+        "page": "pages/17_Madrid_Heatmap.py",
+        "blurb": "Metro de Madrid (Líneas 1–12 and the Ramal, 193 stations "
+                 "inside the city)",
+        "region": "Spain",
+        # Outside the United States frame, like every non-US city - see
+        # IN_DEFAULT_VIEW below. The first city here in EUROPE, which is what
+        # the region model was always going to have to absorb.
+        "in_default_view": False,
+        # ABOVE its dot, and this key MUST EXIST AT ALL - Mexico City omitting
+        # it took the whole Overview page down on 2026-09-22, because
+        # pd.DataFrame fills a missing key with float('nan') and `nan is None`
+        # is False. Overview.py is scalar-safe now; every city still declares
+        # one, because fifteen cities happening to have one is what hid that.
+        #
+        # Madrid is alone in its region and far from every other city on the
+        # map, so nothing constrains this but the canvas edge. Measured by
+        # scripts/check_macro_labels.py across six regions and three widths.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -507,6 +530,11 @@ REGION_ORDER = [
     "Canada West",
     "Canada East",
     "Mexico",
+    # SPAIN IS THE FIRST REGION OUTSIDE NORTH AMERICA, added 2026-09-22 with
+    # Madrid. It needs no composite and no split: the country's screen closed
+    # at two cities (Madrid and Barcelona), which sit 500 km apart and frame
+    # together comfortably - nothing like the 3,300 km that forced Canada's.
+    "Spain",
 ]
 
 # The regions a city may actually be TAGGED with: everything that is not a
