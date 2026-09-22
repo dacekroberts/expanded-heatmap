@@ -296,8 +296,33 @@ Cities built and running end to end (pipeline, map, app page):
   one. Its boundary layer also has a **hole at Stanley Park**, so the boundary
   is a check rather than a filter.
 
+- **Calgary** - Calgary Transit's CTrain: the Red and Blue Lines. Distinctive
+  in four ways.
+
+  Its **licence register names premises itself**, and no other city's does. The
+  96 categories carry `- PREMISES`, `- NO PREMISES`, `(MOBILE)`,
+  `(HOME BASED)`, `(MAIL ORDER)` and `(DIRECT SALES)` suffixes, so the question
+  every other map infers is answered in the category string. 65.7% of active
+  licences are storefronts, second only to Montréal's 69.4%.
+
+  It is the **first city where nothing is excluded**: the CTrain never leaves
+  Calgary, so `excluded_stations.csv` is written empty rather than skipped.
+
+  Its feed publishes **83 platforms, not 83 stations** - a direction prefix on
+  every stop name and no `parent_station` column - which collapse to **45**.
+  The whole Canada ranking had recorded the platform count, so its density
+  went from a published 75 per station to a measured **137**. Its `route_id`
+  also embeds a feed version, so routes match on `route_short_name`.
+
+  And it has **no home-business signal at all**: `homeoccind` is `N` on every
+  row. Surrey and Edmonton state home occupation on the licence; Calgary
+  asserts nothing, and no inference is attempted.
+
 Next by ease ranking: New Orleans and Seattle, both needing decisions before
-code - a streetcar-only scope question and a multi-municipality build. For
+code - a streetcar-only scope question and a multi-municipality build. In
+Canada, **Edmonton and Toronto remain**, and Toronto's corrected figure (81
+per station, not 41) now places it above Edmonton - though it stays the weaker
+build because it is a two-bucket city with no general-retail source. For
 Canada, **re-rank the remaining four cities on storefront counts before
 choosing one** - the published ranking counted every mappable licence for five
 of the six and only storefronts for Toronto, so it is not internally

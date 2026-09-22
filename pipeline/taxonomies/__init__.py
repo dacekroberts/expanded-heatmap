@@ -80,6 +80,7 @@ TAXONOMY_MODULES = {
     # New York's and Boston's it dispatches over no `source` column.
     "dc_businessactivity": "pipeline.taxonomies.dc_businessactivity",
     "vancouver": "pipeline.taxonomies.vancouver",
+    "calgary_licencetype": "pipeline.taxonomies.calgary_licencetype",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

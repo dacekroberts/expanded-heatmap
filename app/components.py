@@ -375,6 +375,19 @@ _NOTICES = [
      "property of the Société de transport de Montréal, used under the "
      "Creative Commons Attribution 4.0 International licence.",
      False),
+    # Calgary, added 2026-09-21. ONE notice covers BOTH the business register
+    # and Calgary Transit's GTFS - the only Canadian city where a single
+    # licence does both, so this city adds one line where Vancouver added
+    # three and Montréal two.
+    #
+    # VERBATIM, and note the en dash and the British "Licence" - Surrey's
+    # sibling notice uses a hyphen and "License", and they are not
+    # interchangeable. Like Toronto's, Vancouver's and Surrey's, this licence
+    # TERMINATES AUTOMATICALLY on breach.
+    ("City of Calgary",
+     "Contains information licensed under the Open Government "
+     "Licence – City of Calgary.",
+     True),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

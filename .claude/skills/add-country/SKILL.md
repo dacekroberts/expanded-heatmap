@@ -278,6 +278,16 @@ multi-licence premises needs a dispatch rule - Boston's `FT+RF` question again.
   All six Canadian sources are UTF-8; Québec data is often `latin-1`.
 - **Mojibake in a terminal is usually the console codepage, not the file.**
   Set `PYTHONIOENCODING=utf-8` before blaming the data.
+- **NORMALISE DASHES, APOSTROPHES AND UNICODE FORM BEFORE ANY JOIN.** This has
+  already cost time once: Montréal's commercial survey writes
+  `Ahuntsic–Cartierville` with an EN DASH where the City's own boundary layer
+  uses a hyphen, across six borough names, which made a 34-feature layer look
+  like it covered 32. Same class: `L’Île` (U+2019) against `L'Île` (U+0027),
+  and `Baie-d'Urfé` against `Baie-D'Urfé`. Map U+2013/U+2014 to U+002D,
+  U+2018/U+2019 to U+0027, apply **NFC**, and compare with `casefold()` rather
+  than `.upper()`. Two files can look identical on screen and fail to match.
+- **Check whether the feed ships `translations.txt`** before transliterating a
+  non-Latin name by hand - TransLink's and STM's both do.
 - **Column names in another language are already solved** - each city's config
   names its own columns and step 2 renames to the taxonomy's `VALUE_COLUMN`.
   `NOM_ETAB` is no harder than `dbaname`.

@@ -177,6 +177,20 @@ REGISTRIES = {
     "montreal": dict(raw=None, trade=None, owner=None,
                      processed="businesses_clean.csv",
                      address=("address",)),
+    # Calgary joins Montréal and Miami in the "structurally absent" group,
+    # and for the cleanest reason yet: `tradename` is blank on ZERO of its
+    # 23,203 rows and the register carries no second name column at all, so
+    # there is no fallback pair to join against and no pin CAN be a
+    # substituted name. `homeoccind` is `N` on every row, so the register also
+    # asserts nothing about home occupation - what stands in for it is the
+    # `(HOME BASED)` and `(MOBILE)` suffixes on individual categories, which
+    # the taxonomy excludes.
+    #
+    # Its address is one free-text field, so the unit check is a regex over it
+    # as Miami's and Montréal's are.
+    "calgary": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv",
+                    address=("address",)),
     "vancouver": dict(raw="vancouver_business_licences.csv", sep=";",
                       trade="businesstradename", owner="businessname",
                       processed="businesses_clean.csv",

@@ -397,6 +397,72 @@ cities' exclusions were justified that way before any privacy argument -
 consistent with how Los Angeles' and Philadelphia's were framed. Vancouver's
 name-suppression policy is separate and is described under "Honest limits".
 
+### Calgary - endorsements, nonstore trade, and two categories left off on sensitivity
+
+**Calgary's register does most of this page's work itself**, which makes its
+exclusions unusually easy to state. Its 96 categories are suffixed with the
+distinction every other city has to infer: `- PREMISES` against `- NO
+PREMISES`, plus `(MOBILE)`, `(HOME BASED)`, `(MAIL ORDER)` and `(DIRECT
+SALES)`. So `RETAIL DEALER - PREMISES` (7,516 rows) and `RETAIL DEALER - NO
+PREMISES` (7) are the same trade, split by the City into the thing this project
+maps and the thing it does not. Every value's verdict is in
+`pipeline/taxonomies/calgary_licencetype.py`, which raises on an unknown
+category rather than defaulting to None.
+
+**Endorsements are excluded, and they are the biggest group.** `ALCOHOL
+BEVERAGE SALES (RESTAURANT)` (1,527), `OUTDOOR PATIO` (937), `ALCOHOL BEVERAGE
+SALES (DRINKING EST/RESTAURANT)` (446), `(ACCESSORY)` (171) and `(DRINKING
+ESTABLISHMENT)` (36) are permissions a premises holds, not premises in
+themselves. A restaurant holding a food-service licence, an alcohol
+endorsement and a patio endorsement is one restaurant; counting the
+endorsements would triple it. This is D.C.'s endorsement problem, and it is
+why two in five of Calgary's licences carry more than one category.
+
+**Nonstore and mobile trade is excluded**, on the project-wide NAICS 454
+reasoning. The City marks it: `RETAIL DEALER - NO PREMISES`, `MOTOR VEHICLE
+DEALER - NO PREMISES` (42), `FOOD SERVICE - NO PREMISES` (27), `FULL SERVICE
+FOOD VEHICLE` (50), `PERSONAL SERVICE (MOBILE)`, `MASSAGE CENTRE (HOME BASED)`
+and the `(DIRECT SALES)` cleaning variants. **`RETAIL DEALER - PREMISES (MAIL
+ORDER)` (59) is excluded despite saying PREMISES** - the suffix nearest the
+actual trade wins, and mail order is nonstore.
+
+**Repair is excluded and personal care is not**, the same NAICS 811-against-812
+line Vancouver and Surrey draw: `MOTOR VEHICLE REPAIR AND SERVICE` (1,400
+across its variants), `AUTO BODY SHOP` (232) and `FURNITURE REFINISHING` (17)
+are out, while hairdressers, tattooists and dry cleaners count.
+
+**The chair renter is excluded.** `PERSONAL SERVICE (INDEPENDENT CHAIR
+OPERATOR)` (160) is a person renting a chair inside someone else's salon;
+counting them double-counts the salon and puts an individual on the map. New
+York drops its state salon registry's renter licence types for the same
+reason.
+
+**And two categories are excluded on sensitivity as well as scope**, which is
+a departure worth stating plainly because a NAICS-only reading would keep the
+first two:
+
+- `BODY RUB CENTRE` (35) and `BODY RUB CENTRE (GRANDFATHERED MASSAGE CENTRE
+  COMMERCIAL)` (45)
+- `EXOTIC ENTERTAINMENT AGENCY` (8) and `DATING SERVICE OR ESCORT SERVICE` (1)
+
+**89 rows in total.** These are licensed commercial premises at commercial
+addresses, and NAICS would place the body rub centres in 812199 personal care
+alongside the tattooists that this map does count. They are left off anyway,
+on the same reasoning that excluded Vancouver's `Adult Services`: mapping
+adult-services premises adds exposure for the people working there without
+adding anything to the question this project asks, which is where storefront
+commerce clusters around transit. **This is a judgment call, not a data
+limitation** - the categories are mapped to None in the taxonomy rather than
+deleted, so it is one line to reverse, and the owner confirmed it on
+2026-09-21.
+
+**One thing Calgary CANNOT tell us**, recorded here because its absence is
+easy to mistake for a decision: `homeoccind` reads `N` on all 23,203 rows.
+It is constant, not merely unreliable, so unlike Surrey (`Home Occupation`,
+14,015 rows) and Edmonton (`licencetype`, 14,114) the City asserts nothing
+about home occupation, and no inference is attempted - Vancouver's parcel
+substitute, the only one this project has built, removed nothing.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

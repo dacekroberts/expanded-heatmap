@@ -258,6 +258,27 @@ CITIES = [
         # either of those labels is ever moved or renamed, re-check this one.
         "label_offset": ("start", 12, -34),
     },
+    {
+        "name": "Calgary",
+        "lat": 51.0447,
+        "lon": -114.0719,
+        "page": "pages/12_Calgary_Heatmap.py",
+        # 45, not 83. The feed publishes 83 PLATFORMS and this blurb said so
+        # until the collapse was written - the same error the Canada ranking
+        # made. See pipeline/calgary/config.py.
+        "blurb": "CTrain (Red and Blue Lines, 45 stations)",
+        # Outside the default view, as every non-US city is - it keeps
+        # fit_view's zoom pinned at 1.4525 so no existing label moves.
+        "in_default_view": False,
+        # EAST and slightly SOUTH of its dot, and the reason is Edmonton.
+        # Their dots are 16 px apart vertically - Calgary at x 372, y 139;
+        # Edmonton at x 374, y 124 - which is the east-coast cluster's problem
+        # in miniature. So these two split the way those four did: Calgary
+        # takes the SOUTH offset and Edmonton will take the NORTH one, both
+        # running east into the space Vancouver's label vacated when it moved
+        # west on 2026-09-21. That move was made for exactly this.
+        "label_offset": ("start", 12, 9),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

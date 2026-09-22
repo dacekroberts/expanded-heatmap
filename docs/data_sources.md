@@ -828,7 +828,19 @@ name montreal.ca's own contents and photos. The open data is governed by the
 separate licence page above. Same shape as nyc.gov's "All Rights Reserved"
 footer and Philadelphia's terms-of-use, and the reason step 4 exists.
 
-So for the **eleven** cities now built there are **ten** sources requiring
+**13. City of Calgary — required, and DISPLAYED. One notice covers BOTH the
+business data and the transit data**, which no other Canadian city manages:
+
+> `Contains information licensed under the Open Government Licence – City of Calgary.`
+
+En dash, British "Licence" — Surrey's sibling notice uses a hyphen and
+"License" and the two are not interchangeable. Like Toronto's, Vancouver's and
+Surrey's, this licence **terminates automatically on breach**. The Socrata
+`license` field on the business register reads `See Terms of Use`, which is the
+`SEE_TERMS_OF_USE` marker `read-licence` step 1 flags: the OGL is the document
+it points at, and it is stored in `docs/licenses/calgary-open-government-licence.txt`.
+
+So for the **twelve** cities now built there are **eleven** sources requiring
 specific text or acknowledgement, all of them displayed — and the two Canadian
 builds added five of the ten between them, where the nine US cities needed
 five in total.

@@ -14,6 +14,130 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Calgary built: 15,099 storefronts, and its ranking figure was PLATFORMS
+
+- **The twelfth city, the third in Canada.** 15,099 storefronts - Food service
+  7,176, Retail 5,011, Personal services 2,912 - across **45 stations**, with
+  **6,171 inside the 0.6 mi outer ring = 137 per station**. Per-step counts:
+  23,203 licences -> 23,009 active -> 15,106 storefront (65.7%) -> 15,099 after
+  premises dedup.
+- **ITS PUBLISHED 75/STATION WAS 75 PER PLATFORM.** The feed publishes **83
+  platforms**, every stop name carrying a direction prefix (`NB Banff Trail
+  CTrain Station` / `SB Banff Trail ...`) with **no `parent_station` column**,
+  so each name is unique and nothing collapsed them. They collapse to **45**,
+  which is the CTrain's real published station count - and that agreement is
+  what turns the regex into evidence. **Calgary moves from fifth of six to
+  third**, behind Vancouver 206 and Montréal 151, ahead of Surrey 135.
+  The rendered map measures **137**, confirming the predicted 138.
+- **This is the second platform-for-station error in two days and the fifth
+  denominator error overall**, after Toronto's 234/118. Both were caught the
+  same way and it is now the standard diagnostic: **the nearest-neighbour
+  spacing**, not a duplicate-name check. Calgary's step 1 asserted no two
+  stations share a name and PASSED, because the direction prefix makes every
+  name distinct. What failed was physics - an uncollapsed median of **17 m,
+  minimum 8 m**. Collapsed it is **1,023 m**. Recorded in the `add-city` skill
+  under "A STATION COUNT IS THE MOST ERROR-PRONE NUMBER IN THIS PROJECT",
+  with the four collapse mechanisms seen so far ranked by reliability.
+- **Three normalisation traps, all real, and a naive strip gets 47 or 49
+  rather than 45:** a TYPO in the feed (`CTrain Staion` alongside `CTrain
+  Station`); three suffixes for one system (`CTrain Station`, `CTrain Stn`,
+  `Station (Free Fare Zone)`, bare `Station`); and **the hyphen MOVING between
+  one station's two directions** - `EB Downtown West-Kerby` against
+  `WB Downtown-West Kerby`.
+- **Seven of the 45 stations legitimately have ONE platform and must not be
+  merged**: 7 Avenue downtown is a one-way couplet, so `EB 3 Street SW` and
+  `WB 4 Street SW` are different places on different streets. Collapsing by
+  normalised NAME handles this; collapsing by proximity would have fused them.
+- **`route_id` EMBEDS A FEED VERSION**, so routes are matched on
+  `route_short_name`: `201-20780` in the Mobility Database mirror against
+  `201-20786` in the agency feed. A pinned id matches nothing after the next
+  release, silently. No other city here has versioned route ids.
+- **Neither Calgary feed carries `feed_info.txt`**, so the `feed_end_date`
+  guard written for D.C., Montréal and Vancouver cannot exist here at all.
+  `fetch_sources.py` prints the Socrata `updatedAt` instead - it read 0 days
+  on the build day.
+- **The two-boundary trap is real and sharper than recorded.** `7t9h-2z9s` is
+  a Socrata **`map`** view and exports **53 bytes** of unreadable GeoJSON;
+  `erra-cqp9` is the **`dataset`** view and carries the real MultiPolygon
+  (852.9 km2 against Calgary's ~825 of land). Both "Historic City Limits"
+  views split the same way, so the rule is the VIEW TYPE, not the dataset.
+  The earlier domain-scoped search that found no city boundary at all was
+  looking at a federated catalogue returning Cincinnati and Los Angeles.
+- **THE FIRST CITY IN THE PROJECT WHERE NOTHING IS EXCLUDED.** The CTrain
+  never leaves Calgary, so all 45 stations are in scope and
+  `excluded_stations.csv` is written EMPTY rather than skipped - an empty file
+  with a header states "nothing was excluded" where a missing one states
+  nothing. Compare San Diego 16 of 63, Los Angeles 54 of 110, D.C. 58 of 98,
+  SkyTrain 30 of 54.
+- **Its own taxonomy names premises, and no other city's does.** The 96
+  categories carry `- PREMISES`, `- NO PREMISES`, `(MOBILE)`, `(HOME BASED)`,
+  `(MAIL ORDER)` and `(DIRECT SALES)`, so the question every other city infers
+  is answered in the category string. That is why its ranking inflation was
+  the lowest of the five (1.4x against Vancouver's 4.2x) and why **65.7% of
+  active licences are storefronts**, second only to Montréal's 69.4%.
+  All 96 have an explicit verdict; `classify()` raises on an unknown.
+- **Food service outranks Retail on this map, and it is a licensing artefact
+  rather than a fact about the street.** 9,089 of 23,009 active licences carry
+  more than one category, so `BUCKET_PRIORITY` does real work here: a premises
+  licensed for both retail and food counts as food. Said plainly on the city
+  page.
+- **`homeoccind` is `N` on all 23,203 rows** - constant, not merely
+  unreliable. So Calgary asserts nothing about home occupation, unlike Surrey
+  (14,015 `Home Occupation`) and Edmonton (14,114 `Home Based`), and no
+  inference is attempted: Vancouver's parcel substitute, the only one this
+  project has built, removed nothing.
+- **One notice, covering both the business data and Calgary Transit** - the
+  only Canadian city where a single licence does both. `Contains information
+  licensed under the Open Government Licence – City of Calgary.` En dash and
+  British "Licence"; Surrey's sibling uses a hyphen and "License" and they are
+  not interchangeable. Terminates automatically on breach.
+
+### 2026-09-21 - Calgary privacy verdict: the claim is enforced at import, not asserted
+
+- **`python scripts/check_personal_exposure.py calgary`** on the rendered map
+  (6,171 pins, 5,566 distinct names), as `CLAUDE.md` requires. Verdict:
+  **publishable.** 0 email addresses, 0 phone numbers, 0 "c/o" markers, 0
+  surname-first names.
+- **No registrant-name fallback CAN exist.** `tradename` is blank on ZERO of
+  23,203 rows and the register carries no second name column, so there is no
+  fallback pair and no pin can be a name this pipeline substituted. Structural,
+  like Montréal's, Miami's and New York's.
+- **23.2% of displayed names match the person heuristic, and that is expected**
+  - they are `tradename` values, self-chosen, at `- PREMISES` categories
+  (RETAIL DEALER - PREMISES 474, FOOD SERVICE - PREMISES (SEATING) 349).
+  **San Diego's precedent**: a trade name the owner registered under their own
+  name is a deliberate public commercial act.
+- **The 0.00% residential reading is a MEASUREMENT GAP**, as Boston's and
+  Montréal's are: Calgary's `address` carries no unit designators to match.
+  **What limits the real exposure is now ENFORCED IN CODE rather than argued.**
+  `calgary_licencetype.py` raises at import if any bucketed category contains
+  `NO PREMISES`, `(MOBILE)`, `(HOME BASED)`, `(MAIL ORDER)` or
+  `(DIRECT SALES)`. So no mapped pin can sit in a category the City itself
+  describes as operating from a home or a vehicle - the strongest version of
+  the argument Boston makes from its licence types, because here the City
+  writes it into the category string.
+
+### 2026-09-21 - Body rub centres and escort agencies excluded from Calgary
+
+- **The owner's call, confirmed 2026-09-21**, and a deliberate departure from
+  the NAICS anchor: `BODY RUB CENTRE` (35), `BODY RUB CENTRE (GRANDFATHERED
+  MASSAGE CENTRE COMMERCIAL)` (45), `EXOTIC ENTERTAINMENT AGENCY` (8) and
+  `DATING SERVICE OR ESCORT SERVICE` (1) - **89 rows** - are mapped to None.
+- **A NAICS-only reading would keep the first two.** They are licensed
+  commercial premises at commercial addresses, and NAICS puts body rub centres
+  in 812199 personal care alongside the tattooists and microblading studios
+  this map does count. So this is not a scope correction dressed up as a
+  privacy one; it is a sensitivity judgment, stated as such.
+- **The reasoning, and it follows Vancouver's `Adult Services` exclusion:**
+  mapping adult-services premises adds exposure for the people working there
+  without adding anything to the question this project asks, which is where
+  storefront commerce clusters around transit.
+- **Reversible by design.** The categories are mapped to None in the taxonomy
+  rather than deleted, so including them is a one-line change, and they are
+  named with their counts in `docs/excluded_categories.md` - the owner asked
+  for them to be stated the way every other city's exclusions are, rather than
+  dropped silently.
+
 ### 2026-09-21 - The three remaining Canadian briefs re-measured in advance; Toronto is FOURTH, not last
 
 - **Done before any build, at the owner's instruction, because a brief has now

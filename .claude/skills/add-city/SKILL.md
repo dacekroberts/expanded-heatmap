@@ -274,6 +274,105 @@ were excluded so a scope mistake is visible, not silent. Match routes by
 exact `route_short_name`/`route_id` after printing the routes table - a
 substring match once swept in a shuttle-bus route.
 
+**AND MATCH ON `route_short_name` WHERE THE FEED VERSIONS ITS IDS.** Calgary's
+`route_id` embeds the feed release: `201-20780` in the Mobility Database
+mirror, `201-20786` in the agency's own feed. A config pinning the id matches
+NOTHING after the next release, and matches nothing *silently*.
+
+### A STATION COUNT IS THE MOST ERROR-PRONE NUMBER IN THIS PROJECT
+
+**Five of the project's denominator errors have been station or percentage
+counts, and two were platforms counted as stations.** Both survived review
+because the wrong number was plausible:
+
+- **Toronto**: the "234 stations" behind its ranking figure was 234
+  PLATFORMS - 118 stations. Its density was 41 per platform, i.e. **81 per
+  station**, which moved it from last of six to fourth.
+- **Calgary**: "83 stations" was 83 PLATFORMS - 45 stations. 75 per platform
+  is **138 per station**, moving it from fifth to third.
+
+**THE CHECK THAT CATCHES IT IS THE SPACING MEASUREMENT, NOT A DUPLICATE-NAME
+ASSERTION.** Calgary's step 1 asserted no two stations share a name and
+PASSED, because `NB Banff Trail CTrain Station` and `SB Banff Trail CTrain
+Station` are different strings. What caught it was the nearest-neighbour
+median: **17 m, with a minimum of 8 m**, which is physically impossible for
+rail stations.
+
+So: **print the nearest-neighbour distribution before trusting any station
+count, and treat a median under ~100 m as platforms until proven otherwise.**
+For calibration, every real figure measured so far - San Francisco's thinned
+street-running median was **134 m**, Montréal 728 m, Vancouver 841 m, D.C.
+962 m, Calgary after collapsing 1,023 m.
+
+**Four collapse mechanisms, in descending order of reliability:**
+
+1. **`parent_station` is populated** - the clean case. Collapse on it and
+   assert it is non-null on every served platform. D.C. 125 platforms -> 98,
+   Montréal 72 -> 68, Edmonton 65 -> 33. **Take the DISPLAY name from the
+   CHILD stop**: Montréal's parents are upper case (`STATION ANGRIGNON`) and
+   its children mixed (`Station Angrignon`), and an all-caps label reads as
+   shouting on a map.
+2. **A regular suffix** - Vancouver's `<Station> @ Platform N`. Regex it, and
+   **assert every name containing the marker actually matched**, so a new
+   suffix form fails loudly instead of inventing stations.
+3. **A direction PREFIX and no `parent_station`** - Calgary's `NB|SB|EB|WB`.
+   This is the dangerous one, because each name is unique and nothing looks
+   wrong.
+4. **Nothing at all** - Toronto: 234 stops named `Finch Station - Southbound
+   Platform`, no `parent_station` column. Normalise by hand and check the
+   result against the operator's own published station count.
+
+**Always sanity-check the collapsed count against the operator's published
+figure.** Calgary collapsed to exactly 45, which is the CTrain's real station
+count; that agreement is what turns a regex into evidence.
+
+### Normalising station names: the traps, all of them real
+
+- **A typo in the feed.** Calgary ships `CTrain Staion` alongside `CTrain
+  Station`.
+- **Several suffixes for one system.** Calgary uses `CTrain Station`, `CTrain
+  Stn`, `Station (Free Fare Zone)` and bare `Station` in one file.
+- **Inconsistent spelling BETWEEN THE TWO DIRECTIONS OF ONE STATION.**
+  Calgary has `EB Downtown West-Kerby Station` and `WB Downtown-West Kerby
+  Station` - the hyphen moves. Normalise hyphens to spaces before comparing.
+- **Legitimately single-platform stations that must NOT be merged with a
+  neighbour.** Calgary's 7 Avenue downtown is a ONE-WAY COUPLET: `EB 3 Street
+  SW` and `WB 4 Street SW` are different places, one direction each. Seven of
+  its 45 stations are like this. Collapsing by normalised name handles it
+  correctly; collapsing by proximity would not.
+- **The opposite error: over-stripping.** Boston's bug turned `North Station`
+  into `North` by removing a trailing token. Strip a LEADING prefix in
+  preference to a trailing one, and never strip a bare trailing word without
+  checking the whole list first.
+
+### Non-English and non-Latin names: what to expect next
+
+The project has met three of these already and should expect more:
+
+- **Dash variants are a silent join killer.** Montréal's commercial survey
+  writes `Ahuntsic–Cartierville` with an EN DASH where the City's own boundary
+  layer writes `Ahuntsic-Cartierville` with a hyphen. Six of its borough names
+  differ this way, which made a 34-feature layer look like it covered only 32.
+  **Normalise U+2013/U+2014 to U+002D before any join.**
+- **Apostrophe variants likewise.** `L’Île-Bizard` (U+2019) against
+  `L'Île-Bizard` (U+0027).
+- **Case differs across sources for the same name.** `Baie-d'Urfé` against
+  `Baie-D'Urfé`. Use `casefold()` rather than `.upper()`, which is wrong for
+  some scripts, and apply **Unicode NFC** so that a precomposed `é` and an
+  `e`-plus-combining-accent compare equal. Two files can look identical and
+  not match.
+- **Direction and platform words are language-specific.** A `NB|SB|EB|WB`
+  regex is an English-feed assumption; expect `Direction`/`Sens` (French),
+  `Richtung` (German), `Sentido`/`Andén` (Spanish), `Binario` (Italian).
+  Derive the pattern from the printed name list, never from a template.
+- **GTFS has `translations.txt`, and some feeds ship it.** TransLink's and
+  STM's both do. Where a feed carries a non-Latin script, that file is where a
+  romanised name lives - prefer it to transliterating by hand, and record
+  which language the displayed name is in.
+- **Business names stay in their own language, always** (an `add-country`
+  rule). Only the bucket labels are translated, and those belong to the
+  taxonomy module.
+
 **Check the rail system's shape before assuming "keep every station."**
 Uniformly sparse systems (San Diego's Trolley) keep every in-city station.
 A system with a compact central corridor plus dense street-running

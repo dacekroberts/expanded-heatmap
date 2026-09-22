@@ -13,8 +13,9 @@ Every transit line is drawn from real GTFS geometry, labelled with its public
 name, and listed in a collapsible legend.
 
 Mapped so far: San Diego, San Francisco, Los Angeles, Chicago, New York,
-Philadelphia, Miami (regional), Boston, Washington D.C. and Vancouver
-(regional, with Surrey) — ten cities, nine of them in the United States.
+Philadelphia, Miami (regional), Boston, Washington D.C., Vancouver (regional,
+with Surrey), Montréal and Calgary — twelve cities, nine of them in the
+United States and three in Canada.
 
 **Read every map as a snapshot of a public register on its retrieval date**,
 redrawn and filtered, not as a census of what is open. Registers lag the
