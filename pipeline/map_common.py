@@ -96,6 +96,16 @@ _THEME_TOGGLE_TEMPLATE = """
         border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.3);
     }
     .map-btn[hidden] { display: none; }
+    /* THE TOOLTIP IS WHERE BUSINESS NAMES APPEAR, so it needs the font stack
+       more than anything else on the map does. Leaflet's own CSS sets
+       `"Helvetica Neue", Arial, Helvetica, sans-serif` on .leaflet-tooltip,
+       which is Latin-only - so without this rule a Japanese, Korean or Greek
+       shop name would render in whatever the browser substituted, as tofu
+       boxes or at metrics that outgrow the tooltip's own box. Added
+       2026-09-21 alongside pipeline/theme.FONT_STACK, whose own note explains
+       why the fallback ORDER matters (browsers fall through per glyph, not
+       per string). */
+    .leaflet-tooltip { font-family: @@FONT_STACK@@; }
     .map-btn:focus-visible { outline: 2px solid @@LIGHT_ACCENT@@; outline-offset: 2px; }
     #city-menu { width: 84px; text-overflow: ellipsis; }
     @media (max-width: 480px) {
@@ -325,7 +335,7 @@ _LEGEND_CSS = """
     align-items: baseline; justify-content: space-between; gap: 12px; }
 .map-legend > summary::-webkit-details-marker { display: none; }
 .map-legend > summary::after {
-    content: "\\25BE\\00A0Hide"; font: 600 11px sans-serif;
+    content: "\\25BE\\00A0Hide"; font: 600 11px """ + FONT_STACK + """;
     opacity: 0.7; white-space: nowrap; }
 .map-legend:not([open]) > summary::after { content: "\\25B8\\00A0Show"; }
 .map-legend > summary:hover::after { opacity: 1; text-decoration: underline; }

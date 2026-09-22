@@ -14,6 +14,33 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - The font stack reaches the tooltip, which is where non-Latin names will land
+
+- **Completing staging's `FONT_STACK` change after merging it.** Staging added
+  one font stack to `pipeline/theme.py` - with per-glyph fallbacks for
+  Japanese, Korean, Traditional and Simplified Chinese, and the ordering note
+  explaining why the Latin faces must come first - and wired it into
+  `.map-btn` and the legend's `font-family`. Two places still said
+  `sans-serif`, and one of them was the one that matters.
+- **`.leaflet-tooltip` had NO `font-family` at all**, so it inherited
+  Leaflet's own CSS: `"Helvetica Neue", Arial, Helvetica, sans-serif`, which
+  is Latin-only. **The tooltip is where a business's own name appears**, so it
+  is the single element on the map most likely to carry non-Latin text, and it
+  was the one element the font stack had not reached. Without the rule, a
+  Japanese or Greek shop name renders in whatever the browser substitutes -
+  tofu boxes, or metrics that outgrow the tooltip's own box.
+- **The legend's collapse marker also still said `sans-serif`** - my own CSS
+  from earlier the same day. Now uses the stack too, so the caret cannot
+  diverge from the text beside it.
+- **Verified end to end rather than in the source**: the rendered
+  `heatmap.html` embedded in the Calgary page carries the CJK fallbacks and
+  the caret, and the diff across all twelve regenerated maps contains nothing
+  but the three `sans-serif` substitutions and the generated Folium ids. All
+  twelve `excluded_stations.csv` came back **identical**, so no data moved.
+- **This is presentation-only and it re-baselines every city**, which is why
+  it is recorded: a reader diffing the outputs later would otherwise find
+  twelve changed files and no reason for them.
+
 ### 2026-09-21 - Calgary built: 15,099 storefronts, and its ranking figure was PLATFORMS
 
 - **The twelfth city, the third in Canada.** 15,099 storefronts - Food service
