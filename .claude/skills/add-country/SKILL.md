@@ -86,6 +86,37 @@ systematically the **oldest** entities - holding companies, dormant shells,
 long-established corporates. It is the least representative sample available.
 **Pull several pages and count.** The cost is one loop.
 
+**A real premises table can still be a SAMPLE rather than a register - count
+the rows.** Malaysia's `lookup_premise` passes every structural test: rows are
+individual premises, `premise`/`address`/`premise_type`/`state`/`district` are
+**100% populated**, and it downloads as CSV with no account. It is unusable
+anyway, because it exists to support a **price-monitoring programme** and lists
+only the premises whose prices are surveyed - **372 in Kuala Lumpur**, against
+80,110 for Toronto's storefronts, 148,814 for Madrid and 197,276 for Seoul.
+
+This is **not the aggregate trap**; the rows really are premises. It is a
+*coverage* trap, and **schema inspection passes it cleanly** - only the row
+count catches it. So after confirming the shape, always ask **"is this
+plausible for a city this size?"** before recording a pass. Composition is the
+second tell: 131 supermarkets and 69 mini-markets in a city of 1.8 million is a
+survey frame, not a register.
+
+**And a premises register can be missing the one column that makes it a map.
+Name the two columns you need - LOCATION and ACTIVITY - and check each
+separately.** A register that has one and not the other fails just as
+completely as one that has neither, and both halves were seen on 2026-09-22
+in the same sweep:
+
+| | Rows | Location | Activity | Why it fails |
+|---|---|---|---|---|
+| Colombia, RUES `nb3d-v3n7` | **6,369,877** | **none at all** | CIIU codes | Right entity - `ESTABLECIMIENTO DE COMERCIO`, not the company - and no address, no municipality, not even a city name. The finest unit is `camara_comercio`, a multi-province chamber region |
+| Jakarta, OSS register | 53,827 | full street `ALAMAT` | **none** | Exactly 9 columns, confirmed against the portal's own component list. `uraian_jenis_perusahaan` is the **legal form** (KOPERASI, PT), `skala_perusahaan` the **size**. Nothing says what the business sells, so `filter_to_storefront()` has nothing to filter on |
+
+Colombia's is the more surprising of the two, because "6.4 million premises"
+reads as a decisive pass right up until you list the columns. **An entity-level
+register is not a located register.** Ask where each row *is* before counting
+how many there are.
+
 **Send a nonsense search term before you believe any result list - or any
 zero.** A server that ignores your search parameter returns HTTP 200 and a
 full, plausible page of results, and nothing in the response says the filter
@@ -295,6 +326,45 @@ refusals early, because they are silent:
 | ArcGIS Hub (Surrey) | `/csv` returns **HTTP 202** with an async job, CSV on a later call |
 | Toronto CKAN | `datastore_search_sql` **404s**; use `datastore_search` with `filters` |
 | Opendatasoft | CSV exports are **semicolon-delimited**, not comma |
+
+#### Open the portal in a real browser BEFORE concluding anything about it
+
+**Standing rule, and it is not a last resort.** Guessing API paths answers
+"this path 404s"; navigating the site answers "what this portal is". The 2026-09-22
+sweep ran both against the same five portals and the browser won every time,
+usually in one page load:
+
+| Portal | What guessing said | What the browser said |
+|---|---|---|
+| GeoMedellín ArcGIS Hub | `data.json` **404**, `api/search/v1` **401** | *"Please sign in. This site requires credentials to access."* The site is **private** - no path exists to find |
+| `data.gov.my` | catalogue API paths all 404 | **Server-rendered**: all 292 datasets are in the HTML, no API involved |
+| `datosabiertos.gob.pe` | "Drupal, not CKAN, at every path tried" | Serves `/profiles/dkan/*` - it is **DKAN**, which speaks CKAN at `/api/3/action/*`. The earlier tries omitted the `3` |
+| `satudata.jakarta.go.id` | "API paths resolve nowhere" | Watching its own requests gave `/backend/api/v2/satudata/*` and a fully parameterised `/search?q=...` URL |
+| FEHD (Hong Kong) | two guessed URLs 404'd | The real page was two clicks from the licensing index |
+
+Four of those five were recorded as *"needs the browser"* and every one of
+them then resolved. So make it the **first** move on an unfamiliar portal,
+not the fallback after a round of 404s:
+
+1. **Load the site and look at it.** A sign-in wall, a CAPTCHA or a dead app
+   is a verdict, and it arrives in one screenshot.
+2. **Read the network requests while its own UI works.** The app calls its
+   real API in front of you - endpoint, shape and all. This beats guessing
+   even when guessing would eventually succeed, and it is how Seoul's keyless
+   `download.do` and Jakarta's `search-v2` were both found.
+3. **Check whether the page is server-rendered.** No recorded XHR means the
+   data is in the HTML; read the HTML.
+4. **Keep the parameterised URL** the UI produces. Jakarta's search URL
+   carries `q`, `organisasi`, `status` and `page_no`, which turns a JS app
+   into something enumerable - and a nonsense `q` still gave the control
+   (`zzqqxx` -> 0 results, so that search genuinely filters).
+
+The same applies to a fetch that is *refused* rather than empty: Bulgaria's
+403 is a **stock Apache page**, i.e. a client-signature refusal, not an
+IP-level one, so the browser is worth trying before recording a negative.
+Record "could not reach" only once the browser has failed too - which is the
+rule `read-licence` step 7 already states for licence pages, generalised to
+the whole probe.
 
 ### 4. How does the country define PERSONAL INFORMATION, and does its licence carve it out?
 

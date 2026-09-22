@@ -370,125 +370,162 @@ its 94 stations. And the first Korean count was silently wrong because **XLSX
 omits empty cells**: appending cells in document order shifted dates into the
 address column. Read the cell `r` reference, not the order.
 
-## MASTER CITY LIST — every candidate, refreshed 2026-09-22
+## MASTER CITY LIST — reordered 2026-09-22 after the Band D and D5 probes
 
-**14 built.** United States (9): San Diego, San Francisco, Los Angeles,
-Chicago, New York, Philadelphia, Miami, Boston, Washington D.C. Canada (5,
-complete): Vancouver *(with Surrey)*, Montréal, Calgary, Edmonton, Toronto.
+> **The canonical copy now lives in
+> [`docs/city_master_list.md`](city_master_list.md).** That file is current
+> state and is rewritten as things change; **this file is the evidence trail**
+> and is appended to. If the two disagree, this one wins and the list is stale.
+> The copy below is kept in place so the evidence sections that follow have
+> their summary beside them.
 
-**54 candidates remain**, banded by **what is actually stopping each one** —
-the only thing that decides what to do next. Only Band D is waiting on
-research.
+**14 built.** US (9): San Diego, San Francisco, Los Angeles, Chicago, New York,
+Philadelphia, Miami, Boston, Washington D.C. Canada (5, complete): Vancouver
+*(with Surrey)*, Montréal, Calgary, Edmonton, Toronto.
 
-| Band | What is stopping it | Cities |
-|---|---|---|
-| **A** | Nothing. Screening complete | **7** |
-| **B** | One narrow question each | **3** |
-| **C** | A geocoding leg — build work, not screening | **16** |
-| **D** | **Probed and ranked 2026-09-22** — 1 promoted, 4 one-question, 5 measured negative, 7 unreached, 11 reachability-only | **28** |
+**48 candidates**, down from 54 — six were discarded on measured evidence this
+round. Banded by **what is actually stopping each one.**
+
+| Band | What is stopping it | Cities | Change this round |
+|---|---|---|---|
+| **A** | Nothing. Screening complete | **7** | — |
+| **B** | One narrow question each | **3** | — |
+| **C** | A geocoding leg — build work, not screening | **17** | **+1** Copenhagen promoted |
+| **D** | Probed and ranked; see the four sub-tiers | **21** | **−7** |
+| *Discarded* | Measured negative, each naming its evidence | *14* | **+6** |
 
 ### Band A — screening COMPLETE (7 cities, 5 countries)
 
-| # | City | Rail | Business | What remains |
-|---|---|---|---|---|
-| 1 | **Guadalajara** 🇲🇽 | LRT 3, re-verified from the feed: **12,231 stops 100% coordinated, `shapes.txt` present** | DENUE — coordinates, **SCIAN = NAICS**, INEGI licence cleared | **Nothing** |
-| 2 | **Madrid** 🇪🇸 | subway 13 | **148,814 open classified premises, 119,070 with valid coordinates**, three-level classification, `rotulo` 100%, EPSG:25830 | **Nothing.** CC BY 4.0 + binding general conditions, read 2026-09-22 |
-| 3 | **Seoul** 🇰🇷 | 407 stations, WGS84, English names, line geometry | **197,276 active premises** over 8 datasets, EPSG:5174, status field, **KOGL Type 1** | Build work only — partial geocoding for 일반음식점 (90.7%), Korean-aware `check_personal_exposure.py` |
-| 4 | **Milan** 🇮🇹 | subway 5, tram 17 | 28,131 premises 99.1% coords, `insegna`, `codice_ateco`, **CC-BY** — **all three buckets confirmed** | Step 0 schemas for the two newly found layers |
-| 5 | **Mexico City** 🇲🇽 | **From OSM** — 12 Metro lines + Tren Ligero, **195/195 stops exact**, 6,468 geometry points, names and official colours 100% | Same DENUE source | **One licence decision** — whether to offer the station extract under ODbL share-alike |
-| 6 | **Barcelona** 🇪🇸 | FGC subway 4 + funicular 3 | 68,024-premises ground-floor census, **CC-BY-4.0** | One residual — the portal's general notice is CAPTCHA-walled and unread |
-| 7 | **Paris** 🇫🇷 | subway 16, tram 17, funicular 1 | SIRENE, établissement-level, geolocated, Licence Ouverte 2.0, non-diffusible masked at source | **An owner decision, not a probe** — a national register is not the per-city municipal shape this project is built around |
+Ordered by how little stands in the way.
 
-Ordered by how little stands in the way. **Guadalajara and Madrid have nothing
-outstanding at all**; Seoul and Milan have named build work; CDMX, Barcelona and
-Paris each have one decision rather than one measurement.
+| # | City | Business leg | What remains |
+|---|---|---|---|
+| 1 | **Guadalajara** 🇲🇽 | DENUE, SCIAN = NAICS, licence cleared | **Nothing** |
+| 2 | **Madrid** 🇪🇸 | 148,814 open premises, 119,070 valid coords, CC BY 4.0 + binding general conditions | **Nothing** |
+| 3 | **Seoul** 🇰🇷 | 197,276 premises, EPSG:5174, KOGL Type 1 | Build work — partial geocoding, Korean privacy pass |
+| 4 | **Milan** 🇮🇹 | 28,131 premises 99.1% coords, all three buckets | Step 0 schemas for two new layers |
+| 5 | **Mexico City** 🇲🇽 | Same DENUE | One licence call — ODbL share-alike on the station extract |
+| 6 | **Barcelona** 🇪🇸 | 68,024 premises, CC-BY-4.0 | One residual — CAPTCHA-walled general notice |
+| 7 | **Paris** 🇫🇷 | SIRENE, geolocated, LO 2.0 | Your architecture decision — national vs per-city |
 
 ### Band B — one narrow question each (3 cities)
 
-| City | Measured | The one question |
-|---|---|---|
-| **Valencia** 🇪🇸 | **subway 84, tram 37** — the largest Spanish system measured | Its own premises source. **Madrid's result raises the prior sharply** |
-| **Bilbao** 🇪🇸 | rail confirmed | Same |
-| **Málaga** 🇪🇸 | rail confirmed | Same |
+**Valencia** 🇪🇸 (subway 84, tram 37 — the largest Spanish system measured) ·
+**Bilbao** 🇪🇸 · **Málaga** 🇪🇸
 
-Spain is bespoke per city, so each needs its own register — but two of three
-Spanish cities probed so far have had one.
+Each needs its own register, since Spain is bespoke per city — but **two of the
+three Spanish cities probed have had one**, which raises the prior sharply.
 
-### Band C — viable, each needs a GEOCODING LEG (16 cities)
-
-Build work with a known cost, not screening. No further probing changes these.
+### Band C — viable, each needs a GEOCODING LEG (17 cities)
 
 | Cities | Country | Business leg | Geocoding |
 |---|---|---|---|
 | **Tokyo**, Osaka, Nagoya, Yokohama, Sapporo, Fukuoka, Kyoto, Kobe, Sendai, Hiroshima *(10)* | 🇯🇵 | Premises-level food permits, CC BY, one national schema. **Two buckets — no general retail** | **Hardest met** — chōme/ban/gō, full-width numerals, `町字ID` 0% populated |
-| **Taipei**, Kaohsiung, Taoyuan, Taichung *(4)* | 🇹🇼 | 商業登記 — premises addresses, active/closed status, per-category assembly | Moderate — **NLSC's geocoder is keyless** |
+| **Taipei**, Kaohsiung, Taoyuan, Taichung *(4)* | 🇹🇼 | 商業登記 — premises, active/closed status, per-category assembly | Moderate — **NLSC geocoder is keyless** |
 | **Oslo** *(1)* | 🇳🇴 | **152,060 sub-units**, `beliggenhetsadresse` (physical, not registered), NACE, open API no key | Moderate |
+| **Copenhagen** *(1)* ↑ **new** | 🇩🇰 | **CVR `productionunits` — P-enheder each with their own `address`/`zipcode`/`city`**, plus `industrycode`/`industrydesc` on a NACE-style scheme (e.g. `475220 Detailhandel med byggematerialer`). Norway's shape, measured via `cvrapi.dk` | Moderate — **plus a free account**: `distribution.virk.dk` 401, `datacvr.virk.dk` 403, and `cvrapi.dk` itself is unofficial and search-by-name |
 | **São Paulo** *(1)* | 🇧🇷 | CNPJ — trade name, address, CNAE | **Hard, past Toronto's scale** |
 
 Japan is **ten cities from one schema** — the best marginal-city cost in the
-screen — against the worst geocoding problem and a two-bucket ceiling. **That
-trade is the single biggest open decision in this list**, and it is a judgment
-call rather than a probe.
+screen — against the worst geocoding problem and a two-bucket ceiling. **Still
+the biggest open decision in this list**, and a judgment call rather than a
+probe.
 
-### Band D — RANKED after individual probes, 2026-09-22 (28 cities)
+### Band D — 21 cities, in four sub-tiers
 
-Probed as three clusters, because Band D is three different questions wearing
-one label. **The European business registers were probed properly; the
-rail/GIS group was probed at reachability only**, and that difference is marked
-below rather than smoothed over.
-
-#### D1 — PROMOTE: premises-level data measured (1 city)
-
-| City | What was measured | The one blocker |
-|---|---|---|
-| **Copenhagen** 🇩🇰 | **CVR carries `productionunits` (P-enheder) — each with its OWN `address`, `zipcode`, `city`, plus `industrycode`/`industrydesc`** (NACE-style, e.g. `475220 Detailhandel med byggematerialer`). That is the premises-vs-registered-office distinction answered the right way, the same shape as Norway's `underenheter` | **Bulk access is registration-gated.** `distribution.virk.dk` returns 401 and `datacvr.virk.dk` 403; `cvrapi.dk` answers but is unofficial and search-by-name. **The WMATA shape — a free account** |
-
-**Denmark is the best thing in Band D** and belongs with Oslo in the "national
-register, premises-level, needs a geocoding leg" family.
-
-#### D2 — one cheap question each (4 cities)
+#### D-a — one cheap question each (4)
 
 | City | State |
 |---|---|
-| **Dublin** 🇮🇪 | `data.gov.ie` lists a **Valuation Office API**, but `api.valoff.ie` and `www.valoff.ie` both return **000 on three hosts across two attempts**. Host down, so **ASSERTED not measured** — retry before concluding. The question stays: does the Irish rateable-property register carry a **use category**, where the UK's NNDR did not? |
-| **Singapore** 🇸🇬 | `api-production.data.gov.sg` answers, but its search is loose — a query for *food establishment* returned historical rainfall. Needs a proper query with a control before any verdict |
-| **Sevilla** 🇪🇸 | Rail is **registration-gated, not absent** — Spain's National Access Point answers 401. Business leg needs its own Spanish source, and **Madrid's result raises that prior sharply** |
-| **Zurich** 🇨🇭 | **Food confirmed** — `Gastwirtschaftsbetriebe`, premises-level with a **GeoJSON** endpoint. Retail and Personal services not found; `Ladenfläche` returns nothing. A one-bucket city unless a second layer exists |
+| **Prague** 🇨🇿 ↑ | **`rzp.cz`, the *živnostenský rejstřík* (TRADE-licence register), is live** — the right shape, since Czech trade licences are issued per premises. Not ARES, which is the company register. **Best D lead after Copenhagen** |
+| **Dublin** 🇮🇪 | `data.gov.ie` lists a **Valuation Office API**, but `api.valoff.ie` and `www.valoff.ie` both returned **000 across two attempts** — host down, so ASSERTED not measured. Question: does the Irish rateable register carry a **use category**, where the UK's NNDR did not? |
+| **Zurich** 🇨🇭 | **Food confirmed** — `Gastwirtschaftsbetriebe`, premises-level, **GeoJSON**. No second bucket found; the national STATENT is aggregate |
+| **Singapore** 🇸🇬 | API answers but its search is loose (*food establishment* → rainfall). Needs one controlled query. Suspected registered-office shaped |
 
-#### D3 — MEASURED NEGATIVE, move to DISCARD (5 cities)
+#### D-b — rail ANSWERED, the business leg is the blocker (10)
 
-Each has a working nonsense control behind it, so these are findings rather
-than absences.
+Rail screened via OSM 2026-09-22. The `name`/`colour` rates are the invariant
+that matters; **relation counts are upper bounds** — see the construction-filter
+note below.
 
-| City | Evidence |
+| City | Rail (OSM) | Business leg |
+|---|---|---|
+| **Hong Kong** 🇭🇰 | **126 rel**, 125 named, 117 coloured | **MEASURED NEGATIVE** on `data.gov.hk` — statistics tables only. Route left: **FEHD's licensed food premises list** (a department, not a portal) |
+| **Santiago** 🇨🇱 | **30 rel**, all named + coloured, L1–L6 + L4A | **MEASURED NEGATIVE** on `datos.gob.cl` — `patentes comerciales` returns nothing at all. Municipal portals remain |
+| **Rio de Janeiro** 🇧🇷 | **20 rel**, all named + coloured | Known: **CNPJ, no coordinates** → geocoding at São Paulo's scale |
+| **Kuala Lumpur** 🇲🇾 | **14 rel**, all named + coloured | `data.gov.my` live but wrong endpoint; SSM is company-shaped |
+| **Jakarta** 🇮🇩 | **9 operating** of 11 — the 2 `TB` relations are the **proposed** MRT East-West Line | `satudata.jakarta.go.id` live; stack unidentified |
+| **Medellín** 🇨🇴 | 6 rel, all named, **only 2 coloured** — colours would need assigning by hand | ArcGIS stack — a shape this project handles |
+| **Tel Aviv** 🇮🇱 | 6 rel — **but Green and Purple are under construction and OSM does not mark them**, so realistically **1** | `data.gov.il/api` 14 bytes; city portal **HTTP 472**, the documented IP refusal |
+| **Hyderabad** 🇮🇳 | 6 rel, all named + coloured | India's trade licences are municipal; `data.telangana.gov.in` dead |
+| **Lima** 🇵🇪 | 4 rel, all named + coloured | `www.datosabiertos.gob.pe` live, wrong endpoint |
+| **Kochi** 🇮🇳 | 2 rel, named + coloured | Kerala LSG live (139 KB) |
+
+#### D-c — genuinely UNREACHED, no finding either way (6)
+
+**Tallinn** 🇪🇪 *(ariregister's fields are company-shaped — suggestive, unmeasured)* ·
+**Stockholm** 🇸🇪 · **Budapest** 🇭🇺 *(both `adatportal.budapest.hu` and `opendata.budapest.hu` resolve nowhere)* ·
+**Zagreb** 🇭🇷 · **Bucharest** 🇷🇴 ·
+**Sofia** 🇧🇬 *(the 403 is a **stock Apache page**, not an IP block — so the browser is worth trying, a cheaper next step than it had)*
+
+#### D-d — one cheap gate (1)
+
+**Sevilla** 🇪🇸 — rail is **registration-gated, not absent**: Spain's National
+Access Point answers **401**. The WMATA shape, a free account. Its business leg
+still needs its own Spanish source.
+
+### DISCARDED — 14 cities, each naming its evidence
+
+| City | Why |
 |---|---|
-| **Berlin** 🇩🇪 | CKAN is on `datenregister.berlin.de`. `Gewerbe` → broadband coverage and electricity load profiles; **`Gaststätten` → 0**; `Betriebe` → swimming pools and parliamentary papers |
-| **Hamburg** 🇩🇪 | Real CKAN is **`suche.transparenz.hamburg.de`** (9,145 datasets, control 0). `Gewerberegister` → **7 hits, all irrelevant**; `Gewerbe` and `Gaststätten` → building-permit **PDFs**; `Einzelhandel` → GML/OAF **planning polygons**, not premises; `Betriebe und Arbeitsstätten` → XLSX **aggregate** |
-| **Naples** 🇮🇹 | Only commercial dataset is *Apertura e cessazione attività commerciali* **"per procedimento e Municipalità"** — the aggregate trap |
-| **Messina** 🇮🇹 | SCIA and DIA ship GeoJSON but are business-*start notifications* — a **flow, not a stock** |
-| **Helsinki** 🇫🇮 | Addresses are fine (89.8%) but composition is **53% real estate, 4.8% retail** |
+| **Berlin** 🇩🇪 ↓ **new** | CKAN on `datenregister.berlin.de`; **`Gaststätten` → 0**; the Gewerberegister is not open data |
+| **Hamburg** 🇩🇪 ↓ **new** | Real CKAN is `suche.transparenz.hamburg.de` (9,145 datasets); `Gewerberegister` → 7 irrelevant hits; building-permit PDFs and planning polygons |
+| **Naples** 🇮🇹 ↓ **new** | Only commercial dataset is **"per procedimento e Municipalità"** — aggregate |
+| **Messina** 🇮🇹 ↓ **new** | SCIA/DIA ship GeoJSON but are business-*start notifications* — a flow, not a stock |
+| **Helsinki** 🇫🇮 ↓ **new** | Addresses fine (89.8%) but composition is **53% real estate, 4.8% retail** |
+| **Bogotá** 🇨🇴 ↓ **new** | **Fails on rail** — one unnamed-ref, zero-colour relation; its only mass transit is BRT |
+| **Vienna** 🇦🇹 | GISA strips the street address by design |
+| **Amsterdam / Rotterdam** 🇳🇱 | Register is aggregate |
+| **Athens** 🇬🇷 | Sector-only |
+| **Lisbon** 🇵🇹 | Specific negative |
+| **Poznań** 🇵🇱 | Specific negative |
+| **Riga** 🇱🇻 | Addressed but unclassified |
+| **Bratislava** 🇸🇰 | No activity classification at all |
+| **Cairo** 🇪🇬 | No open-data infrastructure |
 
-> **GERMANY IS NOW A COUNTRY-LEVEL NEGATIVE**, on two cities measured
-> independently at two different portal hosts. The Gewerberegister exists in
-> every German municipality — it is simply **not published as open data**. That
-> retires "Germany: working route, unprobed register" for good, and it is the
-> correct way to reach a country-level ruling: *two cities measured*, not one
-> city asserted onto a region.
+Plus the no-urban-rail set (Winnipeg, Hamilton, Québec City, Halifax,
+Mississauga, Ottawa, ~30 single-feed countries) and access-not-data (Russia,
+Ukraine).
 
-#### D4 — still genuinely UNREACHED (7 cities)
+**GERMANY is a country-level negative**, on two cities measured independently at
+two different portal hosts. **A row reading "not reached", "unprobed" or a
+regional pattern is not a discard** — that rule went into `add-country` after
+eleven cities were found sitting here on exactly those grounds.
 
-**No finding either way**, and the reason is my hosts rather than their data.
-These stay exactly where they were.
+#### D4 — the corrected-target re-probe
 
-| City | What happened |
-|---|---|
-| **Prague** 🇨🇿 | `opendata.praha.eu` serves HTML at its CKAN path; `api.golemio.cz` 404; ARES v3 returns an SPA shell |
-| **Tallinn** 🇪🇪 | `ariregister` open data downloads exist, but the documented fields are **Registry code, Legal form, VAT number, Status, Address** — **company-register shaped**. Suggestive of a registered-office failure, not yet measured |
-| **Stockholm** 🇸🇪 | `dataportalen.stockholm.se` live but not CKAN; `dataportal.se` search API 400s |
-| **Budapest** 🇭🇺 | `adatportal.budapest.hu` and `opendata.budapest.hu` both resolve nowhere |
-| **Zagreb** 🇭🇷 | `data.gov.hr` returns a 1.3 KB SPA shell at its API path |
-| **Bucharest** 🇷🇴 | `data.gov.ro` resolves nowhere on http or https |
-| **Sofia** 🇧🇬 | `data.egov.bg` returns **403** again — consistent across sessions, so plausibly an IP or region refusal rather than a bad host |
+**D4 re-probed 2026-09-22 at the register each country actually keeps**, rather
+than at a guessed open-data portal — which is where the previous pass failed.
+
+| Country | Corrected target | Result |
+|---|---|---|
+| **Czechia** | **`rzp.cz`** — the *živnostenský rejstřík* (**trade-licence** register), not ARES the company register | **LIVE.** This is the right *shape*: Czech trade licences are issued per premises. The most promising D4 lead after Denmark. `api.golemio.cz` needs a key (401); `opendata.praha.eu` still serves HTML at its CKAN path |
+| **Bulgaria** | `data.egov.bg`, body read rather than just the code | **403 is a plain Apache "Forbidden"** — no IP named, no Cloudflare Ray ID, no WAF marker |
+| **Hungary** | `nyilvantarto.hu` | Live (3.1 KB). `data.gov.hu` resolves nowhere |
+| **Croatia** | `pretrazivac-obrta.gov.hr` (obrtni registar) | Live but a 244-byte SPA shell. `opendata.zagreb.hr` dead |
+| **Sweden** | `dataportal.se/api/datasets` | 404 — still the wrong path |
+| **Romania** | `portal.onrc.ro` | Resolves nowhere |
+| **Estonia** | `ariregister` `/en/open-data` | 404 — the working path is `/en/downloading-open-data`, already read: fields are **Registry code, Legal form, VAT number, Status, Address**, i.e. company-shaped |
+
+> **CORRECTION — Bulgaria was lumped with the IP-refused hosts and should not
+> have been.** This file's own rule is that an IP-level refusal **names your
+> address or shows a WAF request id**, the way `data.go.th` and
+> `opendata.tel-aviv.gov.il` both printed `50.47.238.226` back. Bulgaria's 403
+> does neither: it is a stock Apache `403 Forbidden` page, 199 bytes, which is
+> the **client-signature** case — exactly the one where *the browser is worth
+> trying*. Untested in a browser, so Sofia stays open with a cheaper next step
+> than it had. Two sessions recorded "403, consistent, plausibly IP" without
+> reading the 199 bytes.
 
 #### D5 — rail/GIS group: REACHABILITY ONLY, no layer probed (11 cities)
 
@@ -506,6 +543,119 @@ Two of these carry known business legs already, so only rail is open:
 **Rio** (Brazil, CNPJ — no coordinates, so a geocoding leg) and **Tel Aviv**
 (Israel's register, previously IP-refused).
 
+#### D5 RAIL SCREENED VIA OSM, 2026-09-22 — all 11, and the method transfers
+
+Rather than hunt eleven mapping-agency portals for a layer, the rail question
+was put to **OSM**, the route CDMX validated at 195/195 stops exact. Route
+relations per city, all four urban modes, control-free because an empty result
+is unambiguous:
+
+| City | Relations | named | colour | Modes | Refs |
+|---|---|---|---|---|---|
+| **Hong Kong** 🇭🇰 | **126** | 125 | 117 | subway 82, light_rail 31, tram 12, monorail 1 | 1–14 … |
+| **Santiago** 🇨🇱 | **30** | 30 | 30 | subway 30 | L1 L2 L3 L4 L4A L5 L6 |
+| **Rio de Janeiro** 🇧🇷 | **20** | 20 | 20 | subway 6, light_rail 2, tram 12 | 1 2 3 4, ESFECO |
+| **Kuala Lumpur** 🇲🇾 | **14** | 14 | 14 | light_rail 8, subway 4, monorail 2 | AG KJ MR SP … |
+| **Jakarta** 🇮🇩 | **11** | 11 | 10 | light_rail 6, subway 4, tram 1 | BK CB LRT M TB |
+| **Medellín** 🇨🇴 | 6 | 6 | **2** | subway 4, tram 2 | A B T-A |
+| **Tel Aviv** 🇮🇱 | 6 | 6 | 6 | light_rail 6 | R1 R2 R3 |
+| **Hyderabad** 🇮🇳 | 6 | 6 | 6 | subway 6 | 1 2 3 |
+| **Lima** 🇵🇪 | 4 | 4 | 4 | subway 4 | L1 L2 |
+| **Kochi** 🇮🇳 | 2 | 2 | 2 | subway 2 | I |
+| **Bogotá** 🇨🇴 | **1** | 1 | **0** | subway 1 | *(none)* |
+
+> **THESE ARE UPPER BOUNDS, NOT OPERATING-LINE COUNTS** — and the filter that
+> was supposed to fix that only half works. See "The construction filter" below.
+> Treat every row as "at most this many".
+
+**What the screen does settle**, because these are robust to the caveat:
+
+- **Hong Kong, Santiago, Kuala Lumpur and Rio have large, mature, well-tagged
+  systems** — near-100% `name` and `colour`, which is the invariant that
+  matters. Hong Kong's 126 relations and Santiago's 30 are not construction
+  artefacts at that scale.
+- **Bogotá fails on rail** and can leave D5 — one unnamed relation, no colour,
+  and its only mass transit is BRT.
+- **Medellín is the one with a tagging gap**: 6 relations, all named, but only
+  **2 carry a colour**. This project draws every line with a legend entry, so
+  Medellín would need colours assigned by hand rather than taken from source —
+  the opposite of CDMX, where the real livery came free.
+
+**So D5's rail leg is largely answered and the business leg is now the
+binding question for all of them** — which is where the next pass should go,
+not back to the mapping agencies.
+
+#### The construction filter — RAN, and its failure mode is the finding
+
+Ran against the four suspect cities. **It flagged unbuilt routes in one of
+four, and returned zero in the other three — including two where unbuilt lines
+are known to exist.**
+
+| City | Total | Flagged | Result |
+|---|---|---|---|
+| **Jakarta** 🇮🇩 | 11 | **2** | Both `TB`, *"East-West Line (Tomang → Medan Satria)"*, tagged **`proposed`**. **9 operating**, refs `BK` `CB` `LRT` `M` |
+| **Tel Aviv** 🇮🇱 | 6 | **0** | `R1 R2 R3` all tagged as ordinary `light_rail` |
+| **Bogotá** 🇨🇴 | 1 | **0** | Its one relation is not construction-tagged either |
+| **Rio** 🇧🇷 | 20 | **0** | refs `1 2 3 4 ESFECO`, none flagged |
+
+> **A filter returning zero does not mean "nothing to flag" — it can mean "this
+> convention is not used here", and the two are indistinguishable from the
+> result alone.** Tel Aviv is the proof: its Red Line opened in 2023 and the
+> Green and Purple lines are **still under construction**, yet OSM carries all
+> three as plain `light_rail` with no status marker. The filter passed them
+> silently. Same for Bogotá, whose Línea 1 is years from opening.
+>
+> So **Tel Aviv and Bogotá keep their upper-bound label** despite a clean
+> filter run. Rio's zero is probably honest — Lines 1, 2 and 4 plus the VLT and
+> the Santa Teresa tram is a plausible 20 — but it is *unconfirmed* for exactly
+> the same reason. Resolving these needs a different signal: whether each
+> route's member **ways** are `railway=construction` rather than `railway=subway`,
+> which is a heavier query, or simply real-world knowledge.
+
+**One guess corrected by running it:** I had recorded Jakarta's `TB` as
+"plausibly TransJakarta, i.e. BRT". It is not — it is the **proposed MRT
+East-West Line**. Right conclusion (exclude it), wrong reason, and only the
+probe distinguished them.
+
+**Two transport lessons, both mine:**
+
+- **`overpass-api.de` returns HTTP 406 to every request from here** — not busy,
+  *rejecting*. It fronts on `lambert.openstreetmap.de`, and something in that
+  proxy dislikes this client. I read the failures as "mirrors busy" twice while
+  `/api/status` reported free slots on both hosts. **kumi.systems has done all
+  the work in this session**, and the fix was mirror order, not waiting.
+  `overpass.osm.jp` is worse: its TLS certificate is **expired**.
+- **`PYTHONIOENCODING=utf-8` is not optional on this machine.** Jakarta's result
+  arrived correctly and then crashed the print on the `→` in a route name, under
+  cp1252. Fourth time this session.
+
+#### D5 BUSINESS LEG — first pass on all eleven, 2026-09-22
+
+**No D5 city has a confirmed premises-level register yet.** Two produced
+measured negatives; the rest have live portals on the wrong endpoint, which is
+a fact about the probe, not the data. Recorded so the next pass starts in the
+right place per city rather than re-deriving it.
+
+| City | Portal state | Verdict |
+|---|---|---|
+| **Hong Kong** 🇭🇰 | `data.gov.hk` **is CKAN, control 0** | **MEASURED NEGATIVE on this portal.** `restaurant` returns *Restaurant Receipts and Purchases — Table 625-68003*, `licence` returns *Municipal services licences — Table 990-92201*, `shop` returns public housing estates. All **statistics tables**, the aggregate trap. Note this does not even support the earlier "food-only ceiling" claim — there is no food *premises* register here either. **Unprobed route: FEHD's licensed food premises list**, which is where HK's actual register lives |
+| **Santiago** 🇨🇱 | `datos.gob.cl` **is CKAN, control 0** | **MEASURED NEGATIVE so far.** `establecimientos` (115) returns health and educational establishments; **`patentes comerciales` — the correct Chilean term for a commercial licence — returns no answer at all.** Municipal portals still the route, and `datos.santiago.cl` resolves nowhere |
+| **Bogotá** 🇨🇴 | CKAN, control 0 | `establecimientos` 88 — pharmacies, tourist lodging, universities. One lead: ***Dinámica empresarial. Bogotá D.C.*** in DXF/ESRI REST/GPKG. **Moot: Bogotá fails on rail** |
+| **Kuala Lumpur** 🇲🇾 | `data.gov.my` live, 150 KB, **not CKAN** | Wrong endpoint. SSM (the companies commission) is live at 422 KB and is the likely register — company-shaped, so expect the registered-office failure |
+| **Rio** 🇧🇷 | `data.rio` live, 96 KB, **not CKAN** | Brazil's leg is already known: **CNPJ, premises-level, no coordinates** → geocoding at a scale past Toronto's |
+| **Jakarta** 🇮🇩 | `satudata.jakarta.go.id` live (19 KB); `data.jakarta.go.id` **dead** | Stack unidentified |
+| **Lima** 🇵🇪 | `www.datosabiertos.gob.pe` live, 88 KB, **not CKAN at that path** | The `www.` lesson already applied; now needs the catalogue endpoint |
+| **Medellín** 🇨🇴 | `medellin.gov.co/mapas` → **ArcGIS** | ArcGIS REST is a known shape for this project; cheap next probe |
+| **Hyderabad / Kochi** 🇮🇳 | `data.gov.in` live but 1.2 MB and **not CKAN at that path**; `data.telangana.gov.in` **dead**; Kerala LSG live (139 KB) | India's trade-licence registers are municipal, so the state/city portals are the route |
+| **Tel Aviv** 🇮🇱 | `data.gov.il/api` returns **14 bytes**; `opendata.tel-aviv.gov.il` returns **HTTP 472** | 472 is the same non-standard status recorded earlier when that host **printed our IP back** — consistent with the IP-level refusal already documented. **The browser will not help** |
+
+**The pattern worth carrying:** two CKAN portals answered cleanly with working
+controls and both returned **statistics tables rather than registers**. That is
+the aggregate trap appearing at *national* portals specifically — the same
+reason `datos.gob.cl` and `data.gov.hk` look rich and yield nothing. The
+city-first lesson applies again, and for Hong Kong the named next step (FEHD)
+is a *department*, not a portal.
+
 #### Band D after ranking
 
 | | Cities |
@@ -521,27 +671,6 @@ strike rate, and it is the expected one — Bands A to C already hold everything
 that screened well. The value of the pass was mostly in *closing* things:
 Germany retired on evidence, and five cities moved from "unprobed" to
 "measured negative", which is what stops them being re-probed a third time.
-
-### DISCARDED — 8 cities, each naming its evidence
-
-| City | Why |
-|---|---|
-| **Vienna** 🇦🇹 | GISA strips the street address by design |
-| **Amsterdam / Rotterdam** 🇳🇱 | Register is aggregate |
-| **Athens** 🇬🇷 | Sector-only |
-| **Lisbon** 🇵🇹 | Specific negative |
-| **Poznań** 🇵🇱 | Specific negative |
-| **Riga** 🇱🇻 | Addressed but unclassified |
-| **Bratislava** 🇸🇰 | No activity classification at all |
-| **Cairo** 🇪🇬 | No open-data infrastructure |
-
-Plus the no-urban-rail set (Winnipeg, Hamilton, Québec City, Halifax,
-Mississauga, Ottawa, and ~30 single-feed countries) and the
-access-not-data set (Russia, Ukraine).
-
-**A row whose reason is "not reached", "unprobed" or a regional pattern is not a
-discard** — that rule was added to `add-country` after eleven cities were found
-sitting here on exactly those grounds.
 
 ### THE NINE-ITEM SWEEP, run 2026-09-22 — three resolved, three negative, three partial
 
@@ -2787,3 +2916,95 @@ were mine.
 The second is the more useful lesson: **"has good public transit" and "publishes
 a feed this project can read" are independent properties**, and conflating them
 would have pointed the whole effort at the wrong continent.
+
+
+---
+
+## Tier 5 closed by browser navigation - 2026-09-22
+
+Every probe below used the same two moves: **navigate the site in a real
+browser before concluding anything about it**, then **enumerate providers
+rather than search keywords**. Four countries had been recorded as *"needs the
+browser"*; all four resolved, and the browser's answer differed from the
+guessed one every time.
+
+### 🇨🇴 Colombia - MEASURED NEGATIVE
+
+| Probe | Result |
+|---|---|
+| `geomedellin-m-medellin.opendata.arcgis.com` in the browser | **"Please sign in. This site requires credentials to access."** The Hub is **private** - hence the earlier `data.json` 404 and `api/search/v1` 401. No account will be created |
+| `www.datos.gov.co` (Socrata) control | `zzqqxx_nonsense_zzqq` -> **0 results**. The search filters; result lists are trustworthy |
+| Cámara de Comercio de Medellín para Antioquia - the register-holder | **9 distinct datasets**, every commercial one an aggregate. `pb3w-3vmc` *Estructura empresarial Medellín según comunas y actividad económica*: **2,349 rows**, the 16 comunas as **columns**, CIIU as rows. CC BY-**SA** 4.0 |
+| RUES `nb3d-v3n7`, *Establecimientos - Agencias - Sucursales* (Confecámaras) | **6,369,877 rows.** Right entity - `categoria_matricula = ESTABLECIMIENTO DE COMERCIO`. **25 columns, none of them an address, a municipality or a city.** Finest geography is `camara_comercio`, a multi-province chamber region. Also carries owner `CEDULA DE CIUDADANIA` numbers |
+| Alcaldía de Medellín as a publisher | **No business-licence dataset** on the national portal, where Ley 1712 requires publication |
+
+### 🇵🇪 Peru - MEASURED NEGATIVE on coverage
+
+The browser identified the platform in one load: the site serves
+`/profiles/dkan/*`, so it is **DKAN**, which speaks CKAN at `/api/3/action/*`.
+Earlier passes had tried `/api/action/*` and concluded "Drupal, not CKAN".
+`package_search` 404s but **`package_list` returns 4,687 dataset names** - the
+enumeration primitive, and local filtering sidesteps the silent-ignore question
+entirely.
+
+- **203** commercial-looking names; **78** mention *licencia* or *funcionamiento*
+- Licence: **ODC-BY** (`http://opendefinition.org/licenses/odc-by/`) - attribution only, no share-alike
+- Resources are **direct CSVs** under `sites/default/files/`, no account
+
+Coverage against Línea 1's nine districts:
+
+| District | Rows | Address | Note |
+|---|---|---|---|
+| La Victoria | **135,982** | **100%** | Real register. `Giros` 54.3%, licence type, status. Gamarra's garment trade dominates the activity mix |
+| Cercado (Mun. Metropolitana de Lima) | 5,613 | **none** | Administrative columns only - no address, no trade name. Found only by opening a dataset whose slug names no municipality |
+| San Borja | 20 x 3 cols | - | A **metadata sheet**, not data |
+| Surco, S.J. Miraflores, V.M. Triunfo, Villa El Salvador, El Agustino, S.J. Lurigancho | - | - | Nothing |
+
+Off-line but published: **Chorrillos** 9,767 rows with `LOCAL_DIRECCION` 100%
+populated; **Ate** 1,546 rows with no address column and a `NroDNI` field.
+
+Two parsing notes for any future attempt: the CSVs are **wrapped per record in
+quotes with `;;` terminators**, needing a two-stage parse (split on `;`, take
+field 0, then parse as CSV); and `Nombre` carries **sole traders' personal
+names**, making `check_personal_exposure.py` load-bearing rather than a
+formality.
+
+### 🇮🇩 Indonesia - MEASURED NEGATIVE
+
+`satudata.jakarta.go.id` is a JS app whose API was read straight off its own
+network panel: **`/backend/api/v2/satudata/*`** (`search-v2`,
+`searchautocomplete`, `detail`, `get-komponen-dataset/<hash>`), plus a fully
+parameterised search URL carrying `q`, `organisasi`, `status` and `page_no`.
+
+| Probe | Result |
+|---|---|
+| Control | `q=zzqqxx` -> **0 datasets**. The search filters |
+| Catalogue size | **5,267 datasets** |
+| `q=izin usaha` | 5 hits, all **SIUP issuance logs from 2017-2018**, and **three of five marked `Terbatas`** (restricted) |
+| `q=restoran` | 7 hits - *Jumlah Restoran per Kelurahan* (counts per sub-district), tax realisations, and a 2014 table. All aggregate |
+| `q=izin` | 100 hits |
+| **The live candidate** - *Daftar Perusahaan/Perizinan Usaha ... Online Single Submission (OSS)*, DPMPTSP, `Sifat Data: Terbuka`, metadata updated 25 May 2026 | **53,827 rows**, real street addresses |
+
+The OSS register's schema, confirmed against the portal's own component list
+(**9 of 9**) rather than the rendered table:
+
+`periode_data` - `wilayah` - `kecamatan` - `kelurahan` - `nama_perusahaan` -
+`alamat` - `nib` - `uraian_jenis_perusahaan` - `skala_perusahaan`
+
+`uraian_jenis_perusahaan` is *"Kategori perusahaan"* - the **legal form**
+(KOPERASI, PT) - and `skala_perusahaan` is *"Besaran usaha"* - the **size**
+(USAHA MIKRO, USAHA KECIL). **Nothing records what the business sells**, so
+`filter_to_storefront()` has nothing to act on. Scale is a second concern:
+53,827 for a province of 10.6 million against Seoul's 197,276 for 9.4 million,
+with `periode_data = 2025` and the visible rows dominated by cooperatives.
+
+### 🇮🇱 Israel - unreachable, unchanged
+
+HTTP 472 with our own IP echoed back is an IP-level refusal. The browser shares
+the address, so it is not a route.
+
+### What this closes
+
+**Tier 5: eight countries, seven firm negatives, one unreachable, no
+survivors.** Hong Kong's department (FEHD) remains the only open thread - the
+register exists and is queryable, with no bulk route found.
