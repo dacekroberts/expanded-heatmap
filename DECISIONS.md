@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**126 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**127 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Madrid's zero-coordinate question settled, and the rate was never the answer](#2026-09-22---madrids-zero-coordinate-question-settled-and-the-rate-was-never-the-answer)
 - [Spain profiled: Madrid is ready, both licences read, and one clause raised rather than resolved](#2026-09-22---spain-profiled-madrid-is-ready-both-licences-read-and-one-clause-raised-rather-than-resolved)
 - [A leaf region labels only its own cities, and the one accepted overlap is written down](#2026-09-22---a-leaf-region-labels-only-its-own-cities-and-the-one-accepted-overlap-is-written-down)
 - [Two merges, the macro-label check that was missing, and two fixes rejected by measurement](#2026-09-22---two-merges-the-macro-label-check-that-was-missing-and-two-fixes-rejected-by-measurement)
@@ -162,6 +163,58 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Madrid's zero-coordinate question settled, and the rate was never the answer
+
+- **Measured on the full 124,987,034-byte download: 9.21%, where the two
+  competing figures were 19.99% and 5.85%.** Both were measuring something
+  other than what a density number depends on. All `Abierto` rows are 21.48%
+  zero (34,316 of 159,787); the three storefront sections are 14.79%; and the
+  three sections with `SERVICIOS DE ALOJAMIENTO` removed are **7,471 of 81,142
+  = 9.21%**, leaving 73,671 usable rows and **61,466 usable DISTINCT premises**.
+  Scaffolded `pipeline/madrid/` and `pipeline/taxonomies/madrid_epigrafe.py`
+  around that, with Spain added to `cities.py` as a new leaf region.
+
+- **The distribution was the deliverable, and it explained the disagreement.**
+  The zeros are not spread across the register; they concentrate in activities
+  this project does not map - VIVIENDAS TURÍSTICAS 85.9%, HOSTALES 74.7%,
+  ALBERGUES 68.5%, office and legal activities 45-55% - against FARMACIA 1.2%
+  and TALLER DE REPARACIÓN 0.7%. A sample of the first 4,000 rows in `_id`
+  order was always going to land somewhere arbitrary on that spread, which is
+  the skill's "n=1 is not a measurement" rule showing up as n=4,000.
+
+- **`HOSTELERÍA` is the 72-versus-722 trap in Spanish, and it carried most of
+  the problem.** The section splits into `SERVICIOS DE COMIDAS Y BEBIDAS`
+  (20,345 rows, 10.6% zero) and `SERVICIOS DE ALOJAMIENTO` (7,576 rows, **74.6%
+  zero**). Accommodation is not food service and leaves the bucket on scope
+  grounds regardless - the same correction the Mexico build made after counting
+  SCIAN `72` and sweeping in 999 hotels - and excluding it removes 5,649 of the
+  remaining zeros. Recorded in `madrid_epigrafe.py` as an exclusion with its
+  reason rather than as a filter someone later reads as arbitrary.
+
+- **The district bias collapses with accommodation, which is why it looked
+  alarming.** Raw, CENTRO is 46.1% zero against Villaverde's 4.6% - a 10x
+  spread over precisely the downtown a transit-density map is about, and reason
+  enough to consider a geocoding leg. Once accommodation is out the spread is
+  Barajas 19.4% to Villaverde 2.9%. The raw figure was largely tourist flats and
+  hostels clustered in the centre.
+
+- **This is NOT the Los Angeles case, and the difference decides whether a
+  geocoding leg is needed.** LA's bad coordinates were biased TOWARD the rows
+  the map wanted - 22% of post-2020 registrations against ~1% of older ones - so
+  dropping them would have under-counted new openings and the rows had to be
+  recovered. Madrid's are biased AWAY from them. No geocoding leg; CartoCiudad
+  stays unprobed and ASSERTED.
+
+- **Corrected this project's own "Madrid is 2.2x Barcelona" claim, which
+  compared incomparable quantities.** It divides 148,814 - all open sections,
+  joined rows, zeros included - by Barcelona's 68,024 ground-floor premises
+  census. On storefront-filtered mappable premises Madrid is 61,466, which is
+  COMPARABLE to Barcelona rather than double it. Whether Barcelona's 68,024 is
+  itself storefront-filtered is not established, so the two cities' counts
+  should not be compared at all until it is. The same shape as the Paris
+  finding earlier today, where 148,633 landing on Madrid's 148,814 read as a
+  pass and was magnitude rather than shape.
 
 ### 2026-09-22 - Spain profiled: Madrid is ready, both licences read, and one clause raised rather than resolved
 

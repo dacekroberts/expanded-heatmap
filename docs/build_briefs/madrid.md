@@ -100,6 +100,58 @@ it on the full download before quoting any density number** — at 20% this
 moves Madrid's headline by a fifth, so the check has to run before the number
 is published, not after.
 
+> ### ✅ SETTLED 2026-09-22 on the full 124,987,034-byte download — and neither figure was the one that matters
+>
+> | Scope | Rows | Zero | Rate |
+> |---|---|---|---|
+> | All `Abierto` | 159,787 | 34,316 | **21.48%** |
+> | The three storefront sections | 88,718 | 13,120 | **14.79%** |
+> | **…minus `SERVICIOS DE ALOJAMIENTO`** | **81,142** | **7,471** | **9.21%** |
+>
+> → **73,671 usable rows, 61,466 usable DISTINCT premises.**
+>
+> **THE RATE WAS NEVER THE DELIVERABLE; THE DISTRIBUTION WAS**, and the
+> distribution turned out to explain the disagreement. The zeros are not spread
+> across the register — they concentrate in activities this project does not
+> map:
+>
+> | Activity | Zero rate |
+> |---|---|
+> | VIVIENDAS TURÍSTICAS | **85.9%** |
+> | HOSTALES | 74.7% |
+> | ALBERGUES JUVENILES… | 68.5% |
+> | ACTIVIDADES ADMINISTRATIVAS Y AUXILIARES DE OFICINA | 55.0% |
+> | ACTIVIDADES JURIDICAS | 45.0% |
+> | *vs* FARMACIA | **1.2%** |
+> | *vs* TALLER DE REPARACIÓN (chapa y pintura) | **0.7%** |
+>
+> **`HOSTELERÍA` is the `72`-versus-`722` trap in Spanish.** It splits into
+> `SERVICIOS DE COMIDAS Y BEBIDAS` (20,345 rows, **10.6%** zero) and
+> `SERVICIOS DE ALOJAMIENTO` (7,576 rows, **74.6%** zero). Accommodation is not
+> food service and must be excluded from the bucket on scope grounds alone —
+> the same correction the Mexico build made when counting `72` instead of `722`
+> swept in hotels. Excluding it removes 5,649 of the 7,471 remaining zeros.
+>
+> The district bias collapses with it. Raw, CENTRO is **46.1%** against
+> Villaverde's **4.6%** — a 10× spread that would have gutted precisely the
+> downtown a transit-density map is about. Once accommodation is out, the
+> spread is Barajas **19.4%** to Villaverde **2.9%**, because the raw figure
+> was largely tourist flats and hostels clustered in the centre.
+>
+> **So the loss is real but tolerable, and it is NOT the Los Angeles case.**
+> LA's bad coordinates were biased *toward* the rows the map wanted (22% of
+> post-2020 registrations against ~1% of older ones). Madrid's are biased
+> *away* from them. No geocoding leg is needed, and CartoCiudad stays unprobed.
+>
+> **⚠ CORRECTION TO THIS BRIEF'S OWN COMPARISON.** "Madrid is 2.2× Barcelona's
+> 68,024" divides 148,814 — all open sections, joined rows, zeros included — by
+> Barcelona's ground-floor premises census. Those are not comparable
+> quantities. On storefront-filtered mappable premises Madrid is **61,466**,
+> which is *comparable to* Barcelona rather than double it. Before either
+> number is published, establish whether Barcelona's 68,024 is itself
+> storefront-filtered; until then the two cities' counts should not be compared
+> at all.
+
 Madrid is the **second** city in this project with literal `(0,0)` rows — Los
 Angeles had ~9%. Two of the three pre-geocoded registries examined at this
 depth had the defect, which is why `add-city` Step 0 asks for a bounding-box
