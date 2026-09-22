@@ -348,6 +348,28 @@ Desktop is unaffected — the label is fully visible there.
 
 ## Structure
 
+- [ ] **Move Madrid's, Mexico City's and Guadalajara's fetching out of their
+  step files** into a `fetch_*.py`, as the other fourteen cities do.
+  Demonstrated 2026-09-22: `python pipeline/drift_check.py` in a worktree with
+  no `data/<city>/raw/` **fetched over the network for all three** - a 39 MB
+  DENUE zip, a Madrid census CSV, Overpass responses and CRTM layers - and
+  then reported zero drift. Toronto, by contrast, stopped with "no
+  data/<city>/raw/ - nothing to run against", which is the correct behaviour.
+  The calls are cache-guarded, so this is invisible on a machine that already
+  has the data. **It changes what a passing drift check means:** for those
+  three it asks "does the current upstream still produce the committed output"
+  rather than "does the committed code". Build-session work - each city's
+  context is needed.
+- [ ] **Wire Toronto's `STATIONS_COLLAPSED_EXPECTED`**, or delete it. It is
+  110 and asserted nowhere, while `PLATFORMS_EXPECTED`,
+  `IN_CITY_STATIONS_EXPECTED` and `SUBWAY_ONLY_STATIONS_EXPECTED` are all
+  checked. The per-line check in `pipeline/stations.py` cannot cover it: those
+  counts sum to 117 because an interchange counts on each of its lines.
+- [ ] **Have Guadalajara's step 2 import `DENUE_STATE_COLUMN` and
+  `DENUE_MUNICIPIO_COLUMN`** from `pipeline/countries/mexico.py` instead of
+  writing `"cve_ent"` and `"municipio"` as literals, so a DENUE column rename
+  is a one-file change as the country-config pattern intends.
+
 - [x] ~~Finish the `check_stale_claims.py` category-B pass~~ - **done
   2026-09-22**, seven passes, **74 flagged counts to 35**, files scanned 39 to
   27 as dated records were recognised. Stopped at the floor rather than at

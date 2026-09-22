@@ -162,7 +162,16 @@ reader had already found and immediately found five more.
   `drift_check.py` ends by telling you to find "the latest baseline entry" in
   it - the index is how. `--check` fails if it is stale. Keep
   `docs/project_context.md` to current state, no counts.
-- **Run `python pipeline/drift_check.py` after any pipeline change.**
+- **Run `python pipeline/drift_check.py` after any pipeline change** - then
+  **`git checkout -- outputs/` if it leaves files modified but reported no
+  drift.** On Windows the regenerated files come back CRLF while the committed
+  ones are LF (`.gitattributes` sets `* text=auto eol=lf`), and Folium assigns
+  fresh random element ids on every render, so `git status` shows changed
+  `outputs/` files after a run that said "zero drift". Verified 2026-09-22:
+  three CSVs differed **only** in line endings and three `heatmap.html` files
+  showed exactly 6,062 insertions against 6,062 deletions. Committing that
+  churn would rewrite files the deployed app reads for no change at all - and
+  it is a second reason never to `git add -A`.
 - **Run `python scripts/check_deploy_imports.py` before any push that touches
   `app/`**, and **reboot the deployed app after any push that changes a module
   it imports** - `app/cities.py` changes with every city. Streamlit Cloud's

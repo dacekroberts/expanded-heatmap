@@ -227,6 +227,15 @@ STATION_STRIP_PATTERNS = (
 # exact either way, and merging on proximity rather than on a naming rule is
 # how a real adjacent pair gets destroyed.
 PLATFORMS_EXPECTED = 234
+# NOT ASSERTED ANYWHERE, unlike the three constants around it - noticed
+# 2026-09-22 by `check_stale_claims.py` category D, which reports config
+# constants no script reads. What DOES verify the collapse is
+# `pipeline/stations.py`'s per-line check against the TTC's own published
+# figures, and that is the stronger test. But it cannot cover this number:
+# the per-line counts sum to 117, not 110, because an interchange counts once
+# on each of its lines. So the total below is currently a record rather than a
+# check. Wiring it is a one-line comparison in step 1 and belongs to whoever
+# owns this city, not to a documentation sweep.
 STATIONS_COLLAPSED_EXPECTED = 110
 IN_CITY_STATIONS_EXPECTED = 108
 SUBWAY_ONLY_STATIONS_EXPECTED = 71

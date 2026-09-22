@@ -16,10 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**152 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**154 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [drift_check leaves outputs/ modified on Windows when nothing changed](#2026-09-22---drift_check-leaves-outputs-modified-on-windows-when-nothing-changed)
+- [Working the dead-constant list demonstrated, live, that drift_check is not offline for three cities](#2026-09-22---working-the-dead-constant-list-demonstrated-live-that-drift_check-is-not-offline-for-three-cities)
 - [Two probes came back clean, and the clean result is the record](#2026-09-22---two-probes-came-back-clean-and-the-clean-result-is-the-record)
 - [Sofia settled by enumerating Bulgaria's catalogue from outside the block](#2026-09-22---sofia-settled-by-enumerating-bulgarias-catalogue-from-outside-the-block)
 - [The table check that had been written inline six times, and one probe that was correctly abandoned](#2026-09-22---the-table-check-that-had-been-written-inline-six-times-and-one-probe-that-was-correctly-abandoned)
@@ -188,6 +190,93 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - drift_check leaves outputs/ modified on Windows when nothing changed
+
+- **Found while verifying the previous entry's own work.** Running
+  `pipeline/drift_check.py` for Madrid, Mexico City and Guadalajara reported
+  **zero drift**, and `git status` then showed **six modified `outputs/`
+  files**. Both statements were true, which is the trap.
+
+- **Measured rather than guessed.** The three CSVs differ **only** in line
+  endings - committed blobs are LF, regenerated files CRLF, and
+  `blob.replace(CRLF, LF) == wt.replace(CRLF, LF)` for all three. The three
+  `heatmap.html` files show exactly **6,062 insertions against 6,062
+  deletions**, the signature of Folium's fresh random element ids per render
+  plus the same line-ending change. Not one byte of content differs.
+  `git checkout -- outputs/` restored all six.
+
+- **The consequence is worth naming: committing that churn would rewrite files
+  the DEPLOYED APP READS, for no change at all.** `outputs/` is committed
+  precisely so the app never runs the pipeline, and a line-ending rewrite of
+  every heatmap is a large, meaningless diff through which a real change could
+  pass unnoticed. It is a second, independent reason never to `git add -A` -
+  the existing reason being that another session may hold uncommitted work.
+
+- **Written into `CLAUDE.md` beside the drift-check rule and into the sweep
+  skill**, because it is a hazard of the command the project tells every
+  session to run, and the one place it would otherwise be learned is a
+  confusing `git status` at the end of a long session. Same root cause as the
+  stale licence digests earlier today: `.gitattributes` normalises line endings
+  and anything computed or written before that normalisation disagrees with
+  what git stores.
+
+### 2026-09-22 - Working the dead-constant list demonstrated, live, that drift_check is not offline for three cities
+
+- **Triaged all 15 unexamined category-D constants.** Seven are documented
+  deliberate and stay, and saying so is the output: Edmonton's
+  `STALE_BOUNDARY_IDS` is "kept so the choice above reads as a decision rather
+  than an accident"; Mexico City's four `OSM_*_MEASURED` say in their own
+  comment that they are "observations of the source, not the operator's
+  figures"; Boston's `ISD_PREMISES_KEY` documents a per-source key whose
+  collapse actually happens in SQL at download; Madrid's
+  `COORD_ZERO_IS_MISSING` names a conclusion whose behaviour is real - step 2
+  drops the zeros unconditionally, verified at `step2_clean_businesses.py:148`.
+  Each is now annotated so the next reader does not re-derive it.
+
+- **Toronto's `STATIONS_COLLAPSED_EXPECTED = 110` is an assertion that was
+  written and never wired**, while its three siblings are used 10, 14 and 3
+  times. `pipeline/stations.py` does check the collapse, per line against the
+  TTC's published figures, and that is the stronger test - but it cannot cover
+  this number, because the per-line counts sum to **117**, not 110: an
+  interchange counts once on each of its lines. So the total is a record rather
+  than a check. Annotated; the one-line wiring belongs to that city's owner.
+
+- **Two national column constants are dead because the one city needing them
+  hardcodes the same strings.** `pipeline/countries/mexico.py` defines
+  `DENUE_STATE_COLUMN` and `DENUE_MUNICIPIO_COLUMN`; Guadalajara's step 2
+  writes `"cve_ent"` and `"municipio"` as literals. DENUE renaming a column
+  would be fixed in the national file while the city kept the old spelling -
+  **precisely what profiling a country once is meant to prevent.** The
+  provenance row itself was checked and is accurate: that city does scope by
+  those columns.
+
+- **A prescribed legal attribution exists in two places with no stated owner.**
+  `ATTRIBUTION_PRODUCT` in the national config is read by nothing; the string
+  INEGI actually requires is displayed from `app/components.py`'s `_NOTICES`,
+  which holds its own verbatim copy. Two copies of a prescribed attribution is
+  how a displayed notice quietly stops matching its licence, so the national
+  file now says plainly that **`_NOTICES` is the one that must be right**.
+
+- **THE HEADLINE, and it was demonstrated rather than argued.** Running
+  `python pipeline/drift_check.py` for the four affected cities in this
+  worktree: Toronto failed with "no data/<city>/raw/ - nothing to run
+  against", while **Madrid, Mexico City and Guadalajara all reported zero
+  drift** - because their steps fetched. Afterwards `data/` in this worktree
+  contained exactly those three cities and nothing else, every file written in
+  the preceding ten minutes: a 39 MB DENUE zip, a Madrid census CSV, Overpass
+  responses and CRTM layers. **The command `CLAUDE.md` tells every session to
+  run after any pipeline change went to the network.**
+
+- **And it changes what a passing drift check MEANS for those three.** A drift
+  check exists to ask "does the committed code still produce the committed
+  output". For a city that re-downloads first, it asks "does the CURRENT
+  UPSTREAM still produce the committed output" - a different question, which
+  passes today and would fail on an upstream edit that no commit here caused.
+  The earlier finding was that this would happen on a fresh clone; it happens
+  on any checkout without raw data, which is every new worktree. Handed to the
+  main session rather than fixed here: moving three cities' fetching into
+  `fetch_*.py` is build-session work needing each city's context.
 
 ### 2026-09-22 - Two probes came back clean, and the clean result is the record
 

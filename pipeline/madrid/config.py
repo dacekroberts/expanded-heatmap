@@ -196,6 +196,10 @@ COORD_Y_COLUMN = "coordenada_y_local"
 # flats (85.9%), hostales (74.7%) and offices - categories this project does
 # not map. Unlike Los Angeles the loss is biased AWAY from the mapped rows, so
 # no geocoding step is needed.
+# DESCRIPTIVE, not a switch: step 2 drops the zeros unconditionally (it
+# builds the mask inline), so setting this False would change nothing. Kept
+# because the measurement above is the valuable part and this names what it
+# concluded.
 COORD_ZERO_IS_MISSING = True
 
 # Sanity bounds for the supplied coordinates, in the SOURCE CRS (25830 metres),

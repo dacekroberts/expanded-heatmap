@@ -322,6 +322,12 @@ it needs that session's context.
 
 ## Working rules
 
+- **After running `drift_check.py`, check `git status` before committing.** On
+  Windows it leaves `outputs/` files modified even when it reports zero drift:
+  regenerated files come back CRLF against committed LF, and Folium assigns
+  fresh random element ids each render. `git checkout -- outputs/` restores
+  them. A sweep that commits that churn rewrites files the deployed app reads,
+  for no change.
 - **Sweep narrow, commit immediately.** This role has no exclusive paths, so its
   protection is a short window between reading a file and committing the
   correction. A sweep that touches nine files over two hours will meet somebody.
