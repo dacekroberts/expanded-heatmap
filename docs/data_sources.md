@@ -594,7 +594,10 @@ were ever published.
 **Not established, and flagged rather than assumed:** San Diego's municipal
 **boundary** layer sits on the same `geo.sandag.org` host but is a different
 service (`rest/directories/downloads/Municipal_Boundaries.geojson`) and its own
-terms have not been read. Its row predates this review. Do not extend the
+terms have not been read. **It is now its own row under “Still not
+established” below**, rather than a caveat inside this entry — a caveat is
+not a work item, and this one contradicted that table's own claim to list
+every unread source for half a day. Its row predates this review. Do not extend the
 parcel agreement to it by proximity — that is the Philadelphia mistake, where a
 licence on one page turned out not to govern the dataset beside it.
 
@@ -752,15 +755,33 @@ operating from a residential address is most plausible. **Flagged for
 
 | Source | Status |
 |---|---|
-| **US Census bulk geocoder** | Terms page not read. A US federal government work, used only to derive coordinates stored in this project's own outputs. Low priority, and the only item left unread.
-| **Boston "Business Inventory" (`47bd8208`)** | The one dataset on `data.boston.gov` whose `license_id` is `notspecified` rather than `odc-pddl`. Not established, and not pursued, because the source is deliberately unused (its coverage is downtown plus three corridors). **If it is ever used, the governing terms must be established first** — the portal's own "Open and Protected Data Policy" and the 2014 open-data executive order are the documents to read, not the boston.gov site footer. That is the NYC lesson: the parent site's notice covers the website, not the datasets.
+| **US Census bulk geocoder** | Terms page not read. A US federal government work, used only to derive coordinates stored in this project's own outputs. Low priority. **It was described here as "the only item left unread" until 2026-09-22**, which stopped being true the moment the row below was added — a count kept by hand in one row about the contents of its own table. |
+| **Boston "Business Inventory" (`47bd8208`)** | The one dataset on `data.boston.gov` whose `license_id` is `notspecified` rather than `odc-pddl`. Not established, and not pursued, because the source is deliberately unused (its coverage is downtown plus three corridors). **If it is ever used, the governing terms must be established first** — the portal's own "Open and Protected Data Policy" and the 2014 open-data executive order are the documents to read, not the boston.gov site footer. That is the NYC lesson: the parent site's notice covers the website, not the datasets. |
+| **San Diego municipal boundaries** (`geo.sandag.org/server/rest/directories/downloads/Municipal_Boundaries.geojson`) | Terms not read. It sits on the same host as the SanGIS tax parcels, whose End User Use Agreement WAS read on 2026-09-22, but it is a **different service** and the agreement is deliberately not extended to it by proximity — that is the Philadelphia mistake, where a licence on one page turned out not to govern the dataset beside it. Its row in the boundary table predates the licence review entirely: it is this project's very first city, and the layer has been in use since 2026-09-18. **Higher priority than the Census geocoder**, because this one scopes a published map rather than deriving a coordinate. Raised 2026-09-22 by the SanGIS reading, and listed here so it is an open item rather than a sentence buried in another source's entry. |
 | **Miami-Dade Local Business Tax, its municipal boundary layer, and Miami-Dade Transit's GTFS** | All three carry a disclaimer and no grant. The ArcGIS items' `licenseInfo` is purely about ACCURACY — “Miami-Dade County provides this data for use 'as is'… not accurate to surveying or engineering standards… assumes no responsibility for errors or omissions” — and says nothing whatever about reuse, redistribution, modification or attribution. The GTFS has no `feed_info.txt`, and no separate MDT developer terms were located. **ESTABLISHED 2026-09-21, by reading rather than asking — and this row's earlier claim that no document existed was wrong.** One does: the Open Data Hub's own designated Terms of Use at `https://opendata.miamidade.gov/pages/terms-of-use`. Its entire substance is the accuracy disclaimer quoted above. The county-wide "Liability Disclaimer and User Agreement" at `miamidade.gov/global/disclaimer/disclaimer.page` was read too, and is liability terms only — no copyright claim, no reuse restriction. So three County documents now say nothing whatever about reuse, redistribution, modification or attribution, which is a **definitive absence of restriction from the County's own authoritative pages** rather than an unexamined gap. No enquiry to the County is needed. The affirmative signals stand: all three sources are published by the County's own ITD Geospatial group on its public open-data portal, in formats meant for reuse. |
 
 Note the shape of this. **The business registries are mostly permissive and the
 transit feeds are mostly not** — and the two are inverted within Los Angeles,
 whose business data is CC0 while its GTFS terms are the most restrictive of
-anything here. New York contributes four of the eight registries and is the
-only source whose reuse position could not be established at all.
+anything here. Canada inverts it again: there the registries almost all
+prescribe their own sentence and the feeds mostly ride on the same municipal
+licence.
+
+**The sentence that used to end this paragraph is gone, and it is the third
+hand-kept count in this file to turn out wrong.** It read "New York contributes
+four of the eight registries and is the only source whose reuse position could
+not be established at all" — and by 2026-09-22 there were **37** rows in the
+business table rather than eight, while New York's position *is* established:
+Local Law 11 of 2012 forbids the City attaching a licence at all, which is why
+it sits under *Permissive on reading the terms themselves* two tables up. An
+established absence is not an unestablished position, and conflating the two is
+how a source gets re-investigated every time somebody reads this section.
+
+The durable point the count was reaching for: **an unread source and a source
+read to silence look identical in a summary and are completely different in
+kind.** This table is only for the first. Anything read and found to impose no
+restriction belongs above, named, with the pages that were read — Miami-Dade is
+the worked example, and it moved up here after the reading rather than before.
 
 ### Transit feeds (GTFS) — checked 2026-09-21
 

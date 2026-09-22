@@ -16,11 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**132 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**133 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
 - [Mexico City and Guadalajara promoted into the provenance tables, and OSM rail gets its own subsection rather than a GTFS row](#2026-09-22---mexico-city-and-guadalajara-promoted-into-the-provenance-tables-and-osm-rail-gets-its-own-subsection-rather-than-a-gtfs-row)
+- [The unread-source table did not list an unread source, and two more hand-kept counts were wrong](#2026-09-22---the-unread-source-table-did-not-list-an-unread-source-and-two-more-hand-kept-counts-were-wrong)
 - [Madrid built: the pipeline is complete, and the app wiring is deliberately held back](#2026-09-22---madrid-built-the-pipeline-is-complete-and-the-app-wiring-is-deliberately-held-back)
 - [A provincial publisher nobody had read, and the check that turns "record your sources" into something a script can fail](#2026-09-22---a-provincial-publisher-nobody-had-read-and-the-check-that-turns-record-your-sources-into-something-a-script-can-fail)
 - [Spain re-scoped from six cities to two: Valencia, Bilbao and Malaga measured out, Sevilla unreachable](#2026-09-22---spain-re-scoped-from-six-cities-to-two-valencia-bilbao-and-malaga-measured-out-sevilla-unreachable)
@@ -260,6 +261,71 @@ onwards; the early ones are split by phase rather than by hour.
 - **No pipeline file changed**, so `drift_check.py` has nothing to compare and
   `deploy-verify` has nothing to verify - documentation and one script constant
   only, which is the case `CLAUDE.md` says to skip both for.
+### 2026-09-22 - The unread-source table did not list an unread source, and two more hand-kept counts were wrong
+
+- **Closed a contradiction introduced earlier the same day.** The SanGIS
+  licence reading ended with a caveat that San Diego's municipal BOUNDARY layer
+  sits on the same `geo.sandag.org` host, is a different service, and has never
+  had its terms read. Meanwhile the "Still not established" table said the US
+  Census bulk geocoder was "the only item left unread". Both sentences were in
+  `docs/data_sources.md` at once, a few hundred lines apart, for about half a
+  day. The boundary layer is now **its own row** in that table rather than a
+  caveat inside another source's entry, and it is marked **higher priority than
+  the geocoder** - it scopes a published map, where the geocoder only derives a
+  coordinate that then lives in this project's own outputs. A caveat is not a
+  work item; that is the whole difference.
+
+- **The layer has been in use since 2026-09-18, the project's first day**, and
+  its row in the boundary table predates the licence review entirely. So this
+  is not a new source that slipped through: it is the oldest source in the
+  project, and the reason it was never read is that the licence review was
+  organised by city and this layer arrived before there was a review.
+
+- **Deliberately did NOT extend the SanGIS agreement to it by proximity.** The
+  parcels' End User Use Agreement was read on 2026-09-22 and the boundary
+  download sits on the same host, which makes the inference tempting and wrong
+  - it is the Philadelphia mistake, where a licence on one page turned out not
+  to govern the dataset beside it, in the direction that would have made this
+  project look permitted when it was not established.
+
+- **Removed a second stale count, and it had two errors in one sentence.**
+  "New York contributes four of the eight registries and is the only source
+  whose reuse position could not be established at all" - the business table
+  holds **37** rows, not eight, and New York's position IS established: Local
+  Law 11 of 2012 forbids the City attaching a licence at all, which is why New
+  York sits under *Permissive on reading the terms themselves*. **An
+  established absence is not an unestablished position**, and conflating them
+  is how a source gets re-investigated every time someone reads the section.
+  Replaced with the durable observation and no count - the same treatment the
+  notices summary got earlier today, and the third hand-kept count in this file
+  to turn out wrong.
+
+- **Normalised the two rows that omitted their closing pipe**, which a previous
+  cleanup session had looked at and deliberately left. That call was defensible
+  and the reasoning was right: GFM permits it, the rows render, and
+  `check_provenance.py` makes no trailing-pipe assumption, so nothing in the
+  repository was broken. It was changed anyway for one concrete reason - the
+  ad-hoc table check run during this day's merge used
+  `startswith('|') and endswith('|')` and **silently skipped exactly those two
+  rows**. Content that renders correctly and is invisible to the checker is the
+  shape of every problem found today, including the Toronto endpoint URL that a
+  merge dropped without changing how the row looked. Two characters buys the
+  footgun away. Every table row in the file now closes and every row matches
+  its header's column count.
+
+- **Three claims relayed from other sessions were checked and two were stale,
+  which is itself worth recording.** That Vancouver, Surrey, Montréal and
+  Calgary still had no rows in the three provenance tables (they have rows in
+  all three; the NOTE saying otherwise was deleted hours earlier), and that
+  `claude/sad-franklin-bace80`'s WMATA fix was unmerged so the row still
+  rendered as literal text (`5d51470` is an ancestor of `origin/master`, the
+  row renders inside its table, and the count reads "All seven"). Both sessions
+  were reading checkouts from before the merge landed; the file grew from 1,375
+  to 1,714 lines between them. The third - that
+  `docs/licenses/README.md` still called Washington D.C. unbuilt - was real,
+  and is being fixed separately. **A claim about a shared file is only as
+  current as the checkout behind it**, so verify against `origin/master` before
+  acting on one, in either direction.
 
 ### 2026-09-22 - Madrid built: the pipeline is complete, and the app wiring is deliberately held back
 
