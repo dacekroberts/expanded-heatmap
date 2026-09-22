@@ -360,6 +360,18 @@ owner's identity. It is a stronger position than storing a live key carefully.
    account. On (iv), the clearest obligation is met regardless:
    `data/washington_dc/raw/` is gitignored and never committed.
 
+   **RESOLVED 2026-09-21: a valid WMATA account has been re-established**, so
+   the licence grant in §2 is live again and the D.C. page rests on a current
+   licence rather than a lapsed one. Nothing further is owed.
+
+   **The standing obligation this creates, and it is the only part that
+   outlives today:** the account must stay live for as long as the D.C. page is
+   published. Do not terminate it while the site is up. If it is terminated
+   later — deliberately or by WMATA, which "may revoke or otherwise limit"
+   keys at any time — then §9(i) applies again and **the D.C. page must come
+   down until a new account is registered.** That is now a deploy-gate
+   condition, not a background note.
+
    **Korea raises none of this** — `이용허락범위 제한 없음`, no restriction and
    no termination clause, so terminating that key has no licensing
    consequence at all.
