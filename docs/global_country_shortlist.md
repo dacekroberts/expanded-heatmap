@@ -66,7 +66,37 @@ Four shapes qualify:
 
 Tiers rather than a numbered order: the candidates differ in *which leg is
 unproven*, which is not a thing a single score can express. Rail figures are
-`scripts/screen_rail.py` output against real `routes.txt`, run 2026-09-21.
+`scripts/screen_rail.py` against real `routes.txt`, or `scripts/probe_geodata.py`
+against the publisher's own layer. All 2026-09-21.
+
+### Final standings — every viable candidate, and its one remaining blocker
+
+The useful summary. Each row below Tier 1 has **exactly one** thing standing in
+its way, and the column says what.
+
+| | Country / city | Rail | Business | The single blocker |
+|---|---|---|---|---|
+| **1** | **France** / Paris | subway 16, tram 17, funicular 1 | SIRENE, établissement-level, geolocated, Licence Ouverte 2.0 | **None evidential** — an architectural choice about national vs per-city scope |
+| **2** | **Spain** / Barcelona + 5 more | **6 metro cities**: Madrid 13, Barcelona FGC 4, Bilbao, Málaga, Valencia, Sevilla | Barcelona's 68,024-premises ground-floor census | **One unread licence** |
+| **2** | **South Korea** / Seoul | **1,099 stations**, WGS84, English names, transfer data | `상가(상권)정보`: premises, coords, KSIC 247, quarterly, **제한 없음** | **A free API key** (owner action) — and **no line geometry yet** |
+| **2** | **Taiwan** / Taipei | **complete and unauthenticated**: 122 stations + **5 lines as MULTILINESTRING** + line colours + English | `商業登記`: premises addresses, active/closed status | **No coordinates** → geocoding, and per-category assembly |
+| **2** | **Mexico** / Guadalajara | Guadalajara LRT 3 verified | **DENUE**, 6M+ establishments, **SCIAN = NAICS**, INEGI licence clears | **CDMX is domain-wide unreachable**; Guadalajara carries it meanwhile |
+| **2** | **Brazil** / São Paulo | **94 stations + 6 lines**, EPSG:31983 already correct, metro/trem discriminator, built/planned separate | CNPJ, ~72M, trade name + address + CNAE | **No coordinates** → geocoding past Toronto's scale |
+| **3** | **Norway** / Oslo | metro 5, tram 9 | **MEASURED premises-level** — 152,060 Oslo sub-units, `beliggenhetsadresse`, NACE, open API no key | No coordinates → geocoding |
+| **3** | **Japan** / Tokyo | **solved**: 10,235 stations + 21,932 line segments, PDL 1.0 | **UPGRADED — premises-level food permits with coordinates**, on the national standard schema, CC BY | **A two-bucket ceiling** — no general retail permit exists in Japan |
+
+**Israel and Peru moved to Tier 4** (2026-09-21) — see below.
+
+**Tier 3 continues** with rail measured and business unprobed: Vienna
+(subway 35, tram 185 — deepest in the screen), Amsterdam/Rotterdam (14/46),
+Singapore (13), Lisbon (10), Berlin (9/48), Stockholm (7/21), Santiago (7),
+Bucharest (5/15), Sofia (4/24), Copenhagen (4/4), Bangkok (4/5), Helsinki
+(4/26), Budapest (4/42), Hamburg (4), Prague (3/40), Athens (3), Naples
+(3/3/3), Hyderabad (3), Kochi (1), Cairo (2) — plus tram-only Riga, Tallinn,
+Zagreb, Bratislava, Poznań, Messina.
+
+**All of them sit under GDPR** except Santiago, Bangkok, the Indian cities and
+Cairo, and that is the expensive half of any European profile.
 
 ### Tier 1 — both legs measured. Ready for a country profile.
 
@@ -450,8 +480,10 @@ before the next country is profiled.
 
 | | Why | Basis |
 |---|---|---|
-| **United Kingdom** | Business data is the wrong object — VOA is property without names, Companies House is registered offices, FSA is food-only | MEASURED |
-| **Japan** | Business data is **aggregate counts by area**, not an establishment register. **Its transit is fully solved** — see below | MEASURED |
+| **United Kingdom** | **Re-checked 2026-09-21 and still out, for a sharper reason.** Beyond VOA (property without names), Companies House (registered offices) and the FSA (food only), councils publish **NNDR business-rates** data under the Local Government Transparency Code — premises address, rateable value, property description and ratepayer name. It fails on three counts: **names are given only for limited companies and redacted for sole traders and partnerships under GDPR**; the only classification is a property description (`shop`) which **cannot produce this project's three buckets**; and it is published **per council across 300+ authorities** in separate bespoke spreadsheets. The best UK source is premises without a usable category | MEASURED |
+| **Israel** | Transit measured and good — 332 points, 27 lines, CC-BY — but **the business leg has no route**. The national portal's only business-licensing register is Be'er Sheva's, a city with no rail; Tel Aviv's own portal returns **HTTP 472**, refusing automated requests. Moved here 2026-09-21: good rail with no reachable matching business data is not a candidate | MEASURED |
+| **Peru** | The Lima Line 1 station set is real and ODC-BY, but **dated March 2018 and Line 1 only** — Line 2 has been opening since 2023 and is absent, so the source understates the city and is seven years stale. Moved here 2026-09-21 | MEASURED |
+| ~~**Japan**~~ | **MOVED UP to Tier 3, 2026-09-21.** The earlier ruling rested on the Economic Census being aggregate — true, and the wrong source. Japanese municipalities publish **食品営業許可 (food business permits) as premises-level open data with coordinates**: Minato Ward alone is **5,723 premises**, CC BY, carrying `施設名称`, **`施設名称_英字`** (English name), `営業の種類`, a full address plus split components, **`緯度`/`経度`**, `法人番号`, and permit and closure dates. Crucially it follows Japan's **national 推奨データセット standard schema** (`全国地方公共団体コード`, `町字ID`), so every municipality publishing it uses identical columns and the per-ward assembly is mechanical rather than bespoke. **The real ceiling is two buckets** — Japan has no general retail permit, so retail would be absent, which is Toronto's and Boston's shape. 生活衛生関係営業 permits (理容所, 美容所) are the likely Personal services source and are unprobed | MEASURED |
 | **Taiwan** | **Nothing for Taipei, Kaohsiung, Taoyuan or TDX anywhere in the catalogue.** The 9 Taiwanese feeds are rural bus operators | MEASURED |
 | **Hong Kong** | **No MTR feed anywhere in the catalogue.** The Transport Department feed carries tram/LRT 7 and no subway | MEASURED |
 | **Jakarta** | **No MRT Jakarta or LRT Jakarta feed anywhere.** Transjakarta is BRT | MEASURED |
