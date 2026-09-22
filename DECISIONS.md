@@ -16,12 +16,26 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**129 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**143 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [The `osm_route_refs` check, and the correction it immediately made to the entry above](#2026-09-22---the-osm_route_refs-check-and-the-correction-it-immediately-made-to-the-entry-above)
+- [Category B, fifth pass: the add-city skill's header still said four cities](#2026-09-22---category-b-fifth-pass-the-add-city-skills-header-still-said-four-cities)
+- [Category B, fourth pass: a flagged proposal that had already become practice](#2026-09-22---category-b-fourth-pass-a-flagged-proposal-that-had-already-become-practice)
+- ["The five NAICS cities" were four, in two current-state documents](#2026-09-22---the-five-naics-cities-were-four-in-two-current-state-documents)
+- [The distinction category B turns on: a dated document's count is evidence, not drift](#2026-09-22---the-distinction-category-b-turns-on-a-dated-documents-count-is-evidence-not-drift)
+- [Category B, first pass: Madrid was filed under OpenStreetMap, and three counts had drifted](#2026-09-22---category-b-first-pass-madrid-was-filed-under-openstreetmap-and-three-counts-had-drifted)
+- [The stale-prose check found three notices in the deploy gate marked undisplayed that were displayed](#2026-09-22---the-stale-prose-check-found-three-notices-in-the-deploy-gate-marked-undisplayed-that-were-displayed)
+- [A third session role: auditing what the forward-facing sessions leave behind](#2026-09-22---a-third-session-role-auditing-what-the-forward-facing-sessions-leave-behind)
+- [Barcelona's four owner decisions settled, and its brief's OSM breakdown corrected](#2026-09-22---barcelonas-four-owner-decisions-settled-and-its-briefs-osm-breakdown-corrected)
+- [Madrid's provenance recorded before its wiring lands, and the transit table stopped calling itself GTFS](#2026-09-22---madrids-provenance-recorded-before-its-wiring-lands-and-the-transit-table-stopped-calling-itself-gtfs)
+- [Mexico City and Guadalajara promoted into the provenance tables, and OSM rail gets its own subsection rather than a GTFS row](#2026-09-22---mexico-city-and-guadalajara-promoted-into-the-provenance-tables-and-osm-rail-gets-its-own-subsection-rather-than-a-gtfs-row)
+- [The unread-source table did not list an unread source, and two more hand-kept counts were wrong](#2026-09-22---the-unread-source-table-did-not-list-an-unread-source-and-two-more-hand-kept-counts-were-wrong)
 - [Madrid built: the pipeline is complete, and the app wiring is deliberately held back](#2026-09-22---madrid-built-the-pipeline-is-complete-and-the-app-wiring-is-deliberately-held-back)
+- [A provincial publisher nobody had read, and the check that turns "record your sources" into something a script can fail](#2026-09-22---a-provincial-publisher-nobody-had-read-and-the-check-that-turns-record-your-sources-into-something-a-script-can-fail)
 - [Spain re-scoped from six cities to two: Valencia, Bilbao and Malaga measured out, Sevilla unreachable](#2026-09-22---spain-re-scoped-from-six-cities-to-two-valencia-bilbao-and-malaga-measured-out-sevilla-unreachable)
+- [Four Canadian cities promoted into the provenance tables, and three Step 0 findings did not survive the trip](#2026-09-22---four-canadian-cities-promoted-into-the-provenance-tables-and-three-step-0-findings-did-not-survive-the-trip)
 - [Madrid's zero-coordinate question settled, and the rate was never the answer](#2026-09-22---madrids-zero-coordinate-question-settled-and-the-rate-was-never-the-answer)
 - [Spain profiled: Madrid is ready, both licences read, and one clause raised rather than resolved](#2026-09-22---spain-profiled-madrid-is-ready-both-licences-read-and-one-clause-raised-rather-than-resolved)
 - [A leaf region labels only its own cities, and the one accepted overlap is written down](#2026-09-22---a-leaf-region-labels-only-its-own-cities-and-the-one-accepted-overlap-is-written-down)
@@ -166,6 +180,619 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-22 - The `osm_route_refs` check, and the correction it immediately made to the entry above
+
+- **Built an `osm_route_refs` check kind for `scripts/brief_check.py`, closing
+  a standing gap: no check reached Overpass, so every OSM count claim in every
+  brief was prose only - and four cities now take rail from OSM.** It reports
+  route RELATIONS and distinct REFS per mode in a bbox, because those fail in
+  opposite directions and one city can carry both failures: Barcelona's 28
+  subway relations must stay 14 refs, while its funicular relations are
+  directional pairs that must collapse. Proven to discriminate rather than
+  merely pass, against four deliberately wrong specs (the old split, an
+  11-ref subway collapse, an uncollapsed funicular count, a ref that does not
+  exist) - all four FAILed as intended.
+
+- **SUPERSEDES the claim in the entry above that Barcelona's brief miscounted
+  its OSM relations. The brief is not established as wrong; the two Overpass
+  mirrors do not agree with each other.** `overpass-api.de` returns subway 28 /
+  tram 20 / funicular 6, giving funicular refs FM, FV and FT.
+  `overpass.kumi.systems` returns subway 28 / tram 22 / funicular 4, giving 2
+  funicular refs - **which is exactly what the brief recorded.** So the brief
+  faithfully recorded one mirror and the correction recorded another, and
+  neither has been shown to be the truth. The difference is not truncation:
+  kumi has FEWER funiculars and MORE trams, which is the shape of a different
+  planet-extract vintage rather than a partial answer.
+
+- **Found that an Overpass mirror returns PARTIAL results with HTTP 200 and no
+  `remark`, so the empty-200 rule this project already had is not sufficient.**
+  Measured within one minute on `overpass-api.de`: the same query returned 54
+  elements and then 34, tram 20 -> 12 and funicular 6 -> 4. A partial answer is
+  shaped exactly like a real decrease, which is the dangerous case. Minutes
+  later all three mirrors failed outright - two HTTP 504, and `overpass.osm.ch`
+  the documented empty 200 with no remark, twice.
+
+- **So the check confirms a mismatch against a SECOND mirror before failing a
+  brief, and reports disagreement as a HOST problem rather than as a brief to
+  correct.** This is the project's existing rule - a negative from one method
+  is ASSERTED until two methods agree - applied where it was missing. It is
+  what caught the error above: the check's first real run on Barcelona
+  returned `MIRRORS DISAGREE` rather than confirming the correction its own
+  author had just written and pushed.
+
+- **Consequence for the build: none of the scope decision changes.** FM and FV
+  are present on both mirrors and are the two funiculars drawn; FT is excluded
+  either way, appearing on one mirror only. What does change is that an OSM
+  count is not a fact unless the mirror and the date are recorded with it -
+  which bears on Mexico City, Guadalajara and Madrid as much as Barcelona, and
+  is not yet done for any of them.
+
+- **Still open, and deliberately not resolved here:** which mirror reflects
+  current OSM. Both were tried in the browser as a third method and the direct
+  API URL returned 406; `overpass-turbo.eu` needs editor interaction that a
+  10-minute window would not have finished honestly. Until that is settled the
+  Barcelona brief's OSM prose carries BOTH readings and the check pins the
+  `overpass-api.de` one, so a disagreement surfaces rather than a number being
+  quietly believed.
+### 2026-09-22 - Category B, fifth pass: the add-city skill's header still said four cities
+
+- **`.claude/skills/add-city/SKILL.md` opened "Distilled from the four cities
+  actually built (San Diego, San Francisco, Los Angeles, Chicago)".** Sixteen
+  are built across four countries, and most of what that skill has learned
+  since - multi-source cities, non-GTFS rail, licence notices per source,
+  personal-column omission at the download boundary - came from the later ones.
+  The header now names no number and points at `app/cities.py` for the current
+  list, while keeping the original four as the origin story, which is the part
+  that was actually worth saying. **An instruction file is the worst place for
+  a stale count**, because it is read by someone who does not yet know the
+  project well enough to doubt it.
+
+- **Two counts that were CORRECT were still removed, both written earlier
+  today, both mine.** `CLAUDE.md` and the same skill said the provenance rule
+  "was followed for the nine US cities and silently skipped for the eight that
+  arrived through a country profile". Nine and eight are both right when
+  counting municipalities rather than map entries - Vancouver's regional build
+  is two. That subtlety is exactly the maintenance burden the category is
+  about: a number that needs a footnote to stay true will not survive the next
+  city. Both now say "the US cities" and "every city that arrived through a
+  country profile".
+
+- **Read and kept, with reasons:** `osm-rail`'s "All fourteen cities before
+  Mexico City read GTFS" is a dated historical statement and correct;
+  `add-country`'s "All six Canadian sources are UTF-8" is scoped to a country
+  whose build is finished; `multi-source-city`'s "the two diagnosed cities" is
+  New York and Philadelphia and will only change if a third is diagnosed, at
+  which point the skill is being edited anyway.
+
+- **Category B after five passes: 74 -> 37 flagged.** The `PLAN.md` resume note
+  from the fourth pass still describes what is left accurately, with the skills
+  line now closed.
+
+### 2026-09-22 - Category B, fourth pass: a flagged proposal that had already become practice
+
+- **`global_country_shortlist.md` said agency data "has been the rule for all
+  fourteen built cities", and it was stale twice over.** Numerically, sixteen
+  are built. More usefully, the paragraph was FLAGGING a possible change of
+  sourcing practice as a live question - and that change has since happened
+  three times: Mexico City and Guadalajara draw rail from OpenStreetMap, Madrid
+  from CRTM's ArcGIS services. It now has its own skill and its own subsection
+  in `data_sources.md`. **A count going stale was the symptom; the real defect
+  was a settled question still written as open.** That is a shape worth adding
+  to the sweep's vocabulary.
+
+- **One count was correct by coincidence and was still removed.** "The fourteen
+  agency-sourced cities" happened to be exactly right on 2026-09-22 - sixteen
+  built, two from OpenStreetMap - and would have been wrong on the next build
+  in either direction. Correct-today is not a reason to keep a hand-kept
+  number; it is the state every drifted count was in once.
+
+- **Category B after four passes: 74 -> 40 flagged, files scanned 39 -> 27.**
+  Stopped here against the owner's 98% instruction with the five-hour window at
+  92%, and `PLAN.md` now carries a precise resume note: which files remain,
+  how many hits each, and - for each - whether the next pass should expect to
+  EDIT or to READ AND KEEP. `city_master_list.md`'s eight are maintained by
+  design, since `CLAUDE.md` designates it the file counts are read off; the
+  survivors in `data_sources.md` are scoped facts plus this session's own
+  corrections quoting the text they replace.
+
+- **A false-positive class now named twice, so it is a real limitation:**
+  multi-line quotations. `QUOTED_RE` matches within one line, so a correction
+  that quotes the wrong sentence across a line break keeps reporting. Three of
+  the surviving hits are this session's own corrections. Left unfixed
+  deliberately - widening the regex to span lines would swallow real counts
+  inside long quoted blocks, which is the worse failure for a check whose whole
+  value is that people read its output.
+
+### 2026-09-22 - "The five NAICS cities" were four, in two current-state documents
+
+- **A verified count defect, in a user-facing file.** Both
+  `docs/excluded_categories.md` and `docs/project_context.md` said a city's
+  buckets are anchored on `naics.py` so it "stays comparable with **the five
+  NAICS cities**". Counted from the configs: `TAXONOMY_SYSTEM == "naics"` holds
+  for San Diego, San Francisco, Los Angeles and Montreal — **four**. Mexico
+  City and Guadalajara use `"scian"`, which is Mexico's own instrument and a
+  separate module. `excluded_categories.md` is linked from every page of the
+  site as "What is counted, and what is not", so this was a wrong number in
+  front of readers.
+
+- **Deleted rather than corrected, in both.** The sentence now names the
+  anchor — comparable with every city whose buckets come from `naics.py` —
+  because what matters is that the boundaries come from one module, not how
+  many cities currently use it. Writing "four" would have reset the clock until
+  the next NAICS city landed. `CLAUDE.md` already asks `project_context.md` to
+  carry no counts, and this is the case that shows why.
+
+- **Build briefs excluded from the count check, for the dated-record reason.**
+  `CLAUDE.md` says a brief "caches Step 0's mistakes as confidently as its
+  findings", and Calgary's calls itself "the biggest map of the four
+  remaining" — true during the Canada build, a snapshot rather than drift.
+  Briefs already have the right instrument in `scripts/brief_check.py`, which
+  re-runs their claims against live sources; this check cannot tell a stale
+  brief from an accurate record of a past probe.
+
+- **Report after three passes: A 3 -> 1, B 74 -> 42, C 0**, and the files
+  scanned fell from 39 to 27 as dated records were recognised as such. Most of
+  what is left is correctly scoped — "the two Alberta cities", "two of the
+  four registries", "the two City Boundary layers" — and the next pass is
+  `global_country_shortlist.md` and `city_master_list.md`, the second of which
+  `CLAUDE.md` designates as the place counts are SUPPOSED to live.
+
+### 2026-09-22 - The distinction category B turns on: a dated document's count is evidence, not drift
+
+- **Excluded handovers and retrospectives from `check_stale_claims.py`, and the
+  reason is stronger than noise.** `docs/passover_opus5.md` pins itself to
+  commit `520c165` and opens by saying it is "a map and a set of claims to
+  test, not a source of truth"; `us_build_retrospective.md` and
+  `canada_retrospective.md` describe what was true when written. **Their counts
+  are evidence, and updating one would destroy the record** - a count there is
+  a defect only if it was wrong ON THAT DATE, which no script can know.
+
+- **That is the distinction the whole category turns on, and it was not stated
+  until now:** a CURRENT-STATE document carrying a count has a maintenance
+  burden; a DATED one does not. A sweep that "corrects" a retrospective to
+  match the present has done damage, not work. Written into both the script's
+  docstring and the sweep skill, because the obvious instinct on seeing "all
+  four cities" in a handover is to fix it.
+
+- **Report after two passes: A 3 -> 1, B 74 -> 52, C 0.** The single remaining
+  A hit is a coincidence - a New Orleans row whose line happens to contain both
+  "not yet" and the word Boston - and is not worth another exclusion rule.
+
+- **Read and deliberately KEPT, which is as much the output as the edits.**
+  `docs/project_context.md` carries four counts and three are correctly scoped
+  and stable: "the four registries" is New York's, "the two registries" is
+  Vancouver and Surrey's, "the six pre-1998 municipalities" is a fact about
+  Toronto's amalgamation. Only "comparable with the five NAICS cities" can
+  drift, and it is left for the next pass rather than changed in a hurry.
+  `docs/city_master_list.md` is exempt in spirit for a different reason -
+  `CLAUDE.md` designates it the current global list and says to read counts off
+  it, so its numbers are maintained by design rather than drifting.
+
+### 2026-09-22 - Category B, first pass: Madrid was filed under OpenStreetMap, and three counts had drifted
+
+- **Started working the `check_stale_claims.py` category-B list.**
+  `docs/data_sources.md` went from 16 flagged counts to 11; the total from 74
+  to 69. Most of the remainder are NOT defects and should stay: "All three
+  buckets" is a fixed concept of this project, "the six pre-1998
+  municipalities" is a historical fact about Toronto's amalgamation, and "all
+  five boroughs = the city" will be true as long as New York has five. **The
+  report is a review list, not a defect list**, and saying which entries were
+  read and kept is as much the output as the edits.
+
+- **The list caught an error this session had introduced hours earlier.**
+  Madrid's transit row was anchored after Guadalajara's and so landed inside
+  `### Rail geometry from OpenStreetMap`, a subsection whose prose explains
+  ODbL, notice 1 and the absence of an agency holding the licence - none of
+  which is true of Madrid, whose rail is CRTM's own ArcGIS service under CRTM's
+  own licence. The heading is now `### Rail geometry that is not a GTFS feed`
+  and the prose separates the two reasons: OSM because **no usable feed
+  exists**, Madrid because a feed exists, downloads cleanly and is **rejected
+  on a licence currency clause**. An absence and a consequence are not the same
+  case and were being filed as one.
+
+- **The parent section's new intro was also wrong, and it was mine.** It said
+  "three of the rail sources here are not feeds at all", describing a table in
+  which all fourteen rows are GTFS - the non-feed rows live in the subsection,
+  where the Mexico build had deliberately put them. Rewritten to say the first
+  table is all GTFS and the subsection is not. The rename of the parent heading
+  to `## Transit feeds` stands: a parent that says GTFS while holding a
+  not-GTFS subsection is the mislabelling that started this.
+
+- **Three counts deleted rather than corrected**, per the rule this category
+  exists to enforce. "**All seven** of these agreements are stored locally" -
+  it had been corrected from six to seven by another session while the
+  directory grew past twenty, so it now points at that directory's README as
+  the list and carries no number. "Affects **six of the nine built cities**" -
+  nine was the US-only era; the denominator is gone and the cities are simply
+  named. "**All five cities** can now be rebuilt from scratch from this
+  document alone" - written when there were five, and now the claim is made
+  without a number and attributed to `check_provenance.py`, which actually
+  asserts it.
+
+- **A false-positive class worth knowing: multi-line quotations.**
+  `QUOTED_RE` matches within a single line, so a correction that quotes the
+  wrong sentence it replaces across a line break still reports. Line 782 is
+  this session's own correction of the "four of the eight registries" claim and
+  will keep appearing. Not worth fixing in the regex; worth knowing before
+  chasing it.
+
+### 2026-09-22 - The stale-prose check found three notices in the deploy gate marked undisplayed that were displayed
+
+- **Wrote `scripts/check_stale_claims.py`**, the heuristic half of the cleanup
+  role, and it earned itself on the first real run. `check_provenance.py`
+  decides things and fails; this one **reports and always exits 0**, because
+  every rule in it is a guess about English and a noisy gate gets ignored,
+  which is worse than no gate.
+
+- **The find: notices 2, 3 and 4 - Chicago, SFMTA and LA Metro - all said
+  "required, NOT YET DISPLAYED", and all three are the first three entries in
+  `app/components.py`'s `_NOTICES`**, rendered from every page. The labels were
+  written before the footer existed and nothing brought them forward when it
+  shipped. So the list that GATES THE PUBLIC DEPLOY understated this project's
+  own compliance, in the direction that makes a deploy look blocked when it is
+  not - the opposite failure from Edmonton's, and just as invisible. Corrected,
+  with the reason recorded in place rather than silently.
+
+- **The tuning is the interesting part, and all of it is recorded in the module
+  docstring because each step traded recall for a report anyone will read.**
+  Matching digits returned **1,012 hits**, almost every one a measurement
+  ("664,662 rows") that is data and belongs there. Restricting to spelled-out
+  numbers gave 265, mostly correct scoped facts - "three buckets" is a fixed
+  concept here, "six pre-1998 municipalities" is history. Requiring a
+  **totalising determiner** ("all six", "the eight") cut it to **74**, which is
+  a review list rather than noise. The insight is that a hand-kept count only
+  rots when it asserts how many of a thing the project has *right now*.
+
+- **`DECISIONS.md` and `PLAN.md` are excluded, and that is the single most
+  important rule in the file.** This log is append-only history where "no
+  Canadian city is built" is a correct record of what was true that day, and
+  `PLAN.md` is open work where "not yet" is the point. Scanning either floods
+  the report with correct sentences, which is how a check becomes something
+  people skip.
+
+- **A KNOWN BLIND SPOT, stated rather than discovered later: category A matches
+  on built CITY names, and agency names are not city names.** "SFMTA" is not
+  "San Francisco" and "LA Metro" is not "Los Angeles", so the tool found ONE of
+  the three stale notices and a follow-up grep found the other two. A clean A
+  section means "nothing obvious", not "nothing". Recorded in the skill as well,
+  because a check whose limits are unwritten gets trusted past them.
+
+- **The skill and `PLAN.md` were written yesterday saying this script did not
+  exist; both now say it does.** Shipping a skill that cites a script it does
+  not have would have been the exact defect the skill is about, which is why it
+  was deferred rather than promised.
+
+### 2026-09-22 - A third session role: auditing what the forward-facing sessions leave behind
+
+- **Added the cleanup/audit role**, with `.claude/skills/consistency-sweep/`,
+  an entry in `docs/session_roles.md` and a pointer in `CLAUDE.md`. The build
+  and research sessions are pointed forward - add a city, screen a country -
+  and both leave a wake that neither has a reason to look at. One day of
+  sweeping produced: three files stating Canada was unbuilt while six
+  municipalities were, a fourth saying the same of D.C., four wrong hand-kept
+  counts in one file, two item 8s and two item 15s in the list that gates the
+  public deploy, a provincial publisher whose data was on the site with no
+  licence read, four sources in use with no provenance row, and a heading that
+  no longer described half its contents.
+
+- **The role owns no paths, and that is the design rather than an oversight.**
+  `session_roles.md` allocates by path because that is what actually prevents
+  collisions, and cleanup is cross-cutting by nature: giving it `docs/` would
+  take that from the research session, and giving it nothing would leave it
+  unable to work. So it runs on different rules - sweep narrow, commit
+  immediately, never merge a branch it does not own, never edit a file another
+  session has uncommitted, hand real pipeline bugs over. What it does own is
+  `scripts/check_*.py`.
+
+- **Its stated preferred output is a CHECK, not a correction**, which is the
+  one principle worth keeping if everything else about the role is rewritten.
+  A reader found four Canadian cities missing from the provenance tables;
+  promoting them by hand would have been the whole job. Writing
+  `check_provenance.py` instead found **five more gaps nobody had noticed**,
+  and then caught a sixth the same day when a merge silently dropped an
+  endpoint URL while leaving the row looking correct. A correction fixes an
+  instance; a check keeps finding the class.
+
+- **"Verify against `origin/master`, never the tree you are in" is written in
+  as a rule**, because the role that reports on other sessions' work is the one
+  most likely to read a stale checkout. Three findings were relayed between
+  sessions that day and **two were stale rather than wrong** - both described a
+  file that had changed by 339 lines since the reporting session branched, and
+  acting on either would have meant redoing finished work or merging something
+  already in. The rule is symmetric: verify before acting on a claim and before
+  dismissing one. The third finding was real, and sat four rows above a line
+  this session had itself edited an hour earlier.
+
+- **Deferred `scripts/check_stale_claims.py` to `PLAN.md` rather than shipping
+  a skill that cites a script that does not exist.** That would have been the
+  exact defect the skill is about. Three classes - future-tense prose, drifted
+  counts, headings whose contents moved on - stay hand-swept until it is
+  written, and the skill says so plainly. Deferred on pacing at 87% of a
+  five-hour window, not on doubt; the design is settled and it is the test loop
+  that costs.
+
+### 2026-09-22 - Barcelona's four owner decisions settled, and its brief's OSM breakdown corrected
+
+- **Settled Barcelona's census year at 2022 (66,088 rows, 58,908 `Actiu`) with
+  the survey year stated on the page beside the source credit, rejecting the
+  fresher 2024 resource as geographically incomplete.** The 2024 file sums
+  exactly to its own declared 44,000, so nothing is truncated, but the
+  shortfall against 2022 is wildly uneven by district: Sant Andreu -83%, Nou
+  Barris -76%, Horta-Guinardo -69%, against Ciutat Vella -5% and Eixample -16%.
+  A census that narrowed its definition would shrink roughly evenly; this
+  covers the central districts and barely touches the periphery. The rejected
+  alternative is two years fresher and wrong in the dangerous direction - a map
+  built on it would show outer stations as commercially dead, which is what a
+  reader half expects anyway, so nothing would look broken. The publisher's own
+  data dictionary is headed "ESTRUCTURA RECURS DE L'ANY 2022". Stating the
+  vintage is also what reconciles the choice with Spanish Act 37/2007 Art. 8's
+  "most up-to-date data" wording, which the licence incorporates expressly: a
+  four-year-old survey published as a stated decision, not silently.
+
+- **Settled Barcelona's drawn scope at 16 lines - the 14 metro refs plus
+  funiculars FM and FV - using the operators' own `network` tag as the test
+  rather than a judgment about what counts as a metro.** Measured via Overpass
+  over bbox 41.30,2.03,41.50,2.30: FM (Montjuic) is operated by TMB and tagged
+  `network=Metro de Barcelona`; FV (Vallvidrera) is operated by FGC, tagged
+  `network=Metro del Valles`, and is route `FV` in FGC's own GTFS. Both are
+  drawn. FT (Tibidabo) is operated by Barcelona de Serveis Municipals, the
+  municipal parks and services company, and carries no `network` tag at all -
+  it is access to the Tibidabo funfair, and is excluded. The same test excludes
+  trams without a separate decision: T1-T6 are tagged `Trambaix` and
+  `Trambesos`, neither a metro network. Rejected the alternative of deciding by
+  mode, because `route_type=7` alone would have been wrong in both directions -
+  FGC's three GTFS funicular routes are FV plus `Cremallera Montserrat` and
+  `Cremallera de Nuria`, rack railways 50 km and 150 km from Barcelona.
+
+- **Kept mall, gallery and municipal-market interiors in Barcelona's count
+  rather than excluding them with the site-type flags the census uniquely
+  supplies.** A mall near a station is real commercial density a rider can
+  reach, and excluding it would make Barcelona measure something different from
+  the other sixteen cities while the map invites comparison between them.
+  `SN_CComercial`, `SN_Galeria` and `SN_Mercat` are recorded in the brief as
+  available-but-unused rather than dropped, since no other city in the project
+  can make this distinction at all and a later decision may want them.
+
+- **Corrected Barcelona's brief: the OSM relation breakdown was tram 22 /
+  funicular 4, and the truth is tram 20 / funicular 6.** Found by re-running an
+  explicit `route=funicular` query against the same bbox, which returned 6
+  where the brief said 4. The error survived because the TOTAL was right - two
+  relations sat in the wrong column and 54 still summed to 54 - so no
+  arithmetic check on the table could have caught it. **A breakdown that adds
+  up is not a breakdown that is correct.**
+
+- **Found that Barcelona carries BOTH of the OSM relation traps at once, in
+  opposite directions, which is why "look at the refs" is the rule rather than
+  "collapse" or "do not collapse".** Its 28 subway relations give 14 refs that
+  must NOT be merged - L9 and L10 each run as two disconnected segments, so
+  merging L9N with L9S would draw track that does not exist - while its 6
+  funicular relations are plain directional pairs giving 3 refs that MUST be
+  merged. Madrid's trap (28 relations, 13 lines, directional pairs) and its
+  mirror image live in the same city, and the brief warned about only one of
+  them in bold while silently miscounting the other.
+
+- **Recorded that no `osm_route_refs` check kind exists, so every OSM count
+  claim in every brief is currently unverifiable by `brief_check.py`.** The
+  registry in `scripts/brief_check.py` holds fourteen kinds covering HTTP,
+  ArcGIS, GTFS, CKAN, Socrata, GeoJSON and UTM derivation, and none reaches
+  Overpass - which is exactly why Barcelona's miscount sat in a brief that
+  reports 9/9. Four cities now take rail from OSM (Mexico City, Guadalajara,
+  Madrid, Barcelona), so this is a standing gap rather than one city's. Not
+  built here: it needs the three-mirror handling `pipeline/countries/mexico.py`
+  documents, including the rule that an empty 200 is a host failure and must
+  never be cached, and starting it against a session reset would have left it
+  half-written.
+### 2026-09-22 - Madrid's provenance recorded before its wiring lands, and the transit table stopped calling itself GTFS
+
+- **`spain-app-wiring` is deliberately held off master and was NOT merged.** Its
+  own commit message says why: "landing `app/cities.py` there would publish the
+  city - and because `cities.py` is an imported module it would land BROKEN
+  until a reboot, which is exactly this morning's three-hour outage", and "the
+  owner's plan is to finish the Spanish cities and deploy them together, so
+  this waits for Barcelona". It lists three blockers: Barcelona, a full
+  `deploy-verify`, and the CRTM *siempre actualizada* clause. Its own tip
+  commit resolved the third. A branch that documents its own hold is a decision
+  to respect, not an abandoned branch to tidy away.
+
+- **Test-merged it without merging, and it is clean.** `git merge-tree
+  --write-tree origin/master spain-app-wiring` produced a tree with no
+  conflicts; the resulting `app/components.py` carries **18** `_NOTICES` entries
+  including both this session's Province of British Columbia and that branch's
+  Ayuntamiento de Madrid and CRTM, and parses. Worth checking rather than
+  assuming, because this session had edited the same list.
+
+- **But it WOULD have failed `check_provenance.py` the moment it landed.**
+  Madrid is documented at length in `data_sources.md` as PROSE - a whole
+  "### Madrid - endpoints and findings" section - with **no rows in any of the
+  three tables**, and none of its three endpoints appearing anywhere in the
+  file. Wiring Madrid into `app/cities.py` is what makes the check look at it.
+  So the rows were written now, from `pipeline/madrid/config.py` rather than
+  from the prose: the CKAN `package_show` resolution, the CRTM feature services,
+  and the `Termino_Municipal.zip` boundary. Madrid is now provenance-ready and
+  that blocker is gone before anyone hits it. **Prose is not a row** - a section
+  that describes a source in detail still leaves the tables unable to reproduce
+  the build.
+
+- **Renamed "## Transit feeds (GTFS)" to "## Transit feeds".** Three of its rows
+  are not feeds: Mexico City's and Guadalajara's rail comes from OpenStreetMap
+  via Overpass, and Madrid's from CRTM's ArcGIS feature services - the last
+  because CRTM's licence obliges currency and its own GTFS has not been
+  refreshed since 2025-05-30. `scripts/check_provenance.py`'s `TABLES` updated
+  to match. The sibling `### Transit feeds (GTFS) - checked 2026-09-21` licence
+  subsection keeps its name, because it really is a review of GTFS terms. Note
+  the anchoring trap this exposed: `t.count("## Transit feeds (GTFS)")` returns
+  **2**, because the `###` heading contains the `##` one, so a rename asserted
+  on that count fails.
+
+- **`check_provenance.py` now passes in `--strict` mode with an empty
+  `KNOWN_GAPS`**, the first fully-green state since it was written this
+  morning. Every one of the sixteen wired cities has rows in all three tables
+  and every URL its config resolves to is recorded, and Madrid is ready for the
+  seventeenth.
+
+- **Removed the empty `.claude/worktrees/sad-franklin-bace80` directory.** Its
+  branch, its git registration and its admin dir were all already gone and its
+  work had landed via `c9ab7eb`; only a 4 KB empty folder remained. The
+  worktree directory listing and `git worktree list` now agree exactly, which
+  they did not before.
+
+### 2026-09-22 - Mexico City and Guadalajara promoted into the provenance tables, and OSM rail gets its own subsection rather than a GTFS row
+
+- **Promoted Mexico City and Guadalajara (Regional) into the three tables of
+  `docs/data_sources.md` and emptied `KNOWN_GAPS`, so
+  `python scripts/check_provenance.py --strict` now exits 0 across all
+  sixteen cities.** Six rows: two business registries (DENUE entidad 09 and
+  entidad 14), two rail sources and two boundary layers. Both cities were built
+  2026-09-22 with their notices recorded correctly as item 8 and their
+  endpoints recorded nowhere a rebuild would read - the same omission the
+  script was written to catch in Canada a day earlier, caught this time by the
+  script on the day it was written rather than by a reader. `KNOWN_GAPS` is now
+  `{}`, which is the state the docstring says CI should require. 71 insertions
+  in `data_sources.md`, four deletions in `check_provenance.py`.
+
+- **The `KNOWN_GAPS` entry named a file that does not exist, and re-deriving
+  from the configs is the only reason that surfaced.** Both entries said the
+  endpoints lived "only in `docs/mexico_step0_endpoints.md`";
+  **that file was never written.** Mexico was profiled through
+  `pipeline/countries/mexico.py` rather than through a `docs/<country>_step0`
+  file, so unlike Canada there was no country document to correct and no second
+  claimant to the provenance record - the configs and the country module were
+  the whole trail. Had the rows been copied from the named file as Canada's
+  nearly were, the work would have begun by opening nothing. The phantom
+  reference disappears with the `KNOWN_GAPS` entries themselves, so no
+  correction is left to make.
+
+- **Decided that OpenStreetMap rail belongs in its OWN `###` subsection under
+  "Transit feeds (GTFS)", not as a row in that table and not by renaming the
+  heading.** The table's five columns are `City / Agency / Endpoint /
+  Retrieved / Note`, and every note in it turns on `feed_info.txt`, a validity
+  window, `route_id` matching, or the agency that holds the licence - **four
+  things an OSM source does not have**. A row there would have carried four
+  empty columns and a licence pointing at OpenStreetMap instead of an operator.
+  Rejected two alternatives: renaming the heading to "Transit feeds", which is
+  a wider blast radius than it looks (the string is hardcoded in
+  `check_provenance.py`'s `TABLES` and the heading is cross-referenced
+  elsewhere) and which would make the heading vaguer to accommodate two cities
+  out of sixteen; and a fourth top-level table, which would have put rail
+  geometry in two places a reader has to know to check. The subsection sits
+  between the GTFS table and `## Boundary layers`, so it is still inside the
+  section `check_provenance.py` slices for "transit feeds" and the city rows
+  satisfy check A unchanged - no script edit was needed to make this work.
+
+- **Guadalajara takes ONE row per table despite being a four-municipio regional
+  build, and that is a real difference from Vancouver/Surrey rather than a
+  shortcut.** Vancouver needs two rows because it is two registries, two
+  portals, two boundary layers and two licences. Guadalajara's four municipios
+  - Guadalajara 97,134 units, Zapopan 53,311, San Pedro Tlaquepaque 26,832,
+  Tlajomulco de Zúñiga 19,630 - arrive in **one** ZIP from **one** publisher
+  under **one** set of terms, with one operator and one boundary query, so
+  four rows would have repeated the same endpoint four times and implied a
+  choice of source that does not exist. The municipio scope is recorded inside
+  the single row instead, including that the join spells it **"San Pedro
+  Tlaquepaque"** where SITEUR's prose says "Tlaquepaque" - matching the
+  operator's wording keeps zero rows - and that Tonalá is excluded despite
+  19,897 units because no line reaches it.
+
+- **Recorded why there are three Overpass mirrors and how one is chosen, which
+  no other transit row in the file has to explain.** They are tried in
+  configured order and the first returning HTTP 200 with a **non-empty
+  `elements` list** wins; every other outcome advances to the next host. Three,
+  because across these two builds each failed at least once and none failed
+  consistently - `overpass-api.de` 504 several times and 429 once,
+  `overpass.kumi.systems` 504 several times, `overpass.osm.ch` **200 with an
+  empty body**. The non-obvious half is recorded with it: **an empty 200 is a
+  host failure and is never cached.** `overpass.osm.ch` once returned 272 bytes
+  and an empty element list for the routes query, the fetcher cached it, and
+  the caller then reported "every ref has exactly 2 direction relations" - a
+  vacuous truth over an empty set. A mirror list in a config reads like
+  redundancy; the measured failure rates are what make it a requirement.
+
+- **Added no notice and duplicated none.** Item 8 already covers INEGI's
+  Términos de Libre Uso for both cities - it was written around the SOURCE
+  rather than around a city, which is why Guadalajara needed no new notice -
+  and notice 1 already covers ODbL for the OSM rail and boundaries. The notices
+  section is untouched: still 18 numbered and 16 displayed, still in bijection.
+  What was missing was never the licence, only the provenance.
+
+- **A markdown pipe broke a table row, and a column-count check caught it that
+  reading would not have.** The Mexico City rail note originally wrote the
+  Overpass query as `route=subway|light_rail`; a raw `|` splits a cell **even
+  inside backticks**, giving that row 6 columns against the header's 5 and
+  silently mangling the rendered table. Rewritten as a union of
+  `relation[type=route][route=subway]` and
+  `relation[type=route][route=light_rail]`, which is also what the query
+  actually is - two statements, not an alternation. Every table in the file was
+  checked for column-count consistency afterwards; the rest were clean.
+
+- **No pipeline file changed**, so `drift_check.py` has nothing to compare and
+  `deploy-verify` has nothing to verify - documentation and one script constant
+  only, which is the case `CLAUDE.md` says to skip both for.
+### 2026-09-22 - The unread-source table did not list an unread source, and two more hand-kept counts were wrong
+
+- **Closed a contradiction introduced earlier the same day.** The SanGIS
+  licence reading ended with a caveat that San Diego's municipal BOUNDARY layer
+  sits on the same `geo.sandag.org` host, is a different service, and has never
+  had its terms read. Meanwhile the "Still not established" table said the US
+  Census bulk geocoder was "the only item left unread". Both sentences were in
+  `docs/data_sources.md` at once, a few hundred lines apart, for about half a
+  day. The boundary layer is now **its own row** in that table rather than a
+  caveat inside another source's entry, and it is marked **higher priority than
+  the geocoder** - it scopes a published map, where the geocoder only derives a
+  coordinate that then lives in this project's own outputs. A caveat is not a
+  work item; that is the whole difference.
+
+- **The layer has been in use since 2026-09-18, the project's first day**, and
+  its row in the boundary table predates the licence review entirely. So this
+  is not a new source that slipped through: it is the oldest source in the
+  project, and the reason it was never read is that the licence review was
+  organised by city and this layer arrived before there was a review.
+
+- **Deliberately did NOT extend the SanGIS agreement to it by proximity.** The
+  parcels' End User Use Agreement was read on 2026-09-22 and the boundary
+  download sits on the same host, which makes the inference tempting and wrong
+  - it is the Philadelphia mistake, where a licence on one page turned out not
+  to govern the dataset beside it, in the direction that would have made this
+  project look permitted when it was not established.
+
+- **Removed a second stale count, and it had two errors in one sentence.**
+  "New York contributes four of the eight registries and is the only source
+  whose reuse position could not be established at all" - the business table
+  holds **37** rows, not eight, and New York's position IS established: Local
+  Law 11 of 2012 forbids the City attaching a licence at all, which is why New
+  York sits under *Permissive on reading the terms themselves*. **An
+  established absence is not an unestablished position**, and conflating them
+  is how a source gets re-investigated every time someone reads the section.
+  Replaced with the durable observation and no count - the same treatment the
+  notices summary got earlier today, and the third hand-kept count in this file
+  to turn out wrong.
+
+- **Normalised the two rows that omitted their closing pipe**, which a previous
+  cleanup session had looked at and deliberately left. That call was defensible
+  and the reasoning was right: GFM permits it, the rows render, and
+  `check_provenance.py` makes no trailing-pipe assumption, so nothing in the
+  repository was broken. It was changed anyway for one concrete reason - the
+  ad-hoc table check run during this day's merge used
+  `startswith('|') and endswith('|')` and **silently skipped exactly those two
+  rows**. Content that renders correctly and is invisible to the checker is the
+  shape of every problem found today, including the Toronto endpoint URL that a
+  merge dropped without changing how the row looked. Two characters buys the
+  footgun away. Every table row in the file now closes and every row matches
+  its header's column count.
+
+- **Three claims relayed from other sessions were checked and two were stale,
+  which is itself worth recording.** That Vancouver, Surrey, Montréal and
+  Calgary still had no rows in the three provenance tables (they have rows in
+  all three; the NOTE saying otherwise was deleted hours earlier), and that
+  `claude/sad-franklin-bace80`'s WMATA fix was unmerged so the row still
+  rendered as literal text (`5d51470` is an ancestor of `origin/master`, the
+  row renders inside its table, and the count reads "All seven"). Both sessions
+  were reading checkouts from before the merge landed; the file grew from 1,375
+  to 1,714 lines between them. The third - that
+  `docs/licenses/README.md` still called Washington D.C. unbuilt - was real,
+  and is being fixed separately. **A claim about a shared file is only as
+  current as the checkout behind it**, so verify against `origin/master` before
+  acting on one, in either direction.
+
 ### 2026-09-22 - Madrid built: the pipeline is complete, and the app wiring is deliberately held back
 
 - **Madrid's three steps run green, with zero drift and 18 baseline figures
@@ -247,6 +874,162 @@ onwards; the early ones are split by phase rather than by hour.
 - **`outputs/madrid/heatmap.html` is 8.1 MB**, second only to Mexico City's
   11.4, and total committed outputs are back to ~45 MB after this session's
   earlier work took them from 43.17 to 33.31. Recorded rather than addressed.
+### 2026-09-22 - A provincial publisher nobody had read, and the check that turns "record your sources" into something a script can fail
+
+- **Found and closed four remaining Canada holes, then found the same defect in
+  Mexico and in three US cities and built a check for it.** The morning's work
+  promoted four Canadian cities into the three provenance tables; this entry is
+  what looking for the rest of the gap turned up. The GTFS licence table
+  reviewed nine US agencies and no Canadian one, although all five Canadian
+  feeds' terms had been read and stored on 2026-09-21 - a findability gap, not
+  a compliance one, but the table presents itself as the per-feed index and
+  would have told a reader five feeds were never examined. Rows added for
+  TransLink, STM, Calgary Transit, ETS and TTC. `docs/licenses/canada-required-notices.md`
+  still said "if any Canadian city is built" and the licence store's README
+  still had "Canada - screened 2026-09-21, none built"; both relabelled.
+
+- **The Province of British Columbia was publishing into this site with no
+  licence read and no notice displayed.** The BC ABMS municipalities layer
+  names the 30 SkyTrain stations outside Vancouver and Surrey, and
+  `outputs/vancouver/excluded_stations.csv` carries those names in a public
+  repository. It is the first PROVINCIAL or STATE publisher in the project and
+  no municipal licence reaches it. Read 2026-09-22 per `read-licence`:
+  **OGL-BC v2.0, PERMITTED WITH CONDITIONS**, commercial use granted expressly,
+  terminating automatically on breach, and requiring the verbatim sentence
+  `Contains information licensed under the Open Government Licence – British
+  Columbia.` Now notice 17 and displayed in `app/components.py`'s `_NOTICES`;
+  the text is stored at `docs/licenses/bc-open-government-licence.txt`.
+
+- **Two pointers were followed and both paid.** The licence page opens "as per
+  B.C. Government Copyright, the following licence only applies to records in
+  the B.C. Data Catalogue that specify it", so the catalogue record is the
+  authority - checked, and it declares OGL-BC. And the page links a **second**
+  document, "API Terms of Use for OGL Information", which applies because this
+  project reads a WFS rather than downloading a file: it adds operational
+  conditions (limits "without notice", revocable credentials, terms changeable
+  without notice, automatic termination) and **no new notice**. That is
+  TransLink's two-documents shape with the opposite answer - TransLink's two
+  mandate different legends, BC's second mandates none.
+
+- **A near miss with a licence consequence rather than a geometry one.** Three
+  BC layers carry near-identical names and **two are licensed "Access Only"**,
+  which does not permit redistribution: `tantalis-municipalities` and
+  `legally-defined-administrative-areas-of-bc`. Only
+  `municipalities-legally-defined-administrative-areas-of-bc` is OGL-BC. The
+  build is on the right one, established not from the name but because that
+  package's metadata names the exact `openmaps.gov.bc.ca/geo/pub/...
+  ABMS_MUNICIPALITIES_SP/ows` endpoint the config calls, and because TANTALIS
+  describes itself as "[Replacement Dataset: ABMS_MUNICIPALITIES_SP]". Calgary's
+  two-boundary trap, one layer of consequence deeper.
+
+- **Wrote `scripts/check_provenance.py`, because the rule it enforces has been
+  in `add-city` since the start and was followed for the US cities only.** It
+  asserts that every city in `app/cities.py` has a row in all three provenance
+  tables, that **every URL a city's `config.py` actually resolves to** appears
+  in `docs/data_sources.md`, that `_NOTICES` and the numbered notices are in
+  bijection, and that notice numbers are unique and contiguous. Importing the
+  config rather than grepping it is load-bearing: Vancouver builds four
+  endpoints from an `_ODS` prefix via f-strings, so no literal exists to grep.
+  Ran it and it immediately found five more gaps - **Mexico City and
+  Guadalajara have no rows in any of the three tables** (built 2026-09-22,
+  endpoints only in their country file), and **San Diego, San Francisco and Los
+  Angeles each use an unrecorded residence-filter parcel or assessor layer**.
+  Those are recorded in a dated `KNOWN_GAPS` map that prints loudly and may only
+  shrink; a stale entry fails the check, and `--strict` ignores it entirely.
+
+- **The common factor is a source kind, not a country: the input that belongs
+  to no city.** Four misses, all of them neither a business registry nor a
+  transit feed nor the city boundary - Vancouver's parcel + tax-report residence
+  join, BC's naming layer, and the same residence join in three US cities.
+  D.C. had met the naming-layer category already and needed no notice for it
+  only because US federal works carry no copyright, so the project met this
+  once and drew exactly the wrong general lesson. `add-country` now profiles by
+  source kind with naming layer, residence join and geocoder named explicitly,
+  `add-city` Step 9 says to run the script rather than confirm by eye, and
+  `CLAUDE.md` carries both as invariants.
+
+- **Two items 8 and two items 15 in the list that gates the public deploy.**
+  Canada's notice block was appended after Mexico's without renumbering, and
+  Seoul's after Toronto's. Renumbered to 1-18 with INEGI left at 8 so the one
+  cross-reference to it stays valid; `docs/build_briefs/edmonton.md` updated
+  from "item 14" to "item 15". Nothing else cited a notice by number -
+  `CLAUDE.md`'s "Gate item 9" points at the separate deploy-gate list, which was
+  never affected.
+
+- **Deleted the counts in the notices summary rather than correcting them.**
+  It read "for the **fourteen** cities now built there are **thirteen** sources
+  requiring specific text", when there are sixteen cities and the sentence
+  already disagreed with itself two clauses later ("six of the twelve"). Two
+  cities and three notices had been added without it being touched. The
+  relationship is now asserted by `check_provenance.py` instead, and the prose
+  keeps only the part that does not drift: budget a notice per SOURCE, not per
+  city, because the US sources mostly prescribed no wording and the Canadian
+  ones almost all prescribe their own.
+
+- **Closed the three US residence-filter gaps the new check found, and one of
+  the three licences forbids being credited.** San Diego, San Francisco and Los
+  Angeles each join their business register to a parcel or assessor layer to
+  decide whether a licence is somebody's home, and none of the three endpoints
+  was in `docs/data_sources.md`. Rows added in the business-registries table
+  beside each city's own register, the placement Philadelphia's OPA join
+  already used, and all three licences read on 2026-09-22 per `read-licence`.
+  `check_provenance.py` now reports all fourteen US and Canadian cities OK,
+  leaving only Mexico City and Guadalajara in `KNOWN_GAPS`.
+
+- **SanGIS PROHIBITS attribution at this project's scale, which inverts the
+  rule every other source here follows.** Its End User Use Agreement - found in
+  the ArcGIS item's own `licenseInfo`, not on the web, because `sangis.org/legal/`
+  now redirects to a Hub home page - says the data "does not meet National Map
+  Accuracy Standards at scales finer than 1:24,000" and that **"SanGIS shall not
+  be attributed as the source of the data when representing the data at scales
+  below 1:24,000 absolute scale"**, with an exemption only where the layer is
+  certified for finer work. This project's rings are 0.1-0.6 miles, far finer,
+  and the parcel layer carries no such certification. So the absence of a SanGIS
+  notice is a deliberate compliance position and adding one would breach the
+  terms. Recorded explicitly because it looks exactly like a missing
+  attribution, and the obvious tidy-up is the wrong move. Redistribution is
+  "discouraged, but not prohibited"; nothing from the layer reaches `outputs/`
+  in any case - it is read, used to decide, and discarded.
+
+- **LA County grants expressly; San Francisco's roll is PDDL.** LA County's
+  Enterprise GIS Terms of Use grant "a license to copy, publish, distribute
+  and/or transmit the Data, to adapt the Data and to exploit the Data for
+  commercial and/or personal use", void on violation, with no endorsement
+  implication and a citation format that is explicitly "recommeded" rather than
+  required - so no notice. `wv5m-vpq2` declares PDDL in its own `license`
+  field, the same public-domain dedication as the SF business register.
+  **Neither adds a notice, and SanGIS forbids one, so closing three provenance
+  gaps added zero display obligations** - the opposite of Canada, where almost
+  every source prescribed its own sentence.
+
+- **San Diego's config documents a bulk download the code does not do.** It
+  says the per-point lookup was "REPLACED" by a single bulk fetch plus a local
+  nearest join; `fetch_parcels.py` in fact still queries once per person-like
+  pin with `returnCentroid=true`, and `PARCEL_QUERY_BBOX` and
+  `PARCEL_PAGE_SIZE` are read by no script. The docstring explains why - bulk
+  was attempt 2 of 3 and was abandoned at ~26 s per 2,000-row page, about two
+  hours - so the config comment describes an intention and the docstring
+  describes the outcome. The provenance row records what the code does. Left
+  the dead constants in place rather than deleting them mid-session; noted here
+  so the next reader does not trust the comment over the call.
+
+- **Not established, and flagged rather than assumed.** San Diego's municipal
+  boundary layer sits on the same `geo.sandag.org` host as the parcels but is a
+  different service and its own terms were not read; its row predates this
+  review. The SanGIS parcel agreement is NOT extended to it by proximity -
+  that is precisely the Philadelphia mistake, where a licence on one page
+  turned out not to govern the dataset beside it. Recorded in
+  `data_sources.md` under the new SanGIS entry.
+
+- **The deploy-verify run passed and surfaced two things this session must not
+  drop.** The BC notice renders on the Overview and Vancouver pages with the
+  correct `U+2013` en dash and British "Licence", in position after TransLink,
+  outside any expander, with no console errors and no displacement of the
+  sixteen existing notices. But `check_deploy_imports.py` tested HEAD rather
+  than the working tree, so it must be re-run after committing; and because
+  `app/components.py` is imported by every page, **the deployed app must be
+  REBOOTED after this push, not merely updated** - gate item 9, the failure
+  that kept the live site down for three hours on 2026-09-22.
 
 ### 2026-09-22 - Spain re-scoped from six cities to two: Valencia, Bilbao and Malaga measured out, Sevilla unreachable
 
@@ -318,6 +1101,82 @@ onwards; the early ones are split by phase rather than by hour.
   at 9.21%. A brief that contradicts itself is worse than one that is merely
   wrong. `brief_check.py madrid` is 13/13, barcelona 9/9.
 
+### 2026-09-22 - Four Canadian cities promoted into the provenance tables, and three Step 0 findings did not survive the trip
+
+- **Promoted Vancouver, Surrey, Montréal and Calgary into the three tables of
+  `docs/data_sources.md`, closing a gap that had been labelled rather than
+  fixed since 2026-09-21.** All four were built with their endpoints recorded
+  only in `docs/canada_step0_endpoints.md`; their required notices were in
+  `data_sources.md` (items 8-13) but their sources were not, so the file
+  `CLAUDE.md` calls "the only way a build can be reproduced" could not
+  reproduce five of the fourteen maps. Edmonton's rows had been added when it
+  was built and Toronto's with it, which is what made the omission visible.
+  Twelve rows added: five business registries (Vancouver's licences, its
+  parcel/tax-report residence join, Surrey's directory, Montréal's
+  `locaux-commerciaux`, Calgary's licences), three GTFS feeds, and five
+  boundary layers including the BC ABMS naming layer. The NOTE that recorded
+  the gap is deleted, since it now describes nothing.
+
+- **Wrote the rows from each city's own `config.py` rather than from the Step 0
+  file, and three of the Canada profile's findings turned out to be wrong.**
+  This was the reason to re-derive rather than copy. (1) Surrey's boundary
+  GeoJSON "declares EPSG:4326 while containing EPSG:26910 UTM metres" belongs
+  to the ArcGIS **Hub file export**, not to the FeatureServer the build
+  actually reads with `f=geojson`, which returns correct degrees - so the build
+  needs no `set_crs(..., allow_override=True)` anywhere and step 1 asserts the
+  boundary is in degrees. (2) Calgary's `licencetypes` has **96** real
+  categories, not the 173 the profile recorded: the profile split on a bare
+  `\n` where the delimiter is `,\n`, which shreds each value and counts the
+  fragments. (3) TransLink's feed **does** carry `feed_info.txt`, declaring
+  20260907-20270103; it is the Mobility Database mirror that does not, so the
+  profile's "no validity window" reading described the mirror rather than the
+  feed. Each correction is now in the table cell a rebuild reads, not only in
+  a config comment.
+
+- **Gave `canada_step0_endpoints.md` the opposite job rather than leaving two
+  files claiming to be the provenance record.** Its opening still said "**No
+  Canadian city is built.** When one is, these rows merge into
+  `data_sources.md`" - false on both halves, with six municipalities built as
+  five maps. It is relabelled the evidence trail, with an explicit precedence
+  rule ("where this file and `data_sources.md` disagree, `data_sources.md`
+  wins") and the three corrections named, so a reader who lands on the stale
+  figures knows they are stale. Same shape as `city_master_list.md` versus
+  `global_country_shortlist.md`: current state in one file, the trail behind it
+  in the other, and a stated winner.
+
+- **Carried the endpoint traps into the table cells, because a trap recorded in
+  a sibling city's config does not reach the next reader.** Seven that would
+  each cost a wrong run or a silent empty result: Vancouver's `city-boundary`
+  is a MultiLineString, so a point-in-polygon test against it matches nothing
+  *silently* and `local-area-boundary` dissolved is the layer (22 polygons,
+  118.8 km² against ~115, asserted ±3); Vancouver's Opendatasoft CSV exports
+  are semicolon-delimited, portal-wide; Surrey's boundary layer has 10 features
+  of which 9 are town centres, so an unfiltered read tests containment against
+  a neighbourhood; Surrey's Hub `/csv` returns **HTTP 202** with an async job
+  and then `application/octet-stream`, which a content-type check for "csv"
+  rejected twelve times during Step 0; Calgary publishes two "City Boundary"
+  datasets and the `map` view `7t9h-2z9s` returns 53 bytes of valid, empty
+  GeoJSON that fails only when the geometry is used; Calgary's `route_id`
+  embeds a feed version (`201-20780` mirror, `201-20786` agency) so routes
+  match on `route_short_name`; and Montréal's portal answers a plain client
+  `RBAC: access denied`. This is `osm-rail`'s meta-rule applied to provenance -
+  put the lesson where the next reader must pass through it.
+
+- **Recorded the Vancouver residence-filter sources in the business table
+  although they are not businesses, following Philadelphia's OPA precedent.**
+  The parcel polygons and the property tax report remove rows from the map, so
+  a build is not reproducible without them; the row states the server-side
+  narrowing (`report_year='2026'` plus four columns, ~229k rows against
+  1,553,448 across seven years) and that the address join was tested at 6.5%
+  matched and rejected, so it is not retried. No owner field and no mailing
+  address is downloaded, and neither derived value is ever published.
+
+- **Changed no notice and no other section.** Items 8-13 under "Notices this
+  project MUST display when published" already covered these four cities and
+  are untouched; the diff is three hunks in `data_sources.md` (45 insertions,
+  7 deletions - the deletions are the NOTE) plus the header paragraph of
+  `canada_step0_endpoints.md`. No pipeline file changed, so `drift_check.py`
+  has nothing to compare and `deploy-verify` has nothing to verify.
 
 ### 2026-09-22 - Madrid's zero-coordinate question settled, and the rate was never the answer
 
@@ -370,6 +1229,7 @@ onwards; the early ones are split by phase rather than by hour.
   should not be compared at all until it is. The same shape as the Paris
   finding earlier today, where 148,633 landing on Madrid's 148,814 read as a
   pass and was magnitude rather than shape.
+
 
 ### 2026-09-22 - Spain profiled: Madrid is ready, both licences read, and one clause raised rather than resolved
 

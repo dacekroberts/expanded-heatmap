@@ -339,7 +339,9 @@ future build — a failure here means a source moved under `pipeline/edmonton/`.
 
 **Not machine-checked, because it is a reading rather than a measurement:**
 that the Terms of Use require the URL to be displayed. `docs/data_sources.md`
-item 14 carries it, and no HTTP call settles a clause.
+item 15 carries it (renumbered from 14 on 2026-09-22, when the notices list
+turned out to have two item 8s and two item 15s), and no HTTP call settles a
+clause.
 
 ## Open questions
 

@@ -419,6 +419,27 @@ _NOTICES = [
      "permission of TransLink. TransLink assumes no responsibility for the "
      "accuracy or currency of the Data used in this product or service.",
      True),
+    # Province of British Columbia, added 2026-09-22, and it is the first
+    # PROVINCIAL / STATE-level publisher in the project. Neither Vancouver's
+    # nor Surrey's municipal OGL reaches it: the BC ABMS municipalities layer
+    # is the Province's, read over WFS from openmaps.gov.bc.ca, and it is what
+    # NAMES the 30 SkyTrain stations that fall outside both cities in
+    # outputs/vancouver/excluded_stations.csv. That file is committed and
+    # public, so the Information is distributed and the attribution clause
+    # engages.
+    #
+    # It was missed for a day because the source is not a business registry, a
+    # transit feed or the city boundary - it is the NAMING layer, the fourth
+    # kind of input, and the one no per-city checklist had a slot for.
+    #
+    # VERBATIM, and it is the third en-dash-and-British-"Licence" wording in
+    # this list: Vancouver's, Calgary's and now the Province's. Surrey's is the
+    # odd one with a hyphen and "License". They are not interchangeable.
+    # Terminates automatically on breach, like the four municipal OGLs.
+    ("Province of British Columbia",
+     "Contains information licensed under the Open Government "
+     "Licence – British Columbia.",
+     True),
     # Montréal, added 2026-09-21. TWO credits for one city, because the
     # business data and the transit data have different OWNERS - the STM's
     # datasets are hosted on the City's portal but are STM's property, and its

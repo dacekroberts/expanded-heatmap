@@ -483,6 +483,145 @@ def arcgis_layer(spec, ctx):
     return ok, "; ".join(bits)
 
 
+# --- OpenStreetMap ----------------------------------------------------------
+#
+# Several mirrors, tried in order, and an EMPTY 200 IS A HOST FAILURE rather
+# than an answer about the city. `pipeline/countries/mexico.py` records
+# overpass.osm.ch returning 272 bytes over an empty set, which a caller
+# reported as "every ref has exactly 2 direction relations" - a confident
+# statement about nothing. So an empty result moves to the next host and is
+# never cached.
+OVERPASS_HOSTS = (
+    "https://overpass-api.de/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter",
+    "https://overpass.osm.ch/api/interpreter",
+)
+
+
+def _overpass_once(host, query, timeout):
+    """One mirror. Returns elements, or raises with why this host is no good.
+
+    Two ways a mirror lies with HTTP 200, both seen on 2026-09-22:
+
+      - an EMPTY elements list (overpass.osm.ch, twice, no `remark`), which
+        `pipeline/countries/mexico.py` already records; and
+      - a PARTIAL one. The same query returned 54 elements and then 34 within
+        one minute - tram 20 -> 12, funicular 6 -> 4 - which is the dangerous
+        case, because a partial answer is shaped exactly like a real decrease.
+
+    Overpass signals an aborted query with a top-level `remark`, so that is
+    rejected too; the 34-element answer carried none, which is why the caller
+    must ALSO confirm a mismatch against a second mirror.
+    """
+    r = requests.post(host, data=query.encode("utf-8"),
+                      headers=HEADERS, timeout=timeout)
+    r.raise_for_status()
+    payload = r.json()
+    if payload.get("remark"):
+        raise RuntimeError(f"remark {payload['remark']!r}")
+    elements = payload.get("elements") or []
+    if not elements:
+        raise RuntimeError("empty 200")
+    return elements
+
+
+def _overpass(query, timeout=300, _skip=()):
+    """First mirror that answers. Returns (elements, host)."""
+    problems = []
+    for host in OVERPASS_HOSTS:
+        name = host.split("/")[2]
+        if name in _skip:
+            continue
+        try:
+            return _overpass_once(host, query, timeout), name
+        except Exception as exc:
+            problems.append(f"{name}: {type(exc).__name__} {exc}")
+    raise RuntimeError("every Overpass mirror failed - " + "; ".join(problems))
+
+
+def osm_route_refs(spec, ctx):
+    """Route RELATIONS and distinct REFS per mode, inside a bbox.
+
+    Exists because Barcelona's brief recorded its 54 OSM relations as
+    subway 28 / tram 22 / funicular 4 when the truth is tram 20 / funicular 6.
+    Two relations sat in the wrong column and the total still summed to 54, so
+    no arithmetic on that table could catch it - only re-measuring the parts.
+    A breakdown that adds up is not a breakdown that is correct.
+
+    It reports BOTH counts because they fail in opposite directions, and one
+    city can carry both failures at once. Barcelona's 28 subway relations must
+    stay 14 refs, because L9 and L10 each run as two disconnected segments and
+    merging them would draw track that does not exist; its 6 funicular
+    relations are plain directional pairs that must collapse to 3. Madrid's 28
+    relations collapse to 13. Counting relations answers neither question -
+    refs are what gets drawn, which is why `osm-rail`'s rule is to look at
+    them.
+    """
+    south, west, north, east = spec["bbox"]
+    kinds = list(spec.get("routes")
+                 or ("subway", "tram", "funicular", "light_rail"))
+    query = (
+        "[out:json][timeout:180];"
+        '(relation["type"="route"]["route"~"^(' + "|".join(kinds) + ')$"]'
+        f"({south},{west},{north},{east}););out tags;")
+    elements, host = _overpass(query)
+
+    relations, refs = {}, {}
+    for el in elements:
+        tags = el.get("tags", {})
+        kind = tags.get("route", "?")
+        relations[kind] = relations.get(kind, 0) + 1
+        refs.setdefault(kind, set()).add(tags.get("ref") or "<no ref>")
+
+    got_relations = {k: relations.get(k, 0) for k in kinds}
+    got_refs = {k: len(refs.get(k, ())) for k in kinds}
+    detail = (f"via {host}: relations {json.dumps(got_relations)}, "
+              f"distinct refs {json.dumps(got_refs)}")
+
+    bad = []
+    for label, got, want in (("relations", got_relations,
+                              spec.get("expect_relations")),
+                             ("refs", got_refs, spec.get("expect_refs"))):
+        for kind, expected in (want or {}).items():
+            if got.get(kind, 0) != expected:
+                bad.append(f"{kind} {label}: got {got.get(kind, 0)}, "
+                           f"expected {expected}")
+
+    # The refs themselves, where the brief names them - a count can stay right
+    # while the network changes underneath it.
+    for kind, wanted in (spec.get("require_refs") or {}).items():
+        missing = sorted(set(wanted) - refs.get(kind, set()))
+        if missing:
+            bad.append(f"{kind} missing ref(s) {', '.join(missing)}")
+
+    if not bad:
+        return True, detail
+
+    # A MISMATCH IS NOT YET A FINDING. Overpass returns partial answers with
+    # HTTP 200 and no `remark`, so a low count is ambiguous between "OSM
+    # changed" and "that host truncated". This project's own rule - a negative
+    # from one method is ASSERTED until two methods agree - applies exactly:
+    # confirm against a DIFFERENT mirror before failing the brief.
+    try:
+        second, other = _overpass(query, _skip=(host,))
+    except Exception as exc:
+        return False, (detail + " - MISMATCH: " + "; ".join(bad)
+                       + f" [UNCONFIRMED: no second mirror to check against - {exc}]")
+
+    second_rel = {k: 0 for k in kinds}
+    for el in second:
+        k = el.get("tags", {}).get("route", "?")
+        if k in second_rel:
+            second_rel[k] += 1
+    if second_rel != got_relations:
+        return False, (
+            detail + f" - MIRRORS DISAGREE: {host} {json.dumps(got_relations)} "
+            f"vs {other} {json.dumps(second_rel)}. One of them truncated, so "
+            f"this is a HOST problem, not a brief to correct. Re-run.")
+    return False, (detail + " - MISMATCH: " + "; ".join(bad)
+                   + f" [confirmed by {other}]")
+
+
 CHECKS = {
     "http_ok": http_ok,
     "endpoint_absent": endpoint_absent,
@@ -498,6 +637,7 @@ CHECKS = {
     "socrata_distinct_split": socrata_distinct_split,
     "geojson_area_km2": geojson_area_km2,
     "utm_zone_from_longitude": utm_zone_from_longitude,
+    "osm_route_refs": osm_route_refs,
 }
 
 
