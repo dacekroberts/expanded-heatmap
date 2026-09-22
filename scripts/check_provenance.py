@@ -67,10 +67,7 @@ COMPONENTS_PY = ROOT / "app" / "components.py"
 # Defects awaiting work, each with the date it was recorded. NOT an allowlist:
 # a city here is one whose provenance is missing and known to be missing. Delete
 # the entry when the rows land - leaving it stale fails the check.
-KNOWN_GAPS = {
-    "Mexico City": "2026-09-22 - built 2026-09-22, endpoints only in docs/mexico_step0_endpoints.md",
-    "Guadalajara (Regional)": "2026-09-22 - built 2026-09-22, same omission as Mexico City",
-}
+KNOWN_GAPS = {}
 
 # Slug for a city whose pipeline package is not named after its display name.
 SLUG_OVERRIDES = {

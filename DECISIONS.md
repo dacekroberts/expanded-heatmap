@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**131 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**132 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Mexico City and Guadalajara promoted into the provenance tables, and OSM rail gets its own subsection rather than a GTFS row](#2026-09-22---mexico-city-and-guadalajara-promoted-into-the-provenance-tables-and-osm-rail-gets-its-own-subsection-rather-than-a-gtfs-row)
 - [Madrid built: the pipeline is complete, and the app wiring is deliberately held back](#2026-09-22---madrid-built-the-pipeline-is-complete-and-the-app-wiring-is-deliberately-held-back)
 - [A provincial publisher nobody had read, and the check that turns "record your sources" into something a script can fail](#2026-09-22---a-provincial-publisher-nobody-had-read-and-the-check-that-turns-record-your-sources-into-something-a-script-can-fail)
 - [Spain re-scoped from six cities to two: Valencia, Bilbao and Malaga measured out, Sevilla unreachable](#2026-09-22---spain-re-scoped-from-six-cities-to-two-valencia-bilbao-and-malaga-measured-out-sevilla-unreachable)
@@ -167,6 +168,98 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Mexico City and Guadalajara promoted into the provenance tables, and OSM rail gets its own subsection rather than a GTFS row
+
+- **Promoted Mexico City and Guadalajara (Regional) into the three tables of
+  `docs/data_sources.md` and emptied `KNOWN_GAPS`, so
+  `python scripts/check_provenance.py --strict` now exits 0 across all
+  sixteen cities.** Six rows: two business registries (DENUE entidad 09 and
+  entidad 14), two rail sources and two boundary layers. Both cities were built
+  2026-09-22 with their notices recorded correctly as item 8 and their
+  endpoints recorded nowhere a rebuild would read - the same omission the
+  script was written to catch in Canada a day earlier, caught this time by the
+  script on the day it was written rather than by a reader. `KNOWN_GAPS` is now
+  `{}`, which is the state the docstring says CI should require. 71 insertions
+  in `data_sources.md`, four deletions in `check_provenance.py`.
+
+- **The `KNOWN_GAPS` entry named a file that does not exist, and re-deriving
+  from the configs is the only reason that surfaced.** Both entries said the
+  endpoints lived "only in `docs/mexico_step0_endpoints.md`";
+  **that file was never written.** Mexico was profiled through
+  `pipeline/countries/mexico.py` rather than through a `docs/<country>_step0`
+  file, so unlike Canada there was no country document to correct and no second
+  claimant to the provenance record - the configs and the country module were
+  the whole trail. Had the rows been copied from the named file as Canada's
+  nearly were, the work would have begun by opening nothing. The phantom
+  reference disappears with the `KNOWN_GAPS` entries themselves, so no
+  correction is left to make.
+
+- **Decided that OpenStreetMap rail belongs in its OWN `###` subsection under
+  "Transit feeds (GTFS)", not as a row in that table and not by renaming the
+  heading.** The table's five columns are `City / Agency / Endpoint /
+  Retrieved / Note`, and every note in it turns on `feed_info.txt`, a validity
+  window, `route_id` matching, or the agency that holds the licence - **four
+  things an OSM source does not have**. A row there would have carried four
+  empty columns and a licence pointing at OpenStreetMap instead of an operator.
+  Rejected two alternatives: renaming the heading to "Transit feeds", which is
+  a wider blast radius than it looks (the string is hardcoded in
+  `check_provenance.py`'s `TABLES` and the heading is cross-referenced
+  elsewhere) and which would make the heading vaguer to accommodate two cities
+  out of sixteen; and a fourth top-level table, which would have put rail
+  geometry in two places a reader has to know to check. The subsection sits
+  between the GTFS table and `## Boundary layers`, so it is still inside the
+  section `check_provenance.py` slices for "transit feeds" and the city rows
+  satisfy check A unchanged - no script edit was needed to make this work.
+
+- **Guadalajara takes ONE row per table despite being a four-municipio regional
+  build, and that is a real difference from Vancouver/Surrey rather than a
+  shortcut.** Vancouver needs two rows because it is two registries, two
+  portals, two boundary layers and two licences. Guadalajara's four municipios
+  - Guadalajara 97,134 units, Zapopan 53,311, San Pedro Tlaquepaque 26,832,
+  Tlajomulco de Zúñiga 19,630 - arrive in **one** ZIP from **one** publisher
+  under **one** set of terms, with one operator and one boundary query, so
+  four rows would have repeated the same endpoint four times and implied a
+  choice of source that does not exist. The municipio scope is recorded inside
+  the single row instead, including that the join spells it **"San Pedro
+  Tlaquepaque"** where SITEUR's prose says "Tlaquepaque" - matching the
+  operator's wording keeps zero rows - and that Tonalá is excluded despite
+  19,897 units because no line reaches it.
+
+- **Recorded why there are three Overpass mirrors and how one is chosen, which
+  no other transit row in the file has to explain.** They are tried in
+  configured order and the first returning HTTP 200 with a **non-empty
+  `elements` list** wins; every other outcome advances to the next host. Three,
+  because across these two builds each failed at least once and none failed
+  consistently - `overpass-api.de` 504 several times and 429 once,
+  `overpass.kumi.systems` 504 several times, `overpass.osm.ch` **200 with an
+  empty body**. The non-obvious half is recorded with it: **an empty 200 is a
+  host failure and is never cached.** `overpass.osm.ch` once returned 272 bytes
+  and an empty element list for the routes query, the fetcher cached it, and
+  the caller then reported "every ref has exactly 2 direction relations" - a
+  vacuous truth over an empty set. A mirror list in a config reads like
+  redundancy; the measured failure rates are what make it a requirement.
+
+- **Added no notice and duplicated none.** Item 8 already covers INEGI's
+  Términos de Libre Uso for both cities - it was written around the SOURCE
+  rather than around a city, which is why Guadalajara needed no new notice -
+  and notice 1 already covers ODbL for the OSM rail and boundaries. The notices
+  section is untouched: still 18 numbered and 16 displayed, still in bijection.
+  What was missing was never the licence, only the provenance.
+
+- **A markdown pipe broke a table row, and a column-count check caught it that
+  reading would not have.** The Mexico City rail note originally wrote the
+  Overpass query as `route=subway|light_rail`; a raw `|` splits a cell **even
+  inside backticks**, giving that row 6 columns against the header's 5 and
+  silently mangling the rendered table. Rewritten as a union of
+  `relation[type=route][route=subway]` and
+  `relation[type=route][route=light_rail]`, which is also what the query
+  actually is - two statements, not an alternation. Every table in the file was
+  checked for column-count consistency afterwards; the rest were clean.
+
+- **No pipeline file changed**, so `drift_check.py` has nothing to compare and
+  `deploy-verify` has nothing to verify - documentation and one script constant
+  only, which is the case `CLAUDE.md` says to skip both for.
 
 ### 2026-09-22 - Madrid built: the pipeline is complete, and the app wiring is deliberately held back
 
