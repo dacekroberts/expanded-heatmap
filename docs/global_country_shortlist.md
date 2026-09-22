@@ -84,7 +84,7 @@ its way, and the column says what.
 | **1=** | **Italy** / **Milan** ↑↑ | **subway 5, tram 17** (ATM) — M1–M5 | **28,131 premises, 99.1% with coordinates**, `insegna` (shop sign), `codice_ateco`, `settore_merceologico`, floor area, **CC-BY** | **Whether Personal services is reachable** — two buckets confirmed, the third not |
 | **2** | **Brazil** / São Paulo | **94 stations + 6 lines**, EPSG:31983 already correct, metro/trem discriminator, built/planned separate | CNPJ, ~72M, trade name + address + CNAE | **No coordinates** → geocoding past Toronto's scale |
 | **3** | **Norway** / Oslo | metro 5, tram 9 | **MEASURED premises-level** — 152,060 Oslo sub-units, `beliggenhetsadresse`, NACE, open API no key | No coordinates → geocoding |
-| **3** | **Japan** / Tokyo | **solved**: 10,235 stations + 21,932 line segments, PDL 1.0 | **UPGRADED — premises-level food permits with coordinates**, on the national standard schema, CC BY | **A two-bucket ceiling** — no general retail permit exists in Japan |
+| **3** | **Japan** / Tokyo | **solved**: 10,235 stations + 21,932 line segments, PDL 1.0 | Premises-level food permits, CC BY, national standard schema — but **coordinates are 0% populated** (see the correction below) | **A geocoding leg against Japanese BLOCK addresses**, plus a two-bucket ceiling. Density unmeasurable until geocoded |
 
 **Israel and Peru moved to Tier 4** (2026-09-21) — see below.
 
@@ -389,6 +389,55 @@ more.
 **Build-ready, one named blocker each**
 France (Paris) · **Italy (Milan)** · Spain (6 metro cities) · South Korea
 (Seoul) · Taiwan (Taipei) · Mexico (Guadalajara) · Brazil (São Paulo)
+
+#### CORRECTION — Japan's coordinates, English names and closure dates are ALL EMPTY
+
+**Three claims made about Japan in this file were wrong, and all three came
+from reading the CSV header instead of counting the values.** Counted across
+Minato Ward's 5,722 rows on 2026-09-21:
+
+| Column | Claimed here | Actually populated |
+|---|---|---|
+| **`緯度` / `経度`** | "premises-level **with coordinates**" | **0 of 5,722 — 0.0%** |
+| **`施設名称_英字`** | "an English name field… an unplanned win" | **0 of 5,722 — 0.0%** |
+| **`町字ID`** | the machine join key | **0 of 5,722 — 0.0%** |
+| `法人番号` | "corporate number" | **0%** (though `法人名`, the corporate *name*, is 97.8%) |
+| `廃業年月日` | "permit **and closure** dates" | **0%** — so inactive premises cannot be filtered out |
+
+**This is the project's first invariant, broken by the person who wrote the
+rule into `add-city` Step 0 the same day**: *"a street address and/or lat/long
+that actually has data, not merely a column that exists."* The header was
+taken as the schema.
+
+**What IS populated, and it is still a real source:**
+
+| | |
+|---|---|
+| `施設名称` (name) · `営業の種類` (type) · `許可番号` + all four permit dates · `申請区分` | **100%** |
+| `所在地_連結表記` (concatenated address) | **100%** |
+| Split components — `都道府県` / `市区町村` / `町字` / `番地以下` | **98%** |
+| `施設方書` (building and floor) | 95% |
+| `法人名` (corporate name) | 97.8% |
+
+And `営業の種類` carries genuine categories: 飲食店営業 4,781 (restaurants),
+菓子製造業 320 (confectionery), そうざい製造業 258 (prepared food),
+**食肉販売業 105 and 魚介類販売業 47 — meat and fish retail**, so a narrow
+slice of food retail does exist even though general retail does not.
+
+**The consequence: Japan needs a GEOCODING LEG, and its addresses are the
+hardest format met so far.** Not street-based — Japanese block addressing,
+`東京都港区赤坂一丁目１番１２号　溜池明産ビル１階` (chōme / ban / gō), in
+full-width numerals. Toronto's problem was street-address normalisation
+against a city address-point file; this is a different addressing *system*.
+The route would be Digital Agency's **アドレス・ベース・レジストリ** joined on
+the 町字 *name*, since the `町字ID` that exists to make that join machine-clean
+is empty. **The NFKC rule added to `add-country` today is a prerequisite**, not
+an optimisation.
+
+**And therefore Tokyo's station-density figure could NOT be computed**, which
+was the highest-value open probe. It needs geocoded premises, and there are
+none. Japan's rank stays unmeasured and is now known to be further from
+measurable than this file previously implied.
 
 **Japan is a MULTI-CITY country, and its second bucket is now confirmed**
 (probed 2026-09-21). Because the permit data follows a **national standard
