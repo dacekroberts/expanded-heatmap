@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**154 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**155 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Surveyed CLAUDE.md's invariants for which ones nothing verifies, and nearly shipped a check that examined nothing](#2026-09-22---surveyed-claudemds-invariants-for-which-ones-nothing-verifies-and-nearly-shipped-a-check-that-examined-nothing)
 - [drift_check leaves outputs/ modified on Windows when nothing changed](#2026-09-22---drift_check-leaves-outputs-modified-on-windows-when-nothing-changed)
 - [Working the dead-constant list demonstrated, live, that drift_check is not offline for three cities](#2026-09-22---working-the-dead-constant-list-demonstrated-live-that-drift_check-is-not-offline-for-three-cities)
 - [Two probes came back clean, and the clean result is the record](#2026-09-22---two-probes-came-back-clean-and-the-clean-result-is-the-record)
@@ -190,6 +191,47 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Surveyed CLAUDE.md's invariants for which ones nothing verifies, and nearly shipped a check that examined nothing
+
+- **Went through `CLAUDE.md`'s invariants asking which have a check and which
+  rest on memory.** Eight are machine-checkable; all eight hold today.
+  `streamlit_folium` appears nowhere in `app/`; `map_common.py` names none of
+  the 13 taxonomy modules; no `data/` file is committed and all 17 `outputs/`
+  directories are; the public name is `SITE_NAME = "Storefronts Near Transit"`,
+  not a city; and the removal commitment appears in both files that must carry
+  it. Recorded as examined rather than left implicit.
+
+- **Three of them are now `check_provenance.py` check K**, chosen because each
+  breaks SILENTLY and a new city is exactly when that would happen:
+  **the OSM basemap attribution** (17 of 17 maps carry it and the copyright
+  link - an ODbL obligation breached by omission rather than by a wrong
+  string); **`CRS_PROJECTED` against each city's own longitude** (a copied CRS
+  does not error, it measures a few per cent wrong); and **no map step forking
+  `render_heatmap()`** (all 17 call it, none builds its own `folium.Map`, and
+  they run 77-130 lines).
+
+- **A probe bug worth recording on its own: only 13 of 17 cities have a
+  `step3_map.py`.** Los Angeles, New York, Toronto and Washington D.C. need a
+  geocoding pass, so theirs is `step4_map.py`. The first glob missed all four -
+  which is an argument for writing the rule down once, correctly, rather than
+  re-deriving it per sweep.
+
+- **AND THE CHECK ITSELF NEARLY SHIPPED BROKEN, in the way this whole taxonomy
+  is about.** The CRS limb read longitudes from `app/cities.py` with
+  `getattr(node, "value", None)`; a negative number is an `ast.UnaryOp`
+  wrapping a `Constant`, so **every western longitude parsed as None and the
+  limb examined zero of sixteen cities** - while the section printed its green
+  line. It was caught by deliberately breaking Calgary's CRS and noticing the
+  check stayed SILENT, not by reading the code. Fixed with
+  `ast.literal_eval`, and the limb now **fails if it reads fewer longitudes
+  than there are cities**, because a limb that can be starved of input should
+  say so rather than pass.
+
+- **Written into the sweep skill as its own rule: never ship a check you have
+  not watched fail.** Every check added today was negative-tested, and this is
+  the one where that discipline actually earned itself rather than merely
+  confirming what reading suggested.
 
 ### 2026-09-22 - drift_check leaves outputs/ modified on Windows when nothing changed
 
