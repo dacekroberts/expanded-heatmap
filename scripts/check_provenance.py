@@ -101,7 +101,7 @@ NOTICE_ALIASES = {
 
 TABLES = (
     ("## Business registries", "business registries"),
-    ("## Transit feeds (GTFS)", "transit feeds"),
+    ("## Transit feeds", "transit feeds"),
     ("## Boundary layers", "boundary layers"),
 )
 
