@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**103 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**104 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-21**
 
+- [The Canada retrospective's six improvements, implemented](#2026-09-21---the-canada-retrospectives-six-improvements-implemented)
 - [Toronto built: Canada closes at five cities, and the station count was checked twice](#2026-09-21---toronto-built-canada-closes-at-five-cities-and-the-station-count-was-checked-twice)
 - [Toronto's open question 1 closed: the 71.4% was the wrong denominator](#2026-09-21---torontos-open-question-1-closed-the-714-was-the-wrong-denominator)
 - [DECISIONS.md got a generated index, because it is 100 entries long](#2026-09-21---decisionsmd-got-a-generated-index-because-it-is-100-entries-long)
@@ -136,6 +137,79 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-21 - The Canada retrospective's six improvements, implemented
+
+- **Implemented five of the six improvements the Canada retrospective proposed,
+  and the sixth needed no code.** In value order: a shared station check
+  (`pipeline/stations.py`), a machine-readable drift baseline
+  (`pipeline/baseline.py`), a denominator helper (`pipeline/counts.py`),
+  `brief_check --vs-config`, and a render-time line-colour check
+  (`pipeline/linecolour.py`). The sixth - keep profiling a country before
+  screening its cities - is a practice already followed and documented, so it
+  was confirmed rather than built.
+
+- **The station check is shared but the COLLAPSE is not, and that split is the
+  decision.** The obvious module owns both. It should not: every feed collapses
+  differently and the differences are real, not incidental - Edmonton has
+  `parent_station` on all 65 stops, Calgary has a direction prefix plus three
+  suffix spellings including the City's own typo (`CTrain Staion`), Toronto has
+  three naming conventions in one feed. A shared collapse would grow a flag per
+  city and become the per-city code again with more indirection. **What was
+  missing in four of five cities was never the collapse; it was the check.** So
+  `verify_stations()` owns three gates - spacing, boardability, and the
+  operator's own published counts - and each city keeps its own collapse. The
+  third gate is the one to reach for first and the one that kept being skipped,
+  because it requires reading what the agency publishes rather than
+  interrogating the data.
+
+- **The colour check ships with TWO thresholds instead of the one that was
+  asked for, and measuring first is why.** The proposal was to refuse to draw
+  any line within about 45 Delta-E of a category colour. Surveyed across all
+  fourteen cities before building it: **fourteen line colours in six cities are
+  already below 45** - New York's green at 13.6 and blue at 14.0, Montréal's
+  blue at 16.9, Boston's green at 20.1 - and every one is an **agency's
+  official colour**, kept under the owner's branding decision of 2026-09-21
+  (real line names, real route colours, plus a non-affiliation notice). A hard
+  gate at 45 would have recoloured six cities and overturned that decision by
+  implication, which a lint rule has no business doing. So it RAISES below 10,
+  where two colours are the same colour at a glance and a line vanishes under
+  its own pins, and REPORTS between 10 and 45 on every render. Calgary's
+  historic 3.3 fails; New York's 13.6 is recorded and kept. Rejected: a single
+  threshold at either value - 45 breaks six cities, 10 alone loses the record
+  of which cities are trading recognisability for separation.
+
+- **`pipeline/counts.py` makes the unlabelled percentage unavailable rather
+  than discouraged**, because prose had already failed at it. `pct()` takes the
+  set's name as a required argument and raises on an empty one; `pct_both()`
+  prints two denominators where a figure honestly has two, which is what
+  Toronto's 71.4%/92.8% needed and did not get. Eight instances of this error
+  by now, two of them committed while writing up the other six.
+
+- **The drift baseline is emitted rather than returned.** A step calls
+  `emit("storefront_rows", len(df))`, which prints a `##BASELINE` marker line;
+  `drift_check` parses those out of stdout it already captures. That was chosen
+  over a return value or a written file because it needs **no other change to a
+  step** to make it watched, and a step that emits nothing is reported as
+  unwatched rather than silently passing. `drift_check`'s closing instruction -
+  compare counts by hand against DECISIONS.md - is retired. Toronto emits 8
+  figures; the other 13 cities emit none and say so every run.
+
+- **Each new tool was verified to FAIL, not only to pass.** The colour check
+  raises on Calgary's historic `#0072CE`; the baseline check reported
+  `bucket_retail: 1,200 -> 870 (-330)` and exited 1 on injected values;
+  `--vs-config` reproduced the exact Toronto divergence (config 111 against
+  brief 110). This is deliberate: three of today's wrong findings came from
+  instruments nobody had checked, and a tool that has only ever passed is not
+  evidence that anything is right.
+
+- **And one of them bit while being built, which is recorded because it is the
+  same class.** `--vs-config` reported 111 against a config file that said 110:
+  a stale `.pyc`. The checker was confidently wrong about a correct file. It
+  now calls `importlib.invalidate_caches()` first.
+
+- Zero drift across all 14 cities after every change; 18/18 brief claims and
+  6/6 config mappings hold.
 
 ### 2026-09-21 - Toronto built: Canada closes at five cities, and the station count was checked twice
 
