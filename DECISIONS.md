@@ -359,6 +359,91 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Promoted Tel Aviv from Band D to Band B - the strongest unbuilt result
+  outside Band A - by asking a host that answers instead of the one that does
+  not.** `opendata.tel-aviv.gov.il` and `www.tel-aviv.gov.il` both return
+  **HTTP 472**, Imperva's block code, and an earlier pass had the host
+  printing our own IP back: the one unambiguous IP-level refusal in this
+  project, and the reason the city sat unreached. `gisn.tel-aviv.gov.il`
+  answers normally and serves `IView2`, the city's public map viewer, at
+  **254 layers with no key and no account**. Layer **[964]
+  `מאגר עסקים ברשיון או בהיתר`** holds **22,176 businesses with a licence or
+  permit**; layer [925] `עסקים` holds **37,392**. Both halves of the
+  location/activity split are present - activity as `t_hesber_mahut_esek` in
+  plain Hebrew plus the numeric `mahuiot` licensing-item code, location as
+  `shem_rechov` and point geometry in **wkid 2039, Israeli TM, already
+  projected in metres** - and `date_import` reads 20/09/2026, two days old.
+  Rejected the alternative of recording Tel Aviv as blocked, which is what
+  three prior passes did. Touched `docs/city_master_list.md`.
+
+- **Recommended building Tel Aviv on layer [964] rather than the larger
+  [925], on privacy grounds rather than size.** [925] carries 37,392 rows
+  against [964]'s 22,176, but its `shem_machzik_rashi` field is the **name of
+  the main holder** - squarely the *registrant's own name* category the
+  project invariant excludes, and the kind of field
+  `check_personal_exposure.py` exists to catch. [964] carries `t_shem_esek`,
+  a trade name, which is the publishable field. Treat [925] as a cross-check
+  only. This is a recommendation and not yet a decision: it is the owner's
+  call which layer a Tel Aviv build uses.
+
+- **Recorded Tel Aviv's licence as UNREAD, and as the real gate on the city.**
+  The MapServer returns **no `copyrightText` and no `licenseInfo`**, and Tel
+  Aviv is **not** among the four municipalities publishing on `data.gov.il`
+  (Be'er Sheva, Haifa, Ma'ale Adumim, Petah Tikva), so there is no national
+  statement to inherit either. Per `read-licence`, that a layer fetches is not
+  a finding that it is licensed. The pages that would carry the terms sit on
+  the 472-blocked host, so the Internet Archive is the likely route - the same
+  one that read Barcelona's and Sevilla's.
+
+- **Discarded Tallinn after downloading MTR whole and counting every element
+  name in it.** The Majandustegevuse register was Tallinn's last route and had
+  been parked as *"live HTML with no API found, so it needs the browser"*. It
+  needed no browser: its `andmed.eesti.ee` entry names a bulk export outright,
+  `mtr.ttja.ee/opendata/avaandmed_ettevotjad.xml`, `access: PUBLIC`,
+  `accrualPeriodicity: DAILY`, `applicableLegislation: ODD_LEGAL_ACT`. The
+  102 MB file holds **56,401 undertakings and 100,431 licences, 97.8%
+  Estonian** - and a census of every element name in all 99,337,676 characters
+  returns **17 distinct tags, none of which names a place**. No address, no
+  tegevuskoht, no coordinates. Full activity classification (114 distinct
+  `tegevusala`, EMTAK 2008 and 2025) attached to no location whatsoever: the
+  Colombia-RUES shape exactly. It fails composition independently too - the
+  largest single category is **`Teenindajakaart`, 25,130 service-worker
+  cards**, then freight-transport licences and taxi vehicle cards, which are
+  personal and vehicle certifications rather than premises. Tallinn had been
+  parked on *value*; it is now closed on *data*.
+
+- **Counted the whole MTR file rather than reading its first records, and the
+  head would have been misleading.** The first two `<ettevotja>` entries are
+  French and Polish cross-border filings (`riik_kood` FRA, POL), which have no
+  Estonian premises to declare, so "no address here" was unsurprising and
+  unrepresentative. Scanning all 56,401 records made the negative a
+  measurement instead of an inference. Same correction as the Bulgarian sweep
+  earlier the same day, applied before publishing rather than after.
+
+- **Corrected a recorded blocker on Estonia's search API that was never
+  real.** `andmed.eesti.ee/api/datasets/search` was filed as *"contract
+  unpinned - 400 on empty `search` and on `limit=1000`"*, which is why MTR had
+  never been located in the catalogue. `search=<term>&limit=5&page=1` answers
+  normally; the endpoint rejects an *empty* term, not the parameter. An API
+  that refuses one value is not an API with an unknown contract.
+
+- **Probed all three of Hyderabad's live hosts and left it blocked rather than
+  discarded, with the national fallback now measured shut.** `ghmc.gov.in` -
+  the body that actually issues trade licences - returns **403 in a real
+  browser as well as to curl**, an F5 WAF page carrying a support ID and
+  `F5 site: wes-sea`: a block that names itself, like Bulgaria's.
+  `data.telangana.gov.in` resolves but is unroutable for us, and `tsbpass`
+  has no A record. **`tgbpass.telangana.gov.in` answers 200 and is a false
+  friend** - TG-bPASS is *Building Permission Approval and Self-certification*,
+  construction permits, and `/Home/TradeLicense` 404s. The route that rescued
+  Sofia does not work here: `data.gov.in`'s `title=` filter is controllable
+  (`zzqqxxnonsense` returns "No Result Found", so it genuinely filters) and
+  `trade license` returns only Karnataka's *"District wise ULB wise Trade
+  License Details"*, an **aggregate**, confirming the earlier
+  288,011-resource negative from a second direction. Hyderabad stays the Hong
+  Kong shape: blocked, not negative.
+
+
 - **Discarded Sevilla on measured data after its dead portal named its own
   successor.** `datosabiertos.sevilla.org` is NXDOMAIN and `www.sevilla.org`
   is unroutable from here, so the city had been parked as unreachable with the
