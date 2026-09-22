@@ -16,7 +16,17 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**105 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**112 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-09-22**
+
+- [CDMX approved from OpenStreetMap as a per-city exception, and it passes both rail invariants](#2026-09-22---cdmx-approved-from-openstreetmap-as-a-per-city-exception-and-it-passes-both-rail-invariants)
+- [Mexico nationwide GIS probe: no new route, but CDMX is a retry rather than a loss](#2026-09-22---mexico-nationwide-gis-probe-no-new-route-but-cdmx-is-a-retry-rather-than-a-loss)
+- [Madrid's licence read; the Mobility Database moved its files, and Mexico City drops out of Band A](#2026-09-22---madrids-licence-read-the-mobility-database-moved-its-files-and-mexico-city-drops-out-of-band-a)
+- [Nine-item probe sweep: Madrid, Barcelona and Milan promote; Band A is seven cities](#2026-09-22---nine-item-probe-sweep-madrid-barcelona-and-milan-promote-band-a-is-seven-cities)
+- [Master city list rebanded, and eleven cities were discarded on a reason this project's own file contradicts](#2026-09-22---master-city-list-rebanded-and-eleven-cities-were-discarded-on-a-reason-this-projects-own-file-contradicts)
+- [Seoul's screening is finished: 197,276 active premises, KOGL Type 1, no open questions](#2026-09-22---seouls-screening-is-finished-197276-active-premises-kogl-type-1-no-open-questions)
+- [Korea: Seoul gets coordinates and needs no account; Busan and Daegu are closed](#2026-09-22---korea-seoul-gets-coordinates-and-needs-no-account-busan-and-daegu-are-closed)
 
 **2026-09-21**
 
@@ -139,6 +149,449 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-22 - CDMX approved from OpenStreetMap as a per-city exception, and it passes both rail invariants
+
+- **The owner approved OSM for CDMX's rail leg specifically**, keeping agency
+  data as the default and treating this as a documented per-city exception
+  rather than a new rule. Reasoning recorded as given: a 12-line metro is the
+  highest-value unbuilt system in the screen, OSM's coverage of it is excellent,
+  and the naming risk is low for a system whose lines are literally numbered.
+  **Measured the same day, and it passes.**
+- **Invariant 2 (every drawn line carries its real public name) passes, and more
+  completely than most GTFS feeds do.** 26 route relations - 12 Metro lines in
+  both directions plus Tren Ligero - with refs **1-9, A, B, 12**, exactly Metro
+  CDMX's twelve. `name`, `ref` and **`colour`** are each **100%** populated, and
+  the colours are the real livery (`#F04E98` L1, `#005EB8` L2, `#FFD100` L5), so
+  the map's line styling comes from the source rather than being invented.
+  Geometry: **26/26 relations, 6,468 coordinate points.**
+- **The decisive validation: stop counts per line against Metro CDMX's own
+  published figures are EXACT - 195 vs 195, zero delta on all twelve lines.**
+  An earlier reading of "159 OSM nodes vs 163 official stations" was comparing
+  distinct nodes against a distinct-station count; the like-for-like comparison
+  is stop memberships per route relation, and it matches perfectly. Station
+  layer: 177 nodes (159 subway, 18 light rail), **100% named, 100%
+  coordinated**.
+- **Found a trap that would have cost a quarter of the system: 42 of the 159
+  `station=subway` nodes carry NO `operator` tag.** Filtering stations by
+  `operator="Sistema de Transporte Colectivo"` returns 117 and silently drops 42
+  - Gómez Farías, Zaragoza, Merced, Sevilla, Universidad among them. **Filter on
+  `station=subway`, never on `operator`.** This is the community-data risk in
+  concrete form: the tagging is complete but not uniform, so a filter that is
+  safe against an agency feed is not safe here. Also in the bbox: 12
+  `railway=station` nodes with no `station=` tag and 2 tagged `monorail`.
+  Scope excluded per this project's existing mode rules: Metrobús (BRT),
+  Trolebús, Cablebús (aerial) and Tren Suburbano (commuter), the last on the
+  same basis as route_type 109 / S-Bahn for Berlin.
+- **Raised a licence obligation that is NOT the one expected, and did not
+  resolve it.** Attribution was assumed to be the question and is not - the
+  project already displays OSM attribution on every map. The live question is
+  ODbL **share-alike**, and it turns on what gets committed: `heatmap.html` is a
+  **Produced Work** (attribution only), but
+  `outputs/<city>/excluded_stations.csv` commits
+  `station,latitude,longitude,lines`, a structured extract that is plausibly a
+  **Derivative Database**, to which share-alike attaches. The repository is
+  already structurally ready - `LICENSE` disclaims MIT over everything in
+  `outputs/` and states it "could not" license that data - **but a disclaimer is
+  not an offer, and ODbL requires the derivative database to be offered under
+  ODbL.** That is a positive obligation none of the fourteen agency-sourced
+  cities carries, and it would be this project's first share-alike commitment.
+  Left as an owner decision per `read-licence`'s rule against resolving an
+  ambiguity in this project's favour; the practical fix is small, one line in
+  `LICENSE` and one in `docs/data_sources.md`. Files touched:
+  `docs/global_country_shortlist.md`.
+
+### 2026-09-22 - Mexico nationwide GIS probe: no new route, but CDMX is a retry rather than a loss
+
+- **Ran the Mexico probe as a GIS question rather than a feed question**, since
+  that reframing flipped Japan, Korea and Taiwan, and since DENUE already
+  supplies every Mexican city's business leg with coordinates under a cleared
+  licence. **It produced no new rail route**, which is itself worth recording
+  given how often this reframing has paid: it is not a universal key.
+  Probed: INEGI (portal, mapas, datos abiertos, Red Nacional de Caminos, temas
+  - all reachable, but its site search returned 108 results for *vías férreas*
+  that were all public-security censuses, so the term was not applied);
+  `gaia.inegi.org.mx` (200 but **0 bytes**); SICT and ARTF (~1 KB shells,
+  `geoportal.sct.gob.mx` unreachable); `datos.gob.mx` (live, not CKAN at the
+  documented path).
+- **The single most useful result was `ecobici.cdmx.gob.mx` answering 200 with
+  152 KB** while datos, portal, sig, adip, metro and semovi on the same domain
+  all time out. That discriminates: **the network path from here is fine and
+  those hosts are individually down**, so this is neither a domain-wide block
+  nor an IP-level refusal. It **corrects the earlier finding** that "every
+  `*.cdmx.gob.mx` host times out, which is a more durable finding than one
+  portal being down" - the domain is not uniformly dead, and CDMX is therefore a
+  **retry candidate rather than a permanent loss**. This project has already
+  recorded a transient outage as a durable fact once (`data.go.kr`, 21 s
+  timeouts from two networks, HTTP 200 an hour later), which is the reason to
+  hold the line here.
+- **Monterrey is now a measured negative at the publisher, not an absence from a
+  catalogue.** `datos.nl.gob.mx` is live and is a **WordPress brochure site** -
+  `wp-content`, `portfolio_page`, `comments/feed`, publishing PDFs and
+  statistics pages. No catalogue, no API, no Metrorrey data. Previously recorded
+  only as "not in the catalogue under any of `monterrey`, `metrorrey`, `nuevo
+  león`"; this is the stronger form of the same conclusion.
+  `datos.monterrey.gob.mx` returns a 1 KB shell.
+- **Rejected the third-party GTFS mirrors on consistency grounds.** GitHub
+  carries `CarlosGiles/gtfs-cdmx`, `CelesteBJ/gtfs_cdmx` and others, and no
+  official CDMX government org exists (`SEMOVI-CDMX`, `datos-cdmx` and `LabCDMX`
+  404; `CDMX-ADIP` and `adip-cdmx` have zero repos). These are the same shape as
+  **Dubai's catalogue entry, "an anonymous personal GitLab job artefact", which
+  this project already rejected** - publishing a city's transit geometry on an
+  individual's untracked repository, with no licence and no provenance. Ruled
+  out rather than treated as a find.
+- **Raised, and deliberately not decided: whether OpenStreetMap is an acceptable
+  source for the rail leg.** It is the only option that would unblock CDMX,
+  Monterrey and every future city at once; CDMX's Metro and Monterrey's
+  Metrorrey are both comprehensively mapped; the data is ODbL and **this project
+  already displays OSM attribution on every map**, so it adds no new licence
+  obligation. Against it: community rather than agency data, and the invariant
+  that every drawn line carries its real public name would need per-city
+  verification instead of coming from `routes.txt`. **All fourteen built cities
+  used agency data for the transit leg, so this is a change of sourcing practice
+  and an owner decision rather than a measurement.** Flagged, not assumed.
+  Files touched: `docs/global_country_shortlist.md`.
+
+### 2026-09-22 - Madrid's licence read; the Mobility Database moved its files, and Mexico City drops out of Band A
+
+- **Madrid is PERMITTED WITH CONDITIONS, and the second document was the one
+  that mattered.** CKAN declares `license_id="cc-by"` (CC BY 4.0, `isopen:
+  true`) on the censo de locales - a deliberate choice, since the portal also
+  offers `cc-by-nc` and `cc-by-nc-sa`. But *Condiciones de uso* links
+  *Condiciones generales para la modalidad general…*, which binds **without any
+  acceptance step**: "obligan a cualquier persona y/o empresa que reutilice
+  datos **por el mero hecho de hacer uso**". Structurally that is Philadelphia's
+  incorporation-by-conduct; the content is the opposite, granting reuse "para
+  fines comerciales y no comerciales" including "copia, difusión, modificación,
+  adaptación, extracción, reordenación y combinación", plus a free non-exclusive
+  worldwide IP assignment covering data "en sus niveles más desagregados o 'en
+  bruto'". **Four of its six obligations go beyond CC-BY**: prescribed
+  attribution wording ("Origen de los datos: Ayuntamiento de Madrid"), a
+  requirement to state the **last-update date**, preservation of the reuse-terms
+  metadata, and an express prohibition on **re-identification of persons**.
+  Obligation 4, "está prohibido desnaturalizar el sentido de la información", is
+  the **fourth appearance of the transformation family** after INEGI, Montréal
+  and KOGL - so a bare source credit does not discharge it. The
+  re-identification clause is the **first time a licence has contractually
+  required what this project's privacy invariant already does voluntarily**,
+  and it bears on `rotulo`: trade name plus precise address is the operation the
+  clause names, making `check_personal_exposure.py` a licence obligation here
+  rather than only a house rule. Recorded in `docs/data_sources.md`.
+- **`files.mobilitydatabase.org` is 403 host-wide, and my first framing of that
+  was too broad.** Every path returns `<Error><Code>AccessDenied</Code></Error>`
+  - host root, `mdb-<id>/…` and `mdb-latest/…`, for CDMX, Guadalajara, Sevilla
+  and Toronto alike; `api.mobilitydatabase.org` answers **413** on every path
+  including bare GETs. The body names no IP and carries no WAF id, so by this
+  project's own rule it is an **authentication wall, not an IP block**. But the
+  claim that this "affects every feed sourced that way" was **wrong**: the
+  `mdb-latest` mirror used to unblock CDMX lives on `storage.googleapis.com`, a
+  **different host**, and is still public - Guadalajara downloaded from it
+  cleanly at 2,542,046 b. The earlier 404 there had been a wrong filename guess.
+- **The durable route is the catalogue's GitHub repo, which this project had
+  never used.** `MobilityData/mobility-database-catalogs` is public and each
+  feed's JSON carries the **agency's own** `urls.direct_download` alongside the
+  GCS `urls.latest`; one request for the repo tree returns all 3,555 blobs.
+  **This becomes the first stop in the next rail screen**, ahead of the files
+  host, because it survives the files host changing access policy.
+- **Mexico City drops OUT of Band A.** All four of its routes are dead: the city
+  portal (`datos.cdmx.gob.mx`, 000, consistent with the standing domain-wide
+  outage), the S3 bucket `s3.amazonaws.com/setravi` (403), the GCS mirror (404)
+  and the files host (403). The 2026-09-21 "MEXICO CITY IS UNBLOCKED" finding
+  was true when made and is no longer true, so **Mexico is a one-city country
+  again**. Noted for when it returns: the catalogue lists **`mdb-3126`**, a
+  SEMOVI feed covering Metro, Metrobús, Tren Ligero, Ferrocarriles Suburbanos,
+  Trolebús, Cablebus and Pumabús together, which is a better feed than the
+  `mdb-1099` *corredores concesionados* that the earlier "subway 12" screen
+  actually used.
+- **Guadalajara re-verified and it carries line geometry.** Screened from the
+  downloaded feed: **3 urban-rail routes** at `route_type 0` (Líneas 1-3 of the
+  Tren Ligero), **12,231 stops, 100% with coordinates, and `shapes.txt`
+  present** - so the every-line-drawn-and-labelled invariant is satisfiable. It
+  is now the only Mexican city in Band A, and the recommended next build.
+- **Sevilla was recorded dead and is actually registration-gated**, which is a
+  different finding. The catalogue names Spain's **National Access Point**
+  (`nap.transportes.gob.es/api/Fichero/download/1583`) as the publisher of
+  record for `mdb-2781`, and it answers **401** rather than 404 - the WMATA
+  shape, a free account the owner can create. Moved from "out" back to Band D
+  with a named cheap blocker. Files touched:
+  `docs/data_sources.md`, `docs/global_country_shortlist.md`.
+
+### 2026-09-22 - Nine-item probe sweep: Madrid, Barcelona and Milan promote; Band A is seven cities
+
+- **MADRID PASSES, and it is the largest premises source measured in this
+  project.** `datos.madrid.es` **is** CKAN at the bare host - the earlier
+  "unreachable" was a wrong path (`/egob`), a fact about the guess rather than
+  the portal. Dataset `200085-0-censo-locales`, resource `200085-5`, downloaded
+  (125 MB) and counted: **225,667 rows, 47 columns**; `desc_situacion_local`
+  100% (Abierto 159,835 / Cerrado 40,407 / Baja 12,557 / Uso vivienda 8,486 /
+  Baja Reunificación 4,382); **148,814 open + classified + coordinated**, being
+  93.1% of Abierto; `rotulo` 100% on those; three-level classification
+  `desc_seccion` -> `desc_division` -> `desc_epigrafe`; 22 districts; EPSG:25830;
+  UTF-8 BOM and **semicolon**-delimited. All three buckets in one file - COMERCIO
+  45,951, HOSTELERÍA 27,932, OTROS SERVICIOS 14,887 (PELUQUERIA 6,012, CENTRO DE
+  ESTETICA 3,058). **2.2x Barcelona's 68,024 and needs no geocoding.** This makes
+  Spain a genuine multi-city country rather than the Barcelona-only one this
+  project had it as.
+- **19.99% of Madrid's coordinates are a literal zero although the column is
+  100% populated.** 29,744 of the 148,814, which from EPSG:25830 project into
+  the Atlantic off West Africa - they would have vanished off-map rather than
+  raised an error. **Genuinely mappable: 119,070.** `add-city` Step 0 already
+  required a validity check and already named this exact failure for Los Angeles
+  (~9%, "(0,0), whole-degree placeholders"), so this is corroboration rather
+  than a new rule - but two of the three pre-geocoded registries measured at
+  this depth now show it, so the bounding-box count was promoted from a
+  suspicion-driven check to an every-city one, to be run **before** a density
+  figure is quoted. At 20% it would have overstated Madrid by a fifth.
+- **Milan's third bucket exists, so its one blocker is closed.**
+  `dati.comune.milano.it`, control-verified: *Attività artigianali: servizi alla
+  persona (parrucchieri, estetisti...)* in CSV/**GEOJSON**/JSON, plus *Attività
+  commerciali: esercizi di vicinato in sede fissa* for Retail and *settore
+  alimentare* / *panificatori* for Food. GeoJSON means coordinates ship with it.
+  Schemas not yet counted - that is Step 0, not screening.
+- **Barcelona's census is CC-BY-4.0, read from the API because the portal is
+  CAPTCHA-walled.** `opendata-ajuntament.barcelona.cat` serves **hCaptcha** on
+  `/en/avis-legal`, `/ca/avis-legal` and `/es/aviso-legal` alike; this project
+  does not defeat CAPTCHAs. Its CKAN API is not walled and declares
+  `license_id="CC-BY-4.0"` per dataset on both the premises census and the
+  activity-code lookup. **It is a deliberate choice, not a portal default:**
+  `license_list` also offers CC-BY-ND and CC-BY-NC, the two that would forbid
+  this project. One residual, and it is the step this project most often skips -
+  what the dataset page incorporates **by reference** is what hid Philadelphia's
+  prohibition, and the general legal notice is precisely what sits behind the
+  CAPTCHA. Per-dataset licence MEASURED; general notice UNREAD, and reading it
+  is an owner action.
+- **Sevilla is dead at all six addresses a feed can have**, applying the CDMX
+  rule. Two are **403** from `files.mobilitydatabase.org` (both the versioned
+  path and `mdb-latest`), which is new information: previously recorded as "the
+  mirror 404s", so the host appears to have moved behind authentication. That
+  would affect every feed sourced that way and is worth one check before the
+  next rail screen. Sevilla dropped from the list.
+- **Three measured negatives, each with a working nonsense control.** **Berlin**:
+  the CKAN API is on `datenregister.berlin.de`, not the public host; `Gewerbe`
+  returns broadband coverage and electricity load profiles, **`Gaststätten`
+  returns 0**, `Betriebe` returns swimming pools and parliamentary papers - the
+  Gewerberegister is not open data. **Naples**: its only commercial dataset is
+  *Apertura e cessazione attività commerciali* **"per procedimento e
+  Municipalità"**, i.e. the aggregate trap. **Messina**: SCIA and DIA ship
+  GeoJSON but are business-*start notifications* - a flow, not a stock, so
+  mapping them shows where businesses opened rather than what is there now.
+- **Zurich is one bucket, and it came with a false friend worth recording.**
+  `Gastwirtschaftsbetriebe` is genuine premises data with a GeoJSON endpoint,
+  Food only. **`Betriebliche Bestandeskarten` is not a business inventory at
+  all** - its description is forest stand maps (Bestockung, Waldgesellschaften);
+  a title-level read would have recorded a three-bucket pass. And Switzerland's
+  national route is aggregate: opendata.swiss's STATENT / Betriebszählung /
+  Arbeitsstätten are all "nach Branche / Grössenklasse / Kanton / Gemeinde /
+  Quartier". **Fifth time the city portal beat the national one.**
+- **Dublin has one live lead and no finding yet.** `data.gov.ie` control 0;
+  `valuation` returns the Valuation Office API plus census tables, `commercial
+  rates` returns a *leases* register and Local Property Tax aggregates, `retail`
+  returns zoning polygons and central-bank interest rates. The Valuation Office
+  API is the Irish analogue of the UK's NNDR, which this project rejected for
+  carrying no category, so the single open question is whether the Irish one has
+  a use category.
+- **Items 8 and 9 are recorded as still open rather than as negatives.** The
+  seven never-reached countries were still not reached, mostly because the hosts
+  guessed were wrong - `data.kk.dk`, `opendata.budapest.hu` and `data.gov.ro`
+  resolve nowhere, `data.egov.bg` returns 403 again, and Stockholm, Estonia,
+  Croatia and Prague are live but not CKAN at the guessed path. **None of that
+  is a fact about their data.** Of the 22 mapping-agency hosts, 20 are reachable
+  and every one returned a landing page, which `probe_geodata.py` itself labels
+  a route rather than a finding; only `ign.gob.pe` (TLS) and
+  `geoportal.regionlima.gob.pe` failed. `jupem.gov.my` needed the curl fallback
+  after a `requests` SSLError - **the fourth time Python's TLS has reported a
+  live government host as dead.** Files touched:
+  `docs/global_country_shortlist.md`, `.claude/skills/add-city/SKILL.md`.
+
+### 2026-09-22 - Master city list rebanded, and eleven cities were discarded on a reason this project's own file contradicts
+
+- **Rebuilt the master list around what BLOCKS each city rather than around a
+  tier number**, because the tiers had stopped discriminating: they mixed
+  "needs one document read" with "needs a geocoding pass written" with "never
+  probed", which are three different kinds of work. Four bands now, and **three
+  of the four are not waiting on research at all.** Band A, screening complete:
+  **Seoul, Paris, Mexico City, Guadalajara**. Band B, one narrow question each:
+  Barcelona (unread licence), Milan (is Personal services reachable), Madrid /
+  Valencia / Bilbao / Málaga (each needs its own source, since Spain is bespoke
+  per city and Barcelona's census does not transfer), Sevilla (feed mirror
+  404s). Band C, viable but each needs a geocoding leg, which is build work:
+  Taipei / Kaohsiung / Taoyuan / Taichung, Oslo, São Paulo, and Tokyo plus nine
+  more Japanese cities. Band D, genuinely unprobed. **Mexico is the cheapest
+  unbuilt country in the screen** - two cities, one national source, cleared
+  licence, coordinates included, and SCIAN *is* NAICS so the taxonomy may
+  transfer from the US builds.
+- **Found that the DISCARD list was wrong for eleven cities, and wrong against
+  evidence in the same file.** Berlin, Hamburg, Stockholm, Budapest, Naples,
+  Messina, Hyderabad, Kochi, Tallinn, Zagreb and Santiago all sat under the
+  heading "Rail measured, but the COUNTRY's business leg failed". The same
+  document's "What the sweep actually settled" section says Germany and Czechia
+  have **"a working route and an unprobed register"**, that Sweden, Hungary,
+  Estonia, Croatia and India were **"not reached at all"**, and - sharpest -
+  that **"1 passes both legs: Italy, via Milan"**. So Naples and Messina were
+  discarded for their country failing, in the file whose headline finding is
+  that their country is the one that passed. All eleven moved to Band D. The
+  discard list now carries **one row per city naming the finding that
+  disqualified it**, so eight remain: Vienna (GISA strips the street address),
+  Amsterdam/Rotterdam (aggregate), Athens (sector-only), Lisbon, Poznań, Riga
+  (addressed but unclassified), Bratislava (no activity classification), Cairo
+  (no open-data infrastructure).
+- **Why knowing the rule did not prevent it, which is the transferable part.**
+  "A pattern justifies deprioritising, never ruling out" was already written
+  into `add-country` after the first instance of exactly this error. It
+  recurred because the discard list was **prose in a different section from the
+  evidence**, so nothing forced the two to agree - a bare list of city names
+  cannot be checked, whereas a row reading `Vienna - Austria: GISA strips the
+  street address by design` can. Added the mechanical half to `add-country`: a
+  discard list names its evidence per row, and any row whose reason is "not
+  reached", "unprobed" or a regional pattern **is not a discard**.
+- **Retired the trim-the-list argument.** The previous version of that section
+  argued for trimming, from `scaling_thresholds.md`'s 20-25 ceiling and a count
+  of ~23 already specified. Superseded: RAM was measured as not count-sensitive
+  (ceiling = New York at 7.43 MB, ~0.7% of 1 GB), ~80 page slots are free, and
+  the real limiter was the `drift_check` sweep, which `--jobs N` addressed. So
+  slots are not scarce and **verification is** - which is what the banding
+  measures. There is no reason to trim, and good reason to finish Band A first.
+- **Cancelled the PLAN.md item telling the owner to register a `data.go.kr` API
+  key.** It was not merely stale but impossible and misleading: it read "Free"
+  and "This is WMATA's gate, already cleared once", when every `data.go.kr`
+  member type requires a Korean resident ID or business number. That is a
+  **residency** wall, so the WMATA precedent does not transfer, and the
+  underlying inference was wrong in both halves - **a 401 says the endpoint
+  wants a key, not that the caller is allowed to hold one.** Replaced with the
+  keyless Seoul route, the corrected licence (KOGL Type 1, not 제한 없음), the
+  corrected scope (Seoul only), and the two genuine build-time items. Also
+  closed its sub-item "Korea has no line geometry yet" - dataset `15013203` is
+  the line standard dataset. Files touched:
+  `docs/global_country_shortlist.md`, `PLAN.md`,
+  `.claude/skills/add-country/SKILL.md`.
+
+### 2026-09-22 - Seoul's screening is finished: 197,276 active premises, KOGL Type 1, no open questions
+
+- **Found all six remaining core business types and measured them.** The
+  OA-id sweep had missed them because Seoul's citywide licensing datasets are
+  scattered through OA-160xx rather than contiguous. Driving the catalogue's own
+  search box found them; a `fetch` POST of the **fully serialized** search form
+  still returns the unfiltered 8,258 even for a nonsense control, because
+  `searchSend()` records the keyword server-side before submitting, so **only a
+  real form submit filters**. Downloaded and measured over active rows
+  (`영업상태명 == 영업/정상`): `OA-16094` 일반음식점 537,906 rows -> **120,182
+  active**, coordinates 90.7%; `OA-16095` 휴게음식점 147,582 -> **37,113**,
+  97.6%; `OA-16063` 미용업 99,802 -> **33,679**, 98.7%; `OA-16065` 세탁업
+  15,360 -> **3,263**, 99.3%; `OA-16064` 이용업 15,635 -> **2,366**, 99.0%;
+  `OA-16146` 목욕장업 3,991 -> **673**, 99.4%. With 숙박업 and 동물병원 from
+  earlier that is **197,276 active premises - Food 157,295, Personal services
+  39,981**, more than New York's four sources produced. `사업장명` is 100% on
+  all eight.
+- **One soft spot, recorded rather than smoothed over: 일반음식점 is the only
+  file below 97% on coordinates, at 90.7%.** About 11,000 active restaurants
+  carry an address but no point. Its road address is 99.2%, so they are
+  geocodable rather than lost - but a Seoul build should budget a **partial**
+  geocoding fallback for the Food bucket, not none. This is the largest file and
+  the most important bucket, so it is the figure most worth not rounding up.
+- **Licence read: 공공누리 제1유형 (KOGL Type 1) on all eight, checked
+  individually rather than inferred from one.** Attribution required, commercial
+  use and derivative works permitted; `저작권자` 서울특별시, **`제3저작권자`
+  없음** on every one - which is the by-reference field that hid Philadelphia's
+  prohibition, and Seoul declares nothing there. `갱신주기` is 매일 (daily), and
+  `원본시스템` is 공공데이터포털(지방행정 인허가정보), confirming these are
+  Seoul's republication of the national LOCALDATA register. Read from
+  `kogl.or.kr` rather than from the dataset label, KOGL Type 1 imposes three
+  duties: attribution naming institution, year, type and title **with a
+  hyperlink where one is possible online** - an ODbL-shaped obligation a bare
+  source string would fail; no implied endorsement, already covered by the
+  standing non-affiliation line; and a moral-rights clause naming misleading
+  modification of statistics, which makes this the **third** source after INEGI
+  and Montréal to require disclosing what this project did to the data.
+  **Korea is a one-notice country** - identical terms across all eight means one
+  notice covers the city however many business types it uses, which is the US
+  pattern rather than the Canadian one.
+- **Verified rather than assumed that the publisher did the privacy work.** All
+  eight files were checked for a proprietor-name column (`대표자`, `성명`,
+  `이름`, `주민`, `생년`) across 37-39 columns: **none exists**. The only name
+  field is `사업장명`, the registered trade name, which the project's invariant
+  permits. Left explicitly unresolved for build time: **~30% of `사업장명`
+  values are a bare 2-4 hangul token and Korean salon names routinely contain a
+  personal name** (`김은미장`), so `scripts/check_personal_exposure.py` needs a
+  Korean-aware pass. Flagged for `add-city` Step 0, not pre-judged here.
+- **Seoul reclassified from a screening candidate to a build candidate**, and
+  moved to joint-first in the master ranking with no evidential blocker. Files
+  touched: `docs/global_country_shortlist.md`, `docs/data_sources.md` (new
+  Seoul licence subsection and notice item 15, marked WILL BE REQUIRED rather
+  than required, since no Korean city is built and displaying a notice for
+  absent data would itself mislead).
+- **Set `user.name`/`user.email` in the repo-local git config.** Neither was set
+  anywhere, so commits were failing; the value used is the one already in the
+  project's commit history, `dacekroberts
+  <49654908+dacekroberts@users.noreply.github.com>` - GitHub's noreply alias
+  rather than a real inbox. Repo-local rather than global, so it is scoped to
+  this project, and shared by every worktree.
+
+### 2026-09-22 - Korea: Seoul gets coordinates and needs no account; Busan and Daegu are closed
+
+- **Found a better Seoul source than `OA-13663`, and it needs neither a key nor
+  a geocoding leg.** `data.seoul.go.kr` republishes the LOCALDATA licensing
+  register per business type, citywide, and its SHEET tab exports CSV to a
+  logged-out caller: `POST datafile.seoul.go.kr/bigfile/iot/sheet/csv/download.do`
+  with `infId=<OA-id>`, `srvType=S`, `serviceKind=1` and
+  **`ssUserId=SAMPLE_VIEW`** - the anonymous identity the page's own
+  `doAction()` sends when nobody is signed in, not a bypass. The catalogue holds
+  3,063 `인허가 정보` datasets on the full 24-column LOCALDATA schema, including
+  `영업상태명`, `폐업일자`, `도로명주소`, `사업장명` and **`좌표정보(X)`/`(Y)`
+  in EPSG:5174**. Measured on two: `OA-16044` 숙박업, 7,157 rows → **2,788
+  active**, coordinates on **99.5%** of those and a road address on 99.7%;
+  `OA-16007` 동물병원, 2,235 → **981 active**, coordinates 99.0%, address 100%.
+  Whole-file coordinate rates are only 86-88% because closed premises lack
+  geometry - the active subset is what a build uses. Supersedes the 2026-09-21
+  finding that Korea needs a geocoding pass: **it does not.** `OA-13663`
+  (39,590 food premises) remains valid but is now the worse of the two, since it
+  carries no coordinates at all. Unresolved and blocking a build: the OA ids for
+  일반음식점, 휴게음식점, 미용업, 이용업, 목욕장업 and 세탁업 are not in
+  OA-15880-16460, and the catalogue search is UI-only; and `이용허락범위` is
+  unread, so nothing is recorded in `docs/data_sources.md` yet.
+- **Seoul publishes no citywide 공중위생업소 file, settled from the publisher's
+  own counts.** 251 datasets match 공중위생 and the facet panel reads
+  `SHEET (182) OPENAPI (180) LINK (71) CHART (27)` - **no FILE row**, so none
+  offers the `nio_download.do` route. `OA-10184` is 중구 alone, one of 25
+  districts. Recorded because it rules out the cheapest route to a second
+  bucket, and because the SHEET export above replaces it.
+- **The first pass at that question was wrong, and the error is the reusable
+  part.** "Only `OA-13663` has a FILE tab" was concluded from a search that
+  silently discarded the search term: `GET ?srchDetailWord=` and
+  `POST searchKeyword=` both returned the unfiltered default listing, and the
+  control term `zzzzqqq` produced a **byte-identical** page (91,928 b, then
+  84,955 b) with the same ten ids. The ten read as plausible hygiene results
+  because the default ordering surfaces hygiene datasets. Added to
+  `add-country`: send a nonsense term before believing any result list *or any
+  zero*, and prefer the site's own facet counts to sampling.
+- **Busan ruled out on coverage and on access, independently.** Korea licenses
+  at the 자치구/군, so registers are per district: of Busan's 16, only 중구,
+  사상구, 동래구 and 수영구 publish a real premises register - 연제구 is
+  식품소분업 only, 기장군 식품제조가공업 only, 북구 위탁급식 only, and one
+  사상구 dataset is 행정처분현황, an enforcement list rather than a register.
+  Access fails too: Busan hosts nothing, delegating to
+  `www.data.go.kr/cmm/cmm/fileDownload.do`, where its cached `atchFileId`
+  returns **0 bytes** at `fileDetailSn` 1-2, an **87,693-byte PNG** at 3 and a
+  **203,559-byte JPEG** at 4. Logged out, `data.go.kr` answers `status: true`
+  with **`atchFileId: null`**, and the download path runs through
+  `check-limit.json` → `needCaptcha` → `showLimitCaptcha`. This project does not
+  defeat CAPTCHAs, so 16 districts behind a rate limiter is not a pipeline.
+- **Daegu's download route works but its coverage does not.** Its ids are
+  current where Busan's are stale, and five district files came down keylessly:
+  남구 4,060 rows (94% road address), 서구 4,122 (100%), 북구 6,432 (100%),
+  **달서구 11,089 with 위도/경도 on 99.9%**, 수성구 공중위생업 2,523 (100%).
+  None carries `폐업일자`, so closed premises cannot be filtered. Ruled out
+  because **중구, the downtown, publishes no premises register at all** - 9
+  datasets, all libraries and festivals - and Daegu Metro Lines 1, 2 and 3 all
+  converge there (반월당, 중앙로, 대구역), so the densest station areas would be
+  blank. 4 of 9 districts is not a partial city; it is the wrong city.
+- **Korea's city count corrected from 6 to 1 across the screen.** The
+  "6 cities from one source" claim rested on probing Seoul alone, and Seoul
+  aggregates where no other Korean city does - the capital was the exception
+  mistaken for the rule. Updated the master ranking, the marginal-cost table and
+  the key/geocoding table in `docs/global_country_shortlist.md`; added to
+  `add-country` the rule to ask which tier of government *licenses* rather than
+  publishes, and to probe the second city's central district before believing a
+  country count. Files touched: `docs/global_country_shortlist.md`,
+  `.claude/skills/add-country/SKILL.md`.
 ### 2026-09-21 - Region switcher: the groundwork shipped, the UI did not
 
 - **Committed the region model and deliberately withheld the UI, because the
@@ -817,6 +1270,7 @@ onwards; the early ones are split by phase rather than by hour.
 - **This is presentation-only and it re-baselines every city**, which is why
   it is recorded: a reader diffing the outputs later would otherwise find
   twelve changed files and no reason for them.
+
 ### 2026-09-21 - WMATA's licence re-established, and the clause that mattered was not the one first cited
 
 - **The owner's API practice was recorded, and reading the terms changed what

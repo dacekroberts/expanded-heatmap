@@ -932,30 +932,44 @@ hour.
     external geocoder.
   Beyond Canada, the EU/UK remain unscreened - NACE, and a national CRS such
   as EPSG:27700 for the UK.
-- [ ] **Korea: register for a `data.go.kr` API key** (owner action - account
-  creation is not something Claude does). Free. **The owner's practice is to
-  terminate the account and revoke the key as soon as the data is captured**, as
-  was done for WMATA - so plan the capture as a single complete pull, because a
-  later refresh or a rebuild after a crash needs a NEW account and key. See
-  `docs/data_sources.md`, "The owner's API-account practice". Korea raises no
-  deletion-clause question, unlike WMATA: its terms are `이용허락범위 제한 없음`.
-  Then the business schema can be verified in one call against
-  `apis.data.go.kr/B553077/api/open/sdsc2/storeListInDong`, which currently
-  returns **401**, i.e. the endpoint is live and wants a key. `B553077` is
-  소상공인시장진흥공단's institution code and matches the dataset metadata.
-  This is WMATA's gate, already cleared once for D.C.
-  Context: `상가(상권)정보` is premises-level, nationwide, with 상호명,
-  업종코드/명, both address forms and 경도/위도 on a KSIC 10/75/247 hierarchy,
-  quarterly, CSV UTF-8, **free with 이용허락범위 제한 없음** - the lightest
-  licence position of any candidate screened. The bulk-CSV host
-  (`bigdata.sbiz.or.kr`) is down, so the API is the route. Korea's station
-  data needed no key and is already verified: **1,099 stations with WGS84
-  coordinates and English names**. Full detail in
-  `docs/global_country_shortlist.md`.
-  - [ ] Also open, and a build blocker rather than a screening one:
-    **Korea has no line geometry yet.** The station file carries points only,
-    and this project draws and labels every transit line. Check dataset
-    `15013203`, then 국가공간정보포털.
+- [x] ~~**Korea: register for a `data.go.kr` API key** (owner action).~~
+  **CANCELLED 2026-09-22 - do not attempt this. It is not possible, and it is
+  not needed.**
+  - **Not possible:** every `data.go.kr` member type requires a Korean resident
+    ID (내국인) or a Korean business number, and Seoul's 외국인회원 route is for
+    foreigners *residing in* Korea. This is a **residency** wall, not a
+    registration one, so the WMATA precedent does not apply. The old item read
+    "Free" and "This is WMATA's gate, already cleared once" - both wrong. A
+    **401 says the endpoint wants a key; it says nothing about who is allowed to
+    hold one.**
+  - **Not needed:** `data.seoul.go.kr` serves the same shape of data with **no
+    account**, via the SHEET CSV export (`ssUserId=SAMPLE_VIEW` is the
+    logged-out identity the page itself sends). **Eight datasets, 197,276 active
+    premises, EPSG:5174 coordinates, `영업상태명` for active filtering, cp949,
+    refreshed daily.** `infId`s and per-file measurements are in
+    `docs/data_sources.md`; the download mechanism is in
+    `docs/global_country_shortlist.md`.
+  - **Licence differs from what this item claimed.** Not `제한 없음` but
+    **공공누리 제1유형 (KOGL Type 1)**: attribution required - including a
+    **hyperlink** where one is possible online - no implied endorsement, and a
+    moral-rights clause meaning the per-station counts must be described as this
+    project's derivation. One notice covers all of Seoul.
+  - **Scope shrank: Seoul only, not six cities.** Korea licenses at the 자치구,
+    so registers are published per district; Seoul aggregates and no other
+    Korean city does. Busan has 4 of 16 districts and its national-portal
+    download ids are stale behind a CAPTCHA rate limiter; Daegu's route works
+    but 중구 - the downtown where all three metro lines converge - publishes no
+    premises register at all.
+  - [x] ~~**Korea has no line geometry yet.**~~ Resolved: dataset `15013203`
+    (전국도시철도노선정보표준데이터) is the line standard dataset, alongside
+    `15013205` for stations.
+  - [ ] **Still open, and build work rather than screening:** a **partial**
+    geocoding fallback for `OA-16094` 일반음식점 only - it is the one file below
+    97% on coordinates, at **90.7%**, so ~11,000 active restaurants have a road
+    address (99.2%) but no point. And a **Korean-aware pass in
+    `scripts/check_personal_exposure.py`**: no file carries a proprietor-name
+    column, but salon trade names routinely contain a personal name (`김은미장`)
+    and ~30% of `사업장명` are a bare 2-4 hangul token.
 
 - [ ] Ridership (out of scope; revisit only if asked).
 - [ ] Adopt `safe-rename` (or fold its checklist into `add-city`) once a
