@@ -897,6 +897,78 @@ raw. Both are in addition to the Ayuntamiento de Madrid wording already
 recorded above for the business leg — **Madrid owes two separate attributions
 from two separate licences.**
 
+#### Barcelona — Open Data BCN, read 2026-09-22 **from the Internet Archive** (CANDIDATE, not built)
+
+**How it was read, and the limit on that.** `opendata-ajuntament.barcelona.cat`
+serves **hCaptcha** on `/en/avis-legal`, `/ca/avis-legal` and
+`/es/aviso-legal` alike, and this project does not defeat CAPTCHAs. The legal
+notice and the terms it points to were therefore read from the **Internet
+Archive**: the notice at snapshot **2025-01-18**, the terms of use
+(`/en/condicions-us`) at **2025-03-21**. That is a public archive of a public
+page, not a bypass.
+
+⚠️ **But an archived copy is not the live document**, and these terms
+explicitly reserve the right to change: *"Barcelona City Council may at all
+times add to, remove or amend the data sets published as well as these Terms
+of use … any change that is made shall take effect as soon as it is
+published."* **Before Barcelona is published, someone with a browser should
+open the live page and confirm it still says this.**
+
+**Verdict: PERMITTED WITH CONDITIONS.** The granting text:
+
+> *"… the conditions of Creative Commons-Attribution (CC-BY 4.0) licence,
+> under which such data are allowed: to be copied, distributed and published
+> … to provide the basis for derived works as a result of their analysis or
+> study … to be used for commercial or non-commercial purposes, provided that
+> such use does not constitute a public-authority activity … to be amended,
+> changed and adapted."*
+
+"Derived works as a result of their analysis or study" describes this project
+directly.
+
+⚠️ **A carve-out that must be checked per dataset: CC BY-ND.**
+
+> *"However, any data involving third-party participation may be reused under
+> a Creative Commons Attribution-**NoDerivs** (CC BY-ND 4.0) licence"*
+
+The census declares `CC-BY-4.0` in the CKAN API, so it is not in the ND class
+on its own metadata — but the carve-out exists and any *second* Barcelona
+source has to be checked for it separately. (The clause is also internally
+odd: it lists *"to be amended, changed and adapted"* among the permissions
+**under a NoDerivs licence**, which NoDerivs by definition forbids. Treat the
+named licence as controlling, not the bullet list.)
+
+**Obligations — four of them, and two are unusual:**
+
+| | |
+|---|---|
+| 1 | **Prescribed attribution wording**: *"Source of the data: Barcelona City Council"*, with suggested HTML markup linking `barcelona.cat/opendata` |
+| 2 | **Modifications must be identified at distribution** — *"Any amendment or change made to the data sets … shall be identified as such at the time of their distribution."* The disclosure-of-transformation family again: ring density and storefront filtering are changes, so a bare credit does not satisfy this |
+| 3 | ⚠️ **Users must NOTIFY the Council of the project** — *"Users are required to inform Barcelona City Council of every project relating to or derived from their use of the data sets."* **This is a new obligation class for this project**: an affirmative action owed to the publisher, not a line of text on a page. Nothing in the built cities has required it |
+| 4 | Council **may require reuse statistics** from the user |
+
+**Plus the Spanish Act 37/2007 Article 8 general conditions**, which the terms
+incorporate expressly:
+
+- the content of the information **may not be altered**
+- the meaning **may not be distorted**
+- **the source must be cited**
+- ⚠️ **"the most up-to-date data are referred to"**
+
+**That last one bears directly on the census-year decision.** The build brief
+recommends the **2022** resource because the 2024 one is geographically
+incomplete (down 69–83% in four districts). Article 8 pulls the other way.
+The two are reconcilable — using the most recent *complete* survey, and saying
+so on the page — but it must be a stated decision, not a silent one, and the
+page must name the census year either way.
+
+**Not claimed:** the *"Open Data BCN"* denomination and logo are registered
+trademarks (M 3713011, M 3746181) and are excluded from reuse, as are images
+and icons. Line names and category labels are not claimed.
+
+**No warranty**: the Council disclaims integrity, updating and accuracy, and
+excludes liability.
+
 ## Notices this project MUST display when published
 
 This is the operative output of the licence review. As of 2026-09-21, for the

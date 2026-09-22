@@ -12,7 +12,8 @@ first if Madrid has not been built yet.
 
 ## The one-line summary
 
-Business leg is **complete and clean, but four years old**. Rail leg is **settled in
+Business leg is **complete and clean, but four years old**. Licence **read
+and permissive**, with an unusual duty to notify the Council. Rail leg is **settled in
 favour of OSM** - TMB is registration-gated, and OSM returns TMB, FGC, TRAM
 and the funiculars in one query where the agency route needs four feeds.
 One owner decision (which census year), no open probes.
@@ -199,16 +200,41 @@ density map has not been decided.
 
 `license_id = "CC-BY-4.0"` comes straight from the CKAN API, per dataset.
 
-⚠️ **The portal's general legal notice has never been read.**
-`opendata-ajuntament.barcelona.cat` serves **hCaptcha** on `/en/avis-legal`,
-`/ca/avis-legal` and `/es/aviso-legal` alike (*"PLEASE PROVE THAT YOU ARE
-HUMAN"*). **This project does not defeat CAPTCHAs**, so the document is
-unread — and `read-licence` step 3 exists precisely because a named licence can
-sit on top of an incorporated-by-reference document that overrides it, which is
-how Philadelphia's prohibition hid.
+### ✅ RESOLVED 2026-09-22 — read from the Internet Archive
 
-**This is Barcelona's one true residual.** It is not resolvable by this
-session; it needs a human to open one page.
+The live pages are hCaptcha-walled (*"PLEASE PROVE THAT YOU ARE HUMAN"*) and
+this project does not defeat CAPTCHAs. The notice and the terms it points to
+were read instead from the **Internet Archive** — notice at snapshot
+**2025-01-18**, terms of use at **2025-03-21**. Full record in
+`docs/data_sources.md`.
+
+**It was the Philadelphia shape and it came out the other way.** The legal
+notice does incorporate a second document by reference — *"reuse … within the
+limits provided for under the **terms of use**"* — and that document **grants**
+rather than prohibits: CC-BY 4.0, expressly including *"derived works as a
+result of their analysis or study"* and commercial use.
+
+**Four obligations, two of them unusual for this project:**
+
+1. Prescribed wording: **"Source of the data: Barcelona City Council"**
+2. **Modifications must be identified at distribution** — density rings and
+   storefront filtering are modifications
+3. ⚠️ **Users must NOTIFY the Council of every project derived from the
+   data.** An affirmative act owed to the publisher, not a line of page text.
+   **No built city has required this.**
+4. The Council may request reuse statistics
+
+**And Spanish Act 37/2007 Article 8**, incorporated expressly: content may not
+be altered, meaning may not be distorted, source must be cited, and
+⚠️ **"the most up-to-date data are referred to"** — which bears directly on
+the census-year decision above. 2022-because-2024-is-incomplete is
+reconcilable with it, but only as a *stated* decision with the year on the
+page.
+
+⚠️ **The archive is not the live document**, and these terms reserve the right
+to amend themselves with effect on publication. **Before Barcelona goes
+public, a human should open the live page and confirm.** That is now a
+confirmation rather than an unknown.
 
 ---
 
@@ -216,7 +242,8 @@ session; it needs a human to open one page.
 
 - **Which census year** (above) — recency vs completeness, owner's call.
 - **TMB account or OSM** (above).
-- **The general legal notice**, CAPTCHA-walled.
+- **Re-confirm the terms on the LIVE page** before publishing — they were
+  read from a 2025 archive, and they permit their own amendment.
 - Whether trams (T1-T6) and the two funiculars belong on a metro-density
   map. OSM carries them; nobody has decided.
 - Whether mall/gallery interiors (`SN_CComercial`, `SN_Galeria`) should be
