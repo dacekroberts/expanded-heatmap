@@ -388,6 +388,44 @@ _NOTICES = [
      "Contains information licensed under the Open Government "
      "Licence – City of Calgary.",
      True),
+    # Edmonton, added 2026-09-21. ONE notice covers BOTH the business register
+    # and ETS's GTFS, as Calgary's does - the feed is published through the same
+    # Open Data Catalogue and governed by the same Terms of Use.
+    #
+    # **EDMONTON WAS RECORDED AS NEEDING NO NOTICE AT ALL, AND THAT WAS WRONG.**
+    # Its Terms of Use say credit is "not required" but "encouraged", which is
+    # how the Canada profile and the build brief both concluded it was the one
+    # Canadian city with nothing to display. The obligation is in a different
+    # clause, and it is not about credit:
+    #
+    #   "If you distribute or provide access to the datasets to any other
+    #    person, whether in original or modified form, you agree to include a
+    #    copy of, or this Uniform Resource Locator (URL) for, these Terms of
+    #    Use and to ensure any such person agrees to, and is bound by, them
+    #    without introducing any further restrictions of any kind."
+    #
+    # `outputs/edmonton/` is committed to a public repository and carries the
+    # register's business names, categories and coordinates - the datasets in
+    # modified form. So the clause engages, and what it requires is the URL.
+    # The harder half, "without introducing any further restrictions", is
+    # already satisfied: the repository's own LICENSE explicitly disclaims MIT
+    # over everything under `outputs/` and points at docs/data_sources.md.
+    #
+    # Not marked verbatim: the City prescribes that the URL accompany the data,
+    # not a sentence to reproduce. The credit is included because the terms
+    # encourage it, and the transformation is stated because this project always
+    # draws interpretations.
+    ("City of Edmonton",
+     "Contains datasets made publicly available by the City of Edmonton under "
+     "its Open Data Terms of Use, at "
+     "https://www.edmonton.ca/sites/default/files/public-files/documents/"
+     "Web-version2.1-OpenDataAgreement.pdf — which govern any further use of "
+     "them and are passed on without additional restriction. The data has been "
+     "modified and interpretations drawn from it: it is filtered to storefront "
+     "categories, grouped into three categories of this project's own, and "
+     "measured by distance from transit stations. The City of Edmonton does "
+     "not endorse this project or its use of the data.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

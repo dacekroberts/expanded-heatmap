@@ -1,9 +1,56 @@
 # Build brief — Edmonton
 
-**Not the next city.** Ranked fourth of six Canadian candidates on the
-comparable measure, in a tie with Calgary. This brief exists because the
-re-ranking of 2026-09-21 corrected three facts about Edmonton, one of which
-makes the build materially cheaper than the profile suggests.
+> ## BUILT 2026-09-21. This brief is now HISTORY, not guidance.
+>
+> Read `pipeline/edmonton/config.py` and
+> `pipeline/taxonomies/edmonton_licencecategory.py` for what is true; they
+> carry the measurements and the reasoning. Kept because **four of its claims
+> were wrong in ways worth recording**, and because three of the four were
+> wrong in the same direction — a sentence was read and its consequence was
+> not checked.
+>
+> **1. "A BETTER PATH EXISTS, and it sidesteps staleness entirely" — REVERSED.**
+> The brief recommended Edmonton's eight individual Socrata GTFS tables over
+> the zip. They are **expired**: their `calendar_dates` run to 2026-08-29, and
+> the Stops table had not been written since April. The agency zip is the only
+> current source, and it is at
+> `https://gtfs.edmonton.ca/TMGTFSRealTimeWebService/GTFS/gtfs.zip`, found in
+> the `accessPoints.DOWNLOAD` field of the catalogue's href-type dataset
+> `urjq-fvmq`. Reading each table's `updatedAt` was the brief's own argument
+> for them and would have shown this; the dates were cited as a *feature*
+> rather than checked.
+>
+> **2. "Edmonton's feed carries no `feed_info.txt`" — WRONG.** The agency feed
+> has one, declaring `feed_start_date` 20260911 and `feed_end_date` 20261128.
+> That claim was true of the stale republications and was generalised to the
+> city.
+>
+> **3. "No required notice, uniquely among the Canadian candidates" — WRONG,
+> and this is the most consequential.** Edmonton's Terms of Use do say credit
+> is "not required" but "encouraged". The obligation is in a different clause
+> and is not about credit: distributing the datasets "in original or modified
+> form" requires including the Terms of Use URL and passing them on "without
+> introducing any further restrictions of any kind". `outputs/edmonton/` is
+> committed to a public repo, so it engages. See `docs/data_sources.md` item
+> 14. The brief read the credit sentence and stopped.
+>
+> **4. The station count was 33 and the real answer is 30.** Not the platform
+> error that hit Toronto and Calgary — `parent_station` collapses Edmonton's 65
+> served stops to 33 correctly, at a healthy 713 m median. Three of those 33
+> are **non-revenue**: two garage access points and a tail track, with
+> `pickup_type` and `drop_off_type` both 1 on every one of their stop_times.
+> A new error class for this project, and one every earlier city should have
+> been checked for.
+>
+> **What the brief got right, and it was the expensive half:** no residence
+> inference (`licencetype` states it), no geocoding step (99.4% of storefront
+> rows carry coordinates), no name-fallback problem, the `;` delimiter, the
+> 60-category vocabulary, EPSG:32612, and the corporate-boundary naming trap.
+> Its three corrections to the country profile all held.
+>
+> **Final measured figure: 2,380 storefronts within the 0.6 mi ring across 30
+> stations = 79 per station**, on the build-grade taxonomy. The brief's 76 used
+> 33 stations and a 17-category screening map.
 
 Claims are **MEASURED** or **ASSERTED**, per
 [`session_roles.md`](../session_roles.md).

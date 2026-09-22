@@ -14,6 +14,207 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Edmonton built: 30 stations, not 33, because three of them are garages
+
+- **Added Edmonton as the thirteenth city and the fourth in Canada: 10,721
+  storefronts, 2,380 of them within the 0.6 mi ring across 30 stations, 79 per
+  station.** Per-step counts, as the drift baseline: step 1 took the agency
+  GTFS feed's 3 route_type-0 routes to 65 served stops, dropped 5 platforms
+  across 3 non-revenue stops, collapsed the remaining 60 on `parent_station` to
+  **30 stations**, all inside the corporate boundary (`excluded_stations.csv`
+  written empty, as Calgary's is). Step 2 took 43,672 licence rows to 25,105
+  `Commercial`, dropped 6 with a blank name and 71 lapsed to 25,028, resolved
+  the `";"`-delimited categories to 10,927 storefront rows, lost 62 without
+  coordinates to 10,865, kept 10,865 of 10,865 inside the boundary, and
+  deduplicated on `externalid` to **10,721**. Buckets: Retail 5,196, Food
+  service 3,647, Personal services 2,084 — the first Canadian city where Retail
+  leads, which is a fact about Edmonton licensing general retail in several
+  size bands rather than about its streets. Step 3 plotted 2,380 within-ring
+  pins over 30 stations.
+
+- **THREE OF EDMONTON'S 33 STATIONS ARE NOT STATIONS, AND THIS IS A NEW ERROR
+  CLASS IN THIS PROJECT.** Toronto's and Calgary's station counts were wrong
+  because platforms had been counted as stations, and that check **passes**
+  here: `parent_station` is populated on all 65 served stops and collapses them
+  to 33 at a 713 m nearest-neighbour median, against 66 m uncollapsed. But
+  every rail trip also touches `Q7020` Andrews Garage Platform, `Q7019` DL
+  Macdonald Platform and `QHTT` Health Sciences Tail, and at all three
+  `pickup_type` and `drop_off_type` are 1 on **every** one of their stop_times
+  — 1,947, 1,947 and 1,430 stop_times, zero boardable. Every other station has
+  thousands of boardable ones, so the split is not a judgment call. Keeping
+  them inflated the published Canada ranking figure: 2,520 storefronts over 33
+  stations gave 76 per station, against 2,445 over 30 giving 82 on the same
+  screening taxonomy. **Every city in this project should have had this check
+  and none of them did**; the assumption that hid it is that a stop a revenue
+  trip touches is a place a passenger can use. `step1_stations.py` now filters
+  on boardability and writes `outputs/edmonton/non_revenue_stops.csv`, and the
+  generalisation is in the `add-city` skill: a station count needs the spacing
+  diagnostic *and* the boardability filter. Rules out reporting any city's
+  per-station density as comparable until the older cities are re-checked.
+
+- **Reversed the build brief's GTFS recommendation: Edmonton's eight individual
+  Socrata GTFS tables are STALER than the zip they were meant to replace.** The
+  brief preferred them because each exposes its own `updatedAt` and so would
+  "sidestep staleness entirely". Measured: their `calendar_dates` run 2026-06-18
+  to **2026-08-29**, 23 days expired at the time of reading, and the Stops table
+  had not been written since 2026-04-20. The Mobility Database mirror was worse
+  (`feed_end_date` 20260620). Only the agency feed is current, declaring
+  20260911 to 20261128, and it **does** carry a `feed_info.txt` — another brief
+  claim that was true of the republications and generalised to the city. Its
+  URL is not published as a readable link anywhere: the catalogue's entry for
+  the feed (`urjq-fvmq`) is an `href`-type asset whose URL lives in metadata
+  under `accessPoints.DOWNLOAD`, which is why two guessed URLs 404'd during the
+  Canada profile and the feed stayed ASSERTED for a day. Recorded in
+  `docs/data_sources.md` and asserted every run by
+  `pipeline/edmonton/fetch_sources.py`, which now refuses an expired feed
+  rather than warning — the Valley Line is actively extending, so a stale feed
+  can be missing stations outright.
+
+- **Edmonton DOES require a displayed notice, contradicting both the country
+  profile and its own build brief, which called it the one Canadian city
+  needing none.** Its Terms of Use say credit is "not required" but
+  "encouraged", and that sentence was where both readings stopped. The
+  obligation is a different clause: "If you distribute or provide access to the
+  datasets to any other person, whether in original or modified form, you agree
+  to include a copy of, or this Uniform Resource Locator (URL) for, these Terms
+  of Use and to ensure any such person agrees to, and is bound by, them without
+  introducing any further restrictions of any kind." `outputs/edmonton/` is
+  committed to a public repository and carries the register's names, categories
+  and coordinates — the dataset in modified form — so it engages, and what it
+  requires is the URL. Added to `render_site_notices()` as item 14 with the
+  transformation stated, because this project always draws interpretations. The
+  second half was **already satisfied before it was noticed**: the repository's
+  `LICENSE` disclaims MIT over everything under `outputs/` and points at
+  `docs/data_sources.md`, which was written for a different reason and happens
+  to discharge "without introducing any further restrictions". This is the third
+  licence position in this project corrected by opening a document an earlier
+  review had only cited, after New York's footer and Philadelphia's terms — and
+  the first where the correction went from *no obligation* to *an obligation*.
+  Also found: the portal's own copy of the terms is now behind a **sign-in**,
+  in a browser as well as to `curl`, so `docs/licenses/`'s verified PDF capture
+  is the readable copy rather than a convenience.
+
+- **Sampled business names for four category verdicts, and the sample overrode
+  this project's own merged-category rule twice.** The rule — when a category
+  spans an in-scope and an out-of-scope trade and cannot be split, leave it
+  out, because the term nearest the actual trade wins — decided Vancouver's
+  `Printing Imaging and Photo Services` and Calgary's `(MAIL ORDER)`. Applied
+  blind to Edmonton it would have been wrong twice. `Animal Breeding and
+  Boarding Facility` (77) leads with NAICS 112 agriculture and the rule would
+  exclude it, but the names are HOLLYWOOF, PAWS AT PLAY DOG DAYCARE, POSH POOCH
+  HOTEL AND DAYCARE, PETSMART #1202 — pet-care storefronts, NAICS 81291, nine
+  in ten, so it **counts**, as Calgary's `KENNEL SERVICE/PET DEALER` does.
+  `Health Enhancement Centre` (12) looked like Vancouver's `Health Enhancement
+  Services` and is in fact **pure NAICS 621** — LIFEMARK PHYSIOTHERAPY,
+  WINDERMERE CHIROPRACTOR, REVIVE SPINE AND SPORT — so it is excluded where the
+  brief assumed it counted. Conversely the rule was confirmed twice: `General
+  Business` (154) sampled as parking operators, care agencies, shelters and
+  daycares with **zero** storefronts, and parking is NAICS 81293, the one thing
+  carved out of this project's personal-services anchor; and `Vehicle Wash /
+  Fueling Station` (336) sampled as car washes 40-alone against two Costco fuel
+  bars, so excluding it costs about three sites while its 248 convenience-store
+  co-holders keep Retail anyway. Rules out treating the merged-category rule as
+  sufficient on its own: it ranks the wording, and only a sample ranks the
+  trade.
+
+- **Counted `Health Enhancement Centre (Accredited)` (560) knowing 26.4% of it
+  is not a personal service, for Alberta comparability — and disclosed the
+  contamination rather than hiding it.** Measured on business names: 34.3%
+  massage, 11.8% spa/nail/hair, 4.1% acupuncture, and **26.4% physiotherapy or
+  chiropractic**, which is NAICS 621 regulated health care. The register cannot
+  separate them and there is no second field. Counted because Calgary's
+  `MASSAGE CENTRE (COMMERCIAL)` (917) counts on the ground that massage therapy
+  is not a regulated health profession in Alberta — it is in British Columbia,
+  which is why Vancouver's `Massage Therapy (RMT)` does not — so excluding
+  Edmonton's while counting Calgary's would make the two Alberta cities
+  non-comparable for no reason present in the data. The rejected alternative
+  was excluding the whole class, which would have cost roughly 258 genuine
+  massage and spa storefronts and broken that comparison. Effect: about one in
+  sixteen of Edmonton's personal-services pins is health care. Stated on the
+  city page and in `docs/excluded_categories.md`. The sibling variants are all
+  excluded — `(Accredited / Independent)` (115) is a room renter, as Calgary's
+  chair operator and New York's `DOSAERENTER` are, and `Practitioner
+  (Accredited)` (25) is a person, which the publisher confirms by redacting the
+  address on **all 25** rows.
+
+- **Chose Edmonton's line colours by measured Delta-E rather than by eye, and
+  fixed the scope of that constraint: it is INTRA-city only.** ETS signs
+  Capital blue, Metro red and Valley green (`route_color` 0081BC, FF0000,
+  008000), and two of the three collide with the business-category pin palette
+  this map already spends — Capital sits CIE76 Delta-E 23.9 from Retail's
+  `#2a78d6` and Valley 37.2 from Personal services' `#1baf7a`, against this
+  project's working threshold of ~45 (the figure behind `#C2185B`'s 49.6 and
+  `#FBB878`'s 44.8). Each line keeps its hue and was darkened over a candidate
+  grid until it cleared: Capital `#082F49` (49.2), Metro `#CC0000` (49.3),
+  Valley `#365314` (44.2), with 57.0 and 100.7 between the lines themselves.
+  **Valley's 44.2 is the binding constraint and is marginally under the
+  threshold** — green-against-green is intrinsically the hard pair and no
+  combination in the grid clears it without abandoning green for the Valley
+  Line, so recognisability was preferred and the shortfall recorded rather than
+  left to look like an oversight. Per the owner's direction the same day,
+  **colour separation is not and should not be a cross-city constraint**: each
+  city renders its own map with its own legend and labels, so Edmonton's Metro
+  red is deliberately the same as Calgary's Red Line, and keeping every line in
+  every city distinct would exhaust the palette long before the city list does
+  and push later cities into colours that read badly against their own pins.
+  Written into the `add-city` skill. Found in passing: **Calgary's shipped Blue
+  Line is Delta-E 3.3 from Retail blue**, effectively the same colour, never
+  measured, and still shipped.
+
+- **Drew the Metro Line from its 156-trip shape rather than its 714-trip one,
+  because the mode draws only half the line.** This project's rule is that a
+  line's geometry is its most-used trip shape. Metro's mode `022R-82-South`
+  spans latitude 53.5180 to 53.5664 — NAIT down to about Health Sciences —
+  because most Metro trips turn back in the north. But the Metro Line serves
+  Century Park at 53.4572 and step 1 lists 14 Metro stations including
+  Southgate, University and South Campus, so only `022R-38-North` (156 trips,
+  358 points, 53.4572 to 53.5673) draws the whole of it. Miami's branching
+  Metrorail needed the same departure. The rule where the two disagree is
+  **extent, not trip count**.
+
+- **Kept Edmonton's line labels on automatic after measuring the alternative in
+  the browser, rather than judging it by eye.** The Metro Line's automatic
+  label lands at its NAIT end, in the busiest part of the map, so both options
+  were rendered and their label-on-cluster overlap measured at 1000x660:
+  automatic ~905 px² with a worst single overlap of 23x17, forced `"start"`
+  2,536 px² with 34x21 as it lands on the Century Park cluster stack. Automatic
+  wins by nearly three times and `LINE_LABEL_ENDS` stays empty, as Calgary's
+  is. The residual is a label descender over a circle edge, and the labels
+  carry a white text-shadow halo and draw above the pins.
+
+- **Edmonton's privacy verdict: zero exposure, and the strongest structural
+  claim in the project.** `scripts/check_personal_exposure.py edmonton` reports
+  2,380 pins, 2,203 distinct names, 0 emails, 0 phone numbers, 0 `c/o` markers,
+  and no registrant-name fallback possible. The register publishes **exactly one
+  name column and it is the business's** — no registrant, owner, licensee or
+  contact field exists — so unlike Calgary (no blank trade names) and Montréal
+  (no second name) there is not merely nothing to fall back *on* but nothing to
+  fall back *to*. `fetch_sources.py` and step 2 both assert it. The publisher's
+  own work goes further: `<REDACTED FOR PRIVACY>` replaces the address on 4,074
+  rows and **takes the coordinates with it** (redacted rows carrying
+  coordinates: zero), the `read-licence` step-6b case and the same shape as
+  France's diffusion-status masking. The heuristic flags 454 pins (19.1%) as
+  person-like, but their top classifications are Restaurant, Retail Sales and
+  Personal Service — trade names that read as names, the Vancouver false
+  positive that once dropped 32 real restaurants — and the checker's
+  residential-unit intersection is **4 rows**: STRATH MOTO, PARLOUR BARBA,
+  DOWNSTAIRS CELLAR and NEON NIGHTS. All four are businesses, and all 18 rows
+  the residential regex matches anywhere in the file are `BSMT` or `REAR`
+  addresses on Whyte Avenue and 109 Street — **commercial** location
+  descriptors in Edmonton, not residences, which is a per-city reading caveat
+  on a US-shaped regex and NOT a reason to change it globally. Verdict:
+  publish.
+
+- **Fixed `scaffold_city.py`'s `cities.py` splice at the third occurrence
+  instead of repairing it by hand again.** `add_city_entry()` found the
+  insertion point with `text.rstrip().rfind("]")`, the last `]` in the file,
+  which is the closing bracket of the `IN_DEFAULT_VIEW` comprehension below the
+  `CITIES` list — so it spliced Montréal and then Calgary *into* the
+  comprehension and broke the module both times, each repaired by hand. It now
+  walks forward from `CITIES = [` tracking bracket depth, so anything added
+  after the list is irrelevant however it is written. Edmonton is the first of
+  three scaffold runs that needed no repair.
+
 ### 2026-09-21 - The font stack reaches the tooltip, which is where non-Latin names will land
 
 - **Completing staging's `FONT_STACK` change after merging it.** Staging added

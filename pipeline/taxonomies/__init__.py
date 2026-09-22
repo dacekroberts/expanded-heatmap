@@ -81,6 +81,7 @@ TAXONOMY_MODULES = {
     "dc_businessactivity": "pipeline.taxonomies.dc_businessactivity",
     "vancouver": "pipeline.taxonomies.vancouver",
     "calgary_licencetype": "pipeline.taxonomies.calgary_licencetype",
+    "edmonton_licencecategory": "pipeline.taxonomies.edmonton_licencecategory",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

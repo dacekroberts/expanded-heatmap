@@ -279,6 +279,23 @@ CITIES = [
         # west on 2026-09-21. That move was made for exactly this.
         "label_offset": ("start", 12, 9),
     },
+    {
+        "name": "Edmonton",
+        "lat": 53.5444,
+        "lon": -113.4909,
+        "page": "pages/13_Edmonton_Heatmap.py",
+        "blurb": "ETS LRT (Capital, Metro and Valley Lines)",
+        # OUTSIDE THE DEFAULT VIEW, like the other three Canadian cities. See
+        # IN_DEFAULT_VIEW below.
+        "in_default_view": False,
+        # EAST of its dot, like Calgary's. Edmonton sits almost directly NORTH
+        # of Calgary - 2.5 degrees of latitude, 0.6 of longitude - so the pair
+        # is separated vertically rather than horizontally and both labels can
+        # run east without meeting. Nudged slightly ABOVE the dot (negative y)
+        # so the gap to Calgary's label, which sits below its own dot, is the
+        # sum of the two offsets rather than the difference.
+        "label_offset": ("start", 12, -6),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

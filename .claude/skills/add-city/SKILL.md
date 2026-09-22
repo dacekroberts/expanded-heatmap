@@ -498,9 +498,33 @@ sit above the pins. Always pass `label_focus` - the city's boundary geometry
 - so tails are taken on the in-city stretch of lines that run far beyond it.
 If a rendered map still shows a label landing badly, force that line's end
 with `"start"`/`"end"` in its spec. The legend collapses by itself; check
-both in the browser. If the
-agency's official line colours are ambiguous or shared, use a palette of
-your own that stays distinct from the business-category colours.
+both in the browser.
+
+**Line colours: separate them WITHIN the city, and reuse freely across
+cities.** If the agency's official colours are ambiguous, shared, or collide
+with the three business-category pin colours, use your own palette. What has to
+be distinct is (a) each line against the category colours that map spends, and
+(b) each line against the other lines on the *same* map. **Nothing has to be
+distinct across cities.** Each city renders its own map with its own legend and
+its own on-map labels, so two cities sharing a red can never be confused;
+Edmonton's Metro Line is deliberately the same red as Calgary's Red Line. Do
+not spend effort keeping every line in every city unique — the usable palette
+runs out long before the city list does, and the cost lands on later cities as
+colours that read badly against their own pins, which is the constraint that
+actually matters. Only the macro map shows every city at once, and it draws
+city dots rather than transit lines.
+
+The separation is **measurable, so measure it** rather than judging by eye.
+This project's working threshold is a CIE76 Delta-E of about **45**, the figure
+behind `#C2185B`'s selection (49.6) and `#FBB878`'s (44.8) in `map_common.py`.
+Edmonton is the worked example: ETS signs Capital blue and Valley green, which
+scored 23.9 against Retail's `#2a78d6` and 37.2 against Personal services'
+`#1baf7a`, so each line kept its hue and was darkened until it cleared. Where
+no combination clears the threshold — green-against-green is the hard pair, and
+Edmonton's Valley Line settled at 44.2 — say so in the config as a tradeoff
+rather than leaving it to look like an oversight. Worth knowing before trusting
+an existing city: **Calgary's shipped Blue Line is Delta-E 3.3 from Retail
+blue**, which is effectively the same colour and was never measured.
 
 ## Step 7 - Run it for real, then look at it
 
