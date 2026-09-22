@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**127 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**128 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [A provincial publisher nobody had read, and the check that turns "record your sources" into something a script can fail](#2026-09-22---a-provincial-publisher-nobody-had-read-and-the-check-that-turns-record-your-sources-into-something-a-script-can-fail)
 - [Four Canadian cities promoted into the provenance tables, and three Step 0 findings did not survive the trip](#2026-09-22---four-canadian-cities-promoted-into-the-provenance-tables-and-three-step-0-findings-did-not-survive-the-trip)
 - [Spain profiled: Madrid is ready, both licences read, and one clause raised rather than resolved](#2026-09-22---spain-profiled-madrid-is-ready-both-licences-read-and-one-clause-raised-rather-than-resolved)
 - [A leaf region labels only its own cities, and the one accepted overlap is written down](#2026-09-22---a-leaf-region-labels-only-its-own-cities-and-the-one-accepted-overlap-is-written-down)
@@ -163,6 +164,163 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - A provincial publisher nobody had read, and the check that turns "record your sources" into something a script can fail
+
+- **Found and closed four remaining Canada holes, then found the same defect in
+  Mexico and in three US cities and built a check for it.** The morning's work
+  promoted four Canadian cities into the three provenance tables; this entry is
+  what looking for the rest of the gap turned up. The GTFS licence table
+  reviewed nine US agencies and no Canadian one, although all five Canadian
+  feeds' terms had been read and stored on 2026-09-21 - a findability gap, not
+  a compliance one, but the table presents itself as the per-feed index and
+  would have told a reader five feeds were never examined. Rows added for
+  TransLink, STM, Calgary Transit, ETS and TTC. `docs/licenses/canada-required-notices.md`
+  still said "if any Canadian city is built" and the licence store's README
+  still had "Canada - screened 2026-09-21, none built"; both relabelled.
+
+- **The Province of British Columbia was publishing into this site with no
+  licence read and no notice displayed.** The BC ABMS municipalities layer
+  names the 30 SkyTrain stations outside Vancouver and Surrey, and
+  `outputs/vancouver/excluded_stations.csv` carries those names in a public
+  repository. It is the first PROVINCIAL or STATE publisher in the project and
+  no municipal licence reaches it. Read 2026-09-22 per `read-licence`:
+  **OGL-BC v2.0, PERMITTED WITH CONDITIONS**, commercial use granted expressly,
+  terminating automatically on breach, and requiring the verbatim sentence
+  `Contains information licensed under the Open Government Licence – British
+  Columbia.` Now notice 17 and displayed in `app/components.py`'s `_NOTICES`;
+  the text is stored at `docs/licenses/bc-open-government-licence.txt`.
+
+- **Two pointers were followed and both paid.** The licence page opens "as per
+  B.C. Government Copyright, the following licence only applies to records in
+  the B.C. Data Catalogue that specify it", so the catalogue record is the
+  authority - checked, and it declares OGL-BC. And the page links a **second**
+  document, "API Terms of Use for OGL Information", which applies because this
+  project reads a WFS rather than downloading a file: it adds operational
+  conditions (limits "without notice", revocable credentials, terms changeable
+  without notice, automatic termination) and **no new notice**. That is
+  TransLink's two-documents shape with the opposite answer - TransLink's two
+  mandate different legends, BC's second mandates none.
+
+- **A near miss with a licence consequence rather than a geometry one.** Three
+  BC layers carry near-identical names and **two are licensed "Access Only"**,
+  which does not permit redistribution: `tantalis-municipalities` and
+  `legally-defined-administrative-areas-of-bc`. Only
+  `municipalities-legally-defined-administrative-areas-of-bc` is OGL-BC. The
+  build is on the right one, established not from the name but because that
+  package's metadata names the exact `openmaps.gov.bc.ca/geo/pub/...
+  ABMS_MUNICIPALITIES_SP/ows` endpoint the config calls, and because TANTALIS
+  describes itself as "[Replacement Dataset: ABMS_MUNICIPALITIES_SP]". Calgary's
+  two-boundary trap, one layer of consequence deeper.
+
+- **Wrote `scripts/check_provenance.py`, because the rule it enforces has been
+  in `add-city` since the start and was followed for the US cities only.** It
+  asserts that every city in `app/cities.py` has a row in all three provenance
+  tables, that **every URL a city's `config.py` actually resolves to** appears
+  in `docs/data_sources.md`, that `_NOTICES` and the numbered notices are in
+  bijection, and that notice numbers are unique and contiguous. Importing the
+  config rather than grepping it is load-bearing: Vancouver builds four
+  endpoints from an `_ODS` prefix via f-strings, so no literal exists to grep.
+  Ran it and it immediately found five more gaps - **Mexico City and
+  Guadalajara have no rows in any of the three tables** (built 2026-09-22,
+  endpoints only in their country file), and **San Diego, San Francisco and Los
+  Angeles each use an unrecorded residence-filter parcel or assessor layer**.
+  Those are recorded in a dated `KNOWN_GAPS` map that prints loudly and may only
+  shrink; a stale entry fails the check, and `--strict` ignores it entirely.
+
+- **The common factor is a source kind, not a country: the input that belongs
+  to no city.** Four misses, all of them neither a business registry nor a
+  transit feed nor the city boundary - Vancouver's parcel + tax-report residence
+  join, BC's naming layer, and the same residence join in three US cities.
+  D.C. had met the naming-layer category already and needed no notice for it
+  only because US federal works carry no copyright, so the project met this
+  once and drew exactly the wrong general lesson. `add-country` now profiles by
+  source kind with naming layer, residence join and geocoder named explicitly,
+  `add-city` Step 9 says to run the script rather than confirm by eye, and
+  `CLAUDE.md` carries both as invariants.
+
+- **Two items 8 and two items 15 in the list that gates the public deploy.**
+  Canada's notice block was appended after Mexico's without renumbering, and
+  Seoul's after Toronto's. Renumbered to 1-18 with INEGI left at 8 so the one
+  cross-reference to it stays valid; `docs/build_briefs/edmonton.md` updated
+  from "item 14" to "item 15". Nothing else cited a notice by number -
+  `CLAUDE.md`'s "Gate item 9" points at the separate deploy-gate list, which was
+  never affected.
+
+- **Deleted the counts in the notices summary rather than correcting them.**
+  It read "for the **fourteen** cities now built there are **thirteen** sources
+  requiring specific text", when there are sixteen cities and the sentence
+  already disagreed with itself two clauses later ("six of the twelve"). Two
+  cities and three notices had been added without it being touched. The
+  relationship is now asserted by `check_provenance.py` instead, and the prose
+  keeps only the part that does not drift: budget a notice per SOURCE, not per
+  city, because the US sources mostly prescribed no wording and the Canadian
+  ones almost all prescribe their own.
+
+- **Closed the three US residence-filter gaps the new check found, and one of
+  the three licences forbids being credited.** San Diego, San Francisco and Los
+  Angeles each join their business register to a parcel or assessor layer to
+  decide whether a licence is somebody's home, and none of the three endpoints
+  was in `docs/data_sources.md`. Rows added in the business-registries table
+  beside each city's own register, the placement Philadelphia's OPA join
+  already used, and all three licences read on 2026-09-22 per `read-licence`.
+  `check_provenance.py` now reports all fourteen US and Canadian cities OK,
+  leaving only Mexico City and Guadalajara in `KNOWN_GAPS`.
+
+- **SanGIS PROHIBITS attribution at this project's scale, which inverts the
+  rule every other source here follows.** Its End User Use Agreement - found in
+  the ArcGIS item's own `licenseInfo`, not on the web, because `sangis.org/legal/`
+  now redirects to a Hub home page - says the data "does not meet National Map
+  Accuracy Standards at scales finer than 1:24,000" and that **"SanGIS shall not
+  be attributed as the source of the data when representing the data at scales
+  below 1:24,000 absolute scale"**, with an exemption only where the layer is
+  certified for finer work. This project's rings are 0.1-0.6 miles, far finer,
+  and the parcel layer carries no such certification. So the absence of a SanGIS
+  notice is a deliberate compliance position and adding one would breach the
+  terms. Recorded explicitly because it looks exactly like a missing
+  attribution, and the obvious tidy-up is the wrong move. Redistribution is
+  "discouraged, but not prohibited"; nothing from the layer reaches `outputs/`
+  in any case - it is read, used to decide, and discarded.
+
+- **LA County grants expressly; San Francisco's roll is PDDL.** LA County's
+  Enterprise GIS Terms of Use grant "a license to copy, publish, distribute
+  and/or transmit the Data, to adapt the Data and to exploit the Data for
+  commercial and/or personal use", void on violation, with no endorsement
+  implication and a citation format that is explicitly "recommeded" rather than
+  required - so no notice. `wv5m-vpq2` declares PDDL in its own `license`
+  field, the same public-domain dedication as the SF business register.
+  **Neither adds a notice, and SanGIS forbids one, so closing three provenance
+  gaps added zero display obligations** - the opposite of Canada, where almost
+  every source prescribed its own sentence.
+
+- **San Diego's config documents a bulk download the code does not do.** It
+  says the per-point lookup was "REPLACED" by a single bulk fetch plus a local
+  nearest join; `fetch_parcels.py` in fact still queries once per person-like
+  pin with `returnCentroid=true`, and `PARCEL_QUERY_BBOX` and
+  `PARCEL_PAGE_SIZE` are read by no script. The docstring explains why - bulk
+  was attempt 2 of 3 and was abandoned at ~26 s per 2,000-row page, about two
+  hours - so the config comment describes an intention and the docstring
+  describes the outcome. The provenance row records what the code does. Left
+  the dead constants in place rather than deleting them mid-session; noted here
+  so the next reader does not trust the comment over the call.
+
+- **Not established, and flagged rather than assumed.** San Diego's municipal
+  boundary layer sits on the same `geo.sandag.org` host as the parcels but is a
+  different service and its own terms were not read; its row predates this
+  review. The SanGIS parcel agreement is NOT extended to it by proximity -
+  that is precisely the Philadelphia mistake, where a licence on one page
+  turned out not to govern the dataset beside it. Recorded in
+  `data_sources.md` under the new SanGIS entry.
+
+- **The deploy-verify run passed and surfaced two things this session must not
+  drop.** The BC notice renders on the Overview and Vancouver pages with the
+  correct `U+2013` en dash and British "Licence", in position after TransLink,
+  outside any expander, with no console errors and no displacement of the
+  sixteen existing notices. But `check_deploy_imports.py` tested HEAD rather
+  than the working tree, so it must be re-run after committing; and because
+  `app/components.py` is imported by every page, **the deployed app must be
+  REBOOTED after this push, not merely updated** - gate item 9, the failure
+  that kept the live site down for three hours on 2026-09-22.
 
 ### 2026-09-22 - Four Canadian cities promoted into the provenance tables, and three Step 0 findings did not survive the trip
 

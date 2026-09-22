@@ -609,9 +609,28 @@ clicking each marker opens its page, each switcher works, each map renders).
 - Update `docs/project_context.md` (current state only - which cities exist,
   what's distinctive; no counts), `docs/city_shortlist.md`, and tick or add
   items in `PLAN.md`.
+- **Run `python scripts/check_provenance.py` and make it name your city OK.**
+  This replaces confirming the rows by eye, because confirming by eye is what
+  failed: the sentence below has been in this skill since the start, was
+  followed for nine US cities, and was silently skipped for the eight cities
+  that arrived through a country profile instead. The script checks that the
+  city has a row in all three provenance tables, that **every URL its
+  `config.py` actually resolves to** appears in `docs/data_sources.md`, and
+  that the notices list and `app/components.py`'s `_NOTICES` still match.
+  A city listed under `KNOWN_GAPS` there is a defect with a date on it, not a
+  city that passed.
 - **Confirm the city's licence rows are actually in `docs/data_sources.md`**
   (Step 0 item 4) before calling the city done - endpoint, filter, retrieval
   date, licence, and any notice the source requires. A city whose data is
   mapped but whose terms are unrecorded is not finished, because the gap is
   invisible afterwards: it looks exactly like a city that was checked.
+- **Count the source kinds, not the cities.** Four inputs have been missed this
+  way, every one of them a source that is neither a business registry, a
+  transit feed nor the city boundary: Vancouver's parcel + tax-report
+  **residence join**, the Province of British Columbia's **naming layer**, and
+  the same residence join in San Diego, San Francisco and Los Angeles. If a
+  file under `data/<city>/raw/` came from the internet, it needs a row, even
+  when nothing it produces is drawn on the map. `check_provenance.py` finds
+  these by importing the config, which is why it catches what a checklist
+  organised by city does not.
 - Keep the honesty convention: mark what's verified vs. still a skeleton.

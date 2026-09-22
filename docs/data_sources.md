@@ -66,8 +66,11 @@ purchased, or behind a login.
 | City | Source | Provides | Endpoint | Filter at download | Retrieved |
 |---|---|---|---|---|---|
 | San Diego | City Business Tax Certificates | All three buckets, via NAICS | `https://seshat.datasd.org/business_tax_certificates/` (`sd_businesses_active_datasd.csv`) | none (whole file) | 2026-09-18 |
+| San Diego | **SanGIS/SANDAG countywide tax parcels** (ArcGIS FeatureServer, 1,089,758 polygons) | Not businesses — **joined** to the above for the residence check. San Diego was recorded as the city with NO residence signal, on a 0.03% reading that was a MEASUREMENT GAP rather than a clean result; `ownerocc` is `Y` on 472,498 parcels and is the genuine owner-occupancy flag it was thought to lack | `https://geo.sandag.org/server/rest/services/Hosted/Parcels/FeatureServer/0/query` | **One buffered query PER PERSON-LIKE PIN, not a bulk download** — `where=1=1`, a point `geometry` with `distance` in metres, `outFields=apn,asr_landuse,ownerocc`, `returnGeometry=false` and **`returnCentroid=true`**, then the nearest centroid is chosen locally. Only pins whose displayed name reads as a person's are queried (2,463 of them): the filter cannot fire on anything else and this is a shared public service. **The bulk alternative was tried and abandoned** — `orderByFields` forces a sort over 664,662 rows and `resultOffset` deep-pages at ~26 s per 2,000-row page, about two hours — so `PARCEL_QUERY_BBOX` and `PARCEL_PAGE_SIZE` survive in `config.py` as dead constants that no script reads. **Nearest, not containing:** these coordinates sit 5-15 m outside their own parcel because they are placed at the street frontage and SanGIS parcels exclude road right-of-way, so on 30 sampled pins an exact point-in-parcel test matched 1 and a 25 m buffer matched 30. `asr_landuse` has no published coded-value domain, so `11` = single-family detached was established empirically; `17` = condominium is deliberately excluded, as a unit in a shared building may be ground-floor retail | 2026-09-21 |
 | San Francisco | DataSF Registered Business Locations (Socrata `g8m3-pdis`) | All three buckets, via NAICS | `https://data.sf.gov/resource/g8m3-pdis.csv` | San Francisco only | ≈2026-09-19 |
+| San Francisco | **Assessor Historical Secured Property Tax Rolls** (Socrata `wv5m-vpq2`) | Not businesses — **joined** to the above for the residence check. 217 pins (1.19%) displayed a person's name at a parcel the Assessor calls Single Family Residential *and* claiming a homeowner's exemption, California's homestead analogue, granted only on an owner-occupied primary residence | `https://data.sf.gov/resource/wv5m-vpq2.csv` | `$where=closed_roll_year = '2025' AND the_geom IS NOT NULL`, `$select=block, lot, use_definition, number_of_units, homeowner_exemption_value, the_geom`, `$limit=400000`. **`the_geom` is a POINT per parcel, and selecting it is what makes this a SPATIAL join rather than an address one** — an address join reaches only 43.8%, because `property_location` is a fixed-width composite (`'0000 2801 LEAVENWORTH         ST0000'`) and stripping direction words destroys "North Point" and "South Van Ness" on both sides. 43.8% is not enough to filter on: it would remove home businesses only where the address text happened to match, which is arbitrary but looks complete. Nearest-parcel tolerance 40 m (93.4% matched, median 1.4 m). **"Multi-Family Residential" is deliberately NOT treated as residential** although it is the largest category under this city's pins (5,733) — San Francisco puts ground-floor retail in residential buildings. Same host rule as the boundary layer: `data.sf.gov`, never `data.sfgov.org`, which 403s on `/resource/` | 2026-09-21 |
 | Los Angeles | Listing of Active Businesses (Socrata `6rrh-rzua`) | All three buckets, via NAICS | `https://data.lacity.org/resource/6rrh-rzua.csv` | `$where=location_1 IS NOT NULL`, selected columns, `$order=location_account` | ≈2026-09-19 |
+| Los Angeles | **LA County Assessor parcels** (ArcGIS MapServer, 92 fields) | Not businesses — **joined** to the above for the residence check. A 400-point sample put **7.2%** of this city's person-like pins on a Residential parcel claiming a homeowner's exemption — roughly 1,000-2,000 pins, **the largest such exposure in the project** | `https://public.gis.lacounty.gov/public/rest/services/LACounty_Cache/LACounty_Parcel/MapServer/0/query` | One query per person-like pin: `f=json`, point `geometry` with `inSR=4326`, `spatialRel=esriSpatialRelIntersects`, and `outFields=UseType,UseDescription,Roll_HomeOwnersExemp` — three fields of the 92. **Containing parcel first, 25 m buffer only as a fallback** for points inside no parcel at all: an exact point-in-parcel test matches only ~49% of these pins, because the 9% of LA coordinates recovered by Census geocoding sit on street centrelines. Filtering on the unbuffered 49% would have been San Francisco's 43.8% mistake. **Owner names are absent by law** (Cal. Gov. Code §7928.205), so there is nothing here to publish by accident — a structural privacy position rather than a column omission | 2026-09-21 |
 | Chicago | Business Licenses (Socrata `r5kz-chrr`) | All three buckets, via its own licence taxonomy | `https://data.cityofchicago.org/resource/r5kz-chrr.csv` | `license_status='AAI' AND expiration_date >= '2026-09-20'`, `$order=id` | 2026-09-20 |
 | Washington D.C. | **Basic Business License** (DCRA/DLCP, ArcGIS FeatureServer) | **All three buckets, via its own `BUSINESSACTIVITY` taxonomy** — the first non-NAICS source here that covers all three on its own | `https://maps2.dcgis.dc.gov/dcgis/rest/services/FEEDS/DCRA/FeatureServer/0/query` (`outSR` not needed — `returnGeometry=false`, `orderByFields=OBJECTID ASC`, paged at 2,000) | `LICENSESTATUS='Active' AND PREMISEINDC='Yes' AND BUSINESSACTIVITY NOT IN (<the five residential rental types>)`, and an explicit 16-column `outFields` list that omits every owner/agent name and the billing address | 2026-09-21 |
 | New York | DOHMH Restaurant Inspection Results (Socrata `43nn-pn8j`) | **Food service** | `https://data.cityofnewyork.us/resource/43nn-pn8j.csv` | selected columns, `$limit=500000` (unfiltered: it is an inspection history, collapsed to one row per establishment in step 2) | 2026-09-21 |
@@ -175,7 +178,7 @@ address with `<REDACTED FOR PRIVACY>` on 4,074 rows, **taking the coordinates
 with it** (redacted rows carrying coordinates: zero).
 
 | Toronto | Municipal Licensing & Standards (CKAN `169e90ba-3ae0-43dd-8b2f-919e87002f50`) | **Food service and Personal services**, via its own MLS `Category`. **NOT general retail** — see below | `https://ckan0.cf.opendata.inter.prod-toronto.ca/datastore/dump/169e90ba-3ae0-43dd-8b2f-919e87002f50?format=csv` | none at download; step 2 drops cancelled licences and reads only 6 of 19 columns | 2026-09-21 |
-| Toronto — **geocoder, not a business source** | One Address Repository (CKAN `64d4e54b-738f-4cd9-a9e7-8050fac8a52f`) | 525,440 address points, same licence as the business data | the package's `Address Points - 4326.csv` resource (~183 MB) | none (whole file) | 2026-09-21 |
+| Toronto — **geocoder, not a business source** | One Address Repository (CKAN `64d4e54b-738f-4cd9-a9e7-8050fac8a52f`) | 525,440 address points, same licence as the business data | `https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/address-points-municipal-toronto-one-address-repository/resource/64d4e54b-738f-4cd9-a9e7-8050fac8a52f/download/Address%20Points%20-%204326.csv` (~183 MB; the space in the filename is percent-encoded and the resource id is the one in the row above) | none (whole file) | 2026-09-21 |
 
 **Toronto is the only city here whose register carries NO coordinates**, so the
 address repository is a required input rather than a convenience — Canada has no
@@ -333,6 +336,50 @@ independent of what is *permitted*. That is in `docs/excluded_categories.md`.
 | San Diego businesses | Portal terms explicitly permit use and **"Derivative Work"**, defined as "a work that is based in any way or to any extent on the Data". No attribution requirement stated | — |
 | Boston — every source used above (food inspections, Licensing Board, cannabis, city boundary, plus the neighbourhood, SAM address and Property Assessment layers) | **Open Data Commons PDDL** (public domain dedication), declared per-dataset in CKAN's `license_id` as `odc-pddl` | none declared |
 | **Seoul** — the eight `인허가 정보` datasets below (**candidate, not built**) | **공공누리 제1유형 / KOGL Type 1** — attribution required, commercial use and derivative works permitted | 저작권자 **서울특별시**; 제3저작권자 **없음** (none) |
+| **Province of British Columbia** — the ABMS municipalities layer (`WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP`), which NAMES Vancouver/Surrey's 30 out-of-city stations | **Open Government Licence – British Columbia v2.0** — "worldwide, royalty-free, perpetual, non-exclusive licence… including for commercial purposes"; free to "Copy, modify, publish, translate, adapt, distribute". **Terminates automatically on breach.** Excludes Personal Information and the Province's own marks — neither of which a boundary polygon is. The WFS is also subject to the separate **API Terms of Use for OGL Information** (read 2026-09-22), which add operational limits and **no new notice**. Read 2026-09-22, stored at `docs/licenses/bc-open-government-licence.txt` | **Required, verbatim** — `Contains information licensed under the Open Government Licence – British Columbia.` See notice 17. **Two sibling BC layers are licensed "Access Only" and would NOT permit this**; see the stored file's header |
+| San Francisco assessor roll (`wv5m-vpq2`) — the residence-filter join | **Open Data Commons PDDL 1.0** (public domain dedication), declared in the dataset's own `license` field as "Open Data Commons Public Domain Dedication and License" | none declared |
+| **LA County Assessor parcels** (`public.gis.lacounty.gov`) — the residence-filter join | **Explicit grant**, read 2026-09-22 from the County's Enterprise GIS Terms of Use: "you are granted a license to **copy, publish, distribute and/or transmit the Data, to adapt the Data and to exploit the Data for commercial and/or personal use**". Automatically voided on violation. Grants "no right to use the Data in any way that suggests County's endorsement of your use" | **Recommended, not required** — a citation format is offered as "the recommeded citation format", so this adds no notice. The service's `copyrightText` is "Los Angeles County Office of the Assessor" |
+| **SanGIS/SANDAG tax parcels** (`geo.sandag.org`) — San Diego's residence-filter join | **Permitted with conditions**, and the conditions are unlike any other source here — see below. Redistribution is "discouraged, but **not** prohibited". Read 2026-09-22 from the layer item's own `licenseInfo`, which carries the full *SanGIS GIS Data End User Use Agreement* | **PROHIBITED at this project's scale** — see below. "Copyright SanGIS 2015 - All Rights Reserved" |
+
+**SanGIS is the only source in this project that forbids being credited, and
+the clause is easy to read backwards.** Its End User Use Agreement says:
+
+> "End users should be aware that the data does not meet National Map Accuracy
+> Standards at scales finer than 1:24,000... **SanGIS shall not be attributed
+> as the source of the data when representing the data at scales below
+> 1:24,000 absolute scale.** An exemption to the attribution prohibition is
+> provided to the end user if the GIS data released to them from SanGIS is
+> specifically identified as capable of performing at absolute scales below
+> 1:24,000."
+
+This project's rings are 0.1-0.6 miles, far finer than 1:24,000, and the parcel
+layer is not identified as certified below that scale — so **adding a SanGIS
+credit would breach the terms rather than satisfy them.** Every other source
+here is the other way round, which is exactly why this one is worth stating:
+the absence of a SanGIS notice is a deliberate compliance position, not an
+oversight, and a future reviewer tidying up "missing" attributions must not
+add one. It is also the reason `check_provenance.py` checks that notices and
+`_NOTICES` correspond, rather than that every source has a notice.
+
+Two further clauses, neither of which this project triggers. **"UNDER NO
+CIRCUMSTANCES SHALL THE END USER MODIFY OR ALTER THE SANGIS SOURCE DATA IN ANY
+WAY AND REDISTRIBUTE IT AS AN ORIGINAL SANGIS PRODUCT. IF THE SANGIS SOURCE
+DATA IS ALTERED SANGIS MAY BE CITED AS A REFERNCE BUT SHALL NOT BE IDENTIFED
+AS THE SOLE DATA SOURCE"** (the typos are the document's). Nothing from this
+layer is redistributed at all: it is read, used to decide whether a licence is
+somebody's home, and discarded — no parcel geometry, APN or land-use code
+reaches `outputs/`. And the agreement offers citation wording for derived
+products, "GIS data derived, modified, reduced, and/or processed from SanGIS
+downloadable data", which would be the right form if anything derived from it
+were ever published.
+
+**Not established, and flagged rather than assumed:** San Diego's municipal
+**boundary** layer sits on the same `geo.sandag.org` host but is a different
+service (`rest/directories/downloads/Municipal_Boundaries.geojson`) and its own
+terms have not been read. Its row predates this review. Do not extend the
+parcel agreement to it by proximity — that is the Philadelphia mistake, where a
+licence on one page turned out not to govern the dataset beside it.
+
 
 PDDL and CC0 are both public-domain dedications, so neither compels
 attribution; the maps credit these agencies anyway, which is good practice.
@@ -503,9 +550,13 @@ only source whose reuse position could not be established at all.
 ### Transit feeds (GTFS) — checked 2026-09-21
 
 Line geometry is redrawn from each feed's `shapes.txt` into every map, so these
-terms bear directly on what is published. No feed declares a licence in
-`feed_info.txt`; LA Metro's feed even includes a `feed_license` column and
-leaves it empty, pointing to its developer terms instead.
+terms bear directly on what is published. **No feed in this project declares a
+licence in `feed_info.txt`** — LA Metro's even includes a `feed_license` column
+and leaves it empty, pointing to its developer terms instead. Several feeds ship
+no `feed_info.txt` at all (Miami, Calgary, Toronto), and two ship one that
+carries a validity window but no licence (Montréal, Vancouver), so in every case
+the agency's own terms page is the only source and every row below was read from
+one.
 
 | Agency | Redistribution | Attribution | Other conditions |
 |---|---|---|---|
@@ -524,6 +575,11 @@ without notice, so the clauses quoted above are checkable against the text that
 was actually agreed to rather than against a URL that may have moved on.
 
 | **WMATA** (Washington D.C. — **BUILT 2026-09-21**) | Permitted within your own app: "a limited, non-exclusive, non-assignable, non-transferrable, non-sublicensable, revocable license to download, use, reproduce, and redistribute WMATA's Transit Data within your Application". **Third-party redistribution is prohibited** — "sharing (except with your Application's users), transferring, sublicensing, selling or leasing any Transit Data, directly or indirectly...to any other person", unless authorised in writing and "inseparably commingled with or supplemented by additional data that you have provided" | **Not required** — no attribution or notice clause | **No modification clause at all**, which makes it more permissive than LA Metro's on the point that matters most. Access is gated: `api.wmata.com/gtfs/rail-gtfs-static.zip` returns **401** without a registered key from `developer.wmata.com/signup`; keys "remain WMATA's property and may be revoked or otherwise limited at any time", cannot be sold, transferred or sublicensed, and "enable WMATA to associate your API activity with your Application". Trademarks: "prohibited from using WMATA Intellectual Property, including any confusingly similar variants, in association with the Transit Data or API unless you have entered into a separate, written license agreement", and must not "state or imply affiliation, sponsorship or endorsement". **§6 additionally forbids stating or implying that the data your Application provides "is accurate, complete, or timely"** — the identical clause MTA carries, making this the **second** feed to constrain city-page prose that way, so it is a cross-city sweep rather than a D.C. footnote. **§9 termination is the sharpest in the project:** on termination "you must permanently delete all Transit Data or other data which you stored pursuant to your use of the API or GTFS", and "WMATA may request that you certify in writing your compliance with this section" — LA Metro requires removal, but only WMATA asks for written certification. Read 2026-09-21 from `https://developer.wmata.com/license`; local copy at `docs/licenses/wmata-transit-data-terms-of-use.html` |
+| **TransLink** (Vancouver *and* Surrey — **BUILT 2026-09-21**) | Permitted: "a limited, revocable and non-exclusive license to **use, reproduce, and redistribute** the Data" | **Required, in specific wording** — notice 11. "Route and arrival data used in this product or service is provided by permission of TransLink…" | **TWO documents mandate TWO different legends, and only one of them governs.** The Open API terms require "Some of the data used in this product or service…" and add an approval gate, an API key, a 1,000-request cap and a ten-day termination clause; the **static GTFS terms have none of those** and mandate the "Route and arrival data" wording instead. Using the API legend for GTFS data would not satisfy these terms. Both texts are stored; `translink-gtfs-static-terms-of-use.txt` is the operative one. No marks beyond the Legend. **"You must provide TransLink sufficient information as TransLink may request to identify you"** — read as an obligation to answer rather than a precondition of use, a stated position in the same family as LA Metro's modification clause (`DECISIONS.md`, 2026-09-21). Commercial users charging end users may have additional terms imposed. The feed itself carries `feed_info.txt` but **declares no licence in it** |
+| **STM** (Montréal — **BUILT 2026-09-21**) | Permitted: CC BY 4.0 via the Ville de Montréal portal, which grants reproduction, modification and distribution including commercially | **Required, and credited to STM rather than to the City** — notice 13 | The dataset sits on the City's portal but is **STM's property**, and its own note says so: "selon la clause d'attribution de la licence Creative Commons 4.0, la paternité des données doit être attribuée à la Société de transport de Montréal". Its coverage is stated to extend to "les tracés des lignes de bus et de métro", which is exactly what this project redraws. The portal's **broader-than-CC-BY** condition applies here too: the credit must state whether the data was modified **"ou si des interprétations en ont été tirées"** — and ring density, bucketing and storefront filtering are all interpretations, so a bare credit does not satisfy it. No `feed_info.txt` licence field |
+| **Calgary Transit** (**BUILT 2026-09-21**) | Permitted: the Open Government Licence – City of Calgary grants a "worldwide, royalty-free, perpetual, non-exclusive license to use the Information, including for commercial purposes", and you are free to "Copy, modify, publish, translate, adapt, distribute or otherwise use" it | **Required, in specific wording** — notice 14, and **ONE notice covers both the business data and the transit data**, which no other Canadian city manages | Feed and register are published through the same portal under the same licence. **Terminates automatically on breach.** The Socrata `license` field on the business register reads `See Terms of Use` — the `SEE_TERMS_OF_USE` marker `read-licence` step 1 flags — and the OGL is the document it points at. **Neither Calgary copy of the feed carries `feed_info.txt` at all**, so there is no licence field and no validity window; staleness is judged from the Socrata resource's `updatedAt` |
+| **Edmonton Transit Service** (**BUILT 2026-09-21**) | Permitted under the City's Open Data Terms of Use | **Required — but NOT as a credit**, which is the trap. Notice 15 | **Recorded as needing nothing, and that was wrong.** The Terms say credit is "not required" but "encouraged", and both the Canada profile and `docs/build_briefs/edmonton.md` concluded from that sentence that Edmonton had no display obligation. The obligation is in a **different clause and is not about credit**: distributing the datasets "in original or modified form" requires including "a copy of, or this Uniform Resource Locator (URL) for, these Terms of Use" and ensuring downstream users are bound "without introducing any further restrictions of any kind". `outputs/edmonton/` is that dataset in modified form, so it engages. **Unlike the four municipal OGLs this does NOT terminate automatically** — the City may cancel access "at any time for any reason, in its sole discretion". The portal's own copy is now behind a sign-in; the PDF in `docs/licenses/` is the readable one |
+| **TTC** (Toronto — **BUILT 2026-09-21**) | Permitted: the Open Government Licence – Toronto grants a "worldwide, royalty-free, perpetual, non-exclusive licence to use the Information, including for commercial purposes", free to "Copy, modify, publish, translate, adapt, distribute or otherwise use" | **Required, in specific wording** — notice 16, and **one notice covers both** the MLS business register and the TTC feed | Both are City of Toronto CKAN resources under the same licence. **Both declare "License not specified" at dataset level**, which is exactly the case the standing rule is for — a missing licence field means "go read the terms", not "no restrictions" — so the text was captured from `open.toronto.ca/open-data-licence/` rather than read from a field. **Terminates automatically on breach.** No `feed_info.txt`, so no licence field and no validity window |
 
 ### The owner's API-account practice, and what it interacts with
 
@@ -1190,7 +1246,7 @@ attribution and no acknowledgement — its constraints are on what may be SAID
 (§6 accuracy, §9 deletion on termination, the trademark clause), not on what
 must be shown.
 
-**8. City of Vancouver — required, and DISPLAYED.** The Open Government
+**9. City of Vancouver — required, and DISPLAYED.** The Open Government
 Licence – Vancouver requires this exact sentence wherever its information is
 used:
 
@@ -1202,7 +1258,7 @@ them, the rights granted to you under this licence… will end automatically" �
 so the notice is not cosmetic. In `app/components.py`'s `_NOTICES` since
 2026-09-21, when Vancouver was built.
 
-**9. City of Surrey — required, and DISPLAYED.** The same OGL template, with
+**10. City of Surrey — required, and DISPLAYED.** The same OGL template, with
 Surrey's own wording, which is **not interchangeable with Vancouver's**:
 
 > `Contains information licensed under the Open Government License - City of Surrey.`
@@ -1211,7 +1267,7 @@ Note the American spelling "License" and the HYPHEN. Surrey's OGL also
 terminates automatically on breach. Required because the Vancouver map is
 regional and includes Surrey's own business licences.
 
-**10. TransLink — required, and DISPLAYED. Its wording is a TRAP.** The GTFS
+**11. TransLink — required, and DISPLAYED. Its wording is a TRAP.** The GTFS
 Static Terms of Use require the Legend to be "prominently displayed" in
 exactly this text:
 
@@ -1236,7 +1292,7 @@ Legend** (satisfied by construction — this project draws its own geometry from
 who is using the data**, which was read as an obligation to answer rather than
 a precondition of use (`DECISIONS.md`, 2026-09-21).
 
-**11. Ville de Montréal — required, and DISPLAYED. Its condition is BROADER
+**12. Ville de Montréal — required, and DISPLAYED. Its condition is BROADER
 than standard CC-BY, and this project triggers the broad part every time.**
 `locaux-commerciaux` is CC-BY 4.0 (`license_id: cc-by`, confirmed from CKAN
 `package_show`). The City's own licence page,
@@ -1256,7 +1312,7 @@ City "vous soutient ou endosse votre usage" (explicitly extending to
 integrating its data into a database you own), and no restricting access to the
 originals "sous la forme de conditions légales ou de mesures techniques".
 
-**12. Société de transport de Montréal — required, and DISPLAYED.** The Métro
+**13. Société de transport de Montréal — required, and DISPLAYED.** The Métro
 geometry is a SEPARATE owner from the business data, though both sit on the
 City's portal. The STM dataset's own note:
 
@@ -1282,7 +1338,7 @@ name montreal.ca's own contents and photos. The open data is governed by the
 separate licence page above. Same shape as nyc.gov's "All Rights Reserved"
 footer and Philadelphia's terms-of-use, and the reason step 4 exists.
 
-**13. City of Calgary — required, and DISPLAYED. One notice covers BOTH the
+**14. City of Calgary — required, and DISPLAYED. One notice covers BOTH the
 business data and the transit data**, which no other Canadian city manages:
 
 > `Contains information licensed under the Open Government Licence – City of Calgary.`
@@ -1294,7 +1350,7 @@ Surrey's, this licence **terminates automatically on breach**. The Socrata
 `SEE_TERMS_OF_USE` marker `read-licence` step 1 flags: the OGL is the document
 it points at, and it is stored in `docs/licenses/calgary-open-government-licence.txt`.
 
-**14. City of Edmonton — required, and DISPLAYED. It was recorded as needing
+**15. City of Edmonton — required, and DISPLAYED. It was recorded as needing
 NOTHING, and that was wrong.** One notice covers both the business register and
 ETS's GTFS, as Calgary's does, because the feed is published through the same
 Open Data Catalogue.
@@ -1336,7 +1392,7 @@ any reason, in its sole discretion", which is discretionary rather than
 automatic. It also bars implying City endorsement or affiliation and bars use of
 its marks, which `render_site_notices()`'s standing non-affiliation line covers.
 
-**15. City of Toronto — required, and DISPLAYED. ONE notice covers BOTH the
+**16. City of Toronto — required, and DISPLAYED. ONE notice covers BOTH the
 business register and the TTC's GTFS**, as Calgary's does, because both are City
 of Toronto CKAN resources under the same licence:
 
@@ -1349,23 +1405,86 @@ not specified" at dataset level, which is why the licence text was captured from
 `docs/licenses/toronto-open-government-licence.txt` rather than read from a
 field.
 
-So for the **fourteen** cities now built there are **thirteen** sources requiring
-specific text or acknowledgement, all of them displayed — and the three Canadian
-builds added six of the twelve between them, where the nine US cities needed
-five in total.
+**The counts that used to sit here are gone, and their going is the point.**
+This paragraph asserted "fourteen cities" and "thirteen sources" and was wrong
+on both by the time anyone read it — two cities and three notices had been
+added without it being touched, and the sentence disagreed with itself
+("thirteen sources", then "six of the twelve"). A hand-maintained tally beside
+a hand-maintained list drifts, silently, in the one section that gates a public
+deploy. `scripts/check_provenance.py` now asserts the relationship instead:
+every entry in `app/components.py`'s `_NOTICES` has a numbered item here, every
+numbered item has an entry there, and the numbers are unique and contiguous.
+Run it rather than counting.
 
-**Vancouver added three at once**, the first city to add more than one, because
-it is regional across two municipalities and every Canadian Open Government
-Licence prescribes its own sentence. **Montréal added two**, because its
-business data and its transit data have different owners. And Montréal's is the
-first attribution in this project that has to describe what this project **did
-to** the data rather than merely name its source.
+What does not drift is the shape, and it is worth stating for the next country:
 
-The pattern is worth stating for the next country: the US sources mostly
-prescribed no wording, and the Canadian ones almost all prescribe their own.
-Budget a notice per source rather than a notice per city.
+- **The US sources mostly prescribed no wording; the Canadian ones almost all
+  prescribe their own.** Budget a notice per SOURCE, not per city.
+- **Vancouver added three at once** — the first city to add more than one —
+  because it is regional across two municipalities and each Open Government
+  Licence prescribes its own sentence. It later added a fourth, the Province's.
+- **Montréal added two**, because its business data and its transit data have
+  different owners; and Montréal's is the first attribution here that has to
+  describe what this project **did to** the data rather than merely name its
+  source. INEGI's and CRTM's are the same family.
+- **A notice can come from a publisher that is not a city at all.** The
+  Province of British Columbia (item 17) is the first, and it arrived through
+  the naming layer rather than through any of the three provenance tables —
+  which is why the check looks at sources, not at cities.
 
-**15. Seoul Metropolitan Government — WILL BE REQUIRED. Not yet, because no
+**17. Province of British Columbia — required, and DISPLAYED since 2026-09-22.
+It is the first PROVINCIAL or STATE publisher in this project**, and neither
+Vancouver's nor Surrey's municipal licence reaches it:
+
+> `Contains information licensed under the Open Government Licence – British Columbia.`
+
+En dash, British "Licence" — the third notice in this list with that exact
+shape, after Vancouver's and Calgary's, and still not interchangeable with
+Surrey's hyphen-and-"License". Like the four municipal OGLs it **terminates
+automatically on breach**. Read 2026-09-22 and stored at
+`docs/licenses/bc-open-government-licence.txt` (version 2.0, last updated
+2025-04-11).
+
+**What engages it:** the BC ABMS municipalities layer, read over WFS from
+`openmaps.gov.bc.ca`, is what NAMES the 30 SkyTrain stations lying outside
+Vancouver and Surrey. `outputs/vancouver/excluded_stations.csv` is committed to
+a public repository and carries those names, so the Information is distributed
+and the attribution clause engages — the same reasoning that turned Edmonton
+from "no obligation" into item 15.
+
+**Why it was missed for a day.** It is not a business registry, not a transit
+feed and not the city boundary: it is the **naming layer**, a fourth kind of
+input that no per-city checklist had a slot for. D.C.'s Census TIGERweb states
+layer is the same role and needed no notice only because US federal works carry
+no copyright — so this project had met the category once and drawn exactly the
+wrong lesson from it. `scripts/check_provenance.py` now fails when any source
+in the three provenance tables has no licence position recorded, which is the
+check that would have caught it on the day.
+
+**Two pointers were followed and both mattered.** The licence page opens "as
+per B.C. Government Copyright, the following licence only applies to records in
+the B.C. Data Catalogue that specify it" — so the catalogue record is the
+authority, and it declares OGL-BC. And the page links a **second** document,
+"API Terms of Use for OGL Information", which applies here because this project
+reads a WFS rather than downloading a file. Read 2026-09-22: it adds
+operational conditions (limits "without notice", credentials revocable if
+misused, terms changeable without notice, automatic termination) and **no new
+notice**. That is TransLink's two-documents shape with the opposite answer —
+TransLink's two documents mandate *different legends*, BC's second mandates
+none.
+
+**A near miss worth recording.** Three BC layers carry near-identical names and
+**two are licensed "Access Only"**, which does not permit redistribution:
+`tantalis-municipalities` and `legally-defined-administrative-areas-of-bc`.
+Only `municipalities-legally-defined-administrative-areas-of-bc` is OGL-BC. The
+build is on the right one — confirmed not by its name but because that
+package's own metadata names the exact `openmaps.gov.bc.ca/geo/pub/…
+ABMS_MUNICIPALITIES_SP/ows` endpoint the config calls, and because TANTALIS
+describes itself as superseded: "[Replacement Dataset: ABMS_MUNICIPALITIES_SP]".
+Calgary's two-boundary trap, with a licence consequence instead of a geometry
+one.
+
+**18. Seoul Metropolitan Government — WILL BE REQUIRED. Not yet, because no
 Korean city is built.** Read 2026-09-22 and recorded here so the cost is known
 before the build rather than discovered during it. All eight `인허가 정보`
 datasets are **공공누리 제1유형 (KOGL Type 1)**, and it is a **one-notice

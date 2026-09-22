@@ -102,6 +102,23 @@ colliding. A single session does all of it and can ignore that file.
   is public (Chicago, SFMTA, LA Metro): the exact wording is in
   `docs/data_sources.md`, "Notices this project MUST display when published",
   and those are obligations rather than courtesies.
+- **Run `python scripts/check_provenance.py` after adding a city, and make it
+  name that city OK.** `docs/data_sources.md` is the only way a build can be
+  reproduced, and the rule to record a city's sources there was followed for
+  the nine US cities and silently skipped for the eight that arrived through a
+  country profile - Canada's six for a day, Mexico's two until a script looked.
+  The gap is invisible by construction: **a city whose provenance is unrecorded
+  looks exactly like a city that was checked**, which is why this is a script
+  and not another paragraph. It also checks the notices list against
+  `app/components.py`'s `_NOTICES`, which had two item 8s and two item 15s.
+  A city under `KNOWN_GAPS` in that script is a dated defect, not a pass.
+- **A source that is not a registry, a feed or a boundary still needs a row.**
+  The naming layer that says which municipality an excluded station is in, the
+  parcel or assessor layer a residence filter joins to, a geocoder. These are
+  usually published by a county, a province or a state rather than by the city,
+  so they carry their own licence and sometimes their own required notice - the
+  Province of British Columbia's is notice 17, and it was missed for a day
+  because no per-city checklist had a slot for it.
 - **Record a new data source's licence when you add it**, in
   `docs/data_sources.md`, using the **`read-licence` skill**. A government
   open-data portal is a reason to expect permissive terms, not evidence of
@@ -199,6 +216,7 @@ python pipeline/<city_slug>/step2_clean_businesses.py
 python pipeline/<city_slug>/step3_map.py
 python pipeline/drift_check.py [city_slug] [--jobs N]   # --jobs 4 does all 13 in ~37s
 python scripts/brief_check.py [city_slug]               # re-run a brief's claims against live sources
+python scripts/check_provenance.py [--strict]           # every built city's sources actually recorded; run after adding a city
 python scripts/check_deploy_imports.py [--ref REF]      # clean clone + lean venv: run before ANY push touching app/
 python scripts/decisions_index.py [--check]             # refresh DECISIONS.md's index
 python scripts/merge_append_only.py DECISIONS.md [--dry-run]   # resolve an append-only merge conflict
