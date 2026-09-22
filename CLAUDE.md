@@ -147,6 +147,17 @@ colliding. A single session does all of it and can ignore that file.
   the findings belong in `docs/data_sources.md` and `docs/city_shortlist.md`,
   which is where they can be trusted and the raw capture cannot.
 - Draft interpretive prose in chat before writing it to a file.
+- **Write multi-line text with the Write tool, never a shell heredoc or an
+  inline quoted string.** Commit messages, `DECISIONS.md` entries, page prose,
+  generated Python. Bash command-substitutes backticks and mangles escapes
+  *inside* heredocs too: on 2026-09-22 it broke an f-string in generated code,
+  silently emptied every backticked phrase from a commit message, and turned a
+  `\n` into a literal newline mid-string - three times in one day, with the fix
+  already recorded in `DECISIONS.md` after each one. **That repetition is the
+  point of putting it here:** a lesson in the log describes what happened once,
+  and a working rule is in hand at the moment of typing. Same reasoning as
+  `osm-rail`'s opening section, which exists because a warning in one city's
+  config did not reach the next city.
 
 ## Commands
 

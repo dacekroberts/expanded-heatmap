@@ -380,7 +380,15 @@ CITIES = [
         # it clears Mexico City outright and its west edge lands on-canvas at
         # every width. Chosen against a projection model that reproduces four
         # pixel-measured pills to within 2 px, not by eye.
-        "label_offset": ("end", 0, 0),
+        #
+        # dx IS +12 AND NOT 0, and the 12 px buys a phone rather than tidiness.
+        # At dx 0 deploy-verify measured the pill's left edge at exactly x=0 on
+        # a 375 px viewport - full text, zero margin - and at a 360 px viewport
+        # (a common Android width) the leading "G" was cut. 375 was the
+        # threshold, not a margin. +12 gives +2.3 px at 360 px and still leaves
+        # 11.6 px to "Miami (Regional)", whose pill shares this one's y band;
+        # +24 collides with it. Measured, not nudged.
+        "label_offset": ("end", 12, 0),
     },
 ]
 

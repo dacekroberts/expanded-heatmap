@@ -62,10 +62,9 @@ Fixed premises only. DENUE separately records semi-fixed units — stalls and
 street posts — and those are not shown, although street commerce is a real and
 substantial part of the city's retail.
 
-Unlike the other cities, this map has no whole-city layer. The rings and the
-three categories toggle from the layer control at top left, but there is no
-option to show every business in Mexico City at once; that layer would have
-carried more than twice the points of the default one.
+Unlike the other cities, this map has no whole-city layer: there is no option
+to show every business in Mexico City at once, only those near a station. That
+layer would have carried more than twice the points of the default one.
 
 Concentric ring boundaries and the three business categories (Retail, Food
 service and Personal services) are toggleable via the layer control in the top
