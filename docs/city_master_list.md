@@ -182,7 +182,7 @@ below.
 | **Hong Kong** 🇭🇰 | 126 rel, 125 named, 117 coloured | **BLOCKED, not negative.** The portal is a measured negative (statistics only), but **FEHD's register exists and is queryable** — no bulk export found. The single most valuable open thread in Band D |
 | **Rio de Janeiro** 🇧🇷 | 20 rel, all named + coloured | CNPJ, no coordinates → geocoding at São Paulo's scale |
 | **Tel Aviv** 🇮🇱 | 6 rel, **realistically 1** — Green and Purple were under construction when screened; **that was 2026-09 and may now be stale** | **UNREACHABLE, and the city portal is ALIVE.** `opendata.tel-aviv.gov.il` returns **472** to us but is archived **2026-03-10**; `www.tel-aviv.gov.il` likewise. The block is aimed at us. Meanwhile **`data.gov.il` answers 200 right now** and has not been re-probed since the "14 bytes" reading. **Not a discard** |
-| **Hyderabad** 🇮🇳 | 6 rel, all named + coloured | ⚠️ **The old row said `data.telangana.gov.in` is "dead". That was wrong** — it fails for us but is archived **2025-05-09**, so it is alive. **GHMC** (`ghmc.gov.in`), which is the body that actually issues trade licences, returns **403** to us and is archived **2025-04-24** — also alive. And **`tgbpass.telangana.gov.in` answers 200 right now**, unprobed. **Three live hosts, none measured. Not a discard** |
+| **Hyderabad** 🇮🇳 | 6 rel, all named + coloured | ⚠️ **`data.telangana.gov.in` resolves (103.122.129.180) — our failure is routing, not DNS. The old row said "dead". That was wrong** — it fails for us but is archived **2025-05-09**, so it is alive. **GHMC** (`ghmc.gov.in`), which is the body that actually issues trade licences, returns **403** to us and is archived **2025-04-24** — also alive. And **`tgbpass.telangana.gov.in` answers 200 right now**, unprobed. **Three live hosts, none measured. Not a discard** |
 | **Kochi** 🇮🇳 | 2 rel, named + coloured | ⚠️ **This was never a negative — it is an unfollowed lead.** Both `lsgkerala.gov.in` and `kochicorporation.lsgkerala.gov.in` are **reachable right now** (archived 2026-09-20 and 2026-08-02). LSGD Kerala exposes **`go.lsgkerala.gov.in/pages/query.php?t=establishment`**, an establishment query interface, and Kerala's local bodies are the trade-licence issuers. **Sites are in Malayalam.** Unprobed. **Not a discard** |
 
 #### Paris / SIRENE — the measurement, 2026-09-22
@@ -308,7 +308,7 @@ load-bearing — see the Sofia row.
 | City | What the host actually does |
 |---|---|
 | **Tallinn** 🇪🇪 ⏸ | **PARKED ON VALUE, and now with one half measured.** Trams only, ~450k. The **äriregister**'s open-data downloads are `ettevotja_rekvisiidid` — *company* requisites — plus annual accounts: **company-shaped**, confirming what was previously only suspected. The register that would carry premises is **MTR** (`mtr.ttja.ee`, the Majandustegevuse register); it is live HTML with **no API found**, so it needs the browser. Not done — the city is the thinnest map in the screen and does not justify the hour |
-| **Sofia** 🇧🇬 | **UNREACHABLE, and now demonstrably so.** `data.egov.bg` returns **403 in the browser as well as to curl** — but the Internet Archive holds a snapshot dated **2026-04-02**, so **the portal is alive and the 403 is aimed at us**, not a dead host. The food authority (**BABH**) resolves at no domain tried. `www.sofia.bg` and `portal.registryagency.bg` are live and unprobed. **Nothing has been learned about Bulgarian premises data** — only that our routes to asking it are blocked |
+| **Sofia** 🇧🇬 | **UNREACHABLE, and the refusal is deliberate.** `data.egov.bg` **resolves fine** via DNS-over-HTTPS (213.91.191.234), so this is not a routing or DNS problem — the host is up and returning **403 in the browser as well as to curl** — but the Internet Archive holds a snapshot dated **2026-04-02**, so **the portal is alive and the 403 is aimed at us**, not a dead host. The food authority (**BABH**) resolves at no domain tried. `www.sofia.bg` and `portal.registryagency.bg` are live and unprobed. **Nothing has been learned about Bulgarian premises data** — only that our routes to asking it are blocked |
 
 ### D-d — UNREACHABLE, not a cheap gate (1)
 
@@ -324,7 +324,20 @@ city's own data failed:
 | `sevilla-ayuntamientodesevilla.opendata.arcgis.com` | live, but **"Can't access this content … Sign In"** — the Medellín shape |
 | `datos.gob.es` federated catalogue | **no Ayuntamiento de Sevilla publisher exists.** The publishers returned for "Sevilla" are CIS (opinion surveys), **IGME (geological maps)** and the Junta de Andalucía |
 
-**And the Internet Archive settles that it is OUR problem, not Sevilla's:**
+**⚠️ DNS-over-HTTPS, 2026-09-22 — and it splits the failure in two:**
+
+| Host | Cloudflare DoH | Meaning |
+|---|---|---|
+| `www.sevilla.org` / `sevilla.org` | **resolves → 94.198.88.169** | The host exists. Our 000 is a **routing failure on our side**, not DNS |
+| **`datosabiertos.sevilla.org`** | **NXDOMAIN** | **The open-data subdomain genuinely no longer exists — for anyone.** The 521-dataset portal at that address has been retired |
+
+**So Sevilla is two problems, not one.** The city's main site is reachable in
+principle and blocked only to us; the open-data portal we were trying to reach
+is **actually gone**. Whatever replaced it has not been found — and the ArcGIS
+Hub, which is the obvious successor, is the sign-in-walled one. **That is the
+thread to pull**, not the dead subdomain.
+
+**And the Internet Archive confirms the portal was real while it lasted:**
 
 | | |
 |---|---|
