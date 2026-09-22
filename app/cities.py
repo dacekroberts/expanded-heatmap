@@ -87,6 +87,7 @@ MAP_ONLY_NAV = True
 CITIES = [
     {
         "name": "San Diego",
+        "region": "United States",
         "lat": 32.7157,
         "lon": -117.1611,
         "page": "pages/1_San_Diego_Heatmap.py",
@@ -97,6 +98,7 @@ CITIES = [
     },
     {
         "name": "San Francisco",
+        "region": "United States",
         "lat": 37.7509,
         "lon": -122.4414,
         "page": "pages/2_San_Francisco_Heatmap.py",
@@ -105,6 +107,7 @@ CITIES = [
     },
     {
         "name": "Los Angeles",
+        "region": "United States",
         "lat": 34.05,
         "lon": -118.31,
         "page": "pages/3_Los_Angeles_Heatmap.py",
@@ -116,6 +119,7 @@ CITIES = [
     },
     {
         "name": "Chicago",
+        "region": "United States",
         "lat": 41.8781,
         "lon": -87.6298,
         "page": "pages/4_Chicago_Heatmap.py",
@@ -139,6 +143,7 @@ CITIES = [
     },
     {
         "name": "New York",
+        "region": "United States",
         "lat": 40.7128,
         "lon": -74.006,
         "page": "pages/5_New_York_Heatmap.py",
@@ -150,6 +155,7 @@ CITIES = [
     },
     {
         "name": "Philadelphia",
+        "region": "United States",
         "lat": 39.9526,
         "lon": -75.1652,
         "page": "pages/6_Philadelphia_Heatmap.py",
@@ -164,6 +170,7 @@ CITIES = [
         # municipalities, so "Miami" alone would overstate its scope. The name
         # must match render_city_nav()'s argument on the page.
         "name": "Miami (Regional)",
+        "region": "United States",
         "lat": 25.7743,
         "lon": -80.1937,
         "page": "pages/7_Miami_Heatmap.py",
@@ -175,6 +182,7 @@ CITIES = [
     },
     {
         "name": "Boston",
+        "region": "United States",
         "lat": 42.3601,
         "lon": -71.0589,
         "page": "pages/8_Boston_Heatmap.py",
@@ -185,6 +193,7 @@ CITIES = [
     },
     {
         "name": "Washington D.C.",
+        "region": "United States",
         "lat": 38.9072,
         "lon": -77.0369,
         "page": "pages/9_Washington_DC_Heatmap.py",
@@ -200,6 +209,7 @@ CITIES = [
         # called Vancouver. The name must match render_city_nav()'s argument
         # on the page.
         "name": "Vancouver (Regional)",
+        "region": "Canada",
         "lat": 49.2827,
         "lon": -123.1207,
         "page": "pages/10_Vancouver_Heatmap.py",
@@ -231,6 +241,7 @@ CITIES = [
         # render_city_nav()'s argument on the page must match each other;
         # neither has to match the filename.
         "name": "Montréal",
+        "region": "Canada",
         "lat": 45.5019,
         "lon": -73.5674,
         "page": "pages/11_Montreal_Heatmap.py",
@@ -260,6 +271,7 @@ CITIES = [
     },
     {
         "name": "Calgary",
+        "region": "Canada",
         "lat": 51.0447,
         "lon": -114.0719,
         "page": "pages/12_Calgary_Heatmap.py",
@@ -281,6 +293,7 @@ CITIES = [
     },
     {
         "name": "Edmonton",
+        "region": "Canada",
         "lat": 53.5444,
         "lon": -113.4909,
         "page": "pages/13_Edmonton_Heatmap.py",
@@ -298,6 +311,7 @@ CITIES = [
     },
     {
         "name": "Toronto",
+        "region": "Canada",
         "lat": 43.6532,
         "lon": -79.3832,
         "page": "pages/14_Toronto_Heatmap.py",
@@ -342,3 +356,47 @@ CITIES = [
 # produces a SyntaxError here, that is why - move the entry up into CITIES by
 # hand rather than reverting.
 IN_DEFAULT_VIEW = [c for c in CITIES if c.get("in_default_view", True)]
+
+# --- REGIONS -----------------------------------------------------------------
+#
+# The macro map opens on ONE region and offers the others, rather than fitting
+# the whole world. That is the owner's decision of 2026-09-21, recorded in
+# docs/scaling_thresholds.md under "~12-15 cities": once the map spans
+# continents a single fitted view is unreadable however the markers are drawn,
+# so the answer is to stop trying to fit everything at once.
+#
+# THE SWITCHER RE-CENTRES AND DOES NOT RE-ZOOM, and that is the whole reason it
+# is safe to add. Every `label_offset` above is in PIXELS, measured at the zoom
+# `fit_view` produces for the United States set (1.4525). Pixel distance between
+# two cities depends on the ZOOM alone, not on where the view is centred - so
+# re-centring preserves every measured offset exactly, while re-fitting per
+# region would change the zoom and invalidate all of them at once.
+#
+# A region whose cities sit much closer together than a continent may eventually
+# want its own zoom; `zoom` below exists for that and is None everywhere today,
+# meaning "keep the pinned one". Setting it on a region means re-measuring that
+# region's label offsets, which is the cost this design defers rather than
+# removes.
+DEFAULT_REGION = "United States"
+
+# Order is display order in the switcher. A new country appends here.
+REGION_ORDER = ["United States", "Canada"]
+
+
+def cities_in(region):
+    return [c for c in CITIES if c.get("region") == region]
+
+
+REGIONS = [
+    {"name": name, "cities": cities_in(name), "zoom": None}
+    for name in REGION_ORDER
+    if cities_in(name)
+]
+
+_untagged = [c["name"] for c in CITIES if c.get("region") not in REGION_ORDER]
+if _untagged:
+    raise ValueError(
+        f"cities.py: {_untagged} have no region, or one not in REGION_ORDER. "
+        f"Every city needs one - the macro map opens on a region and a city "
+        f"without one would be reachable only from the text list."
+    )
