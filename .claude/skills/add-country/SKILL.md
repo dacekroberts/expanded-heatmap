@@ -491,6 +491,30 @@ was measured. Expect them.
 - **A catalogue mirror three months stale and missing an entire mode.**
   Toronto's TTC feed on the Mobility Database had no subway at all; the screen
   concluded Toronto mis-codes its subway. `screen_rail.py` now flags expiry.
+
+  **But do NOT generalise that into "never use a mirror" - the 2026-09-21
+  screen did, and contradicted itself within the hour.** Mexico City is the
+  opposite case: `datos.cdmx.gob.mx` times out, the S3 `direct_download`
+  returns 403, and **the Mobility Database mirror is the only route that
+  works** - serving a current feed that screens as subway 12, the correct line
+  count.
+
+  **The distinction is whether the artifact SELF-ATTESTS, not whether it came
+  from a mirror.** GTFS does: `feed_info.txt` carries `feed_end_date`, and mode
+  counts are checkable against a known network, so "Toronto has a subway and
+  this has zero type-1 routes" is detectable. A business-register CSV does not:
+  no embedded validity date, its date living in a filename, and a short row
+  count invisible - 28,000 against a true 31,000 looks fine.
+
+  So the Toronto failure was not "a mirror was used". It was **a stale mirror
+  used without reading the expiry field already in the file**, and the fix was
+  the expiry check rather than abstinence.
+
+  **The rule: a mirror is usable when the artifact self-attests to its own
+  freshness and completeness; it is not when you must take the mirror's word
+  for both.** And a feed has at least three addresses - the agency's,
+  `urls.latest` and `urls.direct_download` - so try all of them before
+  recording a city as unreachable.
 - **A boundary GeoJSON declaring the wrong CRS.** Surrey's says EPSG:4326 and
   contains UTM metres; reprojecting silently puts it millions of metres away
   and every containment test returns zero.

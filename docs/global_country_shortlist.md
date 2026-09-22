@@ -84,7 +84,7 @@ its way, and the column says what.
 | **1=** | **Italy** / **Milan** ↑↑ | **subway 5, tram 17** (ATM) — M1–M5 | **28,131 premises, 99.1% with coordinates**, `insegna` (shop sign), `codice_ateco`, `settore_merceologico`, floor area, **CC-BY** | **Whether Personal services is reachable** — two buckets confirmed, the third not |
 | **2** | **Brazil** / São Paulo | **94 stations + 6 lines**, EPSG:31983 already correct, metro/trem discriminator, built/planned separate | CNPJ, ~72M, trade name + address + CNAE | **No coordinates** → geocoding past Toronto's scale |
 | **3** | **Norway** / Oslo | metro 5, tram 9 | **MEASURED premises-level** — 152,060 Oslo sub-units, `beliggenhetsadresse`, NACE, open API no key | No coordinates → geocoding |
-| **3** | **Japan** / Tokyo | **solved**: 10,235 stations + 21,932 line segments, PDL 1.0 | **UPGRADED — premises-level food permits with coordinates**, on the national standard schema, CC BY | **A two-bucket ceiling** — no general retail permit exists in Japan |
+| **3** | **Japan** / Tokyo | **solved**: 10,235 stations + 21,932 line segments, PDL 1.0 | Premises-level food permits, CC BY, national standard schema — but **coordinates are 0% populated** (see the correction below) | **A geocoding leg against Japanese BLOCK addresses**, plus a two-bucket ceiling. Density unmeasurable until geocoded |
 
 **Israel and Peru moved to Tier 4** (2026-09-21) — see below.
 
@@ -384,11 +384,131 @@ existing list**, so a further country probed is work against a constraint that
 already binds. The valuable work is finishing what is specified, not finding
 more.
 
+### Tier 2c closed out, 2026-09-21
+
+**Taiwan is complete — four systems across three cities, all unauthenticated,
+all with points AND line geometry:**
+
+| System | Stations | Lines | English names |
+|---|---|---|---|
+| Taipei TRTC | 122 | 5 (MULTILINESTRING) | ✓ |
+| **Kaohsiung KRTC** | **39** | 2 (MULTILINESTRING) | ✓ *Hamasen* |
+| **Kaohsiung LRT** | **38** | 1 (LINESTRING) | ✓ *Lizihnei* |
+| **Taoyuan TYMC** | **22** | 1 (MULTILINESTRING) | ✓ |
+| **Taichung TMRT** | **18** | 1 (LINESTRING) | ✓ *Beitun Main Station* |
+
+**MEXICO CITY IS UNBLOCKED — subway 12**, exactly Metro CDMX's line count,
+from a current feed with no expiry warning.
+
+**And the route matters more than the number.** `datos.cdmx.gob.mx` and
+`metro.cdmx.gob.mx` both time out — eight attempts across the session — and
+feed 1099's `urls.direct_download` on S3 returns **403**. What worked was the
+**Mobility Database's own `mdb-latest` mirror**, which had never been tried for
+that feed.
+
+That is the **inverse of the Toronto lesson**. There, the mirror was three
+months stale and missing an entire mode, and the agency's own feed was right.
+Here the agency host is unreachable and **the mirror is the only route**. So
+the rule is not "prefer the agency" or "prefer the mirror" — it is **try
+both, and treat either failing as a fact about that host rather than about the
+city.** A feed has at least three addresses: the agency's, `urls.latest`, and
+`urls.direct_download`.
+
+Still open: **Sevilla** — the real `Metro de Sevilla` feed exists at mdb 2781
+but its mirror **404s**. **Monterrey** — not in the catalogue under any of
+`monterrey`, `metrorrey`, `nuevo león`, so Mexico's third city has no feed.
+
+**Mexico therefore has two confirmed cities**, CDMX and Guadalajara, both
+covered by DENUE and its cleared licence — and CDMX was the prize.
+
+### Geocoders and API keys for the Asian set — probed 2026-09-21
+
+The question was whether to settle API keys before building geocoding. **They
+are independent: only Korea needs a key, and Korea needs no geocoding.**
+
+| | Data needs a key | Needs geocoding | Geocoder gated? |
+|---|---|---|---|
+| **Korea** | **Yes** — the business register | **No** — `경도`/`위도` populated | n/a |
+| **Japan** | No — MLIT, the ward CSVs and ODPT are plain downloads | **Yes** | **No** |
+| **Taiwan** | No — TDX and `data.gov.tw` GET-by-id are keyless | **Yes** | **No** |
+
+**Japan's geocoder is keyless and verified on the real format.** GSI's
+`msearch.gsi.go.jp/address-search/AddressSearch?q=…` resolved
+`東京都港区赤坂一丁目1番12号` to `[139.744003, 35.670933]`. Two properties worth
+knowing: it returns **block level** (`一丁目１番`, dropping the 号), which is
+ample for a 966 m ring; and it **accepted ASCII digits and matched full-width
+itself**, so it does the NFKC normalisation internally rather than requiring it
+upfront. MLIT's 位置参照情報 (`nlftp.mlit.go.jp/isj/`) is the bulk alternative.
+Digital Agency's Address Base Registry refused connections.
+
+**Taiwan's is keyless too, via NLSC rather than TGOS** — and this only showed
+up by applying this file's own TLS lesson. All three Taiwanese hosts threw
+`SSLError` under `requests`; with curl, `www.tgos.tw` returns **403** (the
+official geocoder is gated) while **`api.nlsc.gov.tw` returns 200**, including
+a working keyless point query. **Third time that Python's TLS stack has
+reported a reachable Taiwanese government host as unreachable.**
+
+**So the ordering is: Korea first**, and not because of the key. Because Korea
+is the only one of the three needing **neither a geocoding leg nor any new
+pipeline code** — coordinates on both legs, an unrestricted licence, six cities
+from one source, and a single free registration as the blocker. Japan and
+Taiwan each need a geocoding pass written, which is build work rather than
+screening; Toronto's is the precedent.
+
 ### KEEP
 
 **Build-ready, one named blocker each**
 France (Paris) · **Italy (Milan)** · Spain (6 metro cities) · South Korea
 (Seoul) · Taiwan (Taipei) · Mexico (Guadalajara) · Brazil (São Paulo)
+
+#### CORRECTION — Japan's coordinates, English names and closure dates are ALL EMPTY
+
+**Three claims made about Japan in this file were wrong, and all three came
+from reading the CSV header instead of counting the values.** Counted across
+Minato Ward's 5,722 rows on 2026-09-21:
+
+| Column | Claimed here | Actually populated |
+|---|---|---|
+| **`緯度` / `経度`** | "premises-level **with coordinates**" | **0 of 5,722 — 0.0%** |
+| **`施設名称_英字`** | "an English name field… an unplanned win" | **0 of 5,722 — 0.0%** |
+| **`町字ID`** | the machine join key | **0 of 5,722 — 0.0%** |
+| `法人番号` | "corporate number" | **0%** (though `法人名`, the corporate *name*, is 97.8%) |
+| `廃業年月日` | "permit **and closure** dates" | **0%** — so inactive premises cannot be filtered out |
+
+**This is the project's first invariant, broken by the person who wrote the
+rule into `add-city` Step 0 the same day**: *"a street address and/or lat/long
+that actually has data, not merely a column that exists."* The header was
+taken as the schema.
+
+**What IS populated, and it is still a real source:**
+
+| | |
+|---|---|
+| `施設名称` (name) · `営業の種類` (type) · `許可番号` + all four permit dates · `申請区分` | **100%** |
+| `所在地_連結表記` (concatenated address) | **100%** |
+| Split components — `都道府県` / `市区町村` / `町字` / `番地以下` | **98%** |
+| `施設方書` (building and floor) | 95% |
+| `法人名` (corporate name) | 97.8% |
+
+And `営業の種類` carries genuine categories: 飲食店営業 4,781 (restaurants),
+菓子製造業 320 (confectionery), そうざい製造業 258 (prepared food),
+**食肉販売業 105 and 魚介類販売業 47 — meat and fish retail**, so a narrow
+slice of food retail does exist even though general retail does not.
+
+**The consequence: Japan needs a GEOCODING LEG, and its addresses are the
+hardest format met so far.** Not street-based — Japanese block addressing,
+`東京都港区赤坂一丁目１番１２号　溜池明産ビル１階` (chōme / ban / gō), in
+full-width numerals. Toronto's problem was street-address normalisation
+against a city address-point file; this is a different addressing *system*.
+The route would be Digital Agency's **アドレス・ベース・レジストリ** joined on
+the 町字 *name*, since the `町字ID` that exists to make that join machine-clean
+is empty. **The NFKC rule added to `add-country` today is a prerequisite**, not
+an optimisation.
+
+**And therefore Tokyo's station-density figure could NOT be computed**, which
+was the highest-value open probe. It needs geocoded premises, and there are
+none. Japan's rank stays unmeasured and is now known to be further from
+measurable than this file previously implied.
 
 **Japan is a MULTI-CITY country, and its second bucket is now confirmed**
 (probed 2026-09-21). Because the permit data follows a **national standard
@@ -1336,6 +1456,91 @@ best structural match to what this project already does.
 TM). This came from documentation of the *closed* system. The project would
 reproject to per-city UTM regardless — Seoul ≈ 127°E is UTM 52N, EPSG:32652.
 
+#### SEOUL'S FOOD REGISTER IS OBTAINABLE WITH NO ACCOUNT — downloaded 2026-09-21
+
+The scrub's real payoff. `data.seoul.go.kr` dataset **`OA-13663`**
+(`서울시 식품위생업소 현황`) publishes per-year CSVs on a **FILE** tab, and the
+download needs **no login, no key, no registration**:
+
+```
+POST https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?&useCache=false
+     infId=OA-13663   seq=11   infSeq=3        # seq 11 = the 2025 file
+```
+
+Files run 2019 through 2025 — 12.98 MB for 2025, ~13–14 MB per year back to
+2021, plus a 57 MB zip for everything to 2019. Downloaded and parsed:
+
+| | MEASURED |
+|---|---|
+| Rows | **39,590**, of which **24,824 are still open** (no `폐업일자`) |
+| Encoding | **cp949** — so `SOURCE_ENCODING = "cp949"`, not UTF-8 |
+| `업소명` / `업종명` / `업태명` | **100%** |
+| **`소재지도로명`** (road address) | **99.3%** |
+| `소재지지번` (lot address) / `행정동명` | 100% |
+| `폐업일자` / `폐업구분` / `폐업사유` | 37.3% — **so inactive premises CAN be filtered**, unlike Japan's ward file |
+| `영업장면적(㎡)` | **3.5%** — floor area is effectively absent |
+| `법인명` | 36.5% |
+| **Coordinates** | **NONE.** Checked for 위도/경도/좌표 — no such column |
+
+Open-premises categories: 일반음식점 10,778, **건강기능식품일반판매업 5,112**
+(health-food *retail*), 휴게음식점 3,931, 즉석판매제조가공업 1,649,
+유통전문판매업 1,180, 제과점영업 547.
+
+**So Korea needs a geocoding leg after all — but the easiest of the three.**
+Addresses are Korean **road-name** format, e.g.
+`서울특별시 종로구 자하문로 55, 지상1층 107호 (통인동, 효자아파트)`. That is a
+systematic national scheme with public geocoders, and far more tractable than
+Japan's chōme/ban/gō blocks.
+
+**What this changes.** Seoul is buildable **without any account**, so the
+residency wall on `data.go.kr` and Seoul's own signup is no longer a blocker
+for the food bucket. What is lost by not having `상가(상권)정보` is real
+though: that register carries **coordinates already**, covers **all six
+cities**, and spans **all three buckets**. This route gives one city, one
+bucket, and a geocoding job.
+
+**The sibling dataset for Personal services is 공중위생업소** (이·미용, 숙박,
+목욕업) on the same portal and presumably the same download mechanism —
+unprobed, and the obvious next step.
+
+#### Exhaustive Korean domain scrub, 2026-09-21 — 21 hosts
+
+Run instead of emailing the agency. **11 of 21 reachable.**
+
+| Dead | Alive |
+|---|---|
+| `bigdata.sbiz.or.kr` (**3 tests**, sub-second refusal) | **`semas.or.kr`** — the agency's own site |
+| `sg.sbiz.or.kr` — the 상권정보 system | **`sbiz.or.kr` → redirects to `sbiz24.kr`**, both 200 |
+| **`nsdi.go.kr` and `data.nsdi.go.kr`** — the national spatial infrastructure | `data.seoul.go.kr`, `golmok.seoul.go.kr` |
+| **`vworld.kr`** — the national GIS platform | **`data.busan.go.kr`**, **`data.daegu.go.kr`**, **`data.incheon.go.kr`** |
+| `localdata.kr` and `localdata.go.kr` | **`data.gg.go.kr`** (Gyeonggi) |
+| `openapi.seoul.go.kr`, `bigdata.busan.go.kr` | `kosis.kr`, `mdis.kostat.go.kr` |
+| `data.daejeon.go.kr`, `data.gwangju.go.kr` | |
+
+**Three of the six Korean metro cities run their own reachable portals** —
+Busan, Daegu and Incheon — plus Gyeonggi, which is the Seoul metropolitan
+province. **None is CKAN**, so there is no quick API route:
+
+- **Busan** and **Daegu** are file-based portals (`dataSet`, `파일` markers),
+  so a direct download may exist per dataset. Each needs its own probe.
+- **Incheon** answered `{"code":"257","msg":"NOT_EXIST_TOKEN"}` — a real JSON
+  API, token-gated.
+- **Gyeonggi** is a large portal with `인증키` / `회원가입`, so key-gated too.
+
+**The most useful finding is about the agency, and it argues FOR the enquiry
+rather than against it.** `sbiz.or.kr` redirects to `sbiz24.kr` and both answer
+200, so 소상공인시장진흥공단 is plainly operating — **only the `bigdata`
+subdomain that `data.go.kr` officially points at is broken.** That is a
+reportable fault on their side, not a policy, which makes "your published
+download link is dead, how should a non-resident obtain the file" a
+straightforward request rather than a favour.
+
+**Also worth recording as a method note:** the first run of this probe
+reported all four city portals as "not CKAN, no markers", which was **a
+`subprocess(text=True)` call decoding Korean bytes as cp1252 on Windows** —
+an invalid read presented as a negative finding. Same family as the XLSX
+empty-cell bug earlier the same day. Decode explicitly.
+
 #### Seoul's own portal, probed 2026-09-21 — the route around the blocker
 
 With `data.go.kr` unreachable, **`data.seoul.go.kr` answers 200** and carries
@@ -1427,8 +1632,46 @@ buckets, so Seoul does not need `multi-source-city` after all, and the
 per-category hygiene registers become a cross-check rather than the plan.
 
 **Third-party mirrors exist** (a Seoul extract dated 202506 is on Hugging
-Face). **Do not build on one** — that is exactly how the Toronto error
-happened. A mirror is acceptable to confirm a schema, never to source a build.
+Face), and the licence permits them — `제한 없음` places no restriction on
+redistribution, unlike WMATA, which forbids it outright.
+
+**Do not build on this one** — but the reason is NOT "mirrors are bad", and an
+earlier version of this file got that wrong. See the rule below.
+
+#### CORRECTED — the mirror rule was stated too broadly
+
+This file said, twice and inconsistently: *"a mirror is acceptable to confirm a
+schema, never to source a build"* — and then, for Mexico City, that **the
+mirror was the only working route** and the rule is to try every address. Both
+claims sat in the same document.
+
+**The two cases genuinely differ, and not in the way "mirror" suggests:**
+
+| | Toronto | Mexico City |
+|---|---|---|
+| Agency feed | correct | **host times out** |
+| S3 `direct_download` | — | **403** |
+| Mobility Database mirror | **3 months expired, zero subway routes** | **current, no expiry flag — the only route that worked** |
+
+**What distinguishes them is whether the artifact SELF-ATTESTS:**
+
+- **GTFS does.** `feed_info.txt` carries `feed_end_date`, so staleness is
+  machine-checkable, and mode counts are checkable against a known network —
+  "Toronto has a subway and this file has zero type-1 routes" is detectable.
+- **A business-register CSV does not.** There is no embedded validity date, and
+  the Hugging Face file's `202506` lives in its *filename* — the mirror's word,
+  not the data's. Completeness is worse: 28,000 rows against a true 31,000 is
+  **invisible**.
+
+**And this reframes the Toronto failure.** It was not "a mirror was used". It
+was **a stale mirror used without reading the expiry field that was already in
+the file.** The fix built in response was `screen_rail.py`'s expiry check — not
+abstinence — and that same check is what let Mexico City's mirror be trusted.
+
+**THE RULE, restated:** *a mirror is usable when the artifact self-attests to
+its own freshness and completeness; it is not when you must take the mirror's
+word for both.* That keeps Mexico City, rules out the Korean CSV, and says why
+rather than gesturing at a precedent.
 
 **How to actually get it, traced 2026-09-21.** `data.go.kr` *catalogues* this
 dataset but does not host the file — its own metadata says `atachFileYn = N`,
