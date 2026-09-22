@@ -314,10 +314,20 @@ city's own data failed:
 | `sevilla-ayuntamientodesevilla.opendata.arcgis.com` | live, but **"Can't access this content … Sign In"** — the Medellín shape |
 | `datos.gob.es` federated catalogue | **no Ayuntamiento de Sevilla publisher exists.** The publishers returned for "Sevilla" are CIS (opinion surveys), **IGME (geological maps)** and the Junta de Andalucía |
 
+**And the Internet Archive settles that it is OUR problem, not Sevilla's:**
+
+| | |
+|---|---|
+| `www.sevilla.org` snapshot | **2026-09-12** — ten days old. **The site is alive** |
+| `datosabiertos.sevilla.org` snapshot (2023) | **521 datasets, 1,345 distributions** — a real municipal portal |
+| Enumerable from the archive? | **No.** The crawl is 347 URLs deep, 11 of them datasets, none commercial |
+
 **This is unreachable, not a measured negative**, and the distinction is the
-one this list's maintenance rule exists to protect. Nothing has been learned
-about whether Sevilla licenses premises; only that four routes to asking
-failed.
+one this list's maintenance rule exists to protect. **Discarding Sevilla would
+mean throwing away an unexamined 521-dataset catalogue because of our own
+DNS.** Nothing has been learned about whether Sevilla licenses premises; only
+that every route to asking is blocked on this side. **One attempt from a
+different network settles it.**
 
 ## DISCARDED — 24 cities, each naming its evidence
 
