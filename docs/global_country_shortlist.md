@@ -385,7 +385,7 @@ research.
 | **A** | Nothing. Screening complete | **7** |
 | **B** | One narrow question each | **3** |
 | **C** | A geocoding leg — build work, not screening | **16** |
-| **D** | Genuinely unprobed | **28** |
+| **D** | **Probed and ranked 2026-09-22** — 1 promoted, 4 one-question, 5 measured negative, 7 unreached, 11 reachability-only | **28** |
 
 ### Band A — screening COMPLETE (7 cities, 5 countries)
 
@@ -430,23 +430,97 @@ screen — against the worst geocoding problem and a two-bucket ceiling. **That
 trade is the single biggest open decision in this list**, and it is a judgment
 call rather than a probe.
 
-### Band D — genuinely unprobed (28 cities)
+### Band D — RANKED after individual probes, 2026-09-22 (28 cities)
 
-The only band where more screening changes anything.
+Probed as three clusters, because Band D is three different questions wearing
+one label. **The European business registers were probed properly; the
+rail/GIS group was probed at reachability only**, and that difference is marked
+below rather than smoothed over.
 
-| Cities | Status |
+#### D1 — PROMOTE: premises-level data measured (1 city)
+
+| City | What was measured | The one blocker |
+|---|---|---|
+| **Copenhagen** 🇩🇰 | **CVR carries `productionunits` (P-enheder) — each with its OWN `address`, `zipcode`, `city`, plus `industrycode`/`industrydesc`** (NACE-style, e.g. `475220 Detailhandel med byggematerialer`). That is the premises-vs-registered-office distinction answered the right way, the same shape as Norway's `underenheter` | **Bulk access is registration-gated.** `distribution.virk.dk` returns 401 and `datacvr.virk.dk` 403; `cvrapi.dk` answers but is unofficial and search-by-name. **The WMATA shape — a free account** |
+
+**Denmark is the best thing in Band D** and belongs with Oslo in the "national
+register, premises-level, needs a geocoding leg" family.
+
+#### D2 — one cheap question each (4 cities)
+
+| City | State |
 |---|---|
-| **Dublin** 🇮🇪, **Zurich** 🇨🇭 | Neither leg probed. Dublin has one live lead (the Valuation Office API — does it carry a use category?); Zurich has **Food only** so far and its national route is aggregate |
-| **Berlin**, **Hamburg** 🇩🇪 | Germany had "a working route and an **unprobed** register" — **Berlin now measured NEGATIVE** (the Gewerberegister is not open data). Hamburg untested |
-| **Prague** 🇨🇿 | Working route, unprobed. `opendata.praha.eu` is not CKAN at its documented path |
-| **Singapore** 🇸🇬 | Working route, unprobed. Suspected registered-office shaped, which would be fatal — one probe settles it |
-| **Naples**, **Messina** 🇮🇹 | **Italy PASSES.** Naples now measured **negative** (aggregate per Municipalità); Messina is flow-shaped (SCIA/DIA notifications, not a stock) |
-| **Stockholm** 🇸🇪, **Copenhagen** 🇩🇰, **Budapest** 🇭🇺, **Tallinn** 🇪🇪, **Zagreb** 🇭🇷, **Bucharest** 🇷🇴, **Sofia** 🇧🇬 | **Never reached.** Hosts wrong, dead, behind SPA front ends, or 403 |
-| **Helsinki** 🇫🇮 | Measured: 89.8% carry street addresses, but composition is **53% real estate, 4.8% retail** — a real objection, unlike the n=1 one it replaced |
-| **Sevilla** 🇪🇸 | **Registration-gated, not dead** — Spain's National Access Point answers 401. The WMATA shape: a free account |
-| **Santiago** 🇨🇱 | National portal's copy is a decade stale; municipal portals unprobed |
-| **Hyderabad**, **Kochi** 🇮🇳 | India never reached |
-| **Hong Kong**, **Jakarta**, **Kuala Lumpur**, **Rio de Janeiro**, **Tel Aviv**, **Lima**, **Bogotá**, **Medellín** | Ruled out against a *transit catalogue*, which is the wrong source. **National mapping agency probed for reachability only — 20 of 22 hosts live, all landing pages** |
+| **Dublin** 🇮🇪 | `data.gov.ie` lists a **Valuation Office API**, but `api.valoff.ie` and `www.valoff.ie` both return **000 on three hosts across two attempts**. Host down, so **ASSERTED not measured** — retry before concluding. The question stays: does the Irish rateable-property register carry a **use category**, where the UK's NNDR did not? |
+| **Singapore** 🇸🇬 | `api-production.data.gov.sg` answers, but its search is loose — a query for *food establishment* returned historical rainfall. Needs a proper query with a control before any verdict |
+| **Sevilla** 🇪🇸 | Rail is **registration-gated, not absent** — Spain's National Access Point answers 401. Business leg needs its own Spanish source, and **Madrid's result raises that prior sharply** |
+| **Zurich** 🇨🇭 | **Food confirmed** — `Gastwirtschaftsbetriebe`, premises-level with a **GeoJSON** endpoint. Retail and Personal services not found; `Ladenfläche` returns nothing. A one-bucket city unless a second layer exists |
+
+#### D3 — MEASURED NEGATIVE, move to DISCARD (5 cities)
+
+Each has a working nonsense control behind it, so these are findings rather
+than absences.
+
+| City | Evidence |
+|---|---|
+| **Berlin** 🇩🇪 | CKAN is on `datenregister.berlin.de`. `Gewerbe` → broadband coverage and electricity load profiles; **`Gaststätten` → 0**; `Betriebe` → swimming pools and parliamentary papers |
+| **Hamburg** 🇩🇪 | Real CKAN is **`suche.transparenz.hamburg.de`** (9,145 datasets, control 0). `Gewerberegister` → **7 hits, all irrelevant**; `Gewerbe` and `Gaststätten` → building-permit **PDFs**; `Einzelhandel` → GML/OAF **planning polygons**, not premises; `Betriebe und Arbeitsstätten` → XLSX **aggregate** |
+| **Naples** 🇮🇹 | Only commercial dataset is *Apertura e cessazione attività commerciali* **"per procedimento e Municipalità"** — the aggregate trap |
+| **Messina** 🇮🇹 | SCIA and DIA ship GeoJSON but are business-*start notifications* — a **flow, not a stock** |
+| **Helsinki** 🇫🇮 | Addresses are fine (89.8%) but composition is **53% real estate, 4.8% retail** |
+
+> **GERMANY IS NOW A COUNTRY-LEVEL NEGATIVE**, on two cities measured
+> independently at two different portal hosts. The Gewerberegister exists in
+> every German municipality — it is simply **not published as open data**. That
+> retires "Germany: working route, unprobed register" for good, and it is the
+> correct way to reach a country-level ruling: *two cities measured*, not one
+> city asserted onto a region.
+
+#### D4 — still genuinely UNREACHED (7 cities)
+
+**No finding either way**, and the reason is my hosts rather than their data.
+These stay exactly where they were.
+
+| City | What happened |
+|---|---|
+| **Prague** 🇨🇿 | `opendata.praha.eu` serves HTML at its CKAN path; `api.golemio.cz` 404; ARES v3 returns an SPA shell |
+| **Tallinn** 🇪🇪 | `ariregister` open data downloads exist, but the documented fields are **Registry code, Legal form, VAT number, Status, Address** — **company-register shaped**. Suggestive of a registered-office failure, not yet measured |
+| **Stockholm** 🇸🇪 | `dataportalen.stockholm.se` live but not CKAN; `dataportal.se` search API 400s |
+| **Budapest** 🇭🇺 | `adatportal.budapest.hu` and `opendata.budapest.hu` both resolve nowhere |
+| **Zagreb** 🇭🇷 | `data.gov.hr` returns a 1.3 KB SPA shell at its API path |
+| **Bucharest** 🇷🇴 | `data.gov.ro` resolves nowhere on http or https |
+| **Sofia** 🇧🇬 | `data.egov.bg` returns **403** again — consistent across sessions, so plausibly an IP or region refusal rather than a bad host |
+
+#### D5 — rail/GIS group: REACHABILITY ONLY, no layer probed (11 cities)
+
+**Hong Kong · Jakarta · Kuala Lumpur · Rio de Janeiro · Tel Aviv · Lima ·
+Bogotá · Medellín · Santiago · Hyderabad · Kochi**
+
+All were originally ruled out against a *transit catalogue*, which is the wrong
+source. 20 of 22 national-mapping-agency hosts answered — **and every one
+returned a landing page**, which `probe_geodata.py` labels a route rather than
+a finding. Only `ign.gob.pe` (TLS) and `geoportal.regionlima.gob.pe` failed.
+`jupem.gov.my` needed the curl fallback after a `requests` SSLError, **the
+fourth time Python's TLS has reported a live government host as dead**.
+
+Two of these carry known business legs already, so only rail is open:
+**Rio** (Brazil, CNPJ — no coordinates, so a geocoding leg) and **Tel Aviv**
+(Israel's register, previously IP-refused).
+
+#### Band D after ranking
+
+| | Cities |
+|---|---|
+| Promote to a real candidate | **1** — Copenhagen |
+| One cheap question | **4** — Dublin, Singapore, Sevilla, Zurich |
+| Measured negative → discard | **5** — Berlin, Hamburg, Naples, Messina, Helsinki |
+| Genuinely unreached | **7** |
+| Rail/GIS, reachability only | **11** |
+
+**The honest headline: Band D yielded one real candidate.** That is a low
+strike rate, and it is the expected one — Bands A to C already hold everything
+that screened well. The value of the pass was mostly in *closing* things:
+Germany retired on evidence, and five cities moved from "unprobed" to
+"measured negative", which is what stops them being re-probed a third time.
 
 ### DISCARDED — 8 cities, each naming its evidence
 
