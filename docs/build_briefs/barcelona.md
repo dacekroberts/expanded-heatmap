@@ -12,9 +12,10 @@ first if Madrid has not been built yet.
 
 ## The one-line summary
 
-Business leg is **complete and clean, but four years old**. Rail leg needs the
-same call Madrid needed: **TMB is registration-gated, so OSM or a free
-account.** Two owner decisions, no open probes.
+Business leg is **complete and clean, but four years old**. Rail leg is **settled in
+favour of OSM** - TMB is registration-gated, and OSM returns TMB, FGC, TRAM
+and the funiculars in one query where the agency route needs four feeds.
+One owner decision (which census year), no open probes.
 
 ---
 
@@ -145,9 +146,52 @@ So the same two options Madrid had:
    shape. An owner action; this project does not create accounts.
 2. **OSM**, the CDMX and Madrid precedent.
 
-**Not yet decided.** Unlike Madrid, option 1 here is live rather than closed —
-Madrid had no newer item to find, whereas TMB's feed exists and is simply
-behind a free registration.
+**Recommendation: OSM — and here it is the *better* source, not the fallback.**
+Unlike Madrid, option 1 is live rather than closed (TMB's feed exists behind a
+free registration). But the agency route needs **four feeds stitched together**
+— TMB (gated) + FGC + TRAM + TRAM Besòs — with four licences and four
+refresh cadences. OSM returns the whole network in one query.
+
+### OSM validated for Barcelona — MEASURED 2026-09-22
+
+Bbox `41.30,2.03,41.50,2.30`.
+
+| | Count |
+|---|---|
+| Rail route relations | **54** — subway **28**, tram **22**, funicular **4** |
+| Named | **54 / 54** |
+| With a `colour` tag | **54 / 54** |
+| Flagged construction/proposed | 0 |
+| `station=subway` nodes | **181** |
+
+**Operators present: TMB (22 relations), TRAM (22), FGC (10).** So a single OSM
+query covers what would otherwise be four separate agency feeds, one of them
+behind a login. That is the argument for OSM here.
+
+The invariant that every drawn line gets a real public name and a legend entry
+is satisfiable **directly from OSM tags** — 54 of 54 carry both a name and a
+colour, with no hand-assigned palette.
+
+⚠️ **14 subway `ref`s, and do NOT collapse them to 11.**
+
+```
+L1  L2  L3  L4  L5  L6  L7  L8  L11  L12
+L9N  L9S        L10 Nord  L10S
+```
+
+L9 and L10 genuinely run as **two disconnected segments each** — that is the
+real network, not an OSM artefact, and the segments do not connect. Merging
+`L9N` with `L9S` would draw a line through track that does not exist.
+
+**This is the mirror image of Madrid's trap.** There, 28 relations collapse to
+13 because they are directional pairs; here, 28 relations give 14 refs that
+must stay 14. Same query shape, opposite correct answer — which is why the
+rule is *look at the refs*, never *count the relations* and never *assume a
+merge*.
+
+Tram `T1`–`T6` and funiculars `FM`, `FV` are separate decisions: this project
+has drawn tram networks before, but whether Barcelona's belong on a *metro*
+density map has not been decided.
 
 ---
 
@@ -173,9 +217,8 @@ session; it needs a human to open one page.
 - **Which census year** (above) — recency vs completeness, owner's call.
 - **TMB account or OSM** (above).
 - **The general legal notice**, CAPTCHA-walled.
-- **OSM validation for Barcelona's rail has not been completed** in this pass.
-  Madrid's was run and matched GTFS exactly on line count; Barcelona's needs
-  the same before OSM is committed to.
+- Whether trams (T1-T6) and the two funiculars belong on a metro-density
+  map. OSM carries them; nobody has decided.
 - Whether mall/gallery interiors (`SN_CComercial`, `SN_Galeria`) should be
   excluded from a street-level map. The flags make it possible; nobody has
   decided whether it is right.
