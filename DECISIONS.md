@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**143 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**144 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Category B, sixth pass: the master list's counts are right, and that is the finding](#2026-09-22---category-b-sixth-pass-the-master-lists-counts-are-right-and-that-is-the-finding)
 - [The `osm_route_refs` check, and the correction it immediately made to the entry above](#2026-09-22---the-osm_route_refs-check-and-the-correction-it-immediately-made-to-the-entry-above)
 - [Category B, fifth pass: the add-city skill's header still said four cities](#2026-09-22---category-b-fifth-pass-the-add-city-skills-header-still-said-four-cities)
 - [Category B, fourth pass: a flagged proposal that had already become practice](#2026-09-22---category-b-fourth-pass-a-flagged-proposal-that-had-already-become-practice)
@@ -179,6 +180,35 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Category B, sixth pass: the master list's counts are right, and that is the finding
+
+- **Verified `docs/city_master_list.md`'s built table against `app/cities.py`
+  rather than deleting its counts, and every number held.** "## Built — 16"
+  against 16 entries; "United States (9)" against 6 in *United States East*
+  plus 3 in *United States West*; "Canada (5, complete)" against 3 West plus 2
+  East; "Mexico (2)" against 2. **This is the opposite action from the rest of
+  category B and it is the right one here**, because `CLAUDE.md` designates
+  this file the current global list and says to read counts off it. A count in
+  a file whose job is to carry counts gets CHECKED; a count in a file whose job
+  is something else gets deleted. The sweep skill's rule stands either way:
+  decide which kind of document you are in first.
+
+- **Worth stating plainly: the instruction is working.** `CLAUDE.md` says its
+  own pointer "has gone stale twice by repeating them" and sends the reader to
+  the master list instead. Today the master list was accurate to the entry
+  while four other current-state documents were not, which is the argument for
+  the pattern - one file owns a number and everything else points at it.
+
+- **One line there WAS stale, and it changes what the next session picks up.**
+  "▶ **Madrid is being built now**" understated it: Madrid's pipeline,
+  outputs, taxonomy module and provenance rows are all merged to master, and
+  `check_provenance.py` reports it ready. What is held is only `app/cities.py`
+  and the page, on `spain-app-wiring`, deliberately - Streamlit Cloud pulls
+  master automatically and landing an imported module there would publish the
+  city and serve it broken until a reboot. Corrected to say exactly that, and
+  to name the branch's commit message as the authority on the hold rather than
+  restating the reasoning a third time.
 
 ### 2026-09-22 - The `osm_route_refs` check, and the correction it immediately made to the entry above
 

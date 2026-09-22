@@ -91,7 +91,17 @@ the national DENUE on the same day, so `pipeline/countries/` is the answer and
 national registers are fine. What fails is **SIRENE's composition**, which is
 a different objection and a measured one.
 
-▶ **Madrid is being built now**, so the next *unstarted* city is the question.
+▶ **Madrid's pipeline is DONE and on master; only its app wiring is held.**
+As of 2026-09-22 `pipeline/madrid/`, `outputs/madrid/`, its taxonomy module and
+its provenance rows are all merged, and `scripts/check_provenance.py` reports
+it ready. What is not merged is `app/cities.py` and its page, deliberately:
+they sit on `spain-app-wiring`, because Streamlit Cloud pulls master
+automatically and landing an imported module there would publish the city and
+serve it broken until a reboot. **It waits for Barcelona so the two ship
+together** — see that branch's own commit message, which is the authority on
+the hold.
+
+So the next *unstarted* city is the question.
 **Barcelona** is the obvious answer — same country, brief done, licence read,
 and only owner decisions left. After that the screen has no city whose
 "what remains" column is empty.
