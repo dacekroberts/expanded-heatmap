@@ -233,10 +233,94 @@ so Hong Kong is a two-bucket city at best whatever its rail data shows. Fixing
 its transit would not fix its ceiling.
 
 **Still entirely unprobed:** Indonesia (BIG), Malaysia (JUPEM), Israel
-(`data.gov.il`), Peru (IGN/IDEP), Colombia (IGAC), Brazil (IBGE). The Latin
-American geoportals were confirmed to exist but **not** confirmed to carry
-railway station layers — which is the "a dataset title is not evidence" trap,
-and the reason none of them is recorded as a pass here.
+(`data.gov.il`).
+
+#### Latin America, probed 2026-09-21 — and the national agencies were the wrong place
+
+The national mapping agencies (IGAC, IGN/IDEP, IBGE) were the obvious target
+after Japan. **The layers are at city level instead**, which is the Mexico and
+Korea pattern again: national portal blocked or irrelevant, city portal
+serving.
+
+**Bogotá — good data, wrong mode.** `datosabiertos-transmilenio.hub.arcgis.com`
+serves GeoJSON unauthenticated: **153 stations, all `Point`, EPSG:4326**, with
+`longitud`/`latitud` and station names. But these are **TransMilenio BRT**
+stations, and BRT is not urban rail here. Bogotá's Metro Line 1 is still under
+construction, so Colombia is out **on mode, not on data** — and worth
+revisiting when Line 1 opens, because the publishing infrastructure is
+evidently good.
+
+**Mexico City — unreachable, and this is now durable.** The metro's own
+`Líneas y Estaciones de STC Metro (SHP)` sits on `datos.cdmx.gob.mx`, which
+failed again **after the prober's retry** — roughly the sixth failure across
+the session, while `inegi.org.mx` answered instantly throughout. Recorded as a
+fact about the host, not the data: **the layer exists and is named**, and
+Guadalajara continues to carry Mexico meanwhile.
+
+**Located but not yet probed:**
+
+- **Lima** — `MTC - AATE ESTACIONES DE METRO DE LIMA - LINEA 1` on
+  `datosabiertos.gob.pe`, JSON and Excel, under an **Open Data Commons
+  Attribution** licence. Line 1 is genuine urban rail.
+- **São Paulo** — GeoSampa (`download.geosampa.prefeitura.sp.gov.br`) publishes
+  the operating stations of Metrô and its concessionaires as shapefiles. Brazil
+  already has the CNPJ business register, so São Paulo is the strongest Latin
+  American candidate after Mexico.
+
+#### Taiwan, probed 2026-09-21 — business leg MEASURED
+
+`data.gov.tw`'s catalogue API answers **GET by dataset id without a key**;
+only search needs one (`ER0001: API Key錯誤`).
+
+**`商業登記(依營業項目別)`** (dataset `102985`, Ministry of Economic Affairs),
+downloaded and parsed — **45,819 rows for the single category 其他餐飲 (other
+food service)**, monthly updates:
+
+| Column | Content |
+|---|---|
+| `統一編號` | unified business number |
+| `商業名稱` | business name |
+| **`商業地址`** | **premises address**, e.g. `高雄市鼓山區濱海一路２３號１樓` — down to floor |
+| `登記狀態` | `核准設立` (approved) / `歇業／撤銷` (closed or revoked) — so active filtering works |
+
+**It is premises-level.** 商業登記 registers sole proprietorships and
+partnerships **at their operating address**, unlike 公司登記 (dataset `13861`),
+which is a company register with the registered-office defect.
+
+**Three costs, none fatal:**
+
+- **No coordinates.** Address only, so Taiwan needs a geocoding leg — the
+  Toronto problem. TGOS (內政部) is the candidate; NLSC is down.
+- **Split one dataset per category** (`依營業項目別`), so coverage is an
+  assembly job — `multi-source-city`, at national scale.
+- **Full-width numerals** in addresses (`２３號`) will need normalising before
+  any geocode match. A quiet trap of exactly the kind Toronto's title-case
+  `ADDRESS_FULL` was.
+
+**Transit leg — MEASURED, complete, and NOT registration-gated.** TDX's
+`v2/Rail/Metro/*` endpoints answered plain unauthenticated requests:
+
+| Endpoint | MEASURED |
+|---|---|
+| `Station/TRTC` | **122 stations**, each with `StationPosition.PositionLat/Lon` (WGS84), `StationAddress`, city and town codes, and `StationName` in **Zh_tw, En, Ja and Ko** |
+| **`Shape/TRTC`** | **5 lines as `MULTILINESTRING` WKT**, plus `EncodedPolyline` |
+| `Line/TRTC` | 5 lines with `LineName`, `LineSectionName`, `IsBranch` and **`LineColor`** |
+| `StationOfLine/TRTC` | station-to-line mapping |
+| `Network/TRTC` | operator and network metadata |
+
+**This passes both halves of the points-and-lines check**, and gives more than
+GTFS would: official **line colours**, which this project otherwise researches
+by hand per city, and English station names, which removes the label-language
+question exactly as Korea's `영문역사명` did.
+
+**So Taiwan's ruling is reversed.** It was in Tier 4 on "the 9 Taiwanese feeds
+are all rural bus operators" — true of the catalogue, and irrelevant, because
+the national transport exchange publishes a first-class rail API that the
+catalogue does not mirror. **Taiwan's only real cost is the business leg:
+geocoding, and per-category assembly.**
+
+Taiwan's food-hygiene register (`食品業者登錄資料集`, dataset `8938`) is
+separately available as CSV/JSON/XML from `data.fda.gov.tw`.
 
 #### A refinement the Korea probe produced: stations are not lines
 
