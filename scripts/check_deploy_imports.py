@@ -210,7 +210,15 @@ try:
                 a, b = boxes[n1], boxes[n2]
                 ox = min(a[1], b[1]) - max(a[0], b[0])
                 oy = min(a[3], b[3]) - max(a[2], b[2])
-                if ox > 0 and oy > 0 and (n1, n2) not in seen:
+                # >1 px on BOTH axes, not >0. Pills that ABUT are fine and
+                # common - deploy-verify measured Toronto and New York touching
+                # at 0 px from rendered pixels and reported it as clearance,
+                # not collision. Flagging a sub-pixel touch would make this
+                # check fail permanently, and a check that always fails is a
+                # check somebody disables. Real collisions are tens of pixels:
+                # Boston/Toronto was 30x12, Philadelphia/Washington D.C. was
+                # 102x13.
+                if ox > 1 and oy > 1 and (n1, n2) not in seen:
                     seen.add((n1, n2))
                     problems.append(
                         f"macro map: {n1!r} and {n2!r} labels overlap by "
