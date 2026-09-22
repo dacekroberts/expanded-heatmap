@@ -110,7 +110,7 @@ within days.
 - **Classification**: three levels, `desc_seccion` → `desc_division` →
   `desc_epigrafe`. A documented local taxonomy, which the project's invariant
   explicitly permits; it is **not** NAICS and must not be forced into it.
-- **Geography**: 22 districts (`desc_distrito_local`) — all of them — plus
+- **Geography**: **21** districts (`desc_distrito_local`) — all of them — plus
   barrio and census section.
 
 ### ⚠️ TRAP — the coordinate column is 100% populated and partly invalid

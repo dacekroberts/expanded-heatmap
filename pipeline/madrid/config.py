@@ -161,6 +161,12 @@ MADRID_MUNICIPIO_CODE = "079"
 # boundary in step 2; CITY_KEEP is deliberately unused.
 DISTRICT_COLUMN = "desc_distrito_local"
 
+# MADRID HAS 21 DISTRICTS, not the 22 the build brief claimed until 2026-09-22.
+# `id_distrito_local` runs 1..21 and the names are the city's official ones -
+# Centro through Barajas - so the register was complete and the claim about it
+# was not. Step 2 raises if this moves.
+MADRID_DISTRICT_COUNT = 21
+
 # Keep only premises the register calls open. `Uso vivienda` (8,486) is a
 # RESIDENCE SIGNAL SUPPLIED BY THE SOURCE - the unit reverted to residential
 # use - which most cities in this project have to infer from a parcel join.
