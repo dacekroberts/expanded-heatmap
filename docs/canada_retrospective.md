@@ -9,6 +9,14 @@ the record of what was got wrong.
 
 **Nothing was built.** Six cities passed Step 0. That is the claim.
 
+> **That sentence was true when it was written and is now history.** All five
+> viable cities were built the same day, 2026-09-21, between 14:19 and 21:24 -
+> the sixth candidate, Surrey, shipped inside the Vancouver regional map rather
+> than separately. **Part Two below** is the builds: what the process gained,
+> what broke, and what to change before a sixth city. Read Part One for what a
+> screen costs and Part Two for what a build costs; they are different
+> questions and the answers turned out to be different shapes.
+
 ## The order it ran in, and why the order was right
 
 | # | Stage | Outcome |
@@ -146,3 +154,193 @@ address-level establishment register covering every city at once — the data is
 taxonomy were both built around per-city municipal registers. That is a design
 question, not a screening one, and it should be recognised before the screen
 rather than after.
+
+---
+
+# Part Two: the five builds
+
+**Canada ran 14:19 to 21:24 on 2026-09-21** - about seven hours for five cities,
+after roughly a day of profiling. A second session worked `worktree-staging` in
+parallel from 14:59, screening other countries while cities were built here.
+
+The headline is not the speed. It is that **the same class of error recurred in
+four of the five cities**, was caught four separate times, and was only turned
+into a shared check after the fourth. That is the lesson this half of the file
+exists for.
+
+## The order it actually ran in
+
+| Time | Commit | Event |
+|---|---|---|
+| **14:19** | `3488f11` | **Canada screened: 13 candidates to 6 viable.** Rail first - `screen_rail.py` removed 6 before a data catalogue was opened |
+| 14:30 | `c66e638` | The screen generalised into the **`add-country` skill** |
+| **14:59** | `3f19031` | Sessions split by role and path; **the staging session forks here** and runs the global country screen in parallel until 17:26 |
+| **16:26** | `60e4df3` | **Vancouver + Surrey** - first non-US city, first regional build, two registries, two licences, two taxonomies |
+| 16:51 | `78747ad` | **Canada re-ranked on storefront counts.** The published ranking counted every mappable licence for five of six cities and only storefronts for the sixth, so it was not internally comparable. Montreal next, not Surrey |
+| 16:58 | `9788294` | The four remaining cities re-briefed from the corrected measurements |
+| **17:14** | `65138bb` | **Montreal** - the first field survey (`locaux-commerciaux`), and the first city needing no taxonomy module at all |
+| 17:22 | `be4de74` | Macro-map labels moved pre-emptively to clear the cities not yet built |
+| 17:59 | `92ddab3` | Three briefs re-measured in advance. **Toronto's 234 "stations" were PLATFORMS** - it moves from sixth to fourth |
+| **18:58** | `7380eba` | **Calgary** - its ranking figure was platforms too, 75 to 137 per station. Its register names premises itself |
+| 19:12 | `2c86056` | The font stack reaches the tooltip, where non-Latin names actually land |
+| 19:49 | `e66655a` | *(staging)* `drift_check --jobs N` - the real scaling limiter |
+| **19:59** | `5341b62` | **Edmonton** - three of its 33 "stations" are garages nobody can board at |
+| 20:14 | `1b75367` | A race that could strand any embedded map at a narrow-width zoom |
+| 20:28 | `fe28df3` | **`brief_check.py`** - briefs made executable. Its first run corrects Toronto again, 118 to 111 |
+| 20:29 | `de01955` | `decisions_index.py`, over what turned out to be 100 entries and 57k words |
+| 20:38 | `b731452` | Staging merged: the global screen, `--jobs`, and the WMATA licence notes |
+| 20:44 | `624a2a6` | Toronto's last open question closed: **the 71.4% was the wrong denominator**, 92.8% on storefronts |
+| **21:09** | `b93afc5` | **Toronto** - 234 platforms to 110 stations to 108 in-city, every line matching the TTC exactly |
+| 21:15 | `e9ed983` | Toronto's brief checks synced: they had been **stale and passing** |
+| 21:24 | `e2b481c` | Paperwork closed. **Canada complete at five cities.** |
+
+Per-city marginal cost fell steeply. Vancouver was the longest (two registries,
+a parcel-join residence inference, a boundary that is a line not a polygon);
+Edmonton the shortest (the register sorts itself); Toronto the most expensive
+of the five, entirely because of the geocoding step.
+
+## What the process gained
+
+**New tooling, all of it born from a specific failure:**
+
+- **`add-country`** - the national facts that disqualify every city at once,
+  profiled once instead of per city. 13 candidates to 6 for about a day.
+- **`scripts/brief_check.py`** - 13 check kinds, claims declared as JSON in a
+  fenced ```brief-checks block beside the prose that relies on them. Built
+  because Edmonton inherited three wrong claims from its own brief and the
+  MEASURED/ASSERTED labels did not stop it.
+- **`drift_check --jobs N`** - 14 cities in **37 seconds**, from minutes.
+- **`scripts/decisions_index.py`** - a generated index, because
+  `drift_check` ends every run telling you to find "the latest baseline entry"
+  by eye in 5,400 lines.
+- **`scripts/probe_geodata.py`**, and `screen_rail.py` now prints feed expiry -
+  the latter because a catalogue mirror hid an entire transit mode.
+
+**Discipline added to `add-city`:**
+
+- **A station count needs TWO gates and a cross-check**, never a name check:
+  nearest-neighbour **spacing** (are these platforms?), **boardability** (are
+  these stations?), and agreement with the operator's own published per-line
+  counts.
+- **Line colours are measured, not chosen** - CIE76 Delta-E of about 45 against
+  the three category pin colours - and the constraint is scoped explicitly as
+  **intra-city only**. Reuse across cities costs nothing, because no map shows
+  two cities' lines at once.
+- **Sample the names before applying a rule.** The merged-category rule was
+  wrong twice in Edmonton, and a sample overrode it both times.
+
+**Bugs found and fixed in passing:** `scaffold_city.py` splicing new cities
+into a comprehension (third occurrence; repaired by hand the first two),
+the embedded-map fit race, `.leaflet-tooltip` inheriting a Latin-only font, and
+Calgary's Blue Line shipping at Delta-E 3.3 from Retail blue - the same colour
+as the pins drawn over it.
+
+## The error taxonomy
+
+Sorted by frequency, because the shape matters more than any instance.
+
+**Denominator errors: six during the builds, plus two committed while writing
+them up.** The dominant class by a wide margin, and the project had already
+recorded it as a recurring fault before Canada started.
+
+| # | The wrong number | The right one |
+|---|---|---|
+| 1 | Montreal 440 per station, summing per-station counts | **151**, counting the union of rings |
+| 2 | Toronto 41 per PLATFORM across 234 | per station |
+| 3 | Calgary 75 per station on 83 platforms | **137** on 45 stations |
+| 4 | Edmonton 76 on 33 stops, 3 being garages | **79** on 30 stations |
+| 5 | Toronto 118 stations, one naming convention handled | **110**, three conventions |
+| 6 | Toronto 71.4% geocode match across all licence rows | **92.8%** on storefront rows |
+| 7 | "92 categories, not the 72 asserted" | both right: 92 all history, 72 active |
+| 8 | "blank names on 21.4% of rows" | **0.5%** of the rows that reach the map |
+
+Numbers 7 and 8 are mine, made while correcting numbers 1 to 6, which is the
+most useful thing in this table: **knowing the failure mode does not prevent
+it.** Only naming the set alongside the number does.
+
+**Trusting a cited document instead of opening it: three, and all three were
+licence positions.** New York's site footer (which covers the website, not the
+data), Philadelphia's terms incorporated by reference, and Edmonton's notice
+that "was not required" - where the obligation sat in a redistribution clause
+the credit sentence never mentions. This was already the `read-licence` skill's
+entire premise, and it happened again.
+
+**A stale mirror or a duplicated layer: four.** The Mobility Database's TTC copy
+was three months expired and contained **no subway at all**; Edmonton's eight
+individual Socrata GTFS tables were *staler* than the zip its brief recommended
+replacing; Calgary publishes two "City Boundary" datasets, one of them 53 bytes
+of valid empty GeoJSON; Edmonton publishes four "Corporate Boundary" layers,
+two of them pre-annexation.
+
+**A field that looks like a filter and is not: two.** Los Angeles' city field
+(postal community names) and Toronto's `MUNICIPALITY_NAME`, which holds the six
+pre-1998 municipalities - so matching "Toronto" keeps 30% of the city and
+would have dropped most of Line 2. Caught before it ran, by checking the values
+rather than the column name.
+
+**Broken instruments producing confident findings: three.** A weak geocode join
+manufactured a **12x ward-level bias** that read as disqualifying and was an
+artefact; a WKT pattern against GeoJSON geometry produced a 0% join; and
+`brief_check` reported 9/9 while disagreeing with the build, because a check
+can only test what it encodes. The guard that caught the second one -
+`GEOCODE_MATCH_RATE_MIN` - is the pattern worth copying: **an instrument has to
+reproduce a known number before its new numbers mean anything.**
+
+## What to change before a sixth city
+
+Ranked by value, and the first is worth more than the rest together.
+
+1. **Make the station count a shared module.** It was wrong in **four of five**
+   Canadian cities, in per-city `step1` code, differently each time. A
+   `pipeline/stations.py` owning the four collapse mechanisms, both gates and an
+   `expected_per_line` cross-check would have caught Toronto and Edmonton before
+   they shipped, and stops city six re-deriving it. Everything needed already
+   exists, scattered across five `step1_stations.py` files.
+
+2. **Make the drift baseline machine-readable.** `drift_check` ends by telling
+   you to compare per-step counts against `DECISIONS.md` by eye. Write them to
+   JSON and diff them, so a count regression is loud rather than a reading
+   exercise.
+
+3. **Put the denominator convention in code.** Eight errors in one class says
+   prose is not working. A helper that cannot format a percentage without naming
+   the set it was measured on would make the error unwriteable.
+
+4. **Give `brief_check` a `--vs-config` mode.** Checks passing while
+   disagreeing with the build is a flaw in the tool's premise, not a one-off.
+   Diff a brief's expectations against the built city's constants.
+
+5. **Assert colour separation at render time.** `map_common` should refuse to
+   draw a line within about 45 Delta-E of a category colour. Calgary shipped at
+   3.3 and it went unnoticed until Edmonton's build ran the check for the first
+   time.
+
+6. **Keep the country-before-city order.** Validated: rail is the cheapest
+   disqualifier, and per-city marginal cost genuinely collapsed after the
+   profile. Depth per country beats breadth across countries.
+
+## What is worth keeping unchanged
+
+`classify()` raising on an unknown value rather than returning None - it caught
+schema drift in three cities. `filter_to_storefront()` as the single filter
+entry point. Recording a **verified** absence distinctly from an unexamined one
+(Toronto has zero non-revenue stops, and that is a measurement, not a
+silence). And the append-only decisions trail: it is long *because* the
+convention works, and what was missing was a way in rather than less content.
+
+## The five cities, as one comparable measurement
+
+| City | Storefronts in ring | Stations | Per station |
+|---|---|---|---|
+| Vancouver | 4,668 | 24 (with Surrey) | **206** |
+| Montreal | 9,733 | 64 | **151** |
+| Calgary | 6,171 | 45 | **137** |
+| Surrey | - | - | **135** |
+| Toronto | 8,739 | 108 | **81** |
+| Edmonton | 2,380 | 30 | **79** |
+
+**Three of these six numbers moved during the builds, two by more than 1.8x,
+and every move was a wrong station count or a wrong denominator rather than a
+change in the data.** The largest city came fifth, which is the same conclusion
+Part One reached for a different reason: Toronto licenses food and trades but
+not general retail, so its Retail bucket is the regulated slice alone.
