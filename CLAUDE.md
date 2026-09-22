@@ -6,6 +6,13 @@ architecture, current state, lessons). `PLAN.md` is the open work,
 `DECISIONS.md` the append-only reasoning trail, `docs/city_shortlist.md`
 the city research.
 
+**Picking the next city? `docs/city_master_list.md`** is the current global
+list - 48 candidates banded by what is actually stopping each one, plus the 14
+built and the discards with their evidence. It is current state, rewritten as
+things change. `docs/global_country_shortlist.md` is the **evidence trail**
+behind it (87 countries, every probe logged); when the two disagree the trail
+wins and the list is stale.
+
 **Adding a city in a country this project has never built in? Start with
 `add-country`** (`.claude/skills/add-country/`) - the national facts that
 disqualify every city at once, profiled once instead of per city. Canada is the

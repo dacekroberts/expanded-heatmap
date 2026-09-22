@@ -372,6 +372,13 @@ address column. Read the cell `r` reference, not the order.
 
 ## MASTER CITY LIST — reordered 2026-09-22 after the Band D and D5 probes
 
+> **The canonical copy now lives in
+> [`docs/city_master_list.md`](city_master_list.md).** That file is current
+> state and is rewritten as things change; **this file is the evidence trail**
+> and is appended to. If the two disagree, this one wins and the list is stale.
+> The copy below is kept in place so the evidence sections that follow have
+> their summary beside them.
+
 **14 built.** US (9): San Diego, San Francisco, Los Angeles, Chicago, New York,
 Philadelphia, Miami, Boston, Washington D.C. Canada (5, complete): Vancouver
 *(with Surrey)*, Montréal, Calgary, Edmonton, Toronto.
