@@ -73,7 +73,7 @@ and whether it held.
 | # | City | Business leg | What remains |
 |---|---|---|---|
 | ✅ | ~~**Guadalajara**~~ 🇲🇽 | DENUE, SCIAN = NAICS, INEGI licence cleared | **BUILT 2026-09-22** — `pages/16_Guadalajara_Heatmap.py`, region *Mexico*. Screening said "nothing outstanding" and that held |
-| ▶ | **Madrid** 🇪🇸 **IN PROGRESS** | **73,671 usable rows → 61,466 distinct premises** (settled on the full download; the earlier 148,814 counted zero-coordinate and non-storefront rows). Three-level taxonomy keyed on `division`, EPSG:25830, CC BY 4.0 | **Being built now.** Step 1 done — **193 stations, 13 lines, from CRTM's feature layers**, not the expired GTFS. Build brief 13/13 |
+| ▶ | **Madrid** 🇪🇸 **PIPELINE DONE, not yet wired** | **53,355 clean storefront rows** — retail 36,224 · food 18,194 · personal 9,974 (from 225,660 join rows → 159,787 open → filtered). Three-level taxonomy on `division`, EPSG:25830, CC BY 4.0 | **`outputs/madrid/` rendered.** Rail from **CRTM's feature layers**: 13 lines, 293 station-line records, 49 stations excluded, 0 filter disagreements. Remaining: the app wiring |
 | 2 | **Seoul** 🇰🇷 | 197,276 active premises over 8 datasets, EPSG:5174, status field, KOGL Type 1 | Build work — partial geocoding for 일반음식점 (90.7%), Korean-aware `check_personal_exposure.py` |
 | 3 | **Milan** 🇮🇹 | 28,131 premises 99.1% coords, `insegna`, `codice_ateco`, CC-BY. All three buckets confirmed | Step 0 schemas for the two newly found layers |
 | ✅ | ~~**Mexico City**~~ 🇲🇽 | Same DENUE. **Rail from OSM** — 195/195 stops exact, 6,468 geometry points | **BUILT 2026-09-22** — `pages/15_Mexico_City_Heatmap.py`. The ODbL share-alike decision was taken during the build; see `DECISIONS.md` |
