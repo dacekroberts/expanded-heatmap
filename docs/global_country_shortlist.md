@@ -78,7 +78,7 @@ its way, and the column says what.
 |---|---|---|---|---|
 | **1** | **France** / Paris | subway 16, tram 17, funicular 1 | SIRENE, établissement-level, geolocated, Licence Ouverte 2.0 | **None evidential** — an architectural choice about national vs per-city scope |
 | **2** | **Spain** / Barcelona + 5 more | **6 metro cities**: Madrid 13, Barcelona FGC 4, Bilbao, Málaga, Valencia, Sevilla | Barcelona's 68,024-premises ground-floor census | **One unread licence** |
-| **2** | **South Korea** / **Seoul only** | **1,099 stations**, WGS84, English names, transfer data | **인허가 정보 SHEET export, no account**: premises, **EPSG:5174 coords 99.5% of active**, status field, cp949 | **The OA ids for the six core business types**, and one unread `이용허락범위` — *no key needed after all* |
+| **1=** | **South Korea** / **Seoul only** ↑↑ | **1,099 stations**, WGS84, English names, transfer data | **197,276 active premises** across 8 datasets, no account: EPSG:5174 coords, status field, **KOGL Type 1**, daily, cp949 | **None evidential** — screening is complete; a geocoding fallback for 일반음식점 alone (90.7%) is build work, not a blocker |
 | **2** | **Taiwan** / Taipei | **complete and unauthenticated**: 122 stations + **5 lines as MULTILINESTRING** + line colours + English | `商業登記`: premises addresses, active/closed status | **No coordinates** → geocoding, and per-category assembly |
 | **2** | **Mexico** / Guadalajara | Guadalajara LRT 3 verified | **DENUE**, 6M+ establishments, **SCIAN = NAICS**, INEGI licence clears | **CDMX is domain-wide unreachable**; Guadalajara carries it meanwhile |
 | **1=** | **Italy** / **Milan** ↑↑ | **subway 5, tram 17** (ATM) — M1–M5 | **28,131 premises, 99.1% with coordinates**, `insegna` (shop sign), `codice_ateco`, `settore_merceologico`, floor area, **CC-BY** | **Whether Personal services is reachable** — two buckets confirmed, the third not |
@@ -1572,13 +1572,48 @@ Confirmed citywide (no district prefix): `OA-16044` 숙박업, `OA-16043`
 plus 통신판매업, 위탁급식영업, 무료·유료직업소개소. **Per-district** (25 datasets
 each, because 보건소 licenses them): 병원, 의원, 부속의료기관, 산후조리업, 안경업.
 
-**Still unknown, and needed before a build:** the OA ids for 일반음식점,
-휴게음식점, 미용업, 이용업, 목욕장업, 세탁업 — the three buckets' core types.
-They are not in OA-15880–16460, which was swept. The catalogue search is
-**UI-only** (below), so finding them means driving the search box, not a sweep.
-**And the licence is unread** — `이용허락범위` appears in each dataset's
-metadata block and has not been opened. `read-licence` before this is recorded
-in `docs/data_sources.md`.
+**RESOLVED 2026-09-22 — all six core types found, downloaded and measured.**
+The OA-id sweep missed them because the citywide entries are scattered through
+OA-160xx rather than contiguous; they came from driving the search box. Note
+that a `fetch` POST of the *fully serialized* form still returns the unfiltered
+8,258 — even for the nonsense control — because `searchSend()` records the
+keyword server-side first. **Only a real form submit filters.**
+
+| `infId` | Type | Bucket | Rows | **Active** | coord % | addr % |
+|---|---|---|---|---|---|---|
+| `OA-16094` | 일반음식점 | Food | 537,906 | **120,182** | 90.7% | 99.2% |
+| `OA-16095` | 휴게음식점 | Food | 147,582 | **37,113** | 97.6% | 98.6% |
+| `OA-16063` | 미용업 | Personal services | 99,802 | **33,679** | 98.7% | 99.9% |
+| `OA-16065` | 세탁업 | Personal services | 15,360 | **3,263** | 99.3% | 99.4% |
+| `OA-16044` | 숙박업 | Personal services | 7,157 | **2,788** | 99.5% | 99.7% |
+| `OA-16064` | 이용업 | Personal services | 15,635 | **2,366** | 99.0% | 99.2% |
+| `OA-16007` | 동물병원 | Personal services | 2,235 | **981** | 99.0% | 100% |
+| `OA-16146` | 목욕장업 | Personal services | 3,991 | **673** | 99.4% | 100% |
+
+Percentages are over **active** rows (`영업상태명 == 영업/정상`); `사업장명` is
+100% on every one. **197,276 active premises — Food 157,295, Personal services
+39,981.** For scale, that is more than New York's four sources produced.
+
+**One soft spot, and it is the biggest file.** 일반음식점 is the only one below
+97% on coordinates, at **90.7%** — about 11,000 active restaurants with an
+address but no point. Its road address is 99.2%, so those are geocodable rather
+than lost, but a Seoul build should expect a small geocoding fallback for the
+Food bucket specifically rather than none at all. Everything else is
+essentially complete.
+
+Also found, citywide and on the same route: `OA-16043` 관광숙박업, `OA-16091`
+관광식당, `OA-16067` 집단급식소, `OA-16106` 계량기제조업, plus 통신판매업 and
+위탁급식영업. **Per-district** (25 datasets each): 병원, 의원, 부속의료기관,
+산후조리업, 안경업, and a 일반음식점 set at OA-18652+ duplicating the citywide
+one.
+
+**The licence is read: 공공누리 제1유형 (KOGL Type 1)** — attribution,
+commercial use and derivative works all permitted, `제3저작권자: 없음` on all
+eight, daily refresh. Full terms, the three obligations it imposes (including
+a *mandatory hyperlink*) and the privacy verification are in
+`docs/data_sources.md`. **Retail remains the unaddressed bucket** — 건강기능식품
+appears inside the food files as a category rather than as its own register,
+which is the same shape as Seoul's `OA-13663`.
 
 #### Seoul's 공중위생업소 is NOT published as a file — and the first probe of this was wrong
 
@@ -2079,17 +2114,18 @@ it to dominate the cost of any European profile.
    East**? The catalogue holds neither the private railways nor JR, which is
    where most of Tokyo's ridership is.
 4. ~~**South Korea's transit data**, from the national source rather than the
-   catalogue.~~ **Done — it is excellent** (see "Korea's transit leg"). And the
-   business leg is now settled too: Seoul is buildable with **no account and no
-   geocoding** via the 인허가 정보 SHEET export. Korea's remaining questions are
-   both small and both Seoul-specific:
-   - **Find the OA ids for 일반음식점, 휴게음식점, 미용업, 이용업, 목욕장업,
-     세탁업.** Not in OA-15880–16460. The catalogue search is UI-only, so this
-     means driving the search box in a browser, not sweeping ids.
-   - **Read `이용허락범위`** on those dataset pages (`read-licence`). KOGL Type 1
-     is expected from the LOCALDATA lineage but has not been opened for
-     `data.seoul.go.kr` itself. Nothing gets recorded in `docs/data_sources.md`
-     until it is.
+   catalogue.~~ ~~**Find the OA ids for the six core business types.**~~
+   ~~**Read `이용허락범위`.**~~ **All done, 2026-09-21/22. Seoul has no open
+   screening question left** — transit measured, eight datasets downloaded and
+   measured (197,276 active premises with coordinates), licence read as KOGL
+   Type 1. It is a **build** candidate now, not a screening one: next step is
+   `add-country` for Korea and a Seoul build brief, not more probing.
+
+   Two things the build will have to handle, both known and neither a blocker:
+   a **small geocoding fallback for 일반음식점 only** (90.7% coordinates against
+   97–99.5% everywhere else), and a **Korean-aware pass in
+   `check_personal_exposure.py`**, since salon trade names routinely contain a
+   personal name.
 
    **Busan and Daegu are closed, not open** — see their section. Korea is a
    one-city country for this project.

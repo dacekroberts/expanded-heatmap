@@ -273,6 +273,7 @@ independent of what is *permitted*. That is in `docs/excluded_categories.md`.
 | Los Angeles businesses (`6rrh-rzua`) | **CC0 1.0 Universal** (public domain dedication) | "Office of Finance" |
 | San Diego businesses | Portal terms explicitly permit use and **"Derivative Work"**, defined as "a work that is based in any way or to any extent on the Data". No attribution requirement stated | — |
 | Boston — every source used above (food inspections, Licensing Board, cannabis, city boundary, plus the neighbourhood, SAM address and Property Assessment layers) | **Open Data Commons PDDL** (public domain dedication), declared per-dataset in CKAN's `license_id` as `odc-pddl` | none declared |
+| **Seoul** — the eight `인허가 정보` datasets below (**candidate, not built**) | **공공누리 제1유형 / KOGL Type 1** — attribution required, commercial use and derivative works permitted | 저작권자 **서울특별시**; 제3저작권자 **없음** (none) |
 
 PDDL and CC0 are both public-domain dedications, so neither compels
 attribution; the maps credit these agencies anyway, which is good practice.
@@ -281,6 +282,74 @@ San Diego's terms carry a strong disclaimer worth knowing about: the data is
 "as is" and "as available", the city "makes no representation or warranty that
 the information contained in the Data is accurate, true or correct", and the
 user indemnifies the city for claims arising from their use of it.
+
+#### Seoul — eight `인허가 정보` datasets, read 2026-09-22 (CANDIDATE, not built)
+
+Recorded now because the licence was read now; **no Korean city is built, so
+nothing here is an active obligation yet.** Source: `data.seoul.go.kr`,
+downloaded via the SHEET CSV export (`ssUserId=SAMPLE_VIEW`, no account — see
+`docs/global_country_shortlist.md`).
+
+| `infId` | Dataset | Bucket | Active premises |
+|---|---|---|---|
+| `OA-16094` | 서울시 일반음식점 인허가 정보 | Food | 120,182 |
+| `OA-16095` | 서울시 휴게음식점 인허가 정보 | Food | 37,113 |
+| `OA-16063` | 서울시 미용업 인허가 정보 | Personal services | 33,679 |
+| `OA-16064` | 서울시 이용업 인허가 정보 | Personal services | 2,366 |
+| `OA-16065` | 서울시 세탁업 인허가 정보 | Personal services | 3,263 |
+| `OA-16146` | 서울시 목욕장업 인허가 정보 | Personal services | 673 |
+| `OA-16044` | 서울시 숙박업 인허가 정보 | Personal services | 2,788 |
+| `OA-16007` | 서울시 동물병원 인허가 정보 | Personal services | 981 |
+
+**All eight carry identical metadata**, checked individually rather than
+inferred from one: `이용허락범위` = **공공누리 1유형 : 출처표시 (상업적 이용 및
+변경 가능)**, `저작권자` = 서울특별시, **`제3저작권자` = 없음**, `갱신주기` =
+매일 (daily). `원본시스템` is 공공데이터포털(지방행정 인허가정보) — i.e. these
+are Seoul's republication of the national LOCALDATA register.
+
+**`제3저작권자: 없음` is the check that matters most here.** It is the field
+that would disclose rights incorporated *by reference* — the trap that hid
+Philadelphia's prohibition behind a licence forbidding nothing. Seoul declares
+none, on all eight.
+
+**KOGL Type 1, from `kogl.or.kr` itself rather than from the label.** Three
+obligations, and one of them is easy to miss:
+
+1. **출처표시 — attribution.** The prescribed form names the institution, the
+   year, the KOGL type and the dataset title. And: *"온라인에서 출처
+   웹사이트에 대한 하이퍼링크를 제공하는 것이 가능한 경우에는 링크를
+   제공하여야 합니다"* — **where a hyperlink is possible, one must be
+   provided.** That is an obligation of the same shape as ODbL's, not a
+   courtesy, and it is the part a plain "Source: Seoul Metropolitan Government"
+   string would fail.
+2. **No implied endorsement.** *"이용자는 공공기관이 이용자를 후원한다거나
+   공공기관과 이용자가 특수한 관계에 있는 것처럼 제3자가 오인하게 하는 표시를
+   해서는 안됩니다"* — nothing may suggest Seoul sponsors this project or has
+   any special relationship with it.
+3. **저작인격권 — moral rights, which bear on transformation.** Modified use
+   must not mislead; the licence's own second example is *"연구보고서의
+   연구성과나 통계수치 등을 수정하여 제3자로 하여금 착오를 불러일으킬 수 있는
+   경우"* — altering figures so as to mislead a third party. This project
+   aggregates premises into per-station counts, which is exactly a statistical
+   transformation, so it falls under the same disclosure duty already met for
+   **INEGI** and **Montréal**: say plainly that the counts are this project's
+   derivation and not Seoul's published figures.
+
+**The publisher already did the privacy work — verified, not assumed.** All
+eight files were checked for a proprietor-name column (`대표자`, `성명`, `이름`,
+`주민`, `생년`): **none exists** in any of them, across 37–39 columns. The only
+name field is `사업장명`, the registered trade name, which this project's
+invariant explicitly permits. Same posture as France's *non-diffusible*,
+Edmonton's `<REDACTED FOR PRIVACY>` and Austria's GISA.
+
+**One privacy item left for build time, not resolved here.** Korean salon and
+restaurant trade names very often *contain* a personal name — `김은미장`
+("Kim Eun-mi salon") among 미용업, and ~30% of 사업장명 values are a bare 2–4
+hangul token. These are registered trade names, so the invariant allows them,
+but `scripts/check_personal_exposure.py` will need a Korean-aware pass rather
+than its current one, and Personal services is the bucket where a salon
+operating from a residential address is most plausible. **Flagged for
+`add-city` Step 0, not pre-judged.**
 
 ### Permissive on reading the terms themselves
 
@@ -994,6 +1063,35 @@ to** the data rather than merely name its source.
 The pattern is worth stating for the next country: the US sources mostly
 prescribed no wording, and the Canadian ones almost all prescribe their own.
 Budget a notice per source rather than a notice per city.
+
+**15. Seoul Metropolitan Government — WILL BE REQUIRED. Not yet, because no
+Korean city is built.** Read 2026-09-22 and recorded here so the cost is known
+before the build rather than discovered during it. All eight `인허가 정보`
+datasets are **공공누리 제1유형 (KOGL Type 1)**, and it is a **one-notice
+country on current evidence** — every dataset carries the same licence, the
+same 저작권자 and `제3저작권자: 없음`, so one notice covers the whole city
+however many business types it ends up using. The Korean pattern is therefore
+the US one, not the Canadian one.
+
+Three things it will require, from `kogl.or.kr`'s own text rather than the
+label on the dataset page:
+
+- **Attribution naming institution, year, KOGL type and dataset title — with a
+  hyperlink.** KOGL says a link *must* be provided where providing one is
+  possible online, which it is here. This is ODbL-shaped, so
+  `render_site_notices()` is the right home and a bare source string will not
+  discharge it.
+- **A non-affiliation line.** Already covered by the standing one that
+  `render_site_notices()` emits for Edmonton and Toronto — no new text needed.
+- **A statement that the per-station counts are this project's derivation, not
+  Seoul's published figures.** KOGL's moral-rights clause names misleading
+  modification of statistics specifically. This is the **third** source to
+  impose a describe-what-you-did-to-the-data duty, after INEGI and Montréal,
+  which is now enough of a pattern to expect it rather than be surprised:
+  budget it for any national statistical or licensing register.
+
+Nothing is displayed for this yet and nothing should be — displaying a notice
+for data the site does not carry would itself be misleading.
 
 What has grown instead is the pile of **permission questions**, now four: three
 "what does silence mean?" calls and the route-colour one. They are questions

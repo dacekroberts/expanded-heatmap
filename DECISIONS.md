@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**103 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**104 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Seoul's screening is finished: 197,276 active premises, KOGL Type 1, no open questions](#2026-09-22---seouls-screening-is-finished-197276-active-premises-kogl-type-1-no-open-questions)
 - [Korea: Seoul gets coordinates and needs no account; Busan and Daegu are closed](#2026-09-22---korea-seoul-gets-coordinates-and-needs-no-account-busan-and-daegu-are-closed)
 
 **2026-09-21**
@@ -139,6 +140,67 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Seoul's screening is finished: 197,276 active premises, KOGL Type 1, no open questions
+
+- **Found all six remaining core business types and measured them.** The
+  OA-id sweep had missed them because Seoul's citywide licensing datasets are
+  scattered through OA-160xx rather than contiguous. Driving the catalogue's own
+  search box found them; a `fetch` POST of the **fully serialized** search form
+  still returns the unfiltered 8,258 even for a nonsense control, because
+  `searchSend()` records the keyword server-side before submitting, so **only a
+  real form submit filters**. Downloaded and measured over active rows
+  (`영업상태명 == 영업/정상`): `OA-16094` 일반음식점 537,906 rows -> **120,182
+  active**, coordinates 90.7%; `OA-16095` 휴게음식점 147,582 -> **37,113**,
+  97.6%; `OA-16063` 미용업 99,802 -> **33,679**, 98.7%; `OA-16065` 세탁업
+  15,360 -> **3,263**, 99.3%; `OA-16064` 이용업 15,635 -> **2,366**, 99.0%;
+  `OA-16146` 목욕장업 3,991 -> **673**, 99.4%. With 숙박업 and 동물병원 from
+  earlier that is **197,276 active premises - Food 157,295, Personal services
+  39,981**, more than New York's four sources produced. `사업장명` is 100% on
+  all eight.
+- **One soft spot, recorded rather than smoothed over: 일반음식점 is the only
+  file below 97% on coordinates, at 90.7%.** About 11,000 active restaurants
+  carry an address but no point. Its road address is 99.2%, so they are
+  geocodable rather than lost - but a Seoul build should budget a **partial**
+  geocoding fallback for the Food bucket, not none. This is the largest file and
+  the most important bucket, so it is the figure most worth not rounding up.
+- **Licence read: 공공누리 제1유형 (KOGL Type 1) on all eight, checked
+  individually rather than inferred from one.** Attribution required, commercial
+  use and derivative works permitted; `저작권자` 서울특별시, **`제3저작권자`
+  없음** on every one - which is the by-reference field that hid Philadelphia's
+  prohibition, and Seoul declares nothing there. `갱신주기` is 매일 (daily), and
+  `원본시스템` is 공공데이터포털(지방행정 인허가정보), confirming these are
+  Seoul's republication of the national LOCALDATA register. Read from
+  `kogl.or.kr` rather than from the dataset label, KOGL Type 1 imposes three
+  duties: attribution naming institution, year, type and title **with a
+  hyperlink where one is possible online** - an ODbL-shaped obligation a bare
+  source string would fail; no implied endorsement, already covered by the
+  standing non-affiliation line; and a moral-rights clause naming misleading
+  modification of statistics, which makes this the **third** source after INEGI
+  and Montréal to require disclosing what this project did to the data.
+  **Korea is a one-notice country** - identical terms across all eight means one
+  notice covers the city however many business types it uses, which is the US
+  pattern rather than the Canadian one.
+- **Verified rather than assumed that the publisher did the privacy work.** All
+  eight files were checked for a proprietor-name column (`대표자`, `성명`,
+  `이름`, `주민`, `생년`) across 37-39 columns: **none exists**. The only name
+  field is `사업장명`, the registered trade name, which the project's invariant
+  permits. Left explicitly unresolved for build time: **~30% of `사업장명`
+  values are a bare 2-4 hangul token and Korean salon names routinely contain a
+  personal name** (`김은미장`), so `scripts/check_personal_exposure.py` needs a
+  Korean-aware pass. Flagged for `add-city` Step 0, not pre-judged here.
+- **Seoul reclassified from a screening candidate to a build candidate**, and
+  moved to joint-first in the master ranking with no evidential blocker. Files
+  touched: `docs/global_country_shortlist.md`, `docs/data_sources.md` (new
+  Seoul licence subsection and notice item 15, marked WILL BE REQUIRED rather
+  than required, since no Korean city is built and displaying a notice for
+  absent data would itself mislead).
+- **Set `user.name`/`user.email` in the repo-local git config.** Neither was set
+  anywhere, so commits were failing; the value used is the one already in the
+  project's commit history, `dacekroberts
+  <49654908+dacekroberts@users.noreply.github.com>` - GitHub's noreply alias
+  rather than a real inbox. Repo-local rather than global, so it is scoped to
+  this project, and shared by every worktree.
 
 ### 2026-09-22 - Korea: Seoul gets coordinates and needs no account; Busan and Daegu are closed
 
