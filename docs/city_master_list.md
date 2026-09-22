@@ -42,7 +42,7 @@ Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 
 | Band | What is stopping it | Cities | Change |
 |---|---|---|---|
-| **A** | Nothing. Screening complete | **5** | ✅ −2 **BUILT** |
+| **A** | Nothing. Screening complete | **4** | ✅ −2 built, ▼ −1 Paris |
 | **B** | One narrow question each | **4** | ▲ **+Stockholm** |
 | **C** | A geocoding leg — build work, not screening | **18** | ▲ **+Bucharest** |
 | **D** | Four sub-tiers, see below | **14** | ▼ −7 |
@@ -64,7 +64,7 @@ results in the sweep.
 
 ---
 
-## Band A — screening COMPLETE (5 remaining + 2 ✅ BUILT)
+## Band A — screening COMPLETE (4 remaining + 2 ✅ BUILT)
 
 Ordered by how little stands in the way. **Built cities keep their row**,
 struck through and marked ✅, so the band still shows what screening promised
@@ -78,7 +78,13 @@ and whether it held.
 | 3 | **Milan** 🇮🇹 | 28,131 premises 99.1% coords, `insegna`, `codice_ateco`, CC-BY. All three buckets confirmed | Step 0 schemas for the two newly found layers |
 | ✅ | ~~**Mexico City**~~ 🇲🇽 | Same DENUE. **Rail from OSM** — 195/195 stops exact, 6,468 geometry points | **BUILT 2026-09-22** — `pages/15_Mexico_City_Heatmap.py`. The ODbL share-alike decision was taken during the build; see `DECISIONS.md` |
 | 4 | **Barcelona** 🇪🇸 | 68,024-premises ground-floor census, CC-BY-4.0 | One residual: the portal's general notice is CAPTCHA-walled and unread |
-| 5 | **Paris** 🇫🇷 | SIRENE, établissement-level, geolocated, Licence Ouverte 2.0 | **An owner decision, not a probe** — a national register is not the per-city municipal shape this project is built around |
+
+▼ **Paris left Band A on 2026-09-22**, measured rather than decided — see
+Band D-a. The architecture question it was holding ("national register vs
+per-city") turned out to be **closed already**: Mexico shipped two cities from
+the national DENUE on the same day, so `pipeline/countries/` is the answer and
+national registers are fine. What fails is **SIRENE's composition**, which is
+a different objection and a measured one.
 
 **Madrid now has nothing outstanding at all** — it is the only unbuilt city
 in the screen with an empty "what remains" column, which makes it the next
@@ -136,7 +142,7 @@ than a probe.
 
 ## Band D — 14 cities, four sub-tiers
 
-### D-a — one cheap question each (4)
+### D-a — one cheap question each (5)
 
 | City | State |
 |---|---|
@@ -144,6 +150,7 @@ than a probe.
 | **Dublin** 🇮🇪 | `data.gov.ie` lists a **Valuation Office API**, but `api.valoff.ie` and `www.valoff.ie` both returned 000 twice — host down, so ASSERTED not measured. Does the Irish rateable register carry a **use category**, where the UK's NNDR did not? |
 | **Zurich** 🇨🇭 | **Food confirmed** — `Gastwirtschaftsbetriebe`, premises-level, GeoJSON. No second bucket found; the national STATENT is aggregate |
 | **Singapore** 🇸🇬 | API answers but its search is loose. One controlled query settles it. Suspected registered-office shaped |
+| **Paris** 🇫🇷 ▼ | **Demoted from Band A, 2026-09-22.** SIRENE is legally clean and établissement-level, and **fails on composition**: of 148,633 active Paris rows in NAF 47/56/96, **128,655 (86.6%) are *sièges***, and a French sole trader's siège is typically the home address. **20,542** carry NAF **47.91B, online retail** — no storefront by definition. The open question is narrow: **can a NAF + siège + employee filter produce a defensible storefront layer without mapping homes?** See below |
 
 ### D-b — rail ANSWERED, business leg is the blocker (5)
 
@@ -161,6 +168,55 @@ below.
 | **Tel Aviv** 🇮🇱 | 6 rel, **realistically 1** — Green and Purple are under construction and OSM does not mark them | **UNREACHABLE.** `data.gov.il/api` 14 bytes; city portal **HTTP 472** with our own IP echoed back — IP-level, so the browser shares the block. One operating line is thin regardless |
 | **Hyderabad** 🇮🇳 | 6 rel, all named + coloured | Trade licences are municipal; `data.telangana.gov.in` dead |
 | **Kochi** 🇮🇳 | 2 rel, named + coloured | Kerala LSG live |
+
+#### Paris / SIRENE — the measurement, 2026-09-22
+
+**The architecture question was answered by Mexico, not by argument.**
+`pipeline/countries/mexico.py` holds the national facts and the two city
+configs differ by one line (`DENUE_STATE_CODE`). Milan is already in Band A on
+`codice_ateco`, the same NACE family as France's NAF. So "a national register
+is not the shape this project is built around" is **no longer true**, and the
+France entry had been carrying an objection the project had outgrown.
+
+**What Mexico does NOT answer is the kind of source.** DENUE is a **field
+survey** — INEGI enumerators visit, so a row is a place that exists. SIRENE is
+an **administrative register** — a row is a declaration. Measured on Paris
+(commune codes 751xx, `etatadministratifetablissement = Actif`), via the
+uncapped SIRENE v3 établissement stock (43,896,818 rows):
+
+| | |
+|---|---|
+| All active établissements | **1,335,566** — one per 1.6 residents. Not premises |
+| ...of which **sièges** | **1,231,822 (92.2%)** |
+| NAF 47+56+96 buckets | **148,633** |
+| ...of which sièges | **128,655 (86.6%)** |
+| ...non-siège secondary premises | **19,978** |
+| NAF **47.91B**, online retail | **20,542** — 24% of the whole retail division |
+| Masked (`statut P`) | **176,404 (13.2%)** |
+
+**The 148,633 is a trap.** It sits almost exactly on Madrid's 148,814, which
+makes it read as a pass — but that is a coincidence of magnitude, not of
+shape. 86.6% of it is sièges, and this project's invariant is explicit that
+*a registrant's own name at what looks like their home* is not publishable
+**even from a public registry**. This is the registered-office trap that
+disqualified Germany, Austria, Latvia and Slovakia, arriving through a source
+that passes every legal and access test.
+
+**Paris has no municipal premises survey to substitute.** `opendata.paris.fr`
+enumerated in full — **490 datasets** — and the closest things to a commerce
+layer are `terrasses-autorisations` (24,287 terrace and display permits),
+`commerces-eau-de-paris` (1,500 shops stocking the water utility's product),
+`commerces-semaest` (311 units owned by a city property company) and
+`plub_protcom` (5,107 **zoning** protections on commercial frontages). None is
+a register of businesses. Note `marchés` here is a false friend — it means
+public procurement.
+
+**UNRESOLVED, and recorded as such:** whether APUR's **BDCom** — the Paris
+commercial-premises survey, the Montréal `locaux-commerciaux` shape — is
+published anywhere. `apur.org`'s site search **silently ignores the query
+term**: `BDCom` returns **131 pages** of unrelated studies. So this is "could
+not confirm", not "absent", and it is the single check that would put Paris
+back in Band A.
 
 > **The relation counts are upper bounds.** The construction filter flagged
 > unbuilt routes in Jakarta but returned **zero** for Tel Aviv, Bogotá and Rio —
@@ -248,11 +304,11 @@ country.
 | 🇰🇷 **South Korea** | **1** — Seoul | 8 datasets, EPSG:5174, KOGL Type 1, daily | **Two build items, not probes:** partial geocoding for 일반음식점 (90.7% coords) and a Korean-aware `check_personal_exposure.py` |
 | 🇮🇹 **Italy** | **1** — Milan | Bespoke per city. Naples and Messina measured out | **Step 0 schemas** for the two newly found Milan layers. Nothing to discover |
 
-## Tier 2 — one decision, not one probe (1 country)
+## Tier 2 — ▼ DEMOTED 2026-09-22: the decision was made, and it went against (1 country)
 
 | Country | Cities | Missing link |
 |---|---|---|
-| 🇫🇷 **France** | **1 built-ready, 6 rail-confirmed** — Paris, Lyon, Marseille, Lille, Toulouse, Rennes | **An architecture decision you own:** SIRENE is a *national* register, not the per-city municipal shape this project is built around. Settle that and France is a six-city country with one integration |
+| 🇫🇷 **France** ▼ | **0 built-ready, 6 rail-confirmed** — Paris, Lyon, Marseille, Lille, Toulouse, Rennes | **The decision was taken on measurement, not taste, and it went against.** The architecture half is fine — Mexico proved national registers work. **SIRENE fails on composition:** 86.6% of Paris NAF 47/56/96 are *sièges*, i.e. largely home addresses, and 20,542 are online-retail. France is still a six-city prize, but it is now a **storefront-filter and privacy problem at national scale**, not a single integration. The one check that would reopen it: whether APUR **BDCom** is published |
 
 ## Tier 3 — a geocoding leg buys several cities (5 countries, 18 cities)
 
@@ -665,7 +721,8 @@ metro, so it is a weaker map for a stronger dataset. Unprobed.
    screen had only asserted.
 2. ▶ **Spain — NEXT.** Madrid and Barcelona ready *now*; the other three
    likely rather than speculative. Madrid is the only unbuilt city in the whole
-   screen whose "what remains" column is empty.
+   screen whose "what remains" column is empty — and since Paris left Band A on
+   2026-09-22, it is also the clearest next build by some distance.
 3. **Korea** and **Italy** — one city each, nothing to discover, both with
    named build work rather than open questions.
 4. **Taiwan** — the first geocoding build, chosen because it is the cheapest:
@@ -676,9 +733,11 @@ metro, so it is a weaker map for a stronger dataset. Unprobed.
 6. ⏸ **Japan** — **last, by decision.** Ten cities, and by then the geocoding
    machinery is built.
 
-**France sits outside this order** because its blocker is an architecture
-decision rather than work: settle national-vs-per-city and six cities arrive at
-once.
+**France no longer sits outside this order awaiting a decision** — the
+decision was made on 2026-09-22 and it went against SIRENE as a primary
+source. France re-enters only if APUR BDCom turns out to be published, or if a
+NAF + siège + employee filter is shown to yield a defensible storefront layer.
+Recorded in Band D-a with the measurement.
 
 Tier 4's four probes (**Czechia** strongest) are cheap enough to run alongside
 any of the above rather than competing with them.

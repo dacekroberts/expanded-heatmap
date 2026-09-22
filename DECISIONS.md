@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**116 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**117 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [The France decision, settled by measurement: Paris leaves Band A](#2026-09-22---the-france-decision-settled-by-measurement-paris-leaves-band-a)
 - [Three food-authority probes: Bucharest promoted, Budapest closed, Sofia unreachable](#2026-09-22---three-food-authority-probes-bucharest-promoted-budapest-closed-sofia-unreachable)
 - [Tier 6 reached; Stockholm is a real register four hops deep, and Sofia's 403 reading was wrong](#2026-09-22---tier-6-reached-stockholm-is-a-real-register-four-hops-deep-and-sofias-403-reading-was-wrong)
 - [Tier 5 closed by browser navigation, and real-browser probing made a standing rule](#2026-09-22---tier-5-closed-by-browser-navigation-and-real-browser-probing-made-a-standing-rule)
@@ -152,6 +153,73 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - The France decision, settled by measurement: Paris leaves Band A
+
+- **Closed the "national register vs per-city municipal" architecture question
+  as already answered - by Mexico, not by argument.** France had sat in Tier 2
+  for one reason: SIRENE is a national register and "a national register is not
+  the per-city municipal shape this project is built around". That sentence
+  stopped being true on 2026-09-22, when the other session shipped Guadalajara
+  and Mexico City from the national DENUE. `pipeline/countries/mexico.py` holds
+  the national facts and the two city configs differ by a single line
+  (`DENUE_STATE_CODE = "14"` vs `"09"`). The taxonomy half of the objection was
+  already answered twice over: the project invariant explicitly permits a
+  documented local taxonomy, and Milan is in Band A on `codice_ateco`, the same
+  NACE family as France's NAF. So the France entry had been carrying an
+  objection the project outgrew.
+
+- **Measured the objection Mexico does NOT answer, and it is the one that
+  matters: DENUE and SIRENE are different KINDS of source.** DENUE is a field
+  survey - INEGI enumerators visit, so a row is a place that exists. SIRENE is
+  an administrative register - a row is a declaration. Measured against the
+  uncapped SIRENE v3 etablissement stock (43,896,818 rows) for Paris communes
+  751xx with `etatadministratifetablissement = "Actif"`: **1,335,566 active
+  etablissements**, which is one per 1.6 residents and cannot be premises.
+  **1,231,822 of them (92.2%) are sieges.** Restricted to the project's three
+  buckets (NAF divisions 47, 56, 96): **148,633**, of which **128,655 (86.6%)
+  are sieges** and only **19,978** are non-siege secondary premises.
+  **20,542 carry NAF 47.91B, online retail** - 24% of the entire retail
+  division, and no storefront by definition. **176,404 (13.2%) are masked**
+  under diffusion status P.
+
+- **Named the trap explicitly, because the headline number reads as a pass.**
+  148,633 sits almost exactly on Madrid's 148,814. That is a coincidence of
+  magnitude, not of shape: for a French sole trader the siege IS the home
+  address, so 86.6% of the bucket would place pins on homes. This is the
+  registered-office trap that disqualified Germany, Austria, Latvia and
+  Slovakia, arriving through a source that passes every legal and access test -
+  Licence Ouverte 2.0, etablissement-level, geolocated, privacy masking already
+  applied upstream. It collides with the project invariant that a registrant's
+  own name at what looks like their home is not publishable even from a public
+  registry.
+
+- **Established that Paris has no municipal premises survey to substitute.**
+  Enumerated `opendata.paris.fr` in full - **490 datasets** - rather than
+  keyword-searching it, per the Montreal lesson. The closest things to a
+  commerce layer are `terrasses-autorisations` (24,287 terrace and display
+  permits), `commerces-eau-de-paris` (1,500 shops stocking the water utility's
+  product), `commerces-semaest` (311 units owned by a city property company)
+  and `plub_protcom` (5,107 zoning protections on commercial frontages). None
+  is a register of businesses. Noted that `marches` on this portal means public
+  procurement, a false friend that inflates any keyword scan.
+
+- **Recorded APUR's BDCom as UNRESOLVED rather than absent.** BDCom is the
+  Paris commercial-premises survey and would be the Montreal
+  `locaux-commerciaux` shape exactly. `apur.org`'s own site search **silently
+  ignores the query term** - `BDCom` returns 131 pages of unrelated studies -
+  so nothing was learned either way. This is the silent-ignore family again,
+  and the honest record is "could not confirm", not "does not exist". It is the
+  single check that would put Paris back in Band A.
+
+- **Demoted Paris from Band A to Band D-a and France from Tier 2.** Band A goes
+  5 -> 4 (Madrid, Seoul, Milan, Barcelona); Band D-a 4 -> 5. The open question
+  is narrow and worth stating precisely: can a NAF + siege + employee filter
+  produce a defensible storefront layer without mapping homes? France remains a
+  six-city prize and is no longer a single integration to reach it. Supersedes
+  the framing in this file and in `docs/city_master_list.md` that France was
+  "an architecture decision you own" - it was, and it has now been made on
+  measurement rather than taste.
 
 ### 2026-09-22 - Three food-authority probes: Bucharest promoted, Budapest closed, Sofia unreachable
 
