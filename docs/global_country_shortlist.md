@@ -232,8 +232,45 @@ live.** Its business data is the FEHD food-licence register — **food only**,
 so Hong Kong is a two-bucket city at best whatever its rail data shows. Fixing
 its transit would not fix its ceiling.
 
-**Still entirely unprobed:** Indonesia (BIG), Malaysia (JUPEM), Israel
-(`data.gov.il`).
+**Still entirely unprobed:** Indonesia (BIG), Malaysia (JUPEM).
+
+#### Israel — transit MEASURED, and it passes both halves
+
+`data.gov.il` is CKAN and answers `package_search` without a key. It publishes
+a full light-rail set under **Creative Commons Attribution**: stations, lines,
+tunnels and depots, each as SHP, KMZ and CSV.
+
+| Layer | MEASURED |
+|---|---|
+| `LRT_STAT.shp` | **332 Points**, **EPSG:2039** (Israeli TM Grid), columns `STAT_NAME`, `LINE`, `TYPE`, `STATUS`, `COMP`, `MTR_AREA` |
+| `LRT_LINE.shp` | **27 LineStrings**, EPSG:2039, columns `NAME`, **`LINE_EG`** (English name), `FREQ`, `STATUS`, `START_`, `DESTNATION`, `LENGT` |
+
+Stations *and* line geometry, which is the check Korea fails. Reprojection
+would be EPSG:2039 → UTM 36N (**EPSG:32636**) for Tel Aviv.
+
+**TWO TRAPS, both visible only in the columns:**
+
+- **The "stations" layer is station ENTRANCES.** `ENTRC_EXIT`, `ACSBL_ENTR`,
+  `ENTRC_TYPE` and `ENTRC_LBL` give it away: **332 points against Tel Aviv's
+  ~34 Red Line stops.** Buffering every entrance would multiply rings per
+  station and inflate any density measure severalfold. Dissolve to one point
+  per `STAT_NAME` before use.
+- **`STATUS` means some of this is not built.** Tel Aviv's Red Line opened in
+  2023; the Purple and Green lines are under construction. A layer that
+  includes planned stations would draw rings around building sites — the
+  inverse of Brampton, where the project correctly waited for the Hurontario
+  LRT.
+
+Neither is a defect in the data; both are defects in reading it without
+looking at the columns.
+
+**Israel's business register is unprobed**, and that is now the deciding leg.
+
+#### Peru — portal unreachable
+
+`datosabiertos.gob.pe` refused connection. The Lima Line 1 station dataset is
+named and licensed (Open Data Commons Attribution) but was not retrieved.
+**ASSERTED, not measured** — retry before recording anything.
 
 #### Latin America, probed 2026-09-21 — and the national agencies were the wrong place
 
