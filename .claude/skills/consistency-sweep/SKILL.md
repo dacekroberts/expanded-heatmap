@@ -242,6 +242,24 @@ because re-downloading a business export changes every count in
 filters, which is exactly what its provenance row says. Reading the comment is
 the step, not deleting the constant.
 
+### 8a. Compliance artefacts that quietly stop being evidence
+
+A hash, a stored document, a recorded date - these exist so a claim can be
+checked later, and they fail silently by construction: nothing breaks when a
+digest stops matching, so nothing announces it.
+
+`docs/licenses/README.md` records a SHA-256 per stored licence so the clauses
+quoted in `data_sources.md` are "checkable against the text that was actually
+agreed to". On 2026-09-22 **two of nineteen hashes described bytes that existed
+nowhere**, and two more licence files had no hash at all. The cause was not
+carelessness: `.gitattributes` sets `* text=auto eol=lf`, so git rewrote CRLF
+to LF *after* each hash was taken - once for a file fetched from a server that
+sent CRLF, once for a file a Python script wrote on Windows.
+
+**So compute a digest from the COMMITTED file, never the one you just
+fetched**, and prefer a check to a convention: `check_provenance.py` check G
+now verifies all of them on every run.
+
 ### 8. Repository artifacts that outlive their work
 
 Empty worktree directories, branches merged long ago, worktree registrations
@@ -300,7 +318,7 @@ it needs that session's context.
 
 | Check | What it decides |
 |---|---|
-| `python scripts/check_provenance.py [--strict]` | every built city has rows in all three provenance tables; every URL its `config.py` **resolves to** is recorded; notices and `_NOTICES` are in bijection; notice numbers unique and contiguous; **`city_master_list.md`'s built counts match `app/cities.py`**, total and per country; **every `item N` citation still points at the notice it names** |
+| `python scripts/check_provenance.py [--strict]` | every built city has rows in all three provenance tables; every URL its `config.py` **resolves to** is recorded; notices and `_NOTICES` are in bijection; notice numbers unique and contiguous; **`city_master_list.md`'s built counts match `app/cities.py`**, total and per country; **every `item N` citation still points at the notice it names**; **every stored licence's SHA-256 matches**; **every relative markdown link resolves** |
 | `python scripts/decisions_index.py --check` | `DECISIONS.md`'s generated index is current |
 | `python pipeline/drift_check.py` | committed `outputs/` still match what the pipeline produces |
 | `python scripts/check_deploy_imports.py` | a clean clone imports under the lean venv |

@@ -42,6 +42,21 @@ WHAT IT CHECKS
   D. Notice numbers are unique and contiguous from 1. They were neither: the
      list carried two item 8s and two item 15s from 2026-09-21 to 2026-09-22,
      because each country's block was appended without renumbering.
+  H. Every relative markdown link in the docs resolves. `vancouver.md` linked
+     `[session_roles.md](session_roles.md)` from inside `docs/build_briefs/`,
+     which pointed at a sibling that never existed - it needed `../`. Fenced
+     code is stripped first, because Overpass QL (`["network"="<Net>"](bbox)`)
+     reads exactly like a markdown link and is not one.
+
+  G. Every stored licence in `docs/licenses/` has a SHA-256 listed in that
+     directory's README, and it MATCHES. This is a compliance artefact, not
+     housekeeping: the hashes exist so the clauses quoted in `data_sources.md`
+     are checkable against the text that was actually agreed to, and a stale
+     one silently ends that. Two were stale on 2026-09-22 because
+     `.gitattributes` sets `* text=auto eol=lf` and git rewrote CRLF to LF
+     after the hash was taken - so the recorded digests described bytes that
+     existed nowhere. Two more files had no hash at all.
+
   F. Every `notice N` / `item N` citation of the notices list still points at
      the notice it MEANT. A range check cannot do this: renumbering on
      2026-09-22 moved Edmonton from item 14 to 15, and
@@ -81,6 +96,7 @@ DATA_SOURCES = ROOT / "docs" / "data_sources.md"
 CITIES_PY = ROOT / "app" / "cities.py"
 COMPONENTS_PY = ROOT / "app" / "components.py"
 MASTER_LIST = ROOT / "docs" / "city_master_list.md"
+LICENCE_DIR = ROOT / "docs" / "licenses"
 
 # Files whose `item N` citations are checked. DECISIONS.md is excluded for the
 # usual reason - it records what a citation said on a date.
@@ -234,6 +250,69 @@ def displayed_notices():
     start = src.index("_NOTICES")
     end = src.index("def ", start)
     return re.findall(r'^\s{4}\("([^"]+)"', src[start:end], re.M)
+
+
+def check_links():
+    """H: relative markdown links that do not resolve."""
+    fence = re.compile(r"```.*?```", re.S)
+    inline = re.compile(r"`[^`\n]*`")
+    link = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
+    problems = []
+    seen = set()
+    for g in ("docs/**/*.md", ".claude/**/*.md", "*.md"):
+        for q in sorted(ROOT.glob(g)):
+            if not q.is_file() or q.resolve() in seen:
+                continue
+            seen.add(q.resolve())
+            text = read(q)
+            # Fenced blocks and inline code are not prose; a query that looks
+            # like a link is not a link.
+            text = inline.sub(" ", fence.sub(" ", text))
+            for m in link.finditer(text):
+                tgt = m.group(1).split("#")[0].strip()
+                if not tgt or tgt.startswith(("http://", "https://",
+                                              "mailto:", "<")):
+                    continue
+                if not (q.parent / tgt).resolve().exists():
+                    problems.append(
+                        f"{q.relative_to(ROOT).as_posix()}: "
+                        f"link to '{tgt}' does not resolve")
+    return problems
+
+
+def check_licence_hashes():
+    """G: docs/licenses/ SHA-256s against the files as committed."""
+    import hashlib
+    readme = LICENCE_DIR / "README.md"
+    if not readme.exists():
+        return ["docs/licenses/README.md not found"]
+    m = re.search(r"## SHA-256, as retrieved.*?```\n(.*?)```",
+                  read(readme), re.S)
+    if not m:
+        return ["no '## SHA-256, as retrieved' block in docs/licenses/README.md"]
+    listed = {}
+    for line in m.group(1).strip().split("\n"):
+        parts = line.split()
+        if len(parts) == 2:
+            listed[parts[1]] = parts[0]
+
+    problems = []
+    on_disk = {q.name: q for q in LICENCE_DIR.iterdir()
+               if q.is_file() and q.name != "README.md" and q.suffix != ".md"}
+    for name, digest in sorted(listed.items()):
+        q = on_disk.get(name)
+        if q is None:
+            problems.append(f"{name}: hash listed but the file is gone")
+            continue
+        actual = hashlib.sha256(q.read_bytes()).hexdigest()
+        if actual != digest:
+            problems.append(
+                f"{name}: listed {digest[:16]}... but the file hashes to "
+                f"{actual[:16]}... - recompute from the COMMITTED file, not "
+                f"the one you just fetched (.gitattributes normalises CRLF)")
+    for name in sorted(set(on_disk) - set(listed)):
+        problems.append(f"{name}: stored licence with NO hash listed")
+    return problems
 
 
 def notice_subjects(doc):
@@ -457,6 +536,20 @@ def main():
               f"({len(soft)} unverifiable)")
     for s in soft:
         print(f"      note: {s}")
+
+    # --- H, relative links in the docs ---------------------------------------
+    links = check_links()
+    if links:
+        failures.append(("markdown links", links))
+    else:
+        print("  links: every relative markdown link resolves")
+
+    # --- G, the licence store's own integrity -------------------------------
+    lic = check_licence_hashes()
+    if lic:
+        failures.append(("docs/licenses", lic))
+    else:
+        print("  licences: every stored licence's SHA-256 matches")
 
     # --- report ------------------------------------------------------------
     if gaps:

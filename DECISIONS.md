@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**148 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**149 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Two of nineteen licence hashes described bytes that existed nowhere](#2026-09-22---two-of-nineteen-licence-hashes-described-bytes-that-existed-nowhere)
 - [Category 7 has a check, and it found that the three newest cities fetch inside their steps](#2026-09-22---category-7-has-a-check-and-it-found-that-the-three-newest-cities-fetch-inside-their-steps)
 - [Category 3 has a check, and a range check would not have caught the bug it was built for](#2026-09-22---category-3-has-a-check-and-a-range-check-would-not-have-caught-the-bug-it-was-built-for)
 - [Category B closed: every item adjudicated, and the noisiest file became a hard check](#2026-09-22---category-b-closed-every-item-adjudicated-and-the-noisiest-file-became-a-hard-check)
@@ -184,6 +185,45 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Two of nineteen licence hashes described bytes that existed nowhere
+
+- **Probed the licence store's SHA-256 block and found four defects in a
+  compliance artefact.** `cta-developer-license-agreement.html` and
+  `bc-open-government-licence.txt` were listed with digests that matched
+  neither the working tree nor the committed blob, and
+  `crtm-licencia-de-uso.txt` and
+  `madrid-condiciones-generales-reutilizacion.txt` had no hash at all. The
+  block exists so the clauses quoted in `data_sources.md` are "checkable
+  against the text that was actually agreed to" - a stale digest ends that
+  silently, which is the whole hazard of a compliance artefact.
+
+- **The cause was systemic, not four separate slips, which is why one of them
+  was mine from earlier today.** `.gitattributes` sets `* text=auto eol=lf`,
+  so git rewrites CRLF to LF **on commit** - after the hash has been taken.
+  CTA's was fetched from a server that sent CRLF; BC's was written by a Python
+  script on Windows. Verified rather than assumed: both files are now all-LF
+  with `blob == working tree`, so the recorded digests described bytes that
+  exist nowhere at all. **Compute a digest from the COMMITTED file.**
+
+- **`check_provenance.py` check G now verifies every stored licence's hash and
+  fails on a mismatch or a file with no hash listed**, with the CRLF cause
+  named in the failure message so the next person is not left guessing.
+  Negative-tested by corrupting CTA's digest: it reports the mismatch and both
+  hashes. The README carries the same warning above the block.
+
+- **A second probe found one broken relative link out of two candidates.**
+  `docs/build_briefs/vancouver.md` linked `[session_roles.md](session_roles.md)`
+  from inside `docs/build_briefs/`, pointing at a sibling that never existed -
+  it needed `../`. Check H now resolves every relative markdown link, stripping
+  fenced and inline code first, because Overpass QL
+  (`["network"="<Net>"](bbox)`) reads exactly like a markdown link and is not
+  one - which was the other candidate.
+
+- **A third probe came back clean and that is worth recording too:** every city
+  in `app/cities.py` has its page file and a matching `outputs/<slug>/heatmap.html`.
+  Sixteen for sixteen. A sweep that only reports findings teaches nothing about
+  what was examined.
 
 ### 2026-09-22 - Category 7 has a check, and it found that the three newest cities fetch inside their steps
 
