@@ -151,7 +151,22 @@ CITIES = [
                  "Nassau St, Flushing, Crosstown, 14 St-Canarsie) and the Staten "
                  "Island Railway",
         # East of its dot, second from the top of the eastern column.
-        "label_offset": ("start", 14, -8),
+        #
+        # dx IS 24 AND NOT 14, because at 14 this pill ERASED BOSTON'S MARKER -
+        # deploy-verify measured 0 teal pixels for Boston in the landing view at
+        # 1200 and 768 px, against 32-65 for every other city. Boston's dot
+        # lands at x 627.0 while this pill spanned x 624.5-695.9 at y
+        # 180.4-198.4, so the dot sat inside an opaque pill drawn above it. Same
+        # defect as Guadalajara's, one view over, and it went unseen because the
+        # check of the day scored pills against pills and not against markers.
+        #
+        # East rather than down: the eastern column's vertical slots are 16 px
+        # apart and +8 is Philadelphia's, so any dy that clears Boston's dot
+        # walks into another name. dx 22 is the arithmetic minimum (Boston's dot
+        # centre plus its 5 px radius); 24 leaves 2.5 px. It costs 10 px more
+        # clipping at 375 px - 27% of the pill against 13% - which is the same
+        # accepted trade-off as Washington D.C.'s 39% two rows below.
+        "label_offset": ("start", 24, -8),
     },
     {
         "name": "Philadelphia",

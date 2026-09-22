@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**123 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**124 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Two merges, the macro-label check that was missing, and two fixes rejected by measurement](#2026-09-22---two-merges-the-macro-label-check-that-was-missing-and-two-fixes-rejected-by-measurement)
 - [France reversed on new measurement: the employee filter works, Paris returns to Band A](#2026-09-22---france-reversed-on-new-measurement-the-employee-filter-works-paris-returns-to-band-a)
 - [The France decision, settled by measurement: Paris leaves Band A](#2026-09-22---the-france-decision-settled-by-measurement-paris-leaves-band-a)
 - [The live site was down for three hours, and no check this project had could have seen it](#2026-09-22---the-live-site-was-down-for-three-hours-and-no-check-this-project-had-could-have-seen-it)
@@ -159,6 +160,119 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Two merges, the macro-label check that was missing, and two fixes rejected by measurement
+
+- **Merged the staging session's global screen (`4e87cfc`, 19 commits) and then
+  its France reversal (`81ee70d`), both documentation only.** France left Band A
+  on a siege measurement and returned to it within the hour on an employee one:
+  the siege filter keeps chain branches and discards every independent trader,
+  because an independent shop IS its company's siege, and its 19,978 rows for
+  Paris read like a plausible storefront count while being the inverse of what
+  this project maps. `caractereemployeuretablissement = 'Oui'` gives 50,156 and
+  validates against OSM to 0.4% on restaurants and 92.5% overall. 99.96% of
+  rows arrive geolocated, so France carries no geocoding leg. Both entries
+  stand; neither was edited.
+
+- **A git conflict region shows where two sides DISAGREED, not everything the
+  other side ADDED, and the difference silently deletes entries from an
+  append-only log.** Resolving the first merge by rebuilding `DECISIONS.md`
+  from master's stage and re-appending staging's four colliding entries would
+  have dropped a fifth: staging's "Japan is a BUILD" sat lower in the file with
+  no competing change beside it, so git auto-merged it OUTSIDE the markers. It
+  was caught by asserting the region below the conflict was byte-identical on
+  both sides, which it was not (6,198 lines against 6,262). The second merge
+  made the same point more sharply - its ONLY conflict was the generated index,
+  while the new France entry arrived entirely outside the markers. Written into
+  `scripts/merge_append_only.py`, which edits only the conflict regions of
+  git's own merged file, dates each entry by the commit that introduced it so
+  two sides interleave by real time rather than stacking, and REFUSES TO WRITE
+  unless the result equals the union of both sides' full stages. `CLAUDE.md`
+  carries the rule, per its own argument that a lesson in the log describes
+  what happened once while a working rule is in hand at the moment of typing.
+
+- **The macro map's basemap attribution was collapsing behind an (i) button
+  below ~640 px, which is a licence term rather than a style preference.**
+  mapbox-gl adds `mapboxgl-compact` at narrow widths and sets the credit's
+  inner text to `display: none`; at a 375 px viewport the map showed the button
+  and no credit, while 768 and 1200 showed it in full. ODbL 1.0 requires the
+  credit to stay visible, `CLAUDE.md` says it must not sit "beneath UI, behind
+  toggles, or off-screen", and `components.render_site_notices()` already
+  refuses an `st.expander` for exactly this reason - so a library default is
+  not an exemption. Overridden in `_MACRO_CONTROLS_CSS`, deliberately NOT
+  scoped to `body.dark-base` because the obligation does not depend on the
+  theme. Verified at 375 px: the credit renders as a 234x20 block reading
+  "(c) CARTO, (c) OpenStreetMap contributors" with the button suppressed. The
+  city maps are Leaflet, whose attribution control has no compact mode.
+
+- **Added `scripts/check_macro_labels.py`, because the check that cleared the
+  region split scored only each region's OWN MEMBER CITIES.** Every city is
+  drawn in every region - the view is centred, never filtered - so a non-member
+  still renders at the frame edge and still collides. That blind spot is why a
+  commit message claimed "zero label collisions and zero pills covering their
+  own marker, in all SIX regions" while "Los Angeles" x "San Diego" overlapped
+  20.5 x 11.3 px in United States East. The new script scores every city in
+  every region at 375, 768 and 1200 px, and distinguishes a pill COVERING a
+  marker (centre inside the pill, which is what erases a dot) from one grazing
+  its edge - the loose test flagged Philadelphia against New York, a pair
+  deploy-verify measured as both rendering normally. It reproduced all thirteen
+  of deploy-verify's rendered-pixel measurements from Web-Mercator arithmetic,
+  to 0.1 px, which is what licenses using it in place of a browser for routine
+  checks.
+
+- **New York's pill was erasing Boston's marker in the landing view, and its
+  `dx` went 14 -> 24.** deploy-verify measured 0 teal pixels for Boston at 1200
+  and 768 px against 32-65 for every other city: Boston's dot lands at x 627.0
+  while New York's pill spanned x 624.5-695.9 at y 180.4-198.4, so an opaque
+  pill drawn above the markers sat on it. The same defect as Guadalajara's, one
+  view over. East rather than down, because the eastern column's vertical slots
+  are 16 px apart and +8 is Philadelphia's; 22 is the arithmetic minimum and 24
+  leaves 2.5 px. Verified from rendered pixels after a forced redraw: Boston's
+  centre reads 13,148,136 (the teal fill) with its white ring intact either
+  side, and New York's pill now begins at x 635. It costs 10 px more clipping
+  at 375 px, 27% of the pill against 13%, the same trade-off Washington D.C.
+  already carries at 39%.
+
+- **Two candidate fixes for the phone-width label clipping were tested and
+  REJECTED, both on numbers rather than judgement.** deploy-verify found four
+  labels clipped at 375 px in the region views. (1) Removing Overview.py's
+  re-centring block, which discards `fit_view`'s `west_pad` and draws every
+  non-default region ~12 px east of its fitted frame, looked like the obvious
+  bug fix and made things WORSE: 137.4 px of total clipping became 159.5 px,
+  because the west pad only helps a label running west off its dot and in four
+  of five regions the label at risk runs EAST - plus a new 7.9 px clip on
+  Boston in United States East. The block was restored and its comment, which
+  still read "RE-CENTRE, NEVER RE-ZOOM" after the per-region fit superseded
+  that rule, rewritten to say what it actually does. (2) Fitting the box to the
+  LABELS rather than the dots removes every clip and is arithmetically dead:
+  Canada West drops from zoom 3.868 to the 1.0 floor, United States East from
+  3.085 to 1.273, and the composite from 1.4525 to 1.0 - it buys the labels by
+  throwing away the per-region zoom the owner asked for. That is cities.py's
+  standing rule ("do NOT solve a label overflow by padding fit_view's bounding
+  box") holding in a second place. The residual clipping is the trade-off
+  cities.py already documents for the composite, where Washington D.C. is 39%
+  clipped at phone width; every clipped pill stays clickable and the text-link
+  list beneath the map is the navigation guarantee.
+
+- **`scripts/decisions_index.py` was writing CRLF on Windows**, so every index
+  refresh left the working copy differing byte-for-byte from the blob git
+  stores while `git status` read clean, because git normalises on commit. That
+  is the same mismatch that hid a CRLF-only change to
+  `.claude/agents/deploy-verify.md` earlier the same day and left the agent
+  unregistered for a whole session. Now writes `newline="\n"`.
+
+- **Still open, and deliberately not decided here: whether a region view should
+  LABEL cities that are not its members.** Every remaining finding is one -
+  "Los Angeles" covering San Diego's marker and overlapping its pill in United
+  States East, and "Philadelphia" hanging 2.1 px below the canvas in Canada
+  East, in each case a city the reader switched away from. Suppressing
+  non-member labels while keeping their markers would close all of them and
+  keep the caption's "every city is on the map" true, but it changes what a
+  reader sees, and in the composite it would remove seven labels from the
+  landing view. Left to the owner. The one further finding, "Los Angeles" x
+  "Guadalajara (Regional)" overlapping 68.5 x 1.1 px, is 0.1 px past the
+  >1 px rule set on 2026-09-22 and is abutting rather than a smear - the pill
+  backgrounds touch and the glyphs do not.
 
 ### 2026-09-22 - France reversed on new measurement: the employee filter works, Paris returns to Band A
 

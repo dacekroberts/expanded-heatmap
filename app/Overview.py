@@ -291,14 +291,42 @@ def fit_view(lats, lons, width_px=320, height_px=460, fill=0.7, west_pad=0.12):
 _here = _region_cities[region]
 view = fit_view([c["lat"] for c in _here], [c["lon"] for c in _here])
 
-# RE-CENTRE, NEVER RE-ZOOM. `view.zoom` above is 1.4525, the zoom every
-# `label_offset` in cities.py was measured at; pixel distance between two
-# cities is a function of the zoom alone, so moving the centre preserves all
-# fourteen offsets exactly while re-fitting per region would invalidate them
-# together. That is why this takes the region's midpoint rather than calling
-# fit_view again on its cities. REGIONS[i]["zoom"] exists for a region that
-# eventually needs its own, and setting it means re-measuring that region's
-# offsets - see cities.py.
+# RE-CENTRE ON THE REGION'S OWN MIDPOINT, KEEPING THE FITTED ZOOM. The heading
+# on this block used to read "RE-CENTRE, NEVER RE-ZOOM", which stopped being
+# true when the line above started fitting each region; `view.zoom` is now that
+# region's own fitted zoom, not the pinned 1.4525, and this block preserves it.
+#
+# WHAT IT ACTUALLY DOES is drop fit_view's `west_pad` from the centre, because
+# that padding lives in the fitted longitude and recomputing the midpoint
+# discards it - so a region sits about 12 px east of its fitted frame. That
+# reads like a bug and was removed on 2026-09-22; REMOVING IT MADE THINGS
+# WORSE and it was restored, measured rather than argued:
+#
+#   phone-width (343 px canvas) label clipping, total across all regions
+#     with this block:     137.4 px   (Vancouver 89.9 W, San Diego 16.9 E,
+#                                      Edmonton 14.5 E, Guadalajara 9.8 W,
+#                                      Montréal 6.3 E)
+#     without it:          159.5 px   (Guadalajara fixed, every east-edge
+#                                      label worse, and a NEW 7.9 px clip on
+#                                      Boston in United States East)
+#
+# The west pad only ever helps a label running WEST off its dot, and in four
+# of the five regions the label at risk runs EAST. So the 12 px eastward shift
+# is doing real work here by accident, and the honest fix is to say so rather
+# than to tidy the block away.
+#
+# FITTING THE BOX TO THE LABELS was the other candidate and is arithmetically
+# dead: padding the longitude box by each edge label's pixel width drops Canada
+# West from zoom 3.868 to the 1.0 floor, United States East from 3.085 to
+# 1.273, and the composite from 1.4525 to 1.0 - it removes every clip by
+# throwing away the per-region zoom the clipping is a side effect of. This is
+# cities.py's standing rule ("do NOT solve a label overflow by padding
+# fit_view's bounding box") holding in a second place.
+#
+# The residual clipping is the SAME accepted trade-off cities.py already
+# documents for the composite at phone width, where Washington D.C. is 39%
+# clipped and Philadelphia 28%, with the full text-link list beneath the map as
+# the navigation guarantee. Every clipped pill stays clickable.
 #
 # A NEW ViewState rather than `view.zoom = ...`: pydeck does not serialise
 # attributes mutated after construction, so the assignment form silently ships

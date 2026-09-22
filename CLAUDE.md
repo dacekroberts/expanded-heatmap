@@ -174,6 +174,22 @@ colliding. A single session does all of it and can ignore that file.
   and a working rule is in hand at the moment of typing. Same reasoning as
   `osm-rail`'s opening section, which exists because a warning in one city's
   config did not reach the next city.
+- **Resolve a conflicted append-only file with
+  `python scripts/merge_append_only.py DECISIONS.md`, never by rebuilding it
+  from one side.** Two sessions both append to the top of `DECISIONS.md`, so
+  every master/staging merge conflicts there and the conflict is never a real
+  disagreement. The tempting hand fix - take one side's file, re-append the
+  other side's new entries - **silently deletes entries**, because *a conflict
+  region shows where the two sides disagreed, not everything the other side
+  added*. On 2026-09-22 staging's "Japan is a BUILD" entry sat lower in the
+  file with no competing change beside it, so git auto-merged it outside the
+  markers and rebuilding from master's stage would have dropped it; an hour
+  later the France reversal arrived the same way, with the generated index as
+  the *only* conflict. The script edits just the conflict regions of git's own
+  merged file, dates each entry by the commit that introduced it so the two
+  sides interleave by real time, and refuses to write unless the result equals
+  the union of both sides' full stages. Run `scripts/decisions_index.py`
+  afterwards.
 
 ## Commands
 
@@ -185,6 +201,7 @@ python pipeline/drift_check.py [city_slug] [--jobs N]   # --jobs 4 does all 13 i
 python scripts/brief_check.py [city_slug]               # re-run a brief's claims against live sources
 python scripts/check_deploy_imports.py [--ref REF]      # clean clone + lean venv: run before ANY push touching app/
 python scripts/decisions_index.py [--check]             # refresh DECISIONS.md's index
+python scripts/merge_append_only.py DECISIONS.md [--dry-run]   # resolve an append-only merge conflict
 python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon>   # add --dry-run first
 .venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"
 ```

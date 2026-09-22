@@ -148,8 +148,33 @@ _MACRO_THEME_JS = """
 </script>
 """
 
-# Dark styling for the pydeck/mapbox controls (zoom buttons, attribution).
+# Styling for the pydeck/mapbox controls (zoom buttons, attribution).
 _MACRO_CONTROLS_CSS = """
+/* THE ATTRIBUTION STAYS OPEN AT EVERY WIDTH, AND THIS IS A LICENCE TERM RATHER
+   THAN A STYLE CHOICE. Below ~640 px mapbox-gl adds `mapboxgl-compact` to its
+   attribution control, which sets the inner text to `display: none` and leaves
+   an (i) button that reveals it on tap. Measured 2026-09-22: at a 375 px
+   viewport the macro map showed the button and no credit, while 768 and 1200
+   showed the full text.
+
+   That is precisely the arrangement this project has committed not to ship.
+   ODbL 1.0 requires the credit to stay visible, CLAUDE.md states it must not
+   sit "beneath UI, behind toggles, or off-screen", and render_site_notices()
+   below already refuses an st.expander for the same reason - a required notice
+   behind a toggle is not displayed. A library default is not an exemption, so
+   the compact behaviour is overridden rather than accepted.
+
+   Not scoped to `body.dark-base`: the obligation does not depend on the theme.
+   The city maps are Leaflet, whose attribution control has no compact mode, so
+   they need no equivalent. */
+[data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib.mapboxgl-compact {
+    min-height: 0; padding: 0 5px; border-radius: 3px; margin: 0 10px 10px 0; }
+[data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib.mapboxgl-compact
+    .mapboxgl-ctrl-attrib-inner { display: block !important; }
+/* The (i) toggle itself, and the pseudo-element some versions draw it with. */
+[data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib-button,
+[data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib.mapboxgl-compact::after {
+    display: none !important; }
 /* Invert the whole zoom group (white -> near-black, dark glyph -> light); the
    glyph is the button's own background image, so it cannot be inverted alone. */
 body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-group { filter: invert(0.9); }
