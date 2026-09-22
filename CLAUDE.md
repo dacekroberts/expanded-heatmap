@@ -24,6 +24,18 @@ are already banked there (endpoints, columns, CRS, traps, required notices, and
 an explicit list of what is still unknown). It is a cache, not a prerequisite:
 no brief means `add-city` Step 0 as usual, never waiting for one.
 
+**Is the city's rail coming from OpenStreetMap rather than GTFS? Use
+`osm-rail`** (`.claude/skills/osm-rail/`). Mexico City and Guadalajara both
+needed it - one because every agency host is unreachable, one because the only
+feed expired in 2023 and predates a line that now carries passengers - and most
+of the remaining shortlist (Taipei, São Paulo, Israel) is not GTFS either. It
+also carries the meta-rule that skill exists for: **a lesson written in the
+previous city's config does not reach the next city.** Mexico City's config
+warns in capitals never to match stations on a network label; Guadalajara's
+first query did exactly that and lost a whole line. Put a lesson where the next
+city must pass through it - a raising check in shared code, then a skill - not
+in a sibling city's comments.
+
 **Then run `python scripts/brief_check.py <city>` before writing any code for
 it.** A brief caches Step 0's mistakes as confidently as its findings: Edmonton
 inherited three wrong claims from its own, each an HTTP call from being caught,
