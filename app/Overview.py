@@ -127,7 +127,28 @@ HIGHLIGHT = [251, 191, 36, 255]
 DEFAULT_OFFSET = ("middle", 0, -22)
 offsets = (cities["label_offset"] if "label_offset" in cities
            else pd.Series([None] * len(cities), index=cities.index))
-offsets = offsets.map(lambda v: DEFAULT_OFFSET if v is None else tuple(v))
+
+
+def _offset(value):
+    """A city's (anchor, dx, dy), or the default when it declares none.
+
+    `v is None` IS NOT ENOUGH, and assuming it was took the whole Overview page
+    down from 2026-09-22 (commit 0fa3e55) until it was caught: `pd.DataFrame`
+    fills a key that some dicts omit with **float('nan')**, not None, and
+    `nan is None` is False - so `tuple(nan)` raised `TypeError: 'float' object
+    is not iterable` and every load showed a traceback instead of the map, the
+    city list, the caption and the site notices.
+
+    It survived because the crash needs a city with NO `label_offset` at all,
+    and for fifteen cities every entry happened to have one. Mexico City was
+    the first without. So this is scalar-safe rather than None-safe.
+    """
+    if value is None or (isinstance(value, float) and pd.isna(value)):
+        return DEFAULT_OFFSET
+    return tuple(value)
+
+
+offsets = offsets.map(_offset)
 cities["anchor"] = offsets.map(lambda o: o[0])
 cities["dx"] = offsets.map(lambda o: o[1])
 cities["dy"] = offsets.map(lambda o: o[2])

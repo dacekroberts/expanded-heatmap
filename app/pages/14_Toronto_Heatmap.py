@@ -12,7 +12,11 @@ import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.toronto.config import HEATMAP_HTML  # noqa: E402
-from components import render_city_nav, set_base_font  # noqa: E402
+from components import (  # noqa: E402
+    render_city_nav,
+    render_site_notices,
+    set_base_font,
+)
 
 st.set_page_config(page_title="Toronto Heatmap", page_icon="\U0001f5fa\ufe0f", layout="wide")
 set_base_font()
@@ -80,3 +84,9 @@ if HEATMAP_HTML.exists():
     st.iframe(HEATMAP_HTML, width=1000, height=650)
 else:
     st.info("No map yet. Run `python pipeline/toronto/step4_map.py` to generate it.")
+
+# The notices that publishing requires, on EVERY page rather than one -
+# Chicago's terms say "at the site where the software application ... can
+# be accessed". See components._NOTICES. This page did not call it until
+# 2026-09-22; the scaffold template omitted it.
+render_site_notices()

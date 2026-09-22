@@ -461,9 +461,22 @@ _NOTICES = [
     #
     # Not marked verbatim: INEGI prescribes the attribution FORM and the
     # disclosure OBLIGATION, but no sentence for the latter.
+    #
+    # NAMES EVERY MEXICAN CITY, and it did not until 2026-09-22. This notice
+    # read "Business locations for Mexico City are from DENUE" while Guadalajara
+    # was also built from DENUE (entidad 14), so that city's use was covered by
+    # no notice at all - and the build write-up had claimed the notice "names
+    # the register rather than the city", which was wrong about text in this
+    # file. §1(f) and §1(g) are per-USE duties, so a city the notice does not
+    # name is a city whose transformation is undisclosed.
+    #
+    # ADD EACH NEW MEXICAN CITY TO THIS SENTENCE. It is the one notice here
+    # that has to grow with the country, because DENUE is one register serving
+    # many cities - every other source in this list serves exactly one.
     ("INEGI",
      "Fuente: INEGI, Directorio Estadístico Nacional de Unidades Económicas "
-     "(DENUE). Business locations for Mexico City are from DENUE, published by "
+     "(DENUE). Business locations for Mexico City and Guadalajara are from "
+     "DENUE, published by "
      "the Instituto Nacional de Estadística y Geografía, used under the "
      "Términos de Libre Uso de la Información del INEGI. The data has been "
      "analysed and transformed by this project and not by INEGI: it is "
@@ -478,9 +491,10 @@ _NOTICES = [
     # satisfied for the basemap by every rendered map's "© OpenStreetMap
     # contributors"; this line exists so the credit visibly covers the LINE
     # GEOMETRY too, which is data rather than tiles.
-    ("OpenStreetMap (Mexico City rail)",
-     "Metro and Tren Ligero route geometry and station locations for Mexico "
-     "City are from OpenStreetMap, © OpenStreetMap contributors, available "
+    ("OpenStreetMap (Mexican rail)",
+     "Rail route geometry and station locations for Mexico City (Metro CDMX "
+     "and Tren Ligero) and Guadalajara (Tren Ligero) are from OpenStreetMap, "
+     "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
      "geometry; stations, rings and categories are this project's work.",
      False),

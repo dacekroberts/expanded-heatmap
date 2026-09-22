@@ -12,12 +12,16 @@ import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.guadalajara.config import HEATMAP_HTML  # noqa: E402
-from components import render_city_nav, set_base_font  # noqa: E402
+from components import (  # noqa: E402
+    render_city_nav,
+    render_site_notices,
+    set_base_font,
+)
 
-st.set_page_config(page_title="Guadalajara Heatmap", page_icon="\U0001f5fa\ufe0f", layout="wide")
+st.set_page_config(page_title="Guadalajara (Regional) Heatmap", page_icon="\U0001f5fa\ufe0f", layout="wide")
 set_base_font()
 
-render_city_nav("Guadalajara")
+render_city_nav("Guadalajara (Regional)")
 
 st.title("Guadalajara: commercial density around Tren Ligero station areas")
 
@@ -64,9 +68,9 @@ Fixed premises only. DENUE separately records semi-fixed units — stalls and
 street posts — and those are not shown, although street commerce is a real part
 of the region's retail.
 
-Unlike most cities here, this map has no whole-city layer. The rings and the
-three categories toggle from the layer control at top left, but there is no
-option to show every business in the region at once.
+Unlike most cities here, this map has no whole-city layer: there is no
+option to show every business in the region at once, only those near a
+station.
 
 Concentric ring boundaries and the three business categories (Retail, Food
 service and Personal services) are toggleable via the layer control in the top
@@ -86,3 +90,9 @@ if HEATMAP_HTML.exists():
     st.iframe(HEATMAP_HTML, width=1000, height=650)
 else:
     st.info("No map yet. Run `python pipeline/guadalajara/step3_map.py` to generate it.")
+
+# The notices that publishing requires, on EVERY page rather than one -
+# Chicago's terms say "at the site where the software application ... can
+# be accessed". See components._NOTICES. This page did not call it until
+# 2026-09-22; the scaffold template omitted it.
+render_site_notices()

@@ -341,6 +341,21 @@ CITIES = [
         # 14.53 north and 1.49 east, so the switcher moves the view vertically
         # and the pinned zoom is untouched.
         "in_default_view": False,
+        # SOUTH of its dot, AND THIS KEY MUST EXIST AT ALL. Omitting it took the
+        # whole Overview page down from 2026-09-22 until deploy-verify caught it:
+        # pd.DataFrame fills a key some entries omit with float('nan'), the
+        # offset resolver tested `v is None`, and `tuple(nan)` raised
+        # TypeError on every load - map, city list, caption and site notices all
+        # replaced by a traceback. Overview.py is scalar-safe now, but every
+        # city still declares one, because fifteen cities happening to have one
+        # is what hid the bug.
+        #
+        # Above its dot (the old default) this pill measured x338-426 y264-281
+        # and collided with BOTH "Los Angeles" (13x1 px) and
+        # "Guadalajara (Regional)" (19x0 px). At dy +22 it sits y308-325 and
+        # clears both - including the Los Angeles overlap, which predated this
+        # city and was reported as out of scope.
+        "label_offset": ("middle", 0, 22),
     },
     {
         # REGIONAL, like Miami and Vancouver: SITEUR's own description has
@@ -357,9 +372,15 @@ CITIES = [
         # Outside the United States frame, like Mexico City and every Canadian
         # city - see IN_DEFAULT_VIEW below.
         "in_default_view": False,
-        # West of its dot: Mexico City's pill sits east-north-east of here and
-        # the two are close at the pinned continental zoom.
-        "label_offset": ("end", -14, 0),
+        # West of its dot, ending AT the point rather than short of it. The
+        # first attempt, ("end", -14, 0), was measured by deploy-verify from
+        # real pixels as overlapping "Mexico City" by 19x0 px and, at 375 px,
+        # clipped 15 px by the west canvas edge - rendering as
+        # "uadalajara (Regional)". Dropping dx to 0 moves the pill 14 px east:
+        # it clears Mexico City outright and its west edge lands on-canvas at
+        # every width. Chosen against a projection model that reproduces four
+        # pixel-measured pills to within 2 px, not by eye.
+        "label_offset": ("end", 0, 0),
     },
 ]
 
