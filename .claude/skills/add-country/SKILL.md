@@ -335,6 +335,31 @@ multi-licence premises needs a dispatch rule - Boston's `FT+RF` question again.
   value in the tooltip, so cross-city comparison survives without hiding the
   source.
 - **Business names stay in their own language, always.**
+- **NORMALISE FOR JOIN KEYS, NEVER FOR DISPLAY.** The stdlib does all of this;
+  no package is needed, which matters because `requirements.txt` has to stay
+  lean for Streamlit Cloud.
+  - `unicodedata.normalize("NFKC", s)` fixes the **full-width numerals** in
+    Taiwanese addresses - `濱海一路２３號１樓` becomes `濱海一路23號1樓`, which
+    is the difference between a geocode match and a miss. It also folds
+    Japanese half-width katakana (`ﾏｸﾄﾞﾅﾙﾄﾞ` to `マクドナルド`) and leaves
+    Korean untouched.
+  - Accent folding for a join key is NFD plus a combining-mark filter:
+    `"".join(c for c in normalize("NFD", s) if not combining(c))` turns
+    `Montréal` into `Montreal`, `Plzeň` into `Plzen`, `Rīgas` into `Rigas`.
+  - **THE TRAP: NFKC CHANGES DISPLAY TEXT.** `Ⅳ号店` becomes `IV号店`,
+    `㈱丸井` becomes `(株)丸井`, `Ｃａｆｅ` becomes `Cafe`. Every one of those
+    is a shop's actual name being quietly rewritten. Normalise a *copy* used
+    for matching and keep the original for the tooltip - which is the rule
+    above, stated mechanically.
+
+- **The map's font stack is in `pipeline/theme.py` as `FONT_STACK`, and it
+  matters for non-Latin names.** A bare `sans-serif` lets the browser choose:
+  missing glyphs render as tofu boxes, and a substituted face changes line
+  metrics so a tooltip outgrows its box. The order is deliberate - browsers
+  fall through **per glyph**, so Latin/Greek/Cyrillic faces come first and CJK
+  after, because Segoe UI and Noto Sans carry no CJK glyphs and a Japanese
+  name therefore falls past them to Yu Gothic or Hiragino. Putting a CJK face
+  first would restyle every Latin name on every map.
 - **Search the catalogue in the local vocabulary.** Montréal was almost ruled
   out because `locaux-commerciaux` - a 28,621-premises survey that is the best
   source in the project - contains none of the words *business*, *licence*,
