@@ -342,6 +342,25 @@ CITIES = [
         # and the pinned zoom is untouched.
         "in_default_view": False,
     },
+    {
+        # REGIONAL, like Miami and Vancouver: SITEUR's own description has
+        # Línea 3 connecting Zapopan, Guadalajara and Tlaquepaque, and Línea 4
+        # connecting Tlajomulco de Zúñiga, Tlaquepaque and Guadalajara. The
+        # display name carries "(Regional)"; the page file keeps the plain city
+        # name, as Miami's does.
+        "name": "Guadalajara (Regional)",
+        "lat": 20.6597,
+        "lon": -103.3496,
+        "page": "pages/16_Guadalajara_Heatmap.py",
+        "blurb": "Tren Ligero (Líneas 1–4, across four municipios)",
+        "region": "Mexico",
+        # Outside the United States frame, like Mexico City and every Canadian
+        # city - see IN_DEFAULT_VIEW below.
+        "in_default_view": False,
+        # West of its dot: Mexico City's pill sits east-north-east of here and
+        # the two are close at the pinned continental zoom.
+        "label_offset": ("end", -14, 0),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

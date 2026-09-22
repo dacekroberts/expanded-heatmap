@@ -952,6 +952,40 @@ as a website** and is NOT the data licence. Both are stored, because reading a
 site-terms document as though it governed the data is what made New York look
 prohibited.
 
+**Guadalajara (Regional) needed NO new notice, which is a first.** Its
+business data is the same register under the same licence, and notice 8 names
+INEGI and DENUE rather than a city - so a second Mexican city is covered by the
+text already displayed. Its rail credit is OpenStreetMap's, likewise already
+displayed. Recorded because every previous city added at least one line to
+`render_site_notices()`, and the reason this one does not is that the notice
+was written around the SOURCE instead of the city.
+
+**Guadalajara's endpoints, verified 2026-09-22:**
+
+- **Businesses** — INEGI DENUE, entidad federativa **14 (Jalisco)**, keyless
+  bulk CSV: `https://www.inegi.org.mx/contenidos/masiva/denue/denue_14_csv.zip`
+  (39,432,220 bytes, real ZIP by magic bytes; member
+  `conjunto_de_datos/denue_inegi_14_.csv`; **latin-1**). Scoped in step 2 to
+  four municipios by DENUE's own `municipio` spelling — note **"San Pedro
+  Tlaquepaque"**, not the "Tlaquepaque" SITEUR's prose uses; matching the
+  operator's wording would keep zero rows.
+- **Rail** — OpenStreetMap via Overpass, route relations tagged
+  `network="Mi Tren"`, `route` in (`light_rail`, `subway`). ODbL 1.0.
+- **Boundaries** — OpenStreetMap `admin_level=6` municipio relations, bounded
+  by bbox. ODbL 1.0.
+
+**A REJECTED SOURCE, recorded with its date because a replaced URL that leaves
+no trace hides why:** the only Guadalajara rail feed in the Mobility Database
+(mdb **1925**, also contained in **2366**) downloads cleanly and is **not
+used**. Its own `feed_info.txt` declares `feed_end_date = **20230128**`, its
+`feed_publisher_name` is **Nubenautas** (`gtfs.studio`) rather than SITEUR, and
+it carries **three** light-rail routes where SITEUR publishes **four** —
+**Línea 4 opened 2025-12-15**, almost three years after the feed stopped.
+Using it would have omitted an operating line, 8 stations and 21 km.
+`https://www.siteur.gob.mx/` itself answers HTTP 200 and is the source for this
+project's gate-3 station counts (Línea 2: 10; Línea 4: 8), but publishes no
+GTFS.
+
 **Mexico City's rail geometry is OpenStreetMap, so notice 1 now covers DATA and
 not only basemap tiles.** Every `*.cdmx.gob.mx` host is unreachable, so the
 lines are drawn from OSM route relations (owner-approved 2026-09-22 as a

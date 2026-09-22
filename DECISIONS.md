@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**114 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**115 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Guadalajara built: the second city is what shows which settings were national](#2026-09-22---guadalajara-built-the-second-city-is-what-shows-which-settings-were-national)
 - [Mexico City built: the first city here whose rail is not GTFS, and the first outside North America's licence-register model](#2026-09-22---mexico-city-built-the-first-city-here-whose-rail-is-not-gtfs-and-the-first-outside-north-americas-licence-register-model)
 - [The region switcher shipped, and the fix was a deleted key](#2026-09-22---the-region-switcher-shipped-and-the-fix-was-a-deleted-key)
 - [CDMX approved from OpenStreetMap as a per-city exception, and it passes both rail invariants](#2026-09-22---cdmx-approved-from-openstreetmap-as-a-per-city-exception-and-it-passes-both-rail-invariants)
@@ -150,6 +151,111 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Guadalajara built: the second city is what shows which settings were national
+
+- **Built Guadalajara (Regional) as city 16, and it did what the second city in
+  a country is for: it separated the national settings from the local ones.**
+  196,907 DENUE units across four municipios -> 193,139 `Fijo` -> 117,698
+  storefront -> 117,454 mapped; **36,925 within a ring across 56 stations**.
+  Retail 79,098, Food service 23,226, Personal services 15,374. Map 3.24 MB.
+  What transferred from Mexico City untouched: the register, `scian.py`, the
+  licence, the encoding, the forbidden columns, the `Fijo` filter, the OSM line
+  loader. What did not: the state code, the CRS (32613 against 32614), the
+  municipio scope, and - the one nobody would have predicted - **the station
+  object itself**.
+
+- **REGIONAL, on the operator's own description rather than on convenience.**
+  SITEUR states that Linea 3 "conecta Zapopan, Guadalajara y Tlaquepaque" and
+  that Linea 4 connects "Tlajomulco de Zuniga, Tlaquepaque y Guadalajara", so a
+  Guadalajara-municipio build would have truncated two of four lines. Stations
+  land 35 in Guadalajara, 9 in Zapopan, 6 in San Pedro Tlaquepaque and 6 in
+  Tlajomulco de Zuniga, recorded per station in
+  `outputs/guadalajara/station_municipios.csv` as Miami's and Vancouver's
+  regional builds do. **Tonala is excluded** although DENUE holds 19,897 units
+  there: no line reaches it, and a municipio with no station contributes
+  businesses no ring can contain. Miami's and Vancouver's precedent; the
+  display name carries "(Regional)" and the page file keeps the plain name.
+
+- **THE GTFS FEED WAS FOUND, DOWNLOADED AND REJECTED, which is a different
+  finding from Mexico City's unreachable host.** The only Guadalajara rail feed
+  in the Mobility Database (mdb 1925, also inside 2366) declares
+  **`feed_end_date = 20230128`** in its own `feed_info.txt`, names
+  **Nubenautas** (`gtfs.studio`) as publisher rather than SITEUR, and carries
+  **three** light-rail routes. SITEUR publishes **four**: **Linea 4 opened
+  2025-12-15**, almost three years after the feed stopped. Building from it
+  would have drawn a map missing an operating line, 8 stations and 21 km, while
+  looking complete. That is the Toronto lesson with the staleness declared in
+  the artifact itself - which is exactly the case `add-country` says to catch by
+  reading `feed_end_date` rather than by distrusting mirrors in general. Owner
+  approved OSM as a second documented exception on 2026-09-22, on
+  incompleteness rather than unreachability, and asked for the snapshot date
+  and the resulting line exclusion to be named in the write-up. They are named
+  here, in `pipeline/guadalajara/config.py`, and on the city page.
+
+- **GATE 3 RUNS HERE, unlike Mexico City, and it passes.** `siteur.gob.mx`
+  answers HTTP 200, so the operator's published counts are readable:
+  **Linea 2, "10 estaciones subterraneas"; Linea 4, "Estaciones: 8"**. OSM's
+  route-relation membership gives 10 and 8. **Both match.** SITEUR publishes no
+  count for Lineas 1 or 3 on that page, so none is recorded - a partial gate 3
+  with its gaps named is worth more than a complete-looking one filled in from
+  memory, which is the trap Mexico City's config refuses by leaving
+  `STATION_COUNT_GATE_3 = None`.
+
+- **The same mistake twice in one day, one city apart, and the second time in a
+  query rather than a comment.** `pipeline/mexico_city/config.py` says in
+  capitals "MATCH ON THE MODE, NEVER ON THE NETWORK LABEL ALONE", written
+  because OSM tags Lecheria - a Ferrocarril Suburbano station - as
+  `network=STC Metro`. Guadalajara's first Overpass query was
+  `node["railway"]["network"="Mi Tren"]`, which returned 96 nodes and
+  **silently omitted every one of Linea 4's 8 stops**, whose nodes carry no
+  `network` tag at all because the line is nine months old. The result was a
+  49-station set with **zero stations in Tlajomulco de Zuniga** - the same
+  missing line as the rejected feed, reached a different way.
+  **The cause is not forgetfulness, it is placement:** the warning lived in the
+  previous city's config, which is not a file anyone opens while writing the
+  next one. Fixed structurally rather than with another comment - stations are
+  now derived from **route-relation membership**, which cannot omit a line that
+  has a relation and which hands gate 3 its per-line counts for free. Recorded
+  as a new skill, `.claude/skills/osm-rail/`, whose first section is where a
+  lesson belongs: a raising check in shared code, then a skill, then the shared
+  module, and a city's own config last and only for facts about that city.
+  `CLAUDE.md` points at it.
+
+- **Two more OSM traps, both caught by gates rather than by reading.** A
+  boundary query of `admin_level=6 name="Guadalajara"` with **no bbox** is a
+  global search: it matched **Guadalajara, SPAIN**, and the "keep the largest
+  polygon" tie-breaker then selected it deliberately, yielding a 26,814 km2
+  "municipio" against the real 151. The union-area gate raised. Two rules
+  written into the step: bound every name search geographically, and never
+  tie-break same-named boundaries by SIZE, because the wrong candidate is
+  usually a larger administrative unit. Separately, OSM carries
+  "Independencia" and "Independencia L3" as two stations **4 m apart** - one
+  station box under two names, caught by the spacing gate and merged by a
+  trailing-line-suffix alias, the project's third encounter with that collapse
+  mechanism after Calgary's suffixes and Toronto's conventions. Station spacing
+  went from a 4 m minimum to 91 m, median 766 m.
+
+- **The station object differs between two cities in one country**, which is
+  the sharpest argument yet for `pipeline/stations.py` sharing the CHECKS and
+  leaving the COLLAPSE per city. Mexico City has **184** `railway=station`
+  nodes; Guadalajara has **one**, and its stations are `railway=stop`
+  positions - 110 of them, collapsing to 56 names at almost exactly 2 per name.
+  Mexico City's whitelist finds one station in Guadalajara, and the failure
+  would have looked like a boundary or scope problem rather than a tagging one.
+
+- **Density is 659 per station and carries Mexico City's comparability
+  caveat**, for the same reason: DENUE is an establishment census rather than a
+  licence register, so the figure measures source completeness as much as
+  commercial density. Not comparable with Vancouver's 206 or Toronto's 81. Said
+  on the city page. Three buckets are 60.9% of fixed premises here against
+  Mexico City's 64.1%.
+
+- **`INEGI`'s notice already covered this city**, because the notice names the
+  register rather than the city - the first time a new city needed no new
+  entry in `render_site_notices()`. Its rail credit is OpenStreetMap's, already
+  displayed. Semifijo is 3,768 units here (1.9%) against Mexico City's 4.45%.
+  The whole-city heat layer is off, as Mexico City's is.
 
 ### 2026-09-22 - Mexico City built: the first city here whose rail is not GTFS, and the first outside North America's licence-register model
 

@@ -729,6 +729,43 @@ nouns — also trips it. The heuristic is tuned for English "SMITH JOHN" forms
 and does not transfer; Mexico City is this project's first non-English city.
 Nothing is filtered on that number.
 
+### Guadalajara (Regional) - a municipio with no station, and the same Spanish-name artefact
+
+**Everything excluded in Mexico City is excluded here, for the same reasons and
+from the same register:** Semifijo premises (3,768 units, 1.9% - a smaller
+share than Mexico City's 4.45%, and excluded on the same reasoning regardless),
+SCIAN **469** nonstore retail, and SCIAN **812410** parking. Food service is
+anchored on **722** and personal services on **812**, so 721 accommodation, 811
+repair and 813 associations never enter. See the Mexico City section above for
+the measurements behind each.
+
+**Tonalá is excluded, and it is the only whole municipio this project has left
+out of a region it could have included.** DENUE holds **19,897** economic units
+there and they are already downloaded - entidad 14 is the whole of Jalisco. No
+Tren Ligero line reaches Tonalá, and a municipio with no station contributes
+businesses that no ring can ever contain, so including it would have inflated
+the city total while changing no ring. The four municipios kept -
+Guadalajara, Zapopan, San Pedro Tlaquepaque and Tlajomulco de Zúñiga - are the
+ones SITEUR's own line descriptions name.
+
+**The whole-city heat layer is OFF, as Mexico City's is.** The rings and the
+three categories toggle from the layer control; there is no option to show
+every business in the region at once.
+
+**An operating line is NOT excluded, and it nearly was.** The only GTFS feed
+available for Guadalajara expired on 28 January 2023 and contains three of the
+four lines - Línea 4 opened on 15 December 2025. Building from it would have
+silently omitted that line, its 8 stations and 21 km of route. The geometry
+comes from OpenStreetMap instead, which has all four. Recorded here because a
+missing line is the most consequential kind of omission a map like this can
+have, and this one was avoided rather than accepted.
+
+**The person-like reading is an artefact here too.** 30.7% of pins trip
+`scripts/check_personal_exposure.py`'s heuristic, against Mexico City's 32.2%,
+and for the same reason: it is tuned for English "SMITH JOHN" forms and the
+Spanish shop-sign convention pairs a trade type with a given name. Nothing is
+filtered on that number.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

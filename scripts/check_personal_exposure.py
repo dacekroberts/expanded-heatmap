@@ -244,6 +244,22 @@ REGISTRIES = {
     "mexico_city": dict(raw=None, trade=None, owner=None,
                         processed="businesses_clean.csv",
                         address=None),
+    # Guadalajara is the same register as Mexico City, so the same structural
+    # position applies unchanged: no registrant-name column is ever loaded,
+    # INEGI withholds `raz_social` for a persona física, and `nom_estab` is the
+    # shopfront sign. Address is None for the same reason - the clean CSV
+    # carries none, and step 2 measures `numero_int` (7.1% here) without
+    # publishing it. Read that as a measurement gap, not a pass.
+    #
+    # EXPECT A HIGH person-like READING AND DO NOT ACT ON IT. Mexico City's was
+    # 32.2%, and a hand-sample of 26 found none that were a person presented as
+    # a person - `looks_personal` is tuned for English "SMITH JOHN" forms and
+    # misfires on the Spanish convention of trade type plus a given name
+    # (ABARROTES LIZ, ESTETICA MARIFER), and even on two common nouns
+    # (COCINA ECONOMICA).
+    "guadalajara": dict(raw=None, trade=None, owner=None,
+                        processed="businesses_clean.csv",
+                        address=None),
 }
 
 # Unit designators that suggest a residence, as opposed to a commercial suite.
