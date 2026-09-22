@@ -1,0 +1,70 @@
+Ayuntamiento de Madrid - Condiciones generales para la modalidad general de puesta a disposicion de los documentos reutilizables
+Source: https://datos.madrid.es/pages/condiciones-generales-ayuntamiento-de-madrid
+Retrieved: 2026-09-22
+Stored by: expanded-heatmap (docs/licenses/README.md explains why)
+==============================================================================
+
+Condiciones generales para la modalidad general de puesta a disposición de los documentos reutilizables del Ayuntamiento de Madrid - Portal de datos abiertos del Ayuntamiento de Madrid
+
+Ir al contenido
+
+-->
+-->
+
+×
+Renombre la jerarquía
+
+Anterior valor
+
+...
+
+Nuevo valor
+
+Cancelar
+Confirmar
+
+Inicio
+
+Condiciones generales para la modalidad general de puesta a disposición de los documentos reutilizables del Ayuntamiento de Madrid
+
+Condiciones generales para la modalidad general de puesta a disposición de los documentos reutilizables del Ayuntamiento de Madrid
+
+Obligatoriedad de las condiciones generales
+
+Las presentes condiciones generales obligan a cualquier persona y/o empresa que reutilice datos por el mero hecho de hacer uso de los documentos sometidos a ellas.
+
+Autorizaci&#243;n de reutilizaci&#243;n y cesi&#243;n no exclusiva de derechos de propiedad intelectual
+
+Las presentes condiciones generales permiten la reutilizaci&#243;n de los&#160; documentos y datos sometidos a ellas para fines comerciales y no comerciales . Se entiende por reutilizaci&#243;n el uso de documentos que obran en poder del Ayuntamiento de Madrid y de los dem&#225;s organismos y entidades adscritos a &#233;l, por personas f&#237;sicas o jur&#237;dicas, con fines comerciales o no comerciales, siempre que dicho uso no constituya una actividad administrativa p&#250;blica. Por ejemplo, la reutilizaci&#243;n autorizada incluye actividades como la copia, difusi&#243;n, modificaci&#243;n, adaptaci&#243;n, extracci&#243;n, reordenaci&#243;n y combinaci&#243;n de la informaci&#243;n.
+
+El concepto de documento es el establecido en el apartado 2 del art&#237;culo 3 de la Ley 37/2007, de 16 de noviembre, sobre Reutilizaci&#243;n de la Informaci&#243;n del Sector P&#250;blico, por lo que comprende toda informaci&#243;n cualquiera que sea su soporte material o electr&#243;nico as&#237; como su forma de expresi&#243;n gr&#225;fica, sonora o en imagen utilizada, incluyendo, en consecuencia, tambi&#233;n los datos en sus niveles m&#225;s desagregados o &#8220;en bruto&#8221;.
+
+Esta autorizaci&#243;n conlleva, asimismo, la cesi&#243;n gratuita y no exclusiva de los derechos de propiedad intelectual, en su caso, correspondientes a tales documentos, autoriz&#225;ndose la realizaci&#243;n de actividades de reproducci&#243;n, distribuci&#243;n, comunicaci&#243;n p&#250;blica o transformaci&#243;n, necesarias para desarrollar la actividad de reutilizaci&#243;n autorizada, en cualquier modalidad y bajo cualquier formato, para todo el mundo y por el plazo m&#225;ximo permitido por la Ley.
+
+Condiciones generales para la reutilizaci&#243;n
+
+Son de aplicaci&#243;n las siguientes condiciones generales para la reutilizaci&#243;n de los documentos sometidos a ellas:
+
+Est&#225; prohibido desnaturalizar el sentido de la informaci&#243;n.
+
+Debe citarse la fuente de los documentos objeto de la reutilizaci&#243;n. Esta cita podr&#225; realizarse de la siguiente manera: "Origen de los datos: Ayuntamiento de Madrid (o, en su caso, &#243;rgano administrativo, organismo o entidad de que se trate)"
+
+Debe mencionarse la fecha de la &#250;ltima actualizaci&#243;n de los documentos objeto de la reutilizaci&#243;n, siempre&#160;y cuando estuviera incluida en el documento original.
+
+No se podr&#225; indicar, insinuar o sugerir que el Ayuntamiento de Madrid participa, patrocina o apoya la reutilizaci&#243;n que se lleve a cabo con la informaci&#243;n.
+
+Deben conservarse, no alterarse ni suprimirse los metadatos sobre la fecha de actualizaci&#243;n y las condiciones de reutilizaci&#243;n aplicables incluidos, en su caso, en el documento puesto a disposici&#243;n para su reutilizaci&#243;n.
+
+En caso de informaci&#243;n anonimizada por protecci&#243;n de datos personales u otros motivos,&#160; est&#225; expresamente prohibido realizar labores de re-identificaci&#243;n de personas &#160;a partir de estos datos y otras fuentes de datos e informaci&#243;n posibles, pasadas, actuales o futuras.
+
+Exclusi&#243;n de responsabilidad
+
+La utilizaci&#243;n de los conjuntos de datos se realizar&#225; por parte de las personas y/o empresas que reutilizacen datos, &#160;bajo su propia cuenta y riesgo, correspondi&#233;ndoles en exclusiva a ellos responder frente a terceros por da&#241;os que pudieran derivarse de ella.
+
+El Ayuntamiento de Madrid no ser&#225; responsable del uso que de su informaci&#243;n hagan las personas y/o empresas que reutilicen datos, ni tampoco de los da&#241;os sufridos o p&#233;rdidas econ&#243;micas que, de forma directa o indirecta, produzcan o puedan producir perjuicios econ&#243;micos, materiales o sobre datos, provocados por el uso de la informaci&#243;n reutilizada.
+
+El Ayuntamiento de Madrid no garantiza la continuidad en la puesta a disposici&#243;n de los documentos reutilizables, ni en contenido ni en forma, ni asume responsabilidades por cualquier error u omisi&#243;n contenido en ellos.
+
+Responsabilidad de las personas y/o empresas que reutilicen datos
+
+El agente reutilizador se halla sometido a la normativa aplicable en materia de reutilizaci&#243;n de la informaci&#243;n del sector p&#250;blico, incluyendo el r&#233;gimen sancionador previsto en el art&#237;culo 11 de la Ley 37/2007, de 16 de noviembre, sobre Reutilizaci&#243;n de la Informaci&#243;n del Sector P&#250;blico.
