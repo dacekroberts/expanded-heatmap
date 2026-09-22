@@ -250,6 +250,19 @@ because re-downloading a business export changes every count in
 filters, which is exactly what its provenance row says. Reading the comment is
 the step, not deleting the constant.
 
+### 5a. Promises to a reader that nobody can keep
+
+A page that says "the excluded stations are listed in
+`outputs/montreal/excluded_stations.csv`" has made a claim on behalf of someone
+who will go and look. `outputs/` is committed and `data/` is not, so a city
+added in a hurry can cite a file that never leaves the machine it was built
+on - and nothing about the page looks wrong from the inside.
+
+`check_provenance.py` check J resolves every `outputs/...` path named in a page
+or a doc and fails if it is missing OR merely uncommitted. It was clean when
+written, across 17 paths; it exists for the seventeenth city rather than for
+the sixteen that are already right.
+
 ### 8a. Compliance artefacts that quietly stop being evidence
 
 A hash, a stored document, a recorded date - these exist so a claim can be
@@ -326,7 +339,7 @@ it needs that session's context.
 
 | Check | What it decides |
 |---|---|
-| `python scripts/check_provenance.py [--strict]` | every built city has rows in all three provenance tables; every URL its `config.py` **resolves to** is recorded; notices and `_NOTICES` are in bijection; notice numbers unique and contiguous; **`city_master_list.md`'s built counts match `app/cities.py`**, total and per country; **every `item N` citation still points at the notice it names**; **every stored licence's SHA-256 matches**; **every relative markdown link resolves**; **every table row renders and matches its header's width** |
+| `python scripts/check_provenance.py [--strict]` | every built city has rows in all three provenance tables; every URL its `config.py` **resolves to** is recorded; notices and `_NOTICES` are in bijection; notice numbers unique and contiguous; **`city_master_list.md`'s built counts match `app/cities.py`**, total and per country; **every `item N` citation still points at the notice it names**; **every stored licence's SHA-256 matches**; **every relative markdown link resolves**; **every table row renders and matches its header's width**; **every `outputs/` file named in prose exists and is committed** |
 | `python scripts/decisions_index.py --check` | `DECISIONS.md`'s generated index is current |
 | `python pipeline/drift_check.py` | committed `outputs/` still match what the pipeline produces |
 | `python scripts/check_deploy_imports.py` | a clean clone imports under the lean venv |

@@ -42,6 +42,15 @@ WHAT IT CHECKS
   D. Notice numbers are unique and contiguous from 1. They were neither: the
      list carried two item 8s and two item 15s from 2026-09-21 to 2026-09-22,
      because each country's block was appended without renumbering.
+  J. Every `outputs/...` file NAMED in a page's prose or in the docs exists and
+     is committed. These are not files the app opens - it reads one
+     `heatmap.html` per city through an iframe - they are **promises to a
+     reader**: "the stations excluded are listed in
+     `outputs/montreal/excluded_stations.csv`". `outputs/` is committed and
+     `data/` is not, so a city added in a hurry can cite a file that never
+     leaves the machine it was built on, and nothing about the page looks
+     wrong. Clean when written, 17 paths; it exists for the seventeenth city.
+
   I. Every markdown table in the provenance docs actually renders: no row
      orphaned from its header by intervening prose, and no row whose cell
      count differs from its header's. **Markdown fails silently here** - an
@@ -259,6 +268,43 @@ def displayed_notices():
     start = src.index("_NOTICES")
     end = src.index("def ", start)
     return re.findall(r'^\s{4}\("([^"]+)"', src[start:end], re.M)
+
+
+def check_cited_outputs():
+    """J: outputs/ files promised in prose exist and are committed."""
+    import subprocess
+    try:
+        tracked = set(subprocess.run(
+            ["git", "ls-files"], cwd=ROOT, capture_output=True,
+            text=True, check=True).stdout.split("\n"))
+    except (OSError, subprocess.CalledProcessError):
+        return ["could not run `git ls-files` to check what is committed"]
+
+    cited = {}
+    globs = ("app/**/*.py", "docs/**/*.md", "CLAUDE.md")
+    for g in globs:
+        for q in sorted(ROOT.glob(g)):
+            # DECISIONS.md is excluded everywhere for the same reason; a past
+            # entry may name a file that has since been renamed, and that is
+            # an accurate record rather than a broken promise.
+            if not q.is_file() or q.name == "DECISIONS.md":
+                continue
+            for m in re.finditer(r"outputs/[A-Za-z0-9_./-]+\.(?:csv|html|json)",
+                                 read(q)):
+                cited.setdefault(m.group(0), set()).add(
+                    q.relative_to(ROOT).as_posix())
+
+    problems = []
+    for path in sorted(cited):
+        where = sorted(cited[path])[:2]
+        if not (ROOT / path).exists():
+            problems.append(f"{path}: named in {where} but does not exist")
+        elif path not in tracked:
+            problems.append(
+                f"{path}: named in {where}, exists locally but is NOT "
+                f"committed - a reader cloning this repository will not find "
+                f"it")
+    return problems
 
 
 TABLE_DOCS = ("docs/data_sources.md", "docs/excluded_categories.md",
@@ -591,6 +637,14 @@ def main():
               f"({len(soft)} unverifiable)")
     for s in soft:
         print(f"      note: {s}")
+
+    # --- J, outputs/ files promised in prose ---------------------------------
+    cited = check_cited_outputs()
+    if cited:
+        failures.append(("cited outputs", cited))
+    else:
+        print("  outputs: every outputs/ file named in prose exists and is "
+              "committed")
 
     # --- I, tables that actually render ---------------------------------------
     tbl = check_tables()
