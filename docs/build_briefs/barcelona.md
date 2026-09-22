@@ -159,7 +159,7 @@ Bbox `41.30,2.03,41.50,2.30`.
 
 | | Count |
 |---|---|
-| Rail route relations | **54** — subway **28**, tram **22**, funicular **4** |
+| Rail route relations | **54** — subway **28**, tram **20**, funicular **6** |
 | Named | **54 / 54** |
 | With a `colour` tag | **54 / 54** |
 | Flagged construction/proposed | 0 |
@@ -190,9 +190,51 @@ must stay 14. Same query shape, opposite correct answer — which is why the
 rule is *look at the refs*, never *count the relations* and never *assume a
 merge*.
 
-Tram `T1`–`T6` and funiculars `FM`, `FV` are separate decisions: this project
-has drawn tram networks before, but whether Barcelona's belong on a *metro*
-density map has not been decided.
+### ✅ SETTLED 2026-09-22 — scope is decided by the operator's own `network` tag
+
+**Two counts above were wrong, and the error hid because the TOTAL was right.**
+Re-measured with an explicit `route=funicular` query: the split is tram **20**
+and funicular **6**, not tram 22 and funicular 4. Two relations sat in the
+wrong column and 54 still summed to 54, so nothing flagged it. **A breakdown
+that adds up is not a breakdown that is correct** — re-run the parts, not the
+total.
+
+**Funiculars are directional pairs — 6 relations, 3 refs.** So Barcelona
+carries BOTH traps at once, in opposite directions:
+
+| | Relations | Refs | Rule |
+|---|---|---|---|
+| Subway | 28 | **14** | **MUST NOT collapse** — L9/L10 segments do not meet |
+| Funicular | 6 | **3** | **MUST collapse** — plain directional pairs |
+| Tram | 20 | 6 | T1–T6 |
+
+Madrid's trap and the mirror-image trap the section above warns about are the
+same city's problem here. Which is exactly why the rule is *look at the refs*
+rather than count relations — it survives both.
+
+**The scope test, measured rather than asserted: draw a line if its `network`
+tag names a metro network.** The domestic operators have already made this
+call and published it:
+
+| Line | Operator | `network` | Drawn |
+|---|---|---|---|
+| L1–L12 (14 refs) | TMB | `Metro de Barcelona` | ✅ |
+| **FM** Montjuïc | **TMB** | **`Metro de Barcelona`** | ✅ |
+| **FV** Vallvidrera | **FGC** | **`Metro del Vallès`** | ✅ |
+| **FT** Tibidabo | **Barcelona de Serveis Municipals** | **none** | ❌ |
+| T1–T6 | TRAM | `Trambaix`, `Trambesòs` | ❌ |
+
+So **16 lines are drawn**: the 14 metro refs plus FM and FV. FM runs from
+Paral·lel, an L2/L3 interchange, and TMB publishes it as Metro; FV is route
+`FV` in FGC's own GTFS on its Metro del Vallès network. FT is operated by the
+municipal *parks and services* company — it is access to the Tibidabo funfair
+— and carries no network tag at all. Trams are their own two networks, neither
+a metro, so the same test excludes them without a separate judgment.
+
+⚠️ **`route_type=7` alone would have been wrong.** FGC's three GTFS funicular
+routes are `FV`, `Cremallera Montserrat` and `Cremallera de Núria` — two rack
+railways 50 km and 150 km from Barcelona. The mode tag does not know where the
+city ends.
 
 ---
 
@@ -240,17 +282,34 @@ confirmation rather than an unknown.
 
 ## Still unknown — the honest list
 
-- **Which census year** (above) — recency vs completeness, owner's call.
-- **TMB account or OSM** (above).
+### Decided 2026-09-22 — owner's calls, so the build is unblocked
+
+- **Census year: 2022**, complete at 66,088 rows (58,908 `Actiu`), **with the
+  survey year stated on the page where the source is credited.** An incomplete
+  map is wrong in a way a reader cannot detect; a dated one is honest if it is
+  labelled. This is also what satisfies Act 37/2007 Art. 8's *"most up-to-date
+  data"* wording — as a *stated* decision, not a silent one.
+- **Rail: OSM**, and as the better source rather than the fallback.
+- **Scope: 16 lines** — the 14 metro refs plus funiculars FM and FV, by the
+  operators' own `network` tag. Trams and FT excluded. See above.
+- **Mall and gallery interiors: KEPT.** A mall near a station is real
+  commercial density a rider can reach, and excluding it would import a
+  judgment none of the other 16 cities makes, so cross-city comparison stays
+  honest. `SN_CComercial`, `SN_Galeria` and `SN_Mercat` are recorded as
+  available-but-unused rather than forgotten — they are the only flags of their
+  kind in the project, and a later decision can use them.
+
+### Genuinely still open
+
+- ⚠️ **Notify the Barcelona City Council**, which obligation 3 of the licence
+  requires of every derived project. **An affirmative act owed to the
+  publisher, not a line of page text, and no built city has needed one.**
+  Owner action; pairs with the item below since both pages are CAPTCHA-walled.
 - **Re-confirm the terms on the LIVE page** before publishing — they were
   read from a 2025 archive, and they permit their own amendment.
-- Whether trams (T1-T6) and the two funiculars belong on a metro-density
-  map. OSM carries them; nobody has decided.
-- Whether mall/gallery interiors (`SN_CComercial`, `SN_Galeria`) should be
-  excluded from a street-level map. The flags make it possible; nobody has
-  decided whether it is right.
 - `check_personal_exposure.py` against a Catalan register. `Nom_Local` is a
-  trade name, which is the safe field.
+  trade name and 100% populated, which is the safe field — so this is expected
+  to be clean, but expected is not measured.
 
 ```brief-checks
 [

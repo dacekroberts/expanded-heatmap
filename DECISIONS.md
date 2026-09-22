@@ -16,11 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**135 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**136 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
 - [A third session role: auditing what the forward-facing sessions leave behind](#2026-09-22---a-third-session-role-auditing-what-the-forward-facing-sessions-leave-behind)
+- [Barcelona's four owner decisions settled, and its brief's OSM breakdown corrected](#2026-09-22---barcelonas-four-owner-decisions-settled-and-its-briefs-osm-breakdown-corrected)
 - [Madrid's provenance recorded before its wiring lands, and the transit table stopped calling itself GTFS](#2026-09-22---madrids-provenance-recorded-before-its-wiring-lands-and-the-transit-table-stopped-calling-itself-gtfs)
 - [Mexico City and Guadalajara promoted into the provenance tables, and OSM rail gets its own subsection rather than a GTFS row](#2026-09-22---mexico-city-and-guadalajara-promoted-into-the-provenance-tables-and-osm-rail-gets-its-own-subsection-rather-than-a-gtfs-row)
 - [The unread-source table did not list an unread source, and two more hand-kept counts were wrong](#2026-09-22---the-unread-source-table-did-not-list-an-unread-source-and-two-more-hand-kept-counts-were-wrong)
@@ -221,6 +222,77 @@ onwards; the early ones are split by phase rather than by hour.
   five-hour window, not on doubt; the design is settled and it is the test loop
   that costs.
 
+### 2026-09-22 - Barcelona's four owner decisions settled, and its brief's OSM breakdown corrected
+
+- **Settled Barcelona's census year at 2022 (66,088 rows, 58,908 `Actiu`) with
+  the survey year stated on the page beside the source credit, rejecting the
+  fresher 2024 resource as geographically incomplete.** The 2024 file sums
+  exactly to its own declared 44,000, so nothing is truncated, but the
+  shortfall against 2022 is wildly uneven by district: Sant Andreu -83%, Nou
+  Barris -76%, Horta-Guinardo -69%, against Ciutat Vella -5% and Eixample -16%.
+  A census that narrowed its definition would shrink roughly evenly; this
+  covers the central districts and barely touches the periphery. The rejected
+  alternative is two years fresher and wrong in the dangerous direction - a map
+  built on it would show outer stations as commercially dead, which is what a
+  reader half expects anyway, so nothing would look broken. The publisher's own
+  data dictionary is headed "ESTRUCTURA RECURS DE L'ANY 2022". Stating the
+  vintage is also what reconciles the choice with Spanish Act 37/2007 Art. 8's
+  "most up-to-date data" wording, which the licence incorporates expressly: a
+  four-year-old survey published as a stated decision, not silently.
+
+- **Settled Barcelona's drawn scope at 16 lines - the 14 metro refs plus
+  funiculars FM and FV - using the operators' own `network` tag as the test
+  rather than a judgment about what counts as a metro.** Measured via Overpass
+  over bbox 41.30,2.03,41.50,2.30: FM (Montjuic) is operated by TMB and tagged
+  `network=Metro de Barcelona`; FV (Vallvidrera) is operated by FGC, tagged
+  `network=Metro del Valles`, and is route `FV` in FGC's own GTFS. Both are
+  drawn. FT (Tibidabo) is operated by Barcelona de Serveis Municipals, the
+  municipal parks and services company, and carries no `network` tag at all -
+  it is access to the Tibidabo funfair, and is excluded. The same test excludes
+  trams without a separate decision: T1-T6 are tagged `Trambaix` and
+  `Trambesos`, neither a metro network. Rejected the alternative of deciding by
+  mode, because `route_type=7` alone would have been wrong in both directions -
+  FGC's three GTFS funicular routes are FV plus `Cremallera Montserrat` and
+  `Cremallera de Nuria`, rack railways 50 km and 150 km from Barcelona.
+
+- **Kept mall, gallery and municipal-market interiors in Barcelona's count
+  rather than excluding them with the site-type flags the census uniquely
+  supplies.** A mall near a station is real commercial density a rider can
+  reach, and excluding it would make Barcelona measure something different from
+  the other sixteen cities while the map invites comparison between them.
+  `SN_CComercial`, `SN_Galeria` and `SN_Mercat` are recorded in the brief as
+  available-but-unused rather than dropped, since no other city in the project
+  can make this distinction at all and a later decision may want them.
+
+- **Corrected Barcelona's brief: the OSM relation breakdown was tram 22 /
+  funicular 4, and the truth is tram 20 / funicular 6.** Found by re-running an
+  explicit `route=funicular` query against the same bbox, which returned 6
+  where the brief said 4. The error survived because the TOTAL was right - two
+  relations sat in the wrong column and 54 still summed to 54 - so no
+  arithmetic check on the table could have caught it. **A breakdown that adds
+  up is not a breakdown that is correct.**
+
+- **Found that Barcelona carries BOTH of the OSM relation traps at once, in
+  opposite directions, which is why "look at the refs" is the rule rather than
+  "collapse" or "do not collapse".** Its 28 subway relations give 14 refs that
+  must NOT be merged - L9 and L10 each run as two disconnected segments, so
+  merging L9N with L9S would draw track that does not exist - while its 6
+  funicular relations are plain directional pairs giving 3 refs that MUST be
+  merged. Madrid's trap (28 relations, 13 lines, directional pairs) and its
+  mirror image live in the same city, and the brief warned about only one of
+  them in bold while silently miscounting the other.
+
+- **Recorded that no `osm_route_refs` check kind exists, so every OSM count
+  claim in every brief is currently unverifiable by `brief_check.py`.** The
+  registry in `scripts/brief_check.py` holds fourteen kinds covering HTTP,
+  ArcGIS, GTFS, CKAN, Socrata, GeoJSON and UTM derivation, and none reaches
+  Overpass - which is exactly why Barcelona's miscount sat in a brief that
+  reports 9/9. Four cities now take rail from OSM (Mexico City, Guadalajara,
+  Madrid, Barcelona), so this is a standing gap rather than one city's. Not
+  built here: it needs the three-mirror handling `pipeline/countries/mexico.py`
+  documents, including the rule that an empty 200 is a host failure and must
+  never be cached, and starting it against a session reset would have left it
+  half-written.
 ### 2026-09-22 - Madrid's provenance recorded before its wiring lands, and the transit table stopped calling itself GTFS
 
 - **`spain-app-wiring` is deliberately held off master and was NOT merged.** Its
