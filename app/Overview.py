@@ -266,8 +266,30 @@ def fit_view(lats, lons, width_px=320, height_px=460, fill=0.7, west_pad=0.12):
 # the US set pins the zoom at 1.4525 permanently. Cities outside the frame are
 # still drawn - they are simply found by zooming out, and they are all in the
 # link list below.
-view = fit_view([c["lat"] for c in IN_DEFAULT_VIEW],
-                [c["lon"] for c in IN_DEFAULT_VIEW])
+#
+# EACH REGION IS FITTED TO ITS OWN CITIES, which SUPERSEDES the 2026-09-22
+# decision that the switcher must "re-centre and never re-zoom".
+#
+# That rule existed to protect the pixel `label_offset` values in cities.py,
+# which were measured at the United States zoom of 1.4525 - the worry being
+# that a different zoom would change the pixel distance between cities and
+# invalidate all of them at once. Measured before changing it, and the worry
+# only runs one way: zooming IN spreads cities apart, so collisions get BETTER,
+# not worse. At each region's own fitted zoom - Canada West 3.868, Canada East
+# 4.596, Mexico 5.060 - there are zero label collisions and zero pills covering
+# their own marker. Zooming OUT would still be dangerous, and nothing here
+# does that.
+#
+# The United States view is UNCHANGED, and by construction rather than by
+# luck: IN_DEFAULT_VIEW is exactly the set of cities tagged "United States", so
+# fitting that region reproduces zoom 1.4525 and the same centre.
+#
+# Why it changed: re-centring alone left Canada and Mexico drawn at continental
+# zoom, which showed the same near-empty frame as the United States view and
+# gave a reader almost nothing. Vancouver to Montréal is ~3,300 km - wider than
+# the contiguous United States - which is also why Canada is split west/east.
+_here = _region_cities[region]
+view = fit_view([c["lat"] for c in _here], [c["lon"] for c in _here])
 
 # RE-CENTRE, NEVER RE-ZOOM. `view.zoom` above is 1.4525, the zoom every
 # `label_offset` in cities.py was measured at; pixel distance between two
