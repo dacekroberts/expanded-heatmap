@@ -183,6 +183,45 @@ Two buckets are confirmed; the third is not.
 | **India** | `data.gov.in` requires an API key | **UNPROBED** |
 | **Egypt** | No open API found at CAPMAS | **UNPROBED** |
 
+#### HARD-LINE RE-RUN of the unreached 15, multiple strategies
+
+The nine never-reached plus the four route-only countries, re-probed with
+strategies chosen against what had already failed: full browser headers with a
+`Referer` for the 403s, `www.`/bare and http/https variants, alternative API
+shapes (CKAN alt paths, udata, Entryscape, keyless back ends), and the
+**direct register host** instead of the national portal.
+
+**Six countries gained a working route that did not exist before.** None of
+them gained a usable register.
+
+| Country | What the strategies found | Verdict |
+|---|---|---|
+| **Slovakia** | **Route opened** — `api.statistics.sk/rpo/v1/search` returns **500 records** per query, each with `addresses` (street, buildingNumber, postalCode, municipality + code) and `fullNames` carrying validity history | **FAILS — no activity classification.** Record keys are `id`, `identifiers`, `fullNames`, `addresses`, `establishment`, `sourceRegister`. **Latvia's defect exactly**: addressed and unclassifiable |
+| **Czechia** | **RZP opened** — `/ekonomicke-subjekty-rzp/{ico}` returns `adresySubjektu`, `zivnostiStav` counts, and **`zivnosti` with `predmetPodnikani`** — an activity description per licence | **Closest near-miss.** It *has* classification. But it is **per-ICO lookup with no bulk export**, the address is the registered seat, and the `provozovny` (establishment) side is not in the response |
+| **Denmark** | **Route opened** — `admin.opendata.dk` CKAN, and **the DAWA national address API works and returns coordinates** (a free national geocoder) | **Copenhagen is absent.** The only CVR *produktionsenheder* dataset published is **Aarhus Kommune's** (XML/XLSX/ODS). Production units are published voluntarily per municipality, and the metro city does not |
+| **India** | **Keyless catalogue opened** — `api.data.gov.in/lists` exposes **288,011 resources** with no API key | **Aggregate, and the wrong cities.** Hits are *"Shops And Establishment Licence : Ahmedabad : 2015-16 to 2018-19"* and *"Shop and Esta Statistical Details : Rajkot"* — multi-year statistical summaries for cities with no metro, not premises registers for Hyderabad or Kochi |
+| **Croatia** | **Route opened** — the working path is `/ckan/api/3/action/`, not `/api/3/action/` | **Statistics only** — *Trgovina na malo* (retail trade) as HTML and XLSX |
+| **Poland** | `api.dane.gov.pl/1.4/datasets` works | **No register.** Queries fuzzy-match to tourist organisations, vaccination points and financial statements. CEIDG and REGON both require keys |
+| **Germany** | `ckan.govdata.de` **and** Berlin's `datenregister.berlin.de` both work | **No premises register.** 18 Berlin hits for *Gewerbe* are all statistical XLS — turnover, broadband, load profiles |
+| **Singapore** | v2 API works | **Inconclusive** — page 1 of the catalogue holds 10 datasets, none business-related. Not paginated through |
+| **Estonia** | `avaandmed.eesti.ee/api/datasets` answers | Returns **0 results**; the ariregister bulk CSV **404s** on two URL forms. Unresolved |
+| **Thailand** | **403 on every strategy** — including browser headers with a `Referer`, and the DBD register directly | **BLOCKED.** Consistent across paths; consistent with geo-blocking |
+| **Bulgaria** | **403**, and the registry agency refuses connections | **BLOCKED** |
+| **Romania** | **ConnectTimeout** on `www.`/bare, https/http, and the ONRC portal | **UNREACHABLE** |
+| **Sweden** | Entryscape 404, Stockholm 500, Göteborg HTML | **NO ROUTE FOUND** |
+| **Hungary** | `kozadat.hu` 404, Budapest refuses connections | **NO ROUTE FOUND** |
+| **Egypt** | CAPMAS serves HTML only | **NO OPEN API** |
+
+**The pattern across all fifteen:** the obstacle was never that a country
+lacks business data. It is that the data is **statistical rather than
+premises** (India, Croatia, Germany, Poland), **unclassified** (Slovakia,
+Latvia), **published for the wrong city** (Denmark's Aarhus, India's
+Ahmedabad), or **unreachable from here** (Thailand, Bulgaria, Romania).
+
+**One genuinely useful by-product:** Denmark's **DAWA** address API is a free
+national geocoder returning coordinates — the thing Norway, Taiwan and Brazil
+all need and Canada had to solve city by city.
+
 #### What the sweep actually settled
 
 - **1 passes both legs:** Italy, via Milan.
