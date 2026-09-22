@@ -15,8 +15,8 @@ ones Barcelona, Valencia, Bilbao, Málaga and Sevilla will inherit.
 ## The one-line summary
 
 Business leg is **excellent and ready**. Rail leg is **resolved but the Metro
-feed is four months expired**, and that is the only real decision in this
-build.
+feed is four months expired**, and CRTM's licence — now read — forbids
+displaying stale data, so the build must find a current feed or use OSM.
 
 ---
 
@@ -135,19 +135,34 @@ cleanly, parses cleanly, and describes a service window that has already ended.
    CDMX, approved as a per-city exception, validated at 195/195 stops. The
    `osm-rail` skill covers it. Madrid's 13 subway relations are already
    screened.
-3. **Use the expired feed anyway.** Station *positions* do not expire even when
-   the service calendar does, and this project draws geometry, not timetables.
-   Defensible — but it must be a stated decision in `DECISIONS.md`, not a
-   silent one, and the notice must not imply the data is current.
+3. ~~**Use the expired feed anyway.**~~ **RULED OUT 2026-09-22 by CRTM's own
+   licence**, which was unread when this option was written. It obliges the
+   reuser to *"garantizar que la información mostrada en su sistema esté
+   siempre actualizada"* — keep what is shown up to date. Station positions
+   not going stale is beside the point; the condition is about what the
+   reuser displays, and a feed CRTM has stopped refreshing cannot satisfy it.
 
-**Not yet decided. This is the build's first question.**
+**So the choice is 1 or 2.** Try the newer-item search first because it is
+minutes; fall back to OSM, which has a documented precedent in CDMX.
 
-### ⚠️ Licence — UNREAD
+### ✅ Licence — READ 2026-09-22
 
-`mdb-794` declares `http://www.crtm.es/licencia-de-uso`. **Nobody has opened
-it.** Run the `read-licence` skill before publishing; LA Metro's GTFS forbids
-modifying its data while the same city's business registry is CC0, so a
-transit licence is never assumed from the business one.
+`mdb-794` declares `http://www.crtm.es/licencia-de-uso`. **Now read in full;
+see `docs/data_sources.md`.** Verdict **PERMITTED WITH CONDITIONS** —
+commercial reuse and modification are expressly granted, and the share-alike
+clause binds redistribution of the *data*, not a value-added derivative work
+like this map.
+
+Three consequences for the build:
+
+- **A new prescribed notice: "Powered by CRTM"** with a link to crtm.es. It is
+  this project's **sixth** prescribed notice and its first Spanish one.
+- **Raw-vs-processed must be stated** — *"especificando si son datos en bruto
+  o explotados"*. A bare source credit does not satisfy it.
+- **The "keep it up to date" condition rules out the expired feed**, above.
+
+**Madrid therefore owes two separate attributions from two separate
+licences** — Ayuntamiento de Madrid for the premises, CRTM for the rail.
 
 ---
 
@@ -169,7 +184,6 @@ Plus whatever CRTM's licence turns out to require.
 ## Still unknown — the honest list
 
 - **Which rail route to take** (above). The only blocking question.
-- **CRTM's licence terms.** Unread.
 - Whether `200085-5`'s activity duplication needs deduping for this map, which
   depends on a taxonomy choice not yet made.
 - Whether Madrid's system shape needs a sub-line filter
