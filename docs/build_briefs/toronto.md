@@ -359,6 +359,7 @@ above are the same claim; if they drift, this fails.
     "route_types": [1],
     "expect_platforms": 148,
     "expect_stations": 71,
+    "vs_config": {"expect_stations": "SUBWAY_ONLY_STATIONS_EXPECTED"},
     "expect_parent_station_populated": false,
     "strip_patterns": [
       "\\s*-\\s*\\w+bound Platform Towards .*$",
@@ -382,6 +383,8 @@ above are the same claim; if they drift, this fails.
     "route_name_regex": "^Line \\d",
     "expect_platforms": 234,
     "expect_stations": 110,
+    "vs_config": {"expect_platforms": "PLATFORMS_EXPECTED",
+                  "expect_stations": "STATIONS_COLLAPSED_EXPECTED"},
     "expect_boardable_stations": 110,
     "expect_parent_station_populated": false,
     "strip_patterns": [

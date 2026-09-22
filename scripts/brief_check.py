@@ -57,6 +57,9 @@ from pathlib import Path
 import requests
 
 ROOT = Path(__file__).parent.parent
+# --vs-config imports pipeline.<city>.config, and this runs as a script, so the
+# repo root is not on sys.path the way it is for the step scripts.
+sys.path.insert(0, str(ROOT))
 BRIEFS = ROOT / "docs" / "build_briefs"
 # data/*/raw/ is already gitignored, so this path needs no .gitignore change.
 CACHE = ROOT / "data" / "_brief_check" / "raw"
@@ -425,6 +428,49 @@ CHECKS = {
 
 # --- driver ---------------------------------------------------------------
 
+def compare_to_config(city, specs):
+    """Diff a brief's declared expectations against the BUILT city's config.
+
+    `brief_check` otherwise tests a brief against the live sources - which is
+    what it is for, and is not the same claim as "the brief matches the build".
+    Toronto proved the difference: its checks reported 9/9 while expecting 111
+    stations where the build produced 110, because they encoded the strip
+    patterns the build had since improved on. **A check can only test what it
+    encodes.**
+
+    A spec opts in with a `vs_config` map of {its own field: CONFIG_CONSTANT}.
+    """
+    import importlib
+    # Invalidated because this tool READS a file that was probably just edited,
+    # and a stale .pyc gives a confidently wrong answer. Seen while building
+    # this: the config on disk said 110, the check reported 111 and FAILED
+    # against a correct file. Same class as everything else this tool exists
+    # for - an instrument that has not been checked is not evidence.
+    importlib.invalidate_caches()
+    try:
+        config = importlib.import_module(f"pipeline.{city}.config")
+    except ModuleNotFoundError:
+        return None, [f"  no pipeline/{city}/config.py - not built yet, so "
+                      f"there is nothing to diff against"]
+    lines, bad = [], 0
+    checked = 0
+    for spec in specs:
+        for field, const in (spec.get("vs_config") or {}).items():
+            checked += 1
+            want = spec.get(field)
+            got = getattr(config, const, "<missing>")
+            if want == got:
+                lines.append(f"  OK   {const} = {got} (brief {field})")
+            else:
+                bad += 1
+                lines.append(f"  DIFF {const} = {got}, but the brief's "
+                             f"{field} says {want}")
+    if not checked:
+        lines.append(f"  no vs_config mappings declared in {city}'s checks - "
+                     f"add them to the fields a build sets a constant for")
+    return bad == 0, lines
+
+
 def load(path):
     text = path.read_text(encoding="utf-8")
     specs = []
@@ -443,6 +489,9 @@ def main():
     ap.add_argument("city", nargs="*", help="city slug(s); default every brief")
     ap.add_argument("--list", action="store_true", help="print claims, run nothing")
     ap.add_argument("--force", action="store_true", help="ignore the download cache")
+    ap.add_argument("--vs-config", action="store_true",
+                    help="diff the brief against the BUILT city's config "
+                         "constants instead of against live sources")
     args = ap.parse_args()
 
     briefs = sorted(BRIEFS.glob("*.md"))
@@ -461,6 +510,18 @@ def main():
             continue
         tag = " (BUILT - claims are history, but still checkable)" if built else ""
         print(f"\n=== {path.stem}{tag}: {len(specs)} claim(s) ===")
+        if args.vs_config:
+            # Not a live check. This asks a different question: does the brief
+            # still describe the city that was actually BUILT? Toronto's checks
+            # reported 9/9 while expecting 111 stations against a build
+            # producing 110, because a check can only test what it encodes.
+            ok, lines = compare_to_config(path.stem, specs)
+            for line in lines:
+                print(line)
+            total += 1
+            if ok is False:
+                failed += 1
+            continue
         for spec in specs:
             total += 1
             claim = spec.get("claim", spec.get("id", "?"))
