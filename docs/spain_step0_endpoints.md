@@ -68,6 +68,70 @@ Three consequences worth carrying into Step 4:
 That was a guessed item id, i.e. a fact about the guess, not about CRTM —
 recorded so the next session does not re-derive it as a finding.
 
+### ⚠ The rail-source decision is REOPENED — CRTM's feature layers are maintained even though its GTFS is not
+
+`docs/build_briefs/madrid.md` closes this question in favour of OpenStreetMap,
+on the finding that CRTM's ArcGIS org holds six GTFS items of which **Metro's
+is the stale one** (2025-05-30, against 2026-07-29 for the other four), so
+CRTM's own "siempre actualizada" condition rules it out and *"nothing newer
+exists to find"*.
+
+**That is correct about GTFS ITEMS and not about CRTM's catalogue.** The
+feature services are a different product on a different refresh cycle, and
+they are current. Measured 2026-09-22 from `editingInfo.lastEditDate`:
+
+| Product | Last edited | Age today |
+|---|---|---|
+| GTFS Red de Metro | 2025-05-30 | ~16 months |
+| **M4_Red** (`.../M4_Red/FeatureServer`) | **2026-06-05** | **~3.5 months** |
+| **M4_Lineas** (`.../M4_Lineas/FeatureServer`) | **2026-04-21** | ~5 months |
+
+`M4_Red` alone carries the whole leg, `copyrightText: © CRTM`:
+
+| Layer | Geometry | n | Carries |
+|---|---|---|---|
+| `M4_Estaciones` | point | **293** | `DENOMINACION` (name), `CODIGOESTACION`, `CODIGOMUNICIPIO`, `DISTRITO`, `BARRIO`, `FECHAACTUAL` |
+| `M4_Tramos` | **polyline** | **560** | **`NUMEROLINEAUSUARIO`** (the line as riders name it, e.g. `10b`), `SENTIDO`, `MUNICIPIO`, `CORONATARIFARIA` |
+| `M4_Accesos` | point | 802 | entrances — **already separate**, so the `osm-rail` trap cannot bite |
+| `M4_Andenes` / `M4_Vestibulos` | point | 599 / 354 | platforms, vestibules |
+
+Why this looks better than OSM on every axis the brief used to prefer OSM:
+
+- **Operator-authoritative**, so no CDMX-style per-city exception is needed and
+  no page notice explaining why rail came from OSM.
+- **Native EPSG:25830 — the same CRS as the business data**, so the rail and
+  premises legs share a projection with no reprojection step between them.
+- **`NUMEROLINEAUSUARIO` is the public line name from the operator**, which
+  satisfies the "real public name for label AND legend" invariant without a
+  hand-assigned palette. (`10b` also shows Madrid splits Line 10 operationally
+  — a naming subtlety OSM's `ref` dedupe to 13 would flatten.)
+- **`CODIGOMUNICIPIO` names the municipality per station**, so stations outside
+  Madrid can be *named* in `excluded_stations.csv` without sourcing a
+  multi-city boundary layer — the Los Angeles pattern, for free. `MUNICIPIO:
+  ALCOBENDAS` in the sample confirms the Metro does leave the city.
+- **The currency condition reads far better at 3.5 months than at 16**, stated
+  alongside `FECHAACTUAL` (20260529), which Madrid's own licence already
+  obliges this project to display.
+
+**Carry forward regardless of which source wins:**
+
+- **560 tramos is NOT 560 segments to draw.** `SENTIDO` 1/2 duplicates every
+  stretch by direction — CRTM's form of exactly the trap the brief records for
+  OSM's 28 relations. Dedupe before counting or drawing.
+- **293 is NOT the station count.** OSM gives 236 `station=subway` and GTFS 230
+  boardable; 293 needs reconciling in Step 4 (interchanges, out-of-municipality
+  stations, possible per-line rows) before any figure is quoted. Do not take
+  the largest number because it is the largest — that is the Guadalajara-Spain
+  boundary error's shape.
+- **The OSM work is not wasted.** It becomes an independent cross-check of a
+  kind this project rarely gets: a second, unrelated source agreeing on line
+  count and station positions is gate-3-grade corroboration, and gate 3 is
+  otherwise UNAVAILABLE for Madrid the way it was for Mexico City.
+
+**Owner decision.** This does not make the brief wrong — its reasoning was
+sound on the evidence it enumerated — but the conclusion rested on a scope
+("CRTM item" = GTFS item) that the feature services fall outside of.
+
 ---
 
 ## Q2 — Does Spain record WHERE COMMERCE HAPPENS?
