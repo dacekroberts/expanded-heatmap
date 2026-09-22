@@ -182,9 +182,53 @@ cleanly, parses cleanly, and describes a service window that has already ended.
    not going stale is beside the point; the condition is about what the
    reuser displays, and a feed CRTM has stopped refreshing cannot satisfy it.
 
-**So the answer is 2: take Madrid's Metro from OpenStreetMap**, the CDMX
+> ### ⚠️ SUPERSEDED 2026-09-22 — the rail leg comes from CRTM after all
+>
+> **Option 1 was measured out against CRTM's six GTFS ITEMS, and CRTM
+> publishes the same network twice.** Its ArcGIS **feature services** are a
+> different product on a different refresh cycle, and they are maintained:
+>
+> | Product | Last edited | Age |
+> |---|---|---|
+> | GTFS Red de Metro | 2025-05-30 | ~16 months |
+> | **`M4_Red`** (stations + segments) | **2026-06-05** | **~3.5 months** |
+> | `M4_Lineas` (per-line breakdown) | 2026-04-21 | ~5 months |
+>
+> `M4_Red` carries the whole leg — `M4_Estaciones` **293 points** with
+> `DENOMINACION`, `CODIGOMUNICIPIO`, `DISTRITO` and `FECHAACTUAL`;
+> `M4_Tramos` **560 polylines** with **`NUMEROLINEAUSUARIO`** (the line as
+> riders name it, e.g. `10b`), `SENTIDO` and `MUNICIPIO`; `M4_Accesos` 802
+> entrances **already separate** from stations. Natively **EPSG:25830, the
+> same CRS as the premises data**.
+>
+> **Owner's decision 2026-09-22: use CRTM's feature layers, keep OSM as the
+> cross-check.** That removes the CDMX-style per-city exception and its page
+> notice, gives the operator's own line names instead of a hand-assigned
+> palette, and reads far better against the "siempre actualizada" condition at
+> 3.5 months than at 16 — stated beside `FECHAACTUAL` 20260529, which Madrid's
+> own licence already obliges this project to display.
+>
+> **Why the tripwire missed it.** `metro-feed-is-expired` says *"when this
+> check FAILS, CRTM has refreshed it"* — and it still passes, correctly,
+> because the GTFS really is still expired. It watched the feed while the
+> build wanted the network. The two `arcgis_layer` checks added to the block
+> below watch the product actually consumed; that is the generalisable lesson
+> and it is why the check kind exists.
+>
+> **Two traps carry over regardless of source.** `SENTIDO` 1/2 duplicates
+> every stretch, so **560 tramos is not 560 segments** — CRTM's form of the
+> 28-relations trap recorded for OSM below. And **293 is not the station
+> count** against OSM's 236 and GTFS's 230; reconcile in Step 4 before quoting
+> a figure, rather than taking the largest number because it is largest.
+>
+> **The OSM work below is not wasted** — it becomes an independent second
+> source agreeing on line count and station positions, which is gate-3-grade
+> corroboration, and gate 3 is otherwise UNAVAILABLE for Madrid as it was for
+> Mexico City.
+
+~~**So the answer is 2: take Madrid's Metro from OpenStreetMap**, the CDMX
 precedent, which the owner approved as a documented per-city exception and
-which validated at 195/195 stops exact. Use the `osm-rail` skill.
+which validated at 195/195 stops exact. Use the `osm-rail` skill.~~
 
 **One nuance worth keeping:** `GTFS Red de Metro Ligero` *is* current
 (2026-07-29, `mdb-792`, 4 × `route_type=0`, 96 stops). So Madrid could take
@@ -340,6 +384,28 @@ Plus whatever CRTM's licence turns out to require.
     "kind": "gtfs_calendar_window",
     "url": "https://crtm.maps.arcgis.com/sharing/rest/content/items/5c7f2951962540d69ffe8f640d94c246/data",
     "expect": "expired"
+  },
+  {
+    "id": "crtm-metro-network-layer",
+    "claim": "CRTM's M4_Red feature service is the rail leg's ACTUAL source and is still maintained - 293 stations with the name and municipality fields the build needs. If this goes stale the rail decision must be revisited, which the GTFS tripwire below cannot tell you",
+    "kind": "arcgis_layer",
+    "url": "https://services5.arcgis.com/UxADft6QPcvFyDU1/arcgis/rest/services/M4_Red/FeatureServer/0",
+    "expect_geometry": "esriGeometryPoint",
+    "expect_rows": 293,
+    "tolerance": 25,
+    "present": ["DENOMINACION", "CODIGOESTACION", "CODIGOMUNICIPIO", "FECHAACTUAL"],
+    "max_age_days": 550
+  },
+  {
+    "id": "crtm-metro-line-geometry",
+    "claim": "M4_Tramos carries the drawable line geometry with NUMEROLINEAUSUARIO, the line as riders name it, so the label-and-legend invariant is satisfiable from operator data",
+    "kind": "arcgis_layer",
+    "url": "https://services5.arcgis.com/UxADft6QPcvFyDU1/arcgis/rest/services/M4_Red/FeatureServer/4",
+    "expect_geometry": "esriGeometryPolyline",
+    "expect_rows": 560,
+    "tolerance": 60,
+    "present": ["NUMEROLINEAUSUARIO", "SENTIDO", "MUNICIPIO"],
+    "max_age_days": 550
   },
   {
     "id": "metro-is-all-rail",

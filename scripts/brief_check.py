@@ -46,6 +46,7 @@ this project; resist adding speculative ones.
 """
 
 import argparse
+import datetime as dt
 import io
 import json
 import math
@@ -421,9 +422,71 @@ def endpoint_absent(spec, ctx):
     return ok, f"HTTP {code}" + ("" if ok else " - the brief says this endpoint fails")
 
 
+def arcgis_layer(spec, ctx):
+    """An ArcGIS feature layer's record count AND how recently it was edited.
+
+    Exists because a brief can watch the wrong product and report healthy.
+    Madrid's brief carried a tripwire on CRTM's Metro GTFS - "when this check
+    FAILS, CRTM has refreshed it and the rail decision should be revisited" -
+    and that check kept PASSING while the decision it guarded was already
+    stale, because CRTM publishes the same network TWICE: a GTFS feed it
+    stopped refreshing in 2025-05, and ArcGIS feature layers it still edits
+    (M4_Red, 2026-06-05). The tripwire watched the feed and the build wanted
+    the network.
+
+    So this checks the thing actually consumed. `max_age_days` is the point:
+    a layer that silently stops being maintained is the Edmonton failure in
+    its most general form, and freshness here is read from the server's own
+    `editingInfo.lastEditDate` rather than from a catalogue's `modified`.
+    """
+    base = spec["url"].rstrip("/")
+    meta = requests.get(f"{base}?f=json", headers=HEADERS, timeout=120).json()
+    if "error" in meta:
+        return False, f"service error: {meta['error'].get('message', meta['error'])}"
+
+    bits = []
+    ok = True
+    if "expect_geometry" in spec:
+        got = meta.get("geometryType")
+        good = got == spec["expect_geometry"]
+        ok &= good
+        bits.append(f"geometry {got}" + ("" if good else f" != {spec['expect_geometry']}"))
+
+    if "expect_rows" in spec:
+        n = requests.get(f"{base}/query", headers=HEADERS, timeout=180,
+                         params={"where": "1=1", "returnCountOnly": "true",
+                                 "f": "json"}).json().get("count")
+        good = near(n, spec["expect_rows"], spec.get("tolerance", 0))
+        ok &= good
+        bits.append(f"{n} rows" + ("" if good else f" - brief says {spec['expect_rows']}"))
+
+    for field in spec.get("present", []):
+        good = any(f["name"] == field for f in meta.get("fields", []))
+        ok &= good
+        if not good:
+            bits.append(f"MISSING field {field}")
+
+    stamp = (meta.get("editingInfo") or {}).get("lastEditDate")
+    if stamp:
+        edited = dt.datetime.fromtimestamp(stamp / 1000, dt.timezone.utc)
+        age = (dt.datetime.now(dt.timezone.utc) - edited).days
+        bits.append(f"last edited {edited:%Y-%m-%d} ({age}d)")
+        if "max_age_days" in spec:
+            good = age <= spec["max_age_days"]
+            ok &= good
+            if not good:
+                bits.append(f"STALE - brief allows {spec['max_age_days']}d")
+    elif "max_age_days" in spec:
+        ok = False
+        bits.append("no editingInfo.lastEditDate, so freshness cannot be checked")
+
+    return ok, "; ".join(bits)
+
+
 CHECKS = {
     "http_ok": http_ok,
     "endpoint_absent": endpoint_absent,
+    "arcgis_layer": arcgis_layer,
     "gtfs_files": gtfs_files,
     "gtfs_feed_window": gtfs_feed_window,
     "gtfs_calendar_window": gtfs_calendar_window,
