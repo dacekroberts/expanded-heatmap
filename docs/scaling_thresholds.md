@@ -140,9 +140,29 @@ It is deliberately conservative: a shared file still means the full sweep,
 because a wrong "nothing to do" is invisible until a deploy shows stale
 output. A filtered run prints a `PARTIAL:` line naming what it skipped.
 
-**Still true:** the unfiltered sweep is what runs before a deploy and when
-recording a baseline in `DECISIONS.md`, and *that* remains O(n). If it becomes
-painful, the next step is running cities in parallel rather than in sequence.
+**Also done, 2026-09-21: `--jobs N` runs cities in parallel.** The unfiltered
+sweep is the pre-deploy gate and was the project's only O(n)-in-*pipeline-runs*
+cost — the one thing whose price is paid repeatedly rather than once, which
+made it the **binding operational limiter** rather than RAM or repo size.
+
+Steps within a city stay sequential (step 2 consumes step 1's output); the
+parallelism is across cities, which is safe because each touches only its own
+`data/<city>/` and `outputs/<city>/`, and the one shared call — `git ls-tree` —
+is read-only and takes no index lock.
+
+**Default is still 1**, deliberately: each city's step 2 loads a full business
+dataset through geopandas, so `--jobs 4` is four times the peak memory and a
+killed sweep before a deploy is worse than a slow one. `--jobs 4` is a
+reasonable setting on a machine with room.
+
+**Not verified against a real sweep** — `data/*/raw/` is gitignored, so
+`drift_check` cannot run from a worktree. What *was* verified: the module
+compiles, `--list` is unchanged, `--jobs` validates and is stripped from the
+city list, and the thread-local stdout proxy was stress-tested at 12 cities ×
+4 workers with forced interleaving and **zero cross-contamination** — that
+last one matters because swapping the global `sys.stdout` per worker instead
+would race and print one city's row counts under another city's heading, which
+looks correct and is not.
 
 ## CORRECTION, 2026-09-21 — RAM is NOT a function of city count
 

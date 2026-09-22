@@ -129,7 +129,7 @@ colliding. A single session does all of it and can ignore that file.
 python pipeline/<city_slug>/step1_stations.py
 python pipeline/<city_slug>/step2_clean_businesses.py
 python pipeline/<city_slug>/step3_map.py
-python pipeline/drift_check.py [city_slug]
+python pipeline/drift_check.py [city_slug]        # add --jobs 4 for the full pre-deploy sweep
 python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon>   # add --dry-run first
 .venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"
 ```
