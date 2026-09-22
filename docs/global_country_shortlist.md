@@ -421,6 +421,40 @@ but its mirror **404s**. **Monterrey** — not in the catalogue under any of
 **Mexico therefore has two confirmed cities**, CDMX and Guadalajara, both
 covered by DENUE and its cleared licence — and CDMX was the prize.
 
+### Geocoders and API keys for the Asian set — probed 2026-09-21
+
+The question was whether to settle API keys before building geocoding. **They
+are independent: only Korea needs a key, and Korea needs no geocoding.**
+
+| | Data needs a key | Needs geocoding | Geocoder gated? |
+|---|---|---|---|
+| **Korea** | **Yes** — the business register | **No** — `경도`/`위도` populated | n/a |
+| **Japan** | No — MLIT, the ward CSVs and ODPT are plain downloads | **Yes** | **No** |
+| **Taiwan** | No — TDX and `data.gov.tw` GET-by-id are keyless | **Yes** | **No** |
+
+**Japan's geocoder is keyless and verified on the real format.** GSI's
+`msearch.gsi.go.jp/address-search/AddressSearch?q=…` resolved
+`東京都港区赤坂一丁目1番12号` to `[139.744003, 35.670933]`. Two properties worth
+knowing: it returns **block level** (`一丁目１番`, dropping the 号), which is
+ample for a 966 m ring; and it **accepted ASCII digits and matched full-width
+itself**, so it does the NFKC normalisation internally rather than requiring it
+upfront. MLIT's 位置参照情報 (`nlftp.mlit.go.jp/isj/`) is the bulk alternative.
+Digital Agency's Address Base Registry refused connections.
+
+**Taiwan's is keyless too, via NLSC rather than TGOS** — and this only showed
+up by applying this file's own TLS lesson. All three Taiwanese hosts threw
+`SSLError` under `requests`; with curl, `www.tgos.tw` returns **403** (the
+official geocoder is gated) while **`api.nlsc.gov.tw` returns 200**, including
+a working keyless point query. **Third time that Python's TLS stack has
+reported a reachable Taiwanese government host as unreachable.**
+
+**So the ordering is: Korea first**, and not because of the key. Because Korea
+is the only one of the three needing **neither a geocoding leg nor any new
+pipeline code** — coordinates on both legs, an unrestricted licence, six cities
+from one source, and a single free registration as the blocker. Japan and
+Taiwan each need a geocoding pass written, which is build work rather than
+screening; Toronto's is the precedent.
+
 ### KEEP
 
 **Build-ready, one named blocker each**
