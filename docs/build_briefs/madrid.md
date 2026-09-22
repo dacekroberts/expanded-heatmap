@@ -88,17 +88,64 @@ Africa — it vanishes silently on a station-radius map rather than erroring.
 "is this column populated?" test passes them, and so does the `ckan_fields`
 check in this very brief. Only a numeric or bounding-box test catches them.
 
-| | |
-|---|---|
-| Evidence trail, full file, 2026-09-22 | **29,744 of 148,814 = 19.99%** zero → **119,070 genuinely mappable** |
-| Re-measured 2026-09-22, first 4,000 `Abierto` rows via datastore | **234 = 5.85%** |
+Two early figures disagreed — **19.99%** from the evidence trail, and **5.85%**
+from the first 4,000 `Abierto` rows via the datastore, which is `_id` order
+rather than a random draw. **Both are superseded by the full-download
+measurement immediately below**, which settled the rate and then showed the
+rate was never the point: the zeros concentrate in activities this project
+does not map.
 
-**These disagree and the rate is NOT settled.** The datastore sample is the
-first 4,000 rows in `_id` order, not a random draw, so it is not
-representative and the trail's 19.99% is the safer planning figure. **Measure
-it on the full download before quoting any density number** — at 20% this
-moves Madrid's headline by a fifth, so the check has to run before the number
-is published, not after.
+> ### ✅ SETTLED 2026-09-22 on the full 124,987,034-byte download — and neither figure was the one that matters
+>
+> | Scope | Rows | Zero | Rate |
+> |---|---|---|---|
+> | All `Abierto` | 159,787 | 34,316 | **21.48%** |
+> | The three storefront sections | 88,718 | 13,120 | **14.79%** |
+> | **…minus `SERVICIOS DE ALOJAMIENTO`** | **81,142** | **7,471** | **9.21%** |
+>
+> → **73,671 usable rows, 61,466 usable DISTINCT premises.**
+>
+> **THE RATE WAS NEVER THE DELIVERABLE; THE DISTRIBUTION WAS**, and the
+> distribution turned out to explain the disagreement. The zeros are not spread
+> across the register — they concentrate in activities this project does not
+> map:
+>
+> | Activity | Zero rate |
+> |---|---|
+> | VIVIENDAS TURÍSTICAS | **85.9%** |
+> | HOSTALES | 74.7% |
+> | ALBERGUES JUVENILES… | 68.5% |
+> | ACTIVIDADES ADMINISTRATIVAS Y AUXILIARES DE OFICINA | 55.0% |
+> | ACTIVIDADES JURIDICAS | 45.0% |
+> | *vs* FARMACIA | **1.2%** |
+> | *vs* TALLER DE REPARACIÓN (chapa y pintura) | **0.7%** |
+>
+> **`HOSTELERÍA` is the `72`-versus-`722` trap in Spanish.** It splits into
+> `SERVICIOS DE COMIDAS Y BEBIDAS` (20,345 rows, **10.6%** zero) and
+> `SERVICIOS DE ALOJAMIENTO` (7,576 rows, **74.6%** zero). Accommodation is not
+> food service and must be excluded from the bucket on scope grounds alone —
+> the same correction the Mexico build made when counting `72` instead of `722`
+> swept in hotels. Excluding it removes 5,649 of the 7,471 remaining zeros.
+>
+> The district bias collapses with it. Raw, CENTRO is **46.1%** against
+> Villaverde's **4.6%** — a 10× spread that would have gutted precisely the
+> downtown a transit-density map is about. Once accommodation is out, the
+> spread is Barajas **19.4%** to Villaverde **2.9%**, because the raw figure
+> was largely tourist flats and hostels clustered in the centre.
+>
+> **So the loss is real but tolerable, and it is NOT the Los Angeles case.**
+> LA's bad coordinates were biased *toward* the rows the map wanted (22% of
+> post-2020 registrations against ~1% of older ones). Madrid's are biased
+> *away* from them. No geocoding leg is needed, and CartoCiudad stays unprobed.
+>
+> **⚠ CORRECTION TO THIS BRIEF'S OWN COMPARISON.** "Madrid is 2.2× Barcelona's
+> 68,024" divides 148,814 — all open sections, joined rows, zeros included — by
+> Barcelona's ground-floor premises census. Those are not comparable
+> quantities. On storefront-filtered mappable premises Madrid is **61,466**,
+> which is *comparable to* Barcelona rather than double it. Before either
+> number is published, establish whether Barcelona's 68,024 is itself
+> storefront-filtered; until then the two cities' counts should not be compared
+> at all.
 
 Madrid is the **second** city in this project with literal `(0,0)` rows — Los
 Angeles had ~9%. Two of the three pre-geocoded registries examined at this
@@ -255,17 +302,60 @@ cleanly, parses cleanly, and describes a service window that has already ended.
    not going stale is beside the point; the condition is about what the
    reuser displays, and a feed CRTM has stopped refreshing cannot satisfy it.
 
-**Superseded.** Both options above were framed as "GTFS or OSM". The real
-answer is neither: **CRTM's feature layers**, above. The GTFS staleness stands
-as recorded, and is simply not the deciding fact.
+> ### ⚠️ SUPERSEDED 2026-09-22 — the rail leg comes from CRTM after all
+>
+> **Option 1 was measured out against CRTM's six GTFS ITEMS, and CRTM
+> publishes the same network twice.** Its ArcGIS **feature services** are a
+> different product on a different refresh cycle, and they are maintained:
+>
+> | Product | Last edited | Age |
+> |---|---|---|
+> | GTFS Red de Metro | 2025-05-30 | ~16 months |
+> | **`M4_Red`** (stations + segments) | **2026-06-05** | **~3.5 months** |
+> | `M4_Lineas` (per-line breakdown) | 2026-04-21 | ~5 months |
+>
+> `M4_Red` carries the whole leg — `M4_Estaciones` **293 points** with
+> `DENOMINACION`, `CODIGOMUNICIPIO`, `DISTRITO` and `FECHAACTUAL`;
+> `M4_Tramos` **560 polylines** with **`NUMEROLINEAUSUARIO`** (the line as
+> riders name it, e.g. `10b`), `SENTIDO` and `MUNICIPIO`; `M4_Accesos` 802
+> entrances **already separate** from stations. Natively **EPSG:25830, the
+> same CRS as the premises data**.
+>
+> **Owner's decision 2026-09-22: use CRTM's feature layers, keep OSM as the
+> cross-check.** That removes the CDMX-style per-city exception and its page
+> notice, gives the operator's own line names instead of a hand-assigned
+> palette, and reads far better against the "siempre actualizada" condition at
+> 3.5 months than at 16 — stated beside `FECHAACTUAL` 20260529, which Madrid's
+> own licence already obliges this project to display.
+>
+> **Why the tripwire missed it.** `metro-feed-is-expired` says *"when this
+> check FAILS, CRTM has refreshed it"* — and it still passes, correctly,
+> because the GTFS really is still expired. It watched the feed while the
+> build wanted the network. The two `arcgis_layer` checks added to the block
+> below watch the product actually consumed; that is the generalisable lesson
+> and it is why the check kind exists.
+>
+> **Two traps carry over regardless of source.** `SENTIDO` 1/2 duplicates
+> every stretch, so **560 tramos is not 560 segments** — CRTM's form of the
+> 28-relations trap recorded for OSM below. And **293 is not the station
+> count** against OSM's 236 and GTFS's 230; reconcile in Step 4 before quoting
+> a figure, rather than taking the largest number because it is largest.
+>
+> **The OSM work below is not wasted** — it becomes an independent second
+> source agreeing on line count and station positions, which is gate-3-grade
+> corroboration, and gate 3 is otherwise UNAVAILABLE for Madrid as it was for
+> Mexico City.
 
-**One nuance worth keeping:** `GTFS Red de Metro Ligero` *is* current
-(2026-07-29, `mdb-792`, 4 × `route_type=0`, 96 stops). So Madrid could take
-Metro from OSM and Metro Ligero from the agency feed. That is a mixed-source
-rail leg for one city, which this project has not done before — simpler to
-take both from OSM, and the reason to choose otherwise would be that agency
-data is the standing default. **Left to the build; both inputs are known
-good.**
+~~**So the answer is 2: take Madrid's Metro from OpenStreetMap**, the CDMX
+precedent, which the owner approved as a documented per-city exception and
+which validated at 195/195 stops exact. Use the `osm-rail` skill.~~
+
+**Metro Ligero, for whenever it is scoped in:** it has BOTH a current GTFS
+feed (`mdb-792`, 2026-07-29, 4 × `route_type=0`, 96 stops) AND its own current
+feature service (*Elementos de la Red de Metro Ligero*, 2026-06-05). With the
+Metro leg now coming from CRTM's layers, the consistent choice is the matching
+layer rather than the feed. Cercanías likewise has a current feature service
+(2026-06-04) though its GTFS is stale. **Neither is scoped in yet.**
 
 Cercanías (commuter rail) is stale too (2024-08-27) and is probably out of
 scope for a metro-density map, but that has not been decided either.
@@ -359,9 +449,6 @@ Plus whatever CRTM's licence turns out to require.
 - Whether Madrid's system shape needs a sub-line filter
   (`docs/sub_transit_line_filters.md`) — 13 lines over 240 stations is dense
   and uniform, so probably not, but it has not been looked at.
-- **The real zero-coordinate rate** (above): 19.99% on the full file per
-  the trail, 5.85% on an unrepresentative datastore sample. Settle it on
-  the full download.
 - `check_personal_exposure.py` has never been run against a Spanish register.
   `rotulo` is a trade name, which is the safe field, but the epígrafe catch-all
   categories have not been reviewed the way LA's 812990 was.
@@ -430,6 +517,28 @@ Plus whatever CRTM's licence turns out to require.
     "kind": "gtfs_calendar_window",
     "url": "https://crtm.maps.arcgis.com/sharing/rest/content/items/5c7f2951962540d69ffe8f640d94c246/data",
     "expect": "expired"
+  },
+  {
+    "id": "crtm-metro-network-layer",
+    "claim": "CRTM's M4_Red feature service is the rail leg's ACTUAL source and is still maintained - 293 stations with the name and municipality fields the build needs. If this goes stale the rail decision must be revisited, which the GTFS tripwire below cannot tell you",
+    "kind": "arcgis_layer",
+    "url": "https://services5.arcgis.com/UxADft6QPcvFyDU1/arcgis/rest/services/M4_Red/FeatureServer/0",
+    "expect_geometry": "esriGeometryPoint",
+    "expect_rows": 293,
+    "tolerance": 25,
+    "present": ["DENOMINACION", "CODIGOESTACION", "CODIGOMUNICIPIO", "FECHAACTUAL"],
+    "max_age_days": 550
+  },
+  {
+    "id": "crtm-metro-line-geometry",
+    "claim": "M4_Tramos carries the drawable line geometry with NUMEROLINEAUSUARIO, the line as riders name it, so the label-and-legend invariant is satisfiable from operator data",
+    "kind": "arcgis_layer",
+    "url": "https://services5.arcgis.com/UxADft6QPcvFyDU1/arcgis/rest/services/M4_Red/FeatureServer/4",
+    "expect_geometry": "esriGeometryPolyline",
+    "expect_rows": 560,
+    "tolerance": 60,
+    "present": ["NUMEROLINEAUSUARIO", "SENTIDO", "MUNICIPIO"],
+    "max_age_days": 550
   },
   {
     "id": "metro-is-all-rail",

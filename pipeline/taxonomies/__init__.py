@@ -87,6 +87,7 @@ TAXONOMY_MODULES = {
     # storefronts) - New York's and Boston's shape rather than Calgary's.
     "toronto_mlscategory": "pipeline.taxonomies.toronto_mlscategory",
     "scian": "pipeline.taxonomies.scian",
+    "madrid_epigrafe": "pipeline.taxonomies.madrid_epigrafe",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

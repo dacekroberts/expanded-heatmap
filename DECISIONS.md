@@ -16,10 +16,13 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**125 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**128 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Spain re-scoped from six cities to two: Valencia, Bilbao and Malaga measured out, Sevilla unreachable](#2026-09-22---spain-re-scoped-from-six-cities-to-two-valencia-bilbao-and-malaga-measured-out-sevilla-unreachable)
+- [Madrid's zero-coordinate question settled, and the rate was never the answer](#2026-09-22---madrids-zero-coordinate-question-settled-and-the-rate-was-never-the-answer)
+- [Spain profiled: Madrid is ready, both licences read, and one clause raised rather than resolved](#2026-09-22---spain-profiled-madrid-is-ready-both-licences-read-and-one-clause-raised-rather-than-resolved)
 - [A leaf region labels only its own cities, and the one accepted overlap is written down](#2026-09-22---a-leaf-region-labels-only-its-own-cities-and-the-one-accepted-overlap-is-written-down)
 - [Two merges, the macro-label check that was missing, and two fixes rejected by measurement](#2026-09-22---two-merges-the-macro-label-check-that-was-missing-and-two-fixes-rejected-by-measurement)
 - [France reversed on new measurement: the employee filter works, Paris returns to Band A](#2026-09-22---france-reversed-on-new-measurement-the-employee-filter-works-paris-returns-to-band-a)
@@ -161,6 +164,210 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Spain re-scoped from six cities to two: Valencia, Bilbao and Malaga measured out, Sevilla unreachable
+
+- **Corrected a prior that had been carried as a reason rather than a
+  measurement.** Spain was listed as "2 now, 6 total" on the argument that it
+  licenses bespoke per city and *"two of the three Spanish cities probed have
+  had a premises census, which raises the prior sharply."* All three remaining
+  Band B cities were probed and all three are negatives. **Madrid and Barcelona
+  are the exceptions in Spain, not the rule.** Spain is a two-city country and
+  should be planned as one; both of its cities now have build briefs whose
+  claims re-run green.
+
+- **Valencia: no premises register.** `opendata.vlci.valencia.es` is CKAN with
+  **290 packages**, enumerated in full rather than keyword-searched. The only
+  commercial-adjacent names are container locations, noise-monitoring stations
+  and `zones-dactivitats` - zoning polygons, not businesses.
+
+- **Malaga: business parks and facility layers only.**
+  `datosabiertos.malaga.eu` is CKAN with **1,377 packages**. All three real
+  candidates fail on scope: `empresas-y-sectores` is explicitly *"empresas que
+  se encuentran en parques empresariales"*; `centros-comerciales` and
+  `mercados` are `equipamientos` layers covering a handful of malls and
+  municipal markets. Licence is CC BY-SA, which would have mattered had it
+  passed.
+
+- **Bilbao: retail-trade barometers, not a register.** Its own portal holds 344
+  datasets across 35 pages and offers **no search** - its only form control is
+  a sort order. Enumerated instead through `datos.gob.es`: **600 datasets**
+  under publisher `A16003011`, whose entire commercial holding is *"Barometro
+  del comercio minorista"*, survey aggregates by employment stratum, sector and
+  territory.
+
+- **Sevilla: UNREACHABLE, recorded as that rather than as a negative.** Four
+  routes failed. `www.sevilla.org` and `sevilla.org` do not resolve, to curl or
+  to the browser. `datosabiertos.sevilla.org` and `.es` do not resolve.
+  `sevilla-ayuntamientodesevilla.opendata.arcgis.com` is live but answers
+  *"Can't access this content ... Sign In"*, the Medellin shape. And
+  `datos.gob.es` has **no Ayuntamiento de Sevilla publisher at all** - the
+  publishers returned for "Sevilla" are CIS (opinion surveys), IGME (geological
+  maps) and the Junta de Andalucia. Nothing was learned about whether Sevilla
+  licenses premises, only that four ways of asking failed. Its rail half is
+  unchanged and still cheap: a free NAP account.
+
+- **Found the right primitive for any future Spanish city, and it is not the
+  city's own portal.** Spain federates every municipal portal into
+  `datos.gob.es`, which speaks DCAT over a documented API, so one publisher
+  enumeration (`/catalog/dataset/publisher/<id>`) reaches a city whose own site
+  is paginated, searchless or unreachable. **With a caution**: searching that
+  catalogue by *title* returns almost entirely INE (publisher `EA0042823`)
+  aggregate statistical tables - *Locales por provincia y condicion juridica*,
+  hotel occupancy - which look like premises data and are not. Enumerate by
+  publisher, never by title.
+
+- **Fixed an arithmetic error of mine that predated this change.** Band D's
+  sub-tiers sum to 14 (D-a 4, D-b 5, D-c 4, D-d 1) while its header read 13:
+  when Paris left D-a for Band A and then returned, the Band D total was
+  decremented twice. The 41-candidate headline was right; the Band D header was
+  not. Now corrected, and the bands reconcile: 5 + 1 + 18 + 14 = **38
+  candidates**, 22 discarded.
+
+- **Deconflicted Madrid's brief with the build session's work.** Both sessions
+  corrected the rail leg to CRTM's feature layers independently; theirs is kept
+  because it records the owner's decision, adds the `arcgis_layer` check kind,
+  explains why the `metro-feed-is-expired` tripwire missed it, and catches two
+  traps this session did not - `SENTIDO` 1/2 duplicating every stretch, and the
+  layers being natively EPSG:25830, the same CRS as the premises data. Also
+  removed a stale block of mine that survived the auto-merge: it said the
+  zero-coordinate rate was "NOT settled" directly above their block settling it
+  at 9.21%. A brief that contradicts itself is worse than one that is merely
+  wrong. `brief_check.py madrid` is 13/13, barcelona 9/9.
+
+
+### 2026-09-22 - Madrid's zero-coordinate question settled, and the rate was never the answer
+
+- **Measured on the full 124,987,034-byte download: 9.21%, where the two
+  competing figures were 19.99% and 5.85%.** Both were measuring something
+  other than what a density number depends on. All `Abierto` rows are 21.48%
+  zero (34,316 of 159,787); the three storefront sections are 14.79%; and the
+  three sections with `SERVICIOS DE ALOJAMIENTO` removed are **7,471 of 81,142
+  = 9.21%**, leaving 73,671 usable rows and **61,466 usable DISTINCT premises**.
+  Scaffolded `pipeline/madrid/` and `pipeline/taxonomies/madrid_epigrafe.py`
+  around that, with Spain added to `cities.py` as a new leaf region.
+
+- **The distribution was the deliverable, and it explained the disagreement.**
+  The zeros are not spread across the register; they concentrate in activities
+  this project does not map - VIVIENDAS TURÍSTICAS 85.9%, HOSTALES 74.7%,
+  ALBERGUES 68.5%, office and legal activities 45-55% - against FARMACIA 1.2%
+  and TALLER DE REPARACIÓN 0.7%. A sample of the first 4,000 rows in `_id`
+  order was always going to land somewhere arbitrary on that spread, which is
+  the skill's "n=1 is not a measurement" rule showing up as n=4,000.
+
+- **`HOSTELERÍA` is the 72-versus-722 trap in Spanish, and it carried most of
+  the problem.** The section splits into `SERVICIOS DE COMIDAS Y BEBIDAS`
+  (20,345 rows, 10.6% zero) and `SERVICIOS DE ALOJAMIENTO` (7,576 rows, **74.6%
+  zero**). Accommodation is not food service and leaves the bucket on scope
+  grounds regardless - the same correction the Mexico build made after counting
+  SCIAN `72` and sweeping in 999 hotels - and excluding it removes 5,649 of the
+  remaining zeros. Recorded in `madrid_epigrafe.py` as an exclusion with its
+  reason rather than as a filter someone later reads as arbitrary.
+
+- **The district bias collapses with accommodation, which is why it looked
+  alarming.** Raw, CENTRO is 46.1% zero against Villaverde's 4.6% - a 10x
+  spread over precisely the downtown a transit-density map is about, and reason
+  enough to consider a geocoding leg. Once accommodation is out the spread is
+  Barajas 19.4% to Villaverde 2.9%. The raw figure was largely tourist flats and
+  hostels clustered in the centre.
+
+- **This is NOT the Los Angeles case, and the difference decides whether a
+  geocoding leg is needed.** LA's bad coordinates were biased TOWARD the rows
+  the map wanted - 22% of post-2020 registrations against ~1% of older ones - so
+  dropping them would have under-counted new openings and the rows had to be
+  recovered. Madrid's are biased AWAY from them. No geocoding leg; CartoCiudad
+  stays unprobed and ASSERTED.
+
+- **Corrected this project's own "Madrid is 2.2x Barcelona" claim, which
+  compared incomparable quantities.** It divides 148,814 - all open sections,
+  joined rows, zeros included - by Barcelona's 68,024 ground-floor premises
+  census. On storefront-filtered mappable premises Madrid is 61,466, which is
+  COMPARABLE to Barcelona rather than double it. Whether Barcelona's 68,024 is
+  itself storefront-filtered is not established, so the two cities' counts
+  should not be compared at all until it is. The same shape as the Paris
+  finding earlier today, where 148,633 landing on Madrid's 148,814 read as a
+  pass and was magnitude rather than shape.
+
+### 2026-09-22 - Spain profiled: Madrid is ready, both licences read, and one clause raised rather than resolved
+
+- **Profiled Spain per `add-country` and produced `docs/spain_step0_endpoints.md`.**
+  Fifth country screened to this depth and the first in Europe. Most of the
+  business and rail evidence was already banked by the staging session's global
+  screen and is cited rather than repeated; this pass added the licence leg read
+  END TO END, the boundary layer, and live re-verification that the endpoints
+  resolve. Owner chose Spain over France on the reasoning that the Mexico build
+  gives context strength with Spanish text - half right, and the half that is
+  wrong matters: SCIAN does not transfer (Madrid uses its own three-level
+  scheme), Barcelona is Catalan rather than Spanish, and Spain is BESPOKE PER
+  CITY where Mexico was one national register. What does transfer is the accent
+  and encoding discipline, `character_set="auto"` included.
+
+- **Rail comes from the regional authority, not a catalogue, and passes BOTH
+  halves of the question.** `datos.crtm.es` is an ArcGIS Hub site whose
+  `data.json` enumerates 280 datasets, including *Elementos de la Red de Metro*
+  (stations, entrances, platforms) and *Líneas de la Red de Metro* (line
+  geometry) as separate REST layers, plus the Metro Ligero equivalents and
+  GTFS. The skill's warning is that Korea's station dataset has 1,099 stations
+  and NO LINES, which passes a stations-only screen and fails this project;
+  Madrid publishes both. Three consequences: `accesos` is its own layer, so
+  `osm-rail`'s entrances-outnumbering-stations trap is avoided by layer choice
+  rather than de-duplication; Metro, Metro Ligero and Cercanías are separate
+  categories, so excluding commuter rail is a choice of layer rather than a
+  filter; and geometry arrives as GeoJSON from a REST API rather than a zip.
+
+- **Both licences read in full and both are PERMITTED WITH CONDITIONS, adding
+  TWO required notices and one disclosure duty.** Madrid's CKAN declares
+  `cc-by`, but CC BY is not the whole instrument: the portal's *Condiciones
+  generales* are binding by use - *"obligan a cualquier persona y/o empresa que
+  reutilice datos por el mero hecho de hacer uso"* - and require citing the
+  source (a form is offered verbatim: *"Origen de los datos: Ayuntamiento de
+  Madrid"*), STATING THE LAST-UPDATE DATE, not suggesting the Ayuntamiento
+  sponsors the reuse, and expressly PROHIBITING RE-IDENTIFICATION of anonymised
+  data. CRTM's is a Ley 37/2007 licencia-tipo permitting commercial reuse and
+  requiring **"Powered by CRTM"** with a link, plus citation *"especificando si
+  son datos en bruto o explotados"* - a disclosure-of-transformation duty in the
+  same family as Montréal's and INEGI's, which a bare credit does not satisfy.
+  Share-alike binds the DATA; value-added derivatives may carry a different
+  licence, which is what a rendered map is.
+
+- **Raised rather than resolved: CRTM requires that displayed information be
+  "siempre actualizada".** This site is a deliberately pre-rendered static
+  snapshot and `components._AS_RECORDED` already discloses an as-of date, so
+  the two are in tension. `add-city` Step 0.4 says to raise such a clause
+  instead of reading it generously, and the existing as-recorded notice is NOT
+  treated as automatically sufficient. Options recorded for the owner: state
+  the snapshot date beside the CRTM credit, commit to a refresh cadence, or ask
+  CRTM. Blocks publishing the transit leg, not starting the build.
+
+- **A cited licence URL that 404s is not an absent document.** CRTM's own
+  dataset metadata points at `datos.madrid.es/egob/catalogo/aviso-legal`, which
+  returns 404; the live pages are `/pages/aviso-legal` and
+  `/pages/condiciones-de-uso`. The same wrong-path class once made
+  `datos.madrid.es` itself look unreachable. Found by listing the portal's own
+  links rather than by guessing a second path.
+
+- **Madrid's residence signal is stated at source, and its trade name is 100%
+  populated.** `desc_situacion_local` carries `Uso vivienda` (8,486) as a
+  first-class value, so residential premises are excluded by filtering to
+  `Abierto` with no inference - Canada's licence-level pattern rather than the
+  US parcel join. `rotulo` is populated on 100% of the mappable rows, so there
+  is no registrant-name fallback of the kind that would have published ~4,000
+  individuals' names in Los Angeles. Strong enough to state, not strong enough
+  to skip `check_personal_exposure.py`.
+
+- **One measurement is deliberately deferred to step 2: the zero-coordinate
+  rate and its DISTRIBUTION.** `coordenada_x_local`/`_y_local` are non-empty on
+  every row and 29,744 are a literal `0`, which projects to the Atlantic off
+  West Africa and vanishes silently rather than erroring. The rate is disputed -
+  19.99% on the trail (29,744/148,814) against 5.85% on a later, explicitly
+  unrepresentative sample - and the two may both be right over different
+  denominators, since 29,744/225,667 is 13.2%. Settled on the full download in
+  step 2 rather than in a separate session, because step 2 downloads the file
+  anyway and the requirement is only that it land BEFORE a density is quoted.
+  **The rate is not the deliverable; the distribution is.** Los Angeles' bad
+  coordinates were 22% of businesses registered since 2020 against ~1% of older
+  ones, so if Madrid's zeros cluster by district or `desc_epigrafe` they cannot
+  simply be dropped, and Spain's geocoder question stops being moot.
 
 ### 2026-09-22 - A leaf region labels only its own cities, and the one accepted overlap is written down
 
