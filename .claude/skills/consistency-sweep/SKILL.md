@@ -113,7 +113,27 @@ let a check own the number. A count maintained by hand beside the list it counts
 will drift again, and it is most dangerous in a section that gates something -
 a deploy, a licence position, a privacy claim.
 
-**But first ask whether the document is CURRENT-STATE or DATED**, because the
+**The test for whether a count is safe is its DENOMINATOR, not its accuracy.**
+Sweeping this project's counts to the floor left twenty standing, and every one
+of them is scoped to something that cannot grow without the sentence being
+rewritten anyway:
+
+- a **constant of the world** - "all five boroughs = the city", "the six
+  pre-1998 municipalities that amalgamated into Toronto";
+- **fixed project vocabulary** - "all three buckets" is this project's
+  definition of what it maps, not a tally;
+- a **closed set** - "the two Alberta cities" and "all six Canadian sources",
+  where the country's build is complete; "the two diagnosed cities", which
+  changes only when the skill naming them is being edited;
+- a **dated statement** - "all fourteen cities before Mexico City read GTFS".
+
+Every count that had rotted, by contrast, counted something **open**: cities
+built, sources recorded, agreements stored, registries in a table. So the
+question is not "is this number right today" - a rotted count was right once
+too. It is **"can the thing this counts grow without anyone touching this
+sentence?"** If yes, delete the number and name the thing instead.
+
+**Then ask whether the document is CURRENT-STATE or DATED**, because the
 answer inverts the action. `DECISIONS.md`, a handover pinned to a commit, a
 retrospective - their counts are evidence of what was true when written, and
 **updating one destroys the record**. Only a document that claims to describe
@@ -245,7 +265,7 @@ it needs that session's context.
 
 | Check | What it decides |
 |---|---|
-| `python scripts/check_provenance.py [--strict]` | every built city has rows in all three provenance tables; every URL its `config.py` **resolves to** is recorded; notices and `_NOTICES` are in bijection; notice numbers unique and contiguous |
+| `python scripts/check_provenance.py [--strict]` | every built city has rows in all three provenance tables; every URL its `config.py` **resolves to** is recorded; notices and `_NOTICES` are in bijection; notice numbers unique and contiguous; **`city_master_list.md`'s built counts match `app/cities.py`**, total and per country |
 | `python scripts/decisions_index.py --check` | `DECISIONS.md`'s generated index is current |
 | `python pipeline/drift_check.py` | committed `outputs/` still match what the pipeline produces |
 | `python scripts/check_deploy_imports.py` | a clean clone imports under the lean venv |

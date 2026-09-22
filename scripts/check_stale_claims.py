@@ -86,6 +86,25 @@ EXCLUDE_PATTERNS = ("passover_*.md", "*retrospective*.md", "*_addendum.md")
 # brief from an accurate record of a past probe.
 EXCLUDE_DIRS = ("docs/build_briefs",)
 
+# Two more, each for a reason already established above rather than a new one.
+#
+# `city_master_list.md` is the file `CLAUDE.md` says to READ COUNTS OFF, so its
+# numbers are maintained by design and flagging all eight of them forever would
+# train people to skip this report. They are not unchecked: they moved to
+# `check_provenance.py` check E, which compares them to `app/cities.py` and
+# FAILS - a count in a file whose job is to carry counts gets checked, a count
+# anywhere else gets deleted.
+#
+# `global_country_shortlist.md` and `canada_step0_endpoints.md` are the two
+# evidence trails - `CLAUDE.md` calls the first "every probe logged", and the
+# second was relabelled an evidence trail on 2026-09-22. Their counts are dated
+# probe findings, the same case as the retrospectives.
+EXCLUDE_NAMES |= {
+    "city_master_list.md",
+    "global_country_shortlist.md",
+    "canada_step0_endpoints.md",
+}
+
 # The sweep skill teaches these defects by quoting real instances, so it reports
 # as stale prose about Canada and D.C. It is documentation OF the markers.
 EXCLUDE_PATHS = {".claude/skills/consistency-sweep/SKILL.md"}

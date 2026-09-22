@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**145 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**146 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Category B closed: every item adjudicated, and the noisiest file became a hard check](#2026-09-22---category-b-closed-every-item-adjudicated-and-the-noisiest-file-became-a-hard-check)
 - [Category B reaches its floor: 74 to 35, and the rest are not defects](#2026-09-22---category-b-reaches-its-floor-74-to-35-and-the-rest-are-not-defects)
 - [Category B, sixth pass: the master list's counts are right, and that is the finding](#2026-09-22---category-b-sixth-pass-the-master-lists-counts-are-right-and-that-is-the-finding)
 - [The `osm_route_refs` check, and the correction it immediately made to the entry above](#2026-09-22---the-osm_route_refs-check-and-the-correction-it-immediately-made-to-the-entry-above)
@@ -181,6 +182,47 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Category B closed: every item adjudicated, and the noisiest file became a hard check
+
+- **Finished category B properly rather than at a floor - all 74 originals are
+  now either fixed or explicitly read and kept with a reason.** The report
+  stands at **20**, and those twenty are adjudicated, not unexamined.
+
+- **The eight counts in `docs/city_master_list.md` became a DETERMINISTIC
+  check instead of a permanent heuristic flag.** `check_provenance.py` check E
+  now parses that file's `## Built - N` heading and its per-country rows and
+  compares them to `app/cities.py`, total and per country. Verified by
+  perturbation: changing the total to 15 and Canada to 4 produced exactly two
+  failures naming both. **This is the sweep skill's own first principle applied
+  to itself** - a correction fixes an instance, a check fixes the class - and
+  it settles the awkward case where a file's job IS to carry counts. **A count
+  in a file whose job is to carry counts gets checked; a count anywhere else
+  gets deleted.**
+
+- **The two evidence trails were excluded as dated records**, on the argument
+  already established for retrospectives: `CLAUDE.md` calls
+  `global_country_shortlist.md` "every probe logged", and
+  `canada_step0_endpoints.md` was relabelled an evidence trail earlier today.
+  Their counts are dated probe findings and updating them would damage the
+  trail.
+
+- **THE RULE THE WHOLE CATEGORY WAS REACHING FOR, now written into the skill:
+  the test for a count is its DENOMINATOR, not its accuracy.** All twenty
+  survivors are scoped to something that cannot grow without the sentence being
+  rewritten anyway - a constant of the world ("all five boroughs", "the six
+  pre-1998 municipalities"), fixed project vocabulary ("all three buckets" is a
+  definition, not a tally), a closed set ("the two Alberta cities", "all six
+  Canadian sources", "the two diagnosed cities"), or a dated statement ("all
+  fourteen cities before Mexico City read GTFS"). Every count that HAD rotted
+  counted something open: cities built, sources recorded, agreements stored,
+  registries in a table. So the question is never "is this right today" - a
+  rotted count was right once too - but **"can the thing this counts grow
+  without anyone touching this sentence?"**
+
+- **Category B, final: 74 flagged -> 20, files scanned 39 -> 24**, three of the
+  remaining twenty being the tool's own single-line-quote false positives on
+  this session's corrections. Nothing is left unexamined.
 
 ### 2026-09-22 - Category B reaches its floor: 74 to 35, and the rest are not defects
 

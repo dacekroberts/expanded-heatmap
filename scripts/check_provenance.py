@@ -42,6 +42,14 @@ WHAT IT CHECKS
   D. Notice numbers are unique and contiguous from 1. They were neither: the
      list carried two item 8s and two item 15s from 2026-09-21 to 2026-09-22,
      because each country's block was appended without renumbering.
+  E. `docs/city_master_list.md`'s built counts match `app/cities.py` - the
+     total and the per-country figures. That file is the one place `CLAUDE.md`
+     says to READ COUNTS OFF, so its numbers are load-bearing in a way no other
+     document's are. A sweep on 2026-09-22 verified them by hand and they were
+     right to the entry; this makes that verification repeatable instead of
+     annual. **A count in a file whose job is to carry counts gets checked; a
+     count anywhere else gets deleted** - which is why this lives here and not
+     in `check_stale_claims.py`.
 
 KNOWN_GAPS below is a list of DEFECTS, not exemptions. Entries are dated, the
 report prints them loudly, and a stale entry - one naming a city that is now
@@ -63,6 +71,7 @@ sys.path.insert(0, str(ROOT))
 DATA_SOURCES = ROOT / "docs" / "data_sources.md"
 CITIES_PY = ROOT / "app" / "cities.py"
 COMPONENTS_PY = ROOT / "app" / "components.py"
+MASTER_LIST = ROOT / "docs" / "city_master_list.md"
 
 # Defects awaiting work, each with the date it was recorded. NOT an allowlist:
 # a city here is one whose provenance is missing and known to be missing. Delete
@@ -98,6 +107,10 @@ NOTICE_ALIASES = {
     "Chicago Transit Authority": "CTA",
     "OpenStreetMap (Mexican rail)": "OpenStreetMap",
 }
+
+# `app/cities.py` splits big countries into regions ("Canada West"); the master
+# list groups by country. Strip the direction word to get from one to the other.
+REGION_DIRECTIONS = (" West", " East", " North", " South", " Central")
 
 TABLES = (
     ("## Business registries", "business registries"),
@@ -189,6 +202,49 @@ def displayed_notices():
     return re.findall(r'^\s{4}\("([^"]+)"', src[start:end], re.M)
 
 
+def check_master_list(names, regions):
+    """E: city_master_list.md's built counts against app/cities.py."""
+    if not MASTER_LIST.exists():
+        return ["docs/city_master_list.md not found"]
+    doc = read(MASTER_LIST)
+    problems = []
+
+    m = re.search(r"^##\s+Built\s*[\u2014-]\s*(\d+)", doc, re.M)
+    if not m:
+        return ["no '## Built - N' heading to check against"]
+    claimed_total = int(m.group(1))
+    if claimed_total != len(names):
+        problems.append(
+            f"'## Built - {claimed_total}' but app/cities.py has {len(names)}")
+
+    # per-country: "| **Canada** (5, complete) | ... |"
+    actual = {}
+    for r in regions:
+        country = r
+        for d in REGION_DIRECTIONS:
+            if country.endswith(d):
+                country = country[: -len(d)]
+                break
+        actual[country] = actual.get(country, 0) + 1
+
+    seen = set()
+    for row in re.finditer(r"^\|\s*\*\*([^*]+)\*\*\s*\((\d+)", doc, re.M):
+        country, claimed = row.group(1).strip(), int(row.group(2))
+        if country not in actual:
+            continue
+        seen.add(country)
+        if claimed != actual[country]:
+            problems.append(
+                f"'{country} ({claimed})' but app/cities.py has "
+                f"{actual[country]}")
+    for country, n in sorted(actual.items()):
+        if country not in seen:
+            problems.append(
+                f"'{country}' has {n} cities in app/cities.py and no counted "
+                f"row in the built table")
+    return problems
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--strict", action="store_true",
@@ -265,6 +321,23 @@ def main():
                 f"item in data_sources.md"]))
 
     print(f"\n  notices: {len(numbered)} numbered, {len(shown)} displayed")
+
+    # --- E, the master list's own counts -------------------------------------
+    regions = []
+    tree = ast.parse(read(CITIES_PY))
+    for node in tree.body:
+        if isinstance(node, ast.Assign) and any(
+                getattr(t_, "id", None) == "CITIES" for t_ in node.targets):
+            for d in node.value.elts:
+                pairs = {getattr(k, "value", None): getattr(v, "value", None)
+                         for k, v in zip(d.keys, d.values)}
+                if pairs.get("region"):
+                    regions.append(pairs["region"])
+    ml = check_master_list(names, regions)
+    if ml:
+        failures.append(("city_master_list.md", ml))
+    else:
+        print("  master list: built counts agree with app/cities.py")
 
     # --- report ------------------------------------------------------------
     if gaps:
