@@ -1341,7 +1341,7 @@ committed `heatmap.html`. **Do not remove or restyle it away.** If the tile
 provider ever changes, its own attribution replaces this one — it does not
 simply disappear.
 
-**2. City of Chicago — required, NOT YET DISPLAYED.** Chicago's Data Terms of
+**2. City of Chicago — required, and DISPLAYED.** Chicago's Data Terms of
 Use require any "secondary or derivative application" to carry this disclaimer,
 verbatim, "at the site where the software application … can be accessed":
 
@@ -1353,17 +1353,26 @@ verbatim, "at the site where the software application … can be accessed":
 > understood that the data provided at this site is being used at one's own
 > risk."
 
-**3. SFMTA — required, NOT YET DISPLAYED.** Its transit-data licence requires
+**3. SFMTA — required, and DISPLAYED.** Its transit-data licence requires
 derivative works to include:
 
 > "Reproduced with permission granted by the City and County of San Francisco.
 > The information has been provided by means of a nonexclusive, limited, and
 > revocable license granted by the City and County of San Francisco."
 
-**4. LA Metro — required, NOT YET DISPLAYED.** Must acknowledge Metro as the
+**4. LA Metro — required, and DISPLAYED.** Must acknowledge Metro as the
 provider of the transit information and must not claim ownership of it. No
 exact wording is prescribed; "Rail alignment data provided by LA Metro" would
 meet the stated requirement.
+
+**These three were marked NOT YET DISPLAYED until 2026-09-22, and all three
+were displayed.** `app/components.py`'s `_NOTICES` carries Chicago, SFMTA and
+LA Metro as its first three entries, and `render_site_notices()` is called from
+every page. The labels were written before the footer existed and nothing
+brought them forward when it shipped — so the list that GATES THE PUBLIC
+DEPLOY understated this project's own compliance, in the direction that makes a
+deploy look blocked when it is not. Found by `scripts/check_stale_claims.py` on
+its first real run, which is the argument for the tool in one line.
 
 **5. New York City — conditional, and largely already met.** Local Law 11
 forbids licence requirements, but the Technical Standards Manual reserves one

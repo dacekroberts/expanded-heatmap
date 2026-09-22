@@ -243,13 +243,32 @@ it needs that session's context.
 | `python scripts/check_deploy_imports.py` | a clean clone imports under the lean venv |
 | `python scripts/brief_check.py <city>` | a build brief's claims still hold against live sources |
 | `python scripts/check_personal_exposure.py <city>` | no personal information in a city's published output |
+| `python scripts/check_stale_claims.py` | **reports, never fails.** Prose in the future tense about something that IS built; totalising hand-kept counts; headings whose rows no longer match the label |
 
 **Import configs, do not grep them.** `check_provenance.py` imports each city's
 `config.py` and walks its resolved values, because Vancouver builds four
 endpoints from a prefix via f-strings and no literal exists to grep. A grep
 would have reported them missing and been believed.
 
-Categories 1, 2 and 6 above have **no check yet** and are swept by hand. They
-are the obvious next instrument: a reporting pass over the docs for future-tense
-markers, hand-kept counts and headings whose contents have moved on. It would
-report rather than fail, because all three are heuristics.
+Categories 1, 2 and 6 are covered by `check_stale_claims.py`, which **reports
+and always exits 0** - every rule in it is a guess about English, and a noisy
+gate gets ignored, which is worse than no gate.
+
+**Three tuning decisions in it are worth knowing before trusting a clean run**,
+because each one trades recall for a report anyone will actually read:
+
+- `DECISIONS.md` and `PLAN.md` are excluded. The first is append-only history
+  where "no Canadian city is built" is a correct record of that day; the second
+  is open work where "not yet" is the point.
+- A future-tense marker only counts when the same line names a **built** city or
+  region. This misses agency names: `SFMTA` and `LA Metro` are not `San
+  Francisco` and `Los Angeles`, so two of the three stale notice labels it was
+  built to catch were found by a follow-up grep rather than by the tool.
+- Counts must be spelled out **and** totalising ("all six", "the eight"). Digits
+  matched 1,012 measurements; undetermined counts matched 265 mostly-correct
+  scoped facts. Requiring a determiner cut it to 74.
+
+So a clean A section means "nothing obvious", not "nothing". It found a real
+defect on its first run - three notices in the deploy gate marked NOT YET
+DISPLAYED that had been displayed for some time - and it would have missed two
+of those three on its own.

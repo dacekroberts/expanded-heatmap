@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**136 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**137 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [The stale-prose check found three notices in the deploy gate marked undisplayed that were displayed](#2026-09-22---the-stale-prose-check-found-three-notices-in-the-deploy-gate-marked-undisplayed-that-were-displayed)
 - [A third session role: auditing what the forward-facing sessions leave behind](#2026-09-22---a-third-session-role-auditing-what-the-forward-facing-sessions-leave-behind)
 - [Barcelona's four owner decisions settled, and its brief's OSM breakdown corrected](#2026-09-22---barcelonas-four-owner-decisions-settled-and-its-briefs-osm-breakdown-corrected)
 - [Madrid's provenance recorded before its wiring lands, and the transit table stopped calling itself GTFS](#2026-09-22---madrids-provenance-recorded-before-its-wiring-lands-and-the-transit-table-stopped-calling-itself-gtfs)
@@ -172,6 +173,52 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - The stale-prose check found three notices in the deploy gate marked undisplayed that were displayed
+
+- **Wrote `scripts/check_stale_claims.py`**, the heuristic half of the cleanup
+  role, and it earned itself on the first real run. `check_provenance.py`
+  decides things and fails; this one **reports and always exits 0**, because
+  every rule in it is a guess about English and a noisy gate gets ignored,
+  which is worse than no gate.
+
+- **The find: notices 2, 3 and 4 - Chicago, SFMTA and LA Metro - all said
+  "required, NOT YET DISPLAYED", and all three are the first three entries in
+  `app/components.py`'s `_NOTICES`**, rendered from every page. The labels were
+  written before the footer existed and nothing brought them forward when it
+  shipped. So the list that GATES THE PUBLIC DEPLOY understated this project's
+  own compliance, in the direction that makes a deploy look blocked when it is
+  not - the opposite failure from Edmonton's, and just as invisible. Corrected,
+  with the reason recorded in place rather than silently.
+
+- **The tuning is the interesting part, and all of it is recorded in the module
+  docstring because each step traded recall for a report anyone will read.**
+  Matching digits returned **1,012 hits**, almost every one a measurement
+  ("664,662 rows") that is data and belongs there. Restricting to spelled-out
+  numbers gave 265, mostly correct scoped facts - "three buckets" is a fixed
+  concept here, "six pre-1998 municipalities" is history. Requiring a
+  **totalising determiner** ("all six", "the eight") cut it to **74**, which is
+  a review list rather than noise. The insight is that a hand-kept count only
+  rots when it asserts how many of a thing the project has *right now*.
+
+- **`DECISIONS.md` and `PLAN.md` are excluded, and that is the single most
+  important rule in the file.** This log is append-only history where "no
+  Canadian city is built" is a correct record of what was true that day, and
+  `PLAN.md` is open work where "not yet" is the point. Scanning either floods
+  the report with correct sentences, which is how a check becomes something
+  people skip.
+
+- **A KNOWN BLIND SPOT, stated rather than discovered later: category A matches
+  on built CITY names, and agency names are not city names.** "SFMTA" is not
+  "San Francisco" and "LA Metro" is not "Los Angeles", so the tool found ONE of
+  the three stale notices and a follow-up grep found the other two. A clean A
+  section means "nothing obvious", not "nothing". Recorded in the skill as well,
+  because a check whose limits are unwritten gets trusted past them.
+
+- **The skill and `PLAN.md` were written yesterday saying this script did not
+  exist; both now say it does.** Shipping a skill that cites a script it does
+  not have would have been the exact defect the skill is about, which is why it
+  was deferred rather than promised.
 
 ### 2026-09-22 - A third session role: auditing what the forward-facing sessions leave behind
 

@@ -348,21 +348,16 @@ Desktop is unaffected — the label is fully visible there.
 
 ## Structure
 
-- [ ] **Write `scripts/check_stale_claims.py`**, the reporting half of the
-  cleanup role. `check_provenance.py` covers what is deterministic; three
-  defect classes in `.claude/skills/consistency-sweep/` are swept by hand and
-  each produced real defects on 2026-09-22:
-  **(a) prose in the future tense about a present that arrived** - three files
-  said Canada was unbuilt while six municipalities were, and one said D.C. was
-  unbuilt. Grep candidates: `none built`, `not built`, `unbuilt`, `if any`,
-  `when one is`, `would require`, `not yet`, `eventually`.
-  **(b) hand-kept counts** - four wrong in one file, one contradicting itself
-  two clauses later ("thirteen sources" then "six of the twelve").
-  **(c) headings whose contents moved on** - `## Transit feeds (GTFS)` held
-  three non-GTFS sources.
-  It should **report, never fail**, because all three are heuristics and a
-  noisy gate gets ignored. Deferred 2026-09-22 on pacing, not on doubt: the
-  design is settled, it is the test loop that costs.
+- [x] ~~Write `scripts/check_stale_claims.py`~~ - **done 2026-09-22.**
+  Reports and always exits 0. On its first real run it found three notices in
+  the deploy gate marked NOT YET DISPLAYED - Chicago, SFMTA and LA Metro - that
+  were all in `_NOTICES` and had been displayed for some time, so the list that
+  gates the public deploy was understating this project's compliance. Tuning
+  history is in the module docstring and the sweep skill: digits matched 1,012
+  measurements, undetermined counts 265 mostly-correct scoped facts, and
+  requiring a determiner cut it to 74. **Known blind spot:** category A matches
+  on built CITY names, so agency names miss - two of the three notices above
+  were found by a follow-up grep rather than by the tool.
 
 - [x] ~~Fill in the remaining local taxonomy skeleton (`phl_licensetype`)~~ -
   **done 2026-09-21** from the full `SELECT DISTINCT licensetype` pull; all 50

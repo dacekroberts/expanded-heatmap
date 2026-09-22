@@ -227,6 +227,7 @@ python pipeline/<city_slug>/step3_map.py
 python pipeline/drift_check.py [city_slug] [--jobs N]   # --jobs 4 does all 13 in ~37s
 python scripts/brief_check.py [city_slug]               # re-run a brief's claims against live sources
 python scripts/check_provenance.py [--strict]           # every built city's sources actually recorded; run after adding a city
+python scripts/check_stale_claims.py                    # REPORTS only: prose that stopped being true (stale tense, drifted counts)
 python scripts/check_deploy_imports.py [--ref REF]      # clean clone + lean venv: run before ANY push touching app/
 python scripts/decisions_index.py [--check]             # refresh DECISIONS.md's index
 python scripts/merge_append_only.py DECISIONS.md [--dry-run]   # resolve an append-only merge conflict
