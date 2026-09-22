@@ -113,11 +113,25 @@ All four happened in one day.
   **search by operator name across the whole catalogue, with no country
   filter**, which is also how two feeds missed by country-filtered passes were
   found.
-- **A national portal that is unreachable.** `data.go.kr` and
-  `datos.cdmx.gob.mx` both time out from multiple networks, while
-  `data.seoul.go.kr` answers 200. **Never record "no data" on the strength of
-  an unreachable national portal** - try the city's own portal, which is the
-  scope this project works at anyway.
+- **A national portal that is unreachable.** Before writing that down, work
+  through all four causes, because three of the four have bitten:
+  1. **A transient outage.** `data.go.kr` timed out from two independent
+     networks and answered 200 an hour later. Retry before recording.
+  2. **The wrong hostname.** `datosabiertos.gob.pe` fails; **`www.`
+     datosabiertos.gob.pe answers**. Peru was nearly written off over a vhost.
+     **Always try `www.`**
+  3. **Bot protection, not downtime.** `opendata.tel-aviv.gov.il` returns
+     **HTTP 472**, a non-standard code meaning a WAF refused the script. Use
+     the browser before concluding anything.
+  4. **A genuinely dead host.** Only after the first three. And note whether it
+     is one host or a **whole domain**: every `*.cdmx.gob.mx` host times out,
+     which is a more durable finding than one portal being down.
+
+  **Then try the CITY's own portal, which is the scope this project works at
+  anyway.** This has now paid off three times - Mexico via Guadalajara, Korea
+  via `data.seoul.go.kr`, and Israel, whose national portal carries a business
+  register for Be'er Sheva, a city with no rail, while Tel Aviv publishes its
+  own. **A national portal is the wrong default for a city-scoped project.**
 - **A feed that exists and is broken.** Buenos Aires' SUBTE feed is published
   on the city's own CDN and contains no `routes.txt`; Melbourne's PTV feed is
   a nested zip; Dubai's catalogue entry is an anonymous personal GitLab job

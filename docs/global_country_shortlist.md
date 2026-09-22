@@ -304,11 +304,45 @@ establishments with trade name, full address and CNAE, monthly and open — but
 **São Paulo is now the strongest Latin American candidate after Mexico**, and
 unlike Mexico City its transit host actually answers.
 
-#### Peru — portal unreachable
+#### Peru — NOT blocked. The hostname was wrong.
 
-`datosabiertos.gob.pe` refused connection. The Lima Line 1 station dataset is
-named and licensed (Open Data Commons Attribution) but was not retrieved.
-**ASSERTED, not measured** — retry before recording anything.
+Recorded earlier as "portal refused connection". **That was wrong, and the
+cause is embarrassing and worth keeping:** `datosabiertos.gob.pe` fails, while
+**`www.datosabiertos.gob.pe` answers 200**. A vhost that exists only with the
+`www.` prefix — and a whole country was nearly written off over it.
+
+**Add to the reachability drill: try `www.` before recording a host as down.**
+
+With the right hostname, `package_show` returns the dataset:
+
+| | MEASURED |
+|---|---|
+| Title | `MTC - AATE ESTACIONES DE METRO DE LIMA - LINEA 1` |
+| Author | MTC – AATE (Autoridad Autónoma del Tren Eléctrico) |
+| Licence | **ODC-BY** (`opendefinition.org/licenses/odc-by/`) |
+| Resource | `https://www.datosabiertos.gob.pe/sites/default/files/estaciones2018.xlsx` |
+
+**Two limits, both real:** `metadata_modified` is **March 2018**, and it covers
+**Line 1 only**. Station positions on a line that opened in 2011–14 are
+unlikely to have moved, so the staleness is survivable — but **Lima Line 2 has
+been opening since 2023 and is absent**, so this source alone understates the
+city. Peru is viable and incomplete, not blocked.
+
+#### The last of the sweep — reachability, 2026-09-21
+
+| Target | Result |
+|---|---|
+| **Tel Aviv** `opendata.tel-aviv.gov.il` | **HTTP 472** — a non-standard code, i.e. bot protection. Not down; refusing automated requests. Needs the browser, not a script |
+| **Jakarta** `data.jakarta.go.id` | Connection refused |
+| **Malaysia** `data.gov.my`, `developer.data.gov.my` | **200** — reachable; `api.data.gov.my/data-catalogue` returns 400, so the API needs its documented parameters. Unfinished rather than failed |
+| **Mexico City** `datos.` / `metro.` / `sig.cdmx.gob.mx` | **All three time out.** This is **domain-wide**, not one portal — which is a different and more durable finding than "a portal is down" |
+| **Mexico national** `datos.gob.mx` | 200 |
+| **ArcGIS Hub** | 200, and the likeliest route to the CDMX metro layer; the v3 `filter[q]` parameter was rejected, so the query form still needs working out |
+
+**Mexico City's layer is not lost** — `Líneas y Estaciones de STC Metro` is
+named and catalogued. Every `cdmx.gob.mx` host is unreachable from here, so it
+needs either a different network or a mirror on `datos.gob.mx` or ArcGIS Hub.
+Guadalajara continues to carry Mexico meanwhile.
 
 #### Latin America, probed 2026-09-21 — and the national agencies were the wrong place
 
