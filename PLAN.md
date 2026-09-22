@@ -348,6 +348,25 @@ Desktop is unaffected — the label is fully visible there.
 
 ## Structure
 
+- [ ] **Finish the `check_stale_claims.py` category-B pass.** Four passes on
+  2026-09-22 took it from **74 flagged counts to 40**, and files scanned from
+  39 to 27 as dated records were recognised. Fixed: "All seven of these
+  agreements" (the directory had grown past twenty), "six of the nine built
+  cities", "All five cities can now be rebuilt", "the five NAICS cities" in two
+  current-state files (it is four), and "all fourteen built cities" in the
+  global shortlist. **What remains is mostly NOT defects** and the next pass
+  should expect to read and keep rather than edit:
+  - `docs/city_master_list.md` (8) - `CLAUDE.md` designates this the current
+    global list and says to read counts off it, so its numbers are maintained
+    by design. Verify against reality rather than deleting.
+  - `docs/data_sources.md` (11) - re-read; the survivors are scoped facts
+    ("All three buckets", "the six pre-1998 municipalities", "all five
+    boroughs") plus this session's own corrections quoting the wrong text they
+    replace, which is a known multi-line-quote false positive.
+  - `docs/global_country_shortlist.md` (6) - dated probe findings; likely the
+    same dated-record argument as the retrospectives, worth deciding once.
+  - The four `.claude/skills/*.md` hits and `CLAUDE.md` (1) - unexamined.
+
 - [x] ~~Write `scripts/check_stale_claims.py`~~ - **done 2026-09-22.**
   Reports and always exits 0. On its first real run it found three notices in
   the deploy gate marked NOT YET DISPLAYED - Chicago, SFMTA and LA Metro - that

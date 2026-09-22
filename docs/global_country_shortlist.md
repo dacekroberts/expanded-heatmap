@@ -984,8 +984,16 @@ untracked repository, with no licence and no provenance. Consistency says no.
    `routes.txt`.
 
    It is a genuine change of sourcing practice — agency data for the transit
-   leg has been the rule for all fourteen built cities — so it is flagged here
-   rather than assumed either way.
+   leg had been the rule for every city built to that point — so it is flagged
+   here rather than assumed either way.
+
+   **UPDATE 2026-09-22: the change happened.** Mexico City and Guadalajara
+   draw their rail from OpenStreetMap, and Madrid from CRTM's ArcGIS feature
+   services rather than its feed. So this is no longer a proposal to weigh but
+   a practice with three instances and its own skill (`.claude/skills/osm-rail/`)
+   and its own subsection in `data_sources.md`. Noted because the paragraph
+   above reads as a live question and is a settled one; it said "all fourteen
+   built cities" while there were sixteen.
 
 ### CDMX FROM OSM — approved as a per-city exception, and it PASSES the invariants
 
@@ -1055,7 +1063,10 @@ The repository is **already structurally ready for this**: `LICENSE` disclaims
 MIT over everything in `outputs/` and says in terms that it "could not" license
 that data, because it is derived from third-party sources. But a disclaimer is
 not an offer, and **ODbL requires the derivative database to be offered under
-ODbL** — a positive obligation the fourteen agency-sourced cities do not carry.
+ODbL** — a positive obligation the agency-sourced cities do not carry. (Named,
+not counted: "the fourteen agency-sourced cities" happened to be right on
+2026-09-22 — sixteen built, two from OpenStreetMap — and would have been wrong
+on the next build either way.)
 
 **Not resolved here, per `read-licence`'s rule not to settle an ambiguity in
 this project's favour.** The practical shape is small: one added line in

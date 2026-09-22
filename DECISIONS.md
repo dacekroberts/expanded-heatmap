@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**140 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**141 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Category B, fourth pass: a flagged proposal that had already become practice](#2026-09-22---category-b-fourth-pass-a-flagged-proposal-that-had-already-become-practice)
 - ["The five NAICS cities" were four, in two current-state documents](#2026-09-22---the-five-naics-cities-were-four-in-two-current-state-documents)
 - [The distinction category B turns on: a dated document's count is evidence, not drift](#2026-09-22---the-distinction-category-b-turns-on-a-dated-documents-count-is-evidence-not-drift)
 - [Category B, first pass: Madrid was filed under OpenStreetMap, and three counts had drifted](#2026-09-22---category-b-first-pass-madrid-was-filed-under-openstreetmap-and-three-counts-had-drifted)
@@ -176,6 +177,41 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Category B, fourth pass: a flagged proposal that had already become practice
+
+- **`global_country_shortlist.md` said agency data "has been the rule for all
+  fourteen built cities", and it was stale twice over.** Numerically, sixteen
+  are built. More usefully, the paragraph was FLAGGING a possible change of
+  sourcing practice as a live question - and that change has since happened
+  three times: Mexico City and Guadalajara draw rail from OpenStreetMap, Madrid
+  from CRTM's ArcGIS services. It now has its own skill and its own subsection
+  in `data_sources.md`. **A count going stale was the symptom; the real defect
+  was a settled question still written as open.** That is a shape worth adding
+  to the sweep's vocabulary.
+
+- **One count was correct by coincidence and was still removed.** "The fourteen
+  agency-sourced cities" happened to be exactly right on 2026-09-22 - sixteen
+  built, two from OpenStreetMap - and would have been wrong on the next build
+  in either direction. Correct-today is not a reason to keep a hand-kept
+  number; it is the state every drifted count was in once.
+
+- **Category B after four passes: 74 -> 40 flagged, files scanned 39 -> 27.**
+  Stopped here against the owner's 98% instruction with the five-hour window at
+  92%, and `PLAN.md` now carries a precise resume note: which files remain,
+  how many hits each, and - for each - whether the next pass should expect to
+  EDIT or to READ AND KEEP. `city_master_list.md`'s eight are maintained by
+  design, since `CLAUDE.md` designates it the file counts are read off; the
+  survivors in `data_sources.md` are scoped facts plus this session's own
+  corrections quoting the text they replace.
+
+- **A false-positive class now named twice, so it is a real limitation:**
+  multi-line quotations. `QUOTED_RE` matches within one line, so a correction
+  that quotes the wrong sentence across a line break keeps reporting. Three of
+  the surviving hits are this session's own corrections. Left unfixed
+  deliberately - widening the regex to span lines would swallow real counts
+  inside long quoted blocks, which is the worse failure for a check whose whole
+  value is that people read its output.
 
 ### 2026-09-22 - "The five NAICS cities" were four, in two current-state documents
 
