@@ -144,6 +144,17 @@ labels = pdk.Layer(
     background_padding=[5, 2],
     get_text_anchor="anchor",
     get_pixel_offset="[dx, dy]",
+    # WITHOUT THIS, "Montréal" RENDERS AS "Montr al". deck.gl builds the
+    # TextLayer's font atlas from an ASCII-only character set by default, so
+    # any accented glyph is silently dropped to a blank - not a missing-glyph
+    # box, just a gap, which is why it reads as a spacing bug rather than an
+    # encoding one. "auto" makes deck.gl build the atlas from the actual data,
+    # so it covers whatever the city names contain.
+    #
+    # pdk.types.String() for the same reason as radius_units above: a bare
+    # "auto" is serialized as the expression "@@=auto" and evaluates to
+    # undefined, which silently restores the ASCII default.
+    character_set=pdk.types.String("auto"),
     # Same typeface as the rest of the app (components.set_base_font). String()
     # for the same reason as radius_units above.
     font_family=pdk.types.String("Space Grotesk, sans-serif"),
