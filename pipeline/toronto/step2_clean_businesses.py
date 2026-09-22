@@ -31,6 +31,8 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline.baseline import emit  # noqa: E402
+from pipeline.counts import pct  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # noqa: E402
 from pipeline.toronto.config import (  # noqa: E402
     ADDRESS_COLUMN,
@@ -122,8 +124,11 @@ def main():
 
     # --- names, on the storefront subset ----------------------------------
     blank = df[NAME_COLUMN].isna() | df[NAME_COLUMN].fillna("").str.strip().eq("")
-    print(f"\n{NAME_COLUMN} blank on {int(blank.sum()):,} of the "
-          f"{len(df):,} storefront rows ({100 * blank.mean():.1f}%) - dropped "
+    # pct() names the set, which is the whole point here: this same figure read
+    # 21.4% before the filters were reordered, because it was measured on active
+    # rows rather than on the rows that reach the map.
+    print(f"\n{NAME_COLUMN} blank on "
+          f"{pct(int(blank.sum()), len(df), 'storefront rows')} - dropped "
           f"rather than filled, because the only other name column is the "
           f"registrant's and this project does not load it")
     df = df[~blank].copy()
@@ -156,6 +161,9 @@ def main():
          WARD_COLUMN]]
     BUSINESSES_CLEAN_CSV.parent.mkdir(parents=True, exist_ok=True)
     out.sort_values(LICENCE_KEY).to_csv(BUSINESSES_CLEAN_CSV, index=False)
+    for bucket, n in buckets.value_counts().items():
+        emit("bucket_" + str(bucket).lower().replace(" ", "_"), int(n))
+    emit("storefront_rows", len(out))
     print(f"\nWrote {len(out):,} storefronts to {BUSINESSES_CLEAN_CSV}")
     print("  no coordinates yet - step 3 geocodes them against the One "
           "Address Repository")

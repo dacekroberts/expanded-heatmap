@@ -233,6 +233,19 @@ SUBWAY_ONLY_STATIONS_EXPECTED = 71
 STATION_SPACING_MEDIAN_M_MIN = 400.0
 PLATFORM_SPACING_MEDIAN_M_MAX = 150.0
 
+# GATE 3, and the only check here that is outside the data: what the TTC itself
+# publishes. Toronto's earlier counts of 118 and 77 were internally consistent
+# and agreed with nothing - this is what would have caught them on the first
+# pass rather than the third. Line 1 has 38 stations, Line 2 31, Line 4 5,
+# Line 5 25 and Line 6 18.
+PUBLISHED_STATIONS_PER_LINE = {
+    "Line 1 Yonge-University": 38,
+    "Line 2 Bloor-Danforth": 31,
+    "Line 4 Sheppard": 5,
+    "Line 5 Eglinton": 25,
+    "Line 6 Finch West": 18,
+}
+
 # Toronto has NO non-revenue rail stops - `pickup_type`/`drop_off_type` are
 # boardable on every rail stop_time. Checked rather than assumed, because
 # Edmonton's feed hid two garages and a tail track among its 33 stations.

@@ -71,6 +71,11 @@ import threading
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+# This file is run as a script, so the repo root is not on sys.path the way it
+# is for the step scripts (which insert it themselves).
+sys.path.insert(0, str(ROOT))
+
+from pipeline import baseline  # noqa: E402
 FOLIUM_ID = re.compile(rb"_[0-9a-f]{32}")
 
 
@@ -146,8 +151,35 @@ def show_raw_inputs(city: str):
             print(f"  raw input: {f.name}  {f.stat().st_size:,} bytes  modified {when}")
 
 
-def run_steps(city: str) -> bool:
+def check_baseline(city: str, measured: dict, *, update: bool = False) -> bool:
+    """Diff a city's emitted row counts against outputs/<city>/baseline.json.
+
+    The output files are compared byte for byte elsewhere; this catches what
+    that cannot - a COUNT that moved while the map still rendered plausibly.
+    """
+    if update and measured:
+        path = baseline.save(city, measured)
+        print(f"\n  baseline: wrote {len(measured)} figure(s) to "
+              f"{path.relative_to(ROOT).as_posix()}")
+        return True
+    ok, lines = baseline.compare(city, measured)
+    if lines:
+        print()
+        for line in lines:
+            print(line)
+    return ok
+
+
+def run_steps(city: str):
+    """Run a city's steps in order. Returns (ok, emitted_baseline_figures).
+
+    The figures come from `##BASELINE key=value` lines a step prints via
+    pipeline.baseline.emit(). Captured here because stdout already is, so a step
+    needs no other change to be watched - and filtered out of the echoed output,
+    since they are data rather than narration.
+    """
     env = {**os.environ, "PYTHONIOENCODING": "utf-8"}
+    measured = {}
     for step in sorted((ROOT / "pipeline" / city).glob("step*.py")):
         print(f"\n  >> {step.name}")
         proc = subprocess.run(
@@ -155,11 +187,14 @@ def run_steps(city: str) -> bool:
             encoding="utf-8", errors="replace",
         )
         for line in proc.stdout.splitlines():
+            if line.strip().startswith(baseline.MARKER):
+                continue
             print(f"     {line}")
+        measured.update(baseline.parse(proc.stdout))
         if proc.returncode != 0:
             print(f"     STEP FAILED (exit {proc.returncode})\n{proc.stderr}")
-            return False
-    return True
+            return False, measured
+    return True, measured
 
 
 def compare_outputs(city: str) -> bool:
@@ -221,6 +256,9 @@ def main():
     # --jobs N runs CITIES concurrently. Default 1, i.e. exactly the old
     # behaviour on the default path - see the note at the parallel branch for
     # why the default was not flipped.
+    update_baseline = "--update-baseline" in args
+    if update_baseline:
+        args = [a for a in args if a != "--update-baseline"]
     jobs = 1
     if "--jobs" in args:
         i = args.index("--jobs")
@@ -265,10 +303,13 @@ def main():
         for city in requested:
             print(f"\n=== {city} ===")
             show_raw_inputs(city)
-            if not run_steps(city):
+            ran, measured = run_steps(city)
+            if not ran:
                 all_clean = False
                 continue
             if not compare_outputs(city):
+                all_clean = False
+            if not check_baseline(city, measured, update=update_baseline):
                 all_clean = False
     else:
         # --jobs N: cities run concurrently. Safe because each city touches only
@@ -329,7 +370,9 @@ def main():
             proxy.bind(buf)          # touches only THIS thread's local
             print(f"\n=== {city} ===")
             show_raw_inputs(city)
-            ok = run_steps(city) and compare_outputs(city)
+            ran, measured = run_steps(city)
+            ok = ran and compare_outputs(city)
+            ok = check_baseline(city, measured, update=update_baseline) and ok
             return city, ok, buf.getvalue()
 
         sys.stdout = proxy
@@ -352,7 +395,14 @@ def main():
         skipped = sorted(set(all_cities) - set(requested))
         print(f"PARTIAL: {len(requested)} of {len(all_cities)} cities. Not checked: {', '.join(skipped)}.")
         print("Run without a filter before a deploy, or when recording a baseline.")
-    print("Compare the step row counts above against the latest baseline entry in DECISIONS.md.")
+    # This used to say "compare the step row counts above against the latest
+    # baseline entry in DECISIONS.md" - by hand, against a file that is now 103
+    # entries and 57k words. A city with outputs/<city>/baseline.json has that
+    # diff done for it above; one without is named here so the gap is visible
+    # rather than silently unchecked.
+    print("Row counts are diffed against outputs/<city>/baseline.json where one "
+          "exists (--update-baseline to record an intended change).")
+    print("Cities with no baseline yet emit no figures - see pipeline/baseline.py.")
     sys.exit(0 if all_clean else 1)
 
 

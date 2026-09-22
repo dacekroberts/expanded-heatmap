@@ -272,6 +272,9 @@ future build — a failure here means a source moved under `pipeline/edmonton/`.
     "expect_platforms": 65,
     "expect_stations": 33,
     "expect_boardable_stations": 30,
+    "vs_config": {"expect_platforms": "PLATFORMS_EXPECTED",
+                  "expect_stations": "PARENT_STATIONS_EXPECTED",
+                  "expect_boardable_stations": "IN_CITY_STATIONS_EXPECTED"},
     "expect_parent_station_populated": true,
     "crs": "EPSG:32612",
     "station_spacing_median_m_min": 400

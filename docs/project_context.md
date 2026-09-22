@@ -353,15 +353,52 @@ Cities built and running end to end (pipeline, map, app page):
   as a clinic. Counted anyway, for Alberta comparability with Calgary, and
   disclosed on the city page.
 
+- **Toronto** - the TTC's rapid transit: Lines 1, 2 and 4 of the subway and
+  Lines 5 and 6 of the LRT, with its 18 streetcar routes out of scope.
+  Distinctive in four ways, and the hardest build here.
+
+  **General retail is ABSENT, not thin**, and it is the most severe coverage gap
+  on the site. Toronto licenses no grocer, clothing shop, pharmacy or hardware
+  store, so the Retail bucket holds the *regulated* slice alone - second-hand,
+  pawn, precious metal, smoke, vape, pet, salvage and permanent fireworks - which
+  is **870 of 19,575 storefront rows**. The bucket is drawn and disclosed rather
+  than omitted (the owner's call, and New York's treatment); the city page and
+  `excluded_categories.md` both say what it does and does not contain.
+
+  **Its register carries NO coordinates - not one row**, so it is the only city
+  of six Canadian candidates that genuinely needed a geocoder, and Canada has
+  none. Step 3 joins against the City's own One Address Repository and the map
+  is step 4. The normalisation that matters is one line and it is not street
+  normalisation: the register writes the unit into the address and the
+  repository carries none, so dropping everything after the first comma takes
+  the match from 48.1% to **93.8%**.
+
+  **Its station count was wrong twice before the build**, and it is why this
+  project distrusts station counts at all. `parent_station` is populated on no
+  stop, and **three platform-naming conventions live in one feed** - the subway
+  hyphenates, the LRT does not, and Union Station names its destination. 234
+  platforms collapse to 110 stations, 108 of them in-city, and every per-line
+  count now matches the TTC's own published figures exactly. The two Line 1
+  stations in York Region are recorded in `excluded_stations.csv`.
+
+  And **`MUNICIPALITY_NAME` in the address repository is not a city filter**,
+  despite looking like one: it holds the six pre-1998 municipalities, so
+  matching "Toronto" would have kept 30% of the city. Los Angeles' `CITY_KEEP`
+  trap, caught before it ran.
+
+**Canada is closed at five built cities** - Vancouver (regional, with Surrey),
+Montréal, Calgary, Edmonton and Toronto - out of six candidates screened. The
+sixth, Surrey, is not pending: it shipped inside the Vancouver regional map.
+Final per-station densities, all on one comparable basis: **Vancouver 206,
+Montréal 151, Calgary 137, Surrey 135, Toronto 81, Edmonton 79.** Three of those
+six numbers moved during the builds, two of them by more than 1.8x, every time
+because a station count or a denominator was wrong rather than because the data
+changed.
+
 Next by ease ranking: New Orleans and Seattle, both needing decisions before
-code - a streetcar-only scope question and a multi-municipality build. In
-Canada, **only Toronto remains**. Its figure was corrected twice on 2026-09-21
-- 41 per platform, then 81, then **86 per station across 111 stations** once
-`scripts/brief_check.py` caught that the first correction's collapse pattern
-was written for the subway's hyphenated platform names and left all 86 LRT
-platforms uncollapsed. That puts it above Edmonton's built 79, though it stays
-the weaker build because it is a two-bucket city with no general-retail source,
-needing `multi-source-city`.
+code - a streetcar-only scope question and a multi-municipality build. Beyond
+that the open question is a new country rather than a new city: see
+`docs/global_country_shortlist.md` and the `add-country` skill.
 
 **Briefs are now executable.** `scripts/brief_check.py <city>` re-runs a
 brief's factual claims against the live sources, from a fenced
