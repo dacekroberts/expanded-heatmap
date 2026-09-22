@@ -77,9 +77,36 @@ within days.
 - **Geography**: 22 districts (`desc_distrito_local`) — all of them — plus
   barrio and census section.
 
-**Open + classified + with coordinates: 148,814**, i.e. 93.1% of `Abierto`.
-That is the number the map will actually draw from, and it is larger than
-Barcelona's 68,024.
+### ⚠️ TRAP — the coordinate column is 100% populated and partly invalid
+
+**Do not quote 148,814 as the mappable count.** Open + classified + with a
+non-empty coordinate is 148,814, but a share of those coordinates are a
+literal zero, which in EPSG:25830 projects to a point in the Atlantic off West
+Africa — it vanishes silently on a station-radius map rather than erroring.
+
+**The zeros are stored as the string `'0.0'`, not as empty.** So a
+"is this column populated?" test passes them, and so does the `ckan_fields`
+check in this very brief. Only a numeric or bounding-box test catches them.
+
+| | |
+|---|---|
+| Evidence trail, full file, 2026-09-22 | **29,744 of 148,814 = 19.99%** zero → **119,070 genuinely mappable** |
+| Re-measured 2026-09-22, first 4,000 `Abierto` rows via datastore | **234 = 5.85%** |
+
+**These disagree and the rate is NOT settled.** The datastore sample is the
+first 4,000 rows in `_id` order, not a random draw, so it is not
+representative and the trail's 19.99% is the safer planning figure. **Measure
+it on the full download before quoting any density number** — at 20% this
+moves Madrid's headline by a fifth, so the check has to run before the number
+is published, not after.
+
+Madrid is the **second** city in this project with literal `(0,0)` rows — Los
+Angeles had ~9%. Two of the three pre-geocoded registries examined at this
+depth had the defect, which is why `add-city` Step 0 asks for a bounding-box
+count on every city rather than only on suspicion.
+
+**Even at 119,070, Madrid is 1.75× Barcelona's 68,024 and needs no
+geocoding.**
 
 ### Encoding and delimiter
 
@@ -189,6 +216,9 @@ Plus whatever CRTM's licence turns out to require.
 - Whether Madrid's system shape needs a sub-line filter
   (`docs/sub_transit_line_filters.md`) — 13 lines over 240 stations is dense
   and uniform, so probably not, but it has not been looked at.
+- **The real zero-coordinate rate** (above): 19.99% on the full file per
+  the trail, 5.85% on an unrepresentative datastore sample. Settle it on
+  the full download.
 - `check_personal_exposure.py` has never been run against a Spanish register.
   `rotulo` is a trade name, which is the safe field, but the epígrafe catch-all
   categories have not been reviewed the way LA's 812990 was.
