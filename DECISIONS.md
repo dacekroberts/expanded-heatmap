@@ -14,6 +14,74 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Briefs are executable now, and the first run corrected Toronto again
+
+- **Added `scripts/brief_check.py`: a build brief's factual claims are now
+  re-run against the live sources instead of being labelled.** A brief caches
+  Step 0's answers so a build need not re-derive them, and it caches Step 0's
+  MISTAKES with identical confidence. Edmonton's build inherited three wrong
+  claims from its own brief - a *recommended* GTFS path that was stale, a
+  `feed_info.txt` asserted absent that is present, and "no required notice"
+  where a redistribution clause applies - plus a station count of 33 where 30
+  was right. **Every one was a single HTTP call from being caught.** The
+  MEASURED/ASSERTED convention did not prevent it, and the reason is worth
+  stating precisely: the label was not the failure, the prose was. By the time
+  a brief says "a better path exists, and it sidesteps staleness entirely", the
+  ASSERTED tag three paragraphs above has been metabolised into a
+  recommendation and nobody reopens the question. **A claim survives being
+  reasoned from only if something re-runs it.** So each brief declares its
+  checkable claims as JSON in a fenced ```brief-checks block beside the prose
+  that relies on them, making the claim and its test one act; drift between
+  them is a FAIL rather than a confident sentence. Thirteen check kinds, each
+  derived from something that actually went wrong here rather than invented:
+  `gtfs_stations` reports platforms, the parent_station collapse, the boardable
+  count and the nearest-neighbour median in one call; `socrata_distinct_split`
+  separates true categories from delimiter combinations; `geojson_area_km2`
+  catches a same-named stale boundary; `endpoint_absent` pins an endpoint that
+  must NOT be relied on. Wired into `CLAUDE.md` and `add-city` Step 0 as a
+  pre-code step. Exits 1 on any failure, and reports briefs with no checks
+  block rather than passing them silently. Rejected: a separate per-city
+  Python module of assertions, which would have let the checks drift away from
+  the prose - the whole failure being diagnosed.
+
+- **The first real run corrected Toronto's station count a SECOND time, from
+  118 to 111, and the density from 81 to 86 per station.** The 2026-09-21
+  correction that took Toronto's 234 "stations" down to 118 fixed a large error
+  and introduced a smaller one of the same kind. Measured: 148 subway platforms
+  collapse to **72** stations and 234 subway-plus-LRT to **111**, not 77 and
+  118. The cause is that **two platform-naming conventions live in one feed**:
+  the subway hyphenates (`Finch Station - Southbound Platform`) and the LRT does
+  not (`Aga Khan Park & Museum Station Eastbound Platform`, plus a bare
+  `Finch West Station LRT Platform`), so a pattern written for the subway leaves
+  all 86 LRT platforms uncollapsed; and three stations appear twice, once plain
+  and once suffixed `- Subway`, 0-46 m apart. Two independent checks agree on
+  111 where nothing agrees on 118: the **operator's own counts** (Line 1's 38
+  plus Line 2's 31 plus Line 4's 5, less 3 interchanges, is 71 against the
+  measured 72; adding Line 5's 25 and Line 6's 18 less shared gives ~110
+  against 111), and the **spacing median** - 111 stations sit 632 m apart while
+  the intermediate 160 that leaves the LRT uncollapsed sit 70 m apart, which is
+  platform spacing. **This is the fifth denominator error in the project and
+  the second on this one number.** The lesson is not "count stations carefully"
+  but that a station count must be checked against the operator's published
+  count AND the spacing every time, because each collapse mechanism leaves a
+  different residue. Toronto now ranks third of the six Canadian cities on
+  density, above Edmonton's built 79 - which does not change that it is still
+  the weaker build, being a two-bucket city with no general-retail source.
+
+- **Also established, as a checked absence: Toronto has NO non-revenue rail
+  stops.** `pickup_type` and `drop_off_type` are boardable on every rail
+  stop_time, so Edmonton's garage problem does not apply. Recorded because an
+  unexamined absence and a verified one look identical afterwards, and this
+  project has now been wrong in both directions on station counts.
+
+- **Toronto's and Edmonton's briefs carry 9 checks each and all 18 pass.**
+  Edmonton's are written as the counterfactual - every one would have FAILED
+  against the version of its brief that shipped - and now guard the live
+  pipeline's sources instead of a future build. The checker was verified to
+  fail as well as pass: re-injecting the old 77/118 and a deliberately false
+  file-absence produced 3 FAILs with got-against-expected and exit code 1.
+  A checker that has only ever passed is not evidence.
+
 ### 2026-09-21 - Edmonton built: 30 stations, not 33, because three of them are garages
 
 - **Added Edmonton as the thirteenth city and the fourth in Canada: 10,721

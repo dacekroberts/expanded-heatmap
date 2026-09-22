@@ -231,6 +231,113 @@ than a filter.
   building, not after.
 - **Re-fetching the feed from ETS** and re-counting stations.
 
+
+## Machine checks
+
+**`python scripts/brief_check.py edmonton` re-runs the claims below.**
+
+Edmonton is the reason `scripts/brief_check.py` exists, so this block is
+written as the counterfactual: **every check here would have failed on the
+version of this brief that shipped.** `edmonton-feed-current` would have caught
+both the "no `feed_info.txt`" claim and the recommendation to prefer the stale
+Socrata tables; `edmonton-stations` would have caught 33-where-30; and
+`edmonton-categories` would have caught the 67 inherited from the country
+profile. None of them takes longer than the sentence that got it wrong.
+
+The city is built, so these now guard the live pipeline's sources rather than a
+future build — a failure here means a source moved under `pipeline/edmonton/`.
+
+```brief-checks
+[
+  {
+    "id": "edmonton-agency-feed",
+    "claim": "The agency GTFS resolves at the URL found in href dataset urjq-fvmq's accessPoints.DOWNLOAD, ~16.7 MB",
+    "kind": "http_ok",
+    "url": "https://gtfs.edmonton.ca/TMGTFSRealTimeWebService/GTFS/gtfs.zip",
+    "min_bytes": 10000000
+  },
+  {
+    "id": "edmonton-feed-current",
+    "claim": "The agency feed DOES carry feed_info.txt and its window is CURRENT - the brief said it carried none, which was true only of the stale republications",
+    "kind": "gtfs_feed_window",
+    "url": "https://gtfs.edmonton.ca/TMGTFSRealTimeWebService/GTFS/gtfs.zip",
+    "expect": "current"
+  },
+  {
+    "id": "edmonton-stations",
+    "claim": "3 LRT routes, 65 platforms, parent_station populated, 33 parent_stations of which 3 are non-revenue -> 30 boardable stations",
+    "kind": "gtfs_stations",
+    "url": "https://gtfs.edmonton.ca/TMGTFSRealTimeWebService/GTFS/gtfs.zip",
+    "route_types": [0],
+    "expect_platforms": 65,
+    "expect_stations": 33,
+    "expect_boardable_stations": 30,
+    "expect_parent_station_populated": true,
+    "crs": "EPSG:32612",
+    "station_spacing_median_m_min": 400
+  },
+  {
+    "id": "edmonton-register-rows",
+    "claim": "The business register has 43,672 rows",
+    "kind": "socrata_count",
+    "domain": "data.edmonton.ca",
+    "view": "qhi4-bdpu",
+    "expect": 43672,
+    "tolerance": 3000
+  },
+  {
+    "id": "edmonton-commercial-rows",
+    "claim": "25,105 rows are licencetype Commercial - the premises-or-person marker that removes the need for any residence inference",
+    "kind": "socrata_count",
+    "domain": "data.edmonton.ca",
+    "view": "qhi4-bdpu",
+    "where": "licencetype = 'Commercial'",
+    "expect": 25105,
+    "tolerance": 2000
+  },
+  {
+    "id": "edmonton-categories",
+    "claim": "business_licence_category holds 60 true distinct categories on the Commercial set once split on ';' - NOT the 67 the country profile recorded, and not the 1,247 combinations a naive count returns",
+    "kind": "socrata_distinct_split",
+    "domain": "data.edmonton.ca",
+    "view": "qhi4-bdpu",
+    "column": "business_licence_category",
+    "where": "licencetype = 'Commercial'",
+    "delimiter": ";",
+    "expect": 60
+  },
+  {
+    "id": "edmonton-boundary",
+    "claim": "qqvh-dp5m is the CURRENT corporate boundary at 783.1 km2 - four layers share that name and two are the 699.8 km2 pre-2019 polygon",
+    "kind": "geojson_area_km2",
+    "url": "https://data.edmonton.ca/api/geospatial/qqvh-dp5m?method=export&format=GeoJSON",
+    "crs": "EPSG:32612",
+    "min": 750,
+    "max": 820
+  },
+  {
+    "id": "edmonton-stale-boundary",
+    "claim": "3trg-p57p is the STALE boundary and must not be used - it predates the 2019 annexation",
+    "kind": "geojson_area_km2",
+    "url": "https://data.edmonton.ca/api/geospatial/3trg-p57p?method=export&format=GeoJSON",
+    "crs": "EPSG:32612",
+    "min": 650,
+    "max": 730
+  },
+  {
+    "id": "edmonton-crs",
+    "claim": "EPSG:32612 (UTM 12N) is derivable from longitude -113.5",
+    "kind": "utm_zone_from_longitude",
+    "lon": -113.5,
+    "expect": "EPSG:32612"
+  }
+]
+```
+
+**Not machine-checked, because it is a reading rather than a measurement:**
+that the Terms of Use require the URL to be displayed. `docs/data_sources.md`
+item 14 carries it, and no HTTP call settles a clause.
+
 ## Open questions
 
 1. **The agency's own GTFS URL**, and whether the Valley Line has stations the

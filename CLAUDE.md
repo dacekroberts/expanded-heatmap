@@ -24,6 +24,15 @@ are already banked there (endpoints, columns, CRS, traps, required notices, and
 an explicit list of what is still unknown). It is a cache, not a prerequisite:
 no brief means `add-city` Step 0 as usual, never waiting for one.
 
+**Then run `python scripts/brief_check.py <city>` before writing any code for
+it.** A brief caches Step 0's mistakes as confidently as its findings: Edmonton
+inherited three wrong claims from its own, each an HTTP call from being caught,
+and the MEASURED/ASSERTED labels did not prevent it - by the time a brief
+*recommends* something, the label has been reasoned away. The checks live in a
+fenced ```brief-checks block beside the prose, so writing a claim and writing
+its test are one act. A failing check is a brief to correct, never a check to
+relax. If a brief has no checks block, add one for the claims you rely on.
+
 **More than one session working at once? Read `docs/session_roles.md`** - which
 paths each role owns, and the worktree-per-session split that keeps them from
 colliding. A single session does all of it and can ignore that file.

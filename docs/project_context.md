@@ -355,10 +355,20 @@ Cities built and running end to end (pipeline, map, app page):
 
 Next by ease ranking: New Orleans and Seattle, both needing decisions before
 code - a streetcar-only scope question and a multi-municipality build. In
-Canada, **only Toronto remains**, and its corrected figure (81 per station, not
-41) sits just under Edmonton's measured 79 - though it stays the weaker build
-because it is a two-bucket city with no general-retail source needing
-`multi-source-city`.
+Canada, **only Toronto remains**. Its figure was corrected twice on 2026-09-21
+- 41 per platform, then 81, then **86 per station across 111 stations** once
+`scripts/brief_check.py` caught that the first correction's collapse pattern
+was written for the subway's hyphenated platform names and left all 86 LRT
+platforms uncollapsed. That puts it above Edmonton's built 79, though it stays
+the weaker build because it is a two-bucket city with no general-retail source,
+needing `multi-source-city`.
+
+**Briefs are now executable.** `scripts/brief_check.py <city>` re-runs a
+brief's factual claims against the live sources, from a fenced
+```brief-checks block beside the prose. It exists because Edmonton's build
+inherited three wrong claims from its brief and the MEASURED/ASSERTED labels
+did not stop it; Toronto's and Edmonton's briefs carry 9 checks each, and all
+18 pass. A failing check is a brief to correct, not a check to relax.
 **Check a candidate's registry actually covers all three buckets before
 assuming one source is enough** - that assumption failed for New York, and in
 Philadelphia a whole bucket had no source at any level of government. See

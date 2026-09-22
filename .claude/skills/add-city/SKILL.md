@@ -223,6 +223,24 @@ findings, not from a template: it holds only what is specific to this city
 run), and points back to these steps for everything generic. Chicago's is the
 model. Skip it when the probe and build happen in the same session.
 
+**If the city has a brief, run `python scripts/brief_check.py <city>` now** -
+before Step 1, before any code. It re-runs the brief's factual claims against
+the live sources and prints got-against-expected. It exists because Edmonton's
+build inherited three wrong claims from its brief (a *recommended* GTFS path
+that was stale, a `feed_info.txt` said to be absent that is present, and "no
+required notice" where a redistribution clause applies) plus a station count
+that was 33 where 30 was right. All four were cheap to check and none was
+checked, because the brief's prose had already turned its own ASSERTED labels
+into recommendations.
+
+Add checks for whatever you newly verify in Step 0, in the brief's
+```brief-checks block. The kinds that exist map onto this project's actual
+failures - `gtfs_stations` measures platforms, the parent_station collapse, the
+boardable count and the spacing median in one call; `socrata_distinct_split`
+separates true categories from delimiter combinations; `geojson_area_km2`
+catches a same-named stale boundary layer. A failing check is a brief to
+correct, not a check to relax.
+
 ## Step 1 - Taxonomy
 
 - NAICS: nothing to build; `pipeline/taxonomies/naics.py` is complete.

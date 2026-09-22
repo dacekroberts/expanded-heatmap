@@ -830,12 +830,18 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   reproducible. Result, storefronts in the 0.6 mi ring per in-city station:
   **Vancouver 206, Montreal 151, Surrey 135, Edmonton 76, Calgary 75,
   Toronto 41** - against D.C. ~173 and Boston ~39. **TORONTO'S 41 WAS
-  CORRECTED TO 81 on 2026-09-21**, after its 234 "stations" turned out to be
-  PLATFORMS (148 platforms / 77 stations on the subway; 234 / 118 with the two
-  LRT lines, `parent_station` never populated). That moves Toronto from sixth
-  to **fourth**, ahead of Calgary and Edmonton - so the corrected order is
-  **Vancouver 206, Montreal 151, Surrey 135, Toronto 81, Edmonton 76, Calgary
-  75**. It does NOT change which city to build next: Toronto is a two-bucket
+  CORRECTED TWICE on 2026-09-21, to 81 and then to 86**, after its 234
+  "stations" turned out to be PLATFORMS (`parent_station` never populated).
+  **The second correction came from `scripts/brief_check.py`**: the first pass
+  wrote a collapse pattern for the subway's hyphenated
+  `X Station - Southbound Platform` and missed that the LRT omits the hyphen
+  (`X Station Eastbound Platform`), leaving all 86 LRT platforms uncollapsed,
+  and missed three stations appearing twice via a `- Subway` suffix. The real
+  figures are **148 platforms / 72 stations** on the subway and **234 / 111**
+  with the two LRT lines, which agree with the operator's own counts (38 + 31 +
+  5 less 3 interchanges = 71) where 77 and 118 agree with nothing. So the
+  corrected order is **Vancouver 206, Calgary 137, Montreal 151, Surrey 135,
+  Toronto 86, Edmonton 79**. It does NOT change which city to build next: Toronto is a two-bucket
   city with no general-retail source, which is a coverage problem no
   denominator fixes. See `docs/build_briefs/toronto.md`. Published inflation ran
   1.0x-4.2x and was NOT uniform, so **Montreal and Surrey swap** and
