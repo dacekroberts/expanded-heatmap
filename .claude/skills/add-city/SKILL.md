@@ -5,9 +5,12 @@ description: Add a new city to the expanded-heatmap project - live-verify its re
 
 # Adding a city to expanded-heatmap
 
-Distilled from the four cities actually built (San Diego, San Francisco, Los
-Angeles, Chicago) - not a hypothetical plan. Every step either caught a real problem or is a
-design decision already made (see `docs/project_context.md`; the reasoning
+Distilled from the cities actually built - not a hypothetical plan. It began
+with four of them (San Diego, San Francisco, Los Angeles, Chicago) and that
+number stayed in this line until 2026-09-22, by which point sixteen were built
+across four countries and most of what the skill had learned since came from
+the later ones. **Read `app/cities.py` for the current list.** Every step below
+either caught a real problem or is a design decision already made (see `docs/project_context.md`; the reasoning
 trail is in `DECISIONS.md`). If this is a fresh session, read those, plus
 `docs/city_shortlist.md` and `PLAN.md`, first.
 
@@ -612,8 +615,8 @@ clicking each marker opens its page, each switcher works, each map renders).
 - **Run `python scripts/check_provenance.py` and make it name your city OK.**
   This replaces confirming the rows by eye, because confirming by eye is what
   failed: the sentence below has been in this skill since the start, was
-  followed for nine US cities, and was silently skipped for the eight cities
-  that arrived through a country profile instead. The script checks that the
+  followed for the US cities, and was silently skipped for every city that
+  arrived through a country profile instead. The script checks that the
   city has a row in all three provenance tables, that **every URL its
   `config.py` actually resolves to** appears in `docs/data_sources.md`, and
   that the notices list and `app/components.py`'s `_NOTICES` still match.

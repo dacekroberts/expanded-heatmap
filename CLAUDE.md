@@ -115,8 +115,8 @@ reader had already found and immediately found five more.
 - **Run `python scripts/check_provenance.py` after adding a city, and make it
   name that city OK.** `docs/data_sources.md` is the only way a build can be
   reproduced, and the rule to record a city's sources there was followed for
-  the nine US cities and silently skipped for the eight that arrived through a
-  country profile - Canada's six for a day, Mexico's two until a script looked.
+  the US cities and silently skipped for every city that arrived through a
+  country profile - Canada's for a day, Mexico's until a script looked.
   The gap is invisible by construction: **a city whose provenance is unrecorded
   looks exactly like a city that was checked**, which is why this is a script
   and not another paragraph. It also checks the notices list against

@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**141 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**142 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Category B, fifth pass: the add-city skill's header still said four cities](#2026-09-22---category-b-fifth-pass-the-add-city-skills-header-still-said-four-cities)
 - [Category B, fourth pass: a flagged proposal that had already become practice](#2026-09-22---category-b-fourth-pass-a-flagged-proposal-that-had-already-become-practice)
 - ["The five NAICS cities" were four, in two current-state documents](#2026-09-22---the-five-naics-cities-were-four-in-two-current-state-documents)
 - [The distinction category B turns on: a dated document's count is evidence, not drift](#2026-09-22---the-distinction-category-b-turns-on-a-dated-documents-count-is-evidence-not-drift)
@@ -177,6 +178,40 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Category B, fifth pass: the add-city skill's header still said four cities
+
+- **`.claude/skills/add-city/SKILL.md` opened "Distilled from the four cities
+  actually built (San Diego, San Francisco, Los Angeles, Chicago)".** Sixteen
+  are built across four countries, and most of what that skill has learned
+  since - multi-source cities, non-GTFS rail, licence notices per source,
+  personal-column omission at the download boundary - came from the later ones.
+  The header now names no number and points at `app/cities.py` for the current
+  list, while keeping the original four as the origin story, which is the part
+  that was actually worth saying. **An instruction file is the worst place for
+  a stale count**, because it is read by someone who does not yet know the
+  project well enough to doubt it.
+
+- **Two counts that were CORRECT were still removed, both written earlier
+  today, both mine.** `CLAUDE.md` and the same skill said the provenance rule
+  "was followed for the nine US cities and silently skipped for the eight that
+  arrived through a country profile". Nine and eight are both right when
+  counting municipalities rather than map entries - Vancouver's regional build
+  is two. That subtlety is exactly the maintenance burden the category is
+  about: a number that needs a footnote to stay true will not survive the next
+  city. Both now say "the US cities" and "every city that arrived through a
+  country profile".
+
+- **Read and kept, with reasons:** `osm-rail`'s "All fourteen cities before
+  Mexico City read GTFS" is a dated historical statement and correct;
+  `add-country`'s "All six Canadian sources are UTF-8" is scoped to a country
+  whose build is finished; `multi-source-city`'s "the two diagnosed cities" is
+  New York and Philadelphia and will only change if a third is diagnosed, at
+  which point the skill is being edited anyway.
+
+- **Category B after five passes: 74 -> 37 flagged.** The `PLAN.md` resume note
+  from the fourth pass still describes what is left accurately, with the skills
+  line now closed.
 
 ### 2026-09-22 - Category B, fourth pass: a flagged proposal that had already become practice
 
