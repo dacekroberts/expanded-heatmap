@@ -14,6 +14,74 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-22 - Korea: Seoul gets coordinates and needs no account; Busan and Daegu are closed
+
+- **Found a better Seoul source than `OA-13663`, and it needs neither a key nor
+  a geocoding leg.** `data.seoul.go.kr` republishes the LOCALDATA licensing
+  register per business type, citywide, and its SHEET tab exports CSV to a
+  logged-out caller: `POST datafile.seoul.go.kr/bigfile/iot/sheet/csv/download.do`
+  with `infId=<OA-id>`, `srvType=S`, `serviceKind=1` and
+  **`ssUserId=SAMPLE_VIEW`** - the anonymous identity the page's own
+  `doAction()` sends when nobody is signed in, not a bypass. The catalogue holds
+  3,063 `인허가 정보` datasets on the full 24-column LOCALDATA schema, including
+  `영업상태명`, `폐업일자`, `도로명주소`, `사업장명` and **`좌표정보(X)`/`(Y)`
+  in EPSG:5174**. Measured on two: `OA-16044` 숙박업, 7,157 rows → **2,788
+  active**, coordinates on **99.5%** of those and a road address on 99.7%;
+  `OA-16007` 동물병원, 2,235 → **981 active**, coordinates 99.0%, address 100%.
+  Whole-file coordinate rates are only 86-88% because closed premises lack
+  geometry - the active subset is what a build uses. Supersedes the 2026-09-21
+  finding that Korea needs a geocoding pass: **it does not.** `OA-13663`
+  (39,590 food premises) remains valid but is now the worse of the two, since it
+  carries no coordinates at all. Unresolved and blocking a build: the OA ids for
+  일반음식점, 휴게음식점, 미용업, 이용업, 목욕장업 and 세탁업 are not in
+  OA-15880-16460, and the catalogue search is UI-only; and `이용허락범위` is
+  unread, so nothing is recorded in `docs/data_sources.md` yet.
+- **Seoul publishes no citywide 공중위생업소 file, settled from the publisher's
+  own counts.** 251 datasets match 공중위생 and the facet panel reads
+  `SHEET (182) OPENAPI (180) LINK (71) CHART (27)` - **no FILE row**, so none
+  offers the `nio_download.do` route. `OA-10184` is 중구 alone, one of 25
+  districts. Recorded because it rules out the cheapest route to a second
+  bucket, and because the SHEET export above replaces it.
+- **The first pass at that question was wrong, and the error is the reusable
+  part.** "Only `OA-13663` has a FILE tab" was concluded from a search that
+  silently discarded the search term: `GET ?srchDetailWord=` and
+  `POST searchKeyword=` both returned the unfiltered default listing, and the
+  control term `zzzzqqq` produced a **byte-identical** page (91,928 b, then
+  84,955 b) with the same ten ids. The ten read as plausible hygiene results
+  because the default ordering surfaces hygiene datasets. Added to
+  `add-country`: send a nonsense term before believing any result list *or any
+  zero*, and prefer the site's own facet counts to sampling.
+- **Busan ruled out on coverage and on access, independently.** Korea licenses
+  at the 자치구/군, so registers are per district: of Busan's 16, only 중구,
+  사상구, 동래구 and 수영구 publish a real premises register - 연제구 is
+  식품소분업 only, 기장군 식품제조가공업 only, 북구 위탁급식 only, and one
+  사상구 dataset is 행정처분현황, an enforcement list rather than a register.
+  Access fails too: Busan hosts nothing, delegating to
+  `www.data.go.kr/cmm/cmm/fileDownload.do`, where its cached `atchFileId`
+  returns **0 bytes** at `fileDetailSn` 1-2, an **87,693-byte PNG** at 3 and a
+  **203,559-byte JPEG** at 4. Logged out, `data.go.kr` answers `status: true`
+  with **`atchFileId: null`**, and the download path runs through
+  `check-limit.json` → `needCaptcha` → `showLimitCaptcha`. This project does not
+  defeat CAPTCHAs, so 16 districts behind a rate limiter is not a pipeline.
+- **Daegu's download route works but its coverage does not.** Its ids are
+  current where Busan's are stale, and five district files came down keylessly:
+  남구 4,060 rows (94% road address), 서구 4,122 (100%), 북구 6,432 (100%),
+  **달서구 11,089 with 위도/경도 on 99.9%**, 수성구 공중위생업 2,523 (100%).
+  None carries `폐업일자`, so closed premises cannot be filtered. Ruled out
+  because **중구, the downtown, publishes no premises register at all** - 9
+  datasets, all libraries and festivals - and Daegu Metro Lines 1, 2 and 3 all
+  converge there (반월당, 중앙로, 대구역), so the densest station areas would be
+  blank. 4 of 9 districts is not a partial city; it is the wrong city.
+- **Korea's city count corrected from 6 to 1 across the screen.** The
+  "6 cities from one source" claim rested on probing Seoul alone, and Seoul
+  aggregates where no other Korean city does - the capital was the exception
+  mistaken for the rule. Updated the master ranking, the marginal-cost table and
+  the key/geocoding table in `docs/global_country_shortlist.md`; added to
+  `add-country` the rule to ask which tier of government *licenses* rather than
+  publishes, and to probe the second city's central district before believing a
+  country count. Files touched: `docs/global_country_shortlist.md`,
+  `.claude/skills/add-country/SKILL.md`.
+
 ### 2026-09-21 - WMATA's licence re-established, and the clause that mattered was not the one first cited
 
 - **The owner's API practice was recorded, and reading the terms changed what

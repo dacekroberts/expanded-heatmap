@@ -68,6 +68,22 @@ systematically the **oldest** entities - holding companies, dormant shells,
 long-established corporates. It is the least representative sample available.
 **Pull several pages and count.** The cost is one loop.
 
+**Send a nonsense search term before you believe any result list - or any
+zero.** A server that ignores your search parameter returns HTTP 200 and a
+full, plausible page of results, and nothing in the response says the filter
+was dropped. `data.seoul.go.kr` ignored both `GET ?srchDetailWord=` and
+`POST searchKeyword=`: a real hygiene term and the term `zzzzqqq` returned
+**byte-identical** pages, and the ten datasets on them looked like hygiene
+results because the catalogue's default ordering happens to surface hygiene
+datasets. The conclusion drawn from it - "only one dataset has a downloadable
+file" - was wrong, and the correct answer (a keyless CSV export covering 3,063
+datasets) was two facets away. Cost: one extra request per endpoint.
+
+Corollary: **prefer the site's own facet counts to your own sampling.** Seoul's
+`제공유형 SHEET (182) OPENAPI (180) LINK (71) CHART (27)`, with no FILE row,
+settled in one read what paging through 251 results would not - it is the
+publisher's count over the whole result set, not an inference from page one.
+
 ### 1. Does urban rail exist, in DATA YOU CAN READ - which is not the same as a GTFS feed
 
 **Read this before touching the Mobility Database.** The 2026-09-21 global
@@ -161,6 +177,23 @@ All four happened in one day.
   on the city's own CDN and contains no `routes.txt`; Melbourne's PTV feed is
   a nested zip; Dubai's catalogue entry is an anonymous personal GitLab job
   artefact. Absent and broken are different findings.
+- **A download button that delegates to another portal.** Check where the file
+  actually lives before concluding a city portal publishes it. Busan's and
+  Daegu's FILE buttons both point at
+  `www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=…&fileDetailSn=…`, so
+  neither city hosts its own data. Two consequences, both measured 2026-09-22:
+  - **The delegated id goes stale silently.** Daegu's resolved correctly.
+    Busan's returned **0 bytes** at `fileDetailSn` 1 and 2, an unrelated
+    **PNG** at 3 and a **JPEG** at 4 - a wordmark image from some other
+    dataset. `Content-Disposition` named the PNG honestly; had the header been
+    trusted instead of the magic bytes, the file would have been recorded as
+    downloaded. **Check magic bytes, not the filename the server claims.**
+  - **A CAPTCHA on the download path disqualifies the source**, however open
+    the licence. `data.go.kr` routes downloads through
+    `/cmm/cmm/check-limit.json` → `needCaptcha` → `showLimitCaptcha`, a rate
+    limiter. This project does not defeat CAPTCHAs, so a source needing one
+    download per district per refresh is not a pipeline - record it as closed
+    and say why.
 
 ### 2. Does the country record WHERE COMMERCE HAPPENS, or only where companies are REGISTERED?
 
@@ -442,7 +475,7 @@ fact:
 |---|---|
 | **Japan** | ~9 - Tokyo, Osaka, Nagoya, Yokohama, Kobe, Kyoto, Fukuoka, Sapporo, Sendai |
 | **France** | 6+ - Paris, Lyon, Marseille, Lille, Toulouse, Rennes |
-| **Korea** | 6 - Seoul, Busan, Daegu, Incheon, Daejeon, Gwangju |
+| **Korea** | ~~6~~ **1 - Seoul only.** Corrected 2026-09-22, see below |
 | **Brazil** | 6+ - São Paulo, Rio, Belo Horizonte, Brasília, Recife, Porto Alegre |
 | **Taiwan** | 4 - Taipei, Kaohsiung, Taichung, Taoyuan |
 | **Mexico** | 3 - CDMX, Guadalajara, Monterrey |
@@ -452,6 +485,26 @@ needed **four different portal types** - Toronto CKAN, Vancouver Opendatasoft,
 Calgary and Edmonton Socrata, Surrey ArcGIS Hub, Montréal CKAN - so six cities
 meant six integrations. That is why the Canadian screen cost a day, and it is
 not a fact about Canada's data quality.
+
+**Ask WHICH TIER OF GOVERNMENT LICENSES, not which one publishes - and check
+one non-capital city before believing a country count.** Korea's "6 cities from
+one source" was the single largest error in the 2026-09-21 screen, and it
+survived because only Seoul was probed. In Korea the licensing authority is the
+**district** (자치구/군), so the register is published per district, in whatever
+schema and on whatever schedule that district chose:
+
+| | Districts publishing a usable premises register |
+|---|---|
+| **Seoul** | **25 of 25** - the city aggregates. Verified: 강남구 4,744 → 도봉구 794 |
+| **Busan** | **4 of 16.** Others are single-sector (식품소분업 only) or *enforcement actions*, which is a violations list, not a register |
+| **Daegu** | **4 of 9** - and the missing one is **중구, the downtown**, where all three metro lines converge |
+
+So **the capital was the exception and was mistaken for the rule.** A single
+aggregating city says nothing about the other five. The generalisable check:
+**probe the second city, and probe its central district specifically** - a
+country count built from the capital alone is a guess wearing a number. Partial
+district coverage is also not a partial city: a commercial-density map missing
+the downtown is not a map of that city, however good the other districts are.
 
 **The consequence for ordering:** where two countries are otherwise close,
 **prefer the national-register one.** On this axis **Korea outranks Spain** -

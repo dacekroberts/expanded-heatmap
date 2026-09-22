@@ -78,7 +78,7 @@ its way, and the column says what.
 |---|---|---|---|---|
 | **1** | **France** / Paris | subway 16, tram 17, funicular 1 | SIRENE, établissement-level, geolocated, Licence Ouverte 2.0 | **None evidential** — an architectural choice about national vs per-city scope |
 | **2** | **Spain** / Barcelona + 5 more | **6 metro cities**: Madrid 13, Barcelona FGC 4, Bilbao, Málaga, Valencia, Sevilla | Barcelona's 68,024-premises ground-floor census | **One unread licence** |
-| **2** | **South Korea** / Seoul | **1,099 stations**, WGS84, English names, transfer data | `상가(상권)정보`: premises, coords, KSIC 247, quarterly, **제한 없음** | **A free API key** (owner action) — and **no line geometry yet** |
+| **2** | **South Korea** / **Seoul only** | **1,099 stations**, WGS84, English names, transfer data | **인허가 정보 SHEET export, no account**: premises, **EPSG:5174 coords 99.5% of active**, status field, cp949 | **The OA ids for the six core business types**, and one unread `이용허락범위` — *no key needed after all* |
 | **2** | **Taiwan** / Taipei | **complete and unauthenticated**: 122 stations + **5 lines as MULTILINESTRING** + line colours + English | `商業登記`: premises addresses, active/closed status | **No coordinates** → geocoding, and per-category assembly |
 | **2** | **Mexico** / Guadalajara | Guadalajara LRT 3 verified | **DENUE**, 6M+ establishments, **SCIAN = NAICS**, INEGI licence clears | **CDMX is domain-wide unreachable**; Guadalajara carries it meanwhile |
 | **1=** | **Italy** / **Milan** ↑↑ | **subway 5, tram 17** (ATM) — M1–M5 | **28,131 premises, 99.1% with coordinates**, `insegna` (shop sign), `codice_ateco`, `settore_merceologico`, floor area, **CC-BY** | **Whether Personal services is reachable** — two buckets confirmed, the third not |
@@ -306,7 +306,7 @@ file and a rail check:
 | Country | Rail cities | Source | Buckets |
 |---|---|---|---|
 | **Japan** | **10 confirmed** | 推奨データセット standard schema | 2 — no retail |
-| **South Korea** | **6 confirmed** | `상가(상권)정보` + 표준데이터 | 3 |
+| **South Korea** | 6 have rail, **1 has data** — Seoul | 인허가 정보 (Seoul's portal) + 표준데이터 | 3, with coordinates |
 | **France** | **6 confirmed** | SIRENE, Licence Ouverte 2.0 | 3 |
 | **Taiwan** | 4 | 商業登記 by category | 3, no coordinates |
 | **Mexico** | 3 | DENUE, SCIAN = NAICS | 3 |
@@ -424,11 +424,11 @@ covered by DENUE and its cleared licence — and CDMX was the prize.
 ### Geocoders and API keys for the Asian set — probed 2026-09-21
 
 The question was whether to settle API keys before building geocoding. **They
-are independent: only Korea needs a key, and Korea needs no geocoding.**
+are independent — and as of 2026-09-22 no candidate needs a key at all.**
 
 | | Data needs a key | Needs geocoding | Geocoder gated? |
 |---|---|---|---|
-| **Korea** | **Yes** — the business register | **No** — `경도`/`위도` populated | n/a |
+| **Korea** | **No** — corrected 2026-09-22. Seoul's 인허가 정보 SHEET export is the logged-out path (`ssUserId=SAMPLE_VIEW`) | **No** — `좌표정보(X/Y)` on 99.5% of active premises | n/a |
 | **Japan** | No — MLIT, the ward CSVs and ODPT are plain downloads | **Yes** | **No** |
 | **Taiwan** | No — TDX and `data.gov.tw` GET-by-id are keyless | **Yes** | **No** |
 
@@ -448,12 +448,14 @@ official geocoder is gated) while **`api.nlsc.gov.tw` returns 200**, including
 a working keyless point query. **Third time that Python's TLS stack has
 reported a reachable Taiwanese government host as unreachable.**
 
-**So the ordering is: Korea first**, and not because of the key. Because Korea
-is the only one of the three needing **neither a geocoding leg nor any new
-pipeline code** — coordinates on both legs, an unrestricted licence, six cities
-from one source, and a single free registration as the blocker. Japan and
-Taiwan each need a geocoding pass written, which is build work rather than
-screening; Toronto's is the precedent.
+**So the ordering is: Korea first**, and after 2026-09-22 the reasoning is
+stronger rather than weaker. Korea is still the only one of the three needing
+**neither a geocoding leg nor any new pipeline code** — coordinates on both
+legs — and the "single free registration" blocker turned out not to exist.
+What *did* shrink is the prize: **Seoul alone, not six cities**, because Busan
+and Daegu both fail (per-district licensing, incomplete coverage, and a
+CAPTCHA-gated national download). Japan and Taiwan each need a geocoding pass
+written, which is build work rather than screening; Toronto's is the precedent.
 
 ### KEEP
 
@@ -1452,9 +1454,13 @@ best structural match to what this project already does.
   connections** (verified). Every endpoint is five months old and all
   documentation written against LOCALDATA is stale.
 
-**ASSERTED:** that coordinates are published in EPSG:5174 (Korea Central Belt
-TM). This came from documentation of the *closed* system. The project would
-reproject to per-city UTM regardless — Seoul ≈ 127°E is UTM 52N, EPSG:32652.
+**MEASURED 2026-09-22** (was ASSERTED from documentation of the *closed*
+system): coordinates **are** published in EPSG:5174 (Korea Central Belt TM),
+and Seoul's own dataset pages say so in as many words — *"좌표안내 :
+중부원점TM(EPSG:5174) 좌표계에 따른 해당위치의 좌표정보이며 위경도 좌표는
+제공하고 있지 않음"*. Two files downloaded and their coordinate ranges checked;
+see "Seoul's 인허가 정보 family" below. The project reprojects to per-city UTM
+regardless — Seoul ≈ 127°E is UTM 52N, EPSG:32652.
 
 #### SEOUL'S FOOD REGISTER IS OBTAINABLE WITH NO ACCOUNT — downloaded 2026-09-21
 
@@ -1501,7 +1507,186 @@ bucket, and a geocoding job.
 
 **The sibling dataset for Personal services is 공중위생업소** (이·미용, 숙박,
 목욕업) on the same portal and presumably the same download mechanism —
-unprobed, and the obvious next step.
+probed 2026-09-22. It is **not** published that way, and the probe found a
+better route than `OA-13663` instead: see
+"Seoul's 인허가 정보 family" below, which **supersedes this section** as the
+recommended source. `OA-13663` remains correct and usable; it is simply the
+worse of the two, because it carries no coordinates.
+
+#### Seoul's 인허가 정보 family — the LOCALDATA schema, keyless, WITH COORDINATES
+
+MEASURED 2026-09-22. Probing the Personal-services sibling found something
+better than the thing it was looking for. **`data.seoul.go.kr` republishes the
+LOCALDATA licensing register per business type, citywide, and its SHEET tab
+exports CSV with no account:**
+
+```
+POST https://datafile.seoul.go.kr/bigfile/iot/sheet/csv/download.do
+     srvType=S  infId=<OA-id>  serviceKind=1  pageNo=1
+     gridTotalCnt=999999  ssUserId=SAMPLE_VIEW  strWhere=  strOrderby=
+```
+
+`ssUserId=SAMPLE_VIEW` is the anonymous identity **the page itself sends when
+nobody is logged in** — it is not a bypass, it is the logged-out path. Read out
+of `doAction()` on any `datasetView.do` page. `json` substitutes for `csv` in
+the URL. The catalogue holds **3,063** `인허가 정보` datasets.
+
+The schema is the full LOCALDATA one, 24 columns:
+
+```
+개방자치단체코드, 관리번호, 인허가일자, 영업상태코드, 영업상태명,
+상세영업상태코드, 상세영업상태명, 폐업일자, 휴업시작일자, 휴업종료일자,
+재개업일자, 전화번호, 소재지우편번호, 지번주소, 도로명주소, 도로명우편번호,
+사업장명, 최종수정일자, 데이터갱신구분, 데이터갱신일자,
+좌표정보(X), 좌표정보(Y), 사무소전화번호, 사업장전화번호
+```
+
+Two downloaded and measured. **The coverage figures that matter are the ones
+for `영업상태명 == 영업/정상` (active)** — the whole-file rates look mediocre
+only because closed premises are missing their geometry:
+
+| | `OA-16044` 숙박업 | `OA-16007` 동물병원 |
+|---|---|---|
+| Rows | 7,157 | 2,235 |
+| **Active** (`영업/정상`) | **2,788** | **981** |
+| Closed (`폐업`) | 4,369 | 1,239 |
+| `좌표정보(X/Y)` — whole file | 86.2% | 88.1% |
+| **`좌표정보(X/Y)` — active only** | **99.5%** | **99.0%** |
+| **`도로명주소` — active only** | **99.7%** | **100%** |
+| Either, active only | **100%** | **100%** |
+| `사업장명` / `영업상태명` | 100% | 100% |
+| Encoding | cp949 | cp949 |
+
+Coordinate ranges X 182,525–213,646 / Y 438,573–464,745 — consistent with
+EPSG:5174 over Seoul. `위생업태명` subdivides 숙박업 into 여관업 1,341,
+관광호텔 478, 숙박업(생활) 395, 일반호텔 255, 여인숙업 237.
+
+**Why this supersedes `OA-13663`.** It carries coordinates, so **Korea needs no
+geocoding leg at all** — which reverses the previous section's conclusion. It
+also filters on a status *field* rather than on the presence of a closure date.
+The trade is that one dataset is one business type, so a city needs several,
+which is the `multi-source-city` shape the US cities already use.
+
+Confirmed citywide (no district prefix): `OA-16044` 숙박업, `OA-16043`
+관광숙박업, `OA-16007` 동물병원, `OA-16106` 계량기제조업, `OA-16067` 집단급식소,
+plus 통신판매업, 위탁급식영업, 무료·유료직업소개소. **Per-district** (25 datasets
+each, because 보건소 licenses them): 병원, 의원, 부속의료기관, 산후조리업, 안경업.
+
+**Still unknown, and needed before a build:** the OA ids for 일반음식점,
+휴게음식점, 미용업, 이용업, 목욕장업, 세탁업 — the three buckets' core types.
+They are not in OA-15880–16460, which was swept. The catalogue search is
+**UI-only** (below), so finding them means driving the search box, not a sweep.
+**And the licence is unread** — `이용허락범위` appears in each dataset's
+metadata block and has not been opened. `read-licence` before this is recorded
+in `docs/data_sources.md`.
+
+#### Seoul's 공중위생업소 is NOT published as a file — and the first probe of this was wrong
+
+Two findings, the second more useful than the first.
+
+**The answer.** `data.seoul.go.kr` holds **251** datasets matching 공중위생, and
+the site's own facet panel reads:
+
+```
+제공유형    SHEET (182)    OPENAPI (180)    LINK (71)    CHART (27)
+```
+
+**No FILE row at all** — so zero of the 251 offer the `nio_download.do` route
+that `OA-13663` uses. `OA-10184` (`서울시 중구 위생처리업 공중위생업소 현황`)
+is **중구 only**, one of 25 districts, SHEET/OpenAPI. The citywide ones
+(`서울시 위생처리업 현황`, `서울시 숙박업 인허가 정보`) are SHEET/OpenAPI too —
+which is exactly why the SHEET export above matters. For scale: Seoul has
+**1,179** FILE datasets overall, 137 of them tagged 좌표. The FILE route is
+broad; hygiene is simply excluded from it.
+
+**The method error, worth more than the answer.** The first pass concluded
+"only `OA-13663` has a FILE tab" from a search that **silently ignored the
+search term**. Both `GET ?srchDetailWord=` and `POST searchKeyword=` return the
+unfiltered default listing — and a nonsense control term returned a
+**byte-identical** page (91,928 b, then 84,955 b) with the same ten dataset
+ids. The ten looked like plausible hygiene results because the catalogue's
+default ordering happens to surface hygiene datasets. Nothing about the
+response said "your filter was dropped."
+
+> **Rule.** Before believing a search result list — or a zero — send a
+> **nonsense term** and confirm the response differs. A parameter a server
+> ignores produces a confident, plausible, wrong answer, and neither the status
+> code nor the page shape reveals it. This is how a whole country nearly got
+> written off, the same way the `www.` vhost nearly lost Peru.
+
+A second-order lesson: **a site's own facet counts beat sampling.** One read of
+"SHEET (182) OPENAPI (180) LINK (71) CHART (27)" settles what paging through
+251 results would not, because it is the publisher's own count over the whole
+result set rather than an inference from page one.
+
+#### Busan and Daegu, probed individually 2026-09-22 — both fail, for different reasons
+
+Requested as "real work, may yield two cities." It yielded neither, but the
+reasons are worth keeping because they are the shape of every Korean
+non-capital city.
+
+**The structural fact behind both.** In Korea the licensing authority is the
+**자치구/군**, not the city. So the register is published per district, in
+whatever schema and on whatever schedule that district chose. Seoul is the
+exception, not the rule: it aggregates. Verified — `OA-13663` covers **all 25
+districts**, 강남구 4,744 down to 도봉구 794.
+
+**Busan — NO, on two independent grounds.**
+
+Its search is browser-only (curl gets a nav-only shell from
+`/bdip/srh/getPublicDataListSearch.do`). Driven properly, 식품위생업소 returns
+**59 공공데이터** — but the portal **federates `data.go.kr`**, so Seoul
+datasets appear among Busan's results. Busan's own, from the rendered list:
+
+| District | What it actually is |
+|---|---|
+| 중구, 사상구, 동래구, 수영구 | real premises registers |
+| 연제구 | 식품소분업 only |
+| 기장군 | 식품제조가공업 only |
+| 북구 | 위탁급식영업 only |
+| 사상구 | 행정처분현황 — *enforcement actions*, not premises |
+
+That is **4 of 16 districts** with a usable register. Coverage fails on its own.
+
+Access fails too. Busan does not host the files: the FILE button's own
+`onclick` points at
+`https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003705859&fileDetailSn=3`.
+Fetched: `fileDetailSn` 1 and 2 return **0 bytes**, 3 returns an **87,693-byte
+PNG** (`nexroutine_wordmark_720.png`) and 4 a **203,559-byte JPEG**. Busan's
+cached `atchFileId` has gone stale and now resolves to somebody else's images.
+Asking `data.go.kr` itself, logged out, returns `status: true` but
+**`atchFileId: null`**, so `fn_fileDataDownload` cannot fire. And the path runs
+through `/cmm/cmm/check-limit.json` → `needCaptcha` → `showLimitCaptcha`: a
+**CAPTCHA rate-limiter**, which this project does not attempt to defeat. Even
+with an account, 16 districts × an interactive gate is not a pipeline.
+
+**Daegu — NO on coverage, but the download route works.**
+
+Daegu's search *does* honour `searchWrd` (nonsense control returned 0 ids).
+Its `dataView.do` is a Vue app over eGovFrame; `/data/rest/*` refuses curl even
+with a warmed cookie, so the live app was read instead — `portalDataCheck:
+false` on every dataset, with `dataUrl` pointing at the same
+`www.data.go.kr/cmm/cmm/fileDownload.do`. **Unlike Busan's, Daegu's ids are
+current**, and `fileDetailSn=1` works. Five downloaded keylessly:
+
+| Dataset | Rows | 도로명 | Coordinates |
+|---|---|---|---|
+| 남구 식품위생업소 | 4,060 | 94% | — |
+| 서구 식품위생업소 | 4,122 | 100% | — |
+| 북구 식품접객업 | 6,432 | 100% | — |
+| **달서구 식품관련업소** | **11,089** | 100% | **위도/경도, 99.9% inside Daegu's bbox** |
+| 수성구 공중위생업 | 2,523 | 100% | — |
+
+달서구's mix is right: 일반음식점 5,738, 휴게음식점 1,733, 건강기능식품 918,
+제과점영업 167. **None of the five carries `폐업일자`**, so closed premises
+cannot be filtered — Japan's problem, not Seoul's.
+
+**What kills it: 중구 publishes no premises register at all.** Daegu's downtown
+district offers **9 datasets** — libraries, festivals, 평생학습강좌, 노동조합 —
+and a 중구 + 위생 search returns nothing. Daegu Metro Lines 1, 2 and 3 all
+converge in 중구 (반월당, 중앙로, 대구역). **The densest station areas in the
+city would be blank**, which is not a commercial-density map of Daegu. 4 of 9
+districts obtainable, and the missing one is the one that matters most.
 
 #### Exhaustive Korean domain scrub, 2026-09-21 — 21 hosts
 
@@ -1893,9 +2078,21 @@ it to dominate the cost of any European profile.
    standard. Does it serve static GTFS-JP for **Tokyo Metro, Toei and JR
    East**? The catalogue holds neither the private railways nor JR, which is
    where most of Tokyo's ridership is.
-4. **South Korea's transit data**, from the national source rather than the
-   catalogue. This single question decides whether the best-matched business
-   data in the world for this project is reachable at all.
+4. ~~**South Korea's transit data**, from the national source rather than the
+   catalogue.~~ **Done — it is excellent** (see "Korea's transit leg"). And the
+   business leg is now settled too: Seoul is buildable with **no account and no
+   geocoding** via the 인허가 정보 SHEET export. Korea's remaining questions are
+   both small and both Seoul-specific:
+   - **Find the OA ids for 일반음식점, 휴게음식점, 미용업, 이용업, 목욕장업,
+     세탁업.** Not in OA-15880–16460. The catalogue search is UI-only, so this
+     means driving the search box in a browser, not sweeping ids.
+   - **Read `이용허락범위`** on those dataset pages (`read-licence`). KOGL Type 1
+     is expected from the LOCALDATA lineage but has not been opened for
+     `data.seoul.go.kr` itself. Nothing gets recorded in `docs/data_sources.md`
+     until it is.
+
+   **Busan and Daegu are closed, not open** — see their section. Korea is a
+   one-city country for this project.
 5. **Barcelona's census schema, live** — columns, coordinates, licence,
    and whether the activity codes resolve to the project's three buckets.
 6. **Re-verify Korea's endpoints on `data.go.kr`**, since everything predates
