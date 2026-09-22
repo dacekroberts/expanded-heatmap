@@ -1,0 +1,315 @@
+CRTM - Licencia de uso de datos abiertos y estaticos
+Source: https://www.crtm.es/licencia-de-uso
+Retrieved: 2026-09-22
+Stored by: expanded-heatmap (docs/licenses/README.md explains why)
+==============================================================================
+
+Licencia de uso
+Consorcio Regional de Transportes de Madrid -->
+
+-->
+
+-->
+
+-->
+
+Pasar al contenido principal
+
+Este sitio utiliza cookies para mejorar tu experiencia.
+Leer más
+
+Aceptar todas
+
+Configurar cookies
+
+Configuración de Cookies
+
+Elige qué tipo de cookies deseas permitir en este sitio:
+
+Este es el panel de configuración y aceptación de Cookies. Selecciona las que deseas aceptar.
+
+Cookies t&#xE9;cnicas (siempre activas)
+
+Ver listado detallado de este tipo de cookies
+
+Denominación
+Origen
+Duración
+Finalidad
+
+UMB_UCONTEXT
+Umbraco
+Persistente, finaliza al terminar la sesión.
+Esta es una cookie específica de Umbraco. Almacena una referencia de Guid al usuario backend registrado actualmente. Generado al azar al iniciar sesión y almacenado en la base de datos, le permite acceder al usuario actual, sin tener que almacenar ningún dato específico del usuario en la cookie.
+
+UMB_UPDCHK
+Umbraco
+Persistente, finaliza al terminar la sesión.
+Esta es una cookie específica de Umbraco. Almacena un flag para indicar que se ha realizado una comprobación de actualización. Cuando una cookie caduca o no se encuentra una cookie, se realiza otra comprobación de actualización (configurando la cookie nuevamente). Las comprobaciones solo se realizan si el usuario actual es un administrador de fondo.
+
+Crtmwidgetcookies
+CRTM
+Persistente
+Identifica si se ha realizado la aceptación de las cookies en el widget.
+
+crtmwidgetProtDatos
+CRTM
+Persistente
+Identifica si se ha realizado la aceptación de la protección de datos en el widget.
+
+crtmcookiesSVProtDatos
+CRTM
+Persistente
+Identifica si se ha realizado la lectura y aceptación de la política de protección de datos de solicitud de visita en el Portal Web.
+
+crtmcookiesProtDatos
+CRTM
+Persistente
+Identifica si se ha realizado la aceptación de las cookies y la política de protección de datos en el Portal Web.
+
+crtmcookiesCAnaliticas
+CRTM
+Persistente
+Indica si se han aceptado las cookies de tipo Analítico.
+
+crtmcookiesCPublicitarias
+CRTM
+Persistente
+Indica si se han aceptado las cookies de tipo Publicitario.
+
+crtmcookiesCPersonalizacion
+CRTM
+Persistente
+Indica si se han aceptado las cookies de tipo Personalización.
+
+Aceptar cookies anal&#xED;ticas
+
+Estás cookies recogen datos sobre el comportamiento de los usuarios y permiten elaborar un perfil de usuario.
+
+Si no se aceptan bloqueará el uso de:
+
+Inclusite (Herramienta de accesibilidad)
+
+Los mapas de líneas que usen Google.
+
+Google Analytics
+
+Ver listado detallado de este tipo de cookies
+
+Denominación
+Origen
+Duración
+Finalidad
+
+__utma
+Google
+Persistente, dos años a partir de la configuración o actualización.
+Se usa para distinguir usuarios y sesiones. La cookie se crea cuando se ejecuta la biblioteca JavaScript y no hay ninguna cookie __utma. La cookie se actualiza cada vez que se envían datos a Google.
+
+__utmb
+Google
+Persistente, 30 minutos a partir de la configuración o actualización.
+Se usa para determinar nuevas sesiones o visitas. La cookie se crea cuando se ejecuta la biblioteca JavaScript y no hay ninguna cookie __utmb. La cookie se actualiza cada vez que se envían datos a Google.
+
+__utmc
+Google
+Hasta fin de la sesión del navegador.
+Se configura para interactuar con urchin.js. Anteriormente, esta cookie actuaba junto con la cookie __utmb para determinar si el usuario estaba en una nueva sesión o visita.
+
+__utmt
+Google
+Persistente, diez minutos a partir de la configuración o actualización.
+Se usa para limitar el porcentaje de solicitudes.
+
+__utmv
+Google
+Persistente, dos años a partir de la configuración o actualización.
+Se usa para almacenar datos de variables personalizadas de visitante. Esta cookie se crea cuando un programador usa el método _setCustomVar con una variable personalizada de visitante. También se usaba para el método _setVar retirado. La cookie se actualiza cada vez que se envían datos a Google.
+
+__utmz
+Google
+Persistente, seis meses a partir de la configuración o actualización
+Almacena la fuente de tráfico o la campaña que explica cómo ha llegado el usuario al sitio. La cookie se crea cuando se ejecuta la biblioteca JavaScript y se actualiza cada vez que se envían datos a Google.
+
+_ga
+Google
+Persistente, dos años a partir de la configuración o actualización.
+Se usa para distinguir a los usuarios.
+
+_gat_gtag_[UID]
+Google
+Persistente, finaliza al terminar la sesión.
+Incluye información de la campaña relativa al usuario. Si has vinculado tus cuentas de Google Analytics y AdWords, las etiquetas de conversión de sitios web leerán esta cookie, a menos que la inhabilites.
+
+_gid
+Google
+Persistente, diez minutos a partir de la configuración o actualización.
+Se usa para distinguir a los usuarios.
+
+INCLUSSID
+Google
+Sesión
+Cookie de sesión de Inclusite, herramienta de apoyo en navegación web para personas con discapacidad. Caduca al finalizar la navegación iniciada por el usuario para facilitar la comunicación usuario/servidor.
+
+Aceptar cookies de personalizaci&#xF3;n
+
+Estás cookies permiten a los usuarios acceder dependiendo de algunas características propias que se recogen (navegador, idioma, etc.).
+
+Si no se aceptan bloqueará el uso de:
+
+Inclusite (Herramienta de accesibilidad)
+
+Google Translator
+
+Ver listado detallado de este tipo de cookies
+
+Denominación
+Origen
+Duración
+Finalidad
+
+__Inclusite_Accesibility__
+Inclusite
+Sesión
+Almacena la configuración seleccionada en Inclusite.
+
+googtrans
+Google Translator
+Sesión
+Almacena el idioma de destino que se está empleado si se traduce la página con Google Translate.
+
+Guardar preferencias
+Rechazar todas
+
+Inicio
+
+martes, 22 de septiembre de 2026
+
+Mapa Web
+
+-->
+-->
+-->
+
+Buscar
+
+Tu Transporte P&#xFA;blico
+
+Mu&#xE9;vete por Madrid
+
+Billetes y Tarifas
+
+Atenci&#xF3;n al cliente
+
+Con&#xF3;cenos
+
+Comunicaci&#xF3;n
+
+-->
+
+Estás en:
+
+Inicio
+
+Licencia de uso
+
+-->
+
+Licencia de uso
+
+-->
+
+-->
+
+-->
+
+Licencia de datos estáticos del Consorcio Regional de Transportes de Madrid para el portal de datos abiertos de la web del CRTM
+
+La presente Licencia de datos abiertos y estáticos del Consorcio Regional de Transportes de Madrid (en adelante, LDA) regula la reutilización de los datos abiertos del Consorcio Regional de Transportes de Madrid (en adelante, CRTM) alojados en la parte pública de la web en las condiciones fijadas en este documento. Por la misma queda vinculada la persona, empresa, organización o entidad  (en adelante, agente reutilizador) que va a hacer uso de los documentos contenidos o descritos en la presente licencia o de cualquier dato derivado del mismo y que sean definidos como datos de carácter abierto y estáticos del CRTM.
+
+Las presentes condiciones generales definidas en esta licencia permiten la reutilización de los documentos sometidos a ellas para fines comerciales y no comerciales
+
+El concepto de documento es el recogido en el Anexo de la Ley 37/2007, de 16 de noviembre, sobre reutilización de la información del sector público, por lo que comprende toda información o parte de ella, cualquiera que sea su soporte o forma de expresión, sea esta textual, gráfica, sonora visual o audiovisual, incluyendo los metadatos asociados y los datos contenidos con los niveles más elevados de precisión y desagregación. No se considerarán documentos los programas informáticos que estén protegidos por la legislación específica aplicable a los mismos.
+
+Se entiende por reutilización el uso de documentos que obran en poder de las Administraciones y organismos del sector público referidos en el artículo 2 de la mencionada Ley 37/2007, por personas físicas o jurídicas, con fines comerciales o no comerciales, siempre que dicho uso no constituya una actividad administrativa pública. La reutilización autorizada incluye, a modo ilustrativo, actividades como la copia, difusión, modificación, adaptación, extracción, reordenación y combinación de la información.
+
+Esta autorización conlleva, asimismo, la cesión gratuita y no exclusiva de los derechos de propiedad intelectual, en su caso, correspondientes a tales documentos, autorizándose la realización de actividades de reproducción, distribución, comunicación pública o transformación, necesarias para desarrollar la actividad de reutilización autorizada, en cualquier modalidad y bajo cualquier formato, para todo el mundo y por el plazo máximo permitido por la Ley.
+
+La presente licencia debe ser entendida pues como una licencia-tipo de las previstas en la letra b) del apartado 2 del artículo 4 de la precitada Ley 37/2007.
+
+Ámbito
+
+La LDA autoriza a:
+
+Descarga de datos calificados como estáticos de la parte pública de la web del CRTM.
+
+Compartir (copiar, distribuir) los datos anteriores y obtenidos del CRTM ofreciendo los datos bajo el mismo tipo de licencia.
+
+Los datos generados por el sector público pueden utilizarse como materia prima para servicios de valor añadido y productos innovadores que impulsan la economía, en consecuencia, las obras derivadas añadiendo valor pueden ofrecerse bajo licencias diferentes.
+
+Restricciones
+
+Son de aplicación las siguientes restricciones a las condiciones generales para la reutilización de los documentos sometidos a ellas:
+
+El agente reutilizador tiene expresamente prohibido desnaturalizar el sentido de la información, estando obligado a:
+
+No manipular con mala fe ni falsear la información.
+
+Garantizar que la información mostrada en su sistema esté siempre actualizada.
+
+No utilizar la información para menoscabar o dañar la imagen pública del CRTM o el sistema de transportes públicos.
+
+No utilizar la información en sitios en los que la información de CRTM pueda relacionarse con actos ilegales o intenciones de sabotaje hacia la CRTM o hacia otras entidades, organizaciones o personas.
+
+Debe citarse al CRTM como fuente de datos, especificando si son datos en bruto o explotados. En plataformas digitales; webs, foros, blogs, apps, etc…Debe quedar claramente la indicación “Powered by CRTM” incluyendo enlace a la página oficial del CRTM ( http://www.crtm.es/ )
+
+Deben conservarse, no alterarse ni suprimirse los metadatos sobre la fecha de actualización y las condiciones de reutilización aplicables incluidos, en su caso, como atributos complementarios a la información puesta a disposición para su reutilización.
+
+No se podrá indicar, insinuar o sugerir que el CRTM, como titular de la información reutilizada, participa, patrocina o apoya expresamente el producto final del agente reutilizador, salvo que el CRTM así lo autorice.
+
+CRTM monitorizará el acceso realizado por parte de los sistemas del agente reutilizador. Si se detectara un acceso indebido o abusivo de modo que pudiera penalizar los recursos de los sistemas de CRTM y comprometer la disponibilidad de los mismos por colapso o retardo, CRTM podrá bloquear el acceso al identificador del agente reutilizador.
+
+Garantías y responsabilidades
+
+Cada parte manifiesta y garantiza que tiene pleno poder para suscribir el presente Acuerdo.
+
+CRTM se reserva el derecho de poder incluir cualquier modificación en sus sistemas de Datos Abiertos, tanto en su interfaz de acceso y uso, como en su contenido y diseño. El agente reutilizador deberá realizar la actualización y adaptación de su sistema para una correcta integración con la información de CRTM.
+
+CRTM garantiza que posee plenos derechos sobre la titularidad y veracidad de los datos susceptibles de cesión a los que permite el acceso.
+
+La utilización de los conjuntos de datos se realizará por parte del agente de reutilización bajo su propia cuenta y riesgo, correspondiéndoles en exclusiva a ellos responder frente a terceros por los daños que pudieran derivarse de ella.
+
+CRTM no será responsable del uso que de su información hagan los agentes reutilizadores ni tampoco de los daños sufridos o pérdidas económicas que, de forma directa o indirecta, produzcan o puedan producir perjuicios económicos, materiales o sobre datos, provocados por el uso de la información reutilizada.
+
+CRTM no garantiza la continuidad en la puesta a disposición de la información reutilizable, ni en contenido ni en forma, ni asume responsabilidades por cualquier error u omisión contenido en ellos.
+
+Los datos se proporcionan tal y cómo están. No se puede garantizar que todos los datos sean estrictamente correctos. Cualquier perjuicio que pudiera producir a un tercero por el uso de datos que no sean estrictamente correctos no podrá ser imputado al CRTM. La aceptación de las condiciones de esta LDA exime de esta responsabilidad al CRTM.
+
+El agente reutilizador se halla sometido a la normativa aplicable en materia de reutilización de la información del sector público, incluyendo el régimen sancionador previsto en el artículo 11 de la Ley 37/2007, de 16 de noviembre, sobre reutilización de la información del sector público. El incumplimiento de esta licencia podría dar lugar a acciones restrictivas por parte del CRTM.
+
+La ley aplicable en caso de disputa o conflicto de interpretación de los términos que configuran este aviso legal, será la ley española. Para la resolución de cualquier conflicto que pudiera surgir, el CRTM y el usuario de los servicios de puesta a disposición de los documentos reutilizables acuerdan someterse a los Jueces y Tribunales de Madrid.
+
+Usuario
+
+Con fines estadísticos y de mejora de la calidad del servicio, se recomienda a los usuarios de los datos abiertos cubiertos por esta licencia (parte pública de la web) bien completar el siguiente formulario:
+
+-->
+-->
+
+O rellenar la  ficha identificativa  y enviar copia al email  opendata@crtm.es , indicando en el asunto "Usuario datos abiertos".
+
+© CRTM
+
+Accesibilidad web
+
+Datos Abiertos
+
+Normativa
+
+Aviso Legal
+
+Portal de transparencia
+
+Política de cookies
+
+Protección de datos

@@ -57,6 +57,8 @@ made New York look prohibited.
 |---|---|---|---|
 | `inegi-terminos-libre-uso-informacion.pdf` | **INEGI** — DENUE, and every other INEGI product. **The operative document.** Grants copying, publication, adaptation, extraction and *commercial* exploitation (§1a-e); requires prescribed attribution (§1f), **disclosure of any analysis or transformation** (§1g), and non-endorsement (§1h) | `https://www.inegi.org.mx/contenidos/inegi/doc/terminos_info.pdf` | 2026-09-22 |
 | `inegi-terminos-sitio.pdf` | **INEGI** — the *website* terms. NOT what governs the data; kept so the distinction is checkable rather than asserted | `https://www.inegi.org.mx/contenidos/inegi/doc/terminos_sitio.pdf` | 2026-09-22 |
+| `crtm-licencia-de-uso.txt` | **CRTM** (Madrid) — Metro station and line geometry. A `Ley 37/2007` licencia-tipo; carries the **"Powered by CRTM"** wording and the *en bruto o explotados* disclosure duty | `https://www.crtm.es/licencia-de-uso` | 2026-09-22 |
+| `madrid-condiciones-generales-reutilizacion.txt` | **Ayuntamiento de Madrid** — the Censo de locales. The conditions CC BY 4.0 does NOT cover, **binding by use**, including the last-update-date duty and the re-identification prohibition | `https://datos.madrid.es/pages/condiciones-generales-ayuntamiento-de-madrid` | 2026-09-22 |
 
 **Mexico City's rail geometry is OpenStreetMap, not an agency feed**, because
 every `*.cdmx.gob.mx` host times out and the feed's S3 `direct_download`
