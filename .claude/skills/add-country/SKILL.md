@@ -133,9 +133,21 @@ All four happened in one day.
   2. **The wrong hostname.** `datosabiertos.gob.pe` fails; **`www.`
      datosabiertos.gob.pe answers**. Peru was nearly written off over a vhost.
      **Always try `www.`**
-  3. **Bot protection, not downtime.** `opendata.tel-aviv.gov.il` returns
-     **HTTP 472**, a non-standard code meaning a WAF refused the script. Use
-     the browser before concluding anything.
+  3. **A refusal, which is TWO different things - read the block page.**
+     - **Client-signature refusal:** a bare `requests` user agent is rejected
+       where a real browser is not. Chicago's data terms do this. **Use the
+       browser**, as `read-licence` says.
+     - **IP-level refusal:** the block page **names your IP address** or shows
+       a WAF request ID. **The browser is useless** - it shares the address.
+       Tested 2026-09-21: `data.go.th` and `opendata.tel-aviv.gov.il` both
+       refused the browser pane and printed `50.47.238.226` back, the same IP,
+       one with a Cloudflare Ray ID and one as `Status Code: 472`. The trigger
+       is a **different network or region**, plausibly in-country.
+
+     This distinction was got wrong first: "bot-protected, so try the browser"
+     was carried over from the licence workflow without testing it, and a
+     country was kept warm on a false rationale. **If the block page prints
+     your IP, the client is not the problem.**
   4. **A genuinely dead host.** Only after the first three. And note whether it
      is one host or a **whole domain**: every `*.cdmx.gob.mx` host times out,
      which is a more durable finding than one portal being down.
