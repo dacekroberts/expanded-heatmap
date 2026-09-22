@@ -32,6 +32,7 @@ from shapely.geometry import LineString, Point
 
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent.parent.parent))
 
+from pipeline.baseline import emit  # noqa: E402
 from pipeline.madrid.config import (  # noqa: E402
     CITY_BOUNDARY_URL,
     CITY_BOUNDARY_ZIP,
@@ -170,6 +171,7 @@ def main():
         })
     st = pd.DataFrame(rows)
     print(f"  {len(st)} station-per-line records fetched")
+    emit("station_line_records", len(st))
 
     # THE UNNAMED RECORDS, handled explicitly rather than dropped by a filter
     # that does not mention them. Two rows (CODIGOESTACION 347, 348, both added
@@ -185,6 +187,7 @@ def main():
     # 293 records -> physical stations. An interchange is one place; averaging
     # its per-line points puts the marker between the platforms rather than on
     # an arbitrary one.
+    emit("stations_named_network", st["name"].nunique())
     print(f"  {st['name'].nunique()} distinct station names "
           f"(from {len(st)} records - interchanges repeat per line)")
     grouped = (st.groupby("name")
@@ -222,6 +225,9 @@ def main():
 
     kept = gdf[gdf["in_city_spatial"]].copy()
     outside = gdf[~gdf["in_city_spatial"]].copy()
+    emit("stations_in_city", len(kept))
+    emit("stations_excluded", len(outside))
+    emit("station_filter_disagreements", len(disagree))
 
     # Excluded stations are a scoping RECORD, not a silent filter: San Diego
     # dropped 16 and Los Angeles 54, each named with the city it lies in.
@@ -257,6 +263,8 @@ def main():
                 segs.setdefault(line, []).append(LineString(path))
     print(f"  {len(codes)} distinct line codes -> {len(segs)} lines "
           f"(codes: {' '.join(sorted(codes))})")
+    emit("metro_lines", len(segs))
+    emit("tramo_line_codes", len(codes))
     if len(segs) != 13:
         raise SystemExit(f"expected 13 Metro lines, collapsed to {len(segs)} - "
                          "the GTFS and OSM screens both say 13")
