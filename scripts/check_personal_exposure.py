@@ -221,6 +221,29 @@ REGISTRIES = {
                       trade="businesstradename", owner="businessname",
                       processed="businesses_clean.csv",
                       address=("address",)),
+    # Mexico City has the strongest structural position of any city here, and
+    # it is the PUBLISHER's doing rather than this pipeline's. INEGI omits
+    # `raz_social` entirely when the owner is a persona fisica - its own data
+    # dictionary says "para proteger la confidencialidad de la informacion" -
+    # and `nom_estab` is defined as the name on the shopfront, "visible y
+    # escrito en rotulos, fachadas o anuncios luminosos", populated on 99.95%
+    # of rows. So there is no registrant-name column to fall back to even in
+    # principle, which is why raw/trade/owner are None: Los Angeles' failure
+    # (68% blank dba_name -> ~4,000 individuals published at their premises)
+    # has no mechanism here. Step 2 additionally forbids telefono, correoelec,
+    # www and raz_social and asserts they never arrive.
+    #
+    # ADDRESS IS None AND THAT IS A MEASUREMENT GAP, NOT A PASS - recorded the
+    # way San Diego's and Boston's gaps are. businesses_clean.csv carries no
+    # address column because the map needs none, so the unit-indicator check
+    # cannot run from here. DENUE does have `numero_int`, a STRUCTURED interior
+    # number (better evidence than a regex over free text, per the
+    # multi-source-city skill), and step 2 measures and prints its rate without
+    # publishing the column - adding a unit number to the output to check for
+    # unit numbers would be self-defeating.
+    "mexico_city": dict(raw=None, trade=None, owner=None,
+                        processed="businesses_clean.csv",
+                        address=None),
 }
 
 # Unit designators that suggest a residence, as opposed to a commercial suite.
@@ -360,9 +383,40 @@ def report_contact_details(rows, names):
 
 
 def pins(slug):
-    """[lat, lon, name, classification, station, ring] for every pin in the map."""
+    """[lat, lon, name, classification, station, ring] for every pin in the map.
+
+    row[3] IS AN INDEX INTO A PER-LAYER LOOKUP TABLE since 2026-09-22, not the
+    classification string, because map_common indexes it to shrink the rendered
+    file (Mexico City: 106 distinct values across 283,345 rows, ~7 MB inline).
+    This resolves it back to the string so every caller below is unchanged.
+
+    The pairing is positional: map_common emits the callback - and therefore
+    `var CATEGORIES` - BEFORE its `var data`, once per category layer, so the
+    Nth table belongs to the Nth data block. Verified against a rendered file
+    rather than assumed.
+
+    A bare string at row[3] is still accepted, so a map rendered before the
+    change reads correctly instead of raising - which matters because these
+    outputs are committed and are re-rendered city by city.
+    """
     text = (ROOT / "outputs" / slug / "heatmap.html").read_text(encoding="utf-8")
-    return [r for b in re.findall(r"var data = (\[\[.*?\]\]);", text, re.S) for r in json.loads(b)]
+    tables = [json.loads(t) for t in
+              re.findall(r"var CATEGORIES = (\[.*?\]);", text, re.S)]
+    blocks = re.findall(r"var data = (\[\[.*?\]\]);", text, re.S)
+    if tables and len(tables) != len(blocks):
+        raise SystemExit(
+            f"{slug}: {len(tables)} CATEGORIES tables against {len(blocks)} "
+            "data blocks - the positional pairing in pins() no longer holds. "
+            "Do not guess; re-read how map_common.add_pin_layer emits them."
+        )
+    out = []
+    for i, block in enumerate(blocks):
+        table = tables[i] if i < len(tables) else None
+        for r in json.loads(block):
+            if table is not None and isinstance(r[3], int):
+                r[3] = table[r[3]]
+            out.append(r)
+    return out
 
 
 def looks_personal(name):

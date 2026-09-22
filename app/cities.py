@@ -328,6 +328,20 @@ CITIES = [
         # their own dots further south.
         "label_offset": ("start", 12, -10),
     },
+    {
+        "name": "Mexico City",
+        "lat": 19.4326,
+        "lon": -99.1332,
+        "page": "pages/15_Mexico_City_Heatmap.py",
+        "blurb": "Metro CDMX (Líneas 1–9, A, B and 12) and the STE Tren Ligero",
+        "region": "Mexico",
+        # Outside the United States frame, like every Canadian city - see
+        # IN_DEFAULT_VIEW below. Mexico's centre sits 14.02 degrees SOUTH of the
+        # US centre and 1.41 degrees west, almost an exact mirror of Canada's
+        # 14.53 north and 1.49 east, so the switcher moves the view vertically
+        # and the pinned zoom is untouched.
+        "in_default_view": False,
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -380,7 +394,7 @@ IN_DEFAULT_VIEW = [c for c in CITIES if c.get("in_default_view", True)]
 DEFAULT_REGION = "United States"
 
 # Order is display order in the switcher. A new country appends here.
-REGION_ORDER = ["United States", "Canada"]
+REGION_ORDER = ["United States", "Canada", "Mexico"]
 
 
 def cities_in(region):

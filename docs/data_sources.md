@@ -920,6 +920,45 @@ provider of the Data". No exact wording is prescribed. Same shape as LA Metro's
 obligation. The agreement itself is kept at
 `docs/licenses/mbta-massdot-develop-license-agreement.pdf`.
 
+**8. INEGI (Mexico City) — required, and DISPLAYED since 2026-09-22. It is TWO
+obligations rather than one.** The Términos de Libre Uso de la Información del
+INEGI (`docs/licenses/inegi-terminos-libre-uso-informacion.pdf`, retrieved
+2026-09-22) grant more than most sources here — §1(b)-(e) permit publishing,
+adapting, extracting and even **commercial** exploitation — in exchange for:
+
+- **§1(f), attribution in a prescribed form:** credit INEGI as author and,
+  where technically possible, name the source as *"Fuente: INEGI, nombre del
+  producto de donde se extrae la información"* plus the update date. For this
+  project that is **"Fuente: INEGI, Directorio Estadístico Nacional de Unidades
+  Económicas (DENUE)"** with DENUE's own edition date.
+- **§1(g), DISCLOSURE OF TRANSFORMATION, which a source credit does not
+  satisfy.** The user must be notified of *"cualquier análisis o transformación
+  que haga a la información"*, and the presentation must not suggest INEGI
+  performed it. **This project triggers that clause on every map**: ring
+  assignment, bucketing into three categories, the storefront filter and the
+  `Fijo`-only filter are all transformations. Treat attribution and disclosure
+  as two separate duties — the Montréal licence has the same split, and it is
+  easy to satisfy the first and miss the second.
+- **§1(h), non-endorsement:** the use must not appear to represent an official
+  INEGI position, nor to be endorsed, integrated, sponsored or supported by the
+  source. The site-wide non-affiliation notice already covers the shape of
+  this; INEGI is named explicitly for safety.
+- **§1(a)** additionally forbids altering or suppressing the metadata of
+  distributed copies. This project distributes no copy of DENUE — only derived
+  points — so it does not bite, and is recorded so nobody has to re-derive it.
+
+Note the two-document split: `inegi-terminos-sitio.pdf` governs **inegi.org.mx
+as a website** and is NOT the data licence. Both are stored, because reading a
+site-terms document as though it governed the data is what made New York look
+prohibited.
+
+**Mexico City's rail geometry is OpenStreetMap, so notice 1 now covers DATA and
+not only basemap tiles.** Every `*.cdmx.gob.mx` host is unreachable, so the
+lines are drawn from OSM route relations (owner-approved 2026-09-22 as a
+per-city exception). ODbL 1.0 attribution was already satisfied for the
+basemap; the same credit now also covers line geometry, and notice 1's wording
+should not imply it is only about tiles.
+
 **This heading read "NOT YET DISPLAYED" until 2026-09-21 and was stale**, which
 is worth leaving a note about because a compliance document that understates
 compliance invites someone to re-fix a closed item and to doubt the rest of the

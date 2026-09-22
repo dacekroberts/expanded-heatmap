@@ -435,6 +435,55 @@ _NOTICES = [
      "measured by distance from transit stations. The City of Edmonton does "
      "not endorse this project or its use of the data.",
      False),
+    # Mexico City, added 2026-09-22. TWO OBLIGATIONS IN ONE NOTICE, and the
+    # second is the one a source credit does not discharge.
+    #
+    # INEGI's Terminos de Libre Uso (docs/licenses/
+    # inegi-terminos-libre-uso-informacion.pdf) are unusually generous -
+    # sections 1(b) to 1(e) permit publishing, adapting, extracting and even
+    # COMMERCIAL use - in exchange for three things:
+    #
+    #   1(f)  credit INEGI as author and, where technically possible, name the
+    #         source as "Fuente: INEGI, nombre del producto..." plus the update
+    #         date. The prescribed shape is followed below.
+    #   1(g)  "Asegurarse de notificar al usuario final de cualquier analisis o
+    #         transformacion que haga a la informacion y que la misma no sea
+    #         presentada de tal manera que sugiera que dicho analisis o
+    #         transformacion fue realizada por parte del INEGI."
+    #   1(h)  the use must not appear to represent an official INEGI position,
+    #         nor to be endorsed, sponsored or supported by the source.
+    #
+    # 1(g) IS A SEPARATE DUTY, NOT A LOUDER VERSION OF 1(f) - the same split as
+    # the Ville de Montreal's "ou si des interpretations en ont ete tirees", and
+    # this project triggers it on every map: ring assignment, bucketing into
+    # three categories, the storefront filter and the Fijo-only filter are all
+    # transformations. A bare "data from INEGI" would credit and not disclose.
+    #
+    # Not marked verbatim: INEGI prescribes the attribution FORM and the
+    # disclosure OBLIGATION, but no sentence for the latter.
+    ("INEGI",
+     "Fuente: INEGI, Directorio Estadístico Nacional de Unidades Económicas "
+     "(DENUE). Business locations for Mexico City are from DENUE, published by "
+     "the Instituto Nacional de Estadística y Geografía, used under the "
+     "Términos de Libre Uso de la Información del INEGI. The data has been "
+     "analysed and transformed by this project and not by INEGI: it is "
+     "filtered to fixed premises in storefront categories, grouped into three "
+     "categories of this project's own, and measured by distance from transit "
+     "stations. INEGI does not endorse this project or its use of the data, "
+     "and nothing here represents an official INEGI position.",
+     False),
+    # Mexico City's RAIL geometry is OpenStreetMap rather than the operator's
+    # feed, because every *.cdmx.gob.mx host is unreachable (see
+    # pipeline/mexico_city/config.py). ODbL 1.0 attribution was already
+    # satisfied for the basemap by every rendered map's "© OpenStreetMap
+    # contributors"; this line exists so the credit visibly covers the LINE
+    # GEOMETRY too, which is data rather than tiles.
+    ("OpenStreetMap (Mexico City rail)",
+     "Metro and Tren Ligero route geometry and station locations for Mexico "
+     "City are from OpenStreetMap, © OpenStreetMap contributors, available "
+     "under the Open Database License. The alignments drawn are OSM's own "
+     "geometry; stations, rings and categories are this project's work.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

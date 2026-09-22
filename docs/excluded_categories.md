@@ -684,6 +684,51 @@ SECOND HAND GOODS` (66) as people rather than premises, `SHORT TERM RENTAL
 COMPANY` (5, NAICS 721), and `** Class record not on file. (138)` (4), which is
 the register's own placeholder.
 
+### Mexico City - street stalls, a nonstore twin, and a heuristic that does not speak Spanish
+
+**Semifijo premises are excluded — 20,586 of 462,732 economic units (4.45%),
+of which 18,264 would otherwise have classified into a bucket.** DENUE records
+`tipoUniEco` as `Fijo` or `Semifijo`; a semi-fixed unit is a stall or street
+post rather than a storefront. This project maps storefronts, so the same
+reasoning that excludes nonstore retail everywhere excludes these. It is a
+scope decision, not a data-quality one: street commerce is a real and large
+part of Mexico City's retail geography, and **this map does not show it.**
+Owner's decision, 2026-09-22.
+
+**SCIAN 469 — nonstore retail — is excluded**, the exact twin of NAICS 454
+excluded in every US city: *"Comercio al por menor exclusivamente a través de
+Internet, y catálogos impresos, televisión y similares"*. Small here, 90 units
+in Mexico City against nonstore's 10.1% of Los Angeles' pins, and excluded on
+the same reasoning regardless of size.
+
+**SCIAN 812410 — parking — is excluded**, the twin of NAICS 81293. 2,230 units.
+A parking trip is planned rather than incidental foot traffic from a station.
+
+**Not excluded but absent by construction: 811 repair and 813 associations.**
+Personal services is anchored on **812**, not the whole of 81, so auto repair
+(27,216 units in Jalisco, the largest block inside 81) and civic, religious and
+professional associations never enter. Food service is anchored on **722**, not
+72, so 721 accommodation — hotels — never enters either. Both are the same
+precision the NAICS cities use; a two-digit prefix would have been the
+obvious-looking mistake.
+
+**The whole-city heat layer is OFF for this city.** Every other city offers an
+opt-in layer showing all of its businesses, not only those within a station
+ring. Mexico City's would carry 283,345 points against 133,362 in the default
+layer, and dropping it cut the rendered file from 25.7 MB to 19.0 MB. So the
+map shows density **around stations** and does not offer the whole-city
+comparison the other cities do.
+
+**What is NOT excluded, and is worth stating because the number looks
+alarming:** `scripts/check_personal_exposure.py` reports that 32.2% of Mexico
+City's pins "look like a person". A hand-sample of 26 found **none** that were
+a person presented as a person — every one was a shop sign in the Spanish
+convention of trade type plus a given name or brand (`ABARROTES LIZ`,
+`ESTETICA MARIFER`, `ZAPATERIA SOFI`), and `COCINA ECONOMICA` — two common
+nouns — also trips it. The heuristic is tuned for English "SMITH JOHN" forms
+and does not transfer; Mexico City is this project's first non-English city.
+Nothing is filtered on that number.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

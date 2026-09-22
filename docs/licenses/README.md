@@ -40,6 +40,29 @@ TransLink are the outliers.
 | `translink-open-api-terms-of-use.txt` | **TransLink** Open API — *not* what governs the feed this project uses. Kept because it looked like it did, and because it requires discretionary approval | `https://www.translink.ca/about-us/doing-business-with-translink/app-developer-resources/terms-of-use` | 2026-09-21 |
 | `surrey-open-government-licence.txt` | **City of Surrey** — Business Directory. Covers Surrey's own data only; its rail is TransLink's | `https://opendata-surrey.hub.arcgis.com/pages/surrey::open-data-license` | 2026-09-21 |
 
+### Mexico — profiled 2026-09-22, CDMX being built
+
+**Two documents, and the split is the whole point.** INEGI publishes its
+website terms and its *information* terms as separate PDFs, so
+`read-licence`'s step-4 question - does this govern web pages or data? - is
+answered by the publisher rather than inferred. `terminos_info` is the
+operative one; `terminos_sitio` is kept for the contrast, because reading a
+site-terms document as though it governed the data is exactly the mistake that
+made New York look prohibited.
+
+| File | Source | Source URL | Retrieved |
+|---|---|---|---|
+| `inegi-terminos-libre-uso-informacion.pdf` | **INEGI** — DENUE, and every other INEGI product. **The operative document.** Grants copying, publication, adaptation, extraction and *commercial* exploitation (§1a-e); requires prescribed attribution (§1f), **disclosure of any analysis or transformation** (§1g), and non-endorsement (§1h) | `https://www.inegi.org.mx/contenidos/inegi/doc/terminos_info.pdf` | 2026-09-22 |
+| `inegi-terminos-sitio.pdf` | **INEGI** — the *website* terms. NOT what governs the data; kept so the distinction is checkable rather than asserted | `https://www.inegi.org.mx/contenidos/inegi/doc/terminos_sitio.pdf` | 2026-09-22 |
+
+**Mexico City's rail geometry is OpenStreetMap, not an agency feed**, because
+every `*.cdmx.gob.mx` host times out and the feed's S3 `direct_download`
+returns 403 (re-confirmed 2026-09-22). OSM is ODbL 1.0. No file is stored here
+for it: ODbL is a published public licence rather than an agency document that
+can be revoked or rewritten without notice, which is the reason this directory
+exists. What it changes is the **scope of an attribution the project already
+carries** - see `../data_sources.md`.
+
 ## SHA-256, as retrieved
 
 ```
@@ -59,6 +82,8 @@ db8ad88e1e4a4b61f5c7fae7a1c593cf605402ebaed9886102dbdca0f97f3a08  translink-open
 c389fcab88815aee4b2b39b76350a5bac85e080c52ccd794f9c647911fbeae37  translink-gtfs-static-terms-of-use.txt
 7030261bb53846ed58187b724f23b343e692c7a34bff01e3f69042848e44a472  ipc-ontario-interpretation-bulletin-personal-information.pdf
 6da9228708efa429399ad12f2fd028eb27be453adb71ae2fce68cf5fe75425e5  surrey-open-government-licence.txt
+8900206bbe4a2b8cf461e7e7ff111564cf4de2f863c7cd00b99ac19a4b925d62  inegi-terminos-libre-uso-informacion.pdf
+4496431cc92fef99add789b6fdbb6d1494bd2397e4a05f79f49bd4fd0ab63359  inegi-terminos-sitio.pdf
 ```
 
 ## Two files here are NOT licences

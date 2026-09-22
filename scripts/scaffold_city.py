@@ -343,6 +343,12 @@ def add_city_entry(root, args, page_rel, dry_run):
         f'        "lon": {args.lon},\n'
         f'        "page": "{page_rel}",\n'
         f'        "blurb": "{args.system_name} (TODO: list the lines)",\n'
+        # REQUIRED since 2026-09-21: app/cities.py raises at import on a city
+        # whose region is missing or not in REGION_ORDER, so a scaffold without
+        # this produces a file that will not import. Mexico City found it the
+        # hard way. A region new to the project must ALSO be appended to
+        # REGION_ORDER by hand - this only tags the city.
+        f'        "region": "{args.region}",\n'
         "    },\n"
     )
     # Find the end of the CITIES list specifically, NOT the last "]" in the
@@ -397,6 +403,11 @@ def main():
     ap.add_argument("--taxonomy", required=True, help="a key from TAXONOMY_MODULES, or the name of a new one with --new-taxonomy")
     ap.add_argument("--lat", type=float, required=True, help="marker latitude on the macro map (and CRS zone hint)")
     ap.add_argument("--lon", type=float, required=True)
+    ap.add_argument("--region", required=True,
+                    help="the macro map's region for this city, e.g. \"United States\", "
+                         "\"Canada\", \"Mexico\". REQUIRED: app/cities.py raises at import "
+                         "on an untagged city. A region new to the project must also be "
+                         "appended to REGION_ORDER there by hand.")
     ap.add_argument("--map-step", type=int, default=3, help="number of the map step (3, or 4 if a geocoding step is inserted)")
     ap.add_argument("--new-taxonomy", action="store_true", help="also create and register a skeleton taxonomy module")
     ap.add_argument("--value-column", help="with --new-taxonomy: the raw classification column")

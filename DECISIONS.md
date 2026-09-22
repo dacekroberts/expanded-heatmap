@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**113 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**114 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Mexico City built: the first city here whose rail is not GTFS, and the first outside North America's licence-register model](#2026-09-22---mexico-city-built-the-first-city-here-whose-rail-is-not-gtfs-and-the-first-outside-north-americas-licence-register-model)
 - [The region switcher shipped, and the fix was a deleted key](#2026-09-22---the-region-switcher-shipped-and-the-fix-was-a-deleted-key)
 - [CDMX approved from OpenStreetMap as a per-city exception, and it passes both rail invariants](#2026-09-22---cdmx-approved-from-openstreetmap-as-a-per-city-exception-and-it-passes-both-rail-invariants)
 - [Mexico nationwide GIS probe: no new route, but CDMX is a retry rather than a loss](#2026-09-22---mexico-nationwide-gis-probe-no-new-route-but-cdmx-is-a-retry-rather-than-a-loss)
@@ -149,6 +150,204 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Mexico City built: the first city here whose rail is not GTFS, and the first outside North America's licence-register model
+
+- **Built Mexico City as city 15, on INEGI's DENUE rather than a municipal
+  licence register, and the composition is the best measured in this project.**
+  462,732 economic units in entidad 09 -> 442,146 `Fijo` -> **283,346 in the
+  three storefront buckets (64.1% of fixed premises)** -> 283,345 with valid
+  coordinates. **133,362 fall within a station ring across 163 stations.**
+  Retail 202,038, Food service 49,453, Personal services 31,855. Coordinates
+  are populated on **100%** of rows and `nom_estab` on 99.95%, so this city
+  needs no geocoding leg. Jalisco was measured alongside it as the second
+  reading add-country requires (401,813 units, Guadalajara 97,134, 100%
+  coordinates, 68.39% in buckets) - the capital is not the exception here that
+  Seoul was for Korea.
+
+- **`docs/global_country_shortlist.md` said "SCIAN = NAICS so the taxonomy may
+  transfer". Measured, that is right for two buckets of three and WRONG on the
+  largest.** SCIAN numbers retail **46** where NAICS uses 44-45 (and wholesale
+  43 against 42), while agreeing on 722 food service and 812 personal
+  services. `naics.py` pointed at DENUE would have matched nothing under 44/45
+  and left **212,251 retail rows - 45.87% of the file** - unclassified, and
+  since `classify()` raises on unknown values it would have failed loudly
+  rather than quietly, which is the one mercy. So
+  `pipeline/taxonomies/scian.py` is a new module, differing from `naics.py` in
+  exactly two prefixes: Retail `46`, and parking `812410` in place of `81293`.
+  Nonstore retail has an exact twin, `469`, excluded on the same reasoning at
+  1/1000th the size (90 units against nonstore's 10.1% of Los Angeles' pins).
+  Rejected: a country flag on `naics.py`, which would put the most
+  consequential constant in this project behind an argument.
+
+- **Food service is 722 and not 72, and catching that corrected a figure this
+  session had already produced.** A first pass counted the two-digit prefixes
+  and reported 58,167 food-service units and "73.07% in the three buckets".
+  Both were wrong: `72` includes **721 accommodation** (999 hotels), and the
+  crude prefixes also swept in 811 repair, 813 associations and 812410
+  parking. The carved-out figures are **57,168** and **64.1%**. Same precision
+  the NAICS cities already use; the two-digit prefix was the
+  obvious-looking mistake.
+
+- **Gate 3 CANNOT BE RUN for this city, and that is disclosed rather than
+  worked around.** `pipeline/stations.py` calls the operator's published
+  station count "the one check that can see an error every internal check
+  agrees with" - it corrected Edmonton 33->30 and Toronto 118->110. STC Metro
+  publishes its counts on `metro.cdmx.gob.mx`, which returns ConnectTimeout on
+  every host and scheme tried, as does `ste.cdmx.gob.mx` and the whole
+  `*.cdmx.gob.mx` domain (re-confirmed 2026-09-22). No block page names an IP,
+  so this is a dead host rather than a client refusal and the browser does not
+  help. **No remembered figure was typed into the config**, because a number
+  from memory would look exactly like gate 3 and be worthless.
+  `STATION_COUNT_GATE_3 = None` records the reason. What runs instead: the
+  spacing gate (163 stations, median 780 m), the `railway=station` whitelist,
+  and cross-direction agreement - all 13 refs have exactly two direction
+  relations. Owner's decision to proceed on that basis, 2026-09-22.
+
+- **OSM is a fourth collapse mechanism and a third set of traps, so "just a
+  different source" understates it.** Collapse is BY NAME, because OSM carries
+  one station node per line at an interchange - Pantitlan has 4 nodes, La Raza,
+  Jamaica, Oceania and Tasquena 2 each - after Edmonton's `parent_station`,
+  Calgary's direction prefix and Toronto's three naming conventions. Measured
+  in the same bbox: **447 `railway=subway_entrance` nodes against 184 stations,
+  2.4x**, which is Israel's entrances trap and would have inflated every ring;
+  and **13 PROPOSED Texcoco light-rail stations, five of them tagged
+  `railway=prpopsed`** - misspelled in the source - so a blacklist on
+  `proposed` would have drawn rings around building sites while looking
+  correct. Keeping only `railway == "station"` is immune to the typo, which is
+  why the filter is a whitelist.
+
+- **`network=STC Metro` on a station that is not a Metro station.** OSM tags
+  Lecheria, a Ferrocarril Suburbano station, with Metro's network and no
+  `station` or `subway` tag at all; matching on network admitted it to the
+  published `excluded_stations.csv` as a Metro station. Fixed by matching on
+  the MODE - what a node is - rather than on a label claiming who operates it.
+  The 10 stations that remain excluded are genuine Lineas A and B stops in
+  Estado de Mexico, cut because this build has no business data there and their
+  rings would otherwise anchor over a blank.
+
+- **`pipeline/linecolour.py` stopped a build for the first time since it was
+  written, and on a case it was not written for.** Two LINE-VS-LINE pairs sat
+  below the hard floor of Delta-E 10: Linea 2 `#005EB8` against Tren Ligero
+  `#0554ba` at **9.8**, and Linea 3 `#AF9800` against Linea 12 `#B0A32A` at
+  **8.5**. Every previous finding was line-vs-category. Resolved by the
+  module's own rule - keep the agency hue, change only lightness - and by
+  moving the secondary line of each pair: Tren Ligero to `#033574` (now 21.9)
+  and Linea 12 to `#877D20` (now 21.3). **Linea 2 was deliberately left at
+  10.4 from the Retail pin colour**, the closest in the project after Calgary's
+  historic 3.3: it is above the floor, and the 2026-09-21 branding decision
+  keeps agencies' real colours, with fourteen line colours across six cities
+  already recorded in the 10-45 band. Darkening it was measured (-0.08 gives
+  `#00498F` at 22.1) and rejected. Owner's decision, 2026-09-22.
+
+- **The rendered map was 25.7 MB, 3.5x the largest existing one, and the
+  fix was NOT what the size looked like it was.** The out-of-ring businesses
+  turned out to live only in the opt-in whole-city HEAT layer, not in any pin
+  layer - the pin layers already use the in-ring subset - so the first estimate
+  of the saving was built on a wrong model of where the bytes were.
+  `render_heatmap` gained `all_city_heat`, off for this city: **25.7 -> 19.0
+  MB** for 283,345 dropped coordinate pairs. Recorded in
+  `docs/excluded_categories.md`, because this city now offers less than the
+  others. Measured and rejected on the way: `COORD_DP = 5` saves **1.1 MB of
+  25.7 (4%)** here, so it does not justify re-baselining fifteen cities'
+  committed outputs. And the framing correction that matters most: **19.02 MB
+  gzips to 3.07 MB (6.2x)**, so transfer was never the problem - what remains
+  is parse cost and repository bytes.
+
+- **The classification value is now INDEXED in every city's rendered map, and
+  that is a shared change Mexico City only paid for.** `add_pin_layer` already
+  emitted station names and ring bands once into a lookup table; the
+  classification value stayed an inline string because
+  `scripts/check_personal_exposure.py` parses it out of the HTML. Mexico City
+  made the cost obvious - **106 distinct `scian_actividad` values across
+  283,345 rows**, with one 73-character string appearing **12,462 times in a
+  single file**. Indexing it took this city from **19.02 to 11.38 MB (-40.2%)**
+  and **every** city gained: total committed output **43.17 -> 33.31 MB
+  (-22.8%)**, from -1.1% for San Diego (short NAICS codes) to -15.7% for
+  Toronto. The spread is the point - the saving tracks how long a register's
+  category vocabulary is, so it was always going to look negligible measured on
+  the US cities alone.
+  `pins()` resolves the index by pairing the Nth `var CATEGORIES` table with
+  the Nth `var data` block, positional because `map_common` emits the callback
+  first - verified against a rendered file rather than assumed - and it still
+  accepts a bare string, so a map rendered before this change reads correctly.
+  **Proven representation-only rather than assumed:** resolved pin rows are
+  identical old-vs-new for Chicago (11,796), Toronto (8,739), San Diego (2,577)
+  and New York (44,360). Tooltips verified rendering in a browser for San Diego
+  and Mexico City, accents intact. All 15 committed maps were re-rendered, so
+  `drift_check` reports intended drift on every `heatmap.html` and on nothing
+  else.
+
+- **The residence check is a GAP for this city, recorded as one rather than as
+  a pass**, the way San Diego's and Boston's are. `businesses_clean.csv`
+  carries no address column because the map needs none. DENUE does have
+  `numero_int`, a structured interior number, which step 2 now loads, measures
+  (**13.4% of storefronts**) and prints WITHOUT writing it out - publishing a
+  unit number in order to check for unit numbers would defeat the purpose.
+
+- **INEGI's licence is permissive and carries an obligation this project
+  triggers on every map.** Read from the publisher's own PDF rather than a
+  summary: the Terminos de Libre Uso permit publication, adaptation, extraction
+  and **commercial** use (§1b-e), requiring prescribed attribution (§1f),
+  **notification of any analysis or transformation** (§1g), and non-endorsement
+  (§1h). §1(g) is a second duty and not a louder version of the first, and ring
+  assignment, bucketing and the storefront filter are all transformations.
+  Notice 8 in `docs/data_sources.md`. INEGI publishes its website terms as a
+  SEPARATE PDF, so the "web pages or data?" question is answered by the
+  publisher; both are stored, because reading a site-terms document as the data
+  licence is what made New York look prohibited.
+
+- **This city's privacy position is the strongest in the project and INEGI
+  earned it, not this pipeline.** `raz_social` is omitted entirely when the
+  owner is a persona fisica - INEGI's dictionary says "para proteger la
+  confidencialidad de la informacion" - and `nom_estab` is defined as the name
+  on the shopfront, "visible y escrito en rotulos, fachadas o anuncios
+  luminosos", present on 99.95% of rows. So Los Angeles' failure has **no
+  mechanism** here: there is no personal name to fall back to because the
+  publisher withheld it rather than substituting it. Step 2 forbids `telefono`
+  (35.6% populated), `correoelec` (22.6%), `www` (10.6%) and `raz_social`
+  (25.9%) and asserts they never arrive.
+
+- **`check_personal_exposure.py` reports 32.2% of pins "look like a person",
+  and the finding is about the TOOL.** A hand-sample of 26 found none that were
+  a person presented as a person: `ABARROTES LIZ`, `ESTETICA MARIFER`,
+  `ZAPATERIA SOFI`, `POLLERIA BACHOCO` - the Spanish shop-sign convention of
+  trade type plus a given name or brand - and `COCINA ECONOMICA`, two common
+  nouns, also trips it. `looks_personal` is tuned for English "SMITH JOHN"
+  forms. Mexico City is this project's first non-English city, and nothing is
+  filtered on that number. Verdict: 0 emails, 0 phone numbers, 0 `c/o` markers,
+  no registrant-name column loaded; publish.
+
+- **The density figure is 818 businesses per station and it is NOT comparable
+  to the other cities' figures.** Vancouver's 206 and Toronto's 81 come from
+  municipal licence registers; DENUE is an establishment CENSUS that INEGI
+  collects by surveying premises, and Toronto's register licenses no general
+  retail at all. So 818 measures source completeness at least as much as
+  commercial density, and comparing them directly would be a ninth denominator
+  error in a new costume. The city page says what the number is measured on.
+
+- **Two bugs were caught in checks written earlier the same day, one of them in
+  a check written to prevent exactly this.** `overpass.osm.ch` returned HTTP
+  200 with an empty body; the fetcher cached it as a success and the new
+  cross-direction check then printed "every ref has exactly 2 direction
+  relations" over **zero relations** - a vacuous truth reported as a
+  verification. Fixed twice: the fetcher now rejects an empty 200 and tries the
+  next host, and the check asserts a non-empty set first. Separately,
+  `map_common` kept printing "283,345 available (all-Mexico City toggle)" for
+  one render after that layer was dropped.
+
+- **`scripts/scaffold_city.py` did not know about regions and produced an
+  `app/cities.py` that would not import.** The validator added on 2026-09-21
+  raised on Mexico City, which is the guard working - but every future city
+  would have hit it. `--region` is now required and the emitted entry carries
+  it. `REGION_ORDER` gains "Mexico"; the macro map needed nothing else, because
+  Mexico's centre sits 14.02 degrees south and 1.41 degrees west of the United
+  States centre against Canada's 14.53 north and 1.49 east - close to an exact
+  mirror, so the switcher re-centres vertically at the pinned zoom.
+
+- Mexico City is the **first city built with `pipeline/baseline.py` from the
+  start** rather than retrofitted: 7 figures recorded in
+  `outputs/mexico_city/baseline.json`.
 
 ### 2026-09-22 - The region switcher shipped, and the fix was a deleted key
 
