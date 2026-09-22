@@ -332,11 +332,32 @@ capital-aggregates case — Seoul, 25 of 25 — is the exception, not the rule.
 | Country | Method that worked | Result |
 |---|---|---|
 | 🇮🇳 **India** | `api.data.gov.in/lists` **enumerates — 288,011 resources** | **MEASURED NEGATIVE.** Searched properly: `trade licence` 209, `shops and establishment` 112,346, `commercial establishment` 316, **`Kochi` 1** (port exports). Every premises-shaped hit is either **one city that is not ours** (*Shops And Establishment Licence : **Ahmedabad***) or **aggregate** (*Vyapar **District wise ULB wise** Trade License Details*). Hyderabad's 192 hits are all census tables. **The national portal does not carry it**; GHMC and Kochi Municipal Corporation are the remaining route |
-| 🇲🇾 **Malaysia** | `api.data.gov.my/data-catalogue` **answers** | Live API — returns `"Query parameter 'id' is required"`, so it serves one dataset at a time. **Needs the id-listing endpoint**, which the app knows and I have not found. Not a negative |
+| 🇲🇾 **Malaysia** ↓ | Catalogue read in the browser — 292 datasets | **MEASURED NEGATIVE, and a new trap.** `lookup_premise` is a *genuine* premises table — `premise`, `address`, `premise_type`, `state`, `district`, **100% populated**, direct CSV, no auth. And it holds **3,916 rows nationally, 372 in Kuala Lumpur.** See below |
 | 🇨🇴 **Colombia** (Medellín) | — | ArcGIS Hub `data.json` **404**, `api/search/v1` **401**. The Hub search page is live HTML. **Needs the browser** to find the real service root |
 | 🇵🇪 **Peru** (Lima) | — | `www.datosabiertos.gob.pe` is Drupal, not CKAN, at every path tried. **Needs the browser** |
 | 🇮🇩 **Indonesia** (Jakarta) | — | `satudata.jakarta.go.id` API paths resolve nowhere; the site root is live. **Needs the browser** |
 | 🇮🇱 **Israel** (Tel Aviv) | — | **Not reachable by either method.** HTTP 472 and the host printed our own IP back — an IP-level refusal, so the browser shares the blocked address |
+
+> **NEW TRAP — a real premises table can still be a SAMPLE, not a register.**
+> Malaysia's `lookup_premise` passes every structural test this project
+> applies: rows are individual premises, not aggregates; `premise`, `address`,
+> `premise_type`, `state` and `district` are **100% populated**; it downloads
+> as CSV with no account. It is nonetheless unusable, because it exists to
+> support **PriceCatcher**, a price-monitoring programme — so it lists the
+> premises whose prices are *surveyed*, and there are **372 in Kuala Lumpur**.
+>
+> For scale, this project's built and Band A cities carry 80,110 (Toronto,
+> storefront rows), 148,814 (Madrid) and 197,276 (Seoul). **372 is three
+> orders of magnitude short.**
+>
+> This is not the aggregate trap — the rows genuinely are premises. It is a
+> **coverage** trap: the right shape at the wrong scale, and **only the row
+> count reveals it**. Schema inspection passes it cleanly. The check that
+> catches it is the one this project already runs for a different reason —
+> *count the rows and compare against the city's plausible premises count*
+> — which until now was about spotting truncation. Add sampling to what that
+> check is for. Malaysia's composition also gives it away on a second look:
+> 131 supermarkets and 69 mini-markets in a city of 1.8 million.
 
 **The method is doing its job, and the honest summary is that it mostly
 closes things.** Of the eight Tier 5 countries, provider/API enumeration has

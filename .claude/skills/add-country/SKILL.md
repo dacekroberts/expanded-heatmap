@@ -86,6 +86,21 @@ systematically the **oldest** entities - holding companies, dormant shells,
 long-established corporates. It is the least representative sample available.
 **Pull several pages and count.** The cost is one loop.
 
+**A real premises table can still be a SAMPLE rather than a register - count
+the rows.** Malaysia's `lookup_premise` passes every structural test: rows are
+individual premises, `premise`/`address`/`premise_type`/`state`/`district` are
+**100% populated**, and it downloads as CSV with no account. It is unusable
+anyway, because it exists to support a **price-monitoring programme** and lists
+only the premises whose prices are surveyed - **372 in Kuala Lumpur**, against
+80,110 for Toronto's storefronts, 148,814 for Madrid and 197,276 for Seoul.
+
+This is **not the aggregate trap**; the rows really are premises. It is a
+*coverage* trap, and **schema inspection passes it cleanly** - only the row
+count catches it. So after confirming the shape, always ask **"is this
+plausible for a city this size?"** before recording a pass. Composition is the
+second tell: 131 supermarkets and 69 mini-markets in a city of 1.8 million is a
+survey frame, not a register.
+
 **Send a nonsense search term before you believe any result list - or any
 zero.** A server that ignores your search parameter returns HTTP 200 and a
 full, plausible page of results, and nothing in the response says the filter
