@@ -248,7 +248,7 @@ register found**, and two have already failed at the national portal.
 
 | Country | City | Rail | Missing link |
 |---|---|---|---|
-| 🇭🇰 **Hong Kong** | Hong Kong | **126 relations**, 125 named | `data.gov.hk` is **measured negative** — statistics tables. Try **FEHD's licensed food premises list**: a *department*, not a portal |
+| 🇭🇰 **Hong Kong** | Hong Kong | **126 relations**, 125 named | **The register EXISTS and is queryable — but no bulk export found.** See below |
 | 🇨🇱 **Chile** | Santiago | **30 relations**, all named + coloured | `datos.gob.cl` is **measured negative** — `patentes comerciales` returns nothing. Try the **municipal** portal |
 | 🇲🇾 **Malaysia** | Kuala Lumpur | 14 relations, all named + coloured | The right `data.gov.my` endpoint. SSM is company-shaped, so expect a registered-office failure |
 | 🇮🇩 **Indonesia** | Jakarta | 9 operating of 11 | Identify `satudata.jakarta.go.id`'s stack |
@@ -256,6 +256,49 @@ register found**, and two have already failed at the national portal.
 | 🇮🇳 **India** | Hyderabad, Kochi | 6 and 2 relations | Trade licences are **municipal**; `data.telangana.gov.in` is dead, Kerala LSG is live |
 | 🇵🇪 **Peru** | Lima | 4 relations, all named + coloured | The catalogue endpoint on `www.datosabiertos.gob.pe` |
 | 🇮🇱 **Israel** | Tel Aviv | 6 relations but **realistically 1** — Green and Purple are under construction | **Two problems:** the city portal returns **HTTP 472**, the documented IP-level refusal, and one operating line is thin for this project |
+
+### Hong Kong, chased to the department — 2026-09-22
+
+The furthest any Tier 5 city has been taken, and the verdict changed twice.
+
+**1. `data.gov.hk` is a measured negative, by the strongest available check.**
+Keyword search had returned statistics tables, which proves little. The
+provider route is decisive: `organization_list` shows **129 organisations and
+`hk-fehd` is one of them**, and `organization_show?id=hk-fehd` returns
+**`package_count: 1`** — a single dataset, *"Products exempted from nutrition
+labelling"*. So the licensed-premises register is **definitively not on the
+open-data portal**. Searching by *provider* rather than *keyword* is the
+generalisable move here: a keyword search cannot distinguish "absent" from
+"named differently", and an org listing can.
+
+**2. The register does exist, on FEHD's own site.**
+`fehd.gov.hk/english/licensing/list_licensed_premises.html` →
+**Lists of Licensed / Permitted Premises**, and it covers **two buckets**:
+
+- **Food premises** — searchable by Shopsign/Address and by Licence/Permit Type
+- **Non-food premises** — the same two routes. This is the **Personal services**
+  bucket, which the earlier "food-only ceiling" claim said did not exist
+
+The by-type form carries exactly the selectors a bulk extract needs:
+`Licence Type` (General Restaurants · Light Refreshment · Marine · Factory
+Canteens), `Special Endorsement` including **"All Licensed General
+Restaurants"**, and **`District` including "- All districts -"** across all 19.
+
+**3. But it is a QUERY INTERFACE, not a download.** No CSV, XLS, PDF or JSON
+link exists anywhere on those pages — checked. Extraction would mean iterating
+the form across licence types and districts and **scraping HTML**.
+
+**So the honest verdict is neither "no data" nor "buildable".** It is: *a real
+two-bucket premises register, publicly queryable, with no bulk route found.*
+That is the **Seoul shape** — Seoul's food register also looked closed until the
+page's own JS revealed a keyless POST — so the next step is to watch what the
+form actually submits rather than to conclude from the absence of a download
+link. Not yet done: the submit is JS-driven and did not navigate on click.
+
+**This upgrades Hong Kong's prior considerably.** It has the largest rail
+system in Tier 5 by a wide margin (126 relations, 125 named, 117 coloured) and
+now a confirmed two-bucket register. What it lacks is a *route*, which is a
+smaller problem than lacking data.
 
 ## Tier 6 — never actually reached (6 countries, 6 cities)
 
