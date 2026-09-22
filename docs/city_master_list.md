@@ -253,7 +253,7 @@ register found**, and two have already failed at the national portal.
 | 🇲🇾 **Malaysia** | Kuala Lumpur | 14 relations, all named + coloured | The right `data.gov.my` endpoint. SSM is company-shaped, so expect a registered-office failure |
 | 🇮🇩 **Indonesia** | Jakarta | 9 operating of 11 | Identify `satudata.jakarta.go.id`'s stack |
 | 🇨🇴 **Colombia** | Medellín | 6 relations, **only 2 coloured** | An **ArcGIS** probe — a shape this project already handles. Note colours would need assigning by hand. Bogotá is out: it fails on rail |
-| 🇮🇳 **India** | Hyderabad, Kochi | 6 and 2 relations | Trade licences are **municipal**; `data.telangana.gov.in` is dead, Kerala LSG is live |
+| 🇮🇳 **India** ↓ | Hyderabad, Kochi | 6 and 2 relations | **National portal measured negative** — 288,011 resources searched, nothing premises-level. Municipal corporations (GHMC, Kochi) unprobed. See below |
 | 🇵🇪 **Peru** | Lima | 4 relations, all named + coloured | The catalogue endpoint on `www.datosabiertos.gob.pe` |
 | 🇮🇱 **Israel** | Tel Aviv | 6 relations but **realistically 1** — Green and Purple are under construction | **Two problems:** the city portal returns **HTTP 472**, the documented IP-level refusal, and one operating line is thin for this project |
 
@@ -326,6 +326,30 @@ generalisable rule is already in `add-country` and this confirms it: **where
 licensing is devolved below the city, ask how many sub-units publish AND
 whether the central one is among them, before believing a country count.** The
 capital-aggregates case — Seoul, 25 of 25 — is the exception, not the rule.
+
+### The Tier 5 remainder — where each one now stands, 2026-09-22
+
+| Country | Method that worked | Result |
+|---|---|---|
+| 🇮🇳 **India** | `api.data.gov.in/lists` **enumerates — 288,011 resources** | **MEASURED NEGATIVE.** Searched properly: `trade licence` 209, `shops and establishment` 112,346, `commercial establishment` 316, **`Kochi` 1** (port exports). Every premises-shaped hit is either **one city that is not ours** (*Shops And Establishment Licence : **Ahmedabad***) or **aggregate** (*Vyapar **District wise ULB wise** Trade License Details*). Hyderabad's 192 hits are all census tables. **The national portal does not carry it**; GHMC and Kochi Municipal Corporation are the remaining route |
+| 🇲🇾 **Malaysia** | `api.data.gov.my/data-catalogue` **answers** | Live API — returns `"Query parameter 'id' is required"`, so it serves one dataset at a time. **Needs the id-listing endpoint**, which the app knows and I have not found. Not a negative |
+| 🇨🇴 **Colombia** (Medellín) | — | ArcGIS Hub `data.json` **404**, `api/search/v1` **401**. The Hub search page is live HTML. **Needs the browser** to find the real service root |
+| 🇵🇪 **Peru** (Lima) | — | `www.datosabiertos.gob.pe` is Drupal, not CKAN, at every path tried. **Needs the browser** |
+| 🇮🇩 **Indonesia** (Jakarta) | — | `satudata.jakarta.go.id` API paths resolve nowhere; the site root is live. **Needs the browser** |
+| 🇮🇱 **Israel** (Tel Aviv) | — | **Not reachable by either method.** HTTP 472 and the host printed our own IP back — an IP-level refusal, so the browser shares the blocked address |
+
+**The method is doing its job, and the honest summary is that it mostly
+closes things.** Of the eight Tier 5 countries, provider/API enumeration has
+now produced **three firm negatives** (Hong Kong's portal, Chile, India) and
+**one upgrade** (Hong Kong's department, which turned out to have *two*
+buckets). Four still need the browser, and one cannot be reached at all.
+
+**A parameter-encoding note that cost a pass:** India's API ignores
+`filters[title]=x` with literal brackets and honours `filters%5Btitle%5D=x`.
+The unencoded form returns **HTTP 200 with the full unfiltered 288,011** and no
+error — the same silent-ignore failure as `data.seoul.go.kr`, and the reason a
+control term is not optional. The first search read as "no results" when it was
+actually "no filter".
 
 ## Tier 6 — never actually reached (6 countries, 6 cities)
 
