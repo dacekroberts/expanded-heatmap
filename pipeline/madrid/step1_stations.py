@@ -56,6 +56,42 @@ from pipeline.madrid.config import (  # noqa: E402
 UA = {"User-Agent": "expanded-heatmap (github.com/dacekroberts/expanded-heatmap)"}
 
 
+# Spanish words that stay lower case inside a name. `.title()` is wrong here -
+# it produces "Plaza De Castilla" and "Puerta Del Sur", which no sign in Madrid
+# says - and the register publishes every DENOMINACION in capitals, which shouts
+# on a map. This is the display half of the project's normalise-for-joins,
+# never-for-display rule, applied in the other direction: the source string is
+# kept in the raw cache and only what a reader sees is re-cased.
+_LOWER_WORDS = {"de", "del", "la", "las", "los", "el", "y", "e", "en", "a",
+                "al", "con", "por"}
+
+
+def display_name(raw: str) -> str:
+    """ARROYOFRESNO -> Arroyofresno; PUERTA DEL SUR -> Puerta del Sur."""
+    words = raw.strip().split()
+    out = []
+    for i, w in enumerate(words):
+        low = w.lower()
+        # A token with a digit or an inner hyphen is a designator, not a word:
+        # "T-4", "12", "1º". Left as the register wrote it.
+        if any(ch.isdigit() for ch in w):
+            out.append(w)
+        elif i > 0 and low in _LOWER_WORDS:
+            out.append(low)
+        else:
+            out.append("-".join(p.capitalize() for p in low.split("-")))
+    return " ".join(out)
+
+
+assert display_name("PUERTA DEL SUR") == "Puerta del Sur"
+assert display_name("PLAZA DE CASTILLA") == "Plaza de Castilla"
+assert display_name("AEROPUERTO T-4") == "Aeropuerto T-4"
+assert display_name("SAN BLAS") == "San Blas"
+assert display_name("ÓPERA") == "Ópera"
+# The first word is capitalised even when it is a stop word.
+assert display_name("LOS ESPARTALES") == "Los Espartales"
+
+
 def fetch_layer(layer, cache):
     """One ArcGIS layer, cached to the gitignored raw directory.
 
@@ -254,7 +290,10 @@ def main():
 
     out = kept.to_crs(CRS_GEOGRAPHIC)
     st_out = pd.DataFrame({
-        "station": out["name"],
+        # Re-cased for display; the register's capitals live on in the
+        # raw cache, which is what "keep the source string" means here.
+        "station": [display_name(n) for n in out["name"]],
+        "station_source": out["name"].values,
         "latitude": out.geometry.y,
         "longitude": out.geometry.x,
     }).sort_values("station")
