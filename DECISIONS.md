@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**104 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**105 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-21**
 
+- [Region switcher: the groundwork shipped, the UI did not](#2026-09-21---region-switcher-the-groundwork-shipped-the-ui-did-not)
 - [The Canada retrospective's six improvements, implemented](#2026-09-21---the-canada-retrospectives-six-improvements-implemented)
 - [Toronto built: Canada closes at five cities, and the station count was checked twice](#2026-09-21---toronto-built-canada-closes-at-five-cities-and-the-station-count-was-checked-twice)
 - [Toronto's open question 1 closed: the 71.4% was the wrong denominator](#2026-09-21---torontos-open-question-1-closed-the-714-was-the-wrong-denominator)
@@ -137,6 +138,57 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-21 - Region switcher: the groundwork shipped, the UI did not
+
+- **Committed the region model and deliberately withheld the UI, because the
+  UI does not work.** `docs/scaling_thresholds.md` names a region switcher as
+  the thing that must ship before the first non-North-American city: at 14
+  cities the macro map is at its stated ~12-15 threshold, and a European city
+  would sit off-screen on load, which is the "default silently hides most of
+  the site" failure that document warns about. `app/cities.py` now tags every
+  city with a region and exposes `REGIONS`, `REGION_ORDER`, `DEFAULT_REGION`
+  and a validator that refuses a city without one - purely additive, with
+  `Overview.py` untouched, so behaviour is unchanged.
+
+- **What the withheld UI does and does not do.** The radio renders with its
+  counts (`United States (9)`, `Canada (5)`), the default is fixed rather than
+  geolocated, and the caption names the other regions explicitly ("Showing 9
+  cities in United States - 5 in Canada elsewhere"), which is what the scaling
+  doc requires. **The map does not re-centre when the region changes.**
+
+- **The cause, and it is a Streamlit behaviour rather than a bug in the
+  view.** `st.pydeck_chart(on_select="rerun")` PERSISTS the viewer's current
+  view under its widget key: on a rerun Streamlit restores that stored view and
+  ignores `initial_view_state`. Keying the chart per region
+  (`macro_map_<region>`) did not clear it within the session's remaining
+  budget. The ViewState itself was verified correct - pydeck serialises
+  `latitude`, `longitude` and `zoom` faithfully, and the values matched the
+  committed behaviour exactly.
+
+- **THE CONSTRAINT THAT IS SETTLED, and it should survive whoever finishes
+  this: the switcher must RE-CENTRE and must never RE-ZOOM.** Every
+  `label_offset` in `cities.py` is in PIXELS, measured at the zoom `fit_view`
+  produces for the United States set (1.4525). Pixel distance between two
+  cities is a function of the zoom alone, not of where the view is centred - so
+  re-centring preserves every measured offset exactly, while re-fitting per
+  region would change the zoom and invalidate all fourteen at once. A region
+  whose cities sit much closer than a continent may eventually want its own
+  zoom; `REGIONS[i]["zoom"]` exists for that, is None everywhere, and setting
+  it means re-measuring that region's offsets.
+
+- **And the part worth recording against myself: the same persistence cost
+  about an hour of false debugging.** An early, wrong centring was stored in
+  the session and **replayed over every later fix**, including across a full
+  server restart - so the code was correct while the browser kept showing the
+  broken view. That was read as a code fault three times in a row: pydeck
+  serialisation, then ViewState attribute names, then stale module cache. A
+  fresh session was the only thing that revealed it. **Third instrument failure
+  of the day and the one handled worst** - the other two were caught by
+  measuring the instrument first, and this one was chased instead. The rule
+  that would have saved the hour is the one already written into
+  `pipeline/linecolour.py` and `scripts/brief_check.py`: reproduce a known
+  number before trusting a new one.
 
 ### 2026-09-21 - The Canada retrospective's six improvements, implemented
 

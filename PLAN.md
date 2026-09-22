@@ -1,5 +1,6 @@
 # Plan
 
+
 Open work only. Completed work and the reasoning behind it live in
 [`DECISIONS.md`](DECISIONS.md); the settled state is in
 [`docs/project_context.md`](docs/project_context.md).
@@ -19,6 +20,39 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 ---
 
 ## Now
+
+- [ ] **Region switcher on the macro map — BLOCKS the first non-North-American city.**
+
+**Groundwork committed 2026-09-21 (`f80d04b`); the UI is NOT committed because
+it does not work.** `docs/scaling_thresholds.md` names this as the thing that
+must ship before a city outside North America: at 14 cities the macro map is at
+its stated ~12-15 threshold, and Milan or Barcelona would sit off-screen on
+load.
+
+**Done:** `app/cities.py` tags every city with a region and exposes `REGIONS`,
+`REGION_ORDER`, `DEFAULT_REGION`, plus a validator that refuses an untagged
+city.
+
+**Not done:** the switcher in `app/Overview.py`. The radio, its counts and the
+"N elsewhere" caption all render correctly; **the map does not re-centre.**
+
+**The blocker, precisely:** `st.pydeck_chart(on_select="rerun")` persists the
+viewer's current view under its widget key, so on a rerun Streamlit restores it
+and ignores `initial_view_state`. A per-region key did not clear it. Options
+not yet tried: dropping `on_select="rerun"` for non-default regions, forcing a
+view through deck.gl's own `views`/`viewState` rather than
+`initial_view_state`, or clearing the stored widget state on region change.
+
+**The constraint any fix must respect:** RE-CENTRE, never RE-ZOOM. Every
+`label_offset` is in pixels measured at the US-fitted zoom of 1.4525, and pixel
+distance between cities depends on zoom alone.
+
+**A warning for whoever picks this up:** that same persistence makes a changed
+`initial_view_state` invisible in an existing browser session, across server
+restarts included. Test in a fresh session (a new query string is enough) or
+you will debug correct code - which is exactly what happened here, for about an
+hour.
+
 
 - [ ] **Next city** - pick from the list below. Start with the `add-city`
   Step 0, then `scripts/scaffold_city.py` (the `scaffold-city` skill). That
