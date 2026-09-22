@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**122 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**123 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [France reversed on new measurement: the employee filter works, Paris returns to Band A](#2026-09-22---france-reversed-on-new-measurement-the-employee-filter-works-paris-returns-to-band-a)
 - [The France decision, settled by measurement: Paris leaves Band A](#2026-09-22---the-france-decision-settled-by-measurement-paris-leaves-band-a)
 - [The live site was down for three hours, and no check this project had could have seen it](#2026-09-22---the-live-site-was-down-for-three-hours-and-no-check-this-project-had-could-have-seen-it)
 - [config.py split into country and city, and the outputs did not move](#2026-09-22---configpy-split-into-country-and-city-and-the-outputs-did-not-move)
@@ -158,6 +159,66 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - France reversed on new measurement: the employee filter works, Paris returns to Band A
+
+- **Reversed the demotion recorded earlier the same day, and the reversal is
+  left standing rather than tidied away.** The demotion was correct on the
+  evidence then available: 86.6% of Paris's NAF 47/56/96 rows are sieges, and a
+  French sole trader's siege is the home address. What changed is not the
+  opinion but the measurement - a filter existed that had not been tested, and
+  testing it settled the question in the other direction. Supersedes the
+  "Paris leaves Band A" entry below; that entry stays as written.
+
+- **Found that the siege filter - the one named in the open question - is the
+  WRONG lever, and would have been a quiet disaster.** Restricting to
+  non-sieges gives 19,978 rows, which reads like a plausible storefront count.
+  It is not: an independent shop IS its company's siege, so non-siege-only
+  keeps chain branches and discards every independent trader. That is the exact
+  inverse of what this project maps, and the row count alone would never have
+  revealed it.
+
+- **The EMPLOYEE filter is the right one, and it is validated.** Candidate A -
+  `caractereemployeuretablissement = "Oui"` on NAF 47/56/96, excluding NAF
+  47.91 online retail - yields **50,156** rows for Paris. It keeps the
+  boulangerie run as an entreprise individuelle with staff, and drops the
+  consultant registered at home. The full matrix: base 148,633; minus online
+  115,889; not-a-sole-trader 79,359; employee AND not-sole-trader 47,833.
+
+- **Validated against OpenStreetMap, chosen because it has no relationship to
+  SIRENE.** A filter cannot validate itself - every candidate produces some
+  number, and "50,156 looks about right for Paris" is the same reasoning that
+  nearly let the 148,633-versus-Madrid's-148,814 coincidence through. Paris
+  intra-muros bbox via Overpass: **`amenity=restaurant` 10,642** against
+  SIRENE's **10,595** for 56.10A plus employer - **0.4% apart** on a single
+  class from two unrelated sources. Whole layer: OSM `shop=*` 34,801 plus food
+  amenities 19,397 = **54,198**, against candidate A's **50,156**, or **92.5%**.
+  Landing just under a volunteer map in a city as well-mapped as Paris is where
+  a register-derived layer should sit; the ~4,000 gap is the price of dropping
+  genuine zero-employee shops, and is small against the 65,733 rows removed.
+
+- **Corrected a cost assumption that had been carried unexamined: France has no
+  geocoding leg.** **148,576 of 148,633 (99.96%)** bucket rows carry
+  `geolocetablissement` coordinates. France had been priced as though addresses
+  needed geocoding, which is the largest single build cost in Band C. It does
+  not apply.
+
+- **Recorded what is still owed, because it is not a formality.**
+  `employer = "Oui"` removes home registrations **by proxy, not by proof** - a
+  home-based business can employ someone - so `check_personal_exposure.py` is
+  load-bearing for Paris in a way it is not for a municipal licence register,
+  and a residential-address check belongs in its Step 2. Separately, the
+  Opendatasoft mirror used for these measurements omits
+  `enseigne1Etablissement` and `denominationusuelleEtablissement`, the
+  shop-sign fields that are the strongest storefront signal available; INSEE's
+  own distribution carries them and would improve the filter.
+
+- **Net: Paris back to Band A (5 remaining), Band D-a back to 4, Band D 14 ->
+  13; 41 candidates unchanged.** France returns as six cities on one national
+  integration with no geocoding leg, which on cities-per-unit-of-work makes it
+  the strongest unbuilt country in the screen. Also fixed `CLAUDE.md`, whose
+  pointer paragraph had gone stale twice by repeating the candidate and built
+  counts; it now tells the reader to take those from the list itself.
 
 ### 2026-09-22 - The France decision, settled by measurement: Paris leaves Band A
 
