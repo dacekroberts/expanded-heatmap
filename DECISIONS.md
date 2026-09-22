@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**156 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**157 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Check I caught another session's orphaned row within minutes, which is the first time a check here found a defect it was not written for](#2026-09-22---check-i-caught-another-sessions-orphaned-row-within-minutes-which-is-the-first-time-a-check-here-found-a-defect-it-was-not-written-for)
 - [Toronto's collapse check guarded the wrong number, and re-running it showed a baseline can miss a content change](#2026-09-22---torontos-collapse-check-guarded-the-wrong-number-and-re-running-it-showed-a-baseline-can-miss-a-content-change)
 - [Surveyed CLAUDE.md's invariants for which ones nothing verifies, and nearly shipped a check that examined nothing](#2026-09-22---surveyed-claudemds-invariants-for-which-ones-nothing-verifies-and-nearly-shipped-a-check-that-examined-nothing)
 - [drift_check leaves outputs/ modified on Windows when nothing changed](#2026-09-22---drift_check-leaves-outputs-modified-on-windows-when-nothing-changed)
@@ -192,6 +193,35 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Check I caught another session's orphaned row within minutes, which is the first time a check here found a defect it was not written for
+
+- **`check_provenance.py` failed on `docs/city_master_list.md:432`** — a Sofia
+  discard row separated from its table by prose inserted above it, so it
+  rendered as literal pipe-delimited text. Introduced by `bf682db` ("Tel Aviv
+  promoted to Band B; Tallinn discarded"), pushed by another session, and
+  caught on the next run here **before anyone read the page**.
+
+- **That is the first time one of these checks found a defect in work it was
+  not written for.** Check I was built from Edmonton's and Toronto's orphaned
+  rows in `data_sources.md`; the same shape appeared hours later in a different
+  file, from a different session, for the same reason — a row and its table
+  separated by an insertion between them. It is the argument for a check over a
+  correction, made without anyone arguing it.
+
+- **Fixed by moving the row to sit beside Tallinn's**, its sibling in the same
+  `| City | What the host actually does |` table, which is plainly where the
+  authoring session meant it to go: both are long-form discard entries, and the
+  Tallinn prose belongs below the table rather than inside it. The short Sofia
+  row in the D-c summary table above is untouched and not a duplicate — it
+  serves a different table.
+
+- **Recording that master was briefly red and why.** This session committed and
+  pushed Toronto's fix in the same breath as merging that commit, and only
+  checked `--strict` afterwards; it exited 1. The failure was inherited, not
+  caused, but the ordering was wrong: **run the check before the push, not
+  after**. Fixed within minutes, and the lesson is the cheaper half of the
+  story.
 
 ### 2026-09-22 - Toronto's collapse check guarded the wrong number, and re-running it showed a baseline can miss a content change
 
