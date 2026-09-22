@@ -419,6 +419,49 @@ Carry this table into the first build; it is what actually changed.
 5. **A `DECISIONS.md` entry** with the ranking and its evidence.
 6. **`docs/city_shortlist.md`** gains the country's section.
 
+## Rank ALSO on cost per marginal city - it decides how far a budget goes
+
+Station density (below) measures **value per city**. This measures **cost per
+additional city**, and the two are independent. A fixed research budget goes
+several times further in a country where the second city is nearly free.
+
+**Ask: is the business data NATIONAL, STANDARDISED, or BESPOKE per city?**
+
+| Shape | Marginal city costs | Examples |
+|---|---|---|
+| **One national register** | A boundary file and a rail check. The data is already downloaded | **France** SIRENE · **Korea** `상가(상권)정보` · **Mexico** DENUE · **Taiwan** 商業登記 · **Brazil** CNPJ |
+| **National STANDARD schema, per-municipality publication** | A download per city, but **identical columns**, so one parser serves all | **Japan** 推奨データセット · **Korea** 표준데이터 |
+| **Bespoke per city** | A full integration each time | **US** · **Canada** · **Spain** · **Italy** |
+
+**The 2026-09-21 screen got this wrong by omission**, and it distorted the
+ranking. Each country was assessed as though it were one city - France as
+"Paris", Korea as "Seoul", Mexico as "Guadalajara", Taiwan as "Taipei". In
+fact:
+
+| Country | Metro cities reachable from the SAME source |
+|---|---|
+| **Japan** | ~9 - Tokyo, Osaka, Nagoya, Yokohama, Kobe, Kyoto, Fukuoka, Sapporo, Sendai |
+| **France** | 6+ - Paris, Lyon, Marseille, Lille, Toulouse, Rennes |
+| **Korea** | 6 - Seoul, Busan, Daegu, Incheon, Daejeon, Gwangju |
+| **Brazil** | 6+ - São Paulo, Rio, Belo Horizonte, Brasília, Recife, Porto Alegre |
+| **Taiwan** | 4 - Taipei, Kaohsiung, Taichung, Taoyuan |
+| **Mexico** | 3 - CDMX, Guadalajara, Monterrey |
+
+**Canada is the worked counter-example and explains its cost.** Six cities
+needed **four different portal types** - Toronto CKAN, Vancouver Opendatasoft,
+Calgary and Edmonton Socrata, Surrey ArcGIS Hub, Montréal CKAN - so six cities
+meant six integrations. That is why the Canadian screen cost a day, and it is
+not a fact about Canada's data quality.
+
+**The consequence for ordering:** where two countries are otherwise close,
+**prefer the national-register one.** On this axis **Korea outranks Spain** -
+Spain's six metro cities are six separate integrations, Korea's six are one
+download plus six boundary files - even though Spain's per-city data is
+excellent.
+
+**And check this BEFORE the station-density ranking**, because it changes what
+you are ranking: a country's entry is a *set* of cities, not one.
+
 ## Rank on station density, not on population or city count
 
 The number that decides whether a city is worth building is **businesses within
