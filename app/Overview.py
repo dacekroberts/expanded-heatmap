@@ -18,7 +18,13 @@ import pandas as pd
 import pydeck as pdk
 import streamlit as st
 
-from cities import CITIES, IN_DEFAULT_VIEW, MAP_ONLY_NAV
+from cities import (
+    CITIES,
+    DEFAULT_REGION,
+    IN_DEFAULT_VIEW,
+    MAP_ONLY_NAV,
+    REGIONS,
+)
 from components import (
     SITE_NAME,
     render_macro_map_theme,
@@ -55,6 +61,45 @@ than one shared map instance loading every city's business points at once.
 )
 
 st.subheader("Covered cities")
+
+# The map opens on ONE region and re-centres on the others, rather than fitting
+# every city at once - see cities.py's REGIONS block, and
+# docs/scaling_thresholds.md for why a single fitted world view stops working
+# somewhere around 12-15 cities. The radio is hidden entirely while there is
+# only one region, so this costs nothing until a second country exists.
+_region_names = [r["name"] for r in REGIONS]
+_region_cities = {r["name"]: r["cities"] for r in REGIONS}
+if len(REGIONS) > 1:
+    region = st.radio(
+        "Region",
+        _region_names,
+        index=_region_names.index(DEFAULT_REGION),
+        format_func=lambda n: f"{n} ({len(_region_cities[n])})",
+        horizontal=True,
+        key="macro_region",
+    )
+else:
+    region = DEFAULT_REGION
+
+# CLEARING THE CHART'S STORED STATE IS THE WHOLE FIX, and without it the
+# switcher silently does nothing. st.pydeck_chart(on_select="rerun") persists
+# the viewer's current view under its widget key, and on a rerun Streamlit
+# restores that stored view and IGNORES initial_view_state - so a new centre
+# computed below would be discarded before it was ever drawn. Dropping the key
+# forces the chart to re-initialise from initial_view_state on this run.
+#
+# Keying the chart per region (macro_map_<region>) was tried first and does not
+# work: it creates a fresh widget, but Streamlit still restores the previous
+# key's state when the viewer switches back, so the map returns to wherever
+# they had dragged it rather than to the region's centre.
+#
+# WARNING FOR ANYONE EDITING THE VIEW BELOW: the same persistence makes a
+# changed initial_view_state invisible in a browser session that has already
+# rendered this page, across server restarts included. Test in a fresh session
+# (a new query string is enough) or you will debug correct code.
+if st.session_state.get("_macro_region_shown") != region:
+    st.session_state["_macro_region_shown"] = region
+    st.session_state.pop("macro_map", None)
 
 cities = pd.DataFrame(CITIES)
 
@@ -203,6 +248,26 @@ def fit_view(lats, lons, width_px=320, height_px=460, fill=0.7, west_pad=0.12):
 view = fit_view([c["lat"] for c in IN_DEFAULT_VIEW],
                 [c["lon"] for c in IN_DEFAULT_VIEW])
 
+# RE-CENTRE, NEVER RE-ZOOM. `view.zoom` above is 1.4525, the zoom every
+# `label_offset` in cities.py was measured at; pixel distance between two
+# cities is a function of the zoom alone, so moving the centre preserves all
+# fourteen offsets exactly while re-fitting per region would invalidate them
+# together. That is why this takes the region's midpoint rather than calling
+# fit_view again on its cities. REGIONS[i]["zoom"] exists for a region that
+# eventually needs its own, and setting it means re-measuring that region's
+# offsets - see cities.py.
+#
+# A NEW ViewState rather than `view.zoom = ...`: pydeck does not serialise
+# attributes mutated after construction, so the assignment form silently ships
+# the old view.
+if region != DEFAULT_REGION:
+    _here = _region_cities[region]
+    view = pdk.ViewState(
+        latitude=(max(c["lat"] for c in _here) + min(c["lat"] for c in _here)) / 2,
+        longitude=(max(c["lon"] for c in _here) + min(c["lon"] for c in _here)) / 2,
+        zoom=view.zoom,
+    )
+
 # Carto basemap: pydeck's own default style needs a Mapbox token; Carto's
 # public styles don't. (Tile provider is still an open decision before
 # deploying - see PLAN.md.)
@@ -250,11 +315,20 @@ if picked:
 # dot is visible near the top. Whether a given city falls just inside or just
 # beyond the edge depends on the container width, so the wording covers both
 # and the list below is named as the guarantee.
-if any(c.get("in_default_view", True) is False for c in CITIES):
+# NAMES THE OTHER REGIONS RATHER THAN SAYING "SOME CITIES ARE ELSEWHERE".
+# docs/scaling_thresholds.md's failure mode is a default that silently hides
+# most of the site, and a reader cannot tell a deliberate frame from a broken
+# one unless the counts are stated. Every city is drawn at every region - the
+# view is centred, not filtered - so the wording is about where the view sits.
+if len(REGIONS) > 1:
+    _elsewhere = ", ".join(
+        f"{len(_region_cities[n])} in {n}" for n in _region_names if n != region
+    )
     st.caption(
-        "The opening view is framed on the United States, so cities elsewhere "
-        "sit toward the edge or beyond it. Zoom out and pan to explore — "
-        "or use the list below, which always has every city."
+        f"Showing {len(_region_cities[region])} cities in {region} — "
+        f"{_elsewhere} elsewhere. Every city is on the map: switch region "
+        "above to re-centre, or use the list below, which always has all of "
+        "them."
     )
 
 st.caption("Or pick a city from the list:")
