@@ -264,7 +264,45 @@ would be EPSG:2039 → UTM 36N (**EPSG:32636**) for Tel Aviv.
 Neither is a defect in the data; both are defects in reading it without
 looking at the columns.
 
-**Israel's business register is unprobed**, and that is now the deciding leg.
+**Israel's business register is the deciding leg, and there is a mismatch.**
+Searched `data.gov.il` for רישוי עסקים (business licensing): the only such
+register is published by **עיריית באר שבע — Be'er Sheva**, which has no light
+rail. **The city with the rail is not on the national portal.** Tel Aviv runs
+its own portal (`opendata.tel-aviv.gov.il`), unprobed — the city-first lesson
+for a third time. Until that is checked, Israel has transit and no matching
+business data.
+
+#### São Paulo — MEASURED, and the cleanest transit data found in this screen
+
+GeoSampa's WFS answers unauthenticated. `GetCapabilities` lists **484 layers**,
+of which the relevant ones are `estacao_metro`, `linha_metro`,
+`area_influencia_metro`, `estacao_transbordo`, and — separately —
+`estacao_metro_projetada` and `linha_metro_projetada`.
+
+| Layer | MEASURED |
+|---|---|
+| `geoportal:estacao_metro` | **94 Points**, **EPSG:31983**, columns `nm_estacao_metro_trem`, `nm_linha_metro_trem`, `nm_empresa_metro_trem`, `tx_situacao_metro_trem`, **`cd_tipo_transporte`** |
+| `geoportal:linha_metro` | **6 LineStrings**, EPSG:31983, columns `nr_nome_linha`, `nm_linha_metro_trem`, `nm_empresa_metro_trem` |
+
+Three things make this the best-shaped transit source in the screen:
+
+- **EPSG:31983 is SIRGAS 2000 / UTM 23S** — already the correct metre-based
+  projected CRS for São Paulo, so the project's per-city CRS derivation agrees
+  with the publisher and no reprojection is needed for distance work.
+- **`cd_tipo_transporte` separates metro from *trem*** (CPTM commuter rail),
+  which this project excludes everywhere. The discriminator is in the data
+  rather than inferred from route names.
+- **Built and planned are SEPARATE LAYERS**, not a status flag. That avoids
+  Israel's trap by construction — a build simply does not request
+  `*_projetada`.
+
+**Brazil's cost is the business leg, as recorded earlier:** CNPJ has ~72M
+establishments with trade name, full address and CNAE, monthly and open — but
+**no coordinates**, so geocoding at a scale beyond Toronto's 159,872, and the
+*sócios* names must never be downloaded.
+
+**São Paulo is now the strongest Latin American candidate after Mexico**, and
+unlike Mexico City its transit host actually answers.
 
 #### Peru — portal unreachable
 
