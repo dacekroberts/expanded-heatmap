@@ -7,7 +7,7 @@ architecture, current state, lessons). `PLAN.md` is the open work,
 the city research.
 
 **Picking the next city? `docs/city_master_list.md`** is the current global
-list - 48 candidates banded by what is actually stopping each one, plus the 14
+list - 43 candidates banded by what is actually stopping each one, plus the 14
 built and the discards with their evidence. It is current state, rewritten as
 things change. `docs/global_country_shortlist.md` is the **evidence trail**
 behind it (87 countries, every probe logged); when the two disagree the trail

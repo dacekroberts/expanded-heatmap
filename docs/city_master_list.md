@@ -20,15 +20,22 @@ Last reordered **2026-09-22**, after the Band D and D5 probes.
 | **United States** (9) | San Diego · San Francisco · Los Angeles · Chicago · New York · Philadelphia · Miami · Boston · Washington D.C. |
 | **Canada** (5, complete) | Vancouver *(with Surrey)* · Montréal · Calgary · Edmonton · Toronto |
 
-## Candidates — 48
+## Candidates — 43
 
-| Band | What is stopping it | Cities |
-|---|---|---|
-| **A** | Nothing. Screening complete | **7** |
-| **B** | One narrow question each | **3** |
-| **C** | A geocoding leg — build work, not screening | **17** |
-| **D** | Four sub-tiers, see below | **21** |
-| *Discarded* | Measured negative, evidence named | *14* |
+Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
+**Five cities moved to discarded on measurement** and **one was upgraded**.
+
+| Band | What is stopping it | Cities | Change |
+|---|---|---|---|
+| **A** | Nothing. Screening complete | **7** | — |
+| **B** | One narrow question each | **4** | ▲ **+Stockholm** |
+| **C** | A geocoding leg — build work, not screening | **17** | — |
+| **D** | Four sub-tiers, see below | **15** | ▼ −6 |
+| *Discarded* | Measured negative, evidence named | *19* | ▼ **+5** |
+
+**Net: the screen got smaller and more honest.** Nothing was lost that was
+ever measured as viable — the five drops were all cities whose business leg
+had never been tested, and testing it is what removed them.
 
 ---
 
@@ -48,13 +55,29 @@ Ordered by how little stands in the way.
 
 **Guadalajara and Madrid have nothing outstanding at all.**
 
-## Band B — one narrow question each (3 cities)
+## Band B — one narrow question each (4 cities)
 
 **Valencia** 🇪🇸 *(subway 84, tram 37 — the largest Spanish system measured)* ·
 **Bilbao** 🇪🇸 · **Málaga** 🇪🇸
 
 Spain is bespoke per city, so each needs its own register — but **two of the
 three Spanish cities probed have had one**, which raises the prior sharply.
+
+**▲ Stockholm** 🇸🇪 — **upgraded from D-c on 2026-09-22.** Screening is
+DONE: a public ArcGIS FeatureServer carrying **8,146 distinct food premises**
+with WGS84 points, 100% trade names and 96.9% addresses, updated daily. It
+carries **two questions rather than one, and both are owner decisions, not
+probes**:
+
+1. **Scope.** It is **one bucket** — food. Stockholms stad has 291 datasets
+   and exactly one commercial register; `restaurang` and `företag` both
+   return **0** inside its own catalogue, and Sweden has no general business
+   licence. A Stockholm page would be a food-density map.
+2. **Licence.** `dataportal.se` says `Åtkomsträttigheter: Begränsad`
+   (restricted); the ArcGIS item says `access: public` and serves without
+   credentials; `licenseInfo` is empty. **Ambiguous in a way that matters** —
+   `read-licence` step 8 — so it needs the publisher asked. That it fetches is
+   not a finding that it is licensed.
 
 ## Band C — viable, each needs a GEOCODING LEG (17 cities)
 
@@ -73,7 +96,7 @@ screen — against the worst geocoding problem and a two-bucket ceiling.
 **Still the biggest open decision in this list**, and a judgment call rather
 than a probe.
 
-## Band D — 21 cities, four sub-tiers
+## Band D — 15 cities, four sub-tiers
 
 ### D-a — one cheap question each (4)
 
@@ -84,22 +107,21 @@ than a probe.
 | **Zurich** 🇨🇭 | **Food confirmed** — `Gastwirtschaftsbetriebe`, premises-level, GeoJSON. No second bucket found; the national STATENT is aggregate |
 | **Singapore** 🇸🇬 | API answers but its search is loose. One controlled query settles it. Suspected registered-office shaped |
 
-### D-b — rail ANSWERED, business leg is the blocker (10)
+### D-b — rail ANSWERED, business leg is the blocker (5)
+
+**Five cities left this sub-tier on 2026-09-22** — Santiago, Kuala Lumpur,
+Jakarta, Medellín and Lima — all to *discarded*, each with a measured reason.
+What remains is the set whose business leg is genuinely still open.
 
 Rail screened via OSM. **Relation counts are upper bounds** — see the caveat
 below.
 
 | City | Rail (OSM) | Business leg |
 |---|---|---|
-| **Hong Kong** 🇭🇰 | 126 rel, 125 named, 117 coloured | **MEASURED NEGATIVE** on `data.gov.hk` — statistics tables only. Route left: **FEHD's licensed food premises list** (a department, not a portal) |
-| **Santiago** 🇨🇱 | 30 rel, all named + coloured | **FAILS on coverage.** Only **5 of ~33** Metro comunas publish patentes, and the Santiago comuna is absent entirely |
+| **Hong Kong** 🇭🇰 | 126 rel, 125 named, 117 coloured | **BLOCKED, not negative.** The portal is a measured negative (statistics only), but **FEHD's register exists and is queryable** — no bulk export found. The single most valuable open thread in Band D |
 | **Rio de Janeiro** 🇧🇷 | 20 rel, all named + coloured | CNPJ, no coordinates → geocoding at São Paulo's scale |
-| **Kuala Lumpur** 🇲🇾 | 14 rel, all named + coloured | **FAILS — sample, not register.** `lookup_premise` is a genuine premises table with **372 rows in KL**; it serves a price survey |
-| **Jakarta** 🇮🇩 | **9 operating** of 11 — two are the proposed MRT East-West Line | **FAILS — no activity field.** OSS register: 53,827 rows, full addresses, 9 columns, none of them saying what a business sells |
-| **Medellín** 🇨🇴 | 6 rel, all named, **only 2 coloured** — colours need assigning by hand | **FAILS.** City Hub is credential-walled; chamber publishes comuna×CIIU crosstabs; the 6.4M-row national register has **no address column** |
-| **Tel Aviv** 🇮🇱 | 6 rel, **realistically 1** — Green and Purple are under construction and OSM does not mark them | `data.gov.il/api` 14 bytes; city portal **HTTP 472**, the documented IP refusal |
+| **Tel Aviv** 🇮🇱 | 6 rel, **realistically 1** — Green and Purple are under construction and OSM does not mark them | **UNREACHABLE.** `data.gov.il/api` 14 bytes; city portal **HTTP 472** with our own IP echoed back — IP-level, so the browser shares the block. One operating line is thin regardless |
 | **Hyderabad** 🇮🇳 | 6 rel, all named + coloured | Trade licences are municipal; `data.telangana.gov.in` dead |
-| **Lima** 🇵🇪 | 4 rel, all named + coloured | **FAILS on coverage.** 78 licence datasets (ODC-BY), but **1 of Línea 1's 9 districts** publishes usable data |
 | **Kochi** 🇮🇳 | 2 rel, named + coloured | Kerala LSG live |
 
 > **The relation counts are upper bounds.** The construction filter flagged
@@ -109,11 +131,20 @@ below.
 > marker. **A filter returning zero can mean "nothing to flag" or "this
 > convention is not used here", and the result alone cannot tell you which.**
 
-### D-c — genuinely UNREACHED, no finding either way (6)
+### D-c — REACHED, and each one is a host failure (5)
 
-**Tallinn** 🇪🇪 *(ariregister's fields are company-shaped — suggestive, unmeasured)* ·
-**Stockholm** 🇸🇪 · **Budapest** 🇭🇺 · **Zagreb** 🇭🇷 · **Bucharest** 🇷🇴 ·
-**Sofia** 🇧🇬 *(the 403 is a stock Apache page, not an IP block — the browser is worth trying)*
+Retitled 2026-09-22: these were "genuinely unreached, no finding either way".
+All six have now been reached. **Stockholm was the one that paid off and has
+been promoted to Band B**; the other five are host failures of varying
+finality, and none is a *data* negative.
+
+| City | What the host actually does |
+|---|---|
+| **Tallinn** 🇪🇪 | API **found** by watching the site's own UI — `andmed.eesti.ee/api/datasets/search` — but it returns **400** to an empty `search` and to `limit=1000`, so the contract is unpinned. `toitlustus` gives 16 datasets, all school-catering statistics. The real route is likely **MTR**, unprobed. Lowest-value city in the band: trams only, ~450k |
+| **Zagreb** 🇭🇷 | `data.gov.hr` answers 200 at **four** paths — including `data.json` — with the **identical 1,291-byte** body. An SPA shell. Still needs the browser |
+| **Budapest** 🇭🇺 | **Misidentified until now.** `kozadat.hu` is a *search tool over public bodies' data inventories*, not a data portal. `budapest.hu` loads 425 KB containing two data-ish links, one a privacy PDF |
+| **Bucharest** 🇷🇴 | `data.gov.ro` **times out at the connection** (21 s, root and API alike); `portal.onrc.ro` does not resolve; `www.pmb.ro` is a 2,483-byte shell |
+| **Sofia** 🇧🇬 | **CORRECTED.** The 403 was twice read as a stock Apache page implying a client-signature refusal worth a browser retry. **The browser returns the same 403.** `data.sofia.bg` and `opendata.sofia.bg` do not resolve. `www.sofia.bg` and `portal.registryagency.bg` are live and unprobed |
 
 ### D-d — one cheap gate (1)
 
@@ -121,7 +152,7 @@ below.
 Access Point answers 401. The WMATA shape, a free account. Its business leg
 still needs its own Spanish source.
 
-## DISCARDED — 14 cities, each naming its evidence
+## DISCARDED — 19 cities, each naming its evidence
 
 | City | Why |
 |---|---|
@@ -139,6 +170,11 @@ still needs its own Spanish source.
 | **Riga** 🇱🇻 | Addressed but unclassified |
 | **Bratislava** 🇸🇰 | No activity classification at all |
 | **Cairo** 🇪🇬 | No open-data infrastructure |
+| **Santiago** 🇨🇱 ↓ | **Coverage.** Chile licenses per *comuna*; **5 of ~33** Metro comunas publish patentes and the **Santiago comuna is absent from the portal entirely**. The Daegu shape, 3rd occurrence |
+| **Kuala Lumpur** 🇲🇾 ↓ | **Sample, not register.** `lookup_premise` passes every structural test — premises rows, 100% populated, keyless CSV — and holds **3,916 rows nationally, 372 in KL**. It is PriceCatcher's survey frame |
+| **Medellín** 🇨🇴 ↓ | **Three closed doors.** The city's ArcGIS Hub is **credential-walled**; the chámber of commerce publishes comuna×CIIU **crosstabs**; RUES has **6,369,877** premises rows and **no address, municipality or city column at all** |
+| **Lima** 🇵🇪 ↓ | **Coverage.** 78 licence datasets under ODC-BY, keyless CSV — but licensing is per *distrito* and **1 of Línea 1's 9** publishes usable data. La Victoria's 135,982 rows are excellent and alone |
+| **Jakarta** 🇮🇩 ↓ | **No activity field.** The live OSS register has 53,827 rows and full street addresses across **exactly 9 columns**; the two that look like classification are legal form and business size |
 
 Plus the no-urban-rail set (Winnipeg, Hamilton, Québec City, Halifax,
 Mississauga, Ottawa, ~30 single-feed countries) and access-not-data
@@ -146,6 +182,12 @@ Mississauga, Ottawa, ~30 single-feed countries) and access-not-data
 
 **Germany is a country-level negative**, on two cities measured independently
 at two different portal hosts.
+
+**The five added on 2026-09-22 each failed differently**, which is the useful
+part: coverage (Santiago, Lima), sampling (Kuala Lumpur), no location column
+(Medellín), no activity column (Jakarta). Four distinct ways for a
+premises-shaped table to be unusable, and **not one of them is visible from a
+dataset title**.
 
 ---
 
@@ -241,10 +283,62 @@ file** — that is the decision that makes this ordering pay.
 | 🇨🇭 **Switzerland** | Zurich | **A second bucket.** Food is confirmed with GeoJSON; retail and personal services were not found, and the national STATENT is aggregate |
 | 🇸🇬 **Singapore** | Singapore | **One controlled query.** Its API answers but the search is loose. Suspected registered-office shaped, which would be fatal |
 
-## Tier 5 — rail is answered, the business leg is the hunt (7 countries, 8 cities)
+## Tier 5 — 🇸🇪 Sweden: screening done, two owner decisions (1 country, 1–2 cities)
 
-Rail screened via OSM and passing. **Every one of these needs a premises
-register found**, and two have already failed at the national portal.
+**New tier, 2026-09-22.** Sweden was in the old Tier 6 ("never actually
+reached"). It is the only country that came out of that sweep alive, and it
+sits here rather than higher because what it yields is **one city with one
+bucket** — not because anything remains to probe.
+
+| Country | City | Rail | State |
+|---|---|---|---|
+| 🇸🇪 **Sweden** ▲ | **Stockholm** | T-bana, ~100 stations — the strongest rail in the unbuilt set after Hong Kong | **Screening COMPLETE.** Public ArcGIS FeatureServer, **8,146 distinct food premises**, WGS84 points, trade names 100%, addresses 96.9%, daily refresh |
+| 🇸🇪 Sweden | *Göteborg* | Trams | **Unprobed candidate.** Publishes **two** registers to Stockholm's one — `Livsmedelsverksamheter` (businesses, not inspections, so no dedupe) and `Restauranger med serveringstillstånd`. Better data, weaker map |
+
+**Neither remaining question is a probe.** (1) **Scope** — food only; Sweden
+has no general business licence and Stockholms stad's own catalogue returns 0
+for `restaurang` and `företag`. (2) **Licence** — `dataportal.se` says
+`Begränsad`, ArcGIS says `access: public`, `licenseInfo` is empty; ambiguous
+in a way that matters, so the publisher gets asked.
+
+**Cost per marginal city is poor** — one city, maybe two, and the second needs
+its own probe. Ranked below Tier 4 for that reason, despite being further
+along than any of Tier 4's four.
+
+## Tier 6 — reached, and every one is a HOST failure (5 countries, 5 cities)
+
+**No data finding either way**, so none of these is a negative. Reached
+2026-09-22; what each host actually does is recorded in Band D-c above.
+
+| Country | City | Host state |
+|---|---|---|
+| 🇪🇪 **Estonia** | Tallinn | API found (`andmed.eesti.ee/api/datasets/search`), contract unpinned — **400** on empty `search` and on `limit=1000`. **MTR** is the likely real route, unprobed |
+| 🇭🇷 **Croatia** | Zagreb | `data.gov.hr` — **identical 1,291-byte SPA shell** at four paths incl. `data.json` |
+| 🇭🇺 **Hungary** | Budapest | `kozadat.hu` is a **search tool over data inventories**, not a portal; `budapest.hu` has no catalogue |
+| 🇷🇴 **Romania** | Bucharest | `data.gov.ro` **times out at the connection**; `portal.onrc.ro` does not resolve |
+| 🇧🇬 **Bulgaria** | Sofia | **403 in the browser too** — correcting the earlier client-signature reading. `www.sofia.bg` and `portal.registryagency.bg` live, unprobed |
+
+## CLOSED — the former Tier 5 (8 countries, 9 cities)
+
+**Kept in full below as evidence, not as candidates.** This was "rail is
+answered, the business leg is the hunt". The hunt finished on 2026-09-22:
+**seven firm negatives, one blocked, one unreachable, no survivors.**
+
+| | Country | Outcome |
+|---|---|---|
+| ⏸ | 🇭🇰 **Hong Kong** | **BLOCKED, not negative** — FEHD's register exists and is queryable, no bulk export found. **The one worth returning to** |
+| ✗ | 🇨🇱 **Chile** | Coverage — 5 of ~33 comunas, Santiago absent |
+| ✗ | 🇮🇳 **India** | 288,011 resources searched; nothing premises-level. GHMC and Kochi Municipal Corporation unprobed |
+| ✗ | 🇲🇾 **Malaysia** | Sample, not register — 372 rows in KL |
+| ✗ | 🇨🇴 **Colombia** | Hub credential-walled; crosstabs; 6.4M rows with no address column |
+| ✗ | 🇵🇪 **Peru** | Coverage — 1 of Línea 1's 9 districts |
+| ✗ | 🇮🇩 **Indonesia** | No activity field in a 53,827-row addressed register |
+| — | 🇮🇱 **Israel** | Unreachable — IP-level refusal, browser shares the block |
+
+The full evidence for each is below and in
+`docs/global_country_shortlist.md`.
+
+### The evidence — retained
 
 | Country | City | Rail | Missing link |
 |---|---|---|---|
@@ -442,11 +536,12 @@ error — the same silent-ignore failure as `data.seoul.go.kr`, and the reason a
 control term is not optional. The first search read as "no results" when it was
 actually "no filter".
 
-## Tier 6 — reached, 2026-09-22 (6 countries, 6 cities)
+### The old Tier 6, reached — the evidence, 2026-09-22
 
-Previously "never actually reached". The browser sweep reached all six. One is
-a **partial pass** and the first Tier 6 positive; the rest are host failures of
-varying finality.
+**This is the evidence behind the new Tier 5 (Sweden) and Tier 6 (host
+failures) above**, retained in full. It was "never actually reached"; the
+browser sweep reached all six. One is a **partial pass** and was promoted; the
+rest are host failures of varying finality.
 
 | Country | City | State after the browser |
 |---|---|---|
@@ -547,6 +642,13 @@ once.
 
 Tier 4's four probes (**Czechia** strongest) are cheap enough to run alongside
 any of the above rather than competing with them.
+
+**Sweden sits outside the numbered order too**, for the opposite reason to
+France: its work is not architecture but a **scope call** — whether a
+one-bucket, food-only city page belongs in this project at all. Settle that and
+Stockholm is close to ready; leave it unsettled and there is nothing to build.
+**Hong Kong is the one closed country worth reopening**, since its register is
+known to exist and only the bulk route is missing.
 
 ---
 
