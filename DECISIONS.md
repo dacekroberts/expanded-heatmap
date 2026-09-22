@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**126 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**127 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Four Canadian cities promoted into the provenance tables, and three Step 0 findings did not survive the trip](#2026-09-22---four-canadian-cities-promoted-into-the-provenance-tables-and-three-step-0-findings-did-not-survive-the-trip)
 - [Spain profiled: Madrid is ready, both licences read, and one clause raised rather than resolved](#2026-09-22---spain-profiled-madrid-is-ready-both-licences-read-and-one-clause-raised-rather-than-resolved)
 - [A leaf region labels only its own cities, and the one accepted overlap is written down](#2026-09-22---a-leaf-region-labels-only-its-own-cities-and-the-one-accepted-overlap-is-written-down)
 - [Two merges, the macro-label check that was missing, and two fixes rejected by measurement](#2026-09-22---two-merges-the-macro-label-check-that-was-missing-and-two-fixes-rejected-by-measurement)
@@ -162,6 +163,83 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Four Canadian cities promoted into the provenance tables, and three Step 0 findings did not survive the trip
+
+- **Promoted Vancouver, Surrey, Montréal and Calgary into the three tables of
+  `docs/data_sources.md`, closing a gap that had been labelled rather than
+  fixed since 2026-09-21.** All four were built with their endpoints recorded
+  only in `docs/canada_step0_endpoints.md`; their required notices were in
+  `data_sources.md` (items 8-13) but their sources were not, so the file
+  `CLAUDE.md` calls "the only way a build can be reproduced" could not
+  reproduce five of the fourteen maps. Edmonton's rows had been added when it
+  was built and Toronto's with it, which is what made the omission visible.
+  Twelve rows added: five business registries (Vancouver's licences, its
+  parcel/tax-report residence join, Surrey's directory, Montréal's
+  `locaux-commerciaux`, Calgary's licences), three GTFS feeds, and five
+  boundary layers including the BC ABMS naming layer. The NOTE that recorded
+  the gap is deleted, since it now describes nothing.
+
+- **Wrote the rows from each city's own `config.py` rather than from the Step 0
+  file, and three of the Canada profile's findings turned out to be wrong.**
+  This was the reason to re-derive rather than copy. (1) Surrey's boundary
+  GeoJSON "declares EPSG:4326 while containing EPSG:26910 UTM metres" belongs
+  to the ArcGIS **Hub file export**, not to the FeatureServer the build
+  actually reads with `f=geojson`, which returns correct degrees - so the build
+  needs no `set_crs(..., allow_override=True)` anywhere and step 1 asserts the
+  boundary is in degrees. (2) Calgary's `licencetypes` has **96** real
+  categories, not the 173 the profile recorded: the profile split on a bare
+  `\n` where the delimiter is `,\n`, which shreds each value and counts the
+  fragments. (3) TransLink's feed **does** carry `feed_info.txt`, declaring
+  20260907-20270103; it is the Mobility Database mirror that does not, so the
+  profile's "no validity window" reading described the mirror rather than the
+  feed. Each correction is now in the table cell a rebuild reads, not only in
+  a config comment.
+
+- **Gave `canada_step0_endpoints.md` the opposite job rather than leaving two
+  files claiming to be the provenance record.** Its opening still said "**No
+  Canadian city is built.** When one is, these rows merge into
+  `data_sources.md`" - false on both halves, with six municipalities built as
+  five maps. It is relabelled the evidence trail, with an explicit precedence
+  rule ("where this file and `data_sources.md` disagree, `data_sources.md`
+  wins") and the three corrections named, so a reader who lands on the stale
+  figures knows they are stale. Same shape as `city_master_list.md` versus
+  `global_country_shortlist.md`: current state in one file, the trail behind it
+  in the other, and a stated winner.
+
+- **Carried the endpoint traps into the table cells, because a trap recorded in
+  a sibling city's config does not reach the next reader.** Seven that would
+  each cost a wrong run or a silent empty result: Vancouver's `city-boundary`
+  is a MultiLineString, so a point-in-polygon test against it matches nothing
+  *silently* and `local-area-boundary` dissolved is the layer (22 polygons,
+  118.8 km² against ~115, asserted ±3); Vancouver's Opendatasoft CSV exports
+  are semicolon-delimited, portal-wide; Surrey's boundary layer has 10 features
+  of which 9 are town centres, so an unfiltered read tests containment against
+  a neighbourhood; Surrey's Hub `/csv` returns **HTTP 202** with an async job
+  and then `application/octet-stream`, which a content-type check for "csv"
+  rejected twelve times during Step 0; Calgary publishes two "City Boundary"
+  datasets and the `map` view `7t9h-2z9s` returns 53 bytes of valid, empty
+  GeoJSON that fails only when the geometry is used; Calgary's `route_id`
+  embeds a feed version (`201-20780` mirror, `201-20786` agency) so routes
+  match on `route_short_name`; and Montréal's portal answers a plain client
+  `RBAC: access denied`. This is `osm-rail`'s meta-rule applied to provenance -
+  put the lesson where the next reader must pass through it.
+
+- **Recorded the Vancouver residence-filter sources in the business table
+  although they are not businesses, following Philadelphia's OPA precedent.**
+  The parcel polygons and the property tax report remove rows from the map, so
+  a build is not reproducible without them; the row states the server-side
+  narrowing (`report_year='2026'` plus four columns, ~229k rows against
+  1,553,448 across seven years) and that the address join was tested at 6.5%
+  matched and rejected, so it is not retried. No owner field and no mailing
+  address is downloaded, and neither derived value is ever published.
+
+- **Changed no notice and no other section.** Items 8-13 under "Notices this
+  project MUST display when published" already covered these four cities and
+  are untouched; the diff is three hunks in `data_sources.md` (45 insertions,
+  7 deletions - the deletions are the NOTE) plus the header paragraph of
+  `canada_step0_endpoints.md`. No pipeline file changed, so `drift_check.py`
+  has nothing to compare and `deploy-verify` has nothing to verify.
 
 ### 2026-09-22 - Spain profiled: Madrid is ready, both licences read, and one clause raised rather than resolved
 
