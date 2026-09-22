@@ -190,6 +190,61 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Discarded Sevilla on measured data after its dead portal named its own
+  successor.** `datosabiertos.sevilla.org` is NXDOMAIN and `www.sevilla.org`
+  is unroutable from here, so the city had been parked as unreachable with the
+  note that *"one attempt from a different network settles it"*. What it
+  actually took was a different **host**. The final Internet Archive capture
+  of the retired portal - 2024-04-25, already serving 503 - carries in its own
+  JavaScript a KML link to `sevilla.idesevilla.opendata.arcgis.com`, naming
+  the ArcGIS organisation that replaced it. Enumerating owner accounts on
+  `www.arcgis.com/sharing/rest` returned **1,260 public items, 413 Feature
+  Services**, from org `hcmP7kr0Cx3AcTJk` served by `services1.arcgis.com`.
+  Rejected the alternative of leaving Sevilla parked, because the city is now
+  measured rather than merely unreached. Band D drops to 10 and sub-tier D-d
+  closes entirely. Touched `docs/city_master_list.md`,
+  `.claude/skills/add-country/SKILL.md`.
+
+- **The ArcGIS Hub sign-in wall was a front-end, not a verdict on the data,
+  and reading it as one cost this city several probes.** Sevilla's Hub says
+  *"Can't access this content ... Sign In"*, recorded here as "the Medellín
+  shape" - genuinely private. It is not: `sharing/rest/search` serves the same
+  organisation's items **anonymously**, and every FeatureServer layer answers
+  `?f=json` and `returnCountOnly` without credentials. **A Hub is a UI; the
+  REST API is the data.** Written into `add-country` with the exact calls, so
+  the next sign-in wall is tested rather than believed. Note also that
+  `owner:idesevilla` returned 0 while the correct account, `Ayto.Sevilla`, was
+  already sitting in a printed search result - the org id came from reading
+  output, not from a better guess.
+
+- **`Locales` is a false friend, and only the row count exposed it.** Sevilla
+  publishes a Feature Service called `Locales` plus ten per-district copies -
+  the same Spanish word Madrid's 225,660-row `censo de locales` uses. It holds
+  **150 rows city-wide, and 1 for Triana**. Its fields say what it is:
+  `USO = VACÍO`, `ENTIDAD_CESIÓN_USO`, `ADSCRITO_A`, `Editor = 6_Empleo`,
+  with observations like *"Estado de conservación en bruto"* - the city's
+  inventory of **vacant municipally-owned units offered for assignment**,
+  published by the Employment directorate. `BIENES INMUEBLES` (11 districts)
+  and `Naves Industriales` are the same family; `APP_Mercados` (18) and
+  `Centros_Comerciales` (120) are facility layers, the Málaga shape. The only
+  genuine premises signal is `Veladores_2023`: **389 pavement-terrace
+  licences** (2,897 furniture items), EPSG:25830 - one narrow hospitality
+  bucket, well under Stockholm's 8,146 food premises, which is itself only a
+  Band B city. All 413 Feature Services were scanned by title rather than
+  keyword-filtered, applying the same morning's Bulgarian lesson about partial
+  scopes to this sweep.
+
+- **Sevilla's rail leg is solved, which retires a blocker recorded against
+  it.** The city publishes `METRO_Estacion` (**21** rows, real `NOMBRE` values
+  - Ciudad Expo, Cavaleri, San Juan Alto) and `METRO_Linea` (**20** polylines
+  with `ID_EST_INI`/`ID_EST_FIN` segment topology), both public and account-
+  free. The prior position was that the rail half needed Spain's National
+  Access Point, which answers **401** and wants a free account - the WMATA
+  shape. **That is no longer on Sevilla's critical path**, and the finding is
+  recorded even though the city is discarded, because the NAP was carried as a
+  cost against other Spanish cities too.
+
+
 - **Discarded Sofia on DATA, after routing around the 403 that had it parked
   as "unreachable, nothing learned".** `data.egov.bg` returns 403 to curl and
   to a real browser alike, while DNS-over-HTTPS showed the host up and the

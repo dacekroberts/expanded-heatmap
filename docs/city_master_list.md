@@ -35,18 +35,21 @@ pair**, and the first where the rail leg came from **OpenStreetMap** rather
 than an agency feed — the per-city exception approved for CDMX, which
 validated at 195/195 stops exact.
 
-## Candidates — 35
+## Candidates — 34
 
 Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
-**Six cities moved to discarded on measurement** and **one was upgraded**.
+**Seven cities moved to discarded on measurement** and **one was upgraded**.
+The last two — Sofia and Sevilla — were both sitting in Band D as
+*unreachable*, and both were reached by going to a **different host** rather
+than a different network.
 
 | Band | What is stopping it | Cities | Change |
 |---|---|---|---|
 | **A** | Nothing. Screening complete | **5** | ✅ −2 built; Paris out then back, **measured both ways** |
 | **B** | One narrow question each | **1** | ▼ −3 — Spain's three measured out |
 | **C** | A geocoding leg — build work, not screening | **18** | ▲ **+Bucharest** |
-| **D** | Four sub-tiers, see below | **11** | ▼ −3 — D-c finalised, **Sofia measured out** |
-| *Discarded* | Measured negative, evidence named | *25* | ▼ **+11** |
+| **D** | Four sub-tiers, see below | **10** | ▼ −4 — D-c finalised, **Sofia and Sevilla measured out**, D-d closed |
+| *Discarded* | Measured negative, evidence named | *26* | ▼ **+12** |
 
 ✅ **Guadalajara and Mexico City left Band A by being built**, not by being
 ruled out. Their rows are kept below, marked, because a built city's Band A
@@ -157,7 +160,7 @@ screen — against the worst geocoding problem and a two-bucket ceiling.
 **Still the biggest open decision in this list**, and a judgment call rather
 than a probe.
 
-## Band D — 12 cities, four sub-tiers
+## Band D — 10 cities, and two of its four sub-tiers are now closed
 
 ### D-a — one cheap question each (4)
 
@@ -359,7 +362,12 @@ is a **catalogue, not a bypass**: it can tell you what exists anywhere in the
 EU, and the files stay behind whatever wall they were behind. That is enough
 to *screen* a blocked country, and not enough to *build* one.
 
-### D-d — UNREACHABLE, not a cheap gate (1)
+### D-d — ✗ CLOSED 2026-09-22 (0 left — Sevilla resolved and discarded)
+
+**The whole sub-tier is closed.** Its single city was reached, measured and
+discarded on the same day it was written up as unreachable. Read the section
+below top-to-bottom: it is kept in full *because* the first two thirds are
+wrong, and the correction at the end is the only part that stands.
 
 ▼ **Sevilla** 🇪🇸 — **downgraded 2026-09-22.** The rail half is unchanged
 and still cheap: Spain's National Access Point answers **401**, the WMATA
@@ -386,6 +394,56 @@ is **actually gone**. Whatever replaced it has not been found — and the ArcGIS
 Hub, which is the obvious successor, is the sign-in-walled one. **That is the
 thread to pull**, not the dead subdomain.
 
+> ### ✅ RESOLVED 2026-09-22 — the thread was pulled, and it led all the way
+>
+> **Sevilla is now a measured negative on the business leg and a SOLVED rail
+> leg.** Both halves above are superseded. How it opened:
+>
+> The last Archive capture of the dead portal (2024-04-25, already serving
+> **503**) contains, in its own JavaScript, a KML link to
+> `sevilla.idesevilla.opendata.arcgis.com/datasets/5df7320…_0.kml`. **A dead
+> page named its successor** — that is the general lesson, and it cost one
+> CDX query.
+>
+> **The sign-in wall was the HUB, not the DATA, and that reading was wrong.**
+> Recorded above as "the Medellín shape", i.e. genuinely private. In fact
+> `www.arcgis.com/sharing/rest` serves the city's public items **anonymously**,
+> from org **`hcmP7kr0Cx3AcTJk`** on `services1.arcgis.com` — a host that
+> answers us, while every `sevilla.org` address is retired or unroutable.
+> Enumerating by owner returned **1,260 public items, 413 Feature Services.**
+>
+> **🚇 The rail leg is SOLVED, and the 401 is now irrelevant.** The city
+> publishes its own metro:
+>
+> | Layer | Rows | |
+> |---|---|---|
+> | `METRO_Estacion` | **21** | `NOMBRE` — Ciudad Expo, Cavaleri, San Juan Alto… real named stations |
+> | `METRO_Linea` | **20** | polylines with `ID_EST_INI`/`ID_EST_FIN` segment topology |
+>
+> No account, no NAP, no OSM. **Spain's National Access Point and its 401 are
+> not on Sevilla's critical path at all.**
+>
+> **✗ The business leg is a firm negative**, and `Locales` is a **false
+> friend** — the same trap as Kochi's "establishment", caught the same way,
+> by opening it:
+>
+> | Layer | Rows | What it actually is |
+> |---|---|---|
+> | `Locales` + 10 district copies | **150** | `USO = VACÍO`, `ENTIDAD_CESIÓN_USO`, `ADSCRITO_A`, `Editor = 6_Empleo` — the city's own **vacant municipally-owned units offered for assignment**, published by the Employment directorate |
+> | `BIENES INMUEBLES` × 11 districts, `Naves Industriales` | — | municipal **property holdings**, same family |
+> | `APP_Mercados` / `Centros_Comerciales` | 18 / 120 | market *buildings* and shopping centres — **the Málaga shape**, `equipamientos` facility layers |
+> | `Veladores_2023` | **389** licences (2,897 furniture items) | pavement-terrace occupation, EPSG:25830 |
+>
+> **Row count is what caught it.** `Locales` returns 150 city-wide and **1 for
+> Triana**; Madrid's censo has 225,660. A name that matches Madrid's word for
+> the right dataset, at 0.07% of the scale.
+>
+> All 413 Feature Services were scanned by title, not just keyword-filtered —
+> the Bulgarian sweep's lesson about partial scopes applied to my own work.
+> Nothing else is business-shaped. **Sevilla is DISCARDED on data.** The one
+> real premises signal, 389 terrace licences, is a single narrow bucket far
+> below Stockholm's 8,146 food premises, which is itself only a Band B city.
+
 **And the Internet Archive confirms the portal was real while it lasted:**
 
 | | |
@@ -401,11 +459,18 @@ DNS.** Nothing has been learned about whether Sevilla licenses premises; only
 that every route to asking is blocked on this side. **One attempt from a
 different network settles it.**
 
-## DISCARDED — 25 cities, each naming its evidence
+**↑ That paragraph was right to refuse the discard and wrong about what it
+would take.** It concluded a different *network* was needed; what it actually
+took was a different *host* — `services1.arcgis.com`, reachable all along.
+The rule held and protected the city from a premature discard; the cost
+estimate attached to it was guesswork. **See the resolution above.**
+
+## DISCARDED — 26 cities, each naming its evidence
 
 | City | Why |
 |---|---|
 | **Sofia** 🇧🇬 | **11,635 Bulgarian datasets enumerated via `data.europa.eu`'s SPARQL endpoint, around a 403 aimed at us.** 141 municipal premises registers exist nationally; **Sofia's 76 datasets include none.** Its registers are all small towns — Sofia is Bulgaria's only metro city |
+| **Sevilla** 🇪🇸 | **1,260 public ArcGIS items / 413 Feature Services enumerated** from org `hcmP7kr0Cx3AcTJk` after the dead portal's last Archive capture named its successor. **Rail is solved** (`METRO_Estacion` 21, `METRO_Linea` 20, no account). **No premises register**: `Locales` is 150 *vacant municipally-owned units*, the rest are property holdings and facility layers |
 | **Berlin** 🇩🇪 | `Gaststätten` → 0 on `datenregister.berlin.de`; the Gewerberegister is not open data |
 | **Hamburg** 🇩🇪 | `Gewerberegister` → 7 irrelevant hits on `suche.transparenz.hamburg.de`; building-permit PDFs and planning polygons |
 | **Naples** 🇮🇹 | Only commercial dataset is "per procedimento e Municipalità" — aggregate |
@@ -820,7 +885,7 @@ wrong: **Madrid and Barcelona are the exceptions, not the rule.**
 | **Valencia** | `opendata.vlci.valencia.es` (CKAN) | **290 packages** | ✗ The only commercial-adjacent names are container locations, noise stations, and *zones d'activitats* — **zoning polygons, not businesses** |
 | **Málaga** | `datosabiertos.malaga.eu` (CKAN) | **1,377 packages** | ✗ `empresas-y-sectores` is explicitly businesses **in business parks**; `centros-comerciales` and `mercados` are `equipamientos` facility layers. CC **BY-SA** |
 | **Bilbao** | own portal + `datos.gob.es` | 344 own / **600 federated** | ✗ Entire commercial holding is **"Barómetro del comercio minorista"** — retail-trade survey aggregates by employment stratum, sector, territory |
-| **Sevilla** | — | — | **UNREACHABLE.** City domain does not resolve; ArcGIS Hub is sign-in walled; no Ayuntamiento publisher in the national catalogue |
+| **Sevilla** | ArcGIS org `hcmP7kr0Cx3AcTJk` | **1,260 items / 413 Feature Services** | ✗ **Measured negative** (was "unreachable" — the Hub's sign-in wall hid nothing; `sharing/rest` is public). `Locales` is **150 vacant municipally-owned units**, not businesses. Rail *is* solved: `METRO_Estacion` 21, `METRO_Linea` 20 |
 
 **A method note worth carrying.** Bilbao's own portal holds 344 datasets across
 35 pages and offers **no search** — its only form control is a sort order. Paging

@@ -382,6 +382,36 @@ routes, cheapest first:
 | **National catalogue** | a city portal is searchless, paginated, or down | `datos.gob.es` for Bilbao (600 federated vs 344 own) |
 | **`data.europa.eu`** | a whole EU country refuses you | **Bulgaria — see below** |
 | **Internet Archive** | a page is CAPTCHA-walled or retired | Barcelona's and Sevilla's licences |
+| **The dead page's own HTML** | a portal is **retired** and you need its successor | **Sevilla — see below** |
+| **The platform's API, not the portal's UI** | a Hub/catalogue front-end demands sign-in | **Sevilla again** |
+
+**A retired portal names its successor, in its last capture.** Sevilla's
+`datosabiertos.sevilla.org` is NXDOMAIN and was written off as gone. Its
+final Archive capture — 2024-04-25, already serving **503** — still carried,
+in its own JavaScript, a KML URL pointing at the ArcGIS org that replaced it.
+One CDX query. **Fetch the last capture and read its links before concluding
+a portal left no forwarding address.**
+
+**And a sign-in wall on a Hub is not a verdict on the data.** Sevilla's
+ArcGIS Hub says *"Can't access this content … Sign In"*, which was recorded
+here as "the Medellín shape", i.e. private. It was not: `sharing/rest/search`
+served **1,260 public items / 413 Feature Services** anonymously, and
+`services1.arcgis.com/<orgId>/…` served every layer. **The Hub is a
+front-end; the REST API is the data.** Before accepting a wall, ask the layer
+underneath it:
+
+```
+https://www.arcgis.com/sharing/rest/search?f=json&num=100&q=owner:<account>
+https://services1.arcgis.com/<orgId>/arcgis/rest/services/<name>/FeatureServer/0
+    ?f=json                                   <- fields, geometry, wkid
+    /query?where=1%3D1&returnCountOnly=true   <- the row count that decides it
+```
+
+Get the account or org id by **reading results**, not by guessing:
+`owner:idesevilla` returned 0 while the correct `Ayto.Sevilla` was sitting in
+a search result already printed. Then enumerate by **owner** — a keyword
+search over ArcGIS Online returns the whole world's content (`title:Sevilla`
+gave 1,314 items, mostly other people's).
 
 None of these is a bypass. They are *other publications of the same public
 record*, which is why they are fine where defeating the block would not be.
