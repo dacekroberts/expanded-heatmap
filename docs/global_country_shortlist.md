@@ -579,6 +579,33 @@ is unambiguous:
 binding question for all of them** — which is where the next pass should go,
 not back to the mapping agencies.
 
+#### D5 BUSINESS LEG — first pass on all eleven, 2026-09-22
+
+**No D5 city has a confirmed premises-level register yet.** Two produced
+measured negatives; the rest have live portals on the wrong endpoint, which is
+a fact about the probe, not the data. Recorded so the next pass starts in the
+right place per city rather than re-deriving it.
+
+| City | Portal state | Verdict |
+|---|---|---|
+| **Hong Kong** 🇭🇰 | `data.gov.hk` **is CKAN, control 0** | **MEASURED NEGATIVE on this portal.** `restaurant` returns *Restaurant Receipts and Purchases — Table 625-68003*, `licence` returns *Municipal services licences — Table 990-92201*, `shop` returns public housing estates. All **statistics tables**, the aggregate trap. Note this does not even support the earlier "food-only ceiling" claim — there is no food *premises* register here either. **Unprobed route: FEHD's licensed food premises list**, which is where HK's actual register lives |
+| **Santiago** 🇨🇱 | `datos.gob.cl` **is CKAN, control 0** | **MEASURED NEGATIVE so far.** `establecimientos` (115) returns health and educational establishments; **`patentes comerciales` — the correct Chilean term for a commercial licence — returns no answer at all.** Municipal portals still the route, and `datos.santiago.cl` resolves nowhere |
+| **Bogotá** 🇨🇴 | CKAN, control 0 | `establecimientos` 88 — pharmacies, tourist lodging, universities. One lead: ***Dinámica empresarial. Bogotá D.C.*** in DXF/ESRI REST/GPKG. **Moot: Bogotá fails on rail** |
+| **Kuala Lumpur** 🇲🇾 | `data.gov.my` live, 150 KB, **not CKAN** | Wrong endpoint. SSM (the companies commission) is live at 422 KB and is the likely register — company-shaped, so expect the registered-office failure |
+| **Rio** 🇧🇷 | `data.rio` live, 96 KB, **not CKAN** | Brazil's leg is already known: **CNPJ, premises-level, no coordinates** → geocoding at a scale past Toronto's |
+| **Jakarta** 🇮🇩 | `satudata.jakarta.go.id` live (19 KB); `data.jakarta.go.id` **dead** | Stack unidentified |
+| **Lima** 🇵🇪 | `www.datosabiertos.gob.pe` live, 88 KB, **not CKAN at that path** | The `www.` lesson already applied; now needs the catalogue endpoint |
+| **Medellín** 🇨🇴 | `medellin.gov.co/mapas` → **ArcGIS** | ArcGIS REST is a known shape for this project; cheap next probe |
+| **Hyderabad / Kochi** 🇮🇳 | `data.gov.in` live but 1.2 MB and **not CKAN at that path**; `data.telangana.gov.in` **dead**; Kerala LSG live (139 KB) | India's trade-licence registers are municipal, so the state/city portals are the route |
+| **Tel Aviv** 🇮🇱 | `data.gov.il/api` returns **14 bytes**; `opendata.tel-aviv.gov.il` returns **HTTP 472** | 472 is the same non-standard status recorded earlier when that host **printed our IP back** — consistent with the IP-level refusal already documented. **The browser will not help** |
+
+**The pattern worth carrying:** two CKAN portals answered cleanly with working
+controls and both returned **statistics tables rather than registers**. That is
+the aggregate trap appearing at *national* portals specifically — the same
+reason `datos.gob.cl` and `data.gov.hk` look rich and yield nothing. The
+city-first lesson applies again, and for Hong Kong the named next step (FEHD)
+is a *department*, not a portal.
+
 #### Band D after ranking
 
 | | Cities |
