@@ -35,7 +35,7 @@ pair**, and the first where the rail leg came from **OpenStreetMap** rather
 than an agency feed — the per-city exception approved for CDMX, which
 validated at 195/195 stops exact.
 
-## Candidates — 38
+## Candidates — 36
 
 Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 **Five cities moved to discarded on measurement** and **one was upgraded**.
@@ -45,8 +45,8 @@ Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 | **A** | Nothing. Screening complete | **5** | ✅ −2 built; Paris out then back, **measured both ways** |
 | **B** | One narrow question each | **1** | ▼ −3 — Spain's three measured out |
 | **C** | A geocoding leg — build work, not screening | **18** | ▲ **+Bucharest** |
-| **D** | Four sub-tiers, see below | **14** | — *(header was 13; sub-tiers sum to 14, corrected)* |
-| *Discarded* | Measured negative, evidence named | *22* | ▼ **+8** |
+| **D** | Four sub-tiers, see below | **12** | ▼ −2 — D-c finalised |
+| *Discarded* | Measured negative, evidence named | *24* | ▼ **+10** |
 
 ✅ **Guadalajara and Mexico City left Band A by being built**, not by being
 ruled out. Their rows are kept below, marked, because a built city's Band A
@@ -147,7 +147,7 @@ screen — against the worst geocoding problem and a two-bucket ceiling.
 **Still the biggest open decision in this list**, and a judgment call rather
 than a probe.
 
-## Band D — 14 cities, four sub-tiers
+## Band D — 12 cities, four sub-tiers
 
 ### D-a — one cheap question each (4)
 
@@ -278,19 +278,27 @@ own file carries them and would improve the filter further.
 > marker. **A filter returning zero can mean "nothing to flag" or "this
 > convention is not used here", and the result alone cannot tell you which.**
 
-### D-c — REACHED; one promoted, two parked, two walls (4)
+### D-c — FINALISED 2026-09-22 (2 left: both UNREACHABLE or parked, neither a negative)
 
-Retitled 2026-09-22: these were "genuinely unreached, no finding either way".
-**All six have now been reached, and two of them paid off** — **Stockholm**
-was promoted to Band B and **Bucharest** to Band C. Of the four left, one is a
-firm negative and three are host or value decisions, not data negatives.
+**Finalised 2026-09-22.** These were "genuinely unreached, no finding either
+way". All six are now reached and the sub-tier is closed out:
+
+| | |
+|---|---|
+| ▲ **Stockholm** | promoted to **Band B** |
+| ▲ **Bucharest** | promoted to **Band C** |
+| ✗ **Budapest** | **discarded** — both routes measured closed |
+| ✗ **Zagreb** | **discarded** — 210 Grad Zagreb datasets, one commercial, and it is a grants list |
+| **Sofia** | **UNREACHABLE** — and the site is demonstrably live |
+| **Tallinn** | **parked on value**, with the äriregister half now measured |
+
+**Neither of the two that remain is a data negative**, and that distinction is
+load-bearing — see the Sofia row.
 
 | City | What the host actually does |
 |---|---|
-| **Tallinn** 🇪🇪 ⏸ | **PARKED ON VALUE, not viability — 2026-09-22.** Trams only, ~450k; even a success is a thin map. API found (`andmed.eesti.ee/api/datasets/search`) but returns **400** to an empty `search` and to `limit=1000`, so the contract is unpinned; `toitlustus` gives 16 datasets, all school-catering statistics. **MTR** is the likely route, unprobed. Revisit only if a method makes it cheap |
-| **Zagreb** 🇭🇷 ⏸ | **PARKED ON VALUE, not viability — 2026-09-22.** Trams only, ~770k. `data.gov.hr` answers 200 at **four** paths — including `data.json` — with the **identical 1,291-byte** body, an SPA shell. Still reachable by browser if it is ever worth the hour |
-| **Budapest** 🇭🇺 ✗ | **FIRM NEGATIVE — the food-authority route is closed too.** Nébih's FELIR is **CAPTCHA-gated** (`service.mtcaptcha.com`) and is a one-customer-at-a-time lookup, not a register. Its *Approved Establishments* list is **two PDFs of processing plants** — the page names them: slaughterhouses, meat-cutting plants, dairies, egg packers, fish and game processors, cold stores. Retail and catering are only *registered*, by county offices, unpublished. Separately, `kozadat.hu` is a search tool over data inventories, not a portal |
-| **Sofia** 🇧🇬 | **UNREACHABLE, still not a negative.** `data.egov.bg` returns **403 in the browser too**, correcting the earlier client-signature reading. The food authority (**BABH**) does not resolve at **any** domain tried — `babh.government.bg`, `www.babh.government.bg`, `babh.bg`, `bfsa.bg`, `babh.egov.bg` — and its parent ministry, which IS live, links no register. `www.sofia.bg` and `portal.registryagency.bg` remain live and unprobed |
+| **Tallinn** 🇪🇪 ⏸ | **PARKED ON VALUE, and now with one half measured.** Trams only, ~450k. The **äriregister**'s open-data downloads are `ettevotja_rekvisiidid` — *company* requisites — plus annual accounts: **company-shaped**, confirming what was previously only suspected. The register that would carry premises is **MTR** (`mtr.ttja.ee`, the Majandustegevuse register); it is live HTML with **no API found**, so it needs the browser. Not done — the city is the thinnest map in the screen and does not justify the hour |
+| **Sofia** 🇧🇬 | **UNREACHABLE, and now demonstrably so.** `data.egov.bg` returns **403 in the browser as well as to curl** — but the Internet Archive holds a snapshot dated **2026-04-02**, so **the portal is alive and the 403 is aimed at us**, not a dead host. The food authority (**BABH**) resolves at no domain tried. `www.sofia.bg` and `portal.registryagency.bg` are live and unprobed. **Nothing has been learned about Bulgarian premises data** — only that our routes to asking it are blocked |
 
 ### D-d — UNREACHABLE, not a cheap gate (1)
 
@@ -306,12 +314,22 @@ city's own data failed:
 | `sevilla-ayuntamientodesevilla.opendata.arcgis.com` | live, but **"Can't access this content … Sign In"** — the Medellín shape |
 | `datos.gob.es` federated catalogue | **no Ayuntamiento de Sevilla publisher exists.** The publishers returned for "Sevilla" are CIS (opinion surveys), **IGME (geological maps)** and the Junta de Andalucía |
 
-**This is unreachable, not a measured negative**, and the distinction is the
-one this list's maintenance rule exists to protect. Nothing has been learned
-about whether Sevilla licenses premises; only that four routes to asking
-failed.
+**And the Internet Archive settles that it is OUR problem, not Sevilla's:**
 
-## DISCARDED — 22 cities, each naming its evidence
+| | |
+|---|---|
+| `www.sevilla.org` snapshot | **2026-09-12** — ten days old. **The site is alive** |
+| `datosabiertos.sevilla.org` snapshot (2023) | **521 datasets, 1,345 distributions** — a real municipal portal |
+| Enumerable from the archive? | **No.** The crawl is 347 URLs deep, 11 of them datasets, none commercial |
+
+**This is unreachable, not a measured negative**, and the distinction is the
+one this list's maintenance rule exists to protect. **Discarding Sevilla would
+mean throwing away an unexamined 521-dataset catalogue because of our own
+DNS.** Nothing has been learned about whether Sevilla licenses premises; only
+that every route to asking is blocked on this side. **One attempt from a
+different network settles it.**
+
+## DISCARDED — 24 cities, each naming its evidence
 
 | City | Why |
 |---|---|
@@ -336,6 +354,8 @@ failed.
 | **Jakarta** 🇮🇩 ↓ | **No activity field.** The live OSS register has 53,827 rows and full street addresses across **exactly 9 columns**; the two that look like classification are legal form and business size |
 | **Valencia** 🇪🇸 ↓ | **No premises register.** `opendata.vlci.valencia.es` is CKAN with **290 packages**, read in full. The only commercial-adjacent names are container locations, noise-monitoring stations and *zones d'activitats* — zoning polygons, not businesses |
 | **Málaga** 🇪🇸 ↓ | **Business parks and facility layers only.** `datosabiertos.malaga.eu` is CKAN with **1,377 packages**. `empresas-y-sectores` is explicitly *"empresas que se encuentran en **parques empresariales**"*; `centros-comerciales` and `mercados` are `equipamientos` layers — a handful of malls and municipal markets. Licence is CC **BY-SA** |
+| **Budapest** 🇭🇺 ↓ | **Both routes closed.** Portal: `kozadat.hu` is a search tool over data inventories, not a data portal. Food authority: Nébih's FELIR is **CAPTCHA-gated** and is a one-customer lookup, not a register; its *Approved Establishments* holding is **two PDFs of processing plants** — slaughterhouses, dairies, egg packers, cold stores. Retail and catering are only *registered*, by county offices, unpublished |
+| **Zagreb** 🇭🇷 ↓ | **210 datasets, one commercial, and it is a grant list.** `data.gov.hr`'s CKAN lives at **`/ckan/api/3/...`**, not `/api/3/...` — 3,889 packages once found. **Grad Zagreb** publishes 210 of them; the only commercial one is *Lista za dodjelu potpora … obrtničke djelatnosti*, a grants register. Croatia devolves to municipalities and the only business databases belong to villages — `baza-poduzetnika-i-obrtnika` is **Grad Ivanec** (pop. 13,000) and carries `adresu sjedišta`, the **registered office** |
 | **Bilbao** 🇪🇸 ↓ | **Aggregate barometers only.** Its own portal holds 344 datasets behind a paginated list with **no search** (its one form control is a sort order). Enumerated instead via `datos.gob.es`: **600 datasets** under publisher `A16003011`, whose entire commercial holding is *"Barómetro del comercio minorista"* — retail-trade survey aggregates by employment stratum, sector and territory |
 
 Plus the no-urban-rail set (Winnipeg, Hamilton, Québec City, Halifax,
