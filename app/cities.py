@@ -279,6 +279,41 @@ CITIES = [
         # west on 2026-09-21. That move was made for exactly this.
         "label_offset": ("start", 12, 9),
     },
+    {
+        "name": "Edmonton",
+        "lat": 53.5444,
+        "lon": -113.4909,
+        "page": "pages/13_Edmonton_Heatmap.py",
+        "blurb": "ETS LRT (Capital, Metro and Valley Lines)",
+        # OUTSIDE THE DEFAULT VIEW, like the other three Canadian cities. See
+        # IN_DEFAULT_VIEW below.
+        "in_default_view": False,
+        # EAST of its dot, like Calgary's. Edmonton sits almost directly NORTH
+        # of Calgary - 2.5 degrees of latitude, 0.6 of longitude - so the pair
+        # is separated vertically rather than horizontally and both labels can
+        # run east without meeting. Nudged slightly ABOVE the dot (negative y)
+        # so the gap to Calgary's label, which sits below its own dot, is the
+        # sum of the two offsets rather than the difference.
+        "label_offset": ("start", 12, -6),
+    },
+    {
+        "name": "Toronto",
+        "lat": 43.6532,
+        "lon": -79.3832,
+        "page": "pages/14_Toronto_Heatmap.py",
+        "blurb": "TTC (Lines 1, 2 and 4 subway; Lines 5 and 6 LRT)",
+        # OUTSIDE THE DEFAULT VIEW, like the other Canadian cities. Toronto is
+        # the closest of the four to the framed region - its longitude sits
+        # inside the US span and its latitude only just north of Boston's - so
+        # its dot lands near the frame's top edge rather than off the map.
+        "in_default_view": False,
+        # EAST of its dot and slightly ABOVE, which is the band Chicago's label
+        # was moved south to free on 2026-09-21 - see the Chicago entry, which
+        # recorded Toronto's dot at x 506.6, y 182.0 before this city existed.
+        # Running east keeps it clear of Boston and New York, which sit east of
+        # their own dots further south.
+        "label_offset": ("start", 12, -10),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

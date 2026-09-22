@@ -318,15 +318,57 @@ Cities built and running end to end (pipeline, map, app page):
   row. Surrey and Edmonton state home occupation on the licence; Calgary
   asserts nothing, and no inference is attempted.
 
+- **Edmonton** - Edmonton Transit Service's LRT: the Capital, Metro and Valley
+  Lines. Distinctive in four ways, and the first city whose publisher did this
+  project's privacy work for it.
+
+  **Three of its 33 apparent stations are not stations, which is a NEW error
+  class here.** Every rail trip touches two garage access points and a tail
+  track, and `pickup_type` and `drop_off_type` are both 1 on every one of their
+  stop_times - nobody can board. The platform check that caught Toronto and
+  Calgary passes cleanly here (`parent_station` is populated on all 65 served
+  stops, collapsing to 33 at a healthy 713 m median), so this needed a
+  different test: **boardability**. Edmonton has **30** stations. Every city in
+  this project should have had that check and none of them did.
+
+  Its register **states premises-or-person and redacts the rest itself**.
+  `licencetype` separates `Commercial` from `Home Based`, `Non-Resident` and two
+  individual-held types, so no residence inference is needed; and
+  `<REDACTED FOR PRIVACY>` replaces the address on 4,074 rows **and takes the
+  coordinates with it**. It also publishes **no name column but the business's**
+  - no registrant, owner or contact field exists - so its privacy position is
+  structural: no pin *can* be a person's name.
+
+  Its **line colours are this project's own, chosen by measurement**. ETS signs
+  Capital blue and Valley green, which sit Delta-E 23.9 and 37.2 from the Retail
+  and Personal services pin colours against a working threshold of ~45, so each
+  line keeps its hue and is darkened until it clears. Colour separation is an
+  **intra-city** constraint only: Edmonton's Metro red is deliberately the same
+  as Calgary's Red Line.
+
+  And its **Personal services bucket is knowably generous**: the accredited
+  `Health Enhancement Centre` licence covers massage and spa premises alongside
+  physiotherapy and chiropractic clinics, which are NAICS 621 health care, and
+  the register does not distinguish them. About a quarter of that class reads
+  as a clinic. Counted anyway, for Alberta comparability with Calgary, and
+  disclosed on the city page.
+
 Next by ease ranking: New Orleans and Seattle, both needing decisions before
 code - a streetcar-only scope question and a multi-municipality build. In
-Canada, **Edmonton and Toronto remain**, and Toronto's corrected figure (81
-per station, not 41) now places it above Edmonton - though it stays the weaker
-build because it is a two-bucket city with no general-retail source. For
-Canada, **re-rank the remaining four cities on storefront counts before
-choosing one** - the published ranking counted every mappable licence for five
-of the six and only storefronts for Toronto, so it is not internally
-comparable (see `PLAN.md`).
+Canada, **only Toronto remains**. Its figure was corrected twice on 2026-09-21
+- 41 per platform, then 81, then **86 per station across 111 stations** once
+`scripts/brief_check.py` caught that the first correction's collapse pattern
+was written for the subway's hyphenated platform names and left all 86 LRT
+platforms uncollapsed. That puts it above Edmonton's built 79, though it stays
+the weaker build because it is a two-bucket city with no general-retail source,
+needing `multi-source-city`.
+
+**Briefs are now executable.** `scripts/brief_check.py <city>` re-runs a
+brief's factual claims against the live sources, from a fenced
+```brief-checks block beside the prose. It exists because Edmonton's build
+inherited three wrong claims from its brief and the MEASURED/ASSERTED labels
+did not stop it; Toronto's and Edmonton's briefs carry 9 checks each, and all
+18 pass. A failing check is a brief to correct, not a check to relax.
 **Check a candidate's registry actually covers all three buckets before
 assuming one source is enough** - that assumption failed for New York, and in
 Philadelphia a whole bucket had no source at any level of government. See

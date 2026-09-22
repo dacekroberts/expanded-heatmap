@@ -1,0 +1,6 @@
+parent_station,stop_id,stop_name,latitude,longitude,stop_times
+Q7020,79171,Andrews Garage Platform,53.579042,-113.447938,980
+Q7020,79172,Andrews Garage Platform,53.579141,-113.447875,967
+Q7019,99441,DL Macdonald Platform,53.595052,-113.422203,980
+Q7019,99442,DL Macdonald Platform,53.595147,-113.422148,967
+QHTT,20191,Health Sciences Tail,53.517216,-113.52614,1430

@@ -345,9 +345,27 @@ def add_city_entry(root, args, page_rel, dry_run):
         f'        "blurb": "{args.system_name} (TODO: list the lines)",\n'
         "    },\n"
     )
-    idx = text.rstrip().rfind("]")
-    if idx == -1:
-        sys.exit("app/cities.py: could not find the end of the CITIES list.")
+    # Find the end of the CITIES list specifically, NOT the last "]" in the
+    # file. `rfind("]")` used to do the latter, which spliced Montreal and then
+    # Calgary into the IN_DEFAULT_VIEW comprehension below the list and broke
+    # the module both times - each repaired by hand instead of here. Walk
+    # forward from `CITIES = [` tracking bracket depth, so anything added after
+    # the list is irrelevant however it is written.
+    start = text.find("CITIES = [")
+    if start == -1:
+        sys.exit("app/cities.py: could not find `CITIES = [`.")
+    depth, idx = 0, None
+    for i in range(text.index("[", start), len(text)):
+        ch = text[i]
+        if ch == "[":
+            depth += 1
+        elif ch == "]":
+            depth -= 1
+            if depth == 0:
+                idx = i
+                break
+    if idx is None:
+        sys.exit("app/cities.py: CITIES list is not closed.")
     new = text[:idx] + entry + text[idx:]
     print(f"  {'would edit' if dry_run else 'edit'}: app/cities.py (add {args.name})")
     if not dry_run:

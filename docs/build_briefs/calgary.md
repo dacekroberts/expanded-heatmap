@@ -17,7 +17,7 @@ Claims are **MEASURED** or **ASSERTED**, per
 
 **75 storefronts within the 0.6 mi ring per in-city station** — 6,243 across
 83 stations. For scale: Vancouver 206, Montréal 151, Surrey 135, Edmonton 76,
-Calgary 75, Toronto 81 (corrected 2026-09-21 — its published 41 was per
+Calgary 75, Toronto 86 (corrected twice on 2026-09-21 — its published 41 was per
 PLATFORM; see `toronto.md`), against D.C. ~173 and Boston ~39.
 
 **The published figure was 103**, measured on every licence rather than

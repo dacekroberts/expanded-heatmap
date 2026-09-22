@@ -463,6 +463,140 @@ It is constant, not merely unreliable, so unlike Surrey (`Home Occupation`,
 about home occupation, and no inference is attempted - Vancouver's parcel
 substitute, the only one this project has built, removed nothing.
 
+### Edmonton - a register that sorts itself, and one merged category counted anyway
+
+**Edmonton does more of this page's work than any register except Calgary's,
+and it does a different part of it.** Calgary names *premises*; Edmonton names
+*people*. Its `licencetype` field splits every licence into `Commercial`
+(25,105), `Home Based` (14,114), `Non-Resident` (2,108), `Massage Practitioner`
+(1,582) and `Adult Services` (763). Only `Commercial` is kept, and that single
+filter removes 43% of the file before any category is read - no residence
+inference, no name heuristic, no parcel join. `Non-Resident` is mobile trade;
+the last two are licences held by a **person** rather than a premises, the New
+York `Individual` distinction. Every one of the 60 remaining categories has an
+explicit verdict in `pipeline/taxonomies/edmonton_licencecategory.py`, which
+raises on an unknown rather than defaulting to None.
+
+**FOUR of the judgment calls were settled by SAMPLING NAMES, and the sample
+overrode the rule twice.** This project's merged-category rule - when one
+category spans a trade this map counts and one it does not, and cannot be
+split, leave it out, because the term nearest the actual trade wins - would
+have got two of these wrong:
+
+- **`General Business` (154) is excluded.** The catch-all. Sampling the 111
+  rows carrying it alone found parking operators (IMPARK x4, IMPERIAL PARKING,
+  two City Centre parkades), coach and scooter fleets (TRAXX COACHLINES, FIRST
+  STUDENT, BIRD CANADA, LIME), home-care agencies (HOME INSTEAD, CAREPROS),
+  shelters and churches (EDMONTON WOMEN'S SHELTER, HOPE MISSION), daycares and
+  a market garden - and **zero storefront retail, food or personal services**.
+  Parking is the clincher: NAICS 81293 is the one thing explicitly carved out
+  of this project's personal-services anchor, so the largest identifiable group
+  in the catch-all is excluded by the anchor itself.
+- **`Vehicle Wash / Fueling Station` (336) is excluded**, although Vancouver
+  counts its `Gas Station` as Retail. Vancouver's category is pure; Edmonton's
+  merges a car wash (NAICS 811192, the repair family excluded everywhere here)
+  with a fuel retailer (NAICS 457, which counts). The 40 rows carrying it alone
+  are A1A CAR WASH, MILLCREEK CAR WASH, MINT SMARTWASH, CLEAN GETAWAY,
+  KINGSWAY, DUGGAN, MINIT, BLUE SKY, KLARITY, ULTRA and a truck wash - against
+  two COSTCO GASOLINE and one AFD PETROLEUM. And the genuinely retail ones are
+  almost never alone: 248 of the 336 also carry `Retail Sales (Convenience
+  Store)` and keep Retail from that. Cost of excluding it: about three fuel
+  sites.
+- **`Animal Breeding and Boarding Facility` (77) COUNTS, against the rule.**
+  The leading term is animal breeding, NAICS 112 agriculture, so the rule would
+  exclude it. The sample says otherwise: HOLLYWOOF, PAWS AT PLAY DOG DAYCARE,
+  RUFFINGTON'S PALACE, COZY KITTY ACCOMODATIONS, THE PAMPERED PUPPY, POSH POOCH
+  HOTEL AND DAYCARE, PETSMART #1202 - pet-care storefronts, NAICS 81291,
+  roughly nine in ten. Calgary's `KENNEL SERVICE/PET DEALER` (68) counts for the
+  same reason, and excluding Edmonton's because its category names breeding
+  first would be an artefact of wording, not a difference in the cities.
+- **The `Health Enhancement` family splits four ways, and only the accredited
+  CENTRE counts.** Edmonton uses one phrase for four different things:
+  `Health Enhancement Centre (Accredited)` (560) **counts**;
+  `Health Enhancement Centre` (12) does **not**, because the non-accredited
+  variant is pure NAICS 621 - LIFEMARK PHYSIOTHERAPY, WINDERMERE CHIROPRACTOR,
+  REVIVE SPINE AND SPORT, HERITAGE LANE CHIROPRACTIC, and nothing else;
+  `Health Enhancement Centre (Accredited / Independent)` (115) does **not**,
+  being a practitioner working inside someone else's centre, which
+  double-counts the centre and puts an individual on the map, as Calgary's
+  `INDEPENDENT CHAIR OPERATOR` (160) and New York's `DOSAERENTER` would;
+  and `Health Enhancement Practitioner (Accredited)` (25) does **not**, because
+  it is a person - **all 25 rows carry `<REDACTED FOR PRIVACY>` as the address,
+  which is the publisher's own verdict on what those records are.**
+
+**The one counted against its own contamination, and disclosed for it.**
+`Health Enhancement Centre (Accredited)` is 34.3% massage, 11.8% spa/nail/hair
+and 4.1% acupuncture by business name - but also **26.4% physiotherapy or
+chiropractic**, which is regulated health care and does not belong in a
+personal-services bucket. The register cannot separate them. It is counted
+anyway, because **Calgary's `MASSAGE CENTRE (COMMERCIAL)` (917) counts** on the
+grounds that massage therapy is not a regulated health profession in Alberta -
+it is in British Columbia, which is why Vancouver's `Massage Therapy (RMT)`
+does not count - and excluding Edmonton's while counting Calgary's would make
+the two Alberta cities non-comparable for no reason present in the data. The
+effect is that roughly **one in sixteen of Edmonton's personal-services pins is
+health care rather than a personal-services storefront**. The city page says
+so. This is the one call on this page a reader might reasonably make the other
+way, and reversing it is one line in the taxonomy.
+
+**`Food Processing / Catering Service` (583) stays excluded**, which was the
+open question Edmonton's build brief flagged as worth the most rows. It merges
+NAICS 311 food manufacturing with 7223 catering, leads with processing, and has
+no second field to split on - the treatment Vancouver's `Printing Imaging and
+Photo Services` got. Reversing it is one line.
+
+**Nonstore and mobile trade is excluded** on the project-wide NAICS 454
+reasoning: `Public Market Vendor` (143), `Food Truck / Food Cart` (71),
+`Travelling or Temporary Sales` (38), `Public Market Organizer` (32, which runs
+the market rather than a stall), `Farmers' Market` (8, the market rather than
+its vendors) and `Designated Driver Service` (1).
+
+**Repair is excluded and personal care is not**, the same NAICS 811-against-812
+line Vancouver, Surrey and Calgary draw: `Vehicle Repair, Maintenance, and
+Modification` (1,174), `Light Duty Repair Service` (205) and `Industrial
+Equipment Sales, Rental, and Repair` (373, NAICS 423/532 trade rather than
+consumer) are out, while hairdressers, tattooists and dry cleaners count under
+`Personal Service` (1,649, 57% spa/nail/hair by name).
+
+**Endorsements are NOT a problem here, and Edmonton is the first Canadian city
+where they are not.** Calgary emits one row per category, so its alcohol and
+patio endorsements had to be dropped to avoid counting a restaurant three
+times. Edmonton emits **one row per licence** with a `";"`-delimited category
+list, so an endorsement is a second string on the same row and the pin exists
+once either way. That is why `Alcohol Sales (Consumption On-Premises / *)`
+(1,420 across both variants) is mapped to Food service here and to None in
+Calgary: 1,159 of the larger variant's 1,165 rows also carry another category,
+1,034 of them `Restaurant or Food Service`, which `BUCKET_PRIORITY` resolves to
+Food service regardless - and the 6 rows standing alone are real drinking
+places (NAICS 7224) that mapping the category keeps on the map. `Tobacco and
+Vaping Product Sales` (742) and `Oleoresin Capsicum (OC) Spray Sales` (53) are
+adjuncts treated the same way; the OC spray licence **never** stands alone, so
+it is never decisive.
+
+**And adult services and body rub centres are excluded on sensitivity as well
+as scope**, as Calgary's are: `Body Rub Centre` (29), `Adult Service` (3),
+`Erotic Entertainment Venue` (3) and `Erotic Entertainment Agency` (2) - **37
+rows**, on top of the 763 `Adult Services` licences already removed by
+`licencetype`. A NAICS-only reading would keep the body rub centres in 812199
+beside the tattooists this map does count. The reasoning is the one the owner
+confirmed for Calgary on 2026-09-21: mapping adult-services premises adds
+exposure for the people working there without answering the question this
+project asks. Mapped to None rather than deleted, so it is one line to reverse.
+
+**Also excluded, without controversy:** offices and professional services
+(2,701), construction and labour (2,635), residential rental long- and
+short-term (4,187, Philadelphia's `Rental` problem), wholesale and storage
+(1,518), manufacturing (1,385), delivery and logistics (510), financial
+services (503, NAICS 52 as Vancouver's `Financial Institution`), participant
+recreation (450, NAICS 713940 as Vancouver's `Fitness Centre` and Calgary's
+`FITNESS CONDITIONING`), commercial schools (428, NAICS 611), exhibition halls
+(183), spectator entertainment (148), amusement establishments (116), hotels
+and motels (98, NAICS 721 not 722), independent laboratories (69), scrap metal
+dealers (52), auctions (14, NAICS 425 agents and brokers - the sample is
+livestock and salvage), bingo and casinos (11, NAICS 7132), cannabis processing
+(6) and cultivation (3), event production (3), carnivals (2) and one
+after-hours dance club that holds no alcohol category.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

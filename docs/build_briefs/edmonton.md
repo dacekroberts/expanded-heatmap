@@ -1,9 +1,56 @@
 # Build brief — Edmonton
 
-**Not the next city.** Ranked fourth of six Canadian candidates on the
-comparable measure, in a tie with Calgary. This brief exists because the
-re-ranking of 2026-09-21 corrected three facts about Edmonton, one of which
-makes the build materially cheaper than the profile suggests.
+> ## BUILT 2026-09-21. This brief is now HISTORY, not guidance.
+>
+> Read `pipeline/edmonton/config.py` and
+> `pipeline/taxonomies/edmonton_licencecategory.py` for what is true; they
+> carry the measurements and the reasoning. Kept because **four of its claims
+> were wrong in ways worth recording**, and because three of the four were
+> wrong in the same direction — a sentence was read and its consequence was
+> not checked.
+>
+> **1. "A BETTER PATH EXISTS, and it sidesteps staleness entirely" — REVERSED.**
+> The brief recommended Edmonton's eight individual Socrata GTFS tables over
+> the zip. They are **expired**: their `calendar_dates` run to 2026-08-29, and
+> the Stops table had not been written since April. The agency zip is the only
+> current source, and it is at
+> `https://gtfs.edmonton.ca/TMGTFSRealTimeWebService/GTFS/gtfs.zip`, found in
+> the `accessPoints.DOWNLOAD` field of the catalogue's href-type dataset
+> `urjq-fvmq`. Reading each table's `updatedAt` was the brief's own argument
+> for them and would have shown this; the dates were cited as a *feature*
+> rather than checked.
+>
+> **2. "Edmonton's feed carries no `feed_info.txt`" — WRONG.** The agency feed
+> has one, declaring `feed_start_date` 20260911 and `feed_end_date` 20261128.
+> That claim was true of the stale republications and was generalised to the
+> city.
+>
+> **3. "No required notice, uniquely among the Canadian candidates" — WRONG,
+> and this is the most consequential.** Edmonton's Terms of Use do say credit
+> is "not required" but "encouraged". The obligation is in a different clause
+> and is not about credit: distributing the datasets "in original or modified
+> form" requires including the Terms of Use URL and passing them on "without
+> introducing any further restrictions of any kind". `outputs/edmonton/` is
+> committed to a public repo, so it engages. See `docs/data_sources.md` item
+> 14. The brief read the credit sentence and stopped.
+>
+> **4. The station count was 33 and the real answer is 30.** Not the platform
+> error that hit Toronto and Calgary — `parent_station` collapses Edmonton's 65
+> served stops to 33 correctly, at a healthy 713 m median. Three of those 33
+> are **non-revenue**: two garage access points and a tail track, with
+> `pickup_type` and `drop_off_type` both 1 on every one of their stop_times.
+> A new error class for this project, and one every earlier city should have
+> been checked for.
+>
+> **What the brief got right, and it was the expensive half:** no residence
+> inference (`licencetype` states it), no geocoding step (99.4% of storefront
+> rows carry coordinates), no name-fallback problem, the `;` delimiter, the
+> 60-category vocabulary, EPSG:32612, and the corporate-boundary naming trap.
+> Its three corrections to the country profile all held.
+>
+> **Final measured figure: 2,380 storefronts within the 0.6 mi ring across 30
+> stations = 79 per station**, on the build-grade taxonomy. The brief's 76 used
+> 33 stations and a 17-category screening map.
 
 Claims are **MEASURED** or **ASSERTED**, per
 [`session_roles.md`](../session_roles.md).
@@ -183,6 +230,113 @@ than a filter.
   `outputs/` is committed to a public repo — worth a deliberate reading before
   building, not after.
 - **Re-fetching the feed from ETS** and re-counting stations.
+
+
+## Machine checks
+
+**`python scripts/brief_check.py edmonton` re-runs the claims below.**
+
+Edmonton is the reason `scripts/brief_check.py` exists, so this block is
+written as the counterfactual: **every check here would have failed on the
+version of this brief that shipped.** `edmonton-feed-current` would have caught
+both the "no `feed_info.txt`" claim and the recommendation to prefer the stale
+Socrata tables; `edmonton-stations` would have caught 33-where-30; and
+`edmonton-categories` would have caught the 67 inherited from the country
+profile. None of them takes longer than the sentence that got it wrong.
+
+The city is built, so these now guard the live pipeline's sources rather than a
+future build — a failure here means a source moved under `pipeline/edmonton/`.
+
+```brief-checks
+[
+  {
+    "id": "edmonton-agency-feed",
+    "claim": "The agency GTFS resolves at the URL found in href dataset urjq-fvmq's accessPoints.DOWNLOAD, ~16.7 MB",
+    "kind": "http_ok",
+    "url": "https://gtfs.edmonton.ca/TMGTFSRealTimeWebService/GTFS/gtfs.zip",
+    "min_bytes": 10000000
+  },
+  {
+    "id": "edmonton-feed-current",
+    "claim": "The agency feed DOES carry feed_info.txt and its window is CURRENT - the brief said it carried none, which was true only of the stale republications",
+    "kind": "gtfs_feed_window",
+    "url": "https://gtfs.edmonton.ca/TMGTFSRealTimeWebService/GTFS/gtfs.zip",
+    "expect": "current"
+  },
+  {
+    "id": "edmonton-stations",
+    "claim": "3 LRT routes, 65 platforms, parent_station populated, 33 parent_stations of which 3 are non-revenue -> 30 boardable stations",
+    "kind": "gtfs_stations",
+    "url": "https://gtfs.edmonton.ca/TMGTFSRealTimeWebService/GTFS/gtfs.zip",
+    "route_types": [0],
+    "expect_platforms": 65,
+    "expect_stations": 33,
+    "expect_boardable_stations": 30,
+    "expect_parent_station_populated": true,
+    "crs": "EPSG:32612",
+    "station_spacing_median_m_min": 400
+  },
+  {
+    "id": "edmonton-register-rows",
+    "claim": "The business register has 43,672 rows",
+    "kind": "socrata_count",
+    "domain": "data.edmonton.ca",
+    "view": "qhi4-bdpu",
+    "expect": 43672,
+    "tolerance": 3000
+  },
+  {
+    "id": "edmonton-commercial-rows",
+    "claim": "25,105 rows are licencetype Commercial - the premises-or-person marker that removes the need for any residence inference",
+    "kind": "socrata_count",
+    "domain": "data.edmonton.ca",
+    "view": "qhi4-bdpu",
+    "where": "licencetype = 'Commercial'",
+    "expect": 25105,
+    "tolerance": 2000
+  },
+  {
+    "id": "edmonton-categories",
+    "claim": "business_licence_category holds 60 true distinct categories on the Commercial set once split on ';' - NOT the 67 the country profile recorded, and not the 1,247 combinations a naive count returns",
+    "kind": "socrata_distinct_split",
+    "domain": "data.edmonton.ca",
+    "view": "qhi4-bdpu",
+    "column": "business_licence_category",
+    "where": "licencetype = 'Commercial'",
+    "delimiter": ";",
+    "expect": 60
+  },
+  {
+    "id": "edmonton-boundary",
+    "claim": "qqvh-dp5m is the CURRENT corporate boundary at 783.1 km2 - four layers share that name and two are the 699.8 km2 pre-2019 polygon",
+    "kind": "geojson_area_km2",
+    "url": "https://data.edmonton.ca/api/geospatial/qqvh-dp5m?method=export&format=GeoJSON",
+    "crs": "EPSG:32612",
+    "min": 750,
+    "max": 820
+  },
+  {
+    "id": "edmonton-stale-boundary",
+    "claim": "3trg-p57p is the STALE boundary and must not be used - it predates the 2019 annexation",
+    "kind": "geojson_area_km2",
+    "url": "https://data.edmonton.ca/api/geospatial/3trg-p57p?method=export&format=GeoJSON",
+    "crs": "EPSG:32612",
+    "min": 650,
+    "max": 730
+  },
+  {
+    "id": "edmonton-crs",
+    "claim": "EPSG:32612 (UTM 12N) is derivable from longitude -113.5",
+    "kind": "utm_zone_from_longitude",
+    "lon": -113.5,
+    "expect": "EPSG:32612"
+  }
+]
+```
+
+**Not machine-checked, because it is a reading rather than a measurement:**
+that the Terms of Use require the URL to be displayed. `docs/data_sources.md`
+item 14 carries it, and no HTTP call settles a clause.
 
 ## Open questions
 

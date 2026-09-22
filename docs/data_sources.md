@@ -162,6 +162,26 @@ walked rather than where commerce is, so it is recorded as available and
 deliberately unused. Its licence is also the only "not specified" one on the
 portal.
 
+| Edmonton | City of Edmonton Business Licences (Socrata `qhi4-bdpu`) | All three buckets, via its own `business_licence_category` taxonomy | `https://data.edmonton.ca/resource/qhi4-bdpu.csv` | none (`$limit=60000`; the whole file is 43,672 rows, so the raw capture stays a faithful snapshot and step 2 does the filtering) | 2026-09-21 |
+
+**Edmonton is the only register here that publishes NO name column but the
+business's.** No registrant, owner, licensee or contact field exists, so its
+privacy position is structural rather than measured: no pin *can* be a person's
+name. `pipeline/edmonton/fetch_sources.py` asserts this at download rather than
+assuming it. Its `licencetype` field separates commercial premises from
+`Home Based` (14,114), `Non-Resident` (2,108) and two individual-held types, so
+Edmonton needs no residence inference at all — and the City replaces the
+address with `<REDACTED FOR PRIVACY>` on 4,074 rows, **taking the coordinates
+with it** (redacted rows carrying coordinates: zero).
+
+**NOTE — a gap in these three tables, not in the builds.** Vancouver, Surrey,
+Montréal and Calgary were built with their endpoints recorded in
+[`canada_step0_endpoints.md`](canada_step0_endpoints.md) and their notices here,
+and were never added to the tables above and below. Edmonton's rows are here
+because `CLAUDE.md` calls this file the master provenance list. The other four
+should be promoted the same way; until they are, read
+`canada_step0_endpoints.md` alongside this file for any Canadian city.
+
 ## Transit feeds (GTFS)
 
 | City | Agency / system | Endpoint | Retrieved | Note |
@@ -175,6 +195,7 @@ portal.
 | Washington D.C. | WMATA Metrorail | `https://api.wmata.com/gtfs/rail-gtfs-static.zip` | 2026-09-21 | **The only feed in this project behind an API key** — 401 unauthenticated. Free developer account at `developer.wmata.com`, subscribe to the **GTFS** product, key sent as an `api_key` header. Take the **`Rail GTFS Static`** operation, *not* `Rail & Bus Combined GTFS Static` (bus routes this project never draws) and not any `RT` feed. Verified 2026-09-21: 6 routes (Red, Blue, Green, Yellow, Orange, Silver, all `route_type 1`, `network_id Metrorail`), **98 parent stations, all with coordinates**, 270,784 `stop_times` rows, 340 shape_ids, no bus contamination. **`feed_info.txt` declares `feed_start_date 20260915`, `feed_end_date 20260925` — a ten-day validity window, the shortest of any feed here, so a rebuild must re-download rather than reuse a stored copy.** Terms are the WMATA Transit Data Terms of Use, stored at `docs/licenses/wmata-transit-data-terms-of-use.html`; the key is WMATA's property, must stay out of the repo, and cannot be sold, transferred or sublicensed (§5). **Built 2026-09-21.** `fetch_sources.py` reads the key from a `WMATA_API_KEY` environment variable, never echoes it (not even in the 401 message), and re-checks `feed_end_date` on EVERY run including runs that skip the download — an expired copy is an error, not a warning, because a stale feed still parses, still has 98 stations and still builds a map. Shape selection needed care this feed alone required: WMATA publishes 26-101 shapes per route, so "the most-used shape" could be a short turn (the Yellow Line's second-most-used stops at Mt Vernon Square, nine stations short of Greenbelt). Each drawn shape is the most-used among those serving the route's full stop count |
 | Miami | Miami-Dade Transit (Metrorail + Metromover) | `https://www.miamidade.gov/transit/googletransit/current/google_transit.zip` | 2026-09-21 | 8.4 MB. **Note the host**: `transitdata.miamidade.gov` does not resolve; this URL is also the one the Mobility Database lists as official. Four rail routes; three are drawn (`31009` Metrorail, `14457`/`14456` the Metromover loops) and the MIA Airport People Mover `14458` is not. **No `feed_info.txt` at all**, so no licence is declared in the feed. Metrorail publishes NINE shapes because the line branches, and has **no `parent_station`** — its 46 stop_ids are 23 stations x 2 directions |
 | Philadelphia | SEPTA Metro | `https://github.com/septadev/GTFS/releases/latest/download/gtfs_public.zip` | 2026-09-21 | **A zip of zips.** Contains `google_bus.zip` and `google_rail.zip`; `fetch_sources.py` extracts the **bus** one, because SEPTA's City Transit Division — and therefore the Market-Frankford Line, Broad Street Line and every trolley — is in that feed, not the "rail" one. `google_rail.zip` is Regional Rail, which this project does not draw. The naming is not guessable; both route tables were read to establish it |
+| Edmonton | Edmonton Transit Service LRT | `https://gtfs.edmonton.ca/TMGTFSRealTimeWebService/GTFS/gtfs.zip` | 2026-09-21 | **The URL is not published as a readable link.** The catalogue's entry for the feed (`urjq-fvmq`) is an `href`-type asset with no rows and no download button; the URL lives in its metadata under `accessPoints.DOWNLOAD`, which is why two guessed URLs 404'd during the Canada profile. 16.7 MB, 18 files, and it **declares a validity window** (`feed_start_date` 20260911, `feed_end_date` 20261128) where Calgary's and Toronto's do not. **Do not substitute either republication:** the eight individual Socrata GTFS tables (`d577-xky7`, `4vt2-8zrq`, `ctwr-tvrd`, `greh-g7ac`, `7f8n-igfx`, `f2sy-bth7`, `isug-45sj`, `hnhf-yaps`) expire 2026-08-29 and the Mobility Database mirror (id 714) expired 2026-06-20 |
 
 ## Boundary layers
 
@@ -219,6 +240,8 @@ nowhere) by identifying the raw file from its own fields, `objectid` /
 `fipsstco` / `county` with FIPS `06075`; the endpoint reproduces the file
 byte-for-byte at 38,822 bytes with identical geometry, so it is the confirmed
 original source and not a lookalike.
+
+| Edmonton | **City of Edmonton — Corporate Boundary (current)** (Socrata `qqvh-dp5m`) | `https://data.edmonton.ca/api/geospatial/qqvh-dp5m?method=export&format=GeoJSON` | Whole city, 1 Polygon, 783.1 km². **FOUR layers on this portal are named some variant of "Corporate Boundary" and they are not the same polygon:** `qqvh-dp5m` and `a62q-eaea` give 783.1 km², `3trg-p57p` and `gtx5-kghy` give 699.8 km². The 83.3 km² difference is Edmonton's 2019 annexation from Leduc County, so the smaller pair predates it and is stale. This is Calgary's two-boundary trap with twice the ways to get it wrong, so `fetch_sources.py` asserts the area rather than trusting the name. Also the vocabulary trap: a search for "city boundary" misses it, because Edmonton calls it *corporate* |
 
 ## Geocoding
 
@@ -738,11 +761,20 @@ surfacing both documents rather than only one:
 forms: "Data provided by Chicago Transit Authority", "Data provided by CTA",
 or "Powered by CTA data".
 
-**7. MassDOT / MBTA — required, NOT YET DISPLAYED. Boston was built on 2026-09-21, so this is now ACTIVE rather than conditional.**
-§4.1 of the MassDOT Developers License Agreement requires the licensee to
-"Clearly acknowledge MassDOT as the provider of the Data". No exact wording is
-prescribed. Boston's city page already carries **"Rail alignment data provided by MassDOT/MBTA"**, which meets the requirement for that page; the outstanding part is the same as for the other three — it must appear where the *site* is accessed, not only on one city page. Same shape as LA Metro's obligation. The agreement
-itself is kept at `docs/licenses/mbta-massdot-develop-license-agreement.pdf`.
+**7. MassDOT / MBTA — required, and DISPLAYED.** §4.1 of the MassDOT Developers
+License Agreement requires the licensee to "Clearly acknowledge MassDOT as the
+provider of the Data". No exact wording is prescribed. Same shape as LA Metro's
+obligation. The agreement itself is kept at
+`docs/licenses/mbta-massdot-develop-license-agreement.pdf`.
+
+**This heading read "NOT YET DISPLAYED" until 2026-09-21 and was stale**, which
+is worth leaving a note about because a compliance document that understates
+compliance invites someone to re-fix a closed item and to doubt the rest of the
+gate. The outstanding part had been that the acknowledgement appeared only on
+Boston's own city page rather than "where the *site* is accessed"; that was
+closed when `app/components.py`'s `render_site_notices()` began carrying all
+five outstanding notices on **every** page, and this heading was not updated
+with the others. Verified against `_NOTICES` on 2026-09-21.
 
 Not required by anyone, but good practice and already partly done in the city
 pages' prose: naming each business registry's publishing agency.
@@ -905,9 +937,51 @@ Surrey's, this licence **terminates automatically on breach**. The Socrata
 `SEE_TERMS_OF_USE` marker `read-licence` step 1 flags: the OGL is the document
 it points at, and it is stored in `docs/licenses/calgary-open-government-licence.txt`.
 
-So for the **twelve** cities now built there are **eleven** sources requiring
-specific text or acknowledgement, all of them displayed — and the two Canadian
-builds added five of the ten between them, where the nine US cities needed
+**14. City of Edmonton — required, and DISPLAYED. It was recorded as needing
+NOTHING, and that was wrong.** One notice covers both the business register and
+ETS's GTFS, as Calgary's does, because the feed is published through the same
+Open Data Catalogue.
+
+Edmonton's Terms of Use say credit is "not required" but "encouraged", and both
+the Canada profile and `docs/build_briefs/edmonton.md` concluded from that
+sentence that Edmonton was the one Canadian city with no display obligation.
+**The obligation is in a different clause and it is not about credit:**
+
+> If you distribute or provide access to the datasets to any other person,
+> whether in original or modified form, you agree to include a copy of, or this
+> Uniform Resource Locator (URL) for, these Terms of Use and to ensure any such
+> person agrees to, and is bound by, them **without introducing any further
+> restrictions of any kind**.
+
+`outputs/edmonton/` is committed to a public repository and carries the
+register's business names, categories and coordinates — that is the dataset in
+modified form, so the clause engages. What it requires is **the URL**, which is
+now displayed:
+
+> `https://www.edmonton.ca/sites/default/files/public-files/documents/Web-version2.1-OpenDataAgreement.pdf`
+
+The second half, "without introducing any further restrictions", is already
+satisfied and was before this was noticed: the repository's own `LICENSE`
+disclaims MIT over everything under `outputs/` and points here. That was written
+for a different reason and turns out to discharge this clause.
+
+**Two things about reading this licence at all.** The portal's own copy is now
+behind a SIGN-IN — `data.edmonton.ca/stories/s/Open-Data-Terms-of-Use/msh4-e6be/`
+redirects to a login page, in a browser as well as to `curl`. The readable copy
+is the PDF above, and `docs/licenses/edmonton-open-data-terms-of-use.pdf` is a
+verified capture of it (SHA-256 in that directory's README, re-checked
+2026-09-21). A licence that cannot be read at the URL its dataset points at is
+a reason to keep the local copy, not a reason to trust a summary of it.
+
+Unlike Toronto's, Vancouver's, Surrey's and Calgary's, this licence does **not**
+terminate automatically on breach — the City may cancel access "at any time for
+any reason, in its sole discretion", which is discretionary rather than
+automatic. It also bars implying City endorsement or affiliation and bars use of
+its marks, which `render_site_notices()`'s standing non-affiliation line covers.
+
+So for the **thirteen** cities now built there are **twelve** sources requiring
+specific text or acknowledgement, all of them displayed — and the three Canadian
+builds added six of the twelve between them, where the nine US cities needed
 five in total.
 
 **Vancouver added three at once**, the first city to add more than one, because

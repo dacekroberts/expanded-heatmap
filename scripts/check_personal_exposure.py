@@ -191,6 +191,32 @@ REGISTRIES = {
     "calgary": dict(raw=None, trade=None, owner=None,
                     processed="businesses_clean.csv",
                     address=("address",)),
+    # Edmonton is the STRONGEST of the "structurally absent" group, and for a
+    # reason none of the others have: the register publishes exactly ONE name
+    # column and it is the business's. There is no registrant, owner or contact
+    # field at all - so unlike Calgary (no blank tradenames) or Montreal (no
+    # second name), there is not merely nothing to fall back ON, there is
+    # nothing to fall back TO. No pin CAN be a person's name.
+    #
+    # Its own privacy work goes further than this project's: `<REDACTED FOR
+    # PRIVACY>` replaces the address on 1,729 of the 25,105 Commercial rows,
+    # and it takes the COORDINATES with it (redacted rows carrying coordinates:
+    # zero), so those records cannot be mapped at all. `read-licence` step 6b.
+    # Address is one free-text field, so the unit check is a regex over it as
+    # Miami's, Montreal's and Calgary's are.
+    "edmonton": dict(raw=None, trade=None, owner=None,
+                     processed="businesses_clean.csv",
+                     address=("address",)),
+    # Toronto publishes THREE personal columns - `Client Name`, `Business
+    # Phone` and `Business Phone Ext.` - and step 2 never reads any of them:
+    # they are excluded at `usecols`, so they do not enter the process rather
+    # than being dropped after. `Operating Name` is blank on 0.5% of storefront
+    # rows and those rows are dropped rather than filled, so no pin can be a
+    # registrant's name. Its processed file is the GEOCODED one, since the
+    # register carries no coordinates.
+    "toronto": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_geocoded.csv",
+                    address=("address",)),
     "vancouver": dict(raw="vancouver_business_licences.csv", sep=";",
                       trade="businesstradename", owner="businessname",
                       processed="businesses_clean.csv",
