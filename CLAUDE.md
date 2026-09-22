@@ -110,7 +110,11 @@ colliding. A single session does all of it and can ignore that file.
   `pipeline/drift_check.py` diffs against.
 - **Log every judgment call in `DECISIONS.md`** as it's made (the
   `decisions-entry` skill has the format). Never edit an old entry; add a
-  new one. Keep `docs/project_context.md` to current state, no counts.
+  new one, then run `python scripts/decisions_index.py` to refresh the
+  generated index at the top. That file is 100 entries and ~57k words, and
+  `drift_check.py` ends by telling you to find "the latest baseline entry" in
+  it - the index is how. `--check` fails if it is stale. Keep
+  `docs/project_context.md` to current state, no counts.
 - **Run `python pipeline/drift_check.py` after any pipeline change.**
 - **Verify app changes with the `deploy-verify` agent**, and **always state a
   scope**: `city-added`, `map-chrome`, `app-deps` or `full`. It runs against
@@ -138,7 +142,9 @@ colliding. A single session does all of it and can ignore that file.
 python pipeline/<city_slug>/step1_stations.py
 python pipeline/<city_slug>/step2_clean_businesses.py
 python pipeline/<city_slug>/step3_map.py
-python pipeline/drift_check.py [city_slug]        # add --jobs 4 for the full pre-deploy sweep
+python pipeline/drift_check.py [city_slug] [--jobs N]   # --jobs 4 does all 13 in ~37s
+python scripts/brief_check.py [city_slug]               # re-run a brief's claims against live sources
+python scripts/decisions_index.py [--check]             # refresh DECISIONS.md's index
 python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon>   # add --dry-run first
 .venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"
 ```
