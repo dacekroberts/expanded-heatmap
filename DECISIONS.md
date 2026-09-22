@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**135 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**136 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [The `osm_route_refs` check, and the correction it immediately made to the entry above](#2026-09-22---the-osm_route_refs-check-and-the-correction-it-immediately-made-to-the-entry-above)
 - [Barcelona's four owner decisions settled, and its brief's OSM breakdown corrected](#2026-09-22---barcelonas-four-owner-decisions-settled-and-its-briefs-osm-breakdown-corrected)
 - [Madrid's provenance recorded before its wiring lands, and the transit table stopped calling itself GTFS](#2026-09-22---madrids-provenance-recorded-before-its-wiring-lands-and-the-transit-table-stopped-calling-itself-gtfs)
 - [Mexico City and Guadalajara promoted into the provenance tables, and OSM rail gets its own subsection rather than a GTFS row](#2026-09-22---mexico-city-and-guadalajara-promoted-into-the-provenance-tables-and-osm-rail-gets-its-own-subsection-rather-than-a-gtfs-row)
@@ -171,6 +172,61 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - The `osm_route_refs` check, and the correction it immediately made to the entry above
+
+- **Built an `osm_route_refs` check kind for `scripts/brief_check.py`, closing
+  a standing gap: no check reached Overpass, so every OSM count claim in every
+  brief was prose only - and four cities now take rail from OSM.** It reports
+  route RELATIONS and distinct REFS per mode in a bbox, because those fail in
+  opposite directions and one city can carry both failures: Barcelona's 28
+  subway relations must stay 14 refs, while its funicular relations are
+  directional pairs that must collapse. Proven to discriminate rather than
+  merely pass, against four deliberately wrong specs (the old split, an
+  11-ref subway collapse, an uncollapsed funicular count, a ref that does not
+  exist) - all four FAILed as intended.
+
+- **SUPERSEDES the claim in the entry above that Barcelona's brief miscounted
+  its OSM relations. The brief is not established as wrong; the two Overpass
+  mirrors do not agree with each other.** `overpass-api.de` returns subway 28 /
+  tram 20 / funicular 6, giving funicular refs FM, FV and FT.
+  `overpass.kumi.systems` returns subway 28 / tram 22 / funicular 4, giving 2
+  funicular refs - **which is exactly what the brief recorded.** So the brief
+  faithfully recorded one mirror and the correction recorded another, and
+  neither has been shown to be the truth. The difference is not truncation:
+  kumi has FEWER funiculars and MORE trams, which is the shape of a different
+  planet-extract vintage rather than a partial answer.
+
+- **Found that an Overpass mirror returns PARTIAL results with HTTP 200 and no
+  `remark`, so the empty-200 rule this project already had is not sufficient.**
+  Measured within one minute on `overpass-api.de`: the same query returned 54
+  elements and then 34, tram 20 -> 12 and funicular 6 -> 4. A partial answer is
+  shaped exactly like a real decrease, which is the dangerous case. Minutes
+  later all three mirrors failed outright - two HTTP 504, and `overpass.osm.ch`
+  the documented empty 200 with no remark, twice.
+
+- **So the check confirms a mismatch against a SECOND mirror before failing a
+  brief, and reports disagreement as a HOST problem rather than as a brief to
+  correct.** This is the project's existing rule - a negative from one method
+  is ASSERTED until two methods agree - applied where it was missing. It is
+  what caught the error above: the check's first real run on Barcelona
+  returned `MIRRORS DISAGREE` rather than confirming the correction its own
+  author had just written and pushed.
+
+- **Consequence for the build: none of the scope decision changes.** FM and FV
+  are present on both mirrors and are the two funiculars drawn; FT is excluded
+  either way, appearing on one mirror only. What does change is that an OSM
+  count is not a fact unless the mirror and the date are recorded with it -
+  which bears on Mexico City, Guadalajara and Madrid as much as Barcelona, and
+  is not yet done for any of them.
+
+- **Still open, and deliberately not resolved here:** which mirror reflects
+  current OSM. Both were tried in the browser as a third method and the direct
+  API URL returned 406; `overpass-turbo.eu` needs editor interaction that a
+  10-minute window would not have finished honestly. Until that is settled the
+  Barcelona brief's OSM prose carries BOTH readings and the check pins the
+  `overpass-api.de` one, so a disagreement surfaces rather than a number being
+  quietly believed.
 
 ### 2026-09-22 - Barcelona's four owner decisions settled, and its brief's OSM breakdown corrected
 

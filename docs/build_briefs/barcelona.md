@@ -376,6 +376,19 @@ confirmation rather than an unknown.
     "min_bytes": 300000
   },
   {
+    "id": "osm-relations-and-refs",
+    "claim": "OSM holds 28 subway / 20 tram / 6 funicular route relations, giving 14 / 6 / 3 distinct refs. The SPLIT is what goes wrong: the brief first recorded tram 22 and funicular 4, and 54 still summed to 54. Subway refs must stay 14 (L9/L10 segments do not meet); funicular relations must collapse to 3 (directional pairs)",
+    "kind": "osm_route_refs",
+    "bbox": [41.30, 2.03, 41.50, 2.30],
+    "routes": ["subway", "tram", "funicular"],
+    "expect_relations": {"subway": 28, "tram": 20, "funicular": 6},
+    "expect_refs": {"subway": 14, "tram": 6, "funicular": 3},
+    "require_refs": {
+      "subway": ["L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9N", "L9S", "L10N", "L10S", "L11", "L12"],
+      "funicular": ["FM", "FV", "FT"]
+    }
+  },
+  {
     "id": "barcelona-utm-zone",
     "claim": "Barcelona at about 2.17E falls in UTM 31N; the source CRS EPSG:25831 is the ETRS89 flavour of that same zone",
     "kind": "utm_zone_from_longitude",
