@@ -21,37 +21,51 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [ ] **Region switcher on the macro map — BLOCKS the first non-North-American city.**
+- [x] **Region switcher on the macro map — DONE 2026-09-22 (`2121ada`).**
 
-**Groundwork committed 2026-09-21 (`f80d04b`); the UI is NOT committed because
-it does not work.** `docs/scaling_thresholds.md` names this as the thing that
-must ship before a city outside North America: at 14 cities the macro map is at
-its stated ~12-15 threshold, and Milan or Barcelona would sit off-screen on
-load.
+The macro map opens on the United States and re-centres on any other region,
+which is what `docs/scaling_thresholds.md` required before a city outside North
+America. `app/cities.py` carries the region model (`f80d04b`); `app/Overview.py`
+carries the radio, the region-aware caption and the fix.
 
-**Done:** `app/cities.py` tags every city with a region and exposes `REGIONS`,
-`REGION_ORDER`, `DEFAULT_REGION`, plus a validator that refuses an untagged
-city.
+**The fix was `st.session_state.pop("macro_map", None)` on a region change.**
+`st.pydeck_chart(on_select="rerun")` persists the viewer's view under its widget
+key and restores it on rerun, ignoring `initial_view_state`. A per-region key
+was tried and rejected: Streamlit restores the previous key's state when the
+viewer switches back.
 
-**Not done:** the switcher in `app/Overview.py`. The radio, its counts and the
-"N elsewhere" caption all render correctly; **the map does not re-centre.**
+**The constraint held and was measured:** zoom 1.4525 in both regions, centre
+34.067N to 48.599N. Re-fitting on Canada's cities would give 1.5048 and
+invalidate all fourteen pixel `label_offset` values.
 
-**The blocker, precisely:** `st.pydeck_chart(on_select="rerun")` persists the
-viewer's current view under its widget key, so on a rerun Streamlit restores it
-and ignores `initial_view_state`. A per-region key did not clear it. Options
-not yet tried: dropping `on_select="rerun"` for non-default regions, forcing a
-view through deck.gl's own `views`/`viewState` rather than
-`initial_view_state`, or clearing the stored widget state on region change.
+**Keep this warning for anyone editing the macro map's view:** that same
+persistence makes a changed `initial_view_state` invisible in a browser session
+that has already rendered the page, across server restarts included. Test in a
+fresh session (a new query string is enough) or you will debug correct code.
 
-**The constraint any fix must respect:** RE-CENTRE, never RE-ZOOM. Every
-`label_offset` is in pixels measured at the US-fitted zoom of 1.4525, and pixel
-distance between cities depends on zoom alone.
+- [x] **`deploy-verify` on the switcher — steps 1, 2, 3, 6, 7, 8, 9, run
+2026-09-22.** No named scope fitted: the change is the Streamlit macro map plus
+an import under `app/`, where `map-chrome` covers overlays inside the per-city
+rendered map HTML and says the app is usually not needed. Passed: lean-venv
+start with no import error, all 14 cities in the DOM, the real click path
+through a name pill to a city page in BOTH regions (`st.switch_page` survives
+the new widget), caption flipping, zoom pinned, attribution present, dark mode
+inverting the basemap with the radio still legible. The only console errors
+were two `ERR_CONNECTION_REFUSED` on `/_stcore/health`, bracketed by `200 OK`
+either side — the stop/start gap, not the running server.
 
-**A warning for whoever picks this up:** that same persistence makes a changed
-`initial_view_state` invisible in an existing browser session, across server
-restarts included. Test in a fresh session (a new query string is enough) or
-you will debug correct code - which is exactly what happened here, for about an
-hour.
+- [ ] **"Vancouver (Regional)" is clipped at the left edge at 375px — in the
+Canada region as well as the US one.** Found during the run above. NOT a
+regression: `fit_view` is byte-identical to the pre-switcher commit and frames
+`IN_DEFAULT_VIEW` (US only), so Vancouver was never in the fitted box. But the
+switcher makes it newly user-facing, because it now invites a viewer to look at
+Canada and Canada still does not frame its own westernmost city. This is the
+direct cost of RE-CENTRE-NEVER-RE-ZOOM: centring on Canada's midpoint leaves a
+long label 25 degrees west of centre.
+Options, in increasing cost: shorten the label to "Vancouver"; give that city a
+right-side anchor; or set `REGIONS[i]["zoom"]` for Canada, which exists for
+exactly this and costs a re-measure of that region's `label_offset` values.
+Desktop is unaffected — the label is fully visible there.
 
 
 - [ ] **Next city** - pick from the list below. Start with the `add-city`

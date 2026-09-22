@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**112 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**113 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [The region switcher shipped, and the fix was a deleted key](#2026-09-22---the-region-switcher-shipped-and-the-fix-was-a-deleted-key)
 - [CDMX approved from OpenStreetMap as a per-city exception, and it passes both rail invariants](#2026-09-22---cdmx-approved-from-openstreetmap-as-a-per-city-exception-and-it-passes-both-rail-invariants)
 - [Mexico nationwide GIS probe: no new route, but CDMX is a retry rather than a loss](#2026-09-22---mexico-nationwide-gis-probe-no-new-route-but-cdmx-is-a-retry-rather-than-a-loss)
 - [Madrid's licence read; the Mobility Database moved its files, and Mexico City drops out of Band A](#2026-09-22---madrids-licence-read-the-mobility-database-moved-its-files-and-mexico-city-drops-out-of-band-a)
@@ -148,6 +149,84 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - The region switcher shipped, and the fix was a deleted key
+
+- **The switcher works, and the change that made it work is one line that
+  deletes state rather than any of the view maths that was rewritten three
+  times chasing it.** `st.pydeck_chart(on_select="rerun")` PERSISTS the
+  viewer's current view under its widget key; on every rerun Streamlit restores
+  that stored view and ignores `initial_view_state`. So the new centre was
+  being computed correctly and discarded before it was ever drawn.
+  `st.session_state.pop("macro_map", None)` on a region change forces the chart
+  to re-initialise. Supersedes the 2026-09-21 entry, which recorded the UI as
+  deliberately withheld because it did not work.
+
+- **Keying the chart per region was rejected on test, not on taste.**
+  `macro_map_<region>` does create a fresh widget, but Streamlit restores the
+  PREVIOUS key's state when the viewer switches back, so the map returns to
+  wherever they had dragged it rather than to that region's centre. Deleting
+  the one key is both smaller and correct. The other two options recorded in
+  `PLAN.md` - dropping `on_select="rerun"` for non-default regions, or forcing
+  a view through deck.gl's own `views`/`viewState` - were not needed and remain
+  untried.
+
+- **RE-CENTRE, NEVER RE-ZOOM held, and was measured rather than assumed.** The
+  non-default region gets a fresh `pdk.ViewState` at its cities' midpoint
+  carrying `fit_view`'s zoom across unchanged: **1.4525 for both regions**,
+  centre moving **34.067N to 48.599N**. Re-fitting on Canada's own cities would
+  have produced **1.5048** and invalidated all fourteen pixel `label_offset`
+  values together. A fresh ViewState rather than `view.zoom = ...` because
+  pydeck does not serialise attributes mutated after construction.
+
+- **Verified in a FRESH browser session, which is the step that was missing
+  when this was first attempted.** Radio renders with counts, the caption flips
+  both ways, the cluster sits **42 px lower** on Canada - the right direction
+  for a centre moving north - and every label pill is the same size in both, so
+  the zoom demonstrably did not move. The CARTO/OpenStreetMap attribution stays
+  visible in both regions.
+
+- **The test case understates the feature, and that is worth stating so nobody
+  reads the 42 px as the payoff.** United States against Canada is two regions
+  on one continent, so at the pinned zoom the shift is 42 px at desktop width.
+  Milan against the United States centre is about 108 degrees of longitude,
+  roughly 430 px at the same zoom. The switcher is built for the second case;
+  the first only proves the mechanism.
+
+- **Verified with the `deploy-verify` procedure run by hand at steps 1, 2, 3,
+  6, 7, 8, 9, and the scope named for it first was WRONG.** `map-chrome` was
+  the obvious label and it does not fit: that scope covers overlays inside the
+  per-city rendered map HTML and says outright that the Streamlit app is
+  usually not needed, while this change is the Streamlit app. Passed: lean-venv
+  start with no import error, all 14 cities in the DOM, the real click path
+  through a name pill to a city page in BOTH regions, caption flipping, zoom
+  pinned, attribution present, dark mode inverting the basemap with the radio
+  still legible. The only console errors were two `ERR_CONNECTION_REFUSED` on
+  `/_stcore/health`, bracketed by `200 OK` either side - the stop/start gap.
+
+- **The run found one real thing, and it is a cost of the constraint rather
+  than a defect in the change: "Vancouver (Regional)" is clipped at the left
+  edge at 375 px, in the CANADA region as well as the United States one.**
+  `fit_view` is byte-identical to the pre-switcher commit and frames
+  `IN_DEFAULT_VIEW`, which is US-only, so Vancouver was never in the fitted box
+  - not a regression. But the switcher makes it user-facing, because it now
+  invites a viewer to look at Canada and Canada still does not frame its own
+  westernmost city. That is RE-CENTRE-NEVER-RE-ZOOM billing its cost for the
+  first time. Left open in `PLAN.md` with three options rather than fixed here,
+  because the cheapest two are label changes and the correct one
+  (`REGIONS[i]["zoom"]` for Canada) requires re-measuring that region's offsets
+  - which is the decision this design deferred on purpose. Desktop is
+  unaffected.
+
+- **And the process note, because it nearly repeated.** The first screenshot
+  after the fix looked zoomed out, which would have meant every label offset
+  was broken. That was an illusion from comparing two different scroll
+  positions. It was checked against the numbers before being chased - unlike
+  the same day's earlier hour, where a stale stored view was read as a code
+  fault three times running. Reproduce a known number before trusting a new
+  impression is the rule already written into `pipeline/linecolour.py` and
+  `scripts/brief_check.py`; this is the first time today it was applied to a
+  rendering rather than to data.
 
 ### 2026-09-22 - CDMX approved from OpenStreetMap as a per-city exception, and it passes both rail invariants
 
