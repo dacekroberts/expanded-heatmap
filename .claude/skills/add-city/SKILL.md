@@ -199,6 +199,16 @@ restaurants, grocery, clothing or salons; 79% of Philadelphia's active licences
 are residential landlord registrations. Both passed a schema check and answered
 a different question, and a big row count hid it in each case.
 
+**Pull SEVERAL pages before concluding anything, and never judge a register by
+its first record.** A register is ordered by identifier or registration date,
+so page one is systematically the *oldest* entities - holding companies,
+dormant shells, long-established corporates - and is the least representative
+sample it can give you. Finland was ruled out of the 2026-09-21 country screen
+on exactly one record, the first the API returned: a financial holding company
+with an empty street, a PO box and a `c/o` accounting firm. Counted across 500
+instead, **89.8% carried a real street address**. The ruling was reversed and
+the reason for it had been false. The cost of doing this properly is one loop.
+
 **If any bucket comes back empty or thin, use the `multi-source-city` skill**
 (`.claude/skills/multi-source-city/`). It carries the diagnosis, the source
 archetype per bucket, the dispatching-taxonomy architecture, the cross-source

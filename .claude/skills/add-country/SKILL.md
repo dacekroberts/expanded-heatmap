@@ -55,6 +55,19 @@ into the tier above. They sat in two tiers at once, and it was caught only by
 rebuilding the table by hand. If a country has not been probed, it stays in
 the running with an ASSERTED label on it.
 
+**The FIRST record an API returns is not a random one, and n=1 is not a
+measurement.** Finland was ruled out on a single record - the first the PRH
+API returned, a financial holding company with an empty street, a PO box and a
+`c/o` accounting firm. Measured across 500 companies instead, **89.8% carry a
+real street address**, and the visiting-address type is populated on 100% of
+the records that have one. The stated reason for ruling out a whole country
+was false.
+
+Registers are ordered by identifier or registration date, so the first page is
+systematically the **oldest** entities - holding companies, dormant shells,
+long-established corporates. It is the least representative sample available.
+**Pull several pages and count.** The cost is one loop.
+
 ### 1. Does urban rail exist, in DATA YOU CAN READ - which is not the same as a GTFS feed
 
 **Read this before touching the Mobility Database.** The 2026-09-21 global
@@ -171,6 +184,41 @@ is built for: scoping and taxonomy were both designed around per-city
 municipal registers, and a national register includes every office, depot and
 administrative site alongside the shopfronts. That is a design decision to take
 before a profile, not a fact to discover during one.
+
+#### Measure COMPOSITION, not just presence - most registers are mostly not shops
+
+"Does it have addresses" is the easy half and rarely the deciding one. The
+deciding question is **what the register is actually made of**, and the answer
+is reliably worse than the dataset title suggests:
+
+| Register | Share that is NOT a storefront |
+|---|---|
+| **Philadelphia** L&I | **79%** landlord registrations |
+| **Washington D.C.** | **61%** residential rentals, plus 11,074 `General Business` office catch-all |
+| **Finland** PRH, Helsinki | **53%** NACE 68 real estate - every apartment building is a *Kiinteistö Oy* or *Asunto Oy* |
+| **Vancouver** | 10,698 Long-term Rental, 3,910 Short-term Rental Operator, 3,575 General Contractor |
+| **Toronto** | Taxicab Owner 4,212, Public Garage 3,023, Building Renovator 1,461 |
+
+This is a **family, not a series of one-offs**: a business register records who
+*registered*, and in most countries that is dominated by property-holding
+entities and non-premises trades. The project already filters all of these by
+category, successfully - so a high share is a cost, not a disqualifier.
+
+**The three numbers to produce for any candidate register**, from several
+pages rather than one:
+
+1. **Address presence rate** - what fraction carry a real street, not a PO box
+   or a `c/o`.
+2. **Category composition, top 10-12** - what the register is mostly made of.
+3. **The share in the project's three buckets** - retail, food service,
+   personal services. Finland's retail is **4.8%**, and food and beverage and
+   personal services do not reach its top twelve. That is the number that
+   decides whether a country is worth a profile.
+
+**And then the question that composition does NOT answer:** once filtered to
+the storefront categories, are those rows **shop premises or head offices**? A
+company register can pass all three tests above and still map one pin per
+chain rather than one per shop. That needs its own probe.
 
 ### 3. What portal software, and does it refuse automated fetches?
 
@@ -379,6 +427,11 @@ was measured. Expect them.
   route types cost four European capitals; a nested zip cost Melbourne; a
   `LineString` where a `Point` was expected would have cost Japan, whose
   10,235 station records are platform centrelines needing centroids.
+
+- **Sampling the first record and calling it a measurement.** It cost Finland
+  a whole-country ruling. See the evidence-discipline section.
+- **Answering "are there addresses?" and skipping "what is this register made
+  of?"** Presence is the easy half. Composition decides.
 
 The single recurring cause: **asserting from a column's existence, a dataset
 title, or a plausible-looking flag instead of measuring.** Five separate
