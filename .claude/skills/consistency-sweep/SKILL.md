@@ -191,6 +191,14 @@ in a diff.
   the whole problem in miniature: content that looks right and is invisible to
   the checker.
 
+**`check_provenance.py` check I decides the first two and fails.** It was
+written inline six times during one sweep before being committed, which is the
+usual sign that something belongs in a script. Two traps in writing it, both
+worth knowing if it ever needs changing: a HEADER row sits above its own
+delimiter and so legitimately has no width yet - checking without a one-line
+look-ahead flags every header in the file - and fenced code blocks contain
+pipe-delimited text that is not a table.
+
 ### 5. Sources in use with no terms established
 
 The licence review is organised per city, so a source belonging to no city
@@ -318,7 +326,7 @@ it needs that session's context.
 
 | Check | What it decides |
 |---|---|
-| `python scripts/check_provenance.py [--strict]` | every built city has rows in all three provenance tables; every URL its `config.py` **resolves to** is recorded; notices and `_NOTICES` are in bijection; notice numbers unique and contiguous; **`city_master_list.md`'s built counts match `app/cities.py`**, total and per country; **every `item N` citation still points at the notice it names**; **every stored licence's SHA-256 matches**; **every relative markdown link resolves** |
+| `python scripts/check_provenance.py [--strict]` | every built city has rows in all three provenance tables; every URL its `config.py` **resolves to** is recorded; notices and `_NOTICES` are in bijection; notice numbers unique and contiguous; **`city_master_list.md`'s built counts match `app/cities.py`**, total and per country; **every `item N` citation still points at the notice it names**; **every stored licence's SHA-256 matches**; **every relative markdown link resolves**; **every table row renders and matches its header's width** |
 | `python scripts/decisions_index.py --check` | `DECISIONS.md`'s generated index is current |
 | `python pipeline/drift_check.py` | committed `outputs/` still match what the pipeline produces |
 | `python scripts/check_deploy_imports.py` | a clean clone imports under the lean venv |

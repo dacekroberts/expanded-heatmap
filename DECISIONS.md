@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**149 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**150 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [The table check that had been written inline six times, and one probe that was correctly abandoned](#2026-09-22---the-table-check-that-had-been-written-inline-six-times-and-one-probe-that-was-correctly-abandoned)
 - [Two of nineteen licence hashes described bytes that existed nowhere](#2026-09-22---two-of-nineteen-licence-hashes-described-bytes-that-existed-nowhere)
 - [Category 7 has a check, and it found that the three newest cities fetch inside their steps](#2026-09-22---category-7-has-a-check-and-it-found-that-the-three-newest-cities-fetch-inside-their-steps)
 - [Category 3 has a check, and a range check would not have caught the bug it was built for](#2026-09-22---category-3-has-a-check-and-a-range-check-would-not-have-caught-the-bug-it-was-built-for)
@@ -185,6 +186,45 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - The table check that had been written inline six times, and one probe that was correctly abandoned
+
+- **`check_provenance.py` check I verifies that every markdown table in the
+  provenance docs actually renders**: no row orphaned from its header by
+  intervening prose, no row whose cell count differs from its header's.
+  Markdown fails silently at both - an orphaned row renders as literal
+  pipe-delimited text and looks correct in a diff - and both have happened
+  here: Edmonton's and Toronto's rows were orphaned in two tables at once, and
+  Philadelphia's OPA row carried five cells against a six-cell header.
+  **Written inline six times during one sweep before being committed**, which
+  is the usual sign that something belongs in a script.
+
+- **Negative-tested against both historical shapes**, by injecting prose above
+  a row and by deleting a cell from another; both are reported, and the file
+  restores clean. Two traps in writing it: a header row sits above its own
+  delimiter and so legitimately has no width at that point - without a one-line
+  look-ahead the check flags every header in the file, which the first version
+  did - and fenced code blocks contain pipe-delimited text that is not a table.
+
+- **One probe was run and DELIBERATELY NOT SHIPPED, which is worth recording as
+  much as the ones that were.** The idea: every source host in the three
+  provenance tables should have a licence position somewhere, which would have
+  caught the Province of British Columbia publishing into this site unread -
+  the most significant find of the day. In practice it returned **26 of 42
+  hosts as uncovered and nearly all were false**: the licence section keys on
+  publisher NAME, not host, so `muni-gtfs.apps.sfmta.com` reads as uncovered
+  while SFMTA plainly is not, and the same for MTS, STM and TransLink. The
+  coupling between a URL and its licence entry is a human-readable name a
+  script cannot match reliably.
+
+- **Shipping it anyway would have broken the rule this role runs on**: a check
+  that reports correct work as broken is worse than no check, because the next
+  reader learns to skip it. Making it work would need a convention change -
+  every provenance row naming its own licence - which is a bigger decision than
+  a sweep should take unilaterally. Recorded here so the next person does not
+  rediscover the idea and assume nobody tried it.
+
+- **`check_provenance.py` now runs nine checks** (A-I) and `--strict` exits 0.
 
 ### 2026-09-22 - Two of nineteen licence hashes described bytes that existed nowhere
 

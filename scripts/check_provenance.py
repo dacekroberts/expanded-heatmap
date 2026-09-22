@@ -42,6 +42,15 @@ WHAT IT CHECKS
   D. Notice numbers are unique and contiguous from 1. They were neither: the
      list carried two item 8s and two item 15s from 2026-09-21 to 2026-09-22,
      because each country's block was appended without renumbering.
+  I. Every markdown table in the provenance docs actually renders: no row
+     orphaned from its header by intervening prose, and no row whose cell
+     count differs from its header's. **Markdown fails silently here** - an
+     orphaned row renders as literal pipe-delimited text and looks fine in a
+     diff - and it has happened twice: Edmonton's and Toronto's rows were
+     orphaned in two tables at once, and Philadelphia's OPA row carried five
+     cells against a six-cell header. This check was written inline six times
+     during one sweep before being committed, which is the usual sign.
+
   H. Every relative markdown link in the docs resolves. `vancouver.md` linked
      `[session_roles.md](session_roles.md)` from inside `docs/build_briefs/`,
      which pointed at a sibling that never existed - it needed `../`. Fenced
@@ -250,6 +259,52 @@ def displayed_notices():
     start = src.index("_NOTICES")
     end = src.index("def ", start)
     return re.findall(r'^\s{4}\("([^"]+)"', src[start:end], re.M)
+
+
+TABLE_DOCS = ("docs/data_sources.md", "docs/excluded_categories.md",
+              "docs/city_master_list.md", "docs/session_roles.md")
+
+
+def check_tables():
+    """I: markdown tables that do not render, or whose rows are ragged."""
+    delim = re.compile(r"^\|[\s:|-]+\|\s*$")
+    problems = []
+    for rel in TABLE_DOCS:
+        q = ROOT / rel
+        if not q.exists():
+            continue
+        lines = read(q).split("\n")
+        cols = None
+        in_fence = False
+        for i, line in enumerate(lines, 1):
+            if line.lstrip().startswith("```"):
+                in_fence = not in_fence
+                continue
+            if in_fence:
+                continue
+            if not line.startswith("|"):
+                if not line.strip():
+                    cols = None        # a blank line ends a table
+                continue
+            n = line.count("|") - 1
+            if delim.match(line):
+                cols = n
+                continue
+            if cols is None:
+                # A HEADER row sits immediately above its own delimiter, so at
+                # this point it legitimately has no width yet. Look ahead one
+                # line before calling it orphaned - the inline version of this
+                # check flagged every header in the file.
+                nxt = lines[i] if i < len(lines) else ""
+                if delim.match(nxt):
+                    continue
+                problems.append(
+                    f"{rel}:{i}: table row with no header above it in the "
+                    f"same block - renders as literal text")
+            elif n != cols:
+                problems.append(
+                    f"{rel}:{i}: row has {n} cells, its header has {cols}")
+    return problems
 
 
 def check_links():
@@ -536,6 +591,13 @@ def main():
               f"({len(soft)} unverifiable)")
     for s in soft:
         print(f"      note: {s}")
+
+    # --- I, tables that actually render ---------------------------------------
+    tbl = check_tables()
+    if tbl:
+        failures.append(("markdown tables", tbl))
+    else:
+        print("  tables: every row sits under a header and matches its width")
 
     # --- H, relative links in the docs ---------------------------------------
     links = check_links()
