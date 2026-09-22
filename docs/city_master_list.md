@@ -249,7 +249,7 @@ register found**, and two have already failed at the national portal.
 | Country | City | Rail | Missing link |
 |---|---|---|---|
 | 🇭🇰 **Hong Kong** | Hong Kong | **126 relations**, 125 named | **The register EXISTS and is queryable — but no bulk export found.** See below |
-| 🇨🇱 **Chile** | Santiago | **30 relations**, all named + coloured | `datos.gob.cl` is **measured negative** — `patentes comerciales` returns nothing. Try the **municipal** portal |
+| 🇨🇱 **Chile** ↓ **FAILS** | Santiago | **30 relations**, all named + coloured | **Coverage failure, measured.** Chile licenses per *comuna*; only **5 of ~33** Metro comunas publish patentes, and **the Santiago comuna itself is not on the portal at all**. See below |
 | 🇲🇾 **Malaysia** | Kuala Lumpur | 14 relations, all named + coloured | The right `data.gov.my` endpoint. SSM is company-shaped, so expect a registered-office failure |
 | 🇮🇩 **Indonesia** | Jakarta | 9 operating of 11 | Identify `satudata.jakarta.go.id`'s stack |
 | 🇨🇴 **Colombia** | Medellín | 6 relations, **only 2 coloured** | An **ArcGIS** probe — a shape this project already handles. Note colours would need assigning by hand. Bogotá is out: it fails on rail |
@@ -299,6 +299,33 @@ link. Not yet done: the submit is JS-driven and did not navigate on click.
 system in Tier 5 by a wide margin (126 relations, 125 named, 117 coloured) and
 now a confirmed two-bucket register. What it lacks is a *route*, which is a
 smaller problem than lacking data.
+
+### Santiago — the Daegu failure, third occurrence — 2026-09-22
+
+Provider enumeration settled this outright, and it took one pass. Chile issues
+commercial licences (`patentes comerciales`) **per comuna**, so the question was
+never "does Chile publish" but "how many of the ~33 comunas the Metro serves do".
+
+`datos.gob.cl` lists **272 organisations, 67 of them municipalities**. Of those,
+**15 are Metro-area comunas**, and asking each what it holds:
+
+| | |
+|---|---|
+| Publish patentes | **5** — Independencia, La Florida, La Reina, Pedro Aguirre Cerda, Peñalolén |
+| Present but publish none | Maipú, Puente Alto (245 datasets, no patentes), Recoleta, San Bernardo, Pudahuel, Huechuraba |
+| Present with **zero** datasets | El Bosque, Ñuñoa, Quinta Normal, San Miguel |
+| **Absent from the portal entirely** | **Santiago comuna itself** — the downtown — plus Providencia, Las Condes, Estación Central |
+
+**5 of ~33, and the central comuna is missing.** Santiago's Metro converges on
+the Santiago and Providencia comunas; a commercial-density map without them is
+not a map of Santiago.
+
+**This is the third time this exact shape has appeared** — Busan (4 of 16
+districts), Daegu (4 of 9, with 중구 the downtown absent), now Santiago. The
+generalisable rule is already in `add-country` and this confirms it: **where
+licensing is devolved below the city, ask how many sub-units publish AND
+whether the central one is among them, before believing a country count.** The
+capital-aggregates case — Seoul, 25 of 25 — is the exception, not the rule.
 
 ## Tier 6 — never actually reached (6 countries, 6 cities)
 
