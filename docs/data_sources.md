@@ -311,6 +311,42 @@ was actually agreed to rather than against a URL that may have moved on.
 
 | **WMATA** (Washington D.C. — **BUILT 2026-09-21**) | Permitted within your own app: "a limited, non-exclusive, non-assignable, non-transferrable, non-sublicensable, revocable license to download, use, reproduce, and redistribute WMATA's Transit Data within your Application". **Third-party redistribution is prohibited** — "sharing (except with your Application's users), transferring, sublicensing, selling or leasing any Transit Data, directly or indirectly...to any other person", unless authorised in writing and "inseparably commingled with or supplemented by additional data that you have provided" | **Not required** — no attribution or notice clause | **No modification clause at all**, which makes it more permissive than LA Metro's on the point that matters most. Access is gated: `api.wmata.com/gtfs/rail-gtfs-static.zip` returns **401** without a registered key from `developer.wmata.com/signup`; keys "remain WMATA's property and may be revoked or otherwise limited at any time", cannot be sold, transferred or sublicensed, and "enable WMATA to associate your API activity with your Application". Trademarks: "prohibited from using WMATA Intellectual Property, including any confusingly similar variants, in association with the Transit Data or API unless you have entered into a separate, written license agreement", and must not "state or imply affiliation, sponsorship or endorsement". **§6 additionally forbids stating or implying that the data your Application provides "is accurate, complete, or timely"** — the identical clause MTA carries, making this the **second** feed to constrain city-page prose that way, so it is a cross-city sweep rather than a D.C. footnote. **§9 termination is the sharpest in the project:** on termination "you must permanently delete all Transit Data or other data which you stored pursuant to your use of the API or GTFS", and "WMATA may request that you certify in writing your compliance with this section" — LA Metro requires removal, but only WMATA asks for written certification. Read 2026-09-21 from `https://developer.wmata.com/license`; local copy at `docs/licenses/wmata-transit-data-terms-of-use.html` |
 
+### The owner's API-account practice, and what it interacts with
+
+**Stated 2026-09-21: the owner registers an API account, takes the data, and
+then immediately terminates the account and revokes its keys.** This was done
+for WMATA and is the intended approach for Korea's `data.go.kr` key.
+
+**Why it is sound.** A key that no longer exists cannot leak, cannot be found
+in a shell history or an environment file, and cannot be used against the
+owner's identity. It is a stronger position than storing a live key carefully.
+
+**Two consequences to plan around, neither of them a problem but both real:**
+
+1. **A rebuild requires re-registering.** The city cannot be regenerated from a
+   clean checkout, or after a crash, or to refresh stale data, without creating
+   a new account and key first. For D.C. this is sharper than elsewhere because
+   **WMATA's `feed_end_date` window is ten days** — so any rebuild is
+   necessarily a fresh download, never a reuse. Budget the registration step
+   into any D.C. or Korea re-run, and do not treat those pages as
+   self-regenerating.
+2. **Termination may trigger WMATA's §9 deletion clause.** §9 requires that on
+   termination "you must permanently delete all Transit Data or other data
+   which you stored pursuant to your use of the API or GTFS", and WMATA "may
+   request that you certify in writing your compliance". Deleting the account
+   ends the agreement, so the clause plausibly engages.
+   **The clearest reading is already satisfied:** the raw GTFS lives in
+   `data/washington_dc/raw/`, which is **gitignored and never committed**, so
+   no Transit Data as supplied is stored in this repository.
+   **The grey area is the rendered map** — station coordinates drawn into
+   `outputs/washington_dc/heatmap.html`. That is a derived work rather than
+   stored Transit Data on a natural reading, and the licence grant expressly
+   permits redistribution "within your Application". **Recorded as a question,
+   not a finding**, and worth settling before the public deploy rather than
+   after a certification request. Note that the same practice raises no such
+   question for Korea, whose terms are `이용허락범위 제한 없음` — no
+   restriction, and no termination-deletion clause.
+
 **Do not take WMATA's feed from a third-party mirror.** The Mobility Database
 carries a keyless copy, and using it would be the worse option rather than the
 convenient one: it relies on a redistribution these terms appear to prohibit,

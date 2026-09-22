@@ -887,8 +887,13 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   Beyond Canada, the EU/UK remain unscreened - NACE, and a national CRS such
   as EPSG:27700 for the UK.
 - [ ] **Korea: register for a `data.go.kr` API key** (owner action - account
-  creation is not something Claude does). Free. Then the business schema can be
-  verified in one call against
+  creation is not something Claude does). Free. **The owner's practice is to
+  terminate the account and revoke the key as soon as the data is captured**, as
+  was done for WMATA - so plan the capture as a single complete pull, because a
+  later refresh or a rebuild after a crash needs a NEW account and key. See
+  `docs/data_sources.md`, "The owner's API-account practice". Korea raises no
+  deletion-clause question, unlike WMATA: its terms are `이용허락범위 제한 없음`.
+  Then the business schema can be verified in one call against
   `apis.data.go.kr/B553077/api/open/sdsc2/storeListInDong`, which currently
   returns **401**, i.e. the endpoint is live and wants a key. `B553077` is
   소상공인시장진흥공단's institution code and matches the dataset metadata.

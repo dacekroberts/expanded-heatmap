@@ -292,6 +292,84 @@ Bucharest (5/15), Sofia (4/24), Copenhagen (4/4), Bangkok (4/5), Helsinki
 (3/3/3), Hyderabad (3), Kochi (1), Cairo (2) — plus tram-only Riga, Tallinn,
 Zagreb, Bratislava, Poznań, Messina.
 
+## MULTI-CITY candidate lists, and the Tier 2b rail screen — 2026-09-21
+
+With ~80 page slots free and no RAM constraint (see
+`scaling_thresholds.md`), slots are not scarce. **Verification is.** So each
+passing country's *whole* set of rail cities is listed, not one representative.
+
+### Countries by marginal-city cost
+
+**One national source covers every city** — the second city costs a boundary
+file and a rail check:
+
+| Country | Rail cities | Source | Buckets |
+|---|---|---|---|
+| **Japan** | **10 confirmed** | 推奨データセット standard schema | 2 — no retail |
+| **South Korea** | **6 confirmed** | `상가(상권)정보` + 표준데이터 | 3 |
+| **France** | **6 confirmed** | SIRENE, Licence Ouverte 2.0 | 3 |
+| **Taiwan** | 4 | 商業登記 by category | 3, no coordinates |
+| **Mexico** | 3 | DENUE, SCIAN = NAICS | 3 |
+| **Brazil** | **1 confirmed** (not 6) | CNPJ | 3, no coordinates |
+
+**Multiple cities but bespoke per city** — each is its own integration:
+**Spain** 6 · **Italy** ~4 (Milan verified) · **Canada** 3 remaining
+
+**Single-city:** Singapore · Norway (Oslo) · Czechia (Prague) · Finland
+(Helsinki) · Denmark (Copenhagen) · Israel (Tel Aviv) · Peru (Lima) · Chile
+(Santiago) · Colombia (Bogotá/Medellín) · Thailand (Bangkok) · Bulgaria
+(Sofia) · Romania (Bucharest) · **Ireland (Dublin) and Switzerland (Zurich),
+both unprobed**
+
+### The batched screen, run 2026-09-21
+
+**Japan and Korea needed no GTFS at all** — their rail is one national file
+each, already downloaded, so per-city counts came free:
+
+| Japan | Stations | | Korea | Stations |
+|---|---|---|---|---|
+| **Tokyo** | **330** (Metro 181 + Toei 149) | | **Seoul** | **407** |
+| **Osaka** | 133 | | **Busan** | 126 |
+| **Nagoya** | 102 | | **Incheon** | 102 |
+| **Sapporo** | 49 | | **Daegu** | 94 |
+| **Yokohama** | 43 | | **Daejeon** | 22 |
+| **Fukuoka** | 38 | | **Gwangju** | 20 |
+| **Kyoto** | 32 | | | |
+| **Kobe** / **Sendai** | 30 each | | | |
+| **Hiroshima** | 22 (Astram) | | | |
+
+Japan's municipal figures *understate* each metro area, because the private
+railways are separate operators — Kintetsu 309, Meitetsu 295, Tobu 218,
+Tokyu 110, Hankyu 104, Keio 75.
+
+**France: all five remaining cities confirmed, so France has SIX.**
+
+| City | Measured |
+|---|---|
+| **Lyon** | **subway 12, tram 18, funicular 4** |
+| Marseille | subway 2, tram 3 |
+| Lille | subway 2, tram 1 |
+| Toulouse | subway 2, tram 1 |
+| Rennes | subway 2 — *feed expired 20250629* |
+
+**Spain: Valencia is large** — **subway 84, tram 37**. Sevilla's screen matched
+the wrong operator (a Dos Hermanas bus company, 404) and is unresolved.
+
+**Brazil collapses from 6 to 1.** Rio, Belo Horizonte and Porto Alegre all
+return **bus only**, and Brasília, Recife and Monterrey matched no feed at all.
+That is consistent with MetrôRio having been confirmed absent from the
+catalogue earlier: **Brazil's metro operators are not in it.** São Paulo, whose
+data came from GeoSampa rather than the catalogue, remains the only confirmed
+Brazilian city — and the lesson repeats, since GeoSampa is a *city GIS portal*,
+not a transit catalogue.
+
+**Two parsing lessons from the national files.** Korea's per-city grouping by
+address token **missed Daegu entirely** — its rows carry district names
+(수성구, 달서구) rather than the city name, and only operator grouping found
+its 94 stations. And the first Korean count was silently wrong because **XLSX
+omits empty cells**: appending cells in document order shifted dates into the
+address column. Read the cell `r` reference, not the order.
+
 ## DEFINITIVE keep / discard, 2026-09-21
 
 The screen is closed. This is the list to carry forward; everything else below
