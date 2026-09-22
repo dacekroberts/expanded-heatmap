@@ -1,0 +1,20 @@
+{
+  "bucket_food_service": 18194,
+  "bucket_personal_services": 9974,
+  "bucket_retail": 36224,
+  "businesses_clean_rows": 53355,
+  "distinct_premises_all": 203662,
+  "join_rows": 225660,
+  "metro_lines": 13,
+  "multi_bucket_premises": 1535,
+  "open_rows": 159787,
+  "station_filter_disagreements": 0,
+  "station_line_records": 293,
+  "stations_excluded": 49,
+  "stations_in_city": 193,
+  "stations_named_network": 242,
+  "storefront_rows": 64392,
+  "tramo_line_codes": 18,
+  "usable_coordinate_rows": 125471,
+  "zero_coordinate_rows": 34316
+}

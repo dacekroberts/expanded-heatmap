@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**130 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**131 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Madrid built: the pipeline is complete, and the app wiring is deliberately held back](#2026-09-22---madrid-built-the-pipeline-is-complete-and-the-app-wiring-is-deliberately-held-back)
 - [A provincial publisher nobody had read, and the check that turns "record your sources" into something a script can fail](#2026-09-22---a-provincial-publisher-nobody-had-read-and-the-check-that-turns-record-your-sources-into-something-a-script-can-fail)
 - [Spain re-scoped from six cities to two: Valencia, Bilbao and Malaga measured out, Sevilla unreachable](#2026-09-22---spain-re-scoped-from-six-cities-to-two-valencia-bilbao-and-malaga-measured-out-sevilla-unreachable)
 - [Four Canadian cities promoted into the provenance tables, and three Step 0 findings did not survive the trip](#2026-09-22---four-canadian-cities-promoted-into-the-provenance-tables-and-three-step-0-findings-did-not-survive-the-trip)
@@ -167,6 +168,87 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-22 - Madrid built: the pipeline is complete, and the app wiring is deliberately held back
+
+- **Madrid's three steps run green, with zero drift and 18 baseline figures
+  recorded.** Per-step counts, which are the row-count baseline
+  `pipeline/drift_check.py` now diffs against:
+
+  | Step | Figure |
+  |---|---|
+  | 1 stations | 293 station-per-line records -> 242 named -> **193 in Madrid**, 49 excluded |
+  | 1 lines | 18 line codes -> **13 lines** |
+  | 2 join | 225,660 rows, 203,662 distinct premises |
+  | 2 open | 159,787 `Abierto` |
+  | 2 coordinates | -34,316 literal zeros (21.48%) -> 125,471 usable |
+  | 2 storefront | 64,392 rows - Retail 36,224, Food service 18,194, Personal services 9,974 |
+  | 2 dedupe | 1,535 premises span >1 bucket -> **53,355 one pin per premises** |
+  | 3 map | 50,292 within rings, 3,063 beyond -> **261 per station** |
+
+  261 per station sits beside Montréal's 252, which is the right comparison:
+  both are premises FIELD SURVEYS. It is not comparable with Mexico City's 818
+  (an establishment census) or Toronto's 41 (a register that licenses food and
+  trades but not general retail), and the page must not invite that.
+
+- **The rail leg comes from CRTM's ArcGIS feature services, and the map code
+  grew a third loader rather than a fork.** `load_geojson_line_shapes()` in
+  `map_common.py` returns the same contract as the GTFS and OSM loaders,
+  carrying the OSM one's empty-file guard. GTFS was first, OSM second for
+  Mexico City, and Madrid is the first city whose operator publishes its
+  network as a feature service - the project's standing rule is that a city
+  extends `map_common` rather than forking `render_heatmap`, and this is the
+  third time that rule has been paid for and held.
+
+- **Station names are re-cased for display, owner's decision.** The register
+  publishes `DENOMINACION` in capitals, which shouts on a map, and `.title()`
+  is wrong in Spanish: it yields "Plaza De Castilla" and "Puerta Del Sur",
+  which no sign in Madrid says. A stopword list keeps prepositions lower case,
+  tokens containing digits survive ("Aeropuerto T-4"), six cases are pinned as
+  assertions, and the register's own string is kept alongside in
+  `station_source`. This is the DISPLAY half of the project's
+  normalise-for-joins-never-for-display rule, applied in the other direction.
+
+- **Line colours are Metro de Madrid's own livery, and step 3 re-checks them on
+  every render rather than trusting a comment.** All 13 clear
+  `pipeline/linecolour.py`'s hard floor against the three category pins; seven
+  sit below the preferred 45 and are named in the output, the closest being the
+  Ramal at 14.2 against Retail and Línea 11 at 20.1 against Personal services.
+  The project substitutes its own palette only when an agency's colours are
+  ambiguous or shared, and Madrid's are neither.
+
+- **PRIVACY VERDICT: publishable, and Madrid's case is STRUCTURAL rather than
+  measured.** `scripts/check_personal_exposure.py` reports "no registrant-name
+  fallback exists for this city", plus 0 emails, 0 phone numbers and 0 `c/o`
+  markers across 50,292 pins and 36,049 distinct names. The heuristic's 12,929
+  person-like names (25.7%) are Spanish SHOP SIGNS - the top classifications
+  are peluquería, bar restaurante and restaurante - and `rotulo` is by
+  definition the sign on the street. The 0.00% residential reading is the
+  BOSTON MEASUREMENT GAP, flagged in advance: Madrid's addresses carry no unit
+  designators at all, and what limits exposure is that `Uso vivienda` is
+  excluded at source rather than that the regex found nothing.
+
+- **The app wiring is held back deliberately, and that is a deploy decision
+  rather than an oversight.** `app/cities.py` and `app/pages/17_Madrid_Heatmap.py`
+  were scaffolded and reverted on 2026-09-22, and the two required notices are
+  not in `components.py` either. Streamlit Cloud pulls master automatically, so
+  merging those makes Madrid live - and because `cities.py` is an imported
+  module it would land BROKEN until a reboot, which is precisely the three-hour
+  outage from that morning. The owner's plan is to finish the Spanish cities and
+  deploy them together, so the wiring goes on a branch. **A notice for a city
+  nobody can see is also the wrong shape**, per this file's own rule that the
+  deploy gate lists obligations that actually apply.
+
+- **Still owed before Madrid can go live**, recorded so none of it is mistaken
+  for done: the two required notices (Ayuntamiento de Madrid with the census
+  date, and "Powered by CRTM" with its raw-versus-processed disclosure); a new
+  "Spain" region on the macro map with its label measured by
+  `scripts/check_macro_labels.py`; the page prose; a full `deploy-verify`; and
+  **the CRTM "siempre actualizada" clause, which is an owner decision and
+  blocks the transit leg rather than the build**.
+
+- **`outputs/madrid/heatmap.html` is 8.1 MB**, second only to Mexico City's
+  11.4, and total committed outputs are back to ~45 MB after this session's
+  earlier work took them from 43.17 to 33.31. Recorded rather than addressed.
 ### 2026-09-22 - A provincial publisher nobody had read, and the check that turns "record your sources" into something a script can fail
 
 - **Found and closed four remaining Canada holes, then found the same defect in

@@ -218,6 +218,129 @@ deliberately unused. Its licence is also the only "not specified" one on the
 portal.
 
 
+### Madrid — endpoints and findings, verified 2026-09-22
+
+**The first Spanish city, and the first anywhere in this project whose rail
+comes from an operator's ArcGIS feature services rather than a feed.** Country
+profile: `docs/spain_step0_endpoints.md`. Step 0 evidence and its checks:
+`docs/build_briefs/madrid.md` (13/13).
+
+**Businesses** — Ayuntamiento de Madrid, *Censo de locales, sus actividades y
+terrazas de hostelería y restauración*. `datos.madrid.es` is **CKAN 2.9.11 at
+the bare host** (an earlier screen recorded it unreachable on the path
+`/egob` — a fact about the guess). Package `200085-0-censo-locales`, resource
+**`200085-5-censo-locales`**, the locales × actividades join: 225,660 rows ×
+47 columns, **UTF-8 with BOM, semicolon-delimited**, coordinates in
+**EPSG:25830**.
+
+> **THE DOWNLOAD URL ROTS.** It embeds a build timestamp
+> (`200085_20260922_053829.csv`) that changes on every refresh, so
+> `step2_clean_businesses.py` resolves it from `package_show` by **resource
+> id** at fetch time. This is the first source in the project whose URL is not
+> durable, and a hardcoded one 404s silently within days.
+
+A **premises field survey**, not a licence register — the Montréal and
+Barcelona shape — so the "79% of this register is landlords" correction that
+Philadelphia and Washington D.C. need does not apply.
+
+**This register carries no registrant name at all**, which is a stronger
+position than any other city here can state. All 47 columns were listed on
+2026-09-22 and not one is an owner, titular, NIF/CIF, razón social or contact
+field; the only name-shaped column is `nombre_agrupacion`, which names a
+**market or shopping centre** a unit sits inside, and step 2 does not load it.
+New York, Philadelphia, Miami and Boston all HAVE such a column and decline to
+download it. Madrid has none to decline. Step 2 asserts twelve personal column
+names stay absent, loads columns by name, and **raises** if any kept premises
+lacks a `rotulo` (shop sign) — so there is no fallback path even in principle.
+
+**Residence is answered by the source, not inferred.** `desc_situacion_local`
+carries **`Uso vivienda` (8,486)** — the unit reverted to residential use — as
+its own status value, and step 2 keeps only `Abierto`. Canada's licence-level
+pattern rather than the US parcel join.
+
+> **THE COORDINATE COLUMNS ARE 100% POPULATED AND PARTLY INVALID**, and the
+> zeros are stored as the **string `'0.0'`**, so an is-it-populated test passes
+> them. In EPSG:25830 a zero projects to the Atlantic off West Africa and
+> vanishes on a station-radius map rather than erroring. Measured on the full
+> download: **34,316 of 159,787 open rows (21.48%)**, but only **9.21%** once
+> the storefront filter is applied — the zeros concentrate in tourist flats
+> (85.9%), hostales (74.7%) and offices, categories this project does not map.
+> **Unlike Los Angeles the loss is biased AWAY from the mapped rows**, so no
+> geocoding leg is needed and Spain's CartoCiudad stays unprobed.
+
+**Rail** — Consorcio Regional de Transportes de Madrid (CRTM),
+`services5.arcgis.com/UxADft6QPcvFyDU1/arcgis/rest/services/M4_Red/FeatureServer`,
+layer **0 `M4_Estaciones`** (293 station-per-line points) and layer
+**4 `M4_Tramos`** (560 polylines). Both natively **EPSG:25830**, the same CRS as
+the premises data, so the build never reprojects for geometry.
+
+> **NOT the GTFS, and that is a LICENCE consequence rather than a preference.**
+> CRTM publishes the same network twice: a GTFS feed it stopped refreshing in
+> **2025-05-30**, and feature services it still edits (**2026-06-05**). Its
+> licence obliges a reuser to keep displayed information *"siempre
+> actualizada"*, which a feed abandoned sixteen months ago cannot satisfy.
+> `scripts/brief_check.py` watches the feature layers' `editingInfo.lastEditDate`
+> with the `arcgis_layer` check kind, because the pre-existing tripwire watched
+> the FEED and would have kept passing while the decision it guarded went stale.
+
+**Boundary** — *Término municipal de Madrid*,
+`geoportal.madrid.es/fsdescargas/IDEAM_WBGEOPORTAL/LIMITES_ADMINISTRATIVOS/Termino_Municipal/Termino_Municipal.zip`
+(shapefile, EPSG:25830). Step 1 checks its **area (604.0 km²)** and its
+coordinate magnitudes rather than its declared CRS — Surrey's declared
+EPSG:4326 and contained UTM metres.
+
+**Licences — both PERMITTED WITH CONDITIONS, both `Ley 37/2007` reuse
+licences**, which is Spain's country-level pattern.
+
+- **Ayuntamiento de Madrid**: CKAN declares `cc-by` / **CC BY 4.0**, but CC BY
+  is not the whole instrument — the portal's *Condiciones generales* are
+  **binding by use** (*"obligan a cualquier persona y/o empresa que reutilice
+  datos por el mero hecho de hacer uso"*). Reuse for commercial purposes is
+  authorised, expressly including *modificación, adaptación, extracción,
+  reordenación y combinación*. Conditions: do not distort the sense of the
+  information; **cite the source** (a form is offered — *"Origen de los datos:
+  Ayuntamiento de Madrid"*); **state the last-update date**; do not suggest the
+  Ayuntamiento sponsors the reuse; preserve reuse metadata; and
+  **re-identification of anonymised data is expressly prohibited**.
+  `/pages/aviso-legal` is a **website disclaimer** written for web pages rather
+  than data, so it is recorded as read and not as governing.
+- **CRTM**: `https://www.crtm.es/licencia-de-uso`, a *licencia-tipo* under
+  Ley 37/2007 art. 4.2(b). Commercial reuse and modification granted.
+  Share-alike binds **the data**; *"las obras derivadas añadiendo valor pueden
+  ofrecerse bajo licencias diferentes"*, and a ring-density map is a
+  value-added derivative rather than a redistribution. Conditions: cite CRTM
+  **"especificando si son datos en bruto o explotados"** (a
+  disclosure-of-transformation duty, the Montréal and INEGI family — a bare
+  credit does not satisfy it); display **"Powered by CRTM"** with a link to
+  `http://www.crtm.es/`; do not falsify or damage CRTM's image; preserve reuse
+  metadata; do not imply sponsorship. **CRTM monitors access** and may block a
+  reuser whose fetching degrades its systems.
+
+> **A CITED LICENCE URL THAT 404s IS NOT AN ABSENT DOCUMENT.** CRTM's own
+> dataset metadata points at `datos.madrid.es/egob/catalogo/aviso-legal`, which
+> returns 404; the live pages are `/pages/aviso-legal` and
+> `/pages/condiciones-de-uso`, found by listing the portal's own links rather
+> than guessing a second path.
+
+> **⚠ OPEN — an owner decision, and it blocks publishing the transit leg.**
+> CRTM requires that displayed information be *"siempre actualizada"*. This
+> site is a deliberately pre-rendered static snapshot and
+> `components._AS_RECORDED` already discloses an as-of date. Those are in
+> tension, and `add-city` Step 0.4 says to raise such a clause rather than read
+> it generously — so the existing as-recorded notice is **not** treated as
+> automatically sufficient.
+
+**Gate 3 — the operator's published count — RUNS for Madrid and reconciles.**
+`metromadrid.es/es/quienes-somos/metro-de-madrid-en-cifras`: **303 estaciones**,
+296,78 km, updated 2026-05-18. Against CRTM's 293 station-per-line records plus
+Metro Ligero ML1's 9, that is 302 — a residual of **one**, consistent with
+Pinar de Chamartín being counted by the operator in both networks. Two of the
+operator's own conventions have to be applied first: it counts a station **once
+per line** (which is why 303 sits against 242 distinct names) and it **includes
+ML1**, which it operates. **303 must never reach the page**: this project maps
+**193 distinct stations inside the término municipal**, a different quantity in
+three ways at once.
+
 ## Transit feeds (GTFS)
 
 | City | Agency / system | Endpoint | Retrieved | Note |

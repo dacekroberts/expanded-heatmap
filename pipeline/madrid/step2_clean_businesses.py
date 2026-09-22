@@ -53,6 +53,7 @@ from pipeline.madrid.config import (  # noqa: E402
     TAXONOMY_SYSTEM,
     TRADE_NAME_COLUMN,
 )
+from pipeline.baseline import emit  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # noqa: E402
 
 UA = {"User-Agent": "expanded-heatmap (github.com/dacekroberts/expanded-heatmap)"}
@@ -133,9 +134,12 @@ def main():
                      low_memory=False)
     print(f"\nrows in the locales x actividades join     {len(df):>9,}")
     print(f"  distinct premises (id_local)             {df[PREMISES_ID_COLUMN].nunique():>9,}")
+    emit("join_rows", len(df))
+    emit("distinct_premises_all", df[PREMISES_ID_COLUMN].nunique())
 
     df = df[df[STATUS_COLUMN].str.strip().eq(STATUS_KEEP)].copy()
     print(f"open ({STATUS_KEEP})                          {len(df):>9,}")
+    emit("open_rows", len(df))
 
     # THE ZEROS. Stored as the string '0.0', so an is-it-populated test passes
     # them; only a numeric test catches them.
@@ -144,6 +148,7 @@ def main():
     zero = (x.fillna(0) == 0) | (y.fillna(0) == 0)
     print(f"  dropped literal-zero coordinates         {int(zero.sum()):>9,}"
           f"   ({100 * zero.mean():.2f}% of open rows)")
+    emit("zero_coordinate_rows", int(zero.sum()))
     df, x, y = df[~zero].copy(), x[~zero], y[~zero]
 
     bbox = MADRID_BBOX_25830
@@ -154,15 +159,19 @@ def main():
     df, x, y = df[inside].copy(), x[inside], y[inside]
     df["_x"], df["_y"] = x, y
     print(f"with usable coordinates                    {len(df):>9,}")
+    emit("usable_coordinate_rows", len(df))
 
     before = len(df)
     df = filter_to_storefront(df, TAXONOMY_SYSTEM)
     print(f"in the three storefront buckets            {len(df):>9,}"
           f"   (dropped {before - len(df):,})")
 
+    emit("storefront_rows", len(df))
     module = load_taxonomy_module(TAXONOMY_SYSTEM)
     df["bucket"] = [module.classify(r) for r in df.to_dict("records")]
     print(df["bucket"].value_counts().to_string().replace("\n", "\n    "))
+    for b, n in df["bucket"].value_counts().items():
+        emit(f"bucket_{b.lower().replace(' ', '_')}", int(n))
 
     # ONE PIN PER PREMISES. The join puts a premises on one row per activity at
     # IDENTICAL coordinates (verified: max 1 distinct x and y per id_local), so
@@ -174,6 +183,8 @@ def main():
     df = (df.sort_values([PREMISES_ID_COLUMN, "_rank"])
             .drop_duplicates(PREMISES_ID_COLUMN, keep="first"))
     print(f"one pin per premises                       {len(df):>9,}")
+    emit("multi_bucket_premises", int((multi > 1).sum()))
+    emit("businesses_clean_rows", len(df))
 
     # MADRID HAS 21 DISTRICTS, and this check earned its place by catching the
     # build brief claiming 22 - a cached Step 0 error, which is exactly what
