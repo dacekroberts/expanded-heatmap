@@ -205,6 +205,40 @@ onwards; the early ones are split by phase rather than by hour.
   on a US-shaped regex and NOT a reason to change it globally. Verdict:
   publish.
 
+- **Found and fixed a RACE in the shared responsive fit that could leave any
+  city's embedded map at a narrow-width zoom, and found it by not trusting a
+  screenshot.** Edmonton's map looked wrong inside the Streamlit page - the
+  whole region, every pin in one cluster - while its standalone render was
+  correct. Reading the map object rather than the picture gave zoom **8.25**
+  against the baked **11.5**, at an identical 1000x650 size, and a reload of
+  the same page gave a correct 11.5, which is what identified it as a race
+  rather than an Edmonton problem. Calgary's rendered correctly alongside the
+  broken Edmonton.
+
+  The mechanism is in `PHONE_FIT_SCRIPT`'s `apply()`. It re-fitted `BOUNDS`
+  **only when `target < MAP_W`**. So a pass that ran while the iframe was still
+  laying out measured a small `clientWidth`, fitted at that size - a much lower
+  zoom - and then the later full-width pass restored the container WIDTH and
+  left the ZOOM alone, because re-fitting was conditional on being narrow.
+  Nothing afterwards corrected it. Reproduced deliberately: fitting at a 60x40
+  container drops Edmonton to zoom 4.5, and before the fix that survived the
+  return to full width.
+
+  `apply()` now captures Folium's baked view as `HOME` before the first pass
+  and calls `setView(HOME)` when the map comes back to full width. **Restoring
+  HOME rather than re-fitting BOUNDS is the deliberate part**: the baked view is
+  what every full-width map has always shown, and a runtime `fitBounds` lands a
+  quarter-step tighter (Edmonton 11.75 against 11.5), so this repairs the broken
+  case and leaves the normal one pixel-identical. Rejected as the simpler fix:
+  dropping the `target < MAP_W` condition, which would have re-fitted at full
+  width too and quietly changed all thirteen cities' framing.
+
+  All 13 maps regenerated; the drift baseline moves with this commit. Worth
+  noting for how it was caught: the first reading of the same screenshot was
+  "the map is fine, it is mid-load", and the second was "the map is fine, the
+  bounds are correct" - both wrong, and both would have shipped it. The number
+  that settled it was `getZoom()` after the page had settled, measured twice.
+
 - **Fixed `scaffold_city.py`'s `cities.py` splice at the third occurrence
   instead of repairing it by hand again.** `add_city_entry()` found the
   insertion point with `text.rstrip().rfind("]")`, the last `]` in the file,

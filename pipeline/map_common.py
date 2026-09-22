@@ -437,6 +437,9 @@ PHONE_FIT_SCRIPT = """
     var BOUNDS = __BOUNDS__;            // [[south, west], [north, east]]
     var NAME = "__MAP_NAME__";
     var tries = 0;
+    // The view Folium baked in, captured before any fit runs. apply() restores
+    // it when the map returns to full width - see the else branch there.
+    var HOME = null;
 
     // Folium renders body HTML before the figure's script block, so this runs
     // before the map exists - poll for it rather than assuming.
@@ -458,6 +461,28 @@ PHONE_FIT_SCRIPT = """
             // Generous padding because BOUNDS holds label ANCHORS, and a label's
             // text box extends past its anchor by up to ~70px.
             m.fitBounds(L.latLngBounds(BOUNDS), {padding: [26, 18], animate: false});
+        } else if (HOME) {
+            // BACK AT FULL WIDTH, AND THIS BRANCH IS A BUG FIX, NOT SYMMETRY.
+            //
+            // Until 2026-09-21 there was no else. A pass that ran while the
+            // iframe was still laying out measured a narrow clientWidth,
+            // fitted BOUNDS at that width - which is a much lower zoom - and
+            // then the later full-width pass restored the WIDTH and left the
+            // ZOOM alone, because re-fitting was conditional on being narrow.
+            // Nothing afterwards ever corrected it, so the map sat at the
+            // narrow-width zoom at full width: Edmonton was caught embedded at
+            // zoom 8.25 against its baked 11.5, showing the whole region with
+            // every pin in one cluster. It is a RACE, so it is intermittent and
+            // not specific to a city - the same page reloaded rendered
+            // correctly, and Calgary's rendered correctly alongside the broken
+            // Edmonton.
+            //
+            // Restoring HOME rather than re-fitting BOUNDS is deliberate:
+            // Folium's baked view is what every full-width map has always
+            // shown, and a runtime fitBounds lands a quarter-step tighter
+            // (Edmonton 11.75 against 11.5). So this repairs the broken case
+            // and leaves the normal one pixel-identical.
+            m.setView(HOME.center, HOME.zoom, {animate: false});
         }
     }
 
@@ -467,6 +492,9 @@ PHONE_FIT_SCRIPT = """
             if (tries++ < 60) return setTimeout(start, 100);
             return;
         }
+        // Before the first apply(), so this is Folium's own fitted view and not
+        // something a narrow-width pass has already moved.
+        if (!HOME) HOME = {center: m.getCenter(), zoom: m.getZoom()};
         // Applied more than once on purpose. At load the 1000px-wide map forces
         // a horizontal scrollbar, which costs enough height to force a vertical
         // one, so `clientWidth` reads ~15px short; once the first pass has
