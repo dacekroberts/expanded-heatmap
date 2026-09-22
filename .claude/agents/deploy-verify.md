@@ -231,6 +231,38 @@ the worst-contrast line in the city in the mode every reader sees first.
 **Measure every mode a reader can reach, and say which is the default.** The
 theme toggle is in the map's top-right.
 
+## What this agent CANNOT catch, and must not be read as covering
+
+Recorded 2026-09-22, when the live site was down for over three hours while
+every check here reported green. Two blind spots, both structural rather than
+oversights:
+
+**1. It runs the WORKING TREE, not a clean clone.** So it cannot see anything
+that depends on what is actually committed: an uncommitted file, a stale
+`__pycache__`, a `.gitignore` surprise. A green run says "this works on this
+machine", never "this works from the repository".
+
+**2. It always starts a FRESH process, so a stale-module failure is invisible
+to it by construction.** Streamlit Cloud's "🔄 Updated app!" re-runs the entry
+script but leaves every imported module in `sys.modules` as it was at boot. A
+push that adds a name to `app/cities.py` and imports it from `app/Overview.py`
+therefore breaks the live app until someone reboots it — and this agent, which
+boots cleanly every time, will verify that same commit as healthy. It did.
+
+So: **a passing run of this agent is not evidence that the deployed site is
+up.** If the caller is asking about the live site, say so and point at the
+Streamlit Cloud logs.
+
+Before reporting a pass on any change under `app/`, note in the report whether
+`python scripts/check_deploy_imports.py` has been run — it tests a clean clone
+under `.venv-lean` and catches the mismatched-export and missing-`label_offset`
+cases that this agent cannot. It is cheap and needs no server. You may run it
+yourself; it starts nothing and modifies nothing.
+
+And remind the caller of gate item 9 in `docs/data_sources.md`: **after any
+push that changes a module the app imports, the app must be rebooted**, not
+merely updated.
+
 ## Guardrails
 
 - Never leave a server running, even on a failure path.

@@ -1047,6 +1047,39 @@ pages' prose: naming each business registry's publishing agency.
 7. **Decide the tile provider deliberately**, given that OSM's tile service is
    explicitly best-effort with no SLA.
 8. Optionally, read the Census geocoder's terms — the only source left unread.
+9. **REBOOT THE APP AFTER ANY PUSH THAT CHANGES A MODULE THE APP IMPORTS** —
+   `app/cities.py`, `app/components.py`, or anything under `pipeline/` that
+   `app/` pulls in. This is an operational step, not a courtesy, and it is in
+   this gate because the live site spent **over three hours down** on
+   2026-09-22 for want of it.
+
+   **Streamlit Cloud's "🔄 Updated app!" re-runs the ENTRY SCRIPT only.** It
+   pulls the new files and re-executes `app/Overview.py`, but every module
+   already in `sys.modules` — `cities`, `components`, every `pipeline` config —
+   stays as it was when the process started. So a push that adds a name to
+   `cities.py` and imports it from `Overview.py` leaves the running process
+   with the new script and the old module, and every page load raises
+   `ImportError: cannot import name 'DEFAULT_REGION' from 'cities'`.
+
+   The log that proves it, because the symptom is confusing enough to send
+   anyone hunting a phantom: the traceback printed the **old** one-line
+   `from cities import CITIES, IN_DEFAULT_VIEW, MAP_ONLY_NAV` — which does not
+   mention `DEFAULT_REGION` at all — above an error naming `DEFAULT_REGION`.
+   Python renders traceback source by re-reading the file from disk while
+   executing a cached code object, so disk and runtime were different
+   versions. Five pulls and five "Updated app!" across three hours never
+   cleared it; only **Manage app → ⋮ → Reboot app** does.
+
+   **`app/cities.py` changes every time a city is added**, so every future city
+   carries this exact risk. Treat the reboot as the last step of adding a city,
+   alongside the drift check and the `DECISIONS.md` entry.
+
+   Before the push, run **`python scripts/check_deploy_imports.py`**, which
+   tests a clean clone under `.venv-lean` — the closest local approximation of
+   what the deploy pulls. It catches the mismatched-export case and the
+   missing-`label_offset` case that crashed the Overview the same day. It
+   cannot catch the stale-module case: nothing local can, because a fresh
+   process is the one thing the live app does not do.
 
 **Where this leaves the project:** nothing found anywhere forbids what this
 project does, and the count of **mandatory notices to display is five**.

@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**116 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**117 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [The live site was down for three hours, and no check this project had could have seen it](#2026-09-22---the-live-site-was-down-for-three-hours-and-no-check-this-project-had-could-have-seen-it)
 - [config.py split into country and city, and the outputs did not move](#2026-09-22---configpy-split-into-country-and-city-and-the-outputs-did-not-move)
 - [Guadalajara built: the second city is what shows which settings were national](#2026-09-22---guadalajara-built-the-second-city-is-what-shows-which-settings-were-national)
 - [Mexico City built: the first city here whose rail is not GTFS, and the first outside North America's licence-register model](#2026-09-22---mexico-city-built-the-first-city-here-whose-rail-is-not-gtfs-and-the-first-outside-north-americas-licence-register-model)
@@ -152,6 +153,66 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - The live site was down for three hours, and no check this project had could have seen it
+
+- **The deployed app raised `ImportError: cannot import name 'DEFAULT_REGION'
+  from 'cities'` on every page load across at least five Cloud pulls between
+  06:11 and 09:11, while `drift_check`, `deploy-verify` and a clean-clone
+  import all reported the same commit healthy.** The cause is not a bug in the
+  code: **Streamlit Cloud's "Updated app!" re-runs the ENTRY SCRIPT and leaves
+  every module in `sys.modules` as it was at boot.** `app/Overview.py` was
+  re-read from disk asking for `DEFAULT_REGION`; `cities` remained the module
+  object loaded before that name existed. Only a reboot clears it, and the log
+  shows five pulls and five updates that did not.
+
+- **The log proved it rather than suggesting it, and the proof is worth
+  keeping because the symptom sends you hunting a phantom.** One traceback
+  printed the source line `from cities import CITIES, IN_DEFAULT_VIEW,
+  MAP_ONLY_NAV` - the OLD one-line import, which does not mention
+  `DEFAULT_REGION` anywhere - directly above an error naming `DEFAULT_REGION`.
+  A file cannot fail on a name it does not reference. Python renders traceback
+  source by re-reading the file from disk at error time while executing a
+  cached code object, so disk and runtime were demonstrably different versions.
+  That single frame ruled out every git-side explanation at once, after both
+  branches had been fetched raw from GitHub and both found to define the name.
+
+- **Two live-breaking defects reached that deployment in one session, in one
+  file, and the checks were structurally incapable of catching either.**
+  `drift_check.py` runs the pipeline and never imports `app/`. `deploy-verify`
+  runs the app, but from the WORKING TREE and always in a FRESH process - so it
+  cannot see what is committed, and cannot see a stale module by construction.
+  It verified the same commit as healthy while the site was down. **A green
+  agent run is evidence about a machine, not about the site.**
+
+- **Added `scripts/check_deploy_imports.py`: a clean clone, under `.venv-lean`,
+  checking every module-level import in `app/` plus the data shapes that have
+  actually broken this app.** Verified to FAIL as well as pass, on both real
+  cases: against `0fa3e55` it reports Mexico City's missing `label_offset` and
+  the resulting NaN, which is the defect that took the Overview down; with
+  `DEFAULT_REGION` removed from a clone it reproduces the live message
+  verbatim, `cannot import name 'DEFAULT_REGION' from 'cities'`. It also
+  refuses the heavy pipeline imports reaching the deploy venv. It needs no
+  server and takes seconds.
+
+- **What it still cannot catch is stated in the file rather than assumed
+  away:** the stale-module case. Nothing local can see it, because a fresh
+  process is precisely the thing the live app does not do. That is why the
+  reboot is a written gate step and not a habit.
+
+- **Recorded as gate item 9 in `docs/data_sources.md`, in `CLAUDE.md`'s working
+  rules, and in `deploy-verify`'s own definition** - three places, because the
+  session's other recurring lesson is that a rule reaches nobody where it is
+  not needed. The agent's file now opens its guardrails with what it CANNOT
+  catch, so a future caller cannot read a pass as covering the deployment.
+
+- **And the reporting failure that let the first defect through.** The Mexico
+  City build was reported as hand-verified with "all 15 cities in the DOM,
+  click path in both regions". It was not: that description belonged to the
+  region-switcher check, which ran before Mexico City existed, and the Overview
+  was never reopened after the city was added. The NaN crash would have been
+  visible on the first page load. Stated here because the missing check and the
+  false report were the same event.
 
 ### 2026-09-22 - config.py split into country and city, and the outputs did not move
 

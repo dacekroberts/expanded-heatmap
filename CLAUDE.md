@@ -128,6 +128,14 @@ colliding. A single session does all of it and can ignore that file.
   it - the index is how. `--check` fails if it is stale. Keep
   `docs/project_context.md` to current state, no counts.
 - **Run `python pipeline/drift_check.py` after any pipeline change.**
+- **Run `python scripts/check_deploy_imports.py` before any push that touches
+  `app/`**, and **reboot the deployed app after any push that changes a module
+  it imports** - `app/cities.py` changes with every city. Streamlit Cloud's
+  "Updated app!" re-runs the entry script and leaves imported modules cached,
+  so the live site stayed down for over three hours on 2026-09-22 across five
+  pulls. Gate item 9 in `docs/data_sources.md` has the detail. `deploy-verify`
+  cannot catch either failure: it runs the working tree, and it always starts a
+  fresh process.
 - **Verify app changes with the `deploy-verify` agent**, and **always state a
   scope**: `city-added`, `map-chrome`, `app-deps` or `full`. It runs against
   `.venv-lean` (what Streamlit Cloud installs), not the full environment. A
@@ -167,6 +175,7 @@ python pipeline/<city_slug>/step2_clean_businesses.py
 python pipeline/<city_slug>/step3_map.py
 python pipeline/drift_check.py [city_slug] [--jobs N]   # --jobs 4 does all 13 in ~37s
 python scripts/brief_check.py [city_slug]               # re-run a brief's claims against live sources
+python scripts/check_deploy_imports.py [--ref REF]      # clean clone + lean venv: run before ANY push touching app/
 python scripts/decisions_index.py [--check]             # refresh DECISIONS.md's index
 python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon>   # add --dry-run first
 .venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"
