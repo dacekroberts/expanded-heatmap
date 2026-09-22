@@ -384,6 +384,43 @@ existing list**, so a further country probed is work against a constraint that
 already binds. The valuable work is finishing what is specified, not finding
 more.
 
+### Tier 2c closed out, 2026-09-21
+
+**Taiwan is complete — four systems across three cities, all unauthenticated,
+all with points AND line geometry:**
+
+| System | Stations | Lines | English names |
+|---|---|---|---|
+| Taipei TRTC | 122 | 5 (MULTILINESTRING) | ✓ |
+| **Kaohsiung KRTC** | **39** | 2 (MULTILINESTRING) | ✓ *Hamasen* |
+| **Kaohsiung LRT** | **38** | 1 (LINESTRING) | ✓ *Lizihnei* |
+| **Taoyuan TYMC** | **22** | 1 (MULTILINESTRING) | ✓ |
+| **Taichung TMRT** | **18** | 1 (LINESTRING) | ✓ *Beitun Main Station* |
+
+**MEXICO CITY IS UNBLOCKED — subway 12**, exactly Metro CDMX's line count,
+from a current feed with no expiry warning.
+
+**And the route matters more than the number.** `datos.cdmx.gob.mx` and
+`metro.cdmx.gob.mx` both time out — eight attempts across the session — and
+feed 1099's `urls.direct_download` on S3 returns **403**. What worked was the
+**Mobility Database's own `mdb-latest` mirror**, which had never been tried for
+that feed.
+
+That is the **inverse of the Toronto lesson**. There, the mirror was three
+months stale and missing an entire mode, and the agency's own feed was right.
+Here the agency host is unreachable and **the mirror is the only route**. So
+the rule is not "prefer the agency" or "prefer the mirror" — it is **try
+both, and treat either failing as a fact about that host rather than about the
+city.** A feed has at least three addresses: the agency's, `urls.latest`, and
+`urls.direct_download`.
+
+Still open: **Sevilla** — the real `Metro de Sevilla` feed exists at mdb 2781
+but its mirror **404s**. **Monterrey** — not in the catalogue under any of
+`monterrey`, `metrorrey`, `nuevo león`, so Mexico's third city has no feed.
+
+**Mexico therefore has two confirmed cities**, CDMX and Guadalajara, both
+covered by DENUE and its cleared licence — and CDMX was the prize.
+
 ### KEEP
 
 **Build-ready, one named blocker each**
