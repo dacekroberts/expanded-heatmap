@@ -81,6 +81,7 @@ its way, and the column says what.
 | **2** | **South Korea** / Seoul | **1,099 stations**, WGS84, English names, transfer data | `상가(상권)정보`: premises, coords, KSIC 247, quarterly, **제한 없음** | **A free API key** (owner action) — and **no line geometry yet** |
 | **2** | **Taiwan** / Taipei | **complete and unauthenticated**: 122 stations + **5 lines as MULTILINESTRING** + line colours + English | `商業登記`: premises addresses, active/closed status | **No coordinates** → geocoding, and per-category assembly |
 | **2** | **Mexico** / Guadalajara | Guadalajara LRT 3 verified | **DENUE**, 6M+ establishments, **SCIAN = NAICS**, INEGI licence clears | **CDMX is domain-wide unreachable**; Guadalajara carries it meanwhile |
+| **1=** | **Italy** / **Milan** ↑↑ | **subway 5, tram 17** (ATM) — M1–M5 | **28,131 premises, 99.1% with coordinates**, `insegna` (shop sign), `codice_ateco`, `settore_merceologico`, floor area, **CC-BY** | **Whether Personal services is reachable** — two buckets confirmed, the third not |
 | **2** | **Brazil** / São Paulo | **94 stations + 6 lines**, EPSG:31983 already correct, metro/trem discriminator, built/planned separate | CNPJ, ~72M, trade name + address + CNAE | **No coordinates** → geocoding past Toronto's scale |
 | **3** | **Norway** / Oslo | metro 5, tram 9 | **MEASURED premises-level** — 152,060 Oslo sub-units, `beliggenhetsadresse`, NACE, open API no key | No coordinates → geocoding |
 | **3** | **Japan** / Tokyo | **solved**: 10,235 stations + 21,932 line segments, PDL 1.0 | **UPGRADED — premises-level food permits with coordinates**, on the national standard schema, CC BY | **A two-bucket ceiling** — no general retail permit exists in Japan |
@@ -108,6 +109,95 @@ has addresses" is not sufficient.
 | **Netherlands, Portugal** | **UNPROBED** | Catalogues reachable (`data.overheid.nl` returns 64 hits for *bedrijven vestigingen*; `dados.gov.pt` answers) but no dataset inspected |
 | **Czechia, Estonia** | **UNPROBED** | Endpoint guesses returned 404; both have establishment concepts (`provozovny`, e-Business Register) worth a proper look |
 | **Germany, Sweden, Italy, Greece, Romania, Bulgaria, Hungary, Poland, Latvia, Croatia, Slovakia, Thailand, India, Egypt** | **UNPROBED** | None probed. The EU default is a company register, which the point above disqualifies — but that is a **pattern, not a probe**, and this file's own rule says a pattern deprioritises and never rules out |
+
+### FULL Tier 3 business sweep, 2026-09-21 — all 20 countries
+
+Every remaining Tier 3 country plus the six previously attempted, run to a
+hard line. **One country passed outright and it was not one anybody expected.**
+
+#### The method error this exposed first
+
+A discovery pass across 20 national portals reported "no API" for **17 of
+them**. A second pass with corrected endpoints found working APIs for **at
+least seven of those seventeen**. The portal URLs in the first pass were
+guesses, and guessing produced false negatives at scale — the same class of
+mistake as Peru's missing `www.`, and at eight times the volume.
+
+**Recorded because it is the most likely way this screen goes wrong again:**
+an unverified endpoint is not evidence about a country.
+
+#### ITALY PASSES — and the city was wrong in our own list
+
+Italy sat in Tier 3 on **Naples** (subway 3, tram 3, funicular 3). Naples
+publishes only *Controlli su commercio e ambulantato* — commerce inspections,
+not a register. **Milan does, and Milan is the answer.**
+
+`dati.comune.milano.it` (CKAN, no key), `Attività commerciali: esercizi di
+vicinato in sede fissa` — fixed-premises neighbourhood shops — as CSV, JSON
+**and GeoJSON**, under **Creative Commons Attribution**:
+
+| | MEASURED |
+|---|---|
+| Rows | **28,131**, of which **27,886 carry a Point geometry (99.1%)**, EPSG:4326 |
+| **`insegna`** | **the shop sign** — the trading name, which is exactly what this project displays, and it is the *sign* rather than the legal entity |
+| **`codice_ateco`** | ATECO, Italy's NACE implementation |
+| **`settore_merceologico`** | merchandise sector — a **second, independent** classification |
+| `superficie_vendita` | sales floor area |
+| `Civico`, `DescrizioneVia`, `CAP`, `MUNICIPIO`, `NIL` | street number, street, postcode, borough, neighbourhood |
+| `LONG_X_4326` / `LAT_Y_4326` | explicit coordinates alongside the geometry |
+
+**Rail, screened the same day: Milan ATM gives subway 5, tram 17** — M1–M5
+exactly, current feed, 45 MB.
+
+**So Italy has both legs measured.** On field richness this is the best
+business source in the screen: it carries a trade name, two classifications
+and a floor area, where Barcelona's census carries premises and use. Companion
+datasets on the same portal and licence cover *pubblici esercizi* (bars and
+restaurants, the Food service bucket) in and out of the commercial plan.
+
+**The one open question:** whether Personal services is reachable — either
+inside `settore_merceologico` or as a separate acconciatori/estetisti dataset.
+Two buckets are confirmed; the third is not.
+
+#### Every other country, with what actually happened
+
+| Country | Route found | Verdict |
+|---|---|---|
+| **Latvia** | `data.gov.lv`, *Uzņēmumu reģistrs*, **CC0-1.0**, 122 MB CSV | **FAILS.** 100% carry an address — and there is **no activity or industry column at all** in its 21 fields, so the three buckets cannot be derived. The UK's exact defect. Also **60% terminated**, and it mixes 36,197 farms and 19,860 associations |
+| **Finland** | `avoindata.prh.fi` v3, open | **UNRESOLVED** — see the correction below. 89.8% have streets; **53% are real estate** |
+| **Germany** | **`ckan.govdata.de`** works — 6,058 hits for *gewerbe*, some GeoJSON | **UNRESOLVED.** Hits are municipal and statistical; no national premises register surfaced |
+| **Czechia** | **ARES works** — `/ekonomicke-subjekty-v-be/rest/ekonomicke-subjekty/{ico}` returns name plus a structured `sidlo` | **Company register**, registered seat. The `provozovny` (establishment) side of RŽP is the thing to chase and was not reached |
+| **Singapore** | **`api-production.data.gov.sg/v2/public/api/datasets`** answers unauthenticated | Route open, **register unprobed** |
+| **Netherlands** | `data.overheid.nl`, 258 hits for *vestigingen* | **AGGREGATE trap** — the top hits are *"Aantal vestigingen per buurt"*, counts per neighbourhood |
+| **Greece** | `data.gov.gr`, 343 hits | **Sector-specific only** — shipyards, wineries. No general register surfaced |
+| **Portugal** | `dados.gov.pt` udata API works | Statistical and sector-specific hits; no register |
+| **Poland** | **`api.dane.gov.pl/1.4/datasets`** works | Hits are statistical — REGON *territorial nomenclature*, not the register itself |
+| **Thailand** | `data.go.th` | **HTTP 403** — blocked |
+| **Bulgaria** | `data.egov.bg` | **HTTP 403** — blocked |
+| **Croatia** | `data.gov.hr` | Returns **HTML** — a single-page front end; the real API path was not found |
+| **Slovakia** | `data.slovensko.sk` | Returns **HTML** — same |
+| **Romania** | `data.gov.ro` | Connection failed on both http and https |
+| **Denmark** | `datacvr.virk.dk` **403** behind bot protection; `distribution.virk.dk` failed | **UNPROBED.** CVR *produktionsenheder* remain the right object |
+| **Estonia** | The `ariregister` bulk CSV URL **404s** | **UNPROBED** |
+| **Sweden, Hungary** | No CKAN at the obvious base | **UNPROBED** |
+| **India** | `data.gov.in` requires an API key | **UNPROBED** |
+| **Egypt** | No open API found at CAPMAS | **UNPROBED** |
+
+#### What the sweep actually settled
+
+- **1 passes both legs:** Italy, via Milan.
+- **1 fails on evidence:** Latvia — addressed, unclassified.
+- **1 unresolved with numbers:** Finland.
+- **4 have a working route and an unprobed register:** Germany, Czechia,
+  Singapore, Poland.
+- **4 produced a specific negative:** Netherlands (aggregate), Greece
+  (sector-only), Portugal, Poland.
+- **9 were not reached at all:** Thailand and Bulgaria blocked (403), Croatia
+  and Slovakia behind SPA front ends, Romania, Denmark, Estonia, Sweden,
+  Hungary, India, Egypt.
+
+**Nine of twenty were never actually probed**, and that is the honest headline.
+None of them belongs in Tier 4 on this evidence.
 
 #### CORRECTION — Finland was ruled out on a sample of ONE
 
