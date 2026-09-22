@@ -120,10 +120,22 @@ CITIES = [
         "lon": -87.6298,
         "page": "pages/4_Chicago_Heatmap.py",
         "blurb": "CTA 'L' (Red, Blue, Brown, Green, Orange, Pink, Purple Lines)",
-        # The plain default. It needed moving west while the eastern four were
-        # stacked vertically and reached across it; once they moved east of
-        # their own dots, this went back to being unremarkable.
-        "label_offset": ("middle", 0, -22),
+        # SOUTH of its dot, moved 2026-09-21 for the same pre-emptive reason
+        # as Vancouver's. Above its dot this label occupied x 439-510,
+        # y 158.9-179.9, and **Toronto's dot lands at x 506.6, y 182.0** -
+        # touching that box's corner. Toronto's own label will need the band
+        # above and east of its dot, which is precisely what this frees.
+        #
+        # dy is +16 and NOT larger, which is counter-intuitive: a bigger
+        # southward offset is WORSE here, because "San Diego" runs east from
+        # its own dot to about x 464 at y 224-245, and Chicago's box spans
+        # x 439-510. Pushing Chicago further south walks it into that pill.
+        # +16 is the measured maximum clearance (7.9 px); +26 collided.
+        #
+        # A pill 21 px tall at dy +16 starts 5.5 px below the dot's centre,
+        # which clears the 4 px marker and its 1 px ring - so it reads as
+        # below the dot rather than on it.
+        "label_offset": ("middle", 0, 16),
     },
     {
         "name": "New York",
@@ -195,9 +207,23 @@ CITIES = [
         # OUTSIDE THE DEFAULT VIEW - the first city to be, and the reason the
         # flag exists. See IN_DEFAULT_VIEW below.
         "in_default_view": False,
-        # Its name sits north-east of its dot, over open water, where nothing
-        # can collide with it at any zoom a reader would stop at.
-        "label_offset": ("start", 12, -10),
+        # WEST of its dot, moved 2026-09-21 to pre-empt a collision that was
+        # measured rather than anticipated. Running EAST, this 184 px pill
+        # occupied x 348-532 at y 129.6-150.6 - and **Calgary's dot lands at
+        # x 371.6, y 139.4, inside that box**, with Edmonton's at x 373.8 just
+        # above it. So the longest label on the map sat directly across the
+        # next two Canadian cities' dots.
+        #
+        # West is empty: it is the westernmost entry, with ocean beyond, and
+        # San Francisco's label sits 30 px lower in y.
+        #
+        # THE COST, measured and accepted: at 400 px the canvas puts this dot
+        # at x 109, so a west-running pill needs 196 px where 109 exist and
+        # about 44% of it is clipped by the left edge - worse than Washington
+        # D.C.'s 54%-visible. Same trade-off the eastern four already carry,
+        # and the same mitigation: the pill stays clickable and the Overview
+        # carries a full text-link list of every city beneath the map.
+        "label_offset": ("end", -12, -10),
     },
     {
         # Accented display name, ASCII page filename - the one thing this
