@@ -1456,6 +1456,53 @@ best structural match to what this project already does.
 TM). This came from documentation of the *closed* system. The project would
 reproject to per-city UTM regardless — Seoul ≈ 127°E is UTM 52N, EPSG:32652.
 
+#### SEOUL'S FOOD REGISTER IS OBTAINABLE WITH NO ACCOUNT — downloaded 2026-09-21
+
+The scrub's real payoff. `data.seoul.go.kr` dataset **`OA-13663`**
+(`서울시 식품위생업소 현황`) publishes per-year CSVs on a **FILE** tab, and the
+download needs **no login, no key, no registration**:
+
+```
+POST https://datafile.seoul.go.kr/bigfile/iot/inf/nio_download.do?&useCache=false
+     infId=OA-13663   seq=11   infSeq=3        # seq 11 = the 2025 file
+```
+
+Files run 2019 through 2025 — 12.98 MB for 2025, ~13–14 MB per year back to
+2021, plus a 57 MB zip for everything to 2019. Downloaded and parsed:
+
+| | MEASURED |
+|---|---|
+| Rows | **39,590**, of which **24,824 are still open** (no `폐업일자`) |
+| Encoding | **cp949** — so `SOURCE_ENCODING = "cp949"`, not UTF-8 |
+| `업소명` / `업종명` / `업태명` | **100%** |
+| **`소재지도로명`** (road address) | **99.3%** |
+| `소재지지번` (lot address) / `행정동명` | 100% |
+| `폐업일자` / `폐업구분` / `폐업사유` | 37.3% — **so inactive premises CAN be filtered**, unlike Japan's ward file |
+| `영업장면적(㎡)` | **3.5%** — floor area is effectively absent |
+| `법인명` | 36.5% |
+| **Coordinates** | **NONE.** Checked for 위도/경도/좌표 — no such column |
+
+Open-premises categories: 일반음식점 10,778, **건강기능식품일반판매업 5,112**
+(health-food *retail*), 휴게음식점 3,931, 즉석판매제조가공업 1,649,
+유통전문판매업 1,180, 제과점영업 547.
+
+**So Korea needs a geocoding leg after all — but the easiest of the three.**
+Addresses are Korean **road-name** format, e.g.
+`서울특별시 종로구 자하문로 55, 지상1층 107호 (통인동, 효자아파트)`. That is a
+systematic national scheme with public geocoders, and far more tractable than
+Japan's chōme/ban/gō blocks.
+
+**What this changes.** Seoul is buildable **without any account**, so the
+residency wall on `data.go.kr` and Seoul's own signup is no longer a blocker
+for the food bucket. What is lost by not having `상가(상권)정보` is real
+though: that register carries **coordinates already**, covers **all six
+cities**, and spans **all three buckets**. This route gives one city, one
+bucket, and a geocoding job.
+
+**The sibling dataset for Personal services is 공중위생업소** (이·미용, 숙박,
+목욕업) on the same portal and presumably the same download mechanism —
+unprobed, and the obvious next step.
+
 #### Exhaustive Korean domain scrub, 2026-09-21 — 21 hosts
 
 Run instead of emailing the agency. **11 of 21 reachable.**
