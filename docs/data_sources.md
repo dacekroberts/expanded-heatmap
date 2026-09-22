@@ -322,13 +322,46 @@ licences**, which is Spain's country-level pattern.
 > `/pages/condiciones-de-uso`, found by listing the portal's own links rather
 > than guessing a second path.
 
-> **⚠ OPEN — an owner decision, and it blocks publishing the transit leg.**
-> CRTM requires that displayed information be *"siempre actualizada"*. This
-> site is a deliberately pre-rendered static snapshot and
-> `components._AS_RECORDED` already discloses an as-of date. Those are in
-> tension, and `add-city` Step 0.4 says to raise such a clause rather than read
-> it generously — so the existing as-recorded notice is **not** treated as
-> automatically sufficient.
+> ### ✅ RESOLVED 2026-09-22 — the "siempre actualizada" clause is a
+> misrepresentation rule, not a liveness requirement
+>
+> Raised as an owner decision and settled by reading the clause **in place**
+> rather than in isolation. It is not free-standing: it is one of **four
+> sub-obligations** under a single governing prohibition —
+>
+> > *"El agente reutilizador tiene expresamente prohibido **desnaturalizar el
+> > sentido de la información**, estando obligado a:"*
+> > — no manipular con mala fe ni falsear la información
+> > — **garantizar que la información mostrada en su sistema esté siempre actualizada**
+> > — no menoscabar o dañar la imagen pública del CRTM
+> > — no utilizar la información en sitios … actos ilegales
+>
+> Its three siblings are all about **misrepresentation and reputational harm**,
+> so the clause targets presenting stale data *as though it were current* — not
+> a requirement that the system be live. No static derivative could satisfy the
+> literal reading, and a licence expressly granting *"copia, difusión,
+> modificación, adaptación, extracción, reordenación y combinación"* plainly
+> does not intend to forbid every static product.
+>
+> **The next clause confirms the mechanism**: *"Deben conservarse, no alterarse
+> ni suprimirse los metadatos sobre **la fecha de actualización**"*. The licence
+> expects the data to carry a date and the reuser to preserve it, which is
+> exactly how a dated snapshot meets a currency obligation.
+>
+> **What this project does, which is stricter than the clause requires.** It
+> rejected CRTM's own Metro GTFS — which downloads cleanly — precisely BECAUSE
+> CRTM stopped refreshing it in May 2025, and took the maintained feature
+> layers instead. The notice states CRTM's own last-update date (5 June 2026)
+> and that the map shows the network as recorded then. And
+> `scripts/brief_check.py`'s `arcgis_layer` check carries `max_age_days` on
+> both layers, so this is a commitment a check FAILS on rather than one a
+> comment promises.
+>
+> This is a reasoned position on a clause that is clear once read in context,
+> not a generous reading of an ambiguous one — the distinction `read-licence`
+> step 8 draws. The full text is stored at
+> `docs/licenses/crtm-licencia-de-uso.txt` so the reading can be checked against
+> the document rather than against this summary.
 
 **Gate 3 — the operator's published count — RUNS for Madrid and reconciles.**
 `metromadrid.es/es/quienes-somos/metro-de-madrid-en-cifras`: **303 estaciones**,
