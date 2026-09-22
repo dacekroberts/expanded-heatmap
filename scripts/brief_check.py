@@ -289,12 +289,24 @@ def gtfs_stations(spec, ctx):
 
 def ckan_rows(spec, ctx):
     """CKAN datastore row count. Note datastore_search_sql 404s on Toronto's
-    portal, so this uses datastore_search."""
+    portal, so this uses datastore_search.
+
+    `limit=1`, not `limit=0`. Toronto's CKAN returns `total` either way;
+    Barcelona's omits it entirely when `limit=0`, so both of Barcelona's row
+    claims failed with `KeyError: 'total'` against a portal that was answering
+    correctly. One wasted row is cheaper than a check that only works on the
+    portal it was written against - and every remaining candidate city in this
+    project is on a non-Toronto CKAN."""
     url = f"https://{spec['domain']}/api/3/action/datastore_search"
-    r = requests.get(url, params={"resource_id": spec["resource_id"], "limit": 0},
+    r = requests.get(url, params={"resource_id": spec["resource_id"], "limit": 1},
                      headers=HEADERS, timeout=300)
     r.raise_for_status()
-    got = r.json()["result"]["total"]
+    result = r.json().get("result") or {}
+    if "total" not in result:
+        return False, ("datastore_search returned no `total` field "
+                       f"(keys: {sorted(result)}) - this portal may not expose "
+                       "row counts, or the resource is not datastore-backed")
+    got = result["total"]
     want = spec.get("expect")
     tol = spec.get("tolerance", 0)
     ok = want is None or near(got, want, tol)

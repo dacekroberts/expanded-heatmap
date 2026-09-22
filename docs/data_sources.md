@@ -837,6 +837,66 @@ This is not a legal position and it does not waive or create anything. It is
 a statement of how this project behaves, published because a reader who might
 want something removed should be able to see it without asking first.
 
+#### CRTM (Consorcio Regional de Transportes de Madrid) — read 2026-09-22 (CANDIDATE, not built)
+
+**Source:** `http://www.crtm.es/licencia-de-uso`, the *Licencia de datos
+estáticos del CRTM*, which `mdb-794` (Metro de Madrid GTFS) declares. Read in
+the browser because it is the licence Madrid's rail leg depends on, and no
+transit licence is ever assumed from the city's business licence — LA Metro's
+GTFS forbids modifying data while the same city's registry is CC0.
+
+**Verdict: PERMITTED WITH CONDITIONS.** The granting sentence:
+
+> *"Las presentes condiciones generales definidas en esta licencia permiten la
+> reutilización de los documentos sometidos a ellas para fines comerciales y no
+> comerciales"*
+
+and reuse is defined to include *"la copia, difusión, modificación,
+adaptación, extracción, reordenación y combinación de la información"* — so
+redrawing line geometry onto a map is squarely inside it. Rights are ceded
+*"gratuita y no exclusiva"*, worldwide.
+
+**On share-alike — it applies to the DATA, not to this project's map.** The
+scope section requires sharing CRTM data *"bajo el mismo tipo de licencia"*,
+but says in the next breath that **"las obras derivadas añadiendo valor pueden
+ofrecerse bajo licencias diferentes"** — value-added derivative works may be
+offered under different licences. A ring-density map is a derivative work
+adding value, not a redistribution of the feed. Recorded explicitly because
+ODbL-style share-alike is a live question elsewhere in this project (CDMX).
+
+**The condition that decides Madrid's rail route:**
+
+> *"Garantizar que la información mostrada en su sistema esté siempre
+> **actualizada**"*
+
+**Displaying an expired feed is in direct tension with this.** `mdb-794`'s
+calendar ended 2026-05-27. The build brief had listed "use the expired feed
+anyway, since station positions do not expire" as a defensible third option.
+**It is no longer defensible on these terms** — not because station geometry
+goes stale, but because the licence obliges the reuser to keep what is shown
+up to date, and this project cannot honour that with a feed CRTM has stopped
+refreshing. Madrid's rail leg must come from a current CRTM item or from
+OpenStreetMap.
+
+**Obligations, all of them conditions rather than courtesies:**
+
+| | |
+|---|---|
+| 1 | **Prescribed wording — "Powered by CRTM"**, with a link to `http://www.crtm.es/`. The licence says it *"debe quedar claramente"* on digital platforms: *"webs, foros, blogs, apps"*. **This is a sixth prescribed notice for this project, and the first from a Spanish source** |
+| 2 | **Cite CRTM as the data source, stating whether the data is raw or processed** — *"especificando si son datos en bruto o explotados"*. This is the disclosure-of-transformation family, like Montréal's and INEGI's: a bare credit does not satisfy it, the notice has to say the data was processed |
+| 3 | **Keep the information shown up to date** (above) |
+| 4 | **Do not distort the meaning**, manipulate in bad faith, or falsify |
+| 5 | **Preserve the metadata** on update date and reuse conditions; do not alter or delete it |
+| 6 | **No implied endorsement** — must not *"indicar, insinuar o sugerir que el CRTM … participa, patrocina o apoya"* the product |
+| 7 | Must not be used to damage CRTM's public image or the public transport system, nor placed alongside illegal acts |
+| 8 | CRTM **monitors access** and may block a reuser whose fetching degrades its systems. A pipeline that re-downloads politely is fine; a tight retry loop is not |
+
+**What this project must therefore display for Madrid:** *"Powered by CRTM"*
+linked to crtm.es, plus a statement that the data is processed rather than
+raw. Both are in addition to the Ayuntamiento de Madrid wording already
+recorded above for the business leg — **Madrid owes two separate attributions
+from two separate licences.**
+
 ## Notices this project MUST display when published
 
 This is the operative output of the licence review. As of 2026-09-21, for the
