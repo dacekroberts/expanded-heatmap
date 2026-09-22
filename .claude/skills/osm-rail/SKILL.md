@@ -69,6 +69,43 @@ to its freshness - here it self-attested as three and a half years dead.
 convenient. Record the ground in the city's config and get the exception
 approved.
 
+### ⛔ BEFORE any of that: "the rail leg" is NOT "a GTFS feed"
+
+**A stale or missing GTFS feed does not mean the agency route is closed.**
+This project draws **station points and line geometry**. It never reads a
+timetable. GTFS is one delivery format for that geometry — agencies also
+publish it as **ArcGIS Feature Services, WFS, GeoJSON or shapefiles**, and
+those are frequently maintained on a *different cadence* by a *different
+team*.
+
+**Madrid, 2026-09-22, is the worked example, and it was caught by a second
+session rather than by this rule.** The reasoning that failed:
+
+1. `mdb-794`, CRTM's Metro GTFS, has a calendar that ended 2026-05-27.
+2. A search of CRTM's ArcGIS org **for GTFS items** found six, four refreshed
+   2026-07-29 and Metro left at 2025-05-30.
+3. Concluded: *"there is nothing newer to find"* → use OSM.
+
+Step 3 does not follow from step 2, and the counter-evidence was **in the
+same search output, already printed**: six `Datos abiertos: Elementos de la
+Red de…` **Feature Services** dated 2026-06-04/05, scrolled past because the
+filter said GTFS. CRTM's `M4_Red/FeatureServer` is `access: public` and holds
+`M4_Estaciones` (293 point records → **243 distinct stations**, the real
+count) and `M4_Tramos` (560 polylines) — **more complete than the GTFS feed
+and more complete than OSM**, from the agency, and current.
+
+So the order is:
+
+1. **Agency GIS layers** — search the agency's ArcGIS org / geoportal for
+   *feature services*, not only for feeds. Query `type:"Feature Service"`
+   explicitly; a keyword search for GTFS will hide them.
+2. **Agency GTFS**, if current.
+3. **OSM**, on a recorded ground.
+
+And when OSM is used, **keep it as the cross-check even after another source
+wins**. Madrid's three sources agree on 13 lines and land at 243 / 236 / 230
+stations — the spread is what shows the GTFS feed was undercounting.
+
 ## Deriving stations: use ROUTE-RELATION MEMBERSHIP
 
 **Do not select station nodes by tag.** Select the route relations, then take
