@@ -26,7 +26,7 @@ import pandas as pd
 from folium.plugins import HeatMap, FastMarkerCluster
 
 from pipeline.taxonomies import CATEGORY_BUCKETS, load_taxonomy_module
-from pipeline.theme import AMBIENT_THEME_JS, DARK, LIGHT, css_vars, rgba
+from pipeline.theme import AMBIENT_THEME_JS, DARK, FONT_STACK, LIGHT, css_vars, rgba
 
 # Decimal places BUSINESS coordinates are rounded to before reaching the HTML.
 # Folium emits a float's full repr - "40.76248502732357", 17 significant
@@ -90,7 +90,7 @@ _THEME_TOGGLE_TEMPLATE = """
         display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end;
         max-width: calc(100% - 56px); }   /* clear of the zoom control on a phone */
     .map-btn {
-        font: 600 13px sans-serif; padding: 6px 12px; cursor: pointer;
+        font: 600 13px @@FONT_STACK@@; padding: 6px 12px; cursor: pointer;
         background: @@LIGHT_SURFACE@@; color: @@LIGHT_TEXT@@;
         border: 1px solid @@LIGHT_BORDER@@;
         border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.3);
@@ -282,6 +282,7 @@ _THEME_TOGGLE_TEMPLATE = """
 THEME_TOGGLE_HTML = (
     _THEME_TOGGLE_TEMPLATE
     .replace("@@AMBIENT_JS@@", AMBIENT_THEME_JS)
+    .replace("@@FONT_STACK@@", FONT_STACK)
     .replace("@@DARK_VARS@@", css_vars(DARK))
     .replace("@@DARK_ATTRIB_BG@@", rgba(DARK["page"], 0.8))
     .replace("@@LIGHT_SURFACE@@", LIGHT["surface"])
@@ -337,7 +338,7 @@ LEGEND_HTML = """
 <details open class="map-legend" style="
     position: fixed; bottom: 24px; right: 24px; z-index: 9999;
     background: white; padding: 8px 14px; border: 1px solid #999;
-    border-radius: 4px; font-family: sans-serif; font-size: 13px;
+    border-radius: 4px; font-family: """ + FONT_STACK + """; font-size: 13px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.3);
 ">
   <summary style="font-weight: bold; cursor: pointer; user-select: none;

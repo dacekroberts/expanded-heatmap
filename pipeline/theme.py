@@ -26,6 +26,35 @@ also why a chrome reskin only moves about 15% of a city page's pixels - see
 docs/theming.md.
 """
 
+# --- Type -------------------------------------------------------------------
+# One font stack, for the same reason there is one palette: before this, the
+# city maps and the macro map each said `sans-serif` and nothing said what that
+# resolved to.
+#
+# **The non-Latin fallbacks are the point.** A bare `sans-serif` leaves the
+# browser to choose, which is fine for Latin text and unreliable for anything
+# else - missing glyphs render as tofu boxes, and a substituted face changes
+# the line metrics so a tooltip can outgrow its own box. The 2026-09-21 country
+# screen found candidate cities whose business names are Japanese, Korean,
+# Traditional Chinese, Greek, Hebrew, Latvian and Czech, so this stops being
+# hypothetical the moment a non-Latin city is built.
+#
+# The order matters and is not arbitrary. Browsers fall through **per glyph**,
+# not per string, so the Latin/Greek/Cyrillic faces come first and the CJK
+# faces after: Segoe UI and Noto Sans carry no CJK glyphs, so a Japanese name
+# falls past them to Yu Gothic or Hiragino rather than being rendered by a face
+# that has the character but not the design. Putting a CJK face first would
+# silently restyle every Latin name on the map.
+FONT_STACK = (
+    '-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", '        # Latin, Greek, Cyrillic, Hebrew
+    '"Hiragino Sans", "Yu Gothic", Meiryo, '                              # Japanese
+    '"Apple SD Gothic Neo", "Malgun Gothic", '                            # Korean
+    '"PingFang TC", "Microsoft JhengHei", '                               # Traditional Chinese
+    '"PingFang SC", "Microsoft YaHei", '                                  # Simplified Chinese
+    'Arial, sans-serif'
+)
+
+
 # --- Dark: "midnight slate" -------------------------------------------------
 # Cool blue-navy, chosen to sit beside the maps' dark basemap, which is an
 # invert + hue-rotate CSS filter and so renders blue-grey. Contrast figures are
