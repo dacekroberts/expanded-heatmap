@@ -1,7 +1,15 @@
 Ajuntament de Barcelona - Open Data BCN terms of use
 Live source: https://opendata-ajuntament.barcelona.cat/en/condicions-us
 READ FROM: https://web.archive.org/web/20250321/https://opendata-ajuntament.barcelona.cat/en/condicions-us
-Archive snapshot: 2025-03-21
+Archive snapshot: 2025-03-28 (CORRECTED 2026-09-22)
+  The request asked for 20250321 and the Wayback Machine served the nearest
+  snapshot, 20250328093226 - which this file's own banner line records, and
+  which is the NEWEST capture of this page that exists. The 2025-03-21 date
+  came from the build brief rather than from the document, and a stored
+  evidence file has to be right about its own provenance. Re-fetched and
+  compared 2026-09-22: byte-identical but for HTML-entity escaping of the
+  suggested attribution markup, and the notification clause is present in
+  both.
 Retrieved: 2026-09-22
 WHY THE ARCHIVE: the live pages serve hCaptcha and this project does
 not defeat CAPTCHAs. These terms reserve the right to amend
