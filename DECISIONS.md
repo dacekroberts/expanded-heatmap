@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**151 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**152 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Two probes came back clean, and the clean result is the record](#2026-09-22---two-probes-came-back-clean-and-the-clean-result-is-the-record)
 - [Sofia settled by enumerating Bulgaria's catalogue from outside the block](#2026-09-22---sofia-settled-by-enumerating-bulgarias-catalogue-from-outside-the-block)
 - [The table check that had been written inline six times, and one probe that was correctly abandoned](#2026-09-22---the-table-check-that-had-been-written-inline-six-times-and-one-probe-that-was-correctly-abandoned)
 - [Two of nineteen licence hashes described bytes that existed nowhere](#2026-09-22---two-of-nineteen-licence-hashes-described-bytes-that-existed-nowhere)
@@ -187,6 +188,43 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Two probes came back clean, and the clean result is the record
+
+- **Probe: does `app/` import anything `requirements.txt` does not declare?**
+  Two names came back - `pydeck` and `pipeline` - and **both are accounted
+  for**, which is the useful answer rather than a disappointing one.
+  `requirements.txt` says in a comment "pydeck itself ships with Streamlit, so
+  it needs no line of its own", and the lean-venv run earlier today confirmed
+  pydeck 0.9.3 present without a line. `pipeline` is a local package, and the
+  app imports only `pipeline/<city>/config.py` (for `HEATMAP_HTML`) and
+  `pipeline/theme.py` - **neither touches the geo stack**. `map_common.py` does
+  import it and the app never imports `map_common`. No check shipped: this
+  duplicates `check_deploy_imports.py`, which is strictly stronger because it
+  actually imports the app in a clean clone under the lean venv rather than
+  reasoning about names.
+
+- **Probe: is every `outputs/` file the docs and pages PROMISE actually there?**
+  17 distinct paths cited across `app/` and `docs/`; all 17 exist and all 17
+  are committed. Clean.
+
+- **Shipped a check for the second one anyway, because the risk is structural
+  rather than present.** These are not files the app opens - it reads one
+  `heatmap.html` per city through an iframe - they are **claims on behalf of a
+  reader who will go and look**: "the stations excluded are listed in
+  `outputs/montreal/excluded_stations.csv`". `outputs/` is committed and
+  `data/` is not, so a city added in a hurry can cite a file that never leaves
+  the machine it was built on, and nothing about the page looks wrong from the
+  inside. Check J fails on missing OR merely uncommitted, and was
+  negative-tested by citing an untracked file from the Montreal page.
+  **It exists for the seventeenth city, not for the sixteen already right.**
+
+- **Recording a clean probe is part of the job.** A sweep that reports only
+  findings teaches the next person nothing about what was examined, and the
+  cheapest way to waste an hour is to re-run a probe someone already ran and
+  did not write down.
+
+- **`check_provenance.py` now runs ten checks (A-J)** and `--strict` exits 0.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
