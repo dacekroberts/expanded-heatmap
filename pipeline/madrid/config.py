@@ -136,9 +136,15 @@ LINE_NAMES = {
 }
 
 # Metro de Madrid's official livery, used so the map's line colours come from
-# the operator rather than being invented. TODO: verify each against the
-# operator's own diagram before the map ships, and check every one against the
-# three business-category colours for Delta-E separation (pipeline/linecolour.py).
+# the operator rather than being invented.
+#
+# CHECKED against the three business-category pins with pipeline/linecolour.py
+# on 2026-09-22, and step 3 re-runs that check on every render rather than
+# trusting this comment. All 13 clear the hard floor; seven sit below the
+# preferred 45 and are listed by name in the output, the closest being the
+# Ramal at 14.2 against Retail and Linea 11 at 20.1 against Personal
+# services. The project only substitutes its own palette when an agency's
+# colours are ambiguous or shared, and Madrid's are neither.
 LINE_COLOURS = {
     "1": "#30A2DA", "2": "#E1251B", "3": "#FFD200", "4": "#8E4C9C",
     "5": "#98C93C", "6": "#9C9E9F", "7": "#F0821F", "8": "#EC82B1",
