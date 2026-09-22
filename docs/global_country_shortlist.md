@@ -490,6 +490,29 @@ These stay exactly where they were.
 | **Bucharest** 🇷🇴 | `data.gov.ro` resolves nowhere on http or https |
 | **Sofia** 🇧🇬 | `data.egov.bg` returns **403** again — consistent across sessions, so plausibly an IP or region refusal rather than a bad host |
 
+**D4 re-probed 2026-09-22 at the register each country actually keeps**, rather
+than at a guessed open-data portal — which is where the previous pass failed.
+
+| Country | Corrected target | Result |
+|---|---|---|
+| **Czechia** | **`rzp.cz`** — the *živnostenský rejstřík* (**trade-licence** register), not ARES the company register | **LIVE.** This is the right *shape*: Czech trade licences are issued per premises. The most promising D4 lead after Denmark. `api.golemio.cz` needs a key (401); `opendata.praha.eu` still serves HTML at its CKAN path |
+| **Bulgaria** | `data.egov.bg`, body read rather than just the code | **403 is a plain Apache "Forbidden"** — no IP named, no Cloudflare Ray ID, no WAF marker |
+| **Hungary** | `nyilvantarto.hu` | Live (3.1 KB). `data.gov.hu` resolves nowhere |
+| **Croatia** | `pretrazivac-obrta.gov.hr` (obrtni registar) | Live but a 244-byte SPA shell. `opendata.zagreb.hr` dead |
+| **Sweden** | `dataportal.se/api/datasets` | 404 — still the wrong path |
+| **Romania** | `portal.onrc.ro` | Resolves nowhere |
+| **Estonia** | `ariregister` `/en/open-data` | 404 — the working path is `/en/downloading-open-data`, already read: fields are **Registry code, Legal form, VAT number, Status, Address**, i.e. company-shaped |
+
+> **CORRECTION — Bulgaria was lumped with the IP-refused hosts and should not
+> have been.** This file's own rule is that an IP-level refusal **names your
+> address or shows a WAF request id**, the way `data.go.th` and
+> `opendata.tel-aviv.gov.il` both printed `50.47.238.226` back. Bulgaria's 403
+> does neither: it is a stock Apache `403 Forbidden` page, 199 bytes, which is
+> the **client-signature** case — exactly the one where *the browser is worth
+> trying*. Untested in a browser, so Sofia stays open with a cheaper next step
+> than it had. Two sessions recorded "403, consistent, plausibly IP" without
+> reading the 199 bytes.
+
 #### D5 — rail/GIS group: REACHABILITY ONLY, no layer probed (11 cities)
 
 **Hong Kong · Jakarta · Kuala Lumpur · Rio de Janeiro · Tel Aviv · Lima ·
