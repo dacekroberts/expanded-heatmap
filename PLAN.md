@@ -255,6 +255,62 @@ Desktop is unaffected — the label is fully visible there.
   - Ring coverage is 12.6%, the lowest here, because the business set is
     county-wide while the rail is one line plus a loop. Consider whether the
     all-businesses toggle should be scoped to station municipalities.
+- [ ] **Mexico - the next country, and the last one before this project
+  crosses an ocean.** Two cities, not three: Monterrey matches no feed under
+  `monterrey`, `metrorrey` or `nuevo leon`. Both are covered by DENUE, whose
+  licence is already cleared.
+  - **Start with `add-country`, not `add-city`.** Mexico has been *screened*
+    (both legs measured in `docs/global_country_shortlist.md`) but never
+    *profiled* - `docs/` holds only `canada_step0_endpoints.md`. `CLAUDE.md`'s
+    rule applies: a country this project has never built in starts one layer
+    up. It should be cheaper than Canada's, since the two heaviest questions
+    (licence, classification) are already answered.
+  - **APPROVED BY THE OWNER 2026-09-22: CDMX's page states that its rail
+    geometry came from OpenStreetMap rather than the operator, and why.**
+    `datos.cdmx.gob.mx` and `metro.cdmx.gob.mx` both time out and the feed's
+    S3 `direct_download` returns 403; OSM was accepted as a documented
+    per-city exception after passing both rail invariants (26 route relations,
+    refs 1-9/A/B/12, with `name`, `ref` and `colour` each 100% populated). This
+    makes CDMX's transit provenance shaped differently from all fourteen built
+    cities, so it belongs on the page rather than only in
+    `docs/data_sources.md`. Recorded here because the approval was given three
+    sessions before the build.
+  - **INEGI imposes a DISCLOSURE obligation, not just attribution.** It
+    requires notifying the end user of any analysis or transformation applied,
+    and separately that the presentation must not suggest INEGI made the
+    change. This project triggers it every time - ring density, bucketing and
+    storefront filtering are all transformations - and a bare source credit
+    does not satisfy it. Goes in `docs/data_sources.md`'s notices gate.
+  - **`REGION_ORDER` in `app/cities.py` must gain `"Mexico"` before any
+    Mexican city is added**, or the validator raises at import. The macro map
+    needs nothing else: Mexico's centre sits 14.02 degrees south and 1.41
+    degrees west of the United States centre, against Canada's 14.53 north and
+    1.49 east - almost an exact mirror, so it is a pure vertical re-centre at
+    the pinned zoom, the case already verified on 2026-09-22.
+  - **SCIAN is NAICS**, so `pipeline/taxonomies/naics.py` may transfer largely
+    unchanged. That, rather than map geometry, is why Mexico is cheap.
+  - **SPLIT `config.py` INTO COUNTRY-LEVEL AND CITY-LEVEL WHEN GUADALAJARA
+    ARRIVES - not before, and not later.** Every built city is one-or-more
+    registries *per city*; Mexico, France, Korea, Japan, Taiwan and Brazil are
+    the transpose, one national register scoped to many cities.
+    `multi-source-city` solves N sources to 1 city and nothing solves 1 source
+    to N cities. Today the endpoint, filter, licence and required notice live
+    per city, so building Guadalajara after CDMX copies DENUE's into a second
+    file - and across Japan's ~9 subway cities the same national facts would
+    live in nine, where a licence correction has to be made nine times. Given
+    how many licence positions this project has had to correct, that is the
+    real failure mode. **Mexico is the cheapest place to learn it: two cities,
+    and the second one is the whole test.** Doing it now designs against one
+    example; doing it at Japan means retrofitting nine. Note the docs are
+    already country-shaped (`add-country` produces
+    `docs/<country>_step0_endpoints.md` and per-publisher licences); only the
+    code still assumes the city is the unit.
+  - **Step 1 is GTFS-shaped and CDMX is the first city that is not.** All 14
+    built cities read GTFS; ahead of this are OSM (CDMX), national standard
+    datasets (Korea, Japan), a WFS layer (Sao Paulo), and SHP (Israel). Of
+    `pipeline/stations.py`'s three gates, spacing and the operator's published
+    counts transfer to any source, but **boardability is GTFS-specific** - it
+    must not be allowed to pass silently on a source it cannot check.
 - [ ] **New Orleans - DEFERRED POST-DEPLOY by the owner (2026-09-21),
   alongside Seattle.** The pre-deploy city scope is the nine that are
   built; this and Seattle's multi-municipality build come after. Findings
