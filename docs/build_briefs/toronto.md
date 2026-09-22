@@ -1,33 +1,71 @@
 # Build brief — Toronto
 
-**Not the next city, and the only Canadian candidate whose published ranking
-figure was already correct.** Ranked sixth of six. This brief exists to record
-why its last place survived the re-ranking, and what the one soft spot in its
-number is.
+**Not the next city — but NOT for the reason this brief originally gave.**
+Its published ranking figure was the only Canadian one already measured on
+storefronts, yet its *denominator* was wrong: see the correction below, which
+moves Toronto from sixth of six to **fourth**. The argument against building it
+is coverage, not density.
 
 Claims are **MEASURED** or **ASSERTED**, per
 [`session_roles.md`](../session_roles.md).
 
 ---
 
+## CORRECTION 2026-09-21: Toronto is FOURTH, not last
+
+**Re-measured before any build, and it overturns this brief's own premise.**
+The "234 stations" every Toronto figure rests on is a **PLATFORM count**, not a
+station count. Measured from the agency feed:
+
+| | platforms | **stations** | ratio |
+|---|---|---|---|
+| subway, Lines 1/2/4 | 148 | **77** | 1.92 |
+| subway + LRT Lines 5/6 | **234** | **118** | 1.98 |
+
+The stop names say so outright — "Finch Station - Southbound Platform" — and
+**`parent_station` is not populated at all**, so nothing ever collapsed them.
+
+**Rescaled to real stations, Toronto is 81 per station, not 41:**
+
+> Vancouver 206 · Montréal 151 · Surrey 135 · **Toronto 81** · Edmonton 76 ·
+> Calgary 75
+
+So Toronto moves from clearly last to **fourth, ahead of both Calgary and
+Edmonton**. The rescaling is valid because the numerator — storefronts inside
+the rings — does not depend on how stations are counted; and 81 is still a
+FLOOR, because the 41 rested on a 71.4% geocode match.
+
+**This is the fourth denominator error in this project**, and the first
+introduced by trusting a station count recorded in this project's own notes
+rather than re-deriving it.
+
+**What has NOT changed is the real argument against building Toronto**, and it
+was never the density: it is a **two-bucket city**. It licenses food and trades
+but not general retail, so the Retail bucket cannot be filled from the
+municipal register at all. That is a coverage problem no denominator fixes, and
+it is why Calgary and Edmonton remain the better next builds despite ranking
+below it.
+
 ## Where it ranks, and why the re-ranking did not rescue it
 
-**41 storefronts within the 0.6 mi ring per in-city station**, across 234
-stations. For scale: Vancouver 206, Montréal 151, Surrey 135, Edmonton 76,
-Calgary 75, **Toronto 41** — against D.C. ~173 and Boston ~39.
+**41 storefronts per PLATFORM, across 234 platforms — which is 81 per
+station across 118 stations.** The per-platform figure is what the ranking
+published; the corrected one is above. For scale: Vancouver 206, Montréal 151,
+Surrey 135, **Toronto 81**, Edmonton 76, Calgary 75 — against D.C. ~173 and
+Boston ~39.
 
 **Toronto's 41 was the only Canadian figure already measured on storefronts**,
 so it is the one number the 2026-09-21 re-ranking did not change. The other
 five were inflated 1.4x–4.2x by counting every mappable licence.
 
-**A correction to an intermediate claim made during the Vancouver build.** It
-was suggested that Toronto's last place was "the least trustworthy number in
-the table" and that a common basis would narrow the gap substantially, because
-Toronto alone was being compared against five inflated figures. **The narrowing
-is real but small in effect**: Calgary-to-Toronto goes from 2.5x to 1.8x, and
-Toronto still sits clearly last. The published *order* was directionally right
-all along; only the magnitudes were wrong. Recorded because the wrong inference
-was reasonable and someone may make it again.
+**An intermediate claim made during the Vancouver build turned out to be
+RIGHT, after being recorded here as wrong.** It was suggested that Toronto's
+last place was "the least trustworthy number in the table". This brief then
+recorded that the gap narrowed only from 2.5x to 1.8x and that Toronto "still
+sits clearly last" — which held only while its denominator was platforms. On a
+consistent station count it does not: Toronto is fourth. **Both the original
+suspicion and its rebuttal are left here**, because the sequence is the lesson —
+the suspicion was correct for a reason nobody had identified yet.
 
 **Its real soft spot is different, and it is a floor rather than a point
 estimate.** The 41 rests on geocoding **159,872** licence rows against the
@@ -49,8 +87,9 @@ That is a coverage problem no amount of geocoding fixes, and it is why a
 reader would misread the map as a fact about Toronto's high streets rather than
 about its licensing.
 
-**This, not the density, is the argument against building it.** A city with
-234 stations and one absent bucket produces a large map that is systematically
+**This, not the density, is the argument against building it** — and after
+the denominator correction it is the ONLY argument left. A city with 118
+stations and one absent bucket produces a large map that is systematically
 wrong in a way the page has to apologise for.
 
 ## Sources
@@ -72,11 +111,17 @@ wrong in a way the page has to apologise for.
   points, same licence), which matched **71.4% on exact string match with no
   normalisation** and returns `MUNICIPALITY_NAME`, so it doubles as the in-city
   filter.
-- **`Client Name` is a person column and must never be downloaded** — 395
-  surname-first forms in a 32k sample. `Operating Name` is blank on only 0.8%,
-  so there is no need for a fallback and no excuse for loading the other. Omit
-  it at the download boundary and assert it stays absent, as New York,
-  Philadelphia, Miami and Boston all do.
+- **THREE personal columns, not one.** `Client Name` was already recorded (395
+  surname-first forms in a 32k sample), but the field list measured 2026-09-21
+  also carries **`Business Phone` and `Business Phone Ext.`** All three must be
+  omitted at the download boundary and asserted absent, as New York,
+  Philadelphia, Miami, Boston and Surrey all do. `Operating Name` is blank on
+  only 0.8%, so no fallback is needed and there is no excuse for loading any of
+  them. Full field list: `_id, Category, Licence No., Operating Name, Issued,
+  Client Name, Business Phone, Business Phone Ext., Licence Address Line 1-3,
+  Ward, Conditions, Free Form Conditions Line 1-2, Plate No., Endorsements,
+  Cancel Date, Last Record Update` — note there is **no coordinate field of any
+  kind**, confirming the geocoding requirement. 159,872 rows confirmed.
 - **`datastore_search_sql` 404s** on this portal. Use `datastore_search` with
   `filters`, and note **join keys are case-sensitive**: `ADDRESS_FULL` is title
   case, and matching it in upper case returned **0 of 150**.
@@ -106,10 +151,22 @@ new LRT lines — and separating rail from streetcar is trivial rather than the
 San Francisco problem it was described as. **`screen_rail.py` now prints feed
 expiry because of this city.**
 
-**ASSERTED:** the 234 station count, and which of the 20 `route_type 0` routes
-are LRT rather than streetcar. Both need re-deriving from the agency feed
-before any build; the streetcar/LRT split in particular is a scope decision,
-not a lookup.
+**MEASURED 2026-09-21, both claims resolved** (the station count is corrected
+at the top of this brief):
+
+- **The LRT/streetcar split IS a lookup, not a research problem.** The two LRT
+  lines are named `Line 5 Eglinton` and `Line 6 Finch West`; the other 18
+  `route_type 0` routes carry street names — Bathurst, Carlton, Dundas,
+  Harbourfront, King, Kingston Rd, Lake Shore, Long Branch, Queen and so on. A
+  `^Line \d` test separates them cleanly. This brief previously called it a
+  scope decision; it is a regex.
+- **Station counts, by scope:** subway only 148 platforms / **77 stations**;
+  subway + LRT 234 / **118**; adding all 18 streetcar routes takes it to 913
+  platforms / 706 names — the shape that would make Toronto a street-running
+  city like San Francisco rather than a rapid-transit one.
+- **The agency feed carries NO `feed_info.txt`**, so — like Calgary's and
+  Edmonton's — its staleness cannot be checked from the feed. Only Montréal's
+  STM and Vancouver's TransLink publish a validity window.
 
 ### Projected CRS
 
@@ -140,6 +197,6 @@ The most expensive of the six, and the reasons compound:
 3. **The real station count** from the agency feed, not the 234 asserted here.
 4. **The licence-category count and vocabulary** — 72 is asserted, not
    measured.
-5. **Whether a two-bucket map of 234 stations is worth publishing at all**, or
+5. **Whether a two-bucket map of 118 stations is worth publishing at all**, or
    whether Toronto is better left out with its reason recorded. A
    project-owner question, not a Step 0 one.

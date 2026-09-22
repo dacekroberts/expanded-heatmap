@@ -829,7 +829,15 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   `scripts/rank_canada_storefront_density.py` is committed so it is
   reproducible. Result, storefronts in the 0.6 mi ring per in-city station:
   **Vancouver 206, Montreal 151, Surrey 135, Edmonton 76, Calgary 75,
-  Toronto 41** - against D.C. ~173 and Boston ~39. Published inflation ran
+  Toronto 41** - against D.C. ~173 and Boston ~39. **TORONTO'S 41 WAS
+  CORRECTED TO 81 on 2026-09-21**, after its 234 "stations" turned out to be
+  PLATFORMS (148 platforms / 77 stations on the subway; 234 / 118 with the two
+  LRT lines, `parent_station` never populated). That moves Toronto from sixth
+  to **fourth**, ahead of Calgary and Edmonton - so the corrected order is
+  **Vancouver 206, Montreal 151, Surrey 135, Toronto 81, Edmonton 76, Calgary
+  75**. It does NOT change which city to build next: Toronto is a two-bucket
+  city with no general-retail source, which is a coverage problem no
+  denominator fixes. See `docs/build_briefs/toronto.md`. Published inflation ran
   1.0x-4.2x and was NOT uniform, so **Montreal and Surrey swap** and
   Edmonton/Calgary become a tie. Toronto stays last. **Next build: MONTREAL** -
   densest remaining, cheapest (SCIAN is NAICS, so no taxonomy module at all),

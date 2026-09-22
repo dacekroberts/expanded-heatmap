@@ -14,6 +14,83 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - The three remaining Canadian briefs re-measured in advance; Toronto is FOURTH, not last
+
+- **Done before any build, at the owner's instruction, because a brief has now
+  been wrong twice**: Vancouver's on five of eleven checkable claims, Montreal's
+  on three of seven. Verification only - nothing was built.
+
+- **TORONTO'S RANKING FIGURE RESTED ON A PLATFORM COUNT, NOT A STATION COUNT.**
+  Measured from the agency feed: the subway is **148 platforms / 77 stations**
+  and subway-plus-LRT is **234 platforms / 118 stations**, a ratio of 1.98.
+  `parent_station` is **not populated at all** in this feed, so nothing ever
+  collapsed them, and the stop names say it outright - "Finch Station -
+  Southbound Platform". Rescaled, **Toronto is 81 per station, not 41**:
+
+      Vancouver 206 | Montreal 151 | Surrey 135 | **Toronto 81** | Edmonton 76
+      | Calgary 75
+
+  The rescaling is valid because the numerator - storefronts inside the rings -
+  does not depend on how stations are counted; and 81 remains a FLOOR, since
+  the 41 rested on a 71.4% geocode match.
+- **This reverses what I told the owner earlier today.** After the re-rank I
+  said "Toronto stays clearly last" and that the published order was
+  directionally right. It was not: on a consistent denominator Toronto sits
+  fourth, ahead of both cities queued to be built next. **It is the fourth
+  denominator error in this project and the first I introduced myself**, by
+  trusting a station count recorded in this project's own notes instead of
+  re-deriving it. The earlier suspicion that Toronto's position was "the least
+  trustworthy number in the table" was right for a reason nobody had found yet;
+  both that suspicion and its premature rebuttal are left in the brief, because
+  the sequence is the lesson.
+- **It does NOT change which city to build next.** Toronto is a two-bucket
+  city - it licenses food and trades but not general retail - so its Retail
+  bucket cannot be filled from the municipal register at any denominator. That
+  is a coverage problem, and it is why Calgary and Edmonton remain the better
+  next builds despite now ranking below it.
+
+- **NONE of the three agencies publishes a validity window.** Calgary's,
+  Edmonton's AND Toronto's own agency feeds all carry **no `feed_info.txt`** -
+  only Montreal's STM and Vancouver's TransLink do. So the D.C.-style expiry
+  guard cannot be written for any of the three, and staleness has to be judged
+  from the portal resource's `updatedAt` instead. Recorded because two of these
+  three mirrors were already found stale, and the obvious mitigation does not
+  exist here.
+
+- **Calgary: three claims resolved, one invalidated.** Its agency GTFS URL is
+  found and works (`data.calgary.ca/download/npk7-z3bj/...`, 12.0 MB) and
+  reproduces the mirror's rail half exactly, so its 83-station denominator
+  holds. `jobstatusdesc` has **seven** values, not the six previously read
+  (Renewal Notification Sent 2 was missing). `licencetypes`, `point` and
+  `tradename` are **100% populated** - no nulls, no blanks.
+  - **`route_id` EMBEDS A FEED VERSION**: `201-20780` in the mirror against
+    `201-20786` in the agency feed. **Match on `route_short_name`, never on
+    `route_id`** - a pinned id silently matches nothing after the next release.
+    No other city here has versioned route ids.
+  - **The two-boundary-layers check was INVALIDATED rather than answered.**
+    `data.calgary.ca/api/catalog/v1` federates across the whole Socrata network
+    and returned Cincinnati's and Los Angeles' boundaries; a domain-scoped
+    re-query found only ward, park and population boundaries. Still ASSERTED.
+
+- **Edmonton: its last privacy unknown is closed, and a better feed path
+  found.** `business_name` is blank on **6 of 43,672 rows (0.01%)** and the
+  names are company-shaped, so it has **no name-fallback problem at all**.
+  `<REDACTED FOR PRIVACY>` confirmed at **4,074 rows (9.3%)** - the
+  `read-licence` step-6b case where the publisher did the privacy work
+  upstream. Its agency GTFS zip is still ASSERTED (two guessed URLs 404'd; the
+  catalogue names `urjq-fvmq`, an `href`), **but it publishes GTFS as eight
+  individual Socrata tables** (Routes, Stops, Trips, Stop Times, Route Shapes,
+  Calendar Dates, Agency, Transfers), which avoids the zip and the stale mirror
+  and exposes a per-table `updatedAt`. Prefer that.
+
+- **Toronto also gained a privacy correction: THREE personal columns, not
+  one.** `Client Name` was recorded; the measured field list also carries
+  **`Business Phone` and `Business Phone Ext.`** All three must be omitted at
+  the download boundary and asserted absent. Confirmed too: 159,872 rows, no
+  coordinate field of any kind, and the **LRT/streetcar split is a regex, not a
+  scope decision** - the LRT lines are named `Line 5 Eglinton` and `Line 6
+  Finch West` while the other 18 `route_type 0` routes carry street names.
+
 ### 2026-09-21 - Three presentation changes, site-wide: legend affordance, magenta food, orange heat
 
 - **The owner's calls, batched into ONE regeneration** because each of the

@@ -17,7 +17,8 @@ Claims are **MEASURED** or **ASSERTED**, per
 
 **76 storefronts within the 0.6 mi ring per in-city station** — 2,520 across
 33 stations. For scale: Vancouver 206, Montréal 151, Surrey 135, **Edmonton
-76**, Calgary 75, Toronto 41, against D.C. ~173 and Boston ~39.
+76**, Calgary 75, Toronto 81 (corrected 2026-09-21 — its published 41 was per
+PLATFORM; see `toronto.md`), against D.C. ~173 and Boston ~39.
 
 **The published figure was 153**, measured on every licence rather than
 storefronts (2.0x inflation). So Edmonton fell from "clearly ahead of Calgary"
@@ -26,6 +27,32 @@ density.
 
 **It is the smallest map of the remaining candidates**: 33 stations, half
 Boston's 71. Roughly 2x Boston's density on a third of the stations.
+
+## Claims re-measured 2026-09-21, before any build
+
+- **`business_name` is effectively never blank** (was ASSERTED): blank on
+  **6 of 43,672 rows, 0.01%**, and 6 of 25,105 Commercial rows, with 21,793
+  distinct names on the Commercial set. They are company-shaped - TBOOTH,
+  OASIS APARTMENTS, THE MINI DONUT KING, HASKIN CANOE INC, BUREAU VERITAS - so
+  **Edmonton has no name-fallback problem at all**, which removes the last
+  unknown from its privacy position.
+- **`<REDACTED FOR PRIVACY>` confirmed at 4,074 rows, 9.3%** - the
+  `read-licence` step-6b case, where the publisher did the privacy work
+  upstream. Those rows carry no address to map, so they are lost rather than
+  suppressed.
+- **STILL ASSERTED, and it still BLOCKS the 76/station figure: the agency
+  GTFS.** Two guessed URLs 404'd. The catalogue names the answer though:
+  **`ETS Bus Schedule GTFS Data Schedules - zipped files`, id `urjq-fvmq`,
+  type `href`** - a link to an external file rather than a Socrata download, so
+  it needs resolving before fetching.
+- **A BETTER PATH EXISTS, and it sidesteps staleness entirely.** Edmonton
+  publishes GTFS as **individual Socrata tables**: Routes `d577-xky7`, Stops
+  `4vt2-8zrq`, Trips `ctwr-tvrd`, Stop Times `greh-g7ac`, Route Shapes
+  `7f8n-igfx`, Calendar Dates `f2sy-bth7`, Agency `isug-45sj`, Transfers
+  `hnhf-yaps`. Reading those directly means no zip and no 93-day-stale mirror,
+  and each table exposes its own `updatedAt` - which matters because, like
+  Calgary's and Toronto's, **Edmonton's feed carries no `feed_info.txt`.**
+  Prefer this over the zip.
 
 ## Sources
 

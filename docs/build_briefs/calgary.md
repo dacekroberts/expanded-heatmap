@@ -17,7 +17,8 @@ Claims are **MEASURED** or **ASSERTED**, per
 
 **75 storefronts within the 0.6 mi ring per in-city station** — 6,243 across
 83 stations. For scale: Vancouver 206, Montréal 151, Surrey 135, Edmonton 76,
-Calgary 75, Toronto 41, against D.C. ~173 and Boston ~39.
+Calgary 75, Toronto 81 (corrected 2026-09-21 — its published 41 was per
+PLATFORM; see `toronto.md`), against D.C. ~173 and Boston ~39.
 
 **The published figure was 103**, measured on every licence rather than
 storefronts (1.4x inflation — the smallest of the five mis-measured cities,
@@ -28,9 +29,44 @@ figures had them at 103 and 153. Neither is clearly ahead of the other, so
 choose between them on cost rather than density.
 
 **It is the biggest map of the four remaining**: 83 in-city stations, more than
-Boston's 71 and second only to Toronto's 234. At ~2x Boston's density it is
+Boston's 71 and second only to Toronto's 118. At ~2x Boston's density it is
 viable, not marginal — but it is the thinnest of the Canadian candidates that
 clears Boston.
+
+## Claims re-measured 2026-09-21, before any build
+
+Three of the five open questions below are now MEASURED. Done in advance
+because Vancouver's brief was wrong on five of eleven checkable claims and
+Montreal's on three of seven.
+
+- **The agency GTFS URL is FOUND and works** (was ASSERTED):
+  `https://data.calgary.ca/download/npk7-z3bj/application%2Fx-zip-compressed`,
+  12.0 MB. Its rail half reproduces the mirror exactly: 2 `route_type 0`
+  routes, **83 served stops, 83 distinct names**. So the 75/station figure's
+  denominator holds.
+- **NEITHER feed carries `feed_info.txt`.** The mirror's absence was already
+  recorded; the AGENCY feed has none either, so Calgary's staleness is
+  **structurally uncheckable from any source** rather than a mirror artefact.
+  The D.C.-style expiry guard cannot be written here - use the Socrata
+  resource's own `updatedAt` instead.
+- **`route_id` EMBEDS A FEED VERSION and changes between releases.** The mirror
+  gives `201-20780` / `202-20780`; the agency feed gives `201-20786` /
+  `202-20786`. **Match on `route_short_name` (201, 202), never on `route_id`** -
+  a config pinning the id silently matches nothing after the next release. No
+  other city in this project has versioned route ids.
+- **`jobstatusdesc` has SEVEN values, all measured** (was ASSERTED): Renewal
+  Licensed 15,962, Pending Renewal 2,889, Licensed 2,542, Renewal Invoiced
+  1,614, Move in Progress 168, Close in Progress 26, **Renewal Notification
+  Sent 2** - the seventh was absent from the earlier reading. Sums to 23,203.
+- **`licencetypes`, `point` and `tradename` are 100% populated** - zero nulls
+  and zero blanks on all three. No geocoding step, no name-fallback work.
+- **STILL ASSERTED: the two "City Boundary" layers.** The check was attempted
+  and INVALIDATED rather than answered: `data.calgary.ca/api/catalog/v1`
+  federates across the whole Socrata network and returned Cincinnati's and Los
+  Angeles' boundaries. A domain-scoped re-query returned only ward, park and
+  population boundaries - no city boundary at all - so the layer is named
+  something else, or lives on Calgary's ArcGIS rather than Socrata. Resolve
+  before step 1.
 
 ## Sources
 
