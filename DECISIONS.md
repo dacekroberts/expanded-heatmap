@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**113 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**114 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Tier 5 closed by browser navigation, and real-browser probing made a standing rule](#2026-09-22---tier-5-closed-by-browser-navigation-and-real-browser-probing-made-a-standing-rule)
 - [CDMX approved from OpenStreetMap as a per-city exception, and it passes both rail invariants](#2026-09-22---cdmx-approved-from-openstreetmap-as-a-per-city-exception-and-it-passes-both-rail-invariants)
 - [Mexico nationwide GIS probe: no new route, but CDMX is a retry rather than a loss](#2026-09-22---mexico-nationwide-gis-probe-no-new-route-but-cdmx-is-a-retry-rather-than-a-loss)
 - [Madrid's licence read; the Mobility Database moved its files, and Mexico City drops out of Band A](#2026-09-22---madrids-licence-read-the-mobility-database-moved-its-files-and-mexico-city-drops-out-of-band-a)
@@ -149,6 +150,91 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Tier 5 closed by browser navigation, and real-browser probing made a standing rule
+
+- **Established that opening a portal in a real browser is the FIRST move of
+  data research, not a fallback after fetching fails.** The owner directed this
+  after the method produced four verdicts in one sweep, and the evidence is
+  that the browser's answer differed from the guessed one every time.
+  GeoMedellin's ArcGIS Hub had been recorded as `data.json` 404 plus
+  `api/search/v1` 401, implying a wrong path; it renders "Please sign in. This
+  site requires credentials to access." - the site is private and no path
+  exists to find. `www.datosabiertos.gob.pe` had been recorded as "Drupal, not
+  CKAN, at every path tried"; it serves `/profiles/dkan/*`, so it is DKAN,
+  which speaks CKAN at `/api/3/action/*` - the earlier attempts had omitted the
+  `3`. `satudata.jakarta.go.id` had been recorded as "API paths resolve
+  nowhere"; watching its own UI gave `/backend/api/v2/satudata/*` and a fully
+  parameterised `/search?q=...` URL. `data.gov.my` had no API at all - it is
+  server-rendered, and all 292 datasets sit in the HTML. Rejected the previous
+  framing, which treated the browser as an escalation reserved for blocked
+  pages (the `read-licence` step 7 position). Written into
+  `.claude/skills/add-country/SKILL.md` as a new subsection under §3 with the
+  five-portal comparison table, and into `.claude/skills/add-city/SKILL.md` as
+  Step 0's item 0, ahead of the first `curl`.
+
+- **Colombia ruled out on three independent grounds, one of them a failure
+  shape this project had not seen.** GeoMedellin's Hub is credential-walled.
+  The Camara de Comercio de Medellin para Antioquia - the body that actually
+  holds the register - publishes 9 datasets on `datos.gov.co` and every
+  commercial one is an aggregate: `pb3w-3vmc` is 2,349 rows with the 16 comunas
+  as *columns* and CIIU as rows, under CC BY-SA 4.0. The third is the new one:
+  RUES `nb3d-v3n7` has **6,369,877 rows** of the right entity
+  (`categoria_matricula = ESTABLECIMIENTO DE COMERCIO`, expressly the premises
+  rather than the owning company) and **25 columns containing no address, no
+  municipality and no city name** - the finest geography is `camara_comercio`,
+  a chamber region spanning provinces. It also carries owner cedula numbers,
+  which this project would not publish regardless. A search of the national
+  portal for an Alcaldia de Medellin business-licence dataset found none,
+  though Ley 1712 requires publication there. Rules out Colombia entirely:
+  Bogota already failed on rail.
+
+- **Peru ruled out on coverage, the Daegu shape for the fourth time.** The
+  portal is the best-run of the group - 4,687 datasets via `package_list`,
+  direct CSVs with no account, ODC-BY (attribution only, no share-alike) - and
+  78 datasets name *licencia* or *funcionamiento*. Licensing is per *distrito*,
+  and of Linea 1's nine districts exactly one publishes usable data: La
+  Victoria, 135,982 rows with `Direccion` 100% populated and `Giros` at 54.3%.
+  Cercado de Lima's own file (Municipalidad Metropolitana, 5,613 rows) has no
+  address column and no trade name; San Borja publishes a 20-row metadata sheet
+  in place of data; the remaining six publish nothing. More than half the
+  line's stations would be blank. Chorrillos (9,767 rows, addressed) and Ate
+  (1,546 rows, unaddressed) publish but are not on Linea 1. Recorded two traps
+  for any future attempt: the CSVs wrap each record in quotes with `;;`
+  terminators and need a two-stage parse, and `Nombre` carries sole traders'
+  personal names.
+
+- **Jakarta ruled out because its register has no activity field - the other
+  half of the new trap.** Its live OSS register (DPMPTSP, `Sifat Data:
+  Terbuka`, metadata updated 25 May 2026) holds **53,827 rows with full street
+  addresses**, which reads as a pass until the columns are listed. There are
+  exactly **9**, confirmed against the portal's own component list rather than
+  the rendered table, and the two that look like classification are not:
+  `uraian_jenis_perusahaan` is the legal form (KOPERASI, PT) and
+  `skala_perusahaan` is the size (USAHA MIKRO). Nothing records what a business
+  sells, so `filter_to_storefront()` has nothing to act on. The rest of the
+  portal's commercial holdings are stale or restricted: `izin usaha` returns
+  five SIUP issuance logs from 2017-2018, three of them marked `Terbatas`, and
+  `restoran` returns counts-per-kelurahan and tax realisations. A `zzqqxx`
+  control returned 0 against 5,267 datasets, so the searches genuinely filter.
+
+- **Generalised both halves into one rule: a premises table needs a LOCATION
+  column and an ACTIVITY column, and they must be checked separately.**
+  Colombia has 6.4M located-nowhere rows with CIIU codes; Jakarta has 53,827
+  fully addressed rows with no classification. Each failed completely while
+  passing the test the other failed. Added to `add-country` §2 beside the
+  Malaysia sample trap, with the comparison table. Supersedes nothing - it sits
+  alongside the aggregate trap and the coverage trap as a third distinct way a
+  premises-shaped table can be unusable.
+
+- **Tier 5 closed: eight countries, seven firm negatives, one unreachable, no
+  survivors.** Hong Kong's FEHD is the single open thread, where the register
+  exists and is queryable with no bulk route found. Tel Aviv stays unreachable
+  on an IP-level refusal (HTTP 472 with our own address echoed back), which the
+  browser cannot route around. Updated `docs/city_master_list.md` (Band D rows,
+  the by-country tier table, and the Tier 5 remainder section) and appended the
+  full probe evidence to `docs/global_country_shortlist.md`, which is the trail
+  the master list defers to.
 
 ### 2026-09-22 - CDMX approved from OpenStreetMap as a per-city exception, and it passes both rail invariants
 

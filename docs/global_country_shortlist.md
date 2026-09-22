@@ -2916,3 +2916,95 @@ were mine.
 The second is the more useful lesson: **"has good public transit" and "publishes
 a feed this project can read" are independent properties**, and conflating them
 would have pointed the whole effort at the wrong continent.
+
+
+---
+
+## Tier 5 closed by browser navigation - 2026-09-22
+
+Every probe below used the same two moves: **navigate the site in a real
+browser before concluding anything about it**, then **enumerate providers
+rather than search keywords**. Four countries had been recorded as *"needs the
+browser"*; all four resolved, and the browser's answer differed from the
+guessed one every time.
+
+### 🇨🇴 Colombia - MEASURED NEGATIVE
+
+| Probe | Result |
+|---|---|
+| `geomedellin-m-medellin.opendata.arcgis.com` in the browser | **"Please sign in. This site requires credentials to access."** The Hub is **private** - hence the earlier `data.json` 404 and `api/search/v1` 401. No account will be created |
+| `www.datos.gov.co` (Socrata) control | `zzqqxx_nonsense_zzqq` -> **0 results**. The search filters; result lists are trustworthy |
+| Cámara de Comercio de Medellín para Antioquia - the register-holder | **9 distinct datasets**, every commercial one an aggregate. `pb3w-3vmc` *Estructura empresarial Medellín según comunas y actividad económica*: **2,349 rows**, the 16 comunas as **columns**, CIIU as rows. CC BY-**SA** 4.0 |
+| RUES `nb3d-v3n7`, *Establecimientos - Agencias - Sucursales* (Confecámaras) | **6,369,877 rows.** Right entity - `categoria_matricula = ESTABLECIMIENTO DE COMERCIO`. **25 columns, none of them an address, a municipality or a city.** Finest geography is `camara_comercio`, a multi-province chamber region. Also carries owner `CEDULA DE CIUDADANIA` numbers |
+| Alcaldía de Medellín as a publisher | **No business-licence dataset** on the national portal, where Ley 1712 requires publication |
+
+### 🇵🇪 Peru - MEASURED NEGATIVE on coverage
+
+The browser identified the platform in one load: the site serves
+`/profiles/dkan/*`, so it is **DKAN**, which speaks CKAN at `/api/3/action/*`.
+Earlier passes had tried `/api/action/*` and concluded "Drupal, not CKAN".
+`package_search` 404s but **`package_list` returns 4,687 dataset names** - the
+enumeration primitive, and local filtering sidesteps the silent-ignore question
+entirely.
+
+- **203** commercial-looking names; **78** mention *licencia* or *funcionamiento*
+- Licence: **ODC-BY** (`http://opendefinition.org/licenses/odc-by/`) - attribution only, no share-alike
+- Resources are **direct CSVs** under `sites/default/files/`, no account
+
+Coverage against Línea 1's nine districts:
+
+| District | Rows | Address | Note |
+|---|---|---|---|
+| La Victoria | **135,982** | **100%** | Real register. `Giros` 54.3%, licence type, status. Gamarra's garment trade dominates the activity mix |
+| Cercado (Mun. Metropolitana de Lima) | 5,613 | **none** | Administrative columns only - no address, no trade name. Found only by opening a dataset whose slug names no municipality |
+| San Borja | 20 x 3 cols | - | A **metadata sheet**, not data |
+| Surco, S.J. Miraflores, V.M. Triunfo, Villa El Salvador, El Agustino, S.J. Lurigancho | - | - | Nothing |
+
+Off-line but published: **Chorrillos** 9,767 rows with `LOCAL_DIRECCION` 100%
+populated; **Ate** 1,546 rows with no address column and a `NroDNI` field.
+
+Two parsing notes for any future attempt: the CSVs are **wrapped per record in
+quotes with `;;` terminators**, needing a two-stage parse (split on `;`, take
+field 0, then parse as CSV); and `Nombre` carries **sole traders' personal
+names**, making `check_personal_exposure.py` load-bearing rather than a
+formality.
+
+### 🇮🇩 Indonesia - MEASURED NEGATIVE
+
+`satudata.jakarta.go.id` is a JS app whose API was read straight off its own
+network panel: **`/backend/api/v2/satudata/*`** (`search-v2`,
+`searchautocomplete`, `detail`, `get-komponen-dataset/<hash>`), plus a fully
+parameterised search URL carrying `q`, `organisasi`, `status` and `page_no`.
+
+| Probe | Result |
+|---|---|
+| Control | `q=zzqqxx` -> **0 datasets**. The search filters |
+| Catalogue size | **5,267 datasets** |
+| `q=izin usaha` | 5 hits, all **SIUP issuance logs from 2017-2018**, and **three of five marked `Terbatas`** (restricted) |
+| `q=restoran` | 7 hits - *Jumlah Restoran per Kelurahan* (counts per sub-district), tax realisations, and a 2014 table. All aggregate |
+| `q=izin` | 100 hits |
+| **The live candidate** - *Daftar Perusahaan/Perizinan Usaha ... Online Single Submission (OSS)*, DPMPTSP, `Sifat Data: Terbuka`, metadata updated 25 May 2026 | **53,827 rows**, real street addresses |
+
+The OSS register's schema, confirmed against the portal's own component list
+(**9 of 9**) rather than the rendered table:
+
+`periode_data` - `wilayah` - `kecamatan` - `kelurahan` - `nama_perusahaan` -
+`alamat` - `nib` - `uraian_jenis_perusahaan` - `skala_perusahaan`
+
+`uraian_jenis_perusahaan` is *"Kategori perusahaan"* - the **legal form**
+(KOPERASI, PT) - and `skala_perusahaan` is *"Besaran usaha"* - the **size**
+(USAHA MIKRO, USAHA KECIL). **Nothing records what the business sells**, so
+`filter_to_storefront()` has nothing to act on. Scale is a second concern:
+53,827 for a province of 10.6 million against Seoul's 197,276 for 9.4 million,
+with `periode_data = 2025` and the visible rows dominated by cooperatives.
+
+### 🇮🇱 Israel - unreachable, unchanged
+
+HTTP 472 with our own IP echoed back is an IP-level refusal. The browser shares
+the address, so it is not a route.
+
+### What this closes
+
+**Tier 5: eight countries, seven firm negatives, one unreachable, no
+survivors.** Hong Kong's department (FEHD) remains the only open thread - the
+register exists and is queryable, with no bulk route found.

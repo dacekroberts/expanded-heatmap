@@ -92,14 +92,14 @@ below.
 | City | Rail (OSM) | Business leg |
 |---|---|---|
 | **Hong Kong** 🇭🇰 | 126 rel, 125 named, 117 coloured | **MEASURED NEGATIVE** on `data.gov.hk` — statistics tables only. Route left: **FEHD's licensed food premises list** (a department, not a portal) |
-| **Santiago** 🇨🇱 | 30 rel, all named + coloured | **MEASURED NEGATIVE** on `datos.gob.cl` — `patentes comerciales` returns nothing. Municipal portals remain |
+| **Santiago** 🇨🇱 | 30 rel, all named + coloured | **FAILS on coverage.** Only **5 of ~33** Metro comunas publish patentes, and the Santiago comuna is absent entirely |
 | **Rio de Janeiro** 🇧🇷 | 20 rel, all named + coloured | CNPJ, no coordinates → geocoding at São Paulo's scale |
-| **Kuala Lumpur** 🇲🇾 | 14 rel, all named + coloured | `data.gov.my` live, wrong endpoint; SSM is company-shaped |
-| **Jakarta** 🇮🇩 | **9 operating** of 11 — two are the proposed MRT East-West Line | `satudata.jakarta.go.id` live; stack unidentified |
-| **Medellín** 🇨🇴 | 6 rel, all named, **only 2 coloured** — colours need assigning by hand | ArcGIS — a shape this project handles |
+| **Kuala Lumpur** 🇲🇾 | 14 rel, all named + coloured | **FAILS — sample, not register.** `lookup_premise` is a genuine premises table with **372 rows in KL**; it serves a price survey |
+| **Jakarta** 🇮🇩 | **9 operating** of 11 — two are the proposed MRT East-West Line | **FAILS — no activity field.** OSS register: 53,827 rows, full addresses, 9 columns, none of them saying what a business sells |
+| **Medellín** 🇨🇴 | 6 rel, all named, **only 2 coloured** — colours need assigning by hand | **FAILS.** City Hub is credential-walled; chamber publishes comuna×CIIU crosstabs; the 6.4M-row national register has **no address column** |
 | **Tel Aviv** 🇮🇱 | 6 rel, **realistically 1** — Green and Purple are under construction and OSM does not mark them | `data.gov.il/api` 14 bytes; city portal **HTTP 472**, the documented IP refusal |
 | **Hyderabad** 🇮🇳 | 6 rel, all named + coloured | Trade licences are municipal; `data.telangana.gov.in` dead |
-| **Lima** 🇵🇪 | 4 rel, all named + coloured | `www.datosabiertos.gob.pe` live, wrong endpoint |
+| **Lima** 🇵🇪 | 4 rel, all named + coloured | **FAILS on coverage.** 78 licence datasets (ODC-BY), but **1 of Línea 1's 9 districts** publishes usable data |
 | **Kochi** 🇮🇳 | 2 rel, named + coloured | Kerala LSG live |
 
 > **The relation counts are upper bounds.** The construction filter flagged
@@ -250,11 +250,11 @@ register found**, and two have already failed at the national portal.
 |---|---|---|---|
 | 🇭🇰 **Hong Kong** | Hong Kong | **126 relations**, 125 named | **The register EXISTS and is queryable — but no bulk export found.** See below |
 | 🇨🇱 **Chile** ↓ **FAILS** | Santiago | **30 relations**, all named + coloured | **Coverage failure, measured.** Chile licenses per *comuna*; only **5 of ~33** Metro comunas publish patentes, and **the Santiago comuna itself is not on the portal at all**. See below |
-| 🇲🇾 **Malaysia** | Kuala Lumpur | 14 relations, all named + coloured | The right `data.gov.my` endpoint. SSM is company-shaped, so expect a registered-office failure |
-| 🇮🇩 **Indonesia** | Jakarta | 9 operating of 11 | Identify `satudata.jakarta.go.id`'s stack |
-| 🇨🇴 **Colombia** | Medellín | 6 relations, **only 2 coloured** | An **ArcGIS** probe — a shape this project already handles. Note colours would need assigning by hand. Bogotá is out: it fails on rail |
+| 🇲🇾 **Malaysia** ↓ **FAILS** | Kuala Lumpur | 14 relations, all named + coloured | **Sample, not register.** `lookup_premise` is a genuine premises table with **372 rows in KL** — it serves a price survey. See below |
+| 🇮🇩 **Indonesia** ↓ **FAILS** | Jakarta | 9 operating of 11 | **No activity field.** The live OSS register has 53,827 rows and full addresses across exactly 9 columns, none of which says what a business sells. See below |
+| 🇨🇴 **Colombia** ↓ **FAILS** | Medellín | 6 relations, **only 2 coloured** | **Three closed doors:** the city's Hub requires credentials, the chamber publishes comuna×CIIU crosstabs, and the 6.4M-row national register has **no address column**. See below |
 | 🇮🇳 **India** ↓ | Hyderabad, Kochi | 6 and 2 relations | **National portal measured negative** — 288,011 resources searched, nothing premises-level. Municipal corporations (GHMC, Kochi) unprobed. See below |
-| 🇵🇪 **Peru** | Lima | 4 relations, all named + coloured | The catalogue endpoint on `www.datosabiertos.gob.pe` |
+| 🇵🇪 **Peru** ↓ **FAILS** | Lima | 4 relations, all named + coloured | **Coverage, not existence.** 78 licence datasets under ODC-BY, but licensing is per *distrito* and **1 of Línea 1's 9** publishes usable data. See below |
 | 🇮🇱 **Israel** | Tel Aviv | 6 relations but **realistically 1** — Green and Purple are under construction | **Two problems:** the city portal returns **HTTP 472**, the documented IP-level refusal, and one operating line is thin for this project |
 
 ### Hong Kong, chased to the department — 2026-09-22
@@ -333,10 +333,12 @@ capital-aggregates case — Seoul, 25 of 25 — is the exception, not the rule.
 |---|---|---|
 | 🇮🇳 **India** | `api.data.gov.in/lists` **enumerates — 288,011 resources** | **MEASURED NEGATIVE.** Searched properly: `trade licence` 209, `shops and establishment` 112,346, `commercial establishment` 316, **`Kochi` 1** (port exports). Every premises-shaped hit is either **one city that is not ours** (*Shops And Establishment Licence : **Ahmedabad***) or **aggregate** (*Vyapar **District wise ULB wise** Trade License Details*). Hyderabad's 192 hits are all census tables. **The national portal does not carry it**; GHMC and Kochi Municipal Corporation are the remaining route |
 | 🇲🇾 **Malaysia** ↓ | Catalogue read in the browser — 292 datasets | **MEASURED NEGATIVE, and a new trap.** `lookup_premise` is a *genuine* premises table — `premise`, `address`, `premise_type`, `state`, `district`, **100% populated**, direct CSV, no auth. And it holds **3,916 rows nationally, 372 in Kuala Lumpur.** See below |
-| 🇨🇴 **Colombia** (Medellín) | — | ArcGIS Hub `data.json` **404**, `api/search/v1` **401**. The Hub search page is live HTML. **Needs the browser** to find the real service root |
-| 🇵🇪 **Peru** (Lima) | — | `www.datosabiertos.gob.pe` is Drupal, not CKAN, at every path tried. **Needs the browser** |
-| 🇮🇩 **Indonesia** (Jakarta) | — | `satudata.jakarta.go.id` API paths resolve nowhere; the site root is live. **Needs the browser** |
+| 🇨🇴 **Colombia** (Medellín) ↓ | Browser, then provider enumeration on `www.datos.gov.co` | **MEASURED NEGATIVE, and a new trap.** The Hub is **private** — it renders *"Please sign in. This site requires credentials to access."*, which is why `data.json` 404'd and `api/search/v1` 401'd. The register-holder publishes **crosstabs**; the national register has **no address column at all**. See below |
+| 🇵🇪 **Peru** (Lima) ↓ | Browser identified **DKAN**; `package_list` enumerated 4,687 datasets | **MEASURED NEGATIVE on coverage — the Daegu shape, 4th occurrence.** 78 licence datasets exist, keyless CSV, **ODC-BY**. But licensing is per *distrito*, and of Línea 1's **nine** districts exactly **one** publishes usable data. See below |
+| 🇮🇩 **Indonesia** (Jakarta) ↓ | Browser read its own API off the network panel | **MEASURED NEGATIVE, and the other half of the new trap.** The live OSS register has **53,827 rows and full street addresses** — and **no activity field**, so there is nothing to filter storefronts on. See below |
 | 🇮🇱 **Israel** (Tel Aviv) | — | **Not reachable by either method.** HTTP 472 and the host printed our own IP back — an IP-level refusal, so the browser shares the blocked address |
+
+**Tier 5 is now closed: seven firm negatives, one unreachable, zero survivors.**
 
 > **NEW TRAP — a real premises table can still be a SAMPLE, not a register.**
 > Malaysia's `lookup_premise` passes every structural test this project
@@ -359,11 +361,79 @@ capital-aggregates case — Seoul, 25 of 25 — is the exception, not the rule.
 > check is for. Malaysia's composition also gives it away on a second look:
 > 131 supermarkets and 69 mini-markets in a city of 1.8 million.
 
+> **NEW TRAP, second half — a located register with nothing to classify, and
+> a classified register with nothing to locate.** A premises table needs *two*
+> columns to be a map: **where** and **what**. Both halves failed on the same
+> day, in different countries, and each looked like a pass right up to the
+> column list:
+>
+> | | Rows | Location | Activity |
+> |---|---|---|---|
+> | Colombia, RUES `nb3d-v3n7` | **6,369,877** | **nothing** — not even a city | CIIU codes |
+> | Jakarta, OSS register | 53,827 | full street `ALAMAT` | **nothing** usable |
+>
+> Colombia's is the harder one to catch, because *6.4 million premises* reads
+> as a decisive pass. The rows are the right entity — `ESTABLECIMIENTO DE
+> COMERCIO`, the shop, expressly distinct from the company that owns it — and
+> there is no address, no municipality, no city name. The finest unit in the
+> file is `camara_comercio`, a chamber-of-commerce region spanning provinces.
+> (It also carries owner `CEDULA DE CIUDADANIA` numbers, which this project
+> would not publish in any case.)
+>
+> Jakarta's has exactly **9 columns**, checked against the portal's own
+> component list rather than the rendered table: `periode_data`, `wilayah`,
+> `kecamatan`, `kelurahan`, `nama_perusahaan`, `alamat`, `nib`,
+> `uraian_jenis_perusahaan`, `skala_perusahaan`. The last two are **legal
+> form** (KOPERASI, PT) and **size** (USAHA MIKRO) — neither says what the
+> business sells, so `filter_to_storefront()` has nothing to act on.
+>
+> **Ask the two questions separately.** "Is it premises-level?" does not imply
+> either one.
+
+#### Colombia — three doors, all closed
+
+1. **GeoMedellín's ArcGIS Hub is private.** The browser settled in one load
+   what two HTTP codes had left ambiguous. No path exists to find, and this
+   project does not create accounts.
+2. **The register-holder publishes crosstabs.** The *Cámara de Comercio de
+   Medellín para Antioquia* has nine distinct datasets on `datos.gov.co` and
+   every commercial one is an *Estructura empresarial* table with the **16
+   comunas as columns** and CIIU as rows — 2,349 rows of counts. Textbook
+   aggregate, and CC BY-**SA** into the bargain.
+3. **The national register has no location.** RUES, above.
+
+No *Alcaldía de Medellín* business-licence dataset exists on the national
+portal, which is where Ley 1712 requires publication.
+
+#### Peru — excellent data, in one district out of nine
+
+Peru's portal is the best-run of the group: **4,687 datasets**, keyless CSVs,
+**ODC-BY** (attribution only, no share-alike). **78** carry *licencia* or
+*funcionamiento*. It fails on coverage alone.
+
+| Línea 1 district | State |
+|---|---|
+| **La Victoria** | **135,982 rows**, `Direccion` **100%** populated, `Giros` 54.3%, licence type and status. A genuine register — and the Gamarra garment district shows plainly in its composition |
+| Cercado de Lima (Mun. Metropolitana) | 5,613 rows — **no address column, no trade name**. Administrative fields only |
+| San Borja | Publishes a **metadata sheet**, not data: 20 rows × 3 columns |
+| Surco · S.J. de Miraflores · V.M. del Triunfo · Villa El Salvador · El Agustino · San Juan de Lurigancho | **Nothing** |
+
+**One of nine.** The southern four districts and the northern two — more than
+half the line's stations — would be blank. Chorrillos does publish a good file
+(9,767 rows, addresses) and Ate publishes a poor one (1,546 rows, no address),
+but neither is on Línea 1.
+
+Two notes for any future attempt: the CSVs are **double-quoted with `;;`
+record terminators**, needing a two-stage parse; and `Nombre` carries
+**sole traders' personal names**, so the project's personal-exposure check
+would be load-bearing here rather than a formality.
+
 **The method is doing its job, and the honest summary is that it mostly
-closes things.** Of the eight Tier 5 countries, provider/API enumeration has
-now produced **three firm negatives** (Hong Kong's portal, Chile, India) and
-**one upgrade** (Hong Kong's department, which turned out to have *two*
-buckets). Four still need the browser, and one cannot be reached at all.
+closes things.** All eight Tier 5 countries are now settled: **seven firm
+negatives** — Hong Kong's portal, Chile, India, Malaysia, Colombia, Peru,
+Indonesia — **one upgrade** (Hong Kong's department, which turned out to have
+*two* buckets but no bulk route), and **one unreachable** (Tel Aviv).
+**No survivors.**
 
 **A parameter-encoding note that cost a pass:** India's API ignores
 `filters[title]=x` with literal brackets and honours `filters%5Btitle%5D=x`.

@@ -17,6 +17,16 @@ trail is in `DECISIONS.md`). If this is a fresh session, read those, plus
 search summaries and dataset titles, and both had no usable data on direct
 schema verification. Do this for every candidate before scaffolding:
 
+0. **Open the portal in a real browser first.** Before any `curl`, load the
+   site and watch what its own UI calls. This is a standing rule, not a
+   fallback for when fetching fails - see `add-country` §3, where five portals
+   in one sweep each gave up in one page load what rounds of path-guessing had
+   not: a sign-in wall (GeoMedellín), a server-rendered catalogue with no API
+   at all (`data.gov.my`), a DKAN install whose CKAN path needed the `3`
+   (Peru), and two real API roots read straight off the network panel (Seoul,
+   Jakarta). Guessing tells you a path 404s; navigating tells you what the
+   portal *is*.
+
 1. **Business data.** Find the real open-data portal and pull the *live*
    schema, not a description page. Socrata: `curl -s "<domain>/api/views/<id>.json"`
    for columns, then `<domain>/resource/<id>.json?$limit=3` for sample rows.
