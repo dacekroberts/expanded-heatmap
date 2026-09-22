@@ -446,6 +446,13 @@ CITIES = [
         "blurb": "Metro de Barcelona (L1–L12 across TMB and FGC, plus the "
                  "Montjuïc and Vallvidrera funiculars, 112 stations inside "
                  "the city)",
+        # Spain's two cities sit 500 km apart but frame close together, and
+        # Madrid's label goes ABOVE its marker - so Barcelona's goes to the
+        # RIGHT rather than stacking into it. Omitting this key is not a
+        # neutral default: pd.DataFrame fills a missing key with float('nan'),
+        # and nan is truthy, which is what took the Overview down on
+        # 2026-09-22.
+        "label_offset": ("start", 14, 6),
         "region": "Spain",
     },
 ]
