@@ -353,14 +353,16 @@ above are the same claim; if they drift, this fails.
   },
   {
     "id": "ttc-subway-stations",
-    "claim": "Subway only: 148 platforms -> 72 stations (Line 1 38 + Line 2 31 + Line 4 5, less 3 interchanges = 71)",
+    "claim": "Subway only: 148 platforms -> 71 stations, matching the TTC exactly (38 + 31 + 5 less 3 interchanges)",
     "kind": "gtfs_stations",
     "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/7795b45e-e65a-4465-81fc-c36b9dfff169/resource/cfb6b2b8-6191-41e3-bda1-b175c51148cb/download/opendata_ttc_schedules.zip",
     "route_types": [1],
     "expect_platforms": 148,
-    "expect_stations": 72,
+    "expect_stations": 71,
     "expect_parent_station_populated": false,
     "strip_patterns": [
+      "\\s*-\\s*\\w+bound Platform Towards .*$",
+      "\\s+\\w+bound Platform Towards .*$",
       "\\s*-\\s*\\w+bound Platform\\s*$",
       "\\s+\\w+bound Platform\\s*$",
       "\\s+LRT Platform\\s*$",
@@ -373,16 +375,18 @@ above are the same claim; if they drift, this fails.
   },
   {
     "id": "ttc-subway-lrt-stations",
-    "claim": "Subway + LRT Lines 5/6: 234 platforms -> 111 stations, no non-revenue stops, median spacing 632 m",
+    "claim": "Subway + LRT Lines 5/6: 234 platforms -> 110 stations (108 in-city), no non-revenue stops, median spacing 635 m",
     "kind": "gtfs_stations",
     "url": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/7795b45e-e65a-4465-81fc-c36b9dfff169/resource/cfb6b2b8-6191-41e3-bda1-b175c51148cb/download/opendata_ttc_schedules.zip",
     "route_types": [0, 1],
     "route_name_regex": "^Line \\d",
     "expect_platforms": 234,
-    "expect_stations": 111,
-    "expect_boardable_stations": 111,
+    "expect_stations": 110,
+    "expect_boardable_stations": 110,
     "expect_parent_station_populated": false,
     "strip_patterns": [
+      "\\s*-\\s*\\w+bound Platform Towards .*$",
+      "\\s+\\w+bound Platform Towards .*$",
       "\\s*-\\s*\\w+bound Platform\\s*$",
       "\\s+\\w+bound Platform\\s*$",
       "\\s+LRT Platform\\s*$",
@@ -409,6 +413,16 @@ the one that could still move Toronto); the licence-category vocabulary, which
 `brief_check` could cover but only once a `ckan_distinct` kind exists; and
 whether a two-bucket map of 111 stations is worth publishing at all, which is
 the owner's call.
+
+> **These checks were STALE and PASSING, which is worth recording.** They were
+> written before the build and encoded a strip pattern the build then improved:
+> Union Station names its *destination* ("Union Station - Northbound Platform
+> Towards Finch"), which no pattern here handled, so Union counted twice and
+> Line 1 read 39 stations against the TTC's 38. The checks passed at 111/72
+> because they measured their own worse method. **A check can only test what it
+> encodes**, so when a build improves on a brief's method the checks have to be
+> brought forward too - synced to `pipeline/toronto/config.py`'s
+> `STATION_STRIP_PATTERNS` on 2026-09-21, giving 110 stations and 71 subway.
 
 ## Open questions
 
