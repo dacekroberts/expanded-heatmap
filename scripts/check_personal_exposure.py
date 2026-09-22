@@ -133,6 +133,17 @@ REGISTRIES = {
     "madrid": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv",
                    address=("address",)),
+    # Barcelona: raw=None because the fallback pair does not exist to measure.
+    # The Cens de locals is a FIELD SURVEY of premises, not a register of
+    # registrants - `Nom_Local` is a shop sign and is populated on every row,
+    # so step 2 has nothing to fall back TO and asserts as much. There is also
+    # no address column: `USECOLS` never requests one, the map needs only
+    # coordinates, and `Referencia_Cadastral` (a property-title reference) is
+    # in FORBIDDEN_COLUMNS. So the unit-indicator check is skipped because
+    # there is no address text in the pipeline at all, not because it was not
+    # run.
+    "barcelona": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv", address=None),
     # Washington D.C. is the first city since Chicago where the trade/owner
     # fallback pair genuinely EXISTS and has to be measured rather than
     # reported as structurally absent. Its step 2 falls back from

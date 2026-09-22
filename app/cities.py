@@ -438,6 +438,14 @@ CITIES = [
         # scripts/check_macro_labels.py across six regions and three widths.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Barcelona",
+        "lat": 41.3874,
+        "lon": 2.1686,
+        "page": "pages/18_Barcelona_Heatmap.py",
+        "blurb": "Barcelona Metro (TODO: list the lines)",
+        "region": "Spain",
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
