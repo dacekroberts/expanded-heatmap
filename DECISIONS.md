@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**115 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**116 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Three food-authority probes: Bucharest promoted, Budapest closed, Sofia unreachable](#2026-09-22---three-food-authority-probes-bucharest-promoted-budapest-closed-sofia-unreachable)
 - [Tier 6 reached; Stockholm is a real register four hops deep, and Sofia's 403 reading was wrong](#2026-09-22---tier-6-reached-stockholm-is-a-real-register-four-hops-deep-and-sofias-403-reading-was-wrong)
 - [Tier 5 closed by browser navigation, and real-browser probing made a standing rule](#2026-09-22---tier-5-closed-by-browser-navigation-and-real-browser-probing-made-a-standing-rule)
 - [CDMX approved from OpenStreetMap as a per-city exception, and it passes both rail invariants](#2026-09-22---cdmx-approved-from-openstreetmap-as-a-per-city-exception-and-it-passes-both-rail-invariants)
@@ -151,6 +152,86 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Three food-authority probes: Bucharest promoted, Budapest closed, Sofia unreachable
+
+- **Ran the agreed budget exactly: one attempt each at Hungary's, Romania's
+  and Bulgaria's food authority, food-authority route only, hard stop.** The
+  owner approved this over declaring the five Tier 6 countries non-viable,
+  which would have repeated the error this list's own maintenance rule exists
+  to prevent - eleven cities once sat in the discard list on "not reached"
+  grounds. The reasoning for going to the food authority rather than back to
+  the portals: all five are EU, so Regulation 852/2004 means a food-business
+  register EXISTS by law in each; the only question is publication. That is a
+  structurally different bet from retrying a portal, and it is the route that
+  had just produced Stockholm.
+
+- **Promoted Bucharest from Tier 6 to Band C - the second promotion of the day
+  out of the band that read "never actually reached".** ANSVSA's 503 to curl
+  turned out to be a "Verifying your browser" JS challenge rather than a down
+  host, which the browser walked through; this is the second time in one sweep
+  that a browser converted a fetch failure into a live site. Behind it:
+  *Unitati de vanzare cu amanuntul INREGISTRATE* - the 852/2004 REGISTRATION
+  list for retail, which is the thing Hungary lacks - published per county,
+  with Municipiul Bucuresti at `bucuresti.dsvsa.ro` as **34 XLSX files, one per
+  category, refreshed 25/08/2026**. Measured **31,299 premises across 14 of the
+  34 categories**: 13,279 *unitate de alimentatie publica*, 10,488 *magazin
+  alimentar*, 1,366 canteens, 1,108 pastry labs, 838 confectioners, 837
+  butchers, 813 pizzerias, 716 catering, 709 hyper/supermarkets, 464 food
+  warehouses, 285 fishmongers, 270 meat shops, 108 guesthouses, 18 honey shops.
+  Columns are `Nr. crt.` / `Denumirea unitatii` / `Adresa` / `Sector` /
+  `Categorie unitate` / registration number, e.g. "Boutique Du Pain Bucharest,
+  Academiei 28-30,S1, sector 1, Restaurant, 6645/20.03.2023". **The filename is
+  the taxonomy**, which supplies exactly what Jakarta's register lacked, and
+  the second list (non-animal origin) plus 20 uncounted categories are still
+  unmeasured, so 31,299 is a floor.
+
+- **Recorded three things Bucharest still needs, and did not let the good
+  result blur them.** Two are screening rather than build work: its **rail has
+  never been counted in OSM** (M1-M5, ~63 stations claimed, unverified), and
+  its **licence is unread**. The third is operational: both `ansvsa.ro` and
+  `bucuresti.dsvsa.ro` sit behind the JS challenge, so the pipeline's fetch
+  step needs a route through it that is **not a bot-detection bypass** - the
+  files were read for this probe by fetching them inside the browser that had
+  legitimately passed the challenge and inflating the XLSX with the browser's
+  own `DecompressionStream`, never by replaying a clearance cookie to curl.
+  Placed in Band C because the dominant remaining cost is a geocoding leg:
+  there are no coordinates, only Romanian street addresses.
+
+- **Closed Hungary as a firm negative on both routes.** Nebih's FELIR - the
+  national food-chain operator register - is **CAPTCHA-gated**
+  (`service.mtcaptcha.com`) and is in any case a one-customer-at-a-time
+  verification lookup rather than an enumerable register. Its *Approved
+  Establishments* holding is **two PDFs**, and the page states exactly what
+  "approved" covers: slaughterhouses, meat-cutting plants, meat-product makers,
+  dairies, egg packers, fish processors, game processors, cold stores and
+  casing plants. **Processing plants, not one retail or catering premises.**
+  The structural reason generalises and is worth carrying forward: EU
+  *approval* under 853/2004 covers animal-origin processing, while retail and
+  catering are only *registered* under 852/2004 - and in Hungary that
+  registration sits with county and district government offices, unpublished.
+  The devolution pattern again. Nebih's public-data page is a statutory request
+  procedure under the 2023. evi CI. torveny, not open data.
+
+- **Recorded Bulgaria as UNREACHABLE rather than negative.** BABH does not
+  resolve at any domain tried - `babh.government.bg`,
+  `www.babh.government.bg`, `babh.bg`, `bfsa.bg`, `babh.egov.bg` - and its
+  parent ministry, which is live, surfaces no register. Combined with
+  `data.egov.bg` returning 403 in the browser as well as to curl, every route
+  into Bulgaria is a host wall. That is an absence of evidence, not evidence of
+  absence, and it is recorded as such. `www.sofia.bg` and
+  `portal.registryagency.bg` are live and unprobed.
+
+- **Parked Tallinn and Zagreb on VALUE, not viability, and said so in those
+  words.** Both are tram-only cities under 800k, so even a success is a thin
+  map; that is a defensible reason to stop, where calling them non-viable would
+  not be. Neither is discarded and neither has a data finding against it.
+
+- **Net effect on the list: 43 candidates unchanged, but better distributed.**
+  Band C 17 -> 18 (Bucharest), Band D 15 -> 14, D-c retitled again to "REACHED;
+  one promoted, two parked, two walls". The two best new results of the whole
+  sweep - Stockholm and Bucharest - both came out of the tier that had looked
+  deadest.
 
 ### 2026-09-22 - Tier 6 reached; Stockholm is a real register four hops deep, and Sofia's 403 reading was wrong
 

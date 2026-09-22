@@ -29,13 +29,18 @@ Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 |---|---|---|---|
 | **A** | Nothing. Screening complete | **7** | — |
 | **B** | One narrow question each | **4** | ▲ **+Stockholm** |
-| **C** | A geocoding leg — build work, not screening | **17** | — |
-| **D** | Four sub-tiers, see below | **15** | ▼ −6 |
+| **C** | A geocoding leg — build work, not screening | **18** | ▲ **+Bucharest** |
+| **D** | Four sub-tiers, see below | **14** | ▼ −7 |
 | *Discarded* | Measured negative, evidence named | *19* | ▼ **+5** |
 
 **Net: the screen got smaller and more honest.** Nothing was lost that was
 ever measured as viable — the five drops were all cities whose business leg
 had never been tested, and testing it is what removed them.
+
+**Two cities were promoted the same day**, both by the same method and both
+out of the band that used to read "never actually reached": **Stockholm** to B
+and **Bucharest** to C. The tier that looked deadest produced the two best new
+results in the sweep.
 
 ---
 
@@ -79,7 +84,7 @@ probes**:
    `read-licence` step 8 — so it needs the publisher asked. That it fetches is
    not a finding that it is licensed.
 
-## Band C — viable, each needs a GEOCODING LEG (17 cities)
+## Band C — viable, each needs a GEOCODING LEG (18 cities)
 
 Build work with a known cost. No further probing changes these.
 
@@ -90,13 +95,22 @@ Build work with a known cost. No further probing changes these.
 | **Oslo** *(1)* | 🇳🇴 | 152,060 sub-units, `beliggenhetsadresse` (physical, not registered), NACE, open API no key | Moderate |
 | **Copenhagen** *(1)* | 🇩🇰 | CVR `productionunits` — P-enheder each with own `address`/`zipcode`/`city`, plus `industrycode` | Moderate — **plus a free account** (`distribution.virk.dk` 401) |
 | **São Paulo** *(1)* | 🇧🇷 | CNPJ — trade name, address, CNAE | **Hard, past Toronto's scale** |
+| **Bucharest** 🇷🇴 ▲ *(1)* | 🇷🇴 | **DSVSA's registered-premises lists — 31,299 premises across 14 of 34 categories**, name + `Adresa` + `Sector` + `Categorie unitate`, refreshed 25/08/2026. Food bucket, but a WIDE one: 13,279 catering, 10,488 food shops, 709 hyper/supermarkets | **Unmeasured** — no coordinates, Romanian addresses |
+
+**▲ Bucharest was promoted out of Tier 6 on 2026-09-22** by the food-authority
+probe. **Two cheap checks are still outstanding and are screening, not build
+work:** its rail has never been counted in OSM (M1–M5, ~63 stations claimed,
+unverified), and its licence is unread. A third item is operational rather than
+legal: `ansvsa.ro` and `bucuresti.dsvsa.ro` sit behind a **"Verifying your
+browser" JS challenge**, so the pipeline's fetch step needs a route through it
+that is not a bot-detection bypass.
 
 **Japan is ten cities from one schema** — the best marginal-city cost in the
 screen — against the worst geocoding problem and a two-bucket ceiling.
 **Still the biggest open decision in this list**, and a judgment call rather
 than a probe.
 
-## Band D — 15 cities, four sub-tiers
+## Band D — 14 cities, four sub-tiers
 
 ### D-a — one cheap question each (4)
 
@@ -131,7 +145,7 @@ below.
 > marker. **A filter returning zero can mean "nothing to flag" or "this
 > convention is not used here", and the result alone cannot tell you which.**
 
-### D-c — REACHED, and each one is a host failure (5)
+### D-c — REACHED; one promoted, two parked, two walls (4)
 
 Retitled 2026-09-22: these were "genuinely unreached, no finding either way".
 All six have now been reached. **Stockholm was the one that paid off and has
@@ -140,11 +154,10 @@ finality, and none is a *data* negative.
 
 | City | What the host actually does |
 |---|---|
-| **Tallinn** 🇪🇪 | API **found** by watching the site's own UI — `andmed.eesti.ee/api/datasets/search` — but it returns **400** to an empty `search` and to `limit=1000`, so the contract is unpinned. `toitlustus` gives 16 datasets, all school-catering statistics. The real route is likely **MTR**, unprobed. Lowest-value city in the band: trams only, ~450k |
-| **Zagreb** 🇭🇷 | `data.gov.hr` answers 200 at **four** paths — including `data.json` — with the **identical 1,291-byte** body. An SPA shell. Still needs the browser |
-| **Budapest** 🇭🇺 | **Misidentified until now.** `kozadat.hu` is a *search tool over public bodies' data inventories*, not a data portal. `budapest.hu` loads 425 KB containing two data-ish links, one a privacy PDF |
-| **Bucharest** 🇷🇴 | `data.gov.ro` **times out at the connection** (21 s, root and API alike); `portal.onrc.ro` does not resolve; `www.pmb.ro` is a 2,483-byte shell |
-| **Sofia** 🇧🇬 | **CORRECTED.** The 403 was twice read as a stock Apache page implying a client-signature refusal worth a browser retry. **The browser returns the same 403.** `data.sofia.bg` and `opendata.sofia.bg` do not resolve. `www.sofia.bg` and `portal.registryagency.bg` are live and unprobed |
+| **Tallinn** 🇪🇪 ⏸ | **PARKED ON VALUE, not viability — 2026-09-22.** Trams only, ~450k; even a success is a thin map. API found (`andmed.eesti.ee/api/datasets/search`) but returns **400** to an empty `search` and to `limit=1000`, so the contract is unpinned; `toitlustus` gives 16 datasets, all school-catering statistics. **MTR** is the likely route, unprobed. Revisit only if a method makes it cheap |
+| **Zagreb** 🇭🇷 ⏸ | **PARKED ON VALUE, not viability — 2026-09-22.** Trams only, ~770k. `data.gov.hr` answers 200 at **four** paths — including `data.json` — with the **identical 1,291-byte** body, an SPA shell. Still reachable by browser if it is ever worth the hour |
+| **Budapest** 🇭🇺 ✗ | **FIRM NEGATIVE — the food-authority route is closed too.** Nébih's FELIR is **CAPTCHA-gated** (`service.mtcaptcha.com`) and is a one-customer-at-a-time lookup, not a register. Its *Approved Establishments* list is **two PDFs of processing plants** — the page names them: slaughterhouses, meat-cutting plants, dairies, egg packers, fish and game processors, cold stores. Retail and catering are only *registered*, by county offices, unpublished. Separately, `kozadat.hu` is a search tool over data inventories, not a portal |
+| **Sofia** 🇧🇬 | **UNREACHABLE, still not a negative.** `data.egov.bg` returns **403 in the browser too**, correcting the earlier client-signature reading. The food authority (**BABH**) does not resolve at **any** domain tried — `babh.government.bg`, `www.babh.government.bg`, `babh.bg`, `bfsa.bg`, `babh.egov.bg` — and its parent ministry, which IS live, links no register. `www.sofia.bg` and `portal.registryagency.bg` remain live and unprobed |
 
 ### D-d — one cheap gate (1)
 
@@ -305,7 +318,7 @@ in a way that matters, so the publisher gets asked.
 its own probe. Ranked below Tier 4 for that reason, despite being further
 along than any of Tier 4's four.
 
-## Tier 6 — reached, and every one is a HOST failure (5 countries, 5 cities)
+## Tier 6 — reached; one promoted out, one closed, three left (4 countries, 4 cities)
 
 **No data finding either way**, so none of these is a negative. Reached
 2026-09-22; what each host actually does is recorded in Band D-c above.
@@ -314,8 +327,7 @@ along than any of Tier 4's four.
 |---|---|---|
 | 🇪🇪 **Estonia** | Tallinn | API found (`andmed.eesti.ee/api/datasets/search`), contract unpinned — **400** on empty `search` and on `limit=1000`. **MTR** is the likely real route, unprobed |
 | 🇭🇷 **Croatia** | Zagreb | `data.gov.hr` — **identical 1,291-byte SPA shell** at four paths incl. `data.json` |
-| 🇭🇺 **Hungary** | Budapest | `kozadat.hu` is a **search tool over data inventories**, not a portal; `budapest.hu` has no catalogue |
-| 🇷🇴 **Romania** | Bucharest | `data.gov.ro` **times out at the connection**; `portal.onrc.ro` does not resolve |
+| 🇭🇺 **Hungary** ✗ **CLOSED** | Budapest | **Firm negative on both routes.** Portal: `kozadat.hu` is a search tool over data inventories. Food authority: FELIR is CAPTCHA-gated and lookup-only; approved-establishment lists are PDFs of processing plants |
 | 🇧🇬 **Bulgaria** | Sofia | **403 in the browser too** — correcting the earlier client-signature reading. `www.sofia.bg` and `portal.registryagency.bg` live, unprobed |
 
 ## CLOSED — the former Tier 5 (8 countries, 9 cities)
