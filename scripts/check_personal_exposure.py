@@ -207,6 +207,16 @@ REGISTRIES = {
     "edmonton": dict(raw=None, trade=None, owner=None,
                      processed="businesses_clean.csv",
                      address=("address",)),
+    # Toronto publishes THREE personal columns - `Client Name`, `Business
+    # Phone` and `Business Phone Ext.` - and step 2 never reads any of them:
+    # they are excluded at `usecols`, so they do not enter the process rather
+    # than being dropped after. `Operating Name` is blank on 0.5% of storefront
+    # rows and those rows are dropped rather than filled, so no pin can be a
+    # registrant's name. Its processed file is the GEOCODED one, since the
+    # register carries no coordinates.
+    "toronto": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_geocoded.csv",
+                    address=("address",)),
     "vancouver": dict(raw="vancouver_business_licences.csv", sep=";",
                       trade="businesstradename", owner="businessname",
                       processed="businesses_clean.csv",

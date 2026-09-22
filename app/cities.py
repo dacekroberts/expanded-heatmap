@@ -296,6 +296,24 @@ CITIES = [
         # sum of the two offsets rather than the difference.
         "label_offset": ("start", 12, -6),
     },
+    {
+        "name": "Toronto",
+        "lat": 43.6532,
+        "lon": -79.3832,
+        "page": "pages/14_Toronto_Heatmap.py",
+        "blurb": "TTC (Lines 1, 2 and 4 subway; Lines 5 and 6 LRT)",
+        # OUTSIDE THE DEFAULT VIEW, like the other Canadian cities. Toronto is
+        # the closest of the four to the framed region - its longitude sits
+        # inside the US span and its latitude only just north of Boston's - so
+        # its dot lands near the frame's top edge rather than off the map.
+        "in_default_view": False,
+        # EAST of its dot and slightly ABOVE, which is the band Chicago's label
+        # was moved south to free on 2026-09-21 - see the Chicago entry, which
+        # recorded Toronto's dot at x 506.6, y 182.0 before this city existed.
+        # Running east keeps it clear of Boston and New York, which sit east of
+        # their own dots further south.
+        "label_offset": ("start", 12, -10),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

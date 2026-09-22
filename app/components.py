@@ -415,6 +415,15 @@ _NOTICES = [
     # not a sentence to reproduce. The credit is included because the terms
     # encourage it, and the transformation is stated because this project always
     # draws interpretations.
+    # Toronto, added 2026-09-21. ONE notice covers BOTH the MLS business
+    # register and the TTC's GTFS - both are City of Toronto CKAN resources
+    # under the same licence, so this city adds one line where Vancouver added
+    # three. VERBATIM, en dash, British "Licence". Like Vancouver's, Surrey's
+    # and Calgary's, this licence TERMINATES AUTOMATICALLY on breach.
+    ("City of Toronto",
+     "Contains information licensed under the Open Government "
+     "Licence – Toronto.",
+     True),
     ("City of Edmonton",
      "Contains datasets made publicly available by the City of Edmonton under "
      "its Open Data Terms of Use, at "

@@ -82,6 +82,10 @@ TAXONOMY_MODULES = {
     "vancouver": "pipeline.taxonomies.vancouver",
     "calgary_licencetype": "pipeline.taxonomies.calgary_licencetype",
     "edmonton_licencecategory": "pipeline.taxonomies.edmonton_licencecategory",
+    # Toronto's MLS Category. The only Canadian register with no general-retail
+    # licence, so its Retail bucket is the REGULATED slice alone (4.2% of its
+    # storefronts) - New York's and Boston's shape rather than Calgary's.
+    "toronto_mlscategory": "pipeline.taxonomies.toronto_mlscategory",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

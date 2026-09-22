@@ -105,9 +105,22 @@ LINE_NAMES = {
 # BOTH MODES, dark first, against the burnt-orange heat ramp - see
 # pipeline/map_common.HEAT_GRADIENT, and D.C.'s Silver Line for the case where
 # measuring only the light basemap gave a backwards answer.
+# CORRECTED 2026-09-21, on the owner's go-ahead. The Blue Line shipped as
+# `#0072CE`, Calgary Transit's own colour - and that sits **CIE76 Delta-E 3.3
+# from Retail's `#2a78d6`**, which is to say it is the same blue as the pins
+# drawn on top of it. Nobody measured it; it was found while choosing
+# Edmonton's palette, where the same check ran for the first time.
+#
+# Darkened to `#082F49` (min Delta-E 49.2 against the three category colours),
+# which still reads as the Blue Line. That is **the same navy as Edmonton's
+# Capital Line, deliberately**: colour separation is an intra-city constraint
+# only, since each city renders its own map with its own legend and labels, so
+# reuse across cities costs nothing. See the add-city skill.
+#
+# The Red Line's `#CC0000` is Calgary Transit's own and passes at 49.3.
 LINE_COLOURS = {
-    "201": "#CC0000",   # Red Line
-    "202": "#0072CE",   # Blue Line
+    "201": "#CC0000",   # Red Line - Calgary Transit's own
+    "202": "#082F49",   # Blue Line - CT's #0072CE was Delta-E 3.3 from Retail
 }
 
 # ONE shape per line, the most-used trip shape, as most cities here use.
