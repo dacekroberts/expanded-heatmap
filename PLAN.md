@@ -348,6 +348,22 @@ Desktop is unaffected — the label is fully visible there.
 
 ## Structure
 
+- [ ] **Write `scripts/check_stale_claims.py`**, the reporting half of the
+  cleanup role. `check_provenance.py` covers what is deterministic; three
+  defect classes in `.claude/skills/consistency-sweep/` are swept by hand and
+  each produced real defects on 2026-09-22:
+  **(a) prose in the future tense about a present that arrived** - three files
+  said Canada was unbuilt while six municipalities were, and one said D.C. was
+  unbuilt. Grep candidates: `none built`, `not built`, `unbuilt`, `if any`,
+  `when one is`, `would require`, `not yet`, `eventually`.
+  **(b) hand-kept counts** - four wrong in one file, one contradicting itself
+  two clauses later ("thirteen sources" then "six of the twelve").
+  **(c) headings whose contents moved on** - `## Transit feeds (GTFS)` held
+  three non-GTFS sources.
+  It should **report, never fail**, because all three are heuristics and a
+  noisy gate gets ignored. Deferred 2026-09-22 on pacing, not on doubt: the
+  design is settled, it is the test loop that costs.
+
 - [x] ~~Fill in the remaining local taxonomy skeleton (`phl_licensetype`)~~ -
   **done 2026-09-21** from the full `SELECT DISTINCT licensetype` pull; all 50
   active types carry an explicit verdict. No taxonomy skeletons remain.

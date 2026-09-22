@@ -57,6 +57,16 @@ relax. If a brief has no checks block, add one for the claims you rely on.
 paths each role owns, and the worktree-per-session split that keeps them from
 colliding. A single session does all of it and can ignore that file.
 
+**Auditing rather than building? Use `consistency-sweep`**
+(`.claude/skills/consistency-sweep/`) - the cleanup role. It sweeps for what
+the forward-facing sessions leave behind: prose still written in the future
+tense about a present that arrived, hand-kept counts that drifted, references
+broken by renumbering, sources in use whose terms were never read, tables that
+stopped rendering, branches and worktrees outliving their work. **Its preferred
+output is a check rather than a correction**, which is why it owns
+`scripts/check_*.py` - `check_provenance.py` was written to close one gap a
+reader had already found and immediately found five more.
+
 ## Invariants
 
 - **Live-verify a city's real data schema before writing any pipeline code

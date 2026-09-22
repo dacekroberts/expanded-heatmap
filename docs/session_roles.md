@@ -34,6 +34,7 @@ they hold different cities, because their paths do not intersect.
 | **Staging / research** | `docs/`, `.claude/skills/`, screening `scripts/`, country profiles, Step 0 evidence, build briefs |
 | **Build `<city>`** | `pipeline/<city>/`, `outputs/<city>/`, that city's `app/pages/` file, its row in `app/cities.py`, its taxonomy module |
 | **App / chrome** | `app/` chrome, `pipeline/map_common.py`, `pipeline/theme.py`, `.streamlit/`, shared helpers under `pipeline/` |
+| **Cleanup / audit** | **No exclusive paths** — see below. Owns the *checks*: `scripts/check_*.py` |
 
 Shared pipeline code — `map_common.py`, `drift_check.py`, `pipeline/theme.py`,
 anything under `pipeline/taxonomies/` that is not one city's module — belongs
@@ -41,6 +42,35 @@ to whoever claimed the app/chrome role, or to the staging session when no third
 window exists. **It is never edited opportunistically mid-build by a session
 that does not own it**, because it is the surface every other session's output
 depends on.
+
+## The cleanup role owns no paths, and that is deliberate
+
+Its job is cross-cutting by nature — stale prose in `docs/`, a drifted count in
+a licence table, a heading that stopped describing its contents, an empty
+worktree directory. Allocating it paths would either take `docs/` away from the
+research session or give it nothing to do. So it runs on different rules:
+
+- **Sweep narrow and commit immediately.** Its only protection against a
+  collision is a short window between reading a file and committing the fix. A
+  two-hour sweep across nine files will meet somebody.
+- **Verify against `origin/master`, never the local tree.** It reports on other
+  sessions' work, so it is the role most likely to be reading a stale checkout.
+  On 2026-09-22 two of three findings relayed between sessions were stale rather
+  than wrong — both described a file that had changed by 339 lines since the
+  reporting session branched.
+- **It never merges a branch it does not own**, and reads the commit message
+  before drawing conclusions from the branch graph. A branch held off master
+  deliberately looks exactly like an abandoned one.
+- **It does not edit a file another session has uncommitted**, and does not
+  rewrite pipeline, taxonomy or step logic. A real bug there is handed over.
+- **Its preferred output is a check, not a correction** — which is why it owns
+  `scripts/check_*.py`. A correction fixes one instance; a check keeps finding
+  the class after the session ends. `scripts/check_provenance.py` was written
+  to close a gap a reader had already found by hand, and immediately found five
+  more.
+
+The skill is `.claude/skills/consistency-sweep/`, and it carries the defect
+taxonomy — eight shapes, each with the real instance that produced it.
 
 ## Each non-primary session works in its own worktree
 

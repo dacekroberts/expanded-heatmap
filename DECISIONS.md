@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**134 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**135 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [A third session role: auditing what the forward-facing sessions leave behind](#2026-09-22---a-third-session-role-auditing-what-the-forward-facing-sessions-leave-behind)
 - [Madrid's provenance recorded before its wiring lands, and the transit table stopped calling itself GTFS](#2026-09-22---madrids-provenance-recorded-before-its-wiring-lands-and-the-transit-table-stopped-calling-itself-gtfs)
 - [Mexico City and Guadalajara promoted into the provenance tables, and OSM rail gets its own subsection rather than a GTFS row](#2026-09-22---mexico-city-and-guadalajara-promoted-into-the-provenance-tables-and-osm-rail-gets-its-own-subsection-rather-than-a-gtfs-row)
 - [The unread-source table did not list an unread source, and two more hand-kept counts were wrong](#2026-09-22---the-unread-source-table-did-not-list-an-unread-source-and-two-more-hand-kept-counts-were-wrong)
@@ -170,6 +171,55 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - A third session role: auditing what the forward-facing sessions leave behind
+
+- **Added the cleanup/audit role**, with `.claude/skills/consistency-sweep/`,
+  an entry in `docs/session_roles.md` and a pointer in `CLAUDE.md`. The build
+  and research sessions are pointed forward - add a city, screen a country -
+  and both leave a wake that neither has a reason to look at. One day of
+  sweeping produced: three files stating Canada was unbuilt while six
+  municipalities were, a fourth saying the same of D.C., four wrong hand-kept
+  counts in one file, two item 8s and two item 15s in the list that gates the
+  public deploy, a provincial publisher whose data was on the site with no
+  licence read, four sources in use with no provenance row, and a heading that
+  no longer described half its contents.
+
+- **The role owns no paths, and that is the design rather than an oversight.**
+  `session_roles.md` allocates by path because that is what actually prevents
+  collisions, and cleanup is cross-cutting by nature: giving it `docs/` would
+  take that from the research session, and giving it nothing would leave it
+  unable to work. So it runs on different rules - sweep narrow, commit
+  immediately, never merge a branch it does not own, never edit a file another
+  session has uncommitted, hand real pipeline bugs over. What it does own is
+  `scripts/check_*.py`.
+
+- **Its stated preferred output is a CHECK, not a correction**, which is the
+  one principle worth keeping if everything else about the role is rewritten.
+  A reader found four Canadian cities missing from the provenance tables;
+  promoting them by hand would have been the whole job. Writing
+  `check_provenance.py` instead found **five more gaps nobody had noticed**,
+  and then caught a sixth the same day when a merge silently dropped an
+  endpoint URL while leaving the row looking correct. A correction fixes an
+  instance; a check keeps finding the class.
+
+- **"Verify against `origin/master`, never the tree you are in" is written in
+  as a rule**, because the role that reports on other sessions' work is the one
+  most likely to read a stale checkout. Three findings were relayed between
+  sessions that day and **two were stale rather than wrong** - both described a
+  file that had changed by 339 lines since the reporting session branched, and
+  acting on either would have meant redoing finished work or merging something
+  already in. The rule is symmetric: verify before acting on a claim and before
+  dismissing one. The third finding was real, and sat four rows above a line
+  this session had itself edited an hour earlier.
+
+- **Deferred `scripts/check_stale_claims.py` to `PLAN.md` rather than shipping
+  a skill that cites a script that does not exist.** That would have been the
+  exact defect the skill is about. Three classes - future-tense prose, drifted
+  counts, headings whose contents moved on - stay hand-swept until it is
+  written, and the skill says so plainly. Deferred on pacing at 87% of a
+  five-hour window, not on doubt; the design is settled and it is the test loop
+  that costs.
 
 ### 2026-09-22 - Madrid's provenance recorded before its wiring lands, and the transit table stopped calling itself GTFS
 
