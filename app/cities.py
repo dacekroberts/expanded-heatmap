@@ -446,6 +446,14 @@ CITIES = [
         "blurb": "Metro de Barcelona (L1–L12 across TMB and FGC, plus the "
                  "Montjuïc and Vallvidrera funiculars, 112 stations inside "
                  "the city)",
+        # Outside the United States frame, like every non-US city. OMITTING
+        # THIS IS NOT NEUTRAL: IN_DEFAULT_VIEW defaults a missing key to TRUE,
+        # so Barcelona silently joined the landing frame and stretched it from
+        # California to Catalonia. The symptom named innocent cities -
+        # check_deploy_imports reported Calgary/Toronto and Guadalajara/Los
+        # Angeles colliding and three labels clipped off the west edge, because
+        # everything had been compressed to fit an Atlantic-wide view.
+        "in_default_view": False,
         # Spain's two cities sit 500 km apart but frame close together, and
         # Madrid's label goes ABOVE its marker - so Barcelona's goes to the
         # RIGHT rather than stacking into it. Omitting this key is not a
