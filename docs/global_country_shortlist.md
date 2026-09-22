@@ -386,7 +386,7 @@ waiting on research at all.
 |---|---|---|---|
 | **Seoul** 🇰🇷 | 407 stations (1,099 national), WGS84, English, line geometry | **197,276 active premises**, 8 datasets, EPSG:5174 coords, status field, **KOGL Type 1** | Build work only: partial geocoding for 일반음식점 (90.7%) and a Korean-aware `check_personal_exposure.py` |
 | **Paris** 🇫🇷 | subway 16, tram 17, funicular 1 | SIRENE, établissement-level, geolocated, Licence Ouverte 2.0, non-diffusible masked at source | **An owner decision, not a probe:** a national register is not the per-city municipal shape this project is built around |
-| ❌ **Mexico City** 🇲🇽 → **OUT, 2026-09-22** | ~~subway 12, via `mdb-latest`~~ **all four routes now dead** | DENUE, 6M+ establishments, coordinates, **SCIAN = NAICS**, INEGI licence cleared | **Its feed.** Business leg is fine; there is no reachable feed. See "The Mobility Database moved its files" |
+| ✅ **Mexico City** 🇲🇽 → **back IN via OSM** | ~~all four feed routes dead~~ **12 Metro lines + Tren Ligero from OSM: 195/195 stops matching the official count exactly, 6,468 geometry points, line names and official colours 100%** | DENUE, 6M+ establishments, coordinates, **SCIAN = NAICS**, INEGI licence cleared | **One licence decision** — whether to offer the station extract under ODbL share-alike. See "CDMX from OSM" |
 | **Guadalajara** 🇲🇽 | **LRT 3 re-verified 2026-09-22** — Líneas 1–3 at `route_type 0`, **12,231 stops 100% coordinated, `shapes.txt` present** | Same DENUE source | Nothing |
 
 **Promoted into Band A on 2026-09-22 by the nine-item sweep** — all three had
@@ -770,6 +770,82 @@ untracked repository, with no licence and no provenance. Consistency says no.
    It is a genuine change of sourcing practice — agency data for the transit
    leg has been the rule for all fourteen built cities — so it is flagged here
    rather than assumed either way.
+
+### CDMX FROM OSM — approved as a per-city exception, and it PASSES the invariants
+
+Owner decision 2026-09-22: use OpenStreetMap for CDMX's rail leg specifically,
+**keep agency data as the default**, and treat this as a documented per-city
+exception rather than a new rule. Measured the same day.
+
+**Scope, by this project's own mode rules.** Metro (subway) and Tren Ligero
+(light_rail) count. **Metrobús is BRT, Trolebús is a trolleybus, Cablebús is an
+aerial gondola, and Tren Suburbano is commuter rail** — all excluded, the same
+way route_type 109 / S-Bahn was excluded for Berlin.
+
+**Invariant 1 — every drawn line carries its real public name.** PASS, and
+better than most GTFS feeds:
+
+| | MEASURED |
+|---|---|
+| Route relations | **26** = 12 Metro lines × 2 directions + Tren Ligero × 2 |
+| Metro line refs | **1–9, A, B, 12** — exactly Metro CDMX's twelve |
+| `name` | **100%** — e.g. `Línea 1 (Pantitlán → Observatorio)` |
+| `ref` | **100%** |
+| **`colour`** | **100%**, and they are the real livery — `#F04E98` L1 pink, `#005EB8` L2 blue, `#FFD100` L5 yellow |
+| `operator` | `Sistema de Transporte Colectivo` |
+
+**Invariant 2 — line geometry exists.** PASS. **26/26 relations carry geometry,
+6,468 coordinate points**, from 131 (Línea 4) to 543 (Tren Ligero).
+
+**The decisive validation — stop counts against Metro CDMX's published figures,
+line by line:**
+
+| Línea | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | 12 | **Total** |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| OSM | 20 | 24 | 21 | 10 | 13 | 11 | 14 | 19 | 12 | 10 | 21 | 20 | **195** |
+| Official | 20 | 24 | 21 | 10 | 13 | 11 | 14 | 19 | 12 | 10 | 21 | 20 | **195** |
+| Δ | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0** |
+
+**Exact, every line, zero deltas.** The station layer is 177 nodes (159 subway +
+18 light rail), **100% named and 100% coordinated**. An earlier read of "159 vs
+163 official" was comparing distinct *nodes* against Metro's distinct-station
+count; the like-for-like comparison is stop memberships per route, and it is
+perfect.
+
+> **TRAP, and it would cost a quarter of the system: 42 of the 159
+> `station=subway` nodes carry NO `operator` tag.** Filtering stations by
+> `operator="Sistema de Transporte Colectivo"` returns 117, silently dropping
+> 42 — Gómez Farías, Zaragoza, Merced, Sevilla, Universidad and 37 others.
+> **Filter on `station=subway`, never on `operator`.** This is the community-data
+> risk in its concrete form: the tagging is complete but not uniform, so a
+> filter that would be safe against an agency feed is not safe here. Also
+> present in the bbox: 12 `railway=station` nodes with no `station=` tag at all,
+> and 2 tagged `monorail`.
+
+#### The licence catch, which is NOT the one expected
+
+OSM is ODbL, and this project **already displays OSM attribution on every map**,
+so attribution adds nothing new. The real question is share-alike, and it turns
+on what gets committed:
+
+- **`heatmap.html` is a Produced Work.** ODbL asks for attribution on it, which
+  is already satisfied. No share-alike.
+- **`outputs/<city>/excluded_stations.csv` is not.** It commits
+  `station,latitude,longitude,lines` — a structured extract of the database, so
+  it is plausibly a **Derivative Database**, and ODbL's share-alike then applies
+  to it.
+
+The repository is **already structurally ready for this**: `LICENSE` disclaims
+MIT over everything in `outputs/` and says in terms that it "could not" license
+that data, because it is derived from third-party sources. But a disclaimer is
+not an offer, and **ODbL requires the derivative database to be offered under
+ODbL** — a positive obligation the fourteen agency-sourced cities do not carry.
+
+**Not resolved here, per `read-licence`'s rule not to settle an ambiguity in
+this project's favour.** The practical shape is small: one added line in
+`LICENSE` and in `docs/data_sources.md` offering CDMX's station extract under
+ODbL 1.0. Flagged as an owner decision, because it is the first share-alike
+obligation this project would take on.
 
 ### The ceiling is no longer the binding constraint
 

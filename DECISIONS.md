@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**108 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**109 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [CDMX approved from OpenStreetMap as a per-city exception, and it passes both rail invariants](#2026-09-22---cdmx-approved-from-openstreetmap-as-a-per-city-exception-and-it-passes-both-rail-invariants)
 - [Mexico nationwide GIS probe: no new route, but CDMX is a retry rather than a loss](#2026-09-22---mexico-nationwide-gis-probe-no-new-route-but-cdmx-is-a-retry-rather-than-a-loss)
 - [Madrid's licence read; the Mobility Database moved its files, and Mexico City drops out of Band A](#2026-09-22---madrids-licence-read-the-mobility-database-moved-its-files-and-mexico-city-drops-out-of-band-a)
 - [Nine-item probe sweep: Madrid, Barcelona and Milan promote; Band A is seven cities](#2026-09-22---nine-item-probe-sweep-madrid-barcelona-and-milan-promote-band-a-is-seven-cities)
@@ -144,6 +145,57 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - CDMX approved from OpenStreetMap as a per-city exception, and it passes both rail invariants
+
+- **The owner approved OSM for CDMX's rail leg specifically**, keeping agency
+  data as the default and treating this as a documented per-city exception
+  rather than a new rule. Reasoning recorded as given: a 12-line metro is the
+  highest-value unbuilt system in the screen, OSM's coverage of it is excellent,
+  and the naming risk is low for a system whose lines are literally numbered.
+  **Measured the same day, and it passes.**
+- **Invariant 2 (every drawn line carries its real public name) passes, and more
+  completely than most GTFS feeds do.** 26 route relations - 12 Metro lines in
+  both directions plus Tren Ligero - with refs **1-9, A, B, 12**, exactly Metro
+  CDMX's twelve. `name`, `ref` and **`colour`** are each **100%** populated, and
+  the colours are the real livery (`#F04E98` L1, `#005EB8` L2, `#FFD100` L5), so
+  the map's line styling comes from the source rather than being invented.
+  Geometry: **26/26 relations, 6,468 coordinate points.**
+- **The decisive validation: stop counts per line against Metro CDMX's own
+  published figures are EXACT - 195 vs 195, zero delta on all twelve lines.**
+  An earlier reading of "159 OSM nodes vs 163 official stations" was comparing
+  distinct nodes against a distinct-station count; the like-for-like comparison
+  is stop memberships per route relation, and it matches perfectly. Station
+  layer: 177 nodes (159 subway, 18 light rail), **100% named, 100%
+  coordinated**.
+- **Found a trap that would have cost a quarter of the system: 42 of the 159
+  `station=subway` nodes carry NO `operator` tag.** Filtering stations by
+  `operator="Sistema de Transporte Colectivo"` returns 117 and silently drops 42
+  - Gómez Farías, Zaragoza, Merced, Sevilla, Universidad among them. **Filter on
+  `station=subway`, never on `operator`.** This is the community-data risk in
+  concrete form: the tagging is complete but not uniform, so a filter that is
+  safe against an agency feed is not safe here. Also in the bbox: 12
+  `railway=station` nodes with no `station=` tag and 2 tagged `monorail`.
+  Scope excluded per this project's existing mode rules: Metrobús (BRT),
+  Trolebús, Cablebús (aerial) and Tren Suburbano (commuter), the last on the
+  same basis as route_type 109 / S-Bahn for Berlin.
+- **Raised a licence obligation that is NOT the one expected, and did not
+  resolve it.** Attribution was assumed to be the question and is not - the
+  project already displays OSM attribution on every map. The live question is
+  ODbL **share-alike**, and it turns on what gets committed: `heatmap.html` is a
+  **Produced Work** (attribution only), but
+  `outputs/<city>/excluded_stations.csv` commits
+  `station,latitude,longitude,lines`, a structured extract that is plausibly a
+  **Derivative Database**, to which share-alike attaches. The repository is
+  already structurally ready - `LICENSE` disclaims MIT over everything in
+  `outputs/` and states it "could not" license that data - **but a disclaimer is
+  not an offer, and ODbL requires the derivative database to be offered under
+  ODbL.** That is a positive obligation none of the fourteen agency-sourced
+  cities carries, and it would be this project's first share-alike commitment.
+  Left as an owner decision per `read-licence`'s rule against resolving an
+  ambiguity in this project's favour; the practical fix is small, one line in
+  `LICENSE` and one in `docs/data_sources.md`. Files touched:
+  `docs/global_country_shortlist.md`.
 
 ### 2026-09-22 - Mexico nationwide GIS probe: no new route, but CDMX is a retry rather than a loss
 
