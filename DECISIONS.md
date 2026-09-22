@@ -14,6 +14,152 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-21 - Montreal built: 17,231 storefronts, and the cheapest build so far
+
+- **The eleventh city, the second outside the US, and the first whose source is
+  a FIELD SURVEY rather than a licence register.** 17,231 storefronts - Retail
+  8,283, Food service 6,117, Personal services 2,831 - across 64 stations, with
+  **9,733 inside the 0.6 mi outer ring = 152 per station**. That lands within
+  **one** of the 151 the re-ranking predicted three hours earlier, which is the
+  strongest confirmation available that the storefront basis was the right one.
+- **Per-step counts:** 28,621 surveyed units -> 25,121 after excluding
+  vacancies -> 24,827 with a usable 6-digit `SCIAN` -> **17,231 storefront
+  (69.4%)**. That share is more than double any other city's and it is the
+  whole story of this build: a survey of commerce needs almost none of the
+  filtering a register of licences does.
+- **It needed NO taxonomy module, which no other city here has managed.**
+  `SCIAN` is NAICS, so `pipeline/taxonomies/naics.py` classified it unchanged
+  and the only adaptation was renaming one column. The scaffold ran with
+  `--taxonomy naics` and no `--new-taxonomy`. Five cities now share that module.
+- **Two filters no other city has needed, and one deliberate absence:**
+  - **Vacancies are excluded** - `USAGE1 == 'VACANT'` on 3,500 rows (12.2%).
+    A licence register cannot contain an empty shop; a premises survey can, and
+    counting them would measure the supply of retail space. **Nobody had
+    recorded this**: it is absent from the Canada profile and from the brief's
+    source table. `VACANT_A_LOUER` ('Oui' on 712) was measured as a strict
+    SUBSET of it - 0 rows are for-rent without being USAGE1-vacant - so
+    filtering on that column instead would have left 2,788 vacant units in.
+  - **`SCIAN` is filtered by LENGTH, not by null**, because it is a
+    1-character placeholder on 182 rows. A `notna()` test would have kept
+    codes that cannot be classified.
+  - **NO address dedup, and that is the correct choice.** `ID` is unique on
+    every row, so one row is one surveyed unit. 6,500 rows share an `ADRESSE`
+    legitimately: 7275 rue Sherbrooke E holds **174** units and 7999 boulevard
+    des Galeries-d'Anjou **152**, each a distinct business with its own
+    `SUITE`. Miami's and Vancouver's (name, address) dedup would have collapsed
+    a shopping centre to one shop. Step 2 asserts `ID` uniqueness instead.
+    `T_COMMERCE` is what makes this legible - Commerce rue 14,989, Centre
+    commercial 1,940, Marché public 192, Mégacentre 94, Foire alimentaire 16 -
+    and **all types are kept**, since each is a fixed unit a person walks into.
+- **The off-island cut is spatial AND cross-checked against a structural
+  marker.** 64 of 68 stations are on the island; the four in Laval and
+  Longueuil are dropped by the boundary polygon, per the project invariant.
+  STM also marks exactly those four with a **" -Zone B"** fare-zone suffix, so
+  step 1 asserts the two agree on all 68 and stops if they ever diverge. They
+  agreed. Distances outside: Longueuil 436 m, Cartier 694 m, De la Concorde
+  1,692 m, Montmorency 1,982 m.
+- **The agency feed was current and the catalogue mirror was 29 days expired**,
+  measured the same day: STM's own feed runs to 20261025 (+34 days), the
+  Mobility Database copy to 20260823. Station counts happened to agree, but
+  this is the Toronto lesson recurring for the third time, and the build takes
+  the agency feed.
+- **Spacing is tighter than any unthinned city here** and was measured rather
+  than assumed: median nearest-neighbour **728 m**, minimum 355 m
+  (Place-des-Arts to Saint-Laurent), 57 of 64 stations inside the 966 m outer
+  ring. Against Vancouver's 841 m and D.C.'s 962 m. Still no thinning - the
+  Métro is entirely underground and grade-separated, which is the structural
+  test, not the spacing.
+- **One shape per line**, verified to cover every stop (27 / 31 / 3 / 12). No
+  Métro line branches, so unlike Vancouver's Canada and Expo Lines none needed
+  a tuple.
+- **Three of the brief's seven open questions were resolved by measurement and
+  one by reading:** the premises key (`ID`, above); the "32 `ARRONDISSEMENT`
+  values against 34 boundary features", which turned out to be an **EN-DASH
+  versus HYPHEN** difference on six names plus one case difference
+  (`Baie-d'Urfé`/`Baie-D'Urfé`), with only **Hampstead** and **L'Île-Dorval**
+  genuinely absent from the survey; line branching (none); and the licence.
+- **The accented name was split, not tested.** `cities.py` carries "Montréal"
+  and the page file is ASCII `11_Montreal_Heatmap.py`, so nothing depends on an
+  accented path. The brief flagged this as the one untested thing; it is now
+  avoided rather than proven safe.
+- **`scaffold_city.py` spliced a city INTO a list comprehension and broke
+  `app/cities.py`.** Its insertion anchor is the closing `]` of `CITIES`, and
+  the `IN_DEFAULT_VIEW` line added earlier the same day sits below that, so the
+  new entry landed inside it and the module stopped importing. Repaired by
+  hand, and `cities.py` now carries a note saying why a scaffold run can fail
+  there. **This is the same class of failure as staging's `screen_rail.py`
+  expansion moving an `add-city` anchor** - a generated insertion point moved
+  by hand-written code - and it is the second instance in one day.
+
+### 2026-09-21 - Montreal's licence: permitted with conditions, and a footer trap avoided
+
+- **Read with the `read-licence` skill at the owner's instruction**, including
+  the two clause families staging had added to it hours earlier - one of which,
+  the transformation-disclosure family, has Montréal as its worked example.
+  Both sources are **PERMITTED WITH CONDITIONS**.
+- **Ville de Montréal, `locaux-commerciaux`: CC-BY 4.0** (`license_id: cc-by`,
+  from CKAN `package_show`) plus three conditions read first-hand on
+  `donnees.montreal.ca/pages/licence-d-utilisation`:
+  - credit the data **and** "préciser si des modifications ont été effectuées
+    **ou si des interprétations en ont été tirées**";
+  - no indicating or suggesting the City "vous soutient ou endosse votre
+    usage", explicitly extending to integrating its data into a database you
+    own;
+  - no restricting access to the originals "sous la forme de conditions
+    légales ou de mesures techniques".
+  **This project draws interpretations every time** - ring density, category
+  bucketing, storefront filtering - so a bare source credit does not comply.
+  The displayed notice states that the data is modified and interpreted, and
+  what was done to it. It is the first attribution here that has to describe
+  this project's own processing rather than name a source.
+- **STM is a SEPARATE owner, credited separately.** The Métro data sits on the
+  City's portal but its dataset note says "Le présent ensemble de données est la
+  propriété de la Société de transport de Montréal. Conséquemment, selon la
+  clause d'attribution de la licence Creative Commons 4.0, la paternité des
+  données doit être attribuée à la Société de transport de Montréal." Its note
+  confirms coverage of "les tracés des lignes de bus et de métro", which is
+  exactly what this project redraws.
+- **THE NEW YORK FOOTER, FOR THE THIRD TIME, AND IT WOULD HAVE BEEN FATAL.**
+  The City's licence page points at `montreal.ca/articles/mentions-legales-2654`,
+  which says "L'ensemble des contenus de montreal.ca est la propriété exclusive
+  de la Ville de Montréal, **tous droits réservés**" and forbids reproducing
+  "les images du site" commercially. Read alone it prohibits this project.
+  `read-licence` step 4 settles it: that document is written wholly in
+  **web-page** language (page, site, navigation, hyperlien) and contains **no
+  data language at all** - not "données ouvertes", "jeu de données",
+  "redistribuer", "base de données" or "réutiliser" - and its operative
+  sentences name montreal.ca's own contents and its photos. It governs the
+  website; the open data is governed by the separate licence page. Same shape as
+  nyc.gov's "All Rights Reserved" and Philadelphia's terms-of-use, and the
+  clearest vindication yet of that step existing.
+- **Step 6b answered in the most favourable direction available.** The
+  publisher did the privacy work upstream by surveying **premises** rather than
+  licensees, so there is no personal column to strip - see the verdict below.
+
+### 2026-09-21 - Montreal privacy verdict: structurally the strongest here
+
+- **`python scripts/check_personal_exposure.py montreal`** on the rendered map
+  (9,733 pins, 8,221 distinct names), as `CLAUDE.md` requires. Verdict:
+  **publishable, with the least exposure of the eleven cities.**
+- **No registrant-name fallback CAN exist.** `NOM_ETAB` is the
+  ESTABLISHMENT's name, populated on 100% of rows, and the survey publishes no
+  owner, agent or contact column at all - so no pin can display a name this
+  pipeline substituted. A structural claim, like New York's and Miami's, not a
+  measurement. `0` emails, `0` phone numbers, `0` "c/o" markers.
+- **20.0% of displayed names match the person heuristic, and that is expected
+  rather than alarming.** They are establishment names: 722511 full-service
+  restaurants 381, 722512 limited-service 318, 812116 nail salons 153. A
+  restaurant or salon named after its owner is a name its owner chose to trade
+  under - **San Diego's precedent**, and the same reading applied to
+  Vancouver's 1,827 self-registered trade names.
+- **The 0.00% residential reading is a MEASUREMENT GAP, not a clean result**,
+  and must be read as Boston's was: `ADRESSE` carries no unit designators, and
+  `SUITE` is deliberately not joined in because a suite number in a shopping
+  centre is commercial and 1,940 of these rows are in one. What limits the real
+  exposure is the SOURCE rather than the check: a surveyor walking commercial
+  streets and recording units cannot record a dwelling. That is a stronger
+  structural argument than Boston's licence-type one.
+
 ### 2026-09-21 - Canada re-ranked on storefront counts: Montreal is next, not Surrey
 
 - **Done on the owner's instruction, after the Vancouver build showed the

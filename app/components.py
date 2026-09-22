@@ -343,6 +343,38 @@ _NOTICES = [
      "permission of TransLink. TransLink assumes no responsibility for the "
      "accuracy or currency of the Data used in this product or service.",
      True),
+    # Montréal, added 2026-09-21. TWO credits for one city, because the
+    # business data and the transit data have different OWNERS - the STM's
+    # datasets are hosted on the City's portal but are STM's property, and its
+    # own dataset note says so: "selon la clause d'attribution de la licence
+    # Creative Commons 4.0, la paternité des données doit être attribuée à la
+    # Société de transport de Montréal."
+    #
+    # THE CITY'S CONDITION IS BROADER THAN STANDARD CC-BY, and this notice is
+    # written to satisfy the broad part. Verified verbatim on the City's own
+    # licence page (donnees.montreal.ca/pages/licence-d-utilisation): "Vous
+    # devez créditer les données et les contenus que vous utilisez et préciser
+    # si des modifications ont été effectuées **ou si des interprétations en
+    # ont été tirées**."
+    #
+    # This project always draws interpretations - ring density, category
+    # bucketing, storefront filtering - so a bare "data from the Ville de
+    # Montréal" would NOT comply. The wording below states the transformation
+    # explicitly. Not marked verbatim because the City prescribes the
+    # OBLIGATION rather than a sentence; the disclosure is what is required.
+    ("Ville de Montréal",
+     "Contains data from the Ville de Montréal, used under the Creative "
+     "Commons Attribution 4.0 International licence. The data has been "
+     "modified and interpretations have been drawn from it: it is filtered to "
+     "storefront categories, grouped into three categories of this project's "
+     "own, and measured by distance from transit stations. The Ville de "
+     "Montréal does not endorse this project or its use of the data.",
+     False),
+    ("Société de transport de Montréal",
+     "Métro route geometry and station locations for Montréal are the "
+     "property of the Société de transport de Montréal, used under the "
+     "Creative Commons Attribution 4.0 International licence.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

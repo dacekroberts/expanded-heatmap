@@ -782,11 +782,67 @@ Legend** (satisfied by construction — this project draws its own geometry from
 who is using the data**, which was read as an obligation to answer rather than
 a precondition of use (`DECISIONS.md`, 2026-09-21).
 
-So for the **ten** cities now built there are **eight** sources requiring
-specific text or acknowledgement, all of them displayed. Building Vancouver
-added three at once — the first city to add more than one — because it is
-regional across two municipalities and every Canadian Open Government Licence
-prescribes its own sentence, where the US sources mostly prescribed none.
+**11. Ville de Montréal — required, and DISPLAYED. Its condition is BROADER
+than standard CC-BY, and this project triggers the broad part every time.**
+`locaux-commerciaux` is CC-BY 4.0 (`license_id: cc-by`, confirmed from CKAN
+`package_show`). The City's own licence page,
+`donnees.montreal.ca/pages/licence-d-utilisation`, adds three conditions, read
+2026-09-21:
+
+> "Vous devez créditer les données et les contenus que vous utilisez et
+> **préciser si des modifications ont été effectuées ou si des interprétations
+> en ont été tirées**."
+
+— credit the data **and state whether modifications were made or
+interpretations drawn**. Ring density, category bucketing and storefront
+filtering are all interpretations, so **a bare source credit does not
+comply**; the displayed notice says the data is modified and interpreted, and
+what was done. The other two conditions: no indicating or suggesting that the
+City "vous soutient ou endosse votre usage" (explicitly extending to
+integrating its data into a database you own), and no restricting access to the
+originals "sous la forme de conditions légales ou de mesures techniques".
+
+**12. Société de transport de Montréal — required, and DISPLAYED.** The Métro
+geometry is a SEPARATE owner from the business data, though both sit on the
+City's portal. The STM dataset's own note:
+
+> "Le présent ensemble de données est la propriété de la Société de transport
+> de Montréal. Conséquemment, selon la clause d'attribution de la licence
+> Creative Commons 4.0, la paternité des données doit être attribuée à la
+> Société de transport de Montréal."
+
+So credit **STM**, not the City, for the lines and stations. Its note confirms
+the coverage extends to "les tracés des lignes de bus et de métro", which is
+exactly what this project redraws.
+
+**A trap avoided, and it is the New York footer for the third time.** The
+City's licence page points at `montreal.ca/articles/mentions-legales-2654`,
+which states "L'ensemble des contenus de montreal.ca est la propriété exclusive
+de la Ville de Montréal, **tous droits réservés**" and forbids reproducing "les
+images du site" commercially. Read alone, that makes Montréal look prohibited.
+It is not: applying `read-licence` step 4, that document is written entirely in
+**web-page** language (page, site, navigation, hyperlien) and contains **no
+data language at all** — no "données ouvertes", "jeu de données",
+"redistribuer", "base de données" or "réutiliser" — and its operative sentences
+name montreal.ca's own contents and photos. The open data is governed by the
+separate licence page above. Same shape as nyc.gov's "All Rights Reserved"
+footer and Philadelphia's terms-of-use, and the reason step 4 exists.
+
+So for the **eleven** cities now built there are **ten** sources requiring
+specific text or acknowledgement, all of them displayed — and the two Canadian
+builds added five of the ten between them, where the nine US cities needed
+five in total.
+
+**Vancouver added three at once**, the first city to add more than one, because
+it is regional across two municipalities and every Canadian Open Government
+Licence prescribes its own sentence. **Montréal added two**, because its
+business data and its transit data have different owners. And Montréal's is the
+first attribution in this project that has to describe what this project **did
+to** the data rather than merely name its source.
+
+The pattern is worth stating for the next country: the US sources mostly
+prescribed no wording, and the Canadian ones almost all prescribe their own.
+Budget a notice per source rather than a notice per city.
 
 What has grown instead is the pile of **permission questions**, now four: three
 "what does silence mean?" calls and the route-colour one. They are questions

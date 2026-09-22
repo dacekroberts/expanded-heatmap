@@ -199,6 +199,39 @@ CITIES = [
         # can collide with it at any zoom a reader would stop at.
         "label_offset": ("start", 12, -10),
     },
+    {
+        # Accented display name, ASCII page filename - the one thing this
+        # city's build brief flagged as untested. The name here and
+        # render_city_nav()'s argument on the page must match each other;
+        # neither has to match the filename.
+        "name": "Montréal",
+        "lat": 45.5019,
+        "lon": -73.5674,
+        "page": "pages/11_Montreal_Heatmap.py",
+        "blurb": "STM Métro (4 lines, 64 stations on the island)",
+        # OUTSIDE THE DEFAULT VIEW, for the same reason as Vancouver: it keeps
+        # fit_view's zoom pinned at 1.4525 so no existing label moves. Its dot
+        # is still on canvas at every width - it sits only ~18 px from
+        # Boston's - so this is about the FIT, not about visibility.
+        "in_default_view": False,
+        # WELL ABOVE its dot, and the direction is measured rather than
+        # chosen. Montréal's dot is the NORTHERNMOST on the map, so north is
+        # the only empty side: Boston sits 10 px east and 17 px SOUTH, New
+        # York 26 px south, Chicago 55 px WEST and 20 px south.
+        #
+        # It took three tries, and each rejection was a measurement:
+        #   west, ("end", -12, -6)     - drove an ~80 px pill across CHICAGO's.
+        #   centred, ("middle", 0,-30) - cleared Chicago but collided with
+        #                                VANCOUVER's, because "Vancouver
+        #                                (Regional)" is a ~184 px pill running
+        #                                east from its dot and reaching x~532.
+        #   east and high, this one    - clears Vancouver's pill by ~9 px
+        #                                horizontally and Boston's by ~6 px
+        #                                vertically, at 400, 854 and 1200 px.
+        # Montréal is wedged between the two longest names on the map, so if
+        # either of those labels is ever moved or renamed, re-check this one.
+        "label_offset": ("start", 12, -34),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -220,4 +253,10 @@ CITIES = [
 #
 # A city is in the default view unless it says otherwise, so US cities need no
 # flag and nothing here changed for them.
+#
+# NOTE FOR scripts/scaffold_city.py: its insertion anchor is the closing "]"
+# of CITIES, and adding this block below the list once caused it to splice a
+# new city INTO this comprehension and break the module. If a scaffold run
+# produces a SyntaxError here, that is why - move the entry up into CITIES by
+# hand rather than reverting.
 IN_DEFAULT_VIEW = [c for c in CITIES if c.get("in_default_view", True)]

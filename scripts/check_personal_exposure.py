@@ -158,6 +158,25 @@ REGISTRIES = {
     # structural measure, the same way round as Philadelphia's.
     #
     # Its `sep` is ";" - see the read_csv note in check().
+    # Montréal is the ONLY city here whose source is a field SURVEY rather
+    # than a licence register, and it has the strongest privacy position of
+    # the eleven. `NOM_ETAB` is the ESTABLISHMENT's name, populated on 100% of
+    # rows, and the survey publishes no registrant, owner, agent or contact
+    # column at all - so there is no fallback pair to join against and no pin
+    # CAN be a person's name this pipeline substituted. Reported as
+    # structurally absent, which is a stronger statement than a low count.
+    #
+    # The publisher did the privacy work upstream by surveying PREMISES rather
+    # than licensees, which is the `read-licence` step-6b question answered in
+    # the most favourable direction available.
+    #
+    # Its address is one free-text field (`ADRESSE`), so the unit check is a
+    # regex over it as Miami's is - and SUITE, which the survey does carry, is
+    # deliberately not joined in: a suite number in a shopping centre is
+    # commercial, and 1,940 of these rows are in one.
+    "montreal": dict(raw=None, trade=None, owner=None,
+                     processed="businesses_clean.csv",
+                     address=("address",)),
     "vancouver": dict(raw="vancouver_business_licences.csv", sep=";",
                       trade="businesstradename", owner="businessname",
                       processed="businesses_clean.csv",
