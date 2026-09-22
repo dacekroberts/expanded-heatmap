@@ -167,13 +167,23 @@ What remains is the set whose business leg is genuinely still open.
 Rail screened via OSM. **Relation counts are upper bounds** — see the caveat
 below.
 
+> ⚠️ **None of these five is a discard candidate, and two rows were wrong.**
+> Checked 2026-09-22 by fetching each host *and* asking the Internet Archive
+> whether it has seen it recently — a recent snapshot behind a failing fetch
+> means **the site is alive and the failure is ours**. That test has corrected
+> this project three times in one session (Sevilla, Sofia, Bulgaria's 403).
+> Here it found Hyderabad's portal recorded as "dead" when it is alive,
+> Kochi's row describing a **live lead nobody had followed**, and Tel Aviv's
+> city portal alive behind a block aimed at us. **Unreachable is not a
+> finding.**
+
 | City | Rail (OSM) | Business leg |
 |---|---|---|
 | **Hong Kong** 🇭🇰 | 126 rel, 125 named, 117 coloured | **BLOCKED, not negative.** The portal is a measured negative (statistics only), but **FEHD's register exists and is queryable** — no bulk export found. The single most valuable open thread in Band D |
 | **Rio de Janeiro** 🇧🇷 | 20 rel, all named + coloured | CNPJ, no coordinates → geocoding at São Paulo's scale |
-| **Tel Aviv** 🇮🇱 | 6 rel, **realistically 1** — Green and Purple are under construction and OSM does not mark them | **UNREACHABLE.** `data.gov.il/api` 14 bytes; city portal **HTTP 472** with our own IP echoed back — IP-level, so the browser shares the block. One operating line is thin regardless |
-| **Hyderabad** 🇮🇳 | 6 rel, all named + coloured | Trade licences are municipal; `data.telangana.gov.in` dead |
-| **Kochi** 🇮🇳 | 2 rel, named + coloured | Kerala LSG live |
+| **Tel Aviv** 🇮🇱 | 6 rel, **realistically 1** — Green and Purple were under construction when screened; **that was 2026-09 and may now be stale** | **UNREACHABLE, and the city portal is ALIVE.** `opendata.tel-aviv.gov.il` returns **472** to us but is archived **2026-03-10**; `www.tel-aviv.gov.il` likewise. The block is aimed at us. Meanwhile **`data.gov.il` answers 200 right now** and has not been re-probed since the "14 bytes" reading. **Not a discard** |
+| **Hyderabad** 🇮🇳 | 6 rel, all named + coloured | ⚠️ **The old row said `data.telangana.gov.in` is "dead". That was wrong** — it fails for us but is archived **2025-05-09**, so it is alive. **GHMC** (`ghmc.gov.in`), which is the body that actually issues trade licences, returns **403** to us and is archived **2025-04-24** — also alive. And **`tgbpass.telangana.gov.in` answers 200 right now**, unprobed. **Three live hosts, none measured. Not a discard** |
+| **Kochi** 🇮🇳 | 2 rel, named + coloured | ⚠️ **This was never a negative — it is an unfollowed lead.** Both `lsgkerala.gov.in` and `kochicorporation.lsgkerala.gov.in` are **reachable right now** (archived 2026-09-20 and 2026-08-02). LSGD Kerala exposes **`go.lsgkerala.gov.in/pages/query.php?t=establishment`**, an establishment query interface, and Kerala's local bodies are the trade-licence issuers. **Sites are in Malayalam.** Unprobed. **Not a discard** |
 
 #### Paris / SIRENE — the measurement, 2026-09-22
 
