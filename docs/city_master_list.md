@@ -22,25 +22,36 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 
 ---
 
-## Built — 14
+## Built — 16
 
 | Country | Cities |
 |---|---|
 | **United States** (9) | San Diego · San Francisco · Los Angeles · Chicago · New York · Philadelphia · Miami · Boston · Washington D.C. |
 | **Canada** (5, complete) | Vancouver *(with Surrey)* · Montréal · Calgary · Edmonton · Toronto |
+| **Mexico** (2) ✅ | **Mexico City** · **Guadalajara (Regional)** — built 2026-09-22, live in the app |
 
-## Candidates — 43
+✅ **Mexico is the first country built outside North America's anglophone
+pair**, and the first where the rail leg came from **OpenStreetMap** rather
+than an agency feed — the per-city exception approved for CDMX, which
+validated at 195/195 stops exact.
+
+## Candidates — 41
 
 Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 **Five cities moved to discarded on measurement** and **one was upgraded**.
 
 | Band | What is stopping it | Cities | Change |
 |---|---|---|---|
-| **A** | Nothing. Screening complete | **7** | — |
+| **A** | Nothing. Screening complete | **5** | ✅ −2 **BUILT** |
 | **B** | One narrow question each | **4** | ▲ **+Stockholm** |
 | **C** | A geocoding leg — build work, not screening | **18** | ▲ **+Bucharest** |
 | **D** | Four sub-tiers, see below | **14** | ▼ −7 |
 | *Discarded* | Measured negative, evidence named | *19* | ▼ **+5** |
+
+✅ **Guadalajara and Mexico City left Band A by being built**, not by being
+ruled out. Their rows are kept below, marked, because a built city's Band A
+entry is the only place the screening promise and the delivered build sit
+side by side.
 
 **Net: the screen got smaller and more honest.** Nothing was lost that was
 ever measured as viable — the five drops were all cities whose business leg
@@ -53,21 +64,25 @@ results in the sweep.
 
 ---
 
-## Band A — screening COMPLETE (7 cities, 5 countries)
+## Band A — screening COMPLETE (5 remaining + 2 ✅ BUILT)
 
-Ordered by how little stands in the way.
+Ordered by how little stands in the way. **Built cities keep their row**,
+struck through and marked ✅, so the band still shows what screening promised
+and whether it held.
 
 | # | City | Business leg | What remains |
 |---|---|---|---|
-| 1 | **Guadalajara** 🇲🇽 | DENUE, SCIAN = NAICS, INEGI licence cleared | **Nothing** |
-| 2 | **Madrid** 🇪🇸 | 148,814 open premises, 119,070 with valid coordinates, three-level classification, EPSG:25830. CC BY 4.0 + binding general conditions | **Nothing** |
-| 3 | **Seoul** 🇰🇷 | 197,276 active premises over 8 datasets, EPSG:5174, status field, KOGL Type 1 | Build work — partial geocoding for 일반음식점 (90.7%), Korean-aware `check_personal_exposure.py` |
-| 4 | **Milan** 🇮🇹 | 28,131 premises 99.1% coords, `insegna`, `codice_ateco`, CC-BY. All three buckets confirmed | Step 0 schemas for the two newly found layers |
-| 5 | **Mexico City** 🇲🇽 | Same DENUE. **Rail from OSM** — 195/195 stops exact, 6,468 geometry points | One licence decision: ODbL share-alike on the station extract |
-| 6 | **Barcelona** 🇪🇸 | 68,024-premises ground-floor census, CC-BY-4.0 | One residual: the portal's general notice is CAPTCHA-walled and unread |
-| 7 | **Paris** 🇫🇷 | SIRENE, établissement-level, geolocated, Licence Ouverte 2.0 | **An owner decision, not a probe** — a national register is not the per-city municipal shape this project is built around |
+| ✅ | ~~**Guadalajara**~~ 🇲🇽 | DENUE, SCIAN = NAICS, INEGI licence cleared | **BUILT 2026-09-22** — `pages/16_Guadalajara_Heatmap.py`, region *Mexico*. Screening said "nothing outstanding" and that held |
+| 1 | **Madrid** 🇪🇸 | 148,814 open premises, 119,070 with valid coordinates, three-level classification, EPSG:25830. CC BY 4.0 + binding general conditions | **Nothing** |
+| 2 | **Seoul** 🇰🇷 | 197,276 active premises over 8 datasets, EPSG:5174, status field, KOGL Type 1 | Build work — partial geocoding for 일반음식점 (90.7%), Korean-aware `check_personal_exposure.py` |
+| 3 | **Milan** 🇮🇹 | 28,131 premises 99.1% coords, `insegna`, `codice_ateco`, CC-BY. All three buckets confirmed | Step 0 schemas for the two newly found layers |
+| ✅ | ~~**Mexico City**~~ 🇲🇽 | Same DENUE. **Rail from OSM** — 195/195 stops exact, 6,468 geometry points | **BUILT 2026-09-22** — `pages/15_Mexico_City_Heatmap.py`. The ODbL share-alike decision was taken during the build; see `DECISIONS.md` |
+| 4 | **Barcelona** 🇪🇸 | 68,024-premises ground-floor census, CC-BY-4.0 | One residual: the portal's general notice is CAPTCHA-walled and unread |
+| 5 | **Paris** 🇫🇷 | SIRENE, établissement-level, geolocated, Licence Ouverte 2.0 | **An owner decision, not a probe** — a national register is not the per-city municipal shape this project is built around |
 
-**Guadalajara and Madrid have nothing outstanding at all.**
+**Madrid now has nothing outstanding at all** — it is the only unbuilt city
+in the screen with an empty "what remains" column, which makes it the next
+city if nothing else is prioritised.
 
 ## Band B — one narrow question each (4 cities)
 
@@ -224,11 +239,11 @@ country.
 
 "Missing link" = the single thing that would move the country up a tier.
 
-## Tier 1 — build now, nothing to discover (4 countries, 5 cities ready)
+## Tier 1 — build now, nothing to discover (3 countries, 4 cities ready; ✅ Mexico DONE)
 
 | Country | Cities | Source shape | Missing link |
 |---|---|---|---|
-| 🇲🇽 **Mexico** ▶ **IN PROGRESS** | **2** — Guadalajara, Mexico City | **DENUE**, national, coordinates, SCIAN **is** NAICS so the taxonomy may transfer from the US builds | **Being built now.** CDMX still needs one decision: offer the station extract under **ODbL share-alike**, since its rail comes from OSM |
+| 🇲🇽 **Mexico** ✅ **COMPLETE** | **2** — Mexico City, Guadalajara (Regional) | **DENUE**, national, coordinates, SCIAN **is** NAICS — and the taxonomy **did** transfer from the US builds | **Nothing. Both cities are built and live in the app** (`pages/15_`, `pages/16_`, region *Mexico*), 2026-09-22. The ODbL share-alike decision was taken during the build |
 | 🇪🇸 **Spain** | **2 now, 6 total** — Madrid, Barcelona ready | Bespoke **per city**, but two of three probed had a premises census | Madrid and Barcelona are ready. Valencia, Bilbao and Málaga each need **their own register found**; Sevilla needs a **free NAP account** for rail |
 | 🇰🇷 **South Korea** | **1** — Seoul | 8 datasets, EPSG:5174, KOGL Type 1, daily | **Two build items, not probes:** partial geocoding for 일반음식점 (90.7% coords) and a Korean-aware `check_personal_exposure.py` |
 | 🇮🇹 **Italy** | **1** — Milan | Bespoke per city. Naples and Messina measured out | **Step 0 schemas** for the two newly found Milan layers. Nothing to discover |
@@ -644,9 +659,13 @@ metro, so it is a weaker map for a stronger dataset. Unprobed.
 
 ## The order, as decided
 
-1. ▶ **Mexico** — **in progress.** Two cities, one source, nothing to discover.
-2. **Spain** — Madrid and Barcelona ready *now*; the other three likely rather
-   than speculative.
+1. ✅ **Mexico** — **DONE, 2026-09-22.** Two cities from one source, as
+   predicted. It was also the project's first country outside anglophone North
+   America and its first OSM-sourced rail leg, so it proved two things the
+   screen had only asserted.
+2. ▶ **Spain — NEXT.** Madrid and Barcelona ready *now*; the other three
+   likely rather than speculative. Madrid is the only unbuilt city in the whole
+   screen whose "what remains" column is empty.
 3. **Korea** and **Italy** — one city each, nothing to discover, both with
    named build work rather than open questions.
 4. **Taiwan** — the first geocoding build, chosen because it is the cheapest:
