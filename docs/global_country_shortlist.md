@@ -66,7 +66,37 @@ Four shapes qualify:
 
 Tiers rather than a numbered order: the candidates differ in *which leg is
 unproven*, which is not a thing a single score can express. Rail figures are
-`scripts/screen_rail.py` output against real `routes.txt`, run 2026-09-21.
+`scripts/screen_rail.py` against real `routes.txt`, or `scripts/probe_geodata.py`
+against the publisher's own layer. All 2026-09-21.
+
+### Final standings — every viable candidate, and its one remaining blocker
+
+The useful summary. Each row below Tier 1 has **exactly one** thing standing in
+its way, and the column says what.
+
+| | Country / city | Rail | Business | The single blocker |
+|---|---|---|---|---|
+| **1** | **France** / Paris | subway 16, tram 17, funicular 1 | SIRENE, établissement-level, geolocated, Licence Ouverte 2.0 | **None evidential** — an architectural choice about national vs per-city scope |
+| **2** | **Spain** / Barcelona + 5 more | **6 metro cities**: Madrid 13, Barcelona FGC 4, Bilbao, Málaga, Valencia, Sevilla | Barcelona's 68,024-premises ground-floor census | **One unread licence** |
+| **2** | **South Korea** / Seoul | **1,099 stations**, WGS84, English names, transfer data | `상가(상권)정보`: premises, coords, KSIC 247, quarterly, **제한 없음** | **A free API key** (owner action) — and **no line geometry yet** |
+| **2** | **Taiwan** / Taipei | **complete and unauthenticated**: 122 stations + **5 lines as MULTILINESTRING** + line colours + English | `商業登記`: premises addresses, active/closed status | **No coordinates** → geocoding, and per-category assembly |
+| **2** | **Mexico** / Guadalajara | Guadalajara LRT 3 verified | **DENUE**, 6M+ establishments, **SCIAN = NAICS**, INEGI licence clears | **CDMX is domain-wide unreachable**; Guadalajara carries it meanwhile |
+| **2** | **Brazil** / São Paulo | **94 stations + 6 lines**, EPSG:31983 already correct, metro/trem discriminator, built/planned separate | CNPJ, ~72M, trade name + address + CNAE | **No coordinates** → geocoding past Toronto's scale |
+| **3** | **Norway** / Oslo | metro 5, tram 9 | **MEASURED premises-level** — 152,060 Oslo sub-units, `beliggenhetsadresse`, NACE, open API no key | No coordinates → geocoding |
+| **3** | **Israel** / Tel Aviv | 332 station points + **27 lines**, CC-BY | **Mismatch** — the national portal's only register is Be'er Sheva, which has no rail | **Tel Aviv's own portal is bot-protected** (HTTP 472); needs the browser |
+| **3** | **Peru** / Lima | ODC-BY station set | unprobed | **2018 vintage, Line 1 only** — Line 2 absent |
+| **3** | **Japan** / Tokyo | **solved**: 10,235 stations + 21,932 line segments, PDL 1.0 | **Aggregate counts only** | **The business data** — this is the blocker, not transit |
+
+**Tier 3 continues** with rail measured and business unprobed: Vienna
+(subway 35, tram 185 — deepest in the screen), Amsterdam/Rotterdam (14/46),
+Singapore (13), Lisbon (10), Berlin (9/48), Stockholm (7/21), Santiago (7),
+Bucharest (5/15), Sofia (4/24), Copenhagen (4/4), Bangkok (4/5), Helsinki
+(4/26), Budapest (4/42), Hamburg (4), Prague (3/40), Athens (3), Naples
+(3/3/3), Hyderabad (3), Kochi (1), Cairo (2) — plus tram-only Riga, Tallinn,
+Zagreb, Bratislava, Poznań, Messina.
+
+**All of them sit under GDPR** except Santiago, Bangkok, the Indian cities and
+Cairo, and that is the expensive half of any European profile.
 
 ### Tier 1 — both legs measured. Ready for a country profile.
 
