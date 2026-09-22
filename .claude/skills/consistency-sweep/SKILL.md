@@ -147,9 +147,29 @@ A numbered list that other files cite by number is a coupling nobody declares.
 Renumbering the notices list on 2026-09-22 broke `docs/build_briefs/edmonton.md`,
 which said "item 14 carries it".
 
-Before renumbering anything: `grep -rn "item [0-9]\|notice [0-9]\|step [0-9]"`.
-After renumbering: grep again and fix what moved. Better - check whether the
-list needs numbers at all, or whether an anchor would do.
+**`check_provenance.py` check F now decides this**, and a range check would
+not have: renumbering moved Edmonton from item 14 to 15, and the brief went on
+saying "item 14 carries it" - a citation that still RESOLVED, to Calgary. So
+the check compares the cited notice's SUBJECT against the subjects named
+around the citation, and fails when the neighbourhood is talking about a
+different notice than the one it cites. Verified by reintroducing the real
+break: it reports `cites item 14 (Calgary), but the text around it names
+['Edmonton']`.
+
+**The hard part was namespaces, not numbers.** "Item N" means at least three
+different lists here - the notices list, the deploy-gate list under "What
+closing this fully requires", and `global_country_shortlist.md`'s own "#### Item
+N" sweep. The first version checked all of them against the notices list and
+produced thirteen bogus notes; every one was a citation of a different list.
+Only "notice N", and "item N" whose sentence also names `data_sources.md`, are
+treated as notices citations now - and "Gate item N", "Step 0 item N" and
+`#### Item N` headings are excluded explicitly. **A check that reports other
+people's correct work as broken is worse than no check**, because the next
+reader learns to skip the section.
+
+Still worth doing by hand before renumbering:
+`grep -rn "item [0-9]\|notice [0-9]\|step [0-9]"`. Better still - check
+whether the list needs numbers at all, or whether an anchor would do.
 
 Watch for **appended blocks that never renumber**. Two countries' notices were
 appended after an existing block and produced two item 8s and two item 15s in
@@ -265,7 +285,7 @@ it needs that session's context.
 
 | Check | What it decides |
 |---|---|
-| `python scripts/check_provenance.py [--strict]` | every built city has rows in all three provenance tables; every URL its `config.py` **resolves to** is recorded; notices and `_NOTICES` are in bijection; notice numbers unique and contiguous; **`city_master_list.md`'s built counts match `app/cities.py`**, total and per country |
+| `python scripts/check_provenance.py [--strict]` | every built city has rows in all three provenance tables; every URL its `config.py` **resolves to** is recorded; notices and `_NOTICES` are in bijection; notice numbers unique and contiguous; **`city_master_list.md`'s built counts match `app/cities.py`**, total and per country; **every `item N` citation still points at the notice it names** |
 | `python scripts/decisions_index.py --check` | `DECISIONS.md`'s generated index is current |
 | `python pipeline/drift_check.py` | committed `outputs/` still match what the pipeline produces |
 | `python scripts/check_deploy_imports.py` | a clean clone imports under the lean venv |

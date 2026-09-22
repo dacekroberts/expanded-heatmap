@@ -42,6 +42,15 @@ WHAT IT CHECKS
   D. Notice numbers are unique and contiguous from 1. They were neither: the
      list carried two item 8s and two item 15s from 2026-09-21 to 2026-09-22,
      because each country's block was appended without renumbering.
+  F. Every `notice N` / `item N` citation of the notices list still points at
+     the notice it MEANT. A range check cannot do this: renumbering on
+     2026-09-22 moved Edmonton from item 14 to 15, and
+     `docs/build_briefs/edmonton.md` went on saying "item 14 carries it" - a
+     citation that still RESOLVED, to Calgary. So the check compares the cited
+     notice's subject against the subjects named around the citation, and
+     fails when the neighbourhood is talking about a different notice's
+     subject than the one it cites.
+
   E. `docs/city_master_list.md`'s built counts match `app/cities.py` - the
      total and the per-country figures. That file is the one place `CLAUDE.md`
      says to READ COUNTS OFF, so its numbers are load-bearing in a way no other
@@ -72,6 +81,31 @@ DATA_SOURCES = ROOT / "docs" / "data_sources.md"
 CITIES_PY = ROOT / "app" / "cities.py"
 COMPONENTS_PY = ROOT / "app" / "components.py"
 MASTER_LIST = ROOT / "docs" / "city_master_list.md"
+
+# Files whose `item N` citations are checked. DECISIONS.md is excluded for the
+# usual reason - it records what a citation said on a date.
+CITATION_GLOBS = ("docs/**/*.md", ".claude/**/*.md", "CLAUDE.md", "PLAN.md")
+CITATION_SKIP = {"DECISIONS.md"}
+# The sweep skill quotes the broken citation as a teaching example, and
+# check_provenance's own docstring does the same.
+CITATION_SKIP_PATHS = {
+    ".claude/skills/consistency-sweep/SKILL.md",
+    "scripts/check_provenance.py",
+}
+# "item N" IS AMBIGUOUS and the first version of this check ignored that. At
+# least three numbered namespaces exist: the notices list, the deploy-gate list
+# under "What closing this fully requires", and `global_country_shortlist.md`'s
+# own "#### Item N" probe sweep. Reporting all of them against the notices list
+# produced thirteen "unverifiable" notes, every one of which was a citation of
+# a DIFFERENT list - noise that would have taught people to skip the section.
+#
+# So only two forms are treated as notices citations:
+#   - "notice N", which is unambiguous; and
+#   - "item N" where the surrounding text also says "notice" or names
+#     data_sources.md, which is how a cross-file citation of that list reads.
+# Anything else is left alone rather than guessed at.
+CITATION_RE = re.compile(r"\b(?:item|notice)s?\s+(\d{1,2})\b", re.I)
+NOTICE_WORD_RE = re.compile(r"notice|data_sources", re.I)
 
 # Defects awaiting work, each with the date it was recorded. NOT an allowlist:
 # a city here is one whose provenance is missing and known to be missing. Delete
@@ -200,6 +234,81 @@ def displayed_notices():
     start = src.index("_NOTICES")
     end = src.index("def ", start)
     return re.findall(r'^\s{4}\("([^"]+)"', src[start:end], re.M)
+
+
+def notice_subjects(doc):
+    """{number: [keyword, ...]} for the notices list.
+
+    The keyword is what a document talking ABOUT that notice would say -
+    "Edmonton" rather than "City of Edmonton", "British Columbia" rather than
+    "Province of British Columbia".
+    """
+    out = {}
+    for n, heading in notice_headings(doc):
+        h = heading.strip().strip("*")
+        for prefix in ("City of ", "Province of ", "Ville de ",
+                       "Soci\u00e9t\u00e9 de transport de ", "Ayuntamiento de "):
+            if h.startswith(prefix):
+                h = h[len(prefix):]
+        h = re.sub(r"\s*\(.*?\)", "", h).strip()
+        if h:
+            out[n] = h
+    return out
+
+
+def check_citations(doc):
+    """F: does each `item N` still point at the notice it meant?"""
+    subjects = notice_subjects(doc)
+    if not subjects:
+        return [], []
+    hard, soft = [], []
+    for g in CITATION_GLOBS:
+        for p in sorted(ROOT.glob(g)):
+            if not p.is_file() or p.name in CITATION_SKIP:
+                continue
+            rel = p.relative_to(ROOT).as_posix()
+            if rel in CITATION_SKIP_PATHS:
+                continue
+            text = read(p)
+            for m in CITATION_RE.finditer(text):
+                n = int(m.group(1))
+                cited = m.group(0).lower()
+                lo = max(0, m.start() - 400)
+                window = text[lo:m.end() + 400] + " " + p.stem.replace("_", " ")
+                # Disambiguate the namespace before judging the number.
+                if not cited.startswith("notice"):
+                    # Three other namespaces say "item N" within a sentence
+                    # that also names data_sources.md, so the window test
+                    # alone is not enough: "Gate item 9" is the deploy-gate
+                    # list, "Step 0 item 4" is add-city's, and "#### Item 2"
+                    # is a heading in another document's own sweep.
+                    before = text[max(0, m.start() - 12):m.start()].lower()
+                    if before.endswith("gate ") or before.endswith("step 0 "):
+                        continue
+                    line_start = text.rfind(chr(10), 0, m.start()) + 1
+                    if text[line_start:m.start()].strip().startswith("#"):
+                        continue
+                    near = text[max(0, m.start() - 120):m.end() + 120]
+                    if not NOTICE_WORD_RE.search(near):
+                        continue        # some other list's item N
+                if n not in subjects:
+                    hard.append(f"{rel}: cites item {n}, but the notices list "
+                                f"stops at {max(subjects)}")
+                    continue
+                wl = window.lower()
+                here = subjects[n].lower()
+                if here in wl:
+                    continue                      # cites its own subject: fine
+                others = sorted({s for k, s in subjects.items()
+                                 if k != n and s.lower() in wl and len(s) > 4})
+                if others:
+                    hard.append(
+                        f"{rel}: cites item {n} ({subjects[n]}), but the text "
+                        f"around it names {others} and never {subjects[n]!r}")
+                else:
+                    soft.append(f"{rel}: item {n} ({subjects[n]}) - nothing "
+                                f"nearby names it, so it cannot be verified")
+    return hard, soft
 
 
 def check_master_list(names, regions):
@@ -338,6 +447,16 @@ def main():
         failures.append(("city_master_list.md", ml))
     else:
         print("  master list: built counts agree with app/cities.py")
+
+    # --- F, numbered citations still pointing where they meant ---------------
+    hard, soft = check_citations(doc)
+    if hard:
+        failures.append(("numbered citations", hard))
+    else:
+        print(f"  citations: every `item N` resolves to the notice it names "
+              f"({len(soft)} unverifiable)")
+    for s in soft:
+        print(f"      note: {s}")
 
     # --- report ------------------------------------------------------------
     if gaps:

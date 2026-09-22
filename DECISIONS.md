@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**146 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**147 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Category 3 has a check, and a range check would not have caught the bug it was built for](#2026-09-22---category-3-has-a-check-and-a-range-check-would-not-have-caught-the-bug-it-was-built-for)
 - [Category B closed: every item adjudicated, and the noisiest file became a hard check](#2026-09-22---category-b-closed-every-item-adjudicated-and-the-noisiest-file-became-a-hard-check)
 - [Category B reaches its floor: 74 to 35, and the rest are not defects](#2026-09-22---category-b-reaches-its-floor-74-to-35-and-the-rest-are-not-defects)
 - [Category B, sixth pass: the master list's counts are right, and that is the finding](#2026-09-22---category-b-sixth-pass-the-master-lists-counts-are-right-and-that-is-the-finding)
@@ -182,6 +183,45 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Category 3 has a check, and a range check would not have caught the bug it was built for
+
+- **`check_provenance.py` check F verifies that every `item N` citation still
+  points at the notice it MEANT.** The defect it exists for is subtle in a way
+  that matters: renumbering moved Edmonton from item 14 to 15 on 2026-09-22,
+  and `docs/build_briefs/edmonton.md` went on saying "item 14 carries it" - a
+  citation that still **resolved**, to Calgary. **A range check would have
+  passed it.** So the check reads each notice's subject, then compares it
+  against the subjects named around the citation, and fails when the
+  neighbourhood is discussing a different notice than the one cited.
+
+- **Verified by reintroducing the real break**, not by reasoning about it:
+  reverting that line to "item 14" produces
+  `cites item 14 (Calgary), but the text around it names ['Edmonton'] and
+  never 'Calgary'`, exit 1; restoring it returns exit 0. A check that has never
+  been seen to fail is a check nobody has tested.
+
+- **The hard part was NAMESPACES, not numbers, and the first version got it
+  wrong.** "Item N" means at least three different lists in this repository:
+  the notices list, the deploy-gate list under "What closing this fully
+  requires", and `global_country_shortlist.md`'s own "#### Item N" probe sweep.
+  Checking all of them against the notices list produced **thirteen**
+  "unverifiable" notes, every one a correct citation of a different list. Now
+  only "notice N", and "item N" whose sentence also names `data_sources.md`,
+  are treated as notices citations; "Gate item N", "Step 0 item N" and
+  `#### Item N` headings are excluded explicitly. **Thirteen bogus notes down
+  to one**, and that one is a genuine multi-item citation ("Items 9, 10, 14,
+  16") that proximity cannot verify.
+
+- **The principle, because it will come up again:** a check that reports other
+  people's correct work as broken is worse than no check. The next reader
+  learns to skip the section, and then it catches nothing at all.
+
+- **Method note worth recording since it cost a cycle:** the namespace fix was
+  written through a shell heredoc and the `\n` in `text.rfind("\n", ...)`
+  arrived as a literal newline, producing an unterminated string literal.
+  `CLAUDE.md` warns about exactly this. Rewritten with `chr(10)`, which has no
+  escape to mangle.
 
 ### 2026-09-22 - Category B closed: every item adjudicated, and the noisiest file became a hard check
 
