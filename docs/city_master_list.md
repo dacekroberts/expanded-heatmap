@@ -148,9 +148,9 @@ below.
 ### D-c — REACHED; one promoted, two parked, two walls (4)
 
 Retitled 2026-09-22: these were "genuinely unreached, no finding either way".
-All six have now been reached. **Stockholm was the one that paid off and has
-been promoted to Band B**; the other five are host failures of varying
-finality, and none is a *data* negative.
+**All six have now been reached, and two of them paid off** — **Stockholm**
+was promoted to Band B and **Bucharest** to Band C. Of the four left, one is a
+firm negative and three are host or value decisions, not data negatives.
 
 | City | What the host actually does |
 |---|---|
@@ -185,7 +185,7 @@ still needs its own Spanish source.
 | **Cairo** 🇪🇬 | No open-data infrastructure |
 | **Santiago** 🇨🇱 ↓ | **Coverage.** Chile licenses per *comuna*; **5 of ~33** Metro comunas publish patentes and the **Santiago comuna is absent from the portal entirely**. The Daegu shape, 3rd occurrence |
 | **Kuala Lumpur** 🇲🇾 ↓ | **Sample, not register.** `lookup_premise` passes every structural test — premises rows, 100% populated, keyless CSV — and holds **3,916 rows nationally, 372 in KL**. It is PriceCatcher's survey frame |
-| **Medellín** 🇨🇴 ↓ | **Three closed doors.** The city's ArcGIS Hub is **credential-walled**; the chámber of commerce publishes comuna×CIIU **crosstabs**; RUES has **6,369,877** premises rows and **no address, municipality or city column at all** |
+| **Medellín** 🇨🇴 ↓ | **Three closed doors.** The city's ArcGIS Hub is **credential-walled**; the chamber of commerce publishes comuna×CIIU **crosstabs**; RUES has **6,369,877** premises rows and **no address, municipality or city column at all** |
 | **Lima** 🇵🇪 ↓ | **Coverage.** 78 licence datasets under ODC-BY, keyless CSV — but licensing is per *distrito* and **1 of Línea 1's 9** publishes usable data. La Victoria's 135,982 rows are excellent and alone |
 | **Jakarta** 🇮🇩 ↓ | **No activity field.** The live OSS register has 53,827 rows and full street addresses across **exactly 9 columns**; the two that look like classification are legal form and business size |
 
