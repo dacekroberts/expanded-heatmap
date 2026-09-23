@@ -61,6 +61,12 @@ first query did exactly that and lost a whole line. Put a lesson where the next
 city must pass through it - a raising check in shared code, then a skill - not
 in a sibling city's comments.
 
+**A map opened at the wrong zoom? Use `map-view`** (`.claude/skills/map-view/`).
+It happened three times - Edmonton, Paris, Lille - each fixed where it broke,
+until a guard in the shared fit script started checking the OUTCOME instead.
+`scripts/check_map_view.js` verifies a map's view by reading the map object,
+never a screenshot, and on the live app as well as locally.
+
 **Then run `python scripts/brief_check.py <city>` before writing any code for
 it.** A brief caches Step 0's mistakes as confidently as its findings: Edmonton
 inherited three wrong claims from its own, each an HTTP call from being caught,

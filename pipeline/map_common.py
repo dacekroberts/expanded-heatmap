@@ -504,6 +504,89 @@ PHONE_FIT_SCRIPT = """
     // comparing widths alone cannot notice it.
     var FITTED_AT = null;
 
+    // THE GUARD - owner's decision 2026-09-23, after the same race surfaced a
+    // THIRD way. Edmonton (2026-09-21) and Paris (2026-09-23 morning) were each
+    // fixed at the point where they broke; that afternoon Lille's embedded map
+    // loaded at zoom 8.25 against a baked 11.75 - Edmonton's exact number - and
+    // a reload fixed it. Four further loads would not reproduce it. A race that
+    // cannot be reproduced on demand cannot be fixed one trigger at a time, so
+    // this stops chasing triggers and checks the OUTCOME instead: until the
+    // reader touches the map, the view is compared with what it should be for
+    // the frame's current width, and re-fitted when it is not.
+    //
+    // "What it should be" is exactly what apply() produces - HOME at full
+    // width, fitBounds(BOUNDS, padding 26/18 each side) when narrow - computed
+    // with getBoundsZoom rather than by calling fitBounds, so a correct view is
+    // never touched and the common case stays pixel-identical.
+    //
+    // TOUCHED ends it for good. Any pointer, wheel, touch or key event inside
+    // the map means the reader is steering, and a guard that restored the
+    // view under them would be a new bug. Captured on the container, so the
+    // zoom buttons, the pins and the in-map controls all count.
+    //
+    // __HEATMAP_VIEW is read by scripts/check_map_view.js. It exposes the
+    // INPUTS (home, bounds, padding) as well as the guard's own bookkeeping, so
+    // the check can recompute the expected zoom independently instead of
+    // trusting the thing it is checking.
+    var TOUCHED = false;
+    var PAD = [26, 18];
+    var VIEW = window.__HEATMAP_VIEW = {
+        bounds: BOUNDS, mapW: MAP_W, padding: PAD, home: null,
+        expected: null, actual: null, touched: false, corrections: 0};
+
+    function wantedZoom(m, target) {
+        if (target < MAP_W && BOUNDS) {
+            return m.getBoundsZoom(L.latLngBounds(BOUNDS), false,
+                                   L.point(2 * PAD[0], 2 * PAD[1]));
+        }
+        return HOME ? HOME.zoom : null;
+    }
+
+    function guard(m) {
+        if (TOUCHED || !HOME) return;
+        var w = document.documentElement.clientWidth || window.innerWidth;
+        var target = Math.min(w, MAP_W);
+        if (!target) return;
+        var want = wantedZoom(m, target);
+        VIEW.expected = want;
+        VIEW.actual = m.getZoom();
+        if (want === null || Math.abs(m.getZoom() - want) < 0.01) return;
+        VIEW.corrections += 1;
+        FITTED_AT = null;   // make apply() re-fit instead of trusting the width
+        apply(m);
+        VIEW.actual = m.getZoom();
+    }
+
+    function armGuard(m) {
+        var el = m.getContainer();
+        ["pointerdown", "mousedown", "touchstart", "wheel", "keydown"].forEach(
+            function (ev) {
+                el.addEventListener(ev, function () {
+                    TOUCHED = true;
+                    VIEW.touched = true;
+                }, {capture: true, passive: true});
+            });
+        // Bounded polling for the load itself - every earlier variant of the
+        // race resolved or struck inside the first seconds...
+        var ticks = 0;
+        var iv = setInterval(function () {
+            guard(m);
+            if (TOUCHED || ++ticks >= 40) clearInterval(iv);
+        }, 500);
+        // ...and event triggers for everything slower: a page opened in a
+        // background tab (timers throttled, layout late), an embed below the
+        // fold, a bfcache restore.
+        document.addEventListener("visibilitychange", function () {
+            if (!document.hidden) guard(m);
+        });
+        window.addEventListener("pageshow", function () { guard(m); });
+        if (window.IntersectionObserver) {
+            new IntersectionObserver(function (entries) {
+                if (entries.some(function (e) { return e.isIntersecting; })) guard(m);
+            }).observe(el);
+        }
+    }
+
     // Folium renders body HTML before the figure's script block, so this runs
     // before the map exists - poll for it rather than assuming.
     function ready() {
@@ -564,7 +647,10 @@ PHONE_FIT_SCRIPT = """
         if (target < MAP_W && BOUNDS) {
             // Generous padding because BOUNDS holds label ANCHORS, and a label's
             // text box extends past its anchor by up to ~70px.
-            m.fitBounds(L.latLngBounds(BOUNDS), {padding: [26, 18], animate: false});
+            // PAD, not a literal: the guard computes the zoom this call lands
+            // on, and a padding that drifted between the two would make it
+            // "correct" a right view forever.
+            m.fitBounds(L.latLngBounds(BOUNDS), {padding: PAD, animate: false});
         } else if (HOME) {
             // BACK AT FULL WIDTH, AND THIS BRANCH IS A BUG FIX, NOT SYMMETRY.
             //
@@ -598,7 +684,10 @@ PHONE_FIT_SCRIPT = """
         }
         // Before the first apply(), so this is Folium's own fitted view and not
         // something a narrow-width pass has already moved.
-        if (!HOME) HOME = {center: m.getCenter(), zoom: m.getZoom()};
+        if (!HOME) {
+            HOME = {center: m.getCenter(), zoom: m.getZoom()};
+            VIEW.home = {center: [HOME.center.lat, HOME.center.lng], zoom: HOME.zoom};
+        }
         // Applied more than once on purpose. At load the 1000px-wide map forces
         // a horizontal scrollbar, which costs enough height to force a vertical
         // one, so `clientWidth` reads ~15px short; once the first pass has
@@ -616,8 +705,9 @@ PHONE_FIT_SCRIPT = """
         var t = null;
         window.addEventListener("resize", function () {
             clearTimeout(t);
-            t = setTimeout(function () { apply(m); }, 150);
+            t = setTimeout(function () { apply(m); guard(m); }, 150);
         });
+        armGuard(m);
     }
     start();
 })();

@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**246 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**247 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [The fit race came back a third way, so the fit now checks its outcome](#2026-09-23---the-fit-race-came-back-a-third-way-so-the-fit-now-checks-its-outcome)
 - [Sao Paulo's rail is drawn from OSM with GeoSampa as the status reference; Rio's SIURB clause accepted](#2026-09-23---sao-paulos-rail-is-drawn-from-osm-with-geosampa-as-the-status-reference-rios-siurb-clause-accepted)
 - [The scaffold names a city's page from its slug, not its display name](#2026-09-23---the-scaffold-names-a-citys-page-from-its-slug-not-its-display-name)
 - [Lille made "three regional maps" four within the hour](#2026-09-23---lille-made-three-regional-maps-four-within-the-hour)
@@ -285,6 +286,58 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - The fit race came back a third way, so the fit now checks its outcome
+
+- **Lille's embedded map loaded at zoom 8.25 against a baked 11.75 - Edmonton's
+  exact number - and a reload fixed it; it was first misdiagnosed, and that is
+  half of this entry.** It was put down to a mouse wheel landing on the map as
+  the page scrolled, and the owner was told so without the explanation being
+  reproduced. Repeating the exact action - a fresh load, ten wheel ticks at the
+  same point - left the zoom at 11.75. The record already held the answer:
+  Edmonton on 2026-09-21 broke to 8.25 against 11.5, intermittently, "and a
+  reload of the same page gave a correct 11.5", and Paris broke to 9 against
+  12.5 on the morning of 2026-09-23. Four further Lille loads would not
+  reproduce it (with the caveat that the browser pane was hidden, which pauses
+  rendering). `minZoom` is 0 on every map, so the repeated 8.25 is not a clamp;
+  it is consistent with a fit into the browser's default 300x150 iframe size
+  before Streamlit sizes the frame, which is recorded as a clue, not a finding.
+
+- **Owner's decision: stop chasing triggers and guard the outcome.** Two
+  targeted fixes had each closed the variant in front of them - an `else`
+  branch for Edmonton, `FITTED_AT` and a zero-width refusal for Paris - and a
+  third appeared. `PHONE_FIT_SCRIPT` now carries a guard: until the reader
+  first touches the map, it compares the live zoom with what `apply()` would
+  produce for the frame's current width (the baked view at full width, the
+  bounds fit when narrow) and re-fits on a mismatch - every 500 ms for 20 s, and
+  on visibility change, `pageshow`, resize and scroll-into-view. Any pointer,
+  wheel, touch or key event inside the map ends it for good. `apply()` and the
+  guard now share one `PAD`, since a padding that drifted between them would
+  make the guard "correct" a right view forever. Rejected: one more timed fit
+  pass, which is the approach that produced the two earlier fixes.
+
+- **Proven before it shipped, on a served map:** a clean load was left alone
+  (0 corrections); a programmatic jump to 8.25 - a simulated race - was back at
+  11.75 within 1.2 s; a simulated reader click followed by a zoom to 9 stayed
+  at 9; and at 375 px Edmonton held its bounds fit of 11.75 rather than wrongly
+  restoring its baked 11.5. All 24 maps re-rendered with every point count
+  unchanged (Paris 84,125, Lille 7,205); every one carries the guard.
+
+- **`scripts/check_map_view.js` and the `map-view` skill** make the check
+  repeatable. The script finds the map standalone or two frames deep in the
+  live app, and recomputes the expected zoom from the guard's exposed INPUTS
+  rather than trusting its verdict. It reports a touched map as UNMEASURED and
+  a `corrections > 0` load as the race having fired and been repaired - the
+  only measure there is of how often it happens. Wired into `deploy-verify`
+  step 5 and pointed to from `CLAUDE.md`. The skill records the misdiagnosis
+  as its worked example: search the record for the number, and re-run the
+  action you are blaming, before recording a cause.
+
+- **Wheel-zoom and cluster-click lag were split off, deliberately.** The owner
+  noticed both are laggier than the +/- buttons. That is a performance question
+  (a wheel gesture walks several 0.25 zoom steps, each possibly redrawing the
+  heat layer and re-clustering pins), queued for the cleanup role with an
+  instruction not to touch the fit logic.
 
 ### 2026-09-23 - Sao Paulo's rail is drawn from OSM with GeoSampa as the status reference; Rio's SIURB clause accepted
 
