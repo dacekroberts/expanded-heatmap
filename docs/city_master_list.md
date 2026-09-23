@@ -46,7 +46,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 30
+## Candidates — 28
 
 Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 **Eight cities moved to discarded on measurement** and **two were upgraded**.
@@ -79,8 +79,8 @@ waiting on a licence read, which conflated *we have not looked yet* with
 | 🟤 ~~**D**~~ | ~~Coordinates *and* unfinished screening~~ — ✗ **CLOSED 2026-09-22.** Bucharest's screening finished: rail counted, licence read, national catalogue enumerated | **0** |
 | 🟠 **E** | **Geocoding at national scale.** The address work is a project, justified only by reuse across many cities | **12** |
 | 🟣 **F** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **2** |
-| 🔴 **G** | **Access blocked.** The register exists and is queryable; we cannot reach it in bulk | **2** |
-| *Discarded* | Measured negative, evidence named | *28* |
+| 🔴 ~~**G**~~ | ~~Access blocked~~ — ✗ **CLOSED 2026-09-22.** Both members became **measured negatives** once India's whole catalogue was walked; Hong Kong had already left on its own bulk export | **0** |
+| *Discarded* | Measured negative, evidence named | *30* |
 
 **Re-banded 2026-09-22 so each caption describes what its cities ARE**, not
 how they were found. The previous Band C had grown to 21 cities whose only
@@ -121,6 +121,16 @@ results in the sweep.
 **Every question these cities carry is answerable inside the build**, not
 before it. Nothing here needs a probe, a document or a decision first.
 
+> ⚠️ **Dublin's row was wrong in four places until 2026-09-22**, corrected
+> from `docs/build_briefs/dublin.md` after Step 0 measured it live. All four
+> errors share one root: **the screening probe reported the slice it happened
+> to query as if it were the whole.** It queried **one** authority and **six**
+> categories, then quoted the total as Dublin's; it quoted the length of the
+> *national* category list as the number present in Dublin; it computed 100%
+> coordinates over only the rows it had pulled; and it counted colours across
+> all 42 OSM relations including the Commuter and InterCity services a build
+> would drop. **Every number was true of the query and false of the city.**
+
 Ordered by how little stands in the way. **Built cities keep their row**,
 struck through and marked ✅, so the band still shows what screening promised
 and whether it held.
@@ -129,7 +139,7 @@ and whether it held.
 |---|---|---|---|
 | ✅ | ~~**Guadalajara**~~ 🇲🇽 | DENUE, SCIAN = NAICS, INEGI licence cleared | **BUILT 2026-09-22** — `pages/16_Guadalajara_Heatmap.py`, region *Mexico*. Screening said "nothing outstanding" and that held |
 | ✅ | ~~**Madrid**~~ 🇪🇸 | **53,355 clean storefront rows** — retail 36,224 · food 18,194 · personal 9,974 (from 225,660 join rows → 159,787 open → filtered). Three-level taxonomy on `division`, EPSG:25830, CC BY 4.0 | **BUILT 2026-09-22** — `pages/17_Madrid_Heatmap.py`, region *Spain*. Rail from **CRTM's feature layers**: 13 lines, 293 station-line records, 49 stations excluded, 0 filter disagreements. Screening said the rail leg was the open question and CRTM answered it |
-| 1 | **Dublin** 🇮🇪 ▲▲ | **8,016 rateable premises across two buckets — `RETAIL (SHOPS)` 7,207, `HOSPITALITY` 735, `RETAIL (WAREHOUSE)` 74 — plus `LEISURE` 218 and `HEALTH` 80. 100% carry `Xitm`/`Yitm`, Irish Transverse Mercator, already projected in metres.** Per-row `Category` **and** `Uses`, plus `ValuationReport[].FloorUse` giving use per floor (`RETAIL ZONE A/B/C`). `Eircode` on most rows. Published 15/06/2026. **CC BY 4.0, no key, no account** | **No geocoding leg.** Rail answered: 42 OSM relations, all named — Luas Red + Green (tram) and DART + commuter (Iarnród Éireann). Build decisions only: which of the 36 train relations are in-city, colours for the 32 that lack one, and mapping 16 valuation categories onto three buckets |
+| 1 | **Dublin** 🇮🇪 ▲▲ **REGIONAL** | **38,265 rateable rows across FOUR local authorities → 13,945 storefront** (Dublin City alone: 19,810 → **8,016**). **13 use categories region-wide, 12 in Dublin City.** **99.87% carry `Xitm`/`Yitm`** — Irish TM, already in metres; 51 of 38,265 missing, **46 of them pubs**. Per-row `Category` **and** `Uses`, plus `ValuationReport[].FloorUse`. `Eircode`. **CC BY 4.0, no key** | **No geocoding leg.** Build is the **Vancouver + Surrey shape** — four authorities, not one city. Rail: the three drawn lines (**Luas Red, Luas Green, DART**) all already carry an OSM colour; Commuter and InterCity are **dropped**. ⚠️ **36% of its storefronts are near no rail of any kind** — a scope fact to state on the page, not a defect. Brief: `docs/build_briefs/dublin.md`, **6/6** |
 | 2 | **Seoul** 🇰🇷 | 197,276 active premises over 8 datasets, EPSG:5174, status field, KOGL Type 1 | Build work — partial geocoding for 일반음식점 (90.7%), Korean-aware `check_personal_exposure.py` |
 | 3 | **Milan** 🇮🇹 | 28,131 premises 99.1% coords, `insegna`, `codice_ateco`, CC-BY. All three buckets confirmed | **Capture the column schemas** of two already-confirmed layers — build prep, not screening. The country row is explicit: *"nothing to discover"* |
 | ✅ | ~~**Mexico City**~~ 🇲🇽 | Same DENUE. **Rail from OSM** — 195/195 stops exact, 6,468 geometry points | **BUILT 2026-09-22** — `pages/15_Mexico_City_Heatmap.py`. The ODbL share-alike decision was taken during the build; see `DECISIONS.md` |
@@ -288,6 +298,19 @@ carry three buckets?* **Answer it once and two cities move together.**
 
 ---
 
+## ✗ Closed bands — kept in full as evidence, not as candidates
+
+### Former Band G — ✗ CLOSED (access blocked)
+
+**The band's premise was that the register exists and we cannot reach it, so
+none of its members was a data negative.** That premise was correct and all
+three left it in different directions. **Hong Kong** left upward: its bulk
+export had been published on `data.gov.hk` all along and one `package_list`
+call found it. **Hyderabad and Kochi** left downward: India's entire national
+catalogue — **288,011 titles** — was walked, and every trade-licence dataset
+in it is an aggregate. **A band for unreachable registers is only honest
+while the reaching has not been exhausted.**
+
 ## 🔴 Band G — access blocked: the register exists and we cannot reach it (2 cities)
 
 > ⚠️ **▲▲▲ Hong Kong left this band on 2026-09-22, and it was never
@@ -443,7 +466,6 @@ own file carries them and would improve the filter further.
 > marker. **A filter returning zero can mean "nothing to flag" or "this
 > convention is not used here", and the result alone cannot tell you which.**
 
-## ✗ Closed bands — kept in full as evidence, not as candidates
 
 ### Former Band B — ✗ CLOSED (Tel Aviv, discarded on terms)
 
@@ -764,11 +786,13 @@ took was a different *host* — `services1.arcgis.com`, reachable all along.
 The rule held and protected the city from a premature discard; the cost
 estimate attached to it was guesswork. **See the resolution above.**
 
-## DISCARDED — 28 cities, each naming its evidence
+## DISCARDED — 30 cities, each naming its evidence
 
 | City | Why |
 |---|---|
 | **Tel Aviv** 🇮🇱 | **DISCARDED ON TERMS, NOT ON DATA — owner's decision 2026-09-22.** The data is the strongest of any unbuilt city: **22,176 licensed businesses** with activity *and* location, **EPSG:2039 already in metres**, refreshed within two days. **The municipal Terms forbid it** — no copying, distributing or publishing, **no using the content to create a database**, extending to other websites and to non-commercial use, and requiring **explicit prior written consent**; the open-data portal's footer reads *all rights reserved*. The only remedy was a written request, made **in advance and against explicit prohibitions** — judged not worth the effort against its likelihood. **Not a data negative**, and the full measurement is retained below |
+| **Hyderabad** 🇮🇳 | **India's ENTIRE national catalogue walked — 288,011 titles, 58 calls, zero failed pages — and not one premises-level trade-licence register exists.** All three trade-licence datasets in it are **aggregates**: Ahmedabad's is *No of Gumasta License* per ward per year, Karnataka's is *District wise ULB wise*, Kohima's is *Total* per ward. **Nothing for Telangana, Hyderabad or GHMC at any level.** GHMC itself 403s in a real browser (F5 WAF, names itself); `data.telangana.gov.in` is unroutable and runs DKAN, whose dataset-list endpoint the Archive does not hold; `tgbpass` is *building* permits. **Every route measured, not merely blocked** |
+| **Kochi** 🇮🇳 | **Same national sweep, same result** — India publishes trade-licence **counts**, never premises. Kerala's own route is transactional: K-SMART and Sanchaya renew licences one at a time with no bulk export, and the `?t=establishment` lead was a **false friend** — in Indian government usage *establishment* means **staff posts**, and that search returns 6,526 orders about staffing |
 | **Tallinn** 🇪🇪 | **MTR downloaded whole — 102 MB, 56,401 undertakings, 100,431 licences — and its complete tag census is 17 element names, NONE of which is a place.** Full activity classification, zero location: the Colombia-RUES shape. Composition fails too — the largest category is 25,130 service-worker cards |
 | **Sofia** 🇧🇬 | **11,635 Bulgarian datasets enumerated via `data.europa.eu`'s SPARQL endpoint, around a 403 aimed at us.** 141 municipal premises registers exist nationally; **Sofia's 76 datasets include none.** Its registers are all small towns — Sofia is Bulgaria's only metro city |
 | **Sevilla** 🇪🇸 | **1,260 public ArcGIS items / 413 Feature Services enumerated** from org `hcmP7kr0Cx3AcTJk` after the dead portal's last Archive capture named its successor. **Rail is solved** (`METRO_Estacion` 21, `METRO_Linea` 20, no account). **No premises register**: `Locales` is 150 *vacant municipally-owned units*, the rest are property holdings and facility layers |

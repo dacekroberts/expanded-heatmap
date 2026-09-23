@@ -1131,6 +1131,53 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Discarded Hyderabad and Kochi as MEASURED NEGATIVES after walking India's
+  entire national catalogue - 288,011 titles, 58 calls, zero failed pages.**
+  The decision rule was agreed before the sweep ran, which is what makes the
+  result usable: walk it, and if nothing premises-level appears, close both as
+  measured rather than blocked. **Three titles in the whole catalogue name a
+  trade licence or shops-and-establishments register, and all three are
+  aggregates** - Ahmedabad's fields are *City Name, Year, Zone Name, Ward
+  Name, No of Gumasta License, Amount*; Karnataka's is *District wise ULB wise
+  Trade License Details*; Kohima's is *Total* per ward per category.
+  **Nothing for Telangana, Hyderabad, GHMC, Kerala or Kochi at any level.**
+  India publishes trade-licence **counts**, never premises. Band G closes with
+  both members discarded. Candidates 30 to 28, Discarded 28 to 30. Touched
+  `docs/city_master_list.md`.
+
+- **The sweep was worth running precisely because three negatives had already
+  collapsed the same day.** Stockholm, Zurich and Hong Kong were each recorded
+  as measured and each turned out to be a statement about a search;
+  Hong Kong's bulk export had been sitting on `data.gov.hk` the whole time.
+  Closing India on "we keep running into blockages" without the decisive sweep
+  would have been that error a fourth time. **It cost 58 HTTP calls and
+  converted two blocked cities into two measured ones**, which is a materially
+  stronger position even though the verdict is negative: a blocked city
+  invites a retry forever, a measured one does not.
+
+- **Corrected Dublin's row, which was wrong in four places, and all four
+  errors have one root.** The build session measured Step 0 live
+  (`docs/build_briefs/dublin.md`, checks 6/6) and found: **19,810 rows for
+  Dublin City, not 8,016** - 8,016 is the storefront subset, and the chosen
+  scope is **regional at 38,265 rows / 13,945 storefront across four local
+  authorities**; **13 use categories region-wide and 12 in Dublin City, not
+  16**; **99.87% carrying ITM coordinates, not 100%** - 51 of 38,265 missing,
+  46 of them pubs; and the **"32 relations lacking a colour" was an artefact
+  of counting Commuter and InterCity**, which a build drops - the three lines
+  actually drawn (Luas Red, Luas Green, DART) all already carry an OSM colour.
+
+- **The root is one habit, not four slips: the screening probe reported the
+  slice it happened to query as if it were the whole.** It queried **one**
+  local authority and **six** categories and quoted that sum as Dublin's; it
+  quoted the length of the **national** `SearchCategories` list as the number
+  present in Dublin; it computed 100% coordinates over only the rows it had
+  pulled; and it counted colours across all 42 OSM relations rather than the
+  ones a build would draw. **Every number was true of the query and false of
+  the city.** Also recorded: the build is the **Vancouver + Surrey shape**,
+  four authorities rather than one city, and **36% of its storefronts sit near
+  no rail of any kind** - a scope fact for the page, not a defect.
+
+
 - **Bucharest's licence is SILENT, and the absence is established rather than
   assumed.** Read in the browser, which is the only way to reach the host.
   `bucuresti.dsvsa.ro` has **no terms-of-use page at all** - the entire site
