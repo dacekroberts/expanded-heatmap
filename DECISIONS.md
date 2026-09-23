@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**174 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**175 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Paris's brief written, and its own checks disproved one of its claims](#2026-09-22---pariss-brief-written-and-its-own-checks-disproved-one-of-its-claims)
 - [Paris's feed settled, Lyon deferred, and Europe becomes one map region](#2026-09-22---pariss-feed-settled-lyon-deferred-and-europe-becomes-one-map-region)
 - [Europe became one macro-map region, and a write truncated a file to zero](#2026-09-22---europe-became-one-macro-map-region-and-a-write-truncated-a-file-to-zero)
 - [France's three pre-ship items run; Lyon turns out to be gated three ways](#2026-09-22---frances-three-pre-ship-items-run-lyon-turns-out-to-be-gated-three-ways)
@@ -210,6 +211,61 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Paris's brief written, and its own checks disproved one of its claims
+
+- **`docs/build_briefs/paris.md` written; 7/7 checks hold.** Step 0 is banked
+  from France's country profile, so nothing in it needed discovering. Both
+  remaining items are recorded as **owner calls rather than findings** - the
+  city's scope (commune `751xx` against a network that is far larger, which is
+  Dublin's question again) and what a pin shows for the ~57% of rows with no
+  premises-level name, which is Milan's question again. **The brief stops and
+  asks rather than picking**, which is the difference between a cache and a
+  guess.
+
+- **The brief claimed the IDFM feed SELF-ATTESTS and `brief_check.py`
+  disproved it on the first run.** `add-country` requires self-attestation
+  before a feed is trusted, and the brief asserted it on the strength of an
+  `end_date` of 2026-10-21. The check found **14 files and NO
+  `feed_info.txt`** - the artifact declares no validity window at all, and that
+  date comes from **transport.data.gouv.fr's metadata ABOUT the feed**, which
+  is the National Access Point's assertion rather than the file's. **That is
+  precisely the distinction `add-country` draws** between an artifact that
+  attests to its own freshness and one whose freshness you take on a third
+  party's word.
+
+- **The feed is still the right one; what changed is how staleness is
+  detected.** The host is IDFM's own (`stif/` on Opendatasoft), so provenance
+  was never in question - the two rival GTFS are third-party and both stale or
+  dead. But `fetch_sources.py` must **record the date it downloaded**, because
+  nothing inside the file will. **This also bears on the licence**: Licence
+  Mobilites Art. 5.7 requires the page to state the data's date and its update
+  interval, and **neither is inside the artifact**, so both have to be captured
+  at fetch time or they cannot be displayed honestly. A licence obligation and
+  a build detail turn out to be the same missing field.
+
+- **The absence is now PINNED as a check rather than described in prose.** The
+  `gtfs_files` check lists `feed_info.txt` under `absent`, so if IDFM ever adds
+  one the check fails and the staleness story gets revisited. Recording a
+  negative as a test is the Dublin `valoff-is-retired` pattern.
+
+- **A second check was REMOVED rather than made to pass, and that is the
+  correct outcome.** A claim pinned against `recherche-entreprises.api.gouv.fr`
+  returned **HTTP 429** to a single request. The API is genuinely rate-limited,
+  which makes it fine for the 750-row sample that closed the natural-person gap
+  and **unusable for 148,600 rows** - so the build's guard reads
+  `categorieJuridiqueUniteLegale` from the `StockUniteLegale` parquet instead.
+  **A flaky check is worse than no check**, so the dependency was dropped and
+  the rate limit written into the prose. Replaced with a check on the parquet
+  the guard actually reads - the file this brief separately warns against
+  MAPPING, named rather than avoided.
+
+- **Two claims in the first draft disagreed with the tests written beside
+  them, which is the failure the fenced checks block exists to surface.** One
+  `gtfs_files` check PASSED while its own claim text named `feed_info.txt`,
+  because the file was mentioned in the prose and absent from the `present`
+  array. **A check that passes while its claim is false is worse than a failing
+  one**, and it was visible only because claim and test sit in the same object.
 
 ### 2026-09-22 - Paris's feed settled, Lyon deferred, and Europe becomes one map region
 
