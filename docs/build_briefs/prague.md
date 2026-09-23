@@ -123,9 +123,9 @@ on-map label regardless, so assign colours for those rather than dropping them.
 
 ---
 
-## Licence — one read, one still open
+## ✅ Licence — BOTH READ 2026-09-23, both CC BY 4.0
 
-**ČSÚ is settled. ČÚZK is not, and it is the only thing blocking this city.**
+**Nothing licence-shaped blocks this city any more.** Both are PERMITTED WITH CONDITIONS, and between them they impose **five display obligations**.
 
 - ✅ **RES / ČSÚ — READ 2026-09-23. CC BY 4.0, PERMITTED WITH CONDITIONS.**
   The national catalogue's DCAT record resolves a `podmínky-užití`
@@ -144,23 +144,95 @@ on-map label regardless, so assign colours for those rather than dropping them.
     unchanged official ČSÚ statistics. **This project's ring density, bucketing
     and storefront filtering are all transformations**, so this fires every
     time — the Montréal and INEGI family.
-- **RÚIAN / ČÚZK** — `vdp.cuzk.gov.cz/vdp/ruian/vymennyformat` returns 200 but
-  carries **no data licence**: the only terms link is *"Podmínky užívání
-  aplikace a cookies"*, which is **application and cookie terms, not data
-  terms** — the New York footer shape.
+- ✅ **RÚIAN / ČÚZK — READ 2026-09-23. CC BY 4.0, PERMITTED WITH
+  CONDITIONS.** The document exists and **five earlier attempts searched the
+  wrong subtree**: it lives under **`/Predpisy/`** (Regulations), not under
+  `/Uvod/Produkty-a-sluzby/` or the geoportal —
+  `www.cuzk.gov.cz/Predpisy/Podminky-poskytovani-prostor-dat-a-sitovych-sluzeb/Podminky-poskytovani-prostorovych-dat-CUZK.aspx`,
+  updated **30.06.2023**, reached by one link from the cuzk.gov.cz homepage.
 
-  ⚠️ **Four URLs were tried and all carry application terms rather than data
-  terms.** `vdp.cuzk.gov.cz/vdp/ruian/podminky` and `/vymennyformat` both 200
-  with only the cookie notice; `geoportal.cuzk.cz`'s `podminky_uziti` returns
-  the site's navigation menu; the `cuzk.gov.cz` product page 404s. **A document
-  with the right name exists** — *"Podmínky poskytování prostorových dat a
-  síťových služeb ČÚZK"*, seen in a nav listing — **but its URL was not
-  found.**
+  > „ČÚZK poskytuje prostorová data spadající do kategorie otevřených dat
+  > (včetně metadat) **bezúplatně na základě licence Creative Commons
+  > CC-BY 4.0**."
 
-**Use the `licence-read` agent on ČÚZK before any build.** RÚIAN is widely
-free of charge by statute, but **a government open portal is a reason to
-expect permissive terms, not evidence of them** — and this is the source the
-whole 99.8% coordinate join depends on.
+  Its **first enumerated bullet names this exact resource** — *"data vedená v
+  RÚIAN formou výměnného formátu RÚIAN"*. The grant lists `vytěžovat`,
+  `užívat komerčně i nekomerčně`, `kombinovat`, `kopírovat, distribuovat,
+  šířit`, `transformovat a upravovat`. **Two independent machine records
+  agree** — `data.gov.cz`'s SPARQL and ČÚZK's **own** DCAT-AP record at
+  `atom.cuzk.cz` — CC BY 4.0 on all three rights axes.
+
+### ⚠️ MUST DISPLAY — three, and Prague now needs TWO transformation notices
+
+1. **Prescribed wording**: *"uvedení zdroje ve formátu:* **`ČÚZK, [rok]`**
+   *"* — the year being the data file's currency. For the 2026-08-31 file:
+   **`ČÚZK, 2026`**.
+   ⚠️ **The English page prescribes a DIFFERENT string** (*"ČÚZK ‹month
+   year›"*) and is **version 1.0 dated 2016**, against the Czech version's
+   2023 — and it never mentions CC BY. **Unreconciled.** Use the Czech form and
+   state the file date, which serves the clause's own stated purpose under
+   either reading.
+2. **A link to the conditions page** above.
+3. **A description of the modification** — *"v případě šíření upraveného
+   díla, uvést popis úpravy"*. Projecting S-JTSK, joining to RES and filtering
+   to storefronts are all *úprava*. **This is the Montréal/INEGI family, and
+   ČSÚ requires its own version independently** — so **Prague carries two
+   transformation disclosures**, which may share one sentence only if it names
+   both publishers.
+
+**MUST DO: nothing.** No notification, registration, statistics duty or
+permission request — checked against the whole phrase family. This is not a
+Barcelona.
+
+**MUST NOT SAY**: no endorsement or affiliation (CC BY §2(b)(5)), and no
+accuracy claim — the English version adds that ČÚZK is not liable for damages
+from *"improper or unprofessional interpretation of this data"*, and a
+ring-density map is an interpretation.
+
+### ⚠️ RAISED, NOT RESOLVED — and it changes the FETCH, not the publication
+
+The link this brief previously dismissed as *"Podmínky užívání aplikace a
+cookies"* **is not only cookie terms.** Its real text, at
+`vdp.cuzk.gov.cz/help/topics/cookies.htm` (the `?id=` URL returns a 2,338-byte
+HelpSmith frameset, which is why it read as a bare cookie notice), says:
+
+> „Aplikace je určena pro interaktivní práci uživatelů … **Není povoleno
+> jakékoli vytěžování údajů automatizovanými prostředky.**"
+
+*Any extraction of data by automated means is not permitted* — and it binds
+every user. **Two ČÚZK documents use `vytěžovat` in opposite directions**: the
+spatial-data conditions grant it, the application terms forbid it. **Nothing
+reconciles them, and this is not resolved in the project's favour.**
+
+**But it is about HOW THE FILE IS FETCHED, not what may be published** — the
+reuse verdict holds either way. **Step out of it rather than argue it**: take
+the URL from ČÚZK's **INSPIRE ATOM download service**, which its own
+documentation calls *"určeno především pro strojové zpracování"* — intended
+primarily for machine processing — and which hands out **precisely these
+URLs**:
+
+```
+https://atom.cuzk.gov.cz/get.ashx?theme=RUIAN-CSV-ADR-OB&spatial_dataset_identifier_code=CZ-00025712-CUZK_RUIAN-CSV-ADR-OB_554782
+```
+
+It returns one entry: the Praha file, **3,395,881 bytes**, tagged
+**`EPSG/0/5513`** — which independently corroborates this brief's CRS finding.
+**It also fixes the hard-coded `20260831`, which goes stale on the 1st of
+every month.**
+
+⚠️ A **third** rights statement exists and is deliberately NOT taken: the
+ATOM feed carries `<rights>žádné podmínky neplatí</rights>` — *no conditions
+apply* — which is more permissive than CC BY 4.0 and would be the convenient
+quote. It is standard INSPIRE boilerplate and conflicts with two first-party
+documents. **The conservative reading governs: conditions apply.**
+
+### Privacy — the publisher already did this work
+
+ČÚZK declares `osobní-údaje = neobsahuje-osobní-údaje` on both its own record
+and the national catalogue's — **contains no personal data**, consistent with
+the field list. **RÚIAN contributes nothing to Prague's personal-exposure
+surface**; whatever `check_personal_exposure.py` finds will come from RES
+trade names.
 
 ---
 
@@ -172,7 +244,7 @@ whole 99.8% coordinate join depends on.
 
 ## Still unknown — the honest list
 
-- **ČÚZK / RÚIAN's licence** (above). **The single blocker.** ČSÚ is read.
+- ~~ČÚZK / RÚIAN's licence~~ — ✅ **read 2026-09-23, CC BY 4.0.** What replaces it as open: **whether the VDP application's ban on automated extraction reaches the static file URLs.** Sidestep it via the ATOM service rather than deciding it.
 - **The prefix-matching taxonomy has no precedent in this project** — four
   cities needed a local taxonomy and all four had uniform depth.
 - **Scope** — Prague's `OKRESLAU CZ0100` is the whole city (all 22 městské
@@ -199,6 +271,20 @@ whole 99.8% coordinate join depends on.
     "kind": "http_ok",
     "url": "https://vdp.cuzk.gov.cz/vymenny_format/csv/20260831_OB_554782_ADR.csv.zip",
     "min_bytes": 3000000
+  },
+  {
+    "id": "cuzk-atom-download-service",
+    "claim": "CUZK's INSPIRE ATOM service resolves the Praha file and is the channel its own documentation calls 'intended primarily for machine processing'. USE THIS, not a hard-coded vymenny_format path: it sidesteps the VDP application's ban on automated extraction without anyone having to decide whether that ban reaches static files, AND it fixes the hard-coded 20260831 date, which goes stale on the 1st of every month",
+    "kind": "http_ok",
+    "url": "https://atom.cuzk.gov.cz/get.ashx?theme=RUIAN-CSV-ADR-OB&spatial_dataset_identifier_code=CZ-00025712-CUZK_RUIAN-CSV-ADR-OB_554782",
+    "min_bytes": 300
+  },
+  {
+    "id": "cuzk-spatial-data-conditions-live",
+    "claim": "CUZK's spatial-data conditions page is live. It lives under /Predpisy/ - five earlier attempts searched /Uvod/Produkty-a-sluzby/ and the geoportal and found only application and cookie terms. There is no PDF or versioned artefact, so a change here is SILENT; the page's 'Datum posledni aktualizace: 30.06.2023' is the drift signal",
+    "kind": "http_contains",
+    "url": "https://www.cuzk.gov.cz/Predpisy/Podminky-poskytovani-prostor-dat-a-sitovych-sluzeb/Podminky-poskytovani-prostorovych-dat-CUZK.aspx",
+    "contains": "CC-BY 4.0"
   },
   {
     "id": "cuzk-old-host-redirects",

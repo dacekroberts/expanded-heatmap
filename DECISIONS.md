@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**187 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**188 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [CUZK read: Prague is unblocked, and the "cookie terms" were not only cookie terms](#2026-09-23---cuzk-read-prague-is-unblocked-and-the-cookie-terms-were-not-only-cookie-terms)
 - [The sweep's results sorted: Goteborg banded, two discards evidenced](#2026-09-23---the-sweeps-results-sorted-goteborg-banded-two-discards-evidenced)
 - [The discard record swept for rows that rest on an absence](#2026-09-23---the-discard-record-swept-for-rows-that-rest-on-an-absence)
 - [Four licences read: Oslo is clear, Prague has one left](#2026-09-23---four-licences-read-oslo-is-clear-prague-has-one-left)
@@ -226,6 +227,74 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - CUZK read: Prague is unblocked, and the "cookie terms" were not only cookie terms
+
+- **ČÚZK/RÚIAN is CC BY 4.0, PERMITTED WITH CONDITIONS, and Prague's last
+  licence blocker is gone.** The document exists and **five earlier attempts
+  searched the wrong subtree**: it lives under **`/Predpisy/`** - Regulations -
+  not under `/Uvod/Produkty-a-sluzby/` or the geoportal, and is reached by a
+  single link from the cuzk.gov.cz homepage. Updated **30.06.2023**. Its first
+  enumerated bullet names **this exact resource**, the RÚIAN výměnný formát,
+  and the grant lists `vytěžovat`, `užívat komerčně i nekomerčně`,
+  `kombinovat`, `šířit` and `transformovat a upravovat`. **Two independent
+  machine records agree** - `data.gov.cz`'s SPARQL and ČÚZK's OWN DCAT-AP
+  record at `atom.cuzk.cz` - which is `read-licence` step 5 satisfied rather
+  than asserted.
+
+- **The link this project twice dismissed as "Podmínky užívání aplikace a
+  cookies" contains a data clause, and it is the sharpest finding of the
+  read.** Its real text is at `vdp.cuzk.gov.cz/help/topics/cookies.htm`; the
+  `?id=` URL returns a **2,338-byte HelpSmith frameset**, which is precisely
+  why it read as a bare cookie notice to two earlier passes. It says:
+  *"Není povoleno **jakékoli vytěžování údajů automatizovanými
+  prostředky**"* - any extraction by automated means is not permitted - and
+  binds every user. **So two ČÚZK documents use `vytěžovat` in opposite
+  directions**, one granting it and one forbidding it, and nothing reconciles
+  them.
+
+- **Decided: step out of that ambiguity rather than resolve it in the
+  project's favour.** The conflict is about **how the file is FETCHED, not
+  what may be published** - the reuse verdict holds under either reading - so
+  the exposure is confined to `fetch_sources.py`. ČÚZK operates an **INSPIRE
+  ATOM download service** its own documentation calls *"určeno především pro
+  strojové zpracování"*, intended primarily for machine processing, and it
+  hands out precisely these URLs. **Taking the URL from there makes the
+  question moot at the cost of one extra request**, and it independently fixes
+  a defect in the brief: the hard-coded `20260831` path **goes stale on the
+  1st of every month**. The ATOM entry also returns `EPSG/0/5513`, which
+  **corroborates the CRS finding from a second source**.
+
+- **A THIRD rights statement exists, is more permissive, and was deliberately
+  not taken.** The ATOM feed carries `<rights>žádné podmínky neplatí</rights>`
+  - *no conditions apply*. It is standard INSPIRE boilerplate and it conflicts
+  with two first-party documents and the publisher's own DCAT record. **The
+  conservative reading governs.** Quoting it would have been the convenient
+  move and it is exactly the kind of convenience `read-licence` says not to
+  take.
+
+- **Prague now carries FIVE display obligations across two publishers, and TWO
+  of them are transformation disclosures.** ČÚZK prescribes the literal string
+  **`ČÚZK, [rok]`**, a link to its conditions, and *"v případě šíření
+  upraveného díla, uvést popis úpravy"* - describe the modification. ČSÚ
+  independently requires derived data be marked as derived. **They may share
+  one sentence only if it names both publishers.** ⚠️ ČÚZK's **English**
+  page prescribes a *different* attribution string, is **version 1.0 from
+  2016** against the Czech version's 2023, and never mentions CC BY at all -
+  unreconciled, and the Czech form is used.
+
+- **ČÚZK declares the address data contains NO PERSONAL DATA** -
+  `osobní-údaje = neobsahuje-osobní-údaje` on both its own record and the
+  national catalogue's. So RÚIAN contributes nothing to Prague's
+  personal-exposure surface, and whatever `check_personal_exposure.py` finds
+  will come from RES trade names. `read-licence` step 6b, answered by the
+  publisher rather than by inference.
+
+- **Cost-order arithmetic corrected: Milan was still counted in cost band 1
+  after being built**, which made that file total 33 against the master list's
+  32. Milan removed, band 1 is one city, and the two files sum to **32** again
+  - the check that file states about itself, failing the first time it was
+  exercised after a build landed.
 
 ### 2026-09-23 - The sweep's results sorted: Goteborg banded, two discards evidenced
 

@@ -38,15 +38,15 @@ is why the order is what it is.
 
 ---
 
-## Cost band 1 — nothing left to discover, and no geocoding leg (2 cities)
+## Cost band 1 — nothing left to discover, and no geocoding leg (1 city)
 
 | City | Buys | Why it is cheapest | What is actually left |
 |---|---|---|---|
 | **Paris** 🇫🇷 ▲ | **6** | **99.96% already geolocated** — 148,576 of 148,633. There is no coordinate leg at all, which no other unbuilt city can say | France country facts, NAF taxonomy, OSM rail |
-| **Milan** 🇮🇹 ⚠️ | **1** | Three layers = three buckets, coordinates 99.1%, CC-BY, all three schemas captured 2026-09-22 | Italy facts, ATECO taxonomy, OSM rail. **Owner decision open:** ~82% of retail pins carry no trade name |
 
-**Paris and Milan are the same class of work.** Paris wins on the `Buys`
-column alone.
+**Milan was the other member of this band and is now BUILT (2026-09-22).**
+It was the same class of work as Paris and lost on the `Buys` column — one
+city against six — which is the ordering this file exists to make visible.
 
 ## Cost band 2 — free riders on band 1 (4 cities)
 
@@ -97,15 +97,15 @@ column alone.
 
 | Band | Cities |
 |---|---|
-| 1 — no geocoding leg | 2 |
+| 1 — no geocoding leg | 1 |
 | 2 — free riders | 4 |
 | 3 — a join | 2 |
 | 4 — a keyless geocode | 4 |
 | 5 — one bucket, owner call | 3 |
 | 6 — blocked or keyed | 6 |
 | 7 — national geocoding project | 12 |
-| **Total** | **33** |
+| **Total** | **32** |
 
-Against `city_master_list.md`'s bands: A 9 − Dublin = 8, B 6, C 16, D 2 = 32.
+Against `city_master_list.md`'s bands: **A 7 + B 6 + C 16 + D 3 = 32.**
 **The two files must always sum to the same number**, and that is the check to
 run when either is edited.
