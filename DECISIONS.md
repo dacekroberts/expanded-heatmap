@@ -16,12 +16,16 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**235 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**239 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
 - [The legend covered the basemap credit in every city, and the embedded size hid it](#2026-09-23---the-legend-covered-the-basemap-credit-in-every-city-and-the-embedded-size-hid-it)
 - [The built-cities list was short by EIGHT, and the eighth had been missing since the eleventh city](#2026-09-23---the-built-cities-list-was-short-by-eight-and-the-eighth-had-been-missing-since-the-eleventh-city)
+- [Brazil needs no geocoder: its census address file is a premises survey, and nine cities join Band A](#2026-09-23---brazil-needs-no-geocoder-its-census-address-file-is-a-premises-survey-and-nine-cities-join-band-a)
+- [Two corrections to the Toulouse build, both found while scoping Lille](#2026-09-23---two-corrections-to-the-toulouse-build-both-found-while-scoping-lille)
+- ["Only city" claims read against 23 cities: eleven false, two overstated, one true](#2026-09-23---only-city-claims-read-against-23-cities-eleven-false-two-overstated-one-true)
+- ["Every map here covers one rail network" survived four hours and one new city](#2026-09-23---every-map-here-covers-one-rail-network-survived-four-hours-and-one-new-city)
 - [A self-test for the one check whose vocabulary is meant to be edited](#2026-09-23---a-self-test-for-the-one-check-whose-vocabulary-is-meant-to-be-edited)
 - [Toulouse built: 8,635 storefronts, 48 stations, and the first non-rail mode](#2026-09-23---toulouse-built-8635-storefronts-48-stations-and-the-first-non-rail-mode)
 - [The scope check paid for itself on the first merge it met](#2026-09-23---the-scope-check-paid-for-itself-on-the-first-merge-it-met)
@@ -442,6 +446,231 @@ onwards; the early ones are split by phase rather than by hour.
   after-run is readable as a delta instead of a wall of pre-existing findings.
   The three category-B hits inside `project_context.md` at the start were all
   correct facts rather than drift, and were left alone.
+### 2026-09-23 - Brazil needs no geocoder: its census address file is a premises survey, and nine cities join Band A
+
+- **Brazil's business leg moved from CNPJ to IBGE's CNEFE 2022, and its
+  geocoding leg disappeared.** CNEFE, the census address file, records every
+  non-residential address with `DSC_ESTABELECIMENTO` - the enumerator's
+  identification of the establishment - and a coordinate taken at the address
+  (`NV_GEO_COORD = 1` on 95-99.9% of mapped rows). It was downloaded to
+  measure a geocoding JOIN, and turned out to make both CNPJ and the geocoder
+  unnecessary. **The generalisable move: before building a geocoder, look for
+  an address file that already carries the coordinate** - RUIAN, DAWA and now
+  CNEFE each turned "a geocoding project" into a join or into nothing.
+
+- **CNPJ is geo-blocked, which is a publisher's choice and not routed around.**
+  The old `dados_abertos_cnpj/` directory has returned 404 since 2026-01-30;
+  the files now sit in a Nextcloud share (`index.php/s/YggdBLfdninEJX9`). From
+  16 check nodes, **the Brazilian one answered 200 and all 15 others, in 12
+  countries, were reset**. A Brazilian proxy or VPN was rejected outright: it
+  would circumvent an access control. The four-cause check found two causes
+  at once - the data had MOVED and the host REFUSES - which is why neither
+  alone explained the evidence.
+
+- **The owner chose city registers before a CNPJ mirror, and both cities
+  measured negative.** Sao Paulo: 483 CKAN packages read by eye and 483
+  GeoSampa layers, no business register. Rio: 9,879 public ArcGIS items led
+  to `Fazenda/ISSQN`, whose tables are counts per street x activity group x
+  year of concession - the aggregate trap, and a flow rather than a stock.
+
+- **Taxonomy: free text, so `premises-taxonomy`'s explicit-home rule was
+  adapted rather than applied.** Rio alone has 118,684 distinct descriptions.
+  `scripts/screen_cnefe.py` uses ordered keyword rules on the NAICS bucket
+  boundaries every built city uses (car washes, auto repair, gyms and repair
+  shops OUT; a bakery is RETAIL on the Dublin/Vancouver/Milan precedent), with
+  two design decisions pinned by import-time checks: **the head noun wins**
+  (the earliest match in the string), because the first version would have
+  dropped `BAR DO CLUBE`, `DELICIAS DA PRACA` and `RESTAURANTE DO HOTEL` as a
+  club, a square and a hotel; and **vacancy wins wherever it appears**
+  (`LOJA FECHADA`). An edit-distance pass over unmatched rows recovered
+  enumerator misspellings (`RESTAUTANTE`, `CABELEIRO`, `GARRAGEM`): 2,345 rows
+  in Rio, 8,188 in Sao Paulo.
+
+- **The catch-all is 19.7-29.2% and cannot go a level deeper, because there
+  is no deeper level.** What remains is mostly bare trade names with no
+  category word, dropped rather than assigned to Retail - the guess the skill
+  forbids. **Its share varies by neighbourhood, and that is the finding to
+  carry**: 13% in Sao Paulo's periphery against 31% in Pinheiros, 15% against
+  36% in Rio's Barra da Tijuca, and **48% in Brasilia's Asa Sul**. Affluent
+  commercial districts use brand names, so the map under-draws them. Every
+  Brazilian page must say so.
+
+- **Licence: PERMITTED WITH CONDITIONS, by federal law rather than by any
+  IBGE document** (Decree 8.777/2016 art. 4, Lei 14.129/2021 art. 29), read
+  by the `licence-read` agent. Credit required; LGPD principles apply, which
+  makes the privacy rule a licence condition. **Four restrictive readings (a
+  2009 service-desk email, the copyright waiver's reach, statistical secrecy,
+  and CNEFE's absence from the open-data catalogue) were recorded, not
+  resolved by the reader. The owner decided to proceed on the law** on a
+  recorded reasoned position - the Philadelphia shape. Rejected: asking IBGE
+  first and holding Brazil.
+
+- **Privacy: the owner chose a STRUCTURAL rule over a name list.** At any
+  address that also holds a dwelling, the tooltip shows the category, never
+  the description text. A first name at a dwelling address was measured at
+  0.8-2.3% of mapped rows per city; the structural rule reaches 24-56% (and
+  **89.7% in Brasilia**, whose superquadra addressing puts shops and flats at
+  one address). Rejected: suppressing only name-list matches, because a list
+  misses names; and category everywhere, as more than the licence needs.
+
+- **Vintage and shopping centres: accepted and disclosed**, on the owner's
+  decision. 2022 is the only CNEFE edition since 2010 (Barcelona is built on
+  its 2022 census); a shopping centre collapses to one to a few rows, and
+  only 0.1-1.2% of mapped rows stand for more than 10 establishments.
+  Rejected: supplementing malls from OSM, which would make every Brazilian
+  city a multi-source build.
+
+- **Seven more Brazilian cities re-added, each measured on its own file.** A
+  rail screen of twelve cities (one Overpass query each; Curitiba as a
+  negative control, which returned only a tourist train) and a CNEFE screen
+  of the seven that carry metro or modern light rail. Mapped storefronts:
+  Salvador 52,258, Fortaleza 49,503, Belo Horizonte 44,923, Brasilia 35,824,
+  Recife 25,212, Porto Alegre 18,798, Santos 6,021 - beside Sao Paulo
+  216,037 and Rio 105,350. **Band A: 8 -> 17; Band B: 16 -> 14.** Teresina,
+  Maceio, Joao Pessoa and Natal were NOT downloaded: their rail is single
+  diesel lines or CBTU suburban trains tagged `light_rail`, the commuter shape
+  - recorded as ASSERTED, not discarded.
+
+- **Band A's caption lost "brief written"**, added that morning in the drift
+  fix. `CLAUDE.md` says a brief is a cache, not a prerequisite; nine cities
+  meeting every other condition made the contradiction visible. Files:
+  `docs/city_master_list.md`, `docs/global_country_shortlist.md`,
+  `docs/data_sources.md`, `scripts/screen_cnefe.py`.
+
+### 2026-09-23 - Two corrections to the Toulouse build, both found while scoping Lille
+
+- **CORRECTION: Toulouse's commune-only scope was partly justified by a rule
+  that does not apply in France.** The entry and the published page said
+  drawing Blagnac's stations "would mean mapping Blagnac's businesses too,
+  which is a different project rather than a wider filter." That rule exists
+  for cities whose business data is municipal - it is why San Diego's
+  neighbouring-city stations were a new project, each city licensing
+  separately. SIRENE is one national file under one licence, so Blagnac's
+  businesses were already in the parquet Toulouse reads, and widening the scope
+  was just more commune codes - Miami is this project's precedent for exactly
+  that case. The decision stands on its other stated ground, comparability
+  with Paris and Marseille. The error surfaced while scoping Lille, where it
+  would have argued against the regional scope the owner then chose. Corrected
+  on the page, in `docs/excluded_categories.md` and in the city's config, with
+  the replacement wording approved by the owner before it was written.
+
+- **CORRECTION: a 504 from Overpass is not "usually the query", and the rule
+  written this afternoon said more than its evidence did.** It rested on one
+  pair of observations on the Toulouse bbox - a node+way `out center` query
+  504ing where a nodes-only one answered in seconds. Two hours later, scoping
+  Lille, a **tags-only** relation query - the cheapest query there is, with no
+  geometry at all - drew a 504 from overpass-api.de and a read timeout from
+  kumi.systems, on two consecutive runs. So a 504 is sometimes the host and
+  nothing else. What survives is narrower and still useful: query cost is the
+  half you control, so rule it out first, then treat the remainder as a fact
+  about the host. `fetch()`'s behaviour needed no change - it already falls
+  through to the next mirror either way - so only the wording was corrected, in
+  `pipeline/osm.py`, `scripts/brief_check.py` and `osm-rail`. **The shape of
+  the error is the one this project keeps recording**: a single paired
+  observation written up as a general rule, in shared code, the same day.
+
+### 2026-09-23 - "Only city" claims read against 23 cities: eleven false, two overstated, one true
+
+- **Swept the published surface for universal and superlative claims** - "the
+  only city", "every other city", "no other city" - on every city page and in
+  the two documents the app renders, joining sentences across line breaks so a
+  claim split over two source lines was not missed. This is the error shape the
+  handoff flagged after three instances in one day. **It found eleven more that
+  were false, two that overstated** (Calgary's premises flag, on its page and
+  in the document, now "a distinction most registers here leave to be
+  inferred"), **and one that was true.**
+
+- **At least two were already false the day they were written**, which is the
+  part worth knowing: this is not only rot. Mexico City's page said "every other
+  city here is built from business licences" when Montréal's field survey had
+  been built four cities earlier; Calgary's said it was "the only map on this
+  site where nothing was excluded for lying in another municipality" when New
+  York's and Miami's excluded-stations files were already empty. Each author
+  generalised from the cities they happened to be thinking of.
+
+- **The rest went false as later cities arrived, or may have been false from
+  the start - build order is not always recoverable from the log.** New York's
+  "no other city here
+  needed more than one source" (Boston needed three, Milan six). Philadelphia's
+  "the only city here where a whole category has no source" (Boston, two cities
+  later - and this site's own exclusions page already said so). Montréal's
+  "the only map here built from a field survey" and "the one filter no other
+  city here needed" (Barcelona's census is a survey and excludes vacancy the
+  same way). Mexico City's "every other city offers an opt-in layer of all
+  businesses" (Guadalajara drops it too - `all_city_heat=False` in both
+  `step3_map.py` files). Calgary's "the only parcel substitute this project has
+  built" (San Francisco, Los Angeles and San Diego each built one). Vancouver
+  as "the only city where the registry answers" whether a name is a person
+  (D.C.'s entity type and the French legal form do too).
+
+- **Two were mine, from this morning**, transcribed into
+  `docs/excluded_categories.md` while writing up five cities: Montréal's
+  uniqueness claims copied from its page - contradicting the Barcelona section
+  written in the same hour, which says Barcelona "states vacancy outright" -
+  and Marseille's ferries as "genuine urban transit in a way no other city's
+  excluded mode is", copied from `pipeline/marseille/config.py` without checking
+  it against Vancouver's SeaBus. **Transcribing a claim republishes it**, and
+  the comment in Marseille's config is corrected at the source so the next
+  transcriber does not copy it a third time.
+
+- **One was checked and is TRUE, and was left alone.** Toronto is still the
+  only city whose addresses had to be matched against a separate address-point
+  layer: Vancouver, Milan and Dublin all carry their own coordinates. A true
+  "only" claim is not a defect; the defect is an unchecked one.
+
+- **The fix principle, applied to every one: compare against a CATEGORY, not
+  against "every other city".** "More directly than a licence register can"
+  stays true as cities arrive; "more directly than anywhere else on this site"
+  is a bet on the next city. Where a named comparison was clearer, it names the
+  city - "as in Boston", "as Vancouver's SeaBus is" - without a count, because
+  "one of two" is the same bet one step removed.
+
+- **The probe that found these was the same one that gave false zeros an hour
+  earlier on a different question**, and the difference is instructive. For
+  exposure verdicts, a case-sensitive match on "Marseille" missed entries that
+  wrote "Personal exposure:" without naming the script; widening it found both
+  verdicts recorded (Marseille 1 of 10,013 pins, Toulouse 0 of 5,553). For
+  universal claims, the first pass piped through `head -120` and silently cut
+  off the second half of `excluded_categories.md`, which held four of the eleven
+  - the ferries, the heat layer, the parcel substitute and Vancouver's registry.
+  **Both
+  probes were wrong by being narrower than the question**, which is the
+  harness lesson in a new form.
+
+### 2026-09-23 - "Every map here covers one rail network" survived four hours and one new city
+
+- **The general rule at the top of the station-scope section contradicted the
+  per-city fact a thousand lines below it, and Toulouse is what falsified it.**
+  The section opened "Every map here covers one **rail** network ... anything
+  else that runs on rails in that city is not on the map"; Toulouse draws
+  Téléo, an aerial cable car, and its own section says so correctly. Both
+  statements were published, in one document, at the same time. Corrected to
+  "one city's **rapid-transit** network", with the exception named in the
+  paragraph that follows rather than left for a reader to find.
+
+- **The same edit fixed a reason that had quietly become wrong.** San
+  Francisco's cable cars were excluded here "because they are a different mode
+  entirely" - which, once Toulouse's cable car is drawn, is no longer a reason
+  at all. The real ground is the one already stated for the F Market streetcar
+  and for trams: a separately branded service running beside Muni Metro rather
+  than part of it. **The test a mode has to answer is not "does it run on
+  rails" but "is it part of the network this city's riders use as its rapid
+  transit"**, which is what the tram and commuter-rail paragraphs were already
+  doing without saying it.
+
+- **This is the third instance today of the same error shape**, after the
+  staging session's Zurich correction and the Paris page's "trams are excluded
+  in every city here that has them": **a rule generalised from the cities that
+  existed when it was written.** All three were published prose, none was
+  caught by a check, and all three were found by reading what a NEW city
+  actually did. No check is proposed for it - the failure is a claim about
+  cities that do not exist yet, and a check can only compare a claim to the
+  cities that do.
+
+- **Dropped "Seven of these maps draw light rail" for "many ... among them".**
+  The seven were a measured list from `dd4ced8`, correct when written and
+  already wrong two cities later. A closed count of an open set, which is the
+  denominator rule's own example.
 
 ### 2026-09-23 - A self-test for the one check whose vocabulary is meant to be edited
 

@@ -690,8 +690,11 @@ def _overpass_once(host, query, timeout):
 def _overpass(query, timeout=180, _skip=()):
     """First mirror that answers. Returns (elements, host).
 
-    ⚠ A 504 OR A READ TIMEOUT HERE IS USUALLY THE QUERY, NOT THE HOST, and
-    saying so in the error is what stops the next person waiting it out.
+    ⚠ A 504 OR A READ TIMEOUT HERE MAY BE THE QUERY RATHER THAN THE HOST, and
+    naming that in the error is what stops the next person waiting out a
+    cost problem. It is not always the query: on the same day a tags-only
+    query, with no geometry at all, 504'd on overpass-api.de and timed out
+    on kumi. Rule out cost first because it is the part you control.
     Measured 2026-09-23 on the Toulouse commune bbox, same tag, minutes apart:
     `node+way` with `out center` drew a 504 from overpass-api.de and a read
     timeout from kumi, while `node` alone with `out body` answered in seconds
@@ -719,7 +722,7 @@ def _overpass(query, timeout=180, _skip=()):
         except Exception as exc:
             hint = ""
             if "504" in str(exc) or "timed out" in str(exc).lower():
-                hint = "  <- cost, not outage: try nodes-only and drop `out center`"
+                hint = "  <- may be cost rather than outage: try nodes-only, drop `out center`"
             problems.append(f"{name}: {type(exc).__name__} {exc}{hint}")
     raise RuntimeError("every Overpass mirror failed - " + "; ".join(problems))
 

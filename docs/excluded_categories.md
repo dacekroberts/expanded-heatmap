@@ -30,11 +30,20 @@ home under their own name. Fixing the first mostly fixed the second.
 
 ## Which stations these maps are drawn around
 
-**Every map here covers one rail network**, named in the title of its own page
-and in the city list on the front page: Muni Metro in San Francisco, the 'L' in
-Chicago, Metro de Madrid in Madrid. Anything else that runs on rails in that
-city is not on the map, and the rings are drawn only around the stations that
-are.
+**Every map here covers one city's rapid-transit network**, named in the title
+of its own page and in the city list on the front page: Muni Metro in San
+Francisco, the 'L' in Chicago, Metro de Madrid in Madrid. Anything else that
+carries people around that city is not on the map, and the rings are drawn only
+around the stations that are.
+
+**That network is rail in every city but one.** Toulouse's Téléo is an aerial
+cable car, and it is drawn - because Tisséo runs and tickets it exactly as it
+does the métro, because it crosses the Garonne where no other line does, and
+because one of its three stations is a Métro B interchange. It is the only
+non-rail mode on this site, and its own section below has the reasoning. **So
+the question a mode has to answer is not "does it run on rails" but "is it part
+of the network this city's riders use as its rapid transit"** - which is the
+same question the tram and commuter-rail paragraphs below are answering.
 
 **Commuter rail is excluded in every city.** The ones named on the record are
 BART and Caltrain in San Francisco, Metra in Chicago, Metrolink in Los Angeles,
@@ -46,15 +55,17 @@ InterCity trains in Dublin, RER and Transilien in Paris, and the TER services
 in Marseille.
 
 **Trams are NOT excluded as a class, and the test is whether the tram is the
-rapid-transit system or an overlay on one.** Seven of these maps draw
-light rail - San Diego, San Francisco, Los Angeles, Edmonton, Calgary, Miami
-and Dublin - and Marseille draws its three Tramway lines beside its two Métro
-lines. Where a tram network is left out, the city already has a metro and the
-trams run over the top of it: Milan's 17 tram routes stop a block or two apart
-and the agency publishes no colour for any of them, and Barcelona's tram falls
-outside the network-identity test that picks out its metro. San Francisco's F
-Market heritage streetcar is out on its own ground - a separately branded
-service - and its cable cars are a different mode entirely.
+rapid-transit system or an overlay on one.** Many of these maps draw light rail
+- San Diego, San Francisco, Los Angeles, Edmonton, Calgary, Miami and Dublin
+among them - Marseille draws its three Tramway lines beside its two Métro
+lines, and Toulouse draws T1 beside Métro A and B. Where a tram network is left
+out, the city already has a metro and the trams run over the top of it: Milan's
+17 tram routes stop a block or two apart and the agency publishes no colour for
+any of them, and Barcelona's tram falls outside the network-identity test that
+picks out its metro. San Francisco's F Market heritage streetcar and its cable
+cars are out on that same ground rather than on any question of mode: both are
+separately branded services running beside Muni Metro rather than part of it.
+Toulouse's cable car is the proof that "cable car" is not itself a reason.
 
 **The line is drawn by station spacing and service frequency, not by which
 company runs the trains.** SEPTA is the clearest case — the Market–Frankford
@@ -488,19 +499,19 @@ cities' exclusions were justified that way before any privacy argument -
 consistent with how Los Angeles' and Philadelphia's were framed. Vancouver's
 name-suppression policy is separate and is described under "Honest limits".
 
-### Montréal - vacant units, and the one filter no other city needed
+### Montréal - vacant units, which a survey can see and a register cannot
 
 **Vacant ground-floor units are excluded, about 3,500 of them.** Montréal is
-the only city here built from a field survey rather than a licence register -
-the Ville walks its commercial streets each year and records what occupies each
-unit - so it is also the only city whose source states vacancy outright instead
-of leaving it to be inferred. An empty shopfront is premises rather than
-commerce, and counting it would measure the supply of retail space instead.
+built from a field survey rather than a licence register - the Ville walks its
+commercial streets each year and records what occupies each unit - so, like
+Barcelona's census, its source states vacancy outright instead of leaving it to
+be inferred. An empty shopfront is premises rather than commerce, and counting
+it would measure the supply of retail space instead.
 
-**What is left after that filter is a closer reading of the street than any
-other map here can be.** Roughly 69% of surveyed units are storefronts, against
-about 28% in a licence-register city, which is why this city's density is not
-comparable with the registry cities on either side of it.
+**What is left after that filter is a closer reading of the street than a
+licence register can give.** Roughly 69% of surveyed units are storefronts,
+against about 28% in a licence-register city, which is why this city's density
+is not comparable with the registry cities on either side of it.
 
 **The map is scoped to the agglomeration** - 15 related municipalities
 alongside the 19 boroughs - and about a tenth of surveyed units fall in those
@@ -512,7 +523,7 @@ in the data, not necessarily on the ground.
 
 **Calgary's register does most of this page's work itself**, which makes its
 exclusions unusually easy to state. Its 96 categories are suffixed with the
-distinction every other city has to infer: `- PREMISES` against `- NO
+distinction most cities here have to infer: `- PREMISES` against `- NO
 PREMISES`, plus `(MOBILE)`, `(HOME BASED)`, `(MAIL ORDER)` and `(DIRECT
 SALES)`. So `RETAIL DEALER - PREMISES` (7,516 rows) and `RETAIL DEALER - NO
 PREMISES` (7) are the same trade, split by the City into the thing this project
@@ -572,7 +583,7 @@ easy to mistake for a decision: `homeoccind` reads `N` on all 23,203 rows.
 It is constant, not merely unreliable, so unlike Surrey (`Home Occupation`,
 14,015 rows) and Edmonton (`licencetype`, 14,114) the City asserts nothing
 about home occupation, and no inference is attempted - Vancouver's parcel
-substitute, the only one this project has built, removed nothing.
+substitute, built for the same silence in its own register, removed nothing.
 
 ### Edmonton - a register that sorts itself, and one merged category counted anyway
 
@@ -823,12 +834,12 @@ professional associations never enter. Food service is anchored on **722**, not
 precision the NAICS cities use; a two-digit prefix would have been the
 obvious-looking mistake.
 
-**The whole-city heat layer is OFF for this city.** Every other city offers an
-opt-in layer showing all of its businesses, not only those within a station
-ring. Mexico City's would carry 283,345 points against 133,362 in the default
-layer, and dropping it cut the rendered file from 25.7 MB to 19.0 MB. So the
-map shows density **around stations** and does not offer the whole-city
-comparison the other cities do.
+**The whole-city heat layer is OFF for this city**, as it is for Guadalajara,
+built from the same census. Most cities here offer an opt-in layer showing all
+of their businesses, not only those within a station ring. Mexico City's would
+carry 283,345 points against 133,362 in the default layer, and dropping it cut
+the rendered file from 25.7 MB to 19.0 MB. So the map shows density **around
+stations** and does not offer the whole-city comparison most other cities do.
 
 **What is NOT excluded, and is worth stating because the number looks
 alarming:** `scripts/check_personal_exposure.py` reports that 32.2% of Mexico
@@ -1002,9 +1013,9 @@ which is the comparison worth trusting.
 
 **The harbour ferries are excluded, and this one is flagged rather than
 settled.** The Vieux-Port shuttles and the Frioul islands service are genuine
-urban transit in a way no other city's excluded mode is, and they are dropped
-because this project measures density around *rail* stations and no built city
-draws a ferry. Recorded as an owner's decision on 2026-09-23 for possible
+urban transit - as Vancouver's SeaBus is, dropped on the same ground - and
+they are left out because this project measures density around *rail* stations
+and no built city draws a ferry. Recorded as an owner's decision on 2026-09-23 for possible
 revisiting, not as an automatic application of a rule.
 
 ### Toulouse - the same register again, and the first mode drawn here that is not a train
@@ -1032,8 +1043,10 @@ Beauzelle to the Airbus works and the exhibition centre, and this map covers the
 commune of Toulouse, so those twelve stops and the rings around them are not
 drawn. Métro A loses Balma-Gramont and Métro B loses Ramonville on the same
 rule. All fourteen are listed, with the commune each lies in, at
-`outputs/toulouse/excluded_stations.csv`. Drawing them would mean mapping
-Blagnac's businesses too - a different project rather than a wider filter.
+`outputs/toulouse/excluded_stations.csv`. Blagnac's businesses are in the
+same national register, so this is a scoping choice rather than a data limit -
+the map keeps to the commune so that Toulouse, Paris and Marseille are drawn on
+the same terms.
 
 **Nothing is excluded here for being a cable car.** Téléo is drawn: three
 stations, all inside the commune, and the first non-rail mode anywhere on this
@@ -1192,10 +1205,11 @@ of 5.7 points.
 - Whether a name belongs to a person is judged by pattern, not verified. The
   test spots "Jane Smith" and misses "J Smith Consulting", and it cannot
   distinguish a sole trader legitimately named after themselves from a
-  registrant sitting at home. **Vancouver is the exception**, and the only city
-  where the registry answers this itself: it wraps a sole proprietor's own name
-  in PARENTHESES - "(Qi Liu)" - so the primary signal there is the City's own
-  marking rather than a guess. The pattern test is still run alongside it,
+  registrant sitting at home. **Vancouver is one of the exceptions, where the
+  registry answers this itself** - as D.C.'s entity type and the French
+  register's legal form also do - and it answers in the name field: it wraps a
+  sole proprietor's own name in PARENTHESES - "(Qi Liu)" - so the primary
+  signal there is the City's own marking rather than a guess. The pattern test is still run alongside it,
   because each catches people the other misses: the parentheses find 63
   storefront rows the pattern misses, mostly three-part and non-Anglo names,
   and the pattern finds about 10 registrants who did not use parentheses.

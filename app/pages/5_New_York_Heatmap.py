@@ -58,7 +58,7 @@ service comes from the Health Department's restaurant permits, grocery and
 bodega retail from the State's retail food store licences, salons and barbers
 from the State's appearance-enhancement licences, and a narrow slice of
 regulated retail from the city's own Consumer and Worker Protection licences.
-No other city here needed more than one source.
+Most cities here need only one.
 
 That has a consequence worth stating plainly: **the Retail category here covers
 less of the trade than it does in the other cities on this site.** A clothing

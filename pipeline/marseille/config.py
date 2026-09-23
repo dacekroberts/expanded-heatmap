@@ -167,8 +167,11 @@ RING_LABELS = ["0-0.05 mi", "0.05-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi"]
 # rule that drops Boston's CR-*, Chicago's Metra and Madrid's Cercanias - these
 # reach Nice and Geneva. And 6 `route_type 4` FERRY routes (Vieux-Port
 # shuttles, the Frioul islands service): owner's decision 2026-09-23 to drop
-# them, RECORDED FOR POSSIBLE REVISITING. They are genuine urban transit here,
-# which no other city's excluded mode is, so this is a judgment call rather
+# them, RECORDED FOR POSSIBLE REVISITING. They are genuine urban transit here -
+# as Vancouver's SeaBus is, which was dropped on the same ground (this line
+# once said "which no other city's excluded mode is", and that sentence was
+# copied onto the public exclusions page before anyone checked it against
+# Vancouver) - so this is a judgment call rather
 # than an automatic drop - the project measures density around RAIL stations
 # and no built city draws a ferry.
 ROUTE_TYPES_RAIL = ("0", "1")

@@ -173,9 +173,11 @@ why `pipeline/stations.py` shares the checks and leaves the collapse per city.
   cross-direction check print "every ref has exactly 2 direction relations"
   over **zero** relations. Overpass hosts also 504 and 429 freely - try several
   before concluding anything, and treat a failure as a fact about that host.
-- **But a 504 is usually YOUR QUERY, not the host.** See the section below
-  before you conclude Overpass is down; the Toulouse build lost ten minutes to
-  exactly that misreading.
+- **But a 504 may be YOUR QUERY rather than the host** - and it may not. See
+  the section below: rule out query cost first, because it is the part you
+  control. The Toulouse build lost ten minutes to a cost problem read as an
+  outage; two hours later a tags-only query 504'd on two hosts, which was
+  the host and nothing else.
 
 - **`map_to_area` silently returns NOTHING for a relation that is not in
   Overpass's area index**, and the query then matches zero of everything with

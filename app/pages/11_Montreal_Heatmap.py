@@ -33,19 +33,19 @@ st.title("Montréal: commercial density around Métro station areas")
 
 st.markdown(
     """
-**This is the only map here built from a field survey rather than a licence
-register.** The Ville de Montréal walks its commercial streets each year and
-records what occupies each unit, so it counts what is actually there rather
-than who holds a permit. One consequence is worth knowing before reading the
-colours: roughly **69% of surveyed units are storefronts**, against about 28%
-in a licence-register city, so the balance between categories here reflects the
-street more directly than it can elsewhere on this site.
+**This map is built from a field survey rather than a licence register.** The
+Ville de Montréal walks its commercial streets each year and records what
+occupies each unit, so it counts what is actually there rather than who holds a
+permit. One consequence is worth knowing before reading the colours: roughly
+**69% of surveyed units are storefronts**, against about 28% in a
+licence-register city, so the balance between categories here reflects the
+street more directly than a licence register can.
 
 **Vacant units are excluded.** The survey records them — about 3,500 of them —
 and a licence register never can. An empty shopfront is premises rather than
 commerce, so counting them would measure the supply of retail space instead.
-That is a choice, and it is the one filter on this map that no other city here
-needed.
+That is a choice, and Barcelona, whose census also records vacancy, makes the
+same one.
 
 **Four lines are drawn** from the Société de transport de Montréal's own
 published geometry, each labelled directly on the map and in the legend, in the
