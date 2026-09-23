@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**163 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**164 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Madrid and Barcelona published, and the live site showed a defect no local check could have](#2026-09-22---madrid-and-barcelona-published-and-the-live-site-showed-a-defect-no-local-check-could-have)
 - [The unplaceable label was the circular line, and the fix is a second pass rather than more candidates](#2026-09-22---the-unplaceable-label-was-the-circular-line-and-the-fix-is-a-second-pass-rather-than-more-candidates)
 - [The geocoder gap was closed by moving the boundary, not the code](#2026-09-22---the-geocoder-gap-was-closed-by-moving-the-boundary-not-the-code)
 - [Guadalajara was the last step file that fetched, and the rule is now a check](#2026-09-22---guadalajara-was-the-last-step-file-that-fetched-and-the-rule-is-now-a-check)
@@ -199,6 +200,46 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Madrid and Barcelona published, and the live site showed a defect no local check could have
+
+- **The project's first two cities outside North America are live.** Madrid and
+  Barcelona landed on master at `6dcb295`, the owner rebooted the Streamlit
+  Cloud app rather than taking "Updated app!", and the deploy was confirmed on
+  the public URL rather than locally: the region switcher reads **Spain (2)**,
+  the macro map still opens on the United States, Madrid renders all thirteen
+  line labels and Barcelona all sixteen including both funiculars, each with a
+  full legend and the `© OpenStreetMap contributors` attribution. The reboot
+  was required rather than optional because the push changed `app/cities.py`
+  and `app/components.py`, both imported by `app/Overview.py`.
+
+- **`deploy-verify` was run at `map-chrome` scope rather than `full`, on the
+  owner's decision, and that was the right call.** `CLAUDE.md` requires a full
+  sweep before a real deploy; a full sweep had already run an hour earlier and
+  passed everything except the one Madrid defect, and the only changes since
+  were the label solver, an emptied dict and one city's `heatmap.html`, with
+  the other seventeen byte-identical under `drift_check.py`. Re-running it
+  would have spent ~186k tokens re-checking files it had already passed, with
+  weekly usage at 78%. The narrow run measured what actually changed - thirteen
+  labels, zero overlapping pairs, at both widths - and `check_deploy_imports.py`
+  covered the import half of the clean-clone question.
+
+- **The live site then showed something no local check could have caught.** At
+  an 820px viewport, **Madrid** rendered showing Toledo to Guadalajara with all
+  thirteen labels collapsed into one clump, and **Chicago** - untouched for
+  weeks, `heatmap.html` byte-identical to the version the last full sweep
+  passed - showed Madison to Kalamazoo with its seven labels clustered. Both
+  persisted over ten seconds. On reload both measured their correct baked views
+  (Madrid `zoom 11.25`, Chicago `zoom 11`, container `778x650`) and rendered
+  correctly.
+
+  So it is the intermittent narrow-width re-fit race already documented in
+  `map_common.py`'s `apply()`, **not** a regression from the label change -
+  Chicago is what establishes that, because it shares none of the new code
+  paths' inputs. Recorded in `PLAN.md` with the reproduction and an explicit
+  note that the proposed mechanism is a hypothesis to instrument rather than a
+  measurement to fix from. It is the second time in two days that a rendering
+  defect was invisible to every check the project has and visible in a browser.
 
 ### 2026-09-22 - The unplaceable label was the circular line, and the fix is a second pass rather than more candidates
 

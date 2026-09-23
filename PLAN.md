@@ -638,19 +638,58 @@ Desktop is unaffected — the label is fully visible there.
 
 ## Before deploying
 
-- [ ] **REBOOT the deployed Streamlit app.** Madrid and Barcelona landed on
-  master 2026-09-22 (`6dcb295`), and Streamlit Cloud pulls master
-  automatically, so the code is live but the process is not. That push changed
-  `app/cities.py` and `app/components.py`, both imported by
-  `app/Overview.py`: "Updated app!" re-runs the entry script and leaves
-  imported modules cached, which is what kept the live site down for over three
-  hours on 2026-09-22 across five pulls. **Reboot, not "Update"** - gate item 9
-  in `docs/data_sources.md`. The owner's to do; no session can reach the
-  Streamlit Cloud console.
+- [ ] **The narrow-width re-fit race is NOT fully fixed, and it is visible on
+  the live site.** Seen 2026-09-22 on the deployed app at an 820px viewport
+  (map container 778px): **Madrid** rendered showing Toledo to Guadalajara with
+  all thirteen line labels collapsed into an unreadable clump, and **Chicago**
+  rendered showing Madison, Milwaukee and Kalamazoo with its seven labels in
+  one cluster. Both persisted more than ten seconds, through a scroll and a
+  re-screenshot, so neither was a frame caught mid-layout.
 
-  Then confirm on the live site, not locally: the macro map still opens on the
-  United States, the region switcher reaches Europe, and both Madrid's and
-  Barcelona's pages render their maps and their licence notices.
+  **It is intermittent and pre-existing, which is why it needs a check rather
+  than a look.** On reload at the same width both measured their correct baked
+  views - Madrid `zoom 11.25` at `40.4010,-3.6708`, Chicago `zoom 11` at
+  `41.8711,-87.7554`, container `778x650` in both - and rendered correctly.
+  Chicago is what rules out the 2026-09-22 label change as the cause: it was
+  built long before, its `heatmap.html` is byte-identical to the version that
+  passed the last full `deploy-verify`, and it fails the same way.
+
+  This is the race already documented in `pipeline/map_common.py`'s `apply()`
+  ("It is a RACE, so it is intermittent and not specific to a city"). The
+  2026-09-21 fix added the `else if (HOME)` branch, which repairs the case
+  where the map ends up at a narrow-width zoom **at full width**. What is still
+  open is the narrow case: when the container is under 1000px the function
+  re-fits `BOUNDS` every pass, and a pass that measures a transient width bakes
+  a zoom that no later pass necessarily corrects - `apply()` returns early once
+  the container width already equals its target, before it fits anything.
+
+  **That mechanism is a hypothesis, not a measurement** - the reproduction was
+  observed twice and did not reproduce on demand afterwards. Do not fix it from
+  the hypothesis: instrument `apply()` to record each pass's measured width and
+  resulting zoom, reproduce with that instrumentation, and only then change the
+  branch. `HOME` is captured before the first `apply()`, so the correct zoom is
+  in hand throughout and the repair is likely to be small.
+
+  Anything changed here is baked into all eighteen `outputs/*/heatmap.html`, so
+  it costs a re-render and re-commit of every city plus a full `deploy-verify`.
+  Worth doing as its own change, not folded into a city build.
+
+- [x] **Madrid and Barcelona are LIVE - rebooted and verified 2026-09-22.**
+  They landed on master at `6dcb295`, the owner rebooted (not "Update": the
+  push changed `app/cities.py` and `app/components.py`, both imported by
+  `app/Overview.py`, and Streamlit Cloud leaves imported modules cached, which
+  is what kept the site down for over three hours earlier the same day; the
+  reboot requirement is the ninth entry on the deploy gate in
+  `docs/data_sources.md`, which is a different numbering from the required
+  notices).
+
+  Confirmed on <https://expanded-heatmap-daceroberts.streamlit.app>, not
+  locally: the region switcher now reads **Spain (2)** alongside Mexico (2),
+  Canada and the three United States bands, and the macro map still opens on
+  the United States. Madrid's page renders all thirteen line labels with the
+  circular Línea 6 standing clear, Barcelona's all sixteen including both
+  funiculars; both carry a full legend and the `© OpenStreetMap contributors`
+  attribution.
 
 - [ ] **Send the Barcelona notification AFTER the site is publicly reachable,
   not before.** Drafted in English and Catalan at
