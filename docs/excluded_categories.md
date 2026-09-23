@@ -30,11 +30,20 @@ home under their own name. Fixing the first mostly fixed the second.
 
 ## Which stations these maps are drawn around
 
-**Every map here covers one rail network**, named in the title of its own page
-and in the city list on the front page: Muni Metro in San Francisco, the 'L' in
-Chicago, Metro de Madrid in Madrid. Anything else that runs on rails in that
-city is not on the map, and the rings are drawn only around the stations that
-are.
+**Every map here covers one city's rapid-transit network**, named in the title
+of its own page and in the city list on the front page: Muni Metro in San
+Francisco, the 'L' in Chicago, Metro de Madrid in Madrid. Anything else that
+carries people around that city is not on the map, and the rings are drawn only
+around the stations that are.
+
+**That network is rail in every city but one.** Toulouse's Téléo is an aerial
+cable car, and it is drawn - because Tisséo runs and tickets it exactly as it
+does the métro, because it crosses the Garonne where no other line does, and
+because one of its three stations is a Métro B interchange. It is the only
+non-rail mode on this site, and its own section below has the reasoning. **So
+the question a mode has to answer is not "does it run on rails" but "is it part
+of the network this city's riders use as its rapid transit"** - which is the
+same question the tram and commuter-rail paragraphs below are answering.
 
 **Commuter rail is excluded in every city.** The ones named on the record are
 BART and Caltrain in San Francisco, Metra in Chicago, Metrolink in Los Angeles,
@@ -46,15 +55,17 @@ InterCity trains in Dublin, RER and Transilien in Paris, and the TER services
 in Marseille.
 
 **Trams are NOT excluded as a class, and the test is whether the tram is the
-rapid-transit system or an overlay on one.** Seven of these maps draw
-light rail - San Diego, San Francisco, Los Angeles, Edmonton, Calgary, Miami
-and Dublin - and Marseille draws its three Tramway lines beside its two Métro
-lines. Where a tram network is left out, the city already has a metro and the
-trams run over the top of it: Milan's 17 tram routes stop a block or two apart
-and the agency publishes no colour for any of them, and Barcelona's tram falls
-outside the network-identity test that picks out its metro. San Francisco's F
-Market heritage streetcar is out on its own ground - a separately branded
-service - and its cable cars are a different mode entirely.
+rapid-transit system or an overlay on one.** Many of these maps draw light rail
+- San Diego, San Francisco, Los Angeles, Edmonton, Calgary, Miami and Dublin
+among them - Marseille draws its three Tramway lines beside its two Métro
+lines, and Toulouse draws T1 beside Métro A and B. Where a tram network is left
+out, the city already has a metro and the trams run over the top of it: Milan's
+17 tram routes stop a block or two apart and the agency publishes no colour for
+any of them, and Barcelona's tram falls outside the network-identity test that
+picks out its metro. San Francisco's F Market heritage streetcar and its cable
+cars are out on that same ground rather than on any question of mode: both are
+separately branded services running beside Muni Metro rather than part of it.
+Toulouse's cable car is the proof that "cable car" is not itself a reason.
 
 **The line is drawn by station spacing and service frequency, not by which
 company runs the trains.** SEPTA is the clearest case — the Market–Frankford

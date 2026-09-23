@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**233 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**234 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- ["Every map here covers one rail network" survived four hours and one new city](#2026-09-23---every-map-here-covers-one-rail-network-survived-four-hours-and-one-new-city)
 - [A self-test for the one check whose vocabulary is meant to be edited](#2026-09-23---a-self-test-for-the-one-check-whose-vocabulary-is-meant-to-be-edited)
 - [Toulouse built: 8,635 storefronts, 48 stations, and the first non-rail mode](#2026-09-23---toulouse-built-8635-storefronts-48-stations-and-the-first-non-rail-mode)
 - [The scope check paid for itself on the first merge it met](#2026-09-23---the-scope-check-paid-for-itself-on-the-first-merge-it-met)
@@ -272,6 +273,41 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - "Every map here covers one rail network" survived four hours and one new city
+
+- **The general rule at the top of the station-scope section contradicted the
+  per-city fact a thousand lines below it, and Toulouse is what falsified it.**
+  The section opened "Every map here covers one **rail** network ... anything
+  else that runs on rails in that city is not on the map"; Toulouse draws
+  Téléo, an aerial cable car, and its own section says so correctly. Both
+  statements were published, in one document, at the same time. Corrected to
+  "one city's **rapid-transit** network", with the exception named in the
+  paragraph that follows rather than left for a reader to find.
+
+- **The same edit fixed a reason that had quietly become wrong.** San
+  Francisco's cable cars were excluded here "because they are a different mode
+  entirely" - which, once Toulouse's cable car is drawn, is no longer a reason
+  at all. The real ground is the one already stated for the F Market streetcar
+  and for trams: a separately branded service running beside Muni Metro rather
+  than part of it. **The test a mode has to answer is not "does it run on
+  rails" but "is it part of the network this city's riders use as its rapid
+  transit"**, which is what the tram and commuter-rail paragraphs were already
+  doing without saying it.
+
+- **This is the third instance today of the same error shape**, after the
+  staging session's Zurich correction and the Paris page's "trams are excluded
+  in every city here that has them": **a rule generalised from the cities that
+  existed when it was written.** All three were published prose, none was
+  caught by a check, and all three were found by reading what a NEW city
+  actually did. No check is proposed for it - the failure is a claim about
+  cities that do not exist yet, and a check can only compare a claim to the
+  cities that do.
+
+- **Dropped "Seven of these maps draw light rail" for "many ... among them".**
+  The seven were a measured list from `dd4ced8`, correct when written and
+  already wrong two cities later. A closed count of an open set, which is the
+  denominator rule's own example.
 
 ### 2026-09-23 - A self-test for the one check whose vocabulary is meant to be edited
 
