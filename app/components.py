@@ -605,6 +605,17 @@ _NOTICES = [
     # The separate duty to NOTIFY the Council of every derived project is an
     # affirmative act owed to the publisher, not text on a page, so it is not
     # dischargeable here and is tracked as an owner action instead.
+    #
+    # The closing sentence reports the STATUS of that act and must never be
+    # worded as though it performed it. It is here because the notification
+    # could not be delivered: on 2026-09-22 the portal's own contact form
+    # stalled after its hCaptcha, and the enquiry channel the terms themselves
+    # name (bcn.cat/cgi-bin/consultesIRIS?id=241, redirecting to
+    # atencioenlinia.ajuntament.barcelona.cat) did not respond from two
+    # independent networks while seuelectronica.ajuntament.barcelona.cat
+    # answered in 2.4s from the same /24. The attempt log lives in
+    # docs/notifications/barcelona-city-council.md; when it is sent, update
+    # this sentence and that file together.
     ("Ajuntament de Barcelona",
      "Source of the data: Barcelona City Council. The premises shown for "
      "Barcelona are from the Cens de locals en planta baixa amb activitat "
@@ -613,7 +624,11 @@ _NOTICES = [
      "removed, it is filtered to storefront categories, grouped into three "
      "categories of this project's own, and measured by distance from metro "
      "stations. The Ajuntament does not endorse this project or its use of "
-     "the data.",
+     "the data. Those terms also require reusers to inform the Ajuntament of "
+     "every derived project. That notification is written and not yet "
+     "delivered: on 22 September 2026 the portal's own contact form stalled, "
+     "and the enquiry channel the terms themselves name did not respond. It "
+     "will be sent when that service is reachable again.",
      False),
 ]
 

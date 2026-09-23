@@ -1963,6 +1963,16 @@ sector"*, which makes it a reuse-showcase notification rather than a permission
 gate. **It is an owner action, outstanding**; the draft is at
 `docs/notifications/barcelona-city-council.md`.
 
+**The displayed notice now reports that act's status**, added 2026-09-22 on the
+owner's call: *"That notification is written and not yet delivered: on 22
+September 2026 the portal's own contact form stalled, and the enquiry channel
+the terms themselves name did not respond. It will be sent when that service is
+reachable again."* It is worded as a **status report and never as though it
+performed the act** — text on this project's own page is precisely what does
+not discharge a duty owed to the publisher, and a sentence that blurred the two
+would be worse than no sentence. When the notification is sent, that wording
+and the attempt log in the notifications file change together.
+
 **The live terms were read on 2026-09-22** — by the owner, in a browser, past
 the hCaptcha — which closes the precondition this file had carried since the
 licence review and which Barcelona was published without. Stored at
