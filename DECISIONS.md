@@ -993,6 +993,66 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Prague PASSES, on a bulk register nobody had looked for, and it is
+  SIRENE's shape.** The blocker had been "no activity anywhere", established
+  against ROS and ARES. Both were the wrong files. The Statistical Office
+  publishes **RES**, `opendata.czso.cz/data/od_org03/res_data.csv` - **543 MB,
+  updated 2026-09-17** - carrying per ICO a **single-valued CZ-NACE**
+  (*prevazujici cinnost*, not ARES's fifteen-code array), the trade name
+  `FIRMA`, a full street address, a RUIAN code, and **`KATPO`, an
+  employee-count category**. Streamed rather than downloaded. Measured:
+  **3,528,951 rows; 710,086 active Praha subjects; 85,022 in CZ-NACE
+  47/56/96**, of which **99.6% carry street plus house number, 99.7% carry
+  `KODADM`, and 100% carry a trade name**. Touched
+  `docs/city_master_list.md`.
+
+- **`KATPO` is France's employee filter, already present, which is why Prague
+  goes to Band C rather than staying open.** **46,447 of the 85,022 are
+  `000`** - zero employees - so the SIRENE filter transfers directly and
+  leaves **38,575**, against Paris's 50,156 for a larger city. Prague is
+  therefore the France case: a national register of registered seats plus an
+  employee field, accepted there only after validation against
+  OpenStreetMap. **The same validation is owed here and is not yet done** -
+  recorded as owed rather than assumed, because the France reversal happened
+  twice in one day on exactly this question.
+
+- **Prague's coordinate step is a JOIN, not a geocode, which is cheaper than
+  anything else in Band C.** 99.7% of rows carry `KODADM`, a RUIAN address
+  code, so coordinates come from the national address register by lookup
+  rather than from a geocoder. Band C's caption was changed from "a geocoding
+  leg" to "a coordinate step" to stop the band asserting something false of
+  its newest member.
+
+- **Singapore PASSES as a MULTI-SOURCE city, and the recorded
+  registered-office suspicion was half right.** All **4,628 datasets** were
+  enumerated - 463 pages, zero failed - because the query parameter is inert
+  and no page-size parameter exists. ACRA's twenty-seven "Information on
+  Corporate Entities" files are indeed the registered-office shape the record
+  feared. **But they are not the only route.** Four licence registers carry
+  premises: **`NEA Licensed Eating Establishments` 36,687** rows with
+  `premises_address` and a hygiene `grade`, **`Licensed Tobacco Retailers`
+  4,235**, **`Supermarket Licences` 478** with block, level, unit, street and
+  postcode, and **`Licensed Pharmacies` 243**. That is roughly **41,600
+  premises across two buckets**, which is the `multi-source-city` shape - New
+  York's, not Stockholm's.
+
+- **Singapore's retail is narrow BY CONSTRUCTION, and that is the caveat to
+  carry rather than the number.** Only licensed trades appear, so tobacco,
+  supermarkets and pharmacies are present while general retail - clothing,
+  electronics - has no register at all, because Singapore does not license
+  it. **That is the same gap most large US cities have**, which is why
+  `multi-source-city` exists. It needs a full geocoding leg: none of the four
+  sources carries coordinates, though addresses are highly structured and
+  OneMap's geocoder is free.
+
+- **Band D is CLOSED: all four of its probes were run to a conclusion on
+  2026-09-22.** Dublin to Band A, Zurich to Band E, **Prague and Singapore to
+  Band C**. The band existed to hold cities with exactly one unrun probe, and
+  running them emptied it - which is the outcome a band like that should
+  have, rather than accumulating. Counts: **A4 B1 C21 D0 E2 F3 = 31**,
+  verified.
+
+
 - **Promoted Dublin from Band D to Band A: Ireland's rateable register carries
   a use category, and the question that killed the UK does not kill Ireland.**
   The recorded blocker was *"does the Irish rateable register carry a use

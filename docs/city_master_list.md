@@ -71,15 +71,27 @@ one bucket. Those two were sitting in "a decision to make" beside a city
 waiting on a licence read, which conflated *we have not looked yet* with
 *we looked at everything and this is what is there*.
 
-| Band | The work that unblocks it | Cities | Change |
-|---|---|---|---|
-| 🟢 **A** | **Nothing** — build now | **4** | ▲ **+Dublin** — its probe was run and it passed; ✅ **−4 built** — Madrid and Barcelona joined Mexico's two; Paris out then back, **measured both ways** |
-| 🔵 **B** | **A document to read, or a decision to make.** Never a probe | **1** | ▲ **+Tel Aviv**; ▼ −Stockholm, −Zurich to the new E |
-| 🟡 **C** | **A geocoding leg** — build work, known cost | **19** | ▲ **+Bucharest**, ▲ **+Rio** (re-filed — it was banded by how it was *discovered*) |
-| 🟠 **D** | **One probe each**, none yet run to a conclusion | **2** | was `D-a`; ▼ −Zurich to E, ▼ **−Dublin to A** |
-| 🟣 **E** | **One bucket, but developable** — screening complete, product judgement outstanding | **2** | ✨ **NEW** — Stockholm and Zurich, both confirmed one-bucket by enumeration |
-| 🔴 **F** | **Access blocked** — the register exists, we cannot reach it | **3** | was `D-b`, then E; renumbered |
-| *Discarded* | Measured negative, evidence named | *27* | unchanged — **neither one-bucket city was discarded** |
+| Band | What these cities ARE | Cities |
+|---|---|---|
+| 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates present, rail answered | **4** |
+| 🔵 **B** | **Awaiting permission.** The data is excellent and the terms forbid it; the remedy is a letter, not a probe | **1** |
+| 🟡 **C** | **Business leg done; coordinates are the only work**, and the route is known and cheap | **8** |
+| 🟤 **D** | **Coordinates *and* unfinished screening** — more than one thing still open | **1** |
+| 🟠 **E** | **Geocoding at national scale.** The address work is a project, justified only by reuse across many cities | **12** |
+| 🟣 **F** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **2** |
+| 🔴 **G** | **Access blocked.** The register exists and is queryable; we cannot reach it in bulk | **3** |
+| *Discarded* | Measured negative, evidence named | *27* |
+
+**Re-banded 2026-09-22 so each caption describes what its cities ARE**, not
+how they were found. The previous Band C had grown to 21 cities whose only
+shared property was "needs coordinates" — while the **cost** of that step
+ranges from Prague's RÚIAN lookup to Japan's chōme/ban/gō. That is the
+largest single ranking fact in this list, and one band was hiding it.
+
+**Bucharest has a band of its own** rather than a warning inside C, because
+C's caption promises the business leg is finished and Bucharest's is not.
+A row that names a blocker its band does not is the defect this list was
+audited for earlier the same day.
 
 **A caption names a blocker, never a date or a status.** `D-a` was briefly
 captioned *"all four PROBED 2026-09-22"*, which reads as progress and is
@@ -102,7 +114,7 @@ results in the sweep.
 
 ---
 
-## 🟢 Band A — nothing left to discover: build now (4 remaining + 4 ✅ BUILT)
+## 🟢 Band A — ready to build (4 remaining + 4 ✅ BUILT)
 
 **Every question these cities carry is answerable inside the build**, not
 before it. Nothing here needs a probe, a document or a decision first.
@@ -148,7 +160,7 @@ So the next *unstarted* city is the question.
 and only owner decisions left. After that the screen has no city whose
 "what remains" column is empty.
 
-## 🔵 Band B — one call away: a document to READ or a decision to MAKE (1 city)
+## 🔵 Band B — awaiting permission (1 city)
 
 **Nothing here needs another probe** — but as of 2026-09-22 the single
 city in this band is held by something heavier than desk work. Tel Aviv's
@@ -253,26 +265,48 @@ had a register, which raises the prior sharply."* **The prior was wrong.**
 Madrid and Barcelona are the exceptions in Spain, not the rule — see
 "Spain is a two-city country" below.
 
-## 🟡 Band C — a geocoding leg, and that is the dominant cost (19 cities)
+## 🟡 Band C — the business leg is done; coordinates are the only work, and the route is known (8 cities)
 
-Build work with a known cost: every one of these has a business leg that is
-already established and coordinates that are not.
+**Nothing here needs screening.** Every register is measured, licensed and
+current. What each still lacks is coordinates, and for all eight the method
+is already identified and cheap — a lookup, a keyless geocoder, or a free
+one. Ordered by how little that step costs.
 
-**The earlier caption said "no further probing changes these", and Bucharest's
-own row contradicted it** — that city still owes a rail count and a licence
-read. The claim was true of the other eighteen and has been narrowed rather
-than deleted, because a band caption that is *nearly* true is the kind that
-survives unexamined.
-
-| Cities | Country | Business leg | Geocoding |
+| Cities | Country | Business leg | The coordinate step |
 |---|---|---|---|
-| **Tokyo**, Osaka, Nagoya, Yokohama, Sapporo, Fukuoka, Kyoto, Kobe, Sendai, Hiroshima *(10)* | 🇯🇵 | Premises-level food permits, CC BY, one national schema. **Two buckets — no general retail** | **Hardest met** — chōme/ban/gō, full-width numerals, `町字ID` 0% populated |
+| **Prague** ▲▲ *(1)* | 🇨🇿 | **85,022 active Praha subjects in CZ-NACE 47/56/96**, from the Statistical Office's **RES** (`res_data.csv`, 543 MB, updated 2026-09-17). **CZ-NACE is SINGLE-VALUED** here — *převažující činnost* — unlike ARES's fifteen-code array. `FIRMA` trade name **100%**, street + house number **99.6%** | **A JOIN, not a geocode** — **99.7% carry `KODADM`, a RÚIAN address code**, so coordinates come from the national address register rather than a geocoder. **The cheapest coordinate step in this band.** Plus the France question: `KATPO` is an employee-count category and **46,447 of the 85,022 are `000`**, so the SIRENE employee filter transfers directly — **38,575 survive it**, against Paris's 50,156 for a larger city |
 | **Taipei**, Kaohsiung, Taoyuan, Taichung *(4)* | 🇹🇼 | 商業登記 — premises, active/closed status, per-category assembly | Moderate — **NLSC's geocoder is keyless** |
 | **Oslo** *(1)* | 🇳🇴 | 152,060 sub-units, `beliggenhetsadresse` (physical, not registered), NACE, open API no key | Moderate |
 | **Copenhagen** *(1)* | 🇩🇰 | CVR `productionunits` — P-enheder each with own `address`/`zipcode`/`city`, plus `industrycode` | Moderate — **plus a free account** (`distribution.virk.dk` 401) |
+| **Singapore** ▲▲ *(1)* | 🇸🇬 | **≈41,600 premises across two buckets, assembled from four registers** — `NEA Licensed Eating Establishments` **36,687** (`premises_address`, hygiene `grade`), `Licensed Tobacco Retailers` **4,235**, `Supermarket Licences` **478** (block/level/unit/street/postcode), `Licensed Pharmacies` **243**. **A `multi-source-city`, the New York shape** | **Full geocoding leg — no coordinates in any of the four.** Addresses are highly structured and **OneMap's geocoder is free**. ⚠️ Retail is **narrow by construction**: only licensed trades appear, so general retail — clothing, electronics — has no register, the same gap most US cities have |
+
+## 🟤 Band D — coordinates AND unfinished screening (1 city)
+
+**Bucharest is alone here for a reason**, and it is the reason Band C cannot
+hold it: C's caption promises the business leg is done, and Bucharest's is
+not finished. Its register is real and large, but **its rail has never been
+counted, its licence has never been read, and its host sits behind a
+"Verifying your browser" JS challenge** that the fetch step needs a route
+through which is not a bot-detection bypass. Three open items, only one of
+which is coordinates.
+
+| Cities | Country | Business leg | The coordinate step |
+|---|---|---|---|
+| **Bucharest** 🇷🇴 ▲ *(1)* | 🇷🇴 | **DSVSA's registered-premises lists — 31,299 premises across 14 of 34 categories**, name + `Adresa` + `Sector` + `Categorie unitate`, refreshed 25/08/2026. Food bucket, but a WIDE one: 13,279 catering, 10,488 food shops, 709 hyper/supermarkets | **Unmeasured** — no coordinates, Romanian addresses |
+
+## 🟠 Band E — geocoding at national scale (12 cities)
+
+**The investment tier.** These share one property that separates them from
+Band C: the address work is a project rather than a step, and it is worth
+doing only because the machinery, once written, is reused across many
+cities. Japan is ten cities from one schema; Brazil is two from one register.
+
+| Cities | Country | Business leg | The coordinate step |
+|---|---|---|---|
 | **São Paulo** *(1)* | 🇧🇷 | CNPJ — trade name, address, CNAE | **Hard, past Toronto's scale** |
 | **Rio de Janeiro** ▲ *(1)* | 🇧🇷 | **The same CNPJ** — one national register, so nothing about its business leg is open. Rail confirmed: **20 OSM relations, all named and coloured** | Same as São Paulo's, and shares its cost: write the Brazilian geocoder once, get both cities |
-| **Bucharest** 🇷🇴 ▲ *(1)* | 🇷🇴 | **DSVSA's registered-premises lists — 31,299 premises across 14 of 34 categories**, name + `Adresa` + `Sector` + `Categorie unitate`, refreshed 25/08/2026. Food bucket, but a WIDE one: 13,279 catering, 10,488 food shops, 709 hyper/supermarkets | **Unmeasured** — no coordinates, Romanian addresses |
+| **Tokyo**, Osaka, Nagoya, Yokohama, Sapporo, Fukuoka, Kyoto, Kobe, Sendai, Hiroshima *(10)* | 🇯🇵 | Premises-level food permits, CC BY, one national schema. **Two buckets — no general retail** | **Hardest met** — chōme/ban/gō, full-width numerals, `町字ID` 0% populated |
+
 
 **▲ Bucharest was promoted out of Tier 6 on 2026-09-22** by the food-authority
 probe. **Two cheap checks are still outstanding and are screening, not build
@@ -287,37 +321,7 @@ screen — against the worst geocoding problem and a two-bucket ceiling.
 **Still the biggest open decision in this list**, and a judgment call rather
 than a probe.
 
-## 🟠 Band D — one probe each, and none has been run to a conclusion (2 cities)
-
-**Every row was re-measured on 2026-09-22** and each now has a named next
-query rather than a vague one; the country-level view of the same three is
-under Tier 4. **Three of the four probed were chasing hosts that had moved.**
-
-⚠️ **This band was `D-a`, captioned "all four PROBED 2026-09-22" — a STATUS,
-not a condition.** That was written during the Tier 4 write-up and it broke
-the one property that makes a band auditable: Rio's misfiling was caught only
-because the neighbouring sub-tier still declared what it was *for*. A band
-caption names a blocker, never a date.
-
-**▲▲ Dublin left this band for Band A on 2026-09-22 — the probe was run and
-it passed.** Its API had simply **moved twice**: `api.valoff.ie` is
-**NXDOMAIN**, and the successor, **`opendata.tailte.ie`**, was named on the
-*Valuation API Explorer* page — a JS app, so the endpoint was found by
-**watching the page load its own link**, the Jakarta method. The deciding
-question, *does the Irish rateable register carry a use category*, is
-answered **yes**: sixteen of them, including **`RETAIL (SHOPS)`** and
-**`HOSPITALITY`**. **Ireland is not the UK.**
-
-**Zurich left this band** for Band E: its second bucket is measured absent, so
-it no longer holds a question, only a scope decision.
-
-| City | The one probe that decides it |
-|---|---|
-| **Prague** 🇨🇿 ⚠️ | **PROBED 2026-09-22 — location found, activity missing.** `data.gov.cz/sparql` answers and its control passes (`zzqqxxnonsense` → 0). **`Registr osob - aktivní provozovny`** is a real national open CSV of **active establishments** — `szrcr.cz/…/ros02_data.csv`, **58.5 MB, updated 2026-09-01** — carrying `ICP`, `ICO`, dates and **`PKODADM`, a RÚIAN address code**. That is a *join* to the Czech address register rather than a geocode, which is far cheaper. **But there is no activity column anywhere**: `ros01_data.csv` (**532 MB**, companies) has `FIRMA` and `FORMA` (legal form, not NACE), and `ros02` has none either. **The Colombia-RUES shape, inverted from Tallinn's** — full location, no activity. ⚠️ **ARES was tried as the missing half and does not supply it**: its `czNace` is **company-level and multi-valued** — AGROFERT carries **fifteen** codes — so joining it onto establishments would give every branch all fifteen activities, the registered-office trap in another guise. Its RZP view returns **`provozovnyStav` as COUNTS** (`pocetCelkem: 40`, `pocetAktivnich: 0`), not the establishment list. **The one open path left is arithmetic rather than a probe:** measure what share of ROS establishments belong to an ICO with exactly ONE establishment, since for those the company NACE *is* the premises activity. That is a proxy, and it would need validating the way France's employee filter was. ⚠️ **And the `121-xx` / `476-5: Provozovna` hits are a FALSE FRIEND**: they carry distributions, but those resolve to `slovník.gov.cz` **ontology files** — 91 KB of `skos:Concept` and `owl:DatatypeProperty` defining the trade-business agenda. **A vocabulary, not data** — the Budapest shape, where an inventory reads like a catalogue until one is opened. `rzp.gov.cz/opendata/` is 404, so the trade register's per-establishment trade fields are **queryable per subject and not published in bulk**: the Hong Kong shape, for the activity half only. *(Earlier note retained: its hosts had moved —* `rzp.cz` answers 000, `www.rzp.cz` redirects to `rzp.gov.cz`, and `opendata.praha.eu` redirects to `lkod.cz/catalog/praha`.)* |
-| **Dublin** 🇮🇪 ⚠️ | **`valoff.ie` is not down — it is RETIRED**, and was retried twice as an outage. `data.gov.ie` catalogues a **Valuation Office API** at **CC BY 4.0**, whose one resource is `https://tailte.ie/home/api/` — **Tailte Éireann absorbed the Valuation Office**, and that page answers 200. **But every API endpoint is unroutable for us**: `api.valoff.ie`, `api.tailte.ie` and `valoff.ie/api/...` all return **000**, checked 2026-09-22. So the licence is good and the host is not reachable. **The deciding question is still unasked** — does the Irish rateable register carry a **use category**? The UK's NNDR did not, and that killed the UK. Next: the Archive, or the `tailte.ie` page's own documentation |
-| **Singapore** 🇸🇬 ⚠️ | **Not a loose search — an INERT one.** `zzqqxxnonsense` returns the **identical ten datasets** as `licence`, `food establishment` and `business`: the `query` parameter is ignored entirely, and only the nonsense control separates that from looseness. **Paging CONFIRMED to work** 2026-09-22 — pages 1, 5, 50, 200 and 463 return five different first-items, and page 463 returns 8 items, which confirms **4,628**. So the route is **enumeration, not search**, and it costs 463 requests — **no page-size parameter works**, confirmed with a control: `limit`, `pageSize`, `size`, `per_page` and the nonsense `zzqqxx` all return exactly 10. **Not yet run.** The registered-office suspicion is still untested — nothing has been learned about the data yet |
-
-## 🟣 Band E — one bucket, but developable (2 cities)
+## 🟣 Band F — one bucket only: complete, but narrower than the others (2 cities)
 
 **Screening is COMPLETE for both, and both passed.** Each has a real
 premises-level register with coordinates, current data and a usable licence.
@@ -399,7 +403,7 @@ carry three buckets?* **Answer it once and two cities move together.**
 
 ---
 
-## 🔴 Band F — access blocked: the register exists and we cannot reach it (3 cities)
+## 🔴 Band G — access blocked: the register exists and we cannot reach it (3 cities)
 
 **None of these is a data negative, and the distinction is the whole point of
 the band.** Rail is answered for all three. What is missing is a route to a
