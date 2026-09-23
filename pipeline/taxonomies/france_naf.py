@@ -62,6 +62,15 @@ EXTRA_COLUMNS = ("naf_code",)
 
 # The source column in SIRENE, for the city config's RAW_CLASSIFICATION_COLUMN.
 # Kept here rather than in each config so the five cities cannot drift apart.
+#
+# ⚠ THIS IS NAF rev. 2, AND SIRENE ALSO PUBLISHES NAF 2025. Do not switch the
+# column without rebuilding NAF_LABELS: the two schemes share division and
+# class numbers but NOT the sous-classe letter - rev. 2's `01.11Z` is NAF
+# 2025's `01.11Y` - so pointing this at `activitePrincipaleNAF25Etablissement`
+# makes every lookup below miss and `classify()` return None for every row.
+# That empties the map; it does not raise. Measured 2026-09-23: rev. 2 is 100%
+# populated, NAF 2025 is 37.5%. See `pipeline/countries/france.py`'s
+# NAF25_COLUMN block for the decision and the watch item.
 SIRENE_COLUMN = "activitePrincipaleEtablissement"
 
 

@@ -53,7 +53,36 @@ STATE_ACTIVE_VALUE = "A"
 
 COMMUNE_COLUMN = "codeCommuneEtablissement"   # the ONE per-city variable
 NAF_COLUMN = "activitePrincipaleEtablissement"
-NAF25_COLUMN = "activitePrincipaleNAF25Etablissement"  # NAF 2025, newer scheme
+
+# NAF 2025, the newer scheme - PRESENT, AND DELIBERATELY NOT USED.
+#
+# This was a bare constant with a one-line comment until 2026-09-23, which is
+# how a real question hid in plain sight: `pipeline/taxonomies/france_naf.py`
+# keys entirely on rev. 2, so if SIRENE had migrated, the taxonomy was built on
+# the wrong column. Measured over HTTP range requests against the September 2026
+# release - 6 requests, 2.6 MB, no 2.2 GB download:
+#
+#     column                                  whole row group   active Paris
+#     activitePrincipaleEtablissement                  100.0%         100.0%
+#     activitePrincipaleNAF25Etablissement              37.5%         100.0%
+#
+# THE CODES ARE NOT INTERCHANGEABLE. The sous-classe letter differs - rev. 2
+# writes `01.11Z` where NAF 2025 writes `01.11Y` - so france_naf.py's 64
+# mappings would match nothing and `classify()` would return None for every
+# row, emptying the map rather than raising.
+#
+# Rev. 2 wins on three counts: it is 100% populated everywhere rather than only
+# on the active slice, it is what INSEE's published label file
+# (`int_courts_naf_rev_2.xls`) covers, and it is what the taxonomy's deciding
+# catch-all measurement (19.3% at sous-classe) was taken against.
+#
+# ⚠ WATCH ITEM, not an action: if INSEE deprecates rev. 2 in a future monthly
+# release, this decision reverses and france_naf.py needs a NAF 2025 mapping
+# built from INSEE's 2025 label file. The 37.5% figure is the thing to re-read -
+# it rising toward 100% is the migration happening.
+NAF25_COLUMN = "activitePrincipaleNAF25Etablissement"
+NAF25_IN_USE = False
+NAF25_POPULATED_MEASURED = {"all_rows": 0.375, "active_paris": 1.000}
 
 # The trade name, and why there are two of them. See the naming note below.
 ENSEIGNE_COLUMNS = ("enseigne1Etablissement", "enseigne2Etablissement",
