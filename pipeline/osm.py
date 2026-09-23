@@ -49,6 +49,15 @@ import json
 import time
 import urllib.request
 
+from pipeline.osm_cache import NEVER_A_STATION, load  # noqa: F401
+
+# `load` and `NEVER_A_STATION` live in `pipeline/osm_cache.py` and are
+# re-exported here for callers that already fetch. THIS MODULE MUST STAY
+# UNGUARDED: it holds `urllib.request`, so any `step*.py` that imports it is a
+# real violation and `scripts/check_no_fetch_in_steps.py` fails loudly on one.
+# A step that needs to read a cached result imports `osm_cache` instead, which
+# has no HTTP client to reach.
+
 # More than one host, tried in order. A failure is a fact about that host, not
 # about the city.
 OVERPASS_HOSTS = (
@@ -59,37 +68,6 @@ OVERPASS_HOSTS = (
 OVERPASS_USER_AGENT = (
     "expanded-heatmap city profiling (github.com/dacekroberts/expanded-heatmap)"
 )
-
-# Entrances are never stations - 447 of them against 184 stations in Mexico
-# City, 114 in Guadalajara, 468 against 181 in Barcelona. `prpopsed` is in this
-# list because five real OSM nodes are spelled that way: a blacklist misses a
-# typo, which is why each city's step 1 WHITELISTS what it wants and this exists
-# to be printed as a record of what was dropped.
-NEVER_A_STATION = ("subway_entrance", "proposed", "construction", "prpopsed")
-
-
-def load(cache_path, what):
-    """Read a cached Overpass result. NEVER fetches.
-
-    This is what a `step*.py` calls. `fetch()` belongs to `fetch_sources.py`
-    alone, because `drift_check.py` re-runs every `step*.py` and a drift check
-    has to be deterministic and offline - San Francisco's `fetch_sources.py`
-    states that as an invariant.
-
-    It is stated there as absolute and is currently conditional: Madrid, Mexico
-    City and Guadalajara import `requests` inside their step files. Those are
-    cache-guarded, so a normal run with `data/<city>/raw/` populated is offline
-    and drift behaves - but that directory is gitignored, so a fresh clone is
-    not. Barcelona does not add a fourth exception.
-    """
-    if not cache_path.exists():
-        raise SystemExit(
-            f"{cache_path.name} is missing, and a step file must never fetch.\n"
-            f"  Run:  python pipeline/{cache_path.parent.parent.name}/"
-            f"fetch_sources.py\n"
-            f"  ({what})")
-    payload = json.loads(cache_path.read_text(encoding="utf-8"))
-    return payload["elements"], payload.get("_fetched_from", "cache")
 
 
 def fetch(query, cache_path, *, force=False, timeout=300, retries=2):

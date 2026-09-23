@@ -112,6 +112,29 @@ reader had already found and immediately found five more.
   is public (Chicago, SFMTA, LA Metro): the exact wording is in
   `docs/data_sources.md`, "Notices this project MUST display when published",
   and those are obligations rather than courtesies.
+- **A pipeline step never fetches. Downloading lives in
+  `pipeline/<city>/fetch_sources.py`**, deliberately not named `step*.py` so
+  `drift_check.py` never runs it; the step reads the cache and exits non-zero
+  naming that script when it is missing. A cache-guarded download inside a
+  step is offline only on a machine that has already run it, so on a fresh
+  checkout a drift check silently asks "does the CURRENT UPSTREAM still
+  produce the committed output" instead of "does the COMMITTED CODE" - and
+  Toronto proved that is not a pedantic difference, producing a map missing a
+  storefront while the row-count baseline reported identical. `python
+  scripts/check_no_fetch_in_steps.py` decides this, **including through a
+  shared `pipeline/*.py` module**, which is how three `step3_geocode.py` files
+  turned out to fetch via `census_geocoder.py` without importing an HTTP
+  client themselves.
+- **Where a step genuinely cannot stop fetching, guard the drift check instead
+  of pretending.** `census_geocoder.py` POSTs a batch of addresses the step
+  computes, so there is no URL to hoist into a fetch script. The rule that
+  matters is narrower than "a step never fetches": **a step may fetch when a
+  person runs it; a drift check may never fetch.** `pipeline/offline.py` is
+  that boundary - `drift_check.py` sets `HEATMAP_NO_NETWORK` around every step
+  and `refuse_if_offline()` raises rather than requesting. Use it for the next
+  such case rather than widening the exception list. `HEATMAP_NO_NETWORK=1
+  python pipeline/<city>/step2_clean_businesses.py` also answers "would this
+  work on a fresh checkout?" without unplugging anything.
 - **Run `python scripts/check_provenance.py` after adding a city, and make it
   name that city OK.** `docs/data_sources.md` is the only way a build can be
   reproduced, and the rule to record a city's sources there was followed for
@@ -236,6 +259,8 @@ python pipeline/<city_slug>/step3_map.py
 python pipeline/drift_check.py [city_slug] [--jobs N]   # --jobs 4 does all 13 in ~37s
 python scripts/brief_check.py [city_slug]               # re-run a brief's claims against live sources
 python scripts/check_provenance.py [--strict]           # every built city's sources actually recorded; run after adding a city
+python scripts/check_no_fetch_in_steps.py [--list]      # no pipeline step may reach the network
+python scripts/check_no_fetch_in_steps_selftest.py      # watch that check fail 6 ways; touches nothing
 python scripts/check_stale_claims.py                    # REPORTS only: prose that stopped being true (stale tense, drifted counts)
 python scripts/check_deploy_imports.py [--ref REF]      # clean clone + lean venv: run before ANY push touching app/
 python scripts/decisions_index.py [--check]             # refresh DECISIONS.md's index

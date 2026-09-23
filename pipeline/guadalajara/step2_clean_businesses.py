@@ -1,10 +1,16 @@
 """Step 2 - Guadalajara (Regional) storefronts from INEGI's DENUE.
 
-DENUE is a national ESTABLISHMENT register published per entidad federativa, so
-the in-city question is answered by which file is downloaded (09 = Ciudad de
-Mexico) rather than by a city-name field. That is why this city has no
-CITY_KEEP: there is no city column to mis-read, which is the trap that made Los
-Angeles' postal community names keep about half its rows.
+DENUE is a national ESTABLISHMENT register published per entidad federativa,
+so the download narrows the scope before any filter runs - but ONLY TO A
+STATE. Entidad 14 is the whole of Jalisco, not this city, so unlike Mexico
+City (where entidad 09 IS the city) the scope is finished here by
+MUNICIPIOS_KEEP. See the regional-scope block in main().
+
+There is still no CITY_KEEP, and the reason is worth keeping: the join is on
+`municipio`, INEGI's own controlled spelling, not on a free-text city name.
+That is the trap that made Los Angeles' postal community names keep about half
+its rows - and the spelling is asserted below rather than assumed, because
+'Tlaquepaque' alone matches nothing.
 
 Privacy, and it is the strongest position of any city here. INEGI already did
 the work upstream:
@@ -44,11 +50,6 @@ from pipeline.guadalajara.config import (
     DENUE_MUNICIPIO_COLUMN,
     DENUE_NAME_COLUMN,
     DENUE_STATE_CODE,
-    # From master: this step used to write "cve_ent" and "municipio" as
-    # literals while its own config already named them, so a DENUE column
-    # rename was a two-file change. DENUE_URL came with it there and is NOT
-    # taken here - this branch moved the download into fetch_sources.py, so
-    # nothing in this step reaches the network any more.
     DENUE_STATE_COLUMN,
     DENUE_ZIP,
     FORBIDDEN_COLUMNS,
@@ -85,22 +86,22 @@ USECOLS = (
 
 
 def require_denue():
-    """The DENUE export must already be there. NEVER downloads.
+    """The DENUE zip must already be here - this step does NOT download it.
 
-    It used to download here behind a cache check, which is offline only when
-    the gitignored raw directory happens to be populated - so a fresh clone
-    would have gone to the network from inside a drift check. The download, and
-    its magic-bytes check, moved to fetch_sources.py on 2026-09-22.
+    It used to, on a cache miss, which meant `drift_check.py` could pull a
+    Jalisco-sized zip from INEGI on any checkout without
+    `data/guadalajara/raw/`. See pipeline/guadalajara/fetch_sources.py.
     """
     if not DENUE_ZIP.exists():
         raise SystemExit(
-            f"{DENUE_ZIP.name} is missing, and a step never fetches.\n"
-            "  Run:  python pipeline/guadalajara/fetch_sources.py")
-    print(f"  cached {DENUE_ZIP.name} ({DENUE_ZIP.stat().st_size:,} bytes)")
+            f"Missing {DENUE_ZIP.name}. "
+            f"Run pipeline/guadalajara/fetch_sources.py first."
+        )
+    print(f"  {DENUE_ZIP.name} ({DENUE_ZIP.stat().st_size:,} bytes)")
 
 
 def main():
-    print("=== Step 2: Mexico City storefronts (INEGI DENUE) ===\n")
+    print("=== Step 2: Guadalajara (Regional) storefronts (INEGI DENUE) ===\n")
     tax = load_taxonomy_module(TAXONOMY_SYSTEM)
 
     require_denue()
@@ -135,7 +136,7 @@ def main():
     if len(ents) != 1 or ents.index[0] != DENUE_STATE_CODE:
         raise SystemExit(f"expected only cve_ent={DENUE_STATE_CODE}, got {dict(ents)}")
     print(f"  all rows cve_ent={DENUE_STATE_CODE}; "
-          f"{df['municipio'].nunique()} municipios")
+          f"{df[DENUE_MUNICIPIO_COLUMN].nunique()} municipios")
 
     # --- THE REGIONAL SCOPE, and the difference from Mexico City -----------
     # Entidad 09 IS Ciudad de Mexico, so that city needed no municipio filter at

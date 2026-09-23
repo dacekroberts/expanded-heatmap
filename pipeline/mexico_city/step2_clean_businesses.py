@@ -129,7 +129,7 @@ def main():
     if len(ents) != 1 or ents.index[0] != DENUE_STATE_CODE:
         raise SystemExit(f"expected only cve_ent={DENUE_STATE_CODE}, got {dict(ents)}")
     print(f"  all rows cve_ent={DENUE_STATE_CODE}; "
-          f"{df['municipio'].nunique()} alcaldias")
+          f"{df[DENUE_MUNICIPIO_COLUMN].nunique()} alcaldias")
 
     # --- FIJO ONLY ---------------------------------------------------------
     before = len(df)

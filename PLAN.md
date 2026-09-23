@@ -348,28 +348,62 @@ Desktop is unaffected — the label is fully visible there.
 
 ## Structure
 
-- [x] **Move Madrid's, Mexico City's and Guadalajara's fetching out of their
-  step files** into a `fetch_*.py`, as the other fourteen cities do. **ALL
-  THREE DONE 2026-09-22**, by two sessions working the same list: Mexico City
-  on master, Madrid and Guadalajara on `spain-app-wiring`. The duplicated
-  Mexico City work was resolved in master's favour at the merge, because that
-  version was proved BOTH ways - zero drift with the cache present, and a clean
-  refusal with `data/mexico_city/raw/` moved aside - where the branch's had
-  only the positive half.
+- [x] ~~Move GUADALAJARA's and MADRID's fetching out of their step files~~ -
+  **done 2026-09-22; all three exceptions are closed.** Mexico City first as
+  the worked pattern, Madrid by its own session on the unmerged
+  `spain-app-wiring` branch, Guadalajara last -
+  `pipeline/guadalajara/fetch_sources.py`, which took the three Overpass
+  queries with it because each one's comment is addressed to whoever edits
+  the query, and that is no longer the step. Proved both ways: zero drift
+  with the cache present, and step 1 and step 2 both exiting 1 with "Run
+  pipeline/guadalajara/fetch_sources.py first" with `data/guadalajara/raw/`
+  moved aside. **Guadalajara's two-pass retry was kept rather than unified
+  with Mexico City's single pass** - neither has been measured against the
+  other, and a refactor is a bad moment to quietly change a retry policy. At
+  the `spain-app-wiring` merge the two sessions' Guadalajara fetchers were
+  resolved in the BRANCH's favour, because that one goes through the shared
+  `pipeline/osm.py` (which rejects a `remark` and a partial 200, not only an
+  empty one, and still retries twice) while master's repeated the logic in the
+  city; its two step files were taken from MASTER, so both Mexican cities name
+  the reader `read_cached`. **The rule is now a check rather than a
+  convention:** `scripts/check_no_fetch_in_steps.py`. Madrid was listed there
+  under `KNOWN_GAPS` until `spain-app-wiring` landed, and the check fails on a
+  gap that has silently been fixed, so landing the branch forced both entries
+  out - which is what that failure mode is for.
 
-  The finding was demonstrated rather than argued: `python
-  pipeline/drift_check.py` in a worktree with no `data/<city>/raw/` **fetched
-  over the network for all three** - a 39 MB DENUE zip, a Madrid census CSV,
-  Overpass responses and CRTM layers - and then reported zero drift, while
-  Toronto stopped correctly with "no data/<city>/raw/ - nothing to run
-  against". The calls were cache-guarded, so it was invisible on a machine that
-  already had the data. **It changed what a passing drift check meant:** for
-  those three it asked "does the current upstream still produce the committed
-  output" rather than "does the committed code".
+  The original finding: move the fetching into a `fetch_*.py`, as the other
+  fourteen cities do.
+  Demonstrated 2026-09-22: `python pipeline/drift_check.py` in a worktree with
+  no `data/<city>/raw/` **fetched over the network for all three** - a 39 MB
+  DENUE zip, a Madrid census CSV, Overpass responses and CRTM layers - and
+  then reported zero drift. Toronto, by contrast, stopped with "no
+  data/<city>/raw/ - nothing to run against", which is the correct behaviour.
+  The calls are cache-guarded, so this is invisible on a machine that already
+  has the data. **It changes what a passing drift check means:** for those
+  three it asks "does the current upstream still produce the committed output"
+  rather than "does the committed code". Build-session work - each city's
+  context is needed.
+- [x] ~~Three `step3_geocode.py` files still reach the network, one import
+  deep~~ - **closed 2026-09-22, by moving the boundary rather than the code.**
+  Los Angeles, New York and Washington DC import `geocode_addresses` from
+  `pipeline/census_geocoder.py`, which POSTs address batches to the US Census
+  geocoder on a cache miss; `drift_check.py` globs `step*.py`, so it ran them
+  like any other step and a fresh checkout geocoded over the network inside a
+  drift check. That module's docstring gave it away: "off the network **after
+  the first run**".
 
-  `grep -rln "requests.get\|requests.post\|urlopen" pipeline/*/step*.py` now
-  returns nothing, so the invariant San Francisco's `fetch_sources.py` states
-  is **absolute rather than conditional**. Zero drift across all 18 cities.
+  The recorded plan was to hoist the download into `fetch_sources.py` as the
+  four cities did, and **that was the wrong fix.** There is no URL to hoist:
+  the batch is derived from the step's own filtering, so moving it means
+  moving the address preparation with it. What was actually wrong is narrower
+  - **a step may fetch when a person runs it; a drift check may never fetch**
+  - so `pipeline/offline.py` puts the guard at that boundary, `drift_check.py`
+  sets `HEATMAP_NO_NETWORK` for every step it runs, and an uncached batch
+  under that flag refuses instead of requesting. Proved three ways: refuses
+  uncached, still serves a cached batch, and is inert when the flag is unset,
+  so a person running step 3 is unaffected. `check_no_fetch_in_steps.py`
+  reports such a module as **guarded** - a third answer, not a pass in
+  disguise - and fails if `drift_check.py` stops arming the guard.
 - [x] ~~Wire Toronto's `STATIONS_COLLAPSED_EXPECTED`~~ - **done 2026-09-22,
   and it was a mis-wiring rather than a missing check.** Step 1 compared the
   COLLAPSED count (110) against `IN_CITY_STATIONS_EXPECTED` (108), printing a

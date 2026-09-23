@@ -16,11 +16,13 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**161 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**163 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
 - [The unplaceable label was the circular line, and the fix is a second pass rather than more candidates](#2026-09-22---the-unplaceable-label-was-the-circular-line-and-the-fix-is-a-second-pass-rather-than-more-candidates)
+- [The geocoder gap was closed by moving the boundary, not the code](#2026-09-22---the-geocoder-gap-was-closed-by-moving-the-boundary-not-the-code)
+- [Guadalajara was the last step file that fetched, and the rule is now a check](#2026-09-22---guadalajara-was-the-last-step-file-that-fetched-and-the-rule-is-now-a-check)
 - [Mexico City's fetching moved out of its steps, as the worked pattern for the other two](#2026-09-22---mexico-citys-fetching-moved-out-of-its-steps-as-the-worked-pattern-for-the-other-two)
 - [Both Mexican cities hardcoded the DENUE columns their national config already names](#2026-09-22---both-mexican-cities-hardcoded-the-denue-columns-their-national-config-already-names)
 - [Check I caught another session's orphaned row within minutes, which is the first time a check here found a defect it was not written for](#2026-09-22---check-i-caught-another-sessions-orphaned-row-within-minutes-which-is-the-first-time-a-check-here-found-a-defect-it-was-not-written-for)
@@ -251,6 +253,134 @@ onwards; the early ones are split by phase rather than by hour.
   **0.0 px from its own line** - queried through Leaflet's own geometry after a
   first attempt that scraped SVG paths reported five labels as detached and was
   discarded as a broken measurement rather than believed.
+### 2026-09-22 - The geocoder gap was closed by moving the boundary, not the code
+
+- **The recorded plan for the three `step3_geocode.py` files was the wrong
+  fix, and saying so is the entry.** Hours earlier this session wrote them
+  into `PLAN.md` as "the same defect one level of indirection down", to be
+  closed the way Mexico City, Madrid and Guadalajara were: hoist the download
+  into `fetch_sources.py`. **There is no URL to hoist.** The US Census
+  geocoder is POSTed a batch of addresses that the step itself derives from
+  its own filtering, so moving the request means moving the address
+  preparation with it - restructuring three live pipelines to satisfy a rule
+  stated one notch too broadly.
+
+- **The rule was too broad. It is not "a step never fetches" but "a step may
+  fetch when a person runs it; a DRIFT CHECK may never fetch."** Those had
+  been the same sentence only because, for the four cities, they were. The
+  geocoder separates them: fetching on a cache miss is the intended workflow
+  for a person populating `data/<city>/raw/geocode_cache/`, and the thing that
+  was actually wrong was `drift_check.py` joining in - it globs `step*.py`, so
+  on a fresh checkout it geocoded ~9% of Los Angeles over the network and then
+  reported whether the result had drifted, which is a different question.
+
+- **`pipeline/offline.py` puts the guard at that boundary.** `drift_check.py`
+  sets `HEATMAP_NO_NETWORK` in the environment of every step it runs, and
+  `refuse_if_offline()` raises immediately before a request rather than at
+  import time, so a cached batch is still served. Proved three ways with
+  `requests.post` replaced by a tripwire: an uncached batch under the flag
+  **refuses without calling out**; a cached batch under the flag is **still
+  served**; with the flag unset the request is **attempted as before**, so a
+  person running step 3 is unaffected. `drift_check.py guadalajara` and
+  `mexico_city` both still report zero drift with the guard armed.
+
+- **`check_no_fetch_in_steps.py` gained a third answer rather than a wider
+  exception list.** A shared module that calls `refuse_if_offline()` is
+  reported GUARDED; a step reaching the network only through guarded modules
+  is listed by name and not failed; anything else is a violation. The three
+  geocode steps left `KNOWN_GAPS` for that category - which is a claim about
+  them, not an excuse. **And the check now fails if `drift_check.py` stops
+  mentioning `NO_NETWORK_ENV`**, because a guard nobody arms is worse than no
+  guard: it reads as protection in every listing while protecting nothing.
+  That limb exists because `check_provenance.py`'s CRS limb once parsed 0 of
+  16 longitudes while printing green.
+
+- **`scripts/check_no_fetch_in_steps_selftest.py` is the first executable
+  answer in this project to "never ship a check you have not watched fail".**
+  Six cases, 7 of 7 behaving as intended: a step importing an HTTP client, a
+  step importing a guarded module (which must be classified, not failed), the
+  guard removed from the shared module, `drift_check.py` no longer arming it,
+  a `KNOWN_GAPS` entry that has quietly been fixed, and a glob matching no
+  files at all. **It copies what it breaks into a temporary tree** and runs
+  the check there via a new `--root`: the first version mutated the working
+  tree and restored it in a `finally`, which is one Ctrl-C away from leaving
+  a broken repository.
+
+- **One case went stale within the hour, and the self-test says what to do
+  about that.** "A step imports a shared module that fetches" was written as a
+  failure case; once the geocoder became guarded, the correct verdict flipped
+  to pass, and the harness reported DID NOT FAIL against a check that was
+  right. It is now a positive case asserting the classification. The closing
+  message tells the next reader to work out which of the two went stale before
+  "fixing" either.
+
+### 2026-09-22 - Guadalajara was the last step file that fetched, and the rule is now a check
+
+- **`pipeline/guadalajara/fetch_sources.py` closes the set of three.** Mexico
+  City moved out earlier today as the worked pattern, Madrid moved out on the
+  unmerged `spain-app-wiring` branch by its own session, and this is the last.
+  The three Overpass queries moved with the fetching rather than staying in
+  step 1: each carries a long comment addressed to whoever edits the query -
+  the Línea 4 lesson about matching on mode rather than network label, and the
+  bbox lesson from the run that matched **Guadalajara in SPAIN**, 26,814 km2
+  against the municipio's 151 - and that reader is now in `fetch_sources.py`.
+
+- **Guadalajara's retry policy was kept rather than unified with its sibling's.**
+  This city makes two passes over the Overpass host list with a 3-second pause;
+  Mexico City makes one with 2 seconds. Neither has been measured against the
+  other, and the rejected alternative - copying the sibling's helper wholesale,
+  which the plan had called "mechanical" - would have changed a retry policy
+  silently inside a refactor whose whole claim is that behaviour is preserved.
+  The file says so where the next reader will see it.
+
+- **Verified both directions.** `drift_check.py guadalajara` reports **RESULT:
+  zero drift** with the cache present (117,454 storefronts, 36,925 within a
+  ring, 56 stations). With `data/guadalajara/raw/` moved aside, step 1 and step
+  2 both **exit 1** with "Run pipeline/guadalajara/fetch_sources.py first".
+
+- **`scripts/check_no_fetch_in_steps.py` now decides this for every city, and
+  it found a fourth case nobody had named.** Three `step3_geocode.py` files -
+  Los Angeles, New York, Washington DC - reach the network with no HTTP client
+  anywhere in them, by importing `geocode_addresses` from
+  `pipeline/census_geocoder.py`, which POSTs address batches to the US Census
+  geocoder on a cache miss. `drift_check.py` globs `step*.py`, so it runs them
+  like any other step. The module's own docstring admits it: "off the network
+  **after the first run**". The check therefore walks the shared `pipeline/*.py`
+  modules and reports what a step reaches *through* them, which is the limb
+  that found this - it was written to cover a case that turned out to exist.
+
+- **Those three are listed under `KNOWN_GAPS` rather than fixed or excused.**
+  Unlike the four cities, the geocoder's input is a batch of addresses the step
+  itself computes, not a fixed upstream URL, so moving the download means
+  moving the address preparation with it - build-session work, now in
+  `PLAN.md`. The rejected alternative was narrowing the check to direct imports
+  only, which would have made it pass today and hidden the finding. A
+  `KNOWN_GAPS` entry that stops violating **fails** the check, so the list
+  cannot rot into a permanent exemption; Madrid's two entries will force
+  themselves out when `spain-app-wiring` lands.
+
+- **The check was watched failing four ways before being shipped**, per the
+  `consistency-sweep` rule: a step importing `requests` again, a step importing
+  a shared module that fetches, a `KNOWN_GAPS` entry that no longer violates,
+  and a glob matching nothing at all (a vacuous pass is worse than a failure).
+  **The first negative test reported the check as broken when the harness was**
+  - it mutated `read_bytes().decode()` text with `\n` patterns while the
+  working-tree file is CRLF, so every pattern matched nothing. That is the
+  fourth distinct defect this repository's `.gitattributes` line-ending
+  normalisation has caused, and the first to attack a test rather than the
+  code it tests.
+
+- **Three stale claims fixed in Guadalajara's step 2 while reading it.** It
+  announced itself as `=== Step 2: Mexico City storefronts ===` on every run;
+  its docstring said the scope question is settled by which file is downloaded
+  "(09 = Ciudad de Mexico)" and that "this city has no CITY_KEEP" for that
+  reason, which its own body contradicts 140 lines later - entidad 14 is the
+  whole of Jalisco, 401,813 units across 125 municipios including Puerto
+  Vallarta 300 km away, so this city must scope by `MUNICIPIOS_KEEP`. Both now
+  describe this city. Third: `df['municipio']` in both Mexican cities' step 2
+  still read the DENUE column by literal, missed by the 2026-09-22 substitution
+  that only covered the double-quoted spelling - a reminder that a fix applied
+  by search is only as complete as its pattern.
 
 ### 2026-09-22 - Mexico City's fetching moved out of its steps, as the worked pattern for the other two
 

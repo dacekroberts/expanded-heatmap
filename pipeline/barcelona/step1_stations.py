@@ -44,7 +44,7 @@ from shapely.ops import linemerge, polygonize, unary_union
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from pipeline.osm import load as osm_load
+from pipeline.osm_cache import load as osm_load
 from pipeline.stations import verify_stations
 from pipeline.barcelona.config import (
     BOUNDARY_AREA_KM2,

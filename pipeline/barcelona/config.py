@@ -12,7 +12,7 @@ returns the whole network with every line named and coloured.
 
 from pathlib import Path
 
-from pipeline.osm import NEVER_A_STATION  # noqa: F401  (printed by step 1)
+from pipeline.osm_cache import NEVER_A_STATION  # noqa: F401  (printed by step 1)
 
 # --- Paths ---------------------------------------------------------------
 

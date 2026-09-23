@@ -50,20 +50,24 @@ BOUNDARY_AREA_KM2_MIN = 1_500.0
 BOUNDARY_AREA_KM2_MAX = 4_500.0
 
 
-def cached(cache_path, label):
-    """Read one cached Overpass result. NEVER fetches.
+def read_cached(path, label):
+    """Read a raw input that `fetch_sources.py` has already downloaded.
 
-    Fetching lives in fetch_sources.py, so that drift_check.py - which re-runs
-    every step*.py - is deterministic and offline. It used to fetch here behind
-    a cache check, which is offline only when the gitignored raw directory
-    happens to be populated. Moved out 2026-09-22.
+    This step does NOT fetch. It used to - `overpass()` and the three queries
+    lived here and pulled on a cache miss - which made `drift_check.py` reach
+    the network on any checkout without `data/guadalajara/raw/`, and turned
+    "does the committed code still produce the committed output" into "does
+    the current upstream". The queries moved with the fetching, because the
+    lesson each one carries is addressed to whoever edits the query, and that
+    is no longer this file. See pipeline/guadalajara/fetch_sources.py.
     """
-    if not cache_path.exists():
+    if not path.exists():
         raise SystemExit(
-            f"{cache_path.name} is missing ({label}), and a step never "
-            "fetches.\n  Run:  python pipeline/guadalajara/fetch_sources.py")
-    print(f"  {label}: cached {cache_path.name}")
-    return json.loads(cache_path.read_text(encoding="utf-8"))
+            f"Missing {path.name} ({label}). "
+            f"Run pipeline/guadalajara/fetch_sources.py first."
+        )
+    print(f"  {label}: {path.name} ({path.stat().st_size:,} bytes)")
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def _poly(rel):
@@ -78,7 +82,7 @@ def _poly(rel):
 
 def load_boundaries():
     """One polygon per municipio, plus their union."""
-    data = cached(OSM_BOUNDARY_JSON, "boundaries")
+    data = read_cached(OSM_BOUNDARY_JSON, "boundaries")
     rels = [e for e in data["elements"] if e["type"] == "relation"]
     by_name = {}
     for rel in rels:
@@ -92,10 +96,11 @@ def load_boundaries():
         # municipio and a locality inside it. Keep the SMALLEST that still
         # contains the bbox's centre of gravity... in practice, keep the
         # smallest, because the failure mode here was a PROVINCE matching the
-        # name (see Q_BOUNDARY in fetch_sources.py) and size selected it. With
-        # the bbox
-        # filter in place both candidates are local, and the municipio is the
-        # larger of a municipio/locality pair - so assert instead of guessing.
+        # name (see Q_BOUNDARY in fetch_sources.py, which carries the bbox
+        # lesson now that the query lives there) and size selected it. With
+        # the bbox filter in place both candidates are local, and the
+        # municipio is the larger of a municipio/locality pair - so assert
+        # instead of guessing.
         prev = by_name.get(name)
         if prev is not None:
             raise SystemExit(
@@ -131,9 +136,9 @@ def load_boundaries():
 
 def main():
     print("=== Step 1: Guadalajara stations (OpenStreetMap) ===\n")
-    print("Fetching OSM:")
-    st_data = cached(OSM_STATIONS_JSON, "stations")
-    rt_data = cached(OSM_ROUTES_JSON, "routes")
+    print("Reading cached OSM:")
+    st_data = read_cached(OSM_STATIONS_JSON, "stations")
+    rt_data = read_cached(OSM_ROUTES_JSON, "routes")
     by_muni, boundary = load_boundaries()
 
     nodes = [e for e in st_data["elements"] if e["type"] == "node" and "tags" in e]
