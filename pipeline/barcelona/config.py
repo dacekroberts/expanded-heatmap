@@ -87,8 +87,25 @@ OSM_BBOX = "41.30,2.03,41.50,2.30"
 # Guadalajara's whitelist here would have collected 501 per-direction stop
 # positions instead of 181 stations. Three cities, three answers - which is the
 # meta-rule `osm-rail` exists for.
-OSM_STATION_RAILWAY = ("station",)
-OSM_STATION_KIND = "subway"
+# NEITHER OF THE NEXT TWO IS USED, AND THE PARAGRAPH ABOVE IS THE RECORD OF A
+# REJECTED APPROACH rather than a description of this city's. They are kept
+# because the counts are the evidence for rejecting it - deleting them would
+# leave the decision looking arbitrary - but a reader who met them cold would
+# reasonably conclude Barcelona selects stations by tag. It does not.
+#
+# WHAT ACTUALLY RUNS is `stations_query()` in fetch_sources.py: the member
+# nodes of the cached route relations, asked for BY ID. Tag selection was
+# measured and abandoned because `railway=station` boxes and the
+# `stop_position` nodes a PTv2 relation contains are DIFFERENT OBJECTS with
+# **no overlap at all** - 225 against 378 - so combining the two filters
+# yields an empty set. See that docstring; it carries the measurement.
+#
+# Noticed 2026-09-23 because `check_stale_claims.py` reported OSM_STATION_KIND
+# as unread. OSM_STATION_RAILWAY is equally unread HERE and was NOT reported,
+# because Guadalajara defines and consumes a constant of the same name - see
+# that script's own note on per-module attribution.
+OSM_STATION_RAILWAY = ("station",)          # unused; rejected approach
+OSM_STATION_KIND = "subway"                 # unused; rejected approach
 # 468 subway entrances in this bbox. Never stations.
 OSM_EXCLUDE_RAILWAY = ("subway_entrance", "proposed", "construction", "prpopsed",
                        "level_crossing", "switch", "crossing", "buffer_stop",

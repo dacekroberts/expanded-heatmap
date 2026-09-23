@@ -153,6 +153,27 @@ CITATION_SKIP_PATHS = {
 CITATION_RE = re.compile(r"\b(?:item|notice)s?\s+(\d{1,2})\b", re.I)
 NOTICE_WORD_RE = re.compile(r"notice|data_sources", re.I)
 
+# A DOCUMENT THAT DECLARES ITSELF SUPERSEDED IS A TRAIL, NOT A CLAIM, and its
+# citations point at the list AS IT WAS. Checking them is the same mistake as
+# checking DECISIONS.md, which is skipped two constants above for exactly this
+# reason: "it records what a citation said on a date."
+#
+# Found 2026-09-23 via canada-required-notices.md, whose header reads
+# "SUPERSEDED 2026-09-22 ... Where this file and those disagree, those win."
+# It cites "Items 9, 10, 14, 16" against the phrase "Four municipal OGLs"
+# without naming the four cities, so the subject test could not confirm item 9
+# was Vancouver's and reported it unverifiable. The citation is correct; it is
+# simply written about a numbering this file no longer governs. Naming the
+# cities to satisfy the check would have edited a historical trail to please a
+# script - the correction runs the wrong way round.
+SUPERSEDED_RE = re.compile(r"^\W*\*{0,2}SUPERSEDED\b", re.I | re.M)
+SUPERSEDED_SCAN_CHARS = 600
+
+
+def declares_itself_superseded(text):
+    """Does this document say, up front, that it no longer governs?"""
+    return bool(SUPERSEDED_RE.search(text[:SUPERSEDED_SCAN_CHARS]))
+
 # Defects awaiting work, each with the date it was recorded. NOT an allowlist:
 # a city here is one whose provenance is missing and known to be missing. Delete
 # the entry when the rows land - leaving it stale fails the check.
@@ -570,6 +591,7 @@ def check_citations(doc):
     if not subjects:
         return [], []
     hard, soft = [], []
+    superseded = []
     for g in CITATION_GLOBS:
         for p in sorted(ROOT.glob(g)):
             if not p.is_file() or not ours(p) or p.name in CITATION_SKIP:
@@ -578,6 +600,10 @@ def check_citations(doc):
             if rel in CITATION_SKIP_PATHS:
                 continue
             text = read(p)
+            # A trail, not a claim - see declares_itself_superseded().
+            if declares_itself_superseded(text):
+                superseded.append(rel)
+                continue
             for m in CITATION_RE.finditer(text):
                 n = int(m.group(1))
                 cited = m.group(0).lower()

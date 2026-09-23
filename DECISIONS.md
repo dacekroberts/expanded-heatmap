@@ -16,7 +16,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**203 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**209 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
@@ -29,9 +29,15 @@ onwards; the early ones are split by phase rather than by hour.
 - [ODbL read for Toulouse and Rennes; Marseille's OSM validation holds](#2026-09-23---odbl-read-for-toulouse-and-rennes-marseilles-osm-validation-holds)
 - [Hong Kong's two fields read, Oslo's rail measured, and Oslo's names are full but noisy](#2026-09-23---hong-kongs-two-fields-read-oslos-rail-measured-and-oslos-names-are-full-but-noisy)
 - [All six French cities measured on ONE sample; a correction of my own correction](#2026-09-23---all-six-french-cities-measured-on-one-sample-a-correction-of-my-own-correction)
+- [Category B's 31 counts read, one edited, and the denominator rule earned its keep](#2026-09-23---category-bs-31-counts-read-one-edited-and-the-denominator-rule-earned-its-keep)
+- [A superseded document's citations are a trail, and the check was auditing them](#2026-09-23---a-superseded-documents-citations-are-a-trail-and-the-check-was-auditing-them)
 - [Marseille brief written; its feed covers more cities than its register](#2026-09-23---marseille-brief-written-its-feed-covers-more-cities-than-its-register)
+- [Following one dead constant found a comment describing an approach the city does not use](#2026-09-23---following-one-dead-constant-found-a-comment-describing-an-approach-the-city-does-not-use)
 - [Oslo's rail sourced and taxonomy measured; MEL's WFS is Licence Ouverte](#2026-09-23---oslos-rail-sourced-and-taxonomy-measured-mels-wfs-is-licence-ouverte)
+- [Category D's 18 remaining constants are mostly deliberate records, not decay](#2026-09-23---category-ds-18-remaining-constants-are-mostly-deliberate-records-not-decay)
+- [Category D reported 63 dead constants, 45 of which were add-country working correctly](#2026-09-23---category-d-reported-63-dead-constants-45-of-which-were-add-country-working-correctly)
 - [Lille's tram geometry found first-party; its metro has none, and a line code nearly became a false find](#2026-09-23---lilles-tram-geometry-found-first-party-its-metro-has-none-and-a-line-code-nearly-became-a-false-find)
+- [check_stale_claims category A was reporting three findings and none of them was real](#2026-09-23---check_stale_claims-category-a-was-reporting-three-findings-and-none-of-them-was-real)
 - [The four French followers are country-ready, not brief-ready, and Lille has no line geometry](#2026-09-23---the-four-french-followers-are-country-ready-not-brief-ready-and-lille-has-no-line-geometry)
 - [PLAN.md gains the handoff it was missing, and Paris reverified](#2026-09-23---planmd-gains-the-handoff-it-was-missing-and-paris-reverified)
 - [Paris's brief re-verified against live sources: 7/7 hold](#2026-09-23---pariss-brief-re-verified-against-live-sources-77-hold)
@@ -751,6 +757,76 @@ onwards; the early ones are split by phase rather than by hour.
   `statutDiffusionEtablissement`, which shrinks its usable set by more than its
   row count suggests. Worth knowing before it is picked on row count alone.
 
+### 2026-09-23 - Category B's 31 counts read, one edited, and the denominator rule earned its keep
+
+- **Read all 31 hand-kept counts. Exactly one was stale, and the one that
+  looked worst was correct.** `osm-rail`'s "All fourteen cities before Mexico
+  City read GTFS" sits in a project that now has twenty, which reads as a
+  drifted count - and is not. The denominator is CLOSED by the phrase "before
+  Mexico City", and twenty minus the six built since (Mexico City,
+  Guadalajara, Madrid, Barcelona, Dublin, Milan) is fourteen. **Updating it to
+  twenty would have destroyed a true statement**, which is precisely the
+  failure the denominator rule exists to prevent; the rule was applied to a
+  live case rather than recited.
+
+- **The one real staleness was a tense, not a number.**
+  `premises-taxonomy`'s "Distilled from the four cities that needed one -
+  Chicago, Edmonton, Madrid and Barcelona" was true when written and now reads
+  as a claim that only four ever needed one. Dublin and Milan have since got
+  their own modules. Fixed by closing the denominator - "the FIRST four" -
+  and naming the two that followed, so the sentence stays true as more arrive
+  rather than needing another edit.
+
+- **The other twenty-nine are closed sets and were left alone**: "all three
+  buckets" (a project constant), "all five boroughs" (New York's, permanently),
+  "the six pre-1998 municipalities" (a historical fact about Toronto's
+  amalgamation), "the two Mexican cities" and "the two Alberta cities" (both
+  currently exact). Category B is titled "to eyeball" rather than "to fix" for
+  this reason, and the eyeballing is the work - a pass that corrected on sight
+  would have introduced errors into five of them.
+
+- **This closes the parked pile.** Across the session category A went from 3
+  findings to 1, all noise removed; category D from 63 to 18 with the one
+  genuine defect among them found and annotated; category C was already 0; and
+  category B is now read in full with a single edit. What remains is not
+  backlog but the two items that need another session's context - Dublin's map
+  re-render and the Paris Step 0 checklist - plus one documented checker blind
+  spot, category D attributing by name rather than by module.
+
+### 2026-09-23 - A superseded document's citations are a trail, and the check was auditing them
+
+- **`check_provenance.py` now skips citation verification in any document
+  that declares itself SUPERSEDED in its opening lines.** This is the same
+  rule that already excludes `DECISIONS.md` - "it records what a citation said
+  on a date" - applied to the other shape of historical document.
+
+- **The note that led here was correct about the evidence and wrong about the
+  remedy.** `docs/licenses/canada-required-notices.md` cites "Items 9, 10, 14,
+  16" against the phrase "Four municipal OGLs, each with its own prescribed
+  sentence" without naming the four cities, so the subject test could not
+  confirm that item 9 was Vancouver's and reported it unverifiable. The
+  citation is accurate. The file's own header reads "SUPERSEDED 2026-09-22 ...
+  **Where this file and those disagree, those win.**" **Naming the cities to
+  satisfy the script would have edited a historical trail to please a check** -
+  the correction runs the wrong way round, and the standing rule is that a
+  dated record is evidence rather than a claim to maintain.
+
+- **Proved three ways.** The item 9 note is gone; a `notice 99` injected into
+  a LIVE document still fails the check (exit 1); the identical text injected
+  into the superseded document is ignored (exit 0). The middle case is the one
+  that matters - a skip wide enough to swallow real citations would have
+  passed the first and third tests alone.
+
+- **The harness was wrong a fourth time this session, and in a new way.** It
+  read the subprocess with a strict UTF-8 decode; the check prints Montreal
+  with an e-acute in the console codepage, the reader thread raised
+  `UnicodeDecodeError`, and stdout arrived EMPTY - so a case that had passed on
+  its exit code was reported FAIL for missing text. Re-run capturing bytes and
+  decoding with `errors="replace"`, all three pass. **Byte-vs-text has now
+  produced two of the four harness defects** (line endings on 2026-09-22,
+  codepage today), which makes it the single most reliable way to write a
+  test that lies.
+
 ### 2026-09-23 - Marseille brief written; its feed covers more cities than its register
 
 - **`docs/build_briefs/marseille.md`, 7/7 checks.** The first French follower
@@ -810,6 +886,44 @@ onwards; the early ones are split by phase rather than by hour.
   it the **highest-leverage licence item outstanding**, ahead of anything
   city-specific.
 
+### 2026-09-23 - Following one dead constant found a comment describing an approach the city does not use
+
+- **Barcelona's config carried `OSM_STATION_RAILWAY` and `OSM_STATION_KIND`
+  under a paragraph that reads as a description of how the city selects
+  stations. It is the record of a REJECTED approach, and neither constant is
+  used.** What actually runs is `stations_query()` in `fetch_sources.py` - the
+  member nodes of the cached route relations, asked for by id. Tag selection
+  was measured and abandoned because `railway=station` boxes and the
+  `stop_position` nodes a PTv2 relation contains are different objects with
+  **no overlap at all**, 225 against 378, so combining the two filters yields
+  an empty set. A reader meeting the config cold would reasonably conclude the
+  opposite. **This is the single instance among the eighteen that matched
+  category D's stated purpose** - "a comment describing a plan that did not
+  happen is what misleads the next reader" - and it was reached by following
+  one flagged constant to its comment rather than by scanning.
+
+- **Both constants were KEPT and annotated rather than deleted.** The counts
+  above them are the evidence for rejecting tag selection; removing them would
+  leave the decision looking arbitrary, which is the same reasoning that keeps
+  Edmonton's `STALE_BOUNDARY_IDS`. What was missing was the word "rejected".
+
+- **San Francisco's `COUNTY_BOUNDARY_URL` is a provenance record, and the
+  explanation lived in a different file.** `fetch_sources.py` deliberately
+  fetches only the Assessor roll, because re-downloading a business export
+  would change every count in `DECISIONS.md` and must be a deliberate act;
+  that reasoning is in its docstring, while the unread constant sits in
+  `config.py`. Annotated where the reader meets it. Nothing was rewired: the
+  constant is correct and deliberately unused.
+
+- **A false negative in `check_stale_claims.py` category D, now documented in
+  the checker itself.** Attribution is by NAME, not by module, so a constant
+  dead in one city is not reported when another city defines a live one of the
+  same name. Barcelona's `OSM_STATION_RAILWAY` is exactly that case and was
+  never flagged - only its sibling `OSM_STATION_KIND` was, which is what led
+  here. Shared config vocabularies are where this bites; fixing it means
+  resolving each read back to the module it imports from, which was not
+  attempted today.
+
 ### 2026-09-23 - Oslo's rail sourced and taxonomy measured; MEL's WFS is Licence Ouverte
 
 - **Oslo's rail is sourced: Entur answers keyless.** Ruter's aggregated GTFS
@@ -863,6 +977,88 @@ onwards; the early ones are split by phase rather than by hour.
   open, and until it is taken **Stockholm's measured 8,146 remains the
   stronger number.**
 
+### 2026-09-23 - Category D's 18 remaining constants are mostly deliberate records, not decay
+
+- **Read all 18 with the comment above each, which is what the check asks
+  for, and most are kept ON PURPOSE.** Madrid's `COORD_ZERO_IS_MISSING` says
+  in its own comment "DESCRIPTIVE, not a switch: step 2 drops the zeros
+  unconditionally, so setting this False would change nothing. Kept because
+  the measurement above is the valuable part." Mexico's `ATTRIBUTION_PRODUCT`
+  says "read by nothing... the `_NOTICES` entry is the one that must be
+  right." Edmonton's `STALE_BOUNDARY_IDS` is "the boundary layer this project
+  must NOT use, kept so the choice above reads as a decision rather than an
+  accident." Barcelona's `CKAN_RESOURCE_ID_2024_INCOMPLETE` exists "so the
+  rejection is checkable rather than a claim."
+
+- **So category D's framing does not fit this repository.** Its line is "a
+  comment describing a plan that did not happen is what misleads the next
+  reader" - but here the unread constants overwhelmingly carry MEASUREMENTS
+  and REJECTED ALTERNATIVES, which this project deliberately keeps. Deleting
+  them would destroy exactly the evidence `DECISIONS.md` exists to preserve.
+  The category is still worth running; what it finds is not decay but a
+  reading list, and only two of the eighteen - Barcelona's `OSM_STATION_KIND`
+  and San Francisco's `COUNTY_BOUNDARY_URL` - are bare values with no comment
+  at all, which is the only shape that actually leaves a reader stranded.
+
+- **No constants were deleted, and that is the finding rather than an
+  omission.** The cheap action - clearing a report to zero - would have been
+  the wrong one.
+
+- **A harness deserves the same suspicion as the check it tests, and this is
+  the second instance in two days.** On 2026-09-22 a negative test patched
+  text read as bytes against a file with different line endings, so nothing
+  matched. Today one asserted `"france.py" not in whole.split("Deferred")[-1]`
+  and, with no deferred section present, `str.split()` returned the whole
+  string, so it found the name in the live listing. **Different mechanisms,
+  same consequence: a correct check reported as broken, one step from being
+  "fixed".** Both are now written into
+  `docs/portable/cleanup-session.md` 4.2, where the rule reads: a failing
+  negative test has two suspects, and the newer code is the harness.
+
+- **The heredoc hook made its first unprompted catch, one day after
+  installation.** Patching that faulty test, the one-liner reached for was a
+  heredoc containing a backslash; the guard refused it and the edit went
+  through the Write tool instead. Recorded in the portable briefing's
+  escalation ladder as evidence the top rung pays for itself when the rule was
+  genuinely failing - prose had not stopped that form four times running.
+
+### 2026-09-23 - Category D reported 63 dead constants, 45 of which were add-country working correctly
+
+- **France's country profile has no city yet, so nothing imports it - and the
+  checker called all 45 of its constants dead.** `add-country` exists
+  precisely so the national facts are profiled ONCE, before the first city in
+  that country is built, so a profile whose constants nothing reads is the
+  documented workflow succeeding. Reporting it as decay means the check fires
+  forty-odd false positives every time someone follows the process this
+  project recommends.
+
+- **The distinction is exact and costs one grep: does any city config import
+  the profile?** Mexico's does, from Guadalajara and Mexico City, so its three
+  unread constants ARE findings and stay listed. France's does not, from none,
+  so its 45 are reported as **deferred** with a count and the reason, in their
+  own section. Live findings fell from 63 to **18**, which is the number a
+  reader can actually work through.
+
+- **The deferral expires by itself, and that was the part worth proving.** A
+  deferral needing someone to remember it is the same trap as a `KNOWN_GAPS`
+  list that cannot go stale. Simulated the first French city by making one
+  city config import the profile: France's constants moved from deferred to
+  live immediately, with no edit to the checker, and returned when the import
+  was removed.
+
+- **The negative test failed first, and the test was what was wrong.** Its
+  second assertion read `"france.py" not in whole.split("Deferred")[-1]` -
+  but when the deferred section is absent entirely, `str.split()` returns the
+  whole string as one element, so it found the name in the LIVE listing and
+  reported a working checker as broken. **Second time in two days that a
+  harness, not a check, was the defect** - after the byte-vs-text line-ending
+  bug on 2026-09-22. A harness deserves the same suspicion as the thing it
+  tests.
+
+- **The heredoc guard shipped yesterday blocked the fix for it**, correctly:
+  the one-liner that would have patched the test carried a backslash inside a
+  heredoc. First unprompted catch in real use, one day after installation.
+
 ### 2026-09-23 - Lille's tram geometry found first-party; its metro has none, and a line code nearly became a false find
 
 - **Lille's portal is geOrchestra and its own 404 said so.** After
@@ -909,6 +1105,38 @@ onwards; the early ones are split by phase rather than by hour.
   WFS** - the standing rule that a portal is a reason to expect permissive
   terms rather than evidence of them.
 
+### 2026-09-23 - check_stale_claims category A was reporting three findings and none of them was real
+
+- **The detector paired a future-tense marker with any built-city name on the
+  same LINE, and a markdown table row runs past 600 characters.** So
+  "Screened 2026-09-21, not yet a full Step 0" - accurate prose about New
+  Orleans, a city that is not built - matched "Boston" mentioned some 400
+  characters further along the same row, and was reported as a stale claim.
+  The marker and the name were never related, only adjacent in a file.
+  **Exactly the defect already fixed once in `check_provenance.py`**, where
+  `item N` citations were being read across three unrelated namespaces; that
+  it recurred in a second checker is the argument for treating proximity as a
+  standing question rather than a one-off bug. Scoped to a 120-character
+  window either side of the marker.
+
+- **`docs/notifications/` is no longer scanned, for a principled reason.**
+  That directory holds letters this project owes a publisher, and "NOT YET
+  SENT" is their CORRECT state - the file exists to track an act that has not
+  happened. A document whose subject is pendency cannot be audited for writing
+  about pendency, which is the same reasoning that already excluded
+  `docs/build_briefs`.
+
+- **Category A went from 3 findings, all of them noise, to 1 that is real** -
+  the Barcelona row in the obligations table, which genuinely must be
+  corrected the moment that letter sends, and which the check will keep
+  pointing at until it is. **A report that is 100% false positives is one
+  people learn to skip**, which costs more than the check was ever worth; the
+  same reasoning as the deliberately narrow heredoc guard shipped yesterday.
+
+- **Watched both directions before shipping**, per the standing rule. Both
+  known false positives disappear, and a `Boston is not yet built` injected
+  into `project_context.md` is still caught - a proximity window that had been
+  tightened too far would have passed the first test and failed the second.
 ### 2026-09-23 - The four French followers are country-ready, not brief-ready, and Lille has no line geometry
 
 - **Asked whether the other French cities are brief-ready. They are not, and

@@ -91,7 +91,12 @@ EXCLUDE_PATTERNS = ("passover_*.md", "*retrospective*.md", "*_addendum.md")
 # not drift. Their claims are re-verified by `scripts/brief_check.py` against
 # live sources, which is the right instrument - this one cannot tell a stale
 # brief from an accurate record of a past probe.
-EXCLUDE_DIRS = ("docs/build_briefs",)
+# docs/notifications holds letters this project owes a publisher. "NOT YET
+# SENT" is their CORRECT state, not a stale claim - the whole point of the
+# file is to track an act that has not happened. Excluded for the same reason
+# as build_briefs: a document whose subject is pendency cannot be audited for
+# writing about pendency.
+EXCLUDE_DIRS = ("docs/build_briefs", "docs/notifications")
 
 # Two more, each for a reason already established above rather than a new one.
 #
@@ -119,6 +124,11 @@ EXCLUDE_PATHS = {".claude/skills/consistency-sweep/SKILL.md"}
 SCAN_GLOBS = ("docs/**/*.md", ".claude/skills/**/*.md", "CLAUDE.md", "*.md")
 
 # A. Phrases describing a future, in a project where the future keeps arriving.
+# How close a built city's name must sit to a future-tense marker before the
+# two are treated as one claim. Wide enough for a sentence, far narrower than
+# a table row.
+NEAR_CHARS = 120
+
 FUTURE_MARKERS = [
     "none built", "not built", "unbuilt", "no city is built",
     "not yet a row", "not yet", "if any", "when one is", "would require",
@@ -227,7 +237,17 @@ def check_a(files, vocab, verbose):
                 i = low.find(marker)
                 if i < 0 or in_quotes(i, spans):
                     continue
-                named = [v for v in vocab if v.lower() in low]
+                # PROXIMITY, NOT THE WHOLE LINE. A markdown table row
+                # runs past 600 characters, so "Screened 2026-09-21, not yet
+                # a full Step 0" - accurate prose about an UNBUILT city -
+                # matched "Boston" mentioned 400 characters further along the
+                # same row and was reported as a stale claim. Same defect
+                # shape as check_provenance's `item N` citation namespaces:
+                # the marker and the name were never related, only adjacent
+                # in a file. Measured 2026-09-23: this took category A from
+                # three findings, all of them noise, to one that is real.
+                near = low[max(0, i - NEAR_CHARS):i + len(marker) + NEAR_CHARS]
+                named = [v for v in vocab if v.lower() in near]
                 if named or verbose:
                     hits.append((p, n, marker, named[:3], line.strip()))
                 break
@@ -271,8 +291,42 @@ def check_c():
     return hits
 
 
+def country_without_a_city(rel):
+    """Is this a country profile no city imports YET?
+
+    `add-country` exists so the national facts are profiled ONCE, before
+    the first city in that country is built - so a profile whose
+    constants nothing reads is that workflow working, not a defect.
+    Reporting them as dead would mean this check fires forty-odd false
+    positives every time someone follows the documented process, and a
+    report people learn to skip is worse than no report.
+
+    The distinction is exact and cheap: does any city config import this
+    profile? Mexico's does, from two cities, so its three unread
+    constants ARE findings. France's does not, from none, so its
+    forty-six are deferred until Paris lands - at which point they become
+    findings automatically, with no edit here.
+    """
+    if not rel.startswith("pipeline/countries/"):
+        return False
+    stem = rel.rsplit("/", 1)[1][:-3]
+    for cfg in ROOT.glob("pipeline/*/config.py"):
+        if f"countries.{stem}" in cfg.read_text(encoding="utf-8"):
+            return False
+    return True
+
+
 def check_d():
     """Module-level config constants that nothing outside their own file reads.
+
+    KNOWN FALSE NEGATIVE: attribution is by NAME, not by module. A constant
+    that is dead in one city's config is not reported when another city
+    defines and consumes one of the same name - Barcelona's
+    OSM_STATION_RAILWAY is unread there while Guadalajara's is live, so only
+    its sibling OSM_STATION_KIND surfaced on 2026-09-23. Following that one
+    constant found the real defect anyway, but the blind spot is real and
+    shared config vocabularies are exactly where it bites. Fixing it means
+    resolving each read back to the module it imports from.
 
     Deterministic enough to trust - these configs are imported by name - but it
     REPORTS rather than fails, because a dead constant is a signal to go and
@@ -397,14 +451,30 @@ def main():
 
     if args.only in (None, "D"):
         hits = check_d()
-        print(f"D. CONFIG CONSTANTS no script reads - {len(hits)}")
+        live = [h for h in hits if not country_without_a_city(h[0])]
+        deferred = [h for h in hits if country_without_a_city(h[0])]
+
+        print(f"D. CONFIG CONSTANTS no script reads - {len(live)}")
         print("   Each one is a prompt to READ THE COMMENT ABOVE IT. A dead "
               "constant is harmless;\n   a comment describing a plan that did "
               "not happen is what misleads the next reader.")
-        for rel, lineno, nm in hits:
+        for rel, lineno, nm in live:
             print(f"   {rel}:{lineno}  {nm}")
-        if not hits:
+        if not live:
             print("   none")
+
+        if deferred:
+            by_file = {}
+            for rel, _, _ in deferred:
+                by_file[rel] = by_file.get(rel, 0) + 1
+            print(f"\n   Deferred - {len(deferred)} constant(s) in a country "
+                  f"profile no city imports yet.")
+            print("   That is add-country working as intended: the national "
+                  "facts are profiled once,\n   BEFORE the first city. They "
+                  "become findings on their own the day a city\n   in that "
+                  "country lands, with no edit to this script.")
+            for rel, n in sorted(by_file.items()):
+                print(f"      {rel}  ({n})")
         print()
 
     print("Reported, not failed - every rule here is a guess about English. "
