@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**167 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**168 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [France profiled: one register, six cities, and a naming gap found early](#2026-09-22---france-profiled-one-register-six-cities-and-a-naming-gap-found-early)
 - [Band B's coordinate routes measured; one claim did not survive](#2026-09-22---band-bs-coordinate-routes-measured-one-claim-did-not-survive)
 - [Dublin Step 0: a register with no names, and a taxonomy rule that inverts](#2026-09-22---dublin-step-0-a-register-with-no-names-and-a-taxonomy-rule-that-inverts)
 - [Barcelona's live terms finally read, and they carried a clause that would have sunk the city](#2026-09-22---barcelonas-live-terms-finally-read-and-they-carried-a-clause-that-would-have-sunk-the-city)
@@ -203,6 +204,87 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - France profiled: one register, six cities, and a naming gap found early
+
+- **France was profiled ahead of Milan because a country profile converts into
+  cities at a rate that decides everything, and France's rate is six to one.**
+  Paris, Lyon, Marseille, Toulouse, Lille and Rennes all come off INSEE's
+  SIRENE with **one variable changing** - `codeCommuneEtablissement` - which is
+  Mexico's shape, where the second city differed by one line, rather than
+  Spain's, where two cities shared a country and almost nothing else. Milan is
+  the same class of work and buys **one** city. Produced
+  `pipeline/countries/france.py` and `docs/france_step0_endpoints.md`.
+
+- **France's coordinate leg is a JOIN, which was not what the record implied.**
+  Paris was carried as "99.96% already geolocated", but the raw
+  `StockEtablissement` file carries an address and no coordinates. The
+  geolocation is a **separate INSEE file of 37,901,783 rows keyed on `siret`**
+  (parquet, 811 MB, `lov2`, updated 2026-09-21), so coordinates come from a
+  dict join exactly as Prague's do - no geocoder, no key, no rate limit, and
+  the property holds for all six cities at once. **Both files publish parquet**
+  (2,210 MB and 811 MB against 2,867 MB and 1,177 MB zipped), and every number
+  in this profile was measured by reading parquet FOOTERS over HTTP range
+  requests rather than downloading 3 GB.
+
+- **The geolocation file's CRS is PER ROW, not per file, and hard-coding it
+  would fail silently.** An `epsg` column held four values in one sampled row
+  group: **2154** (Lambert-93) on 99.3%, plus **2975** Reunion, **5490**
+  Antilles and **2972** Guyane. All six profiled cities are metropolitan and
+  uniformly 2154, so a hard-coded constant works today and would put every pin
+  in the sea if the pipeline were pointed at Fort-de-France - **without
+  raising**. Recorded as a column to read rather than a constant to copy, the
+  same lesson Prague's positive-but-inverted S-JTSK coordinates taught hours
+  earlier.
+
+- **Roughly six in ten French storefronts publish no name at the premises
+  level, and this was measured BEFORE a taxonomy was written rather than
+  discovered at step 2.** Across **20,103 active rows in NAF 47/56/96**:
+  `enseigne1Etablissement` **29.1%**, `denominationUsuelleEtablissement`
+  **34.2%**, **either 42.9%**. **This is Milan's `insegna` trap in another
+  language** - the field exists and is mostly empty - and finding it during the
+  profile rather than during the build is the entire reason `add-country` runs
+  before `add-city`.
+
+- **Paris is the WORST-named of the six cities, which inverts the assumption
+  that the flagship carries the best data.** From a 14-row-group sample
+  (1,735,429 rows, 3.9% of the file): Paris **42.9%** named, Marseille 45.8%,
+  Lille 50.7%, Toulouse 51.9%, Lyon 52.5%, **Rennes 54.3%**. The cheap
+  follower cities are also the better data. Paris's scaled 136,400 bucket rows
+  against its independently measured **148,633** is the control passing; the
+  ~8% gap is sample bias, because active rows get denser through a file ordered
+  by siret, which is seniority not geography.
+
+- **The obvious fix for the naming gap is a privacy hazard and is ruled out in
+  its general form.** `StockUniteLegale` joined on `siren` carries
+  `denominationUniteLegale` - but for a sole trader it carries
+  `nomUniteLegale` and `prenomUsuelUniteLegale`, **a person's name**. Decided:
+  fall back to the legal name **only where the legal form is a company, never
+  for a natural person**, and run `scripts/check_personal_exposure.py` before
+  publishing any French city. France already masks non-diffusible records at
+  source - `statutDiffusionEtablissement` hides name, address and geolocation
+  on **13.4%** of active bucket rows - so part of the privacy work is done
+  upstream, which `read-licence` step 6b predicts and which cuts both ways.
+
+- **Rail is ONE integration for six cities, and two matching traps were hit
+  while establishing it.** `transport.data.gouv.fr`, the National Access
+  Point, serves **799 datasets, 489 of type public-transit**, with GTFS for
+  every one of the six urban operators (IDFM, TCL, Aix-Marseille, Tisseo,
+  ilevia, STAR). **First trap:** substring-matching the whole JSON blob scored
+  Rennes at **489 of 799**, because `star`, `mel` and `tcl` match unrelated
+  text - the same self-match that produced 367 false hits on the Tel Aviv
+  portal. **Second trap:** Lille's match also returns **"Navettes Aeroport de
+  Lille"**, an airport shuttle, which is precisely the wrong-feed selection
+  that had Dublin tested against airport coaches. Per-operator GTFS licences
+  are **unread** and are a prerequisite for shipping, not a formality.
+
+- **Two wrong files were pulled before the right ones, and both were the
+  registered-office distinction at file level.** `StockUniteLegale`
+  (30,020,346 **legal units** keyed on `siren`) sits beside
+  `StockEtablissement` (44,064,115 **establishments** keyed on `siret`) in the
+  same resource list, and a title match without its trailing `" -"` also
+  catches `StockEtablissementHistorique` and `StockEtablissementLiensSuccession`.
+  Recorded in the country module as a named constant rather than as a warning.
 
 ### 2026-09-22 - Band B's coordinate routes measured; one claim did not survive
 
