@@ -52,7 +52,7 @@ project's favour.**
 
 | # | City | The question | Status |
 |---|---|---|---|
-| **7** | **Stockholm** 🇸🇪 | `dataportal.se` declares **`Åtkomsträttigheter: Begränsad`** (restricted) while the ArcGIS item declares `access: public` and serves without credentials, and `licenseInfo` is **empty**. The two statements contradict each other | 🟡 **OPEN** — **that it fetches is not a finding that it is licensed.** Blocks the build; needs the publisher asked |
+| **7** | **Stockholm** 🇸🇪 | ~~`dataportal.se` says restricted while the ArcGIS item says public~~ — **re-read 2026-09-22 and the conflict mostly dissolves.** `dataportal.se` is the **harvester**; the publisher's own Hub DCAT feed declares **`accessLevel: public` on all 109 datasets**, with CC0 on 8 and blank on the rest. `read-licence` step 5 gives the publisher precedence over a third-party catalogue | 🟢 **NOT a letter — position is SILENT** (the Miami-Dade shape). Still unread: the walled `dataportalen.stockholm.se` record (**try the Internet Archive**) and any city-wide policy. A note to the publisher is now optional courtesy, not a gate |
 | **8** | **Tel Aviv** 🇮🇱 | The MapServer returns **no `copyrightText` and no `licenseInfo`**, and Tel Aviv is **not** among the four municipalities on `data.gov.il` (Be'er Sheva, Haifa, Ma'ale Adumim, Petah Tikva), so there is no national statement to inherit | 🟡 **OPEN** — and awkward: the pages that would carry the terms are on the **IP-blocked** host (HTTP 472, the block names our IP). **Try the Internet Archive first** — that is how Barcelona's and Sevilla's were read — and only then ask |
 
 ---

@@ -993,6 +993,132 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Moved Rio de Janeiro from Band D-b to Band C, a filing correction rather
+  than a new measurement.** Sub-tier D-b means *"rail answered, the business
+  leg is the blocker"*, and Rio's own row read *"CNPJ, no coordinates ->
+  geocoding at Sao Paulo's scale"* - which names **geocoding** as the blocker,
+  not the business leg. Rio's business leg is **CNPJ, the same national
+  register as Sao Paulo**, which already sat in Band C as viable, and the Tier
+  3 view had paired them all along: *"Brazil - 2 - Sao Paulo, Rio ... Rio's
+  rail is confirmed (20 relations, all named and coloured)"*. So the row
+  contradicted the sub-tier containing it, and the two views of the same two
+  cities disagreed. Band C 18 -> 19, Band D 8 -> 7, D-b 4 -> 3; candidates
+  unchanged at 31, and the band counts now sum to the total. Touched
+  `docs/city_master_list.md`.
+
+- **The cause is worth more than the fix: Rio was banded by how it was
+  DISCOVERED rather than by what is stopping it.** D-b was populated from the
+  OSM rail screen, Rio arrived through that screen, and nobody re-filed it once
+  the business leg turned out to be Sao Paulo's. **Band D exists precisely to
+  say what is actually stopping each city**, so filing by provenance defeats
+  the band's only purpose - and it is invisible, because a city in the wrong
+  band looks exactly like a city in the right one. Caught by a reader asking
+  why a city whose blocker is geocoding sat in the band for blocked business
+  legs. The same question is worth asking of any other row whose text names a
+  blocker its band does not.
+
+- **Recorded the master list's chat format as a standing requirement.** Every
+  future republish uses banded sections with one table per band, a per-city row
+  carrying its own numbers, the load-bearing figure bolded, and the cheapest
+  next action at the end. Stored in memory rather than here, since it governs
+  how results are presented rather than what was decided. **The band counts
+  must be verified to sum to the candidate total before sending** - that
+  arithmetic has now been wrong twice.
+
+
+- **Probed all four Tier 4 countries, and three of the four turned out to be
+  chasing hosts that had MOVED.** `rzp.cz` answers 000 while `www.rzp.cz`
+  redirects to **`rzp.gov.cz`**, which is live; `opendata.praha.eu` redirects
+  to **`lkod.cz/catalog/praha`**; and `valoff.ie`, recorded as "down on both
+  hosts twice", is not down but **retired** - `data.gov.ie` catalogues a
+  "Valuation Office API" whose single resource is `https://tailte.ie/home/api/`,
+  because **Tailte Eireann absorbed the Valuation Office**. With Sevilla's
+  `datosabiertos.sevilla.org` that is four dead addresses retried in one day.
+  **A 000 or a 404 is a question about the address, not an answer about the
+  data.** Touched `docs/city_master_list.md`.
+
+- **Zurich's second bucket is measured ABSENT, so Switzerland is a one-bucket
+  country rather than an open question.** The control passes
+  (`zzqqxxnonsense` returns 0), and every commerce term on
+  `data.stadt-zuerich.ch` returns noise or surveys: `detailhandel` **1** and it
+  is a traffic count; `verkauf` 12, tram ticket offices and apartment prices;
+  `laden` 31, a farm shop and population surveys; `gewerbe` 28, zoning land and
+  3D roof models; `firmen` 16, every one a **Firmenbefragung** - a company
+  *survey*, 2005 to 2025. Only `Gastwirtschaftsbetriebe` is a real register.
+  Zurich therefore inherits **Stockholm's scope question, not a data one**:
+  whether a food-only city page belongs in a project whose other cities carry
+  three buckets. Rejected recording this as "needs more searching", because the
+  control makes the absence a measurement.
+
+- **Singapore's API does not have a loose search; it has an INERT one, and
+  only the nonsense control distinguishes those.** The record said "its API
+  answers but the search is loose". Measured: `zzqqxxnonsense`, `licence`,
+  `food establishment` and `business` all return the **identical ten
+  datasets** - the `query` parameter is ignored entirely. A loose search
+  returns too much and can still be narrowed; an ignored one returns the same
+  thing regardless and every conclusion drawn from it is fiction. This is the
+  third silent-ignore of the screen, after `data.europa.eu`'s facets and the
+  servers that return HTTP 200 with unfiltered results. The catalogue is
+  **4,628 datasets across 463 pages** and pages correctly, so the route is
+  enumeration rather than search.
+
+- **Corrected Band A, which still listed Madrid and Barcelona as candidates
+  after both were built.** Verified against the repository rather than the
+  prose: `outputs/madrid/` and `outputs/barcelona/` exist,
+  `app/pages/17_Madrid_Heatmap.py` and `18_Barcelona_Heatmap.py` exist, both
+  have `cities.py` entries and pipeline directories, and the Built header
+  already read 18. Band A had not caught up, so its "5 remaining" did not
+  reconcile with the candidate total. Now **3 remaining + 4 built**, and
+  Candidates drops 33 to 31. Barcelona's row records that all four owner
+  decisions were settled before the build **and that the duty to notify the
+  City Council is still outstanding**, so the build landing does not read as
+  the obligation being discharged.
+
+
+- **Stockholm's licence position moved from "ambiguous, ask the publisher" to
+  SILENT, by doing the reading that should have come first.** The recorded
+  position cited `read-licence` step 8 - ambiguous in a way that matters, needs
+  the publisher asked - while steps 2, 3 and 5 were still undone. It treated
+  `dataportal.se`'s `accessRights: RESTRICTED` as the last word, and
+  `dataportal.se` is a **harvester**, not the publisher. Following the pointers
+  the record itself names: the miljoforvaltning's **own** Hub DCAT feed
+  (`open-data-sthlm-miljo.hub.arcgis.com/api/feed/dcat-us/1.1.json`, **109
+  datasets**) declares **`accessLevel: public` on all 109**, and `license`
+  **CC0 on 8** with the rest blank. Step 5 decides the contradiction in favour
+  of the publisher, and the publisher says public. Touched
+  `docs/city_master_list.md`, `docs/gated_access.md`.
+
+- **That the publisher licenses 8 of its 109 datasets is what makes the blank
+  meaningful.** A missing licence field can mean "no mechanism" or "declined to
+  license"; here the mechanism is demonstrably in use - CC0 on ArtArken,
+  biotopes, substrates and landscape, a single thematic cluster that reads as
+  one team licensing its own outputs. So the blank on `Livsmedelstillsyn` is a
+  **genuine silence**, the Miami-Dade shape, rather than an absence of
+  capability. Recorded as SILENT with the pages named, which is an established
+  absence rather than an unexamined gap.
+
+- **Declined an over-reach that would have resolved Stockholm in this project's
+  favour.** Stockholm's traffic office states at `openstreetgs.stockholm.se`
+  that *"Datainnehall i dessa tjanster far vidareutnyttjas fritt och
+  tillhandahallas 'Licensfritt' om inget annat anges"* - freely reusable,
+  licence-free unless otherwise stated. It would have been easy to read that as
+  the city's blanket position. **It is Trafikkontoret's statement about "dessa
+  tjanster", its own services, not miljoforvaltningen's**, and extending one
+  department's terms to another department's data is the exact move
+  `read-licence` exists to prevent. Recorded as evidence about the city's
+  posture and explicitly NOT as a licence for this dataset.
+
+- **Corrected the claim that Stockholm needed a letter, which was made before
+  the documents were read.** A letter is step 8's remedy for an ambiguity that
+  **survives** reading; it was offered here as the first move. Two documents
+  remain genuinely unread - the `dataportalen.stockholm.se` record, which
+  redirects to `catalog.signin` and is therefore walled, and any city-wide open
+  data policy - and the Internet Archive is the route to the first, as it was
+  for Barcelona's and Sevilla's licences. **Writing to a publisher is cheap,
+  which is precisely why it should not substitute for opening the pages they
+  have already published.**
+
+
 - **The WMATA account was reinstated by the owner on 2026-09-22, so the D.C.
   page rests on a live licence, and the requirement was promoted from prose to
   gate item 10.** WMATA's terms are an API agreement rather than a data
