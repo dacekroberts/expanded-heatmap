@@ -1131,6 +1131,47 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Milan prep: the two missing layers were found and all three schemas
+  captured, and the fill rates correct what this project believed about the
+  city.** Enumerating `dati.comune.milano.it` - **2,602 datasets** - and
+  filtering out aggregates left three premises layers that are **one per
+  bucket**: `ds49` *esercizi di vicinato in sede fissa* **28,131** (retail),
+  `ds59` *pubblici esercizi fuori piano* **3,799** (food service), `ds62`
+  *parrucchieri, estetisti, centri abbronzatura* **5,732** (personal
+  services). All three **CC-BY**, all updated **2026-08-31**, all carrying
+  `LONG_X_4326`/`LAT_Y_4326`. **The bucket comes from which LAYER a row is
+  in, not from a code**, which is why no ATECO is needed to assign one.
+  Touched `docs/city_master_list.md`.
+
+- **The fields that made Milan "the best business source in the screen" exist
+  but are mostly EMPTY, and that was never measured.** `insegna` is populated
+  on **17.6%** of retail rows (4,947 of 28,131) and **9.1%** of food rows;
+  `codice_ateco` on **7.1%** (2,010 rows); and `ds62` carries **no name field
+  at all**. `settore_merceologico` is 99.5% populated but **binary** -
+  *alimentare / non alimentare* - and `tipologia` is 100% and single-valued
+  (`vicinato` on 28,039 of 28,131), so neither is a taxonomy. **This is
+  Stockholm's `AnlaggningsTyp` trap exactly** - *the field exists and is
+  empty* - and the same error class as Dublin's four wrong numbers the same
+  day: **reporting what a schema OFFERS rather than what the data CONTAINS.**
+
+- **Milan stays in Band A; what changed is an owner decision rather than its
+  viability.** Bucketing works by layer membership, location is complete
+  (`Ubicazione` 100%, `DescrizioneVia` 99.9%, coordinates 99.1%), and the
+  licence is clean CC-BY across all three. What the owner is choosing is
+  **a map where roughly 82% of retail pins carry no trade name** - weaker
+  than Barcelona's 100% `Nom_Local`, and simultaneously **a privacy asset**,
+  since fewer names are published at all. Recorded on the row so the build
+  does not discover it late, which is the whole point of a brief.
+
+- **Two adjacent layers worth noting for a multi-source pass, not used yet.**
+  `ds501 Farmacie` is **422 pharmacies under CC-ZERO** with
+  `DESCRIZIONE_FARMACIA` populated - a *named* retail layer, unlike the main
+  one - and `ds57 edicole` is **502 newsstands**. Both are small, both are
+  premises, and both carry coordinates. They are recorded rather than merged
+  because adding a source multiplies the licence and privacy checks, which is
+  what `multi-source-city` exists to manage.
+
+
 - **Renumbered the live bands to a contiguous A-B-C-D and retired the closed
   ones' letters.** Four bands closed on 2026-09-22, leaving the live set at A,
   C, E and F - gaps that read as missing rather than as resolved. The closed
