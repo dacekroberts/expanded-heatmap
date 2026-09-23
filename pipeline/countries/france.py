@@ -191,7 +191,7 @@ CITY_COMMUNE_PREFIXES = {
 CITY_ESTIMATES = {
     "paris":     {"bucket_rows_est": 136_400, "named": 0.429},
     "marseille": {"bucket_rows_est": 26_940, "named": 0.458},
-    "lyon":      {"bucket_rows_est": 19_449, "named": 0.525},
+    "lyon":      {"bucket_rows_est": 18_082, "named": 0.514},  # DISCARDED
     "toulouse":  {"bucket_rows_est": 12_873, "named": 0.519},
     "lille":     {"bucket_rows_est": 10_461, "named": 0.507},
     "rennes":    {"bucket_rows_est": 5_002, "named": 0.543},
@@ -304,7 +304,11 @@ LYON_REQUIRES_ACCOUNT = True
 MAP_REGION = "Europe"
 
 BUILD_SEQUENCE = ("paris", "marseille", "toulouse", "lille", "rennes")
-DEFERRED = {"lyon": "account + trademark + indemnity; see gated_access 17-19"}
+# DISCARDED 2026-09-23 on four independent blockers - see
+# docs/city_master_list.md and DECISIONS.md. Kept here because the DATA
+# is fine (51.4% named, better than Paris), so a reinstatement would not
+# need to re-measure the business leg.
+DISCARDED = {"lyon": "account + CGU 9.4 indemnity + CGU 6.2 trademark + dead NAP feed"}
 
 # RESOLVED 2026-09-22. The two readings disagreed because the NAP API's
 # `resources` array INCLUDES the entries that also appear in

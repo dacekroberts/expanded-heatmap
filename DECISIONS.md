@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**200 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**201 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Lyon discarded on four blockers, with a reinstatement template kept](#2026-09-23---lyon-discarded-on-four-blockers-with-a-reinstatement-template-kept)
 - [All six French cities are brief-ready](#2026-09-23---all-six-french-cities-are-brief-ready)
 - [Toulouse's and Rennes' CGU are clean, and Lyon stays out](#2026-09-23---toulouses-and-rennes-cgu-are-clean-and-lyon-stays-out)
 - [Licence Ouverte 2.0 read: five sources discharged, two carve-outs opened](#2026-09-23---licence-ouverte-20-read-five-sources-discharged-two-carve-outs-opened)
@@ -239,6 +240,51 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Lyon discarded on four blockers, with a reinstatement template kept
+
+- **Lyon moved from deferred to DISCARDED at the owner's direction**, and the
+  reason for the move is worth recording as much as the decision: **an earlier
+  summary listed three unblocking steps and footnoted the fourth**, which read
+  as a checklist to viability rather than as four independent walls. **A
+  numbered list implies completability.** The dead feed was not a footnote -
+  it is a blocker of the same rank as the other three.
+
+- **The four, each sufficient on its own.** (1) An account on
+  `data.grandlyon.com` is required before any download, and **this project does
+  not create accounts**. (2) Grand Lyon **CGU 9.4** is an open-ended indemnity.
+  (3) **CGU 6.2** bars the producers' *signes distinctifs* *"associes ou non a
+  l'utilisation des donnees"*, colliding with the invariant that every drawn
+  line carries its real public name - Lyon's being **TCL**. (4) Its National
+  Access Point feed is **dead since 2022-04-14**, 0% availability, while the
+  source portal is current: **the stale-mirror trap that cost Toronto**.
+
+- **This is a discard on TERMS AND ACCESS, never on data, and the distinction
+  is kept deliberately.** Lyon's business leg is **~18,082 bucket rows at
+  51.4% named** - **better than Paris's 39.6%**. Recording that alongside the
+  discard is what makes a reinstatement cheap: the business leg would not need
+  re-measuring, only the four blockers re-tested.
+
+- **A reinstatement template is kept in `PLAN.md`** rather than the discard
+  being a dead end - the account URL, the indemnity precedent (Hong Kong's,
+  accepted 2026-09-22), the authorisation channel for the TCL question
+  (`contactopendata@tcl.fr`), and the instruction to source rail from Grand
+  Lyon's portal rather than the NAP. **A discard that names its own undo is
+  more useful than one that does not**, and this project has already reversed
+  Italy, France and Sevilla on re-examination.
+
+- **Lyon's clauses must NOT be generalised to France, and today's reads prove
+  it.** Toulouse's and Rennes' CGU were read the same day and are **clean** -
+  the Opendatasoft template, no indemnity, and a marks clause that expressly
+  excludes *"les donnees publiees sur le DOMAINE"*. **Three French portals,
+  three different answers.** Lyon's are Grand Lyon's own, not a national
+  pattern, which is precisely why each publisher gets read rather than
+  inheriting a country position.
+
+- **Counts: candidates 32 to 31, discards 32 to 33.** Band A is now **6 ready
+  + 6 built** with no gated row, and `docs/city_cost_order.md`'s bands re-sum
+  to 31 - the two files agree, which is the check that file states about
+  itself.
 
 ### 2026-09-23 - All six French cities are brief-ready
 

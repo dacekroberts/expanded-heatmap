@@ -476,6 +476,32 @@ mistakes as confidently as its findings.
   7. Open: whether `navn` is a trade name or a legal name — the question that
      caught Milan and Paris.
 
+- [x] **Lyon** 🇫🇷 — **DISCARDED 2026-09-23.** Four independent
+  blockers, not one: the account this project will not create, CGU **9.4**'s
+  open-ended indemnity, CGU **6.2**'s bar on the producers' *signes
+  distinctifs* (which collides with naming **TCL** on the map), and a National
+  Access Point feed **dead since 2022-04-14**. **Its DATA is fine** — ~18,082
+  bucket rows at **51.4% named**, better than Paris — so this is a discard on
+  **terms and access**, never on data. **Reinstatement template below**, kept
+  because the business leg would not need re-measuring.
+  - **If new evidence suggests viability, these four must ALL clear:**
+    1. An account at `https://data.grandlyon.com/portail/fr/connexion` —
+       **owner action; this project does not create accounts.** CGU 5.5 makes
+       first access rights valid **30 days** before reconfirmation, and
+       Licence Mobilités Art. 4.2 requires **one account per Licensee**.
+    2. **Accept CGU 9.4's indemnity** — owner decision. Precedent exists:
+       Hong Kong's was accepted 2026-09-22 on the reasoning in
+       `docs/data_sources.md`.
+    3. **Settle CGU 6.2** — whether naming **TCL** is barred.
+       `contactopendata@tcl.fr` can grant prior authorisation cheaply.
+    4. **Source the rail from `data.grandlyon.com`, not the NAP** — its NAP
+       copy shows **0% availability, last modified 2022-04-14**, against a
+       source portal current to 2026-09-22. **The stale-mirror trap.**
+  - ⚠️ **Do not generalise Lyon's clauses to France.** Toulouse's and Rennes'
+    CGU were read 2026-09-23 and are **clean** — Opendatasoft template, no
+    indemnity, marks clause expressly excluding the published data. **Lyon's
+    are Grand Lyon's own.**
+
 - [ ] **Marseille · Toulouse · Lille · Rennes** 🇫🇷 — **NOT
   brief-ready; country-ready.** No brief file exists for any of them. They
   inherit France's register, join and privacy handling, but **three things do
