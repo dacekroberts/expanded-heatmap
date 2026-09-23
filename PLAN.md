@@ -821,8 +821,19 @@ mistakes as confidently as its findings.
 
 ## Structure
 
-- [ ] **Re-render `outputs/dublin/heatmap.html` so the Use tooltip drops the
-  `-` placeholder** - the code fix landed 2026-09-22
+- [x] **Re-render `outputs/dublin/heatmap.html` so the Use tooltip drops the
+  `-` placeholder — DONE 2026-09-23 (`383687a`), without anyone setting out to
+  do it.** A session re-rendering every city to fix map widths re-rendered
+  Dublin with the fix in place. Measured on the committed map at each commit:
+  `eb1b68d` (the original build) 88.9% of 7,595 pins carry the placeholder;
+  `383687a` and every commit since, **0%**. That is also the first end-to-end
+  proof the fix works through the real render path - the note below verified
+  the function against extracted values, never an actual render. It sat open
+  here for a day after it was done, which is the argument for closing an item
+  by measuring the output rather than by remembering who was going to do it.
+  Original note, kept as it was:
+
+  The code fix landed 2026-09-22
   (`dublin_uses.display_value()`, used by `map_common.py`) and is verified
   against every value in the committed map: **88.9% of 7,595 pins improve and
   none is left with an empty Use line**. But the rendered map is committed

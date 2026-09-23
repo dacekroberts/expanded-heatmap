@@ -16,12 +16,14 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**243 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**245 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
 - [Sao Paulo's rail is drawn from OSM with GeoSampa as the status reference; Rio's SIURB clause accepted](#2026-09-23---sao-paulos-rail-is-drawn-from-osm-with-geosampa-as-the-status-reference-rios-siurb-clause-accepted)
+- [Lille made "three regional maps" four within the hour](#2026-09-23---lille-made-three-regional-maps-four-within-the-hour)
 - [Taiwan is a door-plate JOIN at 92.5%, not a geocoding project; Rio's rail licence permits, Sao Paulo's is ambiguous](#2026-09-23---taiwan-is-a-door-plate-join-at-925-not-a-geocoding-project-rios-rail-licence-permits-sao-paulos-is-ambiguous)
+- [Two handoffs verified; one held a vacuous pass, one was overtaken by events](#2026-09-23---two-handoffs-verified-one-held-a-vacuous-pass-one-was-overtaken-by-events)
 - [Lille (Regional) built: 11,833 storefronts, 91 stations, eleven communes](#2026-09-23---lille-regional-built-11833-storefronts-91-stations-eleven-communes)
 - [Sixteen brief checks could not see their claims; the Brazilian briefs, and the agency rail both cities had](#2026-09-23---sixteen-brief-checks-could-not-see-their-claims-the-brazilian-briefs-and-the-agency-rail-both-cities-had)
 - [The legend covered the basemap credit in every city, and the embedded size hid it](#2026-09-23---the-legend-covered-the-basemap-credit-in-every-city-and-the-embedded-size-hid-it)
@@ -314,6 +316,28 @@ onwards; the early ones are split by phase rather than by hour.
   IBGE's portal clause than to Hong Kong's open-ended indemnity. Rejected:
   drawing Rio from OSM too, which would have discarded a better-maintained
   agency source to avoid a clause that asks for nothing.
+### 2026-09-23 - Lille made "three regional maps" four within the hour
+
+- **The station section said "Three maps are deliberately regional instead",
+  and Lille (Regional) landed as the fourth the same day.** Written earlier
+  that day by the cleanup session, in the section that also stated the
+  denominator rule's lesson - a closed count of an open set, by the author of
+  the rule. Now "Several maps are deliberately regional instead - among them
+  Miami, Vancouver with Surrey, Guadalajara, and Lille across eleven communes",
+  which the next regional city extends rather than falsifies.
+  `check_scope_disclosure.py` passed throughout, correctly: Lille's own section
+  was written, and a stale GENERAL claim is exactly what that check cannot see.
+  Found by re-reading the general claims on arrival, as the handoff note says.
+
+- **The same arrival showed the scope check steering another session, and
+  imposing friction while doing it.** Lille's page docstring records that it
+  was renamed from the scaffold's `24_Lille_(Regional)_Heatmap.py` because
+  `app/station_scope.py` derives a city's outputs directory from the page
+  filename and `lille_(regional)` resolves to nothing - property C failing
+  loudly, as designed, but on a name the scaffold itself generates. Guadalajara
+  worked around it the same way. Recorded rather than changed:
+  `station_scope.py` is now imported by the live app, so editing it needs a
+  reboot, and the rename is a one-line workaround that already worked twice.
 
 ### 2026-09-23 - Taiwan is a door-plate JOIN at 92.5%, not a geocoding project; Rio's rail licence permits, Sao Paulo's is ambiguous
 
@@ -362,6 +386,56 @@ onwards; the early ones are split by phase rather than by hour.
   repository. Not resolved in the project's favour. **The route that avoids
   the question** was recorded beside it: OSM geometry (the Mexico City and
   Barcelona route) with GeoSampa used only to decide which lines operate.
+### 2026-09-23 - Two handoffs verified; one held a vacuous pass, one was overtaken by events
+
+- **The attribution check handed to the cleanup role was read for the
+  failure it is most likely to hide, and it does not hide it.**
+  `scripts/check_map_attribution.js` reports a MISSING credit outright, counts
+  an off-screen probe as UNMEASURED rather than clear, and separately catches a
+  credit that is hidden, shrunk, clipped, faded, unnamed or unlinked. No path
+  was found by which it passes having measured nothing.
+
+- **The check_provenance.py clause it came with inherited a hole that predates
+  it, now closed.** K.1 looped over `outputs/*/heatmap.html` with no anchor, so
+  a renamed map file or a moved `outputs/` would have reported every map
+  credited, linked and clear having read none - all three clauses, including
+  the one added today. K.3 beside it was already safe (it cross-checks every
+  city in `names` for a map script); K.1 was the only unanchored loop. Proved
+  on the edited module: the real repository reports 0 problems across 23
+  cities, and an empty directory reports exactly one - the new guard - which,
+  since the guard is the file's only change, means the committed version
+  returned nothing there. **The second vacuous pass found today**, after
+  `check_scope_disclosure.py`'s empty `CITIES`; `check_no_fetch_in_steps`'s
+  self-test already guards the same shape as a glob that matches nothing. A
+  loop over a glob is the shape to check first when a check is handed over.
+
+- **Following the handoff's re-render closed an item nobody knew was done.**
+  All 23 maps were re-rendered, but every city's diff was one line - and
+  Dublin's should not have been, if the tooltip fix from 2026-09-22 applied.
+  It did not change because it had already been applied: measured with the
+  original build as the positive control, the placeholder is on **88.9% of
+  7,595 pins at `eb1b68d`** and **0% at `383687a` and every commit since** - a
+  map-width re-render this morning carried the fix live without setting out
+  to. PLAN.md still listed it as open, and so did the cleanup handoff. Closed,
+  with the measurement. It is also the first end-to-end proof the fix works
+  through the real render path; the 2026-09-22 verification tested the
+  function on extracted values.
+
+- **The second handoff's three concerns had all resolved before it arrived**,
+  and each was checked rather than taken as current. `master` was not "5 ahead
+  and 1 behind" but level with `origin/master`; the main checkout's `outputs/`
+  churn had been discarded by its owner; and the staging/master DECISIONS.md
+  merge had happened. That last one was verified by outcome rather than
+  method: every `### ` heading on both parents of `b24eea7` (235 + 237 -> 239)
+  and `4f4dedf` (239 + 238 -> 240) survives in the merge. The push carried no
+  `app/` change, so no deploy-import check or reboot was owed.
+
+- **The harness was wrong again, twice, in the first hour of the new model.**
+  A case-sensitive search for "Marseille" found no exposure verdict where two
+  existed, and importing the committed `check_provenance.py` from a temp file
+  pointed its import-time paths at the wrong `cities.py`. Neither reached a
+  conclusion, because each was the first thing doubted - which is the whole
+  of the rule.
 
 ### 2026-09-23 - Lille (Regional) built: 11,833 storefronts, 91 stations, eleven communes
 

@@ -89,9 +89,10 @@ repository, and every one of them is counted in the table on this page.
   for a reason that has nothing to do with commerce. Washington D.C.'s
   Metrorail reaches Maryland and Virginia, Toronto's Line 1 ends past the city
   limit at Highway 407, and Mexico City's Línea B crosses into the State of
-  México. **Three maps are deliberately regional instead** — Miami with its
-  county, Vancouver with Surrey, and Guadalajara with three neighbouring
-  municipios — because there one registry covers the whole area. Guadalajara
+  México. **Several maps are deliberately regional instead** — among them
+  Miami with its county, Vancouver with Surrey, Guadalajara with three
+  neighbouring municipios, and Lille across eleven communes — because there one
+  registry covers the whole area. Guadalajara
   goes one step further and leaves out a municipio it could have included:
   Tonalá has no Tren Ligero station, so its businesses could never fall inside
   a ring. **A station can also be outside the city by belonging to a

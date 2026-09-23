@@ -363,7 +363,21 @@ def check_invariants(names, lons):
     #    pipeline/map_common.py IS pipeline-only work, so without this half the
     #    only check that sees the regression is the one the rules say not to
     #    run.
-    for html in sorted(ROOT.glob("outputs/*/heatmap.html")):
+    #
+    #    A LOOP OVER NOTHING PASSES ALL THREE CLAUSES. Clause 3 below is
+    #    anchored to `names` - a city with no map script fails - but this one
+    #    had no anchor, so a renamed map file or a moved outputs/ would have
+    #    reported every map credited, linked and clear having read none. Found
+    #    2026-09-23 when the third clause was handed over; the same hole was
+    #    closed that day in check_scope_disclosure.py, and is the one
+    #    check_no_fetch_in_steps_selftest.py calls "a glob that matches nothing".
+    maps = sorted(ROOT.glob("outputs/*/heatmap.html"))
+    if not maps:
+        problems.append(
+            "outputs/*/heatmap.html matched NO files, so the basemap-credit "
+            "clauses examined nothing and would otherwise pass. If the maps "
+            "moved or were renamed, point this glob at them")
+    for html in maps:
         text = html.read_text(encoding="utf-8", errors="replace")
         rel = html.relative_to(ROOT).as_posix()
         if "OpenStreetMap" not in text:
