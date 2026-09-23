@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**160 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**161 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [The unplaceable label was the circular line, and the fix is a second pass rather than more candidates](#2026-09-22---the-unplaceable-label-was-the-circular-line-and-the-fix-is-a-second-pass-rather-than-more-candidates)
 - [Mexico City's fetching moved out of its steps, as the worked pattern for the other two](#2026-09-22---mexico-citys-fetching-moved-out-of-its-steps-as-the-worked-pattern-for-the-other-two)
 - [Both Mexican cities hardcoded the DENUE columns their national config already names](#2026-09-22---both-mexican-cities-hardcoded-the-denue-columns-their-national-config-already-names)
 - [Check I caught another session's orphaned row within minutes, which is the first time a check here found a defect it was not written for](#2026-09-22---check-i-caught-another-sessions-orphaned-row-within-minutes-which-is-the-first-time-a-check-here-found-a-defect-it-was-not-written-for)
@@ -196,6 +197,60 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - The unplaceable label was the circular line, and the fix is a second pass rather than more candidates
+
+- **Madrid's unreadable label was `Línea 6`, the circular line, which is why
+  forcing label ends could never fix it.** The previous entry's fix - pushing
+  crowded lines to their opposite tips via `LINE_LABEL_ENDS` - took Madrid from
+  two unplaceable labels to one and stopped there. The reason is structural: a
+  forced end picks `coords[0]` or `coords[-1]`, and on a **closed loop those are
+  the same point**, so there is no other end to send the label to. Línea 6 rings
+  the centre, which is exactly where the other twelve converge, so all nineteen
+  of its candidate positions sat in one jam. `LINE_LABEL_ENDS` is empty again in
+  `pipeline/madrid/step3_map.py`; Madrid needs no per-city override at all.
+
+- **A label may now stand further off its own line when every nearer position is
+  taken** - `_LABEL_CLEARANCES = (22.0, 44.0)` in `pipeline/map_common.py`,
+  tried only after every position at the normal 6 px gap has failed. The
+  clearance is in **pixels, not ground metres**, so the label holds that
+  distance at every zoom; an offset in metres would read as attached zoomed out
+  and adrift zoomed in. Rejected alternatives, both measured rather than
+  argued: extending the along-the-line walk past halfway (`_ALONG_FRACTIONS`
+  reaches only 0.48, so **only half a closed loop is ever searched**) fixed
+  Línea 2 but never Línea 6, because the whole ring is crowded, not half of it;
+  and an explicit `CENTER`/`ZOOM` for Madrid, which the raise message names
+  first, cannot help either, since zooming in to spread the lines apart pushes
+  stations off the map and zooming out shrinks the geography while the labels
+  stay the same size.
+
+- **The first implementation changed San Francisco, and `drift_check.py` caught
+  it.** Appending the clearance candidates to the existing list looked provably
+  inert - `_layout_labels` takes the first clean candidate, so a later candidate
+  cannot displace an earlier one - and that reasoning holds **within** a view
+  and fails **across** views: `_choose_view` stops at the first view that places
+  everything, so a new candidate that rescues an **earlier** view changes which
+  view a city gets. San Francisco, already placing all six labels cleanly,
+  moved its map centre about a kilometre west (−122.4358 → −122.4481) and sent
+  one label off its line. The view search therefore runs **twice**: once with
+  exactly the old candidate set, and only then, if a label would be drawn
+  unreadable, again with clearance allowed. San Francisco came back
+  byte-identical. The full sweep afterwards: **seventeen cities identical,
+  Madrid the only change**, which is the intended one.
+
+- **The raise now names the labels it could not place.** `_layout_labels`
+  carries the unplaced keys out instead of only counting them, so the message
+  reads `'Línea 6' (line key '6')` rather than `1 transit-line label(s)`.
+  Finding out it was the circular line is what identified the real fix; the
+  solver knew that all along and was throwing it away, the same mistake in
+  miniature as discarding the cost.
+
+- **Madrid verified by measurement in a browser, not by eye**: thirteen visible
+  label elements, **zero overlapping pairs** (there were three, one of them
+  Línea 2 drawn invisible underneath the Ramal), and every label's anchor
+  **0.0 px from its own line** - queried through Leaflet's own geometry after a
+  first attempt that scraped SVG paths reported five labels as detached and was
+  discarded as a broken measurement rather than believed.
 
 ### 2026-09-22 - Mexico City's fetching moved out of its steps, as the worked pattern for the other two
 
