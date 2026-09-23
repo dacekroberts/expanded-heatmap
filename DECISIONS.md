@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**157 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**158 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Both Mexican cities hardcoded the DENUE columns their national config already names](#2026-09-22---both-mexican-cities-hardcoded-the-denue-columns-their-national-config-already-names)
 - [Check I caught another session's orphaned row within minutes, which is the first time a check here found a defect it was not written for](#2026-09-22---check-i-caught-another-sessions-orphaned-row-within-minutes-which-is-the-first-time-a-check-here-found-a-defect-it-was-not-written-for)
 - [Toronto's collapse check guarded the wrong number, and re-running it showed a baseline can miss a content change](#2026-09-22---torontos-collapse-check-guarded-the-wrong-number-and-re-running-it-showed-a-baseline-can-miss-a-content-change)
 - [Surveyed CLAUDE.md's invariants for which ones nothing verifies, and nearly shipped a check that examined nothing](#2026-09-22---surveyed-claudemds-invariants-for-which-ones-nothing-verifies-and-nearly-shipped-a-check-that-examined-nothing)
@@ -193,6 +194,36 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Both Mexican cities hardcoded the DENUE columns their national config already names
+
+- **The PLAN item understated it: it was both cities, not one.** Guadalajara
+  and Mexico City each re-export four DENUE column names from
+  `pipeline/countries/mexico.py` and then wrote `"cve_ent"` and `"municipio"`
+  as literals anyway - in `usecols`, in the state sanity check and in the
+  municipio scope filter. A DENUE column rename would have been fixed once in
+  the national file and missed in **two** step files, which is exactly what
+  profiling a country once is meant to prevent.
+
+- **Both configs now re-export `DENUE_STATE_COLUMN` and
+  `DENUE_MUNICIPIO_COLUMN`, and both step 2 files import them.** Verified by
+  running: `drift_check` reports **zero drift** for both cities, so the
+  substitution is genuinely name-for-value.
+
+- **Two literals were deliberately LEFT, and that distinction is the
+  interesting part.** `cols = [..., "scian", "bucket", "municipio"]` is this
+  project's OUTPUT schema for `businesses_clean.csv`, sitting beside
+  `business_name` and `bucket` - names this project chose. It coincides with
+  DENUE's input column only because the column passes through unrenamed.
+  Binding the output contract to the input spelling would mean a DENUE rename
+  silently renaming a column downstream code reads. Both sites now carry a
+  comment saying so, because the next sweep will see a bare literal and want to
+  "fix" it.
+
+- **The general shape: a string appearing twice is not automatically a
+  duplication.** Ask which of the two is the authority. For the DENUE input
+  columns it is the national config, so the literals were wrong; for the output
+  schema it is this project, so the literals are right.
 
 ### 2026-09-22 - Check I caught another session's orphaned row within minutes, which is the first time a check here found a defect it was not written for
 

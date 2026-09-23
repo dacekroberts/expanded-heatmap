@@ -42,8 +42,10 @@ from pipeline.mexico_city.config import (
     DENUE_ACTIVITY_COLUMN,
     DENUE_CODE_COLUMN,
     DENUE_MEMBER,
+    DENUE_MUNICIPIO_COLUMN,
     DENUE_NAME_COLUMN,
     DENUE_STATE_CODE,
+    DENUE_STATE_COLUMN,
     DENUE_URL,
     DENUE_ZIP,
     FORBIDDEN_COLUMNS,
@@ -64,8 +66,8 @@ USECOLS = (
     DENUE_CODE_COLUMN,
     DENUE_ACTIVITY_COLUMN,
     PREMISES_TYPE_COLUMN,
-    "cve_ent",
-    "municipio",
+    DENUE_STATE_COLUMN,
+    DENUE_MUNICIPIO_COLUMN,
     # MEASURED AND PRINTED, NEVER WRITTEN OUT. `numero_int` is DENUE's
     # structured interior/unit number - better evidence of a dwelling than a
     # regex over free text, which is what the multi-source-city skill asks for.
@@ -131,7 +133,7 @@ def main():
         assert c not in df.columns, f"{c} reached the DataFrame"
 
     # --- state sanity: the file should be one state ------------------------
-    ents = df["cve_ent"].value_counts()
+    ents = df[DENUE_STATE_COLUMN].value_counts()
     if len(ents) != 1 or ents.index[0] != DENUE_STATE_CODE:
         raise SystemExit(f"expected only cve_ent={DENUE_STATE_CODE}, got {dict(ents)}")
     print(f"  all rows cve_ent={DENUE_STATE_CODE}; "
@@ -197,6 +199,11 @@ def main():
         print(f"Dropped {before - len(df):,} duplicate ids")
 
     BUSINESSES_CLEAN_CSV.parent.mkdir(parents=True, exist_ok=True)
+    # `"municipio"` here is THIS PROJECT'S OUTPUT column, beside business_name
+    # and bucket - not DENUE's input column, which is DENUE_MUNICIPIO_COLUMN
+    # above. They are the same string only because the column passes through
+    # unrenamed. Left as a literal deliberately: if DENUE renamed its column,
+    # this output contract should not move with it.
     cols = ["business_name", "latitude", "longitude", tax.VALUE_COLUMN,
             "scian", "bucket", "municipio"]
     df[cols].to_csv(BUSINESSES_CLEAN_CSV, index=False, encoding="utf-8")

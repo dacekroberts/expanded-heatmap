@@ -367,10 +367,11 @@ Desktop is unaffected — the label is fully visible there.
   name, an in-city check was added after the boundary filter, and the docstring
   no longer claims `excluded_stations.csv` is empty (it has two rows). Verified
   by running step 1: 234 -> 110 -> 108, two excluded, zero NOTEs.
-- [ ] **Have Guadalajara's step 2 import `DENUE_STATE_COLUMN` and
-  `DENUE_MUNICIPIO_COLUMN`** from `pipeline/countries/mexico.py` instead of
-  writing `"cve_ent"` and `"municipio"` as literals, so a DENUE column rename
-  is a one-file change as the country-config pattern intends.
+- [x] ~~Have Guadalajara's step 2 import `DENUE_STATE_COLUMN` and
+  `DENUE_MUNICIPIO_COLUMN`~~ - **done 2026-09-22, and it was BOTH Mexican
+  cities.** Zero drift on both after the substitution. The `municipio` in each
+  city's output-column list is left as a literal on purpose: that is this
+  project's output schema, not DENUE's input column, and both sites say so.
 
 - [x] ~~Finish the `check_stale_claims.py` category-B pass~~ - **done
   2026-09-22**, seven passes, **74 flagged counts to 35**, files scanned 39 to
