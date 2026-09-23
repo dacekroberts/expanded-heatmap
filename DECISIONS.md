@@ -993,6 +993,49 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Bucharest's licence is SILENT, and the absence is established rather than
+  assumed.** Read in the browser, which is the only way to reach the host.
+  `bucuresti.dsvsa.ro` has **no terms-of-use page at all** - the entire site
+  offers exactly two policy links, cookies and privacy - and the privacy
+  policy is **8,465 characters about personal data with zero mentions** of
+  reuse, reproduction, distribution, licence, commercial use, copyright or
+  intellectual property. DSVSA data is **not on `data.gov.ro`** (searched the
+  archived 4,693-dataset list for dsvsa, ansvsa, veterinar and
+  sanitar-veterinar: **zero matches**), so there is no national statement to
+  inherit either. The footer reads *"Ⓒ 2017 ANSVSA. Toate drepturile
+  rezervate"* - **all rights reserved** - but that is a **website** footer,
+  which is the New York situation the `read-licence` skill records: a footer
+  governs site content, not the data. **SILENT, with the pages named.**
+
+- **The JS challenge is confirmed to cover the DATA FILES, not just the
+  pages, and the fetch route is browser-assisted by necessity.** Plain curl
+  against the XLSX itself returns **503 with an 8,904-byte HTML body** - the
+  challenge interstitial - so the constraint is not cosmetic. Fetching the
+  same URL **inside the browser that had legitimately passed the challenge**
+  returned **200, 56,009 bytes, magic `PK\x03\x04`**, correct
+  `spreadsheetml.sheet` content type: a real file. **That is the route, and
+  it is the one this project already used for Bucharest** - never replaying a
+  clearance cookie to curl, which would be working around bot detection
+  rather than passing it. Recorded as a **build constraint** on the fetch
+  script rather than as a blocker.
+
+- **Moved Bucharest to Band C and closed Band D.** Its screening is now
+  finished on every axis: **rail counted** (12 subway relations, all named,
+  all coloured, M1-M5, Metrorex), **licence read** (SILENT), **Romania's
+  national catalogue enumerated** (4,693 datasets from the Archive, no second
+  bucket - the only commercial register is ONRC's company register).
+  Band D existed to hold a city whose business leg was unfinished; that
+  stopped being true of its only member, so the band closed rather than being
+  re-captioned around the occupant - the same reasoning that closed B and the
+  original D. Counts: **A4 B0 C10 D0 E12 F2 G2 = 30**, verified.
+
+- **One genuinely useful find for the geocoding leg:** Romania publishes a
+  **complete national street nomenclature** as open data - one dataset per
+  county plus `nomenclator-stradal-municipiul-bucuresti` and a Sector 2
+  file. That is the address reference a Romanian geocoding join needs, and it
+  was invisible until the national catalogue was enumerated from the Archive.
+
+
 - **Recorded Hong Kong's indemnity as a THIRD class of obligation that is not
   a notice, and gave the three a section of their own.** Barcelona introduced
   the first - an affirmative act owed to the publisher - and WMATA the second,

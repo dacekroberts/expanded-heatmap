@@ -75,8 +75,8 @@ waiting on a licence read, which conflated *we have not looked yet* with
 |---|---|---|
 | 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates present, rail answered | **4** |
 | 🔵 ~~**B**~~ | ~~Awaiting permission~~ — ✗ **CLOSED 2026-09-22.** Its one city was discarded: the data was excellent, the terms forbade it, and the letter was judged not worth writing | **0** |
-| 🟡 **C** | **Business leg done; coordinates are the only work**, and the route is known and cheap | **9** |
-| 🟤 **D** | **Coordinates *and* unfinished screening** — more than one thing still open | **1** |
+| 🟡 **C** | **Business leg done; coordinates are the only work** | **10** |
+| 🟤 ~~**D**~~ | ~~Coordinates *and* unfinished screening~~ — ✗ **CLOSED 2026-09-22.** Bucharest's screening finished: rail counted, licence read, national catalogue enumerated | **0** |
 | 🟠 **E** | **Geocoding at national scale.** The address work is a project, justified only by reuse across many cities | **12** |
 | 🟣 **F** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **2** |
 | 🔴 **G** | **Access blocked.** The register exists and is queryable; we cannot reach it in bulk | **2** |
@@ -88,10 +88,12 @@ shared property was "needs coordinates" — while the **cost** of that step
 ranges from Prague's RÚIAN lookup to Japan's chōme/ban/gō. That is the
 largest single ranking fact in this list, and one band was hiding it.
 
-**Bucharest has a band of its own** rather than a warning inside C, because
-C's caption promises the business leg is finished and Bucharest's is not.
-A row that names a blocker its band does not is the defect this list was
-audited for earlier the same day.
+**Band D held Bucharest alone** while its business leg was unfinished. On
+2026-09-22 it finished — **rail counted (12 relations, M1–M5), licence read
+(SILENT), Romania's catalogue enumerated (4,693 datasets, no second
+bucket)** — so the city moved to C and the band closed. **A band whose
+condition stops being true of its last member should close, not be
+re-captioned around the occupant.**
 
 **A caption names a blocker, never a date or a status.** `D-a` was briefly
 captioned *"all four PROBED 2026-09-22"*, which reads as progress and is
@@ -160,7 +162,7 @@ So the next *unstarted* city is the question.
 and only owner decisions left. After that the screen has no city whose
 "what remains" column is empty.
 
-## 🟡 Band C — the business leg is done; coordinates are the only work, and the route is known (9 cities)
+## 🟡 Band C — the business leg is done; coordinates are the only work (10 cities)
 
 **Nothing here needs screening.** Every register is measured, licensed and
 current. What each still lacks is coordinates, and for all eight the method
@@ -174,39 +176,8 @@ one. Ordered by how little that step costs.
 | **Taipei**, Kaohsiung, Taoyuan, Taichung *(4)* | 🇹🇼 | 商業登記 — premises, active/closed status, per-category assembly | Moderate — **NLSC's geocoder is keyless** |
 | **Oslo** *(1)* | 🇳🇴 | 152,060 sub-units, `beliggenhetsadresse` (physical, not registered), NACE, open API no key | Moderate |
 | **Copenhagen** *(1)* | 🇩🇰 | CVR `productionunits` — P-enheder each with own `address`/`zipcode`/`city`, plus `industrycode` | Moderate — **plus a free account** (`distribution.virk.dk` 401) |
+| **Bucharest** ▲▲ *(1)* | 🇷🇴 | **31,299 premises** across 14 of 34 DSVSA categories — 13,279 catering, 10,488 food shops, 709 hyper/supermarkets, refreshed **25/08/2026**. Published as **XLSX per category**. Licence **SILENT** — established, not assumed: the site has **no terms of use at all**, its privacy policy is 8,465 characters about personal data with **zero** mentions of reuse, and it is **not on `data.gov.ro`**, so there is nothing to inherit. The footer's *toate drepturile rezervate* is a **website** footer — the New York shape | **Geocoding, unmeasured** — Romanian addresses, no coordinates. 🎁 **`nomenclator-stradal-municipiul-bucuresti`** is published nationally (one per county, plus Bucharest), which is the address reference the join needs. ⚠️ **The fetch step must be browser-assisted**: plain curl gets **503 even on the XLSX itself**, and the file only comes back inside a browser that has legitimately passed the challenge — **never by replaying a clearance cookie** |
 | **Singapore** ▲▲ *(1)* | 🇸🇬 | **≈41,600 premises across two buckets, assembled from four registers** — `NEA Licensed Eating Establishments` **36,687** (`premises_address`, hygiene `grade`), `Licensed Tobacco Retailers` **4,235**, `Supermarket Licences` **478** (block/level/unit/street/postcode), `Licensed Pharmacies` **243**. **A `multi-source-city`, the New York shape** | **Full geocoding leg — no coordinates in any of the four.** Addresses are highly structured and **OneMap's geocoder is free**. ⚠️ Retail is **narrow by construction**: only licensed trades appear, so general retail — clothing, electronics — has no register, the same gap most US cities have |
-
-## 🟤 Band D — coordinates AND unfinished screening (1 city)
-
-**Bucharest is alone here** because Band C's caption promises the business
-leg is finished and Bucharest's is not. **Two of its four open items closed
-on 2026-09-22**, and what remains is still more than coordinates.
-
-✅ **RAIL SOLVED.** `overpass.private.coffee` (the other two mirrors were
-returning *"the server is probably too busy"*): **12 subway relations, all 12
-named, all 12 coloured, refs M1–M5, operator Metrorex** — the complete
-Bucharest metro, cleanly tagged.
-
-✅ **ROMANIA ENUMERATED, and there is no second bucket.** `data.gov.ro`
-resolves (85.120.75.35) and stays unroutable for us, so it was read **from
-the Internet Archive** — `api/3/action/package_list` is captured and returns
-**4,693 datasets**, 4,482 with readable slugs. The only commercial register
-in the whole national catalogue is **~40 dated snapshots of
-`firme-inregistrate-la-registrul-comertului`** — the ONRC **company**
-register, which is the registered-office trap. Everything else matching is
-health-unit procurement, construction permits or trade statistics.
-
-🎁 **One useful find:** `nomenclator-stradal-municipiul-bucuresti` — the
-city's **street nomenclature**, which is the address reference its geocoding
-leg needs.
-
-⚠️ **Still open: the licence is unread**, and `ansvsa.ro` and
-`bucuresti.dsvsa.ro` sit behind a **"Verifying your browser" JS challenge**
-the fetch step needs a route through that is not a bot-detection bypass.
-
-| Cities | Country | Business leg | The coordinate step |
-|---|---|---|---|
-| **Bucharest** 🇷🇴 ▲ *(1)* | 🇷🇴 | **DSVSA's registered-premises lists — 31,299 premises across 14 of 34 categories**, name + `Adresa` + `Sector` + `Categorie unitate`, refreshed 25/08/2026. Food bucket, but a WIDE one: 13,279 catering, 10,488 food shops, 709 hyper/supermarkets | **Unmeasured** — no coordinates, Romanian addresses |
 
 ## 🟠 Band E — geocoding at national scale (12 cities)
 
