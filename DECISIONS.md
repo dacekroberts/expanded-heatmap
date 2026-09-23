@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**219 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**220 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Copenhagen's brief: 14,887 rows, 100% named, four files](#2026-09-23---copenhagens-brief-14887-rows-100-named-four-files)
 - [Paris's disproven figures swept out of staging's documents](#2026-09-23---pariss-disproven-figures-swept-out-of-stagings-documents)
 - [Singapore is a TWO-bucket city, and the zero is controlled](#2026-09-23---singapore-is-a-two-bucket-city-and-the-zero-is-controlled)
 - [Bucharest moves B to D: the band was measuring the wrong thing](#2026-09-23---bucharest-moves-b-to-d-the-band-was-measuring-the-wrong-thing)
@@ -258,6 +259,79 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Copenhagen's brief: 14,887 rows, 100% named, four files
+
+- **Copenhagen is measured from the real files rather than from metadata, and
+  it is the best-named register in this project: 14,887 storefront rows at
+  100.0% named.** Retail 6,689, food service 5,163, personal services 3,035 -
+  three real buckets, between Toulouse (12,853) and Marseille (25,430) in
+  size, and **46 points ahead of every French city on naming**. Brief written
+  at `docs/build_briefs/copenhagen.md`, **4/4**.
+
+- **`Produktionsenhed` on its own is almost empty, and one line of small print
+  is the whole reason the city works.** Its object-type page lists two
+  attributes, `pnummer` and `beskaeftigelse` - **no address, no activity, no
+  name**. A reader stopping there would record Copenhagen as having no usable
+  premises data, which is the Colombia-RUES verdict. The line that matters is
+  *"Subtype af CVREnhedMedStamdata"*, whose `cvrAdresse`, `branche` and `navn`
+  live in **three separate national files**. **The build is a JOIN across four
+  files, and that was invisible until the schema was read.**
+
+- **The join key is `CVREnhedsId`, and it was VERIFIED rather than assumed.**
+  `Produktionsenhed` calls it `id`; `pNummer` is its own business key and
+  appears in no other file. Of Copenhagen's 330,246 current
+  `beliggenhedsadresse` rows, **133,530 (40.4%) appear as a
+  `Produktionsenhed.id`** - a real overlap. **Joining on `pNummer` would have
+  failed partially and silently**, which is the Oslo `kommunenummer` trap's
+  exact shape.
+
+- **`beliggenhedsadresse` is a first-class value: 2,800,921 rows against 928
+  `postadresse`.** **The same location-vs-registered-office distinction that
+  made Norway pass**, made explicitly by Denmark. Filtering on it is not a
+  refinement, it is the difference between premises and mailboxes.
+
+- **THE TAXONOMY LEVEL MEASUREMENT WAS ATTEMPTED AND IS NOT VALID, and that is
+  recorded rather than quietly reported.** A first pass gave division 20.4% /
+  gruppe 19.6% / klasse 18.3% / full 23.4%. **The three shallower figures are
+  artefacts**: the only labels in the file are the 6-digit ones, so truncating
+  a code and judging it by a sibling's label is **order-dependent** - whichever
+  row was seen first decides whether the whole truncated group counts as a
+  catch-all. **That is a statement about row order, not about the scheme.**
+  Only **23.4% at full depth** is defensible, and keying there is the safe
+  default because it is the only level whose labels are in hand. Proper level
+  figures need Danmarks Statistik's own DB07 hierarchy labels.
+
+- **The sole-trader marker is `v/` - *ved*, "by" - at 7.2%, and that is a
+  FLOOR.** `FISKEFORRETNINGEN V/LARS JOOST OLSEN`,
+  `Restaurant Fridas v/Lene Palmberg`. A sole trader may register under a bare
+  personal name with no marker, and the `Navn` file's own sample contains one,
+  so the real share is higher and unmeasured. France is 8.7%, Oslo 28.6%.
+  🚨 **`coNavn` is a SECOND exposure at 26.0%**, in a different column
+  entirely, and **no existing check would notice it because no other city has
+  that column.**
+
+- **Rail: M1-M4 only, and the master list's inherited figure was wrong.** OSM
+  gives **8 metro relations, refs M1-M4, all named and ALL COLOURED** - so the
+  legend is satisfiable from OSM alone, unlike Oslo where every metro line
+  shares one colour. **`city_master_list.md` carried "subway 4, tram 4". There
+  is no tram** - the system closed in 1972 and the Letbane is not open. **An
+  inherited, unverified count**, the class of error that gave Dublin four wrong
+  claims in one row.
+
+- **Excluding S-tog is the standing rule and has a larger consequence here
+  than anywhere it has been applied**, so it is recorded as an owner call. It
+  is 16 relations across 7 refs, all named and coloured, and `add-country`
+  names the S-Bahn family explicitly - but Copenhagen's actual backbone is the
+  S-tog, and applying the rule leaves four metro lines. In Boston, Chicago and
+  Madrid the metro was already dominant; here it is not.
+
+- **A `brief_check` kind was invented for the second time in one day and
+  failed the same way.** `http_status_expected` joined `http_status_in` as a
+  name outside the registered set. **The kinds are a fixed list; a brief that
+  names one outside it simply fails.** The 401-versus-404 diagnostic it was
+  meant to hold is now prose in the brief, with the reason it cannot be a
+  check stated beside it.
 
 ### 2026-09-23 - Paris's disproven figures swept out of staging's documents
 
