@@ -16,11 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**246 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**247 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
 - [Universal claims get a report category, and its first run found five more false](#2026-09-23---universal-claims-get-a-report-category-and-its-first-run-found-five-more-false)
+- [Sao Paulo's rail is drawn from OSM with GeoSampa as the status reference; Rio's SIURB clause accepted](#2026-09-23---sao-paulos-rail-is-drawn-from-osm-with-geosampa-as-the-status-reference-rios-siurb-clause-accepted)
 - [The scaffold names a city's page from its slug, not its display name](#2026-09-23---the-scaffold-names-a-citys-page-from-its-slug-not-its-display-name)
 - [Lille made "three regional maps" four within the hour](#2026-09-23---lille-made-three-regional-maps-four-within-the-hour)
 - [Taiwan is a door-plate JOIN at 92.5%, not a geocoding project; Rio's rail licence permits, Sao Paulo's is ambiguous](#2026-09-23---taiwan-is-a-door-plate-join-at-925-not-a-geocoding-project-rios-rail-licence-permits-sao-paulos-is-ambiguous)
@@ -334,6 +335,37 @@ onwards; the early ones are split by phase rather than by hour.
   hand-kept count, in the checker for hand-kept counts. Now five, and the
   heading no longer counts them.
 
+### 2026-09-23 - Sao Paulo's rail is drawn from OSM with GeoSampa as the status reference; Rio's SIURB clause accepted
+
+- **Owner's decision: Sao Paulo's line and station geometry comes from
+  OpenStreetMap, and GeoSampa is read only to decide WHICH lines operate.**
+  GeoSampa's CC BY-SA 4.0 may not reach layers the State's Metro authored,
+  and if it does, share-alike reaches the derived geometry. **The question is
+  avoided rather than answered**, which is why it stays recorded as open in
+  `docs/data_sources.md` for any future build that wants GeoSampa's geometry.
+  OSM's side is a settled precedent - the Toulouse/Rennes ODbL read: the
+  rendered map is a Produced Work (ODbL 4.5(b)), the committed station file
+  carries an ODbL notice, and the linked repository offers the method (4.6).
+  **That precedent does NOT transfer to GeoSampa**, because CC BY-SA 4.0 has no
+  Produced Work carve-out; that asymmetry is what made OSM the cheaper side.
+  Rejected: taking CC BY-SA as applying (resolves an ambiguity in the
+  project's favour, which `read-licence` forbids), and writing to the city
+  first (a wait for a question the OSM route does not need answered).
+
+- **Draw refs 1-5 and monorail 15; refs 6 and 17 only if GeoSampa lists them
+  as operating.** OSM carries subway refs 1-6 and monorail 15 and 17, all
+  coloured; GeoSampa has Lines 6 and 17 only in its planned layer. Sao Paulo's
+  brief gained an `osm_route_refs` check (7/7) beside the one that fails the
+  day either line appears in GeoSampa's operating layer - the pair is the
+  rule. Derived station counts are cross-checked against GeoSampa's 85.
+
+- **Owner's decision: Rio's SIURB Termo de Uso clause is ACCEPTED**, and
+  Rio's rail comes from the city's CC BY 4.0 layers with OSM as the colour
+  source. The clause is fault-based liability for damage a user causes, may
+  bind only logged-in users, and prohibits nothing the build does - closer to
+  IBGE's portal clause than to Hong Kong's open-ended indemnity. Rejected:
+  drawing Rio from OSM too, which would have discarded a better-maintained
+  agency source to avoid a clause that asks for nothing.
 ### 2026-09-23 - The scaffold names a city's page from its slug, not its display name
 
 - **`scripts/scaffold_city.py` now builds the page filename from `--slug`**,

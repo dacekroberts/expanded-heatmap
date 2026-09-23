@@ -1020,7 +1020,8 @@ server is using the System. **Reading that does not:** the Termo defines users
 as *"pessoas naturais que utilizarem o Sistema por meio de login de acesso"*.
 Even if it binds, it prohibits nothing the build does — it is **fault-based
 liability for damage caused**, narrower than Hong Kong's indemnity, closer to
-IBGE's portal clause. **Owner call.**
+IBGE's portal clause. **Owner call — ✅ ACCEPTED 2026-09-23**: Rio's rail
+comes from these layers, with OSM as the colour source and cross-check.
 
 **São Paulo: the licence may not reach the layers.** GeoSampa declares
 **CC BY-SA 4.0** on these layers, but its own *Créditos › Licença dos dados*
@@ -1045,11 +1046,21 @@ Paulo."*
   map is Adapted Material.
 
 **Not resolved in this project's favour.** The one party who can settle A
-against B is `geosampa@prefeitura.sp.gov.br`. **An alternative that avoids the
-question:** draw São Paulo's lines from OpenStreetMap, as Mexico City and
-Barcelona do, and use GeoSampa only to decide WHICH lines operate — a fact,
-not a reproduction of its geometry — which is also what keeps OSM's unbuilt
-Lines 6 and 17 off the map.
+against B is `geosampa@prefeitura.sp.gov.br`.
+
+✅ **DECIDED 2026-09-23 by the owner — the question is AVOIDED, not answered:
+São Paulo's line and station geometry comes from OpenStreetMap**, as Mexico
+City's and Barcelona's do, and **GeoSampa is used only to decide WHICH lines
+operate** — a fact read from it, not a reproduction of its geometry. That also
+keeps OSM's unbuilt Lines 6 and 17 off the map. OSM's terms are already
+settled by precedent: under ODbL §4.5(b) the rendered map is a Produced Work,
+so share-alike does not reach it; the committed station file carries an ODbL
+notice and the linked public repository offers the method (§4.6) — the
+Toulouse/Rennes discharge, `docs/licenses/odbl-toulouse-rennes.md`. **Why the
+precedent does not simply carry over to GeoSampa:** CC BY-SA 4.0 has no
+Produced Work carve-out, so its share-alike question stays open and is now
+not this project's to answer. If São Paulo's build ever wants GeoSampa's
+geometry, the email above comes first.
 
 **Not a source here: CNPJ.** Receita Federal's CNPJ open data moved in early
 2026 to a Nextcloud share (`arquivos.receitafederal.gov.br/index.php/s/YggdBLfdninEJX9`;
