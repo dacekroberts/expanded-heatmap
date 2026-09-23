@@ -82,7 +82,11 @@ verdict.
 5. **Check the live app, not only the local file.** The race lives in the
    embed; every incident above was seen on the deployed site. A hidden browser
    pane (`document.hidden: true`) pauses rendering and may not exercise the
-   same timing - note it when reporting a clean result.
+   same timing - note it when reporting a clean result. **A collapsed pane is
+   worse: Streamlit's app frame measures 0 px wide** and squeezes the map to
+   16 px, where every zoom "matches" its own meaningless expectation. The
+   check's first live run PASSED exactly that, before it learned to refuse any
+   frame under 280 px as UNMEASURED. Emulate a real viewport size first.
 6. **Measure at the embedded width AND at phone width.** The expected zoom
    differs between them, and only the phone width exercises the bounds fit.
 

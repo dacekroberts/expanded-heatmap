@@ -30,6 +30,11 @@
 //   * An embedded run needs the Streamlit page to have settled (~15 s).
 await new Promise(r => setTimeout(r, 1200));
 
+// Below this the frame is not laid out - see the width test further down.
+// 280 sits under the narrowest real phone column and far above the 0 and 16px
+// readings a collapsed or hidden frame produces.
+const MIN_REAL_WIDTH = 280;
+
 const findMap = () => {
   const here = (w) => {
     try {
@@ -79,7 +84,20 @@ if (!found) {
   out = {width, mapW: v.mapW, zoom, expected, home: v.home && v.home.zoom,
          corrections: v.corrections, touched: v.touched, problems, notes};
 
-  if (v.touched) {
+  if (width < MIN_REAL_WIDTH) {
+    // A FRAME THIS SMALL IS NOT LAID OUT, so there is nothing to compare. Found
+    // 2026-09-23 on the check's first live run: the map reported width 16 at
+    // zoom 19 and the check PASSED it, because the expected zoom was computed
+    // from the same meaningless width. The cause was the harness - the
+    // browser pane was collapsed, Streamlit's app frame measured 0 px wide and
+    // squeezed the map iframe to 16 - but a check that agrees with a bogus
+    // measurement is worse than no check. Same reasoning as apply()'s refusal
+    // of a zero width. No real reader sees a map narrower than a phone.
+    problems.push(`UNMEASURED: the map frame is ${width}px wide, below ` +
+                  `${MIN_REAL_WIDTH}px, so it is not laid out and no expected zoom ` +
+                  `means anything. Is the browser pane collapsed or hidden? Bring ` +
+                  `it forward at a real size, reload, and run again.`);
+  } else if (v.touched) {
     notes.push('UNMEASURED: the map has been touched, so it shows the reader\'s ' +
                'view, not the render\'s. Reload and run again without interacting.');
   } else if (expected === null) {
