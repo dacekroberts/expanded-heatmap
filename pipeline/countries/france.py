@@ -105,11 +105,19 @@ GEO_PRECISION_COLUMN = "distance_precision"
 # Across 20,103 ACTIVE rows in NAF 47/56/96 sampled from four row groups spread
 # through the file:
 #
-#     enseigne1Etablissement             29.1%
-#     enseigne2Etablissement             13.4%
-#     denominationUsuelleEtablissement   34.2%
-#     EITHER an enseigne or a usual name 42.9%
-#     ...of Paris (751xx) rows           38.4%
+#     enseigne1Etablissement             29.1%   <- NATIONAL
+#     enseigne2Etablissement             13.4%   <- NATIONAL
+#     denominationUsuelleEtablissement   34.2%   <- NATIONAL
+#     EITHER an enseigne or a usual name 42.9%   <- NATIONAL, NOT PARIS
+#     ...of Paris (751xx) rows           38.4%   <- Paris, superseded by 39.6%
+#
+# ** READ THE LABELS. 42.9% IS FRANCE, NOT PARIS.** Paris's own brief imported
+# that national figure into a Paris table and captioned it "Paris is the
+# worst-named of the six" - drawing the right conclusion from the wrong number,
+# while the Paris-specific 38.4% sat five lines above it. Corrected 2026-09-23;
+# the 12.6% one-pass scan puts Paris at **39.6%**, which agrees with 38.4% and
+# never agreed with 42.9%. A country profile's national aggregate and a city's
+# own rate are two different numbers, and the city one is in CITY_ESTIMATES.
 #
 # So roughly SIX IN TEN French storefronts publish no name at the premises
 # level. This is Milan's `insegna` trap in another language, and it is recorded
@@ -137,9 +145,9 @@ NATURAL_PERSON_CODE = "1000"          # personne physique - SUPPRESS the name
 LEGAL_NAME_COLUMN = "denominationUniteLegale"
 
 # Both figures are LOWER BOUNDS: the API used exposes `liste_enseignes` and
-# `nom_commercial` but not `denominationUsuelleEtablissement`, which the 42.9%
-# above came from, so rows counted unnamed there are disproportionately
-# companies. Direction is unaffected.
+# `nom_commercial` but not `denominationUsuelleEtablissement`, which the
+# national 42.9% above came from, so rows counted unnamed there are
+# disproportionately companies. Direction is unaffected.
 #
 # TRAP, and it produced a wrong answer before it was caught: that API's
 # `total_results` SATURATES AT 10,000. Every bucket returned exactly 10,000 and
@@ -180,21 +188,38 @@ CITY_COMMUNE_PREFIXES = {
     "rennes": ("35238",),
 }
 
-# Scaled estimates from that same sample, and the per-city naming rate. These
-# are ESTIMATES for ordering, not build numbers - each city's Step 0 measures
-# its own total. The naming column is the one that matters:
+# RE-MEASURED 2026-09-23. All six cities scanned in ONE pass over 12.6% of the
+# file, replacing a 3.9% scan. These are ESTIMATES for ordering, not build
+# numbers - each city's Step 0 measures its own total. The naming column is the
+# one that matters:
 #
-# **PARIS IS THE WORST-NAMED OF THE SIX.** The five follower cities all carry
-# a premises name on 45-54% of rows against Paris's 42.9%, so the cheap cities
-# are also the better data - which inverts the usual assumption that the
-# flagship city is the strongest one.
+# **PARIS IS THE WORST-NAMED OF THE SIX, and the gap WIDENED on re-measurement.**
+# The five follower cities carry a premises name on 43.4-53.5% of rows against
+# Paris's 39.6%, so the cheap cities are also the better data - which inverts
+# the usual assumption that the flagship city is the strongest one.
+#
+# **Every city except Toulouse came in LOWER by 1-3 points**, so the 3.9%
+# figures were uniformly optimistic. The ranking survived unchanged.
+#
+# ONE SAMPLE, DELIBERATELY. A single row of this table may never be refreshed
+# on its own: on 2026-09-23 Lyon's row was updated alone during its discard and
+# left the other five on the old scan, which is the same
+# comparison-across-samples error that produced a false "correction" to
+# Marseille's figure hours earlier. Refresh all six or none.
+#
+# `bucket_rows_est` is SCALED and is a FLOOR - active bucket rows get denser
+# through a file ordered by `siret`, which is seniority. Paris scales to 117,730
+# against an independently measured **148,633**, so scaling understates by ~21%.
+# The scaled value is kept here so the six stay comparable; the measured one is
+# the build number.
+PARIS_BUCKET_ROWS_MEASURED = 148_633   # use THIS for Paris, not the scaled est.
 CITY_ESTIMATES = {
-    "paris":     {"bucket_rows_est": 136_400, "named": 0.429},
-    "marseille": {"bucket_rows_est": 26_940, "named": 0.458},
+    "paris":     {"bucket_rows_est": 117_730, "named": 0.396},
+    "marseille": {"bucket_rows_est": 25_430, "named": 0.434},
     "lyon":      {"bucket_rows_est": 18_082, "named": 0.514},  # DISCARDED
-    "toulouse":  {"bucket_rows_est": 12_873, "named": 0.519},
-    "lille":     {"bucket_rows_est": 10_461, "named": 0.507},
-    "rennes":    {"bucket_rows_est": 5_002, "named": 0.543},
+    "toulouse":  {"bucket_rows_est": 12_853, "named": 0.528},
+    "lille":     {"bucket_rows_est": 8_076, "named": 0.475},
+    "rennes":    {"bucket_rows_est": 4_833, "named": 0.535},
 }
 
 # --- rail ------------------------------------------------------------------

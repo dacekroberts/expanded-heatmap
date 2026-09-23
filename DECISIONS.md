@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**201 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**202 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Paris's naming share was France's number wearing Paris's label](#2026-09-23---pariss-naming-share-was-frances-number-wearing-pariss-label)
 - [Lyon discarded on four blockers, with a reinstatement template kept](#2026-09-23---lyon-discarded-on-four-blockers-with-a-reinstatement-template-kept)
 - [All six French cities are brief-ready](#2026-09-23---all-six-french-cities-are-brief-ready)
 - [Toulouse's and Rennes' CGU are clean, and Lyon stays out](#2026-09-23---toulouses-and-rennes-cgu-are-clean-and-lyon-stays-out)
@@ -240,6 +241,58 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Paris's naming share was France's number wearing Paris's label
+
+- **`docs/build_briefs/paris.md` reported Paris at 42.9% named, and 42.9% was
+  never Paris's figure - it was FRANCE's.** The brief imported the national
+  aggregate out of `pipeline/countries/france.py`, put it in a table headed by
+  Paris's field names, and captioned it *"Paris is the worst-named of France's
+  six cities"*. **The conclusion was right and the number supporting it
+  belonged to a different population.** Caught while the Paris build was
+  running on master against that brief.
+
+- **The tell was sitting five lines above the number that was taken.**
+  france.py's sample block reads `EITHER an enseigne or a usual name 42.9%`
+  and, on the next line, `...of Paris (751xx) rows 38.4%`. The
+  city-specific figure was present, adjacent, and unused. The 12.6% one-pass
+  re-scan puts Paris at **39.6%**, which agrees with 38.4% and never agreed
+  with 42.9% - **so the two Paris measurements always agreed with each other,
+  and only the borrowed one was out.**
+
+- **A country profile's national aggregate and a city's own rate are two
+  different numbers**, and a country profile is exactly the place this
+  confusion is cheap to make, because both live in one file and one is the
+  headline. Labelled the block NATIONAL vs Paris in france.py so the next of
+  the five follower cities cannot repeat it.
+
+- **A second defect, self-inflicted, found in the same pass: `CITY_ESTIMATES`
+  had become MIXED-SAMPLE.** Lyon's row was refreshed alone during its discard
+  hours earlier, leaving the other five on the superseded 3.9% scan - the same
+  comparison-across-samples error that produced a false "correction" to
+  Marseille's figure the same day, committed while writing up that very error.
+  All six rows are now on the 12.6% pass, with a comment saying **refresh all
+  six or none**.
+
+- **Figures changed**, 3.9% scan to 12.6% scan: Paris 136,400/42.9% to
+  117,730/**39.6%**; Marseille 26,940/45.8% to 25,430/**43.4%**; Toulouse
+  12,873/51.9% to 12,853/**52.8%**; Lille 10,461/50.7% to 8,076/**47.5%**;
+  Rennes 5,002/54.3% to 4,833/**53.5%**. Lille moved most, by 2,385 rows and
+  3.2 points. `docs/city_master_list.md`'s follower row carried the old set
+  too and now carries the new one.
+
+- **Added `PARIS_BUCKET_ROWS_MEASURED = 148_633`** beside the scaled estimates
+  rather than substituting it into them. Scaling understates Paris by ~21%
+  because active bucket rows get denser through a file ordered by `siret`,
+  which is seniority - so **the scaled column is kept for comparability and
+  the measured number is the build number**, each labelled. Substituting one
+  city's measured value into a scaled table would have rebuilt the
+  mixed-sample defect in a new place.
+
+- **No build step changes.** Paris's pins are *name where it exists, address
+  otherwise*, so the share gates nothing in the pipeline - it is the figure
+  any prose about Paris must quote, which is why it was worth correcting mid
+  build rather than after it.
 
 ### 2026-09-23 - Lyon discarded on four blockers, with a reinstatement template kept
 
