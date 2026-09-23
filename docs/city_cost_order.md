@@ -76,12 +76,11 @@ city against six — which is the ordering this file exists to make visible.
 |---|---|---|
 | **Stockholm** 🇸🇪 · **Zurich** 🇨🇭 · **Göteborg** 🇸🇪 | 1 each | Three measured, licensed, **food-service-only** cities. Cheap to build; the open question is whether a one-bucket city belongs on the site at all. **That is a scope decision, not a task — and it is now ONE decision covering three cities rather than two.** ⚠️ Göteborg's main register `Livsmedelsverksamheter` has **no measured row count**: its DCAT node exposes no `accessURL`. Until it is taken, Stockholm's measured 8,146 premises is the stronger number |
 
-## Cost band 6 — blocked or keyed (6 cities)
+## Cost band 6 — blocked or keyed (5 cities)
 
 | Cities | Buys | Blocker |
 |---|---|---|
 | **Bucharest** 🇷🇴 ▲▲ | 1 | `data.gov.ro` blackholes on both ports — an **outage, so retry**. OSM fallback measured at 146,116 addressed objects |
-| **Lyon** 🇫🇷 | 1 | ⚠️ **Moved here from Band 2 on 2026-09-22.** Data is fine — 19,449 est. bucket rows, 52.5% named, better than Paris. Blocked by **three** gates: a `data.grandlyon.com` account the owner must create, CGU Art. 6.2's bar on the producers' *signes distinctifs* (collides with naming TCL on the map), and CGU 9.4's open-ended indemnity. Its NAP feed is also **dead since 2022-04-14** |
 | **Taipei · Kaohsiung · Taoyuan · Taichung** 🇹🇼 | **4** | **Needs a `data.gov.tw` API key** — gate item 16. High `Buys`, so this is the best-value item in the blocked tier once the key exists |
 
 ## Cost band 7 — national geocoding is a project, not a step (12 cities)
@@ -102,10 +101,10 @@ city against six — which is the ordering this file exists to make visible.
 | 3 — a join | 2 |
 | 4 — a keyless geocode | 4 |
 | 5 — one bucket, owner call | 3 |
-| 6 — blocked or keyed | 6 |
+| 6 — blocked or keyed | 5 |
 | 7 — national geocoding project | 12 |
-| **Total** | **32** |
+| **Total** | **31** |
 
-Against `city_master_list.md`'s bands: **A 7 + B 6 + C 16 + D 3 = 32.**
+Against `city_master_list.md`'s bands: **A 6 + B 6 + C 16 + D 3 = 31.**
 **The two files must always sum to the same number**, and that is the check to
 run when either is edited.

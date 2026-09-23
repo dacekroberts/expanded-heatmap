@@ -594,6 +594,169 @@ mistakes as confidently as its findings.
   7. Open: whether `navn` is a trade name or a legal name — the question that
      caught Milan and Paris.
 
+- [x] **Lyon** 🇫🇷 — **DISCARDED 2026-09-23.** Four independent
+  blockers, not one: the account this project will not create, CGU **9.4**'s
+  open-ended indemnity, CGU **6.2**'s bar on the producers' *signes
+  distinctifs* (which collides with naming **TCL** on the map), and a National
+  Access Point feed **dead since 2022-04-14**. **Its DATA is fine** — ~18,082
+  bucket rows at **51.4% named**, better than Paris — so this is a discard on
+  **terms and access**, never on data. **Reinstatement template below**, kept
+  because the business leg would not need re-measuring.
+  - **If new evidence suggests viability, these four must ALL clear:**
+    1. An account at `https://data.grandlyon.com/portail/fr/connexion` —
+       **owner action; this project does not create accounts.** CGU 5.5 makes
+       first access rights valid **30 days** before reconfirmation, and
+       Licence Mobilités Art. 4.2 requires **one account per Licensee**.
+    2. **Accept CGU 9.4's indemnity** — owner decision. Precedent exists:
+       Hong Kong's was accepted 2026-09-22 on the reasoning in
+       `docs/data_sources.md`.
+    3. **Settle CGU 6.2** — whether naming **TCL** is barred.
+       `contactopendata@tcl.fr` can grant prior authorisation cheaply.
+    4. **Source the rail from `data.grandlyon.com`, not the NAP** — its NAP
+       copy shows **0% availability, last modified 2022-04-14**, against a
+       source portal current to 2026-09-22. **The stale-mirror trap.**
+  - ⚠️ **Do not generalise Lyon's clauses to France.** Toulouse's and Rennes'
+    CGU were read 2026-09-23 and are **clean** — Opendatasoft template, no
+    indemnity, marks clause expressly excluding the published data. **Lyon's
+    are Grand Lyon's own.**
+
+- [ ] **Marseille · Toulouse · Lille · Rennes** 🇫🇷 — **NOT
+  brief-ready; country-ready.** No brief file exists for any of them. They
+  inherit France's register, join and privacy handling, but **three things do
+  NOT transfer from Paris.**
+  1. **Their GTFS licences differ from Paris's and from each other.**
+     ✅ **ODbL READ 2026-09-23** for Toulouse and Rennes — **PERMITTED WITH
+     CONDITIONS**, written up at `docs/licenses/odbl-toulouse-rennes.md`.
+     §4.5(b) settles the map: making a Produced Work **does not create a
+     Derivative Database**. But **§4.6 fires on a Produced Work *from* a
+     Derivative Database**, and the map is produced from the committed station
+     CSV — **already satisfied by the public repo**, which is literally *"the
+     method of making the alterations"*, **provided it is LINKED from the
+     site**. §4.3 prescribes a safe-harbour notice per database.
+     ✅ **Both publishers' CGU READ 2026-09-23 and BOTH ARE CLEAN** — no
+     indemnity, and the marks clause is **Opendatasoft's own with the data
+     expressly excluded**, so **naming Tisséo and STAR is not barred**. The
+     express extraction bar is conditional on acting *outside* a licence, and
+     this project is inside one. ⚠️ They answered plain curl — **the earlier
+     Cloudflare challenge was path-specific, not a wall.**
+     ⚠️ **Still open**: whether the station CSV is itself a Derivative
+     Database under §4.4. **Unlike Paris there is NO publisher gloss** —
+     Licence Mobilités had the NAP's published interpretation; ODbL has none.
+     **Cheap discharge: put an ODbL notice on the station CSV.**
+     ✅ **Marseille and Lille are `lov2` — Licence Ouverte 2.0 READ 2026-09-23**,
+     **PERMITTED WITH CONDITIONS**, write-up at `docs/licenses/france-licence-ouverte-2.0.md`.
+     **No share-alike, no revocation, no indemnity.** Attribution is **name +
+     date of last update, PER SOURCE** — and the date-of-last-update duty is
+     **LO 2.0's own**, so the three sightings (Licence Mobilités 5.7, Grand Lyon
+     6.1, MEL) are ONE duty restated, not three inventions.
+     ⚠️ **`Source : Insee` is prescribed VERBATIM** — the only fixed string
+     in the five. ⚠️ **Render no publisher's logo.**
+     ⚠️ **A STANDING refresh duty**: `statutDiffusion` changes as people
+     exercise opposition, so a committed `outputs/` snapshot can contain
+     someone who has since opted out. **Needs a stated refresh cadence.**
+     ⚠️ **ODC-BY is named compatible; ODbL is NOT.** Do not read it as
+     covering Toulouse or Rennes.
+  2. ⚠️ **Scope does not transfer.** Paris went commune-only on a
+     *measurement* — all 16 métro lines survived the boundary. Nothing
+     guarantees that repeats: **Lille's commune is small against MEL**, whose
+     métro serves Villeneuve-d'Ascq, Roubaix and Tourcoing. One
+     boundary-vs-network measurement each.
+  3. **The NAF catch-all (19.3%) and the 15.5% distance-selling exclusion were
+     measured on PARIS rows only**, and per-city row counts are scaled
+     estimates from a 3.9% sample, not build numbers.
+
+  **Feeds VERIFIED 2026-09-23** — they had been identified, never downloaded:
+
+  | City | Size | `shapes.txt` | `feed_info.txt` | Rail |
+  |---|---|---|---|---|
+  | Marseille | 34.0 MB | ✅ | ✅ end **2026-12-31** | 2 subway, 4 tram, 6 ferry |
+  | Toulouse | 12.0 MB | ✅ | ❌ | 2 subway, 1 tram, **1 gondola** |
+  | **Lille** | 9.2 MB | ❌ **MISSING** | ❌ | 2 subway, 1 tram |
+  | Rennes | 13.4 MB | ✅ | ✅ end **2026-10-18** | 2 subway |
+
+  4a. **Lille geometry — PROBED 2026-09-23. Tram is first-party; métro is
+     NOT, and must come from OSM.**
+     The portal is **geOrchestra, not Opendatasoft** —
+     `opendata.lillemetropole.fr` serves an HTML app and
+     `data.lillemetropole.fr` returns **404 JSON whose body names its own
+     platform** (`georchestraStylesheet`, `logoUrl: /public/logo-mel.jpg`).
+     So `/api/datasets/1.0/search` and `/api/explore/v2.1` are the wrong shape
+     entirely. **Read the error body before guessing another path.**
+     The working surface is **WFS**:
+     `data.lillemetropole.fr/geoserver/wfs?service=WFS&request=GetCapabilities&version=2.0.0`
+
+     | Mode | Layer | Verdict |
+     |---|---|---|
+     | **Tram** | `mel_mobilite_et_transport:tramway_lignes` — *"Tracés des lignes de tramway du réseau Ilévia"* | ✅ **4 LineString features**, lines **R** (Lille↔Roubaix) and **T** (Lille↔Tourcoing), with `nom`, `ligne`, `exploitant` |
+     | **Métro** | — | ❌ **NO LINE GEOMETRY ANYWHERE ON THE PORTAL.** Only `stations_metro` and `dsp_ilevia:entree_sortie_metro`, both **points** |
+     | Bus | `dsp_ilevia:ilevia_traceslignes` | 424 LineStrings — not needed |
+
+     ⚠️ **A near-miss worth keeping.** `ilevia_traceslignes` is titled
+     *"Tracés des lignes de **bus**"* and its `ligne` values include **`L1`**,
+     which reads exactly like Métro Ligne 1. **It is not.** Its `type_ligne`
+     values are `Urbaine`, `Suburbaine`, `Scolaire` and `Ligne de nuit` — all
+     bus categories — and **`L1` is *Liane 1*, ilévia's high-frequency BUS
+     brand.** The title was honest; the line code was the trap. **One field
+     check disproved it.**
+
+     🎁 **Bonus, and it solves a separate problem**: `dsp_ilevia:couleurs_lignes`
+     exists, and `ilevia_traceslignes` carries `rgbhex_fond`, `rgbhex_texte`
+     and `color`. Lille's GTFS `routes.txt` may not carry colours; **this is a
+     first-party source for them**, and every drawn line needs a legend entry.
+
+     **So Lille's rail geometry is a HYBRID or an OSM job** — an owner call:
+     tram from MEL's WFS (first-party, named, with `exploitant`) and métro from
+     **OSM** via `osm-rail`; or both from OSM for consistency. ✅ **MEL's WFS licence READ 2026-09-23: `Licence Ouverte v2.0 (Etalab)`**,
+     from the ISO19139 `gmd:otherConstraints`. **PERMITTED WITH CONDITIONS** —
+     its `gmd:useLimitation` requires *"mentionner la source (a minima le nom
+     du producteur) **et la date de sa dernière mise à jour**"*. ⚠️ The WFS
+     service-level `AccessConstraints: NONE` is **OGC boilerplate and was NOT
+     taken** — the dataset records say `otherRestrictions`, which is INSPIRE's
+     code for *see otherConstraints*, not for *no restrictions*. **Third time a
+     date-of-last-update duty has appeared in France**, after Licence
+     Mobilités Art. 5.7 and Grand Lyon CGU 6.1.
+
+  3b. ⚠️ **OWNER DECISION — Lille's GTFS is served from
+     `media.ilevia.fr`, and ilévia's Mentions légales §5 bars "pas de
+     modification ni altération d'aucune sorte" and commercial use of "les
+     contenus des Services en ligne".** *Services en ligne* is a **defined
+     term** — ilévia's websites and apps — and the GTFS is **MEL's `lov2`
+     publication**, so this is likely the **SEPTA pattern**: a web-contents
+     notice mistaken for a data licence. But the host is ilévia's.
+     ⚠️ **The obvious mitigation FAILS**: the PAN's stable
+     `data.gouv.fr/api/1/datasets/r/c9e5dd3f-…` URL **302s to
+     `media.ilevia.fr`** — a redirect, not a mirror. **Third "no modification"
+     bar this project has met**, after LA Metro and Philadelphia.
+     **Cheap close: email `opendata@lillemetropole.fr`.**
+  4. ⚠️ **LILLE HAS NO `shapes.txt`.** Line geometry **cannot be drawn from
+     its feed**, and this project's invariant requires every drawn line to
+     carry real geometry plus a label plus a legend entry. Either reconstruct
+     polylines from stop sequences or take Lille's geometry from **OSM**
+     (`osm-rail`). **Decide before starting Lille** — it is the one follower
+     with a structural rail problem.
+  5. **Marseille and Rennes SELF-ATTEST** (`feed_end_date` 2026-12-31 and
+     2026-10-18). **Toulouse and Lille do not** — same as Paris, so
+     `fetch_sources.py` must record the download date for those two.
+  6. **Toulouse carries `route_type 6`** — an aerial lift, the Téléo cable
+     car. Paris draws a funicular, so a gondola is a **judgment call**, not an
+     automatic include. Marseille's **17 `route_type 2`** are TER regional
+     rail and are excluded by the standing commuter-rail rule.
+  7. ✅ **OSM composition validation RUN 2026-09-23 on Marseille, and the
+     filter HOLDS.** First the employee rule had to be **recovered**, because
+     it was never written down: the `trancheEffectifsEtablissement`
+     distribution shows **dropping `NN` (not reported) leaves 31.8% of Paris**
+     against the recorded 50,156/148,633 = **33.7%** — within sampling
+     variance. Applying the same rule: **Marseille ≈ 6,800 against OSM's
+     6,340 = ≈107%**, where Paris was **92.5%**.
+     **Both near parity, so the filter is not systematically wrong.** The
+     swing is informative rather than alarming: **it measures OSM's
+     completeness as much as SIRENE's** — Paris is densely mapped so OSM
+     overshoots, Marseille less so.
+     ⚠️ **The original Paris query was never recorded**, so today's OSM side
+     is a reconstruction (`shop=*` plus food `amenity` values) and the
+     comparison is **indicative, not an exact reproduction**. **Write the query
+     down this time** — four more cities are meant to reuse it.
+
 - [ ] **Göteborg** 🇸🇪 — promoted into Band D 2026-09-23. **One
   measurement away from being comparable to Stockholm.**
   1. ⚠️ **Get `Livsmedelsverksamheter`'s row count.** Its DCAT node exposes

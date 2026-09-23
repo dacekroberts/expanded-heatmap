@@ -16,16 +16,29 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**199 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**212 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Lyon's discard row spent a day in the wrong table](#2026-09-23---lyons-discard-row-spent-a-day-in-the-wrong-table)
+- [Paris's naming share was France's number wearing Paris's label](#2026-09-23---pariss-naming-share-was-frances-number-wearing-pariss-label)
+- [Lyon discarded on four blockers, with a reinstatement template kept](#2026-09-23---lyon-discarded-on-four-blockers-with-a-reinstatement-template-kept)
+- [All six French cities are brief-ready](#2026-09-23---all-six-french-cities-are-brief-ready)
+- [Toulouse's and Rennes' CGU are clean, and Lyon stays out](#2026-09-23---toulouses-and-rennes-cgu-are-clean-and-lyon-stays-out)
+- [Licence Ouverte 2.0 read: five sources discharged, two carve-outs opened](#2026-09-23---licence-ouverte-20-read-five-sources-discharged-two-carve-outs-opened)
+- [ODbL read for Toulouse and Rennes; Marseille's OSM validation holds](#2026-09-23---odbl-read-for-toulouse-and-rennes-marseilles-osm-validation-holds)
+- [Hong Kong's two fields read, Oslo's rail measured, and Oslo's names are full but noisy](#2026-09-23---hong-kongs-two-fields-read-oslos-rail-measured-and-oslos-names-are-full-but-noisy)
+- [All six French cities measured on ONE sample; a correction of my own correction](#2026-09-23---all-six-french-cities-measured-on-one-sample-a-correction-of-my-own-correction)
 - [Category B's 31 counts read, one edited, and the denominator rule earned its keep](#2026-09-23---category-bs-31-counts-read-one-edited-and-the-denominator-rule-earned-its-keep)
 - [A superseded document's citations are a trail, and the check was auditing them](#2026-09-23---a-superseded-documents-citations-are-a-trail-and-the-check-was-auditing-them)
+- [Marseille brief written; its feed covers more cities than its register](#2026-09-23---marseille-brief-written-its-feed-covers-more-cities-than-its-register)
 - [Following one dead constant found a comment describing an approach the city does not use](#2026-09-23---following-one-dead-constant-found-a-comment-describing-an-approach-the-city-does-not-use)
+- [Oslo's rail sourced and taxonomy measured; MEL's WFS is Licence Ouverte](#2026-09-23---oslos-rail-sourced-and-taxonomy-measured-mels-wfs-is-licence-ouverte)
 - [Category D's 18 remaining constants are mostly deliberate records, not decay](#2026-09-23---category-ds-18-remaining-constants-are-mostly-deliberate-records-not-decay)
 - [Category D reported 63 dead constants, 45 of which were add-country working correctly](#2026-09-23---category-d-reported-63-dead-constants-45-of-which-were-add-country-working-correctly)
+- [Lille's tram geometry found first-party; its metro has none, and a line code nearly became a false find](#2026-09-23---lilles-tram-geometry-found-first-party-its-metro-has-none-and-a-line-code-nearly-became-a-false-find)
 - [check_stale_claims category A was reporting three findings and none of them was real](#2026-09-23---check_stale_claims-category-a-was-reporting-three-findings-and-none-of-them-was-real)
+- [The four French followers are country-ready, not brief-ready, and Lille has no line geometry](#2026-09-23---the-four-french-followers-are-country-ready-not-brief-ready-and-lille-has-no-line-geometry)
 - [PLAN.md gains the handoff it was missing, and Paris reverified](#2026-09-23---planmd-gains-the-handoff-it-was-missing-and-paris-reverified)
 - [Paris's brief re-verified against live sources: 7/7 hold](#2026-09-23---pariss-brief-re-verified-against-live-sources-77-hold)
 - [CUZK read: Prague is unblocked, and the "cookie terms" were not only cookie terms](#2026-09-23---cuzk-read-prague-is-unblocked-and-the-cookie-terms-were-not-only-cookie-terms)
@@ -239,6 +252,514 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-23 - Lyon's discard row spent a day in the wrong table
+
+- **The Lyon discard was recorded against the OPEN SCREENING GAP table rather
+  than the DISCARDED table**, and the count it was supposed to produce was
+  therefore never produced: the heading read *"DISCARDED - 33 cities"* while
+  the table under it held **32**. Found by counting the rows rather than
+  reading the heading.
+
+- **The cause is an anchoring failure, and it is the registered-office trap in
+  a fourth costume.** The edit inserted Lyon before the first occurrence of
+  `| **Lisbon**`, and **Lisbon appears in two different tables** - once in the
+  discard-sweep results and once in DISCARDED. `.index()` returned the first,
+  which was the wrong one. **A string that identifies a row does not identify
+  a table**, exactly as a filter parameter and the field you read are two
+  different addresses. The landing site is as much a claim as the content is,
+  and it went unverified because the write reported success.
+
+- **A second defect surfaced in the same count: Lisbon was listed TWICE in
+  DISCARDED** - the evidenced row added by the 2026-09-23 sweep, and an older
+  bare row reading only *"Specific negative"*. The sweep added evidence without
+  removing what it superseded. **The two together cancelled out**: a duplicate
+  inflating the count by one, and a missing row deflating it by one, so the
+  headline 33 happened to be arithmetically reachable from a table that was
+  wrong in two places. **A count that comes out right is not a checked count.**
+
+- **Both fixed**: Lyon moved into DISCARDED with its four blockers intact, the
+  bare Lisbon row removed, and the table now holds **32 rows / 32 distinct
+  cities, which is 33 with Amsterdam / Rotterdam counted as the two cities it
+  names.** Candidates stay at 31 and the bands still sum: A 6 + B 6 + C 16 +
+  D 3.
+
+- **Two stale captions corrected in the same file.** Band C said its cities
+  *"share one property that separates them from Band C"* - it means Band B.
+  Band D still opened *"Screening is COMPLETE for both, and both passed"* after
+  Goteborg made it three, on the same day Goteborg was added. **Prose that
+  counts its own contents goes stale the moment the contents change**, which is
+  the class `check_stale_claims.py` exists for and did not catch here because
+  the drift is in a word, not a number.
+
+### 2026-09-23 - Paris's naming share was France's number wearing Paris's label
+
+- **`docs/build_briefs/paris.md` reported Paris at 42.9% named, and 42.9% was
+  never Paris's figure - it was FRANCE's.** The brief imported the national
+  aggregate out of `pipeline/countries/france.py`, put it in a table headed by
+  Paris's field names, and captioned it *"Paris is the worst-named of France's
+  six cities"*. **The conclusion was right and the number supporting it
+  belonged to a different population.** Caught while the Paris build was
+  running on master against that brief.
+
+- **The tell was sitting five lines above the number that was taken.**
+  france.py's sample block reads `EITHER an enseigne or a usual name 42.9%`
+  and, on the next line, `...of Paris (751xx) rows 38.4%`. The
+  city-specific figure was present, adjacent, and unused. The 12.6% one-pass
+  re-scan puts Paris at **39.6%**, which agrees with 38.4% and never agreed
+  with 42.9% - **so the two Paris measurements always agreed with each other,
+  and only the borrowed one was out.**
+
+- **A country profile's national aggregate and a city's own rate are two
+  different numbers**, and a country profile is exactly the place this
+  confusion is cheap to make, because both live in one file and one is the
+  headline. Labelled the block NATIONAL vs Paris in france.py so the next of
+  the five follower cities cannot repeat it.
+
+- **A second defect, self-inflicted, found in the same pass: `CITY_ESTIMATES`
+  had become MIXED-SAMPLE.** Lyon's row was refreshed alone during its discard
+  hours earlier, leaving the other five on the superseded 3.9% scan - the same
+  comparison-across-samples error that produced a false "correction" to
+  Marseille's figure the same day, committed while writing up that very error.
+  All six rows are now on the 12.6% pass, with a comment saying **refresh all
+  six or none**.
+
+- **Figures changed**, 3.9% scan to 12.6% scan: Paris 136,400/42.9% to
+  117,730/**39.6%**; Marseille 26,940/45.8% to 25,430/**43.4%**; Toulouse
+  12,873/51.9% to 12,853/**52.8%**; Lille 10,461/50.7% to 8,076/**47.5%**;
+  Rennes 5,002/54.3% to 4,833/**53.5%**. Lille moved most, by 2,385 rows and
+  3.2 points. `docs/city_master_list.md`'s follower row carried the old set
+  too and now carries the new one.
+
+- **Added `PARIS_BUCKET_ROWS_MEASURED = 148_633`** beside the scaled estimates
+  rather than substituting it into them. Scaling understates Paris by ~21%
+  because active bucket rows get denser through a file ordered by `siret`,
+  which is seniority - so **the scaled column is kept for comparability and
+  the measured number is the build number**, each labelled. Substituting one
+  city's measured value into a scaled table would have rebuilt the
+  mixed-sample defect in a new place.
+
+- **No build step changes.** Paris's pins are *name where it exists, address
+  otherwise*, so the share gates nothing in the pipeline - it is the figure
+  any prose about Paris must quote, which is why it was worth correcting mid
+  build rather than after it.
+
+### 2026-09-23 - Lyon discarded on four blockers, with a reinstatement template kept
+
+- **Lyon moved from deferred to DISCARDED at the owner's direction**, and the
+  reason for the move is worth recording as much as the decision: **an earlier
+  summary listed three unblocking steps and footnoted the fourth**, which read
+  as a checklist to viability rather than as four independent walls. **A
+  numbered list implies completability.** The dead feed was not a footnote -
+  it is a blocker of the same rank as the other three.
+
+- **The four, each sufficient on its own.** (1) An account on
+  `data.grandlyon.com` is required before any download, and **this project does
+  not create accounts**. (2) Grand Lyon **CGU 9.4** is an open-ended indemnity.
+  (3) **CGU 6.2** bars the producers' *signes distinctifs* *"associes ou non a
+  l'utilisation des donnees"*, colliding with the invariant that every drawn
+  line carries its real public name - Lyon's being **TCL**. (4) Its National
+  Access Point feed is **dead since 2022-04-14**, 0% availability, while the
+  source portal is current: **the stale-mirror trap that cost Toronto**.
+
+- **This is a discard on TERMS AND ACCESS, never on data, and the distinction
+  is kept deliberately.** Lyon's business leg is **~18,082 bucket rows at
+  51.4% named** - **better than Paris's 39.6%**. Recording that alongside the
+  discard is what makes a reinstatement cheap: the business leg would not need
+  re-measuring, only the four blockers re-tested.
+
+- **A reinstatement template is kept in `PLAN.md`** rather than the discard
+  being a dead end - the account URL, the indemnity precedent (Hong Kong's,
+  accepted 2026-09-22), the authorisation channel for the TCL question
+  (`contactopendata@tcl.fr`), and the instruction to source rail from Grand
+  Lyon's portal rather than the NAP. **A discard that names its own undo is
+  more useful than one that does not**, and this project has already reversed
+  Italy, France and Sevilla on re-examination.
+
+- **Lyon's clauses must NOT be generalised to France, and today's reads prove
+  it.** Toulouse's and Rennes' CGU were read the same day and are **clean** -
+  the Opendatasoft template, no indemnity, and a marks clause that expressly
+  excludes *"les donnees publiees sur le DOMAINE"*. **Three French portals,
+  three different answers.** Lyon's are Grand Lyon's own, not a national
+  pattern, which is precisely why each publisher gets read rather than
+  inheriting a country position.
+
+- **Counts: candidates 32 to 31, discards 32 to 33.** Band A is now **6 ready
+  + 6 built** with no gated row, and `docs/city_cost_order.md`'s bands re-sum
+  to 31 - the two files agree, which is the check that file states about
+  itself.
+
+### 2026-09-23 - All six French cities are brief-ready
+
+- **Rennes 6/6, Toulouse 5/5 and Lille 5/5 written**, joining Paris 7/7 and
+  Marseille 7/7. **With Lyon deferred, every buildable French city now has a
+  brief whose checks pass** - and France is the first country in this project
+  taken to that state as a SET rather than one city at a time.
+
+- **Rennes is the best-quality French city and the smallest.** **53.5%
+  named** - the highest of the six against Paris's 39.6% - the **lowest
+  distance-selling share at 14.2%**, and the only French feed carrying
+  everything: `shapes.txt`, `feed_info.txt` and a real `feed_end_date`. But it
+  is **~4,833 rows**, an order of magnitude below Paris. Whether that is worth
+  a page is a scale judgment rather than a data one, and **Boston shipped on
+  3,164 premises**, so the precedent says yes.
+  Its feed window **expires 2026-10-18**, far sooner than Marseille's
+  2026-12-31, so its staleness check fires first and that means refetch rather
+  than alarm. And a sibling resource is the **FORTHCOMING** timetable - taking
+  `A_VENIR` over `EN_COURS` would draw services that do not yet run.
+
+- **Toulouse has the second-best naming and the most withheld data.** 52.8%
+  named, but **16.0% of rows are masked at source** - roughly double Paris's
+  8.5% - and France masks name, address **and geolocation** together.
+  **Budget ~10,800 usable rows against a headline 12,853.** A city picked on
+  row count alone would be picking wrong.
+
+- **Toulouse carries `route_type 6`, an aerial lift - the Teleo cable car -
+  and this project has never drawn one.** It does draw a **funicular** in
+  Paris, so "not a train" is not itself a reason to exclude; Teleo is ticketed
+  like the metro and crosses the Garonne where no other line does. **Recorded
+  as an owner call rather than silently dropped**, which is the distinction
+  that matters: an unrecorded exclusion looks identical to an oversight.
+
+- **Lille is the only French city whose rail geometry cannot come from its own
+  feed**, and its brief says so in the first line. **No `shapes.txt`.** Half
+  the gap closes first-party - MEL's WFS gives **4 LineStrings for trams R and
+  T**, with names and operator - and **both VAL metro lines must come from
+  OSM**. Hybrid or all-OSM is an owner call and either is defensible.
+
+- **Lille also carries the only unresolved licence question among the five
+  `lov2` sources**, and the mitigation that looked obvious does not work: the
+  national access point's stable URL **302s to `media.ilevia.fr`** rather than
+  mirroring it, so the bytes come from ilevia's host either way. **Checked
+  specifically so it would not be recorded as solved when it is not.**
+
+- **Lille's scope question is the sharpest of the six.** Its commune is small
+  against the Metropole Europeenne de Lille, and **its metro serves
+  Villeneuve-d'Ascq, Roubaix and Tourcoing** - the tram lines are named for
+  those towns outright. **Paris's commune-only answer rested on all 16 metro
+  lines surviving its boundary; Lille's will not.**
+
+- **Every brief names what it does not know.** Between them the six carry
+  **eleven open owner calls** - scope in four cities, ferries in Marseille, the
+  Teleo in Toulouse, geometry and the ilevia carve-out in Lille, the
+  declaration de conformite in Paris, and the section 4.4 station-CSV question
+  in Toulouse and Rennes. **None blocks a build; every one of them would
+  otherwise have been discovered mid-build.**
+
+### 2026-09-23 - Toulouse's and Rennes' CGU are clean, and Lyon stays out
+
+- **Both publishers' CGU read, and NEITHER carries Lyon's two killers.** They
+  are the same Opendatasoft template at `/terms/terms-and-conditions/`, found
+  from the portals' own footers. **No indemnity clause exists in either** -
+  Grand Lyon's CGU 9.4 has no counterpart. And **the marks clause is
+  OPENDATASOFT's own**, expressly carving the data out: *"A l'exception des
+  donnees publiees sur le DOMAINE, il est rappele que les marques, logos ...
+  crees, publies ou enregistres par OPENDATASOFT sont la propriete exclusive
+  de OPENDATASOFT"*. **So naming Tisseo and STAR on the map is not barred**,
+  and the invariant that every drawn line carries its real public name is safe
+  in both cities.
+
+- **The Cloudflare challenge was PATH-SPECIFIC, not a standing wall.** Both
+  pages answered plain `curl` with no challenge at all. An automated read had
+  hit an interactive challenge with a Ray ID, refused it correctly, and spent
+  47 minutes on alternates - and the resolution was simply **reading the
+  portals' own footers for the real path** rather than guessing
+  `/pages/cgu/`, which 404s. **Worth carrying before any portal is recorded as
+  blocked again: a challenge on one path is not a verdict on the host.**
+
+- **The express prohibition is CONDITIONAL and the condition excludes this
+  project.** *"La Societe interdit expressement : L'extraction ... d'une partie
+  qualitativement ou quantitativement substantielle du contenu du DOMAINE ...
+  **des lors que l'auteur de cette extraction intervient EN DEHORS D'UNE
+  LICENCE consentie**"*. It is sui-generis database-right boilerplate **with a
+  licence carve-out**, and the GTFS is licensed, so it does not bite. Read
+  without the trailing clause it looks fatal - which is the Philadelphia shape
+  in reverse.
+
+- **The acceptance clause binds, so these ARE part of the terms** - *"TOUTE
+  UTILISATION ... IMPLIQUE OBLIGATOIREMENT L'ACCEPTATION SANS RESERVE ... DES
+  PRESENTES CGU"*. `read-licence` step 3 satisfied by following it rather than
+  noting it. The step-4 split is clean and both halves are recorded: the
+  restrictive paragraph governs **the PLATFORM**, the permissive obligation
+  governs **the data** - *"mentionner la source des JEUX DE DONNEES en cas de
+  reutilisation"*, plus the same per-dataset-licence warning MEL gives and
+  whose catalogue proved it load-bearing.
+
+- **This does NOT bring Lyon back, and the contrast is the point.**
+  `data.grandlyon.com` is **not** Opendatasoft, its CGU was read separately,
+  and it **does** contain both clauses - an open-ended indemnity at 9.4 and, at
+  6.2, a bar on the producers' *signes distinctifs* **"associes ou non a
+  l'utilisation des donnees"**, which explicitly reaches beyond the site.
+  **Three French portals, three different answers**, which is the argument for
+  reading each rather than inheriting a country position. **Lyon returns on
+  owner decisions rather than on new evidence**: the account, the indemnity
+  (Hong Kong's was accepted 2026-09-22, so there is precedent), and whether
+  naming TCL is barred - which `contactopendata@tcl.fr` can authorise cheaply.
+
+### 2026-09-23 - Licence Ouverte 2.0 read: five sources discharged, two carve-outs opened
+
+- **LO 2.0 is PERMITTED WITH CONDITIONS across all five `lov2` sources** -
+  SIRENE, INSEE's geolocation file, Marseille's GTFS, Lille's GTFS and MEL's
+  WFS. Commercial use is express, derived works are express - *"notamment pour
+  creer des Informations derivees"* - and there is **no share-alike, no
+  revocation clause and no indemnity**. Written up at
+  `docs/licenses/france-licence-ouverte-2.0.md`.
+
+- **The date-of-last-update duty is LO 2.0's OWN, which settles a question
+  asked three times.** The clause requires *"sa source (a minima le nom du
+  Concedant) **et la date de la derniere mise a jour**"*. MEL's
+  `gmd:useLimitation` is a near-verbatim restatement down to *"a minima"*, and
+  `transport.data.gouv.fr` and INSEE restate it independently. **So Licence
+  Mobilites Art. 5.7, Grand Lyon CGU 6.1 and MEL are ONE duty restated, not
+  three publishers each inventing a requirement.** A link is optional;
+  name-plus-date is the obligation.
+
+- **`Source : Insee` is prescribed VERBATIM** - the only fixed string among the
+  five - and **a combined attribution block must still carry name-and-date for
+  EVERY `lov2` source individually.** One shared line naming several publishers
+  under one date does not discharge it. **No publisher's logo may be
+  rendered**: data.gouv.fr's CGU excludes logos from the licence, INSEE bars
+  its marks, and the ministry's are INPI-registered.
+
+- **A STANDING REFRESH DUTY was found, and it is not discharged by anything on
+  a page.** INSEE: *"il est ainsi de votre responsabilite de tenir compte du
+  statut de diffusion le plus recent de chaque personne physique, qui tient
+  compte des oppositions formulees par certaines d'entre elles"*. Because
+  `statutDiffusion` changes as people exercise opposition, **a committed
+  `outputs/` snapshot can contain someone who has since opted out.** This
+  argues for a stated refresh cadence rather than a one-off build, and it is a
+  new obligation SHAPE for this project - neither a notice nor a single act.
+
+- **The upstream privacy work is better than assumed, which narrows the
+  exposure check.** `statutDiffusion = P` masks the name, the commune address
+  **and the geolocation** - and **the geolocation file is built only from
+  "les etablissements dont les donnees sont diffusibles"**, so **the coordinate
+  join cannot reintroduce a masked establishment's location.**
+
+- **ODC-BY is named compatible; ODbL is NOT, and the two are easy to
+  conflate.** LO 2.0 names LO 1.0, the UK's OGL, CC-BY and **Open Data Commons
+  Attribution (ODC-BY)**. **ODbL is the share-alike member of that family and
+  is absent.** So this clause does **not** bless Toulouse's or Rennes' feeds,
+  and whether ODbL's share-alike reaches a mixed database remains open.
+
+- **MEL's catalogue is MIXED, and checking per-record turned out to be
+  load-bearing rather than prudent.** Its own terms say so out loud - *"Il
+  appartient ainsi a chaque utilisateur de consulter la LICENCE concernant
+  chaque JEU DE DONNEES"* - and across **all 427 records**: ~360 Licence
+  Ouverte, **13 requiring "signature d'un acte d'engagement"**, **1 ODbL**, 38
+  with third-party citation, 2 with no constraint at all. **The five layers in
+  scope are all clean, verified individually.** But a signature requirement and
+  a share-alike layer sit one layer away, so **a later session adding a MEL
+  layer must check its record** - which belongs in a check rather than in
+  prose.
+
+- **CARVE-OUT, owner decision: Lille's GTFS host.** The feed comes from
+  `media.ilevia.fr`, and ilevia's Mentions legales section 5 bars *"pas de
+  modification ni alteration d'aucune sorte"* and commercial use of *"les
+  contenus des Services en ligne"*. **"Services en ligne" is a DEFINED term** -
+  ilevia's websites and apps - and the GTFS is **MEL's `lov2` publication**, so
+  this is most likely **the SEPTA pattern**: a web-contents notice mistaken for
+  a data licence. ⚠️ **But the obvious mitigation fails** - the national access
+  point's stable URL **302s to `media.ilevia.fr`**, a redirect rather than a
+  mirror, so the bytes come from ilevia's host either way. **Third "no
+  modification" bar this project has met**, after LA Metro and Philadelphia.
+  Cheap close: `opendata@lillemetropole.fr`.
+
+- **CARVE-OUT: Marseille's Concedant name is contradicted by its own
+  artefacts.** The national access point declares **Metropole
+  d'Aix-Marseille-Provence**; the feed's `feed_info.txt` self-attests
+  **Mecatran**. The Concedant is the body that granted the licence - the
+  Metropole - and **naming Mecatran alone would be wrong**. Recorded so the
+  brief and the notice do not drift apart.
+
+- **One attribution element the source does not supply.**
+  `mel_mobilite_et_transport:tramway_lignes` - the layer Lille would draw for
+  its tram geometry - **carries no citation date at all**, only a `dateStamp`
+  of 2024-06-03 and a revision of 2024-05-29, **neither of which is literally
+  "la date de derniere mise a jour"**. INSEE's *"lorsque celle-ci est connue"*
+  softener is INSEE's and does not extend to MEL. Its `fileIdentifier` still
+  reads `reseau-transpole`, ilevia's pre-2019 name, so the record is not
+  freshly maintained.
+
+### 2026-09-23 - ODbL read for Toulouse and Rennes; Marseille's OSM validation holds
+
+- **ODbL is PERMITTED WITH CONDITIONS, and the deciding clause is §4.5(b).**
+  *"Using this Database ... to create a Produced Work does not create a
+  Derivative Database for purposes of Section 4.4"* - so **the rendered map
+  does not trigger share-alike**, settled rather than arguable. Written up at
+  `docs/licenses/odbl-toulouse-rennes.md`.
+
+- **But §4.6 reaches this project through a route §4.5(b) does not close.**
+  It fires on *"a Derivative Database **or a Produced Work from a Derivative
+  Database**"* - and this project's map is produced from the **committed
+  station CSV**, not directly from the feed. The obligation is to offer
+  recipients either the whole derivative or *"a file containing all of the
+  alterations ... **or the method of making the alterations (such as an
+  algorithm)**"*. **The public repository already satisfies it**, because the
+  pipeline code IS the method - **provided the repo is LINKED from the site**,
+  since an unlinked repo is not an offer. **Licence Mobilites Art. 5.8 asks
+  for the same thing**, so one repository link discharges two different French
+  licences.
+
+- **Left open deliberately: whether the committed station CSV is itself a
+  Derivative Database under §4.4.** It is an extraction of a substantial part
+  of `stops.txt` rearranged into a new table, which ODbL's definition reaches;
+  it is also a filtered subset adding no information. **Not resolved in this
+  project's favour, and unlike Paris there is no publisher gloss to lean on** -
+  Licence Mobilites was rescued by the NAP's *published* interpretation filing
+  this project's shape under "no resharing required"; **ODbL has no
+  equivalent** and its standard text is stricter. **Recommended cheap
+  discharge: put an ODbL notice on the station CSV**, which moots the question
+  for one line, the same move taken for Paris.
+
+- **The existing OpenStreetMap ODbL notice does NOT discharge these.** §4.3
+  requires the notice to identify **which** database the content came from, so
+  Toulouse and Rennes each need their own, using the licence's own safe-harbour
+  wording: *"Contains information from Reseau urbain Tisseo/STAR, which is made
+  available here under the Open Database License (ODbL)."*
+
+- **The publishers' own CGU are STILL UNREAD, and the reason is worth
+  recording.** An automated read hit a **Cloudflare interactive challenge
+  carrying a Ray ID and refused to complete it** - correctly, because this
+  project does not defeat bot detection - then spent **47 minutes** seeking
+  legitimate alternate routes before being stopped. **That gap is exactly the
+  one that defers Lyon**: Grand Lyon's CGU added an open-ended indemnity and a
+  bar on the producers' *signes distinctifs*, which collides with the invariant
+  that every drawn line carries its real name - **Tisseo** and **STAR**
+  respectively. **Neither city should ship until those CGU are read**, in a
+  browser where a person can pass the challenge legitimately.
+
+- **Marseille's OSM composition validation RUN, and the SIRENE filter HOLDS.**
+  The employee rule had to be **recovered first because it was never written
+  down**: the `trancheEffectifsEtablissement` distribution shows that
+  **dropping `NN`** - effectifs not reported, **68.2% of Paris bucket rows** -
+  leaves **31.8%**, against the recorded 50,156/148,633 = **33.7%**, within
+  sampling variance. Applying the same rule to Marseille gives **≈6,800
+  against OSM's 6,340, ≈107%**, where Paris was **92.5%**.
+
+- **Both cities land near parity, which is what validation means here - and
+  the swing is informative rather than alarming.** 92.5% against 107% says the
+  comparison **measures OSM's completeness as much as SIRENE's**: Paris is
+  densely mapped so OSM overshoots, Marseille less so and SIRENE overshoots
+  instead. **The filter is not systematically wrong**, which is what four more
+  French cities needed to know.
+
+- ⚠️ **The original Paris comparison's QUERY was never recorded**, so
+  today's OSM side is a reconstruction and the result is **indicative rather
+  than an exact reproduction**. That is a genuine gap in a check meant to be
+  reused across five more cities - **write the query down**.
+
+### 2026-09-23 - Hong Kong's two fields read, Oslo's rail measured, and Oslo's names are full but noisy
+
+- **Hong Kong's `EXPDATE` does not filter: 0 of 35,808 rows are expired.** The
+  FEHD file is a **live register rather than an archive**, so the ~21,545
+  buildable figure needs no currency filter. The consequence is worth naming:
+  **the whole file's freshness rests entirely on `GENERATION_DATE`**, which is
+  the one thing in it that self-attests.
+
+- **Hong Kong's `INFO` is MULTI-VALUED WITH NO DELIMITER**, and a naive
+  `value_counts()` would return combinations rather than codes - the Calgary,
+  Edmonton and Surrey trap, and worse here because the only separator is the
+  `#` that prefixes each code. `#G#H` alone appears on **1,421 rows**. The
+  codes are **endorsements, not categories**: sashimi, sushi, raw oyster, raw
+  meat, shellfish, live poultry, lunch-box supply, karaoke exemption, and the
+  offensive-trade set (lard boiling, shark-fin and fish-meal processing,
+  leather dressing and tanning).
+
+- **Oslo's feed uses NOT ONE basic route type, which is the documented trap
+  confirmed live.** All 386 routes carry extended types - `704`, `712`, `702`,
+  `705`, `902`, `1008`, `401` - so **a reader of only the basic 0-12 set sees
+  zero rail in Oslo**. `add-country` records exactly this having reported
+  "Berlin, Hamburg, Stockholm and Oslo as having no urban rail"; this is the
+  same feed proving it. Drawn: **5 metro lines (`401`) and 6 tram lines
+  (`902`), 11 routes over 356 stops and 177 distinct parent stations.**
+
+- **Oslo's `route_color` cannot distinguish one line from another.** Every
+  metro line shares `EC700C` and every tram line shares `0B91EF`, so the
+  per-line legend and on-map label this project requires **cannot be satisfied
+  from the feed** - the map must assign its own palette. Contrast Marseille,
+  where M1, M2, T1, T2 and T3 each carry a distinct hex. **Two cities in the
+  same screen, opposite answers to the same question.**
+
+- **Oslo's `navn` is a DIFFERENT problem from Milan's and Paris's, and
+  naming it precisely matters.** Measured on all **13,458** bucket sub-units:
+  **0 blank**, **41.2% ending in a legal-form suffix**, 58.8% not. But the
+  58.8% is **not** a clean trade-name share - many are *legal name plus
+  branch*: `CIRCLE K NORGE AS AVD 57015 - AUTOMAT TRONDHEIMSVEIEN`,
+  `COOP OST SA AVD 2515 COOP PRIX SORENGA`. **`AVD` - avdeling, branch - is
+  the marker.** Genuine trade names do occur (`MENY SKOYEN`,
+  `BAKER HANSEN MAJORSTUKRYSSET`). **Milan and Paris had EMPTY name fields;
+  Oslo has FULL but noisy ones**, so the work is a cleanup rule rather than a
+  fallback join - and the usable share is **below 58.8% and still unmeasured**.
+
+- **Goteborg's row count is abandoned for now after EIGHT paths.**
+  `resource/18`, `entry/18`, `metadata/18`, `rowstore/dataset/35`,
+  `resource/34`, `resource/36`, the `?recursive=dcat` variants and the
+  catalogue's own page - which is a **663-byte EntryScape bootstrap**, a
+  JavaScript shell with no data in it. The sibling `Restauranger` CSV was
+  served directly at `store/6/resource/49543`, so the pattern exists but
+  dataset 35's distribution does not follow it. **Recorded as unreachable by
+  the documented patterns rather than absent**, and it blocks nothing: Goteborg
+  is in Band D behind an owner scope decision either way.
+
+- **The Licence Ouverte 2.0 read FAILED and was relaunched.** The agent
+  terminated on an API error - a tool call that could not be parsed - after
+  drifting into France's transport regulation (MMTIS Article 2(7) and Article
+  8) rather than staying on the Etalab licence. **No verdict was produced and
+  none was recorded.** The relaunch says explicitly to stay on the licence
+  text, because those transport obligations were already read and recorded for
+  Paris separately.
+
+### 2026-09-23 - All six French cities measured on ONE sample; a correction of my own correction
+
+- **Scanned all six French cities in a single 12.6% pass**, closing four
+  outstanding items at once - Rennes, Toulouse and Lille's city measurements,
+  and the per-city naming spread. **One scan rather than five** because a
+  comparison drawn across different samples is not a comparison, which is
+  precisely the error this pass exists to fix.
+
+- **The naming spread is REAL, and the earlier "correction" of it was
+  WRONG.** Yesterday's note recorded Marseille at 43.1% and called it
+  "statistically the same city" as Paris - **but it compared Marseille's fresh
+  11.2% measurement against Paris's OLD 3.9% figure of 42.9%.** Measured on one
+  sample, **Paris is 39.6% and Marseille 43.4%**: a real four-point advantage,
+  and the reverse of what was recorded. **The mistake was not the arithmetic,
+  it was mixing baselines** - and it is the same shape as reporting the slice
+  you queried as the whole.
+
+- **The full spread: 39.6% to 53.5%, fourteen points.** Paris 39.6, Marseille
+  43.4, Lille 47.5, Lyon 51.4, Toulouse 52.8, Rennes 53.5. **The ranking the
+  small sample implied survives** - Paris worst, Rennes best - but **every city
+  except Toulouse came in lower**, so the absolute values were optimistic by
+  1-3 points throughout. A ranking can be right while every number in it is
+  wrong.
+
+- **Scaled counts are systematically LOW and should be treated as floors.**
+  Paris scales to **117,730** against its independently measured **148,633**,
+  because active bucket rows get denser through a file ordered by `siret`,
+  which is seniority rather than geography. Every scaled figure in the France
+  profile carries that bias in the same direction.
+
+- **The taxonomy level transfers across France, and this is the first country
+  in the project where that has been SHOWN rather than assumed.** All six
+  cities land in a **19.8-23.0%** catch-all band at sous-classe, with **0%
+  unlabelled everywhere**, while *groupe* is catastrophic in every one of them
+  (44.1-50.7%). ⚠️ But *classe* ranges **27.9-38.1%**, so **the transfer is
+  level-specific, not wholesale** - a city keying elsewhere in the scheme would
+  still need its own measurement. Contrast Prague, whose CZ-NACE is ragged and
+  supports no level at all.
+
+- **Distance selling ranges 14.2% (Rennes) to 18.3% (Lyon)** and must be
+  excluded everywhere. **Paris is 18.2%, not the 15.5% recorded earlier** -
+  that figure came from a 6,895-row Paris-only sample. Marseille is **16.4%**,
+  so an earlier claim in its brief that Marseille was HIGHER than Paris had the
+  direction backwards; corrected, along with a heading that contradicted its
+  own body.
+
+- **Toulouse's masking is 16.0%, roughly double Paris's 8.5%.** A sixth of its
+  rows have name, address **and geolocation** withheld at source under
+  `statutDiffusionEtablissement`, which shrinks its usable set by more than its
+  row count suggests. Worth knowing before it is picked on row count alone.
+
 ### 2026-09-23 - Category B's 31 counts read, one edited, and the denominator rule earned its keep
 
 - **Read all 31 hand-kept counts. Exactly one was stale, and the one that
@@ -309,6 +830,65 @@ onwards; the early ones are split by phase rather than by hour.
   codepage today), which makes it the single most reliable way to write a
   test that lies.
 
+### 2026-09-23 - Marseille brief written; its feed covers more cities than its register
+
+- **`docs/build_briefs/marseille.md`, 7/7 checks.** The first French follower
+  taken to brief-ready, and the first real test of whether France's country
+  profile transfers. **It largely does**: the coordinate join, the commune
+  prefix filter, the privacy masking and the taxonomy level all hold.
+
+- **The taxonomy answer TRANSFERS, and that is new evidence rather than an
+  assumption.** Measured on Marseille rows against INSEE's own labels:
+  sous-classe **20.8%** catch-all against Paris's 19.3%, groupe **48.1%**
+  against 49.4%, **0% unlabelled at every level**. So **key at sous-classe**,
+  same as Paris. But *classe* diverges - **37.4% against Paris's 27.8%** - so
+  the transfer is **level-specific, not wholesale**, and a city keying
+  elsewhere in the scheme would need its own measurement.
+
+- **Distance selling is 17.7% here against Paris's 15.5%**, so the exclusion
+  list (`47.91A/B`, `47.99A/B`) matters slightly more in Marseille. Same rule,
+  different magnitude - worth measuring per city rather than inheriting the
+  number.
+
+- **The per-city NAMING spread recorded in the country profile is weaker
+  evidence than it looked, and this corrects my own earlier work.** A 3.9%
+  sample put Marseille at **45.8%** named against Paris's 42.9%, which read as
+  a genuine advantage. At **11.2%** coverage Marseille is **43.1%** -
+  **statistically the same city**. The ranking that sample implied (Rennes
+  54.3% best, Paris worst) **should be re-measured before anyone builds on
+  it**; it is the sort of number that hardens into a reason for choosing a
+  city.
+
+- **Marseille's rail feed covers the whole Metropole, not the city, and it is
+  not hypothetical.** The *Referentiel complet (tous les reseaux)* carries
+  **four tram entries, one of which is `T` Le Charrel-Gare - AUBAGNE's tram**,
+  and **17 `route_type 2` routes including "Lyon Part-Dieu - Geneve" and
+  "Grasse - Cannes - Nice"**, TER services spanning south-east France. **A
+  naive draw-all-rail would put Aubagne's tram and half the national TER
+  network on a Marseille map.** The TER routes fall under the standing
+  commuter-rail exclusion; the Aubagne tram is a **scope** question, and
+  **Paris's commune-only answer does not transfer** because Paris's rested on
+  all 16 metro lines surviving its boundary.
+
+- **Six ferry routes are a genuine judgment call, not an oversight.**
+  `route_type 4` carries `NAV1` Vieux Port-La Pointe Rouge, `NAV2` Vieux
+  Port-L'Estaque, the Frioul islands service and cross-harbour hops. **This
+  project has never drawn a ferry**, but Marseille's are real urban transit.
+  Recorded as an owner call rather than silently dropped.
+
+- **The rail that WOULD be drawn is complete and needs no invention**: M1, M2,
+  T1, T2, T3 - **every one with a real public name and a hex colour**, so the
+  legend and on-map label requirements are satisfiable directly. The feed also
+  **SELF-ATTESTS** (`feed_end_date` 2026-12-31, publisher Mecatran), which
+  Paris's IDFM feed cannot do.
+
+- **One licence read would now discharge FIVE sources.** Licence Ouverte 2.0's
+  own terms are still **not recorded in `docs/data_sources.md`** - flagged
+  during Paris's read and still open - and it now governs **SIRENE, the INSEE
+  geolocation file, Marseille's GTFS, Lille's GTFS and MEL's WFS**. That makes
+  it the **highest-leverage licence item outstanding**, ahead of anything
+  city-specific.
+
 ### 2026-09-23 - Following one dead constant found a comment describing an approach the city does not use
 
 - **Barcelona's config carried `OSM_STATION_RAILWAY` and `OSM_STATION_KIND`
@@ -346,6 +926,59 @@ onwards; the early ones are split by phase rather than by hour.
   here. Shared config vocabularies are where this bites; fixing it means
   resolving each read back to the module it imports from, which was not
   attempted today.
+
+### 2026-09-23 - Oslo's rail sourced and taxonomy measured; MEL's WFS is Licence Ouverte
+
+- **Oslo's rail is sourced: Entur answers keyless.** Ruter's aggregated GTFS
+  at `storage.googleapis.com/marduk-production/outbound/gtfs/rb_rut-aggregated-gtfs.zip`
+  returns **206 with `PK\x03\x04`** on a ranged GET. **A HEAD request would
+  have recorded it as empty** - both Entur URLs answer `200` with **size 0 and
+  no content-type** to `curl -I`, because Google Storage does not serve HEAD
+  usefully. **Use a ranged GET and check magic bytes**, which is the same
+  discipline that caught Busan's PNG-masquerading-as-a-dataset. The station
+  COUNT remains unmeasured; the feed is sourced, not read.
+
+- **Oslo keys at the 5-digit SN2007 level, measured at 15.5% catch-all** -
+  division 0.0%, group 38.4%, class 18.5%, **SN2007 15.5%**, with **0%
+  unlabelled at every level**. Barcelona's and Paris's shape. The residual
+  concentrates in `96990` *Andre personlige tjenester ikke nevnt annet sted*
+  (6.0%) and `56220` *Kantinedrift og annen cateringvirksomhet* (4.1%).
+
+- **The first attempt at that measurement was INVALID and the tell was the
+  unlabelled share.** It used INSEE's NAF labels on the assumption that
+  SN2007's 4-digit classes are NACE Rev.2 classes reachable by truncation.
+  **They are not aligned that way**: Norway writes `56.110` - two digits plus
+  three - where NACE's class is `56.10`, two plus two, so slicing a
+  five-character Norwegian code at four yields `5611` rather than the class
+  `5610`. That run reported **57.8% unlabelled at class level and a
+  meaningless 7.8% catch-all**. **A high unlabelled share means the slice is
+  wrong, not that the data is odd** - and the fix was to take SSB's own 1,785
+  SN2007 codes rather than a neighbouring country's list. Generalises: **a
+  national classification is not its parent scheme plus digits.**
+
+- **MEL's WFS is `Licence Ouverte v2.0 (Etalab)`, PERMITTED WITH
+  CONDITIONS.** Found in the ISO19139 `gmd:otherConstraints`, with
+  `gmd:useLimitation` requiring *"Utilisation libre sous reserve de mentionner
+  la source (a minima le nom du producteur) **et la date de sa derniere mise a
+  jour**"*. **That is the THIRD date-of-last-update duty found in France**,
+  after Licence Mobilites Art. 5.7 and Grand Lyon CGU 6.1 - enough repetition
+  to treat it as a French pattern rather than a per-publisher quirk.
+
+- **The WFS's own `AccessConstraints: NONE` was NOT taken, and that was the
+  right call.** It is the OGC service-level field, and the dataset records
+  say **`otherRestrictions`** - which is INSPIRE's code for *see the
+  otherConstraints field*, **not** for *no restrictions*. Taking the service
+  field would have recorded a permissive position that the dataset metadata
+  contradicts. **Same shape as the CUZK ATOM feed's `zadne podminky neplati`
+  that was refused hours earlier**: a machine-readable "no conditions" in
+  spatial-data boilerplate is a default, not a grant.
+
+- **Goteborg's `Livsmedelsverksamheter` row count is STILL unobtained.** Five
+  EntryStore paths tried - `resource/18`, `entry/18`, `rowstore/dataset/35`,
+  `resource/34` and `resource/36` - returning RDF or 404. The file is not
+  reachable by the pattern that served its sibling `Restauranger` CSV. Stays
+  open, and until it is taken **Stockholm's measured 8,146 remains the
+  stronger number.**
 
 ### 2026-09-23 - Category D's 18 remaining constants are mostly deliberate records, not decay
 
@@ -429,6 +1062,52 @@ onwards; the early ones are split by phase rather than by hour.
   the one-liner that would have patched the test carried a backslash inside a
   heredoc. First unprompted catch in real use, one day after installation.
 
+### 2026-09-23 - Lille's tram geometry found first-party; its metro has none, and a line code nearly became a false find
+
+- **Lille's portal is geOrchestra and its own 404 said so.** After
+  `opendata.lillemetropole.fr` served an HTML app and two Opendatasoft-shaped
+  API paths missed, `data.lillemetropole.fr` returned **404 JSON carrying
+  `georchestraStylesheet` and `logoUrl: /public/logo-mel.jpg`** - the error
+  body named the platform. geOrchestra is GeoServer plus GeoNetwork, so the
+  enumerable surface is **WFS GetCapabilities**, which answered. **Read the
+  error body before guessing another path**; two of the three attempts here
+  were spent on the wrong platform's URL shape.
+
+- **Tram line geometry EXISTS first-party and metro line geometry DOES NOT.**
+  `mel_mobilite_et_transport:tramway_lignes` - *"Traces des lignes de tramway
+  du reseau Ilevia"* - returns **4 LineString features**, lines **R**
+  (Lille-Roubaix) and **T** (Lille-Tourcoing), with `nom`, `ligne` and
+  `exploitant`. For the **metro there is nothing but points**:
+  `stations_metro` and `dsp_ilevia:entree_sortie_metro`. So the gap the
+  missing `shapes.txt` opened is **half closed**, and Lille's two VAL metro
+  lines still need OSM.
+
+- **A line code nearly became a false find, and one field check disproved
+  it.** `dsp_ilevia:ilevia_traceslignes` is titled *"Traces des lignes de
+  BUS"*, and its `ligne` values include **`L1`** - which reads exactly like
+  Metro Ligne 1, and was briefly treated as evidence that the layer held all
+  modes despite its title. **It does not.** Its `type_ligne` values are
+  `Urbaine`, `Suburbaine`, `Scolaire` and `Ligne de nuit`, all bus categories,
+  and **`L1` is *Liane 1*, ilevia's high-frequency BUS brand.** The title was
+  honest; the **line code** was the trap. This is the inverse of the Montreal
+  lesson - there a dataset's name concealed what it held, here a row's value
+  suggested something it was not - and both are answered the same way, by
+  checking a second field rather than reasoning from a name.
+
+- **Found in passing: a first-party source for line COLOURS.**
+  `dsp_ilevia:couleurs_lignes` exists, and `ilevia_traceslignes` carries
+  `rgbhex_fond`, `rgbhex_texte` and `color`. Lille's GTFS may not carry route
+  colours, and **every drawn line needs a legend entry**, so this is worth
+  keeping even though the bus traces themselves are not.
+
+- **Lille's rail is therefore a HYBRID or an OSM job, and it is an owner
+  call**: tram from MEL's WFS - first-party, named, carrying the operator -
+  with metro from OSM via `osm-rail`; or both from OSM for consistency.
+  ⚠️ **MEL's WFS licence is UNREAD.** MEL is a different publisher from
+  ilevia, whose GTFS is `lov2`, so **the feed's licence says nothing about the
+  WFS** - the standing rule that a portal is a reason to expect permissive
+  terms rather than evidence of them.
+
 ### 2026-09-23 - check_stale_claims category A was reporting three findings and none of them was real
 
 - **The detector paired a future-tense marker with any built-city name on the
@@ -461,6 +1140,64 @@ onwards; the early ones are split by phase rather than by hour.
   known false positives disappear, and a `Boston is not yet built` injected
   into `project_context.md` is still caught - a proximity window that had been
   tightened too far would have passed the first test and failed the second.
+### 2026-09-23 - The four French followers are country-ready, not brief-ready, and Lille has no line geometry
+
+- **Asked whether the other French cities are brief-ready. They are not, and
+  no brief file exists for any of them.** They inherit the expensive half -
+  one register, one `siret` join, no geocoder, validated commune prefixes,
+  privacy masked upstream - but **three things do not transfer from Paris**,
+  and the first is the one that could change an answer rather than confirm
+  one.
+
+- **Their GTFS licences differ from Paris's AND from each other.** Paris is
+  `mobility-licence`, read in full at the cost of a full agent pass.
+  **Marseille and Lille are `lov2`. Toulouse and Rennes are `odc-odbl` -
+  share-alike.** None of Paris's reading applies to any of them. ODbL asks
+  precisely the derivative-database question that Licence Mobilites answered
+  its own way, via a **published NAP interpretation** that filed this
+  project's shape under "no resharing required"; **ODbL has no such gloss**,
+  and this project commits `outputs/<city>/` to a public repository. An ODbL
+  read is running.
+
+- **Scope does not transfer either, and Paris's own reasoning is why.** Paris
+  went commune-only because **all 16 metro lines survived the boundary** -
+  that was a measurement, not a preference. **Lille's commune is small against
+  the Metropole Europeenne de Lille**, whose metro serves Villeneuve-d'Ascq,
+  Roubaix and Tourcoing. Each follower needs its own boundary-vs-network
+  measurement: the Dublin question, four more times.
+
+- **The four feeds had been IDENTIFIED and never DOWNLOADED, and verifying
+  them found a structural problem.** **Lille's GTFS has NO `shapes.txt`** - so
+  **line geometry cannot be drawn from it at all**, against an invariant that
+  every drawn line carries real geometry plus a permanent label plus a legend
+  entry. Either reconstruct polylines from stop sequences or take Lille's
+  geometry from OSM. **This is the kind of thing that is invisible until the
+  artifact is opened**, which is exactly what `add-country` says about
+  identifying a feed versus reading one.
+
+- **Two of the four self-attest and two do not.** Marseille declares
+  `feed_end_date` **2026-12-31** and Rennes **2026-10-18**; **Toulouse and
+  Lille carry no `feed_info.txt`**, the same gap as Paris, so
+  `fetch_sources.py` must record the download date for those two or staleness
+  is unknowable from the artifact.
+
+- **Two apparent gates were my own truncated URLs, and the error text said
+  so.** Marseille returned **403 "Invalid access key: 60327e505a214c77303f52206f11"**
+  and Toulouse **404 "Unknown image: fc1dda89077cf37e4f7"** - both because an
+  earlier probe printed URLs at 88 characters and the visible prefix was
+  copied. **A 403 that names the key you sent is telling you the key is wrong,
+  not that you are refused**, and a 404 naming the id says the same. With the
+  untruncated `original_url` both return 200. Marseille's `apiKey` is
+  published in the NAP URL and is not a credential gate.
+
+- **Two mode questions surfaced that are judgment calls rather than
+  measurements.** Toulouse carries **`route_type 6`**, an aerial lift - the
+  Teleo cable car - and Paris draws a funicular, so a gondola is not an
+  automatic include or exclude. Marseille carries **17 `route_type 2`** which
+  are TER regional rail and fall under the standing commuter-rail exclusion,
+  plus **6 ferry routes**. Recorded on the PLAN item so neither is discovered
+  mid-build.
+
 ### 2026-09-23 - PLAN.md gains the handoff it was missing, and Paris reverified
 
 - **Five brief-ready cities had a brief with passing checks and NO item in

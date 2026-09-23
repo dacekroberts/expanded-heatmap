@@ -282,14 +282,34 @@ at one code of four.
 
 ## The naming problem, and the guard that makes the fallback safe
 
-| Field | Populated |
-|---|---|
-| `enseigne1Etablissement` | 29.1% |
-| `denominationUsuelleEtablissement` | 34.2% |
-| **Either — any premises name** | **42.9%** |
+| Field | Populated | Sample |
+|---|---|---|
+| `enseigne1Etablissement` | 29.1% | 3.9% scan |
+| `denominationUsuelleEtablissement` | 34.2% | 3.9% scan |
+| **Either — any premises name** | **39.6%** | ✅ **12.6% scan, 14,884 rows** |
 
-**Paris is the worst-named of France's six cities** (Rennes is 54.3%), which
-inverts the usual assumption that the flagship carries the best data.
+⚠️ **The combined figure read 42.9% until 2026-09-23, and that was never
+Paris's number — it was FRANCE's.** This table imported the national aggregate
+from `pipeline/countries/france.py` and captioned it as Paris's, while that
+same file carried the Paris-specific rate, **38.4%**, five lines above it. The
+conclusion drawn ("worst-named of the six") was right; the number supporting it
+belonged to a different population. **A country profile's national aggregate
+and a city's own rate are two different numbers.**
+
+The replacement **39.6%** comes from a 12.6% one-pass scan of all six cities,
+and it agrees with the old Paris-specific 38.4% — which is the tell that 42.9%
+was never measuring this city. The two component rows are left on their
+original sample and labelled rather than rescaled: **rescaling them would be
+inventing numbers**, and mixing samples inside one table is the error that
+produced a false "correction" to Marseille's figure the same day.
+
+**Paris is the worst-named of France's six cities** (Rennes is **53.5%**, the
+best), which inverts the usual assumption that the flagship carries the best
+data. Full six-city table in `docs/france_step0_endpoints.md`.
+
+**This changes no build step.** Pins are *name where it exists, address
+otherwise*, so the share gates nothing — but it is the figure any prose about
+Paris must quote.
 
 ### The fallback is worth building — and the guard is load-bearing
 
