@@ -65,14 +65,21 @@ blocker their band did not. Band D dissolved: its two live sub-tiers were
 about different things and were siblings only because both arrived through
 the same screen.
 
+**Band E was added the same day** for a state the scheme could not express:
+a city whose screening is **complete and successful** but which yields only
+one bucket. Those two were sitting in "a decision to make" beside a city
+waiting on a licence read, which conflated *we have not looked yet* with
+*we looked at everything and this is what is there*.
+
 | Band | The work that unblocks it | Cities | Change |
 |---|---|---|---|
 | 🟢 **A** | **Nothing** — build now | **3** | ✅ **−4 built** — Madrid and Barcelona joined Mexico's two; Paris out then back, **measured both ways** |
-| 🔵 **B** | **A document to read, or a decision to make.** Never a probe | **3** | ▲ **+Tel Aviv**; ▲ **+Zurich** from D — its blocker became an answer |
+| 🔵 **B** | **A document to read, or a decision to make.** Never a probe | **1** | ▲ **+Tel Aviv**; ▼ −Stockholm, −Zurich to the new E |
 | 🟡 **C** | **A geocoding leg** — build work, known cost | **19** | ▲ **+Bucharest**, ▲ **+Rio** (re-filed — it was banded by how it was *discovered*) |
 | 🟠 **D** | **One probe each**, none yet run to a conclusion | **3** | was `D-a`; ▼ −Zurich |
-| 🔴 **E** | **Access blocked** — the register exists, we cannot reach it | **3** | was `D-b`; promoted to a band because it is a different problem from D's |
-| *Discarded* | Measured negative, evidence named | *27* | ▼ **+13** |
+| 🟣 **E** | **One bucket, but developable** — screening complete, product judgement outstanding | **2** | ✨ **NEW** — Stockholm and Zurich, both confirmed one-bucket by enumeration |
+| 🔴 **F** | **Access blocked** — the register exists, we cannot reach it | **3** | was `D-b`, then E; renumbered |
+| *Discarded* | Measured negative, evidence named | *27* | unchanged — **neither one-bucket city was discarded** |
 
 **A caption names a blocker, never a date or a status.** `D-a` was briefly
 captioned *"all four PROBED 2026-09-22"*, which reads as progress and is
@@ -140,16 +147,16 @@ So the next *unstarted* city is the question.
 and only owner decisions left. After that the screen has no city whose
 "what remains" column is empty.
 
-## 🔵 Band B — one call away: a document to READ or a decision to MAKE (3 cities)
+## 🔵 Band B — one call away: a document to READ or a decision to MAKE (1 city)
 
-**Nothing here needs another probe.** Each city is held by something
-answerable at a desk — a licence page nobody has opened, or a judgment only
+**Nothing here needs another probe.** The city is held by something
+answerable at a desk — a licence page nobody has opened, and a judgment only
 the owner can make. That is why the caption is not "one question": Tel Aviv
 carries one of each, and both are still desk work.
 
-**Stockholm and Zurich are held by the SAME decision**, which is the useful
-thing this band now shows: settle whether a one-bucket food page belongs in
-this project and two cities move at once.
+**Stockholm and Zurich left this band on 2026-09-22** for the new Band E,
+once enumeration confirmed both are one-bucket. What holds them is not a
+question about their data — it is a judgement about the product.
 
 **▲▲ Tel Aviv** 🇮🇱 — **promoted from Band D-b on 2026-09-22, and it is the
 strongest unbuilt result outside Band A.** It had been carried as
@@ -212,22 +219,6 @@ had a register, which raises the prior sharply."* **The prior was wrong.**
 Madrid and Barcelona are the exceptions in Spain, not the rule — see
 "Spain is a two-city country" below.
 
-**▲ Stockholm** 🇸🇪 — **upgraded from D-c on 2026-09-22.** Screening is
-DONE: a public ArcGIS FeatureServer carrying **8,146 distinct food premises**
-with WGS84 points, 100% trade names and 96.9% addresses, updated daily. It
-carried two questions; **the licence one was answered on 2026-09-22** (see
-below), so **one remains, and it is an owner decision rather than a probe**:
-
-1. **Scope.** It is **one bucket** — food. Stockholms stad has 291 datasets
-   and exactly one commercial register; `restaurang` and `företag` both
-   return **0** inside its own catalogue, and Sweden has no general business
-   licence. A Stockholm page would be a food-density map.
-2. **Licence.** `dataportal.se` says `Åtkomsträttigheter: Begränsad`
-   (restricted); the ArcGIS item says `access: public` and serves without
-   credentials; `licenseInfo` is empty. **Ambiguous in a way that matters** —
-   `read-licence` step 8 — so it needs the publisher asked. That it fetches is
-   not a finding that it is licensed.
-
 ## 🟡 Band C — a geocoding leg, and that is the dominant cost (19 cities)
 
 Build work with a known cost: every one of these has a business leg that is
@@ -283,7 +274,89 @@ it no longer holds a question, only a scope decision.
 | **Dublin** 🇮🇪 ⚠️ | **`valoff.ie` is not a host that is down — it is RETIRED**, and was retried twice as an outage. `data.gov.ie` catalogues a **Valuation Office API** at **CC BY 4.0**, whose one resource is `https://tailte.ie/home/api/`: **Tailte Éireann absorbed the Valuation Office**, and `tailte.ie` answers 200. The deciding question is unchanged — does the Irish rateable register carry a **use category**, where the UK's NNDR did not? |
 | **Singapore** 🇸🇬 ⚠️ | **Not a loose search — an INERT one.** `zzqqxxnonsense` returns the **identical ten datasets** as `licence`, `food establishment` and `business`: the `query` parameter is ignored entirely, and only the nonsense control separates that from looseness. The catalogue is **4,628 datasets over 463 pages** and pages correctly, so the route is **enumeration, not search**. The registered-office suspicion is still untested — nothing has been learned about the data yet |
 
-## 🔴 Band E — access blocked: the register exists and we cannot reach it (3 cities)
+## 🟣 Band E — one bucket, but developable (2 cities)
+
+**Screening is COMPLETE for both, and both passed.** Each has a real
+premises-level register with coordinates, current data and a usable licence.
+What neither has is a **second bucket** — and the owner's bar is that two is
+acceptable and one is not.
+
+**This is not "we could not find a second register".** Both negatives were
+re-established on 2026-09-22 by **enumerating the whole catalogue** rather
+than searching it, because the original negatives rested on keyword searches
+and that is the method that has failed this project most often — Stockholm's
+own food register is called *Tillsynsverksamheter*, "supervision activities",
+which matches neither `restaurang` nor `livsmedel`.
+
+| | Stockholm 🇸🇪 | Zurich 🇨🇭 |
+|---|---|---|
+| **Catalogue enumerated** | **309 datasets** (Entryscape, by resource-URI prefix) | **1,128 dataset names** (CKAN `package_list`) |
+| **The one register** | `Tillsynsverksamheter - Livsmedel` — **8,146 distinct premises** from 289,742 inspection rows, 100% trade names, 96.9% addresses, daily from Ecos 2 | `Gastwirtschaftsbetriebe` — licensed by the city police's *Bewilligung Gastro* unit |
+| **Licence** | **SILENT** — the publisher's own feed says `accessLevel: public` on all 109 of its datasets | ✅ **CC0** |
+| **What a second bucket would have been** | `Salutorg`, `Torghandelsplats` — **polygons**, *"i form av ytor"*: zones where trading is permitted, not traders | `geo_bauernhofladen` — **not shops**: *"Betriebszentren von Haupterwerbslandwirten"*, farmers' operating centres |
+| **Everything else that matched** | 3 × social care (`Daglig verksamhet`), 1 utility service area | `standorte` of counting stations, contaminated sites, historic cinemas, tram ticket offices |
+
+**Why neither is discarded.** Nothing here is unresolved or unreachable —
+the work is done and the answer is *one bucket*. That is a **product
+judgement**, not a data defect, and it can change: a second source may
+appear, or a food-density page may become worth shipping. **A discard would
+throw away two complete screenings to record a preference.**
+
+**Both countries are structurally one-bucket, which is why no further probe
+helps.** Sweden has **no general business licence** at all, so retail and
+personal services have no municipal source to find; Switzerland's national
+**STATENT is aggregate**. This is the Hong Kong distinction inverted — there
+the register exists and we cannot reach it; here we have reached everything
+and only one register exists.
+
+**If one is ever taken, take Zurich first on licence and Stockholm first on
+size** — Zurich's register is CC0 against Stockholm's silence, and
+Stockholm's 8,146 premises are the larger map.
+
+
+---
+
+### The two cities in full
+
+**▲ Stockholm** 🇸🇪 — **upgraded from D-c on 2026-09-22.** Screening is
+DONE: a public ArcGIS FeatureServer carrying **8,146 distinct food premises**
+with WGS84 points, 100% trade names and 96.9% addresses, updated daily. It
+carried two questions; **the licence one was answered on 2026-09-22** (see
+below), so **one remains, and it is an owner decision rather than a probe**:
+
+1. **Scope.** It is **one bucket** — food. Stockholms stad has 291 datasets
+   and exactly one commercial register; `restaurang` and `företag` both
+   return **0** inside its own catalogue, and Sweden has no general business
+   licence. A Stockholm page would be a food-density map.
+2. **Licence.** `dataportal.se` says `Åtkomsträttigheter: Begränsad`
+   (restricted); the ArcGIS item says `access: public` and serves without
+   credentials; `licenseInfo` is empty. **Ambiguous in a way that matters** —
+   `read-licence` step 8 — so it needs the publisher asked. That it fetches is
+   not a finding that it is licensed.
+
+**▲ Zurich** 🇨🇭 — **moved here from Band D on 2026-09-22, and it is the
+same decision as Stockholm's.** It sat in the probe band while its open item
+was described as "no second bucket found". That is now **measured absent**,
+which is an answer rather than a question:
+
+| Term searched on `data.stadt-zuerich.ch` | Hits | What they actually are |
+|---|---|---|
+| `zzqqxxnonsense` **(control)** | **0** | the filter is real |
+| `detailhandel` | **1** | a **traffic count** |
+| `verkauf` | 12 | tram ticket offices, apartment sale prices |
+| `laden` | 31 | a farm shop, population surveys, tariffs |
+| `gewerbe` | 28 | zoning land, 3D roof models |
+| `firmen` | 16 | **every one a `Firmenbefragung`** — a company *survey*, 2005–2025 |
+
+Only **`Gastwirtschaftsbetriebe`** is a register: premises-level, GeoJSON,
+food. The national STATENT is aggregate. **So Zurich is a one-bucket food
+city, exactly Stockholm's shape**, and the question it now carries is the
+same one — *does a food-density page belong in a project whose other cities
+carry three buckets?* **Answer it once and two cities move together.**
+
+---
+
+## 🔴 Band F — access blocked: the register exists and we cannot reach it (3 cities)
 
 **None of these is a data negative, and the distinction is the whole point of
 the band.** Rail is answered for all three. What is missing is a route to a
@@ -1216,26 +1289,6 @@ the difference between this and Jakarta, where no activity field existed at all.
    > Archive, as Barcelona's and Sevilla's were read) and any city-wide open
    > data policy page. **A letter is no longer the next step, and never was
    > the first one.**
-
-**▲ Zurich** 🇨🇭 — **moved here from Band D on 2026-09-22, and it is the
-same decision as Stockholm's.** It sat in the probe band while its open item
-was described as "no second bucket found". That is now **measured absent**,
-which is an answer rather than a question:
-
-| Term searched on `data.stadt-zuerich.ch` | Hits | What they actually are |
-|---|---|---|
-| `zzqqxxnonsense` **(control)** | **0** | the filter is real |
-| `detailhandel` | **1** | a **traffic count** |
-| `verkauf` | 12 | tram ticket offices, apartment sale prices |
-| `laden` | 31 | a farm shop, population surveys, tariffs |
-| `gewerbe` | 28 | zoning land, 3D roof models |
-| `firmen` | 16 | **every one a `Firmenbefragung`** — a company *survey*, 2005–2025 |
-
-Only **`Gastwirtschaftsbetriebe`** is a register: premises-level, GeoJSON,
-food. The national STATENT is aggregate. **So Zurich is a one-bucket food
-city, exactly Stockholm's shape**, and the question it now carries is the
-same one — *does a food-density page belong in a project whose other cities
-carry three buckets?* **Answer it once and two cities move together.**
 
 **A second Swedish city worth noting:** `dataportal.se` shows **Göteborgs
 stad** publishing *both* `Livsmedelsverksamheter` ("alla aktiva

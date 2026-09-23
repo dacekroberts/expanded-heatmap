@@ -993,6 +993,57 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Confirmed Stockholm and Zurich are genuinely one-bucket by ENUMERATING
+  both catalogues, after the original negatives rested on keyword search.**
+  Stockholm: **309 dcat:Dataset records** pulled from the Entryscape store via
+  a wildcard on the `https://resources.stockholm.se/data/` resource prefix -
+  the publisher filter that `context:` and `publisher:` had both failed to be.
+  Seven carry any commerce term: the food register, three social-care services
+  (`Daglig verksamhet`), a utility service area, and **`Salutorg` /
+  `Torghandelsplats`, which their own descriptions call *"i form av ytor"* -
+  polygons of where trading is permitted, not registers of traders.** Zurich:
+  all **1,128 package names** matched, since `package_search` had stopped at
+  938 of 1,128 and a negative over 83% of a catalogue is not a negative. Its
+  only real commercial datasets are `Gastwirtschaftsbetriebe` (licensed by the
+  city police's *Bewilligung Gastro* unit, **CC0**), its historic copy, a
+  tourism board's gastronomy list, aggregate federal hotel statistics, and
+  `geo_bauernhofladen` - which is **not shops** but *"Betriebszentren von
+  Haupterwerbslandwirten"*, farmers' operating centres. Touched
+  `docs/city_master_list.md`.
+
+- **The keyword method was the thing worth re-testing, and Stockholm is its
+  own counter-example.** The recorded negative was *"`restaurang` and
+  `foretag` both return 0 inside its own catalogue"*. Stockholm's food
+  register is called **`Tillsynsverksamheter`** - "supervision activities" -
+  and contains neither word, so the search that established the negative could
+  not have found the one dataset that disproves the strongest version of it.
+  A negative from search is a statement about the search.
+
+- **Created Band E, "one bucket, but developable", rather than discarding two
+  complete screenings.** The owner's bar is that two buckets is acceptable and
+  one is not, which disposes of both cities today - but neither is unresolved
+  or unreachable, and nothing further can be probed: **Sweden has no general
+  business licence at all** and **Switzerland's STATENT is aggregate**, so both
+  countries are structurally one-bucket. What holds them is a **product
+  judgement, not a data defect**, and that can change. Rejected discarding
+  them, which would have recorded a preference by destroying evidence. The old
+  Band E (access blocked) became **Band F**; counts are A3 B1 C19 D3 E2 F3 =
+  **31**, verified. The two states are opposites worth keeping apart: Band F
+  is *the register exists and we cannot reach it*; Band E is *we reached
+  everything and only one register exists*.
+
+- **Corrected a placement error of my own: Zurich's write-up had been inserted
+  into the "CLOSED - the former Tier 5" section, not Band B.** The insert
+  anchored on the phrase *"A second Swedish city worth noting"*, which occurs
+  exactly once in the file and turned out to sit in the tier evidence trail
+  rather than in the band. The assertion that the anchor was unique passed and
+  was the wrong question - **uniqueness is not location.** For an hour the
+  summary table said Band B while the city's evidence sat under a heading
+  reading CLOSED. Caught while restructuring, by checking the nearest
+  preceding heading rather than trusting the earlier "is Zurich in Band B"
+  substring test, which had searched a slice that no longer matched the file.
+
+
 - **Audited every candidate row against its own band's definition, and five
   named a blocker their band did not.** The test came from the Rio correction:
   a band caption states what is stopping its cities, so a row whose text names
