@@ -180,15 +180,38 @@ was removed.**
 
 ## What is NOT settled
 
-- **Per-operator GTFS licences** — six feeds, none read.
-- **The taxonomy.** NAF is NACE-shaped, but `premises-taxonomy`'s deciding
-  measurement — the **catch-all share at each level** — has not been run.
-  Barcelona keys at its finest level and Madrid near the top of an identically
-  shaped scheme, so there is no default to inherit. Use `brief_check.py`'s
-  `taxonomy_catchall`.
+**Updated 2026-09-22 after the three pre-ship items were run.** The first three
+entries here previously said the licences and the taxonomy were unread and
+unrun; both are now done and are written up below. Left uncorrected, that is
+exactly the future-tense-about-an-arrived-present that `check_stale_claims.py`
+reports on.
+
+**Resolved — see the sections below:**
+
+- ✅ **Per-operator GTFS licences** — read. Paris and Lyon are
+  `mobility-licence` (**PERMITTED WITH CONDITIONS**, full write-up in
+  `docs/licenses/france-required-notices.md`), Marseille and Lille `lov2`,
+  Toulouse and Rennes `odc-odbl` share-alike.
+- ✅ **The taxonomy** — NAF keys at the **sous-classe**, on a measured
+  catch-all share of 18.7 / 49.4 / 27.8 / **19.3%**.
+- 🟡 **Station density** — 4 of 6. **Lyon and Rennes are UNMEASURED**, not
+  zero.
+
+**Genuinely open:**
+
+- ⚠️ **Paris's GTFS provenance.** Two readings of the NAP disagree over whether
+  IDFM publishes an official GTFS or only NeTEx plus third-party copies.
+  **Resolve before fetching** — building from a modified mirror under an
+  unverified licence is not acceptable.
+- ⚠️ **Lyon is gated three ways** — an account the owner must create, a
+  trademark clause that collides with the on-map line-label invariant, and the
+  project's second indemnity. Gate items 17–19.
+- ⚠️ **Whether the annual *déclaration de conformité* applies** to a static
+  density map. Creates a recurring obligation, so worth asking.
+- ⚠️ **City scope.** The commune is far smaller than the transit network —
+  French cities may need Dublin's regional treatment.
 - **Whether `enseigne` or `denominationUsuelle` should be preferred** when both
-  are present, and what a pin shows when neither is.
-- **Station density per city** — the number that actually ranks the six.
+  are present, and what a pin shows when neither is — which is ~57% of rows.
 - **The `etablissementSiege` flag does not separate premises from offices in
   France**: 90.8% of active bucket rows are sièges, because a sole trader's
   shop is its own siège. Recorded so nobody tries it as a filter.
