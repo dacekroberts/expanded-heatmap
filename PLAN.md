@@ -21,6 +21,93 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [ ] **🇫🇷 PARIS — scaffolded on branch `paris-build`, steps 1 and 2 unwritten.**
+
+  Three commits: `5e0e3c6` (the national `france_naf` taxonomy, the scaffold,
+  Lambert-93), `ab47e24` (the decision record), `28b3b91` (the three source
+  rows and notice 24). Step 0 is banked in `docs/build_briefs/paris.md` (7/7)
+  and the national facts in `pipeline/countries/france.py`; **both owner calls
+  are settled** — commune-only scope, and the Milan hybrid for pin names. What
+  follows is only what is specific to Paris; everything generic is `add-city`
+  from Step 4.
+
+  ⚠️ **DO NOT MERGE THIS BRANCH TO MASTER UNTIL THE BUILD FINISHES.** Paris is
+  already an entry in `app/cities.py`, so a merge now puts a Paris marker on
+  the macro map pointing at a page with no `outputs/paris/heatmap.html` behind
+  it. This is the one item on this list that breaks the live site rather than
+  delaying it.
+
+  1. **`fetch_sources.py`** — three downloads, and one deliberate non-download.
+     IDFM's GTFS (`eu.ftp.opendatasoft.com/stif/GTFS/IDFM-gtfs.zip`), SIRENE
+     `StockEtablissement` **parquet** (2,210 MB — not the 2,867 MB ZIP) and
+     INSEE's geolocation parquet (811 MB). **`StockUniteLegale` is NOT needed**:
+     it exists to feed the natural-person suppression guard, and the Milan
+     hybrid removes the legal-name fallback that guard protected, so the 30 M
+     row file is not downloaded at all. ⚠️ **Record the download date**: the
+     feed carries no `feed_info.txt`, so nothing inside the artifact declares
+     when it was current, and notice 24 (Art. 5.7) requires both that date and
+     the update interval to be *displayed*. Capture them here or they cannot be
+     shown honestly later.
+  2. **`step1_stations.py`** — `route_type 1` only. Commuter rail (RER,
+     Transilien) and tram are excluded by standing rule, not by scope, so the
+     boundary is not what drops them. Expect **245 stations inside the commune
+     and 77 outside**, all 16 lines surviving. The 77 go to
+     `outputs/paris/excluded_stations.csv`, which
+     `app/pages/21_Paris_Heatmap.py` **already cites** — `check_provenance.py`
+     stays red until it exists. Naming the commune each excluded station sits
+     in needs a multi-commune layer, so this is **Los Angeles' step 1 shape,
+     not San Diego's**; `geo.api.gouv.fr` can resolve the names.
+  3. **`step2_clean_businesses.py`** — the traps are all measured, and each one
+     fails silently rather than loudly:
+     - active is the **letter `A`**, never the label `Actif` (which returns
+       zero rows for all six French cities — keep Paris as the control);
+     - `codeCommuneEtablissement` prefix **`751`**;
+     - `statutDiffusionEtablissement == "O"` (13.4% masked at source);
+     - join geolocation on `siret`, and **read the per-row `epsg` column**
+       rather than hard-coding 2154 — the DOM values are real;
+     - drop `qualite_xy` **class 33**, which is commune-centroid grade and must
+       not be drawn as a street address;
+     - name = `enseigne1Etablissement` or `denominationUsuelleEtablissement`,
+       **else the address** (42.9% carry either; Paris is the worst-named of
+       France's six cities).
+  4. **Two measurements this build owes, both currently unmeasured.** The
+     market-stall codes `47.81Z/47.82Z/47.89Z` are excluded in `france_naf.py`
+     on reasoning whose supporting share **nobody has counted** — count it, and
+     if it is large, re-take the call rather than leaving the footnote. And
+     sample the five `CATCH_ALL_CODES`, `96.09Z` first at **8.6%** of bucket
+     rows, then put the verdict in `pipeline/paris/config.py` as an exclusion
+     list. The national module deliberately does not make either call.
+  5. **`step3_map.py`** — 16 `LINE_SHAPES`, each with the name riders use
+     (M1–M14 plus 3bis and 7bis, which are separate lines and not variants).
+     ⚠️ **IDFM's network plans are CC BY-NC-ND 3.0 France**: redraw from
+     `shapes.txt` only, and use no IDFM schematic as a source or an overlay.
+     `label_focus` is the commune polygon.
+  6. **Checks, in order.** Add Paris to `scripts/check_personal_exposure.py`'s
+     `REGISTRIES` and run it; `drift_check.py paris`; `check_provenance.py`
+     (two failures are currently **correct** and must clear by being *fixed*,
+     not relaxed — the missing CSV, and `city_master_list.md` still saying
+     `Built - 20`, which becomes true to bump only once Paris really is built);
+     **measure** Paris's macro-map label width in a real browser with Space
+     Grotesk loaded and add it to `check_macro_labels.py` (it refuses a guessed
+     width); `check_deploy_imports.py --ref paris-build`; then `deploy-verify`
+     with scope `city-added`, and a **reboot** after the push.
+  7. **Page prose carries two obligations no other city's does.** Notice 24
+     needs the snapshot date and update interval *displayed*, and Art. 5.7's
+     duty is the inverse of MTA's — it requires **exhaustivité**, so the page
+     must state what was excluded (commuter rail, tram, the 77 out-of-commune
+     stations) rather than leave it implicit. Art. 5.4(a) also prescribes the
+     **linking**, which `render_site_notices()` has never had to do.
+
+  **Still open, none of it blocking:** whether `enseigne1` or
+  `denominationUsuelle` wins when both are present (cosmetic now that neither
+  path reaches a person's name); whether the annual *déclaration de conformité*
+  applies to a static density map (L. 1115-5 — worth asking
+  `donnees-mobilite@autorite-transports.fr` rather than assuming, because it
+  creates a *recurring* duty); and IDFM's own licences page contradicting the
+  NAP by calling its *tracés* Licence Ouverte, where **the stricter reading was
+  adopted deliberately** and would change this city's notice if ever relied on.
+
+
 - [ ] **🇫🇷 Validate the SIRENE storefront filter against OSM in the FIRST
   non-Paris French city built — not in all five, and not skipped.**
 

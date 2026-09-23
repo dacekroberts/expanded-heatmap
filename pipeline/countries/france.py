@@ -322,12 +322,34 @@ DEFERRED = {"lyon": "account + trademark + indemnity; see gated_access 17-19"}
 PARIS_GTFS_PROVENANCE_RESOLVED = True
 PARIS_GTFS_URL = "https://eu.ftp.opendatasoft.com/stif/GTFS/IDFM-gtfs.zip"
 
-# It SELF-ATTESTS, which is the property `add-country` requires before a feed
-# is trusted: `metadata.end_date` 2026-10-21, and it declares its own
-# `features` - "position des stations", "topologie du reseau", "traces de
-# lignes" - and `modes`: bus, tramway, subway, funicular, gondola, rail.
-# The declared end_date also supplies the UPDATE INTERVAL that Art. 5.7 and the
-# MMTIS reglement require this project to display.
-PARIS_GTFS_SELF_ATTESTS = True
+# ⚠ CORRECTED 2026-09-23. This said True, and it was wrong.
+#
+# `add-country`'s rule is that a feed is trusted when THE ARTIFACT self-attests
+# to its own freshness. This one does not: `brief_check.py`'s
+# `idfm-gtfs-has-shapes-and-no-feed-info` measured **14 files and NO
+# feed_info.txt**, so the zip declares no validity window at all. The
+# `end_date` of 2026-10-21 is real but it is `transport.data.gouv.fr`'s
+# metadata ABOUT the feed - the NAP's assertion, not the file's - and that is
+# precisely the weaker thing `add-country` tells these two apart for: *a mirror
+# is usable when the artifact self-attests, and is not when you must take the
+# mirror's word.*
+#
+# The feed is still the right one; provenance was never the question, since the
+# host is IDFM's own (`stif/` on Opendatasoft). What changes is HOW STALENESS
+# IS DETECTED - from the NAP metadata or a content hash, never from the zip -
+# and it changes a COMPLIANCE item, which is why this constant matters beyond
+# bookkeeping: notice 24 (Licence Mobilites Art. 5.7) requires this project to
+# DISPLAY the data's last-updated date and its update interval, and neither
+# value exists inside the artifact. `fetch_sources.py` must capture both at
+# download time or they cannot be shown honestly.
+#
+# The `features` and `modes` declarations quoted in the old comment are real,
+# but they are NAP metadata too - they describe the feed, they do not date it.
+PARIS_GTFS_SELF_ATTESTS = False
+
+# Where the two Art. 5.7 values actually come from, since the artifact has
+# neither. Recorded here rather than in Paris's config because all five cities
+# of BUILD_SEQUENCE read this feed's publisher under the same licence.
+PARIS_GTFS_FRESHNESS_SOURCE = "transport.data.gouv.fr NAP metadata, not the zip"
 
 SOURCE_ENCODING = "utf-8"
