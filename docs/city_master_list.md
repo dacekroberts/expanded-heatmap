@@ -310,6 +310,22 @@ screen — against the worst geocoding problem and a two-bucket ceiling.
 **Still the biggest open decision in this list**, and a judgment call rather
 than a probe.
 
+## ⚠️ OPEN SCREENING GAP — Rome and Turin were never probed (2 cities)
+
+**Not candidates yet and not discards — unscreened.** `global_country_shortlist.md`
+records *"Italy stays a Milan-only country"*, but that rests on **Naples** and
+**Messina** measuring out. **Rome and Turin appear nowhere in any list**, which
+`add-country` is explicit about: a row whose reason is "not reached" is not a
+discard.
+
+| City | What the catalogue holds | What is still unknown |
+|---|---|---|
+| **Rome** 🇮🇹 | `dati.comune.roma.it`, CKAN, **365 datasets**. Carries **`elenco-delle-attivita-produttive-del-suap-di-roma-capitale-anno-2025`** and its 2024 edition — SUAP is the *Sportello Unico Attività Produttive*, the one-stop business register every comune runs, and **2025 is current** | **Schema unread** — the host failed its TLS handshake *after* the catalogue answered. The **LOCATION and ACTIVITY** columns have not been checked separately |
+| **Turin** 🇮🇹 | `aperto.comune.torino.it`, CKAN, **2,118 datasets**, 143 with a commerce term. Its naming makes the Messina distinction itself: `aperte`/`chiuse` are the FLOW, **`presenti` is the STOCK**. Geoportale also publishes **SHP**, so geometry exists. **CC-BY** | ⚠️ **The series STOPS AT 2019** — latest `presenti` is 2019, geoportale layer last modified 2019-05-17. Six years stale against a project mapping *current* density. Schema unread; `risorse.comune.torino.it` timed out at TCP connect |
+
+**Neither changes the Italy profile answer** — Italy is bespoke per city, so
+each would be its own Step 0 regardless. See `DECISIONS.md`, 2026-09-22.
+
 ## 🟣 Band D — one bucket only: complete, but narrower than the others (2 cities)
 
 **Screening is COMPLETE for both, and both passed.** Each has a real
