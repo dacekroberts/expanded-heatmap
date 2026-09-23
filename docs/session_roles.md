@@ -119,6 +119,27 @@ intermediate dead ends are worth keeping out of the caller's context.
 | `licence-read` | One source, four possible verdicts. Most pages opened say nothing about reuse; Spain's two cities cost more licence reading than the nine US cities combined, and most of it was irrelevant pages |
 | `deploy-verify` | A noisy start/check/stop sequence with a short findings list, and it needs the browser rather than the repo |
 
+### An agent's `description` has a length ceiling, and exceeding it fails SILENTLY
+
+**Measured 2026-09-22, by breaking it.** `deploy-verify`'s frontmatter
+`description` was extended from **755** characters to **1038**, and the agent
+**stopped being offered at all** - no error, no warning, no entry in the
+available agent types. It simply was not there, and the thing that was not
+there is the publish gate.
+
+Known points: **670 registers** (`licence-read`), **755 registers**
+(`deploy-verify` before the edit), **1038 does not**. The exact ceiling is
+unknown and is probably 1024.
+
+**Keep a `description` at or under 750 characters**, and put everything else in
+the body, which has no such limit. The description exists to help a caller
+decide whether to invoke the agent; the reasoning belongs where the agent reads
+it, not where the harness parses it.
+
+**And check the agent is still listed after editing one.** A skill that fails
+to load is usually noisy; an agent that fails to register is not, and the only
+symptom is an absence you have to notice.
+
 ### Country screening is NOT one of them, and this is a measured position
 
 It looks like a perfect fan-out — many countries, independent probes, a table
