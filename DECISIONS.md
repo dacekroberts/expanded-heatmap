@@ -934,6 +934,63 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Audited every candidate row against its own band's definition, and five
+  named a blocker their band did not.** The test came from the Rio correction:
+  a band caption states what is stopping its cities, so a row whose text names
+  something else is misfiled. Found: **Milan** in "screening COMPLETE" while
+  its row said *"Step 0 schemas"*; **Tel Aviv** and **Stockholm** both in "one
+  narrow question each" while both rows said *"two questions"* - Stockholm's
+  saying *"two rather than one"* outright; **Bucharest** in a band captioned
+  "no further probing changes these" while its row said *"two cheap checks
+  still outstanding and are screening, not build work"*; and **Zurich** in the
+  probe band after its second bucket had been measured absent. Touched
+  `docs/city_master_list.md`.
+
+- **Milan was checked rather than re-banded, and stayed put.** Its row read
+  "Step 0 schemas for the two newly found layers", which reads as screening
+  inside a band that claims screening is complete. The country row settles it:
+  *"Step 0 schemas for the two newly found Milan layers. **Nothing to
+  discover**"* - the work is capturing column schemas for layers already
+  confirmed, i.e. build prep. Only the wording was wrong, and it was the
+  wording that changed. **An audit that finds a mismatch has still not
+  established which side is wrong.**
+
+- **Re-banded the candidates so every caption names the KIND OF WORK that
+  unblocks its cities, and dissolved Band D.** Its two live sub-tiers were
+  about different problems and were siblings only because both arrived through
+  the same screen - the same provenance-not-blocker error that misfiled Rio,
+  one level up. Now **A** build now (3), **B** a document to read or a
+  decision to make (3), **C** a geocoding leg (19), **D** one probe each (3),
+  **E** access blocked (3); 31, and the counts were verified to sum before
+  publishing. Rejected keeping D with sub-tiers, because a sub-tier is where a
+  mis-banded city hides.
+
+- **Moved Zurich to Band B, where it turns out to share Stockholm's exact
+  decision.** Its second bucket is measured absent - control passes, and
+  `detailhandel` returns **one** result which is a traffic count, while
+  `firmen` returns 16 and every one is a `Firmenbefragung`, a company survey.
+  Only `Gastwirtschaftsbetriebe` is a register. So Zurich is a one-bucket food
+  city, exactly Stockholm's shape, and the two now carry **one decision
+  between them**: whether a food-density page belongs in a project whose other
+  cities carry three buckets. That consolidation was invisible while the two
+  sat in different bands for different stated reasons.
+
+- **Band B's caption is "a document to READ or a decision to MAKE" rather than
+  "one narrow question", because Tel Aviv legitimately carries one of each.**
+  The alternative was moving a city that is the strongest unbuilt result
+  outside Band A, or widening the caption to "one or two questions", which
+  counts items instead of naming a blocker and would not have caught anything.
+  The band is now defined by **what kind of work closes it** - desk work, no
+  probe - which is true of all three and checkable.
+
+- **Recorded that a band caption names a blocker, never a date or a status.**
+  `D-a` was briefly captioned *"all four PROBED 2026-09-22"*, written during
+  the Tier 4 write-up earlier the same day. It reads as progress and is
+  unauditable: Rio's misfiling was caught **only** because the neighbouring
+  sub-tier still declared what it was for. A status caption silently disables
+  the check the band exists to support.
+
+
 - **Moved Rio de Janeiro from Band D-b to Band C, a filing correction rather
   than a new measurement.** Sub-tier D-b means *"rail answered, the business
   leg is the blocker"*, and Rio's own row read *"CNPJ, no coordinates ->
