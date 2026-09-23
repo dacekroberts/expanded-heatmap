@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**191 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**192 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Category D reported 63 dead constants, 45 of which were add-country working correctly](#2026-09-23---category-d-reported-63-dead-constants-45-of-which-were-add-country-working-correctly)
 - [check_stale_claims category A was reporting three findings and none of them was real](#2026-09-23---check_stale_claims-category-a-was-reporting-three-findings-and-none-of-them-was-real)
 - [PLAN.md gains the handoff it was missing, and Paris reverified](#2026-09-23---planmd-gains-the-handoff-it-was-missing-and-paris-reverified)
 - [Paris's brief re-verified against live sources: 7/7 hold](#2026-09-23---pariss-brief-re-verified-against-live-sources-77-hold)
@@ -230,6 +231,43 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Category D reported 63 dead constants, 45 of which were add-country working correctly
+
+- **France's country profile has no city yet, so nothing imports it - and the
+  checker called all 45 of its constants dead.** `add-country` exists
+  precisely so the national facts are profiled ONCE, before the first city in
+  that country is built, so a profile whose constants nothing reads is the
+  documented workflow succeeding. Reporting it as decay means the check fires
+  forty-odd false positives every time someone follows the process this
+  project recommends.
+
+- **The distinction is exact and costs one grep: does any city config import
+  the profile?** Mexico's does, from Guadalajara and Mexico City, so its three
+  unread constants ARE findings and stay listed. France's does not, from none,
+  so its 45 are reported as **deferred** with a count and the reason, in their
+  own section. Live findings fell from 63 to **18**, which is the number a
+  reader can actually work through.
+
+- **The deferral expires by itself, and that was the part worth proving.** A
+  deferral needing someone to remember it is the same trap as a `KNOWN_GAPS`
+  list that cannot go stale. Simulated the first French city by making one
+  city config import the profile: France's constants moved from deferred to
+  live immediately, with no edit to the checker, and returned when the import
+  was removed.
+
+- **The negative test failed first, and the test was what was wrong.** Its
+  second assertion read `"france.py" not in whole.split("Deferred")[-1]` -
+  but when the deferred section is absent entirely, `str.split()` returns the
+  whole string as one element, so it found the name in the LIVE listing and
+  reported a working checker as broken. **Second time in two days that a
+  harness, not a check, was the defect** - after the byte-vs-text line-ending
+  bug on 2026-09-22. A harness deserves the same suspicion as the thing it
+  tests.
+
+- **The heredoc guard shipped yesterday blocked the fix for it**, correctly:
+  the one-liner that would have patched the test carried a backslash inside a
+  heredoc. First unprompted catch in real use, one day after installation.
 
 ### 2026-09-23 - check_stale_claims category A was reporting three findings and none of them was real
 

@@ -291,6 +291,31 @@ def check_c():
     return hits
 
 
+def country_without_a_city(rel):
+    """Is this a country profile no city imports YET?
+
+    `add-country` exists so the national facts are profiled ONCE, before
+    the first city in that country is built - so a profile whose
+    constants nothing reads is that workflow working, not a defect.
+    Reporting them as dead would mean this check fires forty-odd false
+    positives every time someone follows the documented process, and a
+    report people learn to skip is worse than no report.
+
+    The distinction is exact and cheap: does any city config import this
+    profile? Mexico's does, from two cities, so its three unread
+    constants ARE findings. France's does not, from none, so its
+    forty-six are deferred until Paris lands - at which point they become
+    findings automatically, with no edit here.
+    """
+    if not rel.startswith("pipeline/countries/"):
+        return False
+    stem = rel.rsplit("/", 1)[1][:-3]
+    for cfg in ROOT.glob("pipeline/*/config.py"):
+        if f"countries.{stem}" in cfg.read_text(encoding="utf-8"):
+            return False
+    return True
+
+
 def check_d():
     """Module-level config constants that nothing outside their own file reads.
 
@@ -417,14 +442,30 @@ def main():
 
     if args.only in (None, "D"):
         hits = check_d()
-        print(f"D. CONFIG CONSTANTS no script reads - {len(hits)}")
+        live = [h for h in hits if not country_without_a_city(h[0])]
+        deferred = [h for h in hits if country_without_a_city(h[0])]
+
+        print(f"D. CONFIG CONSTANTS no script reads - {len(live)}")
         print("   Each one is a prompt to READ THE COMMENT ABOVE IT. A dead "
               "constant is harmless;\n   a comment describing a plan that did "
               "not happen is what misleads the next reader.")
-        for rel, lineno, nm in hits:
+        for rel, lineno, nm in live:
             print(f"   {rel}:{lineno}  {nm}")
-        if not hits:
+        if not live:
             print("   none")
+
+        if deferred:
+            by_file = {}
+            for rel, _, _ in deferred:
+                by_file[rel] = by_file.get(rel, 0) + 1
+            print(f"\n   Deferred - {len(deferred)} constant(s) in a country "
+                  f"profile no city imports yet.")
+            print("   That is add-country working as intended: the national "
+                  "facts are profiled once,\n   BEFORE the first city. They "
+                  "become findings on their own the day a city\n   in that "
+                  "country lands, with no edit to this script.")
+            for rel, n in sorted(by_file.items()):
+                print(f"      {rel}  ({n})")
         print()
 
     print("Reported, not failed - every rule here is a guess about English. "
