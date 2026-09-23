@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**196 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**197 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [The site said which businesses it leaves out and never which stations](#2026-09-23---the-site-said-which-businesses-it-leaves-out-and-never-which-stations)
 - [Category B's 31 counts read, one edited, and the denominator rule earned its keep](#2026-09-23---category-bs-31-counts-read-one-edited-and-the-denominator-rule-earned-its-keep)
 - [A superseded document's citations are a trail, and the check was auditing them](#2026-09-23---a-superseded-documents-citations-are-a-trail-and-the-check-was-auditing-them)
 - [Following one dead constant found a comment describing an approach the city does not use](#2026-09-23---following-one-dead-constant-found-a-comment-describing-an-approach-the-city-does-not-use)
@@ -235,6 +236,65 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - The site said which businesses it leaves out and never which stations
+
+- **`docs/excluded_categories.md` now covers both halves of this project's
+  scope, and the page that renders it was renamed in substance rather than in
+  title.** The document was entirely about businesses; the other half of its
+  own opening sentence - "density around rail-transit stations" - was scoped
+  just as deliberately and published nowhere a reader would look. The gap was
+  found by a reader's question, **"was BART ever included in the San Francisco
+  build?"**, whose answer had been sitting in this file since the build: BART
+  is regional and crosses county lines, so including it would have reopened the
+  cross-boundary problem San Diego needed solving. Recorded, reasoned, and
+  never told to anyone.
+
+- **The disclosure asymmetry was the real defect, not the BART decision.** Six
+  city pages already named their excluded commuter rail - Chicago's Metra,
+  Philadelphia's Regional Rail, Boston's, Miami's Tri-Rail, Vancouver's West
+  Coast Express, Dublin's Commuter and InterCity - and San Francisco's page
+  named none, while every one of the 20 page titles names the network it does
+  cover. So the convention existed and San Francisco had fallen out of it, in
+  the one city whose omission a reader is most likely to notice. Its page now
+  carries the sentence, including that Embarcadero, Montgomery, Powell and
+  Civic Center ARE mapped, as the Muni stations they also are.
+
+- **The station table is COMPUTED from `outputs/*/excluded_stations.csv` at
+  render time, not written into the prose.** 614 stations are excluded across
+  19 cities - 363 for sitting outside the city whose register the map is built
+  from, 251 thinned out of street-running stretches - and every one of those
+  numbers is an open count that grows with each city. This project has already
+  been bitten by writing one of those into a document. The page reads the
+  committed files instead, so adding a city adds its row with no edit.
+
+- **A `st.dataframe` was tried first and rendered collapsed** - 52 px wide with
+  no canvas at all in the lean venv, measured rather than inferred. Replaced
+  with a markdown table, which is also the right call independently: 20 rows
+  need no sorting, and a grid's contents do not appear in the page text.
+
+- **The check found a fifth city the eye had missed.** Five cities -
+  **Montréal, Madrid, Barcelona, Dublin and Milan** - had no business
+  exclusions written in this document at all, each disclosed on its own city
+  page and nowhere else. A grep for four of them had been run by hand;
+  `scripts/check_scope_disclosure.py` named the fifth on its first run, because
+  it matches on `cities.py`'s own spelling and "Montréal" is not "Montreal".
+  All five were written up from their own published prose rather than parked,
+  so `KNOWN_GAPS` ships empty.
+
+- **The check asserts properties, and was watched failing eight ways** on temp
+  copies before being trusted: the splice marker removed, the splice marker
+  duplicated, the station section deleted, a city's `outputs/` directory
+  renamed, a city dropped from the business half, a station excluded for a
+  brand-new reason, and a documented city left stale in `KNOWN_GAPS` - plus an
+  unmodified copy passing. The KNOWN_GAPS expiry case is the one that matters:
+  a gap list that outlives its gap is how a dated defect turns into a
+  permanent pass.
+
+- **The hook earned its keep again.** A one-line `python -c` probe carrying
+  `\s` and `\(` was refused by `.claude/hooks/block_heredoc.py` - the fifth
+  occurrence of that pattern and the first that cost nothing, because it never
+  ran. Rewritten as a scratchpad file, per the rule the hook enforces.
 
 ### 2026-09-23 - Category B's 31 counts read, one edited, and the denominator rule earned its keep
 
