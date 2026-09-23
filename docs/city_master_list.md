@@ -178,13 +178,31 @@ one. Ordered by how little that step costs.
 
 ## 🟤 Band D — coordinates AND unfinished screening (1 city)
 
-**Bucharest is alone here for a reason**, and it is the reason Band C cannot
-hold it: C's caption promises the business leg is done, and Bucharest's is
-not finished. Its register is real and large, but **its rail has never been
-counted, its licence has never been read, and its host sits behind a
-"Verifying your browser" JS challenge** that the fetch step needs a route
-through which is not a bot-detection bypass. Three open items, only one of
-which is coordinates.
+**Bucharest is alone here** because Band C's caption promises the business
+leg is finished and Bucharest's is not. **Two of its four open items closed
+on 2026-09-22**, and what remains is still more than coordinates.
+
+✅ **RAIL SOLVED.** `overpass.private.coffee` (the other two mirrors were
+returning *"the server is probably too busy"*): **12 subway relations, all 12
+named, all 12 coloured, refs M1–M5, operator Metrorex** — the complete
+Bucharest metro, cleanly tagged.
+
+✅ **ROMANIA ENUMERATED, and there is no second bucket.** `data.gov.ro`
+resolves (85.120.75.35) and stays unroutable for us, so it was read **from
+the Internet Archive** — `api/3/action/package_list` is captured and returns
+**4,693 datasets**, 4,482 with readable slugs. The only commercial register
+in the whole national catalogue is **~40 dated snapshots of
+`firme-inregistrate-la-registrul-comertului`** — the ONRC **company**
+register, which is the registered-office trap. Everything else matching is
+health-unit procurement, construction permits or trade statistics.
+
+🎁 **One useful find:** `nomenclator-stradal-municipiul-bucuresti` — the
+city's **street nomenclature**, which is the address reference its geocoding
+leg needs.
+
+⚠️ **Still open: the licence is unread**, and `ansvsa.ro` and
+`bucuresti.dsvsa.ro` sit behind a **"Verifying your browser" JS challenge**
+the fetch step needs a route through that is not a bot-detection bypass.
 
 | Cities | Country | Business leg | The coordinate step |
 |---|---|---|---|
@@ -348,7 +366,7 @@ below.
 | City | Rail (OSM) | Business leg |
 |---|---|---|
 | ▲▲ **Tel Aviv** 🇮🇱 | see Band B | **PROMOTED OUT OF BAND D 2026-09-22 — to Band B. Both legs measured.** The WAF-blocked portal was never the only host: `gisn.tel-aviv.gov.il` answers, and carries **22,176 licensed businesses** with activity *and* location. See Band B |
-| **Hyderabad** 🇮🇳 | 6 rel, all named + coloured | ⚠️ **All three live hosts PROBED 2026-09-22. Still blocked, and now with the alternative route measured shut.** `ghmc.gov.in` — the body that issues trade licences — returns **403 in a real browser as well as to curl**, an **F5 WAF block that names itself** (support ID + `F5 site: wes-sea`); deliberate, like Bulgaria's. `data.telangana.gov.in` resolves but is unroutable for us; `tsbpass` has no A record. **`tgbpass.telangana.gov.in` answers 200 and is a FALSE FRIEND** — TG-bPASS is *Building Permission Approval and Self-certification*, i.e. construction permits, and `/Home/TradeLicense` 404s. The national fallback that rescued Sofia does **not** work here: `data.gov.in`'s `title=` filter is controllable (nonsense → *"No Result Found"*), and `trade license` returns only **Karnataka's "District wise ULB wise Trade License Details" — an aggregate**, confirming the prior 288,011-resource negative. **The Hong Kong shape: blocked, not negative** |
+| **Hyderabad** 🇮🇳 | 6 rel, all named + coloured | ⚠️ **RE-PROBED 2026-09-22; every remaining route is now closed too.** `ghmc.gov.in` — the licensing body — returns **403 in a real browser**, an F5 WAF page that names itself. `data.telangana.gov.in` resolves but is unroutable for us; it runs **DKAN**, and **the Archive holds ~200 URLs but not the dataset-list endpoint**, so the route that enumerated Romania does not work here. `tgbpass` is a false friend — *building* permits. And **`api.data.gov.in`'s `q` parameter is INERT**: `Telangana` and `zzqqxxnonsense` both return the identical **288,011**, so the national API cannot be filtered at all — only its website search can, and that was already measured negative. **Blocked, not negative** |
 | **Kochi** 🇮🇳 | 2 rel, named + coloured | ⚠️ **PROBED 2026-09-22, and the lead was a FALSE FRIEND.** `go.lsgkerala.gov.in/pages/query.php?t=establishment` is a **Government Orders and Circulars search** — "establishment" matches 6,526 orders about *staffing*; Kochi's own `/establishment/396` is ജീവനക്കാര്യം, its **personnel** page. In Indian government usage "establishment" means staff posts, not premises. The real route is **K-SMART** (`tax.lsgkerala.gov.in` redirects to `ksmart.lsgkerala.gov.in`) and **Sanchaya** — both live, both **transactional citizen portals** for paying tax and renewing licences, **no bulk export found**. Kerala's local bodies do issue the licences, so the register exists. **The Hong Kong shape: blocked, not negative** |
 
 #### Paris / SIRENE — the measurement, 2026-09-22

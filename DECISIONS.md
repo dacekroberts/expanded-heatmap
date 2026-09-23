@@ -993,6 +993,55 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Recorded Hong Kong's indemnity as a THIRD class of obligation that is not
+  a notice, and gave the three a section of their own.** Barcelona introduced
+  the first - an affirmative act owed to the publisher - and WMATA the second,
+  an account that must stay live because the grant dies with it. Hong Kong's
+  is different again: **a liability accepted.** `data.gov.hk`'s Terms require
+  the user to *"indemnify the Government and the Relevant Organisations
+  against any allegations or claims of infringement of the rights of any
+  person **and all costs, losses, damages and liabilities**"*. Everything
+  else in those Terms is generous, which is exactly why the clause is easy to
+  miss: **the grant is the headline and the obligation is a subordinate
+  clause.** Written into `docs/data_sources.md` as a table of the three
+  classes, and into the `read-licence` skill so the next licence read looks
+  for it. **It is an owner decision, and the moment to take it is before
+  35,808 premises are wired into a page.**
+
+- **Bucharest's rail is SOLVED and Romania is enumerated; two of its four
+  open items closed.** The rail count had failed earlier only because Overpass
+  was busy: `overpass.private.coffee` returns **12 subway relations, all 12
+  named, all 12 coloured, refs M1-M5, operator Metrorex** - the complete
+  metro. And `data.gov.ro`, which resolves but stays unroutable for us, was
+  read **from the Internet Archive**: `api/3/action/package_list` is captured
+  and returns **4,693 datasets**, 4,482 with readable slugs. **There is no
+  second bucket in Romania's national catalogue** - the only commercial
+  register is ~40 dated snapshots of `firme-inregistrate-la-registrul-
+  comertului`, the ONRC **company** register and therefore the
+  registered-office trap. One useful find:
+  `nomenclator-stradal-municipiul-bucuresti`, the street nomenclature its
+  geocoding leg needs. Still open: the licence, and the JS challenge.
+
+- **Hyderabad re-probed, and the route that enumerated Romania does NOT work
+  there.** `data.telangana.gov.in` runs **DKAN**, not CKAN, and while the
+  Archive holds about 200 of its URLs it does **not** hold the dataset-list
+  endpoint - only individual items and `search/facets` calls, and the Wayback
+  wrapper would not return those raw. So the state catalogue cannot be
+  enumerated from outside. `ghmc.gov.in` still returns 403 in a real browser.
+  **Blocked, not negative**, and now with the archive route closed as well as
+  the live ones.
+
+- **`api.data.gov.in`'s `q` parameter is INERT, which retro-justifies how the
+  earlier India negative was reached.** `q=Telangana` and
+  `q=zzqqxxnonsense` both return the identical **288,011**, so the national
+  API cannot be filtered at all. The earlier negative was reached through the
+  **website** search, whose `title=` parameter does filter - a nonsense term
+  returns *"No Result Found"* - so that finding stands. **Two search surfaces
+  on one portal, one of which silently ignores its input**, is worth
+  recording: the conclusion was right and would have been unfounded had it
+  come from the other surface.
+
+
 - **Hong Kong was never blocked, and enumerating `data.gov.hk` proved it in
   one call.** It had been recorded as *"the portal is a measured negative
   (statistics only), but FEHD's register exists and is queryable - no bulk
