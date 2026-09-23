@@ -174,6 +174,28 @@ def _segments(value):
     return out
 
 
+def display_value(value):
+    """What the map tooltip should SHOW for this row's `Uses`.
+
+    OPTIONAL TAXONOMY HOOK - `pipeline/map_common.py` uses it when a taxonomy
+    defines one and falls back to the raw column otherwise.
+
+    The register stores a fixed number of use slots per premises and fills the
+    unused ones with `-`, so the raw string reads "-, SHOP". `_segments()` has
+    dropped that placeholder for CLASSIFICATION since this city was built; the
+    tooltip was showing the raw column and therefore the placeholder.
+    Measured on the committed map 2026-09-22: **6,750 of 7,595 pins (88.9%)
+    displayed a `-` segment**, and **none was entirely blank**, which is why
+    the placeholder can be dropped outright rather than merely sorted last.
+
+    Falls back to the raw value if nothing survives, rather than rendering an
+    empty field: that cannot happen with today's data, and if the register
+    ever changes shape, showing what it said beats showing nothing.
+    """
+    parts = _segments(value)
+    return ", ".join(parts) if parts else str(value or "").strip()
+
+
 def bucket_for_segment(segment, category=None):
     """One segment -> a bucket, or None. Exposed so step 2 can report."""
     if segment in _FOOD:

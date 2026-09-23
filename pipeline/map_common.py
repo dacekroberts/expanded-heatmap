@@ -1159,7 +1159,8 @@ def _esc(value):
     return "" if pd.isna(value) else html.escape(str(value), quote=True)
 
 
-def add_pin_layer(m, rows, group_name, color, tooltip_field_label, value_column, show=True):
+def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
+                  value_column, show=True, display=None):
     """One toggleable, clustered, coloured pin layer for a category bucket.
     Returns the number of points (0 = nothing added)."""
     # Station name, ring band AND the classification value each repeat once per
@@ -1184,11 +1185,17 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label, value_column,
     # resolves CATEGORIES by pairing the Nth table with the Nth `var data` in
     # document order, and still accepts a bare string at row[3] so a map
     # rendered before this change reads correctly. Change the two together.
+    # A taxonomy may define display_value() to say how its classification
+    # column should READ, as distinct from how it classifies. Dublin's
+    # register pads unused use-slots with "-", so the raw column rendered as
+    # "Use: -, SHOP" on 88.9% of its pins while the classifier had been
+    # dropping the placeholder all along.
+    _display = display or (lambda v: v)
     stations, bands, cats, data = {}, {}, {}, []
     for row in rows.itertuples():
         station = _esc(row.nearest_station)
         band = _esc(row.ring_band)
-        cat = _esc(getattr(row, value_column))
+        cat = _esc(_display(getattr(row, value_column)))
         data.append([
             round(row.latitude, COORD_DP), round(row.longitude, COORD_DP),
             _esc(row.business_name),
@@ -1481,7 +1488,9 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     present = []
     for name, color in CATEGORY_BUCKETS:
         rows = in_rings[in_rings["_bucket"] == name]
-        if add_pin_layer(m, rows, name, color, taxonomy.FIELD_LABEL, taxonomy.VALUE_COLUMN):
+        if add_pin_layer(m, rows, name, color, taxonomy.FIELD_LABEL,
+                         taxonomy.VALUE_COLUMN,
+                         display=getattr(taxonomy, "display_value", None)):
             present.append((name, color))
 
     m.get_root().html.add_child(folium.Element(

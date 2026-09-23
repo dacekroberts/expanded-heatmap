@@ -628,6 +628,26 @@ REGIONS = [
     if cities_in(name)
 ]
 
+
+def elsewhere_counts(region):
+    """(name, count) for the regions a given region does NOT cover.
+
+    LEAVES ONLY, AND THAT IS THE WHOLE POINT. `REGIONS` holds composites and
+    their halves, which overlap, so "every region except this one" counts the
+    same city twice. Selecting "United States" described its own nine cities
+    as "3 in United States West, 6 in United States East" *elsewhere*, on the
+    default view of the front page; selecting a leaf listed the composite that
+    contains it. Shipped with the Europe macro-region change and found on the
+    live site 2026-09-22.
+
+    The invariant a caller can rely on, and `scripts/check_macro_labels.py`
+    asserts for every region: len(cities_in(region)) + sum of these counts
+    == len(CITIES).
+    """
+    covered = set(REGION_MEMBERS.get(region, (region,)))
+    return [(n, len(cities_in(n))) for n in REGION_ORDER
+            if n in LEAF_REGIONS and n not in covered and cities_in(n)]
+
 _untagged = [c["name"] for c in CITIES if c.get("region") not in LEAF_REGIONS]
 if _untagged:
     raise ValueError(

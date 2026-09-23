@@ -6,6 +6,14 @@ notice**, so a URL alone does not preserve what was actually agreed to. The
 clauses quoted in [`../data_sources.md`](../data_sources.md) are checkable
 against these files.
 
+**Letters this project SENDS are not stored here.** They live in
+[`../notifications/`](../notifications/) - Barcelona's notification and
+Philadelphia's permission request. The distinction is not filing tidiness: the
+rule below is that every file in this directory stays **unaltered** and is
+checkable by SHA-256, and a letter this project wrote and will revise can
+satisfy neither. Philadelphia's sat here until 2026-09-22, the only outgoing
+document among 24 captured ones and the only file absent from the digest table.
+
 **Position on storing them** (decided 2026-09-21, recorded in
 [`../../DECISIONS.md`](../../DECISIONS.md)): each file is kept **unaltered,
 non-commercially, for compliance reference**. These are the agencies' own

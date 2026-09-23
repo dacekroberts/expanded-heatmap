@@ -374,6 +374,18 @@ Desktop is unaffected — the label is fully visible there.
 
 ## Structure
 
+- [ ] **Re-render `outputs/dublin/heatmap.html` so the Use tooltip drops the
+  `-` placeholder** - the code fix landed 2026-09-22
+  (`dublin_uses.display_value()`, used by `map_common.py`) and is verified
+  against every value in the committed map: **88.9% of 7,595 pins improve and
+  none is left with an empty Use line**. But the rendered map is committed
+  output, and this worktree has no `data/dublin/raw/`, so the live site still
+  shows "Use: -, SHOP". Needs a session holding Dublin's cache: run step 3
+  and `drift_check.py dublin`, expecting a diff ONLY in the tooltip strings.
+  If the cache is gone, `pipeline/dublin/fetch_sources.py` will rebuild it -
+  but that is a re-fetch, so report what changed upstream rather than letting
+  it ride in with the tooltip fix.
+
 - [x] ~~**Collapse the European macro-map regions into one "Europe"**~~ -
   **done 2026-09-22, the same day the problem appeared.** `app/cities.py` gave
   every European country its own `region` - Spain (Madrid, Barcelona), then
@@ -896,7 +908,8 @@ Desktop is unaffected — the label is fully visible there.
     - [x] **Request SENT 2026-09-21** by the owner, to **`maps@phila.gov`**
       (the City's own Open Data Program contact) copying
       **`LIGISTEAM@phila.gov`** (the Business Licenses custodian). Text kept at
-      `docs/licenses/phila-permission-request.md`. An earlier draft addressed
+      `docs/notifications/philadelphia-permission-request.md`. An earlier
+      draft addressed
       the custodian alone - the right address for the wrong desk, since a
       dataset maintainer cannot speak to what the City's terms cover.
     - [ ] **Follow up on 2026-09-28** (one week), at the owner's request. No

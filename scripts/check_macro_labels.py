@@ -44,7 +44,13 @@ if hasattr(sys.stdout, "reconfigure"):   # "Montréal" is unprintable under cp12
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "app"))
-from cities import CITIES, REGION_MEMBERS, REGIONS  # noqa: E402
+from cities import (  # noqa: E402
+    CITIES,
+    REGION_MEMBERS,
+    REGIONS,
+    cities_in,
+    elsewhere_counts,
+)
 
 # Measured in the browser at `600 14px "Space Grotesk", sans-serif`, the font
 # app/components.set_base_font() loads and the TextLayer renders with. Re-measure
@@ -154,6 +160,44 @@ def overlap(a, b):
     return (min(a[2], b[2]) - max(a[0], b[0]), min(a[3], b[3]) - max(a[1], b[1]))
 
 
+def caption_arithmetic():
+    """The front page's caption must account for every city exactly once.
+
+    ASSERTS A PROPERTY, IT DOES NOT RE-IMPLEMENT THE SUM. A check that
+    recomputed the caption the way Overview.py does would agree with it while
+    both were wrong, which is precisely what happened: the caption said
+    "every region except this one", `REGIONS` holds composites AND their
+    halves, and selecting "United States" reported its own nine cities as
+    elsewhere - 3 in United States West, 6 in United States East - on the
+    DEFAULT view of the front page. Europe read "4 shown, 25 elsewhere" out of
+    20 cities. Found on the live site 2026-09-22, not by a check.
+
+    shown + elsewhere == total is true of any correct partition and false of
+    that bug, whatever code computes it.
+    """
+    total = len(CITIES)
+    bad = []
+    for region in REGIONS:
+        name = region["name"]
+        shown = len(cities_in(name))
+        counts = elsewhere_counts(name)
+        got = shown + sum(c for _, c in counts)
+        if got != total:
+            listed = ", ".join(f"{c} in {m}" for m, c in counts) or "(none)"
+            bad.append(
+                f"{name}: caption accounts for {got} of {total} cities "
+                f"({shown} shown + {got - shown} elsewhere: {listed})"
+            )
+        for member, _ in counts:
+            if member in REGION_MEMBERS:
+                bad.append(
+                    f"{name}: names the composite {member!r} as elsewhere; "
+                    f"composites overlap their halves, so only leaves may be "
+                    f"counted"
+                )
+    return bad
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--width", type=int, action="append",
@@ -163,6 +207,7 @@ def main():
     widths = args.width or sorted(CANVAS)
 
     problems, clips, near, accepted = [], [], [], []
+    problems.extend(caption_arithmetic())
     for region in REGIONS:
         clat, clon, zoom = region_view(region)
         for vw in widths:
@@ -274,7 +319,8 @@ def main():
             print(f"  {line}")
         return 1
     print(f"PROBLEMS 0 - {len(REGIONS)} regions x {len(widths)} widths, "
-          f"every city scored in every region")
+          f"every city scored in every region; and every region's caption "
+          f"accounts for all {len(CITIES)} cities exactly once")
     return 0
 
 

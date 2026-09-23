@@ -603,9 +603,6 @@ columns. Same section, its own subsection, its own columns.
   not OpenStreetMap's. **Madrid sat under the OpenStreetMap heading for part of
   2026-09-22**, which was wrong in the way this subsection exists to prevent.
 
-Madrid's row is here although the city is not yet wired into `app/cities.py`;
-its pipeline is built and its wiring waits on Barcelona.
-
 | City | System / operator | Endpoint | Retrieved | Note |
 |---|---|---|---|---|
 | Mexico City | **STC Metro** (12 lines) + **STE Tren Ligero** (1). Tren Ligero is a different operator and a different mode and is kept on the same reasoning that put Metromover on Miami's map and the Valley Line on Edmonton's — it is urban rail inside the city, and dropping it would leave the whole southern corridor to Xochimilco blank while the register still counts its shops. Metrobús is BRT and is **not** rail | Overpass API, POSTed to three mirrors in order: `https://overpass-api.de/api/interpreter`, `https://overpass.kumi.systems/api/interpreter`, `https://overpass.osm.ch/api/interpreter` | 2026-09-22 | **Why not the agency: every `*.cdmx.gob.mx` host is unreachable from here** — the city open-data portal, STC Metro and STE alike, ConnectTimeout on `www.` and bare, http and https, re-confirmed 2026-09-22, and the feed's S3 `direct_download` returns 403. No block page names an IP, so this is a dead host rather than a client refusal, and a browser does not help. Owner-approved 2026-09-22 as a documented per-city exception. Stations: `node["railway"]` in bbox `18.95,-99.45,19.75,-98.85`, then a **WHITELIST** of `railway=station` — a whitelist and not a blacklist because OSM carries 13 **proposed** Texcoco light-rail stations in this bbox and **five are tagged `railway=prpopsed`, misspelled in the source data**, which a blacklist would admit and which would draw rings around building sites. 447 `railway=subway_entrance` nodes against 184 stations (2.4x) are excluded on the same principle. **Match on the MODE, never on the network label alone:** seven real stations carry no `network` tag at all, and OSM tags Lechería `network=STC Metro` although it is a Ferrocarril Suburbano station, so the test is `station in (subway, light_rail) or subway=yes`. Lines come from a union of `relation[type=route][route=subway]` and `relation[type=route][route=light_rail]`, fetched with **`out geom`, not `out tags`** — the member way geometry is this project's OSM analogue of `shapes.txt`, and without it the city would have station dots and no lines, breaking the every-line-drawn invariant. **Collapse is BY NAME**, a fourth mechanism after Edmonton's `parent_station`, Calgary's direction prefix and Toronto's naming conventions: OSM has one node per line at an interchange (Pantitlán 4, La Raza/Jamaica/Oceanía/Tasqueña 2 each). **Gate 3 is UNAVAILABLE** — STC Metro's published counts live on the unreachable host, so `STATION_COUNT_GATE_3 = None` records the reason rather than a figure typed from memory; the spacing gate, the whitelist and cross-direction agreement run instead. **163 stations kept** |
@@ -789,7 +786,7 @@ San Diego's terms carry a strong disclaimer worth knowing about: the data is
 the information contained in the Data is accurate, true or correct", and the
 user indemnifies the city for claims arising from their use of it.
 
-#### Madrid — `censo de locales`, read 2026-09-22 (CANDIDATE, not built)
+#### Madrid — `censo de locales`, read 2026-09-22 (**BUILT 2026-09-22**)
 
 **PERMITTED WITH CONDITIONS.** Two documents apply and both were read.
 
@@ -1198,7 +1195,8 @@ silence mean?**
   **DECIDED 2026-09-21 (the owner):** ask the City for written permission - its
   terms name that as the route - and keep the map live under the reasoned
   position meanwhile, with the footer disclosing the question. The drafted
-  request is at `docs/licenses/phila-permission-request.md`, addressed to
+  request is at `docs/notifications/philadelphia-permission-request.md`,
+  addressed to
   `maps@phila.gov` copying `LIGISTEAM@phila.gov`, and was **SENT 2026-09-21**.
   No reply as of that date; follow-up due a week later. Silence will not be
   treated as consent - the interim position rests on the reasoned reading and
@@ -1346,7 +1344,7 @@ This is not a legal position and it does not waive or create anything. It is
 a statement of how this project behaves, published because a reader who might
 want something removed should be able to see it without asking first.
 
-#### CRTM (Consorcio Regional de Transportes de Madrid) — read 2026-09-22 (CANDIDATE, not built)
+#### CRTM (Consorcio Regional de Transportes de Madrid) — read 2026-09-22 (**BUILT 2026-09-22**)
 
 **Source:** `http://www.crtm.es/licencia-de-uso`, the *Licencia de datos
 estáticos del CRTM*, which `mdb-794` (Metro de Madrid GTFS) declares. Read in
@@ -1406,7 +1404,7 @@ raw. Both are in addition to the Ayuntamiento de Madrid wording already
 recorded above for the business leg — **Madrid owes two separate attributions
 from two separate licences.**
 
-#### Barcelona — Open Data BCN, read 2026-09-22 **from the Internet Archive** (CANDIDATE, not built)
+#### Barcelona — Open Data BCN, read 2026-09-22 **from the Internet Archive** (**BUILT 2026-09-22**)
 
 **How it was read, and the limit on that.** `opendata-ajuntament.barcelona.cat`
 serves **hCaptcha** on `/en/avis-legal`, `/ca/avis-legal` and

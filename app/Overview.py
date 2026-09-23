@@ -21,6 +21,7 @@ import streamlit as st
 from cities import (
     CITIES,
     DEFAULT_REGION,
+    elsewhere_counts,
     IN_DEFAULT_VIEW,
     MAP_ONLY_NAV,
     REGION_MEMBERS,
@@ -423,8 +424,11 @@ if picked:
 # one unless the counts are stated. Every city is drawn at every region - the
 # view is centred, not filtered - so the wording is about where the view sits.
 if len(REGIONS) > 1:
+    # NOT "every region except this one": REGIONS holds composites and
+    # their halves, so that counted the same cities twice. See
+    # cities.elsewhere_counts().
     _elsewhere = ", ".join(
-        f"{len(_region_cities[n])} in {n}" for n in _region_names if n != region
+        f"{n_cities} in {n}" for n, n_cities in elsewhere_counts(region)
     )
     st.caption(
         f"Showing {len(_region_cities[region])} cities in {region} — "

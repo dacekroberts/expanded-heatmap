@@ -10,7 +10,8 @@ waiting on a probe. This is the list to come back to and tick off.
 1, 2 and 12. Items 1 and 12 are ongoing obligations rather than one-off steps;
 item 2 is one act, drafted and waiting to be sent. They are first for that reason.
 
-Status values: **OPEN** (nothing done) · **DONE** (satisfied, no upkeep) ·
+Status values: **OPEN** (nothing done) · **SENT** (the act was done, a
+reply is awaited — carry the date, and the follow-up date if there is one) · **DONE** (satisfied, no upkeep) ·
 **STANDING** (satisfied but must stay satisfied) · **MOOT** (the city or route
 was dropped, kept for the record) · **OPTIONAL** (an upgrade, not a blocker).
 
@@ -21,7 +22,7 @@ was dropped, kept for the record) · **OPTIONAL** (an upgrade, not a blocker).
 | # | City | What is required | Status |
 |---|---|---|---|
 | **1** | **Washington D.C.** 🇺🇸 **BUILT** | **A live WMATA API account, for as long as the D.C. page is up.** `api.wmata.com` is the only feed in this project behind a key (401 unauthenticated). The terms are an *API agreement*: §9(i) terminates the grant when the account goes, and what lapses is the right to **publish the page**, not merely to store a file | ✅ **SATISFIED — the owner re-confirmed the account live on 2026-09-22**, stated directly. **STANDING thereafter:** do not terminate it while the site is up. Now **gate item 10** in `data_sources.md`, so it is checked before every deploy rather than remembered |
-| **12** | **Philadelphia** 🇺🇸 **BUILT** | **A written request to the publisher, outstanding.** `phila.gov/terms-of-use` is incorporated by reference into the dataset page and prohibits redistribution and modification without written permission | ⚠️ **OPEN** — the map stays up on a *disclosed reasoned position*, and **comes down if the publisher confirms the restrictive reading**. Not resolvable by more reading; someone has to ask |
+| **12** | **Philadelphia** 🇺🇸 **BUILT** | **A written request to the publisher, outstanding.** `phila.gov/terms-of-use` is incorporated by reference into the dataset page and prohibits redistribution and modification without written permission | 🟠 **SENT 2026-09-21, NO REPLY.** Not OPEN — this row said "someone has to ask" until 2026-09-22, when a sweep found it had been asked: the owner sent it to **`maps@phila.gov`** (the Open Data Program) copying **`LIGISTEAM@phila.gov`** (the Business Licenses custodian). Text at `docs/notifications/philadelphia-permission-request.md`. ⏰ **Follow-up due 2026-09-28**, tracked in `PLAN.md`. **Silence is not consent** — the map stays up on a *disclosed reasoned position* that rests on the reasoned reading and the footer disclosure, not on the City having failed to object, and it **does not strengthen with time**. It **comes down if the publisher confirms the restrictive reading** |
 
 ---
 

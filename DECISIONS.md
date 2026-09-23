@@ -16,10 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**170 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**172 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [A front-page caption counted nine cities twice, and the drafted letters were in two places](#2026-09-22---a-front-page-caption-counted-nine-cities-twice-and-the-drafted-letters-were-in-two-places)
+- [Dublin's tooltip showed a placeholder the classifier had been dropping all along](#2026-09-22---dublins-tooltip-showed-a-placeholder-the-classifier-had-been-dropping-all-along)
 - [Europe became one macro-map region, and a write truncated a file to zero](#2026-09-22---europe-became-one-macro-map-region-and-a-write-truncated-a-file-to-zero)
 - [Dublin and Milan published, and the merge caught a latent break in both](#2026-09-22---dublin-and-milan-published-and-the-merge-caught-a-latent-break-in-both)
 - [Milan built: six disjoint registers, and a screen that was wrong four times](#2026-09-22---milan-built-six-disjoint-registers-and-a-screen-that-was-wrong-four-times)
@@ -206,6 +208,97 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - A front-page caption counted nine cities twice, and the drafted letters were in two places
+
+- **The macro-region change left the front page's caption double-counting, on
+  every selection.** `REGIONS` holds composites AND their halves - "United
+  States" alongside "United States West" and "United States East" - and the
+  caption listed "every region except this one", so selecting the composite
+  described its own nine cities as being elsewhere. Read live 2026-09-22:
+  *"Showing 4 cities in Europe - 9 in United States, 3 in United States West,
+  6 in United States East, 3 ..."*, which accounts for **25 of 20 cities**.
+  The default region IS the composite, so the default view of the site was
+  wrong. Fixed by `cities.elsewhere_counts()`, which counts LEAVES ONLY minus
+  the ones the selected region covers; all seven regions now sum to 20.
+
+- **The check asserts a property rather than re-implementing the sum.**
+  `check_macro_labels.py` gained a limb checking
+  `len(cities_in(region)) + sum(elsewhere) == len(CITIES)` for every region,
+  and separately that no composite is ever named as elsewhere. A check that
+  recomputed the caption the way `Overview.py` does would have agreed with it
+  while both were wrong. Watched failing twice before shipping: the exact
+  regression reintroduced (reports "29 of 20 cities") and a leaf silently
+  dropped ("18 of 20"). The existing label-collision limbs already imported
+  `REGION_MEMBERS`; they score pixels, so the arithmetic fell in the gap
+  between that check and nothing.
+
+- **Philadelphia's gated-access row said OPEN when the letter had been sent.**
+  `docs/gated_access.md` defines OPEN as "nothing done" and the row read
+  "someone has to ask" - while `data_sources.md` recorded the request as
+  **SENT 2026-09-21** to `maps@phila.gov` copying `LIGISTEAM@phila.gov`. The
+  row now carries the send date, the recipients, the file, and the
+  **2026-09-28 follow-up** that only `PLAN.md` was tracking; SENT was added to
+  the file's status vocabulary so the next such row has a word for it. The
+  substance did not change: silence is not consent, and the map comes down if
+  the publisher confirms the restrictive reading.
+
+- **The two drafted letters were in two directories, and one of them was the
+  wrong kind of place.** `docs/licenses/` holds 24 captured publisher
+  documents under SHA-256 verification, and its own README requires each file
+  to stay **unaltered** because "these are the agencies' own copyrighted
+  documents, not this project's". Philadelphia's permission request sat there
+  - the only outgoing document among them, and the only file absent from the
+  digest table, because a letter this project wrote and will revise can
+  satisfy neither rule. Moved to
+  `docs/notifications/philadelphia-permission-request.md` beside Barcelona's,
+  with the licences README now stating where outgoing correspondence goes and
+  why not there. The old `DECISIONS.md` reference to the former path is left
+  standing: this file is append-only, and this bullet is the forwarding note.
+
+- **Four headings in `data_sources.md` still said "CANDIDATE, not built"** for
+  Madrid's registry, CRTM and Barcelona - all three live - plus a paragraph
+  saying Madrid's wiring "waits on Barcelona". Corrected to **BUILT
+  2026-09-22**; the read dates are evidence and were left alone. This matters
+  more in that file than in prose generally: it is the provenance record, and
+  a reader auditing which sources are in use would skip a section marked not
+  built.
+
+### 2026-09-22 - Dublin's tooltip showed a placeholder the classifier had been dropping all along
+
+- **6,750 of Dublin's 7,595 pins (88.9%) displayed "Use: -, SHOP".** The
+  register stores a fixed number of use slots per premises and pads the unused
+  ones with `-`. `dublin_uses._segments()` has stripped that placeholder for
+  CLASSIFICATION since the city was built; the tooltip rendered the raw
+  column, so the map showed what the classifier had already decided to ignore.
+  Reported by the owner from the live site.
+
+- **Dropping the placeholder outright is safe, and that is a measurement
+  rather than a hope.** Of the 260 distinct values in the committed map,
+  **none is entirely blank** - so no pin is left with an empty Use line. Run
+  against every value the map actually contains: 88.9% of pins change, 0 are
+  emptied, and the vocabulary falls from 260 to 247 because the same cleaning
+  deduplicates repeated segments. The rejected alternative was the owner's own
+  fallback suggestion, sorting blanks last; it was not needed once the data
+  showed the field is never only a placeholder.
+
+- **The fix is a taxonomy hook, not a special case in the renderer.**
+  `display_value()` on the taxonomy module says how its classification column
+  should READ, as distinct from how it classifies, and `map_common.py` uses it
+  when present and the raw column otherwise. That keeps the knowledge - "this
+  field is a comma list and `-` means absent" - in the module that already
+  owns the grammar, and honours the standing invariant that the shared
+  renderer never names a taxonomy. Guadalajara and Mexico City both still
+  report **zero drift**, confirming the default path is unchanged for the
+  eighteen cities with no hook.
+
+- **`outputs/dublin/heatmap.html` is NOT yet regenerated, and the live map
+  still shows the placeholder.** This worktree has no `data/dublin/raw/`, and
+  re-fetching to render it would answer "does the current upstream produce
+  this map" rather than "does the committed code" - the exact hazard closed
+  earlier today. Left as open work in `PLAN.md` for a session holding Dublin's
+  cache, or for a deliberate re-fetch whose upstream changes are reported
+  rather than absorbed.
 
 ### 2026-09-22 - Europe became one macro-map region, and a write truncated a file to zero
 
