@@ -363,6 +363,13 @@ onwards; the early ones are split by phase rather than by hour.
   signature - unbanded rows 23.4% catch-all against 7.5% - narrowing to 7.2%
   against 5.0% after the exclusion.
 
+- **Restaurant control 1.52x, inside the French family.** NAF 56.10A (1,410)
+  against OSM `amenity=restaurant` (930) inside the eleven communes, measured
+  node+way with `out center` - the shape Toulouse's 1.28x was taken in, and
+  recorded because the same control read 1.38x there nodes-only. Paris 1.80,
+  Marseille 1.72. The query answered in 2 seconds, which fits the corrected
+  Overpass rule: the afternoon's 504s were the host, not the query shape.
+
 ### 2026-09-23 - Two corrections to the Toulouse build, both found while scoping Lille
 
 - **CORRECTION: Toulouse's commune-only scope was partly justified by a rule

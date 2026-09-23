@@ -591,8 +591,8 @@ _NOTICES = [
     ("OpenStreetMap (rail geometry)",
      "Rail route geometry and station locations for Mexico City (Metro CDMX "
      "and Tren Ligero), Guadalajara (Tren Ligero) and Barcelona (Metro de "
-     "Barcelona, including its FGC lines and both funiculars) are from "
-     "OpenStreetMap, "
+     "Barcelona, including its FGC lines and both funiculars), and the route "
+     "geometry of Lille's two métro lines, are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
      "geometry; stations, rings and categories are this project's work.",
