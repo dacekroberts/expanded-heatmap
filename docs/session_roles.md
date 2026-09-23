@@ -103,13 +103,18 @@ scratchpad and transcript are keyed to its worktree's path. Retire it by
 closing that session, then, from the main checkout:
 
 ```bash
+git pull --ff-only
 git worktree remove .claude/worktrees/practical-leakey-12a8a2
 git branch -d claude/practical-leakey-12a8a2
 ```
 
 `-d`, never `-D`: it refuses to delete a branch holding commits that are not in
 the branch you are on - `master`, from the main checkout - which makes the
-deletion its own check.
+deletion its own check. **Hence the pull first.** The branch has no upstream,
+so `-d` compares it with the main checkout's LOCAL `master`, which is often
+behind GitHub because sessions push from their worktrees and nobody pulls
+there. Without the pull it refuses, correctly - those commits really are not in
+that `master` yet - but it reads like a warning of data loss.
 
 `.claude/worktrees/` is gitignored. It is also worth adding to
 `.git/info/exclude` on a working machine, because `.gitignore` only takes

@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**248 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**249 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Six merged build branches deleted; the retirement steps needed a pull first](#2026-09-23---six-merged-build-branches-deleted-the-retirement-steps-needed-a-pull-first)
 - [The cleanup role gets a named worktree, and its old one is retired rather than moved](#2026-09-23---the-cleanup-role-gets-a-named-worktree-and-its-old-one-is-retired-rather-than-moved)
 - [Universal claims get a report category, and its first run found five more false](#2026-09-23---universal-claims-get-a-report-category-and-its-first-run-found-five-more-false)
 - [Sao Paulo's rail is drawn from OSM with GeoSampa as the status reference; Rio's SIURB clause accepted](#2026-09-23---sao-paulos-rail-is-drawn-from-osm-with-geosampa-as-the-status-reference-rios-siurb-clause-accepted)
@@ -287,6 +288,30 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Six merged build branches deleted; the retirement steps needed a pull first
+
+- **Deleted `dublin-build`, `milan-build`, `paris-build`, `marseille-build`,
+  `toulouse-build` and `lille-build` locally, at the owner's request**, with
+  `git branch -d`, which refuses a branch holding commits not on the current
+  branch. Re-verified immediately before: 0 commits off `master` each, and none
+  checked out in any worktree (Lille's worktree is still live, but now on a new
+  branch, `render-guard`). Their last commits, should one ever be wanted:
+  `eb1b68d`, `95943cb`, `72674f3`, `5dd2e67`, `7044262`, `0597f23` - all
+  reachable from `master` regardless.
+
+- **`dublin-build` and `milan-build` also exist on GitHub, and were left
+  alone.** Deleting a remote branch is a push, and the request was about the
+  local ones; raised with the owner instead.
+
+- **The retirement steps written an hour earlier would have refused.** They
+  said to run `git branch -d claude/practical-leakey-12a8a2` from the main
+  checkout, but that branch has no upstream, so `-d` compares it with the main
+  checkout's LOCAL `master` - 19 commits behind GitHub at the time, because
+  sessions push from their worktrees and nobody pulls there. It would have
+  refused correctly and read like data loss. `docs/session_roles.md` now puts
+  `git pull --ff-only` first. Found by checking the next command against the
+  real repository before anyone had to run it.
 
 ### 2026-09-23 - The cleanup role gets a named worktree, and its old one is retired rather than moved
 
