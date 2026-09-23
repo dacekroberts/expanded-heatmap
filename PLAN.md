@@ -21,6 +21,32 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [ ] **🇫🇷 Validate the SIRENE storefront filter against OSM in the FIRST
+  non-Paris French city built — not in all five, and not skipped.**
+
+  Measured 2026-09-22: **geolocation is confirmed for all six French cities**
+  (Paris 99.98%, Lyon 99.97%, Marseille 99.91%, Rennes 99.90%, Toulouse
+  99.85%, Lille 99.71%), so there is no geocoding leg anywhere in France.
+  **What is still Paris-only is the composition check** — that the employee
+  filter selects the *right rows*, not merely rows that have coordinates.
+
+  In Paris it landed at **50,156 against OSM's 54,198** (92.5%), and
+  **10,595 against 10,642** on restaurants alone. That comparison is what
+  turned France from a rejection into a build, and it has been run in exactly
+  one city.
+
+  **Why this is a checklist item and not a paragraph:** the two halves are
+  easy to conflate, and the geolocation half is now so clean that it invites
+  treating the whole country as settled. It is not. Run the OSM comparison
+  once, on whichever city is built after Paris, and if it holds there, the
+  national claim is evidenced twice and can stand for the rest.
+
+  Storefront layers, for sizing the comparison: Paris 50,156, Marseille
+  8,065, Lyon 7,354, Toulouse 4,833, Lille 3,272, Rennes 2,089. **Rennes and
+  Lille are an order of magnitude below Paris** — a separate scope call about
+  whether a ~2,000-point city earns a page, not a data problem.
+
+
 - [x] **Region switcher on the macro map — DONE 2026-09-22 (`2121ada`).**
 
 The macro map opens on the United States and re-centres on any other region,

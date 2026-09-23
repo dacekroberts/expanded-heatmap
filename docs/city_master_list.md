@@ -1109,6 +1109,44 @@ the difference between this and Jakarta, where no activity field existed at all.
    is **ambiguous in a way that matters** and needs the publisher asked — the
    fact that it fetches is not a finding that it is licensed.
 
+   > **⚠️ SUPERSEDED 2026-09-22 — the pointers were followed, and the conflict
+   > mostly dissolves.** The paragraph above jumped to step 8 ("ask the
+   > publisher") while steps 2, 3 and 5 were still undone: it treated a
+   > **harvester's** metadata field as the last word and never opened the
+   > documents that record names. What reading found:
+   >
+   > | Source | Says | Weight |
+   > |---|---|---|
+   > | `dataportal.se` (the **harvester**) | `accessRights: RESTRICTED`; `license:` the category **`otherlicense`**, not a licence | weakest — a third-party catalogue |
+   > | **Miljöförvaltningen's own Hub DCAT feed** — `open-data-sthlm-miljo.hub.arcgis.com/api/feed/dcat-us/1.1.json`, **109 datasets** | **`accessLevel: public` on all 109**; `license` **CC0 on 8**, blank on 101 incl. this one | **strongest — the publisher asserting** |
+   > | ArcGIS item `8447f7af…` | `access: public`; **no `licenseInfo` field at all** | publisher |
+   > | FeatureServer root | `copyrightText: "Stockholms stad, miljöförvaltningen"`; `licenseInfo` empty | publisher |
+   > | `dataportalen.stockholm.se` deep link | redirects to **`catalog.signin`** — walled, and this project does not create accounts | unread |
+   >
+   > **`read-licence` step 5 decides the contradiction: the publisher outranks
+   > the catalogue**, and the publisher says *public* on all 109 datasets.
+   > That the publisher **declares CC0 on 8 of them** matters too — it shows
+   > the licence field is one they use and chose not to fill here, so the
+   > blank is a genuine silence rather than a missing capability. Those 8 are
+   > a single thematic cluster (ArtArken, biotopes, substrates, landscape),
+   > which reads as one team licensing its own outputs.
+   >
+   > **One tempting over-reach, declined.** Stockholm's traffic office states
+   > at `openstreetgs.stockholm.se`: *"Datainnehåll i dessa tjänster får
+   > vidareutnyttjas fritt och tillhandahållas **'Licensfritt'** om inget
+   > annat anges"* — freely reusable, licence-free unless otherwise stated.
+   > **That is Trafikkontoret's statement about *dessa tjänster*, its own
+   > services — not miljöförvaltningen's**, and extending one department's
+   > terms to another's data is exactly the move this skill exists to stop.
+   > It is evidence about the city's posture, not a licence for this dataset.
+   >
+   > **Position now: SILENT, not restricted** — the Miami-Dade shape, where
+   > the authoritative pages were read and impose no reuse position. Still
+   > genuinely unread: the **walled GeoNetwork record** (try the Internet
+   > Archive, as Barcelona's and Sevilla's were read) and any city-wide open
+   > data policy page. **A letter is no longer the next step, and never was
+   > the first one.**
+
 **A second Swedish city worth noting:** `dataportal.se` shows **Göteborgs
 stad** publishing *both* `Livsmedelsverksamheter` ("alla aktiva
 livsmedelsverksamheter", JSON + CSV) and `Restauranger med serveringstillstånd`
