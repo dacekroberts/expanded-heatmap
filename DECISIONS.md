@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**166 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**167 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Dublin built: the rail source reversed mid-build, and a national grid got admitted](#2026-09-22---dublin-built-the-rail-source-reversed-mid-build-and-a-national-grid-got-admitted)
 - [Dublin Step 0: a register with no names, and a taxonomy rule that inverts](#2026-09-22---dublin-step-0-a-register-with-no-names-and-a-taxonomy-rule-that-inverts)
 - [Barcelona's live terms finally read, and they carried a clause that would have sunk the city](#2026-09-22---barcelonas-live-terms-finally-read-and-they-carried-a-clause-that-would-have-sunk-the-city)
 - [Madrid and Barcelona published, and the live site showed a defect no local check could have](#2026-09-22---madrid-and-barcelona-published-and-the-live-site-showed-a-defect-no-local-check-could-have)
@@ -202,6 +203,92 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Dublin built: the rail source reversed mid-build, and a national grid got admitted
+
+- **Dublin built as a four-authority regional map: 96 stations, 13,123
+  storefront premises, 7,595 pins inside a ring.** Step 2 counts: 38,265
+  register rows -> 13,133 after the storefront filter (Retail 9,917, Food
+  service 2,365, Personal services 851) -> 13,127 after the mixed-use vacancy
+  pass -> 13,126 with coordinates -> 13,124 in bounds -> 13,123 inside the
+  dissolved boundary, all distinct on `PropertyNumber`. Per authority: Dublin
+  City 7,184, Fingal 2,062, Dun Laoghaire-Rathdown 2,050, South Dublin 1,827.
+  Stations: 160 GTFS stop_ids -> 98 by name -> 96 inside the four authorities,
+  with Bray Daly and Greystones excluded as County Wicklow. Baseline recorded
+  in `outputs/dublin/baseline.json`; brief re-run at 9/9.
+- **THE RAIL SOURCE WAS WRONG IN THE BRIEF AND WAS REVERSED DURING THE BUILD.**
+  `docs/build_briefs/dublin.md` recorded "Rail - OpenStreetMap, not a feed",
+  which was never measured: the `osm-rail` order is agency GIS layers, then
+  agency GTFS, then OSM **on a recorded ground**, and neither of the first two
+  had been run. A bounded subagent probe found **both** pass. The NTA's
+  national GTFS declares `feed_end_date` **20270922**, a year out, and carries
+  Woodbrook, a station that opened in 2025 - so it is maintained rather than a
+  re-uploaded archive; the NTA also publishes a Feature Service already in
+  EPSG:2157 carrying 14,079 stops and 6,507 route polylines. **This is Madrid's
+  failure in its general form** - "the GTFS is stale or absent" is a different
+  question from "the agency route is closed" - and it is the second time in one
+  week. The rule that follows, for `osm-rail`: **a brief may not record OSM as
+  the rail source without naming the agency endpoints that were tried.** OSM is
+  retained as the cross-check and now runs every build: GTFS 98 station names
+  against OSM's 100, 88 shared, the differences all spelling.
+- **Found that OSM tags all four DART relations `network=Commuter`, so a
+  network filter drops Dublin's principal line.** The first step 1 did exactly
+  that and exited naming DART as missing. The whitelist is on `ref` instead,
+  and `EXCLUDED_NETWORKS` survives as reporting only. This is the third
+  measured instance of `osm-rail`'s rule that a `network` tag is a label rather
+  than evidence, after Mexico City's Lecheria and Guadalajara's Linea 4 - and
+  the first where the mis-tagged line is the one the city is built around.
+- **Admitted EPSG:2157 to `check_provenance.py`'s per-city-UTM invariant by
+  extending it, not by relaxing it.** Both of Dublin's sources publish in Irish
+  Transverse Mercator - the register as `Xitm`/`Yitm`, the boundary layer as
+  `wkid 2157` - so using UTM 29N would transform every point and polygon out of
+  the CRS the publisher measured them in, and Dublin sits within a
+  quarter-degree of zone 29's eastern edge where that zone's distortion is
+  worst. A `NATIONAL_GRIDS` table now admits a documented national grid **only
+  where the city's own longitude falls inside the grid's domain**, so a copied
+  CRS still fails exactly as it did. The rejected alternative was bending the
+  city to UTM to keep the check simple. Dublin is consequently the first city
+  here with **no geocoding step and no reprojection step**: the only transform
+  is 2157 -> 4326 to draw.
+- **Chose the line palette by measurement after the inherited one failed.**
+  `route_color` is EMPTY for all three routes in both the feed and the feature
+  service, so there is no agency colour to be faithful to, and the project's
+  rule that badly-scoring AGENCY colours are kept did not apply. OSM's
+  community values scored CIE76 21.7 (DART) / 24.3 (Luas Green) / 27.5 (Luas
+  Red) against the category pins they are drawn under. Re-measured: Luas Red
+  `#8B0000` at 39.5 and Luas Green `#006400` at 37.4 are the best available -
+  **nothing red or green clears the preferred 45**, because red sits near the
+  magenta food pin and green near the teal personal-services pin by
+  construction, and a line named "Luas Red Line" cannot be drawn in purple.
+  **DART moved off green entirely to `#F57C00`**, scoring 72.4, which also
+  fixed a problem no number showed: with OSM's palette the map had two green
+  lines. `#E65100` was rejected at 36.0 from Luas Red - a line has to be
+  legible against the other lines as well as against the pins.
+- **Keyed the taxonomy on `Uses` segments rather than whole strings.** 963
+  distinct values reduce to **318 distinct segments**, comma-separated with `-`
+  as a null placeholder, so mapping segments means a combination never seen
+  still classifies. All 318 are either classified or explicitly listed as
+  non-storefront, and step 2 reports any that are neither - the two cases
+  otherwise look identical, because an unmapped segment is silently dropped.
+  `Category` is carried as an EXTRA_COLUMN for one job only: separating a
+  retail `SHOP` from an industrial `STORE`. Recorded in passing: every `SHEET`
+  value is a billboard size (48-sheet, 6-sheet), not a premises.
+- **Recorded that `check_personal_exposure.py`'s heuristics measure nothing for
+  Dublin, and made the script say so.** The displayed name is the street
+  address, so the script reported 297 "person-like" pins (3.9%) - which are
+  Irish streets named after people (Ashe Street, Thomas Street), floor lists
+  ("Basement, Ground & First floor") read as "Surname, First", and unit
+  descriptors ("(Basement) 51 Henry Street") read as "name (trade)". All
+  verified by sampling. A `name_is_address` flag now prints that warning above
+  the numbers, so the next reader does not re-derive it or, worse, record 3.9%
+  as an exposure figure. **The real result is zero, structurally**: step 2
+  exits if any name-like column ever appears.
+- **Held Dublin off master rather than deploying it.** Landing `app/` on master
+  IS deploying, and `deploy-verify` is deliberately deferred to run once over a
+  batch of two or three cities. The city is complete and verified locally - the
+  rendered map was checked in a browser, carries its OpenStreetMap attribution
+  linked to the copyright page, renders all three line labels and the legend,
+  and logs no console errors - but it is not on master and is not live.
 
 ### 2026-09-22 - Dublin Step 0: a register with no names, and a taxonomy rule that inverts
 
