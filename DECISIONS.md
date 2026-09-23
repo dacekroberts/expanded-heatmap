@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**195 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**196 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Category B's 31 counts read, one edited, and the denominator rule earned its keep](#2026-09-23---category-bs-31-counts-read-one-edited-and-the-denominator-rule-earned-its-keep)
 - [A superseded document's citations are a trail, and the check was auditing them](#2026-09-23---a-superseded-documents-citations-are-a-trail-and-the-check-was-auditing-them)
 - [Following one dead constant found a comment describing an approach the city does not use](#2026-09-23---following-one-dead-constant-found-a-comment-describing-an-approach-the-city-does-not-use)
 - [Category D's 18 remaining constants are mostly deliberate records, not decay](#2026-09-23---category-ds-18-remaining-constants-are-mostly-deliberate-records-not-decay)
@@ -234,6 +235,42 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Category B's 31 counts read, one edited, and the denominator rule earned its keep
+
+- **Read all 31 hand-kept counts. Exactly one was stale, and the one that
+  looked worst was correct.** `osm-rail`'s "All fourteen cities before Mexico
+  City read GTFS" sits in a project that now has twenty, which reads as a
+  drifted count - and is not. The denominator is CLOSED by the phrase "before
+  Mexico City", and twenty minus the six built since (Mexico City,
+  Guadalajara, Madrid, Barcelona, Dublin, Milan) is fourteen. **Updating it to
+  twenty would have destroyed a true statement**, which is precisely the
+  failure the denominator rule exists to prevent; the rule was applied to a
+  live case rather than recited.
+
+- **The one real staleness was a tense, not a number.**
+  `premises-taxonomy`'s "Distilled from the four cities that needed one -
+  Chicago, Edmonton, Madrid and Barcelona" was true when written and now reads
+  as a claim that only four ever needed one. Dublin and Milan have since got
+  their own modules. Fixed by closing the denominator - "the FIRST four" -
+  and naming the two that followed, so the sentence stays true as more arrive
+  rather than needing another edit.
+
+- **The other twenty-nine are closed sets and were left alone**: "all three
+  buckets" (a project constant), "all five boroughs" (New York's, permanently),
+  "the six pre-1998 municipalities" (a historical fact about Toronto's
+  amalgamation), "the two Mexican cities" and "the two Alberta cities" (both
+  currently exact). Category B is titled "to eyeball" rather than "to fix" for
+  this reason, and the eyeballing is the work - a pass that corrected on sight
+  would have introduced errors into five of them.
+
+- **This closes the parked pile.** Across the session category A went from 3
+  findings to 1, all noise removed; category D from 63 to 18 with the one
+  genuine defect among them found and annotated; category C was already 0; and
+  category B is now read in full with a single edit. What remains is not
+  backlog but the two items that need another session's context - Dublin's map
+  re-render and the Paris Step 0 checklist - plus one documented checker blind
+  spot, category D attributing by name rather than by module.
 
 ### 2026-09-23 - A superseded document's citations are a trail, and the check was auditing them
 
