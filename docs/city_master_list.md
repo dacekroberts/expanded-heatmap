@@ -76,7 +76,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 31
+## Candidates — 32
 
 Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 **Eight cities moved to discarded on measurement** and **two were upgraded**.
@@ -310,7 +310,7 @@ screen — against the worst geocoding problem and a two-bucket ceiling.
 **Still the biggest open decision in this list**, and a judgment call rather
 than a probe.
 
-## ⚠️ OPEN SCREENING GAP — rows discarded on ABSENCE rather than evidence (3 cities + 3 countries)
+## ⚠️ OPEN SCREENING GAP — rows that rest on an absence (3 cities unscreened, 1 blocked)
 
 **Not candidates yet and not discards — unscreened.** `global_country_shortlist.md`
 records *"Italy stays a Milan-only country"*, but that rests on **Naples** and
@@ -346,7 +346,7 @@ row, and three of this one's rows carried no reason at all.** Two of those now
 do. Göteborg was never ruled out — it was simply never placed anywhere, which
 is how a candidate disappears without anyone deciding to drop it.
 
-## 🟣 Band D — one bucket only: complete, but narrower than the others (2 cities)
+## 🟣 Band D — one bucket only: complete, but narrower than the others (3 cities)
 
 **Screening is COMPLETE for both, and both passed.** Each has a real
 premises-level register with coordinates, current data and a usable licence.
@@ -387,6 +387,27 @@ Stockholm's 8,146 premises are the larger map.
 
 
 ---
+
+### 🇸🇪 Göteborg — promoted into this band 2026-09-23
+
+**It was never ruled out. It was never PLACED.** The master list named it
+twice — *"Unprobed candidate"*, *"Better data, weaker map"* — and put it in no
+band, which is how a candidate disappears without anyone deciding to drop it.
+Probed to the same depth as Stockholm and Zurich on 2026-09-23.
+
+| | |
+|---|---|
+| **Catalogue** | **EntryStore**, `catalog.goteborg.se/store/search?type=solr` — the same platform as Stockholm's. Three guessed CKAN bases returned a 662-byte HTML shell first: **a wrong endpoint, not a verdict** |
+| **The one bucket** | ✅ **FOOD ONLY, and the control proves it.** `livsmedel` → 1, `restaurang` → 6, but **`handel` → 0, `butik` → 0, `företag` → 0, `detaljhandel` → 0, `frisör` → 0.** The search filters, so these are real absences |
+| **`Restauranger med serveringstillstånd`** | **1,043 rows**, **CC ZERO**. Carries `Namn` (trade name) and **`Besöksadress`** — the *visiting* address, kept distinct from `Fakturaadress`, the invoice address. **That is the location split done right**, the same distinction that made Norway pass |
+| **`Livsmedelsverksamheter`** | *"Alla aktiva livsmedelsverksamheter"* — **active food BUSINESSES, not inspections**, so no dedupe, where Stockholm's 8,146 premises had to be distilled from **289,742** inspection rows. `accrualPeriodicity: DAILY` |
+| ⚠️ **Row count UNMEASURED** | Its DCAT distribution node exposes **no `accessURL`** — `resource/18` returns RDF rather than the file. **The one open measurement**, and until it is taken Stockholm's measured 8,146 is the stronger number |
+| **Rail** | **Trams, no metro.** Better data on a weaker map — the trade Toronto lost on |
+
+**Göteborg does NOT displace Stockholm**, and the claim that it has "better
+data" is structural rather than measured: two registers to one, businesses
+rather than inspections, CC0 rather than SILENT. **The count that would settle
+it has not been taken.**
 
 ### The two cities in full
 
@@ -919,7 +940,18 @@ took was a different *host* — `services1.arcgis.com`, reachable all along.
 The rule held and protected the city from a premature discard; the cost
 estimate attached to it was guesswork. **See the resolution above.**
 
-## DISCARDED — 30 cities, each naming its evidence
+## DISCARDED — 32 cities, each naming its evidence
+
+
+**Two rows added 2026-09-23 by the discard sweep.** Both had sat on *"Countries
+ruled out"* with **no parenthetical evidence at all**, which `add-country` says
+is not a discard. Both were probed, and **both discards hold** — which is worth
+stating plainly rather than treating the audit as vindication.
+
+| City | Evidence, 2026-09-23 |
+|---|---|
+| **Lisbon** 🇵🇹 | **The aggregate trap.** `dados.gov.pt` returns **430** hits for *estabelecimentos*, and they are **aggregate hotel statistics** — *"Proporção de estabelecimentos hoteleiros que utilizam computador (%)"* — plus prison establishments. No premises register |
+| **Warsaw** 🇵🇱 | **Control passes** (`zzqqxx` → 0, so the search genuinely filters). `CEIDG` is **company-level**, the registered-office shape. **One premises-shaped lead survives** — *Wykaz punktów sprzedaży napojów alkoholowych*, licensed alcohol sales points, the Singapore-tobacco shape — **one bucket at best**, and narrower than Göteborg's |
 
 | City | Why |
 |---|---|

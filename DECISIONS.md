@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**186 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**187 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [The sweep's results sorted: Goteborg banded, two discards evidenced](#2026-09-23---the-sweeps-results-sorted-goteborg-banded-two-discards-evidenced)
 - [The discard record swept for rows that rest on an absence](#2026-09-23---the-discard-record-swept-for-rows-that-rest-on-an-absence)
 - [Four licences read: Oslo is clear, Prague has one left](#2026-09-23---four-licences-read-oslo-is-clear-prague-has-one-left)
 - [Hong Kong, Prague and Oslo taken to brief-ready; two cities changed size](#2026-09-23---hong-kong-prague-and-oslo-taken-to-brief-ready-two-cities-changed-size)
@@ -225,6 +226,63 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - The sweep's results sorted: Goteborg banded, two discards evidenced
+
+- **Göteborg probed to Stockholm and Zurich's depth and placed in Band D**, so
+  the band is now **three one-bucket cities** and **candidates go 31 to 32**.
+  Its catalogue is **EntryStore** at
+  `catalog.goteborg.se/store/search?type=solr` - the same platform as
+  Stockholm's - and three guessed CKAN bases had returned a 662-byte HTML
+  shell before it was found, which was **a wrong endpoint rather than a
+  verdict**.
+
+- **The one-bucket finding is a MEASURED absence, not an assumption, because
+  the search was controlled.** `livsmedel` returns 1 and `restaurang` returns
+  6, while **`handel`, `butik`, `företag`, `detaljhandel` and `frisör` all
+  return 0.** A controlled zero is a finding; an uncontrolled one is a
+  statement about the query, which is the distinction that cost Seoul a wrong
+  verdict earlier in this screen.
+
+- **`Restauranger med serveringstillstånd`: 1,043 rows, CC ZERO, and it gets
+  the address distinction right.** It carries `Namn` (trade name) and
+  **`Besöksadress`** - the *visiting* address - kept separate from
+  `Fakturaadress`, the invoice address. **That is the same distinction that
+  made Norway pass** and that Bronnoysund's `beliggenhetsadresse` names
+  explicitly. CC0 is also a stronger licence position than Stockholm's SILENT.
+
+- **But the claim that Göteborg has "better data than Stockholm" is
+  STRUCTURAL, not measured, and it is recorded as such.**
+  `Livsmedelsverksamheter` is *"Alla aktiva livsmedelsverksamheter"* - active
+  food **businesses**, not inspections, so it needs no dedupe where Stockholm's
+  8,146 premises had to be distilled from **289,742** inspection rows, and it
+  updates **daily**. **Its row count could not be obtained**: the DCAT
+  distribution node exposes **no `accessURL`**, and `resource/18` returns RDF
+  rather than the file. **Until that count is taken, Stockholm's measured
+  8,146 is the stronger number**, and saying otherwise would be exactly the
+  schema-over-data error that Milan and Paris both produced.
+
+- **Göteborg collapses three open questions into one.** Stockholm, Zurich and
+  now Göteborg are all complete, licensed and food-service-only, so **whether a
+  one-bucket city belongs on the site is a single scope decision covering three
+  cities** rather than two separate ones. Recorded in `city_cost_order.md`
+  band 5.
+
+- **Lisbon and Warsaw moved from "ruled out with no evidence" into the DISCARD
+  list WITH evidence, and both discards hold.** That is worth stating plainly
+  rather than treating the audit as vindication: the rule that a discard must
+  name its evidence per row is about being CHECKABLE, not about being wrong.
+  **Lisbon** is the aggregate trap - `dados.gov.pt` returns 430 for
+  *estabelecimentos* and they are hotel statistics and prisons. **Warsaw's**
+  control passes, CEIDG is company-level, and its one surviving
+  premises-shaped lead - licensed alcohol sales points - is **narrower than
+  Göteborg's**, so it does not reach Band D either. Discard count 30 to 32.
+
+- **Cairo stays unprobed and Zagreb stays blocked**, both in the open-screening
+  section rather than in the discard list, because neither has a finding.
+  Rome and Turin stay there too: their catalogues answered and their **schemas
+  were never read**, so they are candidates-pending-Step-0 rather than banded
+  cities.
 
 ### 2026-09-23 - The discard record swept for rows that rest on an absence
 

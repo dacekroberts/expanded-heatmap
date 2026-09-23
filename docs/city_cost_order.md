@@ -17,8 +17,8 @@ about it is measured).
 - When the two disagree about a *fact*, the master list wins and this file is
   stale. When they disagree about an *order*, that is not a disagreement.
 
-**Current state, 2026-09-22 — 32 candidates.** Dublin moved to BUILT this day
-and is not counted here.
+**Current state, 2026-09-23 — 32 candidates.** Dublin and Milan are BUILT and
+are not counted here; Göteborg was added by the 2026-09-23 discard sweep.
 
 ---
 
@@ -70,11 +70,11 @@ column alone.
 | **Oslo** 🇳🇴 | 1 | **97.8%** two-stage | ⚠️ Physically-in-Oslo share unmeasured — settle with the bulk download, not the API |
 | **Seoul** 🇰🇷 | 1 | Partial | 8 datasets, 197,276 premises — multi-source |
 
-## Cost band 5 — complete, but one bucket: an owner call rather than work (2 cities)
+## Cost band 5 — complete, but one bucket: an owner call rather than work (3 cities)
 
 | Cities | Buys | The decision |
 |---|---|---|
-| **Stockholm** 🇸🇪 · **Zurich** 🇨🇭 | 1 each | Both measured, both licensed, both **food service only**. Cheap to build; the open question is whether a one-bucket city belongs on the site at all. **That is a scope decision, not a task** |
+| **Stockholm** 🇸🇪 · **Zurich** 🇨🇭 · **Göteborg** 🇸🇪 | 1 each | Three measured, licensed, **food-service-only** cities. Cheap to build; the open question is whether a one-bucket city belongs on the site at all. **That is a scope decision, not a task — and it is now ONE decision covering three cities rather than two.** ⚠️ Göteborg's main register `Livsmedelsverksamheter` has **no measured row count**: its DCAT node exposes no `accessURL`. Until it is taken, Stockholm's measured 8,146 premises is the stronger number |
 
 ## Cost band 6 — blocked or keyed (6 cities)
 
@@ -101,10 +101,10 @@ column alone.
 | 2 — free riders | 4 |
 | 3 — a join | 2 |
 | 4 — a keyless geocode | 4 |
-| 5 — one bucket, owner call | 2 |
+| 5 — one bucket, owner call | 3 |
 | 6 — blocked or keyed | 6 |
 | 7 — national geocoding project | 12 |
-| **Total** | **32** |
+| **Total** | **33** |
 
 Against `city_master_list.md`'s bands: A 9 − Dublin = 8, B 6, C 16, D 2 = 32.
 **The two files must always sum to the same number**, and that is the check to
