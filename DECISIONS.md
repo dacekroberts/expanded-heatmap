@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**224 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**225 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Seoul's brief, and two measurements that failed rather than answered](#2026-09-23---seouls-brief-and-two-measurements-that-failed-rather-than-answered)
 - [Goteborg's licence is CC0, and it is on the DISTRIBUTION](#2026-09-23---goteborgs-licence-is-cc0-and-it-is-on-the-distribution)
 - [Goteborg unblocked, and it may not be a one-bucket city](#2026-09-23---goteborg-unblocked-and-it-may-not-be-a-one-bucket-city)
 - [Stockholm and Zurich rail counted; Zurich has no metro at all](#2026-09-23---stockholm-and-zurich-rail-counted-zurich-has-no-metro-at-all)
@@ -263,6 +264,51 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Seoul's brief, and two measurements that failed rather than answered
+
+- **Seoul had NO brief at all while sitting in the ready-to-build band**, and
+  now has a partial one that says so in its first line. **197,276 active
+  premises across 8 datasets, no account, `좌표정보(X/Y)` on 99.5% at
+  EPSG:5174, KOGL Type 1.** Korea needs **neither a geocoding leg nor a new
+  geocoder** - coordinates come with the register, which is Paris's shape.
+
+- **✅ Its subway is the best rail result in this project: 149 relations,
+  149 named, 149 coloured, 10 refs, and ZERO without a `ref`.** Measured
+  inside OSM relation 2297418, resolved by name. **That is the exact opposite
+  of what three other cities showed the same day** - Bucharest's `Extensie
+  M4`, Singapore's uncoloured `JRL`, Stockholm's unref'd subway and tram.
+  Seoul's metro needs no hand-assigned colours and no ref recovery.
+
+- **🚨 TWO RAIL MEASUREMENTS FAILED AND ARE RECORDED AS FAILURES, not
+  as results.** `light_rail` returned a **transport error**, not a count - and
+  Seoul has light rail (Ui-Sinseol, Sillim), so it is a real gap. The
+  station-node query returned **`0`**, and **Seoul has several hundred
+  stations**: Korean stations are evidently tagged in a way
+  `node["railway"="station"]` misses. **Writing that 0 into the brief would
+  have been the uncontrolled-zero trap** - the thing this project has been
+  caught by more than any other - so it is recorded as UNKNOWN with the reason.
+
+- **Korea's national station standard dataset is a FALSE FRIEND and the brief
+  says why.** It carries **1,099 stations with WGS84 and NO line geometry**.
+  `add-country` names this exact case: it passes *"are there station points"*
+  and fails *"is there line geometry"*, and **a screen asking only the first
+  records a false pass**. This project draws and labels every line, so OSM is
+  the rail source and the standard dataset is not.
+
+- **The brief's most useful section is what it does NOT have**, and that is
+  deliberate: seven items, each Step 0 work never done rather than detail
+  omitted. **The eight datasets have never been enumerated individually** -
+  197,276 is a country-screen total and which eight, how many rows each, what
+  columns, and whether they overlap are all unknown. **The taxonomy has never
+  been measured.** **The non-storefront share is unknown**, and every register
+  measured this week carried one - Philadelphia 79%, D.C. 61%, Goteborg 26.5%.
+
+- **`data.seoul.go.kr`'s search is INERT and the brief carries that as a
+  standing trap.** A real term and `zzzzqqq` return **byte-identical pages**,
+  and a conclusion was already drawn from it once and was wrong. Enumerate, or
+  use the portal's own facet counts - which settled in one read what paging
+  through 251 results did not.
 
 ### 2026-09-23 - Goteborg's licence is CC0, and it is on the DISTRIBUTION
 
