@@ -17,7 +17,7 @@ about it is measured).
 - When the two disagree about a *fact*, the master list wins and this file is
   stale. When they disagree about an *order*, that is not a disagreement.
 
-**Current state, 2026-09-23 — 32 candidates.** Dublin and Milan are BUILT and
+**Current state, 2026-09-23 — 31 candidates.** Dublin and Milan are BUILT and
 are not counted here; Göteborg was added by the 2026-09-23 discard sweep.
 
 ---
@@ -52,22 +52,22 @@ city against six — which is the ordering this file exists to make visible.
 
 | Cities | Buys | Marginal cost |
 |---|---|---|
-| **Marseille · Toulouse · Lille · Rennes** 🇫🇷 | — | **The same SIRENE, the same Licence Ouverte 2.0, the same filter.** The cheapest builds available anywhere on this list — but **strictly after Paris**, never instead of it. ⚠️ France's OSM rail composition is validated on **Paris only**; the first non-Paris build must re-validate it. ⚠️ **Lyon was REMOVED from this band 2026-09-22** — three gates (an account this project will not create, a trademark clause that collides with the on-map line-label invariant, and the project's second indemnity), so it is no longer a cheap follower. It is not discarded; see Band 6 |
+| **Marseille · Toulouse · Lille · Rennes** 🇫🇷 | — | **The same SIRENE, the same Licence Ouverte 2.0, the same filter.** The cheapest builds available anywhere on this list — but **strictly after Paris**, never instead of it. ⚠️ France's OSM rail composition is validated on **Paris only**; the first non-Paris build must re-validate it. ⚠️ **Lyon was REMOVED from this band 2026-09-22** — three gates (an account this project will not create, a trademark clause that collides with the on-map line-label invariant, and the project's second indemnity), so it is no longer a cheap follower. ⛔ **It was DISCARDED 2026-09-23** on four independent blockers — see the master list |
 
 ## Cost band 3 — coordinates are a JOIN (2 cities)
 
 | City | Buys | Route | What is left |
 |---|---|---|---|
 | **Prague** 🇨🇿 | 1 | **99.8%** — a 3.4 MB keyless download and a dict lookup | Czech facts, CZ-NACE taxonomy, rail (Golemio key *or* OSM). ⚠️ EPSG:5513 sign-and-axis flip, verified 2026-09-22 |
-| **Copenhagen** 🇩🇰 | 1 | **100%** of 85,351 access addresses carry WGS84 | ⚠️ **Business leg still gated** by the free CVR account. ⚠️ Frederiksberg (0147) is a separate kommune inside Copenhagen — omit it and the map has a hole in its middle |
+| **Copenhagen** 🇩🇰 ✅ | 1 | **96.9%** of its storefront rows carry a **DAR address UUID** — a join, not a geocode | ✅ **UNGATED 2026-09-23 and MEASURED: 14,887 rows across THREE buckets** (retail 6,689 / food 5,163 / personal 3,035) at **100.0% named** — the best-named register in the project. Licence **CC BY 4.0**. Owner obtained the Datafordeler key; only `CVRPerson` is gated and this project does not want it. ⚠️ **`v/` marks a sole trader's personal name** in the trade-name field — unmeasured. ⚠️ Frederiksberg (0147) is a separate kommune inside Copenhagen — omit it and the map has a hole in its middle |
 
 ## Cost band 4 — coordinates are a keyless GEOCODE (4 cities)
 
 | City | Buys | Rate | Cost driver |
 |---|---|---|---|
 | **Hong Kong** 🇭🇰 ▲▲▲ | 1 | ALS answers, returns a confidence `Score` | **Best rail in the whole screen** — 126 relations, 125 named, 117 coloured. ✅ Indemnity ACCEPTED 2026-09-22 |
-| **Singapore** 🇸🇬 ▲▲ | 1 | **98.8%** of answered lookups | Four registers → `multi-source-city`. **7,767 distinct lookups, not 35,064.** Retail narrow by construction |
-| **Oslo** 🇳🇴 | 1 | **97.8%** two-stage | ⚠️ Physically-in-Oslo share unmeasured — settle with the bulk download, not the API |
+| **Singapore** 🇸🇬 ⛔ | 1 | **98.8%** of answered lookups | ⛔ **MOVED TO THE ONE-BUCKET BAND 2026-09-23.** Its big register — NEA eating establishments, 36,687 rows — **covers 2015-06-11 to 2016-09-06**, and the rows confirm it (`suspension_start_date` returns 2016). Only tobacco 4,235 and pharmacies 243 are current: **~4,478 rows, all retail.** `lastUpdatedAt` 2024 is a metadata touch, not a refresh |
+| **Oslo** 🇳🇴 | 1 | **97.8%** two-stage | ✅ **13,481 bucket sub-units measured 2026-09-23, names 100% usable after a trim.** 🚨 But **28.6% of parent entities are `ENK` sole traders** against Paris's 8.7%, and the guard needs a JOIN to the parent `enhet` — the sub-unit's own `organisasjonsform` is never `ENK` and would report 0% |
 | **Seoul** 🇰🇷 | 1 | Partial | 8 datasets, 197,276 premises — multi-source |
 
 ## Cost band 5 — complete, but one bucket: an owner call rather than work (3 cities)
@@ -80,7 +80,7 @@ city against six — which is the ordering this file exists to make visible.
 
 | Cities | Buys | Blocker |
 |---|---|---|
-| **Bucharest** 🇷🇴 ▲▲ | 1 | `data.gov.ro` blackholes on both ports — an **outage, so retry**. OSM fallback measured at 146,116 addressed objects |
+| **Bucharest** 🇷🇴 ▲▲ | 1 | `data.gov.ro` blackholes on both ports — **still down two days running**, which weakens the original *outage, so retry* reading. OSM fallback re-measured **146,228** addressed objects; rail re-counted at **13 relations, 12 coloured, 64 stations**. ⛔ **Moved to the one-bucket band**: Romania's catalogue has no second bucket |
 | **Taipei · Kaohsiung · Taoyuan · Taichung** 🇹🇼 | **4** | **Needs a `data.gov.tw` API key** — gate item 16. High `Buys`, so this is the best-value item in the blocked tier once the key exists |
 
 ## Cost band 7 — national geocoding is a project, not a step (12 cities)
@@ -105,11 +105,16 @@ city against six — which is the ordering this file exists to make visible.
 | 7 — national geocoding project | 12 |
 | **Total** | **31** |
 
-Against `city_master_list.md`'s bands: **A 6 + B 5 + C 16 + D 4 = 31.**
-⚠️ **Bucharest moved B → D on 2026-09-23** — its coordinate route is measured,
-but Romania's catalogue holds no second bucket, and **where both are true the
-ceiling is what is actually stopping the city.** Its COST band is unchanged:
-this file orders by what a build costs, not by what blocks it, and those are
-different questions about the same city.
+Against `city_master_list.md`'s bands: **A 10 + B 16 + C 5 = 31.**
+⚠️ **Bucharest and Singapore both moved to the ONE-BUCKET band on 2026-09-23**
+— each has a measured coordinate route and only one bucket, and **where both
+are true the ceiling is what is actually stopping the city.** Their COST bands
+are unchanged: this file orders by what a build costs, not by what blocks it.
+
+⚠️ **The master list renumbered on 2026-09-23** — the coordinates band
+closed by SUCCEEDING (all four members ended up measured and brief-ready) and was
+absorbed into **A**, so the old `C` and `D` became **B** and **C**. **Name the
+condition, not the letter** — a sentence saying *"moved to the one-bucket band"*
+survives a renumber and one saying *"moved to Band D"* does not.
 **The two files must always sum to the same number**, and that is the check to
 run when either is edited.

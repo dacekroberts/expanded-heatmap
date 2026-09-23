@@ -117,9 +117,9 @@ part of it, the condition that stopped being true is.
 | Old letter | Now | Why it changed |
 |---|---|---|
 | A | **A** | unchanged |
-| **C** | **B** | Hong Kong, Prague, Taiwan ×4, Bucharest, Singapore, Oslo, Copenhagen |
-| **E** | **C** | Brazil ×2, Japan ×10 |
-| **F** | **D** | Stockholm, Zurich |
+| **C** | **B** → *(2026-09-23: absorbed into A)* | Hong Kong, Prague, Taiwan ×4, Bucharest, Singapore, Oslo, Copenhagen |
+| **E** | **C** → **B** *(2026-09-23)* | Brazil ×2, Japan ×10 |
+| **F** | **D** → **C** *(2026-09-23)* | Stockholm, Zurich |
 | B | *(closed)* | **awaiting permission** — Tel Aviv, discarded on terms |
 | D | *(closed)* | **coordinates and unfinished screening** — Bucharest finished its screening |
 | G | *(closed)* | **access blocked** — Hong Kong left upward, Hyderabad and Kochi measured out |
@@ -129,6 +129,19 @@ for a sentence.** Prose that says *"moved to the coordinates band"* survives
 any renumber; prose that says *"moved to Band C"* does not, and four such
 sentences went stale the moment the letters shifted. They have been rewritten
 to name conditions.
+
+**Renumbered again 2026-09-23, and this time a band closed by SUCCEEDING.**
+The coordinates band existed to hold cities whose coordinate route was
+unmeasured. All four of its last members ended up with the route measured AND
+a brief written, so the condition stopped being true of every one of them and
+the band was absorbed into **A** rather than re-captioned. `C` and `D` moved
+up to `B` and `C` behind it.
+
+⚠️ **Several sentences written on 2026-09-23 named LETTERS and went
+stale within hours of being written** — including two in the Bucharest and
+Singapore sections added that same day. They have been rewritten to name
+conditions. **The rule above is easy to agree with and easy to break in the
+next paragraph.**
 
 ⚠️ **`DECISIONS.md` is append-only and names bands by their letter at the time
 of writing.** Those entries remain true of the moment they describe; this
@@ -168,7 +181,7 @@ results in the sweep.
 
 ---
 
-## 🟢 Band A — ready to build (6 ready + 6 ✅ BUILT)
+## 🟢 Band A — ready to build (10 ready + 6 ✅ BUILT)
 
 **Every question these cities carry is answerable inside the build**, not
 before it. Nothing here needs a probe, a document or a decision first.
@@ -232,7 +245,9 @@ So the next *unstarted* city is the question.
 and only owner decisions left. After that the screen has no city whose
 "what remains" column is empty.
 
-## 🟡 Band B — the coordinate route is MEASURED, not assumed (4 cities)
+### ▲ Four cities joined this band 2026-09-23, when the coordinates band closed
+
+**Their coordinate route was the thing being measured, and all four now have it MEASURED and a brief written** — Prague 5/5, Oslo 5/5, Hong Kong 8/8, and Copenhagen's data in hand with its licence read. **A band whose condition stops being true of every member should close, not be re-captioned around them** — the same reasoning that closed the old Band D when Bucharest finished screening.
 
 **Every route in this band was probed on 2026-09-22 and answered.** The band
 used to say the method was "identified and cheap", which is a description of a
@@ -247,7 +262,7 @@ each register's **own** addresses rather than hand-typed landmarks.
 - **A GEOCODE** — one request per distinct address, against a service that
   answers. **Oslo, Singapore, Hong Kong.** All three are keyless.
 
-**Taiwan left this band** for Band C: its route was the one claim here that did
+**Taiwan left this band** for the national-geocoding band: its route was the one claim here that did
 **not** survive probing. **Bucharest's primary is down** but its fallback is
 measured.
 
@@ -258,7 +273,7 @@ measured.
 | **Hong Kong** ▲▲▲ *(1)* | 🇭🇰 | **A GEOCODE, confirmed keyless.** The government **Address Lookup Service** (`als.gov.hk/lookup`) answers without a key and returns **lat/long AND HK1980 Grid easting/northing AND a confidence `Score`** (76.15, 88.75, 97.69 on three test premises). ✅ **INDEMNITY ACCEPTED by the owner 2026-09-22** — the project's only uncapped liability, priced deliberately. Three conditions bind the build: display source + Government IP acknowledgement + DATA.GOV.HK attribution exactly; run `check_personal_exposure.py` and exclude catch-alls; the dated record in `data_sources.md`. ⚠️ Re-reading the live clause corrected this project's OWN earlier quote twice: it arises **directly or indirectly**, and there is **no notice-and-defend right** | Answers; **per-row rate not yet measured** against the 35,808 |
 | **Oslo** *(1)* | 🇳🇴 | **A GEOCODE, keyless — with two traps.** Kartverket (`ws.geonorge.no/adresser`) answers and returns `representasjonspunkt`. ⚠️ **`fuzzy=true` MUST NOT BE USED**: it "rescued" `Karenslyst allé 8B` as **`allé 1B`** — a different building — and turned `7-Eleven` into `Ellen Gleditsch' vei 7`. It returns plausible coordinates for the wrong place. ⚠️ The API caps at **10,000 rows** (offset 9,900 works, 15,000 returns nothing), so it cannot enumerate the city | **97.8%** via two stages: exact `adressetekst`, then plain `sok`. Never fuzzy |
 
-**⚠️ Two Band B facts that are NOT about coordinates and change build scope:**
+**⚠️ Two facts here that are NOT about coordinates and change build scope:**
 
 - **Oslo's register is not filtered by the address you read.** Bronnoysund's
   `?kommunenummer=0301` does **not** guarantee `beliggenhetsadresse` is in
@@ -279,10 +294,10 @@ measured.
   when it is guessing is worth more than one with a higher raw hit rate** —
   which is exactly what Oslo's `fuzzy` lacked.
 
-## 🟠 Band C — geocoding at national scale (16 cities)
+## 🟠 Band B — geocoding at national scale (16 cities)
 
 **The investment tier.** These share one property that separates them from
-Band B: the address work is a project rather than a step, and it is worth
+the buildable band: the address work is a project rather than a step, and it is worth
 doing only because the machinery, once written, is reused across many
 cities. Japan is ten cities from one schema; Brazil is two from one register.
 
@@ -343,7 +358,7 @@ row, and three of this one's rows carried no reason at all.** Two of those now
 do. Göteborg was never ruled out — it was simply never placed anywhere, which
 is how a candidate disappears without anyone deciding to drop it.
 
-## 🟣 Band D — one bucket only: complete, but narrower than the others (5 cities)
+## 🟣 Band C — one bucket only: complete, but narrower than the others (5 cities)
 
 **Screening is COMPLETE for all five, and all five passed.** Each has a real
 premises-level register with coordinates, current data and a usable licence.
@@ -387,7 +402,7 @@ Stockholm's 8,146 premises are the larger map.
 
 ---
 
-### 🇸🇬 Singapore — moved here from Band B 2026-09-23
+### 🇸🇬 Singapore — moved here from the coordinates band 2026-09-23
 
 **Two buckets on paper, ONE on current data.** Four keyless premises registers
 exist and the licence permits everything this project does — but **the big
@@ -446,15 +461,15 @@ reconcile** — MRT 54 + LRT 13 against 90 rail stations total, so 23 are
 tagged as neither and the naive query undercounts badly.
 
 **Reinstatement is cheap and well-defined: if NEA refreshes the eating-
-establishment register, Singapore returns to Band B immediately.** Everything
+establishment register, Singapore returns to the buildable band immediately.** Everything
 else about it is already done — licence read, geocode measured at 98.8%,
 rail counted, registers enumerated. **It is parked on ONE fact.**
 
-### 🇷🇴 Bucharest — moved here from Band B 2026-09-23
+### 🇷🇴 Bucharest — moved here from the coordinates band 2026-09-23
 
 **Nothing about Bucharest got worse. The band it was in was measuring the
-wrong thing.** Band B describes a **coordinate route**, and Bucharest's is
-genuinely measured. Band D describes the **one-bucket ceiling**, and
+wrong thing.** The band it sat in described a **measured coordinate route**, and Bucharest's is
+genuinely measured. This band describes the **one-bucket ceiling**, and
 Bucharest has one. **Where both are true, the ceiling is what is actually
 stopping the city** — which is what these bands exist to say.
 
@@ -604,7 +619,7 @@ below.
 
 | City | Rail (OSM) | Business leg |
 |---|---|---|
-| ▲▲ **Tel Aviv** 🇮🇱 | *(later discarded — see the closed awaiting-permission band)* | **PROMOTED OUT OF BAND D 2026-09-22 — to Band B. Both legs measured.** The WAF-blocked portal was never the only host: `gisn.tel-aviv.gov.il` answers, and carries **22,176 licensed businesses** with activity *and* location. See Band B |
+| ▲▲ **Tel Aviv** 🇮🇱 | *(later discarded — see the closed awaiting-permission band)* | **PROMOTED OUT OF BAND D 2026-09-22 — to Band B. Both legs measured.** The WAF-blocked portal was never the only host: `gisn.tel-aviv.gov.il` answers, and carries **22,176 licensed businesses** with activity *and* location. See the closed awaiting-permission band below |
 | **Hyderabad** 🇮🇳 | 6 rel, all named + coloured | ⚠️ **RE-PROBED 2026-09-22; every remaining route is now closed too.** `ghmc.gov.in` — the licensing body — returns **403 in a real browser**, an F5 WAF page that names itself. `data.telangana.gov.in` resolves but is unroutable for us; it runs **DKAN**, and **the Archive holds ~200 URLs but not the dataset-list endpoint**, so the route that enumerated Romania does not work here. `tgbpass` is a false friend — *building* permits. And **`api.data.gov.in`'s `q` parameter is INERT**: `Telangana` and `zzqqxxnonsense` both return the identical **288,011**, so the national API cannot be filtered at all — only its website search can, and that was already measured negative. **Blocked, not negative** |
 | **Kochi** 🇮🇳 | 2 rel, named + coloured | ⚠️ **PROBED 2026-09-22, and the lead was a FALSE FRIEND.** `go.lsgkerala.gov.in/pages/query.php?t=establishment` is a **Government Orders and Circulars search** — "establishment" matches 6,526 orders about *staffing*; Kochi's own `/establishment/396` is ജീവനക്കാര്യം, its **personnel** page. In Indian government usage "establishment" means staff posts, not premises. The real route is **K-SMART** (`tax.lsgkerala.gov.in` redirects to `ksmart.lsgkerala.gov.in`) and **Sanchaya** — both live, both **transactional citizen portals** for paying tax and renewing licences, **no bulk export found**. Kerala's local bodies do issue the licences, so the register exists. **The Hong Kong shape: blocked, not negative** |
 
