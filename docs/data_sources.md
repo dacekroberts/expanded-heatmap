@@ -1318,6 +1318,25 @@ learns it at the same moment they learn where the data came from. Keep those
 two wordings and `excluded_categories.md` consistent; all three are one
 promise.
 
+**A third trigger, added 2026-09-22: a licence that ENDS BY ITS OWN TERMS.**
+The first two fire on a publisher asking and on this project finding out.
+This one fires on neither — **Licence Mobilités Art. 11.1 terminates *de plein
+droit, sans préavis* on breach**, so the grant can simply stop, with no notice
+to receive and nothing to discover. It is the first revocable grant in this
+project: CC BY, Licence Ouverte, the PSI licences and ODbL are all perpetual,
+and none of them can lapse without someone saying so.
+
+**Owner's decision 2026-09-22: this is ACCEPTED, and Paris is built on it.**
+The response is the same as for the other two triggers and is decided in
+advance rather than under pressure — **if the grant lapses, Paris is archived:
+its page comes off the site and its entry out of `app/cities.py`, while its
+pipeline, brief and `DECISIONS.md` record stay in the repository.** That is
+the distinction worth keeping: a city coming *down* is not the same as a city
+being *deleted*, and the build remains reproducible if the position changes
+back. The rejected alternative was declining to build Paris at all, which
+would have cost the only national register in the screen that buys six cities,
+to avoid a risk that is answerable by taking one page down.
+
 **This project commits, in advance, to honouring such a request.** Stated so
 that it is a standing position rather than a decision made under pressure:
 
