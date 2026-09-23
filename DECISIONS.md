@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**179 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**180 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Hong Kong's indemnity accepted, and re-reading it found two omissions](#2026-09-22---hong-kongs-indemnity-accepted-and-re-reading-it-found-two-omissions)
 - [Italy needs no country profile, and "Milan-only" turns out to be unproven](#2026-09-22---italy-needs-no-country-profile-and-milan-only-turns-out-to-be-unproven)
 - [The heredoc rule was written down four times and broken four times, so it became a hook](#2026-09-22---the-heredoc-rule-was-written-down-four-times-and-broken-four-times-so-it-became-a-hook)
 - [A front-page caption counted nine cities twice, and the drafted letters were in two places](#2026-09-22---a-front-page-caption-counted-nine-cities-twice-and-the-drafted-letters-were-in-two-places)
@@ -215,6 +216,59 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Hong Kong's indemnity accepted, and re-reading it found two omissions
+
+- **The owner ACCEPTED Hong Kong's indemnity on 2026-09-22**, unblocking the
+  strongest unbuilt city in the screen - **35,808 licensed premises, 100%
+  carrying BOTH a trade name and an address**, and the best rail anywhere in
+  the screen at 126 relations, 125 named and 117 coloured. It is **the only
+  uncapped liability in this project**, and it was priced deliberately rather
+  than waved through: **probability low, magnitude unbounded**, which is
+  precisely the combination that gets mis-priced.
+
+- **Re-reading the live clause rather than the project's own citation of it
+  found two things the record had omitted** - which is the exact failure
+  `read-licence` was written for, now on this project's own notes rather than
+  on a publisher's. First, the causation is *"arise **directly or
+  indirectly**"*, and the earlier quote elided it. Second, and more
+  materially, **there is no notice-and-defend clause**: the Government need not
+  tell the indemnifier a claim exists, there is no right to control or join the
+  defence, and nothing obliges them to mitigate or seek consent before
+  settling. Most commercial indemnities temper exposure exactly there.
+
+- **The disclaimer and the indemnity are a deliberate pair, and that is the
+  sharpest fact in the terms.** The *Disclaimer and Limitation of Liability*
+  section expressly disclaims any warranty of **non-infringement**, and that
+  same section caps the GOVERNMENT's liability to the user, not the user's to
+  the Government. **So the publisher does not promise the Data is clean and the
+  user indemnifies them if it is not**, one-directionally and without a cap.
+
+- **What made acceptance reasonable is the SCOPE, not the likelihood.** The
+  indemnity reaches *"infringement of the rights of any person"* - not general
+  liability, and not "anything that goes wrong because of the map". A third
+  party must assert *their own rights* against the Government over this
+  project's use of a **government public register** republished with the
+  attribution the same paragraph requires. The project's standing commitment to
+  **honour removal requests without argument** cuts off the likeliest
+  escalation before it can become a claim, which is a risk control that already
+  existed rather than one invented for this decision.
+
+- **Three conditions were accepted with it and bind the build.** (1) Display
+  all three elements of the same paragraph exactly - source identification,
+  acknowledgement of Government IP ownership, and attribution to DATA.GOV.HK -
+  because **unattributed use is the most likely way to draw a complaint at
+  all**. (2) Run `check_personal_exposure.py` and exclude catch-all categories,
+  the Los Angeles NAICS 812990 precedent, because the realistic complainant is
+  an individual whose name sits at what looks like a home. (3) This record.
+  Written into `docs/data_sources.md` beside the clause.
+
+- **Accepting Hong Kong's does NOT accept Lyon's**, though they are the same
+  shape. Lyon's Grand Lyon CGU 9.4 was recorded as the project's second
+  indemnity, but Lyon carries two further gates - an account this project does
+  not create, and a trademark clause colliding with the on-map line-label
+  invariant - so it stays deferred on those grounds regardless. Recorded so the
+  two are not silently coupled later.
 
 ### 2026-09-22 - Italy needs no country profile, and "Milan-only" turns out to be unproven
 

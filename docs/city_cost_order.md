@@ -65,7 +65,7 @@ column alone.
 
 | City | Buys | Rate | Cost driver |
 |---|---|---|---|
-| **Hong Kong** 🇭🇰 ▲▲▲ | 1 | ALS answers, returns a confidence `Score` | **Best rail in the whole screen** — 126 relations, 125 named, 117 coloured. ⚠️ Indemnity decision outstanding |
+| **Hong Kong** 🇭🇰 ▲▲▲ | 1 | ALS answers, returns a confidence `Score` | **Best rail in the whole screen** — 126 relations, 125 named, 117 coloured. ✅ Indemnity ACCEPTED 2026-09-22 |
 | **Singapore** 🇸🇬 ▲▲ | 1 | **98.8%** of answered lookups | Four registers → `multi-source-city`. **7,767 distinct lookups, not 35,064.** Retail narrow by construction |
 | **Oslo** 🇳🇴 | 1 | **97.8%** two-stage | ⚠️ Physically-in-Oslo share unmeasured — settle with the bulk download, not the API |
 | **Seoul** 🇰🇷 | 1 | Partial | 8 datasets, 197,276 premises — multi-source |
