@@ -55,6 +55,11 @@ map's own layout width (`_MAP_W`, currently 1000px - 854px reproduces what
 the app's column gives at a 1024px window) and at a wide frame. Run
 `check_map_labels.js` on **every** city, and additionally assert no line
 label's box intersects the legend's box at the narrow width.
+**Vary the frame's HEIGHT too, not only its width.** Width is what breaks
+labels; height is what breaks the basemap credit, because the legend is fixed
+to the viewport's bottom edge and the credit sits at the map's. Run
+`check_map_attribution.js` at 650 (the embedded height), 768 and 812 - see
+step 5.
 
 ### `scope: app-deps`
 `requirements.txt`, or an import anywhere under `app/`, changed. This is the
@@ -149,7 +154,17 @@ Run only the steps your scope lists (see Scope above).
    contents with `javascript_tool` on each map: it checks every line label is
    in view, clear of the legend, not overlapping another label and present in
    the legend, and that the legend collapses and re-expands. `problems` in
-   its result must be empty (it also checks the Dark Mode button). On the
+   its result must be empty (it also checks the Dark Mode button).
+   Then read `scripts/check_map_attribution.js` and run it **at more than one
+   viewport HEIGHT** - 650 (what `st.iframe` embeds), 768 and 812. It
+   hit-tests the OSM credit and names whatever is sitting on it. Two things
+   about how to drive it: **reload at each size rather than resizing a loaded
+   page** (a resize leaves Leaflet mid-fit, and the stale rect puts the probe
+   points off-screen - which the check reports as `offscreen`/UNMEASURED, not
+   as a breach), and treat a `clamp.ok` of false as a real finding even when
+   `covered` is 0, because that map is one resize away from covering the
+   credit. A single height proves nothing here: 1000x650 passed for the whole
+   life of the project while 1024x768 was fully covered in every city. On the
    Overview, also check its Dark Mode button sits inside the map frame without
    covering the zoom controls, flips the basemap (only `.mapboxgl-canvas` is
    filtered, not `#deckgl-overlay`), survives a reload, still lets a marker click
