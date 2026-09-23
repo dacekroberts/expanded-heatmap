@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**192 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**193 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Category D's 18 remaining constants are mostly deliberate records, not decay](#2026-09-23---category-ds-18-remaining-constants-are-mostly-deliberate-records-not-decay)
 - [Category D reported 63 dead constants, 45 of which were add-country working correctly](#2026-09-23---category-d-reported-63-dead-constants-45-of-which-were-add-country-working-correctly)
 - [check_stale_claims category A was reporting three findings and none of them was real](#2026-09-23---check_stale_claims-category-a-was-reporting-three-findings-and-none-of-them-was-real)
 - [PLAN.md gains the handoff it was missing, and Paris reverified](#2026-09-23---planmd-gains-the-handoff-it-was-missing-and-paris-reverified)
@@ -231,6 +232,51 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Category D's 18 remaining constants are mostly deliberate records, not decay
+
+- **Read all 18 with the comment above each, which is what the check asks
+  for, and most are kept ON PURPOSE.** Madrid's `COORD_ZERO_IS_MISSING` says
+  in its own comment "DESCRIPTIVE, not a switch: step 2 drops the zeros
+  unconditionally, so setting this False would change nothing. Kept because
+  the measurement above is the valuable part." Mexico's `ATTRIBUTION_PRODUCT`
+  says "read by nothing... the `_NOTICES` entry is the one that must be
+  right." Edmonton's `STALE_BOUNDARY_IDS` is "the boundary layer this project
+  must NOT use, kept so the choice above reads as a decision rather than an
+  accident." Barcelona's `CKAN_RESOURCE_ID_2024_INCOMPLETE` exists "so the
+  rejection is checkable rather than a claim."
+
+- **So category D's framing does not fit this repository.** Its line is "a
+  comment describing a plan that did not happen is what misleads the next
+  reader" - but here the unread constants overwhelmingly carry MEASUREMENTS
+  and REJECTED ALTERNATIVES, which this project deliberately keeps. Deleting
+  them would destroy exactly the evidence `DECISIONS.md` exists to preserve.
+  The category is still worth running; what it finds is not decay but a
+  reading list, and only two of the eighteen - Barcelona's `OSM_STATION_KIND`
+  and San Francisco's `COUNTY_BOUNDARY_URL` - are bare values with no comment
+  at all, which is the only shape that actually leaves a reader stranded.
+
+- **No constants were deleted, and that is the finding rather than an
+  omission.** The cheap action - clearing a report to zero - would have been
+  the wrong one.
+
+- **A harness deserves the same suspicion as the check it tests, and this is
+  the second instance in two days.** On 2026-09-22 a negative test patched
+  text read as bytes against a file with different line endings, so nothing
+  matched. Today one asserted `"france.py" not in whole.split("Deferred")[-1]`
+  and, with no deferred section present, `str.split()` returned the whole
+  string, so it found the name in the live listing. **Different mechanisms,
+  same consequence: a correct check reported as broken, one step from being
+  "fixed".** Both are now written into
+  `docs/portable/cleanup-session.md` 4.2, where the rule reads: a failing
+  negative test has two suspects, and the newer code is the harness.
+
+- **The heredoc hook made its first unprompted catch, one day after
+  installation.** Patching that faulty test, the one-liner reached for was a
+  heredoc containing a backslash; the guard refused it and the edit went
+  through the Write tool instead. Recorded in the portable briefing's
+  escalation ladder as evidence the top rung pays for itself when the rule was
+  genuinely failing - prose had not stopped that form four times running.
 
 ### 2026-09-23 - Category D reported 63 dead constants, 45 of which were add-country working correctly
 

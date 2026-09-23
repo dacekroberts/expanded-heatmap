@@ -139,11 +139,18 @@ code. Do this even when it seems obvious — *especially* then.
 
 Make the negative test operate on **copies in a temp directory**, not on the
 working tree with a `finally` to restore: one interrupt away from leaving a
-broken repo. And beware that the harness can be the broken thing — *[example:
-a negative test reported a working check as broken, because it patched text
-read as bytes while the file on disk had different line endings, so no pattern
-matched. Had it been trusted, a correct check would have been "fixed".]*
-Make the harness fail loudly when its own mutation matches nothing.
+broken repo. Make the harness fail loudly when its own mutation matches
+nothing.
+
+**And suspect the harness as much as the thing it tests.** Twice in two days
+a negative test reported a working check as broken, each time by a different
+mechanism: *[example 1: it patched text read as BYTES while the file on disk
+had different line endings, so no pattern matched at all. Example 2: its
+assertion read `name not in output.split("SECTION")[-1]` — and when that
+section is absent entirely, `split()` returns the whole string as one element,
+so it found the name in a part of the output it never meant to search.]* Both
+times the instinct was to "fix" a correct check. **A failing negative test has
+two suspects, and the newer code is the harness.**
 
 **4.3 Assert a property, do not re-implement the computation.** If your check
 recomputes the thing it is checking, it will agree with the code while both
@@ -211,6 +218,12 @@ read past than the last. Repeated failure against a written rule is evidence
 about the mechanism, not about the reader. And when you escalate, **ask why
 the written version failed** — often the wording was subtly wrong, and fixing
 that matters as much as the enforcement.
+
+The top rung earns its cost quickly if the rule was really failing. *[example:
+a rule broken four times across two days was made an enforced hook; it caught
+a real violation within a day, unprompted — a one-liner reaching for the
+forbidden form to patch something unrelated. Prose had not stopped that, four
+times.]*
 
 ---
 
