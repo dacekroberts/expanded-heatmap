@@ -167,7 +167,14 @@ if more countries follow. **Owner call at build**, measured with
 
 ## Still unknown
 
-- ⚠️ **GeoSampa's licence — being read 2026-09-23**, not yet recorded.
+- 🚨 **GeoSampa's licence — READ 2026-09-23 and AMBIGUOUS; owner decision.**
+  The portal shows CC BY-SA 4.0, but its own text limits that to data
+  *"produzidos pelos órgãos da Prefeitura"*, and these layers' metadata names
+  the **State's Metrô company** as author. If it does apply, share-alike
+  reaches the derived geometry. Full record in `docs/data_sources.md`. **The
+  alternative that sidesteps it:** draw lines from OSM (Mexico City's and
+  Barcelona's route) and use GeoSampa only to decide WHICH lines operate — a
+  fact, not its geometry.
 - ⚠️ **Lines 6 and 17** — operating or not, at build time.
 - ⚠️ **Neighbourhood bias** — measured by locality; not yet by distance from a
   station, which is what the map actually shows.

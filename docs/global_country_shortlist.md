@@ -1787,6 +1787,58 @@ geocoding, and per-category assembly.**
 Taiwan's food-hygiene register (`食品業者登錄資料集`, dataset `8938`) is
 separately available as CSV/JSON/XML from `data.fda.gov.tw`.
 
+#### ▲▲ 2026-09-23 — Taiwan's "geocoding leg" is a JOIN, measured at 92.5% in Taipei
+
+**Both costs above were overstated, and the method that found it was the one
+that found Brazil's: look for an address file that already carries the
+coordinate before building a geocoder.**
+
+1. **The whole catalogue enumerates without a key.** `data.gov.tw/datasets/export/csv`
+   returns all **52,436 datasets** (67.8 MB) with each one's download URL,
+   licence and field list. `ER0001` was the search API only — a statement
+   about one endpoint.
+2. **Door-plate coordinate files exist for every city this project wants.**
+   117 `門牌` datasets; for the four cities plus New Taipei: **Taipei**
+   `門牌位置數值資料` (monthly, 124.5 MB, TWD97 x/y), **New Taipei** (monthly,
+   **1,989,458** door plates, `x_3826`/`y_3826`), **Taoyuan** (monthly, TWD97
+   TM2), **Taichung** (monthly 2026 releases via Google Drive links),
+   **Kaohsiung** (2025 edition, TWD97 — its host **timed out from six check
+   nodes in five countries**, Hong Kong, Japan and Singapore included; no
+   Taiwanese node was available, so recorded as unreachable, not negative).
+   All under **政府資料開放授權條款-第1版** (Open Government Data License v1.0,
+   not yet read). Each row is street / lane / alley / number / coordinate.
+3. **A better business register than 商業登記: the national BUSINESS TAX
+   REGISTER.** `全國營業(稅籍)登記資料集` (Fiscal Information Agency,
+   `eip.fia.gov.tw/data/BGMOPEN1.zip`, 66.3 MB, **refreshed daily** — the file
+   self-attests its date). **1,713,627 operating rows nationally.** One row
+   per trading location: `營業地址`, `總機構統一編號` (a parent ID, so
+   **company branches are their own rows** — 商業登記 omits companies
+   altogether), trade name, organisation type, and a 6-digit industry code
+   with its own name. **No personal-name column** — unlike New Taipei's own
+   商業登記清冊, which carries `res_name` (the responsible person).
+4. **Composition, Taipei (255,699 rows, 14.9% of the country):** the codes
+   read from the register's own names put **47/48 = retail, 56 = food service,
+   96 = personal services**, ISIC's divisions. Storefronts: retail **44,634**,
+   food **23,684**, personal **8,201** = **76,519**, after excluding **4,954**
+   rows of **487 `經營網路購物`** (online shopping — NAICS 454's twin).
+   Organisation types: 有限公司 104,489 · 獨資 69,156 · 股份有限公司 56,483
+   · branches 10,568 — **whether company rows in the storefront codes are
+   shops or head offices is the registered-office question, still open.**
+5. **The join, Taipei:** parse `營業地址` into street / lane / alley / number
+   (NFKC for full-width digits; Chinese section numerals to digits;
+   `之` `－` `―` as one sub-number separator; floors dropped) and match the
+   door-plate keys — **251,607 distinct**. **Food 95.1%, personal services
+   99.0%, retail 90.0% — 92.5% overall.** The first pass read 89.1%; the
+   difference was one character, `―` (U+2015), used as a sub-number dash.
+   Retail's misses are mostly **market stalls** (`環南市場１樓…攤位`) and
+   **stalls under the viaduct** (`建國南路１段高架橋下`) — real premises with no
+   door plate.
+
+⚠️ **Certificates:** Python's bundled store lacks Taiwan's government root
+(GRCA), so `data.taipei` fails verification there; **curl on Windows verifies
+it** against the OS store. A build uses the OS store — never switches
+verification off.
+
 #### A refinement the Korea probe produced: stations are not lines
 
 Japan's N02 carries **both** — 10,235 station points *and* 21,932 line

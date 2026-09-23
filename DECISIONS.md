@@ -16,11 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**243 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**244 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
 - [Lille made "three regional maps" four within the hour](#2026-09-23---lille-made-three-regional-maps-four-within-the-hour)
+- [Taiwan is a door-plate JOIN at 92.5%, not a geocoding project; Rio's rail licence permits, Sao Paulo's is ambiguous](#2026-09-23---taiwan-is-a-door-plate-join-at-925-not-a-geocoding-project-rios-rail-licence-permits-sao-paulos-is-ambiguous)
 - [Two handoffs verified; one held a vacuous pass, one was overtaken by events](#2026-09-23---two-handoffs-verified-one-held-a-vacuous-pass-one-was-overtaken-by-events)
 - [Lille (Regional) built: 11,833 storefronts, 91 stations, eleven communes](#2026-09-23---lille-regional-built-11833-storefronts-91-stations-eleven-communes)
 - [Sixteen brief checks could not see their claims; the Brazilian briefs, and the agency rail both cities had](#2026-09-23---sixteen-brief-checks-could-not-see-their-claims-the-brazilian-briefs-and-the-agency-rail-both-cities-had)
@@ -306,6 +307,53 @@ onwards; the early ones are split by phase rather than by hour.
   `station_scope.py` is now imported by the live app, so editing it needs a
   reboot, and the rename is a one-line workaround that already worked twice.
 
+### 2026-09-23 - Taiwan is a door-plate JOIN at 92.5%, not a geocoding project; Rio's rail licence permits, Sao Paulo's is ambiguous
+
+- **Taiwan needs no geocoder and no API key, measured in Taipei.** The
+  national catalogue exports whole and keyless (52,436 datasets with download
+  URLs); `ER0001` was one search endpoint. Every target city publishes a
+  keyless door-plate coordinate file (`門牌位置數值資料`, monthly in Taipei,
+  New Taipei and Taoyuan). The business leg moved from the per-category
+  商業登記 to the Fiscal Information Agency's **business tax register**
+  (daily, one row per trading location, branches as their own rows, 6-digit
+  industry codes, no personal-name column). **Taipei: 76,519 storefronts,
+  joined at 92.5%** - food 95.1%, personal services 99.0%, retail 90.0% -
+  after excluding 4,954 online-shopping rows (code 487, the NAICS 454 twin).
+  The first pass read 89.1%; the gap was one character, `―` (U+2015), used as
+  a sub-number dash. Retail's remaining misses are market and viaduct stalls
+  with no door plate.
+
+- **Taiwan stays in the geocoding band until three more things are measured**:
+  the other cities' joins (Kaohsiung's portal timed out from six nodes in five
+  countries), the Open Government Data License v1.0 read, and whether company
+  rows in storefront codes are shops or head offices (Taipei: 104,489
+  有限公司 and 56,483 股份有限公司 against 69,156 sole proprietors). Moving it
+  on one city's join would be banding on resemblance. **If the others confirm,
+  the band holds only Japan.**
+
+- **A claim written from memory was caught by the trail within the hour.**
+  The master list was edited to say Taiwan's rail needed a TDX key; the
+  2026-09-21 record says TDX's metro endpoints answered UNAUTHENTICATED (122
+  Taipei stations, shapes, `LineColor`). Corrected before commit. **Read the
+  trail before writing about a country, not after.**
+
+- **Rio's rail licence: PERMITTED WITH CONDITIONS, CC BY 4.0**, declared at
+  service level and on all four items; credit the Prefeitura / IPP, link the
+  licence and data, and state that the data was modified. Data.Rio's
+  "sem alteracao das informacoes originais" clause is item-level (2,727 of
+  5,069 items, mostly 2018 PDFs) and absent from these four. **Raised, not
+  resolved:** the SIURB system's Termo de Uso makes a user liable for damage
+  they cause, and may bind only logged-in users - fault-based, narrower than
+  Hong Kong's indemnity. Owner call.
+
+- **Sao Paulo's rail licence: AMBIGUOUS, owner decision.** GeoSampa shows
+  CC BY-SA 4.0, but its own text limits that licence to data "produzidos
+  pelos orgaos da Prefeitura", and the layers' ISO metadata names the State's
+  Metro company as author; Metro's own portal says "License Not Specified".
+  If CC BY-SA applies, share-alike reaches the derived geometry against an MIT
+  repository. Not resolved in the project's favour. **The route that avoids
+  the question** was recorded beside it: OSM geometry (the Mexico City and
+  Barcelona route) with GeoSampa used only to decide which lines operate.
 ### 2026-09-23 - Two handoffs verified; one held a vacuous pass, one was overtaken by events
 
 - **The attribution check handed to the cleanup role was read for the

@@ -35,8 +35,8 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 >
 > | | |
 > |---|---|
-> | **Built** | **23** across 7 countries *(Toulouse, 2026-09-23)* |
-> | **Candidates** | **35**, all at least partially viable — A 16 · B 14 · C 5 *(Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A)* |
+> | **Built** | **24** across 7 countries *(Toulouse and Lille (Regional), 2026-09-23)* |
+> | **Candidates** | **34**, all at least partially viable — A 15 · B 14 · C 5 *(Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A)* |
 > | **Open screening gap** | **3**, unscreened — neither candidates nor discards |
 > | **Discarded** | **32**, each naming its evidence |
 >
@@ -114,10 +114,10 @@ yet* with *we looked at everything and this is what is there*.
 
 | Band | What these cities ARE | Cities |
 |---|---|---|
-| 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates answered, rail answered — every remaining question is answerable inside the build | **16** *(+ 9 built)* |
+| 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates answered, rail answered — every remaining question is answerable inside the build | **15** *(+ 10 built)* |
 | 🟠 **B** | **Geocoding at national scale.** The address work is a project, justified only by reuse across many cities | **14** |
 | 🟣 **C** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **5** |
-| | **Candidates** | **35** |
+| | **Candidates** | **34** |
 | *Open gap* | Unscreened — a row resting on an absence, so not a discard | *3* |
 | *Discarded* | Measured negative, evidence named | *32* |
 
@@ -410,7 +410,7 @@ turned "a geocoding project" into a join or into nothing.
 
 | Cities | Country | Business leg | The coordinate step |
 |---|---|---|---|
-| **Taipei**, Kaohsiung, Taoyuan, Taichung *(4)* | 🇹🇼 | 商業登記 — premises, active/closed status, per-category assembly | ⚠️ **MOVED HERE FROM BAND B 2026-09-22, on a probe rather than on a resemblance.** The row used to read *"moderate — NLSC's geocoder is keyless"*, and **that claim did not survive**: NLSC's API is alive and keyless, but the keyless endpoint is **reverse** geocoding (point → 村里) and administrative lists, not forward geocoding, and **no bulk 門牌 address-point file was reached**. `data.gov.tw`'s dataset API **requires an API key** (`ER0001:API Key錯誤`); its web pages are reachable, and `addr.tgos.tw` answers but has historically required registration. **Blocked, not negative** — and the Prague-shaped bulk join is still the thing to look for |
+| **Taipei**, Kaohsiung, Taoyuan, Taichung *(4)* | 🇹🇼 | ▲▲ **2026-09-23: the national BUSINESS TAX REGISTER** (`全國營業(稅籍)登記資料集`, Fiscal Information Agency) — keyless, **refreshed daily**, one row per trading location with `營業地址` (the business address), a parent ID so **branches are their own rows**, a trade name, and a 6-digit industry code whose **47/48 · 56 · 96** are retail · food · personal services. **No personal-name column.** Taipei: **76,519 storefronts** after excluding 4,954 online-shopping rows (code 487, NAICS 454's twin) | ▲▲ **A JOIN, not a geocoder — MEASURED 2026-09-23 in Taipei at 92.5%** (food 95.1%, personal 99.0%, retail 90.0%) against the city's **door-plate coordinate file** (`門牌位置數值資料`, monthly, keyless, Open Government Data License v1.0). **Door-plate files exist for all four cities** on the national catalogue, which **exports whole and keyless** — the `ER0001` key error was one API endpoint, not the portal. Retail's misses are mostly **market stalls and under-viaduct stalls** with no door plate. ⚠️ **Still open before Band A:** the other three cities' joins (Kaohsiung's portal timed out from six nodes in five countries), the licence read, and whether company rows in the storefront codes are shops or head offices (Taipei's register is 104,489 有限公司 and 56,483 股份有限公司 against 69,156 sole proprietors). **Rail is NOT open**: TDX's metro endpoints answered unauthenticated on 2026-09-21 — 122 Taipei stations, line shapes and `LineColor` (see `global_country_shortlist.md`); re-verify at build. **The record below is the 2026-09-22 reading, superseded:** ⚠️ **MOVED HERE FROM BAND B 2026-09-22, on a probe rather than on a resemblance.** The row used to read *"moderate — NLSC's geocoder is keyless"*, and **that claim did not survive**: NLSC's API is alive and keyless, but the keyless endpoint is **reverse** geocoding (point → 村里) and administrative lists, not forward geocoding, and **no bulk 門牌 address-point file was reached**. `data.gov.tw`'s dataset API **requires an API key** (`ER0001:API Key錯誤`); its web pages are reachable, and `addr.tgos.tw` answers but has historically required registration. **Blocked, not negative** — and the Prague-shaped bulk join is still the thing to look for |
 | **Tokyo**, Osaka, Nagoya, Yokohama, Sapporo, Fukuoka, Kyoto, Kobe, Sendai, Hiroshima *(10)* | 🇯🇵 | Premises-level food permits, CC BY, one national schema. **Two buckets — no general retail** | **Hardest met** — chōme/ban/gō, full-width numerals, `町字ID` 0% populated |
 
 
@@ -422,7 +422,10 @@ in it.)*
 
 **Brazil was chosen as the next geocoding work on 2026-09-23 and left the band
 the same afternoon** — CNPJ is geo-blocked, and CNEFE made the geocoder
-unnecessary. **Taiwan is now the next geocoding country.**
+unnecessary. **Taiwan was next, and its first probe the same evening found it
+is a JOIN too** (Taipei 92.5%, see its row). If the other three cities
+confirm, **this band will hold only Japan** — and Japan's own address
+registries are the next thing to look for.
 
 **Japan is ten cities from one schema** — the best marginal-city cost in the
 screen — against the worst geocoding problem and a two-bucket ceiling.
@@ -1269,14 +1272,14 @@ the tier is stale.
 | 🇳🇴 Norway | — | **1** — Oslo | A | Build |
 | 🇰🇷 South Korea | — | **1** — Seoul | A | Build, but its brief is **deliberately partial** — seven Step-0 items undone |
 | 🇧🇷 Brazil | — | **9** — São Paulo, Rio, Salvador, Fortaleza, Belo Horizonte, Brasília, Recife, Porto Alegre, Santos | A | **Nothing but the builds** — one national source (IBGE CNEFE 2022), no geocoder. Briefs next, São Paulo and Rio first |
-| 🇹🇼 Taiwan | — | **4** | B | **Blocked, not negative** — no forward geocoder or bulk address file reached |
+| 🇹🇼 Taiwan | — | **4** | B | ▲ **No geocoder needed either** — a door-plate JOIN, measured at 92.5% in Taipei (2026-09-23). Open: three cities' joins, the licence, the rail leg |
 | 🇯🇵 Japan | — | **10** | B | The hardest geocode; **decided: last** |
 | 🇸🇪 Sweden | — | **2** — Stockholm, Göteborg | C | One owner decision (food-only pages) |
 | 🇨🇭 Switzerland | — | **1** — Zurich | C | The same decision |
 | 🇷🇴 Romania | — | **1** — Bucharest | C | The same decision, plus a browser-assisted fetch |
 | 🇸🇬 Singapore | — | **1** | C | **Parked on one fact** — NEA refreshing its 2016 register; indemnity held |
 | 🇪🇬 Egypt | — | Cairo *(open gap)* | — | Unprobed at city level |
-| **Total** | **23** | **35** | | *(+ 3 in the open gap)* |
+| **Total** | **24** | **34** | | *(+ 3 in the open gap)* |
 
 ---
 
@@ -1828,12 +1831,14 @@ not a country ruling. See the open screening gap.*
 ## The order, as decided
 
 > **Current position, 2026-09-23.** Mexico, Spain, Ireland and Italy's Milan
-> are built; France is **three of five** (Paris, Marseille, Toulouse). **The
-> sixteen Band A cities are build-ready now**, nine of them Brazilian. **Brazil was
+> are built; France is **four of five** (Paris, Marseille, Toulouse, Lille).
+> **The fifteen Band A cities are build-ready now**, nine of them Brazilian. **Brazil was
 > picked to go first in the geocoding band and turned out to need no geocoder**
 > (IBGE's census address file carries every establishment's coordinate), so
-> **Taiwan is next in that band** — still blocked on a forward geocoder or a
-> bulk address file — and **Japan stays last**. The numbered order below is the 2026-09-22 plan, kept because its
+> **Taiwan was next in that band — and its first probe found the same thing**:
+> every city publishes a keyless door-plate coordinate file, and Taipei's tax
+> register joins to it at 92.5%. **Japan stays last**, and is the one country
+> left whose address file has not been looked for. The numbered order below is the 2026-09-22 plan, kept because its
 > reasoning (lift shared geocoding machinery into `pipeline/`, let Japan
 > inherit it) still holds even though the country it named first changed.
 
