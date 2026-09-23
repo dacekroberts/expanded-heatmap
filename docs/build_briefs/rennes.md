@@ -165,7 +165,7 @@ unresolved, and **unlike Paris there is no publisher gloss to lean on.**
     "claim": "STAR's portal CGU is live and was read 2026-09-23: no indemnity, and its marks clause is Opendatasoft's own with the published data expressly excluded, so naming STAR on the map is not barred. If this changes, re-read before shipping",
     "kind": "http_contains",
     "url": "https://data.explore.star.fr/terms/terms-and-conditions/",
-    "contains": "OPENDATASOFT"
+    "present": ["OPENDATASOFT"]
   },
   {
     "id": "sirene-stock-etablissement-parquet",

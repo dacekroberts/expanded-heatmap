@@ -322,14 +322,14 @@ groups cities into one readable view.
     "claim": "The file SELF-ATTESTS - GENERATION_DATE is inside it, so staleness is checkable from the artifact rather than from a third party's metadata. This is what Paris's IDFM feed cannot do",
     "kind": "http_contains",
     "url": "https://www.fehd.gov.hk/english/licensing/license/text/LP_NonFood_EN.XML",
-    "contains": "GENERATION_DATE"
+    "present": ["GENERATION_DATE"]
   },
   {
     "id": "fehd-xml-is-self-documenting",
     "claim": "The taxonomy ships inside the download - TYPE_CODE maps every licence code to its label, so no external code list is needed. Catch-all share is ZERO, which no other city in this project can say",
     "kind": "http_contains",
     "url": "https://www.fehd.gov.hk/english/licensing/license/text/LP_NonFood_EN.XML",
-    "contains": "TYPE_CODE"
+    "present": ["TYPE_CODE"]
   },
   {
     "id": "als-geocoder-keyless",
@@ -343,7 +343,7 @@ groups cities into one readable view.
     "claim": "THE BUILD RULE, pinned because a one-stage pipeline silently drops ~4.5% of premises and they are disproportionately upper-floor and multi-unit ones. A floor-prefixed ADR fails; the SAME address with the prefix stripped resolves. This check sends the stripped form of a real register row that failed exact lookup - if ALS ever stops resolving it, stage 2 is no longer the answer and the brief must be re-measured",
     "kind": "http_contains",
     "url": "https://www.als.gov.hk/lookup?q=NO.%2028%20STANLEY%20STREET%2C%20CENTRAL%2C%20HONG%20KONG",
-    "contains": "Latitude"
+    "present": ["Latitude"]
   },
   {
     "id": "datagovhk-org-count-is-unreliable",

@@ -282,14 +282,14 @@ one-value change to the filter, not a new source. **Owner call.**
     "claim": "CVR's own terms page on Datafordeler states CC BY 4.0 with attribution to Det Centrale Virksomhedsregister. This is the whole licence position, and it is NOT read at datacvr.virk.dk, which serves a Cloudflare interactive challenge - the obstacle there was the host, not the document",
     "kind": "http_contains",
     "url": "https://datafordeler.dk/vejledning/brugervilkaar/det-centrale-virksomhedsregister-cvr/",
-    "contains": "CC BY 4.0"
+    "present": ["CC BY 4.0"]
   },
   {
     "id": "only-cvrperson-is-access-restricted",
     "claim": "THE SENTENCE THE WHOLE ACCESS POSITION RESTS ON: only the entity CVRPerson needs an access request, and the other CVR entities are not access-restricted. If this ever changes, Produktionsenhed becomes gated and the build stops",
     "kind": "http_contains",
     "url": "https://datafordeler.dk/vejledning/brugeradgang/anmodning-om-adgang/det-centrale-virksomhedsregister-cvr/",
-    "contains": "CVRPerson"
+    "present": ["CVRPerson"]
   },
   {
     "id": "dawa-address-api-keyless",
@@ -303,7 +303,7 @@ one-value change to the filter, not a new source. **Owner call.**
     "claim": "Frederiksberg is kommunekode 0147 and Kobenhavn is 0101 - two kommuner, with 0147 entirely surrounded by 0101. Scoping to 0101 alone puts a hole in the middle of the map. This check confirms DAWA still treats them as separate codes",
     "kind": "http_contains",
     "url": "https://api.dataforsyningen.dk/kommuner?kode=0147",
-    "contains": "Frederiksberg"
+    "present": ["Frederiksberg"]
   }
 ]
 ```

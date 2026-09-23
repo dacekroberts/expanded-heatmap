@@ -178,7 +178,7 @@ d'engagement*** and **1 is ODbL**. The five layers in scope are clean —
     "claim": "MEL's geOrchestra WFS is live and is where Lille's TRAM line geometry comes from - mel_mobilite_et_transport:tramway_lignes, 4 LineStrings for lines R and T. The portal is geOrchestra, NOT Opendatasoft: its 404 body names itself, which is why /api/datasets paths all miss",
     "kind": "http_contains",
     "url": "https://data.lillemetropole.fr/geoserver/wfs?service=WFS&request=GetCapabilities&version=2.0.0",
-    "contains": "tramway_lignes"
+    "present": ["tramway_lignes"]
   },
   {
     "id": "sirene-stock-etablissement-parquet",
