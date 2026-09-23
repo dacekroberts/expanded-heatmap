@@ -16,11 +16,14 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**179 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**182 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
 - [The cleanup role was written down portably, method only](#2026-09-22---the-cleanup-role-was-written-down-portably-method-only)
+- [The scaffold now refuses an unregistered region instead of documenting it](#2026-09-22---the-scaffold-now-refuses-an-unregistered-region-instead-of-documenting-it)
+- [Paris's two owner calls settled, and commune-only costs it no transit system](#2026-09-22---pariss-two-owner-calls-settled-and-commune-only-costs-it-no-transit-system)
+- [Italy needs no country profile, and "Milan-only" turns out to be unproven](#2026-09-22---italy-needs-no-country-profile-and-milan-only-turns-out-to-be-unproven)
 - [The heredoc rule was written down four times and broken four times, so it became a hook](#2026-09-22---the-heredoc-rule-was-written-down-four-times-and-broken-four-times-so-it-became-a-hook)
 - [A front-page caption counted nine cities twice, and the drafted letters were in two places](#2026-09-22---a-front-page-caption-counted-nine-cities-twice-and-the-drafted-letters-were-in-two-places)
 - [Dublin's tooltip showed a placeholder the classifier had been dropping all along](#2026-09-22---dublins-tooltip-showed-a-placeholder-the-classifier-had-been-dropping-all-along)
@@ -248,6 +251,170 @@ onwards; the early ones are split by phase rather than by hour.
   and `check_stale_claims.py` reports nothing against it, because the counts
   in it are dated or over closed sets - the denominator rule applied to the
   document that states it.
+### 2026-09-22 - The scaffold now refuses an unregistered region instead of documenting it
+
+- **`scaffold_city.py` gains `--new-region`, a refusal gate and an import
+  check, closing the gap Dublin and Milan both shipped.** `--region X` wrote
+  `"region": "X"` into a city's entry while `app/cities.py` RAISES at import on
+  a region absent from `REGION_ORDER` - and **nothing in a build imports the
+  app**: no pipeline step does, and `deploy-verify` had been deferred by
+  decision. So the scaffold succeeded, both builds finished, and the breakage
+  waited for the merge, which was the first import in either session.
+  **The script already warned about it** - a comment at the point of writing
+  the entry, and again in the `--region` help - which is exactly the placement
+  this project has recorded as worthless, in `osm-rail`'s opening section: a
+  lesson belongs where the next city must PASS THROUGH it, not in prose it
+  might read. Now an unknown region is refused, naming the known ones, unless
+  `--new-region` appends it with a TODO demanding the reasoning every other
+  entry carries. Mirrors `--new-taxonomy`, which already solved the identical
+  shape. Verified three ways: unknown region refuses, known region proceeds,
+  `--new-region` appends.
+- **Added `verify_app_imports()`, which is the general fix rather than the
+  specific one.** The scaffold now imports `app/cities.py` in a subprocess
+  after writing and fails if it raises. The region bug's real shape is that
+  **`cities.py` validates itself and nothing in a build triggers that**, so any
+  future validator would have failed the same silent way. This costs one
+  subprocess and catches the next one too - at the moment the caller still has
+  the context to fix it, rather than at a merge.
+
+### 2026-09-22 - Paris's two owner calls settled, and commune-only costs it no transit system
+
+- **Accepted Licence Mobilités' revocability, and decided the response in
+  advance: if the grant lapses, Paris is ARCHIVED rather than deleted.** Art.
+  11.1 terminates *de plein droit, sans préavis* on breach, which makes Paris
+  the first city here whose licence can end without anyone saying so - CC BY,
+  Licence Ouverte, the PSI licences and ODbL are all perpetual grants. Owner's
+  call: build it. The response is the same action the standing removal
+  commitment already promises, taken as a **third trigger** beside the two it
+  carries (a publisher asking, 2026-09-21's unresolved-position rule): **the
+  page comes off the site and the entry out of `app/cities.py`, while the
+  pipeline, the brief and this record stay in the repository.** A city coming
+  DOWN is not a city being DELETED, and the build stays reproducible if the
+  position reverses. The rejected alternative was declining Paris entirely,
+  which would have forfeited the only national register in the screen that buys
+  six cities in order to avoid a risk answerable by unpublishing one page.
+  Recorded in `docs/data_sources.md` under the removal commitment, so it sits
+  with the other two triggers rather than beside them.
+
+- **Paris is scoped COMMUNE-ONLY, and the decision is a measurement rather than
+  a default.** Measured from IDFM's own GTFS against France's own commune
+  contour (`geo.api.gouv.fr/communes/75056`, 105.4 km², matching Paris's ~105):
+  **métro 245 stations inside / 77 outside (76.1%)**, tram 60/227 (20.9%),
+  RER and Transilien 38/437 (8.0%), funicular 2/0. **All sixteen métro lines
+  survive the boundary** - every one has stations inside, none is lost, and the
+  worst-truncated are M14 (12 of 21) and M13 (19 of 32) while M2, M6, M3B and
+  M7B are wholly inside. **The two modes that are mostly outside would not be
+  drawn at any scope**: RER and Transilien are commuter rail, excluded by the
+  standing rule in every built city, and trams are excluded in Barcelona, Milan
+  and Toronto already. So regional scope buys Paris almost nothing - **the
+  opposite of Dublin**, which went regional because its REGISTER is published
+  per local authority and the city alone held 8,016 of 13,945 storefronts, with
+  the rail a consequence rather than the reason. Paris's register does not care
+  (`codeCommuneEtablissement` is a prefix list). The rejected alternative was
+  adding the petite couronne, which would have cost a new boundary layer and a
+  rail filter to gain modes the project excludes.
+- **Paris's pins take the MILAN HYBRID: the premises name where it exists, the
+  address otherwise, and the legal-name join is not built at all.** This is a
+  fourth option the brief's own list omitted, and it is what both recently
+  built cities converged on independently - Milan shows `insegna` on ~20% of
+  rows and `Ubicazione` on the rest, Dublin shows the address on all of them
+  because its register has no name column. **The rejected alternative is the
+  guarded legal-name fallback, and it was rejected although it is MEASURED AS
+  SAFE**, because "safe if the guard is built" is doing real work in that
+  sentence: the guard would be the only thing between the build and roughly ten
+  thousand individuals' names, against the ~4,000 Los Angeles nearly published.
+  The hybrid needs no guard, carries zero residual exposure, and is less work.
+  The measurement is kept in the brief anyway, because it is what makes this a
+  decision rather than an avoidance.
+- **Closed France's `categorieJuridique` gap, which its profile stated as a
+  rule without naming a field or measuring a split.** Via
+  `recherche-entreprises.api.gouv.fr` (official, keyless), which carries
+  `nature_juridique` at company level and `liste_enseignes`/`nom_commercial` at
+  establishment level - so the `StockUniteLegale` join the profile worried
+  about is already made there. 750 active Paris rows, 250 per bucket, ten pages
+  spread through each section: **8.7% are natural persons, 27.3% carry a
+  premises name, and of the UNNAMED rows only 9.4% are natural persons.** So
+  nine in ten unnamed rows are companies and the fallback would have been worth
+  building - which is what makes declining it a choice rather than a dodge.
+  Both figures are floors: this API does not expose
+  `denominationUsuelleEtablissement`, which the profile's 42.9% was measured
+  from, so the rows counted unnamed here are disproportionately companies.
+- **⚠️ A FIRST ATTEMPT AT THAT MEASUREMENT WAS WRONG AND LOOKED RIGHT.**
+  `total_results` on that API **saturates at 10,000**: every bucket returned
+  exactly 10,000 and two returned "100% personne physique", which is plainly
+  false for Paris retail - the session's first query had already returned
+  DISTRIBUTION CASINO FRANCE, nature juridique 5710. The control had tested
+  that the filter was VALIDATED (a nonsense value returns HTTP 400), not that
+  the count was TRUTHFUL. **A cap is a plausible number, which is what makes it
+  dangerous**, and it is the same family as `add-country`'s ignored-search-term
+  trap: shares come from sampled records, never from that API's counts.
+- **Recorded that Licence Mobilités is REVOCABLE, which is new in kind here.**
+  Art. 11.1 terminates *de plein droit, sans préavis* on breach. Every other
+  source in this project is a perpetual grant - CC BY, Licence Ouverte, PSI,
+  ODbL - so Paris is the first city whose licence can end without notice for a
+  reason outside the project's control. The standing commitment already honours
+  removal requests; this makes one automatic, and it belongs in the deploy
+  decision rather than in a footnote.
+### 2026-09-22 - Italy needs no country profile, and "Milan-only" turns out to be unproven
+
+- **Determined: Italy does NOT need a country profile, and the reason is
+  stronger than its city count.** Italy is **bespoke per city**. There is no
+  national premises register - the Registro Imprese is company-level, the
+  registered-office shape this project rejects - so Milan came from
+  `dati.comune.milano.it`, Rome would come from `dati.comune.roma.it` and Turin
+  from `aperto.comune.torino.it`: **three portals, three schemas, three
+  licences.** A country profile amortises NATIONAL facts across cities, and
+  Italy's national facts amount to the ATECO taxonomy and the privacy regime.
+  **ATECO already exists from the Milan build**, which is the one piece that
+  transfers. Contrast France, where SIRENE covers six cities from one file and
+  the profile paid for itself immediately. **Italy is Spain's shape, and
+  `docs/spain_retrospective.md` is the record of what that costs.**
+
+- **But "Italy stays a Milan-only country" is ASSERTED, not established, and
+  the gap is exactly the one `add-country` warns about twice.** That conclusion
+  rests on **Naples** (aggregate trap - its only commercial dataset is *per
+  procedimento e Municipalita*) and **Messina** (SCIA/DIA are business-START
+  notifications, a flow not a stock). **Neither is Rome or Turin**, and neither
+  city appears anywhere in `city_master_list.md`, `global_country_shortlist.md`
+  or `city_shortlist.md`. They are **UNPROBED, not discarded** - and the rule
+  is explicit that a row whose reason is "not reached" is not a discard at all.
+  The trail also carries an unreconciled **"Italy ~4 (Milan verified)"** beside
+  the later "Milan-only", which is the same disagreement in miniature.
+
+- **Probed both, and both have premises-shaped leads.** Enumerating rather than
+  searching, with the portals' own catalogues:
+  **Rome** - `dati.comune.roma.it` is CKAN with **365 datasets**, carrying
+  `elenco-delle-attivita-produttive-del-suap-di-roma-capitale-anno-2025` and
+  its 2024 edition. **SUAP** is the *Sportello Unico Attivita Produttive*, the
+  one-stop business register every Italian comune runs, and the 2025 edition is
+  **current**.
+  **Turin** - `aperto.comune.torino.it` is CKAN with **2,118 datasets**, 143
+  carrying a commerce term, and its naming makes the Messina distinction for
+  us: `attivita-commerciali-aperte-YYYY` and `-chiuse-YYYY` are the FLOW, while
+  **`attivita-commerciali-presenti-YYYY` is the STOCK**. It also publishes
+  `attivita-commerciali` from the geoportale as **SHP**, so geometry exists.
+  Both are **CC-BY**.
+
+- **Turin's blocker is age, not shape: the series STOPS AT 2019.** The latest
+  `presenti` year is **2019** (published 2020-07-15) and the geoportale layer
+  was last modified **2019-05-17**. That is six years stale against a project
+  that maps CURRENT commercial density - Barcelona already rejected a 2024
+  census edition for being geographically incomplete and used 2022. Turin is
+  therefore a **real candidate with a real caveat**, not a pass.
+
+- **Neither city's schema was read: both hosts went flaky mid-probe.**
+  `risorse.comune.torino.it` failed the TCP connect at 21 s and
+  `dati.comune.roma.it` failed the TLS handshake, *after* both catalogues had
+  answered. Recorded as **unread rather than negative**, which is the
+  distinction Bucharest's outage made the same day. **The two-column test -
+  LOCATION and ACTIVITY, checked separately - has not been applied to either.**
+
+- **Consequence for the screen: Italy is one BUILT city plus two unscreened
+  candidates, not a closed country.** Rome is the more promising (current data,
+  a national-standard register type) and Turin the more caveated (geometry and
+  CC-BY, six years stale). Neither changes the profile answer - each would
+  still be its own Step 0 - but both belong in the candidate list rather than
+  in silence.
 
 ### 2026-09-22 - The heredoc rule was written down four times and broken four times, so it became a hook
 

@@ -24,10 +24,50 @@ rather than a lookup.
 
 ---
 
-## ⚠️ TWO OWNER CALLS THE BRIEF DOES NOT RESOLVE
+## ✅ BOTH OWNER CALLS SETTLED 2026-09-22
 
-These are decisions, not measurements. **The build should stop and ask rather
-than pick.**
+They were open when this brief was written, and both were taken the same day —
+**scope: commune-only. Pins: the Milan hybrid.** The reasoning and the
+measurement that decided the first are below, under each original question.
+
+### ✅ 1. Scope — COMMUNE-ONLY, and it costs no transit system
+
+**Measured 2026-09-22 from IDFM's own feed and France's own commune contour**
+(`geo.api.gouv.fr/communes/75056`, 105.4 km², matching Paris's ~105 km²) —
+not from OpenStreetMap, whose mirrors 504'd on both real hosts mid-probe,
+which is a fact about the host rather than about the city.
+
+| Mode | Inside commune | Outside | % inside |
+|---|---|---|---|
+| **Métro** (`route_type 1`) | **245** | 77 | **76.1%** |
+| Tram (`0`) | 60 | 227 | 20.9% |
+| RER / Transilien (`2`) | 38 | 437 | 8.0% |
+| Funicular (`7`) | 2 | 0 | 100% |
+
+**All 16 métro lines survive the boundary.** Every line has stations inside and
+none is lost; the worst-truncated are M14 (12 of 21) and M13 (19 of 32), and
+M2, M6, M3B and M7B are entirely inside. **Paris's own system is kept whole.**
+
+**The two modes that are mostly outside would not be drawn at any scope.**
+RER and Transilien are commuter rail, excluded by the standing rule in every
+built city — Boston's `CR-*`, Chicago's Metra, Madrid's Cercanías, Miami's
+Tri-Rail, Philadelphia's Regional Rail, Vancouver's West Coast Express — so
+scope is not what decides them. Trams are excluded in Barcelona, Milan and
+Toronto already; drawing Paris's would be the exception rather than the rule.
+
+**So regional scope would buy Paris almost nothing, which is the OPPOSITE of
+Dublin.** Dublin went regional because its *register* is published per local
+authority and the city alone held 8,016 of 13,945 storefronts; the rail was a
+consequence, not the reason. Paris's register does not care — 
+`codeCommuneEtablissement` is a prefix list — and its rail gains only modes the
+project excludes. The 77 out-of-commune métro stations go to the build's
+excluded-stations record, as every other city's do, rather than anchoring rings
+over communes this build has no business data for. *(The path is deliberately
+not cited here: `check_provenance.py` requires every `outputs/` path named in
+prose to exist and be committed, and Paris is not built — the promise would be
+to a file no reader could open.)*
+
+<details><summary>The original question, kept for the reasoning</summary>
 
 ### 1. Scope — commune, or regional?
 
@@ -44,6 +84,39 @@ its map has a hole in the middle.
 
 **The business leg does not care. The rail and boundary legs do.**
 
+</details>
+
+### ✅ 2. What a pin shows when there is no name — THE MILAN HYBRID
+
+**Settled 2026-09-22: show the premises name where it exists, the address
+otherwise, and do not build the legal-name join at all.**
+
+This is the option the original list below omitted, and it is what **both**
+recently built cities converged on independently. Milan shows `insegna` on the
+~20% of rows that carry one and `Ubicazione` on the rest; Dublin shows the
+address on all of them, because its register has no name column at all. Paris
+sits between them, so it takes Milan's shape.
+
+**Why not the guarded legal-name fallback, which is measured as safe?**
+Because "safe if the guard is built" is doing real work in that sentence. The
+guard is the only thing between the build and roughly **ten thousand
+individuals' names** — 9.4% of ~108,000 unnamed rows — against the ~4,000 Los
+Angeles nearly published. The hybrid needs no guard, carries **zero** residual
+exposure, and is strictly less work. The fallback's benefit is a nicer label on
+rows where the register itself declined to record one; that is not worth
+standing up a suppression rule whose failure mode is publishing people.
+
+⚠️ **Keep the measurement anyway** (below): it is what makes this a decision
+rather than an avoidance, and it is the number to re-read if the fallback is
+ever reconsidered for another French city.
+
+**One open sub-question is now moot for the build**: "whether `enseigne1` or
+`denominationUsuelle` wins when both are present" still wants an answer for the
+tooltip, but it no longer gates anything, because neither path reaches a
+person's name.
+
+<details><summary>The original question, kept for the reasoning</summary>
+
 ### 2. What a pin shows when there is no name
 
 This affects **~57% of rows**. Three options, and Milan faces the identical
@@ -53,6 +126,8 @@ call:
 - **Fall back to the legal name**, guarded (see below) — recovers ~9 in 10 of
   the unnamed, and is now measured as safe *if the guard is built*.
 - **Drop unnamed rows** — would discard most of the city; not recommended.
+
+</details>
 
 ---
 

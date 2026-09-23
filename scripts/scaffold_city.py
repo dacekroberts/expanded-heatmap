@@ -342,6 +342,69 @@ def next_page_number(pages_dir):
     return max(nums, default=0) + 1
 
 
+def region_order(text):
+    """REGION_ORDER as written in app/cities.py."""
+    m = re.search(r"^REGION_ORDER = \[(.*?)^\]", text, re.S | re.M)
+    if not m:
+        sys.exit("app/cities.py: could not find `REGION_ORDER = [`.")
+    return re.findall(r'^\s*"([^"]+)",', m.group(1), re.M)
+
+
+def ensure_region(root, args, dry_run):
+    """Refuse an unregistered region, or append it with --new-region.
+
+    THE CHECK DUBLIN AND MILAN BOTH NEEDED. Tagging a city with a region that
+    is not in REGION_ORDER makes app/cities.py raise at import - and nothing in
+    a build imports the app, so the failure waits for a merge or a deploy.
+    """
+    path = root / "app" / "cities.py"
+    known = region_order(path.read_text(encoding="utf-8"))
+    if args.region in known:
+        return
+    if not args.new_region:
+        sys.exit(
+            f"app/cities.py: region {args.region!r} is not in REGION_ORDER.\n"
+            f"  Known: {', '.join(known)}\n"
+            f"  A city tagged with an unknown region RAISES at import, and no\n"
+            f"  pipeline step imports the app - so this would surface at a\n"
+            f"  merge or a deploy rather than here. Pass --new-region to add\n"
+            f"  it, or use one of the regions above.")
+
+    text = path.read_text(encoding="utf-8")
+    m = re.search(r"^REGION_ORDER = \[(.*?)^\]", text, re.S | re.M)
+    entry = ('    # TODO: say WHY this region exists and why it is not split.\n'
+             '    # Every other entry here carries that reasoning, and the test\n'
+             '    # is "whatever groups cities into ONE readable view" - Canada\n'
+             '    # splits on 3,300 km rather than on nationality, and Europe\n'
+             '    # stayed whole at about 2,000.\n'
+             f'    "{args.region}",\n')
+    print(f"  {'would edit' if dry_run else 'edit'}: app/cities.py "
+          f"(REGION_ORDER += {args.region!r})")
+    if not dry_run:
+        path.write_text(text[:m.end(1)] + entry + text[m.end(1):],
+                        encoding="utf-8", newline="\n")
+
+
+def verify_app_imports(root):
+    """Import app/cities.py and fail if it raises.
+
+    The generic form of the region bug: cities.py validates itself and nothing
+    in a build ever triggers that. This runs it at the one moment the caller is
+    still holding the context to fix it.
+    """
+    import subprocess
+    r = subprocess.run(
+        [sys.executable, "-c",
+         "import sys; sys.path.insert(0, 'app'); import cities; "
+         "print(f'  app/cities.py imports: {len(cities.CITIES)} cities, "
+         "{len(cities.REGIONS)} regions')"],
+        cwd=str(root), capture_output=True, text=True)
+    if r.returncode:
+        sys.exit("app/cities.py does NOT import after scaffolding:\n"
+                 + (r.stderr or r.stdout))
+    print(r.stdout.strip())
+
+
 def add_city_entry(root, args, page_rel, dry_run):
     path = root / "app" / "cities.py"
     text = path.read_text(encoding="utf-8")
@@ -362,8 +425,11 @@ def add_city_entry(root, args, page_rel, dry_run):
         # REQUIRED since 2026-09-21: app/cities.py raises at import on a city
         # whose region is missing or not in REGION_ORDER, so a scaffold without
         # this produces a file that will not import. Mexico City found it the
-        # hard way. A region new to the project must ALSO be appended to
-        # REGION_ORDER by hand - this only tags the city.
+        # hard way. A region NEW to the project is appended to
+        # REGION_ORDER by --new-region; without it this script refuses
+        # rather than writing an entry that cannot import. Dublin and
+        # Milan both shipped that breakage, on separate branches,
+        # before it did.
         f'        "region": "{args.region}",\n'
         # BOTH KEYS BELOW ARE WRITTEN BECAUSE THEIR ABSENCE IS NOT NEUTRAL.
         # Barcelona shipped without either on 2026-09-22 and both surfaced in
@@ -448,9 +514,11 @@ def main():
     ap.add_argument("--region", required=True,
                     help="the macro map's region for this city, e.g. \"United States\", "
                          "\"Canada\", \"Mexico\". REQUIRED: app/cities.py raises at import "
-                         "on an untagged city. A region new to the project must also be "
-                         "appended to REGION_ORDER there by hand.")
+                         "on an untagged city. A region NEW to the project also needs "
+                         "--new-region; without it this script refuses.")
     ap.add_argument("--map-step", type=int, default=3, help="number of the map step (3, or 4 if a geocoding step is inserted)")
+    ap.add_argument("--new-region", action="store_true",
+                    help="the region is new to the project: append it to REGION_ORDER in app/cities.py. Without this a region not already there is REFUSED, because the entry would import-fail and nothing in a build imports the app")
     ap.add_argument("--new-taxonomy", action="store_true", help="also create and register a skeleton taxonomy module")
     ap.add_argument("--value-column", help="with --new-taxonomy: the raw classification column")
     ap.add_argument("--field-label", help="with --new-taxonomy: tooltip label for that column")
@@ -517,7 +585,17 @@ def main():
     else:
         page_rel = f"pages/{next_page_number(pages)}_{args.name.replace(' ', '_')}_Heatmap.py"
     w.write(f"app/{page_rel}", fill(PAGE, common))
+    # BEFORE the entry, not after: an unregistered region makes the entry
+    # unimportable, and refusing while nothing has been written to cities.py
+    # leaves the caller with a clean tree rather than a half-migration.
+    ensure_region(root, args, args.dry_run)
     add_city_entry(root, args, page_rel, args.dry_run)
+
+    # The generic form of the region bug: cities.py validates ITSELF and
+    # nothing in a build ever triggers that, so the failure waits for a merge.
+    # Running it here costs a subprocess and catches the next validator too.
+    if not args.dry_run:
+        verify_app_imports(root)
 
     print("\nDone." + (f" {len(w.skipped)} existing file(s) left untouched." if w.skipped else ""))
     print(f"Taxonomy: {args.taxonomy} (value column {value_col!r}" + (f", extra columns {list(extra)}" if extra else "") + ")")
