@@ -232,14 +232,17 @@ than a probe.
 
 ## Band D — 8 cities, and three of its four sub-tiers are now closed
 
-### D-a — one cheap question each (4)
+### D-a — all four PROBED 2026-09-22 (4)
 
-| City | State |
+Every row below was re-measured on 2026-09-22; the country-level view of the
+same four is under Tier 4. **Three were chasing hosts that had moved.**
+
+| City | State after the probe |
 |---|---|
-| **Prague** 🇨🇿 | `rzp.cz`, the *živnostenský rejstřík* (**trade-licence** register), is live — the right shape, since Czech licences are issued per premises. Not ARES, the company register. **Best D lead after Copenhagen** |
-| **Dublin** 🇮🇪 | `data.gov.ie` lists a **Valuation Office API**, but `api.valoff.ie` and `www.valoff.ie` both returned 000 twice — host down, so ASSERTED not measured. Does the Irish rateable register carry a **use category**, where the UK's NNDR did not? |
-| **Zurich** 🇨🇭 | **Food confirmed** — `Gastwirtschaftsbetriebe`, premises-level, GeoJSON. No second bucket found; the national STATENT is aggregate |
-| **Singapore** 🇸🇬 | API answers but its search is loose. One controlled query settles it. Suspected registered-office shaped |
+| **Prague** 🇨🇿 ▲ | **Still the best lead here, and its hosts had MOVED.** `rzp.cz` answers 000; **`www.rzp.cz` redirects to `rzp.gov.cz`**, which is live, and `opendata.praha.eu` redirects to **`lkod.cz/catalog/praha`**. The shape is still right — the *živnostenský rejstřík* is a **trade-licence** register, issued per premises, not ARES the company register. **`data.gov.cz/sparql` answers SPARQL**, so the Bulgarian enumeration technique applies. Next: enumerate for *provozovny* |
+| **Dublin** 🇮🇪 ⚠️ | **`valoff.ie` is not a host that is down — it is RETIRED**, and was retried twice as an outage. `data.gov.ie` catalogues a **Valuation Office API** at **CC BY 4.0**, whose one resource is `https://tailte.ie/home/api/`: **Tailte Éireann absorbed the Valuation Office**, and `tailte.ie` answers 200. The deciding question is unchanged — does the Irish rateable register carry a **use category**, where the UK's NNDR did not? |
+| **Zurich** 🇨🇭 ✗ | **The second bucket is now MEASURED ABSENT, not merely "not found".** Control passes (`zzqqxxnonsense` → 0). `detailhandel` returns **1** result and it is a traffic count; `verkauf` 12 (tram ticket offices, apartment prices); `laden` 31 (a farm shop, population surveys); `gewerbe` 28 (zoning land, 3D roof models); `firmen` 16, **every one a `Firmenbefragung`** — a company *survey*, 2005–2025. Only `Gastwirtschaftsbetriebe` is a register. **Zurich is a one-bucket food city — the Stockholm shape**, and now carries Stockholm's scope question rather than a data one |
+| **Singapore** 🇸🇬 ⚠️ | **Not a loose search — an INERT one.** `zzqqxxnonsense` returns the **identical ten datasets** as `licence`, `food establishment` and `business`: the `query` parameter is ignored entirely, and only the nonsense control separates that from looseness. The catalogue is **4,628 datasets over 463 pages** and pages correctly, so the route is **enumeration, not search**. The registered-office suspicion is still untested — nothing has been learned about the data yet |
 
 ### D-b — rail ANSWERED, business leg is the blocker (4)
 
