@@ -17,7 +17,7 @@ about it is measured).
 - When the two disagree about a *fact*, the master list wins and this file is
   stale. When they disagree about an *order*, that is not a disagreement.
 
-**Current state, 2026-09-23 — 31 candidates.** Dublin and Milan are BUILT and
+**Current state, 2026-09-23 — 30 candidates.** Dublin, Milan and **Paris** are BUILT and
 are not counted here; Göteborg was added by the 2026-09-23 discard sweep.
 
 ---
@@ -38,7 +38,7 @@ is why the order is what it is.
 
 ---
 
-## Cost band 1 — nothing left to discover, and no geocoding leg (1 city)
+## Cost band 1 — nothing left to discover, and no geocoding leg (0 cities — EMPTIED)
 
 | City | Buys | Why it is cheapest | What is actually left |
 |---|---|---|---|
@@ -96,16 +96,16 @@ city against six — which is the ordering this file exists to make visible.
 
 | Band | Cities |
 |---|---|
-| 1 — no geocoding leg | 1 |
+| 1 — no geocoding leg | 0 |
 | 2 — free riders | 4 |
 | 3 — a join | 2 |
 | 4 — a keyless geocode | 4 |
 | 5 — one bucket, owner call | 3 |
 | 6 — blocked or keyed | 5 |
 | 7 — national geocoding project | 12 |
-| **Total** | **31** |
+| **Total** | **30** |
 
-Against `city_master_list.md`'s bands: **A 10 + B 16 + C 5 = 31.**
+Against `city_master_list.md`'s bands: **A 9 + B 16 + C 5 = 30.**
 ⚠️ **Bucharest and Singapore both moved to the ONE-BUCKET band on 2026-09-23**
 — each has a measured coordinate route and only one bucket, and **where both
 are true the ceiling is what is actually stopping the city.** Their COST bands

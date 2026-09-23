@@ -250,9 +250,17 @@ trade names.
 - **Scope** — Prague's `OKRESLAU CZ0100` is the whole city (all 22 městské
   části). Whether the tram network's reach justifies a wider scope is unasked.
 - **The employee filter.** `KATPO` is an employee-count band and 46,447 of
-  85,022 are `000`; the SIRENE-style filter would leave **38,575**. Whether to
-  apply it is an owner call, unresolved — Paris's equivalent took 148,633 to
-  50,156.
+  85,022 are `000`; applying it would leave **38,575**. Whether to apply it is
+  an owner call, unresolved. ⚠️ **The Paris precedent this used to
+  cite is VOID** — it read *"Paris's equivalent took 148,633 to 50,156"*,
+  and the Paris build disproved that on 2026-09-23: **no employee filter is
+  applied in France at all**, and 50,156 is not reachable from the column it
+  was attributed to. **Prague's question stands on its own evidence**, which is
+  actually stronger than France's was: `KATPO` is `000` on **54.6%** of rows
+  against France's `NN` at 77.3%, so the Czech column genuinely discriminates
+  where the French one does not. 🚨 **But check what `000` MEANS here
+  before applying it** — in SIRENE the equivalent band turned out to hold
+  every sole trader, and an owner-run shop is exactly what this map is for.
 - **`EXPDATE`-style currency** — RES has no per-row validity window; the file
   is dated 2026-09-17 as a whole.
 

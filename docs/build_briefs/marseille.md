@@ -132,15 +132,50 @@ Chicago's Metra, Madrid's Cercanías and Philadelphia's Regional Rail.
 
 ---
 
-## ⚠️ Marseille owes France's OSM composition validation
+## ⚠️ Marseille owes France's OSM composition validation — REWRITTEN 2026-09-23
 
-`PLAN.md` records that France's storefront composition was validated against
-OSM **on Paris only** — 50,156 against OSM's 54,198 (92.5%), and 10,595
-against 10,642 on restaurants alone. **The first non-Paris build must re-run
-that comparison**, and since Lyon is deferred, **that is Marseille.**
+🚨 **The figure this section used to cite was DISPROVEN by the Paris
+build on 2026-09-23, and the job it describes has changed shape.**
 
-If it holds here, the country is settled; if it does not, the SIRENE filter
-needs work before four more cities inherit it.
+It read: *"validated against OSM on Paris only — **50,156** against OSM's
+54,198 (**92.5%**), and 10,595 against 10,642 on restaurants alone."*
+**None of that is reproducible.** The 50,156 was attributed to an employee
+filter that **does not exist**: `trancheEffectifsEtablissement` is `NN` on
+**77.3%** of Paris's 149,166 bucket rows, so every banded row together is only
+33,918 — the largest cut the column can make falls **16,000 short**. And
+dropping `NN` is separately wrong, because **only 1,425 rows record `00`**, so
+SIRENE codes a sole trader as `NN` and that band holds **every owner-run
+shop**. *No employee filter is applied anywhere in France.*
+
+### What the Paris build measured instead
+
+| | Recorded | **Re-established** |
+|---|---|---|
+| SIRENE vs OSM, whole commune | 50,156 vs 54,198 = **92.5%** | **87,164 vs 48,973 = 1.78×** |
+| Restaurants — OSM side | 10,642 | **9,058** — reproduces |
+| Restaurants — SIRENE side | 10,595 | **16,280** — **1.54× above** what was recorded |
+
+**The OSM side reproduced and the SIRENE side did not**, which is the tell:
+the error was never in OpenStreetMap, it was in a filter that was tuned until
+its output matched OSM. **France remains a build; the 92.5% claim does not.**
+
+### So Marseille's job is DIFFERENT from what this section used to ask
+
+It is no longer *"re-run the comparison and see if 92.5% holds"* — there is
+no 92.5% to hold. It is:
+
+1. **Measure Marseille's own SIRENE-to-OSM ratio** and check it lands near
+   Paris's **1.78×** rather than somewhere else. A ratio, not a percentage.
+2. **Check the two catch-all exclusions transfer.** Paris excluded **`96.09Z`**
+   and **`56.29B`** — chosen on the publisher's own hierarchy (their parent
+   classes assert no premises) rather than on the word *autres*, which is why
+   **`47.19B`, `47.29Z` and `47.78C` were KEPT** (their classes say *en magasin
+   spécialisé*). The effect was targeted: personal services fell
+   **4.40× → 2.49×**, the total **1.99× → 1.78×**,
+   and **retail was untouched** — which is what a correct exclusion looks
+   like.
+3. **Do NOT tune to match OSM.** Disclose the residual on the page instead.
+   **Tuning until the number matched OSM is exactly what produced 50,156.**
 
 ---
 

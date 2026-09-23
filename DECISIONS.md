@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**218 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**219 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Paris's disproven figures swept out of staging's documents](#2026-09-23---pariss-disproven-figures-swept-out-of-stagings-documents)
 - [Singapore is a TWO-bucket city, and the zero is controlled](#2026-09-23---singapore-is-a-two-bucket-city-and-the-zero-is-controlled)
 - [Bucharest moves B to D: the band was measuring the wrong thing](#2026-09-23---bucharest-moves-b-to-d-the-band-was-measuring-the-wrong-thing)
 - [CVR is normalised, and the premises file is nearly empty on its own](#2026-09-23---cvr-is-normalised-and-the-premises-file-is-nearly-empty-on-its-own)
@@ -257,6 +258,68 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Paris's disproven figures swept out of staging's documents
+
+- **The Paris build disproved two things four other cities inherit, and the
+  correction had landed only in the BUILD session's own files.** `paris.md`,
+  `PLAN.md`, `global_country_shortlist.md` and `pipeline/paris/` were all
+  corrected by that session. **`marseille.md`, `pipeline/countries/france.py`
+  and `prague.md` were not** - and those are staging's lane. **A correction
+  that stops at a session boundary is the same defect as one that stops at a
+  file boundary**, and the path ownership in `session_roles.md` is exactly what
+  makes it predictable: each session fixed what it owned and nothing else.
+
+- **What was disproven.** The brief recorded **148,633 to 50,156 "after the
+  employee filter"**, and PLAN.md called the resulting **92.5%** OSM match the
+  comparison that turned France from a rejection into a build. **Neither
+  reproduces.** `trancheEffectifsEtablissement` is `NN` on **115,248 of
+  149,166 rows (77.3%)**, so every banded row together is 33,918 and the
+  largest cut the column can produce falls **16,000 short**. Dropping `NN` is
+  separately wrong: only **1,425** rows record `00`, so **SIRENE codes a sole
+  trader as NN** and that band holds every owner-run shop in France.
+  **No employee filter is applied.**
+
+- **The tell, and it generalises past France: one side of the comparison
+  reproduced and the other did not.** Re-measured, OSM gives **48,973** against
+  SIRENE's **87,164** inside the commune (**1.78x**). On restaurants - where
+  `amenity=restaurant` and NAF `56.10A` mean nearly the same thing - **OSM
+  returns 9,058 against a recorded 10,642, so the OSM side reproduces**, while
+  **SIRENE returns 16,280 against a recorded 10,595, 1.54x below what the
+  register actually contains.** **When one side reproduces and the other does
+  not, the non-reproducing side is where the tuning happened** - and 50,156 was
+  produced by tuning a filter until its output matched OSM, then recorded as a
+  measurement.
+
+- **Marseille's job changed shape, not just its numbers.** Its brief asked it
+  to *"re-run that comparison"* and see whether **92.5%** holds. **There is no
+  92.5% to hold.** Rewritten to ask for three different things: measure
+  Marseille's own SIRENE-to-OSM **ratio** against Paris's 1.78x; check that
+  Paris's two catch-all exclusions transfer (**`96.09Z`** and **`56.29B`**
+  excluded on the publisher's own hierarchy, while **`47.19B`, `47.29Z` and
+  `47.78C` were KEPT** because their classes say *en magasin specialise*); and
+  **do not tune to match OSM** - disclose the residual instead, because tuning
+  is what produced the wrong number the first time.
+
+- **`france.py` gains `EMPLOYEE_FILTER_APPLIED = False`** rather than merely
+  losing a wrong comment. The constant that carried the false claim is kept,
+  because the next reader's question is *"why is there an employee-band column
+  if nothing uses it"* - and the answer, with its measurements, is now beside
+  it. **A deleted comment leaves no trace of why; a corrected one does.**
+
+- **Prague's brief cited the void precedent and now stands on its own
+  evidence, which is stronger.** It read *"Paris's equivalent took 148,633 to
+  50,156"*. Prague's `KATPO` is `000` on **54.6%** of rows against France's
+  `NN` at 77.3%, so **the Czech column genuinely discriminates where the French
+  one does not** - but the brief now carries the France warning explicitly:
+  **check what `000` MEANS before applying it**, because the French equivalent
+  turned out to hold every sole trader.
+
+- **Counts corrected: Paris is BUILT, so candidates fall 31 to 30 and Band A
+  becomes 9 ready + 7 built.** The merge brought `Built - 21` across but left
+  `Candidates - 31` and Paris's candidate row standing. **Cost band 1 is now
+  EMPTY** - it held Paris alone, and a cost band whose only member ships is
+  worth showing as emptied rather than quietly deleted.
 
 ### 2026-09-23 - Singapore is a TWO-bucket city, and the zero is controlled
 
