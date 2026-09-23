@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**227 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**228 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [The stop-spacing test runs, and its own controls disprove it](#2026-09-23---the-stop-spacing-test-runs-and-its-own-controls-disprove-it)
 - [CORRECTION: a tram-only city is NOT unbuildable, and seven built cities draw trams](#2026-09-23---correction-a-tram-only-city-is-not-unbuildable-and-seven-built-cities-draw-trams)
 - [Seoul's brief, and two measurements that failed rather than answered](#2026-09-23---seouls-brief-and-two-measurements-that-failed-rather-than-answered)
 - [Goteborg's licence is CC0, and it is on the DISTRIBUTION](#2026-09-23---goteborgs-licence-is-cc0-and-it-is-on-the-distribution)
@@ -266,6 +267,55 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - The stop-spacing test runs, and its own controls disprove it
+
+- **The test was repaired, produced numbers, and the numbers are NOT a
+  verdict - because the two controls did not separate.** San Francisco, which
+  needed `docs/sub_transit_line_filters.md`, measured **89 m**; San Diego,
+  which needed none, measured **98 m**. **Nine metres apart.** A metric that
+  gives the same answer to the two cases it exists to tell apart cannot rank
+  anything else either, so **Zurich 196 m, Goteborg 301 m and Stockholm
+  419 m are recorded as UNUSABLE rather than as findings.**
+
+- **What it appears to measure instead is NETWORK CONVERGENCE.** Both control
+  cities' lines bunch downtown, so a nearest-neighbour distance picks up
+  CROSS-LINE proximity rather than along-line spacing. **That is Oslo's
+  `organisasjonsform` again**: a field that is fully populated, answers
+  cleanly, and answers a different question than the one asked of it.
+
+- **The controls are the finding.** Without them the run produces a clean
+  table of five numbers in a plausible order, and nothing in it says the
+  ordering is meaningless. **A screening metric without a known-positive and
+  a known-negative is not a measurement, it is a number.** Saved as
+  `scripts/screen_stop_spacing.py`, which **prints the control separation and
+  refuses to endorse the run when it is under 60 m**.
+
+- **THE EFFICIENCY RULE, which cost more than the test did: ONE Overpass
+  query per CITY - never per route, never per station.** Three versions were
+  written:
+  - **v1** used `map_to_area` on a boundary relation. **An unindexed relation
+    yields an EMPTY area**, which matches nothing, and the failure is
+    **silent** - it reported **San Francisco as having zero tram or
+    light-rail routes**. A bbox needs no index.
+  - **v2** fixed that (SF returned 22 relations) but made **one round trip per
+    route**. Against a load-shedding Overpass it ground for **12 minutes on a
+    single city**; worst case 22 routes x 2 mirrors x 2 retries x 300 s.
+  - **v3** does one query per city: **five cities in about five minutes.**
+
+- **The same bottleneck explains two other failures the same day** - the 504
+  that forced a check out of Bucharest's brief, and a Seoul probe that took
+  ten minutes. **Per-item round trips against a rate-limited public API is the
+  recurring cost in this project's OSM work**, and it had never been written
+  down. It is now in `osm-rail`, with the `map_to_area` trap, the
+  resolve-the-boundary-by-name trap, and the unref'd-relation pattern seen in
+  **five cities in one day**.
+
+- **All three one-bucket briefs keep "stop spacing: unmeasured"** - but they
+  can now say WHY, and that the method is the problem rather than the
+  availability of data. **The test of any improvement is whether San
+  Francisco and San Diego pull apart**, which is a sharper acceptance
+  criterion than the original question had.
 
 ### 2026-09-23 - CORRECTION: a tram-only city is NOT unbuildable, and seven built cities draw trams
 
