@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**210 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**211 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Oslo's names are the best in the project, and 28.6% may be people](#2026-09-23---oslos-names-are-the-best-in-the-project-and-286-may-be-people)
 - [Band B measured for briefs, and two of its six are not Band B cities](#2026-09-23---band-b-measured-for-briefs-and-two-of-its-six-are-not-band-b-cities)
 - [Lyon's discard row spent a day in the wrong table](#2026-09-23---lyons-discard-row-spent-a-day-in-the-wrong-table)
 - [Paris's naming share was France's number wearing Paris's label](#2026-09-23---pariss-naming-share-was-frances-number-wearing-pariss-label)
@@ -249,6 +250,53 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Oslo's names are the best in the project, and 28.6% may be people
+
+- **Oslo's usable `navn` share is 100%, not "below 58.8%", and the old framing
+  was wrong in an instructive way.** It counted a legal-form suffix as damage.
+  It is not: **`1 ØRE AS` -> `1 ØRE` is a trade name**, and so are
+  `7 DAYS MINI MARKED`, `377 SPORT`, `A DAY'S MARCH SHIRTS & STAPLES NORWAY`.
+  Measured on all **13,481** Oslo bucket sub-units: **0 blank**, 41.3% carry a
+  legal suffix, only **12.2%** carry an `AVD` branch tail - far fewer than the
+  examples implied - and **100.0% survive the cleanup with nothing empty**.
+  Against Paris's 39.6% and Rennes' 53.5%, **Oslo has the best-named register
+  in this project.** A two-character trim is not a data-quality problem.
+
+- **But 28.6% of those names may be a person's own, which is three times
+  Paris's exposure.** Sampling **220 parent entities**: `AS` 66.8%, **`ENK`
+  28.6%** - *enkeltpersonforetak*, the sole trader - and **86% of the ENK rows
+  (54 of 63) carry a sub-unit name identical to the parent's**. Paris's
+  comparable figure is **8.7%**. The project's invariant is that a trade name
+  is fair game and a registrant's own name is not, so this is a build blocker
+  until the guard exists, not a footnote.
+
+- **THE TRAP, and it is the registered-office trap in a fifth costume: the
+  field that looks like the answer is populated, complete, and about something
+  else.** A sub-unit's own `organisasjonsform` is **`BEDR` 97.7% / `AAFY`
+  2.3%, with ZERO `ENK`** - because those are *sub-unit* forms. **Reading it
+  would have reported 0% natural persons on 100% coverage and been believed.**
+  The legal form lives on the **parent `enhet`**, reached by
+  `overordnetEnhet`, which **100%** of Oslo's sub-units carry.
+
+- **This is exactly France's shape, and Oslo's brief had no equivalent rule.**
+  `categorieJuridiqueUniteLegale` lives on the *unité légale*, never
+  on the *établissement*; Norway splits the same way between `enheter` and
+  `underenheter`. **Two countries, two registers, one structure** - which is
+  the argument for writing the rule where the next country passes through it
+  rather than in one city's brief. Pinned with two `brief_check` claims; Oslo
+  is now **5/5**.
+
+- **Expect usable names near 71% after suppression** - still the best in the
+  project - with the address fallback Paris already uses. And
+  `check_personal_exposure.py` needs a **Norwegian-aware pass** before Oslo
+  ships, the same way Seoul needs a Korean-aware one.
+
+- **One stale line removed from Oslo's own "still unknown" list.** It said the
+  rail station count was unread while **the section above it stated 11 routes,
+  356 stops, 177 distinct parent stations**. A "still unknown" list goes stale
+  exactly the way prose does, and it is more dangerous because it is read as
+  an inventory of remaining work.
 
 ### 2026-09-23 - Band B measured for briefs, and two of its six are not Band B cities
 
