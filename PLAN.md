@@ -504,6 +504,16 @@ mistakes as confidently as its findings.
   | **Lille** | 9.2 MB | ❌ **MISSING** | ❌ | 2 subway, 1 tram |
   | Rennes | 13.4 MB | ✅ | ✅ end **2026-10-18** | 2 subway |
 
+  4a. **Lille geometry — the portal is geOrchestra, NOT Opendatasoft.** Probed
+     2026-09-23: `opendata.lillemetropole.fr` serves an HTML app, and
+     `data.lillemetropole.fr` returns **404 JSON whose body names its own
+     platform** — `georchestraStylesheet`, `logoUrl: /public/logo-mel.jpg`.
+     **So `/api/datasets/1.0/search` and `/api/explore/v2.1` are the wrong
+     shape entirely.** geOrchestra is GeoServer + GeoNetwork, so try
+     **`/geoserver/wfs?request=GetCapabilities&service=WFS`** and
+     **`/geonetwork/srv/eng/csw?request=GetCapabilities&service=CSW`**.
+     *Read the error body before guessing another path — this one said what it
+     was.*
   4. ⚠️ **LILLE HAS NO `shapes.txt`.** Line geometry **cannot be drawn from
      its feed**, and this project's invariant requires every drawn line to
      carry real geometry plus a label plus a legend entry. Either reconstruct
