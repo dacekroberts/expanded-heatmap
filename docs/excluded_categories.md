@@ -2,14 +2,20 @@
 
 This project maps **storefront** commercial density around rail-transit
 stations: the kind of business you might walk into on your way from a station.
-Business registries are broader than that, so some registered businesses are
-deliberately excluded. This page lists every exclusion and the reason for it.
 
-It is written to be published as-is alongside the maps. Counts are from the
-2026-09-21 rebuild; the reasoning behind each decision, with sample sizes, is in
-`DECISIONS.md`. Where each city's data comes from is in `data_sources.md`.
+That sentence holds two separate scoping decisions, and this page is both of
+them — **which stations** a map is drawn around, and **which businesses** are
+counted near them. Each one leaves things out on purpose. Neither is visible
+from the map itself, which is why they are written down here.
 
-Two principles run through all of it:
+It is written to be published as-is alongside the maps. Business counts are
+from the 2026-09-21 rebuild; station counts are computed from the repository's
+own `outputs/<city>/excluded_stations.csv` files each time this page is
+rendered, so they cannot drift. The reasoning behind each decision, with sample
+sizes, is in `DECISIONS.md`. Where each city's data comes from is in
+`data_sources.md`.
+
+Two principles run through the business half:
 
 1. **Storefront means storefront.** A business you cannot walk into does not
    answer the question this map asks, however legitimately it is registered.
@@ -21,6 +27,87 @@ Two principles run through all of it:
 Those two overlap more than you would expect: the categories that are not
 really storefronts are the same ones full of people running a business from
 home under their own name. Fixing the first mostly fixed the second.
+
+## Which stations these maps are drawn around
+
+**Every map here covers one rail network**, named in the title of its own page
+and in the city list on the front page: Muni Metro in San Francisco, the 'L' in
+Chicago, Metro de Madrid in Madrid. Anything else that runs on rails in that
+city is not on the map, and the rings are drawn only around the stations that
+are.
+
+**Commuter rail is excluded in every city.** The ones named on the record are
+BART and Caltrain in San Francisco, Metra in Chicago, Metrolink in Los Angeles,
+the Coaster and Sprinter in San Diego, SEPTA's Regional Rail in Philadelphia,
+the MBTA's Regional Rail in Boston, Tri-Rail in Miami, GO Transit in Toronto,
+the West Coast Express in Vancouver, Cercanías in Madrid, the Passante and
+Trenord's suburban services in Milan, and Iarnród Éireann's Commuter and
+InterCity trains in Dublin, RER and Transilien in Paris, and the TER services
+in Marseille.
+
+**Trams are NOT excluded as a class, and the test is whether the tram is the
+rapid-transit system or an overlay on one.** Seven of these maps draw
+light rail - San Diego, San Francisco, Los Angeles, Edmonton, Calgary, Miami
+and Dublin - and Marseille draws its three Tramway lines beside its two Métro
+lines. Where a tram network is left out, the city already has a metro and the
+trams run over the top of it: Milan's 17 tram routes stop a block or two apart
+and the agency publishes no colour for any of them, and Barcelona's tram falls
+outside the network-identity test that picks out its metro. San Francisco's F
+Market heritage streetcar is out on its own ground - a separately branded
+service - and its cable cars are a different mode entirely.
+
+**The line is drawn by station spacing and service frequency, not by which
+company runs the trains.** SEPTA is the clearest case — the Market–Frankford
+and Broad Street Lines are on the Philadelphia map and Regional Rail is not,
+and the same agency runs both. Dublin's DART is that judgment reached the other
+way: a national-railway service on national-railway track, kept because its
+city-centre stations sit about a kilometre apart, which is metro spacing. Both
+are recorded in `DECISIONS.md` as decisions with a rejected alternative, rather
+than as applications of a rule — because by the letter of the rule DART would
+have been dropped.
+
+### Stations left out of a network that IS mapped
+
+Two things remove a station from a network this project maps. Both are recorded
+station by station in `outputs/<city>/excluded_stations.csv`, committed to the
+repository, and every one of them is counted in the table on this page.
+
+- **It is outside the city.** Rail networks do not stop at municipal
+  boundaries, and business registers do: one city's register cannot say what is
+  around a station in the next city, so a ring drawn there would come out empty
+  for a reason that has nothing to do with commerce. Washington D.C.'s
+  Metrorail reaches Maryland and Virginia, Toronto's Line 1 ends past the city
+  limit at Highway 407, and Mexico City's Línea B crosses into the State of
+  México. **Three maps are deliberately regional instead** — Miami with its
+  county, Vancouver with Surrey, and Guadalajara with three neighbouring
+  municipios — because there one registry covers the whole area. Guadalajara
+  goes one step further and leaves out a municipio it could have included:
+  Tonalá has no Tren Ligero station, so its businesses could never fall inside
+  a ring. **A station can also be outside the city by belonging to a
+  neighbouring town's own network**: Marseille's feed carries a sixth line that
+  is Aubagne's tram rather than Marseille's, and its seven stations are dropped
+  on the same ground as a station across a boundary.
+- **Its stops are too close together to draw rings around.** Street-running
+  light rail can stop every block or two — far denser than the innermost ring,
+  which is a tenth of a mile in most cities and finer in New York — so
+  unthinned, nearly every point in the west of San Francisco would read as
+  "next to a station". Where that happens, surface stops are thinned to roughly
+  one every half mile measured along the line's own route, while every
+  underground station, every terminus and every interchange is kept. It applies
+  to three cities: San Francisco's Muni Metro, Philadelphia's trolleys, and the
+  Boston Green Line's surface branches. The reasoning is in
+  `docs/sub_transit_line_filters.md`.
+
+**A thinned stop does not leave a hole in the map.** Stops are thinned to half a
+mile apart and the outermost ring reaches 0.6 miles, so the stations that were
+kept still cover the ground between them. A station left out for being in
+another city is different: there the businesses are outside the register too,
+which is the honest limit of a map built from one city's own data.
+
+## Which businesses are counted
+
+The rest of this page is the other half — what is excluded from the business
+side, city by city, and what is missing from it rather than excluded.
 
 ## Excluded everywhere
 
@@ -401,6 +488,26 @@ cities' exclusions were justified that way before any privacy argument -
 consistent with how Los Angeles' and Philadelphia's were framed. Vancouver's
 name-suppression policy is separate and is described under "Honest limits".
 
+### Montréal - vacant units, and the one filter no other city needed
+
+**Vacant ground-floor units are excluded, about 3,500 of them.** Montréal is
+the only city here built from a field survey rather than a licence register -
+the Ville walks its commercial streets each year and records what occupies each
+unit - so it is also the only city whose source states vacancy outright instead
+of leaving it to be inferred. An empty shopfront is premises rather than
+commerce, and counting it would measure the supply of retail space instead.
+
+**What is left after that filter is a closer reading of the street than any
+other map here can be.** Roughly 69% of surveyed units are storefronts, against
+about 28% in a licence-register city, which is why this city's density is not
+comparable with the registry cities on either side of it.
+
+**The map is scoped to the agglomeration** - 15 related municipalities
+alongside the 19 boroughs - and about a tenth of surveyed units fall in those
+municipalities, two of which are not in the survey at all. The Métro does not
+reach them, so almost none of this is drawn; read the island's edges as thinner
+in the data, not necessarily on the ground.
+
 ### Calgary - endorsements, nonstore trade, and two categories left off on sensitivity
 
 **Calgary's register does most of this page's work itself**, which makes its
@@ -769,6 +876,136 @@ have, and this one was avoided rather than accepted.
 and for the same reason: it is tuned for English "SMITH JOHN" forms and the
 Spanish shop-sign convention pairs a trade type with a given name. Nothing is
 filtered on that number.
+
+### Madrid - accommodation, trades with no shopfront, and a zero where a location should be
+
+**Hotels and tourist flats are excluded** - accommodation rather than food
+service, the same carve-out Barcelona needs and for the same reason. So are
+wholesale, vehicle repair, and premises with no shopfront at all, such as
+online and vending sales. The three categories are the register's own activity
+classification, not NAICS.
+
+**About one storefront premises in eleven cannot be placed on the map.** The
+register gives every premises a coordinate, and **9.2%** of those in these
+three categories carry a literal zero instead of a location. They are left out
+rather than guessed at. The loss is not even across the city - it falls hardest
+on Barajas and the centre, and hardest of all on tourist flats and hostels,
+which this map does not show anyway.
+
+### Barcelona - empty shopfronts, accommodation filed under restaurants, and 458 rows that could not be classified
+
+**One ground-floor unit in nine is empty, and those are excluded.** A tenth of
+the premises surveyed are recorded as having no economic activity - vacant, for
+sale or to let. Barcelona states vacancy outright where most registers leave it
+to be inferred, so this is one of the few cities here where empty shopfronts
+can be taken out rather than silently counted as businesses.
+
+**Hotels, hostals and pensions are excluded**, although the census files them
+in the same group as restaurants and bars: **720 accommodation rows** sit
+inside a group whose own name says so, in Catalan. Offices, health, education,
+finance, repair, storage and construction are excluded too.
+
+**458 rows are dropped rather than assigned to Retail.** They sit in a sector
+that explicitly mixes retail with wholesale, and the census's finer levels say
+nothing more about them. "It is in a sector whose name contains retail" is not
+evidence about a premises, so they are excluded and counted here instead of
+being folded into the biggest bucket - which would have been a guess wearing a
+number's clothes.
+
+**Premises inside shopping centres, galleries and municipal markets ARE
+counted.** The census flags them and this map deliberately ignores the flag: a
+mall beside a station is commercial density a rider can reach.
+
+### Dublin - a register of premises rather than of businesses
+
+**Nothing here is excluded on the basis of what a business is called, because
+no name is published at all.** Tailte Éireann's rateable valuation register
+records *premises* rather than occupiers: no trade name, no occupier, no owner.
+Each pin shows the address a valuation is filed against and the use recorded
+against it. This is the only city on the site that names no businesses, and the
+only one where the personal-name question does not arise.
+
+**Where a premises carries more than one use, the more specific trading use is
+what it is counted as** - a shop with offices above it is a shop, a salon
+behind a shopfront is a salon. A premises whose recorded uses are none of
+retail, food service or personal service is not on the map.
+
+### Milan - six registers kept apart, and a category the register cannot mark
+
+**Milan's premises come from six separate registers and are deliberately not
+merged.** The city licenses neighbourhood shops, bakers, artisan food makers,
+bars and restaurants - inside and outside the commercial plan - and personal
+services, each in its own register. A single Milan address routinely holds many
+separate premises, so merging the registers on address would delete real ones.
+Where one business holds two licences it is counted twice: these counts read
+slightly high rather than slightly low, which is the deliberate direction to
+err in and the opposite of New York's choice for the same problem.
+
+**The register of premises licensed outside the commercial plan carries staff
+canteens, private clubs and parish halls alongside ordinary bars.** Those that
+identify themselves are filtered out, but the register does not mark them
+reliably, so some remain. This is an exclusion that is incompletely applied
+rather than a category left in on purpose, and it is the one limit on this
+city's map worth knowing before reading its food-service colours.
+
+### Paris - four trades with no premises, and two catch-alls the publisher's own hierarchy settled
+
+**The source is SIRENE, France's national register of établissements**, so the
+exclusions below are French rather than Parisian and apply to Marseille too.
+INSEE strips records it marks *non-diffusible* at source - name, address and
+coordinates together - so that privacy work was done before the data arrived
+rather than by a filter here.
+
+**Four kinds of trade are excluded because their own official label says there
+is no premises.** Distance selling (`47.91A`, `47.91B`), doorstep selling
+(`47.99A`) and vending or other non-shop channels (`47.99B`) sit *inside* the
+retail division and have no shopfront at all - together the single largest
+correction the city needed. Market-stall trading (`47.81Z`, `47.82Z`,
+`47.89Z`) is the publisher saying the trade happens on a pitch, which also
+makes the registered address the trader's own. Contract catering (`56.29A`) is
+a canteen inside someone else's institution. Wholesale laundry (`96.01A`) is
+industrial - and its retail twin `96.01B` is **kept**, because INSEE itself
+splits the pair *de gros* / *de détail*.
+
+**Two of the five catch-alls are dropped and three are kept, decided by the
+class label rather than by the word "autres".** `96.09Z` (9,349 rows) sits
+under a class that asserts no premises at all, and `56.29B` (958) under
+catering; both are excluded, and `96.09Z` is the direct French analogue of the
+NAICS 812990 that Los Angeles excludes. But `47.19B` (5,359), `47.29Z` (1,413)
+and `47.78C` (903) sit under classes whose official labels contain **en
+magasin** - INSEE stating the premises exists - so they stay. This is
+Barcelona's finding in French: the publisher's hierarchy settling a call that a
+reading of the language would have got wrong.
+
+**What is left is still more than a street survey would find, and that is
+disclosed rather than filtered.** Against OpenStreetMap's mapped shops in the
+same commune the map carries roughly **1.8 times** as many points after these
+exclusions, down from about 2.0 before them. SIRENE records where a business is
+*registered* and some registered establishments have no customer-facing
+shopfront, with nothing in the data saying which. Tuning filters until the two
+numbers agreed would be fitting to a number rather than measuring one.
+
+### Marseille - the same register, and a ferry question left open on purpose
+
+**Everything excluded in Paris is excluded here, from the same national
+register and for the same reasons** - the four no-premises trades, the wholesale
+laundry, and the same two catch-alls `96.09Z` and `56.29B`. The catch-all
+verdict was re-measured rather than inherited: the two cities' compositions
+differ, which is why the shares were counted for Marseille instead of Paris's
+being assumed.
+
+**The gap against OpenStreetMap is wider here - about 2.6 times as many points
+- and most of that is not the register.** OpenStreetMap covers Marseille far
+less completely than it covers Paris. On restaurants, where the two schemes
+mean nearly the same thing, the ratio falls to **1.7×**, close to Paris's 1.8×,
+which is the comparison worth trusting.
+
+**The harbour ferries are excluded, and this one is flagged rather than
+settled.** The Vieux-Port shuttles and the Frioul islands service are genuine
+urban transit in a way no other city's excluded mode is, and they are dropped
+because this project measures density around *rail* stations and no built city
+draws a ferry. Recorded as an owner's decision on 2026-09-23 for possible
+revisiting, not as an automatic application of a rule.
 
 ## Kept, and why
 

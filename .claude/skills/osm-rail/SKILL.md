@@ -177,6 +177,39 @@ why `pipeline/stations.py` shares the checks and leaves the collapse per city.
   before you conclude Overpass is down; the Toulouse build lost ten minutes to
   exactly that misreading.
 
+- **`map_to_area` silently returns NOTHING for a relation that is not in
+  Overpass's area index**, and the query then matches zero of everything with
+  a cheerful 200. On 2026-09-23 that reported **San Francisco as having no
+  tram or light-rail routes**, which is absurd on its face and would not have
+  been on a city nobody knows. **Use a bounding box** - it needs no index -
+  or verify the area resolves before trusting a count taken inside it.
+
+- **ONE Overpass query per CITY. Never one per route, and never one per
+  station.** This is the single largest recurring cost in this project's OSM
+  work. A stop-spacing test written per-route ground for **12 minutes on one
+  city** - 22 relations against a load-shedding host, worst case 22 x 2
+  mirrors x 2 retries x a 300 s timeout - and the same pattern produced a 504
+  on Bucharest's brief-check and a 10-minute Seoul probe the same day.
+  Rewritten as one query per city it finished **five cities in five minutes**.
+  `scripts/screen_stop_spacing.py` is the worked example.
+
+- **Resolve a boundary BY NAME and then LOOK at what came back.** Searching
+  `name=Stockholm` at `admin_level=7` matches **nothing** - the Swedish
+  municipality is `Stockholms kommun` - and widening the search returns
+  **two US "Stockholm Township" relations at the same admin_level**. Either
+  would have produced a real, confidently wrong rail network. **A zero from a
+  selector is a statement about the selector.**
+
+- **A route relation with NO `ref` is the default expectation, not an
+  anomaly.** It appeared in **five cities in one day**: Bucharest's
+  `Extensie M4` (no ref, no colour), Singapore's `JRL` (5 relations, named,
+  uncoloured), Stockholm's unref'd subway **and** tram, and 27 of Seoul's 65
+  commuter relations. **A build keying on `ref` drops them silently; a build
+  keying on relation COUNT draws a line it cannot label** - and this project's
+  invariant requires every drawn line to carry its real public name and a
+  legend entry. **Count both ways and reconcile the difference before
+  building.**
+
 ## Keeping Overpass cheap, which is how you stop being throttled
 
 Added 2026-09-23 from the Toulouse build. This is the difference between a
@@ -240,6 +273,9 @@ licence, not an agency document that can be revoked without notice.
       operator publishes them (gate 3), and gaps named rather than filled in
 - [ ] Every name search bounded by a bbox; same-name boundaries never resolved
       by size
+- [ ] **ONE query per city** - never one per route or per station; the largest
+      recurring Overpass cost in this project, and the one that turns a
+      load-shedding host into a twelve-minute stall
 - [ ] Queries written **nodes-first** (`out body`), ways added as a separate
       query only if needed, and no count compared across the two shapes
 - [ ] A real `User-Agent` sent, a total deadline set, and every attempt printed

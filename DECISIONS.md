@@ -16,11 +16,15 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**228 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**232 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
 - [Toulouse built: 8,635 storefronts, 48 stations, and the first non-rail mode](#2026-09-23---toulouse-built-8635-storefronts-48-stations-and-the-first-non-rail-mode)
+- [The scope check paid for itself on the first merge it met](#2026-09-23---the-scope-check-paid-for-itself-on-the-first-merge-it-met)
+- [The site said which businesses it leaves out and never which stations](#2026-09-23---the-site-said-which-businesses-it-leaves-out-and-never-which-stations)
+- [The master list's summaries drifted while its sections stayed right; Cairo leaves the discards](#2026-09-23---the-master-lists-summaries-drifted-while-its-sections-stayed-right-cairo-leaves-the-discards)
+- [The stop-spacing test runs, and its own controls disprove it](#2026-09-23---the-stop-spacing-test-runs-and-its-own-controls-disprove-it)
 - [CORRECTION: a tram-only city is NOT unbuildable, and seven built cities draw trams](#2026-09-23---correction-a-tram-only-city-is-not-unbuildable-and-seven-built-cities-draw-trams)
 - [Seoul's brief, and two measurements that failed rather than answered](#2026-09-23---seouls-brief-and-two-measurements-that-failed-rather-than-answered)
 - [Goteborg's licence is CC0, and it is on the DISTRIBUTION](#2026-09-23---goteborgs-licence-is-cc0-and-it-is-on-the-distribution)
@@ -422,6 +426,214 @@ onwards; the early ones are split by phase rather than by hour.
   pins the iframe height that keeps them apart. Recorded as a separate task
   rather than fixed inside a city build, since it is shared render code and
   the project's stated preference is a check rather than a correction.
+### 2026-09-23 - The scope check paid for itself on the first merge it met
+
+- **Merging master brought Paris and Marseille, and
+  `check_scope_disclosure.py` failed on both within a minute of the merge.**
+  Neither city's business exclusions were in `docs/excluded_categories.md`,
+  though Paris's own page tells readers that document "lists them" - a promise
+  the document did not keep. Both are written up now, from their own published
+  prose and configs. Supersedes the station figures in the entry below: the
+  table reads **697 stations across 21 cities, 446 outside the city and 251
+  thinned**, up from 614 across 19, and it re-reads itself rather than being
+  edited.
+
+- **Marseille arrived with an exclusion reason neither reader understood:
+  "Aubagne's tram, not Marseille's".** Seven stations of a sixth line in the
+  same feed that belongs to a neighbouring town's own network. The check
+  refused to let it be silently bucketed under "Other" - which is the failure
+  it was built for, met on its first new city rather than hypothetically.
+  Folded into "outside the city", because that is what it is to a reader, and
+  the document now says so. Paris's file needed only `commune` added to the
+  boundary-column vocabulary.
+
+- **A false claim was found on a live page and corrected: Paris's page said
+  "trams are excluded in every city here that has them".** They are not -
+  `route_type 0` is drawn in San Diego, San Francisco, Los Angeles, Edmonton,
+  Calgary, Miami and Dublin, and Marseille draws three Tramway lines beside
+  its two Métro lines. The staging session had already caught the same
+  sentence's ancestor the same day (the Zurich correction) and the page it came
+  from had not been updated. **The rule is whether the tram IS the
+  rapid-transit system or a street-running overlay on one**, and that is what
+  both the page and the document now say. A first draft of this document
+  repeated the error - "trams and streetcars are out on different grounds" -
+  and was caught by reading master's commit log rather than by any check.
+
+- **`app/station_scope.py` now holds the one vocabulary for reading
+  `excluded_stations.csv`**, imported by both the page that renders the counts
+  and the check that enforces them. Two copies had existed for about an hour
+  and the drift risk was exactly the invisible kind: the page bucketing a new
+  city under "Other" while the check went on passing. Stdlib only, so the check
+  needs no Streamlit and the app needs no pipeline.
+
+- **The harness was wrong for the sixth time this session**, and the positive
+  control is the only reason it was not read as strictness: after the shared
+  module landed, the negative-test harness still copied only `cities.py`, so
+  all eight cases failed with an `ImportError` - including "an unmodified copy
+  passes". **A negative-test harness without a positive control cannot tell
+  "the check fires" from "the check is broken",** which is the argument for
+  keeping one in every such harness.
+
+### 2026-09-23 - The site said which businesses it leaves out and never which stations
+
+- **`docs/excluded_categories.md` now covers both halves of this project's
+  scope, and the page that renders it was renamed in substance rather than in
+  title.** The document was entirely about businesses; the other half of its
+  own opening sentence - "density around rail-transit stations" - was scoped
+  just as deliberately and published nowhere a reader would look. The gap was
+  found by a reader's question, **"was BART ever included in the San Francisco
+  build?"**, whose answer had been sitting in this file since the build: BART
+  is regional and crosses county lines, so including it would have reopened the
+  cross-boundary problem San Diego needed solving. Recorded, reasoned, and
+  never told to anyone.
+
+- **The disclosure asymmetry was the real defect, not the BART decision.** Six
+  city pages already named their excluded commuter rail - Chicago's Metra,
+  Philadelphia's Regional Rail, Boston's, Miami's Tri-Rail, Vancouver's West
+  Coast Express, Dublin's Commuter and InterCity - and San Francisco's page
+  named none, while every one of the 20 page titles names the network it does
+  cover. So the convention existed and San Francisco had fallen out of it, in
+  the one city whose omission a reader is most likely to notice. Its page now
+  carries the sentence, including that Embarcadero, Montgomery, Powell and
+  Civic Center ARE mapped, as the Muni stations they also are.
+
+- **The station table is COMPUTED from `outputs/*/excluded_stations.csv` at
+  render time, not written into the prose.** 614 stations are excluded across
+  19 cities - 363 for sitting outside the city whose register the map is built
+  from, 251 thinned out of street-running stretches - and every one of those
+  numbers is an open count that grows with each city. This project has already
+  been bitten by writing one of those into a document. The page reads the
+  committed files instead, so adding a city adds its row with no edit.
+
+- **A `st.dataframe` was tried first and rendered collapsed** - 52 px wide with
+  no canvas at all in the lean venv, measured rather than inferred. Replaced
+  with a markdown table, which is also the right call independently: 20 rows
+  need no sorting, and a grid's contents do not appear in the page text.
+
+- **The check found a fifth city the eye had missed.** Five cities -
+  **Montréal, Madrid, Barcelona, Dublin and Milan** - had no business
+  exclusions written in this document at all, each disclosed on its own city
+  page and nowhere else. A grep for four of them had been run by hand;
+  `scripts/check_scope_disclosure.py` named the fifth on its first run, because
+  it matches on `cities.py`'s own spelling and "Montréal" is not "Montreal".
+  All five were written up from their own published prose rather than parked,
+  so `KNOWN_GAPS` ships empty.
+
+- **The check asserts properties, and was watched failing eight ways** on temp
+  copies before being trusted: the splice marker removed, the splice marker
+  duplicated, the station section deleted, a city's `outputs/` directory
+  renamed, a city dropped from the business half, a station excluded for a
+  brand-new reason, and a documented city left stale in `KNOWN_GAPS` - plus an
+  unmodified copy passing. The KNOWN_GAPS expiry case is the one that matters:
+  a gap list that outlives its gap is how a dated defect turns into a
+  permanent pass.
+
+- **The hook earned its keep again.** A one-line `python -c` probe carrying
+  `\s` and `\(` was refused by `.claude/hooks/block_heredoc.py` - the fifth
+  occurrence of that pattern and the first that cost nothing, because it never
+  ran. Rewritten as a scratchpad file, per the rule the hook enforces.
+### 2026-09-23 - The master list's summaries drifted while its sections stayed right; Cairo leaves the discards
+
+- **`docs/city_master_list.md` was corrected against the briefs and against
+  master, and every error was in a SUMMARY, never in a band section.** The
+  counts box read **20 built / 33 candidates / 30 discarded**; the truth is
+  **22 / 29 / 32** once Cairo moves. The band table read **A 9 / B 10 / C 12
+  / D 2** - the pre-renumber counts, left standing through two renumbers that
+  each updated the band HEADINGS and not the table summarising them. **The
+  hand-kept summary is the first thing to drift**, because every change is
+  made in a section and the summary is a second place to remember.
+
+- **Marseille was still listed as a Band A candidate after it was built**
+  (row "4-7 Marseille, Toulouse, Lille, Rennes"), and the Built table said
+  *"not yet deployed"* after `pages/22_Marseille_Heatmap.py` had landed on
+  master. It now has a struck-through BUILT row carrying 18,177 storefronts and
+  66 stations, the same treatment every other built city gets. Band A is **8
+  ready + 8 built**.
+
+- **Two rows were a day behind their own briefs.** Hong Kong's said its
+  geocode rate was *"not yet measured"*; the brief measured **100.0%** on 200
+  random rows as a two-stage lookup. Goteborg's said *"row count UNMEASURED,
+  no accessURL"*; the brief measured **5,063** from the CSV distribution. The
+  second correction also settles a comparison the file had left open:
+  **Stockholm 8,146 > Goteborg 5,063 > Zurich 3,488**, so Stockholm stays
+  first on size.
+
+- **Cairo moved from the discards to the open screening gap, by the file's
+  own rule rather than by a new judgement.** Its discard row read *"No
+  open-data infrastructure"*; the probe log shows ONE probe of ONE national
+  host (CAPMAS, "serves HTML only"), and the file's own 2026-09-23 sweep
+  recorded it **STILL UNPROBED**. `add-country` says a row resting on an
+  absence is not a discard and that the city's own host must be tried before
+  recording a negative. Egypt left the countries-ruled-out line with it.
+  **Rejected: leaving it and annotating** - the rule exists because a
+  discard row that fails its own probe log is how Italy was once ruled out
+  and then passed.
+
+- **Zagreb went the other way: its sweep row was the stale one.** The
+  2026-09-23 sweep recorded it *"Confirmed BLOCKED, not negative"* after three
+  more SPA shells, but the discard row already held a measurement - Grad
+  Zagreb's **210 datasets** enumerated through `data.gov.hr/ckan/api/3/`,
+  the only commercial one a grants list. **Shells at the wrong paths are not
+  evidence of a block.** The sweep row is struck through; the discard stands.
+
+- **The by-country view had stopped being current on 2026-09-22** - it still
+  said Spain was in progress, Taiwan's geocoder was keyless, Hong Kong was
+  blocked and `REGION_ORDER` was `["United States", "Canada"]`. Rather than
+  rewrite evidence sections, a **current by-country table** now heads it
+  (22 built, 29 candidates, reconciling to the bands) and the tier view below
+  is labelled **retained as evidence, not current**. "The order, as decided"
+  gains a current-position note: **Brazil is the next geocoding country by the
+  owner's choice**, Taiwan having no forward geocoder or bulk address file
+  reachable, and Japan stays last.
+
+### 2026-09-23 - The stop-spacing test runs, and its own controls disprove it
+
+- **The test was repaired, produced numbers, and the numbers are NOT a
+  verdict - because the two controls did not separate.** San Francisco, which
+  needed `docs/sub_transit_line_filters.md`, measured **89 m**; San Diego,
+  which needed none, measured **98 m**. **Nine metres apart.** A metric that
+  gives the same answer to the two cases it exists to tell apart cannot rank
+  anything else either, so **Zurich 196 m, Goteborg 301 m and Stockholm
+  419 m are recorded as UNUSABLE rather than as findings.**
+
+- **What it appears to measure instead is NETWORK CONVERGENCE.** Both control
+  cities' lines bunch downtown, so a nearest-neighbour distance picks up
+  CROSS-LINE proximity rather than along-line spacing. **That is Oslo's
+  `organisasjonsform` again**: a field that is fully populated, answers
+  cleanly, and answers a different question than the one asked of it.
+
+- **The controls are the finding.** Without them the run produces a clean
+  table of five numbers in a plausible order, and nothing in it says the
+  ordering is meaningless. **A screening metric without a known-positive and
+  a known-negative is not a measurement, it is a number.** Saved as
+  `scripts/screen_stop_spacing.py`, which **prints the control separation and
+  refuses to endorse the run when it is under 60 m**.
+
+- **THE EFFICIENCY RULE, which cost more than the test did: ONE Overpass
+  query per CITY - never per route, never per station.** Three versions were
+  written:
+  - **v1** used `map_to_area` on a boundary relation. **An unindexed relation
+    yields an EMPTY area**, which matches nothing, and the failure is
+    **silent** - it reported **San Francisco as having zero tram or
+    light-rail routes**. A bbox needs no index.
+  - **v2** fixed that (SF returned 22 relations) but made **one round trip per
+    route**. Against a load-shedding Overpass it ground for **12 minutes on a
+    single city**; worst case 22 routes x 2 mirrors x 2 retries x 300 s.
+  - **v3** does one query per city: **five cities in about five minutes.**
+
+- **The same bottleneck explains two other failures the same day** - the 504
+  that forced a check out of Bucharest's brief, and a Seoul probe that took
+  ten minutes. **Per-item round trips against a rate-limited public API is the
+  recurring cost in this project's OSM work**, and it had never been written
+  down. It is now in `osm-rail`, with the `map_to_area` trap, the
+  resolve-the-boundary-by-name trap, and the unref'd-relation pattern seen in
+  **five cities in one day**.
+
+- **All three one-bucket briefs keep "stop spacing: unmeasured"** - but they
+  can now say WHY, and that the method is the problem rather than the
+  availability of data. **The test of any improvement is whether San
+  Francisco and San Diego pull apart**, which is a sharper acceptance
+  criterion than the original question had.
 
 ### 2026-09-23 - CORRECTION: a tram-only city is NOT unbuildable, and seven built cities draw trams
 
