@@ -52,7 +52,7 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 > next build, or the next licence read changes it, and the counts in the table
 > below are the ones to trust over any prose that repeats them.
 
-## Built — 18
+## Built — 19
 
 | Country | Cities |
 |---|---|
@@ -76,7 +76,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 33
+## Candidates — 32
 
 Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 **Eight cities moved to discarded on measurement** and **two were upgraded**.
@@ -168,7 +168,7 @@ results in the sweep.
 
 ---
 
-## 🟢 Band A — ready to build (9 remaining + 4 ✅ BUILT)
+## 🟢 Band A — ready to build (7 ready + 1 ⛔ gated + 5 ✅ BUILT)
 
 **Every question these cities carry is answerable inside the build**, not
 before it. Nothing here needs a probe, a document or a decision first.
@@ -198,12 +198,13 @@ and whether it held.
 |---|---|---|---|
 | ✅ | ~~**Guadalajara**~~ 🇲🇽 | DENUE, SCIAN = NAICS, INEGI licence cleared | **BUILT 2026-09-22** — `pages/16_Guadalajara_Heatmap.py`, region *Mexico*. Screening said "nothing outstanding" and that held |
 | ✅ | ~~**Madrid**~~ 🇪🇸 | **53,355 clean storefront rows** — retail 36,224 · food 18,194 · personal 9,974 (from 225,660 join rows → 159,787 open → filtered). Three-level taxonomy on `division`, EPSG:25830, CC BY 4.0 | **BUILT 2026-09-22** — `pages/17_Madrid_Heatmap.py`, region *Spain*. Rail from **CRTM's feature layers**: 13 lines, 293 station-line records, 49 stations excluded, 0 filter disagreements. Screening said the rail leg was the open question and CRTM answered it |
-| 1 | **Dublin** 🇮🇪 ▲▲ **REGIONAL** | **38,265 rateable rows across FOUR local authorities → 13,945 storefront** (Dublin City alone: 19,810 → **8,016**). **13 use categories region-wide, 12 in Dublin City.** **99.87% carry `Xitm`/`Yitm`** — Irish TM, already in metres; 51 of 38,265 missing, **46 of them pubs**. Per-row `Category` **and** `Uses`, plus `ValuationReport[].FloorUse`. `Eircode`. **CC BY 4.0, no key** | **No geocoding leg.** Build is the **Vancouver + Surrey shape** — four authorities, not one city. Rail: the three drawn lines (**Luas Red, Luas Green, DART**) all already carry an OSM colour; Commuter and InterCity are **dropped**. ⚠️ **36% of its storefronts are near no rail of any kind** — a scope fact to state on the page, not a defect. Brief: `docs/build_briefs/dublin.md`, **6/6** |
+| ✅ | ~~**Dublin**~~ 🇮🇪 ▲▲ **REGIONAL** | **38,265 rateable rows across FOUR local authorities → 13,945 storefront** (Dublin City alone: 19,810 → **8,016**). **13 use categories region-wide, 12 in Dublin City.** **99.87% carry `Xitm`/`Yitm`** — Irish TM, already in metres; 51 of 38,265 missing, **46 of them pubs**. Per-row `Category` **and** `Uses`, plus `ValuationReport[].FloorUse`. `Eircode`. **CC BY 4.0, no key** | **No geocoding leg.** Build is the **Vancouver + Surrey shape** — four authorities, not one city. Rail: the three drawn lines (**Luas Red, Luas Green, DART**) all already carry an OSM colour; Commuter and InterCity are **dropped**. ⚠️ **36% of its storefronts are near no rail of any kind** — a scope fact to state on the page, not a defect. Brief: `docs/build_briefs/dublin.md`, **6/6**  — **✅ BUILT 2026-09-22** — the regional shape (four local authorities) held |
 | 2 | **Seoul** 🇰🇷 | 197,276 active premises over 8 datasets, EPSG:5174, status field, KOGL Type 1 | Build work — partial geocoding for 일반음식점 (90.7%), Korean-aware `check_personal_exposure.py` |
 | 3 | **Milan** 🇮🇹 ⚠️ | **Three layers, one per bucket — the bucket comes from WHICH LAYER a row is in, not from a code.** `ds49` **28,131** retail · `ds59` **3,799** food service · `ds62` **5,732** personal services. All three **CC-BY**, all updated **2026-08-31**, all with `LONG_X_4326`/`LAT_Y_4326` | **Schemas captured 2026-09-22 — and the fill rates correct this row's old claim.** Coordinates are excellent (99.1% / 92.2% / 98.8%) and location is complete (`Ubicazione` 100%). **But the columns that were cited as making this the richest source in the screen are mostly EMPTY**: `insegna` **17.6%** on retail and **9.1%** on food, `codice_ateco` **7.1%**, and `ds62` has **no name field at all**. `settore_merceologico` is 99.5% but binary — *alimentare / non alimentare*; `tipologia` is 100% and single-valued. **Owner decision: a map where ~82% of retail pins carry no trade name.** Not a blocker — bucketing works by layer, and fewer published names is a privacy asset — but it is a choice, not a detail |
 | ✅ | ~~**Mexico City**~~ 🇲🇽 | Same DENUE. **Rail from OSM** — 195/195 stops exact, 6,468 geometry points | **BUILT 2026-09-22** — `pages/15_Mexico_City_Heatmap.py`. The ODbL share-alike decision was taken during the build; see `DECISIONS.md` |
 | 4 | **Paris** 🇫🇷 ▲ | SIRENE, établissement-level, **Licence Ouverte 2.0**, and **99.96% already geolocated** — 148,576 of 148,633. Storefront filter **validated against OpenStreetMap**: 50,156 rows vs OSM's 54,198, and on one class 10,595 vs 10,642 | **The `check_personal_exposure.py` run is load-bearing here**, not a formality — the filter removes home registrations by proxy, not by proof |
-| **5–9** | **Lyon · Marseille · Toulouse · Lille · Rennes** 🇫🇷 | **The same SIRENE, the same Licence Ouverte 2.0, the same filter** — one national register, so nothing about their business leg is separately open. Storefront layers under the project's own filter: **Marseille 8,065 · Lyon 7,354 · Toulouse 4,833 · Lille 3,272 · Rennes 2,089** | **No geocoding leg in any of them** — geolocation measured per commune: Lyon **99.97%**, Marseille 99.91%, Rennes 99.90%, Toulouse 99.85%, Lille **99.71%**. ⚠️ **The OSM composition validation is Paris-only** and is owed on the **first** non-Paris build, not all five (`PLAN.md`). ⚠️ **Rennes and Lille are an order of magnitude below Paris** — whether a ~2,000-point city earns a page is a scope call |
+| **4–7** | **Marseille · Toulouse · Lille · Rennes** 🇫🇷 | **The same SIRENE, the same Licence Ouverte 2.0, the same filter** — one national register, so nothing about their business leg is separately open. **Country profiled 2026-09-22**: `pipeline/countries/france.py`, `docs/france_step0_endpoints.md`. Coordinates are a **JOIN** on `siret` against INSEE's 37,901,783-row geolocation file, so there is no geocoding leg for any of them. Est. bucket rows: Marseille 26,940, Toulouse 12,873, Lille 10,461, Rennes 5,002 | **Build after Paris; each is then one variable (`codeCommuneEtablissement`).** Licences read: Marseille and Lille `lov2`, Toulouse and Rennes **`odc-odbl` share-alike**. ⚠️ France's OSM rail composition is validated on **Paris only** — the first non-Paris build must re-validate. ⚠️ **Scope undecided**: the commune is far smaller than the transit network, so these may need Dublin's regional shape |
+| ⛔ | **Lyon** 🇫🇷 **GATED — not counted as ready** | Data is fine and **better than Paris**: 19,449 est. bucket rows, **52.5% carrying a premises name** against Paris's 42.9% | **DEFERRED 2026-09-22, not discarded.** Three gates: an account on `data.grandlyon.com` this project does not create; **CGU Art. 6.2 bars the producers' *signes distinctifs*** — which collides with the invariant that every drawn line carries its real name, Lyon's being **TCL**; and **CGU 9.4's open-ended indemnity**, the project's second after Hong Kong's. Its NAP feed is **dead since 2022-04-14**. Gate items 17–19 |
 | ✅ | ~~**Barcelona**~~ 🇪🇸 | **58,908 active premises** (2022 census — the 2024 one is geographically incomplete), 0.00% bad coordinates, CC-BY-4.0. Build brief, 9/9 | **BUILT 2026-09-22** — `pages/18_Barcelona_Heatmap.py`. All four owner decisions were settled before the build: census year **2022**, drawn scope **16 lines** (14 metro refs + funiculars FM and FV, decided on the operators' own `network` tag), mall and market interiors **kept**, and the brief's OSM breakdown corrected to tram 20 / funicular 6. ⚠️ **The duty to notify the Council is still OUTSTANDING** — see `docs/gated_access.md` item 2 |
 
 ⇄ **Paris left Band A and came back the same day, measured both times.**
