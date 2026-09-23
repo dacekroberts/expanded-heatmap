@@ -16,7 +16,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**198 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**199 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
@@ -31,6 +31,7 @@ onwards; the early ones are split by phase rather than by hour.
 - [CUZK read: Prague is unblocked, and the "cookie terms" were not only cookie terms](#2026-09-23---cuzk-read-prague-is-unblocked-and-the-cookie-terms-were-not-only-cookie-terms)
 - [The sweep's results sorted: Goteborg banded, two discards evidenced](#2026-09-23---the-sweeps-results-sorted-goteborg-banded-two-discards-evidenced)
 - [The discard record swept for rows that rest on an absence](#2026-09-23---the-discard-record-swept-for-rows-that-rest-on-an-absence)
+- [Paris renders, and a zero-width race turned out to be one line](#2026-09-23---paris-renders-and-a-zero-width-race-turned-out-to-be-one-line)
 - [The employee filter does not exist, and France's OSM validation was wrong](#2026-09-23---the-employee-filter-does-not-exist-and-frances-osm-validation-was-wrong)
 - [France's taxonomy is national, and Paris takes Lambert-93](#2026-09-23---frances-taxonomy-is-national-and-paris-takes-lambert-93)
 - [Four licences read: Oslo is clear, Prague has one left](#2026-09-23---four-licences-read-oslo-is-clear-prague-has-one-left)
@@ -691,6 +692,74 @@ onwards; the early ones are split by phase rather than by hour.
   as candidates to begin with. That is the point: **they were invisible to the
   arithmetic**, which is exactly why the discard list has to name its evidence
   per row rather than gesture at a pattern.
+
+### 2026-09-23 - Paris renders, and a zero-width race turned out to be one line
+
+- **`check_personal_exposure.py paris`: PASS, and the verdict is structural
+  rather than statistical.** Step 2 never loads a registrant-name column, so no
+  pin CAN be one - the same claim New York, Dublin and Milan rest on, and the
+  reason Los Angeles' failure mode is impossible here rather than merely
+  unlikely. The heuristic flags **10,591 pins (12.6%)**, and splitting that on
+  the built CSV's own `name_is_address` column shows **98% are premises names**
+  (LES PETITES BOMBES, ADIDAS FRANCE, PHARMACIE DU SOLEIL, BARBER STAR) and
+  **2% are street names** (BOULEVARD ORNANO, PLACE DE L'OPERA). Person-like
+  name at a residential unit: **3 of 84,125 pins, 0.00%**. Nothing found was a
+  registrant. This is the city with the LARGEST temptation to do otherwise -
+  `StockUniteLegale` would have named nine tenths of the unnamed rows - and the
+  file is not even downloaded.
+
+- **Paris was first registered with `name_is_address=True`, which is wrong and
+  printed ANOTHER CITY'S EVIDENCE.** That flag is Dublin's case, a register
+  with no name column at all; Paris carries a premises name on 37.2% of pins
+  and is Milan's hybrid. Setting it also emitted Dublin's own verification note
+  - "the person-like hits are Irish streets named after people (Ashe Street,
+  Thomas Street)" - as though it had been checked for Paris, which it had not.
+  Corrected to Milan's shape. The hardcoded note is a latent trap for the next
+  city that sets the flag.
+
+- **`map_common.py` will never write a zero map width again.** Paris rendered
+  BLANK on first load - `width: 0px` on the container, Leaflet.heat throwing
+  `IndexSizeError: getImageData ... source width is 0` - because a pass that
+  runs before the document has laid out reads `clientWidth` 0 and the old code
+  wrote it through. It is the SAME RACE the adjacent `else` branch documents
+  for Edmonton, intermittent and not city-specific, and the page reloaded
+  correctly. What differs is severity: a narrow fit is a bad view, a zero width
+  is no map and a console error. Paris exposed it as the heaviest map in the
+  project (84,125 points), which widens the pre-layout window. One line,
+  `if (!target) return;`, which cannot alter a correct render because `target`
+  is 0 only when the measurement is meaningless. All 21 cities regenerated and
+  verified to carry it; the accompanying CSV churn was reverted as
+  content-identical line endings.
+
+- **`check_macro_labels.py`: PASS, 0 problems across 7 regions x 3 widths.**
+  Paris measures **32.9 px** at `600 14px "Space Grotesk"`, the narrowest label
+  in the project. Measured in a real browser **with five known cities as the
+  control** - Dublin 42.8, Milan 36.3, Madrid 47.2, Boston 48.4, Toronto 52.4
+  all reproduced the table exactly - which is what establishes that the font
+  had loaded and the figure is not a fallback measurement. The script refuses a
+  guessed width; this is why.
+
+- **`check_provenance.py`: ALL RECORDED**, the first full pass with Paris in
+  the tree. Its endpoint check caught two sources this build added and never
+  wrote down: the **Île-de-France commune layer** that names the 76 excluded
+  stations, and the **NAP metadata API**, which is load-bearing rather than
+  incidental - notice 24 requires a last-updated date and an update interval
+  that the GTFS zip does not contain, so without that endpoint the page would
+  display a compliance value from a source nothing recorded.
+
+- **`check_deploy_imports.py --ref paris-build`: clean clone imports cleanly
+  under the lean venv.** `pipeline/countries/france.py` is pure constants and
+  `pipeline/paris/config.py` imports only `pathlib` plus that module, so the
+  page pulls in nothing geopandas-shaped.
+
+- **The saturated heat layer is ACCEPTED, not tuned.** Paris's heat renders as
+  a near-solid mass over the commune, which is the same uniform density that
+  drove the ring-edge change. Rejected: per-city heat parameters, which would
+  be a fresh divergence in shared rendering with no measured basis for the new
+  values. The page already states the heat is illustrative.
+
+- **Master list: Built 21, Europe 5**, and the France row now carries the
+  corrected viability figure rather than the superseded 92.5%.
 
 ### 2026-09-23 - The employee filter does not exist, and France's OSM validation was wrong
 
