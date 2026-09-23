@@ -1026,6 +1026,35 @@ def _choose_view(points, candidates, labels, n_lines, center=None, zoom=None):
             break
     if best is None:   # nothing fits with every station on screen: keep the fit as is
         return center, zoom, first
+
+    # A RESIDUAL COST IS A LABEL NOBODY CAN READ, AND IT USED TO SHIP SILENTLY.
+    #
+    # `_layout_labels` falls back to "the preferred spot, even if it collides"
+    # and counts one per unplaced label; this function then kept the cheapest
+    # view and threw the count away. Madrid shipped that way on 2026-09-22:
+    # three overlapping pairs, with **Línea 2 drawn underneath the Ramal label
+    # and invisible at every width**. The legend row was there, so nothing in
+    # the build or the legend looked wrong - it took a rendered screenshot in
+    # deploy-verify to see it, one commit before a deploy.
+    #
+    # Raising rather than warning, because this is the project's oldest
+    # invariant - every drawn line gets a permanent on-map label AND a legend
+    # entry - and a warning in a build that prints hundreds of lines is a
+    # warning nobody reads. Seventeen of eighteen cities were already at cost 0
+    # when this was added, so it fails only where a label really is unreadable.
+    #
+    # To clear it: pass an explicit `center`/`zoom` for the city (a dense radial
+    # network gives the solver little room), or force the crowded lines' label
+    # ends with "start"/"end" in their spec.
+    if best[0]:
+        raise ValueError(
+            f"{best[0]} transit-line label(s) could not be placed without "
+            f"overlapping another label, the legend or the map edge, across "
+            f"{len(views)} candidate view(s). They would be drawn on top of "
+            f"something and be unreadable - which is not a cosmetic issue but "
+            f"the every-line-is-labelled invariant. Set CENTER/ZOOM for this "
+            f"city, or force the crowded lines' label ends ('start'/'end') in "
+            f"their line specs.")
     return best[1], best[2], best[3]
 
 

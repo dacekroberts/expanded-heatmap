@@ -47,7 +47,24 @@ LINE_SHAPES = {key: (key, LINE_COLOURS[key]) for key in LINE_NAMES}
 # label goes at; the default (automatic) picks the tail end farthest from the
 # other lines, on the stretch inside the city. Left empty until a rendered map
 # shows one landing badly - measured, not anticipated.
-LINE_LABEL_ENDS = {}
+# MADRID IS THE CITY THAT NEEDED THESE, and it needed them because its network
+# is radial: thirteen lines converge on the centre, so the automatic solver -
+# which places the longest name first and walks each line looking for a free
+# tip - ran out of room and fell back to "the preferred spot, even if it
+# collides". It shipped that way on 2026-09-22 with **Línea 2 drawn underneath
+# the Ramal label and invisible at every width**, caught by a rendered
+# screenshot in deploy-verify one commit before a deploy. map_common now RAISES
+# on a residual cost rather than accepting it silently, which is what makes
+# this dict necessary rather than optional.
+#
+# The two crowded pairs were Línea 2 against the Ramal (48x17 px of overlap)
+# and Línea 3 against Línea 6. Pushing each to its opposite tip separates them:
+# Línea 2 runs east-west across the centre and the Ramal is a short central
+# stub, so they compete for the same few hundred pixels unless one is sent to
+# the far end.
+LINE_LABEL_ENDS = {
+    "2": "start",
+}
 
 LINE_SPECS = {
     key: (source_key, colour, LINE_NAMES[key], LINE_LABEL_ENDS.get(key))
