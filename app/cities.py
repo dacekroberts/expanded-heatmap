@@ -572,6 +572,24 @@ CITIES = [
         # comment records hitting at 38.6 x 12.1 px.
         "label_offset": ("end", -8, -22),
     },
+    {
+        "name": "Lille (Regional)",
+        "lat": 50.6292,
+        "lon": 3.0573,
+        "page": "pages/24_Lille_Heatmap.py",
+        "blurb": "ilévia Métro 1–2 and Tram R–T, across eleven communes",
+        "region": "Europe",
+        "in_default_view": False,
+        # THE SCAFFOLD'S DEFAULT, KEPT BECAUSE IT SCORED CLEAN - not left
+        # unexamined. Width measured at 99.7 px in a real browser with Space
+        # Grotesk loaded (five cities already in the table reproduced
+        # exactly), then check_macro_labels.py scored every region at three
+        # widths: PROBLEMS 0. Lille sits north of every other European city
+        # here, so a label pointing up has nothing to meet - unlike
+        # Toulouse, whose default collided with Marseille at the same
+        # latitude and had to be turned west.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

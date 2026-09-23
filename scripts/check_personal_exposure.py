@@ -132,6 +132,12 @@ REGISTRIES = {
     "toulouse": dict(raw=None, trade=None, owner=None,
                      processed="businesses_clean.csv",
                      address=("business_name",)),
+    # Lille (Regional): the same shared French step 2 across eleven
+    # communes rather than one, so the same structural guarantee - no
+    # registrant-name column is ever loaded, in any of them.
+    "lille": dict(raw=None, trade=None, owner=None,
+                  processed="businesses_clean.csv",
+                  address=("business_name",)),
     "san_diego": dict(raw="sd_businesses_active_datasd.csv", trade="dba_name",
                       owner="business_owner_name", processed="businesses_clean.csv",
                       address=("address_no", "address_road", "address_suite")),
