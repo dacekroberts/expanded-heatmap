@@ -348,15 +348,22 @@ Desktop is unaffected — the label is fully visible there.
 
 ## Structure
 
-- [ ] **Move GUADALAJARA's and MADRID's fetching out of their step files** -
-  **Mexico City is done (2026-09-22) and is the worked pattern**: see
-  `pipeline/mexico_city/fetch_sources.py` and the two steps beside it. The
-  recipe is mechanical - move the network helpers and any query constants into
-  a new `fetch_sources.py`, leave the steps reading the cache and exiting with
-  "Run pipeline/<city>/fetch_sources.py first", then prove it BOTH ways: zero
-  drift with the cache present, and a clean refusal with
-  `data/<city>/raw/` moved aside. Guadalajara duplicates Mexico City's
-  `overpass()` today, so the two can share one file's worth of thinking.
+- [x] ~~Move GUADALAJARA's and MADRID's fetching out of their step files~~ -
+  **done 2026-09-22; all three exceptions are closed.** Mexico City first as
+  the worked pattern, Madrid by its own session on the unmerged
+  `spain-app-wiring` branch, Guadalajara last -
+  `pipeline/guadalajara/fetch_sources.py`, which took the three Overpass
+  queries with it because each one's comment is addressed to whoever edits
+  the query, and that is no longer the step. Proved both ways: zero drift
+  with the cache present, and step 1 and step 2 both exiting 1 with "Run
+  pipeline/guadalajara/fetch_sources.py first" with `data/guadalajara/raw/`
+  moved aside. **Guadalajara's two-pass retry was kept rather than unified
+  with Mexico City's single pass** - neither has been measured against the
+  other, and a refactor is a bad moment to quietly change a retry policy.
+  **The rule is now a check rather than a convention:**
+  `scripts/check_no_fetch_in_steps.py`. Madrid is listed there under
+  `KNOWN_GAPS` until `spain-app-wiring` lands, and the check fails on a gap
+  that has silently been fixed, so landing that branch forces the entry out.
   Original finding below. into a `fetch_*.py`, as the other fourteen cities do.
   Demonstrated 2026-09-22: `python pipeline/drift_check.py` in a worktree with
   no `data/<city>/raw/` **fetched over the network for all three** - a 39 MB
@@ -368,6 +375,20 @@ Desktop is unaffected — the label is fully visible there.
   three it asks "does the current upstream still produce the committed output"
   rather than "does the committed code". Build-session work - each city's
   context is needed.
+- [ ] **Three `step3_geocode.py` files still reach the network, one import
+  deep** - Los Angeles, New York and Washington DC import `geocode_addresses`
+  from `pipeline/census_geocoder.py`, which POSTs address batches to the US
+  Census geocoder on a cache miss. The same defect as the three cities just
+  fixed, one level of indirection down, and `drift_check.py` runs these steps
+  like any other - it globs `step*.py` - so a fresh checkout geocodes over the
+  network inside a drift check. That module's own docstring gives it away:
+  "off the network **after the first run**". **Harder than the other three and
+  deliberately not bodged:** the geocoder's input is a batch of addresses the
+  step itself computes, not a fixed upstream URL, so moving the download means
+  moving the address preparation with it. Found 2026-09-22 by writing
+  `scripts/check_no_fetch_in_steps.py` rather than before it; the three are
+  listed there under `KNOWN_GAPS` with this reasoning. Build-session work -
+  each city's context is needed.
 - [x] ~~Wire Toronto's `STATIONS_COLLAPSED_EXPECTED`~~ - **done 2026-09-22,
   and it was a mis-wiring rather than a missing check.** Step 1 compared the
   COLLAPSED count (110) against `IN_CITY_STATIONS_EXPECTED` (108), printing a
