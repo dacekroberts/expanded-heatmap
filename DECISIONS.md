@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**194 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**195 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [A superseded document's citations are a trail, and the check was auditing them](#2026-09-23---a-superseded-documents-citations-are-a-trail-and-the-check-was-auditing-them)
 - [Following one dead constant found a comment describing an approach the city does not use](#2026-09-23---following-one-dead-constant-found-a-comment-describing-an-approach-the-city-does-not-use)
 - [Category D's 18 remaining constants are mostly deliberate records, not decay](#2026-09-23---category-ds-18-remaining-constants-are-mostly-deliberate-records-not-decay)
 - [Category D reported 63 dead constants, 45 of which were add-country working correctly](#2026-09-23---category-d-reported-63-dead-constants-45-of-which-were-add-country-working-correctly)
@@ -233,6 +234,40 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - A superseded document's citations are a trail, and the check was auditing them
+
+- **`check_provenance.py` now skips citation verification in any document
+  that declares itself SUPERSEDED in its opening lines.** This is the same
+  rule that already excludes `DECISIONS.md` - "it records what a citation said
+  on a date" - applied to the other shape of historical document.
+
+- **The note that led here was correct about the evidence and wrong about the
+  remedy.** `docs/licenses/canada-required-notices.md` cites "Items 9, 10, 14,
+  16" against the phrase "Four municipal OGLs, each with its own prescribed
+  sentence" without naming the four cities, so the subject test could not
+  confirm that item 9 was Vancouver's and reported it unverifiable. The
+  citation is accurate. The file's own header reads "SUPERSEDED 2026-09-22 ...
+  **Where this file and those disagree, those win.**" **Naming the cities to
+  satisfy the script would have edited a historical trail to please a check** -
+  the correction runs the wrong way round, and the standing rule is that a
+  dated record is evidence rather than a claim to maintain.
+
+- **Proved three ways.** The item 9 note is gone; a `notice 99` injected into
+  a LIVE document still fails the check (exit 1); the identical text injected
+  into the superseded document is ignored (exit 0). The middle case is the one
+  that matters - a skip wide enough to swallow real citations would have
+  passed the first and third tests alone.
+
+- **The harness was wrong a fourth time this session, and in a new way.** It
+  read the subprocess with a strict UTF-8 decode; the check prints Montreal
+  with an e-acute in the console codepage, the reader thread raised
+  `UnicodeDecodeError`, and stdout arrived EMPTY - so a case that had passed on
+  its exit code was reported FAIL for missing text. Re-run capturing bytes and
+  decoding with `errors="replace"`, all three pass. **Byte-vs-text has now
+  produced two of the four harness defects** (line endings on 2026-09-22,
+  codepage today), which makes it the single most reliable way to write a
+  test that lies.
 
 ### 2026-09-23 - Following one dead constant found a comment describing an approach the city does not use
 
