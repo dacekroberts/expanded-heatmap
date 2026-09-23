@@ -131,9 +131,10 @@ not licensed by it.
 
 ## Still unknown
 
-- ⚠️ **One raised clause — owner call.** The SIURB system's Termo de Uso §6 iv
-  makes a user liable for damage they cause; it may bind only logged-in users,
-  and it prohibits nothing the build does. See `docs/data_sources.md`.
+- ✅ ~~**One raised clause**~~ — the SIURB Termo de Uso's damage-liability
+  clause (§6 iv) was **ACCEPTED by the owner 2026-09-23**: fault-based, may
+  bind only logged-in users, prohibits nothing the build does. Rio's rail
+  comes from the agency layers. See `docs/data_sources.md`.
 - ⚠️ **Teleférico** — operating or not.
 - ⚠️ **Vacancy at 8.7%** — whether it is concentrated near stations is
   unmeasured.

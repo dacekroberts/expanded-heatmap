@@ -116,7 +116,26 @@ Nacional de Endereços para Fins Estatísticos (CNEFE), Censo Demográfico 2022.
 
 ---
 
-## 🚇 Rail — GeoSampa WFS, the agency's own layers
+## 🚇 Rail — OSM geometry, GeoSampa as the STATUS reference (decided 2026-09-23)
+
+✅ **Owner's decision, 2026-09-23:** GeoSampa's licence is ambiguous (see
+`docs/data_sources.md` — CC BY-SA may not reach layers the State's Metrô
+authored, and if it does, share-alike reaches the derived geometry). So **draw
+lines and stations from OpenStreetMap** — station derivation by
+route-relation membership, per `osm-rail` — and **read GeoSampa only for which
+lines operate.** OSM's side is a settled precedent: the map is a Produced Work
+under ODbL §4.5(b); the committed station file carries an ODbL notice and the
+linked repository offers the method (§4.6), as for Toulouse and Rennes.
+
+**What OSM carries (measured 2026-09-23):** `route=subway` **12 relations,
+refs 1–6, all coloured**, network *Metrô de São Paulo*; `route=monorail` **4
+relations, refs 15 and 17, all coloured**; plus the Aeromóvel GRU people mover
+(Guarulhos — out of scope). **Draw refs 1–5 and 15. Refs 6 and 17 are
+drawn only if GeoSampa's operating layer lists them** — the check below fails
+the day either appears there. **Cross-check the derived station count against
+GeoSampa's 85 distinct stations** (gate 3's per-line comparison).
+
+**GeoSampa's layers, for status and the count cross-check only:**
 
 | Layer | Features | |
 |---|---|---|
@@ -128,19 +147,16 @@ Nacional de Endereços para Fins Estatísticos (CNEFE), Censo Demográfico 2022.
 **Interchanges** (on two lines): Sé, República, Paraíso, Ana Rosa, Chácara
 Klabin, Vila Prudente, Vila Mariana, Luz, Santa Cruz. Collapse by name.
 
-🚨 **OSM disagrees, and the agency is right to win.** OSM carries **subway refs
-1–6 and monorail refs 15 and 17** — but GeoSampa has **Linha 6-Laranja (21
-stations) and Linha 17-Ouro (18) only in the PLANNED layer.** OSM would draw
-two lines GeoSampa does not list as operating — Tel Aviv's trap. **Verify both
-lines' status at build time**; if either has opened since GeoSampa's last
-edit, the agency layer is stale, not OSM right by default. OSM's box also
-catches the **Aeromóvel GRU** people mover, which is in Guarulhos.
+🚨 **On STATUS, OSM and GeoSampa disagree, and GeoSampa decides.** GeoSampa
+has **Linha 6-Laranja (21 stations) and Linha 17-Ouro (18) only in the
+PLANNED layer** while OSM carries both as routes — Tel Aviv's trap. **Verify
+both lines' status at build time**; if either has opened since GeoSampa's last
+edit, the agency layer is stale and the line is added deliberately.
 
-⚠️ **Line 15 is a MONORAIL** typed as metro. Draw it — Toulouse's cable car
-is the precedent for a non-rail mode that is part of the network.
-⚠️ **No colour field in GeoSampa.** Line names ARE colours (`AZUL`,
-`VERMELHA`); OSM's relations carry hex colours on all 12 — use those, and say
-which.
+⚠️ **Line 15 is a MONORAIL** (`route=monorail` in OSM, typed as metro in
+GeoSampa). Draw it — Toulouse's cable car is the precedent for a non-rail mode
+that is part of the network. **Colours come from OSM** — hex on all 16
+relations — which GeoSampa does not carry at all.
 
 **Scope:** all six operating lines lie inside the município, so the commune
 is the natural scope — Marseille's shape, not Dublin's.
@@ -164,17 +180,15 @@ if more countries follow. **Owner call at build**, measured with
    drawn — more in affluent commercial districts**, which are under-drawn.
 5. **Shopping centres appear as a single point.**
 6. At addresses that also hold a home, only the category is shown.
+7. **The rail lines are OpenStreetMap data** — the site-wide OSM credit covers
+   it, and the committed station file carries its own ODbL notice (the
+   Toulouse/Rennes discharge).
 
 ## Still unknown
 
-- 🚨 **GeoSampa's licence — READ 2026-09-23 and AMBIGUOUS; owner decision.**
-  The portal shows CC BY-SA 4.0, but its own text limits that to data
-  *"produzidos pelos órgãos da Prefeitura"*, and these layers' metadata names
-  the **State's Metrô company** as author. If it does apply, share-alike
-  reaches the derived geometry. Full record in `docs/data_sources.md`. **The
-  alternative that sidesteps it:** draw lines from OSM (Mexico City's and
-  Barcelona's route) and use GeoSampa only to decide WHICH lines operate — a
-  fact, not its geometry.
+- ✅ ~~**GeoSampa's licence**~~ — read 2026-09-23, ambiguous, and **avoided
+  by decision**: geometry from OSM, GeoSampa for status only. See the rail
+  section.
 - ⚠️ **Lines 6 and 17** — operating or not, at build time.
 - ⚠️ **Neighbourhood bias** — measured by locality; not yet by distance from a
   station, which is what the map actually shows.
@@ -218,6 +232,15 @@ if more countries follow. **Owner call at build**, measured with
     "url": "https://wfs.geosampa.prefeitura.sp.gov.br/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=geoportal:estacao_metro&outputFormat=application/json&propertyName=nm_linha_metro_trem",
     "present": ["PRATA", "LILAS", "AZUL"],
     "absent": ["LARANJA", "OURO"]
+  },
+  {
+    "id": "sp-osm-lines-are-the-geometry-source",
+    "claim": "OSM carries Metro de Sao Paulo subway refs 1-6 and monorail refs 15 and 17 - the geometry source by the owner's 2026-09-23 decision. Refs 6 and 17 are drawn ONLY if GeoSampa's operating layer lists them",
+    "kind": "osm_route_refs",
+    "bbox": [-23.80, -46.83, -23.36, -46.36],
+    "routes": ["subway", "monorail"],
+    "expect_refs": {"subway": 6, "monorail": 2},
+    "require_refs": {"subway": ["1", "2", "3", "4", "5", "6"], "monorail": ["15", "17"]}
   },
   {
     "id": "sp-projected-crs",
