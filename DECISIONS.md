@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**228 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**229 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [The master list's summaries drifted while its sections stayed right; Cairo leaves the discards](#2026-09-23---the-master-lists-summaries-drifted-while-its-sections-stayed-right-cairo-leaves-the-discards)
 - [The stop-spacing test runs, and its own controls disprove it](#2026-09-23---the-stop-spacing-test-runs-and-its-own-controls-disprove-it)
 - [CORRECTION: a tram-only city is NOT unbuildable, and seven built cities draw trams](#2026-09-23---correction-a-tram-only-city-is-not-unbuildable-and-seven-built-cities-draw-trams)
 - [Seoul's brief, and two measurements that failed rather than answered](#2026-09-23---seouls-brief-and-two-measurements-that-failed-rather-than-answered)
@@ -267,6 +268,60 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - The master list's summaries drifted while its sections stayed right; Cairo leaves the discards
+
+- **`docs/city_master_list.md` was corrected against the briefs and against
+  master, and every error was in a SUMMARY, never in a band section.** The
+  counts box read **20 built / 33 candidates / 30 discarded**; the truth is
+  **22 / 29 / 32** once Cairo moves. The band table read **A 9 / B 10 / C 12
+  / D 2** - the pre-renumber counts, left standing through two renumbers that
+  each updated the band HEADINGS and not the table summarising them. **The
+  hand-kept summary is the first thing to drift**, because every change is
+  made in a section and the summary is a second place to remember.
+
+- **Marseille was still listed as a Band A candidate after it was built**
+  (row "4-7 Marseille, Toulouse, Lille, Rennes"), and the Built table said
+  *"not yet deployed"* after `pages/22_Marseille_Heatmap.py` had landed on
+  master. It now has a struck-through BUILT row carrying 18,177 storefronts and
+  66 stations, the same treatment every other built city gets. Band A is **8
+  ready + 8 built**.
+
+- **Two rows were a day behind their own briefs.** Hong Kong's said its
+  geocode rate was *"not yet measured"*; the brief measured **100.0%** on 200
+  random rows as a two-stage lookup. Goteborg's said *"row count UNMEASURED,
+  no accessURL"*; the brief measured **5,063** from the CSV distribution. The
+  second correction also settles a comparison the file had left open:
+  **Stockholm 8,146 > Goteborg 5,063 > Zurich 3,488**, so Stockholm stays
+  first on size.
+
+- **Cairo moved from the discards to the open screening gap, by the file's
+  own rule rather than by a new judgement.** Its discard row read *"No
+  open-data infrastructure"*; the probe log shows ONE probe of ONE national
+  host (CAPMAS, "serves HTML only"), and the file's own 2026-09-23 sweep
+  recorded it **STILL UNPROBED**. `add-country` says a row resting on an
+  absence is not a discard and that the city's own host must be tried before
+  recording a negative. Egypt left the countries-ruled-out line with it.
+  **Rejected: leaving it and annotating** - the rule exists because a
+  discard row that fails its own probe log is how Italy was once ruled out
+  and then passed.
+
+- **Zagreb went the other way: its sweep row was the stale one.** The
+  2026-09-23 sweep recorded it *"Confirmed BLOCKED, not negative"* after three
+  more SPA shells, but the discard row already held a measurement - Grad
+  Zagreb's **210 datasets** enumerated through `data.gov.hr/ckan/api/3/`,
+  the only commercial one a grants list. **Shells at the wrong paths are not
+  evidence of a block.** The sweep row is struck through; the discard stands.
+
+- **The by-country view had stopped being current on 2026-09-22** - it still
+  said Spain was in progress, Taiwan's geocoder was keyless, Hong Kong was
+  blocked and `REGION_ORDER` was `["United States", "Canada"]`. Rather than
+  rewrite evidence sections, a **current by-country table** now heads it
+  (22 built, 29 candidates, reconciling to the bands) and the tier view below
+  is labelled **retained as evidence, not current**. "The order, as decided"
+  gains a current-position note: **Brazil is the next geocoding country by the
+  owner's choice**, Taiwan having no forward geocoder or bulk address file
+  reachable, and Japan stays last.
 
 ### 2026-09-23 - The stop-spacing test runs, and its own controls disprove it
 
