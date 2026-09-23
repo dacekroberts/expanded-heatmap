@@ -14,6 +14,21 @@ either caught a real problem or is a design decision already made (see `docs/pro
 trail is in `DECISIONS.md`). If this is a fresh session, read those, plus
 `docs/city_shortlist.md` and `PLAN.md`, first.
 
+## Adding a EUROPEAN city? Its region is `Europe`, and that is not negotiable
+
+Tag `"region": "Europe"` in `app/cities.py`. **Do not create a region for the
+country.** Ten European countries are on the remaining screen and they describe
+one readable view between them; a region per country means ten entries to
+create, order and later merge.
+
+`Spain` is a leftover from before this rule and **must be retired to `Europe`**
+— see `docs/scaling_thresholds.md`, "EVERY EUROPEAN CITY TAGS ONE REGION".
+
+This lives here rather than in a sibling city's config because a lesson written
+in the previous city's comments does not reach the next city — the meta-rule
+`osm-rail` exists for.
+
+
 ## Step 0 - Live-verify data BEFORE writing any code
 
 **The step that matters most.** Denver and San Jose both looked viable from

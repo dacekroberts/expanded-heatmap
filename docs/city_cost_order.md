@@ -48,11 +48,11 @@ is why the order is what it is.
 **Paris and Milan are the same class of work.** Paris wins on the `Buys`
 column alone.
 
-## Cost band 2 — free riders on band 1 (5 cities)
+## Cost band 2 — free riders on band 1 (4 cities)
 
 | Cities | Buys | Marginal cost |
 |---|---|---|
-| **Lyon · Marseille · Toulouse · Lille · Rennes** 🇫🇷 | — | **The same SIRENE, the same Licence Ouverte 2.0, the same filter.** The cheapest builds available anywhere on this list — but **strictly after Paris**, never instead of it. ⚠️ France's OSM rail composition is validated on **Paris only**; the first non-Paris build must re-validate it |
+| **Marseille · Toulouse · Lille · Rennes** 🇫🇷 | — | **The same SIRENE, the same Licence Ouverte 2.0, the same filter.** The cheapest builds available anywhere on this list — but **strictly after Paris**, never instead of it. ⚠️ France's OSM rail composition is validated on **Paris only**; the first non-Paris build must re-validate it. ⚠️ **Lyon was REMOVED from this band 2026-09-22** — three gates (an account this project will not create, a trademark clause that collides with the on-map line-label invariant, and the project's second indemnity), so it is no longer a cheap follower. It is not discarded; see Band 6 |
 
 ## Cost band 3 — coordinates are a JOIN (2 cities)
 
@@ -76,11 +76,12 @@ column alone.
 |---|---|---|
 | **Stockholm** 🇸🇪 · **Zurich** 🇨🇭 | 1 each | Both measured, both licensed, both **food service only**. Cheap to build; the open question is whether a one-bucket city belongs on the site at all. **That is a scope decision, not a task** |
 
-## Cost band 6 — blocked or keyed (5 cities)
+## Cost band 6 — blocked or keyed (6 cities)
 
 | Cities | Buys | Blocker |
 |---|---|---|
 | **Bucharest** 🇷🇴 ▲▲ | 1 | `data.gov.ro` blackholes on both ports — an **outage, so retry**. OSM fallback measured at 146,116 addressed objects |
+| **Lyon** 🇫🇷 | 1 | ⚠️ **Moved here from Band 2 on 2026-09-22.** Data is fine — 19,449 est. bucket rows, 52.5% named, better than Paris. Blocked by **three** gates: a `data.grandlyon.com` account the owner must create, CGU Art. 6.2's bar on the producers' *signes distinctifs* (collides with naming TCL on the map), and CGU 9.4's open-ended indemnity. Its NAP feed is also **dead since 2022-04-14** |
 | **Taipei · Kaohsiung · Taoyuan · Taichung** 🇹🇼 | **4** | **Needs a `data.gov.tw` API key** — gate item 16. High `Buys`, so this is the best-value item in the blocked tier once the key exists |
 
 ## Cost band 7 — national geocoding is a project, not a step (12 cities)
@@ -97,11 +98,11 @@ column alone.
 | Band | Cities |
 |---|---|
 | 1 — no geocoding leg | 2 |
-| 2 — free riders | 5 |
+| 2 — free riders | 4 |
 | 3 — a join | 2 |
 | 4 — a keyless geocode | 4 |
 | 5 — one bucket, owner call | 2 |
-| 6 — blocked or keyed | 5 |
+| 6 — blocked or keyed | 6 |
 | 7 — national geocoding project | 12 |
 | **Total** | **32** |
 

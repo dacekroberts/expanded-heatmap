@@ -101,6 +101,60 @@ Two things that must come with it, or the feature costs more than it gains:
 Cosmetic and solvable, and **it does not threaten the architecture** — which
 is the whole reason it sits here rather than in `PLAN.md` as urgent work.
 
+## EVERY EUROPEAN CITY TAGS ONE REGION: `Europe` — owner's decision, 2026-09-22
+
+**Standing rule for France and every European city after it.** A European city
+is tagged `"region": "Europe"` in `app/cities.py`. **It does not get a country
+region of its own.**
+
+**The reason is the cost of the alternative.** The screen's remaining European
+candidates span **ten countries** — Ireland, France, Italy, Czechia, Denmark,
+Norway, Romania, Sweden, Switzerland, and Spain, which already has one. Tagging
+by country would mean creating, ordering, and eventually merging ten regions
+that between them describe **one readable view**, and each one would carry the
+same overhead: a line in `REGION_ORDER`, a decision about where it sits in the
+switcher, and a comment justifying it. That is the headache this rule exists to
+avoid, and it is avoided by not starting.
+
+**It fits the existing design rather than bending it.** `app/cities.py` already
+says a region is *"whatever groups cities into ONE readable view"* — that is
+why Canada is split West/East on a 3,300 km span rather than on nationality,
+and it is stated there as a precedent. Europe's widest pair in the current
+screen is roughly **Madrid–Bucharest, ~2,900 km**, which is inside the span
+that forced Canada's split. **One Europe view is readable today.**
+
+### What to do when it stops being readable
+
+Nothing special, and that is the point: `REGION_MEMBERS` already supports a
+composite. Europe becomes the parent of `Europe West` / `Europe East` exactly
+as `United States` is the parent of its two halves, and the landing view
+survives unchanged. **Splitting later is one line; un-picking ten country
+regions later is not.** That asymmetry is the whole argument.
+
+### ⚠️ Outstanding migration — `Spain` must be retired
+
+`Spain` is currently a leaf region holding **Madrid and Barcelona**. It was
+added on 2026-09-22 as the first region outside North America, before this rule
+existed, and it is exactly the precedent that would have produced ten more.
+
+To migrate:
+
+1. change both cities' `"region": "Spain"` to `"region": "Europe"`;
+2. replace `"Spain"` with `"Europe"` in `REGION_ORDER`;
+3. leave `REGION_MEMBERS` alone — `Europe` is a **leaf**, not a composite, until
+   it needs splitting.
+
+`LEAF_REGIONS` is derived, and `cities.py` already **raises** if a city carries
+a region that is not a leaf, so a half-finished migration fails loudly rather
+than dropping a city out of the macro map. **Do this before or with the next
+European city**, not after — Dublin has just been built and Paris is next, so
+the window where it is a two-line change is now.
+
+**Ownership:** `app/cities.py` rows belong to each city's build session and
+cross-cutting region changes to the app/chrome role, so this note is the
+staging session recording the decision rather than making the edit. See
+`docs/session_roles.md`.
+
 ## ~150+ cities — `outputs/` committed to git — **CORRECTED, this is not the ceiling**
 
 Originally recorded as "the real ceiling" at ~20 cities, on an estimate of

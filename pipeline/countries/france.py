@@ -247,11 +247,61 @@ REQUIRES_UPDATE_INTERVAL = True
 # current to 2026-09-22. Gate items 17-19 in `docs/gated_access.md`.
 LYON_REQUIRES_ACCOUNT = True
 
-# UNRESOLVED: the NAP API lists three GTFS resources for IDFM - its own via
-# eu.ftp.opendatasoft.com, an ITO World mirror, and a Google-published "GTFS
-# modifie" from an Apigee URL - while the licence review reports no OFFICIAL
-# GTFS at all, only NeTEx and SIRI Lite. Settle which before fetching; building
-# Paris from a third party's modified copy is not acceptable.
-PARIS_GTFS_PROVENANCE_RESOLVED = False
+# --- the build sequence -----------------------------------------------------
+#
+# **LYON IS DROPPED FROM THE FOLLOWER SEQUENCE, 2026-09-22.** Not discarded as
+# a city - its data is fine and its 19,449 estimated bucket rows are the third
+# largest of the six - but it is no longer a cheap follower, and the whole
+# argument for building France first was that the followers are cheap. Three
+# independent gates, any one of which would be enough:
+#
+#   1. an account on data.grandlyon.com is required before ANY download, and
+#      this project does not create accounts - the owner must register;
+#   2. Grand Lyon CGU Art. 6.2 bars the producers' *signes distinctifs*
+#      "associes ou non a l'utilisation des donnees", which collides head-on
+#      with the invariant that every drawn line carries its real public name -
+#      Lyon's being TCL;
+#   3. CGU 9.4 is an open-ended indemnity, this project's SECOND after Hong
+#      Kong's.
+#
+# And its NAP copy is not a fallback: 0% availability, last modified
+# 2022-04-14, against a source portal current to 2026-09-22.
+#
+# **Marseille replaces it as the first follower** - `lov2`, no account, no
+# trademark clause, no indemnity, and at 26,940 estimated bucket rows it is the
+# largest follower anyway. Gate items 17-19 in `docs/gated_access.md`.
+# Every French city tags "region": "Europe" in app/cities.py - NOT "France".
+# Owner's decision 2026-09-22: ten European countries are on the remaining
+# screen and they describe one readable view between them, so a region per
+# country means ten entries to create, order and later merge. See
+# docs/scaling_thresholds.md, "EVERY EUROPEAN CITY TAGS ONE REGION".
+MAP_REGION = "Europe"
+
+BUILD_SEQUENCE = ("paris", "marseille", "toulouse", "lille", "rennes")
+DEFERRED = {"lyon": "account + trademark + indemnity; see gated_access 17-19"}
+
+# RESOLVED 2026-09-22. The two readings disagreed because the NAP API's
+# `resources` array INCLUDES the entries that also appear in
+# `community_resources` - so a naive count sees three GTFS and concludes they
+# are all official, while a reading that notices the community array concludes
+# there is no official one. Subtracting the two arrays gives the answer:
+#
+#   eu.ftp.opendatasoft.com/stif/GTFS/IDFM-gtfs.zip   OFFICIAL, IDFM's own
+#   gtech-transit-prod.apigee.net/.../odbl/...        community (Google)
+#   opendata.itoworld.com/fr/paris/...                community (ITO World)
+#
+# Exactly ONE official feed, and the choice is not close: IDFM's was updated
+# 2026-09-22, the Google copy last in 2023-11-17, and the ITO World copy
+# reports `is_available: False`. **Both third-party copies are stale or dead.**
+PARIS_GTFS_PROVENANCE_RESOLVED = True
+PARIS_GTFS_URL = "https://eu.ftp.opendatasoft.com/stif/GTFS/IDFM-gtfs.zip"
+
+# It SELF-ATTESTS, which is the property `add-country` requires before a feed
+# is trusted: `metadata.end_date` 2026-10-21, and it declares its own
+# `features` - "position des stations", "topologie du reseau", "traces de
+# lignes" - and `modes`: bus, tramway, subway, funicular, gondola, rail.
+# The declared end_date also supplies the UPDATE INTERVAL that Art. 5.7 and the
+# MMTIS reglement require this project to display.
+PARIS_GTFS_SELF_ATTESTS = True
 
 SOURCE_ENCODING = "utf-8"

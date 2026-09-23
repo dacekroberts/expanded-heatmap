@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**169 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**170 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Paris's feed settled, Lyon deferred, and Europe becomes one map region](#2026-09-22---pariss-feed-settled-lyon-deferred-and-europe-becomes-one-map-region)
 - [France's three pre-ship items run; Lyon turns out to be gated three ways](#2026-09-22---frances-three-pre-ship-items-run-lyon-turns-out-to-be-gated-three-ways)
 - [France profiled: one register, six cities, and a naming gap found early](#2026-09-22---france-profiled-one-register-six-cities-and-a-naming-gap-found-early)
 - [Band B's coordinate routes measured; one claim did not survive](#2026-09-22---band-bs-coordinate-routes-measured-one-claim-did-not-survive)
@@ -205,6 +206,81 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Paris's feed settled, Lyon deferred, and Europe becomes one map region
+
+- **Paris's GTFS provenance is resolved, and the disagreement had a
+  structural cause worth keeping.** Two readings conflicted: a direct API read
+  found three GTFS resources for IDFM, and the licence review found no official
+  one. Both were reading the same JSON. **The NAP API's `resources` array
+  INCLUDES the entries that also appear in `community_resources`**, so counting
+  `resources` alone sees three and concludes all are official, while noticing
+  the community array and stopping there concludes none is. **Subtracting the
+  two arrays answers it**: exactly ONE official feed,
+  `https://eu.ftp.opendatasoft.com/stif/GTFS/IDFM-gtfs.zip`.
+
+- **The choice was not close once the arrays were separated.** IDFM's own feed
+  was updated **2026-09-22**; the Google-published "GTFS modifie" on Apigee
+  last changed **2023-11-17**, and the ITO World copy reports
+  **`is_available: False`**. **Both third-party copies are stale or dead**, so
+  the question of building Paris from a modified mirror answers itself. The
+  official feed also **SELF-ATTESTS**, which is the property `add-country`
+  requires before trusting any feed: `metadata.end_date` **2026-10-21**, and it
+  declares its own `features` - *position des stations*, *topologie du reseau*,
+  *traces de lignes* - and `modes` including subway, tramway, rail and
+  funicular. That declared end date additionally supplies the **update
+  interval** that Licence Mobilites Art. 5.7 requires this project to display,
+  so one field settles a build question and a licence obligation at once.
+
+- **Lyon is DEFERRED from the follower sequence, and Marseille replaces it as
+  the first follower.** Owner's decision. Lyon is **not discarded** - its data
+  is fine, its 19,449 estimated bucket rows are third largest of the six, and
+  at **52.5% named it is better than Paris** - but the entire argument for
+  building France first was that the followers are cheap, and Lyon is no longer
+  one. Three independent gates, any of which would suffice: an account on
+  `data.grandlyon.com` that this project does not create; Grand Lyon CGU
+  Art. 6.2's bar on the producers' *signes distinctifs* "associes ou non a
+  l'utilisation des donnees", which collides head-on with the invariant that
+  every drawn line carries its real public name - Lyon's being **TCL**; and
+  CGU 9.4's open-ended indemnity, the project's **second after Hong Kong's**.
+  Its NAP copy is not a fallback either: **0% availability, last modified
+  2022-04-14** against a source portal current to 2026-09-22.
+
+- **Marseille wins the vacated slot on its own merits, not by default.**
+  `lov2` rather than `mobility-licence`, no account, no trademark clause, no
+  indemnity - and at **26,940 estimated bucket rows it is the largest follower
+  anyway**. The build sequence is now **Paris, Marseille, Toulouse, Lille,
+  Rennes**, recorded as `BUILD_SEQUENCE` in `pipeline/countries/france.py` with
+  Lyon in `DEFERRED` beside it. Moved from cost band 2 to cost band 6 in
+  `docs/city_cost_order.md`; the counts still sum to 32.
+
+- **Every European city now tags ONE region, `Europe`, rather than a region
+  per country.** Owner's decision. The remaining screen holds European
+  candidates in **ten countries** - Ireland, France, Italy, Czechia, Denmark,
+  Norway, Romania, Sweden, Switzerland and Spain - which between them describe
+  **one readable view**, so a region each would mean ten entries to create,
+  order, and eventually merge. **The asymmetry is the argument**: splitting
+  `Europe` later into a composite costs one line, because `REGION_MEMBERS`
+  already resolves `United States` to its two halves; un-picking ten country
+  regions later does not. It also fits what `app/cities.py` already says - that
+  a region is "whatever groups cities into ONE readable view", which is why
+  Canada is split West/East on a 3,300 km span rather than on nationality.
+  Europe's widest current pair, **Madrid-Bucharest at ~2,900 km**, sits inside
+  that. Recorded in `docs/scaling_thresholds.md`, in `add-city`'s skill so the
+  next European city passes through it, and as `MAP_REGION` in the France
+  country module.
+
+- **`Spain` is the leftover that proves the rule, and retiring it is now
+  outstanding work.** It was created on 2026-09-22 with Madrid as the first
+  region outside North America, hours before this decision, and it is precisely
+  the precedent that would have produced ten more. Migration is three edits -
+  both cities' tags, one line in `REGION_ORDER`, and nothing in
+  `REGION_MEMBERS` because `Europe` is a leaf until it needs splitting - and
+  `cities.py` **raises** on a city whose region is not a leaf, so a
+  half-finished migration fails loudly rather than dropping a city off the
+  macro map. **Left to the app/chrome role rather than done here**: `app/`
+  belongs to the build and chrome sessions under `docs/session_roles.md`, and
+  the main session is editing `app/cities.py` for Dublin concurrently.
 
 ### 2026-09-22 - France's three pre-ship items run; Lyon turns out to be gated three ways
 
