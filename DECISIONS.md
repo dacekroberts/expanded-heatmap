@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**180 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**181 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [The scaffold now refuses an unregistered region instead of documenting it](#2026-09-22---the-scaffold-now-refuses-an-unregistered-region-instead-of-documenting-it)
 - [Paris's two owner calls settled, and commune-only costs it no transit system](#2026-09-22---pariss-two-owner-calls-settled-and-commune-only-costs-it-no-transit-system)
 - [Italy needs no country profile, and "Milan-only" turns out to be unproven](#2026-09-22---italy-needs-no-country-profile-and-milan-only-turns-out-to-be-unproven)
 - [The heredoc rule was written down four times and broken four times, so it became a hook](#2026-09-22---the-heredoc-rule-was-written-down-four-times-and-broken-four-times-so-it-became-a-hook)
@@ -216,6 +217,32 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - The scaffold now refuses an unregistered region instead of documenting it
+
+- **`scaffold_city.py` gains `--new-region`, a refusal gate and an import
+  check, closing the gap Dublin and Milan both shipped.** `--region X` wrote
+  `"region": "X"` into a city's entry while `app/cities.py` RAISES at import on
+  a region absent from `REGION_ORDER` - and **nothing in a build imports the
+  app**: no pipeline step does, and `deploy-verify` had been deferred by
+  decision. So the scaffold succeeded, both builds finished, and the breakage
+  waited for the merge, which was the first import in either session.
+  **The script already warned about it** - a comment at the point of writing
+  the entry, and again in the `--region` help - which is exactly the placement
+  this project has recorded as worthless, in `osm-rail`'s opening section: a
+  lesson belongs where the next city must PASS THROUGH it, not in prose it
+  might read. Now an unknown region is refused, naming the known ones, unless
+  `--new-region` appends it with a TODO demanding the reasoning every other
+  entry carries. Mirrors `--new-taxonomy`, which already solved the identical
+  shape. Verified three ways: unknown region refuses, known region proceeds,
+  `--new-region` appends.
+- **Added `verify_app_imports()`, which is the general fix rather than the
+  specific one.** The scaffold now imports `app/cities.py` in a subprocess
+  after writing and fails if it raises. The region bug's real shape is that
+  **`cities.py` validates itself and nothing in a build triggers that**, so any
+  future validator would have failed the same silent way. This costs one
+  subprocess and catches the next one too - at the moment the caller still has
+  the context to fix it, rather than at a merge.
 
 ### 2026-09-22 - Paris's two owner calls settled, and commune-only costs it no transit system
 
