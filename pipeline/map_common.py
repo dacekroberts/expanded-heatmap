@@ -75,6 +75,14 @@ HEAT_MIN_OPACITY = 0.35
 HEAT_GRADIENT = {0.3: "#FBB878", 0.5: "#F97316", 0.7: "#DE6412",
                  0.85: "#C0570F", 1.0: "#8F3A05"}
 
+# The canvas every fixed-position overlay and the whole label layout are
+# computed against - the size passed to folium.Map in render_heatmap and the
+# size app/pages/*.py embeds with st.iframe. Defined here rather than beside
+# the label-layout constants, where it used to live: three comment blocks
+# below this line name it before it was defined, and _LEGEND_BOTTOM_CSS needs
+# its value at import time.
+_MAP_W, _MAP_H = 1000, 650
+
 # Dark Mode toggle: a plain fixed-position button, NOT a Leaflet control. The
 # map is a fixed 1000 px wide and Streamlit's content area is often narrower,
 # so anything positioned against the map (Leaflet's top-right corner sits at
@@ -345,9 +353,58 @@ _LEGEND_CSS = """
 </style>
 """
 
+# WHY THE LEGEND'S BOTTOM IS CLAMPED AND NOT SIMPLY `24px`.
+#
+# The legend is `position: fixed`, so its bottom is measured from the
+# VIEWPORT's bottom edge. Leaflet's basemap attribution is `position:
+# absolute` inside the map container, so its bottom is measured from the MAP's
+# bottom edge - and the map is a fixed _MAP_H tall (see the folium.Map call in
+# render_heatmap). Those two edges are the same line at exactly one viewport
+# height, _MAP_H. Any taller and the map's bottom edge rises while the legend
+# stays pinned to the viewport, and the legend swallows the attribution.
+#
+# Measured 2026-09-23 on Toulouse, hit-testing five points along the
+# attribution strip with document.elementFromPoint:
+#
+#     1000x650  what app/pages/*.py embeds with st.iframe      0/5 covered
+#     1024x768  outputs/<city>/heatmap.html opened directly    5/5 covered
+#     375x812   after a reader re-opens the collapsed legend   5/5 covered
+#
+# EVERY city, not one - the geometry is entirely in this file. The embedded
+# size passed on a 10 px margin, and nothing pinned it there: that is the real
+# defect. CLAUDE.md makes the visible basemap credit a hard invariant (ODbL
+# 1.0 requires it not to sit behind UI), so a change to the iframe height, a
+# responsive embed, or a reader opening the file directly each breached it
+# silently.
+#
+# `max()` clamps the legend's bottom to 24 px above the MAP's bottom edge
+# rather than the viewport's. At the embedded size that is the same position
+# it already had, so the embed is pixel-unchanged; at every taller viewport it
+# clears the 14 px attribution strip by the same 10 px. Shorter than _MAP_H
+# the map overflows and the page scrolls, and there `max()` picks 24px -
+# today's behaviour, with the attribution clear once scrolled to.
+#
+# It also repairs a model that was quietly wrong: _layout_labels treats the
+# open legend as an obstacle whose bottom sits at _MAP_H - 24 in map
+# coordinates. That held only at a 650 px viewport. It now holds at every
+# height at or above one.
+#
+# DO NOT replace this with a plain offset. The offset that clears the
+# attribution is a function of viewport height, so any single number is right
+# at exactly one height - which is the bug, not the fix. Moving the
+# attribution to the bottom-LEFT does not work either: measured at 375 px, the
+# open legend occupies x 133-351 and a bottom-left attribution would occupy
+# x 0-197, so they still overlap.
+#
+# scripts/check_map_attribution.js re-measures this in a real browser at
+# several viewport heights; scripts/check_provenance.py (check K) refuses a
+# committed map whose legend is not clamped, and is the half that still runs
+# when a pipeline-only change skips deploy-verify.
+_LEGEND_BOTTOM_CSS = f"max(24px, calc(100vh - {_MAP_H - 24}px))"
+
 LEGEND_HTML = """
 <details open class="map-legend" style="
-    position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+    position: fixed; bottom: """ + _LEGEND_BOTTOM_CSS + """; right: 24px; z-index: 9999;
     background: white; padding: 8px 14px; border: 1px solid #999;
     border-radius: 4px; font-family: """ + FONT_STACK + """; font-size: 13px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.3);
@@ -954,7 +1011,6 @@ _ALONG_FRACTIONS = (0.06, 0.12, 0.18, 0.25, 0.32, 0.40, 0.48)
 # and one label was drawn unreadable. Standing it off the ring clears it while
 # it stays anchored to a point on its own line.
 _LABEL_CLEARANCES = (22.0, 44.0)
-_MAP_W, _MAP_H = 1000, 650
 
 
 def _project_px(lat, lon, zoom):
