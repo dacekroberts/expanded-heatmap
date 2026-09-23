@@ -10,9 +10,10 @@ code.
 ## The one-line summary
 
 **Second-best-named French city, and the one whose data is most withheld.**
-52.8% carry a premises name — but **16.0% of rows are masked at source**,
-roughly double Paris's 8.5%, so its usable set shrinks by more than its row
-count suggests. Its feed also carries **an aerial cable car**, which is a
+52.8% carry a premises name — but **20.2% of rows are masked at source**
+(⚠ this brief estimated 16.0% from a sample; the build measured 20.2% over the
+whole file, so the estimate was LOW), well over double Paris's 8.5%, so its
+usable set shrinks by more than its row count suggests. Its feed also carries **an aerial cable car**, which is a
 judgment call this project has never had to make.
 
 ---
@@ -24,7 +25,7 @@ judgment call this project has never had to make.
 | Source | `StockEtablissement` **parquet**, `codeCommuneEtablissement` **= `31555`** |
 | Active in NAF 47/56/96 | **≈12,853** (1,625 counted in 12.6% of the file) — a **floor** |
 | **Named** | **52.8%** — second only to Rennes; Paris is 39.6% |
-| ⚠️ **Masked** (`statutDiffusion` ≠ `O`) | **16.0% — the highest of the six** |
+| ⚠️ **Masked** (`statutDiffusion` ≠ `O`) | **20.2% measured at build** — brief said 16.0%; highest of the six either way |
 | Distance selling to exclude | 18.2% |
 
 ⚠️ **The masking matters more than the headline count.** A sixth of Toulouse's
@@ -73,9 +74,22 @@ unknowable from the artifact.
 
 ### ⚠️ OWNER CALL — draw the Téléo?
 
-`route_type 6` is an aerial lift. **This project has never drawn one.** It
-does draw a **funicular** (Paris), so "not a train" is not itself a reason to
-exclude.
+`route_type 6` is an aerial lift. **This project has never drawn one.**
+
+⚠️ **CORRECTED 2026-09-23, during the build.** This section originally read
+"It does draw a **funicular** (Paris), so 'not a train' is not itself a reason
+to exclude." **That is false, and it was the whole case for inclusion.**
+`pipeline/paris/config.py:176` says "WHAT COUNTS: the Metro, and only the
+Metro", and the feed inventory it prints beside that line — "1,966 bus routes,
+24 rail/RER, 17 tram, 16 metro, **1 funicular, 1 cable**" — lists the
+funicular among what Paris *excluded*. **No built city draws a non-rail mode.**
+
+So the decision has no precedent in either direction, and Paris's exclusion is
+not one: the Montmartre funicular is a 108 m two-station lift inside one
+arrondissement, where Téléo is a 3 km ticketed crossing serving a hospital, a
+university and the Oncopole. Generalising from it would repeat the error
+`dd4ced8` corrected — treating an exclusion as a rule when the excluded thing
+shared an unstated condition the new one does not.
 
 - **For**: Téléo is urban transit on the Tisséo network, ticketed like the
   métro, and it crosses the Garonne where no other line does.

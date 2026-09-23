@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**227 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**228 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Toulouse built: 8,635 storefronts, 48 stations, and the first non-rail mode](#2026-09-23---toulouse-built-8635-storefronts-48-stations-and-the-first-non-rail-mode)
 - [CORRECTION: a tram-only city is NOT unbuildable, and seven built cities draw trams](#2026-09-23---correction-a-tram-only-city-is-not-unbuildable-and-seven-built-cities-draw-trams)
 - [Seoul's brief, and two measurements that failed rather than answered](#2026-09-23---seouls-brief-and-two-measurements-that-failed-rather-than-answered)
 - [Goteborg's licence is CC0, and it is on the DISTRIBUTION](#2026-09-23---goteborgs-licence-is-cc0-and-it-is-on-the-distribution)
@@ -266,6 +267,161 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Toulouse built: 8,635 storefronts, 48 stations, and the first non-rail mode
+
+- **Toulouse is the 23rd city and the third French one, at 8,635 storefronts
+  across 48 stations.** Step 2 read the national SIRENE parquet down from
+  44,064,115 rows: 440,775 in commune 31555, 154,157 active, 122,960 publicly
+  diffusible, 13,741 in NAF divisions 47/56/96, 10,248 after the structural
+  non-premises exclusions, 8,657 after this city's catch-all verdict, 8,635
+  with a usable street-level coordinate (99.93% geolocation match, 16 dropped
+  for `qualite_xy` 33). Step 1 took the feed's 4 rail routes to 62 stations and
+  the commune boundary to 48. 5,553 of the storefronts fall within a station
+  ring, **64.3%** - between Marseille's 55% and Paris's 97%. Personal exposure:
+  **0 person-like names at a residential unit of 5,553 pins (0.00%)**, with the
+  same structural guarantee as its siblings, since the shared French step 2
+  never loads a registrant-name column. **The shared country cache paid off a
+  second time**: the 3 GB parquet pair was already present, so this city
+  downloaded nothing but a 12 MB feed and a 25 KB boundary.
+
+- **The Téléo cable car is drawn, and the brief's argument for it was false.**
+  `route_type 6` is an aerial lift, and no built city had drawn a non-rail
+  mode. The brief's case was "It does draw a **funicular** (Paris), so 'not a
+  train' is not itself a reason to exclude" - and `pipeline/paris/config.py`
+  says the opposite: "WHAT COUNTS: the Metro, and only the Metro", with its own
+  feed inventory listing "1 funicular, 1 cable" among what Paris *excluded*.
+  So there was no precedent in either direction, and Paris's exclusion is not
+  one: the Montmartre funicular is a 108 m two-station lift inside one
+  arrondissement where Téléo is a 3 km ticketed crossing. Reading Paris as a
+  rule would have repeated the exact error `dd4ced8` corrected - generalising
+  from cities that shared an unstated condition the new one does not.
+  **Owner's call to draw it**, on grounds that are functional rather than
+  technological: Tisséo runs and tickets it as it does the métro, all three
+  stations are inside the commune, it crosses the Garonne where no other line
+  does, and one of the three (Université Paul Sabatier) is a Métro B
+  interchange. The brief was corrected in place rather than left to mislead the
+  next reader.
+
+- **Commune-only scope cost Toulouse half a line, and Marseille's test would
+  have passed it regardless.** Measured against commune 31555's contour: métro
+  A 17 inside / 1 out, métro B 19 / 1, **T1 13 / 12**, Téléo 3 / 0. Marseille's
+  rule was "every line is 100% inside, so commune-only costs nothing"; here
+  every line survives too, but T1 survives at **half strength**, losing the
+  whole Blagnac and Beauzelle branch - Aéroconstellation, Servanty Airbus,
+  MEETT, Pasteur-Mairie de Blagnac and eight more. **A test that only asks
+  whether a line survives cannot see that**, so `config.EXPECTED_INSIDE_PER_LINE`
+  now records the per-line split and step 1 exits if it moves. Commune-only was
+  taken anyway, with both alternatives put to the owner and declined: it keeps
+  the three French cities on one comparable scope, and the standing rule is
+  that stations in another city are a new project rather than a wider filter.
+
+- **Gate 3 passed exactly on all four lines, and the obvious layer would have
+  failed it.** Tisséo's `arrets-itineraire` gave A 18, B 20, T1 25, TELEO 3
+  against the feed's 18 / 20 / 25 / 3 - the cleanest gate 3 of any city. The
+  layer that *looks* right, `stations-de-tramway`, holds **29** records against
+  T1's 25, and the four extra are AÉROPORT, NADOT, DAURAT and JEAN MAGA, every
+  one tagged `en_service: 2027`. A line that has not opened, sitting in the same
+  layer as the 2010 and 2013 stations and separated only by that column:
+  counting its rows would have reported a four-station hole in the feed that
+  does not exist. **That is `osm-rail`'s "proposed mixed in with built" trap
+  found in a first-party agency layer rather than in OSM**, so the whitelist
+  rule it states is not an OSM rule. The same layer also settled the T2
+  question - Tisséo's own `ligne` register reads `metro: 2, tram: 1,
+  telepherique: 1`, so there is no T2 to be missing.
+
+- **Toulouse's catch-all share diverged from both siblings by about 40%, and
+  excluding it flattened the discriminator that justified it.** `96.09Z` is
+  **13.9%** of bucket rows here against Paris's 9.6% and Marseille's 9.8%;
+  `56.29B` 1.6% against 1.0%. The national argument transfers - INSEE's "autres
+  … n.c.a." is a residual bucket where home-based sole traders land - but the
+  shares are a city fact and were measured rather than inherited. The
+  confirming measurement is step 2's own: before the exclusion, rows with no
+  employee band were **26.4% catch-all against 8.8%** for rows recording one,
+  and were the less-named group (47.0% vs 57.4%); after it, both bands read
+  **5.8%**. The exclusion removed exactly the asymmetric group rather than a
+  slice of everything. The three retail catch-alls were kept, as in both
+  siblings, because INSEE's labels for them say "en magasin" on their face.
+
+- **Toulouse takes New York's ring edges for a different reason from its
+  siblings, which is the point of re-deciding them per city.** Measured across
+  the 48 in-commune stations: min 296 m, **median 525 m**, mean 583, max 2,017,
+  nothing under 200 m. Paris (399 m) and Marseille (341 m) took the tightened
+  edges because the default 966 m outer ring swamped a tight network; Toulouse
+  is looser than both, and the argument here is fit rather than collapse - a
+  483 m outer ring against a 525 m median very nearly tiles, which is a better
+  match than either sibling gets, where 966 m would still reach almost two
+  stations deep. Owner's call, taking the shared set rather than tuning a
+  fourth so the three French cities stay band-comparable. **The spacing gate
+  passed on its own terms**, with no `spacing_min` override - unlike Paris and
+  Marseille, which both tripped the 400 m floor and had to be passed 200.0.
+
+- **The brief's masking estimate was low, and it is the number that most
+  changes how this city reads.** It recorded 16.0% of rows masked at source
+  from a sample; the build measured **20.2%** of active rows over the whole
+  file. France masks name, address and geolocation together, so a fifth of
+  Toulouse's active establishments cannot reach the map at all - against
+  Paris's 8.5%. Recorded on the city page rather than only in the docs, with
+  the caveat a reader cannot otherwise infer: a thin-looking street here may be
+  a quiet one or a private one, and nothing in the data separates them.
+
+- **The OSM restaurant control reads 1.28x, below both siblings, and the total
+  ratio is no more trustworthy than it was.** `amenity=restaurant` against NAF
+  56.10A gives **1.28x** (node+way) where Paris is 1.80 and Marseille 1.72;
+  adjusting Toulouse's numerator to Paris's masking rate raises it to about
+  1.47x, which closes roughly half the gap. A lower ratio is the reassuring
+  direction - this build sits closer to OSM's mapped reality than either
+  sibling. ⚠️ **But the control is more fragile than the entry establishing it
+  assumed.** SIRENE's `56.10C` "type rapide" holds **1,732** rows against OSM's
+  **434** `fast_food`, a 4.0x gap where traditional restaurants are 1.38x, so
+  the two schemes draw the fast-food line in very different places and a
+  single-code control moves with that boundary. The query shape moves it too:
+  the same control reads 1.28x node+way and 1.38x nodes-only. **A count from
+  one query shape must never be compared with a count from another.**
+
+- **Notice 25 added: Tisséo's ODbL, which the OpenStreetMap notice does not
+  discharge.** Both sources are ODbL, which is exactly why one credit looks
+  like it should cover both - but §4.3 requires the notice to name *which*
+  database, and "© OpenStreetMap contributors" names OSM's. §4.6 (offer the
+  derivative or the method) is satisfied by the public repository provided it
+  stays linked from the site, the same standing condition IDFM's Art. 5.8
+  already imposes. The publisher's CGU was read the same day and adds nothing
+  harmful: no indemnity, and its marks clause is Opendatasoft's own with « les
+  données publiées sur le DOMAINE » expressly excluded - so naming Tisséo on
+  the map is not barred, which was the specific risk, since Grand Lyon's
+  equivalent clause is why Lyon is deferred. Left open: whether the derived
+  station CSV is itself a Derivative Database under §4.4, with the cheap
+  discharge recorded rather than the argument won.
+
+- **A 504 from Overpass is usually the query, not the host, and `out center` on
+  ways is the cost.** Ten minutes were lost reading throttling as an outage.
+  Measured on the Toulouse commune bbox, same tag, same hosts, minutes apart:
+  `node+way` with `out center` drew a 504 from overpass-api.de and a read
+  timeout from kumi.systems, while `node` alone with `out body` answered in
+  seconds on the first host tried. Overpass has to resolve every way's member
+  nodes to compute a centroid; the node half is typically 90%+ of a POI answer
+  anyway - restaurant nodes were 827 of the 889 node+way total, 93.0%. A bare
+  client signature also draws HTTP **406** from overpass-api.de, which is
+  `add-country`'s client-signature refusal rather than an IP block. **Written
+  into shared code rather than a note**: `pipeline/osm.py`'s `fetch()` now
+  takes a total `deadline` (default 900 s), prints every attempt, backs off
+  quadratically and names query cost in the error on a 504 - the old shape
+  could spend `retries x hosts x timeout` in silence, which is
+  indistinguishable from a hang and was read as one. The same hint was added to
+  `scripts/brief_check.py`'s own second copy, and the rule to `osm-rail` with
+  its checklist.
+
+- **The map legend covers the OpenStreetMap attribution at any viewport taller
+  than the embed, on every city, and nothing checks it.** Probed with
+  `document.elementFromPoint` across five points of the attribution strip: at
+  **1000x650**, the size `st.iframe` actually embeds at, Toulouse and Marseille
+  are both 0/5 covered; at **1024x768**, Toulouse, Marseille, Paris and San
+  Diego are all **5/5 covered**. So the published artifact is compliant and the
+  risk is latent rather than live - but the legend is anchored bottom-right and
+  grows upward while the attribution is bottom-right and fixed, and nothing
+  pins the iframe height that keeps them apart. Recorded as a separate task
+  rather than fixed inside a city build, since it is shared render code and
+  the project's stated preference is a check rather than a correction.
 
 ### 2026-09-23 - CORRECTION: a tram-only city is NOT unbuildable, and seven built cities draw trams
 
