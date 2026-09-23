@@ -199,6 +199,7 @@ if __name__ == "__main__":
     else:
         print("\nBusiness register: SKIPPED (--skip-parquet)")
 
+    config.OUTPUTS.mkdir(parents=True, exist_ok=True)
     config.PROVENANCE_JSON.write_text(
         json.dumps(prov, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"\nprovenance -> {config.PROVENANCE_JSON.name}")

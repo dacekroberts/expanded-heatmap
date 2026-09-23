@@ -39,7 +39,7 @@ which is a fact about the host rather than about the city.
 
 | Mode | Inside commune | Outside | % inside |
 |---|---|---|---|
-| **Métro** (`route_type 1`) | **245** | 77 | **76.1%** |
+| **Métro** (`route_type 1`) | **245** | 76 | **76.3%** |
 | Tram (`0`) | 60 | 227 | 20.9% |
 | RER / Transilien (`2`) | 38 | 437 | 8.0% |
 | Funicular (`7`) | 2 | 0 | 100% |
@@ -60,7 +60,11 @@ Dublin.** Dublin went regional because its *register* is published per local
 authority and the city alone held 8,016 of 13,945 storefronts; the rail was a
 consequence, not the reason. Paris's register does not care — 
 `codeCommuneEtablissement` is a prefix list — and its rail gains only modes the
-project excludes. The 77 out-of-commune métro stations go to the build's
+project excludes. *(Re-measured at build time 2026-09-23 against the feed the
+build actually downloaded: **76 outside, 321 total**, where this table first
+recorded 77 and 322. One station left the excluded set; the inside count, which
+is what the map is built on, reproduced exactly at 245 and all 16 lines still
+survive.)* The 76 out-of-commune métro stations go to the build's
 excluded-stations record, as every other city's do, rather than anchoring rings
 over communes this build has no business data for. *(The path is deliberately
 not cited here: `check_provenance.py` requires every `outputs/` path named in
@@ -141,8 +145,45 @@ call:
 | Licence | **`lov2` — Licence Ouverte 2.0** |
 | Key | `siret` |
 | Paris filter | `codeCommuneEtablissement` starts with **`751`** |
-| Paris in NAF 47/56/96 | **148,633** active |
-| …after the employee filter | **50,156** |
+| Paris in NAF 47/56/96 | **149,166** active — re-measured 2026-09-23 over the whole file (was 148,633; 0.36% drift, a month's churn) |
+| …after the employee filter | ⚠️ **SUPERSEDED — 50,156 IS NOT REPRODUCIBLE** |
+| Built storefronts, 2026-09-23 | **87,164** |
+
+### ⚠️ The employee filter does not exist, and 50,156 cannot be recovered
+
+**Measured 2026-09-23 over all 149,166 bucket rows.** `trancheEffectifsEtablissement`
+is `NN` (non déterminé) on **115,248 of them — 77.3%**, so *every banded row put
+together is 33,918*. The largest cut this column can produce falls **16,000
+short** of 50,156, and the smallest meaningful one gives 32,419. No predicate on
+it yields the recorded number.
+
+**Dropping `NN` would also be wrong on its own terms**: only **1,425** rows
+record `00` (zero employees), so SIRENE does not code a sole trader as "zero" —
+it codes them `NN`. That band is where every owner-run boulangerie lives.
+
+**The build therefore applies NO employee filter**, and the OSM comparison was
+re-established from scratch rather than inherited:
+
+| Bucket | OSM (commune) | SIRENE | Ratio |
+|---|---|---|---|
+| Retail | 27,278 | 41,507 | 1.52× |
+| Food service | 16,829 | 33,558 | 1.99× |
+| Personal services | 4,866 | 12,099 | 2.49× |
+| **Total** | **48,973** | **87,164** | **1.78×** |
+
+⚠️ **The sharp test disproves the old SIRENE figure directly.** `amenity=restaurant`
+and NAF `56.10A` mean nearly the same thing: OSM gives **9,058** (against the
+recorded 10,642 — the OSM side reproduces), SIRENE gives **16,280** (against the
+recorded **10,595**). So the recorded SIRENE count is 1.54× below what SIRENE
+contains, on the one definition where both schemes agree — the same shortfall
+shape as 50,156 against ~97,000.
+
+**What this does and does not overturn.** France is still a build: the register,
+the join, the coverage and the licence are all unaffected. What is overturned is
+the *claim* that SIRENE lands at 92.5% of OSM. It does not; it is about 1.78× of
+it, and `docs/global_country_shortlist.md`'s France row rests on the old figure.
+The residual is **disclosed on the city page**, not filtered away — tuning until
+the number matched OSM is what produced 50,156 in the first place.
 
 **Use the PARQUET.** It is columnar, so step 2 reads the ten columns it needs
 instead of fifty-four, and its footer can be read over HTTP range requests —
@@ -480,6 +521,22 @@ them. See `docs/scaling_thresholds.md`.
     "kind": "http_ok",
     "url": "https://www.data.gouv.fr/api/1/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/",
     "min_bytes": 5000
+  },
+  {
+    "id": "excluded-stations-count",
+    "claim": "76 metro stations fall outside the commune of Paris. THE FIRST NUMERIC CHECK IN THIS PROJECT, and it exists because this brief said 77 and 322 while the feed gave 76 and 321 - and a 7/7 pass that same morning could not see it, since every other check kind here tests liveness rather than a number. If this fails, correct the brief to what the build measured; do not widen the tolerance",
+    "kind": "row_count",
+    "path": "outputs/paris/excluded_stations.csv",
+    "expect": 76
+  },
+  {
+    "id": "excluded-stations-communes",
+    "claim": "The 76 excluded stations lie across 34 communes, each named rather than counted - Los Angeles' standard. A drop here means the Ile-de-France commune layer stopped resolving names and stations are being recorded as '(outside Ile-de-France)'",
+    "kind": "row_count",
+    "path": "outputs/paris/excluded_stations.csv",
+    "column": "commune",
+    "distinct": true,
+    "expect": 34
   },
   {
     "id": "naf-labels-available",

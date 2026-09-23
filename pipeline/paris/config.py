@@ -25,6 +25,7 @@ from pipeline.countries.france import (  # noqa: F401
     GEOLOC_DATASET_SLUG,
     GEOLOC_RESOURCE_TITLE_CONTAINS,
     JOIN_KEY,
+    METROPOLITAN_EPSG,
     NAF_COLUMN,
     PARIS_GTFS_URL,
     SIRENE_DATASET_SLUG,
@@ -94,7 +95,14 @@ IDF_COMMUNES_GEOJSON = DATA_RAW / "idf_communes.geojson"
 # no validity window at all - and notice 24 (Licence Mobilites Art. 5.7)
 # requires this project to DISPLAY the data's last-updated date and its update
 # interval. Capture both at download time or they cannot be shown honestly.
-PROVENANCE_JSON = DATA_RAW / "provenance.json"
+#
+# ⚠ IT LIVES IN outputs/, NOT data/raw/, and that is the whole point. `data/`
+# is gitignored and the deployed app reads only `outputs/`, so a provenance
+# file in the raw folder could never reach the page that is REQUIRED to display
+# it. Writing it here makes the Art. 5.7 obligation durable - the page reads
+# the date rather than carrying a hardcoded string that goes stale on the next
+# fetch.
+PROVENANCE_JSON = OUTPUTS / "provenance.json"
 NAP_API = "https://transport.data.gouv.fr/api/datasets"
 
 # --- Coordinate reference systems -----------------------------------------
@@ -204,6 +212,40 @@ BOUNDARY_COMMUNE_CODE = "75056"
 # Kept because the scaffold's shared step templates reference it. Paris does
 # not filter on a name string; COMMUNE_PREFIXES is the real filter.
 CITY_KEEP = "PARIS"
+
+# THE PER-CITY CATCH-ALL VERDICT, which france_naf.py deliberately declines to
+# make because a catch-all's composition is a fact about a city. Los Angeles'
+# NAICS_EXCLUDE_CODES is the worked example.
+#
+# **THE RULE IS THE PUBLISHER'S OWN HIERARCHY, NOT THE WORD "AUTRES".** Three
+# of the five catch-alls sit under a NAF class whose official label asserts a
+# shop, so INSEE is saying these premises exist:
+#
+#   47.19B  5,359 | class 47.19 "Autre commerce de detail EN MAGASIN non
+#                 | specialise"                                      -> KEEP
+#   47.29Z  1,413 | class 47.29 "... EN MAGASIN specialise"          -> KEEP
+#   47.78C    903 | class 47.78 "Autre commerce de detail de biens
+#                 | neufs EN MAGASIN specialise"                     -> KEEP
+#   96.09Z  9,349 | class 96.09 "Autres services personnels n.c.a."
+#                 | - asserts no premises at all                     -> DROP
+#   56.29B    958 | class 56.29 "Autres services de restauration"
+#                 | - catering, asserts no premises                  -> DROP
+#
+# This is Barcelona's finding in French: two calls the publisher's hierarchy
+# made rather than a reading of the language. 96.09Z is also the direct
+# analogue of the NAICS 812990 that Los Angeles excludes, and it is the single
+# largest contributor to the bucket that diverges most from OSM (Personal
+# services measured 4.40x OSM before this exclusion).
+#
+# ⚠ THIS DOES NOT CLOSE THE GAP, and it is not meant to. Measured 2026-09-23
+# against OSM inside the same commune: 97,445 SIRENE against 48,973 OSM, 1.99x
+# overall. Excluding these two takes it to about 1.78x. The residual is
+# DISCLOSED on the city page rather than filtered away - SIRENE is a register
+# of registered establishments and some have no customer-facing shopfront,
+# which nothing in the data identifies. Tuning filters until the number
+# matched OSM would be fitting to a number, which is what put the superseded
+# 50,156 in the brief in the first place.
+CATCH_ALL_EXCLUDE = ("96.09Z", "56.29B")
 
 TAXONOMY_SYSTEM = "france_naf"
 # Already the taxonomy's VALUE_COLUMN, so step 2's rename is a no-op.

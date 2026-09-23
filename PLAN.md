@@ -50,8 +50,10 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
      shown honestly later.
   2. **`step1_stations.py`** — `route_type 1` only. Commuter rail (RER,
      Transilien) and tram are excluded by standing rule, not by scope, so the
-     boundary is not what drops them. Expect **245 stations inside the commune
-     and 77 outside**, all 16 lines surviving. The 77 go to
+     boundary is not what drops them. ✅ MEASURED 2026-09-23: **245 inside the
+     commune and 76 outside**, all 16 lines surviving. (The brief predicted 77
+     outside and 322 total; the feed gives 76 and 321. The inside count
+     reproduced exactly.) The 76 go to
      `outputs/paris/excluded_stations.csv`, which
      `app/pages/21_Paris_Heatmap.py` **already cites** — `check_provenance.py`
      stays red until it exists. Naming the commune each excluded station sits
@@ -114,24 +116,51 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   Measured 2026-09-22: **geolocation is confirmed for all six French cities**
   (Paris 99.98%, Lyon 99.97%, Marseille 99.91%, Rennes 99.90%, Toulouse
   99.85%, Lille 99.71%), so there is no geocoding leg anywhere in France.
-  **What is still Paris-only is the composition check** — that the employee
+  **What is still Paris-only is the composition check** — that the storefront
   filter selects the *right rows*, not merely rows that have coordinates.
 
-  In Paris it landed at **50,156 against OSM's 54,198** (92.5%), and
-  **10,595 against 10,642** on restaurants alone. That comparison is what
-  turned France from a rejection into a build, and it has been run in exactly
-  one city.
+  ⚠️ **THE ORIGINAL COMPARISON IS SUPERSEDED. Re-run it, do not inherit it.**
+  This item read "**50,156 against OSM's 54,198** (92.5%), and **10,595 against
+  10,642** on restaurants alone" and called that the comparison that turned
+  France from a rejection into a build. **The SIRENE side of it cannot be
+  reproduced.** It was attributed to an employee filter, and measured
+  2026-09-23 over all 149,166 Paris bucket rows, `trancheEffectifs` is `NN` on
+  **77.3%** of them — so every banded row together is 33,918 and no predicate
+  on that column reaches 50,156.
+
+  Re-established from scratch 2026-09-23, same commune, this project's own
+  Overpass helper:
+
+  | | OSM | SIRENE | ratio |
+  |---|---|---|---|
+  | Total | **48,973** | **87,164** | **1.78×** |
+  | `amenity=restaurant` vs NAF `56.10A` | **9,058** | **16,280** | 1.80× |
+
+  The **OSM side reproduces** (48,973 against the recorded 54,198, and 9,058
+  against 10,642 — my tag set is slightly narrower). The **SIRENE side does
+  not**: 16,280 against a recorded 10,595, on the one definition where the two
+  schemes mean the same thing.
+
+  **What this does and does not overturn.** France remains a build — register,
+  join, coverage and licence are untouched. What falls is the *claim* that
+  SIRENE lands at 92.5% of OSM; it is about 1.78× of it. The residual is
+  disclosed on the city page rather than filtered away, because tuning until
+  the number matched OSM is what produced 50,156.
+  ⚠️ `docs/global_country_shortlist.md`'s France row still rests on the old
+  figure and needs the same correction.
 
   **Why this is a checklist item and not a paragraph:** the two halves are
   easy to conflate, and the geolocation half is now so clean that it invites
-  treating the whole country as settled. It is not. Run the OSM comparison
-  once, on whichever city is built after Paris, and if it holds there, the
-  national claim is evidenced twice and can stand for the rest.
+  treating the whole country as settled. It is not. Run the OSM comparison on
+  whichever city is built after Paris — **now genuinely a second data point
+  rather than a confirmation**, since the first one turned out to be wrong.
 
-  Storefront layers, for sizing the comparison: Paris 50,156, Marseille
-  8,065, Lyon 7,354, Toulouse 4,833, Lille 3,272, Rennes 2,089. **Rennes and
-  Lille are an order of magnitude below Paris** — a separate scope call about
-  whether a ~2,000-point city earns a page, not a data problem.
+  Storefront layers, for sizing the comparison: **Paris 87,164 (measured)**;
+  Marseille 8,065, Lyon 7,354, Toulouse 4,833, Lille 3,272, Rennes 2,089 —
+  ⚠️ **the five follower figures are scaled from the same superseded basis as
+  50,156 and should be treated as ordering hints only.** **Rennes and Lille are
+  an order of magnitude below Paris** — a separate scope call about whether a
+  ~2,000-point city earns a page, not a data problem.
 
 
 - [x] **Region switcher on the macro map — DONE 2026-09-22 (`2121ada`).**
@@ -478,7 +507,9 @@ mistakes as confidently as its findings.
      30,020,346 legal units keyed on `siren`, the registered-office map.
   3. Filter `codeCommuneEtablissement` prefix **`751`**, active =
      **`"A"`, not `"Actif"`** — the label returned zero rows for all six
-     cities. **Run Paris first as a control against 148,633.**
+     cities. **Run Paris first as a control against 149,166** (re-measured
+     2026-09-23 over the whole file; the brief's 148,633 was 0.36% lower, a
+     month's churn rather than an error).
   4. Join the geolocation parquet on `siret`. **Read the `epsg` COLUMN** — it
      is per row; 2154 here, 2975/5490/2972 overseas.
   5. **Exclude distance selling: `47.91A`, `47.91B`, `47.99A`, `47.99B` —

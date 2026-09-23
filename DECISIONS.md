@@ -16,7 +16,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**197 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**198 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
@@ -31,6 +31,7 @@ onwards; the early ones are split by phase rather than by hour.
 - [CUZK read: Prague is unblocked, and the "cookie terms" were not only cookie terms](#2026-09-23---cuzk-read-prague-is-unblocked-and-the-cookie-terms-were-not-only-cookie-terms)
 - [The sweep's results sorted: Goteborg banded, two discards evidenced](#2026-09-23---the-sweeps-results-sorted-goteborg-banded-two-discards-evidenced)
 - [The discard record swept for rows that rest on an absence](#2026-09-23---the-discard-record-swept-for-rows-that-rest-on-an-absence)
+- [The employee filter does not exist, and France's OSM validation was wrong](#2026-09-23---the-employee-filter-does-not-exist-and-frances-osm-validation-was-wrong)
 - [France's taxonomy is national, and Paris takes Lambert-93](#2026-09-23---frances-taxonomy-is-national-and-paris-takes-lambert-93)
 - [Four licences read: Oslo is clear, Prague has one left](#2026-09-23---four-licences-read-oslo-is-clear-prague-has-one-left)
 - [Hong Kong, Prague and Oslo taken to brief-ready; two cities changed size](#2026-09-23---hong-kong-prague-and-oslo-taken-to-brief-ready-two-cities-changed-size)
@@ -690,6 +691,95 @@ onwards; the early ones are split by phase rather than by hour.
   as candidates to begin with. That is the point: **they were invisible to the
   arithmetic**, which is exactly why the discard list has to name its evidence
   per row rather than gesture at a pattern.
+
+### 2026-09-23 - The employee filter does not exist, and France's OSM validation was wrong
+
+- **Paris's recorded 50,156 is NOT REPRODUCIBLE, and no employee filter is
+  applied.** The brief recorded 148,633 -> 50,156 "after the employee filter",
+  and `PLAN.md` called the resulting 92.5% match against OSM the comparison
+  that turned France from a rejection into a build. Measured over all
+  **149,166** bucket rows, `trancheEffectifsEtablissement` is `NN` (non
+  determine) on **115,248 of them, 77.3%** - so every banded row put together
+  is **33,918**, and the largest cut that column can produce falls 16,000
+  short. Dropping `NN` is independently wrong: only **1,425** rows record `00`,
+  so SIRENE does not code a sole trader as zero employees, it codes them `NN`,
+  and that band is where every owner-run shop lives. Rejected: reverse-
+  engineering a predicate that lands near 50,156, which would be fitting to a
+  number for the second time. Files: `pipeline/paris/step2_clean_businesses.py`.
+
+- **The OSM comparison was re-established from scratch, and the SIRENE side of
+  the old one is wrong.** Re-run 2026-09-23 over the same commune with this
+  project's own Overpass helper: OSM **48,973** against SIRENE **87,164**,
+  **1.78x**. The sharp test is restaurants, where `amenity=restaurant` and NAF
+  `56.10A` mean nearly the same thing - OSM gives **9,058** against a recorded
+  10,642, so the OSM side reproduces; SIRENE gives **16,280** against a
+  recorded **10,595**, so the SIRENE side sits 1.54x below what the register
+  actually contains. **France remains a build** - register, join, coverage and
+  licence are untouched - but the claim of a 92.5% match falls.
+  `docs/global_country_shortlist.md`'s France row still rests on the old
+  figure and needs the same correction.
+
+- **Two of five catch-all codes excluded, on the publisher's own hierarchy
+  rather than on the word "autres".** `96.09Z` (9,349) and `56.29B` (958) sit
+  under NAF classes that assert no premises; `47.19B`, `47.29Z` and `47.78C`
+  sit under classes whose official labels say *en magasin specialise*, so INSEE
+  is stating those premises exist. This is Barcelona's finding in French - a
+  call the publisher's hierarchy made rather than a reading of the language.
+  Personal services fell from **4.40x to 2.49x** of OSM and the total from
+  1.99x to 1.78x, while Retail was untouched, which is what a targeted
+  exclusion should look like. Recorded as `CATCH_ALL_EXCLUDE` in
+  `pipeline/paris/config.py`, per city, as `CLAUDE.md` requires.
+
+- **The residual 1.78x is DISCLOSED on the city page, not filtered away.**
+  SIRENE is a register of registered establishments and some have no
+  customer-facing shopfront, which nothing in the data identifies; OSM is
+  separately incomplete. Neither can be separated out, so the page says so.
+  Licence Mobilites Art. 5.7 already requires this page to state what was
+  excluded, so the disclosure has somewhere to live. Rejected: tuning
+  exclusions until SIRENE matched OSM - that is what produced 50,156.
+
+- **A pandas 3.0 bug would have shipped a map of blank labels.** Step 2
+  reported "premises name present on 97,445 rows (100.0%)" while the first CSV
+  row had an empty name. pandas 3.0 backs string columns with pyarrow, so
+  `.astype(str)` on a null yields `<NA>` rather than the string `"nan"` - which
+  passed an `!= ""` test and counted as named. Fixed by `.fillna("")` first;
+  the rate became **37.2%**, against `france.py`'s independently measured
+  `paris_any_name: 0.384`. A 100% fill rate on a register measured at 38% was
+  the tell.
+
+- **Paris is the first city to fail the station spacing gate honestly, at 399 m
+  against the shared 400 m floor.** The gate says to fix the collapse rather
+  than the threshold, so the collapse was tested first: **zero** duplicate
+  station names (Calgary's failure mode), **zero** pairs closer than 150 m, and
+  an uncollapsed platform median of **8 m** - so a broken collapse would read
+  about 8, not 399. The closest pairs are real distinct stations (Le Peletier /
+  Notre-Dame-de-Lorette 183 m, Commerce / Felix Faure 192 m). Paris passes
+  `spacing_min=200.0`, a parameter `verify_stations` already exposes per city.
+  **200 and not 398**: it still catches a platform-spaced set by a factor of
+  25, where a floor shaved just under the observed median would pass this city
+  and catch nothing in the next.
+
+- **`brief_check.py` gains a `row_count` kind - the first numeric check in the
+  project.** All seventeen existing kinds test LIVENESS, and that gap cost real
+  work: Paris's brief was re-verified **7/7 against live sources** on the
+  morning of 2026-09-23, and by the afternoon the build had found "77 stations
+  outside" was 76 and "322 total" was 321. Every check passed throughout,
+  because no check stood behind any count. Deliberately local and offline - it
+  reads committed `outputs/`, so it runs on a fresh clone at no cost. The
+  register-scale numbers are NOT checkable this way and are left guarded by
+  step 2's printed filters instead, because re-reading a 2,210 MB parquet is
+  not something a brief check may do. Paris now runs **9/9**.
+
+- **Two brief numbers superseded at build time: 76 stations outside and 321
+  total, against 77 and 322.** The inside count reproduced **exactly** at 245
+  and all 16 lines still survive the boundary, so the commune-only scope
+  decision stands on its own evidence rather than on the corrected figures.
+
+- **`provenance.json` moved from `data/paris/raw/` to `outputs/paris/`.** The
+  deployed app reads only `outputs/` and `data/` is gitignored, so the file
+  carrying the snapshot date that notice 24 REQUIRES the page to display could
+  never have reached that page. The page now reads the date rather than
+  carrying a hardcoded string that goes stale on the next fetch.
 
 ### 2026-09-23 - France's taxonomy is national, and Paris takes Lambert-93
 
