@@ -272,6 +272,35 @@ Four shapes qualify. Sort a candidate into one before going further:
 registered business address; that distinction *is* the answer. France's
 `établissement` is not the same object as its `unité légale`.
 
+#### If every city reads the SAME BYTES, cache it per COUNTRY, not per city
+
+`add-city`'s scaffold gives each city its own `data/<city>/raw/`, which is right
+for a city's own registry and a city's own feed. **It is wrong for a national
+register**, and the cost compounds silently with each city added.
+
+France is the worked example. SIRENE's two parquets are **2,210 MB and 811 MB**
+and identical for every French city, so the per-city layout would have held
+**15 GB to store one 3 GB pair** across five cities. Fixed 2026-09-23 while
+building the second city — deliberately before a third could set the pattern —
+by putting `SHARED_RAW` in `pipeline/countries/france.py` and having each city's
+config import the paths. `data/*/raw/` already gitignores `data/france/raw/`, so
+nothing about the repository changes.
+
+**The test is "the same bytes", not "one national source", and Mexico is the
+counter-example that keeps it honest.** DENUE is equally national, but it is
+distributed **per entidad federativa**: Mexico City pulls state 09 and
+Guadalajara state 14. Different files, no duplication, nothing to share — and
+sharing them would be a worse design, because a city needs one state and not
+thirty-two. Measured 2026-09-23: 45 MB and 39 MB, no overlap.
+
+So when a country profile lands on a national register, ask which one it is:
+
+| | Cache | Example |
+|---|---|---|
+| One file, every city | **per country** (`SHARED_RAW`) | France SIRENE |
+| Partitioned by region, cities in different partitions | per city, as scaffolded | Mexico DENUE |
+| Partitioned, and two cities share a partition | per **partition** | none yet |
+
 **The caveat on national registers.** One source covering every city is a
 different and possibly better shape, but it is **not** the shape this project
 is built for: scoping and taxonomy were both designed around per-city

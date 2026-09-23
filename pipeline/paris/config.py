@@ -23,12 +23,14 @@ from pipeline.countries.france import (  # noqa: F401
     GEO_LON_COLUMN,
     GEO_QUALITY_COLUMN,
     GEOLOC_DATASET_SLUG,
+    GEOLOC_PARQUET,
     GEOLOC_RESOURCE_TITLE_CONTAINS,
     JOIN_KEY,
     METROPOLITAN_EPSG,
     NAF_COLUMN,
     PARIS_GTFS_URL,
     SIRENE_DATASET_SLUG,
+    SIRENE_PARQUET,
     SIRENE_RESOURCE_TITLE_PREFIX,
     STATE_ACTIVE_VALUE,
     STATE_COLUMN,
@@ -69,8 +71,9 @@ BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 #                     geocoder, no key and no rate limit in this build.
 GTFS_ZIP = DATA_RAW / "gtfs.zip"
 CITY_BOUNDARY_GEOJSON = DATA_RAW / "city_boundary.geojson"
-SIRENE_PARQUET = DATA_RAW / "sirene_etablissements.parquet"
-GEOLOC_PARQUET = DATA_RAW / "sirene_geoloc.parquet"
+# The two parquets are NATIONAL and live in one country-wide cache, not here -
+# see france.SHARED_RAW. Moved there 2026-09-23 when the second French city
+# arrived: five cities reading the same 3 GB pair would otherwise hold 15 GB.
 
 BOUNDARY_URL = ("https://geo.api.gouv.fr/communes/75056"
                 "?geometry=contour&format=geojson")
