@@ -16,11 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**189 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**190 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
 - [PLAN.md gains the handoff it was missing, and Paris reverified](#2026-09-23---planmd-gains-the-handoff-it-was-missing-and-paris-reverified)
+- [Paris's brief re-verified against live sources: 7/7 hold](#2026-09-23---pariss-brief-re-verified-against-live-sources-77-hold)
 - [CUZK read: Prague is unblocked, and the "cookie terms" were not only cookie terms](#2026-09-23---cuzk-read-prague-is-unblocked-and-the-cookie-terms-were-not-only-cookie-terms)
 - [The sweep's results sorted: Goteborg banded, two discards evidenced](#2026-09-23---the-sweeps-results-sorted-goteborg-banded-two-discards-evidenced)
 - [The discard record swept for rows that rest on an absence](#2026-09-23---the-discard-record-swept-for-rows-that-rest-on-an-absence)
@@ -255,6 +256,40 @@ onwards; the early ones are split by phase rather than by hour.
   `feed_info.txt`**, so the correction that replaced this brief's
   self-attestation claim is still true.
 
+### 2026-09-23 - Paris's brief re-verified against live sources: 7/7 hold
+
+- **`python scripts/brief_check.py paris` returns 7/7, so the build starts
+  from verified ground rather than from claims banked a day earlier.** Run by
+  the cleanup session at the owner's request, on the reasoning that re-running
+  a brief's claims against live sources is a check and therefore this role's
+  work, while the Step 0 checklist that prompted it is not - that belongs to
+  the session holding the Paris findings.
+
+- **The three that would have changed the build if they had moved, all
+  unchanged.** IDFM's own GTFS still downloads with no key (10,027,008 bytes,
+  `application/zip`) - the two other feeds on the NAP remain third-party and
+  unusable, Google's stale since 2023-11-17 and ITO World's `is_available`
+  false. The NAP still declares **mobility-licence** on the IDFM dataset, so
+  the required notice stays the Art. 5.4 text rather than an Etalab
+  attribution. INSEE's separate geolocation file is still published, which is
+  what keeps Paris's coordinate leg a JOIN rather than a geocode, and is load
+  bearing for its band placement.
+
+- **The absence pinned in the brief is still an absence.** The feed carries
+  `shapes.txt` (14 files) and still NO `feed_info.txt`, so it declares no
+  validity window and cannot be staleness-checked from the artifact. The brief
+  originally claimed it self-attested; `brief_check.py` disproved that, and
+  the negative is checked deliberately so that the day `feed_info.txt` appears,
+  the staleness story gets simpler and the check gets revisited. **A check
+  that asserts something is still missing is as much a check as one asserting
+  it is present** - this is the second useful instance of that shape today,
+  after the KNOWN_GAPS entries that fail once they stop violating.
+
+- **No correction follows, which is the whole point of running it.** The
+  project's rule is that a failing brief check is a brief to correct, never a
+  check to relax; at 95% of the weekly limit there would have been no budget
+  to correct one, so the run was made knowing a red result would end as a
+  recorded finding rather than a fix. It came back green.
 ### 2026-09-23 - CUZK read: Prague is unblocked, and the "cookie terms" were not only cookie terms
 
 - **ČÚZK/RÚIAN is CC BY 4.0, PERMITTED WITH CONDITIONS, and Prague's last
