@@ -206,6 +206,29 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Milan built: six disjoint registers, and a screen that was wrong four times
 
+- **Correction to the notice-number bullet below: Milan is notice 23, and there
+  was never a branch collision.** That bullet said both cities had taken 22 on
+  separate branches and that Dublin would keep it at merge. The real cause is
+  simpler, and was found by running the check rather than by reasoning:
+  **Tailte Éireann's notice 22 had already reached master with Dublin's BRIEF
+  commit**, which is docs-only, while Dublin's build sat on `dublin-build`. So
+  master's last notice was 22 and not 21, and the next free number read one
+  lower than it was because the branch was consulted instead of master.
+  `check_provenance.py` caught the duplicate, then caught the stale `item 22`
+  citation that fixing it left behind - two catches in one session from the
+  check written after the notices list carried two item 8s and two item 15s.
+  **The PAGE-number collision in that bullet is real and stands:** Milan is
+  page 20 because `scaffold_city.py` globs the working tree and cannot see
+  Dublin's 19 on another branch.
+- **Confirmed while investigating it that NOTHING IS DEPLOYED.** Dublin's
+  `app/cities.py` entry and its page are on `dublin-build` only; master carries
+  Dublin's docs and its brief but no `app/` change, so the deferral of
+  `deploy-verify` holds and no city has gone live unverified. Recorded because
+  "landing `app/` on master IS deploying" makes the difference between a docs
+  commit and a build commit load-bearing - a merge that looked like it had
+  published Dublin turned out not to have, and the way to tell was to read
+  `app/cities.py` at master rather than to reason about the branch graph.
+
 - **Milan built from SIX premises registers - the most of any city here - as
   104 stations and 47,540 storefront premises, 41,510 of them inside a ring.**
   Per register after filtering: `vicinato` 27,886, `pe_in_piano` 9,166,
