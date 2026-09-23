@@ -232,7 +232,7 @@ So the next *unstarted* city is the question.
 and only owner decisions left. After that the screen has no city whose
 "what remains" column is empty.
 
-## 🟡 Band B — the coordinate route is MEASURED, not assumed (5 cities)
+## 🟡 Band B — the coordinate route is MEASURED, not assumed (4 cities)
 
 **Every route in this band was probed on 2026-09-22 and answered.** The band
 used to say the method was "identified and cheap", which is a description of a
@@ -256,7 +256,6 @@ measured.
 | **Prague** ▲▲ *(1)* | 🇨🇿 | **A JOIN, confirmed.** RÚIAN's Praha export is **3.4 MB zipped, keyless** (`vdp.cuzk.gov.cz`; the old `cuzk.cz` redirects rather than dying) and holds **134,627 addresses, every one a unique `Kód ADM`, 99.99% carrying coordinates**. Measured on **6,000 active Praha rows** in CZ-NACE 47/56/96 streamed from RES | **99.8%** — 99.9% carry a code, 100.0% of those resolve |
 | **Copenhagen** *(1)* | 🇩🇰 | **A JOIN, confirmed — and the account gate was on the wrong leg.** DAWA (`api.dataforsyningen.dk`) is **keyless**; the `distribution.virk.dk` 401 gates the BUSINESS register only. The whole city downloads as CSV: **85,351 access addresses, 100% with WGS84**, joinable on `vejnavn` + `husnr`. ⚠️ **Frederiksberg (0147) is a separate kommune entirely surrounded by Copenhagen** — scope to 0101 alone and the map has a hole in its middle; its 9,584 addresses come from the same call | **100%** of addresses carry coordinates |
 | **Hong Kong** ▲▲▲ *(1)* | 🇭🇰 | **A GEOCODE, confirmed keyless.** The government **Address Lookup Service** (`als.gov.hk/lookup`) answers without a key and returns **lat/long AND HK1980 Grid easting/northing AND a confidence `Score`** (76.15, 88.75, 97.69 on three test premises). ✅ **INDEMNITY ACCEPTED by the owner 2026-09-22** — the project's only uncapped liability, priced deliberately. Three conditions bind the build: display source + Government IP acknowledgement + DATA.GOV.HK attribution exactly; run `check_personal_exposure.py` and exclude catch-alls; the dated record in `data_sources.md`. ⚠️ Re-reading the live clause corrected this project's OWN earlier quote twice: it arises **directly or indirectly**, and there is **no notice-and-defend right** | Answers; **per-row rate not yet measured** against the 35,808 |
-| **Singapore** ▲▲ *(1)* | 🇸🇬 | **A GEOCODE, and the postcode is the key.** OneMap is **keyless** and a bare six-digit postcode resolves to a **named building**. **The postcode is not a column — it is inside the address string** (`...SINGAPORE 169663`, `...SINGAPORE(738733)`): extracted on **99.5%** of tobacco, **97.5%** of pharmacy, **83.4%** of eating establishments. ⚠️ OneMap **throttles** — 32.5% refusals even at 2 workers | **98.8%** of answered lookups resolve (80/81). **35,064 postcodes → 7,767 DISTINCT** — dedupe first, ~1.4 h not 6.5 h ✅ **BUSINESS LEG MEASURED 2026-09-23 — TWO BUCKETS, and the band had only ever recorded the geocode.** Four keyless premises registers: **`NEA Licensed Eating Establishments` 36,687** (food service) and **tobacco retailers 4,235 + supermarkets 478 + pharmacies 243** (retail, ~4,956). ⚠️ **Personal services: NONE, and the zero is CONTROLLED** — `spa` returns 91 false friends in the same matcher while `massage`, `salon`, `barber`, `beauty`, `nail`, `tattoo` and `pet shop` all return 0. **No register has an activity column, so BUCKET = SOURCE** — Milan's pattern, and `multi-source-city` rather than a taxonomy module. 🚨 **`Listing of Licensed Pharmacies` carries `Pharmacistincharge`, a named individual** — drop at READ time. ⚠️ `licensee_name` is the LICENCE HOLDER, not the trade name (a hotel restaurant reads *REPUBLIC HOTELS & RESORTS LIMITED*) — **Oslo's problem in a second country.** ✅ `List of Supermarket Licences` is the one with a **structured address incl. its own `postal_code` column**. ⚠️ The catalogue was **ENUMERATED (4,629 datasets, 463 pages)** because the portal's `query` parameter is **INERT** — `zzqqxxnonsense` returns the same 10 rows as a real term, the third occurrence after Seoul and India. |
 | **Oslo** *(1)* | 🇳🇴 | **A GEOCODE, keyless — with two traps.** Kartverket (`ws.geonorge.no/adresser`) answers and returns `representasjonspunkt`. ⚠️ **`fuzzy=true` MUST NOT BE USED**: it "rescued" `Karenslyst allé 8B` as **`allé 1B`** — a different building — and turned `7-Eleven` into `Ellen Gleditsch' vei 7`. It returns plausible coordinates for the wrong place. ⚠️ The API caps at **10,000 rows** (offset 9,900 works, 15,000 returns nothing), so it cannot enumerate the city | **97.8%** via two stages: exact `adressetekst`, then plain `sok`. Never fuzzy |
 
 **⚠️ Two Band B facts that are NOT about coordinates and change build scope:**
@@ -344,9 +343,9 @@ row, and three of this one's rows carried no reason at all.** Two of those now
 do. Göteborg was never ruled out — it was simply never placed anywhere, which
 is how a candidate disappears without anyone deciding to drop it.
 
-## 🟣 Band D — one bucket only: complete, but narrower than the others (4 cities)
+## 🟣 Band D — one bucket only: complete, but narrower than the others (5 cities)
 
-**Screening is COMPLETE for all four, and all four passed.** Each has a real
+**Screening is COMPLETE for all five, and all five passed.** Each has a real
 premises-level register with coordinates, current data and a usable licence.
 What none of them has is a **second bucket** — and the owner's bar is that two
 is acceptable and one is not. **Göteborg joined Stockholm and Zurich here on
@@ -387,6 +386,69 @@ Stockholm's 8,146 premises are the larger map.
 
 
 ---
+
+### 🇸🇬 Singapore — moved here from Band B 2026-09-23
+
+**Two buckets on paper, ONE on current data.** Four keyless premises registers
+exist and the licence permits everything this project does — but **the big
+one is a 2016 snapshot.**
+
+| Register | Coverage | Rows | |
+|---|---|---|---|
+| **NEA Licensed Eating Establishments** | 2015-06-11 → **2016-09-06** | **36,687** | ⛔ **TEN YEARS STALE** |
+| **List of Supermarket Licences** | **2016-06-26 only — a single day** | 478 | ⛔ stale |
+| **Licensed Tobacco Retailers** | updated **2026-08-07** | **4,235** | ✅ current |
+| **Listing of Licensed Pharmacies** | updated **2026-08-07** | **243** | ✅ current |
+
+**The ROWS confirm the metadata rather than merely repeating it**, which is
+what makes this solid rather than a metadata artefact: the only dated column in
+the eating-establishments file, `suspension_start_date`, returns **2016-02-21**
+and **2016-04-13**, while tobacco's `ValidPeriod` returns **2025 / 2026 /
+2027**. **Two files a decade apart in the data itself.**
+
+⚠️ **`lastUpdatedAt` says 2024-06-06 for both stale files and it is a
+METADATA TOUCH, not a data refresh.** Reading that field alone would have
+recorded Singapore as two years old rather than ten. **`coverageEnd` is the
+honest field and the rows are the honest check.**
+
+**So the current position is ~4,478 rows, all RETAIL** — comparable to
+Göteborg's volume and narrower than Stockholm's. **This is Turin's shape,
+four years worse**: Turin sits in the open screening gap for a series that
+stops in 2019, *"six years stale against a project mapping CURRENT density."*
+
+✅ **The licence is NOT the problem and was read in full 2026-09-23** —
+**Singapore Open Data Licence v1.0, PERMITTED WITH CONDITIONS.** Grant is
+*"worldwide, perpetual, royalty-free"* covering *"modify and adapt ... or any
+derived analyses"*, commercially. ⚠️ **It carries an INDEMNITY of
+Hong Kong's class and wider** — its third limb reaches *"any claim made by
+a third party in connection with the third party's Use of ... any derived
+analyses or applications which you have provided"*, and it **survives
+termination**. **That decision is HELD, not taken**: there is no reason to
+accept an open-ended liability for a city whose main register is from 2016.
+
+🚨 **`Listing of Licensed Pharmacies` carries `Pharmacistincharge`, a
+named individual on all 243 rows**, and the licence expressly grants **no
+rights over** *"any personal data in the dataset"* — so publishing it would
+be outside the licence, not merely against project policy.
+
+⚠️ **Provenance decides the terms: take these ONLY from
+`data.gov.sg`.** HSA's and NEA's own site terms restrict commercial reuse of
+their sites' contents, and both HSA datasets point at HSA's InfoSearch page.
+**The same rows from the agency's own site would carry different terms.**
+
+**Rail was counted 2026-09-23 and carries three traps** — recorded because
+they would each have surfaced mid-build: **MRT 21 relations, 21 named, only 16
+coloured** (the **`JRL` Jurong Regional Line has NO colour** across all 5 of its
+relations — Bucharest's `Extensie M4` in a second city, the same day); **only
+ONE of three LRT lines** appears under `route=light_rail`, Sengkang, so Bukit
+Panjang and Punggol are tagged some other way; and **the station counts do not
+reconcile** — MRT 54 + LRT 13 against 90 rail stations total, so 23 are
+tagged as neither and the naive query undercounts badly.
+
+**Reinstatement is cheap and well-defined: if NEA refreshes the eating-
+establishment register, Singapore returns to Band B immediately.** Everything
+else about it is already done — licence read, geocode measured at 98.8%,
+rail counted, registers enumerated. **It is parked on ONE fact.**
 
 ### 🇷🇴 Bucharest — moved here from Band B 2026-09-23
 
