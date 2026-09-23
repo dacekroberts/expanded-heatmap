@@ -1476,7 +1476,7 @@ under GDPR**, which is the expensive half.
 | **Lisbon** | PT | **subway 10** |
 | **Singapore** | SG | **subway 13** — but a city-state, and its register is likely registered-office shaped |
 | **Sofia** | BG | subway 4, tram 24 |
-| **Copenhagen** | DK | subway 4, tram 4 |
+| **Copenhagen** | DK | **subway 4** — ⚠️ **"tram 4" was WRONG, corrected 2026-09-23**: OSM returns **ZERO** tram relations in Københavns Kommune AND zero in Region Hovedstaden, and no Letbane relation exists either. Copenhagen's tram closed in 1972. Metro is M1–M4, 8 relations, all named and all coloured; S-tog is 7 refs and is excluded as S-Bahn |
 | **Bangkok** | TH | subway 4, LRT 5 |
 | **Helsinki** | FI | subway 4, tram 26 — *feed expired* |
 | **Budapest** | HU | subway 4, tram 42 — *feed expired* |
@@ -2050,7 +2050,7 @@ city.
 | **Sofia** | BG | subway 4, tram 24 | current |
 | **Hamburg** | DE | underground 4 | **expired 20251213** |
 | **Helsinki** | FI | subway 4, tram 26 | **expired 20260731** |
-| **Copenhagen** | DK | subway 4, tram 4 | current |
+| **Copenhagen** | DK | **subway 4** — ⚠️ **"tram 4" was WRONG, corrected 2026-09-23**: OSM returns **ZERO** tram relations in Københavns Kommune AND zero in Region Hovedstaden, and no Letbane relation exists either. Copenhagen's tram closed in 1972. Metro is M1–M4, 8 relations, all named and all coloured; S-tog is 7 refs and is excluded as S-Bahn | current |
 | **Budapest** | HU | subway 4, tram 42 | **expired 20260704** |
 | **Bangkok** | TH | subway 4, LRT 5 | current |
 | **Prague** | CZ | subway 3, tram 40 | **expired 20260616** |
