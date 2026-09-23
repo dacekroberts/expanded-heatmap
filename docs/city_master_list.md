@@ -258,7 +258,7 @@ number).
 
 - **CNPJ is unreachable from outside Brazil.** Receita moved it to a Nextcloud
   share in early 2026 and the host resets every non-Brazilian connection —
-  **16 check nodes, the Brazilian one 200, the other 15 in 12 countries
+  **16 check nodes, the Brazilian one 200, the other 15 in 11 countries
   reset.** A publisher's access control, so this project does not route
   around it.
 - **IBGE's CNEFE 2022 is a premises field survey.** The census address file
@@ -473,6 +473,14 @@ registries are the next thing to look for.
 screen — against the worst geocoding problem and a two-bucket ceiling.
 **Still the biggest open decision in this list**, and a judgment call rather
 than a probe.
+
+📘 **Before starting Japan, read `docs/geocoding_retrospective.md`** (written
+2026-09-23). Brazil and Taiwan both left this band because the address file
+already carried the coordinate. **The retrospective predicts Japan is a
+block-level JOIN too** — the permits split the address into municipality /
+町字 / 番地以下 on 98% of rows, and MLIT's 位置参照情報 publishes those
+components with a coordinate per block — **ASSERTED, not measured**, with the
+order of work to test it.
 
 ## ⚠️ OPEN SCREENING GAP — rows that rest on an absence (3 cities unscreened)
 

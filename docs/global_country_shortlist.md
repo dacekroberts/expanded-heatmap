@@ -2924,7 +2924,7 @@ Two costs that no city in this project has yet paid:
    "CNPJ"). From here every client — curl/schannel, Python/OpenSSL and the
    browser — is **reset during the TLS handshake**, while the Archive's crawler
    got through. `check-host.net` settled it: **16 nodes, `br1` 200, all 15
-   others in 12 countries reset, including four in the US.** **A geo-block, and
+   others in 11 countries reset, including four in the US.** **A geo-block, and
    a publisher's choice** — this project does not route around it. The
    four-cause check (transient / wrong host / refusal / dead) was worked in
    order: the answer was *moved* AND *refused*, two causes at once.

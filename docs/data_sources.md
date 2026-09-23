@@ -1101,7 +1101,7 @@ Green Line stations, the national land-survey centre's `捷運車站` layer.
 2026 to a Nextcloud share (`arquivos.receitafederal.gov.br/index.php/s/YggdBLfdninEJX9`;
 the old `dados_abertos_cnpj/` directory has returned **404 since 2026-01-30**)
 and **the host refuses connections from outside Brazil** — measured
-2026-09-23 from 16 check nodes: **the Brazilian one 200, all 15 others in 12
+2026-09-23 from 16 check nodes: **the Brazilian one 200, all 15 others in 11
 countries reset.** A publisher's access control, not an outage, so this
 project does not route around it. Its terms were never read.
 

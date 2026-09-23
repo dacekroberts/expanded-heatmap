@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**251 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**252 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [The geocoding retrospective, written to prepare Japan; the lesson placed where the next country passes through it](#2026-09-23---the-geocoding-retrospective-written-to-prepare-japan-the-lesson-placed-where-the-next-country-passes-through-it)
 - [Taiwan finished: Taipei (Regional), Taoyuan and Taichung to Band A; Kaohsiung held on an unreachable host](#2026-09-23---taiwan-finished-taipei-regional-taoyuan-and-taichung-to-band-a-kaohsiung-held-on-an-unreachable-host)
 - [Six merged build branches deleted; the retirement steps needed a pull first](#2026-09-23---six-merged-build-branches-deleted-the-retirement-steps-needed-a-pull-first)
 - [The fit race came back a third way, so the fit now checks its outcome](#2026-09-23---the-fit-race-came-back-a-third-way-so-the-fit-now-checks-its-outcome)
@@ -290,6 +291,42 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - The geocoding retrospective, written to prepare Japan; the lesson placed where the next country passes through it
+
+- **`docs/geocoding_retrospective.md` records why Brazil and Taiwan both left
+  the geocoding band in one day, as a method for Japan**, at the owner's
+  request. The headline is **four for four**: Czechia (RUIAN), Denmark (DAWA),
+  Brazil (CNEFE) and Taiwan (door plates) each published an address file that
+  already carries the coordinate, and each "geocoding project" became a join
+  or vanished. It sets out the steps that found them - look for the
+  coordinates before the geocoder; enumerate catalogues through their export;
+  treat "unreachable" as four findings and test which; count what a row IS;
+  measure with a control that must reproduce; report tiers; read the misses by
+  place - and the normalisation that mattered, each rule priced in points.
+
+- **It predicts Japan is a block-level JOIN, and labels that ASSERTED.** The
+  permits split the address into municipality / 町字 / 番地以下 on 98% of rows
+  and MLIT's 位置参照情報 publishes those components with a coordinate per
+  block; block precision is ample for 160-960 m rings. The order of work puts
+  finding the address file first, a Minato Ward control second, and a GSI
+  cross-check on a sample so two methods agree.
+
+- **The lesson is placed where the next country passes through it**, per the
+  meta-rule `osm-rail` records: a new section in `add-country` question 6 -
+  "before writing ANY geocoder, find the address file that already carries
+  the coordinate" - and a pointer in the master list's Japan paragraph.
+  **`scripts/screen_taiwan_join.py`** was lifted out of the scratchpad, where
+  the method would not have survived, and reproduces the Taipei control
+  (92.4%, 251,607 keys). The retrospective recommends lifting its harness
+  (tiers, control, miss sampling) into shared code before Japan's parser is
+  written, leaving only key-building per country.
+
+- **One count corrected in the living docs**: the CNPJ geo-block's 15
+  non-Brazilian nodes were in **11** countries, not 12 - recounted from the
+  node list while writing the retrospective. Corrected in the master list, the
+  shortlist and `data_sources.md`; the earlier entry above keeps its wording,
+  since this file is append-only. No conclusion changes.
 
 ### 2026-09-23 - Taiwan finished: Taipei (Regional), Taoyuan and Taichung to Band A; Kaohsiung held on an unreachable host
 
