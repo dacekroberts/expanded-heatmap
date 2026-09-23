@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**242 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**243 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Lille made "three regional maps" four within the hour](#2026-09-23---lille-made-three-regional-maps-four-within-the-hour)
 - [Two handoffs verified; one held a vacuous pass, one was overtaken by events](#2026-09-23---two-handoffs-verified-one-held-a-vacuous-pass-one-was-overtaken-by-events)
 - [Lille (Regional) built: 11,833 storefronts, 91 stations, eleven communes](#2026-09-23---lille-regional-built-11833-storefronts-91-stations-eleven-communes)
 - [Sixteen brief checks could not see their claims; the Brazilian briefs, and the agency rail both cities had](#2026-09-23---sixteen-brief-checks-could-not-see-their-claims-the-brazilian-briefs-and-the-agency-rail-both-cities-had)
@@ -281,6 +282,29 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Lille made "three regional maps" four within the hour
+
+- **The station section said "Three maps are deliberately regional instead",
+  and Lille (Regional) landed as the fourth the same day.** Written earlier
+  that day by the cleanup session, in the section that also stated the
+  denominator rule's lesson - a closed count of an open set, by the author of
+  the rule. Now "Several maps are deliberately regional instead - among them
+  Miami, Vancouver with Surrey, Guadalajara, and Lille across eleven communes",
+  which the next regional city extends rather than falsifies.
+  `check_scope_disclosure.py` passed throughout, correctly: Lille's own section
+  was written, and a stale GENERAL claim is exactly what that check cannot see.
+  Found by re-reading the general claims on arrival, as the handoff note says.
+
+- **The same arrival showed the scope check steering another session, and
+  imposing friction while doing it.** Lille's page docstring records that it
+  was renamed from the scaffold's `24_Lille_(Regional)_Heatmap.py` because
+  `app/station_scope.py` derives a city's outputs directory from the page
+  filename and `lille_(regional)` resolves to nothing - property C failing
+  loudly, as designed, but on a name the scaffold itself generates. Guadalajara
+  worked around it the same way. Recorded rather than changed:
+  `station_scope.py` is now imported by the live app, so editing it needs a
+  reboot, and the rename is a one-line workaround that already worked twice.
 
 ### 2026-09-23 - Two handoffs verified; one held a vacuous pass, one was overtaken by events
 
