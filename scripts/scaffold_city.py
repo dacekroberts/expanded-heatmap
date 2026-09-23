@@ -4,7 +4,8 @@ every built city, so the per-city work starts at the parts that differ.
 Writes (never overwrites without --force):
   pipeline/<slug>/__init__.py, config.py, step<N>_map.py
   data/<slug>/raw/, data/<slug>/processed/, outputs/<slug>/
-  app/pages/<n>_<Name>_Heatmap.py, and an entry in app/cities.py
+  app/pages/<n>_<Slug>_Heatmap.py, and an entry in app/cities.py
+    (named from --slug, NOT --name - see page_stem() for why)
   pipeline/taxonomies/<taxonomy>.py + its registration, with --new-taxonomy
 
 Deliberately NOT generated: step1_stations.py and step2_clean_businesses.py.
@@ -26,6 +27,7 @@ Usage:
 
 import argparse
 import importlib
+import importlib.util
 import re
 import sys
 from pathlib import Path
@@ -337,6 +339,35 @@ def utm_crs(lat, lon):
     return f"EPSG:{epsg}", f"UTM zone {zone}{'N' if lat >= 0 else 'S'}: the longitude (~{lon:.2f}) falls in the {lo} to {lo + 6} band."
 
 
+def page_stem(slug):
+    """The page filename's city part, built from the SLUG: `new_york` -> `New_York`.
+
+    It used to be built from --name, and --name is a DISPLAY name: "Lille
+    (Regional)" gave `24_Lille_(Regional)_Heatmap.py`, and "Montréal" or
+    "Washington D.C." would carry the accent or the dots through the same way.
+    app/station_scope.py derives each city's outputs/ directory back FROM this
+    filename to build the live station table, so `lille_(regional)` resolved to
+    nothing and check_scope_disclosure.py's property C refused it. Two sessions
+    - Guadalajara's and Lille's - met that and renamed the page by hand to
+    exactly the name this function now produces. The slug IS the outputs/
+    directory, so a stem built from it resolves by construction.
+    """
+    return "_".join(part.capitalize() for part in slug.split("_"))
+
+
+def load_station_scope(root):
+    """app/station_scope.py from `root`, for its slug() - the live app's rule.
+
+    Imported rather than restated, for the same reason the page and the scope
+    check share it: a second copy of the rule is the one that drifts.
+    """
+    path = root / "app" / "station_scope.py"
+    spec = importlib.util.spec_from_file_location("_station_scope", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def next_page_number(pages_dir):
     nums = [int(m.group(1)) for p in pages_dir.glob("*_Heatmap.py") if (m := re.match(r"(\d+)_", p.name))]
     return max(nums, default=0) + 1
@@ -579,11 +610,19 @@ def main():
     for sub in ("data/%s/raw" % args.slug, "data/%s/processed" % args.slug, "outputs/%s" % args.slug):
         w.mkdir(sub)
     pages = root / "app" / "pages"
-    existing = sorted(pages.glob(f"*_{args.name.replace(' ', '_')}_Heatmap.py"))
+    scope = load_station_scope(root)
+    # A re-run finds its page BY SLUG, the same test the live table applies, so
+    # a page renamed by hand before this fix is still found rather than doubled.
+    existing = sorted(p for p in pages.glob("*_Heatmap.py")
+                      if scope.slug(f"pages/{p.name}") == args.slug)
     if existing and not args.force:
         page_rel = f"pages/{existing[0].name}"   # re-run: keep the page already there
     else:
-        page_rel = f"pages/{next_page_number(pages)}_{args.name.replace(' ', '_')}_Heatmap.py"
+        page_rel = f"pages/{next_page_number(pages)}_{page_stem(args.slug)}_Heatmap.py"
+    if scope.slug(page_rel) != args.slug:
+        sys.exit(f"refusing: {page_rel} resolves to outputs/{scope.slug(page_rel)}/ "
+                 f"but this city's outputs are outputs/{args.slug}/. The live "
+                 f"station table would show an empty row. See page_stem().")
     w.write(f"app/{page_rel}", fill(PAGE, common))
     # BEFORE the entry, not after: an unregistered region makes the entry
     # unimportable, and refusing while nothing has been written to cities.py
