@@ -219,6 +219,23 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Paris's two owner calls settled, and commune-only costs it no transit system
 
+- **Accepted Licence Mobilités' revocability, and decided the response in
+  advance: if the grant lapses, Paris is ARCHIVED rather than deleted.** Art.
+  11.1 terminates *de plein droit, sans préavis* on breach, which makes Paris
+  the first city here whose licence can end without anyone saying so - CC BY,
+  Licence Ouverte, the PSI licences and ODbL are all perpetual grants. Owner's
+  call: build it. The response is the same action the standing removal
+  commitment already promises, taken as a **third trigger** beside the two it
+  carries (a publisher asking, 2026-09-21's unresolved-position rule): **the
+  page comes off the site and the entry out of `app/cities.py`, while the
+  pipeline, the brief and this record stay in the repository.** A city coming
+  DOWN is not a city being DELETED, and the build stays reproducible if the
+  position reverses. The rejected alternative was declining Paris entirely,
+  which would have forfeited the only national register in the screen that buys
+  six cities in order to avoid a risk answerable by unpublishing one page.
+  Recorded in `docs/data_sources.md` under the removal commitment, so it sits
+  with the other two triggers rather than beside them.
+
 - **Paris is scoped COMMUNE-ONLY, and the decision is a measurement rather than
   a default.** Measured from IDFM's own GTFS against France's own commune
   contour (`geo.api.gouv.fr/communes/75056`, 105.4 km², matching Paris's ~105):
