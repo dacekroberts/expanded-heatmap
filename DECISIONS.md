@@ -993,6 +993,49 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Discarded Tel Aviv on TERMS rather than on data, by owner decision, and
+  the distinction is the whole entry.** Its measurement is the strongest of
+  any unbuilt city in this screen - **22,168+ licensed businesses** carrying
+  activity in plain Hebrew *and* a numeric licensing code, location as street
+  plus point geometry in **EPSG:2039, already projected in metres**, refreshed
+  within two days of being found. Nothing about the data disqualifies it.
+  **The municipal Terms of Use do**: no copying, distributing, publishing or
+  storing; **no using the content to create a database**; extending to other
+  websites and explicitly to **non-commercial** use; and requiring **explicit
+  prior written consent**, with the open-data portal's own footer reading
+  *all rights reserved*. Touched `docs/city_master_list.md`,
+  `docs/gated_access.md`.
+
+- **The owner's reasoning, recorded because it is a reusable rule rather than
+  a one-off call: a written request made IN ADVANCE and AGAINST explicit
+  restrictive clauses is not worth the effort.** The distinction from
+  Philadelphia is the direction of travel. Philadelphia is **already built and
+  published** on a disclosed reasoned position, so its outstanding request is
+  a defence of work that exists and comes down if refused. Tel Aviv would have
+  been **asking permission before doing anything**, against terms that
+  prohibit the exact use in writing - a low-probability ask whose success is a
+  precondition for starting rather than for continuing. **Effort spent
+  there buys nothing unless it succeeds**, where the same effort spent on
+  Dublin or Prague buys a city outright.
+
+- **Band B closed: its one member is gone and the band's premise no longer
+  fits it.** Band B held cities whose blocker was **answerable at a desk**.
+  Tel Aviv's desk work was done - the licence was read - and the answer was a
+  prohibition, which is not a desk problem. A band whose last city has moved
+  past its own definition should close rather than be re-captioned around the
+  occupant, which is the same reasoning that closed Band D when its four
+  probes were run. Counts: **A4 B0 C8 D1 E12 F2 G3 = 30**, and Discarded
+  rises to 28.
+
+- **Kept the full Tel Aviv write-up under the closed band rather than
+  deleting it with the city.** The measurement was the expensive part and it
+  stands regardless of the verdict: if the terms ever change, or if a reading
+  of Israeli open-data law turns up the equivalent of New York's Local Law 11,
+  **nothing needs re-probing except the terms themselves**. Discarding the
+  evidence along with the candidate would have thrown away the only part that
+  is still true.
+
+
 - **Prague PASSES, on a bulk register nobody had looked for, and it is
   SIRENE's shape.** The blocker had been "no activity anywhere", established
   against ROS and ARES. Both were the wrong files. The Statistical Office

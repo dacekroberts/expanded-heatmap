@@ -46,7 +46,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 31
+## Candidates — 30
 
 Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 **Eight cities moved to discarded on measurement** and **two were upgraded**.
@@ -74,13 +74,13 @@ waiting on a licence read, which conflated *we have not looked yet* with
 | Band | What these cities ARE | Cities |
 |---|---|---|
 | 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates present, rail answered | **4** |
-| 🔵 **B** | **Awaiting permission.** The data is excellent and the terms forbid it; the remedy is a letter, not a probe | **1** |
+| 🔵 ~~**B**~~ | ~~Awaiting permission~~ — ✗ **CLOSED 2026-09-22.** Its one city was discarded: the data was excellent, the terms forbade it, and the letter was judged not worth writing | **0** |
 | 🟡 **C** | **Business leg done; coordinates are the only work**, and the route is known and cheap | **8** |
 | 🟤 **D** | **Coordinates *and* unfinished screening** — more than one thing still open | **1** |
 | 🟠 **E** | **Geocoding at national scale.** The address work is a project, justified only by reuse across many cities | **12** |
 | 🟣 **F** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **2** |
 | 🔴 **G** | **Access blocked.** The register exists and is queryable; we cannot reach it in bulk | **3** |
-| *Discarded* | Measured negative, evidence named | *27* |
+| *Discarded* | Measured negative, evidence named | *28* |
 
 **Re-banded 2026-09-22 so each caption describes what its cities ARE**, not
 how they were found. The previous Band C had grown to 21 cities whose only
@@ -159,111 +159,6 @@ So the next *unstarted* city is the question.
 **Barcelona** is the obvious answer — same country, brief done, licence read,
 and only owner decisions left. After that the screen has no city whose
 "what remains" column is empty.
-
-## 🔵 Band B — awaiting permission (1 city)
-
-**Nothing here needs another probe** — but as of 2026-09-22 the single
-city in this band is held by something heavier than desk work. Tel Aviv's
-licence was **read**, and it is a prohibition rather than the silence
-"unread" implied. **The remedy is a written request to the Municipality**, so
-this band's one member now overlaps `docs/gated_access.md`. If the answer is
-no, Tel Aviv is a discard rather than a build.
-
-**Stockholm and Zurich left this band on 2026-09-22** for the new Band E,
-once enumeration confirmed both are one-bucket. What holds them is not a
-question about their data — it is a judgement about the product.
-
-**▲▲ Tel Aviv** 🇮🇱 — **promoted from Band D-b on 2026-09-22, and it is the
-strongest unbuilt result outside Band A.** It had been carried as
-*unreachable*: `opendata.tel-aviv.gov.il` and `www.tel-aviv.gov.il` both
-return **HTTP 472**, Imperva's block code, and an earlier pass recorded the
-host printing our own IP back — the one unambiguous IP-level refusal in this
-project.
-
-**The portal was never the only host.** `gisn.tel-aviv.gov.il` answers us
-normally and serves `IView2`, the city's public map viewer — **254 layers**,
-no key, no account. Third city in one day where the portal was walled and the
-GIS service host was not.
-
-| Layer | Rows | |
-|---|---|---|
-| **[964] `מאגר עסקים ברשיון או בהיתר`** | **22,176** | businesses holding a licence or permit — **the candidate** |
-| [925] `עסקים` | **37,392** | businesses, with street + house number and floor area |
-| [433] `רישיונות בביצוע` | 2,466 | licences in progress |
-| [679] `מתחמי רישוי עסקים` | 29 | licensing zones (polygons) |
-
-**Both halves of the location/activity split are present**, which is what
-disqualified Tallinn, Colombia and Jakarta:
-
-- **Activity** — `t_hesber_mahut_esek` in plain Hebrew (*grocery*, *building
-  materials and paints*, *baking powder and pudding*) **plus** `mahuiot`,
-  the numeric licensing-item code (406300, 407202, 1007200…).
-- **Location** — `shem_rechov` (street), `ms_koma` (floor), and **point
-  geometry in `wkid=2039`, Israeli TM — already projected in metres**, so
-  no reprojection guesswork and no EPSG:4326 buffering trap.
-- **Freshness** — `date_import` reads **20/09/2026**, two days old.
-
-**Two questions, and both are owner decisions rather than probes:**
-
-1. **Which business layer, and a privacy check.** [925] is larger (37,392)
-   but carries **`shem_machzik_rashi` — "name of main holder"**, which is
-   squarely the *registrant's own name* category this project's invariant
-   excludes. [964] carries `t_shem_esek`, a **trade name**, which is the
-   safe field. Recommendation: **build on [964]** and treat [925] as a
-   cross-check only. `check_personal_exposure.py` must run either way.
-2. **Licence — READ 2026-09-22, and it is the opposite of what "unread"
-   suggested.** This was recorded as a gap to fill. It is filled, and what
-   was behind it is a **prohibition**, not a silence.
-
-   Read from the Internet Archive, because every page that carries terms is
-   on the 472-blocked host — the same route that read Barcelona's and
-   Sevilla's licences.
-
-   | Source | What it says |
-   |---|---|
-   | **Municipal Terms of Use** (`/About/Pages/TermsofService.aspx`, captured 2026-04-21) | *"**אין להעתיק, לשחזר, לשנות, לעבד… להפיץ, לשכפל… לפרסם ו/או לאחסן את תוכן האתר**"* — do not copy, reproduce, modify, process, distribute, duplicate, publish and/or store the site's content |
-   | The same document | *"**אין להשתמש בתוכן האתר ליצירת מאגר מידע ו/או לקט**"* — **do not use the content to create a database or compilation** |
-   | The same document | forbids use on **other websites**, for any purpose, ***בין מסחרית ובין שאינה מסחרית*** — whether commercial or non-commercial — **without explicit prior written consent** |
-   | Its definition of *"contents"* | explicitly includes **`מאגר נתונים`** — a database |
-   | **`opendata.tel-aviv.gov.il`** footer (captured 2019-10-14) | ***כל הזכויות שמורות לעיריית תל-אביב-יפו*** — **All rights reserved** |
-   | `data.gov.il` | Tel Aviv is **not** among its four municipal publishers — nothing to inherit |
-   | ArcGIS server root, `/rest/info`, service | **no `licenseInfo`, no `copyrightText`** at any level |
-
-   **The counter-reading, stated rather than resolved.** The Terms are titled
-   *terms of use of the **website***, say *"תוכן האתר"* throughout, and the
-   data sits on a **different host** (`gisn.tel-aviv.gov.il`). That is the
-   **New York** situation from `read-licence`: an "All Rights Reserved"
-   footer covering site content while the data itself was unrestricted.
-
-   **But New York had an affirmative law — Local Law 11 of 2012 — forbidding
-   the City to attach restrictions to its open data. Nothing equivalent is
-   established for Tel Aviv**, the Terms explicitly name databases, and the
-   open-data portal **asserts** rights rather than granting them. On the
-   evidence the restrictive reading is materially stronger, and
-   `read-licence` step 8 forbids resolving it in this project's favour.
-
-   ⛔ **So Tel Aviv is not buildable on what is known.** The remedy is not
-   more reading — it is **explicit prior written consent from the
-   Municipality**, which the Terms name as the route. That is the
-   **Philadelphia shape**, with one difference that matters: Philadelphia was
-   already built and stands on a disclosed reasoned position, while Tel Aviv
-   **has not been built and should not be** until permission exists. Tracked
-   as `docs/gated_access.md` item 8.
-
-**Rail is present but needs a scope decision, not a probe.** The city
-publishes its own: Red Line stations **12**, Green **33**, Purple **19**,
-with alignments. **Green and Purple are still under construction** — drawing
-them would map lines that carry no passengers, the inverse of the
-Guadalajara problem. Red is the operating line, and its 12 stations are the
-in-city segment of a 34-station route that runs to Petah Tikva and Bat Yam,
-so a boundary decision is needed too.
-
-▼ **Valencia, Bilbao and Málaga left this band on 2026-09-22** — all three
-probed, all three measured negative, all three now in *Discarded*. The
-reasoning that put them here was *"two of the three Spanish cities probed have
-had a register, which raises the prior sharply."* **The prior was wrong.**
-Madrid and Barcelona are the exceptions in Spain, not the rule — see
-"Spain is a two-city country" below.
 
 ## 🟡 Band C — the business leg is done; coordinates are the only work, and the route is known (8 cities)
 
@@ -549,6 +444,109 @@ own file carries them and would improve the filter further.
 
 ## ✗ Closed bands — kept in full as evidence, not as candidates
 
+### Former Band B — ✗ CLOSED (Tel Aviv, discarded on terms)
+
+**Band B held cities whose blocker was answerable at a desk.** Its last
+member's desk work was done — the licence was read — and the answer was a
+prohibition, which is not a desk problem. **The owner's call, 2026-09-22: a
+written request made in advance and against explicit restrictive clauses is
+not worth the effort.** That is a judgement about cost and likelihood, not
+about the data, and the full measurement is kept below precisely so the
+distinction survives.
+
+**▲▲ Tel Aviv** 🇮🇱 — **promoted from Band D-b on 2026-09-22, and it is the
+strongest unbuilt result outside Band A.** It had been carried as
+*unreachable*: `opendata.tel-aviv.gov.il` and `www.tel-aviv.gov.il` both
+return **HTTP 472**, Imperva's block code, and an earlier pass recorded the
+host printing our own IP back — the one unambiguous IP-level refusal in this
+project.
+
+**The portal was never the only host.** `gisn.tel-aviv.gov.il` answers us
+normally and serves `IView2`, the city's public map viewer — **254 layers**,
+no key, no account. Third city in one day where the portal was walled and the
+GIS service host was not.
+
+| Layer | Rows | |
+|---|---|---|
+| **[964] `מאגר עסקים ברשיון או בהיתר`** | **22,176** | businesses holding a licence or permit — **the candidate** |
+| [925] `עסקים` | **37,392** | businesses, with street + house number and floor area |
+| [433] `רישיונות בביצוע` | 2,466 | licences in progress |
+| [679] `מתחמי רישוי עסקים` | 29 | licensing zones (polygons) |
+
+**Both halves of the location/activity split are present**, which is what
+disqualified Tallinn, Colombia and Jakarta:
+
+- **Activity** — `t_hesber_mahut_esek` in plain Hebrew (*grocery*, *building
+  materials and paints*, *baking powder and pudding*) **plus** `mahuiot`,
+  the numeric licensing-item code (406300, 407202, 1007200…).
+- **Location** — `shem_rechov` (street), `ms_koma` (floor), and **point
+  geometry in `wkid=2039`, Israeli TM — already projected in metres**, so
+  no reprojection guesswork and no EPSG:4326 buffering trap.
+- **Freshness** — `date_import` reads **20/09/2026**, two days old.
+
+**Two questions, and both are owner decisions rather than probes:**
+
+1. **Which business layer, and a privacy check.** [925] is larger (37,392)
+   but carries **`shem_machzik_rashi` — "name of main holder"**, which is
+   squarely the *registrant's own name* category this project's invariant
+   excludes. [964] carries `t_shem_esek`, a **trade name**, which is the
+   safe field. Recommendation: **build on [964]** and treat [925] as a
+   cross-check only. `check_personal_exposure.py` must run either way.
+2. **Licence — READ 2026-09-22, and it is the opposite of what "unread"
+   suggested.** This was recorded as a gap to fill. It is filled, and what
+   was behind it is a **prohibition**, not a silence.
+
+   Read from the Internet Archive, because every page that carries terms is
+   on the 472-blocked host — the same route that read Barcelona's and
+   Sevilla's licences.
+
+   | Source | What it says |
+   |---|---|
+   | **Municipal Terms of Use** (`/About/Pages/TermsofService.aspx`, captured 2026-04-21) | *"**אין להעתיק, לשחזר, לשנות, לעבד… להפיץ, לשכפל… לפרסם ו/או לאחסן את תוכן האתר**"* — do not copy, reproduce, modify, process, distribute, duplicate, publish and/or store the site's content |
+   | The same document | *"**אין להשתמש בתוכן האתר ליצירת מאגר מידע ו/או לקט**"* — **do not use the content to create a database or compilation** |
+   | The same document | forbids use on **other websites**, for any purpose, ***בין מסחרית ובין שאינה מסחרית*** — whether commercial or non-commercial — **without explicit prior written consent** |
+   | Its definition of *"contents"* | explicitly includes **`מאגר נתונים`** — a database |
+   | **`opendata.tel-aviv.gov.il`** footer (captured 2019-10-14) | ***כל הזכויות שמורות לעיריית תל-אביב-יפו*** — **All rights reserved** |
+   | `data.gov.il` | Tel Aviv is **not** among its four municipal publishers — nothing to inherit |
+   | ArcGIS server root, `/rest/info`, service | **no `licenseInfo`, no `copyrightText`** at any level |
+
+   **The counter-reading, stated rather than resolved.** The Terms are titled
+   *terms of use of the **website***, say *"תוכן האתר"* throughout, and the
+   data sits on a **different host** (`gisn.tel-aviv.gov.il`). That is the
+   **New York** situation from `read-licence`: an "All Rights Reserved"
+   footer covering site content while the data itself was unrestricted.
+
+   **But New York had an affirmative law — Local Law 11 of 2012 — forbidding
+   the City to attach restrictions to its open data. Nothing equivalent is
+   established for Tel Aviv**, the Terms explicitly name databases, and the
+   open-data portal **asserts** rights rather than granting them. On the
+   evidence the restrictive reading is materially stronger, and
+   `read-licence` step 8 forbids resolving it in this project's favour.
+
+   ⛔ **So Tel Aviv is not buildable on what is known.** The remedy is not
+   more reading — it is **explicit prior written consent from the
+   Municipality**, which the Terms name as the route. That is the
+   **Philadelphia shape**, with one difference that matters: Philadelphia was
+   already built and stands on a disclosed reasoned position, while Tel Aviv
+   **has not been built and should not be** until permission exists. Tracked
+   as `docs/gated_access.md` item 8.
+
+**Rail is present but needs a scope decision, not a probe.** The city
+publishes its own: Red Line stations **12**, Green **33**, Purple **19**,
+with alignments. **Green and Purple are still under construction** — drawing
+them would map lines that carry no passengers, the inverse of the
+Guadalajara problem. Red is the operating line, and its 12 stations are the
+in-city segment of a 34-station route that runs to Petah Tikva and Bat Yam,
+so a boundary decision is needed too.
+
+▼ **Valencia, Bilbao and Málaga left this band on 2026-09-22** — all three
+probed, all three measured negative, all three now in *Discarded*. The
+reasoning that put them here was *"two of the three Spanish cities probed have
+had a register, which raises the prior sharply."* **The prior was wrong.**
+Madrid and Barcelona are the exceptions in Spain, not the rule — see
+"Spain is a two-city country" below.
+
+
 **These two were sub-tiers of the former Band D**, which dissolved on
 2026-09-22 when its live halves became Bands D and E. Both closed the same
 day, and their contents are the evidence behind three discards — **Tallinn,
@@ -765,10 +763,11 @@ took was a different *host* — `services1.arcgis.com`, reachable all along.
 The rule held and protected the city from a premature discard; the cost
 estimate attached to it was guesswork. **See the resolution above.**
 
-## DISCARDED — 27 cities, each naming its evidence
+## DISCARDED — 28 cities, each naming its evidence
 
 | City | Why |
 |---|---|
+| **Tel Aviv** 🇮🇱 | **DISCARDED ON TERMS, NOT ON DATA — owner's decision 2026-09-22.** The data is the strongest of any unbuilt city: **22,176 licensed businesses** with activity *and* location, **EPSG:2039 already in metres**, refreshed within two days. **The municipal Terms forbid it** — no copying, distributing or publishing, **no using the content to create a database**, extending to other websites and to non-commercial use, and requiring **explicit prior written consent**; the open-data portal's footer reads *all rights reserved*. The only remedy was a written request, made **in advance and against explicit prohibitions** — judged not worth the effort against its likelihood. **Not a data negative**, and the full measurement is retained below |
 | **Tallinn** 🇪🇪 | **MTR downloaded whole — 102 MB, 56,401 undertakings, 100,431 licences — and its complete tag census is 17 element names, NONE of which is a place.** Full activity classification, zero location: the Colombia-RUES shape. Composition fails too — the largest category is 25,130 service-worker cards |
 | **Sofia** 🇧🇬 | **11,635 Bulgarian datasets enumerated via `data.europa.eu`'s SPARQL endpoint, around a 403 aimed at us.** 141 municipal premises registers exist nationally; **Sofia's 76 datasets include none.** Its registers are all small towns — Sofia is Bulgaria's only metro city |
 | **Sevilla** 🇪🇸 | **1,260 public ArcGIS items / 413 Feature Services enumerated** from org `hcmP7kr0Cx3AcTJk` after the dead portal's last Archive capture named its successor. **Rail is solved** (`METRO_Estacion` 21, `METRO_Linea` 20, no account). **No premises register**: `Locales` is 150 *vacant municipally-owned units*, the rest are property holdings and facility layers |
