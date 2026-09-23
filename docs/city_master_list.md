@@ -46,7 +46,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 33
+## Candidates — 31
 
 Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 **Eight cities moved to discarded on measurement** and **two were upgraded**.
@@ -61,7 +61,7 @@ asked properly* in every single case.
 
 | Band | What is stopping it | Cities | Change |
 |---|---|---|---|
-| **A** | Nothing. Screening complete | **5** | ✅ −2 built; Paris out then back, **measured both ways** |
+| **A** | Nothing. Screening complete | **3** | ✅ **−4 built** — Madrid and Barcelona joined Mexico's two; Paris out then back, **measured both ways** |
 | **B** | One narrow question each | **2** | ▲ **+Tel Aviv**, the strongest unbuilt result outside Band A |
 | **C** | A geocoding leg — build work, not screening | **18** | ▲ **+Bucharest** |
 | **D** | Four sub-tiers, see below | **8** | ▼ −6 — **Sofia, Sevilla and Tallinn measured out**; Tel Aviv promoted; D-c and D-d both closed |
@@ -83,7 +83,7 @@ results in the sweep.
 
 ---
 
-## Band A — screening COMPLETE (5 remaining + 2 ✅ BUILT)
+## Band A — screening COMPLETE (3 remaining + 4 ✅ BUILT)
 
 Ordered by how little stands in the way. **Built cities keep their row**,
 struck through and marked ✅, so the band still shows what screening promised
@@ -92,12 +92,12 @@ and whether it held.
 | # | City | Business leg | What remains |
 |---|---|---|---|
 | ✅ | ~~**Guadalajara**~~ 🇲🇽 | DENUE, SCIAN = NAICS, INEGI licence cleared | **BUILT 2026-09-22** — `pages/16_Guadalajara_Heatmap.py`, region *Mexico*. Screening said "nothing outstanding" and that held |
-| ▶ | **Madrid** 🇪🇸 **PIPELINE DONE, not yet wired** | **53,355 clean storefront rows** — retail 36,224 · food 18,194 · personal 9,974 (from 225,660 join rows → 159,787 open → filtered). Three-level taxonomy on `division`, EPSG:25830, CC BY 4.0 | **`outputs/madrid/` rendered.** Rail from **CRTM's feature layers**: 13 lines, 293 station-line records, 49 stations excluded, 0 filter disagreements. Remaining: the app wiring |
+| ✅ | ~~**Madrid**~~ 🇪🇸 | **53,355 clean storefront rows** — retail 36,224 · food 18,194 · personal 9,974 (from 225,660 join rows → 159,787 open → filtered). Three-level taxonomy on `division`, EPSG:25830, CC BY 4.0 | **BUILT 2026-09-22** — `pages/17_Madrid_Heatmap.py`, region *Spain*. Rail from **CRTM's feature layers**: 13 lines, 293 station-line records, 49 stations excluded, 0 filter disagreements. Screening said the rail leg was the open question and CRTM answered it |
 | 2 | **Seoul** 🇰🇷 | 197,276 active premises over 8 datasets, EPSG:5174, status field, KOGL Type 1 | Build work — partial geocoding for 일반음식점 (90.7%), Korean-aware `check_personal_exposure.py` |
 | 3 | **Milan** 🇮🇹 | 28,131 premises 99.1% coords, `insegna`, `codice_ateco`, CC-BY. All three buckets confirmed | Step 0 schemas for the two newly found layers |
 | ✅ | ~~**Mexico City**~~ 🇲🇽 | Same DENUE. **Rail from OSM** — 195/195 stops exact, 6,468 geometry points | **BUILT 2026-09-22** — `pages/15_Mexico_City_Heatmap.py`. The ODbL share-alike decision was taken during the build; see `DECISIONS.md` |
 | 4 | **Paris** 🇫🇷 ▲ | SIRENE, établissement-level, **Licence Ouverte 2.0**, and **99.96% already geolocated** — 148,576 of 148,633. Storefront filter **validated against OpenStreetMap**: 50,156 rows vs OSM's 54,198, and on one class 10,595 vs 10,642 | **The `check_personal_exposure.py` run is load-bearing here**, not a formality — the filter removes home registrations by proxy, not by proof |
-| 5 | **Barcelona** 🇪🇸 | **58,908 active premises** (2022 census — the 2024 one is geographically incomplete), 0.00% bad coordinates, CC-BY-4.0. Build brief, 9/9 | **Licence now READ** (via the Internet Archive; the live page is CAPTCHA-walled). Two owner decisions remain: **which census year**, and whether trams are in scope. Plus a duty to **notify the Council** of the project |
+| ✅ | ~~**Barcelona**~~ 🇪🇸 | **58,908 active premises** (2022 census — the 2024 one is geographically incomplete), 0.00% bad coordinates, CC-BY-4.0. Build brief, 9/9 | **BUILT 2026-09-22** — `pages/18_Barcelona_Heatmap.py`. All four owner decisions were settled before the build: census year **2022**, drawn scope **16 lines** (14 metro refs + funiculars FM and FV, decided on the operators' own `network` tag), mall and market interiors **kept**, and the brief's OSM breakdown corrected to tram 20 / funicular 6. ⚠️ **The duty to notify the Council is still OUTSTANDING** — see `docs/gated_access.md` item 2 |
 
 ⇄ **Paris left Band A and came back the same day, measured both times.**
 The demotion was right on the evidence then available (86.6% of the bucket are
@@ -752,14 +752,20 @@ nothing and the argument collapses. **Whoever builds the second geocoding city
 should lift the common parts into `pipeline/` rather than copying Toronto's
 file** — that is the decision that makes this ordering pay.
 
-## Tier 4 — one probe decides the country (4 countries, 4 cities)
+## Tier 4 — all four probed 2026-09-22 (4 countries, 4 cities)
 
-| Country | City | Missing link |
+| Country | City | State after the probe |
 |---|---|---|
-| 🇨🇿 **Czechia** | Prague | **Confirm `rzp.cz` is premises-shaped.** It is the *trade-licence* register, not ARES the company register, so the prior is good. **Best single probe left** |
-| 🇮🇪 **Ireland** | Dublin | `valoff.ie` was down on both hosts twice. **Retry, then ask whether the rateable register carries a use category** — the UK's NNDR did not, and that killed the UK |
-| 🇨🇭 **Switzerland** | Zurich | **A second bucket.** Food is confirmed with GeoJSON; retail and personal services were not found, and the national STATENT is aggregate |
-| 🇸🇬 **Singapore** | Singapore | **One controlled query.** Its API answers but the search is loose. Suspected registered-office shaped, which would be fatal |
+| 🇨🇿 **Czechia** ▲ | Prague | **Still the best probe left, and both its hosts had MOVED.** `rzp.cz` is 000 but **`www.rzp.cz` redirects to `rzp.gov.cz`**, which answers; `opendata.praha.eu` redirects to **`lkod.cz/catalog/praha`**. Two successor moves nobody had followed. **`data.gov.cz/sparql` answers SPARQL** — the Bulgarian technique applies directly. Next: enumerate for *provozovny* (premises) |
+| 🇮🇪 **Ireland** ⚠️ | Dublin | **`valoff.ie` is not down — it is RETIRED.** Its 000 was read as an outage and retried twice. `data.gov.ie` catalogues a **"Valuation Office API"**, licence **CC BY 4.0**, whose single resource is `https://tailte.ie/home/api/` — **Tailte Éireann absorbed the Valuation Office.** `tailte.ie` answers 200. The recorded question is unchanged and still decides it: does the rateable register carry a **use category**? The UK's NNDR did not, and that killed the UK |
+| 🇨🇭 **Switzerland** ✗ | Zurich | **The second bucket is MEASURED ABSENT.** Control passes (`zzqqxxnonsense` → 0). Every commerce term returns noise or surveys: `detailhandel` **1** (a traffic count), `verkauf` 12 (tram ticket offices, apartment prices), `laden` 31 (a farm shop, population surveys), `gewerbe` 28 (zoning land, 3D roof models), `firmen` 16 — all **Firmenbefragung**, company *surveys* 2005–2025. Only `Gastwirtschaftsbetriebe` is real. **Zurich is a one-bucket food city — the Stockholm shape**, and it inherits Stockholm's open scope question rather than a data one |
+| 🇸🇬 **Singapore** ⚠️ | Singapore | **The recorded description understated it: the search is not loose, it is INERT.** `zzqqxxnonsense` returns the **identical 10 datasets** as `licence`, `food establishment` and `business` — the query parameter is ignored entirely, and only the nonsense control tells that apart from a loose search. The catalogue is **4,628 datasets over 463 pages** and does page properly, so the route is **enumeration, not search** — the Montréal lesson, forced. Not yet done |
+
+**Three of today's four probes hit the same thing: a host that had moved.**
+`rzp.cz` → `rzp.gov.cz`, `opendata.praha.eu` → `lkod.cz`, `valoff.ie` →
+`tailte.ie` — on top of Sevilla's `datosabiertos.sevilla.org` → an ArcGIS org.
+**A 000 or a 404 is a question about the address, not an answer about the
+data**, and this project has now spent retries on four corpses in one day.
 
 ## Tier 5 — 🇸🇪 Sweden: screening done, two owner decisions (1 country, 1–2 cities)
 

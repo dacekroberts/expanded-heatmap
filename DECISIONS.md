@@ -893,6 +893,55 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Probed all four Tier 4 countries, and three of the four turned out to be
+  chasing hosts that had MOVED.** `rzp.cz` answers 000 while `www.rzp.cz`
+  redirects to **`rzp.gov.cz`**, which is live; `opendata.praha.eu` redirects
+  to **`lkod.cz/catalog/praha`**; and `valoff.ie`, recorded as "down on both
+  hosts twice", is not down but **retired** - `data.gov.ie` catalogues a
+  "Valuation Office API" whose single resource is `https://tailte.ie/home/api/`,
+  because **Tailte Eireann absorbed the Valuation Office**. With Sevilla's
+  `datosabiertos.sevilla.org` that is four dead addresses retried in one day.
+  **A 000 or a 404 is a question about the address, not an answer about the
+  data.** Touched `docs/city_master_list.md`.
+
+- **Zurich's second bucket is measured ABSENT, so Switzerland is a one-bucket
+  country rather than an open question.** The control passes
+  (`zzqqxxnonsense` returns 0), and every commerce term on
+  `data.stadt-zuerich.ch` returns noise or surveys: `detailhandel` **1** and it
+  is a traffic count; `verkauf` 12, tram ticket offices and apartment prices;
+  `laden` 31, a farm shop and population surveys; `gewerbe` 28, zoning land and
+  3D roof models; `firmen` 16, every one a **Firmenbefragung** - a company
+  *survey*, 2005 to 2025. Only `Gastwirtschaftsbetriebe` is a real register.
+  Zurich therefore inherits **Stockholm's scope question, not a data one**:
+  whether a food-only city page belongs in a project whose other cities carry
+  three buckets. Rejected recording this as "needs more searching", because the
+  control makes the absence a measurement.
+
+- **Singapore's API does not have a loose search; it has an INERT one, and
+  only the nonsense control distinguishes those.** The record said "its API
+  answers but the search is loose". Measured: `zzqqxxnonsense`, `licence`,
+  `food establishment` and `business` all return the **identical ten
+  datasets** - the `query` parameter is ignored entirely. A loose search
+  returns too much and can still be narrowed; an ignored one returns the same
+  thing regardless and every conclusion drawn from it is fiction. This is the
+  third silent-ignore of the screen, after `data.europa.eu`'s facets and the
+  servers that return HTTP 200 with unfiltered results. The catalogue is
+  **4,628 datasets across 463 pages** and pages correctly, so the route is
+  enumeration rather than search.
+
+- **Corrected Band A, which still listed Madrid and Barcelona as candidates
+  after both were built.** Verified against the repository rather than the
+  prose: `outputs/madrid/` and `outputs/barcelona/` exist,
+  `app/pages/17_Madrid_Heatmap.py` and `18_Barcelona_Heatmap.py` exist, both
+  have `cities.py` entries and pipeline directories, and the Built header
+  already read 18. Band A had not caught up, so its "5 remaining" did not
+  reconcile with the candidate total. Now **3 remaining + 4 built**, and
+  Candidates drops 33 to 31. Barcelona's row records that all four owner
+  decisions were settled before the build **and that the duty to notify the
+  City Council is still outstanding**, so the build landing does not read as
+  the obligation being discharged.
+
+
 - **Stockholm's licence position moved from "ambiguous, ask the publisher" to
   SILENT, by doing the reading that should have come first.** The recorded
   position cited `read-licence` step 8 - ambiguous in a way that matters, needs
