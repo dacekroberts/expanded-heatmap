@@ -173,6 +173,52 @@ why `pipeline/stations.py` shares the checks and leaves the collapse per city.
   cross-direction check print "every ref has exactly 2 direction relations"
   over **zero** relations. Overpass hosts also 504 and 429 freely - try several
   before concluding anything, and treat a failure as a fact about that host.
+- **But a 504 is usually YOUR QUERY, not the host.** See the section below
+  before you conclude Overpass is down; the Toulouse build lost ten minutes to
+  exactly that misreading.
+
+## Keeping Overpass cheap, which is how you stop being throttled
+
+Added 2026-09-23 from the Toulouse build. This is the difference between a
+query that answers in seconds and one that 504s on every mirror, and it is
+entirely caller-side.
+
+**`out center` on WAYS is the expensive part.** Overpass has to resolve every
+way's member nodes to compute a centroid, so a combined node+way query costs
+far more than the node half alone. Measured that day on the Toulouse commune
+bbox, same tag, same hosts, minutes apart:
+
+| Query | Result |
+|---|---|
+| `node[...]; way[...];` + `out center;` | **504** on overpass-api.de, **read timeout** on kumi.systems |
+| `node[...];` + `out body;` | **answered in seconds**, first host tried |
+
+Nothing about the hosts changed. The query did.
+
+**So, in order:**
+
+1. **Ask for nodes first** - `node["amenity"="fast_food"](bbox); out body;`
+   For POI counting that is usually 90%+ of the answer: restaurant nodes were
+   **827 of the 889** node+way total in Toulouse, 93.0%.
+2. **Add ways as a SECOND query** only if the node answer is not enough, and
+   record which shape produced each number. **Never compare a node-only count
+   with a node+way count** - that measures the query, not the city. Toulouse's
+   restaurant control reads 1.28x one way and 1.38x the other, and the
+   difference is entirely the query shape.
+3. **Keep the in-query `[timeout:N]` low** - 90 is plenty for a city bbox. The
+   HTTP timeout only caps how long *you* wait; the in-query one is what lets
+   Overpass abort and tell you, via a `remark`, that it gave up.
+4. **Set a total deadline and print every attempt.** `pipeline/osm.py`'s
+   `fetch()` now takes `deadline` (default 900s) and prints each host it
+   tries, because the old shape could spend `retries x hosts x timeout` in
+   complete silence - which is indistinguishable from a hang, and was read as
+   one.
+
+⚠ **A bare client signature draws HTTP 406 from `overpass-api.de`.** That is
+`add-country`'s client-signature refusal, not an IP block, and the fix is a
+real `User-Agent`. `pipeline/osm.py` and `scripts/brief_check.py` both send
+one; an ad-hoc probe written with plain `requests` does not, and that is how
+the Toulouse probe earned its first 406 before it had run a single real query.
 
 ## Licence
 
@@ -194,5 +240,9 @@ licence, not an agency document that can be revoked without notice.
       operator publishes them (gate 3), and gaps named rather than filled in
 - [ ] Every name search bounded by a bbox; same-name boundaries never resolved
       by size
+- [ ] Queries written **nodes-first** (`out body`), ways added as a separate
+      query only if needed, and no count compared across the two shapes
+- [ ] A real `User-Agent` sent, a total deadline set, and every attempt printed
+      - a 504 investigated as query cost before it is called an outage
 - [ ] One alignment drawn per line; spacing gate run and its median sane
 - [ ] Attribution scope updated in `docs/data_sources.md`

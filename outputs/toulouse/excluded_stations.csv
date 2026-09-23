@@ -1,0 +1,15 @@
+stop_id,station,lines,reason,latitude,longitude
+stop_area:SA_636,Andromède-Lycée,T1,outside commune 31555,43.65459012335365,1.3744712158043382
+stop_area:SA_624,Aéroconstellation,T1,outside commune 31555,43.663265147892105,1.3627633843400087
+stop_area:SA_1068,Balma-Gramont,A,outside commune 31555,43.62852141490813,1.482416884052139
+stop_area:SA_2525,Beauzelle - Aeroscopia,T1,outside commune 31555,43.660208582078944,1.3694664787507678
+stop_area:SA_573,Grand Noble,T1,outside commune 31555,43.64474280986382,1.3774670427378275
+stop_area:SA_1531,Guyenne-Berry,T1,outside commune 31555,43.63096998865941,1.3915326907169225
+stop_area:SA_2334,MEETT,T1,outside commune 31555,43.66758754819681,1.3597084061806175
+stop_area:SA_1370,Odyssud-Ritouret,T1,outside commune 31555,43.636248677114565,1.3853206785552512
+stop_area:SA_1229,Pasteur-Mairie de Blagnac,T1,outside commune 31555,43.634267514161905,1.3912045320081192
+stop_area:SA_1418,Patinoire-Barradels,T1,outside commune 31555,43.640398335356224,1.3823808579247912
+stop_area:SA_138,Place Georges Brassens,T1,outside commune 31555,43.648537473434594,1.3760724593766485
+stop_area:SA_447,Place du Relais,T1,outside commune 31555,43.63713657562058,1.3902679172957384
+stop_area:SA_213,Ramonville,B,outside commune 31555,43.555901353768704,1.4771491174049718
+stop_area:SA_730,Servanty Airbus,T1,outside commune 31555,43.62547045463758,1.3934838382333206

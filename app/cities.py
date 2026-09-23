@@ -544,6 +544,34 @@ CITIES = [
         # built for exactly this and which still fails if the geometry moves.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Toulouse",
+        "lat": 43.6047,
+        "lon": 1.4442,
+        "page": "pages/23_Toulouse_Heatmap.py",
+        "blurb": "Tisséo Métro A–B, Tramway T1 and the Téléo cable car",
+        "region": "Europe",
+        "in_default_view": False,
+        # ANCHORED "end" SO THE LABEL RUNS WEST, and the check chose it.
+        # Toulouse's width was measured at 60.4 px in a real browser with
+        # Space Grotesk loaded (six cities already in the table reproduced
+        # exactly, which is what proves the font loaded rather than a
+        # fallback).
+        #
+        # At the scaffold's default ("middle", 0, -22) it collided with
+        # MARSEILLE at 19.5 x 12.5 px in the Europe view at all three widths.
+        # The cause is geometric rather than cosmetic: Toulouse is 43.60 N and
+        # Marseille 43.30 N, so at this scale their labels sit at the same
+        # HEIGHT, and both pointed straight up with the same offset.
+        #
+        # Toulouse is WEST of Marseille (1.44 E against 5.37 E), so running
+        # its label leftward separates them along the axis they actually
+        # differ on instead of fighting for vertical space. Moving it DOWN was
+        # the other option and was rejected: Barcelona sits south at 41.39 N
+        # with its own label pointing up, which is the collision Marseille's
+        # comment records hitting at 38.6 x 12.1 px.
+        "label_offset": ("end", -8, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

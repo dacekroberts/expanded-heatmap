@@ -703,6 +703,33 @@ _NOTICES = [
      "mises à disposition aux conditions de la "
      "[« Licence Mobilités »](https://cloud.fabmob.io/s/CJCEzKosfqqNBEx)",
      True),
+    # TISSEO - Toulouse. ODbL 1.0 via the National Access Point, and the
+    # FIRST sentence here is ODbL 4.3's own notice template with the database
+    # named, so it is verbatim rather than this project's wording.
+    #
+    # ⚠ THE EXISTING OPENSTREETMAP NOTICE DOES NOT DISCHARGE THIS. Both are
+    # ODbL, which is exactly why it is easy to assume one credit covers both -
+    # but 4.3 requires the notice to name WHICH database, and "OpenStreetMap"
+    # does not name Tisséo's. Two ODbL sources need two notices.
+    #
+    # ODbL 4.6 (offer the derivative database, or the method) is satisfied by
+    # the public repository carrying the pipeline and the derived CSVs -
+    # PROVIDED it stays linked from the site, which is the same condition
+    # IDFM's Art. 5.8 already imposes.
+    #
+    # The publisher's own CGU was read 2026-09-23 and adds nothing: no
+    # indemnity, and its marks clause is Opendatasoft's with « les données
+    # publiées sur le DOMAINE » expressly excluded - so naming Tisséo on the
+    # map is not barred. That was the specific risk, since Grand Lyon's
+    # equivalent clause is why Lyon is deferred.
+    ("Tisséo (Toulouse)",
+     "Contains information from Réseau urbain Tisséo, which is made available "
+     "here under the Open Database License (ODbL). Métro, tramway and Téléo "
+     "station locations and line geometry for Toulouse are redrawn from that "
+     "feed; the stations kept, the rings, the categories and the densities "
+     "are this project's own work and are not produced or endorsed by Tisséo "
+     "or Toulouse Métropole.",
+     True),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route
