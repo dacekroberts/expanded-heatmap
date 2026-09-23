@@ -476,6 +476,50 @@ mistakes as confidently as its findings.
   7. Open: whether `navn` is a trade name or a legal name — the question that
      caught Milan and Paris.
 
+- [ ] **Marseille · Toulouse · Lille · Rennes** 🇫🇷 — **NOT
+  brief-ready; country-ready.** No brief file exists for any of them. They
+  inherit France's register, join and privacy handling, but **three things do
+  NOT transfer from Paris.**
+  1. ⚠️ **Their GTFS licences differ from Paris's and from each other.**
+     Paris is `mobility-licence`, read in full. **Marseille and Lille are
+     `lov2`; Toulouse and Rennes are `odc-odbl` — SHARE-ALIKE.** ODbL asks the
+     derivative-database question that Licence Mobilités answered its own way
+     via a published NAP interpretation; **ODbL has no such gloss**, and this
+     project commits `outputs/<city>/`. **Read before building either pair.**
+  2. ⚠️ **Scope does not transfer.** Paris went commune-only on a
+     *measurement* — all 16 métro lines survived the boundary. Nothing
+     guarantees that repeats: **Lille's commune is small against MEL**, whose
+     métro serves Villeneuve-d'Ascq, Roubaix and Tourcoing. One
+     boundary-vs-network measurement each.
+  3. **The NAF catch-all (19.3%) and the 15.5% distance-selling exclusion were
+     measured on PARIS rows only**, and per-city row counts are scaled
+     estimates from a 3.9% sample, not build numbers.
+
+  **Feeds VERIFIED 2026-09-23** — they had been identified, never downloaded:
+
+  | City | Size | `shapes.txt` | `feed_info.txt` | Rail |
+  |---|---|---|---|---|
+  | Marseille | 34.0 MB | ✅ | ✅ end **2026-12-31** | 2 subway, 4 tram, 6 ferry |
+  | Toulouse | 12.0 MB | ✅ | ❌ | 2 subway, 1 tram, **1 gondola** |
+  | **Lille** | 9.2 MB | ❌ **MISSING** | ❌ | 2 subway, 1 tram |
+  | Rennes | 13.4 MB | ✅ | ✅ end **2026-10-18** | 2 subway |
+
+  4. ⚠️ **LILLE HAS NO `shapes.txt`.** Line geometry **cannot be drawn from
+     its feed**, and this project's invariant requires every drawn line to
+     carry real geometry plus a label plus a legend entry. Either reconstruct
+     polylines from stop sequences or take Lille's geometry from **OSM**
+     (`osm-rail`). **Decide before starting Lille** — it is the one follower
+     with a structural rail problem.
+  5. **Marseille and Rennes SELF-ATTEST** (`feed_end_date` 2026-12-31 and
+     2026-10-18). **Toulouse and Lille do not** — same as Paris, so
+     `fetch_sources.py` must record the download date for those two.
+  6. **Toulouse carries `route_type 6`** — an aerial lift, the Téléo cable
+     car. Paris draws a funicular, so a gondola is a **judgment call**, not an
+     automatic include. Marseille's **17 `route_type 2`** are TER regional
+     rail and are excluded by the standing commuter-rail rule.
+  7. **OSM composition validation** — France's is validated on Paris only.
+     It lands on **Marseille**, the first follower.
+
 - [ ] **Göteborg** 🇸🇪 — promoted into Band D 2026-09-23. **One
   measurement away from being comparable to Stockholm.**
   1. ⚠️ **Get `Livsmedelsverksamheter`'s row count.** Its DCAT node exposes

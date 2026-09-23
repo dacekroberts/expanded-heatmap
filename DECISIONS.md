@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**190 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**191 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [The four French followers are country-ready, not brief-ready, and Lille has no line geometry](#2026-09-23---the-four-french-followers-are-country-ready-not-brief-ready-and-lille-has-no-line-geometry)
 - [PLAN.md gains the handoff it was missing, and Paris reverified](#2026-09-23---planmd-gains-the-handoff-it-was-missing-and-paris-reverified)
 - [Paris's brief re-verified against live sources: 7/7 hold](#2026-09-23---pariss-brief-re-verified-against-live-sources-77-hold)
 - [CUZK read: Prague is unblocked, and the "cookie terms" were not only cookie terms](#2026-09-23---cuzk-read-prague-is-unblocked-and-the-cookie-terms-were-not-only-cookie-terms)
@@ -229,6 +230,64 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - The four French followers are country-ready, not brief-ready, and Lille has no line geometry
+
+- **Asked whether the other French cities are brief-ready. They are not, and
+  no brief file exists for any of them.** They inherit the expensive half -
+  one register, one `siret` join, no geocoder, validated commune prefixes,
+  privacy masked upstream - but **three things do not transfer from Paris**,
+  and the first is the one that could change an answer rather than confirm
+  one.
+
+- **Their GTFS licences differ from Paris's AND from each other.** Paris is
+  `mobility-licence`, read in full at the cost of a full agent pass.
+  **Marseille and Lille are `lov2`. Toulouse and Rennes are `odc-odbl` -
+  share-alike.** None of Paris's reading applies to any of them. ODbL asks
+  precisely the derivative-database question that Licence Mobilites answered
+  its own way, via a **published NAP interpretation** that filed this
+  project's shape under "no resharing required"; **ODbL has no such gloss**,
+  and this project commits `outputs/<city>/` to a public repository. An ODbL
+  read is running.
+
+- **Scope does not transfer either, and Paris's own reasoning is why.** Paris
+  went commune-only because **all 16 metro lines survived the boundary** -
+  that was a measurement, not a preference. **Lille's commune is small against
+  the Metropole Europeenne de Lille**, whose metro serves Villeneuve-d'Ascq,
+  Roubaix and Tourcoing. Each follower needs its own boundary-vs-network
+  measurement: the Dublin question, four more times.
+
+- **The four feeds had been IDENTIFIED and never DOWNLOADED, and verifying
+  them found a structural problem.** **Lille's GTFS has NO `shapes.txt`** - so
+  **line geometry cannot be drawn from it at all**, against an invariant that
+  every drawn line carries real geometry plus a permanent label plus a legend
+  entry. Either reconstruct polylines from stop sequences or take Lille's
+  geometry from OSM. **This is the kind of thing that is invisible until the
+  artifact is opened**, which is exactly what `add-country` says about
+  identifying a feed versus reading one.
+
+- **Two of the four self-attest and two do not.** Marseille declares
+  `feed_end_date` **2026-12-31** and Rennes **2026-10-18**; **Toulouse and
+  Lille carry no `feed_info.txt`**, the same gap as Paris, so
+  `fetch_sources.py` must record the download date for those two or staleness
+  is unknowable from the artifact.
+
+- **Two apparent gates were my own truncated URLs, and the error text said
+  so.** Marseille returned **403 "Invalid access key: 60327e505a214c77303f52206f11"**
+  and Toulouse **404 "Unknown image: fc1dda89077cf37e4f7"** - both because an
+  earlier probe printed URLs at 88 characters and the visible prefix was
+  copied. **A 403 that names the key you sent is telling you the key is wrong,
+  not that you are refused**, and a 404 naming the id says the same. With the
+  untruncated `original_url` both return 200. Marseille's `apiKey` is
+  published in the NAP URL and is not a credential gate.
+
+- **Two mode questions surfaced that are judgment calls rather than
+  measurements.** Toulouse carries **`route_type 6`**, an aerial lift - the
+  Teleo cable car - and Paris draws a funicular, so a gondola is not an
+  automatic include or exclude. Marseille carries **17 `route_type 2`** which
+  are TER regional rail and fall under the standing commuter-rail exclusion,
+  plus **6 ferry routes**. Recorded on the PLAN item so neither is discovered
+  mid-build.
 
 ### 2026-09-23 - PLAN.md gains the handoff it was missing, and Paris reverified
 
