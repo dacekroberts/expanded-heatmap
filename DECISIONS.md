@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**223 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**224 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Goteborg's licence is CC0, and it is on the DISTRIBUTION](#2026-09-23---goteborgs-licence-is-cc0-and-it-is-on-the-distribution)
 - [Goteborg unblocked, and it may not be a one-bucket city](#2026-09-23---goteborg-unblocked-and-it-may-not-be-a-one-bucket-city)
 - [Stockholm and Zurich rail counted; Zurich has no metro at all](#2026-09-23---stockholm-and-zurich-rail-counted-zurich-has-no-metro-at-all)
 - [The Danish key stays open until Copenhagen's build starts](#2026-09-23---the-danish-key-stays-open-until-copenhagens-build-starts)
@@ -262,6 +263,32 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Goteborg's licence is CC0, and it is on the DISTRIBUTION
+
+- **`Livsmedelsverksamheter` declares
+  `http://creativecommons.org/publicdomain/zero/1.0/` - CC0 1.0**, the
+  strongest licence any source in this project carries. Read on **the dataset
+  actually being built on**, which matters because the recorded CC ZERO
+  belonged to *"Restauranger med serveringstillstand"* - **a different
+  dataset**. **A licence read on a sibling is not a licence read.**
+
+- **🚨 The licence is on the DISTRIBUTION node, and the DATASET node
+  has none at all.** `store/6/resource/35` ("Foodbusinesses") carries
+  fourteen properties - title, publisher, description, distribution, theme -
+  and **no `license`, `rights` or `accessRights` of any kind**. The licence
+  lives on `store/6/resource/57479`, the CSV distribution. **A reader checking
+  the dataset node would have recorded Goteborg as SILENT and been wrong in
+  the permissive direction**, which is the worse way to be wrong about a
+  licence.
+
+- **This is the SECOND property found on the child rather than the parent in
+  the same catalogue, within the hour.** The `accessURL` that unblocked the
+  city was also on the distribution, not the dataset, and its absence from the
+  parent is what got recorded as *"exposes no accessURL"*. **In DCAT the
+  dataset is a description and the distribution is the thing** - so both the
+  bytes and the terms hang off the child. **Check the distribution before
+  concluding anything is missing.**
 
 ### 2026-09-23 - Goteborg unblocked, and it may not be a one-bucket city
 
