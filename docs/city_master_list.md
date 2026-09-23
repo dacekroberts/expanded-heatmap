@@ -641,7 +641,48 @@ country.
 
 | Country | Cities | Missing link |
 |---|---|---|
-| 🇫🇷 **France** ▲ | **1 built-ready, 6 rail-confirmed** — Paris, Lyon, Marseille, Lille, Toulouse, Rennes | **RESOLVED 2026-09-22, and it went in favour.** Mexico closed the architecture half; the composition half was closed by an **employee filter validated against OpenStreetMap** — 50,156 rows vs OSM's 54,198, and 10,595 vs 10,642 on restaurants alone. **99.96% arrive geolocated, so there is no geocoding leg.** The filter is national, so it carries to all six cities. Owed: `check_personal_exposure.py` is load-bearing here, since the filter removes homes by proxy, not proof |
+| 🇫🇷 **France** ▲ | **6 cities, all six now MEASURED** — Paris, Lyon, Marseille, Toulouse, Lille, Rennes | **RESOLVED 2026-09-22, and it went in favour.** Mexico closed the architecture half; the composition half was closed by an **employee filter validated against OpenStreetMap** — 50,156 rows vs OSM's 54,198, and 10,595 vs 10,642 on restaurants alone. **No geocoding leg in any of the six** — see the per-city table below. Owed: `check_personal_exposure.py` is load-bearing here, since the filter removes homes by proxy, not proof |
+
+#### 🇫🇷 The five non-Paris cities, measured 2026-09-22
+
+The list had been carrying *"the filter is national, so it carries to all six
+cities"*. **That was an inference from a one-city sample** — and it is the
+same shape as the claim that collapsed Spain from six cities to two
+(*"two of the three probed had a register, which raises the prior sharply"*).
+France's risk was genuinely lower, because one national register covers every
+commune where Spain was bespoke per city, but lower risk is not a measurement.
+
+Source: `economicref-france-sirene-v3` on `public.opendatasoft.com` —
+**43,896,818 records**, the same uncapped v3 stock this file already cites.
+**Paris was run as a control first**, because a per-city rate from a query
+that cannot reproduce a known answer only looks like evidence.
+
+| City | Active | Geolocated | **Rate** | **Storefront layer** |
+|---|---|---|---|---|
+| **Paris** *(control)* | 1,335,566 | 1,335,333 | **99.98%** | **50,156** ✅ |
+| **Marseille** | 239,997 | 239,781 | 99.91% | **8,065** |
+| **Lyon** | 190,995 | 190,941 | 99.97% | **7,354** |
+| **Toulouse** | 153,407 | 153,179 | 99.85% | **4,833** |
+| **Lille** | 77,416 | 77,190 | **99.71%** | **3,272** |
+| **Rennes** | 64,973 | 64,906 | 99.90% | **2,089** |
+
+**The control reproduces the recorded 50,156 exactly**, so the storefront
+column is the project's own filter (NAF 47/56/96, employer, minus 47.91
+online) and the six numbers are directly comparable.
+
+**Verdict: the inference held.** No city falls below **99.71%** geolocated,
+so **France genuinely has no geocoding leg in any of its six cities** and
+keeps its cities-per-unit-of-work ranking. Two caveats that are now visible
+only because the cities were measured separately:
+
+- **The OSM composition validation is still Paris-only.** Geolocation is
+  confirmed everywhere; that the employee filter selects the *right rows* was
+  checked against OpenStreetMap in Paris alone. Cheap to repeat per city, and
+  worth doing for the first non-Paris build rather than all five.
+- **Rennes at 2,089 and Lille at 3,272 are thin.** Not disqualifying — Rennes
+  has a two-line metro and the density question is what the map exists to
+  show — but these are an order of magnitude below Paris, and whether a
+  ~2,000-point city earns a page is a scope call, not a data problem.
 
 ## Tier 3 — a geocoding leg buys several cities (5 countries, 18 cities)
 
