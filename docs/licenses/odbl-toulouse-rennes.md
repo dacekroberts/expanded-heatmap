@@ -126,28 +126,93 @@ rights granted. A public repository imposes none.
 
 ---
 
-## ⚠️ NOT READ — the publishers' own conditions
+## ✅ The publishers' own CGU — READ 2026-09-23, and BOTH ARE CLEAN
 
-**Both publishers' portal terms remain unread**, and the reason matters:
+**Neither carries Lyon's two killers.** Both portals are Opendatasoft and both
+serve the same CGU template at `/terms/terms-and-conditions/`:
 
-- `data.toulouse-metropole.fr` and Rennes' portal are Opendatasoft instances,
-  which usually carry their own CGU.
-- An automated read hit a **Cloudflare interactive challenge carrying a Ray
-  ID** and **refused to complete it** — correctly, since this project does not
-  defeat bot detection. It then spent 47 minutes seeking legitimate alternate
-  routes before being stopped.
+- `https://data.toulouse-metropole.fr/terms/terms-and-conditions/`
+- `https://data.explore.star.fr/terms/terms-and-conditions/`
 
-**This is a real gap, and it is the gap that defers Lyon.** Grand Lyon's CGU
-added two things the base licence did not: **an open-ended indemnity (9.4)**
-and **a bar on the producers' *signes distinctifs* (6.2)** which collides with
-this project's invariant that every drawn line carries its real public name —
-Toulouse's would say **Tisséo**, Rennes' **STAR**.
+⚠️ **They answered plain `curl` with no challenge.** The Cloudflare
+interactive challenge an earlier automated read hit was **path- or
+timing-specific, not a standing wall** — worth knowing before any portal is
+recorded as blocked again. The real paths came from the portals' own footers.
 
-**Until those CGU are read, neither city should ship.** Read them in a browser,
-where the challenge can be passed legitimately by a person, or ask the
-publishers directly.
+### The acceptance clause binds — so these ARE part of the terms
+
+> **TOUTE UTILISATION EFFECTUÉE À QUELQUE TITRE QUE CE SOIT, DU PRÉSENT
+> DOMAINE IMPLIQUE OBLIGATOIREMENT L'ACCEPTATION SANS RÉSERVE … DES
+> PRÉSENTES CONDITIONS GÉNÉRALES D'UTILISATION**
+
+`read-licence` step 3 satisfied: incorporation found and followed.
+
+### ✅ NO indemnity
+
+**Neither CGU contains one.** Searched for *indemnis*, *indemnit*,
+*supportera seul*, *conséquences financières*. Grand Lyon's **CGU 9.4 has no
+counterpart here.**
+
+### ✅ The marks clause is OPENDATASOFT'S, and it carves the data OUT
+
+> « Les données publiées sur le DOMAINE sont la propriété de la Société [/ du
+> STAR]. **À l'exception des données publiées sur le DOMAINE**, il est rappelé
+> que les marques, logos, slogans … créés, publiés ou enregistrés par
+> **OPENDATASOFT** sont la propriété exclusive de OPENDATASOFT »
+
+**This protects the platform vendor's branding and expressly excludes the
+published data.** It is **not** Grand Lyon's Art. 6.2, which bars the
+*producers'* signes distinctifs *« associés ou non à l'utilisation des
+données »* — explicitly reaching beyond the site.
+
+✅ **So naming *Tisséo* and *STAR* on the map is not barred**, and the
+invariant that every drawn line carries its real public name is safe in both
+cities.
+
+### ✅ The express prohibition is CONDITIONAL, and the condition excludes us
+
+> « la Société interdit expressément : L'extraction … d'une partie
+> qualitativement ou quantitativement substantielle du contenu du DOMAINE …
+> **dès lors que l'auteur de cette extraction intervient EN DEHORS D'UNE
+> LICENCE consentie** par OPENDATASOFT ou la Société »
+
+Sui-generis database-right boilerplate **with a licence carve-out**. The GTFS
+**is** licensed (ODbL, declared on the NAP and the portal), so this project
+operates **inside** a granted licence and the prohibition does not bite.
+
+### The step-4 split, both halves recorded
+
+The restrictive paragraph governs **the PLATFORM**: *« Toute représentation
+totale ou partielle de la PLATEFORME OPENDATASOFT, du DOMAINE ou de leurs
+composantes »*. The permissive obligation governs **the data**: *« mentionner
+la source des JEUX DE DONNÉES en cas de réutilisation »*, plus
+*« il appartient à chaque BÉNÉFICIAIRE de consulter la LICENCE concernant
+chaque JEU DE DONNÉES »* — **the same per-dataset-licence warning MEL gives**,
+and MEL's catalogue proved it load-bearing.
 
 ---
+
+## ⚠️ This does NOT bring Lyon back
+
+**Lyon is a different portal with different terms.** `data.grandlyon.com` is
+not Opendatasoft, and its CGU was read separately and **does** contain both
+clauses:
+
+| | Toulouse / Rennes | **Lyon** |
+|---|---|---|
+| Platform | Opendatasoft | Grand Lyon's own |
+| Indemnity | **none** | **CGU 9.4, open-ended** |
+| Marks clause | Opendatasoft's, **data excluded** | **CGU 6.2 — producers' *signes distinctifs*, *"associés ou non à l'utilisation des données"*** |
+| Account to download | no | **yes** |
+| NAP feed | live | **dead since 2022-04-14** |
+
+**Three French portals, three different answers** — which is the argument for
+reading each rather than inheriting a country position.
+
+**Lyon returns only on owner decisions**, not on new evidence: create the
+`data.grandlyon.com` account, accept CGU 9.4's indemnity (there is precedent —
+Hong Kong's was accepted 2026-09-22), and settle whether naming **TCL** is
+barred, which `contactopendata@tcl.fr` can authorise cheaply.
 
 ## What transfers, and what does not
 

@@ -16,10 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**198 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**200 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [All six French cities are brief-ready](#2026-09-23---all-six-french-cities-are-brief-ready)
+- [Toulouse's and Rennes' CGU are clean, and Lyon stays out](#2026-09-23---toulouses-and-rennes-cgu-are-clean-and-lyon-stays-out)
 - [Licence Ouverte 2.0 read: five sources discharged, two carve-outs opened](#2026-09-23---licence-ouverte-20-read-five-sources-discharged-two-carve-outs-opened)
 - [ODbL read for Toulouse and Rennes; Marseille's OSM validation holds](#2026-09-23---odbl-read-for-toulouse-and-rennes-marseilles-osm-validation-holds)
 - [Hong Kong's two fields read, Oslo's rail measured, and Oslo's names are full but noisy](#2026-09-23---hong-kongs-two-fields-read-oslos-rail-measured-and-oslos-names-are-full-but-noisy)
@@ -237,6 +239,113 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - All six French cities are brief-ready
+
+- **Rennes 6/6, Toulouse 5/5 and Lille 5/5 written**, joining Paris 7/7 and
+  Marseille 7/7. **With Lyon deferred, every buildable French city now has a
+  brief whose checks pass** - and France is the first country in this project
+  taken to that state as a SET rather than one city at a time.
+
+- **Rennes is the best-quality French city and the smallest.** **53.5%
+  named** - the highest of the six against Paris's 39.6% - the **lowest
+  distance-selling share at 14.2%**, and the only French feed carrying
+  everything: `shapes.txt`, `feed_info.txt` and a real `feed_end_date`. But it
+  is **~4,833 rows**, an order of magnitude below Paris. Whether that is worth
+  a page is a scale judgment rather than a data one, and **Boston shipped on
+  3,164 premises**, so the precedent says yes.
+  Its feed window **expires 2026-10-18**, far sooner than Marseille's
+  2026-12-31, so its staleness check fires first and that means refetch rather
+  than alarm. And a sibling resource is the **FORTHCOMING** timetable - taking
+  `A_VENIR` over `EN_COURS` would draw services that do not yet run.
+
+- **Toulouse has the second-best naming and the most withheld data.** 52.8%
+  named, but **16.0% of rows are masked at source** - roughly double Paris's
+  8.5% - and France masks name, address **and geolocation** together.
+  **Budget ~10,800 usable rows against a headline 12,853.** A city picked on
+  row count alone would be picking wrong.
+
+- **Toulouse carries `route_type 6`, an aerial lift - the Teleo cable car -
+  and this project has never drawn one.** It does draw a **funicular** in
+  Paris, so "not a train" is not itself a reason to exclude; Teleo is ticketed
+  like the metro and crosses the Garonne where no other line does. **Recorded
+  as an owner call rather than silently dropped**, which is the distinction
+  that matters: an unrecorded exclusion looks identical to an oversight.
+
+- **Lille is the only French city whose rail geometry cannot come from its own
+  feed**, and its brief says so in the first line. **No `shapes.txt`.** Half
+  the gap closes first-party - MEL's WFS gives **4 LineStrings for trams R and
+  T**, with names and operator - and **both VAL metro lines must come from
+  OSM**. Hybrid or all-OSM is an owner call and either is defensible.
+
+- **Lille also carries the only unresolved licence question among the five
+  `lov2` sources**, and the mitigation that looked obvious does not work: the
+  national access point's stable URL **302s to `media.ilevia.fr`** rather than
+  mirroring it, so the bytes come from ilevia's host either way. **Checked
+  specifically so it would not be recorded as solved when it is not.**
+
+- **Lille's scope question is the sharpest of the six.** Its commune is small
+  against the Metropole Europeenne de Lille, and **its metro serves
+  Villeneuve-d'Ascq, Roubaix and Tourcoing** - the tram lines are named for
+  those towns outright. **Paris's commune-only answer rested on all 16 metro
+  lines surviving its boundary; Lille's will not.**
+
+- **Every brief names what it does not know.** Between them the six carry
+  **eleven open owner calls** - scope in four cities, ferries in Marseille, the
+  Teleo in Toulouse, geometry and the ilevia carve-out in Lille, the
+  declaration de conformite in Paris, and the section 4.4 station-CSV question
+  in Toulouse and Rennes. **None blocks a build; every one of them would
+  otherwise have been discovered mid-build.**
+
+### 2026-09-23 - Toulouse's and Rennes' CGU are clean, and Lyon stays out
+
+- **Both publishers' CGU read, and NEITHER carries Lyon's two killers.** They
+  are the same Opendatasoft template at `/terms/terms-and-conditions/`, found
+  from the portals' own footers. **No indemnity clause exists in either** -
+  Grand Lyon's CGU 9.4 has no counterpart. And **the marks clause is
+  OPENDATASOFT's own**, expressly carving the data out: *"A l'exception des
+  donnees publiees sur le DOMAINE, il est rappele que les marques, logos ...
+  crees, publies ou enregistres par OPENDATASOFT sont la propriete exclusive
+  de OPENDATASOFT"*. **So naming Tisseo and STAR on the map is not barred**,
+  and the invariant that every drawn line carries its real public name is safe
+  in both cities.
+
+- **The Cloudflare challenge was PATH-SPECIFIC, not a standing wall.** Both
+  pages answered plain `curl` with no challenge at all. An automated read had
+  hit an interactive challenge with a Ray ID, refused it correctly, and spent
+  47 minutes on alternates - and the resolution was simply **reading the
+  portals' own footers for the real path** rather than guessing
+  `/pages/cgu/`, which 404s. **Worth carrying before any portal is recorded as
+  blocked again: a challenge on one path is not a verdict on the host.**
+
+- **The express prohibition is CONDITIONAL and the condition excludes this
+  project.** *"La Societe interdit expressement : L'extraction ... d'une partie
+  qualitativement ou quantitativement substantielle du contenu du DOMAINE ...
+  **des lors que l'auteur de cette extraction intervient EN DEHORS D'UNE
+  LICENCE consentie**"*. It is sui-generis database-right boilerplate **with a
+  licence carve-out**, and the GTFS is licensed, so it does not bite. Read
+  without the trailing clause it looks fatal - which is the Philadelphia shape
+  in reverse.
+
+- **The acceptance clause binds, so these ARE part of the terms** - *"TOUTE
+  UTILISATION ... IMPLIQUE OBLIGATOIREMENT L'ACCEPTATION SANS RESERVE ... DES
+  PRESENTES CGU"*. `read-licence` step 3 satisfied by following it rather than
+  noting it. The step-4 split is clean and both halves are recorded: the
+  restrictive paragraph governs **the PLATFORM**, the permissive obligation
+  governs **the data** - *"mentionner la source des JEUX DE DONNEES en cas de
+  reutilisation"*, plus the same per-dataset-licence warning MEL gives and
+  whose catalogue proved it load-bearing.
+
+- **This does NOT bring Lyon back, and the contrast is the point.**
+  `data.grandlyon.com` is **not** Opendatasoft, its CGU was read separately,
+  and it **does** contain both clauses - an open-ended indemnity at 9.4 and, at
+  6.2, a bar on the producers' *signes distinctifs* **"associes ou non a
+  l'utilisation des donnees"**, which explicitly reaches beyond the site.
+  **Three French portals, three different answers**, which is the argument for
+  reading each rather than inheriting a country position. **Lyon returns on
+  owner decisions rather than on new evidence**: the account, the indemnity
+  (Hong Kong's was accepted 2026-09-22, so there is precedent), and whether
+  naming TCL is barred - which `contactopendata@tcl.fr` can authorise cheaply.
 
 ### 2026-09-23 - Licence Ouverte 2.0 read: five sources discharged, two carve-outs opened
 

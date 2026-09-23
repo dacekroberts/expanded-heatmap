@@ -489,6 +489,12 @@ mistakes as confidently as its findings.
      CSV — **already satisfied by the public repo**, which is literally *"the
      method of making the alterations"*, **provided it is LINKED from the
      site**. §4.3 prescribes a safe-harbour notice per database.
+     ✅ **Both publishers' CGU READ 2026-09-23 and BOTH ARE CLEAN** — no
+     indemnity, and the marks clause is **Opendatasoft's own with the data
+     expressly excluded**, so **naming Tisséo and STAR is not barred**. The
+     express extraction bar is conditional on acting *outside* a licence, and
+     this project is inside one. ⚠️ They answered plain curl — **the earlier
+     Cloudflare challenge was path-specific, not a wall.**
      ⚠️ **Still open**: whether the station CSV is itself a Derivative
      Database under §4.4. **Unlike Paris there is NO publisher gloss** —
      Licence Mobilités had the NAP's published interpretation; ODbL has none.
