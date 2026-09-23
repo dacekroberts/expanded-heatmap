@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**166 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**167 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Band B's coordinate routes measured; one claim did not survive](#2026-09-22---band-bs-coordinate-routes-measured-one-claim-did-not-survive)
 - [Dublin Step 0: a register with no names, and a taxonomy rule that inverts](#2026-09-22---dublin-step-0-a-register-with-no-names-and-a-taxonomy-rule-that-inverts)
 - [Barcelona's live terms finally read, and they carried a clause that would have sunk the city](#2026-09-22---barcelonas-live-terms-finally-read-and-they-carried-a-clause-that-would-have-sunk-the-city)
 - [Madrid and Barcelona published, and the live site showed a defect no local check could have](#2026-09-22---madrid-and-barcelona-published-and-the-live-site-showed-a-defect-no-local-check-could-have)
@@ -202,6 +203,104 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Band B's coordinate routes measured; one claim did not survive
+
+- **All six remaining Band B coordinate routes were probed against each
+  register's OWN addresses, and the band split into two kinds.** It had said
+  the method was "identified and cheap", which describes a plan rather than a
+  measurement. **A JOIN** - the whole address table downloads and coordinates
+  are a dict lookup - covers **Prague** (RUIAN's Praha export, 3.4 MB zipped,
+  keyless, **134,627 addresses, 99.99% with coordinates**, measured at
+  **99.8%** against 6,000 active Praha rows streamed from RES) and
+  **Copenhagen** (DAWA, keyless, **85,351 access addresses, 100% with
+  WGS84**). **A GEOCODE** covers **Oslo** (**97.8%**), **Singapore**
+  (**98.8%** of answered lookups) and **Hong Kong** (answers, rate unmeasured).
+  Touched `docs/city_master_list.md`.
+
+- **Taiwan moved to Band C because its route failed the probe, NOT because it
+  resembles Japan.** The owner asked directly whether four cities on one
+  national register justified banding it with Japan and Brazil. The answer
+  given was no - **the city count is an amortisation argument, not a
+  difficulty argument**, and banding on resemblance is exactly the Rio
+  misfiling - and that Japan is hard for a reason Taiwan does not share:
+  Japanese addressing is **block**-based (chome/ban/go, `町字ID` 0%
+  populated) while Taiwan's is **street**-based, which is the Prague shape.
+  **The probe then supplied an independent reason.** The row's claim that
+  "NLSC's geocoder is keyless" did not survive: NLSC is alive and keyless, but
+  the keyless endpoint is **reverse** geocoding (point to 村里) plus
+  administrative lists, **no bulk 門牌 point file was reached**, and
+  `data.gov.tw`'s dataset API **requires a key** (`ER0001:API Key錯誤`).
+  Blocked, not negative. The distinction matters: the band moved on evidence
+  that arrived after the reasoning, not on the reasoning.
+
+- **Oslo carries the registered-office trap in a third costume, and a
+  geocoder that guesses silently.** Bronnoysund's `?kommunenummer=0301` does
+  **not** constrain `beliggenhetsadresse`: a first sample scored 57.3% and the
+  misses were **Bergen, Copenhagen, Paris and Malmo**, plus `c/o` lines in an
+  `adresse` LIST whose first element is not always a street. Filtering on the
+  field actually read lifted it to 93.5%. **The generalisation: a filter
+  parameter and the field you read are two different addresses until proven
+  otherwise** - after ONRC, ACRA and SIRENE's *sieges*. Separately,
+  **`fuzzy=true` must never be used**: it returned `Karenslyst alle 8B` as
+  **`alle 1B`**, a different building, and `7-Eleven` as
+  `Ellen Gleditsch' vei 7`. **It produces plausible coordinates for the wrong
+  place, which a map renders without complaint.** The real fix was a two-stage
+  exact-then-`sok` lookup (**97.8%**), because the residue was a suffix-letter
+  mismatch - the register writes `Thorvald Meyers gate 71`, the address file
+  holds `71A`.
+
+- **Three of the five services report their own confidence and Oslo's does
+  not, which is worth more than a higher raw hit rate.** DAWA returns a
+  `kategori` - **A** exact, **B** normalised (it returned B for
+  `Raadhuspladsen 1 1550 Kobenhavn`, diacritics stripped), **C** ambiguous
+  (30 results for `Vesterbrogade 3`) - plus a per-address `nojagtighed`. Hong
+  Kong's ALS returns a `Score` (76.15, 88.75, 97.69 on three test premises)
+  alongside both lat/long and HK1980 Grid. **A geocoder that says when it is
+  guessing is the property Oslo's `fuzzy` lacked**, and it is now a thing to
+  look for rather than a thing to notice afterwards.
+
+- **Singapore's postcode is in the string, not in a column - and dedupe before
+  geocoding.** Reading the schema said "NO postcode column" for the two big
+  registers, which was true and misleading in the same way Milan's `insegna`
+  was: the postcode sits inside the free-text address (`...SINGAPORE 169663`,
+  `...SINGAPORE(738733)`) and extracts on **99.5%** of tobacco, **97.5%** of
+  pharmacy and **83.4%** of eating establishments. The decisive number is not
+  the hit rate but the **distinct count: 35,064 extracted postcodes are 7,767
+  DISTINCT buildings**, because a Singapore postcode identifies a building and
+  malls and hawker centres share one. That is ~1.4 h of polite fetching rather
+  than 6.5 h. **OneMap throttles** - 85.5% refusals at 8 workers, still 32.5%
+  at 2 - and an early 14.1% "hit rate" was a measurement of my own request
+  pattern, not of the data.
+
+- **Bucharest's named route is down rather than refusing, and its fallback was
+  measured instead of assumed.** `data.gov.ro` resolves to 85.120.75.35 and
+  **blackholes on both 443 and 80** with `time_connect` 0.000000s - no TLS is
+  attempted, so this is below the layer where a browser could differ, and it
+  answered earlier the same day. ANCPI, which owns the nomenclature, has **no
+  resolving geospatial subdomain** (`ran.`, `geoportal.`, `ags.`, `inspire.`
+  all NXDOMAIN) though `ancpi.ro` itself returns 200. **OSM carries 146,116
+  addressed objects** in Bucharest (132,432 nodes + 13,684 ways, relation
+  **377733**), ODbL, and the city's rail is already OSM. Two guessed relation
+  ids returned 0 first - **a statement about the guess** - and `Bucuresci` at
+  admin_level 8 is a different village entirely.
+
+- **Prague's coordinates need a sign flip and an axis swap, verified against a
+  known point rather than reasoned about.** RUIAN publishes `Souradnice X`
+  ~1,042,569 and `Souradnice Y` ~744,384, both **positive**. Transforming the
+  first row - Hrad I. nadvori, the Castle's first courtyard - showed
+  **`EPSG:5513` with (X, Y) as published**, or equivalently `EPSG:5514` with
+  **(-Y, -X)**, lands at 50.08948, 14.39861 against a true 50.0905, 14.4005.
+  **The wrong orderings land in Germany (52.3, 9.5) and the Arctic (68.5,
+  41.6)** - plausible numbers that fail silently, which is why this was
+  measured before any pipeline code exists to inherit the mistake.
+
+- **Two counts in this band are still unmeasured and are recorded as such.**
+  How much of Oslo's 152,128 sub-units is **physically** in Oslo: brreg's API
+  stops paging past ~10,000, so both samples came from the alphabetical head
+  and disagreed (24.5% vs 4.3%); **settle it with the bulk download at build
+  time, not with the API**. And Bucharest's OSM hit rate against DSVSA's
+  31,299 premises - the 146,116 establishes supply, not match.
 
 ### 2026-09-22 - Dublin Step 0: a register with no names, and a taxonomy rule that inverts
 

@@ -37,10 +37,11 @@ was dropped, kept for the record) · **OPTIONAL** (an upgrade, not a blocker).
 
 | # | City / source | What is required | Status |
 |---|---|---|---|
-| **3** | **Copenhagen** 🇩🇰 | **A free account** for Danish CVR bulk distribution — `distribution.virk.dk` answers **401**. The data itself is right (P-enheder, each with its own address and `industrycode`) | 🟡 **OPEN** — blocks the build entirely. Tier 3, one city |
+| **3** | **Copenhagen** 🇩🇰 | **A free account** for Danish CVR bulk distribution — `distribution.virk.dk` answers **401**. The data itself is right (P-enheder, each with its own address and `industrycode`) | 🟡 **OPEN, and now known to gate ONE LEG rather than the build.** Probed 2026-09-22: the COORDINATE leg is **not** gated — DAWA (`api.dataforsyningen.dk`) is keyless and serves all **85,351** Copenhagen access addresses with 100% coordinates. The 401 blocks the **business register only**. The row in `city_master_list.md` had paired the two |
 | **4** | **Prague** 🇨🇿 | **An API key** — `api.golemio.cz` returns **401**. The business leg (`rzp.cz`, the *živnostenský rejstřík*) is live and is the right shape: Czech trade licences are issued **per premises**. Golemio is the transit half | 🟡 **OPEN** — Czechia is the strongest of the four Tier 4 probes |
 | **5** | **Barcelona** 🇪🇸 — TMB | **A free TMB developer account** at `api.tmb.cat` (`app_id` + `app_key`); unauthenticated it returns *"Authentication failed. Authentication parameters missing"* | 🟢 **OPTIONAL** — the brief **chose OSM instead** and validated it (TMB 22 relations, TRAM 22, FGC 10). A key would be an upgrade to first-party geometry, not a prerequisite |
 | **6** | **Spain — National Access Point** | **A free account**; `nap.mitma.es` answers **401**, the WMATA shape | 🟢 **MOOT for Sevilla** (city discarded — and it published its own metro openly anyway). Kept because it is the fallback rail route for any *other* Spanish city |
+| **16** | **Taiwan** 🇹🇼 — `data.gov.tw` | **An API key** for the dataset API — a POST to `/api/v2/rest/dataset` returns `ER0001:API Key錯誤` for every query. Its **web pages are reachable**, and `addr.tgos.tw` answers but has historically required registration | 🟡 **OPEN — added 2026-09-22 when the Band B probe failed.** NLSC's keyless API is **reverse** geocoding only, and no bulk 門牌 address-point file was reached, so the recorded *"NLSC's geocoder is keyless"* did not survive. **Four cities ride on this** (Taipei, Kaohsiung, Taoyuan, Taichung), now in Band C |
 
 ---
 
