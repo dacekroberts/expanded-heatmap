@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**160 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**161 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [The geocoder gap was closed by moving the boundary, not the code](#2026-09-22---the-geocoder-gap-was-closed-by-moving-the-boundary-not-the-code)
 - [Guadalajara was the last step file that fetched, and the rule is now a check](#2026-09-22---guadalajara-was-the-last-step-file-that-fetched-and-the-rule-is-now-a-check)
 - [Mexico City's fetching moved out of its steps, as the worked pattern for the other two](#2026-09-22---mexico-citys-fetching-moved-out-of-its-steps-as-the-worked-pattern-for-the-other-two)
 - [Both Mexican cities hardcoded the DENUE columns their national config already names](#2026-09-22---both-mexican-cities-hardcoded-the-denue-columns-their-national-config-already-names)
@@ -196,6 +197,67 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - The geocoder gap was closed by moving the boundary, not the code
+
+- **The recorded plan for the three `step3_geocode.py` files was the wrong
+  fix, and saying so is the entry.** Hours earlier this session wrote them
+  into `PLAN.md` as "the same defect one level of indirection down", to be
+  closed the way Mexico City, Madrid and Guadalajara were: hoist the download
+  into `fetch_sources.py`. **There is no URL to hoist.** The US Census
+  geocoder is POSTed a batch of addresses that the step itself derives from
+  its own filtering, so moving the request means moving the address
+  preparation with it - restructuring three live pipelines to satisfy a rule
+  stated one notch too broadly.
+
+- **The rule was too broad. It is not "a step never fetches" but "a step may
+  fetch when a person runs it; a DRIFT CHECK may never fetch."** Those had
+  been the same sentence only because, for the four cities, they were. The
+  geocoder separates them: fetching on a cache miss is the intended workflow
+  for a person populating `data/<city>/raw/geocode_cache/`, and the thing that
+  was actually wrong was `drift_check.py` joining in - it globs `step*.py`, so
+  on a fresh checkout it geocoded ~9% of Los Angeles over the network and then
+  reported whether the result had drifted, which is a different question.
+
+- **`pipeline/offline.py` puts the guard at that boundary.** `drift_check.py`
+  sets `HEATMAP_NO_NETWORK` in the environment of every step it runs, and
+  `refuse_if_offline()` raises immediately before a request rather than at
+  import time, so a cached batch is still served. Proved three ways with
+  `requests.post` replaced by a tripwire: an uncached batch under the flag
+  **refuses without calling out**; a cached batch under the flag is **still
+  served**; with the flag unset the request is **attempted as before**, so a
+  person running step 3 is unaffected. `drift_check.py guadalajara` and
+  `mexico_city` both still report zero drift with the guard armed.
+
+- **`check_no_fetch_in_steps.py` gained a third answer rather than a wider
+  exception list.** A shared module that calls `refuse_if_offline()` is
+  reported GUARDED; a step reaching the network only through guarded modules
+  is listed by name and not failed; anything else is a violation. The three
+  geocode steps left `KNOWN_GAPS` for that category - which is a claim about
+  them, not an excuse. **And the check now fails if `drift_check.py` stops
+  mentioning `NO_NETWORK_ENV`**, because a guard nobody arms is worse than no
+  guard: it reads as protection in every listing while protecting nothing.
+  That limb exists because `check_provenance.py`'s CRS limb once parsed 0 of
+  16 longitudes while printing green.
+
+- **`scripts/check_no_fetch_in_steps_selftest.py` is the first executable
+  answer in this project to "never ship a check you have not watched fail".**
+  Six cases, 7 of 7 behaving as intended: a step importing an HTTP client, a
+  step importing a guarded module (which must be classified, not failed), the
+  guard removed from the shared module, `drift_check.py` no longer arming it,
+  a `KNOWN_GAPS` entry that has quietly been fixed, and a glob matching no
+  files at all. **It copies what it breaks into a temporary tree** and runs
+  the check there via a new `--root`: the first version mutated the working
+  tree and restored it in a `finally`, which is one Ctrl-C away from leaving
+  a broken repository.
+
+- **One case went stale within the hour, and the self-test says what to do
+  about that.** "A step imports a shared module that fetches" was written as a
+  failure case; once the geocoder became guarded, the correct verdict flipped
+  to pass, and the harness reported DID NOT FAIL against a check that was
+  right. It is now a positive case asserting the classification. The closing
+  message tells the next reader to work out which of the two went stale before
+  "fixing" either.
 
 ### 2026-09-22 - Guadalajara was the last step file that fetched, and the rule is now a check
 

@@ -375,20 +375,27 @@ Desktop is unaffected — the label is fully visible there.
   three it asks "does the current upstream still produce the committed output"
   rather than "does the committed code". Build-session work - each city's
   context is needed.
-- [ ] **Three `step3_geocode.py` files still reach the network, one import
-  deep** - Los Angeles, New York and Washington DC import `geocode_addresses`
-  from `pipeline/census_geocoder.py`, which POSTs address batches to the US
-  Census geocoder on a cache miss. The same defect as the three cities just
-  fixed, one level of indirection down, and `drift_check.py` runs these steps
-  like any other - it globs `step*.py` - so a fresh checkout geocodes over the
-  network inside a drift check. That module's own docstring gives it away:
-  "off the network **after the first run**". **Harder than the other three and
-  deliberately not bodged:** the geocoder's input is a batch of addresses the
-  step itself computes, not a fixed upstream URL, so moving the download means
-  moving the address preparation with it. Found 2026-09-22 by writing
-  `scripts/check_no_fetch_in_steps.py` rather than before it; the three are
-  listed there under `KNOWN_GAPS` with this reasoning. Build-session work -
-  each city's context is needed.
+- [x] ~~Three `step3_geocode.py` files still reach the network, one import
+  deep~~ - **closed 2026-09-22, by moving the boundary rather than the code.**
+  Los Angeles, New York and Washington DC import `geocode_addresses` from
+  `pipeline/census_geocoder.py`, which POSTs address batches to the US Census
+  geocoder on a cache miss; `drift_check.py` globs `step*.py`, so it ran them
+  like any other step and a fresh checkout geocoded over the network inside a
+  drift check. That module's docstring gave it away: "off the network **after
+  the first run**".
+
+  The recorded plan was to hoist the download into `fetch_sources.py` as the
+  four cities did, and **that was the wrong fix.** There is no URL to hoist:
+  the batch is derived from the step's own filtering, so moving it means
+  moving the address preparation with it. What was actually wrong is narrower
+  - **a step may fetch when a person runs it; a drift check may never fetch**
+  - so `pipeline/offline.py` puts the guard at that boundary, `drift_check.py`
+  sets `HEATMAP_NO_NETWORK` for every step it runs, and an uncached batch
+  under that flag refuses instead of requesting. Proved three ways: refuses
+  uncached, still serves a cached batch, and is inert when the flag is unset,
+  so a person running step 3 is unaffected. `check_no_fetch_in_steps.py`
+  reports such a module as **guarded** - a third answer, not a pass in
+  disguise - and fails if `drift_check.py` stops arming the guard.
 - [x] ~~Wire Toronto's `STATIONS_COLLAPSED_EXPECTED`~~ - **done 2026-09-22,
   and it was a mis-wiring rather than a missing check.** Step 1 compared the
   COLLAPSED count (110) against `IN_CITY_STATIONS_EXPECTED` (108), printing a

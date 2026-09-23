@@ -34,6 +34,15 @@ imported by three cities' `step3_geocode.py`, so those steps fetch without any
 HTTP client appearing in them - the same defect one import deeper, and the
 reason this walks the shared `pipeline/*.py` modules too. It was found by
 writing this check, not before it.
+
+GUARDED IS A THIRD ANSWER, NOT A PASS IN DISGUISE. The geocoder cannot move to
+a fetch script: its input is a batch of addresses the step computes, so there
+is no URL to hoist. What was actually wrong there was narrower - a DRIFT CHECK
+must never fetch, while a person running the step may - so the fix is a guard
+at that boundary (`pipeline/offline.py`), and this check reports such a module
+as guarded rather than either failing it or pretending it is offline. A guard
+nobody arms is worse than none, so the last limb below reads
+`pipeline/drift_check.py` and fails if it does not set the variable.
 """
 
 import argparse
@@ -43,6 +52,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PIPELINE = ROOT / "pipeline"
+
+
+def _use_root(root):
+    """Point the check at another tree. Only --root does this, and only the
+    self-test passes it: a check that silently examined somewhere other than
+    the repository it lives in would be worse than no check."""
+    global ROOT, PIPELINE
+    ROOT = Path(root).resolve()
+    PIPELINE = ROOT / "pipeline"
 
 # `urllib.parse` is deliberately absent: building a URL is not fetching one,
 # and several steps quote query parameters for a URL that fetch_sources.py
@@ -62,18 +80,13 @@ KNOWN_GAPS = {
         "branch (2026-09-22). Remove this entry when that branch lands.",
     "pipeline/madrid/step2_clean_businesses.py":
         "same as step1 - fixed on spain-app-wiring, not yet on master.",
-    "pipeline/los_angeles/step3_geocode.py":
-        "TRANSITIVE, via pipeline/census_geocoder.py. Harder than the other "
-        "three cities: the geocoder's input is a batch of addresses this step "
-        "computes, not a fixed upstream URL, so it cannot move to "
-        "fetch_sources.py without the address preparation moving with it. "
-        "Logged 2026-09-22 as a real exposure rather than closed by "
-        "narrowing the check.",
-    "pipeline/new_york/step3_geocode.py":
-        "TRANSITIVE, via pipeline/census_geocoder.py - see los_angeles.",
-    "pipeline/washington_dc/step3_geocode.py":
-        "TRANSITIVE, via pipeline/census_geocoder.py - see los_angeles.",
 }
+
+# A shared module is GUARDED if it calls this before requesting. See
+# pipeline/offline.py: the three step3_geocode.py files reach the network
+# through census_geocoder.py by design, and what makes that acceptable is
+# that a drift check cannot follow them there.
+GUARD_CALL = "refuse_if_offline"
 
 
 def imported_modules(path):
@@ -92,6 +105,35 @@ def imported_modules(path):
                 for a in node.names:
                     names.add(f"{node.module}.{a.name}")
     return names
+
+
+def calls_guard(path):
+    """Does this module call refuse_if_offline() anywhere?"""
+    tree = ast.parse(path.read_text(encoding="utf-8"))
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Call):
+            f = node.func
+            name = getattr(f, "id", None) or getattr(f, "attr", None)
+            if name == GUARD_CALL:
+                return True
+    return False
+
+
+def drift_check_arms_the_guard():
+    """The guard is inert unless drift_check.py sets the variable.
+
+    Read as text rather than imported, because the failure being guarded
+    against is exactly that someone deletes the line.
+    """
+    p = PIPELINE / "drift_check.py"
+    if not p.exists():
+        return "pipeline/drift_check.py does not exist"
+    src = p.read_text(encoding="utf-8")
+    if "NO_NETWORK_ENV" not in src:
+        return ("pipeline/drift_check.py never mentions NO_NETWORK_ENV, so "
+                "the offline guard is never armed and every guarded module "
+                "below is free to fetch inside a drift check")
+    return None
 
 
 def http_clients(names):
@@ -113,7 +155,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--list", action="store_true",
                     help="print every step and what it reaches, then exit 0")
+    ap.add_argument("--root", default=None,
+                    help="check this tree instead of the repository "
+                         "(used by check_no_fetch_in_steps_selftest.py)")
     args = ap.parse_args()
+    if args.root:
+        _use_root(args.root)
+        print(f"(checking {ROOT})\n")
 
     # Shared pipeline modules first: a step that imports one of these inherits
     # whatever it reaches.
@@ -121,11 +169,12 @@ def main():
     for p in sorted(PIPELINE.glob("*.py")):
         hits = http_clients(imported_modules(p))
         if hits:
-            shared[f"pipeline.{p.stem}"] = (p, hits)
+            shared[f"pipeline.{p.stem}"] = (p, hits, calls_guard(p))
     if shared:
         print("Shared pipeline modules that reach the network:")
-        for mod, (p, hits) in sorted(shared.items()):
-            print(f"  {p.relative_to(ROOT).as_posix()}  ->  "
+        for mod, (p, hits, guarded) in sorted(shared.items()):
+            state = "GUARDED" if guarded else "UNGUARDED"
+            print(f"  {state:9s} {p.relative_to(ROOT).as_posix()}  ->  "
                   f"{', '.join(sorted(hits))}")
         print()
 
@@ -135,6 +184,8 @@ def main():
                          "would pass vacuously, which is worse than failing.")
 
     violations = {}                       # rel path -> (kind, detail)
+    guarded = {}                          # reaches the network, but not
+                                          # from inside a drift check
     for p in steps:
         rel = p.relative_to(ROOT).as_posix()
         names = imported_modules(p)
@@ -145,17 +196,33 @@ def main():
         via = sorted(m for m in names if m in shared)
         if via:
             reached = sorted(set().union(*(shared[m][1] for m in via)))
-            violations[rel] = ("reaches via " + ", ".join(via),
-                               ", ".join(reached))
+            if all(shared[m][2] for m in via):
+                guarded[rel] = ("reaches via " + ", ".join(via),
+                                ", ".join(reached))
+            else:
+                violations[rel] = ("reaches via " + ", ".join(via),
+                                   ", ".join(reached))
 
     if args.list:
         for p in steps:
             rel = p.relative_to(ROOT).as_posix()
-            mark = "FETCHES" if rel in violations else "offline"
+            mark = ("FETCHES" if rel in violations
+                    else "guarded" if rel in guarded else "offline")
             print(f"  {mark:8s} {rel}")
         return 0
 
     failures = []
+
+    arming = drift_check_arms_the_guard()
+    if guarded:
+        print("Guarded - reaches the network when a person runs the step, "
+              "never inside a drift check:")
+        for rel, (kind, detail) in sorted(guarded.items()):
+            print(f"  {rel}\n      {kind}: {detail}")
+        print()
+        if arming:
+            failures.append(f"the offline guard is not armed\n    {arming}")
+
     for rel, (kind, detail) in sorted(violations.items()):
         if rel in KNOWN_GAPS:
             print(f"KNOWN GAP  {rel}\n           {kind}: {detail}\n"
@@ -174,9 +241,10 @@ def main():
             failures.append(f"{rel}\n    listed under KNOWN_GAPS but no longer "
                             f"reaches the network. Delete the entry.")
 
-    print(f"\n{len(steps)} step files checked, "
-          f"{len(violations)} reach the network "
-          f"({len(KNOWN_GAPS)} known and dated).")
+    print(f"\n{len(steps)} step files checked: "
+          f"{len(violations)} reach the network unguarded "
+          f"({len(KNOWN_GAPS)} known and dated), "
+          f"{len(guarded)} reach it only outside a drift check.")
 
     if failures:
         print("\nFAIL - a step must not fetch its own input:")
@@ -188,7 +256,8 @@ def main():
               "pattern.")
         return 1
 
-    print("OK - no step fetches except the gaps listed above.")
+    print("OK - no step fetches inside a drift check, except the gaps "
+          "listed above.")
     return 0
 
 
