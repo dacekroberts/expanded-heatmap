@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**230 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**231 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [The scope check paid for itself on the first merge it met](#2026-09-23---the-scope-check-paid-for-itself-on-the-first-merge-it-met)
 - [The site said which businesses it leaves out and never which stations](#2026-09-23---the-site-said-which-businesses-it-leaves-out-and-never-which-stations)
 - [The master list's summaries drifted while its sections stayed right; Cairo leaves the discards](#2026-09-23---the-master-lists-summaries-drifted-while-its-sections-stayed-right-cairo-leaves-the-discards)
 - [The stop-spacing test runs, and its own controls disprove it](#2026-09-23---the-stop-spacing-test-runs-and-its-own-controls-disprove-it)
@@ -269,6 +270,54 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - The scope check paid for itself on the first merge it met
+
+- **Merging master brought Paris and Marseille, and
+  `check_scope_disclosure.py` failed on both within a minute of the merge.**
+  Neither city's business exclusions were in `docs/excluded_categories.md`,
+  though Paris's own page tells readers that document "lists them" - a promise
+  the document did not keep. Both are written up now, from their own published
+  prose and configs. Supersedes the station figures in the entry below: the
+  table reads **697 stations across 21 cities, 446 outside the city and 251
+  thinned**, up from 614 across 19, and it re-reads itself rather than being
+  edited.
+
+- **Marseille arrived with an exclusion reason neither reader understood:
+  "Aubagne's tram, not Marseille's".** Seven stations of a sixth line in the
+  same feed that belongs to a neighbouring town's own network. The check
+  refused to let it be silently bucketed under "Other" - which is the failure
+  it was built for, met on its first new city rather than hypothetically.
+  Folded into "outside the city", because that is what it is to a reader, and
+  the document now says so. Paris's file needed only `commune` added to the
+  boundary-column vocabulary.
+
+- **A false claim was found on a live page and corrected: Paris's page said
+  "trams are excluded in every city here that has them".** They are not -
+  `route_type 0` is drawn in San Diego, San Francisco, Los Angeles, Edmonton,
+  Calgary, Miami and Dublin, and Marseille draws three Tramway lines beside
+  its two Métro lines. The staging session had already caught the same
+  sentence's ancestor the same day (the Zurich correction) and the page it came
+  from had not been updated. **The rule is whether the tram IS the
+  rapid-transit system or a street-running overlay on one**, and that is what
+  both the page and the document now say. A first draft of this document
+  repeated the error - "trams and streetcars are out on different grounds" -
+  and was caught by reading master's commit log rather than by any check.
+
+- **`app/station_scope.py` now holds the one vocabulary for reading
+  `excluded_stations.csv`**, imported by both the page that renders the counts
+  and the check that enforces them. Two copies had existed for about an hour
+  and the drift risk was exactly the invisible kind: the page bucketing a new
+  city under "Other" while the check went on passing. Stdlib only, so the check
+  needs no Streamlit and the app needs no pipeline.
+
+- **The harness was wrong for the sixth time this session**, and the positive
+  control is the only reason it was not read as strictness: after the shared
+  module landed, the negative-test harness still copied only `cities.py`, so
+  all eight cases failed with an `ImportError` - including "an unmodified copy
+  passes". **A negative-test harness without a positive control cannot tell
+  "the check fires" from "the check is broken",** which is the argument for
+  keeping one in every such harness.
 
 ### 2026-09-23 - The site said which businesses it leaves out and never which stations
 

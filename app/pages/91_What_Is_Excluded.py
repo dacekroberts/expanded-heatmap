@@ -22,18 +22,18 @@ committed `outputs/<city>/excluded_stations.csv` files at render time, so they
 cannot drift from the pipeline the way a hand-kept count does - the denominator
 here is open (it grows with every city) and this project has already been
 bitten by writing one of those into prose. Adding a city adds its row with no
-edit here.
+edit here. The reading of those files lives in `app/station_scope.py`, shared
+with `scripts/check_scope_disclosure.py` so that one vocabulary decides both
+what is shown and what is enforced.
 
 It also carries the standing commitment that a removal request is honoured
 rather than argued, which is the one thing on this site a reader might need to
 act on.
 """
 
-import re
 import sys
 from pathlib import Path
 
-import pandas as pd
 import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
@@ -45,10 +45,10 @@ from components import (  # noqa: E402
     render_site_notices,
     set_base_font,
 )
+from station_scope import scope_rows  # noqa: E402
 
 ROOT = Path(__file__).parent.parent.parent
 DOC = ROOT / "docs" / "excluded_categories.md"
-OUTPUTS = ROOT / "outputs"
 
 # Where the generated station table is spliced into the document: the table
 # belongs at the end of the station half, and the document is rendered as one
@@ -57,8 +57,6 @@ OUTPUTS = ROOT / "outputs"
 # marker is still there, because a silent fallback nobody checks is how this
 # would rot.
 BUSINESS_HEADING = "## Which businesses are counted"
-
-PARENTHETICAL = re.compile(r"\s*\([^)]*\)")
 
 st.set_page_config(page_title=f"What is excluded — {SITE_NAME}",
                    page_icon="\U0001f5fa️", layout="wide")
@@ -100,106 +98,51 @@ argued about.
 )
 
 
-def _slug(entry):
-    """Output-directory name for a city, from its page path.
-
-    `pages/2_San_Francisco_Heatmap.py` -> `san_francisco`. Derived rather than
-    stored because cities.py already treats the page path as the link between
-    an entry and its city, and a second hand-maintained key is a second thing
-    to get wrong. A rename that breaks this shows up as an empty row, so
-    check_scope_disclosure.py asserts every slug resolves to a real directory.
-    """
-    stem = Path(entry["page"]).stem              # 2_San_Francisco_Heatmap
-    stem = stem.split("_", 1)[1] if stem[0].isdigit() else stem
-    return stem[: -len("_Heatmap")].lower() if stem.endswith("_Heatmap") \
-        else stem.lower()
-
-
 @st.cache_data(show_spinner=False)
-def station_scope():
-    """One row per city: network mapped, and stations left out by reason.
+def station_table():
+    """The markdown table, and the three totals the paragraph above it uses."""
+    rows = scope_rows(ROOT, CITIES)
+    outside = sum(r["counts"][0] for r in rows if r["counts"])
+    thinned = sum(r["counts"][1] for r in rows if r["counts"])
+    other = sum(r["counts"][2] for r in rows if r["counts"])
 
-    Counts the committed excluded_stations.csv files rather than restating
-    them. The files do not share a schema - some name the reason in a `reason`
-    column, the rest encode it as a boundary column (`located_in`, `state`,
-    `distance_outside_m`, `in_city_spatial`) - so both shapes are read, and
-    anything matching neither is counted separately rather than folded into a
-    bucket it might not belong in.
-    """
-    BOUNDARY_COLUMNS = {"located_in", "state", "distance_outside_m",
-                        "in_city_spatial", "municipio_codes"}
-    rows = []
-    for entry in CITIES:
-        path = OUTPUTS / _slug(entry) / "excluded_stations.csv"
-        # The blurb names the network and then its lines; the lines are the
-        # city page's job. Dropping the parenthetical keeps the parts that are
-        # not line lists - New York's Staten Island Railway, Mexico City's
-        # Tren Ligero - which cutting at the first bracket would have lost.
-        network = PARENTHETICAL.sub(
-            "", entry.get("blurb", "").split(" — ")[0]).strip().rstrip(",")
-        if not path.exists():
-            rows.append({"City": entry["name"], "Network mapped": network,
-                         "Outside the city": None, "Stops thinned": None,
-                         "Other": None})
-            continue
-        frame = pd.read_csv(path, encoding="utf-8-sig")
-        outside = thinned = other = 0
-        if "reason" in frame.columns:
-            reasons = frame["reason"].fillna("").str.lower()
-            thinned = int(reasons.str.contains("spacing").sum())
-            outside = int(reasons.str.contains("outside").sum())
-            other = int(len(frame) - thinned - outside)
-        elif BOUNDARY_COLUMNS & set(frame.columns):
-            outside = int(len(frame))
+    # A MARKDOWN TABLE, NOT st.dataframe. The grid widget renders collapsed
+    # here - 52 px wide with no canvas at all, measured 2026-09-23 in the lean
+    # venv - and even working it would be the only interactive element on a
+    # page that is otherwise a document: no sorting worth doing on 22 rows, and
+    # its contents would not appear in the page text.
+    header = ["City", "Network mapped", "Outside the city", "Stops thinned"]
+    if other:
+        header.append("Other")
+    lines = ["| " + " | ".join(header) + " |",
+             "|" + "|".join("---" if i < 2 else "--:"
+                            for i, _ in enumerate(header)) + "|"]
+    for row in rows:
+        cells = [row["name"], row["network"]]
+        if row["counts"] is None:
+            cells += ["—"] * (len(header) - 2)
         else:
-            other = int(len(frame))
-        rows.append({"City": entry["name"], "Network mapped": network,
-                     "Outside the city": outside, "Stops thinned": thinned,
-                     "Other": other})
-    return pd.DataFrame(rows)
-
-
-def _table(frame):
-    """The scope frame as a markdown table, blanks shown as an em dash."""
-    columns = [c for c in frame.columns
-               if c != "Other" or frame["Other"].fillna(0).sum()]
-    head = "| " + " | ".join(columns) + " |"
-    rule = "|" + "|".join(["---" if i < 2 else "--:"
-                           for i, _ in enumerate(columns)]) + "|"
-    lines = [head, rule]
-    for row in frame[columns].itertuples(index=False):
-        # Counts arrive as floats when any city has no file at all (pandas
-        # widens an int column to hold the NaN), so they are formatted as the
-        # integers they are rather than printed as "16.0".
-        cells = [("—" if pd.isna(v) else f"{int(v):,}"
-                  if isinstance(v, (int, float)) else str(v)) for v in row]
+            cells += [f"{n:,}" for n in row["counts"][:len(header) - 2]]
         lines.append("| " + " | ".join(cells) + " |")
-    return "\n".join(lines)
+    return "\n".join(lines), outside, thinned, other
 
-
-scope = station_scope()
-totals = scope[["Outside the city", "Stops thinned", "Other"]].sum()
 
 if DOC.exists():
+    table, outside, thinned, other = station_table()
     text = DOC.read_text(encoding="utf-8")
     head, marker, tail = text.partition(BUSINESS_HEADING)
     st.markdown(head)
 
     st.markdown(
         f"""
-**{int(totals.sum()):,} stations are left out across these maps** -
-{int(totals["Outside the city"]):,} for sitting outside the city whose register
-the map is built from, and {int(totals["Stops thinned"]):,} thinned out of
-street-running stretches where the stops are closer together than the rings.
-Every one of them is named in its city's `excluded_stations.csv`.
+**{outside + thinned + other:,} stations are left out across these maps** -
+{outside:,} for standing outside the city whose register the map is built from,
+and {thinned:,} thinned out of street-running stretches where the stops are
+closer together than the rings. Every one of them is named in its city's
+`excluded_stations.csv`.
 """
     )
-    # A MARKDOWN TABLE, NOT st.dataframe. The grid widget renders collapsed
-    # here - 52 px wide with no canvas at all, measured 2026-09-23 in the lean
-    # venv - and even working it would be the only interactive element on a
-    # page that is otherwise a document: no sorting worth doing on 20 rows, and
-    # its contents would not appear in the page text.
-    st.markdown(_table(scope))
+    st.markdown(table)
     st.caption(
         "A dash is a city with no excluded-stations file: every station of "
         "its network is on its map."

@@ -42,13 +42,19 @@ the Coaster and Sprinter in San Diego, SEPTA's Regional Rail in Philadelphia,
 the MBTA's Regional Rail in Boston, Tri-Rail in Miami, GO Transit in Toronto,
 the West Coast Express in Vancouver, Cercanías in Madrid, the Passante and
 Trenord's suburban services in Milan, and Iarnród Éireann's Commuter and
-InterCity trains in Dublin.
+InterCity trains in Dublin, RER and Transilien in Paris, and the TER services
+in Marseille.
 
-**Trams and streetcars are out on different grounds.** Milan's 17 tram routes
-are a dense street-running network whose stops sit a block or two apart, which
-needs different treatment from a metro and which the agency publishes no
-colours for. San Francisco's F Market heritage streetcar is a separately
-branded service, and its cable cars are a different mode entirely.
+**Trams are NOT excluded as a class, and the test is whether the tram is the
+rapid-transit system or an overlay on one.** Seven of these maps draw
+light rail - San Diego, San Francisco, Los Angeles, Edmonton, Calgary, Miami
+and Dublin - and Marseille draws its three Tramway lines beside its two Métro
+lines. Where a tram network is left out, the city already has a metro and the
+trams run over the top of it: Milan's 17 tram routes stop a block or two apart
+and the agency publishes no colour for any of them, and Barcelona's tram falls
+outside the network-identity test that picks out its metro. San Francisco's F
+Market heritage streetcar is out on its own ground - a separately branded
+service - and its cable cars are a different mode entirely.
 
 **The line is drawn by station spacing and service frequency, not by which
 company runs the trains.** SEPTA is the clearest case — the Market–Frankford
@@ -77,7 +83,10 @@ repository, and every one of them is counted in the table on this page.
   municipios — because there one registry covers the whole area. Guadalajara
   goes one step further and leaves out a municipio it could have included:
   Tonalá has no Tren Ligero station, so its businesses could never fall inside
-  a ring.
+  a ring. **A station can also be outside the city by belonging to a
+  neighbouring town's own network**: Marseille's feed carries a sixth line that
+  is Aubagne's tram rather than Marseille's, and its seven stations are dropped
+  on the same ground as a station across a boundary.
 - **Its stops are too close together to draw rings around.** Street-running
   light rail can stop every block or two — far denser than the innermost ring,
   which is a tenth of a mile in most cities and finer in New York — so
@@ -938,6 +947,65 @@ identify themselves are filtered out, but the register does not mark them
 reliably, so some remain. This is an exclusion that is incompletely applied
 rather than a category left in on purpose, and it is the one limit on this
 city's map worth knowing before reading its food-service colours.
+
+### Paris - four trades with no premises, and two catch-alls the publisher's own hierarchy settled
+
+**The source is SIRENE, France's national register of établissements**, so the
+exclusions below are French rather than Parisian and apply to Marseille too.
+INSEE strips records it marks *non-diffusible* at source - name, address and
+coordinates together - so that privacy work was done before the data arrived
+rather than by a filter here.
+
+**Four kinds of trade are excluded because their own official label says there
+is no premises.** Distance selling (`47.91A`, `47.91B`), doorstep selling
+(`47.99A`) and vending or other non-shop channels (`47.99B`) sit *inside* the
+retail division and have no shopfront at all - together the single largest
+correction the city needed. Market-stall trading (`47.81Z`, `47.82Z`,
+`47.89Z`) is the publisher saying the trade happens on a pitch, which also
+makes the registered address the trader's own. Contract catering (`56.29A`) is
+a canteen inside someone else's institution. Wholesale laundry (`96.01A`) is
+industrial - and its retail twin `96.01B` is **kept**, because INSEE itself
+splits the pair *de gros* / *de détail*.
+
+**Two of the five catch-alls are dropped and three are kept, decided by the
+class label rather than by the word "autres".** `96.09Z` (9,349 rows) sits
+under a class that asserts no premises at all, and `56.29B` (958) under
+catering; both are excluded, and `96.09Z` is the direct French analogue of the
+NAICS 812990 that Los Angeles excludes. But `47.19B` (5,359), `47.29Z` (1,413)
+and `47.78C` (903) sit under classes whose official labels contain **en
+magasin** - INSEE stating the premises exists - so they stay. This is
+Barcelona's finding in French: the publisher's hierarchy settling a call that a
+reading of the language would have got wrong.
+
+**What is left is still more than a street survey would find, and that is
+disclosed rather than filtered.** Against OpenStreetMap's mapped shops in the
+same commune the map carries roughly **1.8 times** as many points after these
+exclusions, down from about 2.0 before them. SIRENE records where a business is
+*registered* and some registered establishments have no customer-facing
+shopfront, with nothing in the data saying which. Tuning filters until the two
+numbers agreed would be fitting to a number rather than measuring one.
+
+### Marseille - the same register, and a ferry question left open on purpose
+
+**Everything excluded in Paris is excluded here, from the same national
+register and for the same reasons** - the four no-premises trades, the wholesale
+laundry, and the same two catch-alls `96.09Z` and `56.29B`. The catch-all
+verdict was re-measured rather than inherited: the two cities' compositions
+differ, which is why the shares were counted for Marseille instead of Paris's
+being assumed.
+
+**The gap against OpenStreetMap is wider here - about 2.6 times as many points
+- and most of that is not the register.** OpenStreetMap covers Marseille far
+less completely than it covers Paris. On restaurants, where the two schemes
+mean nearly the same thing, the ratio falls to **1.7×**, close to Paris's 1.8×,
+which is the comparison worth trusting.
+
+**The harbour ferries are excluded, and this one is flagged rather than
+settled.** The Vieux-Port shuttles and the Frioul islands service are genuine
+urban transit in a way no other city's excluded mode is, and they are dropped
+because this project measures density around *rail* stations and no built city
+draws a ferry. Recorded as an owner's decision on 2026-09-23 for possible
+revisiting, not as an automatic application of a rule.
 
 ## Kept, and why
 

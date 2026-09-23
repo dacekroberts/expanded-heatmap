@@ -40,6 +40,11 @@ import csv
 import sys
 from pathlib import Path
 
+# app/station_scope.py holds the one vocabulary for reading these files. It is
+# imported rather than restated: two copies would drift, and the drift would be
+# invisible - the page bucketing a new city's stations under "Other" while this
+# check went on passing. Imported inside main() once --root is known.
+
 # Cities whose business-side exclusions are NOT yet written into
 # docs/excluded_categories.md. A dated defect, not a pass - and it expires:
 # once a city here IS documented, this check FAILS until it is removed from
@@ -51,26 +56,15 @@ KNOWN_GAPS = {}
 BUSINESS_HEADING = "## Which businesses are counted"
 STATION_HEADING = "## Which stations these maps are drawn around"
 
-# The two shapes an excluded_stations.csv comes in: a `reason` column, or
-# boundary facts in their own columns. Kept in step with the page's reader.
-BOUNDARY_COLUMNS = {"located_in", "state", "distance_outside_m",
-                    "in_city_spatial", "municipio_codes"}
 
-
-def slug(page):
-    """`pages/2_San_Francisco_Heatmap.py` -> `san_francisco`."""
-    stem = Path(page).stem
-    stem = stem.split("_", 1)[1] if stem[0].isdigit() else stem
-    return (stem[: -len("_Heatmap")].lower() if stem.endswith("_Heatmap")
-            else stem.lower())
-
-
-def load_cities(root):
+def load_app(root):
+    """cities.CITIES and the shared station_scope module, from `root`'s app/."""
     sys.path.insert(0, str(root / "app"))
-    for stale in ("cities",):
+    for stale in ("cities", "station_scope"):
         sys.modules.pop(stale, None)
+    import station_scope
     from cities import CITIES
-    return CITIES
+    return CITIES, station_scope
 
 
 def main():
@@ -101,7 +95,7 @@ def main():
             f"docs/excluded_categories.md: the station-scope section is gone "
             f"({STATION_HEADING!r}). Transit scope would be undisclosed.")
 
-    cities = load_cities(root)
+    cities, station_scope = load_app(root)
     business_half = doc.partition(BUSINESS_HEADING)[2]
 
     for entry in cities:
@@ -109,7 +103,7 @@ def main():
         base = name.split(" (")[0]
 
         # C - the generated table can find this city's outputs.
-        city_dir = root / "outputs" / slug(entry["page"])
+        city_dir = root / "outputs" / station_scope.slug(entry["page"])
         if not city_dir.is_dir():
             problems.append(
                 f"{name}: no outputs/{city_dir.name}/ directory, so its row in "
@@ -125,8 +119,8 @@ def main():
                     rows = list(reader)
                 if "reason" in columns:
                     unknown = [r for r in rows
-                               if "spacing" not in (r.get("reason") or "").lower()
-                               and "outside" not in (r.get("reason") or "").lower()]
+                               if station_scope.classify(r.get("reason"), base)
+                               == "other"]
                     if unknown:
                         problems.append(
                             f"{name}: {len(unknown)} row(s) in "
@@ -134,11 +128,13 @@ def main():
                             f"spacing filter nor a boundary - e.g. "
                             f"{unknown[0].get('reason')!r}. The page would "
                             f"count them under 'Other'; describe the new "
-                            f"category in the document first.")
-                elif not (BOUNDARY_COLUMNS & columns) and rows:
+                            f"category in the document and teach "
+                            f"app/station_scope.py to read it.")
+                elif not (station_scope.BOUNDARY_COLUMNS & columns) and rows:
                     problems.append(
                         f"{name}: {csv_path.name} has neither a 'reason' "
-                        f"column nor any of {sorted(BOUNDARY_COLUMNS)}, so the "
+                        f"column nor any of "
+                        f"{sorted(station_scope.BOUNDARY_COLUMNS)}, so the "
                         f"page cannot say WHY its {len(rows)} stations were "
                         f"left out.")
 
