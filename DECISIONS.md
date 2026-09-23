@@ -993,6 +993,52 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Promoted Dublin from Band D to Band A: Ireland's rateable register carries
+  a use category, and the question that killed the UK does not kill Ireland.**
+  The recorded blocker was *"does the Irish rateable register carry a use
+  category, where the UK's NNDR did not?"* Answered **yes, sixteen of them** -
+  `SearchCategories` returns OFFICE, FUEL/DEPOT, LEISURE, INDUSTRIAL USES,
+  HEALTH, **HOSPITALITY**, MINERALS, MISCELLANEOUS, **RETAIL (SHOPS)**,
+  UTILITY, **RETAIL (WAREHOUSE)** and four administrative values. Dublin City
+  Council holds **7,207 shops, 735 hospitality, 74 retail warehouse, 218
+  leisure and 80 health**, and **100% of every category carries `Xitm`/`Yitm`
+  - Irish Transverse Mercator, already projected in metres, so there is no
+  geocoding leg at all.** Rows also carry a finer `Uses` string, an `Eircode`,
+  and `ValuationReport[].FloorUse` giving use per floor. Licence **CC BY
+  4.0**, no key, no account, published 15/06/2026. Rail is answered: **42 OSM
+  relations, all named** - Luas Red and Green under Transdev, DART and
+  commuter under Iarnrod Eireann. Touched `docs/city_master_list.md`.
+
+- **The blocker was never the data - it was a host that had moved twice, and
+  the browser found it in one page load.** `valoff.ie` was retried twice as an
+  outage and is **retired**; `api.valoff.ie` is **NXDOMAIN**; `api.tailte.ie`
+  and `data.tailte.ie` are NXDOMAIN too. The live endpoint is
+  **`opendata.tailte.ie`**, which appears nowhere in `data.gov.ie`'s metadata
+  - its resource still points at the HTML page - and nowhere in that page's
+  server-rendered HTML either, because the *Valuation API Explorer* is a JS
+  app. It was found by **loading the page and reading the link its own app
+  rendered**, which is the Jakarta method the browser-first rule exists for.
+  **That is the fourth dead address chased in one day**, after Sevilla's
+  datosabiertos, Czechia's rzp.cz and Prague's opendata.praha.eu.
+
+- **ARES was tried as Prague's missing activity half and does not supply it.**
+  Its `czNace` is **company-level and multi-valued** - AGROFERT carries
+  fifteen codes - so joining it onto ROS establishments would give every
+  branch all fifteen activities, which is the registered-office trap wearing a
+  different hat and useless for storefront filtering. Its RZP view returns
+  **`provozovnyStav` as COUNTS** (`pocetCelkem: 40`, `pocetAktivnich: 0`),
+  not the establishment list. **The one path left is arithmetic rather than a
+  probe:** measure what share of ROS establishments belong to an ICO with
+  exactly one establishment, because for those the company NACE *is* the
+  premises activity. That is a proxy and would need validating the way
+  France's employee filter was against OpenStreetMap.
+
+- **Singapore: no page-size parameter exists, confirmed by control.** `limit`,
+  `pageSize`, `size`, `per_page` and a nonsense `zzqqxx` all return exactly
+  ten items, so the 463-request enumeration is the only route and cannot be
+  shortened. Recorded so the next session does not retry parameter names.
+
+
 - **Tel Aviv's licence was read, and it reverses the promotion made the same
   day: the position is a PROHIBITION, not the silence that "unread" implied.**
   Read from the Internet Archive, because every page carrying terms sits

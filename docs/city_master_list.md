@@ -73,10 +73,10 @@ waiting on a licence read, which conflated *we have not looked yet* with
 
 | Band | The work that unblocks it | Cities | Change |
 |---|---|---|---|
-| 🟢 **A** | **Nothing** — build now | **3** | ✅ **−4 built** — Madrid and Barcelona joined Mexico's two; Paris out then back, **measured both ways** |
+| 🟢 **A** | **Nothing** — build now | **4** | ▲ **+Dublin** — its probe was run and it passed; ✅ **−4 built** — Madrid and Barcelona joined Mexico's two; Paris out then back, **measured both ways** |
 | 🔵 **B** | **A document to read, or a decision to make.** Never a probe | **1** | ▲ **+Tel Aviv**; ▼ −Stockholm, −Zurich to the new E |
 | 🟡 **C** | **A geocoding leg** — build work, known cost | **19** | ▲ **+Bucharest**, ▲ **+Rio** (re-filed — it was banded by how it was *discovered*) |
-| 🟠 **D** | **One probe each**, none yet run to a conclusion | **3** | was `D-a`; ▼ −Zurich |
+| 🟠 **D** | **One probe each**, none yet run to a conclusion | **2** | was `D-a`; ▼ −Zurich to E, ▼ **−Dublin to A** |
 | 🟣 **E** | **One bucket, but developable** — screening complete, product judgement outstanding | **2** | ✨ **NEW** — Stockholm and Zurich, both confirmed one-bucket by enumeration |
 | 🔴 **F** | **Access blocked** — the register exists, we cannot reach it | **3** | was `D-b`, then E; renumbered |
 | *Discarded* | Measured negative, evidence named | *27* | unchanged — **neither one-bucket city was discarded** |
@@ -102,7 +102,7 @@ results in the sweep.
 
 ---
 
-## 🟢 Band A — nothing left to discover: build now (3 remaining + 4 ✅ BUILT)
+## 🟢 Band A — nothing left to discover: build now (4 remaining + 4 ✅ BUILT)
 
 **Every question these cities carry is answerable inside the build**, not
 before it. Nothing here needs a probe, a document or a decision first.
@@ -115,6 +115,7 @@ and whether it held.
 |---|---|---|---|
 | ✅ | ~~**Guadalajara**~~ 🇲🇽 | DENUE, SCIAN = NAICS, INEGI licence cleared | **BUILT 2026-09-22** — `pages/16_Guadalajara_Heatmap.py`, region *Mexico*. Screening said "nothing outstanding" and that held |
 | ✅ | ~~**Madrid**~~ 🇪🇸 | **53,355 clean storefront rows** — retail 36,224 · food 18,194 · personal 9,974 (from 225,660 join rows → 159,787 open → filtered). Three-level taxonomy on `division`, EPSG:25830, CC BY 4.0 | **BUILT 2026-09-22** — `pages/17_Madrid_Heatmap.py`, region *Spain*. Rail from **CRTM's feature layers**: 13 lines, 293 station-line records, 49 stations excluded, 0 filter disagreements. Screening said the rail leg was the open question and CRTM answered it |
+| 1 | **Dublin** 🇮🇪 ▲▲ | **8,016 rateable premises across two buckets — `RETAIL (SHOPS)` 7,207, `HOSPITALITY` 735, `RETAIL (WAREHOUSE)` 74 — plus `LEISURE` 218 and `HEALTH` 80. 100% carry `Xitm`/`Yitm`, Irish Transverse Mercator, already projected in metres.** Per-row `Category` **and** `Uses`, plus `ValuationReport[].FloorUse` giving use per floor (`RETAIL ZONE A/B/C`). `Eircode` on most rows. Published 15/06/2026. **CC BY 4.0, no key, no account** | **No geocoding leg.** Rail answered: 42 OSM relations, all named — Luas Red + Green (tram) and DART + commuter (Iarnród Éireann). Build decisions only: which of the 36 train relations are in-city, colours for the 32 that lack one, and mapping 16 valuation categories onto three buckets |
 | 2 | **Seoul** 🇰🇷 | 197,276 active premises over 8 datasets, EPSG:5174, status field, KOGL Type 1 | Build work — partial geocoding for 일반음식점 (90.7%), Korean-aware `check_personal_exposure.py` |
 | 3 | **Milan** 🇮🇹 | 28,131 premises 99.1% coords, `insegna`, `codice_ateco`, CC-BY. All three buckets confirmed | **Capture the column schemas** of two already-confirmed layers — build prep, not screening. The country row is explicit: *"nothing to discover"* |
 | ✅ | ~~**Mexico City**~~ 🇲🇽 | Same DENUE. **Rail from OSM** — 195/195 stops exact, 6,468 geometry points | **BUILT 2026-09-22** — `pages/15_Mexico_City_Heatmap.py`. The ODbL share-alike decision was taken during the build; see `DECISIONS.md` |
@@ -286,7 +287,7 @@ screen — against the worst geocoding problem and a two-bucket ceiling.
 **Still the biggest open decision in this list**, and a judgment call rather
 than a probe.
 
-## 🟠 Band D — one probe each, and none has been run to a conclusion (3 cities)
+## 🟠 Band D — one probe each, and none has been run to a conclusion (2 cities)
 
 **Every row was re-measured on 2026-09-22** and each now has a named next
 query rather than a vague one; the country-level view of the same three is
@@ -298,14 +299,23 @@ the one property that makes a band auditable: Rio's misfiling was caught only
 because the neighbouring sub-tier still declared what it was *for*. A band
 caption names a blocker, never a date.
 
-**Zurich left this band** for Band B: its second bucket is measured absent, so
+**▲▲ Dublin left this band for Band A on 2026-09-22 — the probe was run and
+it passed.** Its API had simply **moved twice**: `api.valoff.ie` is
+**NXDOMAIN**, and the successor, **`opendata.tailte.ie`**, was named on the
+*Valuation API Explorer* page — a JS app, so the endpoint was found by
+**watching the page load its own link**, the Jakarta method. The deciding
+question, *does the Irish rateable register carry a use category*, is
+answered **yes**: sixteen of them, including **`RETAIL (SHOPS)`** and
+**`HOSPITALITY`**. **Ireland is not the UK.**
+
+**Zurich left this band** for Band E: its second bucket is measured absent, so
 it no longer holds a question, only a scope decision.
 
 | City | The one probe that decides it |
 |---|---|
-| **Prague** 🇨🇿 ⚠️ | **PROBED 2026-09-22 — location found, activity missing.** `data.gov.cz/sparql` answers and its control passes (`zzqqxxnonsense` → 0). **`Registr osob - aktivní provozovny`** is a real national open CSV of **active establishments** — `szrcr.cz/…/ros02_data.csv`, **58.5 MB, updated 2026-09-01** — carrying `ICP`, `ICO`, dates and **`PKODADM`, a RÚIAN address code**. That is a *join* to the Czech address register rather than a geocode, which is far cheaper. **But there is no activity column anywhere**: `ros01_data.csv` (**532 MB**, companies) has `FIRMA` and `FORMA` (legal form, not NACE), and `ros02` has none either. **The Colombia-RUES shape, inverted from Tallinn's** — full location, no activity. ⚠️ **And the `121-xx` / `476-5: Provozovna` hits are a FALSE FRIEND**: they carry distributions, but those resolve to `slovník.gov.cz` **ontology files** — 91 KB of `skos:Concept` and `owl:DatatypeProperty` defining the trade-business agenda. **A vocabulary, not data** — the Budapest shape, where an inventory reads like a catalogue until one is opened. `rzp.gov.cz/opendata/` is 404, so the trade register's per-establishment trade fields are **queryable per subject and not published in bulk**: the Hong Kong shape, for the activity half only. *(Earlier note retained: its hosts had moved —* `rzp.cz` answers 000, `www.rzp.cz` redirects to `rzp.gov.cz`, and `opendata.praha.eu` redirects to `lkod.cz/catalog/praha`.)* |
+| **Prague** 🇨🇿 ⚠️ | **PROBED 2026-09-22 — location found, activity missing.** `data.gov.cz/sparql` answers and its control passes (`zzqqxxnonsense` → 0). **`Registr osob - aktivní provozovny`** is a real national open CSV of **active establishments** — `szrcr.cz/…/ros02_data.csv`, **58.5 MB, updated 2026-09-01** — carrying `ICP`, `ICO`, dates and **`PKODADM`, a RÚIAN address code**. That is a *join* to the Czech address register rather than a geocode, which is far cheaper. **But there is no activity column anywhere**: `ros01_data.csv` (**532 MB**, companies) has `FIRMA` and `FORMA` (legal form, not NACE), and `ros02` has none either. **The Colombia-RUES shape, inverted from Tallinn's** — full location, no activity. ⚠️ **ARES was tried as the missing half and does not supply it**: its `czNace` is **company-level and multi-valued** — AGROFERT carries **fifteen** codes — so joining it onto establishments would give every branch all fifteen activities, the registered-office trap in another guise. Its RZP view returns **`provozovnyStav` as COUNTS** (`pocetCelkem: 40`, `pocetAktivnich: 0`), not the establishment list. **The one open path left is arithmetic rather than a probe:** measure what share of ROS establishments belong to an ICO with exactly ONE establishment, since for those the company NACE *is* the premises activity. That is a proxy, and it would need validating the way France's employee filter was. ⚠️ **And the `121-xx` / `476-5: Provozovna` hits are a FALSE FRIEND**: they carry distributions, but those resolve to `slovník.gov.cz` **ontology files** — 91 KB of `skos:Concept` and `owl:DatatypeProperty` defining the trade-business agenda. **A vocabulary, not data** — the Budapest shape, where an inventory reads like a catalogue until one is opened. `rzp.gov.cz/opendata/` is 404, so the trade register's per-establishment trade fields are **queryable per subject and not published in bulk**: the Hong Kong shape, for the activity half only. *(Earlier note retained: its hosts had moved —* `rzp.cz` answers 000, `www.rzp.cz` redirects to `rzp.gov.cz`, and `opendata.praha.eu` redirects to `lkod.cz/catalog/praha`.)* |
 | **Dublin** 🇮🇪 ⚠️ | **`valoff.ie` is not down — it is RETIRED**, and was retried twice as an outage. `data.gov.ie` catalogues a **Valuation Office API** at **CC BY 4.0**, whose one resource is `https://tailte.ie/home/api/` — **Tailte Éireann absorbed the Valuation Office**, and that page answers 200. **But every API endpoint is unroutable for us**: `api.valoff.ie`, `api.tailte.ie` and `valoff.ie/api/...` all return **000**, checked 2026-09-22. So the licence is good and the host is not reachable. **The deciding question is still unasked** — does the Irish rateable register carry a **use category**? The UK's NNDR did not, and that killed the UK. Next: the Archive, or the `tailte.ie` page's own documentation |
-| **Singapore** 🇸🇬 ⚠️ | **Not a loose search — an INERT one.** `zzqqxxnonsense` returns the **identical ten datasets** as `licence`, `food establishment` and `business`: the `query` parameter is ignored entirely, and only the nonsense control separates that from looseness. **Paging CONFIRMED to work** 2026-09-22 — pages 1, 5, 50, 200 and 463 return five different first-items, and page 463 returns 8 items, which confirms **4,628**. So the route is **enumeration, not search**, and it costs 463 requests. **Not yet run.** The registered-office suspicion is still untested — nothing has been learned about the data yet |
+| **Singapore** 🇸🇬 ⚠️ | **Not a loose search — an INERT one.** `zzqqxxnonsense` returns the **identical ten datasets** as `licence`, `food establishment` and `business`: the `query` parameter is ignored entirely, and only the nonsense control separates that from looseness. **Paging CONFIRMED to work** 2026-09-22 — pages 1, 5, 50, 200 and 463 return five different first-items, and page 463 returns 8 items, which confirms **4,628**. So the route is **enumeration, not search**, and it costs 463 requests — **no page-size parameter works**, confirmed with a control: `limit`, `pageSize`, `size`, `per_page` and the nonsense `zzqqxx` all return exactly 10. **Not yet run.** The registered-office suspicion is still untested — nothing has been learned about the data yet |
 
 ## 🟣 Band E — one bucket, but developable (2 cities)
 
@@ -922,12 +932,12 @@ nothing and the argument collapses. **Whoever builds the second geocoding city
 should lift the common parts into `pipeline/` rather than copying Toronto's
 file** — that is the decision that makes this ordering pay.
 
-## Tier 4 — all four probed 2026-09-22 (4 countries, 4 cities)
+## Tier 4 — all four probed 2026-09-22; **Ireland passes** (4 countries, 4 cities)
 
 | Country | City | State after the probe |
 |---|---|---|
 | 🇨🇿 **Czechia** ▲ | Prague | **Still the best probe left, and both its hosts had MOVED.** `rzp.cz` is 000 but **`www.rzp.cz` redirects to `rzp.gov.cz`**, which answers; `opendata.praha.eu` redirects to **`lkod.cz/catalog/praha`**. Two successor moves nobody had followed. **`data.gov.cz/sparql` answers SPARQL** — the Bulgarian technique applies directly. Next: enumerate for *provozovny* (premises) |
-| 🇮🇪 **Ireland** ⚠️ | Dublin | **`valoff.ie` is not down — it is RETIRED.** Its 000 was read as an outage and retried twice. `data.gov.ie` catalogues a **"Valuation Office API"**, licence **CC BY 4.0**, whose single resource is `https://tailte.ie/home/api/` — **Tailte Éireann absorbed the Valuation Office.** `tailte.ie` answers 200. The recorded question is unchanged and still decides it: does the rateable register carry a **use category**? The UK's NNDR did not, and that killed the UK |
+| 🇮🇪 **Ireland** ▲▲ **PASSES** | Dublin | **The probe was run on 2026-09-22 and Ireland passed — Dublin is now Band A.** `valoff.ie` was not down but **RETIRED**, and `api.valoff.ie` is **NXDOMAIN**; the API had moved twice, ending at **`opendata.tailte.ie`**, named on the *Valuation API Explorer* page and found by watching that JS page load its own link. **The deciding question is answered YES: the rateable register carries 16 use categories**, including `RETAIL (SHOPS)` and `HOSPITALITY`, plus a finer `Uses` string and `FloorUse` per floor. **Ireland is not the UK** — the NNDR's missing use category was never a property of rateable registers as such. Dublin City Council: **7,207 shops, 735 hospitality, 100% carrying Irish Transverse Mercator coordinates**, CC BY 4.0, no key |
 | 🇨🇭 **Switzerland** ✗ | Zurich | **The second bucket is MEASURED ABSENT.** Control passes (`zzqqxxnonsense` → 0). Every commerce term returns noise or surveys: `detailhandel` **1** (a traffic count), `verkauf` 12 (tram ticket offices, apartment prices), `laden` 31 (a farm shop, population surveys), `gewerbe` 28 (zoning land, 3D roof models), `firmen` 16 — all **Firmenbefragung**, company *surveys* 2005–2025. Only `Gastwirtschaftsbetriebe` is real. **Zurich is a one-bucket food city — the Stockholm shape**, and it inherits Stockholm's open scope question rather than a data one |
 | 🇸🇬 **Singapore** ⚠️ | Singapore | **The recorded description understated it: the search is not loose, it is INERT.** `zzqqxxnonsense` returns the **identical 10 datasets** as `licence`, `food establishment` and `business` — the query parameter is ignored entirely, and only the nonsense control tells that apart from a loose search. The catalogue is **4,628 datasets over 463 pages** and does page properly, so the route is **enumeration, not search** — the Montréal lesson, forced. Not yet done |
 
