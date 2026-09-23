@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**193 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**194 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Marseille brief written; its feed covers more cities than its register](#2026-09-23---marseille-brief-written-its-feed-covers-more-cities-than-its-register)
 - [Oslo's rail sourced and taxonomy measured; MEL's WFS is Licence Ouverte](#2026-09-23---oslos-rail-sourced-and-taxonomy-measured-mels-wfs-is-licence-ouverte)
 - [Lille's tram geometry found first-party; its metro has none, and a line code nearly became a false find](#2026-09-23---lilles-tram-geometry-found-first-party-its-metro-has-none-and-a-line-code-nearly-became-a-false-find)
 - [The four French followers are country-ready, not brief-ready, and Lille has no line geometry](#2026-09-23---the-four-french-followers-are-country-ready-not-brief-ready-and-lille-has-no-line-geometry)
@@ -232,6 +233,65 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Marseille brief written; its feed covers more cities than its register
+
+- **`docs/build_briefs/marseille.md`, 7/7 checks.** The first French follower
+  taken to brief-ready, and the first real test of whether France's country
+  profile transfers. **It largely does**: the coordinate join, the commune
+  prefix filter, the privacy masking and the taxonomy level all hold.
+
+- **The taxonomy answer TRANSFERS, and that is new evidence rather than an
+  assumption.** Measured on Marseille rows against INSEE's own labels:
+  sous-classe **20.8%** catch-all against Paris's 19.3%, groupe **48.1%**
+  against 49.4%, **0% unlabelled at every level**. So **key at sous-classe**,
+  same as Paris. But *classe* diverges - **37.4% against Paris's 27.8%** - so
+  the transfer is **level-specific, not wholesale**, and a city keying
+  elsewhere in the scheme would need its own measurement.
+
+- **Distance selling is 17.7% here against Paris's 15.5%**, so the exclusion
+  list (`47.91A/B`, `47.99A/B`) matters slightly more in Marseille. Same rule,
+  different magnitude - worth measuring per city rather than inheriting the
+  number.
+
+- **The per-city NAMING spread recorded in the country profile is weaker
+  evidence than it looked, and this corrects my own earlier work.** A 3.9%
+  sample put Marseille at **45.8%** named against Paris's 42.9%, which read as
+  a genuine advantage. At **11.2%** coverage Marseille is **43.1%** -
+  **statistically the same city**. The ranking that sample implied (Rennes
+  54.3% best, Paris worst) **should be re-measured before anyone builds on
+  it**; it is the sort of number that hardens into a reason for choosing a
+  city.
+
+- **Marseille's rail feed covers the whole Metropole, not the city, and it is
+  not hypothetical.** The *Referentiel complet (tous les reseaux)* carries
+  **four tram entries, one of which is `T` Le Charrel-Gare - AUBAGNE's tram**,
+  and **17 `route_type 2` routes including "Lyon Part-Dieu - Geneve" and
+  "Grasse - Cannes - Nice"**, TER services spanning south-east France. **A
+  naive draw-all-rail would put Aubagne's tram and half the national TER
+  network on a Marseille map.** The TER routes fall under the standing
+  commuter-rail exclusion; the Aubagne tram is a **scope** question, and
+  **Paris's commune-only answer does not transfer** because Paris's rested on
+  all 16 metro lines surviving its boundary.
+
+- **Six ferry routes are a genuine judgment call, not an oversight.**
+  `route_type 4` carries `NAV1` Vieux Port-La Pointe Rouge, `NAV2` Vieux
+  Port-L'Estaque, the Frioul islands service and cross-harbour hops. **This
+  project has never drawn a ferry**, but Marseille's are real urban transit.
+  Recorded as an owner call rather than silently dropped.
+
+- **The rail that WOULD be drawn is complete and needs no invention**: M1, M2,
+  T1, T2, T3 - **every one with a real public name and a hex colour**, so the
+  legend and on-map label requirements are satisfiable directly. The feed also
+  **SELF-ATTESTS** (`feed_end_date` 2026-12-31, publisher Mecatran), which
+  Paris's IDFM feed cannot do.
+
+- **One licence read would now discharge FIVE sources.** Licence Ouverte 2.0's
+  own terms are still **not recorded in `docs/data_sources.md`** - flagged
+  during Paris's read and still open - and it now governs **SIRENE, the INSEE
+  geolocation file, Marseille's GTFS, Lille's GTFS and MEL's WFS**. That makes
+  it the **highest-leverage licence item outstanding**, ahead of anything
+  city-specific.
 
 ### 2026-09-23 - Oslo's rail sourced and taxonomy measured; MEL's WFS is Licence Ouverte
 
