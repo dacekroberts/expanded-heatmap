@@ -119,6 +119,15 @@ def main():
                 .agg(lambda s: "/".join(sorted(set(s)))))
     st_rows["lines"] = st_rows.index.map(lines_of)
 
+    # Gate 3's own side of the comparison, over ALL stations rather than the
+    # 245 kept: IDFM's layer covers the whole network, so scoping one side to
+    # the commune and not the other would manufacture a mismatch on every line.
+    actual_per_line = {}
+    for value in st_rows["lines"]:
+        for line in str(value).split("/"):
+            if line:
+                actual_per_line[line] = actual_per_line.get(line, 0) + 1
+
     print()
     station_gates.verify_stations(
         city="Paris", platforms=quays, stations=st_rows,
@@ -148,11 +157,10 @@ def main():
         # metre under the number that failed would pass this city and catch
         # nothing in the next one.
         spacing_min=200.0,
-        # GATE 3 IS NOT RUN, and that is a gap rather than a decision: RATP's
-        # published per-line station counts have not been sourced. It is the
-        # one check that can see an error every internal check agrees with, so
-        # this is owed. See PLAN.md.
-        expected_per_line=None, actual_per_line=None)
+        # GATE 3, sourced 2026-09-23 from IDFM's own GIS layer rather than from
+        # the feed - see config.OPERATOR_STATION_COUNTS for where and why.
+        expected_per_line=config.OPERATOR_STATION_COUNTS,
+        actual_per_line=actual_per_line)
 
     # --- the commune boundary ---------------------------------------------
     commune = shape(json.loads(

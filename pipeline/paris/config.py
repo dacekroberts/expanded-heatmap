@@ -1,8 +1,8 @@
 """Paris-specific settings, scoped to one city per this project's
 per-city folder architecture (see docs/project_context.md, "Architecture").
 
-Scaffolded by scripts/scaffold_city.py. Every TODO is a value only this city's
-real data can supply (see the add-city skill); none should ship.
+Scaffolded by scripts/scaffold_city.py; every scaffolded placeholder has since
+been replaced with a measured value, so this module ships none.
 """
 
 from pathlib import Path
@@ -194,6 +194,35 @@ ROUTE_IDS = [
     "IDFM:C01383", "IDFM:C01384", "IDFM:C01386", "IDFM:C01387",
 ]
 
+# GATE 3: the OPERATOR'S OWN per-line station counts, from a source that
+# shares no code path with the feed.
+#
+# `pipeline/stations.py` calls gate 3 "the one check that can see an error
+# every internal check agrees with", and Paris's step 1 shipped without it
+# because no operator figure had been sourced. This is that figure.
+#
+# SOURCE: IDFM's own GIS layer `emplacement-des-gares-idf`, "Gares et stations
+# du reseau ferre d'Ile-de-France (par ligne)" - 1,240 records, one per
+# station-per-line, filtered to `mode=METRO` (405) and de-duplicated on
+# `id_ref_zdc`. NOT the GTFS. That is what `osm-rail` says to look for FIRST -
+# "agency GIS layers ... a keyword search for GTFS will hide them" - and what
+# Madrid proved by finding a better station count outside its feed. Paris went
+# straight to GTFS because its brief did, so this arrived a city late.
+#
+# Measured 2026-09-23. Every one of the 14 numbered lines matched the feed
+# EXACTLY, the totals matched at 405 station-line pairs, and IDFM's distinct
+# station count of 321 independently confirmed step 1's parent_station collapse
+# - including that the brief's 322 was wrong.
+#
+# ⚠ KEYED ON THE FEED'S SPELLING. IDFM's layer writes `3bis` and `7b` where the
+# GTFS writes `3B` and `7B`; the counts behind them are identical. The first
+# comparison reported four "mismatched" lines for that reason alone.
+OPERATOR_STATION_COUNTS = {
+    "1": 25, "2": 25, "3": 25, "4": 29, "5": 22, "6": 28, "7": 38,
+    "8": 38, "9": 37, "10": 23, "11": 19, "12": 31, "13": 32, "14": 21,
+    "3B": 4, "7B": 8,
+}
+
 # route_short_name -> the name riders use. Madrid's convention (`Linea 1`):
 # the operator's own public naming, not an English translation. The feed's
 # route_long_name is just the number again, so it supplies nothing.
@@ -290,11 +319,19 @@ RAW_CLASSIFICATION_COLUMN = "naf_label"
 # This taxonomy also classifies by naf_code: keep those raw column(s) through step 2
 # (they are passed to classify() by filter_to_storefront() and the map).
 
-# Sanity bounds for the supplied lat/lng. TODO: tighten to the city's real
-# extent once the boundary is known (this box is a wide starting guess).
+# Sanity bounds for the supplied lat/lng. TIGHTENED 2026-09-23 to the commune's
+# own measured extent plus a small margin - the scaffold's starting box was a
+# wide guess spanning most of Ile-de-France, which would have passed a
+# coordinate landing in Versailles. The contour measures
+# 48.8156-48.9022 N, 2.2242-2.4699 E (105.4 km2).
+#
+# The margin is ~0.02 deg, about 2 km, so a coordinate just outside the contour
+# still passes here and is caught by the boundary test rather than by a box -
+# the box exists to catch a CORRUPT coordinate (a swapped lat/lon, a zero, a
+# whole-degree placeholder), not to do the scoping.
 PARIS_BBOX = {
-    "lat_min": 48.46,
-    "lat_max": 49.26,
-    "lon_min": 1.85,
-    "lon_max": 2.85,
+    "lat_min": 48.79,
+    "lat_max": 48.93,
+    "lon_min": 2.20,
+    "lon_max": 2.49,
 }

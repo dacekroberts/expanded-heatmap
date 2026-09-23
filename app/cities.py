@@ -500,7 +500,7 @@ CITIES = [
         "lat": 48.8566,
         "lon": 2.3522,
         "page": "pages/21_Paris_Heatmap.py",
-        "blurb": "Métro (TODO: list the lines)",
+        "blurb": "Métro (Lignes 1–14, plus 3bis and 7bis)",
         "region": "Europe",
         "in_default_view": False,
         # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a

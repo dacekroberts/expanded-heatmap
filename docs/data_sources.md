@@ -2411,12 +2411,21 @@ non sono necessariamente omogenee, perché riferite al momento dell'ultima
 comunicazione"*. Nothing forbids calling the data current; the publisher's own
 statement makes it unwise.
 
-**24. Île-de-France Mobilités — required, and NOT YET DISPLAYED.**
+**24. Île-de-France Mobilités — required, and DISPLAYED.**
 
-Recorded at scaffold time so the obligation exists before the city does.
-**This item is a deploy blocker for Paris specifically** and not an outstanding
-defect on the cities now published — Paris is on a branch and has no rendered
-map yet.
+Recorded at scaffold time so the obligation existed before the city did, then
+**missed anyway**: the map rendered, the gate was run, and the notice was still
+absent from every page. A verification pass on 2026-09-23 found
+`verbatimIDFMNotice: false` on `/Paris_Heatmap` with 21 sources in the notices
+block and not one of them French. Added to `app/components.py`'s `_NOTICES` the
+same day.
+
+⚠️ **Nothing automated caught it, and that is the more useful finding.**
+`check_provenance.py` checks these notices in bijection with `_NOTICES` and
+prints `notices: 24 numbered, 21 displayed` — as a line of output, passing
+regardless. A required notice that is documented, numbered, called a deploy
+blocker in this very entry, and simply not rendered is exactly the gap this
+file's own reasoning says a script should close rather than a paragraph.
 
 **This is the first notice here whose licence is not a standard public one.**
 `mobility-licence` covers exactly **2 of 799** NAP datasets, there is no
