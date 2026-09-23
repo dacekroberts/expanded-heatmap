@@ -96,6 +96,12 @@ TAXONOMY_MODULES = {
     "barcelona_activitat": "pipeline.taxonomies.barcelona_activitat",
     "dublin_uses": "pipeline.taxonomies.dublin_uses",
     "milan_source": "pipeline.taxonomies.milan_source",
+    # NAF rev. 2 - the FIRST taxonomy here that is NATIONAL rather than a
+    # city's own. SIRENE is one register for the whole country, so five French
+    # cities (france.py's BUILD_SEQUENCE) share this module and a correction
+    # reaches all of them. Keyed at the sous-classe, Barcelona's shape: the
+    # groupe level puts 49.4% of Paris in "other" against 19.3% at level 5.
+    "france_naf": "pipeline.taxonomies.france_naf",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

@@ -21,6 +21,24 @@ fifty-four, and its footer can be read over HTTP range requests without
 downloading the file - which is how every number in this module was measured.
 """
 
+# --- Where the national files are cached ------------------------------------
+#
+# ONE CACHE FOR THE COUNTRY, NOT ONE PER CITY. The two SIRENE parquets are
+# 2,210 MB and 811 MB and they are NATIONAL - the same bytes serve Paris,
+# Marseille, Toulouse, Lille and Rennes. A per-city copy, which is what the
+# scaffold's layout implies, would be 15 GB to hold one 3 GB pair.
+#
+# Introduced 2026-09-23 while building the SECOND French city, deliberately
+# before the per-city pattern could be set in a third. `data/*/raw/` is
+# gitignored, and `data/france/raw/` matches that pattern, so nothing about the
+# repository changes.
+from pathlib import Path
+
+_ROOT = Path(__file__).parent.parent.parent
+SHARED_RAW = _ROOT / "data" / "france" / "raw"
+SIRENE_PARQUET = SHARED_RAW / "sirene_etablissements.parquet"
+GEOLOC_PARQUET = SHARED_RAW / "sirene_geoloc.parquet"
+
 # --- SIRENE: the national establishment register ---------------------------
 
 # Resolved from the data.gouv.fr API rather than hard-coded, because the file
@@ -53,7 +71,36 @@ STATE_ACTIVE_VALUE = "A"
 
 COMMUNE_COLUMN = "codeCommuneEtablissement"   # the ONE per-city variable
 NAF_COLUMN = "activitePrincipaleEtablissement"
-NAF25_COLUMN = "activitePrincipaleNAF25Etablissement"  # NAF 2025, newer scheme
+
+# NAF 2025, the newer scheme - PRESENT, AND DELIBERATELY NOT USED.
+#
+# This was a bare constant with a one-line comment until 2026-09-23, which is
+# how a real question hid in plain sight: `pipeline/taxonomies/france_naf.py`
+# keys entirely on rev. 2, so if SIRENE had migrated, the taxonomy was built on
+# the wrong column. Measured over HTTP range requests against the September 2026
+# release - 6 requests, 2.6 MB, no 2.2 GB download:
+#
+#     column                                  whole row group   active Paris
+#     activitePrincipaleEtablissement                  100.0%         100.0%
+#     activitePrincipaleNAF25Etablissement              37.5%         100.0%
+#
+# THE CODES ARE NOT INTERCHANGEABLE. The sous-classe letter differs - rev. 2
+# writes `01.11Z` where NAF 2025 writes `01.11Y` - so france_naf.py's 64
+# mappings would match nothing and `classify()` would return None for every
+# row, emptying the map rather than raising.
+#
+# Rev. 2 wins on three counts: it is 100% populated everywhere rather than only
+# on the active slice, it is what INSEE's published label file
+# (`int_courts_naf_rev_2.xls`) covers, and it is what the taxonomy's deciding
+# catch-all measurement (19.3% at sous-classe) was taken against.
+#
+# ⚠ WATCH ITEM, not an action: if INSEE deprecates rev. 2 in a future monthly
+# release, this decision reverses and france_naf.py needs a NAF 2025 mapping
+# built from INSEE's 2025 label file. The 37.5% figure is the thing to re-read -
+# it rising toward 100% is the migration happening.
+NAF25_COLUMN = "activitePrincipaleNAF25Etablissement"
+NAF25_IN_USE = False
+NAF25_POPULATED_MEASURED = {"all_rows": 0.375, "active_paris": 1.000}
 
 # The trade name, and why there are two of them. See the naming note below.
 ENSEIGNE_COLUMNS = ("enseigne1Etablissement", "enseigne2Etablissement",
@@ -65,9 +112,30 @@ USUAL_NAME_COLUMN = "denominationUsuelleEtablissement"
 # a sole trader's shop is its own siege. Recorded so nobody tries.
 SIEGE_COLUMN = "etablissementSiege"
 
-# Employee-count band. "000" means no employees. The Paris measurement used
-# this to go from 148,633 to 50,156.
+# Employee-count band. **NO EMPLOYEE FILTER IS APPLIED IN FRANCE**, and this
+# constant exists to record that rather than to enable one.
+#
+# This comment used to read: *"000 means no employees. The Paris measurement
+# used this to go from 148,633 to 50,156."* **The Paris build disproved it on
+# 2026-09-23, measuring all 149,166 bucket rows:**
+#
+#     trancheEffectifsEtablissement == "NN"   115,248   77.3%
+#     every banded row together                33,918
+#     rows recording "00"                       1,425
+#
+# So the largest cut this column can make falls **16,000 short** of 50,156 -
+# the number is not reachable from this column at all. And dropping `NN` is
+# separately wrong: with only 1,425 rows at "00", **SIRENE codes a sole trader
+# as NN**, so that band holds every owner-run shop in the country.
+#
+# THE SHAPE OF THE ERROR, which is the part worth carrying: 50,156 was
+# produced by tuning a filter until its output matched OSM, then recorded as a
+# measurement. The OSM side reproduced on re-test (9,058 restaurants against a
+# recorded 10,642); the SIRENE side did not (16,280 against a recorded 10,595).
+# **When one side of a comparison reproduces and the other does not, the
+# non-reproducing side is where the tuning happened.**
 EMPLOYEE_BAND_COLUMN = "trancheEffectifsEtablissement"
+EMPLOYEE_FILTER_APPLIED = False
 
 # France masks non-diffusible records AT SOURCE - the name, the address and
 # the geolocation - so the privacy work is partly done upstream. 13.4% of
@@ -105,11 +173,19 @@ GEO_PRECISION_COLUMN = "distance_precision"
 # Across 20,103 ACTIVE rows in NAF 47/56/96 sampled from four row groups spread
 # through the file:
 #
-#     enseigne1Etablissement             29.1%
-#     enseigne2Etablissement             13.4%
-#     denominationUsuelleEtablissement   34.2%
-#     EITHER an enseigne or a usual name 42.9%
-#     ...of Paris (751xx) rows           38.4%
+#     enseigne1Etablissement             29.1%   <- NATIONAL
+#     enseigne2Etablissement             13.4%   <- NATIONAL
+#     denominationUsuelleEtablissement   34.2%   <- NATIONAL
+#     EITHER an enseigne or a usual name 42.9%   <- NATIONAL, NOT PARIS
+#     ...of Paris (751xx) rows           38.4%   <- Paris, superseded by 39.6%
+#
+# ** READ THE LABELS. 42.9% IS FRANCE, NOT PARIS.** Paris's own brief imported
+# that national figure into a Paris table and captioned it "Paris is the
+# worst-named of the six" - drawing the right conclusion from the wrong number,
+# while the Paris-specific 38.4% sat five lines above it. Corrected 2026-09-23;
+# the 12.6% one-pass scan puts Paris at **39.6%**, which agrees with 38.4% and
+# never agreed with 42.9%. A country profile's national aggregate and a city's
+# own rate are two different numbers, and the city one is in CITY_ESTIMATES.
 #
 # So roughly SIX IN TEN French storefronts publish no name at the premises
 # level. This is Milan's `insegna` trap in another language, and it is recorded
@@ -137,9 +213,9 @@ NATURAL_PERSON_CODE = "1000"          # personne physique - SUPPRESS the name
 LEGAL_NAME_COLUMN = "denominationUniteLegale"
 
 # Both figures are LOWER BOUNDS: the API used exposes `liste_enseignes` and
-# `nom_commercial` but not `denominationUsuelleEtablissement`, which the 42.9%
-# above came from, so rows counted unnamed there are disproportionately
-# companies. Direction is unaffected.
+# `nom_commercial` but not `denominationUsuelleEtablissement`, which the
+# national 42.9% above came from, so rows counted unnamed there are
+# disproportionately companies. Direction is unaffected.
 #
 # TRAP, and it produced a wrong answer before it was caught: that API's
 # `total_results` SATURATES AT 10,000. Every bucket returned exactly 10,000 and
@@ -180,21 +256,38 @@ CITY_COMMUNE_PREFIXES = {
     "rennes": ("35238",),
 }
 
-# Scaled estimates from that same sample, and the per-city naming rate. These
-# are ESTIMATES for ordering, not build numbers - each city's Step 0 measures
-# its own total. The naming column is the one that matters:
+# RE-MEASURED 2026-09-23. All six cities scanned in ONE pass over 12.6% of the
+# file, replacing a 3.9% scan. These are ESTIMATES for ordering, not build
+# numbers - each city's Step 0 measures its own total. The naming column is the
+# one that matters:
 #
-# **PARIS IS THE WORST-NAMED OF THE SIX.** The five follower cities all carry
-# a premises name on 45-54% of rows against Paris's 42.9%, so the cheap cities
-# are also the better data - which inverts the usual assumption that the
-# flagship city is the strongest one.
+# **PARIS IS THE WORST-NAMED OF THE SIX, and the gap WIDENED on re-measurement.**
+# The five follower cities carry a premises name on 43.4-53.5% of rows against
+# Paris's 39.6%, so the cheap cities are also the better data - which inverts
+# the usual assumption that the flagship city is the strongest one.
+#
+# **Every city except Toulouse came in LOWER by 1-3 points**, so the 3.9%
+# figures were uniformly optimistic. The ranking survived unchanged.
+#
+# ONE SAMPLE, DELIBERATELY. A single row of this table may never be refreshed
+# on its own: on 2026-09-23 Lyon's row was updated alone during its discard and
+# left the other five on the old scan, which is the same
+# comparison-across-samples error that produced a false "correction" to
+# Marseille's figure hours earlier. Refresh all six or none.
+#
+# `bucket_rows_est` is SCALED and is a FLOOR - active bucket rows get denser
+# through a file ordered by `siret`, which is seniority. Paris scales to 117,730
+# against an independently measured **148,633**, so scaling understates by ~21%.
+# The scaled value is kept here so the six stay comparable; the measured one is
+# the build number.
+PARIS_BUCKET_ROWS_MEASURED = 148_633   # use THIS for Paris, not the scaled est.
 CITY_ESTIMATES = {
-    "paris":     {"bucket_rows_est": 136_400, "named": 0.429},
-    "marseille": {"bucket_rows_est": 26_940, "named": 0.458},
-    "lyon":      {"bucket_rows_est": 19_449, "named": 0.525},
-    "toulouse":  {"bucket_rows_est": 12_873, "named": 0.519},
-    "lille":     {"bucket_rows_est": 10_461, "named": 0.507},
-    "rennes":    {"bucket_rows_est": 5_002, "named": 0.543},
+    "paris":     {"bucket_rows_est": 117_730, "named": 0.396},
+    "marseille": {"bucket_rows_est": 25_430, "named": 0.434},
+    "lyon":      {"bucket_rows_est": 18_082, "named": 0.514},  # DISCARDED
+    "toulouse":  {"bucket_rows_est": 12_853, "named": 0.528},
+    "lille":     {"bucket_rows_est": 8_076, "named": 0.475},
+    "rennes":    {"bucket_rows_est": 4_833, "named": 0.535},
 }
 
 # --- rail ------------------------------------------------------------------
@@ -304,7 +397,11 @@ LYON_REQUIRES_ACCOUNT = True
 MAP_REGION = "Europe"
 
 BUILD_SEQUENCE = ("paris", "marseille", "toulouse", "lille", "rennes")
-DEFERRED = {"lyon": "account + trademark + indemnity; see gated_access 17-19"}
+# DISCARDED 2026-09-23 on four independent blockers - see
+# docs/city_master_list.md and DECISIONS.md. Kept here because the DATA
+# is fine (51.4% named, better than Paris), so a reinstatement would not
+# need to re-measure the business leg.
+DISCARDED = {"lyon": "account + CGU 9.4 indemnity + CGU 6.2 trademark + dead NAP feed"}
 
 # RESOLVED 2026-09-22. The two readings disagreed because the NAP API's
 # `resources` array INCLUDES the entries that also appear in
@@ -322,12 +419,34 @@ DEFERRED = {"lyon": "account + trademark + indemnity; see gated_access 17-19"}
 PARIS_GTFS_PROVENANCE_RESOLVED = True
 PARIS_GTFS_URL = "https://eu.ftp.opendatasoft.com/stif/GTFS/IDFM-gtfs.zip"
 
-# It SELF-ATTESTS, which is the property `add-country` requires before a feed
-# is trusted: `metadata.end_date` 2026-10-21, and it declares its own
-# `features` - "position des stations", "topologie du reseau", "traces de
-# lignes" - and `modes`: bus, tramway, subway, funicular, gondola, rail.
-# The declared end_date also supplies the UPDATE INTERVAL that Art. 5.7 and the
-# MMTIS reglement require this project to display.
-PARIS_GTFS_SELF_ATTESTS = True
+# ⚠ CORRECTED 2026-09-23. This said True, and it was wrong.
+#
+# `add-country`'s rule is that a feed is trusted when THE ARTIFACT self-attests
+# to its own freshness. This one does not: `brief_check.py`'s
+# `idfm-gtfs-has-shapes-and-no-feed-info` measured **14 files and NO
+# feed_info.txt**, so the zip declares no validity window at all. The
+# `end_date` of 2026-10-21 is real but it is `transport.data.gouv.fr`'s
+# metadata ABOUT the feed - the NAP's assertion, not the file's - and that is
+# precisely the weaker thing `add-country` tells these two apart for: *a mirror
+# is usable when the artifact self-attests, and is not when you must take the
+# mirror's word.*
+#
+# The feed is still the right one; provenance was never the question, since the
+# host is IDFM's own (`stif/` on Opendatasoft). What changes is HOW STALENESS
+# IS DETECTED - from the NAP metadata or a content hash, never from the zip -
+# and it changes a COMPLIANCE item, which is why this constant matters beyond
+# bookkeeping: notice 24 (Licence Mobilites Art. 5.7) requires this project to
+# DISPLAY the data's last-updated date and its update interval, and neither
+# value exists inside the artifact. `fetch_sources.py` must capture both at
+# download time or they cannot be shown honestly.
+#
+# The `features` and `modes` declarations quoted in the old comment are real,
+# but they are NAP metadata too - they describe the feed, they do not date it.
+PARIS_GTFS_SELF_ATTESTS = False
+
+# Where the two Art. 5.7 values actually come from, since the artifact has
+# neither. Recorded here rather than in Paris's config because all five cities
+# of BUILD_SEQUENCE read this feed's publisher under the same licence.
+PARIS_GTFS_FRESHNESS_SOURCE = "transport.data.gouv.fr NAP metadata, not the zip"
 
 SOURCE_ENCODING = "utf-8"

@@ -134,23 +134,55 @@ spread through the file:
 level.** This is Milan's `insegna` trap in another language, and it is written
 here rather than discovered at step 2 with a taxonomy already built.
 
-Per city, from a larger 14-row-group sample (1,735,429 rows, 3.9% of the file;
-scaled estimates, not build numbers):
+### ✅ RE-MEASURED 2026-09-23 — all six on ONE sample, 12.6% of the file
 
-| City | Bucket rows, est. | Named |
-|---|---|---|
-| **Paris** | 136,400 | **42.9%** |
-| Marseille | 26,940 | 45.8% |
-| Lyon | 19,449 | 52.5% |
-| Toulouse | 12,873 | 51.9% |
-| Lille | 10,461 | 50.7% |
-| **Rennes** | 5,002 | **54.3%** |
+The table below replaces a 3.9% sample. **All six cities were scanned in a
+single pass**, because a comparison drawn across different samples is not a
+comparison — which is the error that produced, and then briefly "corrected",
+the Marseille figure.
 
-**Paris is the worst-named of the six**, which inverts the usual assumption
-that the flagship city carries the best data. Paris's scaled 136,400 against
-its independently measured **148,633** is the control passing — the ~8% gap is
-sample bias, because active bucket rows get denser through a file ordered by
-siret, which is seniority.
+| City | Rows counted | Scaled est. | **Named** | 3.9% had said | Δ |
+|---|---|---|---|---|---|
+| **Paris** | 14,884 | 117,730 | **39.6%** | 42.9% | −3.3 |
+| Marseille | 3,215 | 25,430 | **43.4%** | 45.8% | −2.4 |
+| Lille | 1,021 | 8,076 | **47.5%** | 50.7% | −3.2 |
+| Lyon | 2,286 | 18,082 | **51.4%** | 52.5% | −1.1 |
+| Toulouse | 1,625 | 12,853 | **52.8%** | 51.9% | +0.9 |
+| **Rennes** | 611 | 4,833 | **53.5%** | 54.3% | −0.8 |
+
+**The spread is REAL: 39.6% to 53.5%, fourteen points.** The ranking the
+small sample implied survives — Paris worst, Rennes best — but **every city
+except Toulouse came in lower**, so the absolute values were all optimistic by
+1–3 points.
+
+⚠️ **Scaled counts are systematically LOW.** Paris scales to 117,730 against
+its independently measured **148,633**. Active bucket rows get denser through
+a file ordered by `siret`, which is seniority, so **use the measured figure
+where one exists and treat every scaled estimate here as a floor.**
+
+### The taxonomy level holds in all six — measured, not assumed
+
+Same 12.6% sample, INSEE's own labels, **0% unlabelled everywhere**:
+
+| City | sous-classe | classe | groupe | distance selling | masked |
+|---|---|---|---|---|---|
+| Paris | **19.8%** | 27.9% | 47.7% | 18.2% | 8.5% |
+| Marseille | **21.1%** | 36.3% | 48.1% | 16.4% | 12.2% |
+| Lyon | **19.9%** | 35.0% | 50.7% | 18.3% | 10.9% |
+| Toulouse | **21.8%** | 37.5% | 46.8% | 18.2% | **16.0%** |
+| Lille | **23.0%** | 38.1% | 44.1% | 16.7% | 9.6% |
+| Rennes | **22.6%** | 35.7% | 46.0% | 14.2% | 9.8% |
+
+**Every city keys at sous-classe**, in a tight band of 19.8–23.0%. *Groupe*
+is catastrophic everywhere (44–51%). **So the level choice genuinely transfers
+across France** — the first country in this project where that has been shown
+rather than assumed.
+
+**Distance selling ranges 14.2–18.3%** and must be excluded everywhere;
+Rennes is the lowest, Lyon the highest. ⚠️ **Toulouse's masking is 16.0%**,
+roughly double Paris's 8.5% — a sixth of its rows have name, address **and
+geolocation** withheld at source, which shrinks its usable set more than its
+row count suggests.
 
 ### ⚠️ The fallback that must not be used blindly
 

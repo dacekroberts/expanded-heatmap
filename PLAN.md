@@ -21,30 +21,179 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [ ] **🇫🇷 FRANCE — Paris and Marseille BUILT; Toulouse, Lille and Rennes
+  remain. `deploy-verify` is deliberately deferred until all five are done.**
+
+  ✅ **Paris** built and deployed 2026-09-23 (22 cities live).
+  ✅ **Marseille** built 2026-09-23 on `marseille-build`, 18,177 storefronts,
+  66 stations, gate 3 passing against AMP's own layer.
+
+  **THE DEFERRAL IS THE OWNER'S CALL (2026-09-23) AND IT IS A SCOPE DECISION,
+  NOT AN OVERSIGHT.** `deploy-verify` is city-scoped work: a `city-added` run
+  costs a real slice of a session and re-verifies the whole app each time. Run
+  once, after the last French city, it covers all five for roughly the cost of
+  one — and every check it does not do is already covered per city by
+  `check_provenance`, `check_macro_labels`, `check_personal_exposure`,
+  `check_deploy_imports` and a browser render, all of which ran for both cities
+  built so far.
+  ⚠️ **What this defers is the ONE THING those cannot see**: the app running as
+  a whole under the lean venv with a real click path. So the last French city
+  does not merge until that run happens, and a French city reaching master
+  before then is the thing to stop.
+
+  **What city three inherits, and what it does not.** Inherits: the country
+  module, `france_naf`, the shared national parquet cache, the shared
+  `france_register.py` step 2, the Lambert-93 grid, the Milan-hybrid naming and
+  the catch-all verdict (measured twice now, 9.8% vs 9.6% on `96.09Z`). Does
+  NOT inherit: the scope decision, the ring edges, the spacing floor, gate 3's
+  source, and the OSM control — each measured per city, and each having
+  produced a different answer at least once.
+
+  ⚠️ **Lille has no first-party metro line geometry** (its brief found tram
+  geometry and no metro), so its rail leg is not Paris's or Marseille's and
+  needs its own answer before it starts.
+
+- [ ] **🇫🇷 PARIS — ✅ BUILT AND DEPLOYED 2026-09-23. Kept for the checklist
+  below, which the follower cities still read.**
+
+  Three commits: `5e0e3c6` (the national `france_naf` taxonomy, the scaffold,
+  Lambert-93), `ab47e24` (the decision record), `28b3b91` (the three source
+  rows and notice 24). Step 0 is banked in `docs/build_briefs/paris.md` (7/7)
+  and the national facts in `pipeline/countries/france.py`; **both owner calls
+  are settled** — commune-only scope, and the Milan hybrid for pin names. What
+  follows is only what is specific to Paris; everything generic is `add-city`
+  from Step 4.
+
+  ⚠️ **DO NOT MERGE THIS BRANCH TO MASTER UNTIL THE BUILD FINISHES.** Paris is
+  already an entry in `app/cities.py`, so a merge now puts a Paris marker on
+  the macro map pointing at a page with no `outputs/paris/heatmap.html` behind
+  it. This is the one item on this list that breaks the live site rather than
+  delaying it.
+
+  1. **`fetch_sources.py`** — three downloads, and one deliberate non-download.
+     IDFM's GTFS (`eu.ftp.opendatasoft.com/stif/GTFS/IDFM-gtfs.zip`), SIRENE
+     `StockEtablissement` **parquet** (2,210 MB — not the 2,867 MB ZIP) and
+     INSEE's geolocation parquet (811 MB). **`StockUniteLegale` is NOT needed**:
+     it exists to feed the natural-person suppression guard, and the Milan
+     hybrid removes the legal-name fallback that guard protected, so the 30 M
+     row file is not downloaded at all. ⚠️ **Record the download date**: the
+     feed carries no `feed_info.txt`, so nothing inside the artifact declares
+     when it was current, and notice 24 (Art. 5.7) requires both that date and
+     the update interval to be *displayed*. Capture them here or they cannot be
+     shown honestly later.
+  2. **`step1_stations.py`** — `route_type 1` only. Commuter rail (RER,
+     Transilien) and tram are excluded by standing rule, not by scope, so the
+     boundary is not what drops them. ✅ MEASURED 2026-09-23: **245 inside the
+     commune and 76 outside**, all 16 lines surviving. (The brief predicted 77
+     outside and 322 total; the feed gives 76 and 321. The inside count
+     reproduced exactly.) The 76 go to
+     `outputs/paris/excluded_stations.csv`, which
+     `app/pages/21_Paris_Heatmap.py` **already cites** — `check_provenance.py`
+     stays red until it exists. Naming the commune each excluded station sits
+     in needs a multi-commune layer, so this is **Los Angeles' step 1 shape,
+     not San Diego's**; `geo.api.gouv.fr` can resolve the names.
+  3. **`step2_clean_businesses.py`** — the traps are all measured, and each one
+     fails silently rather than loudly:
+     - active is the **letter `A`**, never the label `Actif` (which returns
+       zero rows for all six French cities — keep Paris as the control);
+     - `codeCommuneEtablissement` prefix **`751`**;
+     - `statutDiffusionEtablissement == "O"` (13.4% masked at source);
+     - join geolocation on `siret`, and **read the per-row `epsg` column**
+       rather than hard-coding 2154 — the DOM values are real;
+     - drop `qualite_xy` **class 33**, which is commune-centroid grade and must
+       not be drawn as a street address;
+     - name = `enseigne1Etablissement` or `denominationUsuelleEtablissement`,
+       **else the address** (42.9% carry either; Paris is the worst-named of
+       France's six cities).
+  4. **Two measurements this build owes, both currently unmeasured.** The
+     market-stall codes `47.81Z/47.82Z/47.89Z` are excluded in `france_naf.py`
+     on reasoning whose supporting share **nobody has counted** — count it, and
+     if it is large, re-take the call rather than leaving the footnote. And
+     sample the five `CATCH_ALL_CODES`, `96.09Z` first at **8.6%** of bucket
+     rows, then put the verdict in `pipeline/paris/config.py` as an exclusion
+     list. The national module deliberately does not make either call.
+  5. **`step3_map.py`** — 16 `LINE_SHAPES`, each with the name riders use
+     (M1–M14 plus 3bis and 7bis, which are separate lines and not variants).
+     ⚠️ **IDFM's network plans are CC BY-NC-ND 3.0 France**: redraw from
+     `shapes.txt` only, and use no IDFM schematic as a source or an overlay.
+     `label_focus` is the commune polygon.
+  6. **Checks, in order.** Add Paris to `scripts/check_personal_exposure.py`'s
+     `REGISTRIES` and run it; `drift_check.py paris`; `check_provenance.py`
+     (two failures are currently **correct** and must clear by being *fixed*,
+     not relaxed — the missing CSV, and `city_master_list.md` still saying
+     `Built - 20`, which becomes true to bump only once Paris really is built);
+     **measure** Paris's macro-map label width in a real browser with Space
+     Grotesk loaded and add it to `check_macro_labels.py` (it refuses a guessed
+     width); `check_deploy_imports.py --ref paris-build`; then `deploy-verify`
+     with scope `city-added`, and a **reboot** after the push.
+  7. **Page prose carries two obligations no other city's does.** Notice 24
+     needs the snapshot date and update interval *displayed*, and Art. 5.7's
+     duty is the inverse of MTA's — it requires **exhaustivité**, so the page
+     must state what was excluded (commuter rail, tram, the 77 out-of-commune
+     stations) rather than leave it implicit. Art. 5.4(a) also prescribes the
+     **linking**, which `render_site_notices()` has never had to do.
+
+  **Still open, none of it blocking:** whether `enseigne1` or
+  `denominationUsuelle` wins when both are present (cosmetic now that neither
+  path reaches a person's name); whether the annual *déclaration de conformité*
+  applies to a static density map (L. 1115-5 — worth asking
+  `donnees-mobilite@autorite-transports.fr` rather than assuming, because it
+  creates a *recurring* duty); and IDFM's own licences page contradicting the
+  NAP by calling its *tracés* Licence Ouverte, where **the stricter reading was
+  adopted deliberately** and would change this city's notice if ever relied on.
+
+
 - [ ] **🇫🇷 Validate the SIRENE storefront filter against OSM in the FIRST
   non-Paris French city built — not in all five, and not skipped.**
 
   Measured 2026-09-22: **geolocation is confirmed for all six French cities**
   (Paris 99.98%, Lyon 99.97%, Marseille 99.91%, Rennes 99.90%, Toulouse
   99.85%, Lille 99.71%), so there is no geocoding leg anywhere in France.
-  **What is still Paris-only is the composition check** — that the employee
+  **What is still Paris-only is the composition check** — that the storefront
   filter selects the *right rows*, not merely rows that have coordinates.
 
-  In Paris it landed at **50,156 against OSM's 54,198** (92.5%), and
-  **10,595 against 10,642** on restaurants alone. That comparison is what
-  turned France from a rejection into a build, and it has been run in exactly
-  one city.
+  ⚠️ **THE ORIGINAL COMPARISON IS SUPERSEDED. Re-run it, do not inherit it.**
+  This item read "**50,156 against OSM's 54,198** (92.5%), and **10,595 against
+  10,642** on restaurants alone" and called that the comparison that turned
+  France from a rejection into a build. **The SIRENE side of it cannot be
+  reproduced.** It was attributed to an employee filter, and measured
+  2026-09-23 over all 149,166 Paris bucket rows, `trancheEffectifs` is `NN` on
+  **77.3%** of them — so every banded row together is 33,918 and no predicate
+  on that column reaches 50,156.
+
+  Re-established from scratch 2026-09-23, same commune, this project's own
+  Overpass helper:
+
+  | | OSM | SIRENE | ratio |
+  |---|---|---|---|
+  | Total | **48,973** | **87,164** | **1.78×** |
+  | `amenity=restaurant` vs NAF `56.10A` | **9,058** | **16,280** | 1.80× |
+
+  The **OSM side reproduces** (48,973 against the recorded 54,198, and 9,058
+  against 10,642 — my tag set is slightly narrower). The **SIRENE side does
+  not**: 16,280 against a recorded 10,595, on the one definition where the two
+  schemes mean the same thing.
+
+  **What this does and does not overturn.** France remains a build — register,
+  join, coverage and licence are untouched. What falls is the *claim* that
+  SIRENE lands at 92.5% of OSM; it is about 1.78× of it. The residual is
+  disclosed on the city page rather than filtered away, because tuning until
+  the number matched OSM is what produced 50,156.
+  ⚠️ `docs/global_country_shortlist.md`'s France row still rests on the old
+  figure and needs the same correction.
 
   **Why this is a checklist item and not a paragraph:** the two halves are
   easy to conflate, and the geolocation half is now so clean that it invites
-  treating the whole country as settled. It is not. Run the OSM comparison
-  once, on whichever city is built after Paris, and if it holds there, the
-  national claim is evidenced twice and can stand for the rest.
+  treating the whole country as settled. It is not. Run the OSM comparison on
+  whichever city is built after Paris — **now genuinely a second data point
+  rather than a confirmation**, since the first one turned out to be wrong.
 
-  Storefront layers, for sizing the comparison: Paris 50,156, Marseille
-  8,065, Lyon 7,354, Toulouse 4,833, Lille 3,272, Rennes 2,089. **Rennes and
-  Lille are an order of magnitude below Paris** — a separate scope call about
-  whether a ~2,000-point city earns a page, not a data problem.
+  Storefront layers, for sizing the comparison: **Paris 87,164 (measured)**;
+  Marseille 8,065, Lyon 7,354, Toulouse 4,833, Lille 3,272, Rennes 2,089 —
+  ⚠️ **the five follower figures are scaled from the same superseded basis as
+  50,156 and should be treated as ordering hints only.** **Rennes and Lille are
+  an order of magnitude below Paris** — a separate scope call about whether a
+  ~2,000-point city earns a page, not a data problem.
 
 
 - [x] **Region switcher on the macro map — DONE 2026-09-22 (`2121ada`).**
@@ -391,7 +540,9 @@ mistakes as confidently as its findings.
      30,020,346 legal units keyed on `siren`, the registered-office map.
   3. Filter `codeCommuneEtablissement` prefix **`751`**, active =
      **`"A"`, not `"Actif"`** — the label returned zero rows for all six
-     cities. **Run Paris first as a control against 148,633.**
+     cities. **Run Paris first as a control against 149,166** (re-measured
+     2026-09-23 over the whole file; the brief's 148,633 was 0.36% lower, a
+     month's churn rather than an error).
   4. Join the geolocation parquet on `siret`. **Read the `epsg` COLUMN** — it
      is per row; 2154 here, 2975/5490/2972 overseas.
   5. **Exclude distance selling: `47.91A`, `47.91B`, `47.99A`, `47.99B` —
@@ -475,6 +626,169 @@ mistakes as confidently as its findings.
      lines, not one credit.**
   7. Open: whether `navn` is a trade name or a legal name — the question that
      caught Milan and Paris.
+
+- [x] **Lyon** 🇫🇷 — **DISCARDED 2026-09-23.** Four independent
+  blockers, not one: the account this project will not create, CGU **9.4**'s
+  open-ended indemnity, CGU **6.2**'s bar on the producers' *signes
+  distinctifs* (which collides with naming **TCL** on the map), and a National
+  Access Point feed **dead since 2022-04-14**. **Its DATA is fine** — ~18,082
+  bucket rows at **51.4% named**, better than Paris — so this is a discard on
+  **terms and access**, never on data. **Reinstatement template below**, kept
+  because the business leg would not need re-measuring.
+  - **If new evidence suggests viability, these four must ALL clear:**
+    1. An account at `https://data.grandlyon.com/portail/fr/connexion` —
+       **owner action; this project does not create accounts.** CGU 5.5 makes
+       first access rights valid **30 days** before reconfirmation, and
+       Licence Mobilités Art. 4.2 requires **one account per Licensee**.
+    2. **Accept CGU 9.4's indemnity** — owner decision. Precedent exists:
+       Hong Kong's was accepted 2026-09-22 on the reasoning in
+       `docs/data_sources.md`.
+    3. **Settle CGU 6.2** — whether naming **TCL** is barred.
+       `contactopendata@tcl.fr` can grant prior authorisation cheaply.
+    4. **Source the rail from `data.grandlyon.com`, not the NAP** — its NAP
+       copy shows **0% availability, last modified 2022-04-14**, against a
+       source portal current to 2026-09-22. **The stale-mirror trap.**
+  - ⚠️ **Do not generalise Lyon's clauses to France.** Toulouse's and Rennes'
+    CGU were read 2026-09-23 and are **clean** — Opendatasoft template, no
+    indemnity, marks clause expressly excluding the published data. **Lyon's
+    are Grand Lyon's own.**
+
+- [ ] **Marseille · Toulouse · Lille · Rennes** 🇫🇷 — **NOT
+  brief-ready; country-ready.** No brief file exists for any of them. They
+  inherit France's register, join and privacy handling, but **three things do
+  NOT transfer from Paris.**
+  1. **Their GTFS licences differ from Paris's and from each other.**
+     ✅ **ODbL READ 2026-09-23** for Toulouse and Rennes — **PERMITTED WITH
+     CONDITIONS**, written up at `docs/licenses/odbl-toulouse-rennes.md`.
+     §4.5(b) settles the map: making a Produced Work **does not create a
+     Derivative Database**. But **§4.6 fires on a Produced Work *from* a
+     Derivative Database**, and the map is produced from the committed station
+     CSV — **already satisfied by the public repo**, which is literally *"the
+     method of making the alterations"*, **provided it is LINKED from the
+     site**. §4.3 prescribes a safe-harbour notice per database.
+     ✅ **Both publishers' CGU READ 2026-09-23 and BOTH ARE CLEAN** — no
+     indemnity, and the marks clause is **Opendatasoft's own with the data
+     expressly excluded**, so **naming Tisséo and STAR is not barred**. The
+     express extraction bar is conditional on acting *outside* a licence, and
+     this project is inside one. ⚠️ They answered plain curl — **the earlier
+     Cloudflare challenge was path-specific, not a wall.**
+     ⚠️ **Still open**: whether the station CSV is itself a Derivative
+     Database under §4.4. **Unlike Paris there is NO publisher gloss** —
+     Licence Mobilités had the NAP's published interpretation; ODbL has none.
+     **Cheap discharge: put an ODbL notice on the station CSV.**
+     ✅ **Marseille and Lille are `lov2` — Licence Ouverte 2.0 READ 2026-09-23**,
+     **PERMITTED WITH CONDITIONS**, write-up at `docs/licenses/france-licence-ouverte-2.0.md`.
+     **No share-alike, no revocation, no indemnity.** Attribution is **name +
+     date of last update, PER SOURCE** — and the date-of-last-update duty is
+     **LO 2.0's own**, so the three sightings (Licence Mobilités 5.7, Grand Lyon
+     6.1, MEL) are ONE duty restated, not three inventions.
+     ⚠️ **`Source : Insee` is prescribed VERBATIM** — the only fixed string
+     in the five. ⚠️ **Render no publisher's logo.**
+     ⚠️ **A STANDING refresh duty**: `statutDiffusion` changes as people
+     exercise opposition, so a committed `outputs/` snapshot can contain
+     someone who has since opted out. **Needs a stated refresh cadence.**
+     ⚠️ **ODC-BY is named compatible; ODbL is NOT.** Do not read it as
+     covering Toulouse or Rennes.
+  2. ⚠️ **Scope does not transfer.** Paris went commune-only on a
+     *measurement* — all 16 métro lines survived the boundary. Nothing
+     guarantees that repeats: **Lille's commune is small against MEL**, whose
+     métro serves Villeneuve-d'Ascq, Roubaix and Tourcoing. One
+     boundary-vs-network measurement each.
+  3. **The NAF catch-all (19.3%) and the 15.5% distance-selling exclusion were
+     measured on PARIS rows only**, and per-city row counts are scaled
+     estimates from a 3.9% sample, not build numbers.
+
+  **Feeds VERIFIED 2026-09-23** — they had been identified, never downloaded:
+
+  | City | Size | `shapes.txt` | `feed_info.txt` | Rail |
+  |---|---|---|---|---|
+  | Marseille | 34.0 MB | ✅ | ✅ end **2026-12-31** | 2 subway, 4 tram, 6 ferry |
+  | Toulouse | 12.0 MB | ✅ | ❌ | 2 subway, 1 tram, **1 gondola** |
+  | **Lille** | 9.2 MB | ❌ **MISSING** | ❌ | 2 subway, 1 tram |
+  | Rennes | 13.4 MB | ✅ | ✅ end **2026-10-18** | 2 subway |
+
+  4a. **Lille geometry — PROBED 2026-09-23. Tram is first-party; métro is
+     NOT, and must come from OSM.**
+     The portal is **geOrchestra, not Opendatasoft** —
+     `opendata.lillemetropole.fr` serves an HTML app and
+     `data.lillemetropole.fr` returns **404 JSON whose body names its own
+     platform** (`georchestraStylesheet`, `logoUrl: /public/logo-mel.jpg`).
+     So `/api/datasets/1.0/search` and `/api/explore/v2.1` are the wrong shape
+     entirely. **Read the error body before guessing another path.**
+     The working surface is **WFS**:
+     `data.lillemetropole.fr/geoserver/wfs?service=WFS&request=GetCapabilities&version=2.0.0`
+
+     | Mode | Layer | Verdict |
+     |---|---|---|
+     | **Tram** | `mel_mobilite_et_transport:tramway_lignes` — *"Tracés des lignes de tramway du réseau Ilévia"* | ✅ **4 LineString features**, lines **R** (Lille↔Roubaix) and **T** (Lille↔Tourcoing), with `nom`, `ligne`, `exploitant` |
+     | **Métro** | — | ❌ **NO LINE GEOMETRY ANYWHERE ON THE PORTAL.** Only `stations_metro` and `dsp_ilevia:entree_sortie_metro`, both **points** |
+     | Bus | `dsp_ilevia:ilevia_traceslignes` | 424 LineStrings — not needed |
+
+     ⚠️ **A near-miss worth keeping.** `ilevia_traceslignes` is titled
+     *"Tracés des lignes de **bus**"* and its `ligne` values include **`L1`**,
+     which reads exactly like Métro Ligne 1. **It is not.** Its `type_ligne`
+     values are `Urbaine`, `Suburbaine`, `Scolaire` and `Ligne de nuit` — all
+     bus categories — and **`L1` is *Liane 1*, ilévia's high-frequency BUS
+     brand.** The title was honest; the line code was the trap. **One field
+     check disproved it.**
+
+     🎁 **Bonus, and it solves a separate problem**: `dsp_ilevia:couleurs_lignes`
+     exists, and `ilevia_traceslignes` carries `rgbhex_fond`, `rgbhex_texte`
+     and `color`. Lille's GTFS `routes.txt` may not carry colours; **this is a
+     first-party source for them**, and every drawn line needs a legend entry.
+
+     **So Lille's rail geometry is a HYBRID or an OSM job** — an owner call:
+     tram from MEL's WFS (first-party, named, with `exploitant`) and métro from
+     **OSM** via `osm-rail`; or both from OSM for consistency. ✅ **MEL's WFS licence READ 2026-09-23: `Licence Ouverte v2.0 (Etalab)`**,
+     from the ISO19139 `gmd:otherConstraints`. **PERMITTED WITH CONDITIONS** —
+     its `gmd:useLimitation` requires *"mentionner la source (a minima le nom
+     du producteur) **et la date de sa dernière mise à jour**"*. ⚠️ The WFS
+     service-level `AccessConstraints: NONE` is **OGC boilerplate and was NOT
+     taken** — the dataset records say `otherRestrictions`, which is INSPIRE's
+     code for *see otherConstraints*, not for *no restrictions*. **Third time a
+     date-of-last-update duty has appeared in France**, after Licence
+     Mobilités Art. 5.7 and Grand Lyon CGU 6.1.
+
+  3b. ⚠️ **OWNER DECISION — Lille's GTFS is served from
+     `media.ilevia.fr`, and ilévia's Mentions légales §5 bars "pas de
+     modification ni altération d'aucune sorte" and commercial use of "les
+     contenus des Services en ligne".** *Services en ligne* is a **defined
+     term** — ilévia's websites and apps — and the GTFS is **MEL's `lov2`
+     publication**, so this is likely the **SEPTA pattern**: a web-contents
+     notice mistaken for a data licence. But the host is ilévia's.
+     ⚠️ **The obvious mitigation FAILS**: the PAN's stable
+     `data.gouv.fr/api/1/datasets/r/c9e5dd3f-…` URL **302s to
+     `media.ilevia.fr`** — a redirect, not a mirror. **Third "no modification"
+     bar this project has met**, after LA Metro and Philadelphia.
+     **Cheap close: email `opendata@lillemetropole.fr`.**
+  4. ⚠️ **LILLE HAS NO `shapes.txt`.** Line geometry **cannot be drawn from
+     its feed**, and this project's invariant requires every drawn line to
+     carry real geometry plus a label plus a legend entry. Either reconstruct
+     polylines from stop sequences or take Lille's geometry from **OSM**
+     (`osm-rail`). **Decide before starting Lille** — it is the one follower
+     with a structural rail problem.
+  5. **Marseille and Rennes SELF-ATTEST** (`feed_end_date` 2026-12-31 and
+     2026-10-18). **Toulouse and Lille do not** — same as Paris, so
+     `fetch_sources.py` must record the download date for those two.
+  6. **Toulouse carries `route_type 6`** — an aerial lift, the Téléo cable
+     car. Paris draws a funicular, so a gondola is a **judgment call**, not an
+     automatic include. Marseille's **17 `route_type 2`** are TER regional
+     rail and are excluded by the standing commuter-rail rule.
+  7. ✅ **OSM composition validation RUN 2026-09-23 on Marseille, and the
+     filter HOLDS.** First the employee rule had to be **recovered**, because
+     it was never written down: the `trancheEffectifsEtablissement`
+     distribution shows **dropping `NN` (not reported) leaves 31.8% of Paris**
+     against the recorded 50,156/148,633 = **33.7%** — within sampling
+     variance. Applying the same rule: **Marseille ≈ 6,800 against OSM's
+     6,340 = ≈107%**, where Paris was **92.5%**.
+     **Both near parity, so the filter is not systematically wrong.** The
+     swing is informative rather than alarming: **it measures OSM's
+     completeness as much as SIRENE's** — Paris is densely mapped so OSM
+     overshoots, Marseille less so.
+     ⚠️ **The original Paris query was never recorded**, so today's OSM side
+     is a reconstruction (`shop=*` plus food `amenity` values) and the
+     comparison is **indicative, not an exact reproduction**. **Write the query
+     down this time** — four more cities are meant to reuse it.
 
 - [ ] **Göteborg** 🇸🇪 — promoted into Band D 2026-09-23. **One
   measurement away from being comparable to Stockholm.**

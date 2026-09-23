@@ -1476,7 +1476,7 @@ under GDPR**, which is the expensive half.
 | **Lisbon** | PT | **subway 10** |
 | **Singapore** | SG | **subway 13** — but a city-state, and its register is likely registered-office shaped |
 | **Sofia** | BG | subway 4, tram 24 |
-| **Copenhagen** | DK | subway 4, tram 4 |
+| **Copenhagen** | DK | **subway 4** — ⚠️ **"tram 4" was WRONG, corrected 2026-09-23**: OSM returns **ZERO** tram relations in Københavns Kommune AND zero in Region Hovedstaden, and no Letbane relation exists either. Copenhagen's tram closed in 1972. Metro is M1–M4, 8 relations, all named and all coloured; S-tog is 7 refs and is excluded as S-Bahn |
 | **Bangkok** | TH | subway 4, LRT 5 |
 | **Helsinki** | FI | subway 4, tram 26 — *feed expired* |
 | **Budapest** | HU | subway 4, tram 42 — *feed expired* |
@@ -2050,7 +2050,7 @@ city.
 | **Sofia** | BG | subway 4, tram 24 | current |
 | **Hamburg** | DE | underground 4 | **expired 20251213** |
 | **Helsinki** | FI | subway 4, tram 26 | **expired 20260731** |
-| **Copenhagen** | DK | subway 4, tram 4 | current |
+| **Copenhagen** | DK | **subway 4** — ⚠️ **"tram 4" was WRONG, corrected 2026-09-23**: OSM returns **ZERO** tram relations in Københavns Kommune AND zero in Region Hovedstaden, and no Letbane relation exists either. Copenhagen's tram closed in 1972. Metro is M1–M4, 8 relations, all named and all coloured; S-tog is 7 refs and is excluded as S-Bahn | current |
 | **Budapest** | HU | subway 4, tram 42 | **expired 20260704** |
 | **Bangkok** | TH | subway 4, LRT 5 | current |
 | **Prague** | CZ | subway 3, tram 40 | **expired 20260616** |
@@ -2203,6 +2203,35 @@ is built for. Scoping and taxonomy were both designed around per-city municipal
 registers, and SIRENE includes every office, depot and administrative site
 alongside the shopfronts. That is a design question to settle **before** a
 screen, not after.
+
+**MEASURED 2026-09-23, when Paris was built — the structural worry above is now
+evidenced rather than asserted.** Against OpenStreetMap's mapped shops inside
+the same commune:
+
+| | OSM | SIRENE | ratio |
+|---|---|---|---|
+| Total | 48,973 | 87,164 | **1.78×** |
+| Personal services | 4,866 | 12,099 | 2.49× |
+| `amenity=restaurant` vs NAF `56.10A` | 9,058 | 16,280 | 1.80× |
+
+Some of that is OSM being incomplete and some is the register including
+premises a passer-by would never see; **nothing in the data separates them**,
+which is precisely the "wrong shape" cost, quantified. Two catch-all codes
+asserting no premises were excluded on INSEE's own class labels, which moved
+personal services from 4.40× to 2.49× and left retail untouched. The residual
+is disclosed on the city page rather than filtered away.
+
+⚠️ **This supersedes the figure France was originally approved on.** An earlier
+pass recorded "50,156 storefronts, 92.5% of OSM" and attributed the filter to
+`trancheEffectifsEtablissement`. That number is **not reproducible**: `NN` is
+77.3% of Paris's bucket rows, so every banded row together is 33,918 and no
+predicate on that column reaches 50,156. France is still a build — register,
+join, coverage and licence are untouched — but a 0.93× match was never real.
+
+**Carry this to the next national register rather than re-learning it.** Mexico's
+DENUE and Norway's `beliggenhetsadresse` are the same shape, and the lesson is
+that a national establishment register over-counts storefronts by a factor no
+filter in the register itself can remove.
 
 ### South Korea — ideal data, no catalogued feed
 

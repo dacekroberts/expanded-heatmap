@@ -81,6 +81,49 @@ REGISTRIES = {
     "milan": dict(raw=None, trade=None, owner=None,
                   processed="businesses_clean.csv",
                   address=("business_name",)),
+    # Paris is Milan's hybrid again, and the reasoning is worth keeping because
+    # this city had the LARGEST measured temptation in the project to do
+    # otherwise. SIRENE carries a premises name on only 37.2% of built rows, and
+    # `StockUniteLegale` would have closed nine tenths of that gap by joining
+    # `denominationUniteLegale` on siren. It is not joined, and the file is not
+    # even downloaded.
+    #
+    # WHY: for a sole trader that column holds `nomUniteLegale` and
+    # `prenomUsuelUniteLegale` - A PERSON'S NAME. Measured 2026-09-22, 8.7% of
+    # Paris storefront rows are natural persons and 9.4% of the UNNAMED ones
+    # are, so a blind fallback across the bucket would have published on the
+    # order of TEN THOUSAND individuals' names, against the ~4,000 Los Angeles
+    # nearly shipped. A guard on categorieJuridique == "1000" was measured as
+    # safe and REJECTED anyway: "safe if the guard is built" does real work in
+    # that sentence, and the hybrid needs no guard at all.
+    #
+    # So the fallback is the street address, as in Dublin and Milan, and step 2
+    # ASSERTS that no personal-name column ever reaches it - a structural claim
+    # rather than a measurement, which is what makes Los Angeles' failure mode
+    # impossible here rather than merely unlikely. France also masks
+    # non-diffusible records at source (name, address AND geolocation), which
+    # removed 13.3% of active Paris rows before any of this ran.
+    # ⚠ NOT name_is_address=True. That flag is Dublin's case - a register with
+    # no name column at all - and Paris carries a real premises name on 37.2%
+    # of built pins, so it is Milan's hybrid and takes Milan's shape. Setting
+    # the flag also prints Dublin's own verification note (Irish streets named
+    # after people, floor lists) as though it had been checked here, which it
+    # had not.
+    "paris": dict(raw=None, trade=None, owner=None,
+                  processed="businesses_clean.csv",
+                  address=("business_name",)),
+    # Marseille is Paris's entry unchanged, and that is the point rather than
+    # laziness: both read ONE national register through ONE shared step 2
+    # (`pipeline/countries/france_register.py`), so the structural claim is the
+    # same claim - no personal-name column is ever loaded, therefore no pin can
+    # be one. The three remaining French cities will inherit it identically.
+    #
+    # What differs is only the fill rate: Marseille shows a premises name on
+    # 43.8% of pins against Paris's 37.3%, so it falls back to the address less
+    # often. Better data, same guarantee.
+    "marseille": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv",
+                      address=("business_name",)),
     "san_diego": dict(raw="sd_businesses_active_datasd.csv", trade="dba_name",
                       owner="business_owner_name", processed="businesses_clean.csv",
                       address=("address_no", "address_road", "address_suite")),
