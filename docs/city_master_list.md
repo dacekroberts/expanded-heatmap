@@ -521,8 +521,13 @@ it has not been taken.**
 **▲ Stockholm** 🇸🇪 — **upgraded from D-c on 2026-09-22.** Screening is
 DONE: a public ArcGIS FeatureServer carrying **8,146 distinct food premises**
 with WGS84 points, 100% trade names and 96.9% addresses, updated daily. It
-carried two questions; **the licence one was answered on 2026-09-22** (see
-below), so **one remains, and it is an owner decision rather than a probe**:
+carried two questions; **the licence one was answered on 2026-09-22 — SILENT,
+see item 2** — so **one remains, and it is an owner decision rather than a
+probe**. ⚠️ **Item 2's text went stale the day it was answered and sat
+contradicting this very sentence until 2026-09-23**, so a reader arriving at
+the list saw "one remains" above a list of two. It is struck through rather
+than deleted, because the superseded reasoning is what makes the resolution
+legible:
 
 ✅ **RAIL COUNTED 2026-09-23, and this list's figure was wrong.** It carried *"metro 7, tram 21"*. Measured inside **Stockholms kommun** (OSM rel 398021): **subway 15 relations / 8 refs**, all named and all coloured; **tram 6 relations / 4 refs**, only **4 of 6 coloured**; **light_rail 6** (refs 21, 30, 31); **92 rail station nodes**. ⚠️ **One subway relation and one tram relation carry NO `ref`** — a `ref`-keyed build drops them silently. ⚠️ The boundary lookup matched nothing on `name=Stockholm` because the kommun is **`Stockholms kommun`**, and widening it returned **two US "Stockholm Township" relations at the same admin_level**.
 
@@ -530,11 +535,20 @@ below), so **one remains, and it is an owner decision rather than a probe**:
    and exactly one commercial register; `restaurang` and `företag` both
    return **0** inside its own catalogue, and Sweden has no general business
    licence. A Stockholm page would be a food-density map.
-2. **Licence.** `dataportal.se` says `Åtkomsträttigheter: Begränsad`
-   (restricted); the ArcGIS item says `access: public` and serves without
-   credentials; `licenseInfo` is empty. **Ambiguous in a way that matters** —
-   `read-licence` step 8 — so it needs the publisher asked. That it fetches is
-   not a finding that it is licensed.
+2. ~~**Licence.**~~ ✅ **RESOLVED 2026-09-22 — SILENT, and this item
+   was left standing after its own intro said it was answered.** The
+   superseded text read: *"`dataportal.se` says `Åtkomsträttigheter:
+   Begränsad`; the ArcGIS item says `access: public`... ambiguous in a way
+   that matters, so it needs the publisher asked."* **It does not.**
+   `dataportal.se` is a **HARVESTER, not the publisher** — `read-licence`
+   step 5 — and the miljöförvaltning's **own** Hub DCAT feed
+   (`open-data-sthlm-miljo.hub.arcgis.com/api/feed/dcat-us/1.1.json`, **109
+   datasets**) declares **`accessLevel: public` on all 109**, with `license`
+   **CC0 on 8** and blank on the rest. **Step 5 decides a contradiction in
+   favour of the publisher, and the publisher says public.** 💡 **And
+   the blank is meaningful precisely BECAUSE 8 of 109 carry CC0**: a missing
+   licence field can mean *"no mechanism"* or *"declined to license"*, and here
+   the mechanism is demonstrably in use.
 
 **▲ Zurich** 🇨🇭 — **moved here on 2026-09-22 out of the one-probe-each
 band, and it is the same decision as Stockholm's.** It sat in the probe band while its open item
