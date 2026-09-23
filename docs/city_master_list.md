@@ -310,7 +310,7 @@ screen — against the worst geocoding problem and a two-bucket ceiling.
 **Still the biggest open decision in this list**, and a judgment call rather
 than a probe.
 
-## ⚠️ OPEN SCREENING GAP — Rome and Turin were never probed (2 cities)
+## ⚠️ OPEN SCREENING GAP — rows discarded on ABSENCE rather than evidence (3 cities + 3 countries)
 
 **Not candidates yet and not discards — unscreened.** `global_country_shortlist.md`
 records *"Italy stays a Milan-only country"*, but that rests on **Naples** and
@@ -325,6 +325,26 @@ discard.
 
 **Neither changes the Italy profile answer** — Italy is bespoke per city, so
 each would be its own Step 0 regardless. See `DECISIONS.md`, 2026-09-22.
+
+### The sweep, 2026-09-23 — what else rests on an absence
+
+**Audited the whole discard record** for rows whose stated reason is *"not
+reached"*, *"unprobed"*, *ASSERTED*, or a regional pattern. `add-country` is
+explicit that such a row **is not a discard**, and records that exact error
+happening twice — once to a group including **Italy, which then passed**.
+
+| Row | What its reason actually was | Probed 2026-09-23 |
+|---|---|---|
+| **Göteborg** 🇸🇪 | *"Unprobed candidate"* — named twice in this file and **placed in no band at all** | ✅ **REAL, and it is a candidate.** `catalog.goteborg.se/store/search?type=solr` — EntryStore, the same platform as Stockholm's. **`Livsmedelsverksamheter`** is *"Alla aktiva livsmedelsverksamheter"* — **active food BUSINESSES, not inspections**, so no dedupe, where Stockholm's 8,146 premises had to be distilled from 289,742 inspection rows. **`Restauranger med serveringstillstånd`** declares **CC ZERO** — stronger than Stockholm's SILENT. Rail is trams, not a metro: **better data, weaker map** |
+| **Lisbon** 🇵🇹 | On *"Countries ruled out"* with **no parenthetical evidence at all** | ⚠️ **Discard now EVIDENCED, and it holds.** `dados.gov.pt` returns 430 for *estabelecimentos*, but they are **aggregate hotel statistics** (*"Proporção de estabelecimentos hoteleiros que utilizam computador (%)"*) and prison establishments. The aggregate trap |
+| **Warsaw** 🇵🇱 | Same — **no evidence** | ⚠️ **Discard now EVIDENCED, and it mostly holds.** Control passes (`zzqqxx` → 0, so the search filters). `CEIDG` is company-level, as recorded elsewhere. **One premises-shaped lead survives**: *Wykaz punktów sprzedaży napojów alkoholowych* — licensed alcohol sales POINTS, the Singapore-tobacco shape. One bucket at best |
+| **Cairo** 🇪🇬 | Same — **no evidence** | ⛔ **STILL UNPROBED.** Recorded as an absence rather than a finding |
+| **Zagreb** 🇭🇷 | *"identical 1,291-byte SPA shell at four paths"* | ⛔ **Confirmed BLOCKED, not negative.** Three more paths tried 2026-09-23, all shells |
+
+**The generalisable result: a "ruled out" list is only as good as its weakest
+row, and three of this one's rows carried no reason at all.** Two of those now
+do. Göteborg was never ruled out — it was simply never placed anywhere, which
+is how a candidate disappears without anyone deciding to drop it.
 
 ## 🟣 Band D — one bucket only: complete, but narrower than the others (2 cities)
 

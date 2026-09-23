@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**185 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**186 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [The discard record swept for rows that rest on an absence](#2026-09-23---the-discard-record-swept-for-rows-that-rest-on-an-absence)
 - [Four licences read: Oslo is clear, Prague has one left](#2026-09-23---four-licences-read-oslo-is-clear-prague-has-one-left)
 - [Hong Kong, Prague and Oslo taken to brief-ready; two cities changed size](#2026-09-23---hong-kong-prague-and-oslo-taken-to-brief-ready-two-cities-changed-size)
 
@@ -224,6 +225,53 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - The discard record swept for rows that rest on an absence
+
+- **Audited every row in the discard and ruled-out records against
+  `add-country`'s rule that a reason of "not reached", "unprobed" or a
+  regional pattern is NOT a discard.** That rule exists because the error has
+  already happened twice in this project, once to a group of four countries
+  that included **Italy - which then passed**. The sweep found **six live
+  cases**, and the useful generalisation is blunt: **a ruled-out list is only
+  as good as its weakest row, and three of this one's rows carried no reason
+  at all.**
+
+- **Goteborg is the real find: it was never ruled out, it was never PLACED.**
+  The master list names it twice - *"Unprobed candidate"*, *"Better data,
+  weaker map"* - and puts it in **no band**, which is how a candidate
+  disappears without anyone deciding to drop it. Probed: the catalogue is
+  **EntryStore** at `catalog.goteborg.se/store/search?type=solr`, the same
+  platform as Stockholm's, and three guessed CKAN bases had returned a
+  662-byte HTML shell first - a wrong endpoint, not a verdict.
+  **`Livsmedelsverksamheter`** is *"Alla aktiva livsmedelsverksamheter"*:
+  **active food BUSINESSES, not inspections**, so it needs no dedupe, where
+  Stockholm's 8,146 premises had to be distilled from **289,742** inspection
+  rows. **`Restauranger med serveringstillstand` declares CC ZERO**, which is a
+  stronger licence position than Stockholm's SILENT. Its rail is trams rather
+  than a metro, so it is **better data on a weaker map** - the same trade
+  Toronto lost on.
+
+- **Portugal and Poland were on "Countries ruled out" with NO evidence
+  whatsoever, and now have some.** Both discards broadly hold, which is worth
+  saying plainly rather than treating the audit as vindication: Lisbon's
+  `dados.gov.pt` returns 430 hits for *estabelecimentos* and they are
+  **aggregate hotel statistics** and prison establishments - the aggregate
+  trap. Warsaw's control passes (`zzqqxx` returns 0, so the search genuinely
+  filters), CEIDG is company-level as recorded elsewhere, and **one
+  premises-shaped lead survives**: *Wykaz punktow sprzedazy napojow
+  alkoholowych*, licensed alcohol sales points - one bucket at best, the shape
+  of Singapore's tobacco retailers.
+
+- **Cairo is still unprobed and is now recorded as an absence rather than a
+  finding**, and **Zagreb is confirmed blocked rather than negative** - three
+  further paths tried, all returning the same SPA shell. Neither is a discard;
+  both are open rows with a named next step.
+
+- **Nothing in the sweep changed a count**, because none of these were counted
+  as candidates to begin with. That is the point: **they were invisible to the
+  arithmetic**, which is exactly why the discard list has to name its evidence
+  per row rather than gesture at a pattern.
 
 ### 2026-09-23 - Four licences read: Oslo is clear, Prague has one left
 
