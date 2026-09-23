@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**247 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**248 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [The cleanup role gets a named worktree, and its old one is retired rather than moved](#2026-09-23---the-cleanup-role-gets-a-named-worktree-and-its-old-one-is-retired-rather-than-moved)
 - [Universal claims get a report category, and its first run found five more false](#2026-09-23---universal-claims-get-a-report-category-and-its-first-run-found-five-more-false)
 - [Sao Paulo's rail is drawn from OSM with GeoSampa as the status reference; Rio's SIURB clause accepted](#2026-09-23---sao-paulos-rail-is-drawn-from-osm-with-geosampa-as-the-status-reference-rios-siurb-clause-accepted)
 - [The scaffold names a city's page from its slug, not its display name](#2026-09-23---the-scaffold-names-a-citys-page-from-its-slug-not-its-display-name)
@@ -286,6 +287,39 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - The cleanup role gets a named worktree, and its old one is retired rather than moved
+
+- **`docs/session_roles.md` now records each standing role's worktree and
+  branch**, which it never had - only the generic `git worktree add
+  .claude/worktrees/<role> -b worktree-<role>`. Staging follows that form
+  (`staging` / `worktree-staging`). Builds do not: every one since Dublin has
+  used `<city>-build`, and the table now says so rather than prescribing a name
+  nobody uses.
+
+- **The cleanup role moves to `.claude/worktrees/cleanup` on
+  `worktree-cleanup`**, at the owner's request. It had been running in
+  `.claude/worktrees/practical-leakey-12a8a2`, a name the desktop app generates
+  for a session it expects to be short-lived; that session became the standing
+  role and never got a proper home. **Supersedes the cleanup handoff note's "Do
+  not delete this worktree; it is kept across sessions."**
+
+- **Rejected: moving the existing worktree, or renaming its branch, in place.**
+  `git worktree move` under a live session is refused by Windows while the
+  directory is in use, and the session's scratchpad and transcript are keyed to
+  that path. A branch rename alone is safe for git, but the desktop app created
+  the worktree and may track the branch by name, with no way to know how it
+  would react. So the next cleanup session starts in the new worktree and the
+  old one is retired - closed, then `git worktree remove` and `git branch -d`
+  from the main checkout. `-d` refuses to delete a branch with commits not on
+  the current branch, so the deletion is its own check that nothing was lost.
+
+- **Found while checking the build convention: six merged build branches have
+  outlived their worktrees** - `dublin-build`, `milan-build`, `paris-build`,
+  `marseille-build`, `toulouse-build` and `lille-build`, each with 0 commits
+  not on `master` and no worktree. Reported to the owner, not deleted: nobody
+  asked, and deleting branches is not this change. The table now says to delete
+  the branch when its worktree goes.
 
 ### 2026-09-23 - Universal claims get a report category, and its first run found five more false
 
