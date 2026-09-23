@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**220 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**221 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [The Danish key stays open until Copenhagen's build starts](#2026-09-23---the-danish-key-stays-open-until-copenhagens-build-starts)
 - [Copenhagen's brief: 14,887 rows, 100% named, four files](#2026-09-23---copenhagens-brief-14887-rows-100-named-four-files)
 - [Paris's disproven figures swept out of staging's documents](#2026-09-23---pariss-disproven-figures-swept-out-of-stagings-documents)
 - [Singapore is a TWO-bucket city, and the zero is controlled](#2026-09-23---singapore-is-a-two-bucket-city-and-the-zero-is-controlled)
@@ -259,6 +260,37 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - The Danish key stays open until Copenhagen's build starts
+
+- **Owner decision: keep the Datafordeler account until the build begins**,
+  then close it under the standing *register, take the data, terminate,
+  revoke* practice. **The trigger is the BUILD, not the brief** - which is the
+  part worth writing down, because the brief is finished and the instinct to
+  tidy up arrives with it.
+
+- **Closing is licence-safe at any time, and that was checked rather than
+  assumed.** CC BY 4.0 attaches to the **data** and is irrevocable; nothing in
+  it conditions the grant on holding an account. **This is exactly the
+  difference from WMATA**, whose terms are an API agreement and whose grant
+  dies with the account - the reason D.C.'s must stay live forever, and the
+  reason Denmark was filed as a fourth obligation class rather than in WMATA's
+  row.
+
+- **What actually blocks closing is operational, not legal, and the first
+  reason is the strongest.** `data/*/raw/` is **gitignored by design**, so
+  Copenhagen's 2.00 GB exists on **one machine, in one worktree, and nowhere
+  else** - the build session's checkout has none of it. Beyond that,
+  `fetch_sources.py` does not exist yet and cannot be written or tested
+  without a live key, and the **7-day retention** means the build downloads
+  fresh regardless.
+
+- **One genuine loss is recorded rather than glossed: closing forfeits
+  `Beskaeftigelse`** if an employee signal is ever wanted. It is
+  **bitemporal-only**, a different download from the four taken. Paris's
+  employee filter turned out not to exist so it is probably moot - but
+  Prague's `KATPO` equivalent is an open owner call, and *probably moot* is
+  not the same as moot.
 
 ### 2026-09-23 - Copenhagen's brief: 14,887 rows, 100% named, four files
 
