@@ -112,6 +112,18 @@ REGISTRIES = {
     "paris": dict(raw=None, trade=None, owner=None,
                   processed="businesses_clean.csv",
                   address=("business_name",)),
+    # Marseille is Paris's entry unchanged, and that is the point rather than
+    # laziness: both read ONE national register through ONE shared step 2
+    # (`pipeline/countries/france_register.py`), so the structural claim is the
+    # same claim - no personal-name column is ever loaded, therefore no pin can
+    # be one. The three remaining French cities will inherit it identically.
+    #
+    # What differs is only the fill rate: Marseille shows a premises name on
+    # 43.8% of pins against Paris's 37.3%, so it falls back to the address less
+    # often. Better data, same guarantee.
+    "marseille": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv",
+                      address=("business_name",)),
     "san_diego": dict(raw="sd_businesses_active_datasd.csv", trade="dba_name",
                       owner="business_owner_name", processed="businesses_clean.csv",
                       address=("address_no", "address_road", "address_suite")),

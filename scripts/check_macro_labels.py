@@ -58,6 +58,7 @@ from cities import (  # noqa: E402
 TEXT_WIDTH = {
     "Boston": 48.4, "Calgary": 51.8, "Chicago": 55.0, "Edmonton": 69.0,
     "Barcelona": 67.9, "Dublin": 42.8, "Milan": 36.3, "Paris": 32.9,
+    "Marseille": 60.3,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,
@@ -90,14 +91,24 @@ TOUCH = 1.0
 # examined comes back as a problem rather than inheriting the exemption.
 #
 # Keyed (region, then the two names sorted).
-ACCEPTED_OVERLAPS = {
-    # Owner's call 2026-09-22, agreeing with deploy-verify, which measured this
-    # from rendered pixels and called it abutting rather than a defect: the pill
-    # BACKGROUNDS touch by 1.1 px on the vertical axis - 0.1 px past the >1 px
-    # rule set the same day - while the GLYPHS do not, and the screenshot is
-    # legible. Both names are readable; there is no smear to fix.
-    ("United States", "Guadalajara (Regional)", "Los Angeles"): (68.5, 1.1),
-}
+# EMPTIED 2026-09-23, and by removing the CAUSE rather than the symptom.
+#
+# This held one entry - Guadalajara x Los Angeles in the United States view,
+# an owner's call agreeing with deploy-verify that a 1.1 px abutment of two
+# pill BACKGROUNDS, with the glyphs clear, was legible rather than a defect.
+# Marseille's arrival was about to add two more, and that is what made the
+# shape visible: all three were a NON-MEMBER's label colliding inside a view it
+# does not belong to, and the list would have grown by roughly one entry per
+# international city forever.
+#
+# `Overview.py` now labels only a region's own cities, composites included, so
+# none of the three collisions can occur at all. An accepted-overlap entry is a
+# judgement that a real collision is harmless; these are no longer real.
+#
+# The mechanism stays, because the reasoning above it is still right: an entry
+# here says THIS pair, in THIS region, at THESE measured dimensions has been
+# looked at - and nothing else has. It is not a loosened threshold.
+ACCEPTED_OVERLAPS = {}
 ACCEPTED_TOL = 0.5
 
 
@@ -221,9 +232,11 @@ def main():
             # Diego" overlap 20.5 x 11.2 px in United States East while a check
             # called that region clean, and scoring every city's label now would
             # report pills the app no longer draws.
-            labelled = ({c["name"] for c in CITIES}
-                        if region["name"] in REGION_MEMBERS
-                        else {c["name"] for c in region["cities"]})
+            # EVERY REGION LABELS ITS OWN CITIES, composites included since
+            # 2026-09-23 - see Overview.py for the measurement that ended the
+            # composite's exemption. `region["cities"]` already resolves a
+            # composite to its members, so this needs no special case.
+            labelled = {c["name"] for c in region["cities"]}
             markers, placed = [], []
             for city in CITIES:
                 x, y = project(city["lat"], city["lon"], clat, clon, zoom, cw, CANVAS_H)

@@ -168,7 +168,24 @@ except Exception:
 # model reproduced four pixel-measured pills to within 2 px on 2026-09-22.
 try:
     import math
-    from cities import CITIES as _CC, IN_DEFAULT_VIEW as _IDV
+    from cities import CITIES as _ALL, IN_DEFAULT_VIEW as _IDV
+    from cities import REGION_ORDER as _RO, cities_in as _cities_in
+
+    # ⚠ SCORE ONLY THE CITIES THIS VIEW ACTUALLY LABELS, which since
+    # 2026-09-23 is the region's own and no longer every city on earth.
+    # `Overview.py` dropped the composite's exemption after measuring that all
+    # three collisions in the landing view involved a NON-MEMBER and 6 of its
+    # 13 non-member labels were drawn off-canvas at 375 px anyway.
+    #
+    # This check kept its OWN copy of the collision model - a second
+    # implementation of check_macro_labels.py's geometry - so it went on
+    # reporting two Marseille overlaps that the app no longer draws. Caught by
+    # running it, which is the argument for running it. The duplication itself
+    # is left standing deliberately: this file must work from a CLEAN CLONE
+    # with only the lean venv, so importing the other script is not free.
+    # Recorded in PLAN.md as worth unifying.
+    _CC = _cities_in(_RO[0])
+    _MARKERS = _ALL          # every city still renders a DOT in every view
 
     def _fit(lats, lons, w=320, h=460, fill=0.7, west_pad=0.12):
         lon_min = min(lons) - west_pad * max(max(lons) - min(lons), 0.5)

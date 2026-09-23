@@ -1,0 +1,8 @@
+stop_id,station,lines,reason,latitude,longitude
+AST-AUB-25980-AUB-26418,Château Blanc,T,"Aubagne's tram, not Marseille's",43.281043,5.550828
+AST-AUB-20830-AUB-21541-AUB-22466-AUB-24956-AUB-24962-AUB-25832-AUB-26641,Gare,T,"Aubagne's tram, not Marseille's",43.29569629,5.56559871
+MAMP-S22990,La Tourtelle,T,"Aubagne's tram, not Marseille's",43.28563959,5.55460547
+AST-AUB-29097,Le Charrel,T,"Aubagne's tram, not Marseille's",43.278911,5.551421
+MAMP-S23019,Martin Luther King,T,"Aubagne's tram, not Marseille's",43.2927926,5.56252053
+MAMP-S27167,Piscine Alain Bernard / Oasis du Charrel,T,"Aubagne's tram, not Marseille's",43.28446967,5.54720436
+MAMP-S27164,Ravel Decroix,T,"Aubagne's tram, not Marseille's",43.29049568,5.56001806
