@@ -91,7 +91,12 @@ EXCLUDE_PATTERNS = ("passover_*.md", "*retrospective*.md", "*_addendum.md")
 # not drift. Their claims are re-verified by `scripts/brief_check.py` against
 # live sources, which is the right instrument - this one cannot tell a stale
 # brief from an accurate record of a past probe.
-EXCLUDE_DIRS = ("docs/build_briefs",)
+# docs/notifications holds letters this project owes a publisher. "NOT YET
+# SENT" is their CORRECT state, not a stale claim - the whole point of the
+# file is to track an act that has not happened. Excluded for the same reason
+# as build_briefs: a document whose subject is pendency cannot be audited for
+# writing about pendency.
+EXCLUDE_DIRS = ("docs/build_briefs", "docs/notifications")
 
 # Two more, each for a reason already established above rather than a new one.
 #
@@ -119,6 +124,11 @@ EXCLUDE_PATHS = {".claude/skills/consistency-sweep/SKILL.md"}
 SCAN_GLOBS = ("docs/**/*.md", ".claude/skills/**/*.md", "CLAUDE.md", "*.md")
 
 # A. Phrases describing a future, in a project where the future keeps arriving.
+# How close a built city's name must sit to a future-tense marker before the
+# two are treated as one claim. Wide enough for a sentence, far narrower than
+# a table row.
+NEAR_CHARS = 120
+
 FUTURE_MARKERS = [
     "none built", "not built", "unbuilt", "no city is built",
     "not yet a row", "not yet", "if any", "when one is", "would require",
@@ -227,7 +237,17 @@ def check_a(files, vocab, verbose):
                 i = low.find(marker)
                 if i < 0 or in_quotes(i, spans):
                     continue
-                named = [v for v in vocab if v.lower() in low]
+                # PROXIMITY, NOT THE WHOLE LINE. A markdown table row
+                # runs past 600 characters, so "Screened 2026-09-21, not yet
+                # a full Step 0" - accurate prose about an UNBUILT city -
+                # matched "Boston" mentioned 400 characters further along the
+                # same row and was reported as a stale claim. Same defect
+                # shape as check_provenance's `item N` citation namespaces:
+                # the marker and the name were never related, only adjacent
+                # in a file. Measured 2026-09-23: this took category A from
+                # three findings, all of them noise, to one that is real.
+                near = low[max(0, i - NEAR_CHARS):i + len(marker) + NEAR_CHARS]
+                named = [v for v in vocab if v.lower() in near]
                 if named or verbose:
                     hits.append((p, n, marker, named[:3], line.strip()))
                 break

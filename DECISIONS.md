@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**189 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**190 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [check_stale_claims category A was reporting three findings and none of them was real](#2026-09-23---check_stale_claims-category-a-was-reporting-three-findings-and-none-of-them-was-real)
 - [Paris's brief re-verified against live sources: 7/7 hold](#2026-09-23---pariss-brief-re-verified-against-live-sources-77-hold)
 - [CUZK read: Prague is unblocked, and the "cookie terms" were not only cookie terms](#2026-09-23---cuzk-read-prague-is-unblocked-and-the-cookie-terms-were-not-only-cookie-terms)
 - [The sweep's results sorted: Goteborg banded, two discards evidenced](#2026-09-23---the-sweeps-results-sorted-goteborg-banded-two-discards-evidenced)
@@ -228,6 +229,39 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - check_stale_claims category A was reporting three findings and none of them was real
+
+- **The detector paired a future-tense marker with any built-city name on the
+  same LINE, and a markdown table row runs past 600 characters.** So
+  "Screened 2026-09-21, not yet a full Step 0" - accurate prose about New
+  Orleans, a city that is not built - matched "Boston" mentioned some 400
+  characters further along the same row, and was reported as a stale claim.
+  The marker and the name were never related, only adjacent in a file.
+  **Exactly the defect already fixed once in `check_provenance.py`**, where
+  `item N` citations were being read across three unrelated namespaces; that
+  it recurred in a second checker is the argument for treating proximity as a
+  standing question rather than a one-off bug. Scoped to a 120-character
+  window either side of the marker.
+
+- **`docs/notifications/` is no longer scanned, for a principled reason.**
+  That directory holds letters this project owes a publisher, and "NOT YET
+  SENT" is their CORRECT state - the file exists to track an act that has not
+  happened. A document whose subject is pendency cannot be audited for writing
+  about pendency, which is the same reasoning that already excluded
+  `docs/build_briefs`.
+
+- **Category A went from 3 findings, all of them noise, to 1 that is real** -
+  the Barcelona row in the obligations table, which genuinely must be
+  corrected the moment that letter sends, and which the check will keep
+  pointing at until it is. **A report that is 100% false positives is one
+  people learn to skip**, which costs more than the check was ever worth; the
+  same reasoning as the deliberately narrow heredoc guard shipped yesterday.
+
+- **Watched both directions before shipping**, per the standing rule. Both
+  known false positives disappear, and a `Boston is not yet built` injected
+  into `project_context.md` is still caught - a proximity window that had been
+  tightened too far would have passed the first test and failed the second.
 
 ### 2026-09-23 - Paris's brief re-verified against live sources: 7/7 hold
 
