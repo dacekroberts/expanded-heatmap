@@ -16,15 +16,20 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**172 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**177 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
 - [A front-page caption counted nine cities twice, and the drafted letters were in two places](#2026-09-22---a-front-page-caption-counted-nine-cities-twice-and-the-drafted-letters-were-in-two-places)
 - [Dublin's tooltip showed a placeholder the classifier had been dropping all along](#2026-09-22---dublins-tooltip-showed-a-placeholder-the-classifier-had-been-dropping-all-along)
+- [Paris's brief written, and its own checks disproved one of its claims](#2026-09-22---pariss-brief-written-and-its-own-checks-disproved-one-of-its-claims)
+- [Paris's feed settled, Lyon deferred, and Europe becomes one map region](#2026-09-22---pariss-feed-settled-lyon-deferred-and-europe-becomes-one-map-region)
 - [Europe became one macro-map region, and a write truncated a file to zero](#2026-09-22---europe-became-one-macro-map-region-and-a-write-truncated-a-file-to-zero)
+- [France's three pre-ship items run; Lyon turns out to be gated three ways](#2026-09-22---frances-three-pre-ship-items-run-lyon-turns-out-to-be-gated-three-ways)
 - [Dublin and Milan published, and the merge caught a latent break in both](#2026-09-22---dublin-and-milan-published-and-the-merge-caught-a-latent-break-in-both)
 - [Milan built: six disjoint registers, and a screen that was wrong four times](#2026-09-22---milan-built-six-disjoint-registers-and-a-screen-that-was-wrong-four-times)
+- [France profiled: one register, six cities, and a naming gap found early](#2026-09-22---france-profiled-one-register-six-cities-and-a-naming-gap-found-early)
+- [Band B's coordinate routes measured; one claim did not survive](#2026-09-22---band-bs-coordinate-routes-measured-one-claim-did-not-survive)
 - [Dublin built: the rail source reversed mid-build, and a national grid got admitted](#2026-09-22---dublin-built-the-rail-source-reversed-mid-build-and-a-national-grid-got-admitted)
 - [Dublin Step 0: a register with no names, and a taxonomy rule that inverts](#2026-09-22---dublin-step-0-a-register-with-no-names-and-a-taxonomy-rule-that-inverts)
 - [Barcelona's live terms finally read, and they carried a clause that would have sunk the city](#2026-09-22---barcelonas-live-terms-finally-read-and-they-carried-a-clause-that-would-have-sunk-the-city)
@@ -299,6 +304,135 @@ onwards; the early ones are split by phase rather than by hour.
   earlier today. Left as open work in `PLAN.md` for a session holding Dublin's
   cache, or for a deliberate re-fetch whose upstream changes are reported
   rather than absorbed.
+### 2026-09-22 - Paris's brief written, and its own checks disproved one of its claims
+
+- **`docs/build_briefs/paris.md` written; 7/7 checks hold.** Step 0 is banked
+  from France's country profile, so nothing in it needed discovering. Both
+  remaining items are recorded as **owner calls rather than findings** - the
+  city's scope (commune `751xx` against a network that is far larger, which is
+  Dublin's question again) and what a pin shows for the ~57% of rows with no
+  premises-level name, which is Milan's question again. **The brief stops and
+  asks rather than picking**, which is the difference between a cache and a
+  guess.
+
+- **The brief claimed the IDFM feed SELF-ATTESTS and `brief_check.py`
+  disproved it on the first run.** `add-country` requires self-attestation
+  before a feed is trusted, and the brief asserted it on the strength of an
+  `end_date` of 2026-10-21. The check found **14 files and NO
+  `feed_info.txt`** - the artifact declares no validity window at all, and that
+  date comes from **transport.data.gouv.fr's metadata ABOUT the feed**, which
+  is the National Access Point's assertion rather than the file's. **That is
+  precisely the distinction `add-country` draws** between an artifact that
+  attests to its own freshness and one whose freshness you take on a third
+  party's word.
+
+- **The feed is still the right one; what changed is how staleness is
+  detected.** The host is IDFM's own (`stif/` on Opendatasoft), so provenance
+  was never in question - the two rival GTFS are third-party and both stale or
+  dead. But `fetch_sources.py` must **record the date it downloaded**, because
+  nothing inside the file will. **This also bears on the licence**: Licence
+  Mobilites Art. 5.7 requires the page to state the data's date and its update
+  interval, and **neither is inside the artifact**, so both have to be captured
+  at fetch time or they cannot be displayed honestly. A licence obligation and
+  a build detail turn out to be the same missing field.
+
+- **The absence is now PINNED as a check rather than described in prose.** The
+  `gtfs_files` check lists `feed_info.txt` under `absent`, so if IDFM ever adds
+  one the check fails and the staleness story gets revisited. Recording a
+  negative as a test is the Dublin `valoff-is-retired` pattern.
+
+- **A second check was REMOVED rather than made to pass, and that is the
+  correct outcome.** A claim pinned against `recherche-entreprises.api.gouv.fr`
+  returned **HTTP 429** to a single request. The API is genuinely rate-limited,
+  which makes it fine for the 750-row sample that closed the natural-person gap
+  and **unusable for 148,600 rows** - so the build's guard reads
+  `categorieJuridiqueUniteLegale` from the `StockUniteLegale` parquet instead.
+  **A flaky check is worse than no check**, so the dependency was dropped and
+  the rate limit written into the prose. Replaced with a check on the parquet
+  the guard actually reads - the file this brief separately warns against
+  MAPPING, named rather than avoided.
+
+- **Two claims in the first draft disagreed with the tests written beside
+  them, which is the failure the fenced checks block exists to surface.** One
+  `gtfs_files` check PASSED while its own claim text named `feed_info.txt`,
+  because the file was mentioned in the prose and absent from the `present`
+  array. **A check that passes while its claim is false is worse than a failing
+  one**, and it was visible only because claim and test sit in the same object.
+
+### 2026-09-22 - Paris's feed settled, Lyon deferred, and Europe becomes one map region
+
+- **Paris's GTFS provenance is resolved, and the disagreement had a
+  structural cause worth keeping.** Two readings conflicted: a direct API read
+  found three GTFS resources for IDFM, and the licence review found no official
+  one. Both were reading the same JSON. **The NAP API's `resources` array
+  INCLUDES the entries that also appear in `community_resources`**, so counting
+  `resources` alone sees three and concludes all are official, while noticing
+  the community array and stopping there concludes none is. **Subtracting the
+  two arrays answers it**: exactly ONE official feed,
+  `https://eu.ftp.opendatasoft.com/stif/GTFS/IDFM-gtfs.zip`.
+
+- **The choice was not close once the arrays were separated.** IDFM's own feed
+  was updated **2026-09-22**; the Google-published "GTFS modifie" on Apigee
+  last changed **2023-11-17**, and the ITO World copy reports
+  **`is_available: False`**. **Both third-party copies are stale or dead**, so
+  the question of building Paris from a modified mirror answers itself. The
+  official feed also **SELF-ATTESTS**, which is the property `add-country`
+  requires before trusting any feed: `metadata.end_date` **2026-10-21**, and it
+  declares its own `features` - *position des stations*, *topologie du reseau*,
+  *traces de lignes* - and `modes` including subway, tramway, rail and
+  funicular. That declared end date additionally supplies the **update
+  interval** that Licence Mobilites Art. 5.7 requires this project to display,
+  so one field settles a build question and a licence obligation at once.
+
+- **Lyon is DEFERRED from the follower sequence, and Marseille replaces it as
+  the first follower.** Owner's decision. Lyon is **not discarded** - its data
+  is fine, its 19,449 estimated bucket rows are third largest of the six, and
+  at **52.5% named it is better than Paris** - but the entire argument for
+  building France first was that the followers are cheap, and Lyon is no longer
+  one. Three independent gates, any of which would suffice: an account on
+  `data.grandlyon.com` that this project does not create; Grand Lyon CGU
+  Art. 6.2's bar on the producers' *signes distinctifs* "associes ou non a
+  l'utilisation des donnees", which collides head-on with the invariant that
+  every drawn line carries its real public name - Lyon's being **TCL**; and
+  CGU 9.4's open-ended indemnity, the project's **second after Hong Kong's**.
+  Its NAP copy is not a fallback either: **0% availability, last modified
+  2022-04-14** against a source portal current to 2026-09-22.
+
+- **Marseille wins the vacated slot on its own merits, not by default.**
+  `lov2` rather than `mobility-licence`, no account, no trademark clause, no
+  indemnity - and at **26,940 estimated bucket rows it is the largest follower
+  anyway**. The build sequence is now **Paris, Marseille, Toulouse, Lille,
+  Rennes**, recorded as `BUILD_SEQUENCE` in `pipeline/countries/france.py` with
+  Lyon in `DEFERRED` beside it. Moved from cost band 2 to cost band 6 in
+  `docs/city_cost_order.md`; the counts still sum to 32.
+
+- **Every European city now tags ONE region, `Europe`, rather than a region
+  per country.** Owner's decision. The remaining screen holds European
+  candidates in **ten countries** - Ireland, France, Italy, Czechia, Denmark,
+  Norway, Romania, Sweden, Switzerland and Spain - which between them describe
+  **one readable view**, so a region each would mean ten entries to create,
+  order, and eventually merge. **The asymmetry is the argument**: splitting
+  `Europe` later into a composite costs one line, because `REGION_MEMBERS`
+  already resolves `United States` to its two halves; un-picking ten country
+  regions later does not. It also fits what `app/cities.py` already says - that
+  a region is "whatever groups cities into ONE readable view", which is why
+  Canada is split West/East on a 3,300 km span rather than on nationality.
+  Europe's widest current pair, **Madrid-Bucharest at ~2,900 km**, sits inside
+  that. Recorded in `docs/scaling_thresholds.md`, in `add-city`'s skill so the
+  next European city passes through it, and as `MAP_REGION` in the France
+  country module.
+
+- **`Spain` is the leftover that proves the rule, and retiring it is now
+  outstanding work.** It was created on 2026-09-22 with Madrid as the first
+  region outside North America, hours before this decision, and it is precisely
+  the precedent that would have produced ten more. Migration is three edits -
+  both cities' tags, one line in `REGION_ORDER`, and nothing in
+  `REGION_MEMBERS` because `Europe` is a leaf until it needs splitting - and
+  `cities.py` **raises** on a city whose region is not a leaf, so a
+  half-finished migration fails loudly rather than dropping a city off the
+  macro map. **Left to the app/chrome role rather than done here**: `app/`
+  belongs to the build and chrome sessions under `docs/session_roles.md`, and
+  the main session is editing `app/cities.py` for Dublin concurrently.
 
 ### 2026-09-22 - Europe became one macro-map region, and a write truncated a file to zero
 
@@ -349,6 +483,117 @@ onwards; the early ones are split by phase rather than by hour.
   untouched, write a temp file, then `os.replace`** - which is what the fix
   does. Nothing was lost because the file was committed; that is the only
   reason this is a note rather than an incident.
+
+### 2026-09-22 - France's three pre-ship items run; Lyon turns out to be gated three ways
+
+- **The NAF taxonomy keys at the FINEST level, measured rather than
+  inherited.** `premises-taxonomy` names the catch-all share at each level as
+  the deciding measurement and says it is skipped every time. Run on **6,895
+  active Paris rows** in NAF 47/56/96 against INSEE's own label file: division
+  **18.7%**, groupe **49.4%**, classe **27.8%**, **sous-classe 19.3%**. So NAF
+  keys at the 5-character sous-classe - **Barcelona's shape, not Madrid's** -
+  and grouping at *groupe* would have dumped half of Paris into "other". The
+  largest single catch-all is **`96.09Z` Autres services personnels n.c.a. at
+  8.6%**, a third of the whole residual and concentrated in one bucket.
+
+- **15.5% of Paris's bucket rows are DISTANCE SELLING and must be excluded.**
+  `47.91A` *Vente à distance sur catalogue général* **4.7%**, `47.91B`
+  *catalogue spécialisé* **8.5%**, `47.99A` *Vente à domicile* **2.0%**,
+  `47.99B` *Vente par automates* **0.3%**. These are businesses with no
+  storefront at all, sitting inside the retail division, and the existing note
+  that 47.91B was "24% of the whole retail division" understated the problem by
+  looking at one code of four. This is a concrete step-2 filter rule, not an
+  observation.
+
+- **Two measurement bugs were caught by their own implausibility before they
+  reached a file.** A first catch-all pass inferred residuals from CODE SHAPE -
+  NACE's "a code ending in 9 is the residual" - which does not apply at NAF's
+  sous-classe level, where the fifth character is a LETTER; it reported
+  **0.0%** for the finest level, which is not a low catch-all share but a
+  broken test. A second pass parsed INSEE's label spreadsheet by compacting
+  each row's non-empty cells, which shifted the columns and mapped **NAF 47 to
+  "Élevage de vaches laitières"** - NAF 01.41's label. Both were visible only
+  because the output was checked against something already known.
+
+- **`mobility-licence` covers exactly 2 of 799 datasets on France's National
+  Access Point, and they are precisely the two cities wanted first.** Paris
+  (IDFM) and Lyon (SYTRAL). The other 797 are `lov2` 472, `odc-odbl` 212,
+  `notspecified` 93, `fr-lo` 20. **There is no government-hosted text**: the
+  décret the licence cites does not approve it, and the authoritative document
+  is a **14-page PDF, "Version au 03.02.2021"**, reachable only through the
+  dataset page's own link to a community wiki. **It is ODbL-derived but NOT
+  ODbL-compatible** - Art. 5.5(a)(iii) allows "une licence compatible" but no
+  compatible list and no proxy was ever published, so share-alike cannot be
+  discharged by relicensing. Verdict **PERMITTED WITH CONDITIONS**; recorded in
+  full at `docs/licenses/france-required-notices.md`.
+
+- **Decided: republish the derived station table on the NAP rather than argue
+  the share-alike boundary.** A rendered map is a « Création Produite » and
+  Art. 5.6(b) says that does **not** create a Derivative Database - but this
+  project commits `outputs/<city>/` to a public repository, and Art. 5.5(b)
+  says extracting a substantial part into a new database does. The NAP's own
+  published interpretation contains an example that is almost verbatim this
+  project - *"Calcul de la distance à l'arrêt de bus le plus proche pour une
+  liste de commerces"*, filed under **"Non"**, no resharing required - so the
+  permitting reading is well supported. **One upload moots the question and
+  costs less than the argument**, which is the same reasoning as reading a
+  licence rather than inferring it.
+
+- **France introduces two obligation SHAPES this project has never carried:
+  a date of last update, and an update interval.** Art. 5.7 forbids use that
+  misleads « quant au contenu de l'information **et à sa date de mise à
+  jour** », and the MMTIS règlement requires the static data's **update
+  interval** to be stated. **A pre-rendered static map built from a frozen GTFS
+  snapshot is precisely what that clause describes** unless the snapshot date
+  is displayed - so this is substantive, not a courtesy. Note also that the
+  clause is the INVERSE of MTA's and WMATA's: nothing here forbids claiming
+  accuracy; instead Art. 5.7 demands currency and exhaustiveness.
+
+- **Lyon is gated three ways and is no longer the cheap second city.** (1) A
+  **free account on `data.grandlyon.com` is required before any download**, and
+  this project does not create accounts - the owner must register. (2) Grand
+  Lyon CGU **Art. 6.2 bars use of the producers' *signes distinctifs*
+  "associés ou non à l'utilisation des données"**, which collides head-on with
+  the invariant that every drawn line carries its real public name - Lyon's
+  being **TCL**; left unresolved deliberately, with prior authorisation
+  obtainable at `contactopendata@tcl.fr`. (3) CGU 9.4 is an **open-ended
+  indemnity**, the project's **second after Hong Kong's**. And separately its
+  **NAP feed is DEAD** - 0% availability, last modified 2022-04-14, against a
+  source portal current to 2026-09-22 - so the stale-mirror trap that cost
+  Toronto is live here too. Added as gate items 17, 18 and 19.
+
+- **Paris's GTFS provenance is NOT settled and must be before any fetch.** A
+  direct read of the NAP API listed three GTFS resources - IDFM's own via
+  `eu.ftp.opendatasoft.com`, an **ITO World mirror**, and a Google-published
+  "GTFS modifié" from an Apigee URL - while the licence review reports the
+  dataset carries no *official* GTFS at all, only NeTEx and SIRI Lite plus that
+  community copy. **The two readings disagree**, plausibly over whether those
+  sit in `resources` or `community_resources`. **Building Paris from a third
+  party's modified copy under an unverified licence is not acceptable**, so
+  this is a prerequisite rather than a detail. Recorded unresolved rather than
+  settled in the project's favour.
+
+- **IDFM's own licences page contradicts the NAP, in this project's favour,
+  and the stricter reading was adopted anyway.** IDFM states it publishes its
+  reference data - « référentiel des arrêts et des lignes, **tracés du réseau
+  ferré** » - under **Licence Ouverte**, reserving Licence Mobilités for
+  timetable data this project does not publish. SYTRAL does the opposite,
+  folding network topography into its Licence Mobilités declaration. Decided to
+  **comply with Licence Mobilités for both**: it is satisfiable, it is stricter
+  for Paris, and it avoids depending on a divergence that could be tidied up in
+  either direction. The divergence is recorded because it is the difference
+  between Paris carrying an Art. 5.4 notice and Paris carrying an Etalab
+  attribution.
+
+- **Two feed-selection traps hit while establishing the six datasets, both
+  already documented and both still effective.** Matching by title alone put
+  **Lyon's row on a Nouvelle-Aquitaine / Limoges feed**, because the portal
+  itself carries **two different datasets both titled "Réseau urbain TCL"** -
+  publisher, not title, is the disambiguator. And Lille's correct match still
+  returns **"Navettes Aéroport de Lille"**, an airport shuttle published by
+  Flibco.com, which is precisely the wrong-feed selection that had Dublin
+  tested against airport coaches. Recorded as named constants in
+  `pipeline/countries/france.py` rather than as warnings.
 
 ### 2026-09-22 - Dublin and Milan published, and the merge caught a latent break in both
 
@@ -522,6 +767,184 @@ onwards; the early ones are split by phase rather than by hour.
   becomes 23, together with the three citations in Milan's provenance rows.
   `check_provenance.py` catches duplicate notice numbers, so the merge will say
   so - but it is cheaper to renumber deliberately.
+### 2026-09-22 - France profiled: one register, six cities, and a naming gap found early
+
+- **France was profiled ahead of Milan because a country profile converts into
+  cities at a rate that decides everything, and France's rate is six to one.**
+  Paris, Lyon, Marseille, Toulouse, Lille and Rennes all come off INSEE's
+  SIRENE with **one variable changing** - `codeCommuneEtablissement` - which is
+  Mexico's shape, where the second city differed by one line, rather than
+  Spain's, where two cities shared a country and almost nothing else. Milan is
+  the same class of work and buys **one** city. Produced
+  `pipeline/countries/france.py` and `docs/france_step0_endpoints.md`.
+
+- **France's coordinate leg is a JOIN, which was not what the record implied.**
+  Paris was carried as "99.96% already geolocated", but the raw
+  `StockEtablissement` file carries an address and no coordinates. The
+  geolocation is a **separate INSEE file of 37,901,783 rows keyed on `siret`**
+  (parquet, 811 MB, `lov2`, updated 2026-09-21), so coordinates come from a
+  dict join exactly as Prague's do - no geocoder, no key, no rate limit, and
+  the property holds for all six cities at once. **Both files publish parquet**
+  (2,210 MB and 811 MB against 2,867 MB and 1,177 MB zipped), and every number
+  in this profile was measured by reading parquet FOOTERS over HTTP range
+  requests rather than downloading 3 GB.
+
+- **The geolocation file's CRS is PER ROW, not per file, and hard-coding it
+  would fail silently.** An `epsg` column held four values in one sampled row
+  group: **2154** (Lambert-93) on 99.3%, plus **2975** Reunion, **5490**
+  Antilles and **2972** Guyane. All six profiled cities are metropolitan and
+  uniformly 2154, so a hard-coded constant works today and would put every pin
+  in the sea if the pipeline were pointed at Fort-de-France - **without
+  raising**. Recorded as a column to read rather than a constant to copy, the
+  same lesson Prague's positive-but-inverted S-JTSK coordinates taught hours
+  earlier.
+
+- **Roughly six in ten French storefronts publish no name at the premises
+  level, and this was measured BEFORE a taxonomy was written rather than
+  discovered at step 2.** Across **20,103 active rows in NAF 47/56/96**:
+  `enseigne1Etablissement` **29.1%**, `denominationUsuelleEtablissement`
+  **34.2%**, **either 42.9%**. **This is Milan's `insegna` trap in another
+  language** - the field exists and is mostly empty - and finding it during the
+  profile rather than during the build is the entire reason `add-country` runs
+  before `add-city`.
+
+- **Paris is the WORST-named of the six cities, which inverts the assumption
+  that the flagship carries the best data.** From a 14-row-group sample
+  (1,735,429 rows, 3.9% of the file): Paris **42.9%** named, Marseille 45.8%,
+  Lille 50.7%, Toulouse 51.9%, Lyon 52.5%, **Rennes 54.3%**. The cheap
+  follower cities are also the better data. Paris's scaled 136,400 bucket rows
+  against its independently measured **148,633** is the control passing; the
+  ~8% gap is sample bias, because active rows get denser through a file ordered
+  by siret, which is seniority not geography.
+
+- **The obvious fix for the naming gap is a privacy hazard and is ruled out in
+  its general form.** `StockUniteLegale` joined on `siren` carries
+  `denominationUniteLegale` - but for a sole trader it carries
+  `nomUniteLegale` and `prenomUsuelUniteLegale`, **a person's name**. Decided:
+  fall back to the legal name **only where the legal form is a company, never
+  for a natural person**, and run `scripts/check_personal_exposure.py` before
+  publishing any French city. France already masks non-diffusible records at
+  source - `statutDiffusionEtablissement` hides name, address and geolocation
+  on **13.4%** of active bucket rows - so part of the privacy work is done
+  upstream, which `read-licence` step 6b predicts and which cuts both ways.
+
+- **Rail is ONE integration for six cities, and two matching traps were hit
+  while establishing it.** `transport.data.gouv.fr`, the National Access
+  Point, serves **799 datasets, 489 of type public-transit**, with GTFS for
+  every one of the six urban operators (IDFM, TCL, Aix-Marseille, Tisseo,
+  ilevia, STAR). **First trap:** substring-matching the whole JSON blob scored
+  Rennes at **489 of 799**, because `star`, `mel` and `tcl` match unrelated
+  text - the same self-match that produced 367 false hits on the Tel Aviv
+  portal. **Second trap:** Lille's match also returns **"Navettes Aeroport de
+  Lille"**, an airport shuttle, which is precisely the wrong-feed selection
+  that had Dublin tested against airport coaches. Per-operator GTFS licences
+  are **unread** and are a prerequisite for shipping, not a formality.
+
+- **Two wrong files were pulled before the right ones, and both were the
+  registered-office distinction at file level.** `StockUniteLegale`
+  (30,020,346 **legal units** keyed on `siren`) sits beside
+  `StockEtablissement` (44,064,115 **establishments** keyed on `siret`) in the
+  same resource list, and a title match without its trailing `" -"` also
+  catches `StockEtablissementHistorique` and `StockEtablissementLiensSuccession`.
+  Recorded in the country module as a named constant rather than as a warning.
+
+### 2026-09-22 - Band B's coordinate routes measured; one claim did not survive
+
+- **All six remaining Band B coordinate routes were probed against each
+  register's OWN addresses, and the band split into two kinds.** It had said
+  the method was "identified and cheap", which describes a plan rather than a
+  measurement. **A JOIN** - the whole address table downloads and coordinates
+  are a dict lookup - covers **Prague** (RUIAN's Praha export, 3.4 MB zipped,
+  keyless, **134,627 addresses, 99.99% with coordinates**, measured at
+  **99.8%** against 6,000 active Praha rows streamed from RES) and
+  **Copenhagen** (DAWA, keyless, **85,351 access addresses, 100% with
+  WGS84**). **A GEOCODE** covers **Oslo** (**97.8%**), **Singapore**
+  (**98.8%** of answered lookups) and **Hong Kong** (answers, rate unmeasured).
+  Touched `docs/city_master_list.md`.
+
+- **Taiwan moved to Band C because its route failed the probe, NOT because it
+  resembles Japan.** The owner asked directly whether four cities on one
+  national register justified banding it with Japan and Brazil. The answer
+  given was no - **the city count is an amortisation argument, not a
+  difficulty argument**, and banding on resemblance is exactly the Rio
+  misfiling - and that Japan is hard for a reason Taiwan does not share:
+  Japanese addressing is **block**-based (chome/ban/go, `町字ID` 0%
+  populated) while Taiwan's is **street**-based, which is the Prague shape.
+  **The probe then supplied an independent reason.** The row's claim that
+  "NLSC's geocoder is keyless" did not survive: NLSC is alive and keyless, but
+  the keyless endpoint is **reverse** geocoding (point to 村里) plus
+  administrative lists, **no bulk 門牌 point file was reached**, and
+  `data.gov.tw`'s dataset API **requires a key** (`ER0001:API Key錯誤`).
+  Blocked, not negative. The distinction matters: the band moved on evidence
+  that arrived after the reasoning, not on the reasoning.
+
+- **Oslo carries the registered-office trap in a third costume, and a
+  geocoder that guesses silently.** Bronnoysund's `?kommunenummer=0301` does
+  **not** constrain `beliggenhetsadresse`: a first sample scored 57.3% and the
+  misses were **Bergen, Copenhagen, Paris and Malmo**, plus `c/o` lines in an
+  `adresse` LIST whose first element is not always a street. Filtering on the
+  field actually read lifted it to 93.5%. **The generalisation: a filter
+  parameter and the field you read are two different addresses until proven
+  otherwise** - after ONRC, ACRA and SIRENE's *sieges*. Separately,
+  **`fuzzy=true` must never be used**: it returned `Karenslyst alle 8B` as
+  **`alle 1B`**, a different building, and `7-Eleven` as
+  `Ellen Gleditsch' vei 7`. **It produces plausible coordinates for the wrong
+  place, which a map renders without complaint.** The real fix was a two-stage
+  exact-then-`sok` lookup (**97.8%**), because the residue was a suffix-letter
+  mismatch - the register writes `Thorvald Meyers gate 71`, the address file
+  holds `71A`.
+
+- **Three of the five services report their own confidence and Oslo's does
+  not, which is worth more than a higher raw hit rate.** DAWA returns a
+  `kategori` - **A** exact, **B** normalised (it returned B for
+  `Raadhuspladsen 1 1550 Kobenhavn`, diacritics stripped), **C** ambiguous
+  (30 results for `Vesterbrogade 3`) - plus a per-address `nojagtighed`. Hong
+  Kong's ALS returns a `Score` (76.15, 88.75, 97.69 on three test premises)
+  alongside both lat/long and HK1980 Grid. **A geocoder that says when it is
+  guessing is the property Oslo's `fuzzy` lacked**, and it is now a thing to
+  look for rather than a thing to notice afterwards.
+
+- **Singapore's postcode is in the string, not in a column - and dedupe before
+  geocoding.** Reading the schema said "NO postcode column" for the two big
+  registers, which was true and misleading in the same way Milan's `insegna`
+  was: the postcode sits inside the free-text address (`...SINGAPORE 169663`,
+  `...SINGAPORE(738733)`) and extracts on **99.5%** of tobacco, **97.5%** of
+  pharmacy and **83.4%** of eating establishments. The decisive number is not
+  the hit rate but the **distinct count: 35,064 extracted postcodes are 7,767
+  DISTINCT buildings**, because a Singapore postcode identifies a building and
+  malls and hawker centres share one. That is ~1.4 h of polite fetching rather
+  than 6.5 h. **OneMap throttles** - 85.5% refusals at 8 workers, still 32.5%
+  at 2 - and an early 14.1% "hit rate" was a measurement of my own request
+  pattern, not of the data.
+
+- **Bucharest's named route is down rather than refusing, and its fallback was
+  measured instead of assumed.** `data.gov.ro` resolves to 85.120.75.35 and
+  **blackholes on both 443 and 80** with `time_connect` 0.000000s - no TLS is
+  attempted, so this is below the layer where a browser could differ, and it
+  answered earlier the same day. ANCPI, which owns the nomenclature, has **no
+  resolving geospatial subdomain** (`ran.`, `geoportal.`, `ags.`, `inspire.`
+  all NXDOMAIN) though `ancpi.ro` itself returns 200. **OSM carries 146,116
+  addressed objects** in Bucharest (132,432 nodes + 13,684 ways, relation
+  **377733**), ODbL, and the city's rail is already OSM. Two guessed relation
+  ids returned 0 first - **a statement about the guess** - and `Bucuresci` at
+  admin_level 8 is a different village entirely.
+
+- **Prague's coordinates need a sign flip and an axis swap, verified against a
+  known point rather than reasoned about.** RUIAN publishes `Souradnice X`
+  ~1,042,569 and `Souradnice Y` ~744,384, both **positive**. Transforming the
+  first row - Hrad I. nadvori, the Castle's first courtyard - showed
+  **`EPSG:5513` with (X, Y) as published**, or equivalently `EPSG:5514` with
+  **(-Y, -X)**, lands at 50.08948, 14.39861 against a true 50.0905, 14.4005.
+  **The wrong orderings land in Germany (52.3, 9.5) and the Arctic (68.5,
+  41.6)** - plausible numbers that fail silently, which is why this was
+  measured before any pipeline code exists to inherit the mistake.
+
+- **Two counts in this band are still unmeasured and are recorded as such.**
+  How much of Oslo's 152,128 sub-units is **physically** in Oslo: brreg's API
+  stops paging past ~10,000, so both samples came from the alphabetical head
+  and disagreed (24.5% vs 4.3%); **settle it with the bulk download at build
+  time, not with the API**. And Bucharest's OSM hit rate against DSVSA's
+  31,299 premises - the 146,116 establishes supply, not match.
 ### 2026-09-22 - Dublin built: the rail source reversed mid-build, and a national grid got admitted
 
 - **Dublin built as a four-authority regional map: 96 stations, 13,123

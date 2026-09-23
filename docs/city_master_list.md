@@ -76,7 +76,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 33
+## Candidates — 31
 
 Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 **Eight cities moved to discarded on measurement** and **two were upgraded**.
@@ -168,7 +168,7 @@ results in the sweep.
 
 ---
 
-## 🟢 Band A — ready to build (9 remaining + 4 ✅ BUILT)
+## 🟢 Band A — ready to build (6 ready + 1 ⛔ gated + 6 ✅ BUILT)
 
 **Every question these cities carry is answerable inside the build**, not
 before it. Nothing here needs a probe, a document or a decision first.
@@ -198,12 +198,13 @@ and whether it held.
 |---|---|---|---|
 | ✅ | ~~**Guadalajara**~~ 🇲🇽 | DENUE, SCIAN = NAICS, INEGI licence cleared | **BUILT 2026-09-22** — `pages/16_Guadalajara_Heatmap.py`, region *Mexico*. Screening said "nothing outstanding" and that held |
 | ✅ | ~~**Madrid**~~ 🇪🇸 | **53,355 clean storefront rows** — retail 36,224 · food 18,194 · personal 9,974 (from 225,660 join rows → 159,787 open → filtered). Three-level taxonomy on `division`, EPSG:25830, CC BY 4.0 | **BUILT 2026-09-22** — `pages/17_Madrid_Heatmap.py`, region *Spain*. Rail from **CRTM's feature layers**: 13 lines, 293 station-line records, 49 stations excluded, 0 filter disagreements. Screening said the rail leg was the open question and CRTM answered it |
-| 1 | **Dublin** 🇮🇪 ▲▲ **REGIONAL** | **38,265 rateable rows across FOUR local authorities → 13,945 storefront** (Dublin City alone: 19,810 → **8,016**). **13 use categories region-wide, 12 in Dublin City.** **99.87% carry `Xitm`/`Yitm`** — Irish TM, already in metres; 51 of 38,265 missing, **46 of them pubs**. Per-row `Category` **and** `Uses`, plus `ValuationReport[].FloorUse`. `Eircode`. **CC BY 4.0, no key** | **No geocoding leg.** Build is the **Vancouver + Surrey shape** — four authorities, not one city. Rail: the three drawn lines (**Luas Red, Luas Green, DART**) all already carry an OSM colour; Commuter and InterCity are **dropped**. ⚠️ **36% of its storefronts are near no rail of any kind** — a scope fact to state on the page, not a defect. Brief: `docs/build_briefs/dublin.md`, **6/6** |
+| ✅ | ~~**Dublin**~~ 🇮🇪 ▲▲ **REGIONAL** | **38,265 rateable rows across FOUR local authorities → 13,945 storefront** (Dublin City alone: 19,810 → **8,016**). **13 use categories region-wide, 12 in Dublin City.** **99.87% carry `Xitm`/`Yitm`** — Irish TM, already in metres; 51 of 38,265 missing, **46 of them pubs**. Per-row `Category` **and** `Uses`, plus `ValuationReport[].FloorUse`. `Eircode`. **CC BY 4.0, no key** | **No geocoding leg.** Build is the **Vancouver + Surrey shape** — four authorities, not one city. Rail: the three drawn lines (**Luas Red, Luas Green, DART**) all already carry an OSM colour; Commuter and InterCity are **dropped**. ⚠️ **36% of its storefronts are near no rail of any kind** — a scope fact to state on the page, not a defect. Brief: `docs/build_briefs/dublin.md`, **6/6**  — **✅ BUILT 2026-09-22** — the regional shape (four local authorities) held |
 | 2 | **Seoul** 🇰🇷 | 197,276 active premises over 8 datasets, EPSG:5174, status field, KOGL Type 1 | Build work — partial geocoding for 일반음식점 (90.7%), Korean-aware `check_personal_exposure.py` |
-| 3 | **Milan** 🇮🇹 ⚠️ | **Three layers, one per bucket — the bucket comes from WHICH LAYER a row is in, not from a code.** `ds49` **28,131** retail · `ds59` **3,799** food service · `ds62` **5,732** personal services. All three **CC-BY**, all updated **2026-08-31**, all with `LONG_X_4326`/`LAT_Y_4326` | **Schemas captured 2026-09-22 — and the fill rates correct this row's old claim.** Coordinates are excellent (99.1% / 92.2% / 98.8%) and location is complete (`Ubicazione` 100%). **But the columns that were cited as making this the richest source in the screen are mostly EMPTY**: `insegna` **17.6%** on retail and **9.1%** on food, `codice_ateco` **7.1%**, and `ds62` has **no name field at all**. `settore_merceologico` is 99.5% but binary — *alimentare / non alimentare*; `tipologia` is 100% and single-valued. **Owner decision: a map where ~82% of retail pins carry no trade name.** Not a blocker — bucketing works by layer, and fewer published names is a privacy asset — but it is a choice, not a detail |
+| ✅ | ~~**Milan**~~ 🇮🇹 | **Three layers, one per bucket — the bucket comes from WHICH LAYER a row is in, not from a code.** `ds49` **28,131** retail · `ds59` **3,799** food service · `ds62` **5,732** personal services. All three **CC-BY**, all updated **2026-08-31**, all with `LONG_X_4326`/`LAT_Y_4326` | **Schemas captured 2026-09-22 — and the fill rates correct this row's old claim.** Coordinates are excellent (99.1% / 92.2% / 98.8%) and location is complete (`Ubicazione` 100%). **But the columns that were cited as making this the richest source in the screen are mostly EMPTY**: `insegna` **17.6%** on retail and **9.1%** on food, `codice_ateco` **7.1%**, and `ds62` has **no name field at all**. `settore_merceologico` is 99.5% but binary — *alimentare / non alimentare*; `tipologia` is 100% and single-valued. **Owner decision: a map where ~82% of retail pins carry no trade name.** Not a blocker — bucketing works by layer, and fewer published names is a privacy asset — but it is a choice, not a detail — **✅ BUILT 2026-09-22** |
 | ✅ | ~~**Mexico City**~~ 🇲🇽 | Same DENUE. **Rail from OSM** — 195/195 stops exact, 6,468 geometry points | **BUILT 2026-09-22** — `pages/15_Mexico_City_Heatmap.py`. The ODbL share-alike decision was taken during the build; see `DECISIONS.md` |
 | 4 | **Paris** 🇫🇷 ▲ | SIRENE, établissement-level, **Licence Ouverte 2.0**, and **99.96% already geolocated** — 148,576 of 148,633. Storefront filter **validated against OpenStreetMap**: 50,156 rows vs OSM's 54,198, and on one class 10,595 vs 10,642 | **The `check_personal_exposure.py` run is load-bearing here**, not a formality — the filter removes home registrations by proxy, not by proof |
-| **5–9** | **Lyon · Marseille · Toulouse · Lille · Rennes** 🇫🇷 | **The same SIRENE, the same Licence Ouverte 2.0, the same filter** — one national register, so nothing about their business leg is separately open. Storefront layers under the project's own filter: **Marseille 8,065 · Lyon 7,354 · Toulouse 4,833 · Lille 3,272 · Rennes 2,089** | **No geocoding leg in any of them** — geolocation measured per commune: Lyon **99.97%**, Marseille 99.91%, Rennes 99.90%, Toulouse 99.85%, Lille **99.71%**. ⚠️ **The OSM composition validation is Paris-only** and is owed on the **first** non-Paris build, not all five (`PLAN.md`). ⚠️ **Rennes and Lille are an order of magnitude below Paris** — whether a ~2,000-point city earns a page is a scope call |
+| **4–7** | **Marseille · Toulouse · Lille · Rennes** 🇫🇷 | **The same SIRENE, the same Licence Ouverte 2.0, the same filter** — one national register, so nothing about their business leg is separately open. **Country profiled 2026-09-22**: `pipeline/countries/france.py`, `docs/france_step0_endpoints.md`. Coordinates are a **JOIN** on `siret` against INSEE's 37,901,783-row geolocation file, so there is no geocoding leg for any of them. Est. bucket rows: Marseille 26,940, Toulouse 12,873, Lille 10,461, Rennes 5,002 | **Build after Paris; each is then one variable (`codeCommuneEtablissement`).** Licences read: Marseille and Lille `lov2`, Toulouse and Rennes **`odc-odbl` share-alike**. ⚠️ France's OSM rail composition is validated on **Paris only** — the first non-Paris build must re-validate. ⚠️ **Scope undecided**: the commune is far smaller than the transit network, so these may need Dublin's regional shape |
+| ⛔ | **Lyon** 🇫🇷 **GATED — not counted as ready** | Data is fine and **better than Paris**: 19,449 est. bucket rows, **52.5% carrying a premises name** against Paris's 42.9% | **DEFERRED 2026-09-22, not discarded.** Three gates: an account on `data.grandlyon.com` this project does not create; **CGU Art. 6.2 bars the producers' *signes distinctifs*** — which collides with the invariant that every drawn line carries its real name, Lyon's being **TCL**; and **CGU 9.4's open-ended indemnity**, the project's second after Hong Kong's. Its NAP feed is **dead since 2022-04-14**. Gate items 17–19 |
 | ✅ | ~~**Barcelona**~~ 🇪🇸 | **58,908 active premises** (2022 census — the 2024 one is geographically incomplete), 0.00% bad coordinates, CC-BY-4.0. Build brief, 9/9 | **BUILT 2026-09-22** — `pages/18_Barcelona_Heatmap.py`. All four owner decisions were settled before the build: census year **2022**, drawn scope **16 lines** (14 metro refs + funiculars FM and FV, decided on the operators' own `network` tag), mall and market interiors **kept**, and the brief's OSM breakdown corrected to tram 20 / funicular 6. ⚠️ **The duty to notify the Council is still OUTSTANDING** — see `docs/gated_access.md` item 2 |
 
 ⇄ **Paris left Band A and came back the same day, measured both times.**
@@ -232,24 +233,56 @@ So the next *unstarted* city is the question.
 and only owner decisions left. After that the screen has no city whose
 "what remains" column is empty.
 
-## 🟡 Band B — the business leg is done; coordinates are the only work (10 cities)
+## 🟡 Band B — the coordinate route is MEASURED, not assumed (6 cities)
 
-**Nothing here needs screening.** Every register is measured, licensed and
-current. What each still lacks is coordinates, and for all eight the method
-is already identified and cheap — a lookup, a keyless geocoder, or a free
-one. Ordered by how little that step costs.
+**Every route in this band was probed on 2026-09-22 and answered.** The band
+used to say the method was "identified and cheap", which is a description of a
+plan rather than of a measurement. It is now a hit rate per city, taken against
+each register's **own** addresses rather than hand-typed landmarks.
 
-| Cities | Country | Business leg | The coordinate step |
+**The band splits in two, and the split is the useful thing:**
+
+- **A JOIN** — the whole address table downloads, and coordinates come from a
+  dict lookup. No per-row requests, no rate limit, no geocoder to be wrong.
+  **Prague and Copenhagen.**
+- **A GEOCODE** — one request per distinct address, against a service that
+  answers. **Oslo, Singapore, Hong Kong.** All three are keyless.
+
+**Taiwan left this band** for Band C: its route was the one claim here that did
+**not** survive probing. **Bucharest's primary is down** but its fallback is
+measured.
+
+| Cities | Country | The coordinate step — MEASURED | Rate |
 |---|---|---|---|
-| **Hong Kong** ▲▲▲ *(1)* | 🇭🇰 | **35,808 licensed premises, 100% carrying BOTH a trade name (`SS`) and an address (`ADR`)** — restaurants **17,260** (general 12,603, light refreshment 4,652), other food **16,518** (**Composite Food Shop, Fresh Provision Shop, Bakery, Siu Mei and Lo Mei** — food *retail*, not only food service), non-food **2,030** (cinemas, karaoke, bathhouses). `EXPDATE` per licence, `DIST` per district. **Regenerated daily** — the files carried `GENERATION_DATE` of the day they were read. Licence **PERMITTED WITH CONDITIONS** | **A geocoding pass** — addresses, no coordinates. Hong Kong's government **Address Lookup Service is free**. ⚠️ Two obligations: **attribution plus acknowledgement of Government IP ownership**, and an **indemnity clause** — the only one in this project. **Rail is the best in the whole screen: 126 relations, 125 named, 117 coloured** |
-| **Prague** ▲▲ *(1)* | 🇨🇿 | **85,022 active Praha subjects in CZ-NACE 47/56/96**, from the Statistical Office's **RES** (`res_data.csv`, 543 MB, updated 2026-09-17). **CZ-NACE is SINGLE-VALUED** here — *převažující činnost* — unlike ARES's fifteen-code array. `FIRMA` trade name **100%**, street + house number **99.6%** | **A JOIN, not a geocode** — **99.7% carry `KODADM`, a RÚIAN address code**, so coordinates come from the national address register rather than a geocoder. **The cheapest coordinate step in this band.** Plus the France question: `KATPO` is an employee-count category and **46,447 of the 85,022 are `000`**, so the SIRENE employee filter transfers directly — **38,575 survive it**, against Paris's 50,156 for a larger city |
-| **Taipei**, Kaohsiung, Taoyuan, Taichung *(4)* | 🇹🇼 | 商業登記 — premises, active/closed status, per-category assembly | Moderate — **NLSC's geocoder is keyless** |
-| **Oslo** *(1)* | 🇳🇴 | 152,060 sub-units, `beliggenhetsadresse` (physical, not registered), NACE, open API no key | Moderate |
-| **Copenhagen** *(1)* | 🇩🇰 | CVR `productionunits` — P-enheder each with own `address`/`zipcode`/`city`, plus `industrycode` | Moderate — **plus a free account** (`distribution.virk.dk` 401) |
-| **Bucharest** ▲▲ *(1)* | 🇷🇴 | **31,299 premises** across 14 of 34 DSVSA categories — 13,279 catering, 10,488 food shops, 709 hyper/supermarkets, refreshed **25/08/2026**. Published as **XLSX per category**. Licence **SILENT** — established, not assumed: the site has **no terms of use at all**, its privacy policy is 8,465 characters about personal data with **zero** mentions of reuse, and it is **not on `data.gov.ro`**, so there is nothing to inherit. The footer's *toate drepturile rezervate* is a **website** footer — the New York shape | **Geocoding, unmeasured** — Romanian addresses, no coordinates. 🎁 **`nomenclator-stradal-municipiul-bucuresti`** is published nationally (one per county, plus Bucharest), which is the address reference the join needs. ⚠️ **The fetch step must be browser-assisted**: plain curl gets **503 even on the XLSX itself**, and the file only comes back inside a browser that has legitimately passed the challenge — **never by replaying a clearance cookie** |
-| **Singapore** ▲▲ *(1)* | 🇸🇬 | **≈41,600 premises across two buckets, assembled from four registers** — `NEA Licensed Eating Establishments` **36,687** (`premises_address`, hygiene `grade`), `Licensed Tobacco Retailers` **4,235**, `Supermarket Licences` **478** (block/level/unit/street/postcode), `Licensed Pharmacies` **243**. **A `multi-source-city`, the New York shape** | **Full geocoding leg — no coordinates in any of the four.** Addresses are highly structured and **OneMap's geocoder is free**. ⚠️ Retail is **narrow by construction**: only licensed trades appear, so general retail — clothing, electronics — has no register, the same gap most US cities have |
+| **Prague** ▲▲ *(1)* | 🇨🇿 | **A JOIN, confirmed.** RÚIAN's Praha export is **3.4 MB zipped, keyless** (`vdp.cuzk.gov.cz`; the old `cuzk.cz` redirects rather than dying) and holds **134,627 addresses, every one a unique `Kód ADM`, 99.99% carrying coordinates**. Measured on **6,000 active Praha rows** in CZ-NACE 47/56/96 streamed from RES | **99.8%** — 99.9% carry a code, 100.0% of those resolve |
+| **Copenhagen** *(1)* | 🇩🇰 | **A JOIN, confirmed — and the account gate was on the wrong leg.** DAWA (`api.dataforsyningen.dk`) is **keyless**; the `distribution.virk.dk` 401 gates the BUSINESS register only. The whole city downloads as CSV: **85,351 access addresses, 100% with WGS84**, joinable on `vejnavn` + `husnr`. ⚠️ **Frederiksberg (0147) is a separate kommune entirely surrounded by Copenhagen** — scope to 0101 alone and the map has a hole in its middle; its 9,584 addresses come from the same call | **100%** of addresses carry coordinates |
+| **Hong Kong** ▲▲▲ *(1)* | 🇭🇰 | **A GEOCODE, confirmed keyless.** The government **Address Lookup Service** (`als.gov.hk/lookup`) answers without a key and returns **lat/long AND HK1980 Grid easting/northing AND a confidence `Score`** (76.15, 88.75, 97.69 on three test premises). ⚠️ Still carries the band's two obligations — attribution plus Government IP acknowledgement, and **the project's only indemnity clause** | Answers; **per-row rate not yet measured** against the 35,808 |
+| **Singapore** ▲▲ *(1)* | 🇸🇬 | **A GEOCODE, and the postcode is the key.** OneMap is **keyless** and a bare six-digit postcode resolves to a **named building**. **The postcode is not a column — it is inside the address string** (`...SINGAPORE 169663`, `...SINGAPORE(738733)`): extracted on **99.5%** of tobacco, **97.5%** of pharmacy, **83.4%** of eating establishments. ⚠️ OneMap **throttles** — 32.5% refusals even at 2 workers | **98.8%** of answered lookups resolve (80/81). **35,064 postcodes → 7,767 DISTINCT** — dedupe first, ~1.4 h not 6.5 h |
+| **Oslo** *(1)* | 🇳🇴 | **A GEOCODE, keyless — with two traps.** Kartverket (`ws.geonorge.no/adresser`) answers and returns `representasjonspunkt`. ⚠️ **`fuzzy=true` MUST NOT BE USED**: it "rescued" `Karenslyst allé 8B` as **`allé 1B`** — a different building — and turned `7-Eleven` into `Ellen Gleditsch' vei 7`. It returns plausible coordinates for the wrong place. ⚠️ The API caps at **10,000 rows** (offset 9,900 works, 15,000 returns nothing), so it cannot enumerate the city | **97.8%** via two stages: exact `adressetekst`, then plain `sok`. Never fuzzy |
+| **Bucharest** ▲▲ *(1)* | 🇷🇴 | ⚠️ **Primary route DOWN, fallback MEASURED.** `data.gov.ro` resolves to 85.120.75.35 but **blackholes on both 443 and 80** (`time_connect` 0.000000s) — and it answered earlier the same day, so this is an **outage, not a refusal**. ANCPI, which owns the nomenclature, has **no resolving geospatial subdomain** (`ran.`, `geoportal.`, `ags.`, `inspire.` all NXDOMAIN). **OSM fallback measured: 146,116 addressed objects** in relation 377733 (132,432 nodes + 13,684 ways), ODbL — and Bucharest's rail is already OSM | Fallback supply confirmed; **hit rate against DSVSA's 31,299 not yet measured** |
 
-## 🟠 Band C — geocoding at national scale (12 cities)
+**⚠️ Two Band B facts that are NOT about coordinates and change build scope:**
+
+- **Oslo's register is not filtered by the address you read.** Bronnoysund's
+  `?kommunenummer=0301` does **not** guarantee `beliggenhetsadresse` is in
+  Oslo — a sample turned up Bergen, Copenhagen, Paris and Malmö, and
+  `adresse` is a **list** whose first line is sometimes `c/o Osnordic AS`.
+  **This is the registered-office trap in a third costume**, after ONRC, ACRA
+  and SIRENE's *sièges*. The generalisation worth keeping: **a filter
+  parameter and the field you read are two different addresses until proven
+  otherwise.** How much of Oslo's 152,128 is physically in Oslo is **still
+  unmeasured** — brreg's API stops paging past ~10,000, so both samples came
+  from the alphabetical head and disagreed (24.5% vs 4.3%). **Settle it with
+  the bulk download at build time, not with the API.**
+- **Three of these services report their own confidence; Oslo's does not.**
+  DAWA returns a `kategori` (A exact / B normalised / C ambiguous — it
+  returned **B** for `Raadhuspladsen 1 1550 Kobenhavn` with the diacritics
+  stripped, and **C with 30 results** for an ambiguous one) plus a
+  per-address `nøjagtighed`; ALS returns a `Score`. **A geocoder that says
+  when it is guessing is worth more than one with a higher raw hit rate** —
+  which is exactly what Oslo's `fuzzy` lacked.
+
+## 🟠 Band C — geocoding at national scale (16 cities)
 
 **The investment tier.** These share one property that separates them from
 Band C: the address work is a project rather than a step, and it is worth
@@ -260,6 +293,7 @@ cities. Japan is ten cities from one schema; Brazil is two from one register.
 |---|---|---|---|
 | **São Paulo** *(1)* | 🇧🇷 | CNPJ — trade name, address, CNAE | **Hard, past Toronto's scale** |
 | **Rio de Janeiro** ▲ *(1)* | 🇧🇷 | **The same CNPJ** — one national register, so nothing about its business leg is open. Rail confirmed: **20 OSM relations, all named and coloured** | Same as São Paulo's, and shares its cost: write the Brazilian geocoder once, get both cities |
+| **Taipei**, Kaohsiung, Taoyuan, Taichung *(4)* | 🇹🇼 | 商業登記 — premises, active/closed status, per-category assembly | ⚠️ **MOVED HERE FROM BAND B 2026-09-22, on a probe rather than on a resemblance.** The row used to read *"moderate — NLSC's geocoder is keyless"*, and **that claim did not survive**: NLSC's API is alive and keyless, but the keyless endpoint is **reverse** geocoding (point → 村里) and administrative lists, not forward geocoding, and **no bulk 門牌 address-point file was reached**. `data.gov.tw`'s dataset API **requires an API key** (`ER0001:API Key錯誤`); its web pages are reachable, and `addr.tgos.tw` answers but has historically required registration. **Blocked, not negative** — and the Prague-shaped bulk join is still the thing to look for |
 | **Tokyo**, Osaka, Nagoya, Yokohama, Sapporo, Fukuoka, Kyoto, Kobe, Sendai, Hiroshima *(10)* | 🇯🇵 | Premises-level food permits, CC BY, one national schema. **Two buckets — no general retail** | **Hardest met** — chōme/ban/gō, full-width numerals, `町字ID` 0% populated |
 
 
