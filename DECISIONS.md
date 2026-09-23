@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**214 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**215 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Singapore is a TWO-bucket city, and the zero is controlled](#2026-09-23---singapore-is-a-two-bucket-city-and-the-zero-is-controlled)
 - [Bucharest moves B to D: the band was measuring the wrong thing](#2026-09-23---bucharest-moves-b-to-d-the-band-was-measuring-the-wrong-thing)
 - [CVR is normalised, and the premises file is nearly empty on its own](#2026-09-23---cvr-is-normalised-and-the-premises-file-is-nearly-empty-on-its-own)
 - [Copenhagen's gate was read at the wrong host, and it is light](#2026-09-23---copenhagens-gate-was-read-at-the-wrong-host-and-it-is-light)
@@ -253,6 +254,63 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Singapore is a TWO-bucket city, and the zero is controlled
+
+- **Singapore's business leg is measured for the first time; Band B had only
+  ever recorded its GEOCODE.** Four registers, all keyless, all premises-level:
+  **`NEA Licensed Eating Establishments` 36,687** (food service);
+  **`Licensed Tobacco Retailers` 4,235**, **`List of Supermarket Licences`
+  478** and **`Listing of Licensed Pharmacies` 243** (retail, ~4,956
+  together). **Personal services: NONE.** Two buckets, which clears the
+  owner's bar that two is acceptable and one is not.
+
+- **The personal-services zero is CONTROLLED, which is the only reason it is
+  worth recording.** In the same matcher `spa` returns **91** hits - every one
+  a false friend, parks and 1940s newspapers - while `massage`, `massage
+  establishment`, `salon`, `hairdress`, `barber`, `beauty`, `nail`, `tattoo`,
+  `laundry`, `pet shop` and `veterinar` all return **0**. **The matcher works;
+  the registers are genuinely not published.** Singapore licenses massage
+  establishments through the police rather than as open data. This is
+  Goteborg's discipline applied before the finding was written rather than
+  after.
+
+- **And the catalogue behind it was ENUMERATED, not searched, because the
+  search is broken.** `api-production.data.gov.sg`'s `query` parameter is
+  **inert**: `zzqqxxnonsense` returns the same 10 rows as `tobacco retail`.
+  **Third occurrence of that family** after `data.seoul.go.kr` and
+  `api.data.gov.in`. The full enumeration took **4,629 datasets over 463
+  pages** - and **two earlier runs were truncated by my own page caps**, at
+  600 and at exactly 4,000, both while still returning new rows. **A cap
+  reached is not a catalogue exhausted.**
+
+- **No register carries an activity column, so BUCKET = SOURCE.** This is
+  Milan's pattern in its purest form - *membership is the classification* -
+  and it means Singapore needs `multi-source-city` rather than a taxonomy
+  module. The columns are licence, licensee, address and (for food) a hygiene
+  `grade`; nothing says what the business sells.
+
+- **🚨 `Listing of Licensed Pharmacies` carries `Pharmacistincharge`,
+  a named individual.** It must be dropped at READ time, not at publish time,
+  and `check_personal_exposure.py` must see Singapore before it ships. The
+  project's invariant is that a trade name is fair game and a person's name is
+  not, and here the person's name is a first-class column rather than
+  something hiding in a catch-all category.
+
+- **`licensee_name` is the LICENSEE, not the trade name** - a hotel
+  restaurant appears as *REPUBLIC HOTELS & RESORTS LIMITED*, a tobacco outlet
+  as *HENG LAI HENG TRADING ENTERPRISE*. **This is Oslo's problem in a second
+  country**, and it suggests the rule generalises: **a LICENCE register names
+  the licence holder; a PREMISES survey names the premises.** `PharmacyName`
+  is the exception and is a real trade name.
+
+- **One register is shaped better than the rest and it is the smallest.**
+  `List of Supermarket Licences` splits the address into
+  `block_house_num` / `street_name` / **`postal_code`** as separate columns,
+  where the other three bury the postcode inside a free-text string - which is
+  the specific thing Band B's geocode measurement had to extract with a regex
+  at 99.5% / 97.5% / 83.4%. **478 rows of clean address against 36,687 of
+  parsed.**
 
 ### 2026-09-23 - Bucharest moves B to D: the band was measuring the wrong thing
 
