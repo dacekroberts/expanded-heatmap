@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**164 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**165 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Barcelona's live terms finally read, and they carried a clause that would have sunk the city](#2026-09-22---barcelonas-live-terms-finally-read-and-they-carried-a-clause-that-would-have-sunk-the-city)
 - [Madrid and Barcelona published, and the live site showed a defect no local check could have](#2026-09-22---madrid-and-barcelona-published-and-the-live-site-showed-a-defect-no-local-check-could-have)
 - [The unplaceable label was the circular line, and the fix is a second pass rather than more candidates](#2026-09-22---the-unplaceable-label-was-the-circular-line-and-the-fix-is-a-second-pass-rather-than-more-candidates)
 - [The geocoder gap was closed by moving the boundary, not the code](#2026-09-22---the-geocoder-gap-was-closed-by-moving-the-boundary-not-the-code)
@@ -200,6 +201,64 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Barcelona's live terms finally read, and they carried a clause that would have sunk the city
+
+- **The precondition this project published without has been discharged.**
+  `docs/data_sources.md` had said since the licence review that a human must
+  open `opendata-ajuntament.barcelona.cat/en/condicions-us` and confirm the
+  terms before publishing; the page serves hCaptcha, this project does not
+  defeat CAPTCHAs, and Barcelona shipped on a disclosed position instead. The
+  owner passed the CAPTCHA and read the page on 2026-09-22, after the deploy.
+  Stored at `docs/licenses/barcelona-condicions-us-live.txt`, **alongside** the
+  Internet Archive capture rather than replacing it: that capture is the text
+  the build was actually decided against, and silently overwriting it would
+  destroy the record of which text a decision was made on. The live file states
+  plainly that it arrived as pasted, markdown-converted text and is not a
+  byte-exact artefact.
+
+- **The notification clause is unchanged, word for word**, so the obligation is
+  current rather than an artefact of an eighteen-month-old snapshot, and the
+  notification should be sent as drafted.
+
+- **A CC BY-ND clause exists in those terms and would have forbidden this
+  project entirely.** *"any data involving third-party participation may be
+  reused under a Creative Commons Attribution-NoDerivs (CC BY-ND 4.0)
+  licence"* - and every map here is a derivative. It does not bind, because
+  *"Every data set that is offered in the Open Data BCN service states its
+  relevant Terms of use"* and the Cens de locals declares `CC-BY-4.0` in its
+  own CKAN metadata, verified live through `package_show` the same day on an
+  endpoint that needs no CAPTCHA. Recorded because the finding is that a clause
+  which could have sunk the city was **checked**, and an unnoticed clause looks
+  identical to a checked one afterwards.
+
+- **Decided to publish on the second reading of Article 8, and to say so** -
+  the owner's call, Philadelphia's shape. The terms import Spanish Act 37/2007
+  Article 8, *"the content of the information may not be altered"* and *"the
+  meaning of the information may not be distorted"*, while this project filters
+  10,722 premises rows to three categories and derives ring density. Read
+  literally that is alteration; read in context the same document permits
+  derived works *"as a result of their analysis or study"*, permits adaptation,
+  and requires that *"Any amendment or change ... shall be identified as such
+  at the time of their distribution"* - incoherent if amendment were forbidden.
+  Rejected: asking the Council to confirm it, which invites a "no" to a
+  question nobody asked; and holding a finished city indefinitely on a body
+  under no obligation to reply. If the Council reads it the other way,
+  Barcelona comes down under the standing removal commitment.
+
+- **The terms name the notification channel, which no earlier reading had.**
+  *"Any doubts or comments on these Terms of use may be forwarded to the
+  following link"* points at `bcn.cat/cgi-bin/consultesIRIS?id=241`, which
+  301-redirects twice to the Council's online enquiry service pre-categorised
+  to city data. This settles a question that was about to be answered by
+  guesswork: **there is no published email address for Open Data BCN.** The
+  dataset's CKAN metadata carries no `maintainer_email` or `author_email` at
+  all, `datos.gob.es` names a web form and no address, and the portal's own
+  contact page is behind the same CAPTCHA. An address of the shape
+  `opendata@bcn.cat` would have been invented, and a formal notification sent
+  to a guessed address can bounce silently or reach the wrong team - which
+  matters precisely because the only evidence the obligation was discharged is
+  the record written afterwards.
 
 ### 2026-09-22 - Madrid and Barcelona published, and the live site showed a defect no local check could have
 

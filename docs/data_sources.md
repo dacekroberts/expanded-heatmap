@@ -1957,11 +1957,61 @@ work, and disclaims endorsement.
 The same terms require the reuser to *inform Barcelona City Council of every
 project* derived from the data — an affirmative act owed to the publisher
 rather than text on a page, and the first of its kind in this project. The
-stored terms show the clause's purpose: *"so that they are open to the public
-for the purpose of encouraging policies for reusing information from the public
+clause's own tail gives its purpose: *"so that they are open to the public for
+the purpose of encouraging policies for reusing information from the public
 sector"*, which makes it a reuse-showcase notification rather than a permission
-gate. **It is an owner action, outstanding**, and it pairs with re-reading the
-live terms before publication since both pages are behind the same CAPTCHA.
+gate. **It is an owner action, outstanding**; the draft is at
+`docs/notifications/barcelona-city-council.md`.
+
+**The live terms were read on 2026-09-22** — by the owner, in a browser, past
+the hCaptcha — which closes the precondition this file had carried since the
+licence review and which Barcelona was published without. Stored at
+`licenses/barcelona-condicions-us-live.txt`. Three things changed, none of them
+adverse:
+
+- **The notification clause is unchanged, word for word**, so the obligation is
+  current and not an artefact of an eighteen-month-old snapshot.
+- **The terms name the channel**, which no earlier reading had established:
+  *"Any doubts or comments on these Terms of use may be forwarded to the
+  following link"* → `bcn.cat/cgi-bin/consultesIRIS?id=241`, which redirects
+  to the Council's online enquiry service pre-categorised to city data
+  (`atencioenlinia.ajuntament.barcelona.cat`, `origen=DADES_CIUTAT`). **That
+  settles a question this project could not answer**: the portal publishes no
+  contact email — the dataset's CKAN metadata carries no `maintainer_email` or
+  `author_email`, `datos.gob.es` names a web form and no address, and the
+  portal's own contact page is behind the same CAPTCHA — so any email address
+  would have been invented.
+- **A CC BY-ND clause exists and does not apply.** *"any data involving
+  third-party participation may be reused under a Creative Commons
+  Attribution-NoDerivs (CC BY-ND 4.0) licence"*. ND would forbid this project
+  outright, every map being a derivative. It does not bind, because *"Every
+  data set that is offered in the Open Data BCN service states its relevant
+  Terms of use"* and the Cens de locals declares `CC-BY-4.0` in its own CKAN
+  metadata — verified live through `package_show` on 2026-09-22, an endpoint
+  that needs no CAPTCHA. Recorded because a clause that would have sunk the
+  city deserves to be on the record as checked, not as unnoticed.
+
+⚠️ **Article 8's "content may not be altered" is a DISCLOSED POSITION, not a
+resolved one.** The terms import Spanish Act 37/2007 Article 8 — *"the content
+of the information may not be altered"*, *"the meaning of the information may
+not be distorted"* — and this project filters 10,722 premises rows to three
+categories and derives ring density from them. Read literally, that is
+alteration. Read in context, the same document permits data *"to provide the
+basis for derived works as a result of their analysis or study"*, permits it
+*"to be amended, changed and adapted"*, and requires that *"Any amendment or
+change … shall be identified as such at the time of their distribution"* — a
+requirement that is incoherent if amendment were forbidden. Article 8 is
+standard Spanish PSI wording and reads as barring misrepresentation rather than
+analysis.
+
+**Owner's decision 2026-09-22: publish on the second reading, stated openly**,
+which is Philadelphia's shape. Every transformation is disclosed on the city
+page and itemised in the notification, which is what the identify-amendments
+clause asks for. The rejected alternatives were asking the Council to confirm
+it — inviting a "no" to a question nobody had asked — and holding a finished
+city indefinitely on a body under no obligation to reply. **If the Council
+reads it the other way, Barcelona comes down**: the standing removal commitment
+below covers this without needing to be invoked.
 
 
 What has grown instead is the pile of **permission questions**, now four: three
