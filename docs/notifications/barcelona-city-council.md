@@ -17,23 +17,73 @@ notification, not a permission gate. Publishing does not wait on a reply.
 
 ---
 
-## Before sending — two things, in this order
+## Both preconditions are met — ready to send
 
-1. **Confirm the live terms.** They were read from the Internet Archive
-   (newest capture 2025-03-28) because `opendata-ajuntament.barcelona.cat`
-   serves **hCaptcha**, and this project does not defeat CAPTCHAs. The terms
-   also amend themselves with effect on publication. **A human has to open
-   `https://opendata-ajuntament.barcelona.cat/en/condicions-us` and confirm the
-   clause still reads as above.** The *declared licence* needs no such step —
-   it is live-verifiable through the API and read `CC-BY-4.0` on 2026-09-22.
-2. **Send it once the site is public.** The notification names a project the
-   Council is meant to be able to look at, so it needs the live URL. Sending it
-   before the deploy would mean notifying them of something they cannot see.
+1. **The live terms were confirmed 2026-09-22**, by the owner, in a browser,
+   past the hCaptcha this project does not defeat. **The notification clause is
+   unchanged, word for word.** The reading is stored at
+   `docs/licenses/barcelona-condicions-us-live.txt`; the Internet Archive
+   capture it confirms is kept beside it, because that is the text Barcelona
+   was actually built and published against.
+2. **The site is public.** Live since 2026-09-22 at
+   <https://expanded-heatmap-daceroberts.streamlit.app>, with Barcelona and
+   Madrid both rendering. The URL is filled in below.
 
-**Where it goes:** the portal's own contact form. CKAN names the publishing
-department as **Gerència de Turisme, Comerç i Mercats** (organization
-`comerc`), and publishes no address for it, so the form is the channel. It sits
-behind the same CAPTCHA.
+---
+
+## Where it goes — the terms name the channel themselves
+
+This was an open question until the live reading, and it has a clean answer.
+The terms' own introduction says:
+
+> *"Any doubts or comments on these Terms of use may be forwarded to the
+> following link"* — `http://www.bcn.cat/cgi-bin/consultesIRIS?id=241`
+
+That 301-redirects twice, ending at the Council's online enquiry service
+pre-categorised to city data:
+
+> <https://atencioenlinia.ajuntament.barcelona.cat/en/fitxa/alta?origen=DADES_CIUTAT&cbDetall=5163>
+
+**Use that rather than an email address, because there is no email address to
+use.** Checked three ways on 2026-09-22: the dataset's CKAN metadata carries
+`author: Gerència de Turisme, Comerç i Mercats` and **no** `maintainer_email`
+or `author_email` field at all; `datos.gob.es`, the Spanish government's own
+catalogue, names the *Oficina Municipal de Dades* as contact point and gives a
+**web form** as the method; and the portal's `/en/contacte` returns the same
+hCaptcha bot-check. Anything of the shape `opendata@bcn.cat` would be
+invention, and a formal notification sent to a guessed address can bounce
+silently or reach the wrong team — which matters here, because the only
+evidence this obligation was discharged is the record written afterwards.
+
+### Send attempts — NOT YET DELIVERED
+
+| Date | Channel | Result |
+|---|---|---|
+| 2026-09-22 | Open Data BCN portal's own dataset contact form | Passed the hCaptcha, then the form **stalled** |
+| 2026-09-22 | `atencioenlinia.ajuntament.barcelona.cat` (the link the terms name) | **Timed out**, from the owner's network and independently from a session: HTTP 000 after 20 s, no response |
+
+**The host is down, not blocking us.** Measured 2026-09-22:
+`seuelectronica.ajuntament.barcelona.cat` answers HTTP 302 in 2.4 s from
+`212.15.228.45`, and `atencioenlinia` sits in the **same /24** and answers
+nothing at all. Two independent networks, one symptom. So this is neither the
+CAPTCHA nor the owner's connection, and retrying from elsewhere will not help
+until the service returns.
+
+**The plan is to wait and retry that channel**, because it is both the one the
+terms name and the only one that does not require Spanish electronic
+identification. The clause sets **no deadline** — *"Users are required to
+inform Barcelona City Council of every project"*, with no time limit attached
+— so a documented good-faith attempt now and a successful send when the
+service returns discharges it fully.
+
+**The fallbacks were checked and are closed.** Barcelona's *Registre
+electrònic* would be the more formal channel, since an instància carries a
+registry number, but it states *"Per cursar-la, cal identificar-se amb
+certificat digital"* — a digital certificate, idCAT or Cl@ve, which a
+non-resident does not hold. Its only non-electronic route is presenting the
+form in person at one of 26 municipal offices in Barcelona. Email is not an
+option because no email address is published, as above; guessing one is worse
+than waiting.
 
 ---
 
@@ -50,9 +100,9 @@ behind the same CAPTCHA.
 > **The project.** *Storefronts Near Transit* is a non-commercial portfolio
 > project that maps the density of ground-floor commercial premises around
 > urban rail stations, so that the same measure can be compared across cities.
-> Barcelona is one of seventeen cities included. It is available at:
+> Barcelona is one of eighteen cities included. It is available at:
 >
-> > &lt;URL&gt;
+> > <https://expanded-heatmap-daceroberts.streamlit.app>
 >
 > **The dataset used.** *Cens de locals en planta baixa amb activitat
 > econòmica*, the 2022 survey (resource `99764d55-b1be-4281-b822-4277442cc721`),
@@ -94,9 +144,9 @@ behind the same CAPTCHA.
 > ànim de lucre, que cartografia la densitat de locals comercials en planta
 > baixa al voltant de les estacions de transport ferroviari urbà, de manera que
 > la mateixa mesura es pugui comparar entre ciutats. Barcelona és una de les
-> disset ciutats incloses. Es pot consultar a:
+> divuit ciutats incloses. Es pot consultar a:
 >
-> > &lt;URL&gt;
+> > <https://expanded-heatmap-daceroberts.streamlit.app>
 >
 > **Conjunt de dades utilitzat.** *Cens de locals en planta baixa amb activitat
 > econòmica*, enquesta del 2022 (recurs
