@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**177 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**178 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [The heredoc rule was written down four times and broken four times, so it became a hook](#2026-09-22---the-heredoc-rule-was-written-down-four-times-and-broken-four-times-so-it-became-a-hook)
 - [A front-page caption counted nine cities twice, and the drafted letters were in two places](#2026-09-22---a-front-page-caption-counted-nine-cities-twice-and-the-drafted-letters-were-in-two-places)
 - [Dublin's tooltip showed a placeholder the classifier had been dropping all along](#2026-09-22---dublins-tooltip-showed-a-placeholder-the-classifier-had-been-dropping-all-along)
 - [Paris's brief written, and its own checks disproved one of its claims](#2026-09-22---pariss-brief-written-and-its-own-checks-disproved-one-of-its-claims)
@@ -213,6 +214,55 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - The heredoc rule was written down four times and broken four times, so it became a hook
+
+- **A rule that is read and then broken does not need restating.** `CLAUDE.md`
+  has carried "write multi-line text with the Write tool, never a shell
+  heredoc" since this morning, with three dated incidents under it. It was
+  read at session start and broken again the same day: a probe written as
+  `re.findall(r'Use[s]?:\\s*([^<\\\\]{0,60})', t)` inside a `python - <<'PYEOF'`
+  arrived as `[^<\\]`, an unterminated character set that would not compile.
+  Four occurrences against an existing rule is evidence about the MECHANISM,
+  not about the reader.
+
+- **Two things the prose rule got wrong, and both are why it kept failing.**
+  First, it was framed as being about MULTI-LINE TEXT - "commit messages,
+  DECISIONS.md entries, page prose, generated Python" - so a one-line regex
+  probe did not read as covered. The real trigger is **backslashes and
+  backticks, at any length**. Second, and worse, **quoting the delimiter does
+  not save you**: `<<'PYEOF'` should stop shell expansion, the mangling
+  happened anyway because the rewriting is not bash's, and nothing written
+  down said so. A reader who knew shell quoting would have concluded the
+  quoted form was safe.
+
+- **`.claude/hooks/block_heredoc.py` now refuses the combination**, wired as a
+  `PreToolUse` hook on Bash in a new `.claude/settings.json` - the repository
+  had no settings file at all, so there were no hooks to merge with. The
+  project's own meta-rule, quoted in `CLAUDE.md` from `osm-rail`, is to put a
+  lesson where the next caller must pass through it as a raising check rather
+  than as prose; this is that, for the one rule with the worst record. The
+  rejected alternative was a skill, which loads on demand and so would not be
+  present at the moment of typing a Bash command - exactly when this fails.
+
+- **Deliberately narrow, because a guard that cries wolf gets disabled.** It
+  fires only on the INTERSECTION: a heredoc or an inline `-c`/`-e` interpreter
+  string AND a backslash or backtick. A plain `grep "\.py$"` is untouched, and
+  so is every Windows path in this repository - blocking bare backslashes
+  would fire constantly. Verified 11 of 11 cases both directions, including
+  all four historical failures as BLOCK and Windows paths, ordinary greps,
+  escape-free heredocs and herestrings as ALLOW.
+
+- **Proved live, not just piped.** After writing the settings file, an attempt
+  to run a heredoc containing a backslash was refused in-session with the
+  guard's own message, and ordinary commands kept running. The message names
+  the remedy (Write the file, then run it) rather than only the prohibition,
+  because a block that does not say what to do instead gets worked around.
+
+- **The guard immediately made itself felt**: the patch that rewrote the
+  `CLAUDE.md` rule contains `\n` and had to be written to a file and executed,
+  which is the behaviour the rule asks for. Fail-open by design - any error in
+  the hook allows the command, since a style guard must never wedge Bash.
 
 ### 2026-09-22 - A front-page caption counted nine cities twice, and the drafted letters were in two places
 

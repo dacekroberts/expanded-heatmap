@@ -249,17 +249,36 @@ reader had already found and immediately found five more.
   the findings belong in `docs/data_sources.md` and `docs/city_shortlist.md`,
   which is where they can be trusted and the raw capture cannot.
 - Draft interpretive prose in chat before writing it to a file.
-- **Write multi-line text with the Write tool, never a shell heredoc or an
-  inline quoted string.** Commit messages, `DECISIONS.md` entries, page prose,
-  generated Python. Bash command-substitutes backticks and mangles escapes
-  *inside* heredocs too: on 2026-09-22 it broke an f-string in generated code,
-  silently emptied every backticked phrase from a commit message, and turned a
-  `\n` into a literal newline mid-string - three times in one day, with the fix
-  already recorded in `DECISIONS.md` after each one. **That repetition is the
-  point of putting it here:** a lesson in the log describes what happened once,
-  and a working rule is in hand at the moment of typing. Same reasoning as
-  `osm-rail`'s opening section, which exists because a warning in one city's
-  config did not reach the next city.
+- **A backslash or a backtick never goes into a Bash command. Write the
+  content to a file with the Write tool and run the file.** A `PreToolUse`
+  hook now refuses the combination outright - `.claude/hooks/block_heredoc.py`,
+  wired up in `.claude/settings.json` - so this is enforced rather than
+  remembered.
+
+  **The rule used to say "write multi-line text with the Write tool", and that
+  framing is what let it fail a fourth time.** Two corrections, both learned
+  the hard way on 2026-09-22:
+
+  - **It is about ESCAPES, not length.** A one-line regex probe does not feel
+    like "multi-line text", so the rule read as not applying. It applied.
+    `re.findall(r'Use[s]?:\\s*([^<\\\\]{0,60})', t)` inside a heredoc arrived as
+    `[^<\\]` - an unterminated character set.
+  - **Quoting the delimiter does NOT save you.** `<<'PYEOF'` should stop shell
+    expansion, and the mangling happened anyway, because the rewriting is not
+    bash's. Nothing in the old rule said this, so the quoted form looked safe.
+
+  The earlier three, same day: an f-string broken in generated code, every
+  backticked phrase silently emptied from a commit message, and a `\n` turned
+  into a literal newline mid-string. Four occurrences against a rule that was
+  already written down is the argument for a hook: **a lesson in the log
+  describes what happened once, a working rule is in hand at the moment of
+  typing, and a check is the only one of the three that cannot be read past.**
+  Same reasoning as `osm-rail`'s opening section, which exists because a
+  warning in one city's config did not reach the next city.
+
+  The guard is deliberately narrow - a heredoc or `-c`/`-e` string AND a
+  backslash or backtick. A plain `grep "\.py$"` and every Windows path in this
+  repository are untouched, because a guard that cries wolf gets disabled.
 - **Resolve a conflicted append-only file with
   `python scripts/merge_append_only.py DECISIONS.md`, never by rebuilding it
   from one side.** Two sessions both append to the top of `DECISIONS.md`, so
