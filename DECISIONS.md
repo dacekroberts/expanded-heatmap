@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**194 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**195 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [All six French cities measured on ONE sample; a correction of my own correction](#2026-09-23---all-six-french-cities-measured-on-one-sample-a-correction-of-my-own-correction)
 - [Marseille brief written; its feed covers more cities than its register](#2026-09-23---marseille-brief-written-its-feed-covers-more-cities-than-its-register)
 - [Oslo's rail sourced and taxonomy measured; MEL's WFS is Licence Ouverte](#2026-09-23---oslos-rail-sourced-and-taxonomy-measured-mels-wfs-is-licence-ouverte)
 - [Lille's tram geometry found first-party; its metro has none, and a line code nearly became a false find](#2026-09-23---lilles-tram-geometry-found-first-party-its-metro-has-none-and-a-line-code-nearly-became-a-false-find)
@@ -233,6 +234,57 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - All six French cities measured on ONE sample; a correction of my own correction
+
+- **Scanned all six French cities in a single 12.6% pass**, closing four
+  outstanding items at once - Rennes, Toulouse and Lille's city measurements,
+  and the per-city naming spread. **One scan rather than five** because a
+  comparison drawn across different samples is not a comparison, which is
+  precisely the error this pass exists to fix.
+
+- **The naming spread is REAL, and the earlier "correction" of it was
+  WRONG.** Yesterday's note recorded Marseille at 43.1% and called it
+  "statistically the same city" as Paris - **but it compared Marseille's fresh
+  11.2% measurement against Paris's OLD 3.9% figure of 42.9%.** Measured on one
+  sample, **Paris is 39.6% and Marseille 43.4%**: a real four-point advantage,
+  and the reverse of what was recorded. **The mistake was not the arithmetic,
+  it was mixing baselines** - and it is the same shape as reporting the slice
+  you queried as the whole.
+
+- **The full spread: 39.6% to 53.5%, fourteen points.** Paris 39.6, Marseille
+  43.4, Lille 47.5, Lyon 51.4, Toulouse 52.8, Rennes 53.5. **The ranking the
+  small sample implied survives** - Paris worst, Rennes best - but **every city
+  except Toulouse came in lower**, so the absolute values were optimistic by
+  1-3 points throughout. A ranking can be right while every number in it is
+  wrong.
+
+- **Scaled counts are systematically LOW and should be treated as floors.**
+  Paris scales to **117,730** against its independently measured **148,633**,
+  because active bucket rows get denser through a file ordered by `siret`,
+  which is seniority rather than geography. Every scaled figure in the France
+  profile carries that bias in the same direction.
+
+- **The taxonomy level transfers across France, and this is the first country
+  in the project where that has been SHOWN rather than assumed.** All six
+  cities land in a **19.8-23.0%** catch-all band at sous-classe, with **0%
+  unlabelled everywhere**, while *groupe* is catastrophic in every one of them
+  (44.1-50.7%). ⚠️ But *classe* ranges **27.9-38.1%**, so **the transfer is
+  level-specific, not wholesale** - a city keying elsewhere in the scheme would
+  still need its own measurement. Contrast Prague, whose CZ-NACE is ragged and
+  supports no level at all.
+
+- **Distance selling ranges 14.2% (Rennes) to 18.3% (Lyon)** and must be
+  excluded everywhere. **Paris is 18.2%, not the 15.5% recorded earlier** -
+  that figure came from a 6,895-row Paris-only sample. Marseille is **16.4%**,
+  so an earlier claim in its brief that Marseille was HIGHER than Paris had the
+  direction backwards; corrected, along with a heading that contradicted its
+  own body.
+
+- **Toulouse's masking is 16.0%, roughly double Paris's 8.5%.** A sixth of its
+  rows have name, address **and geolocation** withheld at source under
+  `statutDiffusionEtablissement`, which shrinks its usable set by more than its
+  row count suggests. Worth knowing before it is picked on row count alone.
 
 ### 2026-09-23 - Marseille brief written; its feed covers more cities than its register
 

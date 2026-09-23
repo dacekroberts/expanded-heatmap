@@ -9,11 +9,12 @@ those first**; a correction belongs there, not here. Run
 
 ## The one-line summary
 
-**The cheapest follower — everything from Paris transfers, and it re-measured
-true.** The taxonomy level, the distance-selling exclusion and the naming rate
-all land within 2 points of Paris's. What is genuinely new is the **rail
-feed's scope: it is the whole Métropole, not the city**, and that turns
-Marseille's boundary question into a real one.
+**The cheapest follower — and the first proof that France's profile
+transfers.** The taxonomy level holds (21.1% catch-all at sous-classe against
+Paris's 19.8%), and Marseille is **better-named than Paris**, 43.4% against
+39.6%. What is genuinely new is the **rail feed's scope: it is the whole
+Métropole, not the city**, and that turns Marseille's boundary question into a
+real one.
 
 ---
 
@@ -52,16 +53,17 @@ half the national TER network on a Marseille map.
 | | |
 |---|---|
 | Source | `StockEtablissement` **parquet**, filter `codeCommuneEtablissement` prefix **`132`** |
-| Active in NAF 47/56/96 | **≈25,194** (2,833 counted in 11.2% of the file) |
-| **Named** (`enseigne1` or `denominationUsuelle`) | **43.1%** |
-| Masked (`statutDiffusion` ≠ `O`) | **11.5%** |
+| Active in NAF 47/56/96 | **≈25,430** (3,215 counted in 12.6% of the file) — a FLOOR; scaling undercounts |
+| **Named** (`enseigne1` or `denominationUsuelle`) | **43.4%** — better than Paris's 39.6% |
+| Masked (`statutDiffusion` ≠ `O`) | **12.2%** |
 
-⚠️ **The naming gap is Paris's, not better.** An earlier 3.9% sample put
-Marseille at 45.8% against Paris's 42.9%, which read as a real advantage. At
-11.2% coverage it is **43.1%** — **statistically the same city**. The
-per-city naming spread recorded in the country profile is **weaker evidence
-than it looks**, and the ranking it implied (Rennes 54.3% best, Paris worst)
-should be re-measured before anyone builds on it.
+⚠️ **CORRECTED 2026-09-23 — Marseille IS better-named than Paris, and an
+earlier note in this brief said otherwise.** That note compared Marseille's
+fresh 11.2% measurement against Paris's **old 3.9%** figure and concluded they
+were "statistically the same city". **A comparison across different samples is
+not a comparison.** Re-scanned with all six cities in one 12.6% pass:
+**Marseille 43.4%, Paris 39.6%** — a real four-point advantage, and the
+country-wide spread runs 39.6% to 53.5%. See `docs/france_step0_endpoints.md`.
 
 **Everything else is the country profile's**: active is `"A"` not `"Actif"`,
 use `StockEtablissement` never `StockUniteLegale`, match the resource title
@@ -81,25 +83,26 @@ geocoder, no key, no rate limit.
 
 Measured on **Marseille rows**, against INSEE's own labels:
 
-| Level | Distinct | Catch-all | Paris |
+| Level | Catch-all | Paris | All six |
 |---|---|---|---|
-| division (2) | 3 | 21.0% | 18.7% |
-| **groupe (3)** | 13 | **48.1%** | 49.4% |
-| classe (4) | 45 | 37.4% | 27.8% |
-| **sous-classe (5)** | 61 | **20.8%** | **19.3%** |
+| **groupe (3)** | **48.1%** | 47.7% | 44.1–50.7% |
+| classe (4) | 36.3% | 27.9% | 27.9–38.1% |
+| **sous-classe (5)** | **21.1%** | **19.8%** | **19.8–23.0%** |
 
 **0% unlabelled at every level** — INSEE's list slices French codes correctly,
 unlike the Norwegian case where SN2007 could not be sliced by a NACE list.
 
-**Key at sous-classe**, same as Paris. This is the first real evidence that
-**France's taxonomy answer transfers between cities** rather than needing a
-re-measurement each time — but note *classe* diverges (37.4% vs 27.8%), so the
-transfer is level-specific, not wholesale.
+**Key at sous-classe** — and **all six French cities land in a 19.8–23.0%
+band**, measured on one sample. *Groupe* is catastrophic everywhere (44–51%).
+**So the level choice genuinely transfers across France**, which is the first
+country in this project where that has been shown rather than assumed.
+⚠️ But *classe* ranges 27.9–38.1%, so the transfer is **level-specific, not
+wholesale** — a city keying elsewhere in the scheme would need its own
+measurement.
 
-### ⚠️ Exclude distance selling — **17.7%** here, higher than Paris
+### ⚠️ Exclude distance selling — **16.4%** here, LOWER than Paris
 
-`47.91A`, `47.91B`, `47.99A`, `47.99B` — **502 of 2,833 sampled rows**, against
-Paris's 15.5%. No storefront; inside the retail division.
+`47.91A`, `47.91B`, `47.99A`, `47.99B` — **16.4%** on the 12.6% sample, against Paris's 18.2%. No storefront; inside the retail division. Across the six cities the range is **14.2% (Rennes) to 18.3% (Lyon)**.
 
 ---
 
@@ -169,8 +172,10 @@ which is the server telling you the key is wrong, not that you are refused.
 - **Both owner calls above** — scope, and ferries.
 - **Licence Ouverte 2.0's terms**, covering five sources.
 - **The OSM composition validation**, which Marseille owes for all of France.
-- **Exact bucket count.** 25,194 is scaled from 11.2% of the file; Paris's
-  148,633 was measured whole.
+- **Exact bucket count.** 25,430 is scaled from 12.6% of the file, and
+  **scaling undercounts**: Paris scales to 117,730 against its measured
+  148,633, because bucket rows get denser through a file ordered by `siret`.
+  **Treat 25,430 as a floor.**
 - **Station counts per line**, and whether any métro or tram station falls
   outside whichever scope is chosen.
 
