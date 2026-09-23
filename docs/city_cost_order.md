@@ -105,6 +105,11 @@ city against six — which is the ordering this file exists to make visible.
 | 7 — national geocoding project | 12 |
 | **Total** | **31** |
 
-Against `city_master_list.md`'s bands: **A 6 + B 6 + C 16 + D 3 = 31.**
+Against `city_master_list.md`'s bands: **A 6 + B 5 + C 16 + D 4 = 31.**
+⚠️ **Bucharest moved B → D on 2026-09-23** — its coordinate route is measured,
+but Romania's catalogue holds no second bucket, and **where both are true the
+ceiling is what is actually stopping the city.** Its COST band is unchanged:
+this file orders by what a build costs, not by what blocks it, and those are
+different questions about the same city.
 **The two files must always sum to the same number**, and that is the check to
 run when either is edited.

@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**213 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**214 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Bucharest moves B to D: the band was measuring the wrong thing](#2026-09-23---bucharest-moves-b-to-d-the-band-was-measuring-the-wrong-thing)
 - [CVR is normalised, and the premises file is nearly empty on its own](#2026-09-23---cvr-is-normalised-and-the-premises-file-is-nearly-empty-on-its-own)
 - [Copenhagen's gate was read at the wrong host, and it is light](#2026-09-23---copenhagens-gate-was-read-at-the-wrong-host-and-it-is-light)
 - [Oslo's names are the best in the project, and 28.6% may be people](#2026-09-23---oslos-names-are-the-best-in-the-project-and-286-may-be-people)
@@ -252,6 +253,52 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Bucharest moves B to D: the band was measuring the wrong thing
+
+- **Bucharest moved from Band B to Band D**, and nothing about the city got
+  worse. **Band B describes a measured COORDINATE ROUTE; Band D describes the
+  ONE-BUCKET CEILING.** Both are true of Bucharest. **Where both are true, the
+  ceiling is what is actually stopping the city** - which is the whole point of
+  banding by what blocks a build rather than by how far along it is.
+
+- **The finding was already recorded and the row was left where it was.** The
+  2026-09-22 entry closing Bucharest's screening states that **Romania's
+  national catalogue holds no second bucket** - 4,693 datasets enumerated from
+  the Internet Archive, the only commercial register being ~40 dated snapshots
+  of ONRC's **company** register. DSVSA is the sanitary-veterinary authority,
+  so its 31,299 rows are food. **The city sat in the wrong band from the moment
+  its own screening finished**, which is the failure mode `add-country` warns
+  about in a different costume: a conclusion recorded in one document and not
+  carried into the one that orders the work.
+
+- **Its rail was re-counted and one number was short.** 13 subway route
+  relations in relation 377733, **13 named, 12 coloured**, refs M1-M5, and
+  **64 station nodes** against the *"~63 claimed, unverified"* the master list
+  carried. ⚠️ **The thirteenth relation is `Extensie M4`, with no
+  `ref` and no `colour`** - so a build keying on `ref` silently drops it and a
+  build keying on relation count draws a line it cannot label. Address supply
+  re-measured at **146,228** (132,478 nodes + 13,750 ways), within 112 of the
+  earlier 146,116.
+
+- **`data.gov.ro` is still blackholed, now two days running**, which weakens
+  the original *"an outage, not a refusal"* reading. It is not upgraded to a
+  refusal - the evidence does not support that either - but the row now says
+  how long it has been down rather than repeating a same-day judgment.
+
+- **Bucharest is the strongest-railed city in Band D and the weakest on
+  access** - a five-line metro against three cities' trams, behind a JS
+  challenge that must be passed in a browser rather than worked around.
+  **The opposite trade from Göteborg**, which has the best licence in the
+  band and the weakest map.
+
+- **Counts: Band B 6 to 5, Band D 3 to 4, candidates unchanged at 31.** Two
+  stale captions fell out of the move: Band D still opened *"Screening is
+  COMPLETE for all three"* and carried a heading reading **"The two cities in
+  full"** - already wrong when Göteborg was added on the same day.
+  `city_cost_order.md`'s cross-check line updated, with a note that a city's
+  COST band and its BLOCKING band are different questions and need not move
+  together.
 
 ### 2026-09-23 - CVR is normalised, and the premises file is nearly empty on its own
 

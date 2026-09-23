@@ -232,7 +232,7 @@ So the next *unstarted* city is the question.
 and only owner decisions left. After that the screen has no city whose
 "what remains" column is empty.
 
-## 🟡 Band B — the coordinate route is MEASURED, not assumed (6 cities)
+## 🟡 Band B — the coordinate route is MEASURED, not assumed (5 cities)
 
 **Every route in this band was probed on 2026-09-22 and answered.** The band
 used to say the method was "identified and cheap", which is a description of a
@@ -258,7 +258,6 @@ measured.
 | **Hong Kong** ▲▲▲ *(1)* | 🇭🇰 | **A GEOCODE, confirmed keyless.** The government **Address Lookup Service** (`als.gov.hk/lookup`) answers without a key and returns **lat/long AND HK1980 Grid easting/northing AND a confidence `Score`** (76.15, 88.75, 97.69 on three test premises). ✅ **INDEMNITY ACCEPTED by the owner 2026-09-22** — the project's only uncapped liability, priced deliberately. Three conditions bind the build: display source + Government IP acknowledgement + DATA.GOV.HK attribution exactly; run `check_personal_exposure.py` and exclude catch-alls; the dated record in `data_sources.md`. ⚠️ Re-reading the live clause corrected this project's OWN earlier quote twice: it arises **directly or indirectly**, and there is **no notice-and-defend right** | Answers; **per-row rate not yet measured** against the 35,808 |
 | **Singapore** ▲▲ *(1)* | 🇸🇬 | **A GEOCODE, and the postcode is the key.** OneMap is **keyless** and a bare six-digit postcode resolves to a **named building**. **The postcode is not a column — it is inside the address string** (`...SINGAPORE 169663`, `...SINGAPORE(738733)`): extracted on **99.5%** of tobacco, **97.5%** of pharmacy, **83.4%** of eating establishments. ⚠️ OneMap **throttles** — 32.5% refusals even at 2 workers | **98.8%** of answered lookups resolve (80/81). **35,064 postcodes → 7,767 DISTINCT** — dedupe first, ~1.4 h not 6.5 h |
 | **Oslo** *(1)* | 🇳🇴 | **A GEOCODE, keyless — with two traps.** Kartverket (`ws.geonorge.no/adresser`) answers and returns `representasjonspunkt`. ⚠️ **`fuzzy=true` MUST NOT BE USED**: it "rescued" `Karenslyst allé 8B` as **`allé 1B`** — a different building — and turned `7-Eleven` into `Ellen Gleditsch' vei 7`. It returns plausible coordinates for the wrong place. ⚠️ The API caps at **10,000 rows** (offset 9,900 works, 15,000 returns nothing), so it cannot enumerate the city | **97.8%** via two stages: exact `adressetekst`, then plain `sok`. Never fuzzy |
-| **Bucharest** ▲▲ *(1)* | 🇷🇴 | ⚠️ **Primary route DOWN, fallback MEASURED.** `data.gov.ro` resolves to 85.120.75.35 but **blackholes on both 443 and 80** (`time_connect` 0.000000s) — and it answered earlier the same day, so this is an **outage, not a refusal**. ANCPI, which owns the nomenclature, has **no resolving geospatial subdomain** (`ran.`, `geoportal.`, `ags.`, `inspire.` all NXDOMAIN). **OSM fallback measured: 146,116 addressed objects** in relation 377733 (132,432 nodes + 13,684 ways), ODbL — and Bucharest's rail is already OSM | Fallback supply confirmed; **hit rate against DSVSA's 31,299 not yet measured** |
 
 **⚠️ Two Band B facts that are NOT about coordinates and change build scope:**
 
@@ -345,16 +344,16 @@ row, and three of this one's rows carried no reason at all.** Two of those now
 do. Göteborg was never ruled out — it was simply never placed anywhere, which
 is how a candidate disappears without anyone deciding to drop it.
 
-## 🟣 Band D — one bucket only: complete, but narrower than the others (3 cities)
+## 🟣 Band D — one bucket only: complete, but narrower than the others (4 cities)
 
-**Screening is COMPLETE for all three, and all three passed.** Each has a real
+**Screening is COMPLETE for all four, and all four passed.** Each has a real
 premises-level register with coordinates, current data and a usable licence.
 What none of them has is a **second bucket** — and the owner's bar is that two
 is acceptable and one is not. **Göteborg joined Stockholm and Zurich here on
 2026-09-23**, probed to the same depth, which is why this caption no longer
 says "both".
 
-**This is not "we could not find a second register".** All three negatives were
+**This is not "we could not find a second register".** All these negatives were
 re-established on 2026-09-22 by **enumerating the whole catalogue** rather
 than searching it, because the original negatives rested on keyword searches
 and that is the method that has failed this project most often — Stockholm's
@@ -389,6 +388,36 @@ Stockholm's 8,146 premises are the larger map.
 
 ---
 
+### 🇷🇴 Bucharest — moved here from Band B 2026-09-23
+
+**Nothing about Bucharest got worse. The band it was in was measuring the
+wrong thing.** Band B describes a **coordinate route**, and Bucharest's is
+genuinely measured. Band D describes the **one-bucket ceiling**, and
+Bucharest has one. **Where both are true, the ceiling is what is actually
+stopping the city** — which is what these bands exist to say.
+
+⚠️ **This project had already recorded the finding and left the row
+where it was.** The 2026-09-22 entry that closed Bucharest's screening states
+that **Romania's national catalogue holds no second bucket**: 4,693 datasets
+enumerated from the Internet Archive, and the only commercial register in them
+is ~40 dated snapshots of ONRC's **company** register. **It has been in the
+wrong band since its own screening finished.**
+
+| | |
+|---|---|
+| **The one bucket** | **DSVSA** — the sanitary-veterinary authority, so its **31,299 rows are FOOD**. `bucuresti.dsvsa.ro` |
+| **Licence** | **SILENT**, and established rather than assumed — no terms page exists at all; the footer's *"Toate drepturile rezervate"* is a **website** footer, the New York situation |
+| **Coordinates** | **OSM fallback, re-measured 2026-09-23: 146,228 addressed objects** in relation 377733 (132,478 nodes + 13,750 ways), within 112 of the earlier figure |
+| **Rail** ✅ | **RE-COUNTED 2026-09-23: 13 subway route relations, 13 named, 12 coloured**, refs M1–M5, and **64 station nodes** against the *"~63 claimed, unverified"* this list carried |
+| ⚠️ **The 13th relation** | **`Extensie M4` carries NO `ref` and NO `colour`.** A build keying on `ref` silently drops it; a build keying on relation count draws a line it cannot label |
+| ⚠️ **Fetch is browser-assisted by necessity** | Plain curl against the XLSX returns **503 with the challenge interstitial**; the same URL **inside the browser that legitimately passed the challenge** returns 200 and real `PK` magic bytes. Never a replayed clearance cookie |
+| ⚠️ **Primary portal still dead** | `data.gov.ro` resolves to 85.120.75.35 and **blackholes on 443 and 80**, now **two days running** — which weakens the original "outage, not refusal" reading. Its catalogue was read from the Internet Archive instead |
+
+**Bucharest is the strongest-RAILED city in this band** — a real five-line
+metro against Stockholm's, Zurich's and Göteborg's trams — and the
+weakest on access. **The opposite trade from Göteborg**, which has the best
+licence and the weakest map.
+
 ### 🇸🇪 Göteborg — promoted into this band 2026-09-23
 
 **It was never ruled out. It was never PLACED.** The master list named it
@@ -410,7 +439,7 @@ data" is structural rather than measured: two registers to one, businesses
 rather than inspections, CC0 rather than SILENT. **The count that would settle
 it has not been taken.**
 
-### The two cities in full
+### Stockholm and Zurich in full
 
 **▲ Stockholm** 🇸🇪 — **upgraded from D-c on 2026-09-22.** Screening is
 DONE: a public ArcGIS FeatureServer carrying **8,146 distinct food premises**
