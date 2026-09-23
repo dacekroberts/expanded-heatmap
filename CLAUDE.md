@@ -162,6 +162,20 @@ reader had already found and immediately found five more.
   and not another paragraph. It also checks the notices list against
   `app/components.py`'s `_NOTICES`, which had two item 8s and two item 15s.
   A city under `KNOWN_GAPS` in that script is a dated defect, not a pass.
+- **A city is scoped TWICE, and both halves have to reach the reader.** Which
+  rail network its map is drawn around is as deliberate as which businesses are
+  counted near it, and until 2026-09-23 only the second half was published:
+  `docs/excluded_categories.md` was entirely about businesses while commuter
+  rail was excluded in every city, silently. The question that exposed it was a
+  reader's - "is BART in the San Francisco build?" - and the answer had been
+  recorded in `DECISIONS.md` for days. `python
+  scripts/check_scope_disclosure.py` decides this: every city in `cities.py`
+  must be named in the business half of that document, the station-scope
+  section must still exist, and every city's `outputs/<slug>/` must resolve so
+  the generated station table has no silently empty row. The same run found
+  five cities - Montréal, Madrid, Barcelona, Dublin, Milan - whose business
+  exclusions had never been written there at all, each disclosed on its own
+  city page and nowhere else.
 - **A source that is not a registry, a feed or a boundary still needs a row.**
   The naming layer that says which municipality an excluded station is in, the
   parcel or assessor layer a residence filter joins to, a geocoder. These are
@@ -308,6 +322,8 @@ python scripts/brief_check.py [city_slug]               # re-run a brief's claim
 python scripts/check_provenance.py [--strict]           # every built city's sources actually recorded; run after adding a city
 python scripts/check_no_fetch_in_steps.py [--list]      # no pipeline step may reach the network
 python scripts/check_no_fetch_in_steps_selftest.py      # watch that check fail 6 ways; touches nothing
+python scripts/check_scope_disclosure.py                # every city's rail AND business scope reaches the published page
+python scripts/check_scope_disclosure_selftest.py       # watch that check fail 8 ways; touches nothing
 python scripts/check_stale_claims.py                    # REPORTS only: prose that stopped being true (stale tense, drifted counts)
 python scripts/check_deploy_imports.py [--ref REF]      # clean clone + lean venv: run before ANY push touching app/
 python scripts/decisions_index.py [--check]             # refresh DECISIONS.md's index

@@ -34,6 +34,15 @@ subway station is shown; the street-running stretches of each line are
 thinned to roughly one station per half mile (plus each line's terminals
 and any transfer points) so the rings stay readable - the excluded
 stations are documented in `outputs/san_francisco/excluded_stations.csv`.
+
+**BART and Caltrain are not on this map.** Both are regional rail crossing
+county lines, and commuter rail is left out of every city map on this site.
+Where BART and Muni Metro share a station, the station is here as the Muni one
+it also is — Embarcadero, Montgomery, Powell and Civic Center are all mapped,
+as are the Balboa Park and Glen Park interchanges. The F Market heritage
+streetcar and the cable cars are out too: a separately branded service, and a
+different mode.
+
 Concentric ring boundaries and NAICS-geocoded storefronts are toggleable
 via the layer control in the top left. When enabled, business density
 will display as numbered circles summing areas when zoomed out. Zooming

@@ -16,11 +16,18 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**230 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**237 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
 - [Brazil needs no geocoder: its census address file is a premises survey, and nine cities join Band A](#2026-09-23---brazil-needs-no-geocoder-its-census-address-file-is-a-premises-survey-and-nine-cities-join-band-a)
+- [Two corrections to the Toulouse build, both found while scoping Lille](#2026-09-23---two-corrections-to-the-toulouse-build-both-found-while-scoping-lille)
+- ["Only city" claims read against 23 cities: eleven false, two overstated, one true](#2026-09-23---only-city-claims-read-against-23-cities-eleven-false-two-overstated-one-true)
+- ["Every map here covers one rail network" survived four hours and one new city](#2026-09-23---every-map-here-covers-one-rail-network-survived-four-hours-and-one-new-city)
+- [A self-test for the one check whose vocabulary is meant to be edited](#2026-09-23---a-self-test-for-the-one-check-whose-vocabulary-is-meant-to-be-edited)
+- [Toulouse built: 8,635 storefronts, 48 stations, and the first non-rail mode](#2026-09-23---toulouse-built-8635-storefronts-48-stations-and-the-first-non-rail-mode)
+- [The scope check paid for itself on the first merge it met](#2026-09-23---the-scope-check-paid-for-itself-on-the-first-merge-it-met)
+- [The site said which businesses it leaves out and never which stations](#2026-09-23---the-site-said-which-businesses-it-leaves-out-and-never-which-stations)
 - [The master list's summaries drifted while its sections stayed right; Cairo leaves the discards](#2026-09-23---the-master-lists-summaries-drifted-while-its-sections-stayed-right-cairo-leaves-the-discards)
 - [The stop-spacing test runs, and its own controls disprove it](#2026-09-23---the-stop-spacing-test-runs-and-its-own-controls-disprove-it)
 - [CORRECTION: a tram-only city is NOT unbuildable, and seven built cities draw trams](#2026-09-23---correction-a-tram-only-city-is-not-unbuildable-and-seven-built-cities-draw-trams)
@@ -361,6 +368,439 @@ onwards; the early ones are split by phase rather than by hour.
   `docs/city_master_list.md`, `docs/global_country_shortlist.md`,
   `docs/data_sources.md`, `scripts/screen_cnefe.py`.
 
+### 2026-09-23 - Two corrections to the Toulouse build, both found while scoping Lille
+
+- **CORRECTION: Toulouse's commune-only scope was partly justified by a rule
+  that does not apply in France.** The entry and the published page said
+  drawing Blagnac's stations "would mean mapping Blagnac's businesses too,
+  which is a different project rather than a wider filter." That rule exists
+  for cities whose business data is municipal - it is why San Diego's
+  neighbouring-city stations were a new project, each city licensing
+  separately. SIRENE is one national file under one licence, so Blagnac's
+  businesses were already in the parquet Toulouse reads, and widening the scope
+  was just more commune codes - Miami is this project's precedent for exactly
+  that case. The decision stands on its other stated ground, comparability
+  with Paris and Marseille. The error surfaced while scoping Lille, where it
+  would have argued against the regional scope the owner then chose. Corrected
+  on the page, in `docs/excluded_categories.md` and in the city's config, with
+  the replacement wording approved by the owner before it was written.
+
+- **CORRECTION: a 504 from Overpass is not "usually the query", and the rule
+  written this afternoon said more than its evidence did.** It rested on one
+  pair of observations on the Toulouse bbox - a node+way `out center` query
+  504ing where a nodes-only one answered in seconds. Two hours later, scoping
+  Lille, a **tags-only** relation query - the cheapest query there is, with no
+  geometry at all - drew a 504 from overpass-api.de and a read timeout from
+  kumi.systems, on two consecutive runs. So a 504 is sometimes the host and
+  nothing else. What survives is narrower and still useful: query cost is the
+  half you control, so rule it out first, then treat the remainder as a fact
+  about the host. `fetch()`'s behaviour needed no change - it already falls
+  through to the next mirror either way - so only the wording was corrected, in
+  `pipeline/osm.py`, `scripts/brief_check.py` and `osm-rail`. **The shape of
+  the error is the one this project keeps recording**: a single paired
+  observation written up as a general rule, in shared code, the same day.
+
+### 2026-09-23 - "Only city" claims read against 23 cities: eleven false, two overstated, one true
+
+- **Swept the published surface for universal and superlative claims** - "the
+  only city", "every other city", "no other city" - on every city page and in
+  the two documents the app renders, joining sentences across line breaks so a
+  claim split over two source lines was not missed. This is the error shape the
+  handoff flagged after three instances in one day. **It found eleven more that
+  were false, two that overstated** (Calgary's premises flag, on its page and
+  in the document, now "a distinction most registers here leave to be
+  inferred"), **and one that was true.**
+
+- **At least two were already false the day they were written**, which is the
+  part worth knowing: this is not only rot. Mexico City's page said "every other
+  city here is built from business licences" when Montréal's field survey had
+  been built four cities earlier; Calgary's said it was "the only map on this
+  site where nothing was excluded for lying in another municipality" when New
+  York's and Miami's excluded-stations files were already empty. Each author
+  generalised from the cities they happened to be thinking of.
+
+- **The rest went false as later cities arrived, or may have been false from
+  the start - build order is not always recoverable from the log.** New York's
+  "no other city here
+  needed more than one source" (Boston needed three, Milan six). Philadelphia's
+  "the only city here where a whole category has no source" (Boston, two cities
+  later - and this site's own exclusions page already said so). Montréal's
+  "the only map here built from a field survey" and "the one filter no other
+  city here needed" (Barcelona's census is a survey and excludes vacancy the
+  same way). Mexico City's "every other city offers an opt-in layer of all
+  businesses" (Guadalajara drops it too - `all_city_heat=False` in both
+  `step3_map.py` files). Calgary's "the only parcel substitute this project has
+  built" (San Francisco, Los Angeles and San Diego each built one). Vancouver
+  as "the only city where the registry answers" whether a name is a person
+  (D.C.'s entity type and the French legal form do too).
+
+- **Two were mine, from this morning**, transcribed into
+  `docs/excluded_categories.md` while writing up five cities: Montréal's
+  uniqueness claims copied from its page - contradicting the Barcelona section
+  written in the same hour, which says Barcelona "states vacancy outright" -
+  and Marseille's ferries as "genuine urban transit in a way no other city's
+  excluded mode is", copied from `pipeline/marseille/config.py` without checking
+  it against Vancouver's SeaBus. **Transcribing a claim republishes it**, and
+  the comment in Marseille's config is corrected at the source so the next
+  transcriber does not copy it a third time.
+
+- **One was checked and is TRUE, and was left alone.** Toronto is still the
+  only city whose addresses had to be matched against a separate address-point
+  layer: Vancouver, Milan and Dublin all carry their own coordinates. A true
+  "only" claim is not a defect; the defect is an unchecked one.
+
+- **The fix principle, applied to every one: compare against a CATEGORY, not
+  against "every other city".** "More directly than a licence register can"
+  stays true as cities arrive; "more directly than anywhere else on this site"
+  is a bet on the next city. Where a named comparison was clearer, it names the
+  city - "as in Boston", "as Vancouver's SeaBus is" - without a count, because
+  "one of two" is the same bet one step removed.
+
+- **The probe that found these was the same one that gave false zeros an hour
+  earlier on a different question**, and the difference is instructive. For
+  exposure verdicts, a case-sensitive match on "Marseille" missed entries that
+  wrote "Personal exposure:" without naming the script; widening it found both
+  verdicts recorded (Marseille 1 of 10,013 pins, Toulouse 0 of 5,553). For
+  universal claims, the first pass piped through `head -120` and silently cut
+  off the second half of `excluded_categories.md`, which held four of the eleven
+  - the ferries, the heat layer, the parcel substitute and Vancouver's registry.
+  **Both
+  probes were wrong by being narrower than the question**, which is the
+  harness lesson in a new form.
+
+### 2026-09-23 - "Every map here covers one rail network" survived four hours and one new city
+
+- **The general rule at the top of the station-scope section contradicted the
+  per-city fact a thousand lines below it, and Toulouse is what falsified it.**
+  The section opened "Every map here covers one **rail** network ... anything
+  else that runs on rails in that city is not on the map"; Toulouse draws
+  Téléo, an aerial cable car, and its own section says so correctly. Both
+  statements were published, in one document, at the same time. Corrected to
+  "one city's **rapid-transit** network", with the exception named in the
+  paragraph that follows rather than left for a reader to find.
+
+- **The same edit fixed a reason that had quietly become wrong.** San
+  Francisco's cable cars were excluded here "because they are a different mode
+  entirely" - which, once Toulouse's cable car is drawn, is no longer a reason
+  at all. The real ground is the one already stated for the F Market streetcar
+  and for trams: a separately branded service running beside Muni Metro rather
+  than part of it. **The test a mode has to answer is not "does it run on
+  rails" but "is it part of the network this city's riders use as its rapid
+  transit"**, which is what the tram and commuter-rail paragraphs were already
+  doing without saying it.
+
+- **This is the third instance today of the same error shape**, after the
+  staging session's Zurich correction and the Paris page's "trams are excluded
+  in every city here that has them": **a rule generalised from the cities that
+  existed when it was written.** All three were published prose, none was
+  caught by a check, and all three were found by reading what a NEW city
+  actually did. No check is proposed for it - the failure is a claim about
+  cities that do not exist yet, and a check can only compare a claim to the
+  cities that do.
+
+- **Dropped "Seven of these maps draw light rail" for "many ... among them".**
+  The seven were a measured list from `dd4ced8`, correct when written and
+  already wrong two cities later. A closed count of an open set, which is the
+  denominator rule's own example.
+
+### 2026-09-23 - A self-test for the one check whose vocabulary is meant to be edited
+
+- **`scripts/check_scope_disclosure_selftest.py` commits the eight negative
+  cases that had lived only in a scratchpad.** Five of the six checks here have
+  no self-test and have been fine, so this is not a rule about checks in
+  general. The ground is specific: **this check's vocabulary is designed to be
+  widened by later sessions**, and Marseille forced exactly that within an hour
+  of the check existing - `commune` added to the boundary columns, a new reason
+  pattern for "Aubagne's tram, not Marseille's". Those edits land in
+  `app/station_scope.py`, which the LIVE PAGE imports to build its station
+  table, so a session widening the classifier to make the check pass can change
+  what readers are shown. An edit is when a silent break happens, and this
+  check has a predictable future editor. `check_theme_sync.py`, by contrast,
+  has never changed and needs no guard.
+
+- **Writing it found a vacuous pass in the check and closed it.** Properties C,
+  D and E are all per-city, so an empty `CITIES` would have printed OK having
+  examined nothing. That is the same hole the sibling self-test found as a glob
+  narrowed to match no files - "a glob that matches nothing passes every
+  assertion ever written" - and it was still open here. The check now fails on
+  an empty city list, and the ninth case watches it do so. **The self-test
+  earned its place before it was committed**, which is the argument for writing
+  one at all.
+
+- **The fixture copies `app/*.py` wholesale rather than a named list**, because
+  the scratchpad ancestor named `cities.py` alone and every case then died on
+  an ImportError when `station_scope.py` was extracted. A third module must not
+  be able to repeat it. The harness also forces `PYTHONIOENCODING=utf-8` on the
+  child AND decodes with `errors="replace"`: this check prints city names, and
+  "Montréal" through a piped Windows console is the byte-vs-text failure that
+  produced two false results earlier in the session.
+
+- **The positive control is documented as load-bearing rather than as a
+  formality.** It is the only thing that distinguishes "the check fires on
+  everything" from "the harness is broken", and it is what caught the
+  incomplete fixture. The failure message now says so: if EVERY case fails,
+  suspect the harness first.
+
+### 2026-09-23 - Toulouse built: 8,635 storefronts, 48 stations, and the first non-rail mode
+
+- **Toulouse is the 23rd city and the third French one, at 8,635 storefronts
+  across 48 stations.** Step 2 read the national SIRENE parquet down from
+  44,064,115 rows: 440,775 in commune 31555, 154,157 active, 122,960 publicly
+  diffusible, 13,741 in NAF divisions 47/56/96, 10,248 after the structural
+  non-premises exclusions, 8,657 after this city's catch-all verdict, 8,635
+  with a usable street-level coordinate (99.93% geolocation match, 16 dropped
+  for `qualite_xy` 33). Step 1 took the feed's 4 rail routes to 62 stations and
+  the commune boundary to 48. 5,553 of the storefronts fall within a station
+  ring, **64.3%** - between Marseille's 55% and Paris's 97%. Personal exposure:
+  **0 person-like names at a residential unit of 5,553 pins (0.00%)**, with the
+  same structural guarantee as its siblings, since the shared French step 2
+  never loads a registrant-name column. **The shared country cache paid off a
+  second time**: the 3 GB parquet pair was already present, so this city
+  downloaded nothing but a 12 MB feed and a 25 KB boundary.
+
+- **The Téléo cable car is drawn, and the brief's argument for it was false.**
+  `route_type 6` is an aerial lift, and no built city had drawn a non-rail
+  mode. The brief's case was "It does draw a **funicular** (Paris), so 'not a
+  train' is not itself a reason to exclude" - and `pipeline/paris/config.py`
+  says the opposite: "WHAT COUNTS: the Metro, and only the Metro", with its own
+  feed inventory listing "1 funicular, 1 cable" among what Paris *excluded*.
+  So there was no precedent in either direction, and Paris's exclusion is not
+  one: the Montmartre funicular is a 108 m two-station lift inside one
+  arrondissement where Téléo is a 3 km ticketed crossing. Reading Paris as a
+  rule would have repeated the exact error `dd4ced8` corrected - generalising
+  from cities that shared an unstated condition the new one does not.
+  **Owner's call to draw it**, on grounds that are functional rather than
+  technological: Tisséo runs and tickets it as it does the métro, all three
+  stations are inside the commune, it crosses the Garonne where no other line
+  does, and one of the three (Université Paul Sabatier) is a Métro B
+  interchange. The brief was corrected in place rather than left to mislead the
+  next reader.
+
+- **Commune-only scope cost Toulouse half a line, and Marseille's test would
+  have passed it regardless.** Measured against commune 31555's contour: métro
+  A 17 inside / 1 out, métro B 19 / 1, **T1 13 / 12**, Téléo 3 / 0. Marseille's
+  rule was "every line is 100% inside, so commune-only costs nothing"; here
+  every line survives too, but T1 survives at **half strength**, losing the
+  whole Blagnac and Beauzelle branch - Aéroconstellation, Servanty Airbus,
+  MEETT, Pasteur-Mairie de Blagnac and eight more. **A test that only asks
+  whether a line survives cannot see that**, so `config.EXPECTED_INSIDE_PER_LINE`
+  now records the per-line split and step 1 exits if it moves. Commune-only was
+  taken anyway, with both alternatives put to the owner and declined: it keeps
+  the three French cities on one comparable scope, and the standing rule is
+  that stations in another city are a new project rather than a wider filter.
+
+- **Gate 3 passed exactly on all four lines, and the obvious layer would have
+  failed it.** Tisséo's `arrets-itineraire` gave A 18, B 20, T1 25, TELEO 3
+  against the feed's 18 / 20 / 25 / 3 - the cleanest gate 3 of any city. The
+  layer that *looks* right, `stations-de-tramway`, holds **29** records against
+  T1's 25, and the four extra are AÉROPORT, NADOT, DAURAT and JEAN MAGA, every
+  one tagged `en_service: 2027`. A line that has not opened, sitting in the same
+  layer as the 2010 and 2013 stations and separated only by that column:
+  counting its rows would have reported a four-station hole in the feed that
+  does not exist. **That is `osm-rail`'s "proposed mixed in with built" trap
+  found in a first-party agency layer rather than in OSM**, so the whitelist
+  rule it states is not an OSM rule. The same layer also settled the T2
+  question - Tisséo's own `ligne` register reads `metro: 2, tram: 1,
+  telepherique: 1`, so there is no T2 to be missing.
+
+- **Toulouse's catch-all share diverged from both siblings by about 40%, and
+  excluding it flattened the discriminator that justified it.** `96.09Z` is
+  **13.9%** of bucket rows here against Paris's 9.6% and Marseille's 9.8%;
+  `56.29B` 1.6% against 1.0%. The national argument transfers - INSEE's "autres
+  … n.c.a." is a residual bucket where home-based sole traders land - but the
+  shares are a city fact and were measured rather than inherited. The
+  confirming measurement is step 2's own: before the exclusion, rows with no
+  employee band were **26.4% catch-all against 8.8%** for rows recording one,
+  and were the less-named group (47.0% vs 57.4%); after it, both bands read
+  **5.8%**. The exclusion removed exactly the asymmetric group rather than a
+  slice of everything. The three retail catch-alls were kept, as in both
+  siblings, because INSEE's labels for them say "en magasin" on their face.
+
+- **Toulouse takes New York's ring edges for a different reason from its
+  siblings, which is the point of re-deciding them per city.** Measured across
+  the 48 in-commune stations: min 296 m, **median 525 m**, mean 583, max 2,017,
+  nothing under 200 m. Paris (399 m) and Marseille (341 m) took the tightened
+  edges because the default 966 m outer ring swamped a tight network; Toulouse
+  is looser than both, and the argument here is fit rather than collapse - a
+  483 m outer ring against a 525 m median very nearly tiles, which is a better
+  match than either sibling gets, where 966 m would still reach almost two
+  stations deep. Owner's call, taking the shared set rather than tuning a
+  fourth so the three French cities stay band-comparable. **The spacing gate
+  passed on its own terms**, with no `spacing_min` override - unlike Paris and
+  Marseille, which both tripped the 400 m floor and had to be passed 200.0.
+
+- **The brief's masking estimate was low, and it is the number that most
+  changes how this city reads.** It recorded 16.0% of rows masked at source
+  from a sample; the build measured **20.2%** of active rows over the whole
+  file. France masks name, address and geolocation together, so a fifth of
+  Toulouse's active establishments cannot reach the map at all - against
+  Paris's 8.5%. Recorded on the city page rather than only in the docs, with
+  the caveat a reader cannot otherwise infer: a thin-looking street here may be
+  a quiet one or a private one, and nothing in the data separates them.
+
+- **The OSM restaurant control reads 1.28x, below both siblings, and the total
+  ratio is no more trustworthy than it was.** `amenity=restaurant` against NAF
+  56.10A gives **1.28x** (node+way) where Paris is 1.80 and Marseille 1.72;
+  adjusting Toulouse's numerator to Paris's masking rate raises it to about
+  1.47x, which closes roughly half the gap. A lower ratio is the reassuring
+  direction - this build sits closer to OSM's mapped reality than either
+  sibling. ⚠️ **But the control is more fragile than the entry establishing it
+  assumed.** SIRENE's `56.10C` "type rapide" holds **1,732** rows against OSM's
+  **434** `fast_food`, a 4.0x gap where traditional restaurants are 1.38x, so
+  the two schemes draw the fast-food line in very different places and a
+  single-code control moves with that boundary. The query shape moves it too:
+  the same control reads 1.28x node+way and 1.38x nodes-only. **A count from
+  one query shape must never be compared with a count from another.**
+
+- **Notice 25 added: Tisséo's ODbL, which the OpenStreetMap notice does not
+  discharge.** Both sources are ODbL, which is exactly why one credit looks
+  like it should cover both - but §4.3 requires the notice to name *which*
+  database, and "© OpenStreetMap contributors" names OSM's. §4.6 (offer the
+  derivative or the method) is satisfied by the public repository provided it
+  stays linked from the site, the same standing condition IDFM's Art. 5.8
+  already imposes. The publisher's CGU was read the same day and adds nothing
+  harmful: no indemnity, and its marks clause is Opendatasoft's own with « les
+  données publiées sur le DOMAINE » expressly excluded - so naming Tisséo on
+  the map is not barred, which was the specific risk, since Grand Lyon's
+  equivalent clause is why Lyon is deferred. Left open: whether the derived
+  station CSV is itself a Derivative Database under §4.4, with the cheap
+  discharge recorded rather than the argument won.
+
+- **A 504 from Overpass is usually the query, not the host, and `out center` on
+  ways is the cost.** Ten minutes were lost reading throttling as an outage.
+  Measured on the Toulouse commune bbox, same tag, same hosts, minutes apart:
+  `node+way` with `out center` drew a 504 from overpass-api.de and a read
+  timeout from kumi.systems, while `node` alone with `out body` answered in
+  seconds on the first host tried. Overpass has to resolve every way's member
+  nodes to compute a centroid; the node half is typically 90%+ of a POI answer
+  anyway - restaurant nodes were 827 of the 889 node+way total, 93.0%. A bare
+  client signature also draws HTTP **406** from overpass-api.de, which is
+  `add-country`'s client-signature refusal rather than an IP block. **Written
+  into shared code rather than a note**: `pipeline/osm.py`'s `fetch()` now
+  takes a total `deadline` (default 900 s), prints every attempt, backs off
+  quadratically and names query cost in the error on a 504 - the old shape
+  could spend `retries x hosts x timeout` in silence, which is
+  indistinguishable from a hang and was read as one. The same hint was added to
+  `scripts/brief_check.py`'s own second copy, and the rule to `osm-rail` with
+  its checklist.
+
+- **The map legend covers the OpenStreetMap attribution at any viewport taller
+  than the embed, on every city, and nothing checks it.** Probed with
+  `document.elementFromPoint` across five points of the attribution strip: at
+  **1000x650**, the size `st.iframe` actually embeds at, Toulouse and Marseille
+  are both 0/5 covered; at **1024x768**, Toulouse, Marseille, Paris and San
+  Diego are all **5/5 covered**. So the published artifact is compliant and the
+  risk is latent rather than live - but the legend is anchored bottom-right and
+  grows upward while the attribution is bottom-right and fixed, and nothing
+  pins the iframe height that keeps them apart. Recorded as a separate task
+  rather than fixed inside a city build, since it is shared render code and
+  the project's stated preference is a check rather than a correction.
+### 2026-09-23 - The scope check paid for itself on the first merge it met
+
+- **Merging master brought Paris and Marseille, and
+  `check_scope_disclosure.py` failed on both within a minute of the merge.**
+  Neither city's business exclusions were in `docs/excluded_categories.md`,
+  though Paris's own page tells readers that document "lists them" - a promise
+  the document did not keep. Both are written up now, from their own published
+  prose and configs. Supersedes the station figures in the entry below: the
+  table reads **697 stations across 21 cities, 446 outside the city and 251
+  thinned**, up from 614 across 19, and it re-reads itself rather than being
+  edited.
+
+- **Marseille arrived with an exclusion reason neither reader understood:
+  "Aubagne's tram, not Marseille's".** Seven stations of a sixth line in the
+  same feed that belongs to a neighbouring town's own network. The check
+  refused to let it be silently bucketed under "Other" - which is the failure
+  it was built for, met on its first new city rather than hypothetically.
+  Folded into "outside the city", because that is what it is to a reader, and
+  the document now says so. Paris's file needed only `commune` added to the
+  boundary-column vocabulary.
+
+- **A false claim was found on a live page and corrected: Paris's page said
+  "trams are excluded in every city here that has them".** They are not -
+  `route_type 0` is drawn in San Diego, San Francisco, Los Angeles, Edmonton,
+  Calgary, Miami and Dublin, and Marseille draws three Tramway lines beside
+  its two Métro lines. The staging session had already caught the same
+  sentence's ancestor the same day (the Zurich correction) and the page it came
+  from had not been updated. **The rule is whether the tram IS the
+  rapid-transit system or a street-running overlay on one**, and that is what
+  both the page and the document now say. A first draft of this document
+  repeated the error - "trams and streetcars are out on different grounds" -
+  and was caught by reading master's commit log rather than by any check.
+
+- **`app/station_scope.py` now holds the one vocabulary for reading
+  `excluded_stations.csv`**, imported by both the page that renders the counts
+  and the check that enforces them. Two copies had existed for about an hour
+  and the drift risk was exactly the invisible kind: the page bucketing a new
+  city under "Other" while the check went on passing. Stdlib only, so the check
+  needs no Streamlit and the app needs no pipeline.
+
+- **The harness was wrong for the sixth time this session**, and the positive
+  control is the only reason it was not read as strictness: after the shared
+  module landed, the negative-test harness still copied only `cities.py`, so
+  all eight cases failed with an `ImportError` - including "an unmodified copy
+  passes". **A negative-test harness without a positive control cannot tell
+  "the check fires" from "the check is broken",** which is the argument for
+  keeping one in every such harness.
+
+### 2026-09-23 - The site said which businesses it leaves out and never which stations
+
+- **`docs/excluded_categories.md` now covers both halves of this project's
+  scope, and the page that renders it was renamed in substance rather than in
+  title.** The document was entirely about businesses; the other half of its
+  own opening sentence - "density around rail-transit stations" - was scoped
+  just as deliberately and published nowhere a reader would look. The gap was
+  found by a reader's question, **"was BART ever included in the San Francisco
+  build?"**, whose answer had been sitting in this file since the build: BART
+  is regional and crosses county lines, so including it would have reopened the
+  cross-boundary problem San Diego needed solving. Recorded, reasoned, and
+  never told to anyone.
+
+- **The disclosure asymmetry was the real defect, not the BART decision.** Six
+  city pages already named their excluded commuter rail - Chicago's Metra,
+  Philadelphia's Regional Rail, Boston's, Miami's Tri-Rail, Vancouver's West
+  Coast Express, Dublin's Commuter and InterCity - and San Francisco's page
+  named none, while every one of the 20 page titles names the network it does
+  cover. So the convention existed and San Francisco had fallen out of it, in
+  the one city whose omission a reader is most likely to notice. Its page now
+  carries the sentence, including that Embarcadero, Montgomery, Powell and
+  Civic Center ARE mapped, as the Muni stations they also are.
+
+- **The station table is COMPUTED from `outputs/*/excluded_stations.csv` at
+  render time, not written into the prose.** 614 stations are excluded across
+  19 cities - 363 for sitting outside the city whose register the map is built
+  from, 251 thinned out of street-running stretches - and every one of those
+  numbers is an open count that grows with each city. This project has already
+  been bitten by writing one of those into a document. The page reads the
+  committed files instead, so adding a city adds its row with no edit.
+
+- **A `st.dataframe` was tried first and rendered collapsed** - 52 px wide with
+  no canvas at all in the lean venv, measured rather than inferred. Replaced
+  with a markdown table, which is also the right call independently: 20 rows
+  need no sorting, and a grid's contents do not appear in the page text.
+
+- **The check found a fifth city the eye had missed.** Five cities -
+  **Montréal, Madrid, Barcelona, Dublin and Milan** - had no business
+  exclusions written in this document at all, each disclosed on its own city
+  page and nowhere else. A grep for four of them had been run by hand;
+  `scripts/check_scope_disclosure.py` named the fifth on its first run, because
+  it matches on `cities.py`'s own spelling and "Montréal" is not "Montreal".
+  All five were written up from their own published prose rather than parked,
+  so `KNOWN_GAPS` ships empty.
+
+- **The check asserts properties, and was watched failing eight ways** on temp
+  copies before being trusted: the splice marker removed, the splice marker
+  duplicated, the station section deleted, a city's `outputs/` directory
+  renamed, a city dropped from the business half, a station excluded for a
+  brand-new reason, and a documented city left stale in `KNOWN_GAPS` - plus an
+  unmodified copy passing. The KNOWN_GAPS expiry case is the one that matters:
+  a gap list that outlives its gap is how a dated defect turns into a
+  permanent pass.
+
+- **The hook earned its keep again.** A one-line `python -c` probe carrying
+  `\s` and `\(` was refused by `.claude/hooks/block_heredoc.py` - the fifth
+  occurrence of that pattern and the first that cost nothing, because it never
+  ran. Rewritten as a scratchpad file, per the rule the hook enforces.
 ### 2026-09-23 - The master list's summaries drifted while its sections stayed right; Cairo leaves the discards
 
 - **`docs/city_master_list.md` was corrected against the briefs and against

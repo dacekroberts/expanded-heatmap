@@ -28,16 +28,16 @@ st.title("Calgary: commercial density around CTrain station areas")
 
 st.markdown(
     """
-**Calgary's licence register says which businesses have premises, and no other
-city's does.** Its own categories are suffixed with the distinction every other
-map here has to infer — `RETAIL DEALER - PREMISES` against `RETAIL DEALER - NO
+**Calgary's licence register says which businesses have premises**, a
+distinction most registers here leave to be inferred. Its own categories carry
+it as a suffix — `RETAIL DEALER - PREMISES` against `RETAIL DEALER - NO
 PREMISES`, and `(MOBILE)`, `(HOME BASED)`, `(MAIL ORDER)` and `(DIRECT SALES)`
 alongside them. So the City did most of the classifying, and about two-thirds
 of its active licences are storefronts, against roughly a quarter in a typical
 register.
 
-**Every CTrain station is inside Calgary**, which makes this the only map on
-this site where nothing was excluded for lying in another municipality.
+**Every CTrain station is inside Calgary**, so nothing here was excluded for
+lying in another municipality.
 Compare San Diego, which loses 16 of 63 stations, or Washington D.C., which
 loses 58 of 98. `outputs/calgary/excluded_stations.csv` exists and is empty.
 

@@ -124,6 +124,14 @@ REGISTRIES = {
     "marseille": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv",
                       address=("business_name",)),
+    # Toulouse, the third on the same shared step 2 and so the same structural
+    # guarantee again. Its fill rate is the best of the three at 51.9%, and
+    # that is partly EARNED rather than given: excluding `96.09Z` removed 1,429
+    # rows whose naming rate was the worst in the file, so the figure rose from
+    # 50.6% to 51.9% as a side effect of a filter taken for other reasons.
+    "toulouse": dict(raw=None, trade=None, owner=None,
+                     processed="businesses_clean.csv",
+                     address=("business_name",)),
     "san_diego": dict(raw="sd_businesses_active_datasd.csv", trade="dba_name",
                       owner="business_owner_name", processed="businesses_clean.csv",
                       address=("address_no", "address_road", "address_suite")),

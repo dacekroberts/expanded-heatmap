@@ -4,9 +4,11 @@ Same static-HTML-embed pattern as pages/1_San_Diego_Heatmap.py - see
 Overview.py's docstring for why this is the decided pattern
 for every city's detail page. Scaffolded by scripts/scaffold_city.py.
 
-The prose below says TWO categories, not three, on purpose: Philadelphia is the
-only city here with no Personal services source at all (see
-pipeline/taxonomies/phl_licensetype.py). If that ever changes, this page and
+The prose below says TWO categories, not three, on purpose: Philadelphia has no
+Personal services source at all (see pipeline/taxonomies/phl_licensetype.py),
+and neither does Boston. This comment used to call Philadelphia "the only city
+here" without one, which Boston falsified two cities later - so name the
+comparison, never claim uniqueness. If that ever changes, this page and
 docs/excluded_categories.md both need updating.
 """
 
@@ -59,8 +61,8 @@ separately from SEPTA Metro.
 rather than from the map.** Philadelphia licenses activities, not businesses,
 and there is no salon, barber or nail licence of any kind; Pennsylvania
 publishes its cosmetology licensees only as county totals with no addresses. So
-**Personal services is absent entirely** — the only city here where a whole
-category has no source to draw on.
+**Personal services is absent entirely** — as in Boston, a whole category
+here has no source to draw on.
 
 Retail is narrow for a related reason. What the city licenses is food retail, so
 Retail here means bodegas, mini-markets and beer distributors, plus the big-box

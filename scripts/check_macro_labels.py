@@ -59,6 +59,11 @@ TEXT_WIDTH = {
     "Boston": 48.4, "Calgary": 51.8, "Chicago": 55.0, "Edmonton": 69.0,
     "Barcelona": 67.9, "Dublin": 42.8, "Milan": 36.3, "Paris": 32.9,
     "Marseille": 60.3,
+    # Toulouse measured 2026-09-23 the same way, and the run was validated by
+    # re-measuring six cities already in this table - Barcelona 67.9, Boston
+    # 48.4, Dublin 42.8, Marseille 60.3, Milan 36.3, Paris 32.9 - all six
+    # reproduced exactly. So this is the same basis rather than a new one.
+    "Toulouse": 60.4,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,

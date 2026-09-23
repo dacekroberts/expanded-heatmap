@@ -687,8 +687,31 @@ def _overpass_once(host, query, timeout):
     return elements
 
 
-def _overpass(query, timeout=300, _skip=()):
-    """First mirror that answers. Returns (elements, host)."""
+def _overpass(query, timeout=180, _skip=()):
+    """First mirror that answers. Returns (elements, host).
+
+    ⚠ A 504 OR A READ TIMEOUT HERE MAY BE THE QUERY RATHER THAN THE HOST, and
+    naming that in the error is what stops the next person waiting out a
+    cost problem. It is not always the query: on the same day a tags-only
+    query, with no geometry at all, 504'd on overpass-api.de and timed out
+    on kumi. Rule out cost first because it is the part you control.
+    Measured 2026-09-23 on the Toulouse commune bbox, same tag, minutes apart:
+    `node+way` with `out center` drew a 504 from overpass-api.de and a read
+    timeout from kumi, while `node` alone with `out body` answered in seconds
+    on the first host tried. `out center` makes Overpass resolve every way's
+    member nodes; the node half is typically 90%+ of a POI answer anyway
+    (restaurant nodes were 827 of 889, 93.0%).
+
+    So write the cheap query first and add ways as a SECOND query if the node
+    answer is not enough - and never compare a node-only count with a
+    node+way one, which measures the query rather than the city.
+
+    `timeout` is 180 rather than 300 for the same reason: a city-bbox query
+    that has not answered in three minutes wants making cheaper, not waiting
+    on. The full rules live in pipeline/osm.py's docstring; this is a second
+    copy of the fetch logic, deliberately, because this script must run from a
+    clean clone without importing the pipeline package.
+    """
     problems = []
     for host in OVERPASS_HOSTS:
         name = host.split("/")[2]
@@ -697,7 +720,10 @@ def _overpass(query, timeout=300, _skip=()):
         try:
             return _overpass_once(host, query, timeout), name
         except Exception as exc:
-            problems.append(f"{name}: {type(exc).__name__} {exc}")
+            hint = ""
+            if "504" in str(exc) or "timed out" in str(exc).lower():
+                hint = "  <- may be cost rather than outage: try nodes-only, drop `out center`"
+            problems.append(f"{name}: {type(exc).__name__} {exc}{hint}")
     raise RuntimeError("every Overpass mirror failed - " + "; ".join(problems))
 
 

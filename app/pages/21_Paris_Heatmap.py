@@ -34,9 +34,11 @@ Sixteen Métro lines are drawn — Lignes 1 to 14 plus the two short branch line
 
 The map covers the **commune of Paris**. Métro stations outside it are not
 drawn, and every one is listed by name, with the commune it stands in, in
-`outputs/paris/excluded_stations.csv`. Two other rail modes are absent by a rule
-this project applies everywhere: RER and Transilien are commuter rail, and trams
-are excluded in every city here that has them.
+`outputs/paris/excluded_stations.csv`. RER and Transilien are absent by a rule
+this project applies everywhere: they are commuter rail. The trams are absent
+by a narrower test — seven maps on this site do draw light rail, and the
+question is whether the tram *is* the city's rapid-transit system or a
+street-running overlay on one. In Paris it is an overlay on the Métro.
 
 Businesses come from **SIRENE**, France's national register of établissements,
 joined to INSEE's separate geolocation file. Records INSEE marks non-diffusible
