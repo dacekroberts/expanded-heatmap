@@ -149,8 +149,18 @@ on-map label regardless, so assign colours for those rather than dropping them.
   aplikace a cookies"*, which is **application and cookie terms, not data
   terms** — the New York footer shape.
 
-**Use the `licence-read` agent on each before any build.** A government open
-portal is a reason to expect permissive terms, not evidence of them.
+  ⚠️ **Four URLs were tried and all carry application terms rather than data
+  terms.** `vdp.cuzk.gov.cz/vdp/ruian/podminky` and `/vymennyformat` both 200
+  with only the cookie notice; `geoportal.cuzk.cz`'s `podminky_uziti` returns
+  the site's navigation menu; the `cuzk.gov.cz` product page 404s. **A document
+  with the right name exists** — *"Podmínky poskytování prostorových dat a
+  síťových služeb ČÚZK"*, seen in a nav listing — **but its URL was not
+  found.**
+
+**Use the `licence-read` agent on ČÚZK before any build.** RÚIAN is widely
+free of charge by statute, but **a government open portal is a reason to
+expect permissive terms, not evidence of them** — and this is the source the
+whole 99.8% coordinate join depends on.
 
 ---
 
