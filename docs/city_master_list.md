@@ -149,10 +149,12 @@ and only owner decisions left. After that the screen has no city whose
 
 ## 🔵 Band B — one call away: a document to READ or a decision to MAKE (1 city)
 
-**Nothing here needs another probe.** The city is held by something
-answerable at a desk — a licence page nobody has opened, and a judgment only
-the owner can make. That is why the caption is not "one question": Tel Aviv
-carries one of each, and both are still desk work.
+**Nothing here needs another probe** — but as of 2026-09-22 the single
+city in this band is held by something heavier than desk work. Tel Aviv's
+licence was **read**, and it is a prohibition rather than the silence
+"unread" implied. **The remedy is a written request to the Municipality**, so
+this band's one member now overlaps `docs/gated_access.md`. If the answer is
+no, Tel Aviv is a discard rather than a build.
 
 **Stockholm and Zurich left this band on 2026-09-22** for the new Band E,
 once enumeration confirmed both are one-bucket. What holds them is not a
@@ -196,13 +198,44 @@ disqualified Tallinn, Colombia and Jakarta:
    excludes. [964] carries `t_shem_esek`, a **trade name**, which is the
    safe field. Recommendation: **build on [964]** and treat [925] as a
    cross-check only. `check_personal_exposure.py` must run either way.
-2. **Licence — UNREAD, and that is the real gate.** The MapServer returns
-   **no `copyrightText` and no `licenseInfo`**. Tel Aviv is *not* among the
-   four municipalities publishing on `data.gov.il` (Be'er Sheva, Haifa,
-   Ma'ale Adumim, Petah Tikva), so there is no national licence statement to
-   inherit either. Needs `read-licence` against the city's own terms —
-   **and the pages that would carry them are on the 472-blocked host**, so
-   the Internet Archive is the likely route.
+2. **Licence — READ 2026-09-22, and it is the opposite of what "unread"
+   suggested.** This was recorded as a gap to fill. It is filled, and what
+   was behind it is a **prohibition**, not a silence.
+
+   Read from the Internet Archive, because every page that carries terms is
+   on the 472-blocked host — the same route that read Barcelona's and
+   Sevilla's licences.
+
+   | Source | What it says |
+   |---|---|
+   | **Municipal Terms of Use** (`/About/Pages/TermsofService.aspx`, captured 2026-04-21) | *"**אין להעתיק, לשחזר, לשנות, לעבד… להפיץ, לשכפל… לפרסם ו/או לאחסן את תוכן האתר**"* — do not copy, reproduce, modify, process, distribute, duplicate, publish and/or store the site's content |
+   | The same document | *"**אין להשתמש בתוכן האתר ליצירת מאגר מידע ו/או לקט**"* — **do not use the content to create a database or compilation** |
+   | The same document | forbids use on **other websites**, for any purpose, ***בין מסחרית ובין שאינה מסחרית*** — whether commercial or non-commercial — **without explicit prior written consent** |
+   | Its definition of *"contents"* | explicitly includes **`מאגר נתונים`** — a database |
+   | **`opendata.tel-aviv.gov.il`** footer (captured 2019-10-14) | ***כל הזכויות שמורות לעיריית תל-אביב-יפו*** — **All rights reserved** |
+   | `data.gov.il` | Tel Aviv is **not** among its four municipal publishers — nothing to inherit |
+   | ArcGIS server root, `/rest/info`, service | **no `licenseInfo`, no `copyrightText`** at any level |
+
+   **The counter-reading, stated rather than resolved.** The Terms are titled
+   *terms of use of the **website***, say *"תוכן האתר"* throughout, and the
+   data sits on a **different host** (`gisn.tel-aviv.gov.il`). That is the
+   **New York** situation from `read-licence`: an "All Rights Reserved"
+   footer covering site content while the data itself was unrestricted.
+
+   **But New York had an affirmative law — Local Law 11 of 2012 — forbidding
+   the City to attach restrictions to its open data. Nothing equivalent is
+   established for Tel Aviv**, the Terms explicitly name databases, and the
+   open-data portal **asserts** rights rather than granting them. On the
+   evidence the restrictive reading is materially stronger, and
+   `read-licence` step 8 forbids resolving it in this project's favour.
+
+   ⛔ **So Tel Aviv is not buildable on what is known.** The remedy is not
+   more reading — it is **explicit prior written consent from the
+   Municipality**, which the Terms name as the route. That is the
+   **Philadelphia shape**, with one difference that matters: Philadelphia was
+   already built and stands on a disclosed reasoned position, while Tel Aviv
+   **has not been built and should not be** until permission exists. Tracked
+   as `docs/gated_access.md` item 8.
 
 **Rail is present but needs a scope decision, not a probe.** The city
 publishes its own: Red Line stations **12**, Green **33**, Purple **19**,
@@ -270,9 +303,9 @@ it no longer holds a question, only a scope decision.
 
 | City | The one probe that decides it |
 |---|---|
-| **Prague** 🇨🇿 ▲ | **Still the best lead here, and its hosts had MOVED.** `rzp.cz` answers 000; **`www.rzp.cz` redirects to `rzp.gov.cz`**, which is live, and `opendata.praha.eu` redirects to **`lkod.cz/catalog/praha`**. The shape is still right — the *živnostenský rejstřík* is a **trade-licence** register, issued per premises, not ARES the company register. **`data.gov.cz/sparql` answers SPARQL**, so the Bulgarian enumeration technique applies. Next: enumerate for *provozovny* |
-| **Dublin** 🇮🇪 ⚠️ | **`valoff.ie` is not a host that is down — it is RETIRED**, and was retried twice as an outage. `data.gov.ie` catalogues a **Valuation Office API** at **CC BY 4.0**, whose one resource is `https://tailte.ie/home/api/`: **Tailte Éireann absorbed the Valuation Office**, and `tailte.ie` answers 200. The deciding question is unchanged — does the Irish rateable register carry a **use category**, where the UK's NNDR did not? |
-| **Singapore** 🇸🇬 ⚠️ | **Not a loose search — an INERT one.** `zzqqxxnonsense` returns the **identical ten datasets** as `licence`, `food establishment` and `business`: the `query` parameter is ignored entirely, and only the nonsense control separates that from looseness. The catalogue is **4,628 datasets over 463 pages** and pages correctly, so the route is **enumeration, not search**. The registered-office suspicion is still untested — nothing has been learned about the data yet |
+| **Prague** 🇨🇿 ⚠️ | **PROBED 2026-09-22 — location found, activity missing.** `data.gov.cz/sparql` answers and its control passes (`zzqqxxnonsense` → 0). **`Registr osob - aktivní provozovny`** is a real national open CSV of **active establishments** — `szrcr.cz/…/ros02_data.csv`, **58.5 MB, updated 2026-09-01** — carrying `ICP`, `ICO`, dates and **`PKODADM`, a RÚIAN address code**. That is a *join* to the Czech address register rather than a geocode, which is far cheaper. **But there is no activity column anywhere**: `ros01_data.csv` (**532 MB**, companies) has `FIRMA` and `FORMA` (legal form, not NACE), and `ros02` has none either. **The Colombia-RUES shape, inverted from Tallinn's** — full location, no activity. ⚠️ **And the `121-xx` / `476-5: Provozovna` hits are a FALSE FRIEND**: they carry distributions, but those resolve to `slovník.gov.cz` **ontology files** — 91 KB of `skos:Concept` and `owl:DatatypeProperty` defining the trade-business agenda. **A vocabulary, not data** — the Budapest shape, where an inventory reads like a catalogue until one is opened. `rzp.gov.cz/opendata/` is 404, so the trade register's per-establishment trade fields are **queryable per subject and not published in bulk**: the Hong Kong shape, for the activity half only. *(Earlier note retained: its hosts had moved —* | `rzp.cz` answers 000, `www.rzp.cz` redirects to `rzp.gov.cz`, and `opendata.praha.eu` redirects to `lkod.cz/catalog/praha`.)* |
+| **Dublin** 🇮🇪 ⚠️ | **`valoff.ie` is not down — it is RETIRED**, and was retried twice as an outage. `data.gov.ie` catalogues a **Valuation Office API** at **CC BY 4.0**, whose one resource is `https://tailte.ie/home/api/` — **Tailte Éireann absorbed the Valuation Office**, and that page answers 200. **But every API endpoint is unroutable for us**: `api.valoff.ie`, `api.tailte.ie` and `valoff.ie/api/...` all return **000**, checked 2026-09-22. So the licence is good and the host is not reachable. **The deciding question is still unasked** — does the Irish rateable register carry a **use category**? The UK's NNDR did not, and that killed the UK. Next: the Archive, or the `tailte.ie` page's own documentation |
+| **Singapore** 🇸🇬 ⚠️ | **Not a loose search — an INERT one.** `zzqqxxnonsense` returns the **identical ten datasets** as `licence`, `food establishment` and `business`: the `query` parameter is ignored entirely, and only the nonsense control separates that from looseness. **Paging CONFIRMED to work** 2026-09-22 — pages 1, 5, 50, 200 and 463 return five different first-items, and page 463 returns 8 items, which confirms **4,628**. So the route is **enumeration, not search**, and it costs 463 requests. **Not yet run.** The registered-office suspicion is still untested — nothing has been learned about the data yet |
 
 ## 🟣 Band E — one bucket, but developable (2 cities)
 
