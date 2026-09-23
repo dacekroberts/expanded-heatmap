@@ -1467,6 +1467,30 @@ and icons. Line names and category labels are not claimed.
 **No warranty**: the Council disclaims integrity, updating and accuracy, and
 excludes liability.
 
+## Obligations that are NOT notices — three classes, one per publisher
+
+**A notice is text on a page. These are not.** Each was found by reading a
+licence that also granted permission freely, which is why they are easy to
+miss: the grant is the headline and the obligation is a subordinate clause.
+
+| Class | Who | What it actually requires |
+|---|---|---|
+| **An act owed to the publisher** | **Barcelona** 🇪🇸 | *"Users are required to inform Barcelona City Council of every project relating to or derived from their use of the data sets."* A message a person sends. Drafted at `docs/notifications/barcelona-city-council.md`, **not yet sent** |
+| **A live account that must STAY live** | **WMATA** (Washington D.C.) 🇺🇸 | The terms are an API agreement, so §9(i) ends the grant when the account ends — and what lapses is the right to **publish the page**. Gate item 10 |
+| ⚠️ **A liability ACCEPTED** | **Hong Kong** 🇭🇰 *(candidate, not built)* | *"you shall **indemnify** the Government and the Relevant Organisations against any allegations or claims of infringement of the rights of any person **and all costs, losses, damages and liabilities** incurred by the Government and the Relevant Organisations … in relation to your use, reproduction and/or distribution of the Data"* |
+
+**Hong Kong's is the one to weigh before building, not after.** Everything
+else in `data.gov.hk`'s Terms of Use v1.2 (26 May 2025) is generous — download,
+distribution and reproduction are permitted for **commercial and
+non-commercial purposes, free of charge**, subject only to identifying the
+source, acknowledging Government ownership of the IP, and proper attribution.
+
+**The indemnity is not a notice, not a credit, and not a step in a build.** It
+is an open-ended undertaking to cover the Government's costs if a third party
+alleges the data infringed their rights. No other source in this project asks
+for one. **It is an owner decision, and the right moment to take it is before
+35,808 premises are wired into a page**, not once the city is live.
+
 ## Notices this project MUST display when published
 
 This is the operative output of the licence review. As of 2026-09-21, for the

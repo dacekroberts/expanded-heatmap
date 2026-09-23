@@ -150,6 +150,17 @@ And three adjacent categories that are not notices but are still work:
 - **Trademark and affiliation.** Six agencies here bar implying affiliation,
   sponsorship or endorsement. Check whether the terms claim **marks** (a logo)
   or something broader; SEPTA's claims only its Logo.
+
+- **What you INDEMNIFY the publisher against.** `data.gov.hk`'s Terms grant
+  download, reproduction and distribution for **commercial and non-commercial
+  use, free of charge** — and in the same sentence require the user to
+  *"indemnify the Government … against any allegations or claims of
+  infringement of the rights of any person **and all costs, losses, damages
+  and liabilities**"*. **A generous grant can carry an open-ended liability,
+  and the liability will not be in the licence summary.** Read the conditions
+  attached to a permission, not just the permission. This is an **owner
+  decision** rather than a build step, so raise it before the work is done,
+  not after.
 - **What must be DISCLOSED about your own processing.** A recurring family,
   found by the 2026-09-21 global country screen, and **this project triggers it
   every time**: ring density, category bucketing and storefront filtering are

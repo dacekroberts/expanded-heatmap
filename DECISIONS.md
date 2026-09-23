@@ -1111,6 +1111,200 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Bucharest's licence is SILENT, and the absence is established rather than
+  assumed.** Read in the browser, which is the only way to reach the host.
+  `bucuresti.dsvsa.ro` has **no terms-of-use page at all** - the entire site
+  offers exactly two policy links, cookies and privacy - and the privacy
+  policy is **8,465 characters about personal data with zero mentions** of
+  reuse, reproduction, distribution, licence, commercial use, copyright or
+  intellectual property. DSVSA data is **not on `data.gov.ro`** (searched the
+  archived 4,693-dataset list for dsvsa, ansvsa, veterinar and
+  sanitar-veterinar: **zero matches**), so there is no national statement to
+  inherit either. The footer reads *"Ⓒ 2017 ANSVSA. Toate drepturile
+  rezervate"* - **all rights reserved** - but that is a **website** footer,
+  which is the New York situation the `read-licence` skill records: a footer
+  governs site content, not the data. **SILENT, with the pages named.**
+
+- **The JS challenge is confirmed to cover the DATA FILES, not just the
+  pages, and the fetch route is browser-assisted by necessity.** Plain curl
+  against the XLSX itself returns **503 with an 8,904-byte HTML body** - the
+  challenge interstitial - so the constraint is not cosmetic. Fetching the
+  same URL **inside the browser that had legitimately passed the challenge**
+  returned **200, 56,009 bytes, magic `PK\x03\x04`**, correct
+  `spreadsheetml.sheet` content type: a real file. **That is the route, and
+  it is the one this project already used for Bucharest** - never replaying a
+  clearance cookie to curl, which would be working around bot detection
+  rather than passing it. Recorded as a **build constraint** on the fetch
+  script rather than as a blocker.
+
+- **Moved Bucharest to Band C and closed Band D.** Its screening is now
+  finished on every axis: **rail counted** (12 subway relations, all named,
+  all coloured, M1-M5, Metrorex), **licence read** (SILENT), **Romania's
+  national catalogue enumerated** (4,693 datasets from the Archive, no second
+  bucket - the only commercial register is ONRC's company register).
+  Band D existed to hold a city whose business leg was unfinished; that
+  stopped being true of its only member, so the band closed rather than being
+  re-captioned around the occupant - the same reasoning that closed B and the
+  original D. Counts: **A4 B0 C10 D0 E12 F2 G2 = 30**, verified.
+
+- **One genuinely useful find for the geocoding leg:** Romania publishes a
+  **complete national street nomenclature** as open data - one dataset per
+  county plus `nomenclator-stradal-municipiul-bucuresti` and a Sector 2
+  file. That is the address reference a Romanian geocoding join needs, and it
+  was invisible until the national catalogue was enumerated from the Archive.
+
+
+- **Recorded Hong Kong's indemnity as a THIRD class of obligation that is not
+  a notice, and gave the three a section of their own.** Barcelona introduced
+  the first - an affirmative act owed to the publisher - and WMATA the second,
+  an account that must stay live because the grant dies with it. Hong Kong's
+  is different again: **a liability accepted.** `data.gov.hk`'s Terms require
+  the user to *"indemnify the Government and the Relevant Organisations
+  against any allegations or claims of infringement of the rights of any
+  person **and all costs, losses, damages and liabilities**"*. Everything
+  else in those Terms is generous, which is exactly why the clause is easy to
+  miss: **the grant is the headline and the obligation is a subordinate
+  clause.** Written into `docs/data_sources.md` as a table of the three
+  classes, and into the `read-licence` skill so the next licence read looks
+  for it. **It is an owner decision, and the moment to take it is before
+  35,808 premises are wired into a page.**
+
+- **Bucharest's rail is SOLVED and Romania is enumerated; two of its four
+  open items closed.** The rail count had failed earlier only because Overpass
+  was busy: `overpass.private.coffee` returns **12 subway relations, all 12
+  named, all 12 coloured, refs M1-M5, operator Metrorex** - the complete
+  metro. And `data.gov.ro`, which resolves but stays unroutable for us, was
+  read **from the Internet Archive**: `api/3/action/package_list` is captured
+  and returns **4,693 datasets**, 4,482 with readable slugs. **There is no
+  second bucket in Romania's national catalogue** - the only commercial
+  register is ~40 dated snapshots of `firme-inregistrate-la-registrul-
+  comertului`, the ONRC **company** register and therefore the
+  registered-office trap. One useful find:
+  `nomenclator-stradal-municipiul-bucuresti`, the street nomenclature its
+  geocoding leg needs. Still open: the licence, and the JS challenge.
+
+- **Hyderabad re-probed, and the route that enumerated Romania does NOT work
+  there.** `data.telangana.gov.in` runs **DKAN**, not CKAN, and while the
+  Archive holds about 200 of its URLs it does **not** hold the dataset-list
+  endpoint - only individual items and `search/facets` calls, and the Wayback
+  wrapper would not return those raw. So the state catalogue cannot be
+  enumerated from outside. `ghmc.gov.in` still returns 403 in a real browser.
+  **Blocked, not negative**, and now with the archive route closed as well as
+  the live ones.
+
+- **`api.data.gov.in`'s `q` parameter is INERT, which retro-justifies how the
+  earlier India negative was reached.** `q=Telangana` and
+  `q=zzqqxxnonsense` both return the identical **288,011**, so the national
+  API cannot be filtered at all. The earlier negative was reached through the
+  **website** search, whose `title=` parameter does filter - a nonsense term
+  returns *"No Result Found"* - so that finding stands. **Two search surfaces
+  on one portal, one of which silently ignores its input**, is worth
+  recording: the conclusion was right and would have been unfounded had it
+  come from the other surface.
+
+
+- **Hong Kong was never blocked, and enumerating `data.gov.hk` proved it in
+  one call.** It had been recorded as *"the portal is a measured negative
+  (statistics only), but FEHD's register exists and is queryable - no bulk
+  export found"*, and carried for several sessions as **the single most
+  valuable open thread in the screen**. `data.gov.hk/en-data/api/3/action/
+  package_list` returns **3,821 datasets** and nobody had pulled the list.
+  Matching locally over every name found FEHD's own Licensing Management
+  Information System published as bulk XML: **`LP_Restaurants_EN.XML`,
+  `LP_OtherFood_EN.XML`, `LP_NonFood_EN.XML`**, each carrying a
+  `GENERATION_DATE` of the day it was read - **regenerated daily**. Promoted
+  from Band G to Band C. Touched `docs/city_master_list.md`.
+
+- **The scale and shape, measured rather than inferred: 35,808 licensed
+  premises, 100% carrying both a trade name and an address.** Restaurants
+  **17,260** (general 12,603, light refreshment 4,652, marine 5), other food
+  **16,518**, non-food **2,030**. Every record has `SS` (shop sign),
+  `ADR`, `TYPE`, `DIST`, `LICNO` and `EXPDATE`, so active filtering and
+  district scoping both come free. **`OtherFood` is not a production
+  register** - its types include **Composite Food Shop, Fresh Provision Shop,
+  Bakery and Siu Mei and Lo Mei Shop**, which are food *retail*, so this is
+  broader than the single food-service bucket the record implied.
+
+- **This is the third time in one day that a recorded negative turned out to
+  be a statement about a SEARCH rather than about the data.** Stockholm's was
+  *"`restaurang` and `foretag` both return 0"* against a register called
+  `Tillsynsverksamheter`; Zurich's was a keyword sweep that missed nothing
+  but was never a sweep; Hong Kong's was "no bulk export found" against a
+  portal whose full dataset list had never been requested. **Enumerate, then
+  conclude** - the cost of the enumeration was one HTTP call in each case.
+
+- **Hong Kong's licence is PERMITTED WITH CONDITIONS, and it carries an
+  obligation no other source here does.** `data.gov.hk`'s Terms of Use v1.2
+  (26 May 2025) allow you to *"browse, download, distribute, reproduce,
+  hyperlink to, and print the Data for **both commercial and non-commercial
+  purposes on a free-of-charge basis**"*, conditional on identifying the
+  source, **acknowledging Government ownership of the intellectual property
+  rights**, and giving proper attribution. It also requires the user to
+  **indemnify the Government against infringement claims and all associated
+  costs** - the only indemnity clause in this project, recorded so it is
+  weighed before Hong Kong is built rather than after.
+
+- **Bucharest's rail count was attempted and failed on the mirrors, not on
+  the data.** Both Overpass mirrors returned *"Dispatcher_Client::
+  request_read_and_idx::timeout. The server is probably too busy"* after 90
+  and 240 seconds. Recorded as attempted-and-unavailable rather than left
+  silently undone, because an outstanding item that looks unattempted is
+  indistinguishable from one that was tried.
+
+- **Romania cannot be enumerated the way Bulgaria was, and the reason is
+  structural.** `data.gov.ro` resolves (85.120.75.35) and remains unroutable
+  for us, so the EU portal is the only route - but **Romanian dataset URIs
+  are slugs and UUIDs, not sequential integers**, so the id-sweep that
+  recovered 11,635 Bulgarian datasets has nothing to sweep. OFFSET also dies
+  at 60 for `ro` where it reached 500 for `bg`. **The technique is not
+  general; it depended on a property of Bulgaria's export.** Bucharest
+  already has a measured source, so this closes a widening route rather than
+  its only one.
+
+
+- **Discarded Tel Aviv on TERMS rather than on data, by owner decision, and
+  the distinction is the whole entry.** Its measurement is the strongest of
+  any unbuilt city in this screen - **22,168+ licensed businesses** carrying
+  activity in plain Hebrew *and* a numeric licensing code, location as street
+  plus point geometry in **EPSG:2039, already projected in metres**, refreshed
+  within two days of being found. Nothing about the data disqualifies it.
+  **The municipal Terms of Use do**: no copying, distributing, publishing or
+  storing; **no using the content to create a database**; extending to other
+  websites and explicitly to **non-commercial** use; and requiring **explicit
+  prior written consent**, with the open-data portal's own footer reading
+  *all rights reserved*. Touched `docs/city_master_list.md`,
+  `docs/gated_access.md`.
+
+- **The owner's reasoning, recorded because it is a reusable rule rather than
+  a one-off call: a written request made IN ADVANCE and AGAINST explicit
+  restrictive clauses is not worth the effort.** The distinction from
+  Philadelphia is the direction of travel. Philadelphia is **already built and
+  published** on a disclosed reasoned position, so its outstanding request is
+  a defence of work that exists and comes down if refused. Tel Aviv would have
+  been **asking permission before doing anything**, against terms that
+  prohibit the exact use in writing - a low-probability ask whose success is a
+  precondition for starting rather than for continuing. **Effort spent
+  there buys nothing unless it succeeds**, where the same effort spent on
+  Dublin or Prague buys a city outright.
+
+- **Band B closed: its one member is gone and the band's premise no longer
+  fits it.** Band B held cities whose blocker was **answerable at a desk**.
+  Tel Aviv's desk work was done - the licence was read - and the answer was a
+  prohibition, which is not a desk problem. A band whose last city has moved
+  past its own definition should close rather than be re-captioned around the
+  occupant, which is the same reasoning that closed Band D when its four
+  probes were run. Counts: **A4 B0 C8 D1 E12 F2 G3 = 30**, and Discarded
+  rises to 28.
+
+- **Kept the full Tel Aviv write-up under the closed band rather than
+  deleting it with the city.** The measurement was the expensive part and it
+  stands regardless of the verdict: if the terms ever change, or if a reading
+  of Israeli open-data law turns up the equivalent of New York's Local Law 11,
+  **nothing needs re-probing except the terms themselves**. Discarding the
+  evidence along with the candidate would have thrown away the only part that
+  is still true.
+
+
 - **Prague PASSES, on a bulk register nobody had looked for, and it is
   SIRENE's shape.** The blocker had been "no activity anywhere", established
   against ROS and ARES. Both were the wrong files. The Statistical Office
