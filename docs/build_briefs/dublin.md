@@ -89,7 +89,7 @@ Every one of the 38,265 rows carries all 19 keys.
 |---|---|---|
 | `PropertyNumber` | 100% | The real primary key; dedupe on this |
 | `Address1`–`Address5` | 99.88% on `Address1` | `Address4`/`Address5` usually null |
-| `Eircode` | 98.05% | ⚠️ See the licence flag — recommended **dropped** |
+| `Eircode` | 98.05% | ✅ **DROPPED at load** — third-party database right, see licence |
 | `Xitm`, `Yitm` | **99.87%** | Irish Transverse Mercator, **already metres** |
 | `Category` | 100% | 13 values region-wide; too coarse — see taxonomy |
 | `Uses` | 100% | 963 distinct values; **this is the taxonomy** |
@@ -433,7 +433,7 @@ paid Map Shop surveying products and mentions valuation, open data, API,
 Eircode, PSI and Creative Commons **zero times each**. Read and inapplicable,
 recorded so the next reader does not have to re-establish that.
 
-### ⚠️ OPEN — the `Eircode` column
+### ✅ SETTLED 2026-09-22 — the `Eircode` column is DROPPED
 
 Tailte publishes `Eircode` on 98.05% of rows, but the Eircode database is
 third-party IP (An Post / OSi via GeoDirectory, licensed commercially through
@@ -445,10 +445,21 @@ not authorised to license.
 - **Does not**: republishing ~38,000 Eircodes is a substantial extraction from
   a database whose *sui generis* right is held by someone else.
 
-**Recommended: drop the column in step 2.** The build does not need it — it has
-`Xitm`/`Yitm` and five address lines — so dropping removes the only
-third-party-rights exposure in the source at zero cost to the map. **Owner's
-call; not yet taken.**
+**Owner's call 2026-09-22: drop the column.** This does not resolve the
+question — it removes it. The build has `Xitm`/`Yitm` and five address lines
+and never reads `Eircode`, so dropping costs the map nothing and eliminates the
+only third-party-rights exposure in the source.
+
+The rejected alternative was keeping it on the permissive reading and
+disclosing the position, which is Philadelphia's and Barcelona's shape. It was
+declined because **those two cities had no cheaper option and this one does**:
+a disclosed position is what you publish on when the disputed thing is load-
+bearing, and this one is not.
+
+⚠️ **Step 2 must exclude `Eircode` at load**, not filter it out afterwards, so
+it never lands in a processed file. Keep it out of the download's field list if
+the API ever gains a column selector; `Fields=*` currently returns everything,
+so the drop happens in the first dataframe operation.
 
 ---
 
@@ -469,8 +480,11 @@ LA, Philadelphia and San Diego all needed does not arise either.
 
 1. **Which attribution string is canonical.** Three are live; the Circular's is
    used, as a disclosed position. Unresolvable from the documents.
-2. **Whether the `Eircode` column is safe to republish.** Recommended dropped;
-   owner's call outstanding.
+2. ~~**Whether the `Eircode` column is safe to republish.**~~ **Closed
+   2026-09-22 by removing the question rather than answering it** — the column
+   is dropped, so whether it was safe no longer matters to this build. The
+   underlying question about GeoDirectory's database right is still unanswered
+   and would return immediately if a future city or feature needed Eircodes.
 3. **Whether Tailte's five superseded PSI conditions are live or stale.**
    `tailte.ie` still publishes "reproduce information accurately", "not use the
    information in a misleading way" and "not … for the principal purpose of

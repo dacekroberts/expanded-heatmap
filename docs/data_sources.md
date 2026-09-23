@@ -2200,14 +2200,22 @@ guaranteed to be complete") — the MTA/WMATA prose rule again; and no Tailte
 logo, crest or official symbol, which the PSI licence excludes and CC BY 4.0
 §2(b) does not license.
 
-⚠️ **One open item, not blocking: the `Eircode` column.** The Eircode database
-is third-party IP (An Post / OSi via GeoDirectory, licensed through Capita),
-and both the PSI licence and `data.gov.ie/license` carve out third-party
-database rights the Information Provider is not authorised to license.
-**Recommended: drop the column in step 2** — the build has `Xitm`/`Yitm` and
-five address lines and does not need it, so dropping removes the only
-third-party-rights exposure in the source at no cost. **Owner's call,
-outstanding.**
+✅ **The `Eircode` column is DROPPED — owner's call, 2026-09-22.** The Eircode
+database is third-party IP (An Post / OSi via GeoDirectory, licensed through
+Capita), and both the PSI licence and `data.gov.ie/license` carve out
+third-party database rights the Information Provider is not authorised to
+license. Tailte publishes Eircodes inside a dataset it declares CC BY 4.0,
+which is an argument that it holds the right to; republishing ~38,000 of them
+is a substantial extraction from a database whose *sui generis* right belongs
+to someone else, which is an argument that it does not.
+
+**The decision does not resolve that — it removes it.** The build has
+`Xitm`/`Yitm` and five address lines and never reads `Eircode`, so dropping the
+column costs the map nothing and leaves the source with no third-party-rights
+exposure at all. The rejected alternative was publishing on the permissive
+reading with the position disclosed, which is what Philadelphia and Barcelona
+do — declined because **those two had no cheaper option and this one does.**
+Step 2 must drop it at load so it never reaches a processed file.
 
 One page that reads alarmingly and does not apply:
 `tailte.ie/map-shop/map-licences-and-copyright/` requires "prior permission"

@@ -205,6 +205,26 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Dublin Step 0: a register with no names, and a taxonomy rule that inverts
 
+- **Decided to drop the `Eircode` column from Dublin's step 2, closing the one
+  licence item Step 0 left open.** The valuation register carries `Eircode` on
+  98.05% of rows, but the Eircode database is third-party IP - An Post and OSi
+  via GeoDirectory, licensed commercially through Capita - and both the PSI
+  licence and `data.gov.ie/license` carve out third-party rights "including …
+  database rights" that the Information Provider is not authorised to license.
+  The reading that permits is that Tailte publishes Eircodes inside a dataset
+  it declares CC BY 4.0, implying it holds the right to; the reading that does
+  not is that republishing ~38,000 Eircodes is a substantial extraction from a
+  database whose *sui generis* right is held by someone else. **The decision
+  does not resolve that question, it removes it**: the build has `Xitm`/`Yitm`
+  and five address lines, so the column is never read, and dropping it costs
+  the map nothing while eliminating the only third-party-rights exposure in the
+  source. The rejected alternative was keeping the column on the permissive
+  reading and disclosing the position, which is Philadelphia's and Barcelona's
+  shape - declined here because those two had no cheaper option and this one
+  does. **Where a disputed right can be dropped at zero cost, drop it rather
+  than publish on a reasoned position.** `docs/data_sources.md` notice 22 and
+  `docs/build_briefs/dublin.md` updated; step 2 must exclude the column at load
+  rather than after, so it never enters a processed file.
 - **Ireland's valuation register was measured live and Dublin banked as a build
   brief, `docs/build_briefs/dublin.md`, 6/6 checks passing.** The endpoint is
   `opendata.tailte.ie/api/Property/GetProperties?Fields=*&LocalAuthority=<LA>&Format=json&Download=false`,
