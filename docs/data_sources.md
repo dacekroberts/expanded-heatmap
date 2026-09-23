@@ -1544,7 +1544,7 @@ miss: the grant is the headline and the obligation is a subordinate clause.
 |---|---|---|
 | **An act owed to the publisher** | **Barcelona** 🇪🇸 | *"Users are required to inform Barcelona City Council of every project relating to or derived from their use of the data sets."* A message a person sends. Drafted at `docs/notifications/barcelona-city-council.md`, **not yet sent** |
 | **A live account that must STAY live** | **WMATA** (Washington D.C.) 🇺🇸 | The terms are an API agreement, so §9(i) ends the grant when the account ends — and what lapses is the right to **publish the page**. Gate item 10 |
-| ⚠️ **A liability ACCEPTED** | **Hong Kong** 🇭🇰 *(candidate, not built)* | *"you shall **indemnify** the Government and the Relevant Organisations against any allegations or claims of infringement of the rights of any person **and all costs, losses, damages and liabilities** incurred by the Government and the Relevant Organisations … in relation to your use, reproduction and/or distribution of the Data"* |
+| ✅ **A liability ACCEPTED** | **Hong Kong** 🇭🇰 *(candidate)* | **ACCEPTED BY THE OWNER 2026-09-22.** *"you shall **indemnify** the Government and the Relevant Organisations against any allegations or claims of infringement of the rights of any person and all costs, losses, damages and liabilities incurred … which in any case arise **directly or indirectly** in relation to your use, reproduction and/or distribution of the Data"*. See the section below for what the earlier record omitted |
 
 **Hong Kong's is the one to weigh before building, not after.** Everything
 else in `data.gov.hk`'s Terms of Use v1.2 (26 May 2025) is generous — download,
@@ -1557,6 +1557,66 @@ is an open-ended undertaking to cover the Government's costs if a third party
 alleges the data infringed their rights. No other source in this project asks
 for one. **It is an owner decision, and the right moment to take it is before
 35,808 premises are wired into a page**, not once the city is live.
+
+### Hong Kong's indemnity — ACCEPTED 2026-09-22, and what the first record omitted
+
+**The owner accepted this on 2026-09-22, in chat, after the live clause was
+re-read.** It is the only uncapped liability in this project. Recorded here
+with its reasoning so it is a decision rather than a drift.
+
+**Two things the first record's quote left out**, both found by reading
+`https://data.gov.hk/en/terms-and-conditions` (Terms v1.2) rather than the
+earlier citation of it — which is the failure mode `read-licence` exists for:
+
+1. **"arise directly or indirectly"** — the earlier quote elided it. Broad
+   causation, not just proximate.
+2. **There is NO notice-and-defend clause.** The Government need not tell you a
+   claim exists, you have no right to control or even join the defence, and
+   nothing obliges them to mitigate or to seek your consent before settling.
+   Most commercial indemnities temper exposure exactly there. This one does
+   not.
+
+**And the pairing is deliberate.** The *Disclaimer and Limitation of Liability*
+section expressly disclaims any warranty of **non-infringement** — so the
+Government does not promise the Data is clean **and** you indemnify them if it
+is not. That section caps **their** liability to you, not yours to them: the
+indemnity is one-directional and has no cap.
+
+**What narrows it**, and why acceptance is reasonable rather than reckless: the
+scope is **infringement of the rights of any person**, not general liability.
+It is not "anything that goes wrong because of the map". A third party must
+assert *their rights* against the Government, over this project's use of a
+**government public register** republished with the attribution the same
+paragraph requires. That is a narrow path, and the project's standing
+commitment to **honour removal requests without argument** cuts off the likeliest
+escalation before it becomes a claim.
+
+**Probability low, magnitude unbounded** — which is the combination that gets
+mis-priced, so it was priced deliberately.
+
+#### THREE CONDITIONS, accepted with it and binding on the build
+
+1. **Display all three required elements exactly** — identify the **source**
+   of the Data, **acknowledge the Government's and the Relevant Organisations'
+   ownership of the intellectual property** in it, and give **proper
+   attribution to the Government, the Relevant Organisations and
+   DATA.GOV.HK**. These are the same paragraph as the indemnity, and
+   **unattributed use is the most likely way to draw a complaint in the first
+   place.** They become numbered notices when Hong Kong is committed, not
+   before.
+2. **Run `python scripts/check_personal_exposure.py hong-kong` and exclude
+   catch-all categories** — the Los Angeles NAICS 812990 precedent. The
+   realistic complainant is an individual whose name sits at what looks like a
+   home, so the privacy filter is the risk control, not a formality.
+3. **This entry is condition three**, dated and reasoned.
+
+#### One consistency note
+
+**Lyon's Grand Lyon CGU 9.4 is the same shape** and was recorded as the
+project's second indemnity. Accepting Hong Kong's does **not** automatically
+accept Lyon's — Lyon carries two further gates (an account this project does
+not create, and a trademark clause that collides with an invariant), so it
+stays deferred on those grounds regardless.
 
 ## Notices this project MUST display when published
 

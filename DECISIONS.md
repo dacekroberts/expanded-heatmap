@@ -16,15 +16,30 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**182 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**197 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Category B's 31 counts read, one edited, and the denominator rule earned its keep](#2026-09-23---category-bs-31-counts-read-one-edited-and-the-denominator-rule-earned-its-keep)
+- [A superseded document's citations are a trail, and the check was auditing them](#2026-09-23---a-superseded-documents-citations-are-a-trail-and-the-check-was-auditing-them)
+- [Following one dead constant found a comment describing an approach the city does not use](#2026-09-23---following-one-dead-constant-found-a-comment-describing-an-approach-the-city-does-not-use)
+- [Category D's 18 remaining constants are mostly deliberate records, not decay](#2026-09-23---category-ds-18-remaining-constants-are-mostly-deliberate-records-not-decay)
+- [Category D reported 63 dead constants, 45 of which were add-country working correctly](#2026-09-23---category-d-reported-63-dead-constants-45-of-which-were-add-country-working-correctly)
+- [check_stale_claims category A was reporting three findings and none of them was real](#2026-09-23---check_stale_claims-category-a-was-reporting-three-findings-and-none-of-them-was-real)
+- [PLAN.md gains the handoff it was missing, and Paris reverified](#2026-09-23---planmd-gains-the-handoff-it-was-missing-and-paris-reverified)
+- [Paris's brief re-verified against live sources: 7/7 hold](#2026-09-23---pariss-brief-re-verified-against-live-sources-77-hold)
+- [CUZK read: Prague is unblocked, and the "cookie terms" were not only cookie terms](#2026-09-23---cuzk-read-prague-is-unblocked-and-the-cookie-terms-were-not-only-cookie-terms)
+- [The sweep's results sorted: Goteborg banded, two discards evidenced](#2026-09-23---the-sweeps-results-sorted-goteborg-banded-two-discards-evidenced)
+- [The discard record swept for rows that rest on an absence](#2026-09-23---the-discard-record-swept-for-rows-that-rest-on-an-absence)
 - [France's taxonomy is national, and Paris takes Lambert-93](#2026-09-23---frances-taxonomy-is-national-and-paris-takes-lambert-93)
+- [Four licences read: Oslo is clear, Prague has one left](#2026-09-23---four-licences-read-oslo-is-clear-prague-has-one-left)
+- [Hong Kong, Prague and Oslo taken to brief-ready; two cities changed size](#2026-09-23---hong-kong-prague-and-oslo-taken-to-brief-ready-two-cities-changed-size)
 
 **2026-09-22**
 
+- [The cleanup role was written down portably, method only](#2026-09-22---the-cleanup-role-was-written-down-portably-method-only)
 - [The scaffold now refuses an unregistered region instead of documenting it](#2026-09-22---the-scaffold-now-refuses-an-unregistered-region-instead-of-documenting-it)
+- [Hong Kong's indemnity accepted, and re-reading it found two omissions](#2026-09-22---hong-kongs-indemnity-accepted-and-re-reading-it-found-two-omissions)
 - [Paris's two owner calls settled, and commune-only costs it no transit system](#2026-09-22---pariss-two-owner-calls-settled-and-commune-only-costs-it-no-transit-system)
 - [Italy needs no country profile, and "Milan-only" turns out to be unproven](#2026-09-22---italy-needs-no-country-profile-and-milan-only-turns-out-to-be-unproven)
 - [The heredoc rule was written down four times and broken four times, so it became a hook](#2026-09-22---the-heredoc-rule-was-written-down-four-times-and-broken-four-times-so-it-became-a-hook)
@@ -222,6 +237,460 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-23 - Category B's 31 counts read, one edited, and the denominator rule earned its keep
+
+- **Read all 31 hand-kept counts. Exactly one was stale, and the one that
+  looked worst was correct.** `osm-rail`'s "All fourteen cities before Mexico
+  City read GTFS" sits in a project that now has twenty, which reads as a
+  drifted count - and is not. The denominator is CLOSED by the phrase "before
+  Mexico City", and twenty minus the six built since (Mexico City,
+  Guadalajara, Madrid, Barcelona, Dublin, Milan) is fourteen. **Updating it to
+  twenty would have destroyed a true statement**, which is precisely the
+  failure the denominator rule exists to prevent; the rule was applied to a
+  live case rather than recited.
+
+- **The one real staleness was a tense, not a number.**
+  `premises-taxonomy`'s "Distilled from the four cities that needed one -
+  Chicago, Edmonton, Madrid and Barcelona" was true when written and now reads
+  as a claim that only four ever needed one. Dublin and Milan have since got
+  their own modules. Fixed by closing the denominator - "the FIRST four" -
+  and naming the two that followed, so the sentence stays true as more arrive
+  rather than needing another edit.
+
+- **The other twenty-nine are closed sets and were left alone**: "all three
+  buckets" (a project constant), "all five boroughs" (New York's, permanently),
+  "the six pre-1998 municipalities" (a historical fact about Toronto's
+  amalgamation), "the two Mexican cities" and "the two Alberta cities" (both
+  currently exact). Category B is titled "to eyeball" rather than "to fix" for
+  this reason, and the eyeballing is the work - a pass that corrected on sight
+  would have introduced errors into five of them.
+
+- **This closes the parked pile.** Across the session category A went from 3
+  findings to 1, all noise removed; category D from 63 to 18 with the one
+  genuine defect among them found and annotated; category C was already 0; and
+  category B is now read in full with a single edit. What remains is not
+  backlog but the two items that need another session's context - Dublin's map
+  re-render and the Paris Step 0 checklist - plus one documented checker blind
+  spot, category D attributing by name rather than by module.
+
+### 2026-09-23 - A superseded document's citations are a trail, and the check was auditing them
+
+- **`check_provenance.py` now skips citation verification in any document
+  that declares itself SUPERSEDED in its opening lines.** This is the same
+  rule that already excludes `DECISIONS.md` - "it records what a citation said
+  on a date" - applied to the other shape of historical document.
+
+- **The note that led here was correct about the evidence and wrong about the
+  remedy.** `docs/licenses/canada-required-notices.md` cites "Items 9, 10, 14,
+  16" against the phrase "Four municipal OGLs, each with its own prescribed
+  sentence" without naming the four cities, so the subject test could not
+  confirm that item 9 was Vancouver's and reported it unverifiable. The
+  citation is accurate. The file's own header reads "SUPERSEDED 2026-09-22 ...
+  **Where this file and those disagree, those win.**" **Naming the cities to
+  satisfy the script would have edited a historical trail to please a check** -
+  the correction runs the wrong way round, and the standing rule is that a
+  dated record is evidence rather than a claim to maintain.
+
+- **Proved three ways.** The item 9 note is gone; a `notice 99` injected into
+  a LIVE document still fails the check (exit 1); the identical text injected
+  into the superseded document is ignored (exit 0). The middle case is the one
+  that matters - a skip wide enough to swallow real citations would have
+  passed the first and third tests alone.
+
+- **The harness was wrong a fourth time this session, and in a new way.** It
+  read the subprocess with a strict UTF-8 decode; the check prints Montreal
+  with an e-acute in the console codepage, the reader thread raised
+  `UnicodeDecodeError`, and stdout arrived EMPTY - so a case that had passed on
+  its exit code was reported FAIL for missing text. Re-run capturing bytes and
+  decoding with `errors="replace"`, all three pass. **Byte-vs-text has now
+  produced two of the four harness defects** (line endings on 2026-09-22,
+  codepage today), which makes it the single most reliable way to write a
+  test that lies.
+
+### 2026-09-23 - Following one dead constant found a comment describing an approach the city does not use
+
+- **Barcelona's config carried `OSM_STATION_RAILWAY` and `OSM_STATION_KIND`
+  under a paragraph that reads as a description of how the city selects
+  stations. It is the record of a REJECTED approach, and neither constant is
+  used.** What actually runs is `stations_query()` in `fetch_sources.py` - the
+  member nodes of the cached route relations, asked for by id. Tag selection
+  was measured and abandoned because `railway=station` boxes and the
+  `stop_position` nodes a PTv2 relation contains are different objects with
+  **no overlap at all**, 225 against 378, so combining the two filters yields
+  an empty set. A reader meeting the config cold would reasonably conclude the
+  opposite. **This is the single instance among the eighteen that matched
+  category D's stated purpose** - "a comment describing a plan that did not
+  happen is what misleads the next reader" - and it was reached by following
+  one flagged constant to its comment rather than by scanning.
+
+- **Both constants were KEPT and annotated rather than deleted.** The counts
+  above them are the evidence for rejecting tag selection; removing them would
+  leave the decision looking arbitrary, which is the same reasoning that keeps
+  Edmonton's `STALE_BOUNDARY_IDS`. What was missing was the word "rejected".
+
+- **San Francisco's `COUNTY_BOUNDARY_URL` is a provenance record, and the
+  explanation lived in a different file.** `fetch_sources.py` deliberately
+  fetches only the Assessor roll, because re-downloading a business export
+  would change every count in `DECISIONS.md` and must be a deliberate act;
+  that reasoning is in its docstring, while the unread constant sits in
+  `config.py`. Annotated where the reader meets it. Nothing was rewired: the
+  constant is correct and deliberately unused.
+
+- **A false negative in `check_stale_claims.py` category D, now documented in
+  the checker itself.** Attribution is by NAME, not by module, so a constant
+  dead in one city is not reported when another city defines a live one of the
+  same name. Barcelona's `OSM_STATION_RAILWAY` is exactly that case and was
+  never flagged - only its sibling `OSM_STATION_KIND` was, which is what led
+  here. Shared config vocabularies are where this bites; fixing it means
+  resolving each read back to the module it imports from, which was not
+  attempted today.
+
+### 2026-09-23 - Category D's 18 remaining constants are mostly deliberate records, not decay
+
+- **Read all 18 with the comment above each, which is what the check asks
+  for, and most are kept ON PURPOSE.** Madrid's `COORD_ZERO_IS_MISSING` says
+  in its own comment "DESCRIPTIVE, not a switch: step 2 drops the zeros
+  unconditionally, so setting this False would change nothing. Kept because
+  the measurement above is the valuable part." Mexico's `ATTRIBUTION_PRODUCT`
+  says "read by nothing... the `_NOTICES` entry is the one that must be
+  right." Edmonton's `STALE_BOUNDARY_IDS` is "the boundary layer this project
+  must NOT use, kept so the choice above reads as a decision rather than an
+  accident." Barcelona's `CKAN_RESOURCE_ID_2024_INCOMPLETE` exists "so the
+  rejection is checkable rather than a claim."
+
+- **So category D's framing does not fit this repository.** Its line is "a
+  comment describing a plan that did not happen is what misleads the next
+  reader" - but here the unread constants overwhelmingly carry MEASUREMENTS
+  and REJECTED ALTERNATIVES, which this project deliberately keeps. Deleting
+  them would destroy exactly the evidence `DECISIONS.md` exists to preserve.
+  The category is still worth running; what it finds is not decay but a
+  reading list, and only two of the eighteen - Barcelona's `OSM_STATION_KIND`
+  and San Francisco's `COUNTY_BOUNDARY_URL` - are bare values with no comment
+  at all, which is the only shape that actually leaves a reader stranded.
+
+- **No constants were deleted, and that is the finding rather than an
+  omission.** The cheap action - clearing a report to zero - would have been
+  the wrong one.
+
+- **A harness deserves the same suspicion as the check it tests, and this is
+  the second instance in two days.** On 2026-09-22 a negative test patched
+  text read as bytes against a file with different line endings, so nothing
+  matched. Today one asserted `"france.py" not in whole.split("Deferred")[-1]`
+  and, with no deferred section present, `str.split()` returned the whole
+  string, so it found the name in the live listing. **Different mechanisms,
+  same consequence: a correct check reported as broken, one step from being
+  "fixed".** Both are now written into
+  `docs/portable/cleanup-session.md` 4.2, where the rule reads: a failing
+  negative test has two suspects, and the newer code is the harness.
+
+- **The heredoc hook made its first unprompted catch, one day after
+  installation.** Patching that faulty test, the one-liner reached for was a
+  heredoc containing a backslash; the guard refused it and the edit went
+  through the Write tool instead. Recorded in the portable briefing's
+  escalation ladder as evidence the top rung pays for itself when the rule was
+  genuinely failing - prose had not stopped that form four times running.
+
+### 2026-09-23 - Category D reported 63 dead constants, 45 of which were add-country working correctly
+
+- **France's country profile has no city yet, so nothing imports it - and the
+  checker called all 45 of its constants dead.** `add-country` exists
+  precisely so the national facts are profiled ONCE, before the first city in
+  that country is built, so a profile whose constants nothing reads is the
+  documented workflow succeeding. Reporting it as decay means the check fires
+  forty-odd false positives every time someone follows the process this
+  project recommends.
+
+- **The distinction is exact and costs one grep: does any city config import
+  the profile?** Mexico's does, from Guadalajara and Mexico City, so its three
+  unread constants ARE findings and stay listed. France's does not, from none,
+  so its 45 are reported as **deferred** with a count and the reason, in their
+  own section. Live findings fell from 63 to **18**, which is the number a
+  reader can actually work through.
+
+- **The deferral expires by itself, and that was the part worth proving.** A
+  deferral needing someone to remember it is the same trap as a `KNOWN_GAPS`
+  list that cannot go stale. Simulated the first French city by making one
+  city config import the profile: France's constants moved from deferred to
+  live immediately, with no edit to the checker, and returned when the import
+  was removed.
+
+- **The negative test failed first, and the test was what was wrong.** Its
+  second assertion read `"france.py" not in whole.split("Deferred")[-1]` -
+  but when the deferred section is absent entirely, `str.split()` returns the
+  whole string as one element, so it found the name in the LIVE listing and
+  reported a working checker as broken. **Second time in two days that a
+  harness, not a check, was the defect** - after the byte-vs-text line-ending
+  bug on 2026-09-22. A harness deserves the same suspicion as the thing it
+  tests.
+
+- **The heredoc guard shipped yesterday blocked the fix for it**, correctly:
+  the one-liner that would have patched the test carried a backslash inside a
+  heredoc. First unprompted catch in real use, one day after installation.
+
+### 2026-09-23 - check_stale_claims category A was reporting three findings and none of them was real
+
+- **The detector paired a future-tense marker with any built-city name on the
+  same LINE, and a markdown table row runs past 600 characters.** So
+  "Screened 2026-09-21, not yet a full Step 0" - accurate prose about New
+  Orleans, a city that is not built - matched "Boston" mentioned some 400
+  characters further along the same row, and was reported as a stale claim.
+  The marker and the name were never related, only adjacent in a file.
+  **Exactly the defect already fixed once in `check_provenance.py`**, where
+  `item N` citations were being read across three unrelated namespaces; that
+  it recurred in a second checker is the argument for treating proximity as a
+  standing question rather than a one-off bug. Scoped to a 120-character
+  window either side of the marker.
+
+- **`docs/notifications/` is no longer scanned, for a principled reason.**
+  That directory holds letters this project owes a publisher, and "NOT YET
+  SENT" is their CORRECT state - the file exists to track an act that has not
+  happened. A document whose subject is pendency cannot be audited for writing
+  about pendency, which is the same reasoning that already excluded
+  `docs/build_briefs`.
+
+- **Category A went from 3 findings, all of them noise, to 1 that is real** -
+  the Barcelona row in the obligations table, which genuinely must be
+  corrected the moment that letter sends, and which the check will keep
+  pointing at until it is. **A report that is 100% false positives is one
+  people learn to skip**, which costs more than the check was ever worth; the
+  same reasoning as the deliberately narrow heredoc guard shipped yesterday.
+
+- **Watched both directions before shipping**, per the standing rule. Both
+  known false positives disappear, and a `Boston is not yet built` injected
+  into `project_context.md` is still caught - a proximity window that had been
+  tightened too far would have passed the first test and failed the second.
+### 2026-09-23 - PLAN.md gains the handoff it was missing, and Paris reverified
+
+- **Five brief-ready cities had a brief with passing checks and NO item in
+  `PLAN.md` at all.** "Next cities, in ease order" held only the US and
+  Mexican entries, so `add-city` Step 0's instruction - turn what the probe
+  found and left open into an ordered checklist under that city's item -
+  **had nothing to hang under.** Creating the items was part of the job.
+  Written for **Paris, Hong Kong, Prague, Oslo and Goteborg**, in build order,
+  every line a measurement rather than a template step.
+
+- **This is the artifact that makes the next session cheap, and it carries no
+  session context.** The checklists front-load the things that fail SILENTLY:
+  Paris's `"A"` not `"Actif"` and its per-row `epsg` column; Prague's
+  EPSG:5513 ordering, whose wrong variants land in Germany and the Arctic
+  without erroring; Oslo's `?kommunenummer=0301` not constraining the address
+  actually read; Hong Kong's 14,263 non-storefront rows. **A checklist that
+  only lists steps is a template; one that lists the traps is a handoff.**
+
+- **Paris re-verified against live sources: 7/7 still hold.** Nothing drifted
+  while the other four cities were being taken to brief-ready - the SIRENE
+  parquet, the geolocation file, IDFM's feed, the `mobility-licence`
+  declaration and INSEE's NAF labels all answer as recorded. The check that
+  matters most is the negative one: **the IDFM feed still carries no
+  `feed_info.txt`**, so the correction that replaced this brief's
+  self-attestation claim is still true.
+
+### 2026-09-23 - Paris's brief re-verified against live sources: 7/7 hold
+
+- **`python scripts/brief_check.py paris` returns 7/7, so the build starts
+  from verified ground rather than from claims banked a day earlier.** Run by
+  the cleanup session at the owner's request, on the reasoning that re-running
+  a brief's claims against live sources is a check and therefore this role's
+  work, while the Step 0 checklist that prompted it is not - that belongs to
+  the session holding the Paris findings.
+
+- **The three that would have changed the build if they had moved, all
+  unchanged.** IDFM's own GTFS still downloads with no key (10,027,008 bytes,
+  `application/zip`) - the two other feeds on the NAP remain third-party and
+  unusable, Google's stale since 2023-11-17 and ITO World's `is_available`
+  false. The NAP still declares **mobility-licence** on the IDFM dataset, so
+  the required notice stays the Art. 5.4 text rather than an Etalab
+  attribution. INSEE's separate geolocation file is still published, which is
+  what keeps Paris's coordinate leg a JOIN rather than a geocode, and is load
+  bearing for its band placement.
+
+- **The absence pinned in the brief is still an absence.** The feed carries
+  `shapes.txt` (14 files) and still NO `feed_info.txt`, so it declares no
+  validity window and cannot be staleness-checked from the artifact. The brief
+  originally claimed it self-attested; `brief_check.py` disproved that, and
+  the negative is checked deliberately so that the day `feed_info.txt` appears,
+  the staleness story gets simpler and the check gets revisited. **A check
+  that asserts something is still missing is as much a check as one asserting
+  it is present** - this is the second useful instance of that shape today,
+  after the KNOWN_GAPS entries that fail once they stop violating.
+
+- **No correction follows, which is the whole point of running it.** The
+  project's rule is that a failing brief check is a brief to correct, never a
+  check to relax; at 95% of the weekly limit there would have been no budget
+  to correct one, so the run was made knowing a red result would end as a
+  recorded finding rather than a fix. It came back green.
+### 2026-09-23 - CUZK read: Prague is unblocked, and the "cookie terms" were not only cookie terms
+
+- **ČÚZK/RÚIAN is CC BY 4.0, PERMITTED WITH CONDITIONS, and Prague's last
+  licence blocker is gone.** The document exists and **five earlier attempts
+  searched the wrong subtree**: it lives under **`/Predpisy/`** - Regulations -
+  not under `/Uvod/Produkty-a-sluzby/` or the geoportal, and is reached by a
+  single link from the cuzk.gov.cz homepage. Updated **30.06.2023**. Its first
+  enumerated bullet names **this exact resource**, the RÚIAN výměnný formát,
+  and the grant lists `vytěžovat`, `užívat komerčně i nekomerčně`,
+  `kombinovat`, `šířit` and `transformovat a upravovat`. **Two independent
+  machine records agree** - `data.gov.cz`'s SPARQL and ČÚZK's OWN DCAT-AP
+  record at `atom.cuzk.cz` - which is `read-licence` step 5 satisfied rather
+  than asserted.
+
+- **The link this project twice dismissed as "Podmínky užívání aplikace a
+  cookies" contains a data clause, and it is the sharpest finding of the
+  read.** Its real text is at `vdp.cuzk.gov.cz/help/topics/cookies.htm`; the
+  `?id=` URL returns a **2,338-byte HelpSmith frameset**, which is precisely
+  why it read as a bare cookie notice to two earlier passes. It says:
+  *"Není povoleno **jakékoli vytěžování údajů automatizovanými
+  prostředky**"* - any extraction by automated means is not permitted - and
+  binds every user. **So two ČÚZK documents use `vytěžovat` in opposite
+  directions**, one granting it and one forbidding it, and nothing reconciles
+  them.
+
+- **Decided: step out of that ambiguity rather than resolve it in the
+  project's favour.** The conflict is about **how the file is FETCHED, not
+  what may be published** - the reuse verdict holds under either reading - so
+  the exposure is confined to `fetch_sources.py`. ČÚZK operates an **INSPIRE
+  ATOM download service** its own documentation calls *"určeno především pro
+  strojové zpracování"*, intended primarily for machine processing, and it
+  hands out precisely these URLs. **Taking the URL from there makes the
+  question moot at the cost of one extra request**, and it independently fixes
+  a defect in the brief: the hard-coded `20260831` path **goes stale on the
+  1st of every month**. The ATOM entry also returns `EPSG/0/5513`, which
+  **corroborates the CRS finding from a second source**.
+
+- **A THIRD rights statement exists, is more permissive, and was deliberately
+  not taken.** The ATOM feed carries `<rights>žádné podmínky neplatí</rights>`
+  - *no conditions apply*. It is standard INSPIRE boilerplate and it conflicts
+  with two first-party documents and the publisher's own DCAT record. **The
+  conservative reading governs.** Quoting it would have been the convenient
+  move and it is exactly the kind of convenience `read-licence` says not to
+  take.
+
+- **Prague now carries FIVE display obligations across two publishers, and TWO
+  of them are transformation disclosures.** ČÚZK prescribes the literal string
+  **`ČÚZK, [rok]`**, a link to its conditions, and *"v případě šíření
+  upraveného díla, uvést popis úpravy"* - describe the modification. ČSÚ
+  independently requires derived data be marked as derived. **They may share
+  one sentence only if it names both publishers.** ⚠️ ČÚZK's **English**
+  page prescribes a *different* attribution string, is **version 1.0 from
+  2016** against the Czech version's 2023, and never mentions CC BY at all -
+  unreconciled, and the Czech form is used.
+
+- **ČÚZK declares the address data contains NO PERSONAL DATA** -
+  `osobní-údaje = neobsahuje-osobní-údaje` on both its own record and the
+  national catalogue's. So RÚIAN contributes nothing to Prague's
+  personal-exposure surface, and whatever `check_personal_exposure.py` finds
+  will come from RES trade names. `read-licence` step 6b, answered by the
+  publisher rather than by inference.
+
+- **Cost-order arithmetic corrected: Milan was still counted in cost band 1
+  after being built**, which made that file total 33 against the master list's
+  32. Milan removed, band 1 is one city, and the two files sum to **32** again
+  - the check that file states about itself, failing the first time it was
+  exercised after a build landed.
+
+### 2026-09-23 - The sweep's results sorted: Goteborg banded, two discards evidenced
+
+- **Göteborg probed to Stockholm and Zurich's depth and placed in Band D**, so
+  the band is now **three one-bucket cities** and **candidates go 31 to 32**.
+  Its catalogue is **EntryStore** at
+  `catalog.goteborg.se/store/search?type=solr` - the same platform as
+  Stockholm's - and three guessed CKAN bases had returned a 662-byte HTML
+  shell before it was found, which was **a wrong endpoint rather than a
+  verdict**.
+
+- **The one-bucket finding is a MEASURED absence, not an assumption, because
+  the search was controlled.** `livsmedel` returns 1 and `restaurang` returns
+  6, while **`handel`, `butik`, `företag`, `detaljhandel` and `frisör` all
+  return 0.** A controlled zero is a finding; an uncontrolled one is a
+  statement about the query, which is the distinction that cost Seoul a wrong
+  verdict earlier in this screen.
+
+- **`Restauranger med serveringstillstånd`: 1,043 rows, CC ZERO, and it gets
+  the address distinction right.** It carries `Namn` (trade name) and
+  **`Besöksadress`** - the *visiting* address - kept separate from
+  `Fakturaadress`, the invoice address. **That is the same distinction that
+  made Norway pass** and that Bronnoysund's `beliggenhetsadresse` names
+  explicitly. CC0 is also a stronger licence position than Stockholm's SILENT.
+
+- **But the claim that Göteborg has "better data than Stockholm" is
+  STRUCTURAL, not measured, and it is recorded as such.**
+  `Livsmedelsverksamheter` is *"Alla aktiva livsmedelsverksamheter"* - active
+  food **businesses**, not inspections, so it needs no dedupe where Stockholm's
+  8,146 premises had to be distilled from **289,742** inspection rows, and it
+  updates **daily**. **Its row count could not be obtained**: the DCAT
+  distribution node exposes **no `accessURL`**, and `resource/18` returns RDF
+  rather than the file. **Until that count is taken, Stockholm's measured
+  8,146 is the stronger number**, and saying otherwise would be exactly the
+  schema-over-data error that Milan and Paris both produced.
+
+- **Göteborg collapses three open questions into one.** Stockholm, Zurich and
+  now Göteborg are all complete, licensed and food-service-only, so **whether a
+  one-bucket city belongs on the site is a single scope decision covering three
+  cities** rather than two separate ones. Recorded in `city_cost_order.md`
+  band 5.
+
+- **Lisbon and Warsaw moved from "ruled out with no evidence" into the DISCARD
+  list WITH evidence, and both discards hold.** That is worth stating plainly
+  rather than treating the audit as vindication: the rule that a discard must
+  name its evidence per row is about being CHECKABLE, not about being wrong.
+  **Lisbon** is the aggregate trap - `dados.gov.pt` returns 430 for
+  *estabelecimentos* and they are hotel statistics and prisons. **Warsaw's**
+  control passes, CEIDG is company-level, and its one surviving
+  premises-shaped lead - licensed alcohol sales points - is **narrower than
+  Göteborg's**, so it does not reach Band D either. Discard count 30 to 32.
+
+- **Cairo stays unprobed and Zagreb stays blocked**, both in the open-screening
+  section rather than in the discard list, because neither has a finding.
+  Rome and Turin stay there too: their catalogues answered and their **schemas
+  were never read**, so they are candidates-pending-Step-0 rather than banded
+  cities.
+
+### 2026-09-23 - The discard record swept for rows that rest on an absence
+
+- **Audited every row in the discard and ruled-out records against
+  `add-country`'s rule that a reason of "not reached", "unprobed" or a
+  regional pattern is NOT a discard.** That rule exists because the error has
+  already happened twice in this project, once to a group of four countries
+  that included **Italy - which then passed**. The sweep found **six live
+  cases**, and the useful generalisation is blunt: **a ruled-out list is only
+  as good as its weakest row, and three of this one's rows carried no reason
+  at all.**
+
+- **Goteborg is the real find: it was never ruled out, it was never PLACED.**
+  The master list names it twice - *"Unprobed candidate"*, *"Better data,
+  weaker map"* - and puts it in **no band**, which is how a candidate
+  disappears without anyone deciding to drop it. Probed: the catalogue is
+  **EntryStore** at `catalog.goteborg.se/store/search?type=solr`, the same
+  platform as Stockholm's, and three guessed CKAN bases had returned a
+  662-byte HTML shell first - a wrong endpoint, not a verdict.
+  **`Livsmedelsverksamheter`** is *"Alla aktiva livsmedelsverksamheter"*:
+  **active food BUSINESSES, not inspections**, so it needs no dedupe, where
+  Stockholm's 8,146 premises had to be distilled from **289,742** inspection
+  rows. **`Restauranger med serveringstillstand` declares CC ZERO**, which is a
+  stronger licence position than Stockholm's SILENT. Its rail is trams rather
+  than a metro, so it is **better data on a weaker map** - the same trade
+  Toronto lost on.
+
+- **Portugal and Poland were on "Countries ruled out" with NO evidence
+  whatsoever, and now have some.** Both discards broadly hold, which is worth
+  saying plainly rather than treating the audit as vindication: Lisbon's
+  `dados.gov.pt` returns 430 hits for *estabelecimentos* and they are
+  **aggregate hotel statistics** and prison establishments - the aggregate
+  trap. Warsaw's control passes (`zzqqxx` returns 0, so the search genuinely
+  filters), CEIDG is company-level as recorded elsewhere, and **one
+  premises-shaped lead survives**: *Wykaz punktow sprzedazy napojow
+  alkoholowych*, licensed alcohol sales points - one bucket at best, the shape
+  of Singapore's tobacco retailers.
+
+- **Cairo is still unprobed and is now recorded as an absence rather than a
+  finding**, and **Zagreb is confirmed blocked rather than negative** - three
+  further paths tried, all returning the same SPA shell. Neither is a discard;
+  both are open rows with a named next step.
+
+- **Nothing in the sweep changed a count**, because none of these were counted
+  as candidates to begin with. That is the point: **they were invisible to the
+  arithmetic**, which is exactly why the discard list has to name its evidence
+  per row rather than gesture at a pattern.
+
 ### 2026-09-23 - France's taxonomy is national, and Paris takes Lambert-93
 
 - **NAF rev. 2 was built as a COUNTRY-level taxonomy rather than a Paris one -
@@ -301,6 +770,170 @@ onwards; the early ones are split by phase rather than by hour.
   `step1_stations.py` and `step2_clean_businesses.py` are unwritten. Committed
   as `5e0e3c6` on branch `paris-build`.
 
+### 2026-09-23 - Four licences read: Oslo is clear, Prague has one left
+
+- **Three of four resolved with read-licence STEP 1 alone**, which is the
+  cheapest step and the one worth exhausting before spending an agent: the
+  declared licence from the machine, not the page. **Brønnøysund declares
+  NLOD** in its API documentation header; **Kartverket's Matrikkelen-Adresse
+  declares CC BY 4.0** in Geonorge metadata, with `AccessConstraints: Åpne
+  data`, **`OtherConstraints: "Ingen juridiske begrensninger."`** and INSPIRE
+  `noLimitations`; **ČSÚ declares CC BY 4.0**. **Oslo is fully unblocked.**
+
+- **ČSÚ is PERMITTED WITH CONDITIONS, and the conditions were only visible by
+  reading the DATA paragraph rather than the website one.** The CC BY sentence
+  on ČSÚ's terms page governs *"Webové stránky https://csu.gov.cz"* - the web
+  pages. Immediately after it sits *"Další podmínky použití dat ČSÚ"*, which
+  is the data paragraph, and it carries two obligations: **state the licence
+  conditions when disseminating, preferably as a direct link**, and **mark
+  modified or derived data as modified or derived, and do not present it as
+  unchanged official ČSÚ statistics.** That second one is the
+  disclosure-of-transformation family - Montréal's *"ou si des
+  interprétations en ont été tirées"* and INEGI's notification duty - and
+  **this project triggers it every time**, because ring density, bucketing and
+  storefront filtering are all transformations. It is also a **MUST NOT SAY**:
+  the page may not imply the map is official Czech statistics.
+  `read-licence` step 4 is what separated the two paragraphs.
+
+- **ČÚZK / RÚIAN is the one still open, and four URLs were tried.**
+  `vdp.cuzk.gov.cz/vdp/ruian/vymennyformat` and `/podminky` both answer 200 and
+  carry **no data licence at all** - their only terms link is *"Podmínky
+  užívání aplikace a cookies"*, **application and cookie terms**, which is the
+  New York footer shape. `geoportal.cuzk.cz`'s `podminky_uziti` returns the
+  site's navigation menu, and the `cuzk.gov.cz` product page 404s. **A document
+  with the right name exists and was seen in a nav listing** - *"Podmínky
+  poskytování prostorových dat a síťových služeb ČÚZK"* - but its URL was not
+  found. **Recorded as UNREAD rather than assumed permissive**, and named as
+  Prague's single remaining blocker. Next step: find that document, or use the
+  `licence-read` agent, which is what it is for.
+
+- **Recording is the step that makes a licence read count.** `read-licence`
+  states terms are not established until written down with the date, so all
+  four went into the briefs as they were read rather than being carried in
+  conversation - the failure that the Canada and Mexico country files both
+  demonstrated.
+
+### 2026-09-23 - Hong Kong, Prague and Oslo taken to brief-ready; two cities changed size
+
+- **Three briefs written and every check holds**: `hong-kong.md` 7/7,
+  `prague.md` 3/3, `oslo.md` 3/3. Hong Kong was unblocked by the owner's
+  indemnity acceptance; Prague and Oslo each needed one measurement that the
+  earlier record had named but never taken.
+
+- **Hong Kong's register is the cleanest in the screen and 40% of it is not
+  storefronts.** All three FEHD XML files parse to **35,808 rows exactly**,
+  reproducing the recorded figure, with **100% fill on SS, ADR, TYPE, DIST and
+  EXPDATE** - no other source in this project is complete on every column. But
+  the composition measurement `add-country` demands had never been taken:
+  **`FF` Food Factory is 11,566 rows, 70% of the "other food" register**, and
+  **`TP` Swimming Pool is 1,440, 71% of the non-food register.** Neither is a
+  shopfront. Adding the factories, canteens, cold stores, slaughterhouses and
+  funeral trades, **14,263 rows filter out and the buildable figure is ~21,545,
+  not 35,808.**
+
+- **The master list's description of that register was wrong in two ways.** It
+  named **"Composite Food Shop"**, which is **not a licence type in the file at
+  all**, and it omitted **Food Factory, the single largest type in the register
+  it was describing**. Corrected in the brief.
+
+- **Hong Kong's taxonomy has a catch-all share of ZERO, which nothing else in
+  this project can say.** All 20 licence types name a specific trade, and the
+  code-to-label lookups (`TYPE_CODE`, `DIST_CODE`, `INFO_CODE`) **ship inside
+  the same download**, so there is no external code list to chase and no level
+  to choose. Compare Paris's 19.3% at its finest level and Barcelona's 2.6%.
+  The file also carries `GENERATION_DATE` - **it SELF-ATTESTS**, which Paris's
+  IDFM feed cannot do.
+
+- **A lesson this project recorded from Hong Kong turns out to be wrong.**
+  `organization_show?id=hk-fehd` returns **`package_count: 1`**, and the notes
+  drew from that: *"searching by PROVIDER rather than by keyword is the
+  generalisable move here."* **`package_list` holds 19 `hk-fehd-*` datasets**,
+  including all three registers. The org endpoint's count is unreliable on that
+  portal, so the provider route failed for the same reason the keyword route
+  did. **Enumerate and match locally** remains the move that actually works.
+
+- **ALS measured at 90.8%** on 120 real `ADR` strings, zero throttling at four
+  workers, 3.9 req/s. It returns a confidence `Score`, and **21.1% of hits
+  score between 50 and 75** - so a threshold is needed rather than an average.
+  Unlike Singapore, where 35,064 postcodes collapsed to 7,767 buildings,
+  **Hong Kong's addresses are 1,799 distinct of 1,800**: budget the full
+  ~35,000 lookups, about 2.5 hours.
+
+- **Prague's taxonomy cannot be keyed at a level, which is a shape this project
+  has not met.** `premises-taxonomy` assumes a level can be chosen - Barcelona
+  at its finest, Madrid near the top. **CZ-NACE in RES is stored at RAGGED
+  depth**: of 12,000 active Prague bucket rows, **4.4% carry 2 characters,
+  31.4% carry 3, 6.2% carry 4 and 57.9% carry 5.** `4725` and `47250` both
+  appear; so do `47`, `471` and `47190`. **Only 57.9% reach the finest level
+  and keying at class covers 64.1%.** The module must match on PREFIX and fall
+  back up the hierarchy. The largest single code is **`471` at 30.2%** -
+  *retail in non-specialised stores*, at group level - so nearly a third of the
+  city says only that.
+
+- **Prague's rail question is settled and the Golemio key is NOT needed.** OSM
+  carries **85 relations - 79 tram and 6 subway - and all 85 are named**, 61
+  coloured. That closes gate item 4, which had been recorded as an API key
+  blocking the transit half. `FIRMA` is also **100% populated**, making Prague
+  the only one of Milan, Paris and Prague with a trade name on every row.
+
+- **Oslo's headline number was measuring the wrong address, and the API cannot
+  settle it.** The recorded **152,060 sub-units** is what
+  `?kommunenummer=0301` returns, and that parameter does **not** constrain
+  `beliggenhetsadresse` - the geocoding misses included **Bergen, Copenhagen,
+  Paris and Malmo**. Two follow-up samples then disagreed, **24.5% against
+  4.3% not-in-Oslo**, because brreg stops paging past ~10,000 and sorts by
+  name, so both were drawn from the alphabetical head. **Settled from the
+  88.9 MB bulk file**: 864,903 sub-units streamed, **138,896 physically in
+  Oslo**, of which **13,458 are in NACE 47/56/96**. That is the buildable
+  figure - about 19 per thousand residents, between Madrid's 17 and
+  Barcelona's 37.
+
+- **Oslo's NACE is at UNIFORM depth - 100% at five characters - which is
+  exactly what Prague is not.** The same scheme family produced opposite
+  answers in two countries, which is the argument for measuring rather than
+  inheriting, stated twice in one day. Oslo can pick a level; Prague cannot.
+
+- **Both Prague and Oslo have UNREAD LICENCES, and that is what still blocks
+  them.** CSU's RES and CUZK's RUIAN on one side, Bronnoysund and Kartverket on
+  the other. `vdp.cuzk.gov.cz` answers 200 and carries **no data licence at
+  all** - its only terms link is *"Podminky uzivani aplikace a cookies"*,
+  application and cookie terms, the New York footer shape. Recorded as the
+  named blocker in both briefs rather than assumed permissive, because a
+  government open portal is a reason to expect permissive terms and not
+  evidence of them.
+
+### 2026-09-22 - The cleanup role was written down portably, method only
+
+- **`docs/portable/cleanup-session.md` is this session's method, generalised
+  for a fresh session on a different project.** It carries the role
+  definition, a discovery procedure for finding that project's OWN defect
+  classes, the defect taxonomy as a checklist rather than a starting point,
+  and fourteen rules - prefer a check to a correction; never ship a check you
+  have not watched fail; assert a property rather than re-implementing the
+  computation; a guard nobody arms is worse than none; known gaps must expire;
+  do not correct a dated record; the denominator rule; guard the boundary that
+  is actually wrong; narrow guards survive and broad ones get disabled;
+  fail-open for style and fail-closed for correctness; name the remedy; verify
+  against the shared branch; measure before choosing the fix; and a rule that
+  has failed N times needs a mechanism rather than a restatement.
+
+- **Method only, and that was a scope decision taken against a real
+  constraint.** The weekly usage limit stood at 93% with the owner having
+  already said the remainder was for building. The rejected alternative was to
+  ship generalised runnable scripts alongside it. It was rejected on the
+  merits as well as the budget: `check_provenance.py` is roughly 90% specific
+  to this repository's file shapes, and a stale-claims scanner needs tuning to
+  any new repo's vocabulary anyway - so the scripts are the least portable
+  part, and the method is the asset. The one genuinely universal artifact,
+  `.claude/hooks/block_heredoc.py`, already exists and copies verbatim.
+
+- **Every borrowed example is labelled and de-identified.** The document names
+  no file in this repository, so it cannot rot when this one changes, and a
+  reader cannot mistake an illustration for an instruction about their own
+  project. Verified against this repo's own checks: no markdown link to break,
+  and `check_stale_claims.py` reports nothing against it, because the counts
+  in it are dated or over closed sets - the denominator rule applied to the
+  document that states it.
 ### 2026-09-22 - The scaffold now refuses an unregistered region instead of documenting it
 
 - **`scaffold_city.py` gains `--new-region`, a refusal gate and an import
@@ -326,6 +959,59 @@ onwards; the early ones are split by phase rather than by hour.
   future validator would have failed the same silent way. This costs one
   subprocess and catches the next one too - at the moment the caller still has
   the context to fix it, rather than at a merge.
+
+### 2026-09-22 - Hong Kong's indemnity accepted, and re-reading it found two omissions
+
+- **The owner ACCEPTED Hong Kong's indemnity on 2026-09-22**, unblocking the
+  strongest unbuilt city in the screen - **35,808 licensed premises, 100%
+  carrying BOTH a trade name and an address**, and the best rail anywhere in
+  the screen at 126 relations, 125 named and 117 coloured. It is **the only
+  uncapped liability in this project**, and it was priced deliberately rather
+  than waved through: **probability low, magnitude unbounded**, which is
+  precisely the combination that gets mis-priced.
+
+- **Re-reading the live clause rather than the project's own citation of it
+  found two things the record had omitted** - which is the exact failure
+  `read-licence` was written for, now on this project's own notes rather than
+  on a publisher's. First, the causation is *"arise **directly or
+  indirectly**"*, and the earlier quote elided it. Second, and more
+  materially, **there is no notice-and-defend clause**: the Government need not
+  tell the indemnifier a claim exists, there is no right to control or join the
+  defence, and nothing obliges them to mitigate or seek consent before
+  settling. Most commercial indemnities temper exposure exactly there.
+
+- **The disclaimer and the indemnity are a deliberate pair, and that is the
+  sharpest fact in the terms.** The *Disclaimer and Limitation of Liability*
+  section expressly disclaims any warranty of **non-infringement**, and that
+  same section caps the GOVERNMENT's liability to the user, not the user's to
+  the Government. **So the publisher does not promise the Data is clean and the
+  user indemnifies them if it is not**, one-directionally and without a cap.
+
+- **What made acceptance reasonable is the SCOPE, not the likelihood.** The
+  indemnity reaches *"infringement of the rights of any person"* - not general
+  liability, and not "anything that goes wrong because of the map". A third
+  party must assert *their own rights* against the Government over this
+  project's use of a **government public register** republished with the
+  attribution the same paragraph requires. The project's standing commitment to
+  **honour removal requests without argument** cuts off the likeliest
+  escalation before it can become a claim, which is a risk control that already
+  existed rather than one invented for this decision.
+
+- **Three conditions were accepted with it and bind the build.** (1) Display
+  all three elements of the same paragraph exactly - source identification,
+  acknowledgement of Government IP ownership, and attribution to DATA.GOV.HK -
+  because **unattributed use is the most likely way to draw a complaint at
+  all**. (2) Run `check_personal_exposure.py` and exclude catch-all categories,
+  the Los Angeles NAICS 812990 precedent, because the realistic complainant is
+  an individual whose name sits at what looks like a home. (3) This record.
+  Written into `docs/data_sources.md` beside the clause.
+
+- **Accepting Hong Kong's does NOT accept Lyon's**, though they are the same
+  shape. Lyon's Grand Lyon CGU 9.4 was recorded as the project's second
+  indemnity, but Lyon carries two further gates - an account this project does
+  not create, and a trademark clause colliding with the on-map line-label
+  invariant - so it stays deferred on those grounds regardless. Recorded so the
+  two are not silently coupled later.
 
 ### 2026-09-22 - Paris's two owner calls settled, and commune-only costs it no transit system
 

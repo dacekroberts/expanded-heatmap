@@ -459,6 +459,121 @@ Desktop is unaffected — the label is fully visible there.
   official layer on ArcGIS. Any of these needs a proper per-portal check before
   being written off.
 
+### Brief-ready, not started — ordered checklists, 2026-09-23
+
+**These five have a brief with passing checks and no item here until now.**
+Each list is in build order and every line is a measurement, not a template
+step. Briefs: `docs/build_briefs/<city>.md`. Run
+`python scripts/brief_check.py <city>` first — a brief caches Step 0's
+mistakes as confidently as its findings.
+
+- [ ] **Paris** 🇫🇷 — brief 7/7, **both owner calls settled**
+  (commune-only; Milan-hybrid pins). Country facts in
+  `pipeline/countries/france.py`; **five more French cities inherit them, so a
+  correction belongs there, not in the city.**
+  1. Fetch the **parquet**, not the zip — 2,210 MB vs 2,867 MB, and columnar,
+     so step 2 reads ten columns of fifty-four.
+  2. Match the resource title **with its trailing ` -`**, or
+     `StockEtablissementHistorique` matches too. **Never `StockUniteLegale`** —
+     30,020,346 legal units keyed on `siren`, the registered-office map.
+  3. Filter `codeCommuneEtablissement` prefix **`751`**, active =
+     **`"A"`, not `"Actif"`** — the label returned zero rows for all six
+     cities. **Run Paris first as a control against 148,633.**
+  4. Join the geolocation parquet on `siret`. **Read the `epsg` COLUMN** — it
+     is per row; 2154 here, 2975/5490/2972 overseas.
+  5. **Exclude distance selling: `47.91A`, `47.91B`, `47.99A`, `47.99B` —
+     15.5% of bucket rows, no storefront.**
+  6. Taxonomy keys at **sous-classe** (catch-all 19.3%; *groupe* would be
+     49.4%). `96.09Z` alone is 8.6%.
+  7. Pins: **premises name where it exists, address otherwise.** **Do NOT
+     build the legal-name join** — settled 2026-09-22.
+  8. Rail: **IDFM's own feed only**. **Record the download date in
+     `fetch_sources.py`** — there is no `feed_info.txt`, and Licence
+     Mobilités Art. 5.7 requires the date and update interval on the page.
+  9. Notices: Art. 5.4 text **with both hyperlinks**, plus snapshot date and
+     update interval. Region **`Europe`**.
+  10. Open: whether the annual *déclaration de conformité* applies — a
+      **recurring** obligation, so ask rather than assume.
+
+- [ ] **Hong Kong** 🇭🇰 — brief 7/7, **indemnity ACCEPTED
+  2026-09-22** with three binding conditions.
+  1. Three XML registers from `fehd.gov.hk/english/licensing/license/text/`.
+     100% fill on `SS`, `ADR`, `TYPE`, `DIST`, `EXPDATE`.
+  2. **Filter out the 14,263 non-storefronts**: `FF` Food Factory (11,566),
+     `TP` Swimming Pool (1,440), `FG`, `FE`, `FC`, `FM`, `TU`, `TF`, `TO`,
+     `TS`. **35,808 → ~21,545.**
+  3. Taxonomy: **flat, 20 types, catch-all 0%**, and `TYPE_CODE` ships inside
+     the download. No level to choose — no module work beyond the mapping.
+  4. Geocode via ALS. **Budget ~35,000 lookups**: addresses are 1,799 distinct
+     of 1,800, so unlike Singapore they do **not** collapse. ~2.5 h at the
+     measured 3.9 req/s.
+  5. **Set a Score threshold** — 21.1% of hits score 50–75. Decide what
+     happens below it.
+  6. **`check_personal_exposure.py`, catch-alls excluded** — indemnity
+     condition 2, a risk control rather than a formality.
+  7. Notices: **source + Government IP acknowledgement + DATA.GOV.HK**, all
+     three, exactly.
+  8. ⚠️ **Needs a NEW map region** — owner/app call. It is not Europe.
+  9. Open: whether `EXPDATE` should filter; the `INFO` field's 6-code lookup.
+
+- [ ] **Prague** 🇨🇿 — brief 5/5, **both licences read
+  2026-09-23**, nothing licence-shaped blocks it.
+  1. ⚠️ **Take the RÚIAN URL from the ATOM service**, not a hard-coded
+     path: `atom.cuzk.gov.cz/get.ashx?theme=RUIAN-CSV-ADR-OB&spatial_dataset_identifier_code=CZ-00025712-CUZK_RUIAN-CSV-ADR-OB_554782`.
+     It sidesteps the VDP application's ban on automated extraction **and**
+     fixes the `20260831` path, which goes stale on the 1st of every month.
+  2. Stream RES, `OKRESLAU == "CZ0100"`, active = `DDATZAN` empty.
+     `FIRMA` is **100%** — a name on every row, unlike Milan or Paris.
+  3. Join `KODADM` → coordinates (99.8%). **`EPSG:5513` with (X, Y) as
+     published** — the wrong orderings land in Germany and the Arctic
+     **without erroring**.
+  4. ⚠️ **Taxonomy must match on PREFIX** — CZ-NACE is ragged: 4.4% at 2
+     chars, 31.4% at 3, 6.2% at 4, 57.9% at 5. **No level can be keyed.** This
+     has no precedent here; the four existing local taxonomies all had uniform
+     depth.
+  5. Rail: **OSM, 85 relations, all named** — the Golemio key is **not**
+     needed. **Assign colours to the 24 without one**; every drawn line needs a
+     label and a legend entry.
+  6. Notices — **five obligations across two publishers**, and **two are
+     transformation disclosures**: ČÚZK's literal **`ČÚZK, 2026`** + a link to
+     its conditions + *"popis úpravy"*; ČSÚ's licence link + derived-data
+     marking. They may share one sentence only if it names both.
+  7. Open: whether to apply the `KATPO` employee filter (85,022 → 38,575);
+     scope beyond `CZ0100`.
+
+- [ ] **Oslo** 🇳🇴 — brief 3/3, **both licences read** (NLOD +
+  CC BY 4.0).
+  1. ⚠️ **Take the bulk file, and filter
+     `beliggenhetsadresse.kommunenummer` LOCALLY.** The API's
+     `?kommunenummer=0301` does **not** constrain the address you read — the
+     misses were Bergen, Copenhagen, Paris and Malmö — and it stops paging
+     past ~10,000 sorted by name, so it **cannot** settle scope.
+     **138,896 in Oslo; 13,458 in the buckets.**
+  2. Read `adresse` as a **LIST**; skip `c/o`, `postboks`, `pb`.
+  3. Geocode two-stage: exact `adressetekst`, then plain `sok` (**97.8%**).
+     ⚠️ **NEVER `fuzzy=true`** — it returned `Karenslyst allé 8B` as
+     `allé 1B`, a different building.
+  4. Taxonomy: **uniform 5-char depth**, so a level CAN be keyed — but
+     **run `taxonomy_catchall` first**; it has not been computed. `96990` is
+     the visible residual at 6.0%.
+  5. ⚠️ **Rail is UNMEASURED** — probe Entur vs OSM. Three Overpass
+     endpoints errored, so Oslo's station count is **missing, not zero**.
+  6. Notices: **NLOD and CC BY 4.0 are different licences — two attribution
+     lines, not one credit.**
+  7. Open: whether `navn` is a trade name or a legal name — the question that
+     caught Milan and Paris.
+
+- [ ] **Göteborg** 🇸🇪 — promoted into Band D 2026-09-23. **One
+  measurement away from being comparable to Stockholm.**
+  1. ⚠️ **Get `Livsmedelsverksamheter`'s row count.** Its DCAT node exposes
+     **no `accessURL`** and `resource/18` returns RDF, so the file was not
+     reached. **Until this is taken, Stockholm's measured 8,146 is the stronger
+     number** and "better data than Stockholm" stays structural, not measured.
+  2. `Restauranger med serveringstillstånd` is **1,043 rows, CC ZERO**, with
+     `Namn` and **`Besöksadress`** kept distinct from `Fakturaadress`.
+  3. Then: **the one-bucket scope decision, which now covers Stockholm, Zurich
+     AND Göteborg** — one call, three cities.
+
 ## Structure
 
 - [ ] **Re-render `outputs/dublin/heatmap.html` so the Use tooltip drops the

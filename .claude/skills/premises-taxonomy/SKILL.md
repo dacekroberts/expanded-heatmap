@@ -5,8 +5,10 @@ description: Build a city's classification module when its register uses a local
 
 # Building a city's own taxonomy
 
-Distilled from the four cities that needed one — Chicago, Edmonton, Madrid and
-Barcelona — plus the two national schemes, SCIAN and NAICS. Read `add-city`
+Distilled from the first four cities that needed one — Chicago, Edmonton,
+Madrid and Barcelona — plus the two national schemes, SCIAN and NAICS. More
+have needed one since (Dublin's `dublin_uses`, Milan's `milan_source`); the
+four are where the method came from, not the whole list. Read `add-city`
 Step 1 first: this is that step when the answer is "the city has its own
 system", which is most non-US cities and several US ones.
 
