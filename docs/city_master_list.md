@@ -284,7 +284,7 @@ measured.
 ## 🟠 Band C — geocoding at national scale (16 cities)
 
 **The investment tier.** These share one property that separates them from
-Band C: the address work is a project rather than a step, and it is worth
+Band B: the address work is a project rather than a step, and it is worth
 doing only because the machinery, once written, is reused across many
 cities. Japan is ten cities from one schema; Brazil is two from one register.
 
@@ -348,12 +348,14 @@ is how a candidate disappears without anyone deciding to drop it.
 
 ## 🟣 Band D — one bucket only: complete, but narrower than the others (3 cities)
 
-**Screening is COMPLETE for both, and both passed.** Each has a real
+**Screening is COMPLETE for all three, and all three passed.** Each has a real
 premises-level register with coordinates, current data and a usable licence.
-What neither has is a **second bucket** — and the owner's bar is that two is
-acceptable and one is not.
+What none of them has is a **second bucket** — and the owner's bar is that two
+is acceptable and one is not. **Göteborg joined Stockholm and Zurich here on
+2026-09-23**, probed to the same depth, which is why this caption no longer
+says "both".
 
-**This is not "we could not find a second register".** Both negatives were
+**This is not "we could not find a second register".** All three negatives were
 re-established on 2026-09-22 by **enumerating the whole catalogue** rather
 than searching it, because the original negatives rested on keyword searches
 and that is the method that has failed this project most often — Stockholm's
