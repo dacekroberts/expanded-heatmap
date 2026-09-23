@@ -21,30 +21,146 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [ ] **🇫🇷 PARIS — scaffolded on branch `paris-build`, steps 1 and 2 unwritten.**
+
+  Three commits: `5e0e3c6` (the national `france_naf` taxonomy, the scaffold,
+  Lambert-93), `ab47e24` (the decision record), `28b3b91` (the three source
+  rows and notice 24). Step 0 is banked in `docs/build_briefs/paris.md` (7/7)
+  and the national facts in `pipeline/countries/france.py`; **both owner calls
+  are settled** — commune-only scope, and the Milan hybrid for pin names. What
+  follows is only what is specific to Paris; everything generic is `add-city`
+  from Step 4.
+
+  ⚠️ **DO NOT MERGE THIS BRANCH TO MASTER UNTIL THE BUILD FINISHES.** Paris is
+  already an entry in `app/cities.py`, so a merge now puts a Paris marker on
+  the macro map pointing at a page with no `outputs/paris/heatmap.html` behind
+  it. This is the one item on this list that breaks the live site rather than
+  delaying it.
+
+  1. **`fetch_sources.py`** — three downloads, and one deliberate non-download.
+     IDFM's GTFS (`eu.ftp.opendatasoft.com/stif/GTFS/IDFM-gtfs.zip`), SIRENE
+     `StockEtablissement` **parquet** (2,210 MB — not the 2,867 MB ZIP) and
+     INSEE's geolocation parquet (811 MB). **`StockUniteLegale` is NOT needed**:
+     it exists to feed the natural-person suppression guard, and the Milan
+     hybrid removes the legal-name fallback that guard protected, so the 30 M
+     row file is not downloaded at all. ⚠️ **Record the download date**: the
+     feed carries no `feed_info.txt`, so nothing inside the artifact declares
+     when it was current, and notice 24 (Art. 5.7) requires both that date and
+     the update interval to be *displayed*. Capture them here or they cannot be
+     shown honestly later.
+  2. **`step1_stations.py`** — `route_type 1` only. Commuter rail (RER,
+     Transilien) and tram are excluded by standing rule, not by scope, so the
+     boundary is not what drops them. ✅ MEASURED 2026-09-23: **245 inside the
+     commune and 76 outside**, all 16 lines surviving. (The brief predicted 77
+     outside and 322 total; the feed gives 76 and 321. The inside count
+     reproduced exactly.) The 76 go to
+     `outputs/paris/excluded_stations.csv`, which
+     `app/pages/21_Paris_Heatmap.py` **already cites** — `check_provenance.py`
+     stays red until it exists. Naming the commune each excluded station sits
+     in needs a multi-commune layer, so this is **Los Angeles' step 1 shape,
+     not San Diego's**; `geo.api.gouv.fr` can resolve the names.
+  3. **`step2_clean_businesses.py`** — the traps are all measured, and each one
+     fails silently rather than loudly:
+     - active is the **letter `A`**, never the label `Actif` (which returns
+       zero rows for all six French cities — keep Paris as the control);
+     - `codeCommuneEtablissement` prefix **`751`**;
+     - `statutDiffusionEtablissement == "O"` (13.4% masked at source);
+     - join geolocation on `siret`, and **read the per-row `epsg` column**
+       rather than hard-coding 2154 — the DOM values are real;
+     - drop `qualite_xy` **class 33**, which is commune-centroid grade and must
+       not be drawn as a street address;
+     - name = `enseigne1Etablissement` or `denominationUsuelleEtablissement`,
+       **else the address** (42.9% carry either; Paris is the worst-named of
+       France's six cities).
+  4. **Two measurements this build owes, both currently unmeasured.** The
+     market-stall codes `47.81Z/47.82Z/47.89Z` are excluded in `france_naf.py`
+     on reasoning whose supporting share **nobody has counted** — count it, and
+     if it is large, re-take the call rather than leaving the footnote. And
+     sample the five `CATCH_ALL_CODES`, `96.09Z` first at **8.6%** of bucket
+     rows, then put the verdict in `pipeline/paris/config.py` as an exclusion
+     list. The national module deliberately does not make either call.
+  5. **`step3_map.py`** — 16 `LINE_SHAPES`, each with the name riders use
+     (M1–M14 plus 3bis and 7bis, which are separate lines and not variants).
+     ⚠️ **IDFM's network plans are CC BY-NC-ND 3.0 France**: redraw from
+     `shapes.txt` only, and use no IDFM schematic as a source or an overlay.
+     `label_focus` is the commune polygon.
+  6. **Checks, in order.** Add Paris to `scripts/check_personal_exposure.py`'s
+     `REGISTRIES` and run it; `drift_check.py paris`; `check_provenance.py`
+     (two failures are currently **correct** and must clear by being *fixed*,
+     not relaxed — the missing CSV, and `city_master_list.md` still saying
+     `Built - 20`, which becomes true to bump only once Paris really is built);
+     **measure** Paris's macro-map label width in a real browser with Space
+     Grotesk loaded and add it to `check_macro_labels.py` (it refuses a guessed
+     width); `check_deploy_imports.py --ref paris-build`; then `deploy-verify`
+     with scope `city-added`, and a **reboot** after the push.
+  7. **Page prose carries two obligations no other city's does.** Notice 24
+     needs the snapshot date and update interval *displayed*, and Art. 5.7's
+     duty is the inverse of MTA's — it requires **exhaustivité**, so the page
+     must state what was excluded (commuter rail, tram, the 77 out-of-commune
+     stations) rather than leave it implicit. Art. 5.4(a) also prescribes the
+     **linking**, which `render_site_notices()` has never had to do.
+
+  **Still open, none of it blocking:** whether `enseigne1` or
+  `denominationUsuelle` wins when both are present (cosmetic now that neither
+  path reaches a person's name); whether the annual *déclaration de conformité*
+  applies to a static density map (L. 1115-5 — worth asking
+  `donnees-mobilite@autorite-transports.fr` rather than assuming, because it
+  creates a *recurring* duty); and IDFM's own licences page contradicting the
+  NAP by calling its *tracés* Licence Ouverte, where **the stricter reading was
+  adopted deliberately** and would change this city's notice if ever relied on.
+
+
 - [ ] **🇫🇷 Validate the SIRENE storefront filter against OSM in the FIRST
   non-Paris French city built — not in all five, and not skipped.**
 
   Measured 2026-09-22: **geolocation is confirmed for all six French cities**
   (Paris 99.98%, Lyon 99.97%, Marseille 99.91%, Rennes 99.90%, Toulouse
   99.85%, Lille 99.71%), so there is no geocoding leg anywhere in France.
-  **What is still Paris-only is the composition check** — that the employee
+  **What is still Paris-only is the composition check** — that the storefront
   filter selects the *right rows*, not merely rows that have coordinates.
 
-  In Paris it landed at **50,156 against OSM's 54,198** (92.5%), and
-  **10,595 against 10,642** on restaurants alone. That comparison is what
-  turned France from a rejection into a build, and it has been run in exactly
-  one city.
+  ⚠️ **THE ORIGINAL COMPARISON IS SUPERSEDED. Re-run it, do not inherit it.**
+  This item read "**50,156 against OSM's 54,198** (92.5%), and **10,595 against
+  10,642** on restaurants alone" and called that the comparison that turned
+  France from a rejection into a build. **The SIRENE side of it cannot be
+  reproduced.** It was attributed to an employee filter, and measured
+  2026-09-23 over all 149,166 Paris bucket rows, `trancheEffectifs` is `NN` on
+  **77.3%** of them — so every banded row together is 33,918 and no predicate
+  on that column reaches 50,156.
+
+  Re-established from scratch 2026-09-23, same commune, this project's own
+  Overpass helper:
+
+  | | OSM | SIRENE | ratio |
+  |---|---|---|---|
+  | Total | **48,973** | **87,164** | **1.78×** |
+  | `amenity=restaurant` vs NAF `56.10A` | **9,058** | **16,280** | 1.80× |
+
+  The **OSM side reproduces** (48,973 against the recorded 54,198, and 9,058
+  against 10,642 — my tag set is slightly narrower). The **SIRENE side does
+  not**: 16,280 against a recorded 10,595, on the one definition where the two
+  schemes mean the same thing.
+
+  **What this does and does not overturn.** France remains a build — register,
+  join, coverage and licence are untouched. What falls is the *claim* that
+  SIRENE lands at 92.5% of OSM; it is about 1.78× of it. The residual is
+  disclosed on the city page rather than filtered away, because tuning until
+  the number matched OSM is what produced 50,156.
+  ⚠️ `docs/global_country_shortlist.md`'s France row still rests on the old
+  figure and needs the same correction.
 
   **Why this is a checklist item and not a paragraph:** the two halves are
   easy to conflate, and the geolocation half is now so clean that it invites
-  treating the whole country as settled. It is not. Run the OSM comparison
-  once, on whichever city is built after Paris, and if it holds there, the
-  national claim is evidenced twice and can stand for the rest.
+  treating the whole country as settled. It is not. Run the OSM comparison on
+  whichever city is built after Paris — **now genuinely a second data point
+  rather than a confirmation**, since the first one turned out to be wrong.
 
-  Storefront layers, for sizing the comparison: Paris 50,156, Marseille
-  8,065, Lyon 7,354, Toulouse 4,833, Lille 3,272, Rennes 2,089. **Rennes and
-  Lille are an order of magnitude below Paris** — a separate scope call about
-  whether a ~2,000-point city earns a page, not a data problem.
+  Storefront layers, for sizing the comparison: **Paris 87,164 (measured)**;
+  Marseille 8,065, Lyon 7,354, Toulouse 4,833, Lille 3,272, Rennes 2,089 —
+  ⚠️ **the five follower figures are scaled from the same superseded basis as
+  50,156 and should be treated as ordering hints only.** **Rennes and Lille are
+  an order of magnitude below Paris** — a separate scope call about whether a
+  ~2,000-point city earns a page, not a data problem.
 
 
 - [x] **Region switcher on the macro map — DONE 2026-09-22 (`2121ada`).**
@@ -391,7 +507,9 @@ mistakes as confidently as its findings.
      30,020,346 legal units keyed on `siren`, the registered-office map.
   3. Filter `codeCommuneEtablissement` prefix **`751`**, active =
      **`"A"`, not `"Actif"`** — the label returned zero rows for all six
-     cities. **Run Paris first as a control against 148,633.**
+     cities. **Run Paris first as a control against 149,166** (re-measured
+     2026-09-23 over the whole file; the brief's 148,633 was 0.36% lower, a
+     month's churn rather than an error).
   4. Join the geolocation parquet on `siret`. **Read the `epsg` COLUMN** — it
      is per row; 2154 here, 2975/5490/2972 overseas.
   5. **Exclude distance selling: `47.91A`, `47.91B`, `47.99A`, `47.99B` —

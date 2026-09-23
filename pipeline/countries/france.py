@@ -53,7 +53,36 @@ STATE_ACTIVE_VALUE = "A"
 
 COMMUNE_COLUMN = "codeCommuneEtablissement"   # the ONE per-city variable
 NAF_COLUMN = "activitePrincipaleEtablissement"
-NAF25_COLUMN = "activitePrincipaleNAF25Etablissement"  # NAF 2025, newer scheme
+
+# NAF 2025, the newer scheme - PRESENT, AND DELIBERATELY NOT USED.
+#
+# This was a bare constant with a one-line comment until 2026-09-23, which is
+# how a real question hid in plain sight: `pipeline/taxonomies/france_naf.py`
+# keys entirely on rev. 2, so if SIRENE had migrated, the taxonomy was built on
+# the wrong column. Measured over HTTP range requests against the September 2026
+# release - 6 requests, 2.6 MB, no 2.2 GB download:
+#
+#     column                                  whole row group   active Paris
+#     activitePrincipaleEtablissement                  100.0%         100.0%
+#     activitePrincipaleNAF25Etablissement              37.5%         100.0%
+#
+# THE CODES ARE NOT INTERCHANGEABLE. The sous-classe letter differs - rev. 2
+# writes `01.11Z` where NAF 2025 writes `01.11Y` - so france_naf.py's 64
+# mappings would match nothing and `classify()` would return None for every
+# row, emptying the map rather than raising.
+#
+# Rev. 2 wins on three counts: it is 100% populated everywhere rather than only
+# on the active slice, it is what INSEE's published label file
+# (`int_courts_naf_rev_2.xls`) covers, and it is what the taxonomy's deciding
+# catch-all measurement (19.3% at sous-classe) was taken against.
+#
+# ⚠ WATCH ITEM, not an action: if INSEE deprecates rev. 2 in a future monthly
+# release, this decision reverses and france_naf.py needs a NAF 2025 mapping
+# built from INSEE's 2025 label file. The 37.5% figure is the thing to re-read -
+# it rising toward 100% is the migration happening.
+NAF25_COLUMN = "activitePrincipaleNAF25Etablissement"
+NAF25_IN_USE = False
+NAF25_POPULATED_MEASURED = {"all_rows": 0.375, "active_paris": 1.000}
 
 # The trade name, and why there are two of them. See the naming note below.
 ENSEIGNE_COLUMNS = ("enseigne1Etablissement", "enseigne2Etablissement",
@@ -351,12 +380,34 @@ DISCARDED = {"lyon": "account + CGU 9.4 indemnity + CGU 6.2 trademark + dead NAP
 PARIS_GTFS_PROVENANCE_RESOLVED = True
 PARIS_GTFS_URL = "https://eu.ftp.opendatasoft.com/stif/GTFS/IDFM-gtfs.zip"
 
-# It SELF-ATTESTS, which is the property `add-country` requires before a feed
-# is trusted: `metadata.end_date` 2026-10-21, and it declares its own
-# `features` - "position des stations", "topologie du reseau", "traces de
-# lignes" - and `modes`: bus, tramway, subway, funicular, gondola, rail.
-# The declared end_date also supplies the UPDATE INTERVAL that Art. 5.7 and the
-# MMTIS reglement require this project to display.
-PARIS_GTFS_SELF_ATTESTS = True
+# ⚠ CORRECTED 2026-09-23. This said True, and it was wrong.
+#
+# `add-country`'s rule is that a feed is trusted when THE ARTIFACT self-attests
+# to its own freshness. This one does not: `brief_check.py`'s
+# `idfm-gtfs-has-shapes-and-no-feed-info` measured **14 files and NO
+# feed_info.txt**, so the zip declares no validity window at all. The
+# `end_date` of 2026-10-21 is real but it is `transport.data.gouv.fr`'s
+# metadata ABOUT the feed - the NAP's assertion, not the file's - and that is
+# precisely the weaker thing `add-country` tells these two apart for: *a mirror
+# is usable when the artifact self-attests, and is not when you must take the
+# mirror's word.*
+#
+# The feed is still the right one; provenance was never the question, since the
+# host is IDFM's own (`stif/` on Opendatasoft). What changes is HOW STALENESS
+# IS DETECTED - from the NAP metadata or a content hash, never from the zip -
+# and it changes a COMPLIANCE item, which is why this constant matters beyond
+# bookkeeping: notice 24 (Licence Mobilites Art. 5.7) requires this project to
+# DISPLAY the data's last-updated date and its update interval, and neither
+# value exists inside the artifact. `fetch_sources.py` must capture both at
+# download time or they cannot be shown honestly.
+#
+# The `features` and `modes` declarations quoted in the old comment are real,
+# but they are NAP metadata too - they describe the feed, they do not date it.
+PARIS_GTFS_SELF_ATTESTS = False
+
+# Where the two Art. 5.7 values actually come from, since the artifact has
+# neither. Recorded here rather than in Paris's config because all five cities
+# of BUILD_SEQUENCE read this feed's publisher under the same licence.
+PARIS_GTFS_FRESHNESS_SOURCE = "transport.data.gouv.fr NAP metadata, not the zip"
 
 SOURCE_ENCODING = "utf-8"

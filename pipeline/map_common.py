@@ -454,6 +454,26 @@ PHONE_FIT_SCRIPT = """
         var el = m.getContainer();
         var w = document.documentElement.clientWidth || window.innerWidth;
         var target = Math.min(w, MAP_W);
+        // A ZERO TARGET IS ALWAYS A BAD MEASUREMENT, NEVER A REAL WIDTH.
+        //
+        // Added 2026-09-23 after Paris rendered BLANK on first load, with
+        // `width: 0px` written onto the container and Leaflet.heat throwing
+        // "IndexSizeError: getImageData ... source width is 0". A pass that
+        // runs before the document has laid out reads clientWidth 0, and the
+        // old code wrote that straight through.
+        //
+        // It is the same RACE the else branch below documents for Edmonton -
+        // intermittent, not specific to a city, and the same page reloaded
+        // rendered correctly - but this manifestation is worse: a narrow fit
+        // is a bad view, a zero width is no map at all plus a console error.
+        // Paris is the city that exposed it because it is the heaviest map
+        // here (84,125 points), which widens the window before layout settles.
+        //
+        // Returning leaves the container alone for the later passes - immediate,
+        // rAF, 120 ms, 400 ms, 1200 ms and resize - one of which measures a
+        // laid-out document. Correct renders are untouched, because `target` is
+        // only 0 when the measurement is meaningless.
+        if (!target) return;
         if (Math.abs(el.getBoundingClientRect().width - target) < 1) return;
         el.style.width = target + "px";
         document.body.style.width = target + "px";

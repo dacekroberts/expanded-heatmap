@@ -2204,6 +2204,35 @@ registers, and SIRENE includes every office, depot and administrative site
 alongside the shopfronts. That is a design question to settle **before** a
 screen, not after.
 
+**MEASURED 2026-09-23, when Paris was built — the structural worry above is now
+evidenced rather than asserted.** Against OpenStreetMap's mapped shops inside
+the same commune:
+
+| | OSM | SIRENE | ratio |
+|---|---|---|---|
+| Total | 48,973 | 87,164 | **1.78×** |
+| Personal services | 4,866 | 12,099 | 2.49× |
+| `amenity=restaurant` vs NAF `56.10A` | 9,058 | 16,280 | 1.80× |
+
+Some of that is OSM being incomplete and some is the register including
+premises a passer-by would never see; **nothing in the data separates them**,
+which is precisely the "wrong shape" cost, quantified. Two catch-all codes
+asserting no premises were excluded on INSEE's own class labels, which moved
+personal services from 4.40× to 2.49× and left retail untouched. The residual
+is disclosed on the city page rather than filtered away.
+
+⚠️ **This supersedes the figure France was originally approved on.** An earlier
+pass recorded "50,156 storefronts, 92.5% of OSM" and attributed the filter to
+`trancheEffectifsEtablissement`. That number is **not reproducible**: `NN` is
+77.3% of Paris's bucket rows, so every banded row together is 33,918 and no
+predicate on that column reaches 50,156. France is still a build — register,
+join, coverage and licence are untouched — but a 0.93× match was never real.
+
+**Carry this to the next national register rather than re-learning it.** Mexico's
+DENUE and Norway's `beliggenhetsadresse` are the same shape, and the lesson is
+that a national establishment register over-counts storefronts by a factor no
+filter in the register itself can remove.
+
 ### South Korea — ideal data, no catalogued feed
 
 **MEASURED.** **195 local-government permit types** consolidated onto

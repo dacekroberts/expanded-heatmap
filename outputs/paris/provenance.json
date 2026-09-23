@@ -1,0 +1,14 @@
+{
+  "fetched_utc": "2026-09-23T17:36:24+00:00",
+  "gtfs_url": "https://eu.ftp.opendatasoft.com/stif/GTFS/IDFM-gtfs.zip",
+  "boundary_url": "https://geo.api.gouv.fr/communes/75056?geometry=contour&format=geojson",
+  "nap": {
+    "dataset_title": "Réseaux urbains et interurbains d'Île-de-France Mobilités (IDFM)",
+    "dataset_id": "6449c52caeceb71273a42dd3",
+    "page_url": "https://transport.data.gouv.fr/datasets/reseau-urbain-et-interurbain-dile-de-france-mobilites",
+    "licence": "mobility-licence",
+    "updated": "2026-09-23T01:03:05.837234Z",
+    "start_date": "2026-09-20",
+    "end_date": "2026-10-22"
+  }
+}
