@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**229 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**230 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Brazil needs no geocoder: its census address file is a premises survey, and nine cities join Band A](#2026-09-23---brazil-needs-no-geocoder-its-census-address-file-is-a-premises-survey-and-nine-cities-join-band-a)
 - [The master list's summaries drifted while its sections stayed right; Cairo leaves the discards](#2026-09-23---the-master-lists-summaries-drifted-while-its-sections-stayed-right-cairo-leaves-the-discards)
 - [The stop-spacing test runs, and its own controls disprove it](#2026-09-23---the-stop-spacing-test-runs-and-its-own-controls-disprove-it)
 - [CORRECTION: a tram-only city is NOT unbuildable, and seven built cities draw trams](#2026-09-23---correction-a-tram-only-city-is-not-unbuildable-and-seven-built-cities-draw-trams)
@@ -268,6 +269,97 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Brazil needs no geocoder: its census address file is a premises survey, and nine cities join Band A
+
+- **Brazil's business leg moved from CNPJ to IBGE's CNEFE 2022, and its
+  geocoding leg disappeared.** CNEFE, the census address file, records every
+  non-residential address with `DSC_ESTABELECIMENTO` - the enumerator's
+  identification of the establishment - and a coordinate taken at the address
+  (`NV_GEO_COORD = 1` on 95-99.9% of mapped rows). It was downloaded to
+  measure a geocoding JOIN, and turned out to make both CNPJ and the geocoder
+  unnecessary. **The generalisable move: before building a geocoder, look for
+  an address file that already carries the coordinate** - RUIAN, DAWA and now
+  CNEFE each turned "a geocoding project" into a join or into nothing.
+
+- **CNPJ is geo-blocked, which is a publisher's choice and not routed around.**
+  The old `dados_abertos_cnpj/` directory has returned 404 since 2026-01-30;
+  the files now sit in a Nextcloud share (`index.php/s/YggdBLfdninEJX9`). From
+  16 check nodes, **the Brazilian one answered 200 and all 15 others, in 12
+  countries, were reset**. A Brazilian proxy or VPN was rejected outright: it
+  would circumvent an access control. The four-cause check found two causes
+  at once - the data had MOVED and the host REFUSES - which is why neither
+  alone explained the evidence.
+
+- **The owner chose city registers before a CNPJ mirror, and both cities
+  measured negative.** Sao Paulo: 483 CKAN packages read by eye and 483
+  GeoSampa layers, no business register. Rio: 9,879 public ArcGIS items led
+  to `Fazenda/ISSQN`, whose tables are counts per street x activity group x
+  year of concession - the aggregate trap, and a flow rather than a stock.
+
+- **Taxonomy: free text, so `premises-taxonomy`'s explicit-home rule was
+  adapted rather than applied.** Rio alone has 118,684 distinct descriptions.
+  `scripts/screen_cnefe.py` uses ordered keyword rules on the NAICS bucket
+  boundaries every built city uses (car washes, auto repair, gyms and repair
+  shops OUT; a bakery is RETAIL on the Dublin/Vancouver/Milan precedent), with
+  two design decisions pinned by import-time checks: **the head noun wins**
+  (the earliest match in the string), because the first version would have
+  dropped `BAR DO CLUBE`, `DELICIAS DA PRACA` and `RESTAURANTE DO HOTEL` as a
+  club, a square and a hotel; and **vacancy wins wherever it appears**
+  (`LOJA FECHADA`). An edit-distance pass over unmatched rows recovered
+  enumerator misspellings (`RESTAUTANTE`, `CABELEIRO`, `GARRAGEM`): 2,345 rows
+  in Rio, 8,188 in Sao Paulo.
+
+- **The catch-all is 19.7-29.2% and cannot go a level deeper, because there
+  is no deeper level.** What remains is mostly bare trade names with no
+  category word, dropped rather than assigned to Retail - the guess the skill
+  forbids. **Its share varies by neighbourhood, and that is the finding to
+  carry**: 13% in Sao Paulo's periphery against 31% in Pinheiros, 15% against
+  36% in Rio's Barra da Tijuca, and **48% in Brasilia's Asa Sul**. Affluent
+  commercial districts use brand names, so the map under-draws them. Every
+  Brazilian page must say so.
+
+- **Licence: PERMITTED WITH CONDITIONS, by federal law rather than by any
+  IBGE document** (Decree 8.777/2016 art. 4, Lei 14.129/2021 art. 29), read
+  by the `licence-read` agent. Credit required; LGPD principles apply, which
+  makes the privacy rule a licence condition. **Four restrictive readings (a
+  2009 service-desk email, the copyright waiver's reach, statistical secrecy,
+  and CNEFE's absence from the open-data catalogue) were recorded, not
+  resolved by the reader. The owner decided to proceed on the law** on a
+  recorded reasoned position - the Philadelphia shape. Rejected: asking IBGE
+  first and holding Brazil.
+
+- **Privacy: the owner chose a STRUCTURAL rule over a name list.** At any
+  address that also holds a dwelling, the tooltip shows the category, never
+  the description text. A first name at a dwelling address was measured at
+  0.8-2.3% of mapped rows per city; the structural rule reaches 24-56% (and
+  **89.7% in Brasilia**, whose superquadra addressing puts shops and flats at
+  one address). Rejected: suppressing only name-list matches, because a list
+  misses names; and category everywhere, as more than the licence needs.
+
+- **Vintage and shopping centres: accepted and disclosed**, on the owner's
+  decision. 2022 is the only CNEFE edition since 2010 (Barcelona is built on
+  its 2022 census); a shopping centre collapses to one to a few rows, and
+  only 0.1-1.2% of mapped rows stand for more than 10 establishments.
+  Rejected: supplementing malls from OSM, which would make every Brazilian
+  city a multi-source build.
+
+- **Seven more Brazilian cities re-added, each measured on its own file.** A
+  rail screen of twelve cities (one Overpass query each; Curitiba as a
+  negative control, which returned only a tourist train) and a CNEFE screen
+  of the seven that carry metro or modern light rail. Mapped storefronts:
+  Salvador 52,258, Fortaleza 49,503, Belo Horizonte 44,923, Brasilia 35,824,
+  Recife 25,212, Porto Alegre 18,798, Santos 6,021 - beside Sao Paulo
+  216,037 and Rio 105,350. **Band A: 8 -> 17; Band B: 16 -> 14.** Teresina,
+  Maceio, Joao Pessoa and Natal were NOT downloaded: their rail is single
+  diesel lines or CBTU suburban trains tagged `light_rail`, the commuter shape
+  - recorded as ASSERTED, not discarded.
+
+- **Band A's caption lost "brief written"**, added that morning in the drift
+  fix. `CLAUDE.md` says a brief is a cache, not a prerequisite; nine cities
+  meeting every other condition made the contradiction visible. Files:
+  `docs/city_master_list.md`, `docs/global_country_shortlist.md`,
+  `docs/data_sources.md`, `scripts/screen_cnefe.py`.
 
 ### 2026-09-23 - The master list's summaries drifted while its sections stayed right; Cairo leaves the discards
 
