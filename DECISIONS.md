@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**202 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**203 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Lyon's discard row spent a day in the wrong table](#2026-09-23---lyons-discard-row-spent-a-day-in-the-wrong-table)
 - [Paris's naming share was France's number wearing Paris's label](#2026-09-23---pariss-naming-share-was-frances-number-wearing-pariss-label)
 - [Lyon discarded on four blockers, with a reinstatement template kept](#2026-09-23---lyon-discarded-on-four-blockers-with-a-reinstatement-template-kept)
 - [All six French cities are brief-ready](#2026-09-23---all-six-french-cities-are-brief-ready)
@@ -241,6 +242,45 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Lyon's discard row spent a day in the wrong table
+
+- **The Lyon discard was recorded against the OPEN SCREENING GAP table rather
+  than the DISCARDED table**, and the count it was supposed to produce was
+  therefore never produced: the heading read *"DISCARDED - 33 cities"* while
+  the table under it held **32**. Found by counting the rows rather than
+  reading the heading.
+
+- **The cause is an anchoring failure, and it is the registered-office trap in
+  a fourth costume.** The edit inserted Lyon before the first occurrence of
+  `| **Lisbon**`, and **Lisbon appears in two different tables** - once in the
+  discard-sweep results and once in DISCARDED. `.index()` returned the first,
+  which was the wrong one. **A string that identifies a row does not identify
+  a table**, exactly as a filter parameter and the field you read are two
+  different addresses. The landing site is as much a claim as the content is,
+  and it went unverified because the write reported success.
+
+- **A second defect surfaced in the same count: Lisbon was listed TWICE in
+  DISCARDED** - the evidenced row added by the 2026-09-23 sweep, and an older
+  bare row reading only *"Specific negative"*. The sweep added evidence without
+  removing what it superseded. **The two together cancelled out**: a duplicate
+  inflating the count by one, and a missing row deflating it by one, so the
+  headline 33 happened to be arithmetically reachable from a table that was
+  wrong in two places. **A count that comes out right is not a checked count.**
+
+- **Both fixed**: Lyon moved into DISCARDED with its four blockers intact, the
+  bare Lisbon row removed, and the table now holds **32 rows / 32 distinct
+  cities, which is 33 with Amsterdam / Rotterdam counted as the two cities it
+  names.** Candidates stay at 31 and the bands still sum: A 6 + B 6 + C 16 +
+  D 3.
+
+- **Two stale captions corrected in the same file.** Band C said its cities
+  *"share one property that separates them from Band C"* - it means Band B.
+  Band D still opened *"Screening is COMPLETE for both, and both passed"* after
+  Goteborg made it three, on the same day Goteborg was added. **Prose that
+  counts its own contents goes stale the moment the contents change**, which is
+  the class `check_stale_claims.py` exists for and did not catch here because
+  the drift is in a word, not a number.
 
 ### 2026-09-23 - Paris's naming share was France's number wearing Paris's label
 
