@@ -524,6 +524,8 @@ with WGS84 points, 100% trade names and 96.9% addresses, updated daily. It
 carried two questions; **the licence one was answered on 2026-09-22** (see
 below), so **one remains, and it is an owner decision rather than a probe**:
 
+✅ **RAIL COUNTED 2026-09-23, and this list's figure was wrong.** It carried *"metro 7, tram 21"*. Measured inside **Stockholms kommun** (OSM rel 398021): **subway 15 relations / 8 refs**, all named and all coloured; **tram 6 relations / 4 refs**, only **4 of 6 coloured**; **light_rail 6** (refs 21, 30, 31); **92 rail station nodes**. ⚠️ **One subway relation and one tram relation carry NO `ref`** — a `ref`-keyed build drops them silently. ⚠️ The boundary lookup matched nothing on `name=Stockholm` because the kommun is **`Stockholms kommun`**, and widening it returned **two US "Stockholm Township" relations at the same admin_level**.
+
 1. **Scope.** It is **one bucket** — food. Stockholms stad has 291 datasets
    and exactly one commercial register; `restaurang` and `företag` both
    return **0** inside its own catalogue, and Sweden has no general business
@@ -538,6 +540,8 @@ below), so **one remains, and it is an owner decision rather than a probe**:
 band, and it is the same decision as Stockholm's.** It sat in the probe band while its open item
 was described as "no second bucket found". That is now **measured absent**,
 which is an answer rather than a question:
+
+🚨 **RAIL COUNTED 2026-09-23 — ZURICH HAS NO METRO.** Zero `route=subway` relations inside the Stadt boundary (OSM rel 1682248). Its network is **42 tram relations across 18 refs**, all named and all coloured, plus **4 `light_rail`, ref S18** (the Forchbahn). **This project excludes trams in Barcelona, Milan and Toronto**, so under the standing rule Zurich has **no drawable network at all** — which is a second, independent blocker on top of the one-bucket ceiling, and the one that was never measured because the bucket problem was found first.
 
 | Term searched on `data.stadt-zuerich.ch` | Hits | What they actually are |
 |---|---|---|

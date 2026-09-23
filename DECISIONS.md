@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**221 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**222 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Stockholm and Zurich rail counted; Zurich has no metro at all](#2026-09-23---stockholm-and-zurich-rail-counted-zurich-has-no-metro-at-all)
 - [The Danish key stays open until Copenhagen's build starts](#2026-09-23---the-danish-key-stays-open-until-copenhagens-build-starts)
 - [Copenhagen's brief: 14,887 rows, 100% named, four files](#2026-09-23---copenhagens-brief-14887-rows-100-named-four-files)
 - [Paris's disproven figures swept out of staging's documents](#2026-09-23---pariss-disproven-figures-swept-out-of-stagings-documents)
@@ -260,6 +261,46 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Stockholm and Zurich rail counted; Zurich has no metro at all
+
+- **Both cities carried rail counts from the screen that gave Copenhagen
+  "tram 4", and both were wrong.** Stockholm was carried as *"metro 7, tram
+  21"*. Measured inside **Stockholms kommun** (OSM relation 398021): **subway
+  15 relations / 8 refs**, all named and all coloured; **tram 6 relations / 4
+  refs**, only **4 of 6 coloured**; light_rail 6 relations (21, 30, 31); and
+  **92 rail station nodes**. The metro figure was roughly right on refs. **The
+  tram figure - 21 against a measured 6 - was not.**
+
+- **🚨 ZURICH HAS NO METRO. Zero `route=subway` relations.** Its
+  network is **42 tram relations across 18 refs** (all named, all coloured)
+  plus **4 `light_rail` relations, ref S18**, the Forchbahn. This is a
+  materially different fact from a wrong count: **this project excludes trams
+  in Barcelona, Milan and Toronto**, and a tram-only city has no drawable
+  network under that rule at all. **Zurich's one-bucket ceiling was never its
+  only problem** - it just happened to be the one that got measured first.
+  Göteborg's row already says *"Trams, no metro. Better data on a weaker
+  map"*; Zurich's says nothing of the kind and now must.
+
+- **The boundary lookup failed first, and the failure is the useful part.**
+  `["name"="Stockholm"]["admin_level"="7"]` matched **nothing**, because the
+  Swedish municipality is named **`Stockholms kommun`**. The script refused to
+  count rail rather than returning a plausible zero - **a zero from a selector
+  is a statement about the selector**. Widened, the search returned **nine**
+  candidates including **two US "Stockholm Township" relations at the same
+  admin_level 7**. A looser selector would have picked one of those and
+  reported a real, wrong, confidently-zero rail network.
+
+- **🚨 A ROUTE RELATION WITH NO `ref` HAS NOW APPEARED IN THREE CITIES
+  IN ONE DAY, and it should stop being recorded per city.** Bucharest's
+  **`Extensie M4`** (no ref, no colour); Singapore's **`JRL`** (5 relations,
+  named, no colour); Stockholm's **unref'd subway relation AND unref'd tram
+  relation**. **A build keying on `ref` drops these silently; a build keying
+  on relation COUNT draws a line it cannot label**, and the project's
+  invariant requires every drawn line to carry its real public name and a
+  legend entry. **This belongs in `osm-rail` as a raising check rather than in
+  a fourth city's notes** - which is that skill's own opening argument: a
+  lesson in one city's config does not reach the next city.
 
 ### 2026-09-23 - The Danish key stays open until Copenhagen's build starts
 
