@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**234 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**235 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [The legend covered the basemap credit in every city, and the embedded size hid it](#2026-09-23---the-legend-covered-the-basemap-credit-in-every-city-and-the-embedded-size-hid-it)
 - [The built-cities list was short by EIGHT, and the eighth had been missing since the eleventh city](#2026-09-23---the-built-cities-list-was-short-by-eight-and-the-eighth-had-been-missing-since-the-eleventh-city)
 - [A self-test for the one check whose vocabulary is meant to be edited](#2026-09-23---a-self-test-for-the-one-check-whose-vocabulary-is-meant-to-be-edited)
 - [Toulouse built: 8,635 storefronts, 48 stations, and the first non-rail mode](#2026-09-23---toulouse-built-8635-storefronts-48-stations-and-the-first-non-rail-mode)
@@ -273,6 +274,87 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - The legend covered the basemap credit in every city, and the embedded size hid it
+
+- **Found that the map legend covered the OpenStreetMap attribution
+  completely at any viewport taller than the map, in all 23 cities, and fixed
+  it in `pipeline/map_common.py` by clamping the legend's bottom to the MAP's
+  bottom edge rather than the viewport's.** Measured on Toulouse and Marseille
+  by hit-testing five points along the attribution strip with
+  `document.elementFromPoint`: 0/5 covered at 1000x650, **5/5 at 1024x768**,
+  **5/5 at 375x812** once a reader re-opens the auto-collapsed legend. The
+  mechanism is that the legend is `position: fixed` against the viewport's
+  bottom edge while Leaflet's attribution is `position: absolute` against the
+  map container's, and the container is a fixed `_MAP_H` = 650 px tall, so the
+  two edges coincide at exactly one viewport height. `CLAUDE.md` makes the
+  visible credit a hard invariant under ODbL 1.0.
+
+- **⚠️ IT WAS NOT A LIVE BREACH, AND THAT IS THE PART WORTH RECORDING.** Every
+  city page embeds the map with `st.iframe(HEATMAP_HTML, width=1000,
+  height=650)`, and at exactly 650 px the credit clears the legend by **10
+  px**. So the published site was compliant by coincidence, with nothing
+  pinning the coincidence: a change to the iframe height, a responsive embed,
+  or a reader opening `outputs/<city>/heatmap.html` directly each breached it
+  silently. A defect that is invisible while the one configuration that hides
+  it holds is the same shape as a city whose provenance is unrecorded looking
+  exactly like a city that was checked.
+
+- **Rejected a static bottom offset, and rejected moving the credit to the
+  bottom-left.** A static offset cannot work: the offset that clears the
+  attribution is a function of viewport height, so any single number is right
+  at one height, which is the bug rather than the fix. Bottom-left moves the
+  collision instead of removing it - measured at 375 px wide, the open legend
+  occupies x 133-351 while a bottom-left credit would occupy x 0-197, so they
+  still overlap - and it costs a `setPosition` on a Leaflet control plus the
+  credit landing where readers do not look for it. The clamp chosen,
+  `max(24px, calc(100vh - 626px))`, is generated from `_MAP_H - 24` so the two
+  cannot drift, and is a no-op at the embedded size: the normalised diff is
+  **exactly one line per city**, and the re-probe measures the same 10 px of
+  clearance at 650, 768 and 812 px tall.
+
+- **The fix also repaired a model that had been quietly wrong since the label
+  layout was written.** `_layout_labels` treats the open legend as an obstacle
+  whose bottom sits at `_MAP_H - 24` in map coordinates. That held only at a
+  650 px viewport; it now holds at every height at or above one. `_MAP_W` and
+  `_MAP_H` moved to the top of the module in the same change, because three
+  comment blocks named the constant before it was defined and the new CSS
+  needs its value at import time.
+
+- **Wrote the check in two halves, because the browser half is the one the
+  rules say to skip.** `scripts/check_map_attribution.js` hit-tests a rendered
+  map at several viewport heights with the legend forced open and NAMES
+  whatever element sits on top, so it catches a future overlay rather than only
+  this one; it runs through the `deploy-verify` agent. But `CLAUDE.md` says to
+  skip `deploy-verify` entirely for pipeline-only work, and `map_common.py` IS
+  pipeline-only work - so the only check that could see the regression is the
+  one that would not have run. `scripts/check_provenance.py` check K.1 therefore
+  grew a third clause: it already required the credit to be PRESENT and LINKED
+  in every committed map, and now also requires the legend's bottom to be
+  clamped against that same file's map height. Layout cannot be read out of
+  HTML, so the static half checks the mechanism and the browser half checks the
+  pixels. Run before the re-render, K.1 failed **23 of 23** cities; after, 0.
+
+- **Writing the browser check produced the exact false failure it was written
+  to avoid, which is why it now reports UNMEASURED as a third state.** Probing
+  375x812 by resizing an already-loaded 1024 px page returned "attribution
+  covered at 5/5 points, by: nothing" with probe points at x=902 on a 375 px
+  viewport: the attribution's rect was stale from the previous layout, the
+  points fell off-screen, and `elementFromPoint` returns null off-screen -
+  indistinguishable from "something opaque is on top" unless checked. This is
+  the stale-rect failure `.claude/agents/deploy-verify.md` already warns about
+  for line labels, met a second time on different geometry. The check now
+  counts an off-screen point as `offscreen` and says coverage is unmeasured
+  rather than breached, and says to reload at the target size instead of
+  resizing a loaded page. Re-probed correctly: 0/5 covered, 0 off-screen, all
+  five points landing on the credit or its links.
+
+- **Verification: `drift_check.py --jobs 4` re-rendered all 23 cities and
+  reported drift confined to `heatmap.html`; `check_provenance.py` exits 0 and
+  names every city OK.** The CRLF-only churn in 26 `excluded_stations.csv` and
+  municipality files was restored rather than committed - they produced no
+  `git diff --numstat` rows at all, only line-ending warnings. Committed as
+  f51d1dd, 26 files.
 
 ### 2026-09-23 - The built-cities list was short by EIGHT, and the eighth had been missing since the eleventh city
 
