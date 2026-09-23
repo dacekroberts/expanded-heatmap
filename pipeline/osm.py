@@ -44,10 +44,17 @@ funicular relations and calls the northern L10 segment `L10N`;
 corrupt - they run different planet extracts. So a build must not key anything
 on a live tag value, and a cached fetch is the only reproducible one.
 
-WHAT A 504 USUALLY MEANS: YOUR QUERY IS TOO EXPENSIVE, NOT THE HOST IS DOWN
---------------------------------------------------------------------------
-Added 2026-09-23 after the Toulouse build lost ten minutes to it, and it is
-the cheapest fix in this file.
+A 504 IS EITHER YOUR QUERY OR THE HOST - CHECK THE PART YOU CONTROL FIRST
+-------------------------------------------------------------------------
+Added 2026-09-23 after the Toulouse build lost ten minutes to it.
+
+⚠ CORRECTED THE SAME DAY. This heading first said a 504 USUALLY means the
+query, on the strength of one pair of observations. Two hours later, while
+scoping Lille, a TAGS-ONLY relation query - the cheapest query there is, no
+geometry at all - drew a 504 from overpass-api.de and a read timeout from
+kumi.systems, twice in a row. So a 504 is sometimes the host and nothing
+else. What holds is narrower: query cost is the half you CONTROL, so rule it
+out first, then treat what is left as a fact about the host.
 
 `out center` on **ways** is the expensive part of a typical POI query. Overpass
 has to resolve every way's member nodes to compute a centroid, so a combined
