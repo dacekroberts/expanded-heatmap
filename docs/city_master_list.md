@@ -59,9 +59,7 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 | **United States** (9) | San Diego · San Francisco · Los Angeles · Chicago · New York · Philadelphia · Miami · Boston · Washington D.C. |
 | **Canada** (5, complete) | Vancouver *(with Surrey)* · Montréal · Calgary · Edmonton · Toronto |
 | **Mexico** (2) ✅ | **Mexico City** · **Guadalajara (Regional)** — built 2026-09-22, live in the app |
-| **Spain** (2) ✅ | **Madrid** · **Barcelona** — built 2026-09-22 |
-| **Ireland** (1, complete) ✅ | **Dublin (Regional)** — built 2026-09-22, **not yet deployed**: held off master until a batch `deploy-verify` runs |
-| **Italy** (1) ✅ | **Milan** — built 2026-09-22, **not yet deployed**: held off master until a batch `deploy-verify` runs |
+| **Europe** (4) ✅ | 🇪🇸 **Madrid** · **Barcelona** · 🇮🇪 **Dublin (Regional)** · 🇮🇹 **Milan** — all built and deployed 2026-09-22. **One macro-map region, not one per country**: Spain, Ireland and Italy were three regions holding four cities until they were collapsed the same day, before France's six could make it five. Spain is complete at two cities, Ireland at one, and Italy is a Milan-only country — so the countries are still the research unit, and only the MAP groups them |
 
 ✅ **Mexico is the first country built outside North America's anglophone
 pair**, and the first where the rail leg came from **OpenStreetMap** rather

@@ -374,19 +374,34 @@ Desktop is unaffected — the label is fully visible there.
 
 ## Structure
 
-- [ ] **Collapse the European macro-map regions into one "Europe", and zoom
-  that view out.** `app/cities.py` currently gives every European country its
-  own `region` - **Spain** (Madrid, Barcelona) and now **Ireland** (Dublin,
-  alone) - which was fine at one country and does not scale: each new country
-  adds a region holding one or two cities, and the switcher becomes a list of
-  countries rather than a map of anywhere. Owner's call, 2026-09-22: make it a
-  single **Europe** region and widen the framing as coverage grows. Not urgent
-  and deliberately not done during the Dublin build, because it changes the
-  macro map for cities that are already live and so belongs with a
-  `deploy-verify` rather than beside a new city. Two things to do together when
-  it happens: the `region` values, and each affected city's `label_offset`,
-  which is scored per region by `scripts/check_macro_labels.py` and will move
-  when the framing does.
+- [x] ~~**Collapse the European macro-map regions into one "Europe"**~~ -
+  **done 2026-09-22, the same day the problem appeared.** `app/cities.py` gave
+  every European country its own `region` - Spain (Madrid, Barcelona), then
+  Ireland (Dublin) and Italy (Milan) - three regions holding four cities, and
+  growing by one entry per country while the map it indexes stayed the same
+  size. Collapsed on the owner's call **before France's six cities could make
+  it five**, which is why it stopped being "not urgent".
+
+  Done as one change: `REGION_ORDER` loses the three country entries and gains
+  `Europe`, and all four cities are retagged. **No `label_offset` moved.**
+  `scripts/check_macro_labels.py` scores every city in every region at three
+  widths and reports **PROBLEMS 0** across the new 7-region layout - and one
+  fewer clipped label than before (11, from 12), because collapsing three
+  narrow frames into one wider one moves labels away from a canvas edge rather
+  than toward it.
+
+  ⚠️ **Two label widths had to be MEASURED first**, and neither city had done
+  it: `TEXT_WIDTH` carried no Dublin and no Milan, so the checker would have
+  refused regardless of this change. Measured in a real browser at
+  `600 14px "Space Grotesk"` - **Dublin 42.8 px, Milan 36.3 px** - with the
+  method validated by reproducing five existing entries (Barcelona 67.9,
+  Madrid 47.2, Boston 48.4, Toronto 52.4, Washington D.C. 110.3) exactly.
+
+  **Revisit the single-region decision on a measurement, not a feeling.**
+  Europe's four cities span Dublin to Milan, about 1,700 km, and frame together
+  at a zoom where each is still distinguishable; North America is split because
+  its countries are 3,300 km wide. A city far enough east or south to force the
+  frame open is what changes it, and `check_macro_labels.py` is what says so.
 
 - [x] ~~Move GUADALAJARA's and MADRID's fetching out of their step files~~ -
   **done 2026-09-22; all three exceptions are closed.** Mexico City first as

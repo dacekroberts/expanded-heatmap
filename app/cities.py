@@ -422,7 +422,7 @@ CITIES = [
         "page": "pages/17_Madrid_Heatmap.py",
         "blurb": "Metro de Madrid (Líneas 1–12 and the Ramal, 193 stations "
                  "inside the city)",
-        "region": "Spain",
+        "region": "Europe",
         # Outside the United States frame, like every non-US city - see
         # IN_DEFAULT_VIEW below. The first city here in EUROPE, which is what
         # the region model was always going to have to absorb.
@@ -461,7 +461,7 @@ CITIES = [
         # and nan is truthy, which is what took the Overview down on
         # 2026-09-22.
         "label_offset": ("start", 14, 6),
-        "region": "Spain",
+        "region": "Europe",
     },
     {
         "name": "Dublin",
@@ -469,7 +469,7 @@ CITIES = [
         "lon": -6.2603,
         "page": "pages/19_Dublin_Heatmap.py",
         "blurb": "Luas Red and Green Lines, and the DART",
-        "region": "Ireland",
+        "region": "Europe",
         "in_default_view": False,
         # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
         # pinned zoom. Run `python scripts/check_macro_labels.py`,
@@ -485,7 +485,7 @@ CITIES = [
         "lon": 9.19,
         "page": "pages/20_Milan_Heatmap.py",
         "blurb": "Metro M1-M5 (rossa, verde, gialla, blu, lilla)",
-        "region": "Italy",
+        "region": "Europe",
         "in_default_view": False,
         # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
         # pinned zoom. Run `python scripts/check_macro_labels.py`,
@@ -587,23 +587,23 @@ REGION_ORDER = [
     "Canada West",
     "Canada East",
     "Mexico",
-    # SPAIN IS THE FIRST REGION OUTSIDE NORTH AMERICA, added 2026-09-22 with
-    # Madrid. It needs no composite and no split: the country's screen closed
-    # at two cities (Madrid and Barcelona), which sit 500 km apart and frame
-    # together comfortably - nothing like the 3,300 km that forced Canada's.
-    "Spain",
-    # IRELAND AND ITALY, added 2026-09-22 with Dublin and Milan. Each holds one
-    # city, and THAT IS THE PROBLEM THIS LIST NOW HAS: three European regions
-    # for four cities, growing by one region per country. The owner's decision
-    # (2026-09-22) is to collapse them into a single **Europe** region and widen
-    # its framing as coverage grows - logged in PLAN.md rather than done here,
-    # because it re-frames the macro map for Madrid and Barcelona, which are
-    # already live, and every affected city's `label_offset` is scored per
-    # region by scripts/check_macro_labels.py, which refuses a guessed label
-    # width. That is a deliberate piece of work, not a line to slip into a
-    # publish.
-    "Ireland",
-    "Italy",
+    # EUROPE IS ONE REGION, NOT ONE PER COUNTRY, and it was briefly the other
+    # way. Spain arrived 2026-09-22 with Madrid as the first region outside
+    # North America; Ireland and Italy followed the same day with Dublin and
+    # Milan, and three regions holding four cities made the shape of the
+    # problem obvious - the list would have grown by one entry per country
+    # while the map it indexes stayed the same size. Collapsed on the owner's
+    # decision the same day, before France's six cities could make it five.
+    #
+    # NOTE WHAT THIS IS NOT. North America is split (United States West/East,
+    # Canada West/East) because those countries are 3,300 km wide and a single
+    # frame shows a continent rather than a city. Europe's four cities span
+    # Dublin to Milan - about 1,700 km - and frame together at a zoom where
+    # each is still distinguishable, so the split that Canada needs, Europe
+    # does not. Revisit it when a city appears far enough east or south to
+    # force the frame open; that is a measurement (`check_macro_labels.py`
+    # scores every city in every region at three widths), not a judgement.
+    "Europe",
 ]
 
 # The regions a city may actually be TAGGED with: everything that is not a

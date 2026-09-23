@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**169 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**170 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Europe became one macro-map region, and a write truncated a file to zero](#2026-09-22---europe-became-one-macro-map-region-and-a-write-truncated-a-file-to-zero)
 - [Dublin and Milan published, and the merge caught a latent break in both](#2026-09-22---dublin-and-milan-published-and-the-merge-caught-a-latent-break-in-both)
 - [Milan built: six disjoint registers, and a screen that was wrong four times](#2026-09-22---milan-built-six-disjoint-registers-and-a-screen-that-was-wrong-four-times)
 - [Dublin built: the rail source reversed mid-build, and a national grid got admitted](#2026-09-22---dublin-built-the-rail-source-reversed-mid-build-and-a-national-grid-got-admitted)
@@ -205,6 +206,56 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Europe became one macro-map region, and a write truncated a file to zero
+
+- **The three European country regions were collapsed into one `Europe`.**
+  `app/cities.py` gave Spain, Ireland and Italy a region each - three regions
+  holding four cities, growing by one entry per country while the map they
+  index stayed the same size. Collapsed on the owner's call the same day the
+  third appeared, **before France's six cities could make it five**.
+  `REGION_ORDER` loses the three country entries and gains `Europe`; Madrid,
+  Barcelona, Dublin and Milan are retagged. **No `label_offset` moved.**
+  `scripts/check_macro_labels.py` reports **PROBLEMS 0** across the new
+  7-region layout and **one fewer clipped label** than the 9-region one (11
+  against 12), because collapsing three narrow frames into one wider one moves
+  labels away from a canvas edge rather than toward it. Verified in the browser
+  against `.venv-lean`: the region row reads
+  `United States (9) / West (3) / East (6) / Canada West (3) / Canada East (2)
+  / Mexico (2) / Europe (4)`, and Europe frames all four cities with readable
+  labels. The decision to keep Europe UNSPLIT is a measurement, not a
+  preference: its cities span about 1,700 km where North America's regions
+  split countries 3,300 km wide, and `check_macro_labels.py` is what will say
+  when that stops holding.
+- **Two label widths were missing and would have refused the check regardless.**
+  `TEXT_WIDTH` in `check_macro_labels.py` carried no Dublin and no Milan -
+  neither build measured its own, although `scaffold_city.py` says to - so the
+  script would have refused a guessed width for either city even without the
+  region change. Measured in a real browser at `600 14px "Space Grotesk"`:
+  **Dublin 42.8 px, Milan 36.3 px.** The method was validated first by
+  reproducing five existing entries exactly (Barcelona 67.9, Madrid 47.2,
+  Boston 48.4, Toronto 52.4, Washington D.C. 110.3).
+- **`check_provenance.py`'s built-table check had to change what it compares,
+  because region stopped meaning country.** It derives a country from each
+  region name by stripping a direction suffix, which worked only while the two
+  were the same thing. With `Europe` covering three countries it demanded a
+  `Europe` row in a table organised by country. Resolved by making the built
+  table's row `Europe (4)` and keeping the countries **inside the cell**, so
+  the research document still reads by country while the check sees the map's
+  own grouping. The alternative - teaching the check a region-to-countries map
+  - was rejected because `app/cities.py` records no country and would have had
+  to start.
+- **⚠️ A `Path.write_text` call TRUNCATED `docs/city_master_list.md` to 0 bytes
+  and lost 111,547 bytes of research, recovered with `git checkout --`.** The
+  string held **lone surrogates**: the flag emoji had been written as
+  `🇪`, a UTF-16 pair, which Python parses as two unpaired surrogate
+  code points that UTF-8 cannot encode. `write_text` opens the file for
+  writing - which truncates - and only then encodes, so the exception landed
+  after the damage. **The correct escape is the codepoint** (`\U0001F1EA`), and
+  the correct method is to **encode to bytes while the original is still
+  untouched, write a temp file, then `os.replace`** - which is what the fix
+  does. Nothing was lost because the file was committed; that is the only
+  reason this is a note rather than an incident.
 
 ### 2026-09-22 - Dublin and Milan published, and the merge caught a latent break in both
 
