@@ -1,87 +1,140 @@
 """Step 3 - Render Marseille's heatmap to a standalone HTML file.
 
 All rendering lives in pipeline/map_common.py; this file supplies only what is
-Marseille-specific. Scaffolded by scripts/scaffold_city.py.
+Marseille-specific.
 
 Input:  data/marseille/processed/stations.csv
         data/marseille/processed/businesses_clean.csv
-        data/marseille/raw/gtfs.zip                    (for the line overlay)
-        data/marseille/raw/city_boundary.geojson       (label anchoring)
+        data/marseille/raw/gtfs.zip
+        data/marseille/raw/city_boundary.geojson   (label anchoring)
 Output: outputs/marseille/heatmap.html
 
 Run:  python pipeline/marseille/step3_map.py
-"""
 
+The shape-selection rule is Dublin's, kept because it costs nothing on a line
+with one alignment and silently saves one that branches: take shapes in
+descending trip order, keep any that reaches a stop the kept ones do not, stop
+when the route's stops are covered. Every Paris line turned out to branch; RTM
+may or may not, and the rule does not need to know in advance.
+"""
+import json
 import sys
+import zipfile
 from pathlib import Path
 
-import geopandas as gpd
 import pandas as pd
+from shapely.geometry import shape
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.map_common import load_line_shapes, render_heatmap  # noqa: E402
 from pipeline.marseille.config import (  # noqa: E402
-    STATIONS_CSV,
     BUSINESSES_CLEAN_CSV,
     CITY_BOUNDARY_GEOJSON,
-    GTFS_ZIP,
-    HEATMAP_HTML,
     CRS_GEOGRAPHIC,
     CRS_PROJECTED,
+    GTFS_ZIP,
+    HEATMAP_HTML,
+    LINE_COLOURS,
+    LINE_NAMES,
     RING_EDGES_METERS,
     RING_LABELS,
-    LINE_NAMES,
+    ROUTE_IDS,
+    STATIONS_CSV,
     TAXONOMY_SYSTEM,
 )
 
-# TODO: route_id -> (shape_id, colour). shape_id is each line's single most-used
-# trip shape (count trips per shape for the route and take the mode; if that
-# shape lies outside the city, pick the one that reaches it and say why).
-# Colours: the agency's own where unambiguous, else your own palette, distinct
-# from the business-category colours.
-LINE_SHAPES = {}
 # Per-line label end override: "start" or "end" forces which end of a line its
-# label goes at; the default (automatic) picks the tail end farthest from the
-# other lines, on the stretch inside the city - override only if a rendered map
-# shows that landing badly.
+# label goes at; the default picks the tail farthest from the other lines, on
+# the stretch inside the commune. Override only if a render shows one badly.
 LINE_LABEL_ENDS = {}
 
-LINE_SPECS = {
-    key: (shape_id, color, LINE_NAMES[key], LINE_LABEL_ENDS.get(key))
-    for key, (shape_id, color) in LINE_SHAPES.items()
-}
+
+def shape_ids_for_routes(zf):
+    """The shape_ids needed to draw each route's WHOLE alignment."""
+    routes = pd.read_csv(zf.open("routes.txt"), dtype=str)
+    rail = routes[routes["route_id"].isin(ROUTE_IDS)]
+    short_of = dict(zip(rail["route_id"], rail["route_short_name"]))
+
+    trips = pd.read_csv(zf.open("trips.txt"), dtype=str,
+                        usecols=["route_id", "trip_id", "shape_id"])
+    trips = trips[trips["route_id"].isin(set(rail["route_id"]))].dropna(
+        subset=["shape_id"])
+    st = pd.read_csv(zf.open("stop_times.txt"), dtype=str,
+                     usecols=["trip_id", "stop_id"])
+    st = st[st["trip_id"].isin(set(trips["trip_id"]))]
+
+    link = st.merge(trips[["trip_id", "route_id", "shape_id"]], on="trip_id")
+    shape_stops = (link.groupby(["route_id", "shape_id"])["stop_id"]
+                   .agg(set).to_dict())
+    shape_trips = (trips.groupby(["route_id", "shape_id"])["trip_id"]
+                   .count().to_dict())
+    route_stops = link.groupby("route_id")["stop_id"].agg(set).to_dict()
+
+    chosen = {}
+    for rid in ROUTE_IDS:
+        want = route_stops.get(rid, set())
+        ranked = sorted((k for k in shape_trips if k[0] == rid),
+                        key=lambda k: (-shape_trips[k], k[1]))
+        picked, covered = [], set()
+        for key in ranked:
+            if not (shape_stops[key] - covered) and picked:
+                continue
+            picked.append(key[1])
+            covered |= shape_stops[key]
+            if covered >= want:
+                break
+        if not picked:
+            sys.exit(f"no shape covers {LINE_NAMES.get(short_of.get(rid), rid)}"
+                     f" - a line this project draws must come from real geometry")
+        chosen[rid] = picked
+        flag = "  <- branches" if len(picked) > 1 else ""
+        print(f"  {LINE_NAMES[short_of[rid]]:14s} {len(picked)} shape(s) "
+              f"covering {len(covered)}/{len(want)} stops{flag}")
+    return chosen, short_of
 
 
-def city_geometry():
-    """The city's limits, so each line's label goes at the tail of the stretch
-    inside the city (lines that run on past it)."""
-    boundary = gpd.read_file(CITY_BOUNDARY_GEOJSON)
-    boundary = boundary.set_crs(CRS_GEOGRAPHIC) if boundary.crs is None else boundary.to_crs(CRS_GEOGRAPHIC)
-    # TODO: if the layer holds several cities, select this city's record first.
-    return boundary.geometry.union_all()
+def commune_geometry():
+    """The commune of Marseille, so each line's label goes at the tail of the
+    stretch inside it. Every station is inside here, unlike Paris, but the LINE
+    geometry still runs past the boundary in places."""
+    return shape(json.loads(
+        CITY_BOUNDARY_GEOJSON.read_text(encoding="utf-8"))["geometry"])
 
 
 def main():
-    if not LINE_SHAPES:
-        sys.exit("Fill in LINE_SHAPES (and LINE_NAMES in config.py) first: every drawn line needs a label and a legend entry.")
-    for path in (STATIONS_CSV, BUSINESSES_CLEAN_CSV):
+    for path in (STATIONS_CSV, BUSINESSES_CLEAN_CSV, GTFS_ZIP,
+                 CITY_BOUNDARY_GEOJSON):
         if not path.exists():
             sys.exit(f"Missing {path}. Run the earlier steps first.")
+
+    print("Line shapes:")
+    with zipfile.ZipFile(GTFS_ZIP) as zf:
+        chosen, short_of = shape_ids_for_routes(zf)
+
+    line_specs = {
+        rid: (tuple(chosen[rid]), LINE_COLOURS[short_of[rid]],
+              LINE_NAMES[short_of[rid]], LINE_LABEL_ENDS.get(rid))
+        for rid in ROUTE_IDS
+    }
+
+    stations = pd.read_csv(STATIONS_CSV)
+    businesses = pd.read_csv(BUSINESSES_CLEAN_CSV)
+    print(f"\n  {len(stations):,} stations, {len(businesses):,} storefronts")
 
     render_heatmap(
         output_path=HEATMAP_HTML,
         map_title="Marseille Métro and Tramway Business Density Heatmap",
         city_name="Marseille",
         system_name="Métro and Tramway",
-        stations=pd.read_csv(STATIONS_CSV),
-        businesses=pd.read_csv(BUSINESSES_CLEAN_CSV),
+        stations=stations,
+        businesses=businesses,
         taxonomy_system=TAXONOMY_SYSTEM,
-        lines=load_line_shapes(GTFS_ZIP, LINE_SPECS, "Métro and Tramway"),
+        lines=load_line_shapes(GTFS_ZIP, line_specs, "Métro and Tramway"),
         crs_geographic=CRS_GEOGRAPHIC,
         crs_projected=CRS_PROJECTED,
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
-        label_focus=city_geometry(),
+        label_focus=commune_geometry(),
     )
 
 

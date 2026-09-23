@@ -16,7 +16,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**219 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**220 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
@@ -51,6 +51,7 @@ onwards; the early ones are split by phase rather than by hour.
 - [CUZK read: Prague is unblocked, and the "cookie terms" were not only cookie terms](#2026-09-23---cuzk-read-prague-is-unblocked-and-the-cookie-terms-were-not-only-cookie-terms)
 - [The sweep's results sorted: Goteborg banded, two discards evidenced](#2026-09-23---the-sweeps-results-sorted-goteborg-banded-two-discards-evidenced)
 - [The discard record swept for rows that rest on an absence](#2026-09-23---the-discard-record-swept-for-rows-that-rest-on-an-absence)
+- [Marseille built, and a region now labels only its own cities](#2026-09-23---marseille-built-and-a-region-now-labels-only-its-own-cities)
 - [Paris renders, and a zero-width race turned out to be one line](#2026-09-23---paris-renders-and-a-zero-width-race-turned-out-to-be-one-line)
 - [The employee filter does not exist, and France's OSM validation was wrong](#2026-09-23---the-employee-filter-does-not-exist-and-frances-osm-validation-was-wrong)
 - [France's taxonomy is national, and Paris takes Lambert-93](#2026-09-23---frances-taxonomy-is-national-and-paris-takes-lambert-93)
@@ -1831,6 +1832,94 @@ onwards; the early ones are split by phase rather than by hour.
   as candidates to begin with. That is the point: **they were invisible to the
   arithmetic**, which is exactly why the discard list has to name its evidence
   per row rather than gesture at a pattern.
+
+### 2026-09-23 - Marseille built, and a region now labels only its own cities
+
+- **Marseille's scope was settled by measurement, not by inheriting Paris's.**
+  The brief was explicit that Paris's commune-only answer does not transfer,
+  because Marseille's feed is the whole Métropole and carries another city's
+  network. Measured against commune 13055: **all five RTM lines are 100% inside
+  the boundary** - 82 station-line pairs, none lost - where Paris lost 76 of
+  321. Marseille's commune is **238.1 km² against Paris's 105.4** and its
+  network is compact, so the boundary costs it nothing. **18,177 storefronts,
+  66 stations.**
+
+- **Aubagne's tram excludes itself, and that is better than a rule.** The feed's
+  fourth tram (`AUB-T`, Le Charrel–Gare) belongs to a different town; it has
+  **zero** stations inside the commune, so the same spatial filter that scopes
+  the city drops another operator's network as a side effect. A hard-coded
+  exclusion would have had to be remembered by the next French city reading a
+  multi-network feed. The 17 TER routes go by the standing commuter-rail rule.
+  **Ferries (6 routes) are dropped by owner's decision and recorded as
+  revisitable** - they are genuine urban transit here, which no other excluded
+  mode in this project is, so the page says so rather than only the config.
+
+- **Second city to fail the spacing gate honestly, and it is TIGHTER than
+  Paris.** 341 m median nearest-neighbour against Paris's 399 m, despite a
+  commune 2.3x the size and a quarter of the stations - because the tram runs
+  past the metro down the Canebière and the two networks interleave. Collapse
+  tested before the threshold was touched: all 150 quays carry a parent, zero
+  duplicate names, platform median 9 m, and the closest pairs (Noailles /
+  Canebière Garibaldi at 54 m) are genuinely different stops. Takes Paris's
+  200 m floor rather than a third bespoke number. Same measurement puts it on
+  **New York's ring edges**, making "dense city" one category with three
+  members instead of three configurations.
+
+- **One national cache, not one per city.** The two SIRENE parquets are 3 GB
+  and identical for every French city, so the scaffold's per-city layout would
+  have held **15 GB to store one 3 GB pair** across five cities. Moved to
+  `france.SHARED_RAW`, deliberately while only one city depended on them.
+  ⚠️ **Mexico is the counter-example and is left alone**: DENUE is equally
+  national but partitioned per *entidad federativa*, so its two cities read
+  genuinely different files (45 MB and 39 MB, no overlap). The rule is "the
+  same bytes", not "one national source", and it is recorded in `add-country`
+  where the next national register gets profiled.
+
+- **Step 2 became shared code, and Paris proved it safe.** SIRENE is one
+  register, so five per-city step 2 files would be the same 250 lines five
+  times with nothing keeping them in agreement - the shape `map_common.py`
+  already exists to prevent. Moved to
+  `pipeline/countries/france_register.py`; both cities' step 2 are now ~30
+  lines. **Paris re-ran through it at ZERO DRIFT**, which is what made this a
+  refactor rather than a rewrite. Deliberately NOT in `france.py`, which every
+  city config imports and `app/` therefore imports transitively - that module
+  must stay importable under the lean deploy venv, and this one pulls in pandas
+  and pyarrow.
+
+- **France's OSM validation re-run on the second city, and the totals should
+  never have been the test.** The restaurant control - where `amenity=
+  restaurant` and NAF `56.10A` mean nearly the same thing - gives **Marseille
+  1.72x against Paris's 1.80x**, so the national filter behaves consistently
+  and the country is now evidenced twice. But the TOTALS diverge sharply
+  (2.58x against 1.78x) because **OSM's own coverage differs between the two
+  cities**: personal services as a share of retail is 0.139 in Marseille's OSM
+  data against 0.178 in Paris's, while SIRENE says the opposite. So the
+  superseded "92.5%" criterion was unsound in a second, independent way - the
+  thing it compared against varies by city for reasons unrelated to the
+  register. **The standing test for the three remaining French cities is the
+  restaurant control, not the total.**
+
+- **A region now labels only its own cities, composites included.** The leaf
+  rule already worked this way, as a correctness fix; the composite "United
+  States" was exempt because it is the landing view and suppression "would take
+  seven labels off it to close one 1.1 px abutment". Re-measured on Marseille's
+  arrival: **13 non-member labels, 3 collisions, and 3 of 3 involve a
+  non-member** - with **6 of those 13 drawn off-canvas entirely at 375 px**, so
+  half were not serving the first impression they were kept for. The cost also
+  grew with every international city, each arriving needing offsets tuned
+  against a view it does not belong to. Markers are untouched, so every city's
+  dot stays visible and clickable and the caption's "every city is on the map"
+  stays true. **`ACCEPTED_OVERLAPS` is now EMPTY** - not by loosening a
+  threshold but because none of the three collisions can occur; clipped labels
+  fell from 11 to 9 as a side effect.
+
+- **Marseille's catch-all shares matched Paris almost exactly, measured rather
+  than assumed.** `96.09Z` 9.8% here against Paris's 9.6%, `56.29B` 1.0%
+  against 1.0%, so the same two exclusions apply - on this city's own numbers.
+  Naming is better than Paris's, as the brief predicted: **43.8% against
+  37.3%**. Personal exposure: **1 person-like name at a residential unit of
+  10,013 pins (0.01%)**, with the same structural guarantee - no
+  registrant-name column is ever loaded, so no pin can be one.
 
 ### 2026-09-23 - Paris renders, and a zero-width race turned out to be one line
 
