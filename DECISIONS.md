@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**245 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**246 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Universal claims get a report category, and its first run found five more false](#2026-09-23---universal-claims-get-a-report-category-and-its-first-run-found-five-more-false)
 - [The scaffold names a city's page from its slug, not its display name](#2026-09-23---the-scaffold-names-a-citys-page-from-its-slug-not-its-display-name)
 - [Lille made "three regional maps" four within the hour](#2026-09-23---lille-made-three-regional-maps-four-within-the-hour)
 - [Taiwan is a door-plate JOIN at 92.5%, not a geocoding project; Rio's rail licence permits, Sao Paulo's is ambiguous](#2026-09-23---taiwan-is-a-door-plate-join-at-925-not-a-geocoding-project-rios-rail-licence-permits-sao-paulos-is-ambiguous)
@@ -284,6 +285,54 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Universal claims get a report category, and its first run found five more false
+
+- **`check_stale_claims.py` has a category E: comparative and universal claims
+  on the published surface** - page prose, plus the two documents the app
+  renders. It reports and exits 0 like the rest. Supersedes the handoff note's
+  "no check catches it": what no check could do was judge a claim, and what
+  this does is make the re-read the note asked for a command rather than a
+  memory.
+
+- **It was narrowed from 44 hits to 32 before shipping, on evidence.** Every
+  false claim found that day was a COMPARISON - "the only", "no other", "every
+  other", "any other", "elsewhere on this site"; none was a bare "every city" or
+  "every map", which mostly describe what the pipeline does to all maps and
+  made up most of the first version's output. A bare "every city HERE" or "ON
+  THIS SITE" was kept, because that suffix turns pipeline behaviour into a claim
+  about the set of built cities - the shape of the two morning instances
+  ("trams are excluded in every city here that has them"). Page docstrings are
+  skipped (they address the next editor), words may break across lines (the
+  line-grep probe before it could not see those), and excerpts are centred on
+  the match, because the first version printed the start of long table rows
+  with the flagged phrase truncated away.
+
+- **Proved against history rather than against its author's intent.** Run on
+  `481a3bd` and `aee5478` - the commits before that day's corrections - it
+  finds all 19 phrases it was pointed at; on the current tree, none. A
+  category that cannot find the defects that motivated it cannot find
+  anything.
+
+- **Its first live run found five more false claims and one overstated one, in
+  seven places, all in `docs/data_sources.md`,** which renders as the
+  About-the-Data page. Two contradicted each other: Edmonton
+  as "the only register here that publishes NO name column but the business's",
+  and Madrid - which publishes exactly that, a trade name and no registrant
+  field - claiming "a stronger position than any other city here can state", in
+  two places. Madrid's was **false the day it was written**, four cities after
+  Edmonton. Toronto as "the only city here whose register carries NO
+  coordinates" (France's SIRENE carries none either; what Toronto alone must do
+  is match on the ADDRESS, which its page correctly says). "Every other city
+  needed one" source (the New York page's claim, fixed that afternoon, still
+  alive in the documentation). The Census geocoder as "the only source left
+  unread" while the same document's San Diego boundary row says "Terms not
+  read". And Calgary as "the only register here that names premises itself",
+  softened to match the Calgary page's wording from the same day.
+
+- **Its own docstring said "WHY THESE THREE" over four categories** - a
+  hand-kept count, in the checker for hand-kept counts. Now five, and the
+  heading no longer counts them.
 
 ### 2026-09-23 - The scaffold names a city's page from its slug, not its display name
 

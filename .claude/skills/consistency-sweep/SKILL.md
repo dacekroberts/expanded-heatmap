@@ -371,7 +371,7 @@ it needs that session's context.
 | `python scripts/check_deploy_imports.py` | a clean clone imports under the lean venv |
 | `python scripts/brief_check.py <city>` | a build brief's claims still hold against live sources |
 | `python scripts/check_personal_exposure.py <city>` | no personal information in a city's published output |
-| `python scripts/check_stale_claims.py` | **reports, never fails.** Prose in the future tense about something that IS built; totalising hand-kept counts; headings whose rows no longer match the label; **config constants no script reads** |
+| `python scripts/check_stale_claims.py` | **reports, never fails.** Prose in the future tense about something that IS built; totalising hand-kept counts; headings whose rows no longer match the label; **config constants no script reads**; **universal claims on the published surface** ("the only city", "no other city", "every city here") - run `--only E` whenever a city lands, because each hit is a bet on the next city |
 
 **Import configs, do not grep them.** `check_provenance.py` imports each city's
 `config.py` and walks its resolved values, because Vancouver builds four

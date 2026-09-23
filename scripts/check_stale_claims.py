@@ -1,16 +1,19 @@
 """Report prose that has stopped being true. The heuristic half of the sweep.
 
-    python scripts/check_stale_claims.py [--verbose] [--only A|B|C]
+    python scripts/check_stale_claims.py [--verbose] [--only A|B|C|D|E]
 
 **THIS REPORTS AND ALWAYS EXITS 0.** `check_provenance.py` decides things - a
 row is present or it is not - and fails. Everything here is a guess about
 English, and a noisy gate gets ignored, which is worse than no gate. Read the
 report; it is for a human mid-sweep, not for CI.
 
-WHY THESE THREE
----------------
-On 2026-09-22 a cleanup sweep found three classes of stale prose that no
-existing check could see, in a project whose every check was about data:
+WHY THESE CATEGORIES
+--------------------
+(This heading said "WHY THESE THREE" over four categories until 2026-09-23 -
+a hand-kept count, in the checker for hand-kept counts.)
+
+On 2026-09-22 a cleanup sweep found classes of stale prose that no existing
+check could see, in a project whose every check was about data:
 
   A. **Future tense about a present that arrived.** Three files said Canada was
      unbuilt while six municipalities were built; a fourth said it of D.C. Each
@@ -26,6 +29,19 @@ existing check could see, in a project whose every check was about data:
      ~26 s per page, and `PARCEL_QUERY_BBOX` and `PARCEL_PAGE_SIZE` survive,
      read by nothing. The constant is harmless; **the comment is the defect**,
      because the next reader trusts it over the call.
+  E. **Universal claims on the published surface** - "the only city", "no
+     other city", "every other city", "every city here". Added 2026-09-23
+     after one day corrected over twenty, each written when fewer cities
+     existed: "no other city here needed more than one source" (Boston needed
+     three, Milan six), Edmonton as "the only register" with no name but the
+     business's while Madrid's entry called its identical position "stronger
+     than any other city here". **At least three were false the day they were
+     written** - so this is not only rot; authors generalise from the cities
+     they happen to be thinking of. Run it when a city lands: every hit is a
+     bet on the next city, and the fix for a lost one is a comparison with a
+     CATEGORY ("than a licence register can"), never another "only". Proved
+     against history: run on the two commits before that day's fixes it finds
+     all 19 phrases it was pointed at, and on the commit after, none.
 
 WHAT KEEPS THE NOISE DOWN, AND WHY EACH RULE IS THERE
 -----------------------------------------------------
@@ -396,11 +412,128 @@ def check_d():
     return hits
 
 
+# --- E. Universal claims on the published surface ---------------------------
+
+# Only what a READER sees: page prose, and the two documents the app renders
+# (91_What_Is_Excluded.py and 90_About_the_Data.py). A universal in a research
+# brief is shorthand between sessions; on a page it is a claim to the public.
+PUBLISHED_PAGES = ("app/Overview.py", "app/pages/*.py")
+PUBLISHED_DOCS = ("docs/excluded_categories.md", "docs/data_sources.md")
+
+# COMPARISONS ONLY. Every one of the eleven false claims found on 2026-09-23
+# compared a city with the rest - "the only", "no other", "every other", "any
+# other", "elsewhere on this site". None was a bare "every city" or "every
+# map": those describe what the pipeline does to all maps ("dropped from every
+# map"), are usually enforced in code, and were 30 of the 44 hits the first
+# version of this category printed. A list that long gets skimmed, then
+# ignored, which is the cry-wolf failure the module docstring warns about.
+#
+# Words are joined by \s+ so a claim split over two source lines still
+# matches - the probe that preceded this was a line grep, and those are
+# exactly the claims it would have missed.
+_S = r"\s+"
+UNIVERSAL_RE = re.compile(
+    r"\b(?:"
+    r"the" + _S + r"only" + _S +
+    r"(?:city|cities|map|maps|register|registry|source|one)"
+    r"|only" + _S + r"city"
+    r"|(?:every|any)" + _S + r"other" + _S + r"(?:city|cities|map|maps)"
+    # A bare "every city" is usually pipeline behaviour; "every city HERE" or
+    # "ON THIS SITE" is a claim about the set of built cities, and it is the
+    # shape of the two instances found earlier that day - "trams are excluded
+    # in every city here that has them", "Every map here covers one rail
+    # network". Both were falsified by the next city to land.
+    r"|every" + _S + r"(?:city|map)" + _S +
+    r"(?:here|on" + _S + r"this" + _S + r"site)"
+    r"|no" + _S + r"other" + _S + r"(?:city|map|register|registry)"
+    r"|all" + _S + r"(?:the" + _S + r")?other" + _S + r"cities"
+    r"|(?:anywhere|elsewhere)" + _S + r"on" + _S + r"this" + _S + r"site"
+    r"|unlike" + _S + r"(?:every|any)" + _S + r"other"
+    r"|none" + _S + r"of" + _S + r"the" + _S + r"other"
+    r")\b", re.I)
+
+# The site's navigation button, not a claim.
+UI_LABELS = {"All cities"}
+
+
+def _published_texts():
+    """(path, first_line, text) for every piece of reader-facing prose.
+
+    From a page: every string literal EXCEPT docstrings, because a docstring is
+    addressed to the next editor, and "the decided pattern for every city's
+    detail page" sits in all of them. Comments never reach the AST at all.
+    From a document: each paragraph, fenced code stripped.
+    """
+    for pattern in PUBLISHED_PAGES:
+        for p in sorted(ROOT.glob(pattern)):
+            tree = ast.parse(p.read_text(encoding="utf-8"))
+            docstrings = set()
+            for node in ast.walk(tree):
+                if isinstance(node, (ast.Module, ast.FunctionDef,
+                                     ast.AsyncFunctionDef, ast.ClassDef)):
+                    body = node.body
+                    if (body and isinstance(body[0], ast.Expr)
+                            and isinstance(body[0].value, ast.Constant)
+                            and isinstance(body[0].value.value, str)):
+                        docstrings.add(id(body[0].value))
+            for node in ast.walk(tree):
+                if (isinstance(node, ast.Constant) and isinstance(node.value, str)
+                        and id(node) not in docstrings):
+                    yield p, node.lineno, node.value
+    for rel in PUBLISHED_DOCS:
+        p = ROOT / rel
+        if not p.exists():
+            continue
+        text = re.sub(r"(?ms)^```.*?^```", lambda m: "\n" * m.group(0).count("\n"),
+                      p.read_text(encoding="utf-8"))
+        line = 1
+        for para in re.split(r"(\n\s*\n)", text):
+            if para.strip():
+                yield p, line, para
+            line += para.count("\n")
+
+
+def check_e():
+    hits, seen = [], set()
+    for p, first_line, text in _published_texts():
+        flat = " ".join(text.split())
+        spans = quoted_spans(flat)
+        for m in UNIVERSAL_RE.finditer(text):
+            phrase = " ".join(m.group(0).split())
+            if phrase in UI_LABELS:
+                continue
+            # Locate the same match in the flattened text, for the sentence.
+            # max(0, ...): a NEGATIVE start makes str.find count from the END.
+            approx = len(" ".join(text[:m.start()].split()))
+            pos = flat.find(phrase, max(0, approx - 2))
+            if pos < 0 or in_quotes(pos, spans):
+                continue
+            prev = flat.rfind(". ", 0, pos)          # -1 when none: start at 0
+            start = 0 if prev < 0 else prev + 2
+            end = flat.find(". ", pos)
+            end = len(flat) if end < 0 else end + 1
+            # CENTRED ON THE MATCH, not cut from the sentence's start: a
+            # markdown table row is one "sentence" hundreds of characters
+            # long, and the first version printed its opening while the
+            # flagged phrase sat past the truncation - a hit that did not
+            # show what it was flagging.
+            a, b = max(start, pos - 90), min(end, pos + len(phrase) + 110)
+            excerpt = ("..." if a > start else "") + flat[a:b].strip(" *") + \
+                ("..." if b < end else "")
+            n = first_line + text[:m.start()].count("\n")
+            key = (p, n, phrase.lower())
+            if key in seen:
+                continue
+            seen.add(key)
+            hits.append((p, n, phrase, excerpt))
+    return hits
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--verbose", action="store_true",
                     help="A: report markers even when no built place is named")
-    ap.add_argument("--only", choices=["A", "B", "C", "D"])
+    ap.add_argument("--only", choices=["A", "B", "C", "D", "E"])
     args = ap.parse_args()
 
     cities, vocab = built_vocabulary()
@@ -475,6 +608,20 @@ def main():
                   "country lands, with no edit to this script.")
             for rel, n in sorted(by_file.items()):
                 print(f"      {rel}  ({n})")
+        print()
+
+    if args.only in (None, "E"):
+        hits = check_e()
+        print(f"E. UNIVERSAL CLAIMS on the published surface - {len(hits)} to "
+              f"re-read when a city lands")
+        print("   Each is a bet on the next city. A true one stays. A false one "
+              "becomes a comparison\n   with a CATEGORY (\"than a licence "
+              "register can\"), never another \"every other city\".")
+        for p, n, phrase, excerpt in hits:
+            print(f"   {p.relative_to(ROOT).as_posix()}:{n}  [{phrase}]")
+            print(f"      {excerpt}")
+        if not hits:
+            print("   none")
         print()
 
     print("Reported, not failed - every rule here is a guess about English. "
