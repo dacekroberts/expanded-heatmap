@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**211 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**212 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Copenhagen's gate was read at the wrong host, and it is light](#2026-09-23---copenhagens-gate-was-read-at-the-wrong-host-and-it-is-light)
 - [Oslo's names are the best in the project, and 28.6% may be people](#2026-09-23---oslos-names-are-the-best-in-the-project-and-286-may-be-people)
 - [Band B measured for briefs, and two of its six are not Band B cities](#2026-09-23---band-b-measured-for-briefs-and-two-of-its-six-are-not-band-b-cities)
 - [Lyon's discard row spent a day in the wrong table](#2026-09-23---lyons-discard-row-spent-a-day-in-the-wrong-table)
@@ -250,6 +251,51 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Copenhagen's gate was read at the wrong host, and it is light
+
+- **CVR is distributed through Datafordeler, and Datafordeler is not
+  Cloudflare-challenged.** Every earlier read of Denmark's terms went at
+  `datacvr.virk.dk` and `erhvervsstyrelsen.dk`, both of which serve an
+  interactive bot challenge this project does not defeat, so the position was
+  recorded as *"a free account, terms unread"*. **The same register's terms are
+  stated in the open on `datafordeler.dk`**, which answered a plain client on
+  the first request. **The obstacle was the host, not the document.**
+
+- **The licence is CC BY 4.0** - *"Som bruger kan du i henhold til licensen
+  frit hente, dele og tilpasse frie grunddata. Du skal kreditere Det Centrale
+  Virksomhedsregister (CVR) pa et passende sted."* Free to fetch, share and
+  adapt, with attribution. **The same licence Madrid and Milan already ship
+  under**, so it adds a notice and nothing else.
+
+- **Only the entity `CVRPerson` is access-restricted, and that is the one this
+  project does not want.** The access-request page is explicit: *"Bemaerk du
+  skal KUN soge om adgang til CVR, hvis du skal have adgang til entiteten
+  CVRPerson. De ovrige entiteter hos CVR er ikke adgangsbegraensede, og du kan
+  hente data uden at anmode registeret om adgang."* **Production units -
+  the premises this project maps - need no request, no approval and no data
+  exchange agreement.** The restriction runs *with* the privacy invariant
+  rather than against it, which is the opposite of the usual shape.
+
+- **What remains is a free account and nothing else**: a Datafordeler
+  Administration user (e-mail or MitID Erhverv) plus an IT-system carrying an
+  API key or OAuth. **None of Lyon's four blockers is present** - no
+  indemnity, no bar on the producers' marks, no 30-day reconfirmation, no dead
+  mirror. That contrast is the point: **two European cities, both recorded as
+  "needs a free account", and the accounts are not remotely the same object.**
+
+- **The `kurv` (basket) on `datacvr.virk.dk` is a false signal and worth
+  naming.** It belongs to the legacy self-service extract service, which is a
+  paid-order shape. Reading it as CVR's access model would have priced the
+  whole city wrongly. **Two routes to one register, and the modern one is
+  free** - the same lesson as Lyon's NAP mirror, in reverse.
+
+- **One probe error recorded rather than quietly dropped.** A check for
+  whether a refusal was IP-level searched the block page for an IP address and
+  reported `1.2.1.1` - **a CSS fragment, not an address**. Both hosts were
+  plain Cloudflare challenges. The conclusion *"IP-level, the browser will not
+  help"* was nearly written down on the strength of a regex matching a
+  stylesheet.
 
 ### 2026-09-23 - Oslo's names are the best in the project, and 28.6% may be people
 
