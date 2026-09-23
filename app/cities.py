@@ -479,6 +479,22 @@ CITIES = [
         # it refuses a guessed one.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Milan",
+        "lat": 45.4642,
+        "lon": 9.19,
+        "page": "pages/20_Milan_Heatmap.py",
+        "blurb": "Metro M1-M5 (rossa, verde, gialla, blu, lilla)",
+        "region": "Italy",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -576,6 +592,18 @@ REGION_ORDER = [
     # at two cities (Madrid and Barcelona), which sit 500 km apart and frame
     # together comfortably - nothing like the 3,300 km that forced Canada's.
     "Spain",
+    # IRELAND AND ITALY, added 2026-09-22 with Dublin and Milan. Each holds one
+    # city, and THAT IS THE PROBLEM THIS LIST NOW HAS: three European regions
+    # for four cities, growing by one region per country. The owner's decision
+    # (2026-09-22) is to collapse them into a single **Europe** region and widen
+    # its framing as coverage grows - logged in PLAN.md rather than done here,
+    # because it re-frames the macro map for Madrid and Barcelona, which are
+    # already live, and every affected city's `label_offset` is scored per
+    # region by scripts/check_macro_labels.py, which refuses a guessed label
+    # width. That is a deliberate piece of work, not a line to slip into a
+    # publish.
+    "Ireland",
+    "Italy",
 ]
 
 # The regions a city may actually be TAGGED with: everything that is not a

@@ -62,6 +62,25 @@ REGISTRIES = {
     "dublin": dict(raw=None, trade=None, owner=None, name_is_address=True,
                    processed="businesses_clean.csv",
                    address=("business_name",)),
+    # Milan is a HYBRID, and the first one here: ~20% of pins carry a real
+    # trade name (`insegna`) and the rest carry the street address, because
+    # `insegna` is 17.6% populated on the retail register, 23.8% and 9.1% on
+    # the two food ones, and ABSENT from three of the six registers entirely.
+    #
+    # None of the six carries a personal name - no titolare, ragione_sociale
+    # or nominativo, confirmed against live headers, and step 2 EXITS if one
+    # ever appears. So this is the France/Edmonton pattern (the publisher
+    # stripped it) and the fallback is an address rather than an owner, which
+    # is why Los Angeles' failure mode cannot occur.
+    #
+    # `name_is_address` is NOT set, unlike Dublin's: it is true of ~80% of
+    # rows rather than all of them, so the heuristics below are measuring a
+    # mixture. Read a person-like hit as "check whether this is an Italian
+    # street name or a sole trader's shop sign" - both are present, and the
+    # second is exactly what this script is for.
+    "milan": dict(raw=None, trade=None, owner=None,
+                  processed="businesses_clean.csv",
+                  address=("business_name",)),
     "san_diego": dict(raw="sd_businesses_active_datasd.csv", trade="dba_name",
                       owner="business_owner_name", processed="businesses_clean.csv",
                       address=("address_no", "address_road", "address_suite")),

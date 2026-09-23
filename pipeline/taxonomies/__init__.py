@@ -95,6 +95,7 @@ TAXONOMY_MODULES = {
     # because that value means five different things depending on its parent.
     "barcelona_activitat": "pipeline.taxonomies.barcelona_activitat",
     "dublin_uses": "pipeline.taxonomies.dublin_uses",
+    "milan_source": "pipeline.taxonomies.milan_source",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

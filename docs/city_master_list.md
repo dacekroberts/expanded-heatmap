@@ -30,7 +30,7 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 >
 > | | |
 > |---|---|
-> | **Built** | **19** across 5 countries |
+> | **Built** | **20** across 6 countries |
 > | **Candidates** | **33**, all at least partially viable |
 > | **Discarded** | **30**, each naming its evidence |
 >
@@ -52,7 +52,7 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 > next build, or the next licence read changes it, and the counts in the table
 > below are the ones to trust over any prose that repeats them.
 
-## Built — 19
+## Built — 20
 
 | Country | Cities |
 |---|---|
@@ -61,6 +61,7 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 | **Mexico** (2) ✅ | **Mexico City** · **Guadalajara (Regional)** — built 2026-09-22, live in the app |
 | **Spain** (2) ✅ | **Madrid** · **Barcelona** — built 2026-09-22 |
 | **Ireland** (1, complete) ✅ | **Dublin (Regional)** — built 2026-09-22, **not yet deployed**: held off master until a batch `deploy-verify` runs |
+| **Italy** (1) ✅ | **Milan** — built 2026-09-22, **not yet deployed**: held off master until a batch `deploy-verify` runs |
 
 ✅ **Mexico is the first country built outside North America's anglophone
 pair**, and the first where the rail leg came from **OpenStreetMap** rather
