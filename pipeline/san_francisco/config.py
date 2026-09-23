@@ -49,6 +49,15 @@ BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 GTFS_ZIP = DATA_RAW / "gtfs.zip"
 BUSINESSES_RAW_CSV = DATA_RAW / "sf_business_locations.csv"
 COUNTY_BOUNDARY_GEOJSON = DATA_RAW / "sf_county_boundary.geojson"
+# A PROVENANCE RECORD, NOT A FETCH TARGET, and nothing reads it. San
+# Francisco's three older raw inputs - the business export, the Muni GTFS feed
+# and this boundary - predate `fetch_sources.py`, which deliberately fetches
+# only the Assessor roll: re-downloading a business export would change every
+# count recorded in `DECISIONS.md`, so it has to be a deliberate act rather
+# than a side effect of running a script. This URL is how the stored file was
+# obtained, kept so the build stays reproducible by hand. The reasoning lives
+# in that script's docstring, which is a different file from this constant -
+# hence this note.
 COUNTY_BOUNDARY_URL = (
     "https://data.sf.gov/resource/wamw-vt4s.geojson"
     "?$where=county%3D%27San%20Francisco%27&$limit=10"

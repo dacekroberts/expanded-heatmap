@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**193 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**194 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Following one dead constant found a comment describing an approach the city does not use](#2026-09-23---following-one-dead-constant-found-a-comment-describing-an-approach-the-city-does-not-use)
 - [Category D's 18 remaining constants are mostly deliberate records, not decay](#2026-09-23---category-ds-18-remaining-constants-are-mostly-deliberate-records-not-decay)
 - [Category D reported 63 dead constants, 45 of which were add-country working correctly](#2026-09-23---category-d-reported-63-dead-constants-45-of-which-were-add-country-working-correctly)
 - [check_stale_claims category A was reporting three findings and none of them was real](#2026-09-23---check_stale_claims-category-a-was-reporting-three-findings-and-none-of-them-was-real)
@@ -232,6 +233,44 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Following one dead constant found a comment describing an approach the city does not use
+
+- **Barcelona's config carried `OSM_STATION_RAILWAY` and `OSM_STATION_KIND`
+  under a paragraph that reads as a description of how the city selects
+  stations. It is the record of a REJECTED approach, and neither constant is
+  used.** What actually runs is `stations_query()` in `fetch_sources.py` - the
+  member nodes of the cached route relations, asked for by id. Tag selection
+  was measured and abandoned because `railway=station` boxes and the
+  `stop_position` nodes a PTv2 relation contains are different objects with
+  **no overlap at all**, 225 against 378, so combining the two filters yields
+  an empty set. A reader meeting the config cold would reasonably conclude the
+  opposite. **This is the single instance among the eighteen that matched
+  category D's stated purpose** - "a comment describing a plan that did not
+  happen is what misleads the next reader" - and it was reached by following
+  one flagged constant to its comment rather than by scanning.
+
+- **Both constants were KEPT and annotated rather than deleted.** The counts
+  above them are the evidence for rejecting tag selection; removing them would
+  leave the decision looking arbitrary, which is the same reasoning that keeps
+  Edmonton's `STALE_BOUNDARY_IDS`. What was missing was the word "rejected".
+
+- **San Francisco's `COUNTY_BOUNDARY_URL` is a provenance record, and the
+  explanation lived in a different file.** `fetch_sources.py` deliberately
+  fetches only the Assessor roll, because re-downloading a business export
+  would change every count in `DECISIONS.md` and must be a deliberate act;
+  that reasoning is in its docstring, while the unread constant sits in
+  `config.py`. Annotated where the reader meets it. Nothing was rewired: the
+  constant is correct and deliberately unused.
+
+- **A false negative in `check_stale_claims.py` category D, now documented in
+  the checker itself.** Attribution is by NAME, not by module, so a constant
+  dead in one city is not reported when another city defines a live one of the
+  same name. Barcelona's `OSM_STATION_RAILWAY` is exactly that case and was
+  never flagged - only its sibling `OSM_STATION_KIND` was, which is what led
+  here. Shared config vocabularies are where this bites; fixing it means
+  resolving each read back to the module it imports from, which was not
+  attempted today.
 
 ### 2026-09-23 - Category D's 18 remaining constants are mostly deliberate records, not decay
 

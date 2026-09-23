@@ -319,6 +319,15 @@ def country_without_a_city(rel):
 def check_d():
     """Module-level config constants that nothing outside their own file reads.
 
+    KNOWN FALSE NEGATIVE: attribution is by NAME, not by module. A constant
+    that is dead in one city's config is not reported when another city
+    defines and consumes one of the same name - Barcelona's
+    OSM_STATION_RAILWAY is unread there while Guadalajara's is live, so only
+    its sibling OSM_STATION_KIND surfaced on 2026-09-23. Following that one
+    constant found the real defect anyway, but the blind spot is real and
+    shared config vocabularies are exactly where it bites. Fixing it means
+    resolving each read back to the module it imports from.
+
     Deterministic enough to trust - these configs are imported by name - but it
     REPORTS rather than fails, because a dead constant is a signal to go and
     read the comment above it, not a defect in itself.
