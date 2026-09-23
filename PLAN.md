@@ -359,12 +359,20 @@ Desktop is unaffected — the label is fully visible there.
   pipeline/guadalajara/fetch_sources.py first" with `data/guadalajara/raw/`
   moved aside. **Guadalajara's two-pass retry was kept rather than unified
   with Mexico City's single pass** - neither has been measured against the
-  other, and a refactor is a bad moment to quietly change a retry policy.
-  **The rule is now a check rather than a convention:**
-  `scripts/check_no_fetch_in_steps.py`. Madrid is listed there under
-  `KNOWN_GAPS` until `spain-app-wiring` lands, and the check fails on a gap
-  that has silently been fixed, so landing that branch forces the entry out.
-  Original finding below. into a `fetch_*.py`, as the other fourteen cities do.
+  other, and a refactor is a bad moment to quietly change a retry policy. At
+  the `spain-app-wiring` merge the two sessions' Guadalajara fetchers were
+  resolved in the BRANCH's favour, because that one goes through the shared
+  `pipeline/osm.py` (which rejects a `remark` and a partial 200, not only an
+  empty one, and still retries twice) while master's repeated the logic in the
+  city; its two step files were taken from MASTER, so both Mexican cities name
+  the reader `read_cached`. **The rule is now a check rather than a
+  convention:** `scripts/check_no_fetch_in_steps.py`. Madrid was listed there
+  under `KNOWN_GAPS` until `spain-app-wiring` landed, and the check fails on a
+  gap that has silently been fixed, so landing the branch forced both entries
+  out - which is what that failure mode is for.
+
+  The original finding: move the fetching into a `fetch_*.py`, as the other
+  fourteen cities do.
   Demonstrated 2026-09-22: `python pipeline/drift_check.py` in a worktree with
   no `data/<city>/raw/` **fetched over the network for all three** - a 39 MB
   DENUE zip, a Madrid census CSV, Overpass responses and CRTM layers - and
@@ -629,6 +637,28 @@ Desktop is unaffected — the label is fully visible there.
     and asserts a plausible content type, rather than trusting the rows.
 
 ## Before deploying
+
+- [ ] **REBOOT the deployed Streamlit app.** Madrid and Barcelona landed on
+  master 2026-09-22 (`6dcb295`), and Streamlit Cloud pulls master
+  automatically, so the code is live but the process is not. That push changed
+  `app/cities.py` and `app/components.py`, both imported by
+  `app/Overview.py`: "Updated app!" re-runs the entry script and leaves
+  imported modules cached, which is what kept the live site down for over three
+  hours on 2026-09-22 across five pulls. **Reboot, not "Update"** - gate item 9
+  in `docs/data_sources.md`. The owner's to do; no session can reach the
+  Streamlit Cloud console.
+
+  Then confirm on the live site, not locally: the macro map still opens on the
+  United States, the region switcher reaches Europe, and both Madrid's and
+  Barcelona's pages render their maps and their licence notices.
+
+- [ ] **Send the Barcelona notification AFTER the site is publicly reachable,
+  not before.** Drafted in English and Catalan at
+  `docs/notifications/barcelona-city-council.md`, unsent, with its two
+  preconditions stated in the file. It is a courtesy notification to the
+  Ajuntament de Barcelona about the `cens de locals` reuse, and the draft is
+  written to be sent by the owner rather than by a session - sending anything
+  on the owner's behalf needs their explicit go-ahead each time.
 
 - [x] **Sweep every city page for "accurate, complete, or timely" claims** -
   DONE 2026-09-21. Two real hits, both on the New York page (the MTA city):

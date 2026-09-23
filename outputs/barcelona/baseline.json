@@ -1,0 +1,14 @@
+{
+  "active_rows": 58908,
+  "bucket_food_service": 9992,
+  "bucket_personal_services": 5673,
+  "bucket_retail": 20293,
+  "businesses_clean_rows": 35958,
+  "census_rows": 66088,
+  "distinct_premises_all": 66088,
+  "multi_bucket_premises": 0,
+  "storefront_rows": 35958,
+  "usable_coordinate_rows": 58908,
+  "vacant_rows": 7180,
+  "zero_coordinate_rows": 0
+}

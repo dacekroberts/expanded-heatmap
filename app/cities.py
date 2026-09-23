@@ -415,6 +415,54 @@ CITIES = [
         # clears Mexico City and Miami at every width.
         "label_offset": ("middle", 0, -16),
     },
+    {
+        "name": "Madrid",
+        "lat": 40.4168,
+        "lon": -3.7038,
+        "page": "pages/17_Madrid_Heatmap.py",
+        "blurb": "Metro de Madrid (Líneas 1–12 and the Ramal, 193 stations "
+                 "inside the city)",
+        "region": "Spain",
+        # Outside the United States frame, like every non-US city - see
+        # IN_DEFAULT_VIEW below. The first city here in EUROPE, which is what
+        # the region model was always going to have to absorb.
+        "in_default_view": False,
+        # ABOVE its dot, and this key MUST EXIST AT ALL - Mexico City omitting
+        # it took the whole Overview page down on 2026-09-22, because
+        # pd.DataFrame fills a missing key with float('nan') and `nan is None`
+        # is False. Overview.py is scalar-safe now; every city still declares
+        # one, because fifteen cities happening to have one is what hid that.
+        #
+        # Madrid is alone in its region and far from every other city on the
+        # map, so nothing constrains this but the canvas edge. Measured by
+        # scripts/check_macro_labels.py across six regions and three widths.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Barcelona",
+        "lat": 41.3874,
+        "lon": 2.1686,
+        "page": "pages/18_Barcelona_Heatmap.py",
+        "blurb": "Metro de Barcelona (L1–L12 across TMB and FGC, plus the "
+                 "Montjuïc and Vallvidrera funiculars, 112 stations inside "
+                 "the city)",
+        # Outside the United States frame, like every non-US city. OMITTING
+        # THIS IS NOT NEUTRAL: IN_DEFAULT_VIEW defaults a missing key to TRUE,
+        # so Barcelona silently joined the landing frame and stretched it from
+        # California to Catalonia. The symptom named innocent cities -
+        # check_deploy_imports reported Calgary/Toronto and Guadalajara/Los
+        # Angeles colliding and three labels clipped off the west edge, because
+        # everything had been compressed to fit an Atlantic-wide view.
+        "in_default_view": False,
+        # Spain's two cities sit 500 km apart but frame close together, and
+        # Madrid's label goes ABOVE its marker - so Barcelona's goes to the
+        # RIGHT rather than stacking into it. Omitting this key is not a
+        # neutral default: pd.DataFrame fills a missing key with float('nan'),
+        # and nan is truthy, which is what took the Overview down on
+        # 2026-09-22.
+        "label_offset": ("start", 14, 6),
+        "region": "Spain",
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -507,6 +555,11 @@ REGION_ORDER = [
     "Canada West",
     "Canada East",
     "Mexico",
+    # SPAIN IS THE FIRST REGION OUTSIDE NORTH AMERICA, added 2026-09-22 with
+    # Madrid. It needs no composite and no split: the country's screen closed
+    # at two cities (Madrid and Barcelona), which sit 500 km apart and frame
+    # together comfortably - nothing like the 3,300 km that forced Canada's.
+    "Spain",
 ]
 
 # The regions a city may actually be TAGGED with: everything that is not a

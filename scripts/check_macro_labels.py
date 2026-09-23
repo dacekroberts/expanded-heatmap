@@ -51,7 +51,9 @@ from cities import CITIES, REGION_MEMBERS, REGIONS  # noqa: E402
 # when a city is added; a wrong width here makes every number downstream wrong.
 TEXT_WIDTH = {
     "Boston": 48.4, "Calgary": 51.8, "Chicago": 55.0, "Edmonton": 69.0,
-    "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Mexico City": 80.0,
+    "Barcelona": 67.9,
+    "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
+    "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,
     "Philadelphia": 82.3, "San Diego": 67.4, "San Francisco": 94.3,
     "Toronto": 52.4, "Vancouver (Regional)": 144.4, "Washington D.C.": 110.3,
@@ -128,7 +130,20 @@ def project(lat, lon, centre_lat, centre_lon, zoom, w, h):
 
 def pill(city, x, y):
     anchor, dx, dy = tuple(city.get("label_offset") or DEFAULT_OFFSET)
-    w = TEXT_WIDTH[city["name"]]
+    try:
+        w = TEXT_WIDTH[city["name"]]
+    except KeyError:
+        # Raising beats guessing: a width estimated from character count would
+        # make every number downstream wrong while still printing confidently.
+        raise SystemExit(
+            f"no measured text width for {city['name']!r}. Measure it in a real "
+            f"browser with the real font loaded and add it to TEXT_WIDTH:\n"
+            f"    await document.fonts.ready;\n"
+            f"    const c = document.createElement('canvas').getContext('2d');\n"
+            f"    c.font = '600 14px \"Space Grotesk\", sans-serif';\n"
+            f"    c.measureText({city['name']!r}).width\n"
+            f"Check a city already in the table at the same time - if its width "
+            f"has moved, the font changed and every entry needs re-measuring.")
     a = x + dx
     left = a if anchor == "start" else a - w if anchor == "end" else a - w / 2
     return (left - PILL_PAD_X, y + dy - PILL_H / 2,

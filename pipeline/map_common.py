@@ -825,28 +825,42 @@ def _tail_end(coords, other_lines, forced=None):
     return tip[0], tip[1], d[0] / norm, d[1] / norm
 
 
-def _label_offset(label, ux, uy):
+def _label_offset(label, ux, uy, clear=0.0):
     """Pixel offset (dx, dy; screen y grows downward) of a label's centre from
     its tip, and the label's half width/height. The label is pushed out along
     (ux, uy) just far enough that its own box clears the tip whatever the
-    angle. ~14px bold text is ~8.2 px per character."""
+    angle. ~14px bold text is ~8.2 px per character.
+
+    `clear` is extra clearance in PIXELS, not metres, so a label that stands
+    off its line keeps that distance at every zoom - an offset anchored in
+    ground distance would look attached when zoomed out and adrift when zoomed
+    in. See _label_candidates for why a label ever wants the extra room."""
     half_w = (len(label) * 8.2 + 10) / 2
     half_h = 11
-    gap = 6
+    gap = 6 + clear
     reach = min(half_w / abs(ux) if abs(ux) > 1e-6 else 1e9, half_h / abs(uy) if abs(uy) > 1e-6 else 1e9)
     return ux * (reach + gap), -uy * (reach + gap), half_w, half_h
+
+
+def _clearance(tip):
+    """A label position is (lat, lon, ux, uy) or (lat, lon, ux, uy, clear).
+    `_tail_end` returns the four-element form, `_label_candidates` the five,
+    and both reach the same two consumers - so read the fifth defensively
+    rather than making every producer carry it."""
+    return tip[4] if len(tip) > 4 else 0.0
 
 
 def add_line_label(feature_group, tip, label, color):
     """A permanent, always-visible line-name label at the tail end of the line
     - NOT a hover tooltip. Use the line's real public-facing name.
 
-    `tip` is (lat, lon, ux, uy) from _tail_end: the label is centred just
-    beyond the tip along the line's own direction, offset in pixels by the
-    label's own size so it clears the line whatever the angle, and it stays
-    put relative to the tip at every zoom."""
-    lat, lon, ux, uy = tip
-    dx, dy, _hw, _hh = _label_offset(label, ux, uy)
+    `tip` is (lat, lon, ux, uy) from _tail_end, or the same with a fifth
+    element - extra pixels of clearance - from _label_candidates: the label is
+    centred just beyond the tip along the line's own direction, offset in
+    pixels by the label's own size so it clears the line whatever the angle,
+    and it stays put relative to the tip at every zoom."""
+    lat, lon, ux, uy = tip[:4]
+    dx, dy, _hw, _hh = _label_offset(label, ux, uy, _clearance(tip))
     # zIndexOffset lifts the label above the business-cluster badges: without
     # it a large downtown cluster is drawn on top of the label and hides it.
     folium.Marker(
@@ -887,6 +901,13 @@ def _fit_view(points, px_w=1000, px_h=650, fill=0.85, min_zoom=8.0, max_zoom=15.
 
 _LABEL_ANGLES = (0, 40, -40, 80, -80)
 _ALONG_FRACTIONS = (0.06, 0.12, 0.18, 0.25, 0.32, 0.40, 0.48)
+# Extra pixels of air between a label and its own line, tried only after every
+# position at the normal 6px gap has failed. A CIRCULAR line is what forced
+# this: Madrid's Línea 6 rings the centre, which is precisely where the other
+# twelve lines converge, so all nineteen of its positions sat in the same jam
+# and one label was drawn unreadable. Standing it off the ring clears it while
+# it stays anchored to a point on its own line.
+_LABEL_CLEARANCES = (22.0, 44.0)
 _MAP_W, _MAP_H = 1000, 650
 
 
@@ -910,17 +931,25 @@ def _boxes_overlap(a, b):
 
 
 def _label_candidates(coords, tip):
-    """Places a line's label may go, best first, each (lat, lon, ux, uy).
+    """Places a line's label may go, best first, each (lat, lon, ux, uy, clear).
 
     First the tail-end tip pointing straight out (and swung a little either
     way); then, if those are taken, spots further along the line from that
-    tail, with the label sitting beside the line (either side)."""
+    tail, with the label sitting beside the line (either side); then all of
+    those again with the label standing further off the line.
+
+    ORDER IS THE CONTRACT. `_layout_labels` takes the first candidate that is
+    clean, so anything appended here can only be reached by a label that would
+    otherwise have been drawn on top of something - which is why the clearance
+    tier could be added without moving a single label in the seventeen cities
+    that were already placing all of theirs (confirmed by drift_check, not
+    assumed). Never insert a new kind of candidate in the middle."""
     cands = []
     for angle in _LABEL_ANGLES:
         r = np.radians(angle)
         cands.append((tip[0], tip[1],
                       tip[2] * np.cos(r) - tip[3] * np.sin(r),
-                      tip[2] * np.sin(r) + tip[3] * np.cos(r)))
+                      tip[2] * np.sin(r) + tip[3] * np.cos(r), 0.0))
     pts = list(coords)
     if np.hypot(pts[0][0] - tip[0], pts[0][1] - tip[1]) > np.hypot(pts[-1][0] - tip[0], pts[-1][1] - tip[1]):
         pts.reverse()   # so pts[0] is the tail end
@@ -929,15 +958,17 @@ def _label_candidates(coords, tip):
     cum = np.concatenate([[0.0], np.cumsum(seg)])
     total = cum[-1]
     if total <= 0:
-        return cands
+        return cands + [(c[0], c[1], c[2], c[3], clear)
+                        for clear in _LABEL_CLEARANCES for c in cands]
     for f in _ALONG_FRACTIONS:
         i = int(np.searchsorted(cum, f * total))
         i = min(max(i, 1), len(pts) - 2)
         tx, ty = xy[i + 1] - xy[i - 1]
         n = float(np.hypot(tx, ty)) or 1.0
         for sign in (1, -1):
-            cands.append((pts[i][0], pts[i][1], -ty / n * sign, tx / n * sign))
-    return cands
+            cands.append((pts[i][0], pts[i][1], -ty / n * sign, tx / n * sign, 0.0))
+    return cands + [(c[0], c[1], c[2], c[3], clear)
+                    for clear in _LABEL_CLEARANCES for c in cands]
 
 
 def _layout_labels(points, candidates, labels, n_lines, center, zoom):
@@ -946,8 +977,13 @@ def _layout_labels(points, candidates, labels, n_lines, center, zoom):
     controls, or the map edge.
 
     Returns None if a station would fall off the map at this view, else
-    (cost, {key: (lat, lon, ux, uy)}) where cost counts labels that could not
-    be placed cleanly (0 = all clean)."""
+    (cost, {key: (lat, lon, ux, uy)}, [keys that could not be placed]) where
+    cost counts labels that could not be placed cleanly (0 = all clean).
+
+    The unplaced keys are carried out rather than just counted so the failure
+    can name the line: "1 label could not be placed" sends you looking at
+    thirteen lines, and the label in question is the one fact the solver
+    already knows."""
     cx, cy = _project_px(center[0], center[1], zoom)
 
     def to_screen(lat, lon):
@@ -962,14 +998,14 @@ def _layout_labels(points, candidates, labels, n_lines, center, zoom):
     # The legend (open) sits bottom-right; the zoom and layer controls top-left.
     legend_h = 178 + 19 * n_lines
     obstacles = [(_MAP_W - 24 - 274, _MAP_H - 24 - legend_h, _MAP_W - 24, _MAP_H - 24), (0, 0, 60, 110)]
-    placed, chosen, cost = [], {}, 0
+    placed, chosen, unplaced = [], {}, []
     # Longest names first: they have the fewest places they fit.
     for key in sorted(candidates, key=lambda k: -len(labels[k])):
         best = None
         for cand in candidates[key]:
-            lat, lon, ux, uy = cand
+            lat, lon, ux, uy = cand[:4]
             sx, sy = to_screen(lat, lon)
-            dx, dy, hw, hh = _label_offset(labels[key], ux, uy)
+            dx, dy, hw, hh = _label_offset(labels[key], ux, uy, _clearance(cand))
             box = (sx + dx - hw, sy + dy - hh, sx + dx + hw, sy + dy + hh)
             inside = box[0] >= 0 and box[1] >= 0 and box[2] <= _MAP_W and box[3] <= _MAP_H
             if best is None:
@@ -978,14 +1014,14 @@ def _layout_labels(points, candidates, labels, n_lines, center, zoom):
                 best = (cand, box)
                 break
         else:
-            cost += 1
+            unplaced.append(key)
         chosen[key] = best[0]
         placed.append(best[1])
         # keep later labels off this line's anchor point too
         lat, lon = best[0][0], best[0][1]
         sx, sy = to_screen(lat, lon)
         placed.append((sx - 5, sy - 5, sx + 5, sy + 5))
-    return cost, chosen
+    return len(unplaced), chosen, unplaced
 
 
 def _choose_view(points, candidates, labels, n_lines, center=None, zoom=None):
@@ -997,7 +1033,17 @@ def _choose_view(points, candidates, labels, n_lines, center=None, zoom=None):
     separate them, the view zooms out in quarter steps and shifts away from the
     legend, taking the closest view that works. Explicit `center`/`zoom` are
     respected (labels are still laid out around them).
-    Returns (center, zoom, {key: (lat, lon, ux, uy)})."""
+    Returns (center, zoom, {key: (lat, lon, ux, uy, clear)}).
+
+    THE WHOLE VIEW SEARCH RUNS TWICE, and the second pass is what lets a label
+    stand off its line. It has to be a separate pass rather than extra
+    candidates in one: the search stops at the first view that places
+    everything, so a candidate that rescues an EARLIER view silently changes
+    which view a city gets. Added in one pass, the clearance tier moved San
+    Francisco's map centre ~1 km west and sent one label off its line - a city
+    whose labels were all placed cleanly already. Two passes keep the rule
+    "nothing changes for a city that was already clean" true rather than
+    plausible, and drift_check is what proves it."""
     first = {k: c[0] for k, c in candidates.items()}
     base_center, base_zoom = _fit_view(points + [(t[0], t[1]) for t in first.values()])
     fixed = center is not None and zoom is not None
@@ -1015,17 +1061,62 @@ def _choose_view(points, candidates, labels, n_lines, center=None, zoom=None):
             for sx, sy in shifts:
                 # the content moves by (sx, sy), so the centre moves the opposite way
                 views.append((list(_unproject_px(bx - sx, by - sy, z)), z))
-    best = None
-    for c, z in views:
-        result = _layout_labels(points, candidates, labels, n_lines, c, z)
-        if result is None:
-            continue
-        if best is None or result[0] < best[0]:
-            best = (result[0], c, z, result[1])
-        if result[0] == 0:
-            break
+    def search(cands):
+        found = None
+        for c, z in views:
+            result = _layout_labels(points, cands, labels, n_lines, c, z)
+            if result is None:
+                continue
+            if found is None or result[0] < found[0]:
+                found = (result[0], c, z, result[1], result[2])
+            if result[0] == 0:
+                break
+        return found
+
+    # Pass 1: every label hugging its own line, exactly the candidate set that
+    # existed before stand-off labels were possible. Pass 2 only runs when a
+    # label would otherwise be drawn unreadable, so a city that passes 1 can
+    # never be changed by anything pass 2 does.
+    best = search({k: [c for c in v if _clearance(c) == 0] for k, v in candidates.items()})
+    if best is not None and best[0]:
+        relaxed = search(candidates)
+        if relaxed is not None and relaxed[0] < best[0]:
+            best = relaxed
     if best is None:   # nothing fits with every station on screen: keep the fit as is
         return center, zoom, first
+
+    # A RESIDUAL COST IS A LABEL NOBODY CAN READ, AND IT USED TO SHIP SILENTLY.
+    #
+    # `_layout_labels` falls back to "the preferred spot, even if it collides"
+    # and counts one per unplaced label; this function then kept the cheapest
+    # view and threw the count away. Madrid shipped that way on 2026-09-22:
+    # three overlapping pairs, with **Línea 2 drawn underneath the Ramal label
+    # and invisible at every width**. The legend row was there, so nothing in
+    # the build or the legend looked wrong - it took a rendered screenshot in
+    # deploy-verify to see it, one commit before a deploy.
+    #
+    # Raising rather than warning, because this is the project's oldest
+    # invariant - every drawn line gets a permanent on-map label AND a legend
+    # entry - and a warning in a build that prints hundreds of lines is a
+    # warning nobody reads. Seventeen of eighteen cities were already at cost 0
+    # when this was added, so it fails only where a label really is unreadable.
+    #
+    # To clear it: pass an explicit `center`/`zoom` for the city (a dense radial
+    # network gives the solver little room), or force the crowded lines' label
+    # ends with "start"/"end" in their spec - though note that a forced end is
+    # no help at all to a CIRCULAR line, whose two ends are the same point.
+    # That is what Madrid turned out to need, and why the second pass above
+    # exists instead.
+    if best[0]:
+        named = ", ".join(f"{labels[k]!r} (line key {k!r})" for k in best[4])
+        raise ValueError(
+            f"{best[0]} transit-line label(s) could not be placed without "
+            f"overlapping another label, the legend or the map edge, across "
+            f"{len(views)} candidate view(s): {named}. They would be drawn on "
+            f"top of something and be unreadable - which is not a cosmetic "
+            f"issue but the every-line-is-labelled invariant. Set CENTER/ZOOM "
+            f"for this city, or force the crowded lines' label ends "
+            f"('start'/'end') in their line specs.")
     return best[1], best[2], best[3]
 
 

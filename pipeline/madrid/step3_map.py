@@ -47,6 +47,20 @@ LINE_SHAPES = {key: (key, LINE_COLOURS[key]) for key in LINE_NAMES}
 # label goes at; the default (automatic) picks the tail end farthest from the
 # other lines, on the stretch inside the city. Left empty until a rendered map
 # shows one landing badly - measured, not anticipated.
+#
+# MADRID IS WHERE THE AUTOMATIC SOLVER FIRST RAN OUT OF ROOM, and it stays
+# empty anyway. Thirteen lines converge on a radial centre, and on 2026-09-22
+# the map shipped with **Línea 2 drawn underneath the Ramal label and invisible
+# at every width** - caught by a rendered screenshot in deploy-verify one commit
+# before a deploy, because the solver fell back to "the preferred spot, even if
+# it collides" and the count of such fallbacks was discarded.
+#
+# Forcing ends here was the first fix tried and it does NOT work: it moved the
+# collision around (two unplaceable labels became one) without ever reaching
+# zero, because the label that could not be placed is **Línea 6, the circular
+# line** - a closed loop whose two "ends" are the same point, so there is no
+# other end to send it to. The fix belongs in map_common, which now lets a
+# label stand further off its own line when every nearer position is taken.
 LINE_LABEL_ENDS = {}
 
 LINE_SPECS = {

@@ -73,14 +73,12 @@ HTTP_MODULES = {
 # Dated defects, not passes. Each entry says what is wrong and where the fix
 # is; an entry that has stopped being true fails this check as loudly as a new
 # violation, so the list cannot rot into a permanent exemption.
-KNOWN_GAPS = {
-    "pipeline/madrid/step1_stations.py":
-        "fetching still in the step on master; already moved to "
-        "pipeline/madrid/fetch_sources.py on the unmerged spain-app-wiring "
-        "branch (2026-09-22). Remove this entry when that branch lands.",
-    "pipeline/madrid/step2_clean_businesses.py":
-        "same as step1 - fixed on spain-app-wiring, not yet on master.",
-}
+# EMPTY, and the two entries that were here are why the staleness rule above
+# exists. Madrid's step1 and step2 were listed as fixed-on-a-branch-not-yet-on-
+# master; when spain-app-wiring landed on 2026-09-22 the fix arrived and the
+# entries went stale in the same commit, which this check fails on. Deleting
+# them was a required part of landing the branch, not a tidy-up afterwards.
+KNOWN_GAPS = {}
 
 # A shared module is GUARDED if it calls this before requesting. See
 # pipeline/offline.py: the three step3_geocode.py files reach the network
@@ -256,8 +254,12 @@ def main():
               "pattern.")
         return 1
 
-    print("OK - no step fetches inside a drift check, except the gaps "
-          "listed above.")
+    if KNOWN_GAPS:
+        print("OK - no step fetches inside a drift check, except the gaps "
+              "listed above.")
+    else:
+        print("OK - no step fetches inside a drift check, and there are no "
+              "known gaps left.")
     return 0
 
 

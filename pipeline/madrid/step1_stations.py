@@ -23,7 +23,6 @@ What this step has to get right, each of which has bitten this project before:
 
 import json
 import sys
-import urllib.request
 import zipfile
 
 import geopandas as gpd
@@ -34,11 +33,9 @@ sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent.parent.parent
 
 from pipeline.baseline import emit  # noqa: E402
 from pipeline.madrid.config import (  # noqa: E402
-    CITY_BOUNDARY_URL,
     CITY_BOUNDARY_ZIP,
     CRS_GEOGRAPHIC,
     CRS_PROJECTED,
-    CRTM_METRO_SERVICE,
     CRTM_STATIONS_LAYER,
     CRTM_TRAMOS_LAYER,
     DATA_PROCESSED,
@@ -53,9 +50,6 @@ from pipeline.madrid.config import (  # noqa: E402
     STATIONS_RAW_JSON,
     TRAMOS_RAW_JSON,
 )
-
-UA = {"User-Agent": "expanded-heatmap (github.com/dacekroberts/expanded-heatmap)"}
-
 
 # Spanish words that stay lower case inside a name. `.title()` is wrong here -
 # it produces "Plaza De Castilla" and "Puerta Del Sur", which no sign in Madrid
@@ -94,35 +88,28 @@ assert display_name("LOS ESPARTALES") == "Los Espartales"
 
 
 def fetch_layer(layer, cache):
-    """One ArcGIS layer, cached to the gitignored raw directory.
+    """Read one cached ArcGIS layer. NEVER fetches.
 
-    `resultRecordCount` is set above the known row count AND the response's
-    `exceededTransferLimit` is checked: a server-side page cap that silently
-    truncates is the same shape of failure as a stale mirror.
+    Fetching lives in fetch_sources.py, so that drift_check.py - which re-runs
+    every step*.py - is deterministic and offline. It used to fetch here behind
+    a cache check, which is offline only when the gitignored raw directory
+    happens to be populated. Moved out 2026-09-22, together with the
+    `exceededTransferLimit` check, which guards the download rather than the
+    parsing and so belongs beside it.
     """
-    if cache.exists():
-        return json.loads(cache.read_text(encoding="utf-8"))
-    url = (f"{CRTM_METRO_SERVICE}/{layer}/query?where=1%3D1&outFields=*"
-           f"&returnGeometry=true&outSR=25830&f=json&resultRecordCount=5000")
-    print(f"  fetching layer {layer} ...")
-    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=300) as r:
-        payload = json.loads(r.read())
-    if payload.get("exceededTransferLimit"):
-        raise SystemExit(f"layer {layer}: the server paged the response - "
-                         "raise resultRecordCount or page it, do not trust this")
-    cache.parent.mkdir(parents=True, exist_ok=True)
-    cache.write_text(json.dumps(payload), encoding="utf-8")
-    return payload
+    if not cache.exists():
+        raise SystemExit(
+            f"{cache.name} is missing (CRTM layer {layer}), and a step never "
+            "fetches.\n  Run:  python pipeline/madrid/fetch_sources.py")
+    return json.loads(cache.read_text(encoding="utf-8"))
 
 
 def load_boundary():
     """Madrid's término municipal, with the declared CRS treated as a claim."""
     if not CITY_BOUNDARY_ZIP.exists():
-        print("  downloading the término municipal ...")
-        CITY_BOUNDARY_ZIP.parent.mkdir(parents=True, exist_ok=True)
-        with urllib.request.urlopen(
-                urllib.request.Request(CITY_BOUNDARY_URL, headers=UA), timeout=300) as r:
-            CITY_BOUNDARY_ZIP.write_bytes(r.read())
+        raise SystemExit(
+            f"{CITY_BOUNDARY_ZIP.name} is missing, and a step never fetches.\n"
+            "  Run:  python pipeline/madrid/fetch_sources.py")
     with zipfile.ZipFile(CITY_BOUNDARY_ZIP) as z:
         shp = [n for n in z.namelist() if n.lower().endswith(".shp")]
         if not shp:

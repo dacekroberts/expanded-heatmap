@@ -23,7 +23,6 @@ Four things this step has to get right:
 
 import json
 import sys
-import urllib.request
 from pathlib import Path
 
 import pandas as pd
@@ -31,9 +30,6 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from pipeline.madrid.config import (  # noqa: E402
-    BUSINESSES_CKAN_API,
-    BUSINESSES_CKAN_PACKAGE,
-    BUSINESSES_CKAN_RESOURCE,
     BUSINESSES_CLEAN_CSV,
     BUSINESSES_RAW_CSV,
     COORD_X_COLUMN,
@@ -56,7 +52,6 @@ from pipeline.madrid.config import (  # noqa: E402
 from pipeline.baseline import emit  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # noqa: E402
 
-UA = {"User-Agent": "expanded-heatmap (github.com/dacekroberts/expanded-heatmap)"}
 
 # THE REGISTER CARRIES NO REGISTRANT NAME AT ALL, which is a stronger claim
 # than "we chose not to publish it". All 47 columns were listed on 2026-09-22
@@ -102,25 +97,16 @@ USECOLS = [
 BUCKET_PRIORITY = ["Food service", "Personal services", "Retail"]
 
 
-def resolve_download_url():
-    url = f"{BUSINESSES_CKAN_API}?id={BUSINESSES_CKAN_PACKAGE}"
-    with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=180) as r:
-        pkg = json.loads(r.read())["result"]
-    for res in pkg["resources"]:
-        if res["id"] == BUSINESSES_CKAN_RESOURCE:
-            return res["url"]
-    raise SystemExit(f"resource {BUSINESSES_CKAN_RESOURCE} not in the package")
-
-
 def main():
     DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
+    # NEVER fetches. The CKAN id -> URL resolution and the download moved to
+    # fetch_sources.py on 2026-09-22, so that drift_check.py - which re-runs
+    # every step*.py - is deterministic and offline rather than offline only
+    # when the gitignored raw directory happens to be populated.
     if not BUSINESSES_RAW_CSV.exists():
-        url = resolve_download_url()
-        print(f"resolved {BUSINESSES_CKAN_RESOURCE} -> {url}")
-        BUSINESSES_RAW_CSV.parent.mkdir(parents=True, exist_ok=True)
-        with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=1800) as r:
-            BUSINESSES_RAW_CSV.write_bytes(r.read())
-        print(f"  downloaded {BUSINESSES_RAW_CSV.stat().st_size:,} bytes")
+        raise SystemExit(
+            f"{BUSINESSES_RAW_CSV.name} is missing, and a step never fetches.\n"
+            "  Run:  python pipeline/madrid/fetch_sources.py")
 
     header = pd.read_csv(BUSINESSES_RAW_CSV, sep=SOURCE_DELIMITER,
                          encoding=SOURCE_ENCODING, dtype=str, nrows=1).columns

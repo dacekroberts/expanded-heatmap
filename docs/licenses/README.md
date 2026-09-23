@@ -59,6 +59,8 @@ made New York look prohibited.
 | `inegi-terminos-sitio.pdf` | **INEGI** — the *website* terms. NOT what governs the data; kept so the distinction is checkable rather than asserted | `https://www.inegi.org.mx/contenidos/inegi/doc/terminos_sitio.pdf` | 2026-09-22 |
 | `crtm-licencia-de-uso.txt` | **CRTM** (Madrid) — Metro station and line geometry. A `Ley 37/2007` licencia-tipo; carries the **"Powered by CRTM"** wording and the *en bruto o explotados* disclosure duty | `https://www.crtm.es/licencia-de-uso` | 2026-09-22 |
 | `madrid-condiciones-generales-reutilizacion.txt` | **Ayuntamiento de Madrid** — the Censo de locales. The conditions CC BY 4.0 does NOT cover, **binding by use**, including the last-update-date duty and the re-identification prohibition | `https://datos.madrid.es/pages/condiciones-generales-ayuntamiento-de-madrid` | 2026-09-22 |
+| `barcelona-condicions-us.txt` | **Ajuntament de Barcelona** — the Cens de locals. Carries the ⚠️ **duty to NOTIFY the Council of every derived project**, the only affirmative obligation to a publisher in this project. **Read from the Internet Archive (snapshot 2025-03-21)**: the live page serves hCaptcha | `https://opendata-ajuntament.barcelona.cat/en/condicions-us` | 2026-09-22 |
+| `barcelona-avis-legal.txt` | **Ajuntament de Barcelona** — the legal notice that points AT the terms above. Stored because it is the document that incorporates them by reference; it does **not** itself contain the notification clause | `https://opendata-ajuntament.barcelona.cat/en/avis-legal` | 2026-09-22 |
 
 **Both Mexican cities' rail geometry is OpenStreetMap, not an agency feed**,
 for different reasons. Mexico City: every `*.cdmx.gob.mx` host times out and
@@ -109,6 +111,8 @@ c389fcab88815aee4b2b39b76350a5bac85e080c52ccd794f9c647911fbeae37  translink-gtfs
 4496431cc92fef99add789b6fdbb6d1494bd2397e4a05f79f49bd4fd0ab63359  inegi-terminos-sitio.pdf
 3827f51e8bea73b85e5b47e7524a0cc2011b6abb9a7505e5c15fd0c28d08d4df  crtm-licencia-de-uso.txt
 9426f1f649033f8c100d3a8e3b95da6aca8efd8011c93696fbf3b175eae26a2b  madrid-condiciones-generales-reutilizacion.txt
+970eb2fd66328c25cc4a35aee4246ffa4fdd59504d3086aa32397434db27fef3  barcelona-condicions-us.txt
+9e16f09354b83d665ffcdd1bbe15e56fc509e59934bddd497ff6eb3f767ec39a  barcelona-avis-legal.txt
 ```
 
 ## Two files here are NOT licences

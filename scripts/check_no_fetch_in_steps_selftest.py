@@ -107,13 +107,20 @@ CASES = [
 
     # A KNOWN_GAPS list that cannot expire becomes a place defects go to be
     # forgotten.
+    # This case used to insert its fake entry ahead of Madrid's real one. That
+    # stopped matching anything on 2026-09-22, when spain-app-wiring landed
+    # Madrid's fix and the two entries were deleted - so the case silently
+    # proved nothing until the "mutation matched nothing" report caught it.
+    # It now writes into an EMPTY table, which is the state the list should
+    # normally be in.
     ("a KNOWN_GAPS entry that has quietly been fixed",
      "scripts/check_no_fetch_in_steps.py",
      lambda t: t.replace(
-         '    "pipeline/madrid/step1_stations.py":',
+         "KNOWN_GAPS = {}",
+         'KNOWN_GAPS = {\n'
          '    "pipeline/toronto/step1_stations.py":\n'
          '        "invented by the self-test; toronto does not fetch.",\n'
-         '    "pipeline/madrid/step1_stations.py":', 1),
+         '}', 1),
      "Delete the entry", 1),
 
     # A glob that matches nothing passes every assertion ever written.

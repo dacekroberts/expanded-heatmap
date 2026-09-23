@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**161 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**163 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [The unplaceable label was the circular line, and the fix is a second pass rather than more candidates](#2026-09-22---the-unplaceable-label-was-the-circular-line-and-the-fix-is-a-second-pass-rather-than-more-candidates)
 - [The geocoder gap was closed by moving the boundary, not the code](#2026-09-22---the-geocoder-gap-was-closed-by-moving-the-boundary-not-the-code)
 - [Guadalajara was the last step file that fetched, and the rule is now a check](#2026-09-22---guadalajara-was-the-last-step-file-that-fetched-and-the-rule-is-now-a-check)
 - [Mexico City's fetching moved out of its steps, as the worked pattern for the other two](#2026-09-22---mexico-citys-fetching-moved-out-of-its-steps-as-the-worked-pattern-for-the-other-two)
@@ -27,6 +28,7 @@ onwards; the early ones are split by phase rather than by hour.
 - [Check I caught another session's orphaned row within minutes, which is the first time a check here found a defect it was not written for](#2026-09-22---check-i-caught-another-sessions-orphaned-row-within-minutes-which-is-the-first-time-a-check-here-found-a-defect-it-was-not-written-for)
 - [Toronto's collapse check guarded the wrong number, and re-running it showed a baseline can miss a content change](#2026-09-22---torontos-collapse-check-guarded-the-wrong-number-and-re-running-it-showed-a-baseline-can-miss-a-content-change)
 - [Surveyed CLAUDE.md's invariants for which ones nothing verifies, and nearly shipped a check that examined nothing](#2026-09-22---surveyed-claudemds-invariants-for-which-ones-nothing-verifies-and-nearly-shipped-a-check-that-examined-nothing)
+- [Barcelona built: a Catalan premises census, a two-operator metro, and two keys whose absence was not neutral](#2026-09-22---barcelona-built-a-catalan-premises-census-a-two-operator-metro-and-two-keys-whose-absence-was-not-neutral)
 - [drift_check leaves outputs/ modified on Windows when nothing changed](#2026-09-22---drift_check-leaves-outputs-modified-on-windows-when-nothing-changed)
 - [Working the dead-constant list demonstrated, live, that drift_check is not offline for three cities](#2026-09-22---working-the-dead-constant-list-demonstrated-live-that-drift_check-is-not-offline-for-three-cities)
 - [Two probes came back clean, and the clean result is the record](#2026-09-22---two-probes-came-back-clean-and-the-clean-result-is-the-record)
@@ -198,6 +200,59 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-22 - The unplaceable label was the circular line, and the fix is a second pass rather than more candidates
+
+- **Madrid's unreadable label was `Línea 6`, the circular line, which is why
+  forcing label ends could never fix it.** The previous entry's fix - pushing
+  crowded lines to their opposite tips via `LINE_LABEL_ENDS` - took Madrid from
+  two unplaceable labels to one and stopped there. The reason is structural: a
+  forced end picks `coords[0]` or `coords[-1]`, and on a **closed loop those are
+  the same point**, so there is no other end to send the label to. Línea 6 rings
+  the centre, which is exactly where the other twelve converge, so all nineteen
+  of its candidate positions sat in one jam. `LINE_LABEL_ENDS` is empty again in
+  `pipeline/madrid/step3_map.py`; Madrid needs no per-city override at all.
+
+- **A label may now stand further off its own line when every nearer position is
+  taken** - `_LABEL_CLEARANCES = (22.0, 44.0)` in `pipeline/map_common.py`,
+  tried only after every position at the normal 6 px gap has failed. The
+  clearance is in **pixels, not ground metres**, so the label holds that
+  distance at every zoom; an offset in metres would read as attached zoomed out
+  and adrift zoomed in. Rejected alternatives, both measured rather than
+  argued: extending the along-the-line walk past halfway (`_ALONG_FRACTIONS`
+  reaches only 0.48, so **only half a closed loop is ever searched**) fixed
+  Línea 2 but never Línea 6, because the whole ring is crowded, not half of it;
+  and an explicit `CENTER`/`ZOOM` for Madrid, which the raise message names
+  first, cannot help either, since zooming in to spread the lines apart pushes
+  stations off the map and zooming out shrinks the geography while the labels
+  stay the same size.
+
+- **The first implementation changed San Francisco, and `drift_check.py` caught
+  it.** Appending the clearance candidates to the existing list looked provably
+  inert - `_layout_labels` takes the first clean candidate, so a later candidate
+  cannot displace an earlier one - and that reasoning holds **within** a view
+  and fails **across** views: `_choose_view` stops at the first view that places
+  everything, so a new candidate that rescues an **earlier** view changes which
+  view a city gets. San Francisco, already placing all six labels cleanly,
+  moved its map centre about a kilometre west (−122.4358 → −122.4481) and sent
+  one label off its line. The view search therefore runs **twice**: once with
+  exactly the old candidate set, and only then, if a label would be drawn
+  unreadable, again with clearance allowed. San Francisco came back
+  byte-identical. The full sweep afterwards: **seventeen cities identical,
+  Madrid the only change**, which is the intended one.
+
+- **The raise now names the labels it could not place.** `_layout_labels`
+  carries the unplaced keys out instead of only counting them, so the message
+  reads `'Línea 6' (line key '6')` rather than `1 transit-line label(s)`.
+  Finding out it was the circular line is what identified the real fix; the
+  solver knew that all along and was throwing it away, the same mistake in
+  miniature as discarding the cost.
+
+- **Madrid verified by measurement in a browser, not by eye**: thirteen visible
+  label elements, **zero overlapping pairs** (there were three, one of them
+  Línea 2 drawn invisible underneath the Ramal), and every label's anchor
+  **0.0 px from its own line** - queried through Leaflet's own geometry after a
+  first attempt that scraped SVG paths reported five labels as detached and was
+  discarded as a broken measurement rather than believed.
 ### 2026-09-22 - The geocoder gap was closed by moving the boundary, not the code
 
 - **The recorded plan for the three `step3_geocode.py` files was the wrong
@@ -503,6 +558,214 @@ onwards; the early ones are split by phase rather than by hour.
   not watched fail.** Every check added today was negative-tested, and this is
   the one where that discipline actually earned itself rather than merely
   confirming what reading suggested.
+### 2026-09-22 - Barcelona built: a Catalan premises census, a two-operator metro, and two keys whose absence was not neutral
+
+- **Decided to publish Barcelona on a DISCLOSED POSITION rather than hold it
+  for a live reading of terms that cannot be reached.** `docs/data_sources.md`
+  had recorded, since the licence review, that a human should open
+  `opendata-ajuntament.barcelona.cat/en/condicions-us` and confirm the terms
+  before publishing. That was attempted 2026-09-22 in a real browser and the
+  page returned hCaptcha - *"PLEASE PROVE THAT YOU ARE HUMAN"* - which this
+  project does not defeat. Owner's decision: publish. The alternative rejected
+  was holding a finished city behind a bot wall indefinitely, since nothing
+  about the obstacle is expected to change.
+
+  **The premise is narrower than it looks, which is why the call is
+  defensible.** The *declared licence* requires no CAPTCHA and was verified
+  live on the day: `package_show` returns `license_id: CC-BY-4.0` with the
+  package last modified 2025-12-02. So the GRANT is confirmed current from the
+  publisher's own machine-readable metadata; only the prose *terms page* is
+  unconfirmed, and its newest capture anywhere is 2025-03-28 with no change
+  visible across captures. The exposure is therefore not "we do not know if we
+  may use this" but "we may be complying with a superseded revision of the
+  conditions" - and this project meets three of the four stated obligations on
+  the page while recording the fourth as an outstanding owner action.
+
+  **Distinguished from Philadelphia, whose shape it borrows.** There the
+  operative sentence is a flat prohibition read from the LIVE page and the
+  question is what the clause MEANS; the map stays up on a disclosed reasoned
+  position with a written request outstanding. Here neither the clause nor the
+  grant is in doubt and the only question is whether a page moved since its
+  last capture. Same disposition, weaker premise needed to reach it.
+
+  **The standing removal commitment is what makes this safe to decide rather
+  than agonise over**, and it is the reason the decision is recorded next to it:
+  a removal request from Barcelona City Council is honoured without argument -
+  the layer or the city comes down first, the reasoning is written afterwards.
+  The file now says to re-read the live terms whenever the CAPTCHA can be
+  passed and record the result either way.
+
+- **Corrected the stored Barcelona terms' own snapshot date, from 2025-03-21 to
+  2025-03-28.** The header was written from the build brief; the file's own
+  Wayback banner says `20250328093226`, because the Machine serves the nearest
+  capture to the date requested rather than refusing. Re-fetched and diffed
+  against the stored copy: identical but for HTML-entity escaping of the
+  suggested attribution markup, with the notification clause present in both,
+  and it is the newest capture that exists. A stored evidence file has to be
+  right about its own provenance - it exists so a quoted clause can be checked
+  against a document instead of against a summary, which fails if the document
+  is not the one the header names.
+
+- **Fixed two defects in `check_provenance.py --strict` found by running it as
+  the deploy gate, one of which pointed at a correct value and called it
+  wrong.** The SHA-256 check read the WORKING TREE while
+  `docs/licenses/README.md` instructs computing from the COMMITTED file;
+  `.gitattributes` sets `* text=auto eol=lf`, and
+  `cta-developer-license-agreement.html` is 230,064 bytes committed against
+  232,828 on a Windows checkout, so the check failed and advised recomputing a
+  digest that was already right. It now falls back to a CRLF-normalised hash
+  before failing. Separately, the markdown-link and citation walks followed
+  `.claude/**/*.md` into `.claude/worktrees/<session>/.venv-lean/` and reported
+  a broken link inside **Streamlit's own bundled documentation** - a
+  dependency's file in another session's working copy. Both walks are now
+  scoped to this project's own files. A checker that reports other people's
+  files, or contradicts its own documented method, trains a reader to skim its
+  output.
+
+- **Barcelona's own two provenance rows were the wrong width, and markdown
+  renders that silently.** All three were written on the transit table's
+  five-cell shape; business registries takes six
+  (`City | Source | Provides | Endpoint | Filter at download | Retrieved`) and
+  boundary layers takes four. The transit row was correct by luck. Caught by
+  the table check in the same `--strict` run, which exists because Edmonton's
+  and Toronto's rows were orphaned in two tables at once and Philadelphia's OPA
+  row carried five cells against a six-cell header.
+
+- **`docs/city_master_list.md` still read "Built - 16" with 18 cities in
+  `app/cities.py`.** It is the one file `CLAUDE.md` directs readers to take
+  counts from, so its numbers are load-bearing in a way no other document's
+  are. Spain is now a counted row, recording what did NOT generalise between
+  its two cities: different rail sources (CRTM's ArcGIS layers against
+  OpenStreetMap), different projected CRS (25830 against 25831), and different
+  LEVELS of similar four-level taxonomies, each chosen on measurement.
+
+- **Built Barcelona from the Ajuntament's 2022 Cens de locals en planta baixa,
+  rejecting the fresher 2024 resource as geographically incomplete.** Per-step
+  counts: 66,088 census rows -> 58,908 `Actiu` (7,180 vacant premises dropped,
+  10.9%) -> 58,908 with usable coordinates (zero bad, against Madrid's 9.21%)
+  -> 35,958 storefront (Retail 20,293, Food service 9,992, Personal services
+  5,673) across all 10 districts; 112 stations inside the city from 374 route
+  relation member nodes, 50 excluded; 35,936 premises within a ring. The 2024
+  resource holds 44,000 rows and its shortfall is wildly uneven - Sant Andreu
+  -83%, Nou Barris -76%, Horta-Guinardo -69% against Ciutat Vella's -5% - so a
+  map built on it would show the periphery as commercially dead, which is
+  roughly what a reader expects and therefore would not look broken. The
+  rejected alternative is two years fresher. The city page states the survey
+  year, which is also what reconciles the choice with Act 37/2007 Article 8's
+  "most up-to-date data" wording that Barcelona's terms incorporate expressly.
+
+- **Keyed the new `barcelona_activitat` taxonomy on `Nom_Activitat`, the FINEST
+  of the census's four levels - the opposite of Madrid, and for measured
+  reasons.** `Nom_Grup_Activitat` puts 20,693 of 58,908 active rows (35%) into
+  `Altres`, and its `Restaurants, bars i hotels` group is the HOSTELERIA trap in
+  Catalan: 10,722 rows of which **720 are `serveis d'allotjament`**, so keying
+  on the group would have published 720 hotels, hostals and pensions as food
+  service - the error the Mexico City build made once with SCIAN 72. All 75
+  values of `Nom_Activitat` are enumerated with an explicit home, verified
+  against the census rather than asserted.
+
+- **Let the publisher's own hierarchy settle two bucket calls that were about to
+  go the other way.** `Plats preparats (no degustacio)` (202 rows) sits under
+  `Quotidia alimentari` beside the butcher and the greengrocer, not under the
+  restaurants group, so Barcelona files prepared-food-to-carry-home as food
+  RETAIL; and `Fotografia` (144) sits under `Comerc al detall`, making it the
+  camera shop rather than the portrait studio. Both readings came off the
+  published hierarchy instead of a reading of the Catalan.
+
+- **Dispatched `Altres` on two further columns, because the value means five
+  different things depending on its parent.** 625 rows under `Quotidia
+  alimentari` are food retail, 458 under `Comerc al detall /Engros` are
+  retail/wholesale with no activity detail at all, 323 under sector `Altres` are
+  genuinely other, 115 under `Serveis` are services and 24 under the restaurants
+  group are food service. Chicago's `EXTRA_COLUMNS` mechanism, reused. The 458
+  are excluded rather than assigned to Retail: "it is in a sector whose name
+  contains retail" is not evidence about a premises, and that sector explicitly
+  mixes in wholesale.
+
+- **Kept mall, gallery and municipal-market interiors rather than excluding them
+  with the site-type flags Barcelona uniquely supplies.** A mall beside a
+  station is real commercial density a rider can reach, and excluding it would
+  make Barcelona measure something different from the other sixteen cities on a
+  map that invites comparison. `SN_CComercial`, `SN_Galeria` and `SN_Mercat` are
+  recorded as available-but-unused so a later decision can reach for them.
+
+- **Drew 16 lines - 14 metro refs plus funiculars FM and FV - using the
+  operators' own `network` tag as the scope test rather than a judgement about
+  what counts as a metro.** FM (Montjuic) is TMB's and tagged `Metro de
+  Barcelona`; FV (Vallvidrera) is FGC's, tagged `Metro del Valles`, and is route
+  `FV` in FGC's own GTFS. FT (Tibidabo) is operated by Barcelona de Serveis
+  Municipals - the municipal parks company - carries no network tag, and is
+  excluded; trams T1-T6 are `Trambaix` and `Trambesos`, neither a metro, and the
+  same test excludes them without a separate decision. Deciding by MODE would
+  have been wrong in both directions: FGC's three `route_type=7` routes are FV
+  plus `Cremallera Montserrat` and `Cremallera de Nuria`, rack railways 50 km
+  and 150 km from the city.
+
+- **Found that a PTv2 route relation and a `railway=station` node are different
+  objects, after a station query returned exactly zero.** 225 station nodes, 378
+  relation member nodes, **no overlap at all**: a relation holds `stop_position`
+  nodes while `railway=station` marks the station box on a `stop_area` relation.
+  The step raised rather than writing an empty map. This is also the third
+  distinct station object in three OSM cities - Mexico City 184
+  `railway=station`, Guadalajara one and 501 `railway=stop`, Barcelona 227 and
+  501 - which is the meta-rule `osm-rail` exists for, hit again.
+
+- **Collapsed two interchanges that FGC and TMB name differently, which the
+  median-spacing gate structurally cannot catch.** FGC writes
+  "Barcelona-Placa Catalunya" where TMB writes "Catalunya", 178 m apart, and the
+  same for Espanya at 198 m - two of the busiest interchanges in the city drawn
+  twice, with two markers and two overlapping ring sets. Two bad names out of
+  114 moved the median not at all and the set passed gate 1 at 520 m; the
+  nearest-neighbour MINIMUM showed it. `pipeline/stations.py` now prints that
+  minimum for every city as a prompt rather than a threshold, because Barcelona
+  also has a genuine 40 m pair (Sant Gervasi and Placa Molina). Stations: 114 ->
+  112, median 520 -> 534 m.
+
+- **Darkened three line colours along their own hue after `linecolour.py`
+  refused to render, and one of them is Calgary's bug on the identical hex.**
+  Barcelona's L5 is TMB's `#0072CE` - the same value Calgary shipped - at
+  Delta-E 3.3 from Retail; L9 Sud was Delta-E **0.0** from L9 Nord because TMB
+  brands the two disconnected segments as one line; L10 Sud was 5.8 from L10
+  Nord. Darkened to ~18 rather than to PREFERRED 45, because at 45 L5 becomes a
+  near-black navy and L9 Sud becomes brown, while ~18 sits inside the band six
+  built cities already occupy while keeping agency colours (New York 13.6,
+  Montreal 16.9, Boston 20.1 and 27.3).
+
+- **Two keys whose ABSENCE is not neutral, both caught by
+  `check_deploy_imports` and both from the same family.** Barcelona had no
+  `label_offset`, which `pd.DataFrame` fills with `float('nan')` - not None, and
+  truthy - the defect that took the Overview down earlier the same day. And it
+  had no `in_default_view`, which `IN_DEFAULT_VIEW` defaults to **True**, so
+  Barcelona silently joined the landing frame and stretched it from California
+  to Catalonia. **The symptom named innocent cities**: five failures reporting
+  Calgary/Toronto and Guadalajara/Los Angeles colliding and three labels clipped
+  off the west edge, none of them naming a Spanish city. `scaffold_city.py`
+  writes neither key.
+
+- **Measured Barcelona's macro-map label width in a real browser rather than
+  guessing it: 67.9 px.** `check_macro_labels.py` refuses a guessed width, which
+  is the point of it. Seven cities already in the table were measured in the
+  same pass and every one reproduced its recorded value exactly (Madrid 47.2,
+  Los Angeles 80.8, Guadalajara 152.7), proving the font had loaded and nothing
+  had drifted.
+
+- **Privacy verdict: publish.** `check_personal_exposure.py` reports no
+  registrant-name fallback exists for this city - step 2 never loads an owner
+  column and asserts as much - so no pin CAN be a person's name. No address is
+  published at all: `USECOLS` never requests one and `Referencia_Cadastral`, a
+  property-title reference that IS in the source, is in `FORBIDDEN_COLUMNS`.
+  Zero emails, phone numbers or `c/o` markers. The person-name heuristic flags
+  27.8% against Madrid's 44.8% on the same measure, and a 30-name sample is
+  trade names (FARMACIA COMTAL, LA TAGLIATELLA, SPEEDY WASH); the few reading as
+  personal are shops named after their proprietor, which is a sign on a street.
+
+- **Verified the rendered map visually as well as structurally.** 16/16 line
+  colours drawn, 16/16 on-map labels, OSM attribution present and linked to the
+  copyright page. The browser pane initially reported the map at 0 px wide,
+  which reproduced on Madrid too and turned out to be Leaflet latching a
+  zero-width container at load in a hidden window - not a defect: the committed
+  HTML declares `width: 1000.0px`, byte-identical in that respect to Toronto's,
+  which is live.
 
 ### 2026-09-22 - drift_check leaves outputs/ modified on Windows when nothing changed
 

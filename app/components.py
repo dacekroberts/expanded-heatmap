@@ -363,6 +363,57 @@ _NOTICES = [
     # docs/licenses/translink-gtfs-static-terms-of-use.txt - the other file in
     # that directory is kept only because it looks like it governs and does
     # not. One Legend covers both cities: Surrey has no rail of its own.
+    # MADRID, added 2026-09-22 with the city. TWO notices from TWO licences,
+    # because the premises and the rail have different owners - the same split
+    # Montreal needed for the City and the STM.
+    #
+    # The Ayuntamiento's Condiciones generales are BINDING BY USE - "obligan a
+    # cualquier persona y/o empresa que reutilice datos por el mero hecho de
+    # hacer uso" - and CC BY 4.0 is not the whole instrument. Three duties land
+    # in this sentence:
+    #   * cite the source, in a form the conditions themselves offer:
+    #     "Origen de los datos: Ayuntamiento de Madrid"
+    #   * STATE THE LAST-UPDATE DATE of the documents reused, which no other
+    #     notice in this list has to carry
+    #   * do not indicate, insinuate or suggest that the Ayuntamiento
+    #     participates in, sponsors or supports the reuse
+    #
+    # Marked VERBATIM because the attribution form is prescribed; the
+    # transformation sentence around it is this project's own wording, the way
+    # INEGI's is.
+    ("Ayuntamiento de Madrid",
+     "Origen de los datos: Ayuntamiento de Madrid. Business locations for "
+     "Madrid are from the Censo de locales, sus actividades y terrazas de "
+     "hosteleria y restauracion, as published on datos.madrid.es and "
+     "last updated 22 September 2026. The data shown here has been filtered, "
+     "grouped and measured by this project and not by the Ayuntamiento de "
+     "Madrid: it is restricted to premises the register records as open and in "
+     "retail, food service or personal services categories, grouped into three "
+     "categories of this project's own, and measured by distance from Metro "
+     "stations. The Ayuntamiento de Madrid does not endorse this project or "
+     "its use of the data.",
+     True),
+    # CRTM's licence prescribes the WORDING "Powered by CRTM" and requires a
+    # link to its site, which is why this is marked verbatim and why the phrase
+    # is in English inside an otherwise Spanish credit - the licence says so.
+    #
+    # It ALSO requires citation "especificando si son datos en bruto o
+    # explotados", which is a DISCLOSURE-OF-TRANSFORMATION duty rather than a
+    # louder attribution - the same split as the Ville de Montreal's "ou si des
+    # interpretations en ont ete tirees" and INEGI's 1(g). This project draws
+    # and relabels the network, so the answer is "explotados" and a bare credit
+    # would not satisfy it.
+    ("CRTM (Consorcio Regional de Transportes de Madrid)",
+     "Powered by CRTM - www.crtm.es. Metro de Madrid station locations and "
+     "line geometry are from CRTM's open data, last updated by CRTM on "
+     "5 June 2026 and shown here as recorded on that date. Used as datos "
+     "explotados "
+     "rather than en bruto: the network has been redrawn, its 293 "
+     "station-per-line records collapsed to one point per station, stations "
+     "outside the termino municipal removed, and each line's eighteen "
+     "published codes collapsed to its thirteen real lines. CRTM does not "
+     "participate in, sponsor or support this project.",
+     True),
     ("TransLink",
      "Route and arrival data used in this product or service is provided by "
      "permission of TransLink. TransLink assumes no responsibility for the "
@@ -537,12 +588,32 @@ _NOTICES = [
     # satisfied for the basemap by every rendered map's "© OpenStreetMap
     # contributors"; this line exists so the credit visibly covers the LINE
     # GEOMETRY too, which is data rather than tiles.
-    ("OpenStreetMap (Mexican rail)",
+    ("OpenStreetMap (rail geometry)",
      "Rail route geometry and station locations for Mexico City (Metro CDMX "
-     "and Tren Ligero) and Guadalajara (Tren Ligero) are from OpenStreetMap, "
+     "and Tren Ligero), Guadalajara (Tren Ligero) and Barcelona (Metro de "
+     "Barcelona, including its FGC lines and both funiculars) are from "
+     "OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
      "geometry; stations, rings and categories are this project's work.",
+     False),
+    # Barcelona's terms prescribe the source wording AND require modifications
+    # to be identified at distribution - the disclosure-of-transformation
+    # family for the fourth time, after Montreal, INEGI and Madrid. A credit
+    # alone does not discharge the second. See docs/data_sources.md item 21.
+    #
+    # The separate duty to NOTIFY the Council of every derived project is an
+    # affirmative act owed to the publisher, not text on a page, so it is not
+    # dischargeable here and is tracked as an owner action instead.
+    ("Ajuntament de Barcelona",
+     "Source of the data: Barcelona City Council. The premises shown for "
+     "Barcelona are from the Cens de locals en planta baixa amb activitat "
+     "economica, 2022 survey, used under CC BY 4.0. The data has been "
+     "modified by this project and not by the Ajuntament: vacant premises are "
+     "removed, it is filtered to storefront categories, grouped into three "
+     "categories of this project's own, and measured by distance from metro "
+     "stations. The Ajuntament does not endorse this project or its use of "
+     "the data.",
      False),
 ]
 

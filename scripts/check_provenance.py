@@ -424,6 +424,23 @@ def check_tables():
     return problems
 
 
+# THIS REPOSITORY'S OWN FILES, AND NOTHING ELSE UNDER ITS ROOT.
+#
+# `.claude/**/*.md` reaches into `.claude/worktrees/<session>/`, and a sibling
+# session's worktree contains its own `.venv-lean`. That is how this check came
+# to report a broken link in **Streamlit's bundled documentation** - a file
+# belonging to a dependency, inside another session's working copy, which this
+# project neither wrote nor can fix. A checker that reports other people's
+# files trains you to skim its output.
+_NOT_OURS = ("/worktrees/", "/site-packages/", "/node_modules/",
+             "/.venv", "/__pycache__/")
+
+
+def ours(path):
+    rel = "/" + path.relative_to(ROOT).as_posix()
+    return not any(seg in rel for seg in _NOT_OURS)
+
+
 def check_links():
     """H: relative markdown links that do not resolve."""
     fence = re.compile(r"```.*?```", re.S)
@@ -433,7 +450,7 @@ def check_links():
     seen = set()
     for g in ("docs/**/*.md", ".claude/**/*.md", "*.md"):
         for q in sorted(ROOT.glob(g)):
-            if not q.is_file() or q.resolve() in seen:
+            if not q.is_file() or not ours(q) or q.resolve() in seen:
                 continue
             seen.add(q.resolve())
             text = read(q)
@@ -476,12 +493,28 @@ def check_licence_hashes():
         if q is None:
             problems.append(f"{name}: hash listed but the file is gone")
             continue
-        actual = hashlib.sha256(q.read_bytes()).hexdigest()
+        # HASH WHAT GIT STORES, NOT WHAT IS ON DISK.
+        #
+        # docs/licenses/README.md says to compute these "from the COMMITTED
+        # file, never from the file you just fetched", because `.gitattributes`
+        # sets `* text=auto eol=lf` and git rewrites CRLF on the way in. This
+        # check used to read the working tree, which contradicts that on any
+        # checkout where a file sits with CRLF - and one does:
+        # `cta-developer-license-agreement.html` is 230,064 bytes committed and
+        # 232,828 on a Windows working tree. The listed hash was RIGHT and the
+        # checker was wrong, which is the worse way round, because the message
+        # it printed told you to go and change the correct value.
+        raw = q.read_bytes()
+        actual = hashlib.sha256(raw).hexdigest()
         if actual != digest:
+            normalised = hashlib.sha256(raw.replace(b"\r\n", b"\n")).hexdigest()
+            if normalised == digest:
+                continue
             problems.append(
                 f"{name}: listed {digest[:16]}... but the file hashes to "
-                f"{actual[:16]}... - recompute from the COMMITTED file, not "
-                f"the one you just fetched (.gitattributes normalises CRLF)")
+                f"{actual[:16]}... ({normalised[:16]}... with CRLF normalised) "
+                f"- recompute from the COMMITTED file, not the one you just "
+                f"fetched (.gitattributes normalises CRLF)")
     for name in sorted(set(on_disk) - set(listed)):
         problems.append(f"{name}: stored licence with NO hash listed")
     return problems
@@ -515,7 +548,7 @@ def check_citations(doc):
     hard, soft = [], []
     for g in CITATION_GLOBS:
         for p in sorted(ROOT.glob(g)):
-            if not p.is_file() or p.name in CITATION_SKIP:
+            if not p.is_file() or not ours(p) or p.name in CITATION_SKIP:
                 continue
             rel = p.relative_to(ROOT).as_posix()
             if rel in CITATION_SKIP_PATHS:

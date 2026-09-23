@@ -88,6 +88,12 @@ TAXONOMY_MODULES = {
     "toronto_mlscategory": "pipeline.taxonomies.toronto_mlscategory",
     "scian": "pipeline.taxonomies.scian",
     "madrid_epigrafe": "pipeline.taxonomies.madrid_epigrafe",
+    # Barcelona's four-level Catalan scheme, keyed on its FINEST level -
+    # the opposite of Madrid, and for a measured reason: the group level dumps
+    # 35% of the city into `Altres` and buries 720 hotels inside its
+    # restaurants group. It also dispatches `Altres` on two further columns,
+    # because that value means five different things depending on its parent.
+    "barcelona_activitat": "pipeline.taxonomies.barcelona_activitat",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

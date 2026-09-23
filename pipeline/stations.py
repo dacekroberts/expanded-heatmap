@@ -138,6 +138,25 @@ def verify_stations(*, city, platforms, stations, crs_projected,
         print(f"    NOTE: uncollapsed median {raw_med:.0f} m is wide for "
               f"platforms - confirm the right stops were selected.")
 
+    # THE MEDIAN CANNOT SEE A HANDFUL OF UNCOLLAPSED NAMES, and a handful is
+    # the usual number. Barcelona passed gate 1 at a 520 m median while two of
+    # its busiest interchanges sat in the set TWICE - FGC writes
+    # "Barcelona-Placa Catalunya" where TMB writes "Catalunya", 178 m apart,
+    # and the same for Espanya at 198 m. Two names out of 114 move a median not
+    # at all. It was the nearest-neighbour MINIMUM that showed it.
+    #
+    # Printed rather than raised, because a genuinely close pair does exist -
+    # Barcelona's own Sant Gervasi and Placa Molina are two real FGC stations
+    # 40 m apart, and L11's Casa de l'Aigua sits 230 m from Trinitat Nova. So
+    # this cannot be a threshold; it is a prompt to go and look.
+    close = int((st_nn < spacing_min / 2).sum())
+    if close:
+        print(f"    NOTE: {close} station(s) within {spacing_min / 2:.0f} m of "
+              f"another (minimum {st_nn.min():.0f} m). Some cities really do "
+              f"have close pairs - but this is also what ONE STATION UNDER TWO "
+              f"NAMES looks like, and the median will not show it. Check the "
+              f"closest pairs by name before accepting the collapse.")
+
     mismatched = {}
     if expected_per_line and actual_per_line:
         print("    against the operator's own published counts:")

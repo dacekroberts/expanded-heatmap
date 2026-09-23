@@ -22,18 +22,29 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 
 ---
 
-## Built — 16
+## Built — 18
 
 | Country | Cities |
 |---|---|
 | **United States** (9) | San Diego · San Francisco · Los Angeles · Chicago · New York · Philadelphia · Miami · Boston · Washington D.C. |
 | **Canada** (5, complete) | Vancouver *(with Surrey)* · Montréal · Calgary · Edmonton · Toronto |
 | **Mexico** (2) ✅ | **Mexico City** · **Guadalajara (Regional)** — built 2026-09-22, live in the app |
+| **Spain** (2) ✅ | **Madrid** · **Barcelona** — built 2026-09-22 |
 
 ✅ **Mexico is the first country built outside North America's anglophone
 pair**, and the first where the rail leg came from **OpenStreetMap** rather
 than an agency feed — the per-city exception approved for CDMX, which
 validated at 195/195 stops exact.
+
+✅ **Spain is the first country in EUROPE**, and the first where the two cities
+did not generalise to each other in any leg. Different rail sources (Madrid
+takes CRTM's own ArcGIS layers, Barcelona OpenStreetMap), different projected
+CRS (25830 against 25831), different taxonomy LEVELS of similar four-level
+schemes — Madrid keys on its division, Barcelona on its finest level, and each
+for a measured reason. Both carry the same accommodation trap and it bites at a
+different depth in each. Barcelona is also the first source in the project to
+impose an obligation that is **an act rather than a notice**: its terms require
+the City Council to be informed of every derived project.
 
 ## Candidates — 33
 
