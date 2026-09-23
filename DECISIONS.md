@@ -16,11 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**190 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**191 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
 - [check_stale_claims category A was reporting three findings and none of them was real](#2026-09-23---check_stale_claims-category-a-was-reporting-three-findings-and-none-of-them-was-real)
+- [PLAN.md gains the handoff it was missing, and Paris reverified](#2026-09-23---planmd-gains-the-handoff-it-was-missing-and-paris-reverified)
 - [Paris's brief re-verified against live sources: 7/7 hold](#2026-09-23---pariss-brief-re-verified-against-live-sources-77-hold)
 - [CUZK read: Prague is unblocked, and the "cookie terms" were not only cookie terms](#2026-09-23---cuzk-read-prague-is-unblocked-and-the-cookie-terms-were-not-only-cookie-terms)
 - [The sweep's results sorted: Goteborg banded, two discards evidenced](#2026-09-23---the-sweeps-results-sorted-goteborg-banded-two-discards-evidenced)
@@ -262,6 +263,31 @@ onwards; the early ones are split by phase rather than by hour.
   known false positives disappear, and a `Boston is not yet built` injected
   into `project_context.md` is still caught - a proximity window that had been
   tightened too far would have passed the first test and failed the second.
+### 2026-09-23 - PLAN.md gains the handoff it was missing, and Paris reverified
+
+- **Five brief-ready cities had a brief with passing checks and NO item in
+  `PLAN.md` at all.** "Next cities, in ease order" held only the US and
+  Mexican entries, so `add-city` Step 0's instruction - turn what the probe
+  found and left open into an ordered checklist under that city's item -
+  **had nothing to hang under.** Creating the items was part of the job.
+  Written for **Paris, Hong Kong, Prague, Oslo and Goteborg**, in build order,
+  every line a measurement rather than a template step.
+
+- **This is the artifact that makes the next session cheap, and it carries no
+  session context.** The checklists front-load the things that fail SILENTLY:
+  Paris's `"A"` not `"Actif"` and its per-row `epsg` column; Prague's
+  EPSG:5513 ordering, whose wrong variants land in Germany and the Arctic
+  without erroring; Oslo's `?kommunenummer=0301` not constraining the address
+  actually read; Hong Kong's 14,263 non-storefront rows. **A checklist that
+  only lists steps is a template; one that lists the traps is a handoff.**
+
+- **Paris re-verified against live sources: 7/7 still hold.** Nothing drifted
+  while the other four cities were being taken to brief-ready - the SIRENE
+  parquet, the geolocation file, IDFM's feed, the `mobility-licence`
+  declaration and INSEE's NAF labels all answer as recorded. The check that
+  matters most is the negative one: **the IDFM feed still carries no
+  `feed_info.txt`**, so the correction that replaced this brief's
+  self-attestation claim is still true.
 
 ### 2026-09-23 - Paris's brief re-verified against live sources: 7/7 hold
 
