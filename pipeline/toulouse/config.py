@@ -208,9 +208,12 @@ ROUTE_IDS = ["line:61", "line:69", "line:68", "line:204"]
 #
 #   - it matches Paris (751xx) and Marseille (132xx), keeping the three French
 #     cities on one comparable scope;
-#   - the standing rule is that stations in another city are a NEW PROJECT, not
-#     a config change - drawing Blagnac's stations would need Blagnac's
-#     business data, sourced and licence-checked separately;
+#   - the standing rule that stations in another city are a new project does
+#     NOT apply in France, and was wrongly cited here at first. SIRENE is one
+#     national file, so Blagnac's businesses are already in the parquet this
+#     city reads, and widening the scope really is just more commune codes -
+#     Miami's situation, where one county register made a regional map
+#     possible. The reason that holds is comparability, above;
 #   - widening to Toulouse Métropole would mean filtering SIRENE on 37 commune
 #     codes and would set a precedent the remaining French cities would inherit.
 #

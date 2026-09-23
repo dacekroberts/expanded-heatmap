@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**235 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**236 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Two corrections to the Toulouse build, both found while scoping Lille](#2026-09-23---two-corrections-to-the-toulouse-build-both-found-while-scoping-lille)
 - ["Only city" claims read against 23 cities: eleven false, two overstated, one true](#2026-09-23---only-city-claims-read-against-23-cities-eleven-false-two-overstated-one-true)
 - ["Every map here covers one rail network" survived four hours and one new city](#2026-09-23---every-map-here-covers-one-rail-network-survived-four-hours-and-one-new-city)
 - [A self-test for the one check whose vocabulary is meant to be edited](#2026-09-23---a-self-test-for-the-one-check-whose-vocabulary-is-meant-to-be-edited)
@@ -274,6 +275,38 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Two corrections to the Toulouse build, both found while scoping Lille
+
+- **CORRECTION: Toulouse's commune-only scope was partly justified by a rule
+  that does not apply in France.** The entry and the published page said
+  drawing Blagnac's stations "would mean mapping Blagnac's businesses too,
+  which is a different project rather than a wider filter." That rule exists
+  for cities whose business data is municipal - it is why San Diego's
+  neighbouring-city stations were a new project, each city licensing
+  separately. SIRENE is one national file under one licence, so Blagnac's
+  businesses were already in the parquet Toulouse reads, and widening the scope
+  was just more commune codes - Miami is this project's precedent for exactly
+  that case. The decision stands on its other stated ground, comparability
+  with Paris and Marseille. The error surfaced while scoping Lille, where it
+  would have argued against the regional scope the owner then chose. Corrected
+  on the page, in `docs/excluded_categories.md` and in the city's config, with
+  the replacement wording approved by the owner before it was written.
+
+- **CORRECTION: a 504 from Overpass is not "usually the query", and the rule
+  written this afternoon said more than its evidence did.** It rested on one
+  pair of observations on the Toulouse bbox - a node+way `out center` query
+  504ing where a nodes-only one answered in seconds. Two hours later, scoping
+  Lille, a **tags-only** relation query - the cheapest query there is, with no
+  geometry at all - drew a 504 from overpass-api.de and a read timeout from
+  kumi.systems, on two consecutive runs. So a 504 is sometimes the host and
+  nothing else. What survives is narrower and still useful: query cost is the
+  half you control, so rule it out first, then treat the remainder as a fact
+  about the host. `fetch()`'s behaviour needed no change - it already falls
+  through to the next mirror either way - so only the wording was corrected, in
+  `pipeline/osm.py`, `scripts/brief_check.py` and `osm-rail`. **The shape of
+  the error is the one this project keeps recording**: a single paired
+  observation written up as a general rule, in shared code, the same day.
 
 ### 2026-09-23 - "Only city" claims read against 23 cities: eleven false, two overstated, one true
 

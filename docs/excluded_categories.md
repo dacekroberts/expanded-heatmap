@@ -1043,8 +1043,10 @@ Beauzelle to the Airbus works and the exhibition centre, and this map covers the
 commune of Toulouse, so those twelve stops and the rings around them are not
 drawn. Métro A loses Balma-Gramont and Métro B loses Ramonville on the same
 rule. All fourteen are listed, with the commune each lies in, at
-`outputs/toulouse/excluded_stations.csv`. Drawing them would mean mapping
-Blagnac's businesses too - a different project rather than a wider filter.
+`outputs/toulouse/excluded_stations.csv`. Blagnac's businesses are in the
+same national register, so this is a scoping choice rather than a data limit -
+the map keeps to the commune so that Toulouse, Paris and Marseille are drawn on
+the same terms.
 
 **Nothing is excluded here for being a cable car.** Téléo is drawn: three
 stations, all inside the commune, and the first non-rail mode anywhere on this

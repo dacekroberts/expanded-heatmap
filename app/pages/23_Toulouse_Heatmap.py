@@ -42,9 +42,10 @@ The map covers the **commune of Toulouse**, and here that costs something real.
 Métro A loses one station and Métro B one; **Tramway T1 loses twelve of its
 twenty-five** — the whole branch out through Blagnac and Beauzelle, the Airbus
 works and the exhibition centre with it. All fourteen are listed in
-`outputs/toulouse/excluded_stations.csv`. Drawing them would mean mapping
-Blagnac's businesses too, which is a different project rather than a wider
-filter.
+`outputs/toulouse/excluded_stations.csv`. Blagnac's businesses are in the
+same national register this map reads, so leaving them out is a choice rather
+than a limit of the data: the map keeps to the commune so that Toulouse can be
+read alongside Paris and Marseille on the same terms.
 
 Businesses come from **SIRENE**, France's national register of établissements,
 joined to INSEE's separate geolocation file — the same two sources Paris and
