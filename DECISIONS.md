@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**212 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**213 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [CVR is normalised, and the premises file is nearly empty on its own](#2026-09-23---cvr-is-normalised-and-the-premises-file-is-nearly-empty-on-its-own)
 - [Copenhagen's gate was read at the wrong host, and it is light](#2026-09-23---copenhagens-gate-was-read-at-the-wrong-host-and-it-is-light)
 - [Oslo's names are the best in the project, and 28.6% may be people](#2026-09-23---oslos-names-are-the-best-in-the-project-and-286-may-be-people)
 - [Band B measured for briefs, and two of its six are not Band B cities](#2026-09-23---band-b-measured-for-briefs-and-two-of-its-six-are-not-band-b-cities)
@@ -251,6 +252,69 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - CVR is normalised, and the premises file is nearly empty on its own
+
+- **`Produktionsenhed` carries TWO attributes - `pnummer` and
+  `beskaeftigelse` - and neither is an address, a name or an activity code.**
+  Read from the objekttypekatalog. **A reader who stopped at that page would
+  conclude Copenhagen has no usable premises data**, which is the Colombia-RUES
+  verdict: millions of premises rows, no location. **A reader who downloaded
+  only that file would get a table of `pnummer`s and discover it mid-build.**
+
+- **The answer is one line of small print: *Subtype af
+  CVREnhedMedStamdata*.** That supertype carries `cvrAdresse` (**location**),
+  `branche` (**activity**, and `Branche` itself is `kode` + `tekst`, so the
+  NACE code AND its label ship together) and `navn` (**trade name**). ✅ **So
+  Copenhagen passes `add-country`'s pair test - location and activity asked
+  SEPARATELY - but only through inheritance.**
+
+- **CVR's fildownload is ONE FILE PER ENTITY, so the build is a JOIN across
+  four files, not a read of one.** *"Totaldownload ... indeholder hver især
+  data bestående af en enkelt entitet."* The four are **Produktionsenhed**
+  (the spine), **Adressering**, **Branche** and **Navn**. This is a materially
+  different build from France's single SIRENE parquet, and it was invisible
+  until the schema was read.
+
+- **`LatestTotalForEntity` removes the filename guessing entirely.** The
+  documented form is
+  `GetFile?Register=CVR&LatestTotalForEntity=<Entity>&type=current&format=CSV`,
+  so no `zzzz` extract number has to be discovered or guessed. **Guessed
+  identifiers have cost this project real time** - Overpass relation ids, a
+  truncated Toulouse GTFS URL - and here the publisher supplies the escape.
+
+- **⚠️ `current` does NOT expose every entity, and the page says so quietly.**
+  Bitemporal lists *"Udstillede entiteter: Alle"*; current and temporal both
+  say *"Ikke alle"*. **`Beskaeftigelse` and `CVREnhed` are bitemporal-only.**
+  That matters specifically: **Paris uses an EMPLOYEE filter to strip home
+  registrations**, and if Copenhagen needs the same guard, employment has to
+  come from the bitemporal file rather than the current one.
+
+- **🚨 The refresh window is seven days, which makes a committed snapshot
+  expire.** *Genereringstid: natten til lørdag, mellem klokken 3 og 6.
+  Arkiveringstid: 7 dage.* Generated weekly, retained a week. **This is
+  WMATA's ten-day window again** - and the lesson there was that a stale feed
+  still parses, still has rows and still builds a map. Copenhagen's
+  `fetch_sources.py` must record the download date and treat an expired copy
+  as an **error, not a warning**.
+
+- **The authentication recommendation was WRONG and the owner's screenshot
+  caught it.** Shared Secret was recommended from the generic Confluence page,
+  which says it *"kan bruges til at kalde alle typer af data"*. True, and not
+  the guidance. **The product UI is specific where the doc is generic**:
+  API-Keys grant *"adgang til tjenester med **frie data**"*, while OAuth Shared
+  Secret is for *"tjenester med **fortrolige data** ... anvendes sammen med
+  ansøgning om adgang og oplysning af IP-adresser"* - both of which had been
+  explicitly ruled out. **The wrong choice would have dragged in the access
+  request and the IP allowlist.** Confirmed afterwards from the CVR page
+  itself: API-key works *"såfremt man ikke forsøger at hente adgangsbegrænset
+  data"*, and OAuth is required only for `CVRPerson`.
+
+- **The generalisable form: when a generic reference page and the product's
+  own UI disagree about which mechanism to use, the UI is describing THIS
+  service and the reference is describing the platform.** Prefer the specific
+  one. This is `read-licence` step 4's question - does this document describe
+  the platform or this dataset - applied to authentication rather than terms.
 
 ### 2026-09-23 - Copenhagen's gate was read at the wrong host, and it is light
 
