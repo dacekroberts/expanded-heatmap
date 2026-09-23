@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**178 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**179 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [The cleanup role was written down portably, method only](#2026-09-22---the-cleanup-role-was-written-down-portably-method-only)
 - [The heredoc rule was written down four times and broken four times, so it became a hook](#2026-09-22---the-heredoc-rule-was-written-down-four-times-and-broken-four-times-so-it-became-a-hook)
 - [A front-page caption counted nine cities twice, and the drafted letters were in two places](#2026-09-22---a-front-page-caption-counted-nine-cities-twice-and-the-drafted-letters-were-in-two-places)
 - [Dublin's tooltip showed a placeholder the classifier had been dropping all along](#2026-09-22---dublins-tooltip-showed-a-placeholder-the-classifier-had-been-dropping-all-along)
@@ -214,6 +215,39 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - The cleanup role was written down portably, method only
+
+- **`docs/portable/cleanup-session.md` is this session's method, generalised
+  for a fresh session on a different project.** It carries the role
+  definition, a discovery procedure for finding that project's OWN defect
+  classes, the defect taxonomy as a checklist rather than a starting point,
+  and fourteen rules - prefer a check to a correction; never ship a check you
+  have not watched fail; assert a property rather than re-implementing the
+  computation; a guard nobody arms is worse than none; known gaps must expire;
+  do not correct a dated record; the denominator rule; guard the boundary that
+  is actually wrong; narrow guards survive and broad ones get disabled;
+  fail-open for style and fail-closed for correctness; name the remedy; verify
+  against the shared branch; measure before choosing the fix; and a rule that
+  has failed N times needs a mechanism rather than a restatement.
+
+- **Method only, and that was a scope decision taken against a real
+  constraint.** The weekly usage limit stood at 93% with the owner having
+  already said the remainder was for building. The rejected alternative was to
+  ship generalised runnable scripts alongside it. It was rejected on the
+  merits as well as the budget: `check_provenance.py` is roughly 90% specific
+  to this repository's file shapes, and a stale-claims scanner needs tuning to
+  any new repo's vocabulary anyway - so the scripts are the least portable
+  part, and the method is the asset. The one genuinely universal artifact,
+  `.claude/hooks/block_heredoc.py`, already exists and copies verbatim.
+
+- **Every borrowed example is labelled and de-identified.** The document names
+  no file in this repository, so it cannot rot when this one changes, and a
+  reader cannot mistake an illustration for an instruction about their own
+  project. Verified against this repo's own checks: no markdown link to break,
+  and `check_stale_claims.py` reports nothing against it, because the counts
+  in it are dated or over closed sets - the denominator rule applied to the
+  document that states it.
 
 ### 2026-09-22 - The heredoc rule was written down four times and broken four times, so it became a hook
 
