@@ -991,6 +991,60 @@ Rio's mapped rows and **1.1%** of São Paulo's; the structural rule reaches
 and like Milan, where ~82% of pins carry no trade name, fewer published names
 is a privacy asset rather than a loss.
 
+#### Brazil's rail sources, read 2026-09-23 by the `licence-read` agent
+
+| Source | Verdict | What it requires |
+|---|---|---|
+| **Rio de Janeiro** — `pgeo3.rio.rj.gov.br/.../Transporte_Trafego/Transporte_publico/MapServer` layers 19, 18, 9, 10 (metro stations and lines, VLT stops and lines) | **PERMITTED WITH CONDITIONS — CC BY 4.0**, declared at SERVICE level (`info/iteminfo`: *"This work is licensed under a Creative Commons Attribution 4.0 International License"*) and on all four Data.Rio items | Credit **"Prefeitura da Cidade do Rio de Janeiro / Instituto Pereira Passos (IPP)"**, the licence link, a link to the data, and **a statement that the data was modified** (CC BY §3(a)(1)(B) — required, not optional). Operator names and colours (MetrôRio, VLT Carioca) come from elsewhere and are **not licensed** by it |
+| **São Paulo** — GeoSampa WFS `estacao_metro`, `linha_metro` | ⚠️ **AMBIGUOUS IN A WAY THAT MATTERS — owner decision** | See below |
+
+**Rio: the "sem alteração" clause does NOT apply.** Data.Rio's *"Uso público,
+citadas as fontes e sem alteração das informações originais"* is set **item by
+item** — 2,727 of the PrefeituraRio account's 5,069 items, 2,671 of them PDFs,
+2,722 last changed in 2018 — and is **absent from all four rail items, the
+service record and its metadata.** Any OTHER Data.Rio source needs its own
+check; the portal is split roughly in half.
+
+**Rio: one clause RAISED, not resolved.** The IPP's *Termo de Uso do SIURB.RIO*
+(v3.0, Aug 2025) governs the system that owns the server: §1 *"Ao utilizar o
+Sistema, o usuário ... estará legalmente vinculado"*, and §6 iv makes the user
+liable for *"todos e quaisquer danos, diretos ou indiretos"* caused to the
+Administration or third parties. **Reading that binds:** fetching from the
+server is using the System. **Reading that does not:** the Termo defines users
+as *"pessoas naturais que utilizarem o Sistema por meio de login de acesso"*.
+Even if it binds, it prohibits nothing the build does — it is **fault-based
+liability for damage caused**, narrower than Hong Kong's indemnity, closer to
+IBGE's portal clause. **Owner call.**
+
+**São Paulo: the licence may not reach the layers.** GeoSampa declares
+**CC BY-SA 4.0** on these layers, but its own *Créditos › Licença dos dados*
+says: *"A licença CC BY-SA exibida no mapa aplica-se exclusivamente aos dados
+geoespaciais das camadas, produzidos pelos órgãos da Prefeitura de São
+Paulo."*
+
+- **Reading A — covered:** the ISO lineage says the geometry is the
+  Prefeitura's own photogrammetry (*"localizados por meio do Mapeamento Digital
+  da Cidade de São Paulo - MDC"*); the portal attaches *"© Produzido por
+  SMUL-PMSP-PRODAM - CC-BY-SA"* to exactly these layers; Lei 16.051/2014 art. 1
+  §1 makes published Prefeitura data *"livremente utilizados, reutilizados e
+  redistribuídos"*, including *"mapas"*.
+- **Reading B — not covered:** both ISO records name the author as the **State's
+  Companhia do Metropolitano (METRÔ)**; `sg_fonte_original = METRO` on all 94
+  stations; the portal's attribution string is a blanket default on all 502
+  layers; a municipal law cannot license a State company's work; Metrô's own
+  portal says *"License Not Specified"*.
+- **And if CC BY-SA applies, SHARE-ALIKE reaches the derived geometry**
+  (§3(b)) — the repository is MIT. Narrow reading: only the station, line and
+  ring geometry must be offered under CC BY-SA; broad: the rendered São Paulo
+  map is Adapted Material.
+
+**Not resolved in this project's favour.** The one party who can settle A
+against B is `geosampa@prefeitura.sp.gov.br`. **An alternative that avoids the
+question:** draw São Paulo's lines from OpenStreetMap, as Mexico City and
+Barcelona do, and use GeoSampa only to decide WHICH lines operate — a fact,
+not a reproduction of its geometry — which is also what keeps OSM's unbuilt
+Lines 6 and 17 off the map.
+
 **Not a source here: CNPJ.** Receita Federal's CNPJ open data moved in early
 2026 to a Nextcloud share (`arquivos.receitafederal.gov.br/index.php/s/YggdBLfdninEJX9`;
 the old `dados_abertos_cnpj/` directory has returned **404 since 2026-01-30**)

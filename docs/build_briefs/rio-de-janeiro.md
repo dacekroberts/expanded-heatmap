@@ -115,15 +115,25 @@ Shares São Paulo's: the first Brazilian city adds it.
 
 ## What the page must say
 
-São Paulo's six items, plus **the rail credit CC BY 4.0 requires** — wording
-pending the licence read.
+São Paulo's six items, plus **the rail credit CC BY 4.0 requires** — READ
+2026-09-23, **PERMITTED WITH CONDITIONS**. No wording is prescribed; the
+licence needs the creator, the licence link, a link to the data, and a
+**statement that it was modified**:
+
+> Metro and VLT stations and lines: Prefeitura da Cidade do Rio de Janeiro /
+> Instituto Pereira Passos (IPP), via DATA.RIO, licensed under CC BY 4.0.
+> Reprojected, filtered and redrawn by this project; station rings and density
+> figures are this project's own analysis.
+
+The *"sem alteração"* clause found on other Data.Rio items is **absent from
+all four rail items**. Operator names and colours (MetrôRio, VLT Carioca) are
+not licensed by it.
 
 ## Still unknown
 
-- ⚠️ **The rail layers' licence** — declared CC BY 4.0 in each item's
-  `licenseInfo`; a full read is running 2026-09-23 (Data.Rio carries at least
-  one item with a *"sem alteração das informações originais"* clause, which
-  would bar modification if it applied here).
+- ⚠️ **One raised clause — owner call.** The SIURB system's Termo de Uso §6 iv
+  makes a user liable for damage they cause; it may bind only logged-in users,
+  and it prohibits nothing the build does. See `docs/data_sources.md`.
 - ⚠️ **Teleférico** — operating or not.
 - ⚠️ **Vacancy at 8.7%** — whether it is concentrated near stations is
   unmeasured.
