@@ -1056,6 +1056,27 @@ does, and because one of its three stations is a Métro B interchange. The
 reasoning, including the fact that the precedent originally cited for it turned
 out not to exist, is recorded in `DECISIONS.md`.
 
+### Lille (Regional) - the same register, eleven communes, and no station lost to a boundary
+
+**Everything excluded in Paris is excluded here, for the same reasons** - the
+four no-premises trades, the wholesale laundry, and the two catch-alls
+`96.09Z` and `56.29B`. They were measured again rather than inherited:
+`96.09Z` is 11.2% here, between Marseille and Toulouse.
+
+**No station is excluded for its location, because the boundary is drawn
+around the stations.** This map covers the eleven communes the network serves,
+so where every other French city lists stations lost to its commune line,
+Lille has none. What the scope does leave out is the other 84 communes of the
+Métropole Européenne de Lille, none of which has a station.
+
+**About one active establishment in six is withheld by INSEE, not by this
+project** - 16.6% across the eleven communes - with the name, the address and
+the coordinates removed together, so those rows cannot reach the map.
+
+**Two things tagged as trams in OpenStreetMap are not drawn**, because they are
+not ilévia's: a heritage tourist tram in the Deûle valley, and a disused
+railway.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

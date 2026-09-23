@@ -125,7 +125,16 @@ reader had already found and immediately found five more.
   `© OpenStreetMap contributors` linked to the OSM copyright page; ODbL 1.0
   requires it to stay visible, not hidden behind UI or a toggle. Changing tile
   provider swaps that attribution for the new provider's - it never just
-  disappears. Three other sources also require specific notices once the site
+  disappears. **"Visible" is a fact about the RENDER, not about the file**, and
+  the two came apart on 2026-09-23: the legend covered the credit completely in
+  all 23 cities at any viewport taller than the map, while every map still
+  contained it. The published site was compliant only because
+  `app/pages/*.py` embeds at exactly the map's own height, clearing it by 10px.
+  `scripts/check_provenance.py` (check K) now refuses a map whose legend is not
+  clamped against the map's bottom edge, and `scripts/check_map_attribution.js`
+  hit-tests a real render at several viewport heights - **run it at more than
+  one height, because a single height is what hid this for the life of the
+  project.** Three other sources also require specific notices once the site
   is public (Chicago, SFMTA, LA Metro): the exact wording is in
   `docs/data_sources.md`, "Notices this project MUST display when published",
   and those are obligations rather than courtesies.
@@ -293,6 +302,19 @@ reader had already found and immediately found five more.
   The guard is deliberately narrow - a heredoc or `-c`/`-e` string AND a
   backslash or backtick. A plain `grep "\.py$"` and every Windows path in this
   repository are untouched, because a guard that cries wolf gets disabled.
+- **Re-check `origin/master` in the same breath as the push, not once at the
+  start of the gate.** The pre-deploy checks take minutes - a full
+  `drift_check.py --jobs 4` alone re-runs every city - and with several
+  sessions live that is long enough for origin to move underneath a tree that
+  was up to date when the sweep began. On 2026-09-23 one push needed **two**
+  merges: origin gained four commits before the sweep and one more between the
+  sweep finishing and `git push`. Neither was a problem, because both were
+  caught by `git fetch` immediately before pushing; the failure mode is
+  pushing on the strength of a freshness check that has gone stale, getting a
+  rejection, and resolving it in a hurry - which is how an append-only file
+  gets rebuilt from one side instead of merged. So: `git fetch`, then merge if
+  behind, then push, with nothing slow in between. If a gate has to re-run
+  after that merge, re-fetch after it too.
 - **Resolve a conflicted append-only file with
   `python scripts/merge_append_only.py DECISIONS.md`, never by rebuilding it
   from one side.** Two sessions both append to the top of `DECISIONS.md`, so

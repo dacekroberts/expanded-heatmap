@@ -16,12 +16,15 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**239 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**242 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
 - [Taiwan is a door-plate JOIN at 92.5%, not a geocoding project; Rio's rail licence permits, Sao Paulo's is ambiguous](#2026-09-23---taiwan-is-a-door-plate-join-at-925-not-a-geocoding-project-rios-rail-licence-permits-sao-paulos-is-ambiguous)
+- [Lille (Regional) built: 11,833 storefronts, 91 stations, eleven communes](#2026-09-23---lille-regional-built-11833-storefronts-91-stations-eleven-communes)
 - [Sixteen brief checks could not see their claims; the Brazilian briefs, and the agency rail both cities had](#2026-09-23---sixteen-brief-checks-could-not-see-their-claims-the-brazilian-briefs-and-the-agency-rail-both-cities-had)
+- [The legend covered the basemap credit in every city, and the embedded size hid it](#2026-09-23---the-legend-covered-the-basemap-credit-in-every-city-and-the-embedded-size-hid-it)
+- [The built-cities list was short by EIGHT, and the eighth had been missing since the eleventh city](#2026-09-23---the-built-cities-list-was-short-by-eight-and-the-eighth-had-been-missing-since-the-eleventh-city)
 - [Brazil needs no geocoder: its census address file is a premises survey, and nine cities join Band A](#2026-09-23---brazil-needs-no-geocoder-its-census-address-file-is-a-premises-survey-and-nine-cities-join-band-a)
 - [Two corrections to the Toulouse build, both found while scoping Lille](#2026-09-23---two-corrections-to-the-toulouse-build-both-found-while-scoping-lille)
 - ["Only city" claims read against 23 cities: eleven false, two overstated, one true](#2026-09-23---only-city-claims-read-against-23-cities-eleven-false-two-overstated-one-true)
@@ -327,6 +330,98 @@ onwards; the early ones are split by phase rather than by hour.
   the question** was recorded beside it: OSM geometry (the Mexico City and
   Barcelona route) with GeoSampa used only to decide which lines operate.
 
+### 2026-09-23 - Lille (Regional) built: 11,833 storefronts, 91 stations, eleven communes
+
+- **Lille (Regional) is the 24th city and the fourth French one, and the first
+  French city scoped regionally.** 11,833 storefronts across 91 stations in the
+  eleven communes the ilévia network serves. Step 2 read the national parquet
+  down from 44,064,115 rows: 490,174 in the thirteen codes (eleven communes plus
+  two legacy), 168,500 active, 140,501 publicly diffusible (16.6% masked),
+  18,811 in NAF divisions 47/56/96, 13,586 after the structural non-premises
+  exclusions, 11,852 after the catch-all verdict, 11,833 with a usable
+  street-level coordinate (99.98% geolocation match). 7,205 fall within a
+  station ring, **60.9%**. Personal exposure: **0 person-like names at a
+  residential unit of 7,205 pins (0.00%)**, on the same structural guarantee as
+  every French city. Built in its own worktree, because two background sessions
+  were writing into the main checkout at the time.
+
+- **Regional by owner's call, on a measurement and a correction.** Commune 59350
+  alone keeps Métro 1 at 13 of 18 stations, Métro 2 at 19 of 44 and the tram at
+  **3 of 36** - a three-stop stub. And the reason the three earlier French
+  cities stayed commune-only was never data availability: SIRENE is one
+  national file under one licence, so every neighbouring commune is already in
+  the parquet. (That had been mis-stated for Toulouse and was corrected the same
+  day - see the entry below.) Scope is **the communes the network serves**, the
+  Dublin and Guadalajara pattern, recommended and accepted.
+
+- **The served communes were derived spatially, and the attribute would have
+  lost one.** All 98 station-line pairs were placed in geo.api.gouv.fr's
+  official contours, each in exactly one commune: Lille, Tourcoing, Roubaix,
+  Villeneuve-d'Ascq, Marcq-en-Barœul, Wasquehal, Croix, Mons-en-Barœul, La
+  Madeleine, Mouvaux and **Lambersart** - which holds one Métro 2 station and is
+  absent from MEL's own `insee` labels. MEL's field is also a 3-digit suffix and
+  codes Lomme (355) and Hellemmes (298) apart from Lille; SIRENE does not (59355
+  holds 22 rows, 59298 two, 59350 226,204), so MEL's convention is not INSEE's.
+  The legacy 24 rows are kept, since they sit inside the drawn area. The set is
+  asserted in config.
+
+- **Both of the brief's owner calls dissolved rather than needing an answer.**
+  The brief framed a choice between MEL-tram-plus-OSM-métro and all-OSM, and an
+  open question about whether `media.ilevia.fr`'s Mentions légales reach the
+  GTFS. But MEL publishes **station points for both modes** (`stations_metro`,
+  `tramway_arrets`) as well as the tram lines, so the build takes everything
+  first-party except the métro LINES, which exist nowhere but OSM - osm-rail's
+  documented order, applied line by line. With nothing drawn from ilévia's
+  GTFS, the feed is never read and the carve-out question never has to be
+  settled. Sidestepped, not answered - recorded that way.
+
+- **`sdit_ligne` is MEL's planned network, and its name promises otherwise.**
+  The layer holds 27 LineStrings for four corridors - two projected tram lines
+  and two BHNS routes - with `status: Variante` rows for alignments still under
+  study, and no métro at all. Toulouse's `en_service: 2027` trap had four rows
+  of a future line in a built-station layer; this is a whole layer that is
+  prospective. Named in config as never-to-use.
+
+- **Gate 3 exact on all four lines, against OpenStreetMap.** The stations are
+  MEL's, so comparing them with MEL would pass by construction; OSM's route
+  relations are the independent count. Métro 1 18 = 18, Métro 2 44 = 44, Tram R
+  23 = 23, Tram T 22 = 22. The Overpass query filters on the RELATION's network,
+  which excludes three `route=tram` relations in the same bbox that are not
+  ilévia's - two for the Amitram heritage tourist tram and one tagged on an
+  abandoned railway. Tram stops were placed on R and/or T by snapping to MEL's
+  own line geometry (worst 42.7 m, cap 75 m).
+
+- **The operator's single tram colour was refused, and Paris's precedent
+  applied.** ilévia's livery table gives the tram one colour for both lines
+  (`#009FE3`, `code_ligne_public: TRAM`). Drawing R and T in it, with labels to
+  tell them apart, was the first attempt; `linecolour.py` raised at Delta-E 0.0
+  between the two lines. R keeps the official colour; T takes the same hue
+  darkened to `#005D85`. Separation rises steadily as the shade darkens, so the
+  check alone would have picked near-black `#003247` - which vanishes on the
+  dark basemap the maps open with, and which the check does not score. The
+  chosen shade sits at the lightness of Toulouse's T1 and clears the official
+  colour's own worst (29.3 from R, 34.4 from Retail); it was then confirmed
+  visible in the browser in both dark and light mode rather than assumed.
+
+- **Ring edges are the shared French set, on Toulouse's measured ground.**
+  Median station spacing 501 m (min 193, max 1,062) - the regime Toulouse's 525
+  m was in when the owner took these edges because a 483 m outer ring nearly
+  tiles. Applied on that measurement rather than re-asked. The 193 m minimum
+  was read by name, since it is also what one station under two names looks
+  like: Croisé Laroche and Foch, two real stops. Every pair under 300 m was
+  checked and all are distinct.
+
+- **Catch-all verdict measured: `96.09Z` 11.2%, `56.29B` 1.6%, both excluded.**
+  Between Marseille's 9.8% and Toulouse's 13.9%, with the same discriminator
+  signature - unbanded rows 23.4% catch-all against 7.5% - narrowing to 7.2%
+  against 5.0% after the exclusion.
+
+- **Restaurant control 1.52x, inside the French family.** NAF 56.10A (1,410)
+  against OSM `amenity=restaurant` (930) inside the eleven communes, measured
+  node+way with `out center` - the shape Toulouse's 1.28x was taken in, and
+  recorded because the same control read 1.38x there nodes-only. Paris 1.80,
+  Marseille 1.72. The query answered in 2 seconds, which fits the corrected
+  Overpass rule: the afternoon's 504s were the host, not the query shape.
 ### 2026-09-23 - Sixteen brief checks could not see their claims; the Brazilian briefs, and the agency rail both cities had
 
 - **Sixteen `http_contains` checks across ten briefs were VACUOUS.** Each
@@ -374,6 +469,173 @@ onwards; the early ones are split by phase rather than by hour.
   for GeoSampa and for Rio's transport layers were started the same hour and
   are recorded when they return; both briefs say so.
 
+### 2026-09-23 - The legend covered the basemap credit in every city, and the embedded size hid it
+
+- **Found that the map legend covered the OpenStreetMap attribution
+  completely at any viewport taller than the map, in all 23 cities, and fixed
+  it in `pipeline/map_common.py` by clamping the legend's bottom to the MAP's
+  bottom edge rather than the viewport's.** Measured on Toulouse and Marseille
+  by hit-testing five points along the attribution strip with
+  `document.elementFromPoint`: 0/5 covered at 1000x650, **5/5 at 1024x768**,
+  **5/5 at 375x812** once a reader re-opens the auto-collapsed legend. The
+  mechanism is that the legend is `position: fixed` against the viewport's
+  bottom edge while Leaflet's attribution is `position: absolute` against the
+  map container's, and the container is a fixed `_MAP_H` = 650 px tall, so the
+  two edges coincide at exactly one viewport height. `CLAUDE.md` makes the
+  visible credit a hard invariant under ODbL 1.0.
+
+- **⚠️ IT WAS NOT A LIVE BREACH, AND THAT IS THE PART WORTH RECORDING.** Every
+  city page embeds the map with `st.iframe(HEATMAP_HTML, width=1000,
+  height=650)`, and at exactly 650 px the credit clears the legend by **10
+  px**. So the published site was compliant by coincidence, with nothing
+  pinning the coincidence: a change to the iframe height, a responsive embed,
+  or a reader opening `outputs/<city>/heatmap.html` directly each breached it
+  silently. A defect that is invisible while the one configuration that hides
+  it holds is the same shape as a city whose provenance is unrecorded looking
+  exactly like a city that was checked.
+
+- **Rejected a static bottom offset, and rejected moving the credit to the
+  bottom-left.** A static offset cannot work: the offset that clears the
+  attribution is a function of viewport height, so any single number is right
+  at one height, which is the bug rather than the fix. Bottom-left moves the
+  collision instead of removing it - measured at 375 px wide, the open legend
+  occupies x 133-351 while a bottom-left credit would occupy x 0-197, so they
+  still overlap - and it costs a `setPosition` on a Leaflet control plus the
+  credit landing where readers do not look for it. The clamp chosen,
+  `max(24px, calc(100vh - 626px))`, is generated from `_MAP_H - 24` so the two
+  cannot drift, and is a no-op at the embedded size: the normalised diff is
+  **exactly one line per city**, and the re-probe measures the same 10 px of
+  clearance at 650, 768 and 812 px tall.
+
+- **The fix also repaired a model that had been quietly wrong since the label
+  layout was written.** `_layout_labels` treats the open legend as an obstacle
+  whose bottom sits at `_MAP_H - 24` in map coordinates. That held only at a
+  650 px viewport; it now holds at every height at or above one. `_MAP_W` and
+  `_MAP_H` moved to the top of the module in the same change, because three
+  comment blocks named the constant before it was defined and the new CSS
+  needs its value at import time.
+
+- **Wrote the check in two halves, because the browser half is the one the
+  rules say to skip.** `scripts/check_map_attribution.js` hit-tests a rendered
+  map at several viewport heights with the legend forced open and NAMES
+  whatever element sits on top, so it catches a future overlay rather than only
+  this one; it runs through the `deploy-verify` agent. But `CLAUDE.md` says to
+  skip `deploy-verify` entirely for pipeline-only work, and `map_common.py` IS
+  pipeline-only work - so the only check that could see the regression is the
+  one that would not have run. `scripts/check_provenance.py` check K.1 therefore
+  grew a third clause: it already required the credit to be PRESENT and LINKED
+  in every committed map, and now also requires the legend's bottom to be
+  clamped against that same file's map height. Layout cannot be read out of
+  HTML, so the static half checks the mechanism and the browser half checks the
+  pixels. Run before the re-render, K.1 failed **23 of 23** cities; after, 0.
+
+- **Writing the browser check produced the exact false failure it was written
+  to avoid, which is why it now reports UNMEASURED as a third state.** Probing
+  375x812 by resizing an already-loaded 1024 px page returned "attribution
+  covered at 5/5 points, by: nothing" with probe points at x=902 on a 375 px
+  viewport: the attribution's rect was stale from the previous layout, the
+  points fell off-screen, and `elementFromPoint` returns null off-screen -
+  indistinguishable from "something opaque is on top" unless checked. This is
+  the stale-rect failure `.claude/agents/deploy-verify.md` already warns about
+  for line labels, met a second time on different geometry. The check now
+  counts an off-screen point as `offscreen` and says coverage is unmeasured
+  rather than breached, and says to reload at the target size instead of
+  resizing a loaded page. Re-probed correctly: 0/5 covered, 0 off-screen, all
+  five points landing on the credit or its links.
+
+- **Verification: `drift_check.py --jobs 4` re-rendered all 23 cities and
+  reported drift confined to `heatmap.html`; `check_provenance.py` exits 0 and
+  names every city OK.** The CRLF-only churn in 26 `excluded_stations.csv` and
+  municipality files was restored rather than committed - they produced no
+  `git diff --numstat` rows at all, only line-ending warnings. Committed as
+  f51d1dd, 26 files.
+
+### 2026-09-23 - The built-cities list was short by EIGHT, and the eighth had been missing since the eleventh city
+
+- **Swept `docs/project_context.md`'s "Cities built and running end to end"
+  list, which ran from San Diego to Guadalajara while `app/cities.py` held 23
+  cities.** Written: Madrid, Barcelona, Dublin, Milan, Paris, Marseille and
+  Toulouse, in build order, each describing the system drawn, the taxonomy and
+  what is distinctive, in the voice of the existing entries. Deliberately **no
+  counts**, per this file's own division of labour - `project_context.md` is
+  current state and the figures live here.
+
+- **⚠️ THE LIST WAS SHORT BY EIGHT, NOT SEVEN: Montréal had no entry either,
+  and it is the ELEVENTH city.** Nobody had noticed because Montréal is not
+  invisible in that file - it is named twice, once inside Calgary's entry as
+  the storefront-share comparison and once in the Canada paragraph, **which
+  asserts five built Canadian cities while the list showed four**. So the file
+  contradicted itself in two places and read as complete in both. Found by
+  diffing the list against `app/cities.py` programmatically rather than by
+  reading it, which is the only reason it surfaced at all: **a missing entry
+  has no anchor, so nothing points at the hole.** The seven recent omissions
+  were caught because a human counted; this one survived twelve cities.
+
+- **The recent seven were a deliberate deferral that then became the defect it
+  was avoiding.** Toulouse's build declined to patch the list for itself alone,
+  on the reasoning that adding one city to a list missing six others makes the
+  document worse because a reader cannot tell an omission from a decision. That
+  reasoning was right and the deferral had no owner, which is how it lasted.
+  Recorded because the same trade-off will recur: **a deferral without a
+  written owner is a silent decision to never do it.**
+
+- **Wrote a France paragraph and a Spain/Ireland/Italy paragraph beside the
+  existing Canada and Mexico ones**, and France's is the first that had to be
+  written for an OPEN country. So it names its cities - Paris, Marseille and
+  Toulouse built, Lille and Rennes remaining - rather than counting them, since
+  a count in a sentence about an unfinished country drifts by construction.
+  Spain's records what did not generalise between two cities in one country,
+  which is the half worth carrying: different rail sources, different projected
+  CRS, and identically-shaped four-level taxonomies keyed at opposite ends.
+
+- **Corrected the macro-map region paragraph by DELETING its count rather than
+  incrementing it.** It read "There are six" with seven in `REGION_ORDER`.
+  Enumerating all seven says the same thing, is self-checking, and takes the
+  sentence out of `check_stale_claims.py`'s category B - which is the rule that
+  category exists to teach: **prefer deleting a count to correcting it, because
+  correcting only resets the clock.** A second paragraph now carries why Europe
+  is ONE region rather than one per country, and that revisiting it is a
+  measurement rather than a judgement.
+
+- **Three further stale claims in the same file, fixed with the owner's
+  approval after being listed rather than assumed.** "Next is a new COUNTRY
+  rather than a new city… South Korea first" predates three French builds and
+  now points at Lille and Rennes, with Lille's unresolved rail leg named as the
+  thing blocking it. "Toronto's and Edmonton's briefs carry 9 checks each, and
+  all 18 pass" was written when there were two briefs and there are now 23, so
+  the numbers are gone and the no-argument run is named instead. And "Not built
+  yet: … deployment" survived the deploy.
+
+- **Miami's superlative was converted rather than corrected.** Its entry opened
+  "the only REGIONAL map here" while Vancouver and Guadalajara carry
+  `(Regional)` in their own names and Dublin spans four authorities - false
+  before this sweep, and false again the moment a fifth regional city lands if
+  it were merely corrected. It now reads **the FIRST regional map here** and
+  names the three that took the shape after it: **first is permanent where only
+  is not**, and naming the successors puts the fact in the path of the next
+  reader who would otherwise re-break it.
+
+- **One defect reported and NOT fixed, because it is another session's file.**
+  `docs/city_master_list.md` still reads France 2 built / 3 remaining, which
+  Toulouse makes 3 and 2 - and that is the one file `CLAUDE.md` tells readers
+  to take counts from, so it matters more than anything corrected here.
+  `docs/session_roles.md` names it as the STAGING session's standing path, not
+  the cleanup role's, so it is handed to staging rather than swept here.
+
+- **The handoff that matters is a CHECK, and it is cleanup's to write.** The
+  list-versus-`cities.py` diff that found Montréal is a few lines and belongs
+  beside `check_scope_disclosure.py`, which already asserts that every city in
+  `cities.py` is named in `excluded_categories.md`. ⚠️ **It cannot be written
+  as exact set equality**: this file calls the city **Miami** where `cities.py`
+  calls it **Miami (Regional)**, and that divergence predates the sweep. Either
+  the check tolerates it or the heading is renamed to match - left open rather
+  than decided inside a list update. A correction fixes Montréal; a check
+  catches the twenty-fourth city.
+
+- **`check_stale_claims.py` was run BEFORE any edit as well as after**, so the
+  after-run is readable as a delta instead of a wall of pre-existing findings.
+  The three category-B hits inside `project_context.md` at the start were all
+  correct facts rather than drift, and were left alone.
 ### 2026-09-23 - Brazil needs no geocoder: its census address file is a premises survey, and nine cities join Band A
 
 - **Brazil's business leg moved from CNPJ to IBGE's CNEFE 2022, and its

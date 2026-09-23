@@ -6,6 +6,15 @@ those first**. Run `python scripts/brief_check.py lille` before writing code.
 
 ---
 
+> ✅ **BUILT 2026-09-23 as Lille (Regional).** Both owner calls below were
+> dissolved rather than decided. **Geometry:** MEL publishes no métro lines,
+> but it publishes station points for BOTH modes, so the build takes stations
+> and tram lines from MEL and only the métro lines from OSM. **Carve-out:**
+> with nothing drawn from ilévia's GTFS, the feed is never read. **Scope,**
+> the third unknown, went regional: the eleven communes the network serves.
+> Two things this brief did not know: `sdit_ligne` is MEL's PLANNED network,
+> and MEL's own labels omit Lambersart. See `DECISIONS.md`.
+
 ## The one-line summary
 
 **The only French city whose rail geometry cannot come from its own feed.**
