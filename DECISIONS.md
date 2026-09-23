@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**192 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**193 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Oslo's rail sourced and taxonomy measured; MEL's WFS is Licence Ouverte](#2026-09-23---oslos-rail-sourced-and-taxonomy-measured-mels-wfs-is-licence-ouverte)
 - [Lille's tram geometry found first-party; its metro has none, and a line code nearly became a false find](#2026-09-23---lilles-tram-geometry-found-first-party-its-metro-has-none-and-a-line-code-nearly-became-a-false-find)
 - [The four French followers are country-ready, not brief-ready, and Lille has no line geometry](#2026-09-23---the-four-french-followers-are-country-ready-not-brief-ready-and-lille-has-no-line-geometry)
 - [PLAN.md gains the handoff it was missing, and Paris reverified](#2026-09-23---planmd-gains-the-handoff-it-was-missing-and-paris-reverified)
@@ -231,6 +232,59 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Oslo's rail sourced and taxonomy measured; MEL's WFS is Licence Ouverte
+
+- **Oslo's rail is sourced: Entur answers keyless.** Ruter's aggregated GTFS
+  at `storage.googleapis.com/marduk-production/outbound/gtfs/rb_rut-aggregated-gtfs.zip`
+  returns **206 with `PK\x03\x04`** on a ranged GET. **A HEAD request would
+  have recorded it as empty** - both Entur URLs answer `200` with **size 0 and
+  no content-type** to `curl -I`, because Google Storage does not serve HEAD
+  usefully. **Use a ranged GET and check magic bytes**, which is the same
+  discipline that caught Busan's PNG-masquerading-as-a-dataset. The station
+  COUNT remains unmeasured; the feed is sourced, not read.
+
+- **Oslo keys at the 5-digit SN2007 level, measured at 15.5% catch-all** -
+  division 0.0%, group 38.4%, class 18.5%, **SN2007 15.5%**, with **0%
+  unlabelled at every level**. Barcelona's and Paris's shape. The residual
+  concentrates in `96990` *Andre personlige tjenester ikke nevnt annet sted*
+  (6.0%) and `56220` *Kantinedrift og annen cateringvirksomhet* (4.1%).
+
+- **The first attempt at that measurement was INVALID and the tell was the
+  unlabelled share.** It used INSEE's NAF labels on the assumption that
+  SN2007's 4-digit classes are NACE Rev.2 classes reachable by truncation.
+  **They are not aligned that way**: Norway writes `56.110` - two digits plus
+  three - where NACE's class is `56.10`, two plus two, so slicing a
+  five-character Norwegian code at four yields `5611` rather than the class
+  `5610`. That run reported **57.8% unlabelled at class level and a
+  meaningless 7.8% catch-all**. **A high unlabelled share means the slice is
+  wrong, not that the data is odd** - and the fix was to take SSB's own 1,785
+  SN2007 codes rather than a neighbouring country's list. Generalises: **a
+  national classification is not its parent scheme plus digits.**
+
+- **MEL's WFS is `Licence Ouverte v2.0 (Etalab)`, PERMITTED WITH
+  CONDITIONS.** Found in the ISO19139 `gmd:otherConstraints`, with
+  `gmd:useLimitation` requiring *"Utilisation libre sous reserve de mentionner
+  la source (a minima le nom du producteur) **et la date de sa derniere mise a
+  jour**"*. **That is the THIRD date-of-last-update duty found in France**,
+  after Licence Mobilites Art. 5.7 and Grand Lyon CGU 6.1 - enough repetition
+  to treat it as a French pattern rather than a per-publisher quirk.
+
+- **The WFS's own `AccessConstraints: NONE` was NOT taken, and that was the
+  right call.** It is the OGC service-level field, and the dataset records
+  say **`otherRestrictions`** - which is INSPIRE's code for *see the
+  otherConstraints field*, **not** for *no restrictions*. Taking the service
+  field would have recorded a permissive position that the dataset metadata
+  contradicts. **Same shape as the CUZK ATOM feed's `zadne podminky neplati`
+  that was refused hours earlier**: a machine-readable "no conditions" in
+  spatial-data boilerplate is a default, not a grant.
+
+- **Goteborg's `Livsmedelsverksamheter` row count is STILL unobtained.** Five
+  EntryStore paths tried - `resource/18`, `entry/18`, `rowstore/dataset/35`,
+  `resource/34` and `resource/36` - returning RDF or 404. The file is not
+  reachable by the pattern that served its sibling `Restauranger` CSV. Stays
+  open, and until it is taken **Stockholm's measured 8,146 remains the
+  stronger number.**
 
 ### 2026-09-23 - Lille's tram geometry found first-party; its metro has none, and a line code nearly became a false find
 

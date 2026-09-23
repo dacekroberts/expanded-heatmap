@@ -536,9 +536,15 @@ mistakes as confidently as its findings.
 
      **So Lille's rail geometry is a HYBRID or an OSM job** — an owner call:
      tram from MEL's WFS (first-party, named, with `exploitant`) and métro from
-     **OSM** via `osm-rail`; or both from OSM for consistency. ⚠️ **MEL's WFS
-     licence is UNREAD** — it is a different publisher from ilévia's GTFS, so
-     `lov2` on the feed says nothing about the WFS.
+     **OSM** via `osm-rail`; or both from OSM for consistency. ✅ **MEL's WFS licence READ 2026-09-23: `Licence Ouverte v2.0 (Etalab)`**,
+     from the ISO19139 `gmd:otherConstraints`. **PERMITTED WITH CONDITIONS** —
+     its `gmd:useLimitation` requires *"mentionner la source (a minima le nom
+     du producteur) **et la date de sa dernière mise à jour**"*. ⚠️ The WFS
+     service-level `AccessConstraints: NONE` is **OGC boilerplate and was NOT
+     taken** — the dataset records say `otherRestrictions`, which is INSPIRE's
+     code for *see otherConstraints*, not for *no restrictions*. **Third time a
+     date-of-last-update duty has appeared in France**, after Licence
+     Mobilités Art. 5.7 and Grand Lyon CGU 6.1.
 
   4. ⚠️ **LILLE HAS NO `shapes.txt`.** Line geometry **cannot be drawn from
      its feed**, and this project's invariant requires every drawn line to

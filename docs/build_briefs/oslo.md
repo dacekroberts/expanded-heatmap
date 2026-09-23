@@ -73,10 +73,32 @@ Top codes: `56110` restaurants **18.4%** · `96210` laundry 8.5% · `47710`
 clothing 7.9% · `96220` hairdressing 6.4% · `47110` groceries 6.2% · `96990`
 other personal services **6.0%**.
 
-⚠️ **Run `brief_check.py`'s `taxonomy_catchall` before writing the module.**
-`96990` is the visible residual at 6.0%, but the catch-all share at each level
-has **not** been computed here, and `premises-taxonomy` is explicit that it is
-the deciding measurement and the one always skipped.
+### ✅ Catch-all share — measured 2026-09-23, and Oslo keys at the FINEST level
+
+Against **SSB's own SN2007 labels** (`data.ssb.no/api/klass/v1/classifications/6`,
+1,785 codes), counting Norwegian residual wording — *annen*, *andre*, *ikke
+nærmere*, *ellers*, *diverse*:
+
+| Level | Distinct | Catch-all | Unlabelled |
+|---|---|---|---|
+| division (2) | 3 | 0.0% | 0.0% |
+| **group (3)** | 18 | **38.4%** | 0.0% |
+| class (4) | 49 | 18.5% | 0.0% |
+| **SN2007 (5)** | 54 | **15.5%** | 0.0% |
+
+**Key at the 5-digit SN2007 level** — Barcelona's and Paris's shape. The
+residual concentrates in `96990` *Andre personlige tjenester ikke nevnt annet
+sted* (6.0%), `56220` *Kantinedrift og annen cateringvirksomhet* (4.1%),
+`47120`, `47780` and `47270`.
+
+⚠️ **Use SSB's labels, NOT a NACE Rev.2 list.** A first attempt used
+INSEE's NAF labels on the theory that SN2007's 4-digit classes are NACE
+classes. **They are not aligned by truncation**: Norway writes `56.110`
+(2 digits + 3) where NACE's class is `56.10` (2 + 2), so slicing a 5-character
+Norwegian code at 4 gives `5611`, not the class `5610`. That run reported
+**57.8% unlabelled at class level and a meaningless 7.8% catch-all**.
+**A high unlabelled share is the tell that the slice is wrong**, not that the
+data is odd.
 
 ---
 
@@ -117,12 +139,22 @@ an address field, ~1.4%.
 
 ---
 
-## Rail — NOT YET MEASURED
+## ✅ Rail — Entur answers, keyless
 
-Norway publishes GTFS through **Entur**, the national point, and OSM is the
-fallback. **Neither has been probed**, and the station-density estimate that
-would rank Oslo failed: three Overpass endpoints returned `runtime error:
-open64`. **Oslo's station count is UNMEASURED, not zero.**
+**`https://storage.googleapis.com/marduk-production/outbound/gtfs/rb_rut-aggregated-gtfs.zip`**
+— Ruter's aggregated GTFS via **Entur**, Norway's national access point. A
+ranged GET returns **206 with `PK\x03\x04`**, a real zip. The whole-country
+feed (`rb_norway-aggregated-gtfs.zip`) is there too if a wider scope is taken.
+
+⚠️ **A HEAD request is not a probe here.** Both URLs answer `200` with
+**size 0 and an empty content-type** to `curl -I` — Google Storage does not
+serve HEAD usefully — which reads exactly like an empty file. **Use a ranged
+GET and check the magic bytes.**
+
+⚠️ **Station COUNT still unmeasured.** The feed is confirmed to exist and be
+a valid archive; its route types and station count have not been read, and the
+Overpass cross-check failed (`runtime error: open64` on three endpoints). So
+Oslo's rail is **sourced, not measured**.
 
 ---
 
@@ -154,8 +186,7 @@ attribution line.** Do not collapse them into one credit.
 ## Still unknown — the honest list
 
 - ~~Both licences~~ — ✅ **read 2026-09-23**, NLOD and CC BY 4.0.
-- **Rail** — Entur vs OSM unprobed; station count unmeasured.
-- **The NACE catch-all share at each level.**
+- **Rail station COUNT** — the Entur feed is confirmed; its route types and station count are not read, and the Overpass cross-check failed.
 - **Trade-name fill.** `navn` exists on every sub-unit, but whether it is a
   trade name or a legal name is unmeasured — the question that caught Milan and
   Paris.
