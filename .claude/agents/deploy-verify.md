@@ -164,7 +164,15 @@ Run only the steps your scope lists (see Scope above).
    as a breach), and treat a `clamp.ok` of false as a real finding even when
    `covered` is 0, because that map is one resize away from covering the
    credit. A single height proves nothing here: 1000x650 passed for the whole
-   life of the project while 1024x768 was fully covered in every city. On the
+   life of the project while 1024x768 was fully covered in every city.
+   Then read `scripts/check_map_view.js` and run it on a **fresh load, without
+   touching the map**, at the embedded width and at phone width (375), and
+   **more than once** - it catches the fit race that left Edmonton, Paris and
+   Lille at the wrong zoom, which is intermittent by nature. `problems` must be
+   empty. A `corrections > 0` note means the race fired and the guard repaired
+   it: record it, do not fail on it. Run it on the LIVE app too - it finds the
+   map two frames deep on its own, and the deployed embed is the only place
+   the race has actually been seen. See `.claude/skills/map-view/`. On the
    Overview, also check its Dark Mode button sits inside the map frame without
    covering the zoom controls, flips the basemap (only `.mapboxgl-canvas` is
    filtered, not `#deckgl-overlay`), survives a reload, still lets a marker click

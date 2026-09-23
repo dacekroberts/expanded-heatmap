@@ -61,6 +61,12 @@ first query did exactly that and lost a whole line. Put a lesson where the next
 city must pass through it - a raising check in shared code, then a skill - not
 in a sibling city's comments.
 
+**A map opened at the wrong zoom? Use `map-view`** (`.claude/skills/map-view/`).
+It happened three times - Edmonton, Paris, Lille - each fixed where it broke,
+until a guard in the shared fit script started checking the OUTCOME instead.
+`scripts/check_map_view.js` verifies a map's view by reading the map object,
+never a screenshot, and on the live app as well as locally.
+
 **Then run `python scripts/brief_check.py <city>` before writing any code for
 it.** A brief caches Step 0's mistakes as confidently as its findings: Edmonton
 inherited three wrong claims from its own, each an HTTP call from being caught,
@@ -347,6 +353,7 @@ python scripts/check_no_fetch_in_steps_selftest.py      # watch that check fail 
 python scripts/check_scope_disclosure.py                # every city's rail AND business scope reaches the published page
 python scripts/check_scope_disclosure_selftest.py       # watch that check fail 8 ways; touches nothing
 python scripts/check_stale_claims.py                    # REPORTS only: prose that stopped being true (stale tense, drifted counts)
+python scripts/check_stale_claims.py --only E           # "the only city"/"no other city" claims: re-read whenever a city lands
 python scripts/check_deploy_imports.py [--ref REF]      # clean clone + lean venv: run before ANY push touching app/
 python scripts/decisions_index.py [--check]             # refresh DECISIONS.md's index
 python scripts/merge_append_only.py DECISIONS.md [--dry-run]   # resolve an append-only merge conflict
