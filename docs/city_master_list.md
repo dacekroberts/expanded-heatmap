@@ -63,8 +63,8 @@ asked properly* in every single case.
 |---|---|---|---|
 | **A** | Nothing. Screening complete | **3** | ✅ **−4 built** — Madrid and Barcelona joined Mexico's two; Paris out then back, **measured both ways** |
 | **B** | One narrow question each | **2** | ▲ **+Tel Aviv**, the strongest unbuilt result outside Band A |
-| **C** | A geocoding leg — build work, not screening | **18** | ▲ **+Bucharest** |
-| **D** | Four sub-tiers, see below | **8** | ▼ −6 — **Sofia, Sevilla and Tallinn measured out**; Tel Aviv promoted; D-c and D-d both closed |
+| **C** | A geocoding leg — build work, not screening | **19** | ▲ **+Bucharest**, ▲ **+Rio** (re-filed — see below) |
+| **D** | Four sub-tiers, see below | **7** | ▼ −7 — **Sofia, Sevilla and Tallinn measured out**; Tel Aviv promoted; **Rio re-filed to C**; D-c and D-d both closed |
 | *Discarded* | Measured negative, evidence named | *27* | ▼ **+13** |
 
 ✅ **Guadalajara and Mexico City left Band A by being built**, not by being
@@ -204,7 +204,7 @@ probes**:
    `read-licence` step 8 — so it needs the publisher asked. That it fetches is
    not a finding that it is licensed.
 
-## Band C — viable, each needs a GEOCODING LEG (18 cities)
+## Band C — viable, each needs a GEOCODING LEG (19 cities)
 
 Build work with a known cost. No further probing changes these.
 
@@ -215,6 +215,7 @@ Build work with a known cost. No further probing changes these.
 | **Oslo** *(1)* | 🇳🇴 | 152,060 sub-units, `beliggenhetsadresse` (physical, not registered), NACE, open API no key | Moderate |
 | **Copenhagen** *(1)* | 🇩🇰 | CVR `productionunits` — P-enheder each with own `address`/`zipcode`/`city`, plus `industrycode` | Moderate — **plus a free account** (`distribution.virk.dk` 401) |
 | **São Paulo** *(1)* | 🇧🇷 | CNPJ — trade name, address, CNAE | **Hard, past Toronto's scale** |
+| **Rio de Janeiro** ▲ *(1)* | 🇧🇷 | **The same CNPJ** — one national register, so nothing about its business leg is open. Rail confirmed: **20 OSM relations, all named and coloured** | Same as São Paulo's, and shares its cost: write the Brazilian geocoder once, get both cities |
 | **Bucharest** 🇷🇴 ▲ *(1)* | 🇷🇴 | **DSVSA's registered-premises lists — 31,299 premises across 14 of 34 categories**, name + `Adresa` + `Sector` + `Categorie unitate`, refreshed 25/08/2026. Food bucket, but a WIDE one: 13,279 catering, 10,488 food shops, 709 hyper/supermarkets | **Unmeasured** — no coordinates, Romanian addresses |
 
 **▲ Bucharest was promoted out of Tier 6 on 2026-09-22** by the food-authority
@@ -230,7 +231,7 @@ screen — against the worst geocoding problem and a two-bucket ceiling.
 **Still the biggest open decision in this list**, and a judgment call rather
 than a probe.
 
-## Band D — 8 cities, and three of its four sub-tiers are now closed
+## Band D — 7 cities, and three of its four sub-tiers are now closed
 
 ### D-a — all four PROBED 2026-09-22 (4)
 
@@ -244,11 +245,21 @@ same four is under Tier 4. **Three were chasing hosts that had moved.**
 | **Zurich** 🇨🇭 ✗ | **The second bucket is now MEASURED ABSENT, not merely "not found".** Control passes (`zzqqxxnonsense` → 0). `detailhandel` returns **1** result and it is a traffic count; `verkauf` 12 (tram ticket offices, apartment prices); `laden` 31 (a farm shop, population surveys); `gewerbe` 28 (zoning land, 3D roof models); `firmen` 16, **every one a `Firmenbefragung`** — a company *survey*, 2005–2025. Only `Gastwirtschaftsbetriebe` is a register. **Zurich is a one-bucket food city — the Stockholm shape**, and now carries Stockholm's scope question rather than a data one |
 | **Singapore** 🇸🇬 ⚠️ | **Not a loose search — an INERT one.** `zzqqxxnonsense` returns the **identical ten datasets** as `licence`, `food establishment` and `business`: the `query` parameter is ignored entirely, and only the nonsense control separates that from looseness. The catalogue is **4,628 datasets over 463 pages** and pages correctly, so the route is **enumeration, not search**. The registered-office suspicion is still untested — nothing has been learned about the data yet |
 
-### D-b — rail ANSWERED, business leg is the blocker (4)
+### D-b — rail ANSWERED, business leg is the blocker (3)
 
 **Five cities left this sub-tier on 2026-09-22** — Santiago, Kuala Lumpur,
 Jakarta, Medellín and Lima — all to *discarded*, each with a measured reason.
 What remains is the set whose business leg is genuinely still open.
+
+⚠️ **Rio de Janeiro left too, and it was a FILING error rather than a new
+measurement.** Its row read *"CNPJ, no coordinates → geocoding at São Paulo's
+scale"* — which describes a **geocoding** blocker, while this sub-tier means
+*the business leg is the blocker*. Rio's business leg is **CNPJ, the same
+national register as São Paulo**, which sits in Band C as viable, and the Tier
+view already paired them. **Rio had been banded by how it was DISCOVERED — the
+OSM rail screen, which is what populated D-b — rather than by what is stopping
+it**, and was never re-filed once the business leg resolved. That is the one
+thing this band exists to encode, so the row was moved to Band C.
 
 Rail screened via OSM. **Relation counts are upper bounds** — see the caveat
 below.
@@ -266,7 +277,6 @@ below.
 | City | Rail (OSM) | Business leg |
 |---|---|---|
 | **Hong Kong** 🇭🇰 | 126 rel, 125 named, 117 coloured | **BLOCKED, not negative.** The portal is a measured negative (statistics only), but **FEHD's register exists and is queryable** — no bulk export found. The single most valuable open thread in Band D |
-| **Rio de Janeiro** 🇧🇷 | 20 rel, all named + coloured | CNPJ, no coordinates → geocoding at São Paulo's scale |
 | ▲▲ **Tel Aviv** 🇮🇱 | see Band B | **PROMOTED OUT OF BAND D 2026-09-22 — to Band B. Both legs measured.** The WAF-blocked portal was never the only host: `gisn.tel-aviv.gov.il` answers, and carries **22,176 licensed businesses** with activity *and* location. See Band B |
 | **Hyderabad** 🇮🇳 | 6 rel, all named + coloured | ⚠️ **All three live hosts PROBED 2026-09-22. Still blocked, and now with the alternative route measured shut.** `ghmc.gov.in` — the body that issues trade licences — returns **403 in a real browser as well as to curl**, an **F5 WAF block that names itself** (support ID + `F5 site: wes-sea`); deliberate, like Bulgaria's. `data.telangana.gov.in` resolves but is unroutable for us; `tsbpass` has no A record. **`tgbpass.telangana.gov.in` answers 200 and is a FALSE FRIEND** — TG-bPASS is *Building Permission Approval and Self-certification*, i.e. construction permits, and `/Home/TradeLicense` 404s. The national fallback that rescued Sofia does **not** work here: `data.gov.in`'s `title=` filter is controllable (nonsense → *"No Result Found"*), and `trade license` returns only **Karnataka's "District wise ULB wise Trade License Details" — an aggregate**, confirming the prior 288,011-resource negative. **The Hong Kong shape: blocked, not negative** |
 | **Kochi** 🇮🇳 | 2 rel, named + coloured | ⚠️ **PROBED 2026-09-22, and the lead was a FALSE FRIEND.** `go.lsgkerala.gov.in/pages/query.php?t=establishment` is a **Government Orders and Circulars search** — "establishment" matches 6,526 orders about *staffing*; Kochi's own `/establishment/396` is ജീവനക്കാര്യം, its **personnel** page. In Indian government usage "establishment" means staff posts, not premises. The real route is **K-SMART** (`tax.lsgkerala.gov.in` redirects to `ksmart.lsgkerala.gov.in`) and **Sanchaya** — both live, both **transactional citizen portals** for paying tax and renewing licences, **no bulk export found**. Kerala's local bodies do issue the licences, so the register exists. **The Hong Kong shape: blocked, not negative** |

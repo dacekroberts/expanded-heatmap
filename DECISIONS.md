@@ -934,6 +934,39 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Moved Rio de Janeiro from Band D-b to Band C, a filing correction rather
+  than a new measurement.** Sub-tier D-b means *"rail answered, the business
+  leg is the blocker"*, and Rio's own row read *"CNPJ, no coordinates ->
+  geocoding at Sao Paulo's scale"* - which names **geocoding** as the blocker,
+  not the business leg. Rio's business leg is **CNPJ, the same national
+  register as Sao Paulo**, which already sat in Band C as viable, and the Tier
+  3 view had paired them all along: *"Brazil - 2 - Sao Paulo, Rio ... Rio's
+  rail is confirmed (20 relations, all named and coloured)"*. So the row
+  contradicted the sub-tier containing it, and the two views of the same two
+  cities disagreed. Band C 18 -> 19, Band D 8 -> 7, D-b 4 -> 3; candidates
+  unchanged at 31, and the band counts now sum to the total. Touched
+  `docs/city_master_list.md`.
+
+- **The cause is worth more than the fix: Rio was banded by how it was
+  DISCOVERED rather than by what is stopping it.** D-b was populated from the
+  OSM rail screen, Rio arrived through that screen, and nobody re-filed it once
+  the business leg turned out to be Sao Paulo's. **Band D exists precisely to
+  say what is actually stopping each city**, so filing by provenance defeats
+  the band's only purpose - and it is invisible, because a city in the wrong
+  band looks exactly like a city in the right one. Caught by a reader asking
+  why a city whose blocker is geocoding sat in the band for blocked business
+  legs. The same question is worth asking of any other row whose text names a
+  blocker its band does not.
+
+- **Recorded the master list's chat format as a standing requirement.** Every
+  future republish uses banded sections with one table per band, a per-city row
+  carrying its own numbers, the load-bearing figure bolded, and the cheapest
+  next action at the end. Stored in memory rather than here, since it governs
+  how results are presented rather than what was decided. **The band counts
+  must be verified to sum to the candidate total before sending** - that
+  arithmetic has now been wrong twice.
+
+
 - **Probed all four Tier 4 countries, and three of the four turned out to be
   chasing hosts that had MOVED.** `rzp.cz` answers 000 while `www.rzp.cz`
   redirects to **`rzp.gov.cz`**, which is live; `opendata.praha.eu` redirects
