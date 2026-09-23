@@ -1007,6 +1007,42 @@ because this project measures density around *rail* stations and no built city
 draws a ferry. Recorded as an owner's decision on 2026-09-23 for possible
 revisiting, not as an automatic application of a rule.
 
+### Toulouse - the same register again, and the first mode drawn here that is not a train
+
+**Everything excluded in Paris is excluded here, from the same national
+register and for the same reasons** - the four no-premises trades, the
+wholesale laundry, and the same two catch-alls `96.09Z` and `56.29B`. The
+verdict was measured a third time rather than inherited, and this is the city
+that shows why that is not ceremony: `96.09Z` is **13.9%** of Toulouse's bucket
+rows against roughly 9.7% in both Paris and Marseille. The national argument
+transfers; the shares plainly do not.
+
+**A fifth of this city's active establishments are withheld by INSEE, not by
+this project.** `statutDiffusion` masks the name, the address **and** the
+geolocation together on **20.2%** of active rows here - the highest of the six
+French candidates and well over double Paris's 8.5%. That single upstream
+exclusion is larger than every filter on this page put together, and nothing in
+the data says which businesses it removed. **A street that looks thin in
+Toulouse may be a quiet one or a private one**, and the map cannot tell them
+apart.
+
+**Twelve tram stations are excluded for being in another commune - more than
+any other line in this project loses.** Tramway T1 runs out through Blagnac and
+Beauzelle to the Airbus works and the exhibition centre, and this map covers the
+commune of Toulouse, so those twelve stops and the rings around them are not
+drawn. Métro A loses Balma-Gramont and Métro B loses Ramonville on the same
+rule. All fourteen are listed, with the commune each lies in, at
+`outputs/toulouse/excluded_stations.csv`. Drawing them would mean mapping
+Blagnac's businesses too - a different project rather than a wider filter.
+
+**Nothing is excluded here for being a cable car.** Téléo is drawn: three
+stations, all inside the commune, and the first non-rail mode anywhere on this
+site. It is included rather than excluded because Tisséo runs and tickets it
+exactly as it does the métro, because it crosses the Garonne where no other line
+does, and because one of its three stations is a Métro B interchange. The
+reasoning, including the fact that the precedent originally cited for it turned
+out not to exist, is recorded in `DECISIONS.md`.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found
