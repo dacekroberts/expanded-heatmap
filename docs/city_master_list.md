@@ -76,7 +76,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 31
+## Candidates — 32
 
 Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 **Eight cities moved to discarded on measurement** and **two were upgraded**.
@@ -256,7 +256,7 @@ measured.
 |---|---|---|---|
 | **Prague** ▲▲ *(1)* | 🇨🇿 | **A JOIN, confirmed.** RÚIAN's Praha export is **3.4 MB zipped, keyless** (`vdp.cuzk.gov.cz`; the old `cuzk.cz` redirects rather than dying) and holds **134,627 addresses, every one a unique `Kód ADM`, 99.99% carrying coordinates**. Measured on **6,000 active Praha rows** in CZ-NACE 47/56/96 streamed from RES | **99.8%** — 99.9% carry a code, 100.0% of those resolve |
 | **Copenhagen** *(1)* | 🇩🇰 | **A JOIN, confirmed — and the account gate was on the wrong leg.** DAWA (`api.dataforsyningen.dk`) is **keyless**; the `distribution.virk.dk` 401 gates the BUSINESS register only. The whole city downloads as CSV: **85,351 access addresses, 100% with WGS84**, joinable on `vejnavn` + `husnr`. ⚠️ **Frederiksberg (0147) is a separate kommune entirely surrounded by Copenhagen** — scope to 0101 alone and the map has a hole in its middle; its 9,584 addresses come from the same call | **100%** of addresses carry coordinates |
-| **Hong Kong** ▲▲▲ *(1)* | 🇭🇰 | **A GEOCODE, confirmed keyless.** The government **Address Lookup Service** (`als.gov.hk/lookup`) answers without a key and returns **lat/long AND HK1980 Grid easting/northing AND a confidence `Score`** (76.15, 88.75, 97.69 on three test premises). ⚠️ Still carries the band's two obligations — attribution plus Government IP acknowledgement, and **the project's only indemnity clause** | Answers; **per-row rate not yet measured** against the 35,808 |
+| **Hong Kong** ▲▲▲ *(1)* | 🇭🇰 | **A GEOCODE, confirmed keyless.** The government **Address Lookup Service** (`als.gov.hk/lookup`) answers without a key and returns **lat/long AND HK1980 Grid easting/northing AND a confidence `Score`** (76.15, 88.75, 97.69 on three test premises). ✅ **INDEMNITY ACCEPTED by the owner 2026-09-22** — the project's only uncapped liability, priced deliberately. Three conditions bind the build: display source + Government IP acknowledgement + DATA.GOV.HK attribution exactly; run `check_personal_exposure.py` and exclude catch-alls; the dated record in `data_sources.md`. ⚠️ Re-reading the live clause corrected this project's OWN earlier quote twice: it arises **directly or indirectly**, and there is **no notice-and-defend right** | Answers; **per-row rate not yet measured** against the 35,808 |
 | **Singapore** ▲▲ *(1)* | 🇸🇬 | **A GEOCODE, and the postcode is the key.** OneMap is **keyless** and a bare six-digit postcode resolves to a **named building**. **The postcode is not a column — it is inside the address string** (`...SINGAPORE 169663`, `...SINGAPORE(738733)`): extracted on **99.5%** of tobacco, **97.5%** of pharmacy, **83.4%** of eating establishments. ⚠️ OneMap **throttles** — 32.5% refusals even at 2 workers | **98.8%** of answered lookups resolve (80/81). **35,064 postcodes → 7,767 DISTINCT** — dedupe first, ~1.4 h not 6.5 h |
 | **Oslo** *(1)* | 🇳🇴 | **A GEOCODE, keyless — with two traps.** Kartverket (`ws.geonorge.no/adresser`) answers and returns `representasjonspunkt`. ⚠️ **`fuzzy=true` MUST NOT BE USED**: it "rescued" `Karenslyst allé 8B` as **`allé 1B`** — a different building — and turned `7-Eleven` into `Ellen Gleditsch' vei 7`. It returns plausible coordinates for the wrong place. ⚠️ The API caps at **10,000 rows** (offset 9,900 works, 15,000 returns nothing), so it cannot enumerate the city | **97.8%** via two stages: exact `adressetekst`, then plain `sok`. Never fuzzy |
 | **Bucharest** ▲▲ *(1)* | 🇷🇴 | ⚠️ **Primary route DOWN, fallback MEASURED.** `data.gov.ro` resolves to 85.120.75.35 but **blackholes on both 443 and 80** (`time_connect` 0.000000s) — and it answered earlier the same day, so this is an **outage, not a refusal**. ANCPI, which owns the nomenclature, has **no resolving geospatial subdomain** (`ran.`, `geoportal.`, `ags.`, `inspire.` all NXDOMAIN). **OSM fallback measured: 146,116 addressed objects** in relation 377733 (132,432 nodes + 13,684 ways), ODbL — and Bucharest's rail is already OSM | Fallback supply confirmed; **hit rate against DSVSA's 31,299 not yet measured** |
@@ -310,7 +310,7 @@ screen — against the worst geocoding problem and a two-bucket ceiling.
 **Still the biggest open decision in this list**, and a judgment call rather
 than a probe.
 
-## ⚠️ OPEN SCREENING GAP — Rome and Turin were never probed (2 cities)
+## ⚠️ OPEN SCREENING GAP — rows that rest on an absence (3 cities unscreened, 1 blocked)
 
 **Not candidates yet and not discards — unscreened.** `global_country_shortlist.md`
 records *"Italy stays a Milan-only country"*, but that rests on **Naples** and
@@ -326,7 +326,27 @@ discard.
 **Neither changes the Italy profile answer** — Italy is bespoke per city, so
 each would be its own Step 0 regardless. See `DECISIONS.md`, 2026-09-22.
 
-## 🟣 Band D — one bucket only: complete, but narrower than the others (2 cities)
+### The sweep, 2026-09-23 — what else rests on an absence
+
+**Audited the whole discard record** for rows whose stated reason is *"not
+reached"*, *"unprobed"*, *ASSERTED*, or a regional pattern. `add-country` is
+explicit that such a row **is not a discard**, and records that exact error
+happening twice — once to a group including **Italy, which then passed**.
+
+| Row | What its reason actually was | Probed 2026-09-23 |
+|---|---|---|
+| **Göteborg** 🇸🇪 | *"Unprobed candidate"* — named twice in this file and **placed in no band at all** | ✅ **REAL, and it is a candidate.** `catalog.goteborg.se/store/search?type=solr` — EntryStore, the same platform as Stockholm's. **`Livsmedelsverksamheter`** is *"Alla aktiva livsmedelsverksamheter"* — **active food BUSINESSES, not inspections**, so no dedupe, where Stockholm's 8,146 premises had to be distilled from 289,742 inspection rows. **`Restauranger med serveringstillstånd`** declares **CC ZERO** — stronger than Stockholm's SILENT. Rail is trams, not a metro: **better data, weaker map** |
+| **Lisbon** 🇵🇹 | On *"Countries ruled out"* with **no parenthetical evidence at all** | ⚠️ **Discard now EVIDENCED, and it holds.** `dados.gov.pt` returns 430 for *estabelecimentos*, but they are **aggregate hotel statistics** (*"Proporção de estabelecimentos hoteleiros que utilizam computador (%)"*) and prison establishments. The aggregate trap |
+| **Warsaw** 🇵🇱 | Same — **no evidence** | ⚠️ **Discard now EVIDENCED, and it mostly holds.** Control passes (`zzqqxx` → 0, so the search filters). `CEIDG` is company-level, as recorded elsewhere. **One premises-shaped lead survives**: *Wykaz punktów sprzedaży napojów alkoholowych* — licensed alcohol sales POINTS, the Singapore-tobacco shape. One bucket at best |
+| **Cairo** 🇪🇬 | Same — **no evidence** | ⛔ **STILL UNPROBED.** Recorded as an absence rather than a finding |
+| **Zagreb** 🇭🇷 | *"identical 1,291-byte SPA shell at four paths"* | ⛔ **Confirmed BLOCKED, not negative.** Three more paths tried 2026-09-23, all shells |
+
+**The generalisable result: a "ruled out" list is only as good as its weakest
+row, and three of this one's rows carried no reason at all.** Two of those now
+do. Göteborg was never ruled out — it was simply never placed anywhere, which
+is how a candidate disappears without anyone deciding to drop it.
+
+## 🟣 Band D — one bucket only: complete, but narrower than the others (3 cities)
 
 **Screening is COMPLETE for both, and both passed.** Each has a real
 premises-level register with coordinates, current data and a usable licence.
@@ -367,6 +387,27 @@ Stockholm's 8,146 premises are the larger map.
 
 
 ---
+
+### 🇸🇪 Göteborg — promoted into this band 2026-09-23
+
+**It was never ruled out. It was never PLACED.** The master list named it
+twice — *"Unprobed candidate"*, *"Better data, weaker map"* — and put it in no
+band, which is how a candidate disappears without anyone deciding to drop it.
+Probed to the same depth as Stockholm and Zurich on 2026-09-23.
+
+| | |
+|---|---|
+| **Catalogue** | **EntryStore**, `catalog.goteborg.se/store/search?type=solr` — the same platform as Stockholm's. Three guessed CKAN bases returned a 662-byte HTML shell first: **a wrong endpoint, not a verdict** |
+| **The one bucket** | ✅ **FOOD ONLY, and the control proves it.** `livsmedel` → 1, `restaurang` → 6, but **`handel` → 0, `butik` → 0, `företag` → 0, `detaljhandel` → 0, `frisör` → 0.** The search filters, so these are real absences |
+| **`Restauranger med serveringstillstånd`** | **1,043 rows**, **CC ZERO**. Carries `Namn` (trade name) and **`Besöksadress`** — the *visiting* address, kept distinct from `Fakturaadress`, the invoice address. **That is the location split done right**, the same distinction that made Norway pass |
+| **`Livsmedelsverksamheter`** | *"Alla aktiva livsmedelsverksamheter"* — **active food BUSINESSES, not inspections**, so no dedupe, where Stockholm's 8,146 premises had to be distilled from **289,742** inspection rows. `accrualPeriodicity: DAILY` |
+| ⚠️ **Row count UNMEASURED** | Its DCAT distribution node exposes **no `accessURL`** — `resource/18` returns RDF rather than the file. **The one open measurement**, and until it is taken Stockholm's measured 8,146 is the stronger number |
+| **Rail** | **Trams, no metro.** Better data on a weaker map — the trade Toronto lost on |
+
+**Göteborg does NOT displace Stockholm**, and the claim that it has "better
+data" is structural rather than measured: two registers to one, businesses
+rather than inspections, CC0 rather than SILENT. **The count that would settle
+it has not been taken.**
 
 ### The two cities in full
 
@@ -899,7 +940,18 @@ took was a different *host* — `services1.arcgis.com`, reachable all along.
 The rule held and protected the city from a premature discard; the cost
 estimate attached to it was guesswork. **See the resolution above.**
 
-## DISCARDED — 30 cities, each naming its evidence
+## DISCARDED — 32 cities, each naming its evidence
+
+
+**Two rows added 2026-09-23 by the discard sweep.** Both had sat on *"Countries
+ruled out"* with **no parenthetical evidence at all**, which `add-country` says
+is not a discard. Both were probed, and **both discards hold** — which is worth
+stating plainly rather than treating the audit as vindication.
+
+| City | Evidence, 2026-09-23 |
+|---|---|
+| **Lisbon** 🇵🇹 | **The aggregate trap.** `dados.gov.pt` returns **430** hits for *estabelecimentos*, and they are **aggregate hotel statistics** — *"Proporção de estabelecimentos hoteleiros que utilizam computador (%)"* — plus prison establishments. No premises register |
+| **Warsaw** 🇵🇱 | **Control passes** (`zzqqxx` → 0, so the search genuinely filters). `CEIDG` is **company-level**, the registered-office shape. **One premises-shaped lead survives** — *Wykaz punktów sprzedaży napojów alkoholowych*, licensed alcohol sales points, the Singapore-tobacco shape — **one bucket at best**, and narrower than Göteborg's |
 
 | City | Why |
 |---|---|
