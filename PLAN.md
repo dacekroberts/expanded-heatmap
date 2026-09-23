@@ -21,8 +21,9 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [ ] **🇫🇷 FRANCE — Paris, Marseille and Toulouse BUILT; Lille and Rennes
-  remain. `deploy-verify` is deliberately deferred until all five are done.**
+- [ ] **🇫🇷 FRANCE — Paris, Marseille, Toulouse and Lille (Regional) BUILT;
+  Rennes remains. `deploy-verify` is deliberately deferred until all five are
+  done - and Rennes is the fifth, so it does not merge without that run.**
 
   ✅ **Paris** built and deployed 2026-09-23 (22 cities live).
   ✅ **Marseille** built and deployed 2026-09-23, 18,177 storefronts,
@@ -30,14 +31,19 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   ✅ **Toulouse** built 2026-09-23 on `toulouse-build`, 8,635 storefronts,
   48 stations, **gate 3 exact on all four lines** against Tisséo's own
   `arrets-itineraire` layer. First city here to draw a **non-rail mode** (the
-  Téléo cable car, owner's call). Its brief's case for that turned out to be
-  false and was corrected in place — see DECISIONS.md.
+  Téléo cable car, owner's call). Its brief's case for th  ✅ **Lille (Regional)** built 2026-09-23 on `lille-build`, 11,833
+  storefronts, 91 stations across the **eleven communes the network serves**
+  - the first regional French city, owner's call. Its rail answer turned out
+  to be three sources: MEL's WFS for every station and the tram lines, OSM
+  for the métro lines only, and ilévia's GTFS not read at all. Gate 3 exact
+  on all four lines against OSM.
 
-  ⚠️ **LILLE STILL NEEDS ITS OWN RAIL ANSWER BEFORE IT STARTS.** Its brief
-  found tram geometry only and **no first-party metro line geometry**, so its
-  rail leg is neither Paris's nor Marseille's nor Toulouse's. Settle that
-  first; Toulouse's experience says to look for the operator's **feature
-  services** rather than only its feed, and to check any station layer for a
+  ⚠️ **For Rennes, carry two things from Lille.** Scope is NOT settled by
+  precedent in either direction: three French cities are commune-only and one
+  is regional, and the deciding measurement is how many stations each line
+  keeps inside the commune. And SIRENE is one national file, so a wider scope
+  is a wider filter, not a new source - Toulouse's scope was briefly justified
+  as if it were not, and that was corrected.ation layer for a
   `en_service`-style column before trusting its row count.
 
   **THE DEFERRAL IS THE OWNER'S CALL (2026-09-23) AND IT IS A SCOPE DECISION,

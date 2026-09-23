@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**236 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**237 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Lille (Regional) built: 11,833 storefronts, 91 stations, eleven communes](#2026-09-23---lille-regional-built-11833-storefronts-91-stations-eleven-communes)
 - [Two corrections to the Toulouse build, both found while scoping Lille](#2026-09-23---two-corrections-to-the-toulouse-build-both-found-while-scoping-lille)
 - ["Only city" claims read against 23 cities: eleven false, two overstated, one true](#2026-09-23---only-city-claims-read-against-23-cities-eleven-false-two-overstated-one-true)
 - ["Every map here covers one rail network" survived four hours and one new city](#2026-09-23---every-map-here-covers-one-rail-network-survived-four-hours-and-one-new-city)
@@ -275,6 +276,92 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Lille (Regional) built: 11,833 storefronts, 91 stations, eleven communes
+
+- **Lille (Regional) is the 24th city and the fourth French one, and the first
+  French city scoped regionally.** 11,833 storefronts across 91 stations in the
+  eleven communes the ilévia network serves. Step 2 read the national parquet
+  down from 44,064,115 rows: 490,174 in the thirteen codes (eleven communes plus
+  two legacy), 168,500 active, 140,501 publicly diffusible (16.6% masked),
+  18,811 in NAF divisions 47/56/96, 13,586 after the structural non-premises
+  exclusions, 11,852 after the catch-all verdict, 11,833 with a usable
+  street-level coordinate (99.98% geolocation match). 7,205 fall within a
+  station ring, **60.9%**. Personal exposure: **0 person-like names at a
+  residential unit of 7,205 pins (0.00%)**, on the same structural guarantee as
+  every French city. Built in its own worktree, because two background sessions
+  were writing into the main checkout at the time.
+
+- **Regional by owner's call, on a measurement and a correction.** Commune 59350
+  alone keeps Métro 1 at 13 of 18 stations, Métro 2 at 19 of 44 and the tram at
+  **3 of 36** - a three-stop stub. And the reason the three earlier French
+  cities stayed commune-only was never data availability: SIRENE is one
+  national file under one licence, so every neighbouring commune is already in
+  the parquet. (That had been mis-stated for Toulouse and was corrected the same
+  day - see the entry below.) Scope is **the communes the network serves**, the
+  Dublin and Guadalajara pattern, recommended and accepted.
+
+- **The served communes were derived spatially, and the attribute would have
+  lost one.** All 98 station-line pairs were placed in geo.api.gouv.fr's
+  official contours, each in exactly one commune: Lille, Tourcoing, Roubaix,
+  Villeneuve-d'Ascq, Marcq-en-Barœul, Wasquehal, Croix, Mons-en-Barœul, La
+  Madeleine, Mouvaux and **Lambersart** - which holds one Métro 2 station and is
+  absent from MEL's own `insee` labels. MEL's field is also a 3-digit suffix and
+  codes Lomme (355) and Hellemmes (298) apart from Lille; SIRENE does not (59355
+  holds 22 rows, 59298 two, 59350 226,204), so MEL's convention is not INSEE's.
+  The legacy 24 rows are kept, since they sit inside the drawn area. The set is
+  asserted in config.
+
+- **Both of the brief's owner calls dissolved rather than needing an answer.**
+  The brief framed a choice between MEL-tram-plus-OSM-métro and all-OSM, and an
+  open question about whether `media.ilevia.fr`'s Mentions légales reach the
+  GTFS. But MEL publishes **station points for both modes** (`stations_metro`,
+  `tramway_arrets`) as well as the tram lines, so the build takes everything
+  first-party except the métro LINES, which exist nowhere but OSM - osm-rail's
+  documented order, applied line by line. With nothing drawn from ilévia's
+  GTFS, the feed is never read and the carve-out question never has to be
+  settled. Sidestepped, not answered - recorded that way.
+
+- **`sdit_ligne` is MEL's planned network, and its name promises otherwise.**
+  The layer holds 27 LineStrings for four corridors - two projected tram lines
+  and two BHNS routes - with `status: Variante` rows for alignments still under
+  study, and no métro at all. Toulouse's `en_service: 2027` trap had four rows
+  of a future line in a built-station layer; this is a whole layer that is
+  prospective. Named in config as never-to-use.
+
+- **Gate 3 exact on all four lines, against OpenStreetMap.** The stations are
+  MEL's, so comparing them with MEL would pass by construction; OSM's route
+  relations are the independent count. Métro 1 18 = 18, Métro 2 44 = 44, Tram R
+  23 = 23, Tram T 22 = 22. The Overpass query filters on the RELATION's network,
+  which excludes three `route=tram` relations in the same bbox that are not
+  ilévia's - two for the Amitram heritage tourist tram and one tagged on an
+  abandoned railway. Tram stops were placed on R and/or T by snapping to MEL's
+  own line geometry (worst 42.7 m, cap 75 m).
+
+- **The operator's single tram colour was refused, and Paris's precedent
+  applied.** ilévia's livery table gives the tram one colour for both lines
+  (`#009FE3`, `code_ligne_public: TRAM`). Drawing R and T in it, with labels to
+  tell them apart, was the first attempt; `linecolour.py` raised at Delta-E 0.0
+  between the two lines. R keeps the official colour; T takes the same hue
+  darkened to `#005D85`. Separation rises steadily as the shade darkens, so the
+  check alone would have picked near-black `#003247` - which vanishes on the
+  dark basemap the maps open with, and which the check does not score. The
+  chosen shade sits at the lightness of Toulouse's T1 and clears the official
+  colour's own worst (29.3 from R, 34.4 from Retail); it was then confirmed
+  visible in the browser in both dark and light mode rather than assumed.
+
+- **Ring edges are the shared French set, on Toulouse's measured ground.**
+  Median station spacing 501 m (min 193, max 1,062) - the regime Toulouse's 525
+  m was in when the owner took these edges because a 483 m outer ring nearly
+  tiles. Applied on that measurement rather than re-asked. The 193 m minimum
+  was read by name, since it is also what one station under two names looks
+  like: Croisé Laroche and Foch, two real stops. Every pair under 300 m was
+  checked and all are distinct.
+
+- **Catch-all verdict measured: `96.09Z` 11.2%, `56.29B` 1.6%, both excluded.**
+  Between Marseille's 9.8% and Toulouse's 13.9%, with the same discriminator
+  signature - unbanded rows 23.4% catch-all against 7.5% - narrowing to 7.2%
+  against 5.0% after the exclusion.
 
 ### 2026-09-23 - Two corrections to the Toulouse build, both found while scoping Lille
 

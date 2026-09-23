@@ -184,6 +184,7 @@ SLUG_OVERRIDES = {
     "Vancouver (Regional)": "vancouver",
     "Guadalajara (Regional)": "guadalajara",
     "Miami (Regional)": "miami",
+    "Lille (Regional)": "lille",
     "Washington D.C.": "washington_dc",
     "Montréal": "montreal",
     "Mexico City": "mexico_city",
@@ -196,6 +197,7 @@ TABLE_ALIASES = {
     "Vancouver (Regional)": ("Vancouver", "Surrey"),
     "Guadalajara (Regional)": ("Guadalajara",),
     "Miami (Regional)": ("Miami",),
+    "Lille (Regional)": ("Lille (Regional)",),
     "Washington D.C.": ("Washington D.C.",),
 }
 
