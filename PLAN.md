@@ -493,8 +493,19 @@ mistakes as confidently as its findings.
      Database under §4.4. **Unlike Paris there is NO publisher gloss** —
      Licence Mobilités had the NAP's published interpretation; ODbL has none.
      **Cheap discharge: put an ODbL notice on the station CSV.**
-     ⚠️ **Marseille and Lille are `lov2`** — Licence Ouverte 2.0, whose own
-     terms cover **five sources** and are being read separately.
+     ✅ **Marseille and Lille are `lov2` — Licence Ouverte 2.0 READ 2026-09-23**,
+     **PERMITTED WITH CONDITIONS**, write-up at `docs/licenses/france-licence-ouverte-2.0.md`.
+     **No share-alike, no revocation, no indemnity.** Attribution is **name +
+     date of last update, PER SOURCE** — and the date-of-last-update duty is
+     **LO 2.0's own**, so the three sightings (Licence Mobilités 5.7, Grand Lyon
+     6.1, MEL) are ONE duty restated, not three inventions.
+     ⚠️ **`Source : Insee` is prescribed VERBATIM** — the only fixed string
+     in the five. ⚠️ **Render no publisher's logo.**
+     ⚠️ **A STANDING refresh duty**: `statutDiffusion` changes as people
+     exercise opposition, so a committed `outputs/` snapshot can contain
+     someone who has since opted out. **Needs a stated refresh cadence.**
+     ⚠️ **ODC-BY is named compatible; ODbL is NOT.** Do not read it as
+     covering Toulouse or Rennes.
   2. ⚠️ **Scope does not transfer.** Paris went commune-only on a
      *measurement* — all 16 métro lines survived the boundary. Nothing
      guarantees that repeats: **Lille's commune is small against MEL**, whose
@@ -555,6 +566,18 @@ mistakes as confidently as its findings.
      date-of-last-update duty has appeared in France**, after Licence
      Mobilités Art. 5.7 and Grand Lyon CGU 6.1.
 
+  3b. ⚠️ **OWNER DECISION — Lille's GTFS is served from
+     `media.ilevia.fr`, and ilévia's Mentions légales §5 bars "pas de
+     modification ni altération d'aucune sorte" and commercial use of "les
+     contenus des Services en ligne".** *Services en ligne* is a **defined
+     term** — ilévia's websites and apps — and the GTFS is **MEL's `lov2`
+     publication**, so this is likely the **SEPTA pattern**: a web-contents
+     notice mistaken for a data licence. But the host is ilévia's.
+     ⚠️ **The obvious mitigation FAILS**: the PAN's stable
+     `data.gouv.fr/api/1/datasets/r/c9e5dd3f-…` URL **302s to
+     `media.ilevia.fr`** — a redirect, not a mirror. **Third "no modification"
+     bar this project has met**, after LA Metro and Philadelphia.
+     **Cheap close: email `opendata@lillemetropole.fr`.**
   4. ⚠️ **LILLE HAS NO `shapes.txt`.** Line geometry **cannot be drawn from
      its feed**, and this project's invariant requires every drawn line to
      carry real geometry plus a label plus a legend entry. Either reconstruct

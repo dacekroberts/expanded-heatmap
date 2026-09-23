@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**197 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**198 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Licence Ouverte 2.0 read: five sources discharged, two carve-outs opened](#2026-09-23---licence-ouverte-20-read-five-sources-discharged-two-carve-outs-opened)
 - [ODbL read for Toulouse and Rennes; Marseille's OSM validation holds](#2026-09-23---odbl-read-for-toulouse-and-rennes-marseilles-osm-validation-holds)
 - [Hong Kong's two fields read, Oslo's rail measured, and Oslo's names are full but noisy](#2026-09-23---hong-kongs-two-fields-read-oslos-rail-measured-and-oslos-names-are-full-but-noisy)
 - [All six French cities measured on ONE sample; a correction of my own correction](#2026-09-23---all-six-french-cities-measured-on-one-sample-a-correction-of-my-own-correction)
@@ -236,6 +237,91 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Licence Ouverte 2.0 read: five sources discharged, two carve-outs opened
+
+- **LO 2.0 is PERMITTED WITH CONDITIONS across all five `lov2` sources** -
+  SIRENE, INSEE's geolocation file, Marseille's GTFS, Lille's GTFS and MEL's
+  WFS. Commercial use is express, derived works are express - *"notamment pour
+  creer des Informations derivees"* - and there is **no share-alike, no
+  revocation clause and no indemnity**. Written up at
+  `docs/licenses/france-licence-ouverte-2.0.md`.
+
+- **The date-of-last-update duty is LO 2.0's OWN, which settles a question
+  asked three times.** The clause requires *"sa source (a minima le nom du
+  Concedant) **et la date de la derniere mise a jour**"*. MEL's
+  `gmd:useLimitation` is a near-verbatim restatement down to *"a minima"*, and
+  `transport.data.gouv.fr` and INSEE restate it independently. **So Licence
+  Mobilites Art. 5.7, Grand Lyon CGU 6.1 and MEL are ONE duty restated, not
+  three publishers each inventing a requirement.** A link is optional;
+  name-plus-date is the obligation.
+
+- **`Source : Insee` is prescribed VERBATIM** - the only fixed string among the
+  five - and **a combined attribution block must still carry name-and-date for
+  EVERY `lov2` source individually.** One shared line naming several publishers
+  under one date does not discharge it. **No publisher's logo may be
+  rendered**: data.gouv.fr's CGU excludes logos from the licence, INSEE bars
+  its marks, and the ministry's are INPI-registered.
+
+- **A STANDING REFRESH DUTY was found, and it is not discharged by anything on
+  a page.** INSEE: *"il est ainsi de votre responsabilite de tenir compte du
+  statut de diffusion le plus recent de chaque personne physique, qui tient
+  compte des oppositions formulees par certaines d'entre elles"*. Because
+  `statutDiffusion` changes as people exercise opposition, **a committed
+  `outputs/` snapshot can contain someone who has since opted out.** This
+  argues for a stated refresh cadence rather than a one-off build, and it is a
+  new obligation SHAPE for this project - neither a notice nor a single act.
+
+- **The upstream privacy work is better than assumed, which narrows the
+  exposure check.** `statutDiffusion = P` masks the name, the commune address
+  **and the geolocation** - and **the geolocation file is built only from
+  "les etablissements dont les donnees sont diffusibles"**, so **the coordinate
+  join cannot reintroduce a masked establishment's location.**
+
+- **ODC-BY is named compatible; ODbL is NOT, and the two are easy to
+  conflate.** LO 2.0 names LO 1.0, the UK's OGL, CC-BY and **Open Data Commons
+  Attribution (ODC-BY)**. **ODbL is the share-alike member of that family and
+  is absent.** So this clause does **not** bless Toulouse's or Rennes' feeds,
+  and whether ODbL's share-alike reaches a mixed database remains open.
+
+- **MEL's catalogue is MIXED, and checking per-record turned out to be
+  load-bearing rather than prudent.** Its own terms say so out loud - *"Il
+  appartient ainsi a chaque utilisateur de consulter la LICENCE concernant
+  chaque JEU DE DONNEES"* - and across **all 427 records**: ~360 Licence
+  Ouverte, **13 requiring "signature d'un acte d'engagement"**, **1 ODbL**, 38
+  with third-party citation, 2 with no constraint at all. **The five layers in
+  scope are all clean, verified individually.** But a signature requirement and
+  a share-alike layer sit one layer away, so **a later session adding a MEL
+  layer must check its record** - which belongs in a check rather than in
+  prose.
+
+- **CARVE-OUT, owner decision: Lille's GTFS host.** The feed comes from
+  `media.ilevia.fr`, and ilevia's Mentions legales section 5 bars *"pas de
+  modification ni alteration d'aucune sorte"* and commercial use of *"les
+  contenus des Services en ligne"*. **"Services en ligne" is a DEFINED term** -
+  ilevia's websites and apps - and the GTFS is **MEL's `lov2` publication**, so
+  this is most likely **the SEPTA pattern**: a web-contents notice mistaken for
+  a data licence. ⚠️ **But the obvious mitigation fails** - the national access
+  point's stable URL **302s to `media.ilevia.fr`**, a redirect rather than a
+  mirror, so the bytes come from ilevia's host either way. **Third "no
+  modification" bar this project has met**, after LA Metro and Philadelphia.
+  Cheap close: `opendata@lillemetropole.fr`.
+
+- **CARVE-OUT: Marseille's Concedant name is contradicted by its own
+  artefacts.** The national access point declares **Metropole
+  d'Aix-Marseille-Provence**; the feed's `feed_info.txt` self-attests
+  **Mecatran**. The Concedant is the body that granted the licence - the
+  Metropole - and **naming Mecatran alone would be wrong**. Recorded so the
+  brief and the notice do not drift apart.
+
+- **One attribution element the source does not supply.**
+  `mel_mobilite_et_transport:tramway_lignes` - the layer Lille would draw for
+  its tram geometry - **carries no citation date at all**, only a `dateStamp`
+  of 2024-06-03 and a revision of 2024-05-29, **neither of which is literally
+  "la date de derniere mise a jour"**. INSEE's *"lorsque celle-ci est connue"*
+  softener is INSEE's and does not extend to MEL. Its `fileIdentifier` still
+  reads `reseau-transpole`, ilevia's pre-2019 name, so the record is not
+  freshly maintained.
 
 ### 2026-09-23 - ODbL read for Toulouse and Rennes; Marseille's OSM validation holds
 
