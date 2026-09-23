@@ -84,6 +84,38 @@ Git refuses to check out `master` in two worktrees at once, so each is on its
 own branch and merges back. That is the point: the merge is an explicit review
 step instead of an implicit race.
 
+**The standing assignments** - current state, so update this when one changes:
+
+| Role | Worktree | Branch |
+|---|---|---|
+| Staging / research | `.claude/worktrees/staging` | `worktree-staging` |
+| Cleanup / audit | `.claude/worktrees/cleanup` | `worktree-cleanup` |
+| Build `<city>` | `.claude/worktrees/<city>` | `<city>-build` - the name every build since Dublin has actually used, rather than the `worktree-<role>` form above. Delete the branch when the worktree goes: merged build branches have tended to outlive their worktrees |
+
+**The cleanup role is moving to its row.** Until 2026-09-23 it ran in
+`.claude/worktrees/practical-leakey-12a8a2` on `claude/practical-leakey-12a8a2`
+- a name the desktop app generates for a session it expects to be short-lived.
+That session became the standing role and never got a proper home. The next
+cleanup session starts in `.claude/worktrees/cleanup`, created from `master`
+with the command above, and the old one is **retired rather than moved**:
+Windows refuses to move a directory a running process is using, and a session's
+scratchpad and transcript are keyed to its worktree's path. Retire it by
+closing that session, then, from the main checkout:
+
+```bash
+git pull --ff-only
+git worktree remove .claude/worktrees/practical-leakey-12a8a2
+git branch -d claude/practical-leakey-12a8a2
+```
+
+`-d`, never `-D`: it refuses to delete a branch holding commits that are not in
+the branch you are on - `master`, from the main checkout - which makes the
+deletion its own check. **Hence the pull first.** The branch has no upstream,
+so `-d` compares it with the main checkout's LOCAL `master`, which is often
+behind GitHub because sessions push from their worktrees and nobody pulls
+there. Without the pull it refuses, correctly - those commits really are not in
+that `master` yet - but it reads like a warning of data loss.
+
 `.claude/worktrees/` is gitignored. It is also worth adding to
 `.git/info/exclude` on a working machine, because `.gitignore` only takes
 effect in a tree that has this commit, and the main checkout may not yet.

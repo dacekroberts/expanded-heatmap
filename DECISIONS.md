@@ -16,11 +16,14 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**247 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**250 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Six merged build branches deleted; the retirement steps needed a pull first](#2026-09-23---six-merged-build-branches-deleted-the-retirement-steps-needed-a-pull-first)
 - [The fit race came back a third way, so the fit now checks its outcome](#2026-09-23---the-fit-race-came-back-a-third-way-so-the-fit-now-checks-its-outcome)
+- [The cleanup role gets a named worktree, and its old one is retired rather than moved](#2026-09-23---the-cleanup-role-gets-a-named-worktree-and-its-old-one-is-retired-rather-than-moved)
+- [Universal claims get a report category, and its first run found five more false](#2026-09-23---universal-claims-get-a-report-category-and-its-first-run-found-five-more-false)
 - [Sao Paulo's rail is drawn from OSM with GeoSampa as the status reference; Rio's SIURB clause accepted](#2026-09-23---sao-paulos-rail-is-drawn-from-osm-with-geosampa-as-the-status-reference-rios-siurb-clause-accepted)
 - [The scaffold names a city's page from its slug, not its display name](#2026-09-23---the-scaffold-names-a-citys-page-from-its-slug-not-its-display-name)
 - [Lille made "three regional maps" four within the hour](#2026-09-23---lille-made-three-regional-maps-four-within-the-hour)
@@ -287,6 +290,30 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-23 - Six merged build branches deleted; the retirement steps needed a pull first
+
+- **Deleted `dublin-build`, `milan-build`, `paris-build`, `marseille-build`,
+  `toulouse-build` and `lille-build` locally, at the owner's request**, with
+  `git branch -d`, which refuses a branch holding commits not on the current
+  branch. Re-verified immediately before: 0 commits off `master` each, and none
+  checked out in any worktree (Lille's worktree is still live, but now on a new
+  branch, `render-guard`). Their last commits, should one ever be wanted:
+  `eb1b68d`, `95943cb`, `72674f3`, `5dd2e67`, `7044262`, `0597f23` - all
+  reachable from `master` regardless.
+
+- **`dublin-build` and `milan-build` also exist on GitHub, and were left
+  alone.** Deleting a remote branch is a push, and the request was about the
+  local ones; raised with the owner instead.
+
+- **The retirement steps written an hour earlier would have refused.** They
+  said to run `git branch -d claude/practical-leakey-12a8a2` from the main
+  checkout, but that branch has no upstream, so `-d` compares it with the main
+  checkout's LOCAL `master` - 19 commits behind GitHub at the time, because
+  sessions push from their worktrees and nobody pulls there. It would have
+  refused correctly and read like data loss. `docs/session_roles.md` now puts
+  `git pull --ff-only` first. Found by checking the next command against the
+  real repository before anyone had to run it.
+
 ### 2026-09-23 - The fit race came back a third way, so the fit now checks its outcome
 
 - **Lille's embedded map loaded at zoom 8.25 against a baked 11.75 - Edmonton's
@@ -338,6 +365,86 @@ onwards; the early ones are split by phase rather than by hour.
   (a wheel gesture walks several 0.25 zoom steps, each possibly redrawing the
   heat layer and re-clustering pins), queued for the cleanup role with an
   instruction not to touch the fit logic.
+### 2026-09-23 - The cleanup role gets a named worktree, and its old one is retired rather than moved
+
+- **`docs/session_roles.md` now records each standing role's worktree and
+  branch**, which it never had - only the generic `git worktree add
+  .claude/worktrees/<role> -b worktree-<role>`. Staging follows that form
+  (`staging` / `worktree-staging`). Builds do not: every one since Dublin has
+  used `<city>-build`, and the table now says so rather than prescribing a name
+  nobody uses.
+
+- **The cleanup role moves to `.claude/worktrees/cleanup` on
+  `worktree-cleanup`**, at the owner's request. It had been running in
+  `.claude/worktrees/practical-leakey-12a8a2`, a name the desktop app generates
+  for a session it expects to be short-lived; that session became the standing
+  role and never got a proper home. **Supersedes the cleanup handoff note's "Do
+  not delete this worktree; it is kept across sessions."**
+
+- **Rejected: moving the existing worktree, or renaming its branch, in place.**
+  `git worktree move` under a live session is refused by Windows while the
+  directory is in use, and the session's scratchpad and transcript are keyed to
+  that path. A branch rename alone is safe for git, but the desktop app created
+  the worktree and may track the branch by name, with no way to know how it
+  would react. So the next cleanup session starts in the new worktree and the
+  old one is retired - closed, then `git worktree remove` and `git branch -d`
+  from the main checkout. `-d` refuses to delete a branch with commits not on
+  the current branch, so the deletion is its own check that nothing was lost.
+
+- **Found while checking the build convention: six merged build branches have
+  outlived their worktrees** - `dublin-build`, `milan-build`, `paris-build`,
+  `marseille-build`, `toulouse-build` and `lille-build`, each with 0 commits
+  not on `master` and no worktree. Reported to the owner, not deleted: nobody
+  asked, and deleting branches is not this change. The table now says to delete
+  the branch when its worktree goes.
+
+### 2026-09-23 - Universal claims get a report category, and its first run found five more false
+
+- **`check_stale_claims.py` has a category E: comparative and universal claims
+  on the published surface** - page prose, plus the two documents the app
+  renders. It reports and exits 0 like the rest. Supersedes the handoff note's
+  "no check catches it": what no check could do was judge a claim, and what
+  this does is make the re-read the note asked for a command rather than a
+  memory.
+
+- **It was narrowed from 44 hits to 32 before shipping, on evidence.** Every
+  false claim found that day was a COMPARISON - "the only", "no other", "every
+  other", "any other", "elsewhere on this site"; none was a bare "every city" or
+  "every map", which mostly describe what the pipeline does to all maps and
+  made up most of the first version's output. A bare "every city HERE" or "ON
+  THIS SITE" was kept, because that suffix turns pipeline behaviour into a claim
+  about the set of built cities - the shape of the two morning instances
+  ("trams are excluded in every city here that has them"). Page docstrings are
+  skipped (they address the next editor), words may break across lines (the
+  line-grep probe before it could not see those), and excerpts are centred on
+  the match, because the first version printed the start of long table rows
+  with the flagged phrase truncated away.
+
+- **Proved against history rather than against its author's intent.** Run on
+  `481a3bd` and `aee5478` - the commits before that day's corrections - it
+  finds all 19 phrases it was pointed at; on the current tree, none. A
+  category that cannot find the defects that motivated it cannot find
+  anything.
+
+- **Its first live run found five more false claims and one overstated one, in
+  seven places, all in `docs/data_sources.md`,** which renders as the
+  About-the-Data page. Two contradicted each other: Edmonton
+  as "the only register here that publishes NO name column but the business's",
+  and Madrid - which publishes exactly that, a trade name and no registrant
+  field - claiming "a stronger position than any other city here can state", in
+  two places. Madrid's was **false the day it was written**, four cities after
+  Edmonton. Toronto as "the only city here whose register carries NO
+  coordinates" (France's SIRENE carries none either; what Toronto alone must do
+  is match on the ADDRESS, which its page correctly says). "Every other city
+  needed one" source (the New York page's claim, fixed that afternoon, still
+  alive in the documentation). The Census geocoder as "the only source left
+  unread" while the same document's San Diego boundary row says "Terms not
+  read". And Calgary as "the only register here that names premises itself",
+  softened to match the Calgary page's wording from the same day.
+
+- **Its own docstring said "WHY THESE THREE" over four categories** - a
+  hand-kept count, in the checker for hand-kept counts. Now five, and the
+  heading no longer counts them.
 
 ### 2026-09-23 - Sao Paulo's rail is drawn from OSM with GeoSampa as the status reference; Rio's SIURB clause accepted
 
