@@ -18,6 +18,14 @@ wins and the list is stale.
 `add-country`** (`.claude/skills/add-country/`) - the national facts that
 disqualify every city at once, profiled once instead of per city. Canada is the
 worked example; `docs/canada_retrospective.md` is what it cost.
+**Three countries have been profiled to that depth and each cost something
+different, so read the pair that matches the shape you expect**:
+`docs/mexico_retrospective.md` (one national register, bespoke rail - the
+second city was cheap) and `docs/spain_retrospective.md` (bespoke per city -
+the second city shared a country with the first and almost nothing else).
+Spain's is also the one to read before betting on a country because its
+language or classification system looks familiar: that reasoning was used to
+pick it, and it was half wrong.
 
 **Adding a city? Use the `add-city` skill** (`.claude/skills/add-city/`) -
 the process the built cities actually followed - and the `scaffold-city` skill
