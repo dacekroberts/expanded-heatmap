@@ -75,11 +75,11 @@ waiting on a licence read, which conflated *we have not looked yet* with
 |---|---|---|
 | 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates present, rail answered | **4** |
 | 🔵 ~~**B**~~ | ~~Awaiting permission~~ — ✗ **CLOSED 2026-09-22.** Its one city was discarded: the data was excellent, the terms forbade it, and the letter was judged not worth writing | **0** |
-| 🟡 **C** | **Business leg done; coordinates are the only work**, and the route is known and cheap | **8** |
+| 🟡 **C** | **Business leg done; coordinates are the only work**, and the route is known and cheap | **9** |
 | 🟤 **D** | **Coordinates *and* unfinished screening** — more than one thing still open | **1** |
 | 🟠 **E** | **Geocoding at national scale.** The address work is a project, justified only by reuse across many cities | **12** |
 | 🟣 **F** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **2** |
-| 🔴 **G** | **Access blocked.** The register exists and is queryable; we cannot reach it in bulk | **3** |
+| 🔴 **G** | **Access blocked.** The register exists and is queryable; we cannot reach it in bulk | **2** |
 | *Discarded* | Measured negative, evidence named | *28* |
 
 **Re-banded 2026-09-22 so each caption describes what its cities ARE**, not
@@ -160,7 +160,7 @@ So the next *unstarted* city is the question.
 and only owner decisions left. After that the screen has no city whose
 "what remains" column is empty.
 
-## 🟡 Band C — the business leg is done; coordinates are the only work, and the route is known (8 cities)
+## 🟡 Band C — the business leg is done; coordinates are the only work, and the route is known (9 cities)
 
 **Nothing here needs screening.** Every register is measured, licensed and
 current. What each still lacks is coordinates, and for all eight the method
@@ -169,6 +169,7 @@ one. Ordered by how little that step costs.
 
 | Cities | Country | Business leg | The coordinate step |
 |---|---|---|---|
+| **Hong Kong** ▲▲▲ *(1)* | 🇭🇰 | **35,808 licensed premises, 100% carrying BOTH a trade name (`SS`) and an address (`ADR`)** — restaurants **17,260** (general 12,603, light refreshment 4,652), other food **16,518** (**Composite Food Shop, Fresh Provision Shop, Bakery, Siu Mei and Lo Mei** — food *retail*, not only food service), non-food **2,030** (cinemas, karaoke, bathhouses). `EXPDATE` per licence, `DIST` per district. **Regenerated daily** — the files carried `GENERATION_DATE` of the day they were read. Licence **PERMITTED WITH CONDITIONS** | **A geocoding pass** — addresses, no coordinates. Hong Kong's government **Address Lookup Service is free**. ⚠️ Two obligations: **attribution plus acknowledgement of Government IP ownership**, and an **indemnity clause** — the only one in this project. **Rail is the best in the whole screen: 126 relations, 125 named, 117 coloured** |
 | **Prague** ▲▲ *(1)* | 🇨🇿 | **85,022 active Praha subjects in CZ-NACE 47/56/96**, from the Statistical Office's **RES** (`res_data.csv`, 543 MB, updated 2026-09-17). **CZ-NACE is SINGLE-VALUED** here — *převažující činnost* — unlike ARES's fifteen-code array. `FIRMA` trade name **100%**, street + house number **99.6%** | **A JOIN, not a geocode** — **99.7% carry `KODADM`, a RÚIAN address code**, so coordinates come from the national address register rather than a geocoder. **The cheapest coordinate step in this band.** Plus the France question: `KATPO` is an employee-count category and **46,447 of the 85,022 are `000`**, so the SIRENE employee filter transfers directly — **38,575 survive it**, against Paris's 50,156 for a larger city |
 | **Taipei**, Kaohsiung, Taoyuan, Taichung *(4)* | 🇹🇼 | 商業登記 — premises, active/closed status, per-category assembly | Moderate — **NLSC's geocoder is keyless** |
 | **Oslo** *(1)* | 🇳🇴 | 152,060 sub-units, `beliggenhetsadresse` (physical, not registered), NACE, open API no key | Moderate |
@@ -298,7 +299,19 @@ carry three buckets?* **Answer it once and two cities move together.**
 
 ---
 
-## 🔴 Band G — access blocked: the register exists and we cannot reach it (3 cities)
+## 🔴 Band G — access blocked: the register exists and we cannot reach it (2 cities)
+
+> ⚠️ **▲▲▲ Hong Kong left this band on 2026-09-22, and it was never
+> actually blocked.** It was recorded here as *"the portal is a measured
+> negative (statistics only), but FEHD's register exists and is queryable —
+> no bulk export found"*, and described as **the single most valuable open
+> thread in the screen**. It was. **`data.gov.hk`'s CKAN `package_list`
+> returns 3,821 datasets and nobody had pulled it** — the recorded negative
+> was a search result. Enumerating found FEHD's own licensing system
+> published as bulk XML: `LP_Restaurants_EN.XML`, `LP_OtherFood_EN.XML` and
+> `LP_NonFood_EN.XML`, regenerated daily. **A negative from search is a
+> statement about the search**, which Stockholm demonstrated the same morning
+> and which cost this city several sessions of being called unreachable.
 
 **None of these is a data negative, and the distinction is the whole point of
 the band.** Rail is answered for all three. What is missing is a route to a
@@ -334,7 +347,6 @@ below.
 
 | City | Rail (OSM) | Business leg |
 |---|---|---|
-| **Hong Kong** 🇭🇰 | 126 rel, 125 named, 117 coloured | **BLOCKED, not negative.** The portal is a measured negative (statistics only), but **FEHD's register exists and is queryable** — no bulk export found. The single most valuable open thread in Band D |
 | ▲▲ **Tel Aviv** 🇮🇱 | see Band B | **PROMOTED OUT OF BAND D 2026-09-22 — to Band B. Both legs measured.** The WAF-blocked portal was never the only host: `gisn.tel-aviv.gov.il` answers, and carries **22,176 licensed businesses** with activity *and* location. See Band B |
 | **Hyderabad** 🇮🇳 | 6 rel, all named + coloured | ⚠️ **All three live hosts PROBED 2026-09-22. Still blocked, and now with the alternative route measured shut.** `ghmc.gov.in` — the body that issues trade licences — returns **403 in a real browser as well as to curl**, an **F5 WAF block that names itself** (support ID + `F5 site: wes-sea`); deliberate, like Bulgaria's. `data.telangana.gov.in` resolves but is unroutable for us; `tsbpass` has no A record. **`tgbpass.telangana.gov.in` answers 200 and is a FALSE FRIEND** — TG-bPASS is *Building Permission Approval and Self-certification*, i.e. construction permits, and `/Home/TradeLicense` 404s. The national fallback that rescued Sofia does **not** work here: `data.gov.in`'s `title=` filter is controllable (nonsense → *"No Result Found"*), and `trade license` returns only **Karnataka's "District wise ULB wise Trade License Details" — an aggregate**, confirming the prior 288,011-resource negative. **The Hong Kong shape: blocked, not negative** |
 | **Kochi** 🇮🇳 | 2 rel, named + coloured | ⚠️ **PROBED 2026-09-22, and the lead was a FALSE FRIEND.** `go.lsgkerala.gov.in/pages/query.php?t=establishment` is a **Government Orders and Circulars search** — "establishment" matches 6,526 orders about *staffing*; Kochi's own `/establishment/396` is ജീവനക്കാര്യം, its **personnel** page. In Indian government usage "establishment" means staff posts, not premises. The real route is **K-SMART** (`tax.lsgkerala.gov.in` redirects to `ksmart.lsgkerala.gov.in`) and **Sanchaya** — both live, both **transactional citizen portals** for paying tax and renewing licences, **no bulk export found**. Kerala's local bodies do issue the licences, so the register exists. **The Hong Kong shape: blocked, not negative** |

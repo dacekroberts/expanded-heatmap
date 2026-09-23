@@ -993,6 +993,65 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Hong Kong was never blocked, and enumerating `data.gov.hk` proved it in
+  one call.** It had been recorded as *"the portal is a measured negative
+  (statistics only), but FEHD's register exists and is queryable - no bulk
+  export found"*, and carried for several sessions as **the single most
+  valuable open thread in the screen**. `data.gov.hk/en-data/api/3/action/
+  package_list` returns **3,821 datasets** and nobody had pulled the list.
+  Matching locally over every name found FEHD's own Licensing Management
+  Information System published as bulk XML: **`LP_Restaurants_EN.XML`,
+  `LP_OtherFood_EN.XML`, `LP_NonFood_EN.XML`**, each carrying a
+  `GENERATION_DATE` of the day it was read - **regenerated daily**. Promoted
+  from Band G to Band C. Touched `docs/city_master_list.md`.
+
+- **The scale and shape, measured rather than inferred: 35,808 licensed
+  premises, 100% carrying both a trade name and an address.** Restaurants
+  **17,260** (general 12,603, light refreshment 4,652, marine 5), other food
+  **16,518**, non-food **2,030**. Every record has `SS` (shop sign),
+  `ADR`, `TYPE`, `DIST`, `LICNO` and `EXPDATE`, so active filtering and
+  district scoping both come free. **`OtherFood` is not a production
+  register** - its types include **Composite Food Shop, Fresh Provision Shop,
+  Bakery and Siu Mei and Lo Mei Shop**, which are food *retail*, so this is
+  broader than the single food-service bucket the record implied.
+
+- **This is the third time in one day that a recorded negative turned out to
+  be a statement about a SEARCH rather than about the data.** Stockholm's was
+  *"`restaurang` and `foretag` both return 0"* against a register called
+  `Tillsynsverksamheter`; Zurich's was a keyword sweep that missed nothing
+  but was never a sweep; Hong Kong's was "no bulk export found" against a
+  portal whose full dataset list had never been requested. **Enumerate, then
+  conclude** - the cost of the enumeration was one HTTP call in each case.
+
+- **Hong Kong's licence is PERMITTED WITH CONDITIONS, and it carries an
+  obligation no other source here does.** `data.gov.hk`'s Terms of Use v1.2
+  (26 May 2025) allow you to *"browse, download, distribute, reproduce,
+  hyperlink to, and print the Data for **both commercial and non-commercial
+  purposes on a free-of-charge basis**"*, conditional on identifying the
+  source, **acknowledging Government ownership of the intellectual property
+  rights**, and giving proper attribution. It also requires the user to
+  **indemnify the Government against infringement claims and all associated
+  costs** - the only indemnity clause in this project, recorded so it is
+  weighed before Hong Kong is built rather than after.
+
+- **Bucharest's rail count was attempted and failed on the mirrors, not on
+  the data.** Both Overpass mirrors returned *"Dispatcher_Client::
+  request_read_and_idx::timeout. The server is probably too busy"* after 90
+  and 240 seconds. Recorded as attempted-and-unavailable rather than left
+  silently undone, because an outstanding item that looks unattempted is
+  indistinguishable from one that was tried.
+
+- **Romania cannot be enumerated the way Bulgaria was, and the reason is
+  structural.** `data.gov.ro` resolves (85.120.75.35) and remains unroutable
+  for us, so the EU portal is the only route - but **Romanian dataset URIs
+  are slugs and UUIDs, not sequential integers**, so the id-sweep that
+  recovered 11,635 Bulgarian datasets has nothing to sweep. OFFSET also dies
+  at 60 for `ro` where it reached 500 for `bg`. **The technique is not
+  general; it depended on a property of Bulgaria's export.** Bucharest
+  already has a measured source, so this closes a widening route rather than
+  its only one.
+
+
 - **Discarded Tel Aviv on TERMS rather than on data, by owner decision, and
   the distinction is the whole entry.** Its measurement is the strongest of
   any unbuilt city in this screen - **22,168+ licensed businesses** carrying
