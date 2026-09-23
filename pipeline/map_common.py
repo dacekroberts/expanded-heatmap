@@ -441,6 +441,11 @@ PHONE_FIT_SCRIPT = """
     // The view Folium baked in, captured before any fit runs. apply() restores
     // it when the map returns to full width - see the else branch there.
     var HOME = null;
+    // The width the CURRENT view was fitted for, which is not the same thing as
+    // the container's width. See apply(): a view fitted while the container was
+    // still laying out stays wrong until something notices the mismatch, and
+    // comparing widths alone cannot notice it.
+    var FITTED_AT = null;
 
     // Folium renders body HTML before the figure's script block, so this runs
     // before the map exists - poll for it rather than assuming.
@@ -474,10 +479,31 @@ PHONE_FIT_SCRIPT = """
         // laid-out document. Correct renders are untouched, because `target` is
         // only 0 when the measurement is meaningless.
         if (!target) return;
-        if (Math.abs(el.getBoundingClientRect().width - target) < 1) return;
-        el.style.width = target + "px";
-        document.body.style.width = target + "px";
-        m.invalidateSize();
+        // THE EARLY RETURN USED TO BE A CORRECTNESS BUG, not just an
+        // optimisation. It read "the width already matches, so there is
+        // nothing to do" - but the VIEW can be wrong while the WIDTH is right.
+        //
+        // Observed on the deployed site 2026-09-23, on Paris: the embedded map
+        // sat at zoom 9 against its baked 12.5, showing the whole Ile-de-France
+        // with every line label flung to the frame edges. Sequence: an early
+        // pass measured the container mid-layout at some narrow width and
+        // fitted BOUNDS for THAT width; a later pass found the container now at
+        // its real 854 px, matched `target`, and returned - so the zoom from
+        // the narrow fit was never undone. Intermittent, and it survived the
+        // 2026-09-21 fix because that one only added an `else` branch AFTER
+        // this return.
+        //
+        // So the state that matters is "what width was the current view fitted
+        // for", not "what width is the container". FITTED_AT records it, and a
+        // mismatch re-fits even when the width needs no change.
+        var atWidth = Math.abs(el.getBoundingClientRect().width - target) < 1;
+        if (atWidth && FITTED_AT === target) return;
+        if (!atWidth) {
+            el.style.width = target + "px";
+            document.body.style.width = target + "px";
+            m.invalidateSize();
+        }
+        FITTED_AT = target;
         if (target < MAP_W && BOUNDS) {
             // Generous padding because BOUNDS holds label ANCHORS, and a label's
             // text box extends past its anchor by up to ~70px.
