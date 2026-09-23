@@ -1,0 +1,11 @@
+{
+  "food_service": 2365,
+  "gtfs_stop_ids": 160,
+  "personal_services": 850,
+  "register_rows": 38265,
+  "retail": 9908,
+  "stations_collapsed": 98,
+  "stations_excluded": 2,
+  "stations_in_region": 96,
+  "storefront_rows": 13123
+}

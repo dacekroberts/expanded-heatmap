@@ -123,6 +123,32 @@ GEO_PRECISION_COLUMN = "distance_precision"
 # registrant's own name is not. So: fall back to the legal name ONLY where the
 # legal form is a company, never for a natural person, and run
 # `scripts/check_personal_exposure.py` before publishing any French city.
+# THE GUARD, and it is load-bearing rather than a formality. Measured
+# 2026-09-22 via recherche-entreprises.api.gouv.fr (official, no key), 750
+# active Paris rows: **8.7% of storefront rows are natural persons**, and of
+# the UNNAMED rows **9.4%** are. So ~nine in ten unnamed rows are companies and
+# the fallback is worth building - but applied blindly across Paris's ~148,600
+# bucket rows it would publish on the order of TEN THOUSAND individuals' names,
+# against the ~4,000 Los Angeles nearly shipped.
+#
+# The field lives on the UNITE LEGALE, joined on siren.
+LEGAL_FORM_COLUMN = "categorieJuridiqueUniteLegale"
+NATURAL_PERSON_CODE = "1000"          # personne physique - SUPPRESS the name
+LEGAL_NAME_COLUMN = "denominationUniteLegale"
+
+# Both figures are LOWER BOUNDS: the API used exposes `liste_enseignes` and
+# `nom_commercial` but not `denominationUsuelleEtablissement`, which the 42.9%
+# above came from, so rows counted unnamed there are disproportionately
+# companies. Direction is unaffected.
+#
+# TRAP, and it produced a wrong answer before it was caught: that API's
+# `total_results` SATURATES AT 10,000. Every bucket returned exactly 10,000 and
+# two reported "100% personne physique", which is plainly false for Paris
+# retail. The control had checked the filter was VALIDATED (a nonsense value
+# 400s), not that the count was TRUTHFUL. **A cap is a plausible number.**
+# Take shares from sampled records, never from that API's counts.
+NATURAL_PERSON_SHARE = {"all_storefront": 0.087, "of_unnamed": 0.094}
+
 NAMING_FILL_MEASURED = {
     "sample_rows": 20103,
     "enseigne1": 0.291,

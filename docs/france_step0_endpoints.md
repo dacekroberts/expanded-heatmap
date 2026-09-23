@@ -164,6 +164,46 @@ own name is not.
 for a natural person**, and run `python scripts/check_personal_exposure.py`
 before publishing any French city.
 
+### ✅ CLOSED 2026-09-22 — the fallback IS worth building, and the guard is not optional
+
+The rule above named no field and measured no split. Both now done, via
+`recherche-entreprises.api.gouv.fr` (the official open API — no key, no
+account), which carries `nature_juridique` at company level and
+`liste_enseignes`/`nom_commercial` at establishment level, so the join this
+section worries about is already made. Sampled 750 active Paris rows across
+ten pages spread through each section, 250 per bucket:
+
+| | Paris storefront rows |
+|---|---|
+| Natural persons (`nature_juridique` **1000**) | **8.7%** |
+| Carry a premises-level name | 27.3% (a FLOOR — see below) |
+| **Of the UNNAMED rows, natural persons** | **9.4%** |
+
+**So roughly nine in ten unnamed rows are companies**, where
+`denominationUniteLegale` is a company name and the fallback is safe. Build it,
+with `nature_juridique == "1000"` as the suppression test.
+
+**The guard is load-bearing, not a formality.** Applied blindly across Paris's
+~148,600 bucket rows, the fallback would publish on the order of **ten thousand
+individuals' names** — against the ~4,000 Los Angeles nearly shipped.
+
+⚠️ **27.3% is a floor and 9.4% is a LOWER BOUND.** This API exposes
+`liste_enseignes` and `nom_commercial` but **not**
+`denominationUsuelleEtablissement`, which the 42.9% above was measured from. The
+rows counted unnamed here but named above are disproportionately companies, so
+the true natural-person share of the genuinely-unnamed is somewhat higher than
+9.4%. It does not change the direction.
+
+⚠️ **`total_results` on this API SATURATES AT 10,000**, and a first
+attempt at this measurement was wrong because of it: every bucket returned
+exactly 10,000 and two returned "100% personne physique", which is plainly
+false for Paris retail — the first query of that session returned
+DISTRIBUTION CASINO FRANCE, nature juridique 5710. The control had tested that
+the filter was VALIDATED (a nonsense value returns HTTP 400), not that the
+count was TRUTHFUL. **A cap is a plausible number, which is what makes it
+dangerous** — take shares from sampled records, never from this API's
+counts.
+
 ---
 
 ## Privacy — partly done upstream

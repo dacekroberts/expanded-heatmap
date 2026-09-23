@@ -42,6 +42,45 @@ ROOT = Path(__file__).resolve().parent.parent
 # step 2 falls back to when trade is blank; processed/address: for the
 # unit-indicator check (None to skip).
 REGISTRIES = {
+    # Dublin is the STRONGEST case in the project and the only one where the
+    # answer is structural rather than measured: the Irish rateable valuation
+    # register carries NO name column of ANY kind - no trade name, no occupier,
+    # no ratepayer, no owner. 19 fields, all address, classification, valuation
+    # and geometry, and step 2 ASSERTS that none matching
+    # name|occupier|tenant|owner|ratepayer|proprietor|person|contact arrives,
+    # exiting if a future refresh adds one.
+    #
+    # So there is no trade/owner fallback pair to join against, as for New York
+    # and Philadelphia - but unlike those two the absence is a property of the
+    # source rather than of what this project chose to download. Los Angeles'
+    # failure mode (a blank trade name falling back to a registrant's own name
+    # at their home) CANNOT occur here. The register is also non-domestic by
+    # statute, so the residence question does not arise either.
+    #
+    # `business_name` holds the STREET ADDRESS, which is why the address
+    # columns and the name column are the same field.
+    "dublin": dict(raw=None, trade=None, owner=None, name_is_address=True,
+                   processed="businesses_clean.csv",
+                   address=("business_name",)),
+    # Milan is a HYBRID, and the first one here: ~20% of pins carry a real
+    # trade name (`insegna`) and the rest carry the street address, because
+    # `insegna` is 17.6% populated on the retail register, 23.8% and 9.1% on
+    # the two food ones, and ABSENT from three of the six registers entirely.
+    #
+    # None of the six carries a personal name - no titolare, ragione_sociale
+    # or nominativo, confirmed against live headers, and step 2 EXITS if one
+    # ever appears. So this is the France/Edmonton pattern (the publisher
+    # stripped it) and the fallback is an address rather than an owner, which
+    # is why Los Angeles' failure mode cannot occur.
+    #
+    # `name_is_address` is NOT set, unlike Dublin's: it is true of ~80% of
+    # rows rather than all of them, so the heuristics below are measuring a
+    # mixture. Read a person-like hit as "check whether this is an Italian
+    # street name or a sole trader's shop sign" - both are present, and the
+    # second is exactly what this script is for.
+    "milan": dict(raw=None, trade=None, owner=None,
+                  processed="businesses_clean.csv",
+                  address=("business_name",)),
     "san_diego": dict(raw="sd_businesses_active_datasd.csv", trade="dba_name",
                       owner="business_owner_name", processed="businesses_clean.csv",
                       address=("address_no", "address_road", "address_suite")),
@@ -483,6 +522,23 @@ def check(slug):
     rows = pins(slug)
     names = [html.unescape(r[2]).strip() for r in rows]
     print(f"\n=== {slug}: {len(rows):,} pins, {len(set(names)):,} distinct names")
+
+    if spec.get("name_is_address"):
+        print("  ** THE DISPLAYED NAME IS THE STREET ADDRESS, NOT A BUSINESS "
+              "NAME. **\n"
+              "  This source publishes no name column of any kind, so every "
+              "heuristic below\n"
+              "  is being run over addresses and its output is not a privacy "
+              "measurement.\n"
+              "  Verified 2026-09-22: the person-like hits are Irish streets "
+              "named after\n"
+              "  people (Ashe Street, Thomas Street), the 'Surname, First' "
+              "hits are floor\n"
+              "  lists ('Basement, Ground & First floor'), and the "
+              "'name (trade)' hits are\n"
+              "  unit descriptors ('(Basement) 51 Henry Street'). READ THE "
+              "NUMBERS BELOW AS\n"
+              "  ZERO until a name column appears, which step 2 exits on.")
 
     if spec["raw"] is None:
         print("  no registrant-name fallback exists for this city: its step 2 "

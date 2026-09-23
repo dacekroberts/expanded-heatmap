@@ -16,14 +16,18 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**170 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**174 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
 - [Paris's feed settled, Lyon deferred, and Europe becomes one map region](#2026-09-22---pariss-feed-settled-lyon-deferred-and-europe-becomes-one-map-region)
+- [Europe became one macro-map region, and a write truncated a file to zero](#2026-09-22---europe-became-one-macro-map-region-and-a-write-truncated-a-file-to-zero)
 - [France's three pre-ship items run; Lyon turns out to be gated three ways](#2026-09-22---frances-three-pre-ship-items-run-lyon-turns-out-to-be-gated-three-ways)
+- [Dublin and Milan published, and the merge caught a latent break in both](#2026-09-22---dublin-and-milan-published-and-the-merge-caught-a-latent-break-in-both)
+- [Milan built: six disjoint registers, and a screen that was wrong four times](#2026-09-22---milan-built-six-disjoint-registers-and-a-screen-that-was-wrong-four-times)
 - [France profiled: one register, six cities, and a naming gap found early](#2026-09-22---france-profiled-one-register-six-cities-and-a-naming-gap-found-early)
 - [Band B's coordinate routes measured; one claim did not survive](#2026-09-22---band-bs-coordinate-routes-measured-one-claim-did-not-survive)
+- [Dublin built: the rail source reversed mid-build, and a national grid got admitted](#2026-09-22---dublin-built-the-rail-source-reversed-mid-build-and-a-national-grid-got-admitted)
 - [Dublin Step 0: a register with no names, and a taxonomy rule that inverts](#2026-09-22---dublin-step-0-a-register-with-no-names-and-a-taxonomy-rule-that-inverts)
 - [Barcelona's live terms finally read, and they carried a clause that would have sunk the city](#2026-09-22---barcelonas-live-terms-finally-read-and-they-carried-a-clause-that-would-have-sunk-the-city)
 - [Madrid and Barcelona published, and the live site showed a defect no local check could have](#2026-09-22---madrid-and-barcelona-published-and-the-live-site-showed-a-defect-no-local-check-could-have)
@@ -282,6 +286,56 @@ onwards; the early ones are split by phase rather than by hour.
   belongs to the build and chrome sessions under `docs/session_roles.md`, and
   the main session is editing `app/cities.py` for Dublin concurrently.
 
+### 2026-09-22 - Europe became one macro-map region, and a write truncated a file to zero
+
+- **The three European country regions were collapsed into one `Europe`.**
+  `app/cities.py` gave Spain, Ireland and Italy a region each - three regions
+  holding four cities, growing by one entry per country while the map they
+  index stayed the same size. Collapsed on the owner's call the same day the
+  third appeared, **before France's six cities could make it five**.
+  `REGION_ORDER` loses the three country entries and gains `Europe`; Madrid,
+  Barcelona, Dublin and Milan are retagged. **No `label_offset` moved.**
+  `scripts/check_macro_labels.py` reports **PROBLEMS 0** across the new
+  7-region layout and **one fewer clipped label** than the 9-region one (11
+  against 12), because collapsing three narrow frames into one wider one moves
+  labels away from a canvas edge rather than toward it. Verified in the browser
+  against `.venv-lean`: the region row reads
+  `United States (9) / West (3) / East (6) / Canada West (3) / Canada East (2)
+  / Mexico (2) / Europe (4)`, and Europe frames all four cities with readable
+  labels. The decision to keep Europe UNSPLIT is a measurement, not a
+  preference: its cities span about 1,700 km where North America's regions
+  split countries 3,300 km wide, and `check_macro_labels.py` is what will say
+  when that stops holding.
+- **Two label widths were missing and would have refused the check regardless.**
+  `TEXT_WIDTH` in `check_macro_labels.py` carried no Dublin and no Milan -
+  neither build measured its own, although `scaffold_city.py` says to - so the
+  script would have refused a guessed width for either city even without the
+  region change. Measured in a real browser at `600 14px "Space Grotesk"`:
+  **Dublin 42.8 px, Milan 36.3 px.** The method was validated first by
+  reproducing five existing entries exactly (Barcelona 67.9, Madrid 47.2,
+  Boston 48.4, Toronto 52.4, Washington D.C. 110.3).
+- **`check_provenance.py`'s built-table check had to change what it compares,
+  because region stopped meaning country.** It derives a country from each
+  region name by stripping a direction suffix, which worked only while the two
+  were the same thing. With `Europe` covering three countries it demanded a
+  `Europe` row in a table organised by country. Resolved by making the built
+  table's row `Europe (4)` and keeping the countries **inside the cell**, so
+  the research document still reads by country while the check sees the map's
+  own grouping. The alternative - teaching the check a region-to-countries map
+  - was rejected because `app/cities.py` records no country and would have had
+  to start.
+- **⚠️ A `Path.write_text` call TRUNCATED `docs/city_master_list.md` to 0 bytes
+  and lost 111,547 bytes of research, recovered with `git checkout --`.** The
+  string held **lone surrogates**: the flag emoji had been written as
+  `🇪`, a UTF-16 pair, which Python parses as two unpaired surrogate
+  code points that UTF-8 cannot encode. `write_text` opens the file for
+  writing - which truncates - and only then encodes, so the exception landed
+  after the damage. **The correct escape is the codepoint** (`\U0001F1EA`), and
+  the correct method is to **encode to bytes while the original is still
+  untouched, write a temp file, then `os.replace`** - which is what the fix
+  does. Nothing was lost because the file was committed; that is the only
+  reason this is a note rather than an incident.
+
 ### 2026-09-22 - France's three pre-ship items run; Lyon turns out to be gated three ways
 
 - **The NAF taxonomy keys at the FINEST level, measured rather than
@@ -393,6 +447,178 @@ onwards; the early ones are split by phase rather than by hour.
   tested against airport coaches. Recorded as named constants in
   `pipeline/countries/france.py` rather than as warnings.
 
+### 2026-09-22 - Dublin and Milan published, and the merge caught a latent break in both
+
+- **Both cities merged to master and verified against the lean venv before the
+  push.** `check_deploy_imports.py` reports a clean clone importing cleanly;
+  the Overview renders with nine regions and no console error; Ireland and
+  Italy each frame their city with a readable label; both city pages open,
+  embed their map, and carry the full notices block. The only console entries
+  are Streamlit probing `/<Page>/_stcore/health` relatively before succeeding
+  at the root, which is navigation behaviour rather than a defect.
+- **THE MERGE CAUGHT A LATENT BREAK THAT WOULD HAVE TAKEN THE OVERVIEW DOWN,
+  and both branches had it.** Neither Dublin nor Milan added its region to
+  `app/cities.py`'s `REGION_ORDER`, so `LEAF_REGIONS` did not contain "Ireland"
+  or "Italy" and the file's own validator raised
+  `ValueError: ['Dublin', 'Milan'] have no region`. **Each branch would have
+  failed alone**; it surfaced at the merge only because that was the first time
+  anything imported `cities.py`. The reason nothing caught it earlier is
+  structural: `deploy-verify` was deferred by decision, and no step in either
+  build imports the app. **The lesson is that `scaffold_city.py` writes the
+  `region` key but does NOT add that region to `REGION_ORDER`** - a gap worth
+  closing in the scaffold rather than remembering, since it is silent until an
+  import happens and the two cities that met it were the first two non-Spanish
+  European ones.
+- **`deploy-verify` could not be invoked this session, and the reason is worth
+  recording because it is not a new breakage.** The agent list is captured at
+  session start; when this session began, `deploy-verify`'s frontmatter
+  `description` was still the 1038-character version that silently failed to
+  register, and the fix to 731 characters landed later in the same session. The
+  file on disk is correct and the agent will register in a fresh session. The
+  verification above was therefore done directly with the browser tools against
+  `.venv-lean`, which covers the same ground for a `city-added` scope - it is
+  the `full` sweep that a hand-run would not reproduce.
+- **Both required notices are now DISPLAYED, which is the part that gates the
+  deploy.** `app/components.py`'s `_NOTICES` gained Tailte Éireann (Dublin) and
+  Comune di Milano (Milan), and `docs/data_sources.md` items 22 and 23 changed
+  from "NOT YET DISPLAYED" to "DISPLAYED". Each carries the **CC BY 4.0
+  §3(a)(1) modification disclosure** rather than a bare source credit, which is
+  the fifth and sixth time this project has met that duty. A one-character
+  trap on the way: the heading in `_NOTICES` was written `Tailte Eireann`
+  while the docs say `Tailte Éireann`, and `check_provenance.py` matches them
+  by name - it reported the notice as displayed-but-unnumbered until the accent
+  was restored.
+
+### 2026-09-22 - Milan built: six disjoint registers, and a screen that was wrong four times
+
+- **Correction to the notice-number bullet below: Milan is notice 23, and there
+  was never a branch collision.** That bullet said both cities had taken 22 on
+  separate branches and that Dublin would keep it at merge. The real cause is
+  simpler, and was found by running the check rather than by reasoning:
+  **Tailte Éireann's notice 22 had already reached master with Dublin's BRIEF
+  commit**, which is docs-only, while Dublin's build sat on `dublin-build`. So
+  master's last notice was 22 and not 21, and the next free number read one
+  lower than it was because the branch was consulted instead of master.
+  `check_provenance.py` caught the duplicate, then caught the stale `item 22`
+  citation that fixing it left behind - two catches in one session from the
+  check written after the notices list carried two item 8s and two item 15s.
+  **The PAGE-number collision in that bullet is real and stands:** Milan is
+  page 20 because `scaffold_city.py` globs the working tree and cannot see
+  Dublin's 19 on another branch.
+- **Confirmed while investigating it that NOTHING IS DEPLOYED.** Dublin's
+  `app/cities.py` entry and its page are on `dublin-build` only; master carries
+  Dublin's docs and its brief but no `app/` change, so the deferral of
+  `deploy-verify` holds and no city has gone live unverified. Recorded because
+  "landing `app/` on master IS deploying" makes the difference between a docs
+  commit and a build commit load-bearing - a merge that looked like it had
+  published Dublin turned out not to have, and the way to tell was to read
+  `app/cities.py` at master rather than to reason about the branch graph.
+
+- **Milan built from SIX premises registers - the most of any city here - as
+  104 stations and 47,540 storefront premises, 41,510 of them inside a ring.**
+  Per register after filtering: `vicinato` 27,886, `pe_in_piano` 9,166,
+  `servizi_persona` 5,661, `pe_fuori_piano` 2,949, `artigianato_alim` 1,444,
+  `panificatori` 434. Buckets: Retail 28,320, Food service 13,559, Personal
+  services 5,661. **87% of premises fall inside a station ring**, against
+  Dublin's 60% - a dense metro in a compact comune. Baseline in
+  `outputs/milan/baseline.json`; brief re-run at 13/13.
+- **Four of the country screen's headline claims about Milan did not survive
+  measurement, and all four are the same mistake: reading page one of an API.**
+  `insegna` was recorded as "the trading name, which is exactly what this
+  project displays" and is **17.6% populated**, absent entirely from three of
+  the six registers - page one reads 41.2% because a register's first page is
+  its oldest rows. `codice_ateco` was recorded as the classification and is
+  **7.1% populated**. "Two classifications and a floor area, the best business
+  source in the screen" - both classifications are unusable. "Three datasets" -
+  there are six. None of it disqualified Milan, but a build trusting the screen
+  would have keyed its taxonomy on a 7%-populated column and labelled its pins
+  from a 17% one. **The general rule, for `add-country`: a population rate read
+  from page one is not a measurement.**
+- **Keyed the taxonomy on the REGISTER rather than on any classification
+  field.** Every in-dataset field is unusable - `settore_merceologico` carries
+  66 distinct values for what should be three (half pure case variation, plus
+  2,759 concatenated rows like `AlimentareNon Alimentare`),
+  `tipo_eser_storico_pe` is 60% blank, `settore_storico_pe` 64% - while `Area
+  di Competenza` is a single clean value per dataset at 100%. So bucket =
+  source, dispatched through `EXTRA_COLUMNS` exactly as New York's taxonomy
+  does, with no change to `map_common.py`. The one judgment inside it: a food
+  SHOP is Retail, not Food service, so bakers and the alimentare half of
+  `vicinato` are Retail on the NAICS 445-vs-722 line Dublin also drew.
+- **Decided NOT to deduplicate across sources, which is the opposite of New
+  York's call, and the reason is measured rather than stylistic.**
+  `multi-source-city` says to merge on address AND a normalised name because
+  one storefront can hold several licences. Neither half transfers: `Codice` is
+  unique within every register with **zero collisions between any pair**
+  (prefixes EV/PA/AE/PE/FP), so the six are demonstrably separate registers of
+  different activities; address cannot be a key at all, because **15,613 of
+  28,131** `vicinato` rows already share one with another row in the same
+  register; and `insegna` is too sparse to normalise on. A shop and a bar at
+  one Milan address are two premises. Step 2 ASSERTS the disjointness rather
+  than deduplicating, so a future overlap fails loudly. The over-count where
+  one business holds two licences is stated on the city page.
+- **Rail from the agency, with BOTH `osm-rail` steps run this time.** ATM
+  publishes metro stations (`ds535`, 130 points) and alignments (`ds539`, 31
+  variants) as separate CRS84 layers, plus a GTFS whose `route_color` carries
+  the five official colours. Three traps, each measured and each now guarded in
+  code: **`ds533`'s `id_ferm` is a STRING where `ds535`'s `id_amat` is an INT**
+  and a raw join gives 130 of 130 misses; **`ds535`'s 130 features are 125
+  physical stations**, with interchanges modelled two incompatible ways and a
+  distance threshold wrong in both directions (WAGNER/BUONARROTI at 277 m are
+  different, LORETO M2/M1 at 231 m are one), so the collapse is by name; and
+  **`stops.txt` cannot select metro stations** because `location_type` and
+  `parent_station` are empty on all 4,897 stops while 532 names match `m1`-`m5`.
+  **Gate 3 runs and passes** against ATM's own join table: M1 38, M2 35, M3 21,
+  M4 21, M5 19, union 130, 130 of 130 resolving.
+- **Fixed a gate that PASSED ON ZERO.** The first version of that gate-3 check
+  guarded `if total and abs(...)`, so a join matching nothing - which is what a
+  wrong column name produces, and did - skipped the check silently and printed
+  "union 0" as though it were a finding. It now exits naming the failure as
+  this project's code rather than as a fact about Milan. Same shape as the
+  empty-200 Overpass lie: **a check that cannot distinguish "no data" from "no
+  answer" is not a check.**
+- **Drew the metro only; the 17 tram routes are recorded as a costed extension
+  rather than a discard.** Barcelona excluded its T1-T6 and Toronto its
+  streetcars, and Milan's trams are a dense street-running network needing
+  `docs/sub_transit_line_filters.md` rather than a line list - plus 17 invented
+  colours, since `route_color` is populated only for the metro. Reversible: the
+  geometry is in the GTFS `shapes.txt`.
+- **Replaced a regex label normaliser with explicit per-source rules, after the
+  regex failed three ways at once.** Splitting concatenations on a
+  lower-to-upper seam left `non alimentare` / `Non Alimentare` / `Alimentare`
+  as three labels (only ALL-CAPS was folded), never split
+  `alimentarenon alimentare` (lower-to-lower seam) and never split
+  `BAR CAFFTavola fredda` (upper-to-upper). The vocabulary is small and bounded
+  per register, so it is written out. `TIPO A - REG.2003` - the commonest value
+  in the personal-services register at 1,333 rows - is deliberately unmapped,
+  because it is a regulatory class under the 2003 hygiene regulation and not an
+  activity; it falls through to the register's own name.
+- **Recorded Milan's privacy result as zero, with the heuristics' hits verified
+  as Italian address conventions.** `check_personal_exposure.py` reports **1
+  person-like name in 41,510 pins**, no emails and no phone numbers. Its two
+  other signals are artefacts: of 39,520 names containing a bracket, **99.5%
+  are Milan's own `(z.d. N)` decentralisation-zone suffix** and the rest are
+  street-naming (`Via Piatti (Dei)`), while all 276 `c/o` markers name
+  organisations (`circolo arci ricotti`, `soc. sportiva iris 1914`), not
+  people. No register carries a personal name and step 2 EXITS if one appears.
+  Milan is entered WITHOUT Dublin's `name_is_address` flag, because ~20% of its
+  pins do carry a real trade name - the heuristics are measuring a mixture here
+  rather than pure addresses, and a sole trader signing a shop with their own
+  name is exactly what the script should still catch.
+- **`brief_check.py` gained `http_contains`, its seventeenth kind, because
+  Milan's licence VERSION is invisible to the obvious endpoint.** CKAN's
+  `package_show` reports `license_id: cc-by` with **no version**, and only the
+  DCAT-AP_IT serialisation carries `owl:versionInfo "4.0"`. A licence claim
+  pinned to `package_show` would have kept passing while the thing it guards
+  went unwatched. The check reads the `.ttl` and also asserts no NonCommercial
+  or NoDerivatives clause has appeared.
+- **Two collisions created by building two cities on two branches in one day,
+  both flagged rather than left to surface at merge.** Milan's page took number
+  **20** because `scaffold_city.py`'s `next_page_number()` globs the working
+  tree and cannot see Dublin's 19 on another branch. And **both cities took
+  notice 22**; Dublin was built first, so at merge Dublin keeps 22 and Milan
+  becomes 23, together with the three citations in Milan's provenance rows.
+  `check_provenance.py` catches duplicate notice numbers, so the merge will say
+  so - but it is cheaper to renumber deliberately.
 ### 2026-09-22 - France profiled: one register, six cities, and a naming gap found early
 
 - **France was profiled ahead of Milan because a country profile converts into
@@ -571,6 +797,91 @@ onwards; the early ones are split by phase rather than by hour.
   and disagreed (24.5% vs 4.3%); **settle it with the bulk download at build
   time, not with the API**. And Bucharest's OSM hit rate against DSVSA's
   31,299 premises - the 146,116 establishes supply, not match.
+### 2026-09-22 - Dublin built: the rail source reversed mid-build, and a national grid got admitted
+
+- **Dublin built as a four-authority regional map: 96 stations, 13,123
+  storefront premises, 7,595 pins inside a ring.** Step 2 counts: 38,265
+  register rows -> 13,133 after the storefront filter (Retail 9,917, Food
+  service 2,365, Personal services 851) -> 13,127 after the mixed-use vacancy
+  pass -> 13,126 with coordinates -> 13,124 in bounds -> 13,123 inside the
+  dissolved boundary, all distinct on `PropertyNumber`. Per authority: Dublin
+  City 7,184, Fingal 2,062, Dun Laoghaire-Rathdown 2,050, South Dublin 1,827.
+  Stations: 160 GTFS stop_ids -> 98 by name -> 96 inside the four authorities,
+  with Bray Daly and Greystones excluded as County Wicklow. Baseline recorded
+  in `outputs/dublin/baseline.json`; brief re-run at 9/9.
+- **THE RAIL SOURCE WAS WRONG IN THE BRIEF AND WAS REVERSED DURING THE BUILD.**
+  `docs/build_briefs/dublin.md` recorded "Rail - OpenStreetMap, not a feed",
+  which was never measured: the `osm-rail` order is agency GIS layers, then
+  agency GTFS, then OSM **on a recorded ground**, and neither of the first two
+  had been run. A bounded subagent probe found **both** pass. The NTA's
+  national GTFS declares `feed_end_date` **20270922**, a year out, and carries
+  Woodbrook, a station that opened in 2025 - so it is maintained rather than a
+  re-uploaded archive; the NTA also publishes a Feature Service already in
+  EPSG:2157 carrying 14,079 stops and 6,507 route polylines. **This is Madrid's
+  failure in its general form** - "the GTFS is stale or absent" is a different
+  question from "the agency route is closed" - and it is the second time in one
+  week. The rule that follows, for `osm-rail`: **a brief may not record OSM as
+  the rail source without naming the agency endpoints that were tried.** OSM is
+  retained as the cross-check and now runs every build: GTFS 98 station names
+  against OSM's 100, 88 shared, the differences all spelling.
+- **Found that OSM tags all four DART relations `network=Commuter`, so a
+  network filter drops Dublin's principal line.** The first step 1 did exactly
+  that and exited naming DART as missing. The whitelist is on `ref` instead,
+  and `EXCLUDED_NETWORKS` survives as reporting only. This is the third
+  measured instance of `osm-rail`'s rule that a `network` tag is a label rather
+  than evidence, after Mexico City's Lecheria and Guadalajara's Linea 4 - and
+  the first where the mis-tagged line is the one the city is built around.
+- **Admitted EPSG:2157 to `check_provenance.py`'s per-city-UTM invariant by
+  extending it, not by relaxing it.** Both of Dublin's sources publish in Irish
+  Transverse Mercator - the register as `Xitm`/`Yitm`, the boundary layer as
+  `wkid 2157` - so using UTM 29N would transform every point and polygon out of
+  the CRS the publisher measured them in, and Dublin sits within a
+  quarter-degree of zone 29's eastern edge where that zone's distortion is
+  worst. A `NATIONAL_GRIDS` table now admits a documented national grid **only
+  where the city's own longitude falls inside the grid's domain**, so a copied
+  CRS still fails exactly as it did. The rejected alternative was bending the
+  city to UTM to keep the check simple. Dublin is consequently the first city
+  here with **no geocoding step and no reprojection step**: the only transform
+  is 2157 -> 4326 to draw.
+- **Chose the line palette by measurement after the inherited one failed.**
+  `route_color` is EMPTY for all three routes in both the feed and the feature
+  service, so there is no agency colour to be faithful to, and the project's
+  rule that badly-scoring AGENCY colours are kept did not apply. OSM's
+  community values scored CIE76 21.7 (DART) / 24.3 (Luas Green) / 27.5 (Luas
+  Red) against the category pins they are drawn under. Re-measured: Luas Red
+  `#8B0000` at 39.5 and Luas Green `#006400` at 37.4 are the best available -
+  **nothing red or green clears the preferred 45**, because red sits near the
+  magenta food pin and green near the teal personal-services pin by
+  construction, and a line named "Luas Red Line" cannot be drawn in purple.
+  **DART moved off green entirely to `#F57C00`**, scoring 72.4, which also
+  fixed a problem no number showed: with OSM's palette the map had two green
+  lines. `#E65100` was rejected at 36.0 from Luas Red - a line has to be
+  legible against the other lines as well as against the pins.
+- **Keyed the taxonomy on `Uses` segments rather than whole strings.** 963
+  distinct values reduce to **318 distinct segments**, comma-separated with `-`
+  as a null placeholder, so mapping segments means a combination never seen
+  still classifies. All 318 are either classified or explicitly listed as
+  non-storefront, and step 2 reports any that are neither - the two cases
+  otherwise look identical, because an unmapped segment is silently dropped.
+  `Category` is carried as an EXTRA_COLUMN for one job only: separating a
+  retail `SHOP` from an industrial `STORE`. Recorded in passing: every `SHEET`
+  value is a billboard size (48-sheet, 6-sheet), not a premises.
+- **Recorded that `check_personal_exposure.py`'s heuristics measure nothing for
+  Dublin, and made the script say so.** The displayed name is the street
+  address, so the script reported 297 "person-like" pins (3.9%) - which are
+  Irish streets named after people (Ashe Street, Thomas Street), floor lists
+  ("Basement, Ground & First floor") read as "Surname, First", and unit
+  descriptors ("(Basement) 51 Henry Street") read as "name (trade)". All
+  verified by sampling. A `name_is_address` flag now prints that warning above
+  the numbers, so the next reader does not re-derive it or, worse, record 3.9%
+  as an exposure figure. **The real result is zero, structurally**: step 2
+  exits if any name-like column ever appears.
+- **Held Dublin off master rather than deploying it.** Landing `app/` on master
+  IS deploying, and `deploy-verify` is deliberately deferred to run once over a
+  batch of two or three cities. The city is complete and verified locally - the
+  rendered map was checked in a browser, carries its OpenStreetMap attribution
+  linked to the copyright page, renders all three line labels and the legend,
+  and logs no console errors - but it is not on master and is not live.
 
 ### 2026-09-22 - Dublin Step 0: a register with no names, and a taxonomy rule that inverts
 

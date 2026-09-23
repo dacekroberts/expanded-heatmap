@@ -630,6 +630,50 @@ _NOTICES = [
      "and the enquiry channel the terms themselves name did not respond. It "
      "will be sent when that service is reachable again.",
      False),
+    # TAILTE EIREANN - Dublin. CC BY 4.0, confirmed from data.gov.ie's
+    # package_show. NO wording is prescribed, so the string is this project's
+    # own; what is NOT optional is the second sentence, because CC BY 4.0
+    # 3(a)(1) requires a reuser to "indicate if You modified the Licensed
+    # Material" and a bare source credit does not do that. Fifth time this
+    # project has met the disclosure-of-transformation duty, after Montreal,
+    # INEGI, Madrid and Barcelona.
+    #
+    # NOTHING IS OWED AS AN ACT here - no notification, no registration - which
+    # is explicitly the opposite of Barcelona above and is recorded positively
+    # in docs/data_sources.md so it is not re-opened.
+    #
+    # The accuracy sentence is required in substance: Tailte disclaims
+    # accuracy, completeness and currency, and tailte.ie/home/api/ states the
+    # API "is not guaranteed to be complete".
+    ("Tailte Éireann",
+     "Contains Irish Public Sector Information licensed under a Creative "
+     "Commons Attribution 4.0 International (CC BY 4.0) licence. The premises "
+     "shown for Dublin are from Tailte Éireann's rateable valuation register, "
+     "via its open API. This map filters, re-categorises and aggregates that "
+     "data into density measures; the filtering, categories and densities are "
+     "this project's own interpretation and are not produced or endorsed by "
+     "Tailte Eireann. The data is published “as is”; Tailte Eireann "
+     "gives no warranty as to its accuracy, completeness or currency.",
+     False),
+    # COMUNE DI MILANO - Milan. CC BY 4.0, and the version is the point: CKAN
+    # reports `license_id: cc-by` with NO version, and only the portal's
+    # DCAT-AP_IT serialisation carries owl:versionInfo "4.0". Milan's brief
+    # pins its licence check to the .ttl for that reason.
+    #
+    # No wording prescribed, so this string is this project's own. The second
+    # sentence is again the CC BY 4.0 3(a)(1) modification duty - the sixth
+    # time - and it is the weaker form: 4.0 requires disclosing MODIFICATION
+    # and says nothing about interpretation, where Montreal's licence names
+    # both. Nothing is owed as an act.
+    ("Comune di Milano",
+     "Contains data from the Comune di Milano, licensed under a Creative "
+     "Commons Attribution 4.0 International (CC BY 4.0) licence. The premises "
+     "shown for Milan are from six of the Comune's own registers of shops, "
+     "bakers, artisan food makers, bars and restaurants, and personal "
+     "services. This map filters, re-categorises and aggregates that data "
+     "into density measures; the filtering, categories and densities are this "
+     "project's own and are not produced or endorsed by the Comune di Milano.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

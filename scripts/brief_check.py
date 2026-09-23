@@ -126,6 +126,37 @@ def http_ok(spec, ctx):
     return ok, detail
 
 
+def http_contains(spec, ctx):
+    """A document still SAYS a specific thing. For a claim no structured
+    field can carry.
+
+    Written for Milan, where the licence VERSION is invisible to the obvious
+    endpoint: CKAN's `package_show` reports `license_id: cc-by` with no
+    number, and only the portal's DCAT-AP_IT serialisation carries
+    `owl:versionInfo "4.0"`. A brief that pinned its licence claim to
+    `package_show` would keep passing while the version - which decides the
+    attribution obligations - went unwatched. That is this project's recurring
+    shape: a check that cannot see the thing it is guarding.
+
+    `present` / `absent` are lists of literal substrings, matched
+    case-insensitively against the response text. Not a parser: the point is
+    to notice a document CHANGING, and a licence page that stops containing
+    "4.0" is worth a human reading it whatever the cause.
+    """
+    r = requests.get(spec["url"], headers=HEADERS, timeout=120)
+    if r.status_code != spec.get("expect_status", 200):
+        return False, f"HTTP {r.status_code}"
+    text = r.text.lower()
+    missing = [s for s in spec.get("present", []) if s.lower() not in text]
+    intruded = [s for s in spec.get("absent", []) if s.lower() in text]
+    bits = [f"{len(r.text):,} chars"]
+    if missing:
+        bits.append(f"MISSING {missing}")
+    if intruded:
+        bits.append(f"UNEXPECTEDLY PRESENT {intruded}")
+    return not (missing or intruded), "; ".join(bits)
+
+
 def gtfs_files(spec, ctx):
     """Which files a feed ships. Catches "no feed_info.txt" said of a feed
     that has one."""
@@ -755,6 +786,7 @@ def osm_route_refs(spec, ctx):
 
 CHECKS = {
     "http_ok": http_ok,
+    "http_contains": http_contains,
     "endpoint_absent": endpoint_absent,
     "arcgis_layer": arcgis_layer,
     "gtfs_files": gtfs_files,
