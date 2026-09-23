@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**234 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**235 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- ["Only city" claims read against 23 cities: eleven false, two overstated, one true](#2026-09-23---only-city-claims-read-against-23-cities-eleven-false-two-overstated-one-true)
 - ["Every map here covers one rail network" survived four hours and one new city](#2026-09-23---every-map-here-covers-one-rail-network-survived-four-hours-and-one-new-city)
 - [A self-test for the one check whose vocabulary is meant to be edited](#2026-09-23---a-self-test-for-the-one-check-whose-vocabulary-is-meant-to-be-edited)
 - [Toulouse built: 8,635 storefronts, 48 stations, and the first non-rail mode](#2026-09-23---toulouse-built-8635-storefronts-48-stations-and-the-first-non-rail-mode)
@@ -273,6 +274,74 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - "Only city" claims read against 23 cities: eleven false, two overstated, one true
+
+- **Swept the published surface for universal and superlative claims** - "the
+  only city", "every other city", "no other city" - on every city page and in
+  the two documents the app renders, joining sentences across line breaks so a
+  claim split over two source lines was not missed. This is the error shape the
+  handoff flagged after three instances in one day. **It found eleven more that
+  were false, two that overstated** (Calgary's premises flag, on its page and
+  in the document, now "a distinction most registers here leave to be
+  inferred"), **and one that was true.**
+
+- **At least two were already false the day they were written**, which is the
+  part worth knowing: this is not only rot. Mexico City's page said "every other
+  city here is built from business licences" when Montréal's field survey had
+  been built four cities earlier; Calgary's said it was "the only map on this
+  site where nothing was excluded for lying in another municipality" when New
+  York's and Miami's excluded-stations files were already empty. Each author
+  generalised from the cities they happened to be thinking of.
+
+- **The rest went false as later cities arrived, or may have been false from
+  the start - build order is not always recoverable from the log.** New York's
+  "no other city here
+  needed more than one source" (Boston needed three, Milan six). Philadelphia's
+  "the only city here where a whole category has no source" (Boston, two cities
+  later - and this site's own exclusions page already said so). Montréal's
+  "the only map here built from a field survey" and "the one filter no other
+  city here needed" (Barcelona's census is a survey and excludes vacancy the
+  same way). Mexico City's "every other city offers an opt-in layer of all
+  businesses" (Guadalajara drops it too - `all_city_heat=False` in both
+  `step3_map.py` files). Calgary's "the only parcel substitute this project has
+  built" (San Francisco, Los Angeles and San Diego each built one). Vancouver
+  as "the only city where the registry answers" whether a name is a person
+  (D.C.'s entity type and the French legal form do too).
+
+- **Two were mine, from this morning**, transcribed into
+  `docs/excluded_categories.md` while writing up five cities: Montréal's
+  uniqueness claims copied from its page - contradicting the Barcelona section
+  written in the same hour, which says Barcelona "states vacancy outright" -
+  and Marseille's ferries as "genuine urban transit in a way no other city's
+  excluded mode is", copied from `pipeline/marseille/config.py` without checking
+  it against Vancouver's SeaBus. **Transcribing a claim republishes it**, and
+  the comment in Marseille's config is corrected at the source so the next
+  transcriber does not copy it a third time.
+
+- **One was checked and is TRUE, and was left alone.** Toronto is still the
+  only city whose addresses had to be matched against a separate address-point
+  layer: Vancouver, Milan and Dublin all carry their own coordinates. A true
+  "only" claim is not a defect; the defect is an unchecked one.
+
+- **The fix principle, applied to every one: compare against a CATEGORY, not
+  against "every other city".** "More directly than a licence register can"
+  stays true as cities arrive; "more directly than anywhere else on this site"
+  is a bet on the next city. Where a named comparison was clearer, it names the
+  city - "as in Boston", "as Vancouver's SeaBus is" - without a count, because
+  "one of two" is the same bet one step removed.
+
+- **The probe that found these was the same one that gave false zeros an hour
+  earlier on a different question**, and the difference is instructive. For
+  exposure verdicts, a case-sensitive match on "Marseille" missed entries that
+  wrote "Personal exposure:" without naming the script; widening it found both
+  verdicts recorded (Marseille 1 of 10,013 pins, Toulouse 0 of 5,553). For
+  universal claims, the first pass piped through `head -120` and silently cut
+  off the second half of `excluded_categories.md`, which held four of the eleven
+  - the ferries, the heat layer, the parcel substitute and Vancouver's registry.
+  **Both
+  probes were wrong by being narrower than the question**, which is the
+  harness lesson in a new form.
 
 ### 2026-09-23 - "Every map here covers one rail network" survived four hours and one new city
 

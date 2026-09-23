@@ -51,12 +51,12 @@ reason, the station count has not been checked against what STC Metro
 publishes.
 
 **The businesses are a census, not a licence register, and that changes what
-the map means.** Every other city here is built from business licences: a
-record of who registered. Mexico City is built from INEGI's DENUE, compiled by
+the map means.** Most cities here are built from business licences: a record
+of who registered. Mexico City is built from INEGI's DENUE, compiled by
 surveying premises and recording the name on the shopfront. It is far more
 complete than a licence register, so the density shown here is **not
-comparable** with the other cities' — read it as a fact about how the data was
-collected as much as about Mexico City's streets.
+comparable** with the licence-register cities' — read it as a fact about how
+the data was collected as much as about Mexico City's streets.
 
 Fixed premises only. DENUE separately records semi-fixed units — stalls and
 street posts — and those are not shown, although street commerce is a real and
