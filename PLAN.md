@@ -348,8 +348,16 @@ Desktop is unaffected — the label is fully visible there.
 
 ## Structure
 
-- [ ] **Move Madrid's, Mexico City's and Guadalajara's fetching out of their
-  step files** into a `fetch_*.py`, as the other fourteen cities do.
+- [ ] **Move GUADALAJARA's and MADRID's fetching out of their step files** -
+  **Mexico City is done (2026-09-22) and is the worked pattern**: see
+  `pipeline/mexico_city/fetch_sources.py` and the two steps beside it. The
+  recipe is mechanical - move the network helpers and any query constants into
+  a new `fetch_sources.py`, leave the steps reading the cache and exiting with
+  "Run pipeline/<city>/fetch_sources.py first", then prove it BOTH ways: zero
+  drift with the cache present, and a clean refusal with
+  `data/<city>/raw/` moved aside. Guadalajara duplicates Mexico City's
+  `overpass()` today, so the two can share one file's worth of thinking.
+  Original finding below. into a `fetch_*.py`, as the other fourteen cities do.
   Demonstrated 2026-09-22: `python pipeline/drift_check.py` in a worktree with
   no `data/<city>/raw/` **fetched over the network for all three** - a 39 MB
   DENUE zip, a Madrid census CSV, Overpass responses and CRTM layers - and

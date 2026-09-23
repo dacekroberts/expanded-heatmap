@@ -29,7 +29,6 @@ from pathlib import Path
 
 import geopandas as gpd
 import pandas as pd
-import requests
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
@@ -46,11 +45,9 @@ from pipeline.mexico_city.config import (
     DENUE_NAME_COLUMN,
     DENUE_STATE_CODE,
     DENUE_STATE_COLUMN,
-    DENUE_URL,
     DENUE_ZIP,
     FORBIDDEN_COLUMNS,
     MEXICO_CITY_BBOX,
-    OVERPASS_USER_AGENT,
     PREMISES_TYPE_COLUMN,
     PREMISES_TYPE_KEEP,
     SOURCE_ENCODING,
@@ -81,31 +78,26 @@ USECOLS = (
 )
 
 
-def download():
-    if DENUE_ZIP.exists():
-        print(f"  cached {DENUE_ZIP.name} ({DENUE_ZIP.stat().st_size:,} bytes)")
-        return
-    print(f"  downloading {DENUE_URL}")
-    DENUE_ZIP.parent.mkdir(parents=True, exist_ok=True)
-    r = requests.get(DENUE_URL, timeout=900,
-                     headers={"User-Agent": OVERPASS_USER_AGENT})
-    r.raise_for_status()
-    # Magic bytes, not the filename the server claims - add-country's rule,
-    # learned from Busan serving a PNG under a CSV's Content-Disposition.
-    if not r.content.startswith(b"PK\x03\x04"):
+def require_denue():
+    """The DENUE zip must already be here - this step does NOT download it.
+
+    It used to, on a cache miss, which meant `drift_check.py` could pull 39 MB
+    from INEGI on any checkout without `data/mexico_city/raw/`. See
+    pipeline/mexico_city/fetch_sources.py.
+    """
+    if not DENUE_ZIP.exists():
         raise SystemExit(
-            f"DENUE download is not a ZIP (first bytes {r.content[:8]!r}). "
-            "Check what the server actually sent before trusting it."
+            f"Missing {DENUE_ZIP.name}. "
+            f"Run pipeline/mexico_city/fetch_sources.py first."
         )
-    DENUE_ZIP.write_bytes(r.content)
-    print(f"  wrote {DENUE_ZIP.stat().st_size:,} bytes")
+    print(f"  {DENUE_ZIP.name} ({DENUE_ZIP.stat().st_size:,} bytes)")
 
 
 def main():
     print("=== Step 2: Mexico City storefronts (INEGI DENUE) ===\n")
     tax = load_taxonomy_module(TAXONOMY_SYSTEM)
 
-    download()
+    require_denue()
     zf = zipfile.ZipFile(DENUE_ZIP)
     if DENUE_MEMBER not in zf.namelist():
         raise SystemExit(

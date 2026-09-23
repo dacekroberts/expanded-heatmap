@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**158 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**159 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Mexico City's fetching moved out of its steps, as the worked pattern for the other two](#2026-09-22---mexico-citys-fetching-moved-out-of-its-steps-as-the-worked-pattern-for-the-other-two)
 - [Both Mexican cities hardcoded the DENUE columns their national config already names](#2026-09-22---both-mexican-cities-hardcoded-the-denue-columns-their-national-config-already-names)
 - [Check I caught another session's orphaned row within minutes, which is the first time a check here found a defect it was not written for](#2026-09-22---check-i-caught-another-sessions-orphaned-row-within-minutes-which-is-the-first-time-a-check-here-found-a-defect-it-was-not-written-for)
 - [Toronto's collapse check guarded the wrong number, and re-running it showed a baseline can miss a content change](#2026-09-22---torontos-collapse-check-guarded-the-wrong-number-and-re-running-it-showed-a-baseline-can-miss-a-content-change)
@@ -194,6 +195,43 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Mexico City's fetching moved out of its steps, as the worked pattern for the other two
+
+- **`pipeline/mexico_city/fetch_sources.py` now holds everything that touches
+  the network**: the three Overpass queries and the host-by-host `overpass()`
+  helper from step 1, and the DENUE download from step 2. Both steps read the
+  cache and **exit with "Run pipeline/mexico_city/fetch_sources.py first"**
+  when it is absent - Toronto's behaviour, and the convention the other
+  thirteen cities already follow.
+
+- **Verified both directions, not just the happy one.** With the cache present,
+  `drift_check.py mexico_city` reports **RESULT: zero drift**, so the move is
+  behaviour-preserving. With `data/mexico_city/raw/` moved aside, step 1 stops
+  with `Missing osm_stations.json (stations). Run
+  pipeline/mexico_city/fetch_sources.py first.` - which is the whole point, and
+  is exactly what Toronto did when this session first ran a drift check here.
+
+- **The hard-won behaviour moved intact**, because it is the kind that is
+  cheapest to lose in a refactor: an Overpass **200 with no elements is still
+  treated as a host failure**, never cached, and the next host is tried - that
+  one once produced the vacuous claim that "every ref has exactly 2 direction
+  relations" over an empty set. And the DENUE zip is still checked by **magic
+  bytes** rather than the filename the server claims.
+
+- **A four-byte bug caught before it shipped.** The magic-byte check was written
+  as `b"PK\x03\x04"` - five literal characters rather than the 4-byte ZIP
+  signature - so it would have rejected every real DENUE download. Found by
+  evaluating the literal rather than reading it, which is the same discipline
+  that caught the longitude parser examining zero cities earlier today.
+  Over-escaping in a generated file, the third time today that escaping has
+  bitten.
+
+- **Stopped at one city deliberately.** Guadalajara and Madrid have the same
+  defect and are now a mechanical repeat of this pattern, but context was at
+  84% and a half-finished refactor spanning three live pipelines is a worse
+  state than one finished city plus a written pattern. `PLAN.md` carries the
+  remaining two with this commit named as the model.
 
 ### 2026-09-22 - Both Mexican cities hardcoded the DENUE columns their national config already names
 
