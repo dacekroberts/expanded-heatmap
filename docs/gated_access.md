@@ -1,0 +1,83 @@
+# Gated sources — every city that needs a key, an account, or a letter
+
+**What this file is for.** Some cities are not blocked by data and not blocked
+by code, but by something only a person can do: register an account, obtain an
+API key, or send a notification to a publisher. Those items are invisible in
+the master list, because a city waiting on a letter looks exactly like a city
+waiting on a probe. This is the list to come back to and tick off.
+
+**Two of these apply to cities that are already BUILT AND PUBLISHED** — items
+1 and 12 — and both are ongoing obligations rather than one-off steps. They
+are first for that reason.
+
+Status values: **OPEN** (nothing done) · **DONE** (satisfied, no upkeep) ·
+**STANDING** (satisfied but must stay satisfied) · **MOOT** (the city or route
+was dropped, kept for the record) · **OPTIONAL** (an upgrade, not a blocker).
+
+---
+
+## A. Live obligations on cities already published
+
+| # | City | What is required | Status |
+|---|---|---|---|
+| **1** | **Washington D.C.** 🇺🇸 **BUILT** | **A live WMATA API account, for as long as the D.C. page is up.** `api.wmata.com` is the only feed in this project behind a key (401 unauthenticated). The terms are an *API agreement*: terminating the account ends the licence. Re-established 2026-09-21 | ⚠️ **STANDING** — if the account lapses, **D.C. comes down until a new one is registered**. This is a deploy gate, not a courtesy |
+| **12** | **Philadelphia** 🇺🇸 **BUILT** | **A written request to the publisher, outstanding.** `phila.gov/terms-of-use` is incorporated by reference into the dataset page and prohibits redistribution and modification without written permission | ⚠️ **OPEN** — the map stays up on a *disclosed reasoned position*, and **comes down if the publisher confirms the restrictive reading**. Not resolvable by more reading; someone has to ask |
+
+---
+
+## B. Notification owed to a publisher
+
+| # | City | What is required | Status |
+|---|---|---|---|
+| **2** | **Barcelona** 🇪🇸 *(next to build)* | **Inform the City Council of the project.** Verbatim: *"Users are required to inform Barcelona City Council of every project relating to or derived from their use of the data sets."* One of four obligations on Open Data BCN — the others (prescribed wording *"Source of the data: Barcelona City Council"*, identifying modifications, and the transformation-disclosure family) are build work, but **this one is a message a person sends** | 🔴 **OPEN — and Barcelona is the next city in the order**, so this is the nearest deadline on the list |
+
+---
+
+## C. Free account or API key needed before a build can start
+
+| # | City / source | What is required | Status |
+|---|---|---|---|
+| **3** | **Copenhagen** 🇩🇰 | **A free account** for Danish CVR bulk distribution — `distribution.virk.dk` answers **401**. The data itself is right (P-enheder, each with its own address and `industrycode`) | 🟡 **OPEN** — blocks the build entirely. Tier 3, one city |
+| **4** | **Prague** 🇨🇿 | **An API key** — `api.golemio.cz` returns **401**. The business leg (`rzp.cz`, the *živnostenský rejstřík*) is live and is the right shape: Czech trade licences are issued **per premises**. Golemio is the transit half | 🟡 **OPEN** — Czechia is the strongest of the four Tier 4 probes |
+| **5** | **Barcelona** 🇪🇸 — TMB | **A free TMB developer account** at `api.tmb.cat` (`app_id` + `app_key`); unauthenticated it returns *"Authentication failed. Authentication parameters missing"* | 🟢 **OPTIONAL** — the brief **chose OSM instead** and validated it (TMB 22 relations, TRAM 22, FGC 10). A key would be an upgrade to first-party geometry, not a prerequisite |
+| **6** | **Spain — National Access Point** | **A free account**; `nap.mitma.es` answers **401**, the WMATA shape | 🟢 **MOOT for Sevilla** (city discarded — and it published its own metro openly anyway). Kept because it is the fallback rail route for any *other* Spanish city |
+
+---
+
+## D. Licence questions only the publisher can answer
+
+These are not access problems. The data fetches; what is unknown is whether we
+may publish it. `read-licence` step 8: **do not resolve an ambiguity in this
+project's favour.**
+
+| # | City | The question | Status |
+|---|---|---|---|
+| **7** | **Stockholm** 🇸🇪 | `dataportal.se` declares **`Åtkomsträttigheter: Begränsad`** (restricted) while the ArcGIS item declares `access: public` and serves without credentials, and `licenseInfo` is **empty**. The two statements contradict each other | 🟡 **OPEN** — **that it fetches is not a finding that it is licensed.** Blocks the build; needs the publisher asked |
+| **8** | **Tel Aviv** 🇮🇱 | The MapServer returns **no `copyrightText` and no `licenseInfo`**, and Tel Aviv is **not** among the four municipalities on `data.gov.il` (Be'er Sheva, Haifa, Ma'ale Adumim, Petah Tikva), so there is no national statement to inherit | 🟡 **OPEN** — and awkward: the pages that would carry the terms are on the **IP-blocked** host (HTTP 472, the block names our IP). **Try the Internet Archive first** — that is how Barcelona's and Sevilla's were read — and only then ask |
+
+---
+
+## E. Closed, kept as evidence
+
+| # | City / source | Why it is here | Status |
+|---|---|---|---|
+| 9 | **Sevilla** 🇪🇸 — ArcGIS Hub | Recorded as credential-walled, *"the Medellín shape"*. **That was wrong.** The Hub is a front-end; `sharing/rest` served 1,260 public items anonymously | ✅ **RESOLVED — never actually gated.** The correction is the lesson: **a sign-in wall on a Hub is not a verdict on the data** |
+| 10 | **Barcelona** 🇪🇸 — general legal notice | CAPTCHA-walled, and **this project does not defeat CAPTCHAs** | ✅ **DONE** — read from the **Internet Archive** instead, which is a legitimate route to a public page, not a bypass |
+| 11 | **Madrid** 🇪🇸 — CRTM | The *"siempre actualizada"* currency clause looked like a standing obligation | ✅ **RESOLVED 2026-09-22** — a dated snapshot meets it |
+| 13 | **Medellín** 🇨🇴 | GeoMedellín's Hub is genuinely private — *"Please sign in"* — and **this project does not create accounts** | ⚫ **MOOT** — city discarded on two other grounds as well |
+| 14 | **Budapest** 🇭🇺 | Nébih's FELIR is **mtcaptcha**-gated and lookup-only | ⚫ **MOOT** — city discarded |
+| 15 | **Seoul** 🇰🇷 | `data.go.kr` is CAPTCHA-gated at the portal | ✅ **NOT a blocker** — the 197,276 premises across 8 datasets were obtained **with no account** |
+
+---
+
+## The owner's standing practice on API accounts
+
+Recorded 2026-09-21 in `docs/data_sources.md`: **the owner registers an API
+account, takes the data, then immediately terminates the account and revokes
+its keys.**
+
+**That practice is safe everywhere on this list except item 1.** WMATA's terms
+are an API agreement rather than a data licence, so terminating the account
+*ends the grant* — which is the point of the practice elsewhere, and a defect
+here, because D.C. is published. **WMATA's account must stay live.** Before
+any public deploy, confirm it still is.

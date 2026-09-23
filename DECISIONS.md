@@ -893,6 +893,57 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Measured France's other five cities instead of inheriting Paris's numbers,
+  and the inference held.** The list had been carrying six French cities on
+  the reasoning that *"the filter is national, so it carries to all six"* -
+  an inference from a one-city sample, and the same shape as the claim that
+  collapsed Spain from six cities to two. Queried
+  `economicref-france-sirene-v3` (43,896,818 records) per commune, with Paris
+  run first as a control. **Geolocation: Paris 99.98%, Lyon 99.97%, Marseille
+  99.91%, Rennes 99.90%, Toulouse 99.85%, Lille 99.71%.** No city falls below
+  99.71%, so **France has no geocoding leg in any of its six cities** and
+  keeps its cities-per-unit-of-work ranking rather than dropping behind
+  Taiwan. Storefront layers under the project's own filter: Paris 50,156,
+  Marseille 8,065, Lyon 7,354, Toulouse 4,833, Lille 3,272, Rennes 2,089.
+  Touched `docs/city_master_list.md`.
+
+- **The control caught a wrong query before it produced a confident wrong
+  answer.** The first run returned **zero rows for all six cities**, because
+  the filter used `etatadministratifetablissement="A"` where the dataset
+  stores the label `"Actif"`. Had Paris not been run as a control, six zeros
+  would have read as a catastrophic France-wide negative. Corrected, the
+  control reproduces the recorded Paris storefront count of **50,156
+  exactly**, which is what makes the other five numbers comparable rather
+  than merely plausible. **A per-city rate from a query that cannot reproduce
+  a known answer only looks like evidence.**
+
+- **Recorded two caveats that were invisible while France was one number.**
+  First, the **OSM composition validation remains Paris-only**: geolocation is
+  now confirmed everywhere, but that the employee filter selects the *right
+  rows* was checked against OpenStreetMap in Paris alone, and should be
+  repeated for the first non-Paris build rather than for all five up front.
+  Second, **Rennes at 2,089 and Lille at 3,272 are an order of magnitude below
+  Paris** - not disqualifying, since Rennes has a two-line metro and density
+  is what the map exists to show, but whether a ~2,000-point city earns a page
+  is a scope call the owner has not been asked.
+
+- **Created `docs/gated_access.md` - every city blocked by an account, a key
+  or a letter rather than by data or code.** These items were invisible by
+  construction: a city waiting on a written request looks exactly like a city
+  waiting on a probe, and nothing in the master list distinguishes them.
+  Fifteen entries, two of which are **live obligations on cities already
+  published**: Washington D.C.'s WMATA account must stay registered for as
+  long as the page is up, because WMATA's terms are an API agreement and
+  terminating the account ends the licence - which makes the owner's standing
+  practice of registering, taking the data and revoking the key **correct
+  everywhere except there**; and Philadelphia's written request to the
+  publisher is still outstanding, with the map standing on a disclosed
+  reasoned position. The nearest deadline is **Barcelona**, which is the next
+  city to build and whose licence requires that users *"inform Barcelona City
+  Council of every project relating to or derived from their use of the data
+  sets"* - a message a person sends, not build work.
+
+
 - **Promoted Tel Aviv from Band D to Band B - the strongest unbuilt result
   outside Band A - by asking a host that answers instead of the one that does
   not.** `opendata.tel-aviv.gov.il` and `www.tel-aviv.gov.il` both return
