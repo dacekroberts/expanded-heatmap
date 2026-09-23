@@ -504,16 +504,42 @@ mistakes as confidently as its findings.
   | **Lille** | 9.2 MB | ❌ **MISSING** | ❌ | 2 subway, 1 tram |
   | Rennes | 13.4 MB | ✅ | ✅ end **2026-10-18** | 2 subway |
 
-  4a. **Lille geometry — the portal is geOrchestra, NOT Opendatasoft.** Probed
-     2026-09-23: `opendata.lillemetropole.fr` serves an HTML app, and
+  4a. **Lille geometry — PROBED 2026-09-23. Tram is first-party; métro is
+     NOT, and must come from OSM.**
+     The portal is **geOrchestra, not Opendatasoft** —
+     `opendata.lillemetropole.fr` serves an HTML app and
      `data.lillemetropole.fr` returns **404 JSON whose body names its own
-     platform** — `georchestraStylesheet`, `logoUrl: /public/logo-mel.jpg`.
-     **So `/api/datasets/1.0/search` and `/api/explore/v2.1` are the wrong
-     shape entirely.** geOrchestra is GeoServer + GeoNetwork, so try
-     **`/geoserver/wfs?request=GetCapabilities&service=WFS`** and
-     **`/geonetwork/srv/eng/csw?request=GetCapabilities&service=CSW`**.
-     *Read the error body before guessing another path — this one said what it
-     was.*
+     platform** (`georchestraStylesheet`, `logoUrl: /public/logo-mel.jpg`).
+     So `/api/datasets/1.0/search` and `/api/explore/v2.1` are the wrong shape
+     entirely. **Read the error body before guessing another path.**
+     The working surface is **WFS**:
+     `data.lillemetropole.fr/geoserver/wfs?service=WFS&request=GetCapabilities&version=2.0.0`
+
+     | Mode | Layer | Verdict |
+     |---|---|---|
+     | **Tram** | `mel_mobilite_et_transport:tramway_lignes` — *"Tracés des lignes de tramway du réseau Ilévia"* | ✅ **4 LineString features**, lines **R** (Lille↔Roubaix) and **T** (Lille↔Tourcoing), with `nom`, `ligne`, `exploitant` |
+     | **Métro** | — | ❌ **NO LINE GEOMETRY ANYWHERE ON THE PORTAL.** Only `stations_metro` and `dsp_ilevia:entree_sortie_metro`, both **points** |
+     | Bus | `dsp_ilevia:ilevia_traceslignes` | 424 LineStrings — not needed |
+
+     ⚠️ **A near-miss worth keeping.** `ilevia_traceslignes` is titled
+     *"Tracés des lignes de **bus**"* and its `ligne` values include **`L1`**,
+     which reads exactly like Métro Ligne 1. **It is not.** Its `type_ligne`
+     values are `Urbaine`, `Suburbaine`, `Scolaire` and `Ligne de nuit` — all
+     bus categories — and **`L1` is *Liane 1*, ilévia's high-frequency BUS
+     brand.** The title was honest; the line code was the trap. **One field
+     check disproved it.**
+
+     🎁 **Bonus, and it solves a separate problem**: `dsp_ilevia:couleurs_lignes`
+     exists, and `ilevia_traceslignes` carries `rgbhex_fond`, `rgbhex_texte`
+     and `color`. Lille's GTFS `routes.txt` may not carry colours; **this is a
+     first-party source for them**, and every drawn line needs a legend entry.
+
+     **So Lille's rail geometry is a HYBRID or an OSM job** — an owner call:
+     tram from MEL's WFS (first-party, named, with `exploitant`) and métro from
+     **OSM** via `osm-rail`; or both from OSM for consistency. ⚠️ **MEL's WFS
+     licence is UNREAD** — it is a different publisher from ilévia's GTFS, so
+     `lov2` on the feed says nothing about the WFS.
+
   4. ⚠️ **LILLE HAS NO `shapes.txt`.** Line geometry **cannot be drawn from
      its feed**, and this project's invariant requires every drawn line to
      carry real geometry plus a label plus a legend entry. Either reconstruct

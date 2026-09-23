@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**191 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**192 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Lille's tram geometry found first-party; its metro has none, and a line code nearly became a false find](#2026-09-23---lilles-tram-geometry-found-first-party-its-metro-has-none-and-a-line-code-nearly-became-a-false-find)
 - [The four French followers are country-ready, not brief-ready, and Lille has no line geometry](#2026-09-23---the-four-french-followers-are-country-ready-not-brief-ready-and-lille-has-no-line-geometry)
 - [PLAN.md gains the handoff it was missing, and Paris reverified](#2026-09-23---planmd-gains-the-handoff-it-was-missing-and-paris-reverified)
 - [Paris's brief re-verified against live sources: 7/7 hold](#2026-09-23---pariss-brief-re-verified-against-live-sources-77-hold)
@@ -230,6 +231,52 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Lille's tram geometry found first-party; its metro has none, and a line code nearly became a false find
+
+- **Lille's portal is geOrchestra and its own 404 said so.** After
+  `opendata.lillemetropole.fr` served an HTML app and two Opendatasoft-shaped
+  API paths missed, `data.lillemetropole.fr` returned **404 JSON carrying
+  `georchestraStylesheet` and `logoUrl: /public/logo-mel.jpg`** - the error
+  body named the platform. geOrchestra is GeoServer plus GeoNetwork, so the
+  enumerable surface is **WFS GetCapabilities**, which answered. **Read the
+  error body before guessing another path**; two of the three attempts here
+  were spent on the wrong platform's URL shape.
+
+- **Tram line geometry EXISTS first-party and metro line geometry DOES NOT.**
+  `mel_mobilite_et_transport:tramway_lignes` - *"Traces des lignes de tramway
+  du reseau Ilevia"* - returns **4 LineString features**, lines **R**
+  (Lille-Roubaix) and **T** (Lille-Tourcoing), with `nom`, `ligne` and
+  `exploitant`. For the **metro there is nothing but points**:
+  `stations_metro` and `dsp_ilevia:entree_sortie_metro`. So the gap the
+  missing `shapes.txt` opened is **half closed**, and Lille's two VAL metro
+  lines still need OSM.
+
+- **A line code nearly became a false find, and one field check disproved
+  it.** `dsp_ilevia:ilevia_traceslignes` is titled *"Traces des lignes de
+  BUS"*, and its `ligne` values include **`L1`** - which reads exactly like
+  Metro Ligne 1, and was briefly treated as evidence that the layer held all
+  modes despite its title. **It does not.** Its `type_ligne` values are
+  `Urbaine`, `Suburbaine`, `Scolaire` and `Ligne de nuit`, all bus categories,
+  and **`L1` is *Liane 1*, ilevia's high-frequency BUS brand.** The title was
+  honest; the **line code** was the trap. This is the inverse of the Montreal
+  lesson - there a dataset's name concealed what it held, here a row's value
+  suggested something it was not - and both are answered the same way, by
+  checking a second field rather than reasoning from a name.
+
+- **Found in passing: a first-party source for line COLOURS.**
+  `dsp_ilevia:couleurs_lignes` exists, and `ilevia_traceslignes` carries
+  `rgbhex_fond`, `rgbhex_texte` and `color`. Lille's GTFS may not carry route
+  colours, and **every drawn line needs a legend entry**, so this is worth
+  keeping even though the bus traces themselves are not.
+
+- **Lille's rail is therefore a HYBRID or an OSM job, and it is an owner
+  call**: tram from MEL's WFS - first-party, named, carrying the operator -
+  with metro from OSM via `osm-rail`; or both from OSM for consistency.
+  ⚠️ **MEL's WFS licence is UNREAD.** MEL is a different publisher from
+  ilevia, whose GTFS is `lov2`, so **the feed's licence says nothing about the
+  WFS** - the standing rule that a portal is a reason to expect permissive
+  terms rather than evidence of them.
 
 ### 2026-09-23 - The four French followers are country-ready, not brief-ready, and Lille has no line geometry
 
