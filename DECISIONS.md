@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**184 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**185 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Four licences read: Oslo is clear, Prague has one left](#2026-09-23---four-licences-read-oslo-is-clear-prague-has-one-left)
 - [Hong Kong, Prague and Oslo taken to brief-ready; two cities changed size](#2026-09-23---hong-kong-prague-and-oslo-taken-to-brief-ready-two-cities-changed-size)
 
 **2026-09-22**
@@ -223,6 +224,49 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Four licences read: Oslo is clear, Prague has one left
+
+- **Three of four resolved with read-licence STEP 1 alone**, which is the
+  cheapest step and the one worth exhausting before spending an agent: the
+  declared licence from the machine, not the page. **Brønnøysund declares
+  NLOD** in its API documentation header; **Kartverket's Matrikkelen-Adresse
+  declares CC BY 4.0** in Geonorge metadata, with `AccessConstraints: Åpne
+  data`, **`OtherConstraints: "Ingen juridiske begrensninger."`** and INSPIRE
+  `noLimitations`; **ČSÚ declares CC BY 4.0**. **Oslo is fully unblocked.**
+
+- **ČSÚ is PERMITTED WITH CONDITIONS, and the conditions were only visible by
+  reading the DATA paragraph rather than the website one.** The CC BY sentence
+  on ČSÚ's terms page governs *"Webové stránky https://csu.gov.cz"* - the web
+  pages. Immediately after it sits *"Další podmínky použití dat ČSÚ"*, which
+  is the data paragraph, and it carries two obligations: **state the licence
+  conditions when disseminating, preferably as a direct link**, and **mark
+  modified or derived data as modified or derived, and do not present it as
+  unchanged official ČSÚ statistics.** That second one is the
+  disclosure-of-transformation family - Montréal's *"ou si des
+  interprétations en ont été tirées"* and INEGI's notification duty - and
+  **this project triggers it every time**, because ring density, bucketing and
+  storefront filtering are all transformations. It is also a **MUST NOT SAY**:
+  the page may not imply the map is official Czech statistics.
+  `read-licence` step 4 is what separated the two paragraphs.
+
+- **ČÚZK / RÚIAN is the one still open, and four URLs were tried.**
+  `vdp.cuzk.gov.cz/vdp/ruian/vymennyformat` and `/podminky` both answer 200 and
+  carry **no data licence at all** - their only terms link is *"Podmínky
+  užívání aplikace a cookies"*, **application and cookie terms**, which is the
+  New York footer shape. `geoportal.cuzk.cz`'s `podminky_uziti` returns the
+  site's navigation menu, and the `cuzk.gov.cz` product page 404s. **A document
+  with the right name exists and was seen in a nav listing** - *"Podmínky
+  poskytování prostorových dat a síťových služeb ČÚZK"* - but its URL was not
+  found. **Recorded as UNREAD rather than assumed permissive**, and named as
+  Prague's single remaining blocker. Next step: find that document, or use the
+  `licence-read` agent, which is what it is for.
+
+- **Recording is the step that makes a licence read count.** `read-licence`
+  states terms are not established until written down with the date, so all
+  four went into the briefs as they were read rather than being carried in
+  conversation - the failure that the Canada and Mexico country files both
+  demonstrated.
 
 ### 2026-09-23 - Hong Kong, Prague and Oslo taken to brief-ready; two cities changed size
 

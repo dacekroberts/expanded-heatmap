@@ -123,14 +123,27 @@ on-map label regardless, so assign colours for those rather than dropping them.
 
 ---
 
-## ⚠️ Licence — THE ONE OPEN ITEM
+## Licence — one read, one still open
 
-**Neither source's licence has been read, and this blocks shipping.**
+**ČSÚ is settled. ČÚZK is not, and it is the only thing blocking this city.**
 
-- **RES / ČSÚ** — `opendata.czso.cz` serves the file. `data.gov.cz`'s SPARQL
-  endpoint answered **406** to the content negotiation tried (it wants
-  `application/sparql-results+json`; the `Accept` header sent contradicted the
-  query string). Retry that.
+- ✅ **RES / ČSÚ — READ 2026-09-23. CC BY 4.0, PERMITTED WITH CONDITIONS.**
+  The national catalogue's DCAT record resolves a `podmínky-užití`
+  distribution per dataset, and ČSÚ's own terms page carries the operative
+  text. ⚠️ **Read the DATA paragraph, not the website one** — the CC BY
+  sentence is about `csu.gov.cz` *web pages*; the data conditions follow it
+  under *"Další podmínky použití dat ČSÚ"*, and impose **two obligations
+  this build triggers**:
+  - **MUST DISPLAY** — *"v případě šíření dat ČSÚ vzniká povinnost uvést
+    podmínky této licence, nejlépe přímým odkazem na tuto webovou stránku"* —
+    state the licence conditions, preferably as a direct link to that page.
+  - **MUST DISCLOSE, and MUST NOT SAY** — *"upravené nebo odvozené údaje musí
+    být označeny jako upravené nebo odvozené a nesmí být prezentovány jako
+    nezměněné oficiální statistiky Českého statistického úřadu"* — modified or
+    derived data must be **marked as such** and must **not** be presented as
+    unchanged official ČSÚ statistics. **This project's ring density, bucketing
+    and storefront filtering are all transformations**, so this fires every
+    time — the Montréal and INEGI family.
 - **RÚIAN / ČÚZK** — `vdp.cuzk.gov.cz/vdp/ruian/vymennyformat` returns 200 but
   carries **no data licence**: the only terms link is *"Podmínky užívání
   aplikace a cookies"*, which is **application and cookie terms, not data
@@ -149,7 +162,7 @@ portal is a reason to expect permissive terms, not evidence of them.
 
 ## Still unknown — the honest list
 
-- **Both licences** (above). This is the blocker.
+- **ČÚZK / RÚIAN's licence** (above). **The single blocker.** ČSÚ is read.
 - **The prefix-matching taxonomy has no precedent in this project** — four
   cities needed a local taxonomy and all four had uniform depth.
 - **Scope** — Prague's `OKRESLAU CZ0100` is the whole city (all 22 městské

@@ -126,10 +126,22 @@ open64`. **Oslo's station count is UNMEASURED, not zero.**
 
 ---
 
-## ⚠️ Licence — NOT READ
+## ✅ Licence — BOTH READ 2026-09-23, both permissive
 
-Brønnøysund's register and Kartverket's addresses both need a `licence-read`
-pass. Norway commonly uses **NLOD**, but that is an expectation, not evidence.
+| Source | Declared | Where |
+|---|---|---|
+| **Brønnøysund** (business) | **NLOD** — *Norsk lisens for offentlige data* | `data.brreg.no/enhetsregisteret/api/dokumentasjon`, stated in the API documentation header |
+| **Kartverket / Matrikkelen – Adresse** | **CC BY 4.0** | Geonorge metadata, uuid `f7df7a18-b30f-4745-bd64-d0863812350c` |
+
+Kartverket's record is unusually explicit: `AccessConstraints: Åpne data`,
+**`OtherConstraints: "Ingen juridiske begrensninger."`** — no legal
+restrictions — `UseLimitations: "Ingen begrensninger på bruk er oppgitt."`,
+and INSPIRE `noLimitations` on public access.
+
+**Verdict: PERMITTED WITH CONDITIONS** — attribution only, on both.
+
+⚠️ **NLOD and CC BY 4.0 are different licences and both need their own
+attribution line.** Do not collapse them into one credit.
 
 ---
 
@@ -141,7 +153,7 @@ pass. Norway commonly uses **NLOD**, but that is an expectation, not evidence.
 
 ## Still unknown — the honest list
 
-- **Both licences.** Blocking.
+- ~~Both licences~~ — ✅ **read 2026-09-23**, NLOD and CC BY 4.0.
 - **Rail** — Entur vs OSM unprobed; station count unmeasured.
 - **The NACE catch-all share at each level.**
 - **Trade-name fill.** `navn` exists on every sub-unit, but whether it is a
