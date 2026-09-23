@@ -151,10 +151,31 @@ feed (`rb_norway-aggregated-gtfs.zip`) is there too if a wider scope is taken.
 serve HEAD usefully — which reads exactly like an empty file. **Use a ranged
 GET and check the magic bytes.**
 
-⚠️ **Station COUNT still unmeasured.** The feed is confirmed to exist and be
-a valid archive; its route types and station count have not been read, and the
-Overpass cross-check failed (`runtime error: open64` on three endpoints). So
-Oslo's rail is **sourced, not measured**.
+### ✅ MEASURED 2026-09-23 — and every route type is EXTENDED
+
+**386 routes, and NOT ONE uses a basic route type.** The mix is `704` (203),
+`712` (127), `702` (20), `705` (19), **`902` (6)**, `1008` (6), **`401` (5)**.
+
+⚠️ **This is the documented trap, live.** `add-country` records that reading
+only the basic 0–12 set reported *"Berlin, Hamburg, Stockholm and Oslo as
+having no urban rail"*. **Oslo's feed confirms it** — a basic-only reader sees
+zero rail here.
+
+| Mode | Type | Lines |
+|---|---|---|
+| **Metro (T-bane)** | `401` | **5** — lines 1–5, all colour `EC700C` |
+| **Tram** | `902` | **6** — lines 12, 13, 15, 17, 18, 19, all colour `0B91EF` |
+
+**11 routes drawn · 356 stops served · 177 distinct parent stations.**
+
+⚠️ **Every metro line shares ONE colour and every tram line shares
+another.** `route_color` cannot distinguish line 1 from line 5, so the map
+must assign its own per-line palette — the legend requirement is not
+satisfiable from the feed alone, unlike Marseille where all five lines carry
+distinct hexes.
+
+⚠️ `1008` is water transport — **6 ferry routes**, not drawn, and the same
+owner call Marseille raises.
 
 ---
 
@@ -187,9 +208,19 @@ attribution line.** Do not collapse them into one credit.
 
 - ~~Both licences~~ — ✅ **read 2026-09-23**, NLOD and CC BY 4.0.
 - **Rail station COUNT** — the Entur feed is confirmed; its route types and station count are not read, and the Overpass cross-check failed.
-- **Trade-name fill.** `navn` exists on every sub-unit, but whether it is a
-  trade name or a legal name is unmeasured — the question that caught Milan and
-  Paris.
+- ⚠️ **`navn` is POPULATED BUT MESSY — a different problem from Milan's and
+  Paris's, and it is not yet solved.** Measured on all **13,458** Oslo bucket
+  sub-units: **0 blank**, **41.2% end in a legal-form suffix** (`AS`, `ASA`,
+  `SA`, `ANS`…), 58.8% do not. **But the 58.8% is not a clean trade-name
+  share**: the examples show many are *legal name + branch*, e.g.
+  `CIRCLE K NORGE AS AVD 57015 - AUTOMAT TRONDHEIMSVEIEN`,
+  `COOP ØST SA AVD 2515 COOP PRIX SØRENGA`, `SAFE BIL AS AVD OSLO`.
+  **`AVD` — *avdeling*, branch — is the marker.** Genuine trade names do
+  appear (`MENY SKØYEN`, `BAKER HANSEN MAJORSTUKRYSSET`), so the usable share
+  sits **below 58.8% and is unmeasured**.
+  **Milan and Paris had EMPTY name fields; Oslo has FULL but noisy ones** — so
+  the work is a cleanup rule (strip `AVD <code>` tails, drop legal suffixes),
+  not a fallback join.
 - **Scope** — Oslo kommune only, or the wider Osloområdet.
 
 ```brief-checks

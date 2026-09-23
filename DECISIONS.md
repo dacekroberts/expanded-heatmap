@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**195 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**196 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Hong Kong's two fields read, Oslo's rail measured, and Oslo's names are full but noisy](#2026-09-23---hong-kongs-two-fields-read-oslos-rail-measured-and-oslos-names-are-full-but-noisy)
 - [All six French cities measured on ONE sample; a correction of my own correction](#2026-09-23---all-six-french-cities-measured-on-one-sample-a-correction-of-my-own-correction)
 - [Marseille brief written; its feed covers more cities than its register](#2026-09-23---marseille-brief-written-its-feed-covers-more-cities-than-its-register)
 - [Oslo's rail sourced and taxonomy measured; MEL's WFS is Licence Ouverte](#2026-09-23---oslos-rail-sourced-and-taxonomy-measured-mels-wfs-is-licence-ouverte)
@@ -234,6 +235,67 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Hong Kong's two fields read, Oslo's rail measured, and Oslo's names are full but noisy
+
+- **Hong Kong's `EXPDATE` does not filter: 0 of 35,808 rows are expired.** The
+  FEHD file is a **live register rather than an archive**, so the ~21,545
+  buildable figure needs no currency filter. The consequence is worth naming:
+  **the whole file's freshness rests entirely on `GENERATION_DATE`**, which is
+  the one thing in it that self-attests.
+
+- **Hong Kong's `INFO` is MULTI-VALUED WITH NO DELIMITER**, and a naive
+  `value_counts()` would return combinations rather than codes - the Calgary,
+  Edmonton and Surrey trap, and worse here because the only separator is the
+  `#` that prefixes each code. `#G#H` alone appears on **1,421 rows**. The
+  codes are **endorsements, not categories**: sashimi, sushi, raw oyster, raw
+  meat, shellfish, live poultry, lunch-box supply, karaoke exemption, and the
+  offensive-trade set (lard boiling, shark-fin and fish-meal processing,
+  leather dressing and tanning).
+
+- **Oslo's feed uses NOT ONE basic route type, which is the documented trap
+  confirmed live.** All 386 routes carry extended types - `704`, `712`, `702`,
+  `705`, `902`, `1008`, `401` - so **a reader of only the basic 0-12 set sees
+  zero rail in Oslo**. `add-country` records exactly this having reported
+  "Berlin, Hamburg, Stockholm and Oslo as having no urban rail"; this is the
+  same feed proving it. Drawn: **5 metro lines (`401`) and 6 tram lines
+  (`902`), 11 routes over 356 stops and 177 distinct parent stations.**
+
+- **Oslo's `route_color` cannot distinguish one line from another.** Every
+  metro line shares `EC700C` and every tram line shares `0B91EF`, so the
+  per-line legend and on-map label this project requires **cannot be satisfied
+  from the feed** - the map must assign its own palette. Contrast Marseille,
+  where M1, M2, T1, T2 and T3 each carry a distinct hex. **Two cities in the
+  same screen, opposite answers to the same question.**
+
+- **Oslo's `navn` is a DIFFERENT problem from Milan's and Paris's, and
+  naming it precisely matters.** Measured on all **13,458** bucket sub-units:
+  **0 blank**, **41.2% ending in a legal-form suffix**, 58.8% not. But the
+  58.8% is **not** a clean trade-name share - many are *legal name plus
+  branch*: `CIRCLE K NORGE AS AVD 57015 - AUTOMAT TRONDHEIMSVEIEN`,
+  `COOP OST SA AVD 2515 COOP PRIX SORENGA`. **`AVD` - avdeling, branch - is
+  the marker.** Genuine trade names do occur (`MENY SKOYEN`,
+  `BAKER HANSEN MAJORSTUKRYSSET`). **Milan and Paris had EMPTY name fields;
+  Oslo has FULL but noisy ones**, so the work is a cleanup rule rather than a
+  fallback join - and the usable share is **below 58.8% and still unmeasured**.
+
+- **Goteborg's row count is abandoned for now after EIGHT paths.**
+  `resource/18`, `entry/18`, `metadata/18`, `rowstore/dataset/35`,
+  `resource/34`, `resource/36`, the `?recursive=dcat` variants and the
+  catalogue's own page - which is a **663-byte EntryScape bootstrap**, a
+  JavaScript shell with no data in it. The sibling `Restauranger` CSV was
+  served directly at `store/6/resource/49543`, so the pattern exists but
+  dataset 35's distribution does not follow it. **Recorded as unreachable by
+  the documented patterns rather than absent**, and it blocks nothing: Goteborg
+  is in Band D behind an owner scope decision either way.
+
+- **The Licence Ouverte 2.0 read FAILED and was relaunched.** The agent
+  terminated on an API error - a tool call that could not be parsed - after
+  drifting into France's transport regulation (MMTIS Article 2(7) and Article
+  8) rather than staying on the Etalab licence. **No verdict was produced and
+  none was recorded.** The relaunch says explicitly to stay on the licence
+  text, because those transport obligations were already read and recorded for
+  Paris separately.
 
 ### 2026-09-23 - All six French cities measured on ONE sample; a correction of my own correction
 

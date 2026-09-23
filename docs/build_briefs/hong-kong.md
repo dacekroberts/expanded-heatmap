@@ -249,9 +249,22 @@ groups cities into one readable view.
 
 - **Which region Hong Kong joins**, and whether it is alone in it.
 - **What to do with ALS hits scoring 50–75** — 21% of them.
-- **Whether `EXPDATE` should filter.** Every row carries one; whether expired
-  licences remain in the file is unmeasured.
-- **The `INFO` field and its 6-code lookup** — endorsements, unread.
+- ~~Whether `EXPDATE` should filter~~ — ✅ **MEASURED: it does not.** **0 of
+  35,808 rows** carry an expiry before today. The file is a **live register**,
+  not an archive, so the ~21,545 buildable figure stands without a currency
+  filter. ⚠️ Re-check on a later pull: this makes the whole file a snapshot
+  whose freshness rests entirely on `GENERATION_DATE`.
+- ~~The `INFO` field and its 6-code lookup~~ — ✅ **READ, and it is
+  MULTI-VALUED WITH NO DELIMITER.** Values concatenate: `#G#H`, `#F#G#H`,
+  `#E#F#G#H`. **A naive `value_counts()` returns COMBINATIONS, not codes** —
+  the Calgary / Edmonton / Surrey trap in a new costume, and worse here
+  because there is no separator to split on except the `#` itself.
+  The codes are **endorsements**, not categories: `#G` sashimi, `#H` sushi,
+  `#F` raw oyster, `#E` raw meat, `#R`/`#S` shellfish, `#I`/`#Q` live and
+  fresh poultry, `#J` lunch-box supply, `#C` karaoke exemption, and `#K`–`#P`
+  the offensive-trade endorsements (lard boiling, shark-fin and fish-meal
+  processing, leather dressing and tanning).
+  **Most common: `#G#H` on 1,421 rows** — sashimi and sushi together.
 - **Whether a general-retail source exists anywhere.** Without one Hong Kong
   is food-service-heavy by construction: 17,260 of 21,545 buildable rows.
 - **District coverage** — 20 districts appear, but no check that the rail
