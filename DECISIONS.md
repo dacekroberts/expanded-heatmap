@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**233 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**234 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [The built-cities list was short by EIGHT, and the eighth had been missing since the eleventh city](#2026-09-23---the-built-cities-list-was-short-by-eight-and-the-eighth-had-been-missing-since-the-eleventh-city)
 - [A self-test for the one check whose vocabulary is meant to be edited](#2026-09-23---a-self-test-for-the-one-check-whose-vocabulary-is-meant-to-be-edited)
 - [Toulouse built: 8,635 storefronts, 48 stations, and the first non-rail mode](#2026-09-23---toulouse-built-8635-storefronts-48-stations-and-the-first-non-rail-mode)
 - [The scope check paid for itself on the first merge it met](#2026-09-23---the-scope-check-paid-for-itself-on-the-first-merge-it-met)
@@ -272,6 +273,93 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - The built-cities list was short by EIGHT, and the eighth had been missing since the eleventh city
+
+- **Swept `docs/project_context.md`'s "Cities built and running end to end"
+  list, which ran from San Diego to Guadalajara while `app/cities.py` held 23
+  cities.** Written: Madrid, Barcelona, Dublin, Milan, Paris, Marseille and
+  Toulouse, in build order, each describing the system drawn, the taxonomy and
+  what is distinctive, in the voice of the existing entries. Deliberately **no
+  counts**, per this file's own division of labour - `project_context.md` is
+  current state and the figures live here.
+
+- **⚠️ THE LIST WAS SHORT BY EIGHT, NOT SEVEN: Montréal had no entry either,
+  and it is the ELEVENTH city.** Nobody had noticed because Montréal is not
+  invisible in that file - it is named twice, once inside Calgary's entry as
+  the storefront-share comparison and once in the Canada paragraph, **which
+  asserts five built Canadian cities while the list showed four**. So the file
+  contradicted itself in two places and read as complete in both. Found by
+  diffing the list against `app/cities.py` programmatically rather than by
+  reading it, which is the only reason it surfaced at all: **a missing entry
+  has no anchor, so nothing points at the hole.** The seven recent omissions
+  were caught because a human counted; this one survived twelve cities.
+
+- **The recent seven were a deliberate deferral that then became the defect it
+  was avoiding.** Toulouse's build declined to patch the list for itself alone,
+  on the reasoning that adding one city to a list missing six others makes the
+  document worse because a reader cannot tell an omission from a decision. That
+  reasoning was right and the deferral had no owner, which is how it lasted.
+  Recorded because the same trade-off will recur: **a deferral without a
+  written owner is a silent decision to never do it.**
+
+- **Wrote a France paragraph and a Spain/Ireland/Italy paragraph beside the
+  existing Canada and Mexico ones**, and France's is the first that had to be
+  written for an OPEN country. So it names its cities - Paris, Marseille and
+  Toulouse built, Lille and Rennes remaining - rather than counting them, since
+  a count in a sentence about an unfinished country drifts by construction.
+  Spain's records what did not generalise between two cities in one country,
+  which is the half worth carrying: different rail sources, different projected
+  CRS, and identically-shaped four-level taxonomies keyed at opposite ends.
+
+- **Corrected the macro-map region paragraph by DELETING its count rather than
+  incrementing it.** It read "There are six" with seven in `REGION_ORDER`.
+  Enumerating all seven says the same thing, is self-checking, and takes the
+  sentence out of `check_stale_claims.py`'s category B - which is the rule that
+  category exists to teach: **prefer deleting a count to correcting it, because
+  correcting only resets the clock.** A second paragraph now carries why Europe
+  is ONE region rather than one per country, and that revisiting it is a
+  measurement rather than a judgement.
+
+- **Three further stale claims in the same file, fixed with the owner's
+  approval after being listed rather than assumed.** "Next is a new COUNTRY
+  rather than a new city… South Korea first" predates three French builds and
+  now points at Lille and Rennes, with Lille's unresolved rail leg named as the
+  thing blocking it. "Toronto's and Edmonton's briefs carry 9 checks each, and
+  all 18 pass" was written when there were two briefs and there are now 23, so
+  the numbers are gone and the no-argument run is named instead. And "Not built
+  yet: … deployment" survived the deploy.
+
+- **Miami's superlative was converted rather than corrected.** Its entry opened
+  "the only REGIONAL map here" while Vancouver and Guadalajara carry
+  `(Regional)` in their own names and Dublin spans four authorities - false
+  before this sweep, and false again the moment a fifth regional city lands if
+  it were merely corrected. It now reads **the FIRST regional map here** and
+  names the three that took the shape after it: **first is permanent where only
+  is not**, and naming the successors puts the fact in the path of the next
+  reader who would otherwise re-break it.
+
+- **One defect reported and NOT fixed, because it is another session's file.**
+  `docs/city_master_list.md` still reads France 2 built / 3 remaining, which
+  Toulouse makes 3 and 2 - and that is the one file `CLAUDE.md` tells readers
+  to take counts from, so it matters more than anything corrected here.
+  `docs/session_roles.md` names it as the STAGING session's standing path, not
+  the cleanup role's, so it is handed to staging rather than swept here.
+
+- **The handoff that matters is a CHECK, and it is cleanup's to write.** The
+  list-versus-`cities.py` diff that found Montréal is a few lines and belongs
+  beside `check_scope_disclosure.py`, which already asserts that every city in
+  `cities.py` is named in `excluded_categories.md`. ⚠️ **It cannot be written
+  as exact set equality**: this file calls the city **Miami** where `cities.py`
+  calls it **Miami (Regional)**, and that divergence predates the sweep. Either
+  the check tolerates it or the heading is renamed to match - left open rather
+  than decided inside a list update. A correction fixes Montréal; a check
+  catches the twenty-fourth city.
+
+- **`check_stale_claims.py` was run BEFORE any edit as well as after**, so the
+  after-run is readable as a delta instead of a wall of pre-existing findings.
+  The three category-B hits inside `project_context.md` at the start were all
+  correct facts rather than drift, and were left alone.
 
 ### 2026-09-23 - A self-test for the one check whose vocabulary is meant to be edited
 
