@@ -1,6 +1,6 @@
 ---
 name: deploy-verify
-description: Use after any change to the Streamlit app (app/, app/pages/, app/components.py), the shared map code (pipeline/map_common.py), or any outputs/<city>/ file the app reads, to verify it actually renders correctly before it's reported as done. Runs the app from the lean deploy-only venv (what Streamlit Community Cloud installs, not the full pipeline environment), reports findings, and shuts the servers down. ALWAYS STATE A SCOPE in the prompt - `scope: city-added`, `scope: map-chrome`, `scope: app-deps` or `scope: full` - because a full sweep is expensive (~186k tokens, ~27 min) and most changes need only part of it. `scope: full` is required before any real deploy. Keeps the noisy start/check/stop sequence out of the main conversation.
+description: Use after any change to the Streamlit app (app/, app/pages/, app/components.py), the shared map code (pipeline/map_common.py), or any outputs/<city>/ file the app reads, to verify it actually renders correctly before it's reported as done. Runs the app from the lean deploy-only venv (what Streamlit Community Cloud installs, not the full pipeline environment), reports findings, and shuts the servers down. ALWAYS STATE A SCOPE in the prompt - `scope: city-added`, `scope: map-chrome`, `scope: app-deps` or `scope: full` - because a full sweep is expensive (~186k tokens, ~27 min) and most changes need only part of it. An unstated scope runs `map-chrome` and says so, NOT `full`: the expensive run should be a choice. `scope: full` is required before a real deploy of a BATCH of unverified work; after fixing one defect a prior full sweep already found, the narrow scope covering that fix is correct and re-running full re-checks byte-identical files. Keeps the noisy start/check/stop sequence out of the main conversation.
 tools: Bash, Read, Glob, Grep, mcp__Claude_Browser__preview_start, mcp__Claude_Browser__preview_stop, mcp__Claude_Browser__preview_logs, mcp__Claude_Browser__preview_list, mcp__Claude_Browser__navigate, mcp__Claude_Browser__computer, mcp__Claude_Browser__find, mcp__Claude_Browser__read_page, mcp__Claude_Browser__read_console_messages, mcp__Claude_Browser__read_network_requests, mcp__Claude_Browser__get_page_text, mcp__Claude_Browser__javascript_tool, mcp__Claude_Browser__resize_window, mcp__Claude_Browser__tabs_context
 ---
 
@@ -13,9 +13,22 @@ concisely; don't re-explain the change back, just what you found.
 
 A full sweep is 5 pages x 3 widths x theme x click paths and costs roughly
 186k tokens and 27 minutes. Most changes cannot break most of that. **The
-caller states a scope in the prompt.** If no scope is stated, run `full` and
-say in the report that no scope was given, so the cost was a choice and not
-an accident.
+caller states a scope in the prompt.**
+
+**If no scope is stated, run `map-chrome` and say so in the report.** This
+reversed on 2026-09-22, having previously defaulted to `full`: defaulting to
+the most expensive run makes the expensive case the thing that happens by
+accident, which is backwards. A caller who wants the full sweep asks for it.
+
+**`full` is for a BATCH, not for a fix.** It is required before a real deploy
+of work that has not been verified piece by piece. It is NOT required after
+repairing a single defect that a full sweep just found - there, the narrow
+scope covering the repair is the honest check, and `full` re-examines files
+that are byte-identical to the ones it passed an hour earlier. Measured that
+day: the narrow run cost ~106k against ~186k and caught the thing that
+mattered. If you are unsure which case you are in, ask what changed since the
+last full sweep; if the answer is "one city's output and the code that
+produced it", you are in the second case.
 
 Run **only** the numbered Procedure steps each scope lists. Steps are below.
 

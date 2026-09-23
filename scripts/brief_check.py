@@ -381,6 +381,137 @@ def socrata_distinct_split(spec, ctx):
     return ok, detail
 
 
+def taxonomy_catchall(spec, ctx):
+    """How much of a classification column is a CATCH-ALL, at each level of the
+    taxonomy - the measurement that decides which level a city keys on.
+
+    WHY THIS IS A CHECK RATHER THAN A PARAGRAPH. Barcelona's census publishes
+    four levels of the same taxonomy, and the natural-looking one is wrong:
+    `Nom_Grup_Activitat` puts **35% of active rows into `Altres`**, while
+    `Nom_Activitat` - the finest - has an explicit home for all 75 of its
+    values. That is the opposite of Madrid, whose own multi-level scheme is
+    keyed nearer the top, and both cities are right. The deciding number is the
+    catch-all share per level, and until now it was measured during step 2, by
+    which point the config, the taxonomy module and the map script have all
+    been written against a level someone guessed at.
+
+    It also catches the second failure in the same family: a catch-all that is
+    small but MEANS SEVERAL THINGS. Barcelona's `Altres` is 1,545 rows spread
+    across five different parents - food retail, retail/wholesale, services,
+    food service and genuinely-other - so a share under the threshold is a
+    reason to look at `by_parent`, not a reason to stop looking. Pass
+    `parent_column` to get that breakdown; it is what tells you whether the
+    catch-all can be dispatched (Chicago's `EXTRA_COLUMNS` mechanism) or has to
+    be dropped.
+
+    A share over `max_share` is a brief to correct - by keying a level deeper -
+    never a threshold to raise.
+    """
+    import pandas as pd
+    values, parents = _classification_column(spec, ctx)
+    total = len(values)
+    if not total:
+        return False, "no rows returned - the filter or resource id is wrong"
+
+    def norm(s):
+        return s.strip().upper() if isinstance(s, str) else ""
+
+    wanted = {norm(v) for v in spec["catchall"]}
+    normed = values.map(norm)
+    blank = int((normed == "").sum())
+    hits = normed.isin(wanted)
+    n = int(hits.sum())
+    share = n / total
+
+    max_share = spec.get("max_share")
+    ok = max_share is None or share <= max_share
+    bits = [f"{n:,} of {total:,} rows ({share:.1%}) are "
+            f"{sorted(spec['catchall'])} in {spec['column']!r}"]
+    if not ok:
+        bits.append(f"OVER the brief's {max_share:.0%} ceiling - key a level "
+                    f"deeper rather than raising this")
+    if blank:
+        bits.append(f"{blank:,} blank ({blank / total:.1%}), counted in the "
+                    f"denominator and NOT as catch-all")
+
+    # Every other level, reported only. This is the comparison the decision is
+    # actually made on, so a brief that declares it shows its working.
+    for other in spec.get("compare", []):
+        # parent_column dropped: it is only meaningful for the keyed column,
+        # and leaving it in asked one portal for the same field twice and got
+        # HTTP 500 - a comparison level IS often the parent level.
+        o_spec = {k: v for k, v in spec.items() if k != "parent_column"}
+        o_spec["column"] = other
+        o_vals, _ = _classification_column(o_spec, ctx)
+        if not len(o_vals):
+            bits.append(f"{other!r}: no rows")
+            continue
+        o_norm = o_vals.map(norm)
+        o_n = int(o_norm.isin(wanted).sum())
+        bits.append(f"{other!r}: {o_n / len(o_vals):.1%} catch-all, "
+                    f"{o_norm.nunique()} distinct")
+
+    if spec.get("parent_column") and parents is not None and n:
+        by_parent = parents[hits.values].map(norm).value_counts()
+        if len(by_parent) > 1:
+            shown = "; ".join(f"{k or '(blank)'} {v:,}"
+                              for k, v in by_parent.head(8).items())
+            bits.append(f"catch-all spans {len(by_parent)} parents - {shown}. "
+                        f"One value meaning several things needs dispatching "
+                        f"on the parent, not a single bucket")
+    bits.append(f"{normed.nunique()} distinct values in {spec['column']!r}")
+    return ok, "; ".join(bits)
+
+
+def _classification_column(spec, ctx):
+    """One or two columns of a live register, as pandas Series.
+
+    Speaks the two portal shapes this project actually meets. Kept beside
+    `taxonomy_catchall` rather than generalised further, because the next
+    portal will want its own paging rule and guessing it now would be
+    inventing a requirement.
+    """
+    import pandas as pd
+    cols = [spec["column"]]
+    if spec.get("parent_column") and spec["parent_column"] != spec["column"]:
+        cols.append(spec["parent_column"])
+
+    if spec.get("domain", "").startswith("data.") or spec.get("socrata"):
+        url = f"https://{spec['domain']}/resource/{spec['view']}.csv"
+        params = {"$select": ",".join(cols), "$limit": spec.get("limit", 200000)}
+        if "where" in spec:
+            params["$where"] = spec["where"]
+        r = requests.get(url, params=params, headers=HEADERS, timeout=600)
+        r.raise_for_status()
+        df = pd.read_csv(io.BytesIO(r.content), dtype=str)
+    else:
+        # CKAN datastore. Paged, because `limit` is capped server-side well
+        # below a full register and a silent truncation here would understate
+        # the catch-all share - the one direction that turns a failing check
+        # into a passing one.
+        url = f"https://{spec['domain']}/api/3/action/datastore_search"
+        rows, offset, page = [], 0, spec.get("page_size", 10000)
+        while True:
+            params = {"resource_id": spec["resource_id"], "limit": page,
+                      "offset": offset, "fields": ",".join(cols)}
+            if spec.get("filters"):
+                params["filters"] = json.dumps(spec["filters"])
+            r = requests.get(url, params=params, headers=HEADERS, timeout=600)
+            r.raise_for_status()
+            got = (r.json().get("result") or {}).get("records") or []
+            rows.extend(got)
+            offset += len(got)
+            if len(got) < page or offset >= spec.get("limit", 500000):
+                break
+        df = pd.DataFrame(rows, columns=cols) if rows else pd.DataFrame(columns=cols)
+
+    values = df[spec["column"]] if spec["column"] in df else pd.Series(dtype=str)
+    parents = (df[spec["parent_column"]]
+               if spec.get("parent_column") and spec["parent_column"] in df
+               else None)
+    return values, parents
+
+
 def geojson_area_km2(spec, ctx):
     """A boundary polygon's real area. Edmonton publishes FOUR layers named
     some variant of "Corporate Boundary" and two are the pre-2019 polygon;
@@ -635,6 +766,7 @@ CHECKS = {
     "ckan_fields": ckan_fields,
     "socrata_count": socrata_count,
     "socrata_distinct_split": socrata_distinct_split,
+    "taxonomy_catchall": taxonomy_catchall,
     "geojson_area_km2": geojson_area_km2,
     "utm_zone_from_longitude": utm_zone_from_longitude,
     "osm_route_refs": osm_route_refs,

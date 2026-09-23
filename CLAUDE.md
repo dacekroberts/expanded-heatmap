@@ -35,6 +35,15 @@ three buckets, use `multi-source-city`** - most large US cities do not license
 general retail, so this is the common case rather than the exception (New York
 needed four sources; Philadelphia's is 79% landlord registrations).
 
+**The city's classification is not NAICS? Use `premises-taxonomy`**
+(`.claude/skills/premises-taxonomy/`) - four cities have needed a local
+taxonomy and the deciding measurement is the same every time and skipped every
+time: **the catch-all share at each level of the scheme.** Barcelona's group
+level puts 35% of active rows in `Altres` and its finest level 2.6%, so it keys
+at the finest; Madrid keys near the top of an identically-shaped scheme. Both
+are right, which is why there is no default to inherit - measure it with
+`brief_check.py`'s `taxonomy_catchall` kind before writing the module.
+
 **Check `docs/build_briefs/<city>.md` first** - if one exists, Step 0's answers
 are already banked there (endpoints, columns, CRS, traps, required notices, and
 an explicit list of what is still unknown). It is a cache, not a prerequisite:
@@ -211,6 +220,16 @@ reader had already found and immediately found five more.
   pulls. Gate item 9 in `docs/data_sources.md` has the detail. `deploy-verify`
   cannot catch either failure: it runs the working tree, and it always starts a
   fresh process.
+- **Publishing a city? Use `publish-city`** (`.claude/skills/publish-city/`) -
+  the eleven-step gate in order, what each step sees that no other does, and
+  the two invisible ones: landing `app/` on master IS deploying, and the reboot
+  question must be computed from the WHOLE push's `app/` diff rather than from
+  the last few commits, which is how `deploy-verify` can correctly report "no
+  reboot needed" about a push that needs one.
+- **Reading a source's terms? The `licence-read` agent** (`.claude/agents/`)
+  runs `read-licence` on ONE source and returns a verdict in four shapes, out
+  of the main conversation - most of the pages it opens say nothing, and Spain
+  alone cost more licence reading than the nine US cities combined.
 - **Verify app changes with the `deploy-verify` agent**, and **always state a
   scope**: `city-added`, `map-chrome`, `app-deps` or `full`. It runs against
   `.venv-lean` (what Streamlit Cloud installs), not the full environment. A
@@ -266,6 +285,7 @@ python pipeline/<city_slug>/step2_clean_businesses.py
 python pipeline/<city_slug>/step3_map.py
 python pipeline/drift_check.py [city_slug] [--jobs N]   # --jobs 4 does all 13 in ~37s
 python scripts/brief_check.py [city_slug]               # re-run a brief's claims against live sources
+                                                       # (16 kinds; taxonomy_catchall picks a taxonomy's level)
 python scripts/check_provenance.py [--strict]           # every built city's sources actually recorded; run after adding a city
 python scripts/check_no_fetch_in_steps.py [--list]      # no pipeline step may reach the network
 python scripts/check_no_fetch_in_steps_selftest.py      # watch that check fail 6 ways; touches nothing
