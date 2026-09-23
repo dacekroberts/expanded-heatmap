@@ -511,6 +511,39 @@ CITIES = [
         # it refuses a guessed one.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Marseille",
+        "lat": 43.2965,
+        "lon": 5.3698,
+        "page": "pages/22_Marseille_Heatmap.py",
+        "blurb": "RTM Métro 1–2 and Tramway 1–3",
+        "region": "Europe",
+        "in_default_view": False,
+        # BELOW THE MARKER, not above, and the check chose it rather than
+        # taste. Marseille's width was measured at 60.3 px in a real browser
+        # with Space Grotesk loaded (five known cities reproduced the table
+        # exactly, which is what proves the font loaded). At the scaffold's
+        # default ("middle", 0, -22) it collided TWICE in the United States
+        # view at 1200 px - Madrid x Marseille 28.4 x 2.9 px and
+        # Milan x Marseille 43.4 x 6.2 px - because every European city here
+        # points its label straight up and Marseille sits between them.
+        #
+        # The same offset every other European city uses, and deliberately so
+        # after two attempts to tune it away. Marseille is boxed in - Paris
+        # north, Milan north-east, Madrid west, Barcelona south-west, and
+        # Barcelona's own label points up into Marseille's space - so moving
+        # it above collided with Madrid and Milan, and moving it below then
+        # collided with Barcelona at 38.6 x 12.1 px.
+        #
+        # OWNER'S CALL 2026-09-23: the two remaining overlaps happen only in
+        # the UNITED STATES view, where Europe is a corner cluster, and chasing
+        # them is not worth it as coverage goes global - a parent region labels
+        # every city on earth, so this class of collision grows with the map
+        # rather than with any defect. Recorded in check_macro_labels.py's
+        # ACCEPTED_OVERLAPS with the measured numbers, which is the mechanism
+        # built for exactly this and which still fails if the geometry moves.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

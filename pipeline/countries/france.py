@@ -21,6 +21,24 @@ fifty-four, and its footer can be read over HTTP range requests without
 downloading the file - which is how every number in this module was measured.
 """
 
+# --- Where the national files are cached ------------------------------------
+#
+# ONE CACHE FOR THE COUNTRY, NOT ONE PER CITY. The two SIRENE parquets are
+# 2,210 MB and 811 MB and they are NATIONAL - the same bytes serve Paris,
+# Marseille, Toulouse, Lille and Rennes. A per-city copy, which is what the
+# scaffold's layout implies, would be 15 GB to hold one 3 GB pair.
+#
+# Introduced 2026-09-23 while building the SECOND French city, deliberately
+# before the per-city pattern could be set in a third. `data/*/raw/` is
+# gitignored, and `data/france/raw/` matches that pattern, so nothing about the
+# repository changes.
+from pathlib import Path
+
+_ROOT = Path(__file__).parent.parent.parent
+SHARED_RAW = _ROOT / "data" / "france" / "raw"
+SIRENE_PARQUET = SHARED_RAW / "sirene_etablissements.parquet"
+GEOLOC_PARQUET = SHARED_RAW / "sirene_geoloc.parquet"
+
 # --- SIRENE: the national establishment register ---------------------------
 
 # Resolved from the data.gouv.fr API rather than hard-coded, because the file

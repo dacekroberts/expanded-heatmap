@@ -173,16 +173,34 @@ cities["dy"] = offsets.map(lambda o: o[2])
 # every city's single pixel offset - and the label being removed is one a
 # reader of that region has no use for.
 #
-# THE COMPOSITE IS EXCLUDED DELIBERATELY. "United States" is the landing view
-# and the portfolio's first impression; suppressing non-members there would
-# take seven labels off it to close one 1.1 px abutment. So the rule is keyed
-# on REGION_MEMBERS rather than on the region name, and a future composite
-# gets the same treatment without another edit.
-if region in REGION_MEMBERS:
-    label_cities = cities
-else:
-    _members = {c["name"] for c in _region_cities[region]}
-    label_cities = cities[cities["name"].isin(_members)]
+# THE COMPOSITE USED TO BE EXEMPT. It no longer is, and the reason is that the
+# trade it was exempted on INVERTED as the map went international.
+#
+# The old rule kept every label on "United States" because that is the landing
+# view, and suppressing non-members there "would take seven labels off it to
+# close one 1.1 px abutment". Measured again on 2026-09-23, when Marseille
+# became the 22nd city:
+#
+#   labels shown that are NOT the region's own      13
+#   collisions in that view                          3
+#   ...of which involve a non-member             3 of 3
+#   non-member labels drawn OFF CANVAS at 375px  6 of 13
+#
+# So it is now thirteen labels against three collisions, EVERY collision is
+# caused by a non-member, and at phone and tablet width nearly half of those
+# labels are off-screen anyway - they cannot be serving the first impression
+# they were kept for. The cost also grows with each international city, which
+# is the part that matters: every one arrives needing its offsets tuned against
+# a view it does not belong to, which `Overview.py` already calls "unbounded
+# work" three paragraphs above.
+#
+# The rule is now simply: A REGION LABELS ITS OWN CITIES. No exception, so a
+# future composite needs no decision. Markers are untouched - every city's dot
+# stays visible and clickable in every view, which is what makes the caption's
+# "every city is on the map" true - and `elsewhere_counts` still names the
+# regions a reader has not opened.
+_members = {c["name"] for c in _region_cities[region]}
+label_cities = cities[cities["name"].isin(_members)]
 
 markers = pdk.Layer(
     "ScatterplotLayer",
