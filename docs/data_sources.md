@@ -1536,7 +1536,7 @@ and icons. Line names and category labels are not claimed.
 **No warranty**: the Council disclaims integrity, updating and accuracy, and
 excludes liability.
 
-## Obligations that are NOT notices — three classes, one per publisher
+## Obligations that are NOT notices — four classes, one per publisher
 
 **A notice is text on a page. These are not.** Each was found by reading a
 licence that also granted permission freely, which is why they are easy to
@@ -1547,6 +1547,9 @@ miss: the grant is the headline and the obligation is a subordinate clause.
 | **An act owed to the publisher** | **Barcelona** 🇪🇸 | *"Users are required to inform Barcelona City Council of every project relating to or derived from their use of the data sets."* A message a person sends. Drafted at `docs/notifications/barcelona-city-council.md`, **not yet sent** |
 | **A live account that must STAY live** | **WMATA** (Washington D.C.) 🇺🇸 | The terms are an API agreement, so §9(i) ends the grant when the account ends — and what lapses is the right to **publish the page**. Gate item 10 |
 | ✅ **A liability ACCEPTED** | **Hong Kong** 🇭🇰 *(candidate)* | **ACCEPTED BY THE OWNER 2026-09-22.** *"you shall **indemnify** the Government and the Relevant Organisations against any allegations or claims of infringement of the rights of any person and all costs, losses, damages and liabilities incurred … which in any case arise **directly or indirectly** in relation to your use, reproduction and/or distribution of the Data"*. See the section below for what the earlier record omitted |
+| 🔧 **AN ACCESS A PERSON MUST OBTAIN** | **Copenhagen / Denmark** 🇩🇰 *(candidate)* | **Added 2026-09-23 at the owner's request.** CVR's premises data needs a **Datafordeler account the owner creates by hand**, and the terms pages sit behind a **Cloudflare interactive challenge** this project does not defeat — so both the registration and the reading are **human-only work**. ⚠️ **This is NOT WMATA's class, and the difference matters.** WMATA's terms are an **API agreement**, so §9(i) ends the grant when the account ends. Copenhagen's licence is **CC BY 4.0, which attaches to the DATA and is irrevocable** — so the owner's standing practice (*register, take the data, terminate, revoke*) is **safe here and unsafe there**. ✅ **Close the account freely; the right to publish survives.** The similarity is the registration effort, not the obligation |
+
+**Copenhagen and WMATA look alike at the signup form and diverge immediately after it.** Both made the owner register; only one made the account load-bearing. **The test is what the terms ARE** — an API agreement licenses *you*, so it can be withdrawn from you, while a public licence licenses *the data*, and nothing you do to your account reaches it. Recording the two in one row would have told a later reader to keep a Danish account alive forever, and implied that closing it revokes the right to publish Copenhagen. **Neither is true.**
 
 **Hong Kong's is the one to weigh before building, not after.** Everything
 else in `data.gov.hk`'s Terms of Use v1.2 (26 May 2025) is generous — download,

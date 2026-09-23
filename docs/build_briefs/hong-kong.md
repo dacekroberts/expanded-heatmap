@@ -150,14 +150,38 @@ statutory category, and it holds 4 rows.)*
 **`https://www.als.gov.hk/lookup?q=<address>`** with
 `Accept: application/json`. Free, no key, no account.
 
-Measured on **120 real `ADR` strings** taken from the XML:
+### ✅ RE-MEASURED 2026-09-23 — and it is a TWO-STAGE lookup, 100.0%
 
-| | |
-|---|---|
-| **Hit rate** | **90.8%** (109/120) |
-| Miss | 9.2% |
-| Throttled / error | **0%** at 4 workers |
-| Throughput | **3.9 req/s** |
+| Stage | n = 200 random register rows | |
+|---|---|---|
+| **1 — exact `ADR`** | **191** | **95.5%** |
+| **2 — floor prefix stripped, retried** | **+9** | **+4.5%** |
+| **COMBINED** | **200** | ✅ **100.0%** |
+| Still unresolved | **0** | **0.0%** |
+| Transport errors | **0** | at ~2 req/s |
+
+⚠️ **The one-stage rate was recorded as 90.8% on n=120 and is 95.5% on n=200.
+Neither was wrong — but neither was the build number**, because *the misses
+are not a ceiling, they are a format*. **Every single unresolved row carried a
+floor, unit or portion clause in front of the building:**
+
+```
+5/F (PORTION), 6/F (PORTION) & 7/F (PORTION) OF LOWER BUILDING, GERMAN …
+UNIT 2B & 3, G/F AND THE WHOLE OF 1/F., SUMMIT INSURANCE BUILDING, NOS …
+30/F & 31/F, NO. 28 STANLEY STREET, CENTRAL, HONG KONG
+```
+
+**The building is findable; the prefix defeats the lookup.** Strip everything
+ahead of the first `NO.`/`NOS.` or street token and retry — **that recovered
+9 of 9.** This is **Oslo's two-stage shape** (exact `adressetekst`, then plain
+`sok`), arrived at independently, and it is now the second city where the rule
+is *retry narrower*, never *fuzzy*.
+
+**Build it as two stages from the start.** A single-stage pipeline silently
+discards ~4.5% of Hong Kong's premises, and they are not a random 4.5% —
+they are disproportionately **upper-floor and multi-unit premises**, which in
+Hong Kong means a systematic bias against exactly the vertical retail this
+map is supposed to show.
 
 Returns **lat/long AND HK1980 Grid easting/northing AND a confidence
 `Score`**.
@@ -309,10 +333,17 @@ groups cities into one readable view.
   },
   {
     "id": "als-geocoder-keyless",
-    "claim": "Hong Kong's Address Lookup Service answers without a key and returns lat/long, HK1980 Grid, and a confidence Score. Measured 90.8% on 120 real ADR strings at 3.9 req/s with zero throttling",
+    "claim": "Hong Kong's Address Lookup Service answers without a key and returns lat/long, HK1980 Grid, and a confidence Score. Re-measured 2026-09-23 on 200 random register rows: 95.5% on the exact ADR, 100.0% once floor-prefixed addresses are retried stripped, 0 transport errors",
     "kind": "http_ok",
     "url": "https://www.als.gov.hk/lookup?q=1%20Harbour%20Road%2C%20Wan%20Chai",
     "min_bytes": 200
+  },
+  {
+    "id": "als-stage2-floor-prefix-rule",
+    "claim": "THE BUILD RULE, pinned because a one-stage pipeline silently drops ~4.5% of premises and they are disproportionately upper-floor and multi-unit ones. A floor-prefixed ADR fails; the SAME address with the prefix stripped resolves. This check sends the stripped form of a real register row that failed exact lookup - if ALS ever stops resolving it, stage 2 is no longer the answer and the brief must be re-measured",
+    "kind": "http_contains",
+    "url": "https://www.als.gov.hk/lookup?q=NO.%2028%20STANLEY%20STREET%2C%20CENTRAL%2C%20HONG%20KONG",
+    "contains": "Latitude"
   },
   {
     "id": "datagovhk-org-count-is-unreliable",

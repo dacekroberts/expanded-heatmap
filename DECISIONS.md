@@ -16,10 +16,17 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**212 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**219 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Paris's disproven figures swept out of staging's documents](#2026-09-23---pariss-disproven-figures-swept-out-of-stagings-documents)
+- [Singapore is a TWO-bucket city, and the zero is controlled](#2026-09-23---singapore-is-a-two-bucket-city-and-the-zero-is-controlled)
+- [Bucharest moves B to D: the band was measuring the wrong thing](#2026-09-23---bucharest-moves-b-to-d-the-band-was-measuring-the-wrong-thing)
+- [CVR is normalised, and the premises file is nearly empty on its own](#2026-09-23---cvr-is-normalised-and-the-premises-file-is-nearly-empty-on-its-own)
+- [Copenhagen's gate was read at the wrong host, and it is light](#2026-09-23---copenhagens-gate-was-read-at-the-wrong-host-and-it-is-light)
+- [Oslo's names are the best in the project, and 28.6% may be people](#2026-09-23---oslos-names-are-the-best-in-the-project-and-286-may-be-people)
+- [Band B measured for briefs, and two of its six are not Band B cities](#2026-09-23---band-b-measured-for-briefs-and-two-of-its-six-are-not-band-b-cities)
 - [Lyon's discard row spent a day in the wrong table](#2026-09-23---lyons-discard-row-spent-a-day-in-the-wrong-table)
 - [Paris's naming share was France's number wearing Paris's label](#2026-09-23---pariss-naming-share-was-frances-number-wearing-pariss-label)
 - [Lyon discarded on four blockers, with a reinstatement template kept](#2026-09-23---lyon-discarded-on-four-blockers-with-a-reinstatement-template-kept)
@@ -251,6 +258,401 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Paris's disproven figures swept out of staging's documents
+
+- **The Paris build disproved two things four other cities inherit, and the
+  correction had landed only in the BUILD session's own files.** `paris.md`,
+  `PLAN.md`, `global_country_shortlist.md` and `pipeline/paris/` were all
+  corrected by that session. **`marseille.md`, `pipeline/countries/france.py`
+  and `prague.md` were not** - and those are staging's lane. **A correction
+  that stops at a session boundary is the same defect as one that stops at a
+  file boundary**, and the path ownership in `session_roles.md` is exactly what
+  makes it predictable: each session fixed what it owned and nothing else.
+
+- **What was disproven.** The brief recorded **148,633 to 50,156 "after the
+  employee filter"**, and PLAN.md called the resulting **92.5%** OSM match the
+  comparison that turned France from a rejection into a build. **Neither
+  reproduces.** `trancheEffectifsEtablissement` is `NN` on **115,248 of
+  149,166 rows (77.3%)**, so every banded row together is 33,918 and the
+  largest cut the column can produce falls **16,000 short**. Dropping `NN` is
+  separately wrong: only **1,425** rows record `00`, so **SIRENE codes a sole
+  trader as NN** and that band holds every owner-run shop in France.
+  **No employee filter is applied.**
+
+- **The tell, and it generalises past France: one side of the comparison
+  reproduced and the other did not.** Re-measured, OSM gives **48,973** against
+  SIRENE's **87,164** inside the commune (**1.78x**). On restaurants - where
+  `amenity=restaurant` and NAF `56.10A` mean nearly the same thing - **OSM
+  returns 9,058 against a recorded 10,642, so the OSM side reproduces**, while
+  **SIRENE returns 16,280 against a recorded 10,595, 1.54x below what the
+  register actually contains.** **When one side reproduces and the other does
+  not, the non-reproducing side is where the tuning happened** - and 50,156 was
+  produced by tuning a filter until its output matched OSM, then recorded as a
+  measurement.
+
+- **Marseille's job changed shape, not just its numbers.** Its brief asked it
+  to *"re-run that comparison"* and see whether **92.5%** holds. **There is no
+  92.5% to hold.** Rewritten to ask for three different things: measure
+  Marseille's own SIRENE-to-OSM **ratio** against Paris's 1.78x; check that
+  Paris's two catch-all exclusions transfer (**`96.09Z`** and **`56.29B`**
+  excluded on the publisher's own hierarchy, while **`47.19B`, `47.29Z` and
+  `47.78C` were KEPT** because their classes say *en magasin specialise*); and
+  **do not tune to match OSM** - disclose the residual instead, because tuning
+  is what produced the wrong number the first time.
+
+- **`france.py` gains `EMPLOYEE_FILTER_APPLIED = False`** rather than merely
+  losing a wrong comment. The constant that carried the false claim is kept,
+  because the next reader's question is *"why is there an employee-band column
+  if nothing uses it"* - and the answer, with its measurements, is now beside
+  it. **A deleted comment leaves no trace of why; a corrected one does.**
+
+- **Prague's brief cited the void precedent and now stands on its own
+  evidence, which is stronger.** It read *"Paris's equivalent took 148,633 to
+  50,156"*. Prague's `KATPO` is `000` on **54.6%** of rows against France's
+  `NN` at 77.3%, so **the Czech column genuinely discriminates where the French
+  one does not** - but the brief now carries the France warning explicitly:
+  **check what `000` MEANS before applying it**, because the French equivalent
+  turned out to hold every sole trader.
+
+- **Counts corrected: Paris is BUILT, so candidates fall 31 to 30 and Band A
+  becomes 9 ready + 7 built.** The merge brought `Built - 21` across but left
+  `Candidates - 31` and Paris's candidate row standing. **Cost band 1 is now
+  EMPTY** - it held Paris alone, and a cost band whose only member ships is
+  worth showing as emptied rather than quietly deleted.
+
+### 2026-09-23 - Singapore is a TWO-bucket city, and the zero is controlled
+
+- **Singapore's business leg is measured for the first time; Band B had only
+  ever recorded its GEOCODE.** Four registers, all keyless, all premises-level:
+  **`NEA Licensed Eating Establishments` 36,687** (food service);
+  **`Licensed Tobacco Retailers` 4,235**, **`List of Supermarket Licences`
+  478** and **`Listing of Licensed Pharmacies` 243** (retail, ~4,956
+  together). **Personal services: NONE.** Two buckets, which clears the
+  owner's bar that two is acceptable and one is not.
+
+- **The personal-services zero is CONTROLLED, which is the only reason it is
+  worth recording.** In the same matcher `spa` returns **91** hits - every one
+  a false friend, parks and 1940s newspapers - while `massage`, `massage
+  establishment`, `salon`, `hairdress`, `barber`, `beauty`, `nail`, `tattoo`,
+  `laundry`, `pet shop` and `veterinar` all return **0**. **The matcher works;
+  the registers are genuinely not published.** Singapore licenses massage
+  establishments through the police rather than as open data. This is
+  Goteborg's discipline applied before the finding was written rather than
+  after.
+
+- **And the catalogue behind it was ENUMERATED, not searched, because the
+  search is broken.** `api-production.data.gov.sg`'s `query` parameter is
+  **inert**: `zzqqxxnonsense` returns the same 10 rows as `tobacco retail`.
+  **Third occurrence of that family** after `data.seoul.go.kr` and
+  `api.data.gov.in`. The full enumeration took **4,629 datasets over 463
+  pages** - and **two earlier runs were truncated by my own page caps**, at
+  600 and at exactly 4,000, both while still returning new rows. **A cap
+  reached is not a catalogue exhausted.**
+
+- **No register carries an activity column, so BUCKET = SOURCE.** This is
+  Milan's pattern in its purest form - *membership is the classification* -
+  and it means Singapore needs `multi-source-city` rather than a taxonomy
+  module. The columns are licence, licensee, address and (for food) a hygiene
+  `grade`; nothing says what the business sells.
+
+- **🚨 `Listing of Licensed Pharmacies` carries `Pharmacistincharge`,
+  a named individual.** It must be dropped at READ time, not at publish time,
+  and `check_personal_exposure.py` must see Singapore before it ships. The
+  project's invariant is that a trade name is fair game and a person's name is
+  not, and here the person's name is a first-class column rather than
+  something hiding in a catch-all category.
+
+- **`licensee_name` is the LICENSEE, not the trade name** - a hotel
+  restaurant appears as *REPUBLIC HOTELS & RESORTS LIMITED*, a tobacco outlet
+  as *HENG LAI HENG TRADING ENTERPRISE*. **This is Oslo's problem in a second
+  country**, and it suggests the rule generalises: **a LICENCE register names
+  the licence holder; a PREMISES survey names the premises.** `PharmacyName`
+  is the exception and is a real trade name.
+
+- **One register is shaped better than the rest and it is the smallest.**
+  `List of Supermarket Licences` splits the address into
+  `block_house_num` / `street_name` / **`postal_code`** as separate columns,
+  where the other three bury the postcode inside a free-text string - which is
+  the specific thing Band B's geocode measurement had to extract with a regex
+  at 99.5% / 97.5% / 83.4%. **478 rows of clean address against 36,687 of
+  parsed.**
+
+### 2026-09-23 - Bucharest moves B to D: the band was measuring the wrong thing
+
+- **Bucharest moved from Band B to Band D**, and nothing about the city got
+  worse. **Band B describes a measured COORDINATE ROUTE; Band D describes the
+  ONE-BUCKET CEILING.** Both are true of Bucharest. **Where both are true, the
+  ceiling is what is actually stopping the city** - which is the whole point of
+  banding by what blocks a build rather than by how far along it is.
+
+- **The finding was already recorded and the row was left where it was.** The
+  2026-09-22 entry closing Bucharest's screening states that **Romania's
+  national catalogue holds no second bucket** - 4,693 datasets enumerated from
+  the Internet Archive, the only commercial register being ~40 dated snapshots
+  of ONRC's **company** register. DSVSA is the sanitary-veterinary authority,
+  so its 31,299 rows are food. **The city sat in the wrong band from the moment
+  its own screening finished**, which is the failure mode `add-country` warns
+  about in a different costume: a conclusion recorded in one document and not
+  carried into the one that orders the work.
+
+- **Its rail was re-counted and one number was short.** 13 subway route
+  relations in relation 377733, **13 named, 12 coloured**, refs M1-M5, and
+  **64 station nodes** against the *"~63 claimed, unverified"* the master list
+  carried. ⚠️ **The thirteenth relation is `Extensie M4`, with no
+  `ref` and no `colour`** - so a build keying on `ref` silently drops it and a
+  build keying on relation count draws a line it cannot label. Address supply
+  re-measured at **146,228** (132,478 nodes + 13,750 ways), within 112 of the
+  earlier 146,116.
+
+- **`data.gov.ro` is still blackholed, now two days running**, which weakens
+  the original *"an outage, not a refusal"* reading. It is not upgraded to a
+  refusal - the evidence does not support that either - but the row now says
+  how long it has been down rather than repeating a same-day judgment.
+
+- **Bucharest is the strongest-railed city in Band D and the weakest on
+  access** - a five-line metro against three cities' trams, behind a JS
+  challenge that must be passed in a browser rather than worked around.
+  **The opposite trade from Göteborg**, which has the best licence in the
+  band and the weakest map.
+
+- **Counts: Band B 6 to 5, Band D 3 to 4, candidates unchanged at 31.** Two
+  stale captions fell out of the move: Band D still opened *"Screening is
+  COMPLETE for all three"* and carried a heading reading **"The two cities in
+  full"** - already wrong when Göteborg was added on the same day.
+  `city_cost_order.md`'s cross-check line updated, with a note that a city's
+  COST band and its BLOCKING band are different questions and need not move
+  together.
+
+### 2026-09-23 - CVR is normalised, and the premises file is nearly empty on its own
+
+- **`Produktionsenhed` carries TWO attributes - `pnummer` and
+  `beskaeftigelse` - and neither is an address, a name or an activity code.**
+  Read from the objekttypekatalog. **A reader who stopped at that page would
+  conclude Copenhagen has no usable premises data**, which is the Colombia-RUES
+  verdict: millions of premises rows, no location. **A reader who downloaded
+  only that file would get a table of `pnummer`s and discover it mid-build.**
+
+- **The answer is one line of small print: *Subtype af
+  CVREnhedMedStamdata*.** That supertype carries `cvrAdresse` (**location**),
+  `branche` (**activity**, and `Branche` itself is `kode` + `tekst`, so the
+  NACE code AND its label ship together) and `navn` (**trade name**). ✅ **So
+  Copenhagen passes `add-country`'s pair test - location and activity asked
+  SEPARATELY - but only through inheritance.**
+
+- **CVR's fildownload is ONE FILE PER ENTITY, so the build is a JOIN across
+  four files, not a read of one.** *"Totaldownload ... indeholder hver især
+  data bestående af en enkelt entitet."* The four are **Produktionsenhed**
+  (the spine), **Adressering**, **Branche** and **Navn**. This is a materially
+  different build from France's single SIRENE parquet, and it was invisible
+  until the schema was read.
+
+- **`LatestTotalForEntity` removes the filename guessing entirely.** The
+  documented form is
+  `GetFile?Register=CVR&LatestTotalForEntity=<Entity>&type=current&format=CSV`,
+  so no `zzzz` extract number has to be discovered or guessed. **Guessed
+  identifiers have cost this project real time** - Overpass relation ids, a
+  truncated Toulouse GTFS URL - and here the publisher supplies the escape.
+
+- **⚠️ `current` does NOT expose every entity, and the page says so quietly.**
+  Bitemporal lists *"Udstillede entiteter: Alle"*; current and temporal both
+  say *"Ikke alle"*. **`Beskaeftigelse` and `CVREnhed` are bitemporal-only.**
+  That matters specifically: **Paris uses an EMPLOYEE filter to strip home
+  registrations**, and if Copenhagen needs the same guard, employment has to
+  come from the bitemporal file rather than the current one.
+
+- **🚨 The refresh window is seven days, which makes a committed snapshot
+  expire.** *Genereringstid: natten til lørdag, mellem klokken 3 og 6.
+  Arkiveringstid: 7 dage.* Generated weekly, retained a week. **This is
+  WMATA's ten-day window again** - and the lesson there was that a stale feed
+  still parses, still has rows and still builds a map. Copenhagen's
+  `fetch_sources.py` must record the download date and treat an expired copy
+  as an **error, not a warning**.
+
+- **The authentication recommendation was WRONG and the owner's screenshot
+  caught it.** Shared Secret was recommended from the generic Confluence page,
+  which says it *"kan bruges til at kalde alle typer af data"*. True, and not
+  the guidance. **The product UI is specific where the doc is generic**:
+  API-Keys grant *"adgang til tjenester med **frie data**"*, while OAuth Shared
+  Secret is for *"tjenester med **fortrolige data** ... anvendes sammen med
+  ansøgning om adgang og oplysning af IP-adresser"* - both of which had been
+  explicitly ruled out. **The wrong choice would have dragged in the access
+  request and the IP allowlist.** Confirmed afterwards from the CVR page
+  itself: API-key works *"såfremt man ikke forsøger at hente adgangsbegrænset
+  data"*, and OAuth is required only for `CVRPerson`.
+
+- **The generalisable form: when a generic reference page and the product's
+  own UI disagree about which mechanism to use, the UI is describing THIS
+  service and the reference is describing the platform.** Prefer the specific
+  one. This is `read-licence` step 4's question - does this document describe
+  the platform or this dataset - applied to authentication rather than terms.
+
+### 2026-09-23 - Copenhagen's gate was read at the wrong host, and it is light
+
+- **CVR is distributed through Datafordeler, and Datafordeler is not
+  Cloudflare-challenged.** Every earlier read of Denmark's terms went at
+  `datacvr.virk.dk` and `erhvervsstyrelsen.dk`, both of which serve an
+  interactive bot challenge this project does not defeat, so the position was
+  recorded as *"a free account, terms unread"*. **The same register's terms are
+  stated in the open on `datafordeler.dk`**, which answered a plain client on
+  the first request. **The obstacle was the host, not the document.**
+
+- **The licence is CC BY 4.0** - *"Som bruger kan du i henhold til licensen
+  frit hente, dele og tilpasse frie grunddata. Du skal kreditere Det Centrale
+  Virksomhedsregister (CVR) pa et passende sted."* Free to fetch, share and
+  adapt, with attribution. **The same licence Madrid and Milan already ship
+  under**, so it adds a notice and nothing else.
+
+- **Only the entity `CVRPerson` is access-restricted, and that is the one this
+  project does not want.** The access-request page is explicit: *"Bemaerk du
+  skal KUN soge om adgang til CVR, hvis du skal have adgang til entiteten
+  CVRPerson. De ovrige entiteter hos CVR er ikke adgangsbegraensede, og du kan
+  hente data uden at anmode registeret om adgang."* **Production units -
+  the premises this project maps - need no request, no approval and no data
+  exchange agreement.** The restriction runs *with* the privacy invariant
+  rather than against it, which is the opposite of the usual shape.
+
+- **What remains is a free account and nothing else**: a Datafordeler
+  Administration user (e-mail or MitID Erhverv) plus an IT-system carrying an
+  API key or OAuth. **None of Lyon's four blockers is present** - no
+  indemnity, no bar on the producers' marks, no 30-day reconfirmation, no dead
+  mirror. That contrast is the point: **two European cities, both recorded as
+  "needs a free account", and the accounts are not remotely the same object.**
+
+- **The `kurv` (basket) on `datacvr.virk.dk` is a false signal and worth
+  naming.** It belongs to the legacy self-service extract service, which is a
+  paid-order shape. Reading it as CVR's access model would have priced the
+  whole city wrongly. **Two routes to one register, and the modern one is
+  free** - the same lesson as Lyon's NAP mirror, in reverse.
+
+- **One probe error recorded rather than quietly dropped.** A check for
+  whether a refusal was IP-level searched the block page for an IP address and
+  reported `1.2.1.1` - **a CSS fragment, not an address**. Both hosts were
+  plain Cloudflare challenges. The conclusion *"IP-level, the browser will not
+  help"* was nearly written down on the strength of a regex matching a
+  stylesheet.
+
+### 2026-09-23 - Oslo's names are the best in the project, and 28.6% may be people
+
+- **Oslo's usable `navn` share is 100%, not "below 58.8%", and the old framing
+  was wrong in an instructive way.** It counted a legal-form suffix as damage.
+  It is not: **`1 ØRE AS` -> `1 ØRE` is a trade name**, and so are
+  `7 DAYS MINI MARKED`, `377 SPORT`, `A DAY'S MARCH SHIRTS & STAPLES NORWAY`.
+  Measured on all **13,481** Oslo bucket sub-units: **0 blank**, 41.3% carry a
+  legal suffix, only **12.2%** carry an `AVD` branch tail - far fewer than the
+  examples implied - and **100.0% survive the cleanup with nothing empty**.
+  Against Paris's 39.6% and Rennes' 53.5%, **Oslo has the best-named register
+  in this project.** A two-character trim is not a data-quality problem.
+
+- **But 28.6% of those names may be a person's own, which is three times
+  Paris's exposure.** Sampling **220 parent entities**: `AS` 66.8%, **`ENK`
+  28.6%** - *enkeltpersonforetak*, the sole trader - and **86% of the ENK rows
+  (54 of 63) carry a sub-unit name identical to the parent's**. Paris's
+  comparable figure is **8.7%**. The project's invariant is that a trade name
+  is fair game and a registrant's own name is not, so this is a build blocker
+  until the guard exists, not a footnote.
+
+- **THE TRAP, and it is the registered-office trap in a fifth costume: the
+  field that looks like the answer is populated, complete, and about something
+  else.** A sub-unit's own `organisasjonsform` is **`BEDR` 97.7% / `AAFY`
+  2.3%, with ZERO `ENK`** - because those are *sub-unit* forms. **Reading it
+  would have reported 0% natural persons on 100% coverage and been believed.**
+  The legal form lives on the **parent `enhet`**, reached by
+  `overordnetEnhet`, which **100%** of Oslo's sub-units carry.
+
+- **This is exactly France's shape, and Oslo's brief had no equivalent rule.**
+  `categorieJuridiqueUniteLegale` lives on the *unité légale*, never
+  on the *établissement*; Norway splits the same way between `enheter` and
+  `underenheter`. **Two countries, two registers, one structure** - which is
+  the argument for writing the rule where the next country passes through it
+  rather than in one city's brief. Pinned with two `brief_check` claims; Oslo
+  is now **5/5**.
+
+- **Expect usable names near 71% after suppression** - still the best in the
+  project - with the address fallback Paris already uses. And
+  `check_personal_exposure.py` needs a **Norwegian-aware pass** before Oslo
+  ships, the same way Seoul needs a Korean-aware one.
+
+- **One stale line removed from Oslo's own "still unknown" list.** It said the
+  rail station count was unread while **the section above it stated 11 routes,
+  356 stops, 177 distinct parent stations**. A "still unknown" list goes stale
+  exactly the way prose does, and it is more dangerous because it is read as
+  an inventory of remaining work.
+
+### 2026-09-23 - Band B measured for briefs, and two of its six are not Band B cities
+
+- **Hong Kong's geocode is a TWO-STAGE lookup and it resolves 100.0%.** The
+  rate had been recorded as 90.8% on 120 rows; re-measured on **200 random
+  register rows** it is **95.5% on the exact `ADR`**, and **100.0% (200/200,
+  zero unresolved, zero transport errors)** once the failures are retried with
+  their floor prefix stripped. **Neither earlier figure was wrong and neither
+  was the build number**, because the misses are **a format, not a ceiling**:
+  every unresolved row led with a floor, unit or portion clause - `5/F
+  (PORTION), 6/F (PORTION) & 7/F (PORTION) OF LOWER BUILDING`, `30/F & 31/F,
+  NO. 28 STANLEY STREET` - in front of a building ALS can find perfectly well.
+
+- **Build it as two stages from the start, because the 4.5% is not a random
+  4.5%.** Floor-prefixed addresses are disproportionately **upper-floor and
+  multi-unit premises**, which in Hong Kong is precisely the vertical retail
+  this map exists to show. A single-stage pipeline would have dropped them
+  silently and the row count would have looked fine. **This is Oslo's
+  two-stage shape reached independently** - exact string first, then a
+  NARROWER retry, never a fuzzy one - and it is now the second city where
+  that is the rule. Pinned with its own `brief_check` claim; Hong Kong is
+  **8/8**.
+
+- **Bucharest's rail is now counted rather than claimed, and one figure was
+  short.** In relation 377733: **13 subway route relations, 13 named, 12
+  coloured**, refs M1-M5 - and **the thirteenth is `Extensie M4`, which
+  carries no `ref` and no `colour`**, so a build keying on `ref` drops it and
+  a build keying on relation count draws a line it cannot label. **64 subway
+  station nodes**, against the *"~63 claimed, unverified"* the master list
+  carried. Address supply re-confirmed at **146,228** (132,478 nodes + 13,750
+  ways), within 112 of the earlier 146,116.
+
+- **BUT Bucharest is a ONE-BUCKET city, and this project's own record already
+  said so.** The 2026-09-22 entry that finished its screening states plainly
+  that **Romania's national catalogue holds no second bucket** - 4,693
+  datasets enumerated from the Archive, the only commercial register being
+  ONRC's **company** register. DSVSA is the sanitary-veterinary authority, so
+  its 31,299 rows are **food only**. **Band B describes a measured coordinate
+  route; Band D describes the one-bucket ceiling** - and where both are true
+  the ceiling is what is actually stopping the city. Bucharest has been
+  sitting in the wrong band since its screening closed.
+
+- **Copenhagen is also one bucket on anything keyless, and this was settled by
+  ENUMERATION rather than search.** All **483** layers its WFS advertises were
+  listed and read, not keyword-filtered - the Stockholm rule, whose own food
+  register matches neither `restaurang` nor `livsmedel`. The only
+  premises-level commercial layer is **`k101:bevillinger`: 2,390 rows** with
+  `navn`, `vejnavn`/`husnr`/`postnr`, an activity field (`koncept`) and
+  **coordinates already in EPSG:25832 metres**. `geoenviron_virksomheder`
+  (1,042) is **industrial** - machine workshops - not storefronts;
+  `servicemarkering` is street-cleaning polygons; the two `detailhandel`
+  layers are zoning. opendata.dk's 638 packages were enumerated too, control
+  clean: the only `produktionsenheder` dataset is **Aarhus Kommune's**,
+  **unmaintained since 2024-08-01**, and its own note redirects to the gated
+  host.
+
+- **Copenhagen's gate is an ACCOUNT, and the distinction was worth pinning
+  down.** `distribution.virk.dk` returns **401 from nginx** - HTTP Basic auth,
+  a credential - while `datacvr.virk.dk` returns a **Cloudflare interactive
+  challenge**, which is bot detection and which this project does not defeat.
+  **Two different obstacles that both read as "blocked"**: one is answerable by
+  obtaining a credential, the other is not answerable by this project at all.
+  findsmiley, the obvious national alternative, publishes **aggregate
+  inspection counts only** - the aggregate trap - and its old open XML is 404.
+
+- **Singapore's portal search parameter is INERT, and the control caught it
+  before anything was recorded.** `api-production.data.gov.sg`'s `query`
+  returns **the same 10 results for `tobacco retail` as for
+  `zzqqxxnonsense`**. This is the third occurrence of the family after
+  `data.seoul.go.kr` and `api.data.gov.in`'s `q`, and the first where the
+  control was run *first* rather than after a false finding had been written
+  down. Enumeration is therefore the only usable route, and **two successive
+  runs were truncated by my own page caps** (600, then exactly 4,000 = the cap
+  x 10) - **a cap reached is not a catalogue exhausted**, and both stopped
+  while still returning new rows.
 
 ### 2026-09-23 - Lyon's discard row spent a day in the wrong table
 

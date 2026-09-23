@@ -94,9 +94,30 @@ USUAL_NAME_COLUMN = "denominationUsuelleEtablissement"
 # a sole trader's shop is its own siege. Recorded so nobody tries.
 SIEGE_COLUMN = "etablissementSiege"
 
-# Employee-count band. "000" means no employees. The Paris measurement used
-# this to go from 148,633 to 50,156.
+# Employee-count band. **NO EMPLOYEE FILTER IS APPLIED IN FRANCE**, and this
+# constant exists to record that rather than to enable one.
+#
+# This comment used to read: *"000 means no employees. The Paris measurement
+# used this to go from 148,633 to 50,156."* **The Paris build disproved it on
+# 2026-09-23, measuring all 149,166 bucket rows:**
+#
+#     trancheEffectifsEtablissement == "NN"   115,248   77.3%
+#     every banded row together                33,918
+#     rows recording "00"                       1,425
+#
+# So the largest cut this column can make falls **16,000 short** of 50,156 -
+# the number is not reachable from this column at all. And dropping `NN` is
+# separately wrong: with only 1,425 rows at "00", **SIRENE codes a sole trader
+# as NN**, so that band holds every owner-run shop in the country.
+#
+# THE SHAPE OF THE ERROR, which is the part worth carrying: 50,156 was
+# produced by tuning a filter until its output matched OSM, then recorded as a
+# measurement. The OSM side reproduced on re-test (9,058 restaurants against a
+# recorded 10,642); the SIRENE side did not (16,280 against a recorded 10,595).
+# **When one side of a comparison reproduces and the other does not, the
+# non-reproducing side is where the tuning happened.**
 EMPLOYEE_BAND_COLUMN = "trancheEffectifsEtablissement"
+EMPLOYEE_FILTER_APPLIED = False
 
 # France masks non-diffusible records AT SOURCE - the name, the address and
 # the geolocation - so the privacy work is partly done upstream. 13.4% of

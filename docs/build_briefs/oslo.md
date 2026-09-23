@@ -207,21 +207,78 @@ attribution line.** Do not collapse them into one credit.
 ## Still unknown — the honest list
 
 - ~~Both licences~~ — ✅ **read 2026-09-23**, NLOD and CC BY 4.0.
-- **Rail station COUNT** — the Entur feed is confirmed; its route types and station count are not read, and the Overpass cross-check failed.
-- ⚠️ **`navn` is POPULATED BUT MESSY — a different problem from Milan's and
-  Paris's, and it is not yet solved.** Measured on all **13,458** Oslo bucket
-  sub-units: **0 blank**, **41.2% end in a legal-form suffix** (`AS`, `ASA`,
-  `SA`, `ANS`…), 58.8% do not. **But the 58.8% is not a clean trade-name
-  share**: the examples show many are *legal name + branch*, e.g.
-  `CIRCLE K NORGE AS AVD 57015 - AUTOMAT TRONDHEIMSVEIEN`,
-  `COOP ØST SA AVD 2515 COOP PRIX SØRENGA`, `SAFE BIL AS AVD OSLO`.
-  **`AVD` — *avdeling*, branch — is the marker.** Genuine trade names do
-  appear (`MENY SKØYEN`, `BAKER HANSEN MAJORSTUKRYSSET`), so the usable share
-  sits **below 58.8% and is unmeasured**.
-  **Milan and Paris had EMPTY name fields; Oslo has FULL but noisy ones** — so
-  the work is a cleanup rule (strip `AVD <code>` tails, drop legal suffixes),
-  not a fallback join.
+- ~~Rail station COUNT~~ — ✅ **answered in this brief's own rail section**:
+  **11 routes, 356 stops, 177 distinct parent stations.** This line said it
+  was unread while the section above stated it; **a "still unknown" list goes
+  stale the same way prose does.**
+- ~~`navn` usable share~~ — ✅ **MEASURED 2026-09-23, and the framing was
+  wrong.** See the section below; it is **100%**, and the real problem is a
+  different one.
 - **Scope** — Oslo kommune only, or the wider Osloområdet.
+
+---
+
+## 🚨 The name problem is NOT messiness — it is WHOSE name it is
+
+**Measured 2026-09-23 on all 13,481 Oslo bucket sub-units** (NACE 47/56/96,
+`beliggenhetsadresse.kommunenummer = 0301`).
+
+### The cleanup question is settled, and it was never the issue
+
+| | |
+|---|---|
+| Blank `navn` | **0** |
+| End in a legal-form suffix (`AS`, `SA`, `ANS`…) | **41.3%** |
+| Contain an `AVD` branch tail | **12.2%** — not the majority this brief implied |
+| **Survive the cleanup rule** | ✅ **100.0%** — 0 empty |
+| Changed by it | 53.4% |
+
+⚠️ **The earlier reading — "usable share sits below 58.8%" — was wrong, and
+wrong in a specific way worth keeping.** It treated a legal-form suffix as
+*damage*. It is not: **`1 ØRE AS` → `1 ØRE` is a perfectly good trade name**,
+and so are `7 DAYS MINI MARKED`, `377 SPORT`, `A DAY'S MARCH SHIRTS & STAPLES
+NORWAY`. A two-character trim is not a data quality problem. **Oslo's names
+are the best in this project** — 100% against Paris's 39.6% and Rennes' 53.5%.
+
+### 🚨 But 28.6% of them may be A PERSON'S OWN NAME
+
+| | |
+|---|---|
+| Sub-units carrying `overordnetEnhet` (the join key) | ✅ **100.0%** |
+| Parent is **`ENK`** — *enkeltpersonforetak*, sole trader | ⚠️ **28.6%** (63 of 220 sampled parents) |
+| …of those, sub-unit `navn` **identical to parent** `navn` | **54 of 63 — 86%** |
+| Paris's comparable figure | **8.7%** |
+
+**Oslo is more than three times more exposed than Paris**, and this project's
+standing invariant is explicit: a trade name is fair game, a registrant's own
+name at what looks like their premises is not.
+
+### ⚠️ THE TRAP — and it is the registered-office trap in a FIFTH costume
+
+**`organisasjonsform` on the sub-unit is populated on 100% of rows and is
+useless for this.** It returns **`BEDR` 97.7% / `AAFY` 2.3% and ZERO `ENK`** —
+because those are *sub-unit* forms. **The field exists, is complete, and
+answers a different question than the one asked of it.**
+
+The legal form lives on the **parent `enhet`**, reached by `overordnetEnhet`:
+
+```
+https://data.brreg.no/enhetsregisteret/api/enheter/{overordnetEnhet}
+```
+
+**This is exactly France's shape** — `categorieJuridiqueUniteLegale` lives on
+the *unité légale*, never on the *établissement* — and Oslo's brief had no
+equivalent rule until now. **Reading `organisasjonsform` off the sub-unit
+would have returned a clean 0% natural persons and been believed.**
+
+### So the build rule is
+
+1. **Join every sub-unit to its parent** on `overordnetEnhet` (100% available).
+2. **Suppress the name where the parent is `ENK`**; fall back to the address,
+   as Paris does.
+3. Expect usable names to land near **71%** — still the best in the project.
+4. **`check_personal_exposure.py` is load-bearing here, not a formality**, and
+   it needs a Norwegian-aware pass before Oslo ships.
 
 ```brief-checks
 [
@@ -245,6 +302,20 @@ attribution line.** Do not collapse them into one credit.
     "kind": "http_ok",
     "url": "https://data.brreg.no/enhetsregisteret/api/underenheter?kommunenummer=0301&size=1",
     "min_bytes": 200
+  },
+  {
+    "id": "brreg-legal-form-is-on-the-PARENT-not-the-subunit",
+    "claim": "THE PRIVACY GUARD, and the trap that hides it. A sub-unit's own organisasjonsform is BEDR or AAFY on 100% of rows and NEVER ENK, because those are sub-unit forms - a complete, populated field that answers a different question. The sole-trader form lives on the parent enhet, reached by overordnetEnhet, which 100% of sub-units carry. Sampling 220 parents: 28.6% are ENK, and 86% of those share the sub-unit's name. Reading the sub-unit field instead would report 0% natural persons and be believed",
+    "kind": "http_contains",
+    "url": "https://data.brreg.no/enhetsregisteret/api/underenheter?kommunenummer=0301&naeringskode=47&size=1",
+    "contains": "overordnetEnhet"
+  },
+  {
+    "id": "brreg-enheter-endpoint-serves-the-legal-form",
+    "claim": "The parent endpoint is live and returns organisasjonsform, which is where ENK is actually visible. If this breaks, Oslo has no natural-person guard and must not ship - Norway is 3x more exposed than Paris at 28.6% against 8.7%",
+    "kind": "http_contains",
+    "url": "https://data.brreg.no/enhetsregisteret/api/enheter?kommunenummer=0301&organisasjonsform=ENK&size=1",
+    "contains": "ENK"
   }
 ]
 ```
