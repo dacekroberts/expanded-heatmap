@@ -1,0 +1,18 @@
+MESSAGE CORRECTION. Three backticked phrases were silently emptied from this
+commit's message when it was written with an inline `git commit -m` containing
+backticks: bash command-substituted them, which is the exact failure CLAUDE.md
+warns about and forbids. The commit's CONTENT is unaffected. The three gaps,
+restored:
+
+  "... the README says to hash the COMMITTED file. [cta-developer-license-
+   agreement.html] is 230,064 bytes committed and 232,828 on a Windows
+   checkout ..."
+
+  "... The markdown-link and citation walks followed [.claude/**/*.md] into
+   [.claude/worktrees/<session>/.venv-lean/], and reported a broken link in
+   STREAMLIT'S OWN BUNDLED DOCUMENTATION ..."
+
+Recorded as a git note rather than by amending: by the time it was noticed this
+commit was three commits back, behind a merge and already pushed, so rewording
+it would have meant rebasing pushed history and force-pushing. A note attaches
+to this exact commit and rewrites nothing.
