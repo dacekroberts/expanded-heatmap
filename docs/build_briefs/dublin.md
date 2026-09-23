@@ -257,11 +257,58 @@ built rail, not about where Dublin has shops.
 
 ## Rail leg — Luas Red, Luas Green, DART
 
+### ⚠️ CORRECTED DURING THE BUILD 2026-09-22 — the source is the AGENCY FEED
+
+**This section originally read "Rail — OpenStreetMap, not a feed", and that was
+wrong** — not in its facts about OSM, but in never having asked the question.
+The `osm-rail` order is agency GIS layers → agency GTFS → OSM **on a recorded
+ground**, and neither of the first two had been run when this brief was
+written. Both pass:
+
+- **NTA national GTFS**, `transportforireland.ie/transitData/Data/GTFS_All.zip`
+  — 158 MB, `feed_end_date` **20270922** (a year out), `shapes.txt` present,
+  and it carries **Woodbrook, a station that opened in 2025**, so it is
+  maintained rather than a re-uploaded archive. Routes drawn:
+  `10000 GREEN g a` and `10000 RED g a` (`route_type 0`), `BRAY-HOWTH-I` (`2`).
+- **NTA Feature Service**, `services-eu1.arcgis.com/p0UmGrpumWZYhF0p/` —
+  14,079 stops, 6,507 route polylines, **already EPSG:2157**, with
+  `local_authority` pre-populated in the boundary layer's own spelling.
+
+**This is Madrid's failure in its general form**, and worth carrying into
+`osm-rail` as a sharper rule: *a brief may not record OSM as the rail source
+without naming the agency endpoints that were tried.* "No usable feed" is a
+measurement, and here it was an assumption.
+
+Two corrections follow from the change:
+
+- **`route_color` is EMPTY for all three routes**, in both the feed and the
+  feature service. "All three lines already carry a colour" was true **of OSM
+  only**, so the palette is chosen against `map_common`'s CIE76 check instead —
+  Luas Red `#8B0000`, Luas Green `#006400`, DART `#F57C00`. The two Luas lines
+  stay below the preferred 45 because nothing red or green clears it; DART
+  moves off green entirely, which also stops the map having two green lines.
+- **DART's `route_long_name` is `Bray - Howth`**, understating a line whose own
+  stops run Malahide to Greystones. Label it `DART` (`route_short_name`).
+
+### OSM is retained as the CROSS-CHECK
+
 **42 route relations**, measured via `overpass-api.de`. ⚠️ `overpass.osm.ch`
 returned an **empty 200** for the same query on the same day —
-`brief_check.py`'s `_overpass_once` already rejects that, and the first attempt
-here bypassed it and would have recorded "0 relations" against a real 42. Use
-the project's own Overpass path, never a hand-rolled one.
+`pipeline/osm.py` already rejects that, and the first attempt here bypassed it
+and would have recorded "0 relations" against a real 42. Use the project's own
+Overpass path, never a hand-rolled one.
+
+Agreement measured at build time: **GTFS 98 station names, OSM 100, 88 shared**
+— the differences are spelling (`Abbey St.` / `Abbey Street`, `Bray (Daly)` /
+`Bray Daly`), plus two OSM entries the feed resolves better: `Connolly Station`
+as a second Connolly, and `Fortunestown Tram Stop` as a duplicate of
+`Fortunestown`.
+
+⚠️ **OSM TAGS ALL FOUR DART RELATIONS `network=Commuter`**, the same value the
+Northern, Western and South Western services carry. A `network` filter drops
+Dublin's principal line — proved by a run, before the source changed. The
+whitelist is on `ref`. `osm-rail`'s "a `network` tag is a label, not evidence",
+measured a third time.
 
 | Group | Relations | Refs | Colour on OSM |
 |---|---|---|---|
@@ -518,6 +565,28 @@ LA, Philadelphia and San Diego all needed does not arise either.
     "kind": "http_ok",
     "url": "https://opendata.tailte.ie/api/Property/GetProperties?Fields=*&LocalAuthority=DUN%20LAOGHAIRE%20RATHDOWN%20CO%20CO&Format=json&Download=false",
     "min_bytes": 1500000
+  },
+  {
+    "id": "nta-gtfs-downloads",
+    "claim": "The NTA national GTFS downloads with no key, ~158 MB. THIS IS THE RAIL SOURCE - the brief originally said OpenStreetMap and was corrected during the build, because neither agency route had been probed",
+    "kind": "http_ok",
+    "url": "https://www.transportforireland.ie/transitData/Data/GTFS_All.zip",
+    "min_bytes": 100000000
+  },
+  {
+    "id": "nta-gtfs-has-shapes",
+    "claim": "The feed carries shapes.txt, so the three lines can be drawn, and feed_info.txt, so staleness is checkable rather than assumed",
+    "kind": "gtfs_files",
+    "url": "https://www.transportforireland.ie/transitData/Data/GTFS_All.zip",
+    "present": ["routes.txt", "trips.txt", "stop_times.txt", "stops.txt", "shapes.txt", "feed_info.txt"],
+    "absent": []
+  },
+  {
+    "id": "nta-gtfs-is-current",
+    "claim": "The feed declares feed_end_date 20270922 - a year out. When this check FAILS the NTA has republished, and the trimmed zip in data/dublin/raw/ should be refreshed with fetch_sources.py --force before trusting a drift check",
+    "kind": "gtfs_feed_window",
+    "url": "https://www.transportforireland.ie/transitData/Data/GTFS_All.zip",
+    "expect": "current"
   },
   {
     "id": "valoff-is-retired",

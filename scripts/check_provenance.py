@@ -285,6 +285,22 @@ def displayed_notices():
 # 326xx WGS84 UTM north, 258xx ETRS89 UTM, 269xx NAD83 UTM, 327xx WGS84 south.
 UTM_FAMILIES = (326, 327, 258, 269)
 
+# A national grid is admitted where the country publishes its data in one and a
+# UTM zone would mean transforming OUT of the CRS the publisher measured in.
+# This is not a relaxation: each entry still has to contain the city's own
+# longitude, so a copied CRS fails here exactly as it does for UTM. What it
+# stops asserting is that "projected metres" must always mean "UTM", which was
+# only ever true of the cities built so far.
+#
+# Add an entry only with the evidence that the SOURCES ship in it - not because
+# a national grid exists. Ireland qualifies because both Tailte Eireann's
+# valuation register (Xitm/Yitm) and its boundary layer (wkid 2157) are already
+# EPSG:2157, and Dublin sits within a quarter-degree of UTM zone 29's eastern
+# edge, where that zone's distortion is worst.
+NATIONAL_GRIDS = {
+    2157: ("Irish Transverse Mercator", -11.0, -5.0),   # Ireland
+}
+
 
 def check_invariants(names, lons):
     """K: three CLAUDE.md invariants a new city could break silently."""
@@ -314,9 +330,17 @@ def check_invariants(names, lons):
         epsg = int(m.group(1))
         family, zone = divmod(epsg, 100)
         implied = int((lon + 180) // 6) + 1
-        if family not in UTM_FAMILIES:
+        if epsg in NATIONAL_GRIDS:
+            grid, west, east = NATIONAL_GRIDS[epsg]
+            if not west <= lon <= east:
+                problems.append(
+                    f"{slug}: CRS_PROJECTED EPSG:{epsg} is {grid}, whose "
+                    f"domain is {west} to {east}, but longitude {lon:.2f} is "
+                    f"outside it - a national grid is still per-city")
+        elif family not in UTM_FAMILIES:
             problems.append(f"{slug}: CRS_PROJECTED EPSG:{epsg} is not a UTM "
-                            f"zone - the invariant is a per-city UTM in metres")
+                            f"zone and not a documented national grid - the "
+                            f"invariant is per-city projected metres")
         elif zone != implied:
             problems.append(
                 f"{slug}: CRS_PROJECTED EPSG:{epsg} is UTM zone {zone}, but "

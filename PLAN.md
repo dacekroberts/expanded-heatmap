@@ -374,6 +374,20 @@ Desktop is unaffected — the label is fully visible there.
 
 ## Structure
 
+- [ ] **Collapse the European macro-map regions into one "Europe", and zoom
+  that view out.** `app/cities.py` currently gives every European country its
+  own `region` - **Spain** (Madrid, Barcelona) and now **Ireland** (Dublin,
+  alone) - which was fine at one country and does not scale: each new country
+  adds a region holding one or two cities, and the switcher becomes a list of
+  countries rather than a map of anywhere. Owner's call, 2026-09-22: make it a
+  single **Europe** region and widen the framing as coverage grows. Not urgent
+  and deliberately not done during the Dublin build, because it changes the
+  macro map for cities that are already live and so belongs with a
+  `deploy-verify` rather than beside a new city. Two things to do together when
+  it happens: the `region` values, and each affected city's `label_offset`,
+  which is scored per region by `scripts/check_macro_labels.py` and will move
+  when the framing does.
+
 - [x] ~~Move GUADALAJARA's and MADRID's fetching out of their step files~~ -
   **done 2026-09-22; all three exceptions are closed.** Mexico City first as
   the worked pattern, Madrid by its own session on the unmerged
