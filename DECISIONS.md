@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**178 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**179 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Paris's two owner calls settled, and commune-only costs it no transit system](#2026-09-22---pariss-two-owner-calls-settled-and-commune-only-costs-it-no-transit-system)
 - [The heredoc rule was written down four times and broken four times, so it became a hook](#2026-09-22---the-heredoc-rule-was-written-down-four-times-and-broken-four-times-so-it-became-a-hook)
 - [A front-page caption counted nine cities twice, and the drafted letters were in two places](#2026-09-22---a-front-page-caption-counted-nine-cities-twice-and-the-drafted-letters-were-in-two-places)
 - [Dublin's tooltip showed a placeholder the classifier had been dropping all along](#2026-09-22---dublins-tooltip-showed-a-placeholder-the-classifier-had-been-dropping-all-along)
@@ -214,6 +215,68 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Paris's two owner calls settled, and commune-only costs it no transit system
+
+- **Paris is scoped COMMUNE-ONLY, and the decision is a measurement rather than
+  a default.** Measured from IDFM's own GTFS against France's own commune
+  contour (`geo.api.gouv.fr/communes/75056`, 105.4 km², matching Paris's ~105):
+  **métro 245 stations inside / 77 outside (76.1%)**, tram 60/227 (20.9%),
+  RER and Transilien 38/437 (8.0%), funicular 2/0. **All sixteen métro lines
+  survive the boundary** - every one has stations inside, none is lost, and the
+  worst-truncated are M14 (12 of 21) and M13 (19 of 32) while M2, M6, M3B and
+  M7B are wholly inside. **The two modes that are mostly outside would not be
+  drawn at any scope**: RER and Transilien are commuter rail, excluded by the
+  standing rule in every built city, and trams are excluded in Barcelona, Milan
+  and Toronto already. So regional scope buys Paris almost nothing - **the
+  opposite of Dublin**, which went regional because its REGISTER is published
+  per local authority and the city alone held 8,016 of 13,945 storefronts, with
+  the rail a consequence rather than the reason. Paris's register does not care
+  (`codeCommuneEtablissement` is a prefix list). The rejected alternative was
+  adding the petite couronne, which would have cost a new boundary layer and a
+  rail filter to gain modes the project excludes.
+- **Paris's pins take the MILAN HYBRID: the premises name where it exists, the
+  address otherwise, and the legal-name join is not built at all.** This is a
+  fourth option the brief's own list omitted, and it is what both recently
+  built cities converged on independently - Milan shows `insegna` on ~20% of
+  rows and `Ubicazione` on the rest, Dublin shows the address on all of them
+  because its register has no name column. **The rejected alternative is the
+  guarded legal-name fallback, and it was rejected although it is MEASURED AS
+  SAFE**, because "safe if the guard is built" is doing real work in that
+  sentence: the guard would be the only thing between the build and roughly ten
+  thousand individuals' names, against the ~4,000 Los Angeles nearly published.
+  The hybrid needs no guard, carries zero residual exposure, and is less work.
+  The measurement is kept in the brief anyway, because it is what makes this a
+  decision rather than an avoidance.
+- **Closed France's `categorieJuridique` gap, which its profile stated as a
+  rule without naming a field or measuring a split.** Via
+  `recherche-entreprises.api.gouv.fr` (official, keyless), which carries
+  `nature_juridique` at company level and `liste_enseignes`/`nom_commercial` at
+  establishment level - so the `StockUniteLegale` join the profile worried
+  about is already made there. 750 active Paris rows, 250 per bucket, ten pages
+  spread through each section: **8.7% are natural persons, 27.3% carry a
+  premises name, and of the UNNAMED rows only 9.4% are natural persons.** So
+  nine in ten unnamed rows are companies and the fallback would have been worth
+  building - which is what makes declining it a choice rather than a dodge.
+  Both figures are floors: this API does not expose
+  `denominationUsuelleEtablissement`, which the profile's 42.9% was measured
+  from, so the rows counted unnamed here are disproportionately companies.
+- **⚠️ A FIRST ATTEMPT AT THAT MEASUREMENT WAS WRONG AND LOOKED RIGHT.**
+  `total_results` on that API **saturates at 10,000**: every bucket returned
+  exactly 10,000 and two returned "100% personne physique", which is plainly
+  false for Paris retail - the session's first query had already returned
+  DISTRIBUTION CASINO FRANCE, nature juridique 5710. The control had tested
+  that the filter was VALIDATED (a nonsense value returns HTTP 400), not that
+  the count was TRUTHFUL. **A cap is a plausible number, which is what makes it
+  dangerous**, and it is the same family as `add-country`'s ignored-search-term
+  trap: shares come from sampled records, never from that API's counts.
+- **Recorded that Licence Mobilités is REVOCABLE, which is new in kind here.**
+  Art. 11.1 terminates *de plein droit, sans préavis* on breach. Every other
+  source in this project is a perpetual grant - CC BY, Licence Ouverte, PSI,
+  ODbL - so Paris is the first city whose licence can end without notice for a
+  reason outside the project's control. The standing commitment already honours
+  removal requests; this makes one automatic, and it belongs in the deploy
+  decision rather than in a footnote.
 
 ### 2026-09-22 - The heredoc rule was written down four times and broken four times, so it became a hook
 
