@@ -28,8 +28,15 @@ python scripts/scaffold_city.py --slug dallas --name Dallas --system-name DART \
 
 **What it writes:** `pipeline/<slug>/__init__.py`, `config.py`,
 `step<N>_map.py`; `data/<slug>/{raw,processed}` and `outputs/<slug>/`;
-`app/pages/<n>_<Name>_Heatmap.py` (next free number); and the `app/cities.py`
+`app/pages/<n>_<Slug>_Heatmap.py` (next free number); and the `app/cities.py`
 entry. Every value only the city's data can supply is a `TODO`.
+
+**The page is named from `--slug`, not `--name`**, so "Lille (Regional)" gets
+`24_Lille_Heatmap.py`. The live station table finds each city's `outputs/`
+directory by reading it back out of the page filename, so a display name's
+brackets, accents or dots in the filename leave that city's row empty.
+Guadalajara and Lille both hit this and renamed their pages by hand before the
+scaffold was fixed; it now refuses to write a page that does not resolve.
 
 ## Custom taxonomies
 

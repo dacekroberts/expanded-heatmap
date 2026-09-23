@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**244 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**245 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [The scaffold names a city's page from its slug, not its display name](#2026-09-23---the-scaffold-names-a-citys-page-from-its-slug-not-its-display-name)
 - [Lille made "three regional maps" four within the hour](#2026-09-23---lille-made-three-regional-maps-four-within-the-hour)
 - [Taiwan is a door-plate JOIN at 92.5%, not a geocoding project; Rio's rail licence permits, Sao Paulo's is ambiguous](#2026-09-23---taiwan-is-a-door-plate-join-at-925-not-a-geocoding-project-rios-rail-licence-permits-sao-paulos-is-ambiguous)
 - [Two handoffs verified; one held a vacuous pass, one was overtaken by events](#2026-09-23---two-handoffs-verified-one-held-a-vacuous-pass-one-was-overtaken-by-events)
@@ -283,6 +284,36 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - The scaffold names a city's page from its slug, not its display name
+
+- **`scripts/scaffold_city.py` now builds the page filename from `--slug`**,
+  so "Lille (Regional)" gets `24_Lille_Heatmap.py` rather than
+  `24_Lille_(Regional)_Heatmap.py`. The live station table on the exclusions
+  page reads each city's `outputs/` directory back OUT of its page filename
+  (`app/station_scope.py`'s `slug()`), and a display name carries its
+  brackets, accents and dots through: `lille_(regional)` resolved to nothing,
+  and "Montréal" or "Washington D.C." would have failed the same way.
+  Guadalajara and Lille both met it through `check_scope_disclosure.py`'s
+  property C and renamed their pages by hand - to exactly the name the
+  scaffold now produces. The slug IS the outputs directory, so a filename built
+  from it resolves by construction.
+
+- **Rejected: teaching `station_scope.slug()` to strip brackets and accents
+  instead.** That module is imported by the live app, so editing it costs a
+  reboot, and it would be widening a reader to accept names the writer had no
+  reason to produce. Fixing the writer costs nothing to deploy, because the app
+  never imports the scaffold.
+
+- **Two guards came with it.** A re-run finds the city's existing page BY SLUG,
+  the same test the live table applies - under the old name-based glob,
+  re-scaffolding Lille would have missed its hand-renamed page and written a
+  second one. And the scaffold refuses outright if a page it is about to write
+  would not resolve, importing `slug()` from `station_scope.py` rather than
+  restating it. Dry runs: "Testville (Regional)" -> `25_Testville_Heatmap.py`,
+  "Montréal-Nord" -> `25_Montreal_Nord_Heatmap.py`, a Lille re-run -> "skip
+  (exists): 24_Lille_Heatmap.py"; the committed version, for the same regional
+  name, would have written `25_Testville_(Regional)_Heatmap.py`.
 
 ### 2026-09-23 - Lille made "three regional maps" four within the hour
 
