@@ -993,6 +993,71 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Tel Aviv's licence was read, and it reverses the promotion made the same
+  day: the position is a PROHIBITION, not the silence that "unread" implied.**
+  Read from the Internet Archive, because every page carrying terms sits
+  behind the 472 block. The municipal Terms of Use forbid copying,
+  reproducing, distributing, publishing and storing the content; forbid
+  **using it to create a database or compilation**; extend to **other
+  websites** and to **non-commercial** use; and require **explicit prior
+  written consent**. Their definition of *contents* names **`maagar netunim`,
+  a database**. The open-data portal's own archived footer reads **"all
+  rights reserved to the Tel Aviv-Yafo Municipality"**. The ArcGIS server
+  root, `/rest/info` and the service all carry **no licenseInfo and no
+  copyrightText**, and Tel Aviv is not among `data.gov.il`'s four municipal
+  publishers, so there is nothing to inherit. Touched
+  `docs/city_master_list.md`, `docs/gated_access.md`.
+
+- **The counter-reading is recorded rather than used, because
+  `read-licence` step 8 forbids resolving an ambiguity in this project's
+  favour.** The Terms are titled *terms of use of the WEBSITE*, say "the
+  site's content" throughout, and the data sits on a **different host**
+  (`gisn.tel-aviv.gov.il`) - which is exactly the **New York** situation the
+  skill records, where an "All Rights Reserved" footer governed site content
+  while the data was in fact unrestricted. **But New York had Local Law 11 of
+  2012 affirmatively forbidding the City to attach restrictions to open data,
+  and nothing equivalent is established for Tel Aviv**; the Terms explicitly
+  name databases; and the open-data portal asserts rights rather than
+  granting them. On the evidence the restrictive reading is materially
+  stronger. **Tel Aviv is therefore not buildable on what is known**, and the
+  remedy is a written request to the Municipality, which the Terms name as
+  the route - the Philadelphia shape, with the difference that Philadelphia
+  is already published on a disclosed position while Tel Aviv is not built
+  and should not be.
+
+- **Prague probed: location found, activity absent, and the promising hits
+  were a false friend.** `data.gov.cz/sparql` answers and its control passes.
+  **`Registr osob - aktivni provozovny`** is a genuine national open CSV of
+  **active establishments** - 58.5 MB, updated 2026-09-01 - carrying `ICP`,
+  `ICO`, dates and **`PKODADM`, a RUIAN address code**, which is a join to the
+  national address register rather than a geocode and therefore much cheaper
+  than Band C's problem. **But no activity column exists anywhere in ROS**:
+  `ros01_data.csv` is 532 MB of companies with `FIRMA` and `FORMA` - legal
+  form, not NACE. That is the Colombia-RUES shape, the exact inverse of
+  Tallinn's. And the `121-xx` and `476-5: Provozovna` hits **do** carry
+  distributions, which is why they looked real - but those resolve to
+  `slovnik.gov.cz` **ontology files**, 91 KB of `skos:Concept` and
+  `owl:DatatypeProperty` defining the trade-business agenda. **A vocabulary,
+  not data** - the Budapest shape, where an inventory reads like a catalogue
+  until one entry is opened. `rzp.gov.cz/opendata/` is 404, so the trade
+  register's per-establishment fields are queryable per subject and not
+  published in bulk.
+
+- **Dublin: the licence is good and the host is unreachable, which is a
+  different answer from either half alone.** `data.gov.ie`'s Valuation Office
+  API is **CC BY 4.0** - a clean licence, rare in this screen - but
+  `api.valoff.ie`, `api.tailte.ie` and `valoff.ie/api/...` **all return 000**.
+  The deciding question is still unasked: does the Irish rateable register
+  carry a **use category**? The UK's NNDR did not, and that killed the UK.
+
+- **Singapore: paging confirmed before spending 463 requests on it.** Pages 1,
+  5, 50, 200 and 463 return five different first-items, and page 463 returns
+  8 rather than 10, which independently confirms the declared 4,628. So the
+  enumeration route is real and the earlier inert-query finding does not
+  extend to paging. **Not yet run** - recorded as measured-and-pending rather
+  than attempted, so the next session does not re-derive it.
+
+
 - **Confirmed Stockholm and Zurich are genuinely one-bucket by ENUMERATING
   both catalogues, after the original negatives rested on keyword search.**
   Stockholm: **309 dcat:Dataset records** pulled from the Entryscape store via
