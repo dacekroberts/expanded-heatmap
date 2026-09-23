@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**196 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**197 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [ODbL read for Toulouse and Rennes; Marseille's OSM validation holds](#2026-09-23---odbl-read-for-toulouse-and-rennes-marseilles-osm-validation-holds)
 - [Hong Kong's two fields read, Oslo's rail measured, and Oslo's names are full but noisy](#2026-09-23---hong-kongs-two-fields-read-oslos-rail-measured-and-oslos-names-are-full-but-noisy)
 - [All six French cities measured on ONE sample; a correction of my own correction](#2026-09-23---all-six-french-cities-measured-on-one-sample-a-correction-of-my-own-correction)
 - [Marseille brief written; its feed covers more cities than its register](#2026-09-23---marseille-brief-written-its-feed-covers-more-cities-than-its-register)
@@ -235,6 +236,74 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - ODbL read for Toulouse and Rennes; Marseille's OSM validation holds
+
+- **ODbL is PERMITTED WITH CONDITIONS, and the deciding clause is §4.5(b).**
+  *"Using this Database ... to create a Produced Work does not create a
+  Derivative Database for purposes of Section 4.4"* - so **the rendered map
+  does not trigger share-alike**, settled rather than arguable. Written up at
+  `docs/licenses/odbl-toulouse-rennes.md`.
+
+- **But §4.6 reaches this project through a route §4.5(b) does not close.**
+  It fires on *"a Derivative Database **or a Produced Work from a Derivative
+  Database**"* - and this project's map is produced from the **committed
+  station CSV**, not directly from the feed. The obligation is to offer
+  recipients either the whole derivative or *"a file containing all of the
+  alterations ... **or the method of making the alterations (such as an
+  algorithm)**"*. **The public repository already satisfies it**, because the
+  pipeline code IS the method - **provided the repo is LINKED from the site**,
+  since an unlinked repo is not an offer. **Licence Mobilites Art. 5.8 asks
+  for the same thing**, so one repository link discharges two different French
+  licences.
+
+- **Left open deliberately: whether the committed station CSV is itself a
+  Derivative Database under §4.4.** It is an extraction of a substantial part
+  of `stops.txt` rearranged into a new table, which ODbL's definition reaches;
+  it is also a filtered subset adding no information. **Not resolved in this
+  project's favour, and unlike Paris there is no publisher gloss to lean on** -
+  Licence Mobilites was rescued by the NAP's *published* interpretation filing
+  this project's shape under "no resharing required"; **ODbL has no
+  equivalent** and its standard text is stricter. **Recommended cheap
+  discharge: put an ODbL notice on the station CSV**, which moots the question
+  for one line, the same move taken for Paris.
+
+- **The existing OpenStreetMap ODbL notice does NOT discharge these.** §4.3
+  requires the notice to identify **which** database the content came from, so
+  Toulouse and Rennes each need their own, using the licence's own safe-harbour
+  wording: *"Contains information from Reseau urbain Tisseo/STAR, which is made
+  available here under the Open Database License (ODbL)."*
+
+- **The publishers' own CGU are STILL UNREAD, and the reason is worth
+  recording.** An automated read hit a **Cloudflare interactive challenge
+  carrying a Ray ID and refused to complete it** - correctly, because this
+  project does not defeat bot detection - then spent **47 minutes** seeking
+  legitimate alternate routes before being stopped. **That gap is exactly the
+  one that defers Lyon**: Grand Lyon's CGU added an open-ended indemnity and a
+  bar on the producers' *signes distinctifs*, which collides with the invariant
+  that every drawn line carries its real name - **Tisseo** and **STAR**
+  respectively. **Neither city should ship until those CGU are read**, in a
+  browser where a person can pass the challenge legitimately.
+
+- **Marseille's OSM composition validation RUN, and the SIRENE filter HOLDS.**
+  The employee rule had to be **recovered first because it was never written
+  down**: the `trancheEffectifsEtablissement` distribution shows that
+  **dropping `NN`** - effectifs not reported, **68.2% of Paris bucket rows** -
+  leaves **31.8%**, against the recorded 50,156/148,633 = **33.7%**, within
+  sampling variance. Applying the same rule to Marseille gives **≈6,800
+  against OSM's 6,340, ≈107%**, where Paris was **92.5%**.
+
+- **Both cities land near parity, which is what validation means here - and
+  the swing is informative rather than alarming.** 92.5% against 107% says the
+  comparison **measures OSM's completeness as much as SIRENE's**: Paris is
+  densely mapped so OSM overshoots, Marseille less so and SIRENE overshoots
+  instead. **The filter is not systematically wrong**, which is what four more
+  French cities needed to know.
+
+- ⚠️ **The original Paris comparison's QUERY was never recorded**, so
+  today's OSM side is a reconstruction and the result is **indicative rather
+  than an exact reproduction**. That is a genuine gap in a check meant to be
+  reused across five more cities - **write the query down**.
 
 ### 2026-09-23 - Hong Kong's two fields read, Oslo's rail measured, and Oslo's names are full but noisy
 

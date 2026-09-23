@@ -480,12 +480,21 @@ mistakes as confidently as its findings.
   brief-ready; country-ready.** No brief file exists for any of them. They
   inherit France's register, join and privacy handling, but **three things do
   NOT transfer from Paris.**
-  1. ⚠️ **Their GTFS licences differ from Paris's and from each other.**
-     Paris is `mobility-licence`, read in full. **Marseille and Lille are
-     `lov2`; Toulouse and Rennes are `odc-odbl` — SHARE-ALIKE.** ODbL asks the
-     derivative-database question that Licence Mobilités answered its own way
-     via a published NAP interpretation; **ODbL has no such gloss**, and this
-     project commits `outputs/<city>/`. **Read before building either pair.**
+  1. **Their GTFS licences differ from Paris's and from each other.**
+     ✅ **ODbL READ 2026-09-23** for Toulouse and Rennes — **PERMITTED WITH
+     CONDITIONS**, written up at `docs/licenses/odbl-toulouse-rennes.md`.
+     §4.5(b) settles the map: making a Produced Work **does not create a
+     Derivative Database**. But **§4.6 fires on a Produced Work *from* a
+     Derivative Database**, and the map is produced from the committed station
+     CSV — **already satisfied by the public repo**, which is literally *"the
+     method of making the alterations"*, **provided it is LINKED from the
+     site**. §4.3 prescribes a safe-harbour notice per database.
+     ⚠️ **Still open**: whether the station CSV is itself a Derivative
+     Database under §4.4. **Unlike Paris there is NO publisher gloss** —
+     Licence Mobilités had the NAP's published interpretation; ODbL has none.
+     **Cheap discharge: put an ODbL notice on the station CSV.**
+     ⚠️ **Marseille and Lille are `lov2`** — Licence Ouverte 2.0, whose own
+     terms cover **five sources** and are being read separately.
   2. ⚠️ **Scope does not transfer.** Paris went commune-only on a
      *measurement* — all 16 métro lines survived the boundary. Nothing
      guarantees that repeats: **Lille's commune is small against MEL**, whose
@@ -559,8 +568,21 @@ mistakes as confidently as its findings.
      car. Paris draws a funicular, so a gondola is a **judgment call**, not an
      automatic include. Marseille's **17 `route_type 2`** are TER regional
      rail and are excluded by the standing commuter-rail rule.
-  7. **OSM composition validation** — France's is validated on Paris only.
-     It lands on **Marseille**, the first follower.
+  7. ✅ **OSM composition validation RUN 2026-09-23 on Marseille, and the
+     filter HOLDS.** First the employee rule had to be **recovered**, because
+     it was never written down: the `trancheEffectifsEtablissement`
+     distribution shows **dropping `NN` (not reported) leaves 31.8% of Paris**
+     against the recorded 50,156/148,633 = **33.7%** — within sampling
+     variance. Applying the same rule: **Marseille ≈ 6,800 against OSM's
+     6,340 = ≈107%**, where Paris was **92.5%**.
+     **Both near parity, so the filter is not systematically wrong.** The
+     swing is informative rather than alarming: **it measures OSM's
+     completeness as much as SIRENE's** — Paris is densely mapped so OSM
+     overshoots, Marseille less so.
+     ⚠️ **The original Paris query was never recorded**, so today's OSM side
+     is a reconstruction (`shop=*` plus food `amenity` values) and the
+     comparison is **indicative, not an exact reproduction**. **Write the query
+     down this time** — four more cities are meant to reuse it.
 
 - [ ] **Göteborg** 🇸🇪 — promoted into Band D 2026-09-23. **One
   measurement away from being comparable to Stockholm.**
