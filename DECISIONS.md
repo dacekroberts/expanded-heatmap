@@ -16,7 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**181 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**182 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-09-23**
+
+- [France's taxonomy is national, and Paris takes Lambert-93](#2026-09-23---frances-taxonomy-is-national-and-paris-takes-lambert-93)
 
 **2026-09-22**
 
@@ -217,6 +221,85 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - France's taxonomy is national, and Paris takes Lambert-93
+
+- **NAF rev. 2 was built as a COUNTRY-level taxonomy rather than a Paris one -
+  the first module in `pipeline/taxonomies/` that is not a single city's.**
+  Every other module there belongs to one city because the register does;
+  SIRENE is one register for all of France, and
+  `pipeline/countries/france.py`'s `BUILD_SEQUENCE` names five cities that will
+  read it (paris, marseille, toulouse, lille, rennes). Keyed at the
+  sous-classe on the brief's measurement - **49.4% catch-all at *groupe*
+  against 19.3% at level 5** - which is Barcelona's shape and not Madrid's.
+  The three buckets map onto exactly three NAF divisions (47 commerce de
+  detail, 56 restauration, 96 autres services personnels) holding **64 level-5
+  codes**, against the **62** the brief measured as occurring in Paris, so two
+  codes simply do not appear there. Rejected: a `paris_naf` module, which would
+  have made the second French city either a copy or a divergence. Files:
+  `pipeline/taxonomies/france_naf.py`, `pipeline/taxonomies/__init__.py`.
+
+- **Two kinds of exclusion were kept apart rather than merged into one list.**
+  `NOT_PREMISES` (9 codes) is structural and national - distance selling,
+  market stalls, contract catering, wholesale laundry - where INSEE's own label
+  says the activity happens away from a shop, so the code is not a storefront
+  in Marseille either. `CATCH_ALL_CODES` (5 codes) is deliberately **not
+  applied** in the module: per `CLAUDE.md` a catch-all's composition is a fact
+  about a city, sampled per city and recorded in that city's config, and
+  `96.09Z` alone is **8.6%** of Paris's bucket rows - the French analogue of
+  the NAICS 812990 Los Angeles excludes. Merging the two lists would have let a
+  national module silently make a per-city call, which is the error the split
+  exists to prevent.
+
+- **Distance selling is four codes, not one.** `47.91A`, `47.91B`, `47.99A` and
+  `47.99B` together are **15.5%** of Paris's bucket rows. An earlier note put
+  `47.91B` at "24% of the retail division", which understated the problem by
+  looking at one code of four.
+
+- **Three exclusion calls recorded as calls, not as facts.** Market stalls
+  (`47.81Z`, `47.82Z`, `47.89Z`) are excluded because a pitch is not a
+  storefront and the registered address is the trader's own, but **their share
+  of Paris is UNMEASURED** - it needs the parquet - and the module says so
+  rather than implying the share is small. Contract catering (`56.29A`) follows
+  Milan's existing `mensa` exclusion, so it is precedent rather than fresh
+  judgement. Wholesale laundry (`96.01A`) is split from retail laundry
+  (`96.01B`) by INSEE's own *de gros* / *de detail* pair, so the publisher's
+  hierarchy made that call and not a reading of the French.
+
+- **Labels are INSEE's full wording, verbatim.** The 40-character form INSEE
+  also publishes was rejected as unreadable ("Com. det. quinc. pein. etc.
+  (mag.<400m2)"), and abbreviating the long form here would have put text this
+  project invented onto the map. Embedding the table in the module also keeps
+  step 2 offline, so no fetch script is needed for the classification.
+
+- **Paris projects to EPSG:2154 (Lambert-93), not the EPSG:32631 the scaffold
+  derived.** Three grounds, and the third is the deciding one: the source is
+  natively 2154 on **99.3%** of rows so its coordinates are never reprojected;
+  `france.py` already names `METROPOLITAN_EPSG = 2154`; and **metropolitan
+  France spans UTM zones 30N, 31N and 32N**, so a per-city UTM rule would give
+  five cities reading ONE national file three different projections. The
+  invariant is projected metres derived per city and never copied - deriving
+  from France's own grid satisfies it, and copying a UTM zone from Paris to
+  Lille would not. This is the project's second national grid after Dublin's
+  EPSG:2157. `scripts/check_provenance.py`'s `NATIONAL_GRIDS` gains 2154
+  **bounded to metropolitan longitudes (-5.5 to 10.0)**, because SIRENE's
+  per-row `epsg` column also carries 2975 (Reunion), 5490 (Antilles) and 2972
+  (Guyane): a Fort-de-France build inheriting a hard-coded 2154 would put every
+  pin in the sea **without raising**, and those bounds are what raises.
+
+- **The scaffold's region gate ran on its first real city and passed.**
+  `--region Europe` was accepted without `--new-region` because Europe is
+  already in `REGION_ORDER`, and `verify_app_imports()` reported
+  `app/cities.py imports: 21 cities, 7 regions`. The gate was added the
+  previous day after Dublin and Milan both shipped an unregistered region on
+  separate branches; this is the first evidence it works in the path that
+  should succeed rather than the path that should refuse.
+
+- **Paris is scaffolded, not built.** `check_provenance.py` names Paris as
+  having no recorded business registry, transit feed or boundary layer, and
+  that failure is correct and expected until those rows are written.
+  `step1_stations.py` and `step2_clean_businesses.py` are unwritten. Committed
+  as `5e0e3c6` on branch `paris-build`.
 
 ### 2026-09-22 - The scaffold now refuses an unregistered region instead of documenting it
 
