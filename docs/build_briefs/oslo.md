@@ -308,14 +308,14 @@ would have returned a clean 0% natural persons and been believed.**
     "claim": "THE PRIVACY GUARD, and the trap that hides it. A sub-unit's own organisasjonsform is BEDR or AAFY on 100% of rows and NEVER ENK, because those are sub-unit forms - a complete, populated field that answers a different question. The sole-trader form lives on the parent enhet, reached by overordnetEnhet, which 100% of sub-units carry. Sampling 220 parents: 28.6% are ENK, and 86% of those share the sub-unit's name. Reading the sub-unit field instead would report 0% natural persons and be believed",
     "kind": "http_contains",
     "url": "https://data.brreg.no/enhetsregisteret/api/underenheter?kommunenummer=0301&naeringskode=47&size=1",
-    "contains": "overordnetEnhet"
+    "present": ["overordnetEnhet"]
   },
   {
     "id": "brreg-enheter-endpoint-serves-the-legal-form",
     "claim": "The parent endpoint is live and returns organisasjonsform, which is where ENK is actually visible. If this breaks, Oslo has no natural-person guard and must not ship - Norway is 3x more exposed than Paris at 28.6% against 8.7%",
     "kind": "http_contains",
     "url": "https://data.brreg.no/enhetsregisteret/api/enheter?kommunenummer=0301&organisasjonsform=ENK&size=1",
-    "contains": "ENK"
+    "present": ["ENK"]
   }
 ]
 ```

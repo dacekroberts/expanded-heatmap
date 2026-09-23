@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**237 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**238 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Sixteen brief checks could not see their claims; the Brazilian briefs, and the agency rail both cities had](#2026-09-23---sixteen-brief-checks-could-not-see-their-claims-the-brazilian-briefs-and-the-agency-rail-both-cities-had)
 - [Brazil needs no geocoder: its census address file is a premises survey, and nine cities join Band A](#2026-09-23---brazil-needs-no-geocoder-its-census-address-file-is-a-premises-survey-and-nine-cities-join-band-a)
 - [Two corrections to the Toulouse build, both found while scoping Lille](#2026-09-23---two-corrections-to-the-toulouse-build-both-found-while-scoping-lille)
 - ["Only city" claims read against 23 cities: eleven false, two overstated, one true](#2026-09-23---only-city-claims-read-against-23-cities-eleven-false-two-overstated-one-true)
@@ -276,6 +277,53 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Sixteen brief checks could not see their claims; the Brazilian briefs, and the agency rail both cities had
+
+- **Sixteen `http_contains` checks across ten briefs were VACUOUS.** Each
+  declared `"contains": "..."`, a key the function never read - it reads
+  `present` and `absent` - so each passed on any HTTP 200 and could not see
+  the licence, field or layer it guarded: Copenhagen's CC BY 4.0, Goteborg's
+  CC0, Zurich's cc-zero, Oslo's ENK, Hong Kong's three, Prague's, Rennes',
+  Toulouse's, Lille's, Stockholm's. **That is the kind's own docstring's
+  failure - "a check that cannot see the thing it is guarding" - reproduced by
+  a spelling.** Found while writing Brazil's briefs, by reading the function
+  before using it. `brief_check.py` now FAILS a spec that uses `contains`,
+  passes a string where a list belongs, or gives neither `present` nor
+  `absent`; the ten briefs were rewritten to `present`, and **all sixteen then
+  passed for real** - the claims were true, the checks were blind. Rejected:
+  accepting `contains` as an alias, which would have fixed today's spelling
+  and left the next one silent. **A check framework that ignores unknown keys
+  converts every typo into a pass.**
+
+- **Sao Paulo's brief (6/6) and Rio's (8/8) are written**, the first two of
+  nine Brazilian cities. The national argument - CNEFE not CNPJ, the free-text
+  taxonomy, the privacy rule, the licence - lives in Sao Paulo's; Rio's
+  carries what is Rio's.
+
+- **Both cities' rail comes from the agency, and in Sao Paulo that is not a
+  preference.** GeoSampa's `estacao_metro` holds 94 station-line records, 85
+  distinct stations, 6 operating lines including the Line 15 monorail; planned
+  lines are a SEPARATE layer. OSM carries subway refs 1-6 and monorail 15 and
+  17 - but **GeoSampa has Linha 6-Laranja and Linha 17-Ouro only as
+  planned.** OSM would draw two lines the agency does not list as operating;
+  a check now fails if either appears in the operating layer. Rio's own
+  ArcGIS server carries metro stations (41), metro lines (3), VLT stops (31)
+  and VLT lines (4) under a declared CC BY 4.0 - **never searched for before
+  today**, because the country screen had only OSM. `osm-rail` puts agency
+  layers first; this is the second city where that order changed the answer.
+
+- **Rio's VLT stops table codes one field two ways**: `linha_1`-`linha_3` as
+  `1`/`2`, `linha_4` as `Sim`/`Nao`, one row `1`. A build testing `== "1"`
+  drops Line 4 without an error. A check pins the coding. Its metro lines
+  table carries `flg_ativa` NULL on two of three lines, so the stations' line
+  flags are the field to trust.
+
+- **Two claims in Rio's first draft were corrected before commit**: its
+  vacancy was called second-highest of the nine (it is fourth), and its
+  coordinate rate was compared to "any geocoder" (unmeasured). Licence reads
+  for GeoSampa and for Rio's transport layers were started the same hour and
+  are recorded when they return; both briefs say so.
 
 ### 2026-09-23 - Brazil needs no geocoder: its census address file is a premises survey, and nine cities join Band A
 

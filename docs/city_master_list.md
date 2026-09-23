@@ -207,9 +207,9 @@ results in the sweep.
 
 **The sixteen:** Seoul · Lille · Rennes · Prague · Copenhagen · Hong Kong ·
 Oslo — **each with a brief** in `docs/build_briefs/` — and **nine
-Brazilian cities from one national source**, briefs not yet written: São Paulo
-· Rio de Janeiro · Salvador · Fortaleza · Belo Horizonte · Brasília · Recife ·
-Porto Alegre · Santos.
+Brazilian cities from one national source**: **São Paulo (brief 6/6) and Rio de
+Janeiro (brief 8/8)**, written 2026-09-23, then Salvador · Fortaleza · Belo
+Horizonte · Brasília · Recife · Porto Alegre · Santos, briefs not yet written.
 
 ### ▲▲ Brazil — nine cities, one census file, no geocoder (2026-09-23)
 
