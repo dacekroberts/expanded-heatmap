@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**165 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**166 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Dublin Step 0: a register with no names, and a taxonomy rule that inverts](#2026-09-22---dublin-step-0-a-register-with-no-names-and-a-taxonomy-rule-that-inverts)
 - [Barcelona's live terms finally read, and they carried a clause that would have sunk the city](#2026-09-22---barcelonas-live-terms-finally-read-and-they-carried-a-clause-that-would-have-sunk-the-city)
 - [Madrid and Barcelona published, and the live site showed a defect no local check could have](#2026-09-22---madrid-and-barcelona-published-and-the-live-site-showed-a-defect-no-local-check-could-have)
 - [The unplaceable label was the circular line, and the fix is a second pass rather than more candidates](#2026-09-22---the-unplaceable-label-was-the-circular-line-and-the-fix-is-a-second-pass-rather-than-more-candidates)
@@ -201,6 +202,123 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Dublin Step 0: a register with no names, and a taxonomy rule that inverts
+
+- **Ireland's valuation register was measured live and Dublin banked as a build
+  brief, `docs/build_briefs/dublin.md`, 6/6 checks passing.** The endpoint is
+  `opendata.tailte.ie/api/Property/GetProperties?Fields=*&LocalAuthority=<LA>&Format=json&Download=false`,
+  keyless and accountless, returning **38,265 rows across the four Dublin local
+  authorities of which 13,945 are storefront**, with `Xitm`/`Yitm` in EPSG:2157
+  on 99.87% of them. The earlier screen had recorded only "the Valuation Office
+  API" and a CC BY 4.0 citation; neither the query shape nor the licence page
+  had been written down, and both predecessor hosts are dead - `api.valoff.ie`
+  is NXDOMAIN and `www.valoff.ie` answers 000, which is why an earlier probe
+  recorded the whole country as negative. Dublin is the first city here with
+  **no geocoding step and no reprojection step**: the register and the boundary
+  layer are both already in Irish Transverse Mercator, in metres.
+- **Found that the register carries no business name of any kind, and recorded
+  it as two findings rather than one.** Nineteen fields, checked against
+  `name|occupier|tenant|owner|ratepayer|proprietor|person|contact` with zero
+  matches; the Irish valuation list records premises and is non-domestic by
+  statute. As a privacy position it is the strongest in the project and is
+  **structural rather than measured** - New York can only assert that a
+  registrant-name column never arrives, and Los Angeles' blank-trade-name
+  fallback cannot occur here at all. As a design problem it is real, because
+  every other city's pins carry a trade name. **Owner's call: `Address1`
+  becomes `business_name` and the tooltip's category line carries `Uses`**, so
+  a pin reads `12 Camden Street` / `HAIRDRESSING SALON`; `map_common.py` is
+  untouched, and the city page must state the absence so a reader draws a
+  conclusion about Irish public records rather than about this map.
+- **Dublin keys its taxonomy on the level with the LARGER catch-all, which
+  inverts the rule Barcelona set.** Measured region-wide: `Category` is 13
+  values with a 3.2% catch-all, `Uses` is 963 values with 16.4%. Barcelona
+  chose its finer level *because* the catch-all was smaller (2.6% against
+  35.1%); Dublin chooses the worse number because `Category` cannot separate
+  the three buckets at all - **1,483 of 2,335 food-service rows and 677 of 744
+  personal-service rows both sit inside `RETAIL (SHOPS)`**, so hairdressers,
+  launderettes and restaurants would all land in Retail. The rejected
+  alternative was keying on `Category` and accepting a two-bucket map. The
+  general rule this establishes, to be carried into `premises-taxonomy`:
+  **measure the catch-all at every level, then check bucket separability, and
+  let separability win.** `Uses` is also multi-valued - comma-separated with
+  `-` as a null placeholder, 1,869 rows carrying two real uses, confirmed
+  against `ValuationReport` - so step 2 splits and classifies segments rather
+  than matching whole strings.
+- **Tailte's confidentiality caveat was tested rather than noted, and does not
+  bite.** `tailte.ie/home/api/` warns of missing detail for "Hotels, Pubs,
+  Cinemas, Service Stations, Guesthouses", which lands on food service. All 767
+  `PUB`, 210 `HOTEL`, 184 `SERVICE STATION` and 116 guesthouse/hostel/cinema
+  rows arrive present and fully classified, with `ValuationReport` empty on
+  **100%** of them against **0%** for hairdressers, pharmacies and clothes
+  shops. What is withheld is the per-floor valuation, which this project never
+  reads; 767 pubs also sits inside the published 750-800 range for Co. Dublin,
+  so nothing was suppressed from the list. **It would bite totally, and
+  precisely on food service, if the build ever weighted by floor area.**
+- **Scope set to all four Dublin local authorities, with the cost measured
+  first.** Dublin City alone is 8,016 storefront rows with 78% inside the 0.6
+  mi ring of a drawn station; the four-authority region is 13,944 with **60%**,
+  and **36% near no rail of any kind** against 22% for the city alone. Fingal
+  is the extreme - its largest town, Swords, has no rail station of any type,
+  and 65% of its storefronts are near nothing. The owner took the wider scope
+  on the Vancouver + Surrey precedent, so the page must state that the empty
+  areas are a fact about where Dublin built rail rather than where Dublin has
+  shops. Two traps recorded: `LocalAuthority` is matched exactly and
+  `DUN LAOGHAIRE RATHDOWN COUNTY COUNCIL` returns **HTTP 200 with zero rows**
+  where `DUN LAOGHAIRE RATHDOWN CO CO` works, while the boundary layer spells
+  the same place `DUN LAOGHAIRE-RATHDOWN COUNTY COUNCIL`; and the boundary
+  layer is multipart, Fingal returning 46 polygons and Dun Laoghaire-Rathdown
+  42, so it must be dissolved by `ENG_NAME_VALUE` before any point-in-polygon
+  test or a station is tested against Lambay Island.
+- **Commuter and InterCity services dropped; DART kept as a judgment call.**
+  Commuter rail is excluded in every built city and eight record it explicitly
+  (Boston, Chicago, Madrid, Miami, Philadelphia, Vancouver, and Montreal and
+  Washington DC noting they have none), and independently it is worth **4.4% of
+  this region** - 619 storefronts, and zero in Dun Laoghaire-Rathdown. **DART
+  would be excluded by the letter of that rule**, being run by the national
+  railway and tagged `route=train`; it is kept on the Philadelphia precedent,
+  where SEPTA's Market-Frankford and Broad Street lines are drawn and Regional
+  Rail is not, the line being station spacing rather than operator. DART's
+  in-city spacing is about a kilometre where the Commuter services it shares
+  track with run to Dundalk and Portlaoise. **If the rule is ever tightened to
+  admit no `route_type 2`, Dublin loses its principal line and must be
+  re-scoped rather than shipped as a two-tram-line map.** The three drawn lines
+  all already carry OSM colours, so the master list's "32 relations lacking a
+  colour" was an artefact of counting InterCity.
+- **Recorded that `overpass.osm.ch` returned an empty 200 for the Dublin rail
+  query, and that a hand-rolled fetch accepted it.** `brief_check.py`'s
+  `_overpass_once` rejects an empty 200 precisely because
+  `pipeline/countries/mexico.py` already recorded that mirror lying this way; a
+  probe written outside that path reported **0 relations against a real 42**
+  and would have been recorded as a finding. The measurement was redone through
+  the project's own Overpass helper.
+- **Tailte Éireann's terms established as PERMITTED WITH CONDITIONS by the
+  `licence-read` agent**, which opened 13 documents and probed 11 more that do
+  not exist. `CC-BY-4.0` is confirmed from `data.gov.ie`'s `package_show` and
+  is a deliberate declaration rather than portal default - 3 of the first 100
+  Tailte datasets carry it and 97 carry no licence field. Notice 22 added to
+  `docs/data_sources.md`, **not yet displayed because Dublin is not built**,
+  and flagged there as a Dublin-specific deploy blocker rather than a defect on
+  the sixteen live cities. It discharges four obligations at once, including
+  **CC BY 4.0 §3(a)(1)'s duty to indicate modification** - the
+  disclosure-of-transformation family for the fifth time after Montreal, INEGI,
+  Madrid and Barcelona. **No affirmative act is owed**, which is explicitly the
+  opposite of Barcelona's finding and is recorded positively so it is not
+  re-opened. Two items left open rather than resolved favourably: three
+  different attribution strings are live on Irish government sites and the
+  Circular's wording is used as a disclosed position, and the `Eircode` column
+  carries third-party database rights (An Post / OSi via GeoDirectory) that the
+  PSI licence's carve-out may not cover - **recommended dropped in step 2**,
+  since the build has coordinates and five address lines and does not need it.
+- **Left `docs/city_master_list.md` untouched although its Dublin row is now
+  measurably wrong in four places.** It records 8,016 premises (that is the
+  storefront subset of 19,810 for the city, or 13,945 of 38,265 for the
+  region), 16 use categories (12 for the city, 13 region-wide), 100% coordinate
+  coverage (99.87%), and 32 relations needing colours (none of the three drawn
+  lines does). `docs/session_roles.md` assigns that file to the staging
+  session, which was mid-screen, so the corrections are recorded here and
+  handed over rather than applied - editing another session's active file is
+  the collision the roles document exists to prevent.
 
 ### 2026-09-22 - Barcelona's live terms finally read, and they carried a clause that would have sunk the city
 

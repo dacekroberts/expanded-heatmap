@@ -405,6 +405,112 @@ ML1**, which it operates. **303 must never reach the page**: this project maps
 **193 distinct stations inside the término municipal**, a different quantity in
 three ways at once.
 
+### Dublin — endpoints and findings, verified 2026-09-22
+
+**Not yet built.** Step 0 only, recorded as verified per `add-city` Step 0's
+instruction to write endpoints down while they are in front of you. Full
+evidence and its checks: `docs/build_briefs/dublin.md` (6/6).
+
+**The first Irish city, and Ireland yields only this one**, so the
+`add-country` national questions are answered inside the city brief rather
+than in a separate country file.
+
+**Businesses** — Tailte Éireann, the Irish rateable valuation register, through
+a keyless JSON API:
+
+```
+https://opendata.tailte.ie/api/Property/GetProperties
+    ?Fields=*&LocalAuthority=<AUTHORITY>&Format=json&Download=false
+```
+
+No key, no account, no registration. **38,265 rows across the four Dublin local
+authorities**, of which **13,945 are storefront**. Coordinates are `Xitm`/`Yitm`
+in **EPSG:2157 (Irish Transverse Mercator), already in metres, on 99.87% of
+rows** — so there is no geocoding step and no reprojection step.
+
+> **TWO PREDECESSOR HOSTS ARE DEAD AND NEITHER REDIRECTS.** `api.valoff.ie` is
+> **NXDOMAIN** and `www.valoff.ie` answers **000**. An earlier screen recorded
+> Ireland as *negative* on the strength of those two corpses. The API moved
+> twice and left no forwarding, and `opendata.tailte.ie/` is itself a 404 with
+> no documentation page, no `robots.txt` and no Swagger — the contract is
+> stated only in the error body: `Use either Property Number or Local
+> Authority`.
+
+> **`LocalAuthority` IS MATCHED EXACTLY, AND A WRONG STRING RETURNS HTTP 200
+> WITH ZERO ROWS.** The register spells one authority
+> `DUN LAOGHAIRE RATHDOWN CO CO`; the spelled-out
+> `DUN LAOGHAIRE RATHDOWN COUNTY COUNCIL` silently returns nothing. The
+> **boundary layer spells the same place `DUN LAOGHAIRE-RATHDOWN COUNTY
+> COUNCIL`** — hyphenated and unabbreviated. Two strings for one authority, in
+> the two sources that must be joined, so the join is an explicit mapping table
+> and never string equality.
+
+The four values, with row counts measured 2026-09-22: `DUBLIN CITY COUNCIL`
+19,810 · `FINGAL COUNTY COUNCIL` 6,528 · `SOUTH DUBLIN COUNTY COUNCIL` 6,926 ·
+`DUN LAOGHAIRE RATHDOWN CO CO` 5,001.
+
+**The register carries no business name.** No trade name, no occupier, no
+ratepayer, no owner — 19 fields, all address, classification, valuation and
+geometry, checked against
+`name|occupier|tenant|owner|ratepayer|proprietor|person|contact` with zero
+matches. It records premises, and the Irish valuation list is non-domestic by
+statute. This is the strongest privacy position of any source in this project
+and it is structural rather than measured.
+
+**Classification is `Uses` (963 distinct values), not `Category` (13).**
+`Category` cannot separate this project's three buckets: 1,483 of 2,335
+food-service rows and 677 of 744 personal-service rows both sit inside
+`RETAIL (SHOPS)`. See the brief for the catch-all measurement, which inverts
+Barcelona's rule.
+
+> **TAILTE WITHHOLDS FLOOR-LEVEL DETAIL FOR NAMED PROPERTY TYPES, AND IT DOES
+> NOT AFFECT THIS BUILD — MEASURED.** `tailte.ie/home/api/` warns of missing
+> detail for "Hotels, Pubs, Cinemas, Service Stations, Guesthouses…" on
+> confidentiality grounds. Measured with a control: all 767 `PUB`, 210 `HOTEL`,
+> 184 `SERVICE STATION` and 116 guesthouse/hostel/cinema rows arrive **present
+> and fully classified**, with `ValuationReport` empty on **100%** of them and
+> on **0%** of hairdressers, pharmacies and clothes shops. What is withheld is
+> the per-floor valuation, which this project never reads. **It would bite
+> totally, and precisely on food service, if the build ever weighted by floor
+> area.**
+
+**Boundary** — Tailte Éireann, *Local Authorities — National Statutory
+Boundaries — Ungeneralised — 2026*, layer 3:
+
+```
+https://services-eu1.arcgis.com/FH5XCsx8rYXqnjF5/arcgis/rest/services/
+  National_Statutory_Boundaries_-_Local_Authorities__Ungeneralised_-_2026/
+  FeatureServer/3
+```
+
+Authority name is `ENG_NAME_VALUE` (Irish `GLE_NAME_VALUE`), spatial reference
+**wkid 2157**, 937.3 km² over the four authorities.
+
+> **USE THE FEATURESERVER, NOT THE HUB DOWNLOAD.** `data.gov.ie`'s resource
+> list points at `data-osi.opendata.arcgis.com/api/download/v1/items/...`,
+> which is the **async job endpoint that answers HTTP 202** — the Surrey trap
+> in `add-country`. The FeatureServer above is synchronous and takes a
+> where-clause.
+
+> **THE LAYER IS MULTIPART.** Fingal returns **46** polygons and Dún
+> Laoghaire–Rathdown **42** — islands and coastal outcrops, most under
+> 0.1 km². Dissolve by `ENG_NAME_VALUE` before any point-in-polygon test, or a
+> station gets tested against Lambay Island.
+
+**Rail** — OpenStreetMap, not a feed. 42 route relations in the Dublin bbox:
+**Luas** 6 relations → 2 refs (Red `#CD5C5C`, Green `#008531`), **DART** 4
+relations, ref `DART`, `#68C56B`. Commuter (14) and InterCity (18) are dropped.
+
+> **IARNRÓD ÉIREANN RUNS URBAN, COMMUTER AND INTERCITY SERVICES, AND OSM TAGS
+> ALL THREE `route=train`.** Filter on `network=Commuter` / `network=InterCity`,
+> never on `route=`. Dublin is the first city here where intercity services
+> land in the same Overpass query as the urban network.
+
+> **`overpass.osm.ch` RETURNED AN EMPTY 200 FOR THIS QUERY ON 2026-09-22.**
+> `brief_check.py`'s `_overpass_once` rejects that; a hand-rolled fetch does
+> not, and the first attempt here would have recorded "0 relations" against a
+> real 42.
+
 ## Transit feeds
 
 **Titled “Transit feeds (GTFS)” until 2026-09-22.** The table immediately below
@@ -2023,6 +2129,68 @@ city indefinitely on a body under no obligation to reply. **If the Council
 reads it the other way, Barcelona comes down**: the standing removal commitment
 below covers this without needing to be invoked.
 
+**22. Tailte Éireann — required, and NOT YET DISPLAYED because Dublin is not
+built.** Recorded here at Step 0 so the obligation exists before the city does;
+`app/components.py` gets it when the city is wired, and **this item is a deploy
+blocker for Dublin specifically**, not an outstanding defect on the sixteen
+cities now live. The valuation register declares `CC-BY-4.0` on `data.gov.ie`
+(`package_show`, verified 2026-09-22), and the licence is Circular 12/2016
+Annex 1, which Tailte's own open-data page links. Four obligations converge and
+one paragraph discharges all four — the PSI attribution string, Tailte's own
+requirement to be named as content creator, **CC BY 4.0 §3(a)(1)'s duty to
+indicate modification**, and non-endorsement:
+
+> Contains Irish Public Sector Information licensed under a Creative Commons
+> Attribution 4.0 International (CC BY 4.0) licence. Source: Tailte Éireann
+> valuation data, via the Tailte Éireann Valuation open API. This map filters,
+> re-categorises and aggregates that data into density measures; the filtering,
+> categories and densities are this project's own interpretation and are not
+> produced or endorsed by Tailte Éireann. The data is published "as is"; Tailte
+> Éireann gives no warranty as to its accuracy, completeness or currency.
+
+That is the **disclosure-of-transformation family for the fifth time**, after
+Montréal, INEGI, Madrid and Barcelona — a bare source credit does not discharge
+it.
+
+⚠️ **Three different attribution strings are live on Irish government sites**,
+differing in one word: Circular 12/2016 says *"Irish Public Sector
+Information"*, `data.gov.ie/license` says *"Irish Public Sector Data"*, and
+`data.gov.ie/technical-framework` says *"Irish Government Data"*. No document
+ranks them. The wording above follows the **Circular**, because it is the
+instrument Tailte's own page points to and the only one of the three that is a
+licence rather than guidance. **Recorded as a disclosed position**, not as a
+settled fact.
+
+**Nothing must be DONE.** No registration, notification, permission request or
+statistics return is owed — swept for the full affirmative-obligation phrase
+set across every document read, with zero hits. **This is explicitly the
+opposite of Barcelona's finding** and is recorded positively so it is not
+re-opened. Channels exist anyway for corrections:
+`opendataofficer@tailte.ie` and `opendata@tailte.ie`, both live, neither
+CAPTCHA-walled.
+
+**What must NOT be said**: nothing implying official status or Tailte
+endorsement; **no claim the data is accurate, complete or current** (Tailte
+disclaims all three, and `tailte.ie/home/api/` states the API "is not
+guaranteed to be complete") — the MTA/WMATA prose rule again; and no Tailte
+logo, crest or official symbol, which the PSI licence excludes and CC BY 4.0
+§2(b) does not license.
+
+⚠️ **One open item, not blocking: the `Eircode` column.** The Eircode database
+is third-party IP (An Post / OSi via GeoDirectory, licensed through Capita),
+and both the PSI licence and `data.gov.ie/license` carve out third-party
+database rights the Information Provider is not authorised to license.
+**Recommended: drop the column in step 2** — the build has `Xitm`/`Yitm` and
+five address lines and does not need it, so dropping removes the only
+third-party-rights exposure in the source at no cost. **Owner's call,
+outstanding.**
+
+One page that reads alarmingly and does not apply:
+`tailte.ie/map-shop/map-licences-and-copyright/` requires "prior permission"
+for reproducing Tailte **surveying** material. It mentions valuation, open
+data, API, Eircode, PSI and Creative Commons **zero times each** and governs
+the paid Map Shop products. Read and inapplicable — recorded so the next
+reader does not re-establish it.
 
 What has grown instead is the pile of **permission questions**, now four: three
 "what does silence mean?" calls and the route-colour one. They are questions
