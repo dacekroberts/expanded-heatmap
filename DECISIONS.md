@@ -194,6 +194,85 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Barcelona built: a Catalan premises census, a two-operator metro, and two keys whose absence was not neutral
 
+- **Decided to publish Barcelona on a DISCLOSED POSITION rather than hold it
+  for a live reading of terms that cannot be reached.** `docs/data_sources.md`
+  had recorded, since the licence review, that a human should open
+  `opendata-ajuntament.barcelona.cat/en/condicions-us` and confirm the terms
+  before publishing. That was attempted 2026-09-22 in a real browser and the
+  page returned hCaptcha - *"PLEASE PROVE THAT YOU ARE HUMAN"* - which this
+  project does not defeat. Owner's decision: publish. The alternative rejected
+  was holding a finished city behind a bot wall indefinitely, since nothing
+  about the obstacle is expected to change.
+
+  **The premise is narrower than it looks, which is why the call is
+  defensible.** The *declared licence* requires no CAPTCHA and was verified
+  live on the day: `package_show` returns `license_id: CC-BY-4.0` with the
+  package last modified 2025-12-02. So the GRANT is confirmed current from the
+  publisher's own machine-readable metadata; only the prose *terms page* is
+  unconfirmed, and its newest capture anywhere is 2025-03-28 with no change
+  visible across captures. The exposure is therefore not "we do not know if we
+  may use this" but "we may be complying with a superseded revision of the
+  conditions" - and this project meets three of the four stated obligations on
+  the page while recording the fourth as an outstanding owner action.
+
+  **Distinguished from Philadelphia, whose shape it borrows.** There the
+  operative sentence is a flat prohibition read from the LIVE page and the
+  question is what the clause MEANS; the map stays up on a disclosed reasoned
+  position with a written request outstanding. Here neither the clause nor the
+  grant is in doubt and the only question is whether a page moved since its
+  last capture. Same disposition, weaker premise needed to reach it.
+
+  **The standing removal commitment is what makes this safe to decide rather
+  than agonise over**, and it is the reason the decision is recorded next to it:
+  a removal request from Barcelona City Council is honoured without argument -
+  the layer or the city comes down first, the reasoning is written afterwards.
+  The file now says to re-read the live terms whenever the CAPTCHA can be
+  passed and record the result either way.
+
+- **Corrected the stored Barcelona terms' own snapshot date, from 2025-03-21 to
+  2025-03-28.** The header was written from the build brief; the file's own
+  Wayback banner says `20250328093226`, because the Machine serves the nearest
+  capture to the date requested rather than refusing. Re-fetched and diffed
+  against the stored copy: identical but for HTML-entity escaping of the
+  suggested attribution markup, with the notification clause present in both,
+  and it is the newest capture that exists. A stored evidence file has to be
+  right about its own provenance - it exists so a quoted clause can be checked
+  against a document instead of against a summary, which fails if the document
+  is not the one the header names.
+
+- **Fixed two defects in `check_provenance.py --strict` found by running it as
+  the deploy gate, one of which pointed at a correct value and called it
+  wrong.** The SHA-256 check read the WORKING TREE while
+  `docs/licenses/README.md` instructs computing from the COMMITTED file;
+  `.gitattributes` sets `* text=auto eol=lf`, and
+  `cta-developer-license-agreement.html` is 230,064 bytes committed against
+  232,828 on a Windows checkout, so the check failed and advised recomputing a
+  digest that was already right. It now falls back to a CRLF-normalised hash
+  before failing. Separately, the markdown-link and citation walks followed
+  `.claude/**/*.md` into `.claude/worktrees/<session>/.venv-lean/` and reported
+  a broken link inside **Streamlit's own bundled documentation** - a
+  dependency's file in another session's working copy. Both walks are now
+  scoped to this project's own files. A checker that reports other people's
+  files, or contradicts its own documented method, trains a reader to skim its
+  output.
+
+- **Barcelona's own two provenance rows were the wrong width, and markdown
+  renders that silently.** All three were written on the transit table's
+  five-cell shape; business registries takes six
+  (`City | Source | Provides | Endpoint | Filter at download | Retrieved`) and
+  boundary layers takes four. The transit row was correct by luck. Caught by
+  the table check in the same `--strict` run, which exists because Edmonton's
+  and Toronto's rows were orphaned in two tables at once and Philadelphia's OPA
+  row carried five cells against a six-cell header.
+
+- **`docs/city_master_list.md` still read "Built - 16" with 18 cities in
+  `app/cities.py`.** It is the one file `CLAUDE.md` directs readers to take
+  counts from, so its numbers are load-bearing in a way no other document's
+  are. Spain is now a counted row, recording what did NOT generalise between
+  its two cities: different rail sources (CRTM's ArcGIS layers against
+  OpenStreetMap), different projected CRS (25830 against 25831), and different
+  LEVELS of similar four-level taxonomies, each chosen on measurement.
+
 - **Built Barcelona from the Ajuntament's 2022 Cens de locals en planta baixa,
   rejecting the fresher 2024 resource as geographically incomplete.** Per-step
   counts: 66,088 census rows -> 58,908 `Actiu` (7,180 vacant premises dropped,

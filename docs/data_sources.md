@@ -1260,15 +1260,51 @@ serves **hCaptcha** on `/en/avis-legal`, `/ca/avis-legal` and
 `/es/aviso-legal` alike, and this project does not defeat CAPTCHAs. The legal
 notice and the terms it points to were therefore read from the **Internet
 Archive**: the notice at snapshot **2025-01-18**, the terms of use
-(`/en/condicions-us`) at **2025-03-21**. That is a public archive of a public
-page, not a bypass.
+(`/en/condicions-us`) at **2025-03-28** — the newest capture of that page that
+exists. That is a public archive of a public page, not a bypass.
 
-⚠️ **But an archived copy is not the live document**, and these terms
-explicitly reserve the right to change: *"Barcelona City Council may at all
-times add to, remove or amend the data sets published as well as these Terms
-of use … any change that is made shall take effect as soon as it is
-published."* **Before Barcelona is published, someone with a browser should
-open the live page and confirm it still says this.**
+⚠️ **An archived copy is not the live document**, and these terms explicitly
+reserve the right to change: *"Barcelona City Council may at all times add to,
+remove or amend the data sets published as well as these Terms of use … any
+change that is made shall take effect as soon as it is published."*
+
+### ✅ DECIDED 2026-09-22 — Barcelona is published on a DISCLOSED POSITION
+
+This section previously said a human should confirm the live page before
+publishing. That was attempted on 2026-09-22 and **the page returned
+hCaptcha** — *"PLEASE PROVE THAT YOU ARE HUMAN"* — which this project does not
+defeat. The owner's decision was to publish anyway, on a disclosed position,
+rather than hold the city. Recorded here because **a precondition that is
+knowingly not met has to say so**, rather than sit in the file reading like a
+plan somebody will get to.
+
+**What IS verified, live, today.** The *declared licence* needs no CAPTCHA:
+`package_show` on the CKAN API returns `license_id: CC-BY-4.0`, `license_title:
+Creative Commons Attribution 4.0`, with the package last modified 2025-12-02.
+So the grant this project relies on is confirmed current from the publisher's
+own machine-readable metadata. It is only the *terms page* that is unconfirmed.
+
+**What the gap actually risks, stated plainly.** The stored terms impose four
+obligations; this project meets three on the page and records the fourth as an
+owner action. If the live terms have since become **more permissive**, nothing
+is wrong. If they have become **more restrictive**, this project would be
+complying with a superseded version — and that is the real exposure, sized by
+the fact that no capture since March 2025 shows any change at all.
+
+**Why that is tolerable here and was NOT in Philadelphia.** Philadelphia's
+operative sentence is a flat prohibition on redistribution, read from the live
+page; the question there is what a clause MEANS. Here the clause is not in
+doubt and neither is the grant — the question is only whether a page has
+changed since its last capture, and the licence field says it has not. Same
+shape of answer as Philadelphia (publish on a disclosed reasoned position), a
+weaker premise required to reach it.
+
+**What happens if that turns out to be wrong.** The standing commitment applies
+unchanged and is the reason this is safe to decide rather than agonise over: a
+removal request from Barcelona City Council is honoured, not argued — the layer
+or the whole city comes down first and the reasoning is recorded afterwards.
+**Re-read the live terms whenever the CAPTCHA can be passed**, and record the
+result here either way.
 
 **Verdict: PERMITTED WITH CONDITIONS.** The granting text:
 
