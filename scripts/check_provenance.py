@@ -320,6 +320,12 @@ UTM_FAMILIES = (326, 327, 258, 269)
 # edge, where that zone's distortion is worst.
 NATIONAL_GRIDS = {
     2157: ("Irish Transverse Mercator", -11.0, -5.0),   # Ireland
+    # METROPOLITAN France only. The domain is deliberately tight: SIRENE's
+    # geolocation file carries a PER-ROW `epsg` column holding 2154 alongside
+    # 2975 (Réunion), 5490 (Antilles) and 2972 (Guyane), so a French build that
+    # hard-codes 2154 works in Paris and puts every pin in the sea in
+    # Fort-de-France - without raising. These bounds are what raises.
+    2154: ("Lambert-93", -5.5, 10.0),                   # France (métropole)
 }
 
 

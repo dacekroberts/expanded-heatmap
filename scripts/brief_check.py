@@ -784,8 +784,75 @@ def osm_route_refs(spec, ctx):
                    + f" [confirmed by {other}]")
 
 
+def row_count(spec, ctx):
+    """A COUNT the brief states, against a committed output file.
+
+    WHY THIS KIND EXISTS. Every other check here tests LIVENESS - a URL
+    resolves, a feed carries a file, a layer has fields. None of them can see a
+    stale NUMBER, and on 2026-09-23 that gap cost real work: Paris's brief was
+    re-verified 7/7 against live sources that morning, and by the afternoon the
+    build had found "77 stations outside the commune" was 76 and "322 total"
+    was 321. Both checks passed the whole time, because no check stood behind
+    any count in the file.
+
+    `CLAUDE.md` asks that writing a claim and writing its test be one act. A
+    brief full of measured numbers and no numeric check is that rule half
+    applied.
+
+    DELIBERATELY LOCAL AND OFFLINE. It reads `outputs/`, which is committed, so
+    it runs on a fresh clone with no network and costs nothing. The
+    register-scale numbers (Paris's 149,166 bucket rows) are NOT checkable this
+    way - re-reading a 2,210 MB parquet is not something a brief check may do -
+    and those stay guarded by step 2's own printed filters instead. Claiming
+    otherwise would be worse than the gap.
+
+    Spec:
+      path       repo-relative file, normally under outputs/
+      expect     the number the brief states
+      tolerance  allowed drift, default 0
+      column     optional: count over this column rather than rows
+      distinct   with `column`: count DISTINCT values instead of rows
+      equals     with `column`: count rows whose value equals this
+    """
+    import csv
+
+    path = ROOT / spec["path"]
+    if not path.exists():
+        return False, (f"{spec['path']} does not exist - a count cannot be "
+                       f"checked against a file the build has not written")
+    with open(path, encoding="utf-8", newline="") as fh:
+        rows = list(csv.DictReader(fh))
+
+    col = spec.get("column")
+    if col:
+        if rows and col not in rows[0]:
+            return False, (f"column {col!r} not in {spec['path']} "
+                           f"(has {list(rows[0])[:6]})")
+        values = [r[col] for r in rows]
+        if spec.get("distinct"):
+            got, what = len(set(values)), f"distinct {col}"
+        elif "equals" in spec:
+            got = sum(1 for v in values if v == spec["equals"])
+            what = f"rows where {col} == {spec['equals']!r}"
+        else:
+            got, what = len(values), f"rows (over {col})"
+    else:
+        got, what = len(rows), "rows"
+
+    expect, tol = spec["expect"], spec.get("tolerance", 0)
+    ok = abs(got - expect) <= tol
+    detail = f"{got:,} {what}, brief says {expect:,}"
+    if tol:
+        detail += f" (tolerance {tol:,})"
+    if not ok:
+        detail += (f" - DRIFT of {got - expect:+,}. Correct the brief to the "
+                   f"measured number; do not widen the tolerance.")
+    return ok, detail
+
+
 CHECKS = {
     "http_ok": http_ok,
+    "row_count": row_count,
     "http_contains": http_contains,
     "endpoint_absent": endpoint_absent,
     "arcgis_layer": arcgis_layer,

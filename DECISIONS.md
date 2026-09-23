@@ -16,7 +16,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**215 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**218 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
@@ -50,6 +50,9 @@ onwards; the early ones are split by phase rather than by hour.
 - [CUZK read: Prague is unblocked, and the "cookie terms" were not only cookie terms](#2026-09-23---cuzk-read-prague-is-unblocked-and-the-cookie-terms-were-not-only-cookie-terms)
 - [The sweep's results sorted: Goteborg banded, two discards evidenced](#2026-09-23---the-sweeps-results-sorted-goteborg-banded-two-discards-evidenced)
 - [The discard record swept for rows that rest on an absence](#2026-09-23---the-discard-record-swept-for-rows-that-rest-on-an-absence)
+- [Paris renders, and a zero-width race turned out to be one line](#2026-09-23---paris-renders-and-a-zero-width-race-turned-out-to-be-one-line)
+- [The employee filter does not exist, and France's OSM validation was wrong](#2026-09-23---the-employee-filter-does-not-exist-and-frances-osm-validation-was-wrong)
+- [France's taxonomy is national, and Paris takes Lambert-93](#2026-09-23---frances-taxonomy-is-national-and-paris-takes-lambert-93)
 - [Four licences read: Oslo is clear, Prague has one left](#2026-09-23---four-licences-read-oslo-is-clear-prague-has-one-left)
 - [Hong Kong, Prague and Oslo taken to brief-ready; two cities changed size](#2026-09-23---hong-kong-prague-and-oslo-taken-to-brief-ready-two-cities-changed-size)
 
@@ -1765,6 +1768,242 @@ onwards; the early ones are split by phase rather than by hour.
   as candidates to begin with. That is the point: **they were invisible to the
   arithmetic**, which is exactly why the discard list has to name its evidence
   per row rather than gesture at a pattern.
+
+### 2026-09-23 - Paris renders, and a zero-width race turned out to be one line
+
+- **`check_personal_exposure.py paris`: PASS, and the verdict is structural
+  rather than statistical.** Step 2 never loads a registrant-name column, so no
+  pin CAN be one - the same claim New York, Dublin and Milan rest on, and the
+  reason Los Angeles' failure mode is impossible here rather than merely
+  unlikely. The heuristic flags **10,591 pins (12.6%)**, and splitting that on
+  the built CSV's own `name_is_address` column shows **98% are premises names**
+  (LES PETITES BOMBES, ADIDAS FRANCE, PHARMACIE DU SOLEIL, BARBER STAR) and
+  **2% are street names** (BOULEVARD ORNANO, PLACE DE L'OPERA). Person-like
+  name at a residential unit: **3 of 84,125 pins, 0.00%**. Nothing found was a
+  registrant. This is the city with the LARGEST temptation to do otherwise -
+  `StockUniteLegale` would have named nine tenths of the unnamed rows - and the
+  file is not even downloaded.
+
+- **Paris was first registered with `name_is_address=True`, which is wrong and
+  printed ANOTHER CITY'S EVIDENCE.** That flag is Dublin's case, a register
+  with no name column at all; Paris carries a premises name on 37.2% of pins
+  and is Milan's hybrid. Setting it also emitted Dublin's own verification note
+  - "the person-like hits are Irish streets named after people (Ashe Street,
+  Thomas Street)" - as though it had been checked for Paris, which it had not.
+  Corrected to Milan's shape. The hardcoded note is a latent trap for the next
+  city that sets the flag.
+
+- **`map_common.py` will never write a zero map width again.** Paris rendered
+  BLANK on first load - `width: 0px` on the container, Leaflet.heat throwing
+  `IndexSizeError: getImageData ... source width is 0` - because a pass that
+  runs before the document has laid out reads `clientWidth` 0 and the old code
+  wrote it through. It is the SAME RACE the adjacent `else` branch documents
+  for Edmonton, intermittent and not city-specific, and the page reloaded
+  correctly. What differs is severity: a narrow fit is a bad view, a zero width
+  is no map and a console error. Paris exposed it as the heaviest map in the
+  project (84,125 points), which widens the pre-layout window. One line,
+  `if (!target) return;`, which cannot alter a correct render because `target`
+  is 0 only when the measurement is meaningless. All 21 cities regenerated and
+  verified to carry it; the accompanying CSV churn was reverted as
+  content-identical line endings.
+
+- **`check_macro_labels.py`: PASS, 0 problems across 7 regions x 3 widths.**
+  Paris measures **32.9 px** at `600 14px "Space Grotesk"`, the narrowest label
+  in the project. Measured in a real browser **with five known cities as the
+  control** - Dublin 42.8, Milan 36.3, Madrid 47.2, Boston 48.4, Toronto 52.4
+  all reproduced the table exactly - which is what establishes that the font
+  had loaded and the figure is not a fallback measurement. The script refuses a
+  guessed width; this is why.
+
+- **`check_provenance.py`: ALL RECORDED**, the first full pass with Paris in
+  the tree. Its endpoint check caught two sources this build added and never
+  wrote down: the **Île-de-France commune layer** that names the 76 excluded
+  stations, and the **NAP metadata API**, which is load-bearing rather than
+  incidental - notice 24 requires a last-updated date and an update interval
+  that the GTFS zip does not contain, so without that endpoint the page would
+  display a compliance value from a source nothing recorded.
+
+- **`check_deploy_imports.py --ref paris-build`: clean clone imports cleanly
+  under the lean venv.** `pipeline/countries/france.py` is pure constants and
+  `pipeline/paris/config.py` imports only `pathlib` plus that module, so the
+  page pulls in nothing geopandas-shaped.
+
+- **The saturated heat layer is ACCEPTED, not tuned.** Paris's heat renders as
+  a near-solid mass over the commune, which is the same uniform density that
+  drove the ring-edge change. Rejected: per-city heat parameters, which would
+  be a fresh divergence in shared rendering with no measured basis for the new
+  values. The page already states the heat is illustrative.
+
+- **Master list: Built 21, Europe 5**, and the France row now carries the
+  corrected viability figure rather than the superseded 92.5%.
+
+### 2026-09-23 - The employee filter does not exist, and France's OSM validation was wrong
+
+- **Paris's recorded 50,156 is NOT REPRODUCIBLE, and no employee filter is
+  applied.** The brief recorded 148,633 -> 50,156 "after the employee filter",
+  and `PLAN.md` called the resulting 92.5% match against OSM the comparison
+  that turned France from a rejection into a build. Measured over all
+  **149,166** bucket rows, `trancheEffectifsEtablissement` is `NN` (non
+  determine) on **115,248 of them, 77.3%** - so every banded row put together
+  is **33,918**, and the largest cut that column can produce falls 16,000
+  short. Dropping `NN` is independently wrong: only **1,425** rows record `00`,
+  so SIRENE does not code a sole trader as zero employees, it codes them `NN`,
+  and that band is where every owner-run shop lives. Rejected: reverse-
+  engineering a predicate that lands near 50,156, which would be fitting to a
+  number for the second time. Files: `pipeline/paris/step2_clean_businesses.py`.
+
+- **The OSM comparison was re-established from scratch, and the SIRENE side of
+  the old one is wrong.** Re-run 2026-09-23 over the same commune with this
+  project's own Overpass helper: OSM **48,973** against SIRENE **87,164**,
+  **1.78x**. The sharp test is restaurants, where `amenity=restaurant` and NAF
+  `56.10A` mean nearly the same thing - OSM gives **9,058** against a recorded
+  10,642, so the OSM side reproduces; SIRENE gives **16,280** against a
+  recorded **10,595**, so the SIRENE side sits 1.54x below what the register
+  actually contains. **France remains a build** - register, join, coverage and
+  licence are untouched - but the claim of a 92.5% match falls.
+  `docs/global_country_shortlist.md`'s France row still rests on the old
+  figure and needs the same correction.
+
+- **Two of five catch-all codes excluded, on the publisher's own hierarchy
+  rather than on the word "autres".** `96.09Z` (9,349) and `56.29B` (958) sit
+  under NAF classes that assert no premises; `47.19B`, `47.29Z` and `47.78C`
+  sit under classes whose official labels say *en magasin specialise*, so INSEE
+  is stating those premises exist. This is Barcelona's finding in French - a
+  call the publisher's hierarchy made rather than a reading of the language.
+  Personal services fell from **4.40x to 2.49x** of OSM and the total from
+  1.99x to 1.78x, while Retail was untouched, which is what a targeted
+  exclusion should look like. Recorded as `CATCH_ALL_EXCLUDE` in
+  `pipeline/paris/config.py`, per city, as `CLAUDE.md` requires.
+
+- **The residual 1.78x is DISCLOSED on the city page, not filtered away.**
+  SIRENE is a register of registered establishments and some have no
+  customer-facing shopfront, which nothing in the data identifies; OSM is
+  separately incomplete. Neither can be separated out, so the page says so.
+  Licence Mobilites Art. 5.7 already requires this page to state what was
+  excluded, so the disclosure has somewhere to live. Rejected: tuning
+  exclusions until SIRENE matched OSM - that is what produced 50,156.
+
+- **A pandas 3.0 bug would have shipped a map of blank labels.** Step 2
+  reported "premises name present on 97,445 rows (100.0%)" while the first CSV
+  row had an empty name. pandas 3.0 backs string columns with pyarrow, so
+  `.astype(str)` on a null yields `<NA>` rather than the string `"nan"` - which
+  passed an `!= ""` test and counted as named. Fixed by `.fillna("")` first;
+  the rate became **37.2%**, against `france.py`'s independently measured
+  `paris_any_name: 0.384`. A 100% fill rate on a register measured at 38% was
+  the tell.
+
+- **Paris is the first city to fail the station spacing gate honestly, at 399 m
+  against the shared 400 m floor.** The gate says to fix the collapse rather
+  than the threshold, so the collapse was tested first: **zero** duplicate
+  station names (Calgary's failure mode), **zero** pairs closer than 150 m, and
+  an uncollapsed platform median of **8 m** - so a broken collapse would read
+  about 8, not 399. The closest pairs are real distinct stations (Le Peletier /
+  Notre-Dame-de-Lorette 183 m, Commerce / Felix Faure 192 m). Paris passes
+  `spacing_min=200.0`, a parameter `verify_stations` already exposes per city.
+  **200 and not 398**: it still catches a platform-spaced set by a factor of
+  25, where a floor shaved just under the observed median would pass this city
+  and catch nothing in the next.
+
+- **`brief_check.py` gains a `row_count` kind - the first numeric check in the
+  project.** All seventeen existing kinds test LIVENESS, and that gap cost real
+  work: Paris's brief was re-verified **7/7 against live sources** on the
+  morning of 2026-09-23, and by the afternoon the build had found "77 stations
+  outside" was 76 and "322 total" was 321. Every check passed throughout,
+  because no check stood behind any count. Deliberately local and offline - it
+  reads committed `outputs/`, so it runs on a fresh clone at no cost. The
+  register-scale numbers are NOT checkable this way and are left guarded by
+  step 2's printed filters instead, because re-reading a 2,210 MB parquet is
+  not something a brief check may do. Paris now runs **9/9**.
+
+- **Two brief numbers superseded at build time: 76 stations outside and 321
+  total, against 77 and 322.** The inside count reproduced **exactly** at 245
+  and all 16 lines still survive the boundary, so the commune-only scope
+  decision stands on its own evidence rather than on the corrected figures.
+
+- **`provenance.json` moved from `data/paris/raw/` to `outputs/paris/`.** The
+  deployed app reads only `outputs/` and `data/` is gitignored, so the file
+  carrying the snapshot date that notice 24 REQUIRES the page to display could
+  never have reached that page. The page now reads the date rather than
+  carrying a hardcoded string that goes stale on the next fetch.
+
+### 2026-09-23 - France's taxonomy is national, and Paris takes Lambert-93
+
+- **NAF rev. 2 was built as a COUNTRY-level taxonomy rather than a Paris one -
+  the first module in `pipeline/taxonomies/` that is not a single city's.**
+  Every other module there belongs to one city because the register does;
+  SIRENE is one register for all of France, and
+  `pipeline/countries/france.py`'s `BUILD_SEQUENCE` names five cities that will
+  read it (paris, marseille, toulouse, lille, rennes). Keyed at the
+  sous-classe on the brief's measurement - **49.4% catch-all at *groupe*
+  against 19.3% at level 5** - which is Barcelona's shape and not Madrid's.
+  The three buckets map onto exactly three NAF divisions (47 commerce de
+  detail, 56 restauration, 96 autres services personnels) holding **64 level-5
+  codes**, against the **62** the brief measured as occurring in Paris, so two
+  codes simply do not appear there. Rejected: a `paris_naf` module, which would
+  have made the second French city either a copy or a divergence. Files:
+  `pipeline/taxonomies/france_naf.py`, `pipeline/taxonomies/__init__.py`.
+
+- **Two kinds of exclusion were kept apart rather than merged into one list.**
+  `NOT_PREMISES` (9 codes) is structural and national - distance selling,
+  market stalls, contract catering, wholesale laundry - where INSEE's own label
+  says the activity happens away from a shop, so the code is not a storefront
+  in Marseille either. `CATCH_ALL_CODES` (5 codes) is deliberately **not
+  applied** in the module: per `CLAUDE.md` a catch-all's composition is a fact
+  about a city, sampled per city and recorded in that city's config, and
+  `96.09Z` alone is **8.6%** of Paris's bucket rows - the French analogue of
+  the NAICS 812990 Los Angeles excludes. Merging the two lists would have let a
+  national module silently make a per-city call, which is the error the split
+  exists to prevent.
+
+- **Distance selling is four codes, not one.** `47.91A`, `47.91B`, `47.99A` and
+  `47.99B` together are **15.5%** of Paris's bucket rows. An earlier note put
+  `47.91B` at "24% of the retail division", which understated the problem by
+  looking at one code of four.
+
+- **Three exclusion calls recorded as calls, not as facts.** Market stalls
+  (`47.81Z`, `47.82Z`, `47.89Z`) are excluded because a pitch is not a
+  storefront and the registered address is the trader's own, but **their share
+  of Paris is UNMEASURED** - it needs the parquet - and the module says so
+  rather than implying the share is small. Contract catering (`56.29A`) follows
+  Milan's existing `mensa` exclusion, so it is precedent rather than fresh
+  judgement. Wholesale laundry (`96.01A`) is split from retail laundry
+  (`96.01B`) by INSEE's own *de gros* / *de detail* pair, so the publisher's
+  hierarchy made that call and not a reading of the French.
+
+- **Labels are INSEE's full wording, verbatim.** The 40-character form INSEE
+  also publishes was rejected as unreadable ("Com. det. quinc. pein. etc.
+  (mag.<400m2)"), and abbreviating the long form here would have put text this
+  project invented onto the map. Embedding the table in the module also keeps
+  step 2 offline, so no fetch script is needed for the classification.
+
+- **Paris projects to EPSG:2154 (Lambert-93), not the EPSG:32631 the scaffold
+  derived.** Three grounds, and the third is the deciding one: the source is
+  natively 2154 on **99.3%** of rows so its coordinates are never reprojected;
+  `france.py` already names `METROPOLITAN_EPSG = 2154`; and **metropolitan
+  France spans UTM zones 30N, 31N and 32N**, so a per-city UTM rule would give
+  five cities reading ONE national file three different projections. The
+  invariant is projected metres derived per city and never copied - deriving
+  from France's own grid satisfies it, and copying a UTM zone from Paris to
+  Lille would not. This is the project's second national grid after Dublin's
+  EPSG:2157. `scripts/check_provenance.py`'s `NATIONAL_GRIDS` gains 2154
+  **bounded to metropolitan longitudes (-5.5 to 10.0)**, because SIRENE's
+  per-row `epsg` column also carries 2975 (Reunion), 5490 (Antilles) and 2972
+  (Guyane): a Fort-de-France build inheriting a hard-coded 2154 would put every
+  pin in the sea **without raising**, and those bounds are what raises.
+
+- **The scaffold's region gate ran on its first real city and passed.**
+  `--region Europe` was accepted without `--new-region` because Europe is
+  already in `REGION_ORDER`, and `verify_app_imports()` reported
+  `app/cities.py imports: 21 cities, 7 regions`. The gate was added the
+  previous day after Dublin and Milan both shipped an unregistered region on
+  separate branches; this is the first evidence it works in the path that
+  should succeed rather than the path that should refuse.
+
+- **Paris is scaffolded, not built.** `check_provenance.py` names Paris as
+  having no recorded business registry, transit feed or boundary layer, and
+  that failure is correct and expected until those rows are written.
+  `step1_stations.py` and `step2_clean_businesses.py` are unwritten. Committed
+  as `5e0e3c6` on branch `paris-build`.
 
 ### 2026-09-23 - Four licences read: Oslo is clear, Prague has one left
 

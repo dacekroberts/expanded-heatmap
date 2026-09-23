@@ -674,6 +674,35 @@ _NOTICES = [
      "into density measures; the filtering, categories and densities are this "
      "project's own and are not produced or endorsed by the Comune di Milano.",
      False),
+    # ILE-DE-FRANCE MOBILITES - Paris. THE ONLY NOTICE HERE THAT PRESCRIBES
+    # MARKUP, not just words.
+    #
+    # Licence Mobilites is not a standard public licence: it covers 2 of the
+    # NAP's 799 datasets, there is no government-hosted text, and the
+    # authoritative document is a 14-page PDF behind a community wiki. Art. 3.1
+    # grants public display; Art. 5.4(a) prescribes BOTH the sentence and its
+    # LINKING - the database name hyperlinks to the dataset URI, and
+    # « Licence Mobilites » to the licence text. Hence the markdown links: they
+    # are the obligation, not decoration. st.caption renders markdown.
+    #
+    # Added 2026-09-23 after a verification pass found it MISSING from every
+    # map page while `docs/data_sources.md` had been calling it "a deploy
+    # blocker for Paris specifically" since the day it was written. Nothing
+    # automated caught that: check_provenance.py prints "24 numbered, N
+    # displayed" and passes regardless.
+    #
+    # Art. 5.7 also requires the data's date and update interval to be shown.
+    # That half is Paris-specific and lives on the city page, which reads
+    # outputs/paris/provenance.json - it cannot live here, because this block
+    # renders on every page and the date belongs to one city's snapshot.
+    ("Île-de-France Mobilités",
+     "Contient des informations de "
+     "[Réseaux urbains et interurbains d'Île-de-France Mobilités (IDFM)]"
+     "(https://transport.data.gouv.fr/datasets/"
+     "reseau-urbain-et-interurbain-dile-de-france-mobilites), présentement "
+     "mises à disposition aux conditions de la "
+     "[« Licence Mobilités »](https://cloud.fabmob.io/s/CJCEzKosfqqNBEx)",
+     True),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route
