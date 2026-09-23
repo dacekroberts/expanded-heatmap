@@ -7,6 +7,33 @@ real data can supply (see the add-city skill); none should ship.
 
 from pathlib import Path
 
+# The national facts. SIRENE is ONE register for all of France, so the columns,
+# the active value, the diffusion mask, the geolocation schema and the licence
+# live in the country module and five cities share them - Mexico's shape
+# (`pipeline/countries/mexico.py`), not Spain's per-city one. Re-exported with
+# noqa so this city's step files import them from here, unchanged.
+from pipeline.countries.france import (  # noqa: F401
+    COMMUNE_COLUMN,
+    DIFFUSION_COLUMN,
+    DIFFUSION_PUBLIC_VALUE,
+    EMPLOYEE_BAND_COLUMN,
+    ENSEIGNE_COLUMNS,
+    GEO_EPSG_COLUMN,
+    GEO_LAT_COLUMN,
+    GEO_LON_COLUMN,
+    GEO_QUALITY_COLUMN,
+    GEOLOC_DATASET_SLUG,
+    GEOLOC_RESOURCE_TITLE_CONTAINS,
+    JOIN_KEY,
+    NAF_COLUMN,
+    PARIS_GTFS_URL,
+    SIRENE_DATASET_SLUG,
+    SIRENE_RESOURCE_TITLE_PREFIX,
+    STATE_ACTIVE_VALUE,
+    STATE_COLUMN,
+    USUAL_NAME_COLUMN,
+)
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -22,14 +49,53 @@ EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"
 STATIONS_CSV = DATA_PROCESSED / "stations.csv"
 BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 
-# Raw inputs. Record the exact download command for each (all public):
-# TODO: gtfs.zip - the agency's GTFS feed URL.
-# TODO: city_boundary.geojson - a real GIS boundary layer for the city.
-# TODO: the business file - endpoint, server-side filter, and snapshot date if
-#       the source is a term history (Chicago's AS_OF_DATE is the model).
+# Raw inputs, all four public and keyless. `fetch_sources.py` downloads them;
+# no step may fetch (scripts/check_no_fetch_in_steps.py enforces it).
+#
+#   gtfs.zip          IDFM's own feed, PARIS_GTFS_URL. NOT either of the two
+#                     third-party copies the NAP lists beside it - Google's is
+#                     stale since 2023-11-17 and ITO World's reports
+#                     is_available false.
+#   city_boundary     geo.api.gouv.fr commune 75056. ⚠ `geometry=contour`, NOT
+#                     `fields=contour` - the latter returns HTTP 200 with a
+#                     120-byte POINT (the commune centre) and would scope the
+#                     whole build to one coordinate without erroring.
+#   sirene parquet    StockEtablissement, ~2,210 MB. Resolved through the
+#                     data.gouv API rather than hard-coded: the filename
+#                     carries its own monthly release date.
+#   geoloc parquet    INSEE's separate geolocation file, ~811 MB. The
+#                     coordinate leg is a JOIN on siret, so there is no
+#                     geocoder, no key and no rate limit in this build.
 GTFS_ZIP = DATA_RAW / "gtfs.zip"
-BUSINESSES_RAW_CSV = DATA_RAW / "businesses.csv"  # TODO: real file name
 CITY_BOUNDARY_GEOJSON = DATA_RAW / "city_boundary.geojson"
+SIRENE_PARQUET = DATA_RAW / "sirene_etablissements.parquet"
+GEOLOC_PARQUET = DATA_RAW / "sirene_geoloc.parquet"
+
+BOUNDARY_URL = ("https://geo.api.gouv.fr/communes/75056"
+                "?geometry=contour&format=geojson")
+
+# Every Ile-de-France commune, with contours (~6.2 MB, 1,268 communes). Not for
+# scoping - the single contour above does that - but to NAME the commune each
+# EXCLUDED station sits in, which Los Angeles established as the standard for a
+# system that crosses municipal borders: "54 of 110 stations, across 23 other
+# places" is a readable record and a bare count is not.
+#
+# ⚠ THE PATH FORMS DO NOT EXIST. `/regions/11/communes` and a comma-separated
+# `/departements/75,92,.../communes` both return 404; the region filter is a
+# QUERY PARAMETER. Recorded because both were tried, and a 404 on a constructed
+# URL is the cheap failure - the expensive one was `fields=contour`, which
+# answers 200 with a Point.
+IDF_COMMUNES_URL = ("https://geo.api.gouv.fr/communes?codeRegion=11"
+                    "&format=geojson&geometry=contour&fields=nom,code,contour")
+IDF_COMMUNES_GEOJSON = DATA_RAW / "idf_communes.geojson"
+
+# WHAT NOTHING INSIDE THE ARTIFACTS CAN TELL US, so fetch_sources.py writes it.
+# The GTFS carries NO feed_info.txt (14 files, measured), so the zip declares
+# no validity window at all - and notice 24 (Licence Mobilites Art. 5.7)
+# requires this project to DISPLAY the data's last-updated date and its update
+# interval. Capture both at download time or they cannot be shown honestly.
+PROVENANCE_JSON = DATA_RAW / "provenance.json"
+NAP_API = "https://transport.data.gouv.fr/api/datasets"
 
 # --- Coordinate reference systems -----------------------------------------
 
@@ -67,17 +133,76 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 
 # --- Station scope ----------------------------------------------------------
 
-# TODO: which lines count and why (one agency's rail system per city; note what
-# is left out), the feed's own route_ids, and the real public line names.
-# Check the rail system's shape before assuming "keep every station" (see the
-# add-city skill, Step 4).
-ROUTE_IDS = []
-LINE_NAMES = {}  # route_id -> real public name, e.g. {"801": "A Line"}
+# WHAT COUNTS: the Metro, and only the Metro. `route_type == 1`, 16 routes.
+#
+# IDFM's feed is the WHOLE Ile-de-France network - measured 2026-09-23 at 1,966
+# bus routes, 24 rail/RER, 17 tram, 16 metro, 1 funicular, 1 cable. So the
+# filter here is doing real work rather than confirming a single-mode feed.
+#
+# WHAT IS LEFT OUT, AND WHY IT IS NOT A SCOPE DECISION. RER and Transilien are
+# commuter rail, excluded by the standing rule in every built city (Boston's
+# CR-*, Chicago's Metra, Madrid's Cercanias, Miami's Tri-Rail, Philadelphia's
+# Regional Rail, Vancouver's West Coast Express). Trams are excluded in
+# Barcelona, Milan and Toronto already. Both would be dropped at ANY scope, so
+# commune-only is not what decides them - see docs/build_briefs/paris.md.
+#
+# Matched on route_type plus the exact short name, never a substring: "1" is a
+# substring of "11", "12", "13" and "14".
+ROUTE_TYPE_METRO = "1"
+ROUTE_IDS = [
+    "IDFM:C01371", "IDFM:C01372", "IDFM:C01373", "IDFM:C01374",
+    "IDFM:C01375", "IDFM:C01376", "IDFM:C01377", "IDFM:C01378",
+    "IDFM:C01379", "IDFM:C01380", "IDFM:C01381", "IDFM:C01382",
+    "IDFM:C01383", "IDFM:C01384", "IDFM:C01386", "IDFM:C01387",
+]
+
+# route_short_name -> the name riders use. Madrid's convention (`Linea 1`):
+# the operator's own public naming, not an English translation. The feed's
+# route_long_name is just the number again, so it supplies nothing.
+LINE_NAMES = {
+    "1": "Ligne 1", "2": "Ligne 2", "3": "Ligne 3", "4": "Ligne 4",
+    "5": "Ligne 5", "6": "Ligne 6", "7": "Ligne 7", "8": "Ligne 8",
+    "9": "Ligne 9", "10": "Ligne 10", "11": "Ligne 11", "12": "Ligne 12",
+    "13": "Ligne 13", "14": "Ligne 14",
+    "3B": "Ligne 3bis", "7B": "Ligne 7bis",
+}
+
+# RATP's official livery from the feed's own route_color, with TWO OVERRIDES.
+#
+# **The feed gives the bis lines their parent's colour, and that collides.**
+# Measured: M13 and M3bis are both 82C8E6, M6 and M7bis are both 82DC73. That
+# is not a feed error - RATP really does colour them that way - but a 16-entry
+# legend with two identical pairs cannot be read, which is the case add-city
+# Step 6 names: "if the agency's official line colours are ambiguous or shared,
+# use a palette of your own". The 14 main lines keep their official colour and
+# only the two bis lines are shifted, so the deviation is as small as it can be
+# and is visible here rather than inferred from the map.
+LINE_COLOURS = {
+    "1": "#FFBE00", "2": "#0055C8", "3": "#6E6E00", "4": "#A0006E",
+    "5": "#FF5A00", "6": "#82DC73", "7": "#FF82B4", "8": "#D282BE",
+    "9": "#D2D200", "10": "#DC9600", "11": "#6E491E", "12": "#00643C",
+    "13": "#82C8E6", "14": "#640082",
+    "3B": "#3D7A99",   # was 82C8E6, identical to Ligne 13
+    "7B": "#2E8B57",   # was 82DC73, identical to Ligne 6
+}
 
 # --- Business filtering ------------------------------------------------
 
-# TODO: how in-city rows are identified: the dataset's own city field (check
-# what it really holds) or an authoritative district field.
+# HOW IN-CITY ROWS ARE IDENTIFIED. Not a city-name field: SIRENE has none that
+# is trustworthy, and this register is national. The authoritative marker is the
+# INSEE commune code, and Paris is subdivided into 20 arrondissements each with
+# its own code (75101-75120), so it is a PREFIX match rather than one value.
+#
+# ⚠ `75056` is Paris's commune code for the BOUNDARY API and is NOT what
+# appears in this column - the two are different code systems for the same
+# city, and mixing them returns zero rows silently, the same shape as the
+# "Actif" bug. Validated 2026-09-22 across 14 row groups with Paris as the
+# control; every prefix returned non-zero.
+COMMUNE_PREFIXES = ("751",)
+BOUNDARY_COMMUNE_CODE = "75056"
+
+# Kept because the scaffold's shared step templates reference it. Paris does
+# not filter on a name string; COMMUNE_PREFIXES is the real filter.
 CITY_KEEP = "PARIS"
 
 TAXONOMY_SYSTEM = "france_naf"
