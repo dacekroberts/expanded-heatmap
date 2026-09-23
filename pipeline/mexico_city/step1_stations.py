@@ -23,11 +23,9 @@ true:
 
 import json
 import sys
-import time
 
 import geopandas as gpd
 import pandas as pd
-import requests
 from shapely.geometry import MultiLineString, shape
 from shapely.ops import linemerge, polygonize, unary_union
 
@@ -39,15 +37,12 @@ from pipeline.mexico_city.config import (
     CRS_PROJECTED,
     EXCLUDED_STATIONS_CSV,
     LINE_NAMES,
-    OSM_BBOX,
     OSM_BOUNDARY_JSON,
     OSM_EXCLUDE_RAILWAY,
     OSM_RAILWAY_KEEP,
     OSM_ROUTES_JSON,
     OSM_STATIONS_JSON,
     OSM_STATION_NETWORKS,
-    OVERPASS_HOSTS,
-    OVERPASS_USER_AGENT,
     STATIONS_CSV,
     STATION_COUNT_GATE_3,
     STATION_COUNT_GATE_3_REASON,
@@ -62,80 +57,27 @@ BOUNDARY_AREA_KM2_MIN = 1_300.0
 BOUNDARY_AREA_KM2_MAX = 1_700.0
 
 
-def overpass(query, cache_path, label):
-    """POST to Overpass, trying each host. Cached, because a 504 from one host
-    is a fact about that host and re-running the pipeline should not depend on
-    which one answered."""
-    if cache_path.exists():
-        print(f"  {label}: cached {cache_path.name}")
-        return json.loads(cache_path.read_text(encoding="utf-8"))
-    last = None
-    for host in OVERPASS_HOSTS:
-        try:
-            r = requests.post(host, data={"data": query}, timeout=300,
-                              headers={"User-Agent": OVERPASS_USER_AGENT})
-            print(f"  {label}: {host.split('/')[2]} HTTP {r.status_code} "
-                  f"{len(r.content):,} bytes")
-            if r.status_code == 200:
-                payload = r.json()
-                # A 200 WITH NO ELEMENTS IS NOT A SUCCESS, and caching it is
-                # worse than failing: overpass.osm.ch returned 272 bytes and an
-                # empty list for the routes query, which this function cached
-                # and the caller then reported as "every ref has exactly 2
-                # direction relations" - a vacuous truth over an empty set.
-                # Treat empty as a host failure and try the next one.
-                if not payload.get("elements"):
-                    print(f"  {label}: {host.split('/')[2]} 200 but EMPTY - "
-                          "not cached, trying next host")
-                    last = "empty result"
-                    time.sleep(2)
-                    continue
-                cache_path.parent.mkdir(parents=True, exist_ok=True)
-                cache_path.write_text(r.text, encoding="utf-8")
-                return payload
-            last = f"HTTP {r.status_code}"
-        except Exception as exc:                        # noqa: BLE001
-            print(f"  {label}: {host.split('/')[2]} {type(exc).__name__}")
-            last = f"{type(exc).__name__}"
-        time.sleep(2)
-    raise SystemExit(
-        f"Every Overpass host failed for {label} (last: {last}). This is a "
-        "fact about Overpass, not about Mexico City - retry before concluding "
-        "anything about the data."
-    )
+def read_cached(path, label):
+    """Read a raw input that `fetch_sources.py` has already downloaded.
 
-
-Q_STATIONS = f"""
-[out:json][timeout:280];
-(
-  node["railway"]({OSM_BBOX});
-);
-out body;
-"""
-
-# `out geom`, NOT `out tags`: the member way geometry is the line alignment the
-# map draws, and it is the OSM analogue of GTFS shapes.txt. Without it this
-# city would have station dots and no lines, which breaks the project's
-# invariant that every line is drawn, labelled and in the legend.
-Q_ROUTES = f"""
-[out:json][timeout:280];
-(
-  relation["type"="route"]["route"="subway"]({OSM_BBOX});
-  relation["type"="route"]["route"="light_rail"]({OSM_BBOX});
-);
-out geom;
-"""
-
-Q_BOUNDARY = """
-[out:json][timeout:280];
-relation["boundary"="administrative"]["admin_level"="4"]["name"="Ciudad de México"];
-out geom;
-"""
+    This step does NOT fetch. It used to - `overpass()` lived here and pulled
+    on a cache miss - which made `drift_check.py` reach the network on any
+    checkout without `data/mexico_city/raw/`, and turned "does the committed
+    code still produce the committed output" into "does the current upstream".
+    See pipeline/mexico_city/fetch_sources.py for the whole argument.
+    """
+    if not path.exists():
+        raise SystemExit(
+            f"Missing {path.name} ({label}). "
+            f"Run pipeline/mexico_city/fetch_sources.py first."
+        )
+    print(f"  {label}: {path.name} ({path.stat().st_size:,} bytes)")
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def load_boundary():
     """Assemble CDMX's admin_level=4 polygon from the relation's member ways."""
-    data = overpass(Q_BOUNDARY, OSM_BOUNDARY_JSON, "boundary")
+    data = read_cached(OSM_BOUNDARY_JSON, "boundary")
     rels = [e for e in data["elements"] if e["type"] == "relation"]
     if len(rels) != 1:
         raise SystemExit(
@@ -173,9 +115,9 @@ def load_boundary():
 def main():
     print("=== Step 1: Mexico City stations (OpenStreetMap) ===\n")
 
-    print("Fetching OSM:")
-    st_data = overpass(Q_STATIONS, OSM_STATIONS_JSON, "stations")
-    rt_data = overpass(Q_ROUTES, OSM_ROUTES_JSON, "routes")
+    print("Reading cached OSM:")
+    st_data = read_cached(OSM_STATIONS_JSON, "stations")
+    rt_data = read_cached(OSM_ROUTES_JSON, "routes")
     boundary = load_boundary()
 
     nodes = [e for e in st_data["elements"]

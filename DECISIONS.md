@@ -16,10 +16,17 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**154 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**161 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [The geocoder gap was closed by moving the boundary, not the code](#2026-09-22---the-geocoder-gap-was-closed-by-moving-the-boundary-not-the-code)
+- [Guadalajara was the last step file that fetched, and the rule is now a check](#2026-09-22---guadalajara-was-the-last-step-file-that-fetched-and-the-rule-is-now-a-check)
+- [Mexico City's fetching moved out of its steps, as the worked pattern for the other two](#2026-09-22---mexico-citys-fetching-moved-out-of-its-steps-as-the-worked-pattern-for-the-other-two)
+- [Both Mexican cities hardcoded the DENUE columns their national config already names](#2026-09-22---both-mexican-cities-hardcoded-the-denue-columns-their-national-config-already-names)
+- [Check I caught another session's orphaned row within minutes, which is the first time a check here found a defect it was not written for](#2026-09-22---check-i-caught-another-sessions-orphaned-row-within-minutes-which-is-the-first-time-a-check-here-found-a-defect-it-was-not-written-for)
+- [Toronto's collapse check guarded the wrong number, and re-running it showed a baseline can miss a content change](#2026-09-22---torontos-collapse-check-guarded-the-wrong-number-and-re-running-it-showed-a-baseline-can-miss-a-content-change)
+- [Surveyed CLAUDE.md's invariants for which ones nothing verifies, and nearly shipped a check that examined nothing](#2026-09-22---surveyed-claudemds-invariants-for-which-ones-nothing-verifies-and-nearly-shipped-a-check-that-examined-nothing)
 - [drift_check leaves outputs/ modified on Windows when nothing changed](#2026-09-22---drift_check-leaves-outputs-modified-on-windows-when-nothing-changed)
 - [Working the dead-constant list demonstrated, live, that drift_check is not offline for three cities](#2026-09-22---working-the-dead-constant-list-demonstrated-live-that-drift_check-is-not-offline-for-three-cities)
 - [Two probes came back clean, and the clean result is the record](#2026-09-22---two-probes-came-back-clean-and-the-clean-result-is-the-record)
@@ -190,6 +197,312 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - The geocoder gap was closed by moving the boundary, not the code
+
+- **The recorded plan for the three `step3_geocode.py` files was the wrong
+  fix, and saying so is the entry.** Hours earlier this session wrote them
+  into `PLAN.md` as "the same defect one level of indirection down", to be
+  closed the way Mexico City, Madrid and Guadalajara were: hoist the download
+  into `fetch_sources.py`. **There is no URL to hoist.** The US Census
+  geocoder is POSTed a batch of addresses that the step itself derives from
+  its own filtering, so moving the request means moving the address
+  preparation with it - restructuring three live pipelines to satisfy a rule
+  stated one notch too broadly.
+
+- **The rule was too broad. It is not "a step never fetches" but "a step may
+  fetch when a person runs it; a DRIFT CHECK may never fetch."** Those had
+  been the same sentence only because, for the four cities, they were. The
+  geocoder separates them: fetching on a cache miss is the intended workflow
+  for a person populating `data/<city>/raw/geocode_cache/`, and the thing that
+  was actually wrong was `drift_check.py` joining in - it globs `step*.py`, so
+  on a fresh checkout it geocoded ~9% of Los Angeles over the network and then
+  reported whether the result had drifted, which is a different question.
+
+- **`pipeline/offline.py` puts the guard at that boundary.** `drift_check.py`
+  sets `HEATMAP_NO_NETWORK` in the environment of every step it runs, and
+  `refuse_if_offline()` raises immediately before a request rather than at
+  import time, so a cached batch is still served. Proved three ways with
+  `requests.post` replaced by a tripwire: an uncached batch under the flag
+  **refuses without calling out**; a cached batch under the flag is **still
+  served**; with the flag unset the request is **attempted as before**, so a
+  person running step 3 is unaffected. `drift_check.py guadalajara` and
+  `mexico_city` both still report zero drift with the guard armed.
+
+- **`check_no_fetch_in_steps.py` gained a third answer rather than a wider
+  exception list.** A shared module that calls `refuse_if_offline()` is
+  reported GUARDED; a step reaching the network only through guarded modules
+  is listed by name and not failed; anything else is a violation. The three
+  geocode steps left `KNOWN_GAPS` for that category - which is a claim about
+  them, not an excuse. **And the check now fails if `drift_check.py` stops
+  mentioning `NO_NETWORK_ENV`**, because a guard nobody arms is worse than no
+  guard: it reads as protection in every listing while protecting nothing.
+  That limb exists because `check_provenance.py`'s CRS limb once parsed 0 of
+  16 longitudes while printing green.
+
+- **`scripts/check_no_fetch_in_steps_selftest.py` is the first executable
+  answer in this project to "never ship a check you have not watched fail".**
+  Six cases, 7 of 7 behaving as intended: a step importing an HTTP client, a
+  step importing a guarded module (which must be classified, not failed), the
+  guard removed from the shared module, `drift_check.py` no longer arming it,
+  a `KNOWN_GAPS` entry that has quietly been fixed, and a glob matching no
+  files at all. **It copies what it breaks into a temporary tree** and runs
+  the check there via a new `--root`: the first version mutated the working
+  tree and restored it in a `finally`, which is one Ctrl-C away from leaving
+  a broken repository.
+
+- **One case went stale within the hour, and the self-test says what to do
+  about that.** "A step imports a shared module that fetches" was written as a
+  failure case; once the geocoder became guarded, the correct verdict flipped
+  to pass, and the harness reported DID NOT FAIL against a check that was
+  right. It is now a positive case asserting the classification. The closing
+  message tells the next reader to work out which of the two went stale before
+  "fixing" either.
+
+### 2026-09-22 - Guadalajara was the last step file that fetched, and the rule is now a check
+
+- **`pipeline/guadalajara/fetch_sources.py` closes the set of three.** Mexico
+  City moved out earlier today as the worked pattern, Madrid moved out on the
+  unmerged `spain-app-wiring` branch by its own session, and this is the last.
+  The three Overpass queries moved with the fetching rather than staying in
+  step 1: each carries a long comment addressed to whoever edits the query -
+  the Línea 4 lesson about matching on mode rather than network label, and the
+  bbox lesson from the run that matched **Guadalajara in SPAIN**, 26,814 km2
+  against the municipio's 151 - and that reader is now in `fetch_sources.py`.
+
+- **Guadalajara's retry policy was kept rather than unified with its sibling's.**
+  This city makes two passes over the Overpass host list with a 3-second pause;
+  Mexico City makes one with 2 seconds. Neither has been measured against the
+  other, and the rejected alternative - copying the sibling's helper wholesale,
+  which the plan had called "mechanical" - would have changed a retry policy
+  silently inside a refactor whose whole claim is that behaviour is preserved.
+  The file says so where the next reader will see it.
+
+- **Verified both directions.** `drift_check.py guadalajara` reports **RESULT:
+  zero drift** with the cache present (117,454 storefronts, 36,925 within a
+  ring, 56 stations). With `data/guadalajara/raw/` moved aside, step 1 and step
+  2 both **exit 1** with "Run pipeline/guadalajara/fetch_sources.py first".
+
+- **`scripts/check_no_fetch_in_steps.py` now decides this for every city, and
+  it found a fourth case nobody had named.** Three `step3_geocode.py` files -
+  Los Angeles, New York, Washington DC - reach the network with no HTTP client
+  anywhere in them, by importing `geocode_addresses` from
+  `pipeline/census_geocoder.py`, which POSTs address batches to the US Census
+  geocoder on a cache miss. `drift_check.py` globs `step*.py`, so it runs them
+  like any other step. The module's own docstring admits it: "off the network
+  **after the first run**". The check therefore walks the shared `pipeline/*.py`
+  modules and reports what a step reaches *through* them, which is the limb
+  that found this - it was written to cover a case that turned out to exist.
+
+- **Those three are listed under `KNOWN_GAPS` rather than fixed or excused.**
+  Unlike the four cities, the geocoder's input is a batch of addresses the step
+  itself computes, not a fixed upstream URL, so moving the download means
+  moving the address preparation with it - build-session work, now in
+  `PLAN.md`. The rejected alternative was narrowing the check to direct imports
+  only, which would have made it pass today and hidden the finding. A
+  `KNOWN_GAPS` entry that stops violating **fails** the check, so the list
+  cannot rot into a permanent exemption; Madrid's two entries will force
+  themselves out when `spain-app-wiring` lands.
+
+- **The check was watched failing four ways before being shipped**, per the
+  `consistency-sweep` rule: a step importing `requests` again, a step importing
+  a shared module that fetches, a `KNOWN_GAPS` entry that no longer violates,
+  and a glob matching nothing at all (a vacuous pass is worse than a failure).
+  **The first negative test reported the check as broken when the harness was**
+  - it mutated `read_bytes().decode()` text with `\n` patterns while the
+  working-tree file is CRLF, so every pattern matched nothing. That is the
+  fourth distinct defect this repository's `.gitattributes` line-ending
+  normalisation has caused, and the first to attack a test rather than the
+  code it tests.
+
+- **Three stale claims fixed in Guadalajara's step 2 while reading it.** It
+  announced itself as `=== Step 2: Mexico City storefronts ===` on every run;
+  its docstring said the scope question is settled by which file is downloaded
+  "(09 = Ciudad de Mexico)" and that "this city has no CITY_KEEP" for that
+  reason, which its own body contradicts 140 lines later - entidad 14 is the
+  whole of Jalisco, 401,813 units across 125 municipios including Puerto
+  Vallarta 300 km away, so this city must scope by `MUNICIPIOS_KEEP`. Both now
+  describe this city. Third: `df['municipio']` in both Mexican cities' step 2
+  still read the DENUE column by literal, missed by the 2026-09-22 substitution
+  that only covered the double-quoted spelling - a reminder that a fix applied
+  by search is only as complete as its pattern.
+
+### 2026-09-22 - Mexico City's fetching moved out of its steps, as the worked pattern for the other two
+
+- **`pipeline/mexico_city/fetch_sources.py` now holds everything that touches
+  the network**: the three Overpass queries and the host-by-host `overpass()`
+  helper from step 1, and the DENUE download from step 2. Both steps read the
+  cache and **exit with "Run pipeline/mexico_city/fetch_sources.py first"**
+  when it is absent - Toronto's behaviour, and the convention the other
+  thirteen cities already follow.
+
+- **Verified both directions, not just the happy one.** With the cache present,
+  `drift_check.py mexico_city` reports **RESULT: zero drift**, so the move is
+  behaviour-preserving. With `data/mexico_city/raw/` moved aside, step 1 stops
+  with `Missing osm_stations.json (stations). Run
+  pipeline/mexico_city/fetch_sources.py first.` - which is the whole point, and
+  is exactly what Toronto did when this session first ran a drift check here.
+
+- **The hard-won behaviour moved intact**, because it is the kind that is
+  cheapest to lose in a refactor: an Overpass **200 with no elements is still
+  treated as a host failure**, never cached, and the next host is tried - that
+  one once produced the vacuous claim that "every ref has exactly 2 direction
+  relations" over an empty set. And the DENUE zip is still checked by **magic
+  bytes** rather than the filename the server claims.
+
+- **A four-byte bug caught before it shipped.** The magic-byte check was written
+  as `b"PK\x03\x04"` - five literal characters rather than the 4-byte ZIP
+  signature - so it would have rejected every real DENUE download. Found by
+  evaluating the literal rather than reading it, which is the same discipline
+  that caught the longitude parser examining zero cities earlier today.
+  Over-escaping in a generated file, the third time today that escaping has
+  bitten.
+
+- **Stopped at one city deliberately.** Guadalajara and Madrid have the same
+  defect and are now a mechanical repeat of this pattern, but context was at
+  84% and a half-finished refactor spanning three live pipelines is a worse
+  state than one finished city plus a written pattern. `PLAN.md` carries the
+  remaining two with this commit named as the model.
+
+### 2026-09-22 - Both Mexican cities hardcoded the DENUE columns their national config already names
+
+- **The PLAN item understated it: it was both cities, not one.** Guadalajara
+  and Mexico City each re-export four DENUE column names from
+  `pipeline/countries/mexico.py` and then wrote `"cve_ent"` and `"municipio"`
+  as literals anyway - in `usecols`, in the state sanity check and in the
+  municipio scope filter. A DENUE column rename would have been fixed once in
+  the national file and missed in **two** step files, which is exactly what
+  profiling a country once is meant to prevent.
+
+- **Both configs now re-export `DENUE_STATE_COLUMN` and
+  `DENUE_MUNICIPIO_COLUMN`, and both step 2 files import them.** Verified by
+  running: `drift_check` reports **zero drift** for both cities, so the
+  substitution is genuinely name-for-value.
+
+- **Two literals were deliberately LEFT, and that distinction is the
+  interesting part.** `cols = [..., "scian", "bucket", "municipio"]` is this
+  project's OUTPUT schema for `businesses_clean.csv`, sitting beside
+  `business_name` and `bucket` - names this project chose. It coincides with
+  DENUE's input column only because the column passes through unrenamed.
+  Binding the output contract to the input spelling would mean a DENUE rename
+  silently renaming a column downstream code reads. Both sites now carry a
+  comment saying so, because the next sweep will see a bare literal and want to
+  "fix" it.
+
+- **The general shape: a string appearing twice is not automatically a
+  duplication.** Ask which of the two is the authority. For the DENUE input
+  columns it is the national config, so the literals were wrong; for the output
+  schema it is this project, so the literals are right.
+
+### 2026-09-22 - Check I caught another session's orphaned row within minutes, which is the first time a check here found a defect it was not written for
+
+- **`check_provenance.py` failed on `docs/city_master_list.md:432`** — a Sofia
+  discard row separated from its table by prose inserted above it, so it
+  rendered as literal pipe-delimited text. Introduced by `bf682db` ("Tel Aviv
+  promoted to Band B; Tallinn discarded"), pushed by another session, and
+  caught on the next run here **before anyone read the page**.
+
+- **That is the first time one of these checks found a defect in work it was
+  not written for.** Check I was built from Edmonton's and Toronto's orphaned
+  rows in `data_sources.md`; the same shape appeared hours later in a different
+  file, from a different session, for the same reason — a row and its table
+  separated by an insertion between them. It is the argument for a check over a
+  correction, made without anyone arguing it.
+
+- **Fixed by moving the row to sit beside Tallinn's**, its sibling in the same
+  `| City | What the host actually does |` table, which is plainly where the
+  authoring session meant it to go: both are long-form discard entries, and the
+  Tallinn prose belongs below the table rather than inside it. The short Sofia
+  row in the D-c summary table above is untouched and not a duplicate — it
+  serves a different table.
+
+- **Recording that master was briefly red and why.** This session committed and
+  pushed Toronto's fix in the same breath as merging that commit, and only
+  checked `--strict` afterwards; it exited 1. The failure was inherited, not
+  caused, but the ordering was wrong: **run the check before the push, not
+  after**. Fixed within minutes, and the lesson is the cheaper half of the
+  story.
+
+### 2026-09-22 - Toronto's collapse check guarded the wrong number, and re-running it showed a baseline can miss a content change
+
+- **The dead constant was a mis-wiring, not a redundancy.** Step 1 collapses
+  234 platforms to 110 stations, then filters to 108 in-city. Its check read
+  `if len(stations) != IN_CITY_STATIONS_EXPECTED` - comparing the COLLAPSED
+  count against the IN-CITY expectation, 110 against 108 - so it **printed a
+  NOTE on every single run** while `STATIONS_COLLAPSED_EXPECTED` sat unread.
+  That is why a dead-constant sweep found it: nothing read the constant because
+  the wrong one had been used in its place.
+
+- **Both constants now guard the quantity they name**, and a second check was
+  added after the boundary filter for the in-city count. **Verified by running
+  the step, not by reading it**: 234 platforms -> 110 stations, 108 inside, 2
+  excluded (Highway 407, Vaughan Metropolitan Centre), and **zero NOTEs** where
+  the old code emitted one every time. All three figures match the committed
+  `baseline.json`.
+
+- **The docstring also claimed `excluded_stations.csv` is "EMPTY - nothing
+  outside".** It has two rows and has had since the city was built. Corrected.
+
+- **AND RUNNING IT SURFACED SOMETHING LARGER, which is not this city's bug.**
+  To verify the fix, Toronto's raw data was fetched - and the regenerated
+  `heatmap.html` DRIFTED from the committed one: a storefront present in the
+  committed map ("KORDOG") is absent now, because the MLS register has changed
+  upstream since those outputs were built. The change is real data movement,
+  not a rendering artefact.
+
+- **The alarming part is that `baseline.json` reported IDENTICAL.** All five
+  figures it watches - `storefront_rows` 19,384, `geocoded_rows` 18,186 and the
+  three bucket totals - matched exactly while the map's contents differed. **A
+  row-count baseline cannot see a substitution**, and `drift_check` only caught
+  this because it also diffs the rendered HTML. Worth knowing before anyone
+  proposes trusting the counts alone, or trims the HTML diff for being noisy.
+
+- **`outputs/` was restored rather than committed.** The fix is a print
+  statement; the published map must not move because a sweep happened to
+  re-download a register on a Tuesday. Committing the regenerated file would
+  have baked today's upstream snapshot into the site under a commit message
+  about an assertion.
+
+### 2026-09-22 - Surveyed CLAUDE.md's invariants for which ones nothing verifies, and nearly shipped a check that examined nothing
+
+- **Went through `CLAUDE.md`'s invariants asking which have a check and which
+  rest on memory.** Eight are machine-checkable; all eight hold today.
+  `streamlit_folium` appears nowhere in `app/`; `map_common.py` names none of
+  the 13 taxonomy modules; no `data/` file is committed and all 17 `outputs/`
+  directories are; the public name is `SITE_NAME = "Storefronts Near Transit"`,
+  not a city; and the removal commitment appears in both files that must carry
+  it. Recorded as examined rather than left implicit.
+
+- **Three of them are now `check_provenance.py` check K**, chosen because each
+  breaks SILENTLY and a new city is exactly when that would happen:
+  **the OSM basemap attribution** (17 of 17 maps carry it and the copyright
+  link - an ODbL obligation breached by omission rather than by a wrong
+  string); **`CRS_PROJECTED` against each city's own longitude** (a copied CRS
+  does not error, it measures a few per cent wrong); and **no map step forking
+  `render_heatmap()`** (all 17 call it, none builds its own `folium.Map`, and
+  they run 77-130 lines).
+
+- **A probe bug worth recording on its own: only 13 of 17 cities have a
+  `step3_map.py`.** Los Angeles, New York, Toronto and Washington D.C. need a
+  geocoding pass, so theirs is `step4_map.py`. The first glob missed all four -
+  which is an argument for writing the rule down once, correctly, rather than
+  re-deriving it per sweep.
+
+- **AND THE CHECK ITSELF NEARLY SHIPPED BROKEN, in the way this whole taxonomy
+  is about.** The CRS limb read longitudes from `app/cities.py` with
+  `getattr(node, "value", None)`; a negative number is an `ast.UnaryOp`
+  wrapping a `Constant`, so **every western longitude parsed as None and the
+  limb examined zero of sixteen cities** - while the section printed its green
+  line. It was caught by deliberately breaking Calgary's CRS and noticing the
+  check stayed SILENT, not by reading the code. Fixed with
+  `ast.literal_eval`, and the limb now **fails if it reads fewer longitudes
+  than there are cities**, because a limb that can be starved of input should
+  say so rather than pass.
+
+- **Written into the sweep skill as its own rule: never ship a check you have
+  not watched fail.** Every check added today was negative-tested, and this is
+  the one where that discipline actually earned itself rather than merely
+  confirming what reading suggested.
 
 ### 2026-09-22 - drift_check leaves outputs/ modified on Windows when nothing changed
 

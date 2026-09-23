@@ -42,6 +42,18 @@ WHAT IT CHECKS
   D. Notice numbers are unique and contiguous from 1. They were neither: the
      list carried two item 8s and two item 15s from 2026-09-21 to 2026-09-22,
      because each country's block was appended without renumbering.
+  K. Three of `CLAUDE.md`'s invariants that a new city could break silently:
+
+     - **the basemap attribution is on every rendered map.** ODbL requires it
+       to stay visible; nothing verified it, and it is the one obligation here
+       that is breached by OMISSION rather than by a wrong string.
+     - **each city's `CRS_PROJECTED` matches its own longitude.** The invariant
+       is that the projected CRS is derived per city and NEVER copied, and a
+       copied one is invisible: distances come out wrong by a few per cent
+       rather than erroring.
+     - **each city's map step calls `render_heatmap()` and builds no
+       `folium.Map` of its own**, so the shared renderer is not forked.
+
   J. Every `outputs/...` file NAMED in a page's prose or in the docs exists and
      is committed. These are not files the app opens - it reads one
      `heatmap.html` per city through an iframe - they are **promises to a
@@ -268,6 +280,65 @@ def displayed_notices():
     start = src.index("_NOTICES")
     end = src.index("def ", start)
     return re.findall(r'^\s{4}\("([^"]+)"', src[start:end], re.M)
+
+
+# 326xx WGS84 UTM north, 258xx ETRS89 UTM, 269xx NAD83 UTM, 327xx WGS84 south.
+UTM_FAMILIES = (326, 327, 258, 269)
+
+
+def check_invariants(names, lons):
+    """K: three CLAUDE.md invariants a new city could break silently."""
+    problems = []
+
+    # 1. ODbL: the basemap credit must be on every rendered map.
+    for html in sorted(ROOT.glob("outputs/*/heatmap.html")):
+        text = html.read_text(encoding="utf-8", errors="replace")
+        rel = html.relative_to(ROOT).as_posix()
+        if "OpenStreetMap" not in text:
+            problems.append(f"{rel}: no OpenStreetMap attribution - ODbL "
+                            f"requires it to stay visible")
+        elif "openstreetmap.org/copyright" not in text.lower():
+            problems.append(f"{rel}: attribution present but not linked to "
+                            f"the OSM copyright page")
+
+    # 2. The projected CRS is derived per city, never copied.
+    for name in names:
+        slug = SLUG_OVERRIDES.get(name, name.lower().replace(" ", "_"))
+        cfg = ROOT / "pipeline" / slug / "config.py"
+        lon = lons.get(name)
+        if not cfg.exists() or lon is None:
+            continue
+        m = re.search(r"CRS_PROJECTED\s*=\s*[\"']EPSG:(\d+)[\"']", read(cfg))
+        if not m:
+            continue
+        epsg = int(m.group(1))
+        family, zone = divmod(epsg, 100)
+        implied = int((lon + 180) // 6) + 1
+        if family not in UTM_FAMILIES:
+            problems.append(f"{slug}: CRS_PROJECTED EPSG:{epsg} is not a UTM "
+                            f"zone - the invariant is a per-city UTM in metres")
+        elif zone != implied:
+            problems.append(
+                f"{slug}: CRS_PROJECTED EPSG:{epsg} is UTM zone {zone}, but "
+                f"longitude {lon:.2f} implies zone {implied} - a copied CRS "
+                f"does not error, it just measures wrong")
+
+    # 3. The shared renderer is not forked.
+    steps = sorted(ROOT.glob("pipeline/*/step[34]_map.py"))
+    seen = {s.parent.name for s in steps}
+    for s in steps:
+        text = read(s)
+        rel = s.relative_to(ROOT).as_posix()
+        if "render_heatmap" not in text:
+            problems.append(f"{rel}: does not call render_heatmap()")
+        if "folium.Map(" in text:
+            problems.append(f"{rel}: builds its own folium.Map - "
+                            f"pipeline/map_common.py is the shared renderer")
+    for name in names:
+        slug = SLUG_OVERRIDES.get(name, name.lower().replace(" ", "_"))
+        if (ROOT / "pipeline" / slug).is_dir() and slug not in seen:
+            problems.append(f"pipeline/{slug}: no step3_map.py or step4_map.py")
+    return problems
 
 
 def check_cited_outputs():
@@ -637,6 +708,39 @@ def main():
               f"({len(soft)} unverifiable)")
     for s in soft:
         print(f"      note: {s}")
+
+    # --- K, invariants a new city could break silently ------------------------
+    # `ast.literal_eval`, NOT `node.value` - a negative number is a UnaryOp
+    # wrapping a Constant, so `getattr(v, "value", None)` returns None for
+    # every western longitude in the file. The first version of this did that
+    # and parsed ZERO of sixteen, so the CRS limb below examined nothing while
+    # reporting success. Caught by negative-testing the limb rather than by
+    # reading it.
+    lons = {}
+    for node in ast.parse(read(CITIES_PY)).body:
+        if isinstance(node, ast.Assign) and any(
+                getattr(t_, "id", None) == "CITIES" for t_ in node.targets):
+            for d in node.value.elts:
+                pairs = {}
+                for k, v in zip(d.keys, d.values):
+                    key = getattr(k, "value", None)
+                    try:
+                        pairs[key] = ast.literal_eval(v)
+                    except (ValueError, TypeError, SyntaxError):
+                        pairs[key] = None
+                if pairs.get("name") is not None and pairs.get("lon") is not None:
+                    lons[pairs["name"]] = float(pairs["lon"])
+    if len(lons) != len(names):
+        # A limb that silently examines nothing is worse than one that fails.
+        failures.append(("CLAUDE.md invariants", [
+            f"read a longitude for only {len(lons)} of {len(names)} cities in "
+            f"app/cities.py - the CRS check cannot run"]))
+    inv = check_invariants(names, lons)
+    if inv:
+        failures.append(("CLAUDE.md invariants", inv))
+    else:
+        print("  invariants: OSM attribution on every map; every CRS matches "
+              "its longitude; no map step forks the renderer")
 
     # --- J, outputs/ files promised in prose ---------------------------------
     cited = check_cited_outputs()

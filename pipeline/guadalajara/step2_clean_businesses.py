@@ -1,10 +1,16 @@
 """Step 2 - Guadalajara (Regional) storefronts from INEGI's DENUE.
 
-DENUE is a national ESTABLISHMENT register published per entidad federativa, so
-the in-city question is answered by which file is downloaded (09 = Ciudad de
-Mexico) rather than by a city-name field. That is why this city has no
-CITY_KEEP: there is no city column to mis-read, which is the trap that made Los
-Angeles' postal community names keep about half its rows.
+DENUE is a national ESTABLISHMENT register published per entidad federativa,
+so the download narrows the scope before any filter runs - but ONLY TO A
+STATE. Entidad 14 is the whole of Jalisco, not this city, so unlike Mexico
+City (where entidad 09 IS the city) the scope is finished here by
+MUNICIPIOS_KEEP. See the regional-scope block in main().
+
+There is still no CITY_KEEP, and the reason is worth keeping: the join is on
+`municipio`, INEGI's own controlled spelling, not on a free-text city name.
+That is the trap that made Los Angeles' postal community names keep about half
+its rows - and the spelling is asserted below rather than assumed, because
+'Tlaquepaque' alone matches nothing.
 
 Privacy, and it is the strongest position of any city here. INEGI already did
 the work upstream:
@@ -29,7 +35,6 @@ from pathlib import Path
 
 import geopandas as gpd
 import pandas as pd
-import requests
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
@@ -42,14 +47,14 @@ from pipeline.guadalajara.config import (
     DENUE_ACTIVITY_COLUMN,
     DENUE_CODE_COLUMN,
     DENUE_MEMBER,
+    DENUE_MUNICIPIO_COLUMN,
     DENUE_NAME_COLUMN,
     DENUE_STATE_CODE,
-    DENUE_URL,
+    DENUE_STATE_COLUMN,
     DENUE_ZIP,
     FORBIDDEN_COLUMNS,
     MUNICIPIOS_KEEP,
     GUADALAJARA_BBOX,
-    OVERPASS_USER_AGENT,
     PREMISES_TYPE_COLUMN,
     PREMISES_TYPE_KEEP,
     SOURCE_ENCODING,
@@ -65,8 +70,8 @@ USECOLS = (
     DENUE_CODE_COLUMN,
     DENUE_ACTIVITY_COLUMN,
     PREMISES_TYPE_COLUMN,
-    "cve_ent",
-    "municipio",
+    DENUE_STATE_COLUMN,
+    DENUE_MUNICIPIO_COLUMN,
     # MEASURED AND PRINTED, NEVER WRITTEN OUT. `numero_int` is DENUE's
     # structured interior/unit number - better evidence of a dwelling than a
     # regex over free text, which is what the multi-source-city skill asks for.
@@ -80,31 +85,26 @@ USECOLS = (
 )
 
 
-def download():
-    if DENUE_ZIP.exists():
-        print(f"  cached {DENUE_ZIP.name} ({DENUE_ZIP.stat().st_size:,} bytes)")
-        return
-    print(f"  downloading {DENUE_URL}")
-    DENUE_ZIP.parent.mkdir(parents=True, exist_ok=True)
-    r = requests.get(DENUE_URL, timeout=900,
-                     headers={"User-Agent": OVERPASS_USER_AGENT})
-    r.raise_for_status()
-    # Magic bytes, not the filename the server claims - add-country's rule,
-    # learned from Busan serving a PNG under a CSV's Content-Disposition.
-    if not r.content.startswith(b"PK\x03\x04"):
+def require_denue():
+    """The DENUE zip must already be here - this step does NOT download it.
+
+    It used to, on a cache miss, which meant `drift_check.py` could pull a
+    Jalisco-sized zip from INEGI on any checkout without
+    `data/guadalajara/raw/`. See pipeline/guadalajara/fetch_sources.py.
+    """
+    if not DENUE_ZIP.exists():
         raise SystemExit(
-            f"DENUE download is not a ZIP (first bytes {r.content[:8]!r}). "
-            "Check what the server actually sent before trusting it."
+            f"Missing {DENUE_ZIP.name}. "
+            f"Run pipeline/guadalajara/fetch_sources.py first."
         )
-    DENUE_ZIP.write_bytes(r.content)
-    print(f"  wrote {DENUE_ZIP.stat().st_size:,} bytes")
+    print(f"  {DENUE_ZIP.name} ({DENUE_ZIP.stat().st_size:,} bytes)")
 
 
 def main():
-    print("=== Step 2: Mexico City storefronts (INEGI DENUE) ===\n")
+    print("=== Step 2: Guadalajara (Regional) storefronts (INEGI DENUE) ===\n")
     tax = load_taxonomy_module(TAXONOMY_SYSTEM)
 
-    download()
+    require_denue()
     zf = zipfile.ZipFile(DENUE_ZIP)
     if DENUE_MEMBER not in zf.namelist():
         raise SystemExit(
@@ -132,11 +132,11 @@ def main():
         assert c not in df.columns, f"{c} reached the DataFrame"
 
     # --- state sanity: the file should be one state ------------------------
-    ents = df["cve_ent"].value_counts()
+    ents = df[DENUE_STATE_COLUMN].value_counts()
     if len(ents) != 1 or ents.index[0] != DENUE_STATE_CODE:
         raise SystemExit(f"expected only cve_ent={DENUE_STATE_CODE}, got {dict(ents)}")
     print(f"  all rows cve_ent={DENUE_STATE_CODE}; "
-          f"{df['municipio'].nunique()} municipios")
+          f"{df[DENUE_MUNICIPIO_COLUMN].nunique()} municipios")
 
     # --- THE REGIONAL SCOPE, and the difference from Mexico City -----------
     # Entidad 09 IS Ciudad de Mexico, so that city needed no municipio filter at
@@ -146,15 +146,15 @@ def main():
     # descriptions name. This is the first thing that did NOT generalise from
     # Mexico City's step 2.
     before = len(df)
-    unknown = sorted(set(MUNICIPIOS_KEEP) - set(df["municipio"].unique()))
+    unknown = sorted(set(MUNICIPIOS_KEEP) - set(df[DENUE_MUNICIPIO_COLUMN].unique()))
     if unknown:
         raise SystemExit(
             f"MUNICIPIOS_KEEP names absent from DENUE: {unknown}. INEGI's "
             "spelling is the join key - 'Tlaquepaque' alone matches nothing, "
             "the register says 'San Pedro Tlaquepaque'.")
-    df = df[df["municipio"].isin(MUNICIPIOS_KEEP)].copy()
+    df = df[df[DENUE_MUNICIPIO_COLUMN].isin(MUNICIPIOS_KEEP)].copy()
     print(f"\nFour municipios: {pct(len(df), before, 'Jalisco units')} kept")
-    for m, n in df["municipio"].value_counts().items():
+    for m, n in df[DENUE_MUNICIPIO_COLUMN].value_counts().items():
         print(f"    {m:26s} {n:8,}")
     emit("in_scope_rows", len(df))
 
@@ -218,6 +218,11 @@ def main():
         print(f"Dropped {before - len(df):,} duplicate ids")
 
     BUSINESSES_CLEAN_CSV.parent.mkdir(parents=True, exist_ok=True)
+    # `"municipio"` here is THIS PROJECT'S OUTPUT column, beside business_name
+    # and bucket - not DENUE's input column, which is DENUE_MUNICIPIO_COLUMN
+    # above. They are the same string only because the column passes through
+    # unrenamed. Left as a literal deliberately: if DENUE renamed its column,
+    # this output contract should not move with it.
     cols = ["business_name", "latitude", "longitude", tax.VALUE_COLUMN,
             "scian", "bucket", "municipio"]
     df[cols].to_csv(BUSINESSES_CLEAN_CSV, index=False, encoding="utf-8")

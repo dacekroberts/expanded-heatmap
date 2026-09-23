@@ -3,7 +3,7 @@
 Input:  data/toronto/raw/gtfs.zip                     (the CITY's CKAN copy)
         data/toronto/raw/toronto_boundary_wgs84.zip
 Output: data/toronto/processed/stations.csv
-        outputs/toronto/excluded_stations.csv          (EMPTY - nothing outside)
+        outputs/toronto/excluded_stations.csv          (2 rows - see below)
 
 THIS CITY IS WHY THE PROJECT DISTRUSTS STATION COUNTS, AND IT GOT THE NUMBER
 WRONG TWICE.
@@ -74,6 +74,7 @@ from pipeline.toronto.config import (  # noqa: E402
     RING_EDGES_METERS,
     ROUTE_IDS_EXPECTED,
     STATION_SPACING_MEDIAN_M_MIN,
+    STATIONS_COLLAPSED_EXPECTED,
     STATION_STRIP_PATTERNS,
     STATIONS_CSV,
     SUBWAY_ONLY_STATIONS_EXPECTED,
@@ -205,8 +206,13 @@ def main():
           f"(the TTC publishes 38 + 31 + 5 less 3 interchanges = 71)")
     if n_subway != SUBWAY_ONLY_STATIONS_EXPECTED:
         print(f"  NOTE: subway-only expected {SUBWAY_ONLY_STATIONS_EXPECTED}")
-    if len(stations) != IN_CITY_STATIONS_EXPECTED:
-        print(f"  NOTE: expected {IN_CITY_STATIONS_EXPECTED} stations. A "
+    # `stations` here is the COLLAPSED set, before the boundary filter - 110,
+    # not the 108 that survive it. This compared it against
+    # IN_CITY_STATIONS_EXPECTED until 2026-09-22, so it printed a NOTE on every
+    # single run and STATIONS_COLLAPSED_EXPECTED sat unused, which is how the
+    # mis-wiring was found: a dead-constant sweep asked why nothing read it.
+    if len(stations) != STATIONS_COLLAPSED_EXPECTED:
+        print(f"  NOTE: expected {STATIONS_COLLAPSED_EXPECTED} stations. A "
               f"pattern written only for the subway's hyphenated names gives "
               f"160 here; check STATION_STRIP_PATTERNS against the spacing "
               f"below rather than adjusting this number.")
@@ -272,6 +278,8 @@ def main():
         print(f"      OUTSIDE: {r.station:<34} "
               f"{round(r.geometry.distance(geom)):>7} m")
     kept = gdf[inside].drop(columns="geometry").copy()
+    if len(kept) != IN_CITY_STATIONS_EXPECTED:
+        print(f"  NOTE: expected {IN_CITY_STATIONS_EXPECTED} in-city stations")
 
     # --- outputs ------------------------------------------------------------
     EXCLUDED_STATIONS_CSV.parent.mkdir(parents=True, exist_ok=True)

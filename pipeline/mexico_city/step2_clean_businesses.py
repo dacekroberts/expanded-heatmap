@@ -29,7 +29,6 @@ from pathlib import Path
 
 import geopandas as gpd
 import pandas as pd
-import requests
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
@@ -42,13 +41,13 @@ from pipeline.mexico_city.config import (
     DENUE_ACTIVITY_COLUMN,
     DENUE_CODE_COLUMN,
     DENUE_MEMBER,
+    DENUE_MUNICIPIO_COLUMN,
     DENUE_NAME_COLUMN,
     DENUE_STATE_CODE,
-    DENUE_URL,
+    DENUE_STATE_COLUMN,
     DENUE_ZIP,
     FORBIDDEN_COLUMNS,
     MEXICO_CITY_BBOX,
-    OVERPASS_USER_AGENT,
     PREMISES_TYPE_COLUMN,
     PREMISES_TYPE_KEEP,
     SOURCE_ENCODING,
@@ -64,8 +63,8 @@ USECOLS = (
     DENUE_CODE_COLUMN,
     DENUE_ACTIVITY_COLUMN,
     PREMISES_TYPE_COLUMN,
-    "cve_ent",
-    "municipio",
+    DENUE_STATE_COLUMN,
+    DENUE_MUNICIPIO_COLUMN,
     # MEASURED AND PRINTED, NEVER WRITTEN OUT. `numero_int` is DENUE's
     # structured interior/unit number - better evidence of a dwelling than a
     # regex over free text, which is what the multi-source-city skill asks for.
@@ -79,31 +78,26 @@ USECOLS = (
 )
 
 
-def download():
-    if DENUE_ZIP.exists():
-        print(f"  cached {DENUE_ZIP.name} ({DENUE_ZIP.stat().st_size:,} bytes)")
-        return
-    print(f"  downloading {DENUE_URL}")
-    DENUE_ZIP.parent.mkdir(parents=True, exist_ok=True)
-    r = requests.get(DENUE_URL, timeout=900,
-                     headers={"User-Agent": OVERPASS_USER_AGENT})
-    r.raise_for_status()
-    # Magic bytes, not the filename the server claims - add-country's rule,
-    # learned from Busan serving a PNG under a CSV's Content-Disposition.
-    if not r.content.startswith(b"PK\x03\x04"):
+def require_denue():
+    """The DENUE zip must already be here - this step does NOT download it.
+
+    It used to, on a cache miss, which meant `drift_check.py` could pull 39 MB
+    from INEGI on any checkout without `data/mexico_city/raw/`. See
+    pipeline/mexico_city/fetch_sources.py.
+    """
+    if not DENUE_ZIP.exists():
         raise SystemExit(
-            f"DENUE download is not a ZIP (first bytes {r.content[:8]!r}). "
-            "Check what the server actually sent before trusting it."
+            f"Missing {DENUE_ZIP.name}. "
+            f"Run pipeline/mexico_city/fetch_sources.py first."
         )
-    DENUE_ZIP.write_bytes(r.content)
-    print(f"  wrote {DENUE_ZIP.stat().st_size:,} bytes")
+    print(f"  {DENUE_ZIP.name} ({DENUE_ZIP.stat().st_size:,} bytes)")
 
 
 def main():
     print("=== Step 2: Mexico City storefronts (INEGI DENUE) ===\n")
     tax = load_taxonomy_module(TAXONOMY_SYSTEM)
 
-    download()
+    require_denue()
     zf = zipfile.ZipFile(DENUE_ZIP)
     if DENUE_MEMBER not in zf.namelist():
         raise SystemExit(
@@ -131,11 +125,11 @@ def main():
         assert c not in df.columns, f"{c} reached the DataFrame"
 
     # --- state sanity: the file should be one state ------------------------
-    ents = df["cve_ent"].value_counts()
+    ents = df[DENUE_STATE_COLUMN].value_counts()
     if len(ents) != 1 or ents.index[0] != DENUE_STATE_CODE:
         raise SystemExit(f"expected only cve_ent={DENUE_STATE_CODE}, got {dict(ents)}")
     print(f"  all rows cve_ent={DENUE_STATE_CODE}; "
-          f"{df['municipio'].nunique()} alcaldias")
+          f"{df[DENUE_MUNICIPIO_COLUMN].nunique()} alcaldias")
 
     # --- FIJO ONLY ---------------------------------------------------------
     before = len(df)
@@ -197,6 +191,11 @@ def main():
         print(f"Dropped {before - len(df):,} duplicate ids")
 
     BUSINESSES_CLEAN_CSV.parent.mkdir(parents=True, exist_ok=True)
+    # `"municipio"` here is THIS PROJECT'S OUTPUT column, beside business_name
+    # and bucket - not DENUE's input column, which is DENUE_MUNICIPIO_COLUMN
+    # above. They are the same string only because the column passes through
+    # unrenamed. Left as a literal deliberately: if DENUE renamed its column,
+    # this output contract should not move with it.
     cols = ["business_name", "latitude", "longitude", tax.VALUE_COLUMN,
             "scian", "bucket", "municipio"]
     df[cols].to_csv(BUSINESSES_CLEAN_CSV, index=False, encoding="utf-8")

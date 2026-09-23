@@ -39,13 +39,12 @@ SOURCE_ENCODING = "latin-1"
 DENUE_NAME_COLUMN = "nom_estab"        # the exterior sign - see the note below
 DENUE_ACTIVITY_COLUMN = "nombre_act"   # -> the taxonomy's VALUE_COLUMN
 DENUE_CODE_COLUMN = "codigo_act"       # -> `scian`, what classify() reads
-# THESE TWO ARE NOT CONSUMED, and that is worth knowing rather than tidying
-# away. Guadalajara is the only city that scopes by state and municipio, and
-# its `step2_clean_businesses.py` writes the literals "cve_ent" and
-# "municipio" directly instead of importing these. So DENUE renaming a column
-# would be fixed here, in the national file, and Guadalajara would silently
-# keep the old spelling - precisely what profiling a country once is meant to
-# prevent. Noticed 2026-09-22; the change belongs to that city's owner.
+# CONSUMED by both Mexican cities' step 2 since 2026-09-22. They previously
+# wrote the literals "cve_ent" and "municipio" directly - BOTH cities, not just
+# the one that scopes by municipio - so a DENUE column rename would have been
+# fixed here, in the national file, and missed in two step files. That is
+# precisely what profiling a country once is meant to prevent, and it was found
+# by asking why nothing read these.
 DENUE_STATE_COLUMN = "cve_ent"
 DENUE_MUNICIPIO_COLUMN = "municipio"
 

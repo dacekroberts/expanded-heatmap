@@ -383,6 +383,7 @@ now the only genuinely-unjudged city left in this band.**
 | City | What the host actually does |
 |---|---|
 | ✗ **Tallinn** 🇪🇪 | **DISCARDED 2026-09-22 — MTR reached, downloaded whole, and measured.** No longer parked: the register that was going to be Tallinn's route has **no location data of any kind.** See below |
+| ✗ **Sofia** 🇧🇬 | **DISCARDED 2026-09-22 — and on data, not on the block.** See the section below: the entire Bulgarian catalogue was enumerated from outside, and **Sofia does not publish a commercial-premises register.** The 403 was never what stopped it |
 
 #### 🇪🇪 Tallinn: MTR reached and measured — 2026-09-22
 
@@ -429,7 +430,6 @@ Estonia-wide, not Tallinn.
 
 Tallinn was parked on *value* — trams only, ~450k, the thinnest map in the
 screen. It is now closed on *data*, which is the better reason.
-| ✗ **Sofia** 🇧🇬 | **DISCARDED 2026-09-22 — and on data, not on the block.** See the section below: the entire Bulgarian catalogue was enumerated from outside, and **Sofia does not publish a commercial-premises register.** The 403 was never what stopped it |
 
 #### 🇧🇬 Sofia resolved by going around the 403 entirely — 2026-09-22
 

@@ -5,8 +5,13 @@ rows). Free, no API key, US addresses only.
 Batches are cached under the city's raw folder, keyed by a hash of the
 batch's own contents, so re-running skips completed batches (a timeout
 partway through costs one batch) and - unlike a bare batch-number key - a
-changed input can never be served a stale answer. That also keeps
-pipeline/drift_check.py deterministic and off the network after the first run.
+changed input can never be served a stale answer.
+
+That kept `pipeline/drift_check.py` deterministic **only after the first
+run** - on a fresh checkout it geocoded over the network and then reported
+whether the result had drifted, which is a different question. Since
+2026-09-22 a drift check sets `HEATMAP_NO_NETWORK` and an uncached batch
+refuses rather than fetching; see pipeline/offline.py.
 
 Interface: geocode_addresses() returns only the rows the Census matched;
 callers decide what to do with the rest and must sanity-check the returned
@@ -21,6 +26,8 @@ from pathlib import Path
 
 import pandas as pd
 import requests
+
+from pipeline.offline import refuse_if_offline
 
 GEOCODER_URL = "https://geocoding.geo.census.gov/geocoder/locations/addressbatch"
 BENCHMARK = "Public_AR_Current"
@@ -47,6 +54,15 @@ def _geocode_batch(payload: pd.DataFrame, cache_dir: Path, batch_num: int) -> pd
         print(f"  batch {batch_num}: cached")
         text = cache_file.read_text(encoding="utf-8")
     else:
+        # THE ONLY PLACE THIS MODULE REACHES THE NETWORK, and the only place
+        # the guard belongs: a cached batch above is served either way, and
+        # only a real request is refused. See pipeline/offline.py for why the
+        # boundary is drawn at the drift check rather than at this step.
+        refuse_if_offline(
+            f"geocode batch {batch_num} ({cache_file.name})",
+            hint="Run the city's step3_geocode.py directly once to populate "
+                 "data/<city>/raw/geocode_cache/, then re-run the drift check.",
+        )
         response = requests.post(
             GEOCODER_URL,
             files={"addressFile": ("batch.csv", csv_bytes, "text/csv")},

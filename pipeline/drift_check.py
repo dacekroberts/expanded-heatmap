@@ -75,7 +75,7 @@ ROOT = Path(__file__).resolve().parent.parent
 # is for the step scripts (which insert it themselves).
 sys.path.insert(0, str(ROOT))
 
-from pipeline import baseline  # noqa: E402
+from pipeline import baseline, offline  # noqa: E402
 FOLIUM_ID = re.compile(rb"_[0-9a-f]{32}")
 
 
@@ -178,7 +178,14 @@ def run_steps(city: str):
     needs no other change to be watched - and filtered out of the echoed output,
     since they are data rather than narration.
     """
-    env = {**os.environ, "PYTHONIOENCODING": "utf-8"}
+    # A DRIFT CHECK MUST NOT REACH THE NETWORK. Steps do not download their
+    # own inputs any more (scripts/check_no_fetch_in_steps.py enforces it),
+    # but three step3_geocode.py files still call the US Census geocoder for
+    # batches they compute themselves, which cannot move to a fetch script.
+    # This makes such a call refuse here while leaving it available to a
+    # person running the step. See pipeline/offline.py.
+    env = {**os.environ, "PYTHONIOENCODING": "utf-8",
+           offline.NO_NETWORK_ENV: "1"}
     measured = {}
     for step in sorted((ROOT / "pipeline" / city).glob("step*.py")):
         print(f"\n  >> {step.name}")

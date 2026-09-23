@@ -348,8 +348,23 @@ Desktop is unaffected — the label is fully visible there.
 
 ## Structure
 
-- [ ] **Move Madrid's, Mexico City's and Guadalajara's fetching out of their
-  step files** into a `fetch_*.py`, as the other fourteen cities do.
+- [x] ~~Move GUADALAJARA's and MADRID's fetching out of their step files~~ -
+  **done 2026-09-22; all three exceptions are closed.** Mexico City first as
+  the worked pattern, Madrid by its own session on the unmerged
+  `spain-app-wiring` branch, Guadalajara last -
+  `pipeline/guadalajara/fetch_sources.py`, which took the three Overpass
+  queries with it because each one's comment is addressed to whoever edits
+  the query, and that is no longer the step. Proved both ways: zero drift
+  with the cache present, and step 1 and step 2 both exiting 1 with "Run
+  pipeline/guadalajara/fetch_sources.py first" with `data/guadalajara/raw/`
+  moved aside. **Guadalajara's two-pass retry was kept rather than unified
+  with Mexico City's single pass** - neither has been measured against the
+  other, and a refactor is a bad moment to quietly change a retry policy.
+  **The rule is now a check rather than a convention:**
+  `scripts/check_no_fetch_in_steps.py`. Madrid is listed there under
+  `KNOWN_GAPS` until `spain-app-wiring` lands, and the check fails on a gap
+  that has silently been fixed, so landing that branch forces the entry out.
+  Original finding below. into a `fetch_*.py`, as the other fourteen cities do.
   Demonstrated 2026-09-22: `python pipeline/drift_check.py` in a worktree with
   no `data/<city>/raw/` **fetched over the network for all three** - a 39 MB
   DENUE zip, a Madrid census CSV, Overpass responses and CRTM layers - and
@@ -360,15 +375,39 @@ Desktop is unaffected — the label is fully visible there.
   three it asks "does the current upstream still produce the committed output"
   rather than "does the committed code". Build-session work - each city's
   context is needed.
-- [ ] **Wire Toronto's `STATIONS_COLLAPSED_EXPECTED`**, or delete it. It is
-  110 and asserted nowhere, while `PLATFORMS_EXPECTED`,
-  `IN_CITY_STATIONS_EXPECTED` and `SUBWAY_ONLY_STATIONS_EXPECTED` are all
-  checked. The per-line check in `pipeline/stations.py` cannot cover it: those
-  counts sum to 117 because an interchange counts on each of its lines.
-- [ ] **Have Guadalajara's step 2 import `DENUE_STATE_COLUMN` and
-  `DENUE_MUNICIPIO_COLUMN`** from `pipeline/countries/mexico.py` instead of
-  writing `"cve_ent"` and `"municipio"` as literals, so a DENUE column rename
-  is a one-file change as the country-config pattern intends.
+- [x] ~~Three `step3_geocode.py` files still reach the network, one import
+  deep~~ - **closed 2026-09-22, by moving the boundary rather than the code.**
+  Los Angeles, New York and Washington DC import `geocode_addresses` from
+  `pipeline/census_geocoder.py`, which POSTs address batches to the US Census
+  geocoder on a cache miss; `drift_check.py` globs `step*.py`, so it ran them
+  like any other step and a fresh checkout geocoded over the network inside a
+  drift check. That module's docstring gave it away: "off the network **after
+  the first run**".
+
+  The recorded plan was to hoist the download into `fetch_sources.py` as the
+  four cities did, and **that was the wrong fix.** There is no URL to hoist:
+  the batch is derived from the step's own filtering, so moving it means
+  moving the address preparation with it. What was actually wrong is narrower
+  - **a step may fetch when a person runs it; a drift check may never fetch**
+  - so `pipeline/offline.py` puts the guard at that boundary, `drift_check.py`
+  sets `HEATMAP_NO_NETWORK` for every step it runs, and an uncached batch
+  under that flag refuses instead of requesting. Proved three ways: refuses
+  uncached, still serves a cached batch, and is inert when the flag is unset,
+  so a person running step 3 is unaffected. `check_no_fetch_in_steps.py`
+  reports such a module as **guarded** - a third answer, not a pass in
+  disguise - and fails if `drift_check.py` stops arming the guard.
+- [x] ~~Wire Toronto's `STATIONS_COLLAPSED_EXPECTED`~~ - **done 2026-09-22,
+  and it was a mis-wiring rather than a missing check.** Step 1 compared the
+  COLLAPSED count (110) against `IN_CITY_STATIONS_EXPECTED` (108), printing a
+  NOTE every run while the right constant sat unread. Both now guard what they
+  name, an in-city check was added after the boundary filter, and the docstring
+  no longer claims `excluded_stations.csv` is empty (it has two rows). Verified
+  by running step 1: 234 -> 110 -> 108, two excluded, zero NOTEs.
+- [x] ~~Have Guadalajara's step 2 import `DENUE_STATE_COLUMN` and
+  `DENUE_MUNICIPIO_COLUMN`~~ - **done 2026-09-22, and it was BOTH Mexican
+  cities.** Zero drift on both after the substitution. The `municipio` in each
+  city's output-column list is left as a literal on purpose: that is this
+  project's output schema, not DENUE's input column, and both sites say so.
 
 - [x] ~~Finish the `check_stale_claims.py` category-B pass~~ - **done
   2026-09-22**, seven passes, **74 flagged counts to 35**, files scanned 39 to

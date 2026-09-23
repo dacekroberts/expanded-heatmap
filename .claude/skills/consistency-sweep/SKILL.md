@@ -14,6 +14,24 @@ still true.
 screen and a licence that has never been read are other sessions' work. This
 one corrects the record, and makes the record hard to falsify next time.
 
+## Never ship a check you have not watched FAIL
+
+A check that passes proves nothing until you have made it fail on purpose. On
+2026-09-22 a newly written limb reported success while examining **nothing**:
+it read longitudes from `app/cities.py` with `getattr(node, "value", None)`,
+and a negative number is an `ast.UnaryOp` wrapping a Constant, so every western
+longitude parsed as `None` - **zero of sixteen cities**. The section printed
+its confident green line anyway. It was caught by breaking a city's CRS on
+purpose and noticing the check stayed silent, not by reading the code.
+
+So for every limb: break the thing it guards, watch it report, restore, watch
+it pass. And where a limb can be starved of input rather than given bad input,
+**assert that it had input** - that one now fails if it reads fewer longitudes
+than there are cities.
+
+This is the same shape as everything else in this taxonomy: something that
+looks right and is invisible to the tool examining it.
+
 ## The one principle that matters: prefer a check to a correction
 
 **A correction fixes an instance. A check fixes the class, and keeps fixing it
@@ -345,9 +363,11 @@ it needs that session's context.
 
 | Check | What it decides |
 |---|---|
-| `python scripts/check_provenance.py [--strict]` | every built city has rows in all three provenance tables; every URL its `config.py` **resolves to** is recorded; notices and `_NOTICES` are in bijection; notice numbers unique and contiguous; **`city_master_list.md`'s built counts match `app/cities.py`**, total and per country; **every `item N` citation still points at the notice it names**; **every stored licence's SHA-256 matches**; **every relative markdown link resolves**; **every table row renders and matches its header's width**; **every `outputs/` file named in prose exists and is committed** |
+| `python scripts/check_provenance.py [--strict]` | every built city has rows in all three provenance tables; every URL its `config.py` **resolves to** is recorded; notices and `_NOTICES` are in bijection; notice numbers unique and contiguous; **`city_master_list.md`'s built counts match `app/cities.py`**, total and per country; **every `item N` citation still points at the notice it names**; **every stored licence's SHA-256 matches**; **every relative markdown link resolves**; **every table row renders and matches its header's width**; **every `outputs/` file named in prose exists and is committed**; **OSM attribution on every map, every CRS matches its longitude, no map step forks the renderer** |
 | `python scripts/decisions_index.py --check` | `DECISIONS.md`'s generated index is current |
 | `python pipeline/drift_check.py` | committed `outputs/` still match what the pipeline produces |
+| `python scripts/check_no_fetch_in_steps.py` | no `pipeline/*/step*.py` reaches the network **inside a drift check** - directly, or through a shared `pipeline/*.py` module; a module that calls `refuse_if_offline()` is reported **guarded** rather than passed; **fails if `drift_check.py` stops arming the guard**, and if a `KNOWN_GAPS` entry has quietly been fixed and left listed |
+| `python scripts/check_no_fetch_in_steps_selftest.py` | **that check still fails when it should**, six ways, against throwaway copies - the first executable answer in this project to "never ship a check you have not watched fail" |
 | `python scripts/check_deploy_imports.py` | a clean clone imports under the lean venv |
 | `python scripts/brief_check.py <city>` | a build brief's claims still hold against live sources |
 | `python scripts/check_personal_exposure.py <city>` | no personal information in a city's published output |
