@@ -111,6 +111,8 @@ c389fcab88815aee4b2b39b76350a5bac85e080c52ccd794f9c647911fbeae37  translink-gtfs
 4496431cc92fef99add789b6fdbb6d1494bd2397e4a05f79f49bd4fd0ab63359  inegi-terminos-sitio.pdf
 3827f51e8bea73b85e5b47e7524a0cc2011b6abb9a7505e5c15fd0c28d08d4df  crtm-licencia-de-uso.txt
 9426f1f649033f8c100d3a8e3b95da6aca8efd8011c93696fbf3b175eae26a2b  madrid-condiciones-generales-reutilizacion.txt
+970eb2fd66328c25cc4a35aee4246ffa4fdd59504d3086aa32397434db27fef3  barcelona-condicions-us.txt
+9e16f09354b83d665ffcdd1bbe15e56fc509e59934bddd497ff6eb3f767ec39a  barcelona-avis-legal.txt
 ```
 
 ## Two files here are NOT licences
