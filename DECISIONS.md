@@ -16,10 +16,17 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**220 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**227 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [CORRECTION: a tram-only city is NOT unbuildable, and seven built cities draw trams](#2026-09-23---correction-a-tram-only-city-is-not-unbuildable-and-seven-built-cities-draw-trams)
+- [Seoul's brief, and two measurements that failed rather than answered](#2026-09-23---seouls-brief-and-two-measurements-that-failed-rather-than-answered)
+- [Goteborg's licence is CC0, and it is on the DISTRIBUTION](#2026-09-23---goteborgs-licence-is-cc0-and-it-is-on-the-distribution)
+- [Goteborg unblocked, and it may not be a one-bucket city](#2026-09-23---goteborg-unblocked-and-it-may-not-be-a-one-bucket-city)
+- [Stockholm and Zurich rail counted; Zurich has no metro at all](#2026-09-23---stockholm-and-zurich-rail-counted-zurich-has-no-metro-at-all)
+- [The Danish key stays open until Copenhagen's build starts](#2026-09-23---the-danish-key-stays-open-until-copenhagens-build-starts)
+- [Copenhagen's brief: 14,887 rows, 100% named, four files](#2026-09-23---copenhagens-brief-14887-rows-100-named-four-files)
 - [Paris's disproven figures swept out of staging's documents](#2026-09-23---pariss-disproven-figures-swept-out-of-stagings-documents)
 - [Singapore is a TWO-bucket city, and the zero is controlled](#2026-09-23---singapore-is-a-two-bucket-city-and-the-zero-is-controlled)
 - [Bucharest moves B to D: the band was measuring the wrong thing](#2026-09-23---bucharest-moves-b-to-d-the-band-was-measuring-the-wrong-thing)
@@ -259,6 +266,327 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - CORRECTION: a tram-only city is NOT unbuildable, and seven built cities draw trams
+
+- **Supersedes the claim made earlier today that Zurich has "no drawable
+  network at all" under a standing tram exclusion.** That was asserted from
+  PROSE - Paris's brief line *"trams are excluded in Barcelona, Milan and
+  Toronto"* - and **the pipeline code says something different.** The owner
+  challenged it; the code settled it.
+
+- **`route_type 0` (tram / light rail) IS DRAWN in at least SEVEN built
+  cities**: **San Diego** (MTS Trolley), **San Francisco** (Muni Metro),
+  **Los Angeles**, **Edmonton** (LRT), **Calgary** (CTrain), **Miami**
+  (Metromover) and **Dublin** (Luas - whose config warns against shipping *"a
+  two-tram-line map"*, which presumes the trams are drawn). **A tram is not
+  excluded for being a tram.**
+
+- **Every exclusion is a city that ALSO has a metro**, and Milan's config
+  states the real test outright: *"Milan's trams are a **dense street-running
+  network whose stops sit one or two blocks apart**: San Francisco's Muni
+  Metro shape, which needs `docs/sub_transit_line_filters.md` rather than a
+  line list. They would also need **17 invented colours**, because
+  `route_color` is populated ONLY for the metro. **Recorded as a costed
+  extension, not a discard** - the geometry is in the GTFS `shapes.txt` and
+  the decision is reversible."* Barcelona's is a **network-identity** test -
+  `Trambaix` and `Trambesos`, *"neither a metro"* - used to SELECT the metro,
+  not to ban trams.
+
+- **So the rule is: is the tram the RAPID-TRANSIT SYSTEM, or a street-running
+  overlay on top of one?** Overlay -> excluded. **The system itself -> drawn**,
+  seven times. Zurich and Goteborg are the second case: they have no metro for
+  a tram to overlay.
+
+- **And Zurich specifically defeats Milan's other objection: ALL 42 of its
+  tram relations carry a `colour`**, so there is no invented palette. Its
+  network is 42 relations across 18 refs, all named, all coloured, plus the
+  S18 Forchbahn.
+
+- **The live question is the Muni Metro SPACING question, which is measurable
+  rather than a blocker**: are Zurich's and Goteborg's tram stops one or two
+  blocks apart, needing `docs/sub_transit_line_filters.md`? **That is a cost,
+  not a disqualification** - and `CLAUDE.md` already frames it that way,
+  telling a reader to check the rail system's SHAPE rather than assume.
+
+- **The shape of my error is worth more than the error.** I generalised *"X is
+  excluded in A, B and C"* into *"X is excluded"*, when all three of A, B and
+  C shared a property the new cities do not have. **A rule inferred from three
+  instances that share an unstated condition is not a rule** - and the
+  unstated condition here was "this city already has a metro". **The owner's
+  question - does tram-only mean no value, particularly where there is no
+  alternative - was the right one, and the answer was in the code the whole
+  time.**
+
+### 2026-09-23 - Seoul's brief, and two measurements that failed rather than answered
+
+- **Seoul had NO brief at all while sitting in the ready-to-build band**, and
+  now has a partial one that says so in its first line. **197,276 active
+  premises across 8 datasets, no account, `좌표정보(X/Y)` on 99.5% at
+  EPSG:5174, KOGL Type 1.** Korea needs **neither a geocoding leg nor a new
+  geocoder** - coordinates come with the register, which is Paris's shape.
+
+- **✅ Its subway is the best rail result in this project: 149 relations,
+  149 named, 149 coloured, 10 refs, and ZERO without a `ref`.** Measured
+  inside OSM relation 2297418, resolved by name. **That is the exact opposite
+  of what three other cities showed the same day** - Bucharest's `Extensie
+  M4`, Singapore's uncoloured `JRL`, Stockholm's unref'd subway and tram.
+  Seoul's metro needs no hand-assigned colours and no ref recovery.
+
+- **🚨 TWO RAIL MEASUREMENTS FAILED AND ARE RECORDED AS FAILURES, not
+  as results.** `light_rail` returned a **transport error**, not a count - and
+  Seoul has light rail (Ui-Sinseol, Sillim), so it is a real gap. The
+  station-node query returned **`0`**, and **Seoul has several hundred
+  stations**: Korean stations are evidently tagged in a way
+  `node["railway"="station"]` misses. **Writing that 0 into the brief would
+  have been the uncontrolled-zero trap** - the thing this project has been
+  caught by more than any other - so it is recorded as UNKNOWN with the reason.
+
+- **Korea's national station standard dataset is a FALSE FRIEND and the brief
+  says why.** It carries **1,099 stations with WGS84 and NO line geometry**.
+  `add-country` names this exact case: it passes *"are there station points"*
+  and fails *"is there line geometry"*, and **a screen asking only the first
+  records a false pass**. This project draws and labels every line, so OSM is
+  the rail source and the standard dataset is not.
+
+- **The brief's most useful section is what it does NOT have**, and that is
+  deliberate: seven items, each Step 0 work never done rather than detail
+  omitted. **The eight datasets have never been enumerated individually** -
+  197,276 is a country-screen total and which eight, how many rows each, what
+  columns, and whether they overlap are all unknown. **The taxonomy has never
+  been measured.** **The non-storefront share is unknown**, and every register
+  measured this week carried one - Philadelphia 79%, D.C. 61%, Goteborg 26.5%.
+
+- **`data.seoul.go.kr`'s search is INERT and the brief carries that as a
+  standing trap.** A real term and `zzzzqqq` return **byte-identical pages**,
+  and a conclusion was already drawn from it once and was wrong. Enumerate, or
+  use the portal's own facet counts - which settled in one read what paging
+  through 251 results did not.
+
+### 2026-09-23 - Goteborg's licence is CC0, and it is on the DISTRIBUTION
+
+- **`Livsmedelsverksamheter` declares
+  `http://creativecommons.org/publicdomain/zero/1.0/` - CC0 1.0**, the
+  strongest licence any source in this project carries. Read on **the dataset
+  actually being built on**, which matters because the recorded CC ZERO
+  belonged to *"Restauranger med serveringstillstand"* - **a different
+  dataset**. **A licence read on a sibling is not a licence read.**
+
+- **🚨 The licence is on the DISTRIBUTION node, and the DATASET node
+  has none at all.** `store/6/resource/35` ("Foodbusinesses") carries
+  fourteen properties - title, publisher, description, distribution, theme -
+  and **no `license`, `rights` or `accessRights` of any kind**. The licence
+  lives on `store/6/resource/57479`, the CSV distribution. **A reader checking
+  the dataset node would have recorded Goteborg as SILENT and been wrong in
+  the permissive direction**, which is the worse way to be wrong about a
+  licence.
+
+- **This is the SECOND property found on the child rather than the parent in
+  the same catalogue, within the hour.** The `accessURL` that unblocked the
+  city was also on the distribution, not the dataset, and its absence from the
+  parent is what got recorded as *"exposes no accessURL"*. **In DCAT the
+  dataset is a description and the distribution is the thing** - so both the
+  bytes and the terms hang off the child. **Check the distribution before
+  concluding anything is missing.**
+
+### 2026-09-23 - Goteborg unblocked, and it may not be a one-bucket city
+
+- **The blocker is gone: `Livsmedelsverksamheter` is 5,063 rows.** The
+  recorded obstacle was *"its DCAT distribution node exposes no `accessURL` -
+  `resource/18` returns RDF rather than data"*. **The node was real and the
+  walk was wrong.** EntryStore nests dataset -> distribution -> accessURL, and
+  the dataset lives in **context 6**, not 1 - an earlier probe at
+  `store/1` returned *"The requested context ID does not exist"*, which reads
+  like a dead catalogue and was a wrong path. Walking
+  `search -> resource.children[].metadata -> dcat:distribution` gives **three**
+  distributions: a **CSV**, an EntryStore **rowstore JSON**, and a **WMS**.
+
+- **The parser was wrong before the catalogue was.** The search returns
+  `{offset, resource, limit, results, facetFields}` where **`results` is an
+  integer count and `resource` is a dict with one key, `children`** - so a
+  reader treating `results` as the array gets nothing from a 21 KB response
+  that is full of data. **Zero results from a populated response is a statement
+  about the parser.**
+
+- **🚨 The two distributions of the same dataset disagree three ways,
+  and the JSON is the bad one.** CSV **5,063 rows**; rowstore **4,786**. The
+  JSON's `namn` column arrives **BOM-mangled as `﻿namn`**, so a consumer
+  keying on `namn` reads nothing. And **`x_sweref991200` and `y_sweref991200`
+  are SWAPPED between them**: the CSV has northing 6,397,893 in `y` and easting
+  149,193 in `x`, the JSON has them the other way round. **Prague's EPSG:5513
+  axis flip in a new costume** - except here both copies come from one
+  publisher and only one is right.
+
+- **The 277-row gap is explained, and the explanation is the worst part.**
+  **5,063 minus the 279 rows whose `typ` is blank = 4,784**, against the
+  rowstore's 4,786. **The JSON distribution silently drops rows with no
+  classification.** A build taking the JSON would lose 5.5% of the register
+  and never see an error. **Take the CSV.**
+
+- **✅ There is NO geocoding leg at all.** `lat` and `lon` are populated on
+  **100%** of rows and **0 fall outside Goteborg's bounding box** (lat
+  57.5631-57.8583, lon 11.7044-12.2050). That is Paris's shape, and it was
+  unknown while the row count was unmeasured.
+
+- **🚨 AND IT MAY NOT BE A ONE-BUCKET CITY, which is the finding that
+  matters.** `typ` carries **47 values** and they are not all food service:
+  **RESTAURANG 1,591 + KAFE 485** is food service, while **LIVSMEDELSBUTIK
+  685 + BAGERI 65 + APOTEK 61** is food RETAIL. **Hong Kong's build already
+  counts those as two separate buckets** (food service 17,260, food retail
+  3,853). Applying the same reading moves Goteborg out of the one-bucket band.
+  **Raised rather than decided** - it is a judgment that changes a band, and
+  the owner's bar of two-is-acceptable turns on exactly this distinction.
+
+- **A quarter of the register is not a storefront, and that is measurable
+  rather than suspected**: FORSKOLA 497, SKOLA 216, GRUPP/SERVICEBOENDE 150,
+  GROSSIST 133, AMBULERANDE 114, HUVUDKONTOR 72, LAGER 64, MATMAKLARE 54,
+  TRANSPORTOR 42 - **~1,342 rows, 26.5%**. With the 5.5% blanks removed too,
+  **buildable is roughly 3,442**. ✅ The catch-all share is **0.9%**, the
+  cleanest in this project.
+
+### 2026-09-23 - Stockholm and Zurich rail counted; Zurich has no metro at all
+
+- **Both cities carried rail counts from the screen that gave Copenhagen
+  "tram 4", and both were wrong.** Stockholm was carried as *"metro 7, tram
+  21"*. Measured inside **Stockholms kommun** (OSM relation 398021): **subway
+  15 relations / 8 refs**, all named and all coloured; **tram 6 relations / 4
+  refs**, only **4 of 6 coloured**; light_rail 6 relations (21, 30, 31); and
+  **92 rail station nodes**. The metro figure was roughly right on refs. **The
+  tram figure - 21 against a measured 6 - was not.**
+
+- **🚨 ZURICH HAS NO METRO. Zero `route=subway` relations.** Its
+  network is **42 tram relations across 18 refs** (all named, all coloured)
+  plus **4 `light_rail` relations, ref S18**, the Forchbahn. This is a
+  materially different fact from a wrong count: **this project excludes trams
+  in Barcelona, Milan and Toronto**, and a tram-only city has no drawable
+  network under that rule at all. **Zurich's one-bucket ceiling was never its
+  only problem** - it just happened to be the one that got measured first.
+  Göteborg's row already says *"Trams, no metro. Better data on a weaker
+  map"*; Zurich's says nothing of the kind and now must.
+
+- **The boundary lookup failed first, and the failure is the useful part.**
+  `["name"="Stockholm"]["admin_level"="7"]` matched **nothing**, because the
+  Swedish municipality is named **`Stockholms kommun`**. The script refused to
+  count rail rather than returning a plausible zero - **a zero from a selector
+  is a statement about the selector**. Widened, the search returned **nine**
+  candidates including **two US "Stockholm Township" relations at the same
+  admin_level 7**. A looser selector would have picked one of those and
+  reported a real, wrong, confidently-zero rail network.
+
+- **🚨 A ROUTE RELATION WITH NO `ref` HAS NOW APPEARED IN THREE CITIES
+  IN ONE DAY, and it should stop being recorded per city.** Bucharest's
+  **`Extensie M4`** (no ref, no colour); Singapore's **`JRL`** (5 relations,
+  named, no colour); Stockholm's **unref'd subway relation AND unref'd tram
+  relation**. **A build keying on `ref` drops these silently; a build keying
+  on relation COUNT draws a line it cannot label**, and the project's
+  invariant requires every drawn line to carry its real public name and a
+  legend entry. **This belongs in `osm-rail` as a raising check rather than in
+  a fourth city's notes** - which is that skill's own opening argument: a
+  lesson in one city's config does not reach the next city.
+
+### 2026-09-23 - The Danish key stays open until Copenhagen's build starts
+
+- **Owner decision: keep the Datafordeler account until the build begins**,
+  then close it under the standing *register, take the data, terminate,
+  revoke* practice. **The trigger is the BUILD, not the brief** - which is the
+  part worth writing down, because the brief is finished and the instinct to
+  tidy up arrives with it.
+
+- **Closing is licence-safe at any time, and that was checked rather than
+  assumed.** CC BY 4.0 attaches to the **data** and is irrevocable; nothing in
+  it conditions the grant on holding an account. **This is exactly the
+  difference from WMATA**, whose terms are an API agreement and whose grant
+  dies with the account - the reason D.C.'s must stay live forever, and the
+  reason Denmark was filed as a fourth obligation class rather than in WMATA's
+  row.
+
+- **What actually blocks closing is operational, not legal, and the first
+  reason is the strongest.** `data/*/raw/` is **gitignored by design**, so
+  Copenhagen's 2.00 GB exists on **one machine, in one worktree, and nowhere
+  else** - the build session's checkout has none of it. Beyond that,
+  `fetch_sources.py` does not exist yet and cannot be written or tested
+  without a live key, and the **7-day retention** means the build downloads
+  fresh regardless.
+
+- **One genuine loss is recorded rather than glossed: closing forfeits
+  `Beskaeftigelse`** if an employee signal is ever wanted. It is
+  **bitemporal-only**, a different download from the four taken. Paris's
+  employee filter turned out not to exist so it is probably moot - but
+  Prague's `KATPO` equivalent is an open owner call, and *probably moot* is
+  not the same as moot.
+
+### 2026-09-23 - Copenhagen's brief: 14,887 rows, 100% named, four files
+
+- **Copenhagen is measured from the real files rather than from metadata, and
+  it is the best-named register in this project: 14,887 storefront rows at
+  100.0% named.** Retail 6,689, food service 5,163, personal services 3,035 -
+  three real buckets, between Toulouse (12,853) and Marseille (25,430) in
+  size, and **46 points ahead of every French city on naming**. Brief written
+  at `docs/build_briefs/copenhagen.md`, **4/4**.
+
+- **`Produktionsenhed` on its own is almost empty, and one line of small print
+  is the whole reason the city works.** Its object-type page lists two
+  attributes, `pnummer` and `beskaeftigelse` - **no address, no activity, no
+  name**. A reader stopping there would record Copenhagen as having no usable
+  premises data, which is the Colombia-RUES verdict. The line that matters is
+  *"Subtype af CVREnhedMedStamdata"*, whose `cvrAdresse`, `branche` and `navn`
+  live in **three separate national files**. **The build is a JOIN across four
+  files, and that was invisible until the schema was read.**
+
+- **The join key is `CVREnhedsId`, and it was VERIFIED rather than assumed.**
+  `Produktionsenhed` calls it `id`; `pNummer` is its own business key and
+  appears in no other file. Of Copenhagen's 330,246 current
+  `beliggenhedsadresse` rows, **133,530 (40.4%) appear as a
+  `Produktionsenhed.id`** - a real overlap. **Joining on `pNummer` would have
+  failed partially and silently**, which is the Oslo `kommunenummer` trap's
+  exact shape.
+
+- **`beliggenhedsadresse` is a first-class value: 2,800,921 rows against 928
+  `postadresse`.** **The same location-vs-registered-office distinction that
+  made Norway pass**, made explicitly by Denmark. Filtering on it is not a
+  refinement, it is the difference between premises and mailboxes.
+
+- **THE TAXONOMY LEVEL MEASUREMENT WAS ATTEMPTED AND IS NOT VALID, and that is
+  recorded rather than quietly reported.** A first pass gave division 20.4% /
+  gruppe 19.6% / klasse 18.3% / full 23.4%. **The three shallower figures are
+  artefacts**: the only labels in the file are the 6-digit ones, so truncating
+  a code and judging it by a sibling's label is **order-dependent** - whichever
+  row was seen first decides whether the whole truncated group counts as a
+  catch-all. **That is a statement about row order, not about the scheme.**
+  Only **23.4% at full depth** is defensible, and keying there is the safe
+  default because it is the only level whose labels are in hand. Proper level
+  figures need Danmarks Statistik's own DB07 hierarchy labels.
+
+- **The sole-trader marker is `v/` - *ved*, "by" - at 7.2%, and that is a
+  FLOOR.** `FISKEFORRETNINGEN V/LARS JOOST OLSEN`,
+  `Restaurant Fridas v/Lene Palmberg`. A sole trader may register under a bare
+  personal name with no marker, and the `Navn` file's own sample contains one,
+  so the real share is higher and unmeasured. France is 8.7%, Oslo 28.6%.
+  🚨 **`coNavn` is a SECOND exposure at 26.0%**, in a different column
+  entirely, and **no existing check would notice it because no other city has
+  that column.**
+
+- **Rail: M1-M4 only, and the master list's inherited figure was wrong.** OSM
+  gives **8 metro relations, refs M1-M4, all named and ALL COLOURED** - so the
+  legend is satisfiable from OSM alone, unlike Oslo where every metro line
+  shares one colour. **`city_master_list.md` carried "subway 4, tram 4". There
+  is no tram** - the system closed in 1972 and the Letbane is not open. **An
+  inherited, unverified count**, the class of error that gave Dublin four wrong
+  claims in one row.
+
+- **Excluding S-tog is the standing rule and has a larger consequence here
+  than anywhere it has been applied**, so it is recorded as an owner call. It
+  is 16 relations across 7 refs, all named and coloured, and `add-country`
+  names the S-Bahn family explicitly - but Copenhagen's actual backbone is the
+  S-tog, and applying the rule leaves four metro lines. In Boston, Chicago and
+  Madrid the metro was already dominant; here it is not.
+
+- **A `brief_check` kind was invented for the second time in one day and
+  failed the same way.** `http_status_expected` joined `http_status_in` as a
+  name outside the registered set. **The kinds are a fixed list; a brief that
+  names one outside it simply fails.** The 401-versus-404 diagnostic it was
+  meant to hold is now prose in the brief, with the reason it cannot be a
+  check stated beside it.
 
 ### 2026-09-23 - Paris's disproven figures swept out of staging's documents
 
