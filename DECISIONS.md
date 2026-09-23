@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**178 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**179 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Italy needs no country profile, and "Milan-only" turns out to be unproven](#2026-09-22---italy-needs-no-country-profile-and-milan-only-turns-out-to-be-unproven)
 - [The heredoc rule was written down four times and broken four times, so it became a hook](#2026-09-22---the-heredoc-rule-was-written-down-four-times-and-broken-four-times-so-it-became-a-hook)
 - [A front-page caption counted nine cities twice, and the drafted letters were in two places](#2026-09-22---a-front-page-caption-counted-nine-cities-twice-and-the-drafted-letters-were-in-two-places)
 - [Dublin's tooltip showed a placeholder the classifier had been dropping all along](#2026-09-22---dublins-tooltip-showed-a-placeholder-the-classifier-had-been-dropping-all-along)
@@ -214,6 +215,67 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Italy needs no country profile, and "Milan-only" turns out to be unproven
+
+- **Determined: Italy does NOT need a country profile, and the reason is
+  stronger than its city count.** Italy is **bespoke per city**. There is no
+  national premises register - the Registro Imprese is company-level, the
+  registered-office shape this project rejects - so Milan came from
+  `dati.comune.milano.it`, Rome would come from `dati.comune.roma.it` and Turin
+  from `aperto.comune.torino.it`: **three portals, three schemas, three
+  licences.** A country profile amortises NATIONAL facts across cities, and
+  Italy's national facts amount to the ATECO taxonomy and the privacy regime.
+  **ATECO already exists from the Milan build**, which is the one piece that
+  transfers. Contrast France, where SIRENE covers six cities from one file and
+  the profile paid for itself immediately. **Italy is Spain's shape, and
+  `docs/spain_retrospective.md` is the record of what that costs.**
+
+- **But "Italy stays a Milan-only country" is ASSERTED, not established, and
+  the gap is exactly the one `add-country` warns about twice.** That conclusion
+  rests on **Naples** (aggregate trap - its only commercial dataset is *per
+  procedimento e Municipalita*) and **Messina** (SCIA/DIA are business-START
+  notifications, a flow not a stock). **Neither is Rome or Turin**, and neither
+  city appears anywhere in `city_master_list.md`, `global_country_shortlist.md`
+  or `city_shortlist.md`. They are **UNPROBED, not discarded** - and the rule
+  is explicit that a row whose reason is "not reached" is not a discard at all.
+  The trail also carries an unreconciled **"Italy ~4 (Milan verified)"** beside
+  the later "Milan-only", which is the same disagreement in miniature.
+
+- **Probed both, and both have premises-shaped leads.** Enumerating rather than
+  searching, with the portals' own catalogues:
+  **Rome** - `dati.comune.roma.it` is CKAN with **365 datasets**, carrying
+  `elenco-delle-attivita-produttive-del-suap-di-roma-capitale-anno-2025` and
+  its 2024 edition. **SUAP** is the *Sportello Unico Attivita Produttive*, the
+  one-stop business register every Italian comune runs, and the 2025 edition is
+  **current**.
+  **Turin** - `aperto.comune.torino.it` is CKAN with **2,118 datasets**, 143
+  carrying a commerce term, and its naming makes the Messina distinction for
+  us: `attivita-commerciali-aperte-YYYY` and `-chiuse-YYYY` are the FLOW, while
+  **`attivita-commerciali-presenti-YYYY` is the STOCK**. It also publishes
+  `attivita-commerciali` from the geoportale as **SHP**, so geometry exists.
+  Both are **CC-BY**.
+
+- **Turin's blocker is age, not shape: the series STOPS AT 2019.** The latest
+  `presenti` year is **2019** (published 2020-07-15) and the geoportale layer
+  was last modified **2019-05-17**. That is six years stale against a project
+  that maps CURRENT commercial density - Barcelona already rejected a 2024
+  census edition for being geographically incomplete and used 2022. Turin is
+  therefore a **real candidate with a real caveat**, not a pass.
+
+- **Neither city's schema was read: both hosts went flaky mid-probe.**
+  `risorse.comune.torino.it` failed the TCP connect at 21 s and
+  `dati.comune.roma.it` failed the TLS handshake, *after* both catalogues had
+  answered. Recorded as **unread rather than negative**, which is the
+  distinction Bucharest's outage made the same day. **The two-column test -
+  LOCATION and ACTIVITY, checked separately - has not been applied to either.**
+
+- **Consequence for the screen: Italy is one BUILT city plus two unscreened
+  candidates, not a closed country.** Rome is the more promising (current data,
+  a national-standard register type) and Turin the more caveated (geometry and
+  CC-BY, six years stale). Neither changes the profile answer - each would
+  still be its own Step 0 - but both belong in the candidate list rather than
+  in silence.
 
 ### 2026-09-22 - The heredoc rule was written down four times and broken four times, so it became a hook
 
