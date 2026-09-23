@@ -1,0 +1,5 @@
+stop_id,station,lines,reason,latitude,longitude
+7-15051,Atalante,b,"in Cesson-Sévigné (35051), outside commune 35238",48.127146,-1.628023
+7-15050,Cesson - Viasilva,b,"in Cesson-Sévigné (35051), outside commune 35238",48.131493,-1.620061
+7-15063,La Courrouze,b,"in Saint-Jacques-de-la-Lande (35281), outside commune 35238",48.096522,-1.698399
+7-15064,Saint-Jacques - Gaîté,b,"in Saint-Jacques-de-la-Lande (35281), outside commune 35238",48.092047,-1.70362

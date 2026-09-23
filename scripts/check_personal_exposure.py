@@ -138,6 +138,12 @@ REGISTRIES = {
     "lille": dict(raw=None, trade=None, owner=None,
                   processed="businesses_clean.csv",
                   address=("business_name",)),
+    # Rennes, the fifth and last French city on the same shared step 2: the
+    # same structural guarantee. Its premises-name rate is the best of the
+    # five at 59.1%.
+    "rennes": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv",
+                   address=("business_name",)),
     "san_diego": dict(raw="sd_businesses_active_datasd.csv", trade="dba_name",
                       owner="business_owner_name", processed="businesses_clean.csv",
                       address=("address_no", "address_road", "address_suite")),
