@@ -128,7 +128,7 @@ wrong, confidently-zero rail network.**
     "claim": "THE LICENCE POSITION RESTS ON THIS FEED. dataportal.se says Begransad (restricted) but is a HARVESTER; the miljoforvaltning's own Hub DCAT feed declares accessLevel public across its datasets, with CC0 on 8 of 109. read-licence step 5 decides a contradiction in favour of the publisher. If this feed changes, the SILENT verdict must be re-argued",
     "kind": "http_contains",
     "url": "https://open-data-sthlm-miljo.hub.arcgis.com/api/feed/dcat-us/1.1.json",
-    "contains": "accessLevel"
+    "present": ["accessLevel"]
   },
   {
     "id": "stockholm-osm-boundary-is-stockholms-kommun",

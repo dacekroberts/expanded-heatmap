@@ -2810,6 +2810,66 @@ Two costs that no city in this project has yet paid:
   range — and must never be downloaded. Toronto's `Client Name` problem at
   national scale.
 
+#### ▲▲ 2026-09-23 — Brazil re-screened: CNPJ is geo-blocked, and IBGE's census address file replaces it
+
+**Both findings above were superseded the same afternoon, by measurement.**
+
+1. **CNPJ moved and is geo-blocked.** The `dados_abertos_cnpj/` directory
+   returned **404 to the Internet Archive from 2026-01-30** (last capture
+   2026-09-02); the host became a Nextcloud server and the files sit in the
+   public share `index.php/s/YggdBLfdninEJX9` (its capture's `og:title` is
+   "CNPJ"). From here every client — curl/schannel, Python/OpenSSL and the
+   browser — is **reset during the TLS handshake**, while the Archive's crawler
+   got through. `check-host.net` settled it: **16 nodes, `br1` 200, all 15
+   others in 12 countries reset, including four in the US.** **A geo-block, and
+   a publisher's choice** — this project does not route around it. The
+   four-cause check (transient / wrong host / refusal / dead) was worked in
+   order: the answer was *moved* AND *refused*, two causes at once.
+2. **City registers: measured negative in both cities.** São Paulo's CKAN
+   (**483 packages**, read by eye in full) and GeoSampa (**483 WFS layers**)
+   carry building and industrial licences, markets, fairs and shopping centres,
+   and no business register (`aprovacao-de-alvaras` is building permits,
+   discontinued 2019). Rio's ArcGIS org (**9,879 public items**) led to
+   `Fazenda/ISSQN` — whose four tables are **counts per street × activity
+   group × year of concession**, the aggregate trap, and a FLOW not a stock.
+3. **IBGE's CNEFE 2022 is a premises field survey with coordinates.**
+   *"O CNEFE oriundo do Censo Demográfico 2022 foi a primeira oportunidade na
+   qual o IBGE coletou a localização precisa para todos os endereços em campo,
+   resultando em um cadastro 100% georreferenciado pela primeira vez."* Rows
+   with `COD_ESPECIE = 6` carry `DSC_ESTABELECIMENTO`, *"identificação do
+   estabelecimento"* — free text written by the enumerator. `NV_GEO_COORD = 1`
+   is the census's own coordinate at the address. **One row per use-type per
+   address**, with `COD_INDICADOR_ESTAB_ENDERECO` flagging multiples.
+   Keyless, national, one schema — so **every Brazilian city with rail is
+   screenable from the same file**, which is what reopened the five cities
+   this file had collapsed on transit-catalogue grounds.
+
+**Measured per city** with `scripts/screen_cnefe.py` — never inferred from one
+city, which is the France lesson:
+
+| City | Establishment rows | **Mapped** | Unclassifiable | Coord level 1 | Name at a dwelling |
+|---|---|---|---|---|---|
+| São Paulo | 570,229 | **216,037** | 19.7% | 98.5% | 1.1% |
+| Rio de Janeiro | 264,714 | **105,350** | 20.0% | 95.1% | 2.1% |
+| Fortaleza | 132,638 | **49,503** | 25.9% | 98.5% | 1.0% |
+| Belo Horizonte | 125,268 | **44,923** | 22.8% | 98.8% | 1.4% |
+| Salvador | 122,120 | **52,258** | 21.6% | 97.3% | 1.4% |
+| Brasília | 100,889 | **35,824** | 26.7% | 99.9% | 2.3% |
+| Recife | 72,760 | **25,212** | 29.2% | 99.0% | 1.2% |
+| Porto Alegre | 61,068 | **18,798** | 27.9% | 98.1% | 0.9% |
+| Santos | 18,641 | **6,021** | 25.0% | 98.1% | 0.8% |
+
+**Rail, one Overpass query per city** (Curitiba as negative control — it
+returned only a tourist train; Cuiabá, whose VLT was abandoned, returned 0):
+Brasília, Recife, Porto Alegre, Fortaleza, Belo Horizonte, Salvador and Santos
+carry metro or modern light rail. **Teresina, Maceió, João Pessoa and Natal**
+carry single diesel lines or CBTU suburban trains tagged `light_rail` —
+**ASSERTED commuter-shaped, not downloaded, not discarded.**
+
+**Licence: free use by federal law**, credit required, LGPD applies; four
+restrictive readings recorded in `docs/data_sources.md`. **Brazil moves from
+"geocoding at national scale" to buildable: nine cities, one source.**
+
 ### Newly surfaced by the exhaustive sweep
 
 The catalogue sweep put 60 further countries on the table. Three were probed;

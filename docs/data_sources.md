@@ -743,6 +743,7 @@ independent of what is *permitted*. That is in `docs/excluded_categories.md`.
 | Los Angeles businesses (`6rrh-rzua`) | **CC0 1.0 Universal** (public domain dedication) | "Office of Finance" |
 | San Diego businesses | Portal terms explicitly permit use and **"Derivative Work"**, defined as "a work that is based in any way or to any extent on the Data". No attribution requirement stated | — |
 | Boston — every source used above (food inspections, Licensing Board, cannabis, city boundary, plus the neighbourhood, SAM address and Property Assessment layers) | **Open Data Commons PDDL** (public domain dedication), declared per-dataset in CKAN's `license_id` as `odc-pddl` | none declared |
+| **Brazil — IBGE CNEFE 2022** (**candidate, not built**; São Paulo and Rio first) | **Free use by federal law** — Decree 8.777/2016 art. 4 and Lei 14.129/2021 art. 29 — subject to LGPD principles. **No IBGE licence document exists.** Read 2026-09-23; four restrictive readings recorded in the Brazil section below | **Required** (the decree's definition of open data: *"limitando-se a creditar a autoria ou a fonte"*). No wording prescribed; use `Fonte: IBGE, Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE), Censo Demográfico 2022.` |
 | **Seoul** — the eight `인허가 정보` datasets below (**candidate, not built**) | **공공누리 제1유형 / KOGL Type 1** — attribution required, commercial use and derivative works permitted | 저작권자 **서울특별시**; 제3저작권자 **없음** (none) |
 | **Province of British Columbia** — the ABMS municipalities layer (`WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP`), which NAMES Vancouver/Surrey's 30 out-of-city stations | **Open Government Licence – British Columbia v2.0** — "worldwide, royalty-free, perpetual, non-exclusive licence… including for commercial purposes"; free to "Copy, modify, publish, translate, adapt, distribute". **Terminates automatically on breach.** Excludes Personal Information and the Province's own marks — neither of which a boundary polygon is. The WFS is also subject to the separate **API Terms of Use for OGL Information** (read 2026-09-22), which add operational limits and **no new notice**. Read 2026-09-22, stored at `docs/licenses/bc-open-government-licence.txt` | **Required, verbatim** — `Contains information licensed under the Open Government Licence – British Columbia.` See notice 17. **Two sibling BC layers are licensed "Access Only" and would NOT permit this**; see the stored file's header |
 | San Francisco assessor roll (`wv5m-vpq2`) — the residence-filter join | **Open Data Commons PDDL 1.0** (public domain dedication), declared in the dataset's own `license` field as "Open Data Commons Public Domain Dedication and License" | none declared |
@@ -930,6 +931,76 @@ but `scripts/check_personal_exposure.py` will need a Korean-aware pass rather
 than its current one, and Personal services is the bucket where a salon
 operating from a residential address is most plausible. **Flagged for
 `add-city` Step 0, not pre-judged.**
+
+### 🇧🇷 Brazil — IBGE's CNEFE 2022 (candidate, not built): the grant is a LAW, not a document
+
+**Source:** *Cadastro Nacional de Endereços para Fins Estatísticos*, Censo
+Demográfico 2022 — one CSV per município, keyless, at
+`ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/`.
+Every address in the country with a field-collected coordinate; rows with
+`COD_ESPECIE = 6` carry `DSC_ESTABELECIMENTO`, the enumerator's
+identification of the establishment. **It is Brazil's business leg AND its
+coordinate leg** — no CNPJ, no geocoder. Read 2026-09-23 by the `licence-read`
+agent; its full working is in the session scratchpad, not the repository.
+
+**PERMITTED WITH CONDITIONS — and no IBGE document grants it.** No licence
+exists anywhere machine-readable: the FTP is a bare listing, the zips hold
+only the CSV, the dictionary is silent, and CNEFE is **not on dados.gov.br**.
+The grant is federal law that binds IBGE as a public foundation:
+
+- **Decree 8.777/2016, art. 4** (as reworded by Decree 9.903/2019): *"Os
+  dados disponibilizados pelo Poder Executivo federal e as informações de
+  transparência ativa são de livre utilização pelos Poderes Públicos e pela
+  sociedade."*
+- **Lei 14.129/2021, art. 29**: *"...são de livre utilização pela sociedade,
+  observados os princípios dispostos no art. 6º da Lei nº 13.709 [LGPD]."*
+- The FTP's own line: *"Todos os arquivos aqui disponíveis são públicos."*
+  — a statement that they are public, not a licence.
+
+**Two conditions, neither of them an act owed to IBGE:**
+
+1. **Credit the source.** No wording is prescribed. Use IBGE's own form:
+   **`Fonte: IBGE, Cadastro Nacional de Endereços para Fins Estatísticos
+   (CNEFE), Censo Demográfico 2022.`** Add it to the numbered notices when
+   the first Brazilian page ships, not before — `check_provenance.py` pairs
+   that list with `app/components.py`.
+2. **LGPD principles for any personal data published** (art. 29's proviso;
+   LGPD art. 7 §3 — *finalidade, boa-fé e interesse público*). **This makes
+   the privacy rule below a licence condition, not house style.**
+
+**Four restrictive readings were found and NOT resolved in this project's
+favour by the reader. The owner decided on 2026-09-23 to proceed on the law**,
+on a recorded reasoned position — the Philadelphia shape:
+
+| | Reading | Why the project proceeds |
+|---|---|---|
+| **A** | A **2009 IBGE service-desk email**, surviving only in an OSM mailing-list archive: its dissemination policy *"não contempla a modalidade de disponibilizar o produto do seu trabalho em sites de terceiros"* | Informal, unpublished, about mirroring maps and orthophotos, and **predates both the 2016 decree and the 2021 law**. A second reply in the same thread allowed reuse with citation |
+| **B** | The decree's **copyright waiver** (art. 4 §1) covers databases whose rights belong to **the União**; IBGE is a foundation and its PDFs say "© IBGE" | The **caput** and **Lei 14.129 art. 29** grant free use regardless; the CSVs carry no © notice |
+| **C** | **Lei 5.534/1968**: informants' data are secret and *"usadas exclusivamente para fins estatísticos"* | The duty is **IBGE's**, and IBGE discharged it: its methodological note (Notas metodológicas n. 04) says establishment names were **published deliberately**, and its secrecy review withholds what identifies informants |
+| **D** | CNEFE is **not in IBGE's open-data plan** and not on dados.gov.br | Art. 4 speaks of data *"disponibilizados"*, not only catalogued datasets |
+
+**What may not be SAID** (from IBGE's own documentation, not its terms):
+the names were **not checked against any register or standardised**, so never
+present them as verified business names; **IBGE did not classify the
+establishments** — the three buckets are this project's reading of free text;
+and **the data are not current** — they are the 2022 census fieldwork.
+
+**Privacy rule, decided 2026-09-23:** at any address that also holds a
+dwelling (`COD_ESPECIE` 1 or 2 at the same address), the tooltip shows the
+**category, never the description text**. Structural rather than a name list.
+Measured before deciding: a first name at a dwelling address is **2.1%** of
+Rio's mapped rows and **1.1%** of São Paulo's; the structural rule reaches
+**55.4%** and **37.3%**, which is the price of not trusting a name list —
+and like Milan, where ~82% of pins carry no trade name, fewer published names
+is a privacy asset rather than a loss.
+
+**Not a source here: CNPJ.** Receita Federal's CNPJ open data moved in early
+2026 to a Nextcloud share (`arquivos.receitafederal.gov.br/index.php/s/YggdBLfdninEJX9`;
+the old `dados_abertos_cnpj/` directory has returned **404 since 2026-01-30**)
+and **the host refuses connections from outside Brazil** — measured
+2026-09-23 from 16 check nodes: **the Brazilian one 200, all 15 others in 12
+countries reset.** A publisher's access control, not an outage, so this
+project does not route around it. Its terms were never read.
 
 ### Permissive on reading the terms themselves
 

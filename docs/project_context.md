@@ -171,9 +171,10 @@ Cities built and running end to end (pipeline, map, app page):
   own names off the pins. Its own `legalentitytype` field gives a structural
   Individual/corporate signal no other city has.
 
-- **Miami** - Metrorail plus both Metromover loops, 42 stations. **The only
-  REGIONAL map here**, and the project's first working proof of the
-  multi-jurisdiction idea Seattle is planned around. Metrorail leaves the City
+- **Miami** - Metrorail plus both Metromover loops, 42 stations. **The FIRST
+  REGIONAL map here** - the working proof of the multi-jurisdiction idea
+  Seattle is planned around, and the shape Vancouver, Guadalajara and Dublin
+  each took later. Metrorail leaves the City
   of Miami, and everywhere else that ends the discussion - a station in another
   city needs that city's own business data, sourced separately. Miami is the
   exception because Miami-Dade County licenses all 34 of its municipalities in
@@ -298,6 +299,36 @@ Cities built and running end to end (pipeline, map, app page):
   one. Its boundary layer also has a **hole at Stanley Park**, so the boundary
   is a check rather than a filter.
 
+- **Montréal** - the STM Métro: the Green, Orange, Yellow and Blue Lines, at
+  agglomeration scope. Distinctive in three ways, and the cheapest build here.
+
+  **Its source is a field survey rather than a licence register**, the only one
+  in the project, and that changes what has to be filtered. A survey of
+  commerce can contain an empty shop where a register of licences cannot, so
+  vacancies are excluded - nobody had recorded that they were in there, and the
+  obvious for-rent column turns out to be a strict subset of the vacancy flag,
+  so filtering on that instead would have left most of them in. The
+  classification is filtered by LENGTH rather than for nulls, because it is a
+  one-character placeholder on a couple of hundred rows and a not-null test
+  keeps codes that cannot be classified. What remains is a storefront share
+  more than double any other city's, which is the whole story of the build.
+
+  It **needed no taxonomy module at all**, which no other city here has
+  managed: SCIAN is NAICS, so `naics.py` classified it unchanged and the only
+  adaptation was renaming a column.
+
+  And it takes **no address dedup, deliberately** - the opposite of Miami's and
+  Vancouver's call, decided on the survey's own structure. Every row is one
+  surveyed unit with its own identifier, and thousands of rows share an address
+  legitimately: one shopping centre holds over a hundred and seventy units, so
+  a name-plus-address dedup would have collapsed a mall to one shop. Step 2
+  asserts that identifier's uniqueness instead. Its off-island cut is spatial
+  per the project invariant and cross-checked against a structural marker - STM
+  marks exactly the four off-island stations with a fare-zone suffix, and
+  step 1 stops if the two ever disagree. No thinning, because the Métro is
+  entirely underground and grade-separated, which is the structural test rather
+  than the spacing.
+
 - **Calgary** - Calgary Transit's CTrain: the Red and Blue Lines. Distinctive
   in four ways.
 
@@ -400,6 +431,254 @@ Cities built and running end to end (pipeline, map, app page):
   the only GTFS feed expired 2023-01-28 and predates Linea 4. Gate 3 DOES run
   here and passes against SITEUR's published counts.
 
+- **Madrid** - Metro de Madrid: Líneas 1-12 and the Ramal Ópera-Príncipe Pío.
+  **The first city in Europe.** Distinctive in four ways.
+
+  Its **rail comes from the operator's own feature services, and the reason is
+  a licence clause rather than an absence.** CRTM publishes a Metro GTFS, it
+  downloads cleanly, and it was rejected: the feed stopped being refreshed in
+  May 2025 while CRTM's licence obliges a reuser to keep displayed information
+  *siempre actualizada*. The ArcGIS layers carry the same network and are
+  maintained. So `map_common.py` grew a third line-shape loader beside the GTFS
+  and OpenStreetMap ones rather than a fork - the standing rule that a city
+  extends the shared renderer, paid for and held a third time. OSM is the
+  cross-check here, never the source.
+
+  Its **line codes do not collapse uniformly into lines**, which is
+  Guadalajara's lost-line trap in a third form. A naive distinct count would
+  draw Madrid as an eighteen-line system: most codes are a line, three are
+  lettered branch pairs whose case is inconsistent, so a case-sensitive
+  collapse strands one branch as its own line, and two circular lines are
+  published as two one-direction codes each. Three independent sources agree on
+  the real number.
+
+  Its **taxonomy keys near the top of its scheme** - one division per bucket,
+  with a handful of epígrafes carved back out, which is `naics.py`'s
+  groups-plus-exclusions shape. Barcelona keys at the opposite end of an
+  identically-shaped scheme, and both were measured rather than inherited.
+  `HOSTELERÍA` is the 72-versus-722 trap in Spanish, holding accommodation
+  alongside food and drink; and NACE 47 is retail where NACE 46 is wholesale,
+  the exact inverse of SCIAN, so a reader carrying the Mexican numbers across
+  gets the wrong half of the register.
+
+  And its **coordinates are fully populated and partly invalid**: a large block
+  of rows carries a literal zero stored as a string, so an is-it-populated test
+  passes them and the pin lands in the Atlantic. Unlike Los Angeles the loss is
+  biased *away* from the mapped rows - it concentrates in tourist flats,
+  hostales and offices, which this project does not map - so no geocoding step
+  is needed. Station names are re-cased for display, because the register
+  shouts in capitals and `.title()` is wrong in Spanish.
+
+- **Barcelona** - Metro de Barcelona: L1-L12 across two operators, plus the
+  Montjuïc and Vallvidrera funiculars. Distinctive in four ways.
+
+  Its **rail geometry is OpenStreetMap's, and what counts as a line was settled
+  by the operators' own `network` tag** rather than by a judgement about what a
+  metro is. That test keeps TMB's and FGC's lines and both funiculars, and
+  drops the Tibidabo funicular - run by the municipal parks company and
+  carrying no network tag - along with the trams, without a separate decision.
+  Deciding by mode would have been wrong in both directions: FGC's rack
+  railways share a mode with a funicular and sit fifty and a hundred and fifty
+  kilometres away.
+
+  It found that **a route relation and a station node are different objects**,
+  after a station query returned exactly zero: a relation holds stop positions
+  while the station box hangs off a stop area. The step raised rather than
+  writing an empty map. It is the third distinct station object in three OSM
+  cities.
+
+  It **collapsed two interchanges its two operators name differently**, which
+  the shared spacing gate structurally cannot catch. FGC and TMB write
+  Catalunya and Espanya under different names, metres apart, so two of the
+  busiest stations in the city were drawn twice, with two markers and two
+  overlapping ring sets. A median cannot see two bad names; the
+  nearest-neighbour minimum did, and `pipeline/stations.py` now prints that
+  minimum for every city as a prompt rather than a threshold, because Barcelona
+  also has a genuine pair that close.
+
+  And its **taxonomy keys at the finest level of its scheme** - the opposite of
+  Madrid's, on measurement: the group level puts a third of active rows in
+  `Altres` where the finest level puts a fortieth of that. The group holding
+  restaurants also holds accommodation, so keying there would have published
+  hotels as food service. `Altres` is then dispatched on two further columns,
+  because it means five different things depending on its parent. Built on the
+  survey year that is complete rather than the one that is fresher: the newer
+  release is short by four fifths in the outer districts against a twentieth in
+  the centre, so a map drawn from it would show the periphery as commercially
+  dead - which is roughly what a reader expects, and would therefore not look
+  broken.
+
+- **Dublin** - the Luas Red and Green Lines and the DART, across four local
+  authorities. Distinctive in four ways.
+
+  **Its register carries no business name of any kind** - no trade name, no
+  occupier, no ratepayer - so the address is the pin label. Los Angeles'
+  failure mode cannot occur here structurally rather than by a filter, and
+  step 2 exits if a name-like column ever appears. This is its own case rather
+  than Milan's hybrid, and the build records which, because
+  `check_personal_exposure.py`'s heuristics measure nothing when every label is
+  an address: its person-like hits are Irish streets named after people, floor
+  lists read as surname-first, and unit descriptors read as a person plus a
+  trade name.
+
+  **Its rail source was wrong in its brief and was reversed mid-build.** The
+  brief recorded OpenStreetMap, which had never been measured: the agency's
+  national feed is maintained a year ahead and carries a station that opened
+  the previous year, and the agency also publishes a feature service. The rule
+  that followed is now in `osm-rail` - a brief may not record OSM as the rail
+  source without naming the agency endpoints that were tried. OSM is retained
+  as a cross-check and runs on every build.
+
+  **OpenStreetMap tags every DART relation as commuter rail**, so a network
+  filter drops the line the city is built around, and the first step 1 did
+  exactly that and exited naming DART as missing. The whitelist is on the line
+  reference instead. Third measured instance of the rule that a network tag is
+  a label rather than evidence, and the first where the mis-tagged line is the
+  principal one.
+
+  And it is the **first city here with neither a geocoding step nor a
+  reprojection step**: both its sources publish in Irish Transverse Mercator,
+  the project's first national grid, so the only transform is to draw. The
+  per-city-UTM invariant was extended rather than relaxed - a national grid is
+  admitted only where the city's own longitude falls inside that grid's domain,
+  so a copied CRS still fails exactly as it did. Its line palette is measured
+  rather than inherited, because feed and feature service both leave the route
+  colours empty: nothing red or green clears the preferred separation from the
+  category pins, and the DART moved off green entirely, which fixed a problem
+  no number showed - the map had two green lines.
+
+- **Milan** - Metro M1-M5; the seventeen tram routes are recorded as a costed
+  extension rather than a discard. Distinctive in four ways.
+
+  It assembles **six premises registers, the most of any city here**, and its
+  **taxonomy is keyed on the register rather than on any classification
+  field**, because every in-dataset classification is unusable: one carries
+  sixty-odd distinct values for what should be three, half of them pure case
+  variation and thousands of them two values concatenated, while the other two
+  are more than half blank. The field naming each dataset's own remit is a
+  single clean value at full population. Bucket equals source, dispatched
+  through `EXTRA_COLUMNS` as New York's taxonomy does, with no change to the
+  shared renderer. The one judgement inside it: a food shop is Retail, not Food
+  service - the same line Dublin drew.
+
+  It **deliberately does not deduplicate across its sources, which is the
+  opposite of New York's call**, and the ground is measured rather than
+  stylistic. The registers' identifier prefixes never collide between any pair,
+  so they are demonstrably separate registers of different activities; and an
+  address cannot be a key at all, because more than half the rows in the
+  largest register already share one with another row inside it. A shop and a
+  bar at one Milan address are two premises. Step 2 asserts the disjointness
+  rather than merging, so a future overlap fails loudly, and the over-count
+  where one business holds two licences is stated on the city page.
+
+  Its pins take the **hybrid naming pattern the French cities later
+  inherited**: the trade name where the register carries one, the address
+  otherwise.
+
+  And its **rail comes from the agency's own layers with both of `osm-rail`'s
+  agency steps run**, hitting three traps that are each guarded in code rather
+  than noted - a string identifier joined against an integer one, which matches
+  nothing at all; a station layer whose features are not stations, with
+  interchanges modelled two incompatible ways so that a distance threshold is
+  wrong in both directions at once; and a `stops.txt` that cannot select metro
+  stations, the columns that would do it being empty on every stop. Gate 3 runs
+  against the agency's own join table and passes. Fixing it also fixed a gate
+  that passed on zero: a check that cannot distinguish "no data" from "no
+  answer" is not a check.
+
+- **Paris** - the Métro: Lignes 1-14 plus 3bis and 7bis. **The first French
+  city, and the first built on a national register.** Distinctive in four ways.
+
+  SIRENE is one register for the whole country, so its classification module is
+  the **first in `pipeline/taxonomies/` that belongs to a country rather than
+  to a city**, keyed on the finest level of NAF on the same kind of measurement
+  Barcelona used. It keeps two kinds of exclusion apart rather than merging
+  them into one list: the structural ones are national, because the publisher's
+  own label says the activity happens away from a shop, and so hold in
+  Marseille too, while a catch-all's composition is a fact about a city,
+  sampled per city and recorded in that city's config. Merging them would have
+  let a national module silently make a per-city call.
+
+  It projects to **Lambert-93, not the UTM zone the scaffold derived**, and
+  that is the project's second national grid. Metropolitan France spans three
+  UTM zones, so a per-city UTM rule would give several cities reading one
+  national file three different projections. The invariant is metres derived
+  per city and never copied; deriving from France's own grid satisfies it where
+  copying a zone between French cities would not. The grid is admitted bounded
+  to metropolitan longitudes, because the register's own CRS column also
+  carries the overseas départements - an inherited hardcoded Lambert-93 would
+  put every pin in the sea *without raising*, and those bounds are what raises.
+
+  It is **scoped to the commune on a measurement**, not by default. Every métro
+  line survives the boundary, and the two modes lying mostly outside it would
+  not be drawn at any scope - the RER and Transilien are commuter rail,
+  excluded in every city here, and trams are already excluded in Barcelona,
+  Milan and Toronto. So regional scope buys Paris almost nothing, which is the
+  opposite of Dublin, whose register is published per local authority and whose
+  rail scope followed from that rather than the reverse.
+
+  And it carries the **only notice in this project that prescribes markup**.
+  Licence Mobilités requires the database name to hyperlink to the dataset and
+  the licence name to the licence text, so `render_site_notices()` cannot carry
+  it as plain text the way it carries LA Metro's. It is also the first
+  revocable grant here - every other source is perpetual - and the response was
+  decided in advance: if the grant lapses, the page comes off the site and the
+  entry out of `app/cities.py` while the pipeline and the record stay, because
+  a city coming down is not a city being deleted. The same licence requires the
+  data's last-updated date and its update interval to be displayed, and neither
+  exists inside the feed, so the national access point's metadata API is a
+  load-bearing source in its own right rather than a convenience.
+
+- **Marseille** - RTM's Métro 1-2 and Tramway 1-3. France's second city, and
+  the one that turned the country's shared parts into shared code: the national
+  extracts are the same bytes for every French city, so they moved to one
+  country-level cache rather than a copy per city, and step 2 became a country
+  module that Paris re-ran through at zero drift - which is what made it a
+  refactor rather than a rewrite. Mexico is the deliberate counter-example and
+  is left alone, its national register being partitioned per state, so its two
+  cities read genuinely different files; the rule is "the same bytes", not "one
+  national source". Its **scope was measured rather than inherited from
+  Paris**, because its feed is the whole métropole: every RTM line sits inside
+  the commune, and the fourth tram in that feed belongs to Aubagne and has no
+  station inside it at all, so **the same spatial filter that scopes the city
+  drops another operator's network as a side effect** - better than a
+  hard-coded exclusion, which the next French city reading a multi-network feed
+  would have had to remember. The ferries are dropped by the owner's decision
+  and recorded as revisitable, because they are genuine urban transit here,
+  which no other excluded mode in this project is.
+
+- **Toulouse** - Tisséo's Métro A and B, Tramway T1, and the Téléo cable car.
+  France's third city. Distinctive in three ways.
+
+  It is the **first city here to draw a non-rail mode**. Téléo is an aerial
+  lift, and the case for it is functional rather than technological: the
+  operator runs and tickets it as it does the métro, every one of its stations
+  is inside the commune, it crosses the river where no other line does, and one
+  of them is a métro interchange. The owner's call, made after the argument in
+  its own brief turned out to be false - it cited Paris's funicular as
+  precedent, and Paris excludes its funicular - and the brief was corrected in
+  place rather than left to mislead the next reader.
+
+  **Commune-only scope costs Tramway T1 half its stations**, the whole airport
+  branch, and that is the finding the obvious test cannot see: Marseille's rule
+  was that every line survives the boundary, and every line survives here too.
+  So the config now records the per-line split and step 1 exits if it moves.
+  Commune-only was taken anyway, with both alternatives put to the owner and
+  declined, because it keeps the French cities on one comparable scope.
+
+  And its **gate 3 matches the operator exactly on all four lines** - the
+  cleanest of any city here - where the layer that looks like the right one
+  would have failed it: the obvious tram layer holds four extra stations, every
+  one tagged with a service year still in the future, sitting beside the built
+  ones and separated only by that column. That is `osm-rail`'s
+  proposed-mixed-with-built trap found in a first-party agency layer rather
+  than in OSM, so the whitelist rule it states is not an OSM rule. Its
+  catch-all share diverged from both siblings and was measured rather than
+  inherited; and a fifth of its active establishments are masked at source -
+  name, address and location together - so a thin-looking street here may be a
+  quiet one or a private one, and nothing in the data separates them. The page
+  says so.
+
 **Canada is closed at five built cities** - Vancouver (regional, with Surrey),
 Montréal, Calgary, Edmonton and Toronto - out of six candidates screened. The
 sixth, Surrey, is not pending: it shipped inside the Vancouver regional map.
@@ -425,13 +704,53 @@ justified, how to derive stations from route-relation membership rather than
 node tags, and the traps - entrances outnumbering stations, proposed stations
 misspelled `prpopsed`, an unbounded name search matching Guadalajara, Spain.
 
+**Spain is complete at two cities**, out of six screened - Valencia, Bilbao and
+Málaga measured out and Sevilla unreachable - and it is the country that proves
+a shared language and a shared classification family are not a shared build.
+Madrid and Barcelona have different rail sources, different projected CRS, and
+key identically-shaped four-level taxonomies at opposite ends, each decided by
+measurement, which is why there is no default for the next city to inherit.
+`docs/spain_retrospective.md` is what that cost. **Ireland and Italy are one
+city each**, and Italy needed no country profile at all: its registers are
+municipal, so what a profile would establish is per city anyway.
+
+**France is open: Paris, Marseille and Toulouse are built, Lille and Rennes
+remain.** It is the first country here where each city was materially cheaper
+than the last - one national register, one national taxonomy module, one
+national grid, one shared extract cache and one shared step 2, so Marseille's
+own work was a scope measurement and a rail leg, and Toulouse downloaded
+nothing but a feed and a boundary. What does NOT transfer is the more useful
+half, and it is the same list each time: the scope decision, the ring edges,
+the spacing floor, gate 3's source, and the catch-all's share. Lyon is
+discarded on four independent blockers - an account required before any
+download, an open-ended indemnity, a marks clause colliding with the invariant
+that every drawn line carries its real public name, and a feed dead behind the
+national access point - while Toulouse's and Rennes' terms were read the same
+day and are clean, so those clauses are that métropole's own rather than a
+French pattern. Lille needs its own rail answer before it starts. **Toulouse is
+built but not deployed:** `deploy-verify` is deliberately deferred until the
+last French city, so a French city reaching master before that run is the thing
+to stop.
+
 **The macro map is regional, and a region is whatever groups cities into one
-readable view** - not a country. There are six: United States (a COMPOSITE of
-West and East, and the default landing view), United States West, United States
-East, Canada West, Canada East, Mexico. Each is fitted to its own cities, so
-switching region zooms as well as re-centres. A city carries exactly one region
-tag and a composite is resolved at lookup; tagging a city with a composite is
-an error the validator names.
+readable view** - not a country. They are United States (a COMPOSITE of West
+and East, and the default landing view), United States West, United States
+East, Canada West, Canada East, Mexico and Europe. Each is fitted to its own
+cities, so switching region zooms as well as re-centres. A city carries exactly
+one region tag and a composite is resolved at lookup; tagging a city with a
+composite is an error the validator names. A region labels only its own cities,
+composites included - a parent drawing every city's name is a collision class
+that grows with the map rather than with any defect.
+
+**Europe is one region, not one per country**, and it was briefly the other
+way: three regions held four cities before they were collapsed, which is what
+let France arrive without adding more. Note what this is not. North America is
+split because those countries are thousands of kilometres wide and a single
+frame shows a continent rather than a city; Europe's cities frame together at a
+zoom where each is still distinguishable. Revisit it when a city appears far
+enough east or south to force the frame open - that is a measurement
+(`scripts/check_macro_labels.py` scores every city in every region at three
+widths), not a judgement.
 
 **The deployed app must be REBOOTED, not merely updated, after any push that
 changes a module it imports.** Streamlit Cloud's "Updated app!" re-runs the
@@ -441,19 +760,22 @@ downtime on 2026-09-22. `app/cities.py` changes with every city.
 `python scripts/check_deploy_imports.py` tests a clean clone under the lean
 venv before pushing; it cannot catch the stale-module case, and says so.
 
-Next is a new COUNTRY rather than a new city. The shortlist's own ordering
-puts South Korea first - the only candidate needing neither a geocoding leg
-nor new pipeline code, and its supposed API-key blocker was withdrawn when
-`data.seoul.go.kr`'s export turned out to work logged-out. New Orleans and
-Seattle remain deferred, both needing decisions before code. See
-`docs/global_country_shortlist.md` and the `add-country` skill.
+Next is the rest of France - Lille, then Rennes - and **Lille needs its own
+rail answer before it starts**, because its brief found tram geometry and no
+first-party metro line geometry, so its rail leg is none of the three built
+French cities'. A new COUNTRY comes after that rather than a new city. New
+Orleans and Seattle remain deferred, both needing decisions before code. Take
+the candidate ordering from `docs/city_master_list.md`, which is current state;
+`docs/global_country_shortlist.md` is its evidence trail, and the `add-country`
+skill is the process.
 
 **Briefs are now executable.** `scripts/brief_check.py <city>` re-runs a
 brief's factual claims against the live sources, from a fenced
 ```brief-checks block beside the prose. It exists because Edmonton's build
 inherited three wrong claims from its brief and the MEASURED/ASSERTED labels
-did not stop it; Toronto's and Edmonton's briefs carry 9 checks each, and all
-18 pass. A failing check is a brief to correct, not a check to relax.
+did not stop it. Nearly every brief now carries a checks block, and the script
+run with no city argument runs all of them. A failing check is a brief to
+correct, not a check to relax.
 **Check a candidate's registry actually covers all three buckets before
 assuming one source is enough** - that assumption failed for New York, and in
 Philadelphia a whole bucket had no source at any level of government. See
@@ -478,7 +800,8 @@ button back to the macro map; with the flag off, every city page has a switcher
 row to jump to another city or back to the map (see
 `docs/navigation_sidebar_and_city_links.md`). The city list lives in `app/cities.py`.
 
-Not built yet: a shared pipeline-side city registry, and deployment.
+Not built yet: a shared pipeline-side city registry. The site is deployed, and
+the reboot rule above is what keeps it up.
 
 ## Standing requirements for a city's map
 

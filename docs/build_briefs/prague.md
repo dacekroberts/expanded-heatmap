@@ -292,7 +292,7 @@ trade names.
     "claim": "CUZK's spatial-data conditions page is live. It lives under /Predpisy/ - five earlier attempts searched /Uvod/Produkty-a-sluzby/ and the geoportal and found only application and cookie terms. There is no PDF or versioned artefact, so a change here is SILENT; the page's 'Datum posledni aktualizace: 30.06.2023' is the drift signal",
     "kind": "http_contains",
     "url": "https://www.cuzk.gov.cz/Predpisy/Podminky-poskytovani-prostor-dat-a-sitovych-sluzeb/Podminky-poskytovani-prostorovych-dat-CUZK.aspx",
-    "contains": "CC-BY 4.0"
+    "present": ["CC-BY 4.0"]
   },
   {
     "id": "cuzk-old-host-redirects",

@@ -44,9 +44,14 @@ WHAT IT CHECKS
      because each country's block was appended without renumbering.
   K. Three of `CLAUDE.md`'s invariants that a new city could break silently:
 
-     - **the basemap attribution is on every rendered map.** ODbL requires it
-       to stay visible; nothing verified it, and it is the one obligation here
-       that is breached by OMISSION rather than by a wrong string.
+     - **the basemap attribution is on every rendered map, and nothing is
+       parked on top of it.** ODbL requires it to stay visible; nothing
+       verified it, and it is the one obligation here that is breached by
+       OMISSION rather than by a wrong string. Since 2026-09-23 this also
+       requires the legend's `bottom` to be clamped against the map's own
+       height, because "in the file" and "on the screen" turned out to be
+       different questions - the legend covered the credit in every city at
+       any viewport taller than the map.
      - **each city's `CRS_PROJECTED` matches its own longitude.** The invariant
        is that the projected CRS is derived per city and NEVER copied, and a
        copied one is invisible: distances come out wrong by a few per cent
@@ -335,7 +340,29 @@ def check_invariants(names, lons):
     """K: three CLAUDE.md invariants a new city could break silently."""
     problems = []
 
-    # 1. ODbL: the basemap credit must be on every rendered map.
+    # 1. ODbL: the basemap credit must be on every rendered map - PRESENT,
+    #    LINKED, and NOT UNDERNEATH THE LEGEND.
+    #
+    #    The third clause was added 2026-09-23. Until then this checked only
+    #    that the credit was in the file, and it was: in every city, at every
+    #    viewport taller than the map, the legend covered it completely. The
+    #    file said "visible" and the render said otherwise, which is the exact
+    #    shape of failure the rest of this script exists to catch.
+    #
+    #    Layout cannot be measured by reading HTML, so this does not try. What
+    #    it checks is that the MECHANISM is present: the legend is
+    #    position:fixed against the viewport's bottom edge while the credit is
+    #    absolutely positioned against the MAP's, so the legend's `bottom` has
+    #    to be clamped against the map's own height or the two collide as soon
+    #    as the frame is taller than the map. Both numbers are read out of the
+    #    same committed file, so this compares the map that shipped against the
+    #    clamp that shipped with it. The real measurement is
+    #    scripts/check_map_attribution.js, which hit-tests a rendered map at
+    #    several viewport heights - but that one needs a browser and an agent,
+    #    and CLAUDE.md says to skip deploy-verify for pipeline-only work.
+    #    pipeline/map_common.py IS pipeline-only work, so without this half the
+    #    only check that sees the regression is the one the rules say not to
+    #    run.
     for html in sorted(ROOT.glob("outputs/*/heatmap.html")):
         text = html.read_text(encoding="utf-8", errors="replace")
         rel = html.relative_to(ROOT).as_posix()
@@ -345,6 +372,28 @@ def check_invariants(names, lons):
         elif "openstreetmap.org/copyright" not in text.lower():
             problems.append(f"{rel}: attribution present but not linked to "
                             f"the OSM copyright page")
+
+        map_h = re.search(r"#map_\w+\s*\{[^}]*?height:\s*([\d.]+)px", text)
+        legend_bottom = re.search(
+            r'class="map-legend"[^>]*style="[^"]*?bottom:\s*([^;]+);', text, re.S)
+        if not map_h or not legend_bottom:
+            problems.append(
+                f"{rel}: cannot find the map's height and the legend's bottom "
+                f"offset, so the basemap credit's clearance is unverifiable. "
+                f"If the legend or the map container was restructured, update "
+                f"this check with it - do not delete it")
+        else:
+            want = f"max(24px, calc(100vh - {int(float(map_h.group(1))) - 24}px))"
+            got = " ".join(legend_bottom.group(1).split())
+            if got != want:
+                problems.append(
+                    f"{rel}: the legend's bottom is '{got}', not '{want}'. The "
+                    f"legend is fixed to the VIEWPORT's bottom edge and the "
+                    f"OSM credit sits at the MAP's, so an unclamped offset "
+                    f"puts the credit under the legend at every frame taller "
+                    f"than the map - measured 5/5 covered at 1024x768 on "
+                    f"2026-09-23. See _LEGEND_BOTTOM_CSS in "
+                    f"pipeline/map_common.py, and re-render this city")
 
     # 2. The projected CRS is derived per city, never copied.
     for name in names:

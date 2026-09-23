@@ -167,7 +167,7 @@ failed its own control.
     "claim": "The licence is CC0 and it is on the DISTRIBUTION node, not the dataset. Foodbusinesses (store/6/resource/35) carries fourteen properties and no license, rights or accessRights of any kind - a reader checking the dataset node would record Goteborg as SILENT and be wrong in the permissive direction",
     "kind": "http_contains",
     "url": "https://catalog.goteborg.se/store/6/metadata/57479",
-    "contains": "publicdomain/zero"
+    "present": ["publicdomain/zero"]
   }
 ]
 ```

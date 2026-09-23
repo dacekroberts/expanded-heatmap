@@ -137,14 +137,14 @@ rule for all European cities.
     "claim": "The WFS is the route that works. Its capabilities advertise the lower-case layer gastwirtschaftsbetriebe, resultType=hits and GeoJSON output - all verified 2026-09-23 at 3,488 features. The CKAN-advertised CSV/GeoJSON/SHP download URLs are an Angular SPA returning text/html, so a fetch script taking the CKAN resource URL gets a web page",
     "kind": "http_contains",
     "url": "https://www.ogd.stadt-zuerich.ch/wfs/geoportal/Gastwirtschaftsbetriebe?SERVICE=WFS&REQUEST=GetCapabilities&VERSION=1.1.0",
-    "contains": "gastwirtschaftsbetriebe"
+    "present": ["gastwirtschaftsbetriebe"]
   },
   {
     "id": "zurich-licence-is-cc-zero",
     "claim": "Gastwirtschaftsbetriebe declares Creative Commons CCZero on the city's own CKAN. The strongest licence position of the three one-bucket cities - Goteborg is also CC0 and Stockholm is SILENT",
     "kind": "http_contains",
     "url": "https://data.stadt-zuerich.ch/api/3/action/package_show?id=geo_gastwirtschaftsbetriebe",
-    "contains": "cc-zero"
+    "present": ["cc-zero"]
   }
 ]
 ```

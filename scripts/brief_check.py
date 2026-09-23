@@ -143,6 +143,21 @@ def http_contains(spec, ctx):
     to notice a document CHANGING, and a licence page that stops containing
     "4.0" is worth a human reading it whatever the cause.
     """
+    # A CHECK WITH NOTHING TO LOOK FOR MUST FAIL, NOT PASS. Until 2026-09-23
+    # sixteen checks across ten briefs declared `"contains": "..."`, a key this
+    # function never read - so each passed on any HTTP 200 and could not see
+    # the licence, field or layer it was written to guard. That is this kind's
+    # own docstring's failure ("a check that cannot see the thing it is
+    # guarding"), reproduced by a spelling. A string where a list belongs is
+    # the same trap one character over: "CC0" iterates as "C", "C", "0".
+    if "contains" in spec:
+        return False, ("spec uses 'contains', which this kind does not read - "
+                       "write \"present\": [...] so the check can see its claim")
+    for key in ("present", "absent"):
+        if isinstance(spec.get(key), str):
+            return False, f"'{key}' must be a LIST of strings, not one string"
+    if not spec.get("present") and not spec.get("absent"):
+        return False, "no 'present' or 'absent' given - this check cannot see anything"
     r = requests.get(spec["url"], headers=HEADERS, timeout=120)
     if r.status_code != spec.get("expect_status", 200):
         return False, f"HTTP {r.status_code}"

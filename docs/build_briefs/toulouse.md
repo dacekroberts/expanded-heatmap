@@ -177,7 +177,7 @@ discharge: an ODbL notice on the station CSV.**
     "claim": "Toulouse Metropole's portal CGU is live and was read 2026-09-23: no indemnity, and its marks clause is Opendatasoft's own with published data expressly excluded, so naming Tisseo on the map is not barred. That was the specific risk - Grand Lyon's equivalent clause is why Lyon is deferred",
     "kind": "http_contains",
     "url": "https://data.toulouse-metropole.fr/terms/terms-and-conditions/",
-    "contains": "OPENDATASOFT"
+    "present": ["OPENDATASOFT"]
   },
   {
     "id": "sirene-stock-etablissement-parquet",
