@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**222 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**223 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Goteborg unblocked, and it may not be a one-bucket city](#2026-09-23---goteborg-unblocked-and-it-may-not-be-a-one-bucket-city)
 - [Stockholm and Zurich rail counted; Zurich has no metro at all](#2026-09-23---stockholm-and-zurich-rail-counted-zurich-has-no-metro-at-all)
 - [The Danish key stays open until Copenhagen's build starts](#2026-09-23---the-danish-key-stays-open-until-copenhagens-build-starts)
 - [Copenhagen's brief: 14,887 rows, 100% named, four files](#2026-09-23---copenhagens-brief-14887-rows-100-named-four-files)
@@ -261,6 +262,61 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Goteborg unblocked, and it may not be a one-bucket city
+
+- **The blocker is gone: `Livsmedelsverksamheter` is 5,063 rows.** The
+  recorded obstacle was *"its DCAT distribution node exposes no `accessURL` -
+  `resource/18` returns RDF rather than data"*. **The node was real and the
+  walk was wrong.** EntryStore nests dataset -> distribution -> accessURL, and
+  the dataset lives in **context 6**, not 1 - an earlier probe at
+  `store/1` returned *"The requested context ID does not exist"*, which reads
+  like a dead catalogue and was a wrong path. Walking
+  `search -> resource.children[].metadata -> dcat:distribution` gives **three**
+  distributions: a **CSV**, an EntryStore **rowstore JSON**, and a **WMS**.
+
+- **The parser was wrong before the catalogue was.** The search returns
+  `{offset, resource, limit, results, facetFields}` where **`results` is an
+  integer count and `resource` is a dict with one key, `children`** - so a
+  reader treating `results` as the array gets nothing from a 21 KB response
+  that is full of data. **Zero results from a populated response is a statement
+  about the parser.**
+
+- **🚨 The two distributions of the same dataset disagree three ways,
+  and the JSON is the bad one.** CSV **5,063 rows**; rowstore **4,786**. The
+  JSON's `namn` column arrives **BOM-mangled as `﻿namn`**, so a consumer
+  keying on `namn` reads nothing. And **`x_sweref991200` and `y_sweref991200`
+  are SWAPPED between them**: the CSV has northing 6,397,893 in `y` and easting
+  149,193 in `x`, the JSON has them the other way round. **Prague's EPSG:5513
+  axis flip in a new costume** - except here both copies come from one
+  publisher and only one is right.
+
+- **The 277-row gap is explained, and the explanation is the worst part.**
+  **5,063 minus the 279 rows whose `typ` is blank = 4,784**, against the
+  rowstore's 4,786. **The JSON distribution silently drops rows with no
+  classification.** A build taking the JSON would lose 5.5% of the register
+  and never see an error. **Take the CSV.**
+
+- **✅ There is NO geocoding leg at all.** `lat` and `lon` are populated on
+  **100%** of rows and **0 fall outside Goteborg's bounding box** (lat
+  57.5631-57.8583, lon 11.7044-12.2050). That is Paris's shape, and it was
+  unknown while the row count was unmeasured.
+
+- **🚨 AND IT MAY NOT BE A ONE-BUCKET CITY, which is the finding that
+  matters.** `typ` carries **47 values** and they are not all food service:
+  **RESTAURANG 1,591 + KAFE 485** is food service, while **LIVSMEDELSBUTIK
+  685 + BAGERI 65 + APOTEK 61** is food RETAIL. **Hong Kong's build already
+  counts those as two separate buckets** (food service 17,260, food retail
+  3,853). Applying the same reading moves Goteborg out of the one-bucket band.
+  **Raised rather than decided** - it is a judgment that changes a band, and
+  the owner's bar of two-is-acceptable turns on exactly this distinction.
+
+- **A quarter of the register is not a storefront, and that is measurable
+  rather than suspected**: FORSKOLA 497, SKOLA 216, GRUPP/SERVICEBOENDE 150,
+  GROSSIST 133, AMBULERANDE 114, HUVUDKONTOR 72, LAGER 64, MATMAKLARE 54,
+  TRANSPORTOR 42 - **~1,342 rows, 26.5%**. With the 5.5% blanks removed too,
+  **buildable is roughly 3,442**. ✅ The catch-all share is **0.9%**, the
+  cleanest in this project.
 
 ### 2026-09-23 - Stockholm and Zurich rail counted; Zurich has no metro at all
 
