@@ -2000,6 +2000,18 @@ pages' prose: naming each business registry's publishing agency.
    versions. Five pulls and five "Updated app!" across three hours never
    cleared it; only **Manage app → ⋮ → Reboot app** does.
 
+   **Two routes reach that reboot, and only one works reliably on a phone.**
+   In the app, **Manage app** sits in the lower-right corner - but only in a
+   browser signed in to Streamlit as the app's owner. Signed out, the same
+   corner shows Community Cloud's red "Hosted with Streamlit" badge and a
+   round creator avatar instead, so there is no button to find, and on a
+   phone that corner is exactly where one gets looked for. The dashboard
+   route never touches the app page: **share.streamlit.io → sign in → the ⋮
+   beside `expanded-heatmap` → Reboot**. Use it on mobile. Neither the badge
+   nor the avatar is this project's - both are the host's chrome around the
+   app, which app code cannot move. Recorded 2026-09-23, after the owner hit
+   it on a phone for the second time.
+
    **`app/cities.py` changes every time a city is added**, so every future city
    carries this exact risk. Treat the reboot as the last step of adding a city,
    alongside the drift check and the `DECISIONS.md` entry.
