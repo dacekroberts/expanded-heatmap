@@ -52,7 +52,7 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 > next build, or the next licence read changes it, and the counts in the table
 > below are the ones to trust over any prose that repeats them.
 
-## Built — 18
+## Built — 19
 
 | Country | Cities |
 |---|---|
@@ -60,6 +60,7 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 | **Canada** (5, complete) | Vancouver *(with Surrey)* · Montréal · Calgary · Edmonton · Toronto |
 | **Mexico** (2) ✅ | **Mexico City** · **Guadalajara (Regional)** — built 2026-09-22, live in the app |
 | **Spain** (2) ✅ | **Madrid** · **Barcelona** — built 2026-09-22 |
+| **Italy** (1) ✅ | **Milan** — built 2026-09-22, **not yet deployed**: held off master until a batch `deploy-verify` runs |
 
 ✅ **Mexico is the first country built outside North America's anglophone
 pair**, and the first where the rail leg came from **OpenStreetMap** rather

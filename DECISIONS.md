@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**166 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**167 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Milan built: six disjoint registers, and a screen that was wrong four times](#2026-09-22---milan-built-six-disjoint-registers-and-a-screen-that-was-wrong-four-times)
 - [Dublin Step 0: a register with no names, and a taxonomy rule that inverts](#2026-09-22---dublin-step-0-a-register-with-no-names-and-a-taxonomy-rule-that-inverts)
 - [Barcelona's live terms finally read, and they carried a clause that would have sunk the city](#2026-09-22---barcelonas-live-terms-finally-read-and-they-carried-a-clause-that-would-have-sunk-the-city)
 - [Madrid and Barcelona published, and the live site showed a defect no local check could have](#2026-09-22---madrid-and-barcelona-published-and-the-live-site-showed-a-defect-no-local-check-could-have)
@@ -202,6 +203,114 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Milan built: six disjoint registers, and a screen that was wrong four times
+
+- **Milan built from SIX premises registers - the most of any city here - as
+  104 stations and 47,540 storefront premises, 41,510 of them inside a ring.**
+  Per register after filtering: `vicinato` 27,886, `pe_in_piano` 9,166,
+  `servizi_persona` 5,661, `pe_fuori_piano` 2,949, `artigianato_alim` 1,444,
+  `panificatori` 434. Buckets: Retail 28,320, Food service 13,559, Personal
+  services 5,661. **87% of premises fall inside a station ring**, against
+  Dublin's 60% - a dense metro in a compact comune. Baseline in
+  `outputs/milan/baseline.json`; brief re-run at 13/13.
+- **Four of the country screen's headline claims about Milan did not survive
+  measurement, and all four are the same mistake: reading page one of an API.**
+  `insegna` was recorded as "the trading name, which is exactly what this
+  project displays" and is **17.6% populated**, absent entirely from three of
+  the six registers - page one reads 41.2% because a register's first page is
+  its oldest rows. `codice_ateco` was recorded as the classification and is
+  **7.1% populated**. "Two classifications and a floor area, the best business
+  source in the screen" - both classifications are unusable. "Three datasets" -
+  there are six. None of it disqualified Milan, but a build trusting the screen
+  would have keyed its taxonomy on a 7%-populated column and labelled its pins
+  from a 17% one. **The general rule, for `add-country`: a population rate read
+  from page one is not a measurement.**
+- **Keyed the taxonomy on the REGISTER rather than on any classification
+  field.** Every in-dataset field is unusable - `settore_merceologico` carries
+  66 distinct values for what should be three (half pure case variation, plus
+  2,759 concatenated rows like `AlimentareNon Alimentare`),
+  `tipo_eser_storico_pe` is 60% blank, `settore_storico_pe` 64% - while `Area
+  di Competenza` is a single clean value per dataset at 100%. So bucket =
+  source, dispatched through `EXTRA_COLUMNS` exactly as New York's taxonomy
+  does, with no change to `map_common.py`. The one judgment inside it: a food
+  SHOP is Retail, not Food service, so bakers and the alimentare half of
+  `vicinato` are Retail on the NAICS 445-vs-722 line Dublin also drew.
+- **Decided NOT to deduplicate across sources, which is the opposite of New
+  York's call, and the reason is measured rather than stylistic.**
+  `multi-source-city` says to merge on address AND a normalised name because
+  one storefront can hold several licences. Neither half transfers: `Codice` is
+  unique within every register with **zero collisions between any pair**
+  (prefixes EV/PA/AE/PE/FP), so the six are demonstrably separate registers of
+  different activities; address cannot be a key at all, because **15,613 of
+  28,131** `vicinato` rows already share one with another row in the same
+  register; and `insegna` is too sparse to normalise on. A shop and a bar at
+  one Milan address are two premises. Step 2 ASSERTS the disjointness rather
+  than deduplicating, so a future overlap fails loudly. The over-count where
+  one business holds two licences is stated on the city page.
+- **Rail from the agency, with BOTH `osm-rail` steps run this time.** ATM
+  publishes metro stations (`ds535`, 130 points) and alignments (`ds539`, 31
+  variants) as separate CRS84 layers, plus a GTFS whose `route_color` carries
+  the five official colours. Three traps, each measured and each now guarded in
+  code: **`ds533`'s `id_ferm` is a STRING where `ds535`'s `id_amat` is an INT**
+  and a raw join gives 130 of 130 misses; **`ds535`'s 130 features are 125
+  physical stations**, with interchanges modelled two incompatible ways and a
+  distance threshold wrong in both directions (WAGNER/BUONARROTI at 277 m are
+  different, LORETO M2/M1 at 231 m are one), so the collapse is by name; and
+  **`stops.txt` cannot select metro stations** because `location_type` and
+  `parent_station` are empty on all 4,897 stops while 532 names match `m1`-`m5`.
+  **Gate 3 runs and passes** against ATM's own join table: M1 38, M2 35, M3 21,
+  M4 21, M5 19, union 130, 130 of 130 resolving.
+- **Fixed a gate that PASSED ON ZERO.** The first version of that gate-3 check
+  guarded `if total and abs(...)`, so a join matching nothing - which is what a
+  wrong column name produces, and did - skipped the check silently and printed
+  "union 0" as though it were a finding. It now exits naming the failure as
+  this project's code rather than as a fact about Milan. Same shape as the
+  empty-200 Overpass lie: **a check that cannot distinguish "no data" from "no
+  answer" is not a check.**
+- **Drew the metro only; the 17 tram routes are recorded as a costed extension
+  rather than a discard.** Barcelona excluded its T1-T6 and Toronto its
+  streetcars, and Milan's trams are a dense street-running network needing
+  `docs/sub_transit_line_filters.md` rather than a line list - plus 17 invented
+  colours, since `route_color` is populated only for the metro. Reversible: the
+  geometry is in the GTFS `shapes.txt`.
+- **Replaced a regex label normaliser with explicit per-source rules, after the
+  regex failed three ways at once.** Splitting concatenations on a
+  lower-to-upper seam left `non alimentare` / `Non Alimentare` / `Alimentare`
+  as three labels (only ALL-CAPS was folded), never split
+  `alimentarenon alimentare` (lower-to-lower seam) and never split
+  `BAR CAFFTavola fredda` (upper-to-upper). The vocabulary is small and bounded
+  per register, so it is written out. `TIPO A - REG.2003` - the commonest value
+  in the personal-services register at 1,333 rows - is deliberately unmapped,
+  because it is a regulatory class under the 2003 hygiene regulation and not an
+  activity; it falls through to the register's own name.
+- **Recorded Milan's privacy result as zero, with the heuristics' hits verified
+  as Italian address conventions.** `check_personal_exposure.py` reports **1
+  person-like name in 41,510 pins**, no emails and no phone numbers. Its two
+  other signals are artefacts: of 39,520 names containing a bracket, **99.5%
+  are Milan's own `(z.d. N)` decentralisation-zone suffix** and the rest are
+  street-naming (`Via Piatti (Dei)`), while all 276 `c/o` markers name
+  organisations (`circolo arci ricotti`, `soc. sportiva iris 1914`), not
+  people. No register carries a personal name and step 2 EXITS if one appears.
+  Milan is entered WITHOUT Dublin's `name_is_address` flag, because ~20% of its
+  pins do carry a real trade name - the heuristics are measuring a mixture here
+  rather than pure addresses, and a sole trader signing a shop with their own
+  name is exactly what the script should still catch.
+- **`brief_check.py` gained `http_contains`, its seventeenth kind, because
+  Milan's licence VERSION is invisible to the obvious endpoint.** CKAN's
+  `package_show` reports `license_id: cc-by` with **no version**, and only the
+  DCAT-AP_IT serialisation carries `owl:versionInfo "4.0"`. A licence claim
+  pinned to `package_show` would have kept passing while the thing it guards
+  went unwatched. The check reads the `.ttl` and also asserts no NonCommercial
+  or NoDerivatives clause has appeared.
+- **Two collisions created by building two cities on two branches in one day,
+  both flagged rather than left to surface at merge.** Milan's page took number
+  **20** because `scaffold_city.py`'s `next_page_number()` globs the working
+  tree and cannot see Dublin's 19 on another branch. And **both cities took
+  notice 22**; Dublin was built first, so at merge Dublin keeps 22 and Milan
+  becomes 23, together with the three citations in Milan's provenance rows.
+  `check_provenance.py` catches duplicate notice numbers, so the merge will say
+  so - but it is cheaper to renumber deliberately.
 
 ### 2026-09-22 - Dublin Step 0: a register with no names, and a taxonomy rule that inverts
 

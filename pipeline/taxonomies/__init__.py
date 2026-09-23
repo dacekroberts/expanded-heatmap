@@ -94,6 +94,7 @@ TAXONOMY_MODULES = {
     # restaurants group. It also dispatches `Altres` on two further columns,
     # because that value means five different things depending on its parent.
     "barcelona_activitat": "pipeline.taxonomies.barcelona_activitat",
+    "milan_source": "pipeline.taxonomies.milan_source",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 
