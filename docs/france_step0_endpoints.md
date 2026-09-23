@@ -192,3 +192,81 @@ was removed.**
 - **The `etablissementSiege` flag does not separate premises from offices in
   France**: 90.8% of active bucket rows are sièges, because a sole trader's
   shop is its own siège. Recorded so nobody tries it as a filter.
+
+---
+
+## The taxonomy — NAF keys at the FINEST level (measured 2026-09-22)
+
+`premises-taxonomy` names one deciding measurement and says it is skipped every
+time: **the catch-all share at each level.** Run on **6,895 active Paris rows**
+in NAF 47/56/96, against INSEE's own label file
+(`int_courts_naf_rev_2.xls`, 1,707 codes), counting any label containing
+*autre*, *n.c.a.*, *divers* or *non spécialisé*:
+
+| Level | Distinct | **Catch-all share** |
+|---|---|---|
+| division (2) | 3 | 18.7% |
+| **groupe (3)** | 13 | **49.4%** |
+| classe (4) | 46 | 27.8% |
+| **sous-classe (5)** | 62 | **19.3%** |
+
+**Key at the sous-classe — Barcelona's shape, not Madrid's.** Grouping at
+*groupe* would put half of Paris in "other".
+
+The residual is concentrated: **`96.09Z` *Autres services personnels n.c.a.*
+is 8.6% on its own**, a third of the whole catch-all and sitting entirely
+inside the personal-services bucket. The 19.3% is an **upper bound** — the
+keyword test also catches labels like `47.52A quincaillerie, peintures et
+verres` where *autres* appears incidentally.
+
+### ⚠️ 15.5% of Paris's bucket rows are DISTANCE SELLING — exclude them
+
+| Code | Share | Label |
+|---|---|---|
+| `47.91B` | **8.5%** | Vente à distance sur catalogue spécialisé |
+| `47.91A` | **4.7%** | Vente à distance sur catalogue général |
+| `47.99A` | 2.0% | Vente à domicile |
+| `47.99B` | 0.3% | Vente par automates |
+
+These have **no storefront at all** and sit inside the retail division. The
+existing note that 47.91B was "24% of the retail division" understated it by
+looking at one code of four. **This is a step-2 filter rule.**
+
+---
+
+## Station density — PARTIAL, and it exposed a scoping problem
+
+Estimated as OSM subway/light-rail/tram stops inside each city's
+**admin_level 8** commune, divided by the scaled bucket estimate. **An estimate
+for ranking, not a measurement** — the build replaces it with the GTFS feed.
+
+| City | Stops | Bucket est. | Per stop |
+|---|---|---|---|
+| Lille | 32 | 10,461 | 327 |
+| Paris | 430 | 136,400 | 317 |
+| Marseille | 141 | 26,940 | 191 |
+| Toulouse | 91 | 12,873 | 141 |
+| **Lyon** | — | 19,449 | **UNMEASURED** |
+| **Rennes** | — | 5,002 | **UNMEASURED** |
+
+**Lyon and Rennes are UNMEASURED, not zero.** Three Overpass endpoints
+returned `runtime error: open64` for both. Both cities plainly have metros —
+Lyon four lines, Rennes two — so a zero here is a statement about the query.
+Recorded as missing rather than as a low score, because a zero that gets
+written down as a number is how a city gets deprioritised for a server error.
+
+### ⚠️ The real finding: the commune is far smaller than the network
+
+**Lille's 32 stops against a métro of ~60 stations** is the tell. The
+`admin_level 8` commune of Lille excludes Villeneuve-d'Ascq, Roubaix and
+Tourcoing, which its two métro lines serve. The same gap applies to Paris
+(commune 2.1M, Île-de-France network ~10M+), Lyon (commune vs Métropole) and
+Marseille.
+
+**So these ratios are not comparable across the six**, and more importantly:
+**French cities may need the Dublin regional treatment** — a build scoped to
+several communes rather than one. Dublin needed four local authorities;
+Copenhagen needs Frederiksberg. **Decide scope per city before Step 0, not
+during it.** The `codeCommuneEtablissement` filter makes a multi-commune scope
+cheap on the business side, so this is a boundary and rail question, not a
+data one.

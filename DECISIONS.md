@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**168 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**169 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [France's three pre-ship items run; Lyon turns out to be gated three ways](#2026-09-22---frances-three-pre-ship-items-run-lyon-turns-out-to-be-gated-three-ways)
 - [France profiled: one register, six cities, and a naming gap found early](#2026-09-22---france-profiled-one-register-six-cities-and-a-naming-gap-found-early)
 - [Band B's coordinate routes measured; one claim did not survive](#2026-09-22---band-bs-coordinate-routes-measured-one-claim-did-not-survive)
 - [Dublin Step 0: a register with no names, and a taxonomy rule that inverts](#2026-09-22---dublin-step-0-a-register-with-no-names-and-a-taxonomy-rule-that-inverts)
@@ -204,6 +205,117 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - France's three pre-ship items run; Lyon turns out to be gated three ways
+
+- **The NAF taxonomy keys at the FINEST level, measured rather than
+  inherited.** `premises-taxonomy` names the catch-all share at each level as
+  the deciding measurement and says it is skipped every time. Run on **6,895
+  active Paris rows** in NAF 47/56/96 against INSEE's own label file: division
+  **18.7%**, groupe **49.4%**, classe **27.8%**, **sous-classe 19.3%**. So NAF
+  keys at the 5-character sous-classe - **Barcelona's shape, not Madrid's** -
+  and grouping at *groupe* would have dumped half of Paris into "other". The
+  largest single catch-all is **`96.09Z` Autres services personnels n.c.a. at
+  8.6%**, a third of the whole residual and concentrated in one bucket.
+
+- **15.5% of Paris's bucket rows are DISTANCE SELLING and must be excluded.**
+  `47.91A` *Vente à distance sur catalogue général* **4.7%**, `47.91B`
+  *catalogue spécialisé* **8.5%**, `47.99A` *Vente à domicile* **2.0%**,
+  `47.99B` *Vente par automates* **0.3%**. These are businesses with no
+  storefront at all, sitting inside the retail division, and the existing note
+  that 47.91B was "24% of the whole retail division" understated the problem by
+  looking at one code of four. This is a concrete step-2 filter rule, not an
+  observation.
+
+- **Two measurement bugs were caught by their own implausibility before they
+  reached a file.** A first catch-all pass inferred residuals from CODE SHAPE -
+  NACE's "a code ending in 9 is the residual" - which does not apply at NAF's
+  sous-classe level, where the fifth character is a LETTER; it reported
+  **0.0%** for the finest level, which is not a low catch-all share but a
+  broken test. A second pass parsed INSEE's label spreadsheet by compacting
+  each row's non-empty cells, which shifted the columns and mapped **NAF 47 to
+  "Élevage de vaches laitières"** - NAF 01.41's label. Both were visible only
+  because the output was checked against something already known.
+
+- **`mobility-licence` covers exactly 2 of 799 datasets on France's National
+  Access Point, and they are precisely the two cities wanted first.** Paris
+  (IDFM) and Lyon (SYTRAL). The other 797 are `lov2` 472, `odc-odbl` 212,
+  `notspecified` 93, `fr-lo` 20. **There is no government-hosted text**: the
+  décret the licence cites does not approve it, and the authoritative document
+  is a **14-page PDF, "Version au 03.02.2021"**, reachable only through the
+  dataset page's own link to a community wiki. **It is ODbL-derived but NOT
+  ODbL-compatible** - Art. 5.5(a)(iii) allows "une licence compatible" but no
+  compatible list and no proxy was ever published, so share-alike cannot be
+  discharged by relicensing. Verdict **PERMITTED WITH CONDITIONS**; recorded in
+  full at `docs/licenses/france-required-notices.md`.
+
+- **Decided: republish the derived station table on the NAP rather than argue
+  the share-alike boundary.** A rendered map is a « Création Produite » and
+  Art. 5.6(b) says that does **not** create a Derivative Database - but this
+  project commits `outputs/<city>/` to a public repository, and Art. 5.5(b)
+  says extracting a substantial part into a new database does. The NAP's own
+  published interpretation contains an example that is almost verbatim this
+  project - *"Calcul de la distance à l'arrêt de bus le plus proche pour une
+  liste de commerces"*, filed under **"Non"**, no resharing required - so the
+  permitting reading is well supported. **One upload moots the question and
+  costs less than the argument**, which is the same reasoning as reading a
+  licence rather than inferring it.
+
+- **France introduces two obligation SHAPES this project has never carried:
+  a date of last update, and an update interval.** Art. 5.7 forbids use that
+  misleads « quant au contenu de l'information **et à sa date de mise à
+  jour** », and the MMTIS règlement requires the static data's **update
+  interval** to be stated. **A pre-rendered static map built from a frozen GTFS
+  snapshot is precisely what that clause describes** unless the snapshot date
+  is displayed - so this is substantive, not a courtesy. Note also that the
+  clause is the INVERSE of MTA's and WMATA's: nothing here forbids claiming
+  accuracy; instead Art. 5.7 demands currency and exhaustiveness.
+
+- **Lyon is gated three ways and is no longer the cheap second city.** (1) A
+  **free account on `data.grandlyon.com` is required before any download**, and
+  this project does not create accounts - the owner must register. (2) Grand
+  Lyon CGU **Art. 6.2 bars use of the producers' *signes distinctifs*
+  "associés ou non à l'utilisation des données"**, which collides head-on with
+  the invariant that every drawn line carries its real public name - Lyon's
+  being **TCL**; left unresolved deliberately, with prior authorisation
+  obtainable at `contactopendata@tcl.fr`. (3) CGU 9.4 is an **open-ended
+  indemnity**, the project's **second after Hong Kong's**. And separately its
+  **NAP feed is DEAD** - 0% availability, last modified 2022-04-14, against a
+  source portal current to 2026-09-22 - so the stale-mirror trap that cost
+  Toronto is live here too. Added as gate items 17, 18 and 19.
+
+- **Paris's GTFS provenance is NOT settled and must be before any fetch.** A
+  direct read of the NAP API listed three GTFS resources - IDFM's own via
+  `eu.ftp.opendatasoft.com`, an **ITO World mirror**, and a Google-published
+  "GTFS modifié" from an Apigee URL - while the licence review reports the
+  dataset carries no *official* GTFS at all, only NeTEx and SIRI Lite plus that
+  community copy. **The two readings disagree**, plausibly over whether those
+  sit in `resources` or `community_resources`. **Building Paris from a third
+  party's modified copy under an unverified licence is not acceptable**, so
+  this is a prerequisite rather than a detail. Recorded unresolved rather than
+  settled in the project's favour.
+
+- **IDFM's own licences page contradicts the NAP, in this project's favour,
+  and the stricter reading was adopted anyway.** IDFM states it publishes its
+  reference data - « référentiel des arrêts et des lignes, **tracés du réseau
+  ferré** » - under **Licence Ouverte**, reserving Licence Mobilités for
+  timetable data this project does not publish. SYTRAL does the opposite,
+  folding network topography into its Licence Mobilités declaration. Decided to
+  **comply with Licence Mobilités for both**: it is satisfiable, it is stricter
+  for Paris, and it avoids depending on a divergence that could be tidied up in
+  either direction. The divergence is recorded because it is the difference
+  between Paris carrying an Art. 5.4 notice and Paris carrying an Etalab
+  attribution.
+
+- **Two feed-selection traps hit while establishing the six datasets, both
+  already documented and both still effective.** Matching by title alone put
+  **Lyon's row on a Nouvelle-Aquitaine / Limoges feed**, because the portal
+  itself carries **two different datasets both titled "Réseau urbain TCL"** -
+  publisher, not title, is the disambiguator. And Lille's correct match still
+  returns **"Navettes Aéroport de Lille"**, an airport shuttle published by
+  Flibco.com, which is precisely the wrong-feed selection that had Dublin
+  tested against airport coaches. Recorded as named constants in
+  `pipeline/countries/france.py` rather than as warnings.
 
 ### 2026-09-22 - France profiled: one register, six cities, and a naming gap found early
 
