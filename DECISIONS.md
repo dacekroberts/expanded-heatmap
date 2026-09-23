@@ -16,7 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**180 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**181 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-09-23**
+
+- [Hong Kong, Prague and Oslo taken to brief-ready; two cities changed size](#2026-09-23---hong-kong-prague-and-oslo-taken-to-brief-ready-two-cities-changed-size)
 
 **2026-09-22**
 
@@ -216,6 +220,95 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Hong Kong, Prague and Oslo taken to brief-ready; two cities changed size
+
+- **Three briefs written and every check holds**: `hong-kong.md` 7/7,
+  `prague.md` 3/3, `oslo.md` 3/3. Hong Kong was unblocked by the owner's
+  indemnity acceptance; Prague and Oslo each needed one measurement that the
+  earlier record had named but never taken.
+
+- **Hong Kong's register is the cleanest in the screen and 40% of it is not
+  storefronts.** All three FEHD XML files parse to **35,808 rows exactly**,
+  reproducing the recorded figure, with **100% fill on SS, ADR, TYPE, DIST and
+  EXPDATE** - no other source in this project is complete on every column. But
+  the composition measurement `add-country` demands had never been taken:
+  **`FF` Food Factory is 11,566 rows, 70% of the "other food" register**, and
+  **`TP` Swimming Pool is 1,440, 71% of the non-food register.** Neither is a
+  shopfront. Adding the factories, canteens, cold stores, slaughterhouses and
+  funeral trades, **14,263 rows filter out and the buildable figure is ~21,545,
+  not 35,808.**
+
+- **The master list's description of that register was wrong in two ways.** It
+  named **"Composite Food Shop"**, which is **not a licence type in the file at
+  all**, and it omitted **Food Factory, the single largest type in the register
+  it was describing**. Corrected in the brief.
+
+- **Hong Kong's taxonomy has a catch-all share of ZERO, which nothing else in
+  this project can say.** All 20 licence types name a specific trade, and the
+  code-to-label lookups (`TYPE_CODE`, `DIST_CODE`, `INFO_CODE`) **ship inside
+  the same download**, so there is no external code list to chase and no level
+  to choose. Compare Paris's 19.3% at its finest level and Barcelona's 2.6%.
+  The file also carries `GENERATION_DATE` - **it SELF-ATTESTS**, which Paris's
+  IDFM feed cannot do.
+
+- **A lesson this project recorded from Hong Kong turns out to be wrong.**
+  `organization_show?id=hk-fehd` returns **`package_count: 1`**, and the notes
+  drew from that: *"searching by PROVIDER rather than by keyword is the
+  generalisable move here."* **`package_list` holds 19 `hk-fehd-*` datasets**,
+  including all three registers. The org endpoint's count is unreliable on that
+  portal, so the provider route failed for the same reason the keyword route
+  did. **Enumerate and match locally** remains the move that actually works.
+
+- **ALS measured at 90.8%** on 120 real `ADR` strings, zero throttling at four
+  workers, 3.9 req/s. It returns a confidence `Score`, and **21.1% of hits
+  score between 50 and 75** - so a threshold is needed rather than an average.
+  Unlike Singapore, where 35,064 postcodes collapsed to 7,767 buildings,
+  **Hong Kong's addresses are 1,799 distinct of 1,800**: budget the full
+  ~35,000 lookups, about 2.5 hours.
+
+- **Prague's taxonomy cannot be keyed at a level, which is a shape this project
+  has not met.** `premises-taxonomy` assumes a level can be chosen - Barcelona
+  at its finest, Madrid near the top. **CZ-NACE in RES is stored at RAGGED
+  depth**: of 12,000 active Prague bucket rows, **4.4% carry 2 characters,
+  31.4% carry 3, 6.2% carry 4 and 57.9% carry 5.** `4725` and `47250` both
+  appear; so do `47`, `471` and `47190`. **Only 57.9% reach the finest level
+  and keying at class covers 64.1%.** The module must match on PREFIX and fall
+  back up the hierarchy. The largest single code is **`471` at 30.2%** -
+  *retail in non-specialised stores*, at group level - so nearly a third of the
+  city says only that.
+
+- **Prague's rail question is settled and the Golemio key is NOT needed.** OSM
+  carries **85 relations - 79 tram and 6 subway - and all 85 are named**, 61
+  coloured. That closes gate item 4, which had been recorded as an API key
+  blocking the transit half. `FIRMA` is also **100% populated**, making Prague
+  the only one of Milan, Paris and Prague with a trade name on every row.
+
+- **Oslo's headline number was measuring the wrong address, and the API cannot
+  settle it.** The recorded **152,060 sub-units** is what
+  `?kommunenummer=0301` returns, and that parameter does **not** constrain
+  `beliggenhetsadresse` - the geocoding misses included **Bergen, Copenhagen,
+  Paris and Malmo**. Two follow-up samples then disagreed, **24.5% against
+  4.3% not-in-Oslo**, because brreg stops paging past ~10,000 and sorts by
+  name, so both were drawn from the alphabetical head. **Settled from the
+  88.9 MB bulk file**: 864,903 sub-units streamed, **138,896 physically in
+  Oslo**, of which **13,458 are in NACE 47/56/96**. That is the buildable
+  figure - about 19 per thousand residents, between Madrid's 17 and
+  Barcelona's 37.
+
+- **Oslo's NACE is at UNIFORM depth - 100% at five characters - which is
+  exactly what Prague is not.** The same scheme family produced opposite
+  answers in two countries, which is the argument for measuring rather than
+  inheriting, stated twice in one day. Oslo can pick a level; Prague cannot.
+
+- **Both Prague and Oslo have UNREAD LICENCES, and that is what still blocks
+  them.** CSU's RES and CUZK's RUIAN on one side, Bronnoysund and Kartverket on
+  the other. `vdp.cuzk.gov.cz` answers 200 and carries **no data licence at
+  all** - its only terms link is *"Podminky uzivani aplikace a cookies"*,
+  application and cookie terms, the New York footer shape. Recorded as the
+  named blocker in both briefs rather than assumed permissive, because a
+  government open portal is a reason to expect permissive terms and not
+  evidence of them.
 
 ### 2026-09-22 - Hong Kong's indemnity accepted, and re-reading it found two omissions
 
