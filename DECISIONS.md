@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**246 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**247 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Taiwan finished: Taipei (Regional), Taoyuan and Taichung to Band A; Kaohsiung held on an unreachable host](#2026-09-23---taiwan-finished-taipei-regional-taoyuan-and-taichung-to-band-a-kaohsiung-held-on-an-unreachable-host)
 - [Sao Paulo's rail is drawn from OSM with GeoSampa as the status reference; Rio's SIURB clause accepted](#2026-09-23---sao-paulos-rail-is-drawn-from-osm-with-geosampa-as-the-status-reference-rios-siurb-clause-accepted)
 - [The scaffold names a city's page from its slug, not its display name](#2026-09-23---the-scaffold-names-a-citys-page-from-its-slug-not-its-display-name)
 - [Lille made "three regional maps" four within the hour](#2026-09-23---lille-made-three-regional-maps-four-within-the-hour)
@@ -285,6 +286,56 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Taiwan finished: Taipei (Regional), Taoyuan and Taichung to Band A; Kaohsiung held on an unreachable host
+
+- **Three more cities joined, with Taipei as the control.** A generalised
+  parser first read Taipei at 91.7% against its measured 92.5%, because its
+  street pattern forbade the characters stripped as district and village
+  (市, 鎮, 里) and so failed every street that contains one - `市民大道`,
+  `鎮三街`. Fixed, the control read 92.4% and the others counted: **Taoyuan
+  94.0%, Taichung 92.7%, New Taipei 95.5%.** Taipei (Regional) is **152,839
+  storefronts at 93.9%**. No registration still carried the pre-upgrade county
+  names (桃園縣, 臺中縣) - the trap was checked and empty. **A control that
+  must reproduce before the others count caught a 0.8-point regression that
+  would otherwise have been reported as three cities' results.**
+
+- **Taipei is REGIONAL, with New Taipei**, on the owner's framing: New Taipei
+  surrounds Taipei and the metro crosses the boundary on several lines - the
+  Dublin and Lille shape.
+
+- **TDX is key-gated, and not needed.** Every operator returned 401 to a
+  script on 2026-09-23; TDX's own terms allow keyless use only as a
+  browser-only visitor mode (20 calls a day) and bind scripted use to a
+  member key whose registration wants a Taiwanese mobile number. The server
+  now enforces the browser/script distinction, which is why the 2026-09-21
+  probe worked; nothing was worked around. **The agencies publish rail data
+  keyless under OGDL v1** - Taipei's line geometry and stations, Taichung's
+  stations, the national `捷運車站` layer.
+
+- **Owner's decisions, 2026-09-23:** (1) **OGDL v1's fault-based liability
+  clause is ACCEPTED for all of Taiwan** - the Rio/IBGE class, not Hong
+  Kong's. (2) **Names are shown only when they are a TRADE name** - companies,
+  branches, and sole proprietors whose name carries a business marker;
+  otherwise the category. The tax agency itself refuses to publish owners'
+  names (2016, and again 2026-08-14, on a Ministry of Justice proportionality
+  letter), and 4.9% of Taipei's storefronts carry a name that reads as the
+  owner's. Rejected: hiding only pattern-matched person names (a list misses
+  names) and hiding every name (more than the risk needs). (3) **Taipei
+  (Regional), Taoyuan and Taichung move to Band A; Kaohsiung stays in B**:
+  its business side is measured (72,550) but its door-plate and station files
+  sit on a host that timed out from six nodes in five countries and twice
+  more. **Band A 15 -> 18, Band B 14 -> 11**, and Band B is now Japan plus
+  one unreachable host.
+
+- **Measured for the build, not decided here:** 38.7% of Taipei's company rows
+  in storefront codes sit on a 3rd floor or higher or carry a room number,
+  against 7.1% of sole proprietors - the head-office trap, confined to
+  companies; and market stalls, genuine premises with no door plate, are most
+  of retail's misses. Two scratch probes that switched certificate
+  verification off for header peeks were deleted once the licence reader
+  flagged them; curl verifies Taiwan's government root against the Windows
+  store, so nothing needs it off.
 
 ### 2026-09-23 - Sao Paulo's rail is drawn from OSM with GeoSampa as the status reference; Rio's SIURB clause accepted
 

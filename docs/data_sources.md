@@ -1059,6 +1059,41 @@ Produced Work carve-out, so its share-alike question stays open and is now
 not this project's to answer. If São Paulo's build ever wants GeoSampa's
 geometry, the email above comes first.
 
+### 🇹🇼 Taiwan (candidate, not built) — read 2026-09-23 by the `licence-read` agent
+
+| Source | Verdict | What it requires |
+|---|---|---|
+| **Taipei door plates** — `臺北市門牌位置數值資料` (民政局, data.taipei, dataset 155472), used as the GEOCODING REFERENCE | **PERMITTED WITH CONDITIONS — 政府資料開放授權條款-第1版 (OGDL v1)**, declared on the publisher's own portal and on data.gov.tw. Grant §二(一): *"不限目的、時間及地域、非專屬、不可撤回、免授權金進行利用 ... 編輯、改作 ... 衍生物"* | **The annex's attribution statement (顯名聲明), and it is LOAD-BEARING**: §三(二) — failing it means *"視為自始未取得開放資料之授權"*, never licensed at all — and it covers **derivatives**, so the published coordinates carry it though the door-plate table is never published. Form: `提供機關／臺北市政府民政局 [2026] [臺北市門牌位置數值資料 20260902]` + *"此開放資料依政府資料開放授權條款 (Open Government Data License) 進行公眾釋出，使用者於遵守本條款各項規定之前提下，得利用之。"* + `https://data.gov.tw/license`. No patents or trademarks licensed |
+| **The national business tax register** — `全國營業(稅籍)登記資料集` (財政部財政資訊中心 / FIA, `eip.fia.gov.tw/data/BGMOPEN1.zip`, data.gov.tw 9400) — the BUSINESS leg for every Taiwanese city | **PERMITTED WITH CONDITIONS — OGDL v1** (`license: "1"`), plus the FIA's own *政府網站資料開放宣告*, which repeats the grant and adds: cite the source (*"應註明出處"*); no marks or emblems; no implied endorsement; and **§二(二): personal data that is public must still be handled under the Personal Data Protection Act by the user** | The same prescribed 顯名聲明, e.g. `財政部財政資訊中心 2026 全國營業(稅籍)登記資料集（資料日期 YYYY-MM-DD）` — the CSV's first data row carries its own date. ⚠️ **Do not present the filtered, geolocated points as the register itself** (FIA 四) |
+| **TDX** (交通部運輸資料流通服務平臺) metro endpoints | ⛔ **NOT USED.** Its own terms (not OGDL): scripted access needs a **registered member key**; keyless is a browser-only visitor mode, 20 calls/day per IP; registration wants a Taiwanese mobile number or manual review. The server now enforces it (curl 401, browser 200) and **it is not worked around** | — |
+
+**A fault-based liability clause — RAISED, owner call.** OGDL v1 §六(三):
+*"使用者...因故意或過失，致資料提供機關遭受損害，或第三人因此向資料提供機關請求賠償損害，使用者應對各機關負賠償責任。"*
+The same class as Rio's SIURB clause and IBGE's portal terms — liability for
+damage the user causes deliberately or negligently, narrower than Hong Kong's
+indemnity. **It rides on every OGDL v1 source in Taiwan**, so one decision
+covers them. ✅ **ACCEPTED by the owner 2026-09-23, for all of Taiwan.**
+
+**The personal-name question — the one ambiguity that mattered, DECIDED.**
+For small sole proprietors (獨資) the registered business name IS the owner's
+name (`黃信雄`, `陳雅娟`); in Taipei, **3,763 storefronts (4.9%)** read that way,
+63% of them market stalls. **The FIA itself refuses to publish owners' names**
+— it removed them in 2016 and refused again on 2026-08-14: *"如將負責人姓名無任何
+限制下全數公開，恐有過度揭露個人資料、侵害資訊隱私、違反比例原則之疑慮"* —
+relying on Ministry of Justice letter 法律字第10503516500號. The Personal Data
+Protection Act reaches a foreign reuser of Taiwanese residents' data (第51條
+第2項). **Decided 2026-09-23: a name is shown only when it is a TRADE name** —
+for companies and branches (legal entities), and for sole proprietors only
+when the name carries a business marker (行/店/社/館/坊…); otherwise the tooltip
+shows the category. It errs toward hiding, which the publisher's own refusal
+argues for. Removal requests under PDPA 第3條/第19條 are honoured, which the
+project's standing commitment already says.
+
+**Taiwan's rail comes from the agencies instead**, keyless and under OGDL v1
+(one read covers the licence; each source still needs its attribution line):
+Taipei's `臺北都會區大眾捷運系統路網圖` and `車站點位圖`, Taichung Metro's
+Green Line stations, the national land-survey centre's `捷運車站` layer.
+
 **Not a source here: CNPJ.** Receita Federal's CNPJ open data moved in early
 2026 to a Nextcloud share (`arquivos.receitafederal.gov.br/index.php/s/YggdBLfdninEJX9`;
 the old `dados_abertos_cnpj/` directory has returned **404 since 2026-01-30**)
