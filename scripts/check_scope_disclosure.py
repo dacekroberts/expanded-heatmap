@@ -98,6 +98,15 @@ def main():
     cities, station_scope = load_app(root)
     business_half = doc.partition(BUSINESS_HEADING)[2]
 
+    # A LOOP OVER NOTHING SATISFIES EVERY ASSERTION IN IT. Properties C, D and
+    # E are all per-city, so an empty list would print OK having examined
+    # nothing - the same hole check_no_fetch_in_steps.py's self-test found in
+    # its sibling as a glob that matched no files.
+    if not cities:
+        problems.append(
+            "app/cities.py declares no cities at all, so this check would "
+            "pass having examined nothing.")
+
     for entry in cities:
         name = entry["name"]
         base = name.split(" (")[0]

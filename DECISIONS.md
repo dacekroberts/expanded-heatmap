@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**232 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**233 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [A self-test for the one check whose vocabulary is meant to be edited](#2026-09-23---a-self-test-for-the-one-check-whose-vocabulary-is-meant-to-be-edited)
 - [Toulouse built: 8,635 storefronts, 48 stations, and the first non-rail mode](#2026-09-23---toulouse-built-8635-storefronts-48-stations-and-the-first-non-rail-mode)
 - [The scope check paid for itself on the first merge it met](#2026-09-23---the-scope-check-paid-for-itself-on-the-first-merge-it-met)
 - [The site said which businesses it leaves out and never which stations](#2026-09-23---the-site-said-which-businesses-it-leaves-out-and-never-which-stations)
@@ -271,6 +272,44 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - A self-test for the one check whose vocabulary is meant to be edited
+
+- **`scripts/check_scope_disclosure_selftest.py` commits the eight negative
+  cases that had lived only in a scratchpad.** Five of the six checks here have
+  no self-test and have been fine, so this is not a rule about checks in
+  general. The ground is specific: **this check's vocabulary is designed to be
+  widened by later sessions**, and Marseille forced exactly that within an hour
+  of the check existing - `commune` added to the boundary columns, a new reason
+  pattern for "Aubagne's tram, not Marseille's". Those edits land in
+  `app/station_scope.py`, which the LIVE PAGE imports to build its station
+  table, so a session widening the classifier to make the check pass can change
+  what readers are shown. An edit is when a silent break happens, and this
+  check has a predictable future editor. `check_theme_sync.py`, by contrast,
+  has never changed and needs no guard.
+
+- **Writing it found a vacuous pass in the check and closed it.** Properties C,
+  D and E are all per-city, so an empty `CITIES` would have printed OK having
+  examined nothing. That is the same hole the sibling self-test found as a glob
+  narrowed to match no files - "a glob that matches nothing passes every
+  assertion ever written" - and it was still open here. The check now fails on
+  an empty city list, and the ninth case watches it do so. **The self-test
+  earned its place before it was committed**, which is the argument for writing
+  one at all.
+
+- **The fixture copies `app/*.py` wholesale rather than a named list**, because
+  the scratchpad ancestor named `cities.py` alone and every case then died on
+  an ImportError when `station_scope.py` was extracted. A third module must not
+  be able to repeat it. The harness also forces `PYTHONIOENCODING=utf-8` on the
+  child AND decodes with `errors="replace"`: this check prints city names, and
+  "Montréal" through a piped Windows console is the byte-vs-text failure that
+  produced two false results earlier in the session.
+
+- **The positive control is documented as load-bearing rather than as a
+  formality.** It is the only thing that distinguishes "the check fires on
+  everything" from "the harness is broken", and it is what caught the
+  incomplete fixture. The failure message now says so: if EVERY case fails,
+  suspect the harness first.
 
 ### 2026-09-23 - Toulouse built: 8,635 storefronts, 48 stations, and the first non-rail mode
 
