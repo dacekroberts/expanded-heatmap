@@ -1576,6 +1576,18 @@ pages' prose: naming each business registry's publishing agency.
    cannot catch the stale-module case: nothing local can, because a fresh
    process is the one thing the live app does not do.
 
+10. **CONFIRM THE WMATA ACCOUNT IS STILL LIVE** — before every public deploy,
+    for as long as the D.C. page is published. This is a gate item rather
+    than a note because **nothing in the codebase can check it**: verifying an
+    account means holding its key, and this project never handles one. It is
+    a human step by construction, which is exactly the kind that gets skipped.
+    WMATA's terms are an **API agreement**, so §9(i) terminates the grant the
+    moment the account goes — and the right that lapses is the right to
+    *publish the page*, not merely to store a file. **Re-confirmed live by the
+    owner on 2026-09-22.** If it ever lapses, D.C. comes down until a new
+    account is registered. The full reasoning is under the WMATA entry above;
+    the standing list of items like this is `docs/gated_access.md`.
+
 **Where this leaves the project:** nothing found anywhere forbids what this
 project does, and the count of **mandatory notices to display is five**.
 Neither Philadelphia nor Miami added one, because SEPTA, the City of

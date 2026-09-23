@@ -20,7 +20,7 @@ was dropped, kept for the record) · **OPTIONAL** (an upgrade, not a blocker).
 
 | # | City | What is required | Status |
 |---|---|---|---|
-| **1** | **Washington D.C.** 🇺🇸 **BUILT** | **A live WMATA API account, for as long as the D.C. page is up.** `api.wmata.com` is the only feed in this project behind a key (401 unauthenticated). The terms are an *API agreement*: terminating the account ends the licence. Re-established 2026-09-21 | ⚠️ **STANDING** — if the account lapses, **D.C. comes down until a new one is registered**. This is a deploy gate, not a courtesy |
+| **1** | **Washington D.C.** 🇺🇸 **BUILT** | **A live WMATA API account, for as long as the D.C. page is up.** `api.wmata.com` is the only feed in this project behind a key (401 unauthenticated). The terms are an *API agreement*: §9(i) terminates the grant when the account goes, and what lapses is the right to **publish the page**, not merely to store a file | ✅ **SATISFIED — the owner re-confirmed the account live on 2026-09-22**, stated directly. **STANDING thereafter:** do not terminate it while the site is up. Now **gate item 10** in `data_sources.md`, so it is checked before every deploy rather than remembered |
 | **12** | **Philadelphia** 🇺🇸 **BUILT** | **A written request to the publisher, outstanding.** `phila.gov/terms-of-use` is incorporated by reference into the dataset page and prohibits redistribution and modification without written permission | ⚠️ **OPEN** — the map stays up on a *disclosed reasoned position*, and **comes down if the publisher confirms the restrictive reading**. Not resolvable by more reading; someone has to ask |
 
 ---
@@ -79,5 +79,15 @@ its keys.**
 **That practice is safe everywhere on this list except item 1.** WMATA's terms
 are an API agreement rather than a data licence, so terminating the account
 *ends the grant* — which is the point of the practice elsewhere, and a defect
-here, because D.C. is published. **WMATA's account must stay live.** Before
-any public deploy, confirm it still is.
+here, because D.C. is published. **WMATA's account must stay live.**
+
+**Resolved 2026-09-22: the owner reinstated the account to comply**, and it is
+now **gate item 10** in `docs/data_sources.md` so the check runs before every
+deploy instead of depending on someone remembering.
+
+**A note on how this item gets verified, because it cannot be automated.**
+Confirming an API account means holding its key, and **this project never
+handles one** — no key is pasted into a session, and no screenshot is accepted
+as proof of an account. The owner's word with a date is the record. That makes
+this the rare gate item where the *only* possible check is a human one, which
+is precisely why it needed a numbered slot rather than a paragraph.

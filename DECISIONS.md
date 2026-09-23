@@ -630,6 +630,31 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **The WMATA account was reinstated by the owner on 2026-09-22, so the D.C.
+  page rests on a live licence, and the requirement was promoted from prose to
+  gate item 10.** WMATA's terms are an API agreement rather than a data
+  licence: §9(i) terminates every granted right the moment the account goes,
+  and the right that lapses is **the right to publish the page**, not merely
+  to keep a stored file. The obligation had been recorded in the WMATA entry
+  of `docs/data_sources.md`, which is the correct place for the reasoning and
+  the wrong place for a recurring check - it sat inside a long licence
+  discussion that nobody re-reads before a deploy. It is now item 10 of the
+  numbered pre-publish gate, beside the app-reboot item that was added for the
+  same reason after the live site spent three hours down.
+
+- **Recorded that this gate item cannot be automated, which is why it needed a
+  number.** Verifying an API account means holding its key, and this project
+  never handles one: no key is pasted into a session and no screenshot is
+  accepted as proof of an account. The owner's statement with a date is the
+  record, and that is sufficient. Every other item in the pre-publish gate can
+  in principle be checked by a script; this one cannot, so the only protection
+  available is that it appears on a list somebody reads. Also created the
+  standing register `docs/gated_access.md` for the same class of item - cities
+  blocked by an account, a key or a letter rather than by data or code, which
+  are invisible in the master list because a city waiting on a written request
+  looks exactly like a city waiting on a probe.
+
+
 - **Measured France's other five cities instead of inheriting Paris's numbers,
   and the inference held.** The list had been carrying six French cities on
   the reasoning that *"the filter is national, so it carries to all six"* -
