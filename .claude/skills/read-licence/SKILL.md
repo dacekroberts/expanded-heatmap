@@ -166,6 +166,77 @@ And three adjacent categories that are not notices but are still work:
   transformation" as two different obligations and check for both, because a
   licence can require the second while granting the first freely.
 
+### 6c. Capture what must be DONE — an obligation no page can discharge
+
+**The category this skill was missing until 2026-09-22.** Everything above asks
+what the site must *say*. Some terms require an **affirmative act owed to the
+publisher**, and no amount of text on your own site discharges one.
+
+Barcelona is the worked example:
+
+> *"Users are required to **inform Barcelona City Council** of every project
+> relating to or derived from their use of the data sets, so that they are open
+> to the public for the purpose of encouraging policies for reusing information
+> from the public sector."*
+
+**Read the clause's tail before deciding what kind of obligation it is.** That
+one says *why*: the Council wants derived projects visible so it can point at
+them. So it is a **reuse-showcase notification, not a permission gate**, and
+publishing does not wait on a reply. A clause requiring *written permission*
+before reuse is the opposite and does block. Two obligations that read almost
+identically differ entirely on that tail.
+
+**Phrases that mean you have found one:**
+
+> "are required to inform" · "shall notify" · "must register" · "provide
+> statistical data" · "may require users to" · "request permission" ·
+> "written consent"
+
+#### The five things to capture, because four of them get lost
+
+1. **The act itself**, quoted.
+2. **Whether it BLOCKS publication or not**, with the reasoning — from the
+   clause's own stated purpose, not from convenience.
+3. **The channel**, and whether it actually resolves. This is the one that
+   turns into work. Barcelona's terms name their own channel in an easily
+   missed introductory line — *"Any doubts or comments on these Terms of use
+   may be forwarded to the following link"* — and the link redirects twice to
+   a host that was **down**, while the portal's own contact form sat behind an
+   hCaptcha that stalled.
+4. **Whether a published contact address exists at all.** Check the machine
+   metadata (`maintainer_email`, `author_email`), the national catalogue's
+   contact point, and the portal's contact page. If all three are empty, say
+   so — **an invented address is worse than an undelivered notification**,
+   because it can bounce silently or reach the wrong team while looking sent.
+5. **Any reciprocal duty it implies later.** Barcelona's next sentence lets the
+   Council *require statistical data about the reuse*; that is a standing duty,
+   not a one-off.
+
+#### How to record it, which is not as a notice
+
+An act is **not** a numbered notice and must not be filed as one — a notices
+list is a list of things the page displays, and putting an act there makes it
+look discharged by deploying. Instead:
+
+- Draft the communication as its own file under `docs/notifications/`, with its
+  preconditions stated.
+- Record it in `docs/data_sources.md` beside that source's notice, explicitly
+  flagged as **not discharged by this page**.
+- **Log every send attempt with a date and an outcome.** The obligation is
+  discharged by an act, so the only evidence it happened is the record you
+  write. A failed attempt is evidence too — and distinguishing "the publisher
+  never replied" from "we never reached the publisher" changes what happens
+  next.
+- If the site says anything about it publicly, word it as a **status report**
+  and never as though the page performed the act.
+
+#### And check whether it has a deadline
+
+Barcelona's has none — *"Users are required to inform"*, with no time limit —
+which is what makes waiting out a dead channel legitimate rather than a
+breach. A clause that names a period is a different obligation, and the period
+belongs in the record next to the act.
+
 ### 6b. Check whether the publisher already did the privacy work
 
 Before designing a residence filter or a name-suppression rule, check whether
@@ -197,7 +268,10 @@ Never leave a position implied. Write one of:
 
 - **PERMITTED** — quote the granting sentence.
 - **PERMITTED WITH CONDITIONS** — quote them, and add any display requirement
-  to the notices section.
+  to the notices section. **If a condition is an ACT rather than a display,
+  say so in the verdict itself** (step 6c): it is the one kind of condition
+  that a completed deploy does not satisfy, and a verdict that does not
+  distinguish them reads as discharged.
 - **SILENT** — the authoritative pages were read and impose no reuse position.
   Name which pages, so this is an established absence rather than an
   unexamined gap. Miami-Dade is the worked example.

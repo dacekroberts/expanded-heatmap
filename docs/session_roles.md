@@ -104,6 +104,45 @@ One courtesy that avoids most of it: **do not edit a shared file that another
 session currently has modified and uncommitted.** `git status` in the main
 checkout shows this. Leave the line for them, or add it after they commit.
 
+## Subagents are not sessions, and the split is not the same one
+
+A **session** is a long-lived role with owned paths, its own worktree and its
+own commits. A **subagent** is one bounded errand inside somebody's turn: it
+starts cold, returns a report, and writes nothing anybody has to merge.
+
+**Give a subagent work that is deep, bounded, and mostly negative** — where a
+large amount of fetching and reading collapses to a short answer, and the
+intermediate dead ends are worth keeping out of the caller's context.
+
+| Agent | Why it is the right shape |
+|---|---|
+| `licence-read` | One source, four possible verdicts. Most pages opened say nothing about reuse; Spain's two cities cost more licence reading than the nine US cities combined, and most of it was irrelevant pages |
+| `deploy-verify` | A noisy start/check/stop sequence with a short findings list, and it needs the browser rather than the repo |
+
+### Country screening is NOT one of them, and this is a measured position
+
+It looks like a perfect fan-out — many countries, independent probes, a table
+at the end — and it is the wrong shape for three reasons:
+
+1. **It is already a session's standing role.** The staging session owns
+   `docs/city_master_list.md` and `docs/global_country_shortlist.md`, and a
+   subagent writing the same files is the collision this whole document exists
+   to prevent.
+2. **Parallel work on the append-only files has a real price.** One afternoon
+   in 2026-09-22 cost **three separate `DECISIONS.md` merges** between two
+   participants. A fan-out of screeners multiplies that by the fan.
+3. **Screening is cumulative, not bounded.** `add-country`'s own discipline is
+   that a negative from one method is not a finding, that the exhaustive base
+   is built before filtering, and that a discard list names its evidence per
+   row. A cold agent cannot know what the previous probe already ruled out, so
+   it re-derives — and worse, it re-derives *differently*, which is how the
+   same country ended up in two tiers at once.
+
+**The screening work that a subagent CAN take is one probe with a stated
+question** — "does this endpoint return premises rows with a street address and
+an activity code" — handed back as an answer, with the caller doing the
+banding. That is bounded. "Screen these five countries" is not.
+
 ## Handing work over: label every claim
 
 The Canada screen reversed five conclusions, each because something was

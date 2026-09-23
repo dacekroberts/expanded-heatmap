@@ -394,6 +394,19 @@ confirmation rather than an unknown.
     "kind": "utm_zone_from_longitude",
     "lon": 2.1734,
     "expect": "EPSG:32631"
+  },
+  {
+    "id": "taxonomy-keyed-at-the-right-level",
+    "claim": "Altres is 2.6% of active rows at Nom_Activitat, the level this build keys on, against 35% at Nom_Grup_Activitat one level up - which is WHY it keys at the finest level, the opposite of Madrid. The small catch-all still spans several parents, so it is dispatched rather than bucketed",
+    "kind": "taxonomy_catchall",
+    "domain": "opendata-ajuntament.barcelona.cat/data",
+    "resource_id": "99764d55-b1be-4281-b822-4277442cc721",
+    "column": "Nom_Activitat",
+    "parent_column": "Nom_Grup_Activitat",
+    "catchall": ["Altres"],
+    "compare": ["Nom_Grup_Activitat"],
+    "filters": {"Nom_Principal_Activitat": "Actiu"},
+    "max_share": 0.05
   }
 ]
 ```
