@@ -323,6 +323,7 @@ python scripts/check_provenance.py [--strict]           # every built city's sou
 python scripts/check_no_fetch_in_steps.py [--list]      # no pipeline step may reach the network
 python scripts/check_no_fetch_in_steps_selftest.py      # watch that check fail 6 ways; touches nothing
 python scripts/check_scope_disclosure.py                # every city's rail AND business scope reaches the published page
+python scripts/check_scope_disclosure_selftest.py       # watch that check fail 8 ways; touches nothing
 python scripts/check_stale_claims.py                    # REPORTS only: prose that stopped being true (stale tense, drifted counts)
 python scripts/check_deploy_imports.py [--ref REF]      # clean clone + lean venv: run before ANY push touching app/
 python scripts/decisions_index.py [--check]             # refresh DECISIONS.md's index
