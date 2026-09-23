@@ -21,7 +21,40 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [ ] **🇫🇷 PARIS — scaffolded on branch `paris-build`, steps 1 and 2 unwritten.**
+- [ ] **🇫🇷 FRANCE — Paris and Marseille BUILT; Toulouse, Lille and Rennes
+  remain. `deploy-verify` is deliberately deferred until all five are done.**
+
+  ✅ **Paris** built and deployed 2026-09-23 (22 cities live).
+  ✅ **Marseille** built 2026-09-23 on `marseille-build`, 18,177 storefronts,
+  66 stations, gate 3 passing against AMP's own layer.
+
+  **THE DEFERRAL IS THE OWNER'S CALL (2026-09-23) AND IT IS A SCOPE DECISION,
+  NOT AN OVERSIGHT.** `deploy-verify` is city-scoped work: a `city-added` run
+  costs a real slice of a session and re-verifies the whole app each time. Run
+  once, after the last French city, it covers all five for roughly the cost of
+  one — and every check it does not do is already covered per city by
+  `check_provenance`, `check_macro_labels`, `check_personal_exposure`,
+  `check_deploy_imports` and a browser render, all of which ran for both cities
+  built so far.
+  ⚠️ **What this defers is the ONE THING those cannot see**: the app running as
+  a whole under the lean venv with a real click path. So the last French city
+  does not merge until that run happens, and a French city reaching master
+  before then is the thing to stop.
+
+  **What city three inherits, and what it does not.** Inherits: the country
+  module, `france_naf`, the shared national parquet cache, the shared
+  `france_register.py` step 2, the Lambert-93 grid, the Milan-hybrid naming and
+  the catch-all verdict (measured twice now, 9.8% vs 9.6% on `96.09Z`). Does
+  NOT inherit: the scope decision, the ring edges, the spacing floor, gate 3's
+  source, and the OSM control — each measured per city, and each having
+  produced a different answer at least once.
+
+  ⚠️ **Lille has no first-party metro line geometry** (its brief found tram
+  geometry and no metro), so its rail leg is not Paris's or Marseille's and
+  needs its own answer before it starts.
+
+- [ ] **🇫🇷 PARIS — ✅ BUILT AND DEPLOYED 2026-09-23. Kept for the checklist
+  below, which the follower cities still read.**
 
   Three commits: `5e0e3c6` (the national `france_naf` taxonomy, the scaffold,
   Lambert-93), `ab47e24` (the decision record), `28b3b91` (the three source

@@ -114,6 +114,15 @@ def main():
         return q, rows, dropped_n
 
     quays, st_rows, non_revenue = station_set(config.ROUTE_IDS)
+
+    # Gate 3's own side, per MODE: distinct stations served by a metro line.
+    # Distinct, not station-line pairs - AMP counts a station once per mode
+    # however many lines call there, and comparing a pair count against a
+    # station count is the denominator error `pipeline/counts.py` exists for.
+    distinct_metro = int(sum(
+        1 for v in st_rows["lines"]
+        if any(l.startswith("M") for l in str(v).split("/"))))
+
     print()
     station_gates.verify_stations(
         city="Marseille", platforms=quays, stations=st_rows,
@@ -141,12 +150,11 @@ def main():
         # 200.0, the same value Paris took, and deliberately not a third
         # bespoke number: it still catches a platform-spaced set by 22x.
         spacing_min=200.0,
-        # GATE 3 NOT RUN - no operator-published per-line count has been
-        # sourced for RTM. Paris's came from IDFM's own GIS layer, which is
-        # what osm-rail says to look for first; the equivalent for Marseille
-        # has not been found. Owed, and recorded in PLAN.md rather than
-        # quietly skipped.
-        expected_per_line=None, actual_per_line=None)
+        # GATE 3, per MODE rather than per line, because AMP's layer lists each
+        # stop once per mode. Metro only - see config.OPERATOR_STATION_COUNTS
+        # for why the tram figure is deliberately not passed.
+        expected_per_line=config.OPERATOR_STATION_COUNTS,
+        actual_per_line={"Métro": distinct_metro})
 
     commune = shape(json.loads(
         config.CITY_BOUNDARY_GEOJSON.read_bytes())["geometry"])

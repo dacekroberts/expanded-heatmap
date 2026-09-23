@@ -175,6 +175,39 @@ ROUTE_TYPES_RAIL = ("0", "1")
 ROUTE_IDS = ["RTM-116", "RTM-125", "RTM-2", "RTM-47", "RTM-48"]
 EXCLUDED_RAIL_ROUTE_IDS = {"AUB-T": "Aubagne's tram, not Marseille's"}
 
+# GATE 3: the operator's own station count, from outside the feed.
+#
+# SOURCE: AMP's own portal, `ls-stations-de-metro-et-de-tramway-marseille`
+# ("Stations de metro et de tramway") - a GIS layer, not the feed, which is
+# what osm-rail says to look for first. 69 records, listing each stop ONCE PER
+# MODE rather than per line, so this is a per-MODE check and not a per-line one.
+#
+# ⚠ ONLY THE METRO IS CHECKED, AND THAT IS DELIBERATE. The layer is dated
+# **2021-11-03** and the tram network has been extended since. Measured
+# 2026-09-23:
+#
+#   metro    AMP 29   build 29   EXACT
+#   Aubagne  AMP  7   build  7   EXACT - independently confirms the exclusion
+#   tram     AMP 33   build 44
+#
+# The tram gap is 12 names, and naming them is what turned it from a worry into
+# a finding: ELEVEN are one contiguous run on T3 - La Gaye, Hopital
+# Sainte-Marguerite, Aubert Ganay, Cantini Rouet, Parc Sevigne, Place Ferrie,
+# Salengro Bachas, Salengro Cougit, Parc du 26e Centenaire, Geze and Ste
+# Marguerite Dromel - which is the Geze-La Gaye extension the 2021 layer
+# predates. The twelfth is a naming convention: the feed writes "TRAM LES
+# CAILLOLS" where AMP writes "LES CAILLOLS". Same for the metro, where the feed
+# prefixes "METRO " throughout and the COUNTS still match exactly.
+#
+# So the tram figure is not passed to the gate. A permanently-printed MISMATCH
+# is a check people learn to ignore, which is the argument this project already
+# makes against loosening a threshold. Re-add the tram when AMP refreshes the
+# layer; the expected value then is whatever it publishes, not 44.
+OPERATOR_STATION_COUNTS = {"Métro": 29}
+OPERATOR_COUNTS_SOURCE = (
+    "data.ampmetropole.fr ls-stations-de-metro-et-de-tramway-marseille, "
+    "layer dated 2021-11-03 - metro only, see the note above")
+
 # route_short_name -> the name riders use. RTM writes them exactly this way on
 # its own maps and signage, so unlike Paris there is nothing to translate.
 LINE_NAMES = {
