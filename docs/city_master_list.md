@@ -22,6 +22,36 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 
 ---
 
+> ## ✅ Settled state — 2026-09-22
+>
+> **Every candidate on this list has a measured business leg, a named next
+> step, and no unexamined route.** Nothing here is carried on a guess, a
+> search result, or a host that was never asked properly.
+>
+> | | |
+> |---|---|
+> | **Built** | **18** across 4 countries |
+> | **Candidates** | **33**, all at least partially viable |
+> | **Discarded** | **30**, each naming its evidence |
+>
+> **What this day changed.** Four bands closed because their condition stopped
+> being true of their members. **Seven cities were reached by going to a
+> different HOST rather than a different network** — Sofia, Sevilla, Tel Aviv,
+> Tallinn, Prague, Dublin and Hong Kong — and *unreachable* turned out to mean
+> *not yet asked properly* in every single case.
+>
+> **Three recorded negatives turned out to be statements about a SEARCH rather
+> than about the data**: Stockholm's register is called `Tillsynsverksamheter`,
+> a word no query contained; Zurich's catalogue was matched over 938 of 1,128
+> names; Hong Kong's bulk export was on `data.gov.hk` the whole time and the
+> dataset list had never been requested. **Each cost one HTTP call to
+> disprove.** India was then swept in full — 288,011 titles — specifically so
+> it would not become the fourth.
+>
+> **This claim is dated because it will stop being true.** The next probe, the
+> next build, or the next licence read changes it, and the counts in the table
+> below are the ones to trust over any prose that repeats them.
+
 ## Built — 18
 
 | Country | Cities |
@@ -65,11 +95,11 @@ blocker their band did not. Band D dissolved: its two live sub-tiers were
 about different things and were siblings only because both arrived through
 the same screen.
 
-**Band E was added the same day** for a state the scheme could not express:
-a city whose screening is **complete and successful** but which yields only
-one bucket. Those two were sitting in "a decision to make" beside a city
-waiting on a licence read, which conflated *we have not looked yet* with
-*we looked at everything and this is what is there*.
+**The one-bucket band (now D) was added the same day** for a state the scheme
+could not express: a city whose screening is **complete and successful** but
+which yields only one bucket. Those two were sitting in "a decision to make"
+beside a city waiting on a licence read, which conflated *we have not looked
+yet* with *we looked at everything and this is what is there*.
 
 | Band | What these cities ARE | Cities |
 |---|---|---|
