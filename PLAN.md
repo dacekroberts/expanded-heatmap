@@ -349,39 +349,39 @@ Desktop is unaffected — the label is fully visible there.
 ## Structure
 
 - [x] **Move Madrid's, Mexico City's and Guadalajara's fetching out of their
-  step files** into a `fetch_*.py`, as the other fourteen cities do. **DONE
-  2026-09-22 on `spain-app-wiring`**, so it reaches master when Spain merges.
-  Demonstrated by the cleanup session first: `python pipeline/drift_check.py`
-  in a worktree with no `data/<city>/raw/` **fetched over the network for all
-  three** - a 39 MB DENUE zip, a Madrid census CSV, Overpass responses and CRTM
-  layers - and then reported zero drift. Toronto, by contrast, stopped with "no
-  data/<city>/raw/ - nothing to run against", which is the correct behaviour.
-  The calls were cache-guarded, so this was invisible on a machine that already
-  had the data. **It changed what a passing drift check meant:** for those
-  three it asked "does the current upstream still produce the committed output"
-  rather than "does the committed code".
+  step files** into a `fetch_*.py`, as the other fourteen cities do. **ALL
+  THREE DONE 2026-09-22**, by two sessions working the same list: Mexico City
+  on master, Madrid and Guadalajara on `spain-app-wiring`. The duplicated
+  Mexico City work was resolved in master's favour at the merge, because that
+  version was proved BOTH ways - zero drift with the cache present, and a clean
+  refusal with `data/mexico_city/raw/` moved aside - where the branch's had
+  only the positive half.
 
-  Six fetch sites moved into three new `fetch_sources.py` files. The step-side
-  functions keep their names and lose only the ability to fetch - `fetch_layer`
-  and `overpass` became cache readers that RAISE with the command to run,
-  `download` became `require_denue`. Two checks travelled with their downloads
-  rather than staying behind, because each guards the fetch and not the
-  parsing: ArcGIS `exceededTransferLimit`, and the DENUE magic-bytes test.
+  The finding was demonstrated rather than argued: `python
+  pipeline/drift_check.py` in a worktree with no `data/<city>/raw/` **fetched
+  over the network for all three** - a 39 MB DENUE zip, a Madrid census CSV,
+  Overpass responses and CRTM layers - and then reported zero drift, while
+  Toronto stopped correctly with "no data/<city>/raw/ - nothing to run
+  against". The calls were cache-guarded, so it was invisible on a machine that
+  already had the data. **It changed what a passing drift check meant:** for
+  those three it asked "does the current upstream still produce the committed
+  output" rather than "does the committed code".
+
   `grep -rln "requests.get\|requests.post\|urlopen" pipeline/*/step*.py` now
-  returns nothing, so **the invariant is absolute rather than conditional**.
-  Verified at zero drift across all 18 cities with every baseline figure
-  unchanged. The two Mexican cities also gained a rule their own code lacked,
-  via `pipeline/osm.py`: a mirror can return a PARTIAL result with HTTP 200 and
-  no `remark`, not only an empty one.
-- [ ] **Wire Toronto's `STATIONS_COLLAPSED_EXPECTED`**, or delete it. It is
-  110 and asserted nowhere, while `PLATFORMS_EXPECTED`,
-  `IN_CITY_STATIONS_EXPECTED` and `SUBWAY_ONLY_STATIONS_EXPECTED` are all
-  checked. The per-line check in `pipeline/stations.py` cannot cover it: those
-  counts sum to 117 because an interchange counts on each of its lines.
-- [ ] **Have Guadalajara's step 2 import `DENUE_STATE_COLUMN` and
-  `DENUE_MUNICIPIO_COLUMN`** from `pipeline/countries/mexico.py` instead of
-  writing `"cve_ent"` and `"municipio"` as literals, so a DENUE column rename
-  is a one-file change as the country-config pattern intends.
+  returns nothing, so the invariant San Francisco's `fetch_sources.py` states
+  is **absolute rather than conditional**. Zero drift across all 18 cities.
+- [x] ~~Wire Toronto's `STATIONS_COLLAPSED_EXPECTED`~~ - **done 2026-09-22,
+  and it was a mis-wiring rather than a missing check.** Step 1 compared the
+  COLLAPSED count (110) against `IN_CITY_STATIONS_EXPECTED` (108), printing a
+  NOTE every run while the right constant sat unread. Both now guard what they
+  name, an in-city check was added after the boundary filter, and the docstring
+  no longer claims `excluded_stations.csv` is empty (it has two rows). Verified
+  by running step 1: 234 -> 110 -> 108, two excluded, zero NOTEs.
+- [x] ~~Have Guadalajara's step 2 import `DENUE_STATE_COLUMN` and
+  `DENUE_MUNICIPIO_COLUMN`~~ - **done 2026-09-22, and it was BOTH Mexican
+  cities.** Zero drift on both after the substitution. The `municipio` in each
+  city's output-column list is left as a literal on purpose: that is this
+  project's output schema, not DENUE's input column, and both sites say so.
 
 - [x] ~~Finish the `check_stale_claims.py` category-B pass~~ - **done
   2026-09-22**, seven passes, **74 flagged counts to 35**, files scanned 39 to

@@ -57,25 +57,27 @@ BOUNDARY_AREA_KM2_MIN = 1_300.0
 BOUNDARY_AREA_KM2_MAX = 1_700.0
 
 
-def cached(cache_path, label):
-    """Read one cached Overpass result. NEVER fetches.
+def read_cached(path, label):
+    """Read a raw input that `fetch_sources.py` has already downloaded.
 
-    Fetching lives in fetch_sources.py, so that drift_check.py - which re-runs
-    every step*.py - is deterministic and offline. It used to fetch here,
-    guarded by a cache check, which is offline only when the gitignored raw
-    directory happens to be populated. Moved out 2026-09-22.
+    This step does NOT fetch. It used to - `overpass()` lived here and pulled
+    on a cache miss - which made `drift_check.py` reach the network on any
+    checkout without `data/mexico_city/raw/`, and turned "does the committed
+    code still produce the committed output" into "does the current upstream".
+    See pipeline/mexico_city/fetch_sources.py for the whole argument.
     """
-    if not cache_path.exists():
+    if not path.exists():
         raise SystemExit(
-            f"{cache_path.name} is missing ({label}), and a step never "
-            "fetches.\n  Run:  python pipeline/mexico_city/fetch_sources.py")
-    print(f"  {label}: cached {cache_path.name}")
-    return json.loads(cache_path.read_text(encoding="utf-8"))
+            f"Missing {path.name} ({label}). "
+            f"Run pipeline/mexico_city/fetch_sources.py first."
+        )
+    print(f"  {label}: {path.name} ({path.stat().st_size:,} bytes)")
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def load_boundary():
     """Assemble CDMX's admin_level=4 polygon from the relation's member ways."""
-    data = cached(OSM_BOUNDARY_JSON, "boundary")
+    data = read_cached(OSM_BOUNDARY_JSON, "boundary")
     rels = [e for e in data["elements"] if e["type"] == "relation"]
     if len(rels) != 1:
         raise SystemExit(
@@ -113,9 +115,9 @@ def load_boundary():
 def main():
     print("=== Step 1: Mexico City stations (OpenStreetMap) ===\n")
 
-    print("Fetching OSM:")
-    st_data = cached(OSM_STATIONS_JSON, "stations")
-    rt_data = cached(OSM_ROUTES_JSON, "routes")
+    print("Reading cached OSM:")
+    st_data = read_cached(OSM_STATIONS_JSON, "stations")
+    rt_data = read_cached(OSM_ROUTES_JSON, "routes")
     boundary = load_boundary()
 
     nodes = [e for e in st_data["elements"]

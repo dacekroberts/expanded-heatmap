@@ -46,21 +46,26 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 34
+## Candidates — 33
 
 Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
-**Seven cities moved to discarded on measurement** and **one was upgraded**.
-The last two — Sofia and Sevilla — were both sitting in Band D as
-*unreachable*, and both were reached by going to a **different host** rather
-than a different network.
+**Eight cities moved to discarded on measurement** and **two were upgraded**.
+
+**Four of those were sitting in Band D as "unreachable", and all four were
+reached by going to a different HOST rather than a different network** —
+Sofia via `data.europa.eu`, Sevilla and Tel Aviv via the ArcGIS service host
+behind a walled portal, Tallinn via a bulk export its catalogue entry named.
+Three then measured negative and **one, Tel Aviv, is now the strongest
+unbuilt candidate outside Band A.** *Unreachable* turned out to mean *not yet
+asked properly* in every single case.
 
 | Band | What is stopping it | Cities | Change |
 |---|---|---|---|
 | **A** | Nothing. Screening complete | **5** | ✅ −2 built; Paris out then back, **measured both ways** |
-| **B** | One narrow question each | **1** | ▼ −3 — Spain's three measured out |
+| **B** | One narrow question each | **2** | ▲ **+Tel Aviv**, the strongest unbuilt result outside Band A |
 | **C** | A geocoding leg — build work, not screening | **18** | ▲ **+Bucharest** |
-| **D** | Four sub-tiers, see below | **10** | ▼ −4 — D-c finalised, **Sofia and Sevilla measured out**, D-d closed |
-| *Discarded* | Measured negative, evidence named | *26* | ▼ **+12** |
+| **D** | Four sub-tiers, see below | **8** | ▼ −6 — **Sofia, Sevilla and Tallinn measured out**; Tel Aviv promoted; D-c and D-d both closed |
+| *Discarded* | Measured negative, evidence named | *27* | ▼ **+13** |
 
 ✅ **Guadalajara and Mexico City left Band A by being built**, not by being
 ruled out. Their rows are kept below, marked, because a built city's Band A
@@ -120,7 +125,61 @@ So the next *unstarted* city is the question.
 and only owner decisions left. After that the screen has no city whose
 "what remains" column is empty.
 
-## Band B — one narrow question each (1 city)
+## Band B — one narrow question each (2 cities)
+
+**▲▲ Tel Aviv** 🇮🇱 — **promoted from Band D-b on 2026-09-22, and it is the
+strongest unbuilt result outside Band A.** It had been carried as
+*unreachable*: `opendata.tel-aviv.gov.il` and `www.tel-aviv.gov.il` both
+return **HTTP 472**, Imperva's block code, and an earlier pass recorded the
+host printing our own IP back — the one unambiguous IP-level refusal in this
+project.
+
+**The portal was never the only host.** `gisn.tel-aviv.gov.il` answers us
+normally and serves `IView2`, the city's public map viewer — **254 layers**,
+no key, no account. Third city in one day where the portal was walled and the
+GIS service host was not.
+
+| Layer | Rows | |
+|---|---|---|
+| **[964] `מאגר עסקים ברשיון או בהיתר`** | **22,176** | businesses holding a licence or permit — **the candidate** |
+| [925] `עסקים` | **37,392** | businesses, with street + house number and floor area |
+| [433] `רישיונות בביצוע` | 2,466 | licences in progress |
+| [679] `מתחמי רישוי עסקים` | 29 | licensing zones (polygons) |
+
+**Both halves of the location/activity split are present**, which is what
+disqualified Tallinn, Colombia and Jakarta:
+
+- **Activity** — `t_hesber_mahut_esek` in plain Hebrew (*grocery*, *building
+  materials and paints*, *baking powder and pudding*) **plus** `mahuiot`,
+  the numeric licensing-item code (406300, 407202, 1007200…).
+- **Location** — `shem_rechov` (street), `ms_koma` (floor), and **point
+  geometry in `wkid=2039`, Israeli TM — already projected in metres**, so
+  no reprojection guesswork and no EPSG:4326 buffering trap.
+- **Freshness** — `date_import` reads **20/09/2026**, two days old.
+
+**Two questions, and both are owner decisions rather than probes:**
+
+1. **Which business layer, and a privacy check.** [925] is larger (37,392)
+   but carries **`shem_machzik_rashi` — "name of main holder"**, which is
+   squarely the *registrant's own name* category this project's invariant
+   excludes. [964] carries `t_shem_esek`, a **trade name**, which is the
+   safe field. Recommendation: **build on [964]** and treat [925] as a
+   cross-check only. `check_personal_exposure.py` must run either way.
+2. **Licence — UNREAD, and that is the real gate.** The MapServer returns
+   **no `copyrightText` and no `licenseInfo`**. Tel Aviv is *not* among the
+   four municipalities publishing on `data.gov.il` (Be'er Sheva, Haifa,
+   Ma'ale Adumim, Petah Tikva), so there is no national licence statement to
+   inherit either. Needs `read-licence` against the city's own terms —
+   **and the pages that would carry them are on the 472-blocked host**, so
+   the Internet Archive is the likely route.
+
+**Rail is present but needs a scope decision, not a probe.** The city
+publishes its own: Red Line stations **12**, Green **33**, Purple **19**,
+with alignments. **Green and Purple are still under construction** — drawing
+them would map lines that carry no passengers, the inverse of the
+Guadalajara problem. Red is the operating line, and its 12 stations are the
+in-city segment of a 34-station route that runs to Petah Tikva and Bat Yam,
+so a boundary decision is needed too.
 
 ▼ **Valencia, Bilbao and Málaga left this band on 2026-09-22** — all three
 probed, all three measured negative, all three now in *Discarded*. The
@@ -171,7 +230,7 @@ screen — against the worst geocoding problem and a two-bucket ceiling.
 **Still the biggest open decision in this list**, and a judgment call rather
 than a probe.
 
-## Band D — 10 cities, and two of its four sub-tiers are now closed
+## Band D — 8 cities, and three of its four sub-tiers are now closed
 
 ### D-a — one cheap question each (4)
 
@@ -182,7 +241,7 @@ than a probe.
 | **Zurich** 🇨🇭 | **Food confirmed** — `Gastwirtschaftsbetriebe`, premises-level, GeoJSON. No second bucket found; the national STATENT is aggregate |
 | **Singapore** 🇸🇬 | API answers but its search is loose. One controlled query settles it. Suspected registered-office shaped |
 
-### D-b — rail ANSWERED, business leg is the blocker (5)
+### D-b — rail ANSWERED, business leg is the blocker (4)
 
 **Five cities left this sub-tier on 2026-09-22** — Santiago, Kuala Lumpur,
 Jakarta, Medellín and Lima — all to *discarded*, each with a measured reason.
@@ -205,8 +264,8 @@ below.
 |---|---|---|
 | **Hong Kong** 🇭🇰 | 126 rel, 125 named, 117 coloured | **BLOCKED, not negative.** The portal is a measured negative (statistics only), but **FEHD's register exists and is queryable** — no bulk export found. The single most valuable open thread in Band D |
 | **Rio de Janeiro** 🇧🇷 | 20 rel, all named + coloured | CNPJ, no coordinates → geocoding at São Paulo's scale |
-| **Tel Aviv** 🇮🇱 | 6 rel, **realistically 1** — Green and Purple were under construction when screened; **that was 2026-09 and may now be stale** | **UNREACHABLE, and the city portal is ALIVE.** `opendata.tel-aviv.gov.il` returns **472** to us but is archived **2026-03-10**; `www.tel-aviv.gov.il` likewise. The block is aimed at us. Meanwhile **`data.gov.il` answers 200 right now** and has not been re-probed since the "14 bytes" reading. **Not a discard** |
-| **Hyderabad** 🇮🇳 | 6 rel, all named + coloured | ⚠️ **`data.telangana.gov.in` resolves (103.122.129.180) — our failure is routing, not DNS. The old row said "dead". That was wrong** — it fails for us but is archived **2025-05-09**, so it is alive. **GHMC** (`ghmc.gov.in`), which is the body that actually issues trade licences, returns **403** to us and is archived **2025-04-24** — also alive. And **`tgbpass.telangana.gov.in` answers 200 right now**, unprobed. **Three live hosts, none measured. Not a discard** |
+| ▲▲ **Tel Aviv** 🇮🇱 | see Band B | **PROMOTED OUT OF BAND D 2026-09-22 — to Band B. Both legs measured.** The WAF-blocked portal was never the only host: `gisn.tel-aviv.gov.il` answers, and carries **22,176 licensed businesses** with activity *and* location. See Band B |
+| **Hyderabad** 🇮🇳 | 6 rel, all named + coloured | ⚠️ **All three live hosts PROBED 2026-09-22. Still blocked, and now with the alternative route measured shut.** `ghmc.gov.in` — the body that issues trade licences — returns **403 in a real browser as well as to curl**, an **F5 WAF block that names itself** (support ID + `F5 site: wes-sea`); deliberate, like Bulgaria's. `data.telangana.gov.in` resolves but is unroutable for us; `tsbpass` has no A record. **`tgbpass.telangana.gov.in` answers 200 and is a FALSE FRIEND** — TG-bPASS is *Building Permission Approval and Self-certification*, i.e. construction permits, and `/Home/TradeLicense` 404s. The national fallback that rescued Sofia does **not** work here: `data.gov.in`'s `title=` filter is controllable (nonsense → *"No Result Found"*), and `trade license` returns only **Karnataka's "District wise ULB wise Trade License Details" — an aggregate**, confirming the prior 288,011-resource negative. **The Hong Kong shape: blocked, not negative** |
 | **Kochi** 🇮🇳 | 2 rel, named + coloured | ⚠️ **PROBED 2026-09-22, and the lead was a FALSE FRIEND.** `go.lsgkerala.gov.in/pages/query.php?t=establishment` is a **Government Orders and Circulars search** — "establishment" matches 6,526 orders about *staffing*; Kochi's own `/establishment/396` is ജീവനക്കാര്യം, its **personnel** page. In Indian government usage "establishment" means staff posts, not premises. The real route is **K-SMART** (`tax.lsgkerala.gov.in` redirects to `ksmart.lsgkerala.gov.in`) and **Sanchaya** — both live, both **transactional citizen portals** for paying tax and renewing licences, **no bulk export found**. Kerala's local bodies do issue the licences, so the register exists. **The Hong Kong shape: blocked, not negative** |
 
 #### Paris / SIRENE — the measurement, 2026-09-22
@@ -312,7 +371,7 @@ own file carries them and would improve the filter further.
 > marker. **A filter returning zero can mean "nothing to flag" or "this
 > convention is not used here", and the result alone cannot tell you which.**
 
-### D-c — FINALISED 2026-09-22 (1 left: Tallinn, parked on value)
+### D-c — ✗ CLOSED 2026-09-22 (0 left — Tallinn measured out, Sofia measured out)
 
 **Finalised 2026-09-22.** These were "genuinely unreached, no finding either
 way". All six are now reached and the sub-tier is closed out:
@@ -334,8 +393,54 @@ now the only genuinely-unjudged city left in this band.**
 
 | City | What the host actually does |
 |---|---|
-| **Tallinn** 🇪🇪 ⏸ | **PARKED ON VALUE, and now with one half measured.** Trams only, ~450k. The **äriregister**'s open-data downloads are `ettevotja_rekvisiidid` — *company* requisites — plus annual accounts: **company-shaped**, confirming what was previously only suspected. The register that would carry premises is **MTR** (`mtr.ttja.ee`, the Majandustegevuse register); it is live HTML with **no API found**, so it needs the browser. Not done — the city is the thinnest map in the screen and does not justify the hour |
+| ✗ **Tallinn** 🇪🇪 | **DISCARDED 2026-09-22 — MTR reached, downloaded whole, and measured.** No longer parked: the register that was going to be Tallinn's route has **no location data of any kind.** See below |
 | ✗ **Sofia** 🇧🇬 | **DISCARDED 2026-09-22 — and on data, not on the block.** See the section below: the entire Bulgarian catalogue was enumerated from outside, and **Sofia does not publish a commercial-premises register.** The 403 was never what stopped it |
+
+#### 🇪🇪 Tallinn: MTR reached and measured — 2026-09-22
+
+The äriregister was already known to be company-shaped. **MTR**
+(Majandustegevuse register) was the remaining hope, recorded as *"live HTML
+with no API found, so it needs the browser"*. It needed no browser. Its
+`andmed.eesti.ee` catalogue entry names a bulk export outright —
+`mtr.ttja.ee/opendata/avaandmed_ettevotjad.xml`, `access: PUBLIC`,
+`accrualPeriodicity: DAILY`, `applicableLegislation: ODD_LEGAL_ACT`.
+
+**Note the recorded blocker was also wrong.** The search API was filed as
+*"contract unpinned — 400 on empty `search` and on `limit=1000`"*.
+`search=<term>&limit=5&page=1` answers fine; the contract simply rejects an
+*empty* term. A parameter that refuses one value is not an unpinnable API.
+
+The export is **102 MB**. It was downloaded in full and every element name
+counted, rather than sampled — the head of the file is unrepresentative
+(the first records are French and Polish cross-border filings, which would
+have no Estonian premises anyway, and reading those two would have produced
+the right answer by the wrong method).
+
+| | |
+|---|---|
+| Undertakings | **56,401** |
+| Licences | **100,431** |
+| Estonian | **97.8%** (55,184) |
+| Distinct element names in the whole file | **17** |
+| **Elements naming a place** | **ZERO** |
+
+The complete tag census is `ettevotja · registrikood · nimi · riik_kood ·
+url · load · luba · tyyp · number · staatus · valdkond · tegevusala ·
+emtak · emtak2025 · kood · kehtiv_alates · kehtiv_kuni`. No address, no
+tegevuskoht, no coordinates. *(`vald` appears only inside `valdkond` —
+a substring, not a field.)*
+
+**This is the pure Colombia-RUES shape**: complete activity classification
+(114 distinct `tegevusala`, plus EMTAK 2008 and 2025 codes) attached to no
+location at all. And it fails the composition test independently — the
+largest category is **`Teenindajakaart`, 25,130 service-worker cards**,
+followed by freight-transport community licences and taxi vehicle cards.
+**Personal and vehicle certifications, not premises.** Only `Toitlustamine`
+(5,576) and `Jaekaubandus` (4,120) are storefront-shaped, and those are
+Estonia-wide, not Tallinn.
+
+Tallinn was parked on *value* — trams only, ~450k, the thinnest map in the
+screen. It is now closed on *data*, which is the better reason.
 
 #### 🇧🇬 Sofia resolved by going around the 403 entirely — 2026-09-22
 
@@ -476,10 +581,11 @@ took was a different *host* — `services1.arcgis.com`, reachable all along.
 The rule held and protected the city from a premature discard; the cost
 estimate attached to it was guesswork. **See the resolution above.**
 
-## DISCARDED — 26 cities, each naming its evidence
+## DISCARDED — 27 cities, each naming its evidence
 
 | City | Why |
 |---|---|
+| **Tallinn** 🇪🇪 | **MTR downloaded whole — 102 MB, 56,401 undertakings, 100,431 licences — and its complete tag census is 17 element names, NONE of which is a place.** Full activity classification, zero location: the Colombia-RUES shape. Composition fails too — the largest category is 25,130 service-worker cards |
 | **Sofia** 🇧🇬 | **11,635 Bulgarian datasets enumerated via `data.europa.eu`'s SPARQL endpoint, around a 403 aimed at us.** 141 municipal premises registers exist nationally; **Sofia's 76 datasets include none.** Its registers are all small towns — Sofia is Bulgaria's only metro city |
 | **Sevilla** 🇪🇸 | **1,260 public ArcGIS items / 413 Feature Services enumerated** from org `hcmP7kr0Cx3AcTJk` after the dead portal's last Archive capture named its successor. **Rail is solved** (`METRO_Estacion` 21, `METRO_Linea` 20, no account). **No premises register**: `Locales` is 150 *vacant municipally-owned units*, the rest are property holdings and facility layers |
 | **Berlin** 🇩🇪 | `Gaststätten` → 0 on `datenregister.berlin.de`; the Gewerberegister is not open data |

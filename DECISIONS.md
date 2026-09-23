@@ -16,10 +16,15 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**155 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**160 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Mexico City's fetching moved out of its steps, as the worked pattern for the other two](#2026-09-22---mexico-citys-fetching-moved-out-of-its-steps-as-the-worked-pattern-for-the-other-two)
+- [Both Mexican cities hardcoded the DENUE columns their national config already names](#2026-09-22---both-mexican-cities-hardcoded-the-denue-columns-their-national-config-already-names)
+- [Check I caught another session's orphaned row within minutes, which is the first time a check here found a defect it was not written for](#2026-09-22---check-i-caught-another-sessions-orphaned-row-within-minutes-which-is-the-first-time-a-check-here-found-a-defect-it-was-not-written-for)
+- [Toronto's collapse check guarded the wrong number, and re-running it showed a baseline can miss a content change](#2026-09-22---torontos-collapse-check-guarded-the-wrong-number-and-re-running-it-showed-a-baseline-can-miss-a-content-change)
+- [Surveyed CLAUDE.md's invariants for which ones nothing verifies, and nearly shipped a check that examined nothing](#2026-09-22---surveyed-claudemds-invariants-for-which-ones-nothing-verifies-and-nearly-shipped-a-check-that-examined-nothing)
 - [Barcelona built: a Catalan premises census, a two-operator metro, and two keys whose absence was not neutral](#2026-09-22---barcelona-built-a-catalan-premises-census-a-two-operator-metro-and-two-keys-whose-absence-was-not-neutral)
 - [drift_check leaves outputs/ modified on Windows when nothing changed](#2026-09-22---drift_check-leaves-outputs-modified-on-windows-when-nothing-changed)
 - [Working the dead-constant list demonstrated, live, that drift_check is not offline for three cities](#2026-09-22---working-the-dead-constant-list-demonstrated-live-that-drift_check-is-not-offline-for-three-cities)
@@ -192,6 +197,182 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-22 - Mexico City's fetching moved out of its steps, as the worked pattern for the other two
+
+- **`pipeline/mexico_city/fetch_sources.py` now holds everything that touches
+  the network**: the three Overpass queries and the host-by-host `overpass()`
+  helper from step 1, and the DENUE download from step 2. Both steps read the
+  cache and **exit with "Run pipeline/mexico_city/fetch_sources.py first"**
+  when it is absent - Toronto's behaviour, and the convention the other
+  thirteen cities already follow.
+
+- **Verified both directions, not just the happy one.** With the cache present,
+  `drift_check.py mexico_city` reports **RESULT: zero drift**, so the move is
+  behaviour-preserving. With `data/mexico_city/raw/` moved aside, step 1 stops
+  with `Missing osm_stations.json (stations). Run
+  pipeline/mexico_city/fetch_sources.py first.` - which is the whole point, and
+  is exactly what Toronto did when this session first ran a drift check here.
+
+- **The hard-won behaviour moved intact**, because it is the kind that is
+  cheapest to lose in a refactor: an Overpass **200 with no elements is still
+  treated as a host failure**, never cached, and the next host is tried - that
+  one once produced the vacuous claim that "every ref has exactly 2 direction
+  relations" over an empty set. And the DENUE zip is still checked by **magic
+  bytes** rather than the filename the server claims.
+
+- **A four-byte bug caught before it shipped.** The magic-byte check was written
+  as `b"PK\x03\x04"` - five literal characters rather than the 4-byte ZIP
+  signature - so it would have rejected every real DENUE download. Found by
+  evaluating the literal rather than reading it, which is the same discipline
+  that caught the longitude parser examining zero cities earlier today.
+  Over-escaping in a generated file, the third time today that escaping has
+  bitten.
+
+- **Stopped at one city deliberately.** Guadalajara and Madrid have the same
+  defect and are now a mechanical repeat of this pattern, but context was at
+  84% and a half-finished refactor spanning three live pipelines is a worse
+  state than one finished city plus a written pattern. `PLAN.md` carries the
+  remaining two with this commit named as the model.
+
+### 2026-09-22 - Both Mexican cities hardcoded the DENUE columns their national config already names
+
+- **The PLAN item understated it: it was both cities, not one.** Guadalajara
+  and Mexico City each re-export four DENUE column names from
+  `pipeline/countries/mexico.py` and then wrote `"cve_ent"` and `"municipio"`
+  as literals anyway - in `usecols`, in the state sanity check and in the
+  municipio scope filter. A DENUE column rename would have been fixed once in
+  the national file and missed in **two** step files, which is exactly what
+  profiling a country once is meant to prevent.
+
+- **Both configs now re-export `DENUE_STATE_COLUMN` and
+  `DENUE_MUNICIPIO_COLUMN`, and both step 2 files import them.** Verified by
+  running: `drift_check` reports **zero drift** for both cities, so the
+  substitution is genuinely name-for-value.
+
+- **Two literals were deliberately LEFT, and that distinction is the
+  interesting part.** `cols = [..., "scian", "bucket", "municipio"]` is this
+  project's OUTPUT schema for `businesses_clean.csv`, sitting beside
+  `business_name` and `bucket` - names this project chose. It coincides with
+  DENUE's input column only because the column passes through unrenamed.
+  Binding the output contract to the input spelling would mean a DENUE rename
+  silently renaming a column downstream code reads. Both sites now carry a
+  comment saying so, because the next sweep will see a bare literal and want to
+  "fix" it.
+
+- **The general shape: a string appearing twice is not automatically a
+  duplication.** Ask which of the two is the authority. For the DENUE input
+  columns it is the national config, so the literals were wrong; for the output
+  schema it is this project, so the literals are right.
+
+### 2026-09-22 - Check I caught another session's orphaned row within minutes, which is the first time a check here found a defect it was not written for
+
+- **`check_provenance.py` failed on `docs/city_master_list.md:432`** — a Sofia
+  discard row separated from its table by prose inserted above it, so it
+  rendered as literal pipe-delimited text. Introduced by `bf682db` ("Tel Aviv
+  promoted to Band B; Tallinn discarded"), pushed by another session, and
+  caught on the next run here **before anyone read the page**.
+
+- **That is the first time one of these checks found a defect in work it was
+  not written for.** Check I was built from Edmonton's and Toronto's orphaned
+  rows in `data_sources.md`; the same shape appeared hours later in a different
+  file, from a different session, for the same reason — a row and its table
+  separated by an insertion between them. It is the argument for a check over a
+  correction, made without anyone arguing it.
+
+- **Fixed by moving the row to sit beside Tallinn's**, its sibling in the same
+  `| City | What the host actually does |` table, which is plainly where the
+  authoring session meant it to go: both are long-form discard entries, and the
+  Tallinn prose belongs below the table rather than inside it. The short Sofia
+  row in the D-c summary table above is untouched and not a duplicate — it
+  serves a different table.
+
+- **Recording that master was briefly red and why.** This session committed and
+  pushed Toronto's fix in the same breath as merging that commit, and only
+  checked `--strict` afterwards; it exited 1. The failure was inherited, not
+  caused, but the ordering was wrong: **run the check before the push, not
+  after**. Fixed within minutes, and the lesson is the cheaper half of the
+  story.
+
+### 2026-09-22 - Toronto's collapse check guarded the wrong number, and re-running it showed a baseline can miss a content change
+
+- **The dead constant was a mis-wiring, not a redundancy.** Step 1 collapses
+  234 platforms to 110 stations, then filters to 108 in-city. Its check read
+  `if len(stations) != IN_CITY_STATIONS_EXPECTED` - comparing the COLLAPSED
+  count against the IN-CITY expectation, 110 against 108 - so it **printed a
+  NOTE on every single run** while `STATIONS_COLLAPSED_EXPECTED` sat unread.
+  That is why a dead-constant sweep found it: nothing read the constant because
+  the wrong one had been used in its place.
+
+- **Both constants now guard the quantity they name**, and a second check was
+  added after the boundary filter for the in-city count. **Verified by running
+  the step, not by reading it**: 234 platforms -> 110 stations, 108 inside, 2
+  excluded (Highway 407, Vaughan Metropolitan Centre), and **zero NOTEs** where
+  the old code emitted one every time. All three figures match the committed
+  `baseline.json`.
+
+- **The docstring also claimed `excluded_stations.csv` is "EMPTY - nothing
+  outside".** It has two rows and has had since the city was built. Corrected.
+
+- **AND RUNNING IT SURFACED SOMETHING LARGER, which is not this city's bug.**
+  To verify the fix, Toronto's raw data was fetched - and the regenerated
+  `heatmap.html` DRIFTED from the committed one: a storefront present in the
+  committed map ("KORDOG") is absent now, because the MLS register has changed
+  upstream since those outputs were built. The change is real data movement,
+  not a rendering artefact.
+
+- **The alarming part is that `baseline.json` reported IDENTICAL.** All five
+  figures it watches - `storefront_rows` 19,384, `geocoded_rows` 18,186 and the
+  three bucket totals - matched exactly while the map's contents differed. **A
+  row-count baseline cannot see a substitution**, and `drift_check` only caught
+  this because it also diffs the rendered HTML. Worth knowing before anyone
+  proposes trusting the counts alone, or trims the HTML diff for being noisy.
+
+- **`outputs/` was restored rather than committed.** The fix is a print
+  statement; the published map must not move because a sweep happened to
+  re-download a register on a Tuesday. Committing the regenerated file would
+  have baked today's upstream snapshot into the site under a commit message
+  about an assertion.
+
+### 2026-09-22 - Surveyed CLAUDE.md's invariants for which ones nothing verifies, and nearly shipped a check that examined nothing
+
+- **Went through `CLAUDE.md`'s invariants asking which have a check and which
+  rest on memory.** Eight are machine-checkable; all eight hold today.
+  `streamlit_folium` appears nowhere in `app/`; `map_common.py` names none of
+  the 13 taxonomy modules; no `data/` file is committed and all 17 `outputs/`
+  directories are; the public name is `SITE_NAME = "Storefronts Near Transit"`,
+  not a city; and the removal commitment appears in both files that must carry
+  it. Recorded as examined rather than left implicit.
+
+- **Three of them are now `check_provenance.py` check K**, chosen because each
+  breaks SILENTLY and a new city is exactly when that would happen:
+  **the OSM basemap attribution** (17 of 17 maps carry it and the copyright
+  link - an ODbL obligation breached by omission rather than by a wrong
+  string); **`CRS_PROJECTED` against each city's own longitude** (a copied CRS
+  does not error, it measures a few per cent wrong); and **no map step forking
+  `render_heatmap()`** (all 17 call it, none builds its own `folium.Map`, and
+  they run 77-130 lines).
+
+- **A probe bug worth recording on its own: only 13 of 17 cities have a
+  `step3_map.py`.** Los Angeles, New York, Toronto and Washington D.C. need a
+  geocoding pass, so theirs is `step4_map.py`. The first glob missed all four -
+  which is an argument for writing the rule down once, correctly, rather than
+  re-deriving it per sweep.
+
+- **AND THE CHECK ITSELF NEARLY SHIPPED BROKEN, in the way this whole taxonomy
+  is about.** The CRS limb read longitudes from `app/cities.py` with
+  `getattr(node, "value", None)`; a negative number is an `ast.UnaryOp`
+  wrapping a `Constant`, so **every western longitude parsed as None and the
+  limb examined zero of sixteen cities** - while the section printed its green
+  line. It was caught by deliberately breaking Calgary's CRS and noticing the
+  check stayed SILENT, not by reading the code. Fixed with
+  `ast.literal_eval`, and the limb now **fails if it reads fewer longitudes
+  than there are cities**, because a limb that can be starved of input should
+  say so rather than pass.
+
+- **Written into the sweep skill as its own rule: never ship a check you have
+  not watched fail.** Every check added today was negative-tested, and this is
+  the one where that discipline actually earned itself rather than merely
+  confirming what reading suggested.
 ### 2026-09-22 - Barcelona built: a Catalan premises census, a two-operator metro, and two keys whose absence was not neutral
 
 - **Decided to publish Barcelona on a DISCLOSED POSITION rather than hold it
@@ -526,6 +707,91 @@ onwards; the early ones are split by phase rather than by hour.
 - **`check_provenance.py` now runs ten checks (A-J)** and `--strict` exits 0.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
+
+- **Promoted Tel Aviv from Band D to Band B - the strongest unbuilt result
+  outside Band A - by asking a host that answers instead of the one that does
+  not.** `opendata.tel-aviv.gov.il` and `www.tel-aviv.gov.il` both return
+  **HTTP 472**, Imperva's block code, and an earlier pass had the host
+  printing our own IP back: the one unambiguous IP-level refusal in this
+  project, and the reason the city sat unreached. `gisn.tel-aviv.gov.il`
+  answers normally and serves `IView2`, the city's public map viewer, at
+  **254 layers with no key and no account**. Layer **[964]
+  `מאגר עסקים ברשיון או בהיתר`** holds **22,176 businesses with a licence or
+  permit**; layer [925] `עסקים` holds **37,392**. Both halves of the
+  location/activity split are present - activity as `t_hesber_mahut_esek` in
+  plain Hebrew plus the numeric `mahuiot` licensing-item code, location as
+  `shem_rechov` and point geometry in **wkid 2039, Israeli TM, already
+  projected in metres** - and `date_import` reads 20/09/2026, two days old.
+  Rejected the alternative of recording Tel Aviv as blocked, which is what
+  three prior passes did. Touched `docs/city_master_list.md`.
+
+- **Recommended building Tel Aviv on layer [964] rather than the larger
+  [925], on privacy grounds rather than size.** [925] carries 37,392 rows
+  against [964]'s 22,176, but its `shem_machzik_rashi` field is the **name of
+  the main holder** - squarely the *registrant's own name* category the
+  project invariant excludes, and the kind of field
+  `check_personal_exposure.py` exists to catch. [964] carries `t_shem_esek`,
+  a trade name, which is the publishable field. Treat [925] as a cross-check
+  only. This is a recommendation and not yet a decision: it is the owner's
+  call which layer a Tel Aviv build uses.
+
+- **Recorded Tel Aviv's licence as UNREAD, and as the real gate on the city.**
+  The MapServer returns **no `copyrightText` and no `licenseInfo`**, and Tel
+  Aviv is **not** among the four municipalities publishing on `data.gov.il`
+  (Be'er Sheva, Haifa, Ma'ale Adumim, Petah Tikva), so there is no national
+  statement to inherit either. Per `read-licence`, that a layer fetches is not
+  a finding that it is licensed. The pages that would carry the terms sit on
+  the 472-blocked host, so the Internet Archive is the likely route - the same
+  one that read Barcelona's and Sevilla's.
+
+- **Discarded Tallinn after downloading MTR whole and counting every element
+  name in it.** The Majandustegevuse register was Tallinn's last route and had
+  been parked as *"live HTML with no API found, so it needs the browser"*. It
+  needed no browser: its `andmed.eesti.ee` entry names a bulk export outright,
+  `mtr.ttja.ee/opendata/avaandmed_ettevotjad.xml`, `access: PUBLIC`,
+  `accrualPeriodicity: DAILY`, `applicableLegislation: ODD_LEGAL_ACT`. The
+  102 MB file holds **56,401 undertakings and 100,431 licences, 97.8%
+  Estonian** - and a census of every element name in all 99,337,676 characters
+  returns **17 distinct tags, none of which names a place**. No address, no
+  tegevuskoht, no coordinates. Full activity classification (114 distinct
+  `tegevusala`, EMTAK 2008 and 2025) attached to no location whatsoever: the
+  Colombia-RUES shape exactly. It fails composition independently too - the
+  largest single category is **`Teenindajakaart`, 25,130 service-worker
+  cards**, then freight-transport licences and taxi vehicle cards, which are
+  personal and vehicle certifications rather than premises. Tallinn had been
+  parked on *value*; it is now closed on *data*.
+
+- **Counted the whole MTR file rather than reading its first records, and the
+  head would have been misleading.** The first two `<ettevotja>` entries are
+  French and Polish cross-border filings (`riik_kood` FRA, POL), which have no
+  Estonian premises to declare, so "no address here" was unsurprising and
+  unrepresentative. Scanning all 56,401 records made the negative a
+  measurement instead of an inference. Same correction as the Bulgarian sweep
+  earlier the same day, applied before publishing rather than after.
+
+- **Corrected a recorded blocker on Estonia's search API that was never
+  real.** `andmed.eesti.ee/api/datasets/search` was filed as *"contract
+  unpinned - 400 on empty `search` and on `limit=1000`"*, which is why MTR had
+  never been located in the catalogue. `search=<term>&limit=5&page=1` answers
+  normally; the endpoint rejects an *empty* term, not the parameter. An API
+  that refuses one value is not an API with an unknown contract.
+
+- **Probed all three of Hyderabad's live hosts and left it blocked rather than
+  discarded, with the national fallback now measured shut.** `ghmc.gov.in` -
+  the body that actually issues trade licences - returns **403 in a real
+  browser as well as to curl**, an F5 WAF page carrying a support ID and
+  `F5 site: wes-sea`: a block that names itself, like Bulgaria's.
+  `data.telangana.gov.in` resolves but is unroutable for us, and `tsbpass`
+  has no A record. **`tgbpass.telangana.gov.in` answers 200 and is a false
+  friend** - TG-bPASS is *Building Permission Approval and Self-certification*,
+  construction permits, and `/Home/TradeLicense` 404s. The route that rescued
+  Sofia does not work here: `data.gov.in`'s `title=` filter is controllable
+  (`zzqqxxnonsense` returns "No Result Found", so it genuinely filters) and
+  `trade license` returns only Karnataka's *"District wise ULB wise Trade
+  License Details"*, an **aggregate**, confirming the earlier
+  288,011-resource negative from a second direction. Hyderabad stays the Hong
+  Kong shape: blocked, not negative.
+
 
 - **Discarded Sevilla on measured data after its dead portal named its own
   successor.** `datosabiertos.sevilla.org` is NXDOMAIN and `www.sevilla.org`

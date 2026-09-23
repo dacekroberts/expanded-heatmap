@@ -1,42 +1,58 @@
-"""Download Mexico City's raw inputs: three OSM queries and the DENUE export.
+"""Download Mexico City's raw inputs. Run this before the steps.
+
+    python pipeline/mexico_city/fetch_sources.py [--force]
 
 Deliberately NOT named step*.py, so pipeline/drift_check.py never re-runs it -
-a drift check must be deterministic and offline, and a step must therefore
-never fetch anything itself. San Francisco's fetch_sources.py has stated that
-as an invariant since 2026-09-21, and this city was one of three exceptions to
-it: the fetching lived in step1 and step2, cache-guarded, so a populated
-`data/mexico_city/raw/` ran offline and drift behaved - but that directory is
-gitignored, so **a fresh clone would have gone to the network from inside a
-drift check.** Conditional is not the same as deterministic.
+a drift check must be deterministic and offline, and the steps must therefore
+never fetch anything themselves.
 
-Moved out 2026-09-22 with the outputs unchanged; drift confirms it.
+WHY THIS FILE EXISTS AT ALL, GIVEN THE STEPS ALREADY WORKED
+-----------------------------------------------------------
+They worked by fetching on a cache miss, which is invisible on a machine that
+already has `data/mexico_city/raw/` and wrong everywhere else. Demonstrated
+2026-09-22: `python pipeline/drift_check.py` in a fresh worktree downloaded a
+39 MB DENUE zip and three Overpass responses for this city and its two
+siblings, then reported zero drift - while Toronto, which keeps its fetching
+here, stopped correctly with "no data/<city>/raw/ - nothing to run against".
 
-The Overpass fetching now goes through `pipeline/osm.py`, which carries a rule
-this city's own code did not: a mirror can return a PARTIAL result with HTTP
-200 and no `remark`, not merely an empty one. The empty-200 rule was learned
-here - overpass.osm.ch returned 272 bytes over an empty set and a caller
-reported it as a finding - and the partial case was measured on Barcelona.
+That difference matters beyond tidiness. **A drift check asks whether the
+COMMITTED CODE still produces the COMMITTED OUTPUT.** A step that re-downloads
+first asks whether the CURRENT UPSTREAM does - a different question, and one
+that passes or fails for reasons no commit here caused. Toronto proved the
+hazard is real the same day: re-fetching its register produced a map missing a
+storefront that is in the committed one, while `baseline.json` reported
+identical because the row counts happened to match.
 
-    python pipeline/mexico_city/fetch_sources.py            # skips what exists
-    python pipeline/mexico_city/fetch_sources.py --force    # re-download
+TWO THINGS MOVED HERE, AND BOTH KEEP THEIR OWN HARD-WON BEHAVIOUR.
+
+**Overpass is tried host by host, and an empty 200 is a FAILURE.**
+`overpass.osm.ch` once returned 272 bytes and an empty element list for the
+routes query; cached, that produced the vacuous claim that "every ref has
+exactly 2 direction relations" over an empty set. An empty payload is never
+cached and moves to the next host.
+
+**The DENUE zip is checked by MAGIC BYTES, not by the filename the server
+claims** - `add-country`'s rule, learned from a portal serving a PNG under a
+CSV's Content-Disposition.
 """
 
 import argparse
 import sys
+import time
 from pathlib import Path
 
 import requests
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from pipeline.osm import fetch as osm_fetch
-from pipeline.mexico_city.config import (
+from pipeline.mexico_city.config import (  # noqa: E402
     DENUE_URL,
     DENUE_ZIP,
     OSM_BBOX,
     OSM_BOUNDARY_JSON,
     OSM_ROUTES_JSON,
     OSM_STATIONS_JSON,
+    OVERPASS_HOSTS,
     OVERPASS_USER_AGENT,
 )
 
@@ -68,47 +84,83 @@ out geom;
 """
 
 
-def fetch_denue(force):
-    if DENUE_ZIP.exists() and not force:
-        print(f"  cached {DENUE_ZIP.name} ({DENUE_ZIP.stat().st_size:,} bytes)")
+def overpass(query, cache_path, label, force):
+    """POST to Overpass, trying each host. Cached, because a 504 from one host
+    is a fact about that host and re-running should not depend on which one
+    answered."""
+    if cache_path.exists() and not force:
+        print(f"  {label}: have {cache_path.name} "
+              f"({cache_path.stat().st_size:,} bytes) - skipping")
         return
-    print(f"  downloading {DENUE_URL}")
+    last = None
+    for host in OVERPASS_HOSTS:
+        try:
+            r = requests.post(host, data={"data": query}, timeout=300,
+                              headers={"User-Agent": OVERPASS_USER_AGENT})
+            print(f"  {label}: {host.split('/')[2]} HTTP {r.status_code} "
+                  f"{len(r.content):,} bytes")
+            if r.status_code == 200:
+                payload = r.json()
+                # A 200 WITH NO ELEMENTS IS NOT A SUCCESS, and caching it is
+                # worse than failing - see this module's docstring.
+                if not payload.get("elements"):
+                    print(f"  {label}: {host.split('/')[2]} 200 but EMPTY - "
+                          "not cached, trying next host")
+                    last = "empty result"
+                    time.sleep(2)
+                    continue
+                cache_path.parent.mkdir(parents=True, exist_ok=True)
+                cache_path.write_text(r.text, encoding="utf-8")
+                print(f"  {label}: wrote {cache_path.name} "
+                      f"({cache_path.stat().st_size:,} bytes)")
+                return
+            last = f"HTTP {r.status_code}"
+        except Exception as exc:                        # noqa: BLE001
+            print(f"  {label}: {host.split('/')[2]} {type(exc).__name__}")
+            last = f"{type(exc).__name__}"
+        time.sleep(2)
+    raise SystemExit(
+        f"Every Overpass host failed for {label} (last: {last}). This is a "
+        "fact about Overpass, not about Mexico City - retry before concluding "
+        "anything about the data."
+    )
+
+
+def download_denue(force):
+    if DENUE_ZIP.exists() and not force:
+        print(f"  denue: have {DENUE_ZIP.name} "
+              f"({DENUE_ZIP.stat().st_size:,} bytes) - skipping")
+        return
+    print(f"  denue: GET {DENUE_URL}")
     DENUE_ZIP.parent.mkdir(parents=True, exist_ok=True)
     r = requests.get(DENUE_URL, timeout=900,
                      headers={"User-Agent": OVERPASS_USER_AGENT})
     r.raise_for_status()
-    # Magic bytes, not the filename the server claims - add-country's rule,
-    # learned from Busan serving a PNG under a CSV's Content-Disposition.
+    # Magic bytes, not the filename the server claims - see the docstring.
     if not r.content.startswith(b"PK\x03\x04"):
         raise SystemExit(
             f"DENUE download is not a ZIP (first bytes {r.content[:8]!r}). "
             "Check what the server actually sent before trusting it."
         )
     DENUE_ZIP.write_bytes(r.content)
-    print(f"  wrote {DENUE_ZIP.stat().st_size:,} bytes")
+    print(f"  denue: wrote {DENUE_ZIP.stat().st_size:,} bytes")
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--force", action="store_true")
+    ap.add_argument("--force", action="store_true",
+                    help="re-download even if the file is already present")
     args = ap.parse_args()
 
-    print("=== Mexico City: fetch raw sources ===\n")
-    print("OpenStreetMap:")
-    for query, path, what in (
-            (Q_STATIONS, OSM_STATIONS_JSON, "railway nodes"),
-            (Q_ROUTES, OSM_ROUTES_JSON, "subway and light-rail routes"),
-            (Q_BOUNDARY, OSM_BOUNDARY_JSON, "the CDMX boundary")):
-        if path.exists() and not args.force:
-            print(f"  cached {path.name}")
-            continue
-        elements, host = osm_fetch(query, path, force=args.force)
-        print(f"  {path.name}: {len(elements):,} elements via {host}  ({what})")
+    print("Rail geometry (OpenStreetMap via Overpass):")
+    overpass(Q_BOUNDARY, OSM_BOUNDARY_JSON, "boundary", args.force)
+    overpass(Q_STATIONS, OSM_STATIONS_JSON, "stations", args.force)
+    overpass(Q_ROUTES, OSM_ROUTES_JSON, "routes", args.force)
 
-    print("\nINEGI DENUE:")
-    fetch_denue(args.force)
+    print("\nBusinesses (INEGI DENUE):")
+    download_denue(args.force)
 
-    print("\nDone. The steps read these and never fetch.")
+    print("\nDone. Next: python pipeline/mexico_city/step1_stations.py")
 
 
 if __name__ == "__main__":
