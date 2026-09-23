@@ -204,6 +204,54 @@ CITY_RAIL_DATASET = {
 # standing rule that LA Metro's CC0-registry/restrictive-GTFS pair exists to
 # enforce.
 SIRENE_LICENCE = "Licence Ouverte 2.0"
-GTFS_LICENCE_PER_OPERATOR = True  # unread as of 2026-09-22
+
+# READ 2026-09-22, all six. They are NOT the same, and two of them are the two
+# cities this project wants first. Full write-up, including the required
+# notices and the acts no notice discharges, in
+# `docs/licenses/france-required-notices.md`.
+#
+# `mobility-licence` covers exactly 2 of 799 datasets on the entire National
+# Access Point - and they are Paris and Lyon. It is ODbL-DERIVED but NOT
+# ODbL-COMPATIBLE: Art. 5.5(a)(iii) allows "une licence compatible" and no
+# compatible list or proxy was ever published, so share-alike cannot be
+# discharged by relicensing under ODbL. There is no government-hosted text;
+# the authoritative document is a 14-page PDF, "Version au 03.02.2021".
+GTFS_LICENCE = {
+    "paris": "mobility-licence",      # PERMITTED WITH CONDITIONS
+    "lyon": "mobility-licence",       # + account, trademark and indemnity gates
+    "marseille": "lov2",
+    "lille": "lov2",
+    "toulouse": "odc-odbl",           # share-alike
+    "rennes": "odc-odbl",             # share-alike
+}
+
+# Art. 5.4 notice text, and Art. 5.4(a) requires the database name to hyperlink
+# to the dataset URI and the licence name to the licence text.
+MOBILITY_LICENCE_NOTICE = (
+    "Contient des informations de {dataset}, présentement mises à "
+    "disposition aux conditions de la « Licence Mobilités »"
+)
+
+# TWO OBLIGATION SHAPES THIS PROJECT HAS NEVER CARRIED, both from Art. 5.7 and
+# the MMTIS reglement: the DATE the reused data was last updated, and its
+# UPDATE INTERVAL. Art. 5.7 forbids use that misleads "quant au contenu de
+# l'information et a sa date de mise a jour" - and a pre-rendered static map
+# built from a frozen snapshot is exactly what that describes unless the
+# snapshot date is shown. Substantive, not a courtesy.
+REQUIRES_SNAPSHOT_DATE = True
+REQUIRES_UPDATE_INTERVAL = True
+
+# Lyon cannot be fetched without an account on data.grandlyon.com, which this
+# project does not create - the owner must register. Its NAP copy is NOT a
+# fallback: 0% availability, last modified 2022-04-14, against a source portal
+# current to 2026-09-22. Gate items 17-19 in `docs/gated_access.md`.
+LYON_REQUIRES_ACCOUNT = True
+
+# UNRESOLVED: the NAP API lists three GTFS resources for IDFM - its own via
+# eu.ftp.opendatasoft.com, an ITO World mirror, and a Google-published "GTFS
+# modifie" from an Apigee URL - while the licence review reports no OFFICIAL
+# GTFS at all, only NeTEx and SIRI Lite. Settle which before fetching; building
+# Paris from a third party's modified copy is not acceptable.
+PARIS_GTFS_PROVENANCE_RESOLVED = False
 
 SOURCE_ENCODING = "utf-8"
