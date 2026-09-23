@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**225 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**226 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [CORRECTION: a tram-only city is NOT unbuildable, and seven built cities draw trams](#2026-09-23---correction-a-tram-only-city-is-not-unbuildable-and-seven-built-cities-draw-trams)
 - [Seoul's brief, and two measurements that failed rather than answered](#2026-09-23---seouls-brief-and-two-measurements-that-failed-rather-than-answered)
 - [Goteborg's licence is CC0, and it is on the DISTRIBUTION](#2026-09-23---goteborgs-licence-is-cc0-and-it-is-on-the-distribution)
 - [Goteborg unblocked, and it may not be a one-bucket city](#2026-09-23---goteborg-unblocked-and-it-may-not-be-a-one-bucket-city)
@@ -264,6 +265,57 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - CORRECTION: a tram-only city is NOT unbuildable, and seven built cities draw trams
+
+- **Supersedes the claim made earlier today that Zurich has "no drawable
+  network at all" under a standing tram exclusion.** That was asserted from
+  PROSE - Paris's brief line *"trams are excluded in Barcelona, Milan and
+  Toronto"* - and **the pipeline code says something different.** The owner
+  challenged it; the code settled it.
+
+- **`route_type 0` (tram / light rail) IS DRAWN in at least SEVEN built
+  cities**: **San Diego** (MTS Trolley), **San Francisco** (Muni Metro),
+  **Los Angeles**, **Edmonton** (LRT), **Calgary** (CTrain), **Miami**
+  (Metromover) and **Dublin** (Luas - whose config warns against shipping *"a
+  two-tram-line map"*, which presumes the trams are drawn). **A tram is not
+  excluded for being a tram.**
+
+- **Every exclusion is a city that ALSO has a metro**, and Milan's config
+  states the real test outright: *"Milan's trams are a **dense street-running
+  network whose stops sit one or two blocks apart**: San Francisco's Muni
+  Metro shape, which needs `docs/sub_transit_line_filters.md` rather than a
+  line list. They would also need **17 invented colours**, because
+  `route_color` is populated ONLY for the metro. **Recorded as a costed
+  extension, not a discard** - the geometry is in the GTFS `shapes.txt` and
+  the decision is reversible."* Barcelona's is a **network-identity** test -
+  `Trambaix` and `Trambesos`, *"neither a metro"* - used to SELECT the metro,
+  not to ban trams.
+
+- **So the rule is: is the tram the RAPID-TRANSIT SYSTEM, or a street-running
+  overlay on top of one?** Overlay -> excluded. **The system itself -> drawn**,
+  seven times. Zurich and Goteborg are the second case: they have no metro for
+  a tram to overlay.
+
+- **And Zurich specifically defeats Milan's other objection: ALL 42 of its
+  tram relations carry a `colour`**, so there is no invented palette. Its
+  network is 42 relations across 18 refs, all named, all coloured, plus the
+  S18 Forchbahn.
+
+- **The live question is the Muni Metro SPACING question, which is measurable
+  rather than a blocker**: are Zurich's and Goteborg's tram stops one or two
+  blocks apart, needing `docs/sub_transit_line_filters.md`? **That is a cost,
+  not a disqualification** - and `CLAUDE.md` already frames it that way,
+  telling a reader to check the rail system's SHAPE rather than assume.
+
+- **The shape of my error is worth more than the error.** I generalised *"X is
+  excluded in A, B and C"* into *"X is excluded"*, when all three of A, B and
+  C shared a property the new cities do not have. **A rule inferred from three
+  instances that share an unstated condition is not a rule** - and the
+  unstated condition here was "this city already has a metro". **The owner's
+  question - does tram-only mean no value, particularly where there is no
+  alternative - was the right one, and the answer was in the code the whole
+  time.**
 
 ### 2026-09-23 - Seoul's brief, and two measurements that failed rather than answered
 
