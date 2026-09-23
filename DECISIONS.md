@@ -1131,6 +1131,45 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Renumbered the live bands to a contiguous A-B-C-D and retired the closed
+  ones' letters.** Four bands closed on 2026-09-22, leaving the live set at A,
+  C, E and F - gaps that read as missing rather than as resolved. The closed
+  bands are now named by their **condition** instead of a letter, because
+  reusing one would have made *Band B* mean both the closed band that held Tel
+  Aviv and the new one that holds Hong Kong. **A closed band's letter was
+  never the interesting part of it; the condition that stopped being true is.**
+  Mapping: A stays A, **C becomes B**, **E becomes C**, **F becomes D**.
+
+- **`DECISIONS.md` was deliberately NOT edited for the renumber.** It is
+  append-only and its 166 entries name bands by the letter current when each
+  was written, which remains true of the moment each describes. A mapping
+  table in `docs/city_master_list.md` is how a reader resolves them. **Editing
+  the log to match a new numbering would have rewritten history to fit a
+  cosmetic change.**
+
+- **Four sentences went stale the instant the letters moved, and that is the
+  argument for the rule this established: a LETTER is for a heading, a
+  CONDITION is for a sentence.** Stockholm was described as *promoted to Band
+  B* when it is now in D; Zurich as *moved here from Band D* while sitting in
+  D; Tel Aviv as promoted *to Band B*, a band now closed; and Sevilla's
+  comparison called Stockholm *only a Band B city*. All four were rewritten to
+  name conditions - *the coordinates band*, *the one-bucket band* - which
+  survives any future renumber. Letters now appear only in headings.
+
+- **Added France's other five cities to Band A, which the band view had
+  omitted for as long as both views existed.** The Tier view has said *France
+  - 6 cities* since the country resolved, while the bands showed only Paris,
+  **so this list understated France by five cities** - a drift between two
+  views of one fact, and the same class of defect as Rio being banded by how
+  it was discovered. Lyon, Marseille, Toulouse, Lille and Rennes share one
+  national register, one licence and one filter with Paris, and their
+  geolocation was **measured per commune rather than inherited**: Lyon
+  99.97%, Marseille 99.91%, Rennes 99.90%, Toulouse 99.85%, Lille 99.71%.
+  Storefront layers: Marseille 8,065, Lyon 7,354, Toulouse 4,833, Lille
+  3,272, Rennes 2,089. **The OSM composition validation stays Paris-only** and
+  is owed on the first non-Paris build. Band A 4 to 9, Candidates 28 to 33.
+
+
 - **Discarded Hyderabad and Kochi as MEASURED NEGATIVES after walking India's
   entire national catalogue - 288,011 titles, 58 calls, zero failed pages.**
   The decision rule was agreed before the sweep ran, which is what makes the
