@@ -135,9 +135,39 @@ CRS_PROJECTED = "EPSG:2154"
 # The same edges are used for every city (a category-definition choice, not
 # a city-specific measurement).
 METERS_PER_MILE = 1609.344
-RING_EDGES_MILES = [0.0, 0.1, 0.2, 0.3, 0.6]
+# PARIS IS THE SECOND CITY OFF THE SHARED EDGES, AND IT TAKES NEW YORK'S SET
+# RATHER THAN A THIRD ONE OF ITS OWN.
+#
+# 19 of the 20 built cities use [0, 0.1, 0.2, 0.3, 0.6] miles. New York does
+# not, on a recorded ground: "Manhattan station spacing of roughly 0.3 mi, so a
+# 0.6 mi outer ring reaches past the next two stations in every direction: the
+# rings merge into one solid mass". `add-city` Step 3 says to reuse the shared
+# edges "unless station spacing is meaningfully different".
+#
+# **Paris is denser than the city that set that precedent.** Measured
+# 2026-09-23 from the built station set, nearest-neighbour distance in
+# EPSG:2154: median **399 m (0.248 mi)** against Manhattan's ~0.30 mi, p25 317
+# m, p90 821 m. At a 0.6 mi (966 m) outer ring, more than 90% of stations have
+# a neighbour inside their own outer band and the rings merge across the whole
+# commune.
+#
+# Taking NEW YORK'S EXACT SET makes "dense city" a category with two members
+# instead of three bespoke configurations, and a reader comparing Paris with
+# New York gets identical bands. A Paris-specific set scaled to 399 m would
+# encode a distinction too small to carry meaning - the two cities are in the
+# same regime.
+#
+# ⚠ THIS IMPROVES THE OVERLAP, IT DOES NOT REMOVE IT. The halved outer ring is
+# 0.3 mi = 483 m against Paris's 399 m median, so neighbouring rings still
+# touch. What changes is the failure mode: from one solid mass over the whole
+# commune to adjacent rings meeting at their edges. Recorded rather than
+# glossed, because the rings show WALKING DISTANCE and not catchment, and
+# `map_common` already assigns each business to its NEAREST station so nothing
+# is double-counted either way. It would matter directly if ring statistics
+# were ever added.
+RING_EDGES_MILES = [0.0, 0.05, 0.1, 0.2, 0.3]
 RING_EDGES_METERS = [m * METERS_PER_MILE for m in RING_EDGES_MILES]
-RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
+RING_LABELS = ["0-0.05 mi", "0.05-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi"]
 
 # --- Station scope ----------------------------------------------------------
 
@@ -190,8 +220,15 @@ LINE_COLOURS = {
     "5": "#FF5A00", "6": "#82DC73", "7": "#FF82B4", "8": "#D282BE",
     "9": "#D2D200", "10": "#DC9600", "11": "#6E491E", "12": "#00643C",
     "13": "#82C8E6", "14": "#640082",
+    # The two overrides must clear TWO things, not one: the parent line they
+    # collided with, and the three category pin colours. The first attempt
+    # cleared only the first - #2E8B57 broke the tie with Ligne 6 and landed
+    # 15.6 CIE76 from the Personal services pin (#1baf7a), the worst separation
+    # on the whole map, which the renderer printed and which was my choice
+    # rather than RATP's. Teal moves it out of the green family entirely.
     "3B": "#3D7A99",   # was 82C8E6, identical to Ligne 13
-    "7B": "#2E8B57",   # was 82DC73, identical to Ligne 6
+    "7B": "#00838F",   # was 82DC73, identical to Ligne 6; then 2E8B57, too
+                       # close to the Personal services pin
 }
 
 # --- Business filtering ------------------------------------------------
