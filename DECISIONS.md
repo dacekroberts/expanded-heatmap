@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**209 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**210 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Band B measured for briefs, and two of its six are not Band B cities](#2026-09-23---band-b-measured-for-briefs-and-two-of-its-six-are-not-band-b-cities)
 - [Lyon's discard row spent a day in the wrong table](#2026-09-23---lyons-discard-row-spent-a-day-in-the-wrong-table)
 - [Paris's naming share was France's number wearing Paris's label](#2026-09-23---pariss-naming-share-was-frances-number-wearing-pariss-label)
 - [Lyon discarded on four blockers, with a reinstatement template kept](#2026-09-23---lyon-discarded-on-four-blockers-with-a-reinstatement-template-kept)
@@ -248,6 +249,81 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Band B measured for briefs, and two of its six are not Band B cities
+
+- **Hong Kong's geocode is a TWO-STAGE lookup and it resolves 100.0%.** The
+  rate had been recorded as 90.8% on 120 rows; re-measured on **200 random
+  register rows** it is **95.5% on the exact `ADR`**, and **100.0% (200/200,
+  zero unresolved, zero transport errors)** once the failures are retried with
+  their floor prefix stripped. **Neither earlier figure was wrong and neither
+  was the build number**, because the misses are **a format, not a ceiling**:
+  every unresolved row led with a floor, unit or portion clause - `5/F
+  (PORTION), 6/F (PORTION) & 7/F (PORTION) OF LOWER BUILDING`, `30/F & 31/F,
+  NO. 28 STANLEY STREET` - in front of a building ALS can find perfectly well.
+
+- **Build it as two stages from the start, because the 4.5% is not a random
+  4.5%.** Floor-prefixed addresses are disproportionately **upper-floor and
+  multi-unit premises**, which in Hong Kong is precisely the vertical retail
+  this map exists to show. A single-stage pipeline would have dropped them
+  silently and the row count would have looked fine. **This is Oslo's
+  two-stage shape reached independently** - exact string first, then a
+  NARROWER retry, never a fuzzy one - and it is now the second city where
+  that is the rule. Pinned with its own `brief_check` claim; Hong Kong is
+  **8/8**.
+
+- **Bucharest's rail is now counted rather than claimed, and one figure was
+  short.** In relation 377733: **13 subway route relations, 13 named, 12
+  coloured**, refs M1-M5 - and **the thirteenth is `Extensie M4`, which
+  carries no `ref` and no `colour`**, so a build keying on `ref` drops it and
+  a build keying on relation count draws a line it cannot label. **64 subway
+  station nodes**, against the *"~63 claimed, unverified"* the master list
+  carried. Address supply re-confirmed at **146,228** (132,478 nodes + 13,750
+  ways), within 112 of the earlier 146,116.
+
+- **BUT Bucharest is a ONE-BUCKET city, and this project's own record already
+  said so.** The 2026-09-22 entry that finished its screening states plainly
+  that **Romania's national catalogue holds no second bucket** - 4,693
+  datasets enumerated from the Archive, the only commercial register being
+  ONRC's **company** register. DSVSA is the sanitary-veterinary authority, so
+  its 31,299 rows are **food only**. **Band B describes a measured coordinate
+  route; Band D describes the one-bucket ceiling** - and where both are true
+  the ceiling is what is actually stopping the city. Bucharest has been
+  sitting in the wrong band since its screening closed.
+
+- **Copenhagen is also one bucket on anything keyless, and this was settled by
+  ENUMERATION rather than search.** All **483** layers its WFS advertises were
+  listed and read, not keyword-filtered - the Stockholm rule, whose own food
+  register matches neither `restaurang` nor `livsmedel`. The only
+  premises-level commercial layer is **`k101:bevillinger`: 2,390 rows** with
+  `navn`, `vejnavn`/`husnr`/`postnr`, an activity field (`koncept`) and
+  **coordinates already in EPSG:25832 metres**. `geoenviron_virksomheder`
+  (1,042) is **industrial** - machine workshops - not storefronts;
+  `servicemarkering` is street-cleaning polygons; the two `detailhandel`
+  layers are zoning. opendata.dk's 638 packages were enumerated too, control
+  clean: the only `produktionsenheder` dataset is **Aarhus Kommune's**,
+  **unmaintained since 2024-08-01**, and its own note redirects to the gated
+  host.
+
+- **Copenhagen's gate is an ACCOUNT, and the distinction was worth pinning
+  down.** `distribution.virk.dk` returns **401 from nginx** - HTTP Basic auth,
+  a credential - while `datacvr.virk.dk` returns a **Cloudflare interactive
+  challenge**, which is bot detection and which this project does not defeat.
+  **Two different obstacles that both read as "blocked"**: one is answerable by
+  obtaining a credential, the other is not answerable by this project at all.
+  findsmiley, the obvious national alternative, publishes **aggregate
+  inspection counts only** - the aggregate trap - and its old open XML is 404.
+
+- **Singapore's portal search parameter is INERT, and the control caught it
+  before anything was recorded.** `api-production.data.gov.sg`'s `query`
+  returns **the same 10 results for `tobacco retail` as for
+  `zzqqxxnonsense`**. This is the third occurrence of the family after
+  `data.seoul.go.kr` and `api.data.gov.in`'s `q`, and the first where the
+  control was run *first* rather than after a false finding had been written
+  down. Enumeration is therefore the only usable route, and **two successive
+  runs were truncated by my own page caps** (600, then exactly 4,000 = the cap
+  x 10) - **a cap reached is not a catalogue exhausted**, and both stopped
+  while still returning new rows.
 
 ### 2026-09-23 - Lyon's discard row spent a day in the wrong table
 
