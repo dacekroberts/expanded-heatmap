@@ -993,6 +993,114 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-22 - Sofia settled by enumerating Bulgaria's catalogue from outside the block
 
+- **Confirmed Stockholm and Zurich are genuinely one-bucket by ENUMERATING
+  both catalogues, after the original negatives rested on keyword search.**
+  Stockholm: **309 dcat:Dataset records** pulled from the Entryscape store via
+  a wildcard on the `https://resources.stockholm.se/data/` resource prefix -
+  the publisher filter that `context:` and `publisher:` had both failed to be.
+  Seven carry any commerce term: the food register, three social-care services
+  (`Daglig verksamhet`), a utility service area, and **`Salutorg` /
+  `Torghandelsplats`, which their own descriptions call *"i form av ytor"* -
+  polygons of where trading is permitted, not registers of traders.** Zurich:
+  all **1,128 package names** matched, since `package_search` had stopped at
+  938 of 1,128 and a negative over 83% of a catalogue is not a negative. Its
+  only real commercial datasets are `Gastwirtschaftsbetriebe` (licensed by the
+  city police's *Bewilligung Gastro* unit, **CC0**), its historic copy, a
+  tourism board's gastronomy list, aggregate federal hotel statistics, and
+  `geo_bauernhofladen` - which is **not shops** but *"Betriebszentren von
+  Haupterwerbslandwirten"*, farmers' operating centres. Touched
+  `docs/city_master_list.md`.
+
+- **The keyword method was the thing worth re-testing, and Stockholm is its
+  own counter-example.** The recorded negative was *"`restaurang` and
+  `foretag` both return 0 inside its own catalogue"*. Stockholm's food
+  register is called **`Tillsynsverksamheter`** - "supervision activities" -
+  and contains neither word, so the search that established the negative could
+  not have found the one dataset that disproves the strongest version of it.
+  A negative from search is a statement about the search.
+
+- **Created Band E, "one bucket, but developable", rather than discarding two
+  complete screenings.** The owner's bar is that two buckets is acceptable and
+  one is not, which disposes of both cities today - but neither is unresolved
+  or unreachable, and nothing further can be probed: **Sweden has no general
+  business licence at all** and **Switzerland's STATENT is aggregate**, so both
+  countries are structurally one-bucket. What holds them is a **product
+  judgement, not a data defect**, and that can change. Rejected discarding
+  them, which would have recorded a preference by destroying evidence. The old
+  Band E (access blocked) became **Band F**; counts are A3 B1 C19 D3 E2 F3 =
+  **31**, verified. The two states are opposites worth keeping apart: Band F
+  is *the register exists and we cannot reach it*; Band E is *we reached
+  everything and only one register exists*.
+
+- **Corrected a placement error of my own: Zurich's write-up had been inserted
+  into the "CLOSED - the former Tier 5" section, not Band B.** The insert
+  anchored on the phrase *"A second Swedish city worth noting"*, which occurs
+  exactly once in the file and turned out to sit in the tier evidence trail
+  rather than in the band. The assertion that the anchor was unique passed and
+  was the wrong question - **uniqueness is not location.** For an hour the
+  summary table said Band B while the city's evidence sat under a heading
+  reading CLOSED. Caught while restructuring, by checking the nearest
+  preceding heading rather than trusting the earlier "is Zurich in Band B"
+  substring test, which had searched a slice that no longer matched the file.
+
+
+- **Audited every candidate row against its own band's definition, and five
+  named a blocker their band did not.** The test came from the Rio correction:
+  a band caption states what is stopping its cities, so a row whose text names
+  something else is misfiled. Found: **Milan** in "screening COMPLETE" while
+  its row said *"Step 0 schemas"*; **Tel Aviv** and **Stockholm** both in "one
+  narrow question each" while both rows said *"two questions"* - Stockholm's
+  saying *"two rather than one"* outright; **Bucharest** in a band captioned
+  "no further probing changes these" while its row said *"two cheap checks
+  still outstanding and are screening, not build work"*; and **Zurich** in the
+  probe band after its second bucket had been measured absent. Touched
+  `docs/city_master_list.md`.
+
+- **Milan was checked rather than re-banded, and stayed put.** Its row read
+  "Step 0 schemas for the two newly found layers", which reads as screening
+  inside a band that claims screening is complete. The country row settles it:
+  *"Step 0 schemas for the two newly found Milan layers. **Nothing to
+  discover**"* - the work is capturing column schemas for layers already
+  confirmed, i.e. build prep. Only the wording was wrong, and it was the
+  wording that changed. **An audit that finds a mismatch has still not
+  established which side is wrong.**
+
+- **Re-banded the candidates so every caption names the KIND OF WORK that
+  unblocks its cities, and dissolved Band D.** Its two live sub-tiers were
+  about different problems and were siblings only because both arrived through
+  the same screen - the same provenance-not-blocker error that misfiled Rio,
+  one level up. Now **A** build now (3), **B** a document to read or a
+  decision to make (3), **C** a geocoding leg (19), **D** one probe each (3),
+  **E** access blocked (3); 31, and the counts were verified to sum before
+  publishing. Rejected keeping D with sub-tiers, because a sub-tier is where a
+  mis-banded city hides.
+
+- **Moved Zurich to Band B, where it turns out to share Stockholm's exact
+  decision.** Its second bucket is measured absent - control passes, and
+  `detailhandel` returns **one** result which is a traffic count, while
+  `firmen` returns 16 and every one is a `Firmenbefragung`, a company survey.
+  Only `Gastwirtschaftsbetriebe` is a register. So Zurich is a one-bucket food
+  city, exactly Stockholm's shape, and the two now carry **one decision
+  between them**: whether a food-density page belongs in a project whose other
+  cities carry three buckets. That consolidation was invisible while the two
+  sat in different bands for different stated reasons.
+
+- **Band B's caption is "a document to READ or a decision to MAKE" rather than
+  "one narrow question", because Tel Aviv legitimately carries one of each.**
+  The alternative was moving a city that is the strongest unbuilt result
+  outside Band A, or widening the caption to "one or two questions", which
+  counts items instead of naming a blocker and would not have caught anything.
+  The band is now defined by **what kind of work closes it** - desk work, no
+  probe - which is true of all three and checkable.
+
+- **Recorded that a band caption names a blocker, never a date or a status.**
+  `D-a` was briefly captioned *"all four PROBED 2026-09-22"*, written during
+  the Tier 4 write-up earlier the same day. It reads as progress and is
+  unauditable: Rio's misfiling was caught **only** because the neighbouring
+  sub-tier still declared what it was for. A status caption silently disables
+  the check the band exists to support.
+
+
 - **Moved Rio de Janeiro from Band D-b to Band C, a filing correction rather
   than a new measurement.** Sub-tier D-b means *"rail answered, the business
   leg is the blocker"*, and Rio's own row read *"CNPJ, no coordinates ->

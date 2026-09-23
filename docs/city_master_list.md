@@ -59,13 +59,32 @@ Three then measured negative and **one, Tel Aviv, is now the strongest
 unbuilt candidate outside Band A.** *Unreachable* turned out to mean *not yet
 asked properly* in every single case.
 
-| Band | What is stopping it | Cities | Change |
+**Re-banded 2026-09-22 so that every caption names the kind of work that
+unblocks its cities**, after an audit found five rows whose text named a
+blocker their band did not. Band D dissolved: its two live sub-tiers were
+about different things and were siblings only because both arrived through
+the same screen.
+
+**Band E was added the same day** for a state the scheme could not express:
+a city whose screening is **complete and successful** but which yields only
+one bucket. Those two were sitting in "a decision to make" beside a city
+waiting on a licence read, which conflated *we have not looked yet* with
+*we looked at everything and this is what is there*.
+
+| Band | The work that unblocks it | Cities | Change |
 |---|---|---|---|
-| **A** | Nothing. Screening complete | **3** | ✅ **−4 built** — Madrid and Barcelona joined Mexico's two; Paris out then back, **measured both ways** |
-| **B** | One narrow question each | **2** | ▲ **+Tel Aviv**, the strongest unbuilt result outside Band A |
-| **C** | A geocoding leg — build work, not screening | **19** | ▲ **+Bucharest**, ▲ **+Rio** (re-filed — see below) |
-| **D** | Four sub-tiers, see below | **7** | ▼ −7 — **Sofia, Sevilla and Tallinn measured out**; Tel Aviv promoted; **Rio re-filed to C**; D-c and D-d both closed |
-| *Discarded* | Measured negative, evidence named | *27* | ▼ **+13** |
+| 🟢 **A** | **Nothing** — build now | **3** | ✅ **−4 built** — Madrid and Barcelona joined Mexico's two; Paris out then back, **measured both ways** |
+| 🔵 **B** | **A document to read, or a decision to make.** Never a probe | **1** | ▲ **+Tel Aviv**; ▼ −Stockholm, −Zurich to the new E |
+| 🟡 **C** | **A geocoding leg** — build work, known cost | **19** | ▲ **+Bucharest**, ▲ **+Rio** (re-filed — it was banded by how it was *discovered*) |
+| 🟠 **D** | **One probe each**, none yet run to a conclusion | **3** | was `D-a`; ▼ −Zurich |
+| 🟣 **E** | **One bucket, but developable** — screening complete, product judgement outstanding | **2** | ✨ **NEW** — Stockholm and Zurich, both confirmed one-bucket by enumeration |
+| 🔴 **F** | **Access blocked** — the register exists, we cannot reach it | **3** | was `D-b`, then E; renumbered |
+| *Discarded* | Measured negative, evidence named | *27* | unchanged — **neither one-bucket city was discarded** |
+
+**A caption names a blocker, never a date or a status.** `D-a` was briefly
+captioned *"all four PROBED 2026-09-22"*, which reads as progress and is
+unauditable — Rio's misfiling was caught only because the sub-tier beside it
+still declared what it was *for*.
 
 ✅ **Guadalajara and Mexico City left Band A by being built**, not by being
 ruled out. Their rows are kept below, marked, because a built city's Band A
@@ -83,7 +102,10 @@ results in the sweep.
 
 ---
 
-## Band A — screening COMPLETE (3 remaining + 4 ✅ BUILT)
+## 🟢 Band A — nothing left to discover: build now (3 remaining + 4 ✅ BUILT)
+
+**Every question these cities carry is answerable inside the build**, not
+before it. Nothing here needs a probe, a document or a decision first.
 
 Ordered by how little stands in the way. **Built cities keep their row**,
 struck through and marked ✅, so the band still shows what screening promised
@@ -94,7 +116,7 @@ and whether it held.
 | ✅ | ~~**Guadalajara**~~ 🇲🇽 | DENUE, SCIAN = NAICS, INEGI licence cleared | **BUILT 2026-09-22** — `pages/16_Guadalajara_Heatmap.py`, region *Mexico*. Screening said "nothing outstanding" and that held |
 | ✅ | ~~**Madrid**~~ 🇪🇸 | **53,355 clean storefront rows** — retail 36,224 · food 18,194 · personal 9,974 (from 225,660 join rows → 159,787 open → filtered). Three-level taxonomy on `division`, EPSG:25830, CC BY 4.0 | **BUILT 2026-09-22** — `pages/17_Madrid_Heatmap.py`, region *Spain*. Rail from **CRTM's feature layers**: 13 lines, 293 station-line records, 49 stations excluded, 0 filter disagreements. Screening said the rail leg was the open question and CRTM answered it |
 | 2 | **Seoul** 🇰🇷 | 197,276 active premises over 8 datasets, EPSG:5174, status field, KOGL Type 1 | Build work — partial geocoding for 일반음식점 (90.7%), Korean-aware `check_personal_exposure.py` |
-| 3 | **Milan** 🇮🇹 | 28,131 premises 99.1% coords, `insegna`, `codice_ateco`, CC-BY. All three buckets confirmed | Step 0 schemas for the two newly found layers |
+| 3 | **Milan** 🇮🇹 | 28,131 premises 99.1% coords, `insegna`, `codice_ateco`, CC-BY. All three buckets confirmed | **Capture the column schemas** of two already-confirmed layers — build prep, not screening. The country row is explicit: *"nothing to discover"* |
 | ✅ | ~~**Mexico City**~~ 🇲🇽 | Same DENUE. **Rail from OSM** — 195/195 stops exact, 6,468 geometry points | **BUILT 2026-09-22** — `pages/15_Mexico_City_Heatmap.py`. The ODbL share-alike decision was taken during the build; see `DECISIONS.md` |
 | 4 | **Paris** 🇫🇷 ▲ | SIRENE, établissement-level, **Licence Ouverte 2.0**, and **99.96% already geolocated** — 148,576 of 148,633. Storefront filter **validated against OpenStreetMap**: 50,156 rows vs OSM's 54,198, and on one class 10,595 vs 10,642 | **The `check_personal_exposure.py` run is load-bearing here**, not a formality — the filter removes home registrations by proxy, not by proof |
 | ✅ | ~~**Barcelona**~~ 🇪🇸 | **58,908 active premises** (2022 census — the 2024 one is geographically incomplete), 0.00% bad coordinates, CC-BY-4.0. Build brief, 9/9 | **BUILT 2026-09-22** — `pages/18_Barcelona_Heatmap.py`. All four owner decisions were settled before the build: census year **2022**, drawn scope **16 lines** (14 metro refs + funiculars FM and FV, decided on the operators' own `network` tag), mall and market interiors **kept**, and the brief's OSM breakdown corrected to tram 20 / funicular 6. ⚠️ **The duty to notify the Council is still OUTSTANDING** — see `docs/gated_access.md` item 2 |
@@ -125,7 +147,16 @@ So the next *unstarted* city is the question.
 and only owner decisions left. After that the screen has no city whose
 "what remains" column is empty.
 
-## Band B — one narrow question each (2 cities)
+## 🔵 Band B — one call away: a document to READ or a decision to MAKE (1 city)
+
+**Nothing here needs another probe.** The city is held by something
+answerable at a desk — a licence page nobody has opened, and a judgment only
+the owner can make. That is why the caption is not "one question": Tel Aviv
+carries one of each, and both are still desk work.
+
+**Stockholm and Zurich left this band on 2026-09-22** for the new Band E,
+once enumeration confirmed both are one-bucket. What holds them is not a
+question about their data — it is a judgement about the product.
 
 **▲▲ Tel Aviv** 🇮🇱 — **promoted from Band D-b on 2026-09-22, and it is the
 strongest unbuilt result outside Band A.** It had been carried as
@@ -188,25 +219,16 @@ had a register, which raises the prior sharply."* **The prior was wrong.**
 Madrid and Barcelona are the exceptions in Spain, not the rule — see
 "Spain is a two-city country" below.
 
-**▲ Stockholm** 🇸🇪 — **upgraded from D-c on 2026-09-22.** Screening is
-DONE: a public ArcGIS FeatureServer carrying **8,146 distinct food premises**
-with WGS84 points, 100% trade names and 96.9% addresses, updated daily. It
-carries **two questions rather than one, and both are owner decisions, not
-probes**:
+## 🟡 Band C — a geocoding leg, and that is the dominant cost (19 cities)
 
-1. **Scope.** It is **one bucket** — food. Stockholms stad has 291 datasets
-   and exactly one commercial register; `restaurang` and `företag` both
-   return **0** inside its own catalogue, and Sweden has no general business
-   licence. A Stockholm page would be a food-density map.
-2. **Licence.** `dataportal.se` says `Åtkomsträttigheter: Begränsad`
-   (restricted); the ArcGIS item says `access: public` and serves without
-   credentials; `licenseInfo` is empty. **Ambiguous in a way that matters** —
-   `read-licence` step 8 — so it needs the publisher asked. That it fetches is
-   not a finding that it is licensed.
+Build work with a known cost: every one of these has a business leg that is
+already established and coordinates that are not.
 
-## Band C — viable, each needs a GEOCODING LEG (19 cities)
-
-Build work with a known cost. No further probing changes these.
+**The earlier caption said "no further probing changes these", and Bucharest's
+own row contradicted it** — that city still owes a rail count and a licence
+read. The claim was true of the other eighteen and has been narrowed rather
+than deleted, because a band caption that is *nearly* true is the kind that
+survives unexamined.
 
 | Cities | Country | Business leg | Geocoding |
 |---|---|---|---|
@@ -231,21 +253,115 @@ screen — against the worst geocoding problem and a two-bucket ceiling.
 **Still the biggest open decision in this list**, and a judgment call rather
 than a probe.
 
-## Band D — 7 cities, and three of its four sub-tiers are now closed
+## 🟠 Band D — one probe each, and none has been run to a conclusion (3 cities)
 
-### D-a — all four PROBED 2026-09-22 (4)
+**Every row was re-measured on 2026-09-22** and each now has a named next
+query rather than a vague one; the country-level view of the same three is
+under Tier 4. **Three of the four probed were chasing hosts that had moved.**
 
-Every row below was re-measured on 2026-09-22; the country-level view of the
-same four is under Tier 4. **Three were chasing hosts that had moved.**
+⚠️ **This band was `D-a`, captioned "all four PROBED 2026-09-22" — a STATUS,
+not a condition.** That was written during the Tier 4 write-up and it broke
+the one property that makes a band auditable: Rio's misfiling was caught only
+because the neighbouring sub-tier still declared what it was *for*. A band
+caption names a blocker, never a date.
 
-| City | State after the probe |
+**Zurich left this band** for Band B: its second bucket is measured absent, so
+it no longer holds a question, only a scope decision.
+
+| City | The one probe that decides it |
 |---|---|
 | **Prague** 🇨🇿 ▲ | **Still the best lead here, and its hosts had MOVED.** `rzp.cz` answers 000; **`www.rzp.cz` redirects to `rzp.gov.cz`**, which is live, and `opendata.praha.eu` redirects to **`lkod.cz/catalog/praha`**. The shape is still right — the *živnostenský rejstřík* is a **trade-licence** register, issued per premises, not ARES the company register. **`data.gov.cz/sparql` answers SPARQL**, so the Bulgarian enumeration technique applies. Next: enumerate for *provozovny* |
 | **Dublin** 🇮🇪 ⚠️ | **`valoff.ie` is not a host that is down — it is RETIRED**, and was retried twice as an outage. `data.gov.ie` catalogues a **Valuation Office API** at **CC BY 4.0**, whose one resource is `https://tailte.ie/home/api/`: **Tailte Éireann absorbed the Valuation Office**, and `tailte.ie` answers 200. The deciding question is unchanged — does the Irish rateable register carry a **use category**, where the UK's NNDR did not? |
-| **Zurich** 🇨🇭 ✗ | **The second bucket is now MEASURED ABSENT, not merely "not found".** Control passes (`zzqqxxnonsense` → 0). `detailhandel` returns **1** result and it is a traffic count; `verkauf` 12 (tram ticket offices, apartment prices); `laden` 31 (a farm shop, population surveys); `gewerbe` 28 (zoning land, 3D roof models); `firmen` 16, **every one a `Firmenbefragung`** — a company *survey*, 2005–2025. Only `Gastwirtschaftsbetriebe` is a register. **Zurich is a one-bucket food city — the Stockholm shape**, and now carries Stockholm's scope question rather than a data one |
 | **Singapore** 🇸🇬 ⚠️ | **Not a loose search — an INERT one.** `zzqqxxnonsense` returns the **identical ten datasets** as `licence`, `food establishment` and `business`: the `query` parameter is ignored entirely, and only the nonsense control separates that from looseness. The catalogue is **4,628 datasets over 463 pages** and pages correctly, so the route is **enumeration, not search**. The registered-office suspicion is still untested — nothing has been learned about the data yet |
 
-### D-b — rail ANSWERED, business leg is the blocker (3)
+## 🟣 Band E — one bucket, but developable (2 cities)
+
+**Screening is COMPLETE for both, and both passed.** Each has a real
+premises-level register with coordinates, current data and a usable licence.
+What neither has is a **second bucket** — and the owner's bar is that two is
+acceptable and one is not.
+
+**This is not "we could not find a second register".** Both negatives were
+re-established on 2026-09-22 by **enumerating the whole catalogue** rather
+than searching it, because the original negatives rested on keyword searches
+and that is the method that has failed this project most often — Stockholm's
+own food register is called *Tillsynsverksamheter*, "supervision activities",
+which matches neither `restaurang` nor `livsmedel`.
+
+| | Stockholm 🇸🇪 | Zurich 🇨🇭 |
+|---|---|---|
+| **Catalogue enumerated** | **309 datasets** (Entryscape, by resource-URI prefix) | **1,128 dataset names** (CKAN `package_list`) |
+| **The one register** | `Tillsynsverksamheter - Livsmedel` — **8,146 distinct premises** from 289,742 inspection rows, 100% trade names, 96.9% addresses, daily from Ecos 2 | `Gastwirtschaftsbetriebe` — licensed by the city police's *Bewilligung Gastro* unit |
+| **Licence** | **SILENT** — the publisher's own feed says `accessLevel: public` on all 109 of its datasets | ✅ **CC0** |
+| **What a second bucket would have been** | `Salutorg`, `Torghandelsplats` — **polygons**, *"i form av ytor"*: zones where trading is permitted, not traders | `geo_bauernhofladen` — **not shops**: *"Betriebszentren von Haupterwerbslandwirten"*, farmers' operating centres |
+| **Everything else that matched** | 3 × social care (`Daglig verksamhet`), 1 utility service area | `standorte` of counting stations, contaminated sites, historic cinemas, tram ticket offices |
+
+**Why neither is discarded.** Nothing here is unresolved or unreachable —
+the work is done and the answer is *one bucket*. That is a **product
+judgement**, not a data defect, and it can change: a second source may
+appear, or a food-density page may become worth shipping. **A discard would
+throw away two complete screenings to record a preference.**
+
+**Both countries are structurally one-bucket, which is why no further probe
+helps.** Sweden has **no general business licence** at all, so retail and
+personal services have no municipal source to find; Switzerland's national
+**STATENT is aggregate**. This is the Hong Kong distinction inverted — there
+the register exists and we cannot reach it; here we have reached everything
+and only one register exists.
+
+**If one is ever taken, take Zurich first on licence and Stockholm first on
+size** — Zurich's register is CC0 against Stockholm's silence, and
+Stockholm's 8,146 premises are the larger map.
+
+
+---
+
+### The two cities in full
+
+**▲ Stockholm** 🇸🇪 — **upgraded from D-c on 2026-09-22.** Screening is
+DONE: a public ArcGIS FeatureServer carrying **8,146 distinct food premises**
+with WGS84 points, 100% trade names and 96.9% addresses, updated daily. It
+carried two questions; **the licence one was answered on 2026-09-22** (see
+below), so **one remains, and it is an owner decision rather than a probe**:
+
+1. **Scope.** It is **one bucket** — food. Stockholms stad has 291 datasets
+   and exactly one commercial register; `restaurang` and `företag` both
+   return **0** inside its own catalogue, and Sweden has no general business
+   licence. A Stockholm page would be a food-density map.
+2. **Licence.** `dataportal.se` says `Åtkomsträttigheter: Begränsad`
+   (restricted); the ArcGIS item says `access: public` and serves without
+   credentials; `licenseInfo` is empty. **Ambiguous in a way that matters** —
+   `read-licence` step 8 — so it needs the publisher asked. That it fetches is
+   not a finding that it is licensed.
+
+**▲ Zurich** 🇨🇭 — **moved here from Band D on 2026-09-22, and it is the
+same decision as Stockholm's.** It sat in the probe band while its open item
+was described as "no second bucket found". That is now **measured absent**,
+which is an answer rather than a question:
+
+| Term searched on `data.stadt-zuerich.ch` | Hits | What they actually are |
+|---|---|---|
+| `zzqqxxnonsense` **(control)** | **0** | the filter is real |
+| `detailhandel` | **1** | a **traffic count** |
+| `verkauf` | 12 | tram ticket offices, apartment sale prices |
+| `laden` | 31 | a farm shop, population surveys, tariffs |
+| `gewerbe` | 28 | zoning land, 3D roof models |
+| `firmen` | 16 | **every one a `Firmenbefragung`** — a company *survey*, 2005–2025 |
+
+Only **`Gastwirtschaftsbetriebe`** is a register: premises-level, GeoJSON,
+food. The national STATENT is aggregate. **So Zurich is a one-bucket food
+city, exactly Stockholm's shape**, and the question it now carries is the
+same one — *does a food-density page belong in a project whose other cities
+carry three buckets?* **Answer it once and two cities move together.**
+
+---
+
+## 🔴 Band F — access blocked: the register exists and we cannot reach it (3 cities)
+
+**None of these is a data negative, and the distinction is the whole point of
+the band.** Rail is answered for all three. What is missing is a route to a
+register that is known to exist — which is a different thing from a register
+that was looked for and was not there.
 
 **Five cities left this sub-tier on 2026-09-22** — Santiago, Kuala Lumpur,
 Jakarta, Medellín and Lima — all to *discarded*, each with a measured reason.
@@ -384,7 +500,15 @@ own file carries them and would improve the filter further.
 > marker. **A filter returning zero can mean "nothing to flag" or "this
 > convention is not used here", and the result alone cannot tell you which.**
 
-### D-c — ✗ CLOSED 2026-09-22 (0 left — Tallinn measured out, Sofia measured out)
+## ✗ Closed bands — kept in full as evidence, not as candidates
+
+**These two were sub-tiers of the former Band D**, which dissolved on
+2026-09-22 when its live halves became Bands D and E. Both closed the same
+day, and their contents are the evidence behind three discards — **Tallinn,
+Sofia and Sevilla**. Kept whole, including the parts that turned out to be
+wrong, because a superseded reading is how the corrected one gets checked.
+
+### Former D-c — ✗ CLOSED (Tallinn and Sofia, both measured out)
 
 **Finalised 2026-09-22.** These were "genuinely unreached, no finding either
 way". All six are now reached and the sub-tier is closed out:
@@ -491,7 +615,7 @@ is a **catalogue, not a bypass**: it can tell you what exists anywhere in the
 EU, and the files stay behind whatever wall they were behind. That is enough
 to *screen* a blocked country, and not enough to *build* one.
 
-### D-d — ✗ CLOSED 2026-09-22 (0 left — Sevilla resolved and discarded)
+### Former D-d — ✗ CLOSED (Sevilla, reached and discarded)
 
 **The whole sub-tier is closed.** Its single city was reached, measured and
 discarded on the same day it was written up as unreachable. Read the section

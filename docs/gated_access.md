@@ -6,9 +6,9 @@ API key, or send a notification to a publisher. Those items are invisible in
 the master list, because a city waiting on a letter looks exactly like a city
 waiting on a probe. This is the list to come back to and tick off.
 
-**Two of these apply to cities that are already BUILT AND PUBLISHED** — items
-1 and 12 — and both are ongoing obligations rather than one-off steps. They
-are first for that reason.
+**Three of these apply to cities that are already BUILT AND PUBLISHED** — items
+1, 2 and 12. Items 1 and 12 are ongoing obligations rather than one-off steps;
+item 2 is one act, drafted and waiting to be sent. They are first for that reason.
 
 Status values: **OPEN** (nothing done) · **DONE** (satisfied, no upkeep) ·
 **STANDING** (satisfied but must stay satisfied) · **MOOT** (the city or route
@@ -29,7 +29,7 @@ was dropped, kept for the record) · **OPTIONAL** (an upgrade, not a blocker).
 
 | # | City | What is required | Status |
 |---|---|---|---|
-| **2** | **Barcelona** 🇪🇸 *(next to build)* | **Inform the City Council of the project.** Verbatim: *"Users are required to inform Barcelona City Council of every project relating to or derived from their use of the data sets."* One of four obligations on Open Data BCN — the others (prescribed wording *"Source of the data: Barcelona City Council"*, identifying modifications, and the transformation-disclosure family) are build work, but **this one is a message a person sends** | 🔴 **OPEN — and Barcelona is the next city in the order**, so this is the nearest deadline on the list |
+| **2** | **Barcelona** 🇪🇸 **BUILT AND LIVE** | **Inform the City Council of the project.** Verbatim: *"Users are required to inform Barcelona City Council of every project relating to or derived from their use of the data sets."* The clause's own tail — *"so that they are open to the public"* — makes it a **reuse-showcase notification, not a permission gate**, so publishing did not wait on it | 🟠 **DRAFTED, NOT SENT.** See `docs/notifications/barcelona-city-council.md`. **Both preconditions are met**: the live terms were re-read by the owner in a browser on 2026-09-22, past the hCaptcha this project does not defeat, and the clause is unchanged word for word; and the site is public. The terms name their own channel. **All that remains is sending it** |
 
 ---
 
