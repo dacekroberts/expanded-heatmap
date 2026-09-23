@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**168 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**169 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-22**
 
+- [Dublin and Milan published, and the merge caught a latent break in both](#2026-09-22---dublin-and-milan-published-and-the-merge-caught-a-latent-break-in-both)
 - [Milan built: six disjoint registers, and a screen that was wrong four times](#2026-09-22---milan-built-six-disjoint-registers-and-a-screen-that-was-wrong-four-times)
 - [Dublin built: the rail source reversed mid-build, and a national grid got admitted](#2026-09-22---dublin-built-the-rail-source-reversed-mid-build-and-a-national-grid-got-admitted)
 - [Dublin Step 0: a register with no names, and a taxonomy rule that inverts](#2026-09-22---dublin-step-0-a-register-with-no-names-and-a-taxonomy-rule-that-inverts)
@@ -204,6 +205,48 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-22 - Dublin and Milan published, and the merge caught a latent break in both
+
+- **Both cities merged to master and verified against the lean venv before the
+  push.** `check_deploy_imports.py` reports a clean clone importing cleanly;
+  the Overview renders with nine regions and no console error; Ireland and
+  Italy each frame their city with a readable label; both city pages open,
+  embed their map, and carry the full notices block. The only console entries
+  are Streamlit probing `/<Page>/_stcore/health` relatively before succeeding
+  at the root, which is navigation behaviour rather than a defect.
+- **THE MERGE CAUGHT A LATENT BREAK THAT WOULD HAVE TAKEN THE OVERVIEW DOWN,
+  and both branches had it.** Neither Dublin nor Milan added its region to
+  `app/cities.py`'s `REGION_ORDER`, so `LEAF_REGIONS` did not contain "Ireland"
+  or "Italy" and the file's own validator raised
+  `ValueError: ['Dublin', 'Milan'] have no region`. **Each branch would have
+  failed alone**; it surfaced at the merge only because that was the first time
+  anything imported `cities.py`. The reason nothing caught it earlier is
+  structural: `deploy-verify` was deferred by decision, and no step in either
+  build imports the app. **The lesson is that `scaffold_city.py` writes the
+  `region` key but does NOT add that region to `REGION_ORDER`** - a gap worth
+  closing in the scaffold rather than remembering, since it is silent until an
+  import happens and the two cities that met it were the first two non-Spanish
+  European ones.
+- **`deploy-verify` could not be invoked this session, and the reason is worth
+  recording because it is not a new breakage.** The agent list is captured at
+  session start; when this session began, `deploy-verify`'s frontmatter
+  `description` was still the 1038-character version that silently failed to
+  register, and the fix to 731 characters landed later in the same session. The
+  file on disk is correct and the agent will register in a fresh session. The
+  verification above was therefore done directly with the browser tools against
+  `.venv-lean`, which covers the same ground for a `city-added` scope - it is
+  the `full` sweep that a hand-run would not reproduce.
+- **Both required notices are now DISPLAYED, which is the part that gates the
+  deploy.** `app/components.py`'s `_NOTICES` gained Tailte Éireann (Dublin) and
+  Comune di Milano (Milan), and `docs/data_sources.md` items 22 and 23 changed
+  from "NOT YET DISPLAYED" to "DISPLAYED". Each carries the **CC BY 4.0
+  §3(a)(1) modification disclosure** rather than a bare source credit, which is
+  the fifth and sixth time this project has met that duty. A one-character
+  trap on the way: the heading in `_NOTICES` was written `Tailte Eireann`
+  while the docs say `Tailte Éireann`, and `check_provenance.py` matches them
+  by name - it reported the notice as displayed-but-unnumbered until the accent
+  was restored.
 
 ### 2026-09-22 - Milan built: six disjoint registers, and a screen that was wrong four times
 
