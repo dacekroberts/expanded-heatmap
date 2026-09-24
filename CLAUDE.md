@@ -364,6 +364,7 @@ python scripts/check_render_current.py                  # every committed map ca
 python scripts/check_plan_done.py [--verbose]           # REPORTS only: PLAN.md's [x] items and which already have their DECISIONS entry
 python scripts/check_stale_claims.py                    # REPORTS only: prose that stopped being true (stale tense, drifted counts)
 python scripts/check_stale_claims.py --only E           # "the only city"/"no other city" claims: re-read whenever a city lands
+python scripts/check_discard_evidence.py [--selftest]   # every discard row carries enough evidence for its kind; run when the discard table changes
 python scripts/check_deploy_imports.py [--ref REF]      # clean clone + lean venv: run before ANY push touching app/
 node scripts/profile_zoom.mjs <baseUrl> <city,city> [reps]   # wheel/click/cluster zoom lag, headless Edge, trusted input
 python scripts/decisions_index.py [--check]             # refresh DECISIONS.md's index

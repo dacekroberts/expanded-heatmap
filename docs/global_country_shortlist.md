@@ -1928,6 +1928,8 @@ The batched RŽP route above was measured and then **set aside**. Measured: 100 
 
 **The audit** read all 34 discard rows against this trail: 21 rest on two methods, a measured register, or their terms; **12 rested on one method** — Vienna, Rotterdam, Helsinki, Lisbon, Kuala Lumpur, Tallinn, Warsaw, Hamburg, Riga, Athens, Poznań, Bratislava — and moved to the open gap with their next probe named. **The lesson: an early sweep checked discard rows for the words "unprobed" and "not reached", and a one-search negative worded as a finding ("aggregate") passed it.** A discard needs its method count, not its wording.
 
+**Later the same night — the evidence columns.** Filling *Kind / Methods / City host asked?* from this trail failed **5 of the 21** the audit had passed: **Naples** and **Messina** (one search of the city's portal each), **Santiago** and **Lima** (coverage verdicts that never asked the missing comunas' or districts' own sites), **Hyderabad** (GHMC's own host blocked, 403 F5 WAF, never diagnosed from inside India). Owner's call: all five to the open gap. **The audit sorted on wording a second time**; columns a script reads (`scripts/check_discard_evidence.py`) are what caught it. Discards now 16, open gap 17.
+
 #### A refinement the Korea probe produced: stations are not lines
 
 Japan's N02 carries **both** — 10,235 station points *and* 21,932 line

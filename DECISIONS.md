@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**286 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**287 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Discard table gets evidence columns and a check; five more rows to the open gap (owner)](#2026-09-24---discard-table-gets-evidence-columns-and-a-check-five-more-rows-to-the-open-gap-owner)
 - [Discard audit: 12 single-method rows to the open gap (owner); Amsterdam re-probed on its own host and moved to Band C](#2026-09-24---discard-audit-12-single-method-rows-to-the-open-gap-owner-amsterdam-re-probed-on-its-own-host-and-moved-to-band-c)
 - [Rome to Band A with a build check: 95,493 premises joined to ANNCSU at 95.7%, both licences CC BY 4.0, a 2.60x control to settle at build](#2026-09-24---rome-to-band-a-with-a-build-check-95493-premises-joined-to-anncsu-at-957-both-licences-cc-by-40-a-260x-control-to-settle-at-build)
 - [Barcelona's notification adjourned](#2026-09-24---barcelonas-notification-adjourned)
@@ -328,6 +329,41 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Discard table gets evidence columns and a check; five more rows to the open gap (owner)
+
+- **Gave the discard table three columns - Kind, Methods, City host asked? -
+  and wrote `scripts/check_discard_evidence.py` to decide them**, the proposal
+  in the entry below. Kinds: absence, coverage, measured, terms, rail. An
+  *absence* or *coverage* row rests on something NOT being found, so it needs
+  the city's own host asked and two methods, or one that enumerated a whole
+  catalogue or measured a register; *measured*, *terms* and *rail* rows rest on
+  something that exists and was read, and need one. Each method opens with its
+  shape (search, enumerated, measured, read; blocked counts for nothing). It
+  also checks the heading's count, and `--selftest` watches it fail eight ways.
+  Rejected: the two proposed columns alone (a column nothing reads decays as
+  the prose did), and a flat "two methods for every row" rule, which would have
+  failed Tel Aviv and Jakarta - discards on a thing that exists and was read -
+  and a guard that cries wolf gets disabled.
+- **Filling the columns from the probe trail failed five of the 21 rows the
+  audit had just passed**: Naples and Messina (one search of the city's portal
+  each), Santiago and Lima (coverage verdicts that never asked the missing
+  comunas' or districts' own sites), and Hyderabad (GHMC's own host blocked,
+  403 F5 WAF, never diagnosed from inside India - Kaohsiung's shape). The audit
+  had sorted on the rows' wording again, the failure its own entry named.
+  **Owner's call: all five to the open gap**, below the twelve, cheapest probe
+  first. Rejected: Hyderabad straight to Band D (not yet known to be a block),
+  and an owner-kept override (the exception that let thin rows through before).
+- Weakest survivors, recorded so they are not read as strong: Sofia, Valencia,
+  Málaga, Zagreb and Jakarta pass on ONE method - a whole catalogue enumerated,
+  or the register measured - and Berlin on two searches.
+- Fixed on the way: the by-country table (built 24 -> 26; Italy and Egypt rows;
+  a Netherlands row for Amsterdam; "+ 3 in the open gap" -> 17) and the "two
+  rules" section's Germany sentence, stale since Hamburg left the discards.
+- Counts: candidates 34 (A 17 · B 10 · C 6 · D 1), open gap 17, discarded 16.
+  Touched `docs/city_master_list.md`, `docs/global_country_shortlist.md`,
+  `scripts/check_discard_evidence.py`, `CLAUDE.md`,
+  `.claude/skills/add-country/SKILL.md`, `.claude/skills/consistency-sweep/SKILL.md`.
 
 ### 2026-09-24 - Discard audit: 12 single-method rows to the open gap (owner); Amsterdam re-probed on its own host and moved to Band C
 

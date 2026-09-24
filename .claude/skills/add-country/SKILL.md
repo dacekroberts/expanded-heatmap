@@ -73,6 +73,12 @@ reason is "not reached", "unprobed" or a regional pattern **is not a discard at
 all** - it belongs in the still-open band. Re-read the discard list against the
 probe log whenever either changes.
 
+**Reading it did not hold either, so a script reads it now.** On 2026-09-24 an
+audit passed 21 discard rows and, the same night, filling in evidence columns
+from the probe log failed five of them. The table carries *Kind*, *Methods*
+and *City host asked?* per row, and `python scripts/check_discard_evidence.py`
+refuses an absence resting on one search or on a host nobody asked.
+
 **The FIRST record an API returns is not a random one, and n=1 is not a
 measurement.** Finland was ruled out on a single record - the first the PRH
 API returned, a financial holding company with an empty street, a PO box and a
