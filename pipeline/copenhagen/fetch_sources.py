@@ -85,6 +85,8 @@ def save_manifest(man):
 def target(register, entity, kommune=None):
     if register == DK.CVR_REGISTER:
         return DK.CVR_DIR / f"{entity}.csv"
+    if kommune is None:
+        return DK.DAR_DIR / f"{entity}.csv"
     return DK.DAR_DIR / f"{entity}_{kommune}.csv"
 
 
@@ -193,28 +195,13 @@ def pick(rows, entity, kommune, quiet=False):
 
 def download(entry, dest, key):
     fn = entry["filename"]
-    muni = entry.get("_municipality")
-    if muni:
-        # A PER-KOMMUNE EXTRACT IS NEVER LISTED - measured 2026-09-24, DAR's
-        # listing carries MunicipalityCode None on all 72 rows. It is asked for
-        # by entity and kommune instead (confluence.kds.dk/x/CVUPCQ), and comes
-        # with no MD5 to check against.
-        fn = entry["_label"]
-        params = {"Register": entry["register"], "LatestTotalForEntity": entry["entityname"],
-                  "Type": "Current", "Format": "csv", "MunicipalityCode": muni,
-                  "apiKey": key}
-    else:
-        params = {"Filename": fn, "apiKey": key}
+    params = {"Filename": fn, "apiKey": key}
     tmp = dest.with_suffix(".zip.part")
     try:
         with requests.get(DK.GET_URL, timeout=3600, stream=True, headers=HEADERS,
                           params=params) as r:
             if r.status_code != 200:
                 sys.exit(f"  {fn}: HTTP {r.status_code}: {_scrub(r.text[:300], key)}")
-            served = re.search(r'filename="?([^";]+)',
-                               r.headers.get("Content-Disposition", ""))
-            if served:
-                entry["_served_filename"] = served.group(1)
             md5 = hashlib.md5()
             done = 0
             with open(tmp, "wb") as fh:
@@ -243,29 +230,42 @@ def download(entry, dest, key):
 
 
 def fetch_datafordeler(man, key, assume_yes, refresh_cvr):
-    wanted = [(DK.CVR_REGISTER, e, None) for e in DK.CVR_ENTITIES]
-    wanted += [(DK.DAR_REGISTER, e, k) for e in DK.DAR_ENTITIES for k in config.DAR_KOMMUNER]
     plan, listings = [], {}
-    for register, entity, kommune in wanted:
-        dest = target(register, entity, kommune)
-        cached = dest.exists() and rel(dest) in man["files"]
-        if cached and not (refresh_cvr and register == DK.CVR_REGISTER):
-            continue
+
+    def listing(register, entity):
         if (register, entity) not in listings:
             listings[(register, entity)] = list_files(register, entity, key)
-        rows = listings[(register, entity)]
-        entry = pick(rows, entity, kommune, quiet=kommune is not None)
-        if entry is None and kommune is not None:
-            # Not listed per kommune: plan the kommune extract, sized by the
-            # national file it is cut from - an upper bound, stated as one.
-            national = pick(rows, entity, None)
-            if national is not None:
-                entry = dict(national, _municipality=kommune, register=register,
-                             entityname=entity,
-                             _label=f"{register} {entity} kommune {kommune} (extract)")
+        return listings[(register, entity)]
+
+    def want(register, entity, kommune):
+        dest = target(register, entity, kommune)
+        if dest.exists() and rel(dest) in man["files"] and not (
+                refresh_cvr and register == DK.CVR_REGISTER):
+            return True
+        entry = pick(listing(register, entity), entity, kommune, quiet=kommune is not None)
         if entry is None:
-            sys.exit(f"  cannot plan {register}/{entity}; see the listing above")
+            return False
         plan.append((register, entity, kommune, dest, entry))
+        return True
+
+    for entity in DK.CVR_ENTITIES:
+        if not want(DK.CVR_REGISTER, entity, None):
+            sys.exit(f"  cannot plan CVR/{entity}; see the listing above")
+
+    # DAR: PER KOMMUNE WHERE DATAFORDELER LISTS IT, NATIONAL OTHERWISE. Measured
+    # 2026-09-24: `Adressepunkt` is listed per kommune (0101 10.3 MB, 0147 1.2
+    # MB zipped); `Adresse` and `Husnummer` carry MunicipalityCode None on
+    # every row, and the owner's first run stopped at the first UNLISTED
+    # kommune extract it asked for. Only what the listing names is requested -
+    # it is also what carries a size and an MD5.
+    for entity in DK.DAR_ENTITIES:
+        per = [pick(listing(DK.DAR_REGISTER, entity), entity, k, quiet=True)
+               for k in config.DAR_KOMMUNER]
+        if all(per):
+            for k in config.DAR_KOMMUNER:
+                want(DK.DAR_REGISTER, entity, k)
+        elif not want(DK.DAR_REGISTER, entity, None):
+            sys.exit(f"  cannot plan DAR/{entity}; see the listing above")
 
     # ONE CVR GENERATION: what is cached and what would be fetched must agree.
     gens = {v["generation"] for p, v in man["files"].items()
@@ -280,19 +280,12 @@ def fetch_datafordeler(man, key, assume_yes, refresh_cvr):
     if not plan:
         print("  everything cached")
         return
-    listed = [e for *_, e in plan if not e.get("_municipality")]
-    extracts = [e for *_, e in plan if e.get("_municipality")]
-    print(f"\n  {'file':62s} {'generated':20s} {'size':>15s}")
-    for e in listed + extracts:
-        size = int(e.get("filesizeinbytes") or 0)
-        shown = f"<= {size:,}" if e.get("_municipality") else f"{size:,}"
-        print(f"  {e.get('_label', e['filename']):62s} "
-              f"{str(e.get('generationtime'))[:19]:20s} {shown:>15s}")
-    print(f"  {len(plan)} file(s) from api.datafordeler.dk: "
-          f"{sum(int(e.get('filesizeinbytes') or 0) for e in listed):,} bytes zipped listed"
-          + (f", plus {len(extracts)} kommune extract(s) Datafordeler does not size in "
-             f"advance - each is a slice of the national file whose size is shown"
-             if extracts else ""))
+    total = sum(int(e.get("filesizeinbytes") or 0) for *_, e in plan)
+    print(f"\n  {'file':62s} {'generated':20s} {'size':>13s}")
+    for *_, e in plan:
+        print(f"  {e['filename']:62s} {str(e.get('generationtime'))[:19]:20s} "
+              f"{int(e.get('filesizeinbytes') or 0):13,}")
+    print(f"  {len(plan)} file(s), {total:,} bytes zipped, from api.datafordeler.dk")
     if not assume_yes:
         if not sys.stdin.isatty():
             sys.exit("  not a terminal - re-run with --yes to download")
@@ -303,9 +296,7 @@ def fetch_datafordeler(man, key, assume_yes, refresh_cvr):
         md5 = download(e, dest, key)
         man["files"][rel(dest)] = {
             "register": register, "entity": entity, "kommune": kommune,
-            "filename": e.get("_served_filename") or e.get("_label") or e["filename"],
-            "cut_from": e["filename"] if e.get("_municipality") else None,
-            "version": int(e.get("version") or 0),
+            "filename": e["filename"], "version": int(e.get("version") or 0),
             "generation": int(e["generationnumber"]),
             "generation_time": e.get("generationtime"),
             "expiration": e.get("expirationdate"), "zip_md5": md5,
