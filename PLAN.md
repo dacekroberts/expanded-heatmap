@@ -653,6 +653,16 @@ brief names.
      Move Kyoto's master-list row from the open gap to Band A. **Osaka is the recommended
   first build**: the cleanest list, 99.1% block, 38 m against the city's own
   coordinates.
+- [ ] **Japan's licence reads, consolidated into `docs/data_sources.md`
+  (2026-09-24).** The consolidation found gaps:
+  - [ ] **N03** (the city line): being read.
+  - [ ] **Four Tokyo wards whose terms were never read**: Shibuya (its ArcGIS
+    site), Taitō, Setagaya and Meguro (BODIK). Only their hosts were
+    accepted. Four `licence-read` runs, due before Tokyo's build.
+  - [ ] **Owner: the fault-based cost clauses.** Tokyo's and Sapporo's were
+    accepted individually. Fukuoka 第４条, Hiroshima 第3条 and MHLW 免責 1) エ are
+    the same class. Should one decision cover every Japanese source, as it
+    did for Taiwan?
 - [ ] **Kyoto's place in the Japanese build order (owner).** Recommended:
   after Fukuoka and before Tokyo, which stays last. Kyoto is the first
   rebuilt register in Japan, so it benefits from the join being settled on

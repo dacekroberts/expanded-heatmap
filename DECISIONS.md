@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**332 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**333 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Japan's licence reads consolidated into data_sources.md; five were never read](#2026-09-24---japans-licence-reads-consolidated-into-data_sourcesmd-five-were-never-read)
 - [Kyoto enters Band A: licence read, brief written, row moved](#2026-09-24---kyoto-enters-band-a-licence-read-brief-written-row-moved)
 - [Kyoto's rail scope: Keishin kept, funiculars drawn, Sagano out (owner)](#2026-09-24---kyotos-rail-scope-keishin-kept-funiculars-drawn-sagano-out-owner)
 - [Kyoto's register rebuild moves into the pipeline; its stub test passes](#2026-09-24---kyotos-register-rebuild-moves-into-the-pipeline-its-stub-test-passes)
@@ -374,6 +375,34 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Japan's licence reads consolidated into data_sources.md; five were never read
+
+- **Consolidated every Japanese licence read into `docs/data_sources.md`** (the
+  owner's request): a new Japan section with one row per source, like
+  Taiwan's. Until now the verdicts lived only in each city's build brief, so
+  `data_sources.md`, the file `read-licence` says establishes terms, held none
+  of them. The briefs keep the full quotes and draft notices. Each row states
+  the verdict, its date, what must be displayed, and what may not be said.
+- **The consolidation found five sources never read.**
+  - **MLIT N03**, the ward boundaries that decide which stations count in
+    every Japanese city. No brief had read it, and `kyoto.md` asserted
+    "PDL 1.0, as in every Japanese brief". That was wrong twice: unread, and
+    the other briefs name only the address files and N02. It is corrected, and
+    a `licence-read` is under way. Some 国土数値情報 datasets are
+    non-commercial, so it is not assumed.
+  - **Four Tokyo wards**: Shibuya, Taitō, Setagaya and Meguro. The owner
+    accepted their hosts as the wards' own channels, but nobody read their
+    terms. The Tokyo read covered only the Tokyo catalogue's wards. The reads
+    are due before Tokyo's build, which comes last.
+- **The fault-based cost clauses are now listed together.**
+  - Tokyo §6 / Chūō §5 and Sapporo 第9条3 were accepted individually.
+  - Fukuoka 第４条, Hiroshima 第3条 and MHLW 免責 1) エ are the same class and
+    were not accepted on their own. Fukuoka's brief had only noted they
+    were the same class.
+  - Whether one decision covers every Japanese source, as it did for Taiwan,
+    is raised to the owner (`PLAN.md`).
+- `check_provenance.py`: all recorded.
 
 ### 2026-09-24 - Kyoto enters Band A: licence read, brief written, row moved
 
