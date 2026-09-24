@@ -51,6 +51,7 @@ number. Consistency is worth more here than the last few points of perceptual
 accuracy.
 """
 
+import colorsys
 import math
 
 HARD_FLOOR = 10.0
@@ -85,6 +86,63 @@ def delta_e(a, b):
     la, aa, ba = to_lab(a)
     lb, ab, bb = to_lab(b)
     return math.sqrt((la - lb) ** 2 + (aa - ab) ** 2 + (ba - bb) ** 2)
+
+
+# DARK-MODE LINE LABELS, and a reader who could not read them. A line label is
+# drawn in its line's colour on a halo of the page colour, and dark mode (the
+# default) lifts it with a CSS `brightness()` filter - which multiplies each
+# sRGB channel, so it can do nothing for a colour whose light is all in blue.
+# Brazil's deploy check measured four labels at 1.91-2.85:1 against the dark
+# halo (Porto Alegre's navy Trensurb, Rio's and Salvador's pure blue, Belo
+# Horizonte's indigo), with Barcelona, Calgary and Edmonton in the same group.
+# The owner's call (2026-09-24): a label below 4.5:1 in dark mode - WCAG's
+# figure for text of this size - is drawn in its own colour with the HSL
+# lightness raised by the smallest step that reaches it. Labels that already
+# pass, light mode and the lines themselves are untouched.
+LABEL_MIN_CONTRAST = 4.5
+DARK_LABEL_BRIGHTNESS = 1.8     # the CSS filter the dark theme puts on labels
+
+
+def _rgb(hex_colour):
+    h = hex_colour.lstrip("#")
+    if len(h) != 6:
+        raise ValueError(f"expected a 6-digit hex colour, got {hex_colour!r}")
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def _hex(rgb):
+    return "#" + "".join(f"{max(0, min(255, round(v))):02x}" for v in rgb)
+
+
+def contrast_ratio(a, b):
+    """WCAG 2 contrast ratio between two hex colours."""
+    def lum(hex_colour):
+        r, g, b_ = (_srgb_to_linear(v) for v in _rgb(hex_colour))
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b_
+    hi, lo = sorted((lum(a), lum(b)), reverse=True)
+    return (hi + 0.05) / (lo + 0.05)
+
+
+def brightened(hex_colour, factor=DARK_LABEL_BRIGHTNESS):
+    """What CSS `filter: brightness(factor)` renders: each sRGB channel scaled
+    and clipped."""
+    return _hex(v * factor for v in _rgb(hex_colour))
+
+
+def dark_label_colour(colour, page, *, brightness=DARK_LABEL_BRIGHTNESS,
+                      minimum=LABEL_MIN_CONTRAST):
+    """None when `colour`'s label already reads at `minimum` against `page` in
+    dark mode; otherwise `colour` with its HSL lightness raised by the smallest
+    0.01 step that does, before the same brightness filter."""
+    if contrast_ratio(brightened(colour, brightness), page) >= minimum:
+        return None
+    r, g, b = (v / 255 for v in _rgb(colour))
+    h, l, s = colorsys.rgb_to_hls(r, g, b)
+    for step in range(1, 101):
+        lifted = _hex(v * 255 for v in colorsys.hls_to_rgb(h, min(1.0, l + step / 100), s))
+        if contrast_ratio(brightened(lifted, brightness), page) >= minimum:
+            return lifted
+    raise ValueError(f"{colour}: no lightness reaches {minimum}:1 against {page}")
 
 
 def check_line_colours(line_colours, category_colours, *, city=""):

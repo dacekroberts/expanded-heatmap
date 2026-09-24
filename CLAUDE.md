@@ -377,6 +377,7 @@ python scripts/check_scope_disclosure.py                # every city's rail AND 
 python scripts/check_scope_disclosure_selftest.py       # watch that check fail 8 ways; touches nothing
 python scripts/check_stray_downloads.py                 # untracked files at ANY checkout's root - where browser-pane downloads land
 python scripts/check_render_current.py                  # every committed map carries the CURRENT renderer's shared blocks; run after merging
+python scripts/check_map_markup.py [--verbose]          # every line label reads at 4.5:1 in DARK mode; every legend's inline style intact
 python scripts/check_city_registry.py                   # app/cities.py: one entry per city page, no dict with a repeated key; run after merging
 python scripts/check_plan_done.py [--verbose]           # REPORTS only: PLAN.md's [x] items and which already have their DECISIONS entry
 python scripts/check_stale_claims.py                    # REPORTS only: prose that stopped being true (stale tense, drifted counts)
@@ -387,7 +388,7 @@ python scripts/check_deploy_imports.py [--ref REF]      # clean clone + lean ven
 node scripts/profile_zoom.mjs <baseUrl> <city,city> [reps]   # wheel/click/cluster zoom lag, headless Edge, trusted input
 python scripts/decisions_index.py [--check]             # refresh DECISIONS.md's index
 python scripts/merge_append_only.py DECISIONS.md [--dry-run]   # resolve an append-only merge conflict
-python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon>   # add --dry-run first
+python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon> --region <region> --country <country>   # add --dry-run first
 .venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"
 ```
 

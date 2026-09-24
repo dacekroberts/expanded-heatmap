@@ -88,6 +88,7 @@ CITIES = [
     {
         "name": "San Diego",
         "region": "United States West",
+        "country": "United States",
         "lat": 32.7157,
         "lon": -117.1611,
         "page": "pages/1_San_Diego_Heatmap.py",
@@ -99,6 +100,7 @@ CITIES = [
     {
         "name": "San Francisco",
         "region": "United States West",
+        "country": "United States",
         "lat": 37.7509,
         "lon": -122.4414,
         "page": "pages/2_San_Francisco_Heatmap.py",
@@ -108,6 +110,7 @@ CITIES = [
     {
         "name": "Los Angeles",
         "region": "United States West",
+        "country": "United States",
         "lat": 34.05,
         "lon": -118.31,
         "page": "pages/3_Los_Angeles_Heatmap.py",
@@ -120,6 +123,7 @@ CITIES = [
     {
         "name": "Chicago",
         "region": "United States East",
+        "country": "United States",
         "lat": 41.8781,
         "lon": -87.6298,
         "page": "pages/4_Chicago_Heatmap.py",
@@ -144,6 +148,7 @@ CITIES = [
     {
         "name": "New York",
         "region": "United States East",
+        "country": "United States",
         "lat": 40.7128,
         "lon": -74.006,
         "page": "pages/5_New_York_Heatmap.py",
@@ -171,6 +176,7 @@ CITIES = [
     {
         "name": "Philadelphia",
         "region": "United States East",
+        "country": "United States",
         "lat": 39.9526,
         "lon": -75.1652,
         "page": "pages/6_Philadelphia_Heatmap.py",
@@ -186,6 +192,7 @@ CITIES = [
         # must match render_city_nav()'s argument on the page.
         "name": "Miami (Regional)",
         "region": "United States East",
+        "country": "United States",
         "lat": 25.7743,
         "lon": -80.1937,
         "page": "pages/7_Miami_Heatmap.py",
@@ -198,6 +205,7 @@ CITIES = [
     {
         "name": "Boston",
         "region": "United States East",
+        "country": "United States",
         "lat": 42.3601,
         "lon": -71.0589,
         "page": "pages/8_Boston_Heatmap.py",
@@ -209,6 +217,7 @@ CITIES = [
     {
         "name": "Washington D.C.",
         "region": "United States East",
+        "country": "United States",
         "lat": 38.9072,
         "lon": -77.0369,
         "page": "pages/9_Washington_DC_Heatmap.py",
@@ -225,6 +234,7 @@ CITIES = [
         # on the page.
         "name": "Vancouver (Regional)",
         "region": "Canada West",
+        "country": "Canada",
         "lat": 49.2827,
         "lon": -123.1207,
         "page": "pages/10_Vancouver_Heatmap.py",
@@ -257,6 +267,7 @@ CITIES = [
         # neither has to match the filename.
         "name": "Montréal",
         "region": "Canada East",
+        "country": "Canada",
         "lat": 45.5019,
         "lon": -73.5674,
         "page": "pages/11_Montreal_Heatmap.py",
@@ -287,6 +298,7 @@ CITIES = [
     {
         "name": "Calgary",
         "region": "Canada West",
+        "country": "Canada",
         "lat": 51.0447,
         "lon": -114.0719,
         "page": "pages/12_Calgary_Heatmap.py",
@@ -309,6 +321,7 @@ CITIES = [
     {
         "name": "Edmonton",
         "region": "Canada West",
+        "country": "Canada",
         "lat": 53.5444,
         "lon": -113.4909,
         "page": "pages/13_Edmonton_Heatmap.py",
@@ -327,6 +340,7 @@ CITIES = [
     {
         "name": "Toronto",
         "region": "Canada East",
+        "country": "Canada",
         "lat": 43.6532,
         "lon": -79.3832,
         "page": "pages/14_Toronto_Heatmap.py",
@@ -354,6 +368,7 @@ CITIES = [
         "page": "pages/15_Mexico_City_Heatmap.py",
         "blurb": "Metro CDMX (Líneas 1–9, A, B and 12) and the STE Tren Ligero",
         "region": "Mexico",
+        "country": "Mexico",
         # Outside the United States frame, like every Canadian city - see
         # IN_DEFAULT_VIEW below. Mexico's centre sits 14.02 degrees SOUTH of the
         # US centre and 1.41 degrees west, almost an exact mirror of Canada's
@@ -388,6 +403,7 @@ CITIES = [
         "page": "pages/16_Guadalajara_Heatmap.py",
         "blurb": "Tren Ligero (Líneas 1–4, across four municipios)",
         "region": "Mexico",
+        "country": "Mexico",
         # Outside the United States frame, like Mexico City and every Canadian
         # city - see IN_DEFAULT_VIEW below.
         "in_default_view": False,
@@ -423,6 +439,7 @@ CITIES = [
         "blurb": "Metro de Madrid (Líneas 1–12 and the Ramal, 193 stations "
                  "inside the city)",
         "region": "Europe",
+        "country": "Spain",
         # Outside the United States frame, like every non-US city - see
         # IN_DEFAULT_VIEW below. The first city here in EUROPE, which is what
         # the region model was always going to have to absorb.
@@ -462,6 +479,7 @@ CITIES = [
         # 2026-09-22.
         "label_offset": ("start", 14, 6),
         "region": "Europe",
+        "country": "Spain",
     },
     {
         "name": "Dublin",
@@ -470,6 +488,7 @@ CITIES = [
         "page": "pages/19_Dublin_Heatmap.py",
         "blurb": "Luas Red and Green Lines, and the DART",
         "region": "Europe",
+        "country": "Ireland",
         "in_default_view": False,
         # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
         # pinned zoom. Run `python scripts/check_macro_labels.py`,
@@ -486,6 +505,7 @@ CITIES = [
         "page": "pages/20_Milan_Heatmap.py",
         "blurb": "Metro M1-M5 (rossa, verde, gialla, blu, lilla)",
         "region": "Europe",
+        "country": "Italy",
         "in_default_view": False,
         # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
         # pinned zoom. Run `python scripts/check_macro_labels.py`,
@@ -502,6 +522,7 @@ CITIES = [
         "page": "pages/21_Paris_Heatmap.py",
         "blurb": "Métro (Lignes 1–14, plus 3bis and 7bis)",
         "region": "Europe",
+        "country": "France",
         "in_default_view": False,
         # TURNED BELOW THE DOT 2026-09-24, when Oslo joined Europe, and the
         # check chose it. Oslo is far enough north that the Europe frame
@@ -521,6 +542,7 @@ CITIES = [
         "page": "pages/22_Marseille_Heatmap.py",
         "blurb": "RTM Métro 1–2 and Tramway 1–3",
         "region": "Europe",
+        "country": "France",
         "in_default_view": False,
         # BELOW THE MARKER, not above, and the check chose it rather than
         # taste. Marseille's width was measured at 60.3 px in a real browser
@@ -554,6 +576,7 @@ CITIES = [
         "page": "pages/23_Toulouse_Heatmap.py",
         "blurb": "Tisséo Métro A–B, Tramway T1 and the Téléo cable car",
         "region": "Europe",
+        "country": "France",
         "in_default_view": False,
         # ANCHORED "end" SO THE LABEL RUNS WEST, and the check chose it.
         # Toulouse's width was measured at 60.4 px in a real browser with
@@ -582,6 +605,7 @@ CITIES = [
         "page": "pages/24_Lille_Heatmap.py",
         "blurb": "ilévia Métro 1–2 and Tram R–T, across eleven communes",
         "region": "Europe",
+        "country": "France",
         "in_default_view": False,
         # THE SCAFFOLD'S DEFAULT, KEPT BECAUSE IT SCORED CLEAN - not left
         # unexamined. Width measured at 99.7 px in a real browser with Space
@@ -606,6 +630,7 @@ CITIES = [
         "page": "pages/25_Rennes_Heatmap.py",
         "blurb": "STAR Métro a and b",
         "region": "Europe",
+        "country": "France",
         "in_default_view": False,
         # THE SCAFFOLD'S DEFAULT, KEPT BECAUSE IT SCORED CLEAN. Width
         # measured at 49.7 px in the deployed app's own frame with Space
@@ -623,6 +648,7 @@ CITIES = [
         "page": "pages/26_Oslo_Heatmap.py",
         "blurb": "Ruter T-bane 1–5 and Trikk 12, 13, 15, 17, 18, 19",
         "region": "Europe",
+        "country": "Norway",
         "in_default_view": False,
         # TURNED BELOW THE DOT, and not by check_macro_labels.py. Width 29.0
         # px, measured in the deployed app's own frame with six table entries
@@ -643,6 +669,7 @@ CITIES = [
         "page": "pages/27_Copenhagen_Heatmap.py",
         "blurb": "Metro M1–M4 and S-tog A, B, Bx, C, E, F, H",
         "region": "Europe",
+        "country": "Denmark",
         "in_default_view": False,
         # Above the dot, and SCORED rather than assumed: the label width was
         # measured at 85.5 px in the app's own document (2026-09-24), and
@@ -658,6 +685,7 @@ CITIES = [
         "page": "pages/28_Prague_Heatmap.py",
         "blurb": "Metro A, B and C",
         "region": "Europe",
+        "country": "Czechia",
         "in_default_view": False,
         # Above the dot, and SCORED rather than assumed: the label width was
         # measured at 47.3 px in the app's own document (2026-09-24), and
@@ -672,6 +700,7 @@ CITIES = [
         "page": "pages/29_Amsterdam_Heatmap.py",
         "blurb": "Metro 50–54 and 16 tram lines",
         "region": "Europe",
+        "country": "Netherlands",
         "in_default_view": False,
         # Above the dot, and SCORED rather than assumed: the label width was
         # measured at 76.5 px in the app's own document with nine entries
@@ -687,6 +716,7 @@ CITIES = [
         "page": "pages/30_Rome_Heatmap.py",
         "blurb": "Metro A, B, B1, C and Roma–Viterbo",
         "region": "Europe",
+        "country": "Italy",
         "in_default_view": False,
         # Above the dot, and SCORED rather than assumed: the label width was
         # measured at 37.5 px in the app's own document with nine entries
@@ -702,6 +732,7 @@ CITIES = [
         "page": "pages/31_Sao_Paulo_Heatmap.py",
         "blurb": "Metrô Linhas 1–5 and 15, CPTM Linha 9",
         "region": "South America",
+        "country": "Brazil",
         "in_default_view": False,
         # LEFT of the dot, not above: Santos's dot is 6 px away at South
         # America's zoom (3.04) and Rio's 40 px east, so the three names
@@ -718,6 +749,7 @@ CITIES = [
         "page": "pages/32_Rio_de_Janeiro_Heatmap.py",
         "blurb": "MetrôRio 1, 2 and 4, VLT Carioca, SuperVia Deodoro and Saracuruna",
         "region": "South America",
+        "country": "Brazil",
         "in_default_view": False,
         # RIGHT of the dot, clear of São Paulo's name 40 px west. Scored: the
         # label width was measured in the app's own document with eleven
@@ -732,6 +764,7 @@ CITIES = [
         "page": "pages/33_Belo_Horizonte_Heatmap.py",
         "blurb": "Metrô BH Linhas 1 and 2",
         "region": "South America",
+        "country": "Brazil",
         "in_default_view": False,
         # Above the dot, and SCORED rather than assumed: the label width was
         # measured in the app's own document with eleven entries reproduced,
@@ -746,6 +779,7 @@ CITIES = [
         "page": "pages/34_Brasilia_Heatmap.py",
         "blurb": "Metrô-DF Linha Verde and Linha Laranja",
         "region": "South America",
+        "country": "Brazil",
         "in_default_view": False,
         # Above the dot, and SCORED rather than assumed: the label width was
         # measured in the app's own document with eleven entries reproduced,
@@ -760,6 +794,7 @@ CITIES = [
         "page": "pages/35_Salvador_Heatmap.py",
         "blurb": "Metrô Linhas 1 and 2",
         "region": "South America",
+        "country": "Brazil",
         "in_default_view": False,
         # Above the dot, and SCORED rather than assumed: the label width was
         # measured in the app's own document with eleven entries reproduced,
@@ -774,6 +809,7 @@ CITIES = [
         "page": "pages/36_Fortaleza_Heatmap.py",
         "blurb": "Metrofor Linha Sul",
         "region": "South America",
+        "country": "Brazil",
         "in_default_view": False,
         # Above the dot, and SCORED rather than assumed: the label width was
         # measured in the app's own document with eleven entries reproduced,
@@ -788,6 +824,7 @@ CITIES = [
         "page": "pages/37_Porto_Alegre_Heatmap.py",
         "blurb": "Trensurb Linha 1",
         "region": "South America",
+        "country": "Brazil",
         "in_default_view": False,
         # Above the dot, and SCORED rather than assumed: the label width was
         # measured in the app's own document with eleven entries reproduced,
@@ -804,6 +841,7 @@ CITIES = [
         "page": "pages/38_Recife_Heatmap.py",
         "blurb": "Metrô do Recife Linhas Centro and Sul",
         "region": "South America",
+        "country": "Brazil",
         "in_default_view": False,
         # Above the dot, and SCORED rather than assumed: the label width was
         # measured in the app's own document with eleven entries reproduced,
@@ -818,6 +856,7 @@ CITIES = [
         "page": "pages/39_Santos_Heatmap.py",
         "blurb": "VLT Linhas 1 and 2",
         "region": "South America",
+        "country": "Brazil",
         "in_default_view": False,
         # BELOW the dot: São Paulo's dot sits 6 px away, so its name runs
         # west and this one drops under both. Scored: the label width was
@@ -996,3 +1035,24 @@ if _untagged:
         f"Every city needs one - the macro map opens on a region and a city "
         f"without one would be reachable only from the text list."
     )
+
+# --- CITY SWITCHER ORDER -----------------------------------------------------
+#
+# The city pages' switcher (and the map's "Cities" menu, which reads its
+# options from that switcher's hidden links) and the Overview's text list of
+# cities are GROUPED BY COUNTRY: countries in the order their first city was
+# built, cities within a country in build order. Owner's request 2026-09-24 -
+# build order alone put Rome ten places after Milan. CITIES itself stays in
+# build order, because page numbers and the macro map follow it.
+#
+# `country` is not `region`: a region is a macro-map VIEW (Canada is two,
+# Europe is one), a country is what a reader groups by.
+_uncountried = [c["name"] for c in CITIES if not c.get("country")]
+if _uncountried:
+    raise ValueError(
+        f"cities.py: {_uncountried} have no 'country'. Every city needs one - "
+        f"the city switcher groups by it."
+    )
+
+COUNTRY_ORDER = list(dict.fromkeys(c["country"] for c in CITIES))
+SWITCHER_ORDER = [c for k in COUNTRY_ORDER for c in CITIES if c["country"] == k]

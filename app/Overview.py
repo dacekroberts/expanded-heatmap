@@ -26,6 +26,7 @@ from cities import (
     MAP_ONLY_NAV,
     REGION_MEMBERS,
     REGIONS,
+    SWITCHER_ORDER,
 )
 from components import (
     SITE_NAME,
@@ -456,7 +457,7 @@ if len(REGIONS) > 1:
     )
 
 st.caption("Or pick a city from the list:")
-for city in CITIES:
+for city in SWITCHER_ORDER:   # grouped by country, like each city map's menu
     st.page_link(city["page"], label=f"**{city['name']}**")
     st.caption(city["blurb"])  # a caption wraps; a long page_link label is clipped on a phone
 
