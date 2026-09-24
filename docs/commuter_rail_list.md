@@ -49,7 +49,7 @@ project's record — verify before relying on them.
 | Recife · Fortaleza | a diesel VLT to Cabo · the Oeste line | **In the briefs' rail lists as written** — check them against the rule |
 | Porto Alegre | Trensurb | The city's whole network — drawn (regional scope decided 2026-09-23) |
 | Prague · Seoul · Hong Kong · Taipei, Taichung, Taoyuan | Esko · Korail-run lines · MTR East Rail · TRA — *ASSERTED* | Not recorded. Seoul's and Hong Kong's sit inside the metro's own numbering, so each needs a decision |
-| Japan (10) | JR and private railways — *ASSERTED* | **Undecided, and the largest instance of this question** |
+| Japan (10) | JR and private railways — *ASSERTED* | ✅ **INCLUDE — owner's decision 2026-09-24.** Japan joins Dublin and Copenhagen as a place where commuter rail is drawn. Open for the build: whether intercity-only services (Shinkansen, limited-express-only lines) count — the decision covers the commuter network |
 | Stockholm · Göteborg · Zurich | Pendeltåg · Västtåg · S-Bahn — *ASSERTED* | Not recorded (Band C) |
 | Kaohsiung | TRA — *ASSERTED* | Not recorded (Band D) |
 
@@ -57,6 +57,7 @@ project's record — verify before relying on them.
 
 Both exceptions were decided on **station spacing and frequency inside the
 city**, the test `excluded_categories.md` states — not on who runs the trains.
-**Japan, Seoul, Hong Kong and São Paulo will each need the same decision at
-build**, because there commuter lines carry much of the city's own traffic.
+**Seoul, Hong Kong and São Paulo will each need the same decision at build**,
+because there commuter lines carry much of the city's own traffic. **Japan's
+is taken: include** (owner, 2026-09-24).
 Settle each one in its brief before the build reaches its rail step.
