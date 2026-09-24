@@ -90,7 +90,14 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     business leg (`docs/build_briefs/prague.md`, 12/12), with its sole-trader
     owner call.
 
-- [ ] **Label collisions at phone width - app/chrome.** Pre-existing, and
+- [~] **Label collisions at phone width - FIXED ON `worktree-cleanup`
+  2026-09-24, NOT YET PUSHED: `deploy-verify` scope `map-chrome` must run
+  first** (held for the owner's usage limit). `LABEL_CLAMP_SCRIPT` now
+  re-places a colliding label around its own line's tip: 56 overlapping pairs
+  and 6 labels under a button or the legend at 375/343 became **2** (Madrid's
+  core at 343, where eight line ends sit within ~60 px). 1280 unchanged, the
+  view unchanged on 90 loads. See `DECISIONS.md`, *"Phone-width line labels
+  re-placed at runtime"*. The note below is the original. Pre-existing, and
   unchanged by the clipping fix. `scripts/check_map_labels.js` at 375/343
   reports overlapping label pairs in seven cities, 28 in all: Madrid 3/5,
   Paris 3/4, New York 2/3, San Francisco 2/2, Toronto 1/1, Barcelona 0/1,
