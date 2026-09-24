@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**271 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**272 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Oslo's deploy-verify found two phone-width failures the per-city checks passed](#2026-09-24---oslos-deploy-verify-found-two-phone-width-failures-the-per-city-checks-passed)
 - [Oslo built: 10,718 storefronts, 155 stations, and Norway's first city](#2026-09-24---oslo-built-10718-storefronts-155-stations-and-norways-first-city)
 - [Prague: RŽP's establishments are reachable in batches through ARES v3, each with a RÚIAN code; Prague stays paused until measured](#2026-09-24---prague-ržps-establishments-are-reachable-in-batches-through-ares-v3-each-with-a-rúian-code-prague-stays-paused-until-measured)
 - [Prague paused at Step 0: RES is a register of seats, not of shops](#2026-09-24---prague-paused-at-step-0-res-is-a-register-of-seats-not-of-shops)
@@ -313,6 +314,30 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Oslo's deploy-verify found two phone-width failures the per-city checks passed
+
+- **Oslo's name was hidden on the Europe map at 375 px, under the map's own
+  "Light mode" button, while `check_macro_labels.py` scored PROBLEMS 0.** Oslo
+  is the northernmost city in the frame, so its label above the dot (x 242-281,
+  y 18-36) sat entirely inside the button (x 180-291, y 10-42); it cleared at
+  768 and 1280. The checker compares labels with labels and dots and does not
+  model the button, so it could not see this - handed to the cleanup role, which
+  owns the checks. Oslo's label now sits below its dot, confirmed in the app at
+  375: readable and clear of the button, and the checker still scores 0.
+
+- **"Trikk 17" and "Trikk 18" overlapped on Oslo's own map at phone width** -
+  47 x 10 px at 375, 50 x 11 at 343, where Trikk 15 also touched. Both trams end
+  at Rikshospitalet, and the default placement put both labels at that shared
+  tail. Forcing Trikk 18 to its shape's "start" moved nothing (that end is also
+  Rikshospitalet); "end" cleared it. The label tests are now clean at 375, 343,
+  854 and 1280. Recorded beside `LINE_LABEL_ENDS` in `step3_map.py`.
+
+- **Everything else passed**: check_map_view 10.25/10.25 at 343 and 11.5/11.5
+  at 854, twice each, 0 corrections; the basemap credit uncovered at three
+  heights; the Entur logo rendering on its white chip in the app's light and
+  dark themes; the three new notices linked; Paris's label below its dot, clear
+  of Lille and Rennes, at every width; all 26 pages free of error blocks.
 
 ### 2026-09-24 - Oslo built: 10,718 storefronts, 155 stations, and Norway's first city
 

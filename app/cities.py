@@ -618,11 +618,17 @@ CITIES = [
         "blurb": "Ruter T-bane 1–5 and Trikk 12, 13, 15, 17, 18, 19",
         "region": "Europe",
         "in_default_view": False,
-        # THE SCAFFOLD'S DEFAULT, KEPT BECAUSE IT SCORED CLEAN. Width 29.0 px,
-        # measured in the deployed app's own frame with six table entries
-        # reproducing exactly. Oslo sits alone in the north of the Europe
-        # frame; what it DID change is the frame itself - see Paris's entry.
-        "label_offset": ("middle", 0, -22),
+        # TURNED BELOW THE DOT, and not by check_macro_labels.py. Width 29.0
+        # px, measured in the deployed app's own frame with six table entries
+        # reproducing exactly. The scaffold's ("middle", 0, -22) scored clean
+        # against every label and dot - but Oslo is the northernmost city in
+        # the Europe frame, and deploy-verify (2026-09-24) found its name
+        # ENTIRELY under the macro map's "Light mode" button at 375 px (label
+        # x 242-281, y 18-36; button x 180-291, y 10-42). The checker does not
+        # model that button, so its PROBLEMS 0 could not see this. Below the
+        # dot the label clears the button's bottom edge. Oslo also changed
+        # the frame itself - see Paris's entry.
+        "label_offset": ("middle", 0, 22),
     },
 ]
 

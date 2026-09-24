@@ -48,7 +48,14 @@ from pipeline.oslo.config import (  # noqa: E402
 
 # Per-line label end override: "start" or "end". Default picks the tail
 # farthest from the other lines, on the stretch inside the kommune.
-LINE_LABEL_ENDS = {}
+#
+# TRIKK 18 IS FORCED TO ITS "end" - found by deploy-verify 2026-09-24. Trams 17
+# and 18 both terminate at Rikshospitalet, so the default put both labels at
+# that shared tail, and at phone width they overlapped (47 x 10 px at 375, 50
+# x 11 at 343, where Trikk 15 also touched). "start" moved nothing: that end of
+# 18's shape is also Rikshospitalet. With "end", check_map_labels' label tests
+# are clean at 375, 343, 854 and 1280.
+LINE_LABEL_ENDS = {"RUT:Line:18": "end"}
 
 
 def shape_ids_for_routes(zf):
