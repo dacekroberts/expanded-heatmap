@@ -91,6 +91,10 @@ centroid them. See `docs/commuter_rail_list.md`.
   2026-09-24)**: 第9条3 — uncapped compensation for damage from a prohibited
   act, triggered by the user's breach; the same class as Tokyo §6.
 - **MLIT N02** — PDL 1.0.
+- **MLIT N03** (the ward boundaries that decide which stations count): CC BY
+  4.0, read 2026-09-24. Permitted for picking stations and anchoring labels.
+  ⛔ **Never draw it**: showing its boundaries as a map may need GSI's
+  approval under the Survey Act (`docs/data_sources.md`, Japan section).
 
 ## Privacy
 

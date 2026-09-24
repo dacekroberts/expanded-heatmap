@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**339 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**340 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Japan: cost clauses accepted country-wide; N03 never drawn; Kyoto before Tokyo](#2026-09-24---japan-cost-clauses-accepted-country-wide-n03-never-drawn-kyoto-before-tokyo)
 - [Japan's licence reads consolidated into data_sources.md; five were never read](#2026-09-24---japans-licence-reads-consolidated-into-data_sourcesmd-five-were-never-read)
 - [Brazil's batch deploy check passed; two renderer defects shipped now, fixed next (owner)](#2026-09-24---brazils-batch-deploy-check-passed-two-renderer-defects-shipped-now-fixed-next-owner)
 - [Kyoto enters Band A: licence read, brief written, row moved](#2026-09-24---kyoto-enters-band-a-licence-read-brief-written-row-moved)
@@ -381,6 +382,47 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Japan: cost clauses accepted country-wide; N03 never drawn; Kyoto before Tokyo
+
+- **The owner accepted the fault-based cost clauses for every Japanese
+  source**, as was done for Taiwan.
+  - **What it covers**: Fukuoka 第４条, Hiroshima 第3条 and MHLW 免責 1) エ join
+    Tokyo §6 / Chūō §5 and Sapporo 第9条3, which were accepted one by one
+    earlier the same day. Any Japanese source read later whose clause is of the
+    same class is covered too: the user bears the cost of claims from its own
+    breach.
+  - **Its limit**: an indemnity for claims the project did not cause, or
+    anything broader, is a new question.
+  - **Recorded in** `docs/data_sources.md` (Japan section) and in the
+    Fukuoka and Hiroshima briefs.
+- **Found MLIT N03 CC BY 4.0, but with a Survey Act condition; recorded it
+  as NEVER DRAWN.**
+  - **The licence**: the N03-2025 page's own 使用許諾条件 is
+    オープンデータ（CC_BY_4.0）.
+  - **The condition**: its 原典表示 says the boundaries derive from GSI's
+    数値地図（国土基本情報） under Survey Act approval, and that reproducing them
+    needs GSI's approval. GSI's own guidance for a public web map ends at
+    "application required".
+  - **So drawing the city outline is ambiguous in a way that matters**, and
+    is not resolved in this project's favour.
+  - **Why nothing is blocked**: this project's maps never draw a city
+    boundary. `map_common` has no boundary layer, and every city's polygon
+    only picks stations and anchors labels. So N03 is permitted for the use
+    actually made.
+  - **Where the rule lives**: where the next Japanese build must pass through
+    it (the `osm-rail` meta-rule). That is `japan.city_boundary()`'s
+    docstring, the N03 row in `data_sources.md`, and every Japanese brief.
+  - **The rejected alternatives**: applying to GSI now (it needs an account,
+    so it is the owner's act) or asking MLIT (`shitsumon@ksjask.info`). Both
+    are worth doing only if an outline is ever wanted.
+  - **The read also noted**: MLIT's current credit examples add a URL and
+    the processor, which the project's N02 credit string lacks. Check at
+    build.
+  - **This corrects `kyoto.md`**, which had asserted PDL 1.0 for N03 unread.
+- **Kyoto builds after Fukuoka and before Tokyo** (owner, 2026-09-24),
+  which stays last. The order is now Osaka → Kobe → Sapporo → Fukuoka → Kyoto
+  → Tokyo.
 
 ### 2026-09-24 - Japan's licence reads consolidated into data_sources.md; five were never read
 

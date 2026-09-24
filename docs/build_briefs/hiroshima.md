@@ -111,9 +111,15 @@ Hatsukaichi and Kaita. Check at build.
   - **MUST NOT**: present processed data as the city's own; use city logos
     or symbols. **Cost**: under the city's 利用規約 第3条, claims from our
     own breach are resolved at our own cost. There is no indemnity.
+    ✅ **ACCEPTED (owner, 2026-09-24)**: one decision for every Japanese
+    source.
   - 「適切に使用してください」 defines nothing and points to nothing. Reading only
     premises columns fits any reading of it.
 - **MLIT 位置参照情報 and N02**: PDL 1.0.
+- **MLIT N03** (the ward boundaries that decide which stations count): CC BY
+  4.0, read 2026-09-24. Permitted for picking stations and anchoring labels.
+  ⛔ **Never draw it**: showing its boundaries as a map may need GSI's
+  approval under the Survey Act (`docs/data_sources.md`, Japan section).
 
 ## Privacy
 

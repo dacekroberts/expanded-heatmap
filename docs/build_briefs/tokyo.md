@@ -200,6 +200,10 @@ publishes none. MHLW's open data does not fill them (Chiyoda 291 restaurants,
   breach; the same class as Taiwan's OGDL §六(三), Rio's and IBGE's.
 - **MLIT N02** — PDL 1.0, read 2026-09-21; attribution
   `「国土数値情報（鉄道データ）」（国土交通省）をもとに作成`.
+- **MLIT N03** (the ward boundaries that decide which stations count): CC BY
+  4.0, read 2026-09-24. Permitted for picking stations and anchoring labels.
+  ⛔ **Never draw it**: showing its boundaries as a map may need GSI's
+  approval under the Survey Act (`docs/data_sources.md`, Japan section).
 
 ## Privacy
 
