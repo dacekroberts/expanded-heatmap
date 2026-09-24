@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**318 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**319 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [check_city_registry.py: a merge that fuses two cities' entries now fails](#2026-09-24---check_city_registrypy-a-merge-that-fuses-two-cities-entries-now-fails)
 - [Japan re-banded and the geocoding band closed; Rotterdam to A](#2026-09-24---japan-re-banded-and-the-geocoding-band-closed-rotterdam-to-a)
 - [Rome: the page text written, notices 36 and 37, merged with Amsterdam](#2026-09-24---rome-the-page-text-written-notices-36-and-37-merged-with-amsterdam)
 - [Amsterdam deployed; the live site measured after the reboot](#2026-09-24---amsterdam-deployed-the-live-site-measured-after-the-reboot)
@@ -360,6 +361,25 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - check_city_registry.py: a merge that fuses two cities' entries now fails
+
+- **`scripts/check_city_registry.py` refuses any dict in `app/cities.py`
+  that repeats a key, and any mismatch between city pages and registry
+  entries.** Proposed by the Main Building Session after merging Rome's
+  branch with master FUSED the appended Rome and Amsterdam entries into one
+  dict. The conflict region held only each entry's interior, so resolving it
+  dropped the `}, {`, and Rome's keys silently overwrote Amsterdam's: 29
+  cities, no Amsterdam, a clean parse. It caught that by counting. The
+  duplicate keys are read from the SOURCE with `ast`, because by import time
+  Python has already discarded them - which is the whole failure.
+  **Control:** a copy of `cities.py` with Amsterdam and Rome re-fused fails
+  with 8 repeated keys and "pages/29_Amsterdam_Heatmap.py has NO entry". The
+  first run named Rome's page as the orphan, because the reader took each
+  key's first occurrence; it now takes the last, as Python does, so the
+  report names the city that actually vanished. The real file passes: 30
+  entries, 30 pages, one to one. Standard library only, so it runs in either
+  environment.
 
 ### 2026-09-24 - Japan re-banded and the geocoding band closed; Rotterdam to A
 
