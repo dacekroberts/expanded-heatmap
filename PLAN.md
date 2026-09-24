@@ -21,14 +21,12 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [~] **🇳🇴 OSLO - BUILT on `oslo-build` 2026-09-24, not yet pushed.** 10,718
-  storefronts, 155 stations, T-bane 1-5 and trams 12-19, Oslo kommune only
-  (owner's calls: kommune only, trams drawn, ferries excluded). Norway's
-  national modules (`pipeline/countries/norway*.py`, `norway_sn2025`) are
-  written for a second city. **Remaining before it lands:** the licence read
-  of Entur's GTFS and Kartverket's kommune boundary, then provenance rows and
-  any required notices; the city-scoped `deploy-verify`; push, and a REBOOT
-  (`app/cities.py` changes - Paris's macro label moved too).
+- [x] **🇳🇴 OSLO - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** 10,718
+  storefronts, 155 stations, T-bane 1-5 and trams 12-19, Oslo kommune only.
+  City-scoped `deploy-verify` found two phone-width failures (Oslo's macro
+  label under the Light mode button; Trikk 17/18 labels overlapping), both
+  fixed before the push. Norway's national modules are ready for a second
+  city. See `DECISIONS.md`, *"Oslo built"* and the verify entry after it.
 
 - [x] **🇫🇷 FRANCE — COMPLETE AND DEPLOYED 2026-09-23: Paris, Marseille,
   Toulouse, Lille (Regional) and Rennes, all live.** The city-scoped

@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**273 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**274 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Oslo deployed; the live site measured after the reboot](#2026-09-24---oslo-deployed-the-live-site-measured-after-the-reboot)
 - [Oslo's deploy-verify found two phone-width failures the per-city checks passed](#2026-09-24---oslos-deploy-verify-found-two-phone-width-failures-the-per-city-checks-passed)
 - [Oslo built: 10,718 storefronts, 155 stations, and Norway's first city](#2026-09-24---oslo-built-10718-storefronts-155-stations-and-norways-first-city)
 - [Prague: RŽP's establishments are reachable in batches through ARES v3, each with a RÚIAN code; Prague stays paused until measured](#2026-09-24---prague-ržps-establishments-are-reachable-in-batches-through-ares-v3-each-with-a-rúian-code-prague-stays-paused-until-measured)
@@ -315,6 +316,19 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Oslo deployed; the live site measured after the reboot
+
+- **Oslo is live, and the reboot took.** Pushed `06bf63d..cef5444`; the push
+  changed `app/cities.py` and `app/components.py`, so the app was rebooted.
+  Measured on the map object afterwards: the Oslo page renders its title, the
+  snapshot caption, Entur's credit with its logo loaded (56 px), and all three
+  new notices, with no error block; zoom 11.5 against 11.5 at the embedded
+  1000 px and 10.25 against 10.25 at 375 (frame 343), 0 corrections both; at
+  375 all 11 line labels present with no overlap and none clipped - the Trikk
+  17/18 fix, live. The Overview lists Oslo, reads "Europe (10)" and carries the
+  cleanup role's "rapid-transit" wording, which is the rebooted modules rather
+  than cached ones.
 
 ### 2026-09-24 - Oslo's deploy-verify found two phone-width failures the per-city checks passed
 
