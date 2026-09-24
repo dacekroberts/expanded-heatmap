@@ -133,9 +133,32 @@ checkout, with the same commands as above.
 `.git/info/exclude` on a working machine, because `.gitignore` only takes
 effect in a tree that has this commit, and the main checkout may not yet.
 
-**Removing one is clean.** Commits live in the shared object store, so
-`git merge worktree-<role>` followed by `git worktree remove` leaves nothing
-behind. Nothing ever exists only in a worktree.
+**Commits survive a removal; gitignored files do not.** Commits live in the
+shared object store, so `git merge worktree-<role>` followed by `git worktree
+remove` loses no commit. But `git worktree remove` deletes ignored files without
+asking, and `data/` is ignored - so a city's cache can exist ONLY in the
+worktree that built it. On 2026-09-23 `lille` held the only Rennes and Lille
+caches, and Rennes' feed is quota-limited. Before removing a worktree:
+
+1. **Unlink every junction first, on its own, without recursion.** A worktree
+   may link `data/<country>/raw` to the one shared national file instead of
+   copying gigabytes - `lille`'s `data/france/raw` pointed at the 3 GB SIRENE
+   pair in the main checkout. PowerShell 5.1's `Remove-Item -Recurse` can
+   follow a junction and empty its TARGET, which here would have deleted the
+   file every French city is built from. List them, then remove each link
+   alone - `cmd /c rmdir <link>` deletes a junction and never its target:
+
+   ```powershell
+   Get-ChildItem -LiteralPath <worktree>\data -Recurse -Force -Attributes ReparsePoint
+   ```
+
+   That day the leftover folder was deleted recursively BEFORE its junction
+   was noticed. The target survived - both SIRENE files kept their size and
+   timestamps - which was luck, not procedure.
+2. **Copy any `data/<city>/` the main checkout lacks** into the main
+   checkout's `data/`, no-clobber (`cp -rn`), and `diff -rq` the two.
+3. Then the three commands above. If Windows leaves an empty folder behind,
+   re-run step 1's listing on it before deleting it.
 
 ## The shared files everyone appends to
 

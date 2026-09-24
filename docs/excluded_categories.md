@@ -1078,6 +1078,27 @@ the coordinates removed together, so those rows cannot reach the map.
 not ilévia's: a heritage tourist tram in the Deûle valley, and a disused
 railway.
 
+### Rennes - the same register, and one line that leaves the commune at both ends
+
+**Everything excluded in Paris is excluded here, for the same reasons** - the
+four no-premises trades, the wholesale laundry, and the two catch-alls `96.09Z`
+and `56.29B`. They were measured again rather than inherited: `96.09Z` is 14.0%
+here, level with Toulouse, and its rows show the same sign of sole traders
+registered at home - rows with no employee band are 28.8% catch-all, against
+9.8% for rows that record one.
+
+**Four métro stations are excluded for being in another commune, all on Métro b
+and including both of its ends.** Atalante and Cesson - Viasilva are in
+Cesson-Sévigné; La Courrouze and Saint-Jacques - Gaîté are in
+Saint-Jacques-de-la-Lande. The line is drawn to its ends, but no ring is drawn
+around those four. They are listed, with the commune each lies in, at
+`outputs/rennes/excluded_stations.csv`. Those communes' businesses are in the
+same national register, so this is a scoping choice rather than a data limit.
+
+**About one active establishment in six is withheld by INSEE, not by this
+project** - 17.5% here - with the name, the address and the coordinates removed
+together, so those rows cannot reach the map.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

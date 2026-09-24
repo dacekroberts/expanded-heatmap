@@ -16,14 +16,22 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**257 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**262 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-09-24**
+
+- [France deployed: the deferred deploy-verify passed, and phone-width labels clip](#2026-09-24---france-deployed-the-deferred-deploy-verify-passed-and-phone-width-labels-clip)
+- [Rennes' gate 3 confirmed against STAR's own layer after the quota reset](#2026-09-24---rennes-gate-3-confirmed-against-stars-own-layer-after-the-quota-reset)
 
 **2026-09-23**
 
 - [Brazil's agency rail searched for seven cities; station share per municipio measured; Brasilia's 90% is its address key; BH Line 2 is open](#2026-09-23---brazils-agency-rail-searched-for-seven-cities-station-share-per-municipio-measured-brasilias-90-is-its-address-key-bh-line-2-is-open)
+- [Stray downloads in the main checkout's root filed](#2026-09-23---stray-downloads-in-the-main-checkouts-root-filed)
+- [Label check runs at phone width; Milan's shop-sign share; lille retired](#2026-09-23---label-check-runs-at-phone-width-milans-shop-sign-share-lille-retired)
 - [Kaohsiung's data hosts are geo-blocked to Taiwan, not down; stays in Band B](#2026-09-23---kaohsiungs-data-hosts-are-geo-blocked-to-taiwan-not-down-stays-in-band-b)
 - [Every Band A city has a brief: seven Brazilian and three Taiwanese written, all checks passing live](#2026-09-23---every-band-a-city-has-a-brief-seven-brazilian-and-three-taiwanese-written-all-checks-passing-live)
 - [The cleanup role's stray worktrees retired; removing a session's own launch worktree broke that session](#2026-09-23---the-cleanup-roles-stray-worktrees-retired-removing-a-sessions-own-launch-worktree-broke-that-session)
+- [Rennes built: 3,479 storefronts, 24 stations, and France is complete](#2026-09-23---rennes-built-3479-storefronts-24-stations-and-france-is-complete)
 - [Three limbs of check_provenance could fall silent; each now asserts it had input](#2026-09-23---three-limbs-of-check_provenance-could-fall-silent-each-now-asserts-it-had-input)
 - [The geocoding retrospective, written to prepare Japan; the lesson placed where the next country passes through it](#2026-09-23---the-geocoding-retrospective-written-to-prepare-japan-the-lesson-placed-where-the-next-country-passes-through-it)
 - [Taiwan finished: Taipei (Regional), Taoyuan and Taichung to Band A; Kaohsiung held on an unreachable host](#2026-09-23---taiwan-finished-taipei-regional-taoyuan-and-taichung-to-band-a-kaohsiung-held-on-an-unreachable-host)
@@ -340,6 +348,134 @@ onwards; the early ones are split by phase rather than by hour.
   (five more stations due 2027-28).
 - Touched: the seven Brazilian briefs (new checks for Brasília, Recife,
   Santos, Belo Horizonte), `docs/city_master_list.md`.
+### 2026-09-23 - Stray downloads in the main checkout's root filed
+
+- **Rio's Decreto nº 38.879/2014 is stored in `docs/licenses/`, with its
+  source recorded as UNVERIFIED; data.taipei's user manual goes to the
+  gitignored `data/taipei/raw/`.** Both PDFs were saved to the main
+  checkout's root at 16:45 by download prompts the owner answered away from
+  the desktop, and nothing in the repository referenced either. Identified by
+  their text: the decree constitutes Rio's Sistema Municipal de Informações
+  Urbanas (SIURB) - the legal basis of the *Termo de Uso do SIURB.RIO* whose
+  liability clause the owner accepted today - so it is a terms document and
+  belongs with the others. It is stored unaltered as
+  `rio-decreto-38879-siurb.pdf`, SHA-256 `64db5ecd...6583d`, in a new Brazil
+  section. **The prompt did not record its URL**; the README names SIURB's
+  documents listing as the likely source and says it is not verified,
+  instead of writing a URL no one fetched. The 38-slide *資料大平臺網站使用手冊*
+  (January 2025) is a how-to for the portal, not terms, and
+  `docs/licenses/README.md` stores only terms kept "for compliance
+  reference" - so it goes where CLAUDE.md puts probe captures, which are
+  never committed. `check_provenance.py --strict` passes with the new hash.
+  A third PDF, PID's logo manual (Prague), arrived at 17:59 while this ran
+  and was left in place for the Staging Session, which was active and whose
+  Prague research it most likely belongs to.
+
+### 2026-09-23 - Label check runs at phone width; Milan's shop-sign share; lille retired
+
+- **`scripts/check_map_labels.js` now measures labels from the map object and
+  runs at phone width, and it finds clipped labels in 22 of 25 cities.** The
+  handover from the France deploy-verify said the check was blind at phone
+  width (it ran only at 854 and 1280) and wrong when forced there (Rennes'
+  "Métro a" reported out of view while a screenshot showed it whole). The
+  false report was reproduced and explained: with the browser pane hidden
+  (`document.visibilityState` "hidden"), the map had already fitted to zoom
+  12.25 while every label element still sat at its desktop position - "Métro
+  a" read x 617 on a 375px map for six seconds, where it draws at 221. The
+  redraw waits for a frame a hidden page never gets, and it is intermittent:
+  two of four hidden loads were fresh. Each label box is now the marker's
+  `latLngToContainerPoint` plus the label's offset from its own icon, both
+  independent of the stale transform; a DOM that disagrees goes to `notes`.
+  Rejected: refusing to measure a hidden page, since the harness usually runs
+  hidden and the map-object reading is right either way. The check also finds
+  the map two frames deep (as `check_map_view.js` does), reports each clip in
+  pixels and share of width, and notes when a run at or above the 1000px
+  layout width never exercised the phone fit. **Positive control: Rennes'
+  "Métro b" 7px (13%) at 375 and 23px (45%) at 343**, the handover's own
+  screenshot figures, with "Métro a" no longer flagged. Swept every city at
+  375 and 343 by loading each map in a fixed-width iframe: **35 of 155 labels
+  clipped at 375, 33 at 343; only Lille, Madrid and Toulouse clean; the view
+  matched the expected zoom on all 50 loads**, so this is placement, not the
+  fit race. The fix is `pipeline/map_common.py` and belongs to app/chrome;
+  the numbers and the unverified bounds-vs-text-box hypothesis are in
+  `PLAN.md`. `.claude/agents/deploy-verify.md` now names 375 and 343.
+
+- **Milan's page said "about a fifth of the pins carry a shop sign"; step 2
+  measures 15.3%, and the page now says "about one pin in seven".** 7,267 of
+  47,540 storefronts carry an `insegna` (4,927 retail + 2,189 in-plan food +
+  151 out-of-plan food; the other three registers have no name field). Of the
+  41,510 pins drawn within a ring it is 6,383, 15.4%. The "fifth" most likely
+  came from the per-register rates, which were the only ones step 2 printed
+  (17.7% on the largest) - so step 2 now also prints the rate across the final
+  table, the figure the page quotes, and the page carries a comment naming
+  that line. Output unchanged: the flag is dropped before the CSV is written,
+  and `drift_check.py milan` reports zero drift with 10 baseline figures
+  unchanged. `docs/build_briefs/paris.md` repeated "~20%" and is corrected;
+  the 2026-09-22 entry here that says "~20%" stands, superseded by this one.
+
+- **Retired the `lille` worktree and the merged `rennes-build` branch, and
+  found that removal can destroy what git does not track.** Removed after the
+  three stated conditions held: 1575b2e on `origin/master` with 0 commits of
+  `rennes-build` outside it, a clean `git status`, and the Main Building
+  Session not running (last active at that commit). Two things were not
+  covered by `docs/session_roles.md`, which said "nothing ever exists only in
+  a worktree": `data/lille` and `data/rennes` (16 MB, gitignored, Rennes'
+  feed quota-limited) existed nowhere else and were copied to the main
+  checkout's `data/` first, diffed identical; and after `git worktree remove`
+  Windows left an empty-looking folder that was deleted with PowerShell's
+  `Remove-Item -Recurse` **before** a directory listing showed
+  `data/france/raw` was a junction to the main checkout's 3 GB SIRENE pair.
+  PowerShell 5.1 can follow a junction on a recursive delete. Both files were
+  checked afterwards and kept their size and 03:09/03:10 timestamps - luck,
+  not procedure. `docs/session_roles.md` now says to unlink junctions alone
+  and copy missing caches before any worktree removal.
+
+### 2026-09-24 - France deployed: the deferred deploy-verify passed, and phone-width labels clip
+
+- **The city-scoped `deploy-verify` the owner deferred to the last French city
+  ran before Rennes merged, and every in-scope step passed.** Scope
+  `city-added`, widened at step 5 because it was the run the four earlier
+  French cities' verification had been held for. It ran against the Rennes
+  worktree at `bcea784` through two temporary worktree-pointing launch.json
+  entries, since the default configurations serve the main checkout, which
+  was on master without Rennes - a false pass the default would have produced.
+  Lean-venv start clean; all 25 pages load with no error block; the Europe
+  view holds 9 cities with every name legible at 1280, 768 and 375; the Rennes
+  dot and name both open its page; caption, notice 26, legend and switcher
+  correct. `check_map_view.js` on fresh loads: Rennes 13.5/13.5 at the embedded
+  width three times and 12.25/12.25 at phone width twice, Paris 12.5,
+  Marseille 12.75, Toulouse 12.5, Lille 11.75 - every one as expected, **0
+  corrections on every load**, so the fit race never fired. The OSM credit was
+  covered at 0 of 5 probe points at 1000x650, 1024x768, 1280x812 and 375x812.
+
+- **Live after the reboot, measured on the map object:** the deployed Rennes
+  page renders its title, caption and STAR notice with no error block; zoom
+  13.5 against 13.5 at the embedded 1000px, and 12.25 against 12.25 at 375
+  (map frame 343px), both with 0 corrections. The Overview lists Rennes and
+  reads "Europe (9)", which is the rebooted `app/cities.py` rather than a
+  cached one.
+
+- **Found outside the checks asked for: line labels clip at phone width, and
+  the check that should see it cannot.** In the app at 375px Rennes' "Métro b"
+  label spans x 315-366 of a 343px frame - about 45% cut, "Métr" on screen.
+  Paris's "Ligne 10" (4px) and Marseille's "Tramway 1" (33px) clip the same
+  way on the live site already; Toulouse and Lille are clean.
+  `check_map_labels.js` runs only at 854 and 1280, and forced to 375 it
+  reports Rennes' fully visible "Métro a" as out of view. **Owner's call:
+  ship Rennes and hand the class to the cleanup role** - a phone-width check
+  first, with the false positive fixed so it does not cry wolf, and any change
+  to label placement handed on to app/chrome, which owns `map_common.py`. A
+  per-city label override was rejected: it would fix one of three clipped
+  labels and leave the check blind.
+
+- **Two merges of master during the gate, both caught by the fetch before the
+  push.** The second brought a band summary table in the master list still
+  reading A 18 (+10 built) and 34 candidates - staging's count from before
+  Rennes left Band A, merged without a conflict and so invisible to conflict
+  resolution; corrected to 17 (+11) and 33. Neither incoming batch touched
+  `app/` or `pipeline/`, so `check_deploy_imports` at `bcea784` (PROBLEMS 0)
+  still covered the push. Reboot required and done: the push changed
+  `app/cities.py` and `app/components.py`.
 
 ### 2026-09-23 - Kaohsiung's data hosts are geo-blocked to Taiwan, not down; stays in Band B
 
@@ -394,6 +530,29 @@ onwards; the early ones are split by phase rather than by hour.
   expects `401 Valid API Key Required`, and fails the day TDX's access
   changes - the `endpoint_absent` pattern CNPJ's geo-block uses, expressed
   with `expect_status` so it can also check the refusal's wording.
+### 2026-09-24 - Rennes' gate 3 confirmed against STAR's own layer after the quota reset
+
+- **STAR's per-line stop layer matches the feed exactly: a 15 = 15, b 15 = 15.**
+  `data.explore.star.fr` refused every call on 2026-09-23 on a spent
+  domain-wide quota, so the build took gate 3 from OpenStreetMap's route
+  relations and recorded why. After the 00:00 UTC reset the portal answered
+  (19,996 of 20,000 calls remaining - the per-caller limit is separate from
+  the domain's) and `tco-metro-topologie-dessertes-td`, the operator's own
+  list of which stop each métro route serves, gives the same counts. Gate 3
+  now names the first-party source, as osm-rail orders it; OSM stays the
+  cross-check. The dataset's catalogue `modified` reads 2014-11-24, but it
+  holds line b - opened 2022 - in full, and `data_processed` was the night it
+  was read: a creation date, not a staleness signal.
+
+- **The scope split is the operator's own attribute too.**
+  `tco-metro-topologie-stations-td` holds 28 stations - the feed's
+  network-wide count - each with `codeinseecommune`: 24 in 35238, 2 in 35051
+  Cesson-Sévigné, 2 in 35281 Saint-Jacques-de-la-Lande, naming exactly the
+  four stations step 1 excludes by point-in-polygon. Two methods, one answer.
+  No output changes: the counts were already right, only the source string
+  step 1 prints did. Config, the provenance row, the brief, PLAN and
+  project_context updated to say so.
+
 ### 2026-09-23 - The cleanup role's stray worktrees retired; removing a session's own launch worktree broke that session
 
 - **Retired, at the owner's request:** the worktree
@@ -422,6 +581,115 @@ onwards; the early ones are split by phase rather than by hour.
   command was run anyway. Nothing was lost, because the worktree was clean and
   at `master`. The rule now sits beside the retirement steps in
   `docs/session_roles.md`, which is the place the next retirement will read.
+### 2026-09-23 - Rennes built: 3,479 storefronts, 24 stations, and France is complete
+
+- **Rennes is the 25th city and the fifth and last French one.** 3,479
+  storefronts across 24 stations of STAR's two métro lines, commune 35238 only.
+  Step 2 read the national parquet down from 44,064,115 rows: 172,429 in the
+  commune, 65,252 active, 53,826 publicly diffusible (17.5% masked), 5,451 in
+  NAF divisions 47/56/96, 4,129 after the structural non-premises exclusions
+  (1,322, 24.3%), 3,483 after the catch-all verdict, 3,479 with a usable
+  street-level coordinate (99.97% geolocation match, 3 commune centroids
+  dropped). 2,365 fall within a station ring, **68.0%**. Premises name on
+  **59.1%** - the best of the five French cities, as the brief predicted.
+  Personal exposure: **0 person-like names at a residential unit of 2,365 pins
+  (0.00%)**, on the same structural guarantee as every French city - no
+  registrant-name column is ever loaded. Built in the Lille worktree on branch
+  `rennes-build`, with the national parquet linked in by one junction.
+
+- **The brief's scope premise was wrong, and commune-only was the owner's call
+  on the corrected measurement.** The brief said "the métro is
+  city-contained". Against commune 35238's own contour, Métro a keeps **15 of
+  15** stations and Métro b **11 of 15**, losing **both termini**: Atalante and
+  Cesson - Viasilva in Cesson-Sévigné (35051), La Courrouze and Saint-Jacques -
+  Gaîté in Saint-Jacques-de-la-Lande (35281). Put to the owner as commune-only
+  (recommended) against Rennes (Regional) over the three served communes, the
+  Lille pattern. **Commune-only was taken, on the rule the French cities now
+  share: the deciding measure is the worst line's survival.** Lille's worst was
+  a stub - the tram at 3 of 36 - and went regional; Toulouse's was T1 at 13 of
+  25 (52%) and stayed commune-only; Rennes' is 73%. Data availability was not
+  the reason - SIRENE is one national file, so the regional option was a wider
+  filter and nothing more. `config.EXPECTED_INSIDE_PER_LINE` asserts {a: 15, b:
+  11}, and step 1 exits if it moves. 28 stations network-wide -> 24 inside,
+  after the two interchanges (Gares, Sainte-Anne) collapse.
+
+- **Each excluded station is named with its commune, from Rennes Métropole's
+  own contours** (EPCI 243500139, 43 communes) - a naming layer, not a scoping
+  one, Paris's in miniature. `fetch_sources.py` refuses the file unless it
+  holds 35238, 35051 and 35281, since a wrong EPCI code would answer 200 with
+  some other intercommunality's communes.
+
+- **Gate 3 exact on both lines, against OpenStreetMap - because STAR's portal
+  refused every call that day.** osm-rail puts the agency's GIS first, and
+  `data.explore.star.fr` was the place to look; its API answered the first
+  request with HTTP 429, errorcode 10003, *"Too many requests on the
+  domain"* - a **domain-wide** quota of 150,000 calls a day shared by every
+  anonymous caller, spent before this project made a call, resetting at 00:00
+  UTC. A fact about the host, recorded as such. The feed's file host
+  (`eu.ftp.opendatasoft.com`) does not count against it and answered
+  throughout, so the build's one mandatory download does not depend on the
+  quota. OSM's route relations (`network=FR:STAR`, four - one per line per
+  direction, nodes-first, 63 elements) give a 15 = 15, b 15 = 15.
+
+- **The feed self-attests**: `feed_info.txt` names Keolis Rennes, 2026-09-22 to
+  2026-10-18. Marseille's case, not Paris's or Toulouse's - but a four-week
+  window, so `brief_check`'s feed-window check will flag it early. That means
+  refetch, not alarm.
+
+- **Masking was under-estimated by the brief, the same way Toulouse's was.**
+  The brief's 9.8% came from a 12.6% sample of the bucket rows. Measured at the
+  build on the same denominator - active rows in 47/56/96 - it is **15.9%**;
+  across all active rows 17.5%. Toulouse's brief read 16.0% against a built
+  20.2%. Two French briefs sampled low on the same variable, so the sampling
+  pass is the suspect, not either city.
+
+- **Catch-all verdict measured, not inherited: `96.09Z` 14.0%, `56.29B` 1.7%,
+  both excluded.** Level with Toulouse's 13.9% / 1.6%. Step 2 prints its
+  employee-band discriminator AFTER the exclusion, when the dropped codes are
+  gone, so it was re-run with nothing excluded: unbanded rows are **28.8%**
+  catch-all against **9.8%** for banded ones, and less often named (52.8% vs
+  63.2%) - Toulouse's signature (26.4% vs 8.8%) of registered individuals with
+  no premises. The three retail catch-alls are kept, as everywhere in France.
+
+- **Ring edges are the shared French set, on Toulouse's measured ground.**
+  In-commune spacing median 541 m (min 237, mean 581, max 1,119), the regime
+  Toulouse's 525 m was in; applied on that measurement rather than re-asked, as
+  Lille's were. The 237 m minimum was read by name: République (a) and
+  Saint-Germain (b), two lines' separate stations. The spacing gate did not
+  fire, so no `spacing_min` is passed.
+
+- **Restaurant control 1.26x**, NAF 56.10A (470) against OSM
+  `amenity=restaurant` (374) inside the commune, node+way with `out center` -
+  the shape Toulouse's 1.28x and Lille's 1.52x were taken in. Level with
+  Toulouse and the closest of the five to OSM's count (Paris 1.80, Marseille
+  1.72). The query answered in 12 seconds.
+
+- **Line colours are STAR's own, and Métro b's is recorded below the preferred
+  separation.** The feed's `route_color` gives a `#EE1D23` and b `#00893E`
+  (OSM's `colour` tags differ by one step on a; the feed is the publisher's and
+  wins). The shared check scores b at Delta-E 19.8 against the Personal
+  services pins - above the floor, below the preferred 45 - and a at 46.2. Kept,
+  as official liveries are elsewhere; confirmed legible in the browser on both
+  basemaps.
+
+- **Macro-map label measured at 49.7 px** in the deployed app's own frame, with
+  six table entries reproducing exactly (Toulouse 60.4, Paris 32.9, Marseille
+  60.3, Milan 36.3, Lille (Regional) 99.7, Boston 48.4). **The OUTER page
+  measured every one of them differently** - Toulouse 61.2, Paris 34.2 - while
+  reporting the font loaded, so the frame matters and is now written beside the
+  table. The scaffold's default offset scored clean: PROBLEMS 0, Rennes not
+  among the nine labels clipped at 375 px.
+
+- **Notice 26 added: STAR's ODbL**, §4.3's own template with the database
+  named - the third ODbL source, and neither OpenStreetMap's notice nor
+  Tisséo's discharges it. The portal's CGU is the same Opendatasoft template as
+  Toulouse Métropole's and was already read clean. The §4.4 station-CSV
+  question is left exactly where Toulouse's is.
+
+- **France is complete at five cities** - Paris, Marseille, Toulouse, Lille
+  (Regional), Rennes - with Lyon discarded on terms. Master list, brief and
+  provenance updated; the brief carries a build note at its head and both
+  wrong claims corrected in place.
 
 ### 2026-09-23 - Three limbs of check_provenance could fall silent; each now asserts it had input
 

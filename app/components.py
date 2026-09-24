@@ -730,6 +730,25 @@ _NOTICES = [
      "are this project's own work and are not produced or endorsed by Tisséo "
      "or Toulouse Métropole.",
      True),
+    # STAR - Rennes. ODbL 1.0, the same licence and the same reading as Tisséo
+    # above (docs/licenses/odbl-toulouse-rennes.md), and the first sentence is
+    # again ODbL 4.3's own template with the database named.
+    #
+    # ⚠ NEITHER NOTICE ABOVE DISCHARGES THIS. Three ODbL sources now -
+    # OpenStreetMap, Tisséo, STAR - and 4.3 asks each notice to name its own
+    # database.
+    #
+    # The portal's CGU is the same Opendatasoft template as Toulouse
+    # Métropole's, read 2026-09-23: no indemnity, marks clause Opendatasoft's
+    # own with the published data excluded - so naming STAR is not barred.
+    ("STAR (Rennes)",
+     "Contains information from Réseau urbain STAR, which is made available "
+     "here under the Open Database License (ODbL). Métro station locations and "
+     "line geometry for Rennes are redrawn from that feed; the stations kept, "
+     "the rings, the categories and the densities are this project's own work "
+     "and are not produced or endorsed by STAR, Keolis Rennes or Rennes "
+     "Métropole.",
+     True),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

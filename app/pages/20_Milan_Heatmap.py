@@ -23,6 +23,10 @@ set_base_font()
 
 render_city_nav("Milan")
 
+# "One pin in seven" below is step 2's own "shop sign on" line (15.3% of every
+# storefront, 15.4% of the within-ring pins, 2026-09-23). It read "a fifth"
+# until then - the per-register rates (17.7% on the largest) were the only ones
+# printed, and none of them is the rate across the map.
 st.title("Milan: commercial density around Metropolitana di Milano station areas")
 
 st.markdown(
@@ -47,7 +51,7 @@ kept apart. Where one business holds two licences it is counted twice; that is
 the deliberate direction to err in, and it is why the counts read slightly
 high rather than slightly low.
 
-**About a fifth of the pins carry a shop sign; the rest carry an address.**
+**About one pin in seven carries a shop sign; the rest carry an address.**
 Milan records an *insegna* - the sign over the door - on only some rows, and
 three of the six registers have no name field at all. Where a sign exists it is
 shown, and where it does not the address is. No register carries an owner's

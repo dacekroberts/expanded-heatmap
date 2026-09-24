@@ -590,6 +590,23 @@ CITIES = [
         # latitude and had to be turned west.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Rennes",
+        "lat": 48.1113,
+        "lon": -1.68,
+        "page": "pages/25_Rennes_Heatmap.py",
+        "blurb": "STAR Métro a and b",
+        "region": "Europe",
+        "in_default_view": False,
+        # THE SCAFFOLD'S DEFAULT, KEPT BECAUSE IT SCORED CLEAN. Width
+        # measured at 49.7 px in the deployed app's own frame with Space
+        # Grotesk loaded (six cities already in the table reproduced
+        # exactly), then check_macro_labels.py scored every region at three
+        # widths: PROBLEMS 0, and Rennes is not among the labels clipped at
+        # 375 px. It sits alone in the west of France, 3.4 degrees of
+        # longitude from Paris, so a label pointing up has nothing to meet.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

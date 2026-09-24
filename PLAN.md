@@ -21,55 +21,32 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [ ] **🇫🇷 FRANCE — Paris, Marseille, Toulouse and Lille (Regional) BUILT;
-  Rennes remains. `deploy-verify` is deliberately deferred until all five are
-  done - and Rennes is the fifth, so it does not merge without that run.**
+- [x] **🇫🇷 FRANCE — COMPLETE AND DEPLOYED 2026-09-23: Paris, Marseille,
+  Toulouse, Lille (Regional) and Rennes, all live.** The city-scoped
+  `deploy-verify` the owner deferred to the last French city ran before Rennes
+  merged and passed; the live site was checked after the reboot. See
+  `DECISIONS.md`, *"France deployed: the deferred deploy-verify passed"*.
+  **Carried forward, not closed:** line labels clip at phone width (Rennes'
+  Métro b, Paris's Ligne 10, Marseille's Tramway 1) - handed to the cleanup
+  role as a CHECK first (`check_map_labels.js` never runs at phone width, and
+  misreports at 375), with any placement fix going to app/chrome.
 
-  ✅ **Paris** built and deployed 2026-09-23 (22 cities live).
-  ✅ **Marseille** built and deployed 2026-09-23, 18,177 storefronts,
-  66 stations, gate 3 passing against AMP's own layer.
-  ✅ **Toulouse** built 2026-09-23 on `toulouse-build`, 8,635 storefronts,
-  48 stations, **gate 3 exact on all four lines** against Tisséo's own
-  `arrets-itineraire` layer. First city here to draw a **non-rail mode** (the
-  Téléo cable car, owner's call). Its brief's case for th  ✅ **Lille (Regional)** built 2026-09-23 on `lille-build`, 11,833
-  storefronts, 91 stations across the **eleven communes the network serves**
-  - the first regional French city, owner's call. Its rail answer turned out
-  to be three sources: MEL's WFS for every station and the tram lines, OSM
-  for the métro lines only, and ilévia's GTFS not read at all. Gate 3 exact
-  on all four lines against OSM.
-
-  ⚠️ **For Rennes, carry two things from Lille.** Scope is NOT settled by
-  precedent in either direction: three French cities are commune-only and one
-  is regional, and the deciding measurement is how many stations each line
-  keeps inside the commune. And SIRENE is one national file, so a wider scope
-  is a wider filter, not a new source - Toulouse's scope was briefly justified
-  as if it were not, and that was corrected.ation layer for a
-  `en_service`-style column before trusting its row count.
-
-  **THE DEFERRAL IS THE OWNER'S CALL (2026-09-23) AND IT IS A SCOPE DECISION,
-  NOT AN OVERSIGHT.** `deploy-verify` is city-scoped work: a `city-added` run
-  costs a real slice of a session and re-verifies the whole app each time. Run
-  once, after the last French city, it covers all five for roughly the cost of
-  one — and every check it does not do is already covered per city by
-  `check_provenance`, `check_macro_labels`, `check_personal_exposure`,
-  `check_deploy_imports` and a browser render, all of which ran for both cities
-  built so far.
-  ⚠️ **What this defers is the ONE THING those cannot see**: the app running as
-  a whole under the lean venv with a real click path. So the last French city
-  does not merge until that run happens, and a French city reaching master
-  before then is the thing to stop.
-
-  **What city three inherits, and what it does not.** Inherits: the country
-  module, `france_naf`, the shared national parquet cache, the shared
-  `france_register.py` step 2, the Lambert-93 grid, the Milan-hybrid naming and
-  the catch-all verdict (measured twice now, 9.8% vs 9.6% on `96.09Z`). Does
-  NOT inherit: the scope decision, the ring edges, the spacing floor, gate 3's
-  source, and the OSM control — each measured per city, and each having
-  produced a different answer at least once.
-
-  ⚠️ **Lille has no first-party metro line geometry** (its brief found tram
-  geometry and no metro), so its rail leg is not Paris's or Marseille's and
-  needs its own answer before it starts.
+- [ ] **Line labels clip at phone width in 22 of 25 cities - app/chrome
+  role, `pipeline/map_common.py`.** The check exists as of 2026-09-23:
+  `scripts/check_map_labels.js` at 375 and 343 measures **35 of 155 labels
+  clipped at 375 and 33 at 343**; only Lille, Madrid and Toulouse are clean.
+  Worst: Miami's "Metromover Omni/Brickell Loops" 155px (71%) at 343, Los
+  Angeles' A and E Lines 68% each, Guadalajara's Línea 2 and 4 ~65%. The
+  view itself is right on all 50 loads, so this is not the fit race.
+  Hypothesis, not yet a finding: PHONE_FIT_SCRIPT's `BOUNDS` holds label
+  ANCHORS and `PAD` is 26px, while a label's text reaches up to ~220px past
+  its anchor - reproduce before fixing. The same run found label/label
+  overlaps at phone width in seven cities (Barcelona, Madrid, Mexico City, New
+  York, Paris, San Francisco, Toronto; Madrid's are all overlaps, no clips),
+  labels under the legend or theme button in Barcelona, Edmonton and San
+  Diego, and Miami's legend reading 38px open and closed at 343 - that last
+  one unconfirmed as real. Done when the check returns no `clipped` problem
+  in any city at both widths.
 
 - [ ] **🇫🇷 PARIS — ✅ BUILT AND DEPLOYED 2026-09-23. Kept for the checklist
   below, which the follower cities still read.**
