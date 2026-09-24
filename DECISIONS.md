@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**338 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**339 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Brazil deployed; the live site measured after the reboot](#2026-09-24---brazil-deployed-the-live-site-measured-after-the-reboot)
 - [Brazil's batch deploy check passed; two renderer defects shipped now, fixed next (owner)](#2026-09-24---brazils-batch-deploy-check-passed-two-renderer-defects-shipped-now-fixed-next-owner)
 - [Kyoto enters Band A: licence read, brief written, row moved](#2026-09-24---kyoto-enters-band-a-licence-read-brief-written-row-moved)
 - [Kyoto's rail scope: Keishin kept, funiculars drawn, Sagano out (owner)](#2026-09-24---kyotos-rail-scope-keishin-kept-funiculars-drawn-sagano-out-owner)
@@ -380,6 +381,28 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Brazil deployed; the live site measured after the reboot
+
+- **The nine Brazilian cities are live, checked after the owner's reboot.**
+  The branch was pushed as `adcfe16` (master had moved 9 commits since the
+  deploy check, none under `app/`, so a merge was all that was needed; it
+  brought Kyoto into Band A, and the master list now reads 39 built, Band A 12,
+  22 candidates). The live Overview offers South America (9), frames all nine
+  with São Paulo's name west, Rio's east and Santos's below, and its caption
+  accounts for 39 cities. Each of the nine pages carries its approved title
+  and a caption dated from provenance ("file dated 2024-05-20", "files" on the
+  four regional pages, Rio's with its two rail sources, Santos's "VLT lines and
+  stops"). Each map renders with the OpenStreetMap credit, at zooms of 11.25
+  (São Paulo), 11.75 (Rio), 12.5 (Belo Horizonte), 12 (Brasília), 12.5
+  (Salvador), 12.25 (Fortaleza), 11 (Porto Alegre), 12.5 (Recife) and 13.5
+  (Santos) in the 854 px pane. Notices 38 and 39 and the OpenStreetMap
+  credit's Brazil clause are shown, and no page has an exception. Rome's base
+  layer reads "Rome Metro and Roma–Viterbo Business Density Heatmap".
+  Chicago, spot-checked, still renders with its own notice. The
+  `sao-paulo-*-tmp` launch entries were removed.
+- **The next push waits for the two renderer fixes** (owner, same day), so
+  this entry and the PLAN tick stay on the branch until then.
 
 ### 2026-09-24 - Brazil's batch deploy check passed; two renderer defects shipped now, fixed next (owner)
 
