@@ -316,6 +316,28 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-23 - Wheel zoom stops discarding notches; cluster animation off
 
+- **deploy-verify (`scope: map-chrome`) passed, and found one residual gap in
+  the wheel merge, measured as rare and left open.** Embedded in the app from
+  `.venv-lean`: Paris, Toulouse, New York and Boston render cleanly, the view
+  is right untouched at 1000 and 343 with 0 corrections, a real notch took
+  Paris 12.5 -> 13.5 and the view held for 8 s with `touched` set, and cluster
+  clicks, +/-, the legend, the layer control and the theme button all work;
+  its own 25-city sweep of the three checks matched the one above.
+  `check_deploy_imports.py` passed; nothing under `app/` changed, so no reboot.
+  **The gap:** Leaflet starts a zoom animation on the NEXT frame, so until one
+  is drawn `_animatingZoom` is false and `getZoom()` is still the old zoom. A
+  second wheel batch firing in that window is computed from the old zoom, and
+  the last target wins - notches lost. deploy-verify produced it by sending
+  notches while its pane drew no frames (16.25 -> 15.25 instead of 11.25).
+  Measured with trusted input in a rendering browser, it did not occur: five
+  notches 45 ms apart - each batch just past Leaflet's 40 ms debounce, the
+  worst spacing - zoomed Paris 12.5 -> 17.5 and New York 10.5 -> 15.5 in all
+  six runs (`profile_zoom.mjs`, new `wheel45` case). It needs the main thread
+  to go 40 ms without a frame between batches. Stock Leaflet has the same
+  window, so it is not a regression. If it is ever seen, the fix is small:
+  treat the map as busy from the `setZoomAround` call until the next
+  animation frame, not only while `_animatingZoom` is set.
+
 - **The mouse wheel felt laggier than +/- because Leaflet DISCARDED most of a
   fast roll, not because the wheel was slow - measured, and the opposite of
   the recorded hypothesis.** The owner reported wheel zoom and cluster-click

@@ -106,7 +106,10 @@ const SCEN = {
   'wheel1': async (t) => { await wheel(t.center.x, t.center.y, 1, 0); },
   'wheel3fast': async (t) => { await wheel(t.center.x, t.center.y, 3, 25); },
   'wheel5': async (t) => { await wheel(t.center.x, t.center.y, 5, 60); },
-  'wheelslow': async (t) => { await wheel(t.center.x, t.center.y, 4, 300); },
+  // Batches just past Leaflet's 40 ms debounce: each can fire before the
+  // previous zoom's animation has started on the next frame.
+  'wheel45': async (t) => { await wheel(t.center.x, t.center.y, 5, 45); },
+  'wheelslow':async (t) => { await wheel(t.center.x, t.center.y, 4, 300); },
   // Many small pixel deltas, the shape a trackpad sends.
   'trackpad': async (t) => { await wheel(t.center.x, t.center.y, 30, 16, -8); },
   'wheel5out': async (t) => { await wheel(t.center.x, t.center.y, 5, 60, 100); },
