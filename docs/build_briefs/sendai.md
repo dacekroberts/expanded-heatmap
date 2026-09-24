@@ -63,8 +63,11 @@ town-chōme `.../19.0b/<code>-19.0b.zip`. Keyed (ward, town, block).
 | Tier | Food (12,627 permanent) | Personal services (3,378) |
 |---|---|---|
 | Block | **95.1%** | **96.5%** |
-| Town-chōme / 大字 centroid | 4.9% | 3.3% |
+| Town-chōme / 大字 centroid | 4.9% | 3.4% |
 | Unplaced | 0.0% | 0.1% |
+
+*(Re-measured 2026-09-24 after Kyoto's rules A–D in `japan_register.py`: food
+unchanged; one personal-services row moved from unplaced to chōme.)*
 
 **Independent check.** Sendai publishes no coordinates, so the check is GSI's
 keyless address search on a seeded sample of 150 block hits: **150 answered,

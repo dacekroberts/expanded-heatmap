@@ -604,8 +604,14 @@ brief names.
     taxonomy from the shared modules.
   - [ ] Owner, minor: アイスクリーム類製造業 (692 rows; many are gelato
     counters) is OUT for now, since the owner's call named 菓子 and そうざい.
-- [ ] **Kyoto → Band A (owner, 2026-09-24), in this order, after a /compact:**
-  1. Add the rebuild's rules A–D to `pipeline/countries/japan_register.py`.
+- [~] **Kyoto → Band A (owner, 2026-09-24), in this order, after a /compact:**
+  1. [x] **Done 2026-09-24.** Kyoto food 92.7% block, 6.0% chōme, 1.3% none;
+     personal services 94.4% / 4.1% / 1.6%. Minato stays at 99.8%. Two changes
+     from the text below, both measured: the private-use codes sit in a
+     Kyoto-only table, and C's prefix match on a 大字 that has 小字 looks the
+     地番 up under that 小字 or leaves the row unplaced. Kobe, Sapporo, Sendai,
+     Fukuoka and Hiroshima briefs updated. See DECISIONS.
+     Add the rebuild's rules A–D to `pipeline/countries/japan_register.py`.
      The rule text is in `scratchpad/japan_run/kyoto/result.json`.
      - A: strip the street-intersection part (上る/下る/入る), Kyoto only.
      - B: character variants in `VARIANTS` (祇/祗 and Kyoto's private-use

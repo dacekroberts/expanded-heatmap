@@ -471,9 +471,9 @@ count, not OSM (owner).
 |---|---|---|---|---|---|
 | **Tokyo (8 wards)** | **≈59,400** — Chūō, Minato, Shinjuku (2023, disclosed), Kōtō, Shibuya, Taitō, Setagaya, Meguro | **99.1–100%** | the wards' own coordinates, median **22–43 m** | 生活衛生 registers, 11 wards (14,887) | Tokyo Open Data Terms / ward CC BY 4.0; §6 cost clause accepted |
 | **Osaka** | **61,752** | **99.1%** | the city's own (mislabelled) coordinates, median **38 m** | 15,775 | CC BY 4.0 / 政府標準利用規約 2.0 |
-| **Kobe** | **24,761** | **96.5%** | — | 4,993 | CC BY 2.1 JP |
-| **Sapporo** | **24,257** | **84.5%** + 15.2% chōme | — | 5,993 | CC BY 4.0; 第9条3 accepted |
-| **Fukuoka** | 3,231 (own list, pre-2021) + **21,088** restaurants from MHLW | **98.1% / 96.7%** | MHLW's own coordinates, median **36 m** | 5,846 (99.1%) | BODIK CC BY 4.0 + MHLW PDL 1.0 |
+| **Kobe** | **24,761** | **97.1%** | — | 4,993 | CC BY 2.1 JP |
+| **Sapporo** | **24,257** | **84.7%** + 15.2% chōme | — | 5,993 | CC BY 4.0; 第9条3 accepted |
+| **Fukuoka** | 3,231 (own list, pre-2021) + **21,088** restaurants from MHLW | **98.1% / 96.8%** | MHLW's own coordinates, median **36 m** | 5,846 (99.2%) | BODIK CC BY 4.0 + MHLW PDL 1.0 |
 
 - **Tokyo**: 🚩 the owner requests **Chiyoda's** ledger (即時公開請求, a CD-R for
   ¥100) to fill the centre. Until then the page names the wards with no
@@ -856,7 +856,7 @@ count settles the size question in Stockholm's favour. *(This paragraph read
 | | |
 |---|---|
 | **The one bucket (food)** | Two lists that split by filing channel: the city's counter applications (**7,479** restaurants) and MHLW's open data for online filings (**5,195**, 66% addressed), overlapping by 1.2% at block level. **10.7 restaurants per 1,000 residents** (9.2 placeable), beside Sendai's 9.5 |
-| **Joined** | own list **95.9%**, MHLW **94.7%** block; MHLW's own coordinates median **35 m** |
+| **Joined** | own list **96.0%**, MHLW **95.0%** block; MHLW's own coordinates median **35 m** |
 | **Why one bucket** | **no personal-services list**: new openings are published as PDFs only. Food retail exists only as MHLW's partial, opt-in notifications |
 | **Licences** | both **PERMITTED WITH CONDITIONS**: the city's list under PDL 1.0 (the dataset-level declaration accepted for the full-list file, owner 2026-09-24) and MHLW's PDL 1.0 |
 | **Brief** | `docs/build_briefs/hiroshima.md` (4/4). Hiroden's streetcars are the network's backbone, and whether trams count is the owner's call |

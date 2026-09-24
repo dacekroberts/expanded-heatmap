@@ -19,15 +19,20 @@ one rate.
 the city that taught it: kanji chōme numbers (Chūō), the whole address in
 町字 (Shinjuku), UTF-16 files (Shinjuku), kanji variants (Osaka's 曽根崎新地),
 mislabelled lat/lon (Osaka), the 条 grid and direction suffixes (Sapporo),
-字 addresses keyed through 小字・通称名 (Sendai; it lifted Kobe too), and
+字 addresses keyed through 小字・通称名 (Sendai; it lifted Kobe too),
 `一円` not-a-premises rows (Sendai's festival stalls, Kobe's storeless laundry
-pick-ups). **Re-run the Minato control after any change to this file.**
+pick-ups), and Kyoto's four (2026-09-24): A the street-intersection prefix
+(河原町通三条上る, Kyoto only), B character variants (祇/祗, 藪/薮, ゝ), C a
+known-town fallback, and D twin town names left unplaced. C runs in every city
+and is checked against publisher coordinates and GSI: see join_city.
+**Re-run the Minato control and every screen after any change to this file.**
 
 **Privacy by construction.** The loaders read the premises columns BY NAME
 (address, trade name, type, the publisher's lat/lon). The operator columns
 these files carry (営業者名, 申請者名, 開設者名 and 開設者住所, 代表者名, phones)
 are never selected.
 """
+import collections
 import csv
 import io
 import math
@@ -38,7 +43,35 @@ from pathlib import Path
 
 
 VARIANTS = str.maketrans({"曾": "曽", "靱": "靭", "﨑": "崎", "ヶ": "ケ", "ヵ": "カ", "邊": "辺", "邉": "辺", "齋": "斉",
-                          "齊": "斉", "濵": "浜", "髙": "高", "德": "徳", "槇": "槙"})
+                          "齊": "斉", "濵": "浜", "髙": "高", "德": "徳", "槇": "槙",
+                          # Kyoto's misses (rule B): MLIT itself spells 藪/薮 both ways
+                          "祗": "祇", "薮": "藪", "壺": "壷", "檜": "桧", "籠": "篭", "竈": "竃", "龍": "竜",
+                          "淵": "渕", "秡": "祓"})
+STRING_VARIANTS = (("鍛治", "鍛冶"), ("廻リ", "廻り"))
+
+
+# Kyoto's own private-use code points for 祇 (祇園). Private-use characters are
+# each publisher's own assignment, so these are read in Kyoto's files only.
+KYOTO_GAIJI = str.maketrans({"": "祇", "": "祇", "": "祇"})
+
+
+# Kyoto's misses (rule A): the central wards name the street intersection before
+# the town - 河原町通三条上る下丸屋町123 is 下丸屋町 123, on Kawaramachi-dōri north
+# of Sanjō. The town follows the LAST direction word, and a count of blocks may
+# sit between them (大和大路通四条下る4丁目小松町): that 丁目 is a distance, not a town.
+INTERSECTION = re.compile(r"^.*(?:上る|下る|上がる|下がる|[東西南北]入る|[東西南北]入|入る)(.*)$")
+BLOCKS_AFTER = re.compile(r"^[0-9一二三四五六七八九十]+丁目(\D.*)$")
+
+
+def strip_intersection(rest):
+    """The address after the ward, without its street-intersection part."""
+    for a, b in (("上ル", "上る"), ("下ル", "下る"), ("入ル", "入る"), ("上ガル", "上がる"), ("下ガル", "下がる")):
+        rest = rest.replace(a, b)
+    m = INTERSECTION.match(rest)
+    if not m:
+        return rest
+    b = BLOCKS_AFTER.match(m.group(1))
+    return b.group(1) if b else m.group(1)
 
 
 KANJI_DIGITS = {"〇": 0, "一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
@@ -66,6 +99,10 @@ def norm_town(s):
     # Osaka's misses: 曽根崎新地 (1,807 permits) vs MLIT's 曾根崎新地, 靭本町 vs
     # 靱本町, 松ヶ枝町 vs 松ケ枝町 - one spelling for each variant, both sides.
     s = s.translate(VARIANTS)
+    for a, b in STRING_VARIANTS:
+        s = s.replace(a, b)
+    # Kyoto's misses: MLIT writes 深草スゝハキ町 where permits repeat the kana
+    s = re.sub(r"(.)[ゝヽ]", r"\1\1", s)
     # Sapporo's grid (南16条西10丁目) takes the same rule before 条 as before 丁目.
     return re.sub(r"([〇一二三四五六七八九十]+)(丁目|条)",
                   lambda m: f"{kanji_number(m.group(1))}{m.group(2)}" if kanji_number(m.group(1)) else m.group(0), s)
@@ -244,13 +281,27 @@ def city_rows(path):
 
 
 def load_city_isj(isj_dir):
-    """Every ward's block and town-chōme files, keyed by (ward, town[, block])."""
-    blocks, chome = {}, {}
+    """Every ward's block and town-chōme files, keyed by (ward, town[, block]).
+
+    Kyoto's misses (rule D): one town name can belong to two places in a ward -
+    123 names in 上京, 中京 and 下京, the twins a median 1.27 km apart. Such a
+    town's chōme entry is None, and so is a block whose 地番 occurs in more than
+    one twin; join_city leaves those rows unplaced rather than guess a twin."""
+    cents = collections.defaultdict(list)
+    for z in sorted(Path(isj_dir).glob("*-19.0b.zip")):
+        for r in read_zip_csv(z):
+            cents[(r["市区町村名"].split("市")[-1], norm_town(r["大字町丁目名"]))].append((float(r["緯度"]), float(r["経度"])))
+    chome = {k: pts[0] if len(pts) == 1 else None for k, pts in cents.items()}
+    twin_of = collections.defaultdict(set)  # a twin town's (ward, town, block) -> which twins it occurs in
+    blocks = {}
     for z in sorted(Path(isj_dir).glob("*-24.0a.zip")):
         for r in read_zip_csv(z):
             ward = r["市区町村名"].split("市")[-1]
             key = (ward, norm_town(r["大字・丁目名"]), first_number(r["街区符号・地番"]))
             pt = (float(r["緯度"]), float(r["経度"]), r["住居表示フラグ"])
+            if chome.get(key[:2], ()) is None:
+                twins = cents[key[:2]]
+                twin_of[key].add(min(range(len(twins)), key=lambda i: haversine_m(pt[:2], twins[i])))
             if r.get("代表フラグ") == "1" or key not in blocks:
                 blocks[key] = pt
             # Sendai's 字 addresses (福室字境４番) - MLIT keeps the 字 in 小字・通称名,
@@ -259,9 +310,9 @@ def load_city_isj(isj_dir):
                 akey = (ward, norm_town(r["大字・丁目名"] + "字" + r["小字・通称名"]), key[2])
                 if r.get("代表フラグ") == "1" or akey not in blocks:
                     blocks[akey] = pt
-    for z in sorted(Path(isj_dir).glob("*-19.0b.zip")):
-        for r in read_zip_csv(z):
-            chome[(r["市区町村名"].split("市")[-1], norm_town(r["大字町丁目名"]))] = (float(r["緯度"]), float(r["経度"]))
+    for key, which in twin_of.items():
+        if len(which) > 1:
+            blocks[key] = None
     return blocks, chome
 
 
@@ -274,6 +325,8 @@ def load_city_permits(path, pref, city):
         a = unicodedata.normalize("NFKC", addr).replace(" ", "").replace("　", "")
         a = re.sub("^" + pref, "", a)
         a = a.split(city, 1)[-1]
+        if city == "京都市":
+            a = a.translate(KYOTO_GAIJI)
         if city.endswith("区"):
             # a Tokyo special ward's own list: the ward IS the municipality, and
             # Taitō's addresses start at the town (浅草一丁目…)
@@ -281,6 +334,8 @@ def load_city_permits(path, pref, city):
         else:
             m = re.match(r"^(\D+?区)(.*)$", a)
             ward, rest = (m.group(1), m.group(2)) if m else ("", a)
+        if city == "京都市":
+            rest = strip_intersection(rest)
         # Sapporo's misses: an address that ENDS at 丁目 (南5条西6丁目, no block
         # number) was cut to 南 - the number after the town is optional.
         # ...and a building name may follow 丁目 directly (南5条西6丁目ニュー桂和ビル).
@@ -307,7 +362,27 @@ def load_city_permits(path, pref, city):
     return out
 
 
+def known_town(town, known):
+    """Kyoto's misses (rule C): a town with something attached, before
+    (八坂新地清本町 -> 清本町, 高台寺桝屋町 -> 桝屋町) or after (嵯峨中ノ島町官有地 ->
+    嵯峨中ノ島町). The longest known town of 3+ characters that ENDS the parsed
+    town, else the longest that STARTS it."""
+    for i in range(1, len(town) - 2):
+        if town[i:] in known:
+            return town[i:], "suffix"
+    for j in range(len(town) - 1, 2, -1):
+        if town[:j] in known:
+            return town[:j], "prefix"
+    return None, None
+
+
 def join_city(permits, blocks, chome):
+    towns = collections.defaultdict(set)
+    for w, t in chome:
+        towns[w].add(t)
+    # 大字 whose blocks are also keyed by 小字 (the Sendai key above): their 地番
+    # restart in each 小字 - 110 of 五日市町's 588 numbers occur in 2+ of them
+    has_koaza = {(w, t.rsplit("字", 1)[0]) for w, t, _ in blocks if "字" in t[1:]}
     for p in permits:
         w = p["ward"]
         # the direction suffix (Sapporo) only where that town exists in MLIT's file
@@ -324,6 +399,19 @@ def join_city(permits, blocks, chome):
         # Kobe's misses: hill addresses name a 字 inside the 大字 (山田町上谷上字古々山);
         # MLIT's town-chōme file knows the 大字, so it takes the 大字's centroid.
         oaza = re.split(r"字", p["town"], maxsplit=1)[0] if "字" in p["town"][1:] else None
+        if not hit and (w, p["town"]) not in chome and not (oaza and (w, oaza) in chome):
+            t, how = known_town(p["town"], towns[w])
+            if t and how == "prefix" and (w, t) in has_koaza:
+                # The dropped tail may be a 小字 (六甲山町北六甲, 五日市町上河内), whose
+                # 地番 restart: look it up under that 小字 or not at all. Measured
+                # against Hiroshima's MHLW coordinates, the 大字's own 地番 put rows
+                # a median 2.1 km off and its centroid 5.2 km.
+                hit = blocks.get((w, t + "字" + p["town"][len(t):].lstrip("字"), p["block"]))
+                if hit:
+                    p["town"], p["affix"] = t, how
+            elif t:
+                p["town"], p["affix"] = t, how
+                hit = blocks.get((w, t, p["block"]))
         if hit:
             p["tier"], p["pt"] = "block", hit[:2]
         elif (w, p["town"]) in chome:
@@ -332,6 +420,9 @@ def join_city(permits, blocks, chome):
             p["tier"], p["pt"], p["oaza"] = "chome", chome[(w, oaza)], True
         else:
             p["tier"], p["pt"] = "none", None
+        if p["tier"] == "chome" and p["pt"] is None:
+            # rule D: a twin town (an ambiguous 地番 falls through to here too)
+            p["tier"], p["twin"] = "none", True
     return permits
 
 
