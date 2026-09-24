@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**341 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**342 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Meguro's personal-services registers joined: 1,412 premises at 100% block](#2026-09-24---meguros-personal-services-registers-joined-1412-premises-at-100-block)
 - [Tokyo's four own-site wards read: all CC BY 4.0, none like Sendai](#2026-09-24---tokyos-four-own-site-wards-read-all-cc-by-40-none-like-sendai)
 - [Japan: cost clauses accepted country-wide; N03 never drawn; Kyoto before Tokyo](#2026-09-24---japan-cost-clauses-accepted-country-wide-n03-never-drawn-kyoto-before-tokyo)
 - [Japan's licence reads consolidated into data_sources.md; five were never read](#2026-09-24---japans-licence-reads-consolidated-into-data_sourcesmd-five-were-never-read)
@@ -383,6 +384,36 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Meguro's personal-services registers joined: 1,412 premises at 100% block
+
+- **Downloaded Meguro's three 生活衛生 registers from BODIK and joined them**, at
+  the owner's request. They are the complete lists as of 2026-03-31, 294 KB,
+  CC BY 4.0, read the same day.
+  - **Why**: Meguro is one of Tokyo's eight in-scope wards and had no
+    personal-services data. The brief had listed the registers as deferred.
+  - **The count**: 143 barbers, 1,076 beauty salons and 202 laundries (the
+    ward's own row numbers confirm 1,421). **1,412 premises** after 9
+    storeless laundry pick-ups are dropped. **100.0% placed at block level**
+    (`screen_japan_join.py meguro-life`).
+  - Tokyo's personal services now total **16,299** across 11 wards, up from
+    14,887.
+- **Two reader rules in `japan_register.py`, each from this file's misses.**
+  - **A TSV wrapped whole in CSV quotes.** Each tab-separated line is one
+    quoted field with its inner quotes doubled, so the first run read one
+    giant column and placed 0 rows. `city_rows` now unwraps that exact shape;
+    a plain quoted TSV has no doubled quotes and is untouched.
+  - **無店舗 ("no shop") in the type is not a premises.** The 9 pick-ups are
+    addressed `目黒区内` (anywhere in the ward), which the 一円 rule does not
+    catch. The type column `施設（種別）等` also had to join `TYPE_COLS`, because
+    without it the type read as blank.
+- **Every other key is unchanged** (26 of 26), and the Minato control stays
+  at 99.8%.
+- Only column names and fill counts were inspected. 営業者名 and ＴＥＬ１ are never
+  read.
+- **Meguro also publishes monthly new, succession and closure lists**, so a
+  build can bring the March list up to date both ways. It is the rare
+  Japanese source whose closures are visible.
 
 ### 2026-09-24 - Tokyo's four own-site wards read: all CC BY 4.0, none like Sendai
 

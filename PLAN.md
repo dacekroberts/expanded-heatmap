@@ -689,8 +689,9 @@ brief names.
     site), Taitō, Setagaya and Meguro (BODIK). **Read 2026-09-24 (owner):
     all PERMITTED WITH CONDITIONS, CC BY 4.0, nothing owed.** Their cost
     clauses are within the Japan-wide acceptance, and Shibuya has none. Each
-    needs its own credit. Found on the way: Meguro's 生活衛生 registers on BODIK
-    (Tokyo's still-unknown list).
+    needs its own credit. Found on the way: Meguro's 生活衛生 registers on BODIK.
+    **Downloaded and joined the same day (owner)**: 1,412 premises at 100.0%
+    block, so Tokyo's personal services now total 16,299.
   - [x] **The fault-based cost clauses: ✅ ACCEPTED by the owner
     2026-09-24 for every Japanese source**, as for Taiwan. That covers
     Fukuoka 第４条, Hiroshima 第3条 and MHLW 免責 1) エ, beside Tokyo's and

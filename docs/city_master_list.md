@@ -473,7 +473,7 @@ count, not OSM (owner).
 
 | City | Food premises (fixed) | **Joined** (block) | Independent check | Personal services | Licences (all READ) |
 |---|---|---|---|---|---|
-| **Tokyo (8 wards)** | **≈59,400** — Chūō, Minato, Shinjuku (2023, disclosed), Kōtō, Shibuya, Taitō, Setagaya, Meguro | **99.1–100%** | the wards' own coordinates, median **22–43 m** | 生活衛生 registers, 11 wards (14,887) | Tokyo Open Data Terms / ward CC BY 4.0; §6 cost clause accepted |
+| **Tokyo (8 wards)** | **≈59,400** — Chūō, Minato, Shinjuku (2023, disclosed), Kōtō, Shibuya, Taitō, Setagaya, Meguro | **99.1–100%** | the wards' own coordinates, median **22–43 m** | 生活衛生 registers, 11 wards (16,299; Meguro's 1,412 added 2026-09-24) | Tokyo Open Data Terms / ward CC BY 4.0; §6 cost clause accepted |
 | **Osaka** | **61,752** | **99.1%** | the city's own (mislabelled) coordinates, median **38 m** | 15,775 | CC BY 4.0 / 政府標準利用規約 2.0 |
 | **Kobe** | **24,761** | **97.1%** | — | 4,993 | CC BY 2.1 JP |
 | **Sapporo** | **24,257** | **84.7%** + 15.2% chōme | — | 5,993 | CC BY 4.0; 第9条3 accepted |
