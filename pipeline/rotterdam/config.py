@@ -109,12 +109,27 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 # trams reach Noord, Blijdorp, Delfshaven, Kralingen and Charlois, where no
 # metro runs, so they are not an overlay on the metro the way Milan's are.
 # Line 12 is left out: it runs on 7 of the window's 82 days (the stadium
-# event service). Lines 14 and 18 run on 62 of 82 (Monday to Saturday).
+# event service).
+#
+# THE FEED'S WINDOW OPENS ON A WORKS TIMETABLE, and it nearly drew the wrong
+# network. Trams 14 and 18 run every day from 2026-09-22 to 2026-11-22 and then
+# stop; over the same weeks trams 4, 6 and 8 are cut short (4 serves 17 of its
+# 31 stops on most days). Measured over the whole window, the works routes were
+# "regular" and 14 and 18 looked like lines serving seven stations nothing else
+# did - Euromast, Museumpark, Heemraadsplein - which are tram 4's, 6's and 8's
+# own stops the rest of the year. Neither of RET's own maps (the tram map of
+# October 2025 and the schematic of January 2026, both in data/rotterdam/raw)
+# carries a 14 or an 18. So a line's regular route is measured over the
+# timetable AFTER the works, REGULAR_ROUTE_DATES, and 14 and 18 are not drawn.
+# When the feed is refreshed past these dates, re-read which days are works.
+REGULAR_ROUTE_DATES = ("20261123", "20261212")
 ROUTE_TYPES_RAIL = ("0", "1")        # basic GTFS: tram, metro
 METRO_ROUTE_TYPE = "1"
-NOT_DRAWN = {"12": "event service to Stadion Feijenoord - 7 of 82 days in the feed"}
+NOT_DRAWN = {"12": "event service to Stadion Feijenoord - 7 of 82 days in the feed",
+             "14": "temporary works service, 2026-09-22 to 2026-11-22 - not on RET's maps",
+             "18": "temporary works service, 2026-09-22 to 2026-11-22 - not on RET's maps"}
 LINE_ORDER = ("A", "B", "C", "D", "E",
-              "1", "2", "3", "4", "5", "6", "7", "8", "11", "14", "18")
+              "1", "2", "3", "4", "5", "6", "7", "8", "11")
 LINE_NAMES = {ln: (f"Metro {ln}" if ln.isalpha() else f"Tram {ln}") for ln in LINE_ORDER}
 
 # A line's REGULAR ROUTE is the stops it serves on most days of the window -
@@ -179,15 +194,8 @@ TRAM_FEED_COLOURS = {"1": "#3651a3", "2": "#f47b20", "3": "#f3aacb", "4": "#165d
 # by the smallest step that clears 13 from every other line - tram 1 lighter to
 # #3f5ebe (L +0.07; 13.9 from its nearest line, 13.1 from the Retail pins),
 # then tram 11 darker to #293e7d (L -0.10; 13.8).
-#
-# PROVISIONAL, FOR THE OWNER: trams 14 and 18 carry no route_color in the
-# feed, and they serve seven stations no other line does (Euromast,
-# Museumpark, Heemraadsplein...), so they are drawn. Until the owner picks a
-# source - RET's own map (a download), OpenStreetMap's tags (a download), or
-# this palette - they take the two candidates furthest from every other line
-# and every pin: 14 brown #704214 (50.9 / 57.3), 18 grey #7f7f7f (40.2 / 53.1).
 LINE_COLOURS = {**METRO_FEED_COLOURS, **TRAM_FEED_COLOURS,
-                "1": "#3f5ebe", "11": "#293e7d", "14": "#704214", "18": "#7f7f7f"}
+                "1": "#3f5ebe", "11": "#293e7d"}
 
 RET_SHAPES_ZIP = DATA_PROCESSED / "ret_rail_shapes.zip"
 LINE_SHAPES_JSON = DATA_PROCESSED / "line_shapes.json"

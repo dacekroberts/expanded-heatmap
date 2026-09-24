@@ -148,6 +148,13 @@ def load_feed():
     stops["stop_name"] = stops["stop_name"].map(stop_name)
     cal = pd.read_csv(z.open("calendar_dates.txt"), dtype=str)
     cal = cal[(cal["exception_type"] == "1") & cal["service_id"].isin(set(trips["service_id"]))]
+    # The regular route is measured after the works timetable - see
+    # config.REGULAR_ROUTE_DATES for what the whole window would draw.
+    lo, hi = config.REGULAR_ROUTE_DATES
+    cal = cal[(cal["date"] >= lo) & (cal["date"] <= hi)]
+    if cal.empty:
+        sys.exit(f"no service days in {lo}-{hi}: the feed no longer covers the dates "
+                 f"config.REGULAR_ROUTE_DATES measures - re-read which days are works")
     return z, rail, line_of, mode_of, trips, st, stops, cal
 
 

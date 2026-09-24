@@ -51,35 +51,26 @@ station,lines,reason,latitude,longitude
 "Vlaardingen, Vlaardingen West",B,"in Vlaardingen (0622), outside gemeente 0599",51.903850500000004,4.3150335
 "Voorburg, Leidschendam-Voorburg",E,"in Leidschendam-Voorburg (1916), outside gemeente 0599",52.077231499999996,4.382771
 "Voorburg, Voorburg 't Loo",E,"in Leidschendam-Voorburg (1916), outside gemeente 0599",52.082006,4.366265
-'s-Gravendijkwal,14,"spacing filter on Tram 14: 0.434 mi after Eendrachtsplein, under 0.5 mi",51.913903,4.464127
 Adriaan Volkerlaan,3,"spacing filter on Tram 3: 0.308 mi after Dwarsdijk, under 0.5 mi",51.892046,4.5460465
 Akkeroord,3,"spacing filter on Tram 3: 0.421 mi after Keizerswaard, under 0.5 mi",51.8847015,4.5579350000000005
 Beijerlandselaan,5,"spacing filter on Tram 5: 0.263 mi after Varkenoordseviaduct, under 0.5 mi",51.8972185,4.510897999999999
-Bergse Dorpsstraat,4,"spacing filter on Tram 4: 0.483 mi after Bergse Plaslaan, under 0.5 mi",51.9575345,4.494444
+Bergse Dorpsstraat,4,"spacing filter on Tram 4: 0.451 mi after Burg. van Kempensingel, under 0.5 mi",51.9575345,4.494444
 Beverwaardseweg,3,"spacing filter on Tram 3: 0.219 mi after Schinnenbaan, under 0.5 mi",51.898073499999995,4.568404
-Boezemweg,7,"spacing filter on Tram 7: 0.255 mi after Vlietlaan, under 0.5 mi",51.9281745,4.496402
-Claes de Vrieselaan / Mathenesserlaan,14,"spacing filter on Tram 14: 0.208 mi after Heemraadsplein, under 0.5 mi",51.914258,4.458959
+Boezemsingel,7,"spacing filter on Tram 7: 0.223 mi after Vlietlaan, under 0.5 mi",51.929859,4.4969065
 Croystraat,3,"spacing filter on Tram 3: 0.193 mi after P+R Beverwaard, under 0.5 mi",51.8885885,4.568758
 Dorpsweg,2,"spacing filter on Tram 2: 0.234 mi after Pleinweg, under 0.5 mi",51.891324,4.472878
 Grote Hagen,2,"spacing filter on Tram 2: 0.196 mi after Keizerswaard, under 0.5 mi",51.887193,4.553706
-Huygensstraat,18,"spacing filter on Tram 18: 0.117 mi after Spartastraat, under 0.5 mi",51.917471500000005,4.4354245
-Jericholaan,7,"spacing filter on Tram 7: 0.388 mi after Voorschoterlaan, under 0.5 mi",51.928869000000006,4.5062605
-Kievitslaan,18,"spacing filter on Tram 18: 0.209 mi after Euromast, under 0.5 mi",51.9096825,4.4715745
 Kreekhuizenlaan,2,"spacing filter on Tram 2: 0.221 mi after Kerstendijk, under 0.5 mi",51.882613,4.539244
 Larikslaan,8,"spacing filter on Tram 8: 0.47 mi after Wilgenlei, under 0.5 mi",51.961543,4.47211
-Mathenesserlaan,14,"spacing filter on Tram 14: 0.325 mi after Eendrachtsplein, under 0.5 mi",51.915014,4.465964
+Lijnbaan,5,"spacing filter on Tram 5: 0.224 mi after Kruisplein, under 0.5 mi",51.919543000000004,4.4761925
 Mecklenburglaan,7,"spacing filter on Tram 7: 0.146 mi after Voorschoterlaan, under 0.5 mi",51.926835999999994,4.5108654999999995
 Meidoornweide,8,"spacing filter on Tram 8: 0.245 mi after Wilgenlei, under 0.5 mi",51.959152,4.47568
-Nieuwe Binnenweg,14,"spacing filter on Tram 14: 0.481 mi after Heemraadsplein, under 0.5 mi",51.914829,4.465285
 Noorderhelling,3,"spacing filter on Tram 3: 0.33 mi after Stadion Feyenoord, under 0.5 mi",51.8944345,4.5320475
 Oude Watering,3,"spacing filter on Tram 3: 0.481 mi after P+R Beverwaard, under 0.5 mi",51.892683,4.570093
-Pieter de Hoochweg,18,"spacing filter on Tram 18: 0.293 mi after Oostkousdijk, under 0.5 mi",51.905317,4.459936000000001
 Putsebocht,2,"spacing filter on Tram 2: 0.425 mi after Randweg, under 0.5 mi",51.89745,4.50227
-Schiemond,18,"spacing filter on Tram 18: 0.393 mi after Delfshaven, under 0.5 mi",51.904326,4.446623499999999
-Spanjaardstraat,18,"spacing filter on Tram 18: 0.209 mi after Delfshaven, under 0.5 mi",51.9069205,4.445653999999999
+Spanjaardstraat,8,"spacing filter on Tram 8: 0.209 mi after Delfshaven, under 0.5 mi",51.9069205,4.445653999999999
 Teldersweg,8,"spacing filter on Tram 8: 0.344 mi after Melanchthonweg, under 0.5 mi",51.9527735,4.4691685
-Van Duylstraat,18,"spacing filter on Tram 18: 0.477 mi after Marconiplein, under 0.5 mi",51.910562999999996,4.4425685
-Van den Hoonaardstraat,4,"spacing filter on Tram 4: 0.381 mi after Walenburgerweg, under 0.5 mi",51.9350345,4.475543999999999
-Vasteland,18,"spacing filter on Tram 18: 0.467 mi after Euromast, under 0.5 mi",51.911373999999995,4.4769760000000005
-Zaagmolenbrug,6,"spacing filter on Tram 6: 0.191 mi after Noorderbrug, under 0.5 mi",51.93215,4.487315
-Zeilmakersstraat,18,"spacing filter on Tram 18: 0.282 mi after Marconiplein, under 0.5 mi",51.9116525,4.438352500000001
+Van Duylstraat,8,"spacing filter on Tram 8: 0.477 mi after Marconiplein, under 0.5 mi",51.910562999999996,4.4425685
+Vasteland,8,"spacing filter on Tram 8: 0.467 mi after Euromast, under 0.5 mi",51.911373999999995,4.4769760000000005
+Zaagmolenbrug,7,"spacing filter on Tram 7: 0.286 mi after Crooswijksestraat, under 0.5 mi",51.93215,4.487315
+Zeilmakersstraat,8,"spacing filter on Tram 8: 0.282 mi after Marconiplein, under 0.5 mi",51.9116525,4.438352500000001

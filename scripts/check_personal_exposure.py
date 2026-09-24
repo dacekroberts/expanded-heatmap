@@ -214,6 +214,12 @@ REGISTRIES = {
     "rome": dict(raw=None, trade=None, owner=None,
                  processed="businesses_clean.csv",
                  address=("business_name",)),
+    # Rotterdam: neither layer carries a name. Permit premises show the fixed
+    # label "Hospitality premises" (notice titles and abstracts sometimes hold a
+    # trade name and are never read into a pin); BAG units show their address.
+    "rotterdam": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv",
+                      address=("address",)),
     "san_diego": dict(raw="sd_businesses_active_datasd.csv", trade="dba_name",
                       owner="business_owner_name", processed="businesses_clean.csv",
                       address=("address_no", "address_road", "address_suite")),
