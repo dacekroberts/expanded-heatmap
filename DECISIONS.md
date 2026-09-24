@@ -16,13 +16,15 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**324 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**326 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Kyoto rebuilt from its permit stream; Band A decided, pending four join rules](#2026-09-24---kyoto-rebuilt-from-its-permit-stream-band-a-decided-pending-four-join-rules)
+- [Phone-width label placer verified and pushed](#2026-09-24---phone-width-label-placer-verified-and-pushed)
 - [Japan's permit-type taxonomy: one module for ten list formats](#2026-09-24---japans-permit-type-taxonomy-one-module-for-ten-list-formats)
 - [Japan's national facts module; the stub test clears four cities; Tokyo goes last](#2026-09-24---japans-national-facts-module-the-stub-test-clears-four-cities-tokyo-goes-last)
+- [Phone-width line labels re-placed at runtime: 62 problems to 2](#2026-09-24---phone-width-line-labels-re-placed-at-runtime-62-problems-to-2)
 - [Japan: the Shinkansen is out; confectioners and delis count](#2026-09-24---japan-the-shinkansen-is-out-confectioners-and-delis-count)
 - [Japan's join moved into the pipeline, unchanged, before any Japanese build](#2026-09-24---japans-join-moved-into-the-pipeline-unchanged-before-any-japanese-build)
 - [check_city_registry.py: a merge that fuses two cities' entries now fails](#2026-09-24---check_city_registrypy-a-merge-that-fuses-two-cities-entries-now-fails)
@@ -398,6 +400,22 @@ onwards; the early ones are split by phase rather than by hour.
   brief and the row move (`PLAN.md`). **Must disclose**: a rebuilt register
   whose closures are unknown (an upper bound), vehicles excluded, and food
   retail by permit type only.
+### 2026-09-24 - Phone-width label placer verified and pushed
+
+- **`deploy-verify` (`map-chrome`) PASSED on the placer, so it is pushed.**
+  `check_map_labels.js` on all 30 cities at 375, 343, 854 and 1280 (120
+  loads) found only the two expected Madrid pairs at 343. The legend and dark
+  toggle worked on every load. `check_map_view.js`: every zoom as expected on
+  120 fresh loads, with 0 guard corrections. `check_map_attribution.js`: the
+  credit was never covered in 36 runs at 650, 768 and 812 px. Interaction on
+  Amsterdam at 375, with real clicks: opening the legend shows 13 labels
+  under it, by design (an open legend is not an obstacle); closing it
+  restores 0 problems; zooming in re-places cleanly; no console errors.
+  **Worth knowing, not failures:** some labels use the farthest spot, about
+  54 px from their tip (Amsterdam's Metro 51, floating above Metro 50's label
+  and tied to its line only by colour), and labels can sit on cluster
+  bubbles, which the placer does not avoid. Both are in `PLAN.md` as optional
+  follow-ups. No `app/` change, so no reboot.
 
 ### 2026-09-24 - Japan's permit-type taxonomy: one module for ten list formats
 
@@ -460,6 +478,39 @@ onwards; the early ones are split by phase rather than by hour.
   missing wards, which becomes a planned project before its build (the PDF
   lists, the partial files, the requests). **Build order: Osaka, Kobe,
   Sapporo, Fukuoka, then Tokyo.**
+### 2026-09-24 - Phone-width line labels re-placed at runtime: 62 problems to 2
+
+- **`LABEL_CLAMP_SCRIPT` now re-places any line label that collides, on the
+  phone view and whenever the view changes. Owner's call routed the work to
+  cleanup (the Main Building Session's handoff).** The cause, confirmed:
+  `_label_candidates` and `_tail_end` place every label once, in Python,
+  against the full-width view, and nothing moved them when the phone fit
+  zoomed out. After the existing slide inside the frame, a label that
+  overlaps another label, the fixed buttons, Leaflet's top-left controls or
+  the COLLAPSED legend tries spots around its own line's tip: mirrored,
+  above, below, right, left, the four diagonals, then further out. It takes
+  the first clear spot, or the least-overlapping one, over up to four passes.
+  Obstacles are kept 2 px clear, and labels 1 px from each other: the first
+  run left Edmonton's Valley Line, whose tip sits UNDER the collapsed legend,
+  overlapping that legend by one pixel. A label that collides with nothing
+  never moves, and the open legend is not an obstacle, because opening it is
+  the reader choosing to cover part of the map.
+
+- **Measured with `check_map_labels.js` on all 30 cities, before and after.**
+  At 375: 21 overlapping pairs and 5 labels under a button or the legend
+  became **0**. At 343, the app's frame on a 375 phone: 35 and 1 became **2**,
+  both in Madrid's core (Línea 2/5 and 3/6), where eight line ends sit within
+  about 60 px. Clearing those would push labels so far from their lines that
+  they would misname them, so they stay reported, with no exemption. 1280
+  shows no problem before or after. `check_map_view.js` passed on all 90
+  loads with 0 corrections, and nothing is clipped or over the credit. All
+  30 maps were re-rendered with every baseline figure unchanged;
+  `check_render_current.py` passes. Copenhagen's cache lives only in its
+  worktree and was copied here, read-only, to render it.
+
+- **Not pushed.** A change to the shared renderer goes out only after
+  `deploy-verify` with scope `map-chrome`, and the owner was at 10% of the
+  5-hour limit. The commit waits on `worktree-cleanup`; the handoff says so.
 
 ### 2026-09-24 - Japan: the Shinkansen is out; confectioners and delis count
 
