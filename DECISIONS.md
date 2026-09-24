@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**253 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**254 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [The cleanup role's stray worktrees retired; removing a session's own launch worktree broke that session](#2026-09-23---the-cleanup-roles-stray-worktrees-retired-removing-a-sessions-own-launch-worktree-broke-that-session)
 - [Three limbs of check_provenance could fall silent; each now asserts it had input](#2026-09-23---three-limbs-of-check_provenance-could-fall-silent-each-now-asserts-it-had-input)
 - [The geocoding retrospective, written to prepare Japan; the lesson placed where the next country passes through it](#2026-09-23---the-geocoding-retrospective-written-to-prepare-japan-the-lesson-placed-where-the-next-country-passes-through-it)
 - [Taiwan finished: Taipei (Regional), Taoyuan and Taichung to Band A; Kaohsiung held on an unreachable host](#2026-09-23---taiwan-finished-taipei-regional-taoyuan-and-taichung-to-band-a-kaohsiung-held-on-an-unreachable-host)
@@ -292,6 +293,35 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - The cleanup role's stray worktrees retired; removing a session's own launch worktree broke that session
+
+- **Retired, at the owner's request:** the worktree
+  `.claude/worktrees/practical-leakey-12a8a2`, and the branches
+  `claude/practical-leakey-12a8a2` (`2fea434`),
+  `claude/cleanup-handoff-2026-09-23-18986c` (`6ec6010`) and `render-guard`
+  (`469ca7a`). All were deleted with `-d` against `worktree-cleanup` at
+  `2c091fd`, which contains every one of them. Removing the worktree without
+  `--force` also confirmed it had no uncommitted files. The remote branches
+  `dublin-build`, `milan-build` and `spain-app-wiring` are merged and were left
+  on GitHub; deleting them is a push, and it was not asked for.
+
+- **The desktop app had launched this cleanup session in a worktree it
+  generated, `cleanup-handoff-2026-09-23-18986c`, instead of in
+  `.claude/worktrees/cleanup`.** The handoff's first instruction, to confirm
+  the branch and stop if it was wrong, caught it. The session then moved
+  itself into the cleanup worktree at the owner's choice, rather than being
+  restarted.
+
+- **Removing that launch worktree from inside the same session broke the
+  session.** `git worktree remove` deleted the contents and unregistered the
+  worktree, then failed to delete the folder itself, because the session
+  still held it open. The session's hooks load from the `.claude/` of the
+  folder it was launched in, so `block_heredoc.py` disappeared and every Bash
+  call failed. The risk had been named to the owner minutes earlier, and the
+  command was run anyway. Nothing was lost, because the worktree was clean and
+  at `master`. The rule now sits beside the retirement steps in
+  `docs/session_roles.md`, which is the place the next retirement will read.
 
 ### 2026-09-23 - Three limbs of check_provenance could fall silent; each now asserts it had input
 
