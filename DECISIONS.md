@@ -16,7 +16,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**261 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**263 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
@@ -26,6 +26,8 @@ onwards; the early ones are split by phase rather than by hour.
 
 **2026-09-23**
 
+- [Brazil's agency rail searched for seven cities; station share per municipio measured; Brasilia's 90% is its address key; BH Line 2 is open](#2026-09-23---brazils-agency-rail-searched-for-seven-cities-station-share-per-municipio-measured-brasilias-90-is-its-address-key-bh-line-2-is-open)
+- [Stray downloads in the main checkout's root filed](#2026-09-23---stray-downloads-in-the-main-checkouts-root-filed)
 - [Label check runs at phone width; Milan's shop-sign share; lille retired](#2026-09-23---label-check-runs-at-phone-width-milans-shop-sign-share-lille-retired)
 - [Kaohsiung's data hosts are geo-blocked to Taiwan, not down; stays in Band B](#2026-09-23---kaohsiungs-data-hosts-are-geo-blocked-to-taiwan-not-down-stays-in-band-b)
 - [Every Band A city has a brief: seven Brazilian and three Taiwanese written, all checks passing live](#2026-09-23---every-band-a-city-has-a-brief-seven-brazilian-and-three-taiwanese-written-all-checks-passing-live)
@@ -359,6 +361,71 @@ onwards; the early ones are split by phase rather than by hour.
     code (`110`, 29.8%); and `000`'s legal-form mix (68.3% sole traders)
     matches the whole set's (67.9%). The brief's "the Czech column genuinely
     discriminates" is false - it is France's `NN` again.
+### 2026-09-23 - Brazil's agency rail searched for seven cities; station share per municipio measured; Brasilia's 90% is its address key; BH Line 2 is open
+
+- **Searched the agencies' own rail layers for the seven Brazilian cities
+  that had only OSM, and found them for two.** Brasília: IPEDF/Codeplan's
+  GeoServer carries **24 operating stations with a status field**, 5 under
+  construction, 13 planned, and both lines as one MultiLineString (declared
+  "Public Domain (PD)", unread). Recife: a CBTU file on the city's CKAN with
+  **36 stations and six status-labelled lines** (declared ODbL, unread) - but
+  labelled like a planning map, so its status text is not evidence of
+  service. Santos: an ArcGIS account `CPGSTM` carries EMTU-labelled VLT stops
+  and track, **owner unconfirmed** (the name alone suggests SP's
+  metropolitan-transport secretariat), so it is a cross-check, never the
+  licensed source. Belo Horizonte: Prodabel publishes metro LINES (2022,
+  pre-Line 2, declared cc-by), no stations. **Fortaleza, Salvador and Porto
+  Alegre: none, each on three or four methods** - Metrofor's certificate has
+  expired, Salvador's mobility folder is token-gated (not worked around),
+  Trensurb's hosts do not answer. Each brief now recommends which source
+  draws what; **OSM remains the geometry source everywhere except Brasília's
+  stations.** Searched by a background agent; its one borderline act (a
+  custom user agent past BH's firewall) was checked and was an honest
+  self-identifying name, not a browser disguise.
+- **Measured station share per municipio from OSM route members, for the
+  scope question.** Porto Alegre **7 of 23 (30%)**, Recife **19 of 36 (53%)**,
+  Santos **17 of 25 (68%)** with São Vicente holding the rest, Fortaleza **31 of
+  41 (76%)**, Salvador **20 of 21** (Aeroporto in Lauro de Freitas). Salvador
+  keeps commune scope; the other four are recommended regional (Porto Alegre:
+  regional or not built) and **left to the owner**. The twelve neighbours'
+  CNEFE files total 32.5 MB and were NOT downloaded - that needs the owner's
+  permission.
+- **Found that Brasília's "89.7% of storefronts share an address with a
+  dwelling" is the key, not the city.** 98.5% of those rows carry no door
+  number: the street field names a quadra and the unit is the `LOTE`
+  complement, so `screen_cnefe.py`'s street+number key merges whole blocks.
+  Keyed on the lot, **58.0%**; on the identical coordinate, **18.8%** (Recife,
+  the control: 40.9% / 23.7% / 20.3%). Not changed in the script: a finer key
+  narrows what the owner's privacy rule strips, so it is the owner's call.
+- **Found Belo Horizonte's Linha 2 OPEN** since 2026-07-03 with two stations
+  (Nova Suíça, Amazonas), per the local press, and **OSM's ref 2 relations
+  list exactly those two stops**, now coloured. The "Tel Aviv trap" flag in
+  the brief and the master list was retired; re-check at each opening
+  (five more stations due 2027-28).
+- Touched: the seven Brazilian briefs (new checks for Brasília, Recife,
+  Santos, Belo Horizonte), `docs/city_master_list.md`.
+### 2026-09-23 - Stray downloads in the main checkout's root filed
+
+- **Rio's Decreto nº 38.879/2014 is stored in `docs/licenses/`, with its
+  source recorded as UNVERIFIED; data.taipei's user manual goes to the
+  gitignored `data/taipei/raw/`.** Both PDFs were saved to the main
+  checkout's root at 16:45 by download prompts the owner answered away from
+  the desktop, and nothing in the repository referenced either. Identified by
+  their text: the decree constitutes Rio's Sistema Municipal de Informações
+  Urbanas (SIURB) - the legal basis of the *Termo de Uso do SIURB.RIO* whose
+  liability clause the owner accepted today - so it is a terms document and
+  belongs with the others. It is stored unaltered as
+  `rio-decreto-38879-siurb.pdf`, SHA-256 `64db5ecd...6583d`, in a new Brazil
+  section. **The prompt did not record its URL**; the README names SIURB's
+  documents listing as the likely source and says it is not verified,
+  instead of writing a URL no one fetched. The 38-slide *資料大平臺網站使用手冊*
+  (January 2025) is a how-to for the portal, not terms, and
+  `docs/licenses/README.md` stores only terms kept "for compliance
+  reference" - so it goes where CLAUDE.md puts probe captures, which are
+  never committed. `check_provenance.py --strict` passes with the new hash.
+  A third PDF, PID's logo manual (Prague), arrived at 17:59 while this ran
+  and was left in place for the Staging Session, which was active and whose
+  Prague research it most likely belongs to.
 
 ### 2026-09-23 - Label check runs at phone width; Milan's shop-sign share; lille retired
 
