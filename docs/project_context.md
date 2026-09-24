@@ -679,6 +679,26 @@ Cities built and running end to end (pipeline, map, app page):
   quiet one or a private one, and nothing in the data separates them. The page
   says so.
 
+- **Lille (Regional)** - ilévia's Métro 1 and 2 and Tram R and T, across the
+  eleven communes the network serves. France's fourth city and **its first
+  regional one**: the commune of Lille alone would have kept fewer than half
+  of Métro 2's stations and drawn the tram as a three-stop stub. Its rail comes
+  from three sources, line by line in `osm-rail`'s order - the Métropole's own
+  GIS for every station and the tram lines, OpenStreetMap for the métro lines
+  that exist nowhere else, and the operator's feed not read at all. The served
+  communes were derived by placing every station in the official contours, and
+  the Métropole's own station labels would have missed one of them.
+
+- **Rennes** - STAR's Métro a and b. France's fifth and last city, the smallest
+  and the best-named. **Its brief's scope premise was wrong**: "the métro is
+  city-contained" held for line a and not for line b, which leaves the commune
+  at both ends. Commune-only was the owner's call on the corrected measurement,
+  because line b keeps more of itself than Toulouse's T1 did - which made the
+  worst line's survival the rule the French cities share. Its gate 3 is
+  OpenStreetMap's count rather than the operator's, because the operator's
+  portal API was refusing every caller on a spent domain-wide daily quota; the
+  feed itself is on a separate host and was never affected.
+
 **Canada is closed at five built cities** - Vancouver (regional, with Surrey),
 Montréal, Calgary, Edmonton and Toronto - out of six candidates screened. The
 sixth, Surrey, is not pending: it shipped inside the Vancouver regional map.
@@ -714,8 +734,8 @@ measurement, which is why there is no default for the next city to inherit.
 city each**, and Italy needed no country profile at all: its registers are
 municipal, so what a profile would establish is per city anyway.
 
-**France is open: Paris, Marseille and Toulouse are built, Lille and Rennes
-remain.** It is the first country here where each city was materially cheaper
+**France is complete at five cities: Paris, Marseille, Toulouse, Lille
+(Regional) and Rennes.** It is the first country here where each city was materially cheaper
 than the last - one national register, one national taxonomy module, one
 national grid, one shared extract cache and one shared step 2, so Marseille's
 own work was a scope measurement and a rail leg, and Toulouse downloaded
@@ -727,10 +747,13 @@ download, an open-ended indemnity, a marks clause colliding with the invariant
 that every drawn line carries its real public name, and a feed dead behind the
 national access point - while Toulouse's and Rennes' terms were read the same
 day and are clean, so those clauses are that métropole's own rather than a
-French pattern. Lille needs its own rail answer before it starts. **Toulouse is
-built but not deployed:** `deploy-verify` is deliberately deferred until the
-last French city, so a French city reaching master before that run is the thing
-to stop.
+French pattern. **Scope is the one thing decided city by city, on one
+measure: the worst line's station survival inside the commune.** Lille's
+tram kept 3 of 36 and it went regional; Toulouse's T1 kept 13 of 25 and
+Rennes' Métro b 11 of 15, and both stayed commune-only. SIRENE is one
+national file, so regional is a wider filter, never a new source. **Rennes
+is built but not merged:** the city-scoped `deploy-verify` deferred until the
+last French city runs before it reaches master.
 
 **The macro map is regional, and a region is whatever groups cities into one
 readable view** - not a country. They are United States (a COMPOSITE of West
@@ -760,10 +783,7 @@ downtime on 2026-09-22. `app/cities.py` changes with every city.
 `python scripts/check_deploy_imports.py` tests a clean clone under the lean
 venv before pushing; it cannot catch the stale-module case, and says so.
 
-Next is the rest of France - Lille, then Rennes - and **Lille needs its own
-rail answer before it starts**, because its brief found tram geometry and no
-first-party metro line geometry, so its rail leg is none of the three built
-French cities'. A new COUNTRY comes after that rather than a new city. New
+Next, with France complete, is a new COUNTRY rather than a new city. New
 Orleans and Seattle remain deferred, both needing decisions before code. Take
 the candidate ordering from `docs/city_master_list.md`, which is current state;
 `docs/global_country_shortlist.md` is its evidence trail, and the `add-country`

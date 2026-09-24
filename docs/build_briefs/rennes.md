@@ -7,6 +7,17 @@ those first**; a correction belongs there, not here. Run
 
 ---
 
+> ✅ **BUILT 2026-09-23, commune-only.** Two claims below did not survive the
+> build, and both are corrected where they stand. **Scope:** "the métro is
+> city-contained" is half true - Métro a keeps 15 of 15 stations inside
+> commune 35238, **Métro b keeps 11 of 15 and loses both termini** (Atalante
+> and Cesson - Viasilva to Cesson-Sévigné, La Courrouze and Saint-Jacques -
+> Gaîté to Saint-Jacques-de-la-Lande). Commune-only was the owner's call anyway,
+> because the worst line survives better than Toulouse's T1. **Masking:** 9.8%
+> was low - 15.9% on the same denominator. Gate 3 was taken against
+> OpenStreetMap (15 = 15 on both lines), because STAR's portal API refused
+> every call that day on a spent domain-wide quota. See `DECISIONS.md`.
+
 ## The one-line summary
 
 **The smallest of the six and the cleanest feed in France.** ~4,833 storefront
@@ -24,7 +35,7 @@ everything Paris's does not: `shapes.txt`, `feed_info.txt`, and a real
 | Source | `StockEtablissement` **parquet**, `codeCommuneEtablissement` **= `35238`** (a single code, not a prefix) |
 | Active in NAF 47/56/96 | **≈4,833** (611 counted in 12.6% of the file) — a **floor**; scaling undercuts |
 | **Named** | **53.5% — the highest of the six** (Paris 39.6%) |
-| Masked (`statutDiffusion` ≠ `O`) | 9.8% |
+| Masked (`statutDiffusion` ≠ `O`) | ~~9.8%~~ **15.9%** measured at the build on the same denominator (active rows in 47/56/96); 17.5% of all active rows. The sample was low, as Toulouse's was |
 | Distance selling to exclude | **14.2% — the lowest of the six** |
 
 **Rennes is the best-quality French city and the smallest.** Whether ~4,800
@@ -129,8 +140,10 @@ unresolved, and **unlike Paris there is no publisher gloss to lean on.**
 
 ## Still unknown
 
-- **Scope** — Rennes commune only, or Rennes Métropole? The métro is
-  city-contained, so this is lower-stakes than Marseille's.
+- ~~**Scope** — Rennes commune only, or Rennes Métropole? The métro is
+  city-contained, so this is lower-stakes than Marseille's.~~ **Settled
+  2026-09-23: commune-only, and the premise was wrong** - Métro b loses 4 of
+  15 stations, both termini among them. See the note at the top.
 - **§4.4** — the station CSV question above.
 - **Exact bucket count** — 4,833 is scaled and is a floor.
 - **Whether ~4,800 rows is worth a page.** A scale judgment for the owner;

@@ -21,9 +21,9 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [ ] **🇫🇷 FRANCE — Paris, Marseille, Toulouse and Lille (Regional) BUILT;
-  Rennes remains. `deploy-verify` is deliberately deferred until all five are
-  done - and Rennes is the fifth, so it does not merge without that run.**
+- [~] **🇫🇷 FRANCE — ALL FIVE BUILT: Paris, Marseille, Toulouse, Lille
+  (Regional) and Rennes. Rennes does not merge until the city-scoped
+  `deploy-verify` has run - the deferral below ends here.**
 
   ✅ **Paris** built and deployed 2026-09-23 (22 cities live).
   ✅ **Marseille** built and deployed 2026-09-23, 18,177 storefronts,
@@ -31,20 +31,24 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   ✅ **Toulouse** built 2026-09-23 on `toulouse-build`, 8,635 storefronts,
   48 stations, **gate 3 exact on all four lines** against Tisséo's own
   `arrets-itineraire` layer. First city here to draw a **non-rail mode** (the
-  Téléo cable car, owner's call). Its brief's case for th  ✅ **Lille (Regional)** built 2026-09-23 on `lille-build`, 11,833
+  Téléo cable car, owner's call). Its brief's case for that turned out to be
+  false and was corrected in place — see DECISIONS.md.
+  ✅ **Lille (Regional)** built 2026-09-23 on `lille-build`, 11,833
   storefronts, 91 stations across the **eleven communes the network serves**
   - the first regional French city, owner's call. Its rail answer turned out
   to be three sources: MEL's WFS for every station and the tram lines, OSM
   for the métro lines only, and ilévia's GTFS not read at all. Gate 3 exact
   on all four lines against OSM.
+  ✅ **Rennes** built 2026-09-23 on `rennes-build`, 3,479 storefronts,
+  24 stations, **commune-only by owner's call** after its brief's "the métro
+  is city-contained" turned out half wrong: Métro b keeps 11 of 15 stations
+  and loses both termini. Gate 3 exact on both lines against OSM, because
+  STAR's portal API was refusing every caller on a spent domain-wide quota.
 
-  ⚠️ **For Rennes, carry two things from Lille.** Scope is NOT settled by
-  precedent in either direction: three French cities are commune-only and one
-  is regional, and the deciding measurement is how many stations each line
-  keeps inside the commune. And SIRENE is one national file, so a wider scope
-  is a wider filter, not a new source - Toulouse's scope was briefly justified
-  as if it were not, and that was corrected.ation layer for a
-  `en_service`-style column before trusting its row count.
+  **What remains before Rennes merges:** the city-scoped `deploy-verify`
+  (below), `check_map_view.js` on the Rennes page at embedded and phone
+  width, then the publish gate - and a REBOOT after the push, since
+  `app/cities.py` and `app/components.py` both change.
 
   **THE DEFERRAL IS THE OWNER'S CALL (2026-09-23) AND IT IS A SCOPE DECISION,
   NOT AN OVERSIGHT.** `deploy-verify` is city-scoped work: a `city-added` run

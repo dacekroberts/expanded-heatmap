@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**250 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**251 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Rennes built: 3,479 storefronts, 24 stations, and France is complete](#2026-09-23---rennes-built-3479-storefronts-24-stations-and-france-is-complete)
 - [Six merged build branches deleted; the retirement steps needed a pull first](#2026-09-23---six-merged-build-branches-deleted-the-retirement-steps-needed-a-pull-first)
 - [The fit race came back a third way, so the fit now checks its outcome](#2026-09-23---the-fit-race-came-back-a-third-way-so-the-fit-now-checks-its-outcome)
 - [The cleanup role gets a named worktree, and its old one is retired rather than moved](#2026-09-23---the-cleanup-role-gets-a-named-worktree-and-its-old-one-is-retired-rather-than-moved)
@@ -289,6 +290,116 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Rennes built: 3,479 storefronts, 24 stations, and France is complete
+
+- **Rennes is the 25th city and the fifth and last French one.** 3,479
+  storefronts across 24 stations of STAR's two métro lines, commune 35238 only.
+  Step 2 read the national parquet down from 44,064,115 rows: 172,429 in the
+  commune, 65,252 active, 53,826 publicly diffusible (17.5% masked), 5,451 in
+  NAF divisions 47/56/96, 4,129 after the structural non-premises exclusions
+  (1,322, 24.3%), 3,483 after the catch-all verdict, 3,479 with a usable
+  street-level coordinate (99.97% geolocation match, 3 commune centroids
+  dropped). 2,365 fall within a station ring, **68.0%**. Premises name on
+  **59.1%** - the best of the five French cities, as the brief predicted.
+  Personal exposure: **0 person-like names at a residential unit of 2,365 pins
+  (0.00%)**, on the same structural guarantee as every French city - no
+  registrant-name column is ever loaded. Built in the Lille worktree on branch
+  `rennes-build`, with the national parquet linked in by one junction.
+
+- **The brief's scope premise was wrong, and commune-only was the owner's call
+  on the corrected measurement.** The brief said "the métro is
+  city-contained". Against commune 35238's own contour, Métro a keeps **15 of
+  15** stations and Métro b **11 of 15**, losing **both termini**: Atalante and
+  Cesson - Viasilva in Cesson-Sévigné (35051), La Courrouze and Saint-Jacques -
+  Gaîté in Saint-Jacques-de-la-Lande (35281). Put to the owner as commune-only
+  (recommended) against Rennes (Regional) over the three served communes, the
+  Lille pattern. **Commune-only was taken, on the rule the French cities now
+  share: the deciding measure is the worst line's survival.** Lille's worst was
+  a stub - the tram at 3 of 36 - and went regional; Toulouse's was T1 at 13 of
+  25 (52%) and stayed commune-only; Rennes' is 73%. Data availability was not
+  the reason - SIRENE is one national file, so the regional option was a wider
+  filter and nothing more. `config.EXPECTED_INSIDE_PER_LINE` asserts {a: 15, b:
+  11}, and step 1 exits if it moves. 28 stations network-wide -> 24 inside,
+  after the two interchanges (Gares, Sainte-Anne) collapse.
+
+- **Each excluded station is named with its commune, from Rennes Métropole's
+  own contours** (EPCI 243500139, 43 communes) - a naming layer, not a scoping
+  one, Paris's in miniature. `fetch_sources.py` refuses the file unless it
+  holds 35238, 35051 and 35281, since a wrong EPCI code would answer 200 with
+  some other intercommunality's communes.
+
+- **Gate 3 exact on both lines, against OpenStreetMap - because STAR's portal
+  refused every call that day.** osm-rail puts the agency's GIS first, and
+  `data.explore.star.fr` was the place to look; its API answered the first
+  request with HTTP 429, errorcode 10003, *"Too many requests on the
+  domain"* - a **domain-wide** quota of 150,000 calls a day shared by every
+  anonymous caller, spent before this project made a call, resetting at 00:00
+  UTC. A fact about the host, recorded as such. The feed's file host
+  (`eu.ftp.opendatasoft.com`) does not count against it and answered
+  throughout, so the build's one mandatory download does not depend on the
+  quota. OSM's route relations (`network=FR:STAR`, four - one per line per
+  direction, nodes-first, 63 elements) give a 15 = 15, b 15 = 15.
+
+- **The feed self-attests**: `feed_info.txt` names Keolis Rennes, 2026-09-22 to
+  2026-10-18. Marseille's case, not Paris's or Toulouse's - but a four-week
+  window, so `brief_check`'s feed-window check will flag it early. That means
+  refetch, not alarm.
+
+- **Masking was under-estimated by the brief, the same way Toulouse's was.**
+  The brief's 9.8% came from a 12.6% sample of the bucket rows. Measured at the
+  build on the same denominator - active rows in 47/56/96 - it is **15.9%**;
+  across all active rows 17.5%. Toulouse's brief read 16.0% against a built
+  20.2%. Two French briefs sampled low on the same variable, so the sampling
+  pass is the suspect, not either city.
+
+- **Catch-all verdict measured, not inherited: `96.09Z` 14.0%, `56.29B` 1.7%,
+  both excluded.** Level with Toulouse's 13.9% / 1.6%. Step 2 prints its
+  employee-band discriminator AFTER the exclusion, when the dropped codes are
+  gone, so it was re-run with nothing excluded: unbanded rows are **28.8%**
+  catch-all against **9.8%** for banded ones, and less often named (52.8% vs
+  63.2%) - Toulouse's signature (26.4% vs 8.8%) of registered individuals with
+  no premises. The three retail catch-alls are kept, as everywhere in France.
+
+- **Ring edges are the shared French set, on Toulouse's measured ground.**
+  In-commune spacing median 541 m (min 237, mean 581, max 1,119), the regime
+  Toulouse's 525 m was in; applied on that measurement rather than re-asked, as
+  Lille's were. The 237 m minimum was read by name: République (a) and
+  Saint-Germain (b), two lines' separate stations. The spacing gate did not
+  fire, so no `spacing_min` is passed.
+
+- **Restaurant control 1.26x**, NAF 56.10A (470) against OSM
+  `amenity=restaurant` (374) inside the commune, node+way with `out center` -
+  the shape Toulouse's 1.28x and Lille's 1.52x were taken in. Level with
+  Toulouse and the closest of the five to OSM's count (Paris 1.80, Marseille
+  1.72). The query answered in 12 seconds.
+
+- **Line colours are STAR's own, and Métro b's is recorded below the preferred
+  separation.** The feed's `route_color` gives a `#EE1D23` and b `#00893E`
+  (OSM's `colour` tags differ by one step on a; the feed is the publisher's and
+  wins). The shared check scores b at Delta-E 19.8 against the Personal
+  services pins - above the floor, below the preferred 45 - and a at 46.2. Kept,
+  as official liveries are elsewhere; confirmed legible in the browser on both
+  basemaps.
+
+- **Macro-map label measured at 49.7 px** in the deployed app's own frame, with
+  six table entries reproducing exactly (Toulouse 60.4, Paris 32.9, Marseille
+  60.3, Milan 36.3, Lille (Regional) 99.7, Boston 48.4). **The OUTER page
+  measured every one of them differently** - Toulouse 61.2, Paris 34.2 - while
+  reporting the font loaded, so the frame matters and is now written beside the
+  table. The scaffold's default offset scored clean: PROBLEMS 0, Rennes not
+  among the nine labels clipped at 375 px.
+
+- **Notice 26 added: STAR's ODbL**, §4.3's own template with the database
+  named - the third ODbL source, and neither OpenStreetMap's notice nor
+  Tisséo's discharges it. The portal's CGU is the same Opendatasoft template as
+  Toulouse Métropole's and was already read clean. The §4.4 station-CSV
+  question is left exactly where Toulouse's is.
+
+- **France is complete at five cities** - Paris, Marseille, Toulouse, Lille
+  (Regional), Rennes - with Lyon discarded on terms. Master list, brief and
+  provenance updated; the brief carries a build note at its head and both
+  wrong claims corrected in place.
 
 ### 2026-09-23 - Six merged build branches deleted; the retirement steps needed a pull first
 
