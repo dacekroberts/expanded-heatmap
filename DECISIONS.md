@@ -16,12 +16,15 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**341 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**344 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Renderer fixes verified and pushed; the dark-label model corrected next, with the light-mode halo swap (owner)](#2026-09-24---renderer-fixes-verified-and-pushed-the-dark-label-model-corrected-next-with-the-light-mode-halo-swap-owner)
+- [Tokyo's four own-site wards read: all CC BY 4.0, none like Sendai](#2026-09-24---tokyos-four-own-site-wards-read-all-cc-by-40-none-like-sendai)
+- [Japan: cost clauses accepted country-wide; N03 never drawn; Kyoto before Tokyo](#2026-09-24---japan-cost-clauses-accepted-country-wide-n03-never-drawn-kyoto-before-tokyo)
 - [Renderer: dark-mode line labels lifted to 4.5:1, the legend's style repaired; a check for both](#2026-09-24---renderer-dark-mode-line-labels-lifted-to-451-the-legends-style-repaired-a-check-for-both)
+- [Japan's licence reads consolidated into data_sources.md; five were never read](#2026-09-24---japans-licence-reads-consolidated-into-data_sourcesmd-five-were-never-read)
 - [Brazil deployed; the live site measured after the reboot](#2026-09-24---brazil-deployed-the-live-site-measured-after-the-reboot)
 - [Brazil's batch deploy check passed; two renderer defects shipped now, fixed next (owner)](#2026-09-24---brazils-batch-deploy-check-passed-two-renderer-defects-shipped-now-fixed-next-owner)
 - [Kyoto enters Band A: licence read, brief written, row moved](#2026-09-24---kyoto-enters-band-a-licence-read-brief-written-row-moved)
@@ -428,6 +431,82 @@ onwards; the early ones are split by phase rather than by hour.
   Built next, and verified inside Rotterdam's deploy check rather than in a
   separate run.
 
+### 2026-09-24 - Tokyo's four own-site wards read: all CC BY 4.0, none like Sendai
+
+- **Read the terms of the four Tokyo wards whose files come from their own
+  sites**, at the owner's request: Shibuya, Taitō, Setagaya and Meguro. The
+  owner had accepted their hosts as the wards' own channels earlier the same
+  day, but their terms were never read. The Tokyo read covered only the
+  Tokyo catalogue's wards.
+- **All four are PERMITTED WITH CONDITIONS under CC BY 4.0, and nothing is
+  owed to any ward.** Each ward's default no-copying rule gives way to its
+  open-data terms, so none is in Sendai's position.
+  - **Shibuya**: 渋谷区オープンデータ利用規約, accepted on download from its
+    ArcGIS site; no cost clause. The dashboard's broader 補償 clause governs
+    only the dashboard.
+  - **Taitō**: its licence page puts its オープンデータ一覧 under CC BY 4.0,
+    and the list is on it. It is also on the Tokyo catalogue as a link-only
+    entry, so both sets of terms apply, and they agree.
+  - **Setagaya**: 世田谷区オープンデータ利用規約 §2. Not on the Tokyo catalogue.
+  - **Meguro**: BODIK's `131105/tos/`, the Tokyo template with the ward's
+    name.
+- **Cost clauses.** Setagaya's §4 and Meguro's 第8項 match Tokyo §6 (Meguro's
+  character for character), and Taitō inherits Tokyo §6. All fall within the
+  owner's Japan-wide acceptance, so nothing new goes to the owner.
+- **The credits differ by ward.** Taitō prescribes a no-warranty sentence,
+  Setagaya a 「改変して利用」 form, and Meguro a labelled catalogue link. So the
+  Tokyo page needs per-ward credits, not only the catalogue's combined
+  notice. The forms are in `docs/data_sources.md` (Japan section) and
+  `tokyo.md`.
+- **Two corrections and one find.**
+  - `tokyo.md` said Taitō's file carries operators' home addresses. The ward
+    masks individual operators at source (※, 2,738 of 7,676 rows), and the
+    unmasked operators are almost all companies. The project reads none of
+    those columns either way.
+  - Meguro's barber, beauty and laundry registers, listed as deferred in the
+    brief, are on BODIK under the same licence. They are not yet joined.
+
+### 2026-09-24 - Japan: cost clauses accepted country-wide; N03 never drawn; Kyoto before Tokyo
+
+- **The owner accepted the fault-based cost clauses for every Japanese
+  source**, as was done for Taiwan.
+  - **What it covers**: Fukuoka 第４条, Hiroshima 第3条 and MHLW 免責 1) エ join
+    Tokyo §6 / Chūō §5 and Sapporo 第9条3, which were accepted one by one
+    earlier the same day. Any Japanese source read later whose clause is of the
+    same class is covered too: the user bears the cost of claims from its own
+    breach.
+  - **Its limit**: an indemnity for claims the project did not cause, or
+    anything broader, is a new question.
+  - **Recorded in** `docs/data_sources.md` (Japan section) and in the
+    Fukuoka and Hiroshima briefs.
+- **Found MLIT N03 CC BY 4.0, but with a Survey Act condition; recorded it
+  as NEVER DRAWN.**
+  - **The licence**: the N03-2025 page's own 使用許諾条件 is
+    オープンデータ（CC_BY_4.0）.
+  - **The condition**: its 原典表示 says the boundaries derive from GSI's
+    数値地図（国土基本情報） under Survey Act approval, and that reproducing them
+    needs GSI's approval. GSI's own guidance for a public web map ends at
+    "application required".
+  - **So drawing the city outline is ambiguous in a way that matters**, and
+    is not resolved in this project's favour.
+  - **Why nothing is blocked**: this project's maps never draw a city
+    boundary. `map_common` has no boundary layer, and every city's polygon
+    only picks stations and anchors labels. So N03 is permitted for the use
+    actually made.
+  - **Where the rule lives**: where the next Japanese build must pass through
+    it (the `osm-rail` meta-rule). That is `japan.city_boundary()`'s
+    docstring, the N03 row in `data_sources.md`, and every Japanese brief.
+  - **The rejected alternatives**: applying to GSI now (it needs an account,
+    so it is the owner's act) or asking MLIT (`shitsumon@ksjask.info`). Both
+    are worth doing only if an outline is ever wanted.
+  - **The read also noted**: MLIT's current credit examples add a URL and
+    the processor, which the project's N02 credit string lacks. Check at
+    build.
+  - **This corrects `kyoto.md`**, which had asserted PDL 1.0 for N03 unread.
+- **Kyoto builds after Fukuoka and before Tokyo** (owner, 2026-09-24),
+  which stays last. The order is now Osaka → Kobe → Sapporo → Fukuoka → Kyoto
+  → Tokyo.
+
 ### 2026-09-24 - Renderer: dark-mode line labels lifted to 4.5:1, the legend's style repaired; a check for both
 
 - **A line label under 4.5:1 in dark mode now carries its own lighter shade**
@@ -476,6 +555,33 @@ onwards; the early ones are split by phase rather than by hour.
   `check_no_fetch_in_steps.py` all pass. A `map-chrome` deploy check,
   including dark mode, comes before the push this gate was waiting for.
 
+### 2026-09-24 - Japan's licence reads consolidated into data_sources.md; five were never read
+
+- **Consolidated every Japanese licence read into `docs/data_sources.md`** (the
+  owner's request): a new Japan section with one row per source, like
+  Taiwan's. Until now the verdicts lived only in each city's build brief, so
+  `data_sources.md`, the file `read-licence` says establishes terms, held none
+  of them. The briefs keep the full quotes and draft notices. Each row states
+  the verdict, its date, what must be displayed, and what may not be said.
+- **The consolidation found five sources never read.**
+  - **MLIT N03**, the ward boundaries that decide which stations count in
+    every Japanese city. No brief had read it, and `kyoto.md` asserted
+    "PDL 1.0, as in every Japanese brief". That was wrong twice: unread, and
+    the other briefs name only the address files and N02. It is corrected, and
+    a `licence-read` is under way. Some 国土数値情報 datasets are
+    non-commercial, so it is not assumed.
+  - **Four Tokyo wards**: Shibuya, Taitō, Setagaya and Meguro. The owner
+    accepted their hosts as the wards' own channels, but nobody read their
+    terms. The Tokyo read covered only the Tokyo catalogue's wards. The reads
+    are due before Tokyo's build, which comes last.
+- **The fault-based cost clauses are now listed together.**
+  - Tokyo §6 / Chūō §5 and Sapporo 第9条3 were accepted individually.
+  - Fukuoka 第４条, Hiroshima 第3条 and MHLW 免責 1) エ are the same class and
+    were not accepted on their own. Fukuoka's brief had only noted they
+    were the same class.
+  - Whether one decision covers every Japanese source, as it did for Taiwan,
+    is raised to the owner (`PLAN.md`).
+- `check_provenance.py`: all recorded.
 ### 2026-09-24 - Brazil deployed; the live site measured after the reboot
 
 - **The nine Brazilian cities are live, checked after the owner's reboot.**

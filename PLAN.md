@@ -685,10 +685,28 @@ brief names.
      Move Kyoto's master-list row from the open gap to Band A. **Osaka is the recommended
   first build**: the cleanest list, 99.1% block, 38 m against the city's own
   coordinates.
-- [ ] **Kyoto's place in the Japanese build order (owner).** Recommended:
-  after Fukuoka and before Tokyo, which stays last. Kyoto is the first
-  rebuilt register in Japan, so it benefits from the join being settled on
-  four cities first.
+- [ ] **Japan's licence reads, consolidated into `docs/data_sources.md`
+  (2026-09-24).** The consolidation found gaps:
+  - [x] **N03** (the city line), read 2026-09-24. CC BY 4.0, permitted for
+    picking stations and anchoring labels. ⛔ **Never drawn.** Showing its
+    boundaries as a map may need GSI's approval under the Survey Act, and
+    that question is open. The maps never draw a boundary, so nothing is
+    blocked. The rule is in `japan.city_boundary()` and every Japanese brief.
+  - [x] **Four Tokyo wards whose terms were never read**: Shibuya (its ArcGIS
+    site), Taitō, Setagaya and Meguro (BODIK). **Read 2026-09-24 (owner):
+    all PERMITTED WITH CONDITIONS, CC BY 4.0, nothing owed.** Their cost
+    clauses are within the Japan-wide acceptance, and Shibuya has none. Each
+    needs its own credit. Found on the way: Meguro's 生活衛生 registers on BODIK
+    (Tokyo's still-unknown list).
+  - [x] **The fault-based cost clauses: ✅ ACCEPTED by the owner
+    2026-09-24 for every Japanese source**, as for Taiwan. That covers
+    Fukuoka 第４条, Hiroshima 第3条 and MHLW 免責 1) エ, beside Tokyo's and
+    Sapporo's, and later sources of the same class. Anything broader comes
+    back to the owner.
+- [x] **Kyoto's place in the Japanese build order (owner, 2026-09-24): after
+  Fukuoka, before Tokyo**, which stays last. Kyoto is the first rebuilt
+  register in Japan, so it benefits from the join being settled on four
+  cities first.
 - [ ] **Kyoto, at build**: pin `as_of` to the fetch date. Before publishing,
   measure same-address successors and the factory share of 菓子 and そうざい
   (brief, "Still unknown").
@@ -711,7 +729,7 @@ brief names.
   14.7% of that sample but 3.5% of all rows. **Measure a rule's yield on a
   FRESH sample**, never the one it was chosen from.
 - [x] **Japanese build order (owner, 2026-09-24): Osaka → Kobe → Sapporo →
-  Fukuoka → Tokyo LAST.** The stub test cleared the first four: every urban
+  Fukuoka → Kyoto → Tokyo LAST.** (Kyoto was added later the same day, owner.) The stub test cleared the first four: every urban
   line keeps 80–100% of its stations inside the city line. Tokyo failed, with
   Chiyoda missing from the centre of its 8 wards. Tokyo goes last as the
   densest, and it benefits most from a Japan skill written off the first four.

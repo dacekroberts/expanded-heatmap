@@ -144,7 +144,7 @@ theirs only on request or for in-person viewing, and so do Nerima and Edogawa
 | Ward | File | Rows | Format / coordinates | As of | Host |
 |---|---|---|---|---|---|
 | **Shibuya** 13113 | `131130_food_businesses_list.csv`, 22.2 MB, UTF-8 | 39,304 (**16,993 open**) | national format, **coordinates 99.96%** | 2026-09-09 | ward's ArcGIS open-data site ⚠️ |
-| **Taitō** 13106 | `2026ALL-IND-CSV.csv`, 1.59 MB, Shift_JIS | 7,676 | own format, coordinates 98.5%, **operator name + home address columns** | 2026-03-31 | ward's own |
+| **Taitō** 13106 | `2026ALL-IND-CSV.csv`, 1.59 MB, Shift_JIS | 7,676 | own format, coordinates 98.5%, **operator name + address columns** (individual operators masked ※ at source, 2,738 rows; the rest are mostly companies) | 2026-03-31 | ward's own |
 | **Setagaya** 13112 | `zenkenr080331.csv`, 1.32 MB, Shift_JIS | 7,428 | own format, no coordinates | 2026-03-31 | ward's own |
 | **Meguro** 13110 | `all_new_8.csv` + `all_old_8.csv`, UTF-8 | 2,495 + 1,087 | own format, no coordinates | 2026-04-01 | BODIK ⚠️ |
 | **Nakano** 13114 | `opendata_550150.csv`, 1.98 MB | 5,790 | coordinates on all; **labels shifted** (trade name under 営業の種類) | ⚠️ **stale: to 2023-06-27** | wagmap ⚠️ |
@@ -198,8 +198,31 @@ publishes none. MHLW's open data does not fill them (Chiyoda 291 restaurants,
   both. ✅ **ACCEPTED (owner, 2026-09-24)**: Tokyo §6 / Chūō §5 — fault-based,
   uncapped reimbursement of the publisher's costs arising from the user's
   breach; the same class as Taiwan's OGDL §六(三), Rio's and IBGE's.
+- **The four wards read from their own sites: all PERMITTED WITH CONDITIONS
+  (CC BY 4.0), read 2026-09-24.** Nothing is owed to any ward. Each ward's
+  default no-copying rule gives way to its open-data terms, so none is in
+  Sendai's position. Each needs its OWN credit, not the catalogue's combined
+  notice; the forms are in `docs/data_sources.md`, Japan section.
+  - **Shibuya**: 渋谷区オープンデータ利用規約; downloading is acceptance. Credit
+    `「食品等営業許可・届出一覧」（渋谷区）（URL）を加工して作成`. No cost clause.
+    Re-read the terms before each republish.
+  - **Taitō**: CC BY 4.0 through the ward's licence page, and the Tokyo
+    catalogue's terms through its link-only entry. The ward prescribes four
+    credit elements, including a no-warranty sentence. A link must name
+    台東区公式ホームページ.
+  - **Setagaya**: 世田谷区オープンデータ利用規約 §2, with a prescribed
+    「…改変して利用しています」 form. Not on the Tokyo catalogue, so there is no
+    date-of-use notice.
+  - **Meguro**: BODIK's `131105/tos/`, the Tokyo template. The credit adds a
+    link labelled 目黒区オープンデータカタログサイト.
+  - **Cost**: Setagaya §4 and Meguro 第8項 match Tokyo §6, and Taitō inherits
+    Tokyo §6. All are within the owner's Japan-wide acceptance.
 - **MLIT N02** — PDL 1.0, read 2026-09-21; attribution
   `「国土数値情報（鉄道データ）」（国土交通省）をもとに作成`.
+- **MLIT N03** (the ward boundaries that decide which stations count): CC BY
+  4.0, read 2026-09-24. Permitted for picking stations and anchoring labels.
+  ⛔ **Never draw it**: showing its boundaries as a map may need GSI's
+  approval under the Survey Act (`docs/data_sources.md`, Japan section).
 
 ## Privacy
 
@@ -220,7 +243,11 @@ run `check_personal_exposure.py`.
 - ⚠️ Shinjuku's 2023 vintage: a newer file on the ward's own page? (Used with its vintage disclosed if not.)
 - ⚠️ The Economic Census control's figures (the source is decided); the wards whose own sites are being read.
 - ✅ decided 2026-09-24 (owner): see the block at the top (Shinkansen out). ⚠️ Still open: limited-express-only lines, and which N02 lines are commuter.
-- ⚠️ Meguro's registers (BODIK) and Nakano's food file (a vendor map host) — deferred.
+- ⚠️ **Meguro's 生活衛生 registers are on BODIK** (`131105_barber`,
+  `131105_hairdressingshop`, `131105_cleaning_shop`, full lists as of
+  2026-03-31, CC BY 4.0, read 2026-09-24). Not downloaded or joined yet, and
+  their columns are unknown. Nakano's food file (a vendor map host) stays
+  deferred.
 
 ```brief-checks
 [

@@ -189,7 +189,13 @@ projected CRS.
   - **Governing law**: Japanese law, Kyoto District Court.
   - ⚠️ **Fetch only from `data.city.kyoto.lg.jp`.** Older copies of some lists
     sat on `www.city.kyoto.lg.jp`, whose copyright page bars copying.
-- **MLIT 位置参照情報, N02 and N03**: PDL 1.0, as in every Japanese brief.
+- **MLIT 位置参照情報 and N02**: PDL 1.0, as in the other Japanese briefs.
+- **MLIT N03** (the ward boundaries that decide which stations count): CC BY
+  4.0, read 2026-09-24. Permitted for picking stations and anchoring labels.
+  ⛔ **Never draw it**: its boundaries derive from GSI survey data, and
+  showing them as a map may need GSI's approval under the Survey Act. That
+  question is open (`docs/data_sources.md`, Japan section). An earlier version
+  of this line asserted PDL 1.0 unread.
 
 ## Must disclose on the page
 

@@ -83,7 +83,12 @@ def _read_geojson(zip_path, member):
 
 def city_boundary(slug, wards=None):
     """The city's own area: the union of its wards' N03 polygons, EPSG:4326.
-    `wards` overrides the city's list, to measure a scope before choosing it."""
+    `wards` overrides the city's list, to measure a scope before choosing it.
+
+    NEVER DRAW IT. Use it to pick stations and anchor labels only. N03 is CC BY
+    4.0, but its boundaries derive from GSI survey data, and reproducing them
+    as a map may need GSI's approval under the Survey Act (測量法). The licence
+    read of 2026-09-24 left that open (`docs/data_sources.md`, Japan section)."""
     city = CITIES[slug]
     want = wards or city["wards"]
     z = SHARED_RAW / N03_ZIP_TEMPLATE.format(pref=city["pref"])

@@ -113,6 +113,8 @@ call.
     only); state or imply accuracy (免責 1) ウ).
   - **Cost**: 免責 1) エ, the user resolves at its own cost any damage from
     using the site. No express indemnity. Japanese law, Tokyo courts.
+    ✅ **ACCEPTED (owner, 2026-09-24)** with every Japanese cost clause of
+    this class (`docs/data_sources.md`, Japan section).
   - ⚠️ **OPEN (owner, minor)**: 免責事項・著作権 2) ウ, 「営利目的での複製・頒布等、再利用しないことに同意する」,
     could be read to cover the data rather than the site's articles and
     photos. **This project is non-commercial, so it is fine under both
@@ -134,11 +136,16 @@ call.
   - **Cost (第４条)**: complaints from our own breach or infringement are
     resolved at our own cost. This is **the fault-based class the owner
     accepted for Tokyo §6 and Sapporo 第9条3**. No indemnity. Japanese law,
-    Fukuoka District Court.
+    Fukuoka District Court. ✅ **ACCEPTED (owner, 2026-09-24)**: one decision
+    for every Japanese source.
   - Beauty and barber files mask some fields at source (＊＊＊＊＊＊). The live
     CKAN records timed out, so the licence fields come from search.ckan.jp's
     harvest and web-archive copies: re-run `package_show` when BODIK answers.
 - **MLIT 位置参照情報 and N02**: PDL 1.0, as in the Osaka brief.
+- **MLIT N03** (the ward boundaries that decide which stations count): CC BY
+  4.0, read 2026-09-24. Permitted for picking stations and anchoring labels.
+  ⛔ **Never draw it**: showing its boundaries as a map may need GSI's
+  approval under the Survey Act (`docs/data_sources.md`, Japan section).
 
 ## Privacy
 

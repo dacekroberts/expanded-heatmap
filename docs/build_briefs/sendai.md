@@ -140,6 +140,10 @@ It stays unbuilt until the city answers.
   `出典：位置参照情報ダウンロードサービス（国土交通省）（https://nlftp.mlit.go.jp/isj/）`
   and `…を加工して作成`. **MUST NOT** present placements as MLIT's own.
 - **MLIT N02**: PDL 1.0; `「国土数値情報（鉄道データ）」（国土交通省）をもとに作成`.
+- **MLIT N03** (the ward boundaries that decide which stations count): CC BY
+  4.0, read 2026-09-24. Permitted for picking stations and anchoring labels.
+  ⛔ **Never draw it**: showing its boundaries as a map may need GSI's
+  approval under the Survey Act (`docs/data_sources.md`, Japan section).
 
 ## Privacy
 
