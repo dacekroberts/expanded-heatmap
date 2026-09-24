@@ -36,8 +36,8 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 > | | |
 > |---|---|
 > | **Built** | **25** across 7 countries *(Toulouse, Lille (Regional) and Rennes, 2026-09-23)* |
-> | **Candidates** | **33**, all at least partially viable — A 17 · B 11 · C 5 *(Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built)* |
-> | **Open screening gap** | **3**, unscreened — neither candidates nor discards |
+> | **Candidates** | **32**, all at least partially viable — A 16 · B 11 · C 5 *(Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built; Prague paused to the open gap 2026-09-24)* |
+> | **Open screening gap** | **4**, resting on an absence — neither candidates nor discards |
 > | **Discarded** | **32**, each naming its evidence |
 >
 > *Counts corrected 2026-09-23. This box had read 20 / 33 / 30 since
@@ -87,7 +87,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 28
+## Candidates — 27
 
 Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 **Eight cities moved to discarded on measurement** and **two were upgraded**.
@@ -114,11 +114,11 @@ yet* with *we looked at everything and this is what is there*.
 
 | Band | What these cities ARE | Cities |
 |---|---|---|
-| 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates answered, rail answered — every remaining question is answerable inside the build | **17** *(+ 11 built)* |
+| 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates answered, rail answered — every remaining question is answerable inside the build | **16** *(+ 11 built)* |
 | 🟠 **B** | **Geocoding at national scale.** The address work is a project, justified only by reuse across many cities | **11** |
 | 🟣 **C** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **5** |
-| | **Candidates** | **33** |
-| *Open gap* | Unscreened — a row resting on an absence, so not a discard | *3* |
+| | **Candidates** | **32** |
+| *Open gap* | Unscreened — a row resting on an absence, so not a discard | *4* |
 | *Discarded* | Measured negative, evidence named | *32* |
 
 *Band A's caption briefly said "brief written" (2026-09-23, morning). That was
@@ -203,9 +203,9 @@ results in the sweep.
 
 ---
 
-## 🟢 Band A — ready to build (17 ready + 11 ✅ BUILT)
+## 🟢 Band A — ready to build (16 ready + 11 ✅ BUILT)
 
-**The seventeen:** Seoul · Prague · Copenhagen · Hong Kong ·
+**The sixteen:** Seoul · Copenhagen · Hong Kong ·
 Oslo — **each with a brief** in `docs/build_briefs/` — **nine
 Brazilian cities from one national source**: São Paulo (7/7) · Rio de Janeiro
 (8/8) · Belo Horizonte · Brasília · Recife (Regional) · Santos (Regional)
@@ -485,7 +485,7 @@ block-level JOIN too** — the permits split the address into municipality /
 components with a coordinate per block — **ASSERTED, not measured**, with the
 order of work to test it.
 
-## ⚠️ OPEN SCREENING GAP — rows that rest on an absence (3 cities unscreened)
+## ⚠️ OPEN SCREENING GAP — rows that rest on an absence (4 cities)
 
 **Not candidates yet and not discards — unscreened.** `global_country_shortlist.md`
 records *"Italy stays a Milan-only country"*, but that rests on **Naples** and
@@ -498,6 +498,7 @@ discard.
 | **Rome** 🇮🇹 | `dati.comune.roma.it`, CKAN, **365 datasets**. Carries **`elenco-delle-attivita-produttive-del-suap-di-roma-capitale-anno-2025`** and its 2024 edition — SUAP is the *Sportello Unico Attività Produttive*, the one-stop business register every comune runs, and **2025 is current** | **Schema unread** — the host failed its TLS handshake *after* the catalogue answered. The **LOCATION and ACTIVITY** columns have not been checked separately |
 | **Turin** 🇮🇹 | `aperto.comune.torino.it`, CKAN, **2,118 datasets**, 143 with a commerce term. Its naming makes the Messina distinction itself: `aperte`/`chiuse` are the FLOW, **`presenti` is the STOCK**. Geoportale also publishes **SHP**, so geometry exists. **CC-BY** | ⚠️ **The series STOPS AT 2019** — latest `presenti` is 2019, geoportale layer last modified 2019-05-17. Six years stale against a project mapping *current* density. Schema unread; `risorse.comune.torino.it` timed out at TCP connect |
 | **Cairo** 🇪🇬 ▼ *moved here from the discards 2026-09-23* | **One probe, of one national host:** CAPMAS, the statistics agency, *"serves HTML only"* — recorded in `global_country_shortlist.md` as **NO OPEN API**. No city-level host has ever been asked | **Everything.** It sat in the discard table as *"No open-data infrastructure"* while this file's own 2026-09-23 sweep recorded it **STILL UNPROBED**. **A national statistics agency not having an API is not a finding about Cairo's premises**, and `add-country` says to try the city's own host before recording a negative — which was never done. **Moved by this file's own rule**, not re-judged |
+| **Prague** 🇨🇿 ▼ *moved here from Band A 2026-09-24, at the build's Step 0* | **RES, the business leg the brief chose, is a REGISTERED-SEAT register.** Measured at the build: restaurant control **8.02x** OSM (NACE 5610* 20,829 vs 2,596) against France's 1.26-1.80x; **767** registrants at one address (Rybná 716/24), 44 addresses holding 50+; **67.9%** sole traders located at their seat - usually home - under their own name. Everything else passed: RÚIAN join 99.8%, PID's keyless GTFS (CC BY 4.0), metro 16/24/20 all inside the city, two owner calls banked in `docs/build_briefs/prague.md` | **A bulk source for RŽP's *provozovny*** - establishments with a location address and an activity. The 2026-09-22 screen found only a per-IČO lookup. Owner's call: staging chases it; Prague resumes only if one exists |
 
 **Neither Italian city changes the Italy profile answer** — Italy is bespoke per city, so
 each would be its own Step 0 regardless. See `DECISIONS.md`, 2026-09-22.
@@ -1319,7 +1320,7 @@ the tier is stale.
 | 🇮🇪 Ireland | **1** | — | — | Complete |
 | 🇮🇹 Italy | **1** | Rome, Turin *(open gap)* | — | Neither is screened; Turin's series stops in 2019 |
 | 🇫🇷 France | **5** | — | — | **Complete** — Rennes built 2026-09-23. Lyon discarded |
-| 🇨🇿 Czechia | — | **1** — Prague | A | Build |
+| 🇨🇿 Czechia | — | **1** — Prague | gap | ⏸ **Paused 2026-09-24**: RES is a seat register; staging is chasing a bulk source for RŽP's *provozovny* |
 | 🇩🇰 Denmark | — | **1** — Copenhagen | A | Build; the Danish API key closes when it starts |
 | 🇭🇰 Hong Kong | — | **1** | A | Build; indemnity accepted; map-region call |
 | 🇳🇴 Norway | — | **1** — Oslo | A | Build |
@@ -1885,7 +1886,7 @@ not a country ruling. See the open screening gap.*
 
 > **Current position, 2026-09-23.** Mexico, Spain, Ireland and Italy's Milan
 > are built; France is **complete at five** (Paris, Marseille, Toulouse, Lille, Rennes).
-> **The seventeen Band A cities are build-ready now**, nine of them Brazilian
+> **The sixteen Band A cities are build-ready now**, nine of them Brazilian
 > and three Taiwanese. **Brazil was
 > picked to go first in the geocoding band and turned out to need no geocoder**
 > (IBGE's census address file carries every establishment's coordinate), so
