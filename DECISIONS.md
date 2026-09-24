@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**283 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**284 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Barcelona's notification adjourned](#2026-09-24---barcelonas-notification-adjourned)
 - [Stale-prose sweep: 48 unused settings, 37 counts, 2 tense hits read](#2026-09-24---stale-prose-sweep-48-unused-settings-37-counts-2-tense-hits-read)
 - [PLAN.md trimmed of 14 done items; three merged branches deleted](#2026-09-24---planmd-trimmed-of-14-done-items-three-merged-branches-deleted)
 - [Rome is a JOIN: its business register matches ANNCSU on the municipal street code, 92.4% at civic level](#2026-09-24---rome-is-a-join-its-business-register-matches-anncsu-on-the-municipal-street-code-924-at-civic-level)
@@ -325,6 +326,18 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Barcelona's notification adjourned
+
+- **Owner's decision: the notification to Barcelona City Council is
+  adjourned until a working contact channel exists.** Raised by the
+  stale-prose sweep as an open obligation on a live city. Both 2026-09-22
+  attempts had failed (the portal form stalled after its hCaptcha; the named
+  electronic office timed out), the electronic registry needs a Spanish
+  digital certificate, and no email address is published. A fresh look on
+  2026-09-24 found no valid route either. The clause sets no deadline, so the
+  map stays up and the draft stays ready. `docs/gated_access.md` item 2 now
+  records the pause, so later sweeps read it as deliberate, not as a gap.
 
 ### 2026-09-24 - Stale-prose sweep: 48 unused settings, 37 counts, 2 tense hits read
 
