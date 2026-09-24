@@ -1,10 +1,10 @@
 {
   "establishments": 155448,
   "placed": 98897,
-  "stations_collapsed": 74,
+  "stations_collapsed": 88,
   "stations_excluded": 1,
-  "stations_in_scope": 73,
-  "stop_positions": 154,
+  "stations_in_scope": 87,
+  "stop_positions": 182,
   "storefront_establishments": 103375,
   "storefronts": 98897,
   "suap_rows": 168255

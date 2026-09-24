@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**307 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**308 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Rome: the Roma-Viterbo urban service drawn, Metromare not (owner, on the DART / S-tog test)](#2026-09-24---rome-the-roma-viterbo-urban-service-drawn-metromare-not-owner-on-the-dart-s-tog-test)
 - [Rome built on its branch: 98,897 storefronts, 73 stations](#2026-09-24---rome-built-on-its-branch-98897-storefronts-73-stations)
 - [Prague deployed; the live site measured after the reboot](#2026-09-24---prague-deployed-the-live-site-measured-after-the-reboot)
 - [Prague's deploy-verify passed; the Europe view zoomed out](#2026-09-24---pragues-deploy-verify-passed-the-europe-view-zoomed-out)
@@ -349,6 +350,40 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Rome: the Roma-Viterbo urban service drawn, Metromare not (owner, on the DART / S-tog test)
+
+- **Rome draws COTRAL's Roma-Viterbo urban service (Flaminio-Montebello)
+  beside Metro A, B, B1 and C, and leaves Metromare (the Roma-Lido railway)
+  out - the owner's call of 2026-09-24, on the project's published
+  spacing-and-frequency test rather than as an exception to the commuter-rail
+  rule.** The owner approved Rome's drafted page and calls with one condition:
+  leave the two COTRAL lines out "unless commuter rail holds a backbone
+  distinction like in Dublin or Copenhagen". Measured from the cached OSM
+  relations, both lines wholly inside the comune:
+  - **Roma-Viterbo urban** - 15 stations, straight-line median **895 m** apart
+    (S-tog 1,227 m, DART ~1 km), **14 of 15 with no metro station within
+    800 m** (Tor di Quinto to Prima Porta - Rome's north along the Tiber has
+    no other rail), and every **10-15 minutes** in normal service, which
+    it.wikipedia calls "servizio di tipo metropolitano" (secondary; read
+    2026-09-24). The summer 2026 works ran it at 16/32 minutes and closed it
+    10-23 August; regular service resumed 7 September. **Passes.**
+  - **Metromare** - 14 stations, median **2,171 m** apart with gaps to
+    3.97 km, and every **15-20 minutes** as of July 2026 (vivereroma,
+    2026-07-27; the Regione's 10-minute service promised for March 2026 had not
+    started). Coverage passes - **11 of 14 stations, Ostia's and Acilia's, have
+    no metro nearby** - but spacing and frequency both fail. **Left out, and the
+    page says Ostia has no station rings and why.**
+  Rejected: both lines (Metromare fails two of the three parts); neither (the
+  urban service passes all three, near-metro frequency aside). Effect: **87
+  stations in scope, up from 73**; gate 3 exact on all five counts (A 27,
+  B + B1 26, C 24, metro network 74, Roma-Viterbo urban 15); Flaminio collapses
+  to one interchange (A and Roma-Viterbo, 129 m); **52,895 storefronts within
+  a ring, up from 51,209 (53.5%)**. OSM's own colour `#7e7bb4` clears every
+  check unchanged (19.4 from B, 25.8 from the Retail pins). The approved page
+  text's rail paragraph changes to match and goes back to the owner. Files:
+  `pipeline/rome/config.py`, `pipeline/rome/step1_stations.py`,
+  `outputs/rome/`, `docs/data_sources.md`.
 
 ### 2026-09-24 - Rome built on its branch: 98,897 storefronts, 73 stations
 

@@ -1,4 +1,5 @@
-"""Rome step 1: Metro A, B, B1 and C stations inside the comune.
+"""Rome step 1: Metro A, B, B1 and C, and the Roma-Viterbo urban service,
+stations inside the comune.
 
     python pipeline/rome/step1_stations.py
 
@@ -118,8 +119,11 @@ def main():
 
     def count(ln):
         return int(sum(1 for v in st_rows["lines"] if ln in v.split()))
+    metro = {"A", "B", "B1", "C"}
     actual = {"Metro A": count("A"), "Metro B + B1": count("B") + count("B1"),
-              "Metro C": count("C"), "Metro (network)": len(st_rows)}
+              "Metro C": count("C"),
+              "Metro (network)": int(sum(1 for v in st_rows["lines"] if metro & set(v.split()))),
+              "Roma–Viterbo (urban)": count("RV")}
     print()
     station_gates.verify_stations(
         city="Rome", platforms=platforms, stations=st_rows, crs_projected=config.CRS_PROJECTED,

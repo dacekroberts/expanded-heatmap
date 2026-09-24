@@ -91,17 +91,28 @@ LINE_RELATIONS = {
     "B": (207926, 1720959),
     "B1": (2172804, 2172805),
     "C": (398053, 2172845),
+    "RV": (387417, 1721478),
 }
-LINE_ORDER = ("A", "B", "B1", "C")
-LINE_NAMES = {"A": "Metro A", "B": "Metro B", "B1": "Metro B1", "C": "Metro C"}
-# Left out, by default and PUT TO THE OWNER: Metromare (the Roma-Lido railway,
-# COTRAL, tagged route=subway in OSM - 208013/1721156) and the Roma-Viterbo
-# urban service (COTRAL, light_rail - 387417/1721478): regional railways
-# under the commuter-rail rule until the owner says otherwise. Always out:
-# OSM's "Metro D" (2703073, a line not yet built - no stops) and Palestrina's
-# scala mobile.
+LINE_ORDER = ("A", "B", "B1", "C", "RV")
+LINE_NAMES = {"A": "Metro A", "B": "Metro B", "B1": "Metro B1", "C": "Metro C",
+              "RV": "Roma–Viterbo"}
+# COMMUTER RAIL, MEASURED AGAINST THE PUBLISHED TEST - the owner's call of
+# 2026-09-24: draw it where it runs at metro spacing and frequency in districts
+# the metro does not reach (Dublin's DART, Copenhagen's S-tog), not by who runs
+# the trains. Both COTRAL lines lie wholly inside the comune:
+#   * Roma-Viterbo's URBAN service, Flaminio-Montebello (387417/1721478) -
+#     DRAWN: 15 stations, median 895 m apart (S-tog 1,227 m), every 10-15
+#     minutes, "servizio di tipo metropolitano" (it.wikipedia, read
+#     2026-09-24), and 14 of its 15 stations have no metro within 800 m. Only
+#     the urban relations are kept; the line beyond Montebello is regional.
+#   * Metromare, the Roma-Lido railway (208013/1721156, tagged route=subway) -
+#     LEFT OUT: median 2,171 m apart, gaps to 3.97 km, every 15-20 minutes in
+#     July 2026 (the 10-minute service promised for March 2026 had not
+#     started) - though 11 of its 14 stations, Ostia's and Acilia's, have no
+#     metro nearby, which the page says.
+# Always out: OSM's "Metro D" (2703073, a line not yet built - no stops) and
+# Palestrina's scala mobile.
 LEFT_OUT_RELATIONS = {208013: "Metromare", 1721156: "Metromare",
-                      387417: "Roma-Viterbo (urban)", 1721478: "Roma-Viterbo (urban)",
                       2703073: "Metro D (not built)", 2581270: "Palestrina escalator",
                       2581271: "Palestrina escalator"}
 
@@ -109,7 +120,10 @@ LEFT_OUT_RELATIONS = {208013: "Metromare", 1721156: "Metromare",
 # share one blue, and this project's check refuses two lines under Delta-E
 # 10, so B1 moves in HSL lightness only by the smallest step that clears 13 -
 # Amsterdam's and Oslo's rule: #3783C6 -> #629ed3 (L +0.11), 13.7 from B.
-LINE_COLOURS = {"A": "#F68B1F", "B": "#3783C6", "B1": "#629ed3", "C": "#008751"}
+# Roma-Viterbo is OSM's own #7e7bb4, unchanged: 19.4 from B, 21.2 from B1,
+# 25.8 from the Retail pins.
+LINE_COLOURS = {"A": "#F68B1F", "B": "#3783C6", "B1": "#629ed3", "C": "#008751",
+                "RV": "#7e7bb4"}
 
 # Step 1 writes the kept relations here for step 3, with B1 relabelled and cut
 # to its OWN ways (Bologna to Jonio): OSM tags it ref "B", and its relations
@@ -124,9 +138,11 @@ STATION_NAME_ALIASES = {"Colosseo – Fori Imperiali": "Colosseo"}
 # Gate 3: English Wikipedia's "Rome Metro" (read 2026-09-24, SECONDARY): A 27,
 # B 26 including B1's four, C 24, network 74.
 OPERATOR_STATION_COUNTS = {"Metro A": 27, "Metro B + B1": 26, "Metro C": 24,
-                           "Metro (network)": 74}
+                           "Metro (network)": 74, "Roma–Viterbo (urban)": 15}
 OPERATOR_COUNTS_SOURCE = ("en.wikipedia.org/wiki/Rome_Metro, read 2026-09-24 - secondary; "
-                          "A 27, B 26 (with B1), C 24, network 74")
+                          "A 27, B 26 (with B1), C 24, network 74. "
+                          "it.wikipedia.org/wiki/Ferrovia_Roma-Civita_Castellana-Viterbo, "
+                          "read 2026-09-24 - secondary; the urban section's 15 stations")
 SPACING_MIN_M = 400.0
 COLLAPSE_MAX_SPREAD_M = 400
 
