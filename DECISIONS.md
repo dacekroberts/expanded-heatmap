@@ -430,6 +430,18 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-23 - Wheel zoom stops discarding notches; cluster animation off
 
+- **Live-verified after the push (`b8b2931`, no reboot: the push changed
+  nothing under `app/`).** Headless Edge on the deployed site, each page
+  loaded fresh, the map reached in its own frame. Paris embedded at 1000:
+  `check_map_view.js` zoom 12.5 against 12.5, 0 problems; the served map
+  carries the patched wheel handler and `animate: false` on all three cluster
+  groups; five trusted notches 60 ms apart zoomed 12.5 -> 17.5 (steps 13.5,
+  16.5, 17.5), settling in 1,579 ms, and the view held six seconds later with
+  `touched` set and 0 corrections. Paris at 343 (a 375 phone): 11 against 11,
+  0 problems, five notches 11 -> 16 in 1,192 ms, held. Oslo at 1000: 11.5
+  against 11.5, 0 problems, 11.5 -> 16.5 in 1,148 ms, held. Before this
+  change the same five notches zoomed Paris 1.5 levels.
+
 - **Oslo landed on master during this gate and was re-rendered on the change
   before pushing.** Its map had been built without `WHEEL_ZOOM_SCRIPT`, so a
   plain merge would have shipped 25 cities with the fix and one without it.
