@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**275 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**276 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Copenhagen opened: four owner calls, and the brief's coordinate leg is closing](#2026-09-24---copenhagen-opened-four-owner-calls-and-the-briefs-coordinate-leg-is-closing)
 - [Two checks closed: the macro map's controls, and clones leaking into %TEMP%](#2026-09-24---two-checks-closed-the-macro-maps-controls-and-clones-leaking-into-temp)
 - [Oslo deployed; the live site measured after the reboot](#2026-09-24---oslo-deployed-the-live-site-measured-after-the-reboot)
 - [Oslo's deploy-verify found two phone-width failures the per-city checks passed](#2026-09-24---oslos-deploy-verify-found-two-phone-width-failures-the-per-city-checks-passed)
@@ -317,6 +318,114 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Copenhagen opened: four owner calls, and the brief's coordinate leg is closing
+
+- **The Copenhagen build started from a fresh worktree (`copenhagen-build`) and
+  the brief's four checks held, 4/4 - but three of its load-bearing claims did
+  not survive being measured.** The measurements read staging's CVR files
+  read-only (generation 505, generated the night of 18-19 September; origin
+  and CC BY 4.0 terms established by the brief). Kobenhavn reproduces the
+  brief exactly: 14,887 current, located, active production units in
+  divisions 47/56/96.
+
+- **The classification is DB25, not DB07.** Every current hovedbranche code
+  is six digits (153,986 of 153,986 in the two kommuner), their `virkningFra`
+  is 2025 or 2026 on all but five, and classes that exist only in NACE Rev. 2.1
+  are populated - 9621 (1,351), 9622 (1,064), 9623 (465), 9699 (613), car
+  retail 4781-4783 (140), intermediation 4791/4792 (118) - while Rev. 2's 9602
+  and 9609 have zero rows. Denmark switched on 1 January 2025. **This is Oslo's
+  SN2007 -> SN2025 finding again, one country later**, and it is useful rather
+  than costly: SN2025 and DB25 are both national extensions of NACE Rev. 2.1,
+  so Oslo's structural exclusions transfer at the shared four-digit class.
+  Applied to Kobenhavn they remove 1,178 rows - event catering 5621 (520),
+  contract catering 5622 (393), mobile food 5612 (98), the four intermediation
+  classes (142), services in households 9691 (25) - leaving **13,709**. The
+  brief's open "taxonomy level" question is settled by measurement rather than
+  asked: the file carries labels at the six-digit level only, and that is the
+  finest level, which is Oslo's and Paris's shape. Catch-alls at that level
+  (477800, 969900, 472700, 475590, 476990, 471200) are 11.9% of the kept rows;
+  969900 gets a hand sample before its verdict, as 96.990 did in Oslo.
+
+- **DAWA closes on 1 October 2026 at 10:00, so the brief's coordinate leg has
+  eight days left.** Klimadatastyrelsen's notice (published 2 July) moves
+  address data to Datafordeler. The join itself survives, and its shape was
+  measured before the service goes: of 200 sampled CVR `Adressering.Adresse`
+  UUIDs, **199 resolve as DAWA `adresser` (a DAR Adresse, the unit address),
+  none as `adgangsadresser`, one as neither**. So on Datafordeler the chain is
+  Adresse -> Husnummer -> Adressepunkt, whose position is EPSG:25832. DAR's
+  terms were read the same day: CC BY 4.0, credit Klimadatastyrelsen, on the
+  same account and key as CVR, with per-kommune files for the current full
+  download. **Rejected: snapshotting DAWA before it closes** - a fetch script
+  whose only URL dies in a week reproduces nothing.
+
+- **Owner call: Frederiksberg is IN (0101 + 0147).** It is a separate kommune
+  entirely enclosed by Kobenhavn and holds 7 Metro stations. By the worst-line
+  rule the French cities and Oslo were scoped on, Kobenhavn alone keeps M1
+  10/15, **M2 9/16 (56%)**, M3 13/17, M4 12/13; with Frederiksberg, 15/15,
+  14/16, 16/17 and 12/13 (M2's two are Kastrup and Lufthavnen in Taarnby; M3's
+  and M4's one is Gammel Strand, whose OSM node falls just outside the
+  polygon - to be confirmed at step 1). Frederiksberg adds 2,286 storefront-
+  division rows, 2,146 after the structural exclusions. **Rejected: Kobenhavn
+  only**, which puts a hole in the middle of the map with three Metro lines
+  drawn through it and no rings. Taarnby's two airport stations stay out and
+  are named as excluded.
+
+- **Owner call: S-tog is DRAWN, beside M1-M4 - decided on the project's
+  published test, not as an exception to it.** `docs/excluded_categories.md`
+  draws the line "by station spacing and service frequency, not by which
+  company runs the trains", which is how Dublin's DART was kept. Measured
+  inside the two kommuner: S-tog's median station spacing is **1,227 m** (the F
+  ring 892 m) against the Metro's 884 m; every line runs every 10 minutes
+  through the day on its own network (DSB); and **22 of the 31 S-tog stations
+  in scope have no Metro station within 400 m, 16 none within 800 m** -
+  Valby, Husum, Bispebjerg, Svanemollen, Sydhavn. That is the distinction from
+  Paris's RER, excluded as a second network laid over a Metro that already
+  covers the city: here S-tog is the network in the districts the Metro does
+  not reach. **Rejected: Metro only**, `add-country`'s default for the S-Bahn
+  family, which leaves about twenty districts without a ring. Costs accepted:
+  eleven lines to label, and four S-tog colours sit near a Metro colour (A/M4
+  blue, B/M1 green, F/M2 yellow, H/M3 red) for the colour check to separate.
+  Only stations inside the two kommuner get rings. The brief had recorded this
+  as an owner call; the owner's instinct was that a backbone is hard to
+  exclude, and the measurement agreed.
+
+- **Owner call: sole traders are guarded by LEGAL FORM, Oslo's shape, not by
+  the `v/` name marker.** Every active production unit carries its parent's
+  CVR number (`tilknyttetVirksomhedsCVRNummer`, 100.0%), so joining CVR's
+  `Virksomhed` and `Virksomhedsform` entities identifies a sole
+  proprietorship structurally, and its pin shows the address instead of the
+  name. The `v/` marker finds 7.3% of Kobenhavn's kept rows and is only a
+  floor. `coNavn` (c/o, 24.9% of kept rows) is never loaded, and step 2 will
+  assert it. **Rejected: the name marker alone**, which publishes every sole
+  trader registered under a bare personal name. Cost: two more entities from
+  the same unrestricted account.
+
+- **Owner call: the rail leg is OSM, not Rejseplanen's GTFS - on an
+  unresolved licence rather than on convenience.** Rejseplanen publishes a
+  national feed with no key (54,971,494 bytes, modified 21 September), which
+  `osm-rail` ranks above OSM, and the owner approved downloading it subject to
+  the licence read. The read (Labs guidelines, 2026-09-23) found CC BY 4.0, but
+  the same guidelines ask users not to change the data so that it differs from
+  the original - which collapsing stops into stations arguably does - and
+  document access as by request, with a form requiring the guidelines to be
+  accepted, while the zip sits at a URL no public page lists. **Neither point
+  is resolved in the project's favour**, so the file was not downloaded. OSM
+  (ODbL, already credited on every map) carries M1-M4 and all seven S-tog
+  lines, each named and coloured. The station collapse, gate 3 and the
+  osm-rail checklist apply.
+
+- **Two smaller corrections to the brief.** *Hovedstadens Letbane is open* -
+  Ishoj to Rodovre Nord on 26 October 2025, the full line on 22 August 2026 -
+  where the brief said it was not; none of its 29 stops is in either kommune,
+  so the scope is unchanged. And **the brief's instruction to treat an expired
+  CVR copy as an error is not adopted for the steps**: the seven-day retention
+  is how long Datafordeler keeps a generation available, not a window in which
+  the data is valid, unlike WMATA's feed dates. An error on expiry would fail
+  every drift check a week after each fetch. `fetch_sources.py` records each
+  file's generation and refuses a MIXED set instead - the four entities
+  already on disk are generation 505, and the next generation is built 03:00-
+  06:00 Danish time on Saturday 26 September.
 
 ### 2026-09-24 - Two checks closed: the macro map's controls, and clones leaking into %TEMP%
 

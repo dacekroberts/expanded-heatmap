@@ -1,0 +1,60 @@
+station,lines,reason,latitude,longitude
+Albertslund,B/Bx,"in Albertslund Kommune (0165), outside Kobenhavn and Frederiksberg",55.65811875,12.3537736
+Allerød,A,"in Allerød Kommune (0201), outside Kobenhavn and Frederiksberg",55.871056949999996,12.356846699999998
+Ballerup,C/H,"in Ballerup Kommune (0151), outside Kobenhavn and Frederiksberg",55.72971795,12.358288250000001
+Kildedal,C,"in Ballerup Kommune (0151), outside Kobenhavn and Frederiksberg",55.751961249999994,12.286460250000001
+Malmparken,C/H,"in Ballerup Kommune (0151), outside Kobenhavn and Frederiksberg",55.72466255,12.3857045
+Måløv,C,"in Ballerup Kommune (0151), outside Kobenhavn and Frederiksberg",55.74738615,12.3181279
+Skovlunde,C,"in Ballerup Kommune (0151), outside Kobenhavn and Frederiksberg",55.723063499999995,12.4027132
+Brøndby Strand,A,"in Brøndby Kommune (0153), outside Kobenhavn and Frederiksberg",55.6209884,12.42186235
+Brøndbyøster,B,"in Brøndby Kommune (0153), outside Kobenhavn and Frederiksberg",55.6650504,12.4410201
+Egedal,C,"in Egedal Kommune (0240), outside Kobenhavn and Frederiksberg",55.7797855,12.185499700000001
+Stenløse,C,"in Egedal Kommune (0240), outside Kobenhavn and Frederiksberg",55.766850149999996,12.19007775
+Veksø,C,"in Egedal Kommune (0240), outside Kobenhavn and Frederiksberg",55.74991695,12.240590749999999
+Ølstykke,C,"in Egedal Kommune (0240), outside Kobenhavn and Frederiksberg",55.7957675,12.15931725
+Frederikssund,C,"in Frederikssund Kommune (0250), outside Kobenhavn and Frederiksberg",55.83498435,12.0661855
+Vinge,C,"in Frederikssund Kommune (0250), outside Kobenhavn and Frederiksberg",55.81028825,12.115801600000001
+Farum,B,"in Furesø Kommune (0190), outside Kobenhavn and Frederiksberg",55.8120949,12.3736762
+Hareskov,B,"in Furesø Kommune (0190), outside Kobenhavn and Frederiksberg",55.76522025,12.40796885
+Værløse,B,"in Furesø Kommune (0190), outside Kobenhavn and Frederiksberg",55.7824512,12.3719152
+Bernstorffsvej,A/E,"in Gentofte Kommune (0157), outside Kobenhavn and Frederiksberg",55.74280885,12.5578091
+Charlottenlund,C,"in Gentofte Kommune (0157), outside Kobenhavn and Frederiksberg",55.75176555,12.57235515
+Dyssegård,B/Bx,"in Gentofte Kommune (0157), outside Kobenhavn and Frederiksberg",55.73237565,12.536030499999999
+Gentofte,A/E,"in Gentofte Kommune (0157), outside Kobenhavn and Frederiksberg",55.7535946,12.54143605
+Jægersborg,A/E,"in Gentofte Kommune (0157), outside Kobenhavn and Frederiksberg",55.7617434,12.52123365
+Klampenborg,C,"in Gentofte Kommune (0157), outside Kobenhavn and Frederiksberg",55.7768011,12.5881242
+Ordrup,C,"in Gentofte Kommune (0157), outside Kobenhavn and Frederiksberg",55.76289935,12.583561549999999
+Vangede,B/Bx,"in Gentofte Kommune (0157), outside Kobenhavn and Frederiksberg",55.739284749999996,12.5242143
+Bagsværd,B,"in Gladsaxe Kommune (0159), outside Kobenhavn and Frederiksberg",55.761588700000004,12.45455805
+Buddinge,B/Bx,"in Gladsaxe Kommune (0159), outside Kobenhavn and Frederiksberg",55.74715845,12.49417615
+Kildebakke,B/Bx,"in Gladsaxe Kommune (0159), outside Kobenhavn and Frederiksberg",55.7446631,12.50796415
+Skovbrynet,B,"in Gladsaxe Kommune (0159), outside Kobenhavn and Frederiksberg",55.7651626,12.4337301
+Stengården,B,"in Gladsaxe Kommune (0159), outside Kobenhavn and Frederiksberg",55.75671785,12.4731006
+Glostrup,B/Bx,"in Glostrup Kommune (0161), outside Kobenhavn and Frederiksberg",55.66309405,12.39876125
+Greve,A/E,"in Greve Kommune (0253), outside Kobenhavn and Frederiksberg",55.58168835,12.2966496
+Hundige,A/E,"in Greve Kommune (0253), outside Kobenhavn and Frederiksberg",55.597960900000004,12.33418525
+Karlslunde,A/E,"in Greve Kommune (0253), outside Kobenhavn and Frederiksberg",55.56625495,12.269741100000001
+Herlev,C/H,"in Herlev Kommune (0163), outside Kobenhavn and Frederiksberg",55.718838399999996,12.44354825
+Favrholm,A,"in Hillerød Kommune (0219), outside Kobenhavn and Frederiksberg",55.9106932,12.3149833
+Hillerød,A,"in Hillerød Kommune (0219), outside Kobenhavn and Frederiksberg",55.927048600000006,12.31125385
+Avedøre,A,"in Hvidovre Kommune (0167), outside Kobenhavn and Frederiksberg",55.625662250000005,12.45558385
+Friheden,A,"in Hvidovre Kommune (0167), outside Kobenhavn and Frederiksberg",55.629422899999994,12.48365605
+Hvidovre,B,"in Hvidovre Kommune (0167), outside Kobenhavn and Frederiksberg",55.664490900000004,12.4750154
+Rødovre,B,"in Hvidovre Kommune (0167), outside Kobenhavn and Frederiksberg",55.6648012,12.4591846
+Åmarken,A,"in Hvidovre Kommune (0167), outside Kobenhavn and Frederiksberg",55.63976835,12.49986585
+Høje Taastrup,B/Bx,"in Høje-Taastrup Kommune (0169), outside Kobenhavn and Frederiksberg",55.64896725,12.26855695
+Taastrup,B/Bx,"in Høje-Taastrup Kommune (0169), outside Kobenhavn and Frederiksberg",55.65248525,12.302094050000001
+Ishøj,A/E,"in Ishøj Kommune (0183), outside Kobenhavn and Frederiksberg",55.61337905,12.3578947
+Køge,A/E,"in Køge Kommune (0259), outside Kobenhavn and Frederiksberg",55.457978499999996,12.1864596
+Køge Nord,A/E,"in Køge Kommune (0259), outside Kobenhavn and Frederiksberg",55.4990379,12.174913
+Ølby,A/E,"in Køge Kommune (0259), outside Kobenhavn and Frederiksberg",55.479839049999995,12.1756578
+Lyngby,A/E,"in Lyngby-Taarbæk Kommune (0173), outside Kobenhavn and Frederiksberg",55.76807605,12.5031341
+Sorgenfri,A/E,"in Lyngby-Taarbæk Kommune (0173), outside Kobenhavn and Frederiksberg",55.78121285,12.48358865
+Virum,A/E,"in Lyngby-Taarbæk Kommune (0173), outside Kobenhavn and Frederiksberg",55.79615475,12.4729758
+Birkerød,A,"in Rudersdal Kommune (0230), outside Kobenhavn and Frederiksberg",55.8404467,12.4235559
+Holte,A/E,"in Rudersdal Kommune (0230), outside Kobenhavn and Frederiksberg",55.807697000000005,12.4684443
+Jersie,A/E,"in Solrød Kommune (0269), outside Kobenhavn and Frederiksberg",55.521405599999994,12.208951599999999
+Solrød Strand,A/E,"in Solrød Kommune (0269), outside Kobenhavn and Frederiksberg",55.53333535,12.21810275
+Kastrup,M2,"in Tårnby Kommune (0185), outside Kobenhavn and Frederiksberg",55.63572205,12.6469482
+Lufthavnen (Metro),M2,"in Tårnby Kommune (0185), outside Kobenhavn and Frederiksberg",55.6309114,12.6492152
+Vallensbæk,A,"in Vallensbæk Kommune (0187), outside Kobenhavn and Frederiksberg",55.6233618,12.38678135

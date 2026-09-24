@@ -1,0 +1,68 @@
+{
+  "written_utc": "2026-09-24T04:29:22+00:00",
+  "osm_bbox": [
+    55.4,
+    12.0,
+    56.0,
+    12.7
+  ],
+  "osm_host": "overpass-api.de",
+  "datafordeler": {
+    "cvr/Adressering.csv": {
+      "register": "CVR",
+      "entity": "Adressering",
+      "kommune": null,
+      "filename": "CVR_V2_Adressering_TotalDownload_csv_Current_505.csv",
+      "version": 2,
+      "generation": 505,
+      "generation_time": null,
+      "zip_md5": null,
+      "csv_bytes": 876851728,
+      "csv_sha256": "7f373eec55949f39ecfed85f421cb1924c151614fe1346d865156cff6e1a217c",
+      "fetched_utc": "2026-09-24T04:29:06+00:00",
+      "source": "seeded from an earlier Datafordeler download"
+    },
+    "cvr/Branche.csv": {
+      "register": "CVR",
+      "entity": "Branche",
+      "kommune": null,
+      "filename": "CVR_V2_Branche_TotalDownload_csv_Current_505.csv",
+      "version": 2,
+      "generation": 505,
+      "generation_time": null,
+      "zip_md5": null,
+      "csv_bytes": 463545936,
+      "csv_sha256": "6f579219eeadb2e8d8c6adaff3139ab85206ce81288768efd34113c38c9c3014",
+      "fetched_utc": "2026-09-24T04:29:07+00:00",
+      "source": "seeded from an earlier Datafordeler download"
+    },
+    "cvr/Navn.csv": {
+      "register": "CVR",
+      "entity": "Navn",
+      "kommune": null,
+      "filename": "CVR_V2_Navn_TotalDownload_csv_Current_505.csv",
+      "version": 2,
+      "generation": 505,
+      "generation_time": null,
+      "zip_md5": null,
+      "csv_bytes": 583359223,
+      "csv_sha256": "c7b853408f6e549d75f7ac224cbf6da9b62c9e5d0b7c5d1fc0212a50a9f6106f",
+      "fetched_utc": "2026-09-24T04:29:08+00:00",
+      "source": "seeded from an earlier Datafordeler download"
+    },
+    "cvr/Produktionsenhed.csv": {
+      "register": "CVR",
+      "entity": "Produktionsenhed",
+      "kommune": null,
+      "filename": "CVR_V2_Produktionsenhed_TotalDownload_csv_Current_505.csv",
+      "version": 2,
+      "generation": 505,
+      "generation_time": null,
+      "zip_md5": null,
+      "csv_bytes": 222563505,
+      "csv_sha256": "bd181e52dd14f0f58603f1f66bbb1fb5573047a78f2d4729b4237b000a20072d",
+      "fetched_utc": "2026-09-24T04:29:08+00:00",
+      "source": "seeded from an earlier Datafordeler download"
+    }
+  }
+}
