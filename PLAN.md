@@ -21,6 +21,26 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [~] **🇳🇱 AMSTERDAM - PARKED 2026-09-24 at "page text drafted", on
+  `amsterdam-build`.** 13,238 storefronts, 144 stations, metro 50-54 and 16
+  trams. Pipeline, map, drift baseline, privacy verdict, provenance rows and
+  the DECISIONS entry are committed; **held uncommitted on purpose** until the
+  owner approves the text, so no commit names a page that does not exist yet:
+  `app/cities.py` (entry + Lille's label turned), `app/pages/29_Amsterdam_Heatmap.py`,
+  `docs/city_master_list.md` (29 built), `docs/project_context.md`.
+  Morning, in order:
+  - [ ] Owner: approve the page text, notice 35 (Gemeente Amsterdam, CC BY
+    4.0) and the `excluded_categories.md` section - drafted in chat.
+  - [ ] Owner: **scope** - Tram 6 keeps 5 of 16 stops (31%) gemeente-only.
+  - [ ] Owner: **phone labels** - 11 overlapping pairs at 375 px.
+  - [ ] Write the approved text; `_NOTICES` in `app/components.py`; commit.
+  - [ ] Scoped `deploy-verify` (city-added), `check_deploy_imports`, then
+    fetch, merge, push, reboot, live check - one city at a time.
+  - [ ] AFTER PUBLISH: remove the two `amsterdam-*-tmp` entries from the main
+    checkout's `.claude/launch.json` (standing permission).
+  - [ ] The owner may delete `data/amsterdam/raw/gtfs-nl.zip` (243.8 MB) -
+    superseded by `gtfs-openov-nl.zip`, kept rather than deleted by Claude.
+
 - [x] **🇨🇿 PRAGUE - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro A,
   B and C, obec 554782: **25,275 storefronts, 58 stations**; page text, notices
   32-34 and the `excluded_categories.md` section approved by the owner.
