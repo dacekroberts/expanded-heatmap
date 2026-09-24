@@ -16,13 +16,18 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**346 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**351 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [The macro map lands on "Global", which labels every city (owner)](#2026-09-24---the-macro-map-lands-on-global-which-labels-every-city-owner)
 - [Rotterdam built: 7,520 storefronts, 132 stations; the food layer rebuilt from permit notices](#2026-09-24---rotterdam-built-7520-storefronts-132-stations-the-food-layer-rebuilt-from-permit-notices)
+- [Three of Tokyo's eight food lists are partial; a per-ward table for Japan](#2026-09-24---three-of-tokyos-eight-food-lists-are-partial-a-per-ward-table-for-japan)
+- [Meguro's personal-services registers joined: 1,412 premises at 100% block](#2026-09-24---meguros-personal-services-registers-joined-1412-premises-at-100-block)
+- [Overview's city list grouped by country too (owner)](#2026-09-24---overviews-city-list-grouped-by-country-too-owner)
 - [Line labels read at 4.5:1 in both themes: no dark filter, a halo swap in light mode](#2026-09-24---line-labels-read-at-451-in-both-themes-no-dark-filter-a-halo-swap-in-light-mode)
 - [Renderer fixes verified and pushed; the dark-label model corrected next, with the light-mode halo swap (owner)](#2026-09-24---renderer-fixes-verified-and-pushed-the-dark-label-model-corrected-next-with-the-light-mode-halo-swap-owner)
+- [City switcher grouped by country (owner)](#2026-09-24---city-switcher-grouped-by-country-owner)
 - [Tokyo's four own-site wards read: all CC BY 4.0, none like Sendai](#2026-09-24---tokyos-four-own-site-wards-read-all-cc-by-40-none-like-sendai)
 - [Japan: cost clauses accepted country-wide; N03 never drawn; Kyoto before Tokyo](#2026-09-24---japan-cost-clauses-accepted-country-wide-n03-never-drawn-kyoto-before-tokyo)
 - [Renderer: dark-mode line labels lifted to 4.5:1, the legend's style repaired; a check for both](#2026-09-24---renderer-dark-mode-line-labels-lifted-to-451-the-legends-style-repaired-a-check-for-both)
@@ -389,6 +394,51 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-24 - The macro map lands on "Global", which labels every city (owner)
+
+- **The front page opens on a new "Global" region**, first in the selector.
+  It labels all 39 cities and opens at exactly the United States frame
+  (zoom 1.4525, same centre).
+  - **Before**: the landing view was the "United States" region, and a
+    region labels only its own cities since 2026-09-23. The first impression
+    silently carried no name for Canada, Mexico, Europe or South America.
+  - **Owner's reasoning**: every city cannot be framed at once, so a label
+    beyond the opening frame is fine. The label limit belongs to the regions a
+    reader chooses. "United States" is now one of those and keeps its own
+    labels only.
+- **Measured before building.** With every city labelled at the US frame:
+  - **North America is clean** apart from one pair (below).
+  - **Europe and South America are NOT off-screen at wider widths.** At
+    1200 px Europe's 14 cities render as a cluster at the right edge: 22 pill
+    overlaps and 17 pills covering another city's dot.
+  - **Shown to the owner**, who chose to label everything anyway: each
+    region's own view lays those cities out cleanly at its own zoom.
+- **Los Angeles's label moved from dy 26 to 24.** Global labels Guadalajara at
+  LA's zoom, and the two pills overlapped 68.5 x 1.1 px: the same abutment
+  accepted once before, on 2026-09-22. Moving the label cleared it outright,
+  so no accepted-overlap entry was added.
+- **`check_macro_labels.py` models Global.**
+  - **Scoring**: Global borrows `DEFAULT_FRAME`'s frame and is held to the
+    cities whose markers fall on the phone-width canvas. That set is North
+    America, derived from the arithmetic rather than listed.
+  - **Result**: 9 regions x 3 widths, PROBLEMS 0.
+  - **Positive control**: the 1.1 px pair failed it in all three widths
+    before the move.
+- **Not in this change**: renaming each city map's "All cities" button to
+  "Global View", which the owner also asked for.
+  - **Why**: it lives in `pipeline/map_common.py`, so every map must be
+    re-rendered.
+  - **Clash**: the Rotterdam branch already carries an unpushed 39-map
+    re-render. A second one here would conflict with it file for file.
+  - **So**: it goes with that re-render, with the app-side "All cities"
+    wording changed at the same time. Until then the old wording stays
+    everywhere, so the site never names the same thing two ways.
+  - **Keep the hidden link**: the text "All cities" in
+    `components.render_city_nav()` must survive that rename. Every
+    already-rendered map finds the Overview link by that text, and a map
+    that failed to find it would list the renamed link as a city in its
+    menu.
+
 ### 2026-09-24 - Rotterdam built: 7,520 storefronts, 132 stations; the food layer rebuilt from permit notices
 
 - **Rotterdam is built on `worktree-rotterdam`, as Amsterdam's shape with the
@@ -462,6 +512,81 @@ onwards; the early ones are split by phase rather than by hour.
   shop-vacancy share, about one in fourteen: 430 of 6,060 units on
   2025-01-01.
 
+### 2026-09-24 - Three of Tokyo's eight food lists are partial; a per-ward table for Japan
+
+- **Found that Chūō's, Kōtō's and Minato's food files are NOT complete lists**,
+  while building a per-ward table for the master-list republish (owner's
+  request).
+  - **The first sign was per capita**: Kōtō, about 530,000 residents, with 570
+    restaurants is about 1 per 1,000, against Osaka's 19.
+  - **The permit dates inside the files settle it.** Chūō's 許可年月日 and
+    Kōtō's 初回許可年月日 run **2021–2022 only**. Minato's 初回許可年月日 runs
+    **2021–2026, with nothing earlier**: new-law permits only, missing the
+    old-law permits still in term.
+  - **The five complete lists reach back decades**: Shinjuku (2016–2022, its
+    disclosed 2023 vintage), Shibuya, Taitō and Setagaya. Meguro counts too,
+    because it publishes both halves (`all_new_8` and `all_old_8`).
+  - **This corrects `tokyo.md`**, which called all eight "full, current food
+    lists". The claim was made from file presence and a successful join,
+    never from a completeness measure. Tokyo's screen predates the per-capita
+    yardstick, and the yardstick was never applied back to its wards.
+  - **Minato remains valid as the join control**, since placement accuracy is
+    unaffected.
+  - **Next probe** (`PLAN.md`): whether the three wards publish their
+    old-law halves. Tokyo builds last, so nothing is blocked.
+- **A per-ward table was measured** (`scratchpad/japan_run/ward_table.py`):
+  permit rows by bucket, block rate, and N02 stations per ward, for every
+  Japanese city with data on disk.
+- **Privacy slip, disclosed to the owner.** The date-format probe selected
+  every column whose name contained 日, 年月 or 法, and 法 matched 法人名, the
+  operator's corporate name. It printed three corporate names in the output
+  (a restaurant group, a coffee chain, a supermarket chain). All three are
+  legal entities, not individuals. Nothing was written to any file. The rule
+  stands: select premises columns by exact name, never by a pattern that can
+  reach an operator column.
+- The master list's "Candidates — 31" heading was stale after Brazil's nine
+  were built. It now reads 22, matching its own summary table (A 12 · C 6 ·
+  D 4).
+
+### 2026-09-24 - Meguro's personal-services registers joined: 1,412 premises at 100% block
+
+- **Downloaded Meguro's three 生活衛生 registers from BODIK and joined them**, at
+  the owner's request. They are the complete lists as of 2026-03-31, 294 KB,
+  CC BY 4.0, read the same day.
+  - **Why**: Meguro is one of Tokyo's eight in-scope wards and had no
+    personal-services data. The brief had listed the registers as deferred.
+  - **The count**: 143 barbers, 1,076 beauty salons and 202 laundries (the
+    ward's own row numbers confirm 1,421). **1,412 premises** after 9
+    storeless laundry pick-ups are dropped. **100.0% placed at block level**
+    (`screen_japan_join.py meguro-life`).
+  - Tokyo's personal services now total **16,299** across 11 wards, up from
+    14,887.
+- **Two reader rules in `japan_register.py`, each from this file's misses.**
+  - **A TSV wrapped whole in CSV quotes.** Each tab-separated line is one
+    quoted field with its inner quotes doubled, so the first run read one
+    giant column and placed 0 rows. `city_rows` now unwraps that exact shape;
+    a plain quoted TSV has no doubled quotes and is untouched.
+  - **無店舗 ("no shop") in the type is not a premises.** The 9 pick-ups are
+    addressed `目黒区内` (anywhere in the ward), which the 一円 rule does not
+    catch. The type column `施設（種別）等` also had to join `TYPE_COLS`, because
+    without it the type read as blank.
+- **Every other key is unchanged** (26 of 26), and the Minato control stays
+  at 99.8%.
+- Only column names and fill counts were inspected. 営業者名 and ＴＥＬ１ are never
+  read.
+- **Meguro also publishes monthly new, succession and closure lists**, so a
+  build can bring the March list up to date both ways. It is the rare
+  Japanese source whose closures are visible.
+
+### 2026-09-24 - Overview's city list grouped by country too (owner)
+
+- **The owner extended the switcher's grouping to the Overview's text list**,
+  the list of every city beneath the macro map. It now iterates
+  `SWITCHER_ORDER`, so the list and each city map's "Cities" menu read in the
+  same order: Milan then Rome.
+- This supersedes that one line of the previous entry, "The Overview list is
+  unchanged". `CITIES` stays in build order, because page numbers and the
+  macro map follow it.
 ### 2026-09-24 - Line labels read at 4.5:1 in both themes: no dark filter, a halo swap in light mode
 
 - **Built the owner's two label calls into the renderer**, on the Rotterdam
@@ -533,6 +658,29 @@ onwards; the early ones are split by phase rather than by hour.
   Built next, and verified inside Rotterdam's deploy check rather than in a
   separate run.
 
+### 2026-09-24 - City switcher grouped by country (owner)
+
+- **The owner asked for cities of one country to sit back to back** in the
+  city map's "Cities" menu, e.g. Milan then Rome.
+  - **Before**: the menu followed build order, so Rome (page 30) sat ten places
+    after Milan (page 20). The menu reads its options from the hidden
+    switcher links that `components.render_city_nav()` renders, so the fix is
+    app-side only. No map is re-rendered.
+- **How it works**: every `CITIES` entry now carries `country`. The new
+  `SWITCHER_ORDER` in `app/cities.py` lists countries in the order their first
+  city was built, and cities within a country in build order. Today that
+  moves only Rome; Brazil's nine cities already sat together.
+- **`CITIES` itself stays in build order**, because page numbers, the macro
+  map and the Overview's text list all follow it. The Overview list is
+  unchanged: the request named the city map's menu.
+- **`country` is not `region`.** A region is a macro-map view (Canada is
+  two, Europe one); a country is what a reader groups by.
+- **Enforced, not remembered**: `cities.py` raises at import on a city with
+  no `country` (watched failing with Rome's removed), and
+  `scripts/scaffold_city.py` now requires `--country`. A scaffold run with it
+  imported 40 cities, 8 regions, and was then reverted. **Any build branch
+  that adds a city after this lands needs the field**, and
+  `check_deploy_imports.py` refuses the branch until it has it.
 ### 2026-09-24 - Tokyo's four own-site wards read: all CC BY 4.0, none like Sendai
 
 - **Read the terms of the four Tokyo wards whose files come from their own

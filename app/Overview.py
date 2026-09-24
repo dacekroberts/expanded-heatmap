@@ -20,12 +20,14 @@ import streamlit as st
 
 from cities import (
     CITIES,
+    DEFAULT_FRAME,
     DEFAULT_REGION,
     elsewhere_counts,
     IN_DEFAULT_VIEW,
     MAP_ONLY_NAV,
     REGION_MEMBERS,
     REGIONS,
+    SWITCHER_ORDER,
 )
 from components import (
     SITE_NAME,
@@ -338,7 +340,12 @@ def fit_view(lats, lons, width_px=320, height_px=460, fill=0.7, west_pad=0.12):
 # zoom, which showed the same near-empty frame as the United States view and
 # gave a reader almost nothing. Vancouver to Montréal is ~3,300 km - wider than
 # the contiguous United States - which is also why Canada is split west/east.
-_here = _region_cities[region]
+#
+# GLOBAL, THE LANDING VIEW, BORROWS DEFAULT_FRAME'S FRAME (the United States):
+# it labels every city but opens exactly where the United States view does.
+# See DEFAULT_REGION in cities.py.
+_frame_region = DEFAULT_FRAME if region == DEFAULT_REGION else region
+_here = _region_cities[_frame_region]
 view = fit_view([c["lat"] for c in _here], [c["lon"] for c in _here])
 
 # RE-CENTRE ON THE REGION'S OWN MIDPOINT, KEEPING THE FITTED ZOOM. The heading
@@ -381,8 +388,9 @@ view = fit_view([c["lat"] for c in _here], [c["lon"] for c in _here])
 # A NEW ViewState rather than `view.zoom = ...`: pydeck does not serialise
 # attributes mutated after construction, so the assignment form silently ships
 # the old view.
-if region != DEFAULT_REGION:
-    _here = _region_cities[region]
+# The United States frame is the one exception, as it always was: it is the
+# landing frame (now Global's too) and its offsets were measured un-shifted.
+if _frame_region != DEFAULT_FRAME:
     view = pdk.ViewState(
         latitude=(max(c["lat"] for c in _here) + min(c["lat"] for c in _here)) / 2,
         longitude=(max(c["lon"] for c in _here) + min(c["lon"] for c in _here)) / 2,
@@ -441,7 +449,13 @@ if picked:
 # most of the site, and a reader cannot tell a deliberate frame from a broken
 # one unless the counts are stated. Every city is drawn at every region - the
 # view is centred, not filtered - so the wording is about where the view sits.
-if len(REGIONS) > 1:
+if region == DEFAULT_REGION:
+    st.caption(
+        f"All {len(CITIES)} cities are on the map, opening on the "
+        f"{DEFAULT_FRAME}: drag or zoom out to reach the rest, pick a region "
+        "above to jump there, or use the list below."
+    )
+elif len(REGIONS) > 1:
     # NOT "every region except this one": REGIONS holds composites and
     # their halves, so that counted the same cities twice. See
     # cities.elsewhere_counts().
@@ -456,7 +470,7 @@ if len(REGIONS) > 1:
     )
 
 st.caption("Or pick a city from the list:")
-for city in CITIES:
+for city in SWITCHER_ORDER:   # grouped by country, like each city map's menu
     st.page_link(city["page"], label=f"**{city['name']}**")
     st.caption(city["blurb"])  # a caption wraps; a long page_link label is clipped on a phone
 

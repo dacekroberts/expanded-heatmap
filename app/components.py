@@ -11,7 +11,7 @@ from pathlib import Path
 
 import streamlit as st
 
-from cities import CITIES, MAP_ONLY_NAV
+from cities import MAP_ONLY_NAV, SWITCHER_ORDER
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 # pipeline/theme.py imports nothing, so it is safe for the lean deploy venv
@@ -36,7 +36,7 @@ def render_city_nav(current: str):
     if MAP_ONLY_NAV:
         with st.container(key="map-only-nav"):
             st.page_link(OVERVIEW_PAGE, label="All cities")
-            for city in CITIES:
+            for city in SWITCHER_ORDER:   # grouped by country; see cities.py
                 st.page_link(city["page"], label=city["name"])
         return
     # A horizontal container sizes each item to its content and wraps onto a
@@ -44,7 +44,7 @@ def render_city_nav(current: str):
     # longer city names once a fourth city was added.
     with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
         st.page_link(OVERVIEW_PAGE, label="← All cities (map)")
-        for city in CITIES:
+        for city in SWITCHER_ORDER:
             if city["name"] == current:
                 st.markdown(f"**{city['name']}**")
             else:

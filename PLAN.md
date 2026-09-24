@@ -703,8 +703,9 @@ brief names.
     site), Taitō, Setagaya and Meguro (BODIK). **Read 2026-09-24 (owner):
     all PERMITTED WITH CONDITIONS, CC BY 4.0, nothing owed.** Their cost
     clauses are within the Japan-wide acceptance, and Shibuya has none. Each
-    needs its own credit. Found on the way: Meguro's 生活衛生 registers on BODIK
-    (Tokyo's still-unknown list).
+    needs its own credit. Found on the way: Meguro's 生活衛生 registers on BODIK.
+    **Downloaded and joined the same day (owner)**: 1,412 premises at 100.0%
+    block, so Tokyo's personal services now total 16,299.
   - [x] **The fault-based cost clauses: ✅ ACCEPTED by the owner
     2026-09-24 for every Japanese source**, as for Taiwan. That covers
     Fukuoka 第４条, Hiroshima 第3条 and MHLW 免責 1) エ, beside Tokyo's and
@@ -746,6 +747,12 @@ brief names.
   Routes: request Chiyoda's ledger (owner, gated item 22); extract Ōta's,
   Kita's and Arakawa's PDF lists; Shinagawa's and Itabashi's partial files;
   requests to Toshima, Nerima and Edogawa.
+  - [ ] ⚠️ **Three in-scope lists are PARTIAL (found 2026-09-24).** Chūō's
+    and Kōtō's hold only 2021–22 permits, and Minato's only new-law permits
+    since 2021. Next probe: whether each ward publishes its old-law (旧法)
+    half, as Meguro does (`all_old_8`), or a newer full file. Otherwise a
+    request to the ward. Until then those three wards' food layers are
+    undercounts, and the page must say so.
 - [ ] **Fukuoka** — agree the wording that discloses the ~20% of restaurants
   with no published address. BODIK is flaky, so `fetch_sources.py` retries.
 - [x] **No pre-build items**: Seoul (its brief is deliberately partial, and

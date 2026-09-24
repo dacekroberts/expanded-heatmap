@@ -229,7 +229,8 @@ ADDR_COLS = ("施設所在地", "営業所所在地", "所在地_連結表記", 
              "営業所所在地（所在地_連結標記", "施設所在地（所在地_連結標記）")
 
 
-TYPE_COLS = ("業種名", "業種分類", "業種情報公開名称", "営業の種類", "業種区分", "営業種類", "施設（種別）", "種別", "業種", "業務種別")
+TYPE_COLS = ("業種名", "業種分類", "業種情報公開名称", "営業の種類", "業種区分", "営業種類", "施設（種別）", "施設（種別）等", "種別", "業種",
+             "業務種別")
 
 
 NAME_COLS = ("屋号", "施設名称", "営業施設名称、屋号又は商号", "施設の名称", "施設屋号")
@@ -277,7 +278,14 @@ def city_rows(path):
         yield from xlsx_rows(Path(path).read_bytes())
         return
     text = decode(Path(path).read_bytes())
-    delim = "\t" if text.split("\n", 1)[0].count("\t") > text.split("\n", 1)[0].count(",") else ","
+    head = text.split("\n", 1)[0]
+    # Meguro's 生活衛生 registers: each TAB-separated line is wrapped whole in CSV
+    # quotes, inner quotes doubled ("No\t""施設名称""\t…"). Unwrap it with the csv
+    # reader, then read the TSV inside. A plain quoted TSV has no doubled quotes.
+    if head.startswith('"') and "\t" in head and '""' in head:
+        text = "\n".join(r[0] for r in csv.reader(io.StringIO(text)) if r)
+        head = text.split("\n", 1)[0]
+    delim = "\t" if head.count("\t") > head.count(",") else ","
     yield from csv.DictReader(io.StringIO(text), delimiter=delim)
 
 
@@ -484,8 +492,10 @@ def permits_from_rows(rows, pref, city):
                     "addr": addr, "type": next((r[c] for c in TYPE_COLS if r.get(c)), ""),
                     "name": next((r[c] for c in NAME_COLS if r.get(c)), ""), "pub": pub,
                     # not a premises: vehicles, and 市内一円 / 仙台市内一円 ("anywhere in
-                    # the city") - Sendai's festival stalls (仮設, 臨時) are written so
-                    "mobile": not addr.strip() or "一円" in addr or "自動車" in next((r[c] for c in TYPE_COLS if r.get(c)), "")})
+                    # the city") - Sendai's festival stalls (仮設, 臨時) are written so -
+                    # and 無店舗 ("no shop"): Meguro's laundry pick-ups at 目黒区内
+                    "mobile": not addr.strip() or "一円" in addr
+                    or any(w in next((r[c] for c in TYPE_COLS if r.get(c)), "") for w in ("自動車", "無店舗"))})
     return out
 
 

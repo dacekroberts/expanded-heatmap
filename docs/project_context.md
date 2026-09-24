@@ -869,14 +869,19 @@ five are deployed**; the city-scoped `deploy-verify` deferred to the last
 French city ran before Rennes merged, and passed.
 
 **The macro map is regional, and a region is whatever groups cities into one
-readable view** - not a country. They are United States (a COMPOSITE of West
-and East, and the default landing view), United States West, United States
-East, Canada West, Canada East, Mexico, Europe and South America. Each is fitted to its own
-cities, so switching region zooms as well as re-centres. A city carries exactly
-one region tag and a composite is resolved at lookup; tagging a city with a
-composite is an error the validator names. A region labels only its own cities,
-composites included - a parent drawing every city's name is a collision class
-that grows with the map rather than with any defect.
+readable view** - not a country. They are Global (the landing view, a
+COMPOSITE of every leaf), United States (a composite of West and East), United
+States West, United States East, Canada West, Canada East, Mexico, Europe and
+South America. Each is fitted to its own cities, so switching region zooms as
+well as re-centres - except Global, which opens on the United States frame. A
+city carries exactly one region tag and a composite is resolved at lookup;
+tagging a city with a composite is an error the validator names. A region
+labels only its own cities, composites included - a parent drawing every
+city's name is a collision class that grows with the map rather than with any
+defect. **Global is the one exception, by the owner's decision**: it labels
+every city, accepting that Europe and South America cluster at the edge of a
+wide screen, and `check_macro_labels.py` holds it only to the cities in its
+opening frame.
 
 **Europe is one region, not one per country**, and it was briefly the other
 way: three regions held four cities before they were collapsed, which is what

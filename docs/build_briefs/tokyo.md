@@ -33,9 +33,10 @@ organization `t` + its six-digit municipal code (Minato `t131032`).
 
 **Personal services** — the 生活衛生 registers (美容所 / 理容所 / クリーニング所),
 same address columns, on the metropolitan portal (`www.opendata.metro.tokyo.lg.jp`)
-or Minato's own: **11 wards, 14,887 premises** — Chiyoda, Minato, Bunkyō,
-Taitō, Shinagawa, Ōta, Shibuya, Toshima, Arakawa, Katsushika (+ Meguro on
-BODIK, deferred). Beauty 10,265 · barber 1,899 · laundry 2,723.
+or Minato's own: **11 wards, 16,299 premises** — Chiyoda, Minato, Bunkyō,
+Taitō, Shinagawa, Ōta, Shibuya, Toshima, Arakawa, Katsushika, and Meguro
+(on BODIK, measured 2026-09-24: 1,412). Beauty 11,341 · barber 2,042 ·
+laundry 2,916.
 
 ### Taxonomy — `営業の種類`, first cut
 
@@ -65,7 +66,7 @@ BODIK, deferred). Beauty 10,265 · barber 1,899 · laundry 2,723.
 | Chūō | 99.1% | 0.2% | 0.7% |
 | Kōtō | 99.6% | 0.1% | 0.3% |
 | **Food, 24,297** | **99.3%** | 0.5% | 0.1% |
-| Personal services, 14,887 | 98.8–99.8% | | |
+| Personal services, 16,299 | 98.8–100% | | |
 
 **Independently confirmed**: where wards publish their own coordinates, the
 block point sits a **median 22–43 m** away, **95–100% within 250 m**. (GSI's
@@ -174,9 +175,27 @@ start at the town, so a single-ward list defaults its ward.
 | Setagaya | 7,428 | **100.0%** | none published |
 | Meguro | 3,492 (+90 都内一円) | **99.9%** | none published |
 
-**Tokyo now: 8 wards with full, current food lists** (Chūō, Minato, Shinjuku
-(2023), Kōtō, Shibuya, Taitō, Setagaya, Meguro), about **59,400 food
-premises**. **The remaining hole is the very centre**: Chiyoda (Marunouchi,
+⚠️ **CORRECTED 2026-09-24: three of the eight lists are NOT complete, as the
+permit dates inside them show.** The join is unaffected; only completeness is.
+
+| Ward | Permit dates in the file | Reading | Restaurants in it |
+|---|---|---|---|
+| **Chūō** | 許可年月日 **2021–2022 only** (1,438 + 1,110) | a partial list: about 1.5 years of permits | 1,319 |
+| **Kōtō** | 初回許可年月日 **2021–2022 only** | a partial list: about 1.5 years of permits | 570 |
+| **Minato** | 初回許可年月日 **2021–2026 only**, none earlier | new-law permits only. Old-law permits still in term are missing | 4,892 |
+| Shinjuku | 許可年月日 2016–2022 | complete, as of 2023-01-01 (its disclosed vintage) | 12,888 |
+| Shibuya · Taitō · Setagaya | back to 1969 / 2019 / 1960 | complete | 10,887 · 6,533 · 5,845 |
+| Meguro | `all_new_8` (2021–) **plus** `all_old_8` (the old law) | complete, because both halves are published | 1,443 + old |
+
+Per capita they fail too: Kōtō (about 530,000 residents) with 570 restaurants
+is about 1 per 1,000, against Osaka's 19. So "8 wards with full, current food
+lists" was wrong. Five are complete. Minato was the join control, and it
+stays valid for the join. Whether the old-law halves (旧法) are published
+anywhere for Chūō, Kōtō and Minato is the next probe, as Meguro's are.
+
+**Tokyo now: 8 wards with food lists, 5 of them complete** (Shinjuku (2023),
+Shibuya, Taitō, Setagaya, Meguro; Chūō, Kōtō and Minato partial, above),
+about **59,400 food permit rows**. **The remaining hole is the very centre**: Chiyoda (Marunouchi,
 Ōtemachi) and Toshima (Ikebukuro) release theirs only on request, and Bunkyō
 publishes none. MHLW's open data does not fill them (Chiyoda 291 restaurants,
 26% addressed). **The scope is the owner's call**: the 8 wards as a stated
@@ -243,11 +262,19 @@ run `check_personal_exposure.py`.
 - ⚠️ Shinjuku's 2023 vintage: a newer file on the ward's own page? (Used with its vintage disclosed if not.)
 - ⚠️ The Economic Census control's figures (the source is decided); the wards whose own sites are being read.
 - ✅ decided 2026-09-24 (owner): see the block at the top (Shinkansen out). ⚠️ Still open: limited-express-only lines, and which N02 lines are commuter.
-- ⚠️ **Meguro's 生活衛生 registers are on BODIK** (`131105_barber`,
-  `131105_hairdressingshop`, `131105_cleaning_shop`, full lists as of
-  2026-03-31, CC BY 4.0, read 2026-09-24). Not downloaded or joined yet, and
-  their columns are unknown. Nakano's food file (a vendor map host) stays
-  deferred.
+- ✅ **Meguro's 生活衛生 registers, measured 2026-09-24**: `131105_barber`,
+  `131105_hairdressingshop` and `131105_cleaning_shop` on BODIK (CC BY 4.0),
+  complete lists as of 2026-03-31. `screen_japan_join.py meguro-life`:
+  - 143 barbers, 1,076 beauty salons, 202 laundries.
+  - **1,412 premises**, after 9 storeless laundry pick-ups (無店舗取次店 at
+    `目黒区内`) are dropped. **100.0% placed at block level.**
+  - **Columns**: 施設名称, 施設所在地, 施設方書, 施設（種別）等, 許可日 and 許可番号.
+    Also 営業者名 and ＴＥＬ１, which are never read.
+  - ⚠️ **The files are tab-separated lines, each wrapped whole in CSV quotes.**
+    The shared reader now unwraps them.
+  - **Meguro also publishes monthly new, succession (承継) and closure (廃止)
+    lists**, so a build can bring the March list up to date both ways.
+- ⚠️ Nakano's food file (a vendor map host) stays deferred.
 
 ```brief-checks
 [

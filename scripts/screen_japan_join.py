@@ -112,6 +112,10 @@ CITIES = {
     "taito": ("東京都", "台東区", ["tokyo/raw/13106/2026ALL-IND-CSV.csv"], "tokyo/raw/13106"),
     "setagaya": ("東京都", "世田谷区", ["tokyo/raw/13112/zenkenr080331.csv"], "tokyo/raw/13112"),
     "meguro": ("東京都", "目黒区", ["tokyo/raw/13110/all_new_8.csv", "tokyo/raw/13110/all_old_8.csv"], "tokyo/raw/13110"),
+    # Meguro's 生活衛生 registers, also on BODIK (tab-separated despite .csv)
+    "meguro-life": ("東京都", "目黒区", ["tokyo/raw/13110/131105_barber_20260331.csv",
+                                     "tokyo/raw/13110/131105_hairdressingshop_20260331.csv",
+                                     "tokyo/raw/13110/131105_cleaning_20260331.csv"], "tokyo/raw/13110"),
     # Kyoto publishes no current full list: the register is REBUILT from the 2021
     # list and every monthly list, as of the day they were downloaded. Personal
     # services are the city's own complete lists (2026-03-31) plus each month's new.

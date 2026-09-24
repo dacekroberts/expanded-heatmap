@@ -219,7 +219,6 @@ try:
     # is left standing deliberately: this file must work from a CLEAN CLONE
     # with only the lean venv, so importing the other script is not free.
     # Recorded in PLAN.md as worth unifying.
-    _CC = _cities_in(_RO[0])
     _MARKERS = _ALL          # every city still renders a DOT in every view
 
     def _fit(lats, lons, w=320, h=460, fill=0.7, west_pad=0.12):
@@ -252,6 +251,20 @@ try:
                                                    else cx + 5 - w)
         y0 = y + dy - PILL_H / 2
         return x0, x0 + w, y0, y0 + PILL_H
+
+    # THE LANDING VIEW ("Global" since 2026-09-24) LABELS EVERY CITY, and the
+    # owner accepted that Europe and South America pile up at the edge of a
+    # wide screen there - each has its own region for reading them. So score
+    # only the labelled cities whose MARKER falls on the 343 px phone canvas,
+    # the frame fit_view is sized for: North America today, by arithmetic
+    # rather than by list. check_macro_labels.py applies the same rule and
+    # scores every other region in full.
+    def _on_phone(c):
+        x = (c["lon"] - CLON) / 360 * SCALE + 343 / 2
+        y = (_mercy(c["lat"]) - _mercy(CLAT)) * SCALE + 460 / 2
+        return 0 <= x <= 343 and 0 <= y <= 460
+
+    _CC = [c for c in _cities_in(_RO[0]) if _on_phone(c)]
 
     seen = set()
     for W in (343, 726, 1030):          # 375 / 768 / 1200 px viewports
