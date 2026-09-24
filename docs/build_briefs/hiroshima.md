@@ -70,11 +70,15 @@ Shinkansen.
 **Hiroshima City (8 wards).** Hiroden's Miyajima line and JR run on to
 Hatsukaichi and Kaita. Check at build.
 
-## ⏳ Licences — PENDING
+## Licences — MHLW READ 2026-09-24; the city's pending
 
-- **MHLW open data: a licence read is in progress.**
+- **MHLW open data — PERMITTED WITH CONDITIONS** (PDL 1.0), exactly as in
+  `fukuoka.md`: a processed-by credit naming the processor, no
+  completeness or accuracy claims, no MHLW logo, and the minor OPEN point on
+  免責 2) ウ (commercial reuse). That point is fine for a non-commercial site.
 - **The city's own list**: PDL 1.0 declared on the DataEye resource, none on
-  the city page. NOT YET READ.
+  the city page. The page's only line on use is
+  「なお、掲載している情報については適切に使用してください。」 NOT YET READ in full.
 - **MLIT 位置参照情報 and N02**: PDL 1.0.
 
 ## Privacy
@@ -89,7 +93,7 @@ and the address, never any operator column. MHLW's file carries 法人名,
 
 ## Still unknown
 
-- ⏳ **The MHLW licence** and the city's PDL 1.0.
+- ⏳ **The city's PDL 1.0** (MHLW's is read: PERMITTED WITH CONDITIONS).
 - ⚠️ **Band**: food service plus partial food retail, with no personal services. Band C's shape: the owner's call.
 - ⚠️ The ~14% with no published address; whether trams count; scope; the Shinkansen.
 - ⚠️ The Economic Census food control.
