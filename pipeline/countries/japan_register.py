@@ -34,6 +34,7 @@ are never selected.
 """
 import collections
 import csv
+import datetime
 import io
 import math
 import re
@@ -280,6 +281,123 @@ def city_rows(path):
     yield from csv.DictReader(io.StringIO(text), delimiter=delim)
 
 
+def _cell(v):
+    if v is None:
+        return ""
+    if isinstance(v, float) and v.is_integer():
+        v = int(v)
+    if hasattr(v, "strftime"):
+        return v.strftime("%Y-%m-%d")
+    return str(v).replace("\n", "").replace("\r", "").strip()
+
+
+def workbook_tables(path):
+    """Rows as dicts from every sheet of an .xls or .xlsx that has a 所在地 column
+    in its first 30 rows (the header; title rows may sit above it). Kyoto's
+    2021 list is the old .xls format, read with xlrd. Dates come back ISO."""
+    data = Path(path).read_bytes()
+    if data[:4] == b"\xd0\xcf\x11\xe0":
+        import xlrd
+        wb = xlrd.open_workbook(file_contents=data)
+
+        def xls_cell(c):
+            if c.ctype == xlrd.XL_CELL_DATE:
+                try:
+                    return _cell(xlrd.xldate_as_datetime(c.value, wb.datemode))
+                except (ValueError, OverflowError, xlrd.xldate.XLDateError):
+                    pass
+            return _cell(c.value)
+        sheets = [[[xls_cell(c) for c in sh.row(i)] for i in range(sh.nrows)] for sh in wb.sheets()]
+    else:
+        import openpyxl
+        wb = openpyxl.load_workbook(io.BytesIO(data), read_only=True, data_only=True)
+        sheets = [[[_cell(c) for c in r] for r in ws.iter_rows(values_only=True)] for ws in wb.worksheets]
+    for rows in sheets:
+        hi = next((i for i, r in enumerate(rows[:30]) if any("所在地" in c for c in r)), None)
+        if hi is None:
+            continue
+        head, seen = [], collections.Counter()
+        for k, h in enumerate(c.replace(" ", "").replace("　", "") for c in rows[hi]):
+            h = h or f"_col{k}"
+            head.append(f"{h}#{seen[h]}" if seen[h] else h)  # a repeated header keeps its first column
+            seen[h] += 1
+        for r in rows[hi + 1:]:
+            if any(r):
+                yield dict(zip(head, r + [""] * (len(head) - len(r))))
+
+
+# ---- Kyoto's register, rebuilt from its permit stream ------------------------
+# Since the 2021 reform Kyoto publishes no full list, only the 2021-03-31 one and
+# a list of each month's new permits. A permit runs 5-6 years and a renewal
+# arrives as a new monthly row, so the register is rebuilt: every list,
+# deduplicated, kept while its term runs. Closures are INVISIBLE, so this is an
+# upper bound and must be disclosed as one (Rotterdam's method).
+KYOTO_COLS = {"a1": "営業所＿所在地１", "a2": "営業所＿所在地２", "name": "営業所＿名称（屋号・商号）１",
+              "type": "業種", "end": "許可終了日", "granted": "許可年月日"}  # premises columns only
+KYOTO_CORP = re.compile(r"株式会社|有限会社|合同会社|合資会社|合名会社|一般社団法人|公益社団法人|一般財団法人|"
+                        r"公益財団法人|社会福祉法人|医療法人|学校法人|宗教法人|特定非営利活動法人|[(]株[)]|[(]有[)]|㈱|㈲")
+
+
+def wareki_date(s):
+    """H31.4.30 / 令和3年4月1日 / 2026-03-31 / an Excel serial -> date, else None."""
+    s = unicodedata.normalize("NFKC", (s or "").strip())
+    if m := re.match(r"([HR])(\d+)[.](\d+)[.](\d+)", s):
+        y, mo, d = int(m.group(2)) + (1988 if m.group(1) == "H" else 2018), int(m.group(3)), int(m.group(4))
+    elif m := re.match(r"(平成|令和)(\d+|元)年(\d+)月(\d+)日", s):
+        n = 1 if m.group(2) == "元" else int(m.group(2))
+        y, mo, d = n + (1988 if m.group(1) == "平成" else 2018), int(m.group(3)), int(m.group(4))
+    elif m := re.match(r"(\d{4})[-/](\d{1,2})[-/](\d{1,2})", s):
+        y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
+    elif re.fullmatch(r"\d{5}", s):  # one row: 47177 = 2029-02-28
+        return datetime.date(1899, 12, 30) + datetime.timedelta(days=int(s))
+    else:
+        return None
+    try:
+        return datetime.date(y, mo, d)
+    except ValueError:  # an end date written as 29 February in a non-leap year
+        return datetime.date(y, mo, 28) if mo == 2 else None
+
+
+def _kyoto_key(rec):
+    """(address, trade name, type), each normalised, so a renewal finds its permit."""
+    a = unicodedata.normalize("NFKC", rec["a1"]).replace(" ", "").replace("　", "")
+    a = re.sub(r"^京都府", "", a)
+    a = re.sub(r"^京都市", "", a)
+    a = a.replace("上ル", "上る").replace("下ル", "下る").replace("入ル", "入る")
+    if re.search(r"[0-9][‐‑‒–—―−ｰー－][0-9]", a):
+        a = re.sub(r"[‐‑‒–—―−ｰー－]", "-", a)
+    a = re.sub(r"([0-9])番地?([0-9])", r"\1-\2", a)
+    a = re.sub(r"([0-9])(番地|番|号)$", r"\1", a)
+    n = KYOTO_CORP.sub("", unicodedata.normalize("NFKC", rec["name"]).replace(" ", "").replace("　", ""))
+    t = unicodedata.normalize("NFKC", rec["type"]).replace(" ", "").replace("　", "")
+    # the 2021 reform folded 喫茶店営業 into 飲食店営業, so a renewal changes type
+    return a, n, "飲食店営業" if t.startswith("喫茶店営業") else t
+
+
+def kyoto_permit_stream(raw_dir, as_of):
+    """Kyoto's current food permits on `as_of`, rebuilt from the 2021-03-31 full
+    list (resource 15447 of dataset 00414) and every monthly list (the rest of
+    00414, and 00541), oldest first. Where (address, trade name, type) repeats,
+    the permit ending latest wins. `as_of` is a parameter, never today: a build
+    that filtered on today would drift every day.
+    Measured 2026-09-24: 69,651 rows, 50,178 after deduplication, 30,351 in term."""
+    raw = Path(raw_dir)
+    rid = lambda p: int(p.name.split("_")[1])  # noqa: E731
+    files = sorted([*raw.glob("00414/*"), *raw.glob("00541/*")], key=lambda p: (rid(p) != 15447, rid(p)))
+    best = {}
+    for f in files:
+        for r in workbook_tables(f):
+            rec = {k: r.get(v, "") for k, v in KYOTO_COLS.items()}
+            rec["d_end"], rec["d_granted"] = wareki_date(rec["end"]), wareki_date(rec["granted"])
+            rank = (rec["d_end"] or datetime.date(1900, 1, 1), rec["d_granted"] or datetime.date(1900, 1, 1))
+            key = _kyoto_key(rec)
+            if key not in best or rank > best[key][0]:
+                best[key] = (rank, rec)
+    return [{"営業所所在地": rec["a1"] + rec["a2"], "業種": rec["type"], "屋号": rec["name"],
+             "許可終了日": rec["d_end"].isoformat()}
+            for _, rec in best.values() if rec["d_end"] and rec["d_end"] >= as_of]
+
+
 def load_city_isj(isj_dir):
     """Every ward's block and town-chōme files, keyed by (ward, town[, block]).
 
@@ -319,8 +437,13 @@ def load_city_isj(isj_dir):
 def load_city_permits(path, pref, city):
     """Own-format city lists: one address string naming the ward. Reads only the
     premises columns - never 営業者名 / 申請者名 / 開設者 (people)."""
+    return permits_from_rows(city_rows(path), pref, city)
+
+
+def permits_from_rows(rows, pref, city):
+    """load_city_permits for rows already read - Kyoto's rebuilt register."""
     out = []
-    for r in city_rows(path):
+    for r in rows:
         addr = next((r[c] for c in ADDR_COLS if (r.get(c) or "").strip()), "")
         a = unicodedata.normalize("NFKC", addr).replace(" ", "").replace("　", "")
         a = re.sub("^" + pref, "", a)

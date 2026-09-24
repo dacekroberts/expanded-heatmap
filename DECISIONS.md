@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**329 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**330 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Kyoto's register rebuild moves into the pipeline; its stub test passes](#2026-09-24---kyotos-register-rebuild-moves-into-the-pipeline-its-stub-test-passes)
 - [Kyoto's four join rules land in the shared module; rule C corrected before it did](#2026-09-24---kyotos-four-join-rules-land-in-the-shared-module-rule-c-corrected-before-it-did)
 - [MHLW's 2026 amendment archived: it leaves the terms the Japan verdict relies on untouched](#2026-09-24---mhlws-2026-amendment-archived-it-leaves-the-terms-the-japan-verdict-relies-on-untouched)
 - [MHLW's permit-system terms stored with the licences; its 2026 amendment flagged](#2026-09-24---mhlws-permit-system-terms-stored-with-the-licences-its-2026-amendment-flagged)
@@ -371,6 +372,44 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Kyoto's register rebuild moves into the pipeline; its stub test passes
+
+- **Moved Kyoto's register stitch from a scratch script into
+  `pipeline/countries/japan_register.py` as `kyoto_permit_stream(raw_dir,
+  as_of)`**, the same move the join made earlier today and for the same
+  reason: the screen that measures it and the build that uses it run one copy.
+  - **The rejected alternative** was having the screen read a stitched CSV,
+    with the build porting the logic, which makes two copies.
+  - **`as_of` is required and never defaults to today.** A step that filtered
+    on today's date would drift every day, and the drift check could not tell
+    that from a real change. The build must pin it (the screen uses
+    2026-09-24, the download date).
+  - **Verified against the scratch stitch.** The same 30,351 rows came out,
+    identical row for row. The screen's `kyoto` key reads **28,459 fixed
+    premises at 92.7 / 6.0 / 1.3%**. That is one more than the prototype's
+    28,458, because its intermediate CSV had lost a row (30,350 rows against
+    30,351). `kyoto-life` (the city's complete barber, beauty and laundry
+    lists, plus each month's new premises) reads 5,828 at 94.4 / 4.1 / 1.6%.
+  - The other 24 keys are unchanged.
+  - `load_city_permits` is split so the stitch's rows reach the same parser
+    (`permits_from_rows`). `xlrd>=2.0` joins `requirements-pipeline.txt` for
+    the 2021 list, which is `.xls`.
+- **Kyoto passes the stub test** (N03 for prefecture 26 downloaded: 4.3 MB,
+  MLIT, logged).
+  - The subway keeps its stations: Karasuma 15 of 15, Tōzai 16 of 17 (六地蔵 is
+    in Uji).
+  - The Randen trams and every line wholly inside the city (Eizan's two,
+    Keihan Ōtō, Hankyū Arashiyama) keep all of their stations.
+  - JR and the private railways are cut at the line, as the owner's scope
+    intends: Keihan main line 15 of 41, Kintetsu Kyōto 9 of 26.
+- **Two items go to the owner through the brief.** Neither blocks Band A.
+  - Keihan Keishin, legally a tramway, keeps 3 of its 7 stations, the rest
+    being in Ōtsu. The Hankai precedent (17 of 32, "half a line, not a stub")
+    reads it as passing.
+  - The data carries two mountain funiculars and the Sagano scenic line. Kobe's
+    brief left its funiculars as a build call, while Lille and Santos left out
+    their tourist lines.
 
 ### 2026-09-24 - Kyoto's four join rules land in the shared module; rule C corrected before it did
 

@@ -624,7 +624,21 @@ brief names.
      B and C apply to every city. Capture a before/after of all 24 keys plus
      Kyoto (`scratchpad/japan_run/baseline_all.py`), keep Minato at 99.8%,
      and update any brief whose number moves.
-  2. Add a `kyoto` entry to `scripts/screen_japan_join.py` (the stitched list,
+  2. [x] **Done 2026-09-24.** The stitch moved into the pipeline as
+     `japan_register.kyoto_permit_stream(raw_dir, as_of)`, so the screen and
+     the build run one copy. The build must pin `as_of` and never use today.
+     The screen's `kyoto` and `kyoto-life` keys read 28,459 / 5,828 fixed
+     premises at 92.7% / 94.4% block. `xlrd` was added for the 2021 `.xls`.
+     **Stub test passes.** Karasuma keeps 15 of 15 stations and Tōzai 16 of 17.
+     Randen, Eizan, Keihan Ōtō and Hankyū Arashiyama keep all of theirs. JR and
+     the private railways are cut at the line.
+     For the brief, two questions for the owner:
+     - Keihan Keishin (a legal tramway) keeps 3 of 7 stations. The Hankai
+       precedent (17 of 32) reads that as half a line, not a stub.
+     - Two funiculars and the Sagano scenic line are in the data. Kobe's
+       brief left funiculars to the build; Lille and Santos left out tourist
+       lines.
+     Add a `kyoto` entry to `scripts/screen_japan_join.py` (the stitched list,
      `data/kyoto/raw/isj`), and put Kyoto's ward codes (26101–26111) and
      EPSG:32653 in `japan.py`. Run the stub test.
   3. `licence-read` on data.city.kyoto.lg.jp (CC BY 4.0 declared).
