@@ -16,10 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**290 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**292 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Amsterdam to Band A (owner): both licences read, the permits credited as CC BY 4.0, brief written](#2026-09-24---amsterdam-to-band-a-owner-both-licences-read-the-permits-credited-as-cc-by-40-brief-written)
+- [Amsterdam: BAG accepted as a second layer, with its vacancy disclosed (owner)](#2026-09-24---amsterdam-bag-accepted-as-a-second-layer-with-its-vacancy-disclosed-owner)
 - [Amsterdam's empty shops: not filterable per unit from open data, but measured at 4.6%](#2026-09-24---amsterdams-empty-shops-not-filterable-per-unit-from-open-data-but-measured-at-46)
 - [Amsterdam's other routes: the gated register is staff-only; BAG measured as a possible retail layer, band question left open](#2026-09-24---amsterdams-other-routes-the-gated-register-is-staff-only-bag-measured-as-a-possible-retail-layer-band-question-left-open)
 - [Discard table gets evidence columns and a check; five more rows to the open gap (owner)](#2026-09-24---discard-table-gets-evidence-columns-and-a-check-five-more-rows-to-the-open-gap-owner)
@@ -332,6 +334,52 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Amsterdam to Band A (owner): both licences read, the permits credited as CC BY 4.0, brief written
+
+- **Read both licences** (two `licence-read` runs). **BAG - PERMITTED**: the
+  Kadaster's terms govern the national fields used - *"geldt de Creative
+  Commons Public Domain Mark v1.0"* - and PDOK's geo-register record says *"Geen
+  beperkingen"*; Amsterdam's copy is SILENT and incorporates nothing, so only
+  national BAG fields are used (the city's "BAG-plus" fields carry no licence).
+  **Hospitality permits - SILENT**: the live schema has no `license` key (55 of
+  the city's 141 schemas carry one, so the omission is this dataset's), the API
+  says `Licentie: -`, and the city's unversioned `cc-by` lived in a retired
+  catalogue record (live 2023-09-26, 404 by 2026-01-18); data.overheid.nl's
+  "4.0" is the national catalogue's mapping. Databankenwet art. 8(2) and
+  Auteurswet art. 15b put government databases and works outside protection
+  unless reserved, and no reservation was found.
+- **Owner's call: display the permits as CC BY 4.0** - credit Gemeente
+  Amsterdam, link the licence, state the filtering and mapping - because it
+  satisfies both readings. Rejected: a plain credit, which matches today's
+  silence but falls short if the old grant binds.
+- **Owner's call: Band A.** Brief `docs/build_briefs/amsterdam.md`, 8/8 checks
+  live. Its open items are build-time calls (trams, four permit categories,
+  1,061 mixed-use units, de-duplication), as Rome's and Oslo's were. Rejected:
+  staying in Band C until those are answered. Also recorded: the city will make
+  an API key mandatory from an unset date - a form the owner fills in, never
+  this project; and nothing may present the map as the official permit record.
+- Counts: candidates 34 (A 18 · B 10 · C 5 · D 1), open gap 17, discarded 16.
+  Touched `docs/build_briefs/amsterdam.md`, `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md`.
+
+### 2026-09-24 - Amsterdam: BAG accepted as a second layer, with its vacancy disclosed (owner)
+
+- **Owner's decision: BAG shop-class units become Amsterdam's second layer**
+  beside the hospitality permits, on the condition that the page discloses the
+  vacancy rate (wording along the lines of *"about 5% of shop units are empty
+  (Locatus, 2026)"*). Empty shops were the owner's one concern and measured at
+  4.6% (entry below); the missing names and activity were accepted.
+- **What it commits the build to**: two layers, food (permits) and shop
+  premises (BAG); **retail and personal services share one category**, because
+  BAG's use class cannot separate them - every other city splits them, so the
+  page says so; units that are shop-class in BAG AND hold a hospitality permit
+  (takeaways) are de-duplicated by address at build.
+- **Conditional on two licence reads, run the same night**: BAG's (Kadaster
+  and Amsterdam's copy) and the permits', whose SILENT-with-conflict position
+  is unresolved. If both pass, a build brief is written and the band question
+  goes to the owner; Amsterdam stays in Band C until then. Supersedes the
+  "OPEN (owner)" line in `docs/city_master_list.md`, rewritten to match.
 
 ### 2026-09-24 - Amsterdam's empty shops: not filterable per unit from open data, but measured at 4.6%
 

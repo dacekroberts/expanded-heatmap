@@ -1934,6 +1934,8 @@ The batched RŽP route above was measured and then **set aside**. Measured: 100 
 
 **Amsterdam, how many BAG shops are empty.** Not filterable per unit from open data: `standvastgoed/gebouwen` (134 fields per address, BAG-keyed) has no occupancy field; `energieverbruik_mra` is per neighbourhood; Locatus and KvK hold it per unit but are paid or staff-only. **The rate is published**: `bbga` indicator `BHLOCVKPLEEGSTAND` (source Locatus, 1 January 2026) — **660 vacant of 14,314 sales points, 4.6%**; by district 0–7% (Centrum 4.0%, 208 of 5,001); rates for 110/110 *wijken* and 465/545 *buurten*.
 
+**Amsterdam, licences and band (same night).** Owner's call: the BAG becomes the second layer, vacancy disclosed. **BAG — PERMITTED**: the Kadaster's *"Creative Commons Public Domain Mark v1.0"*, PDOK's record *"Geen beperkingen"*; Amsterdam's copy SILENT. **Permits — SILENT**: no `license` key in the live schema (55 of the city's 141 schemas carry one); the CC BY statement lived in a retired catalogue record (live 2023-09-26, 404 by 2026-01-18); Databankenwet art. 8(2) puts government databases outside database right. Owner's call: credit it as CC BY 4.0, which satisfies both readings. **Amsterdam → Band A**, brief `docs/build_briefs/amsterdam.md` 8/8.
+
 #### A refinement the Korea probe produced: stations are not lines
 
 Japan's N02 carries **both** — 10,235 station points *and* 21,932 line

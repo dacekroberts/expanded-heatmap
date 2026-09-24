@@ -36,7 +36,7 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 > | | |
 > |---|---|
 > | **Built** | **26** across 8 countries *(Toulouse, Lille (Regional) and Rennes, 2026-09-23; Oslo, 2026-09-24)* |
-> | **Candidates** | **34**, all at least partially viable — A 17 · B 10 · C 6 · D 1 *(Amsterdam from the discards to C 2026-09-24; Rome to A 2026-09-24 — SUAP premises joined to ANNCSU, owner's call with a build check; Prague back to A 2026-09-24 on open data — ROS02 establishments + RES; Kaohsiung moved from B to a reopened access-blocked band D 2026-09-23, owner's call; Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built; Prague paused to the open gap 2026-09-24)* |
+> | **Candidates** | **34**, all at least partially viable — A 18 · B 10 · C 5 · D 1 *(Amsterdam to A 2026-09-24 — permits + BAG shop units, both licences read, owner's call; Amsterdam from the discards to C earlier the same night; Rome to A 2026-09-24 — SUAP premises joined to ANNCSU, owner's call with a build check; Prague back to A 2026-09-24 on open data — ROS02 establishments + RES; Kaohsiung moved from B to a reopened access-blocked band D 2026-09-23, owner's call; Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built; Prague paused to the open gap 2026-09-24)* |
 > | **Open screening gap** | **17**, resting on an absence — neither candidates nor discards |
 > | **Discarded** | **16**, each naming its evidence *(an audit moved 12 single-method rows to the open gap and Amsterdam to Band C, 2026-09-24; the evidence check moved 5 more the same night)* |
 >
@@ -114,9 +114,9 @@ yet* with *we looked at everything and this is what is there*.
 
 | Band | What these cities ARE | Cities |
 |---|---|---|
-| 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates answered, rail answered — every remaining question is answerable inside the build | **17** *(+ 12 built)* |
+| 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates answered, rail answered — every remaining question is answerable inside the build | **18** *(+ 12 built)* |
 | 🟠 **B** | **Geocoding at national scale.** The address work is a project, justified only by reuse across many cities | **10** |
-| 🟣 **C** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **6** |
+| 🟣 **C** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **5** |
 | 🔴 **D** | **Access blocked by the publisher.** Screening complete, the file exists and is measured; the publisher's own access control is the only thing stopping it, so it is unblocked by ASKING, not by probing | **1** |
 | | **Candidates** | **34** |
 | *Open gap* | Unscreened — a row resting on an absence, so not a discard | *17* |
@@ -204,9 +204,9 @@ results in the sweep.
 
 ---
 
-## 🟢 Band A — ready to build (17 ready + 12 ✅ BUILT)
+## 🟢 Band A — ready to build (18 ready + 12 ✅ BUILT)
 
-**The seventeen:** Seoul · Prague ▲ · Rome ▲ · Copenhagen · Hong Kong — **each with a brief** in `docs/build_briefs/` — **nine
+**The eighteen:** Seoul · Prague ▲ · Rome ▲ · Amsterdam ▲ · Copenhagen · Hong Kong — **each with a brief** in `docs/build_briefs/` — **nine
 Brazilian cities from one national source**: São Paulo (7/7) · Rio de Janeiro
 (8/8) · Belo Horizonte · Brasília · Recife (Regional) · Santos (Regional)
 (5/5 each) · Salvador · Fortaleza (Regional) · Porto Alegre (Regional) (4/4 each) — and **three Taiwanese cities**: Taipei (Regional) (6/6) ·
@@ -407,6 +407,50 @@ separated). The register has **no closure date**. The build compares SUAP with
 OSM street by street, splits the excess by start year, and either sets an age
 cut-off or states the over-count on the page.
 
+### ▲ 🇳🇱 Amsterdam — two layers from the city's own API (2026-09-24)
+
+**Moved here from Band C on 2026-09-24 (owner's call)**, the night it left the
+discards. The BAG's **10,898 shop-class units in use** became a second layer
+beside the **4,092 hospitality permits**, with the **4.6%** vacancy rate
+disclosed on the page and retail and personal services in one category. Both
+licences read: **BAG PERMITTED** (Kadaster, Public Domain Mark); **the permits
+SILENT**, credited as **CC BY 4.0** on the owner's choice because that
+satisfies both readings. Brief: `docs/build_briefs/amsterdam.md`, **8/8
+checks**. Build-time calls: trams in or out, four permit categories, 1,061
+mixed-use units, de-duplication by address.
+
+#### From the discards to Band C, 2026-09-24 — the screening, as written
+
+**Its discard rested on the top hits of one national search** (*"Aantal
+vestigingen per buurt"* — neighbourhood counts). **The city's own API was
+never asked**, and it answers: `api.data.amsterdam.nl/v1/` lists **100 datasets**
+*(recorded as 383 at first — that was dataset and table paths, not datasets)*.
+
+| | |
+|---|---|
+| **The full register** | 🚧 `hr_kvk` (the KvK Handelsregister, incl. `vestigingen`) and `standbedrijven` answer **HTTP 403** — authorised users only, not worked around. The published schema names the scopes: `hr_kvk` **`FP/MDW`** and **`HR/R`**, `standbedrijven` **`BSK/BEDRIJVEN`** — city-staff scopes, so asking for access is unlikely to land. KvK's own HVD open dataset (CC BY 4.0) **cuts every address to the first two postcode digits** and drops names and numbers — activities without a location, Colombia's shape |
+| **The one bucket** | ✅ `horeca/exploitatievergunning` — **4,094 hospitality operating permits**, all granted, **every end date in 2026–2031 (a live register: expired permits leave it)**, 96.7% with a point (RD New). Restaurant 1,702 · café 870 · alcohol-free 327 · fast food 231 · coffeeshop 126 · eethuis 93 · hotels 72 (out) |
+| **Control** | **0.89×** OSM restaurants (1,806 vs 2,040) and **0.95×** all food and drink — close to complete; **fast food is thin** (231 vs 712), probably exempt |
+| **Licence** | **SILENT — read 2026-09-24.** The live API declares none (`license: null`, *"Licentie: -"*); a 2022 harvest of the city's retired catalogue on `data.overheid.nl` said CC BY 4.0 — **a conflict flagged, not resolved in the project's favour** |
+| **Names** | trade names (*"Taco Lindo Albert Cuyp B.V."*) |
+| **Rail** | 14 subway and 46 tram relations |
+| **A second layer? (probed 2026-09-24)** | **BAG on the same API**: **10,898** units whose use class is *winkelfunctie* (shop) and whose status is *in gebruik*, all with a point, **90% shop-only** (9,837), the rest mixed. **1.77×** OSM's 6,150 shops (nonsense-term control: 0). But BAG records what a unit is **for**, not what is there: **no name, no activity, and `feitelijkGebruik` (actual use) empty on all 10,898** — a vacant shop counts, and so does a hairdresser. Restaurants and cafés sit mostly under *bijeenkomstfunctie* (6,717 units), which the permits already cover better. **Licence not read** |
+| **How many are empty? (measured 2026-09-24)** | **No open source marks a unit empty** — the property snapshot (`standvastgoed`, 134 fields per address) has no occupancy field, energy use is published per neighbourhood only, and the per-unit sources (Locatus, KvK) are paid or staff-only. **But the rate is published**: the city's statistics (`bbga`, source **Locatus**, 1 January 2026) count **660 vacant of 14,314 sales points — 4.6%**, 0–7% by district, with a rate for all 110 *wijken* and 465 of 545 *buurten*. So empty shops are about one in twenty: disclosable, not filterable |
+| **Nothing else** | The other 97 datasets were listed in full: shopping-area polygons (`winkelgebieden`, 142), terrace tariff zones (11), B&B and mooring permits, city-owned property — **none premises-shaped** |
+
+**One bucket, and the best-maintained one in this band** — the only register
+here that drops premises when their permit ends. It joined Stockholm, Göteborg
+and Zurich under the same owner question — until the BAG gave it a second layer.
+
+**✅ DECIDED (owner, 2026-09-24): BAG becomes the second layer**, with the
+vacancy rate disclosed on the page (**4.6%** city-wide, Locatus via the city's
+statistics — no open source filters it per unit). Retail and personal services
+share one category, which the page says; takeaways that are both shop-class and
+permit holders are de-duplicated by address at build. **Conditional on two
+licence reads** (BAG; the permits' SILENT-with-conflict position) — if both
+pass, a build brief follows and the band question returns to the owner. The
+same answer carries to Rotterdam's re-probe, since BAG is national.
+
 ### ▲ Four cities joined this band 2026-09-23, when the coordinates band closed
 
 **Their coordinate route was the thing being measured, and all four now have it MEASURED and a brief written** — Prague 5/5, Oslo 5/5, Hong Kong 8/8, and Copenhagen's data in hand with its licence read. **A band whose condition stops being true of every member should close, not be re-captioned around them** — the same reasoning that closed the old Band D when Bucharest finished screening.
@@ -574,7 +618,7 @@ row, and three of this one's rows carried no reason at all.** Two of those now
 do. Göteborg was never ruled out — it was simply never placed anywhere, which
 is how a candidate disappears without anyone deciding to drop it.
 
-## 🟣 Band C — one bucket only: complete, but narrower than the others (6 cities)
+## 🟣 Band C — one bucket only: complete, but narrower than the others (5 cities)
 
 **Screening is COMPLETE for all five, and all five passed.** Each has a real
 premises-level register with coordinates, current data and a usable licence.
@@ -621,35 +665,8 @@ food-density page belong in a project whose other cities carry three buckets?
 
 ---
 
-### 🇳🇱 Amsterdam — moved here from the DISCARDS 2026-09-24
-
-**Its discard rested on the top hits of one national search** (*"Aantal
-vestigingen per buurt"* — neighbourhood counts). **The city's own API was
-never asked**, and it answers: `api.data.amsterdam.nl/v1/` lists **100 datasets**
-*(recorded as 383 at first — that was dataset and table paths, not datasets)*.
-
-| | |
-|---|---|
-| **The full register** | 🚧 `hr_kvk` (the KvK Handelsregister, incl. `vestigingen`) and `standbedrijven` answer **HTTP 403** — authorised users only, not worked around. The published schema names the scopes: `hr_kvk` **`FP/MDW`** and **`HR/R`**, `standbedrijven` **`BSK/BEDRIJVEN`** — city-staff scopes, so asking for access is unlikely to land. KvK's own HVD open dataset (CC BY 4.0) **cuts every address to the first two postcode digits** and drops names and numbers — activities without a location, Colombia's shape |
-| **The one bucket** | ✅ `horeca/exploitatievergunning` — **4,094 hospitality operating permits**, all granted, **every end date in 2026–2031 (a live register: expired permits leave it)**, 96.7% with a point (RD New). Restaurant 1,702 · café 870 · alcohol-free 327 · fast food 231 · coffeeshop 126 · eethuis 93 · hotels 72 (out) |
-| **Control** | **0.89×** OSM restaurants (1,806 vs 2,040) and **0.95×** all food and drink — close to complete; **fast food is thin** (231 vs 712), probably exempt |
-| **Licence** | **SILENT — read 2026-09-24.** The live API declares none (`license: null`, *"Licentie: -"*); a 2022 harvest of the city's retired catalogue on `data.overheid.nl` said CC BY 4.0 — **a conflict flagged, not resolved in the project's favour** |
-| **Names** | trade names (*"Taco Lindo Albert Cuyp B.V."*) |
-| **Rail** | 14 subway and 46 tram relations |
-| **A second layer? (probed 2026-09-24)** | **BAG on the same API**: **10,898** units whose use class is *winkelfunctie* (shop) and whose status is *in gebruik*, all with a point, **90% shop-only** (9,837), the rest mixed. **1.77×** OSM's 6,150 shops (nonsense-term control: 0). But BAG records what a unit is **for**, not what is there: **no name, no activity, and `feitelijkGebruik` (actual use) empty on all 10,898** — a vacant shop counts, and so does a hairdresser. Restaurants and cafés sit mostly under *bijeenkomstfunctie* (6,717 units), which the permits already cover better. **Licence not read** |
-| **How many are empty? (measured 2026-09-24)** | **No open source marks a unit empty** — the property snapshot (`standvastgoed`, 134 fields per address) has no occupancy field, energy use is published per neighbourhood only, and the per-unit sources (Locatus, KvK) are paid or staff-only. **But the rate is published**: the city's statistics (`bbga`, source **Locatus**, 1 January 2026) count **660 vacant of 14,314 sales points — 4.6%**, 0–7% by district, with a rate for all 110 *wijken* and 465 of 545 *buurten*. So empty shops are about one in twenty: disclosable, not filterable |
-| **Nothing else** | The other 97 datasets were listed in full: shopping-area polygons (`winkelgebieden`, 142), terrace tariff zones (11), B&B and mooring permits, city-owned property — **none premises-shaped** |
-
-**One bucket, and the best-maintained one in this band** — the only register
-here that drops premises when their permit ends. It joins Stockholm, Göteborg
-and Zurich under the same owner question.
-
-**OPEN (owner):** whether a use-class layer — premises by what they are built
-for, with no name or activity and vacancies included — may stand in for a
-register's retail bucket. No source of that shape has been used here, and the
-answer would also decide Rotterdam's re-probe, since BAG is national. Vacancy,
-the owner's stated concern, measured at **4.6%** city-wide (Locatus via the
-city's statistics) — a rate to disclose, since no open source filters it per unit.
+*▲ **Amsterdam left this band on 2026-09-24 for Band A** — the BAG gave it a
+second layer. Its section is there.*
 
 ### 🇸🇬 Singapore — moved here from the coordinates band 2026-09-23
 
@@ -1442,7 +1459,7 @@ the tier is stale.
 | 🇨🇭 Switzerland | — | **1** — Zurich | C | The same decision |
 | 🇷🇴 Romania | — | **1** — Bucharest | C | The same decision, plus a browser-assisted fetch |
 | 🇸🇬 Singapore | — | **1** | C | **Parked on one fact** — NEA refreshing its 2016 register; indemnity held |
-| 🇳🇱 Netherlands | — | **1** — Amsterdam | C | Hospitality permits only; the business register is gated (403) |
+| 🇳🇱 Netherlands | — | **1** — Amsterdam | A | ▶ **To A 2026-09-24**: hospitality permits + BAG shop units, both licences read, vacancy disclosed |
 | 🇪🇬 Egypt | — | — | — | Cairo discarded 2026-09-24: no register at any level |
 | **Total** | **26** | **34** | | *(+ 17 in the open gap)* |
 
@@ -1984,7 +2001,7 @@ metro, so it is a weaker map for a stronger dataset. Unprobed.
 *▼ **2026-09-24 — eight countries left this list** with the discard audit:
 Germany, Austria, the Netherlands, Greece, Portugal, Poland, Latvia and
 Slovakia each rested on one national-level method, and their cities are in
-the open gap (the Netherlands' Amsterdam in Band C). A country is not ruled
+the open gap (the Netherlands' Amsterdam now in Band A). A country is not ruled
 out by its national portal's first page.*
 
 🇬🇧 **UK** *(NNDR is a tax register with no category)* ·
