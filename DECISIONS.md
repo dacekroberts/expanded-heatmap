@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**345 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**346 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Overview's city list grouped by country too (owner)](#2026-09-24---overviews-city-list-grouped-by-country-too-owner)
 - [Renderer fixes verified and pushed; the dark-label model corrected next, with the light-mode halo swap (owner)](#2026-09-24---renderer-fixes-verified-and-pushed-the-dark-label-model-corrected-next-with-the-light-mode-halo-swap-owner)
 - [City switcher grouped by country (owner)](#2026-09-24---city-switcher-grouped-by-country-owner)
 - [Tokyo's four own-site wards read: all CC BY 4.0, none like Sendai](#2026-09-24---tokyos-four-own-site-wards-read-all-cc-by-40-none-like-sendai)
@@ -387,6 +388,16 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Overview's city list grouped by country too (owner)
+
+- **The owner extended the switcher's grouping to the Overview's text list**,
+  the list of every city beneath the macro map. It now iterates
+  `SWITCHER_ORDER`, so the list and each city map's "Cities" menu read in the
+  same order: Milan then Rome.
+- This supersedes that one line of the previous entry, "The Overview list is
+  unchanged". `CITIES` stays in build order, because page numbers and the
+  macro map follow it.
 
 ### 2026-09-24 - Renderer fixes verified and pushed; the dark-label model corrected next, with the light-mode halo swap (owner)
 

@@ -1039,11 +1039,11 @@ if _untagged:
 # --- CITY SWITCHER ORDER -----------------------------------------------------
 #
 # The city pages' switcher (and the map's "Cities" menu, which reads its
-# options from that switcher's hidden links) lists cities GROUPED BY COUNTRY:
-# countries in the order their first city was built, cities within a country in
-# build order. Owner's request 2026-09-24 - build order alone put Rome ten
-# places after Milan. CITIES itself stays in build order, because page numbers,
-# the macro map and the Overview's list all follow it.
+# options from that switcher's hidden links) and the Overview's text list of
+# cities are GROUPED BY COUNTRY: countries in the order their first city was
+# built, cities within a country in build order. Owner's request 2026-09-24 -
+# build order alone put Rome ten places after Milan. CITIES itself stays in
+# build order, because page numbers and the macro map follow it.
 #
 # `country` is not `region`: a region is a macro-map VIEW (Canada is two,
 # Europe is one), a country is what a reader groups by.
