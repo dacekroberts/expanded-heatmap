@@ -740,12 +740,24 @@ brief names.
   Routes: request Chiyoda's ledger (owner, gated item 22); extract Ōta's,
   Kita's and Arakawa's PDF lists; Shinagawa's and Itabashi's partial files;
   requests to Toshima, Nerima and Edogawa.
-  - [ ] ⚠️ **Three in-scope lists are PARTIAL (found 2026-09-24).** Chūō's
-    and Kōtō's hold only 2021–22 permits, and Minato's only new-law permits
-    since 2021. Next probe: whether each ward publishes its old-law (旧法)
-    half, as Meguro does (`all_old_8`), or a newer full file. Otherwise a
-    request to the ward. Until then those three wards' food layers are
-    undercounts, and the page must say so.
+  - [x] ⚠️ **Tokyo's food lists measured against an official count
+    (2026-09-24)**: Tokyo's statistical yearbook, table 19-8. Only Shibuya is
+    essentially complete (98%). The others: Shinjuku 83% (2023), Taitō 71% and
+    Setagaya 63% (opt-outs left out), Meguro 46%, Minato 30%
+    (consent-filtered), Chūō 12% and Kōtō 9% (never updated). The ward probes
+    found no open file that fills any gap. `tokyo.md` has the table.
+  - [ ] **Owner: four requests** (`docs/gated_access.md` items 29–32): Chūō
+    disclosure; Kōtō 情報提供; Minato, asking the ward to publish the full list;
+    Shinjuku, permission for its 2026-03-31 PDF. None drafted yet. Drafting
+    them in formal Japanese, as Sendai's was, is a staging task on the
+    owner's word.
+  - [ ] **Meguro's 46%**: why, when both halves are published. Measure the
+    all_new / all_old overlap and any consent wording on its page.
+  - [ ] **Licence reads** for two side finds: Chūō's complete
+    personal-services lists (August 2026) and Shinjuku's (June 2026, PDF).
+  - [ ] **The designated cities against the same kind of count**: MHLW's
+    衛生行政報告例 per city (probe running), so every city in the Japan list is
+    measured one way.
 - [ ] **Fukuoka** — agree the wording that discloses the ~20% of restaurants
   with no published address. BODIK is flaky, so `fetch_sources.py` retries.
 - [x] **No pre-build items**: Seoul (its brief is deliberately partial, and

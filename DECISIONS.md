@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**348 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**349 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Tokyo's food lists against an official count: one complete, and no open file fills the rest](#2026-09-24---tokyos-food-lists-against-an-official-count-one-complete-and-no-open-file-fills-the-rest)
 - [Three of Tokyo's eight food lists are partial; a per-ward table for Japan](#2026-09-24---three-of-tokyos-eight-food-lists-are-partial-a-per-ward-table-for-japan)
 - [Meguro's personal-services registers joined: 1,412 premises at 100% block](#2026-09-24---meguros-personal-services-registers-joined-1412-premises-at-100-block)
 - [Overview's city list grouped by country too (owner)](#2026-09-24---overviews-city-list-grouped-by-country-too-owner)
@@ -390,6 +391,50 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Tokyo's food lists against an official count: one complete, and no open file fills the rest
+
+- **Measured every Tokyo ward's food list against 飲食店営業 in Tokyo's
+  statistical yearbook, table 19-8, FY2024**, at the owner's request ("clean up
+  Tokyo's ward data as much as possible, in line with the other cities").
+  - **Only Shibuya is essentially complete: 98%.**
+  - Shinjuku 83% (its 2023 vintage).
+  - **Taitō 71% and Setagaya 63%**: each ward's page says premises that opted
+    out are left out.
+  - Meguro 46%, not yet explained.
+  - Minato 30%, Chūō 12%, Kōtō 9%.
+  - **This supersedes the earlier entry's "five are complete".** That was
+    judged from permit-date spans, which catch a truncated list but not one
+    filtered by consent. The count catches both.
+- **Four ward probes found no open file that fills any gap.**
+  - **Minato's file is consent-filtered**, as its own description says. No
+    old-law list exists anywhere; its report counts 16,073 restaurants in
+    force.
+  - **Chūō's only list** covers 2021-06 to 2022-12, published 2024-03 and
+    never updated.
+  - **Kōtō's is consent-only new permits.** Its monthly lists fall under
+    site terms that bar reuse.
+  - **Shinjuku has a complete list at 2026-03-31**, but only as a 1,023-page
+    PDF under site terms that bar reuse.
+  - **The way through is four requests, all the owner's act**
+    (`docs/gated_access.md` items 29–32).
+- **Why Tokyo differs.** Each ward runs its own health centre, so there are
+  23 publishers against one per designated city. Their choices vary: own
+  register, a consent-filtered national-format export, an opt-out rule, or a
+  one-off snapshot.
+  - **Whether the designated cities' lists are complete has never been
+    measured against an official count.** The per-capita yardstick was drawn
+    from those same lists.
+  - MHLW's 衛生行政報告例 is being fetched to measure them the same way.
+- **`scripts/japan_ward_table.py`** now shows each Tokyo ward's share of the
+  official count, reading the cached yearbook table. The monthly and PDF
+  lists were not used.
+- **Two side finds, licences unread**: complete personal-services lists for
+  Chūō (August 2026) and Shinjuku (June 2026, PDF).
+- **Privacy slip, disclosed.** The Shinjuku probe's first header check let
+  two digit-and-hyphen fragments of 所在地電話番号 (premises phone numbers) into
+  its output. It tightened the filter at once; nothing else was printed and
+  nothing was written to any file.
 
 ### 2026-09-24 - Three of Tokyo's eight food lists are partial; a per-ward table for Japan
 

@@ -108,20 +108,20 @@
 
 ### Tokyo (8 wards) — by ward
 
-| Ward | Food service | Food retail | Personal services | Block | Stations | Food list |
-|---|---|---|---|---|---|---|
-| Shinjuku | **12,747** | 1,443 | 0 | 99.2% | 29 | ✅ complete, as of 2023 (disclosed) |
-| Shibuya | **10,586** | 4,222 | 3,884 | 99.8% | 19 | ✅ complete |
-| Setagaya | **5,873** | 1,342 | 0 | 100.0% | 38 | ✅ complete |
-| Taitō | **5,779** | 1,219 | 1,048 | 100.0% | 16 | ✅ complete |
-| Minato | **4,781** | 730 | 2,576 | 99.8% | 35 | ⚠️ **permits 2021–2026 only** |
-| Meguro | **2,022** | 1,045 | 1,412 | 100.0% | 10 | ✅ complete, new-law and old-law lists |
-| Chūō | **1,324** | 992 | 0 | 99.1% | 22 | ⚠️ **permits 2021–2022 only** |
-| Kōtō | **526** | 902 | 0 | 99.9% | 28 | ⚠️ **permits 2021–2022 only** |
+| Ward | Food service | Food retail | Personal services | Block | Stations | Of the official count | Food list |
+|---|---|---|---|---|---|---|---|
+| Shinjuku | **12,747** | 1,443 | 0 | 99.2% | 29 | ⚠️ **83%** of 15,356 | complete as of 2023-01-01. A 2026-03-31 full list exists only as PDF, under site terms that bar reuse |
+| Shibuya | **10,586** | 4,222 | 3,884 | 99.8% | 19 | ✅ **98%** of 10,798 | open list, closed premises dropped |
+| Setagaya | **5,873** | 1,342 | 0 | 100.0% | 38 | ⚠️ **63%** of 9,291 | opted-out premises left out (the ward's page) |
+| Taitō | **5,779** | 1,219 | 1,048 | 100.0% | 16 | ⚠️ **71%** of 8,112 | opted-out premises left out (the ward's page) |
+| Minato | **4,781** | 730 | 2,576 | 99.8% | 35 | ⚠️ **30%** of 15,939 | permits 2021–2026 only; consent-filtered. No old-law list is published |
+| Meguro | **2,022** | 1,045 | 1,412 | 100.0% | 10 | ⚠️ **46%** of 4,370 | new-law and old-law lists. The gap is not yet explained |
+| Chūō | **1,324** | 992 | 0 | 99.1% | 22 | ⚠️ **12%** of 11,056 | permits 2021–2022 only; never updated since |
+| Kōtō | **526** | 902 | 0 | 99.9% | 28 | ⚠️ **9%** of 6,102 | permits 2021–2022 only; consent-only new permits |
 
 **Personal services only, outside the food scope:** Toshima 1,537 · Ōta 1,521 · Katsushika 1,226 · Shinagawa 1,200 · Chiyoda 713 · Bunkyō 689 · Arakawa 493.
 
-⚠️ **A partial list** holds only permits from 2021 on, the post-reform half. Its old-law permits still in term are missing, so that ward is an undercount until its other half is found (`docs/build_briefs/tokyo.md`).
+**Of the official count** is the list's fixed-premises food-service rows against 飲食店営業 in Tokyo's statistical yearbook, table 19-8, for the latest fiscal year. The yearbook also counts vehicle permits (about 2% of Shibuya's list), so a complete list reads a little under 100%. ✅ marks 90% or more. **The wards differ because each is its own publisher.** Some publish their own register, some an opt-in or consent-filtered export, and some a snapshot never updated (`docs/build_briefs/tokyo.md`).
 
 ### Hiroshima — by ward
 

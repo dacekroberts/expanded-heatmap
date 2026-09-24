@@ -175,27 +175,53 @@ start at the town, so a single-ward list defaults its ward.
 | Setagaya | 7,428 | **100.0%** | none published |
 | Meguro | 3,492 (+90 都内一円) | **99.9%** | none published |
 
-⚠️ **CORRECTED 2026-09-24: three of the eight lists are NOT complete, as the
-permit dates inside them show.** The join is unaffected; only completeness is.
+⚠️ **CORRECTED 2026-09-24: only ONE of the eight food lists is essentially
+complete, measured against an official count.** The join is unaffected; only
+completeness is. The measure is each list's fixed food-service rows against
+飲食店営業 in **Tokyo's statistical yearbook, table 19-8, FY2024**
+(`data/tokyo/raw/tn24qv190800.csv`). The yearbook also counts vehicles, so a
+complete list reads a little under 100%. Four ward probes followed the same
+day.
 
-| Ward | Permit dates in the file | Reading | Restaurants in it |
+| Ward | Of the official count | Why | What exists beyond our file |
 |---|---|---|---|
-| **Chūō** | 許可年月日 **2021–2022 only** (1,438 + 1,110) | a partial list: about 1.5 years of permits | 1,319 |
-| **Kōtō** | 初回許可年月日 **2021–2022 only** | a partial list: about 1.5 years of permits | 570 |
-| **Minato** | 初回許可年月日 **2021–2026 only**, none earlier | new-law permits only. Old-law permits still in term are missing | 4,892 |
-| Shinjuku | 許可年月日 2016–2022 | complete, as of 2023-01-01 (its disclosed vintage) | 12,888 |
-| Shibuya · Taitō · Setagaya | back to 1969 / 2019 / 1960 | complete | 10,887 · 6,533 · 5,845 |
-| Meguro | `all_new_8` (2021–) **plus** `all_old_8` (the old law) | complete, because both halves are published | 1,443 + old |
+| **Shibuya** | ✅ **98%** of 10,798 | the ward's own register, closed premises dropped | — |
+| Shinjuku | 83% of 15,356 | complete as of 2023-01-01 (its disclosed vintage) | ⚠️ **A full list at 2026-03-31**: PDF, 1,023 pages, 15,333 permits, plus monthly new-permit PDFs. **Not on the open-data portal, so the site terms bar reuse without permission**. The PDFs also carry operator columns |
+| Taitō | 71% of 8,112 | the ward's page: premises that opted out are left out | — |
+| Setagaya | 63% of 9,291 | the ward's page: premises that opted out are left out | — |
+| Meguro | 46% of 4,370 | new-law and old-law lists both published; **the gap is not yet explained** | — |
+| **Minato** | **30%** of 15,939 | **consent-filtered** (the resource says so); new-law permits only | **Nothing.** No old-law list exists anywhere (ward site, both catalogues, web archive). The ward's own report: 16,073 restaurants in force at 2026-03-31, 11,631 new-law and 4,442 old-law |
+| **Chūō** | **12%** of 11,056 | permits of 2021-06 to 2022-12 only, published 2024-03 and never updated | **Nothing.** No other list in any format. Side find: **complete personal-services lists** (August 2026) on the ward's site, licence not yet read (possibly site terms) |
+| **Kōtō** | **9%** of 6,102 | consent-only new permits, 2021-06 to 2022-11 | Monthly lists of the last 12 months, but under site terms that bar reuse. Health bureau FY2024: 3,760 new-law + 2,285 old-law restaurants |
 
-Per capita they fail too: Kōtō (about 530,000 residents) with 570 restaurants
-is about 1 per 1,000, against Osaka's 19. So "8 wards with full, current food
-lists" was wrong. Five are complete. Minato was the join control, and it
-stays valid for the join. Whether the old-law halves (旧法) are published
-anywhere for Chūō, Kōtō and Minato is the next probe, as Meguro's are.
+**Why Tokyo differs from the designated cities:**
+- Each of the 23 wards runs its own health centre, so there are 23
+  publishers.
+- Four publish their own register (Shibuya, Taitō, Setagaya, Meguro).
+- Three publish an export in the national recommended format that is **opt-in
+  or consent-filtered**, the same shape as MHLW's national open data.
+- Taitō, Setagaya and Meguro also leave out premises that declined
+  publication.
+- Chūō's is a one-off snapshot.
 
-**Tokyo now: 8 wards with food lists, 5 of them complete** (Shinjuku (2023),
-Shibuya, Taitō, Setagaya, Meguro; Chūō, Kōtō and Minato partial, above),
-about **59,400 food permit rows**. **The remaining hole is the very centre**: Chiyoda (Marunouchi,
+**The ways through are all requests, and all are the owner's act**
+(`docs/gated_access.md`, items 29–32):
+- **Chūō**: a disclosure request, ¥300 per item.
+- **Kōtō**: 情報提供 from 保健所生活衛生課 食品衛生第三係, which its disclosure page
+  names for facility lists.
+- **Minato**: a 情報公開請求, routine there, which returns PDF on CD-R for ¥100
+  with no open licence. Or ask みなと保健所 to publish the full list, since its
+  own form says permits are published "in principle".
+- **Shinjuku**: permission to reuse the 2026-03-31 PDF, or publication as CSV
+  on its portal.
+
+Minato stays valid as the join control. Whether the designated cities' own
+lists also leave out opt-outs is being measured against MHLW's 衛生行政報告例
+(PLAN.md).
+
+**Tokyo now: 8 wards with food lists, one essentially complete** (Shibuya;
+the rest 9–83% of the official count, above), about **59,400 food permit
+rows**. **The remaining hole is the very centre**: Chiyoda (Marunouchi,
 Ōtemachi) and Toshima (Ikebukuro) release theirs only on request, and Bunkyō
 publishes none. MHLW's open data does not fill them (Chiyoda 291 restaurants,
 26% addressed). **The scope is the owner's call**: the 8 wards as a stated
