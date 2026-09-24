@@ -16,11 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**308 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**309 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Amsterdam: the owner's calls, and the page text written](#2026-09-24---amsterdam-the-owners-calls-and-the-page-text-written)
+- [Sendai joined at 95.1% block; MLIT's 小字 column places 字 addresses](#2026-09-24---sendai-joined-at-951-block-mlits-小字-column-places-字-addresses)
 - [Amsterdam built on its branch: 13,238 storefronts, 144 stations](#2026-09-24---amsterdam-built-on-its-branch-13238-storefronts-144-stations)
 - [Prague deployed; the live site measured after the reboot](#2026-09-24---prague-deployed-the-live-site-measured-after-the-reboot)
 - [Prague's deploy-verify passed; the Europe view zoomed out](#2026-09-24---pragues-deploy-verify-passed-the-europe-view-zoomed-out)
@@ -373,6 +374,35 @@ onwards; the early ones are split by phase rather than by hour.
   `app/cities.py`, `docs/data_sources.md`, `docs/excluded_categories.md`,
   `docs/city_master_list.md`, `docs/project_context.md`, `PLAN.md`.
 
+### 2026-09-24 - Sendai joined at 95.1% block; MLIT's 小字 column places 字 addresses
+
+- **Found Sendai's food list joins to MLIT's block file at 95.1%, with 0.0%
+  unplaced, and an independent check agrees at a median 34 m.** The owner
+  approved adding `openpyxl` (question 11), because Sendai publishes XLSX
+  inside ZIPs. It went in `requirements-pipeline.txt`, never `requirements.txt`.
+  `screen_japan_join.py` gained a row reader for CSV, XLSX and XLSX-in-ZIP
+  (`file.zip::part` picks members); cp932 member names without the UTF-8 flag
+  are decoded. **Row count reconciled against the workbook's own summary sheet:
+  14,724 = 14,724.** The first pass placed 81.3% at block and left 9.0%
+  unplaced, and both were misreadings rather than data. (1) **1,260 festival
+  and event stalls** are addressed `仙台市内一円` ("anywhere in the city"). The
+  not-a-premises rule matched only Osaka's `市内一円`, so it now matches any
+  `一円` address. Checked across all six city keys: the only other rows it
+  moves are Kobe's 21 storeless laundry pick-up services at `神戸市内一円`,
+  correctly (Kobe personal services 5,014 to 4,993). (2) **字 addresses**
+  (`福室字境４番`): MLIT's block file keeps the 字 in `小字・通称名` (21,768 of
+  47,466 Sendai rows), so the 地番 is now also keyed under 大字 + 字 + 小字.
+  Sendai food went from 81.3% to **95.1%** block and personal services to
+  **96.5%**. **Kobe rose from 95.7% to 96.5%** (personal services 96.3% to 97.3%),
+  and its brief was corrected in the same commit. The Minato control (99.8%),
+  Osaka (99.1%) and Sapporo (84.5%) are unchanged. The rejected alternative was
+  leaving 字 rows at the 大字 centroid, as Kobe's rule did: that costs
+  hundreds of metres in the rural 大字 where these rows sit, for a lookup that
+  was one column away. Independent check: Sendai publishes no coordinates, so
+  150 seeded block hits went to GSI's address search. All 150 answered, median
+  34 m, all within 250 m. `run_city` now accepts `--gsi N`. Brief:
+  `docs/build_briefs/sendai.md` (4/4). The city's licence was not declared on
+  either page, and its read is in progress.
 ### 2026-09-24 - Amsterdam built on its branch: 13,238 storefronts, 144 stations
 
 - **Amsterdam is built on `amsterdam-build`, the Netherlands' first city:

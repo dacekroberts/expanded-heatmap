@@ -6,9 +6,11 @@
 #
 # requests: the Census bulk geocoder (pipeline/census_geocoder.py). Downloads
 # themselves are done with curl.
+# openpyxl: registers published only as XLSX (Sendai's permit lists, inside ZIPs).
 pandas>=2.2
 geopandas>=1.0
 shapely>=2.0
 pyproj>=3.6
 folium>=0.17
 requests>=2.32
+openpyxl>=3.1
