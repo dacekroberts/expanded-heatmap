@@ -16,11 +16,15 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**302 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**306 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Prague deployed; the live site measured after the reboot](#2026-09-24---prague-deployed-the-live-site-measured-after-the-reboot)
+- [Prague's deploy-verify passed; the Europe view zoomed out](#2026-09-24---pragues-deploy-verify-passed-the-europe-view-zoomed-out)
+- [Prague built: 25,275 storefronts, 58 stations](#2026-09-24---prague-built-25275-storefronts-58-stations)
 - [Japan's coordinate step is a JOIN at 99% block level; coverage, not geocoding, is what stops it](#2026-09-24---japans-coordinate-step-is-a-join-at-99-block-level-coverage-not-geocoding-is-what-stops-it)
+- [Prague resumed: four owner calls, and NACE2025 rather than NACE](#2026-09-24---prague-resumed-four-owner-calls-and-nace2025-rather-than-nace)
 - [Japan's maps will draw JR and private commuter railways (owner)](#2026-09-24---japans-maps-will-draw-jr-and-private-commuter-railways-owner)
 - [The Datafordeler account is closed](#2026-09-24---the-datafordeler-account-is-closed)
 - ["Commuter rail is excluded everywhere" retired: Copenhagen's S-tog made it two exceptions](#2026-09-24---commuter-rail-is-excluded-everywhere-retired-copenhagens-s-tog-made-it-two-exceptions)
@@ -345,6 +349,125 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-24 - Prague deployed; the live site measured after the reboot
+
+- **Prague is live, and the reboot took.** Origin had gained five Japan
+  commits during the build; merged at `eccfd3e` (DECISIONS.md by
+  `merge_append_only.py`, 4 entries interleaved, 301 verified present; PLAN.md
+  and the master list auto-merged, no overlap). On the merged tree
+  `check_deploy_imports` (PROBLEMS 0), `check_provenance`,
+  `check_scope_disclosure` (28 cities) and `check_render_current` (28 maps,
+  all 7 shared blocks) passed; a re-fetch immediately before the push found
+  origin unmoved. Pushed `0204fa0..eccfd3e`; the push's whole `app/` diff is
+  `cities.py`, `components.py` and the new page, so the app was rebooted.
+
+- **Measured on the live site afterwards, in the app's own frame**: the page
+  renders its approved text and the snapshot caption ("establishments as of
+  2026-08-31 (ROS02); metro timetable data valid 2026-09-24 to 2026-10-07
+  (PID)"); notices 32 (Czech Statistical Office), 33 (ČÚZK, 2026) and 34
+  (ROPID) and the OpenStreetMap notice's "Prague's city boundary" are present;
+  no error block. The map: zoom 12 against 12 at the 1000 px frame and 10.25
+  against 10.25 at 375 (frame 343), 0 corrections both; at both widths all
+  three labels present, none clipped, overlapping, under the legend, over the
+  credit or under the buttons; the legend collapses (243 -> 38 px) and the
+  theme toggle flips and restores. The Overview reads "Europe (12)", its
+  Europe view reports "Showing 12 cities in Europe", and the Prague link routes
+  to `Prague_Heatmap` - the rebooted modules, not cached ones.
+
+- **The two `prague-*-tmp` entries were removed from the main checkout's
+  `.claude/launch.json` by the build session**, under the owner's standing
+  permission of 2026-09-24; the file parses with its two original entries.
+  Both servers had already been stopped.
+
+### 2026-09-24 - Prague's deploy-verify passed; the Europe view zoomed out
+
+- **City-scoped `deploy-verify` passed all five items at `0c97e9e`, no
+  defects**, on the worktree's app under the lean venv. The page's caption
+  reads the ROS02 snapshot (2026-08-31) and PID's window (2026-09-24 to
+  2026-10-07); notices 32-34 and the OpenStreetMap notice's addition render on
+  every page with their four links answering 200 and the Czech letters in the
+  site's own font; the Overview reads "Europe (12)" and sums to 28; marker,
+  list link, switcher and "All cities" all route correctly. Embedded map:
+  check_map_view 12/12 at 1000 (twice), 11.5/11.5 at 726, 10.25/10.25 at 343
+  (twice), 0 corrections; check_map_labels clean at 1000 and 343;
+  check_map_attribution uncovered at five sizes with the legend clamp in force.
+
+- **Prague is the Europe frame's new easternmost city, so the macro view
+  zoomed out (2.895 -> 2.764) - and that moved two things.** Oslo's dot now
+  clears the Light mode button by about 17.6 px at 375, up from the ~3 px
+  Copenhagen's verify recorded: the margin that entry flagged widened rather
+  than closed. And **Marseille's label now grazes Milan's DOT at 375 and
+  1200**, which `check_macro_labels.py` scored as PROBLEMS 0 - so either the
+  checker's pin model and the render disagree by a few pixels, or grazing is
+  under its threshold. Cosmetic, Milan's pin stays visible; recorded for the
+  cleanup role rather than fixed in a city build.
+
+- **Two cosmetic observations on Prague's own map, not defects**: at 343 an
+  OPENED legend would cover the Metro C label (not the default state), and
+  cluster badges partly overlap "Metro C" at 343 and 768, which the label
+  check ignores by design.
+
+- **The push needs a REBOOT** - it changes `app/cities.py` and
+  `app/components.py` (gate item 9 in `docs/data_sources.md`).
+
+### 2026-09-24 - Prague built: 25,275 storefronts, 58 stations
+
+- **Prague is built on `prague-build`: 25,275 storefronts around 58 metro
+  stations, 69.8% within a ring.** The row counts, the drift baseline:
+  - **step 1** - 122 metro platforms -> **58 stations** by the feed's own
+    `parent_station` (A 17 with Flora, B 24, C 20), gate 3 exact against
+    English Wikipedia (secondary); OSM's relations give 16 / 24 / 20, omitting
+    Flora too. All 58 inside obec 554782 (OSM relation 435514, 495.9 km²
+    against ČÚZK's 496.2); `excluded_stations.csv` is written empty. In-scope
+    nearest-neighbour median 912 m, so the shared ring edges.
+  - **step 2** - ROS02 804,609 rows -> 574,607 distinct establishments active
+    on the file's own date (2026-08-31) -> **84,192** with an address in the
+    obec -> 84,104 whose owner is active in RES (99.97% found) -> 27,327 in
+    CZ-NACE 2025 divisions 47/56/96 -> 26,777 after 550 structural exclusions
+    (9691 home services 439, 562 catering 101, 479 intermediation 10) ->
+    **1,500 natural persons' premises at their own registered seat excluded**
+    -> 25,277 -> **25,275 placed (99.99%)**, the 2 at RUIAN addresses that
+    carry no coordinates.
+  - **step 3** - 17,648 within a ring, 7,627 outside.
+
+- **No catch-all is excluded, on Prague's own numbers.** `96990`, the code
+  Oslo and Copenhagen excluded, holds 3 rows: CZ-NACE 2025 has already sorted
+  that work into specific classes. The large personal-services class after
+  hairdressing is `96230`, day spas, saunas and steam baths - 1,638 rows, 80%
+  natural persons - a SPECIFIC class rather than residual wording, and mostly
+  massage salons with a street door: kept. The retail catch-alls are kept, as
+  everywhere.
+
+- **Found and fixed during the build: a RUIAN address with no coordinates
+  transforms to INFINITY, not NaN.** Six Praha addresses carry none; the first
+  run counted them as placed and then dropped two storefronts on the bounding
+  box, which would have been reported as bad coordinates. They are now made
+  missing before any test and reported as unplaced.
+
+- **Privacy verdict, from `check_personal_exposure.py prague`: publish.** 0
+  e-mails, 0 phone numbers, 0 c/o markers; 1 person-like name at a residential
+  unit (0.01%). The heuristic flags 1,991 names, every one a COMPANY's
+  registered name (natural persons show addresses): shop and firm names, and a
+  few companies named after a person or a brand ("Andreas Luka", "YVES
+  ROCHER") - trade names by the project's rule, as in Oslo and Copenhagen.
+  Registered names show on 51.4% of pins.
+
+- **The register reads as premises**: CZ-NACE 2025 5611 on the map 7,414
+  against OSM's restaurant, fast food, café, food court and ice cream 4,655
+  in relation 435514 - **1.59x**, inside France's 1.26-1.80x; staging's
+  pre-build 1.63x on the older column agrees.
+
+- **Metro A's colour moved, and the map passes at three widths.** DPP's
+  `#00A562` was 9.2 from the Personal services pins, under the floor; lightened
+  to `#00b96e` (13.1). check_map_view: zoom 12/12 at 1280, 10.5/10.5 at 375,
+  10.25/10.25 at 343, 0 corrections; all three labels clear at each. The
+  Europe-map label measured 47.3 px (eight entries reproduced), and
+  check_macro_labels scores PROBLEMS 0 across 28 cities.
+
+- **The page text, notices 32 (ČSÚ), 33 (ČÚZK, 2026) and 34 (ROPID), the
+  OpenStreetMap notice's addition and the `excluded_categories.md` section
+  were approved by the owner as written, 2026-09-24.** ROS02 needs no notice.
+
 ### 2026-09-24 - Japan's coordinate step is a JOIN at 99% block level; coverage, not geocoding, is what stops it
 
 - **Found Japan needs no geocoder**, as `address-join` predicted: food permits
@@ -373,6 +496,59 @@ onwards; the early ones are split by phase rather than by hour.
   60 files, 12.2 MB, fetched in the owner's bounds; deferred files listed by
   domain. Touched `scripts/screen_japan_join.py`,
   `docs/global_country_shortlist.md`, `docs/city_master_list.md`, `PLAN.md`.
+### 2026-09-24 - Prague resumed: four owner calls, and NACE2025 rather than NACE
+
+- **The Prague build resumed from a fresh worktree (`prague-build`) on
+  staging's new business leg, and the brief held 12/12.** ROS02's active
+  establishments in Praha (84,170, placed by RUIAN address code) joined to RES
+  by ICO: RES found for 100.0%, 87 subjects ended. Measured read-only on
+  staging's ROS02 and RUIAN files and the main checkout's RES.
+
+- **RES carries TWO activity columns, and the build keys on `NACE2025`, not the
+  `NACE` the brief measured.** `NACE2025` is CZ-NACE 2025 - NACE Rev. 2.1, the
+  same parent as Oslo's SN2025 and Copenhagen's DB25: classes that exist only
+  in Rev. 2.1 are populated (9621 7,166; 5611 7,780; 4781 107) where the old
+  column has 9602 and 5610. It is also DEEPER - 65% of Praha rows at the
+  5-digit level against 52% - though still ragged (15,099 rows stop at 3
+  digits). The two columns put 27,320 and 27,065 establishments in the
+  buckets, and only 263 rows fall on different sides. **Decided on those
+  measurements, not asked**: the current classification, the deeper one, and
+  the one whose exclusions are already written twice. The brief's "no level
+  can be chosen" still holds, so the taxonomy matches on PREFIX.
+
+- **Owner's call: every natural person's premises shows its ADDRESS, and so
+  does every v.o.s. partnership - Copenhagen's rule.** 14,144 of 27,320
+  storefront establishments (51.8%) belong to natural persons - FORMA 101
+  (13,481), 424 foreign natural person (599), 105, 107, 425 per ČSÚ's own
+  codebook 56 - and a Czech sole trader's business name carries the person's
+  own name by law. The 37 v.o.s. partnerships follow the owner's Copenhagen
+  call on I/S. **Rejected: Oslo's natural-persons-only rule.**
+
+- **Owner's call: natural persons' premises AT THEIR OWN REGISTERED SEAT are
+  EXCLUDED - 1,537 establishments (5.6%)** (650 personal services, 522 retail,
+  365 food). A Czech sole trader's seat is usually the home, so a pin there -
+  even labelled with only the address - puts a person's home on a public map,
+  and such premises are unlikely to be a counter anyone walks up to. Copenhagen
+  could not detect this; Prague can, from ROS02's `PKODADM` against RES's
+  `KODADM`. **Rejected: keeping them with the address label**, Copenhagen's
+  treatment, which here would knowingly publish home addresses. Staging
+  recommended the same.
+
+- **Owner's call: NO employee filter.** ČSÚ's codebook 579 reads `KATPO 000` as
+  *Neuvedeno*, not stated, and its legal-form mix matches the whole set -
+  France's `NN` again; filtering on it would drop over half the city at random.
+
+- **Owner's call: the metro comes from PID's own GTFS** (keyless, CC BY 4.0,
+  credit ROPID), downloaded with the owner's approval; OSM stays as the
+  cross-check, as the brief corrected.
+
+- **Two limits to disclose, not fix.** Each establishment inherits its OWNER's
+  single activity code, so a chain's office or warehouse in Praha counts as the
+  chain's trade (90 subjects hold 10 or more storefront establishments, the
+  largest 166). And 57,017 active Praha establishments belong to subjects
+  whose activity is outside 47/56/96 - a brewery's pub, a wholesaler's shop -
+  and are not drawn, because no open source gives an establishment its own
+  activity.
 
 ### 2026-09-24 - Japan's maps will draw JR and private commuter railways (owner)
 

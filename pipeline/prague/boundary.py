@@ -1,0 +1,47 @@
+"""Prague's boundary, assembled from the cached OSM relation.
+
+Shared by step 1 (which stations are inside the obec) and step 3 (the label
+focus). Reads the cache only. Relation 435514, "Praha", admin_level 4 - the
+region that is also the city; polygonised from outer AND inner ways and gated
+on area against ČÚZK's 496.2 km².
+"""
+import json
+import sys
+
+import geopandas as gpd
+from shapely.geometry import MultiLineString
+from shapely.ops import linemerge, polygonize, unary_union
+
+from pipeline.prague import config
+
+
+def _rings(rel, role):
+    lines = [[(p["lon"], p["lat"]) for p in m["geometry"]]
+             for m in rel.get("members", [])
+             if m.get("type") == "way" and m.get("role") == role and m.get("geometry")]
+    return unary_union(list(polygonize(linemerge(MultiLineString(lines))))) if lines else None
+
+
+def city_polygon(verbose=True):
+    if not config.OSM_BOUNDARY_JSON.exists():
+        sys.exit(f"missing {config.OSM_BOUNDARY_JSON}\n"
+                 f"Run: python pipeline/prague/fetch_sources.py")
+    els = json.loads(config.OSM_BOUNDARY_JSON.read_text(encoding="utf-8"))["elements"]
+    rels = [e for e in els if e["type"] == "relation"
+            and e["id"] == config.OSM_BOUNDARY_RELATION]
+    if len(rels) != 1:
+        sys.exit(f"expected OSM relation {config.OSM_BOUNDARY_RELATION}, got "
+                 f"{[e.get('id') for e in els]}")
+    outer, inner = _rings(rels[0], "outer"), _rings(rels[0], "inner")
+    if outer is None or outer.is_empty:
+        sys.exit("Praha's outer ways did not close into a polygon")
+    geom = outer.difference(inner) if inner is not None else outer
+    area = gpd.GeoSeries([geom], crs=config.CRS_GEOGRAPHIC).to_crs(
+        config.CRS_PROJECTED).area.iloc[0] / 1e6
+    lo, hi = config.BOUNDARY_AREA_KM2
+    if verbose:
+        print(f"  Praha boundary (OSM {config.OSM_BOUNDARY_RELATION}): {area:.1f} km2")
+    if not lo <= area <= hi:
+        sys.exit(f"Praha's polygon is {area:.1f} km2, outside {lo}-{hi}: the rings "
+                 f"assembled wrong or this is not the obec")
+    return geom

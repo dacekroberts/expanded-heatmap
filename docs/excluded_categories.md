@@ -1182,6 +1182,41 @@ airport stations in Tårnby - and are listed with their municipality in
 not drawn, nor the Hovedstadens Letbane**, which has no stop in either
 municipality.
 
+### Prague - establishments rather than companies, and a sole trader's home kept off the map
+
+**Excluded by the classification itself, anywhere in Czechia** - personal
+services performed in the customer's home (439), catering and contract catering
+(101), and retail intermediation (10): 550 rows, read against the Czech
+Statistical Office's own CZ-NACE 2025 labels.
+
+**Excluded because it is probably a home** - 1,500 establishments of people
+trading in their own name at their own registered address, which for a Czech
+sole trader is usually where they live.
+
+**No catch-all is excluded.** The "other personal services" category that other
+cities leave out holds three rows here; the 2025 classification already sorts
+that work into specific classes. Day spas, saunas and massage salons are a
+specific class and are kept.
+
+**Missing rather than excluded** - about 57,000 Prague establishments belong to
+businesses whose main activity is something other than retail, food or personal
+services, such as a brewery's pub or a wholesaler's shop, and are not shown. Each
+establishment carries its owner's single main activity, and no open source
+records its own.
+
+**What cannot be excluded: web shops.** As in Oslo and Copenhagen, the
+classification files an online seller under the goods it sells.
+
+**Shown, but not named** - every establishment of a person trading in their own
+name, or of a partnership, shows its address instead of its name.
+
+**Left off because they could not be placed** - 2 establishments whose address
+carries no coordinates.
+
+**All 58 metro stations are inside the city.** Trams, which run as a dense
+overlay on the metro, the Petřín funicular, ferries and suburban trains are not
+drawn. Flora, closed for reconstruction, is drawn.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

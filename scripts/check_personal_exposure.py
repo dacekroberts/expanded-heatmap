@@ -152,6 +152,14 @@ REGISTRIES = {
     "rennes": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv",
                    address=("business_name",)),
+    # Prague, the first Czech city: the structural guarantee again, from RES's
+    # legal form. A natural person's (FORMA 101/105/107/424/425) or a v.o.s.
+    # partnership's establishment shows its street address, never the
+    # registered name, and a natural person's establishment at their own
+    # registered seat is not on the map at all. No other name column is read.
+    "prague": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv",
+                   address=("business_name",)),
     # Copenhagen, the first Danish city: Oslo's structural guarantee, from
     # CVR. The parent company's legal form is joined for every premises, and
     # a personally owned one (Enkeltmandsvirksomhed, PMV) - or any name with

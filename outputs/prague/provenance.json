@@ -1,0 +1,72 @@
+{
+  "ros02": {
+    "file": "ros02_data.csv",
+    "url": "https://www.szrcr.cz/images/dokumenty/ROS/Otevrena%20data/ros02_data.csv",
+    "bytes": 58507315,
+    "sha256": "a17749249c8cbb4bfe1569f38635e29e56cd7b6f18806f3d5298f2fe4340d810",
+    "retrieved": "cached before provenance"
+  },
+  "res": {
+    "file": "res_data.csv",
+    "url": "https://opendata.czso.cz/data/od_org03/res_data.csv",
+    "bytes": 543309993,
+    "sha256": "c6b6031d0598ce95117de7980c5f52d1d8675b49f92ddbb72f80e201d5dc4fdc",
+    "retrieved": "cached before provenance"
+  },
+  "nace_level1": {
+    "file": "cz_nace_2025_level1.csv",
+    "url": "https://apl2.czso.cz/iSMS/do_cis_export?kodcis=6101&typdat=0&cisjaz=203&format=2&separator=%2C",
+    "bytes": 3489,
+    "sha256": "04af65726c38444d4f8d0cbb1999fbafb94c4c9fd1dbbedae628be977ae5f79c",
+    "retrieved": "2026-09-24T08:20:38+00:00"
+  },
+  "nace_level2": {
+    "file": "cz_nace_2025_level2.csv",
+    "url": "https://apl2.czso.cz/iSMS/do_cis_export?kodcis=6102&typdat=0&cisjaz=203&format=2&separator=%2C",
+    "bytes": 14016,
+    "sha256": "3b301176e60bc18d912086afb2f24136450773150441de18d13b5543b6b05edc",
+    "retrieved": "2026-09-24T08:20:39+00:00"
+  },
+  "nace_level3": {
+    "file": "cz_nace_2025_level3.csv",
+    "url": "https://apl2.czso.cz/iSMS/do_cis_export?kodcis=6103&typdat=0&cisjaz=203&format=2&separator=%2C",
+    "bytes": 47490,
+    "sha256": "7e47f8d581c0c3bbc18d71ca0a1e52c2418ea16a4f03f3b215e15eaee08a3d4d",
+    "retrieved": "2026-09-24T08:20:40+00:00"
+  },
+  "nace_level4": {
+    "file": "cz_nace_2025_level4.csv",
+    "url": "https://apl2.czso.cz/iSMS/do_cis_export?kodcis=6104&typdat=0&cisjaz=203&format=2&separator=%2C",
+    "bytes": 103402,
+    "sha256": "37526e7a5ca1d4b468cef11c30e1644c30eaa4193b553fe1c33b5df4d60ecb48",
+    "retrieved": "2026-09-24T08:20:41+00:00"
+  },
+  "nace_level5": {
+    "file": "cz_nace_2025_level5.csv",
+    "url": "https://apl2.czso.cz/iSMS/do_cis_export?kodcis=6105&typdat=0&cisjaz=203&format=2&separator=%2C",
+    "bytes": 115587,
+    "sha256": "df261a1fbfeef605c8eba6ac7c8fb3b6252c15adc1e87f3431db7e661f5f0fb5",
+    "retrieved": "2026-09-24T08:20:42+00:00"
+  },
+  "ruian": {
+    "file": "ruian_adr_554782.csv.zip",
+    "url": "https://vdp.cuzk.gov.cz/vymenny_format/csv/20260831_OB_554782_ADR.csv.zip",
+    "bytes": 3395881,
+    "sha256": "58e8c9950cc0506ffc39bb20a4bd3643f8238417f5b23f864dafd401db806106",
+    "retrieved": "cached before provenance"
+  },
+  "gtfs": {
+    "file": "pid_gtfs.zip",
+    "url": "https://data.pid.cz/PID_GTFS.zip",
+    "bytes": 51039590,
+    "sha256": "bb702f61a90e2dedbde9281b6ccab5f1af81d6a1d340bb38be9695337c86f055",
+    "retrieved": "2026-09-24T08:20:47+00:00"
+  },
+  "gtfs_feed_info": {
+    "feed_start_date": "20260924",
+    "feed_end_date": "20261007",
+    "publisher": "\"ROPID\""
+  },
+  "osm_host": "overpass-api.de",
+  "ros02_snapshot": "2026-08-31"
+}

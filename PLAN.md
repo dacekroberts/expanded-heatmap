@@ -21,6 +21,20 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [x] **🇨🇿 PRAGUE - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro A,
+  B and C, obec 554782: **25,275 storefronts, 58 stations**; page text, notices
+  32-34 and the `excluded_categories.md` section approved by the owner.
+  City-scoped `deploy-verify` passed with no defects; pushed
+  `0204fa0..eccfd3e` and rebooted. Czechia's national modules are ready for a
+  second city. See `DECISIONS.md`, *"Prague resumed"*, *"Prague built"* and the
+  entries after it. One reminder remains open below.
+  - [x] **DONE 2026-09-24: the build session removed both `prague-*-tmp`
+    entries** from the main checkout's `.claude/launch.json`, under the
+    owner's standing permission; the file parses with its two original
+    entries.
+  - [ ] ⏰ **Flora reopens around December 2026**: when PID's feed serves it
+    again, step 1 STOPS the build on purpose - remove the override then.
+
 - [x] **🇩🇰 COPENHAGEN - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** 14,978
   storefronts, 64 stations, Metro M1-M4 and S-tog, Kobenhavn + Frederiksberg.
   City-scoped `deploy-verify` passed with no defects; pushed `646f850..cf7a765`

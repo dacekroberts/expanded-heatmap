@@ -735,6 +735,20 @@ Cities built and running end to end (pipeline, map, app page):
   users not to change the data. The Datafordeler account is the owner's and
   closes after publish.
 
+- **Prague** - Metro A, B and C, all inside the city. Czechia's first city, and
+  the third built off a register of PREMISES - after its pause, when the
+  business register it started from turned out to record where companies are
+  seated rather than where they trade. Four things are its own. **Location and
+  activity come from two different registers**: open-data establishments give
+  where each business trades, and the Statistical Office's register gives the
+  owner's single activity, which every establishment inherits. **Its
+  classification is stored at ragged depth**, so the taxonomy matches on code
+  PREFIXES rather than at a level - the first here to. **A sole trader's
+  premises at their own registered address is left off the map**, not just
+  unnamed - the first city where that could be detected. And **Flora station
+  is drawn while closed for reconstruction**, with a guard that stops the build
+  once the feed serves it again.
+
 **Canada is closed at five built cities** - Vancouver (regional, with Surrey),
 Montréal, Calgary, Edmonton and Toronto - out of six candidates screened. The
 sixth, Surrey, is not pending: it shipped inside the Vancouver regional map.
@@ -819,10 +833,11 @@ downtime on 2026-09-22. `app/cities.py` changes with every city.
 `python scripts/check_deploy_imports.py` tests a clean clone under the lean
 venv before pushing; it cannot catch the stale-module case, and says so.
 
-**Norway has one city, Oslo, and Denmark one, Copenhagen; each country's
-national modules** - the register facts, a shared step 2, a NACE Rev. 2.1
-taxonomy (SN2025, DB25) and a national cache for the register files - **are
-written for a second** on France's pattern. Czechia is
+**Norway, Denmark and Czechia have one city each - Oslo, Copenhagen and
+Prague - and each country's national modules** - the register facts, a
+shared step 2, a NACE Rev. 2.1 taxonomy (SN2025, DB25, CZ-NACE 2025) and a
+national cache for the register files - **are written for a second** on
+France's pattern. Czechia is
 paused at Prague, whose register records registered seats; the staging
 session is measuring whether the trade register's establishments can
 replace it.
