@@ -87,6 +87,11 @@ TEXT_WIDTH = {
     # 60.3. The map's own st.iframe measured the outer-page values (Oslo 31.1,
     # Toulouse 61.2), so the frame warning above holds locally too.
     "Copenhagen": 85.5,
+    # Prague measured 2026-09-24 in the local app's own document, the same
+    # way, with eight entries reproduced exactly in the same run - Copenhagen
+    # 85.5, Oslo 29.0, Rennes 49.7, Toulouse 60.4, Paris 32.9, Milan 36.3,
+    # Boston 48.4, Marseille 60.3.
+    "Prague": 47.3,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,

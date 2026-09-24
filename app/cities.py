@@ -645,6 +645,20 @@ CITIES = [
         # the north and of the map's controls.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Prague",
+        "lat": 50.0755,
+        "lon": 14.4378,
+        "page": "pages/28_Prague_Heatmap.py",
+        "blurb": "Metro A, B and C",
+        "region": "Europe",
+        "in_default_view": False,
+        # Above the dot, and SCORED rather than assumed: the label width was
+        # measured at 47.3 px in the app's own document (2026-09-24), and
+        # check_macro_labels.py passes every region at 375, 768 and 1200 with
+        # PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

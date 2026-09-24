@@ -594,8 +594,8 @@ _NOTICES = [
      "Barcelona, including its FGC lines and both funiculars), and the route "
      "geometry of Lille's two métro lines, the per-line colours of "
      "Oslo's T-bane and tram lines, and Copenhagen's Metro and S-tog lines "
-     "and stations and the municipal boundaries used to select them, are "
-     "from OpenStreetMap, "
+     "and stations and the municipal boundaries used to select them, and "
+     "Prague's city boundary, are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
      "geometry; stations, rings and categories are this project's work.",
@@ -821,6 +821,43 @@ _NOTICES = [
      "Datafordeler under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). "
      "This project joins the register's address points to the business register "
      "to place each premises.",
+     False),
+    # ČSÚ - Prague's activity, form and name data (RES). CC BY 4.0 for the web
+    # pages, and the DATA paragraph ("Další podmínky použití dat ČSÚ") adds two
+    # duties this notice discharges: state the licence conditions, preferably
+    # by a direct link, and mark modified or derived data as such and never
+    # present it as unchanged official statistics (read 2026-09-23/24).
+    # Wording approved by the owner 2026-09-24.
+    ("Czech Statistical Office (Prague)",
+     "Contains data from the Czech Statistical Office's business register "
+     "(Registr ekonomických subjektů, RES), used under the [ČSÚ conditions of use]"
+     "(https://csu.gov.cz/podminky_pro_vyuzivani_a_dalsi_zverejnovani_statistickych_udaju_csu) "
+     "(CC BY 4.0). The activity, legal-form and name data are modified and derived by "
+     "this project — joined to establishment locations, filtered to storefront "
+     "categories and grouped into this project's own categories — and are not "
+     "official statistics of the Czech Statistical Office.",
+     False),
+    # ČÚZK - RUIAN addresses. The Czech conditions page PRESCRIBES the credit
+    # format "ČÚZK, [rok]" (the file's year), a link to the conditions, and a
+    # description of the modification. Wording approved by the owner 2026-09-24.
+    ("ČÚZK (Prague)",
+     "ČÚZK, 2026. Address points from the Registry of Territorial Identification, "
+     "Addresses and Real Estate (RÚIAN), under the [ČÚZK conditions]"
+     "(https://www.cuzk.gov.cz/Predpisy/Podminky-poskytovani-prostor-dat-a-sitovych-sluzeb/Podminky-poskytovani-prostorovych-dat-CUZK.aspx) "
+     "(CC BY 4.0). This project joins the addresses to the business register and "
+     "converts their coordinates to place each establishment.",
+     False),
+    # ROPID / PID - Prague's metro. CC BY: name the author and any changes
+    # (pid.cz/o-systemu/opendata/, read 2026-09-24). The PID, ROPID and IDSK
+    # LOGOS need ROPID's consent and are not used. Wording approved by the
+    # owner 2026-09-24.
+    ("ROPID (Prague)",
+     "Metro lines and stations for Prague are redrawn from PID open data published "
+     "by ROPID ([pid.cz/o-systemu/opendata](https://pid.cz/o-systemu/opendata/)), "
+     "under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Changes: the "
+     "three metro lines are selected and redrawn, stations are reduced to one point "
+     "each, Flora is added while closed, and line A's colour is lightened. Not "
+     "produced or endorsed by ROPID or DPP.",
      False),
 ]
 

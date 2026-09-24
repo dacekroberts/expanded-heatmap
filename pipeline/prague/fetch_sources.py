@@ -133,6 +133,12 @@ if __name__ == "__main__":
 
     print("National (shared by every Czech city):")
     fetch(CZ.ROS02_URL, CZ.ROS02_CSV, "ros02_data.csv", b'"ICP"', prov, "ros02", args.force)
+    # ROS02 dates itself: every row carries the file's DATPLAT, which the page
+    # shows and step 2 judges "active" against.
+    import pandas as pd
+    prov["ros02_snapshot"] = str(pd.read_csv(CZ.ROS02_CSV, dtype=str,
+                                             usecols=["DATPLAT"])["DATPLAT"].max())
+    print(f"  {'':26s} ROS02 snapshot {prov['ros02_snapshot']}")
     fetch(CZ.RES_URL, CZ.RES_CSV, "res_data.csv", b"ICO,", prov, "res", args.force)
     for level, kodcis in CZ.NACE_LEVEL_CODEBOOKS.items():
         fetch(CZ.NACE_CODEBOOK_URL.format(kodcis=kodcis),

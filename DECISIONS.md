@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**302 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**303 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Prague built: 25,275 storefronts, 58 stations](#2026-09-24---prague-built-25275-storefronts-58-stations)
 - [Prague resumed: four owner calls, and NACE2025 rather than NACE](#2026-09-24---prague-resumed-four-owner-calls-and-nace2025-rather-than-nace)
 - [Japan's maps will draw JR and private commuter railways (owner)](#2026-09-24---japans-maps-will-draw-jr-and-private-commuter-railways-owner)
 - [The Datafordeler account is closed](#2026-09-24---the-datafordeler-account-is-closed)
@@ -344,6 +345,64 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Prague built: 25,275 storefronts, 58 stations
+
+- **Prague is built on `prague-build`: 25,275 storefronts around 58 metro
+  stations, 69.8% within a ring.** The row counts, the drift baseline:
+  - **step 1** - 122 metro platforms -> **58 stations** by the feed's own
+    `parent_station` (A 17 with Flora, B 24, C 20), gate 3 exact against
+    English Wikipedia (secondary); OSM's relations give 16 / 24 / 20, omitting
+    Flora too. All 58 inside obec 554782 (OSM relation 435514, 495.9 km²
+    against ČÚZK's 496.2); `excluded_stations.csv` is written empty. In-scope
+    nearest-neighbour median 912 m, so the shared ring edges.
+  - **step 2** - ROS02 804,609 rows -> 574,607 distinct establishments active
+    on the file's own date (2026-08-31) -> **84,192** with an address in the
+    obec -> 84,104 whose owner is active in RES (99.97% found) -> 27,327 in
+    CZ-NACE 2025 divisions 47/56/96 -> 26,777 after 550 structural exclusions
+    (9691 home services 439, 562 catering 101, 479 intermediation 10) ->
+    **1,500 natural persons' premises at their own registered seat excluded**
+    -> 25,277 -> **25,275 placed (99.99%)**, the 2 at RUIAN addresses that
+    carry no coordinates.
+  - **step 3** - 17,648 within a ring, 7,627 outside.
+
+- **No catch-all is excluded, on Prague's own numbers.** `96990`, the code
+  Oslo and Copenhagen excluded, holds 3 rows: CZ-NACE 2025 has already sorted
+  that work into specific classes. The large personal-services class after
+  hairdressing is `96230`, day spas, saunas and steam baths - 1,638 rows, 80%
+  natural persons - a SPECIFIC class rather than residual wording, and mostly
+  massage salons with a street door: kept. The retail catch-alls are kept, as
+  everywhere.
+
+- **Found and fixed during the build: a RUIAN address with no coordinates
+  transforms to INFINITY, not NaN.** Six Praha addresses carry none; the first
+  run counted them as placed and then dropped two storefronts on the bounding
+  box, which would have been reported as bad coordinates. They are now made
+  missing before any test and reported as unplaced.
+
+- **Privacy verdict, from `check_personal_exposure.py prague`: publish.** 0
+  e-mails, 0 phone numbers, 0 c/o markers; 1 person-like name at a residential
+  unit (0.01%). The heuristic flags 1,991 names, every one a COMPANY's
+  registered name (natural persons show addresses): shop and firm names, and a
+  few companies named after a person or a brand ("Andreas Luka", "YVES
+  ROCHER") - trade names by the project's rule, as in Oslo and Copenhagen.
+  Registered names show on 51.4% of pins.
+
+- **The register reads as premises**: CZ-NACE 2025 5611 on the map 7,414
+  against OSM's restaurant, fast food, café, food court and ice cream 4,655
+  in relation 435514 - **1.59x**, inside France's 1.26-1.80x; staging's
+  pre-build 1.63x on the older column agrees.
+
+- **Metro A's colour moved, and the map passes at three widths.** DPP's
+  `#00A562` was 9.2 from the Personal services pins, under the floor; lightened
+  to `#00b96e` (13.1). check_map_view: zoom 12/12 at 1280, 10.5/10.5 at 375,
+  10.25/10.25 at 343, 0 corrections; all three labels clear at each. The
+  Europe-map label measured 47.3 px (eight entries reproduced), and
+  check_macro_labels scores PROBLEMS 0 across 28 cities.
+
+- **The page text, notices 32 (ČSÚ), 33 (ČÚZK, 2026) and 34 (ROPID), the
+  OpenStreetMap notice's addition and the `excluded_categories.md` section
+  were approved by the owner as written, 2026-09-24.** ROS02 needs no notice.
 
 ### 2026-09-24 - Prague resumed: four owner calls, and NACE2025 rather than NACE
 

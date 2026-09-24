@@ -67,5 +67,6 @@
     "feed_end_date": "20261007",
     "publisher": "\"ROPID\""
   },
-  "osm_host": "overpass-api.de"
+  "osm_host": "overpass-api.de",
+  "ros02_snapshot": "2026-08-31"
 }
