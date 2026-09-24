@@ -25,7 +25,7 @@ block.
 | | City's own list | MHLW open data |
 |---|---|---|
 | **File** | `https://data.bodik.jp/dataset/5925a9fb-3326-4499-9acd-7b18c03d5e32/resource/70d22acf-2353-4bc1-b45d-f12d45da5216/download/r8.7.csv`: **855,886 B**, 3,977 rows, as of 2026-07-31. BODIK is the city's designated open-data site (`odcs.bodik.jp/401307`) | `https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=40130_food_business_all.csv`: **14,880,467 B**, 40,390 live rows (27,815 permits, the rest notifications), as of 2026-08 end. A plain GET, no session |
-| ⚠️ **BODIK is flaky** | The same URL downloaded at 07:37 and answered HEAD, ranged GET and GET at 200 at 07:55. It returned **HTTP 500 to `brief_check` twice** the same morning, and its CKAN API timed out during the licence read. `fetch_sources.py` must retry, and a single 500 is not a dead source | |
+| ⚠️ **BODIK is flaky** | The same URL downloaded at 07:37 and answered HEAD, ranged GET and GET at 200 at 07:55. Over the same day it returned **HTTP 500 twice and 502 once to `brief_check`**, and **504s and timeouts** to both licence reads. A build-time risk, not a blocker: `fetch_sources.py` must retry with backoff, and a failure is not a dead source. **If this check fails, re-run it before correcting anything** | |
 | **What it holds** | **Only permits granted before 2021-06-01 and still held.** The dataset's own note sends everything since to MHLW | **Online filings where the applicant agreed to open-data publication**, field by field. Fukuoka evidently routes nearly all filings through the system: 2,175–4,426 restaurant permits a year since 2021 |
 | Columns | 営業所所在地, 営業所所在地ビル名, **屋号**, **業種**, 業態, permit dates | 営業施設名称、屋号又は商号, **営業の種類**, 業態, **営業施設所在地**, 営業施設方書, **緯度 / 経度** (the publisher's own), 申請区分 (許可 / 届出), dates |
 | Restaurants (飲食店営業, fixed) | **3,231** | **21,088**, of which **16,110 (76%) carry an address** |
@@ -87,7 +87,7 @@ them. ⚠️ Open: the Shinkansen (Hakata). See `docs/commuter_rail_list.md`.
 Dazaifu; check which stations fall outside at build. The scope is the owner's
 call.
 
-## Licences — MHLW READ 2026-09-24; BODIK pending
+## ✅ Licences — READ 2026-09-24
 
 - **MHLW open data — PERMITTED WITH CONDITIONS** (PDL 1.0, CC BY 4.0-compatible).
   - **The grant**: the system's own site terms (`https://i2fas.mhlw.go.jp/termsofuse.htm` §2):
@@ -111,8 +111,26 @@ call.
     photos. **This project is non-commercial, so it is fine under both
     readings today.** It matters only if the site ever becomes commercial.
     Only MHLW can settle it.
-- **The city's lists on BODIK**: declared "Creative Commons Attribution",
-  unversioned. NOT YET READ (BODIK's CKAN timed out during the MHLW read).
+- **The city's lists on BODIK — PERMITTED WITH CONDITIONS** (CC BY 4.0, read
+  2026-09-24).
+  - **The grant**: the city's own terms, `https://odcs.bodik.jp/401307/tos/`
+    第１条: 「…本市等が著作権を有する著作物の利用…については、クリエイティブ・コモンズ・ライセンス…の表示4.0国際…によるものとします。」
+    BODIK defers to each municipality's terms. The city does not adopt
+    政府標準利用規約.
+  - **MUST DISPLAY (第７条)**: each dataset's **作成者** as recorded (food:
+    `保健医療局 食品安全推進課`; beauty and barbers: `福岡市保健福祉局`; cleaning:
+    `保健福祉局 生活衛生課`), the **resource name**, which carries its as-of date
+    so generate it from the file used, and the **resource URL**. Also "CC BY
+    4.0" linked, and a statement that the data was modified.
+  - **MUST NOT**: claim completeness, accuracy or currency (第４条); imply
+    affiliation or endorsement (CC BY §2(a)(6)); use city logos (第３条).
+  - **Cost (第４条)**: complaints from our own breach or infringement are
+    resolved at our own cost. This is **the fault-based class the owner
+    accepted for Tokyo §6 and Sapporo 第9条3**. No indemnity. Japanese law,
+    Fukuoka District Court.
+  - Beauty and barber files mask some fields at source (＊＊＊＊＊＊). The live
+    CKAN records timed out, so the licence fields come from search.ckan.jp's
+    harvest and web-archive copies: re-run `package_show` when BODIK answers.
 - **MLIT 位置参照情報 and N02**: PDL 1.0, as in the Osaka brief.
 
 ## Privacy
@@ -129,7 +147,7 @@ type and premises address** (plus MHLW's lat/lon). Run
 
 ## Still unknown
 
-- ⏳ **The BODIK licence**. MHLW's is read: PERMITTED WITH CONDITIONS, with one minor commercial-use OPEN point.
+- ✅ Both licences read: BODIK (CC BY 4.0) and MHLW (PDL 1.0), each PERMITTED WITH CONDITIONS. MHLW has one minor commercial-use OPEN point.
 - ⚠️ **Privacy**: per MHLW's FAQ, sole traders may enter 「個人名及び自宅住所」 as their 屋号 in their account. Whether that reaches `営業施設名称` is unchecked, so `check_personal_exposure.py` must look at trade names that are personal names.
 - ⚠️ **The ~20% of restaurants with no published address**: whether they cluster spatially. The owner decides whether a disclosed undercount is acceptable.
 - ⚠️ 菓子製造業 / そうざい製造業; the food-retail bucket's disclosure.
