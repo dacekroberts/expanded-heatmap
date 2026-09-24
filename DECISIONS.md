@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**306 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**307 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Rome built on its branch: 98,897 storefronts, 73 stations](#2026-09-24---rome-built-on-its-branch-98897-storefronts-73-stations)
 - [Prague deployed; the live site measured after the reboot](#2026-09-24---prague-deployed-the-live-site-measured-after-the-reboot)
 - [Prague's deploy-verify passed; the Europe view zoomed out](#2026-09-24---pragues-deploy-verify-passed-the-europe-view-zoomed-out)
 - [Prague built: 25,275 storefronts, 58 stations](#2026-09-24---prague-built-25275-storefronts-58-stations)
@@ -348,6 +349,90 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Rome built on its branch: 98,897 storefronts, 73 stations
+
+- **Rome is built on `rome-build`, Italy's second city: 98,897 storefronts
+  around 73 metro stations, 51.8% within a ring** - a 1,286 km² comune whose
+  metro is sparse outside the centre. The row counts, the drift baseline
+  (zero drift offline):
+  - **step 1** - OSM route relations for Metro A, B, B1 and C -> 154 stop
+    positions -> **74 stations** (one alias: Colosseo / Colosseo - Fori
+    Imperiali, one interchange) -> **73 inside comune 058091**; Monte
+    Compatri - Pantano, Metro C's terminus, is in Monte Compatri (058060).
+    Gate 3 exact against English Wikipedia (secondary): A 27, B 26 with B1,
+    C 24, 74 network-wide.
+  - **step 2** - SUAP 168,255 rows -> 155,448 establishments -> **103,375**
+    storefronts (Retail 63,559, Food service 25,826, Personal services
+    13,990) -> **98,897 placed** by the ANNCSU join: 92.2% exact, 3.5% civic
+    with the suffix dropped, 2.7% not found, 1.6% with no civic number;
+    worst municipio IX at 90.6%.
+  - **step 3** - 51,209 within a ring, 47,688 outside.
+
+- **Decided on measurement, each flagged to the owner:**
+  - **The SUAP file is not valid CSV** - no quoting, and SPECIALIZZAZIONE
+    carries commas on 30,075 rows, a few street names too. `pipeline/rome/
+    suap.py` reads it by its fixed shape (eleven comma-free fields, two
+    fixed-vocabulary fields at the end) and validates every row; some
+    values were UTF-8 encoded twice and are repaired only where the round
+    trip succeeds. The brief's "comma-separated" was true and not enough.
+  - **The workshop catch-all mapped trade by trade** (`premises-taxonomy`):
+    `Laboratorio Artigianale e non` is 22% of rows, its SPECIALIZZAZIONE
+    blank on 19,963 (53%) - dropped and disclosed. Personal services follow
+    NAICS 812 (laundry, dry cleaning, nails, tattoo, piercing, pet grooming),
+    artisan food follows Milan (pizza by the slice, pastry, gelato,
+    delicatessen - Food service; a bakery is Retail), and repairs, car work,
+    manufacturing, printing and catering stay out. `Trattenimento e Svago`
+    (bars and clubs with entertainment) is Food service, NAICS 7224.
+  - **An establishment with two authorisations takes the more specific** -
+    Food service, then Personal services, then Retail (3,110; a bar that
+    also sells goods is a bar).
+  - **Civic level only**: a street's centroid is never used to place a
+    premises - on a long Roman street it can be kilometres off. Rejected:
+    the brief's street-centroid tier (4.2%).
+
+- **The owner's build check, measured (`pipeline/rome/build_check.py`): the
+  food-and-drink register reads 2.67x OSM (19,803 SUAP `Somministrazione`
+  premises placed against 7,408 OSM places), and the excess is NOT old
+  registrations.** 45.4% of SUAP premises have an OSM food place within 30 m,
+  and the OLDEST match best - 56-60% for premises started before 2000,
+  49% for 2000-2009, 41% for 2010-2019, 32-36% since 2020. If ceased premises
+  lingered in a register with no closure date, the old cohorts would match
+  worst. An age cut-off would therefore remove the best-verified premises
+  first; the excess reads as OSM under-mapping Rome's bars (the major
+  consular roads match 15-66%) plus recent registrations not yet open.
+  **Recommended: no cut-off, state the over-count on the page** - put to the
+  owner with the page text.
+
+- **Rail from OpenStreetMap, on a recorded ground - put to the owner.**
+  `licence-read` found Roma Mobilità's static GTFS AMBIGUOUS IN A WAY THAT
+  MATTERS: its own open-data page says the data may be used "esclusivamente
+  a titolo di supporto al viaggio" (only as travel support), and the file
+  carries five inconsistent licence declarations (CC BY-SA with no version,
+  "Licenza Sconosciuta", CC BY 4.0 by harvest). Not resolved in the
+  project's favour; downloaded once, not used, not fetched. RSM's ArcGIS
+  metro layers are CC BY 4.0 but last edited 2023-05-19, missing Metro C's
+  two stations opened 2025-12-16. OSM carries all four lines to the current
+  termini. B1 is tagged ref "B" in OSM, so lines are keyed on relation ids
+  and B1 is cut to its own ways for drawing; its shared blue moves +0.11 in
+  HSL lightness (#629ed3), 13.7 from B.
+
+- **Privacy verdict: publish.** The register has no name column; every pin
+  shows its activity and street address. `check_personal_exposure.py rome`:
+  0 contact details, 0 person-like names.
+
+- **Checked in the browser**: check_map_view 12/12 at 1280 and 10.5/10.5 at
+  375, 0 corrections; all four labels clear at both; the basemap credit
+  uncovered at 1000x650, 1280x768 and 375x812 with the clamp in force.
+  Overview label measured at 37.5 px; check_macro_labels PROBLEMS 0 on this
+  branch - to be re-scored with Amsterdam's branch merged.
+
+- **Put to the owner, not decided:** the rail source (OSM, or accept the
+  GTFS / RSM layers); **Metromare** (Roma-Lido, COTRAL - not in the GTFS
+  at all, OSM would supply it) and the **Roma-Viterbo urban service**, both
+  left out under the commuter-rail rule; the food over-count (recommended:
+  state it, no cut-off). Trams (five lines) are left out under the standing
+  test - they run over the metro in the centre.
 
 ### 2026-09-24 - Prague deployed; the live site measured after the reboot
 

@@ -21,6 +21,25 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [~] **🇮🇹 ROME - PARKED 2026-09-24 at "page text drafted", on `rome-build`.**
+  98,897 storefronts, 73 stations, Metro A, B, B1 and C. Pipeline, map, drift
+  baseline, privacy verdict, provenance rows and the DECISIONS entry are
+  committed; **held uncommitted** until the owner approves the text:
+  `app/cities.py` (entry), `app/pages/30_Rome_Heatmap.py`,
+  `docs/city_master_list.md`. Page number 30 assumes Amsterdam (29) lands
+  first. Morning:
+  - [ ] Owner: **rail source** - OSM (built), or the GTFS / RSM layers.
+  - [ ] Owner: **Metromare and the Roma-Viterbo urban service** - in or out.
+  - [ ] Owner: **the food over-count** - state it (recommended), or a cut-off.
+  - [ ] Owner: approve the page text, notices 36 (Roma Capitale) and 37
+    (ANNCSU) and the `excluded_categories.md` section - drafted in chat.
+  - [ ] Merge with Amsterdam's branch; re-score check_macro_labels.
+  - [ ] Scoped `deploy-verify`, `check_deploy_imports`, fetch, merge, push,
+    reboot, live check.
+  - [ ] AFTER PUBLISH: remove the two `rome-*-tmp` launch entries.
+  - [ ] The owner may delete `data/rome/raw/rome_static_gtfs.zip` (46.8 MB) -
+    downloaded, then not used.
+
 - [x] **🇨🇿 PRAGUE - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro A,
   B and C, obec 554782: **25,275 storefronts, 58 stations**; page text, notices
   32-34 and the `excluded_categories.md` section approved by the owner.
