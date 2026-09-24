@@ -169,6 +169,16 @@ REGISTRIES = {
     "copenhagen": dict(raw=None, trade=None, owner=None,
                        processed="businesses_clean.csv",
                        address=("business_name",)),
+    # Amsterdam, the first Dutch city, two layers. The BAG shop units carry NO
+    # name at all - the pin shows the unit's address - and a unit also
+    # registered as a dwelling is not on the map. The hospitality permits show
+    # `zaaknaam`, the name the business trades under on its permit; the
+    # register loads no owner or applicant column, so there is no fallback
+    # to a registrant's name. What this check measures is whether a trade
+    # name is itself a person's name.
+    "amsterdam": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv",
+                      address=("address",)),
     "san_diego": dict(raw="sd_businesses_active_datasd.csv", trade="dba_name",
                       owner="business_owner_name", processed="businesses_clean.csv",
                       address=("address_no", "address_road", "address_suite")),

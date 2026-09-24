@@ -587,11 +587,17 @@ CITIES = [
         # unexamined. Width measured at 99.7 px in a real browser with Space
         # Grotesk loaded (five cities already in the table reproduced
         # exactly), then check_macro_labels.py scored every region at three
-        # widths: PROBLEMS 0. Lille sits north of every other European city
-        # here, so a label pointing up has nothing to meet - unlike
+        # widths: PROBLEMS 0. Lille sat north of every other European city
+        # here, so a label pointing up had nothing to meet - unlike
         # Toulouse, whose default collided with Marseille at the same
         # latitude and had to be turned west.
-        "label_offset": ("middle", 0, -22),
+        #
+        # TURNED UP AND WEST 2026-09-24, when Amsterdam arrived north of it:
+        # the pill above the dot covered Amsterdam's marker at 375, 768 and
+        # 1200. Scored alternatives: due west met Rennes (59.7 x 2.6 px),
+        # below covered Paris's marker; up-and-west scores PROBLEMS 0 across
+        # 7 regions x 3 widths.
+        "label_offset": ("end", -10, -14),
     },
     {
         "name": "Rennes",
@@ -657,6 +663,21 @@ CITIES = [
         # measured at 47.3 px in the app's own document (2026-09-24), and
         # check_macro_labels.py passes every region at 375, 768 and 1200 with
         # PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Amsterdam",
+        "lat": 52.3728,
+        "lon": 4.8936,
+        "page": "pages/29_Amsterdam_Heatmap.py",
+        "blurb": "Metro 50–54 and 16 tram lines",
+        "region": "Europe",
+        "in_default_view": False,
+        # Above the dot, and SCORED rather than assumed: the label width was
+        # measured at 76.5 px in the app's own document with nine entries
+        # reproduced, and check_macro_labels.py passes every region at 375,
+        # 768 and 1200 with PROBLEMS 0 - after Lille's label was turned up
+        # and west, since Lille's pill had covered this marker.
         "label_offset": ("middle", 0, -22),
     },
 ]

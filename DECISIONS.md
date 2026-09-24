@@ -16,14 +16,17 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**310 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**313 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Four more band calls; Tokyo reaches 8 wards; MHLW's terms read](#2026-09-24---four-more-band-calls-tokyo-reaches-8-wards-mhlws-terms-read)
+- [The open legend capped below the map's buttons, and a taxonomy may name its layer (owner, from Amsterdam's deploy-verify)](#2026-09-24---the-open-legend-capped-below-the-maps-buttons-and-a-taxonomy-may-name-its-layer-owner-from-amsterdams-deploy-verify)
 - [MHLW's national food open data is an opt-in slice; it completes Fukuoka and Hiroshima only](#2026-09-24---mhlws-national-food-open-data-is-an-opt-in-slice-it-completes-fukuoka-and-hiroshima-only)
 - [The owner's answers to the overnight question points; Sendai's lists need permission](#2026-09-24---the-owners-answers-to-the-overnight-question-points-sendais-lists-need-permission)
+- [Amsterdam: the owner's calls, and the page text written](#2026-09-24---amsterdam-the-owners-calls-and-the-page-text-written)
 - [Sendai joined at 95.1% block; MLIT's 小字 column places 字 addresses](#2026-09-24---sendai-joined-at-951-block-mlits-小字-column-places-字-addresses)
+- [Amsterdam built on its branch: 13,238 storefronts, 144 stations](#2026-09-24---amsterdam-built-on-its-branch-13238-storefronts-144-stations)
 - [Prague deployed; the live site measured after the reboot](#2026-09-24---prague-deployed-the-live-site-measured-after-the-reboot)
 - [Prague's deploy-verify passed; the Europe view zoomed out](#2026-09-24---pragues-deploy-verify-passed-the-europe-view-zoomed-out)
 - [Prague built: 25,275 storefronts, 58 stations](#2026-09-24---prague-built-25275-storefronts-58-stations)
@@ -395,6 +398,42 @@ onwards; the early ones are split by phase rather than by hour.
   only if that changes. Recorded in `fukuoka.md` and `hiroshima.md`.
   **BODIK was flaky**: HTTP 500 twice to `brief_check`, and 200 by every method
   in between. Recorded as a retry requirement, not a relaxed check.
+### 2026-09-24 - The open legend capped below the map's buttons, and a taxonomy may name its layer (owner, from Amsterdam's deploy-verify)
+
+- **The open map legend is now capped at the visible map height less the
+  button row and scrolls, with a sticky header; and a taxonomy may define
+  `layer_label()` to name a bucket's layer the way its legend does. Fixed in
+  the shared renderer before Amsterdam shipped - the owner's call of
+  2026-09-24, over handing both to app/chrome beside the phone label layout.**
+  `deploy-verify` (city-added) found two defects on Amsterdam's map that no
+  earlier city could show. **The legend**: 21 lines, the first map past 20, made
+  the open legend 634 px tall at the 650 px embed, so its top sat at y = -8 and
+  its header and Hide control were under the "All cities" and theme buttons
+  (Paris's had been the tallest, its top at y 84). **The layer name**: the layer
+  control said "Businesses: Retail" beside a legend and a page that say "Shops
+  and services", because layers were named by bucket while the legend goes
+  through `legend_label()`. Fixes in `pipeline/map_common.py`: `.map-legend`
+  gets `max-height: calc(min(100vh, 650px) - 80px)`, `overflow-y: auto`,
+  border-box and contained overscroll; the `<summary>` is sticky with an
+  explicit background - `inherit` was tried and FAILED, measured: a summary is
+  slotted into the `<details>` shadow root, so it inherits from a transparent
+  slot and the rows showed through the header in dark mode; `_layout_labels`
+  caps its legend obstacle at the same height; `render_heatmap` names each pin
+  layer through `taxonomy.layer_label` when defined, else the bucket
+  (`legend_label()` itself cannot serve - NAICS's appends its code prefixes).
+  `amsterdam_source.py` sets `layer_label = legend_label`. Measured on
+  Amsterdam at 1000x650: the legend spans y 56-626 (the buttons end at 45), 570
+  px, scrolling 62; the header stays at y 57 when scrolled, background matching
+  the panel in both themes; the layer control reads "Businesses: Shops and
+  services (9,215)". **Rejected: shipping and handing off** - unlike the phone
+  label overlaps, this was the desktop embed, the most-viewed state. The CSS is
+  a shared block, so every map was re-rendered: the full `drift_check.py --jobs
+  4` over 29 cities showed all 29 `heatmap.html` changed and **all 51 other
+  outputs identical, every baseline unchanged**; `check_render_current.py` 29
+  of 29 current; `check_provenance.py` all recorded. Shared code normally
+  app/chrome's (`docs/session_roles.md`); the owner assigned it to this session.
+  Files: `pipeline/map_common.py`, `pipeline/taxonomies/__init__.py`,
+  `pipeline/taxonomies/amsterdam_source.py`, `outputs/*/heatmap.html`.
 
 ### 2026-09-24 - MHLW's national food open data is an opt-in slice; it completes Fukuoka and Hiroshima only
 
@@ -491,6 +530,27 @@ onwards; the early ones are split by phase rather than by hour.
   notice selected rows by a wrong filter and printed the first two data rows
   of each food sheet, operator names included, to the session. Nothing was
   written to disk, and the script was deleted.
+### 2026-09-24 - Amsterdam: the owner's calls, and the page text written
+
+- **The owner approved Amsterdam's page text, notice 35 and its
+  `excluded_categories.md` section as drafted, and took both open calls as
+  recommended (2026-09-24, morning).** The drafts were written overnight in
+  unattended mode and approved in one pass with Rome's. **Scope: gemeente
+  only**, although tram 6 keeps 5 of its 16 stops (31%) - between Lille's
+  3 of 36, which went regional, and Toulouse's T1 at 52%, which stayed
+  commune-only; regional would have needed Amstelveen's own hospitality
+  permits, a new source. The line is drawn whole and counted only inside the
+  city, which the page says. **Phone labels: shipped with 11 overlapping pairs
+  of the 21 line labels at 375 px** (clean at desktop). Per-line label ends
+  were tried and made it worse (14), so the fix is a phone-specific label
+  layout for every city - added to PLAN's existing app/chrome item rather
+  than tuned here. Notice 35 credits the Gemeente under CC BY 4.0 (the
+  register's own licence is SILENT; the owner's choice of 2026-09-24), and the
+  OpenStreetMap notice now names Amsterdam's city boundary beside Prague's.
+  Files: `app/pages/29_Amsterdam_Heatmap.py` (with a snapshot caption read
+  from `outputs/amsterdam/provenance.json`), `app/components.py`,
+  `app/cities.py`, `docs/data_sources.md`, `docs/excluded_categories.md`,
+  `docs/city_master_list.md`, `docs/project_context.md`, `PLAN.md`.
 
 ### 2026-09-24 - Sendai joined at 95.1% block; MLIT's 小字 column places 字 addresses
 
@@ -521,6 +581,93 @@ onwards; the early ones are split by phase rather than by hour.
   34 m, all within 250 m. `run_city` now accepts `--gsi N`. Brief:
   `docs/build_briefs/sendai.md` (4/4). The city's licence was not declared on
   either page, and its read is in progress.
+### 2026-09-24 - Amsterdam built on its branch: 13,238 storefronts, 144 stations
+
+- **Amsterdam is built on `amsterdam-build`, the Netherlands' first city:
+  13,238 storefronts around 144 stations, 95.5% within a ring.** The row
+  counts, the drift baseline (zero drift offline):
+  - **step 1** - GVB's 21 rail lines read out of OVapi's national GTFS
+    (36,751 trips) -> each line's REGULAR route, 225 stop places -> 203 inside
+    gemeente 0363 -> **144 stations** after the sub-transit-line filters (59
+    tram stops thinned, every one recorded with its nearest kept station).
+    Gate 3 exact on the metro against English Wikipedia (secondary): 20 / 19 /
+    8 / 14 / 15, 39 network-wide.
+  - **step 2** - permits 4,092 -> **3,605** by the owner's mapping -> 3,583
+    placed (92 of the 114 with no point placed through the BAG by street and
+    number, 22 unplaceable); BAG shop-class units 11,607 -> 10,898 in use ->
+    **10,141** without the 757 also registered as dwellings -> **9,655** after
+    **486** de-duplicated against a permit at the same address.
+  - **step 3** - 12,648 within a ring, 590 outside.
+
+- **Four owner's calls, 2026-09-24**: **metro AND trams** (recommended metro
+  only; the owner took Oslo's precedent - Amsterdam's metro barely enters the
+  canal ring); the **permit mapping** as recommended (in: restaurants, cafés,
+  alcohol-free, fast food, eethuis, coffeeshops, nightclubs, `Onbekend` sorted
+  by its own specification; out: `Additionele horeca` - 318 sports-club
+  canteens, community centres and theatre foyers - cultural venues, members'
+  societies, hotels, hall hire); **shop units also registered as a dwelling
+  left off** (757, Prague's own-seat precedent); and the **unattended build
+  mode** for the night (recorded in memory, not here).
+
+- **Decided on measurement, each flagged to the owner and each one line to
+  reverse:**
+  - **The CC0-labelled national file** (`gtfs.openov.nl/gtfs-rt/gtfs-openov-
+    nl.zip`) rather than the usual `gtfs-nl.zip`, whose README grants only
+    "free to use"; same feed minus AVV and Thalys. `licence-read`: PERMITTED
+    WITH CONDITIONS, CC0 upstream. Avoids the README question rather than
+    answering it in the project's favour.
+  - **A line's stations are its regular route** - stops served on at least
+    half the line's days in the window. GVB runs up to 30 shapes per line
+    here; metro 50's most-used shape covers 11 of its 20 stations, and a
+    works diversion put 22 stops on tram 7 that it does not normally serve.
+    Rejected: the most-used shape (misses whole stretches), any single date
+    (every date tried was someone's odd one out).
+  - **A GVB stop name is a street, not a place** - "Jan van Galenstraat" is a
+    metro station and a tram stop 1.6 km apart, and three trams each have a
+    "Prinsengracht". Each name's platforms split into places by 300 m single
+    linkage; none spans more than 400 m.
+  - **Gate 1 at 200 m**, Paris's and Marseille's value, not a new number: the
+    collapsed tram network's median is 333 m.
+  - **128 permits past their end date are KEPT.** All ended July-September
+    2026, all still `Verleend`, and nothing that ended earlier is in the
+    register - the city prunes with a lag of about three months, so these
+    read as renewals in progress. `einddatum` ends a permit's term, not the
+    business. Rejected: dropping them (would remove La Madonnina on
+    Rembrandtplein, Café De Walvis). `config.KEEP_PERMITS_PAST_END_DATE`.
+  - **Tram colours from GVB's own map** (`GVB_railnetwerk_31aug_2026.pdf`,
+    the fill of each line badge, its text decoded through the PDF's font
+    encoding), downloaded with the owner's permission; the feed has none and
+    OSM's are unusable. GVB gives 6 and 25 one red and 19 and 29 one orange,
+    so five trams move in HSL lightness only - 6 -0.10, 25 +0.04, 24 +0.04,
+    26 -0.06, 29 +0.18 - the metro keeping GVB's colour (Oslo's rule), the
+    lower-numbered tram keeping it between two trams.
+  - **Lille's Overview label turned up and west**, because its pill covered
+    Amsterdam's marker at every width; `check_macro_labels.py` PROBLEMS 0.
+
+- **Privacy verdict, from `check_personal_exposure.py amsterdam`: publish.**
+  0 e-mails, 0 phone numbers, 0 c/o markers, 0 person-like names at a
+  residential unit; no owner column exists to fall back to. The heuristic
+  flags 781 pins (6.2%), every one a permit's trade name - a sample of 60 is
+  shop and restaurant names (FEBO Zeilstraat, Coffeeshop Nagtegaal, La
+  Madonnina), some carrying a surname as the trade name (Café Van Daele), as
+  in Oslo and Copenhagen. The BAG layer carries no name at all.
+
+- **Checked in the browser**: check_map_view 12/12 at 1280 and 10.75/10.75
+  at 375, 0 corrections; all 21 labels clear at 1280; the basemap credit
+  uncovered at 1000x650, 1280x768 and 375x812 with the legend clamp in force.
+
+- **Two questions put to the owner, not decided:**
+  - **Scope. Tram 6 keeps 5 of its 16 stops inside the gemeente (31%)** -
+    the other 11 are in Amstelveen - between Lille's 3 of 36 (made regional)
+    and Toulouse's T1 at 52% (kept commune-only). Built gemeente-only, the
+    brief's expectation, because the permit register is Amsterdam's own: a
+    regional scope needs Amstelveen's permits, a new source. Tram 25 keeps 18
+    of 32 (56%); every other line 62% or more.
+  - **Phone-width labels.** At 375 px, 11 pairs of the 21 line labels
+    overlap - the shared renderer lays labels out once, for the 1000 px
+    canvas, and a phone layout is an open PLAN item. Per-line label ends
+    were tried and made it worse (14). This is the cost the owner accepted
+    with trams; the choices are shared-renderer work or fewer drawn lines.
 
 ### 2026-09-24 - Prague deployed; the live site measured after the reboot
 

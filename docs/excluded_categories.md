@@ -1217,6 +1217,38 @@ carries no coordinates.
 overlay on the metro, the Petřín funicular, ferries and suburban trains are not
 drawn. Flora, closed for reconstruction, is drawn.
 
+### Amsterdam - two registers, and a shop unit that is also a home kept off the map
+
+**Two layers, two categories.** Food service is the city's register of
+hospitality permits; everything else is the national buildings register's shop
+units, which record what a unit is for rather than what trades there, so retail
+and personal services are one category here, "Shops and services".
+
+**Excluded from the permit register** - cafés and canteens inside another venue,
+such as a sports club, community centre or theatre (318 permits), hotels (72),
+hall hire (32), cultural venues (17), members-only societies (13), and 35
+permits of unknown type whose own description is one of these.
+
+**Excluded because it is probably a home** - 757 shop units also registered as
+a dwelling.
+
+**Removed as duplicates** - 486 shop units at the same address as a permit; the
+permit, which names the business, is kept.
+
+**Missing rather than excluded** - takeaways that need no hospitality permit,
+and 22 permits whose address could not be placed.
+
+**What cannot be excluded: empty shops.** About one shop unit in twenty stood
+empty at the start of 2026, and no open source says which.
+
+**Shown, but not named** - every shop unit shows its address.
+
+**Stations.** GVB's metro lines 50 to 54 and sixteen tram lines are drawn. 22
+stops outside the municipality are left out - 12 in Amstelveen, 5 in Diemen, 3
+in Uithoorn, 2 in Ouder-Amstel - and 59 tram stops are thinned to about one per
+half mile. Tram 3, which is not running, the museum tram, ferries and NS trains
+are not drawn.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found
