@@ -605,10 +605,12 @@ brief names.
   (drafted), Kaohsiung's request, and reads from inside Poland and India.
 - **The open gap (9)** — re-probes, not builds.
 
-**Owner's outside actions:**
-- [ ] Send Sendai's request (drafted in formal Japanese).
-- [ ] Request Chiyoda's ledger.
-- [ ] Place the Tallinn building-register orders (two reports).
+**Owner's outside actions** are tracked in `docs/gated_access.md`, the list of
+every key, account and letter:
+- [ ] Item 21: send Sendai's request (`docs/notifications/sendai-permission-request.md`).
+- [ ] Item 22: request Chiyoda's ledger.
+- [ ] Item 23: place the Tallinn building-register orders (two reports).
+- Items 25–27 (Hiroshima, MHLW, Osaka) are optional confirmations, not gates.
 
 ### Brief-ready, not started — ordered checklists, 2026-09-23
 
