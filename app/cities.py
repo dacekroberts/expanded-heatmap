@@ -630,6 +630,21 @@ CITIES = [
         # the frame itself - see Paris's entry.
         "label_offset": ("middle", 0, 22),
     },
+    {
+        "name": "Copenhagen",
+        "lat": 55.6761,
+        "lon": 12.5683,
+        "page": "pages/27_Copenhagen_Heatmap.py",
+        "blurb": "Metro M1–M4 and S-tog A, B, Bx, C, E, F, H",
+        "region": "Europe",
+        "in_default_view": False,
+        # Above the dot, and SCORED rather than assumed: the label width was
+        # measured at 85.5 px in the app's own document (2026-09-24), and
+        # check_macro_labels.py passes every region at 375, 768 and 1200 with
+        # PROBLEMS 0 - Copenhagen sits mid-frame in Europe, clear of Oslo to
+        # the north and of the map's controls.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

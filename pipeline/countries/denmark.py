@@ -106,8 +106,13 @@ MAIN_BRANCH_SEQ = "0"
 #     30  Interessentskab                       334   2.1%   partners liable
 #                                                            personally
 #
-# (Norway's guard is ENK alone; these two are Denmark's ENK.)
-SOLE_TRADER_FORMS = ("10", "15")
+# ✅ INTERESSENTSKAB IS IN TOO - owner's call 2026-09-24, and a deliberate
+# difference from Norway, whose guard is ENK alone. An I/S's partners are
+# liable personally and without limit, and of Copenhagen's 326 I/S
+# storefronts about 105 display names that could be the partners' own - full
+# personal names joined by "&", or a bar's name followed by its partners'.
+# Cost: ~300 more pins show an address, some of them ordinary shop names.
+SOLE_TRADER_FORMS = ("10", "15", "30")
 
 # Denmark's sole-trader MARKER in a name: "v/" - "ved", by - followed by the
 # person ("FISKEFORRETNINGEN V/LARS ..."). A second guard, applied whatever the

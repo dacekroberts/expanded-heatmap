@@ -592,8 +592,10 @@ _NOTICES = [
      "Rail route geometry and station locations for Mexico City (Metro CDMX "
      "and Tren Ligero), Guadalajara (Tren Ligero) and Barcelona (Metro de "
      "Barcelona, including its FGC lines and both funiculars), and the route "
-     "geometry of Lille's two métro lines and the per-line colours of "
-     "Oslo's T-bane and tram lines, are from OpenStreetMap, "
+     "geometry of Lille's two métro lines, the per-line colours of "
+     "Oslo's T-bane and tram lines, and Copenhagen's Metro and S-tog lines "
+     "and stations and the municipal boundaries used to select them, are "
+     "from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
      "geometry; stations, rings and categories are this project's work.",
@@ -795,6 +797,31 @@ _NOTICES = [
      "and redrawn by this project, and the line colours are not from this "
      "data. Not produced or endorsed by Entur, Ruter or Sporveien.",
      True),
+    # CVR - Copenhagen's business register, via Datafordeler. CC BY 4.0:
+    # "Du skal kreditere Det Centrale Virksomhedsregister (CVR) på et
+    # passende sted" (datafordeler.dk, read 2026-09-23). The name is
+    # prescribed, the wording is not, so this string is this project's own;
+    # its second sentence is CC BY 4.0 3(a)(1)'s modification duty. Wording
+    # approved by the owner 2026-09-24.
+    ("Det Centrale Virksomhedsregister (Copenhagen)",
+     "Contains data from Det Centrale Virksomhedsregister (CVR), distributed by "
+     "Datafordeler under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). "
+     "Copenhagen's business premises are selected, classified and placed by this "
+     "project, and a personally owned business is shown by its address rather "
+     "than its name; the categories and densities are this project's own work "
+     "and are not produced or endorsed by Erhvervsstyrelsen.",
+     False),
+    # DAR - the coordinate join. CC BY 4.0 crediting Klimadatastyrelsen, which
+    # lets the reuser choose the form of credit (read 2026-09-24 by the
+    # licence-read agent). Named with the register as well, since Datafordeler's
+    # general terms ask for "the responsible register". Wording approved by the
+    # owner 2026-09-24.
+    ("Klimadatastyrelsen (Copenhagen)",
+     "Contains data from Klimadatastyrelsen, Danmarks Adresseregister (DAR), via "
+     "Datafordeler under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). "
+     "This project joins the register's address points to the business register "
+     "to place each premises.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

@@ -217,12 +217,12 @@ CITY_KEEP = "COPENHAGEN"   # kept for the scaffold's templates; KOMMUNER filters
 # shops and eateries by product.
 CATCH_ALL_EXCLUDE = ("969900",)
 
-# Sanity bounds: the two kommuner's extent plus ~0.02 deg. Catches a corrupt
-# coordinate; the join to DAR does the placing.
-# TODO: tighten to the measured extent at step 2.
+# Sanity bounds: the placed storefronts' measured extent (55.6166-55.7316 N,
+# 12.4562-12.6655 E, 2026-09-24) plus ~0.02 deg. Catches a corrupt
+# coordinate; the join to DAR does the placing, and it dropped none.
 COPENHAGEN_BBOX = {
-    "lat_min": 55.58,
+    "lat_min": 55.59,
     "lat_max": 55.76,
     "lon_min": 12.43,
-    "lon_max": 12.75,
+    "lon_max": 12.69,
 }
