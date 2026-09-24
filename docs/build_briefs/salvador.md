@@ -44,13 +44,17 @@ first name at a dwelling address is **756 (1.4%)**.
 
 **Metrô de Salvador, L1 and L2** — 4 relations, refs `1`, `2`, all named, **0 of 4 coloured**. The invariant requires every drawn line to carry its real name and a legend entry; **colours must come from the operator** (CCR Metrô Bahia), stated as sourced, never invented.
 
-⚠️ **Agency layers have NOT been searched.** `osm-rail` puts them first, and
-Rio's metro and VLT layers turned up only when its city's ArcGIS org was
-enumerated. **Enumerate Salvador's own portals before building from OSM.**
+**Agency layers searched 2026-09-23 — none public (MEASURED, three methods).**
+Bahia's CKAN (`dados.ba.gov.br`) returns nothing for any rail term, and a
+nonsense term returns nothing too, so the search is live. ArcGIS Online holds
+no government-owned item in the city's box. The city's own ArcGIS Server
+(`geo.salvador.ba.gov.br`) has a `SEMOB` (mobility secretariat) folder that
+answers `Token Required` — **not worked around**. **OSM is the geometry
+source**; the colours are still owed by the operator.
 
 ## Scope
 
-L2 runs out past the airport toward Lauro de Freitas; measure how many stations fall outside município 2927408 before choosing commune scope.
+**MEASURED 2026-09-23** (OSM, each route member's município): **20 of 21 stations are in Salvador**; only **Aeroporto**, L2's terminus, is in Lauro de Freitas (2919207). **Commune scope holds** — the airport station is the line's end, drawn as such.
 
 ## Region
 
@@ -59,7 +63,6 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
 ## Still unknown
 
 - ⚠️ Line colours — from the operator
-- ⚠️ Stations outside the município (L2's airport end)
 
 ```brief-checks
 [
@@ -83,7 +86,7 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
   },
   {
     "id": "salvador-osm-rail",
-    "claim": "OSM carries Salvador's rail refs as counted 2026-09-23 - the geometry source until agency layers are found",
+    "claim": "OSM carries Salvador's rail refs as counted 2026-09-23 - the geometry source; agency layers searched 2026-09-23, see Rail",
     "kind": "osm_route_refs",
     "bbox": [
       -13.02,

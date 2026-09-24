@@ -44,13 +44,23 @@ first name at a dwelling address is **46 (0.8%)**.
 
 **VLT da Baixada Santista, L1 and L2** — `route=light_rail`, 4 relations, all coloured. The **Bonde Turístico** (heritage tram, no ref, no colour) is **excluded** as a tourist service.
 
-⚠️ **Agency layers have NOT been searched.** `osm-rail` puts them first, and
-Rio's metro and VLT layers turned up only when its city's ArcGIS org was
-enumerated. **Enumerate Santos's own portals before building from OSM.**
+**Agency-hosted layers FOUND 2026-09-23 — stops and line, OWNER UNCONFIRMED.**
+EMTU's own open-data and GTFS pages now redirect to its home page, and São
+Paulo's state CKANs timed out. The ArcGIS Online account `CPGSTM` (*CPG
+Coordenadoria de Planejamento e Gestão*, in no organisation, created 2023)
+hosts `EMTU_RMBS_Estações_Paradas_VLT_SIM_Em_Operação` (**16 stops**, `Nome`,
+`Status` = *Em Operação*, `Empresa` = EMTU; EPSG:4674) and
+`EMTU_RMBS_Tracado_VLT_SIM_Em_Operação` (one line, *SIM - VLT Baixada*,
+Barreiros–Porto), plus *Em Implantação* pairs; `licenseInfo` blank. **The
+"STM" suffix suggests the state's Secretaria dos Transportes Metropolitanos,
+EMTU's parent — ASSERTED from the name alone.** 16 stops against OSM's L1 +
+L2 suggests the layer may predate L2 — unverified. **Recommendation: OSM
+geometry; the CPGSTM layers as a status cross-check only, never the licensed
+source, until their owner is confirmed.**
 
 ## Scope
 
-L1 runs west into **São Vicente** (município 3551009) — a regional question, and at 6,021 storefronts the city alone may be too thin to earn a page.
+**MEASURED 2026-09-23** (OSM, by município): 25 stops — **17 in Santos (68%, one of them the excluded heritage tram's), 8 in São Vicente** (3551009), including Terminal Barreiros, the lines' western hub. **Santos + São Vicente recommended — the owner's call**; at 6,021 storefronts the city alone may be too thin to earn a page. São Vicente's CNEFE file is 3,189,142 B, not yet downloaded.
 
 ## Region
 
@@ -58,11 +68,22 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
 
 ## Still unknown
 
-- ⚠️ Scope — São Vicente
+- ⚠️ Scope — Santos + São Vicente recommended, **owner's call**; São Vicente's storefronts unmeasured
 - ⚠️ Whether ~6,000 storefronts earn a page (Rennes' question)
 
 ```brief-checks
 [
+  {
+    "id": "santos-vlt-stops-layer",
+    "claim": "An ArcGIS layer labelled EMTU carries the VLT's operating stops with a status field - a cross-check only; its owner (account CPGSTM) is unconfirmed",
+    "kind": "arcgis_layer",
+    "url": "https://services3.arcgis.com/3qsRj8hNn2xpckE0/arcgis/rest/services/EMTU_RMBS_Esta%C3%A7%C3%B5es_Paradas_VLT_SIM_Em_Opera%C3%A7%C3%A3o/FeatureServer/0",
+    "expect_rows": 16,
+    "present": [
+      "Nome",
+      "Status"
+    ]
+  },
   {
     "id": "santos-cnefe-file-live",
     "claim": "The CNEFE 2022 file for Santos is keyless and live - business leg and coordinate leg in one",
@@ -83,7 +104,7 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
   },
   {
     "id": "santos-osm-rail",
-    "claim": "OSM carries Santos's rail refs as counted 2026-09-23 - the geometry source until agency layers are found",
+    "claim": "OSM carries Santos's rail refs as counted 2026-09-23 - the geometry source; agency layers searched 2026-09-23, see Rail",
     "kind": "osm_route_refs",
     "bbox": [
       -24.0,
