@@ -111,6 +111,12 @@ TEXT_WIDTH = {
     "Brasília": 49.0, "Salvador": 58.6, "Fortaleza (Regional)": 135.9,
     "Porto Alegre (Regional)": 156.6, "Recife (Regional)": 115.9,
     "Santos (Regional)": 120.1,
+    # Rotterdam measured 2026-09-24 in the local app's own document, the same
+    # way, with thirteen entries reproduced exactly in the same run - Amsterdam
+    # 76.5, Rome 37.5, Prague 47.3, Copenhagen 85.5, Oslo 29.0, Rennes 49.7,
+    # Toulouse 60.4, Paris 32.9, Milan 36.3, Boston 48.4, Marseille 60.3, São
+    # Paulo 65.6, Santos (Regional) 120.1.
+    "Rotterdam": 70.7,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,

@@ -826,6 +826,23 @@ CITIES = [
         # with PROBLEMS 0.
         "label_offset": ('middle', 0, 22),
     },
+    {
+        "name": "Rotterdam",
+        "lat": 51.9225,
+        "lon": 4.4792,
+        "page": "pages/40_Rotterdam_Heatmap.py",
+        "blurb": "RET metro A–E and 9 tram lines",
+        "region": "Europe",
+        "in_default_view": False,
+        # UP AND LEFT of the dot, the only placement that scores: Amsterdam's
+        # name sits above, Lille's to the south-west and Prague's pill to the
+        # east. Width 70.7 px measured in the app's own document, thirteen
+        # entries reproduced; check_macro_labels.py passes every region at
+        # 375, 768 and 1200 with PROBLEMS 0. TIGHT: dy -11 touches Lille's pill
+        # and -13 Amsterdam's (1-2 px), so the next European city near here
+        # re-scores this one first.
+        "label_offset": ("end", -9, -12),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

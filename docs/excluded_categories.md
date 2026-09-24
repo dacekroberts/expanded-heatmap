@@ -1476,6 +1476,35 @@ shows its category, never the enumerator's description.
 Linha 2 running from 9 to 15h since it opened on 1 December 2025. Not drawn: the
 heritage tourist tram.
 
+### Rotterdam - a food layer rebuilt from permit notices, and a shop unit that is also a home kept off the map
+
+**Rebuilt rather than read** - Rotterdam publishes no hospitality register. 3,223 exploitation,
+provisional and coffeeshop permits granted inside their term, merged where they share a place,
+give 1,939 premises.
+
+**Left out of the notices** - alcohol licences (991), terrace permits (589), gaming-machine
+permits (366), short-term event permits (27), sex-business permits (14), permits under other
+bylaws (8), one refusal and one withdrawal, and 20 notices that are not permits; exploitation
+permits older than five years and coffeeshop permits older than one.
+
+**Excluded because it is probably a home** - 26 shop units also registered as a dwelling.
+
+**Removed as duplicates** - 563 shop units within 3 m of a permit premises; the permit is kept.
+
+**What cannot be excluded: closed premises and empty shops.** A premises that closed stays until
+its permit would have run out (about one in seven, measured on Amsterdam); about 7% of shop units
+were registered vacant on 1 January 2025 (CBS).
+
+**Not named** - no dot carries a business name; shop units show their address.
+
+**Stations.** RET metro A-E and trams 1-8 and 11 are drawn, on the timetable after the works
+that shorten trams 4, 6 and 8 until 22 November. 52 stops outside the gemeente are left out - 18
+in Schiedam, 7 in Vlaardingen, 5 in Barendrecht, 4 in Den Haag, 3 each in Capelle aan den IJssel,
+Maassluis, Pijnacker-Nootdorp and Nissewaard, 2 each in Lansingerland, Albrandswaard and
+Leidschendam-Voorburg - and 23 tram stops are thinned by the spacing filter to about one per half
+mile. Not drawn: tram 12 (event days), temporary trams 14 and 18 (during the works), ferries and
+NS trains.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

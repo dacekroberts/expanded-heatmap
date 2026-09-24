@@ -93,13 +93,16 @@ CBS's.
 - **BAG** — Public Domain Mark (Kadaster), as in Amsterdam.
 - **OpenStreetMap** (rail and basemap): ODbL, the standing credit.
 
-## 🚇 Rail — RET metro (A–E) and trams, from OSM as in Amsterdam
+## 🚇 Rail — RET metro (A–E) and trams, from the national GTFS as in Amsterdam
 
-Not yet measured. By general knowledge: RET metro lines A–E (E runs on to The
-Hague) and the RET tram network. Amsterdam drew GVB metro and tram from OSM with
-`sub_transit_line_filters` thinning the trams. **Check at build**: which
-lines, and whether Line E's stretch beyond the city line is kept (the
-gemeente-only scope below).
+**Corrected at build (2026-09-24):** this section said "from OSM as in
+Amsterdam", and Amsterdam in fact read OVapi's national GTFS
+(`gtfs-openov-nl.zip`, CC0), agency GVB. Rotterdam reads the same file, copied
+from Amsterdam's cache, agency RET. Built: metro A–E and trams 1–8 and 11,
+gemeente only (52 stops outside it; metro E keeps 12 of 23), trams thinned.
+**The feed opened on a works timetable** - temporary trams 14 and 18 (to
+2026-11-22) while 4, 6 and 8 are shortened - so regular routes are measured
+from 2026-11-23; neither of RET's own maps carries a 14 or an 18.
 
 ## Scope
 

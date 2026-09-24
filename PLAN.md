@@ -42,6 +42,13 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - [ ] Re-render all maps with Rotterdam's; one `deploy-verify` for
     Rotterdam covering `city-added` and `map-chrome` (both themes).
 
+- [~] **🇳🇱 ROTTERDAM - built on `worktree-rotterdam`, text approved (owner
+  2026-09-24): 7,520 storefronts, 132 stations.** Trams drawn (owner); 14 and 18
+  found temporary, so not drawn; page 40, notice 40 (CBS), docs written.
+  - [ ] ONE `deploy-verify` (city-added Rotterdam + map-chrome both themes, for
+    the label work above), fetch, push, reboot (cities.py), live check; remove
+    the `rotterdam-*-tmp` launch entries and the worktree's data junctions.
+
 - [ ] **NEXT BUILDS (owner, 2026-09-24): 🇳🇱 Rotterdam, then 🇹🇼 Taiwan** -
   Rotterdam's deploy check also verifies the label-contrast work above. Rotterdam is
   Amsterdam's shape (permit-notice food layer rebuilt from the Gemeenteblad,

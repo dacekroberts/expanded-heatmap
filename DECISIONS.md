@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**345 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**346 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Rotterdam built: 7,520 storefronts, 132 stations; the food layer rebuilt from permit notices](#2026-09-24---rotterdam-built-7520-storefronts-132-stations-the-food-layer-rebuilt-from-permit-notices)
 - [Line labels read at 4.5:1 in both themes: no dark filter, a halo swap in light mode](#2026-09-24---line-labels-read-at-451-in-both-themes-no-dark-filter-a-halo-swap-in-light-mode)
 - [Renderer fixes verified and pushed; the dark-label model corrected next, with the light-mode halo swap (owner)](#2026-09-24---renderer-fixes-verified-and-pushed-the-dark-label-model-corrected-next-with-the-light-mode-halo-swap-owner)
 - [Tokyo's four own-site wards read: all CC BY 4.0, none like Sendai](#2026-09-24---tokyos-four-own-site-wards-read-all-cc-by-40-none-like-sendai)
@@ -387,6 +388,79 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Rotterdam built: 7,520 storefronts, 132 stations; the food layer rebuilt from permit notices
+
+- **Rotterdam is built on `worktree-rotterdam`, as Amsterdam's shape with the
+  food layer REBUILT rather than read.** Rotterdam publishes no hospitality
+  register, but every permit decision is a Gemeenteblad notice with a point.
+  - **The harvest** (KOOP's SRU, year by year since 2021) took 5,724 notices.
+    It is the UNION of the exploitation-permit rubric and the permit words in a
+    title: 424 provisional permits and 270 exploitation-titled notices sat
+    outside the rubric.
+  - **Sorted by each notice's own title**, in three forms: the decision
+    sentence, "kind - street number", and, until early 2022, "…verleend aan
+    <name>". That gives 2,587 exploitation, 888 provisional and 232 coffeeshop
+    notices. Out: 991 alcohol licences (165 of them under the Drank- en
+    Horecawet form), 589 terrace, 366 gaming-machine, 27 event, 14
+    sex-business and 8 bylaw notices, one refusal, one withdrawal, and 20
+    non-permits (pre-emption rights among them).
+  - **Kept:** grants inside the permit term, counted back from the HARVEST
+    date so a rebuild is stable. That is five years for exploitation and
+    provisional permits and one for coffeeshops, which Amsterdam's register
+    also keeps as food service. The 3,223 grants merge within 3 m into
+    **1,939 premises**, the brief's 1,937: 1,799 exploitation, 101
+    provisional, 39 coffeeshops.
+  - **No names**: the dots read "Hospitality premises".
+- **Shops and services are BAG shop units, from PDOK's WFS with their
+  address.** 6,170 are in use. 26 are also registered as a dwelling and left
+  off, on Amsterdam's owner call applied the same way. The layers are
+  **de-duplicated by distance**, since the notices carry no address: 541 shop
+  units sit within 1 m of a permit premises (the same address point), 563
+  within the 3 m used, and 660 within 5 m. The permit is kept, leaving 5,581
+  units and **7,520 storefronts**.
+- **Rail: RET's metro A–E and trams 1–8 and 11**, from OVapi's national GTFS,
+  copied from Amsterdam's cache (sha256 checked). The brief's "from OSM as in
+  Amsterdam" was wrong; Amsterdam read this same feed, and the brief is
+  corrected. The owner's call: **trams drawn**, on Amsterdam's precedent, since
+  they reach Noord, Blijdorp, Delfshaven, Kralingen and Charlois, where no metro
+  runs.
+  - **The feed opened on a works timetable, and nearly drew the wrong
+    network.** Trams 14 and 18 run every day from 2026-09-22 to 2026-11-22 and
+    then stop, while trams 4, 6 and 8 are shortened (4 serves 17 of its 31
+    stops). Over the whole window, 14 and 18 looked like lines serving seven
+    stations nothing else did.
+  - **It was caught by the owner's own call to take their colours from RET's
+    map.** Neither RET map carries a 14 or an 18: the tram map of October 2025
+    (1.95 MB, now in `data/rotterdam/raw`) or the schematic of January 2026
+    (2.69 MB, the owner approved the second download too).
+  - So regular routes are measured from 2026-11-23, 14 and 18 are not drawn,
+    and the owner approved revising the page text to say so.
+  - Tram 12, the stadium event service (7 of 82 days), is out.
+  - RET's platform-suffixed stop names ("spoor 1", "perron A") are normalised
+    before platforms are grouped, and three turning sidings are dropped.
+- **The stations: 155 stops inside the gemeente, 132 after thinning, 52
+  outside it** (18 in Schiedam; metro E keeps 12 of 23), and 23 thinned.
+  - **Gate 3 is exact against nl.wikipedia**: B 32, C 26, D 17, E 23, network
+    71.
+  - **Line A is a recorded correction.** Both Wikipedias say 24, but
+    en.wikipedia's terminus is Vlaardingen West, the extension beyond Schiedam.
+    The feed, valid to 2026-12-12, runs 20, and the four in between are
+    outside the gemeente.
+- **Colours:** RET gives trams 1 and 11 one colour, 8.6 from metro E's. Both
+  move in lightness only: tram 1 to `#3f5ebe`, tram 11 to `#293e7d`.
+- **Checks:**
+  - Privacy: 0 names, 0 contact details, 0 person-like names.
+  - Labels read at 4.5:1 in both themes, and macro labels score PROBLEMS 0.
+    Rotterdam's pill sits up and left, a 1 px fit between Amsterdam's and
+    Lille's.
+  - Provenance, scope disclosure and render currency all pass.
+  - Baseline: 11 figures.
+- **Page 40, notice 40 (CBS) and the exclusions section**, as approved by the
+  owner, with the first paragraph and the station line revised for 14 and 18.
+  The CBS notice is required (CC BY 4.0) because the page quotes the
+  shop-vacancy share, about one in fourteen: 430 of 6,060 units on
+  2025-01-01.
 
 ### 2026-09-24 - Line labels read at 4.5:1 in both themes: no dark filter, a halo swap in light mode
 

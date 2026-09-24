@@ -600,7 +600,7 @@ _NOTICES = [
      "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "
      "Horizonte, Brasília, Salvador, Fortaleza, Porto Alegre, Recife and "
      "Santos, and those cities' município boundaries, and "
-     "Prague's, Amsterdam's and Rome's city boundaries, are from OpenStreetMap, "
+     "Prague's, Amsterdam's, Rome's and Rotterdam's city boundaries, are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
      "geometry; stations, rings and categories are this project's work.",
@@ -927,6 +927,17 @@ _NOTICES = [
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Reprojected, "
      "filtered and redrawn by this project; station rings and density figures "
      "are this project's own analysis.",
+     False),
+    # CBS - the shop-vacancy share Rotterdam's page quotes. CC BY 4.0
+    # (cbs.nl copyright page, read 2026-09-24): credit CBS, link the licence,
+    # say when a figure is recalculated; no endorsement implied, no logo.
+    # Wording approved by the owner 2026-09-24.
+    ("CBS (Rotterdam)",
+     "The shop-vacancy figure for Rotterdam is from CBS (Statistics Netherlands), "
+     "Landelijke Monitor Leegstand 2025, table 1, 1 January 2025, used under "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) "
+     "([cbs.nl](https://www.cbs.nl/)); the share is rounded from CBS's counts. "
+     "CBS did not produce or endorse this map.",
      False),
 ]
 
