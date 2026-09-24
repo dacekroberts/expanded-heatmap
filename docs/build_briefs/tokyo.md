@@ -95,6 +95,31 @@ LineString (the platform), not a point — centroid it before any ring.**
 ⚠️ Open: whether intercity-only services (Shinkansen, limited-express-only
 lines) count.
 
+**✅ Stub test, measured 2026-09-24** (`pipeline/countries/japan.py` `stub_test()`: N02 stations, Shinkansen excluded, against the city's N03 ward polygons): **FAILS, because Chiyoda is missing from the 8 wards.** The lines are cut through the centre: Marunouchi 8 of 25, Chiyoda 6 of 20, Tōzai 9 of 23, Mita 6 of 27, Yūrakuchō 7 of 24, the Arakawa tram 2 of 30, the Monorail 1 of 11. Only Ginza (17 of 19), Hibiya (17 of 22) and Ōedo (27 of 38) keep most of their stations. **Owner, 2026-09-24: Tokyo WAITS for Chiyoda's ledger** (`docs/gated_access.md` item 22). Osaka, Kobe, Sapporo and Fukuoka build first.
+
+**Does Tokyo truly need Chiyoda? Measured the same day** (the owner's
+question), on the 19 urban lines (Tokyo Metro, Toei, the AGTs and the
+monorail), with `stub_test("tokyo", wards=…)`:
+
+| Scope | Urban station-line records inside | Lines under half |
+|---|---|---|
+| The 8 wards | 163 of 365 (**45%**) | 11 of 19 |
+| **+ Chiyoda** | 203 (**56%**) | 6 |
+| + Chiyoda, Toshima, Bunkyō | 244 (**67%**) | 4 |
+| All 23 wards | 356 (**98%**) | 0 |
+
+**Chiyoda is the most valuable single ward** (+40 records; it lifts
+Marunouchi, the Chiyoda line, Hanzōmon and the Shinjuku line back above
+half). **But it is not the fix**: with it, six lines stay under half (Mita 9 of
+27, the Arakawa tram 2 of 30, Nippori-Toneri 0 of 13, the Monorail 1 of 11).
+**A whole Tokyo needs most of the 12 missing wards**, and several are
+reachable: Ōta, Kita and Arakawa publish full lists as PDFs; Shinagawa and
+Itabashi partially; Nakano's list is stale; Toshima, Nerima and Edogawa are
+on request. **Owner, 2026-09-24: Tokyo is the LAST Japanese city**, the
+densest, and the one that benefits most from a Japan skill written off the
+first four builds. The missing wards become a planned project for it, not a
+blocker for the others.
+
 ## Scope — 🚩 the owner's call
 
 Food files exist for **Minato, Shinjuku, Chūō, Kōtō** — central, but not all

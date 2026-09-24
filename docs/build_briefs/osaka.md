@@ -74,6 +74,8 @@ JR West, and the private railways (Hankyu, Hanshin, Keihan, Kintetsu, Nankai)
 are all in it. ⚠️ Stations are LineStrings — centroid them. ⚠️ Open: intercity-only
 services (Shinkansen). See `docs/commuter_rail_list.md`.
 
+**✅ Stub test, measured 2026-09-24** (`pipeline/countries/japan.py` `stub_test()`: N02 stations, Shinkansen excluded, against the city's N03 ward polygons): **PASSES.** Osaka Metro keeps 80–100% of each line's stations (Midōsuji 16 of 20, Tanimachi 23 of 26, Chūō 12 of 14; Sakaisuji, Yotsubashi, Sennichimae and the New Tram 100%). The Hankai tram keeps 17 of 32 (it runs into Sakai): half a line, not a stub. JR and the private railways are cut at the line, as the owner's scope intends (Hankyu Kōbe 5 of 17, Keihan 8 of 41, the Loop Line 19 of 19).
+
 ## Scope
 
 **Osaka City (the 24 wards)** — the list is city-wide. Osaka Metro reaches

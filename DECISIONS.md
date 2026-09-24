@@ -16,11 +16,13 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**323 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**325 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Phone-width label placer verified and pushed](#2026-09-24---phone-width-label-placer-verified-and-pushed)
+- [Japan's permit-type taxonomy: one module for ten list formats](#2026-09-24---japans-permit-type-taxonomy-one-module-for-ten-list-formats)
+- [Japan's national facts module; the stub test clears four cities; Tokyo goes last](#2026-09-24---japans-national-facts-module-the-stub-test-clears-four-cities-tokyo-goes-last)
 - [Phone-width line labels re-placed at runtime: 62 problems to 2](#2026-09-24---phone-width-line-labels-re-placed-at-runtime-62-problems-to-2)
 - [Japan: the Shinkansen is out; confectioners and delis count](#2026-09-24---japan-the-shinkansen-is-out-confectioners-and-delis-count)
 - [Japan's join moved into the pipeline, unchanged, before any Japanese build](#2026-09-24---japans-join-moved-into-the-pipeline-unchanged-before-any-japanese-build)
@@ -383,6 +385,67 @@ onwards; the early ones are split by phase rather than by hour.
   bubbles, which the placer does not avoid. Both are in `PLAN.md` as optional
   follow-ups. No `app/` change, so no reboot.
 
+### 2026-09-24 - Japan's permit-type taxonomy: one module for ten list formats
+
+- **Wrote `pipeline/taxonomies/japan_eigyo.py` and registered it as
+  `japan_eigyo`**, the last piece of the shared Japan code before Osaka's build.
+  **One module for every format.** The same national permit types arrive
+  spelled ten ways: plain, MHLW's numbered (①, which NFKC turns to "1"),
+  Taitō's sub-typed (`飲食店営業（一般・居酒屋）`) and Meguro's abbreviated
+  (`飲食一般`, `他食販店舗`). **A per-city mapping was rejected**: a fix would
+  reach one city instead of five, the lesson Brazil's CNEFE module was built
+  on. Nineteen rules run in order, first match wins, and every exclusion sits
+  above the bucket it carves from:
+  - **Out**: institutional catering, vending machines, stalls and temporary
+    permits, mail order, restaurants inside accommodation (the trap Madrid
+    and Barcelona met), and entertainment venues holding food permits.
+  - **Retail, food only**: the owner's 菓子製造業 and そうざい製造業, then butcher,
+    fish, dairy, greengrocer, rice, konbini (including those holding a
+    restaurant permit), supermarkets, bento shops, and other food sales.
+  - **Food service**: every form of 飲食店営業, and 喫茶店営業.
+  - **Personal services** come from the 生活衛生 registers by `source`, with
+    storeless laundry pick-ups out.
+  
+  Import-time checks pin the order-dependent cases. **Measured over all
+  229,504 fixed premises in the ten screened lists** (289 distinct values):
+  Food service 76.4%, Retail 18.2%, out 5.3%. **All 125 fall-through values
+  were read**: they are manufacturing and processing, plus a 0.04% catch-all,
+  so no storefront type escapes. One borderline type is left to the owner:
+  アイスクリーム類製造業 (692 rows, often gelato counters) is out, since the
+  owner's call named 菓子 and そうざい only.
+
+### 2026-09-24 - Japan's national facts module; the stub test clears four cities; Tokyo goes last
+
+- **Wrote `pipeline/countries/japan.py`**, the shared facts every Japanese city
+  uses:
+  - the N02 railway file, with the Shinkansen dropped as `N02_002 == "1"`
+    (owner);
+  - the N03 boundaries, where a city is the union of its wards' polygons by
+    `N03_007`;
+  - the ISJ URL templates, and each Band A city's ward codes and UTM EPSG;
+  - `stub_test()`.
+  
+  It never fetches: `check_no_fetch_in_steps.py` passes, and N02 and N03 for
+  five prefectures sit in the shared cache `data/japan/raw/` (91 MB, logged).
+  Station platforms are LineStrings, and their centroid is taken in a
+  projected CRS, never in degrees.
+- **The stub test, the owner's city-line rule, clears Osaka, Kobe, Sapporo and
+  Fukuoka.** Every urban line keeps 80–100% of its stations: Sapporo's and
+  Fukuoka's subways, Kobe's subway and new transit, and Sapporo's streetcar at
+  100%; Osaka Metro 80–100%. The one half-line is Osaka's Hankai tram (17 of 32,
+  into Sakai), which is not a stub. JR and the private lines are cut at the
+  line, as intended. **Tokyo fails**: Chiyoda sits in the middle of its 8 wards,
+  so Marunouchi keeps 8 of 25 stations and the Arakawa tram 2 of 30.
+- **Owner: Tokyo waits, and then goes LAST among the Japanese cities**, as the
+  densest and the one that benefits most from a Japan skill written off the
+  first four builds. Asked whether Chiyoda is truly needed, the stub test was
+  re-run on alternative ward sets. Urban station coverage is 45% for the 8
+  wards, **56% with Chiyoda** (11 lines under half fall to 6), 67% with
+  Chiyoda, Toshima and Bunkyō, and 98% with all 23. So Chiyoda is the most
+  valuable single ward but not the fix. A whole Tokyo needs most of the 12
+  missing wards, which becomes a planned project before its build (the PDF
+  lists, the partial files, the requests). **Build order: Osaka, Kobe,
+  Sapporo, Fukuoka, then Tokyo.**
 ### 2026-09-24 - Phone-width line labels re-placed at runtime: 62 problems to 2
 
 - **`LABEL_CLAMP_SCRIPT` now re-places any line label that collides, on the

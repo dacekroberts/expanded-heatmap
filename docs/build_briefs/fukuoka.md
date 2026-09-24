@@ -83,6 +83,8 @@ knowledge (not yet read from N02): the Fukuoka City Subway (Kūkō, Hakozaki,
 Nanakuma), JR Kyushu and Nishitetsu. ⚠️ Stations are LineStrings, so centroid
 them. ⚠️ Open: the Shinkansen (Hakata). See `docs/commuter_rail_list.md`.
 
+**✅ Stub test, measured 2026-09-24** (`pipeline/countries/japan.py` `stub_test()`: N02 stations, Shinkansen excluded, against the city's N03 ward polygons): **PASSES.** All three subway lines are 100% inside, and Nishitetsu Kaizuka 9 of 10. JR and Nishitetsu Tenjin-Ōmuta are cut at the line as intended. The two-station Hakata-Minami line keeps only Hakata, which is served anyway: drop it.
+
 ## Scope
 
 **Fukuoka City (7 wards).** JR and Nishitetsu run on to Kasuga, Ōnojō and

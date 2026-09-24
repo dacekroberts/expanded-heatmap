@@ -593,10 +593,17 @@ brief names.
     `pipeline/countries/japan_register.py` (20 definitions). The script now
     imports it and keeps only the measurement. Identical output on all 24
     city and ward keys, with Minato at 99.8%.
-  - [ ] Stage 2: `pipeline/countries/japan.py` (national facts: the MLIT URL
-    templates, N02, the per-city ward codes and projected CRS), the 営業の種類
-    taxonomy module and its registry entry. The three owner calls above decide
-    two of its rules (菓子製造業 / そうざい製造業; rail). **Osaka is the recommended
+  - [x] **Stage 2 (2026-09-24)**: `pipeline/countries/japan.py` (N02 without
+    the Shinkansen, N03 city lines, ISJ templates, ward codes and EPSG,
+    `stub_test()`) and `pipeline/taxonomies/japan_eigyo.py`, registered as
+    `japan_eigyo`: 19 ordered rules with import-time checks. Over 229,504 fixed
+    premises in ten lists: Food service 76.4%, food-only Retail 18.2%, out 5.3%.
+    Every one of the 125 fall-through values is manufacturing, processing or
+    the 0.04% catch-all. **Main can now start Osaka**
+    (`add-city`, `pipeline/osaka/`), reading the join, the facts and the
+    taxonomy from the shared modules.
+  - [ ] Owner, minor: アイスクリーム類製造業 (692 rows; many are gelato
+    counters) is OUT for now, since the owner's call named 菓子 and そうざい. **Osaka is the recommended
   first build**: the cleanest list, 99.1% block, 38 m against the city's own
   coordinates.
 - [~] **Japan — three owner calls that recur in all five briefs.**
@@ -617,9 +624,17 @@ brief names.
   lesson (CNEFE rules v2): words chosen from a sample of unmatched rows rescued
   14.7% of that sample but 3.5% of all rows. **Measure a rule's yield on a
   FRESH sample**, never the one it was chosen from.
-- [ ] **Tokyo** — buildable now as 8 wards (owner). The page names the wards
-  with no published list. Owner action: request Chiyoda's ledger
-  (即時公開請求, a CD-R for ¥100).
+- [x] **Japanese build order (owner, 2026-09-24): Osaka → Kobe → Sapporo →
+  Fukuoka → Tokyo LAST.** The stub test cleared the first four: every urban
+  line keeps 80–100% of its stations inside the city line. Tokyo failed, with
+  Chiyoda missing from the centre of its 8 wards. Tokyo goes last as the
+  densest, and it benefits most from a Japan skill written off the first four.
+- [ ] **Tokyo — the missing wards as a planned project, before its build.**
+  Chiyoda alone lifts urban station coverage from 45% to 56%; Chiyoda,
+  Toshima and Bunkyō reach 67%; all 23 wards reach 98% (`tokyo.md`).
+  Routes: request Chiyoda's ledger (owner, gated item 22); extract Ōta's,
+  Kita's and Arakawa's PDF lists; Shinagawa's and Itabashi's partial files;
+  requests to Toshima, Nerima and Edogawa.
 - [ ] **Fukuoka** — agree the wording that discloses the ~20% of restaurants
   with no published address. BODIK is flaky, so `fetch_sources.py` retries.
 - [x] **No pre-build items**: Seoul (its brief is deliberately partial, and

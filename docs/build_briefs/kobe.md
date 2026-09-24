@@ -67,6 +67,8 @@ Kobe Municipal Subway, Port Liner, Rokkō Liner, JR West, Hankyu, Hanshin,
 Sanyo, Kobe Electric — all in N02. ⚠️ Stations are LineStrings — centroid
 them. ⚠️ Open: the Shinkansen (Shin-Kobe). See `docs/commuter_rail_list.md`.
 
+**✅ Stub test, measured 2026-09-24** (`pipeline/countries/japan.py` `stub_test()`: N02 stations, Shinkansen excluded, against the city's N03 ward polygons): **PASSES.** The subway (Seishin, Yamate, Kaigan, Hokushin) and the Port Liner and Rokkō Liner are 100% inside. Kobe Electric's Arima line is 15 of 15, Sanda 7 of 10, Ao 8 of 20. JR, Hankyu, Hanshin and Sanyō are cut at the line as intended. ⚠️ Two mountain funiculars (Maya, Rokkō) are in N02, and whether they are drawn is a build call (Barcelona drew its funiculars; Toulouse's cable car was the owner's call).
+
 ## Scope
 
 **Kobe City (9 wards)**. The JR / Hankyu / Hanshin corridor runs on to
