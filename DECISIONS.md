@@ -16,7 +16,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**260 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**261 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
@@ -25,6 +25,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 **2026-09-23**
 
+- [Stray downloads in the main checkout's root filed](#2026-09-23---stray-downloads-in-the-main-checkouts-root-filed)
 - [Label check runs at phone width; Milan's shop-sign share; lille retired](#2026-09-23---label-check-runs-at-phone-width-milans-shop-sign-share-lille-retired)
 - [Kaohsiung's data hosts are geo-blocked to Taiwan, not down; stays in Band B](#2026-09-23---kaohsiungs-data-hosts-are-geo-blocked-to-taiwan-not-down-stays-in-band-b)
 - [Every Band A city has a brief: seven Brazilian and three Taiwanese written, all checks passing live](#2026-09-23---every-band-a-city-has-a-brief-seven-brazilian-and-three-taiwanese-written-all-checks-passing-live)
@@ -302,6 +303,29 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Stray downloads in the main checkout's root filed
+
+- **Rio's Decreto nº 38.879/2014 is stored in `docs/licenses/`, with its
+  source recorded as UNVERIFIED; data.taipei's user manual goes to the
+  gitignored `data/taipei/raw/`.** Both PDFs were saved to the main
+  checkout's root at 16:45 by download prompts the owner answered away from
+  the desktop, and nothing in the repository referenced either. Identified by
+  their text: the decree constitutes Rio's Sistema Municipal de Informações
+  Urbanas (SIURB) - the legal basis of the *Termo de Uso do SIURB.RIO* whose
+  liability clause the owner accepted today - so it is a terms document and
+  belongs with the others. It is stored unaltered as
+  `rio-decreto-38879-siurb.pdf`, SHA-256 `64db5ecd...6583d`, in a new Brazil
+  section. **The prompt did not record its URL**; the README names SIURB's
+  documents listing as the likely source and says it is not verified,
+  instead of writing a URL no one fetched. The 38-slide *資料大平臺網站使用手冊*
+  (January 2025) is a how-to for the portal, not terms, and
+  `docs/licenses/README.md` stores only terms kept "for compliance
+  reference" - so it goes where CLAUDE.md puts probe captures, which are
+  never committed. `check_provenance.py --strict` passes with the new hash.
+  A third PDF, PID's logo manual (Prague), arrived at 17:59 while this ran
+  and was left in place for the Staging Session, which was active and whose
+  Prague research it most likely belongs to.
 
 ### 2026-09-23 - Label check runs at phone width; Milan's shop-sign share; lille retired
 
