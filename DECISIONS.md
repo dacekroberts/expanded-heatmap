@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**278 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**279 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [The oslo worktree retired; prague's empty folder kept](#2026-09-24---the-oslo-worktree-retired-pragues-empty-folder-kept)
 - [A check that every map was rendered by the current renderer; the zoom-lag worktree retired](#2026-09-24---a-check-that-every-map-was-rendered-by-the-current-renderer-the-zoom-lag-worktree-retired)
 - [Prague back in Band A: establishments from ROS02 open data + RES activity; RŽP rejected on GDPR; the paused control was mis-specified](#2026-09-24---prague-back-in-band-a-establishments-from-ros02-open-data-res-activity-ržp-rejected-on-gdpr-the-paused-control-was-mis-specified)
 - [Two checks closed: the macro map's controls, and clones leaking into %TEMP%](#2026-09-24---two-checks-closed-the-macro-maps-controls-and-clones-leaking-into-temp)
@@ -320,6 +321,20 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - The oslo worktree retired; prague's empty folder kept
+
+- **Retired `.claude/worktrees/oslo` and deleted `oslo-build`, on the owner's
+  word that Oslo was finished.** Checked first: 0 commits outside master (last
+  `7875bcc`, "Oslo deployed"), a clean tree, no links anywhere in the folder,
+  and no `data/<city>` cache that the main checkout lacked. The Main Building
+  Session confirmed it had launched in the main checkout and now works in
+  `copenhagen`, so no session held the folder. `git worktree remove` completed
+  in one pass, with no long-path stop despite the folder's own `.venv-lean`.
+  **`.claude/worktrees/prague` is kept on the owner's instruction.** It is an
+  empty folder, unregistered with git and with no branch, left by an
+  interrupted session. Prague has since been re-upgraded to viable by
+  staging's research, so a build may use that folder again.
 
 ### 2026-09-24 - A check that every map was rendered by the current renderer; the zoom-lag worktree retired
 
