@@ -1457,7 +1457,7 @@ the tier is stale.
 | 🇮🇹 Italy | **1** | Rome | A | Rome build-ready, with a build check; Turin discarded (its series stops in 2019); Naples and Messina back in the open gap |
 | 🇫🇷 France | **5** | — | — | **Complete** — Rennes built 2026-09-23. Lyon discarded |
 | 🇨🇿 Czechia | — | **1** — Prague | A | ▶ **Back in A 2026-09-24**: establishments from ROS02 (open data) + RES activity, RÚIAN join; restaurant control 1.63x like-for-like |
-| 🇩🇰 Denmark | **1** | — | — | **Copenhagen built 2026-09-24**; the national modules are ready for a second city. The Datafordeler account closes after publish |
+| 🇩🇰 Denmark | **1** | — | — | **Copenhagen built 2026-09-24**; the national modules are ready for a second city. ✅ **Closed out**: published, and the Datafordeler account closed after publish (2026-09-24) |
 | 🇭🇰 Hong Kong | — | **1** | A | Build; indemnity accepted; map-region call |
 | 🇳🇴 Norway | **1** | — | — | **Oslo built 2026-09-24**; the national modules are ready for a second city |
 | 🇰🇷 South Korea | — | **1** — Seoul | A | Build, but its brief is **deliberately partial** — seven Step-0 items undone |
