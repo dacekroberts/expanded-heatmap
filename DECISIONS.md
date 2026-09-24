@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**300 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**301 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Japan's maps will draw JR and private commuter railways (owner)](#2026-09-24---japans-maps-will-draw-jr-and-private-commuter-railways-owner)
 - [The Datafordeler account is closed](#2026-09-24---the-datafordeler-account-is-closed)
 - ["Commuter rail is excluded everywhere" retired: Copenhagen's S-tog made it two exceptions](#2026-09-24---commuter-rail-is-excluded-everywhere-retired-copenhagens-s-tog-made-it-two-exceptions)
 - [Copenhagen deployed; the live site measured after the reboot](#2026-09-24---copenhagen-deployed-the-live-site-measured-after-the-reboot)
@@ -342,6 +343,22 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Japan's maps will draw JR and private commuter railways (owner)
+
+- **Owner's decision: include commuter rail in all ten Japanese cities** - JR
+  and the private railways as well as the subways. The standing rule excludes
+  commuter rail everywhere; Dublin's DART and Copenhagen's S-tog were kept as
+  decisions on metro-like spacing inside the city, and Japan is the largest
+  case of the same question, since in Japanese cities these lines carry much
+  of the city's own traffic. Rejected: subways only, which would draw a
+  fraction of the network riders actually use. Rail geometry is already solved
+  (MLIT N02: 10,235 stations, 21,932 segments, every JR company, PDL 1.0).
+  Left for the build: whether intercity-only services (Shinkansen, lines with
+  limited-express service only) count; the decision covers the commuter
+  network. `docs/excluded_categories.md` must name Japan beside Dublin and
+  Copenhagen when the first Japanese city is published. Touched
+  `docs/commuter_rail_list.md`.
 
 ### 2026-09-24 - The Datafordeler account is closed
 
