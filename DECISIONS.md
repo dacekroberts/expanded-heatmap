@@ -16,7 +16,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**263 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**264 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
@@ -25,6 +25,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 **2026-09-23**
 
+- [The licence-read agent runs the stray-download check before reporting](#2026-09-23---the-licence-read-agent-runs-the-stray-download-check-before-reporting)
 - [A check for downloads that land in a checkout's root](#2026-09-23---a-check-for-downloads-that-land-in-a-checkouts-root)
 - [Line labels no longer run off the map at phone width](#2026-09-23---line-labels-no-longer-run-off-the-map-at-phone-width)
 - [Stray downloads in the main checkout's root filed](#2026-09-23---stray-downloads-in-the-main-checkouts-root-filed)
@@ -305,6 +306,23 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - The licence-read agent runs the stray-download check before reporting
+
+- **All three root downloads are filed, and the agent that caused one now
+  has to look for them.** The Main Building Session confirmed PID's logo
+  manual came from its `licence-read` run on PID's GTFS terms. The agent had
+  reported "nothing was saved through the browser". The file is reference
+  material, not terms: logo variants and a clear-space rule, while the
+  operative logo clause is on PID's web page, already quoted in
+  `docs/build_briefs/prague.md`. So it went to the gitignored
+  `data/prague/raw/` with a `SOURCE.txt` beside it recording
+  `https://pid.cz/wp-content/uploads/loga-2021/Logo-PID_logomanuál.pdf` and
+  its SHA-256. `check_stray_downloads.py`'s OK path then ran for the first
+  time: no stray files at the root of 5 checkouts. `.claude/agents/licence-read.md`
+  now requires the agent to run that check before reporting, and to list
+  every file it names with the exact URL it came from. That is the step
+  whose absence cost the Rio decree its source.
 
 ### 2026-09-23 - A check for downloads that land in a checkout's root
 
