@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**260 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**261 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Prague paused at Step 0: RES is a register of seats, not of shops](#2026-09-24---prague-paused-at-step-0-res-is-a-register-of-seats-not-of-shops)
 - [France deployed: the deferred deploy-verify passed, and phone-width labels clip](#2026-09-24---france-deployed-the-deferred-deploy-verify-passed-and-phone-width-labels-clip)
 - [Rennes' gate 3 confirmed against STAR's own layer after the quota reset](#2026-09-24---rennes-gate-3-confirmed-against-stars-own-layer-after-the-quota-reset)
 
@@ -302,6 +303,62 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Prague paused at Step 0: RES is a register of seats, not of shops
+
+- **Prague's business leg failed the premises test the brief never ran, and
+  the owner paused the build there.** RES (ČSÚ's register of economic
+  subjects) records a subject's registered seat, not where it trades - which
+  the 2026-09-22 country screen had already written down for ARES ("Company
+  register, registered seat") while noting that RŽP's *provozovny* were "the
+  thing to chase and was not reached". The brief then built on RES without
+  closing it. Measured at the build on 85,022 active Prague rows in CZ-NACE
+  47/56/96: the **restaurant control reads 8.02x** OpenStreetMap (NACE 5610*
+  20,829 against `amenity=restaurant` 2,596 inside obec 554782, node+way with
+  `out center`) where France's premises register reads 1.26-1.80x on the same
+  shape; **767 registrants share one address** (Rybná 716/24, 668 of them
+  s.r.o. - a virtual office), 44 addresses hold 50 or more, and s.r.o.
+  companies sit 31.5% at addresses with ten or more of their kind; and
+  **67.9% of rows are `FORMA 101` sole traders**, located at their seat -
+  usually home - under the owner's own name. On RES the map would be
+  accountants' mailboxes and people's homes, failing both the project's
+  premise and its privacy invariant, and no filter repairs it: dropping sole
+  traders removes most real small shops and leaves company seats that are
+  still seats.
+
+- **Owner's call: pause, and hand the staging session the one question that
+  decides it** - whether RŽP's *provozovny* (establishments, with a location
+  address and an activity) exist in bulk. The screen found only a per-IČO
+  lookup. Rejected: building on RES anyway (a map of registrations, not
+  shops); switching to Oslo or Copenhagen in Prague's place was offered and
+  the owner chose to pause Prague and move on to Oslo as a separate build.
+  Prague leaves Band A for the open screening gap in the master list (A 17 ->
+  16, candidates 33 -> 32, open gap 3 -> 4).
+
+- **Everything else was measured, and banked in the brief so a resumed build
+  starts where this one stopped.** Brief checks re-run 10/10, five of them new.
+  - **Rail: PID's own GTFS, not OSM** - the brief checked only Golemio's keyed
+    API, Madrid's failure in its general form. `data.pid.cz/PID_GTFS.zip` is
+    keyless, 50 MB, carries `shapes.txt` and self-attests (ROPID, 2026-09-23 to
+    2026-10-06). Metro per line A 16, B 24, C 20, matching OSM's
+    `network=Pražské metro` relations exactly; all 60 station-line pairs sit
+    inside obec 554782 (ČÚZK INSPIRE AU, 496.2 km²).
+  - **Owner's calls, taken before the pause:** draw **metro A, B, C only**
+    (trams are a dense overlay on the metro here, and the funicular, ferries
+    and S-trains go on the standing rules, as in Paris); and **draw Flora,
+    disclosed** - closed for reconstruction since 1 February 2026 and due to
+    reopen at the turn of November and December (DPP's release of 23. 01.
+    2026), with a step-1 assertion to stop the build once the feed serves it
+    again.
+  - **PID's licence read: CC BY 4.0, permitted with conditions** - credit
+    ROPID, state the changes (a third transformation disclosure after ČSÚ's and
+    ČÚZK's), link the licence and the open-data page, on the station CSV too;
+    no PID/ROPID/IDSK logos. Nothing owed as an act.
+  - **The employee filter is withdrawn.** ČSÚ's own codebook 579 defines
+    `KATPO` `000` as *Neuvedeno*, NOT STATED, with "no employees" a separate
+    code (`110`, 29.8%); and `000`'s legal-form mix (68.3% sole traders)
+    matches the whole set's (67.9%). The brief's "the Czech column genuinely
+    discriminates" is false - it is France's `NN` again.
 
 ### 2026-09-23 - Label check runs at phone width; Milan's shop-sign share; lille retired
 
