@@ -102,6 +102,7 @@ TAXONOMY_MODULES = {
     # reaches all of them. Keyed at the sous-classe, Barcelona's shape: the
     # groupe level puts 49.4% of Paris in "other" against 19.3% at level 5.
     "france_naf": "pipeline.taxonomies.france_naf",
+    "norway_sn2025": "pipeline.taxonomies.norway_sn2025",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

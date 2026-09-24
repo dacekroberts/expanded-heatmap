@@ -138,6 +138,14 @@ REGISTRIES = {
     "lille": dict(raw=None, trade=None, owner=None,
                   processed="businesses_clean.csv",
                   address=("business_name",)),
+    # Oslo: Enhetsregisteret's sub-units. NO owner column is loaded, but the
+    # risk is not zero by construction the way France's is: a sub-unit's own
+    # `navn` IS its owner's name for ~89% of sole traders (ENK parent). The
+    # guard is norway_register.py's rule - an ENK row shows its ADDRESS, never
+    # its name - so this check measures whether that rule held.
+    "oslo": dict(raw=None, trade=None, owner=None,
+                 processed="businesses_clean.csv",
+                 address=("business_name",)),
     # Rennes, the fifth and last French city on the same shared step 2: the
     # same structural guarantee. Its premises-name rate is the best of the
     # five at 59.1%.

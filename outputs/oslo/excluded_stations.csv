@@ -1,0 +1,13 @@
+stop_id,station,lines,reason,latitude,longitude
+NSR:StopPlace:3963,Avløs,2/3/5,"in Bærum (3201), outside kommune 0301",59.913107499999995,10.548349
+NSR:StopPlace:3808,Bekkestua,2/3/5,"in Bærum (3201), outside kommune 0301",59.9172545,10.58989
+NSR:StopPlace:3693,Eiksmarka,2,"in Bærum (3201), outside kommune 0301",59.9469625,10.6231675
+NSR:StopPlace:4007,Gjettum,3,"in Bærum (3201), outside kommune 0301",59.9085155,10.530621
+NSR:StopPlace:3861,Gjønnes,2/3/5,"in Bærum (3201), outside kommune 0301",59.9150565,10.5800895
+NSR:StopPlace:3908,Haslum,2/3/5,"in Bærum (3201), outside kommune 0301",59.915069,10.564383
+NSR:StopPlace:4051,Hauger,3,"in Bærum (3201), outside kommune 0301",59.911108999999996,10.510051
+NSR:StopPlace:3659,Jar,2/3/5,"in Bærum (3201), outside kommune 0301",59.9258285,10.618418
+NSR:StopPlace:4060,Kolsås,3,"in Bærum (3201), outside kommune 0301",59.9142415,10.501389
+NSR:StopPlace:3700,Lijordet,2,"in Bærum (3201), outside kommune 0301",59.941123000000005,10.616626
+NSR:StopPlace:3779,Ringstabekk,2/3/5,"in Bærum (3201), outside kommune 0301",59.920125,10.604385
+NSR:StopPlace:3726,Østerås,2,"in Bærum (3201), outside kommune 0301",59.939410499999994,10.608843
