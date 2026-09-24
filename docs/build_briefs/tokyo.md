@@ -6,6 +6,8 @@ method is the `address-join` skill; the measurement is
 `scripts/screen_japan_join.py`. **This brief is deliberately PARTIAL on
 coverage** — see *Scope*, which is the owner's call before a build.
 
+**✅ Decided by the owner, 2026-09-24, for every Japanese city:** (1) **the Shinkansen does not count**, since it is long-distance travel between cities; (2) **the city line only**: only stations inside the city get rings, matching the city-only permit list, with a per-line stub test at build (any urban line cut to a stub goes back to the owner); (3) **菓子製造業 and そうざい製造業 count**, in the Retail bucket (bakeries, confectioners and delis sell over a counter), with the factory and central-kitchen share measured from trade names before publishing. Open items below that ask these questions are answered. **Tokyo's own scope** was decided the same day: the 8 wards now, with the missing wards named on the page and the owner requesting Chiyoda's ledger (`docs/gated_access.md` item 22).
+
 ---
 
 ## The one-line summary
@@ -192,7 +194,7 @@ run `check_personal_exposure.py`.
 - 🚩 **Scope**: which wards, and how the gap is stated. Decided after the wards' own sites are read (owner, 2026-09-24).
 - ⚠️ Shinjuku's 2023 vintage: a newer file on the ward's own page? (Used with its vintage disclosed if not.)
 - ⚠️ The Economic Census control's figures (the source is decided); the wards whose own sites are being read.
-- ⚠️ Shinkansen / limited-express-only lines; which N02 lines are "commuter".
+- ✅ decided 2026-09-24 (owner): see the block at the top (Shinkansen out). ⚠️ Still open: limited-express-only lines, and which N02 lines are commuter.
 - ⚠️ Meguro's registers (BODIK) and Nakano's food file (a vendor map host) — deferred.
 
 ```brief-checks

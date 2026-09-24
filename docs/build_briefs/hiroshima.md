@@ -5,6 +5,8 @@
 Coordinates: the `address-join` skill, measured by
 `scripts/screen_japan_join.py hiroshima` and `hiroshima-mhlw`.
 
+**✅ Decided by the owner, 2026-09-24, for every Japanese city:** (1) **the Shinkansen does not count**, since it is long-distance travel between cities; (2) **the city line only**: only stations inside the city get rings, matching the city-only permit list, with a per-line stub test at build (any urban line cut to a stub goes back to the owner); (3) **菓子製造業 and そうざい製造業 count**, in the Retail bucket (bakeries, confectioners and delis sell over a counter), with the factory and central-kitchen share measured from trade names before publishing. Open items below that ask these questions are answered.
+
 ---
 
 ## The one-line summary
@@ -121,7 +123,7 @@ and the address, never any operator column. MHLW's file carries 法人名,
 
 - ⚠️ **Whether the city's dataset-level PDL 1.0 covers the full-list file**: the owner's call, or one question to the city (both licences are read: PERMITTED WITH CONDITIONS).
 - ⚠️ **Band**: food service plus partial food retail, with no personal services. Band C's shape: the owner's call.
-- ⚠️ The ~14% with no published address; whether trams count; scope; the Shinkansen.
+- ⚠️ The ~14% with no published address; whether trams count. (✅ decided 2026-09-24 (owner): see the block at the top: city line only; Shinkansen out.)
 - ⚠️ The Economic Census food control.
 
 ```brief-checks
