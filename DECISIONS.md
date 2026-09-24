@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**258 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**259 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [France deployed: the deferred deploy-verify passed, and phone-width labels clip](#2026-09-24---france-deployed-the-deferred-deploy-verify-passed-and-phone-width-labels-clip)
 - [Rennes' gate 3 confirmed against STAR's own layer after the quota reset](#2026-09-24---rennes-gate-3-confirmed-against-stars-own-layer-after-the-quota-reset)
 
 **2026-09-23**
@@ -300,6 +301,53 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - France deployed: the deferred deploy-verify passed, and phone-width labels clip
+
+- **The city-scoped `deploy-verify` the owner deferred to the last French city
+  ran before Rennes merged, and every in-scope step passed.** Scope
+  `city-added`, widened at step 5 because it was the run the four earlier
+  French cities' verification had been held for. It ran against the Rennes
+  worktree at `bcea784` through two temporary worktree-pointing launch.json
+  entries, since the default configurations serve the main checkout, which
+  was on master without Rennes - a false pass the default would have produced.
+  Lean-venv start clean; all 25 pages load with no error block; the Europe
+  view holds 9 cities with every name legible at 1280, 768 and 375; the Rennes
+  dot and name both open its page; caption, notice 26, legend and switcher
+  correct. `check_map_view.js` on fresh loads: Rennes 13.5/13.5 at the embedded
+  width three times and 12.25/12.25 at phone width twice, Paris 12.5,
+  Marseille 12.75, Toulouse 12.5, Lille 11.75 - every one as expected, **0
+  corrections on every load**, so the fit race never fired. The OSM credit was
+  covered at 0 of 5 probe points at 1000x650, 1024x768, 1280x812 and 375x812.
+
+- **Live after the reboot, measured on the map object:** the deployed Rennes
+  page renders its title, caption and STAR notice with no error block; zoom
+  13.5 against 13.5 at the embedded 1000px, and 12.25 against 12.25 at 375
+  (map frame 343px), both with 0 corrections. The Overview lists Rennes and
+  reads "Europe (9)", which is the rebooted `app/cities.py` rather than a
+  cached one.
+
+- **Found outside the checks asked for: line labels clip at phone width, and
+  the check that should see it cannot.** In the app at 375px Rennes' "Métro b"
+  label spans x 315-366 of a 343px frame - about 45% cut, "Métr" on screen.
+  Paris's "Ligne 10" (4px) and Marseille's "Tramway 1" (33px) clip the same
+  way on the live site already; Toulouse and Lille are clean.
+  `check_map_labels.js` runs only at 854 and 1280, and forced to 375 it
+  reports Rennes' fully visible "Métro a" as out of view. **Owner's call:
+  ship Rennes and hand the class to the cleanup role** - a phone-width check
+  first, with the false positive fixed so it does not cry wolf, and any change
+  to label placement handed on to app/chrome, which owns `map_common.py`. A
+  per-city label override was rejected: it would fix one of three clipped
+  labels and leave the check blind.
+
+- **Two merges of master during the gate, both caught by the fetch before the
+  push.** The second brought a band summary table in the master list still
+  reading A 18 (+10 built) and 34 candidates - staging's count from before
+  Rennes left Band A, merged without a conflict and so invisible to conflict
+  resolution; corrected to 17 (+11) and 33. Neither incoming batch touched
+  `app/` or `pipeline/`, so `check_deploy_imports` at `bcea784` (PROBLEMS 0)
+  still covered the push. Reboot required and done: the push changed
+  `app/cities.py` and `app/components.py`.
 
 ### 2026-09-23 - Kaohsiung's data hosts are geo-blocked to Taiwan, not down; stays in Band B
 

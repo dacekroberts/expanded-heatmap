@@ -753,9 +753,9 @@ French pattern. **Scope is the one thing decided city by city, on one
 measure: the worst line's station survival inside the commune.** Lille's
 tram kept 3 of 36 and it went regional; Toulouse's T1 kept 13 of 25 and
 Rennes' Métro b 11 of 15, and both stayed commune-only. SIRENE is one
-national file, so regional is a wider filter, never a new source. **Rennes
-is built but not merged:** the city-scoped `deploy-verify` deferred until the
-last French city runs before it reaches master.
+national file, so regional is a wider filter, never a new source. **All
+five are deployed**; the city-scoped `deploy-verify` deferred to the last
+French city ran before Rennes merged, and passed.
 
 **The macro map is regional, and a region is whatever groups cities into one
 readable view** - not a country. They are United States (a COMPOSITE of West

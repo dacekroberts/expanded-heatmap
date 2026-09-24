@@ -21,60 +21,15 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [~] **🇫🇷 FRANCE — ALL FIVE BUILT: Paris, Marseille, Toulouse, Lille
-  (Regional) and Rennes. Rennes does not merge until the city-scoped
-  `deploy-verify` has run - the deferral below ends here.**
-
-  ✅ **Paris** built and deployed 2026-09-23 (22 cities live).
-  ✅ **Marseille** built and deployed 2026-09-23, 18,177 storefronts,
-  66 stations, gate 3 passing against AMP's own layer.
-  ✅ **Toulouse** built 2026-09-23 on `toulouse-build`, 8,635 storefronts,
-  48 stations, **gate 3 exact on all four lines** against Tisséo's own
-  `arrets-itineraire` layer. First city here to draw a **non-rail mode** (the
-  Téléo cable car, owner's call). Its brief's case for that turned out to be
-  false and was corrected in place — see DECISIONS.md.
-  ✅ **Lille (Regional)** built 2026-09-23 on `lille-build`, 11,833
-  storefronts, 91 stations across the **eleven communes the network serves**
-  - the first regional French city, owner's call. Its rail answer turned out
-  to be three sources: MEL's WFS for every station and the tram lines, OSM
-  for the métro lines only, and ilévia's GTFS not read at all. Gate 3 exact
-  on all four lines against OSM.
-  ✅ **Rennes** built 2026-09-23 on `rennes-build`, 3,479 storefronts,
-  24 stations, **commune-only by owner's call** after its brief's "the métro
-  is city-contained" turned out half wrong: Métro b keeps 11 of 15 stations
-  and loses both termini. Gate 3 exact on both lines against STAR's own
-  per-line stop layer, confirmed after its portal's domain-wide quota reset;
-  OSM agrees.
-
-  **What remains before Rennes merges:** the city-scoped `deploy-verify`
-  (below), `check_map_view.js` on the Rennes page at embedded and phone
-  width, then the publish gate - and a REBOOT after the push, since
-  `app/cities.py` and `app/components.py` both change.
-
-  **THE DEFERRAL IS THE OWNER'S CALL (2026-09-23) AND IT IS A SCOPE DECISION,
-  NOT AN OVERSIGHT.** `deploy-verify` is city-scoped work: a `city-added` run
-  costs a real slice of a session and re-verifies the whole app each time. Run
-  once, after the last French city, it covers all five for roughly the cost of
-  one — and every check it does not do is already covered per city by
-  `check_provenance`, `check_macro_labels`, `check_personal_exposure`,
-  `check_deploy_imports` and a browser render, all of which ran for both cities
-  built so far.
-  ⚠️ **What this defers is the ONE THING those cannot see**: the app running as
-  a whole under the lean venv with a real click path. So the last French city
-  does not merge until that run happens, and a French city reaching master
-  before then is the thing to stop.
-
-  **What city three inherits, and what it does not.** Inherits: the country
-  module, `france_naf`, the shared national parquet cache, the shared
-  `france_register.py` step 2, the Lambert-93 grid, the Milan-hybrid naming and
-  the catch-all verdict (measured twice now, 9.8% vs 9.6% on `96.09Z`). Does
-  NOT inherit: the scope decision, the ring edges, the spacing floor, gate 3's
-  source, and the OSM control — each measured per city, and each having
-  produced a different answer at least once.
-
-  ⚠️ **Lille has no first-party metro line geometry** (its brief found tram
-  geometry and no metro), so its rail leg is not Paris's or Marseille's and
-  needs its own answer before it starts.
+- [x] **🇫🇷 FRANCE — COMPLETE AND DEPLOYED 2026-09-23: Paris, Marseille,
+  Toulouse, Lille (Regional) and Rennes, all live.** The city-scoped
+  `deploy-verify` the owner deferred to the last French city ran before Rennes
+  merged and passed; the live site was checked after the reboot. See
+  `DECISIONS.md`, *"France deployed: the deferred deploy-verify passed"*.
+  **Carried forward, not closed:** line labels clip at phone width (Rennes'
+  Métro b, Paris's Ligne 10, Marseille's Tramway 1) - handed to the cleanup
+  role as a CHECK first (`check_map_labels.js` never runs at phone width, and
+  misreports at 375), with any placement fix going to app/chrome.
 
 - [ ] **🇫🇷 PARIS — ✅ BUILT AND DEPLOYED 2026-09-23. Kept for the checklist
   below, which the follower cities still read.**
