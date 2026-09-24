@@ -46,6 +46,8 @@ if hasattr(sys.stdout, "reconfigure"):   # "Montréal" is unprintable under cp12
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "app"))
 from cities import (  # noqa: E402
     CITIES,
+    DEFAULT_FRAME,
+    DEFAULT_REGION,
     REGION_MEMBERS,
     REGIONS,
     cities_in,
@@ -202,14 +204,43 @@ def fit_view(lats, lons, west_pad=0.12):
 
 
 def region_view(region):
-    """Centre and zoom exactly as app/Overview.py computes them."""
-    here = region["cities"]
+    """Centre and zoom exactly as app/Overview.py computes them: the landing
+    region borrows DEFAULT_FRAME's frame, and every frame but that one is
+    re-centred."""
+    frame = DEFAULT_FRAME if region["name"] == DEFAULT_REGION else region["name"]
+    here = cities_in(frame)
     lats, lons = [c["lat"] for c in here], [c["lon"] for c in here]
     centre_lat, centre_lon, zoom = fit_view(lats, lons)
-    if region["name"] != "United States":       # Overview.py's re-centring block
+    if frame != DEFAULT_FRAME:                  # Overview.py's re-centring block
         centre_lat = (max(lats) + min(lats)) / 2
         centre_lon = (max(lons) + min(lons)) / 2
     return centre_lat, centre_lon, zoom
+
+
+def scored_labels(region, clat, clon, zoom):
+    """Which cities' pills this region is held to.
+
+    A region labels its own cities and is scored on all of them. THE LANDING
+    VIEW IS THE EXCEPTION (owner's decision 2026-09-24, see DEFAULT_REGION in
+    cities.py): it labels every city on the planet at the United States zoom,
+    so on a wide screen Europe and South America pile up at the right-hand
+    side. The owner accepted that; each has its own region, scored in full.
+
+    So the landing view is held to the cities whose MARKERS fall on the
+    phone-width canvas, the frame fit_view is sized for. That is North
+    America today, decided by the arithmetic and not by a list, so a city
+    built inside that frame is scored here without anyone remembering to add
+    it.
+    """
+    if region["name"] != DEFAULT_REGION:
+        return {c["name"] for c in region["cities"]}
+    cw = CANVAS[375]
+    out = set()
+    for c in CITIES:
+        x, y = project(c["lat"], c["lon"], clat, clon, zoom, cw, CANVAS_H)
+        if 0 <= x <= cw and 0 <= y <= CANVAS_H:
+            out.add(c["name"])
+    return out
 
 
 def project(lat, lon, centre_lat, centre_lon, zoom, w, h):
@@ -314,7 +345,8 @@ def main():
             # 2026-09-23 - see Overview.py for the measurement that ended the
             # composite's exemption. `region["cities"]` already resolves a
             # composite to its members, so this needs no special case.
-            labelled = {c["name"] for c in region["cities"]}
+            # The landing view is the one exception - see scored_labels().
+            labelled = scored_labels(region, clat, clon, zoom)
             markers, placed = [], []
             for city in CITIES:
                 x, y = project(city["lat"], city["lon"], clat, clon, zoom, cw, CANVAS_H)

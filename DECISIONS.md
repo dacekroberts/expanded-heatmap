@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**348 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**349 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [The macro map lands on "Global", which labels every city (owner)](#2026-09-24---the-macro-map-lands-on-global-which-labels-every-city-owner)
 - [Three of Tokyo's eight food lists are partial; a per-ward table for Japan](#2026-09-24---three-of-tokyos-eight-food-lists-are-partial-a-per-ward-table-for-japan)
 - [Meguro's personal-services registers joined: 1,412 premises at 100% block](#2026-09-24---meguros-personal-services-registers-joined-1412-premises-at-100-block)
 - [Overview's city list grouped by country too (owner)](#2026-09-24---overviews-city-list-grouped-by-country-too-owner)
@@ -390,6 +391,51 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - The macro map lands on "Global", which labels every city (owner)
+
+- **The front page opens on a new "Global" region**, first in the selector.
+  It labels all 39 cities and opens at exactly the United States frame
+  (zoom 1.4525, same centre).
+  - **Before**: the landing view was the "United States" region, and a
+    region labels only its own cities since 2026-09-23. The first impression
+    silently carried no name for Canada, Mexico, Europe or South America.
+  - **Owner's reasoning**: every city cannot be framed at once, so a label
+    beyond the opening frame is fine. The label limit belongs to the regions a
+    reader chooses. "United States" is now one of those and keeps its own
+    labels only.
+- **Measured before building.** With every city labelled at the US frame:
+  - **North America is clean** apart from one pair (below).
+  - **Europe and South America are NOT off-screen at wider widths.** At
+    1200 px Europe's 14 cities render as a cluster at the right edge: 22 pill
+    overlaps and 17 pills covering another city's dot.
+  - **Shown to the owner**, who chose to label everything anyway: each
+    region's own view lays those cities out cleanly at its own zoom.
+- **Los Angeles's label moved from dy 26 to 24.** Global labels Guadalajara at
+  LA's zoom, and the two pills overlapped 68.5 x 1.1 px: the same abutment
+  accepted once before, on 2026-09-22. Moving the label cleared it outright,
+  so no accepted-overlap entry was added.
+- **`check_macro_labels.py` models Global.**
+  - **Scoring**: Global borrows `DEFAULT_FRAME`'s frame and is held to the
+    cities whose markers fall on the phone-width canvas. That set is North
+    America, derived from the arithmetic rather than listed.
+  - **Result**: 9 regions x 3 widths, PROBLEMS 0.
+  - **Positive control**: the 1.1 px pair failed it in all three widths
+    before the move.
+- **Not in this change**: renaming each city map's "All cities" button to
+  "Global View", which the owner also asked for.
+  - **Why**: it lives in `pipeline/map_common.py`, so every map must be
+    re-rendered.
+  - **Clash**: the Rotterdam branch already carries an unpushed 39-map
+    re-render. A second one here would conflict with it file for file.
+  - **So**: it goes with that re-render, with the app-side "All cities"
+    wording changed at the same time. Until then the old wording stays
+    everywhere, so the site never names the same thing two ways.
+  - **Keep the hidden link**: the text "All cities" in
+    `components.render_city_nav()` must survive that rename. Every
+    already-rendered map finds the Overview link by that text, and a map
+    that failed to find it would list the renamed link as a city in its
+    menu.
 
 ### 2026-09-24 - Three of Tokyo's eight food lists are partial; a per-ward table for Japan
 
