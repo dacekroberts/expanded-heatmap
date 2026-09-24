@@ -486,6 +486,35 @@ Desktop is unaffected — the label is fully visible there.
   official layer on ArcGIS. Any of these needs a proper per-portal check before
   being written off.
 
+### 🇯🇵 Japan — the plan (2026-09-24; evidence in `docs/global_country_shortlist.md`)
+
+Ten cities; JR and private railways INCLUDED (owner, 2026-09-24). Measurement:
+`scripts/screen_japan_join.py`. Deferred downloads are listed by domain in the
+evidence section.
+
+- [x] **A. Address file** — MLIT 位置参照情報 (block + town-chōme) per
+  municipality. The Address Base Registry MOVED (`dataset.address-br.digital.go.jp`,
+  plus an official geocoder) — not needed at these rates.
+- [x] **B. Minato control join** — 99.8% of fixed premises at block level.
+- [x] **C. Privacy** — individuals' names withheld at source (Minato: 12 of 5,721).
+- [~] **D. Coverage** — Tokyo done ON ONE METHOD (Tokyo's CKAN): food files for
+  4 of 23 wards, personal services 11. The nine other cities: in progress.
+  - [ ] **Second method for the 16 wards without a food file — their own
+    sites, central wards first (Chiyoda, Shibuya, Toshima).**
+- [x] **E. Downloads (Tokyo)** — 60 files, 12.2 MB, in bounds.
+- [x] **F. Join (Tokyo)** — food 99.3% block on 24,297; personal services
+  98.8–99.8%; independent check median 22–43 m. OSM control Shinjuku 6.02×.
+  - [ ] Like-for-like control against the Economic Census per-ward 飲食店 count.
+- [x] **G. Buckets** — food everywhere published; personal services in 11
+  wards; food retail only where 届出 are published (Chūō, Kōtō). No general retail.
+- [ ] **Owner: scope** — a Tokyo map needs its central wards; a "core wards"
+  regional scope that states the gap, or wait for the second method.
+- [ ] **Owner: band** — Japan's coordinate step is solved; re-band on coverage.
+- [ ] **Licences** — `licence-read` on the permit datasets (CC BY 4.0
+  declared), MLIT 位置参照情報, and each ward's register.
+- [ ] **Rail** — MLIT N02 with JR and private lines; decide intercity-only
+  services (Shinkansen, limited-express-only).
+
 ### Brief-ready, not started — ordered checklists, 2026-09-23
 
 **These five have a brief with passing checks and no item here until now.**
