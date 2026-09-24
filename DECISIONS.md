@@ -16,7 +16,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**261 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**262 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
@@ -25,6 +25,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 **2026-09-23**
 
+- [Line labels no longer run off the map at phone width](#2026-09-23---line-labels-no-longer-run-off-the-map-at-phone-width)
 - [Stray downloads in the main checkout's root filed](#2026-09-23---stray-downloads-in-the-main-checkouts-root-filed)
 - [Label check runs at phone width; Milan's shop-sign share; lille retired](#2026-09-23---label-check-runs-at-phone-width-milans-shop-sign-share-lille-retired)
 - [Kaohsiung's data hosts are geo-blocked to Taiwan, not down; stays in Band B](#2026-09-23---kaohsiungs-data-hosts-are-geo-blocked-to-taiwan-not-down-stays-in-band-b)
@@ -303,6 +304,59 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Line labels no longer run off the map at phone width
+
+- **Owner's call, and an exception to `docs/session_roles.md`: the cleanup
+  session fixed this in `pipeline/map_common.py`.** That file belongs to
+  app/chrome, and cleanup owns no pipeline logic. The owner routed the
+  placement fix here rather than to the new zoom-lag session, which was told
+  to build on it and not to touch label placement or `PHONE_FIT_SCRIPT`.
+  Recorded so the edit is not read as a role breach.
+
+- **A label that would be cut by the frame now slides inward, just far
+  enough, while its line's tip is on screen. The view does not change.**
+  `LABEL_CLAMP_SCRIPT` runs on every moveend/zoomend/resize from each
+  label's baked transform, so slides never accumulate. It keeps 6px from
+  every edge and clears the basemap credit's strip at the bottom. The label
+  div gains class `hm-line-label` so the script finds it without matching on
+  inline style. **`PHONE_FIT_SCRIPT`, its guard, `PAD`, `BOUNDS` and zoomSnap
+  are untouched.** Across all 25 re-rendered maps, `BOUNDS` and the whole fit
+  script are byte-identical to HEAD once Folium's random ids are normalised.
+  Nothing else changed but the class and the new script, and every
+  `baseline.json` figure is unchanged. **Before: 35 of 155 labels clipped at
+  375px and 33 at 343px, in 22 of 25 cities. After: 0 at 375, 343, 854 and
+  1280 across all 25 (100 loads).** `check_map_view.js`, unmodified, passes
+  on every load with 0 guard corrections. Label/label overlaps at phone width
+  total 28, the same as before.
+
+- **Rejected after building and measuring it: zooming out until every
+  label's text fits.** A `narrowView()` inside `PHONE_FIT_SCRIPT` took
+  fitBounds' own view when every label box fitted there, and otherwise
+  stepped out a quarter level at a time. It also removed every clip, but it
+  took New York from 9.5 to 8.75 at 343px: Staten Island Railway on the west
+  and Lexington Av on the east reach 90px and 88px past their anchors. A
+  screenshot showed the city as a small knot of stacked labels, and
+  overlapping pairs across the 25 cities rose from 28 to 49 (Barcelona 1 to
+  6, New York 3 to 9 at 343). It also meant changing the guard's expected
+  zoom and re-deriving it in `check_map_view.js`. Reverted before commit.
+  **Clipping is solved by moving the few labels that clip, not by shrinking
+  the whole map.**
+
+- **`check_map_labels.js` now also refuses a label drawn over the basemap
+  credit.** `check_map_attribution.js` hit-tests the credit with
+  `elementFromPoint`, which cannot see a line label (labels are
+  `pointer-events: none`), so this case had no check. It was watched failing
+  with a positive control: a Rennes label moved onto the credit came back
+  "over the basemap credit: Métro a". Writing it exposed the gap it now
+  guards: the first version of the slide kept labels 6px from the bottom
+  edge, while the credit strip is 14px tall.
+
+- **Still open, and pre-existing rather than caused by this change:** label
+  overlaps at phone width in seven cities, and labels under the theme button
+  or legend. Those are Barcelona's L11 at 375, Edmonton at 375 and 343, San
+  Diego's Blue Line at 375, and Montréal's Ligne 1 at 854, which the pre-fix
+  map shows identically. They are in `PLAN.md`.
 
 ### 2026-09-23 - Stray downloads in the main checkout's root filed
 

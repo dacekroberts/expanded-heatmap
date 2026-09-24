@@ -6,9 +6,9 @@
 //
 // Checks: every line label (the bold 14px divs inside .leaflet-marker-icon;
 // the numeric cluster badges are ignored) is inside the map box, clear of the
-// open legend, and not overlapping another line label; each label has a legend
-// row; the legend collapses and re-expands; and the Dark Mode button is in
-// view and flips and restores the theme.
+// open legend and of the basemap credit, and not overlapping another line
+// label; each label has a legend row; the legend collapses and re-expands; and
+// the Dark Mode button is in view and flips and restores the theme.
 //
 // RUN IT AT A PHONE WIDTH AS WELL AS A DESKTOP ONE - 375 standalone, and 343,
 // which is the map frame's width inside the app on a 375 phone. Until
@@ -130,8 +130,15 @@ if (!found) {
                `(${view.mapW}), so the phone fit was NOT exercised - run at 375 ` +
                `and 343 as well`);
   }
+  // The basemap credit must stay visible (ODbL; CLAUDE.md). check_map_attribution.js
+  // hit-tests it with elementFromPoint, which cannot see a line label - labels
+  // are pointer-events: none - so a label drawn over the credit is caught here.
+  // Mattered from 2026-09-23, when labels began sliding inward to stay on screen.
+  const att = doc.querySelector('.leaflet-control-attribution');
+  const attRect = att && att.getBoundingClientRect();
   for (const l of labels) {
     if (overlaps(l.r, legendRect)) problems.push(`under legend: ${l.text}`);
+    if (attRect && attRect.width && overlaps(l.r, attRect)) problems.push(`over the basemap credit: ${l.text}`);
     if (!legendText.includes(l.text)) problems.push(`no legend row: ${l.text}`);
   }
   for (let i = 0; i < labels.length; i++)

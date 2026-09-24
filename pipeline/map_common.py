@@ -713,6 +713,77 @@ PHONE_FIT_SCRIPT = """
 })();
 </script>
 """
+# KEEPS EVERY LINE LABEL INSIDE THE FRAME, by sliding it - never by zooming.
+#
+# A label's text reaches up to ~220px past the anchor at its line's tip, and
+# PHONE_FIT_SCRIPT fits the ANCHORS (with 26px of padding), so on a phone a
+# label at the tail of an outlying line ran off the frame: 22 of 25 cities,
+# 35 of 155 labels at 375px and 33 at 343px, measured 2026-09-23 by
+# scripts/check_map_labels.js - Rennes' "Métro b" cut to "Métr" in the app.
+#
+# Zooming out until every label fitted was built and measured first, and
+# rejected: it removed every clip but took New York from 9.5 to 8.75 at 343px,
+# shrinking the city to a knot of stacked labels, and raised overlapping label
+# pairs across the 25 cities from 28 to 49. Sliding keeps the view exactly
+# as it was - zoom, centre, PHONE_FIT_SCRIPT and its guard are untouched - and
+# moves only a label that would otherwise be cut, only as far as it must, and
+# only while its line's tip is on screen: once a reader pans the tip away, the
+# label leaves with it, as it always did.
+#
+# Re-run on every moveend/zoomend/resize, from the label's baked transform, so
+# a slide never accumulates. The measurement is the label box relative to its
+# own 0x0 icon plus latLngToContainerPoint, which stays right even when a
+# hidden page has not redrawn its markers yet.
+LABEL_CLAMP_SCRIPT = """
+<script>
+(function () {
+    var NAME = "__MAP_NAME__";
+    var MARGIN = 6;     // px kept between a label's text and the frame edge
+    var tries = 0;
+
+    function clamp(m) {
+        var size = m.getSize();
+        if (!size.x || !size.y) return;
+        // Never slide a label ONTO the basemap credit, which must stay
+        // visible (ODbL). The credit is a strip along the bottom edge, so the
+        // bottom limit clears its height as well as MARGIN.
+        var att = m.getContainer().querySelector(".leaflet-control-attribution");
+        var bottom = size.y - MARGIN - (att ? att.getBoundingClientRect().height : 0);
+        m.eachLayer(function (layer) {
+            if (!layer._icon || !layer.getLatLng) return;
+            var d = layer._icon.querySelector(".hm-line-label");
+            if (!d) return;
+            if (d.dataset.base === undefined) d.dataset.base = d.style.transform;
+            d.style.transform = d.dataset.base;
+            var i = layer._icon.getBoundingClientRect();
+            var r = d.getBoundingClientRect();
+            if (!r.width) return;
+            var p = m.latLngToContainerPoint(layer.getLatLng());
+            if (p.x < 0 || p.y < 0 || p.x > size.x || p.y > size.y) return;
+            var x0 = p.x + (r.left - i.left), x1 = p.x + (r.right - i.left);
+            var y0 = p.y + (r.top - i.top), y1 = p.y + (r.bottom - i.top);
+            var dx = Math.max(0, MARGIN - x0) - Math.max(0, x1 - (size.x - MARGIN));
+            var dy = Math.max(0, MARGIN - y0) - Math.max(0, y1 - bottom);
+            if (dx || dy) {
+                d.style.transform = d.dataset.base + " translate(" +
+                    dx.toFixed(1) + "px, " + dy.toFixed(1) + "px)";
+            }
+        });
+    }
+
+    function start() {
+        var m = window[NAME];
+        if (!m || !m.getSize) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        m.on("moveend zoomend resize viewreset", function () { clamp(m); });
+        clamp(m);
+    }
+    start();
+})();
+</script>
+"""
 LEGEND_ROW = """
   <div style="display:flex; align-items:center; margin:3px 0;">
     <span style="display:inline-block; width:11px; height:11px;
@@ -1063,7 +1134,7 @@ def add_line_label(feature_group, tip, label, color):
             icon_size=(0, 0),
             icon_anchor=(0, 0),
             html=f"""
-            <div style="
+            <div class="hm-line-label" style="
                 position: absolute; left: 0; top: 0;
                 transform: translate(-50%, -50%) translate({dx:.1f}px, {dy:.1f}px);
                 font-size: 14px; font-weight: bold; color: {color};
@@ -1724,6 +1795,10 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
              max([float(stations["longitude"].max())] + [float(t[1]) for t in tips.values()])],
         ]))
     ))
+    # Anchors are fitted above; the labels' TEXT is kept inside the frame by
+    # sliding it, not by zooming. See LABEL_CLAMP_SCRIPT.
+    m.get_root().html.add_child(folium.Element(
+        LABEL_CLAMP_SCRIPT.replace("__MAP_NAME__", m.get_name())))
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     m.save(str(output_path))
