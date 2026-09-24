@@ -193,6 +193,14 @@ SLUG_OVERRIDES = {
     "Washington D.C.": "washington_dc",
     "Montréal": "montreal",
     "Mexico City": "mexico_city",
+    # Brazil: accents dropped from the package name, and the regional pages'
+    # suffix, as for Lille.
+    "São Paulo": "sao_paulo",
+    "Brasília": "brasilia",
+    "Fortaleza (Regional)": "fortaleza",
+    "Porto Alegre (Regional)": "porto_alegre",
+    "Recife (Regional)": "recife",
+    "Santos (Regional)": "santos",
 }
 
 # A city's rows may name it differently from its page title - Vancouver's are

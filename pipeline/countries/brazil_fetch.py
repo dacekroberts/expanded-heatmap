@@ -40,9 +40,14 @@ def _mtime(path):
             .isoformat(timespec="seconds") + " (cache file time)")
 
 
-def _record(prov, key, path, url, retrieved):
+def _record(prov, key, path, url, retrieved, last_modified=None):
+    # last_modified is the server's Last-Modified header - for a CNEFE zip,
+    # the date IBGE published the file, which each page's caption shows.
+    last_modified = last_modified or prov.get(key, {}).get("last_modified")
     prov[key] = {"file": path.name, "url": url, "bytes": path.stat().st_size,
                  "sha256": _sha256(path), "retrieved": retrieved}
+    if last_modified:
+        prov[key]["last_modified"] = last_modified
 
 
 def fetch(url, dest, magic, prov, key, force, timeout=3600):
@@ -56,13 +61,15 @@ def fetch(url, dest, magic, prov, key, force, timeout=3600):
     tmp = dest.with_suffix(dest.suffix + ".part")
     req = urllib.request.Request(url, headers=HEADERS)
     with urllib.request.urlopen(req, timeout=timeout) as r, open(tmp, "wb") as fh:
+        last_modified = r.headers.get("Last-Modified")
         while chunk := r.read(1 << 22):
             fh.write(chunk)
     if magic and not tmp.read_bytes()[:len(magic)].startswith(magic):
         tmp.unlink()
         sys.exit(f"  {dest.name}: wrong magic bytes - not the file asked for")
     tmp.replace(dest)
-    _record(prov, key, dest, url, datetime.now(timezone.utc).isoformat(timespec="seconds"))
+    _record(prov, key, dest, url, datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            last_modified)
     print(f"  {dest.name:44s} {dest.stat().st_size:13,} bytes downloaded")
 
 

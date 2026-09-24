@@ -34,9 +34,12 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     Santos Linha 2 drawn with its hours.
   - [x] Owner: all nine pages' text, notices 38-39, the OSM credit and the
     exclusions sections approved as drafted.
-  - [ ] Pages 31-39, notices, `cities.py` (South America), docs, re-render,
-    ONE `deploy-verify` for the batch, `check_deploy_imports`, fetch, push,
-    reboot, live check.
+  - [x] Pages 31-39, notices 38-39 and the OSM credit, `cities.py` (South
+    America, labels scored PROBLEMS 0), docs, master merged, re-rendered on
+    the current renderer (Rome's title too) - DECISIONS, "Brazil's nine
+    cities to the app".
+  - [ ] ONE `deploy-verify` for the batch, `check_deploy_imports`, fetch,
+    push, reboot, live check.
   - [ ] AFTER PUBLISH: remove the `sao-paulo-*-tmp` launch entries.
 
 - [x] **🇳🇱 AMSTERDAM - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro

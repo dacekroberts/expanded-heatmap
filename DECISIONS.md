@@ -16,10 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**330 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**332 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Brazil's nine cities to the app: text approved, five calls taken, pages 31-39](#2026-09-24---brazils-nine-cities-to-the-app-text-approved-five-calls-taken-pages-31-39)
+- [Rome deployed; the live site measured after the reboot](#2026-09-24---rome-deployed-the-live-site-measured-after-the-reboot)
 - [MHLW's permit-system terms stored with the licences; its 2026 amendment flagged](#2026-09-24---mhlws-permit-system-terms-stored-with-the-licences-its-2026-amendment-flagged)
 - [Kyoto rebuilt from its permit stream; Band A decided, pending four join rules](#2026-09-24---kyoto-rebuilt-from-its-permit-stream-band-a-decided-pending-four-join-rules)
 - [Phone-width label placer verified and pushed](#2026-09-24---phone-width-label-placer-verified-and-pushed)
@@ -372,6 +374,95 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Brazil's nine cities to the app: text approved, five calls taken, pages 31-39
+
+- **The owner approved every draft and all five batch calls as recommended**
+  ("all recommendations are approved and good to build out to deploy"). The
+  drafts were the eight cities' page text (São Paulo's was approved earlier),
+  notice 39, the OpenStreetMap credit clause and the exclusions sections. The
+  five calls:
+  - **Rio's SuperVia Belford Roxo line: OUT.** Stations 1.8 km apart, every
+    15 minutes at peak, 7 of 15 with no metro nearby. Line 9 passed at the
+    same spacing, but on trains every 4 to 7 minutes.
+  - **Rio's Santa Cruz line: OUT.** 2.1 km apart, Metromare's spacing, though
+    20 of 23 of its stations have no metro nearby, the widest coverage of any
+    line tested.
+  - **Fortaleza's Parangaba–Mucuripe VLT: OUT.** 1.2 km apart, but every 40
+    minutes where the city's own metro runs every 20. Drawing it would be one
+    config line.
+  - **Fortaleza's and Recife's regional scopes: KEPT.** Caucaia and Cabo
+    count for their businesses and have no drawn station, since their only
+    lines failed the rail test. This is Guadalajara's precedent run the other
+    way. Dropping them was the rejected alternative.
+  - **Santos's VLT Linha 2: DRAWN**, with its 9h–15h assisted-operation
+    hours stated on the page, as Belo Horizonte's peak-only Linha 2 is.
+- **Pages 31-39 come from one template** (São Paulo first, then Rio, Belo
+  Horizonte, Brasília, Salvador, Fortaleza, Porto Alegre, Recife, Santos).
+  Every page shares the approved census paragraphs, with one figure changed per
+  city. Two mechanical changes were made to the approved wording: "About almost
+  half" became "Almost half" in Porto Alegre and Santos, and Brasília's hyphen
+  became a dash.
+- **Each caption reads its dates from `provenance.json`, which had not
+  recorded IBGE's file date.** HEAD requests (no bodies) on all 21 CNEFE zips
+  returned 200, byte counts identical to the cached files, and a Last-Modified
+  of **2024-05-20** on every one. The date went into each city's provenance
+  as `last_modified`, and `brazil_fetch.py` and São Paulo's fetch now record
+  it on every download. São Paulo's provenance also gained `osm_rail` and
+  `osm_train` records from its cache files' times, as the other eight already
+  had.
+- **The site's notices and credit:** notice 38, IBGE (Brazil), covers all nine
+  cities. Notice 39, IPP / DATA.RIO (Rio), meets CC BY 4.0's requirement to
+  state the change. The OpenStreetMap credit now names each Brazilian city's
+  lines and its município boundaries.
+- **`app/cities.py` gains nine entries in a new "South America" region**
+  (owner's name, chosen so another country on the continent joins it). Label
+  widths were measured in the app's own document, with eleven existing entries
+  reproduced exactly. At the region's fitted zoom (3.04), São Paulo and Santos
+  sit 6 px apart and Rio 40 px east. So São Paulo's label runs west (`end`,
+  -11), Rio's east (`start`, 11) and Santos's below (+22). `check_macro_labels.py`
+  scores PROBLEMS 0, with one report: Porto Alegre is clipped 5% at phone
+  width, the same class as Guadalajara. The first screenshot seemed to show
+  Porto Alegre's label on top of Santos's. It was taken mid-transition; at
+  rest the view matches the model.
+- **Docs:** `docs/excluded_categories.md` gains nine sections in São Paulo's
+  shape. The eight's counts come from re-running their step 2, which
+  reproduced every committed output. The unreadable figure is `unmatched` plus
+  `catch-all`, as in São Paulo's. The station-scope section now names the
+  Brazilian commuter lines left out and the three that passed. Also updated:
+  `docs/commuter_rail_list.md` (five cities now draw commuter rail),
+  `docs/city_master_list.md` (39 built across 12 countries; Band A 11),
+  `docs/project_context.md` and the `brazil-city` skill.
+- **Merged master (52 commits: Rome, Amsterdam, the phone-width label
+  placer, Japan's modules).** DECISIONS.md was resolved by
+  `merge_append_only.py`. The conflicts in the taxonomy registry and in
+  `data_sources.md` were resolved as a union, and PLAN's by hand.
+  `check_city_registry.py` counts 39 entries and 39 pages, one to one. This
+  time no dict fused, but the check now exists to catch it.
+- **Rome's map now names Roma–Viterbo**, owed since the owner's call to draw
+  it. `SYSTEM` became "Metro and Roma–Viterbo", but that only prefixes line
+  layers that are hidden from the layer control, so re-rendering changed
+  nothing visible. The name a reader sees is `map_title`, the base layer's
+  label, which now reads "Rome Metro and Roma–Viterbo Business Density
+  Heatmap". Rome and the nine were re-rendered on the current renderer. Ring
+  counts were unchanged, and `check_render_current.py` passes all 39 maps.
+- **`check_provenance.py` learned the six Brazilian display names that do not
+  reduce to a package name** (São Paulo, Brasília and the four regional
+  pages). Before that, they had dropped out of the CRS check rather than
+  failing it. The master list's built table is keyed by macro-map region, so
+  Brazil's row is "South America (9)". São Paulo's train-station WFS URL is
+  now written out in full in `data_sources.md`; it had been "the same with
+  `estacao_trem`", which the check cannot match. `check_provenance.py`:
+  all recorded.
+
+### 2026-09-24 - Rome deployed; the live site measured after the reboot
+
+- **Rome is live, checked after the owner's reboot at about 10:28 PDT.** The
+  title and caption were correct: premises as of July 2025, house numbers
+  2026-09-15, rail retrieved 2026-09-24. The legend showed Metro A, B, B1 and C
+  and Roma–Viterbo. The zoom was 11.5 at the 1000x650 frame. Notices 36 and 37
+  and the OpenStreetMap Rome clause were shown, with no exceptions, and the
+  Overview read Europe (14). The `rome-*-tmp` launch entries were removed.
 
 ### 2026-09-24 - MHLW's permit-system terms stored with the licences; its 2026 amendment flagged
 

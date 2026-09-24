@@ -197,3 +197,23 @@ Santo Agostinho 2602902 + Camaragibe 2603454 · bbox (-8.40, -35.15, -7.92, -34.
    Notice "IBGE (Brazil)" is ONE notice for every Brazilian city.
 4. Merge master, re-render on the current renderer (`check_render_current.py`),
    one `deploy-verify` over the batch, fetch, push, reboot, live check.
+
+## How the batch came out (2026-09-24) - for the next Brazilian city
+
+- **The pages are generated**, from one template holding the census paragraphs
+  (São Paulo's approved wording, one figure changed per city). A further city
+  copies its neighbour's page and changes the rail paragraph, the unreadable
+  share and the closing sentence - not the census paragraphs.
+- **The caption reads its dates from `provenance.json`**: the CNEFE zip's
+  `last_modified` (IBGE's server date, 2024-05-20 for every file so far - the
+  fetch now records it on download) and the rail cache's `retrieved`.
+- **`docs/excluded_categories.md`'s section is built from the step 2 log**:
+  the classification table gives the excluded counts, and the unreadable figure
+  is `unmatched` plus `catch-all`. Keep São Paulo's shape.
+- **Macro-map labels**: São Paulo and Santos sit 6 px apart at South America's
+  fitted zoom (3.04), so São Paulo's name runs west, Rio's east and Santos's
+  below. A new city near either needs its label scored with all three.
+- **The five batch calls** (owner, 2026-09-24): Rio's SuperVia Belford Roxo
+  and Santa Cruz out; Fortaleza's Parangaba-Mucuripe VLT out; Fortaleza's and
+  Recife's regional scopes kept although Caucaia and Cabo have no drawn
+  station; Santos Linha 2 drawn with its hours stated.

@@ -35,8 +35,8 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 >
 > | | |
 > |---|---|
-> | **Built** | **30** across 11 countries *(Toulouse, Lille (Regional) and Rennes, 2026-09-23; Oslo, Copenhagen, Prague, Amsterdam and Rome, 2026-09-24)* |
-> | **Candidates** | **30**, all at least partially viable — A 20 · B 0 (closed) · C 6 · D 4 *(**Japan re-banded 2026-09-24 and the geocoding band closed** — Tokyo (8 wards), Osaka, Kobe, Sapporo and Fukuoka to A, Hiroshima to C, Sendai to D, Yokohama, Nagoya and Kyoto to the open gap; Rotterdam from the open gap to A; all owner's calls; Warsaw and Hyderabad to D 2026-09-24 from the open gap, owner's calls — each geo-blocked before measurement; Copenhagen, Prague, Amsterdam and Rome built 2026-09-24; Amsterdam to A 2026-09-24 — permits + BAG shop units, both licences read, owner's call; Amsterdam from the discards to C earlier the same night; Rome to A 2026-09-24 — SUAP premises joined to ANNCSU, owner's call with a build check; Prague back to A 2026-09-24 on open data — ROS02 establishments + RES; Kaohsiung moved from B to a reopened access-blocked band D 2026-09-23, owner's call; Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built; Prague paused to the open gap 2026-09-24)* |
+> | **Built** | **39** across 12 countries *(Toulouse, Lille (Regional) and Rennes, 2026-09-23; Oslo, Copenhagen, Prague, Amsterdam and Rome, 2026-09-24; Brazil's nine cities as one batch, 2026-09-24)* |
+> | **Candidates** | **21**, all at least partially viable — A 11 · B 0 (closed) · C 6 · D 4 *(**Brazil's nine built 2026-09-24**, leaving Band A by being built; **Japan re-banded 2026-09-24 and the geocoding band closed** — Tokyo (8 wards), Osaka, Kobe, Sapporo and Fukuoka to A, Hiroshima to C, Sendai to D, Yokohama, Nagoya and Kyoto to the open gap; Rotterdam from the open gap to A; all owner's calls; Warsaw and Hyderabad to D 2026-09-24 from the open gap, owner's calls — each geo-blocked before measurement; Copenhagen, Prague, Amsterdam and Rome built 2026-09-24; Amsterdam to A 2026-09-24 — permits + BAG shop units, both licences read, owner's call; Amsterdam from the discards to C earlier the same night; Rome to A 2026-09-24 — SUAP premises joined to ANNCSU, owner's call with a build check; Prague back to A 2026-09-24 on open data — ROS02 establishments + RES; Kaohsiung moved from B to a reopened access-blocked band D 2026-09-23, owner's call; Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built; Prague paused to the open gap 2026-09-24)* |
 > | **Open screening gap** | **9**, resting on an absence — neither candidates nor discards *(Yokohama, Nagoya and Kyoto in, Rotterdam out to A, 2026-09-24; ten left 2026-09-24 on the owner's calls after their re-probes: eight to the discards, Warsaw and Hyderabad to D)* |
 > | **Discarded** | **24**, each naming its evidence *(Kuala Lumpur, Athens, Poznań, Bratislava, Hamburg, Naples, Lima and Messina from the open gap 2026-09-24, owner's calls after their re-probes; an audit moved 12 single-method rows to the open gap and Amsterdam to Band C, 2026-09-24; the evidence check moved 5 more the same night)* |
 >
@@ -63,7 +63,7 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 > next build, or the next licence read changes it, and the counts in the table
 > below are the ones to trust over any prose that repeats them.
 
-## Built — 30
+## Built — 39
 
 | Country | Cities |
 |---|---|
@@ -71,6 +71,7 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 | **Canada** (5, complete) | Vancouver *(with Surrey)* · Montréal · Calgary · Edmonton · Toronto |
 | **Mexico** (2) ✅ | **Mexico City** · **Guadalajara (Regional)** — built 2026-09-22, live in the app |
 | **Europe** (14) ✅ | 🇪🇸 **Madrid** · **Barcelona** · 🇮🇪 **Dublin (Regional)** · 🇮🇹 **Milan** · **Rome** · 🇫🇷 **Paris** · **Marseille** · **Toulouse** · **Lille (Regional)** · **Rennes** · 🇳🇴 **Oslo** · 🇩🇰 **Copenhagen** · 🇨🇿 **Prague** · 🇳🇱 **Amsterdam** — **Rome built 2026-09-24**, Italy's second (`pages/30_Rome_Heatmap.py`; **98,897 storefronts, 87 stations**, Metro A, B, B1 and C and the Roma–Viterbo urban service, comune only): Roma Capitale's SUAP premises register JOINED to ANNCSU house numbers at 95.7%, no names, and the food layer stated as an upper bound (2.67x OSM, no closing dates). **Amsterdam built 2026-09-24**, the Netherlands' first (`pages/29_Amsterdam_Heatmap.py`; **13,238 storefronts, 144 stations**, GVB metro 50–54 and 16 tram lines, gemeente only): the city's live hospitality-permit register for food, the BAG's shop-class units for everything else - one "Shops and services" category, because a building register cannot tell a hairdresser from a clothes shop - de-duplicated by address, and trams thinned with the sub-transit-line filters. **Prague built 2026-09-24**, Czechia's first (`pages/28_Prague_Heatmap.py`; **25,275 storefronts, 58 stations**, metro A, B and C): ROS02's establishments where they trade, the owner's activity from RES's CZ-NACE 2025, a RUIAN join for the point, and every natural person's or partnership's name replaced by its address - their premises at the owner's own seat left off. **Copenhagen built 2026-09-24**, Denmark's first (`pages/27_Copenhagen_Heatmap.py`; **14,978 storefronts, 64 stations**, Metro and S-tog, Copenhagen with Frederiksberg): CVR production units joined across six national files, coordinates JOINED to DAR, and every personally owned business shown by its address. **Oslo built 2026-09-24**, Norway's first city (`pages/26_Oslo_Heatmap.py`; **10,718 storefronts, 155 stations**, T-bane and trams, kommune only): an establishment register keyed on the PHYSICAL location address, coordinates JOINED to Kartverket's bulk address file, and every sole trader's name replaced by its address. the first four built and deployed 2026-09-22, Paris deployed 2026-09-23, **Marseille built and deployed the same day** (`pages/22_Marseille_Heatmap.py`; **18,177 storefronts, 66 stations**), **Toulouse** likewise (`pages/23_Toulouse_Heatmap.py`; **8,635 storefronts, 48 stations**), **Lille (Regional)** likewise (`pages/24_Lille_Heatmap.py`; **11,833 storefronts, 91 stations**) — **the first French city scoped regionally**, to the eleven communes its network serves, because the commune alone would have drawn the tram as a three-stop stub — and **Rennes built and deployed the same day** (`pages/25_Rennes_Heatmap.py`; **3,479 storefronts, 24 stations**), commune-only because its worst line keeps 11 of 15 stations, **which completes France at five cities**. **France is the first country here where the second city was materially cheaper than the first**: Marseille inherited the national register, the NAF taxonomy, the parquet cache and the Lambert-93 grid, and its own work was the scope measurement and the rail leg. That is Mexico's retrospective repeating, and the opposite of Spain's. **Toulouse made the third city cheaper again**: it downloaded nothing at all, because the 3 GB national parquet pair was already cached for the country, and its own work was one scope decision, one owner call, and a gate-3 run that matched the operator exactly on all four lines. It is also the first city anywhere here to draw a **non-rail mode** — the Téléo cable car — which was the owner's call after the brief's stated precedent for it turned out not to exist. **One macro-map region, not one per country**: Spain, Ireland and Italy were three regions holding four cities until they were collapsed the same day, which is what let France join without adding a sixth region. Spain is complete at two cities, Ireland at one, and Italy is a Milan-only country — so the countries are still the research unit, and only the MAP groups them. ⚠️ **France's own viability figure was corrected on the day Paris was built**: the recorded "50,156 storefronts, 92.5% of OSM" is not reproducible and the real ratio is about 1.78× — see `docs/build_briefs/paris.md`. France remains a build; `docs/global_country_shortlist.md`'s France row still carries the old number |
+| **South America** (9) ✅ | 🇧🇷 **São Paulo** · **Rio de Janeiro** · **Belo Horizonte** · **Brasília** · **Salvador** · **Fortaleza (Regional)** · **Porto Alegre (Regional)** · **Recife (Regional)** · **Santos (Regional)** — **built 2026-09-24 as one batch** (`pages/31`–`39`; **617,188 storefronts, 363 stations**), the first country built that way: every city to drafts, one review of all the text, one deploy check and one push. One national source, IBGE's CNEFE 2022 - the census's walk of every block, each establishment with the enumerator's description and a coordinate - read by a free-text classifier (`pipeline/taxonomies/brazil_cnefe.py`); unreadable descriptions dropped and disclosed, and only the category shown at an address that is also a home. Commuter lines went through the three-part rail test: São Paulo's CPTM Linha 9 and Rio's SuperVia Deodoro and Saracuruna drawn, the rest out. The macro map's **South America** region |
 
 ✅ **Mexico is the first country built outside North America's anglophone
 pair**, and the first where the rail leg came from **OpenStreetMap** rather
@@ -114,11 +115,11 @@ yet* with *we looked at everything and this is what is there*.
 
 | Band | What these cities ARE | Cities |
 |---|---|---|
-| 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates answered, rail answered — every remaining question is answerable inside the build | **20** *(+ 16 built)* |
+| 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates answered, rail answered — every remaining question is answerable inside the build | **11** *(+ 25 built)* |
 | ~~🟠 **B**~~ | ~~**Geocoding at national scale.**~~ **CLOSED 2026-09-24**: Japan's address work was a join, so the condition stopped being true of all ten | **0** |
 | 🟣 **C** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **6** |
 | 🔴 **D** | **Access blocked by the publisher.** Screening complete, the file exists and is measured; the publisher's own access control is the only thing stopping it, so it is unblocked by ASKING, not by probing *(Warsaw and Hyderabad, 2026-09-24: blocked before measurement — a read from inside the country first; Sendai, 2026-09-24: the city's permission)* | **4** |
-| | **Candidates** | **30** |
+| | **Candidates** | **21** |
 | *Open gap* | Unscreened — a row resting on an absence, so not a discard | *9* |
 | *Discarded* | Measured negative, evidence named | *24* |
 
@@ -204,12 +205,10 @@ results in the sweep.
 
 ---
 
-## 🟢 Band A — ready to build (20 ready + 16 ✅ BUILT)
+## 🟢 Band A — ready to build (11 ready + 25 ✅ BUILT)
 
-**The twenty:** Seoul · Hong Kong — **each with a brief** in `docs/build_briefs/` — **nine
-Brazilian cities from one national source**: São Paulo (7/7) · Rio de Janeiro
-(8/8) · Belo Horizonte · Brasília · Recife (Regional) · Santos (Regional)
-(5/5 each) · Salvador · Fortaleza (Regional) · Porto Alegre (Regional) (4/4 each) — and **three Taiwanese cities**: Taipei (Regional) (6/6) ·
+**The eleven:** Seoul · Hong Kong — **each with a brief** in `docs/build_briefs/` — ✅ ~~nine
+Brazilian cities~~ **built 2026-09-24** (below) — **three Taiwanese cities**: Taipei (Regional) (6/6) ·
 Taichung (3/3) · Taoyuan (3/3) — ▲ **and six more on 2026-09-24**: **five Japanese cities**, Tokyo (8 wards) (7/7) ·
 Osaka · Kobe · Sapporo · Fukuoka (4/4 each), and **Rotterdam** (6/6). ✅ **Every Band A city has a brief**, and
 every brief's checks pass live *(Fukuoka's BODIK host is flaky — re-run before correcting)*.
@@ -253,6 +252,11 @@ with no door plate, most of Taipei's retail misses; and **TDX is not used**
 number).
 
 ### ▲▲ Brazil — nine cities, one census file, no geocoder (2026-09-23)
+
+✅ **ALL NINE BUILT 2026-09-24, as one batch** - see the Built table above and
+`DECISIONS.md`. The screening figures below are the screen's, kept beside the
+build as the promise it was measured against; the built counts differ because
+the build added the rules-version-2 fallback, placement and scope.
 
 **Brazil left the geocoding band by not needing a geocoder.** It was carried as
 *"CNPJ plus geocoding past Toronto's scale"*. Two measurements replaced that:

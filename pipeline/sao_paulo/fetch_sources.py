@@ -33,9 +33,14 @@ def _sha256(path):
     return h.hexdigest()
 
 
-def _record(prov, key, path, url, fetched):
+def _record(prov, key, path, url, fetched, last_modified=None):
+    # last_modified is the server's Last-Modified header - for the CNEFE zip,
+    # the date IBGE published the file, which the page's caption shows.
+    last_modified = last_modified or prov.get(key, {}).get("last_modified")
     prov[key] = {"file": path.name, "url": url, "bytes": path.stat().st_size,
                  "sha256": _sha256(path), "retrieved": fetched}
+    if last_modified:
+        prov[key]["last_modified"] = last_modified
 
 
 def fetch(url, dest, label, magic, prov, key, force, timeout=3600):
@@ -49,13 +54,15 @@ def fetch(url, dest, label, magic, prov, key, force, timeout=3600):
     tmp = dest.with_suffix(dest.suffix + ".part")
     req = urllib.request.Request(url, headers=HEADERS)
     with urllib.request.urlopen(req, timeout=timeout) as r, open(tmp, "wb") as fh:
+        last_modified = r.headers.get("Last-Modified")
         while chunk := r.read(1 << 22):
             fh.write(chunk)
     if magic and not tmp.read_bytes()[:len(magic)].startswith(magic):
         tmp.unlink()
         sys.exit(f"  {label}: wrong magic bytes - not the file asked for")
     tmp.replace(dest)
-    _record(prov, key, dest, url, datetime.now(timezone.utc).isoformat(timespec="seconds"))
+    _record(prov, key, dest, url, datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            last_modified)
     print(f"  {label:30s} {dest.stat().st_size:13,} bytes downloaded")
 
 
@@ -108,6 +115,12 @@ if __name__ == "__main__":
           timeout=300)
     print("\nOpenStreetMap:")
     prov["osm_host"] = fetch_osm(args.force)
+    # The rail caches' own times, for the page's "retrieved" date - the same
+    # record the other Brazilian cities keep (brazil_fetch.run).
+    for key, dest in (("osm_rail", config.OSM_RAIL_JSON), ("osm_train", config.OSM_TRAIN_JSON)):
+        prov[key] = {"file": dest.name,
+                     "retrieved": datetime.fromtimestamp(dest.stat().st_mtime, timezone.utc)
+                     .isoformat(timespec="seconds") + " (cache file time)"}
     config.PROVENANCE_JSON.write_text(json.dumps(prov, ensure_ascii=False, indent=2),
                                       encoding="utf-8")
     print(f"\nprovenance -> {config.PROVENANCE_JSON.name}. The steps read these files "

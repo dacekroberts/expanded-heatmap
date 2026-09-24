@@ -4,42 +4,48 @@
     "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4314902_PORTO_ALEGRE.zip",
     "bytes": 17172345,
     "sha256": "a1ce72d376ad7d122600425f2508749a85691bbed08ad5021369f45e8c89d403",
-    "retrieved": "2026-09-24T15:56:52+00:00 (cache file time)"
+    "retrieved": "2026-09-24T15:56:52+00:00 (cache file time)",
+    "last_modified": "Mon, 20 May 2024 22:54:47 GMT"
   },
   "cnefe:4304606_CANOAS.zip": {
     "file": "4304606_CANOAS.zip",
     "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4304606_CANOAS.zip",
     "bytes": 3546253,
     "sha256": "093333faa826d05b81a537497149e66b7fa69ecd9793f18cc5bce494872f9ea6",
-    "retrieved": "2026-09-24T15:56:54+00:00 (cache file time)"
+    "retrieved": "2026-09-24T15:56:54+00:00 (cache file time)",
+    "last_modified": "Mon, 20 May 2024 22:54:39 GMT"
   },
   "cnefe:4307708_ESTEIO.zip": {
     "file": "4307708_ESTEIO.zip",
     "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4307708_ESTEIO.zip",
     "bytes": 744631,
     "sha256": "f677384cffe622c24d5b36fa96fb6364facda91c6ba069d4a1840470dd3c8da3",
-    "retrieved": "2026-09-24T15:56:56+00:00 (cache file time)"
+    "retrieved": "2026-09-24T15:56:56+00:00 (cache file time)",
+    "last_modified": "Mon, 20 May 2024 22:54:42 GMT"
   },
   "cnefe:4320008_SAPUCAIA_DO_SUL.zip": {
     "file": "4320008_SAPUCAIA_DO_SUL.zip",
     "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4320008_SAPUCAIA_DO_SUL.zip",
     "bytes": 1370445,
     "sha256": "90d2fef1d06c1e64334c3cca628c98087bbdfd056fcd481eb1967d4e5e069401",
-    "retrieved": "2026-09-24T15:56:58+00:00 (cache file time)"
+    "retrieved": "2026-09-24T15:56:58+00:00 (cache file time)",
+    "last_modified": "Mon, 20 May 2024 22:54:49 GMT"
   },
   "cnefe:4318705_SAO_LEOPOLDO.zip": {
     "file": "4318705_SAO_LEOPOLDO.zip",
     "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4318705_SAO_LEOPOLDO.zip",
     "bytes": 2436268,
     "sha256": "f6630b8004d51330d6600fb9009e830ca56dafbc4cc0fbf70b9066799070fbf4",
-    "retrieved": "2026-09-24T15:57:00+00:00 (cache file time)"
+    "retrieved": "2026-09-24T15:57:00+00:00 (cache file time)",
+    "last_modified": "Mon, 20 May 2024 22:54:49 GMT"
   },
   "cnefe:4313409_NOVO_HAMBURGO.zip": {
     "file": "4313409_NOVO_HAMBURGO.zip",
     "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4313409_NOVO_HAMBURGO.zip",
     "bytes": 2739559,
     "sha256": "749ff5f68670c1337f4c07e12b2c4bec0d95f15b6b72146e3be0d056b3c85c43",
-    "retrieved": "2026-09-24T15:57:03+00:00 (cache file time)"
+    "retrieved": "2026-09-24T15:57:03+00:00 (cache file time)",
+    "last_modified": "Mon, 20 May 2024 22:54:44 GMT"
   },
   "osm_municipios": {
     "file": "osm_municipios.json",

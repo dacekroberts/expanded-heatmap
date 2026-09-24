@@ -779,6 +779,25 @@ Cities built and running end to end (pipeline, map, app page):
   service passed the spacing-and-frequency test, and Metromare, to Ostia,
   did not.
 
+- **São Paulo, Rio de Janeiro, Belo Horizonte, Brasília and Salvador, and
+  Fortaleza, Porto Alegre, Recife and Santos as regional pages** - Brazil,
+  built as one batch from one national source. Four things are their own.
+  **The register is a census, not a licence file**: IBGE's CNEFE 2022 records
+  every establishment an enumerator walked past, with a coordinate taken at
+  the address, so there is no geocoder and no join - and the pages say it is a
+  2022 picture. **The classification is free text**: IBGE did not classify the
+  establishments, so `pipeline/taxonomies/brazil_cnefe.py` reads the
+  enumerator's own words with ordered keyword rules, an edit-distance pass for
+  misspellings and a fallback list consulted only for rows nothing else
+  matched; descriptions no rule can read - mostly bare trade names, commoner
+  near stations - are dropped and disclosed, never guessed. **At an address
+  that is also a home, a dot shows only its category**, a structural rule
+  rather than a name list. And **commuter lines faced a three-part rail test**
+  - spacing, frequency, and coverage of districts no drawn line reaches -
+  which drew São Paulo's CPTM Linha 9 and Rio's SuperVia Deodoro and
+  Saracuruna lines and left the rest out. Rail is OpenStreetMap's everywhere
+  but Rio's metro, which is the city's own layer.
+
 **Canada is closed at five built cities** - Vancouver (regional, with Surrey),
 Montréal, Calgary, Edmonton and Toronto - out of six candidates screened. The
 sixth, Surrey, is not pending: it shipped inside the Vancouver regional map.
@@ -838,7 +857,7 @@ French city ran before Rennes merged, and passed.
 **The macro map is regional, and a region is whatever groups cities into one
 readable view** - not a country. They are United States (a COMPOSITE of West
 and East, and the default landing view), United States West, United States
-East, Canada West, Canada East, Mexico and Europe. Each is fitted to its own
+East, Canada West, Canada East, Mexico, Europe and South America. Each is fitted to its own
 cities, so switching region zooms as well as re-centres. A city carries exactly
 one region tag and a composite is resolved at lookup; tagging a city with a
 composite is an error the validator names. A region labels only its own cities,
@@ -872,7 +891,21 @@ paused at Prague, whose register records registered seats; the staging
 session is measuring whether the trade register's establishments can
 replace it.
 
-Next is another new country rather than a new city. New
+**Brazil is built at nine cities, and it is the first country built as a
+batch** - every city to drafts, one review of all the text, one deploy check
+and one push. The national modules (`pipeline/countries/brazil*.py`) were
+written with São Paulo; each further city was a config, its rail step and
+three thin steps. What did not transfer is the usual list: the scope (four
+regional pages, two of which keep a município with no drawn station because
+its only line failed the rail test), gate 3's source (a stale agency layer or
+Wikipedia table, corrected and recorded in three cities), and each city's
+rail. The `brazil-city` skill carries the traps, and
+`scripts/measure_rail_backbone.py` answers two of the rail test's three parts
+from cached OSM.
+
+Next is another new country rather than a new city: the owner's order after
+Brazil is Hong Kong, Taiwan, Seoul, then Japan, with a per-country skill
+written after the first Taiwanese and the first Japanese city. New
 Orleans and Seattle remain deferred, both needing decisions before code. Take
 the candidate ordering from `docs/city_master_list.md`, which is current state;
 `docs/global_country_shortlist.md` is its evidence trail, and the `add-country`

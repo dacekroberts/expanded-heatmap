@@ -4,7 +4,8 @@
     "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/53_DF/5300108_BRASILIA.zip",
     "bytes": 19814371,
     "sha256": "b263c241a5fd250716d9031d96eacca0e6a221ef614c7253028d2187ee1dfb35",
-    "retrieved": "2026-09-24T15:56:31+00:00 (cache file time)"
+    "retrieved": "2026-09-24T15:56:31+00:00 (cache file time)",
+    "last_modified": "Mon, 20 May 2024 22:55:08 GMT"
   },
   "df_estacoes_metro": {
     "file": "df_estacoes_metro.json",

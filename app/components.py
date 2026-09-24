@@ -595,7 +595,11 @@ _NOTICES = [
      "geometry of Lille's two métro lines, the per-line colours of "
      "Oslo's T-bane and tram lines, and Copenhagen's Metro and S-tog lines "
      "and stations and the municipal boundaries used to select them, "
-     "Rome's metro and Roma–Viterbo urban lines and their stations, and "
+     "Rome's metro and Roma–Viterbo urban lines and their stations, "
+     "the metro, VLT and suburban lines and stations of São Paulo (with its "
+     "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "
+     "Horizonte, Brasília, Salvador, Fortaleza, Porto Alegre, Recife and "
+     "Santos, and those cities' município boundaries, and "
      "Prague's, Amsterdam's and Rome's city boundaries, are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
@@ -895,6 +899,34 @@ _NOTICES = [
      "([anncsu.open.agenziaentrate.gov.it](https://anncsu.open.agenziaentrate.gov.it/)), "
      "used under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). They are "
      "used here to place another register's premises on the map.",
+     False),
+    # IBGE - CNEFE 2022, the establishment register behind all nine Brazilian
+    # cities. Free use by federal law (Decree 8.777/2016 art. 4, Lei
+    # 14.129/2021 art. 29), crediting the source; no wording is prescribed, so
+    # the Fonte line is IBGE's own citation form. Wording approved by the owner
+    # 2026-09-24 with São Paulo's page.
+    ("IBGE (Brazil)",
+     "Establishment data for Brazilian cities is from IBGE's Cadastro Nacional "
+     "de Endereços para Fins Estatísticos (CNEFE). Fonte: IBGE, Cadastro "
+     "Nacional de Endereços para Fins Estatísticos (CNEFE), Censo Demográfico "
+     "2022. Changes: this project sorts each establishment's recorded "
+     "description into three categories, leaves out those it cannot read, "
+     "shows only the category at addresses that are also homes, and maps the "
+     "rest by distance to stations. The categories are this project's "
+     "reading, not IBGE's, and IBGE did not produce or endorse this map.",
+     False),
+    # IPP / DATA.RIO - Rio's metro stations and lines (layers 19 and 18). CC BY
+    # 4.0 at service level (read 2026-09-23): the creator, the licence, a link,
+    # and a statement that the data was modified - CC BY 4.0 s3(a)(1)(B), not
+    # optional. Wording approved by the owner 2026-09-24.
+    ("IPP / DATA.RIO (Rio)",
+     "Metro stations and lines for Rio de Janeiro: Prefeitura da Cidade do Rio "
+     "de Janeiro / Instituto Pereira Passos (IPP), via DATA.RIO "
+     "([pgeo3.rio.rj.gov.br](https://pgeo3.rio.rj.gov.br/arcgis/rest/services/"
+     "Transporte_Trafego/Transporte_publico/MapServer)), licensed under "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Reprojected, "
+     "filtered and redrawn by this project; station rings and density figures "
+     "are this project's own analysis.",
      False),
 ]
 

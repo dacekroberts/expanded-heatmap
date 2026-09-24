@@ -4,7 +4,8 @@
     "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/33_RJ/3304557_RIO_DE_JANEIRO.zip",
     "bytes": 94594981,
     "sha256": "688e6693ebb93eac908033c238bfb1372771f49c0a6fd1ba566ea1fecfb16c91",
-    "retrieved": "2026-09-24T15:56:14+00:00 (cache file time)"
+    "retrieved": "2026-09-24T15:56:14+00:00 (cache file time)",
+    "last_modified": "Mon, 20 May 2024 22:53:43 GMT"
   },
   "rio_metro_estacoes_19": {
     "file": "rio_metro_estacoes_19.geojson",
