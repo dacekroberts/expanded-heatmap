@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**289 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**290 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Amsterdam's empty shops: not filterable per unit from open data, but measured at 4.6%](#2026-09-24---amsterdams-empty-shops-not-filterable-per-unit-from-open-data-but-measured-at-46)
 - [Amsterdam's other routes: the gated register is staff-only; BAG measured as a possible retail layer, band question left open](#2026-09-24---amsterdams-other-routes-the-gated-register-is-staff-only-bag-measured-as-a-possible-retail-layer-band-question-left-open)
 - [Discard table gets evidence columns and a check; five more rows to the open gap (owner)](#2026-09-24---discard-table-gets-evidence-columns-and-a-check-five-more-rows-to-the-open-gap-owner)
 - [GitHub repo reviewed: README brought current, LICENSE's disclaimer kept where Edmonton relies on it](#2026-09-24---github-repo-reviewed-readme-brought-current-licenses-disclaimer-kept-where-edmonton-relies-on-it)
@@ -331,6 +332,23 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Amsterdam's empty shops: not filterable per unit from open data, but measured at 4.6%
+
+- **Found no open source that marks a BAG unit empty**, answering the owner's
+  one concern about a BAG retail layer. `standvastgoed/gebouwen` (134 fields
+  per address, keyed to BAG) carries no occupancy field;
+  `energieverbruik_mra` is per neighbourhood; Locatus and the KvK hold the fact
+  per unit but are paid or staff-only (not pursued).
+- **Found the rate instead**: the city's `bbga` statistics publish Locatus's
+  vacant sales points - **660 of 14,314 on 1 January 2026, 4.6%**, 0-7% by
+  district (Centrum 4.0%, 208 of 5,001), with a rate for all 110 *wijken* and
+  465 of 545 *buurten*. So about one BAG shop in twenty is likely empty -
+  disclosable on the page, not removable from it. A per-neighbourhood discount
+  was considered and not proposed: pins would still include the empty units,
+  and no other city is adjusted that way. Band question still OPEN for the
+  owner; licences of BAG and `bbga` not read. Touched
+  `docs/city_master_list.md`, `docs/global_country_shortlist.md`.
 
 ### 2026-09-24 - Amsterdam's other routes: the gated register is staff-only; BAG measured as a possible retail layer, band question left open
 

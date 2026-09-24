@@ -637,6 +637,7 @@ never asked**, and it answers: `api.data.amsterdam.nl/v1/` lists **100 datasets*
 | **Names** | trade names (*"Taco Lindo Albert Cuyp B.V."*) |
 | **Rail** | 14 subway and 46 tram relations |
 | **A second layer? (probed 2026-09-24)** | **BAG on the same API**: **10,898** units whose use class is *winkelfunctie* (shop) and whose status is *in gebruik*, all with a point, **90% shop-only** (9,837), the rest mixed. **1.77×** OSM's 6,150 shops (nonsense-term control: 0). But BAG records what a unit is **for**, not what is there: **no name, no activity, and `feitelijkGebruik` (actual use) empty on all 10,898** — a vacant shop counts, and so does a hairdresser. Restaurants and cafés sit mostly under *bijeenkomstfunctie* (6,717 units), which the permits already cover better. **Licence not read** |
+| **How many are empty? (measured 2026-09-24)** | **No open source marks a unit empty** — the property snapshot (`standvastgoed`, 134 fields per address) has no occupancy field, energy use is published per neighbourhood only, and the per-unit sources (Locatus, KvK) are paid or staff-only. **But the rate is published**: the city's statistics (`bbga`, source **Locatus**, 1 January 2026) count **660 vacant of 14,314 sales points — 4.6%**, 0–7% by district, with a rate for all 110 *wijken* and 465 of 545 *buurten*. So empty shops are about one in twenty: disclosable, not filterable |
 | **Nothing else** | The other 97 datasets were listed in full: shopping-area polygons (`winkelgebieden`, 142), terrace tariff zones (11), B&B and mooring permits, city-owned property — **none premises-shaped** |
 
 **One bucket, and the best-maintained one in this band** — the only register
@@ -646,7 +647,9 @@ and Zurich under the same owner question.
 **OPEN (owner):** whether a use-class layer — premises by what they are built
 for, with no name or activity and vacancies included — may stand in for a
 register's retail bucket. No source of that shape has been used here, and the
-answer would also decide Rotterdam's re-probe, since BAG is national.
+answer would also decide Rotterdam's re-probe, since BAG is national. Vacancy,
+the owner's stated concern, measured at **4.6%** city-wide (Locatus via the
+city's statistics) — a rate to disclose, since no open source filters it per unit.
 
 ### 🇸🇬 Singapore — moved here from the coordinates band 2026-09-23
 

@@ -1932,6 +1932,8 @@ The batched RŽP route above was measured and then **set aside**. Measured: 100 
 
 **Amsterdam, other routes (same night).** All 100 datasets listed. The gated two are city-staff scopes in the published schema — `hr_kvk` `FP/MDW` + `HR/R`, `standbedrijven` `BSK/BEDRIJVEN` — so a request is unlikely to land. **BAG** on the same API: 10,898 *winkelfunctie* units in use (90% shop-only), 1.77× OSM's 6,150 shops, nonsense control 0 — but no name, no activity, and `feitelijkGebruik` empty on every one, so vacancies count. Nothing else is premises-shaped. Band C stands; whether a use-class layer may stand in for a retail register is OPEN for the owner.
 
+**Amsterdam, how many BAG shops are empty.** Not filterable per unit from open data: `standvastgoed/gebouwen` (134 fields per address, BAG-keyed) has no occupancy field; `energieverbruik_mra` is per neighbourhood; Locatus and KvK hold it per unit but are paid or staff-only. **The rate is published**: `bbga` indicator `BHLOCVKPLEEGSTAND` (source Locatus, 1 January 2026) — **660 vacant of 14,314 sales points, 4.6%**; by district 0–7% (Centrum 4.0%, 208 of 5,001); rates for 110/110 *wijken* and 465/545 *buurten*.
+
 #### A refinement the Korea probe produced: stations are not lines
 
 Japan's N02 carries **both** — 10,235 station points *and* 21,932 line
