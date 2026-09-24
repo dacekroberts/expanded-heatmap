@@ -11,7 +11,7 @@ the `address-join` skill, measured by `scripts/screen_japan_join.py kobe`.
 ## The one-line summary
 
 **A city-wide food-permit list (24,761 fixed premises, as of 2026-03-31)
-joined to MLIT's block-level address files at 96.5% (99.0% placed); the misses
+joined to MLIT's block-level address files at 97.1% (99.7% placed); the misses
 are mountain addresses on Rokkō-san.** Personal services 4,993. ⚠️ The list
 leaves out notification-only food businesses (届出), which the city's own page
 says; MHLW's national open data is the route to them.
@@ -48,11 +48,16 @@ MLIT files for the **9 wards** (28101 東灘, 28102 灘, 28105 兵庫, 28106 長
 
 | Tier | Food (24,761) | Personal services (4,993) |
 |---|---|---|
-| Block | **96.5%** | **97.3%** |
-| Town-chōme / 大字 centroid | 2.6% | 2.2% |
-| Unplaced | 1.0% | 0.5% |
+| Block | **97.1%** | **97.5%** |
+| Town-chōme / 大字 centroid | 2.6% | 2.3% |
+| Unplaced | 0.3% | 0.2% |
 
-*(Re-measured 2026-09-24 after Sendai's rule below: block was 95.7% / 96.3%.)*
+*(Re-measured 2026-09-24 after Sendai's rule below: block was 95.7% / 96.3%.
+Re-measured again after Kyoto's rules A–D in `japan_register.py`: block was
+96.5% / 97.3%, unplaced 1.0% / 0.5%. Rule C's known-town fallback gave the
+gain: hill addresses written without 字 (`六甲山町北六甲`) now reach their
+小字's 地番. On 20 sampled rows, GSI's address search agrees within a median of
+1 m.)*
 
 **Rules from Kobe's misses**: hill addresses name a 字 inside the 大字
 (`山田町上谷上字古々山`). **Sendai's rule placed a share of them at block

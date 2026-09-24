@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**327 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**328 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Kyoto's four join rules land in the shared module; rule C corrected before it did](#2026-09-24---kyotos-four-join-rules-land-in-the-shared-module-rule-c-corrected-before-it-did)
 - [MHLW's permit-system terms stored with the licences; its 2026 amendment flagged](#2026-09-24---mhlws-permit-system-terms-stored-with-the-licences-its-2026-amendment-flagged)
 - [Kyoto rebuilt from its permit stream; Band A decided, pending four join rules](#2026-09-24---kyoto-rebuilt-from-its-permit-stream-band-a-decided-pending-four-join-rules)
 - [Phone-width label placer verified and pushed](#2026-09-24---phone-width-label-placer-verified-and-pushed)
@@ -369,6 +370,50 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Kyoto's four join rules land in the shared module; rule C corrected before it did
+
+- **Rules A–D from Kyoto's rebuild are now in
+  `pipeline/countries/japan_register.py`, and Kyoto joins at 92.7% block, 6.0%
+  chōme, 1.3% unplaced** (food, 28,458 fixed rows; restaurants 20,760 / 1,266 /
+  280). Personal services are at 94.4 / 4.1 / 1.6% (5,828). That is the
+  prototype's 93.0 / 6.5 / 0.5% with its 237 ambiguous twin-town rows moved to
+  unplaced, as rule D intends. Two rows differ because C now runs last, after
+  the hyphen shift and the 大字 fallback, rather than first. The Minato control
+  stays at 99.8%. The before/after of all 24 keys is in the scratchpad
+  (`japan_run/rulesAD_before.txt`, `rulesAD_after.txt`).
+- **Two departures from the proposal, both measured.** First, Kyoto's
+  private-use code points for 祇 (U+E2D3, U+E014, U+E004) sit in a Kyoto-only
+  table rather than in `VARIANTS`: each publisher assigns private-use
+  characters for itself. Second, and more important, **rule C as proposed was
+  wrong outside Kyoto.** Its prefix match drops a tail that can be a 小字
+  (`六甲山町北六甲`, `五日市町上河内`), and then looked the 地番 up under the
+  bare 大字, where the numbers restart in every 小字: 110 of 五日市町's 588
+  recur in two or more. Against MHLW's own coordinates in Hiroshima, those
+  rows sat a median 2.1 km off, 29 of 58 more than 1 km away. The 大字's
+  centroid, the obvious fallback, was a median 5.2 km off. So a prefix match on
+  a 大字 that has 小字 now looks the 地番 up under 大字 + 字 + tail, the key
+  Sendai's rule already builds, or leaves the row unplaced.
+  - After the correction, suffix matches sit a median 12–27 m from publisher
+    points, and prefix block matches 30–146 m. Hiroshima's rows more than 1 km
+    off are back to 33, where they were before the rules.
+  - Kobe publishes no coordinates, so GSI's address search is the check there:
+    on 20 sampled prefix placements it agrees at a median of 1 m.
+  - Kyoto's suffix matches first looked 838 m off GSI. GSI had matched only a
+    fragment of the intersection-style address (the ward, or 八坂上町). Given
+    the stripped ward + town + 地番 form, it agreed within 0–1 m on 12 of 12.
+- **The side-effect checks came back clean.** B merges no two MLIT towns in
+  any of the 23 address sets on disk. Twin town names exist only in Kyoto (123
+  of them), so D touches no other city.
+- **These numbers moved, and the briefs and master list now carry them**:
+  - Kobe block 96.5 → 97.1% (unplaced 1.0 → 0.3%); personal services
+    97.3 → 97.5%.
+  - Sapporo 84.5 → 84.7%.
+  - Fukuoka 98.1 / 96.7 / 99.1 → 98.1 / 96.8 / 99.2%.
+  - Hiroshima 95.9 / 94.7 → 96.0 / 95.0%.
+  - Sendai: one personal-services row.
+
+  Osaka and every Tokyo ward are unchanged.
 
 ### 2026-09-24 - MHLW's permit-system terms stored with the licences; its 2026 amendment flagged
 

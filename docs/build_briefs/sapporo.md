@@ -11,8 +11,8 @@ the `address-join` skill, measured by `scripts/screen_japan_join.py sapporo`.
 ## The one-line summary
 
 **A city-wide food-permit list (24,257 fixed premises, as of 2026-03-31)
-joined to MLIT's address files: 84.5% at block level and 15.2% at town-chōme
-— and on Sapporo's 条 grid a 条丁目 IS roughly one block, so 99.7% is placed at
+joined to MLIT's address files: 84.7% at block level and 15.2% at town-chōme
+— and on Sapporo's 条 grid a 条丁目 IS roughly one block, so 99.8% is placed at
 near-block precision.** Personal services 5,993.
 
 ---
@@ -44,9 +44,13 @@ MLIT files for the **10 wards** (01101–01110).
 
 | Tier | Food (24,257) | Personal services (5,993) |
 |---|---|---|
-| Block | **84.5%** | **92.4%** |
+| Block | **84.7%** | **92.4%** |
 | Town-chōme centroid | 15.2% | 7.5% |
-| Unplaced | 0.3% | 0.1% |
+| Unplaced | 0.2% | 0.1% |
+
+*(Re-measured 2026-09-24 after Kyoto's rules A–D in `japan_register.py`: food
+block was 84.5%, unplaced 0.3%. Rule C's suffix match gave the gain: addresses
+that repeat the ward (`中央区南5条西6丁目`) now reach their town.)*
 
 **Sapporo's grid, and the rules its misses taught** (the retrospective
 predicted it): digits before **条** as before 丁目 (`南十六条西十丁目` =
