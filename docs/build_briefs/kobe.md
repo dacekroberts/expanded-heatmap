@@ -66,12 +66,24 @@ them. ⚠️ Open: the Shinkansen (Shin-Kobe). See `docs/commuter_rail_list.md`.
 Ashiya and Nishinomiya — the stations beyond the city line fall outside;
 owner's call at build.
 
-## ⏳ Licences
+## ✅ Licences — READ 2026-09-24
 
 - **MLIT 位置参照情報 — PERMITTED WITH CONDITIONS** (PDL 1.0) — the prescribed
   出典 and 「…を加工して作成」; never presented as MLIT's own.
-- **Kobe City permit data** — licence-read PENDING (catalogue "CC 表示",
-  unversioned; the city page labels files CC BY 2.1 JP).
+- **Kobe City permit data — PERMITTED WITH CONDITIONS, no owner decision.**
+  **CC BY 2.1 JP governs** (the city page's badge on each CSV; the portal
+  policy's 「表示」 links 2.1 JP and adds 「必ず神戸市の著作物あるいはデータを使用した旨を記載してください」);
+  Kobe's website terms (Government Standard Terms 2.0: 「…商用利用も可能です。」)
+  also plausibly apply and do not conflict. **MUST DISPLAY**:
+  `出典：「生活衛生関係許可施設等の情報提供」（神戸市）（https://www.city.kobe.lg.jp/a99427/kenko/health/hygiene/dataset.html）`,
+  `…を加工して作成`, the CC BY 2.1 JP link, and © City of Kobe kept intact.
+  **MUST NOT**: look as if the city made it (「あたかも本市が作成したかのような態様で…」);
+  city logos; **claim the pins are businesses currently open** (the page warns
+  closed ones may remain). **If the city asks, remove the credit** (2.1 JP
+  art. 5). **No indemnity or cost clause.** CC BY 2.1 JP bars sublicensing —
+  **already covered**: the repository's `LICENSE` (lines 27–59) limits the MIT
+  grant to the project's own code and says nothing in it permits
+  redistributing any third party's data.
 - **MLIT N02** — PDL 1.0.
 
 ## Privacy
@@ -85,7 +97,6 @@ owner's call at build.
 
 ## Still unknown
 
-- ⏳ Kobe's licence terms (and which CC BY version governs).
 - ⚠️ Notification-only businesses (届出) are missing — MHLW's national open data.
 - ⚠️ 菓子製造業 / そうざい製造業 — counter shops or not.
 - ⚠️ Stations outside the city; Shinkansen.
