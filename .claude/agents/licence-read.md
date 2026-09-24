@@ -103,3 +103,12 @@ exact.
   not defeat CAPTCHAs**: if a page is CAPTCHA-walled, say so and stop. That is
   a finding, and it has already changed a build decision.
 - **Do not resolve an ambiguity in the project's favour.** Raise it.
+- **Opening a document in the browser can SAVE it, whatever you saw.** A
+  server that sends a PDF as a download raises a save dialog, and an answered
+  dialog writes the file into the MAIN checkout's root, not your scratchpad.
+  On 2026-09-23 three files arrived that way. One run reported "nothing was
+  saved through the browser" when PID's logo manual had been. Two of the three
+  lost their source URL. So **before you report, run `python
+  scripts/check_stray_downloads.py`**. For every file it names that you
+  opened, list it under item 6 with the exact URL it came from. Do not move
+  it yourself; the caller files it.

@@ -35,8 +35,8 @@ rises, the map under-draws. The page must say so, as São Paulo's does.
 ## 🔒 Privacy — the decided rule applies unchanged
 
 At an address that also holds a dwelling, the tooltip shows the **category,
-never the description text**. On the key every other city uses that reaches **32,146 (89.7%)** of mapped rows — **an artefact of block addressing, not the city** (see Still unknown: keyed on the lot it is 58.0%); a
-first name at a dwelling address is **824 (2.3%)**.
+never the description text**. On the old street + number key that reached 32,146 (89.7%) — **an artefact of block addressing, not the city**. **Keyed on the lot (decided by the owner 2026-09-23, now in `screen_cnefe.py`) it is 24,665 (68.9%)**; a
+first name at a dwelling address is **706 (2.0%)**.
 
 ---
 
@@ -68,7 +68,7 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
 
 ## Still unknown
 
-- ⚠️ 🚨 **The dwelling test must key on the LOT here, not the door number** — MEASURED 2026-09-23. **98.5% of the "shared" rows (31,004 of 31,486) carry no door number** (`SN`/`0`): the street field names a *quadra* or *conjunto* and the unit is the `LOTE` complement, so the usual key treats a whole block as one address. Keyed on street + number + first complement (the lot), the share is **58.0%**; on the identical coordinate, **18.8%** — Recife, the control, reads 40.9% / 23.7% / 20.3% on the same three keys. **The owner's call** whether step 2's dwelling test uses the lot where the number is blank (it narrows what the privacy rule strips, from 90% of pins to about 58%)
+- ✅ **DECIDED 2026-09-23 (owner): the dwelling test keys on the LOT where the door number is blank.** 98.5% of the old key's "shared" rows carried no door number (`SN`/`0`): the street field names a *quadra* or *conjunto* and the unit is the `LOTE` complement, so street + number merged whole blocks. `screen_cnefe.py` now appends the lot when the number is blank and the first complement is `LOTE`: **68.9%** of mapped rows share a lot with a dwelling (was 89.7%). Two other keys, measured for comparison: any first complement, 58.0%; the identical coordinate, 18.8% (Recife 20.3%) — rejected as least protective, since a home and a shop on one lot can carry different points.
 - ⚠️ 9.0% of rows stand for 2+ establishments (`COD_INDICADOR_ESTAB_ENDERECO` 2/3/4)
 - ⚠️ Whether the Asa Sul / Asa Norte skew needs a better classifier before this city is worth drawing
 

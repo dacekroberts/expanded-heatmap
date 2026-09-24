@@ -1,4 +1,4 @@
-# Recife — build brief
+# Recife (Regional) — build brief
 
 **Step 0 measured 2026-09-23.** Run `python scripts/brief_check.py recife`
 before writing any code. **Read `sao-paulo.md` first** — the national facts
@@ -58,7 +58,7 @@ evidence of today's service. **Recommendation: OSM for geometry and stations
 
 ## Scope
 
-**MEASURED 2026-09-23** (OSM route members, by município): **36 stations — only 19 in Recife (53%)**, Jaboatão dos Guararapes 12, Cabo de Santo Agostinho 4 (the diesel VLT's southern end), Camaragibe 1. **Regional recommended — the owner's call.** The neighbours' CNEFE files are not yet downloaded: Jaboatão 7,528,738 B, Cabo 2,470,937 B, Camaragibe 1,592,566 B.
+**MEASURED 2026-09-23** (OSM route members, by município): **36 stations — only 19 in Recife (53%)**, Jaboatão dos Guararapes 12, Cabo de Santo Agostinho 4 (the diesel VLT's southern end), Camaragibe 1. **REGIONAL — decided by the owner 2026-09-23: Recife (Regional)** = Recife + Jaboatão dos Guararapes + Cabo de Santo Agostinho + Camaragibe. Measured the same night with `scripts/screen_cnefe.py` (lot-aware key): **Jaboatão 11,721** storefronts · **Cabo 3,908** · **Camaragibe 2,677** — **43,518 with Recife's 25,212**. Coordinate level 1 ≥ 99.6% in each; catch-all 27.1–28.5%, in line with Recife's.
 
 ## Region
 
@@ -66,7 +66,6 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
 
 ## Still unknown
 
-- ⚠️ Scope — regional recommended, **owner's call**; the neighbours' storefronts are unmeasured
 - ⚠️ The VLT's service pattern (diesel)
 - ⚠️ Why the catch-all runs highest here (29.2%) — a regional vocabulary the rules lack?
 
@@ -98,6 +97,9 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
     "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/26_PE/",
     "present": [
       "2611606_RECIFE.zip",
+      "2607901_JABOATAO_DOS_GUARARAPES.zip",
+      "2602902_CABO_DE_SANTO_AGOSTINHO.zip",
+      "2603454_CAMARAGIBE.zip",
       "2024-05-2"
     ]
   },

@@ -16,16 +16,23 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**263 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**270 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Prague: RŽP's establishments are reachable in batches through ARES v3, each with a RÚIAN code; Prague stays paused until measured](#2026-09-24---prague-ržps-establishments-are-reachable-in-batches-through-ares-v3-each-with-a-rúian-code-prague-stays-paused-until-measured)
 - [Prague paused at Step 0: RES is a register of seats, not of shops](#2026-09-24---prague-paused-at-step-0-res-is-a-register-of-seats-not-of-shops)
 - [France deployed: the deferred deploy-verify passed, and phone-width labels clip](#2026-09-24---france-deployed-the-deferred-deploy-verify-passed-and-phone-width-labels-clip)
 - [Rennes' gate 3 confirmed against STAR's own layer after the quota reset](#2026-09-24---rennes-gate-3-confirmed-against-stars-own-layer-after-the-quota-reset)
 
 **2026-09-23**
 
+- [gated_access.md: Taiwan's key gate retired, Kaohsiung's request added](#2026-09-23---gated_accessmd-taiwans-key-gate-retired-kaohsiungs-request-added)
+- [The licence-read agent runs the stray-download check before reporting](#2026-09-23---the-licence-read-agent-runs-the-stray-download-check-before-reporting)
+- [Kaohsiung moves to a reopened access-blocked band (D); Band B becomes Japan only](#2026-09-23---kaohsiung-moves-to-a-reopened-access-blocked-band-d-band-b-becomes-japan-only)
+- [A check for downloads that land in a checkout's root](#2026-09-23---a-check-for-downloads-that-land-in-a-checkouts-root)
+- [Line labels no longer run off the map at phone width](#2026-09-23---line-labels-no-longer-run-off-the-map-at-phone-width)
+- [Four Brazilian cities go regional (owner); Brasilia's dwelling test keys on the lot (owner); neighbours measured](#2026-09-23---four-brazilian-cities-go-regional-owner-brasilias-dwelling-test-keys-on-the-lot-owner-neighbours-measured)
 - [Brazil's agency rail searched for seven cities; station share per municipio measured; Brasilia's 90% is its address key; BH Line 2 is open](#2026-09-23---brazils-agency-rail-searched-for-seven-cities-station-share-per-municipio-measured-brasilias-90-is-its-address-key-bh-line-2-is-open)
 - [Stray downloads in the main checkout's root filed](#2026-09-23---stray-downloads-in-the-main-checkouts-root-filed)
 - [Label check runs at phone width; Milan's shop-sign share; lille retired](#2026-09-23---label-check-runs-at-phone-width-milans-shop-sign-share-lille-retired)
@@ -305,6 +312,192 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - gated_access.md: Taiwan's key gate retired, Kaohsiung's request added
+
+- **Row 16 (a `data.gov.tw` API key for four Taiwanese cities) moved to
+  "Closed, kept as evidence" as never needed, and Kaohsiung gets a live row
+  20: a request to 高雄市政府民政局.** Handed over by the Staging Session and
+  checked against the record. The catalogue exports whole and keyless, the
+  door-plate file is keyless, and three cities moved to the buildable band
+  (*"Taiwan is a door-plate JOIN at 92.5%"*, *"Taiwan finished"*).
+  Kaohsiung's block is a host that answers only inside Taiwan, and its way
+  through is a request, not a key (*"Kaohsiung moves to a reopened
+  access-blocked band"*). Section C's heading now reads "Free account, API
+  key or access request", since a request to a publisher is the same kind
+  of person-only gate. Nothing linked to the old heading's anchor.
+
+### 2026-09-23 - The licence-read agent runs the stray-download check before reporting
+
+- **All three root downloads are filed, and the agent that caused one now
+  has to look for them.** The Main Building Session confirmed PID's logo
+  manual came from its `licence-read` run on PID's GTFS terms. The agent had
+  reported "nothing was saved through the browser". The file is reference
+  material, not terms: logo variants and a clear-space rule, while the
+  operative logo clause is on PID's web page, already quoted in
+  `docs/build_briefs/prague.md`. So it went to the gitignored
+  `data/prague/raw/` with a `SOURCE.txt` beside it recording
+  `https://pid.cz/wp-content/uploads/loga-2021/Logo-PID_logomanuál.pdf` and
+  its SHA-256. `check_stray_downloads.py`'s OK path then ran for the first
+  time: no stray files at the root of 5 checkouts. `.claude/agents/licence-read.md`
+  now requires the agent to run that check before reporting, and to list
+  every file it names with the exact URL it came from. That is the step
+  whose absence cost the Rio decree its source.
+
+### 2026-09-23 - Kaohsiung moves to a reopened access-blocked band (D); Band B becomes Japan only
+
+- **Decided by the owner: Kaohsiung leaves the geocoding band for a live
+  access-blocked band, reopened as D.** Supersedes the earlier entry the
+  same night that kept it in Band B. Band B's caption names geocoding as
+  the unblocking work, and Kaohsiung needs none - the Taiwan join is proven
+  at 92.7-95.5% on the same file shape; what unblocks it is the publisher
+  opening a file that answers only inside Taiwan. **Rejected: the open
+  screening gap**, which the owner asked about first - that band holds rows
+  resting on an ABSENCE (never screened), and every leg of Kaohsiung is
+  measured, the block included; putting it beside Cairo would blur what the
+  gap means. **Rejected: keeping it in B under a widened caption**, which
+  would make one caption describe two kinds of work. The closed band G's
+  lesson stands and is why D is captioned differently: G's members were
+  "not yet reached properly" and all left once they were; D's member has
+  been reached every way there is, and its way through is a request, not a
+  probe. Counts: A 16 · B 10 · C 5 · D 1 = 32 candidates, unchanged.
+  Touched `docs/city_master_list.md` (counts box, band table, renumber
+  table, Band B, new Band D, the closed band's note, the by-country row) and
+  one sentence in `docs/global_country_shortlist.md` that named a letter
+  where it should name a condition.
+
+### 2026-09-23 - A check for downloads that land in a checkout's root
+
+- **`scripts/check_stray_downloads.py` lists untracked files directly in the
+  root of every checkout, and exits non-zero if it finds one.** Three PDFs
+  reached the main checkout's root today, and the Staging Session identified
+  the mechanism. They were **browser-pane downloads**: the pane saves into the
+  main checkout's root whatever folder the session meant to use, and the owner
+  answered the download prompts while away from the desktop. CLAUDE.md's
+  scratchpad rule cannot reach a download dialog, so the only place to catch
+  one is afterwards. That is why this is a check and not another rule. It
+  looks only at checkout roots: untracked files deeper in a worktree are
+  usually a build in progress, and flagging them would cry wolf. Watched
+  working with three controls. The PID logo manual was named, accented
+  filename intact. A probe at this worktree's root was flagged. A probe in
+  `docs/` was not. The zoom-lag session's worktree is covered because the
+  list comes from `git worktree list`. The OK path is unexercised until the
+  PID file is filed; the Main Building Session, which owns Prague, has been
+  asked where it goes.
+
+### 2026-09-23 - Line labels no longer run off the map at phone width
+
+- **Owner's call, and an exception to `docs/session_roles.md`: the cleanup
+  session fixed this in `pipeline/map_common.py`.** That file belongs to
+  app/chrome, and cleanup owns no pipeline logic. The owner routed the
+  placement fix here rather than to the new zoom-lag session, which was told
+  to build on it and not to touch label placement or `PHONE_FIT_SCRIPT`.
+  Recorded so the edit is not read as a role breach.
+
+- **A label that would be cut by the frame now slides inward, just far
+  enough, while its line's tip is on screen. The view does not change.**
+  `LABEL_CLAMP_SCRIPT` runs on every moveend/zoomend/resize from each
+  label's baked transform, so slides never accumulate. It keeps 6px from
+  every edge and clears the basemap credit's strip at the bottom. The label
+  div gains class `hm-line-label` so the script finds it without matching on
+  inline style. **`PHONE_FIT_SCRIPT`, its guard, `PAD`, `BOUNDS` and zoomSnap
+  are untouched.** Across all 25 re-rendered maps, `BOUNDS` and the whole fit
+  script are byte-identical to HEAD once Folium's random ids are normalised.
+  Nothing else changed but the class and the new script, and every
+  `baseline.json` figure is unchanged. **Before: 35 of 155 labels clipped at
+  375px and 33 at 343px, in 22 of 25 cities. After: 0 at 375, 343, 854 and
+  1280 across all 25 (100 loads).** `check_map_view.js`, unmodified, passes
+  on every load with 0 guard corrections. Label/label overlaps at phone width
+  total 28, the same as before.
+
+- **Rejected after building and measuring it: zooming out until every
+  label's text fits.** A `narrowView()` inside `PHONE_FIT_SCRIPT` took
+  fitBounds' own view when every label box fitted there, and otherwise
+  stepped out a quarter level at a time. It also removed every clip, but it
+  took New York from 9.5 to 8.75 at 343px: Staten Island Railway on the west
+  and Lexington Av on the east reach 90px and 88px past their anchors. A
+  screenshot showed the city as a small knot of stacked labels, and
+  overlapping pairs across the 25 cities rose from 28 to 49 (Barcelona 1 to
+  6, New York 3 to 9 at 343). It also meant changing the guard's expected
+  zoom and re-deriving it in `check_map_view.js`. Reverted before commit.
+  **Clipping is solved by moving the few labels that clip, not by shrinking
+  the whole map.**
+
+- **`check_map_labels.js` now also refuses a label drawn over the basemap
+  credit.** `check_map_attribution.js` hit-tests the credit with
+  `elementFromPoint`, which cannot see a line label (labels are
+  `pointer-events: none`), so this case had no check. It was watched failing
+  with a positive control: a Rennes label moved onto the credit came back
+  "over the basemap credit: Métro a". Writing it exposed the gap it now
+  guards: the first version of the slide kept labels 6px from the bottom
+  edge, while the credit strip is 14px tall.
+
+- **Still open, and pre-existing rather than caused by this change:** label
+  overlaps at phone width in seven cities, and labels under the theme button
+  or legend. Those are Barcelona's L11 at 375, Edmonton at 375 and 343, San
+  Diego's Blue Line at 375, and Montréal's Ligne 1 at 854, which the pre-fix
+  map shows identically. They are in `PLAN.md`.
+
+### 2026-09-24 - Prague: RŽP's establishments are reachable in batches through ARES v3, each with a RÚIAN code; Prague stays paused until measured
+
+- **Found the bulk route the paused Prague build asked for: ARES v3's
+  `POST /ekonomicke-subjekty-rzp/vyhledat` takes a LIST of IČOs and returns
+  each subject's full trade-register record, every licence's `provozovny`
+  included, each carrying `kodAdresnihoMista`** - the RÚIAN address-point
+  code Prague's join already matches at 99.8%. Found in ARES's own OpenAPI
+  spec after three other routes failed differently (NKOD's SPARQL timed out
+  on cost; the RŽP portal and ARES's developer page are JavaScript apps),
+  then confirmed with one live call on two chains: Billa 1,258 establishment
+  entries (259 in Praha), Albert 1,723 (398). It answers the 2026-09-22
+  screen's "per-ICO lookup with no bulk export": the export is still absent,
+  but a batched search is a pipeline where ~85,000 single lookups are not.
+- **Prague is NOT re-banded yet**: the route is found, not measured. Open:
+  the per-call list cap, ARES's terms and rate limits (unread - a rate gate
+  would disqualify it under `add-country`), the IČO universe (a Praha shop
+  can belong to a subject seated anywhere, so the RES seat filter
+  under-covers), the `TypProvozovny` codes, and the restaurant control
+  re-run on establishments. Rejected: moving Prague back to Band A on one
+  call, which is the n=1 mistake the add-country skill records for Finland.
+  Touched `docs/city_master_list.md` (Prague's gap row),
+  `docs/global_country_shortlist.md`.
+
+### 2026-09-23 - Four Brazilian cities go regional (owner); Brasilia's dwelling test keys on the lot (owner); neighbours measured
+
+- **Decided by the owner: Recife, Fortaleza, Porto Alegre and Santos are
+  built REGIONAL**, the Taipei/Dublin/Lille shape, on the station shares
+  measured earlier the same night (30% to 76% of each network inside the
+  city). Rejected: Fortaleza city-only (it keeps 76% of stations, but the
+  ten outside are all line ends and the page would stop where riders do
+  not) and deciding after measurement. The regions: **Recife (Regional)** +
+  Jaboatão dos Guararapes, Cabo de Santo Agostinho, Camaragibe - **43,518**
+  storefronts (city 25,212); **Fortaleza (Regional)** + Caucaia, Maracanaú,
+  Pacatuba - **62,792** (city 49,503); **Porto Alegre (Regional)** + Canoas,
+  Esteio, Sapucaia do Sul, São Leopoldo, Novo Hamburgo - **35,688** (city
+  18,798), nearly double; **Santos (Regional)** + São Vicente - **11,691** (city
+  6,021), nearly double, which answers the brief's Rennes-sized question in
+  the page's favour. Every neighbour reads coordinate level 1 at 97.0% or
+  better and a catch-all of 20.3-28.7%, in the range of the cities
+  themselves. The twelve CNEFE files (32,545,209 B, ftp.ibge.gov.br) were
+  downloaded with the owner's permission into the gitignored raw folders,
+  each checked for size and zip magic bytes.
+- **Decided by the owner: where the door number is blank and the first
+  complement is `LOTE`, the dwelling test keys on the lot.** Implemented in
+  `scripts/screen_cnefe.py`'s address key. Brasília's share of storefronts
+  sharing an address with a dwelling falls **89.7% -> 68.9%** (first names at
+  a dwelling address 824 -> 706). Rejected: keeping street + number (it
+  merged whole blocks and stripped description text from 90% of pins for a
+  reason that is addressing, not housing), and the identical coordinate
+  (18.8% - least protective, since a home and a shop on one lot can carry
+  different points). The key is general: outside Brasília it acts only on
+  unnumbered `LOTE` addresses. **The seven earlier cities' dwelling shares
+  were measured on the old key and are not re-run** - the script already
+  labels the figure an upper bound, and for them the unnumbered-lot case is
+  rare (Recife: 1,213 of its 10,117 shared rows had no number, of any
+  complement).
+- Touched: `scripts/screen_cnefe.py`; the Recife, Fortaleza, Porto Alegre,
+  Santos and Brasília briefs (the four regional briefs' re-release checks now
+  also watch the neighbours' files); `docs/city_master_list.md` (the four
+  renamed "(Regional)" with regional totals).
 
 ### 2026-09-24 - Prague paused at Step 0: RES is a register of seats, not of shops
 

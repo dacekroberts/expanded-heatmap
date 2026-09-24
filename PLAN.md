@@ -31,22 +31,27 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   role as a CHECK first (`check_map_labels.js` never runs at phone width, and
   misreports at 375), with any placement fix going to app/chrome.
 
-- [ ] **Line labels clip at phone width in 22 of 25 cities - app/chrome
-  role, `pipeline/map_common.py`.** The check exists as of 2026-09-23:
-  `scripts/check_map_labels.js` at 375 and 343 measures **35 of 155 labels
-  clipped at 375 and 33 at 343**; only Lille, Madrid and Toulouse are clean.
-  Worst: Miami's "Metromover Omni/Brickell Loops" 155px (71%) at 343, Los
-  Angeles' A and E Lines 68% each, Guadalajara's Línea 2 and 4 ~65%. The
-  view itself is right on all 50 loads, so this is not the fit race.
-  Hypothesis, not yet a finding: PHONE_FIT_SCRIPT's `BOUNDS` holds label
-  ANCHORS and `PAD` is 26px, while a label's text reaches up to ~220px past
-  its anchor - reproduce before fixing. The same run found label/label
-  overlaps at phone width in seven cities (Barcelona, Madrid, Mexico City, New
-  York, Paris, San Francisco, Toronto; Madrid's are all overlaps, no clips),
-  labels under the legend or theme button in Barcelona, Edmonton and San
-  Diego, and Miami's legend reading 38px open and closed at 343 - that last
-  one unconfirmed as real. Done when the check returns no `clipped` problem
-  in any city at both widths.
+- [x] **Line labels clipped at phone width in 22 of 25 cities - FIXED
+  2026-09-23** (cleanup session, by the owner's call). Cause confirmed:
+  `PHONE_FIT_SCRIPT` fits label ANCHORS with 26px of padding, while a label's
+  text reaches up to ~220px past its anchor. A label that would be cut now
+  slides inward (`LABEL_CLAMP_SCRIPT`), and the view is unchanged. 35 + 33
+  clipped labels became 0 at 375, 343, 854 and 1280 in all 25 cities. See
+  `DECISIONS.md`, *"Line labels no longer run off the map at phone width"*,
+  including the zoom-out alternative that was measured and rejected.
+
+- [ ] **Label collisions at phone width - app/chrome.** Pre-existing, and
+  unchanged by the clipping fix. `scripts/check_map_labels.js` at 375/343
+  reports overlapping label pairs in seven cities, 28 in all: Madrid 3/5,
+  Paris 3/4, New York 2/3, San Francisco 2/2, Toronto 1/1, Barcelona 0/1,
+  Mexico City 0/1. Labels also sit under the theme button or legend in
+  Barcelona (L11 at 375), Edmonton (375 and 343), San Diego (Blue Line at
+  375) and Montréal (Ligne 1 at 854, the same in the pre-fix map). Label
+  placement is decided once, in Python, against the full-width view
+  (`_label_candidates`, `_tail_end`), so nothing re-places a label when the
+  phone fit zooms out. Miami's legend reading 38px open and closed at 343 was
+  not seen again in the later sweeps. Done when the check reports no
+  `overlap` or `under` problem at 375 and 343.
 
 - [ ] **🇫🇷 PARIS — ✅ BUILT AND DEPLOYED 2026-09-23. Kept for the checklist
   below, which the follower cities still read.**
