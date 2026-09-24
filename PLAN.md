@@ -608,9 +608,17 @@ brief names.
   lesson (CNEFE rules v2): words chosen from a sample of unmatched rows rescued
   14.7% of that sample but 3.5% of all rows. **Measure a rule's yield on a
   FRESH sample**, never the one it was chosen from.
-- [ ] **Tokyo** — buildable now as 8 wards (owner). The page names the wards
-  with no published list. Owner action: request Chiyoda's ledger
-  (即時公開請求, a CD-R for ¥100).
+- [x] **Japanese build order (owner, 2026-09-24): Osaka → Kobe → Sapporo →
+  Fukuoka → Tokyo LAST.** The stub test cleared the first four: every urban
+  line keeps 80–100% of its stations inside the city line. Tokyo failed, with
+  Chiyoda missing from the centre of its 8 wards. Tokyo goes last as the
+  densest, and it benefits most from a Japan skill written off the first four.
+- [ ] **Tokyo — the missing wards as a planned project, before its build.**
+  Chiyoda alone lifts urban station coverage from 45% to 56%; Chiyoda,
+  Toshima and Bunkyō reach 67%; all 23 wards reach 98% (`tokyo.md`).
+  Routes: request Chiyoda's ledger (owner, gated item 22); extract Ōta's,
+  Kita's and Arakawa's PDF lists; Shinagawa's and Itabashi's partial files;
+  requests to Toshima, Nerima and Edogawa.
 - [ ] **Fukuoka** — agree the wording that discloses the ~20% of restaurants
   with no published address. BODIK is flaky, so `fetch_sources.py` retries.
 - [x] **No pre-build items**: Seoul (its brief is deliberately partial, and

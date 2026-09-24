@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**321 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**322 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Japan's national facts module; the stub test clears four cities; Tokyo goes last](#2026-09-24---japans-national-facts-module-the-stub-test-clears-four-cities-tokyo-goes-last)
 - [Japan: the Shinkansen is out; confectioners and delis count](#2026-09-24---japan-the-shinkansen-is-out-confectioners-and-delis-count)
 - [Japan's join moved into the pipeline, unchanged, before any Japanese build](#2026-09-24---japans-join-moved-into-the-pipeline-unchanged-before-any-japanese-build)
 - [check_city_registry.py: a merge that fuses two cities' entries now fails](#2026-09-24---check_city_registrypy-a-merge-that-fuses-two-cities-entries-now-fails)
@@ -363,6 +364,39 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Japan's national facts module; the stub test clears four cities; Tokyo goes last
+
+- **Wrote `pipeline/countries/japan.py`**, the shared facts every Japanese city
+  uses:
+  - the N02 railway file, with the Shinkansen dropped as `N02_002 == "1"`
+    (owner);
+  - the N03 boundaries, where a city is the union of its wards' polygons by
+    `N03_007`;
+  - the ISJ URL templates, and each Band A city's ward codes and UTM EPSG;
+  - `stub_test()`.
+  
+  It never fetches: `check_no_fetch_in_steps.py` passes, and N02 and N03 for
+  five prefectures sit in the shared cache `data/japan/raw/` (91 MB, logged).
+  Station platforms are LineStrings, and their centroid is taken in a
+  projected CRS, never in degrees.
+- **The stub test, the owner's city-line rule, clears Osaka, Kobe, Sapporo and
+  Fukuoka.** Every urban line keeps 80–100% of its stations: Sapporo's and
+  Fukuoka's subways, Kobe's subway and new transit, and Sapporo's streetcar at
+  100%; Osaka Metro 80–100%. The one half-line is Osaka's Hankai tram (17 of 32,
+  into Sakai), which is not a stub. JR and the private lines are cut at the
+  line, as intended. **Tokyo fails**: Chiyoda sits in the middle of its 8 wards,
+  so Marunouchi keeps 8 of 25 stations and the Arakawa tram 2 of 30.
+- **Owner: Tokyo waits, and then goes LAST among the Japanese cities**, as the
+  densest and the one that benefits most from a Japan skill written off the
+  first four builds. Asked whether Chiyoda is truly needed, the stub test was
+  re-run on alternative ward sets. Urban station coverage is 45% for the 8
+  wards, **56% with Chiyoda** (11 lines under half fall to 6), 67% with
+  Chiyoda, Toshima and Bunkyō, and 98% with all 23. So Chiyoda is the most
+  valuable single ward but not the fix. A whole Tokyo needs most of the 12
+  missing wards, which becomes a planned project before its build (the PDF
+  lists, the partial files, the requests). **Build order: Osaka, Kobe,
+  Sapporo, Fukuoka, then Tokyo.**
 
 ### 2026-09-24 - Japan: the Shinkansen is out; confectioners and delis count
 

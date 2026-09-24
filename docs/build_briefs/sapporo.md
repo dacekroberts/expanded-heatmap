@@ -62,6 +62,8 @@ Sapporo Municipal Subway (Namboku, Tōzai, Tōhō), the Sapporo streetcar, and
 JR Hokkaido's Sapporo lines — all in N02. ⚠️ Stations are LineStrings —
 centroid them. See `docs/commuter_rail_list.md`.
 
+**✅ Stub test, measured 2026-09-24** (`pipeline/countries/japan.py` `stub_test()`: N02 stations, Shinkansen excluded, against the city's N03 ward polygons): **PASSES.** All three subway lines and every streetcar segment are 100% inside. JR Hokkaido is cut at the line as intended (Hakodate line 14 of 84, Sasshō 10 of 14).
+
 ## Scope
 
 **Sapporo City (10 wards)**; JR lines run on to Otaru, Ebetsu and the airport
