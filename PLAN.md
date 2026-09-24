@@ -25,18 +25,32 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   now, fix after" and "fix before next deploy"; no further push to master
   until these land). Two defects Brazil's deploy check found, both older than
   Brazil, fixed once in `pipeline/map_common.py`:
-  - [ ] **Dark mode (the default) cannot lift pure blue or navy line labels.**
+  - [x] **Dark mode (the default) cannot lift pure blue or navy line labels.**
+    FIXED: failing labels carry a lighter shade (owner's option), 17 of 235;
+    `scripts/check_map_markup.py` checks it.
     Contrast against the halo: Porto Alegre Trensurb Linha 1 `#000080`
     1.91:1, Rio VLT Linha 1 and Salvador Linha 2-Azul `#0000FF` 2.18:1, Belo
     Horizonte Linha 2 `#2F1F85` 2.85:1; Barcelona (1.78), Calgary and
     Edmonton (2.36) alike. Light mode is fine (8.6-16:1).
-  - [ ] **The legend's inline `style` breaks at its font list**
+  - [x] **The legend's inline `style` breaks at its font list** - FIXED
+    (single quotes inline; the same check covers it)
     (`map_common.py:432`): the first `"Segoe UI"` closes the double-quoted
     attribute, so every legend loses its 13 px size, shadow and non-Latin
     fonts.
-  - [ ] Re-render all maps, `check_render_current.py`, a `map-chrome`
-    `deploy-verify` (dark mode included), fetch, push, reboot only if `app/`
-    changed, live check.
+  - [x] Re-render all maps, `check_render_current.py` (39 current).
+  - [ ] A `map-chrome` `deploy-verify` (dark mode included), fetch, push,
+    reboot only if `app/` changed, live check.
+  - [ ] **Owner question, not part of the gate: light-mode label contrast.**
+    145 of 235 labels read under 4.5:1 on their white halo (yellows and
+    oranges; Milan M3 1.08:1). Reported by `check_map_markup.py`, not failed.
+
+- [ ] **NEXT BUILDS (owner, 2026-09-24): 🇳🇱 Rotterdam, then 🇹🇼 Taiwan** -
+  after the renderer fixes above, which gate the next deploy. Rotterdam is
+  Amsterdam's shape (permit-notice food layer rebuilt from the Gemeenteblad,
+  BAG shop units, CBS vacancy) - `docs/build_briefs/rotterdam.md`. Taiwan:
+  Taipei (Regional), Taichung, Taoyuan; write a `taiwan-city` skill after the
+  first (owner). This replaces the earlier order Hong Kong, Taiwan, Seoul,
+  Japan; what follows Taiwan is to be confirmed.
 
 - [x] **🇧🇷 BRAZIL - NINE CITIES BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24**,
   as one batch on `sao-paulo-build`: São Paulo, Rio de Janeiro, Belo

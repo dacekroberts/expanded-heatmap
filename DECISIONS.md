@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**339 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**340 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Renderer: dark-mode line labels lifted to 4.5:1, the legend's style repaired; a check for both](#2026-09-24---renderer-dark-mode-line-labels-lifted-to-451-the-legends-style-repaired-a-check-for-both)
 - [Brazil deployed; the live site measured after the reboot](#2026-09-24---brazil-deployed-the-live-site-measured-after-the-reboot)
 - [Brazil's batch deploy check passed; two renderer defects shipped now, fixed next (owner)](#2026-09-24---brazils-batch-deploy-check-passed-two-renderer-defects-shipped-now-fixed-next-owner)
 - [Kyoto enters Band A: licence read, brief written, row moved](#2026-09-24---kyoto-enters-band-a-licence-read-brief-written-row-moved)
@@ -381,6 +382,54 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Renderer: dark-mode line labels lifted to 4.5:1, the legend's style repaired; a check for both
+
+- **A line label under 4.5:1 in dark mode now carries its own lighter shade**
+  (owner's call, "lighten failing labels", among three options). Dark mode is
+  the default theme. It lifts labels with `brightness(1.8)`, which scales each
+  sRGB channel and so does nothing for a colour whose light is all in blue.
+  `pipeline/linecolour.py` gains `contrast_ratio`, `brightened` and
+  `dark_label_colour`. For a failing label, `dark_label_colour` returns the
+  colour with its HSL lightness raised by the smallest 0.01 step that reads at
+  4.5:1 against `DARK["page"]` after the same filter. `add_line_label` puts that
+  shade in `--dm-label`, and one dark-theme rule applies it. The filter's
+  factor now comes from the same constant as the CSS, so the two cannot drift.
+  Light mode, passing labels and the lines themselves are untouched. **17 of
+  235 labels changed, in 15 cities.** Seven moved visibly:
+  - Porto Alegre's Trensurb `#000080` to `#3e3eff`, 1.91 to 4.86:1;
+  - Rio's VLT Linha 1 and Salvador's Linha 2-Azul `#0000FF` to `#3d3dff`,
+    2.18 to 4.76:1;
+  - Milan's M4 `#0000ee` to `#3c3cff`;
+  - Belo Horizonte's Linha 2 `#2F1F85` to `#4d35d0`;
+  - Calgary's and Edmonton's `#082F49` to `#0d4a72`.
+
+  The other ten changed by a shade or two: Barcelona's Vallvidrera
+  funicular, Boston's and Madrid's blues, Chicago's Purple and Brown, Mexico
+  City's Línea 9 and Tren Ligero, Paris's Ligne 14, Toronto's Line 2 and
+  Vancouver's Expo Line.
+- **The legend's inline style no longer breaks at its font list.**
+  `FONT_STACK` quotes family names in double quotes, and the legend's `style`
+  is a double-quoted attribute, so `"Segoe UI"` closed it. Every legend lost
+  its 13 px size, its shadow and every fallback font, and rendered in
+  Leaflet's Latin-only default. The inline copy now uses single quotes.
+  `position` and `bottom` came before the break, which is why the attribution
+  clamp held throughout.
+- **`scripts/check_map_markup.py` checks both, over every committed map**,
+  because neither showed up in any browser script. Run against HEAD's Porto
+  Alegre map it fails three ways: 1.91:1, font-size and box-shadow missing.
+  After the fix it reports PROBLEMS 0 on 39 maps and 235 labels.
+  **Light-mode contrast is reported, not failed: 145 of 235 labels are under
+  4.5:1 on their white halo**, most of them yellows and oranges. Examples:
+  Milan's M3 `#fcff01` 1.08:1, São Paulo's Linha 4 1.40:1, Washington's
+  Yellow 1.46:1. The owner's call covered dark mode only, so this is raised
+  as its own question rather than fixed by extension.
+- **All 39 maps re-rendered**, with every city's data linked into this
+  worktree (Copenhagen's from its own worktree, since the main checkout has
+  none). Ring counts were unchanged. `check_render_current.py`,
+  `check_provenance.py`, `check_scope_disclosure.py` and
+  `check_no_fetch_in_steps.py` all pass. A `map-chrome` deploy check,
+  including dark mode, comes before the push this gate was waiting for.
 
 ### 2026-09-24 - Brazil deployed; the live site measured after the reboot
 
