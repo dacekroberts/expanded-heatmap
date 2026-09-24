@@ -586,15 +586,35 @@ brief names.
   (staging, started 2026-09-24).** Five cities run on one join. Lift
   `scripts/screen_japan_join.py` into `pipeline/japan_join.py`, and write a
   shared taxonomy for 営業の種類 in `pipeline/taxonomies/`, as Brazil's CNEFE
-  module was written before its second build. **Osaka is the recommended
+  module was written before its second build.
+  - [x] **Stage 1 (2026-09-24): the join core MOVED unchanged** into
+    `pipeline/countries/japan_register.py` (20 definitions). The script now
+    imports it and keeps only the measurement. Identical output on all 24
+    city and ward keys, with Minato at 99.8%.
+  - [ ] Stage 2: `pipeline/countries/japan.py` (national facts: the MLIT URL
+    templates, N02, the per-city ward codes and projected CRS), the 営業の種類
+    taxonomy module and its registry entry. The three owner calls above decide
+    two of its rules (菓子製造業 / そうざい製造業; rail). **Osaka is the recommended
   first build**: the cleanest list, 99.1% block, 38 m against the city's own
   coordinates.
-- [ ] **Japan — three owner calls that recur in all five briefs.** Decide them
-  once:
-  1. Do the Shinkansen and limited-express-only lines count as rail?
-  2. What is the scope beyond each city line? JR and the private railways run
-     into neighbouring cities.
-  3. Do 菓子製造業 and そうざい製造業 count as counter shops?
+- [~] **Japan — three owner calls that recur in all five briefs.**
+  1. [x] **The Shinkansen does NOT count** (owner, 2026-09-24): it is
+     long-distance travel between cities.
+  2. [x] **City line only, with the stub test** (owner, 2026-09-24): only
+     stations inside each city get rings, matching the city-only permit lists.
+     Stage 2 measures each line's stations inside and outside (N02 against
+     MLIT's N03 boundaries), and any urban line the city line cuts to a stub
+     goes back to the owner (the Rennes and Lille test). Neighbours are a
+     later, case-by-case upgrade.
+  3. [x] **菓子製造業 and そうざい製造業 COUNT** (owner, 2026-09-24): bakeries,
+     confectioners and delis are counter shops. They join the Retail bucket
+     with the other food-retail permit types.
+  - [ ] Stage 2 carries 1 and 3 into the taxonomy and the five briefs' open
+    items.
+- [ ] **premises-taxonomy skill** — add the São Paulo session's sampling
+  lesson (CNEFE rules v2): words chosen from a sample of unmatched rows rescued
+  14.7% of that sample but 3.5% of all rows. **Measure a rule's yield on a
+  FRESH sample**, never the one it was chosen from.
 - [ ] **Tokyo** — buildable now as 8 wards (owner). The page names the wards
   with no published list. Owner action: request Chiyoda's ledger
   (即時公開請求, a CD-R for ¥100).

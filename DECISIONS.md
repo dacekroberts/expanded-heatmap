@@ -16,11 +16,13 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**320 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**322 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Phone-width line labels re-placed at runtime: 62 problems to 2](#2026-09-24---phone-width-line-labels-re-placed-at-runtime-62-problems-to-2)
+- [Japan: the Shinkansen is out; confectioners and delis count](#2026-09-24---japan-the-shinkansen-is-out-confectioners-and-delis-count)
+- [Japan's join moved into the pipeline, unchanged, before any Japanese build](#2026-09-24---japans-join-moved-into-the-pipeline-unchanged-before-any-japanese-build)
 - [check_city_registry.py: a merge that fuses two cities' entries now fails](#2026-09-24---check_city_registrypy-a-merge-that-fuses-two-cities-entries-now-fails)
 - [Japan re-banded and the geocoding band closed; Rotterdam to A](#2026-09-24---japan-re-banded-and-the-geocoding-band-closed-rotterdam-to-a)
 - [Rome: the page text written, notices 36 and 37, merged with Amsterdam](#2026-09-24---rome-the-page-text-written-notices-36-and-37-merged-with-amsterdam)
@@ -397,6 +399,53 @@ onwards; the early ones are split by phase rather than by hour.
   `deploy-verify` with scope `map-chrome`, and the owner was at 10% of the
   5-hour limit. The commit waits on `worktree-cleanup`; the handoff says so.
 
+### 2026-09-24 - Japan: the Shinkansen is out; confectioners and delis count
+
+- **Owner, 2026-09-24: the Shinkansen does not count as rail for any Japanese
+  city.** It is long-distance travel between cities at large, not the urban
+  and commuter network this project maps. JR's and the private railways'
+  commuter lines stay in (the earlier call). **菓子製造業 and そうざい製造業
+  count**: bakeries, confectioners and delis sell over a counter. They go in
+  the Retail bucket with 食肉販売業 and 魚介類販売業, the food-retail permit
+  types. That is the default, and the owner can move them to Food service.
+  Their counts across the five Band A cities, from the briefs: Osaka 3,580 +
+  1,209, Kobe 2,024 + 611, Sendai 989 + 232 (the permits, before
+  de-duplication). ⚠️ **A share are factories and central kitchens**
+  (そうざい製造業 includes school-lunch caterers). The taxonomy cannot see
+  that, so the build measures it from trade names before publishing, as Rome
+  measured its over-count.
+- **Owner, the same day, after the detail: the city line only, with the stub
+  test.** Each city's permit list covers only that city, since the city's own
+  health office issues the permits. So a station beyond the line would get an
+  empty ring, and a ring straddling it undercounts. Going regional, as Lille,
+  Dublin and four Brazilian cities did, was nearly free where one national
+  register covered the neighbours. **In Japan each neighbour is its own
+  publisher, format and licence**, so regional means a new screen per
+  neighbour, and Sendai showed a neighbour may not be open. The rejected
+  alternative was screening the continuous suburbs now (Sakai; Ashiya,
+  Nishinomiya and Amagasaki; Kasuga). Stage 2 measures each line's stations
+  inside and outside the city (N02 against MLIT's N03 boundaries). Any urban
+  line cut to a stub returns to the owner. The subways sit almost entirely
+  inside each city, so it is expected to trigger nowhere.
+
+### 2026-09-24 - Japan's join moved into the pipeline, unchanged, before any Japanese build
+
+- **Moved the Japan join core from `scripts/screen_japan_join.py` into
+  `pipeline/countries/japan_register.py`, without editing it**, so the screen
+  and the five Band A builds share one set of rules. The owner approved it as
+  the handoff's first item. Twenty definitions were lifted by AST with their
+  leading comments: normalisation, the ISJ loaders (the 小字 key included),
+  the three permit readers, and both joins. The script keeps only the
+  measurement (tiers, misses, the GSI check, the per-city configs). **The proof
+  is output, not review**: every city and ward key was run before and after
+  (24 keys, `--misses` samples included), and the two outputs are identical.
+  `check_no_fetch_in_steps.py` passes: the module does no network access. The
+  rejected alternative was writing the pipeline module fresh from the script,
+  which is how two copies drift. Brazil's CNEFE taxonomy took this route for
+  the same reason, and a peer session asked this session not to create a
+  second copy of that. Stage 2 is the national facts module (`japan.py`) and
+  the 営業の種類 taxonomy. Two of its rules wait on owner calls (菓子製造業 and
+  そうざい製造業; intercity rail).
 ### 2026-09-24 - check_city_registry.py: a merge that fuses two cities' entries now fails
 
 - **`scripts/check_city_registry.py` refuses any dict in `app/cities.py`
