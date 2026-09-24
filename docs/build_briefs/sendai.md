@@ -14,6 +14,9 @@ writing any code. Coordinates: the `address-join` skill, measured by
 unplaced, and confirmed by GSI's address search at a median 34 m (150 of 150
 within 250 m).** Personal services from the city's 生活衛生 lists (3,378). The
 city publishes XLSX inside ZIPs, not CSV. That is the only new mechanics.
+**🚫 But the lists are NOT open data**: the city's default terms bar reuse
+without permission, so Sendai waits at the end of the Japanese cities for the
+city's answer (owner, 2026-09-24).
 
 ---
 
@@ -92,11 +95,41 @@ Natori, Tagajō and Shiogama, and the airport line is almost entirely in Natori
 and Iwanuma. Check which stations fall outside at build; the scope is the
 owner's call.
 
-## ⏳ Licences — PENDING (read in progress 2026-09-24)
+## 🚫 Licences — READ 2026-09-24: the city's lists need PERMISSION
 
-- **Sendai City permit lists: NOT YET READ.** Neither page declares a
-  licence, and the site footer links 著作権・リンク・免責事項. A licence read is
-  running and this section will be replaced with its verdict.
+⏸ **Sendai goes to the END of the Japanese cities (owner, 2026-09-24).** The
+terms are clear, so a written request has been drafted for the owner to send.
+It stays unbuilt until the city answers.
+
+- **Sendai City permit lists: NOT PERMITTED without permission.** Sendai has
+  not adopted CC BY 4.0 or 政府標準利用規約 site-wide, which is where it differs
+  from Osaka, Kobe and Sapporo. Its copyright page
+  (`/sesakukoho/chosakuken/index.html`) is the default:
+  「「私的使用のための複製」や「引用」など著作権法上認められた場合を除き、無断で複製・転用することはできません。」
+  The override is 「ただし、…各ページに特段の定めがある場合には、その取り扱いが優先されます。」
+  **Neither list page has one.** Files the city releases as open data carry a
+  `class="openDataFile"` link with a CC BY 4.0 badge, as on the statistics
+  pages, and these links carry neither. **Neither list is in the city's
+  catalogue** (5,907 rows: 5,885 CC BY 4.0, 22 not copyrighted) **or on
+  Miyagi's joint portal.** The files carry no notice of their own either:
+  document properties, title rows and every cell were checked, and the only
+  footer is page numbers. The city's open-data policy names 食品等営業許可・届出一覧
+  as a recommended dataset but has not released it, probably because the lists
+  carry 営業者氏名 and its policy excludes 個人情報.
+  - **The reading that would permit it**: a ledger of permits is facts, and
+    the project republishes extracted facts, not files; the city's own policy
+    says 「著作物とならない公共データについては、…二次利用の制限はない」.
+    **Not relied on**: whether the lists are 著作物 is for the city or a court
+    to decide, and the skill's rule is never to resolve that in this project's
+    favour.
+  - **Deep links are gated by request**: 「その他のページへリンクを希望される場合は、それぞれの担当課へお問い合わせください。」
+    The drafted request asks this too.
+  - **No cost or indemnity clause.** The disclaimer limits the city's
+    liability only.
+  - **The way through**: written permission from 健康福祉局生活衛生課
+    (`fuk005530@city.sendai.jp`, listed on the city's organisation page;
+    食品衛生係 022-214-8205, 生活衛生係 022-214-8206). A formal request is drafted
+    for the owner to send. Nothing sent yet.
 - **MLIT 位置参照情報: PERMITTED WITH CONDITIONS** (PDL 1.0), as in the Osaka
   brief. **MUST DISPLAY**:
   `出典：位置参照情報ダウンロードサービス（国土交通省）（https://nlftp.mlit.go.jp/isj/）`
@@ -117,7 +150,7 @@ never an operator column. Run `check_personal_exposure.py`.
 
 ## Still unknown
 
-- ⚠️ **The city's licence** (read in progress).
+- 🚫 **The city's permission**: request drafted; the owner sends it. Sendai waits at the end of the Japanese cities until the city answers.
 - ⚠️ 菓子製造業 / そうざい製造業: which are counter shops.
 - ⚠️ Scope beyond the city line; the Shinkansen; N02's line list for Sendai (general knowledge above, not read).
 - ⚠️ A like-for-like food control (the Economic Census per ward), as for Tokyo.

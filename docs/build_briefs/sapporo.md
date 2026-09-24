@@ -79,9 +79,9 @@ centroid them. See `docs/commuter_rail_list.md`.
   **MUST NOT**: imply endorsement; use city logos (第4条); **call the pins
   operating businesses** — the dataset's own note says permits may differ from
   actual trading. **Fetch from `ckan.pf-sapporo.jp` only** — the city
-  website's copies fall under its copyright page. 🚩 **OPEN (owner)**: 第9条3 —
-  uncapped compensation for damage from a prohibited act, triggered by the
-  user's breach; the same class as Tokyo §6.
+  website's copies fall under its copyright page. ✅ **ACCEPTED (owner,
+  2026-09-24)**: 第9条3 — uncapped compensation for damage from a prohibited
+  act, triggered by the user's breach; the same class as Tokyo §6.
 - **MLIT N02** — PDL 1.0.
 
 ## Privacy
@@ -96,7 +96,6 @@ Read only 屋号 / 施設名称, 業種名 and 施設所在地. Run `check_perso
 
 ## Still unknown
 
-- 🚩 Sapporo 第9条3 — accept the breach-triggered compensation clause (as Tokyo §6).
 - ⚠️ 菓子製造業 / そうざい製造業 — counter shops or not.
 - ⚠️ Stations outside the city.
 

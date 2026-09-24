@@ -16,11 +16,13 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**310 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**312 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [The open legend capped below the map's buttons, and a taxonomy may name its layer (owner, from Amsterdam's deploy-verify)](#2026-09-24---the-open-legend-capped-below-the-maps-buttons-and-a-taxonomy-may-name-its-layer-owner-from-amsterdams-deploy-verify)
+- [MHLW's national food open data is an opt-in slice; it completes Fukuoka and Hiroshima only](#2026-09-24---mhlws-national-food-open-data-is-an-opt-in-slice-it-completes-fukuoka-and-hiroshima-only)
+- [The owner's answers to the overnight question points; Sendai's lists need permission](#2026-09-24---the-owners-answers-to-the-overnight-question-points-sendais-lists-need-permission)
 - [Amsterdam: the owner's calls, and the page text written](#2026-09-24---amsterdam-the-owners-calls-and-the-page-text-written)
 - [Sendai joined at 95.1% block; MLIT's 小字 column places 字 addresses](#2026-09-24---sendai-joined-at-951-block-mlits-小字-column-places-字-addresses)
 - [Amsterdam built on its branch: 13,238 storefronts, 144 stations](#2026-09-24---amsterdam-built-on-its-branch-13238-storefronts-144-stations)
@@ -390,6 +392,101 @@ onwards; the early ones are split by phase rather than by hour.
   Files: `pipeline/map_common.py`, `pipeline/taxonomies/__init__.py`,
   `pipeline/taxonomies/amsterdam_source.py`, `outputs/*/heatmap.html`.
 
+### 2026-09-24 - MHLW's national food open data is an opt-in slice; it completes Fukuoka and Hiroshima only
+
+- **Found MHLW's 食品衛生申請等システム open data covers too little to rescue
+  Yokohama, Nagoya or Kyoto. But it completes Fukuoka and Hiroshima, whose own
+  lists stop exactly where online filing begins.** The owner approved using
+  the public viewer (question 10). Its オープンデータ page lists 157
+  authorities, and each file is a plain keyless GET
+  (`/faspub/page/opendatadownload.jsp?param=<code>_food_business_all.csv`,
+  found by reading the icon's handler). No form was submitted. The page
+  states its own limit: online filings only, and only where the applicant
+  agreed, field by field. **Measured against complete lists**, MHLW holds 8.1%
+  of Minato's restaurants, 2.9% of Osaka's, 4.0% of Kobe's and 1.9% of
+  Sendai's. It is also mostly notifications (届出), and only 26–65% of rows
+  carry an address. Yokohama (2,912 restaurants), Nagoya (1,058) and Kyoto
+  (26) stay without a current food source. Tokyo's gap wards are not filled
+  either (Chiyoda 291, Shibuya 812, Toshima 250).
+- **Fukuoka and Hiroshima are different in kind.** Fukuoka's own list (BODIK)
+  holds only permits granted before 2021-06 and still held (3,231
+  restaurants); MHLW holds 21,088 since then, 76% addressed. Hiroshima's own
+  list holds counter applications (7,479), and MHLW the online ones (5,195, 66%
+  addressed). **The overlap was measured at block level, not by string**,
+  because the address formats differ (exact matching found 160 and 5): 1.3%
+  and 1.2%, so the sources are disjoint. **The combination was judged against
+  a per-capita yardstick from the complete lists** (restaurant permits per
+  1,000 residents: Sendai 9.5, Kobe 13.0, Osaka 19.0). Fukuoka comes to
+  **14.8** (11.8 placeable) and Hiroshima **10.7** (9.2 placeable). The
+  shortfall is premises that withheld their address. Joins: Fukuoka own 98.1%
+  / MHLW 96.7% / personal services 99.1% block; Hiroshima own 95.9% / MHLW
+  94.7%. **MHLW's own coordinates agree with the block point at a median
+  36 m / 35 m**, so an MHLW row the join misses can take the publisher's point.
+  Hiroshima publishes no personal-services list (PDFs of new openings only),
+  which gives it Band C's shape. `screen_japan_join.py` gained the entries
+  (`fukuoka`, `fukuoka-mhlw`, `fukuoka-life`, `hiroshima`, `hiroshima-mhlw`)
+  and MHLW's column names. The Minato control holds at 99.8%. Briefs:
+  `fukuoka.md` and `hiroshima.md` (4/4 each). Licences pending: MHLW's (a read
+  is running), BODIK's CC BY and Hiroshima's PDL 1.0. **No band moved**: the
+  unaddressed share is a disclosure for the owner to accept or not.
+- **The last overnight re-probe batch and Riga's follow-up were recorded in
+  their gap rows, with recommendations and no band moved.** Hyderabad is
+  geo-blocked to India (Band D recommended). Naples, Lima and Messina are
+  negative on two methods (discard recommended). Santiago is still thin:
+  Providencia publishes a current licence register under the transparency law,
+  but the downtown comuna does not. Riga has Amsterdam's two-layer shape: its
+  premise groups place at 99.5% through the building number, but its only
+  vacancy figure is 20.4%, centre-only.
+
+### 2026-09-24 - The owner's answers to the overnight question points; Sendai's lists need permission
+
+- **The owner answered the overnight run's open question points on waking,
+  and six rows left the open screening gap.** Each answer and where it went:
+  - **Japan.** The fault-based cost clauses were **accepted** as the Taiwan,
+    Rio and IBGE class: Tokyo Open Data Terms §6, Chūō §5 and Sapporo's
+    platform terms 第9条3. **Osaka**'s current food CSV rests on the CC-BY
+    notice on the page that links it, **accepted**. **Shinjuku**'s 2023-01-01
+    snapshot is used with its vintage disclosed. **Food retail**, where a ward
+    publishes 届出, is a disclosed partial bucket, never extrapolated. The
+    **Economic Census**'s 飲食店 count is the food control for every Japanese
+    city, not OSM, after Shinjuku read 6.0× OSM. For **Tokyo's scope**, the
+    wards' own sites are read first (19 wards without a catalogue file,
+    central first), and the scope is decided after. **Taitō**'s own list is
+    re-fetched under the raised bounds, reading only 営業所所在地, 業種 and
+    屋号. Briefs updated: `tokyo.md`, `sapporo.md`, `osaka.md`.
+  - **Re-probes.** Kuala Lumpur, Athens, Poznań and Bratislava went to the
+    discards, kind absence, each on two or more methods with the city's own
+    host asked. **Hamburg** went on currency: a 2016 retail survey and
+    nothing else, Turin's shape. **Warsaw** went to **Band D**. It is weaker
+    than Kaohsiung's shape, because it was blocked BEFORE anything was
+    measured, so its row says the first step is a read from inside Poland.
+    **Vienna stays in the gap**, the owner's choice, although its two-method
+    negative would pass `check_discard_evidence.py`. The counts are now:
+    candidates 33 (D 2), gap 11, discarded 21. The check reads all 21 rows OK.
+  - **Further probes.** Riga gets one more probe: place the cadastre premise
+    groups through the building number, and find a vacancy rate. Rotterdam
+    is re-probed and stays in the gap if nothing new turns up. **Tallinn**:
+    the owner places the building-register order, since it carries an
+    e-mail, and was sent the order page
+    (`livekluster.ehr.ee/ui/ehr/v1/infoportal/reports`).
+  - **Standing rule.** A read-only API POST (GraphQL or search) now counts as
+    a GET. Web forms, and anything carrying an e-mail, a name or a login, do
+    not. Recorded in `reprobe-city` Step 2, where the next re-probe agent
+    reads it.
+- **Found Sendai's lists are NOT open data: the city's site default bars
+  reuse without permission, and no page overrides it.** Sendai has not
+  adopted CC BY 4.0 site-wide, unlike Osaka, Kobe and Sapporo. Its open-data
+  files carry a per-file CC BY badge, and these two list links carry none.
+  Neither list is in the city's 5,907-row catalogue or on Miyagi's portal, and
+  the files hold no notice of their own. The "facts are not 著作物" reading was
+  recorded and NOT relied on, per `read-licence`. The owner's rule was: if
+  the terms are clear, draft a request, otherwise probe further at the end of
+  the queue. They were judged clear, so a formal Japanese request to
+  健康福祉局生活衛生課 was drafted for the owner to send. Sendai waits at the
+  end of the Japanese cities. **Disclosed slip**: the scan for a file-level
+  notice selected rows by a wrong filter and printed the first two data rows
+  of each food sheet, operator names included, to the session. Nothing was
+  written to disk, and the script was deleted.
 ### 2026-09-24 - Amsterdam: the owner's calls, and the page text written
 
 - **The owner approved Amsterdam's page text, notice 35 and its

@@ -237,10 +237,20 @@ CITIES = {
     "sendai": ("宮城県", "仙台市", ["sendai/raw/r7shokuhinichiran.zip"], "sendai/raw/isj"),
     "sendai-life": ("宮城県", "仙台市", ["sendai/raw/260331.zip::4_理容所", "sendai/raw/260331.zip::5_美容所",
                                       "sendai/raw/260331.zip::6_クリーニング所"], "sendai/raw/isj"),
+    # Fukuoka's and Hiroshima's own lists stop where online filing starts (2021-06 /
+    # 2023-08); MHLW's 食品衛生申請等システム open data carries the online filings
+    # (opt-in, per-field disclosure, publisher's lat/lon).
+    "fukuoka": ("福岡県", "福岡市", ["fukuoka/raw/r8.7.csv"], "fukuoka/raw/isj"),
+    "fukuoka-mhlw": ("福岡県", "福岡市", ["mhlw/raw/40130_food_business_all.csv"], "fukuoka/raw/isj"),
+    "fukuoka-life": ("福岡県", "福岡市", ["fukuoka/raw/202609011129.csv", "fukuoka/raw/202609011112.csv",
+                                       "fukuoka/raw/202604011019.csv"], "fukuoka/raw/isj"),
+    "hiroshima": ("広島県", "広島市", ["hiroshima/raw/5080331-2.xlsx"], "hiroshima/raw/isj"),
+    "hiroshima-mhlw": ("広島県", "広島市", ["mhlw/raw/34100_food_business_all.csv"], "hiroshima/raw/isj"),
 }
-ADDR_COLS = ("施設所在地", "営業所所在地", "所在地_連結表記", "営業所住所")
-TYPE_COLS = ("業種名", "業種分類", "業種情報公開名称", "営業の種類", "業種区分", "営業種類", "施設（種別）", "種別")
-NAME_COLS = ("屋号", "施設名称")
+ADDR_COLS = ("施設所在地", "営業所所在地", "所在地_連結表記", "営業所住所", "営業施設所在地",
+             "営業所所在地（所在地_連結標記", "施設所在地（所在地_連結標記）")
+TYPE_COLS = ("業種名", "業種分類", "業種情報公開名称", "営業の種類", "業種区分", "営業種類", "施設（種別）", "種別", "業種", "業務種別")
+NAME_COLS = ("屋号", "施設名称", "営業施設名称、屋号又は商号")
 
 
 def xlsx_rows(data):

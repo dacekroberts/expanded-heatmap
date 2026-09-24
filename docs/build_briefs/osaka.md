@@ -92,11 +92,11 @@ Oslo *kommune only* precedent or a regional scope is the owner's call.
   `「食品営業許可施設一覧」（大阪市）（https://www.city.osaka.lg.jp/kenko/page/0000575579.html）を加工して作成`,
   likewise for pages 0000431136 and 0000552712. **MUST NOT**: present the map as
   the city's own (「あたかも大阪市が作成したかのような態様で」); city logos. No cost
-  clause. ⚠️ **OPEN (owner, minor)**: the current food CSV's licence rests on the
-  CC-BY notice on its own page — the portal's food record points to a dead
-  page and a 2021 file, and the terms' appendix bars reuse of attachments that
-  show no licence. The strong reading covers it; a one-line confirmation from
-  食品衛生グループ (06-6208-9991) would settle it.
+  clause. ✅ **ACCEPTED (owner, 2026-09-24)**: the current food CSV's licence
+  rests on the CC-BY notice on its own page. The portal's food record points to
+  a dead page and a 2021 file, and the terms' appendix bars reuse of attachments
+  that show no licence. The notice sits on the page that links the file, so it
+  covers it.
 - **MLIT N02** — PDL 1.0; `「国土数値情報（鉄道データ）」（国土交通省）をもとに作成`.
 
 ## Privacy
@@ -111,10 +111,9 @@ the barber / beauty lists an operator-name column. **Read only 屋号,
 
 ## Still unknown
 
-- ⚠️ The food CSV's licence rests on its page's CC-BY notice (owner, minor — or ask the city).
 - ⚠️ 菓子製造業 / そうざい製造業 — which are counter shops.
 - ⚠️ Scope beyond the city line; Shinkansen.
-- ⚠️ A like-for-like food control (the Economic Census per ward), as for Tokyo.
+- ⚠️ The like-for-like food control's figures: the Economic Census per ward (source decided by the owner, 2026-09-24).
 
 ```brief-checks
 [
