@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**281 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**282 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Rome to Band A with a build check: 95,493 premises joined to ANNCSU at 95.7%, both licences CC BY 4.0, a 2.60x control to settle at build](#2026-09-24---rome-to-band-a-with-a-build-check-95493-premises-joined-to-anncsu-at-957-both-licences-cc-by-40-a-260x-control-to-settle-at-build)
 - [Rome is a JOIN: its business register matches ANNCSU on the municipal street code, 92.4% at civic level](#2026-09-24---rome-is-a-join-its-business-register-matches-anncsu-on-the-municipal-street-code-924-at-civic-level)
 - [Open gap probed (Rome reached; Turin, Cairo discarded); Brasília and Recife rail licences read; Taipei's head-office rule tested; the address-join skill](#2026-09-24---open-gap-probed-rome-reached-turin-cairo-discarded-brasília-and-recife-rail-licences-read-taipeis-head-office-rule-tested-the-address-join-skill)
 - [The oslo worktree retired; prague's empty folder kept](#2026-09-24---the-oslo-worktree-retired-pragues-empty-folder-kept)
@@ -323,6 +324,41 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Rome to Band A with a build check: 95,493 premises joined to ANNCSU at 95.7%, both licences CC BY 4.0, a 2.60x control to settle at build
+
+- **Screened Rome in full** (owner-approved download of the July 2025
+  register, 25,646,982 B). 168,255 rows are **155,448 establishments** keyed on
+  (STRUTTURA_GESTIONE, NUMERO_ESERCIZIO) - the number alone restarts per
+  municipio - and **95,493** fall in the three buckets (retail 65,107, food
+  19,223, personal 11,163), with more food and personal trades inside the
+  *Laboratorio Artigianale* catch-all for the taxonomy to take at build.
+  `DATA_INIZIO` is an Excel serial; starts run to 4,146 in January-July 2025,
+  so the stock is live. The register carries **no names**.
+- **The join, all rows: 95.7% civic-level** (92.0% exact on street code +
+  civic + suffix, 3.7% suffix ignored), 4.2% street centroid, 0.2% unmatched;
+  every municipio at 90.9% or better. The Municipio I sample's 92.4% was
+  lower, not a flattering ceiling.
+- **Both licences read: CC BY 4.0, PERMITTED WITH CONDITIONS** - SUAP by
+  the portal's own Licenze page and each resource's `A21_CCBY40` code; ANNCSU
+  by dati.gov.it, with the EU HVD regulation mandating CC BY 4.0 or looser for
+  addresses. Credit, licence link and a statement of modification each; no
+  wording prescribed; no act owed.
+- **The control reads 2.60x** (SUAP food service 19,223 against OSM's 7,405
+  food-and-drink amenities), above France's and Prague's range, and cannot
+  be sharpened because the register does not separate restaurants from bars.
+  **Owner's call: Band A with a build check** - compare with OSM street by
+  street, split the excess by start year, then an age cut-off or a stated
+  over-count. Rejected: holding Rome until the city explains closures (a
+  question the owner would have to send), and accepting 2.60x silently.
+  Distinguished from Prague: Prague's register recorded seats, Rome's records
+  premises.
+- **Rail**: OSM A, B/B1, C and Metromare, all coloured; **a Metro D relation
+  exists for an unbuilt line and must be excluded** (Tel Aviv's trap);
+  Metromare's inclusion is an owner call at build.
+- Counts: candidates 33 (A 17 · B 10 · C 5 · D 1); the open screening gap is
+  empty. Touched `docs/build_briefs/rome.md` (new, 6/6 live),
+  `docs/city_master_list.md`, `docs/global_country_shortlist.md`.
 
 ### 2026-09-24 - Rome is a JOIN: its business register matches ANNCSU on the municipal street code, 92.4% at civic level
 
