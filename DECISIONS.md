@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**276 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**277 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [The Datafordeler key was exposed; it is not rotated, and the account closes after publish](#2026-09-24---the-datafordeler-key-was-exposed-it-is-not-rotated-and-the-account-closes-after-publish)
 - [Copenhagen opened: four owner calls, and the brief's coordinate leg is closing](#2026-09-24---copenhagen-opened-four-owner-calls-and-the-briefs-coordinate-leg-is-closing)
 - [Two checks closed: the macro map's controls, and clones leaking into %TEMP%](#2026-09-24---two-checks-closed-the-macro-maps-controls-and-clones-leaking-into-temp)
 - [Oslo deployed; the live site measured after the reboot](#2026-09-24---oslo-deployed-the-live-site-measured-after-the-reboot)
@@ -318,6 +319,34 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - The Datafordeler key was exposed; it is not rotated, and the account closes after publish
+
+- **Owner decision: the build's Datafordeler API key stays in use although it
+  is known to be exposed, and the account closes AFTER COPENHAGEN PUBLISHES.**
+  Setting it in PowerShell without quotation marks made the shell run the key
+  as a command and print it in the error, and the terminal was then shared
+  into the build conversation as a screenshot - so the key is readable in that
+  conversation's history, in the image file saved under the local temp
+  directory, and in the terminal's PowerShell history. **Rejected: rotating it
+  now.** The key reaches only data that is free and unrestricted anyway (CVR's
+  non-person entities, DAR), a new key costs a 15-minute propagation, and
+  closing the account - already the standing practice - revokes it. The key
+  was never used by the session, never written to the repository, and appears
+  in no record here.
+
+- **This moves the closing trigger from the 2026-09-23 entry** ("the account
+  STAYS OPEN until Copenhagen's build starts"): the build needs the account
+  through its own fetch, and a failed or partial fetch after a close would
+  mean a new account mid-build. Tracked as a dated reminder in `PLAN.md` and
+  in `docs/gated_access.md` item 3.
+
+- **What the next key needs instead, recorded where it will be read:** a way
+  to set it that never shows it - `Read-Host -AsSecureString` converted into
+  the environment variable, so nothing echoes and nothing reaches the shell's
+  history - and the instruction, given up front, to describe an error in words
+  rather than screenshot it. Korea's `data.go.kr`, Taiwan's TDX and Japan's
+  ODPT are all registration-gated, so this recurs.
 
 ### 2026-09-24 - Copenhagen opened: four owner calls, and the brief's coordinate leg is closing
 

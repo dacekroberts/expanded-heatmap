@@ -21,6 +21,25 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [~] **🇩🇰 COPENHAGEN - building on `copenhagen-build`.** Kobenhavn +
+  Frederiksberg, Metro M1-M4 and S-tog, rail from OSM, coordinates from DAR.
+  Step 1 done (64 stations, gate 3 exact). **Waiting on the owner's
+  Datafordeler fetch** - `Virksomhed`, `Virksomhedsform` and DAR for 0101/0147
+  - which must run **before Friday 25 September, 6 pm Pacific** (the next
+  weekly generation) or the CVR set has to be re-fetched whole with
+  `--refresh-cvr`. Then step 2, the page prose for approval, deploy-verify,
+  publish. See `DECISIONS.md`, *"Copenhagen opened: four owner calls"*.
+  - [ ] ⏰ **AFTER PUBLISH: the owner closes the Datafordeler account.** Its API
+    key was visible in a terminal screenshot shared into the build
+    conversation on 2026-09-24 and sits in that terminal's PowerShell history;
+    it was deliberately not rotated (owner's call - free, unrestricted data
+    only), because closing the account revokes it. Closing is licence-safe
+    (CC BY 4.0 is irrevocable); a future refresh means a new free account and
+    the 15-minute key propagation. `docs/gated_access.md` item 3.
+  - [ ] **Next build after Copenhagen: Prague**, on staging's new ROS02 + RES
+    business leg (`docs/build_briefs/prague.md`, 12/12), with its sole-trader
+    owner call.
+
 - [x] **🇳🇴 OSLO - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** 10,718
   storefronts, 155 stations, T-bane 1-5 and trams 12-19, Oslo kommune only.
   City-scoped `deploy-verify` found two phone-width failures (Oslo's macro
