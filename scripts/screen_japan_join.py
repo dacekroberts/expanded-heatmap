@@ -52,6 +52,12 @@ DATA = Path(__file__).resolve().parent.parent / "data"
 MUNICIPALITIES = {
     "minato": ("13103", "港区", "tokyo/raw/food_business_all.csv",
                "tokyo/raw/13103-24.0a.zip", "tokyo/raw/13103-19.0b.zip"),
+    "chuo": ("13102", "中央区", "tokyo/raw/13102/syokuhineigyoukyoka.csv",
+             "tokyo/raw/13102/13102-24.0a.zip", "tokyo/raw/13102/13102-19.0b.zip"),
+    "shinjuku": ("13104", "新宿区", "tokyo/raw/13104/000399975.csv",
+                 "tokyo/raw/13104/13104-24.0a.zip", "tokyo/raw/13104/13104-19.0b.zip"),
+    "koto": ("13108", "江東区", "tokyo/raw/13108/131083_015_food_business_all.csv",
+             "tokyo/raw/13108/13108-24.0a.zip", "tokyo/raw/13108/13108-19.0b.zip"),
 }
 
 KANJI_DIGITS = {"〇": 0, "一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
@@ -71,9 +77,13 @@ def kanji_number(s):
 
 
 def norm_town(s):
-    """町字 as a comparable key: NFKC, no spaces."""
+    """町字 as a comparable key: NFKC, no spaces, and the 丁目 number in digits.
+
+    The digits rule came from Chūō's and Kōtō's misses: their permits write
+    八重洲2丁目 where MLIT writes 八重洲二丁目. Applied to BOTH sides."""
     s = unicodedata.normalize("NFKC", s or "").replace(" ", "").replace("　", "")
-    return s
+    return re.sub(r"([〇一二三四五六七八九十]+)丁目",
+                  lambda m: f"{kanji_number(m.group(1))}丁目" if kanji_number(m.group(1)) else m.group(0), s)
 
 
 def first_number(s):
@@ -109,8 +119,21 @@ def load_isj(block_zip, chome_zip):
     return blocks, chome
 
 
+def decode(b):
+    """Permit files arrive as UTF-8 (Minato, Kōtō), cp932 (Chūō) or UTF-16 LE
+    with a BOM (Shinjuku) - the same national schema, three encodings."""
+    if b[:2] in (b"\xff\xfe", b"\xfe\xff"):
+        return b.decode("utf-16")
+    for enc in ("utf-8-sig", "cp932"):
+        try:
+            return b.decode(enc)
+        except UnicodeDecodeError:
+            continue
+    raise ValueError("undecodable permit file")
+
+
 def load_permits(path, muni_name):
-    text = Path(path).read_bytes().decode("utf-8-sig")
+    text = decode(Path(path).read_bytes())
     rows = [r for r in csv.DictReader(io.StringIO(text)) if r.get("許可番号")]
     out = []
     for r in rows:
@@ -125,7 +148,14 @@ def load_permits(path, muni_name):
             full = full.split(muni_name, 1)[-1]
             m = re.match(r"(.+?丁目|[^0-9]+?)([0-9].*)$", full)
             town, rest, src = (m.group(1), m.group(2), "joined") if m else (full, "", "joined")
-        out.append({"town": norm_town(town), "block": first_number(rest), "src": src,
+        # Shinjuku's misses: the WHOLE address sits in 町字 (新宿3-14-1, 歌舞伎町1-2-7)
+        # with 番地以下 empty. Split at the first digit; the hyphen-form shift in
+        # join() then reads 新宿3-14-1 as 新宿三丁目 14番.
+        t = unicodedata.normalize("NFKC", town)
+        m = re.match(r"^(\D+?)(\d.*)$", t)
+        if m and "丁目" not in t:
+            town, rest, src = m.group(1), m.group(2) + " " + rest, "split-embedded"
+        out.append({"town": norm_town(town), "block": first_number(rest), "rest": rest, "src": src,
                     "addr": r.get("所在地_連結表記", ""), "type": r.get("営業の種類", ""),
                     "name": r.get("施設名称", ""), "corp": r.get("法人名", "")})
     return out
@@ -133,7 +163,16 @@ def load_permits(path, muni_name):
 
 def join(permits, blocks, chome):
     for p in permits:
+        p["mobile"] = p["town"] == "都内一円" or "自動車" in p["type"]
         hit = blocks.get((p["town"], p["block"]))
+        if not hit and "丁目" not in p["town"] and p["block"]:
+            # hyphen form: 築地5-2-1 is 築地五丁目 2番 1号 - the first number is the
+            # 丁目. Shift only when that town-chōme exists in the file.
+            nums = re.findall(r"\d+", unicodedata.normalize("NFKC", p["rest"]))
+            shifted = f"{p['town']}{nums[0]}丁目" if nums else None
+            if shifted in chome:
+                p["town"], p["block"], p["shifted"] = shifted, (str(int(nums[1])) if len(nums) > 1 else None), True
+                hit = blocks.get((p["town"], p["block"]))
         if hit:
             p["tier"], p["pt"], p["jukyo"] = "block", hit[:2], hit[2]
         elif p["town"] in chome:
@@ -192,6 +231,11 @@ def main():
     for t in ("block", "chome", "none"):
         print(f"  {t:<6} {tiers[t]:>6,}  {100 * tiers[t] / n:5.1f}%")
     print(f"  placed (block + chome): {100 * (tiers['block'] + tiers['chome']) / n:.1f}%")
+    fixed = [p for p in permits if not p["mobile"]]
+    ft = collections.Counter(p["tier"] for p in fixed)
+    print(f"  FIXED PREMISES ({len(fixed):,}; {n - len(fixed)} mobile vendors set aside): "
+          + ", ".join(f"{t} {100 * ft[t] / max(1, len(fixed)):.1f}%" for t in ("block", "chome", "none")))
+    print(f"  hyphen-form shifts (5-2-1 read as 五丁目 2番): {sum(1 for p in permits if p.get('shifted'))}")
     print("  address source:", dict(collections.Counter(p["src"] for p in permits)))
     print("  block hits in 住居表示 areas:",
           sum(1 for p in permits if p["tier"] == "block" and p.get("jukyo") == "1"))
