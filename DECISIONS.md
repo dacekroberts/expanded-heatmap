@@ -16,11 +16,13 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**253 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**255 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
 - [Every Band A city has a brief: seven Brazilian and three Taiwanese written, all checks passing live](#2026-09-23---every-band-a-city-has-a-brief-seven-brazilian-and-three-taiwanese-written-all-checks-passing-live)
+- [The cleanup role's stray worktrees retired; removing a session's own launch worktree broke that session](#2026-09-23---the-cleanup-roles-stray-worktrees-retired-removing-a-sessions-own-launch-worktree-broke-that-session)
+- [Three limbs of check_provenance could fall silent; each now asserts it had input](#2026-09-23---three-limbs-of-check_provenance-could-fall-silent-each-now-asserts-it-had-input)
 - [The geocoding retrospective, written to prepare Japan; the lesson placed where the next country passes through it](#2026-09-23---the-geocoding-retrospective-written-to-prepare-japan-the-lesson-placed-where-the-next-country-passes-through-it)
 - [Taiwan finished: Taipei (Regional), Taoyuan and Taichung to Band A; Kaohsiung held on an unreachable host](#2026-09-23---taiwan-finished-taipei-regional-taoyuan-and-taichung-to-band-a-kaohsiung-held-on-an-unreachable-host)
 - [Six merged build branches deleted; the retirement steps needed a pull first](#2026-09-23---six-merged-build-branches-deleted-the-retirement-steps-needed-a-pull-first)
@@ -325,6 +327,73 @@ onwards; the early ones are split by phase rather than by hour.
   expects `401 Valid API Key Required`, and fails the day TDX's access
   changes - the `endpoint_absent` pattern CNPJ's geo-block uses, expressed
   with `expect_status` so it can also check the refusal's wording.
+### 2026-09-23 - The cleanup role's stray worktrees retired; removing a session's own launch worktree broke that session
+
+- **Retired, at the owner's request:** the worktree
+  `.claude/worktrees/practical-leakey-12a8a2`, and the branches
+  `claude/practical-leakey-12a8a2` (`2fea434`),
+  `claude/cleanup-handoff-2026-09-23-18986c` (`6ec6010`) and `render-guard`
+  (`469ca7a`). All were deleted with `-d` against `worktree-cleanup` at
+  `2c091fd`, which contains every one of them. Removing the worktree without
+  `--force` also confirmed it had no uncommitted files. The remote branches
+  `dublin-build`, `milan-build` and `spain-app-wiring` are merged and were left
+  on GitHub; deleting them is a push, and it was not asked for.
+
+- **The desktop app had launched this cleanup session in a worktree it
+  generated, `cleanup-handoff-2026-09-23-18986c`, instead of in
+  `.claude/worktrees/cleanup`.** The handoff's first instruction, to confirm
+  the branch and stop if it was wrong, caught it. The session then moved
+  itself into the cleanup worktree at the owner's choice, rather than being
+  restarted.
+
+- **Removing that launch worktree from inside the same session broke the
+  session.** `git worktree remove` deleted the contents and unregistered the
+  worktree, then failed to delete the folder itself, because the session
+  still held it open. The session's hooks load from the `.claude/` of the
+  folder it was launched in, so `block_heredoc.py` disappeared and every Bash
+  call failed. The risk had been named to the owner minutes earlier, and the
+  command was run anyway. Nothing was lost, because the worktree was clean and
+  at `master`. The rule now sits beside the retirement steps in
+  `docs/session_roles.md`, which is the place the next retirement will read.
+
+### 2026-09-23 - Three limbs of check_provenance could fall silent; each now asserts it had input
+
+- **Found three places where `scripts/check_provenance.py` would examine
+  nothing and still print its green line, and made each one fail instead.**
+  This came from the handed-over instruction to look for loops with no guard
+  for matching nothing. The glob loops themselves were harmless:
+  `docs/**/*.md` does not come back empty. The dangerous variant was a
+  NAMED input going missing and being skipped with `continue` or `return []`:
+  (1) the CRS limb of check K skipped any city with no config at its derived
+  slug, or whose `CRS_PROJECTED` was not a literal the regex reads (an
+  f-string, or a value imported from `pipeline/countries/`); (2) check I
+  skipped a `TABLE_DOCS` file that no longer existed, so renaming one of those
+  documents would have retired its table check; (3) checks C, D and F read the
+  notices from `data_sources.md` and `app/components.py` by regex, and an empty
+  parse passes C, because `[]` counts as contiguous from 1. If both parses came
+  back empty, D and F passed too.
+
+- **None of the three is starved today, measured before the change:** the CRS
+  limb examined 24 of 24 cities, the notice parses returned 25 and 23, and all
+  4 table documents exist. So these are guards, not corrections. They record
+  why a skip happened instead of just taking it, the same pattern as the
+  longitude guard the 2026-09-22 entry describes, which covered only one of
+  the CRS limb's three ways to drop a city.
+
+- **Each guard was watched failing** in a scratchpad harness that
+  monkeypatches in-process and never touches the tree: an f-string CRS in
+  Lille, Lille's slug pointed elsewhere, an extra entry in `TABLE_DOCS`, and
+  both notice parses emptied. Each exited 1 with its own message, and an
+  unmodified positive control exited 0. **The harness was wrong on its first
+  run.** It patched the slug for `"Lille"` while `city_names()` returns
+  `"Lille (Regional)"`, so that negative case became a second positive control
+  and passed. Exit status alone could not tell the two apart. Checking for the
+  expected message is what caught it.
+
+- **Not changed:** `check_stale_claims.py` has the same skip shape for its
+  documents, in category C and category E, and was left alone. It reports and
+  never fails, so a silent limb there costs recall rather than a false green
+  gate.
 
 ### 2026-09-23 - The geocoding retrospective, written to prepare Japan; the lesson placed where the next country passes through it
 

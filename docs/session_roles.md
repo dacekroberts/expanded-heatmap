@@ -116,6 +116,19 @@ behind GitHub because sessions push from their worktrees and nobody pulls
 there. Without the pull it refuses, correctly - those commits really are not in
 that `master` yet - but it reads like a warning of data loss.
 
+**Never remove a session's own launch worktree from inside that session.**
+On 2026-09-23 a cleanup session that the app had launched in the wrong
+worktree moved itself to `.claude/worktrees/cleanup`, then ran `git worktree
+remove` on the worktree it had been launched in. Windows refused to delete the
+folder, which the session still held open, but only after git had deleted
+everything inside it and unregistered the worktree. A session loads its hooks
+and skills from the `.claude/` of the folder it was **launched** in, not the
+one it moved to, so that session lost `block_heredoc.py`. Every Bash call
+failed from then on, and skills were at risk. Nothing was lost, because the
+worktree was clean and at `master`, but the session could not continue.
+Remove a launch worktree **after closing its session**, from the main
+checkout, with the same commands as above.
+
 `.claude/worktrees/` is gitignored. It is also worth adding to
 `.git/info/exclude` on a working machine, because `.gitignore` only takes
 effect in a tree that has this commit, and the main checkout may not yet.
