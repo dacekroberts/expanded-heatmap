@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**280 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**281 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [PLAN.md trimmed of 14 done items; three merged branches deleted](#2026-09-24---planmd-trimmed-of-14-done-items-three-merged-branches-deleted)
 - [Open gap probed (Rome reached; Turin, Cairo discarded); Brasília and Recife rail licences read; Taipei's head-office rule tested; the address-join skill](#2026-09-24---open-gap-probed-rome-reached-turin-cairo-discarded-brasília-and-recife-rail-licences-read-taipeis-head-office-rule-tested-the-address-join-skill)
 - [The oslo worktree retired; prague's empty folder kept](#2026-09-24---the-oslo-worktree-retired-pragues-empty-folder-kept)
 - [A check that every map was rendered by the current renderer; the zoom-lag worktree retired](#2026-09-24---a-check-that-every-map-was-rendered-by-the-current-renderer-the-zoom-lag-worktree-retired)
@@ -322,6 +323,36 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - PLAN.md trimmed of 14 done items; three merged branches deleted
+
+- **PLAN.md loses 201 lines (1,695 to 1,494), all of them done items that
+  already have their DECISIONS entry, and `scripts/check_plan_done.py` now
+  reports what is next in line.** PLAN.md's own legend says a `[x]` item
+  "stays only until its DECISIONS.md entry exists"; nothing enforced it, and
+  43 had piled up in the file every session reads first. The report sorts
+  each done item three ways: REMOVABLE (it cites an entry that exists),
+  CANDIDATE (a best-effort match on date and words), or KEEP?. Its matches
+  are only a starting point - it paired Boston with "Residence exposure
+  checked" - so nothing was removed on its word. An item went only when an
+  exact DECISIONS heading was found for it by hand AND it held no open work:
+  no `[ ]` sub-item, and none of "left behind", "still open", "to settle",
+  "not yet" or TODO. That filter kept Miami, Madrid/Barcelona, Korea's
+  "do not attempt" item and the stale-claims one. A second, manual read kept
+  Washington D.C., whose follow-ups are phrased in other words ("Worth
+  deciding whether the drift check should say so"). The deploy-gate sweep
+  item stays because `app/pages/9_Washington_DC_Heatmap.py` points readers
+  to it. **Removed:** Oslo, France, the label fix, the zoom fix, New York,
+  Mexico, Lyon (its reinstatement test lives in its DECISIONS entry and in
+  `docs/gated_access.md` rows 17-18), the three fetch/geocoder/DENUE
+  refactors, the category-B pass, rings off by default, the catch-all sweep,
+  Canada's re-ranking, and Vancouver. The diff is deletions only. Report-only
+  by design: some done items are kept on purpose.
+
+- **Deleted `dublin-build`, `milan-build` and `spain-app-wiring` on
+  GitHub**, on the owner's instruction. Each had 0 commits outside master,
+  re-checked immediately before, so every commit remains reachable from
+  master. `worktree-staging` stays; the Staging Session uses it.
 
 ### 2026-09-24 - Open gap probed (Rome reached; Turin, Cairo discarded); Brasília and Recife rail licences read; Taipei's head-office rule tested; the address-join skill
 
