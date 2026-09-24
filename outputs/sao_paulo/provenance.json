@@ -1,0 +1,17 @@
+{
+  "cnefe": {
+    "file": "3550308_SAO_PAULO.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/35_SP/3550308_SAO_PAULO.zip",
+    "bytes": 185731999,
+    "sha256": "6071947b633a096e093c7a04399ba6b24f8bcfef41b8d034c462cd70dc6fecc3",
+    "retrieved": "2026-09-24T10:57:58+00:00"
+  },
+  "geosampa_stations": {
+    "file": "geosampa_estacao_metro.json",
+    "url": "https://wfs.geosampa.prefeitura.sp.gov.br/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=geoportal:estacao_metro&outputFormat=application/json",
+    "bytes": 44818,
+    "sha256": "9924900d8c0b1233d8385412793d74a475edf31db4a30790ad4ed76342506fd2",
+    "retrieved": "2026-09-24T10:57:59+00:00"
+  },
+  "osm_host": "overpass-api.de"
+}

@@ -21,6 +21,16 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [~] **🇧🇷 SÃO PAULO - PINNED 2026-09-24 at step 2, on `sao-paulo-build`.**
+  Fetch, boundary and step 1 (86 stations, gate 3 exact) committed. Waiting on
+  the owner:
+  - [ ] **Who writes Brazil's national CNEFE classifier** (`pipeline/taxonomies/`,
+    lifted from `scripts/screen_cnefe.py`) - this build session, or staging,
+    per `docs/session_roles.md`.
+  - [ ] **The macro-map region** - "Brazil", or a South American region.
+  - [ ] Then: step 2 (privacy rule at dwelling addresses, vacancy excluded,
+    2022 vintage), step 3, checks, drafts - as Amsterdam and Rome.
+
 - [x] **🇨🇿 PRAGUE - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro A,
   B and C, obec 554782: **25,275 storefronts, 58 stations**; page text, notices
   32-34 and the `excluded_categories.md` section approved by the owner.

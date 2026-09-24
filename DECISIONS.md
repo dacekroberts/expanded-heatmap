@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**306 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**307 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [São Paulo started and PINNED at step 2: who writes Brazil's classifier](#2026-09-24---são-paulo-started-and-pinned-at-step-2-who-writes-brazils-classifier)
 - [Prague deployed; the live site measured after the reboot](#2026-09-24---prague-deployed-the-live-site-measured-after-the-reboot)
 - [Prague's deploy-verify passed; the Europe view zoomed out](#2026-09-24---pragues-deploy-verify-passed-the-europe-view-zoomed-out)
 - [Prague built: 25,275 storefronts, 58 stations](#2026-09-24---prague-built-25275-storefronts-58-stations)
@@ -348,6 +349,42 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - São Paulo started and PINNED at step 2: who writes Brazil's classifier
+
+- **São Paulo's own paths are built on `sao-paulo-build` and step 2 is
+  pinned for the owner.** The brief (7/7 checks) says the CNEFE classifier
+  must be ONE shared national module under `pipeline/taxonomies/`, lifted
+  from staging's `scripts/screen_cnefe.py` and never copied per city, and
+  `docs/session_roles.md` gives shared taxonomy code to the app/chrome role -
+  or to staging when no third window exists - and says it "is never edited
+  opportunistically mid-build by a session that does not own it". Staging was
+  live that night (commits at 03:36 and 03:47), so a build session writing
+  the module would be exactly that. Put to the owner: this build session
+  writes it, or staging does. Everything else waits on it only as far as
+  step 2 and 3.
+
+- **Built and committed**: `fetch_sources.py` (CNEFE's 185,731,999-byte zip,
+  GeoSampa's operating station layer, OSM boundary and rail), `boundary.py`
+  (OSM relation 298285 found by `IBGE:GEOCODIGO` 3550308 inside a bbox, never
+  by name - 1,524.1 km² against IBGE's 1,521) and **step 1: 86 stations** on
+  Linhas 1-5 and 15, all inside the município, geometry and stations from
+  OSM by route membership and status from GeoSampa (the owner's 2026-09-23
+  decision). Lines 6 and 17 are in OSM and still only in GeoSampa's planned
+  layer - not drawn, and step 1 stops the day either appears as operating.
+
+- **Gate 3 is exact after one recorded correction and one alias.** GeoSampa's
+  operating layer lacks **Jardim Colonial**, Linha 15's terminus, open since
+  2021-12-29 (English Wikipedia, "11 operational") - the agency layer is stale
+  by one station, which `config.GATE3_ADDED` records and step 1 drops the day
+  GeoSampa lists it. OSM carries **São Paulo-Morumbi** under two spellings (an
+  en dash and a hyphen, 6 m apart) - one alias. Then 23 / 14 / 18 / 11 / 17 /
+  11, 86 network-wide, all equal. Other name differences are naming-rights
+  suffixes (Saúde-Ultrafarma, Faria Lima-PagBank) - the same stations.
+
+- **Also for the owner at build**: the macro-map REGION (the brief: "Brazil",
+  or a South American region if more countries follow) - no Brazilian city
+  can enter `app/cities.py` without it.
 
 ### 2026-09-24 - Prague deployed; the live site measured after the reboot
 
