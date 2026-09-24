@@ -6,19 +6,20 @@
 - **Buckets**: `japan_eigyo`. Japan publishes no general-retail register, so **Retail is food shops only**, bakeries and delis included (owner).
 - **Counts** are fixed-premises permit rows, before build-time de-duplication.
 - **Stations** are distinct N02 station names inside each ward. The Shinkansen and the Sagano scenic line are left out. "—" means that prefecture's N03 file is not cached.
+- **Of the official count**: every food-service row in the list, vehicles and stalls included, against 飲食店営業 permits in force at 2025-03-31. The count comes from MHLW's 衛生行政報告例, old law plus revised law (for Tokyo's wards, Tokyo's yearbook, which equals it). The lists are dated 2026, so read about ±3%. ✅ marks 90% or more. Credit: 「衛生行政報告例」（厚生労働省）を加工して作成.
 
-| City | Band | Wards | Food service | Food retail | Personal services | Placed at block | Stations | Order / status |
-|---|---|---|---|---|---|---|---|---|
-| **Osaka** | 🟢 A | 24 | **52,184** | 7,928 | 15,766 | **99.1%** | 214 | Builds 1st |
-| **Kobe** | 🟢 A | 9 | **19,707** | 3,820 | 4,993 | **97.3%** | 121 | 2nd |
-| **Sapporo** | 🟢 A | 10 | **19,883** | 3,358 | 5,993 | **86.0%** | 93 | 3rd. Grid addresses resolve to the 条丁目 block, about 100 m |
-| **Fukuoka** | 🟢 A | 7 | **18,330** | 9,070 | 5,842 | **97.6%** | 71 | 4th. Includes MHLW's addressed rows; about 20% of restaurants withhold their address |
-| **Kyoto** | 🟢 A | 11 | **22,306** | 4,890 | 5,828 | **93.2%** | 121 | 5th. Rebuilt register: an upper bound |
-| **Tokyo (8 wards)** | 🟢 A | 8 food + 7 personal-services only | **43,638** ⚠️ | 11,895 | 16,299 | **99.7%** | 197 | 6th, last. Chiyoda missing. ⚠️ 3 partial food lists |
-| **Hiroshima** | 🟣 C | 8 | **11,056** | 4,086 | **0**, none published | **96.2%** | — | Food only: no personal-services list is published |
-| **Sendai** | 🔴 D | 5 | **10,544** | 1,700 | 3,377 | **95.5%** | — | Needs the city's permission; letter drafted, not sent |
-| **Yokohama** | ⚠️ gap | 18 | no current list | — | complete (2026-04-01) | — | — | Only 2,912 restaurants online (MHLW's opt-in slice). A request to the city |
-| **Nagoya** | ⚠️ gap | 16 | no full list | — | beauty list only | — | — | BODIK keeps only 12 months of new permits. A request to the city |
+| City | Band | Wards | Food service | Food retail | Personal services | Of the official count | Placed at block | Stations | Order / status |
+|---|---|---|---|---|---|---|---|---|---|
+| **Osaka** | 🟢 A | 24 | **52,184** | 7,928 | 15,766 | ⚠️ **67%** of 81,418 | **99.1%** | 214 | Builds 1st |
+| **Kobe** | 🟢 A | 9 | **19,707** | 3,820 | 4,993 | ✅ **101%** of 21,554 | **97.3%** | 121 | 2nd |
+| **Sapporo** | 🟢 A | 10 | **19,883** | 3,358 | 5,993 | ✅ **100%** of 20,484 | **86.0%** | 93 | 3rd. Grid addresses resolve to the 条丁目 block, about 100 m |
+| **Fukuoka** | 🟢 A | 7 | **18,330** | 9,070 | 5,842 | ✅ **101%** of 25,505 | **97.6%** | 71 | 4th. Includes MHLW's addressed rows; about 20% of restaurants withhold their address |
+| **Kyoto** | 🟢 A | 11 | **22,306** | 4,890 | 5,828 | ✅ **93%** of 26,070 | **93.2%** | 121 | 5th. Rebuilt register: an upper bound |
+| **Tokyo (8 wards)** | 🟢 A | 8 food + 7 personal-services only | **43,638** ⚠️ | 11,895 | 16,299 | ⚠️ **56%** of 81,024 | **99.7%** | 197 | 6th, last. Chiyoda missing. ⚠️ 3 partial food lists |
+| **Hiroshima** | 🟣 C | 8 | **11,056** | 4,086 | **0**, none published | ✅ **99%** of 12,855 | **96.2%** | — | Food only: no personal-services list is published |
+| **Sendai** | 🔴 D | 5 | **10,544** | 1,700 | 3,377 | ✅ **101%** of 12,417 | **95.5%** | — | Needs the city's permission; letter drafted, not sent |
+| **Yokohama** | ⚠️ gap | 18 | no current list | — | complete (2026-04-01) | no list; official 29,358 | — | — | Only 2,912 restaurants online (MHLW's opt-in slice). A request to the city |
+| **Nagoya** | ⚠️ gap | 16 | no current list | — | beauty list only | no list; official 33,776 | — | — | BODIK keeps only 12 months of new permits. A request to the city |
 
 ### Osaka — by ward
 
@@ -110,18 +111,18 @@
 
 | Ward | Food service | Food retail | Personal services | Block | Stations | Of the official count | Food list |
 |---|---|---|---|---|---|---|---|
-| Shinjuku | **12,747** | 1,443 | 0 | 99.2% | 29 | ⚠️ **83%** of 15,356 | complete as of 2023-01-01. A 2026-03-31 full list exists only as PDF, under site terms that bar reuse |
-| Shibuya | **10,586** | 4,222 | 3,884 | 99.8% | 19 | ✅ **98%** of 10,798 | open list, closed premises dropped |
+| Shinjuku | **12,747** | 1,443 | 0 | 99.2% | 29 | ⚠️ **84%** of 15,356 | complete as of 2023-01-01. A 2026-03-31 full list exists only as PDF, under site terms that bar reuse |
+| Shibuya | **10,586** | 4,222 | 3,884 | 99.8% | 19 | ✅ **101%** of 10,798 | open list, closed premises dropped |
 | Setagaya | **5,873** | 1,342 | 0 | 100.0% | 38 | ⚠️ **63%** of 9,291 | opted-out premises left out (the ward's page) |
-| Taitō | **5,779** | 1,219 | 1,048 | 100.0% | 16 | ⚠️ **71%** of 8,112 | opted-out premises left out (the ward's page) |
-| Minato | **4,781** | 730 | 2,576 | 99.8% | 35 | ⚠️ **30%** of 15,939 | permits 2021–2026 only; consent-filtered. No old-law list is published |
-| Meguro | **2,022** | 1,045 | 1,412 | 100.0% | 10 | ⚠️ **46%** of 4,370 | new-law and old-law lists. The gap is not yet explained |
+| Taitō | **5,779** | 1,219 | 1,048 | 100.0% | 16 | ⚠️ **81%** of 8,112 | opted-out premises left out (the ward's page) |
+| Minato | **4,781** | 730 | 2,576 | 99.8% | 35 | ⚠️ **31%** of 15,939 | permits 2021–2026 only; consent-filtered. No old-law list is published |
+| Meguro | **2,022** | 1,045 | 1,412 | 100.0% | 10 | ⚠️ **52%** of 4,370 | new-law and old-law lists. The gap is not yet explained |
 | Chūō | **1,324** | 992 | 0 | 99.1% | 22 | ⚠️ **12%** of 11,056 | permits 2021–2022 only; never updated since |
 | Kōtō | **526** | 902 | 0 | 99.9% | 28 | ⚠️ **9%** of 6,102 | permits 2021–2022 only; consent-only new permits |
 
 **Personal services only, outside the food scope:** Toshima 1,537 · Ōta 1,521 · Katsushika 1,226 · Shinagawa 1,200 · Chiyoda 713 · Bunkyō 689 · Arakawa 493.
 
-**Of the official count** is the list's fixed-premises food-service rows against 飲食店営業 in Tokyo's statistical yearbook, table 19-8, for the latest fiscal year. The yearbook also counts vehicle permits (about 2% of Shibuya's list), so a complete list reads a little under 100%. ✅ marks 90% or more. **The wards differ because each is its own publisher.** Some publish their own register, some an opt-in or consent-filtered export, and some a snapshot never updated (`docs/build_briefs/tokyo.md`).
+**Of the official count**: each list's 飲食店 permit rows, vehicles included, against 飲食店営業 in Tokyo's statistical yearbook, table 19-8, for the latest fiscal year. ✅ marks 90% or more. **The wards differ because each is its own publisher.** Some publish their own register, some an opt-in or consent-filtered export, and some a snapshot never updated (`docs/build_briefs/tokyo.md`).
 
 ### Hiroshima — by ward
 

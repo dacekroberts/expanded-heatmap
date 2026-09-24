@@ -16,6 +16,15 @@ confirmed against Osaka's own coordinates at a median 38 m.** Personal
 services from the city's barber, beauty and laundry registers (15,775). The
 strongest Japanese city measured.
 
+⚠️ **But the list holds only about 67% of the city's restaurant permits
+(measured 2026-09-24).** It has 54,289 飲食店営業 rows, vehicles included,
+against **81,418** in MHLW's 衛生行政報告例 at FY2024-end, old-law plus revised-law
+tables. The same measure puts Kobe, Sapporo, Fukuoka, Kyoto, Hiroshima and
+Sendai at 93–101%. It is not a reform split: expiry dates run 2026–2033
+evenly, so old-law permits are present. The cause is being probed (`PLAN.md`).
+Until it is known, the page must not call the list complete. Placement is
+unaffected.
+
 ---
 
 ## Business leg — Osaka City's food-permit list (the city's own format)

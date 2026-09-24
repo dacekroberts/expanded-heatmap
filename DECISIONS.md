@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**350 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**351 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Every Japanese city against MHLW's official count: complete except Osaka (67%) and Tokyo](#2026-09-24---every-japanese-city-against-mhlws-official-count-complete-except-osaka-67-and-tokyo)
 - [Tokyo's food lists against an official count: one complete, and no open file fills the rest](#2026-09-24---tokyos-food-lists-against-an-official-count-one-complete-and-no-open-file-fills-the-rest)
 - [The macro map lands on "Global", which labels every city (owner)](#2026-09-24---the-macro-map-lands-on-global-which-labels-every-city-owner)
 - [Three of Tokyo's eight food lists are partial; a per-ward table for Japan](#2026-09-24---three-of-tokyos-eight-food-lists-are-partial-a-per-ward-table-for-japan)
@@ -392,6 +393,37 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Every Japanese city against MHLW's official count: complete except Osaka (67%) and Tokyo
+
+- **Measured every Japanese city's list against MHLW's 衛生行政報告例** (e-Stat,
+  FY2024 year-end, old-law table 5-2-1 plus revised-law 5-4-1).
+  - **Why**: the owner's question was whether the designated cities are
+    fully complete where Tokyo is not. Their completeness had only ever been
+    judged by a per-capita yardstick drawn from the same lists, which is
+    circular.
+  - **Its basis**: the two tables summed for 東京都 equal Tokyo's yearbook
+    exactly (194,868), so the cities and Tokyo's wards are measured on one
+    basis. Credit is 「衛生行政報告例」（厚生労働省）を加工して作成.
+- **The designated cities are complete**: Kobe 101%, Sapporo 100%, Fukuoka
+  101%, Kyoto 93%, Hiroshima 99%, Sendai 101% (lists dated 2026, count
+  2025-03-31, so ±3%).
+- **Osaka is the exception: 67%** (54,289 of 81,418).
+  - **It is not a reform split**: expiry dates run 2026–2033 evenly.
+  - **A probe is finding the cause.** Osaka builds first, so this is a
+    pre-build item (`PLAN.md`, `osaka.md`).
+  - **The earlier "strongest Japanese city" was about placement, and that
+    stands (99.1%, 38 m).** Completeness was never measured until now.
+- **One mistake caught before recording.** The first comparison counted only
+  the taxonomy's Food-service rows, vehicles included. That put Sendai at 85%,
+  because the taxonomy drops 仮設, 臨時 and 自動車 permits (2,069 rows) as not
+  premises, while the official count includes them. Counting every 飲食店
+  permit row gives 101%. The Tokyo ward shares moved the same way (Taitō 71% →
+  81%, Meguro 46% → 52%). **Against an official count, count what the
+  official count counts**, then decide separately what the map shows.
+- **`scripts/japan_ward_table.py`** now puts an official-count column on every
+  city, reading the cached e-Stat tables (`data/japan/raw/estat_eisei_r6_*`).
+  Yokohama and Nagoya show their counts (29,358 and 33,776) with no list.
 
 ### 2026-09-24 - Tokyo's food lists against an official count: one complete, and no open file fills the rest
 

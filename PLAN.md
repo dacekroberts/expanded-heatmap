@@ -755,9 +755,15 @@ brief names.
     all_new / all_old overlap and any consent wording on its page.
   - [ ] **Licence reads** for two side finds: Chūō's complete
     personal-services lists (August 2026) and Shinjuku's (June 2026, PDF).
-  - [ ] **The designated cities against the same kind of count**: MHLW's
-    衛生行政報告例 per city (probe running), so every city in the Japan list is
-    measured one way.
+  - [x] **The designated cities against the same kind of count** (MHLW's
+    衛生行政報告例, FY2024, old law + revised law): Kobe 101%, Sapporo 100%,
+    Fukuoka 101%, Kyoto 93%, Hiroshima 99%, Sendai 101%. These lists are
+    complete. `docs/japan_city_list.md` now measures every city this way.
+- [ ] ⚠️ **Osaka, BEFORE its build (it builds first): the list holds only 67%
+  of the official restaurant count** (54,289 of 81,418). It is not a reform
+  split. A probe is finding the cause: opt-outs, a missing health office,
+  excluded temporary permits, or a second list. Until then the page must
+  not call Osaka's list complete.
 - [ ] **Fukuoka** — agree the wording that discloses the ~20% of restaurants
   with no published address. BODIK is flaky, so `fetch_sources.py` retries.
 - [x] **No pre-build items**: Seoul (its brief is deliberately partial, and
