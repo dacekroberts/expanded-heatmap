@@ -1,6 +1,6 @@
 # What this map leaves out, and why
 
-This project maps **storefront** commercial density around rail-transit
+This project maps **storefront** commercial density around rapid-transit
 stations: the kind of business you might walk into on your way from a station.
 
 That sentence holds two separate scoping decisions, and this page is both of

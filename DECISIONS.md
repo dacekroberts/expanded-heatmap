@@ -16,7 +16,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**270 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**271 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
@@ -27,6 +27,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 **2026-09-23**
 
+- [The site says "rapid-transit", not "rail-transit"](#2026-09-23---the-site-says-rapid-transit-not-rail-transit)
 - [gated_access.md: Taiwan's key gate retired, Kaohsiung's request added](#2026-09-23---gated_accessmd-taiwans-key-gate-retired-kaohsiungs-request-added)
 - [The licence-read agent runs the stray-download check before reporting](#2026-09-23---the-licence-read-agent-runs-the-stray-download-check-before-reporting)
 - [Kaohsiung moves to a reopened access-blocked band (D); Band B becomes Japan only](#2026-09-23---kaohsiung-moves-to-a-reopened-access-blocked-band-d-band-b-becomes-japan-only)
@@ -312,6 +313,34 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - The site says "rapid-transit", not "rail-transit"
+
+- **Owner's decision: the site-wide wording follows the scope the project
+  actually applies, so Toulouse's Téléo cable car no longer contradicts the
+  front page.** Drawing Téléo was decided earlier the same day. What was
+  left open was that the front-page caption and intro, the README, and What
+  Is Excluded still said "rail-transit stations" and "one rail network",
+  while the Toulouse page said Téléo "is the first thing on this site that is
+  not a train". `docs/excluded_categories.md`'s station-scope section had
+  already been corrected to "one city's rapid-transit network", and its test
+  was never about rails: "is it part of the network this city's riders use as
+  its rapid transit". That test is also why commuter rail is out and some
+  trams are in. **Rejected:** keeping "rail" with a "(plus one cable car, in
+  Toulouse)" footnote, which is clunky and fails again with the next non-rail
+  city; and dropping Téléo, which would reverse the earlier decision and
+  remove the only line crossing the Garonne. Changed: `app/Overview.py`
+  (caption and intro), `app/pages/91_What_Is_Excluded.py` (two sentences),
+  `README.md`, the opening sentence of `docs/excluded_categories.md`,
+  `docs/project_context.md`, and CLAUDE.md's one-line description, the last
+  approved by the owner as part of this choice. A draft that named Toulouse
+  as the one exception was cut before commit, since it would be the next
+  stale universal claim; `check_stale_claims.py --only E` still reports 25.
+  **Left as written:** the sent Philadelphia letter,
+  `docs/passover_opus5.md` (a historical handoff), `docs/city_shortlist.md`'s
+  screening criteria, and a code comment that quotes the old tagline as
+  history. City titles that say "rail" (New York's "MTA rail", LA's "Metro
+  Rail") describe networks that are rail.
 
 ### 2026-09-23 - gated_access.md: Taiwan's key gate retired, Kaohsiung's request added
 

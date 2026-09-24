@@ -1,6 +1,6 @@
 # Project conventions
 
-Multi-city map of commercial density around rail-transit stations. Read
+Multi-city map of commercial density around rapid-transit stations. Read
 `docs/project_context.md` first - it is the stable briefing (what's settled,
 architecture, current state, lessons). `PLAN.md` is the open work,
 `DECISIONS.md` the append-only reasoning trail, `docs/city_shortlist.md`
