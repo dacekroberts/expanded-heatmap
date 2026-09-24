@@ -1924,11 +1924,13 @@ The batched RŽP route above was measured and then **set aside**. Measured: 100 
 
 #### ▲ 2026-09-24 — the discard audit, and Amsterdam re-probed on its own host
 
-**Amsterdam** had been discarded as *"register is aggregate"* on the top hits of one `data.overheid.nl` search. Its own DSO API (`api.data.amsterdam.nl/v1/`, 383 datasets) holds the KvK register (`hr_kvk`, gated 403) and **`horeca/exploitatievergunning`: 4,094 live hospitality permits with points** — 0.89× OSM restaurants; licence SILENT. KvK's national HVD open dataset truncates addresses to two postcode digits. → Band C.
+**Amsterdam** had been discarded as *"register is aggregate"* on the top hits of one `data.overheid.nl` search. Its own DSO API (`api.data.amsterdam.nl/v1/`, 100 datasets — first recorded as 383, which was dataset and table paths) holds the KvK register (`hr_kvk`, gated 403) and **`horeca/exploitatievergunning`: 4,094 live hospitality permits with points** — 0.89× OSM restaurants; licence SILENT. KvK's national HVD open dataset truncates addresses to two postcode digits. → Band C.
 
 **The audit** read all 34 discard rows against this trail: 21 rest on two methods, a measured register, or their terms; **12 rested on one method** — Vienna, Rotterdam, Helsinki, Lisbon, Kuala Lumpur, Tallinn, Warsaw, Hamburg, Riga, Athens, Poznań, Bratislava — and moved to the open gap with their next probe named. **The lesson: an early sweep checked discard rows for the words "unprobed" and "not reached", and a one-search negative worded as a finding ("aggregate") passed it.** A discard needs its method count, not its wording.
 
 **Later the same night — the evidence columns.** Filling *Kind / Methods / City host asked?* from this trail failed **5 of the 21** the audit had passed: **Naples** and **Messina** (one search of the city's portal each), **Santiago** and **Lima** (coverage verdicts that never asked the missing comunas' or districts' own sites), **Hyderabad** (GHMC's own host blocked, 403 F5 WAF, never diagnosed from inside India). Owner's call: all five to the open gap. **The audit sorted on wording a second time**; columns a script reads (`scripts/check_discard_evidence.py`) are what caught it. Discards now 16, open gap 17.
+
+**Amsterdam, other routes (same night).** All 100 datasets listed. The gated two are city-staff scopes in the published schema — `hr_kvk` `FP/MDW` + `HR/R`, `standbedrijven` `BSK/BEDRIJVEN` — so a request is unlikely to land. **BAG** on the same API: 10,898 *winkelfunctie* units in use (90% shop-only), 1.77× OSM's 6,150 shops, nonsense control 0 — but no name, no activity, and `feitelijkGebruik` empty on every one, so vacancies count. Nothing else is premises-shaped. Band C stands; whether a use-class layer may stand in for a retail register is OPEN for the owner.
 
 #### A refinement the Korea probe produced: stations are not lines
 

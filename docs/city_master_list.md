@@ -625,20 +625,28 @@ food-density page belong in a project whose other cities carry three buckets?
 
 **Its discard rested on the top hits of one national search** (*"Aantal
 vestigingen per buurt"* — neighbourhood counts). **The city's own API was
-never asked**, and it answers: `api.data.amsterdam.nl/v1/` lists 383 datasets.
+never asked**, and it answers: `api.data.amsterdam.nl/v1/` lists **100 datasets**
+*(recorded as 383 at first — that was dataset and table paths, not datasets)*.
 
 | | |
 |---|---|
-| **The full register** | 🚧 `hr_kvk` (the KvK Handelsregister, incl. `vestigingen`) and `standbedrijven` answer **HTTP 403** — authorised users only, not worked around. KvK's own HVD open dataset (CC BY 4.0) **cuts every address to the first two postcode digits** and drops names and numbers — activities without a location, Colombia's shape |
+| **The full register** | 🚧 `hr_kvk` (the KvK Handelsregister, incl. `vestigingen`) and `standbedrijven` answer **HTTP 403** — authorised users only, not worked around. The published schema names the scopes: `hr_kvk` **`FP/MDW`** and **`HR/R`**, `standbedrijven` **`BSK/BEDRIJVEN`** — city-staff scopes, so asking for access is unlikely to land. KvK's own HVD open dataset (CC BY 4.0) **cuts every address to the first two postcode digits** and drops names and numbers — activities without a location, Colombia's shape |
 | **The one bucket** | ✅ `horeca/exploitatievergunning` — **4,094 hospitality operating permits**, all granted, **every end date in 2026–2031 (a live register: expired permits leave it)**, 96.7% with a point (RD New). Restaurant 1,702 · café 870 · alcohol-free 327 · fast food 231 · coffeeshop 126 · eethuis 93 · hotels 72 (out) |
 | **Control** | **0.89×** OSM restaurants (1,806 vs 2,040) and **0.95×** all food and drink — close to complete; **fast food is thin** (231 vs 712), probably exempt |
 | **Licence** | **SILENT — read 2026-09-24.** The live API declares none (`license: null`, *"Licentie: -"*); a 2022 harvest of the city's retired catalogue on `data.overheid.nl` said CC BY 4.0 — **a conflict flagged, not resolved in the project's favour** |
 | **Names** | trade names (*"Taco Lindo Albert Cuyp B.V."*) |
 | **Rail** | 14 subway and 46 tram relations |
+| **A second layer? (probed 2026-09-24)** | **BAG on the same API**: **10,898** units whose use class is *winkelfunctie* (shop) and whose status is *in gebruik*, all with a point, **90% shop-only** (9,837), the rest mixed. **1.77×** OSM's 6,150 shops (nonsense-term control: 0). But BAG records what a unit is **for**, not what is there: **no name, no activity, and `feitelijkGebruik` (actual use) empty on all 10,898** — a vacant shop counts, and so does a hairdresser. Restaurants and cafés sit mostly under *bijeenkomstfunctie* (6,717 units), which the permits already cover better. **Licence not read** |
+| **Nothing else** | The other 97 datasets were listed in full: shopping-area polygons (`winkelgebieden`, 142), terrace tariff zones (11), B&B and mooring permits, city-owned property — **none premises-shaped** |
 
 **One bucket, and the best-maintained one in this band** — the only register
 here that drops premises when their permit ends. It joins Stockholm, Göteborg
 and Zurich under the same owner question.
+
+**OPEN (owner):** whether a use-class layer — premises by what they are built
+for, with no name or activity and vacancies included — may stand in for a
+register's retail bucket. No source of that shape has been used here, and the
+answer would also decide Rotterdam's re-probe, since BAG is national.
 
 ### 🇸🇬 Singapore — moved here from the coordinates band 2026-09-23
 

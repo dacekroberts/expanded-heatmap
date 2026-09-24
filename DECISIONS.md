@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**288 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**289 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Amsterdam's other routes: the gated register is staff-only; BAG measured as a possible retail layer, band question left open](#2026-09-24---amsterdams-other-routes-the-gated-register-is-staff-only-bag-measured-as-a-possible-retail-layer-band-question-left-open)
 - [Discard table gets evidence columns and a check; five more rows to the open gap (owner)](#2026-09-24---discard-table-gets-evidence-columns-and-a-check-five-more-rows-to-the-open-gap-owner)
 - [GitHub repo reviewed: README brought current, LICENSE's disclaimer kept where Edmonton relies on it](#2026-09-24---github-repo-reviewed-readme-brought-current-licenses-disclaimer-kept-where-edmonton-relies-on-it)
 - [Discard audit: 12 single-method rows to the open gap (owner); Amsterdam re-probed on its own host and moved to Band C](#2026-09-24---discard-audit-12-single-method-rows-to-the-open-gap-owner-amsterdam-re-probed-on-its-own-host-and-moved-to-band-c)
@@ -330,6 +331,33 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Amsterdam's other routes: the gated register is staff-only; BAG measured as a possible retail layer, band question left open
+
+- **Listed all 100 datasets on `api.data.amsterdam.nl/v1/`** rather than
+  searching. The earlier "383 datasets" (entry below, 2026-09-24) was dataset
+  and table paths counted as datasets; corrected in the master list and the
+  shortlist. Nothing premises-shaped beyond what was already known:
+  shopping-area polygons (`winkelgebieden`, 142), terrace tariff zones (11),
+  B&B and mooring permits, city-owned property.
+- **The two gated datasets are staff-only by their published schema**:
+  `hr_kvk` carries scopes `FP/MDW` and `HR/R`, `standbedrijven`
+  `BSK/BEDRIJVEN`. Read from `schemas.data.amsterdam.nl`, no credentials sent.
+  So a written access request, the one legitimate route to them, is unlikely
+  to be granted; not drafted.
+- **Measured BAG on the same API as a possible second layer**: 10,898
+  verblijfsobjecten with use class *winkelfunctie* and status *in gebruik*,
+  every one current and with a point, 9,837 (90%) shop-only; **1.77x** OSM's
+  6,150 `shop=*` in the gemeente (overpass-api.de; the other host 504'd).
+  Server-side filter confirmed with a nonsense-term control (0). But BAG
+  records what a unit is built for, not what is there: no name, no activity,
+  `feitelijkGebruik` empty on all 10,898 - vacancies count, and personal
+  services share the class. Licence not read.
+- **Left OPEN for the owner**: whether a use-class layer may stand in for a
+  register's retail bucket. It would be the first source of that shape here,
+  and the answer also decides Rotterdam's re-probe, since BAG is national.
+  Amsterdam stays in Band C meanwhile. Touched `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md`.
 
 ### 2026-09-24 - Discard table gets evidence columns and a check; five more rows to the open gap (owner)
 
