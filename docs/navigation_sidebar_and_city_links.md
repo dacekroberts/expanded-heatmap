@@ -5,7 +5,7 @@ The app has two ways of moving between pages. The **map-only pilot** (started
 navigation. Nothing was deleted: `MAP_ONLY_NAV` in `app/cities.py` switches
 between the two modes, so restoring the older navigation is a one-line change.
 
-| | Sidebar page list | City switcher row | Macro map + "All cities" button |
+| | Sidebar page list | City switcher row | Macro map + "Global View" button |
 |---|---|---|---|
 | `MAP_ONLY_NAV = True` (now) | hidden | not shown | the way in, out, and between cities |
 | `MAP_ONLY_NAV = False` | shown | shown on every city page | still there, alongside |
@@ -36,7 +36,7 @@ button and makes the change reversible from Python alone.
        # second line when the row is too narrow; fixed-width columns clipped the
        # longer city names once a fourth city was added.
        with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
-           st.page_link(OVERVIEW_PAGE, label="← All cities (map)")
+           st.page_link(OVERVIEW_PAGE, label="← Global View")
            for city in CITIES:
                if city["name"] == current:
                    st.markdown(f"**{city['name']}**")
@@ -53,14 +53,14 @@ button and makes the change reversible from Python alone.
    and the route if the map fails to load (see the "Macro map and city
    navigation" entry in `DECISIONS.md`). Decided 2026-09-21: keep it.
 3. **The intro sentence** on the Overview, which mentions the switcher; it now
-   reads "each city map has an 'All cities' button to come back here" while
+   reads "each city map has a 'Global View' button to come back here" while
    `MAP_ONLY_NAV` is on.
 
 ## How map-only navigation works
 
 - **In:** clicking a city marker on the macro map opens that city's page
   (`st.switch_page`; works without a sidebar).
-- **Out:** each city map has an **"All cities"** button, top-right, left of the
+- **Out:** each city map has a **"Global View"** button, top-right, left of the
   Dark Mode button (all the top-right controls live in `THEME_TOGGLE_HTML` in
   `pipeline/map_common.py`, so every city gets them from the shared renderer).
 - **Between cities:** a **"Cities" dropdown** (a native `<select>`, so it works
@@ -77,7 +77,8 @@ button and makes the change reversible from Python alone.
   access but not top-level navigation), so it cannot set the parent's location.
   Clicking the parent page's own link to the Overview works, and Streamlit then
   navigates in place, with no reload (checked: the browser window object
-  survives the click). The link is found by its text ("All cities"), falling
+  survives the click). The link is found by its text (the hidden link keeps "All cities", the
+  switcher's reads "Global View"), falling
   back to the link whose path is the app's root.
 - **Those links must exist on every city page.** With the switcher off,
   `render_city_nav()` still renders a link to the Overview and one per city inside a
@@ -93,8 +94,8 @@ button and makes the change reversible from Python alone.
 
 Set `MAP_ONLY_NAV = False` in `app/cities.py`. That un-hides the sidebar,
 brings back the switcher row on every city page, and restores the intro
-sentence. The "All cities" button stays (it finds the switcher's "All cities
-(map)" link). Restart Streamlit after the change (it serves an edited
+sentence. The "Global View" button stays (it finds the switcher's "← Global View"
+link). Restart Streamlit after the change (it serves an edited
 `components.py` from cache otherwise), then check every city page.
 
 ## Open questions and known gaps in the pilot
@@ -104,7 +105,7 @@ sentence. The "All cities" button stays (it finds the switcher's "All cities
   of city links; dropping it later removes the keyboard and no-map route.
 - **Hopping between cities** was a gap (two steps through the macro map); the
   "Cities" dropdown closes it (added 2026-09-21). A visitor who lands on a city
-  page by URL now has the dropdown and the "All cities" button.
+  page by URL now has the dropdown and the "Global View" button.
 - **Deep links still work:** a city page's URL opens it directly.
 - **A missing link means a dead control:** the buttons do nothing, and the
   dropdown stays hidden or empty, if the hidden links were not rendered.

@@ -50,7 +50,7 @@ st.caption("Storefront commercial density around rapid-transit stations, "
            "city by city.")
 
 _FOLLOW_UP = (
-    'each city map has an "All cities" button to come back here.'
+    'each city map has a "Global View" button to come back here.'
     if MAP_ONLY_NAV
     else "each city page also has a switcher to jump straight to another city."
 )

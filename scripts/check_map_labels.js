@@ -168,7 +168,7 @@ if (!found) {
   if (!(closedH < openH)) problems.push(`legend does not collapse (open ${Math.round(openH)}px, closed ${Math.round(closedH)}px)`);
   if (legend.open !== wasOpen) problems.push('legend state not restored');
 
-  // Top-right buttons ("All cities" when embedded, and Dark Mode): inside the
+  // Top-right buttons ("Global View" when embedded, and Dark Mode): inside the
   // visible viewport (it is position: fixed, unlike Leaflet's top-right
   // corner), not over a label, and it toggles and restores.
   const toggle = doc.getElementById('theme-toggle');

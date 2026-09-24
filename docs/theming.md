@@ -18,7 +18,7 @@ last. Anything under "Superseded" is provenance, not instructions.
 does not.**
 
 - **The toggle** is a plain fixed-position button at the map's top right, part
-  of the `#map-actions` group alongside "All cities" and the Cities dropdown.
+  of the `#map-actions` group alongside "Global View" and the Cities dropdown.
   Not a Leaflet control — see Superseded for why the base-layer radio lost.
 - **The dark basemap is one CSS filter** on the tile pane:
   `invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9) saturate(0.7)`.

@@ -229,7 +229,7 @@ worth knowing because it also says what *would* make it right.
 - **There is no caching anywhere in `app/`.** No `@st.cache_data`, no
   `@st.cache_resource` (grepped). So nothing accumulates across page visits or
   sessions — each request reads what it needs and releases it.
-- **No city map contains another city's data.** The "All cities" control is a
+- **No city map contains another city's data.** The "Global View" control is a
   navigation button, not a data layer. (The "all-city heat layer" noted for New
   York is *city-wide* extent versus the ring subset — not cross-city.)
 - **`Overview.py` loads only `pd.DataFrame(CITIES)`** — the metadata list from

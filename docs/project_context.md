@@ -958,7 +958,7 @@ house, which carries no unit indicator to detect.
 with Streamlit; no folium) with a labelled marker per city, where clicking a
 marker opens that city's page (`st.switch_page`), plus a plain link list as a
 fallback. In the map-only pilot (`MAP_ONLY_NAV` in `app/cities.py`) the sidebar page
-list and the city switcher are hidden, and each city map has an "All cities"
+list and the city switcher are hidden, and each city map has a "Global View"
 button back to the macro map; with the flag off, every city page has a switcher
 row to jump to another city or back to the map (see
 `docs/navigation_sidebar_and_city_links.md`). The city list lives in `app/cities.py`.

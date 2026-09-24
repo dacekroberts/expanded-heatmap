@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**351 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**352 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [The city map's "All cities" button is now "Global View" (owner); the hidden link keeps its text](#2026-09-24---the-city-maps-all-cities-button-is-now-global-view-owner-the-hidden-link-keeps-its-text)
 - [The macro map lands on "Global", which labels every city (owner)](#2026-09-24---the-macro-map-lands-on-global-which-labels-every-city-owner)
 - [Rotterdam built: 7,520 storefronts, 132 stations; the food layer rebuilt from permit notices](#2026-09-24---rotterdam-built-7520-storefronts-132-stations-the-food-layer-rebuilt-from-permit-notices)
 - [Three of Tokyo's eight food lists are partial; a per-ward table for Japan](#2026-09-24---three-of-tokyos-eight-food-lists-are-partial-a-per-ward-table-for-japan)
@@ -393,6 +394,30 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - The city map's "All cities" button is now "Global View" (owner); the hidden link keeps its text
+
+- **Renamed at the owner's request, which the Cleanup session relayed; the
+  owner approved the wording in the Rotterdam session.** The name matches the
+  macro map's new landing region.
+  - **On the maps:** the button reads "← Global View", with the aria-label
+    "Back to the Global View map". All 40 maps are re-rendered, in the same
+    push as the label-contrast work.
+  - **In the app:** "← Global View" replaces "← All cities (map)" on About the
+    Data, What Is Excluded and the switcher row that `MAP_ONLY_NAV = False`
+    restores. The Overview's sentence and the "Top right" line on pages 1-6
+    name the button the same way. The docs and the deploy-verify and add-city
+    mentions changed too. The app never names it two ways.
+- **The hidden map-only link still reads "All cities", deliberately.** The
+  maps' JS finds the Overview link by that text and leaves it out of the
+  Cities menu. A renamed hidden link would show up as a city in any map drawn
+  before the change. `overviewLink()` now also matches "Global View", so the
+  switcher row finds its link by text rather than through the root-path
+  fallback. `check_stale_claims.py`'s `UI_LABELS` keeps "All cities" for the
+  same reason, because the literal is still in `components.py`.
+- **Left as written:** `docs/passover_opus5.md` (a dated handover) and a
+  measurement note in `pipeline/boston/config.py`. Both describe the button
+  as it was then.
 
 ### 2026-09-24 - The macro map lands on "Global", which labels every city (owner)
 

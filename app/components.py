@@ -31,10 +31,12 @@ def render_city_nav(current: str):
 
     In the map-only pilot (cities.MAP_ONLY_NAV) there is no visible switcher.
     The links are still rendered, hidden (see set_base_font): one to the Overview
-    and one per city, because the city map's own "All cities" button and city
+    and one per city, because the city map's own "Global View" button and city
     menu navigate by clicking them (and read the city names from them)."""
     if MAP_ONLY_NAV:
         with st.container(key="map-only-nav"):
+            # Keep this text: the maps' JS finds this link, and leaves it out of
+            # the Cities menu, by "All cities" (pipeline/map_common.py).
             st.page_link(OVERVIEW_PAGE, label="All cities")
             for city in SWITCHER_ORDER:   # grouped by country; see cities.py
                 st.page_link(city["page"], label=city["name"])
@@ -43,7 +45,7 @@ def render_city_nav(current: str):
     # second line when the row is too narrow; fixed-width columns clipped the
     # longer city names once a fourth city was added.
     with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
-        st.page_link(OVERVIEW_PAGE, label="← All cities (map)")
+        st.page_link(OVERVIEW_PAGE, label="← Global View")
         for city in SWITCHER_ORDER:
             if city["name"] == current:
                 st.markdown(f"**{city['name']}**")

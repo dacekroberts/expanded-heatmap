@@ -77,7 +77,7 @@ adding a city whose name is long.
 `MAP_ONLY_NAV` (below) switches the app between two ways of moving around: True
 (the current pilot) hides the sidebar page list and the city switcher on every
 city page, so the map is the only navigation (a city's page opens from its
-marker, and each city map has an "All cities" button back); False restores the
+marker, and each city map has a "Global View" button back); False restores the
 sidebar and the switcher. Both are documented in
 docs/navigation_sidebar_and_city_links.md.
 """

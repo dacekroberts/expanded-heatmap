@@ -175,7 +175,7 @@ _THEME_TOGGLE_TEMPLATE = """
         <option value="" selected disabled>Cities</option>
     </select>
     <button id="back-to-map" class="map-btn" type="button" hidden
-        aria-label="Back to the map of all cities">&larr; All cities</button>
+        aria-label="Back to the Global View map">&larr; Global View</button>
     <button id="theme-toggle" class="map-btn" type="button" aria-pressed="false">&#9790; Dark mode</button>
 </div>
 <script>
@@ -217,7 +217,7 @@ _THEME_TOGGLE_TEMPLATE = """
         }
     }
 
-    // "All cities" button: only when this map is embedded in the app (it has a
+    // "Global View" button: only when this map is embedded in the app (it has a
     // parent page to go back to); opened on its own it stays hidden. It clicks
     // the app's own link to the Overview, so Streamlit navigates in place, and
     // saves the current theme first so the macro map opens in the same mode.
@@ -225,8 +225,9 @@ _THEME_TOGGLE_TEMPLATE = """
     function trimSlash(p) { while (p.length > 1 && p.charAt(p.length - 1) === '/') p = p.slice(0, -1); return p; }
     function overviewLink() {
         var doc = window.parent.document, links = doc.querySelectorAll('a[href]');
-        for (var i = 0; i < links.length; i++) {          // the page's own link to the Overview
-            if (links[i].textContent.indexOf('All cities') !== -1) return links[i];
+        for (var i = 0; i < links.length; i++) {          // the page's own link to the Overview:
+            var t = links[i].textContent;                 // hidden "All cities", switcher "Global View"
+            if (t.indexOf('All cities') !== -1 || t.indexOf('Global View') !== -1) return links[i];
         }
         var here = window.parent.location.pathname;      // else the link to the app's root
         var root = trimSlash(here.substring(0, here.lastIndexOf('/') + 1));
@@ -363,7 +364,7 @@ _LEGEND_CSS = """
 /* THE OPEN LEGEND IS CAPPED BELOW THE BUTTON ROW, AND SCROLLS. Amsterdam
    (2026-09-24) was the first map with 21 lines: open, its legend was 634 px
    tall at the 650 px embed, so its top sat at y = -8 and its header and Hide
-   control were under the "All cities" and theme buttons (#map-actions, fixed
+   control were under the "Global View" and theme buttons (#map-actions, fixed
    at top 10px, ~30 px tall) - found by deploy-verify. Every earlier legend was
    shorter than the cap (Paris's the tallest, its top at y 84), so none of
    them changes. min(100vh, MAP_H) is the visible map height whichever way
@@ -802,7 +803,7 @@ LABEL_CLAMP_SCRIPT = """
     }
 
     // What a label must stay clear of, in the map container's coordinates:
-    // the fixed "All cities"/theme buttons, Leaflet's own top-left controls,
+    // the fixed "Global View"/theme buttons, Leaflet's own top-left controls,
     // and the legend while it is COLLAPSED. An open legend is the reader's
     // choice to cover part of the map; shuffling labels out from under it
     // would only crowd them elsewhere.
