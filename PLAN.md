@@ -632,12 +632,10 @@ brief names.
      **Stub test passes.** Karasuma keeps 15 of 15 stations and Tōzai 16 of 17.
      Randen, Eizan, Keihan Ōtō and Hankyū Arashiyama keep all of theirs. JR and
      the private railways are cut at the line.
-     For the brief, two questions for the owner:
-     - Keihan Keishin (a legal tramway) keeps 3 of 7 stations. The Hankai
-       precedent (17 of 32) reads that as half a line, not a stub.
-     - Two funiculars and the Sagano scenic line are in the data. Kobe's
-       brief left funiculars to the build; Lille and Santos left out tourist
-       lines.
+     ✅ **Owner, 2026-09-24:** Keihan Keishin passes (3 of 7 stations is half
+     a line, not a stub). The two funiculars (Eizan cable, Kurama-dera) are
+     drawn. The Sagano scenic line is left out as a tourist line. The brief
+     carries all three.
      Add a `kyoto` entry to `scripts/screen_japan_join.py` (the stitched list,
      `data/kyoto/raw/isj`), and put Kyoto's ward codes (26101–26111) and
      EPSG:32653 in `japan.py`. Run the stub test.

@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**330 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**331 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Kyoto's rail scope: Keishin kept, funiculars drawn, Sagano out (owner)](#2026-09-24---kyotos-rail-scope-keishin-kept-funiculars-drawn-sagano-out-owner)
 - [Kyoto's register rebuild moves into the pipeline; its stub test passes](#2026-09-24---kyotos-register-rebuild-moves-into-the-pipeline-its-stub-test-passes)
 - [Kyoto's four join rules land in the shared module; rule C corrected before it did](#2026-09-24---kyotos-four-join-rules-land-in-the-shared-module-rule-c-corrected-before-it-did)
 - [MHLW's 2026 amendment archived: it leaves the terms the Japan verdict relies on untouched](#2026-09-24---mhlws-2026-amendment-archived-it-leaves-the-terms-the-japan-verdict-relies-on-untouched)
@@ -372,6 +373,20 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Kyoto's rail scope: Keishin kept, funiculars drawn, Sagano out (owner)
+
+- **The owner settled the two rail questions Kyoto's stub test raised.**
+  - **Keihan Keishin passes.** It is legally a tramway, and 3 of its 7
+    stations are inside the city line, the rest in Ōtsu. As with the Hankai
+    tram (17 of 32), that is half a line, not a stub.
+  - **The two mountain funiculars are drawn**: 京福 鋼索線 (the Eizan cable)
+    and 鞍馬山鋼索鉄道 (Kurama-dera's), both wholly inside the city.
+  - **The Sagano scenic railway is left out** as a tourist line, as Lille's
+    heritage tram and Santos's tourist tram were.
+  - These are Kyoto's calls. Kobe's funiculars (Maya, Rokkō) are still
+    recorded in its brief as a build call, with this one as the nearest
+    precedent.
 
 ### 2026-09-24 - Kyoto's register rebuild moves into the pipeline; its stub test passes
 
