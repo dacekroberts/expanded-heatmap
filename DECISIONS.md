@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**297 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**298 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Copenhagen deployed; the live site measured after the reboot](#2026-09-24---copenhagen-deployed-the-live-site-measured-after-the-reboot)
 - [Copenhagen's deploy-verify passed, with one margin to watch](#2026-09-24---copenhagens-deploy-verify-passed-with-one-margin-to-watch)
 - [Copenhagen built: 14,978 storefronts, 64 stations](#2026-09-24---copenhagen-built-14978-storefronts-64-stations)
 - [The Amsterdam process becomes the `reprobe-city` skill (owner's request)](#2026-09-24---the-amsterdam-process-becomes-the-reprobe-city-skill-owners-request)
@@ -339,6 +340,24 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Copenhagen deployed; the live site measured after the reboot
+
+- **Copenhagen is live, and the reboot took.** Pushed `646f850..cf7a765`; the
+  push changed `app/cities.py` and `app/components.py`, so the app was
+  rebooted. Measured on the live site afterwards, in the app's own frame: the
+  page renders its approved text and the snapshot caption ("generated
+  2026-09-18"), notices 30 and 31 and the amended OpenStreetMap notice are
+  present, and there is no error block. The map: zoom 12 against 12 at the
+  854 px frame and 11 against 11 at 375 (frame 343), 0 corrections both; at
+  375 all 11 line labels present, none clipped, overlapping, under the legend,
+  over the credit or under the buttons. The Overview reads "Europe (11)",
+  lists Copenhagen and carries notice 30 - the rebooted modules, not cached
+  ones.
+
+- **Two owner actions follow, tracked in `PLAN.md`**: close the Datafordeler
+  account (its key was exposed and deliberately not rotated), and delete the
+  two `-tmp` entries from the main checkout's `.claude/launch.json`.
 
 ### 2026-09-24 - Copenhagen's deploy-verify passed, with one margin to watch
 
