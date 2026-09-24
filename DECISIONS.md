@@ -16,11 +16,14 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**282 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**285 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Rome to Band A with a build check: 95,493 premises joined to ANNCSU at 95.7%, both licences CC BY 4.0, a 2.60x control to settle at build](#2026-09-24---rome-to-band-a-with-a-build-check-95493-premises-joined-to-anncsu-at-957-both-licences-cc-by-40-a-260x-control-to-settle-at-build)
+- [Barcelona's notification adjourned](#2026-09-24---barcelonas-notification-adjourned)
+- [Stale-prose sweep: 48 unused settings, 37 counts, 2 tense hits read](#2026-09-24---stale-prose-sweep-48-unused-settings-37-counts-2-tense-hits-read)
+- [PLAN.md trimmed of 14 done items; three merged branches deleted](#2026-09-24---planmd-trimmed-of-14-done-items-three-merged-branches-deleted)
 - [Rome is a JOIN: its business register matches ANNCSU on the municipal street code, 92.4% at civic level](#2026-09-24---rome-is-a-join-its-business-register-matches-anncsu-on-the-municipal-street-code-924-at-civic-level)
 - [Open gap probed (Rome reached; Turin, Cairo discarded); Brasília and Recife rail licences read; Taipei's head-office rule tested; the address-join skill](#2026-09-24---open-gap-probed-rome-reached-turin-cairo-discarded-brasília-and-recife-rail-licences-read-taipeis-head-office-rule-tested-the-address-join-skill)
 - [The oslo worktree retired; prague's empty folder kept](#2026-09-24---the-oslo-worktree-retired-pragues-empty-folder-kept)
@@ -360,6 +363,71 @@ onwards; the early ones are split by phase rather than by hour.
   empty. Touched `docs/build_briefs/rome.md` (new, 6/6 live),
   `docs/city_master_list.md`, `docs/global_country_shortlist.md`.
 
+### 2026-09-24 - Barcelona's notification adjourned
+
+- **Owner's decision: the notification to Barcelona City Council is
+  adjourned until a working contact channel exists.** Raised by the
+  stale-prose sweep as an open obligation on a live city. Both 2026-09-22
+  attempts had failed (the portal form stalled after its hCaptcha; the named
+  electronic office timed out), the electronic registry needs a Spanish
+  digital certificate, and no email address is published. A fresh look on
+  2026-09-24 found no valid route either. The clause sets no deadline, so the
+  map stays up and the draft stays ready. `docs/gated_access.md` item 2 now
+  records the pause, so later sweeps read it as deliberate, not as a gap.
+
+### 2026-09-24 - Stale-prose sweep: 48 unused settings, 37 counts, 2 tense hits read
+
+- **Three corrections out of 87 flagged lines. The rest were read and are
+  right as written.** `check_stale_claims.py` categories D, B and A, each
+  item read in context. **D (48 config settings no script reads):** almost
+  all are deliberate records - rejected options kept so the rejection is
+  checkable (`STALE_BOUNDARY_IDS`, `CKAN_RESOURCE_ID_2024_INCOMPLETE`) and
+  measurements kept as provenance (`NAF25_POPULATED_MEASURED`), each saying
+  so. One comment contradicted the file it sits in: `countries/france.py`
+  said Lyon was "Not discarded as a city" above a `DISCARDED` setting dated
+  the next day. It now carries a dated superseded note, with the original
+  reasoning kept as written. `barcelona/config.py`'s "the other sixteen
+  cities" became "every other city". **B (37 hand-kept counts):** scoped
+  facts that stay true - "all five boroughs", "the two Mexican cities", "the
+  nine US cities", "all fourteen cities before Mexico City" - apart from
+  `docs/licenses/france-licence-ouverte-2.0.md`, where SIRENE served "all six
+  cities" including the discarded Lyon; it now reads "every French city", a
+  category rather than a number. `docs/france_step0_endpoints.md`'s "all six
+  cities" describes the six screened and stays. **A (2 future-tense hits):**
+  the map-view skill's "not yet a finding" is correct. Barcelona's
+  notification "drafted, not yet sent" is also correct: `docs/gated_access.md`
+  item 2 agrees. That makes it an open owner action on a live city, raised
+  with the owner rather than edited.
+
+### 2026-09-24 - PLAN.md trimmed of 14 done items; three merged branches deleted
+
+- **PLAN.md loses 201 lines (1,695 to 1,494), all of them done items that
+  already have their DECISIONS entry, and `scripts/check_plan_done.py` now
+  reports what is next in line.** PLAN.md's own legend says a `[x]` item
+  "stays only until its DECISIONS.md entry exists"; nothing enforced it, and
+  43 had piled up in the file every session reads first. The report sorts
+  each done item three ways: REMOVABLE (it cites an entry that exists),
+  CANDIDATE (a best-effort match on date and words), or KEEP?. Its matches
+  are only a starting point - it paired Boston with "Residence exposure
+  checked" - so nothing was removed on its word. An item went only when an
+  exact DECISIONS heading was found for it by hand AND it held no open work:
+  no `[ ]` sub-item, and none of "left behind", "still open", "to settle",
+  "not yet" or TODO. That filter kept Miami, Madrid/Barcelona, Korea's
+  "do not attempt" item and the stale-claims one. A second, manual read kept
+  Washington D.C., whose follow-ups are phrased in other words ("Worth
+  deciding whether the drift check should say so"). The deploy-gate sweep
+  item stays because `app/pages/9_Washington_DC_Heatmap.py` points readers
+  to it. **Removed:** Oslo, France, the label fix, the zoom fix, New York,
+  Mexico, Lyon (its reinstatement test lives in its DECISIONS entry and in
+  `docs/gated_access.md` rows 17-18), the three fetch/geocoder/DENUE
+  refactors, the category-B pass, rings off by default, the catch-all sweep,
+  Canada's re-ranking, and Vancouver. The diff is deletions only. Report-only
+  by design: some done items are kept on purpose.
+
+- **Deleted `dublin-build`, `milan-build` and `spain-app-wiring` on
+  GitHub**, on the owner's instruction. Each had 0 commits outside master,
+  re-checked immediately before, so every commit remains reachable from
+  master. `worktree-staging` stays; the Staging Session uses it.
 ### 2026-09-24 - Rome is a JOIN: its business register matches ANNCSU on the municipal street code, 92.4% at civic level
 
 - **Downloaded ANNCSU's Lazio address list** (owner-approved,
