@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**308 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**309 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [MHLW's national food open data is an opt-in slice; it completes Fukuoka and Hiroshima only](#2026-09-24---mhlws-national-food-open-data-is-an-opt-in-slice-it-completes-fukuoka-and-hiroshima-only)
 - [The owner's answers to the overnight question points; Sendai's lists need permission](#2026-09-24---the-owners-answers-to-the-overnight-question-points-sendais-lists-need-permission)
 - [Sendai joined at 95.1% block; MLIT's 小字 column places 字 addresses](#2026-09-24---sendai-joined-at-951-block-mlits-小字-column-places-字-addresses)
 - [Prague deployed; the live site measured after the reboot](#2026-09-24---prague-deployed-the-live-site-measured-after-the-reboot)
@@ -350,6 +351,52 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - MHLW's national food open data is an opt-in slice; it completes Fukuoka and Hiroshima only
+
+- **Found MHLW's 食品衛生申請等システム open data covers too little to rescue
+  Yokohama, Nagoya or Kyoto. But it completes Fukuoka and Hiroshima, whose own
+  lists stop exactly where online filing begins.** The owner approved using
+  the public viewer (question 10). Its オープンデータ page lists 157
+  authorities, and each file is a plain keyless GET
+  (`/faspub/page/opendatadownload.jsp?param=<code>_food_business_all.csv`,
+  found by reading the icon's handler). No form was submitted. The page
+  states its own limit: online filings only, and only where the applicant
+  agreed, field by field. **Measured against complete lists**, MHLW holds 8.1%
+  of Minato's restaurants, 2.9% of Osaka's, 4.0% of Kobe's and 1.9% of
+  Sendai's. It is also mostly notifications (届出), and only 26–65% of rows
+  carry an address. Yokohama (2,912 restaurants), Nagoya (1,058) and Kyoto
+  (26) stay without a current food source. Tokyo's gap wards are not filled
+  either (Chiyoda 291, Shibuya 812, Toshima 250).
+- **Fukuoka and Hiroshima are different in kind.** Fukuoka's own list (BODIK)
+  holds only permits granted before 2021-06 and still held (3,231
+  restaurants); MHLW holds 21,088 since then, 76% addressed. Hiroshima's own
+  list holds counter applications (7,479), and MHLW the online ones (5,195, 66%
+  addressed). **The overlap was measured at block level, not by string**,
+  because the address formats differ (exact matching found 160 and 5): 1.3%
+  and 1.2%, so the sources are disjoint. **The combination was judged against
+  a per-capita yardstick from the complete lists** (restaurant permits per
+  1,000 residents: Sendai 9.5, Kobe 13.0, Osaka 19.0). Fukuoka comes to
+  **14.8** (11.8 placeable) and Hiroshima **10.7** (9.2 placeable). The
+  shortfall is premises that withheld their address. Joins: Fukuoka own 98.1%
+  / MHLW 96.7% / personal services 99.1% block; Hiroshima own 95.9% / MHLW
+  94.7%. **MHLW's own coordinates agree with the block point at a median
+  36 m / 35 m**, so an MHLW row the join misses can take the publisher's point.
+  Hiroshima publishes no personal-services list (PDFs of new openings only),
+  which gives it Band C's shape. `screen_japan_join.py` gained the entries
+  (`fukuoka`, `fukuoka-mhlw`, `fukuoka-life`, `hiroshima`, `hiroshima-mhlw`)
+  and MHLW's column names. The Minato control holds at 99.8%. Briefs:
+  `fukuoka.md` and `hiroshima.md` (4/4 each). Licences pending: MHLW's (a read
+  is running), BODIK's CC BY and Hiroshima's PDL 1.0. **No band moved**: the
+  unaddressed share is a disclosure for the owner to accept or not.
+- **The last overnight re-probe batch and Riga's follow-up were recorded in
+  their gap rows, with recommendations and no band moved.** Hyderabad is
+  geo-blocked to India (Band D recommended). Naples, Lima and Messina are
+  negative on two methods (discard recommended). Santiago is still thin:
+  Providencia publishes a current licence register under the transparency law,
+  but the downtown comuna does not. Riga has Amsterdam's two-layer shape: its
+  premise groups place at 99.5% through the building number, but its only
+  vacancy figure is 20.4%, centre-only.
 
 ### 2026-09-24 - The owner's answers to the overnight question points; Sendai's lists need permission
 

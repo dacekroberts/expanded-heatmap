@@ -1,0 +1,128 @@
+# Hiroshima — build brief
+
+**Step 0 measured 2026-09-24 (MHLW's viewer approved by the owner, question
+10).** Run `python scripts/brief_check.py hiroshima` before writing any code.
+Coordinates: the `address-join` skill, measured by
+`scripts/screen_japan_join.py hiroshima` and `hiroshima-mhlw`.
+
+---
+
+## The one-line summary
+
+**Food comes from TWO lists that split by filing channel: the city's own list
+of counter applications (7,479 restaurants), and MHLW's 食品衛生申請等システム
+open data for online filings (5,195 restaurants). They overlap by 1.2%, and
+together make 10.7 restaurants per 1,000 residents, beside Sendai's 9.5.**
+⚠️ About 14% of the total withholds its address, so about 86% can be placed.
+⚠️ **No personal-services data**: the city publishes new openings as PDFs only.
+So this is food service plus a partial food-retail bucket, **the Band C shape**.
+
+---
+
+## Business leg — two food sources, one filing split
+
+| | City's own list | MHLW open data |
+|---|---|---|
+| **File** | `https://www.city.hiroshima.lg.jp/_res/projects/default_project/_page_/001/014/315/5080331-2.xlsx`: **13,880,348 B**, two sheets (個人 / 法人), **9,247 rows**, as of 2026-03-31, with monthly additions. Page `/business/shokuhin-eisei/1051268/1051957.html`; catalogued on `hiroshima-opendata.dataeye.jp` (id 5672) | `https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=34100_food_business_all.csv`: **4,094,641 B**, 11,940 live rows (6,674 permits), as of 2026-08 end |
+| **What it holds** | **Counter (窓口) applications.** Since 2023-08 the page excludes facilities that applied online, and sends users to MHLW | **Online filings where the applicant agreed to open-data publication**, field by field |
+| Columns | **営業の種類**, **施設名称**, 施設名称_カナ, **営業所所在地（所在地_連結標記）** (個人) / **施設所在地（所在地_連結標記）** (法人), 自動車登録番号, permit dates | as Fukuoka's: trade name, 営業の種類, 業態, address, **緯度 / 経度**, 申請区分 |
+| Restaurants (飲食店営業, fixed) | **7,479** (① 飲食店営業 5,788 + 飲食店営業 1,690: new and old type names) | **5,195**, of which **3,419 (66%) carry an address** |
+
+- **Overlap, measured at block level**: 40 of MHLW's addressed restaurants
+  (**1.2%**). Disjoint by filing channel.
+- **MHLW's restaurant permits by year**: 2021 1,178 · 2022 2,223 · 2023 1,425,
+  then **114 · 143 · 112** for 2024–2026. Online filing fell away after 2023,
+  so most recent permits sit in the city's own list.
+- **Combined**: 12,674 restaurants, **10.7 per 1,000 residents**. **Placeable**:
+  10,898, **9.2 per 1,000**.
+- **Food retail**: MHLW's notifications are a PARTIAL, opt-in bucket, as in
+  Fukuoka.
+- ⚠️ **Personal services: none usable.** 理容所 / 美容所 are published as
+  six-monthly PDFs of new openings only (`/business/seikatsu-eisei/1026699/1013502.html`),
+  with no full list and no クリーニング list.
+
+---
+
+## ✅ Coordinates — a JOIN to MLIT 位置参照情報, ward by ward
+
+MLIT files for the **8 wards** (34101 中, 34102 東, 34103 南, 34104 西,
+34105 安佐南, 34106 安佐北, 34107 安芸, 34108 佐伯).
+
+| Tier | Own list (9,235 fixed) | MHLW, addressed (7,397) |
+|---|---|---|
+| Block | **95.9%** | **94.7%** |
+| Town-chōme / 大字 centroid | 1.5% | 1.5% |
+| Unplaced | 2.6% | 3.7% |
+
+**Independent check**: MHLW's own coordinates against the block point sit a
+**median 35 m** apart, **96.3% within 250 m** (7,006 rows).
+
+## 🚇 Rail — MLIT N02, commuter rail INCLUDED (owner, 2026-09-24)
+
+By general knowledge (not yet read from N02): the Astram Line, **Hiroden's
+streetcars** (the network's backbone), and JR West (Sanyō Main Line, Kabe,
+Geibi, Kure). ⚠️ Whether trams count here, as in Amsterdam and Oslo, is the
+owner's call. ⚠️ Stations are LineStrings, so centroid them. ⚠️ Open: the
+Shinkansen.
+
+## Scope
+
+**Hiroshima City (8 wards).** Hiroden's Miyajima line and JR run on to
+Hatsukaichi and Kaita. Check at build.
+
+## ⏳ Licences — PENDING
+
+- **MHLW open data: a licence read is in progress.**
+- **The city's own list**: PDL 1.0 declared on the DataEye resource, none on
+  the city page. NOT YET READ.
+- **MLIT 位置参照情報 and N02**: PDL 1.0.
+
+## Privacy
+
+The own list's 個人 sheet is individual operators: read only 施設名称, 営業の種類
+and the address, never any operator column. MHLW's file carries 法人名,
+法人住所 and phones: never read. Run `check_personal_exposure.py`.
+
+## Region
+
+`"region": "East Asia"`. Project to **UTM 53N (EPSG:32653)**.
+
+## Still unknown
+
+- ⏳ **The MHLW licence** and the city's PDL 1.0.
+- ⚠️ **Band**: food service plus partial food retail, with no personal services. Band C's shape: the owner's call.
+- ⚠️ The ~14% with no published address; whether trams count; scope; the Shinkansen.
+- ⚠️ The Economic Census food control.
+
+```brief-checks
+[
+  {
+    "id": "hiroshima-own-food-live",
+    "claim": "Hiroshima City's own food-permit list (counter applications, XLSX) is keyless and live",
+    "kind": "http_ok",
+    "url": "https://www.city.hiroshima.lg.jp/_res/projects/default_project/_page_/001/014/315/5080331-2.xlsx",
+    "min_bytes": 5000000
+  },
+  {
+    "id": "hiroshima-mhlw-live",
+    "claim": "MHLW's open-data file for Hiroshima City (34100) answers a plain keyless GET",
+    "kind": "http_ok",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=34100_food_business_all.csv",
+    "min_bytes": 1000000
+  },
+  {
+    "id": "hiroshima-isj-naka-live",
+    "claim": "MLIT's block-level address file for Naka ward (34101) answers keyless - the join target",
+    "kind": "http_ok",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/34101-24.0a.zip",
+    "min_bytes": 10000
+  },
+  {
+    "id": "hiroshima-projected-crs",
+    "claim": "Hiroshima projects to UTM 53N",
+    "kind": "utm_zone_from_longitude",
+    "lon": 132.46,
+    "expect": "EPSG:32653"
+  }
+]
+```
