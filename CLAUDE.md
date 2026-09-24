@@ -56,6 +56,13 @@ turned out to publish an address file that already carries the coordinate,
 so the work became a join measured against a control city - or nothing.
 Japan is the next one through it.
 
+**Re-probing a city the screen left thin - an open-gap row, or a one-bucket
+city in Band C? Use `reprobe-city`** (`.claude/skills/reprobe-city/`).
+Amsterdam went from discard to Band A in one evening on probes the first
+screen never ran: the city's own host, its whole catalogue, the scope on a
+403, and a second layer in a different shape (a building register's use
+class), with that shape's defect measured before the owner was asked.
+
 **Is the city's rail coming from OpenStreetMap rather than GTFS? Use
 `osm-rail`** (`.claude/skills/osm-rail/`). Mexico City and Guadalajara both
 needed it - one because every agency host is unreachable, one because the only

@@ -557,6 +557,9 @@ records *"Italy stays a Milan-only country"*, but that rests on **Naples** and
 `add-country` is explicit about: a row whose reason is "not reached" is not a
 discard.
 
+**Run each re-probe through the `reprobe-city` skill** — the process that took
+Amsterdam from a discard to Band A in one evening.
+
 **▼ 2026-09-24 — twelve rows back from the discards**, in re-probe order (biggest
 rail and clearest next probe first). Each rested on ONE method, and
 Amsterdam — the same shape — turned out to have a current premises register
@@ -626,6 +629,11 @@ What none of them has is a **second bucket** — and the owner's bar is that two
 is acceptable and one is not. **Göteborg joined Stockholm and Zurich here on
 2026-09-23**, probed to the same depth, which is why this caption no longer
 says "both".
+
+**▶ A second source in a different shape is still open for each** — a
+building register's use class gave Amsterdam its shop layer on 2026-09-24,
+which is how it left this band. `reprobe-city` Step 4 names the per-country
+targets (ASSERTED, unprobed).
 
 **This is not "we could not find a second register".** All these negatives were
 re-established on 2026-09-22 by **enumerating the whole catalogue** rather

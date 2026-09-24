@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**292 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**293 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [The Amsterdam process becomes the `reprobe-city` skill (owner's request)](#2026-09-24---the-amsterdam-process-becomes-the-reprobe-city-skill-owners-request)
 - [Amsterdam to Band A (owner): both licences read, the permits credited as CC BY 4.0, brief written](#2026-09-24---amsterdam-to-band-a-owner-both-licences-read-the-permits-credited-as-cc-by-40-brief-written)
 - [Amsterdam: BAG accepted as a second layer, with its vacancy disclosed (owner)](#2026-09-24---amsterdam-bag-accepted-as-a-second-layer-with-its-vacancy-disclosed-owner)
 - [Amsterdam's empty shops: not filterable per unit from open data, but measured at 4.6%](#2026-09-24---amsterdams-empty-shops-not-filterable-per-unit-from-open-data-but-measured-at-46)
@@ -334,6 +335,25 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - The Amsterdam process becomes the `reprobe-city` skill (owner's request)
+
+- **Wrote `.claude/skills/reprobe-city/SKILL.md`** from the Amsterdam
+  re-probe, for the open gap's 17 rows and Band C's one-bucket cities: the
+  city's own host before the national portal; enumerate, don't search, with a
+  nonsense value before trusting any filter; read a 403's authorisation scope
+  rather than work around it; look for a second layer in a different shape (a
+  building register's use class); measure that shape's defect and look for a
+  per-unit filter before settling for a disclosed rate; control each layer on
+  its own; one `licence-read` agent per source in parallel; record with the
+  discard check and the master list's four count sites.
+- Chose a skill over a doc section because a skill is what a session loads at
+  the moment of work, and the lesson this project keeps relearning is that a
+  lesson filed beside the work does not reach the next city (`osm-rail`'s
+  opening). The per-country use-class targets for Band C (Sweden, Switzerland,
+  Denmark, Norway, Czechia, Spain, Finland) are labelled ASSERTED - probe
+  targets, not findings. Pointers added in `CLAUDE.md` and the master list's
+  open gap and Band C sections.
 
 ### 2026-09-24 - Amsterdam to Band A (owner): both licences read, the permits credited as CC BY 4.0, brief written
 
