@@ -224,6 +224,14 @@ CITIES = {
     "sapporo": ("北海道", "札幌市", ["sapporo/raw/shokuhin260331.csv"], "sapporo/raw/isj"),
     "osaka": ("大阪府", "大阪市", ["osaka/raw/260630zenku.csv"], "osaka/raw/isj"),
     "kobe": ("兵庫県", "神戸市", ["kobe/raw/20260407150739.csv"], "kobe/raw/isj"),
+    # personal services - the 生活衛生 registers, same join
+    "sapporo-life": ("北海道", "札幌市", ["sapporo/raw/sapporo-eigyoshisetsu-riyo-r80731.csv",
+                                        "sapporo/raw/sapporo-eigyoshisetsu-biyo-r80731.csv",
+                                        "sapporo/raw/sapporo-eigyoshisetsu-cleaning-r80731.csv"], "sapporo/raw/isj"),
+    "osaka-life": ("大阪府", "大阪市", ["osaka/raw/ri20260331.csv", "osaka/raw/bi20260331.csv",
+                                     "osaka/raw/cleaning20260331.csv"], "osaka/raw/isj"),
+    "kobe-life": ("兵庫県", "神戸市", ["kobe/raw/r7_riyousho.csv", "kobe/raw/r7_biyousho.csv",
+                                     "kobe/raw/r7_cleaning.csv"], "kobe/raw/isj"),
 }
 ADDR_COLS = ("施設所在地", "営業所所在地", "所在地_連結表記")
 TYPE_COLS = ("業種名", "業種分類", "業種情報公開名称", "営業の種類", "業種区分")
