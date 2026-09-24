@@ -1,0 +1,19 @@
+{
+  "cnefe:3106200_BELO_HORIZONTE.zip": {
+    "file": "3106200_BELO_HORIZONTE.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/31_MG/3106200_BELO_HORIZONTE.zip",
+    "bytes": 34957820,
+    "sha256": "a12fdb9c9db381787ccee814ec6c6e7de30f780a952d7be6dc70176ecf48892c",
+    "retrieved": "2026-09-24T15:56:23+00:00 (cache file time)"
+  },
+  "osm_municipios": {
+    "file": "osm_municipios.json",
+    "host": "overpass-api.de",
+    "retrieved": "2026-09-24T15:58:49+00:00 (cache file time)"
+  },
+  "osm_rail": {
+    "file": "osm_rail.json",
+    "host": "overpass-api.de",
+    "retrieved": "2026-09-24T16:00:26+00:00 (cache file time)"
+  }
+}

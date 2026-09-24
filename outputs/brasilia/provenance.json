@@ -1,0 +1,33 @@
+{
+  "cnefe:5300108_BRASILIA.zip": {
+    "file": "5300108_BRASILIA.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/53_DF/5300108_BRASILIA.zip",
+    "bytes": 19814371,
+    "sha256": "b263c241a5fd250716d9031d96eacca0e6a221ef614c7253028d2187ee1dfb35",
+    "retrieved": "2026-09-24T15:56:31+00:00 (cache file time)"
+  },
+  "df_estacoes_metro": {
+    "file": "df_estacoes_metro.json",
+    "url": "https://catalogo.ipe.df.gov.br/geoserver/geonode/wfs?service=WFS&version=2.0.0&request=GetFeature&outputFormat=application/json&srsName=EPSG:4326&typeNames=geonode:ESTACOES_METRO",
+    "bytes": 9160,
+    "sha256": "6928ddbdd79392b421fda9ea2887a57a2de0c7a5a8b3472373f81d7937748002",
+    "retrieved": "2026-09-24T17:05:44+00:00 (cache file time)"
+  },
+  "df_estacoes_em_construcao": {
+    "file": "df_estacoes_em_construcao.json",
+    "url": "https://catalogo.ipe.df.gov.br/geoserver/geonode/wfs?service=WFS&version=2.0.0&request=GetFeature&outputFormat=application/json&srsName=EPSG:4326&typeNames=geonode:ESTACOES_EM_CONSTRUCAO",
+    "bytes": 4467,
+    "sha256": "5dbe6584794b9fac4883dc938e190df73e34d97238e3bd2a143f8b5e7edd31e0",
+    "retrieved": "2026-09-24T17:05:44+00:00 (cache file time)"
+  },
+  "osm_municipios": {
+    "file": "osm_municipios.json",
+    "host": "overpass-api.de",
+    "retrieved": "2026-09-24T16:00:31+00:00 (cache file time)"
+  },
+  "osm_rail": {
+    "file": "osm_rail.json",
+    "host": "overpass-api.de",
+    "retrieved": "2026-09-24T16:03:47+00:00 (cache file time)"
+  }
+}

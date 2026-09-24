@@ -40,16 +40,38 @@ def municipios(path, crs="EPSG:4326"):
     return gpd.GeoDataFrame(rows, crs=crs)
 
 
+def in_codes(code, codes):
+    """True when an OSM `IBGE:GEOCODIGO` belongs to one of the scope's codes -
+    exactly, or as a sub-unit carrying the município's code as its prefix."""
+    code = str(code or "")
+    return any(code == c or code.startswith(c) for c in codes)
+
+
 def scope_polygon(path, codes, area_km2, crs_projected, label, verbose=True):
-    """The union of the listed municípios, each present exactly once, gated on
-    total area (km2, lo-hi)."""
+    """The union of the listed municípios, gated on total area (km2, lo-hi).
+
+    A município OSM maps only as its SUB-UNITS is assembled from them: Brasília
+    (5300108) is the whole Federal District, and OSM carries no relation for it
+    at admin_level 8 - only its 35 administrative regions, each coded
+    5300108xxxx. So an exact code must appear exactly once, or not at all and
+    then as one or more prefixed sub-units, printed."""
     m = municipios(path)
     parts = []
     for code in codes:
         hit = m[m["ibge"] == code]
-        if len(hit) != 1:
+        if len(hit) > 1:
             sys.exit(f"{label}: município {code} appears {len(hit)} times in {path.name}")
-        parts.append(hit.iloc[0])
+        if len(hit) == 0:
+            hit = m[m["ibge"].astype(str).str.startswith(code)]
+            if len(hit) == 0:
+                sys.exit(f"{label}: município {code} is not in {path.name}, whole or in parts")
+            if verbose:
+                print(f"  {label}: {code} assembled from {len(hit)} sub-units coded {code}...")
+            hit = [{"name": f"{code} ({len(hit)} sub-units)",
+                    "geometry": unary_union(list(hit["geometry"]))}]
+        else:
+            hit = [hit.iloc[0]]
+        parts.extend(hit)
     geom = unary_union([p["geometry"] for p in parts])
     area = gpd.GeoSeries([geom], crs=m.crs).to_crs(crs_projected).area.iloc[0] / 1e6
     lo, hi = area_km2

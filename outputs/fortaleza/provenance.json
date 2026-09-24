@@ -1,0 +1,40 @@
+{
+  "cnefe:2304400_FORTALEZA.zip": {
+    "file": "2304400_FORTALEZA.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/23_CE/2304400_FORTALEZA.zip",
+    "bytes": 28907115,
+    "sha256": "b4b735e37ba7894d3c812a1367470db12e06d78efbb54dc36ad42d1785339fd9",
+    "retrieved": "2026-09-24T15:56:42+00:00 (cache file time)"
+  },
+  "cnefe:2303709_CAUCAIA.zip": {
+    "file": "2303709_CAUCAIA.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/23_CE/2303709_CAUCAIA.zip",
+    "bytes": 3875954,
+    "sha256": "0cc1c1988c208e213a885fa2ffff005ec11ff70e1a5f09de79faf3e22f012f4d",
+    "retrieved": "2026-09-24T15:56:45+00:00 (cache file time)"
+  },
+  "cnefe:2307650_MARACANAU.zip": {
+    "file": "2307650_MARACANAU.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/23_CE/2307650_MARACANAU.zip",
+    "bytes": 2340410,
+    "sha256": "ffa32efea24055b3007db973adb697ac8f10cb987f0b18bdf86da1fb4fd8e925",
+    "retrieved": "2026-09-24T15:56:47+00:00 (cache file time)"
+  },
+  "cnefe:2309706_PACATUBA.zip": {
+    "file": "2309706_PACATUBA.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/23_CE/2309706_PACATUBA.zip",
+    "bytes": 710306,
+    "sha256": "c1685d02b1c1d8a0f123f59c44ac6e1af4f12e197255ec04348869577d18039f",
+    "retrieved": "2026-09-24T15:56:49+00:00 (cache file time)"
+  },
+  "osm_municipios": {
+    "file": "osm_municipios.json",
+    "host": "overpass-api.de",
+    "retrieved": "2026-09-24T16:07:14+00:00 (cache file time)"
+  },
+  "osm_rail": {
+    "file": "osm_rail.json",
+    "host": "overpass-api.de",
+    "retrieved": "2026-09-24T16:07:22+00:00 (cache file time)"
+  }
+}

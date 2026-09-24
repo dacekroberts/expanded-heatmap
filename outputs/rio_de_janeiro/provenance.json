@@ -1,0 +1,33 @@
+{
+  "cnefe:3304557_RIO_DE_JANEIRO.zip": {
+    "file": "3304557_RIO_DE_JANEIRO.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/33_RJ/3304557_RIO_DE_JANEIRO.zip",
+    "bytes": 94594981,
+    "sha256": "688e6693ebb93eac908033c238bfb1372771f49c0a6fd1ba566ea1fecfb16c91",
+    "retrieved": "2026-09-24T15:56:14+00:00 (cache file time)"
+  },
+  "rio_metro_estacoes_19": {
+    "file": "rio_metro_estacoes_19.geojson",
+    "url": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/Transporte_Trafego/Transporte_publico/MapServer/19/query?where=1%3D1&outFields=*&outSR=4326&f=geojson",
+    "bytes": 20517,
+    "sha256": "c598b5772dea1f631d077a1c85703b2fbf4374796733498aa7884735c9bd2c08",
+    "retrieved": "2026-09-24T17:05:41+00:00 (cache file time)"
+  },
+  "rio_metro_linhas_18": {
+    "file": "rio_metro_linhas_18.geojson",
+    "url": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/Transporte_Trafego/Transporte_publico/MapServer/18/query?where=1%3D1&outFields=*&outSR=4326&f=geojson",
+    "bytes": 14627,
+    "sha256": "9f51183d52f00a7e047827837414c677038cfbe4f8a6f6cdfa4a59867de672bb",
+    "retrieved": "2026-09-24T17:05:42+00:00 (cache file time)"
+  },
+  "osm_municipios": {
+    "file": "osm_municipios.json",
+    "host": "overpass.kumi.systems",
+    "retrieved": "2026-09-24T15:58:34+00:00 (cache file time)"
+  },
+  "osm_rail": {
+    "file": "osm_rail.json",
+    "host": "overpass-api.de",
+    "retrieved": "2026-09-24T15:58:45+00:00 (cache file time)"
+  }
+}
