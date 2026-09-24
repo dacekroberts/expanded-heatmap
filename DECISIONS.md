@@ -430,6 +430,17 @@ onwards; the early ones are split by phase rather than by hour.
 
 ### 2026-09-23 - Wheel zoom stops discarding notches; cluster animation off
 
+- **Oslo landed on master during this gate and was re-rendered on the change
+  before pushing.** Its map had been built without `WHEEL_ZOOM_SCRIPT`, so a
+  plain merge would have shipped 25 cities with the fix and one without it.
+  `drift_check.py oslo`: only `heatmap.html` drifted, additions only (72
+  lines, as in every three-bucket city); the other 25 maps identical to master.
+  `check_map_view.js` 8 fresh loads at 1280/854/375/343, `check_map_labels.js`
+  at the same four widths and `check_map_attribution.js` at four heights: 0
+  problems. Three notches after load zoomed it three levels at 1280 and 375,
+  and the view held six seconds with 0 corrections. The push's `app/` diff
+  against `origin/master` is empty, so no reboot.
+
 - **deploy-verify (`scope: map-chrome`) passed, and found one residual gap in
   the wheel merge, measured as rare and left open.** Embedded in the app from
   `.venv-lean`: Paris, Toulouse, New York and Boston render cleanly, the view
