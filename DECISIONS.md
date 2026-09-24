@@ -16,10 +16,13 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**297 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**300 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [The Datafordeler account is closed](#2026-09-24---the-datafordeler-account-is-closed)
+- ["Commuter rail is excluded everywhere" retired: Copenhagen's S-tog made it two exceptions](#2026-09-24---commuter-rail-is-excluded-everywhere-retired-copenhagens-s-tog-made-it-two-exceptions)
+- [Copenhagen deployed; the live site measured after the reboot](#2026-09-24---copenhagen-deployed-the-live-site-measured-after-the-reboot)
 - [Copenhagen's deploy-verify passed, with one margin to watch](#2026-09-24---copenhagens-deploy-verify-passed-with-one-margin-to-watch)
 - [Copenhagen built: 14,978 storefronts, 64 stations](#2026-09-24---copenhagen-built-14978-storefronts-64-stations)
 - [The Amsterdam process becomes the `reprobe-city` skill (owner's request)](#2026-09-24---the-amsterdam-process-becomes-the-reprobe-city-skill-owners-request)
@@ -339,6 +342,58 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - The Datafordeler account is closed
+
+- **The owner deactivated the Datafordeler IT system and then the user,
+  after Copenhagen published** - the trigger the key entry set. The exposed
+  API key died with the system. Nothing published depends on the account:
+  the six CVR and four DAR files are cached nationally at
+  `data/denmark/raw/`, the live site never calls Datafordeler, and CC BY 4.0
+  attaches to the data irrevocably. **Consequence recorded for the next
+  Danish build or refresh**: a new free account, a new IT system and key,
+  and the 15-minute key propagation (`docs/gated_access.md` item 3).
+  `Beskaeftigelse` (employees, bitemporal only) was never taken, as the
+  2026-09-23 entry anticipated.
+### 2026-09-24 - "Commuter rail is excluded everywhere" retired: Copenhagen's S-tog made it two exceptions
+
+- **Owner-approved wording: the rule is stated as the test it is, and the four
+  city pages that repeated it as universal now say "most maps".** Handed over
+  by the Main Building Session when Copenhagen went live drawing the S-tog on
+  the published spacing-and-frequency test, the second commuter network
+  admitted after Dublin's DART. `check_stale_claims.py --only E` had these
+  lines listed as bets on the next city, and this is the city that lost them.
+  `docs/excluded_categories.md`'s lead-in "**Commuter rail is excluded in
+  every city.**" is now "**…excluded unless it runs like rapid transit.**" -
+  the test its own DART and S-tog paragraphs already apply. The pages: Boston
+  ("left out on most maps here"), Miami ("left out here as on most maps on
+  this site"), Dublin (same), and Vancouver, whose sentence stands without the
+  comparison, so it was dropped. **Rejected:** naming the exceptions on every
+  page ("everywhere except DART and S-tog"), which is stronger and goes stale
+  with the next one - the lesson category E exists to teach. Universal claims
+  went from 24 to 20. **The other 20 were re-read against Copenhagen and still
+  hold**: it covers two kommuner through ONE boundary layer (OSM), so
+  Vancouver's "two municipalities with two boundary layers" stands; it keeps
+  the rings-off default; and it names its businesses, so Dublin is still the
+  only city that does not.
+
+### 2026-09-24 - Copenhagen deployed; the live site measured after the reboot
+
+- **Copenhagen is live, and the reboot took.** Pushed `646f850..cf7a765`; the
+  push changed `app/cities.py` and `app/components.py`, so the app was
+  rebooted. Measured on the live site afterwards, in the app's own frame: the
+  page renders its approved text and the snapshot caption ("generated
+  2026-09-18"), notices 30 and 31 and the amended OpenStreetMap notice are
+  present, and there is no error block. The map: zoom 12 against 12 at the
+  854 px frame and 11 against 11 at 375 (frame 343), 0 corrections both; at
+  375 all 11 line labels present, none clipped, overlapping, under the legend,
+  over the credit or under the buttons. The Overview reads "Europe (11)",
+  lists Copenhagen and carries notice 30 - the rebooted modules, not cached
+  ones.
+
+- **Two owner actions follow, tracked in `PLAN.md`**: close the Datafordeler
+  account (its key was exposed and deliberately not rotated), and delete the
+  two `-tmp` entries from the main checkout's `.claude/launch.json`.
 
 ### 2026-09-24 - Copenhagen's deploy-verify passed, with one margin to watch
 

@@ -21,21 +21,24 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [~] **🇩🇰 COPENHAGEN - built on `copenhagen-build`, not yet published.**
-  Kobenhavn + Frederiksberg, Metro M1-M4 and S-tog, rail from OSM, coordinates
-  from DAR: **14,978 storefronts, 64 stations**, page text and notices 30-31
-  approved by the owner 2026-09-24. Remaining: `excluded_categories.md`
-  section (owner to approve), docs, drift check, city-scoped `deploy-verify`,
-  publish. See `DECISIONS.md`, *"Copenhagen opened: four owner calls"* and the
-  entries after it.
-  - [ ] ⏰ **AFTER PUBLISH: the owner closes the Datafordeler account.** Its API
+- [x] **🇩🇰 COPENHAGEN - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** 14,978
+  storefronts, 64 stations, Metro M1-M4 and S-tog, Kobenhavn + Frederiksberg.
+  City-scoped `deploy-verify` passed with no defects; pushed `646f850..cf7a765`
+  and rebooted. Denmark's national modules are ready for a second city. See
+  `DECISIONS.md`, *"Copenhagen built"* and the entries after it. Two owner
+  actions remain open below.
+  - [x] **DONE 2026-09-24: the owner deactivated the Datafordeler IT system
+    AND the user**, so the exposed key is dead. Was:
+    ⏰ **AFTER PUBLISH: the owner closes the Datafordeler account.** Its API
     key was visible in a terminal screenshot shared into the build
     conversation on 2026-09-24 and sits in that terminal's PowerShell history;
     it was deliberately not rotated (owner's call - free, unrestricted data
     only), because closing the account revokes it. Closing is licence-safe
     (CC BY 4.0 is irrevocable); a future refresh means a new free account and
     the 15-minute key propagation. `docs/gated_access.md` item 3.
-  - [ ] ⏰ **AFTER PUBLISH: the owner removes the two `-tmp` entries** from the
+  - [x] **DONE 2026-09-24: the owner removed both `-tmp` entries**; the file
+    parses with its two original entries. Was:
+    ⏰ **AFTER PUBLISH: the owner removes the two `-tmp` entries** from the
     main checkout's `.claude/launch.json` (`copenhagen-static-tmp`,
     `copenhagen-app-tmp`). They point into this worktree; the build session
     was confined to it and could not edit that file itself.

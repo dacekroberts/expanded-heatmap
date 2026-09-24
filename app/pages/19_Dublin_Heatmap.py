@@ -33,7 +33,7 @@ the DART run through all four. Three lines are drawn: the **Luas Red Line**,
 the **Luas Green Line** and the **DART**, each labelled on the map and in the
 legend. Commuter and InterCity services are not: Iarnrod Eireann runs them over
 the same tracks, but they are not urban rail, and they are left out here as
-commuter rail is on every other city page on this site. Two DART stations, Bray
+commuter rail is on most maps on this site. Two DART stations, Bray
 Daly and Greystones, lie in County Wicklow outside all four authorities - they
 and the reason are listed in `outputs/dublin/excluded_stations.csv`.
 
