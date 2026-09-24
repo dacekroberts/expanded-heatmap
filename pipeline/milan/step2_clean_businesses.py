@@ -87,6 +87,7 @@ def load_source(key, spec):
                      else [spec["label_fallback"]] * len(df)),
         "source": key,
         "codice": df["Codice"].astype(str),
+        "has_sign": (name != "").to_numpy(),
     })
     print(f"  {key:18s} {n0:6,} -> {len(out):6,}  "
           f"({n1 - len(out)} without usable coordinates) | "
@@ -137,7 +138,16 @@ def main():
     gdf = gdf[gdf.geometry.within(one)]
     print(f"Inside the comune boundary: {n:,} -> {len(gdf):,}")
 
-    out = (pd.DataFrame(gdf.drop(columns="geometry"))
+    # THE RATE THE PAGE QUOTES. The per-register lines above are not it: the
+    # page said "about a fifth" until 2026-09-23 while this measured 15.3%,
+    # because three registers carry no name field at all and only the
+    # per-register rates (17.7% on the largest) were ever printed.
+    signed = int(gdf["has_sign"].sum())
+    print(f"Shop sign on {signed:,} of {len(gdf):,} storefronts "
+          f"({signed / max(len(gdf), 1) * 100:.1f}%) - the figure the Milan page "
+          f"quotes; the rest are labelled with their address")
+
+    out = (pd.DataFrame(gdf.drop(columns=["geometry", "has_sign"]))
            .sort_values(["source", "codice"]).reset_index(drop=True))
     config.DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
     out.to_csv(config.BUSINESSES_CLEAN_CSV, index=False, encoding="utf-8")

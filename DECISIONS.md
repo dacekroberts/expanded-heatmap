@@ -16,7 +16,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**259 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**260 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
@@ -25,6 +25,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 **2026-09-23**
 
+- [Label check runs at phone width; Milan's shop-sign share; lille retired](#2026-09-23---label-check-runs-at-phone-width-milans-shop-sign-share-lille-retired)
 - [Kaohsiung's data hosts are geo-blocked to Taiwan, not down; stays in Band B](#2026-09-23---kaohsiungs-data-hosts-are-geo-blocked-to-taiwan-not-down-stays-in-band-b)
 - [Every Band A city has a brief: seven Brazilian and three Taiwanese written, all checks passing live](#2026-09-23---every-band-a-city-has-a-brief-seven-brazilian-and-three-taiwanese-written-all-checks-passing-live)
 - [The cleanup role's stray worktrees retired; removing a session's own launch worktree broke that session](#2026-09-23---the-cleanup-roles-stray-worktrees-retired-removing-a-sessions-own-launch-worktree-broke-that-session)
@@ -301,6 +302,65 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Label check runs at phone width; Milan's shop-sign share; lille retired
+
+- **`scripts/check_map_labels.js` now measures labels from the map object and
+  runs at phone width, and it finds clipped labels in 22 of 25 cities.** The
+  handover from the France deploy-verify said the check was blind at phone
+  width (it ran only at 854 and 1280) and wrong when forced there (Rennes'
+  "Métro a" reported out of view while a screenshot showed it whole). The
+  false report was reproduced and explained: with the browser pane hidden
+  (`document.visibilityState` "hidden"), the map had already fitted to zoom
+  12.25 while every label element still sat at its desktop position - "Métro
+  a" read x 617 on a 375px map for six seconds, where it draws at 221. The
+  redraw waits for a frame a hidden page never gets, and it is intermittent:
+  two of four hidden loads were fresh. Each label box is now the marker's
+  `latLngToContainerPoint` plus the label's offset from its own icon, both
+  independent of the stale transform; a DOM that disagrees goes to `notes`.
+  Rejected: refusing to measure a hidden page, since the harness usually runs
+  hidden and the map-object reading is right either way. The check also finds
+  the map two frames deep (as `check_map_view.js` does), reports each clip in
+  pixels and share of width, and notes when a run at or above the 1000px
+  layout width never exercised the phone fit. **Positive control: Rennes'
+  "Métro b" 7px (13%) at 375 and 23px (45%) at 343**, the handover's own
+  screenshot figures, with "Métro a" no longer flagged. Swept every city at
+  375 and 343 by loading each map in a fixed-width iframe: **35 of 155 labels
+  clipped at 375, 33 at 343; only Lille, Madrid and Toulouse clean; the view
+  matched the expected zoom on all 50 loads**, so this is placement, not the
+  fit race. The fix is `pipeline/map_common.py` and belongs to app/chrome;
+  the numbers and the unverified bounds-vs-text-box hypothesis are in
+  `PLAN.md`. `.claude/agents/deploy-verify.md` now names 375 and 343.
+
+- **Milan's page said "about a fifth of the pins carry a shop sign"; step 2
+  measures 15.3%, and the page now says "about one pin in seven".** 7,267 of
+  47,540 storefronts carry an `insegna` (4,927 retail + 2,189 in-plan food +
+  151 out-of-plan food; the other three registers have no name field). Of the
+  41,510 pins drawn within a ring it is 6,383, 15.4%. The "fifth" most likely
+  came from the per-register rates, which were the only ones step 2 printed
+  (17.7% on the largest) - so step 2 now also prints the rate across the final
+  table, the figure the page quotes, and the page carries a comment naming
+  that line. Output unchanged: the flag is dropped before the CSV is written,
+  and `drift_check.py milan` reports zero drift with 10 baseline figures
+  unchanged. `docs/build_briefs/paris.md` repeated "~20%" and is corrected;
+  the 2026-09-22 entry here that says "~20%" stands, superseded by this one.
+
+- **Retired the `lille` worktree and the merged `rennes-build` branch, and
+  found that removal can destroy what git does not track.** Removed after the
+  three stated conditions held: 1575b2e on `origin/master` with 0 commits of
+  `rennes-build` outside it, a clean `git status`, and the Main Building
+  Session not running (last active at that commit). Two things were not
+  covered by `docs/session_roles.md`, which said "nothing ever exists only in
+  a worktree": `data/lille` and `data/rennes` (16 MB, gitignored, Rennes'
+  feed quota-limited) existed nowhere else and were copied to the main
+  checkout's `data/` first, diffed identical; and after `git worktree remove`
+  Windows left an empty-looking folder that was deleted with PowerShell's
+  `Remove-Item -Recurse` **before** a directory listing showed
+  `data/france/raw` was a junction to the main checkout's 3 GB SIRENE pair.
+  PowerShell 5.1 can follow a junction on a recursive delete. Both files were
+  checked afterwards and kept their size and 03:09/03:10 timestamps - luck,
+  not procedure. `docs/session_roles.md` now says to unlink junctions alone
+  and copy missing caches before any worktree removal.
 
 ### 2026-09-24 - France deployed: the deferred deploy-verify passed, and phone-width labels clip
 

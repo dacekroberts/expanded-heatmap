@@ -52,7 +52,8 @@ static file).
 **The Streamlit app is usually not needed at all here**: serve
 `heatmap-static` and check the standalone maps at a frame narrower than the
 map's own layout width (`_MAP_W`, currently 1000px - 854px reproduces what
-the app's column gives at a 1024px window) and at a wide frame. Run
+the app's column gives at a 1024px window), at 375 and 343 (a phone, and the
+app's frame on one), and at a wide frame. Run
 `check_map_labels.js` on **every** city, and additionally assert no line
 label's box intersects the legend's box at the narrow width.
 **Vary the frame's HEIGHT too, not only its width.** Width is what breaks
@@ -155,6 +156,11 @@ Run only the steps your scope lists (see Scope above).
    in view, clear of the legend, not overlapping another label and present in
    the legend, and that the legend collapses and re-expands. `problems` in
    its result must be empty (it also checks the Dark Mode button).
+   **Run it at 375 and 343 as well as a desktop width** - 343 is the map
+   frame inside the app on a 375 phone. At or above the map's layout width
+   the phone fit never runs, so a desktop-only pass says nothing about
+   phones; the result's `notes` warns when that is all it saw. A clipped
+   label is reported with its pixels and share cut off.
    Then read `scripts/check_map_attribution.js` and run it **at more than one
    viewport HEIGHT** - 650 (what `st.iframe` embeds), 768 and 812. It
    hit-tests the OSM credit and names whatever is sitting on it. Two things

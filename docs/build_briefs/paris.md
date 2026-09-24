@@ -97,7 +97,8 @@ otherwise, and do not build the legal-name join at all.**
 
 This is the option the original list below omitted, and it is what **both**
 recently built cities converged on independently. Milan shows `insegna` on the
-~20% of rows that carry one and `Ubicazione` on the rest; Dublin shows the
+15.3% of rows that carry one (measured 2026-09-23; "~20%" before that) and
+`Ubicazione` on the rest; Dublin shows the
 address on all of them, because its register has no name column at all. Paris
 sits between them, so it takes Milan's shape.
 
