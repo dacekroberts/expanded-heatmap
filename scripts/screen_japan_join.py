@@ -59,6 +59,19 @@ MUNICIPALITIES = {
     "koto": ("13108", "江東区", "tokyo/raw/13108/131083_015_food_business_all.csv",
              "tokyo/raw/13108/13108-24.0a.zip", "tokyo/raw/13108/13108-19.0b.zip"),
 }
+# the 生活衛生 registers - personal services - one entry per ward and kind
+_LIFE = {"13101": ("千代田区", "131016_chiyodaku"), "13105": ("文京区", "131059_bunkyoku"),
+         "13106": ("台東区", "131067_taitoku"), "13109": ("品川区", "131091_shinagawaku"),
+         "13111": ("大田区", "131113_otaku"), "13113": ("渋谷区", "131130_shibuyaku"),
+         "13116": ("豊島区", "131164_toshimaku"), "13118": ("荒川区", "131181_arakawaku"),
+         "13122": ("葛飾区", "131229_katsushikaku")}
+for _c, (_ward, _stem) in _LIFE.items():
+    for _kind, _file in (("beauty", "biyousyo"), ("barber", "riyousyo"), ("laundry", "cleaning")):
+        MUNICIPALITIES[f"{_c}-{_kind}"] = (_c, _ward, f"tokyo/raw/{_c}/{_stem}_{_file}.csv",
+                                           f"tokyo/raw/{_c}/{_c}-24.0a.zip", f"tokyo/raw/{_c}/{_c}-19.0b.zip")
+for _kind, _file in (("beauty", "biyou"), ("barber", "riyou"), ("laundry", "cleaning")):
+    MUNICIPALITIES[f"13103-{_kind}"] = ("13103", "港区", f"tokyo/raw/13103/{_file}.csv",
+                                        "tokyo/raw/13103-24.0a.zip", "tokyo/raw/13103-19.0b.zip")
 
 KANJI_DIGITS = {"〇": 0, "一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
 
@@ -133,16 +146,25 @@ def decode(b):
 
 
 def load_permits(path, muni_name):
+    """Food permits AND the 生活衛生 registers (理容所 / 美容所 / クリーニング所):
+    the same national address columns, prefixed 施設所在地_ in the food schema
+    and 所在地_ in the registers; Minato's own registers carry one 施設所在地."""
+    def col(r, *names):
+        return next((r[n] for n in names if (r.get(n) or "").strip()), "")
+
     text = decode(Path(path).read_bytes())
-    rows = [r for r in csv.DictReader(io.StringIO(text)) if r.get("許可番号")]
+    rows = list(csv.DictReader(io.StringIO(text)))
+    if rows and "許可番号" in rows[0]:
+        rows = [r for r in rows if r.get("許可番号")]
     out = []
     for r in rows:
-        town, rest = r.get("施設所在地_町字", ""), r.get("施設所在地_番地以下", "")
+        town = col(r, "施設所在地_町字", "所在地_町字")
+        rest = col(r, "施設所在地_番地以下", "所在地_番地以下")
         src = "split"
         if not town:
             # fall back to the joined string: strip prefecture and municipality,
             # take the town up to its first digit
-            full = unicodedata.normalize("NFKC", r.get("所在地_連結表記", ""))
+            full = unicodedata.normalize("NFKC", col(r, "所在地_連結表記", "施設所在地"))
             full = full.split(" ")[0]
             full = re.sub(r"^東京都", "", full)
             full = full.split(muni_name, 1)[-1]
@@ -155,9 +177,14 @@ def load_permits(path, muni_name):
         m = re.match(r"^(\D+?)(\d.*)$", t)
         if m and "丁目" not in t:
             town, rest, src = m.group(1), m.group(2) + " " + rest, "split-embedded"
+        pub = None
+        try:
+            pub = (float(r["緯度"]), float(r["経度"])) if (r.get("緯度") or "").strip() else None
+        except ValueError:
+            pass
         out.append({"town": norm_town(town), "block": first_number(rest), "rest": rest, "src": src,
-                    "addr": r.get("所在地_連結表記", ""), "type": r.get("営業の種類", ""),
-                    "name": r.get("施設名称", ""), "corp": r.get("法人名", "")})
+                    "addr": col(r, "所在地_連結表記", "施設所在地"), "type": r.get("営業の種類", ""),
+                    "name": r.get("施設名称", ""), "corp": r.get("法人名", ""), "pub": pub})
     return out
 
 
@@ -236,6 +263,12 @@ def main():
     print(f"  FIXED PREMISES ({len(fixed):,}; {n - len(fixed)} mobile vendors set aside): "
           + ", ".join(f"{t} {100 * ft[t] / max(1, len(fixed)):.1f}%" for t in ("block", "chome", "none")))
     print(f"  hyphen-form shifts (5-2-1 read as 五丁目 2番): {sum(1 for p in permits if p.get('shifted'))}")
+    # an INDEPENDENT position check where the publisher geocoded its own rows
+    d = sorted(haversine_m(p["pt"], p["pub"]) for p in permits if p["tier"] == "block" and p.get("pub"))
+    if d:
+        print(f"  vs the publisher's own coordinates ({len(d):,} block hits): median {d[len(d) // 2]:.0f} m, "
+              f"<=100 m {100 * sum(x <= 100 for x in d) / len(d):.1f}%, <=250 m {100 * sum(x <= 250 for x in d) / len(d):.1f}%, "
+              f">1 km {sum(x > 1000 for x in d)}")
     print("  address source:", dict(collections.Counter(p["src"] for p in permits)))
     print("  block hits in 住居表示 areas:",
           sum(1 for p in permits if p["tier"] == "block" and p.get("jukyo") == "1"))
