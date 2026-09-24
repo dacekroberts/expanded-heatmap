@@ -73,6 +73,8 @@ for _kind, _file in (("beauty", "biyou"), ("barber", "riyou"), ("laundry", "clea
     MUNICIPALITIES[f"13103-{_kind}"] = ("13103", "港区", f"tokyo/raw/13103/{_file}.csv",
                                         "tokyo/raw/13103-24.0a.zip", "tokyo/raw/13103-19.0b.zip")
 
+VARIANTS = str.maketrans({"曾": "曽", "靱": "靭", "﨑": "崎", "ヶ": "ケ", "ヵ": "カ", "邊": "辺", "邉": "辺", "齋": "斉",
+                          "齊": "斉", "濵": "浜", "髙": "高", "德": "徳", "槇": "槙"})
 KANJI_DIGITS = {"〇": 0, "一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
 
 
@@ -95,8 +97,12 @@ def norm_town(s):
     The digits rule came from Chūō's and Kōtō's misses: their permits write
     八重洲2丁目 where MLIT writes 八重洲二丁目. Applied to BOTH sides."""
     s = unicodedata.normalize("NFKC", s or "").replace(" ", "").replace("　", "")
-    return re.sub(r"([〇一二三四五六七八九十]+)丁目",
-                  lambda m: f"{kanji_number(m.group(1))}丁目" if kanji_number(m.group(1)) else m.group(0), s)
+    # Osaka's misses: 曽根崎新地 (1,807 permits) vs MLIT's 曾根崎新地, 靭本町 vs
+    # 靱本町, 松ヶ枝町 vs 松ケ枝町 - one spelling for each variant, both sides.
+    s = s.translate(VARIANTS)
+    # Sapporo's grid (南16条西10丁目) takes the same rule before 条 as before 丁目.
+    return re.sub(r"([〇一二三四五六七八九十]+)(丁目|条)",
+                  lambda m: f"{kanji_number(m.group(1))}{m.group(2)}" if kanji_number(m.group(1)) else m.group(0), s)
 
 
 def first_number(s):
@@ -211,6 +217,128 @@ def join(permits, blocks, chome):
     return permits
 
 
+# Designated cities (政令指定都市): each WARD has its own MLIT files, and one
+# city-wide permit list names the ward inside the address. Keys carry the ward.
+# city -> (prefecture, city name, permit files, ISJ directory)
+CITIES = {
+    "sapporo": ("北海道", "札幌市", ["sapporo/raw/shokuhin260331.csv"], "sapporo/raw/isj"),
+    "osaka": ("大阪府", "大阪市", ["osaka/raw/260630zenku.csv"], "osaka/raw/isj"),
+    "kobe": ("兵庫県", "神戸市", ["kobe/raw/20260407150739.csv"], "kobe/raw/isj"),
+}
+ADDR_COLS = ("施設所在地", "営業所所在地", "所在地_連結表記")
+TYPE_COLS = ("業種名", "業種分類", "業種情報公開名称", "営業の種類", "業種区分")
+NAME_COLS = ("屋号", "施設名称")
+
+
+def load_city_isj(isj_dir):
+    """Every ward's block and town-chōme files, keyed by (ward, town[, block])."""
+    blocks, chome = {}, {}
+    for z in sorted(Path(isj_dir).glob("*-24.0a.zip")):
+        for r in read_zip_csv(z):
+            ward = r["市区町村名"].split("市")[-1]
+            key = (ward, norm_town(r["大字・丁目名"]), first_number(r["街区符号・地番"]))
+            pt = (float(r["緯度"]), float(r["経度"]), r["住居表示フラグ"])
+            if r.get("代表フラグ") == "1" or key not in blocks:
+                blocks[key] = pt
+    for z in sorted(Path(isj_dir).glob("*-19.0b.zip")):
+        for r in read_zip_csv(z):
+            chome[(r["市区町村名"].split("市")[-1], norm_town(r["大字町丁目名"]))] = (float(r["緯度"]), float(r["経度"]))
+    return blocks, chome
+
+
+def load_city_permits(path, pref, city):
+    """Own-format city lists: one address string naming the ward. Reads only the
+    premises columns - never 営業者名 / 申請者名 / 開設者 (people)."""
+    text = decode(Path(path).read_bytes())
+    delim = "\t" if text.split("\n", 1)[0].count("\t") > text.split("\n", 1)[0].count(",") else ","
+    out = []
+    for r in csv.DictReader(io.StringIO(text), delimiter=delim):
+        addr = next((r[c] for c in ADDR_COLS if (r.get(c) or "").strip()), "")
+        a = unicodedata.normalize("NFKC", addr).replace(" ", "").replace("　", "")
+        a = re.sub("^" + pref, "", a)
+        a = a.split(city, 1)[-1]
+        m = re.match(r"^(\D+?区)(.*)$", a)
+        ward, rest = (m.group(1), m.group(2)) if m else ("", a)
+        # Sapporo's misses: an address that ENDS at 丁目 (南5条西6丁目, no block
+        # number) was cut to 南 - the number after the town is optional.
+        # ...and a building name may follow 丁目 directly (南5条西6丁目ニュー桂和ビル).
+        m = re.match(r"^(.+?丁目)(.*)$", rest) or re.match(r"^([^0-9]+?)([0-9].*)?$", rest)
+        town, tail = (m.group(1), m.group(2) or "") if m else (rest, "")
+        # Sapporo's Shiroishi misses: the town ends in a direction after 丁目
+        # (本郷通8丁目南 3-1) - keep it in the town when a number follows.
+        d = re.match(r"^([南北東西])(\d.*)$", tail) if town.endswith("丁目") else None
+        pub = None
+        try:
+            pub = (float(r["緯度"]), float(r["経度"])) if (r.get("緯度") or "").strip() else None
+            # Osaka's columns are MISLABELLED: 経度 holds 34.7, 緯度 135.5.
+            if pub and pub[0] > 90:
+                pub = (pub[1], pub[0])
+        except (ValueError, KeyError):
+            pass
+        out.append({"ward": ward, "town": norm_town(town), "block": first_number(tail), "rest": tail,
+                    "dir": (d.group(1), d.group(2)) if d else None,
+                    "addr": addr, "type": next((r[c] for c in TYPE_COLS if r.get(c)), ""),
+                    "name": next((r[c] for c in NAME_COLS if r.get(c)), ""), "pub": pub,
+                    "mobile": addr.strip() in ("", "市内一円") or "自動車" in next((r[c] for c in TYPE_COLS if r.get(c)), "")})
+    return out
+
+
+def join_city(permits, blocks, chome):
+    for p in permits:
+        w = p["ward"]
+        # the direction suffix (Sapporo) only where that town exists in MLIT's file
+        if p.get("dir") and (w, p["town"] + p["dir"][0]) in chome:
+            p["town"], p["rest"] = p["town"] + p["dir"][0], p["dir"][1]
+            p["block"] = first_number(p["rest"])
+        hit = blocks.get((w, p["town"], p["block"]))
+        if not hit and "丁目" not in p["town"] and p["block"]:
+            nums = re.findall(r"\d+", p["rest"])
+            shifted = f"{p['town']}{nums[0]}丁目" if nums else None
+            if (w, shifted) in chome:
+                p["town"], p["block"], p["shifted"] = shifted, (str(int(nums[1])) if len(nums) > 1 else None), True
+                hit = blocks.get((w, p["town"], p["block"]))
+        # Kobe's misses: hill addresses name a 字 inside the 大字 (山田町上谷上字古々山);
+        # MLIT's town-chōme file knows the 大字, so it takes the 大字's centroid.
+        oaza = re.split(r"字", p["town"], maxsplit=1)[0] if "字" in p["town"][1:] else None
+        if hit:
+            p["tier"], p["pt"] = "block", hit[:2]
+        elif (w, p["town"]) in chome:
+            p["tier"], p["pt"] = "chome", chome[(w, p["town"])]
+        elif oaza and (w, oaza) in chome:
+            p["tier"], p["pt"], p["oaza"] = "chome", chome[(w, oaza)], True
+        else:
+            p["tier"], p["pt"] = "none", None
+    return permits
+
+
+def run_city(key, show_misses=False):
+    pref, city, files, isj = CITIES[key]
+    blocks, chome = load_city_isj(DATA / isj)
+    ps = []
+    for f in files:
+        ps += load_city_permits(DATA / f, pref, city)
+    join_city(ps, blocks, chome)
+    fixed = [p for p in ps if not p["mobile"]]
+    t = collections.Counter(p["tier"] for p in fixed)
+    n = max(1, len(fixed))
+    print(f"{key} ({city}): {len(ps):,} rows, {len(fixed):,} fixed; ISJ {len(blocks):,} blocks / {len(chome):,} town-chōme; "
+          + ", ".join(f"{k} {100 * t[k] / n:.1f}%" for k in ("block", "chome", "none"))
+          + f"; hyphen shifts {sum(1 for p in fixed if p.get('shifted'))}")
+    d = sorted(haversine_m(p["pt"], p["pub"]) for p in fixed if p["tier"] == "block" and p.get("pub"))
+    if d:
+        print(f"  vs the publisher's own coordinates ({len(d):,}): median {d[len(d) // 2]:.0f} m, "
+              f"<=250 m {100 * sum(x <= 250 for x in d) / len(d):.1f}%, >1 km {sum(x > 1000 for x in d)}")
+    if show_misses:
+        rnd = random.Random(1)
+        print("  unplaced (ward, town) top 12:",
+              collections.Counter((p["ward"], p["town"]) for p in fixed if p["tier"] == "none").most_common(12))
+        for tier in ("chome", "none"):
+            s = [p for p in fixed if p["tier"] == tier]
+            for p in rnd.sample(s, min(8, len(s))):
+                print(f"   [{tier}] ward={p['ward']!r} town={p['town']!r} block={p['block']!r} | {p['addr'][:50]}")
+    return ps
+
+
 def haversine_m(a, b):
     la1, lo1, la2, lo2 = map(math.radians, (*a, *b))
     h = math.sin((la2 - la1) / 2) ** 2 + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2
@@ -249,6 +377,9 @@ def gsi_check(permits, n):
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
     key = sys.argv[1] if len(sys.argv) > 1 else "minato"
+    if key in CITIES:
+        run_city(key, "--misses" in sys.argv)
+        return
     code, muni, permit_csv, bz, cz = MUNICIPALITIES[key]
     blocks, chome = load_isj(DATA / bz, DATA / cz)
     permits = join(load_permits(DATA / permit_csv, muni), blocks, chome)
