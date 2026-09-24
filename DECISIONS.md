@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**274 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**275 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Two checks closed: the macro map's controls, and clones leaking into %TEMP%](#2026-09-24---two-checks-closed-the-macro-maps-controls-and-clones-leaking-into-temp)
 - [Oslo deployed; the live site measured after the reboot](#2026-09-24---oslo-deployed-the-live-site-measured-after-the-reboot)
 - [Oslo's deploy-verify found two phone-width failures the per-city checks passed](#2026-09-24---oslos-deploy-verify-found-two-phone-width-failures-the-per-city-checks-passed)
 - [Oslo built: 10,718 storefronts, 155 stations, and Norway's first city](#2026-09-24---oslo-built-10718-storefronts-155-stations-and-norways-first-city)
@@ -316,6 +317,36 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Two checks closed: the macro map's controls, and clones leaking into %TEMP%
+
+- **`check_macro_labels.py` now scores the map's own controls, and it
+  reproduces the Oslo failure to 0.1 px.** Handed over by the Main Building
+  Session: Oslo's deploy-verify found Oslo's pill entirely under the theme
+  button at 375 px, which this check had scored PROBLEMS 0 because it did not
+  model the button at all. It now refuses a pill that overlaps, or a labelled
+  city's dot under, the theme button, Mapbox's zoom group or the map credit.
+  All three were measured in the deployed app's own frame at 375 and 1200 px,
+  each after a screenshot forced a real frame; a hidden pane had reported the
+  Mapbox controls at a 300 px layout. The button and zoom group sit at fixed
+  offsets from the canvas's right edge at both widths (button W−163 to W−52 by
+  10–42, using the wider "☀ Light mode" label; zoom group W−42 to W−13.2 by
+  12–69.6). The credit is 244.1 × 20, inset 10 px in Mapbox's compact form
+  below 640 px of map width and flush in the corner above it. **Positive
+  control:** Oslo's label put back above its dot is computed at x 242.0–281.0,
+  y 17.9–35.9, against the measured 242–281 and 18–36, and fails with
+  "Europe 375px Oslo's pill is under the theme button (39.0 x 18.0 px)". That
+  was its only problem. With the fixed placement, all 26 cities in 7 regions
+  at 3 widths pass: nothing else was ever hidden this way.
+
+- **`check_deploy_imports.py` no longer leaves its clone behind on Windows.**
+  53 `deploy-imports-*` folders (1.7 GB) had accumulated in `%TEMP%`. Each
+  held exactly three read-only git pack files (`.idx`, `.pack`, `.rev`), which
+  Windows will not delete. `rmtree(..., ignore_errors=True)` hid every
+  failure. Removal now clears the read-only bit and retries, and warns if a
+  folder still survives. Each run also clears clones older than two hours, so
+  a concurrent run's clone is never touched. The first run took the count
+  from 54 to 5, and the 5 left are today's, under two hours old.
 
 ### 2026-09-24 - Oslo deployed; the live site measured after the reboot
 

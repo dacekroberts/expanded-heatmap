@@ -32,11 +32,46 @@ the cheap check to run before every push that touches `app/` or `pipeline/`.
 
 import argparse
 import ast
+import os
 import shutil
+import stat
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
+
+
+# A CLONE ON WINDOWS CANNOT BE DELETED WITH A PLAIN rmtree. Git writes its pack
+# files read-only, and Windows refuses to delete a read-only file, so every
+# run until 2026-09-23 left `.git/objects/pack/pack-*.{idx,pack,rev}` behind:
+# 53 `deploy-imports-*` folders, 1.7 GB, found by Oslo's deploy-verify. The
+# old `ignore_errors=True` is why nobody saw it. So: clear the read-only bit
+# and retry, and SAY so if a folder still will not go.
+def _make_writable_and_retry(func, path, _exc):
+    os.chmod(path, stat.S_IWRITE)
+    func(path)
+
+
+def remove_tree(path):
+    handler = ({"onexc": _make_writable_and_retry} if sys.version_info >= (3, 12)
+               else {"onerror": _make_writable_and_retry})
+    try:
+        shutil.rmtree(path, **handler)
+    except OSError as e:
+        print(f"  WARNING: could not remove {path}: {e}", file=sys.stderr)
+
+
+# Clones older than this came from an earlier run, not a concurrent one, so
+# they are cleared at the start of every run - which also cleared the backlog.
+STALE_AFTER_S = 2 * 3600
+
+
+def remove_stale_clones():
+    cutoff = time.time() - STALE_AFTER_S
+    for old in Path(tempfile.gettempdir()).glob("deploy-imports-*"):
+        if old.is_dir() and old.stat().st_mtime < cutoff:
+            remove_tree(old)
 
 REPO = Path(__file__).resolve().parent.parent
 LEAN = REPO / ".venv-lean" / "Scripts" / "python.exe"
@@ -291,6 +326,7 @@ def main():
                  "  python -m venv .venv-lean\n"
                  "  .venv-lean/Scripts/python.exe -m pip install -r requirements.txt")
 
+    remove_stale_clones()
     tmp = Path(tempfile.mkdtemp(prefix="deploy-imports-"))
     clone = tmp / "repo"
     try:
@@ -321,7 +357,9 @@ def main():
         if args.keep:
             print(f"clone kept at {clone}")
         else:
-            shutil.rmtree(tmp, ignore_errors=True)
+            remove_tree(tmp)
+            if tmp.exists():
+                print(f"  WARNING: clone left behind at {tmp}", file=sys.stderr)
 
 
 if __name__ == "__main__":
