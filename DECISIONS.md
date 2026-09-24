@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**332 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**333 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Brazil's batch deploy check passed; two renderer defects shipped now, fixed next (owner)](#2026-09-24---brazils-batch-deploy-check-passed-two-renderer-defects-shipped-now-fixed-next-owner)
 - [Brazil's nine cities to the app: text approved, five calls taken, pages 31-39](#2026-09-24---brazils-nine-cities-to-the-app-text-approved-five-calls-taken-pages-31-39)
 - [Rome deployed; the live site measured after the reboot](#2026-09-24---rome-deployed-the-live-site-measured-after-the-reboot)
 - [MHLW's permit-system terms stored with the licences; its 2026 amendment flagged](#2026-09-24---mhlws-permit-system-terms-stored-with-the-licences-its-2026-amendment-flagged)
@@ -374,6 +375,42 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Brazil's batch deploy check passed; two renderer defects shipped now, fixed next (owner)
+
+- **One `deploy-verify` (`city-added`) over all nine cities PASSED**, at
+  e74eed5. The Overview's South America (9) view frames all nine, and every
+  region's caption adds up to 39. A real click on each of the nine markers or
+  pills opened the right page. Every page carries its prose, caption, map,
+  rings and switcher; Rio's caption names two rail sources and the four
+  regional captions say "files dated". Lines, labels and legend rows agree
+  (7 / 9 / 2 / 2 / 2 / 1 / 1 / 3 / 2). `check_map_view.js` found 0
+  corrections at five sizes plus the app embed. `check_map_attribution.js`
+  found the credit never covered at heights 650, 768, 800 and 812.
+  `check_map_labels.js` found no problems at 1280, 854, 375 and 343. Notices 38
+  and 39 are on every page, and the OpenStreetMap credit names all nine. Rome's
+  base layer now reads "Rome Metro and Roma–Viterbo". A reboot is needed after
+  the push, since `app/cities.py` and `app/components.py` change.
+- **It found two renderer defects that no script measures, and both predate
+  this batch. The owner shipped the batch first and fixes them next ("ship
+  now, fix after"), and gated the next push on the fixes ("fix before next
+  deploy").** The alternative was Amsterdam's order, fixing before
+  pushing. It was rejected because neither defect is Brazil's alone, and the
+  batch as verified is the one shipped.
+  - **Dark mode, the default, cannot lift pure blue or navy line labels**
+    (`map_common.py`'s brightening filter). Contrast against the halo:
+    Porto Alegre's Trensurb Linha 1 `#000080` 1.91:1; Rio's VLT Linha 1 and
+    Salvador's Linha 2-Azul `#0000FF` 2.18:1; Belo Horizonte's Linha 2
+    `#2F1F85` 2.85:1. Barcelona (1.78), Calgary and Edmonton (2.36) are in the
+    same group. Light mode is fine at 8.6–16:1.
+  - **The legend's inline style breaks at its font list**
+    (`map_common.py:432`): the first `"Segoe UI"` closes the double-quoted
+    `style` attribute. Every map loses the legend's 13 px size, its shadow and
+    its non-Latin fonts. The attribution clamp survives because `bottom:`
+    comes before the break. Chicago's committed map has the same markup.
+  - Minor, no action: at phone width Rio's Metrô Linha 1 and VLT Linha 1
+    labels sit end to end. The regional pages drop "(Regional)" from their
+    heading, as Guadalajara's and Miami's do.
 
 ### 2026-09-24 - Brazil's nine cities to the app: text approved, five calls taken, pages 31-39
 

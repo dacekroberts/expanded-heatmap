@@ -38,9 +38,20 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     America, labels scored PROBLEMS 0), docs, master merged, re-rendered on
     the current renderer (Rome's title too) - DECISIONS, "Brazil's nine
     cities to the app".
-  - [ ] ONE `deploy-verify` for the batch, `check_deploy_imports`, fetch,
-    push, reboot, live check.
+  - [x] ONE `deploy-verify` (`city-added`) for the batch - PASSED;
+    `check_deploy_imports` PROBLEMS 0.
+  - [ ] Fetch, merge, push, reboot (cities.py and components.py change),
+    live check.
   - [ ] AFTER PUBLISH: remove the `sao-paulo-*-tmp` launch entries.
+  - [ ] **BLOCKS THE NEXT DEPLOY (owner: "ship now, fix after" and "fix
+    before next deploy") - no further push until these land: two renderer
+    defects the batch's deploy check found, both older than Brazil** - (1) dark mode
+    cannot lift pure blue / navy line labels (Porto Alegre 1.91:1, Rio VLT 1
+    and Salvador L2 2.18:1, Belo Horizonte L2 2.85:1; Barcelona, Calgary and
+    Edmonton alike); (2) the legend's inline `style` breaks at its font list
+    (`map_common.py:432`, a double quote inside a double-quoted attribute).
+    Fix both once in `pipeline/map_common.py`, re-render all maps,
+    `check_render_current.py`, a `map-chrome` deploy check, push.
 
 - [x] **🇳🇱 AMSTERDAM - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro
   50-54 and 16 trams, gemeente 0363: **13,238 storefronts, 144 stations**;
