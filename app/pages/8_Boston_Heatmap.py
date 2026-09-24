@@ -59,8 +59,8 @@ mostly package stores that also hold a food licence.
 
 **Five lines are drawn**, each labelled directly on the map and in the legend:
 the Red, Orange, Blue and Green Lines and the Mattapan Trolley. Regional Rail
-is a separate system and is not included, as commuter rail is excluded in every
-city here.
+is a separate system and is not included, as commuter rail is left out on most
+maps here.
 
 **Two different kinds of station are missing, and both are listed in
 `outputs/boston/excluded_stations.csv` with the reason for each.** 43 stations
