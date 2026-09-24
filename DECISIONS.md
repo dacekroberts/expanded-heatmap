@@ -16,11 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**328 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**329 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Kyoto's four join rules land in the shared module; rule C corrected before it did](#2026-09-24---kyotos-four-join-rules-land-in-the-shared-module-rule-c-corrected-before-it-did)
+- [MHLW's 2026 amendment archived: it leaves the terms the Japan verdict relies on untouched](#2026-09-24---mhlws-2026-amendment-archived-it-leaves-the-terms-the-japan-verdict-relies-on-untouched)
 - [MHLW's permit-system terms stored with the licences; its 2026 amendment flagged](#2026-09-24---mhlws-permit-system-terms-stored-with-the-licences-its-2026-amendment-flagged)
 - [Kyoto rebuilt from its permit stream; Band A decided, pending four join rules](#2026-09-24---kyoto-rebuilt-from-its-permit-stream-band-a-decided-pending-four-join-rules)
 - [Phone-width label placer verified and pushed](#2026-09-24---phone-width-label-placer-verified-and-pushed)
@@ -414,6 +415,21 @@ onwards; the early ones are split by phase rather than by hour.
   - Sendai: one personal-services row.
 
   Osaka and every Tokyo ward are unchanged.
+### 2026-09-24 - MHLW's 2026 amendment archived: it leaves the terms the Japan verdict relies on untouched
+
+- **On the owner's instruction, 健生食監発0331第2号 (2026-03-31) is stored at
+  `docs/licenses/mhlw-food-sanitation-system-terms-amendment-2026.pdf`**,
+  fetched from `https://www.mhlw.go.jp/content/001683424.pdf` (HTTP 200,
+  705,401 bytes, SHA-256 `1483b30f...2e4836`). Read before filing, because
+  the MHLW open-data verdict in the Fukuoka and Hiroshima briefs rests on the
+  2020 notice's 利用規約 (別添1, 第3条 against 第7条). **The amendment changes
+  別添2 only** - the handling of personal information, to add reporting of
+  health damage from 健康食品. 別添1 does not appear in its comparison table,
+  and 第3条, 第7条, 改変 and 頒布 appear nowhere in its text. So the verdict's
+  basis is unchanged, and the 2020 row's "check the amendment" warning now
+  records that finding instead. Read from extracted text, not a rendered
+  comparison; the table printed as 別添2 alone. Worth a line to the Staging
+  Session when it resumes, since its briefs cite the 2020 text.
 
 ### 2026-09-24 - MHLW's permit-system terms stored with the licences; its 2026 amendment flagged
 
