@@ -14,9 +14,10 @@ those first**; a correction belongs there, not here. Run
 > and Cesson - Viasilva to Cesson-Sévigné, La Courrouze and Saint-Jacques -
 > Gaîté to Saint-Jacques-de-la-Lande). Commune-only was the owner's call anyway,
 > because the worst line survives better than Toulouse's T1. **Masking:** 9.8%
-> was low - 15.9% on the same denominator. Gate 3 was taken against
-> OpenStreetMap (15 = 15 on both lines), because STAR's portal API refused
-> every call that day on a spent domain-wide quota. See `DECISIONS.md`.
+> was low - 15.9% on the same denominator. Gate 3 is exact on both lines
+> against STAR's own `tco-metro-topologie-dessertes-td` (15 = 15), read the
+> night after the build because the portal API refused every call that day on
+> a spent domain-wide quota; OpenStreetMap agrees. See `DECISIONS.md`.
 
 ## The one-line summary
 

@@ -694,10 +694,12 @@ Cities built and running end to end (pipeline, map, app page):
   city-contained" held for line a and not for line b, which leaves the commune
   at both ends. Commune-only was the owner's call on the corrected measurement,
   because line b keeps more of itself than Toulouse's T1 did - which made the
-  worst line's survival the rule the French cities share. Its gate 3 is
-  OpenStreetMap's count rather than the operator's, because the operator's
-  portal API was refusing every caller on a spent domain-wide daily quota; the
-  feed itself is on a separate host and was never affected.
+  worst line's survival the rule the French cities share. Its gate 3 matches
+  the operator's own per-line stop layer exactly, and the operator's station
+  layer names the same four stations as outside the commune - read the night
+  after the build, because the portal's API was refusing every caller on a
+  spent domain-wide daily quota. The feed is on a separate host and was never
+  affected.
 
 **Canada is closed at five built cities** - Vancouver (regional, with Surrey),
 Montréal, Calgary, Edmonton and Toronto - out of six candidates screened. The

@@ -42,8 +42,9 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   ✅ **Rennes** built 2026-09-23 on `rennes-build`, 3,479 storefronts,
   24 stations, **commune-only by owner's call** after its brief's "the métro
   is city-contained" turned out half wrong: Métro b keeps 11 of 15 stations
-  and loses both termini. Gate 3 exact on both lines against OSM, because
-  STAR's portal API was refusing every caller on a spent domain-wide quota.
+  and loses both termini. Gate 3 exact on both lines against STAR's own
+  per-line stop layer, confirmed after its portal's domain-wide quota reset;
+  OSM agrees.
 
   **What remains before Rennes merges:** the city-scoped `deploy-verify`
   (below), `check_map_view.js` on the Rennes page at embedded and phone

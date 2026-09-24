@@ -190,25 +190,35 @@ ROUTE_IDS = ["7-1001", "7-1002"]
 # Saint-Jacques-de-la-Lande's businesses are already in the parquet this city
 # reads. Regional was a wider filter away, put to the owner, and declined.
 
-# GATE 3: the operator-side station count, from outside the feed.
+# GATE 3: the operator's own station count, from outside the feed.
 #
-# SOURCE: OpenStreetMap's route relations for the network, `network=FR:STAR`,
-# operator Keolis Rennes - one relation per direction, per line, and each
-# direction's stop and platform members counted by name. Nodes-first, no way
-# geometry requested. Measured 2026-09-23:
+# SOURCE: STAR's portal, `tco-metro-topologie-dessertes-td` ("Dessertes des
+# parcours de métro du réseau STAR", 60 records) - the operator's own list of
+# which stop each métro route serves, with the line on every row. A
+# first-party layer, osm-rail's first choice. Its catalogue `modified` reads
+# 2014, but it carries line b (opened 2022) in full and was re-processed the
+# night it was read, so the date is the dataset's creation, not its content.
+# Measured 2026-09-24 00:04 UTC:
 #
-#     a   OSM 15 (both directions)   feed 15
-#     b   OSM 15 (both directions)   feed 15
+#     a   STAR 15   OSM 15   feed 15
+#     b   STAR 15   OSM 15   feed 15
 #
-# ⚠ NOT THE PUBLISHER'S OWN LAYER, and that is recorded rather than glossed.
-# osm-rail puts agency GIS first; STAR's portal (data.explore.star.fr) was the
-# place to look, and its API refused every call on 2026-09-23 because the
-# domain's shared daily quota was spent (see GTFS_URL). OSM is the independent
-# count Lille's gate 3 also used, and it agrees exactly on both lines.
+# Its sibling `tco-metro-topologie-stations-td` holds 28 stations - the feed's
+# network-wide count - each with `codeinseecommune`, and puts exactly 24 in
+# 35238, 2 in Cesson-Sévigné and 2 in Saint-Jacques-de-la-Lande: the same four
+# excluded stations step 1 finds geometrically. So the scope split is the
+# operator's own attribute, not only a point-in-polygon result.
+#
+# ⚠ IT WAS NOT READABLE ON THE DAY OF THE BUILD. data.explore.star.fr refused
+# every call on 2026-09-23 on a spent domain-wide quota (see GTFS_URL), so the
+# build first took gate 3 from OpenStreetMap's route relations (network=
+# FR:STAR, four relations, nodes-first) and confirmed it here after the 00:00
+# UTC reset. OSM stays the cross-check.
 OPERATOR_STATION_COUNTS = {"a": 15, "b": 15}
 OPERATOR_COUNTS_SOURCE = (
-    "OpenStreetMap route relations network=FR:STAR (4 relations, one per "
-    "line per direction), measured 2026-09-23 - per-line, both lines checked")
+    "data.explore.star.fr tco-metro-topologie-dessertes-td (STAR's own per-line "
+    "stop list), read 2026-09-24 - per-line, both lines; OpenStreetMap's route "
+    "relations agree")
 
 # WHAT SURVIVES THE BOUNDARY, PER LINE. Asserted in step 1 so the scope
 # decision is CHECKABLE rather than merely written down. If these numbers move,

@@ -16,7 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**254 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**255 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-09-24**
+
+- [Rennes' gate 3 confirmed against STAR's own layer after the quota reset](#2026-09-24---rennes-gate-3-confirmed-against-stars-own-layer-after-the-quota-reset)
 
 **2026-09-23**
 
@@ -293,6 +297,29 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Rennes' gate 3 confirmed against STAR's own layer after the quota reset
+
+- **STAR's per-line stop layer matches the feed exactly: a 15 = 15, b 15 = 15.**
+  `data.explore.star.fr` refused every call on 2026-09-23 on a spent
+  domain-wide quota, so the build took gate 3 from OpenStreetMap's route
+  relations and recorded why. After the 00:00 UTC reset the portal answered
+  (19,996 of 20,000 calls remaining - the per-caller limit is separate from
+  the domain's) and `tco-metro-topologie-dessertes-td`, the operator's own
+  list of which stop each métro route serves, gives the same counts. Gate 3
+  now names the first-party source, as osm-rail orders it; OSM stays the
+  cross-check. The dataset's catalogue `modified` reads 2014-11-24, but it
+  holds line b - opened 2022 - in full, and `data_processed` was the night it
+  was read: a creation date, not a staleness signal.
+
+- **The scope split is the operator's own attribute too.**
+  `tco-metro-topologie-stations-td` holds 28 stations - the feed's
+  network-wide count - each with `codeinseecommune`: 24 in 35238, 2 in 35051
+  Cesson-Sévigné, 2 in 35281 Saint-Jacques-de-la-Lande, naming exactly the
+  four stations step 1 excludes by point-in-polygon. Two methods, one answer.
+  No output changes: the counts were already right, only the source string
+  step 1 prints did. Config, the provenance row, the brief, PLAN and
+  project_context updated to say so.
 
 ### 2026-09-23 - Rennes built: 3,479 storefronts, 24 stations, and France is complete
 
