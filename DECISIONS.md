@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**280 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**281 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Rome is a JOIN: its business register matches ANNCSU on the municipal street code, 92.4% at civic level](#2026-09-24---rome-is-a-join-its-business-register-matches-anncsu-on-the-municipal-street-code-924-at-civic-level)
 - [Open gap probed (Rome reached; Turin, Cairo discarded); Brasília and Recife rail licences read; Taipei's head-office rule tested; the address-join skill](#2026-09-24---open-gap-probed-rome-reached-turin-cairo-discarded-brasília-and-recife-rail-licences-read-taipeis-head-office-rule-tested-the-address-join-skill)
 - [The oslo worktree retired; prague's empty folder kept](#2026-09-24---the-oslo-worktree-retired-pragues-empty-folder-kept)
 - [A check that every map was rendered by the current renderer; the zoom-lag worktree retired](#2026-09-24---a-check-that-every-map-was-rendered-by-the-current-renderer-the-zoom-lag-worktree-retired)
@@ -322,6 +323,28 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Rome is a JOIN: its business register matches ANNCSU on the municipal street code, 92.4% at civic level
+
+- **Downloaded ANNCSU's Lazio address list** (owner-approved,
+  24,574,080 B, dated 2026-09-15) and found **Roma's 516,337 civic numbers
+  carry the municipal street code and WGS84 coordinates on 100% of rows** -
+  and the street code is the SUAP register's own `CODICE_VIA` (440 = Arco
+  degli Acetari in both). **Measured on the 1,916-row Municipio I sample
+  already on disk: 91.6% exact on (street code, civic, suffix), 0.8% with
+  the suffix ignored - 92.4% at civic level - 5.5% at street centroid, 2.1%
+  unmatched**, 27 of the 40 in Galleria Termini, the station's shopping
+  arcade (premises with no civic number, Taipei's market-stall shape).
+- **Rome no longer rests on an absence**, so the gap row now says what is
+  left before Band A: the full register's counts and composition (a ~26 MB
+  monthly file, not yet downloaded), both licence reads, rail, and the
+  register's age (newest file July 2025). Not moved to Band A on a
+  one-municipio sample - the historic centre is the best-addressed part of
+  the city, so the rate is a ceiling until the other municipi are measured.
+- **Italy is no longer a Milan-only country**; ANNCSU is national, but its
+  fill varies by comune (empty for the first comune in the Lazio file), so
+  every Italian city must be checked on its own rows. Touched
+  `docs/city_master_list.md`, `docs/global_country_shortlist.md`.
 
 ### 2026-09-24 - Open gap probed (Rome reached; Turin, Cairo discarded); Brasília and Recife rail licences read; Taipei's head-office rule tested; the address-join skill
 
