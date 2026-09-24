@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**255 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**256 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Kaohsiung's data hosts are geo-blocked to Taiwan, not down; stays in Band B](#2026-09-23---kaohsiungs-data-hosts-are-geo-blocked-to-taiwan-not-down-stays-in-band-b)
 - [Every Band A city has a brief: seven Brazilian and three Taiwanese written, all checks passing live](#2026-09-23---every-band-a-city-has-a-brief-seven-brazilian-and-three-taiwanese-written-all-checks-passing-live)
 - [The cleanup role's stray worktrees retired; removing a session's own launch worktree broke that session](#2026-09-23---the-cleanup-roles-stray-worktrees-retired-removing-a-sessions-own-launch-worktree-broke-that-session)
 - [Three limbs of check_provenance could fall silent; each now asserts it had input](#2026-09-23---three-limbs-of-check_provenance-could-fall-silent-each-now-asserts-it-had-input)
@@ -294,6 +295,27 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Kaohsiung's data hosts are geo-blocked to Taiwan, not down; stays in Band B
+
+- **Found that `data.kcg.gov.tw` answers inside Taiwan and refuses the rest
+  of the world, so Kaohsiung's "unreachable" was a geo-block all along.**
+  From here every Kaohsiung data host (`data`, `openapi`, `api`, `kcgdg`,
+  `sports`) resolves and then drops the TCP connection attempt on 443 and 80,
+  while `www.kcg.gov.tw` on the same /16 connects in 0.16 s. Globalping's
+  probe network, which has Taiwanese probes where check-host.net has none,
+  returned **HTTP 200 from 3 of 3 Taiwanese probes** (two networks) and a
+  TCP timeout from Tokyo and Los Angeles. Recorded as a publisher's access
+  control and **not routed around** - no proxy, no VPN, nothing fetched
+  through a probe (one `HEAD` each, diagnosis only). Rejected: treating it
+  as an outage to retry, which the measurement rules out. The on-disk
+  catalogue export lists no other host for any of 3,342 Kaohsiung datasets,
+  and no national door-plate file exists. **Kaohsiung stays in Band B**; the
+  way through is asking 高雄市政府民政局 to publish the file on data.gov.tw or
+  lift the filter for it - an owner action, not taken. Touched
+  `docs/city_master_list.md`, `docs/global_country_shortlist.md`,
+  `docs/geocoding_retrospective.md` (the four-findings table now names the
+  in-country test).
 
 ### 2026-09-23 - Every Band A city has a brief: seven Brazilian and three Taiwanese written, all checks passing live
 
