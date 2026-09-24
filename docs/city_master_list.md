@@ -36,9 +36,9 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 > | | |
 > |---|---|
 > | **Built** | **26** across 8 countries *(Toulouse, Lille (Regional) and Rennes, 2026-09-23; Oslo, 2026-09-24)* |
-> | **Candidates** | **33**, all at least partially viable — A 17 · B 10 · C 5 · D 1 *(Rome to A 2026-09-24 — SUAP premises joined to ANNCSU, owner's call with a build check; Prague back to A 2026-09-24 on open data — ROS02 establishments + RES; Kaohsiung moved from B to a reopened access-blocked band D 2026-09-23, owner's call; Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built; Prague paused to the open gap 2026-09-24)* |
-> | **Open screening gap** | **0**, resting on an absence — neither candidates nor discards |
-> | **Discarded** | **34**, each naming its evidence *(Turin and Cairo from the open gap, 2026-09-24)* |
+> | **Candidates** | **34**, all at least partially viable — A 17 · B 10 · C 6 · D 1 *(Amsterdam from the discards to C 2026-09-24; Rome to A 2026-09-24 — SUAP premises joined to ANNCSU, owner's call with a build check; Prague back to A 2026-09-24 on open data — ROS02 establishments + RES; Kaohsiung moved from B to a reopened access-blocked band D 2026-09-23, owner's call; Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built; Prague paused to the open gap 2026-09-24)* |
+> | **Open screening gap** | **12**, resting on an absence — neither candidates nor discards |
+> | **Discarded** | **21**, each naming its evidence *(an audit moved 12 single-method rows to the open gap and Amsterdam to Band C, 2026-09-24)* |
 >
 > *Counts corrected 2026-09-23. This box had read 20 / 33 / 30 since
 > 2026-09-22 while the sections below moved on — **the hand-kept summary is
@@ -87,7 +87,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 33
+## Candidates — 34
 
 Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 **Eight cities moved to discarded on measurement** and **two were upgraded**.
@@ -116,11 +116,11 @@ yet* with *we looked at everything and this is what is there*.
 |---|---|---|
 | 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates answered, rail answered — every remaining question is answerable inside the build | **17** *(+ 12 built)* |
 | 🟠 **B** | **Geocoding at national scale.** The address work is a project, justified only by reuse across many cities | **10** |
-| 🟣 **C** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **5** |
+| 🟣 **C** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **6** |
 | 🔴 **D** | **Access blocked by the publisher.** Screening complete, the file exists and is measured; the publisher's own access control is the only thing stopping it, so it is unblocked by ASKING, not by probing | **1** |
-| | **Candidates** | **33** |
-| *Open gap* | Unscreened — a row resting on an absence, so not a discard | *0* |
-| *Discarded* | Measured negative, evidence named | *34* |
+| | **Candidates** | **34** |
+| *Open gap* | Unscreened — a row resting on an absence, so not a discard | *12* |
+| *Discarded* | Measured negative, evidence named | *21* |
 
 *Band A's caption briefly said "brief written" (2026-09-23, morning). That was
 wrong by `CLAUDE.md`'s own rule — **a brief is a cache, not a prerequisite** —
@@ -505,7 +505,7 @@ block-level JOIN too** — the permits split the address into municipality /
 components with a coordinate per block — **ASSERTED, not measured**, with the
 order of work to test it.
 
-## ⚠️ OPEN SCREENING GAP — rows that rest on an absence (0 cities — empty since 2026-09-24)
+## ⚠️ OPEN SCREENING GAP — rows that rest on an absence (12 cities — a re-probe queue since 2026-09-24)
 
 **Not candidates yet and not discards — unscreened.** `global_country_shortlist.md`
 records *"Italy stays a Milan-only country"*, but that rests on **Naples** and
@@ -513,8 +513,25 @@ records *"Italy stays a Milan-only country"*, but that rests on **Naples** and
 `add-country` is explicit about: a row whose reason is "not reached" is not a
 discard.
 
-| City | What the catalogue holds | What is still unknown |
+**▼ 2026-09-24 — twelve rows back from the discards**, in re-probe order (biggest
+rail and clearest next probe first). Each rested on ONE method, and
+Amsterdam — the same shape — turned out to have a current premises register
+on its own host the night it was re-probed. The evidence each carried is kept.
+
+| City | The one method it rested on | Next probe |
 |---|---|---|
+| **Vienna 🇦🇹** ▼ *from the discards 2026-09-24* | GISA (national, 1,032,283 trade licences) strips the street address by design — national only | Enumerate `data.wien.gv.at` for a city-run premises / Gastgewerbe dataset. **Rail is the deepest in the screen: 35 subway and 185 tram relations** |
+| **Rotterdam 🇳🇱** ▼ *from the discards 2026-09-24* | One search of `data.overheid.nl` (top hits were neighbourhood counts). Amsterdam's own API later showed the KvK register gated (403) and KvK's open dataset cuts locations to two postcode digits | Rotterdam's own portal for a hospitality-permit register like Amsterdam's |
+| **Helsinki 🇫🇮** ▼ *from the discards 2026-09-24* | The national PRH register, a 500-company sample: 89.8% addressed, but 53% real estate and 4.8% retail — national only | Helsinki Region Infoshare (`hri.fi`) for a municipal food-control or premises register |
+| **Lisbon 🇵🇹** ▼ *from the discards 2026-09-24* | `dados.gov.pt`: 430 hits for *estabelecimentos*, all aggregate hotel statistics — national only | Lisboa Aberta, the city's own portal, for licensed establishments |
+| **Kuala Lumpur 🇲🇾** ▼ *from the discards 2026-09-24* | DOSM's `lookup_premise`: 372 KL rows, a price-survey frame, not a register — national only | DBKL's own catalogue for a licensing register |
+| **Tallinn 🇪🇪** ▼ *from the discards 2026-09-24* | The national MTR downloaded whole (102 MB): full activity, no location field — national only | Tallinn's own open data for a premises register. Trams only |
+| **Warsaw 🇵🇱** ▼ *from the discards 2026-09-24* | `dane.gov.pl` (control passes): CEIDG is company-level; one alcohol-sales-points lead, one bucket at best — national only | `api.um.warszawa.pl` for a municipal premises dataset |
+| **Hamburg 🇩🇪** ▼ *from the discards 2026-09-24* | `suche.transparenz.hamburg.de`, ONE term (*Gewerberegister*) → 7 irrelevant hits, no control | Enumerate the transparency portal and geoportal (Gaststätten, Einzelhandel) with a nonsense-term control |
+| **Riga 🇱🇻** ▼ *from the discards 2026-09-24* | The national company register (`data.gov.lv`, 21 fields): addressed, no activity column, 60% terminated — national only | Riga's own portal for a premises or food register |
+| **Athens 🇬🇷** ▼ *from the discards 2026-09-24* | `data.gov.gr`, 343 hits, sector-specific (shipyards, wineries) — the top hits of one search | The municipality's own portal and `geodata.gov.gr` for shop or food licences |
+| **Poznań 🇵🇱** ▼ *from the discards 2026-09-24* | `dane.gov.pl`: statistical hits; CEIDG and REGON keyed — national only | Poznań's own portal and GIS for premises |
+| **Bratislava 🇸🇰** ▼ *from the discards 2026-09-24* | The national RPO API: addressed, but no activity classification — national only | Bratislava's own open-data portal for premises or permits |
 
 *▲ **Rome left this gap on 2026-09-24 for Band A** — see its section there.*
 
@@ -545,7 +562,7 @@ row, and three of this one's rows carried no reason at all.** Two of those now
 do. Göteborg was never ruled out — it was simply never placed anywhere, which
 is how a candidate disappears without anyone deciding to drop it.
 
-## 🟣 Band C — one bucket only: complete, but narrower than the others (5 cities)
+## 🟣 Band C — one bucket only: complete, but narrower than the others (6 cities)
 
 **Screening is COMPLETE for all five, and all five passed.** Each has a real
 premises-level register with coordinates, current data and a usable licence.
@@ -591,6 +608,25 @@ food-density page belong in a project whose other cities carry three buckets?
 
 
 ---
+
+### 🇳🇱 Amsterdam — moved here from the DISCARDS 2026-09-24
+
+**Its discard rested on the top hits of one national search** (*"Aantal
+vestigingen per buurt"* — neighbourhood counts). **The city's own API was
+never asked**, and it answers: `api.data.amsterdam.nl/v1/` lists 383 datasets.
+
+| | |
+|---|---|
+| **The full register** | 🚧 `hr_kvk` (the KvK Handelsregister, incl. `vestigingen`) and `standbedrijven` answer **HTTP 403** — authorised users only, not worked around. KvK's own HVD open dataset (CC BY 4.0) **cuts every address to the first two postcode digits** and drops names and numbers — activities without a location, Colombia's shape |
+| **The one bucket** | ✅ `horeca/exploitatievergunning` — **4,094 hospitality operating permits**, all granted, **every end date in 2026–2031 (a live register: expired permits leave it)**, 96.7% with a point (RD New). Restaurant 1,702 · café 870 · alcohol-free 327 · fast food 231 · coffeeshop 126 · eethuis 93 · hotels 72 (out) |
+| **Control** | **0.89×** OSM restaurants (1,806 vs 2,040) and **0.95×** all food and drink — close to complete; **fast food is thin** (231 vs 712), probably exempt |
+| **Licence** | **SILENT — read 2026-09-24.** The live API declares none (`license: null`, *"Licentie: -"*); a 2022 harvest of the city's retired catalogue on `data.overheid.nl` said CC BY 4.0 — **a conflict flagged, not resolved in the project's favour** |
+| **Names** | trade names (*"Taco Lindo Albert Cuyp B.V."*) |
+| **Rail** | 14 subway and 46 tram relations |
+
+**One bucket, and the best-maintained one in this band** — the only register
+here that drops premises when their permit ends. It joins Stockholm, Göteborg
+and Zurich under the same owner question.
 
 ### 🇸🇬 Singapore — moved here from the coordinates band 2026-09-23
 
@@ -1279,7 +1315,16 @@ took was a different *host* — `services1.arcgis.com`, reachable all along.
 The rule held and protected the city from a premature discard; the cost
 estimate attached to it was guesswork. **See the resolution above.**
 
-## DISCARDED — 34 cities, each naming its evidence
+## DISCARDED — 21 cities, each naming its evidence
+
+▼ **2026-09-24 — thirteen rows left this table on an audit.** Every row was read
+against the probe log and sorted by the kind of evidence behind it. **Twelve
+rested on ONE method** — a national portal only, the city's own host never
+asked, or the top hits of one search — which `add-country` says is an
+ASSERTED negative, not a finding; they are in the open screening gap as a
+re-probe queue (owner's call). **Amsterdam** went further: its own API
+carries a current hospitality register, and it is in Band C. The 21 left
+each rest on two methods, a measured register, or its terms.
 
 **Two rows added 2026-09-24 from the open screening gap**, each measured by
 two differently-shaped methods before being recorded:
@@ -1295,15 +1340,9 @@ host, and the file's own sweep had already recorded it as unprobed. **A discard
 row has to survive being read against the probe log; that one did not.**
 
 
-**Two rows added 2026-09-23 by the discard sweep.** Both had sat on *"Countries
-ruled out"* with **no parenthetical evidence at all**, which `add-country` says
-is not a discard. Both were probed, and **both discards hold** — which is worth
-stating plainly rather than treating the audit as vindication.
-
-| City | Evidence, 2026-09-23 |
-|---|---|
-| **Lisbon** 🇵🇹 | **The aggregate trap.** `dados.gov.pt` returns **430** hits for *estabelecimentos*, and they are **aggregate hotel statistics** — *"Proporção de estabelecimentos hoteleiros que utilizam computador (%)"* — plus prison establishments. No premises register |
-| **Warsaw** 🇵🇱 | **Control passes** (`zzqqxx` → 0, so the search genuinely filters). `CEIDG` is **company-level**, the registered-office shape. **One premises-shaped lead survives** — *Wykaz punktów sprzedaży napojów alkoholowych*, licensed alcohol sales points, the Singapore-tobacco shape — **one bucket at best**, and narrower than Göteborg's |
+▼ **Lisbon and Warsaw — added here by the 2026-09-23 sweep — left on
+2026-09-24** with ten other single-method rows: see the note above the
+open screening gap's table.
 
 | City | Why |
 |---|---|
@@ -1311,23 +1350,13 @@ stating plainly rather than treating the audit as vindication.
 | **Tel Aviv** 🇮🇱 | **DISCARDED ON TERMS, NOT ON DATA — owner's decision 2026-09-22.** The data is the strongest of any unbuilt city: **22,176 licensed businesses** with activity *and* location, **EPSG:2039 already in metres**, refreshed within two days. **The municipal Terms forbid it** — no copying, distributing or publishing, **no using the content to create a database**, extending to other websites and to non-commercial use, and requiring **explicit prior written consent**; the open-data portal's footer reads *all rights reserved*. The only remedy was a written request, made **in advance and against explicit prohibitions** — judged not worth the effort against its likelihood. **Not a data negative**, and the full measurement is retained below |
 | **Hyderabad** 🇮🇳 | **India's ENTIRE national catalogue walked — 288,011 titles, 58 calls, zero failed pages — and not one premises-level trade-licence register exists.** All three trade-licence datasets in it are **aggregates**: Ahmedabad's is *No of Gumasta License* per ward per year, Karnataka's is *District wise ULB wise*, Kohima's is *Total* per ward. **Nothing for Telangana, Hyderabad or GHMC at any level.** GHMC itself 403s in a real browser (F5 WAF, names itself); `data.telangana.gov.in` is unroutable and runs DKAN, whose dataset-list endpoint the Archive does not hold; `tgbpass` is *building* permits. **Every route measured, not merely blocked** |
 | **Kochi** 🇮🇳 | **Same national sweep, same result** — India publishes trade-licence **counts**, never premises. Kerala's own route is transactional: K-SMART and Sanchaya renew licences one at a time with no bulk export, and the `?t=establishment` lead was a **false friend** — in Indian government usage *establishment* means **staff posts**, and that search returns 6,526 orders about staffing |
-| **Tallinn** 🇪🇪 | **MTR downloaded whole — 102 MB, 56,401 undertakings, 100,431 licences — and its complete tag census is 17 element names, NONE of which is a place.** Full activity classification, zero location: the Colombia-RUES shape. Composition fails too — the largest category is 25,130 service-worker cards |
 | **Sofia** 🇧🇬 | **11,635 Bulgarian datasets enumerated via `data.europa.eu`'s SPARQL endpoint, around a 403 aimed at us.** 141 municipal premises registers exist nationally; **Sofia's 76 datasets include none.** Its registers are all small towns — Sofia is Bulgaria's only metro city |
 | **Sevilla** 🇪🇸 | **1,260 public ArcGIS items / 413 Feature Services enumerated** from org `hcmP7kr0Cx3AcTJk` after the dead portal's last Archive capture named its successor. **Rail is solved** (`METRO_Estacion` 21, `METRO_Linea` 20, no account). **No premises register**: `Locales` is 150 *vacant municipally-owned units*, the rest are property holdings and facility layers |
 | **Berlin** 🇩🇪 | `Gaststätten` → 0 on `datenregister.berlin.de`; the Gewerberegister is not open data |
-| **Hamburg** 🇩🇪 | `Gewerberegister` → 7 irrelevant hits on `suche.transparenz.hamburg.de`; building-permit PDFs and planning polygons |
 | **Naples** 🇮🇹 | Only commercial dataset is "per procedimento e Municipalità" — aggregate |
 | **Messina** 🇮🇹 | SCIA/DIA are business-*start notifications* — a flow, not a stock |
-| **Helsinki** 🇫🇮 | Addresses fine (89.8%) but composition is 53% real estate, 4.8% retail |
 | **Bogotá** 🇨🇴 | **Fails on rail** — one unnamed-ref, zero-colour relation; its only mass transit is BRT |
-| **Vienna** 🇦🇹 | GISA strips the street address by design |
-| **Amsterdam / Rotterdam** 🇳🇱 | Register is aggregate |
-| **Athens** 🇬🇷 | Sector-only |
-| **Poznań** 🇵🇱 | Specific negative |
-| **Riga** 🇱🇻 | Addressed but unclassified |
-| **Bratislava** 🇸🇰 | No activity classification at all |
 | **Santiago** 🇨🇱 ↓ | **Coverage.** Chile licenses per *comuna*; **5 of ~33** Metro comunas publish patentes and the **Santiago comuna is absent from the portal entirely**. The Daegu shape, 3rd occurrence |
-| **Kuala Lumpur** 🇲🇾 ↓ | **Sample, not register.** `lookup_premise` passes every structural test — premises rows, 100% populated, keyless CSV — and holds **3,916 rows nationally, 372 in KL**. It is PriceCatcher's survey frame |
 | **Medellín** 🇨🇴 ↓ | **Three closed doors.** The city's ArcGIS Hub is **credential-walled**; the chamber of commerce publishes comuna×CIIU **crosstabs**; RUES has **6,369,877** premises rows and **no address, municipality or city column at all** |
 | **Lima** 🇵🇪 ↓ | **Coverage.** 78 licence datasets under ODC-BY, keyless CSV — but licensing is per *distrito* and **1 of Línea 1's 9** publishes usable data. La Victoria's 135,982 rows are excellent and alone |
 | **Jakarta** 🇮🇩 ↓ | **No activity field.** The live OSS register has 53,827 rows and full street addresses across **exactly 9 columns**; the two that look like classification are legal form and business size |
@@ -1341,8 +1370,9 @@ Plus the no-urban-rail set (Winnipeg, Hamilton, Québec City, Halifax,
 Mississauga, Ottawa, ~30 single-feed countries) and access-not-data
 (Russia, Ukraine).
 
-**Germany is a country-level negative**, on two cities measured independently
-at two different portal hosts.
+~~**Germany is a country-level negative**, on two cities measured independently
+at two different portal hosts.~~ ▼ **Not any more (2026-09-24)**: Hamburg's row
+rested on one search term and is back in the open gap; Berlin's stands.
 
 **The five added on 2026-09-22 each failed differently**, which is the useful
 part: coverage (Santiago, Lima), sampling (Kuala Lumpur), no location column
@@ -1923,11 +1953,12 @@ metro, so it is a weaker map for a stronger dataset. Unprobed.
 
 ## Countries ruled out
 
-🇩🇪 **Germany** *(two cities measured at two hosts — the Gewerberegister is not open data)* ·
-🇦🇹 **Austria** *(GISA strips the street address)* · 🇳🇱 **Netherlands** *(aggregate)* ·
-🇬🇷 **Greece** *(sector-only)* · 🇵🇹 **Portugal** *(aggregate — Lisbon, 2026-09-23)* ·
-🇵🇱 **Poland** *(company-level CEIDG — Warsaw; Poznań)* ·
-🇱🇻 **Latvia** *(unclassified)* · 🇸🇰 **Slovakia** *(no classification)* ·
+*▼ **2026-09-24 — eight countries left this list** with the discard audit:
+Germany, Austria, the Netherlands, Greece, Portugal, Poland, Latvia and
+Slovakia each rested on one national-level method, and their cities are in
+the open gap (the Netherlands' Amsterdam in Band C). A country is not ruled
+out by its national portal's first page.*
+
 🇬🇧 **UK** *(NNDR is a tax register with no category)* ·
 🇦🇺 **Australia**, 🇳🇿 **New Zealand** *(licensing is not municipal)* ·
 🇧🇪 **Belgium** *(bulk access paid)* · 🇦🇪 **Dubai** *(no agency feed)*

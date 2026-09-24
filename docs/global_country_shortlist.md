@@ -1922,6 +1922,12 @@ The batched RŽP route above was measured and then **set aside**. Measured: 100 
 
 **Japan**: `data.go.jp` **ignores `q`** (the nonsense term returned all 18,140 datasets); enumerated whole, it holds **no food-business dataset at all** — the national catalogue does not harvest municipal open data, so each city's own portal is the route (Tokyo's metropolitan CKAN lists ward files: Minato, Chuo, Koto, Shinjuku, Nakano).
 
+#### ▲ 2026-09-24 — the discard audit, and Amsterdam re-probed on its own host
+
+**Amsterdam** had been discarded as *"register is aggregate"* on the top hits of one `data.overheid.nl` search. Its own DSO API (`api.data.amsterdam.nl/v1/`, 383 datasets) holds the KvK register (`hr_kvk`, gated 403) and **`horeca/exploitatievergunning`: 4,094 live hospitality permits with points** — 0.89× OSM restaurants; licence SILENT. KvK's national HVD open dataset truncates addresses to two postcode digits. → Band C.
+
+**The audit** read all 34 discard rows against this trail: 21 rest on two methods, a measured register, or their terms; **12 rested on one method** — Vienna, Rotterdam, Helsinki, Lisbon, Kuala Lumpur, Tallinn, Warsaw, Hamburg, Riga, Athens, Poznań, Bratislava — and moved to the open gap with their next probe named. **The lesson: an early sweep checked discard rows for the words "unprobed" and "not reached", and a one-search negative worded as a finding ("aggregate") passed it.** A discard needs its method count, not its wording.
+
 #### A refinement the Korea probe produced: stations are not lines
 
 Japan's N02 carries **both** — 10,235 station points *and* 21,932 line

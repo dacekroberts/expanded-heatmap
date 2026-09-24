@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**285 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**286 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Discard audit: 12 single-method rows to the open gap (owner); Amsterdam re-probed on its own host and moved to Band C](#2026-09-24---discard-audit-12-single-method-rows-to-the-open-gap-owner-amsterdam-re-probed-on-its-own-host-and-moved-to-band-c)
 - [Rome to Band A with a build check: 95,493 premises joined to ANNCSU at 95.7%, both licences CC BY 4.0, a 2.60x control to settle at build](#2026-09-24---rome-to-band-a-with-a-build-check-95493-premises-joined-to-anncsu-at-957-both-licences-cc-by-40-a-260x-control-to-settle-at-build)
 - [Barcelona's notification adjourned](#2026-09-24---barcelonas-notification-adjourned)
 - [Stale-prose sweep: 48 unused settings, 37 counts, 2 tense hits read](#2026-09-24---stale-prose-sweep-48-unused-settings-37-counts-2-tense-hits-read)
@@ -327,6 +328,37 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Discard audit: 12 single-method rows to the open gap (owner); Amsterdam re-probed on its own host and moved to Band C
+
+- **Found Amsterdam's discard ("register is aggregate") rested on the top
+  hits of one national search**, with the city's own host never asked. Its
+  DSO API answers: the KvK register (`hr_kvk`) is gated to authorised users
+  (403, not worked around), and KvK's national HVD open dataset cuts
+  addresses to two postcode digits; but **`horeca/exploitatievergunning`
+  holds 4,094 live hospitality permits** - all granted, every end date
+  2026-2031, 96.7% with a point - at **0.89x** OSM restaurants. Licence read:
+  **SILENT** (the live API declares none; a 2022 harvest of the retired
+  catalogue said CC BY 4.0 - flagged, not resolved in the project's favour).
+  **Moved to Band C** (one bucket), beside Stockholm, Göteborg and Zurich.
+- **Audited all 34 discards** (a read-only pass, corrected by hand where it
+  searched city names and the evidence sat under the country). 21 rest on two
+  methods, a measured register, or their terms. **12 rested on one method** -
+  a national portal only, the city never asked, or one search's top hits.
+  **Owner's call: all 12 to the open gap** as a re-probe queue in order -
+  Vienna, Rotterdam, Helsinki, Lisbon, Kuala Lumpur, Tallinn, Warsaw,
+  Hamburg, Riga, Athens, Poznań, Bratislava - each keeping its evidence and
+  naming its next probe. Rejected: keeping them as flagged discards (the
+  list's own rule says a single-method negative is asserted, not found), and
+  moving only the top five. Eight countries left "Countries ruled out";
+  **Germany is no longer a country-level negative** (Hamburg's row was one
+  search term).
+- **Why the 2026-09-23 sweep missed these**: it checked discard rows for the
+  words "unprobed" and "not reached", and a one-search negative worded as a
+  finding passed. Proposed, not done: give the discard table *methods used*
+  and *city host asked?* columns, so a thin row shows in the row itself.
+- Counts: candidates 34 (A 17 · B 10 · C 6 · D 1), open gap 12, discarded
+  21. Touched `docs/city_master_list.md`, `docs/global_country_shortlist.md`.
 
 ### 2026-09-24 - Rome to Band A with a build check: 95,493 premises joined to ANNCSU at 95.7%, both licences CC BY 4.0, a 2.60x control to settle at build
 
