@@ -462,6 +462,9 @@ def add_city_entry(root, args, page_rel, dry_run):
         # Milan both shipped that breakage, on separate branches,
         # before it did.
         f'        "region": "{args.region}",\n'
+        # REQUIRED since 2026-09-24, for the same reason as region: cities.py
+        # raises at import without it. The city switcher groups by country.
+        f'        "country": "{args.country}",\n'
         # BOTH KEYS BELOW ARE WRITTEN BECAUSE THEIR ABSENCE IS NOT NEUTRAL.
         # Barcelona shipped without either on 2026-09-22 and both surfaced in
         # check_deploy_imports, the second one disguised:
@@ -547,6 +550,10 @@ def main():
                          "\"Canada\", \"Mexico\". REQUIRED: app/cities.py raises at import "
                          "on an untagged city. A region NEW to the project also needs "
                          "--new-region; without it this script refuses.")
+    ap.add_argument("--country", required=True,
+                    help="the city's country, spelled as the other cities in app/cities.py "
+                         "spell it (\"Brazil\", \"Netherlands\"). REQUIRED: the city "
+                         "switcher groups by it and cities.py raises at import without it.")
     ap.add_argument("--map-step", type=int, default=3, help="number of the map step (3, or 4 if a geocoding step is inserted)")
     ap.add_argument("--new-region", action="store_true",
                     help="the region is new to the project: append it to REGION_ORDER in app/cities.py. Without this a region not already there is REFUSED, because the entry would import-fail and nothing in a build imports the app")

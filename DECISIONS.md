@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**340 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**341 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [City switcher grouped by country (owner)](#2026-09-24---city-switcher-grouped-by-country-owner)
 - [Japan: cost clauses accepted country-wide; N03 never drawn; Kyoto before Tokyo](#2026-09-24---japan-cost-clauses-accepted-country-wide-n03-never-drawn-kyoto-before-tokyo)
 - [Japan's licence reads consolidated into data_sources.md; five were never read](#2026-09-24---japans-licence-reads-consolidated-into-data_sourcesmd-five-were-never-read)
 - [Brazil's batch deploy check passed; two renderer defects shipped now, fixed next (owner)](#2026-09-24---brazils-batch-deploy-check-passed-two-renderer-defects-shipped-now-fixed-next-owner)
@@ -382,6 +383,30 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - City switcher grouped by country (owner)
+
+- **The owner asked for cities of one country to sit back to back** in the
+  city map's "Cities" menu, e.g. Milan then Rome.
+  - **Before**: the menu followed build order, so Rome (page 30) sat ten places
+    after Milan (page 20). The menu reads its options from the hidden
+    switcher links that `components.render_city_nav()` renders, so the fix is
+    app-side only. No map is re-rendered.
+- **How it works**: every `CITIES` entry now carries `country`. The new
+  `SWITCHER_ORDER` in `app/cities.py` lists countries in the order their first
+  city was built, and cities within a country in build order. Today that
+  moves only Rome; Brazil's nine cities already sat together.
+- **`CITIES` itself stays in build order**, because page numbers, the macro
+  map and the Overview's text list all follow it. The Overview list is
+  unchanged: the request named the city map's menu.
+- **`country` is not `region`.** A region is a macro-map view (Canada is
+  two, Europe one); a country is what a reader groups by.
+- **Enforced, not remembered**: `cities.py` raises at import on a city with
+  no `country` (watched failing with Rome's removed), and
+  `scripts/scaffold_city.py` now requires `--country`. A scaffold run with it
+  imported 40 cities, 8 regions, and was then reverted. **Any build branch
+  that adds a city after this lands needs the field**, and
+  `check_deploy_imports.py` refuses the branch until it has it.
 
 ### 2026-09-24 - Japan: cost clauses accepted country-wide; N03 never drawn; Kyoto before Tokyo
 
