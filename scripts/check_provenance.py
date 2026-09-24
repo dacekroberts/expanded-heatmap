@@ -410,14 +410,26 @@ def check_invariants(names, lons):
                     f"pipeline/map_common.py, and re-render this city")
 
     # 2. The projected CRS is derived per city, never copied.
+    #
+    #    Every skip below is RECORDED, not just taken. main() already refuses a
+    #    run that read fewer longitudes than cities, but a city could still drop
+    #    out here by having no config at its derived slug or a CRS_PROJECTED
+    #    that is not a literal this regex reads - an f-string, or a value
+    #    imported from pipeline/countries/. Either way the limb would examine
+    #    one city fewer and print the same green line.
+    skipped = []
     for name in names:
         slug = SLUG_OVERRIDES.get(name, name.lower().replace(" ", "_"))
         cfg = ROOT / "pipeline" / slug / "config.py"
         lon = lons.get(name)
-        if not cfg.exists() or lon is None:
+        if lon is None:
+            continue                      # main() reports the missing longitude
+        if not cfg.exists():
+            skipped.append(f"{name} (no pipeline/{slug}/config.py)")
             continue
         m = re.search(r"CRS_PROJECTED\s*=\s*[\"']EPSG:(\d+)[\"']", read(cfg))
         if not m:
+            skipped.append(f"{name} (no literal CRS_PROJECTED = \"EPSG:n\")")
             continue
         epsg = int(m.group(1))
         family, zone = divmod(epsg, 100)
@@ -438,6 +450,11 @@ def check_invariants(names, lons):
                 f"{slug}: CRS_PROJECTED EPSG:{epsg} is UTM zone {zone}, but "
                 f"longitude {lon:.2f} implies zone {implied} - a copied CRS "
                 f"does not error, it just measures wrong")
+    if skipped:
+        problems.append(
+            f"the CRS check could not examine {len(skipped)} of {len(names)} "
+            f"cities: {', '.join(skipped)} - teach it to read that config "
+            f"rather than letting the city drop out of the check")
 
     # 3. The shared renderer is not forked.
     steps = sorted(ROOT.glob("pipeline/*/step[34]_map.py"))
@@ -505,6 +522,9 @@ def check_tables():
     for rel in TABLE_DOCS:
         q = ROOT / rel
         if not q.exists():
+            # Renaming a document must not quietly retire its table check.
+            problems.append(f"{rel}: listed in TABLE_DOCS but does not exist "
+                            f"- update TABLE_DOCS with the rename")
             continue
         lines = read(q).split("\n")
         cols = None
@@ -820,6 +840,18 @@ def main():
     nums = [n for n, _ in numbered]
     doc_headings = {h for _, h in numbered}
     shown = displayed_notices()
+
+    # Both lists are read by regex from source text. An empty parse passes C
+    # (`[]` is contiguous from 1), and if BOTH come back empty D passes too,
+    # and so does F, which takes its subjects from the same parse.
+    if not numbered:
+        failures.append(("notices", [
+            "parsed NO numbered notices from data_sources.md - the '**N. "
+            "Heading —' format changed, so checks C, D and F examined nothing"]))
+    if not shown:
+        failures.append(("notices", [
+            "parsed NO entries from app/components.py's _NOTICES - its format "
+            "changed, so check D examined nothing"]))
 
     if nums != list(range(1, len(nums) + 1)):
         dupes = sorted({n for n in nums if nums.count(n) > 1})

@@ -546,6 +546,34 @@ on exact string match** with no street normalisation, and returns
 may have no address either - Edmonton's placeholders, Vancouver's rentals and
 contractors.
 
+#### ⛔ Before writing ANY geocoder: find the address file that already carries the coordinate
+
+**Four for four, the same week.** Every country this project filed under
+"geocoding at national scale" turned out to publish an address-point file
+with coordinates, and the geocoding project became a JOIN - or vanished:
+
+| Country | The file | Result |
+|---|---|---|
+| Czechia | RÚIAN, keyless | a join, **99.8%** |
+| Denmark | DAWA, keyless | a join on the DAR UUID, **96.9%** |
+| **Brazil** | IBGE's **census address file** (CNEFE 2022) | **no geocoder AND no register** - it records every establishment with a field coordinate |
+| **Taiwan** | each city's **door-plate file** (門牌位置數值資料), from the civil-affairs bureau | a join, **92.4-95.5%** in four cities |
+
+**Where to look, in order:** the census bureau's address frame; the national
+mapping agency's address or location-reference layer; the municipal
+civil-affairs or registry office (it numbers the doors). **Never under
+"geocoding"** - none of the four was filed there. Enumerate the catalogue
+(its export, not its search API - Taiwan's `ER0001` key error was one
+endpoint); read the rows' fill, not the header.
+
+**Then measure the join with a CONTROL city that must reproduce before any
+other counts** - it caught a 0.8-point parser regression in Taiwan that would
+have shipped silently in three cities - **report match TIERS** (exact /
+degraded / unplaceable), and **read the misses by place**: Brazil's dropped
+rows under-draw affluent districts, Taiwan's are market stalls.
+**`docs/geocoding_retrospective.md` carries the full method and the Japan
+plan; `scripts/screen_taiwan_join.py` is the reusable harness.**
+
 ### 7. What classification standard, and is the field single-valued?
 
 Canada uses NAICS (it is a trilateral US/Canada/Mexico standard, so

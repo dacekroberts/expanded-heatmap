@@ -1837,7 +1837,58 @@ coordinate before building a geocoder.**
 ⚠️ **Certificates:** Python's bundled store lacks Taiwan's government root
 (GRCA), so `data.taipei` fails verification there; **curl on Windows verifies
 it** against the OS store. A build uses the OS store — never switches
-verification off.
+verification off. *(Two scratch probes that did switch it off for header peeks
+were deleted the same day; nothing in the repository ever did.)*
+
+#### ▲▲ 2026-09-23, later — Taiwan finished: three cities join, rail needs no TDX
+
+**The join, three cities, one parser** — with **Taipei as the control**, which
+had to reproduce its first measurement before the others counted. A
+generalised parser first read Taipei at 91.7%, because its street pattern
+forbade `市`, `鎮` and `里` — the characters stripped as district and village —
+and so failed every street that CONTAINS one (`市民大道`, `鎮三街`). Fixed, the
+control read 92.4% against 92.5%:
+
+| City | Storefronts | **Joined** | Door-plate file |
+|---|---|---|---|
+| **Taipei** | 76,519 | **92.4%** | monthly, 2026-09-02, 251,607 keys |
+| **Taoyuan** | 49,282 | **94.0%** | `TGOS_A68000_11508.CSV`, 2026-08, 516,049 keys |
+| **Taichung** | 73,227 | **92.7%** | 2026-08 GIS release (city's Google Drive), 719,446 keys, **TWD97 and WGS84** both |
+| **Kaohsiung** | 72,550 | ⛔ **unmeasured** — `data.kcg.gov.tw` and `openapi.kcg.gov.tw` time out from six nodes in five countries and on two later tries | — |
+| **New Taipei** | **76,320** | **95.5%** — the best of the five | monthly, 192.9 MB, 422,048 keys, columns in English |
+| **Taipei (Regional)** = Taipei + New Taipei | **152,839** | **93.9%** | New Taipei surrounds Taipei and the metro crosses the boundary: the Dublin/Lille regional shape, decided 2026-09-23 |
+
+**No registration still carries the pre-upgrade county names** (`桃園縣`,
+`臺中縣`) — the trap was checked and is empty. **Taichung's numbers chain
+sub-numbers** (`２之３之２號`), which the parser now handles.
+
+**The head-office question, MEASURED on Taipei's 76,519:** company rows (head
+office or single site) are **19,491**, and **38.7% of them sit on a 3rd floor or
+higher or carry a room number (`室`)** — against **7.1% for sole proprietors**,
+the control, and 8.2% for branches. **The registered-office trap is real and
+confined to company rows** — about 7,500 in Taipei. Clustering found the
+opposite of a registered-office service: the most-shared addresses are
+**traditional markets** (環南市場 893 rows, 士林市場 513).
+
+**Person names, MEASURED:** **3,763 Taipei storefronts (4.9%) are registered
+under what reads as a person's name** — all sole proprietors, **63% of them
+market stalls**, 1,282 at street level, **119 on an upper floor**. A
+build-time rule, recorded in the brief when one is written.
+
+**Rail: TDX is now key-gated, and not needed.** Every operator returns `401
+Valid API Key Required` to a script; TDX's terms (read 2026-09-23) allow
+keyless access only as a browser-only visitor mode capped at 20 calls a day,
+and scripted use needs a member key whose registration wants a Taiwanese
+mobile number or manual review. The server now tells browsers from scripts,
+which is why the 2026-09-21 probe worked and today's does not. **The agencies
+publish their own, keyless, under OGDL v1:** Taipei's network map
+(`臺北都會區大眾捷運系統路網圖`, GeoJSON `MultiLineString` with `RouteName`,
+EPSG:3826) and station points; Taipei Metro's station and route tables;
+Taichung's Green Line stations with lat/lon; the national land-survey centre's
+`捷運車站` / `輕軌捷運車站` layers (2026-04); Taoyuan Metro's network XML.
+Kaohsiung's station files sit on the unreachable host, and the railway
+bureau's airport-MRT file is behind an **Incapsula bot challenge** — not worked
+around; the national layer covers those stations.
 
 #### A refinement the Korea probe produced: stations are not lines
 
@@ -2873,7 +2924,7 @@ Two costs that no city in this project has yet paid:
    "CNPJ"). From here every client — curl/schannel, Python/OpenSSL and the
    browser — is **reset during the TLS handshake**, while the Archive's crawler
    got through. `check-host.net` settled it: **16 nodes, `br1` 200, all 15
-   others in 12 countries reset, including four in the US.** **A geo-block, and
+   others in 11 countries reset, including four in the US.** **A geo-block, and
    a publisher's choice** — this project does not route around it. The
    four-cause check (transient / wrong host / refusal / dead) was worked in
    order: the answer was *moved* AND *refused*, two causes at once.

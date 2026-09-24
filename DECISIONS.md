@@ -16,11 +16,14 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**251 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**254 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
 - [Rennes built: 3,479 storefronts, 24 stations, and France is complete](#2026-09-23---rennes-built-3479-storefronts-24-stations-and-france-is-complete)
+- [Three limbs of check_provenance could fall silent; each now asserts it had input](#2026-09-23---three-limbs-of-check_provenance-could-fall-silent-each-now-asserts-it-had-input)
+- [The geocoding retrospective, written to prepare Japan; the lesson placed where the next country passes through it](#2026-09-23---the-geocoding-retrospective-written-to-prepare-japan-the-lesson-placed-where-the-next-country-passes-through-it)
+- [Taiwan finished: Taipei (Regional), Taoyuan and Taichung to Band A; Kaohsiung held on an unreachable host](#2026-09-23---taiwan-finished-taipei-regional-taoyuan-and-taichung-to-band-a-kaohsiung-held-on-an-unreachable-host)
 - [Six merged build branches deleted; the retirement steps needed a pull first](#2026-09-23---six-merged-build-branches-deleted-the-retirement-steps-needed-a-pull-first)
 - [The fit race came back a third way, so the fit now checks its outcome](#2026-09-23---the-fit-race-came-back-a-third-way-so-the-fit-now-checks-its-outcome)
 - [The cleanup role gets a named worktree, and its old one is retired rather than moved](#2026-09-23---the-cleanup-role-gets-a-named-worktree-and-its-old-one-is-retired-rather-than-moved)
@@ -401,6 +404,130 @@ onwards; the early ones are split by phase rather than by hour.
   provenance updated; the brief carries a build note at its head and both
   wrong claims corrected in place.
 
+### 2026-09-23 - Three limbs of check_provenance could fall silent; each now asserts it had input
+
+- **Found three places where `scripts/check_provenance.py` would examine
+  nothing and still print its green line, and made each one fail instead.**
+  This came from the handed-over instruction to look for loops with no guard
+  for matching nothing. The glob loops themselves were harmless:
+  `docs/**/*.md` does not come back empty. The dangerous variant was a
+  NAMED input going missing and being skipped with `continue` or `return []`:
+  (1) the CRS limb of check K skipped any city with no config at its derived
+  slug, or whose `CRS_PROJECTED` was not a literal the regex reads (an
+  f-string, or a value imported from `pipeline/countries/`); (2) check I
+  skipped a `TABLE_DOCS` file that no longer existed, so renaming one of those
+  documents would have retired its table check; (3) checks C, D and F read the
+  notices from `data_sources.md` and `app/components.py` by regex, and an empty
+  parse passes C, because `[]` counts as contiguous from 1. If both parses came
+  back empty, D and F passed too.
+
+- **None of the three is starved today, measured before the change:** the CRS
+  limb examined 24 of 24 cities, the notice parses returned 25 and 23, and all
+  4 table documents exist. So these are guards, not corrections. They record
+  why a skip happened instead of just taking it, the same pattern as the
+  longitude guard the 2026-09-22 entry describes, which covered only one of
+  the CRS limb's three ways to drop a city.
+
+- **Each guard was watched failing** in a scratchpad harness that
+  monkeypatches in-process and never touches the tree: an f-string CRS in
+  Lille, Lille's slug pointed elsewhere, an extra entry in `TABLE_DOCS`, and
+  both notice parses emptied. Each exited 1 with its own message, and an
+  unmodified positive control exited 0. **The harness was wrong on its first
+  run.** It patched the slug for `"Lille"` while `city_names()` returns
+  `"Lille (Regional)"`, so that negative case became a second positive control
+  and passed. Exit status alone could not tell the two apart. Checking for the
+  expected message is what caught it.
+
+- **Not changed:** `check_stale_claims.py` has the same skip shape for its
+  documents, in category C and category E, and was left alone. It reports and
+  never fails, so a silent limb there costs recall rather than a false green
+  gate.
+
+### 2026-09-23 - The geocoding retrospective, written to prepare Japan; the lesson placed where the next country passes through it
+
+- **`docs/geocoding_retrospective.md` records why Brazil and Taiwan both left
+  the geocoding band in one day, as a method for Japan**, at the owner's
+  request. The headline is **four for four**: Czechia (RUIAN), Denmark (DAWA),
+  Brazil (CNEFE) and Taiwan (door plates) each published an address file that
+  already carries the coordinate, and each "geocoding project" became a join
+  or vanished. It sets out the steps that found them - look for the
+  coordinates before the geocoder; enumerate catalogues through their export;
+  treat "unreachable" as four findings and test which; count what a row IS;
+  measure with a control that must reproduce; report tiers; read the misses by
+  place - and the normalisation that mattered, each rule priced in points.
+
+- **It predicts Japan is a block-level JOIN, and labels that ASSERTED.** The
+  permits split the address into municipality / 町字 / 番地以下 on 98% of rows
+  and MLIT's 位置参照情報 publishes those components with a coordinate per
+  block; block precision is ample for 160-960 m rings. The order of work puts
+  finding the address file first, a Minato Ward control second, and a GSI
+  cross-check on a sample so two methods agree.
+
+- **The lesson is placed where the next country passes through it**, per the
+  meta-rule `osm-rail` records: a new section in `add-country` question 6 -
+  "before writing ANY geocoder, find the address file that already carries
+  the coordinate" - and a pointer in the master list's Japan paragraph.
+  **`scripts/screen_taiwan_join.py`** was lifted out of the scratchpad, where
+  the method would not have survived, and reproduces the Taipei control
+  (92.4%, 251,607 keys). The retrospective recommends lifting its harness
+  (tiers, control, miss sampling) into shared code before Japan's parser is
+  written, leaving only key-building per country.
+
+- **One count corrected in the living docs**: the CNPJ geo-block's 15
+  non-Brazilian nodes were in **11** countries, not 12 - recounted from the
+  node list while writing the retrospective. Corrected in the master list, the
+  shortlist and `data_sources.md`; the earlier entry above keeps its wording,
+  since this file is append-only. No conclusion changes.
+
+### 2026-09-23 - Taiwan finished: Taipei (Regional), Taoyuan and Taichung to Band A; Kaohsiung held on an unreachable host
+
+- **Three more cities joined, with Taipei as the control.** A generalised
+  parser first read Taipei at 91.7% against its measured 92.5%, because its
+  street pattern forbade the characters stripped as district and village
+  (市, 鎮, 里) and so failed every street that contains one - `市民大道`,
+  `鎮三街`. Fixed, the control read 92.4% and the others counted: **Taoyuan
+  94.0%, Taichung 92.7%, New Taipei 95.5%.** Taipei (Regional) is **152,839
+  storefronts at 93.9%**. No registration still carried the pre-upgrade county
+  names (桃園縣, 臺中縣) - the trap was checked and empty. **A control that
+  must reproduce before the others count caught a 0.8-point regression that
+  would otherwise have been reported as three cities' results.**
+
+- **Taipei is REGIONAL, with New Taipei**, on the owner's framing: New Taipei
+  surrounds Taipei and the metro crosses the boundary on several lines - the
+  Dublin and Lille shape.
+
+- **TDX is key-gated, and not needed.** Every operator returned 401 to a
+  script on 2026-09-23; TDX's own terms allow keyless use only as a
+  browser-only visitor mode (20 calls a day) and bind scripted use to a
+  member key whose registration wants a Taiwanese mobile number. The server
+  now enforces the browser/script distinction, which is why the 2026-09-21
+  probe worked; nothing was worked around. **The agencies publish rail data
+  keyless under OGDL v1** - Taipei's line geometry and stations, Taichung's
+  stations, the national `捷運車站` layer.
+
+- **Owner's decisions, 2026-09-23:** (1) **OGDL v1's fault-based liability
+  clause is ACCEPTED for all of Taiwan** - the Rio/IBGE class, not Hong
+  Kong's. (2) **Names are shown only when they are a TRADE name** - companies,
+  branches, and sole proprietors whose name carries a business marker;
+  otherwise the category. The tax agency itself refuses to publish owners'
+  names (2016, and again 2026-08-14, on a Ministry of Justice proportionality
+  letter), and 4.9% of Taipei's storefronts carry a name that reads as the
+  owner's. Rejected: hiding only pattern-matched person names (a list misses
+  names) and hiding every name (more than the risk needs). (3) **Taipei
+  (Regional), Taoyuan and Taichung move to Band A; Kaohsiung stays in B**:
+  its business side is measured (72,550) but its door-plate and station files
+  sit on a host that timed out from six nodes in five countries and twice
+  more. **Band A 15 -> 18, Band B 14 -> 11**, and Band B is now Japan plus
+  one unreachable host.
+
+- **Measured for the build, not decided here:** 38.7% of Taipei's company rows
+  in storefront codes sit on a 3rd floor or higher or carry a room number,
+  against 7.1% of sole proprietors - the head-office trap, confined to
+  companies; and market stalls, genuine premises with no door plate, are most
+  of retail's misses. Two scratch probes that switched certificate
+  verification off for header peeks were deleted once the licence reader
+  flagged them; curl verifies Taiwan's government root against the Windows
+  store, so nothing needs it off.
 ### 2026-09-23 - Six merged build branches deleted; the retirement steps needed a pull first
 
 - **Deleted `dublin-build`, `milan-build`, `paris-build`, `marseille-build`,
