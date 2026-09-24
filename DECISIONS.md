@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**325 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**326 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [MHLW's permit-system terms stored with the licences; its 2026 amendment flagged](#2026-09-24---mhlws-permit-system-terms-stored-with-the-licences-its-2026-amendment-flagged)
 - [Phone-width label placer verified and pushed](#2026-09-24---phone-width-label-placer-verified-and-pushed)
 - [Japan's permit-type taxonomy: one module for ten list formats](#2026-09-24---japans-permit-type-taxonomy-one-module-for-ten-list-formats)
 - [Japan's national facts module; the stub test clears four cities; Tokyo goes last](#2026-09-24---japans-national-facts-module-the-stub-test-clears-four-cities-tokyo-goes-last)
@@ -367,6 +368,24 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - MHLW's permit-system terms stored with the licences; its 2026 amendment flagged
+
+- **The MHLW notice 薬生食監発0710第1号 (2020-07-10) is stored at
+  `docs/licenses/mhlw-food-sanitation-system-terms-2020.pdf`**, on the
+  Staging Session's word, with its source URL recorded
+  (`https://www.mhlw.go.jp/content/11130500/000648204.pdf`). It reached the
+  main checkout's root as `000648204.pdf` through a browser-pane download
+  during a `licence-read` run, and `check_stray_downloads.py` flagged it. It is
+  a terms document the project relies on: its 利用規約 第3条 scopes the terms to
+  system users and authorities, which is how the MHLW open-data verdict in
+  `docs/build_briefs/fukuoka.md` (line 100) and `hiroshima.md` reads 第7条 as
+  not reaching reusers. Verified before filing: the SHA-256 matches both the
+  staging run's curl copy and this file, and the brief's argument quotes 第3条.
+  **A 2026-03-31 amendment exists** (`https://www.mhlw.go.jp/content/001683424.pdf`)
+  and is not stored. The README row says to check it before treating this text
+  as current, and whether to archive it is the owner's call, since it means
+  downloading a file.
 
 ### 2026-09-24 - Phone-width label placer verified and pushed
 
