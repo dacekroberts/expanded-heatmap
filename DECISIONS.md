@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**301 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**302 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Prague resumed: four owner calls, and NACE2025 rather than NACE](#2026-09-24---prague-resumed-four-owner-calls-and-nace2025-rather-than-nace)
 - [Japan's maps will draw JR and private commuter railways (owner)](#2026-09-24---japans-maps-will-draw-jr-and-private-commuter-railways-owner)
 - [The Datafordeler account is closed](#2026-09-24---the-datafordeler-account-is-closed)
 - ["Commuter rail is excluded everywhere" retired: Copenhagen's S-tog made it two exceptions](#2026-09-24---commuter-rail-is-excluded-everywhere-retired-copenhagens-s-tog-made-it-two-exceptions)
@@ -343,6 +344,60 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Prague resumed: four owner calls, and NACE2025 rather than NACE
+
+- **The Prague build resumed from a fresh worktree (`prague-build`) on
+  staging's new business leg, and the brief held 12/12.** ROS02's active
+  establishments in Praha (84,170, placed by RUIAN address code) joined to RES
+  by ICO: RES found for 100.0%, 87 subjects ended. Measured read-only on
+  staging's ROS02 and RUIAN files and the main checkout's RES.
+
+- **RES carries TWO activity columns, and the build keys on `NACE2025`, not the
+  `NACE` the brief measured.** `NACE2025` is CZ-NACE 2025 - NACE Rev. 2.1, the
+  same parent as Oslo's SN2025 and Copenhagen's DB25: classes that exist only
+  in Rev. 2.1 are populated (9621 7,166; 5611 7,780; 4781 107) where the old
+  column has 9602 and 5610. It is also DEEPER - 65% of Praha rows at the
+  5-digit level against 52% - though still ragged (15,099 rows stop at 3
+  digits). The two columns put 27,320 and 27,065 establishments in the
+  buckets, and only 263 rows fall on different sides. **Decided on those
+  measurements, not asked**: the current classification, the deeper one, and
+  the one whose exclusions are already written twice. The brief's "no level
+  can be chosen" still holds, so the taxonomy matches on PREFIX.
+
+- **Owner's call: every natural person's premises shows its ADDRESS, and so
+  does every v.o.s. partnership - Copenhagen's rule.** 14,144 of 27,320
+  storefront establishments (51.8%) belong to natural persons - FORMA 101
+  (13,481), 424 foreign natural person (599), 105, 107, 425 per ČSÚ's own
+  codebook 56 - and a Czech sole trader's business name carries the person's
+  own name by law. The 37 v.o.s. partnerships follow the owner's Copenhagen
+  call on I/S. **Rejected: Oslo's natural-persons-only rule.**
+
+- **Owner's call: natural persons' premises AT THEIR OWN REGISTERED SEAT are
+  EXCLUDED - 1,537 establishments (5.6%)** (650 personal services, 522 retail,
+  365 food). A Czech sole trader's seat is usually the home, so a pin there -
+  even labelled with only the address - puts a person's home on a public map,
+  and such premises are unlikely to be a counter anyone walks up to. Copenhagen
+  could not detect this; Prague can, from ROS02's `PKODADM` against RES's
+  `KODADM`. **Rejected: keeping them with the address label**, Copenhagen's
+  treatment, which here would knowingly publish home addresses. Staging
+  recommended the same.
+
+- **Owner's call: NO employee filter.** ČSÚ's codebook 579 reads `KATPO 000` as
+  *Neuvedeno*, not stated, and its legal-form mix matches the whole set -
+  France's `NN` again; filtering on it would drop over half the city at random.
+
+- **Owner's call: the metro comes from PID's own GTFS** (keyless, CC BY 4.0,
+  credit ROPID), downloaded with the owner's approval; OSM stays as the
+  cross-check, as the brief corrected.
+
+- **Two limits to disclose, not fix.** Each establishment inherits its OWNER's
+  single activity code, so a chain's office or warehouse in Praha counts as the
+  chain's trade (90 subjects hold 10 or more storefront establishments, the
+  largest 166). And 57,017 active Praha establishments belong to subjects
+  whose activity is outside 47/56/96 - a brewery's pub, a wholesaler's shop -
+  and are not drawn, because no open source gives an establishment its own
+  activity.
 
 ### 2026-09-24 - Japan's maps will draw JR and private commuter railways (owner)
 
