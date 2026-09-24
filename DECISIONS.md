@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**277 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**278 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [A check that every map was rendered by the current renderer; the zoom-lag worktree retired](#2026-09-24---a-check-that-every-map-was-rendered-by-the-current-renderer-the-zoom-lag-worktree-retired)
 - [Prague back in Band A: establishments from ROS02 open data + RES activity; RŽP rejected on GDPR; the paused control was mis-specified](#2026-09-24---prague-back-in-band-a-establishments-from-ros02-open-data-res-activity-ržp-rejected-on-gdpr-the-paused-control-was-mis-specified)
 - [Two checks closed: the macro map's controls, and clones leaking into %TEMP%](#2026-09-24---two-checks-closed-the-macro-maps-controls-and-clones-leaking-into-temp)
 - [Oslo deployed; the live site measured after the reboot](#2026-09-24---oslo-deployed-the-live-site-measured-after-the-reboot)
@@ -319,6 +320,47 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - A check that every map was rendered by the current renderer; the zoom-lag worktree retired
+
+- **`scripts/check_render_current.py` fails any committed map that lacks, or
+  carries an older version of, a shared block the current
+  `pipeline/map_common.py` injects.** Proposed by the zoom-lag session, and
+  the owner asked whether cleanup should make future cities follow its
+  changes. A convention would not have caught the failure that happened: Oslo
+  was built on a branch while `WHEEL_ZOOM_SCRIPT` landed on master, and its
+  committed map shipped without it until that session happened to re-render
+  it. Only a full `drift_check.py` would have noticed. This check takes
+  seconds and runs no pipeline. **Derived from the source, not listed:**
+  every module-level `*_SCRIPT` / `*_HTML` / `*_CSS` string the module also
+  references, split at its per-city slots (`__NAME__` and `{field}`), with
+  every fixed piece required verbatim. That catches a stale EDIT, not only a
+  missing block. Two rules came from the first control runs. A piece that also
+  occurs in another block is dropped, because every script block opens with
+  the same boilerplate, which let Oslo's pre-wheel map read as an "older
+  version" of a script it never had. A block whose whole text sits inside
+  another (`_LEGEND_BOTTOM_CSS`, inside `LEGEND_HTML`) is a fragment and is
+  covered by its container. **Controls:** Oslo at `719ad23` →
+  `WHEEL_ZOOM_SCRIPT is MISSING`; Rennes before the label fix → the label and
+  wheel scripts MISSING; a current map with `PAD = [26, 19]` →
+  `PHONE_FIT_SCRIPT is an OLDER version`. All 26 committed maps pass, with 7
+  blocks derived. Not covered: per-city options such as `animate_clusters`,
+  and anything outside these blocks, which stays `drift_check.py`'s job.
+
+- **Retired the zoom-lag session's worktree (`gallant-brattain-00d045`) and
+  deleted `claude/gallant-brattain-00d045`.** The owner authorised this when
+  the task was created. Every stated fact was re-checked, not taken from the
+  message: 0 commits outside master, a clean tree, and the session idle,
+  confirmed by the owner after it first read as running. Its one junction
+  (`data\france\raw` → the shared SIRENE pair) was the only reparse point
+  anywhere in the folder, and was removed alone and non-recursively. Both
+  files kept their exact size and timestamps before and after. No city cache
+  existed only there. `git worktree remove` stopped at `Filename too long`
+  (263 characters inside `.venv-lean`) after unregistering the worktree; a
+  whole-folder re-scan found 0 reparse points, and the rest went with
+  `rmdir /s /q "\\?\…"`. An empty folder stays, locked by the still-open idle
+  session, to be removed once it is closed. Both obstacles are now step 4 of
+  the retirement procedure in `docs/session_roles.md`.
 
 ### 2026-09-24 - Prague back in Band A: establishments from ROS02 open data + RES activity; RŽP rejected on GDPR; the paused control was mis-specified
 

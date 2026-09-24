@@ -353,6 +353,7 @@ python scripts/check_no_fetch_in_steps_selftest.py      # watch that check fail 
 python scripts/check_scope_disclosure.py                # every city's rail AND business scope reaches the published page
 python scripts/check_scope_disclosure_selftest.py       # watch that check fail 8 ways; touches nothing
 python scripts/check_stray_downloads.py                 # untracked files at ANY checkout's root - where browser-pane downloads land
+python scripts/check_render_current.py                  # every committed map carries the CURRENT renderer's shared blocks; run after merging
 python scripts/check_stale_claims.py                    # REPORTS only: prose that stopped being true (stale tense, drifted counts)
 python scripts/check_stale_claims.py --only E           # "the only city"/"no other city" claims: re-read whenever a city lands
 python scripts/check_deploy_imports.py [--ref REF]      # clean clone + lean venv: run before ANY push touching app/

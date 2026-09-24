@@ -159,6 +159,15 @@ caches, and Rennes' feed is quota-limited. Before removing a worktree:
    checkout's `data/`, no-clobber (`cp -rn`), and `diff -rq` the two.
 3. Then the three commands above. If Windows leaves an empty folder behind,
    re-run step 1's listing on it before deleting it.
+4. **`Filename too long` stops `git worktree remove` partway.** A worktree
+   with its own `.venv-lean` holds Streamlit template paths over Windows'
+   260-character limit, 263 in the first case (2026-09-24). Git unregisters
+   the worktree and deletes what it can, then stops. Re-run step 1's listing
+   over the WHOLE folder, then delete the rest with the long-path prefix:
+   `cmd /c rmdir /s /q "\\?\<full path>"`. **An idle session that is still
+   open keeps its launch folder locked**: the contents go and an empty
+   folder stays until that session is closed. Leave it, and remove the empty
+   folder afterwards.
 
 ## The shared files everyone appends to
 
