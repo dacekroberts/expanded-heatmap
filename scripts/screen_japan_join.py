@@ -58,6 +58,9 @@ MUNICIPALITIES = {
                  "tokyo/raw/13104/13104-24.0a.zip", "tokyo/raw/13104/13104-19.0b.zip"),
     "koto": ("13108", "江東区", "tokyo/raw/13108/131083_015_food_business_all.csv",
              "tokyo/raw/13108/13108-24.0a.zip", "tokyo/raw/13108/13108-19.0b.zip"),
+    # the wards' own sites, 2026-09-24 (Shibuya's host is its ArcGIS catalogue - owner accepted)
+    "shibuya": ("13113", "渋谷区", "tokyo/raw/13113/131130_food_businesses_list.csv",
+                "tokyo/raw/13113/13113-24.0a.zip", "tokyo/raw/13113/13113-19.0b.zip"),
 }
 # the 生活衛生 registers - personal services - one entry per ward and kind
 _LIFE = {"13101": ("千代田区", "131016_chiyodaku"), "13105": ("文京区", "131059_bunkyoku"),
@@ -162,10 +165,13 @@ def load_permits(path, muni_name):
     rows = list(csv.DictReader(io.StringIO(text)))
     if rows and "許可番号" in rows[0]:
         rows = [r for r in rows if r.get("許可番号")]
+    # Shibuya keeps closed premises in the file (39,304 rows, 16,993 open)
+    if rows and "廃業日" in rows[0]:
+        rows = [r for r in rows if not (r.get("廃業日") or "").strip()]
     out = []
     for r in rows:
         town = col(r, "施設所在地_町字", "所在地_町字")
-        rest = col(r, "施設所在地_番地以下", "所在地_番地以下")
+        rest = col(r, "施設所在地_番地以下", "所在地_番地以下", "施設所在地_番地")
         src = "split"
         if not town:
             # fall back to the joined string: strip prefecture and municipality,
@@ -189,7 +195,8 @@ def load_permits(path, muni_name):
         except ValueError:
             pass
         out.append({"town": norm_town(town), "block": first_number(rest), "rest": rest, "src": src,
-                    "addr": col(r, "所在地_連結表記", "施設所在地"), "type": r.get("営業の種類", ""),
+                    "addr": col(r, "所在地_連結表記", "施設所在地", "施設所在地_連結表記"),
+                    "type": col(r, "営業の種類", "営業の種類もしくは営業の形態"),
                     "name": r.get("施設名称", ""), "corp": r.get("法人名", ""), "pub": pub})
     return out
 
@@ -246,11 +253,16 @@ CITIES = {
                                        "fukuoka/raw/202604011019.csv"], "fukuoka/raw/isj"),
     "hiroshima": ("広島県", "広島市", ["hiroshima/raw/5080331-2.xlsx"], "hiroshima/raw/isj"),
     "hiroshima-mhlw": ("広島県", "広島市", ["mhlw/raw/34100_food_business_all.csv"], "hiroshima/raw/isj"),
+    # Tokyo wards whose own lists are their own format - one address string; the
+    # "city" is the ward (Meguro's host is BODIK - owner accepted)
+    "taito": ("東京都", "台東区", ["tokyo/raw/13106/2026ALL-IND-CSV.csv"], "tokyo/raw/13106"),
+    "setagaya": ("東京都", "世田谷区", ["tokyo/raw/13112/zenkenr080331.csv"], "tokyo/raw/13112"),
+    "meguro": ("東京都", "目黒区", ["tokyo/raw/13110/all_new_8.csv", "tokyo/raw/13110/all_old_8.csv"], "tokyo/raw/13110"),
 }
 ADDR_COLS = ("施設所在地", "営業所所在地", "所在地_連結表記", "営業所住所", "営業施設所在地",
              "営業所所在地（所在地_連結標記", "施設所在地（所在地_連結標記）")
 TYPE_COLS = ("業種名", "業種分類", "業種情報公開名称", "営業の種類", "業種区分", "営業種類", "施設（種別）", "種別", "業種", "業務種別")
-NAME_COLS = ("屋号", "施設名称", "営業施設名称、屋号又は商号")
+NAME_COLS = ("屋号", "施設名称", "営業施設名称、屋号又は商号", "施設の名称", "施設屋号")
 
 
 def xlsx_rows(data):
@@ -330,8 +342,13 @@ def load_city_permits(path, pref, city):
         a = unicodedata.normalize("NFKC", addr).replace(" ", "").replace("　", "")
         a = re.sub("^" + pref, "", a)
         a = a.split(city, 1)[-1]
-        m = re.match(r"^(\D+?区)(.*)$", a)
-        ward, rest = (m.group(1), m.group(2)) if m else ("", a)
+        if city.endswith("区"):
+            # a Tokyo special ward's own list: the ward IS the municipality, and
+            # Taitō's addresses start at the town (浅草一丁目…)
+            ward, rest = city, a
+        else:
+            m = re.match(r"^(\D+?区)(.*)$", a)
+            ward, rest = (m.group(1), m.group(2)) if m else ("", a)
         # Sapporo's misses: an address that ENDS at 丁目 (南5条西6丁目, no block
         # number) was cut to 南 - the number after the town is optional.
         # ...and a building name may follow 丁目 directly (南5条西6丁目ニュー桂和ビル).

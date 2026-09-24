@@ -70,11 +70,41 @@ Shinkansen.
 **Hiroshima City (8 wards).** Hiroden's Miyajima line and JR run on to
 Hatsukaichi and Kaita. Check at build.
 
-## ⏳ Licences — PENDING
+## Licences — MHLW READ 2026-09-24; the city's pending
 
-- **MHLW open data: a licence read is in progress.**
-- **The city's own list**: PDL 1.0 declared on the DataEye resource, none on
-  the city page. NOT YET READ.
+- **MHLW open data — PERMITTED WITH CONDITIONS** (PDL 1.0), exactly as in
+  `fukuoka.md`: a processed-by credit naming the processor, no
+  completeness or accuracy claims, no MHLW logo, and the minor OPEN point on
+  免責 2) ウ (commercial reuse). That point is fine for a non-commercial site.
+- **The city's own list — PERMITTED WITH CONDITIONS (PDL 1.0), read
+  2026-09-24, with one OPEN point.**
+  - **The grant**: the city's own open-data list names PDL 1.0 for this
+    dataset (DataEye resource 12464, row 36: `食品営業許可一覧 … datasets/5672, 有, PDL1.0`),
+    and the city sends licence questions to DataEye. DataEye's terms say
+    「権利表記の記載がない限り「公共データ利用規約（第1.0版）」（PDL1.0）が適用」.
+    The 基本方針 defines open data as data published 「二次利用可能なルールの下で」.
+  - **The site default GIVES WAY, unlike Sendai's**: the website terms reserve
+    reuse (「…無断で使用・複製・転載・販売・改変・印刷配布することはできません」)
+    but add 「…利用規約等、特別な規定がある場合は、この取り扱いに優先する」.
+  - ⚠️ **OPEN (owner)**: DataEye's only per-file entry (resource 25502)
+    names the MONTHLY series and says the full list is viewable elsewhere. The
+    市内全て file has no entry of its own, and it sits on the city's page,
+    which declares no licence. The permitting reading is the city's
+    dataset-level PDL 1.0 plus the page calling the list open data
+    (「…オープンデータの非公開を申し出た施設の情報…は掲載していません」), and it is
+    much better supported. The restrictive reading puts it in Sendai's
+    position. **The workbook itself carries no notice**: its document
+    properties and header/footer are empty, and no cell contains a licence
+    word. The only route to certainty is one question to 食品指導課食品監視係
+    (082-241-7404, `shokuhin-s@city.hiroshima.lg.jp`).
+  - **MUST DISPLAY** (DataEye's prescribed pattern, filled in):
+    `出典：「食品営業許可一覧」（広島広域都市圏・広島県オープンデータポータルサイト）（https://hiroshima-opendata.dataeye.jp/datasets/5672）を加工して作成`,
+    and, per PDL 1.1, who did the processing.
+  - **MUST NOT**: present processed data as the city's own; use city logos
+    or symbols. **Cost**: under the city's 利用規約 第3条, claims from our
+    own breach are resolved at our own cost. There is no indemnity.
+  - 「適切に使用してください」 defines nothing and points to nothing. Reading only
+    premises columns fits any reading of it.
 - **MLIT 位置参照情報 and N02**: PDL 1.0.
 
 ## Privacy
@@ -89,7 +119,7 @@ and the address, never any operator column. MHLW's file carries 法人名,
 
 ## Still unknown
 
-- ⏳ **The MHLW licence** and the city's PDL 1.0.
+- ⚠️ **Whether the city's dataset-level PDL 1.0 covers the full-list file**: the owner's call, or one question to the city (both licences are read: PERMITTED WITH CONDITIONS).
 - ⚠️ **Band**: food service plus partial food retail, with no personal services. Band C's shape: the owner's call.
 - ⚠️ The ~14% with no published address; whether trams count; scope; the Shinkansen.
 - ⚠️ The Economic Census food control.

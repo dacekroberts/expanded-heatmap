@@ -16,12 +16,13 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**316 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**317 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Rome: the page text written, notices 36 and 37, merged with Amsterdam](#2026-09-24---rome-the-page-text-written-notices-36-and-37-merged-with-amsterdam)
 - [Amsterdam deployed; the live site measured after the reboot](#2026-09-24---amsterdam-deployed-the-live-site-measured-after-the-reboot)
+- [Four more band calls; Tokyo reaches 8 wards; MHLW's terms read](#2026-09-24---four-more-band-calls-tokyo-reaches-8-wards-mhlws-terms-read)
 - [The open legend capped below the map's buttons, and a taxonomy may name its layer (owner, from Amsterdam's deploy-verify)](#2026-09-24---the-open-legend-capped-below-the-maps-buttons-and-a-taxonomy-may-name-its-layer-owner-from-amsterdams-deploy-verify)
 - [MHLW's national food open data is an opt-in slice; it completes Fukuoka and Hiroshima only](#2026-09-24---mhlws-national-food-open-data-is-an-opt-in-slice-it-completes-fukuoka-and-hiroshima-only)
 - [The owner's answers to the overnight question points; Sendai's lists need permission](#2026-09-24---the-owners-answers-to-the-overnight-question-points-sendais-lists-need-permission)
@@ -403,6 +404,48 @@ onwards; the early ones are split by phase rather than by hour.
   worktree for the 29-city re-render were unlinked non-recursively (targets
   checked intact).
 
+### 2026-09-24 - Four more band calls; Tokyo reaches 8 wards; MHLW's terms read
+
+- **The owner's calls on the last re-probe batch and the morning's finds.**
+  Naples, Lima (coverage) and Messina went to the discards, each on two or more
+  methods with its own host asked. `check_discard_evidence.py` reads all 24
+  rows OK. **Hyderabad went to Band D** in Warsaw's weaker shape: geo-blocked
+  to India before anything was measured. The counts are now candidates 34
+  (D 3), gap 7, discarded 24.
+  - **Rotterdam to Band A** as an Amsterdam-shaped city: the hospitality layer
+    rebuilt from Gemeenteblad permit notices, and CBS's 7.1% shop vacancy.
+  - **Fukuoka to Band A; Hiroshima to Band C** (food plus partial food retail,
+    no personal services).
+  - All three are decided, and **their master-list rows move once their
+    licence reads land**. Four reads are running: KOOP notices, CBS, Fukuoka's
+    BODIK lists and Hiroshima's list. Band A's definition includes "licence
+    read", so a move before the read would make the band say something false.
+  - **Riga** stays partial unless the vacancy figure can be made workable (an
+    investigation is running). **Santiago**: other routes to the downtown
+    comuna are being tried; otherwise it stays in the gap.
+- **Tokyo's wards: the three non-ward hosts were accepted, and a ward is on
+  the map only with a full, current list** (owner). Shibuya's ArcGIS
+  catalogue, Meguro's BODIK and Nakano's wagmap are each named by the ward's
+  own pages as its catalogue. Nakano (to 2023-06), Shinagawa (since 2024-04)
+  and Itabashi (since 2025-04) are left out. The four new full lists join like
+  the first four: Shibuya 99.6% (its own coordinates, median 23 m), Taitō
+  100.0% (median 25 m), Setagaya 100.0%, Meguro 99.9%. `load_permits` now
+  reads `施設所在地_番地` and drops rows with a `廃業日`: Shibuya's file keeps
+  22,311 closed premises. A single-ward own-format list defaults its ward. The
+  controls are unchanged, Minato included at 99.8%. **Tokyo is now 8 wards and
+  about 59,400 food premises.** The hole is the very centre: Chiyoda and
+  Toshima release theirs only on request, and Bunkyō publishes none. The scope
+  is the owner's call.
+- **MHLW's 食品衛生申請等システム open data is PERMITTED WITH CONDITIONS**
+  (PDL 1.0 via the system site's own terms §2). The system's 利用規約 binds
+  applicants and authorities, not reusers (第3条). **Must display**: the
+  source, and that it was processed and by whom. **Must not**: present it as
+  MHLW's own, claim it is complete, or state accuracy. ⚠️ **OPEN (minor)**:
+  免責 2) ウ's ban on commercial reuse could be read to reach the data. This
+  project is non-commercial, so it is fine under both readings, and it matters
+  only if that changes. Recorded in `fukuoka.md` and `hiroshima.md`.
+  **BODIK was flaky**: HTTP 500 twice to `brief_check`, and 200 by every method
+  in between. Recorded as a retry requirement, not a relaxed check.
 ### 2026-09-24 - The open legend capped below the map's buttons, and a taxonomy may name its layer (owner, from Amsterdam's deploy-verify)
 
 - **The open map legend is now capped at the visible map height less the

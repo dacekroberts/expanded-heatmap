@@ -107,8 +107,53 @@ with food only where published (the page says which); or wait.
 ▶ **Owner, 2026-09-24: second method first.** Each of the 19 wards without a
 catalogue food file gets its own site read, central wards first, and the scope
 is decided after. **Taitō's own list is approved** under the raised bounds,
-reading only 営業所所在地, 業種 and 屋号, never its operator columns. The pass
-was running when this was written.
+reading only 営業所所在地, 業種 and 屋号, never its operator columns.
+
+▶ **Result, 2026-09-24: 11 of 23 wards now have a food-permit file** (9 full,
+2 partial). **Shibuya has one; Chiyoda and Toshima do not.** Both release
+theirs only on request or for in-person viewing, and so do Nerima and Edogawa
+(behind a password sent after an application).
+
+| Ward | File | Rows | Format / coordinates | As of | Host |
+|---|---|---|---|---|---|
+| **Shibuya** 13113 | `131130_food_businesses_list.csv`, 22.2 MB, UTF-8 | 39,304 (**16,993 open**) | national format, **coordinates 99.96%** | 2026-09-09 | ward's ArcGIS open-data site ⚠️ |
+| **Taitō** 13106 | `2026ALL-IND-CSV.csv`, 1.59 MB, Shift_JIS | 7,676 | own format, coordinates 98.5%, **operator name + home address columns** | 2026-03-31 | ward's own |
+| **Setagaya** 13112 | `zenkenr080331.csv`, 1.32 MB, Shift_JIS | 7,428 | own format, no coordinates | 2026-03-31 | ward's own |
+| **Meguro** 13110 | `all_new_8.csv` + `all_old_8.csv`, UTF-8 | 2,495 + 1,087 | own format, no coordinates | 2026-04-01 | BODIK ⚠️ |
+| **Nakano** 13114 | `opendata_550150.csv`, 1.98 MB | 5,790 | coordinates on all; **labels shifted** (trade name under 営業の種類) | ⚠️ **stale: to 2023-06-27** | wagmap ⚠️ |
+| Shinagawa 13109 | `R6-7.csv` + 5 monthly | 2,421 | own format; 31–50% of addresses blanked | **partial: since 2024-04** | ward's own |
+| Itabashi 13119 | 17 monthly XLSX | 897 | new permits only | **partial: since 2025-04** | ward's own |
+
+**PDF only**: Ōta (full list, 93 + 16 pages), Kita (335 + 155 pages, "not open
+data"), Arakawa (55 pages), Sumida and Adachi (new permits). **None found**:
+Bunkyō, Suginami, Katsushika. **Three hosts are outside the ward domains**
+(Shibuya's ArcGIS, Meguro's BODIK, Nakano's wagmap), each named by the ward's
+own pages as its catalogue. **The owner accepted all three, 2026-09-24.**
+**A ward is on the map only with a full, current list (owner, 2026-09-24)**:
+Nakano (stale, to 2023-06) and the partial Shinagawa and Itabashi files are
+left out, and the page names the missing wards. Files are in
+`data/tokyo/raw/<code>/`.
+
+**The four new full lists join as cleanly as the first four**
+(`screen_japan_join.py shibuya / taito / setagaya / meguro`; the controls,
+including Minato's 99.8%, are unchanged). Shibuya's file keeps closed premises,
+so only rows with an empty 廃業日 are read (16,993 of 39,304). Taitō's addresses
+start at the town, so a single-ward list defaults its ward.
+
+| Ward | Fixed premises | Block | Independent check |
+|---|---|---|---|
+| Shibuya | 16,635 (+358 mobile) | **99.6%** | its own coordinates: median **23 m**, 99.6% within 250 m |
+| Taitō | 7,559 | **100.0%** | its own coordinates: median **25 m**, 99.9% within 250 m |
+| Setagaya | 7,428 | **100.0%** | none published |
+| Meguro | 3,492 (+90 都内一円) | **99.9%** | none published |
+
+**Tokyo now: 8 wards with full, current food lists** (Chūō, Minato, Shinjuku
+(2023), Kōtō, Shibuya, Taitō, Setagaya, Meguro), about **59,400 food
+premises**. **The remaining hole is the very centre**: Chiyoda (Marunouchi,
+Ōtemachi) and Toshima (Ikebukuro) release theirs only on request, and Bunkyō
+publishes none. MHLW's open data does not fill them (Chiyoda 291 restaurants,
+26% addressed). **The scope is the owner's call**: the 8 wards as a stated
+"core wards" map with the centre missing, or wait for a request to Chiyoda.
 
 ## ✅ Licences — READ 2026-09-24
 
