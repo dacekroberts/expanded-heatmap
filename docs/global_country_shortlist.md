@@ -1987,7 +1987,31 @@ Run under the owner's bounded download approval (MLIT address files; permit CSVs
 | `www.city.taito.lg.jp` | Taitō food + three personal-service lists | declared CSV, served a web page or 404 (Taitō's registers were fetched from the metropolitan portal instead) |
 | `www.city.shinagawa.tokyo.jp` | Shinagawa food | HTML only |
 
-The nine other cities: see the next section when their enumeration lands.
+**The nine other cities — enumerated 2026-09-24** (a background agent; two routes per city — the homepage's own open-data link to its portal, and a crawl of ~150 of the city's own health pages; nonsense-term control 0 on every searched portal; sizes from catalogues or HEAD; nothing downloaded). Full table with every URL: the run's `cities_coverage.json`.
+
+| City | Food permits | Personal services (理容 / 美容 / クリーニング) | Where |
+|---|---|---|---|
+| **Sapporo** | ✅ full list, CSV 5.71 MB, as of 2026-03-31 (+ monthly new) | ✅ all three, CSV | `ckan.pf-sapporo.jp`, CC BY 4.0 declared |
+| **Sendai** | ✅ full list, ZIP of one XLSX, 1.77 MB, 2026-03-31 | ✅ all three (ZIP of 9 XLSX) | `www.city.sendai.jp` pages only; no licence stated |
+| **Osaka** | ✅ full list, CSV **10.46 MB with lat/lon**, 2026-06-30 | ✅ all three, CSV | `www.city.osaka.lg.jp`, CC-BY 4.0 declared |
+| **Kobe** | ✅ list, CSV 3.87 MB, 2026-03-31 (notification-only businesses left out) | ✅ all three, CSV | `www.city.kobe.lg.jp`; catalogue "CC 表示", pages CC BY 2.1 JP |
+| Yokohama | ❌ none found (CKAN 649 packages + crawl) | ✅ all three — per-ward CSVs inside city ZIPs | `www.city.yokohama.lg.jp`, CC BY |
+| Nagoya | ⚠️ new permits only (12 monthly CSVs on BODIK) | ⚠️ beauty only (XLS) | BODIK / `www.city.nagoya.jp`, CC BY 4.0 |
+| Kyoto | ⚠️ new permits since 2021-06 (monthly); full list stale (2021-03-31) | ✅ all three (XLSX) — downloads are POST forms | `data.city.kyoto.lg.jp`, CC-BY 4.0 |
+| Hiroshima | ⚠️ counter applications only, XLSX 13.88 MB | ❌ monthly new-opening PDFs only | `hiroshima-opendata.dataeye.jp`, PDL 1.0 |
+| Fukuoka | ⚠️ pre-June-2021 permits only (shrinks yearly) | ✅ all three | `data.bodik.jp`, CC BY |
+
+**The finding that matters most: since the June 2021 permit reform, food permits are filed through MHLW's national system, and cities have stopped listing them** — Fukuoka's list excludes everything granted since 2021-06-01, Hiroshima's everything filed electronically since 2023-08, Kobe's the notification-only businesses — and all three pages send readers to **MHLW's own open-data viewer** (`ifas.mhlw.go.jp/faspub/_link.do`). **One national source may be Japan's real food leg.** Also: Osaka's barber/beauty CSVs and Sendai's registers carry operator names — the Tokyo rule (never read 営業者 columns) applies. No file over 25 MB.
+
+**The designated cities joined (same night).** Their lists are **each city's own format** — one address string naming the ward, not the national schema — and all three carry operator names (read never). The join is ward-aware: each ward's MLIT files, keyed (ward, town, block). Minato re-run after every rule — unchanged at 99.8%.
+
+| City | Food premises (fixed) | Block | Chōme | None | Personal services | Rules its misses taught |
+|---|---|---|---|---|---|---|
+| **Osaka** | **61,752** (as of 2026-06-30) | **99.1%** | 0.9% | 0.0% | 15,775 — 99.4% block | **Kanji variants** — 曽根崎新地 vs MLIT's 曾根崎新地 was **1,807 permits** (Kitashinchi) alone; 靭/靱, ヶ/ケ. **Its lat/lon columns are MISLABELLED** (経度 holds 34.7) — once swapped, the block point sits a **median 38 m** from Osaka's own coordinates, **98.6% within 250 m** (61,172 rows) |
+| **Kobe** | **24,761** | **95.7%** | 3.3% | 1.0% | 5,014 — 96.3% | Hill addresses name a 字 inside the 大字 (山田町上谷上字古々山) → the 大字's centroid; Rokkō-san remains |
+| **Sapporo** | **24,257** | **84.5%** | 15.2% | 0.3% | 5,993 — 92.4% | The 条 grid (南5条西6丁目) — digits before 条 as before 丁目; addresses that end at 丁目 or run into a building name; Shiroishi's direction suffix (本郷通8丁目南), only where MLIT has that town. A Sapporo 条丁目 is itself about one block, so the chōme tier is near block precision |
+
+**Sendai** (a ZIP of XLSX) is fetched-ready but not joined: reading XLSX needs `openpyxl`, which is not installed and was not installed unattended. Yokohama, Nagoya, Kyoto, Hiroshima and Fukuoka have no current full food list (above); MHLW's national open-data CSV is the route for them.
 
 #### A refinement the Korea probe produced: stations are not lines
 
