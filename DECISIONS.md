@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**282 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**283 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Stale-prose sweep: 48 unused settings, 37 counts, 2 tense hits read](#2026-09-24---stale-prose-sweep-48-unused-settings-37-counts-2-tense-hits-read)
 - [PLAN.md trimmed of 14 done items; three merged branches deleted](#2026-09-24---planmd-trimmed-of-14-done-items-three-merged-branches-deleted)
 - [Rome is a JOIN: its business register matches ANNCSU on the municipal street code, 92.4% at civic level](#2026-09-24---rome-is-a-join-its-business-register-matches-anncsu-on-the-municipal-street-code-924-at-civic-level)
 - [Open gap probed (Rome reached; Turin, Cairo discarded); Brasília and Recife rail licences read; Taipei's head-office rule tested; the address-join skill](#2026-09-24---open-gap-probed-rome-reached-turin-cairo-discarded-brasília-and-recife-rail-licences-read-taipeis-head-office-rule-tested-the-address-join-skill)
@@ -324,6 +325,30 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Stale-prose sweep: 48 unused settings, 37 counts, 2 tense hits read
+
+- **Three corrections out of 87 flagged lines. The rest were read and are
+  right as written.** `check_stale_claims.py` categories D, B and A, each
+  item read in context. **D (48 config settings no script reads):** almost
+  all are deliberate records - rejected options kept so the rejection is
+  checkable (`STALE_BOUNDARY_IDS`, `CKAN_RESOURCE_ID_2024_INCOMPLETE`) and
+  measurements kept as provenance (`NAF25_POPULATED_MEASURED`), each saying
+  so. One comment contradicted the file it sits in: `countries/france.py`
+  said Lyon was "Not discarded as a city" above a `DISCARDED` setting dated
+  the next day. It now carries a dated superseded note, with the original
+  reasoning kept as written. `barcelona/config.py`'s "the other sixteen
+  cities" became "every other city". **B (37 hand-kept counts):** scoped
+  facts that stay true - "all five boroughs", "the two Mexican cities", "the
+  nine US cities", "all fourteen cities before Mexico City" - apart from
+  `docs/licenses/france-licence-ouverte-2.0.md`, where SIRENE served "all six
+  cities" including the discarded Lyon; it now reads "every French city", a
+  category rather than a number. `docs/france_step0_endpoints.md`'s "all six
+  cities" describes the six screened and stays. **A (2 future-tense hits):**
+  the map-view skill's "not yet a finding" is correct. Barcelona's
+  notification "drafted, not yet sent" is also correct: `docs/gated_access.md`
+  item 2 agrees. That makes it an open owner action on a live city, raised
+  with the owner rather than edited.
 
 ### 2026-09-24 - PLAN.md trimmed of 14 done items; three merged branches deleted
 
