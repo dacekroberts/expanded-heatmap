@@ -718,6 +718,23 @@ Cities built and running end to end (pipeline, map, app page):
   alike and every tram alike, so the lines carry Ruter's own per-line colours
   from its network maps, two lightened to clear the colour check.
 
+- **Copenhagen** - Metro M1-M4 and the S-tog's seven lines, across Copenhagen
+  and Frederiksberg, the municipality it encloses. Denmark's first city, and
+  the second built off a register of PREMISES: the business register's
+  production units, each at its own location address. Four things are its
+  own. **The register is a join of six national files**, one per entity -
+  premises, address, activity, name, parent company, legal form - on an
+  internal id rather than the public unit number. **The S-tog is drawn**
+  although suburban rail is left out elsewhere, on the spacing-and-frequency
+  test Dublin's DART passed. **The coordinates come from the national address
+  register through the same account as the businesses**, because the keyless
+  address service the brief relied on closes on 1 October 2026. And **the
+  privacy guard is the parent's legal form**, extended past Oslo's to
+  partnerships, with Denmark's "v/" sole-trader marker as a second guard. Rail
+  is from OpenStreetMap: the national journey planner's GTFS is open but asks
+  users not to change the data. The Datafordeler account is the owner's and
+  closes after publish.
+
 **Canada is closed at five built cities** - Vancouver (regional, with Surrey),
 Montréal, Calgary, Edmonton and Toronto - out of six candidates screened. The
 sixth, Surrey, is not pending: it shipped inside the Vancouver regional map.
@@ -802,9 +819,10 @@ downtime on 2026-09-22. `app/cities.py` changes with every city.
 `python scripts/check_deploy_imports.py` tests a clean clone under the lean
 venv before pushing; it cannot catch the stale-module case, and says so.
 
-**Norway has one city, Oslo, and its national modules** - the register
-facts, a shared step 2, the SN2025 taxonomy and a national cache for the two
-register files - **are written for a second** on France's pattern. Czechia is
+**Norway has one city, Oslo, and Denmark one, Copenhagen; each country's
+national modules** - the register facts, a shared step 2, a NACE Rev. 2.1
+taxonomy (SN2025, DB25) and a national cache for the register files - **are
+written for a second** on France's pattern. Czechia is
 paused at Prague, whose register records registered seats; the staging
 session is measuring whether the trade register's establishments can
 replace it.

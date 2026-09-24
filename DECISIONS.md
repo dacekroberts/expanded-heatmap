@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**295 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**296 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Copenhagen built: 14,978 storefronts, 64 stations](#2026-09-24---copenhagen-built-14978-storefronts-64-stations)
 - [The Amsterdam process becomes the `reprobe-city` skill (owner's request)](#2026-09-24---the-amsterdam-process-becomes-the-reprobe-city-skill-owners-request)
 - [Amsterdam to Band A (owner): both licences read, the permits credited as CC BY 4.0, brief written](#2026-09-24---amsterdam-to-band-a-owner-both-licences-read-the-permits-credited-as-cc-by-40-brief-written)
 - [Amsterdam: BAG accepted as a second layer, with its vacancy disclosed (owner)](#2026-09-24---amsterdam-bag-accepted-as-a-second-layer-with-its-vacancy-disclosed-owner)
@@ -337,6 +338,79 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Copenhagen built: 14,978 storefronts, 64 stations
+
+- **Copenhagen is built on `copenhagen-build`: 14,978 storefronts around 64
+  stations in Kobenhavn and Frederiksberg, 94.5% of them within a ring.** The
+  row counts, which are the drift baseline:
+  - **step 1** - 283 OSM stop positions on 22 kept relations -> 123 stations
+    by name (8 Metro/S-tog interchanges, widest Nordhavn at 279 m) -> **64 in
+    scope** (Kobenhavn 55, Frederiksberg 9), 59 excluded and named across 22
+    kommuner. Gate 3 exact: Metro 15/16/17/13 = 44, S-tog 87. In-scope
+    nearest-neighbour median 708 m, so the shared ring edges on
+    Philadelphia's 711 m precedent.
+  - **step 2** - 958,843 production units nationally -> 958,606 current and
+    open -> 153,987 with a current beliggenhedsadresse in the two kommuner
+    (133,530 / 20,457) -> 17,173 in divisions 47/56/96 -> 15,847 after 1,326
+    structural exclusions -> 15,234 after the 969900 catch-all -> **14,978
+    placed through DAR (98.3%)**: of 11,512 distinct address ids one did not
+    resolve, and 255 rows carry none. The unplaced lean personally owned
+    (59.0% against 39.0%), a bias stated on the page as "under 2%".
+  - **step 3** - 14,154 within a ring, 824 outside.
+  Every parent company was found and none had ceased; CVR generation 505,
+  DAR generation 761.
+
+- **Owner's call: `969900` (other personal services i.a.n.) is EXCLUDED, and
+  the loss is disclosed.** 613 rows, 84% personally owned and 50% above the
+  ground floor against 41% and 23% for all storefronts - Oslo's 96.990 and
+  France's 96.09Z signature on Copenhagen's own numbers. A hand sample of the
+  company-form rows found coaching, healing, consulting, dog walking, a
+  photo-booth company and a municipal public toilet, and ALSO about 70 tattoo
+  studios and a few dog groomers - real shopfronts lost with the code, which
+  the page and `excluded_categories.md` both say. **Rejected: keeping it**,
+  which puts a mostly home-based category on a storefront map to save one
+  trade. The six retail catch-alls and 561190 stay, as in Oslo and France.
+
+- **Owner's call: partnerships (Interessentskab, form 30) join the privacy
+  guard - a deliberate difference from Oslo**, whose guard is ENK alone.
+  Partners are liable personally and without limit, and of 326 I/S
+  storefronts about 105 displayed names that could be the partners' own:
+  strings of full personal names joined by "&", or a bar's name followed by
+  its partners'. **Rejected: Oslo's rule**, which would have published those
+  names. Cost: about 300 more pins show an address, some of them ordinary shop
+  names. Result: the trade name on 9,170 pins (61.2%); the address on 5,787
+  personally owned ones and on 21 company-form names carrying `v/`.
+
+- **Privacy verdict, from `check_personal_exposure.py copenhagen`: publish.**
+  0 e-mails, 0 phone numbers and 0 c/o markers in any displayed name - `coNavn`
+  is never loaded and step 2 asserts it. The heuristic flags 2,004 pins as
+  person-like; a sample is shop names ("ROMA PIZZERIA", "Apair Footwear",
+  "Netto Borgmestervangen") and a few companies named after their owner, which
+  are registered company names and trade names by the project's rule, as in
+  Oslo. **4 person-like names at a residential unit (0.03%), and that figure is
+  a measurement GAP as much as a result**: a Danish address marks its floor and
+  door in fields the pin does not display, so the script's unit-token test
+  sees little. The structural guard - legal form, then the marker - is the
+  claim that carries the weight.
+
+- **The register reads as premises, measured the corrected way.** DB25 5611
+  (restaurants and cafés, other eating places) 3,539 against OSM's restaurant,
+  fast food, café, food court and ice cream 3,114 in the two kommuner:
+  **1.14x**, 1.24x with coffee bars (563010). The page states 1.1 times.
+
+- **The map passes at three widths, and the macro label was measured.**
+  check_map_view: zoom 11.75/11.75 at 1024 px, 11.25/11.25 at 375, 11/11 at
+  343, 0 corrections. All 11 line labels inside the map with no overlap and
+  clear of the legend, the credit and the theme button at all three. The
+  Europe-map label measured 85.5 px in the app's own document, with seven
+  table entries reproduced exactly in the same run; check_macro_labels scores
+  PROBLEMS 0. The re-render after merging master's renderer passes
+  check_render_current.
+
+- **The page text, notices 30 (CVR) and 31 (Klimadatastyrelsen / DAR), and the
+  `excluded_categories.md` section with its S-tog sentence were approved by
+  the owner as written, 2026-09-24.**
 
 ### 2026-09-24 - The Amsterdam process becomes the `reprobe-city` skill (owner's request)
 

@@ -76,6 +76,10 @@ city-centre stations sit about a kilometre apart, which is metro spacing. Both
 are recorded in `DECISIONS.md` as decisions with a rejected alternative, rather
 than as applications of a rule — because by the letter of the rule DART would
 have been dropped.
+Copenhagen's S-tog is the second such case: a suburban network on its own
+tracks, drawn because inside the city its stations sit about a kilometre and
+a quarter apart, every line runs every ten minutes, and most of its stations
+there have no Metro station nearby.
 
 ### Stations left out of a network that IS mapped
 
@@ -1136,6 +1140,47 @@ withheld.
 branches of lines 2, 3 and 5, and are listed with their municipality in
 `outputs/oslo/excluded_stations.csv`. **Ferries are not drawn**, as in
 Marseille.
+
+### Copenhagen - production units, two municipalities, and a personal owner's name kept off the map
+
+**Excluded by the classification itself, anywhere in Denmark** - the same eight
+kinds of work Oslo excludes, read against Denmark's DB25 labels: the four
+intermediation classes new in NACE Rev. 2.1, mobile food stalls, event catering,
+contract catering and canteens, and personal services in the client's home.
+Denmark adds one split of its own, excluding industrial and institutional
+laundries while the dry cleaner on the corner stays. 1,326 rows.
+
+**Excluded as a catch-all, on Copenhagen's own numbers** - `969900`, *other
+personal services not elsewhere classified*: 613 rows, 84% personally owned and
+half above the ground floor, against 41% and 23% for storefronts overall. A
+sample held coaching, healing, consulting and dog walking. It also held about
+seventy tattoo studios and a few dog groomers, which are lost with it, and the
+map's page says so. The six retail catch-alls and "other eating places" are
+kept.
+
+**Left off because they could not be placed** - 256 premises (under 2%) that
+carry no address in Denmark's official address register, more of them
+personally owned than the storefronts as a whole.
+
+**What cannot be excluded: web shops.** As in Oslo, DB25 follows NACE Rev. 2.1,
+so an online-only seller carries the code of the goods it sells.
+
+**Shown, but not named: personally owned businesses.** Every premises of a sole
+proprietorship, a small personally owned business or a partnership shows its
+address instead of its name, as does any name carrying Denmark's sole-trader
+marker "v/" ("by"). They remain on the map; only the name is withheld. Addresses
+recorded "care of" another person are never read.
+
+**Two municipalities, one map.** The map covers Copenhagen and Frederiksberg,
+which Copenhagen entirely surrounds. Businesses in the surrounding
+municipalities are not counted, although the national register holds them.
+
+**Fifty-nine stations are excluded for being outside the two municipalities** -
+fifty-seven S-tog stations on the lines' suburban reaches and the Metro's two
+airport stations in Tårnby - and are listed with their municipality in
+`outputs/copenhagen/excluded_stations.csv`. **Regional and InterCity trains are
+not drawn, nor the Hovedstadens Letbane**, which has no stop in either
+municipality.
 
 ## Kept, and why
 
