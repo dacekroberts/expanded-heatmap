@@ -701,6 +701,23 @@ Cities built and running end to end (pipeline, map, app page):
   spent domain-wide daily quota. The feed is on a separate host and was never
   affected.
 
+- **Oslo** - Ruter's T-bane lines 1-5 and six tram lines. Norway's first city,
+  and the first built off a register of PREMISES rather than companies: the
+  Brønnøysund register's sub-units carry each business's physical location
+  address, kept apart from the company's registered one, which is the
+  distinction Czechia's register lacked when Prague was paused. Three things
+  are its own. **A sole trader's name is never shown** - the legal form lives
+  on the parent unit, not the premises, so every premises is joined to its
+  parent and an owner-named business shows its address instead. **The
+  coordinates are a join, not a geocode** - Kartverket publishes each
+  municipality's whole address register in bulk, which replaced a planned
+  ~13,000 geocoder calls. And **its classification is NACE Rev. 2.1**, which
+  moved car retail into the retail division and abolished the separate codes
+  for selling online, so web shops cannot be excluded by code here the way
+  France excludes them; the page says so. The feed colours every T-bane line
+  alike and every tram alike, so the lines carry Ruter's own per-line colours
+  from its network maps, two lightened to clear the colour check.
+
 **Canada is closed at five built cities** - Vancouver (regional, with Surrey),
 Montréal, Calgary, Edmonton and Toronto - out of six candidates screened. The
 sixth, Surrey, is not pending: it shipped inside the Vancouver regional map.
@@ -785,7 +802,14 @@ downtime on 2026-09-22. `app/cities.py` changes with every city.
 `python scripts/check_deploy_imports.py` tests a clean clone under the lean
 venv before pushing; it cannot catch the stale-module case, and says so.
 
-Next, with France complete, is a new COUNTRY rather than a new city. New
+**Norway has one city, Oslo, and its national modules** - the register
+facts, a shared step 2, the SN2025 taxonomy and a national cache for the two
+register files - **are written for a second** on France's pattern. Czechia is
+paused at Prague, whose register records registered seats; the staging
+session is measuring whether the trade register's establishments can
+replace it.
+
+Next is another new country rather than a new city. New
 Orleans and Seattle remain deferred, both needing decisions before code. Take
 the candidate ordering from `docs/city_master_list.md`, which is current state;
 `docs/global_country_shortlist.md` is its evidence trail, and the `add-country`

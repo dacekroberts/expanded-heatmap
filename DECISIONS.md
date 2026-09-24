@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**270 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**271 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Oslo built: 10,718 storefronts, 155 stations, and Norway's first city](#2026-09-24---oslo-built-10718-storefronts-155-stations-and-norways-first-city)
 - [Prague: RŽP's establishments are reachable in batches through ARES v3, each with a RÚIAN code; Prague stays paused until measured](#2026-09-24---prague-ržps-establishments-are-reachable-in-batches-through-ares-v3-each-with-a-rúian-code-prague-stays-paused-until-measured)
 - [Prague paused at Step 0: RES is a register of seats, not of shops](#2026-09-24---prague-paused-at-step-0-res-is-a-register-of-seats-not-of-shops)
 - [France deployed: the deferred deploy-verify passed, and phone-width labels clip](#2026-09-24---france-deployed-the-deferred-deploy-verify-passed-and-phone-width-labels-clip)
@@ -312,6 +313,107 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Oslo built: 10,718 storefronts, 155 stations, and Norway's first city
+
+- **Oslo is the 26th city and Norway's first, built off a register of PREMISES
+  rather than companies.** Brønnøysundregistrene's Enhetsregisteret SUB-UNITS
+  carry `beliggenhetsadresse`, each premises' physical location, kept apart
+  from the company's registered address - the distinction Czechia's RES lacked
+  when Prague was paused. Step 2 read 864,903 sub-units nationally: 138,896
+  located in kommune 0301, 13,458 in SN2025 divisions 47/56/96 (the brief's
+  figure, reproduced exactly), 12,144 after 1,314 structural exclusions, 11,884
+  after dropping 260 whose parent is bankrupt or being wound up, 11,073 after
+  the catch-all verdict, and **10,718** placed on a street address. 8,107 fall
+  within a station ring, **75.6%**. Built in the `oslo` worktree on
+  `oslo-build`; the national register files are cached once for the country at
+  `data/norway/raw/`, as France's are.
+
+- **Owner's calls: Oslo kommune only, trams drawn, ferries excluded.** Measured
+  against Kartverket's own kommune polygon: T-bane 1 37/37, 2 38/47, 3 29/38,
+  4 37/37, 5 45/51, and all six tram lines 100% inside. The worst line keeps
+  76%, better than Toulouse's T1 (52%) and Rennes' Métro b (73%), both
+  commune-only - the rule the French cities settled. All 12 stations outside
+  are in Bærum, on the Kolsås and Østerås branches, named from Kartverket's own
+  Bærum polygon. Oslo's trams serve corridors the T-bane does not (Grünerløkka,
+  Frogner, Torshov, Sagene), Marseille's and Toulouse's shape rather than
+  Paris's dense overlay; the 6 ferry routes go on Marseille's call.
+
+- **Three of the brief's claims did not survive, and each is corrected in
+  place.** (1) **The register is SN2025 (NACE Rev. 2.1), not SN2007** - its own
+  labels show it (`47.810` motor-vehicle retail, `96.230` day spas). Rev. 2.1
+  moved car retail INTO division 47 (kept, on Madrid's precedent that NAICS 441
+  counts car dealers) and ABOLISHED the store/non-store split, so a web shop is
+  filed under its product and cannot be excluded by code as France excludes
+  distance selling - disclosed on the page. (2) **Coordinates are a join, not a
+  geocode**: Kartverket publishes each kommune's whole address register in bulk
+  (5.7 MB for Oslo, 106,254 addresses), so the brief's ~13,000 geocoder calls
+  and its `fuzzy=true` trap were never needed. 96.8% placed - 10,090 exact,
+  611 letter-agnostic, 12 on an old street spelling, 5 on a unique match that
+  ignores a stale postcode; the 355 unmatched lean to companies (13.2% sole
+  traders against 28.1%), mostly a building name or c/o on the address line.
+  (3) **OSM's route relations are too partial for gate 3 here** (line 2 lists 25
+  stations against the feed's 47), unlike Lille and Rennes.
+
+- **A new national taxonomy, `norway_sn2025`, keyed at the 5-digit level.**
+  Structural exclusions by label, national: the four intermediation codes new in
+  Rev. 2.1 (47.910, 47.920, 56.400, 96.400), mobile food (56.120), canteens and
+  other catering (56.220, France's 56.29A shape), household services (96.910),
+  and **event catering (56.210) - deliberately unlike France**, which keeps its
+  *traiteurs* because a French traiteur is usually a shop; Norway's label says
+  the work happens at the event, and 53% of Oslo's have an ENK parent. The
+  per-city catch-all verdict: **`96.990` excluded** - 811 rows, 5% with any
+  registered employee and 87% with a sole-trader parent, the strongest
+  home-based signature measured anywhere here. The retail catch-alls are kept.
+
+- **Privacy: a sole trader's name is never shown, and the guard is structural.**
+  The legal form lives on the PARENT unit - a sub-unit's own form is BEDR/AAFY on
+  100% of rows and never ENK - so every premises is joined to its parent (99.2%
+  found) and an ENK's premises (32.1% after the filters) shows its address;
+  89.3% of those carry the owner's own name. `check_personal_exposure.py oslo`:
+  0 sole-trader rows show a name; 0 e-mails, 0 phone numbers (the CSV carries
+  both, never loaded - asserted); the heuristic's 1,403 "person-like" pins are
+  company names (`AS` limited companies above all - "LUMI CANDLES", "NORTH
+  PINE"), trade names by the project's rule. Its "0 at a residential unit" is a
+  measurement GAP, not a clean result: Norwegian addresses carry no APT/UNIT
+  token for it to find. Trade names shown on 71.4% of pins.
+
+- **Gate 3 network-level, a secondary source, recorded as such.** The feed's
+  101 distinct T-bane stations match the figure Norwegian Wikipedia gives; no
+  operator page states a count, and no tram figure from outside the feed was
+  found. One station stood under two names - the tram stop "Forskningsparken T"
+  12 m from the T-bane's "Forskningsparken" - merged by an explicit alias after
+  the spacing gate flagged it; the other four pairs under 200 m are real stops.
+  Collapsed median spacing 475 m network-wide, 465 m in the kommune: the shared
+  400 m floor passes, and New York's tight ring edges apply on Toulouse's fit
+  argument.
+
+- **Colours: Ruter's per-line colours from OSM, two lightened in hue.** The feed
+  colours every T-bane line `EC700C` and every tram `0B91EF`. The shared check
+  refused Ruter's T-bane 1 (ΔE 6.5 from the Retail pins) and Trikk 12 (5.7 from
+  T-bane 3); both were lightened in HSL lightness only, hue kept - lighter
+  because darker shades vanish on the dark basemap the check does not score.
+  Tram 15, line 12's route while the Briskeby line is closed, has no colour
+  anywhere read and takes this project's teal. Confirmed in the browser on both
+  basemaps.
+
+- **Licences read, all PERMITTED WITH CONDITIONS, three notices added.** 27
+  Brønnøysund (NLOD; §5's default sentence verbatim, since Brønnøysund specifies
+  none), 28 Kartverket (CC BY 4.0, `© Kartverket`, both datasets on one line), 29
+  Entur (NLOD; Entur's specified "Data made available by Entur" **with its logo -
+  owner's call**, since the old developer portal still asks for it: Entur's own
+  unaltered SVG, shown on the Oslo page on a white chip at ≥20 px). Ruter's APP
+  agreement bars copying "data som Ruter gjør tilgjengelig"; it is formed on
+  installing the app and no data page incorporates it, so it is read as
+  governing the app - recorded, not buried. The kommune endpoint moved to
+  `api.kartverket.no` on Kartverket's recommendation (identical geometry).
+
+- **Adding Oslo moved Paris's macro label.** Oslo's own label (29.0 px) scored
+  clean, but Oslo widened the Europe frame, which pressed the French cities
+  together: Paris's pill covered Lille's marker and met Rennes' label at every
+  width. The checker scored four placements; Paris now sits below its dot
+  (PROBLEMS 0, 26 cities). Map re-rendered after the merge on the cleanup
+  role's phone-width label fix (`2cdcdcd`), point counts unchanged.
 
 ### 2026-09-23 - gated_access.md: Taiwan's key gate retired, Kaohsiung's request added
 

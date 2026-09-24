@@ -5,6 +5,7 @@ Overview.py's docstring for why this is the decided pattern
 for every city's detail page. Scaffolded by scripts/scaffold_city.py.
 """
 
+import base64
 import json
 import sys
 from pathlib import Path
@@ -92,6 +93,24 @@ if PROVENANCE_JSON.exists():
     except (ValueError, OSError):
         # A malformed provenance file must not take the page down.
         pass
+
+# ENTUR'S SPECIFIED CREDIT, WITH ITS LOGO, beside the data it covers. Entur
+# asks for "Data made available by Entur + (logo)"; the owner's call
+# (2026-09-24) was to show the logo. The file is Entur's own, unaltered, from
+# its RGB logo pack. Entur's rules: the primary (blue) logo on a light
+# background, at least 20 px - so it sits on a white chip whatever the page
+# theme, and the SVG's 800x400 canvas is drawn 56 px tall because the mark
+# fills ~39% of it, putting the visible logo at ~22 px.
+_ENTUR_LOGO = Path(__file__).parent.parent / "assets" / "entur" / "Enturlogo_Blue_RGB.svg"
+if _ENTUR_LOGO.exists():
+    _b64 = base64.b64encode(_ENTUR_LOGO.read_bytes()).decode("ascii")
+    st.markdown(
+        '<div style="display:flex;align-items:center;gap:10px;margin:0 0 0.6rem">'
+        '<span style="background:#ffffff;border-radius:6px;display:inline-flex">'
+        f'<img src="data:image/svg+xml;base64,{_b64}" alt="Entur" height="56"></span>'
+        '<span style="font-size:0.85rem">Data made available by Entur, under the '
+        '<a href="https://data.norge.no/nlod/en/2.0">NLOD</a>.</span></div>',
+        unsafe_allow_html=True)
 
 if HEATMAP_HTML.exists():
     # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its

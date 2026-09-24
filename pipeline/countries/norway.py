@@ -44,9 +44,13 @@ ADDRESS_URL_TEMPLATE = (
     "https://nedlasting.geonorge.no/geonorge/Basisdata/MatrikkelenAdresse/CSV/"
     "Basisdata_{code}_{name}_4258_MatrikkelenAdresse_CSV.zip")
 
-# Kartverket's municipal boundary, one kommune per call, GeoJSON geometry.
+# Kartverket's municipal boundary, one kommune per call, GeoJSON geometry -
+# dataset "Administrative enheter kommuner", CC BY 4.0. api.kartverket.no is
+# the endpoint Kartverket recommends since December 2023; the older
+# ws.geonorge.no path is kept "inntil videre" as a proxy. Compared 2026-09-24
+# for 0301 and 3201: identical geometry, zero symmetric difference.
 KOMMUNE_BOUNDARY_URL_TEMPLATE = (
-    "https://ws.geonorge.no/kommuneinfo/v1/kommuner/{code}/omrade")
+    "https://api.kartverket.no/kommuneinfo/v1/kommuner/{code}/omrade")
 
 # --- The sub-unit columns a step may read ----------------------------------
 #
