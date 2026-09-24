@@ -21,31 +21,29 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [ ] **🛠 RENDERER FIXES - BLOCK THE NEXT DEPLOY** (owner 2026-09-24: "ship
-  now, fix after" and "fix before next deploy"; no further push to master
-  until these land). Two defects Brazil's deploy check found, both older than
-  Brazil, fixed once in `pipeline/map_common.py`:
-  - [x] **Dark mode (the default) cannot lift pure blue or navy line labels.**
-    FIXED: failing labels carry a lighter shade (owner's option), 17 of 235;
-    `scripts/check_map_markup.py` checks it.
-    Contrast against the halo: Porto Alegre Trensurb Linha 1 `#000080`
-    1.91:1, Rio VLT Linha 1 and Salvador Linha 2-Azul `#0000FF` 2.18:1, Belo
-    Horizonte Linha 2 `#2F1F85` 2.85:1; Barcelona (1.78), Calgary and
-    Edmonton (2.36) alike. Light mode is fine (8.6-16:1).
-  - [x] **The legend's inline `style` breaks at its font list** - FIXED
-    (single quotes inline; the same check covers it)
-    (`map_common.py:432`): the first `"Segoe UI"` closes the double-quoted
-    attribute, so every legend loses its 13 px size, shadow and non-Latin
-    fonts.
-  - [x] Re-render all maps, `check_render_current.py` (39 current).
-  - [ ] A `map-chrome` `deploy-verify` (dark mode included), fetch, push,
-    reboot only if `app/` changed, live check.
-  - [ ] **Owner question, not part of the gate: light-mode label contrast.**
-    145 of 235 labels read under 4.5:1 on their white halo (yellows and
-    oranges; Milan M3 1.08:1). Reported by `check_map_markup.py`, not failed.
+- [ ] **🛠 LINE-LABEL CONTRAST, BOTH THEMES - build before Rotterdam, verify in
+  Rotterdam's deploy check** (owner 2026-09-24: "push the verified dark-mode
+  fixes first, then build the swap and include it in Rotterdam's deploy check").
+  The renderer gate itself closed with the push of the dark-mode and legend
+  fixes (DECISIONS, "Renderer fixes verified and pushed").
+  - [ ] **Correct the dark model**: the `brightness(1.8)` filter also
+    brightens the halo (renders `#132039`, not `#0B1220`), so 44 of 235 labels
+    are under 4.5:1 against what is drawn, and Vancouver's Expo Line has no
+    margin (4.49 as the browser truncates). Drop the filter; give every
+    dark-mode label an explicit colour measured against the halo actually
+    drawn, channels truncated as the browser does; `check_map_markup.py`
+    measures the same way.
+  - [ ] **Light-mode halo swap** (owner-approved over darkening): a label
+    under 4.5:1 on white keeps its colour and takes the halo it reads better
+    on - dark for 139 of 145, white for 6 - and the 13 mid-tones that miss on
+    both get the smallest lightness step away from their halo (at most
+    ΔE 3.7).
+    `check_map_markup.py` then FAILS light mode too.
+  - [ ] Re-render all maps with Rotterdam's; one `deploy-verify` for
+    Rotterdam covering `city-added` and `map-chrome` (both themes).
 
 - [ ] **NEXT BUILDS (owner, 2026-09-24): 🇳🇱 Rotterdam, then 🇹🇼 Taiwan** -
-  after the renderer fixes above, which gate the next deploy. Rotterdam is
+  Rotterdam's deploy check also verifies the label-contrast work above. Rotterdam is
   Amsterdam's shape (permit-notice food layer rebuilt from the Gemeenteblad,
   BAG shop units, CBS vacancy) - `docs/build_briefs/rotterdam.md`. Taiwan:
   Taipei (Regional), Taichung, Taoyuan; write a `taiwan-city` skill after the

@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**340 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**341 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Renderer fixes verified and pushed; the dark-label model corrected next, with the light-mode halo swap (owner)](#2026-09-24---renderer-fixes-verified-and-pushed-the-dark-label-model-corrected-next-with-the-light-mode-halo-swap-owner)
 - [Renderer: dark-mode line labels lifted to 4.5:1, the legend's style repaired; a check for both](#2026-09-24---renderer-dark-mode-line-labels-lifted-to-451-the-legends-style-repaired-a-check-for-both)
 - [Brazil deployed; the live site measured after the reboot](#2026-09-24---brazil-deployed-the-live-site-measured-after-the-reboot)
 - [Brazil's batch deploy check passed; two renderer defects shipped now, fixed next (owner)](#2026-09-24---brazils-batch-deploy-check-passed-two-renderer-defects-shipped-now-fixed-next-owner)
@@ -382,6 +383,50 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Renderer fixes verified and pushed; the dark-label model corrected next, with the light-mode halo swap (owner)
+
+- **`deploy-verify` (`map-chrome`, dark mode included) PASSED the two renderer
+  fixes** at 5684c4c:
+  - **Labels:** exactly the 17 labels carry `--dm-label` and render in it; the
+    other 218 inline colours are byte-identical to the previous commit; light
+    mode shows every original colour.
+  - **Legend:** 13 px, its shadow and the full 15-font stack on all 39 maps,
+    and exactly three attributes on the element.
+  - **100 fresh loads** (10 cities, 10 frame sizes): attribution never
+    covered, 0 zoom corrections, the legend collapses and the theme toggles
+    every time. The only label report is Madrid's 1-6 px pair at 343 px,
+    which predates this change.
+  - `check_map_markup.py` and `check_render_current.py` pass. `app/` is
+    unchanged, so no reboot is needed.
+- **It found the dark-label model measuring against the wrong background.**
+  Nothing here blocks the push.
+  - The `brightness()` filter sits on the label element, so it brightens the
+    halo too. The halo renders `#132039`, not the `#0B1220` that
+    `linecolour.py` and `check_map_markup.py` assume.
+  - Against the halo actually drawn, the 17 lifted labels read 3.89-4.18:1
+    (from as low as 1.91), and 44 of 235 labels are under 4.5.
+  - Vancouver's Expo Line has no margin: 4.53:1 as modelled and 4.49:1 as
+    the browser truncates.
+  - **Decided** (owner's order, "push the verified dark-mode fixes first"):
+    push now, since this is a large improvement on what is live. The model
+    correction lands with the light-mode halo swap, in the same code, and is
+    verified in Rotterdam's deploy check. That correction means no filter:
+    every dark-mode label gets an explicit colour, measured against the halo
+    actually drawn, with channels truncated as the browser does.
+- **Light-mode labels: the owner approved the halo swap.** The owner asked
+  for the dark treatment mirrored ("darken until 4.5:1 on white"). Measured,
+  it was not viable: a median CIE76 shift of 19.9, with 48 labels moving 25 or
+  more and every yellow turning olive (`#FFD700` to `#8a7400`), which would
+  break the match between a line and its label. Instead, each label under
+  4.5:1 on white keeps its colour and takes the halo it reads better on: the
+  dark page colour for 139 of 145, white for 6. The 13 mid-tones that miss on
+  both (4.2-4.45:1) get the smallest lightness step away from their halo, at
+  most ΔE 3.7. The cost is a mix of white and dark halos on one light-mode
+  map. A single halo cannot work, since navy needs white and yellow needs
+  dark. The owner saw the swatches (`light_labels_options.html`) and agreed.
+  Built next, and verified inside Rotterdam's deploy check rather than in a
+  separate run.
 
 ### 2026-09-24 - Renderer: dark-mode line labels lifted to 4.5:1, the legend's style repaired; a check for both
 
