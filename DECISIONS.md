@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**303 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**304 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Prague's deploy-verify passed; the Europe view zoomed out](#2026-09-24---pragues-deploy-verify-passed-the-europe-view-zoomed-out)
 - [Prague built: 25,275 storefronts, 58 stations](#2026-09-24---prague-built-25275-storefronts-58-stations)
 - [Prague resumed: four owner calls, and NACE2025 rather than NACE](#2026-09-24---prague-resumed-four-owner-calls-and-nace2025-rather-than-nace)
 - [Japan's maps will draw JR and private commuter railways (owner)](#2026-09-24---japans-maps-will-draw-jr-and-private-commuter-railways-owner)
@@ -345,6 +346,37 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Prague's deploy-verify passed; the Europe view zoomed out
+
+- **City-scoped `deploy-verify` passed all five items at `0c97e9e`, no
+  defects**, on the worktree's app under the lean venv. The page's caption
+  reads the ROS02 snapshot (2026-08-31) and PID's window (2026-09-24 to
+  2026-10-07); notices 32-34 and the OpenStreetMap notice's addition render on
+  every page with their four links answering 200 and the Czech letters in the
+  site's own font; the Overview reads "Europe (12)" and sums to 28; marker,
+  list link, switcher and "All cities" all route correctly. Embedded map:
+  check_map_view 12/12 at 1000 (twice), 11.5/11.5 at 726, 10.25/10.25 at 343
+  (twice), 0 corrections; check_map_labels clean at 1000 and 343;
+  check_map_attribution uncovered at five sizes with the legend clamp in force.
+
+- **Prague is the Europe frame's new easternmost city, so the macro view
+  zoomed out (2.895 -> 2.764) - and that moved two things.** Oslo's dot now
+  clears the Light mode button by about 17.6 px at 375, up from the ~3 px
+  Copenhagen's verify recorded: the margin that entry flagged widened rather
+  than closed. And **Marseille's label now grazes Milan's DOT at 375 and
+  1200**, which `check_macro_labels.py` scored as PROBLEMS 0 - so either the
+  checker's pin model and the render disagree by a few pixels, or grazing is
+  under its threshold. Cosmetic, Milan's pin stays visible; recorded for the
+  cleanup role rather than fixed in a city build.
+
+- **Two cosmetic observations on Prague's own map, not defects**: at 343 an
+  OPENED legend would cover the Metro C label (not the default state), and
+  cluster badges partly overlap "Metro C" at 343 and 768, which the label
+  check ignores by design.
+
+- **The push needs a REBOOT** - it changes `app/cities.py` and
+  `app/components.py` (gate item 9 in `docs/data_sources.md`).
 
 ### 2026-09-24 - Prague built: 25,275 storefronts, 58 stations
 
