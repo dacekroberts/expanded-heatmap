@@ -27,7 +27,9 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   and rebooted. Denmark's national modules are ready for a second city. See
   `DECISIONS.md`, *"Copenhagen built"* and the entries after it. Two owner
   actions remain open below.
-  - [ ] ⏰ **AFTER PUBLISH: the owner closes the Datafordeler account.** Its API
+  - [x] **DONE 2026-09-24: the owner deactivated the Datafordeler IT system
+    AND the user**, so the exposed key is dead. Was:
+    ⏰ **AFTER PUBLISH: the owner closes the Datafordeler account.** Its API
     key was visible in a terminal screenshot shared into the build
     conversation on 2026-09-24 and sits in that terminal's PowerShell history;
     it was deliberately not rotated (owner's call - free, unrestricted data

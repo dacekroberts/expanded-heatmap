@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**298 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**299 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [The Datafordeler account is closed](#2026-09-24---the-datafordeler-account-is-closed)
 - [Copenhagen deployed; the live site measured after the reboot](#2026-09-24---copenhagen-deployed-the-live-site-measured-after-the-reboot)
 - [Copenhagen's deploy-verify passed, with one margin to watch](#2026-09-24---copenhagens-deploy-verify-passed-with-one-margin-to-watch)
 - [Copenhagen built: 14,978 storefronts, 64 stations](#2026-09-24---copenhagen-built-14978-storefronts-64-stations)
@@ -340,6 +341,19 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - The Datafordeler account is closed
+
+- **The owner deactivated the Datafordeler IT system and then the user,
+  after Copenhagen published** - the trigger the key entry set. The exposed
+  API key died with the system. Nothing published depends on the account:
+  the six CVR and four DAR files are cached nationally at
+  `data/denmark/raw/`, the live site never calls Datafordeler, and CC BY 4.0
+  attaches to the data irrevocably. **Consequence recorded for the next
+  Danish build or refresh**: a new free account, a new IT system and key,
+  and the 15-minute key propagation (`docs/gated_access.md` item 3).
+  `Beskaeftigelse` (employees, bitemporal only) was never taken, as the
+  2026-09-23 entry anticipated.
 
 ### 2026-09-24 - Copenhagen deployed; the live site measured after the reboot
 
