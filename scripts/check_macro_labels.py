@@ -76,6 +76,10 @@ TEXT_WIDTH = {
     # differently (Toulouse 61.2, Paris 34.2) with the font reported loaded,
     # so measure in the app frame, never the top document.
     "Rennes": 49.7,
+    # Oslo measured 2026-09-24 in the app frame the same way; six entries -
+    # Rennes 49.7, Toulouse 60.4, Paris 32.9, Marseille 60.3, Milan 36.3,
+    # Boston 48.4 - reproduced exactly in the same run.
+    "Oslo": 29.0,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,
