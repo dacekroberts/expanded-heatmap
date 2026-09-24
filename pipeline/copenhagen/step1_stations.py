@@ -29,6 +29,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from pipeline import stations as station_gates  # noqa: E402
+from pipeline.baseline import emit  # noqa: E402
 from pipeline.copenhagen import config  # noqa: E402
 from pipeline.copenhagen.kommuner import kommune_polygons, read_cached  # noqa: E402
 
@@ -185,6 +186,11 @@ def main():
             .sort_values("station"))
     keep.to_csv(config.STATIONS_CSV, index=False, encoding="utf-8")
     print(f"\n  {len(keep)} stations -> {config.STATIONS_CSV.relative_to(config.ROOT)}")
+
+    emit("stop_positions", len(platforms))
+    emit("stations_collapsed", len(st_rows))
+    emit("stations_in_scope", len(keep))
+    emit("stations_excluded", len(out))
 
 
 if __name__ == "__main__":

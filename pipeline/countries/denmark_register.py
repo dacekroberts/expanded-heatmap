@@ -24,6 +24,7 @@ import sys
 
 import pandas as pd
 
+from pipeline.baseline import emit
 from pipeline.countries import denmark as DK
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module
 
@@ -220,8 +221,10 @@ def build_storefronts(cfg, bbox):
     for (code, lab), n in df[struct].groupby(["db25_code", cfg.RAW_CLASSIFICATION_COLUMN]) \
             .size().sort_values(ascending=False).items():
         print(f"      {code}  {n:>6,}  {lab[:60]}")
+    emit("bucket_rows", len(df))
     df = filter_to_storefront(df, cfg.TAXONOMY_SYSTEM)
     print(f"  {len(df):,} storefront rows after filter_to_storefront()")
+    emit("storefront_rows", len(df))
 
     df = _parent_forms(df, cfg)
 
@@ -265,6 +268,9 @@ def build_storefronts(cfg, bbox):
           f"personally owned {int(df['personal_form'].sum()):,}, the v/ marker on a "
           f"company form {int((marker & ~df['personal_form']).sum()):,}")
 
+    emit("storefronts_placed", len(df))
+    emit("name_shown", int((~df["name_is_address"]).sum()))
+    emit("personally_owned", int(df["personal_form"].sum()))
     out = df.rename(columns={"pNummer": "pnummer"})[
         ["pnummer", "business_name", "name_is_address", "latitude", "longitude",
          cfg.RAW_CLASSIFICATION_COLUMN, "db25_code"]]
