@@ -21,21 +21,32 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [~] **🇮🇹 ROME - PARKED 2026-09-24 at "page text drafted", on `rome-build`.**
-  98,897 storefronts, 73 stations, Metro A, B, B1 and C. Pipeline, map, drift
-  baseline, privacy verdict, provenance rows and the DECISIONS entry are
-  committed; **held uncommitted** until the owner approves the text:
-  `app/cities.py` (entry), `app/pages/30_Rome_Heatmap.py`,
-  `docs/city_master_list.md`. Page number 30 assumes Amsterdam (29) lands
-  first. Morning:
-  - [ ] Owner: **rail source** - OSM (built), or the GTFS / RSM layers.
-  - [ ] Owner: **Metromare and the Roma-Viterbo urban service** - in or out.
-  - [ ] Owner: **the food over-count** - state it (recommended), or a cut-off.
-  - [ ] Owner: approve the page text, notices 36 (Roma Capitale) and 37
-    (ANNCSU) and the `excluded_categories.md` section - drafted in chat.
-  - [ ] Merge with Amsterdam's branch; re-score check_macro_labels.
-  - [ ] Scoped `deploy-verify`, `check_deploy_imports`, fetch, merge, push,
-    reboot, live check.
+- [x] **🇳🇱 AMSTERDAM - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro
+  50-54 and 16 trams, gemeente 0363: **13,238 storefronts, 144 stations**;
+  page text, notice 35 and the exclusions section approved as drafted,
+  gemeente-only scope and the phone labels shipped as they are (owner's
+  calls). Its deploy-verify found the open legend over the map's buttons and
+  a Retail / "Shops and services" layer name - both fixed in the shared
+  renderer before pushing (owner's call), all 29 maps re-rendered. Pushed
+  `bc8b52c`; live after the owner's reboot, legend 56-626 px under buttons
+  ending at 45, zoom 12, notice 35 shown. `amsterdam-*-tmp` launch entries
+  removed. Left for the owner: `data/amsterdam/raw/gtfs-nl.zip` (243.8 MB)
+  may be deleted - superseded by `gtfs-openov-nl.zip`.
+
+- [~] **🇮🇹 ROME - publishing 2026-09-24, on `rome-build`.** 98,897
+  storefronts, **87 stations**: Metro A, B, B1 and C, and the Roma-Viterbo
+  urban service (owner's call on the DART / S-tog test; Metromare out).
+  - [x] Owner: **rail source** - OSM, kept.
+  - [x] Owner: **Metromare and the Roma-Viterbo urban service** - measured;
+    Roma-Viterbo urban drawn, Metromare out.
+  - [x] Owner: **the food over-count** - stated on the page, no cut-off.
+  - [x] Owner: approved the page text (revised for Roma-Viterbo), notices 36
+    and 37 and the `excluded_categories.md` section.
+  - [x] Merged with master (Amsterdam); `app/cities.py`'s two appended
+    entries had merged INTO ONE DICT - Rome's keys over Amsterdam's - and
+    were split by hand; re-score check_macro_labels.
+  - [ ] Notices 36-37, re-render on the current renderer, scoped
+    `deploy-verify`, `check_deploy_imports`, fetch, push, reboot, live check.
   - [ ] AFTER PUBLISH: remove the two `rome-*-tmp` launch entries.
   - [ ] The owner may delete `data/rome/raw/rome_static_gtfs.zip` (46.8 MB) -
     downloaded, then not used.
@@ -83,7 +94,10 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   unchanged by the clipping fix. `scripts/check_map_labels.js` at 375/343
   reports overlapping label pairs in seven cities, 28 in all: Madrid 3/5,
   Paris 3/4, New York 2/3, San Francisco 2/2, Toronto 1/1, Barcelona 0/1,
-  Mexico City 0/1. Labels also sit under the theme button or legend in
+  Mexico City 0/1. **Amsterdam adds 11 pairs at 375** (21 labels, clean at
+  desktop), shipped that way on the owner's call 2026-09-24 and handed here:
+  per-line label ends made it worse (14), so the fix is a phone-specific
+  layout, not a per-city tweak. Labels also sit under the theme button or legend in
   Barcelona (L11 at 375), Edmonton (375 and 343), San Diego (Blue Line at
   375) and Montréal (Ligne 1 at 854, the same in the pre-fix map). Label
   placement is decided once, in Python, against the full-width view

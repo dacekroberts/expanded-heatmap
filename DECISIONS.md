@@ -16,12 +16,18 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**308 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**314 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [The open legend capped below the map's buttons, and a taxonomy may name its layer (owner, from Amsterdam's deploy-verify)](#2026-09-24---the-open-legend-capped-below-the-maps-buttons-and-a-taxonomy-may-name-its-layer-owner-from-amsterdams-deploy-verify)
+- [MHLW's national food open data is an opt-in slice; it completes Fukuoka and Hiroshima only](#2026-09-24---mhlws-national-food-open-data-is-an-opt-in-slice-it-completes-fukuoka-and-hiroshima-only)
+- [The owner's answers to the overnight question points; Sendai's lists need permission](#2026-09-24---the-owners-answers-to-the-overnight-question-points-sendais-lists-need-permission)
 - [Rome: the Roma-Viterbo urban service drawn, Metromare not (owner, on the DART / S-tog test)](#2026-09-24---rome-the-roma-viterbo-urban-service-drawn-metromare-not-owner-on-the-dart-s-tog-test)
+- [Amsterdam: the owner's calls, and the page text written](#2026-09-24---amsterdam-the-owners-calls-and-the-page-text-written)
+- [Sendai joined at 95.1% block; MLIT's 小字 column places 字 addresses](#2026-09-24---sendai-joined-at-951-block-mlits-小字-column-places-字-addresses)
 - [Rome built on its branch: 98,897 storefronts, 73 stations](#2026-09-24---rome-built-on-its-branch-98897-storefronts-73-stations)
+- [Amsterdam built on its branch: 13,238 storefronts, 144 stations](#2026-09-24---amsterdam-built-on-its-branch-13238-storefronts-144-stations)
 - [Prague deployed; the live site measured after the reboot](#2026-09-24---prague-deployed-the-live-site-measured-after-the-reboot)
 - [Prague's deploy-verify passed; the Europe view zoomed out](#2026-09-24---pragues-deploy-verify-passed-the-europe-view-zoomed-out)
 - [Prague built: 25,275 storefronts, 58 stations](#2026-09-24---prague-built-25275-storefronts-58-stations)
@@ -351,6 +357,138 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-24 - The open legend capped below the map's buttons, and a taxonomy may name its layer (owner, from Amsterdam's deploy-verify)
+
+- **The open map legend is now capped at the visible map height less the
+  button row and scrolls, with a sticky header; and a taxonomy may define
+  `layer_label()` to name a bucket's layer the way its legend does. Fixed in
+  the shared renderer before Amsterdam shipped - the owner's call of
+  2026-09-24, over handing both to app/chrome beside the phone label layout.**
+  `deploy-verify` (city-added) found two defects on Amsterdam's map that no
+  earlier city could show. **The legend**: 21 lines, the first map past 20, made
+  the open legend 634 px tall at the 650 px embed, so its top sat at y = -8 and
+  its header and Hide control were under the "All cities" and theme buttons
+  (Paris's had been the tallest, its top at y 84). **The layer name**: the layer
+  control said "Businesses: Retail" beside a legend and a page that say "Shops
+  and services", because layers were named by bucket while the legend goes
+  through `legend_label()`. Fixes in `pipeline/map_common.py`: `.map-legend`
+  gets `max-height: calc(min(100vh, 650px) - 80px)`, `overflow-y: auto`,
+  border-box and contained overscroll; the `<summary>` is sticky with an
+  explicit background - `inherit` was tried and FAILED, measured: a summary is
+  slotted into the `<details>` shadow root, so it inherits from a transparent
+  slot and the rows showed through the header in dark mode; `_layout_labels`
+  caps its legend obstacle at the same height; `render_heatmap` names each pin
+  layer through `taxonomy.layer_label` when defined, else the bucket
+  (`legend_label()` itself cannot serve - NAICS's appends its code prefixes).
+  `amsterdam_source.py` sets `layer_label = legend_label`. Measured on
+  Amsterdam at 1000x650: the legend spans y 56-626 (the buttons end at 45), 570
+  px, scrolling 62; the header stays at y 57 when scrolled, background matching
+  the panel in both themes; the layer control reads "Businesses: Shops and
+  services (9,215)". **Rejected: shipping and handing off** - unlike the phone
+  label overlaps, this was the desktop embed, the most-viewed state. The CSS is
+  a shared block, so every map was re-rendered: the full `drift_check.py --jobs
+  4` over 29 cities showed all 29 `heatmap.html` changed and **all 51 other
+  outputs identical, every baseline unchanged**; `check_render_current.py` 29
+  of 29 current; `check_provenance.py` all recorded. Shared code normally
+  app/chrome's (`docs/session_roles.md`); the owner assigned it to this session.
+  Files: `pipeline/map_common.py`, `pipeline/taxonomies/__init__.py`,
+  `pipeline/taxonomies/amsterdam_source.py`, `outputs/*/heatmap.html`.
+
+### 2026-09-24 - MHLW's national food open data is an opt-in slice; it completes Fukuoka and Hiroshima only
+
+- **Found MHLW's 食品衛生申請等システム open data covers too little to rescue
+  Yokohama, Nagoya or Kyoto. But it completes Fukuoka and Hiroshima, whose own
+  lists stop exactly where online filing begins.** The owner approved using
+  the public viewer (question 10). Its オープンデータ page lists 157
+  authorities, and each file is a plain keyless GET
+  (`/faspub/page/opendatadownload.jsp?param=<code>_food_business_all.csv`,
+  found by reading the icon's handler). No form was submitted. The page
+  states its own limit: online filings only, and only where the applicant
+  agreed, field by field. **Measured against complete lists**, MHLW holds 8.1%
+  of Minato's restaurants, 2.9% of Osaka's, 4.0% of Kobe's and 1.9% of
+  Sendai's. It is also mostly notifications (届出), and only 26–65% of rows
+  carry an address. Yokohama (2,912 restaurants), Nagoya (1,058) and Kyoto
+  (26) stay without a current food source. Tokyo's gap wards are not filled
+  either (Chiyoda 291, Shibuya 812, Toshima 250).
+- **Fukuoka and Hiroshima are different in kind.** Fukuoka's own list (BODIK)
+  holds only permits granted before 2021-06 and still held (3,231
+  restaurants); MHLW holds 21,088 since then, 76% addressed. Hiroshima's own
+  list holds counter applications (7,479), and MHLW the online ones (5,195, 66%
+  addressed). **The overlap was measured at block level, not by string**,
+  because the address formats differ (exact matching found 160 and 5): 1.3%
+  and 1.2%, so the sources are disjoint. **The combination was judged against
+  a per-capita yardstick from the complete lists** (restaurant permits per
+  1,000 residents: Sendai 9.5, Kobe 13.0, Osaka 19.0). Fukuoka comes to
+  **14.8** (11.8 placeable) and Hiroshima **10.7** (9.2 placeable). The
+  shortfall is premises that withheld their address. Joins: Fukuoka own 98.1%
+  / MHLW 96.7% / personal services 99.1% block; Hiroshima own 95.9% / MHLW
+  94.7%. **MHLW's own coordinates agree with the block point at a median
+  36 m / 35 m**, so an MHLW row the join misses can take the publisher's point.
+  Hiroshima publishes no personal-services list (PDFs of new openings only),
+  which gives it Band C's shape. `screen_japan_join.py` gained the entries
+  (`fukuoka`, `fukuoka-mhlw`, `fukuoka-life`, `hiroshima`, `hiroshima-mhlw`)
+  and MHLW's column names. The Minato control holds at 99.8%. Briefs:
+  `fukuoka.md` and `hiroshima.md` (4/4 each). Licences pending: MHLW's (a read
+  is running), BODIK's CC BY and Hiroshima's PDL 1.0. **No band moved**: the
+  unaddressed share is a disclosure for the owner to accept or not.
+- **The last overnight re-probe batch and Riga's follow-up were recorded in
+  their gap rows, with recommendations and no band moved.** Hyderabad is
+  geo-blocked to India (Band D recommended). Naples, Lima and Messina are
+  negative on two methods (discard recommended). Santiago is still thin:
+  Providencia publishes a current licence register under the transparency law,
+  but the downtown comuna does not. Riga has Amsterdam's two-layer shape: its
+  premise groups place at 99.5% through the building number, but its only
+  vacancy figure is 20.4%, centre-only.
+
+### 2026-09-24 - The owner's answers to the overnight question points; Sendai's lists need permission
+
+- **The owner answered the overnight run's open question points on waking,
+  and six rows left the open screening gap.** Each answer and where it went:
+  - **Japan.** The fault-based cost clauses were **accepted** as the Taiwan,
+    Rio and IBGE class: Tokyo Open Data Terms §6, Chūō §5 and Sapporo's
+    platform terms 第9条3. **Osaka**'s current food CSV rests on the CC-BY
+    notice on the page that links it, **accepted**. **Shinjuku**'s 2023-01-01
+    snapshot is used with its vintage disclosed. **Food retail**, where a ward
+    publishes 届出, is a disclosed partial bucket, never extrapolated. The
+    **Economic Census**'s 飲食店 count is the food control for every Japanese
+    city, not OSM, after Shinjuku read 6.0× OSM. For **Tokyo's scope**, the
+    wards' own sites are read first (19 wards without a catalogue file,
+    central first), and the scope is decided after. **Taitō**'s own list is
+    re-fetched under the raised bounds, reading only 営業所所在地, 業種 and
+    屋号. Briefs updated: `tokyo.md`, `sapporo.md`, `osaka.md`.
+  - **Re-probes.** Kuala Lumpur, Athens, Poznań and Bratislava went to the
+    discards, kind absence, each on two or more methods with the city's own
+    host asked. **Hamburg** went on currency: a 2016 retail survey and
+    nothing else, Turin's shape. **Warsaw** went to **Band D**. It is weaker
+    than Kaohsiung's shape, because it was blocked BEFORE anything was
+    measured, so its row says the first step is a read from inside Poland.
+    **Vienna stays in the gap**, the owner's choice, although its two-method
+    negative would pass `check_discard_evidence.py`. The counts are now:
+    candidates 33 (D 2), gap 11, discarded 21. The check reads all 21 rows OK.
+  - **Further probes.** Riga gets one more probe: place the cadastre premise
+    groups through the building number, and find a vacancy rate. Rotterdam
+    is re-probed and stays in the gap if nothing new turns up. **Tallinn**:
+    the owner places the building-register order, since it carries an
+    e-mail, and was sent the order page
+    (`livekluster.ehr.ee/ui/ehr/v1/infoportal/reports`).
+  - **Standing rule.** A read-only API POST (GraphQL or search) now counts as
+    a GET. Web forms, and anything carrying an e-mail, a name or a login, do
+    not. Recorded in `reprobe-city` Step 2, where the next re-probe agent
+    reads it.
+- **Found Sendai's lists are NOT open data: the city's site default bars
+  reuse without permission, and no page overrides it.** Sendai has not
+  adopted CC BY 4.0 site-wide, unlike Osaka, Kobe and Sapporo. Its open-data
+  files carry a per-file CC BY badge, and these two list links carry none.
+  Neither list is in the city's 5,907-row catalogue or on Miyagi's portal, and
+  the files hold no notice of their own. The "facts are not 著作物" reading was
+  recorded and NOT relied on, per `read-licence`. The owner's rule was: if
+  the terms are clear, draft a request, otherwise probe further at the end of
+  the queue. They were judged clear, so a formal Japanese request to
+  健康福祉局生活衛生課 was drafted for the owner to send. Sendai waits at the
+  end of the Japanese cities. **Disclosed slip**: the scan for a file-level
+  notice selected rows by a wrong filter and printed the first two data rows
+  of each food sheet, operator names included, to the session. Nothing was
+  written to disk, and the script was deleted.
 ### 2026-09-24 - Rome: the Roma-Viterbo urban service drawn, Metromare not (owner, on the DART / S-tog test)
 
 - **Rome draws COTRAL's Roma-Viterbo urban service (Flaminio-Montebello)
@@ -385,6 +523,57 @@ onwards; the early ones are split by phase rather than by hour.
   `pipeline/rome/config.py`, `pipeline/rome/step1_stations.py`,
   `outputs/rome/`, `docs/data_sources.md`.
 
+### 2026-09-24 - Amsterdam: the owner's calls, and the page text written
+
+- **The owner approved Amsterdam's page text, notice 35 and its
+  `excluded_categories.md` section as drafted, and took both open calls as
+  recommended (2026-09-24, morning).** The drafts were written overnight in
+  unattended mode and approved in one pass with Rome's. **Scope: gemeente
+  only**, although tram 6 keeps 5 of its 16 stops (31%) - between Lille's
+  3 of 36, which went regional, and Toulouse's T1 at 52%, which stayed
+  commune-only; regional would have needed Amstelveen's own hospitality
+  permits, a new source. The line is drawn whole and counted only inside the
+  city, which the page says. **Phone labels: shipped with 11 overlapping pairs
+  of the 21 line labels at 375 px** (clean at desktop). Per-line label ends
+  were tried and made it worse (14), so the fix is a phone-specific label
+  layout for every city - added to PLAN's existing app/chrome item rather
+  than tuned here. Notice 35 credits the Gemeente under CC BY 4.0 (the
+  register's own licence is SILENT; the owner's choice of 2026-09-24), and the
+  OpenStreetMap notice now names Amsterdam's city boundary beside Prague's.
+  Files: `app/pages/29_Amsterdam_Heatmap.py` (with a snapshot caption read
+  from `outputs/amsterdam/provenance.json`), `app/components.py`,
+  `app/cities.py`, `docs/data_sources.md`, `docs/excluded_categories.md`,
+  `docs/city_master_list.md`, `docs/project_context.md`, `PLAN.md`.
+
+### 2026-09-24 - Sendai joined at 95.1% block; MLIT's 小字 column places 字 addresses
+
+- **Found Sendai's food list joins to MLIT's block file at 95.1%, with 0.0%
+  unplaced, and an independent check agrees at a median 34 m.** The owner
+  approved adding `openpyxl` (question 11), because Sendai publishes XLSX
+  inside ZIPs. It went in `requirements-pipeline.txt`, never `requirements.txt`.
+  `screen_japan_join.py` gained a row reader for CSV, XLSX and XLSX-in-ZIP
+  (`file.zip::part` picks members); cp932 member names without the UTF-8 flag
+  are decoded. **Row count reconciled against the workbook's own summary sheet:
+  14,724 = 14,724.** The first pass placed 81.3% at block and left 9.0%
+  unplaced, and both were misreadings rather than data. (1) **1,260 festival
+  and event stalls** are addressed `仙台市内一円` ("anywhere in the city"). The
+  not-a-premises rule matched only Osaka's `市内一円`, so it now matches any
+  `一円` address. Checked across all six city keys: the only other rows it
+  moves are Kobe's 21 storeless laundry pick-up services at `神戸市内一円`,
+  correctly (Kobe personal services 5,014 to 4,993). (2) **字 addresses**
+  (`福室字境４番`): MLIT's block file keeps the 字 in `小字・通称名` (21,768 of
+  47,466 Sendai rows), so the 地番 is now also keyed under 大字 + 字 + 小字.
+  Sendai food went from 81.3% to **95.1%** block and personal services to
+  **96.5%**. **Kobe rose from 95.7% to 96.5%** (personal services 96.3% to 97.3%),
+  and its brief was corrected in the same commit. The Minato control (99.8%),
+  Osaka (99.1%) and Sapporo (84.5%) are unchanged. The rejected alternative was
+  leaving 字 rows at the 大字 centroid, as Kobe's rule did: that costs
+  hundreds of metres in the rural 大字 where these rows sit, for a lookup that
+  was one column away. Independent check: Sendai publishes no coordinates, so
+  150 seeded block hits went to GSI's address search. All 150 answered, median
+  34 m, all within 250 m. `run_city` now accepts `--gsi N`. Brief:
+  `docs/build_briefs/sendai.md` (4/4). The city's licence was not declared on
+  either page, and its read is in progress.
 ### 2026-09-24 - Rome built on its branch: 98,897 storefronts, 73 stations
 
 - **Rome is built on `rome-build`, Italy's second city: 98,897 storefronts
@@ -468,6 +657,93 @@ onwards; the early ones are split by phase rather than by hour.
   left out under the commuter-rail rule; the food over-count (recommended:
   state it, no cut-off). Trams (five lines) are left out under the standing
   test - they run over the metro in the centre.
+### 2026-09-24 - Amsterdam built on its branch: 13,238 storefronts, 144 stations
+
+- **Amsterdam is built on `amsterdam-build`, the Netherlands' first city:
+  13,238 storefronts around 144 stations, 95.5% within a ring.** The row
+  counts, the drift baseline (zero drift offline):
+  - **step 1** - GVB's 21 rail lines read out of OVapi's national GTFS
+    (36,751 trips) -> each line's REGULAR route, 225 stop places -> 203 inside
+    gemeente 0363 -> **144 stations** after the sub-transit-line filters (59
+    tram stops thinned, every one recorded with its nearest kept station).
+    Gate 3 exact on the metro against English Wikipedia (secondary): 20 / 19 /
+    8 / 14 / 15, 39 network-wide.
+  - **step 2** - permits 4,092 -> **3,605** by the owner's mapping -> 3,583
+    placed (92 of the 114 with no point placed through the BAG by street and
+    number, 22 unplaceable); BAG shop-class units 11,607 -> 10,898 in use ->
+    **10,141** without the 757 also registered as dwellings -> **9,655** after
+    **486** de-duplicated against a permit at the same address.
+  - **step 3** - 12,648 within a ring, 590 outside.
+
+- **Four owner's calls, 2026-09-24**: **metro AND trams** (recommended metro
+  only; the owner took Oslo's precedent - Amsterdam's metro barely enters the
+  canal ring); the **permit mapping** as recommended (in: restaurants, cafés,
+  alcohol-free, fast food, eethuis, coffeeshops, nightclubs, `Onbekend` sorted
+  by its own specification; out: `Additionele horeca` - 318 sports-club
+  canteens, community centres and theatre foyers - cultural venues, members'
+  societies, hotels, hall hire); **shop units also registered as a dwelling
+  left off** (757, Prague's own-seat precedent); and the **unattended build
+  mode** for the night (recorded in memory, not here).
+
+- **Decided on measurement, each flagged to the owner and each one line to
+  reverse:**
+  - **The CC0-labelled national file** (`gtfs.openov.nl/gtfs-rt/gtfs-openov-
+    nl.zip`) rather than the usual `gtfs-nl.zip`, whose README grants only
+    "free to use"; same feed minus AVV and Thalys. `licence-read`: PERMITTED
+    WITH CONDITIONS, CC0 upstream. Avoids the README question rather than
+    answering it in the project's favour.
+  - **A line's stations are its regular route** - stops served on at least
+    half the line's days in the window. GVB runs up to 30 shapes per line
+    here; metro 50's most-used shape covers 11 of its 20 stations, and a
+    works diversion put 22 stops on tram 7 that it does not normally serve.
+    Rejected: the most-used shape (misses whole stretches), any single date
+    (every date tried was someone's odd one out).
+  - **A GVB stop name is a street, not a place** - "Jan van Galenstraat" is a
+    metro station and a tram stop 1.6 km apart, and three trams each have a
+    "Prinsengracht". Each name's platforms split into places by 300 m single
+    linkage; none spans more than 400 m.
+  - **Gate 1 at 200 m**, Paris's and Marseille's value, not a new number: the
+    collapsed tram network's median is 333 m.
+  - **128 permits past their end date are KEPT.** All ended July-September
+    2026, all still `Verleend`, and nothing that ended earlier is in the
+    register - the city prunes with a lag of about three months, so these
+    read as renewals in progress. `einddatum` ends a permit's term, not the
+    business. Rejected: dropping them (would remove La Madonnina on
+    Rembrandtplein, Café De Walvis). `config.KEEP_PERMITS_PAST_END_DATE`.
+  - **Tram colours from GVB's own map** (`GVB_railnetwerk_31aug_2026.pdf`,
+    the fill of each line badge, its text decoded through the PDF's font
+    encoding), downloaded with the owner's permission; the feed has none and
+    OSM's are unusable. GVB gives 6 and 25 one red and 19 and 29 one orange,
+    so five trams move in HSL lightness only - 6 -0.10, 25 +0.04, 24 +0.04,
+    26 -0.06, 29 +0.18 - the metro keeping GVB's colour (Oslo's rule), the
+    lower-numbered tram keeping it between two trams.
+  - **Lille's Overview label turned up and west**, because its pill covered
+    Amsterdam's marker at every width; `check_macro_labels.py` PROBLEMS 0.
+
+- **Privacy verdict, from `check_personal_exposure.py amsterdam`: publish.**
+  0 e-mails, 0 phone numbers, 0 c/o markers, 0 person-like names at a
+  residential unit; no owner column exists to fall back to. The heuristic
+  flags 781 pins (6.2%), every one a permit's trade name - a sample of 60 is
+  shop and restaurant names (FEBO Zeilstraat, Coffeeshop Nagtegaal, La
+  Madonnina), some carrying a surname as the trade name (Café Van Daele), as
+  in Oslo and Copenhagen. The BAG layer carries no name at all.
+
+- **Checked in the browser**: check_map_view 12/12 at 1280 and 10.75/10.75
+  at 375, 0 corrections; all 21 labels clear at 1280; the basemap credit
+  uncovered at 1000x650, 1280x768 and 375x812 with the legend clamp in force.
+
+- **Two questions put to the owner, not decided:**
+  - **Scope. Tram 6 keeps 5 of its 16 stops inside the gemeente (31%)** -
+    the other 11 are in Amstelveen - between Lille's 3 of 36 (made regional)
+    and Toulouse's T1 at 52% (kept commune-only). Built gemeente-only, the
+    brief's expectation, because the permit register is Amsterdam's own: a
+    regional scope needs Amstelveen's permits, a new source. Tram 25 keeps 18
+    of 32 (56%); every other line 62% or more.
+  - **Phone-width labels.** At 375 px, 11 pairs of the 21 line labels
+    overlap - the shared renderer lays labels out once, for the 1000 px
+    canvas, and a phone layout is an open PLAN item. Per-line label ends
+    were tried and made it worse (14). This is the cost the owner accepted
+    with trams; the choices are shared-renderer work or fewer drawn lines.
 
 ### 2026-09-24 - Prague deployed; the live site measured after the reboot
 

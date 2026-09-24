@@ -1,0 +1,57 @@
+{
+  "permits": {
+    "file": "horeca_exploitatievergunning.json",
+    "url": "https://api.data.amsterdam.nl/v1/horeca/exploitatievergunning/",
+    "bytes": 5247388,
+    "sha256": "3707aecffbd47b9d7bc22d806b4da6a2210d51a03b397f7ae221c6b7ac31f0bc",
+    "retrieved": "2026-09-24T09:33:39+00:00",
+    "records": 4092
+  },
+  "bag_units": {
+    "file": "bag_verblijfsobjecten_winkelfunctie.json",
+    "url": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/?gebruiksdoel.omschrijving=winkelfunctie",
+    "bytes": 28672100,
+    "sha256": "de0aa9298c63ca2c2c849bf95466b1170096643cf6d1d2731e6d078a48d3688b",
+    "retrieved": "2026-09-24T09:37:30+00:00",
+    "records": 11607
+  },
+  "bag_addresses": {
+    "file": "bag_nummeraanduidingen.json",
+    "url": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/",
+    "bytes": 19967387,
+    "sha256": "9b0fb4f66007a720bbc8be2a9d68c6ba0d220e524fe61dedf1a0ba44aadd396f",
+    "retrieved": "2026-09-24T09:39:39+00:00",
+    "records": 10898
+  },
+  "bag_streets": {
+    "file": "bag_openbareruimtes.json",
+    "url": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/",
+    "bytes": 4417586,
+    "sha256": "cad5c6e9abb7bb8a5e4951f31657e1b3aafe02f85819d89c97f784567a90e968",
+    "retrieved": "2026-09-24T09:39:55+00:00",
+    "records": 1190
+  },
+  "bag_permit_lookup": {
+    "file": "bag_permit_address_lookup.json",
+    "url": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/",
+    "bytes": 2720211,
+    "sha256": "ec29b6743cc8f12a0e31b2c100083e04bc2d14dd2a166eda96340ccf2c913d09",
+    "retrieved": "2026-09-24T09:58:46+00:00",
+    "records": 492
+  },
+  "permits_snapshot": "2026-09-24",
+  "gtfs": {
+    "file": "gtfs-openov-nl.zip",
+    "url": "https://gtfs.openov.nl/gtfs-rt/gtfs-openov-nl.zip",
+    "bytes": 242421105,
+    "sha256": "57a07bc481bb02e25d8660fe13d4d7cefceded437ef1392cfaffcb019879f57c",
+    "retrieved": "2026-09-24T09:44:24+00:00"
+  },
+  "gtfs_feed_info": {
+    "feed_start_date": "20260923",
+    "feed_end_date": "20261212",
+    "publisher": "OVapi",
+    "version": "gtransit_chb:1.0.3:9601"
+  },
+  "osm_host": "overpass-api.de"
+}

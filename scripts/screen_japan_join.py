@@ -232,10 +232,71 @@ CITIES = {
                                      "osaka/raw/cleaning20260331.csv"], "osaka/raw/isj"),
     "kobe-life": ("兵庫県", "神戸市", ["kobe/raw/r7_riyousho.csv", "kobe/raw/r7_biyousho.csv",
                                      "kobe/raw/r7_cleaning.csv"], "kobe/raw/isj"),
+    # Sendai publishes XLSX inside ZIPs: food as one sheet per ward office (plus
+    # the 食品監視センター's), and nine 生活衛生 workbooks in one ZIP - "::" picks members.
+    "sendai": ("宮城県", "仙台市", ["sendai/raw/r7shokuhinichiran.zip"], "sendai/raw/isj"),
+    "sendai-life": ("宮城県", "仙台市", ["sendai/raw/260331.zip::4_理容所", "sendai/raw/260331.zip::5_美容所",
+                                      "sendai/raw/260331.zip::6_クリーニング所"], "sendai/raw/isj"),
+    # Fukuoka's and Hiroshima's own lists stop where online filing starts (2021-06 /
+    # 2023-08); MHLW's 食品衛生申請等システム open data carries the online filings
+    # (opt-in, per-field disclosure, publisher's lat/lon).
+    "fukuoka": ("福岡県", "福岡市", ["fukuoka/raw/r8.7.csv"], "fukuoka/raw/isj"),
+    "fukuoka-mhlw": ("福岡県", "福岡市", ["mhlw/raw/40130_food_business_all.csv"], "fukuoka/raw/isj"),
+    "fukuoka-life": ("福岡県", "福岡市", ["fukuoka/raw/202609011129.csv", "fukuoka/raw/202609011112.csv",
+                                       "fukuoka/raw/202604011019.csv"], "fukuoka/raw/isj"),
+    "hiroshima": ("広島県", "広島市", ["hiroshima/raw/5080331-2.xlsx"], "hiroshima/raw/isj"),
+    "hiroshima-mhlw": ("広島県", "広島市", ["mhlw/raw/34100_food_business_all.csv"], "hiroshima/raw/isj"),
 }
-ADDR_COLS = ("施設所在地", "営業所所在地", "所在地_連結表記")
-TYPE_COLS = ("業種名", "業種分類", "業種情報公開名称", "営業の種類", "業種区分")
-NAME_COLS = ("屋号", "施設名称")
+ADDR_COLS = ("施設所在地", "営業所所在地", "所在地_連結表記", "営業所住所", "営業施設所在地",
+             "営業所所在地（所在地_連結標記", "施設所在地（所在地_連結標記）")
+TYPE_COLS = ("業種名", "業種分類", "業種情報公開名称", "営業の種類", "業種区分", "営業種類", "施設（種別）", "種別", "業種", "業務種別")
+NAME_COLS = ("屋号", "施設名称", "営業施設名称、屋号又は商号")
+
+
+def xlsx_rows(data):
+    """Every sheet that has an address column, header found by that column (a
+    sheet may open with title rows). Summary sheets without one are skipped."""
+    import openpyxl
+    wb = openpyxl.load_workbook(io.BytesIO(data), read_only=True, data_only=True)
+    for ws in wb.worksheets:
+        head = None
+        for r in ws.iter_rows(values_only=True):
+            cells = ["" if c is None else str(c).replace("\n", "").strip() for c in r]
+            if head is None:
+                if any(c in ADDR_COLS for c in cells):
+                    head = cells
+                continue
+            if any(cells):
+                yield dict(zip(head, cells))
+
+
+def zip_member_name(info):
+    """Japanese member names without the UTF-8 flag are cp932 read as cp437."""
+    if info.flag_bits & 0x800:
+        return info.filename
+    try:
+        return info.filename.encode("cp437").decode("cp932")
+    except (UnicodeEncodeError, UnicodeDecodeError):
+        return info.filename
+
+
+def city_rows(path):
+    """Rows as dicts from a CSV, an XLSX, or XLSX members of a ZIP
+    ('file.zip::part' keeps only members whose name contains part)."""
+    path, _, part = str(path).partition("::")
+    if path.lower().endswith(".zip"):
+        with zipfile.ZipFile(path) as zf:
+            for info in zf.infolist():
+                nm = zip_member_name(info)
+                if nm.lower().endswith(".xlsx") and part in nm:
+                    yield from xlsx_rows(zf.read(info))
+        return
+    if path.lower().endswith(".xlsx"):
+        yield from xlsx_rows(Path(path).read_bytes())
+        return
+    text = decode(Path(path).read_bytes())
+    delim = "\t" if text.split("\n", 1)[0].count("\t") > text.split("\n", 1)[0].count(",") else ","
+    yield from csv.DictReader(io.StringIO(text), delimiter=delim)
 
 
 def load_city_isj(isj_dir):
@@ -248,6 +309,12 @@ def load_city_isj(isj_dir):
             pt = (float(r["緯度"]), float(r["経度"]), r["住居表示フラグ"])
             if r.get("代表フラグ") == "1" or key not in blocks:
                 blocks[key] = pt
+            # Sendai's 字 addresses (福室字境４番) - MLIT keeps the 字 in 小字・通称名,
+            # so the same 地番 is also keyed under 大字 + 字 + 小字.
+            if r.get("小字・通称名"):
+                akey = (ward, norm_town(r["大字・丁目名"] + "字" + r["小字・通称名"]), key[2])
+                if r.get("代表フラグ") == "1" or akey not in blocks:
+                    blocks[akey] = pt
     for z in sorted(Path(isj_dir).glob("*-19.0b.zip")):
         for r in read_zip_csv(z):
             chome[(r["市区町村名"].split("市")[-1], norm_town(r["大字町丁目名"]))] = (float(r["緯度"]), float(r["経度"]))
@@ -257,10 +324,8 @@ def load_city_isj(isj_dir):
 def load_city_permits(path, pref, city):
     """Own-format city lists: one address string naming the ward. Reads only the
     premises columns - never 営業者名 / 申請者名 / 開設者 (people)."""
-    text = decode(Path(path).read_bytes())
-    delim = "\t" if text.split("\n", 1)[0].count("\t") > text.split("\n", 1)[0].count(",") else ","
     out = []
-    for r in csv.DictReader(io.StringIO(text), delimiter=delim):
+    for r in city_rows(path):
         addr = next((r[c] for c in ADDR_COLS if (r.get(c) or "").strip()), "")
         a = unicodedata.normalize("NFKC", addr).replace(" ", "").replace("　", "")
         a = re.sub("^" + pref, "", a)
@@ -287,7 +352,9 @@ def load_city_permits(path, pref, city):
                     "dir": (d.group(1), d.group(2)) if d else None,
                     "addr": addr, "type": next((r[c] for c in TYPE_COLS if r.get(c)), ""),
                     "name": next((r[c] for c in NAME_COLS if r.get(c)), ""), "pub": pub,
-                    "mobile": addr.strip() in ("", "市内一円") or "自動車" in next((r[c] for c in TYPE_COLS if r.get(c)), "")})
+                    # not a premises: vehicles, and 市内一円 / 仙台市内一円 ("anywhere in
+                    # the city") - Sendai's festival stalls (仮設, 臨時) are written so
+                    "mobile": not addr.strip() or "一円" in addr or "自動車" in next((r[c] for c in TYPE_COLS if r.get(c)), "")})
     return out
 
 
@@ -353,15 +420,18 @@ def haversine_m(a, b):
     return 2 * 6371000 * math.asin(math.sqrt(h))
 
 
-def gsi_check(permits, n):
+def gsi_check(permits, n, prefix=""):
     """Second method: GSI's keyless AddressSearch on a random sample of block
-    hits, at 1 request per second. Distance from ISJ's block point."""
+    hits, at 1 request per second. Distance from ISJ's block point. prefix
+    restores the prefecture and city where a list's addresses start at the ward."""
     import truststore
     truststore.inject_into_ssl()
     sample = random.Random(20260924).sample([p for p in permits if p["tier"] == "block"], n)
     dists, fails = [], 0
     for p in sample:
         q = unicodedata.normalize("NFKC", p["addr"]).split(" ")[0]
+        if prefix and not q.startswith(prefix):
+            q = prefix + q
         url = "https://msearch.gsi.go.jp/address-search/AddressSearch?q=" + urllib.parse.quote(q)
         try:
             with urllib.request.urlopen(urllib.request.Request(
@@ -386,7 +456,11 @@ def main():
     sys.stdout.reconfigure(encoding="utf-8")
     key = sys.argv[1] if len(sys.argv) > 1 else "minato"
     if key in CITIES:
-        run_city(key, "--misses" in sys.argv)
+        ps = run_city(key, "--misses" in sys.argv)
+        if "--gsi" in sys.argv:
+            pref, city = CITIES[key][:2]
+            gsi_check([p for p in ps if not p["mobile"]], int(sys.argv[sys.argv.index("--gsi") + 1]),
+                      prefix=pref + city)
         return
     code, muni, permit_csv, bz, cz = MUNICIPALITIES[key]
     blocks, chome = load_isj(DATA / bz, DATA / cz)

@@ -9,8 +9,8 @@ the `address-join` skill, measured by `scripts/screen_japan_join.py kobe`.
 ## The one-line summary
 
 **A city-wide food-permit list (24,761 fixed premises, as of 2026-03-31)
-joined to MLIT's block-level address files at 95.7% (99.0% placed); the misses
-are mountain addresses on Rokkō-san.** Personal services 5,014. ⚠️ The list
+joined to MLIT's block-level address files at 96.5% (99.0% placed); the misses
+are mountain addresses on Rokkō-san.** Personal services 4,993. ⚠️ The list
 leaves out notification-only food businesses (届出), which the city's own page
 says; MHLW's national open data is the route to them.
 
@@ -25,7 +25,8 @@ says; MHLW's national open data is the route to them.
 | Also | monthly new-permit CSVs; a stale 2021 full list (`r30531_all_.csv`) beside it — do not use |
 
 **Personal services**: `r7_riyousho.csv`, `r7_biyousho.csv`, `r7_cleaning.csv`
-(same folder, **tab-separated** despite the .csv name) — **5,014 premises**.
+(same folder, **tab-separated** despite the .csv name) — **4,993 premises**
+(plus 21 storeless laundry pick-up services at `神戸市内一円`, not premises).
 
 ### Taxonomy — `業種情報公開名称` (43 types)
 
@@ -43,15 +44,19 @@ says; MHLW's national open data is the route to them.
 MLIT files for the **9 wards** (28101 東灘, 28102 灘, 28105 兵庫, 28106 長田,
 28107 須磨, 28108 垂水, 28109 北, 28110 中央, 28111 西).
 
-| Tier | Food (24,761) | Personal services (5,014) |
+| Tier | Food (24,761) | Personal services (4,993) |
 |---|---|---|
-| Block | **95.7%** | **96.3%** |
-| Town-chōme / 大字 centroid | 3.3% | 2.8% |
-| Unplaced | 1.0% | 0.9% |
+| Block | **96.5%** | **97.3%** |
+| Town-chōme / 大字 centroid | 2.6% | 2.2% |
+| Unplaced | 1.0% | 0.5% |
 
-**Rule from Kobe's misses**: hill addresses name a 字 inside the 大字
-(`山田町上谷上字古々山`) — MLIT's town-chōme file knows the 大字, so they take
-its centroid. The unplaced are **Rokkō-san** (六甲山町北六甲 / 南六甲) and
+*(Re-measured 2026-09-24 after Sendai's rule below: block was 95.7% / 96.3%.)*
+
+**Rules from Kobe's misses**: hill addresses name a 字 inside the 大字
+(`山田町上谷上字古々山`). **Sendai's rule placed a share of them at block
+level**: MLIT's block file keeps the 字 in its `小字・通称名` column, so the
+地番 is also keyed under 大字 + 字 + 小字. The rest take the 大字's
+town-chōme centroid. The unplaced are **Rokkō-san** (六甲山町北六甲 / 南六甲) and
 `新港町1丁目` (reclaimed land) — far from any station either way.
 
 ## 🚇 Rail — MLIT N02, commuter rail INCLUDED (owner, 2026-09-24)
@@ -66,12 +71,24 @@ them. ⚠️ Open: the Shinkansen (Shin-Kobe). See `docs/commuter_rail_list.md`.
 Ashiya and Nishinomiya — the stations beyond the city line fall outside;
 owner's call at build.
 
-## ⏳ Licences
+## ✅ Licences — READ 2026-09-24
 
 - **MLIT 位置参照情報 — PERMITTED WITH CONDITIONS** (PDL 1.0) — the prescribed
   出典 and 「…を加工して作成」; never presented as MLIT's own.
-- **Kobe City permit data** — licence-read PENDING (catalogue "CC 表示",
-  unversioned; the city page labels files CC BY 2.1 JP).
+- **Kobe City permit data — PERMITTED WITH CONDITIONS, no owner decision.**
+  **CC BY 2.1 JP governs** (the city page's badge on each CSV; the portal
+  policy's 「表示」 links 2.1 JP and adds 「必ず神戸市の著作物あるいはデータを使用した旨を記載してください」);
+  Kobe's website terms (Government Standard Terms 2.0: 「…商用利用も可能です。」)
+  also plausibly apply and do not conflict. **MUST DISPLAY**:
+  `出典：「生活衛生関係許可施設等の情報提供」（神戸市）（https://www.city.kobe.lg.jp/a99427/kenko/health/hygiene/dataset.html）`,
+  `…を加工して作成`, the CC BY 2.1 JP link, and © City of Kobe kept intact.
+  **MUST NOT**: look as if the city made it (「あたかも本市が作成したかのような態様で…」);
+  city logos; **claim the pins are businesses currently open** (the page warns
+  closed ones may remain). **If the city asks, remove the credit** (2.1 JP
+  art. 5). **No indemnity or cost clause.** CC BY 2.1 JP bars sublicensing —
+  **already covered**: the repository's `LICENSE` (lines 27–59) limits the MIT
+  grant to the project's own code and says nothing in it permits
+  redistributing any third party's data.
 - **MLIT N02** — PDL 1.0.
 
 ## Privacy
@@ -85,7 +102,6 @@ owner's call at build.
 
 ## Still unknown
 
-- ⏳ Kobe's licence terms (and which CC BY version governs).
 - ⚠️ Notification-only businesses (届出) are missing — MHLW's national open data.
 - ⚠️ 菓子製造業 / そうざい製造業 — counter shops or not.
 - ⚠️ Stations outside the city; Shinkansen.

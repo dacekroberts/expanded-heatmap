@@ -25,7 +25,7 @@ organization `t` + its six-digit municipal code (Minato `t131032`).
 | Ward | Food file | Fixed premises | Encoding / quirk | Vintage |
 |---|---|---|---|---|
 | **Minato** | `food_business_all.csv` (opendata.city.minato.tokyo.jp), 2,332,997 B | **5,618** (+103 mobile) | UTF-8; split address columns 98% | **2026-07-31** |
-| **Shinjuku** | `000399975.csv` (www.city.shinjuku.lg.jp), 4,445,074 B | **14,418** (+309 mobile) | **UTF-16 LE**; whole address in 町字 (`新宿3-14-1`) | ⚠️ **2023-01-01 snapshot** |
+| **Shinjuku** | `000399975.csv` (www.city.shinjuku.lg.jp), 4,445,074 B | **14,418** (+309 mobile) | **UTF-16 LE**; whole address in 町字 (`新宿3-14-1`) | ⚠️ **2023-01-01 snapshot**: use it with the vintage disclosed (owner, 2026-09-24); check the ward's page for a newer file at build |
 | **Chūō** | `syokuhineigyoukyoka.csv` (www.city.chuo.lg.jp), 513,187 B | **2,548** | cp932; split columns EMPTY — parse `所在地_連結表記` | catalogue 2025-12 |
 | **Kōtō** | `131083_015_food_business_all.csv` (metropolitan portal), 867,166 B | **1,713** (+43 mobile) | UTF-8 | catalogue 2025-12 |
 
@@ -40,7 +40,7 @@ BODIK, deferred). Beauty 10,265 · barber 1,899 · laundry 2,723.
 | Bucket | Types |
 |---|---|
 | Food service | 飲食店営業 (Shinjuku 12,603 · Minato 4,781 · Chūō 1,319 · Kōtō 525), 喫茶店営業 |
-| **Food retail — only where a ward publishes 届出** | Chūō / Kōtō: その他の食料・飲料販売業 (467 / 437), コンビニエンスストア (127 / 138), 百貨店、総合スーパー (38 / 65), 野菜果物販売業, 魚介類販売業, 食肉販売業 |
+| **Food retail — only where a ward publishes 届出**: a disclosed PARTIAL retail bucket, never extrapolated to wards that don't publish it (owner, 2026-09-24) | Chūō / Kōtō: その他の食料・飲料販売業 (467 / 437), コンビニエンスストア (127 / 138), 百貨店、総合スーパー (38 / 65), 野菜果物販売業, 魚介類販売業, 食肉販売業 |
 | Personal services | the 生活衛生 registers |
 | **Out** | 飲食店営業（自動車）and 都内一円 (food trucks), （臨時）, （屋形船）, 集団給食施設 (institutional catering), 行商, manufacturing (菓子製造業, そうざい製造業… — `premises-taxonomy` decides which sell over a counter), vending machines |
 
@@ -77,7 +77,8 @@ Shinjuku: **12,446** distinct 飲食店営業 premises vs OSM **2,068**
 (restaurant + fast_food + cafe + food_court + ice_cream) = **6.02×**; 4.77×
 with bars and pubs. OSM is plausibly thin in multi-storey bar districts —
 ASSERTED. **Use the Economic Census's per-ward 飲食店 count as the
-like-for-like control at build**, not OSM.
+like-for-like control at build**, not OSM. **Decided by the owner, 2026-09-24**,
+for every Japanese city.
 
 ---
 
@@ -103,6 +104,12 @@ ward, Shibuya and Ikebukuro. **Options**: a *core wards* regional scope that
 names the gap on the page; the personal-services layer across its 11 wards
 with food only where published (the page says which); or wait.
 
+▶ **Owner, 2026-09-24: second method first.** Each of the 19 wards without a
+catalogue food file gets its own site read, central wards first, and the scope
+is decided after. **Taitō's own list is approved** under the raised bounds,
+reading only 営業所所在地, 業種 and 屋号, never its operator columns. The pass
+was running when this was written.
+
 ## ✅ Licences — READ 2026-09-24
 
 - **MLIT 位置参照情報 — PERMITTED WITH CONDITIONS** (PDL 1.0 via the site
@@ -116,9 +123,9 @@ with food only where published (the page says which); or wait.
   use**, that the data was **processed**, the CC BY 4.0 link. **MUST NOT**:
   present anything as the ward's or Tokyo's own; use a ward logo. Shinjuku's
   own site says CC BY **2.1 JP** for the same file — the combined notice covers
-  both. 🚩 **OPEN (owner)**: Tokyo §6 / Chūō §5 — fault-based, uncapped
-  reimbursement of the publisher's costs arising from the user's breach; the
-  same class as Taiwan's OGDL §六(三), accepted there.
+  both. ✅ **ACCEPTED (owner, 2026-09-24)**: Tokyo §6 / Chūō §5 — fault-based,
+  uncapped reimbursement of the publisher's costs arising from the user's
+  breach; the same class as Taiwan's OGDL §六(三), Rio's and IBGE's.
 - **MLIT N02** — PDL 1.0, read 2026-09-21; attribution
   `「国土数値情報（鉄道データ）」（国土交通省）をもとに作成`.
 
@@ -137,10 +144,9 @@ run `check_personal_exposure.py`.
 
 ## Still unknown
 
-- 🚩 **Scope** — which wards, and how the gap is stated.
-- 🚩 **Tokyo §6 / Chūō §5** — accept the fault-based cost clause.
-- ⚠️ Shinjuku's 2023 vintage — a newer file on the ward's own page?
-- ⚠️ The Economic Census control; the 13 wards whose own sites were not reached.
+- 🚩 **Scope**: which wards, and how the gap is stated. Decided after the wards' own sites are read (owner, 2026-09-24).
+- ⚠️ Shinjuku's 2023 vintage: a newer file on the ward's own page? (Used with its vintage disclosed if not.)
+- ⚠️ The Economic Census control's figures (the source is decided); the wards whose own sites are being read.
 - ⚠️ Shinkansen / limited-express-only lines; which N02 lines are "commuter".
 - ⚠️ Meguro's registers (BODIK) and Nakano's food file (a vendor map host) — deferred.
 

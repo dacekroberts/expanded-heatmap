@@ -65,12 +65,23 @@ centroid them. See `docs/commuter_rail_list.md`.
 **Sapporo City (10 wards)**; JR lines run on to Otaru, Ebetsu and the airport
 (Chitose) — stations beyond the city fall outside; owner's call at build.
 
-## ⏳ Licences
+## ✅ Licences — READ 2026-09-24
 
 - **MLIT 位置参照情報 — PERMITTED WITH CONDITIONS** (PDL 1.0) — the prescribed
   出典 and 「…を加工して作成」; never presented as MLIT's own.
-- **Sapporo City permit data** — licence-read PENDING (catalogue declares
-  CC BY 4.0; the platform `ckan.pf-sapporo.jp` is the city's ICT platform).
+- **Sapporo City permit data — PERMITTED WITH CONDITIONS.** The platform is
+  the city's own (「札幌市が運営し」, `data.pf-sapporo.jp/tos/`, in force
+  2024-06-01; use = acceptance, 第1条); it defers to each dataset's licence
+  (第2条2): both `package_show` return **CC-BY-4.0**. **MUST DISPLAY** (no
+  wording prescribed): credit 札幌市, the two dataset titles and URLs, the
+  licence link, and that the data was processed — e.g.
+  「札幌市『札幌市内の食品営業許可施設一覧』『札幌市内の環境衛生営業施設一覧』（札幌市ICT活用プラットフォーム、CC BY 4.0）を加工して作成」.
+  **MUST NOT**: imply endorsement; use city logos (第4条); **call the pins
+  operating businesses** — the dataset's own note says permits may differ from
+  actual trading. **Fetch from `ckan.pf-sapporo.jp` only** — the city
+  website's copies fall under its copyright page. ✅ **ACCEPTED (owner,
+  2026-09-24)**: 第9条3 — uncapped compensation for damage from a prohibited
+  act, triggered by the user's breach; the same class as Tokyo §6.
 - **MLIT N02** — PDL 1.0.
 
 ## Privacy
@@ -85,7 +96,6 @@ Read only 屋号 / 施設名称, 業種名 and 施設所在地. Run `check_perso
 
 ## Still unknown
 
-- ⏳ Sapporo's licence terms.
 - ⚠️ 菓子製造業 / そうざい製造業 — counter shops or not.
 - ⚠️ Stations outside the city.
 

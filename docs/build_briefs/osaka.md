@@ -79,12 +79,24 @@ neighbouring cities (Sakai, Higashiōsaka, Moriguchi…) and the private
 railways run far beyond — check which stations fall outside at build; the
 Oslo *kommune only* precedent or a regional scope is the owner's call.
 
-## ⏳ Licences
+## ✅ Licences — READ 2026-09-24
 
 - **MLIT 位置参照情報 — PERMITTED WITH CONDITIONS** (PDL 1.0). **MUST
   DISPLAY**: `出典：位置参照情報ダウンロードサービス（国土交通省）（https://nlftp.mlit.go.jp/isj/）`
   and `…を加工して作成`; **MUST NOT** present placements as MLIT's own.
-- **Osaka City permit data** — licence-read PENDING (the portal declares CC-BY 4.0).
+- **Osaka City permit data — PERMITTED WITH CONDITIONS.** The city's
+  著作権・免責 page (`/main/site_policy/0000000124.html`, Government Standard
+  Terms 2.0, usable equally under CC BY 4.0): 「複製、公衆送信、翻訳・変形等の翻案等、自由に利用できます」,
+  commercial use allowed; each of the three source pages says
+  「CC-BY4.0で提供いたします。」 **MUST DISPLAY** (examples, not fixed wording):
+  `「食品営業許可施設一覧」（大阪市）（https://www.city.osaka.lg.jp/kenko/page/0000575579.html）を加工して作成`,
+  likewise for pages 0000431136 and 0000552712. **MUST NOT**: present the map as
+  the city's own (「あたかも大阪市が作成したかのような態様で」); city logos. No cost
+  clause. ✅ **ACCEPTED (owner, 2026-09-24)**: the current food CSV's licence
+  rests on the CC-BY notice on its own page. The portal's food record points to
+  a dead page and a 2021 file, and the terms' appendix bars reuse of attachments
+  that show no licence. The notice sits on the page that links the file, so it
+  covers it.
 - **MLIT N02** — PDL 1.0; `「国土数値情報（鉄道データ）」（国土交通省）をもとに作成`.
 
 ## Privacy
@@ -99,10 +111,9 @@ the barber / beauty lists an operator-name column. **Read only 屋号,
 
 ## Still unknown
 
-- ⏳ Osaka City's licence terms.
 - ⚠️ 菓子製造業 / そうざい製造業 — which are counter shops.
 - ⚠️ Scope beyond the city line; Shinkansen.
-- ⚠️ A like-for-like food control (the Economic Census per ward), as for Tokyo.
+- ⚠️ The like-for-like food control's figures: the Economic Census per ward (source decided by the owner, 2026-09-24).
 
 ```brief-checks
 [
