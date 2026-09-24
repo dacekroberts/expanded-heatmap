@@ -103,6 +103,7 @@ TAXONOMY_MODULES = {
     # groupe level puts 49.4% of Paris in "other" against 19.3% at level 5.
     "france_naf": "pipeline.taxonomies.france_naf",
     "norway_sn2025": "pipeline.taxonomies.norway_sn2025",
+    "denmark_db25": "pipeline.taxonomies.denmark_db25",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

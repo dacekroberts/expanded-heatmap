@@ -1,9 +1,31 @@
 # Copenhagen — build brief
 
 **Step 0 measured 2026-09-23, from the real files rather than from metadata.**
-The four CVR downloads are on disk at `data/copenhagen/raw/` (2.00 GB,
-gitignored). Run `python scripts/brief_check.py copenhagen` before writing any
-code for this city.
+The four CVR downloads were measured in the staging worktree (2.00 GB,
+gitignored, generation 505); the build copied them into the national cache at
+`data/denmark/raw/cvr/`. Run `python scripts/brief_check.py copenhagen` before
+writing any code for this city.
+
+## 🔧 Corrected by the build, 2026-09-24 — read this before the rest
+
+The build found four claims below wrong and resolved every owner call. The
+sections below are kept as written, with each correction marked where it
+lands; `DECISIONS.md`, *"Copenhagen opened: four owner calls"*, has the
+evidence.
+
+| Brief said | Measured | Consequence |
+|---|---|---|
+| Taxonomy is **DB07** | **DB25** (NACE Rev. 2.1): every current hovedbranche is 6 digits, 9621/9622/9699/4781/4791 populated, Rev. 2's 9602/9609 empty | Oslo's SN2025 exclusions transfer at the shared 4-digit class; key at 6 digits |
+| Coordinates from **DAWA**, keyless | **DAWA closes 1 October 2026 at 10:00** (Klimadatastyrelsen) | Coordinates from **DAR on Datafordeler**, same account and key as CVR, CC BY 4.0 crediting Klimadatastyrelsen |
+| `Adresse` is "a DAR address UUID" | **199 of 200** sampled resolve as a DAR **Adresse** (unit address), 0 as a Husnummer | The join is Adresse → Husnummer → Adressepunkt, three files |
+| "the Letbane is not open" | **Open** — in part 26 Oct 2025, in full 22 Aug 2026 — with **0 of 29 stops** in either kommune | No scope effect |
+
+**Owner calls, all taken 2026-09-24:** Frederiksberg **IN**; S-tog **DRAWN**
+(the published spacing-and-frequency test, Dublin's DART precedent); sole
+traders guarded by **legal form** (two more CVR entities, `Virksomhed` and
+`Virksomhedsform`); rail from **OSM**, because Rejseplanen's national GTFS —
+keyless and current, which the brief did not know existed — has terms that ask
+users not to change the data and document access as by request.
 
 ---
 
@@ -97,9 +119,18 @@ Copenhagen access addresses with **100%** WGS84 coordinates.
 the same shape as Paris, and the reason Copenhagen was in the coordinates band
 at all.
 
+> 🔧 **Corrected 2026-09-24: DAWA closes on 1 October 2026 at 10:00**, so the
+> "no key" half is gone. The join survives on Datafordeler's DAR, with the
+> same key as CVR: `Adresse` → `Husnummer` → `Adressepunkt`, whose position is
+> EPSG:25832 even in Copenhagen (zone 33). Per-kommune current files exist.
+
 ---
 
 ## Taxonomy — DB07, and ONE of the two measurements is valid
+
+> 🔧 **Corrected 2026-09-24: it is DB25, not DB07** — see the table at the
+> top. The 6-digit shape and the labels below are right; the scheme's name
+> and its lineage were not.
 
 **DB07 codes are SIX digits** (`561110`, `962100`), not NACE's four. A taxonomy
 keyed at NACE class depth would be two levels too shallow — **Oslo's SN2007
@@ -179,7 +210,9 @@ Counted in OSM 2026-09-23 inside Københavns Kommune (relation 2192363):
 
 ⚠️ **`docs/city_master_list.md` carried "subway 4, tram 4". The tram count is
 WRONG — Copenhagen has no tram.** The system closed in 1972 and the
-Hovedstadens Letbane is not open. **An inherited, unverified count**, which is
+Hovedstadens Letbane is not open. *(🔧 2026-09-24: the Letbane IS open — in
+full since 22 August 2026 — but it is light rail along Ring 3 with no stop in
+Copenhagen or Frederiksberg, so the conclusion about scope stands.)* **An inherited, unverified count**, which is
 the class of error that gave Dublin four wrong claims in one row.
 
 ✅ **M1–M4 all carry a distinct `colour`**, so the legend is satisfiable from
@@ -193,6 +226,12 @@ applying it leaves Copenhagen with **four metro lines** against a city whose
 actual backbone is the S-tog — a larger consequence than the same rule had in
 Boston, Chicago or Madrid, where the metro was already the dominant network.
 **Recorded as a call rather than silently applied.**
+
+> ✅ **Taken 2026-09-24: S-tog is DRAWN.** Inside the two kommuner its median
+> station spacing is 1,227 m against the Metro's 884 m, every line runs every
+> 10 minutes, and 22 of its 31 stations there have no Metro station within
+> 400 m - the published spacing-and-frequency test, which Dublin's DART passed
+> the same way.
 
 ---
 
@@ -255,6 +294,9 @@ by Copenhagen.** Scoping to `101` alone puts a hole in the centre of the map.
 Its addresses come from the same national files at no extra cost — it is a
 one-value change to the filter, not a new source. **Owner call.**
 
+> ✅ **Taken 2026-09-24: Frederiksberg is IN.** It holds 7 Metro stations;
+> without it M2 keeps 9 of 16 (56%). Step 1 asserts the per-line counts.
+
 ---
 
 ## Region
@@ -266,14 +308,14 @@ one-value change to the filter, not a new source. **Owner call.**
 ## Still unknown
 
 - 🚨 **The true sole-trader share.** `v/` gives a floor of 7.2%; bare personal
-  names are not counted.
-- 🚨 **The taxonomy LEVEL choice** — needs DB07's own hierarchy labels from
-  Danmarks Statistik. 23.4% at full depth is the only valid figure today.
-- ⚠️ **Frederiksberg** — in or out.
-- ⚠️ **S-tog** — the exclusion is the standing rule; the consequence is larger
-  here than anywhere it has been applied.
-- **Exact DAWA join rate** — 96.9% carry a UUID; the share that *resolves* is
-  untested.
+  names are not counted. *(2026-09-24: answered structurally instead - the
+  parent company's `Virksomhedsform`.)*
+- ~~🚨 **The taxonomy LEVEL choice**~~ — settled 2026-09-24: DB25 at 6 digits,
+  the only level whose labels ship in the file.
+- ~~⚠️ **Frederiksberg**~~ — IN, 2026-09-24.
+- ~~⚠️ **S-tog**~~ — DRAWN, 2026-09-24.
+- **Exact DAR join rate** — 98.4% of storefront rows in the two kommuner carry
+  an `Adresse` UUID and 199 of 200 sampled resolved; the full rate is step 2's.
 
 ```brief-checks
 [
@@ -292,18 +334,28 @@ one-value change to the filter, not a new source. **Owner call.**
     "present": ["CVRPerson"]
   },
   {
-    "id": "dawa-address-api-keyless",
-    "claim": "DAWA answers without a key and returns WGS84 coordinates. This is the coordinate leg: Adressering.Adresse is a DAR UUID on 96.9% of Copenhagen rows, so coordinates are a JOIN rather than a geocode",
-    "kind": "http_ok",
-    "url": "https://api.dataforsyningen.dk/adresser?kommunekode=0101&side=1&per_side=1",
-    "min_bytes": 200
+    "id": "dar-licence-is-cc-by-4",
+    "claim": "THE COORDINATE LEG'S LICENCE, replacing the DAWA check this brief first carried (DAWA closes 1 October 2026). DAR on Datafordeler is CC BY 4.0 with credit to Klimadatastyrelsen - read 2026-09-24 by the licence-read agent. If this page stops saying so, notice 31 needs re-reading before the next rebuild",
+    "kind": "http_contains",
+    "url": "https://datafordeler.dk/vejledning/brugervilkaar/danmarks-adresseregister-dar/",
+    "present": ["CC BY 4.0", "Klimadatastyrelsen"]
   },
   {
-    "id": "frederiksberg-is-a-separate-kommune",
-    "claim": "Frederiksberg is kommunekode 0147 and Kobenhavn is 0101 - two kommuner, with 0147 entirely surrounded by 0101. Scoping to 0101 alone puts a hole in the middle of the map. This check confirms DAWA still treats them as separate codes",
+    "id": "dawa-closes-1-october-2026",
+    "claim": "WHY THE BRIEF'S KEYLESS COORDINATE LEG WAS ABANDONED: Klimadatastyrelsen's own notice that DAWA closes on 1 October 2026. Kept as a check so the reason stays citable after the service itself is gone",
     "kind": "http_contains",
-    "url": "https://api.dataforsyningen.dk/kommuner?kode=0147",
-    "present": ["Frederiksberg"]
+    "url": "https://www.klimadatastyrelsen.dk/om-klimadatastyrelsen/nyheder/nyhedsarkiv/2026/jul/dawa-lukker-d-1-oktober-2026",
+    "present": ["1. oktober 2026"]
+  },
+  {
+    "id": "osm-carries-every-drawn-line",
+    "claim": "THE RAIL LEG: OSM carries all four Metro refs as route=subway and all seven S-tog refs (A, B, Bx, C, E, F, H) as route=light_rail in the build's bbox, 2026-09-24. light_rail also holds Lokaltog 910, the Letbane's L and Gribskovbanen's L41, which step 1 drops on operator - so only the subway ref count is pinned",
+    "kind": "osm_route_refs",
+    "bbox": [55.40, 12.00, 56.00, 12.70],
+    "routes": ["subway", "light_rail"],
+    "expect_refs": {"subway": 4},
+    "require_refs": {"subway": ["M1", "M2", "M3", "M4"],
+                     "light_rail": ["A", "B", "Bx", "C", "E", "F", "H"]}
   }
 ]
 ```

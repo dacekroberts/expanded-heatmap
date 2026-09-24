@@ -135,6 +135,30 @@ STATION_NAME_ALIASES = {}
 
 SPACING_MIN_M = 400.0
 
+# THE AGENCIES' OWN COLOURS, from the OSM route relations (read 2026-09-24),
+# with TWO S-tog colours moved. The shared check (pipeline/linecolour.py,
+# Delta-E floor 10) REFUSED two Metro / S-tog pairs, because DSB and
+# Metroselskabet chose near-identical shades independently:
+#
+#   S-tog F  #fcc019 was  5.1 from Metro M2's #ffc600 - both yellow.
+#            -> #fdcb41 (HSL lightness +0.08): 13.1 from M2; 9.9 from DSB's.
+#   S-tog A  #00a4eb was  9.6 from Metro M4's #009cd3 - both blue.
+#            -> #05b4ff (lightness +0.05): 13.7 from M4; 6.2 from DSB's.
+#
+# The METRO keeps its colours and the S-tog member moves - Oslo's rule for
+# Trikk 12 against T-bane 3, one primary line per pair. LIGHTER, hue and
+# saturation kept, for Lille's reason: the maps open on a dark basemap the
+# check does not score. Each step is the smallest that clears the floor with
+# Oslo's ~13 margin. H (#e63511) is 15.4 from M3's red and passes as DSB's.
+# Below the preferred 45 against the pins, recorded rather than moved:
+# M1 19.0 and E 21.7 (vs Personal services / Retail), A 29.8, M4 31.7,
+# B 36.3, Bx 38.6.
+LINE_COLOURS = {
+    "M1": "#008d41", "M2": "#ffc600", "M3": "#ff0a0a", "M4": "#009cd3",
+    "A": "#05b4ff", "B": "#50ae30", "Bx": "#adce6d", "C": "#f68b1f",
+    "E": "#7670b3", "F": "#fdcb41", "H": "#e63511",
+}
+
 # WHAT SURVIVES THE BOUNDARY, PER LINE - asserted in step 1 so the scope
 # decision is CHECKABLE rather than merely written down. Measured 2026-09-24
 # on OSM's kommune polygons (Kobenhavn 94.4 km2 with Frederiksberg's 8.7 km2
