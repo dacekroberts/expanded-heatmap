@@ -1962,7 +1962,7 @@ Run under the owner's bounded download approval (MLIT address files; permit CSVs
 
 **Buckets.** Food service everywhere a file exists; personal services in 11 wards; and — against this trail's "two buckets" — **food RETAIL where a ward publishes 許可・届出**: Chūō and Kōtō list convenience stores (127 / 138), supermarkets and department stores (38 / 65), other food and drink sellers (467 / 437). General retail is still absent.
 
-**Privacy.** Minato's 法人名 is blank on 125 permits and carries a non-corporate name on 12 (0.2%), none shown as the premises name — the publisher withholds individuals' names.
+**Privacy.** Minato's 法人名 is blank on 125 permits and carries a non-corporate name on 12 (0.2%), none shown as the premises name — the publisher withholds individuals' names. **But the national-format 生活衛生 registers carry 営業者氏名 and 営業者_所在地 (the operator's own address), and four wards fill them** — Taitō (with phone numbers), Shinagawa, Shibuya, and Bunkyō (names only); Chiyoda, Ōta, Toshima, Arakawa and Katsushika leave them empty. **A build reads only 名称 and 所在地_* — never the 営業者 columns.**
 
 **Tokyo coverage — Tokyo's CKAN, enumerated ward by ward** (organisation `t` + the six-digit municipal code):
 
@@ -1970,7 +1970,10 @@ Run under the owner's bounded download approval (MLIT address files; permit CSVs
 |---|---|
 | **Food permits as a file** | Chūō · Minato · Shinjuku · Kōtō (**4 of 23**) |
 | Food, not usable as published | Taitō (the "CSV" link serves a web page) · Shinagawa (HTML only) · Nakano (a vendor map host — deferred) |
-| **No food dataset on the catalogue** | **Chiyoda · Shibuya · Toshima** (central) and 13 others — ONE method; the wards' own sites are the second |
+| **No food dataset on the catalogue** | **Chiyoda · Shibuya · Toshima** (central) and 13 others — see the second and third methods below |
+| **Central wards, three methods** (catalogue · the ward's own homepage route · a search of the ward's own domain) | **Chiyoda: the food-permit ledger is released only on a disclosure request** (即時公開請求) — **not open data**. **Toshima: permit facilities are viewable in person** at the ward's information corner — **not open data**. **Shibuya: none found by two methods**; its own FAQ on the question is script-rendered and unread |
+| **Taitō** | Its own site publishes the full list as `2026ALL-IND-CSV.csv` (1.59 MB, 7,676 rows, lat/lon) — **in its own format, with operators' names and home addresses**; outside the approved bounds, deleted after the header, a question for the owner |
+| The other 13 wards | The homepage route found no open-data link on most front pages — **inconclusive, not a negative**; a per-ward site search is the next step |
 | Personal-services registers | Chiyoda · Minato · Bunkyō · Taitō · Shinagawa · Ōta · Shibuya · Toshima · Arakawa · Katsushika · Meguro (deferred — BODIK) |
 
 **The national catalogue listing saved on 2026-09-23 is unusable for coverage**: all 18,140 of its packages carry one publisher (環境省), so it was one ministry's slice, not the catalogue. Municipal permits live on prefectural and municipal CKANs.
