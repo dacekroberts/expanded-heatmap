@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**340 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**341 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Tokyo's four own-site wards read: all CC BY 4.0, none like Sendai](#2026-09-24---tokyos-four-own-site-wards-read-all-cc-by-40-none-like-sendai)
 - [Japan: cost clauses accepted country-wide; N03 never drawn; Kyoto before Tokyo](#2026-09-24---japan-cost-clauses-accepted-country-wide-n03-never-drawn-kyoto-before-tokyo)
 - [Japan's licence reads consolidated into data_sources.md; five were never read](#2026-09-24---japans-licence-reads-consolidated-into-data_sourcesmd-five-were-never-read)
 - [Brazil's batch deploy check passed; two renderer defects shipped now, fixed next (owner)](#2026-09-24---brazils-batch-deploy-check-passed-two-renderer-defects-shipped-now-fixed-next-owner)
@@ -382,6 +383,41 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Tokyo's four own-site wards read: all CC BY 4.0, none like Sendai
+
+- **Read the terms of the four Tokyo wards whose files come from their own
+  sites**, at the owner's request: Shibuya, Taitō, Setagaya and Meguro. The
+  owner had accepted their hosts as the wards' own channels earlier the same
+  day, but their terms were never read. The Tokyo read covered only the
+  Tokyo catalogue's wards.
+- **All four are PERMITTED WITH CONDITIONS under CC BY 4.0, and nothing is
+  owed to any ward.** Each ward's default no-copying rule gives way to its
+  open-data terms, so none is in Sendai's position.
+  - **Shibuya**: 渋谷区オープンデータ利用規約, accepted on download from its
+    ArcGIS site; no cost clause. The dashboard's broader 補償 clause governs
+    only the dashboard.
+  - **Taitō**: its licence page puts its オープンデータ一覧 under CC BY 4.0,
+    and the list is on it. It is also on the Tokyo catalogue as a link-only
+    entry, so both sets of terms apply, and they agree.
+  - **Setagaya**: 世田谷区オープンデータ利用規約 §2. Not on the Tokyo catalogue.
+  - **Meguro**: BODIK's `131105/tos/`, the Tokyo template with the ward's
+    name.
+- **Cost clauses.** Setagaya's §4 and Meguro's 第8項 match Tokyo §6 (Meguro's
+  character for character), and Taitō inherits Tokyo §6. All fall within the
+  owner's Japan-wide acceptance, so nothing new goes to the owner.
+- **The credits differ by ward.** Taitō prescribes a no-warranty sentence,
+  Setagaya a 「改変して利用」 form, and Meguro a labelled catalogue link. So the
+  Tokyo page needs per-ward credits, not only the catalogue's combined
+  notice. The forms are in `docs/data_sources.md` (Japan section) and
+  `tokyo.md`.
+- **Two corrections and one find.**
+  - `tokyo.md` said Taitō's file carries operators' home addresses. The ward
+    masks individual operators at source (※, 2,738 of 7,676 rows), and the
+    unmasked operators are almost all companies. The project reads none of
+    those columns either way.
+  - Meguro's barber, beauty and laundry registers, listed as deferred in the
+    brief, are on BODIK under the same licence. They are not yet joined.
 
 ### 2026-09-24 - Japan: cost clauses accepted country-wide; N03 never drawn; Kyoto before Tokyo
 

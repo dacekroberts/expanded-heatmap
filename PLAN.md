@@ -685,9 +685,12 @@ brief names.
     boundaries as a map may need GSI's approval under the Survey Act, and
     that question is open. The maps never draw a boundary, so nothing is
     blocked. The rule is in `japan.city_boundary()` and every Japanese brief.
-  - [ ] **Four Tokyo wards whose terms were never read**: Shibuya (its ArcGIS
-    site), Taitō, Setagaya and Meguro (BODIK). Only their hosts were
-    accepted. Four `licence-read` runs, due before Tokyo's build.
+  - [x] **Four Tokyo wards whose terms were never read**: Shibuya (its ArcGIS
+    site), Taitō, Setagaya and Meguro (BODIK). **Read 2026-09-24 (owner):
+    all PERMITTED WITH CONDITIONS, CC BY 4.0, nothing owed.** Their cost
+    clauses are within the Japan-wide acceptance, and Shibuya has none. Each
+    needs its own credit. Found on the way: Meguro's 生活衛生 registers on BODIK
+    (Tokyo's still-unknown list).
   - [x] **The fault-based cost clauses: ✅ ACCEPTED by the owner
     2026-09-24 for every Japanese source**, as for Taiwan. That covers
     Fukuoka 第４条, Hiroshima 第3条 and MHLW 免責 1) エ, beside Tokyo's and
