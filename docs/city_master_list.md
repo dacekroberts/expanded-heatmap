@@ -208,8 +208,8 @@ results in the sweep.
 **The seventeen:** Seoul · Prague · Copenhagen · Hong Kong ·
 Oslo — **each with a brief** in `docs/build_briefs/` — **nine
 Brazilian cities from one national source**: São Paulo (7/7) · Rio de Janeiro
-(8/8) · Belo Horizonte · Brasília · Recife · Santos (5/5 each) · Salvador ·
-Fortaleza · Porto Alegre (4/4 each) — and **three Taiwanese cities**: Taipei (Regional) (6/6) ·
+(8/8) · Belo Horizonte · Brasília · Recife (Regional) · Santos (Regional)
+(5/5 each) · Salvador · Fortaleza (Regional) · Porto Alegre (Regional) (4/4 each) — and **three Taiwanese cities**: Taipei (Regional) (6/6) ·
 Taichung (3/3) · Taoyuan (3/3). ✅ **Every Band A city has a brief as of
 2026-09-23**, and every brief's checks pass live.
 
@@ -282,12 +282,12 @@ enumerator misspellings). Every figure is from the city's own file:
 | **São Paulo** | **216,037** | 108,265 / 66,467 / 41,305 | 19.7% — **13% periphery → 31% Pinheiros** | 98.5% | GeoSampa WFS, 94 stations / 6 lines, EPSG:31983 |
 | **Rio de Janeiro** | **105,350** | 50,423 / 35,509 / 19,418 | 20.0% — 15% → **36% Barra da Tijuca** | 95.1% | 20 relations, all named and coloured |
 | **Salvador** | **52,258** | 25,890 / 17,186 / 9,182 | 21.6% — 15% → 29% | 97.3% | L1 + L2, **0 of 4 relations coloured** — colours from the operator. No public agency layer (SEMOB's folder is token-gated). **20 of 21 stations in the city** |
-| **Fortaleza** | **49,503** | 29,239 / 11,470 / 8,794 | 25.9% — 20% → **43% Meireles** | 98.5% | Sul (metro) + Oeste, Parangaba–Mucuripe (light rail), all coloured. No agency layer reachable (Metrofor's certificate expired). **31 of 41 stations in the city — regional? owner's call** |
+| **Fortaleza (Regional)** | **62,792** (city 49,503) | 29,239 / 11,470 / 8,794 | 25.9% — 20% → **43% Meireles** | 98.5% | Sul (metro) + Oeste, Parangaba–Mucuripe (light rail), all coloured. No agency layer reachable (Metrofor's certificate expired). 31 of 41 stations in the city — **regional, decided 2026-09-23**: + Caucaia, Maracanaú, Pacatuba |
 | **Belo Horizonte** | **44,923** | 22,518 / 13,127 / 9,278 | 22.8% — 22% → 30% | 98.8% | L1 + **Linha 2, opened 2026-07-03 with two stations — OSM lists exactly those two**. Agency lines (2022, pre-L2), no agency stations |
 | **Brasília** | **35,824** | 19,706 / 9,164 / 6,954 | 26.7% — 16% → **48% Asa Sul** | 99.9% | Metrô-DF Verde + Laranja, coloured. **Agency stations + lines with status** (IPEDF GeoServer; declared public domain, unread) |
-| **Recife** | **25,212** | 14,968 / 5,622 / 4,622 | 29.2% — 19% → 32% | 99.0% | Centro 1 & 2 + Sul, coloured; plus a diesel VLT to Cabo. **CBTU file: 36 stations + lines** (declared ODbL). **19 of 36 stations in the city — regional? owner's call** |
-| **Porto Alegre** | **18,798** | 10,576 / 4,599 / 3,623 | 27.9% — 23% → 40% | 98.1% | Trensurb, coloured. No agency layer. **Only 7 of 23 stations in the city — regional or not built; owner's call** |
-| **Santos** | **6,021** | 3,322 / 1,769 / 930 | 25.0% | 98.1% | VLT L1 + L2, coloured; tourist tram excluded. Stops layer of unconfirmed ownership. **17 of 25 stops in Santos, 8 in São Vicente — regional? owner's call** |
+| **Recife (Regional)** | **43,518** (city 25,212) | 14,968 / 5,622 / 4,622 | 29.2% — 19% → 32% | 99.0% | Centro 1 & 2 + Sul, coloured; plus a diesel VLT to Cabo. **CBTU file: 36 stations + lines** (declared ODbL). 19 of 36 stations in the city — **regional, decided 2026-09-23**: + Jaboatão, Cabo, Camaragibe |
+| **Porto Alegre (Regional)** | **35,688** (city 18,798) | 10,576 / 4,599 / 3,623 | 27.9% — 23% → 40% | 98.1% | Trensurb, coloured. No agency layer. Only 7 of 23 stations in the city — **regional, decided 2026-09-23**: + the Trensurb corridor to Novo Hamburgo |
+| **Santos (Regional)** | **11,691** (city 6,021) | 3,322 / 1,769 / 930 | 25.0% | 98.1% | VLT L1 + L2, coloured; tourist tram excluded. Stops layer of unconfirmed ownership. 17 of 25 stops in Santos — **regional, decided 2026-09-23**: + São Vicente |
 
 **Four decisions taken by the owner the same day**, recorded in `DECISIONS.md`:
 proceed on the federal-law grant with four restrictive readings recorded; at
@@ -309,8 +309,10 @@ forbids.
 The 89.7% of its storefronts that "share an address with a dwelling" is the
 key's artefact: 98.5% of those rows have no door number, and the unit is the
 `LOTE` complement. **Keyed on the lot: 58.0%. On the identical coordinate:
-18.8%** (Recife 20.3%). Whether step 2 keys the dwelling test on the lot is
-the owner's call. **9%** of rows still stand for more than one establishment.
+18.8%** (Recife 20.3%);
+**decided by the owner 2026-09-23: key on the lot where the number is blank** —
+now in `screen_cnefe.py`, **68.9%**. **9%** of rows still stand for more than
+one establishment.
 
 **Not carried forward:** Teresina, Maceió, João Pessoa and Natal have rail in
 OSM, but it is single diesel lines or CBTU suburban trains tagged

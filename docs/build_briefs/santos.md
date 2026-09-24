@@ -1,4 +1,4 @@
-# Santos — build brief
+# Santos (Regional) — build brief
 
 **Step 0 measured 2026-09-23.** Run `python scripts/brief_check.py santos`
 before writing any code. **Read `sao-paulo.md` first** — the national facts
@@ -60,7 +60,7 @@ source, until their owner is confirmed.**
 
 ## Scope
 
-**MEASURED 2026-09-23** (OSM, by município): 25 stops — **17 in Santos (68%, one of them the excluded heritage tram's), 8 in São Vicente** (3551009), including Terminal Barreiros, the lines' western hub. **Santos + São Vicente recommended — the owner's call**; at 6,021 storefronts the city alone may be too thin to earn a page. São Vicente's CNEFE file is 3,189,142 B, not yet downloaded.
+**MEASURED 2026-09-23** (OSM, by município): 25 stops — **17 in Santos (68%, one of them the excluded heritage tram's), 8 in São Vicente** (3551009), including Terminal Barreiros, the lines' western hub. **REGIONAL — decided by the owner 2026-09-23: Santos (Regional)** = Santos + São Vicente. Measured the same night: **São Vicente 5,670** storefronts — **11,691 with Santos's 6,021, nearly double**, which also answers Rennes' question in the page's favour. Coordinate level 1 99.3%; catch-all 20.3%, the lowest measured in Brazil.
 
 ## Region
 
@@ -68,8 +68,6 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
 
 ## Still unknown
 
-- ⚠️ Scope — Santos + São Vicente recommended, **owner's call**; São Vicente's storefronts unmeasured
-- ⚠️ Whether ~6,000 storefronts earn a page (Rennes' question)
 
 ```brief-checks
 [
@@ -99,6 +97,7 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
     "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/35_SP/",
     "present": [
       "3548500_SANTOS.zip",
+      "3551009_SAO_VICENTE.zip",
       "2024-05-2"
     ]
   },

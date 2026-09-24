@@ -1,4 +1,4 @@
-# Porto Alegre — build brief
+# Porto Alegre (Regional) — build brief
 
 **Step 0 measured 2026-09-23.** Run `python scripts/brief_check.py porto-alegre`
 before writing any code. **Read `sao-paulo.md` first** — the national facts
@@ -54,7 +54,7 @@ the geometry source.**
 
 ## Scope
 
-**MEASURED 2026-09-23** (OSM route members, by município): **23 stations — only 7 in Porto Alegre (30%)**, Canoas 6, Novo Hamburgo 4, São Leopoldo 3, Sapucaia do Sul 2, Esteio 1. **The city holds under a third of its own network: regional, or not built** — the owner's call. The five neighbours' CNEFE files total 10,837,156 B, not yet downloaded.
+**MEASURED 2026-09-23** (OSM route members, by município): **23 stations — only 7 in Porto Alegre (30%)**, Canoas 6, Novo Hamburgo 4, São Leopoldo 3, Sapucaia do Sul 2, Esteio 1. **The city holds under a third of its own network. REGIONAL — decided by the owner 2026-09-23: Porto Alegre (Regional)** = Porto Alegre + Canoas + Esteio + Sapucaia do Sul + São Leopoldo + Novo Hamburgo — the Trensurb corridor. Measured the same night: **Canoas 5,108** storefronts · **Novo Hamburgo 4,654** · **São Leopoldo 3,596** · **Sapucaia do Sul 2,181** · **Esteio 1,351** — **35,688 with Porto Alegre's 18,798, nearly double**. Coordinate level 1 ≥ 98.4%; catch-all 25.9–28.7%.
 
 ## Region
 
@@ -62,7 +62,6 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
 
 ## Still unknown
 
-- ⚠️ Scope — regional or not built, **owner's call**; the corridor's storefronts are unmeasured
 - ⚠️ Trensurb's classification (urban vs commuter)
 - ⚠️ Whether the Aeromóvel is drawn (Toulouse's cable-car precedent says a non-rail mode can be)
 
@@ -83,6 +82,11 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
     "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/",
     "present": [
       "4314902_PORTO_ALEGRE.zip",
+      "4304606_CANOAS.zip",
+      "4313409_NOVO_HAMBURGO.zip",
+      "4318705_SAO_LEOPOLDO.zip",
+      "4320008_SAPUCAIA_DO_SUL.zip",
+      "4307708_ESTEIO.zip",
       "2024-05-2"
     ]
   },

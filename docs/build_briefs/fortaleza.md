@@ -1,4 +1,4 @@
-# Fortaleza — build brief
+# Fortaleza (Regional) — build brief
 
 **Step 0 measured 2026-09-23.** Run `python scripts/brief_check.py fortaleza`
 before writing any code. **Read `sao-paulo.md` first** — the national facts
@@ -55,7 +55,7 @@ geometry source.**
 
 ## Scope
 
-**MEASURED 2026-09-23** (OSM route members, by município): **41 stations — 31 in Fortaleza (76%)**, Maracanaú 5, Caucaia 3, Pacatuba 1 (Carlito Benevides, Linha Sul's terminus), and Conjunto São Miguel on the boundary. Every outside station is at a line's end. **Regional recommended — the owner's call.** The neighbours' CNEFE files are not yet downloaded: Maracanaú 2,340,410 B, Caucaia 3,875,954 B, Pacatuba 710,306 B.
+**MEASURED 2026-09-23** (OSM route members, by município): **41 stations — 31 in Fortaleza (76%)**, Maracanaú 5, Caucaia 3, Pacatuba 1 (Carlito Benevides, Linha Sul's terminus), and Conjunto São Miguel on the boundary. Every outside station is at a line's end. **REGIONAL — decided by the owner 2026-09-23: Fortaleza (Regional)** = Fortaleza + Caucaia + Maracanaú + Pacatuba. Measured the same night: **Caucaia 6,790** storefronts · **Maracanaú 5,158** · **Pacatuba 1,341** — **62,792 with Fortaleza's 49,503**. Coordinate level 1 ≥ 97.0% (Caucaia the lowest, 2.6% at level 2); catch-all 25.9–28.2%.
 
 ## Region
 
@@ -63,7 +63,6 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
 
 ## Still unknown
 
-- ⚠️ Scope — regional recommended, **owner's call**; the neighbours' storefronts are unmeasured
 - ⚠️ Linha Oeste's service pattern (diesel)
 - ⚠️ OSM ref `5` is the **Ramal Aeroporto–Castelão** (Expedicionários ⇒ Castelão, light rail) — whether it carries passengers is unverified: Tel Aviv's trap
 
@@ -84,6 +83,9 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
     "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/23_CE/",
     "present": [
       "2304400_FORTALEZA.zip",
+      "2307650_MARACANAU.zip",
+      "2303709_CAUCAIA.zip",
+      "2309706_PACATUBA.zip",
       "2024-05-2"
     ]
   },

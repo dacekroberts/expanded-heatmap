@@ -16,7 +16,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**262 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**263 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
@@ -25,6 +25,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 **2026-09-23**
 
+- [Four Brazilian cities go regional (owner); Brasilia's dwelling test keys on the lot (owner); neighbours measured](#2026-09-23---four-brazilian-cities-go-regional-owner-brasilias-dwelling-test-keys-on-the-lot-owner-neighbours-measured)
 - [Brazil's agency rail searched for seven cities; station share per municipio measured; Brasilia's 90% is its address key; BH Line 2 is open](#2026-09-23---brazils-agency-rail-searched-for-seven-cities-station-share-per-municipio-measured-brasilias-90-is-its-address-key-bh-line-2-is-open)
 - [Stray downloads in the main checkout's root filed](#2026-09-23---stray-downloads-in-the-main-checkouts-root-filed)
 - [Label check runs at phone width; Milan's shop-sign share; lille retired](#2026-09-23---label-check-runs-at-phone-width-milans-shop-sign-share-lille-retired)
@@ -304,6 +305,44 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Four Brazilian cities go regional (owner); Brasilia's dwelling test keys on the lot (owner); neighbours measured
+
+- **Decided by the owner: Recife, Fortaleza, Porto Alegre and Santos are
+  built REGIONAL**, the Taipei/Dublin/Lille shape, on the station shares
+  measured earlier the same night (30% to 76% of each network inside the
+  city). Rejected: Fortaleza city-only (it keeps 76% of stations, but the
+  ten outside are all line ends and the page would stop where riders do
+  not) and deciding after measurement. The regions: **Recife (Regional)** +
+  Jaboatão dos Guararapes, Cabo de Santo Agostinho, Camaragibe - **43,518**
+  storefronts (city 25,212); **Fortaleza (Regional)** + Caucaia, Maracanaú,
+  Pacatuba - **62,792** (city 49,503); **Porto Alegre (Regional)** + Canoas,
+  Esteio, Sapucaia do Sul, São Leopoldo, Novo Hamburgo - **35,688** (city
+  18,798), nearly double; **Santos (Regional)** + São Vicente - **11,691** (city
+  6,021), nearly double, which answers the brief's Rennes-sized question in
+  the page's favour. Every neighbour reads coordinate level 1 at 97.0% or
+  better and a catch-all of 20.3-28.7%, in the range of the cities
+  themselves. The twelve CNEFE files (32,545,209 B, ftp.ibge.gov.br) were
+  downloaded with the owner's permission into the gitignored raw folders,
+  each checked for size and zip magic bytes.
+- **Decided by the owner: where the door number is blank and the first
+  complement is `LOTE`, the dwelling test keys on the lot.** Implemented in
+  `scripts/screen_cnefe.py`'s address key. Brasília's share of storefronts
+  sharing an address with a dwelling falls **89.7% -> 68.9%** (first names at
+  a dwelling address 824 -> 706). Rejected: keeping street + number (it
+  merged whole blocks and stripped description text from 90% of pins for a
+  reason that is addressing, not housing), and the identical coordinate
+  (18.8% - least protective, since a home and a shop on one lot can carry
+  different points). The key is general: outside Brasília it acts only on
+  unnumbered `LOTE` addresses. **The seven earlier cities' dwelling shares
+  were measured on the old key and are not re-run** - the script already
+  labels the figure an upper bound, and for them the unnumbered-lot case is
+  rare (Recife: 1,213 of its 10,117 shared rows had no number, of any
+  complement).
+- Touched: `scripts/screen_cnefe.py`; the Recife, Fortaleza, Porto Alegre,
+  Santos and Brasília briefs (the four regional briefs' re-release checks now
+  also watch the neighbours' files); `docs/city_master_list.md` (the four
+  renamed "(Regional)" with regional totals).
 
 ### 2026-09-23 - Brazil's agency rail searched for seven cities; station share per municipio measured; Brasilia's 90% is its address key; BH Line 2 is open
 

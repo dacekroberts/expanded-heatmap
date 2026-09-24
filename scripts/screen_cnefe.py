@@ -406,8 +406,17 @@ def main():
     rescued = collections.Counter()
     rows = []   # (addr_key, label, bucket, desc_norm, indicator, nv, locality)
     for row in rd:
+        # Where the door number is blank and the first complement is a LOTE,
+        # the lot IS the address (Brasilia names a block, not a door: 98.5%
+        # of its "shared with a dwelling" rows had no number, so street +
+        # number merged whole blocks). Owner decision 2026-09-23.
+        lot = ""
+        if (row["NUM_ENDERECO"].strip() in ("", "0")
+                and row["NOM_COMP_ELEM1"].strip() == "LOTE"):
+            lot = row["VAL_COMP_ELEM1"].strip()
         key = (row["COD_SETOR"], row["NUM_QUADRA"], row["NUM_FACE"],
-               row["NOM_SEGLOGR"], row["NUM_ENDERECO"], row["DSC_MODIFICADOR"])
+               row["NOM_SEGLOGR"], row["NUM_ENDERECO"], row["DSC_MODIFICADOR"],
+               lot)
         sp = row["COD_ESPECIE"]
         if sp in ("1", "2"):
             home_addr.add(key)
