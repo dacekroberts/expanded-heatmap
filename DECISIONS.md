@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**307 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**308 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [The owner's answers to the overnight question points; Sendai's lists need permission](#2026-09-24---the-owners-answers-to-the-overnight-question-points-sendais-lists-need-permission)
 - [Sendai joined at 95.1% block; MLIT's 小字 column places 字 addresses](#2026-09-24---sendai-joined-at-951-block-mlits-小字-column-places-字-addresses)
 - [Prague deployed; the live site measured after the reboot](#2026-09-24---prague-deployed-the-live-site-measured-after-the-reboot)
 - [Prague's deploy-verify passed; the Europe view zoomed out](#2026-09-24---pragues-deploy-verify-passed-the-europe-view-zoomed-out)
@@ -349,6 +350,56 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - The owner's answers to the overnight question points; Sendai's lists need permission
+
+- **The owner answered the overnight run's open question points on waking,
+  and six rows left the open screening gap.** Each answer and where it went:
+  - **Japan.** The fault-based cost clauses were **accepted** as the Taiwan,
+    Rio and IBGE class: Tokyo Open Data Terms §6, Chūō §5 and Sapporo's
+    platform terms 第9条3. **Osaka**'s current food CSV rests on the CC-BY
+    notice on the page that links it, **accepted**. **Shinjuku**'s 2023-01-01
+    snapshot is used with its vintage disclosed. **Food retail**, where a ward
+    publishes 届出, is a disclosed partial bucket, never extrapolated. The
+    **Economic Census**'s 飲食店 count is the food control for every Japanese
+    city, not OSM, after Shinjuku read 6.0× OSM. For **Tokyo's scope**, the
+    wards' own sites are read first (19 wards without a catalogue file,
+    central first), and the scope is decided after. **Taitō**'s own list is
+    re-fetched under the raised bounds, reading only 営業所所在地, 業種 and
+    屋号. Briefs updated: `tokyo.md`, `sapporo.md`, `osaka.md`.
+  - **Re-probes.** Kuala Lumpur, Athens, Poznań and Bratislava went to the
+    discards, kind absence, each on two or more methods with the city's own
+    host asked. **Hamburg** went on currency: a 2016 retail survey and
+    nothing else, Turin's shape. **Warsaw** went to **Band D**. It is weaker
+    than Kaohsiung's shape, because it was blocked BEFORE anything was
+    measured, so its row says the first step is a read from inside Poland.
+    **Vienna stays in the gap**, the owner's choice, although its two-method
+    negative would pass `check_discard_evidence.py`. The counts are now:
+    candidates 33 (D 2), gap 11, discarded 21. The check reads all 21 rows OK.
+  - **Further probes.** Riga gets one more probe: place the cadastre premise
+    groups through the building number, and find a vacancy rate. Rotterdam
+    is re-probed and stays in the gap if nothing new turns up. **Tallinn**:
+    the owner places the building-register order, since it carries an
+    e-mail, and was sent the order page
+    (`livekluster.ehr.ee/ui/ehr/v1/infoportal/reports`).
+  - **Standing rule.** A read-only API POST (GraphQL or search) now counts as
+    a GET. Web forms, and anything carrying an e-mail, a name or a login, do
+    not. Recorded in `reprobe-city` Step 2, where the next re-probe agent
+    reads it.
+- **Found Sendai's lists are NOT open data: the city's site default bars
+  reuse without permission, and no page overrides it.** Sendai has not
+  adopted CC BY 4.0 site-wide, unlike Osaka, Kobe and Sapporo. Its open-data
+  files carry a per-file CC BY badge, and these two list links carry none.
+  Neither list is in the city's 5,907-row catalogue or on Miyagi's portal, and
+  the files hold no notice of their own. The "facts are not 著作物" reading was
+  recorded and NOT relied on, per `read-licence`. The owner's rule was: if
+  the terms are clear, draft a request, otherwise probe further at the end of
+  the queue. They were judged clear, so a formal Japanese request to
+  健康福祉局生活衛生課 was drafted for the owner to send. Sendai waits at the
+  end of the Japanese cities. **Disclosed slip**: the scan for a file-level
+  notice selected rows by a wrong filter and printed the first two data rows
+  of each food sheet, operator names included, to the session. Nothing was
+  written to disk, and the script was deleted.
 
 ### 2026-09-24 - Sendai joined at 95.1% block; MLIT's 小字 column places 字 addresses
 
