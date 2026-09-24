@@ -1,4 +1,4 @@
-# Porto Alegre — build brief
+# Porto Alegre (Regional) — build brief
 
 **Step 0 measured 2026-09-23.** Run `python scripts/brief_check.py porto-alegre`
 before writing any code. **Read `sao-paulo.md` first** — the national facts
@@ -44,13 +44,17 @@ first name at a dwelling address is **166 (0.9%)**.
 
 **Trensurb** — `route=subway`, 6 relations, ref `1`, all coloured — plus the **Aeromóvel airport connector** (`Conexão Metrô-Aeroporto`), a people mover. ⚠️ Trensurb is a *trem metropolitano*: confirm it is urban rail, not commuter, under the standing rule — its frequency and electrification argue urban.
 
-⚠️ **Agency layers have NOT been searched.** `osm-rail` puts them first, and
-Rio's metro and VLT layers turned up only when its city's ArcGIS org was
-enumerated. **Enumerate Porto Alegre's own portals before building from OSM.**
+**Agency layers searched 2026-09-23 — none found (MEASURED, four methods).**
+Trensurb's own domains (`trensurb.gov.br`, `.com.br`) refuse or time out; the
+city's and the state's CKAN portals return nothing for any rail term
+(nonsense control: zero on both); the Mobility Database has no Trensurb, CBTU
+or Aeromóvel feed; ArcGIS Online has nothing in the box. A secondary source
+says Trensurb falls outside Decree 8.777's open-data duty — ASSERTED. **OSM is
+the geometry source.**
 
 ## Scope
 
-Trensurb runs north through Canoas, Esteio, Sapucaia do Sul and São Leopoldo to Novo Hamburgo; **the city holds only its southern end.** The regional shape, and possibly a thin map inside the município alone.
+**MEASURED 2026-09-23** (OSM route members, by município): **23 stations — only 7 in Porto Alegre (30%)**, Canoas 6, Novo Hamburgo 4, São Leopoldo 3, Sapucaia do Sul 2, Esteio 1. **The city holds under a third of its own network. REGIONAL — decided by the owner 2026-09-23: Porto Alegre (Regional)** = Porto Alegre + Canoas + Esteio + Sapucaia do Sul + São Leopoldo + Novo Hamburgo — the Trensurb corridor. Measured the same night: **Canoas 5,108** storefronts · **Novo Hamburgo 4,654** · **São Leopoldo 3,596** · **Sapucaia do Sul 2,181** · **Esteio 1,351** — **35,688 with Porto Alegre's 18,798, nearly double**. Coordinate level 1 ≥ 98.4%; catch-all 25.9–28.7%.
 
 ## Region
 
@@ -58,7 +62,6 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
 
 ## Still unknown
 
-- ⚠️ Scope — the Trensurb corridor municipalities
 - ⚠️ Trensurb's classification (urban vs commuter)
 - ⚠️ Whether the Aeromóvel is drawn (Toulouse's cable-car precedent says a non-rail mode can be)
 
@@ -79,12 +82,17 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
     "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/",
     "present": [
       "4314902_PORTO_ALEGRE.zip",
+      "4304606_CANOAS.zip",
+      "4313409_NOVO_HAMBURGO.zip",
+      "4318705_SAO_LEOPOLDO.zip",
+      "4320008_SAPUCAIA_DO_SUL.zip",
+      "4307708_ESTEIO.zip",
       "2024-05-2"
     ]
   },
   {
     "id": "porto-alegre-osm-rail",
-    "claim": "OSM carries Porto Alegre's rail refs as counted 2026-09-23 - the geometry source until agency layers are found",
+    "claim": "OSM carries Porto Alegre's rail refs as counted 2026-09-23 - the geometry source; agency layers searched 2026-09-23, see Rail",
     "kind": "osm_route_refs",
     "bbox": [
       -30.27,

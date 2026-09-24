@@ -10,7 +10,7 @@ here unchanged. This brief carries what is Brasília's.
 
 ## The one-line summary
 
-**The best coordinates in Brazil (99.9%) on the most unusual addresses: 90% of storefronts share an address with a home, 9% of rows stand for more than one establishment, and the core loses half its trade names.**
+**The best coordinates in Brazil (99.9%) on the most unusual addresses: addresses name a block rather than a door, 9% of rows stand for more than one establishment, and the core loses half its trade names.**
 
 ---
 
@@ -35,8 +35,8 @@ rises, the map under-draws. The page must say so, as São Paulo's does.
 ## 🔒 Privacy — the decided rule applies unchanged
 
 At an address that also holds a dwelling, the tooltip shows the **category,
-never the description text**. Here that reaches **32,146 (89.7%)** of mapped rows; a
-first name at a dwelling address is **824 (2.3%)**.
+never the description text**. On the old street + number key that reached 32,146 (89.7%) — **an artefact of block addressing, not the city**. **Keyed on the lot (decided by the owner 2026-09-23, now in `screen_cnefe.py`) it is 24,665 (68.9%)**; a
+first name at a dwelling address is **706 (2.0%)**.
 
 ---
 
@@ -44,9 +44,19 @@ first name at a dwelling address is **824 (2.3%)**.
 
 **Metrô-DF, Linha Verde and Linha Laranja** — 4 relations, all coloured.
 
-⚠️ **Agency layers have NOT been searched.** `osm-rail` puts them first, and
-Rio's metro and VLT layers turned up only when its city's ArcGIS org was
-enumerated. **Enumerate Brasília's own portals before building from OSM.**
+**Agency layers FOUND 2026-09-23 — stations AND lines, with status.**
+IPEDF/Codeplan's GeoServer (`catalogo.ipe.df.gov.br/geoserver/geonode/wfs`):
+`geonode:ESTACOES_METRO` — **24 stations**, `nome_estac` and `situacao` (all
+*Em operação*), EPSG:4326, published 2023-10-27; `geonode:ESTACOES_EM_CONSTRUCAO`
+— 5 (Onoyama, Estrada Parque, 110/106/104 Sul); `geonode:ESTACAO_EXPANSAO` — 13
+planned; `geonode:LINHA_VERDE_LARANJA` — **one MultiLineString for both lines**
+(`linha` = *verde e laranja*), so the two labels the invariant needs come from
+a split or from OSM's per-line relations. Licence on the GeoNode item pages:
+**"Public Domain (PD)"** as declared — **not read**. `dados.df.gov.br` timed out
+in the TLS handshake; this catalogue is the way in. ⚠️ The status field is
+from a **2023** file — cross-check it against OSM before trusting it.
+**Recommendation: agency stations, whose status decides what is drawn; OSM
+for the per-line geometry.**
 
 ## Scope
 
@@ -58,11 +68,21 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
 
 ## Still unknown
 
-- ⚠️ 🚨 **Superquadra addressing**: 89.7% of mapped rows share an address with a dwelling and 9.0% stand for 2+ establishments (`COD_INDICADOR_ESTAB_ENDERECO` 2/3/4) — look at the addresses before trusting any Brasília figure; the privacy rule strips description text from nearly every pin
+- ✅ **DECIDED 2026-09-23 (owner): the dwelling test keys on the LOT where the door number is blank.** 98.5% of the old key's "shared" rows carried no door number (`SN`/`0`): the street field names a *quadra* or *conjunto* and the unit is the `LOTE` complement, so street + number merged whole blocks. `screen_cnefe.py` now appends the lot when the number is blank and the first complement is `LOTE`: **68.9%** of mapped rows share a lot with a dwelling (was 89.7%). Two other keys, measured for comparison: any first complement, 58.0%; the identical coordinate, 18.8% (Recife 20.3%) — rejected as least protective, since a home and a shop on one lot can carry different points.
+- ⚠️ 9.0% of rows stand for 2+ establishments (`COD_INDICADOR_ESTAB_ENDERECO` 2/3/4)
 - ⚠️ Whether the Asa Sul / Asa Norte skew needs a better classifier before this city is worth drawing
 
 ```brief-checks
 [
+  {
+    "id": "brasilia-agency-stations",
+    "claim": "IPEDF's GeoServer publishes Metro-DF's 24 operating stations with a status field - the station source, declared public domain",
+    "kind": "http_contains",
+    "url": "https://catalogo.ipe.df.gov.br/geoserver/geonode/wfs?service=WFS&version=2.0.0&request=GetFeature&typeNames=geonode:ESTACOES_METRO&resultType=hits",
+    "present": [
+      "numberMatched=\"24\""
+    ]
+  },
   {
     "id": "brasilia-cnefe-file-live",
     "claim": "The CNEFE 2022 file for Brasília is keyless and live - business leg and coordinate leg in one",
@@ -83,7 +103,7 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
   },
   {
     "id": "brasilia-osm-rail",
-    "claim": "OSM carries Brasília's rail refs as counted 2026-09-23 - the geometry source until agency layers are found",
+    "claim": "OSM carries Brasília's rail refs as counted 2026-09-23 - the geometry source; agency layers searched 2026-09-23, see Rail",
     "kind": "osm_route_refs",
     "bbox": [
       -15.9,

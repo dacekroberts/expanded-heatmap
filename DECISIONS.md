@@ -16,18 +16,23 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**264 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**269 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Prague: RŽP's establishments are reachable in batches through ARES v3, each with a RÚIAN code; Prague stays paused until measured](#2026-09-24---prague-ržps-establishments-are-reachable-in-batches-through-ares-v3-each-with-a-rúian-code-prague-stays-paused-until-measured)
+- [Prague paused at Step 0: RES is a register of seats, not of shops](#2026-09-24---prague-paused-at-step-0-res-is-a-register-of-seats-not-of-shops)
 - [France deployed: the deferred deploy-verify passed, and phone-width labels clip](#2026-09-24---france-deployed-the-deferred-deploy-verify-passed-and-phone-width-labels-clip)
 - [Rennes' gate 3 confirmed against STAR's own layer after the quota reset](#2026-09-24---rennes-gate-3-confirmed-against-stars-own-layer-after-the-quota-reset)
 
 **2026-09-23**
 
 - [The licence-read agent runs the stray-download check before reporting](#2026-09-23---the-licence-read-agent-runs-the-stray-download-check-before-reporting)
+- [Kaohsiung moves to a reopened access-blocked band (D); Band B becomes Japan only](#2026-09-23---kaohsiung-moves-to-a-reopened-access-blocked-band-d-band-b-becomes-japan-only)
 - [A check for downloads that land in a checkout's root](#2026-09-23---a-check-for-downloads-that-land-in-a-checkouts-root)
 - [Line labels no longer run off the map at phone width](#2026-09-23---line-labels-no-longer-run-off-the-map-at-phone-width)
+- [Four Brazilian cities go regional (owner); Brasilia's dwelling test keys on the lot (owner); neighbours measured](#2026-09-23---four-brazilian-cities-go-regional-owner-brasilias-dwelling-test-keys-on-the-lot-owner-neighbours-measured)
+- [Brazil's agency rail searched for seven cities; station share per municipio measured; Brasilia's 90% is its address key; BH Line 2 is open](#2026-09-23---brazils-agency-rail-searched-for-seven-cities-station-share-per-municipio-measured-brasilias-90-is-its-address-key-bh-line-2-is-open)
 - [Stray downloads in the main checkout's root filed](#2026-09-23---stray-downloads-in-the-main-checkouts-root-filed)
 - [Label check runs at phone width; Milan's shop-sign share; lille retired](#2026-09-23---label-check-runs-at-phone-width-milans-shop-sign-share-lille-retired)
 - [Kaohsiung's data hosts are geo-blocked to Taiwan, not down; stays in Band B](#2026-09-23---kaohsiungs-data-hosts-are-geo-blocked-to-taiwan-not-down-stays-in-band-b)
@@ -324,6 +329,28 @@ onwards; the early ones are split by phase rather than by hour.
   every file it names with the exact URL it came from. That is the step
   whose absence cost the Rio decree its source.
 
+### 2026-09-23 - Kaohsiung moves to a reopened access-blocked band (D); Band B becomes Japan only
+
+- **Decided by the owner: Kaohsiung leaves the geocoding band for a live
+  access-blocked band, reopened as D.** Supersedes the earlier entry the
+  same night that kept it in Band B. Band B's caption names geocoding as
+  the unblocking work, and Kaohsiung needs none - the Taiwan join is proven
+  at 92.7-95.5% on the same file shape; what unblocks it is the publisher
+  opening a file that answers only inside Taiwan. **Rejected: the open
+  screening gap**, which the owner asked about first - that band holds rows
+  resting on an ABSENCE (never screened), and every leg of Kaohsiung is
+  measured, the block included; putting it beside Cairo would blur what the
+  gap means. **Rejected: keeping it in B under a widened caption**, which
+  would make one caption describe two kinds of work. The closed band G's
+  lesson stands and is why D is captioned differently: G's members were
+  "not yet reached properly" and all left once they were; D's member has
+  been reached every way there is, and its way through is a request, not a
+  probe. Counts: A 16 · B 10 · C 5 · D 1 = 32 candidates, unchanged.
+  Touched `docs/city_master_list.md` (counts box, band table, renumber
+  table, Band B, new Band D, the closed band's note, the by-country row) and
+  one sentence in `docs/global_country_shortlist.md` that named a letter
+  where it should name a condition.
+
 ### 2026-09-23 - A check for downloads that land in a checkout's root
 
 - **`scripts/check_stray_downloads.py` lists untracked files directly in the
@@ -396,6 +423,165 @@ onwards; the early ones are split by phase rather than by hour.
   Diego's Blue Line at 375, and Montréal's Ligne 1 at 854, which the pre-fix
   map shows identically. They are in `PLAN.md`.
 
+### 2026-09-24 - Prague: RŽP's establishments are reachable in batches through ARES v3, each with a RÚIAN code; Prague stays paused until measured
+
+- **Found the bulk route the paused Prague build asked for: ARES v3's
+  `POST /ekonomicke-subjekty-rzp/vyhledat` takes a LIST of IČOs and returns
+  each subject's full trade-register record, every licence's `provozovny`
+  included, each carrying `kodAdresnihoMista`** - the RÚIAN address-point
+  code Prague's join already matches at 99.8%. Found in ARES's own OpenAPI
+  spec after three other routes failed differently (NKOD's SPARQL timed out
+  on cost; the RŽP portal and ARES's developer page are JavaScript apps),
+  then confirmed with one live call on two chains: Billa 1,258 establishment
+  entries (259 in Praha), Albert 1,723 (398). It answers the 2026-09-22
+  screen's "per-ICO lookup with no bulk export": the export is still absent,
+  but a batched search is a pipeline where ~85,000 single lookups are not.
+- **Prague is NOT re-banded yet**: the route is found, not measured. Open:
+  the per-call list cap, ARES's terms and rate limits (unread - a rate gate
+  would disqualify it under `add-country`), the IČO universe (a Praha shop
+  can belong to a subject seated anywhere, so the RES seat filter
+  under-covers), the `TypProvozovny` codes, and the restaurant control
+  re-run on establishments. Rejected: moving Prague back to Band A on one
+  call, which is the n=1 mistake the add-country skill records for Finland.
+  Touched `docs/city_master_list.md` (Prague's gap row),
+  `docs/global_country_shortlist.md`.
+
+### 2026-09-23 - Four Brazilian cities go regional (owner); Brasilia's dwelling test keys on the lot (owner); neighbours measured
+
+- **Decided by the owner: Recife, Fortaleza, Porto Alegre and Santos are
+  built REGIONAL**, the Taipei/Dublin/Lille shape, on the station shares
+  measured earlier the same night (30% to 76% of each network inside the
+  city). Rejected: Fortaleza city-only (it keeps 76% of stations, but the
+  ten outside are all line ends and the page would stop where riders do
+  not) and deciding after measurement. The regions: **Recife (Regional)** +
+  Jaboatão dos Guararapes, Cabo de Santo Agostinho, Camaragibe - **43,518**
+  storefronts (city 25,212); **Fortaleza (Regional)** + Caucaia, Maracanaú,
+  Pacatuba - **62,792** (city 49,503); **Porto Alegre (Regional)** + Canoas,
+  Esteio, Sapucaia do Sul, São Leopoldo, Novo Hamburgo - **35,688** (city
+  18,798), nearly double; **Santos (Regional)** + São Vicente - **11,691** (city
+  6,021), nearly double, which answers the brief's Rennes-sized question in
+  the page's favour. Every neighbour reads coordinate level 1 at 97.0% or
+  better and a catch-all of 20.3-28.7%, in the range of the cities
+  themselves. The twelve CNEFE files (32,545,209 B, ftp.ibge.gov.br) were
+  downloaded with the owner's permission into the gitignored raw folders,
+  each checked for size and zip magic bytes.
+- **Decided by the owner: where the door number is blank and the first
+  complement is `LOTE`, the dwelling test keys on the lot.** Implemented in
+  `scripts/screen_cnefe.py`'s address key. Brasília's share of storefronts
+  sharing an address with a dwelling falls **89.7% -> 68.9%** (first names at
+  a dwelling address 824 -> 706). Rejected: keeping street + number (it
+  merged whole blocks and stripped description text from 90% of pins for a
+  reason that is addressing, not housing), and the identical coordinate
+  (18.8% - least protective, since a home and a shop on one lot can carry
+  different points). The key is general: outside Brasília it acts only on
+  unnumbered `LOTE` addresses. **The seven earlier cities' dwelling shares
+  were measured on the old key and are not re-run** - the script already
+  labels the figure an upper bound, and for them the unnumbered-lot case is
+  rare (Recife: 1,213 of its 10,117 shared rows had no number, of any
+  complement).
+- Touched: `scripts/screen_cnefe.py`; the Recife, Fortaleza, Porto Alegre,
+  Santos and Brasília briefs (the four regional briefs' re-release checks now
+  also watch the neighbours' files); `docs/city_master_list.md` (the four
+  renamed "(Regional)" with regional totals).
+
+### 2026-09-24 - Prague paused at Step 0: RES is a register of seats, not of shops
+
+- **Prague's business leg failed the premises test the brief never ran, and
+  the owner paused the build there.** RES (ČSÚ's register of economic
+  subjects) records a subject's registered seat, not where it trades - which
+  the 2026-09-22 country screen had already written down for ARES ("Company
+  register, registered seat") while noting that RŽP's *provozovny* were "the
+  thing to chase and was not reached". The brief then built on RES without
+  closing it. Measured at the build on 85,022 active Prague rows in CZ-NACE
+  47/56/96: the **restaurant control reads 8.02x** OpenStreetMap (NACE 5610*
+  20,829 against `amenity=restaurant` 2,596 inside obec 554782, node+way with
+  `out center`) where France's premises register reads 1.26-1.80x on the same
+  shape; **767 registrants share one address** (Rybná 716/24, 668 of them
+  s.r.o. - a virtual office), 44 addresses hold 50 or more, and s.r.o.
+  companies sit 31.5% at addresses with ten or more of their kind; and
+  **67.9% of rows are `FORMA 101` sole traders**, located at their seat -
+  usually home - under the owner's own name. On RES the map would be
+  accountants' mailboxes and people's homes, failing both the project's
+  premise and its privacy invariant, and no filter repairs it: dropping sole
+  traders removes most real small shops and leaves company seats that are
+  still seats.
+
+- **Owner's call: pause, and hand the staging session the one question that
+  decides it** - whether RŽP's *provozovny* (establishments, with a location
+  address and an activity) exist in bulk. The screen found only a per-IČO
+  lookup. Rejected: building on RES anyway (a map of registrations, not
+  shops); switching to Oslo or Copenhagen in Prague's place was offered and
+  the owner chose to pause Prague and move on to Oslo as a separate build.
+  Prague leaves Band A for the open screening gap in the master list (A 17 ->
+  16, candidates 33 -> 32, open gap 3 -> 4).
+
+- **Everything else was measured, and banked in the brief so a resumed build
+  starts where this one stopped.** Brief checks re-run 10/10, five of them new.
+  - **Rail: PID's own GTFS, not OSM** - the brief checked only Golemio's keyed
+    API, Madrid's failure in its general form. `data.pid.cz/PID_GTFS.zip` is
+    keyless, 50 MB, carries `shapes.txt` and self-attests (ROPID, 2026-09-23 to
+    2026-10-06). Metro per line A 16, B 24, C 20, matching OSM's
+    `network=Pražské metro` relations exactly; all 60 station-line pairs sit
+    inside obec 554782 (ČÚZK INSPIRE AU, 496.2 km²).
+  - **Owner's calls, taken before the pause:** draw **metro A, B, C only**
+    (trams are a dense overlay on the metro here, and the funicular, ferries
+    and S-trains go on the standing rules, as in Paris); and **draw Flora,
+    disclosed** - closed for reconstruction since 1 February 2026 and due to
+    reopen at the turn of November and December (DPP's release of 23. 01.
+    2026), with a step-1 assertion to stop the build once the feed serves it
+    again.
+  - **PID's licence read: CC BY 4.0, permitted with conditions** - credit
+    ROPID, state the changes (a third transformation disclosure after ČSÚ's and
+    ČÚZK's), link the licence and the open-data page, on the station CSV too;
+    no PID/ROPID/IDSK logos. Nothing owed as an act.
+  - **The employee filter is withdrawn.** ČSÚ's own codebook 579 defines
+    `KATPO` `000` as *Neuvedeno*, NOT STATED, with "no employees" a separate
+    code (`110`, 29.8%); and `000`'s legal-form mix (68.3% sole traders)
+    matches the whole set's (67.9%). The brief's "the Czech column genuinely
+    discriminates" is false - it is France's `NN` again.
+### 2026-09-23 - Brazil's agency rail searched for seven cities; station share per municipio measured; Brasilia's 90% is its address key; BH Line 2 is open
+
+- **Searched the agencies' own rail layers for the seven Brazilian cities
+  that had only OSM, and found them for two.** Brasília: IPEDF/Codeplan's
+  GeoServer carries **24 operating stations with a status field**, 5 under
+  construction, 13 planned, and both lines as one MultiLineString (declared
+  "Public Domain (PD)", unread). Recife: a CBTU file on the city's CKAN with
+  **36 stations and six status-labelled lines** (declared ODbL, unread) - but
+  labelled like a planning map, so its status text is not evidence of
+  service. Santos: an ArcGIS account `CPGSTM` carries EMTU-labelled VLT stops
+  and track, **owner unconfirmed** (the name alone suggests SP's
+  metropolitan-transport secretariat), so it is a cross-check, never the
+  licensed source. Belo Horizonte: Prodabel publishes metro LINES (2022,
+  pre-Line 2, declared cc-by), no stations. **Fortaleza, Salvador and Porto
+  Alegre: none, each on three or four methods** - Metrofor's certificate has
+  expired, Salvador's mobility folder is token-gated (not worked around),
+  Trensurb's hosts do not answer. Each brief now recommends which source
+  draws what; **OSM remains the geometry source everywhere except Brasília's
+  stations.** Searched by a background agent; its one borderline act (a
+  custom user agent past BH's firewall) was checked and was an honest
+  self-identifying name, not a browser disguise.
+- **Measured station share per municipio from OSM route members, for the
+  scope question.** Porto Alegre **7 of 23 (30%)**, Recife **19 of 36 (53%)**,
+  Santos **17 of 25 (68%)** with São Vicente holding the rest, Fortaleza **31 of
+  41 (76%)**, Salvador **20 of 21** (Aeroporto in Lauro de Freitas). Salvador
+  keeps commune scope; the other four are recommended regional (Porto Alegre:
+  regional or not built) and **left to the owner**. The twelve neighbours'
+  CNEFE files total 32.5 MB and were NOT downloaded - that needs the owner's
+  permission.
+- **Found that Brasília's "89.7% of storefronts share an address with a
+  dwelling" is the key, not the city.** 98.5% of those rows carry no door
+  number: the street field names a quadra and the unit is the `LOTE`
+  complement, so `screen_cnefe.py`'s street+number key merges whole blocks.
+  Keyed on the lot, **58.0%**; on the identical coordinate, **18.8%** (Recife,
+  the control: 40.9% / 23.7% / 20.3%). Not changed in the script: a finer key
+  narrows what the owner's privacy rule strips, so it is the owner's call.
+- **Found Belo Horizonte's Linha 2 OPEN** since 2026-07-03 with two stations
+  (Nova Suíça, Amazonas), per the local press, and **OSM's ref 2 relations
+  list exactly those two stops**, now coloured. The "Tel Aviv trap" flag in
+  the brief and the master list was retired; re-check at each opening
+  (five more stations due 2027-28).
+- Touched: the seven Brazilian briefs (new checks for Brasília, Recife,
+  Santos, Belo Horizonte), `docs/city_master_list.md`.
 ### 2026-09-23 - Stray downloads in the main checkout's root filed
 
 - **Rio's Decreto nº 38.879/2014 is stored in `docs/licenses/`, with its

@@ -1,4 +1,4 @@
-# Fortaleza — build brief
+# Fortaleza (Regional) — build brief
 
 **Step 0 measured 2026-09-23.** Run `python scripts/brief_check.py fortaleza`
 before writing any code. **Read `sao-paulo.md` first** — the national facts
@@ -44,13 +44,18 @@ first name at a dwelling address is **502 (1.0%)**.
 
 **Metrofor**: `route=subway` **Linha Sul** (2 relations); `route=light_rail` **Linha Oeste**, **Parangaba–Mucuripe** and ref `5` (6 relations). **All 8 coloured.** ⚠️ Linha Oeste is a **diesel** light-rail line — confirm service frequency before treating it as urban rail rather than commuter.
 
-⚠️ **Agency layers have NOT been searched.** `osm-rail` puts them first, and
-Rio's metro and VLT layers turned up only when its city's ArcGIS org was
-enumerated. **Enumerate Fortaleza's own portals before building from OSM.**
+**Agency layers searched 2026-09-23 — none reachable (MEASURED, three methods).**
+The city's CKAN (`dados.fortaleza.ce.gov.br`) returns only a discount-zone
+dataset and bike-share stations for every rail term (nonsense control: zero).
+ArcGIS Online holds no government item in the box. **Metrofor's own GTFS page
+fails TLS because its certificate has EXPIRED** — not bypassed — and the
+Mobility Database lists all three Metrofor feed versions as deprecated, the
+last as of 2025-02-24. `dados.ce.gov.br` does not resolve. **OSM is the
+geometry source.**
 
 ## Scope
 
-Linha Sul runs to Maracanaú and Pacatuba, Linha Oeste to Caucaia — both outside município 2304400. Likely the **regional shape** (Dublin, Lille); measure first.
+**MEASURED 2026-09-23** (OSM route members, by município): **41 stations — 31 in Fortaleza (76%)**, Maracanaú 5, Caucaia 3, Pacatuba 1 (Carlito Benevides, Linha Sul's terminus), and Conjunto São Miguel on the boundary. Every outside station is at a line's end. **REGIONAL — decided by the owner 2026-09-23: Fortaleza (Regional)** = Fortaleza + Caucaia + Maracanaú + Pacatuba. Measured the same night: **Caucaia 6,790** storefronts · **Maracanaú 5,158** · **Pacatuba 1,341** — **62,792 with Fortaleza's 49,503**. Coordinate level 1 ≥ 97.0% (Caucaia the lowest, 2.6% at level 2); catch-all 25.9–28.2%.
 
 ## Region
 
@@ -58,9 +63,8 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
 
 ## Still unknown
 
-- ⚠️ Scope — Caucaia and Maracanaú
 - ⚠️ Linha Oeste's service pattern (diesel)
-- ⚠️ The meaning of OSM ref `5`
+- ⚠️ OSM ref `5` is the **Ramal Aeroporto–Castelão** (Expedicionários ⇒ Castelão, light rail) — whether it carries passengers is unverified: Tel Aviv's trap
 
 ```brief-checks
 [
@@ -79,12 +83,15 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
     "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/23_CE/",
     "present": [
       "2304400_FORTALEZA.zip",
+      "2307650_MARACANAU.zip",
+      "2303709_CAUCAIA.zip",
+      "2309706_PACATUBA.zip",
       "2024-05-2"
     ]
   },
   {
     "id": "fortaleza-osm-rail",
-    "claim": "OSM carries Fortaleza's rail refs as counted 2026-09-23 - the geometry source until agency layers are found",
+    "claim": "OSM carries Fortaleza's rail refs as counted 2026-09-23 - the geometry source; agency layers searched 2026-09-23, see Rail",
     "kind": "osm_route_refs",
     "bbox": [
       -3.89,

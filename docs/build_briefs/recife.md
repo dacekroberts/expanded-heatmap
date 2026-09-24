@@ -1,4 +1,4 @@
-# Recife — build brief
+# Recife (Regional) — build brief
 
 **Step 0 measured 2026-09-23.** Run `python scripts/brief_check.py recife`
 before writing any code. **Read `sao-paulo.md` first** — the national facts
@@ -42,15 +42,23 @@ first name at a dwelling address is **301 (1.2%)**.
 
 ## 🚇 Rail — OpenStreetMap, counted 2026-09-23 (one query, Curitiba as the negative control)
 
-**Metrô do Recife**: `route=subway` Linha Centro 1 & 2 and Linha Sul (6 relations, refs `1`, `2`, `Sul`, all coloured); `route=light_rail` **VLT Curado–Cajueiro Seco** (2 relations) — ⚠️ a **diesel** line; confirm service pattern before drawing.
+**Metrô do Recife**: `route=subway` Linha Centro 1 & 2 and Linha Sul (6 relations, refs `1`, `2`, `Sul`, all coloured); `route=light_rail` **VLT Curado–Cajueiro Seco** and **VLT Cajueiro Seco–Cabo** (4 relations) — ⚠️ **diesel** lines; confirm service pattern before drawing.
 
-⚠️ **Agency layers have NOT been searched.** `osm-rail` puts them first, and
-Rio's metro and VLT layers turned up only when its city's ArcGIS org was
-enumerated. **Enumerate Recife's own portals before building from OSM.**
+**Agency layer FOUND 2026-09-23 — stations and lines in one small file.**
+`dados.recife.pe.gov.br`, *Malha Viária de Trens do Grande Recife* (author
+CBTU, maintainer EMPREL): `estacoes-de-trem-do-grande-recife.geojson`, 11,899 B
+— **36 station points** (`name` only; OSM also counts 36) and **six line
+strings whose `name` carries line, length and status** (*"Linha Sul (diesel)
+- 17,6 km / Cajueiro Seco - Cabo / Operação em VLT"*). Declared licence
+**ODbL** in CKAN and the data dictionary — **not read**. ⚠️ **It reads like a
+planning map**: one segment is labelled *"Expansão - 4,7 km / Rodoviária -
+Camaragibe"* while OSM shows Camaragibe in service, so its status text is not
+evidence of today's service. **Recommendation: OSM for geometry and stations
+(per-line relations, colours); the CBTU file as the cross-check.**
 
 ## Scope
 
-Linha Centro runs to Camaragibe and Jaboatão dos Guararapes, Linha Sul to Cajueiro Seco in Jaboatão — **much of the network is outside município 2611606**. Almost certainly the **regional shape**; measure station share per município.
+**MEASURED 2026-09-23** (OSM route members, by município): **36 stations — only 19 in Recife (53%)**, Jaboatão dos Guararapes 12, Cabo de Santo Agostinho 4 (the diesel VLT's southern end), Camaragibe 1. **REGIONAL — decided by the owner 2026-09-23: Recife (Regional)** = Recife + Jaboatão dos Guararapes + Cabo de Santo Agostinho + Camaragibe. Measured the same night with `scripts/screen_cnefe.py` (lot-aware key): **Jaboatão 11,721** storefronts · **Cabo 3,908** · **Camaragibe 2,677** — **43,518 with Recife's 25,212**. Coordinate level 1 ≥ 99.6% in each; catch-all 27.1–28.5%, in line with Recife's.
 
 ## Region
 
@@ -58,12 +66,22 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
 
 ## Still unknown
 
-- ⚠️ Scope — Jaboatão dos Guararapes, Camaragibe
 - ⚠️ The VLT's service pattern (diesel)
 - ⚠️ Why the catch-all runs highest here (29.2%) — a regional vocabulary the rules lack?
 
 ```brief-checks
 [
+  {
+    "id": "recife-agency-rail",
+    "claim": "CBTU's station-and-line file on Recife's CKAN is keyless and live, with line status in the names - the cross-check for OSM, declared ODbL",
+    "kind": "http_contains",
+    "url": "https://dados.recife.pe.gov.br/dataset/9a4d7113-f4e0-448f-b62f-05cd2fab5c1d/resource/c029fbdd-8b62-4308-bf73-27de9a931554/download/estacoes-de-trem-do-grande-recife.geojson",
+    "present": [
+      "Operação em VLT",
+      "Estação Cajueiro Seco",
+      "Camaragibe"
+    ]
+  },
   {
     "id": "recife-cnefe-file-live",
     "claim": "The CNEFE 2022 file for Recife is keyless and live - business leg and coordinate leg in one",
@@ -79,12 +97,15 @@ Brazil's — the first Brazilian city adds it (see `sao-paulo.md`).
     "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/26_PE/",
     "present": [
       "2611606_RECIFE.zip",
+      "2607901_JABOATAO_DOS_GUARARAPES.zip",
+      "2602902_CABO_DE_SANTO_AGOSTINHO.zip",
+      "2603454_CAMARAGIBE.zip",
       "2024-05-2"
     ]
   },
   {
     "id": "recife-osm-rail",
-    "claim": "OSM carries Recife's rail refs as counted 2026-09-23 - the geometry source until agency layers are found",
+    "claim": "OSM carries Recife's rail refs as counted 2026-09-23 - the geometry source; agency layers searched 2026-09-23, see Rail",
     "kind": "osm_route_refs",
     "bbox": [
       -8.16,
