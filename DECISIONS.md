@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**323 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**324 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Kyoto rebuilt from its permit stream; Band A decided, pending four join rules](#2026-09-24---kyoto-rebuilt-from-its-permit-stream-band-a-decided-pending-four-join-rules)
 - [Japan's permit-type taxonomy: one module for ten list formats](#2026-09-24---japans-permit-type-taxonomy-one-module-for-ten-list-formats)
 - [Japan's national facts module; the stub test clears four cities; Tokyo goes last](#2026-09-24---japans-national-facts-module-the-stub-test-clears-four-cities-tokyo-goes-last)
 - [Japan: the Shinkansen is out; confectioners and delis count](#2026-09-24---japan-the-shinkansen-is-out-confectioners-and-delis-count)
@@ -365,6 +366,38 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Kyoto rebuilt from its permit stream; Band A decided, pending four join rules
+
+- **Found Kyoto's current food register can be REBUILT, Rotterdam's method,
+  and the owner accepted it for Band A, with its disclosures.** The owner
+  approved the portal's own download button, which POSTs a form. It is now a
+  standing rule in `reprobe-city`. Through it came 82 XLSX (14.1 MB, CC BY 4.0
+  declared, logged): the 2021-03-31 full list, taken just before the reform,
+  plus 64 monthly new-permit lists. Stitched, deduplicated and kept only
+  within each permit's term (expiry filled on about 100% of rows; renewals
+  arrive as monthly rows), that leaves 30,351 permits and **22,259 fixed
+  restaurants, 15.5 per 1,000** residents. Kyoto's own complete 2021 list gave
+  16.7, and a pessimistic closure model gives a floor of 11.6: all inside the
+  complete-list yardstick. The rejected alternative was waiting for a
+  published full list, which the 2021 reform ended. The same ceiling holds
+  in Yokohama and Nagoya, where no such stitch is possible.
+- **The join needs four new rules**, prototyped outside the shared module,
+  which is unchanged; the Minato control still reads 99.8%. The module alone
+  gives 61.4% block and 35.5% unplaced, because Kyoto's addresses name the
+  street intersection before the town (`河原町通三条上る`). With the rules, it
+  reaches **93.0% block, 6.5% chōme, 0.5% none**:
+  - A: strip the intersection part, for Kyoto only;
+  - B: character variants;
+  - C: a known-town fallback;
+  - D: leave the 0.8% in same-named twin towns unplaced, not misplaced by a
+    median 1.27 km.
+  
+  B and C reach every city, so **they land after a /compact** (owner) with a
+  before/after on every key. Then come the stub test, the licence read, the
+  brief and the row move (`PLAN.md`). **Must disclose**: a rebuilt register
+  whose closures are unknown (an upper bound), vehicles excluded, and food
+  retail by permit type only.
 
 ### 2026-09-24 - Japan's permit-type taxonomy: one module for ten list formats
 

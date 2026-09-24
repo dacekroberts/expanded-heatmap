@@ -594,7 +594,29 @@ brief names.
     (`add-city`, `pipeline/osaka/`), reading the join, the facts and the
     taxonomy from the shared modules.
   - [ ] Owner, minor: アイスクリーム類製造業 (692 rows; many are gelato
-    counters) is OUT for now, since the owner's call named 菓子 and そうざい. **Osaka is the recommended
+    counters) is OUT for now, since the owner's call named 菓子 and そうざい.
+- [ ] **Kyoto → Band A (owner, 2026-09-24), in this order, after a /compact:**
+  1. Add the rebuild's rules A–D to `pipeline/countries/japan_register.py`.
+     The rule text is in `scratchpad/japan_run/kyoto/result.json`.
+     - A: strip the street-intersection part (上る/下る/入る), Kyoto only.
+     - B: character variants in `VARIANTS` (祇/祗 and Kyoto's private-use
+       characters, 藪/薮, 壷/壺, 桧/檜, 篭/籠, 竃/竈, 竜/龍, 渕/淵, 祓/秡; 鍛治→鍛冶,
+       廻リ→廻り; expand ゝ).
+     - C: a known-town fallback, where the longest known town in the ward
+       ends or starts the parsed town.
+     - D: same-named twin towns in 上京, 中京 and 下京 are left unplaced.
+     
+     B and C apply to every city. Capture a before/after of all 24 keys plus
+     Kyoto (`scratchpad/japan_run/baseline_all.py`), keep Minato at 99.8%,
+     and update any brief whose number moves.
+  2. Add a `kyoto` entry to `scripts/screen_japan_join.py` (the stitched list,
+     `data/kyoto/raw/isj`), and put Kyoto's ward codes (26101–26111) and
+     EPSG:32653 in `japan.py`. Run the stub test.
+  3. `licence-read` on data.city.kyoto.lg.jp (CC BY 4.0 declared).
+  4. Write `docs/build_briefs/kyoto.md` with a checks block. It must disclose
+     a rebuilt register (the 2021 list plus monthly permits within their
+     term), closures unknown (an upper bound), and vehicles excluded.
+  5. Move Kyoto's master-list row from the open gap to Band A. **Osaka is the recommended
   first build**: the cleanest list, 99.1% block, 38 m against the city's own
   coordinates.
 - [~] **Japan — three owner calls that recur in all five briefs.**
