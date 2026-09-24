@@ -11,6 +11,8 @@ exists". Nothing enforced that, and on 2026-09-24 PLAN.md held 43 done items in
   REMOVABLE  it cites a DECISIONS.md entry (*"title"*) and that entry exists;
   CANDIDATE  it cites none, but DECISIONS.md headings share its date and its
              distinctive words - a person must confirm the match;
+  KEEP(open) it still holds open work (an unticked sub-item, "left behind",
+             "not yet"...) - whatever it cites, it is not done;
   KEEP?      nothing in DECISIONS.md looks like it - the entry may be missing,
              which is itself worth fixing before the item goes.
 
@@ -33,6 +35,8 @@ if hasattr(sys.stdout, "reconfigure"):
 
 HEADING = re.compile(r"^### (\d{4}-\d{2}-\d{2}) - (.+)$", re.M)
 CITED = re.compile(r'\*"([^"]{8,})"\*')
+OPEN = re.compile(r"^\s*- \[[ ~]\]|left behind|still open|remains? open|"
+                  r"to settle|not yet|\bTODO\b", re.I | re.M)
 DATE = re.compile(r"\b(20\d\d-\d\d-\d\d)\b")
 WORD = re.compile(r"[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ'-]{3,}")
 STOP = set("""this that with from were have been their there which when what
@@ -71,12 +75,20 @@ def main():
     args = ap.parse_args()
     plan = PLAN.read_text(encoding="utf-8")
     heads = HEADING.findall(DECISIONS.read_text(encoding="utf-8"))
-    counts = {"REMOVABLE": 0, "CANDIDATE": 0, "KEEP?": 0}
+    counts = {"REMOVABLE": 0, "CANDIDATE": 0, "KEEP?": 0, "KEEP(open)": 0}
     for line, body in items(plan):
         title = re.sub(r"[*`]", "", body.splitlines()[0][6:]).strip()[:70]
         cited = [c for c in CITED.findall(body)
                  if any(c.lower().rstrip(".") in h.lower() for _, h in heads)]
-        if cited:
+        # A recorded item can still hold live work - Prague's carried an open
+        # reminder (Flora reopens around December 2026) and Copenhagen's open
+        # owner actions, and both were first reported REMOVABLE. Open work
+        # outranks a citation.
+        open_work = OPEN.search(body)
+        if open_work:
+            verdict = "KEEP(open)"
+            why = f"holds open work: {open_work.group(0).strip()!r}"
+        elif cited:
             verdict, why = "REMOVABLE", f'cites "{cited[0][:50]}"'
         else:
             dates, mine = set(DATE.findall(body)), words(body)
