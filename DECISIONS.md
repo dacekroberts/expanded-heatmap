@@ -16,7 +16,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**255 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**258 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
@@ -24,6 +24,9 @@ onwards; the early ones are split by phase rather than by hour.
 
 **2026-09-23**
 
+- [Kaohsiung's data hosts are geo-blocked to Taiwan, not down; stays in Band B](#2026-09-23---kaohsiungs-data-hosts-are-geo-blocked-to-taiwan-not-down-stays-in-band-b)
+- [Every Band A city has a brief: seven Brazilian and three Taiwanese written, all checks passing live](#2026-09-23---every-band-a-city-has-a-brief-seven-brazilian-and-three-taiwanese-written-all-checks-passing-live)
+- [The cleanup role's stray worktrees retired; removing a session's own launch worktree broke that session](#2026-09-23---the-cleanup-roles-stray-worktrees-retired-removing-a-sessions-own-launch-worktree-broke-that-session)
 - [Rennes built: 3,479 storefronts, 24 stations, and France is complete](#2026-09-23---rennes-built-3479-storefronts-24-stations-and-france-is-complete)
 - [Three limbs of check_provenance could fall silent; each now asserts it had input](#2026-09-23---three-limbs-of-check_provenance-could-fall-silent-each-now-asserts-it-had-input)
 - [The geocoding retrospective, written to prepare Japan; the lesson placed where the next country passes through it](#2026-09-23---the-geocoding-retrospective-written-to-prepare-japan-the-lesson-placed-where-the-next-country-passes-through-it)
@@ -298,6 +301,59 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-23 - Kaohsiung's data hosts are geo-blocked to Taiwan, not down; stays in Band B
+
+- **Found that `data.kcg.gov.tw` answers inside Taiwan and refuses the rest
+  of the world, so Kaohsiung's "unreachable" was a geo-block all along.**
+  From here every Kaohsiung data host (`data`, `openapi`, `api`, `kcgdg`,
+  `sports`) resolves and then drops the TCP connection attempt on 443 and 80,
+  while `www.kcg.gov.tw` on the same /16 connects in 0.16 s. Globalping's
+  probe network, which has Taiwanese probes where check-host.net has none,
+  returned **HTTP 200 from 3 of 3 Taiwanese probes** (two networks) and a
+  TCP timeout from Tokyo and Los Angeles. Recorded as a publisher's access
+  control and **not routed around** - no proxy, no VPN, nothing fetched
+  through a probe (one `HEAD` each, diagnosis only). Rejected: treating it
+  as an outage to retry, which the measurement rules out. The on-disk
+  catalogue export lists no other host for any of 3,342 Kaohsiung datasets,
+  and no national door-plate file exists. **Kaohsiung stays in Band B**; the
+  way through is asking 高雄市政府民政局 to publish the file on data.gov.tw or
+  lift the filter for it - an owner action, not taken. Touched
+  `docs/city_master_list.md`, `docs/global_country_shortlist.md`,
+  `docs/geocoding_retrospective.md` (the four-findings table now names the
+  in-country test).
+
+### 2026-09-23 - Every Band A city has a brief: seven Brazilian and three Taiwanese written, all checks passing live
+
+- **Ten briefs written, completing Band A**: Salvador, Fortaleza, Belo
+  Horizonte, Brasilia, Recife, Porto Alegre and Santos (4/4 each), and Taipei
+  (Regional) 6/6, Taichung 3/3, Taoyuan 3/3. The seven Brazilian briefs were
+  generated from one template over the figures `scripts/screen_cnefe.py`
+  measured, so they are identical in shape and differ only in numbers; each
+  defers the national argument to `sao-paulo.md`, as Taichung's and Taoyuan's
+  defer to `taipei.md`. Every brief names its own open items rather than
+  inheriting a clean bill: **none of the seven Brazilian cities has had its
+  agency rail layers searched** (Rio's were found only by enumerating), and
+  Recife, Fortaleza, Porto Alegre and Santos each carry a regional-scope
+  question.
+
+- **`brief_check.py` now verifies against the operating system's trust
+  store** (`truststore`, when installed). Python's bundle lacks Taiwan's
+  government root, so every data.taipei and FIA check failed on certificates
+  rather than facts; the OS store trusts it. **Verification stays on** - this
+  widens what is trusted to what the OS trusts. Rejected: disabling
+  verification for Taiwanese hosts, which the project forbids.
+
+- **One check failed on the first run and it was the HOST, not the brief**:
+  Belo Horizonte's OSM check got `429 Too Many Requests` after seven Overpass
+  checks back to back, and the second mirror timed out. Re-run alone, it
+  passed (4 relations, 2 refs). Recorded because the reflex to "fix" a
+  failing check by editing it is the one `brief_check.py` exists to refuse; a
+  failure's first question is whether it is about the claim or the host.
+
+- **Taipei's brief carries a TDX tripwire**: an `http_contains` check that
+  expects `401 Valid API Key Required`, and fails the day TDX's access
+  changes - the `endpoint_absent` pattern CNPJ's geo-block uses, expressed
+  with `expect_status` so it can also check the refusal's wording.
 ### 2026-09-24 - Rennes' gate 3 confirmed against STAR's own layer after the quota reset
 
 - **STAR's per-line stop layer matches the feed exactly: a 15 = 15, b 15 = 15.**
@@ -321,6 +377,34 @@ onwards; the early ones are split by phase rather than by hour.
   step 1 prints did. Config, the provenance row, the brief, PLAN and
   project_context updated to say so.
 
+### 2026-09-23 - The cleanup role's stray worktrees retired; removing a session's own launch worktree broke that session
+
+- **Retired, at the owner's request:** the worktree
+  `.claude/worktrees/practical-leakey-12a8a2`, and the branches
+  `claude/practical-leakey-12a8a2` (`2fea434`),
+  `claude/cleanup-handoff-2026-09-23-18986c` (`6ec6010`) and `render-guard`
+  (`469ca7a`). All were deleted with `-d` against `worktree-cleanup` at
+  `2c091fd`, which contains every one of them. Removing the worktree without
+  `--force` also confirmed it had no uncommitted files. The remote branches
+  `dublin-build`, `milan-build` and `spain-app-wiring` are merged and were left
+  on GitHub; deleting them is a push, and it was not asked for.
+
+- **The desktop app had launched this cleanup session in a worktree it
+  generated, `cleanup-handoff-2026-09-23-18986c`, instead of in
+  `.claude/worktrees/cleanup`.** The handoff's first instruction, to confirm
+  the branch and stop if it was wrong, caught it. The session then moved
+  itself into the cleanup worktree at the owner's choice, rather than being
+  restarted.
+
+- **Removing that launch worktree from inside the same session broke the
+  session.** `git worktree remove` deleted the contents and unregistered the
+  worktree, then failed to delete the folder itself, because the session
+  still held it open. The session's hooks load from the `.claude/` of the
+  folder it was launched in, so `block_heredoc.py` disappeared and every Bash
+  call failed. The risk had been named to the owner minutes earlier, and the
+  command was run anyway. Nothing was lost, because the worktree was clean and
+  at `master`. The rule now sits beside the retirement steps in
+  `docs/session_roles.md`, which is the place the next retirement will read.
 ### 2026-09-23 - Rennes built: 3,479 storefronts, 24 stations, and France is complete
 
 - **Rennes is the 25th city and the fifth and last French one.** 3,479

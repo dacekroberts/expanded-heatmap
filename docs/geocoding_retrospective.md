@@ -68,9 +68,11 @@ rarely filed under "geocoding".
 | What happened | What it was | How it was told apart |
 |---|---|---|
 | Receita's CNPJ host reset every TLS handshake | **Moved AND geo-blocked** — directory 404 since 2026-01-30 (Internet Archive), Nextcloud share since, and **1 of 16 check nodes answered: the Brazilian one** | `check-host.net`, 16 nodes in 12 countries |
-| Kaohsiung's `data.kcg.gov.tw` timed out | **Unreachable from everywhere tested** — six nodes in five countries incl. HK/JP/SG, and twice later | Same; no Taiwanese node available, so "unreachable, not negative" |
+| Kaohsiung's `data.kcg.gov.tw` timed out | **Geo-blocked to Taiwan** — **HTTP 200 from 3 of 3 Taiwanese probes**, a TCP timeout from Japan and the US, while `www.kcg.gov.tw` on the same network answered from everywhere. Recorded for a day as "unreachable from everywhere" because check-host.net has **no Taiwanese node** | **Globalping** (`api.globalping.io`, anonymous, one `HEAD` per probe) **has probes INSIDE the country**; also test the publisher's main site as a same-network control. Diagnosis only — nothing is fetched through a probe |
 | `data.taipei` failed TLS in Python | **Our trust store** — Python's bundle lacks Taiwan's government root (GRCA); **curl on Windows verifies it** against the OS store | Try the OS store before concluding anything. **Never switch verification off** |
 | The railway bureau's airport-MRT file returned an Incapsula page | **A bot challenge** — not worked around; the national layer covered those stations | Read the response body, not the status code |
+
+**Where the country's own vantage point is missing, the finding is incomplete** — a timeout from six foreign nodes cannot tell "down" from "geo-blocked", and those two have opposite next steps (wait, or ask the publisher). Test from inside the country before recording either.
 
 **A geo-block or bot challenge is a publisher's access control, and this
 project does not route around it** — no proxy, no VPN, no disguising a

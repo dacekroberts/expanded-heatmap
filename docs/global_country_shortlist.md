@@ -1890,6 +1890,14 @@ Kaohsiung's station files sit on the unreachable host, and the railway
 bureau's airport-MRT file is behind an **Incapsula bot challenge** — not worked
 around; the national layer covers those stations.
 
+#### ▲▲ 2026-09-23, night — Kaohsiung is GEO-BLOCKED, not down
+
+Measured layer by layer from here: every Kaohsiung data host — `data.kcg.gov.tw` (223.200.100.11), `openapi.kcg.gov.tw` and `api.kcg.gov.tw` (both 223.200.91.113), `kcgdg`, `sports` — **resolves in DNS and drops the TCP connection attempt on ports 443 AND 80**, while `www.kcg.gov.tw` (223.200.91.227, same /16) connects in 0.16 s with a valid `*.kcg.gov.tw` certificate. Then from **Globalping**'s probe network, which has Taiwanese probes where check-host.net has none: `data.kcg.gov.tw` answered **HTTP 200 to 3 of 3 Taiwanese probes** (Taichung and Taipei, AS3462 and AS4780) and **timed out from Tokyo and Los Angeles**; `www.kcg.gov.tw` answered all five. **A foreign-address filter on the data hosts — the publisher's access control, not routed around.** One `HEAD` per probe, diagnosis only; nothing was fetched through a probe.
+
+The national catalogue (the on-disk export, 52,436 datasets) lists **3,342 Kaohsiung-published datasets and no other host** for any of its files: 6,951 URLs on `data.kcg.gov.tw`, 6,932 on `openapi.kcg.gov.tw`, 9 on `api.kcg.gov.tw`. The door-plate file exists in a **2026 edition** (`高雄市115年門牌坐標資料-TWD97`, dataset 177859, six resources, updated 2026-06-25) with the same street / lane / alley / number / TWD97 columns as the other cities. Kaohsiung's metro station coordinates (`高雄紅橘線捷運車站中心座標`, `高雄輕軌車站中心座標`) sit behind the same filter. `openapi.kcg.gov.tw`'s root redirects to `/Account/Login` even from Taiwan. **No national door-plate file** exists in the catalogue — MOI publishes only counts of what the cities supply.
+
+**The way through is the publisher, not the network**: 高雄市政府民政局 could publish the file on data.gov.tw or lift the filter for it. Until then Kaohsiung stays in Band B.
+
 #### A refinement the Korea probe produced: stations are not lines
 
 Japan's N02 carries **both** — 10,235 station points *and* 21,932 line
