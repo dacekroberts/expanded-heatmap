@@ -2912,6 +2912,24 @@ official permit record, or that the Gemeente produced or endorses it. The BAG
 the owner 2026-09-24. **MUST DO: nothing** - the city's API is to require a key
 on an unset date, and registering is the owner's act.
 
+**36. Roma Capitale (Rome) — required, and DISPLAYED.**
+
+**CC BY 4.0**, from the portal's *Licenze* page and the resource's own
+`license_type` `A21_CCBY40` (read 2026-09-24): credit Roma Capitale, link the
+licence, state the modification. The notice names the changes - filtered to
+shops, food and drink and personal services, sorted into three categories,
+placed at house-number level, mapped by distance to stations. **MUST NOT SAY**:
+that Roma Capitale produced or endorses the map. Wording approved by the owner
+2026-09-24. **MUST DO: nothing.**
+
+**37. ANNCSU (Rome) — required, and DISPLAYED.**
+
+**CC BY 4.0**, on dati.gov.it (read 2026-09-24; the EU high-value-datasets
+regulation requires CC BY 4.0 or looser for addresses): credit the Agenzia delle
+Entrate and ISTAT, link the licence, and say what the coordinates are used for -
+placing another register's premises. Wording approved by the owner 2026-09-24.
+**MUST DO: nothing.**
+
 What has grown instead is the pile of **permission questions**, now four: three
 "what does silence mean?" calls and the route-colour one. They are questions
 about permission rather than implementation, and they are the only items of

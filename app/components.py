@@ -594,8 +594,9 @@ _NOTICES = [
      "Barcelona, including its FGC lines and both funiculars), and the route "
      "geometry of Lille's two métro lines, the per-line colours of "
      "Oslo's T-bane and tram lines, and Copenhagen's Metro and S-tog lines "
-     "and stations and the municipal boundaries used to select them, and "
-     "Prague's and Amsterdam's city boundaries, are from OpenStreetMap, "
+     "and stations and the municipal boundaries used to select them, "
+     "Rome's metro and Roma–Viterbo urban lines and their stations, and "
+     "Prague's, Amsterdam's and Rome's city boundaries, are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
      "geometry; stations, rings and categories are this project's work.",
@@ -874,6 +875,26 @@ _NOTICES = [
      "address, and mapped by distance to metro and tram stops. This is not the "
      "official permit record, and it is not produced or endorsed by the Gemeente "
      "Amsterdam.",
+     False),
+    # Roma Capitale - the SUAP premises register. CC BY 4.0 on the dataset page
+    # (read 2026-09-24): credit, link the licence, state the changes. Wording
+    # approved by the owner 2026-09-24.
+    ("Roma Capitale (Rome)",
+     "Premises data for Rome is from Roma Capitale's register of productive "
+     "activities (SUAP, [dati.comune.roma.it](https://dati.comune.roma.it/)), used "
+     "under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Changes: the "
+     "register is filtered to shops, food and drink, and personal services, sorted "
+     "into three categories, placed at house-number level and mapped by distance "
+     "to metro stations. Not produced or endorsed by Roma Capitale.",
+     False),
+    # ANNCSU - the national house-number archive that places SUAP's premises.
+    # CC BY 4.0 (read 2026-09-24). Wording approved by the owner 2026-09-24.
+    ("ANNCSU (Rome)",
+     "House-number coordinates for Rome are from ANNCSU, the national archive of "
+     "street numbers kept by the Agenzia delle Entrate and ISTAT "
+     "([anncsu.open.agenziaentrate.gov.it](https://anncsu.open.agenziaentrate.gov.it/)), "
+     "used under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). They are "
+     "used here to place another register's premises on the map.",
      False),
 ]
 

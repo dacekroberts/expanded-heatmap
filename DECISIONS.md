@@ -16,10 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**314 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**316 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Rome: the page text written, notices 36 and 37, merged with Amsterdam](#2026-09-24---rome-the-page-text-written-notices-36-and-37-merged-with-amsterdam)
+- [Amsterdam deployed; the live site measured after the reboot](#2026-09-24---amsterdam-deployed-the-live-site-measured-after-the-reboot)
 - [The open legend capped below the map's buttons, and a taxonomy may name its layer (owner, from Amsterdam's deploy-verify)](#2026-09-24---the-open-legend-capped-below-the-maps-buttons-and-a-taxonomy-may-name-its-layer-owner-from-amsterdams-deploy-verify)
 - [MHLW's national food open data is an opt-in slice; it completes Fukuoka and Hiroshima only](#2026-09-24---mhlws-national-food-open-data-is-an-opt-in-slice-it-completes-fukuoka-and-hiroshima-only)
 - [The owner's answers to the overnight question points; Sendai's lists need permission](#2026-09-24---the-owners-answers-to-the-overnight-question-points-sendais-lists-need-permission)
@@ -356,6 +358,50 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Rome: the page text written, notices 36 and 37, merged with Amsterdam
+
+- **Rome's page, notices 36 (Roma Capitale) and 37 (ANNCSU), its
+  `excluded_categories.md` section and the OpenStreetMap notice's Rome clause
+  are written as the owner approved them on 2026-09-24** - the overnight
+  drafts, with the rail paragraph, the title ("metro and urban rail
+  stations"), the ring sentence ("Rome's rail") and the blurb revised for the
+  Roma-Viterbo urban service and re-approved the same morning. The snapshot
+  caption reads its three dates from `outputs/rome/provenance.json`: the SUAP
+  file's month (only its name carries one), the ANNCSU extract's date, and
+  the fetch day for the OSM rail. **The merge with master (Amsterdam) put the
+  two cities' appended `app/cities.py` entries INTO ONE DICT** - the conflict
+  region held only each entry's interior, so taking both sides gave one `{...}`
+  with Amsterdam's keys then Rome's, and Rome's silently won: 29 cities, no
+  Amsterdam, and no error. Caught by importing the file and counting, and split
+  by hand. The lesson for any merge of two appended list entries: count the
+  entries after resolving, never trust a clean parse. Re-rendered on the merged
+  renderer (the legend cap): `drift_check.py rome` - only `heatmap.html`
+  changed, 9 figures unchanged; `check_render_current.py` 30 of 30;
+  `check_macro_labels.py` PROBLEMS 0 over 30 cities; `check_provenance.py` all
+  recorded, 37 notices numbered; `check_scope_disclosure.py` 30 cities;
+  `check_personal_exposure.py rome` 0 person-like names. `docs/city_master_list.md`
+  (30 built; Italy 2; its country table's Total corrected from a stale 26 / 34
+  / 17 to 30 / 31 / 11, and Poland added for Warsaw's Band D row, which the
+  header already counted), `docs/commuter_rail_list.md` (Rome the third city to
+  draw suburban rail; Prague and Amsterdam rows added), `docs/project_context.md`.
+
+### 2026-09-24 - Amsterdam deployed; the live site measured after the reboot
+
+- **Amsterdam is live: pushed `bc8b52c` (master `cf0c8d5..bc8b52c`), rebooted
+  by the owner, and measured on the deployed site.** The Overview's region
+  picker reads Europe (13); the Amsterdam page shows the approved title, the
+  snapshot caption (permits and shop units 2026-09-24; OVapi timetable
+  2026-09-23 to 2026-12-12), notice 35 and the OpenStreetMap notice naming
+  Amsterdam's boundary, with no exceptions. **The legend fix measured live**,
+  at a 1400x900 window (map frame 1000x650): open legend y 56-626, 570 px,
+  scrolling, under buttons ending at 45; zoom 12, as expected; the layer
+  control "Businesses: Shops and services (9,215)". A 770 px window loads it
+  collapsed, as the autofit intends. Paris spot-checked: legend top 84,
+  unchanged, no scrollbar, no exceptions. The two `amsterdam-*-tmp` launch
+  entries were removed, and the 32 data junctions added to the Amsterdam
+  worktree for the 29-city re-render were unlinked non-recursively (targets
+  checked intact).
 
 ### 2026-09-24 - The open legend capped below the map's buttons, and a taxonomy may name its layer (owner, from Amsterdam's deploy-verify)
 
