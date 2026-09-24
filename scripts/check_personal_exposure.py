@@ -152,6 +152,15 @@ REGISTRIES = {
     "rennes": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv",
                    address=("business_name",)),
+    # Copenhagen, the first Danish city: Oslo's structural guarantee, from
+    # CVR. The parent company's legal form is joined for every premises, and
+    # a personally owned one (Enkeltmandsvirksomhed, PMV) - or any name with
+    # the sole-trader marker "v/" - shows its address, never its name. CVR's
+    # `coNavn` (c/o, a person on 25% of storefront rows) is never loaded and
+    # step 2 asserts it. No registrant-name column exists to fall back to.
+    "copenhagen": dict(raw=None, trade=None, owner=None,
+                       processed="businesses_clean.csv",
+                       address=("business_name",)),
     "san_diego": dict(raw="sd_businesses_active_datasd.csv", trade="dba_name",
                       owner="business_owner_name", processed="businesses_clean.csv",
                       address=("address_no", "address_road", "address_suite")),

@@ -200,9 +200,22 @@ TAXONOMY_SYSTEM = "denmark_db25"
 RAW_CLASSIFICATION_COLUMN = "db25_label"
 CITY_KEEP = "COPENHAGEN"   # kept for the scaffold's templates; KOMMUNER filters
 
-# TODO: the per-city catch-all verdict (969900 first), from a hand sample and
-# the sole-trader share, as Oslo's 96.990 was taken.
-CATCH_ALL_EXCLUDE = ()
+# The per-city catch-all verdict, which denmark_db25.py declines to make.
+# Measured 2026-09-24 on Copenhagen's own profile (15,847 storefronts):
+#
+#     969900  Andre personlige serviceydelser i.a.n.
+#             613 rows (3.9%) - personally owned 82%, above ground 50%
+#             (all storefronts: 39% and 23%)
+#
+# Oslo's 96.990 signature (87% sole traders, 5% with employees) and France's
+# 96.09Z, on Copenhagen's own numbers. A hand sample of the 109 company-form
+# rows found tattoo studios (~70 across the whole code) and dog groomers
+# beside coaching, healing, consulting, dog walking, a photo-booth company and
+# a municipal public toilet - so the exclusion DOES lose some real shopfronts,
+# tattoo studios above all, and says so on the page. The six RETAIL
+# catch-alls and 561190 (øvrige spisesteder) are kept, as in Oslo and France:
+# shops and eateries by product.
+CATCH_ALL_EXCLUDE = ("969900",)
 
 # Sanity bounds: the two kommuner's extent plus ~0.02 deg. Catches a corrupt
 # coordinate; the join to DAR does the placing.

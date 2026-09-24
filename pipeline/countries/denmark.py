@@ -96,13 +96,47 @@ MAIN_BRANCH_SEQ = "0"
 
 # ⚠ THE PRIVACY GUARD LIVES ON THE PARENT COMPANY, as in France and Norway. A
 # production unit has no legal form of its own; its parent's `Virksomhedsform`
-# says whether it is a person trading.
-# TODO: the form codes, read off the Virksomhedsform file once downloaded.
-SOLE_TRADER_FORMS = ()
+# says whether it is a person trading. Codes read off the file 2026-09-24,
+# with their share of Copenhagen's 15,847 storefronts:
+#
+#     10  Enkeltmandsvirksomhed               5,424  34.2%   a person
+#     15  Personligt ejet Mindre Virksomhed     692   4.4%   a person
+#     80  Anpartsselskab                      7,821  49.4%
+#     60  Aktieselskab                        1,224   7.7%
+#     30  Interessentskab                       334   2.1%   partners liable
+#                                                            personally
+#
+# (Norway's guard is ENK alone; these two are Denmark's ENK.)
+SOLE_TRADER_FORMS = ("10", "15")
+
+# Denmark's sole-trader MARKER in a name: "v/" - "ved", by - followed by the
+# person ("FISKEFORRETNINGEN V/LARS ..."). A second guard, applied whatever the
+# parent's form: 7.3% of Copenhagen's storefront names carry it, nearly all on
+# form 10, and the rest on partnerships and foreign firms the form test misses.
+SOLE_TRADER_MARKER = r"(?i)(?:^|[\s,])v/"
+
+# Legal-form tails stripped from a displayed trade name ("PAW SOCIETY ApS" ->
+# "PAW SOCIETY"). Only as a WHOLE final token.
+LEGAL_FORM_SUFFIXES = ("APS", "A/S", "I/S", "IVS", "K/S", "P/S", "SMBA", "AMBA",
+                       "FMBA", "S.M.B.A", "A.M.B.A", "F.M.B.A")
 
 # --- DAR ------------------------------------------------------------------
 DAR_REGISTER = "DAR"
 DAR_ENTITIES = ("Adresse", "Husnummer", "Adressepunkt")
+# The columns, read off the files 2026-09-24. Every DAR object is keyed on
+# `id_lokalId`; a row counts only while BOTH `registreringTil` and
+# `virkningTil` are empty (DAR is bitemporal even in a "current" download).
+DAR_ID = "id_lokalId"
+DAR_STATUS = "status"
+DAR_REG_TO = "registreringTil"
+DAR_VALID_TO = "virkningTil"
+DAR_ADRESSE_HUSNUMMER = "husnummer"       # Adresse -> Husnummer
+DAR_HUSNUMMER_POINT = "adgangspunkt"      # Husnummer -> Adressepunkt
+DAR_POSITION = "position"                 # Adressepunkt's WKT point
+# DAR's status codes: 3 gældende (in force) first, then 2 foreløbig
+# (provisional); 4 nedlagt and 5 henlagt only if nothing better exists.
+DAR_STATUS_RANK = {"3": 0, "2": 1, "4": 2, "5": 3}
+
 # DAR ships ETRS89 / UTM 32N NATIONALLY, Copenhagen included, though the city
 # lies in zone 33 - the object catalogue's example is POINT(552412.26
 # 6179535.68). Read the CRS off the data, never off the city's zone.
