@@ -21,15 +21,17 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [~] **🇨🇿 PRAGUE - built on `prague-build`, not yet published.** Metro A, B
-  and C, obec 554782: **25,275 storefronts, 58 stations**; page text, notices
-  32-34 and the `excluded_categories.md` section approved by the owner
-  2026-09-24. Remaining: drift baseline, `check_deploy_imports`, city-scoped
-  `deploy-verify`, publish, reboot, live check. See `DECISIONS.md`, *"Prague
-  resumed"* and *"Prague built"*.
-  - [ ] **AFTER PUBLISH: remove the two `prague-*-tmp` entries** from the main
-    checkout's `.claude/launch.json` - the build session does this itself,
-    under the owner's standing permission (2026-09-24).
+- [x] **🇨🇿 PRAGUE - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro A,
+  B and C, obec 554782: **25,275 storefronts, 58 stations**; page text, notices
+  32-34 and the `excluded_categories.md` section approved by the owner.
+  City-scoped `deploy-verify` passed with no defects; pushed
+  `0204fa0..eccfd3e` and rebooted. Czechia's national modules are ready for a
+  second city. See `DECISIONS.md`, *"Prague resumed"*, *"Prague built"* and the
+  entries after it. One reminder remains open below.
+  - [x] **DONE 2026-09-24: the build session removed both `prague-*-tmp`
+    entries** from the main checkout's `.claude/launch.json`, under the
+    owner's standing permission; the file parses with its two original
+    entries.
   - [ ] ⏰ **Flora reopens around December 2026**: when PID's feed serves it
     again, step 1 STOPS the build on purpose - remove the override then.
 

@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**305 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**306 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Prague deployed; the live site measured after the reboot](#2026-09-24---prague-deployed-the-live-site-measured-after-the-reboot)
 - [Prague's deploy-verify passed; the Europe view zoomed out](#2026-09-24---pragues-deploy-verify-passed-the-europe-view-zoomed-out)
 - [Prague built: 25,275 storefronts, 58 stations](#2026-09-24---prague-built-25275-storefronts-58-stations)
 - [Japan's coordinate step is a JOIN at 99% block level; coverage, not geocoding, is what stops it](#2026-09-24---japans-coordinate-step-is-a-join-at-99-block-level-coverage-not-geocoding-is-what-stops-it)
@@ -347,6 +348,36 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Prague deployed; the live site measured after the reboot
+
+- **Prague is live, and the reboot took.** Origin had gained five Japan
+  commits during the build; merged at `eccfd3e` (DECISIONS.md by
+  `merge_append_only.py`, 4 entries interleaved, 301 verified present; PLAN.md
+  and the master list auto-merged, no overlap). On the merged tree
+  `check_deploy_imports` (PROBLEMS 0), `check_provenance`,
+  `check_scope_disclosure` (28 cities) and `check_render_current` (28 maps,
+  all 7 shared blocks) passed; a re-fetch immediately before the push found
+  origin unmoved. Pushed `0204fa0..eccfd3e`; the push's whole `app/` diff is
+  `cities.py`, `components.py` and the new page, so the app was rebooted.
+
+- **Measured on the live site afterwards, in the app's own frame**: the page
+  renders its approved text and the snapshot caption ("establishments as of
+  2026-08-31 (ROS02); metro timetable data valid 2026-09-24 to 2026-10-07
+  (PID)"); notices 32 (Czech Statistical Office), 33 (ČÚZK, 2026) and 34
+  (ROPID) and the OpenStreetMap notice's "Prague's city boundary" are present;
+  no error block. The map: zoom 12 against 12 at the 1000 px frame and 10.25
+  against 10.25 at 375 (frame 343), 0 corrections both; at both widths all
+  three labels present, none clipped, overlapping, under the legend, over the
+  credit or under the buttons; the legend collapses (243 -> 38 px) and the
+  theme toggle flips and restores. The Overview reads "Europe (12)", its
+  Europe view reports "Showing 12 cities in Europe", and the Prague link routes
+  to `Prague_Heatmap` - the rebooted modules, not cached ones.
+
+- **The two `prague-*-tmp` entries were removed from the main checkout's
+  `.claude/launch.json` by the build session**, under the owner's standing
+  permission of 2026-09-24; the file parses with its two original entries.
+  Both servers had already been stopped.
 
 ### 2026-09-24 - Prague's deploy-verify passed; the Europe view zoomed out
 
