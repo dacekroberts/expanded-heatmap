@@ -45,8 +45,7 @@ municipality it sits in.
 **Three lines are drawn** from TransLink's own route geometry, each labelled
 directly on the map and in the legend: the Expo Line, the Millennium Line and
 the Canada Line, in TransLink's own colours. The West Coast Express is commuter
-rail and the SeaBus is a passenger ferry; neither is included, matching every
-other city here.
+rail and the SeaBus is a passenger ferry; neither is included.
 
 **The two cities are licensed by different authorities, so read them as two
 measurements that share a map rather than one continuous surface.** Vancouver

@@ -45,7 +45,7 @@ the question a mode has to answer is not "does it run on rails" but "is it part
 of the network this city's riders use as its rapid transit"** - which is the
 same question the tram and commuter-rail paragraphs below are answering.
 
-**Commuter rail is excluded in every city.** The ones named on the record are
+**Commuter rail is excluded unless it runs like rapid transit.** The ones named on the record are
 BART and Caltrain in San Francisco, Metra in Chicago, Metrolink in Los Angeles,
 the Coaster and Sprinter in San Diego, SEPTA's Regional Rail in Philadelphia,
 the MBTA's Regional Rail in Boston, Tri-Rail in Miami, GO Transit in Toronto,

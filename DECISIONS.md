@@ -16,11 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**299 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**300 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [The Datafordeler account is closed](#2026-09-24---the-datafordeler-account-is-closed)
+- ["Commuter rail is excluded everywhere" retired: Copenhagen's S-tog made it two exceptions](#2026-09-24---commuter-rail-is-excluded-everywhere-retired-copenhagens-s-tog-made-it-two-exceptions)
 - [Copenhagen deployed; the live site measured after the reboot](#2026-09-24---copenhagen-deployed-the-live-site-measured-after-the-reboot)
 - [Copenhagen's deploy-verify passed, with one margin to watch](#2026-09-24---copenhagens-deploy-verify-passed-with-one-margin-to-watch)
 - [Copenhagen built: 14,978 storefronts, 64 stations](#2026-09-24---copenhagen-built-14978-storefronts-64-stations)
@@ -354,6 +355,27 @@ onwards; the early ones are split by phase rather than by hour.
   and the 15-minute key propagation (`docs/gated_access.md` item 3).
   `Beskaeftigelse` (employees, bitemporal only) was never taken, as the
   2026-09-23 entry anticipated.
+### 2026-09-24 - "Commuter rail is excluded everywhere" retired: Copenhagen's S-tog made it two exceptions
+
+- **Owner-approved wording: the rule is stated as the test it is, and the four
+  city pages that repeated it as universal now say "most maps".** Handed over
+  by the Main Building Session when Copenhagen went live drawing the S-tog on
+  the published spacing-and-frequency test, the second commuter network
+  admitted after Dublin's DART. `check_stale_claims.py --only E` had these
+  lines listed as bets on the next city, and this is the city that lost them.
+  `docs/excluded_categories.md`'s lead-in "**Commuter rail is excluded in
+  every city.**" is now "**…excluded unless it runs like rapid transit.**" -
+  the test its own DART and S-tog paragraphs already apply. The pages: Boston
+  ("left out on most maps here"), Miami ("left out here as on most maps on
+  this site"), Dublin (same), and Vancouver, whose sentence stands without the
+  comparison, so it was dropped. **Rejected:** naming the exceptions on every
+  page ("everywhere except DART and S-tog"), which is stronger and goes stale
+  with the next one - the lesson category E exists to teach. Universal claims
+  went from 24 to 20. **The other 20 were re-read against Copenhagen and still
+  hold**: it covers two kommuner through ONE boundary layer (OSM), so
+  Vancouver's "two municipalities with two boundary layers" stands; it keeps
+  the rings-off default; and it names its businesses, so Dublin is still the
+  only city that does not.
 
 ### 2026-09-24 - Copenhagen deployed; the live site measured after the reboot
 

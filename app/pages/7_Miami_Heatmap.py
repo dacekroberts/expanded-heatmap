@@ -50,7 +50,7 @@ Orange — its GTFS publishes a single route for both, and inventing a split the
 feed does not contain would be worse than using the name every station sign
 carries. The MIA Airport People Mover is left out because it runs terminal to
 rental-car centre with no surrounding commerce to measure, and Tri-Rail is
-commuter rail, excluded here as in every other city. The line colours are this
+commuter rail, left out here as on most maps on this site. The line colours are this
 project's own rather than the agency's: Miami-Dade's own orange and two greens
 collide with the business-category colours and with each other.
 
