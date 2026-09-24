@@ -197,20 +197,29 @@ def download(entry, dest, key):
     fn = entry["filename"]
     params = {"Filename": fn, "apiKey": key}
     tmp = dest.with_suffix(".zip.part")
-    try:
-        with requests.get(DK.GET_URL, timeout=3600, stream=True, headers=HEADERS,
-                          params=params) as r:
-            if r.status_code != 200:
-                sys.exit(f"  {fn}: HTTP {r.status_code}: {_scrub(r.text[:300], key)}")
-            md5 = hashlib.md5()
-            done = 0
-            with open(tmp, "wb") as fh:
-                for chunk in r.iter_content(1 << 22):
-                    fh.write(chunk)
-                    md5.update(chunk)
-                    done += len(chunk)
-    except requests.RequestException as exc:
-        sys.exit(f"  {fn}: download failed ({_scrub(type(exc).__name__, key)})")
+    # A DROPPED CONNECTION IS RETRIED, AN HTTP ERROR IS NOT. The owner's second
+    # run lost Husnummer's stream at 405 of 470 MB (2026-09-24) and the script
+    # stopped; a refusal, by contrast, would only be refused again.
+    for attempt in range(1, 4):
+        try:
+            with requests.get(DK.GET_URL, timeout=3600, stream=True, headers=HEADERS,
+                              params=params) as r:
+                if r.status_code != 200:
+                    sys.exit(f"  {fn}: HTTP {r.status_code}: {_scrub(r.text[:300], key)}")
+                md5 = hashlib.md5()
+                done = 0
+                with open(tmp, "wb") as fh:
+                    for chunk in r.iter_content(1 << 22):
+                        fh.write(chunk)
+                        md5.update(chunk)
+                        done += len(chunk)
+            break
+        except requests.RequestException as exc:
+            print(f"  {fn}: connection lost at {tmp.stat().st_size if tmp.exists() else 0:,} "
+                  f"bytes ({_scrub(type(exc).__name__, key)}), attempt {attempt} of 3")
+            if attempt == 3:
+                sys.exit(f"  {fn}: download failed three times - re-run to resume from "
+                         f"this file; everything before it is kept")
     if tmp.read_bytes()[:4] != b"PK\x03\x04":
         tmp.unlink()
         sys.exit(f"  {fn}: not a zip - not the file asked for")
