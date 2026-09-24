@@ -16,7 +16,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**262 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**263 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
@@ -25,6 +25,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 **2026-09-23**
 
+- [A check for downloads that land in a checkout's root](#2026-09-23---a-check-for-downloads-that-land-in-a-checkouts-root)
 - [Line labels no longer run off the map at phone width](#2026-09-23---line-labels-no-longer-run-off-the-map-at-phone-width)
 - [Stray downloads in the main checkout's root filed](#2026-09-23---stray-downloads-in-the-main-checkouts-root-filed)
 - [Label check runs at phone width; Milan's shop-sign share; lille retired](#2026-09-23---label-check-runs-at-phone-width-milans-shop-sign-share-lille-retired)
@@ -304,6 +305,25 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - A check for downloads that land in a checkout's root
+
+- **`scripts/check_stray_downloads.py` lists untracked files directly in the
+  root of every checkout, and exits non-zero if it finds one.** Three PDFs
+  reached the main checkout's root today, and the Staging Session identified
+  the mechanism. They were **browser-pane downloads**: the pane saves into the
+  main checkout's root whatever folder the session meant to use, and the owner
+  answered the download prompts while away from the desktop. CLAUDE.md's
+  scratchpad rule cannot reach a download dialog, so the only place to catch
+  one is afterwards. That is why this is a check and not another rule. It
+  looks only at checkout roots: untracked files deeper in a worktree are
+  usually a build in progress, and flagging them would cry wolf. Watched
+  working with three controls. The PID logo manual was named, accented
+  filename intact. A probe at this worktree's root was flagged. A probe in
+  `docs/` was not. The zoom-lag session's worktree is covered because the
+  list comes from `git worktree list`. The OK path is unexercised until the
+  PID file is filed; the Main Building Session, which owns Prague, has been
+  asked where it goes.
 
 ### 2026-09-23 - Line labels no longer run off the map at phone width
 
