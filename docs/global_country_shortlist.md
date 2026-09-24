@@ -1936,6 +1936,59 @@ The batched RŽP route above was measured and then **set aside**. Measured: 100 
 
 **Amsterdam, licences and band (same night).** Owner's call: the BAG becomes the second layer, vacancy disclosed. **BAG — PERMITTED**: the Kadaster's *"Creative Commons Public Domain Mark v1.0"*, PDOK's record *"Geen beperkingen"*; Amsterdam's copy SILENT. **Permits — SILENT**: no `license` key in the live schema (55 of the city's 141 schemas carry one); the CC BY statement lived in a retired catalogue record (live 2023-09-26, 404 by 2026-01-18); Databankenwet art. 8(2) puts government databases outside database right. Owner's call: credit it as CC BY 4.0, which satisfies both readings. **Amsterdam → Band A**, brief `docs/build_briefs/amsterdam.md` 8/8.
 
+#### ▲ 2026-09-24 (run from 01:10) — Japan: the coordinate step is a JOIN at 99%; coverage is the constraint
+
+Run under the owner's bounded download approval (MLIT address files; permit CSVs from a ward's, city's or prefecture's own portal; ≤25 MB each, ≤300 MB total). **60 files fetched, 12.2 MB**, into gitignored `data/tokyo/raw/`. Measurement: `scripts/screen_japan_join.py`.
+
+**The address file.** MLIT 位置参照情報 per municipality: block level (24.0a — Minato 2,543 rows, 117 town-chōme, 100% with lat/lon, a 住居表示 flag) and town-chōme level (19.0b — 117 centroids). **The Address Base Registry moved, not blocked**: `catalog.registries.digital.go.jp` no longer resolves anywhere (Globalping, Tokyo and US; and from here) while `www.digital.go.jp` answers everywhere; the Digital Agency now links `dataset.address-br.digital.go.jp` and an official open-source geocoder (`lp.geocoder.address-br.digital.go.jp`, `github.com/digital-go-jp/abr-geocoder`). Not needed at these rates; recorded.
+
+**The control — Minato, 5,721 food permits.** First pass, NFKC only: **98.0% block, 0.2% town-chōme, 1.8% unplaced — and every unplaced row is 都内一円** (food trucks and temporary stalls, not premises). **Fixed premises: 99.8% block.** GSI AddressSearch agrees on 100 of 100 within 1 m — but returns the same block point, so it confirms the key, not the position.
+
+**Three more wards, and the rules their misses taught** (Minato re-run after each — unchanged):
+
+| Ward | Fixed premises | Block | Chōme | None | What its misses taught |
+|---|---|---|---|---|---|
+| Minato (control) | 5,618 | **99.8%** | 0.2% | 0.0% | — |
+| Shinjuku | 14,418 | **99.2%** | 0.7% | 0.1% | **Read 0% first**: the WHOLE address sits in 町字 (`新宿3-14-1`) → split at the first digit; 12,270 hyphen-form shifts. UTF-16 file |
+| Chūō | 2,548 | **99.1%** | 0.2% | 0.7% | Split columns empty — parse the joined string; `八重洲2丁目` vs MLIT's `八重洲二丁目` → chōme digits normalised on BOTH sides; cp932 |
+| Kōtō | 1,713 | **99.6%** | 0.1% | 0.3% | — |
+| **Food, 4 wards** | **24,297** | **99.3%** | 0.5% | 0.1% | |
+
+**Personal services join the same way**: the 生活衛生 registers (理容所 / 美容所 / クリーニング所) share the address columns. **11 wards, 14,887 premises** — beauty 10,265 at 99.8% block, barber 1,899 at 99.7%, laundry 2,723 at 98.8%.
+
+**The independent check.** Six wards publish their OWN coordinates on some registers (Chūō and Kōtō food; Bunkyō, Taitō, Shibuya personal services). Against them, the join's block point sits a **median 22–43 m** away, **95–100% within 250 m** — position confirmed, not just the key.
+
+**Controls.** Shinjuku: **12,446** distinct 飲食店営業 premises vs OSM **2,068** (restaurant + fast_food + cafe + food_court + ice_cream) = **6.02×**, 4.77× with bars and pubs. OSM is plausibly thin in Tokyo's multi-storey bar districts — ASSERTED; the Economic Census's per-ward 飲食店 count is the like-for-like to use. Minato's OSM query failed on both hosts.
+
+**Buckets.** Food service everywhere a file exists; personal services in 11 wards; and — against this trail's "two buckets" — **food RETAIL where a ward publishes 許可・届出**: Chūō and Kōtō list convenience stores (127 / 138), supermarkets and department stores (38 / 65), other food and drink sellers (467 / 437). General retail is still absent.
+
+**Privacy.** Minato's 法人名 is blank on 125 permits and carries a non-corporate name on 12 (0.2%), none shown as the premises name — the publisher withholds individuals' names. **But the national-format 生活衛生 registers carry 営業者氏名 and 営業者_所在地 (the operator's own address), and four wards fill them** — Taitō (with phone numbers), Shinagawa, Shibuya, and Bunkyō (names only); Chiyoda, Ōta, Toshima, Arakawa and Katsushika leave them empty. **A build reads only 名称 and 所在地_* — never the 営業者 columns.**
+
+**Tokyo coverage — Tokyo's CKAN, enumerated ward by ward** (organisation `t` + the six-digit municipal code):
+
+| | Wards |
+|---|---|
+| **Food permits as a file** | Chūō · Minato · Shinjuku · Kōtō (**4 of 23**) |
+| Food, not usable as published | Taitō (the "CSV" link serves a web page) · Shinagawa (HTML only) · Nakano (a vendor map host — deferred) |
+| **No food dataset on the catalogue** | **Chiyoda · Shibuya · Toshima** (central) and 13 others — see the second and third methods below |
+| **Central wards, three methods** (catalogue · the ward's own homepage route · a search of the ward's own domain) | **Chiyoda: the food-permit ledger is released only on a disclosure request** (即時公開請求) — **not open data**. **Toshima: permit facilities are viewable in person** at the ward's information corner — **not open data**. **Shibuya: none found by two methods**; its own FAQ on the question is script-rendered and unread |
+| **Taitō** | Its own site publishes the full list as `2026ALL-IND-CSV.csv` (1.59 MB, 7,676 rows, lat/lon) — **in its own format, with operators' names and home addresses**; outside the approved bounds, deleted after the header, a question for the owner |
+| The other 13 wards | The homepage route found no open-data link on most front pages — **inconclusive, not a negative**; a per-ward site search is the next step |
+| Personal-services registers | Chiyoda · Minato · Bunkyō · Taitō · Shinagawa · Ōta · Shibuya · Toshima · Arakawa · Katsushika · Meguro (deferred — BODIK) |
+
+**The national catalogue listing saved on 2026-09-23 is unusable for coverage**: all 18,140 of its packages carry one publisher (環境省), so it was one ministry's slice, not the catalogue. Municipal permits live on prefectural and municipal CKANs.
+
+**Deferred files (not fetched), by domain:**
+
+| Domain | Files | Why |
+|---|---|---|
+| `data.bodik.jp` | Meguro 美容所 / クリーニング所 / 理容所 (69 / 13 / 15 monthly snapshots) | off the ward's own domain |
+| `www2.wagmap.jp` | Nakano 食品等営業許可届出一覧 (`opendata_550150.csv`) | a vendor map host, not the ward's own portal |
+| `www.city.taito.lg.jp` | Taitō food + three personal-service lists | declared CSV, served a web page or 404 (Taitō's registers were fetched from the metropolitan portal instead) |
+| `www.city.shinagawa.tokyo.jp` | Shinagawa food | HTML only |
+
+The nine other cities: see the next section when their enumeration lands.
+
 #### A refinement the Korea probe produced: stations are not lines
 
 Japan's N02 carries **both** — 10,235 station points *and* 21,932 line

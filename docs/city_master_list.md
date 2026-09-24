@@ -522,7 +522,7 @@ turned "a geocoding project" into a join or into nothing.
 
 | Cities | Country | Business leg | The coordinate step |
 |---|---|---|---|
-| **Tokyo**, Osaka, Nagoya, Yokohama, Sapporo, Fukuoka, Kyoto, Kobe, Sendai, Hiroshima *(10)* | 🇯🇵 | Premises-level food permits, CC BY, one national schema. **Two buckets — no general retail** | **Hardest met** — chōme/ban/gō, full-width numerals, `町字ID` 0% populated |
+| **Tokyo**, Osaka, Nagoya, Yokohama, Sapporo, Fukuoka, Kyoto, Kobe, Sendai, Hiroshima *(10)* | 🇯🇵 | Premises-level food permits, CC BY declared, one national schema; **personal services from the 生活衛生 registers (11 Tokyo wards)**; food retail only where a ward publishes 届出. No general retail | ✅ **SOLVED 2026-09-24 — a JOIN, not a geocode**: MLIT 位置参照情報, **99.3% at block level on 24,297 Tokyo food premises** (Minato control 99.8%), personal services 98.8–99.8%; independent check against publishers' own coordinates median 22–43 m. ⚠️ **What stops Japan now is COVERAGE**: food files for **4 of 23** Tokyo wards; central Chiyoda, Shibuya, Toshima absent from Tokyo's catalogue (one method — their own sites next). **RECOMMEND (owner's call):** this band's caption no longer describes Japan; re-band on coverage once the nine cities and the ward second pass are in |
 
 
 *(A paragraph here said Bucharest's rail was uncounted and its licence unread.

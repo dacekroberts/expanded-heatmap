@@ -16,12 +16,13 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**304 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**305 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Prague's deploy-verify passed; the Europe view zoomed out](#2026-09-24---pragues-deploy-verify-passed-the-europe-view-zoomed-out)
 - [Prague built: 25,275 storefronts, 58 stations](#2026-09-24---prague-built-25275-storefronts-58-stations)
+- [Japan's coordinate step is a JOIN at 99% block level; coverage, not geocoding, is what stops it](#2026-09-24---japans-coordinate-step-is-a-join-at-99-block-level-coverage-not-geocoding-is-what-stops-it)
 - [Prague resumed: four owner calls, and NACE2025 rather than NACE](#2026-09-24---prague-resumed-four-owner-calls-and-nace2025-rather-than-nace)
 - [Japan's maps will draw JR and private commuter railways (owner)](#2026-09-24---japans-maps-will-draw-jr-and-private-commuter-railways-owner)
 - [The Datafordeler account is closed](#2026-09-24---the-datafordeler-account-is-closed)
@@ -436,6 +437,34 @@ onwards; the early ones are split by phase rather than by hour.
   OpenStreetMap notice's addition and the `excluded_categories.md` section
   were approved by the owner as written, 2026-09-24.** ROS02 needs no notice.
 
+### 2026-09-24 - Japan's coordinate step is a JOIN at 99% block level; coverage, not geocoding, is what stops it
+
+- **Found Japan needs no geocoder**, as `address-join` predicted: food permits
+  and 生活衛生 registers join to MLIT's 位置参照情報 on (town-chōme, first block
+  number). **Minato, the control: 99.8% of fixed premises at block level**
+  (first pass, NFKC only); its 1.8% unplaced were all 都内一円 mobile vendors.
+  **Four Tokyo wards, 24,297 food premises: 99.3% block**; personal services,
+  11 wards, 14,887 premises: 98.8-99.8%. Every rule was found by reading
+  misses, with Minato re-run after each: chōme digits in either script
+  (Chūō, Kōtō), the hyphen form 5-2-1 (Chūō), and the whole address in the
+  town field (Shinjuku - read 0% until fixed, then 99.2%); three encodings.
+- **Position independently confirmed**: where wards publish their own
+  coordinates, the block point sits a median 22-43 m away, 95-100% within
+  250 m. GSI AddressSearch agreed 100/100 within 1 m but returns the same
+  block point, so it was not counted as independent.
+- **Coverage is the constraint**: on Tokyo's CKAN, food files for 4 of 23
+  wards; central Chiyoda, Shibuya and Toshima have none there - one method,
+  so not yet a negative. **Recommended, not moved** (owner's call): the
+  "geocoding at national scale" caption no longer describes Japan; re-band on
+  coverage once the nine cities and a second method for the wards are in.
+- Also found: the Address Base Registry MOVED (not blocked) to
+  `dataset.address-br.digital.go.jp` with an official geocoder; food retail
+  exists where wards publish 届出 (Chūō, Kōtō); the food control reads 6.02x OSM
+  in Shinjuku (the Economic Census is the better control); the 2026-09-23
+  data.go.jp listing held one ministry's 18,140 packages, not the catalogue.
+  60 files, 12.2 MB, fetched in the owner's bounds; deferred files listed by
+  domain. Touched `scripts/screen_japan_join.py`,
+  `docs/global_country_shortlist.md`, `docs/city_master_list.md`, `PLAN.md`.
 ### 2026-09-24 - Prague resumed: four owner calls, and NACE2025 rather than NACE
 
 - **The Prague build resumed from a fresh worktree (`prague-build`) on
