@@ -4,7 +4,7 @@ All rendering lives in pipeline/map_common.py; this file supplies only what is
 São Paulo-specific.
 
 Input:  data/sao_paulo/processed/stations.csv
-        data/sao_paulo/processed/businesses_clean.csv   (step 2 - PINNED)
+        data/sao_paulo/processed/businesses_clean.csv
         data/sao_paulo/raw/osm_rail.json
         data/sao_paulo/raw/osm_boundary.json             (label anchoring)
 Output: outputs/sao_paulo/heatmap.html
@@ -32,32 +32,35 @@ from pipeline.sao_paulo.config import (  # noqa: E402
     LINE_NAMES,
     LINE_ORDER,
     OSM_RAIL_JSON,
+    OSM_TRAIN_JSON,
     RING_EDGES_METERS,
     RING_LABELS,
     STATIONS_CSV,
+    TAXONOMY_SYSTEM,
 )
 
-SYSTEM = "Metrô"
+SYSTEM = "Metrô and CPTM"
 LINE_LABEL_ENDS = {}
-# Set when the owner settles who writes Brazil's national CNEFE module.
-TAXONOMY_SYSTEM = None
+# CPTM's Line 9 lives in the train cache; the metro and monorail in the rail one.
+TRAIN_REFS = ("9",)
 
 
 def main():
-    if TAXONOMY_SYSTEM is None:
-        sys.exit("São Paulo is pinned at step 2 - see PLAN.md and DECISIONS.md")
-    for path in (STATIONS_CSV, BUSINESSES_CLEAN_CSV, OSM_RAIL_JSON):
+    for path in (STATIONS_CSV, BUSINESSES_CLEAN_CSV, OSM_RAIL_JSON, OSM_TRAIN_JSON):
         if not path.exists():
             sys.exit(f"Missing {path}. Run the earlier steps first.")
     line_specs = {ln: (ln, LINE_COLOURS[ln], LINE_NAMES[ln], LINE_LABEL_ENDS.get(ln))
                   for ln in LINE_ORDER}
-    lines = load_osm_line_shapes(OSM_RAIL_JSON, line_specs, SYSTEM)
+    lines = load_osm_line_shapes(
+        OSM_RAIL_JSON, {k: v for k, v in line_specs.items() if k not in TRAIN_REFS}, SYSTEM)
+    lines.update(load_osm_line_shapes(
+        OSM_TRAIN_JSON, {k: v for k, v in line_specs.items() if k in TRAIN_REFS}, SYSTEM))
     missing = [ln for ln in LINE_ORDER if ln not in lines]
     if missing:
         sys.exit(f"no geometry for {missing}")
     render_heatmap(
         output_path=HEATMAP_HTML,
-        map_title="São Paulo Metrô Business Density Heatmap",
+        map_title="São Paulo Metrô and CPTM Business Density Heatmap",
         city_name="São Paulo",
         system_name=SYSTEM,
         stations=pd.read_csv(STATIONS_CSV),

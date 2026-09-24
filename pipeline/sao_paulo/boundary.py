@@ -41,3 +41,10 @@ def city_polygon(verbose=True):
     if not lo <= area <= hi:
         sys.exit(f"São Paulo's polygon is {area:.1f} km2, outside {lo}-{hi}")
     return geom
+
+
+def neighbour_polygons():
+    """Every município in the rail bbox, to NAME an excluded station (naming
+    only - Line 9's two stations in Osasco)."""
+    from pipeline.countries.brazil_boundary import municipios
+    return municipios(config.OSM_MUNICIPIOS_JSON, config.CRS_GEOGRAPHIC)

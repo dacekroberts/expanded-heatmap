@@ -26,7 +26,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline import stations as station_gates  # noqa: E402
 from pipeline.baseline import emit  # noqa: E402
 from pipeline.sao_paulo import config  # noqa: E402
-from pipeline.sao_paulo.boundary import city_polygon  # noqa: E402
+from pipeline.sao_paulo.boundary import city_polygon, neighbour_polygons  # noqa: E402
 
 GEOSAMPA_LINE = {"AZUL": "1", "VERDE": "2", "VERMELHA": "3", "AMARELA": "4", "LILAS": "5",
                  "PRATA": "15"}
@@ -65,8 +65,17 @@ def geosampa_status():
     return per_line, names
 
 
+def geosampa_line9():
+    """Line 9's operating stations from GeoSampa's CPTM layer - count only."""
+    feats = _read(config.GEOSAMPA_TRAIN_STATIONS_JSON)["features"]
+    return {fold(f["properties"]["nm_estacao_metro_trem"]) for f in feats
+            if f["properties"]["nm_linha_metro_trem"] == "ESMERALDA"
+            and f["properties"]["tx_situacao_metro_trem"] == "OPERANDO"}
+
+
 def stop_rows():
-    els = _read(config.OSM_RAIL_JSON)["elements"]
+    els = (_read(config.OSM_RAIL_JSON)["elements"]
+           + _read(config.OSM_TRAIN_JSON)["elements"])
     nodes = {e["id"]: e for e in els if e["type"] == "node"}
     rows = []
     print("  route relations:")
@@ -74,7 +83,8 @@ def stop_rows():
                     key=lambda e: (e["tags"].get("route", ""), e["tags"].get("ref", "").zfill(3))):
         t = r["tags"]
         keep = t.get("ref") in config.DRAW_REFS.get(t.get("route"), ())
-        known_out = t.get("ref") in config.NOT_YET_OPEN_REFS
+        known_out = (t.get("ref") in config.NOT_YET_OPEN_REFS
+                     or (t.get("route") == "train" and t.get("ref") in config.CPTM_NOT_DRAWN))
         print(f"    {'KEEP' if keep else 'out ':4} {r['id']:>9} {t.get('route', ''):9} "
               f"{t.get('ref', ''):>3}  {t.get('name', '')[:60]}")
         if not keep and not known_out:
@@ -121,9 +131,11 @@ def main():
     st_rows = by_name.reset_index()
     st_rows["lines"] = st_rows["stop_name"].map(lines_by_name)
 
+    gs_per_line["9"] = geosampa_line9()
+    metro = set(order) - {"9"}
     actual = {config.LINE_NAMES[ln]: int(sum(1 for v in st_rows["lines"] if ln in v.split()))
               for ln in order}
-    actual["Metrô (network)"] = len(st_rows)
+    actual["Metrô (network)"] = int(sum(1 for v in st_rows["lines"] if metro & set(v.split())))
     expected = {config.LINE_NAMES[ln]: len(gs_per_line.get(ln, ())) for ln in order}
     expected["Metrô (network)"] = len(gs_names)
     print()
@@ -131,8 +143,8 @@ def main():
         city="São Paulo", platforms=platforms, stations=st_rows,
         crs_projected=config.CRS_PROJECTED, spacing_min=config.SPACING_MIN_M,
         expected_per_line=expected, actual_per_line=actual)
-    print("    gate 3 source: GeoSampa's operating layer geoportal:estacao_metro (the agency's "
-          "own, used for counts and status only)")
+    print("    gate 3 source: GeoSampa's operating layers geoportal:estacao_metro and, for "
+          "Line 9, geoportal:estacao_trem (the agency's own, used for counts and status only)")
     # Name-level difference, so a count mismatch says WHICH station.
     for ln in order:
         osm_names = {fold(n) for n, v in lines_by_name.items() if ln in v.split()}
@@ -144,12 +156,29 @@ def main():
     poly = city_polygon()
     pts = gpd.GeoSeries(gpd.points_from_xy(st_rows["longitude"], st_rows["latitude"]),
                         crs=config.CRS_GEOGRAPHIC)
-    outside = st_rows[~pts.within(poly).values]
-    if len(outside):
-        sys.exit(f"stations outside the município - the brief said none: "
-                 f"{sorted(outside['stop_name'])}")
-    pd.DataFrame(columns=["station", "lines", "reason", "latitude", "longitude"]).to_csv(
+    inside = pts.within(poly).values
+    outside = st_rows[~inside]
+    # The six metro lines lie wholly inside the município (the brief); only a
+    # CPTM line may leave it - Line 9 runs on to Osasco.
+    bad = [nm for nm, ln in zip(outside["stop_name"], outside["lines"]) if ln != "9"]
+    if bad:
+        sys.exit(f"metro stations outside the município - the brief said none: {sorted(bad)}")
+    nb = neighbour_polygons()
+    excluded = []
+    for _, r in outside.iterrows():
+        pt = gpd.points_from_xy([r["longitude"]], [r["latitude"]])[0]
+        hit = nb[nb.contains(pt) & (nb["ibge"] != config.IBGE_MUNICIPIO)]
+        if len(hit) != 1:
+            sys.exit(f"{r['stop_name']} is outside São Paulo and in {len(hit)} recorded municípios")
+        excluded.append({"station": r["stop_name"], "lines": r["lines"],
+                         "reason": f"in {hit.iloc[0]['name']} ({hit.iloc[0]['ibge']}), "
+                                   f"outside município {config.IBGE_MUNICIPIO}",
+                         "latitude": r["latitude"], "longitude": r["longitude"]})
+    pd.DataFrame(excluded, columns=["station", "lines", "reason", "latitude", "longitude"]).to_csv(
         config.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8")
+    for x in excluded:
+        print(f"  excluded: {x['station']} [{x['lines']}] - {x['reason']}")
+    st_rows = st_rows[inside]
     keep = (st_rows.rename(columns={"stop_name": "station"})
             [["station", "lines", "latitude", "longitude"]].sort_values("station"))
     keep.to_csv(config.STATIONS_CSV, index=False, encoding="utf-8")

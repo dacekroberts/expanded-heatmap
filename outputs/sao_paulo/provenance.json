@@ -13,5 +13,12 @@
     "sha256": "9924900d8c0b1233d8385412793d74a475edf31db4a30790ad4ed76342506fd2",
     "retrieved": "2026-09-24T10:57:59+00:00"
   },
-  "osm_host": "overpass-api.de"
+  "osm_host": "overpass-api.de",
+  "geosampa_train_stations": {
+    "file": "geosampa_estacao_trem.json",
+    "url": "https://wfs.geosampa.prefeitura.sp.gov.br/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=geoportal:estacao_trem&outputFormat=application/json",
+    "bytes": 51848,
+    "sha256": "e49c50a4359f3ce061086b74b564ddd1c6627dbcc278602faa585ee99f763a48",
+    "retrieved": "cached before provenance"
+  }
 }

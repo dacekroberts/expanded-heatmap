@@ -105,6 +105,10 @@ TAXONOMY_MODULES = {
     "norway_sn2025": "pipeline.taxonomies.norway_sn2025",
     "denmark_db25": "pipeline.taxonomies.denmark_db25",
     "czech_nace2025": "pipeline.taxonomies.czech_nace2025",
+    # IBGE's CNEFE 2022 - the first FREE-TEXT taxonomy: no code list, so
+    # ordered keyword rules on the enumerator's description, lifted unchanged
+    # from staging's scripts/screen_cnefe.py. National, like france_naf.
+    "brazil_cnefe": "pipeline.taxonomies.brazil_cnefe",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

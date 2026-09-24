@@ -73,6 +73,19 @@ def fetch_osm(force):
     if any(not r.get("members") for r in rels):
         sys.exit("  a route relation came back without members - `out geom` is required")
     print(f"  {'osm_rail':30s} {len(rels)} route relations via {host}")
+    # CPTM, for Line 9 (the owner's call of 2026-09-24); every other train
+    # relation must be named in config.CPTM_NOT_DRAWN or step 1 stops.
+    train = ('[out:json][timeout:240];'
+             f'(relation["type"="route"]["route"="train"]({s},{w},{n},{e}););'
+             'out geom;node(r);out tags center;')
+    els, host = osm.fetch(train, config.OSM_TRAIN_JSON, force=force)
+    print(f"  {'osm_train':30s} {sum(1 for x in els if x['type'] == 'relation')} "
+          f"route relations via {host}")
+    # Every município in the bbox, only to NAME a station outside São Paulo.
+    mun = ('[out:json][timeout:180];rel["boundary"="administrative"]["admin_level"="8"]'
+           f'["IBGE:GEOCODIGO"]({s},{w},{n},{e});out geom;')
+    els, host = osm.fetch(mun, config.OSM_MUNICIPIOS_JSON, force=force)
+    print(f"  {'osm_municipios':30s} {len(els)} relations via {host}")
     return host
 
 
@@ -90,6 +103,9 @@ if __name__ == "__main__":
     print("\nGeoSampa (status and count only):")
     fetch(config.GEOSAMPA_STATIONS_URL, config.GEOSAMPA_STATIONS_JSON,
           "geosampa_estacao_metro.json", b"{", prov, "geosampa_stations", args.force, timeout=300)
+    fetch(config.GEOSAMPA_TRAIN_STATIONS_URL, config.GEOSAMPA_TRAIN_STATIONS_JSON,
+          "geosampa_estacao_trem.json", b"{", prov, "geosampa_train_stations", args.force,
+          timeout=300)
     print("\nOpenStreetMap:")
     prov["osm_host"] = fetch_osm(args.force)
     config.PROVENANCE_JSON.write_text(json.dumps(prov, ensure_ascii=False, indent=2),

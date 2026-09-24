@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**307 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**308 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [São Paulo built on its branch: 219,578 storefronts, 103 stations, Line 9 drawn](#2026-09-24---são-paulo-built-on-its-branch-219578-storefronts-103-stations-line-9-drawn)
 - [São Paulo started and PINNED at step 2: who writes Brazil's classifier](#2026-09-24---são-paulo-started-and-pinned-at-step-2-who-writes-brazils-classifier)
 - [Prague deployed; the live site measured after the reboot](#2026-09-24---prague-deployed-the-live-site-measured-after-the-reboot)
 - [Prague's deploy-verify passed; the Europe view zoomed out](#2026-09-24---pragues-deploy-verify-passed-the-europe-view-zoomed-out)
@@ -349,6 +350,85 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - São Paulo built on its branch: 219,578 storefronts, 103 stations, Line 9 drawn
+
+- **São Paulo is built on `sao-paulo-build`, Brazil's first city, off the
+  national modules this session wrote on the owner's decision of 2026-09-24**
+  (the classifier's author was the overnight pin; "go with recommendations"):
+  `pipeline/taxonomies/brazil_cnefe.py` (staging's `screen_cnefe.py` rules,
+  lifted, then extended - below), `pipeline/countries/brazil.py` (the facts),
+  `brazil_register.py` (the reader) and `brazil_boundary.py` (município
+  polygons for scope and naming). Staging was told and will point its screen
+  at the module. The row counts, recorded as the drift baseline:
+  - **step 2** - CNEFE 3550308: 5,689,391 rows -> 570,229 establishment rows
+    (`COD_ESPECIE` 6) -> **219,851 classified into a bucket (38.6%)**, 108,311
+    unclassifiable (19.0%, dropped, never guessed) -> 219,578 placed: **14 at
+    census-tract level dropped** (`NV_GEO_COORD` 6 - the decision Rio's brief
+    asked for, now national in `brazil.py`: levels 1-4 kept, a WHITELIST; 98.46
+    / 0.10 / 0.39 / 1.05% at 1-4) and 259 outside OSM's município polygon.
+    Retail 109,879 · Food service 67,569 · Personal services 42,130. Every
+    mapped row has its own `COD_UNICO_ENDERECO`, so there is nothing to
+    de-duplicate; the reader asserts it.
+  - **step 1** - 227 stop positions -> 105 stations by name -> **103 in the
+    município**: Linhas 1-5 and 15 (86, gate 3 exact) and Line 9's 19, with
+    Pinheiros (4+9, 194 m) and Santo Amaro (5+9, 257 m) collapsing to
+    interchanges; Osasco and Presidente Altino recorded as excluded, named from
+    OSM's município relations. Gate 3 exact on all eight counts against
+    GeoSampa's operating layers.
+  - **map** - 49,591 storefronts within a ring (22.6%).
+  **Privacy verdict: no personal-data exposure.** CNEFE has no owner or
+  registrant column, so the fallback failure cannot occur; at an address that
+  also holds a dwelling a pin shows its category, never the description
+  (81,511 of 219,578, 37.1% - the owner's 2026-09-23 decision, structural).
+  `check_personal_exposure.py` flags 8,876 pins (17.9%) as person-like, and
+  **that heuristic misfires on upper-case Portuguese**: it matches any two
+  words - `SALAO COMERCIAL`, `CACAU SHOW`, `DROGA RAIA` - and **0** of the
+  8,876 carry a first name by the CNEFE module's own measure; the few that
+  open with one (`MARIA CABELEREIRA`) are trade names at non-dwelling
+  addresses. Files: the modules above, `pipeline/sao_paulo/`,
+  `scripts/check_personal_exposure.py`, `outputs/sao_paulo/`.
+- **CNEFE rules version 2 - FALLBACK words, after the first attempt re-routed
+  238 classified rows (owner's call to extend, 2026-09-24).** The map was found
+  to miss storefronts near its stations: inside the rings **42.1%** of the rows
+  that could be storefronts were unreadable, against 31.9% beyond - station
+  areas are commercial districts of bare trade names (measured by
+  `pipeline/sao_paulo/build_check.py`). A hand-read sample of 150 in-ring
+  unreadable rows found 35 clear storefronts, many of them plain words the
+  rules lacked (PIZZA beside PIZZARIA, BURGUER beside HAMBURGUER, PET beside PET
+  SHOP). Twenty words were read against São Paulo's unmatched rows first
+  (their most frequent captures listed and read); SOFA, FRUTA and PECAS were
+  REJECTED on that reading (upholstery repair; street stalls and fruit trucks;
+  machine parts). **Added to RULES, they rescued 3,814 rows and also moved 238
+  that version 1 had classified - mostly wrongly**: under "the head noun
+  wins", PET became the head of `PET BANHO E TOSA` (pet grooming) and of
+  `PET ... CLINICA VETERINARIA` (a vet, excluded), PAO of `KI PAO DISTRIBUIDORA`.
+  So they are `WEAK_RULES`, consulted only for a row still unmatched after the
+  edit-distance pass: **3,814 rescued, 0 re-routed**, and the nine briefs'
+  figures for classified rows stand (`RULES_VERSION` 2; the briefs were
+  measured on 1). Effect in the rings: +1,051 storefronts, the unreadable share
+  42.1% -> 40.7%. **And a lesson about samples**: on the SAME 150 rows the new
+  words rescue 22 (14.7%), across all in-ring rows 3.5% - the words were chosen
+  FROM that sample, so it cannot measure them. A FRESH sample of 100 rows still
+  unreadable under version 2 (seed 7) reads 15 clear storefronts, 39
+  undecidable, 46 clearly not, so the map misses roughly **one storefront in
+  ten to one in seven near the stations** - the figure the page states.
+  Rejected: shipping on version 1 with the larger gap disclosed.
+- **CPTM Line 9-Esmeralda DRAWN, Lines 7, 8 and 10-13 not - the owner's call
+  of 2026-09-24 on the DART / S-tog test**, the brief having left CPTM out by
+  the standing rule with a note that Lines 8 and 9 run at metro frequency.
+  Measured from OSM's route relations (one owner-approved query): **Line 9 -
+  19 stations in the município, median 1,778 m apart, a train every 4.5
+  minutes at peak on its core and about 7 elsewhere (metrocptm,
+  diariodacptm), 16 of 19 with no metro station within 800 m** - the Pinheiros
+  corridor, Vila Olimpia, Berrini, Santo Amaro; its spacing is wider than the
+  S-tog's (1,227 m) and narrower than Metromare's (2,171 m, left out), and the
+  frequency carried it. Lines 7, 8, 10, 11 and 12: in-city medians 2.1-3.4 km,
+  FAIL; 13 and the Expresso Aeroporto have one to three stops in the city.
+  OSM's `#00A88E` clears the colour check unchanged (15.4 from Personal
+  services, 15.5 from Linha 2). Status and gate 3 from GeoSampa's
+  `estacao_trem`, the rule the owner set for GeoSampa on 2026-09-23. The map's
+  system name is "Metrô and CPTM", Dublin's and Copenhagen's pattern.
 
 ### 2026-09-24 - São Paulo started and PINNED at step 2: who writes Brazil's classifier
 
