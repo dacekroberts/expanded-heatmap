@@ -147,6 +147,12 @@ def list_files(register, entity, key):
             sys.exit(f"  listing {register}/{entity}: HTTP 401. A key younger than "
                      f"about 15 minutes 401s exactly like a wrong one (DAF-AUTH-0005) - "
                      f"wait and retry the SAME key rather than making a new one.")
+        # PAGING ENDS WITH AN ERROR, NOT AN EMPTY PAGE. Measured 2026-09-24:
+        # the page after the last answers HTTP 400, "'pageNumber' is greater
+        # than the total amount of pages." On page 1 it means nothing is
+        # listed at all, which `pick` then reports.
+        if r.status_code == 400 and "greater than the total amount of pages" in r.text:
+            break
         if r.status_code != 200:
             sys.exit(f"  listing {register}/{entity}: HTTP {r.status_code}: "
                      f"{_scrub(r.text[:300], key)}")
