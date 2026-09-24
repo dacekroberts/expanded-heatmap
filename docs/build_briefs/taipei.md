@@ -144,8 +144,21 @@ Asia region shared with Seoul and Hong Kong). Owner call, measured with
 - ⚠️ **New Taipei's own lines** (Circular Line, Danhai and Ankeng light rail):
   whether Taipei's network map carries them.
 - ⚠️ **Line colours** — the agency map's `RouteName` has no colour field seen.
-- ⚠️ **The head-office rule** — test against a known department store.
-- ⚠️ **Market stalls** — placed at the market, or left unplaced.
+- ✅ **The head-office rule — TESTED 2026-09-24 on ten department stores and
+  malls** (Shin Kong Mitsukoshi A4/A8/A9/A11, Breeze, SOGO, Uni-Ustyle, Q
+  Square, ATT 4 FUN, Bellavita): the register holds only **1–4 rows per
+  store — the operator, not its counters** — so the rule drops **0 of 20**.
+  Counter brands are not registered at the store at all, which means **a
+  department store draws as ONE point**: disclose it, as Brazil discloses
+  shopping centres. Refinement measured: of 7,534 rows the rule flags, 884 sit
+  at addresses with 20+ storefront rows (markets, malls); exempting those, the
+  rule drops **6,650**. ⚠️ The first run matched nothing because the register
+  inserts `里`/`鄰` between district and street — match on district + street
+  + number.
+- ⚠️ **Market stalls — COUNTED 2026-09-24: 5,239 storefront rows (6.8%)** —
+  2,796 with a stall number (`攤`/`攤位`), 1,522 in a market without one, 921
+  under a viaduct (`高架橋下`). Biggest: 環南市場 900, 南門市場 246, 成功中繼市場
+  147. Placing them at the market's own door plate is the build's call.
 
 ```brief-checks
 [

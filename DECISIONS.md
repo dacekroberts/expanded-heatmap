@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**276 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**277 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Open gap probed (Rome reached; Turin, Cairo discarded); Brasília and Recife rail licences read; Taipei's head-office rule tested; the address-join skill](#2026-09-24---open-gap-probed-rome-reached-turin-cairo-discarded-brasília-and-recife-rail-licences-read-taipeis-head-office-rule-tested-the-address-join-skill)
 - [Prague back in Band A: establishments from ROS02 open data + RES activity; RŽP rejected on GDPR; the paused control was mis-specified](#2026-09-24---prague-back-in-band-a-establishments-from-ros02-open-data-res-activity-ržp-rejected-on-gdpr-the-paused-control-was-mis-specified)
 - [Two checks closed: the macro map's controls, and clones leaking into %TEMP%](#2026-09-24---two-checks-closed-the-macro-maps-controls-and-clones-leaking-into-temp)
 - [Oslo deployed; the live site measured after the reboot](#2026-09-24---oslo-deployed-the-live-site-measured-after-the-reboot)
@@ -318,6 +319,47 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Open gap probed (Rome reached; Turin, Cairo discarded); Brasília and Recife rail licences read; Taipei's head-office rule tested; the address-join skill
+
+- **Rome reached, not yet placed.** The SUAP register is real and
+  premises-level (location as street code + civic number, activity as a
+  macro class and a description, CC BY declared, monthly to July 2025); the
+  recorded TLS failure was this project's trust store. It has no
+  coordinates. **ANNCSU**, Italy's national house-number archive, publishes
+  the municipal street code and coordinates per civic number as open data,
+  but both fields are empty for the first comune in the Lazio file - whether
+  Roma's rows fill them decides the city, and needs one 24.6 MB download the
+  owner has not yet approved. Kept in the gap with that row rewritten.
+- **Turin and Cairo discarded**, two methods each. Turin: the city's CKAN
+  and Italy's national catalogue agree the premises stock stops at 2019.
+  Cairo: the Governorate's own site has no data section, only a curated
+  tourism guide of ~220 restaurants for a city of 10 million (the Kuala
+  Lumpur coverage trap); CAPMAS nationally serves HTML only. Discarded 34,
+  open gap 1.
+- **Brasília's IPEDF rail layers: PERMITTED** (public domain on every
+  layer, backed by DF decree 38.354/2017). **Recife's CBTU file: ODbL,
+  PERMITTED WITH CONDITIONS**, no obligation while it stays a cross-check;
+  flagged, not resolved in the project's favour, that CBTU rather than the
+  city is its rightsholder and nothing shows CBTU authorised the label.
+- **Taipei's head-office rule survives the department-store test**, because
+  the tax register holds only the store operator (1-4 rows per store, 20 over
+  ten stores, 0 dropped): counters are not registered there, so **a
+  department store draws as one point** - a disclosure, like Brazil's
+  malls. Refinement measured: exempting addresses with 20+ storefront rows,
+  the rule drops 6,650. Market stalls counted: 5,239 rows (6.8%). The first
+  run matched nothing because the register inserts 里/鄰 between district and
+  street - recorded in the new skill as "a measurement near zero usually
+  means the matcher is wrong".
+- **Japan's national catalogue ignores its search parameter** (18,140 for a
+  nonsense term) and, enumerated whole, holds no municipal food permit at
+  all; the per-city portals are the route.
+- **Wrote the `address-join` skill** (owner's yes): the seven-step method
+  from `docs/geocoding_retrospective.md` as a checklist, with tonight's
+  traps added (in-country reachability via Globalping, HEAD refused where GET
+  works, the key coarser than the address, a register's premises published
+  by a different agency). Pointed to from `CLAUDE.md`, `add-country` and the
+  retrospective; the 01:12 Japan run was re-created to open it first.
 
 ### 2026-09-24 - Prague back in Band A: establishments from ROS02 open data + RES activity; RŽP rejected on GDPR; the paused control was mis-specified
 

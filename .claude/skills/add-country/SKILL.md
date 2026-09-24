@@ -548,6 +548,9 @@ contractors.
 
 #### ⛔ Before writing ANY geocoder: find the address file that already carries the coordinate
 
+**The procedure is the `address-join` skill** — find the file, measure the join
+against a control, report tiers, read the misses. This section is why.
+
 **Four for four, the same week.** Every country this project filed under
 "geocoding at national scale" turned out to publish an address-point file
 with coordinates, and the geocoding project became a JOIN - or vanished:

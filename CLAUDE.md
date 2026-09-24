@@ -49,6 +49,13 @@ are already banked there (endpoints, columns, CRS, traps, required notices, and
 an explicit list of what is still unknown). It is a cache, not a prerequisite:
 no brief means `add-city` Step 0 as usual, never waiting for one.
 
+**Does the register have addresses but no coordinates? Use `address-join`**
+(`.claude/skills/address-join/`) **before writing any geocoder.** Prague,
+Copenhagen, Brazil and Taiwan each looked like a geocoding project and each
+turned out to publish an address file that already carries the coordinate,
+so the work became a join measured against a control city - or nothing.
+Japan is the next one through it.
+
 **Is the city's rail coming from OpenStreetMap rather than GTFS? Use
 `osm-rail`** (`.claude/skills/osm-rail/`). Mexico City and Guadalajara both
 needed it - one because every agency host is unreachable, one because the only

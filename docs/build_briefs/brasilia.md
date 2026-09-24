@@ -51,8 +51,12 @@ IPEDF/Codeplan's GeoServer (`catalogo.ipe.df.gov.br/geoserver/geonode/wfs`):
 — 5 (Onoyama, Estrada Parque, 110/106/104 Sul); `geonode:ESTACAO_EXPANSAO` — 13
 planned; `geonode:LINHA_VERDE_LARANJA` — **one MultiLineString for both lines**
 (`linha` = *verde e laranja*), so the two labels the invariant needs come from
-a split or from OSM's per-line relations. Licence on the GeoNode item pages:
-**"Public Domain (PD)"** as declared — **not read**. `dados.df.gov.br` timed out
+a split or from OSM's per-line relations. Licence: **PERMITTED — READ 2026-09-24.** All four layers declare
+**"Public Domain (PD)"** on their item pages, in the API (`public_domain`)
+and in the ISO record, and the Federal District's open-data decree
+(**Decreto 38.354/2017**, art. 4) authorises reuse of DF data by every
+modality of the copyright law. Nothing to display; crediting IPEDF is a
+courtesy the decree's definition of open data anticipates. `dados.df.gov.br` timed out
 in the TLS handshake; this catalogue is the way in. ⚠️ The status field is
 from a **2023** file — cross-check it against OSM before trusting it.
 **Recommendation: agency stations, whose status decides what is drawn; OSM

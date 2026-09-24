@@ -1914,6 +1914,14 @@ The batched RŽP route above was measured and then **set aside**. Measured: 100 
 
 **The generalisable lesson: a register's establishments may be published by a DIFFERENT agency than the register.** RŽP owns the provozovny; the basic-registers agency publishes them as open data. Asking only the owner's API found a legal problem the open copy does not have.
 
+#### ▲ 2026-09-24 — the open screening gap probed: Rome reached, Turin and Cairo measured out
+
+**Rome**: the SUAP register's host verifies with the OS trust store (the recorded TLS failure was ours). Premises-level, CC BY declared, monthly to July 2025: `NUMERO_ESERCIZIO`, `CODICE_VIA` + street + `CIVICO` (95.8%), `DESCRIZIONE_MACRO_ATTIVITA` (99.2%), `DESCRIZIONE`. No coordinates and no house-number layer on the city's portal (its one *civici* hit is a polling-station list). **ANNCSU**, the national house-number archive (Agenzia delle Entrate + ISTAT, open data under the EU HVD regulation), publishes monthly regional files — `getds.php?INDIR_LAZI`, 24,573,936 B compressed / 156,609,050 B, dated 2026-09-15, which answers `403` to `HEAD` and `200` to `GET` — with `CODICE_COMUNALE`, `CIVICO`, `ESPONENTE`, `COORD_X_COMUNE`, `COORD_Y_COMUNE`; empty for the first comune in the file, **unmeasured for Roma**. **This may change "Italy is a Milan-only country"**, and ANNCSU would serve every Italian city.
+
+**Turin** and **Cairo**: discarded, two methods each — see the master list's discard table.
+
+**Japan**: `data.go.jp` **ignores `q`** (the nonsense term returned all 18,140 datasets); enumerated whole, it holds **no food-business dataset at all** — the national catalogue does not harvest municipal open data, so each city's own portal is the route (Tokyo's metropolitan CKAN lists ward files: Minato, Chuo, Koto, Shinjuku, Nakano).
+
 #### A refinement the Korea probe produced: stations are not lines
 
 Japan's N02 carries **both** — 10,235 station points *and* 21,932 line

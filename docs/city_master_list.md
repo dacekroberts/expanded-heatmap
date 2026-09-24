@@ -37,8 +37,8 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 > |---|---|
 > | **Built** | **26** across 8 countries *(Toulouse, Lille (Regional) and Rennes, 2026-09-23; Oslo, 2026-09-24)* |
 > | **Candidates** | **32**, all at least partially viable — A 16 · B 10 · C 5 · D 1 *(Prague back to A 2026-09-24 on open data — ROS02 establishments + RES; Kaohsiung moved from B to a reopened access-blocked band D 2026-09-23, owner's call; Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built; Prague paused to the open gap 2026-09-24)* |
-> | **Open screening gap** | **3**, resting on an absence — neither candidates nor discards |
-> | **Discarded** | **32**, each naming its evidence |
+> | **Open screening gap** | **1**, resting on an absence — neither candidates nor discards |
+> | **Discarded** | **34**, each naming its evidence *(Turin and Cairo from the open gap, 2026-09-24)* |
 >
 > *Counts corrected 2026-09-23. This box had read 20 / 33 / 30 since
 > 2026-09-22 while the sections below moved on — **the hand-kept summary is
@@ -119,8 +119,8 @@ yet* with *we looked at everything and this is what is there*.
 | 🟣 **C** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **5** |
 | 🔴 **D** | **Access blocked by the publisher.** Screening complete, the file exists and is measured; the publisher's own access control is the only thing stopping it, so it is unblocked by ASKING, not by probing | **1** |
 | | **Candidates** | **32** |
-| *Open gap* | Unscreened — a row resting on an absence, so not a discard | *3* |
-| *Discarded* | Measured negative, evidence named | *32* |
+| *Open gap* | Unscreened — a row resting on an absence, so not a discard | *1* |
+| *Discarded* | Measured negative, evidence named | *34* |
 
 *Band A's caption briefly said "brief written" (2026-09-23, morning). That was
 wrong by `CLAUDE.md`'s own rule — **a brief is a cache, not a prerequisite** —
@@ -284,8 +284,8 @@ enumerator misspellings). Every figure is from the city's own file:
 | **Salvador** | **52,258** | 25,890 / 17,186 / 9,182 | 21.6% — 15% → 29% | 97.3% | L1 + L2, **0 of 4 relations coloured** — colours from the operator. No public agency layer (SEMOB's folder is token-gated). **20 of 21 stations in the city** |
 | **Fortaleza (Regional)** | **62,792** (city 49,503) | 29,239 / 11,470 / 8,794 | 25.9% — 20% → **43% Meireles** | 98.5% | Sul (metro) + Oeste, Parangaba–Mucuripe (light rail), all coloured. No agency layer reachable (Metrofor's certificate expired). 31 of 41 stations in the city — **regional, decided 2026-09-23**: + Caucaia, Maracanaú, Pacatuba |
 | **Belo Horizonte** | **44,923** | 22,518 / 13,127 / 9,278 | 22.8% — 22% → 30% | 98.8% | L1 + **Linha 2, opened 2026-07-03 with two stations — OSM lists exactly those two**. Agency lines (2022, pre-L2), no agency stations |
-| **Brasília** | **35,824** | 19,706 / 9,164 / 6,954 | 26.7% — 16% → **48% Asa Sul** | 99.9% | Metrô-DF Verde + Laranja, coloured. **Agency stations + lines with status** (IPEDF GeoServer; declared public domain, unread) |
-| **Recife (Regional)** | **43,518** (city 25,212) | 14,968 / 5,622 / 4,622 | 29.2% — 19% → 32% | 99.0% | Centro 1 & 2 + Sul, coloured; plus a diesel VLT to Cabo. **CBTU file: 36 stations + lines** (declared ODbL). 19 of 36 stations in the city — **regional, decided 2026-09-23**: + Jaboatão, Cabo, Camaragibe |
+| **Brasília** | **35,824** | 19,706 / 9,164 / 6,954 | 26.7% — 16% → **48% Asa Sul** | 99.9% | Metrô-DF Verde + Laranja, coloured. **Agency stations + lines with status** (IPEDF GeoServer; **public domain, READ 2026-09-24**, backed by DF decree 38.354/2017) |
+| **Recife (Regional)** | **43,518** (city 25,212) | 14,968 / 5,622 / 4,622 | 29.2% — 19% → 32% | 99.0% | Centro 1 & 2 + Sul, coloured; plus a diesel VLT to Cabo. **CBTU file: 36 stations + lines** (ODbL, READ 2026-09-24 — as a cross-check it carries no obligations). 19 of 36 stations in the city — **regional, decided 2026-09-23**: + Jaboatão, Cabo, Camaragibe |
 | **Porto Alegre (Regional)** | **35,688** (city 18,798) | 10,576 / 4,599 / 3,623 | 27.9% — 23% → 40% | 98.1% | Trensurb, coloured. No agency layer. Only 7 of 23 stations in the city — **regional, decided 2026-09-23**: + the Trensurb corridor to Novo Hamburgo |
 | **Santos (Regional)** | **11,691** (city 6,021) | 3,322 / 1,769 / 930 | 25.0% | 98.1% | VLT L1 + L2, coloured; tourist tram excluded. Stops layer of unconfirmed ownership. 17 of 25 stops in Santos — **regional, decided 2026-09-23**: + São Vicente |
 
@@ -485,7 +485,7 @@ block-level JOIN too** — the permits split the address into municipality /
 components with a coordinate per block — **ASSERTED, not measured**, with the
 order of work to test it.
 
-## ⚠️ OPEN SCREENING GAP — rows that rest on an absence (3 cities)
+## ⚠️ OPEN SCREENING GAP — rows that rest on an absence (1 city)
 
 **Not candidates yet and not discards — unscreened.** `global_country_shortlist.md`
 records *"Italy stays a Milan-only country"*, but that rests on **Naples** and
@@ -495,9 +495,9 @@ discard.
 
 | City | What the catalogue holds | What is still unknown |
 |---|---|---|
-| **Rome** 🇮🇹 | `dati.comune.roma.it`, CKAN, **365 datasets**. Carries **`elenco-delle-attivita-produttive-del-suap-di-roma-capitale-anno-2025`** and its 2024 edition — SUAP is the *Sportello Unico Attività Produttive*, the one-stop business register every comune runs, and **2025 is current** | **Schema unread** — the host failed its TLS handshake *after* the catalogue answered. The **LOCATION and ACTIVITY** columns have not been checked separately |
-| **Turin** 🇮🇹 | `aperto.comune.torino.it`, CKAN, **2,118 datasets**, 143 with a commerce term. Its naming makes the Messina distinction itself: `aperte`/`chiuse` are the FLOW, **`presenti` is the STOCK**. Geoportale also publishes **SHP**, so geometry exists. **CC-BY** | ⚠️ **The series STOPS AT 2019** — latest `presenti` is 2019, geoportale layer last modified 2019-05-17. Six years stale against a project mapping *current* density. Schema unread; `risorse.comune.torino.it` timed out at TCP connect |
-| **Cairo** 🇪🇬 ▼ *moved here from the discards 2026-09-23* | **One probe, of one national host:** CAPMAS, the statistics agency, *"serves HTML only"* — recorded in `global_country_shortlist.md` as **NO OPEN API**. No city-level host has ever been asked | **Everything.** It sat in the discard table as *"No open-data infrastructure"* while this file's own 2026-09-23 sweep recorded it **STILL UNPROBED**. **A national statistics agency not having an API is not a finding about Cairo's premises**, and `add-country` says to try the city's own host before recording a negative — which was never done. **Moved by this file's own rule**, not re-judged |
+| **Rome** 🇮🇹 ▲ *reached 2026-09-24* | **The register is REAL and premises-level.** SUAP's *Elenco delle attività produttive* (CC BY declared, monthly; newest file July 2025, **no 2026 edition**): `NUMERO_ESERCIZIO` per establishment, **LOCATION** = `CODICE_VIA` (the city's street code) + `DESCRIZIONE_VIA` + `CIVICO` (95.8%) — **no coordinates**; **ACTIVITY** = `DESCRIZIONE_MACRO_ATTIVITA` (99.2%) + `DESCRIZIONE` (*Esercizio di Vicinato*, *Somministrazione*, *Acconciatori ed Estetisti*; *Commercio Elettronico* to exclude). ~26 MB a month, ≈165,000 rows. The TLS failure was the trust store — the OS store verifies it | **The coordinate route: ANNCSU**, Italy's national house-number archive, open data (EU HVD), monthly — `INDIR_LAZI` (24.6 MB, dated 2026-09-15) carries `CODICE_COMUNALE` (the municipal street code, the likely join key to `CODICE_VIA`), `CIVICO`, `ESPONENTE` and `COORD_X_COMUNE`/`COORD_Y_COMUNE`. **Both are EMPTY for the first comune in the file; whether Roma's rows fill them decides the city** — one download (owner's permission) answers it. Licences unread |
+
+*▼ **Turin and Cairo left this gap on 2026-09-24 for the discard table**, each measured by two methods — see there.*
 
 *▲ **Prague left this gap on 2026-09-24, back to Band A**, the same day it arrived: the premises source it lacked turned out to be published as open data (ROS02). Its row is in Band A.*
 
@@ -1258,7 +1258,15 @@ took was a different *host* — `services1.arcgis.com`, reachable all along.
 The rule held and protected the city from a premature discard; the cost
 estimate attached to it was guesswork. **See the resolution above.**
 
-## DISCARDED — 32 cities, each naming its evidence
+## DISCARDED — 34 cities, each naming its evidence
+
+**Two rows added 2026-09-24 from the open screening gap**, each measured by
+two differently-shaped methods before being recorded:
+
+| City | Evidence, 2026-09-24 |
+|---|---|
+| **Turin** 🇮🇹 | **Stale, and nothing replaced it.** The city's CKAN (`aperto.comune.torino.it`, nonsense control 0) holds *"Attività commerciali presenti 2019"* as its newest premises stock; every later commerce dataset is the statistical yearbook (aggregate). Italy's national catalogue (`dati.gov.it`, control 0) finds for Turin only animal-food processing plants, a regional summary and a 2009 survey. A map of 2019 premises is not a map of current density |
+| **Cairo** 🇪🇬 | **No register at any level.** The Governorate's own site (`cairo.gov.eg`, reached 2026-09-24) has no open-data section: a services portal, a population dashboard, a government-services map, and a **tourism guide of ~220 restaurants and ~50 malls** — a curated list for a city of 10 million, the Kuala Lumpur coverage trap. Nationally, CAPMAS serves HTML only |
 
 ▼ **Cairo left this table on 2026-09-23** for the open screening gap. Its row
 read *"No open-data infrastructure"*, which rests on one probe of one national
