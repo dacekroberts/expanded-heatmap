@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**296 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**297 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Copenhagen's deploy-verify passed, with one margin to watch](#2026-09-24---copenhagens-deploy-verify-passed-with-one-margin-to-watch)
 - [Copenhagen built: 14,978 storefronts, 64 stations](#2026-09-24---copenhagen-built-14978-storefronts-64-stations)
 - [The Amsterdam process becomes the `reprobe-city` skill (owner's request)](#2026-09-24---the-amsterdam-process-becomes-the-reprobe-city-skill-owners-request)
 - [Amsterdam to Band A (owner): both licences read, the permits credited as CC BY 4.0, brief written](#2026-09-24---amsterdam-to-band-a-owner-both-licences-read-the-permits-credited-as-cc-by-40-brief-written)
@@ -338,6 +339,33 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Copenhagen's deploy-verify passed, with one margin to watch
+
+- **City-scoped `deploy-verify` passed all five items at `c0811c9`, no
+  defects,** against the worktree's app on the lean venv (served through two
+  temporary `launch.json` entries the owner added, because the session was
+  confined to its worktree). The page's snapshot caption reads the CVR
+  generation date (2026-09-18); notices 30 and 31 and the amended
+  OpenStreetMap notice render on the Copenhagen, Overview and Oslo pages; the
+  Overview reads "Europe (11)" and the regions sum to 27; the marker, the
+  fallback link, "All cities" and the switcher all route correctly.
+  Embedded map: `check_map_view` zoom 12/12 at the 854 px frame and 11/11 at
+  343, twice each, 0 corrections; `check_map_labels` clean at 854, 343 and
+  standalone 1024; `check_map_attribution` 0 of 5 probes covered at 1000x650,
+  1024x768, 375x812 and 343x650, the legend clamp in force each time. No
+  error block on three pages; the only console 404s are Streamlit's base-path
+  probes, identical on Oslo.
+
+- **One margin recorded rather than acted on: at 375 px, Oslo's DOT now
+  clears the Europe map's "Light mode" button by about 3 px.** Copenhagen is
+  the region's easternmost city, so the Europe frame refitted; the cleanup
+  role's `check_macro_labels.py` scores dots against the controls and still
+  passes. A further city to the north or east could push Oslo's dot under the
+  button - the check will catch it, which is what it is for.
+
+- **The push needs a REBOOT**: it changes `app/cities.py` and
+  `app/components.py` (gate item 9 in `docs/data_sources.md`).
 
 ### 2026-09-24 - Copenhagen built: 14,978 storefronts, 64 stations
 
