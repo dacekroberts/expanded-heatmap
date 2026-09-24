@@ -349,7 +349,10 @@ def main():
             continue
         seen.add(c["station"])
         excluded.append({"station": short(c["station"]), "lines": by_name.at[c["station"], "lines"],
-                         "reason": f"thinned on {c['line']}: {c['miles_since_kept']} mi after "
+                         # "spacing filter" is the phrase app/station_scope.py
+                         # reads to count a stop as thinned on the published
+                         # scope table (check_scope_disclosure.py).
+                         "reason": f"spacing filter on {c['line']}: {c['miles_since_kept']} mi after "
                                    f"{short(c['nearest_kept'])}, under "
                                    f"{config.THIN_SPACING_MILES} mi",
                          "latitude": by_name.at[c["station"], "latitude"],

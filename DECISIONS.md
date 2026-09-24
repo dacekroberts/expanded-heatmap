@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**307 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**308 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Amsterdam: the owner's calls, and the page text written](#2026-09-24---amsterdam-the-owners-calls-and-the-page-text-written)
 - [Amsterdam built on its branch: 13,238 storefronts, 144 stations](#2026-09-24---amsterdam-built-on-its-branch-13238-storefronts-144-stations)
 - [Prague deployed; the live site measured after the reboot](#2026-09-24---prague-deployed-the-live-site-measured-after-the-reboot)
 - [Prague's deploy-verify passed; the Europe view zoomed out](#2026-09-24---pragues-deploy-verify-passed-the-europe-view-zoomed-out)
@@ -349,6 +350,28 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Amsterdam: the owner's calls, and the page text written
+
+- **The owner approved Amsterdam's page text, notice 35 and its
+  `excluded_categories.md` section as drafted, and took both open calls as
+  recommended (2026-09-24, morning).** The drafts were written overnight in
+  unattended mode and approved in one pass with Rome's. **Scope: gemeente
+  only**, although tram 6 keeps 5 of its 16 stops (31%) - between Lille's
+  3 of 36, which went regional, and Toulouse's T1 at 52%, which stayed
+  commune-only; regional would have needed Amstelveen's own hospitality
+  permits, a new source. The line is drawn whole and counted only inside the
+  city, which the page says. **Phone labels: shipped with 11 overlapping pairs
+  of the 21 line labels at 375 px** (clean at desktop). Per-line label ends
+  were tried and made it worse (14), so the fix is a phone-specific label
+  layout for every city - added to PLAN's existing app/chrome item rather
+  than tuned here. Notice 35 credits the Gemeente under CC BY 4.0 (the
+  register's own licence is SILENT; the owner's choice of 2026-09-24), and the
+  OpenStreetMap notice now names Amsterdam's city boundary beside Prague's.
+  Files: `app/pages/29_Amsterdam_Heatmap.py` (with a snapshot caption read
+  from `outputs/amsterdam/provenance.json`), `app/components.py`,
+  `app/cities.py`, `docs/data_sources.md`, `docs/excluded_categories.md`,
+  `docs/city_master_list.md`, `docs/project_context.md`, `PLAN.md`.
 
 ### 2026-09-24 - Amsterdam built on its branch: 13,238 storefronts, 144 stations
 

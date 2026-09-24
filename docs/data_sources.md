@@ -2894,6 +2894,20 @@ while closed, line A lightened). **MUST NOT**: the PID, ROPID and IDSK logos
 Wording approved by the owner 2026-09-24. **MUST DO: nothing** -
 `opendata@pid.cz`'s invitation to write is not a condition.
 
+**35. Gemeente Amsterdam (Amsterdam) — required, and DISPLAYED.**
+
+The hospitality-permit register's licence is **SILENT** - `Licentie: -` on the
+live dataset, no `license` key in its schema, and a retired 2022 catalogue that
+said CC BY (read 2026-09-24). **Displayed as CC BY 4.0 on the owner's choice of
+2026-09-24**, which satisfies both readings: it credits the Gemeente, links the
+licence and states the changes (filtered to restaurants, cafés, takeaways,
+coffeeshops and nightclubs, grouped into one category, matched to the BAG by
+address, mapped by distance to stops). **MUST NOT SAY**: that the map is the
+official permit record, or that the Gemeente produced or endorses it. The BAG
+(Public Domain Mark) and GVB's data (CC0) require no notice. Wording approved by
+the owner 2026-09-24. **MUST DO: nothing** - the city's API is to require a key
+on an unset date, and registering is the owner's act.
+
 What has grown instead is the pile of **permission questions**, now four: three
 "what does silence mean?" calls and the route-colour one. They are questions
 about permission rather than implementation, and they are the only items of

@@ -29,11 +29,12 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   `app/cities.py` (entry + Lille's label turned), `app/pages/29_Amsterdam_Heatmap.py`,
   `docs/city_master_list.md` (29 built), `docs/project_context.md`.
   Morning, in order:
-  - [ ] Owner: approve the page text, notice 35 (Gemeente Amsterdam, CC BY
-    4.0) and the `excluded_categories.md` section - drafted in chat.
-  - [ ] Owner: **scope** - Tram 6 keeps 5 of 16 stops (31%) gemeente-only.
-  - [ ] Owner: **phone labels** - 11 overlapping pairs at 375 px.
-  - [ ] Write the approved text; `_NOTICES` in `app/components.py`; commit.
+  - [x] Owner: approve the page text, notice 35 (Gemeente Amsterdam, CC BY
+    4.0) and the `excluded_categories.md` section - approved 2026-09-24.
+  - [x] Owner: **scope** - gemeente-only kept, tram 6 at 5 of 16 stops.
+  - [x] Owner: **phone labels** - shipped with 11 overlapping pairs at 375 px;
+    the phone layout is the app/chrome item below.
+  - [x] Write the approved text; `_NOTICES` in `app/components.py`; commit.
   - [ ] Scoped `deploy-verify` (city-added), `check_deploy_imports`, then
     fetch, merge, push, reboot, live check - one city at a time.
   - [ ] AFTER PUBLISH: remove the two `amsterdam-*-tmp` entries from the main
@@ -84,7 +85,10 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   unchanged by the clipping fix. `scripts/check_map_labels.js` at 375/343
   reports overlapping label pairs in seven cities, 28 in all: Madrid 3/5,
   Paris 3/4, New York 2/3, San Francisco 2/2, Toronto 1/1, Barcelona 0/1,
-  Mexico City 0/1. Labels also sit under the theme button or legend in
+  Mexico City 0/1. **Amsterdam adds 11 pairs at 375** (21 labels, clean at
+  desktop), shipped that way on the owner's call 2026-09-24 and handed here:
+  per-line label ends made it worse (14), so the fix is a phone-specific
+  layout, not a per-city tweak. Labels also sit under the theme button or legend in
   Barcelona (L11 at 375), Edmonton (375 and 343), San Diego (Blue Line at
   375) and Montréal (Ligne 1 at 854, the same in the pre-fix map). Label
   placement is decided once, in Python, against the full-width view
