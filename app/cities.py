@@ -118,7 +118,12 @@ CITIES = [
         # BELOW its dot, not west of it. Westward, "Los Angeles" ran off the
         # left edge at phone width - the "flush at 375 px" problem - and
         # widening the view to make room would have lowered the zoom.
-        "label_offset": ("middle", 0, 26),
+        #
+        # dy 24, not the original 26, since the Global landing view
+        # (2026-09-24) labels Guadalajara at this zoom too: at 26 the two pills
+        # overlapped 68.5 x 1.1 px. At 24 they clear, and the pill's top is
+        # still 15 px below LA's dot.
+        "label_offset": ("middle", 0, 24),
     },
     {
         "name": "Chicago",
@@ -914,7 +919,27 @@ IN_DEFAULT_VIEW = [c for c in CITIES if c.get("in_default_view", True)]
 # meaning "keep the pinned one". Setting it on a region means re-measuring that
 # region's label offsets, which is the cost this design defers rather than
 # removes.
-DEFAULT_REGION = "United States"
+#
+# THE LANDING VIEW IS "GLOBAL", NOT "UNITED STATES" - owner's decision
+# 2026-09-24. Global is a composite of EVERY leaf region, so it labels every
+# city, and it opens on DEFAULT_FRAME's frame: the same centre and zoom (1.4525)
+# the United States view has always opened on. Nothing about the first
+# impression moves except that Canada's and Mexico's names now appear, and
+# Europe's and South America's wherever the screen is wide enough to reach them.
+#
+# Why: the landing view had to be a REGION, and a region labels only its own
+# cities, so the front page silently left sixteen of the site's labels off
+# (Canada, Mexico, Europe, South America). The owner's call is that a label
+# beyond the opening frame is fine - a world of cities cannot be framed at
+# once - and that the label limit belongs to the regions a reader CHOOSES.
+# The United States is one of those now, and keeps its own labels only.
+#
+# check_macro_labels.py scores Global only for the cities whose markers fall in
+# the opening frame at phone width. Europe and South America piling up at the
+# right of a desktop-width Global view is the accepted cost of that decision;
+# each has its own region, scored in full.
+DEFAULT_REGION = "Global"
+DEFAULT_FRAME = "United States"
 
 # Order is display order in the switcher. A new country appends here.
 # CANADA IS SPLIT WEST/EAST, and the reason is geographic rather than
@@ -951,6 +976,7 @@ REGION_MEMBERS = {
 # familiar view first. A new country appends here; a new composite adds a line
 # to REGION_MEMBERS as well.
 REGION_ORDER = [
+    "Global",
     "United States",
     "United States West",
     "United States East",
@@ -983,6 +1009,11 @@ REGION_ORDER = [
     # check_macro_labels.py like every other region).
     "South America",
 ]
+
+# Global is every region that is not itself a composite, derived rather than
+# listed so a new region joins it without an edit here.
+REGION_MEMBERS["Global"] = tuple(
+    r for r in REGION_ORDER if r not in REGION_MEMBERS and r != "Global")
 
 # The regions a city may actually be TAGGED with: everything that is not a
 # composite. Tagging a city "United States" is now an error rather than a
