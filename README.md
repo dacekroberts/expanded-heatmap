@@ -5,7 +5,7 @@ Transit. A standing rule is that this project is never named after a city.)*
 
 **Live site: <https://expanded-heatmap-daceroberts.streamlit.app>**
 
-A multi-city map of how commercial activity clusters around rail-transit
+A multi-city map of how commercial activity clusters around rapid-transit
 stations. For each city it shows retail, food-service and personal-service
 businesses by distance from the nearest station (0-0.1, 0.1-0.2, 0.2-0.3 and
 0.3-0.6 miles), as heat layers, distance rings and clustered category pins.

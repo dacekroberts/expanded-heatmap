@@ -9,7 +9,7 @@ work is in [`PLAN.md`](../PLAN.md), and working rules are in
 
 ## The project
 
-A multi-city map of commercial (storefront) density around rail-transit
+A multi-city map of commercial (storefront) density around rapid-transit
 stations. For each covered city, a station-centred heatmap shows where
 retail, food-service and personal-service businesses cluster relative to
 the transit lines, with toggleable distance rings, clustered per-business

@@ -44,7 +44,7 @@ render_macro_map_theme()
 # The public name lives in components.SITE_NAME; the repository keeps its own
 # name (`expanded-heatmap`), which is a directory, not a title.
 st.title(SITE_NAME)
-st.caption("Storefront commercial density around rail-transit stations, "
+st.caption("Storefront commercial density around rapid-transit stations, "
            "city by city.")
 
 _FOLLOW_UP = (
@@ -54,7 +54,7 @@ _FOLLOW_UP = (
 )
 st.markdown(
     f"""
-This project maps commercial/business density around rail transit station
+This project maps commercial/business density around rapid-transit station
 areas, one city at a time. Each city has its own independently scoped detail
 map - its own map instance, its own data, its own viewport bounds - rather
 than one shared map instance loading every city's business points at once.
