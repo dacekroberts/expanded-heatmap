@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**322 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**323 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Japan's permit-type taxonomy: one module for ten list formats](#2026-09-24---japans-permit-type-taxonomy-one-module-for-ten-list-formats)
 - [Japan's national facts module; the stub test clears four cities; Tokyo goes last](#2026-09-24---japans-national-facts-module-the-stub-test-clears-four-cities-tokyo-goes-last)
 - [Japan: the Shinkansen is out; confectioners and delis count](#2026-09-24---japan-the-shinkansen-is-out-confectioners-and-delis-count)
 - [Japan's join moved into the pipeline, unchanged, before any Japanese build](#2026-09-24---japans-join-moved-into-the-pipeline-unchanged-before-any-japanese-build)
@@ -364,6 +365,35 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Japan's permit-type taxonomy: one module for ten list formats
+
+- **Wrote `pipeline/taxonomies/japan_eigyo.py` and registered it as
+  `japan_eigyo`**, the last piece of the shared Japan code before Osaka's build.
+  **One module for every format.** The same national permit types arrive
+  spelled ten ways: plain, MHLW's numbered (①, which NFKC turns to "1"),
+  Taitō's sub-typed (`飲食店営業（一般・居酒屋）`) and Meguro's abbreviated
+  (`飲食一般`, `他食販店舗`). **A per-city mapping was rejected**: a fix would
+  reach one city instead of five, the lesson Brazil's CNEFE module was built
+  on. Nineteen rules run in order, first match wins, and every exclusion sits
+  above the bucket it carves from:
+  - **Out**: institutional catering, vending machines, stalls and temporary
+    permits, mail order, restaurants inside accommodation (the trap Madrid
+    and Barcelona met), and entertainment venues holding food permits.
+  - **Retail, food only**: the owner's 菓子製造業 and そうざい製造業, then butcher,
+    fish, dairy, greengrocer, rice, konbini (including those holding a
+    restaurant permit), supermarkets, bento shops, and other food sales.
+  - **Food service**: every form of 飲食店営業, and 喫茶店営業.
+  - **Personal services** come from the 生活衛生 registers by `source`, with
+    storeless laundry pick-ups out.
+  
+  Import-time checks pin the order-dependent cases. **Measured over all
+  229,504 fixed premises in the ten screened lists** (289 distinct values):
+  Food service 76.4%, Retail 18.2%, out 5.3%. **All 125 fall-through values
+  were read**: they are manufacturing and processing, plus a 0.04% catch-all,
+  so no storefront type escapes. One borderline type is left to the owner:
+  アイスクリーム類製造業 (692 rows, often gelato counters) is out, since the
+  owner's call named 菓子 and そうざい only.
 
 ### 2026-09-24 - Japan's national facts module; the stub test clears four cities; Tokyo goes last
 

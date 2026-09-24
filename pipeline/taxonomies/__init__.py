@@ -111,6 +111,11 @@ TAXONOMY_MODULES = {
     "czech_nace2025": "pipeline.taxonomies.czech_nace2025",
     "amsterdam_source": "pipeline.taxonomies.amsterdam_source",
     "rome_suap": "pipeline.taxonomies.rome_suap",
+    # Japan's permit types (営業の種類), shared by every Japanese city and every
+    # list format (plain, MHLW's numbered, Taitō's sub-typed, Meguro's
+    # abbreviated). Food service and FOOD-ONLY Retail from the food-hygiene
+    # permits; Personal services by `source` from the 生活衛生 registers.
+    "japan_eigyo": "pipeline.taxonomies.japan_eigyo",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

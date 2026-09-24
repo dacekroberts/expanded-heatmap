@@ -584,10 +584,17 @@ brief names.
     `pipeline/countries/japan_register.py` (20 definitions). The script now
     imports it and keeps only the measurement. Identical output on all 24
     city and ward keys, with Minato at 99.8%.
-  - [ ] Stage 2: `pipeline/countries/japan.py` (national facts: the MLIT URL
-    templates, N02, the per-city ward codes and projected CRS), the 営業の種類
-    taxonomy module and its registry entry. The three owner calls above decide
-    two of its rules (菓子製造業 / そうざい製造業; rail). **Osaka is the recommended
+  - [x] **Stage 2 (2026-09-24)**: `pipeline/countries/japan.py` (N02 without
+    the Shinkansen, N03 city lines, ISJ templates, ward codes and EPSG,
+    `stub_test()`) and `pipeline/taxonomies/japan_eigyo.py`, registered as
+    `japan_eigyo`: 19 ordered rules with import-time checks. Over 229,504 fixed
+    premises in ten lists: Food service 76.4%, food-only Retail 18.2%, out 5.3%.
+    Every one of the 125 fall-through values is manufacturing, processing or
+    the 0.04% catch-all. **Main can now start Osaka**
+    (`add-city`, `pipeline/osaka/`), reading the join, the facts and the
+    taxonomy from the shared modules.
+  - [ ] Owner, minor: アイスクリーム類製造業 (692 rows; many are gelato
+    counters) is OUT for now, since the owner's call named 菓子 and そうざい. **Osaka is the recommended
   first build**: the cleanest list, 99.1% block, 38 m against the city's own
   coordinates.
 - [~] **Japan — three owner calls that recur in all five briefs.**
