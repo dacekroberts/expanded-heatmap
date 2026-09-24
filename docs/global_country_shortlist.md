@@ -2013,6 +2013,14 @@ Run under the owner's bounded download approval (MLIT address files; permit CSVs
 
 **Sendai** (a ZIP of XLSX) is fetched-ready but not joined: reading XLSX needs `openpyxl`, which is not installed and was not installed unattended. Yokohama, Nagoya, Kyoto, Hiroshima and Fukuoka have no current full food list (above); MHLW's national open-data CSV is the route for them.
 
+**▼ Measured the next morning (2026-09-24, owner awake), superseding parts of the above:**
+
+- **A new join rule from Sendai, and Kobe's row corrected.** MLIT's block file keeps the 字 in `小字・通称名` (21,768 of Sendai's 47,466 rows), so a 地番 is also keyed under 大字 + 字 + 小字. Sendai went from 81.3% to **95.1%**, and **Kobe from 95.7% to 96.5%** (personal services 96.3% to 97.3%; 4,993 after 21 storeless laundry pick-ups at `神戸市内一円` were set aside). Minato, Osaka and Sapporo are unchanged.
+- **Sendai joins, but its lists are NOT open data.** `openpyxl` was approved. 12,627 permanent food premises join at 95.1% block, and a GSI check puts them at a median 34 m. But the city's site default is 「無断で複製・転用することはできません」 and no page overrides it, so the owner is sending a request.
+- **MHLW's open data is an OPT-IN SLICE, measured.** It is a plain GET per authority (157 authorities), holding online filings only, with per-field consent. Measured against complete lists, it holds **1.9–8.1%** of their restaurants, is mostly notifications, and 26–65% of its rows carry an address. It does not rescue Yokohama (2,912 restaurants), Nagoya (1,058), Kyoto (26) or Tokyo's gap wards. **But it completes Fukuoka and Hiroshima**, whose own lists stop exactly where online filing begins. Their combined totals are **14.8** and **10.7** restaurants per 1,000 residents, against complete lists at 9.5–19.0, and the two sources overlap by 1.3% and 1.2% at block level. MHLW's own coordinates agree with the join at a median 35–36 m. Its licence: PDL 1.0, PERMITTED WITH CONDITIONS.
+- **Tokyo: 8 wards, from the wards' own sites.** Shibuya 99.6%, Taitō 100%, Setagaya 100% and Meguro 99.9% join like the first four, for about 59,400 food premises. Chiyoda and Toshima release their lists only on request; Bunkyō publishes none.
+- **Re-banded (owner)**: the geocoding band closed. Tokyo (8 wards), Osaka, Kobe, Sapporo and Fukuoka went to A; Hiroshima to one-bucket; Sendai to access-blocked; Yokohama, Nagoya and Kyoto to the open gap. See `city_master_list.md` and the briefs.
+
 #### A refinement the Korea probe produced: stations are not lines
 
 Japan's N02 carries **both** — 10,235 station points *and* 21,932 line

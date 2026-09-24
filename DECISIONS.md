@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**313 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**314 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Japan re-banded and the geocoding band closed; Rotterdam to A](#2026-09-24---japan-re-banded-and-the-geocoding-band-closed-rotterdam-to-a)
 - [Four more band calls; Tokyo reaches 8 wards; MHLW's terms read](#2026-09-24---four-more-band-calls-tokyo-reaches-8-wards-mhlws-terms-read)
 - [The open legend capped below the map's buttons, and a taxonomy may name its layer (owner, from Amsterdam's deploy-verify)](#2026-09-24---the-open-legend-capped-below-the-maps-buttons-and-a-taxonomy-may-name-its-layer-owner-from-amsterdams-deploy-verify)
 - [MHLW's national food open data is an opt-in slice; it completes Fukuoka and Hiroshima only](#2026-09-24---mhlws-national-food-open-data-is-an-opt-in-slice-it-completes-fukuoka-and-hiroshima-only)
@@ -355,6 +356,38 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Japan re-banded and the geocoding band closed; Rotterdam to A
+
+- **Closed the geocoding band (B) by success, and re-banded its ten Japanese
+  cities on the owner's calls.** Its caption, *geocoding at national scale*,
+  stopped being true of every member once the coordinate step measured as a
+  block-level join to MLIT's 位置参照情報 (95–100%). This is the same reasoning
+  that closed the coordinates band on 2026-09-23: a band whose condition stops
+  being true of its members closes, and is not re-captioned around them.
+  - **Band A**: Tokyo (8 wards; the owner requests Chiyoda's ledger in
+    parallel), Osaka, Kobe, Sapporo and Fukuoka, each with a brief and its
+    licences read.
+  - **Band C**: Hiroshima, which has no personal-services list. The owner
+    accepted the city's dataset-level PDL 1.0 for its full-list file.
+  - **Band D**: Sendai, in the full Kaohsiung form: screened and joined, and
+    only the city's permission is missing.
+  - **Open gap**: Yokohama, Nagoya and Kyoto. They have no current food list,
+    and MHLW's slice is at most 7%. They rest on an absence, so they are not
+    discards.
+- **Rotterdam went to Band A** after both licence reads passed: the KOOP
+  notices (Auteurswet art. 11 and CC0, with conditions on the harvest only) and
+  CBS (CC BY 4.0). Its brief checks 6/6, and its gap row is kept inside its
+  Band A section. **Riga stays partial** (owner): its only vacancy figures cover
+  about a third of the mapped shops, at 15–20%. **Santiago stays in the gap**:
+  the downtown comuna publishes only scanned alcohol-licence decrees.
+- **Counts: built 29; candidates 31 (A 21 · B 0 · C 6 · D 4); gap 9; discarded
+  24.** The band summary table had still read 32 / 11 / 21 from before the
+  morning's moves. It was corrected in the same edit, the drift the file's own
+  box warns about. The evidence trail (`global_country_shortlist.md`) gained a
+  dated Japan paragraph. A stale-offset bug in the edit script, which spliced
+  with a position computed before an insertion, was caught by its own assert
+  before anything was written.
 
 ### 2026-09-24 - Four more band calls; Tokyo reaches 8 wards; MHLW's terms read
 
