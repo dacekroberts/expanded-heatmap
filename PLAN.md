@@ -36,7 +36,9 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     only), because closing the account revokes it. Closing is licence-safe
     (CC BY 4.0 is irrevocable); a future refresh means a new free account and
     the 15-minute key propagation. `docs/gated_access.md` item 3.
-  - [ ] ⏰ **AFTER PUBLISH: the owner removes the two `-tmp` entries** from the
+  - [x] **DONE 2026-09-24: the owner removed both `-tmp` entries**; the file
+    parses with its two original entries. Was:
+    ⏰ **AFTER PUBLISH: the owner removes the two `-tmp` entries** from the
     main checkout's `.claude/launch.json` (`copenhagen-static-tmp`,
     `copenhagen-app-tmp`). They point into this worktree; the build session
     was confined to it and could not edit that file itself.
