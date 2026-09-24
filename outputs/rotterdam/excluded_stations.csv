@@ -1,0 +1,85 @@
+station,lines,reason,latitude,longitude
+"'s-Gravenhage, Den Haag Centraal",E,"in Den Haag (0518), outside gemeente 0599",52.080343,4.32611
+"'s-Gravenhage, Forepark",E,"in Den Haag (0518), outside gemeente 0599",52.0696535,4.393348
+"'s-Gravenhage, Leidschenveen",E,"in Den Haag (0518), outside gemeente 0599",52.0644255,4.400734
+"Barendrecht, Carnisselande",5,"in Barendrecht (0489), outside gemeente 0599",51.844072,4.500721
+"Barendrecht, Meerwede",5,"in Barendrecht (0489), outside gemeente 0599",51.854438,4.5015625
+"Barendrecht, Middeldijkerplein",5,"in Barendrecht (0489), outside gemeente 0599",51.8484205,4.500991
+"Barendrecht, Vrijenburg",5,"in Barendrecht (0489), outside gemeente 0599",51.860369500000004,4.502571
+"Barendrecht, Waterkant",5,"in Barendrecht (0489), outside gemeente 0599",51.8452945,4.500683
+"Berkel en Rodenrijs, Berkel Westpolder",E,"in Lansingerland (1621), outside gemeente 0599",51.990211,4.454257500000001
+"Berkel en Rodenrijs, Rodenrijs",E,"in Lansingerland (1621), outside gemeente 0599",51.9752255,4.4608785
+"Capelle aan den IJssel, Capelle Centrum",C,"in Capelle aan den IJssel (0502), outside gemeente 0599",51.931392,4.5896075
+"Capelle aan den IJssel, De Terp",C,"in Capelle aan den IJssel (0502), outside gemeente 0599",51.935795,4.600079
+"Capelle aan den IJssel, Slotlaan",C,"in Capelle aan den IJssel (0502), outside gemeente 0599",51.9284795,4.578377
+"Den Haag, Laan van NOI",E,"in Den Haag (0518), outside gemeente 0599",52.079399499999994,4.343719
+"Maassluis, Maassluis Centrum",B,"in Maassluis (0556), outside gemeente 0599",51.9164435,4.253689
+"Maassluis, Maassluis West",B,"in Maassluis (0556), outside gemeente 0599",51.9262505,4.2351220000000005
+"Maassluis, Steendijkpolder",B,"in Maassluis (0556), outside gemeente 0599",51.932717333333336,4.224750333333334
+"Nootdorp, Nootdorp",E,"in Pijnacker-Nootdorp (1926), outside gemeente 0599",52.047705,4.41458
+"Pijnacker, Pijnacker Centrum",E,"in Pijnacker-Nootdorp (1926), outside gemeente 0599",52.0206175,4.4371244999999995
+"Pijnacker, Pijnacker Zuid",E,"in Pijnacker-Nootdorp (1926), outside gemeente 0599",52.004965999999996,4.445809000000001
+"Poortugaal, Poortugaal",D,"in Albrandswaard (0613), outside gemeente 0599",51.861753,4.3955745
+"Rhoon, Rhoon",D,"in Albrandswaard (0613), outside gemeente 0599",51.8590395,4.418927
+"Schiedam, 's-Gravelandseweg",1 11,"in Schiedam (0606), outside gemeente 0599",51.923375500000006,4.4024875
+"Schiedam, Bachplein",1 11,"in Schiedam (0606), outside gemeente 0599",51.937546499999996,4.3713385
+"Schiedam, Boeier",11,"in Schiedam (0606), outside gemeente 0599",51.9423545,4.3686335
+"Schiedam, Broersvest",1 11,"in Schiedam (0606), outside gemeente 0599",51.9182605,4.402381
+"Schiedam, Harreweg",11,"in Schiedam (0606), outside gemeente 0599",51.944370500000005,4.3746315
+"Schiedam, Hof van Spaland",1 11,"in Schiedam (0606), outside gemeente 0599",51.934520500000005,4.3747810000000005
+"Schiedam, Koemarkt",1 11,"in Schiedam (0606), outside gemeente 0599",51.9155235,4.4024339999999995
+"Schiedam, Parkweg",C,"in Schiedam (0606), outside gemeente 0599",51.921167,4.393733
+"Schiedam, Parkweg",1 11,"in Schiedam (0606), outside gemeente 0599",51.924323,4.3948920000000005
+"Schiedam, Piersonstraat",1 11,"in Schiedam (0606), outside gemeente 0599",51.9235815,4.3901035
+"Schiedam, Prinses Beatrixlaan",1 11,"in Schiedam (0606), outside gemeente 0599",51.9294605,4.375898
+"Schiedam, Rotterdamsedijk",1 11,"in Schiedam (0606), outside gemeente 0599",51.9144895,4.408859
+"Schiedam, Schiedam Centrum",A B C,"in Schiedam (0606), outside gemeente 0599",51.921535000000006,4.409377
+"Schiedam, Schiedam Nieuwland",B 1 11,"in Schiedam (0606), outside gemeente 0599",51.923318,4.38239675
+"Schiedam, Schubertplein",1,"in Schiedam (0606), outside gemeente 0599",51.937470000000005,4.3671015
+"Schiedam, Station Schiedam Centrum",1 11,"in Schiedam (0606), outside gemeente 0599",51.9209475,4.406632500000001
+"Schiedam, Troelstralaan",C,"in Schiedam (0606), outside gemeente 0599",51.915502000000004,4.3844755
+"Schiedam, Vijfsluizen",C,"in Schiedam (0606), outside gemeente 0599",51.9089365,4.371978
+"Spijkenisse, De Akkers",C D,"in Nissewaard (1930), outside gemeente 0599",51.833325,4.3197155
+"Spijkenisse, Heemraadlaan",C D,"in Nissewaard (1930), outside gemeente 0599",51.8377925,4.3316099999999995
+"Spijkenisse, Spijkenisse Centrum",C D,"in Nissewaard (1930), outside gemeente 0599",51.8467645,4.334723
+"Vlaardingen, De Loper",1,"in Vlaardingen (0622), outside gemeente 0599",51.931940999999995,4.3459970000000006
+"Vlaardingen, Holysingel",1,"in Vlaardingen (0622), outside gemeente 0599",51.93090466666666,4.3418600000000005
+"Vlaardingen, Over de Dammen",1,"in Vlaardingen (0622), outside gemeente 0599",51.933636,4.353206500000001
+"Vlaardingen, Parijslaan",1,"in Vlaardingen (0622), outside gemeente 0599",51.934929,4.3586955
+"Vlaardingen, Vlaardingen Centrum",B,"in Vlaardingen (0622), outside gemeente 0599",51.903129500000006,4.3437945
+"Vlaardingen, Vlaardingen Oost",B,"in Vlaardingen (0622), outside gemeente 0599",51.910373,4.3619755
+"Vlaardingen, Vlaardingen West",B,"in Vlaardingen (0622), outside gemeente 0599",51.903850500000004,4.3150335
+"Voorburg, Leidschendam-Voorburg",E,"in Leidschendam-Voorburg (1916), outside gemeente 0599",52.077231499999996,4.382771
+"Voorburg, Voorburg 't Loo",E,"in Leidschendam-Voorburg (1916), outside gemeente 0599",52.082006,4.366265
+'s-Gravendijkwal,14,"spacing filter on Tram 14: 0.434 mi after Eendrachtsplein, under 0.5 mi",51.913903,4.464127
+Adriaan Volkerlaan,3,"spacing filter on Tram 3: 0.308 mi after Dwarsdijk, under 0.5 mi",51.892046,4.5460465
+Akkeroord,3,"spacing filter on Tram 3: 0.421 mi after Keizerswaard, under 0.5 mi",51.8847015,4.5579350000000005
+Beijerlandselaan,5,"spacing filter on Tram 5: 0.263 mi after Varkenoordseviaduct, under 0.5 mi",51.8972185,4.510897999999999
+Bergse Dorpsstraat,4,"spacing filter on Tram 4: 0.483 mi after Bergse Plaslaan, under 0.5 mi",51.9575345,4.494444
+Beverwaardseweg,3,"spacing filter on Tram 3: 0.219 mi after Schinnenbaan, under 0.5 mi",51.898073499999995,4.568404
+Boezemweg,7,"spacing filter on Tram 7: 0.255 mi after Vlietlaan, under 0.5 mi",51.9281745,4.496402
+Claes de Vrieselaan / Mathenesserlaan,14,"spacing filter on Tram 14: 0.208 mi after Heemraadsplein, under 0.5 mi",51.914258,4.458959
+Croystraat,3,"spacing filter on Tram 3: 0.193 mi after P+R Beverwaard, under 0.5 mi",51.8885885,4.568758
+Dorpsweg,2,"spacing filter on Tram 2: 0.234 mi after Pleinweg, under 0.5 mi",51.891324,4.472878
+Grote Hagen,2,"spacing filter on Tram 2: 0.196 mi after Keizerswaard, under 0.5 mi",51.887193,4.553706
+Huygensstraat,18,"spacing filter on Tram 18: 0.117 mi after Spartastraat, under 0.5 mi",51.917471500000005,4.4354245
+Jericholaan,7,"spacing filter on Tram 7: 0.388 mi after Voorschoterlaan, under 0.5 mi",51.928869000000006,4.5062605
+Kievitslaan,18,"spacing filter on Tram 18: 0.209 mi after Euromast, under 0.5 mi",51.9096825,4.4715745
+Kreekhuizenlaan,2,"spacing filter on Tram 2: 0.221 mi after Kerstendijk, under 0.5 mi",51.882613,4.539244
+Larikslaan,8,"spacing filter on Tram 8: 0.47 mi after Wilgenlei, under 0.5 mi",51.961543,4.47211
+Mathenesserlaan,14,"spacing filter on Tram 14: 0.325 mi after Eendrachtsplein, under 0.5 mi",51.915014,4.465964
+Mecklenburglaan,7,"spacing filter on Tram 7: 0.146 mi after Voorschoterlaan, under 0.5 mi",51.926835999999994,4.5108654999999995
+Meidoornweide,8,"spacing filter on Tram 8: 0.245 mi after Wilgenlei, under 0.5 mi",51.959152,4.47568
+Nieuwe Binnenweg,14,"spacing filter on Tram 14: 0.481 mi after Heemraadsplein, under 0.5 mi",51.914829,4.465285
+Noorderhelling,3,"spacing filter on Tram 3: 0.33 mi after Stadion Feyenoord, under 0.5 mi",51.8944345,4.5320475
+Oude Watering,3,"spacing filter on Tram 3: 0.481 mi after P+R Beverwaard, under 0.5 mi",51.892683,4.570093
+Pieter de Hoochweg,18,"spacing filter on Tram 18: 0.293 mi after Oostkousdijk, under 0.5 mi",51.905317,4.459936000000001
+Putsebocht,2,"spacing filter on Tram 2: 0.425 mi after Randweg, under 0.5 mi",51.89745,4.50227
+Schiemond,18,"spacing filter on Tram 18: 0.393 mi after Delfshaven, under 0.5 mi",51.904326,4.446623499999999
+Spanjaardstraat,18,"spacing filter on Tram 18: 0.209 mi after Delfshaven, under 0.5 mi",51.9069205,4.445653999999999
+Teldersweg,8,"spacing filter on Tram 8: 0.344 mi after Melanchthonweg, under 0.5 mi",51.9527735,4.4691685
+Van Duylstraat,18,"spacing filter on Tram 18: 0.477 mi after Marconiplein, under 0.5 mi",51.910562999999996,4.4425685
+Van den Hoonaardstraat,4,"spacing filter on Tram 4: 0.381 mi after Walenburgerweg, under 0.5 mi",51.9350345,4.475543999999999
+Vasteland,18,"spacing filter on Tram 18: 0.467 mi after Euromast, under 0.5 mi",51.911373999999995,4.4769760000000005
+Zaagmolenbrug,6,"spacing filter on Tram 6: 0.191 mi after Noorderbrug, under 0.5 mi",51.93215,4.487315
+Zeilmakersstraat,18,"spacing filter on Tram 18: 0.282 mi after Marconiplein, under 0.5 mi",51.9116525,4.438352500000001
