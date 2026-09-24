@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**308 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**309 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Brazil's other eight cities built on the national modules (dcb1507)](#2026-09-24---brazils-other-eight-cities-built-on-the-national-modules-dcb1507)
 - [São Paulo built on its branch: 219,578 storefronts, 103 stations, Line 9 drawn](#2026-09-24---são-paulo-built-on-its-branch-219578-storefronts-103-stations-line-9-drawn)
 - [São Paulo started and PINNED at step 2: who writes Brazil's classifier](#2026-09-24---são-paulo-started-and-pinned-at-step-2-who-writes-brazils-classifier)
 - [Prague deployed; the live site measured after the reboot](#2026-09-24---prague-deployed-the-live-site-measured-after-the-reboot)
@@ -350,6 +351,69 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Brazil's other eight cities built on the national modules (dcb1507)
+
+- **Belo Horizonte, Brasília, Salvador, Fortaleza (Regional), Porto Alegre
+  (Regional), Recife (Regional), Santos (Regional) and Rio de Janeiro are built
+  on `sao-paulo-build`, the owner's batch: each to drafted page text, one
+  review, one deploy-verify, one push.** Seven are OSM-railed through the
+  shared step 1 written before the second of them
+  (`pipeline/countries/brazil_rail.py`, osm-rail's meta-lesson), with
+  `brazil_fetch.py` and `brazil_build_check.py`; the packages are generated
+  from one spec shape. Gate 3 passes exactly everywhere. Storefronts / stations
+  / within a ring / unreadable share inside vs beyond the rings:
+  Belo Horizonte 45,582 / 20 / 18.5% / 41.9 vs 36.7%; Brasília 36,687 / 27 /
+  13.8% / 42.0 vs 41.4; Salvador 53,045 / 20 / 19.0% / 35.2 vs 31.7; Fortaleza
+  62,969 / 20 / 13.6% / 43.6 vs 39.3; Porto Alegre 36,480 / 22 / 20.3% / **52.2**
+  vs 44.6; Recife 44,382 / 29 / 23.4% / 43.6 vs 43.1; Santos 11,813 / 27 /
+  45.6% / 42.0 vs 33.2; Rio 106,652 / 95 / 28.4% / 34.9 vs 31.6. **Privacy: no
+  exposure in any** - no registrant column, no contact details, and the
+  person heuristic's 8.8-19.5% is the upper-case two-word misfire São Paulo
+  found: **0** of the flagged pins carries a first name by `person_name_in`
+  in any city (the top flags are chains - DROGARIA ARAUJO, LOJAS AMERICANAS).
+- **Gate-3 corrections, each measured, none relaxed.** Belo Horizonte: Linha 1
+  is 21 - pt.wikipedia's table reads "20 (+1 being built)" but the +1, Nova
+  Suíça, opened with Linha 2 on 2026-07-03 and its text reads 22 in
+  operation. Brasília: 27 - the IPEDF layer (2023) lists 24 and marks 106 Sul,
+  110 Sul and Estrada Parque under construction, though they opened in 2020;
+  and the DF has no admin_level-8 relation in OSM, so its scope is assembled
+  from the 35 administrative regions coded 5300108xxxx (5,773.7 km²).
+  Santos: three new L2 stops carry no name in OSM, only wikidata items -
+  named Mercado, Paquetá, Poupatempo from their labels; Ana Costa from its
+  wikipedia tag; "São Bento", 148 m from Valongo on the terminal loop and in
+  no station list, treated as Valongo - 27, matching L1's 15 and L2's 12 new.
+  Rio: the metro from IPP's layers (20 / 26 / 6, 41), **but the VLT from OSM,
+  not the agency's layer - its line flags give 20/14/11/14 where pt.wikipedia
+  lists 16/11/10/11 and OSM agrees**; the VLT is gated on its network (30 of
+  30) because its downtown loops serve different stops in each direction, so
+  a line's stations are the union while Wikipedia lists per direction; and
+  two DIFFERENT stations named São Francisco Xavier (the metro's in Tijuca,
+  SuperVia's 2.8 km away) were caught by the collapse spread cap and kept
+  apart by a line-scoped rename. Salvador: OSM's relations carry no colour and
+  the operator publishes no hex; its lines are named Linha 1-Vermelha and
+  Linha 2-Azul, resolved through the CSS table (Guadalajara's precedent).
+  Salvador's Aeroporto station is in Lauro de Freitas - excluded, 11 of 12 on
+  L2 kept, city scope unchanged. Rio's nine line colours needed four minimal
+  lightness moves (closest pair after, 13.2).
+- **The rail test, applied as the owner's standing call for this batch**
+  (`scripts/measure_rail_backbone.py`; frequencies cited): **drawn** - Rio's
+  SuperVia Deodoro (1,204 m, every 6-8 min, 13 of 19 with no metro or VLT
+  within 800 m) and Saracuruna to Gramacho (1,314 m, every 12 min, 10 of 14);
+  **out, clear fails** - SuperVia Japeri (3,223 m in the city), Fortaleza's
+  Linha Oeste (2,059 m, every 60 min) and Aeroporto branch (every 30 min, two
+  stops), Recife's VLTs to Cabo (3,126 m) and Curado (3,941 m); **out,
+  BORDERLINE, to the owner in the batch review** - SuperVia Belford Roxo
+  (1,814 m, every 15 min), SuperVia Santa Cruz (2,114 m, frequency unread, 20
+  of 23 uncovered), Fortaleza's Parangaba-Mucuripe VLT (1,228 m, 9 of 11,
+  every 40 min where Fortaleza's own metro runs every 20). **Consequence, also
+  to the owner**: Caucaia's and Cabo's only stations were on lines that
+  failed; both regional scopes are kept as decided, so those municípios add
+  storefronts without a station - Guadalajara's precedent. Rio's Teleférico,
+  drawn if operating by the owner's call, is closed (since 2016; reopening
+  moved to June 2027) and not drawn. Santos L2's twelve stations are in
+  assisted operation (9h-15h since 2025-12-01) and drawn on the Belo
+  Horizonte Linha 2 precedent, flagged for the review.
 
 ### 2026-09-24 - São Paulo built on its branch: 219,578 storefronts, 103 stations, Line 9 drawn
 
