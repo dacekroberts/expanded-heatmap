@@ -749,6 +749,36 @@ Cities built and running end to end (pipeline, map, app page):
   is drawn while closed for reconstruction**, with a guard that stops the build
   once the feed serves it again.
 
+- **Amsterdam** - GVB's metro lines 50-54 and sixteen tram lines, inside the
+  municipality. The Netherlands' first city, and the first built from two
+  layers of different kinds rather than one register. Three things are its
+  own. **Two categories, not three**: food service is the city's live register
+  of hospitality permits, each under its permit name; everything else is the
+  national buildings register's shop-class units in use, which record what a
+  unit is for rather than who trades there, so retail and personal services
+  are one "Shops and services" category and those dots show an address. **A
+  line's stations are its regular route** - served on at least half the
+  line's days - because GVB runs up to 30 shapes per line in the national
+  feed; trams are thinned with the sub-transit-line filters. And **the tram
+  colours are read from GVB's own network map**, since the feed carries none.
+  Empty shops, about one unit in twenty, cannot be filtered per unit and are
+  disclosed instead.
+
+- **Rome** - Metro A, B, B1 and C and the Roma-Viterbo railway's urban
+  service, inside the comune. Italy's second city, and built from nothing
+  Milan used: Italy is bespoke per city. Three things are its own. **A
+  register of premises with no names and no closing dates**: Roma
+  Capitale's SUAP records each authorised premises by the city's street code
+  and civic number, JOINED to ANNCSU, the national house-number archive,
+  rather than geocoded; its food layer lists about 2.7 times OpenStreetMap's
+  restaurants and bars and is stated as an upper bound, since the oldest
+  registrations match a mapped place best and no age cut-off would help.
+  **Its rail is OpenStreetMap's**, because the agency's timetable data is
+  limited to travel information. And **it is the third city to draw
+  suburban rail**, after Dublin and Copenhagen: the Roma-Viterbo urban
+  service passed the spacing-and-frequency test, and Metromare, to Ostia,
+  did not.
+
 **Canada is closed at five built cities** - Vancouver (regional, with Surrey),
 Montréal, Calgary, Edmonton and Toronto - out of six candidates screened. The
 sixth, Surrey, is not pending: it shipped inside the Vancouver regional map.

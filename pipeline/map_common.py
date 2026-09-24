@@ -319,6 +319,11 @@ assert "@@" not in THEME_TOGGLE_HTML, "unresolved placeholder in THEME_TOGGLE_HT
 # KEPT OUT OF LEGEND_HTML ON PURPOSE: that string goes through .format(), so
 # every CSS brace in it would have to be doubled, and a single missed one is a
 # KeyError at render time rather than a visible mistake. Concatenated instead.
+#
+# How far below the map's top edge the open legend must stop: the button row
+# (#map-actions, top 10px, ~30 px tall) plus a gap. _layout_labels caps its
+# legend obstacle with the same number, so the model and the render agree.
+_LEGEND_TOP_CLEAR = 56
 _LEGEND_CSS = """
 <style>
 /* THE HEADER IS THE CONTROL, AND IT HAS TO SAY SO. A native <summary> does
@@ -350,6 +355,24 @@ _LEGEND_CSS = """
 .map-legend > summary:hover::after { opacity: 1; text-decoration: underline; }
 .map-legend > summary:focus-visible { outline: 2px solid currentColor;
     outline-offset: 2px; }
+/* THE OPEN LEGEND IS CAPPED BELOW THE BUTTON ROW, AND SCROLLS. Amsterdam
+   (2026-09-24) was the first map with 21 lines: open, its legend was 634 px
+   tall at the 650 px embed, so its top sat at y = -8 and its header and Hide
+   control were under the "All cities" and theme buttons (#map-actions, fixed
+   at top 10px, ~30 px tall) - found by deploy-verify. Every earlier legend was
+   shorter than the cap (Paris's the tallest, its top at y 84), so none of
+   them changes. min(100vh, MAP_H) is the visible map height whichever way
+   _LEGEND_BOTTOM_CSS resolves; border-box so the cap is the whole panel. The
+   header sticks, so Hide stays in reach while the rows scroll. Its background
+   is set, NOT `inherit`: a <summary> is slotted into the <details> shadow
+   root, so it inherits from a transparent slot - measured, the rows showed
+   through the header in dark mode. */
+.map-legend { box-sizing: border-box; overflow-y: auto;
+    overscroll-behavior: contain;
+    max-height: calc(min(100vh, """ + str(_MAP_H) + """px) - """ + str(24 + _LEGEND_TOP_CLEAR) + """px); }
+.map-legend > summary { position: sticky; top: -8px; z-index: 1;
+    padding-top: 8px; margin-top: -8px; background: white; }
+.dark-base .map-legend > summary { background: var(--dm-surface); }
 </style>
 """
 
@@ -734,14 +757,60 @@ PHONE_FIT_SCRIPT = """
 # a slide never accumulates. The measurement is the label box relative to its
 # own 0x0 icon plus latLngToContainerPoint, which stays right even when a
 # hidden page has not redrawn its markers yet.
+#
+# AND IT RE-PLACES A LABEL THAT COLLIDES (2026-09-24). _label_candidates and
+# _tail_end place every label ONCE, in Python, against the full-width view;
+# when the phone fit zooms out, line tips crowd together while labels keep
+# their size, and nothing moved them. Amsterdam shipped with 11 overlapping
+# pairs at 375px and 17 at 343px; seven other cities had 28 between them. So
+# after the slide, any label overlapping another label, the fixed buttons,
+# Leaflet's top-left controls or the COLLAPSED legend tries spots around its
+# own line's tip - mirrored, above, below, right, left, a step further out -
+# and takes the first clear one, or the least-overlapping. A label that
+# collides with nothing never moves, so every desktop view, already laid out
+# clean in Python, is unchanged. The open legend is not an obstacle: opening
+# it is the reader choosing to cover part of the map.
 LABEL_CLAMP_SCRIPT = """
 <script>
 (function () {
     var NAME = "__MAP_NAME__";
     var MARGIN = 6;     // px kept between a label's text and the frame edge
+    var GAP = 4;        // px between a re-placed label and its line's tip
+    var CLEAR = 2;      // px a label keeps from a button, control or legend
+    var PASSES = 4;
     var tries = 0;
 
-    function clamp(m) {
+    function box(x0, y0, x1, y1) { return {x0: x0, y0: y0, x1: x1, y1: y1}; }
+    function shift(b, sx, sy) { return box(b.x0 + sx, b.y0 + sy, b.x1 + sx, b.y1 + sy); }
+    function area(a, b) {
+        var w = Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0);
+        var h = Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0);
+        return w > 0 && h > 0 ? w * h : 0;
+    }
+
+    // What a label must stay clear of, in the map container's coordinates:
+    // the fixed "All cities"/theme buttons, Leaflet's own top-left controls,
+    // and the legend while it is COLLAPSED. An open legend is the reader's
+    // choice to cover part of the map; shuffling labels out from under it
+    // would only crowd them elsewhere.
+    function obstacles(m) {
+        var c = m.getContainer(), mr = c.getBoundingClientRect(), out = [];
+        function add(el) {
+            if (!el) return;
+            var r = el.getBoundingClientRect();
+            if (r.width && r.height) {
+                out.push(box(r.left - mr.left, r.top - mr.top,
+                             r.right - mr.left, r.bottom - mr.top));
+            }
+        }
+        add(document.getElementById("map-actions"));
+        var legend = document.querySelector("details.map-legend");
+        if (legend && !legend.open) add(legend);
+        c.querySelectorAll(".leaflet-top.leaflet-left .leaflet-control").forEach(add);
+        return out;
+    }
+
+    function place(m) {
         var size = m.getSize();
         if (!size.x || !size.y) return;
         // Never slide a label ONTO the basemap credit, which must stay
@@ -749,6 +818,15 @@ LABEL_CLAMP_SCRIPT = """
         // bottom limit clears its height as well as MARGIN.
         var att = m.getContainer().querySelector(".leaflet-control-attribution");
         var bottom = size.y - MARGIN - (att ? att.getBoundingClientRect().height : 0);
+        function inside(b) {
+            var dx = Math.max(0, MARGIN - b.x0) - Math.max(0, b.x1 - (size.x - MARGIN));
+            var dy = Math.max(0, MARGIN - b.y0) - Math.max(0, b.y1 - bottom);
+            return [dx, dy];
+        }
+
+        // 1. Every label at its baked position, slid inside the frame if it
+        //    would be cut - exactly as before this placer existed.
+        var labels = [];
         m.eachLayer(function (layer) {
             if (!layer._icon || !layer.getLatLng) return;
             var d = layer._icon.querySelector(".hm-line-label");
@@ -760,13 +838,80 @@ LABEL_CLAMP_SCRIPT = """
             if (!r.width) return;
             var p = m.latLngToContainerPoint(layer.getLatLng());
             if (p.x < 0 || p.y < 0 || p.x > size.x || p.y > size.y) return;
-            var x0 = p.x + (r.left - i.left), x1 = p.x + (r.right - i.left);
-            var y0 = p.y + (r.top - i.top), y1 = p.y + (r.bottom - i.top);
-            var dx = Math.max(0, MARGIN - x0) - Math.max(0, x1 - (size.x - MARGIN));
-            var dy = Math.max(0, MARGIN - y0) - Math.max(0, y1 - bottom);
-            if (dx || dy) {
-                d.style.transform = d.dataset.base + " translate(" +
-                    dx.toFixed(1) + "px, " + dy.toFixed(1) + "px)";
+            var base = box(p.x + (r.left - i.left), p.y + (r.top - i.top),
+                           p.x + (r.right - i.left), p.y + (r.bottom - i.top));
+            var s = inside(base);
+            labels.push({d: d, p: p, base: base, sx: s[0], sy: s[1],
+                         b: shift(base, s[0], s[1])});
+        });
+
+        // 2. Re-place only a label that overlaps another label or an obstacle,
+        //    trying spots around its own line's tip, so it still names that
+        //    line. A label that collides with nothing never moves, so a map
+        //    that was already clean - every desktop view - is unchanged.
+        var obs = obstacles(m);
+        function cost(L, b) {
+            var c = 0;
+            labels.forEach(function (o) {
+                if (o !== L) c += area(b, box(o.b.x0 - 1, o.b.y0 - 1, o.b.x1 + 1, o.b.y1 + 1));
+            });
+            // Obstacles count with CLEAR px of margin: Edmonton's Valley Line
+            // tip sits under the collapsed legend, and the best spot beside it
+            // still overlapped the legend by one pixel - which reads as
+            // touching and which the check rightly refuses.
+            obs.forEach(function (o) {
+                c += area(b, box(o.x0 - CLEAR, o.y0 - CLEAR, o.x1 + CLEAR, o.y1 + CLEAR));
+            });
+            return c;
+        }
+        function candidates(L) {
+            var b = L.base, p = L.p;
+            var w = b.x1 - b.x0, h = b.y1 - b.y0;
+            var cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
+            var at = function (x, y) { return [x - cx, y - cy]; };
+            return [
+                [2 * (p.x - cx), 0],                       // mirrored across the tip
+                [0, 2 * (p.y - cy)],
+                at(p.x, p.y - h / 2 - GAP),                // above the tip
+                at(p.x, p.y + h / 2 + GAP),                // below
+                at(p.x + w / 2 + GAP, p.y),                // right
+                at(p.x - w / 2 - GAP, p.y),                // left
+                [2 * (p.x - cx), 2 * (p.y - cy)],
+                at(p.x, p.y - 1.5 * h - 2 * GAP),          // a step further out
+                at(p.x, p.y + 1.5 * h + 2 * GAP),
+                at(p.x + w / 2 + GAP, p.y - h / 2 - GAP),  // the four diagonals
+                at(p.x - w / 2 - GAP, p.y - h / 2 - GAP),
+                at(p.x + w / 2 + GAP, p.y + h / 2 + GAP),
+                at(p.x - w / 2 - GAP, p.y + h / 2 + GAP),
+                at(p.x, p.y - 2.5 * h - 3 * GAP),          // for a tip buried
+                at(p.x, p.y + 2.5 * h + 3 * GAP)           // under an obstacle
+            ];
+        }
+        for (var pass = 0; pass < PASSES; pass++) {
+            var moved = false;
+            labels.forEach(function (L) {
+                var best = cost(L, L.b);
+                if (!best) return;
+                candidates(L).forEach(function (c) {
+                    if (!best) return;
+                    var b = shift(L.base, c[0], c[1]);
+                    var s = inside(b);
+                    b = shift(b, s[0], s[1]);
+                    var k = cost(L, b);
+                    if (k < best) {
+                        best = k; L.b = b;
+                        L.sx = c[0] + s[0]; L.sy = c[1] + s[1];
+                        moved = true;
+                    }
+                });
+            });
+            if (!moved) break;
+        }
+
+        labels.forEach(function (L) {
+            if (L.sx || L.sy) {
+                L.d.style.transform = L.d.dataset.base + " translate(" +
+                    L.sx.toFixed(1) + "px, " + L.sy.toFixed(1) + "px)";
             }
         });
     }
@@ -777,8 +922,12 @@ LABEL_CLAMP_SCRIPT = """
             if (tries++ < 60) setTimeout(start, 100);
             return;
         }
-        m.on("moveend zoomend resize viewreset", function () { clamp(m); });
-        clamp(m);
+        m.on("moveend zoomend resize viewreset", function () { place(m); });
+        // The collapsed legend is an obstacle and the open one is not, so a
+        // reader opening or closing it re-runs the placement.
+        var legend = document.querySelector("details.map-legend");
+        if (legend) legend.addEventListener("toggle", function () { place(m); });
+        place(m);
     }
     start();
 })();
@@ -1355,7 +1504,8 @@ def _layout_labels(points, candidates, labels, n_lines, center, zoom):
             return None
 
     # The legend (open) sits bottom-right; the zoom and layer controls top-left.
-    legend_h = 178 + 19 * n_lines
+    # Capped as _LEGEND_CSS caps it (only a map past ~20 lines reaches it).
+    legend_h = min(178 + 19 * n_lines, _MAP_H - 24 - _LEGEND_TOP_CLEAR)
     obstacles = [(_MAP_W - 24 - 274, _MAP_H - 24 - legend_h, _MAP_W - 24, _MAP_H - 24), (0, 0, 60, 110)]
     placed, chosen, unplaced = [], {}, []
     # Longest names first: they have the fewest places they fit.
@@ -1856,10 +2006,16 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     if unmatched:
         print(f"WARNING: {unmatched} businesses matched no category bucket.")
 
+    # A taxonomy may define layer_label() to name a bucket's layer the way its
+    # legend names it. Amsterdam's legend reads "Shops and services" for the
+    # Retail bucket (a building register cannot split retail from personal
+    # services), and until 2026-09-24 its layer control still said "Retail".
+    # Not legend_label() itself: NAICS's appends its code prefixes.
+    layer_label = getattr(taxonomy, "layer_label", lambda bucket: bucket)
     present = []
     for name, color in CATEGORY_BUCKETS:
         rows = in_rings[in_rings["_bucket"] == name]
-        if add_pin_layer(m, rows, name, color, taxonomy.FIELD_LABEL,
+        if add_pin_layer(m, rows, layer_label(name), color, taxonomy.FIELD_LABEL,
                          taxonomy.VALUE_COLUMN,
                          display=getattr(taxonomy, "display_value", None),
                          animate=animate_clusters):

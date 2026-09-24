@@ -4,13 +4,15 @@
 `python scripts/brief_check.py kobe` before writing any code. Coordinates:
 the `address-join` skill, measured by `scripts/screen_japan_join.py kobe`.
 
+**✅ Decided by the owner, 2026-09-24, for every Japanese city:** (1) **the Shinkansen does not count**, since it is long-distance travel between cities; (2) **the city line only**: only stations inside the city get rings, matching the city-only permit list, with a per-line stub test at build (any urban line cut to a stub goes back to the owner); (3) **菓子製造業 and そうざい製造業 count**, in the Retail bucket (bakeries, confectioners and delis sell over a counter), with the factory and central-kitchen share measured from trade names before publishing. Open items below that ask these questions are answered.
+
 ---
 
 ## The one-line summary
 
 **A city-wide food-permit list (24,761 fixed premises, as of 2026-03-31)
-joined to MLIT's block-level address files at 95.7% (99.0% placed); the misses
-are mountain addresses on Rokkō-san.** Personal services 5,014. ⚠️ The list
+joined to MLIT's block-level address files at 96.5% (99.0% placed); the misses
+are mountain addresses on Rokkō-san.** Personal services 4,993. ⚠️ The list
 leaves out notification-only food businesses (届出), which the city's own page
 says; MHLW's national open data is the route to them.
 
@@ -25,7 +27,8 @@ says; MHLW's national open data is the route to them.
 | Also | monthly new-permit CSVs; a stale 2021 full list (`r30531_all_.csv`) beside it — do not use |
 
 **Personal services**: `r7_riyousho.csv`, `r7_biyousho.csv`, `r7_cleaning.csv`
-(same folder, **tab-separated** despite the .csv name) — **5,014 premises**.
+(same folder, **tab-separated** despite the .csv name) — **4,993 premises**
+(plus 21 storeless laundry pick-up services at `神戸市内一円`, not premises).
 
 ### Taxonomy — `業種情報公開名称` (43 types)
 
@@ -43,15 +46,19 @@ says; MHLW's national open data is the route to them.
 MLIT files for the **9 wards** (28101 東灘, 28102 灘, 28105 兵庫, 28106 長田,
 28107 須磨, 28108 垂水, 28109 北, 28110 中央, 28111 西).
 
-| Tier | Food (24,761) | Personal services (5,014) |
+| Tier | Food (24,761) | Personal services (4,993) |
 |---|---|---|
-| Block | **95.7%** | **96.3%** |
-| Town-chōme / 大字 centroid | 3.3% | 2.8% |
-| Unplaced | 1.0% | 0.9% |
+| Block | **96.5%** | **97.3%** |
+| Town-chōme / 大字 centroid | 2.6% | 2.2% |
+| Unplaced | 1.0% | 0.5% |
 
-**Rule from Kobe's misses**: hill addresses name a 字 inside the 大字
-(`山田町上谷上字古々山`) — MLIT's town-chōme file knows the 大字, so they take
-its centroid. The unplaced are **Rokkō-san** (六甲山町北六甲 / 南六甲) and
+*(Re-measured 2026-09-24 after Sendai's rule below: block was 95.7% / 96.3%.)*
+
+**Rules from Kobe's misses**: hill addresses name a 字 inside the 大字
+(`山田町上谷上字古々山`). **Sendai's rule placed a share of them at block
+level**: MLIT's block file keeps the 字 in its `小字・通称名` column, so the
+地番 is also keyed under 大字 + 字 + 小字. The rest take the 大字's
+town-chōme centroid. The unplaced are **Rokkō-san** (六甲山町北六甲 / 南六甲) and
 `新港町1丁目` (reclaimed land) — far from any station either way.
 
 ## 🚇 Rail — MLIT N02, commuter rail INCLUDED (owner, 2026-09-24)
@@ -59,6 +66,8 @@ its centroid. The unplaced are **Rokkō-san** (六甲山町北六甲 / 南六甲
 Kobe Municipal Subway, Port Liner, Rokkō Liner, JR West, Hankyu, Hanshin,
 Sanyo, Kobe Electric — all in N02. ⚠️ Stations are LineStrings — centroid
 them. ⚠️ Open: the Shinkansen (Shin-Kobe). See `docs/commuter_rail_list.md`.
+
+**✅ Stub test, measured 2026-09-24** (`pipeline/countries/japan.py` `stub_test()`: N02 stations, Shinkansen excluded, against the city's N03 ward polygons): **PASSES.** The subway (Seishin, Yamate, Kaigan, Hokushin) and the Port Liner and Rokkō Liner are 100% inside. Kobe Electric's Arima line is 15 of 15, Sanda 7 of 10, Ao 8 of 20. JR, Hankyu, Hanshin and Sanyō are cut at the line as intended. ⚠️ Two mountain funiculars (Maya, Rokkō) are in N02, and whether they are drawn is a build call (Barcelona drew its funiculars; Toulouse's cable car was the owner's call).
 
 ## Scope
 
@@ -98,8 +107,8 @@ owner's call at build.
 ## Still unknown
 
 - ⚠️ Notification-only businesses (届出) are missing — MHLW's national open data.
-- ⚠️ 菓子製造業 / そうざい製造業 — counter shops or not.
-- ⚠️ Stations outside the city; Shinkansen.
+- ✅ decided 2026-09-24 (owner): see the block at the top (菓子製造業 / そうざい製造業 count, in Retail).
+- ✅ decided 2026-09-24 (owner): see the block at the top (city line only; Shinkansen out).
 
 ```brief-checks
 [

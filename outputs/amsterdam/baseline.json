@@ -1,0 +1,13 @@
+{
+  "bag_deduplicated": 486,
+  "bag_units_in_use": 10898,
+  "bag_units_kept": 10141,
+  "metro_stations_network": 39,
+  "permits": 4092,
+  "permits_kept": 3605,
+  "permits_past_end_date": 128,
+  "regular_stop_names": 225,
+  "stations_inside": 203,
+  "stations_kept": 144,
+  "storefronts": 13238
+}

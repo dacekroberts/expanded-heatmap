@@ -4,6 +4,8 @@
 `python scripts/brief_check.py sapporo` before writing any code. Coordinates:
 the `address-join` skill, measured by `scripts/screen_japan_join.py sapporo`.
 
+**✅ Decided by the owner, 2026-09-24, for every Japanese city:** (1) **the Shinkansen does not count**, since it is long-distance travel between cities; (2) **the city line only**: only stations inside the city get rings, matching the city-only permit list, with a per-line stub test at build (any urban line cut to a stub goes back to the owner); (3) **菓子製造業 and そうざい製造業 count**, in the Retail bucket (bakeries, confectioners and delis sell over a counter), with the factory and central-kitchen share measured from trade names before publishing. Open items below that ask these questions are answered.
+
 ---
 
 ## The one-line summary
@@ -60,6 +62,8 @@ Sapporo Municipal Subway (Namboku, Tōzai, Tōhō), the Sapporo streetcar, and
 JR Hokkaido's Sapporo lines — all in N02. ⚠️ Stations are LineStrings —
 centroid them. See `docs/commuter_rail_list.md`.
 
+**✅ Stub test, measured 2026-09-24** (`pipeline/countries/japan.py` `stub_test()`: N02 stations, Shinkansen excluded, against the city's N03 ward polygons): **PASSES.** All three subway lines and every streetcar segment are 100% inside. JR Hokkaido is cut at the line as intended (Hakodate line 14 of 84, Sasshō 10 of 14).
+
 ## Scope
 
 **Sapporo City (10 wards)**; JR lines run on to Otaru, Ebetsu and the airport
@@ -79,9 +83,9 @@ centroid them. See `docs/commuter_rail_list.md`.
   **MUST NOT**: imply endorsement; use city logos (第4条); **call the pins
   operating businesses** — the dataset's own note says permits may differ from
   actual trading. **Fetch from `ckan.pf-sapporo.jp` only** — the city
-  website's copies fall under its copyright page. 🚩 **OPEN (owner)**: 第9条3 —
-  uncapped compensation for damage from a prohibited act, triggered by the
-  user's breach; the same class as Tokyo §6.
+  website's copies fall under its copyright page. ✅ **ACCEPTED (owner,
+  2026-09-24)**: 第9条3 — uncapped compensation for damage from a prohibited
+  act, triggered by the user's breach; the same class as Tokyo §6.
 - **MLIT N02** — PDL 1.0.
 
 ## Privacy
@@ -96,9 +100,8 @@ Read only 屋号 / 施設名称, 業種名 and 施設所在地. Run `check_perso
 
 ## Still unknown
 
-- 🚩 Sapporo 第9条3 — accept the breach-triggered compensation clause (as Tokyo §6).
-- ⚠️ 菓子製造業 / そうざい製造業 — counter shops or not.
-- ⚠️ Stations outside the city.
+- ✅ decided 2026-09-24 (owner): see the block at the top (菓子製造業 / そうざい製造業 count, in Retail).
+- ✅ decided 2026-09-24 (owner): see the block at the top (city line only; Shinkansen out).
 
 ```brief-checks
 [

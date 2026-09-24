@@ -21,15 +21,46 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [~] **🇧🇷 SÃO PAULO - PINNED 2026-09-24 at step 2, on `sao-paulo-build`.**
-  Fetch, boundary and step 1 (86 stations, gate 3 exact) committed. Waiting on
-  the owner:
-  - [ ] **Who writes Brazil's national CNEFE classifier** (`pipeline/taxonomies/`,
-    lifted from `scripts/screen_cnefe.py`) - this build session, or staging,
-    per `docs/session_roles.md`.
-  - [ ] **The macro-map region** - "Brazil", or a South American region.
-  - [ ] Then: step 2 (privacy rule at dwelling addresses, vacancy excluded,
-    2022 vintage), step 3, checks, drafts - as Amsterdam and Rome.
+- [~] **🇧🇷 BRAZIL - NINE CITIES publishing 2026-09-24, on `sao-paulo-build`.**
+  São Paulo, Rio de Janeiro, Belo Horizonte, Brasília and Salvador, and
+  Fortaleza, Porto Alegre, Recife and Santos as regional builds - one national
+  CNEFE module (`pipeline/countries/brazil*.py`, `pipeline/taxonomies/brazil_cnefe.py`)
+  and the `brazil-city` skill.
+  - [x] Owner: the classifier written by this session; region "South America";
+    rules version 2; CPTM Line 9 drawn and Lines 7, 8, 10-13 not.
+  - [x] Owner: the rail test for commuter and diesel lines; SuperVia Deodoro
+    and Saracuruna drawn; Belford Roxo, Santa Cruz and Fortaleza's
+    Parangaba-Mucuripe VLT out; the Fortaleza and Recife regional scopes kept;
+    Santos Linha 2 drawn with its hours.
+  - [x] Owner: all nine pages' text, notices 38-39, the OSM credit and the
+    exclusions sections approved as drafted.
+  - [ ] Pages 31-39, notices, `cities.py` (South America), docs, re-render,
+    ONE `deploy-verify` for the batch, `check_deploy_imports`, fetch, push,
+    reboot, live check.
+  - [ ] AFTER PUBLISH: remove the `sao-paulo-*-tmp` launch entries.
+
+- [x] **🇳🇱 AMSTERDAM - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro
+  50-54 and 16 trams, gemeente 0363: **13,238 storefronts, 144 stations**;
+  page text, notice 35 and the exclusions section approved as drafted,
+  gemeente-only scope and the phone labels shipped as they are (owner's
+  calls). Its deploy-verify found the open legend over the map's buttons and
+  a Retail / "Shops and services" layer name - both fixed in the shared
+  renderer before pushing (owner's call), all 29 maps re-rendered. Pushed
+  `bc8b52c`; live after the owner's reboot, legend 56-626 px under buttons
+  ending at 45, zoom 12, notice 35 shown. `amsterdam-*-tmp` launch entries
+  removed. Left for the owner: `data/amsterdam/raw/gtfs-nl.zip` (243.8 MB)
+  may be deleted - superseded by `gtfs-openov-nl.zip`.
+
+- [x] **🇮🇹 ROME - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro A,
+  B, B1 and C, and the Roma-Viterbo urban service (owner's call on the DART /
+  S-tog test; Metromare out): 98,897 storefronts, 87 stations. Pushed
+  `14e6461`; live after the owner's reboot - title, caption, legend (Metro A,
+  B, B1, C and Roma-Viterbo), zoom 11.5 at the 1000x650 frame, notices 36 and
+  37 and the OSM Rome clause shown, no exceptions; the Overview reads Europe
+  (14). `rome-*-tmp` launch entries removed. The map's system name now names
+  Roma-Viterbo (fixed in the Brazil push). Left for the owner:
+  `data/rome/raw/rome_static_gtfs.zip` (46.8 MB) may be deleted - downloaded,
+  then not used.
 
 - [x] **🇨🇿 PRAGUE - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro A,
   B and C, obec 554782: **25,275 storefronts, 58 stations**; page text, notices
@@ -70,11 +101,23 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     business leg (`docs/build_briefs/prague.md`, 12/12), with its sole-trader
     owner call.
 
-- [ ] **Label collisions at phone width - app/chrome.** Pre-existing, and
+- [x] **Label collisions at phone width - FIXED AND PUSHED 2026-09-24**, after
+  `deploy-verify` (`map-chrome`) PASSED with only the two expected Madrid
+  pairs. Open follow-ups, if wanted: a few re-placed labels sit ~54 px from
+  their tip (Amsterdam's Metro 51), and labels may sit on cluster bubbles,
+  which the placer does not avoid. `LABEL_CLAMP_SCRIPT` now
+  re-places a colliding label around its own line's tip: 56 overlapping pairs
+  and 6 labels under a button or the legend at 375/343 became **2** (Madrid's
+  core at 343, where eight line ends sit within ~60 px). 1280 unchanged, the
+  view unchanged on 90 loads. See `DECISIONS.md`, *"Phone-width line labels
+  re-placed at runtime"*. The note below is the original. Pre-existing, and
   unchanged by the clipping fix. `scripts/check_map_labels.js` at 375/343
   reports overlapping label pairs in seven cities, 28 in all: Madrid 3/5,
   Paris 3/4, New York 2/3, San Francisco 2/2, Toronto 1/1, Barcelona 0/1,
-  Mexico City 0/1. Labels also sit under the theme button or legend in
+  Mexico City 0/1. **Amsterdam adds 11 pairs at 375** (21 labels, clean at
+  desktop), shipped that way on the owner's call 2026-09-24 and handed here:
+  per-line label ends made it worse (14), so the fix is a phone-specific
+  layout, not a per-city tweak. Labels also sit under the theme button or legend in
   Barcelona (L11 at 375), Edmonton (375 and 343), San Diego (Blue Line at
   375) and Montréal (Ligne 1 at 854, the same in the pre-fix map). Label
   placement is decided once, in Python, against the full-width view
@@ -521,23 +564,130 @@ evidence section.
   plus an official geocoder) — not needed at these rates.
 - [x] **B. Minato control join** — 99.8% of fixed premises at block level.
 - [x] **C. Privacy** — individuals' names withheld at source (Minato: 12 of 5,721).
-- [~] **D. Coverage** — Tokyo done ON ONE METHOD (Tokyo's CKAN): food files for
-  4 of 23 wards, personal services 11. The nine other cities: in progress.
-  - [ ] **Second method for the 16 wards without a food file — their own
-    sites, central wards first (Chiyoda, Shibuya, Toshima).**
+- [x] **D. Coverage** — Tokyo: **8 wards** with full, current food lists
+  after the wards' own sites were read (2026-09-24); Chiyoda and Toshima are on
+  request only and Bunkyō publishes none. The other nine cities: measured.
+  MHLW's national open data is an opt-in slice that completes only Fukuoka and
+  Hiroshima.
 - [x] **E. Downloads (Tokyo)** — 60 files, 12.2 MB, in bounds.
-- [x] **F. Join (Tokyo)** — food 99.3% block on 24,297; personal services
-  98.8–99.8%; independent check median 22–43 m. OSM control Shinjuku 6.02×.
-  - [ ] Like-for-like control against the Economic Census per-ward 飲食店 count.
-- [x] **G. Buckets** — food everywhere published; personal services in 11
-  wards; food retail only where 届出 are published (Chūō, Kōtō). No general retail.
-- [ ] **Owner: scope** — a Tokyo map needs its central wards; a "core wards"
-  regional scope that states the gap, or wait for the second method.
-- [ ] **Owner: band** — Japan's coordinate step is solved; re-band on coverage.
-- [ ] **Licences** — `licence-read` on the permit datasets (CC BY 4.0
-  declared), MLIT 位置参照情報, and each ward's register.
+- [x] **F. Join** — Tokyo 99.1–100%, Osaka 99.1%, Kobe 96.5%, Sapporo 84.5% (+15.2%
+  chōme), Fukuoka 98.1% / 96.7%, Sendai 95.1%, Hiroshima 95.9% / 94.7%; independent
+  checks median 22–43 m.
+  - [ ] Like-for-like control against the Economic Census per-ward 飲食店 count
+    (the owner's chosen control) — at build.
+- [x] **G. Buckets** — food everywhere published; personal services from the
+  生活衛生 registers; food retail only where 届出 are published (a disclosed
+  partial bucket, owner). No general retail.
+- [x] **Owner: scope** — Tokyo is 8 wards now, with the missing wards named on
+  the page; the owner requests Chiyoda's ledger in parallel.
+- [x] **Owner: band** — re-banded 2026-09-24 and the geocoding band closed.
+  Tokyo, Osaka, Kobe, Sapporo and Fukuoka to A; Hiroshima to C; Sendai to D
+  (permission); Yokohama, Nagoya and Kyoto to the open gap.
+- [x] **Licences** — all read, each PERMITTED WITH CONDITIONS; the cost clauses
+  were accepted. See each brief.
 - [ ] **Rail** — MLIT N02 with JR and private lines; decide intercity-only
-  services (Shinkansen, limited-express-only).
+  services (Shinkansen, limited-express-only). **Owner, once for all five.**
+
+### ▶ Handoff to main — the Band A candidates, 2026-09-24
+
+**All 20 Band A cities are buildable**: each has a brief whose checks pass live
+and its licences read. The items below are what should be settled BEFORE
+main starts a city. Everything else is a decision inside the build, which the
+brief names.
+
+- [~] **Japan (Tokyo, Osaka, Kobe, Sapporo, Fukuoka) — shared code first
+  (staging, started 2026-09-24).** Five cities run on one join. Lift
+  `scripts/screen_japan_join.py` into `pipeline/japan_join.py`, and write a
+  shared taxonomy for 営業の種類 in `pipeline/taxonomies/`, as Brazil's CNEFE
+  module was written before its second build.
+  - [x] **Stage 1 (2026-09-24): the join core MOVED unchanged** into
+    `pipeline/countries/japan_register.py` (20 definitions). The script now
+    imports it and keeps only the measurement. Identical output on all 24
+    city and ward keys, with Minato at 99.8%.
+  - [x] **Stage 2 (2026-09-24)**: `pipeline/countries/japan.py` (N02 without
+    the Shinkansen, N03 city lines, ISJ templates, ward codes and EPSG,
+    `stub_test()`) and `pipeline/taxonomies/japan_eigyo.py`, registered as
+    `japan_eigyo`: 19 ordered rules with import-time checks. Over 229,504 fixed
+    premises in ten lists: Food service 76.4%, food-only Retail 18.2%, out 5.3%.
+    Every one of the 125 fall-through values is manufacturing, processing or
+    the 0.04% catch-all. **Main can now start Osaka**
+    (`add-city`, `pipeline/osaka/`), reading the join, the facts and the
+    taxonomy from the shared modules.
+  - [ ] Owner, minor: アイスクリーム類製造業 (692 rows; many are gelato
+    counters) is OUT for now, since the owner's call named 菓子 and そうざい.
+- [ ] **Kyoto → Band A (owner, 2026-09-24), in this order, after a /compact:**
+  1. Add the rebuild's rules A–D to `pipeline/countries/japan_register.py`.
+     The rule text is in `scratchpad/japan_run/kyoto/result.json`.
+     - A: strip the street-intersection part (上る/下る/入る), Kyoto only.
+     - B: character variants in `VARIANTS` (祇/祗 and Kyoto's private-use
+       characters, 藪/薮, 壷/壺, 桧/檜, 篭/籠, 竃/竈, 竜/龍, 渕/淵, 祓/秡; 鍛治→鍛冶,
+       廻リ→廻り; expand ゝ).
+     - C: a known-town fallback, where the longest known town in the ward
+       ends or starts the parsed town.
+     - D: same-named twin towns in 上京, 中京 and 下京 are left unplaced.
+     
+     B and C apply to every city. Capture a before/after of all 24 keys plus
+     Kyoto (`scratchpad/japan_run/baseline_all.py`), keep Minato at 99.8%,
+     and update any brief whose number moves.
+  2. Add a `kyoto` entry to `scripts/screen_japan_join.py` (the stitched list,
+     `data/kyoto/raw/isj`), and put Kyoto's ward codes (26101–26111) and
+     EPSG:32653 in `japan.py`. Run the stub test.
+  3. `licence-read` on data.city.kyoto.lg.jp (CC BY 4.0 declared).
+  4. Write `docs/build_briefs/kyoto.md` with a checks block. It must disclose
+     a rebuilt register (the 2021 list plus monthly permits within their
+     term), closures unknown (an upper bound), and vehicles excluded.
+  5. Move Kyoto's master-list row from the open gap to Band A. **Osaka is the recommended
+  first build**: the cleanest list, 99.1% block, 38 m against the city's own
+  coordinates.
+- [~] **Japan — three owner calls that recur in all five briefs.**
+  1. [x] **The Shinkansen does NOT count** (owner, 2026-09-24): it is
+     long-distance travel between cities.
+  2. [x] **City line only, with the stub test** (owner, 2026-09-24): only
+     stations inside each city get rings, matching the city-only permit lists.
+     Stage 2 measures each line's stations inside and outside (N02 against
+     MLIT's N03 boundaries), and any urban line the city line cuts to a stub
+     goes back to the owner (the Rennes and Lille test). Neighbours are a
+     later, case-by-case upgrade.
+  3. [x] **菓子製造業 and そうざい製造業 COUNT** (owner, 2026-09-24): bakeries,
+     confectioners and delis are counter shops. They join the Retail bucket
+     with the other food-retail permit types.
+  - [ ] Stage 2 carries 1 and 3 into the taxonomy and the five briefs' open
+    items.
+- [ ] **premises-taxonomy skill** — add the São Paulo session's sampling
+  lesson (CNEFE rules v2): words chosen from a sample of unmatched rows rescued
+  14.7% of that sample but 3.5% of all rows. **Measure a rule's yield on a
+  FRESH sample**, never the one it was chosen from.
+- [x] **Japanese build order (owner, 2026-09-24): Osaka → Kobe → Sapporo →
+  Fukuoka → Tokyo LAST.** The stub test cleared the first four: every urban
+  line keeps 80–100% of its stations inside the city line. Tokyo failed, with
+  Chiyoda missing from the centre of its 8 wards. Tokyo goes last as the
+  densest, and it benefits most from a Japan skill written off the first four.
+- [ ] **Tokyo — the missing wards as a planned project, before its build.**
+  Chiyoda alone lifts urban station coverage from 45% to 56%; Chiyoda,
+  Toshima and Bunkyō reach 67%; all 23 wards reach 98% (`tokyo.md`).
+  Routes: request Chiyoda's ledger (owner, gated item 22); extract Ōta's,
+  Kita's and Arakawa's PDF lists; Shinagawa's and Itabashi's partial files;
+  requests to Toshima, Nerima and Edogawa.
+- [ ] **Fukuoka** — agree the wording that discloses the ~20% of restaurants
+  with no published address. BODIK is flaky, so `fetch_sources.py` retries.
+- [x] **No pre-build items**: Seoul (its brief is deliberately partial, and
+  geocoding the rest of 一般飲食店 is build work), Hong Kong, the nine Brazilian
+  cities (São Paulo is already with main), the three Taiwanese cities, and
+  Rotterdam (its build-time calls are in its brief).
+
+**Not ready for main:**
+- **Band C (6)** — one owner decision moves all six: does a single-bucket page
+  belong beside three-bucket cities?
+- **Band D (4)** — each waits on an owner act or on access: Sendai's request
+  (drafted), Kaohsiung's request, and reads from inside Poland and India.
+- **The open gap (9)** — re-probes, not builds.
+
+**Owner's outside actions** are tracked in `docs/gated_access.md`, the list of
+every key, account and letter:
+- [ ] Item 21: send Sendai's request (`docs/notifications/sendai-permission-request.md`).
+- [ ] Item 22: request Chiyoda's ledger.
+- [ ] Item 23: place the Tallinn building-register orders (two reports).
+- Items 25–27 (Hiroshima, MHLW, Osaka) are optional confirmations, not gates.
 
 ### Brief-ready, not started — ordered checklists, 2026-09-23
 

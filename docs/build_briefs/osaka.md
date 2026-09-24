@@ -4,6 +4,8 @@
 `python scripts/brief_check.py osaka` before writing any code. Coordinates:
 the `address-join` skill, measured by `scripts/screen_japan_join.py osaka`.
 
+**✅ Decided by the owner, 2026-09-24, for every Japanese city:** (1) **the Shinkansen does not count**, since it is long-distance travel between cities; (2) **the city line only**: only stations inside the city get rings, matching the city-only permit list, with a per-line stub test at build (any urban line cut to a stub goes back to the owner); (3) **菓子製造業 and そうざい製造業 count**, in the Retail bucket (bakeries, confectioners and delis sell over a counter), with the factory and central-kitchen share measured from trade names before publishing. Open items below that ask these questions are answered.
+
 ---
 
 ## The one-line summary
@@ -72,6 +74,8 @@ JR West, and the private railways (Hankyu, Hanshin, Keihan, Kintetsu, Nankai)
 are all in it. ⚠️ Stations are LineStrings — centroid them. ⚠️ Open: intercity-only
 services (Shinkansen). See `docs/commuter_rail_list.md`.
 
+**✅ Stub test, measured 2026-09-24** (`pipeline/countries/japan.py` `stub_test()`: N02 stations, Shinkansen excluded, against the city's N03 ward polygons): **PASSES.** Osaka Metro keeps 80–100% of each line's stations (Midōsuji 16 of 20, Tanimachi 23 of 26, Chūō 12 of 14; Sakaisuji, Yotsubashi, Sennichimae and the New Tram 100%). The Hankai tram keeps 17 of 32 (it runs into Sakai): half a line, not a stub. JR and the private railways are cut at the line, as the owner's scope intends (Hankyu Kōbe 5 of 17, Keihan 8 of 41, the Loop Line 19 of 19).
+
 ## Scope
 
 **Osaka City (the 24 wards)** — the list is city-wide. Osaka Metro reaches
@@ -79,12 +83,24 @@ neighbouring cities (Sakai, Higashiōsaka, Moriguchi…) and the private
 railways run far beyond — check which stations fall outside at build; the
 Oslo *kommune only* precedent or a regional scope is the owner's call.
 
-## ⏳ Licences
+## ✅ Licences — READ 2026-09-24
 
 - **MLIT 位置参照情報 — PERMITTED WITH CONDITIONS** (PDL 1.0). **MUST
   DISPLAY**: `出典：位置参照情報ダウンロードサービス（国土交通省）（https://nlftp.mlit.go.jp/isj/）`
   and `…を加工して作成`; **MUST NOT** present placements as MLIT's own.
-- **Osaka City permit data** — licence-read PENDING (the portal declares CC-BY 4.0).
+- **Osaka City permit data — PERMITTED WITH CONDITIONS.** The city's
+  著作権・免責 page (`/main/site_policy/0000000124.html`, Government Standard
+  Terms 2.0, usable equally under CC BY 4.0): 「複製、公衆送信、翻訳・変形等の翻案等、自由に利用できます」,
+  commercial use allowed; each of the three source pages says
+  「CC-BY4.0で提供いたします。」 **MUST DISPLAY** (examples, not fixed wording):
+  `「食品営業許可施設一覧」（大阪市）（https://www.city.osaka.lg.jp/kenko/page/0000575579.html）を加工して作成`,
+  likewise for pages 0000431136 and 0000552712. **MUST NOT**: present the map as
+  the city's own (「あたかも大阪市が作成したかのような態様で」); city logos. No cost
+  clause. ✅ **ACCEPTED (owner, 2026-09-24)**: the current food CSV's licence
+  rests on the CC-BY notice on its own page. The portal's food record points to
+  a dead page and a 2021 file, and the terms' appendix bars reuse of attachments
+  that show no licence. The notice sits on the page that links the file, so it
+  covers it.
 - **MLIT N02** — PDL 1.0; `「国土数値情報（鉄道データ）」（国土交通省）をもとに作成`.
 
 ## Privacy
@@ -99,10 +115,9 @@ the barber / beauty lists an operator-name column. **Read only 屋号,
 
 ## Still unknown
 
-- ⏳ Osaka City's licence terms.
-- ⚠️ 菓子製造業 / そうざい製造業 — which are counter shops.
-- ⚠️ Scope beyond the city line; Shinkansen.
-- ⚠️ A like-for-like food control (the Economic Census per ward), as for Tokyo.
+- ✅ decided 2026-09-24 (owner): see the block at the top (菓子製造業 / そうざい製造業 count, in Retail).
+- ✅ decided 2026-09-24 (owner): see the block at the top (city line only; Shinkansen out).
+- ⚠️ The like-for-like food control's figures: the Economic Census per ward (source decided by the owner, 2026-09-24).
 
 ```brief-checks
 [

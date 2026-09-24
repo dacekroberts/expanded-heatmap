@@ -57,6 +57,10 @@ CATEGORY_BUCKETS = [
 #       the legend row text for a bucket (NAICS appends its prefixes,
 #       e.g. "Retail - NAICS Code: 44/45"; a local taxonomy can just return
 #       the bucket name).
+# and MAY expose:
+#   layer_label(bucket: str) -> str
+#       the bucket's name in the layer control, when a taxonomy renames it
+#       (Amsterdam: "Shops and services"). Defaults to the bucket name.
 TAXONOMY_MODULES = {
     "naics": "pipeline.taxonomies.naics",
     "chicago_license": "pipeline.taxonomies.chicago_license",
@@ -105,6 +109,13 @@ TAXONOMY_MODULES = {
     "norway_sn2025": "pipeline.taxonomies.norway_sn2025",
     "denmark_db25": "pipeline.taxonomies.denmark_db25",
     "czech_nace2025": "pipeline.taxonomies.czech_nace2025",
+    "amsterdam_source": "pipeline.taxonomies.amsterdam_source",
+    "rome_suap": "pipeline.taxonomies.rome_suap",
+    # Japan's permit types (営業の種類), shared by every Japanese city and every
+    # list format (plain, MHLW's numbered, Taitō's sub-typed, Meguro's
+    # abbreviated). Food service and FOOD-ONLY Retail from the food-hygiene
+    # permits; Personal services by `source` from the 生活衛生 registers.
+    "japan_eigyo": "pipeline.taxonomies.japan_eigyo",
     # IBGE's CNEFE 2022 - the first FREE-TEXT taxonomy: no code list, so
     # ordered keyword rules on the enumerator's description, lifted unchanged
     # from staging's scripts/screen_cnefe.py. National, like france_naf.

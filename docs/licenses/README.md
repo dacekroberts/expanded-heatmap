@@ -89,6 +89,12 @@ changes is the **scope of an attribution the project already carries** - see
 |---|---|---|---|
 | `rio-decreto-38879-siurb.pdf` | **Prefeitura do Rio de Janeiro** — *Decreto Rio nº 38.879 de 2 de julho de 2014*, which constitutes the **Sistema Municipal de Informações Urbanas (SIURB)** under Lei Complementar 111/2011. **The legal basis, not the operative terms**: the clause the owner accepted on 2026-09-23 is in the IPP's separate *Termo de Uso do SIURB.RIO* (v3.0, Aug 2025), quoted in `../data_sources.md` and not stored here. Kept because it establishes who runs the system whose terms bind a fetch. A Brazilian official act, which Lei 9.610/1998 art. 8 IV excludes from copyright | The download prompt that saved it did not record its URL. The file name matches SIURB's own documents listing, `https://siurb-pcrj.hub.arcgis.com/pages/documentos` ("decretos ... sobre o SIURB"); **treat that as the likely source, not a verified one** | 2026-09-23 |
 
+### Japan — screened 2026-09-24, briefs written, none built yet
+
+| File | Source | Source URL | Retrieved |
+|---|---|---|---|
+| `mhlw-food-sanitation-system-terms-2020.pdf` | **Ministry of Health, Labour and Welfare** — 薬生食監発0710第1号 (2020-07-10), *食品衛生申請等システムの運用開始を踏まえた利用規約及び営業者等の個人情報の取扱いについて*. It carries the system's 利用規約: **第3条** limits the terms to システム利用者 and 利用行政庁 (the businesses that file and the authorities), which is what lets the **MHLW open-data verdict** in `../build_briefs/fukuoka.md` and `../build_briefs/hiroshima.md` read 第7条's ban on 改変・編集・頒布 as not reaching reusers of the open data. The notice never mentions open data. The per-field consent finding (開示情報設定) comes from the system's own FAQ, not from here. ⚠ **A 2026-03-31 amendment exists** (`https://www.mhlw.go.jp/content/001683424.pdf`); it is not stored here yet, so check it before relying on this text as current | `https://www.mhlw.go.jp/content/11130500/000648204.pdf` — saved by a browser-pane download during the Staging Session's `licence-read` run, and identical (same SHA-256 and size) to that run's own curl copy | 2026-09-24 |
+
 ## SHA-256, as retrieved
 
 **Recompute these from the COMMITTED file, never from the file you just
@@ -130,6 +136,7 @@ c389fcab88815aee4b2b39b76350a5bac85e080c52ccd794f9c647911fbeae37  translink-gtfs
 0347663aac7b19436a43a5e14401ed0fb68ea3502497e13440c6dabe5567efb0  barcelona-condicions-us-live.txt
 9e16f09354b83d665ffcdd1bbe15e56fc509e59934bddd497ff6eb3f767ec39a  barcelona-avis-legal.txt
 64db5ecdb13ba290f578c4b8b75b88cc3501aa4760f73cf92dc7e62123b6583d  rio-decreto-38879-siurb.pdf
+e1836a9aad4c134d86df8bd92680d2bf53359a95037171066238ffce79a6062d  mhlw-food-sanitation-system-terms-2020.pdf
 ```
 
 ## Two files here are NOT licences
