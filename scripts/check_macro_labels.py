@@ -92,6 +92,11 @@ TEXT_WIDTH = {
     # 85.5, Oslo 29.0, Rennes 49.7, Toulouse 60.4, Paris 32.9, Milan 36.3,
     # Boston 48.4, Marseille 60.3.
     "Prague": 47.3,
+    # Rome measured 2026-09-24 in the local app's own document, the same way,
+    # with nine entries reproduced exactly in the same run - Prague 47.3,
+    # Copenhagen 85.5, Oslo 29.0, Rennes 49.7, Toulouse 60.4, Paris 32.9,
+    # Milan 36.3, Boston 48.4, Marseille 60.3.
+    "Rome": 37.5,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,

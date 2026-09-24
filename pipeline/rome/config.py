@@ -29,7 +29,6 @@ BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 
 SUAP_CSV = DATA_RAW / "opendata_suap_luglio_2025.csv"
 ANNCSU_ZIP = DATA_RAW / "indirizzario_lazio.zip"
-GTFS_ZIP = DATA_RAW / "rome_static_gtfs.zip"
 OSM_BOUNDARY_JSON = DATA_RAW / "osm_boundary.json"
 OSM_RAIL_JSON = DATA_RAW / "osm_rail.json"
 OSM_NEIGHBOURS_JSON = DATA_RAW / "osm_neighbour_comuni.json"
@@ -44,7 +43,6 @@ SUAP_URL = ("https://dati.comune.roma.it/catalog/it/dataset/94848d96-0197-486b-b
 # ANNCSU's Lazio address list. It refuses HEAD (403) and answers GET; the
 # file inside names its own date (indirizzarioLazio<yyyymmdd>.csv).
 ANNCSU_URL = "https://anncsu.open.agenziaentrate.gov.it/age-inspire/opendata/anncsu/getds.php?INDIR_LAZI"
-GTFS_URL = "https://romamobilita.it/sites/default/files/rome_static_gtfs.zip"
 
 # --- Scope ---------------------------------------------------------------------
 

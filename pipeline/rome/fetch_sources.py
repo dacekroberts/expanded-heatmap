@@ -15,7 +15,7 @@ import json
 import sys
 import urllib.request
 import zipfile
-from datetime import date, datetime, timezone
+from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
@@ -63,25 +63,6 @@ def fetch(url, dest, label, magic, prov, key, force):
         return
     _get(url, dest, label, magic)
     _record(prov, key, dest, url, datetime.now(timezone.utc).isoformat(timespec="seconds"))
-
-
-def feed_window(zip_path):
-    with zipfile.ZipFile(zip_path) as z:
-        names = set(z.namelist())
-        if "feed_info.txt" not in names:
-            print("  GTFS: no feed_info.txt - the fetch date pins the snapshot")
-            return {}
-        head, row = z.read("feed_info.txt").decode("utf-8-sig").splitlines()[:2]
-    info = dict(zip(head.split(","), row.split(",")))
-    start, end = info.get("feed_start_date", ""), info.get("feed_end_date", "")
-    if end:
-        end_date = date(int(end[:4]), int(end[4:6]), int(end[6:8]))
-        print(f"  GTFS feed window {start} to {end} "
-              f"({(end_date - date.today()).days:+d} days from today)")
-        if end_date < date.today():
-            sys.exit("  the feed has expired - re-run with --force for the current one")
-    return {"feed_start_date": start, "feed_end_date": end,
-            "publisher": info.get("feed_publisher_name")}
 
 
 def anncsu_date(zip_path):
@@ -142,10 +123,11 @@ if __name__ == "__main__":
     prov["anncsu"]["member"] = anncsu_date(config.ANNCSU_ZIP)
     print(f"  {'':28s} member {prov['anncsu']['member']}")
 
-    print("\nRail:")
-    fetch(config.GTFS_URL, config.GTFS_ZIP, "rome_static_gtfs.zip", b"PK\x03\x04", prov,
-          "gtfs", args.force)
-    prov["gtfs_feed_info"] = feed_window(config.GTFS_ZIP)
+    print("\nRail (OpenStreetMap - see config.RAIL_SOURCE_GROUND):")
+    # Roma Mobilità's GTFS is NOT fetched: its terms are ambiguous and it is not
+    # used. Recorded in docs/data_sources.md, not downloaded on every run.
+    prov.pop("gtfs", None)
+    prov.pop("gtfs_feed_info", None)
     if not args.skip_osm:
         prov["osm_host"] = fetch_osm(args.force)
 

@@ -14,13 +14,5 @@
     "retrieved": "2026-09-24T10:28:13+00:00",
     "member": "INDIR_LAZI_20260915.csv"
   },
-  "gtfs": {
-    "file": "rome_static_gtfs.zip",
-    "url": "https://romamobilita.it/sites/default/files/rome_static_gtfs.zip",
-    "bytes": 46798074,
-    "sha256": "5a60f96f6aec260b2c4224eea1f3d60bbf6fde2693939d3dba3bd906f26dae3e",
-    "retrieved": "2026-09-24T10:28:21+00:00"
-  },
-  "gtfs_feed_info": {},
   "osm_host": "overpass-api.de"
 }
