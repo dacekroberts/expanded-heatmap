@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**347 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**348 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Three of Tokyo's eight food lists are partial; a per-ward table for Japan](#2026-09-24---three-of-tokyos-eight-food-lists-are-partial-a-per-ward-table-for-japan)
 - [Meguro's personal-services registers joined: 1,412 premises at 100% block](#2026-09-24---meguros-personal-services-registers-joined-1412-premises-at-100-block)
 - [Overview's city list grouped by country too (owner)](#2026-09-24---overviews-city-list-grouped-by-country-too-owner)
 - [Renderer fixes verified and pushed; the dark-label model corrected next, with the light-mode halo swap (owner)](#2026-09-24---renderer-fixes-verified-and-pushed-the-dark-label-model-corrected-next-with-the-light-mode-halo-swap-owner)
@@ -389,6 +390,42 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Three of Tokyo's eight food lists are partial; a per-ward table for Japan
+
+- **Found that Chūō's, Kōtō's and Minato's food files are NOT complete lists**,
+  while building a per-ward table for the master-list republish (owner's
+  request).
+  - **The first sign was per capita**: Kōtō, about 530,000 residents, with 570
+    restaurants is about 1 per 1,000, against Osaka's 19.
+  - **The permit dates inside the files settle it.** Chūō's 許可年月日 and
+    Kōtō's 初回許可年月日 run **2021–2022 only**. Minato's 初回許可年月日 runs
+    **2021–2026, with nothing earlier**: new-law permits only, missing the
+    old-law permits still in term.
+  - **The five complete lists reach back decades**: Shinjuku (2016–2022, its
+    disclosed 2023 vintage), Shibuya, Taitō and Setagaya. Meguro counts too,
+    because it publishes both halves (`all_new_8` and `all_old_8`).
+  - **This corrects `tokyo.md`**, which called all eight "full, current food
+    lists". The claim was made from file presence and a successful join,
+    never from a completeness measure. Tokyo's screen predates the per-capita
+    yardstick, and the yardstick was never applied back to its wards.
+  - **Minato remains valid as the join control**, since placement accuracy is
+    unaffected.
+  - **Next probe** (`PLAN.md`): whether the three wards publish their
+    old-law halves. Tokyo builds last, so nothing is blocked.
+- **A per-ward table was measured** (`scratchpad/japan_run/ward_table.py`):
+  permit rows by bucket, block rate, and N02 stations per ward, for every
+  Japanese city with data on disk.
+- **Privacy slip, disclosed to the owner.** The date-format probe selected
+  every column whose name contained 日, 年月 or 法, and 法 matched 法人名, the
+  operator's corporate name. It printed three corporate names in the output
+  (a restaurant group, a coffee chain, a supermarket chain). All three are
+  legal entities, not individuals. Nothing was written to any file. The rule
+  stands: select premises columns by exact name, never by a pattern that can
+  reach an operator column.
+- The master list's "Candidates — 31" heading was stale after Brazil's nine
+  were built. It now reads 22, matching its own summary table (A 12 · C 6 ·
+  D 4).
 
 ### 2026-09-24 - Meguro's personal-services registers joined: 1,412 premises at 100% block
 

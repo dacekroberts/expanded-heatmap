@@ -740,6 +740,12 @@ brief names.
   Routes: request Chiyoda's ledger (owner, gated item 22); extract Ōta's,
   Kita's and Arakawa's PDF lists; Shinagawa's and Itabashi's partial files;
   requests to Toshima, Nerima and Edogawa.
+  - [ ] ⚠️ **Three in-scope lists are PARTIAL (found 2026-09-24).** Chūō's
+    and Kōtō's hold only 2021–22 permits, and Minato's only new-law permits
+    since 2021. Next probe: whether each ward publishes its old-law (旧法)
+    half, as Meguro does (`all_old_8`), or a newer full file. Otherwise a
+    request to the ward. Until then those three wards' food layers are
+    undercounts, and the page must say so.
 - [ ] **Fukuoka** — agree the wording that discloses the ~20% of restaurants
   with no published address. BODIK is flaky, so `fetch_sources.py` retries.
 - [x] **No pre-build items**: Seoul (its brief is deliberately partial, and

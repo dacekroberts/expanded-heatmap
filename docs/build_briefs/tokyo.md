@@ -175,9 +175,27 @@ start at the town, so a single-ward list defaults its ward.
 | Setagaya | 7,428 | **100.0%** | none published |
 | Meguro | 3,492 (+90 都内一円) | **99.9%** | none published |
 
-**Tokyo now: 8 wards with full, current food lists** (Chūō, Minato, Shinjuku
-(2023), Kōtō, Shibuya, Taitō, Setagaya, Meguro), about **59,400 food
-premises**. **The remaining hole is the very centre**: Chiyoda (Marunouchi,
+⚠️ **CORRECTED 2026-09-24: three of the eight lists are NOT complete, as the
+permit dates inside them show.** The join is unaffected; only completeness is.
+
+| Ward | Permit dates in the file | Reading | Restaurants in it |
+|---|---|---|---|
+| **Chūō** | 許可年月日 **2021–2022 only** (1,438 + 1,110) | a partial list: about 1.5 years of permits | 1,319 |
+| **Kōtō** | 初回許可年月日 **2021–2022 only** | a partial list: about 1.5 years of permits | 570 |
+| **Minato** | 初回許可年月日 **2021–2026 only**, none earlier | new-law permits only. Old-law permits still in term are missing | 4,892 |
+| Shinjuku | 許可年月日 2016–2022 | complete, as of 2023-01-01 (its disclosed vintage) | 12,888 |
+| Shibuya · Taitō · Setagaya | back to 1969 / 2019 / 1960 | complete | 10,887 · 6,533 · 5,845 |
+| Meguro | `all_new_8` (2021–) **plus** `all_old_8` (the old law) | complete, because both halves are published | 1,443 + old |
+
+Per capita they fail too: Kōtō (about 530,000 residents) with 570 restaurants
+is about 1 per 1,000, against Osaka's 19. So "8 wards with full, current food
+lists" was wrong. Five are complete. Minato was the join control, and it
+stays valid for the join. Whether the old-law halves (旧法) are published
+anywhere for Chūō, Kōtō and Minato is the next probe, as Meguro's are.
+
+**Tokyo now: 8 wards with food lists, 5 of them complete** (Shinjuku (2023),
+Shibuya, Taitō, Setagaya, Meguro; Chūō, Kōtō and Minato partial, above),
+about **59,400 food permit rows**. **The remaining hole is the very centre**: Chiyoda (Marunouchi,
 Ōtemachi) and Toshima (Ikebukuro) release theirs only on request, and Bunkyō
 publishes none. MHLW's open data does not fill them (Chiyoda 291 restaurants,
 26% addressed). **The scope is the owner's call**: the 8 wards as a stated
