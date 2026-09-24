@@ -378,8 +378,20 @@ onwards; the early ones are split by phase rather than by hour.
   de-duplication). ⚠️ **A share are factories and central kitchens**
   (そうざい製造業 includes school-lunch caterers). The taxonomy cannot see
   that, so the build measures it from trade names before publishing, as Rome
-  measured its over-count. The scope beyond city lines is still open: the
-  owner asked for detail first.
+  measured its over-count.
+- **Owner, the same day, after the detail: the city line only, with the stub
+  test.** Each city's permit list covers only that city, since the city's own
+  health office issues the permits. So a station beyond the line would get an
+  empty ring, and a ring straddling it undercounts. Going regional, as Lille,
+  Dublin and four Brazilian cities did, was nearly free where one national
+  register covered the neighbours. **In Japan each neighbour is its own
+  publisher, format and licence**, so regional means a new screen per
+  neighbour, and Sendai showed a neighbour may not be open. The rejected
+  alternative was screening the continuous suburbs now (Sakai; Ashiya,
+  Nishinomiya and Amagasaki; Kasuga). Stage 2 measures each line's stations
+  inside and outside the city (N02 against MLIT's N03 boundaries). Any urban
+  line cut to a stub returns to the owner. The subways sit almost entirely
+  inside each city, so it is expected to trigger nowhere.
 
 ### 2026-09-24 - Japan's join moved into the pipeline, unchanged, before any Japanese build
 

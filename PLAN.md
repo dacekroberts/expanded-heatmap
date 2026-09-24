@@ -593,8 +593,12 @@ brief names.
 - [~] **Japan — three owner calls that recur in all five briefs.**
   1. [x] **The Shinkansen does NOT count** (owner, 2026-09-24): it is
      long-distance travel between cities.
-  2. [ ] **The scope beyond each city line**: the owner asked for detail
-     first. The business lists are city-only.
+  2. [x] **City line only, with the stub test** (owner, 2026-09-24): only
+     stations inside each city get rings, matching the city-only permit lists.
+     Stage 2 measures each line's stations inside and outside (N02 against
+     MLIT's N03 boundaries), and any urban line the city line cuts to a stub
+     goes back to the owner (the Rennes and Lille test). Neighbours are a
+     later, case-by-case upgrade.
   3. [x] **菓子製造業 and そうざい製造業 COUNT** (owner, 2026-09-24): bakeries,
      confectioners and delis are counter shops. They join the Retail bucket
      with the other food-retail permit types.
