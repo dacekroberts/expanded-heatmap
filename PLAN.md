@@ -544,23 +544,71 @@ evidence section.
   plus an official geocoder) — not needed at these rates.
 - [x] **B. Minato control join** — 99.8% of fixed premises at block level.
 - [x] **C. Privacy** — individuals' names withheld at source (Minato: 12 of 5,721).
-- [~] **D. Coverage** — Tokyo done ON ONE METHOD (Tokyo's CKAN): food files for
-  4 of 23 wards, personal services 11. The nine other cities: in progress.
-  - [ ] **Second method for the 16 wards without a food file — their own
-    sites, central wards first (Chiyoda, Shibuya, Toshima).**
+- [x] **D. Coverage** — Tokyo: **8 wards** with full, current food lists
+  after the wards' own sites were read (2026-09-24); Chiyoda and Toshima are on
+  request only and Bunkyō publishes none. The other nine cities: measured.
+  MHLW's national open data is an opt-in slice that completes only Fukuoka and
+  Hiroshima.
 - [x] **E. Downloads (Tokyo)** — 60 files, 12.2 MB, in bounds.
-- [x] **F. Join (Tokyo)** — food 99.3% block on 24,297; personal services
-  98.8–99.8%; independent check median 22–43 m. OSM control Shinjuku 6.02×.
-  - [ ] Like-for-like control against the Economic Census per-ward 飲食店 count.
-- [x] **G. Buckets** — food everywhere published; personal services in 11
-  wards; food retail only where 届出 are published (Chūō, Kōtō). No general retail.
-- [ ] **Owner: scope** — a Tokyo map needs its central wards; a "core wards"
-  regional scope that states the gap, or wait for the second method.
-- [ ] **Owner: band** — Japan's coordinate step is solved; re-band on coverage.
-- [ ] **Licences** — `licence-read` on the permit datasets (CC BY 4.0
-  declared), MLIT 位置参照情報, and each ward's register.
+- [x] **F. Join** — Tokyo 99.1–100%, Osaka 99.1%, Kobe 96.5%, Sapporo 84.5% (+15.2%
+  chōme), Fukuoka 98.1% / 96.7%, Sendai 95.1%, Hiroshima 95.9% / 94.7%; independent
+  checks median 22–43 m.
+  - [ ] Like-for-like control against the Economic Census per-ward 飲食店 count
+    (the owner's chosen control) — at build.
+- [x] **G. Buckets** — food everywhere published; personal services from the
+  生活衛生 registers; food retail only where 届出 are published (a disclosed
+  partial bucket, owner). No general retail.
+- [x] **Owner: scope** — Tokyo is 8 wards now, with the missing wards named on
+  the page; the owner requests Chiyoda's ledger in parallel.
+- [x] **Owner: band** — re-banded 2026-09-24 and the geocoding band closed.
+  Tokyo, Osaka, Kobe, Sapporo and Fukuoka to A; Hiroshima to C; Sendai to D
+  (permission); Yokohama, Nagoya and Kyoto to the open gap.
+- [x] **Licences** — all read, each PERMITTED WITH CONDITIONS; the cost clauses
+  were accepted. See each brief.
 - [ ] **Rail** — MLIT N02 with JR and private lines; decide intercity-only
-  services (Shinkansen, limited-express-only).
+  services (Shinkansen, limited-express-only). **Owner, once for all five.**
+
+### ▶ Handoff to main — the Band A candidates, 2026-09-24
+
+**All 20 Band A cities are buildable**: each has a brief whose checks pass live
+and its licences read. The items below are what should be settled BEFORE
+main starts a city. Everything else is a decision inside the build, which the
+brief names.
+
+- [~] **Japan (Tokyo, Osaka, Kobe, Sapporo, Fukuoka) — shared code first
+  (staging, started 2026-09-24).** Five cities run on one join. Lift
+  `scripts/screen_japan_join.py` into `pipeline/japan_join.py`, and write a
+  shared taxonomy for 営業の種類 in `pipeline/taxonomies/`, as Brazil's CNEFE
+  module was written before its second build. **Osaka is the recommended
+  first build**: the cleanest list, 99.1% block, 38 m against the city's own
+  coordinates.
+- [ ] **Japan — three owner calls that recur in all five briefs.** Decide them
+  once:
+  1. Do the Shinkansen and limited-express-only lines count as rail?
+  2. What is the scope beyond each city line? JR and the private railways run
+     into neighbouring cities.
+  3. Do 菓子製造業 and そうざい製造業 count as counter shops?
+- [ ] **Tokyo** — buildable now as 8 wards (owner). The page names the wards
+  with no published list. Owner action: request Chiyoda's ledger
+  (即時公開請求, a CD-R for ¥100).
+- [ ] **Fukuoka** — agree the wording that discloses the ~20% of restaurants
+  with no published address. BODIK is flaky, so `fetch_sources.py` retries.
+- [x] **No pre-build items**: Seoul (its brief is deliberately partial, and
+  geocoding the rest of 一般飲食店 is build work), Hong Kong, the nine Brazilian
+  cities (São Paulo is already with main), the three Taiwanese cities, and
+  Rotterdam (its build-time calls are in its brief).
+
+**Not ready for main:**
+- **Band C (6)** — one owner decision moves all six: does a single-bucket page
+  belong beside three-bucket cities?
+- **Band D (4)** — each waits on an owner act or on access: Sendai's request
+  (drafted), Kaohsiung's request, and reads from inside Poland and India.
+- **The open gap (9)** — re-probes, not builds.
+
+**Owner's outside actions:**
+- [ ] Send Sendai's request (drafted in formal Japanese).
+- [ ] Request Chiyoda's ledger.
+- [ ] Place the Tallinn building-register orders (two reports).
 
 ### Brief-ready, not started — ordered checklists, 2026-09-23
 
