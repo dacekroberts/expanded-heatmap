@@ -45,9 +45,11 @@ harvest of a city is not the city: the permits were not in its results.
 - **A read-only API POST counts as a GET** (owner, 2026-09-24): a GraphQL or
   search-API query that lists or reads data, with no account and no personal
   data sent. Poznań's portal refuses GET, and a POST-only catalogue is not a
-  reason to stop. **Still not a query**: a web form, or anything carrying an
-  e-mail, a name or a login, such as Estonia's building-register order
-  (Step 3's owner's act).
+  reason to stop. **A public open-data portal's own DOWNLOAD button that POSTs
+  a form also counts as a GET** (owner, 2026-09-24, for Kyoto's portal, whose
+  files have no direct link). **Still not a query**: search, contact or order
+  forms, or anything carrying an e-mail, a name or a login, such as Estonia's
+  building-register order (Step 3's owner's act).
 
 ## Step 3 — A 403 is a finding about access: read who it is for
 
