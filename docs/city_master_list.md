@@ -207,11 +207,11 @@ results in the sweep.
 
 **The eighteen:** Seoul · Rennes · Prague · Copenhagen · Hong Kong ·
 Oslo — **each with a brief** in `docs/build_briefs/` — **nine
-Brazilian cities from one national source**: **São Paulo (brief 6/6) and Rio de
-Janeiro (brief 8/8)**, written 2026-09-23, then Salvador · Fortaleza · Belo
-Horizonte · Brasília · Recife · Porto Alegre · Santos, briefs not yet written —
-and **three Taiwanese cities**: Taipei (Regional) · Taoyuan · Taichung, briefs
-not yet written.
+Brazilian cities from one national source**: São Paulo (7/7) · Rio de Janeiro
+(8/8) · Salvador · Fortaleza · Belo Horizonte · Brasília · Recife · Porto Alegre
+· Santos (4/4 each) — and **three Taiwanese cities**: Taipei (Regional) (6/6) ·
+Taichung (3/3) · Taoyuan (3/3). ✅ **Every Band A city has a brief as of
+2026-09-23**, and every brief's checks pass live.
 
 ### ▲▲ Taiwan — three cities, one tax register, a door-plate JOIN (2026-09-23)
 

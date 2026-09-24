@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**252 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**253 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-23**
 
+- [Every Band A city has a brief: seven Brazilian and three Taiwanese written, all checks passing live](#2026-09-23---every-band-a-city-has-a-brief-seven-brazilian-and-three-taiwanese-written-all-checks-passing-live)
 - [The geocoding retrospective, written to prepare Japan; the lesson placed where the next country passes through it](#2026-09-23---the-geocoding-retrospective-written-to-prepare-japan-the-lesson-placed-where-the-next-country-passes-through-it)
 - [Taiwan finished: Taipei (Regional), Taoyuan and Taichung to Band A; Kaohsiung held on an unreachable host](#2026-09-23---taiwan-finished-taipei-regional-taoyuan-and-taichung-to-band-a-kaohsiung-held-on-an-unreachable-host)
 - [Six merged build branches deleted; the retirement steps needed a pull first](#2026-09-23---six-merged-build-branches-deleted-the-retirement-steps-needed-a-pull-first)
@@ -291,6 +292,39 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Every Band A city has a brief: seven Brazilian and three Taiwanese written, all checks passing live
+
+- **Ten briefs written, completing Band A**: Salvador, Fortaleza, Belo
+  Horizonte, Brasilia, Recife, Porto Alegre and Santos (4/4 each), and Taipei
+  (Regional) 6/6, Taichung 3/3, Taoyuan 3/3. The seven Brazilian briefs were
+  generated from one template over the figures `scripts/screen_cnefe.py`
+  measured, so they are identical in shape and differ only in numbers; each
+  defers the national argument to `sao-paulo.md`, as Taichung's and Taoyuan's
+  defer to `taipei.md`. Every brief names its own open items rather than
+  inheriting a clean bill: **none of the seven Brazilian cities has had its
+  agency rail layers searched** (Rio's were found only by enumerating), and
+  Recife, Fortaleza, Porto Alegre and Santos each carry a regional-scope
+  question.
+
+- **`brief_check.py` now verifies against the operating system's trust
+  store** (`truststore`, when installed). Python's bundle lacks Taiwan's
+  government root, so every data.taipei and FIA check failed on certificates
+  rather than facts; the OS store trusts it. **Verification stays on** - this
+  widens what is trusted to what the OS trusts. Rejected: disabling
+  verification for Taiwanese hosts, which the project forbids.
+
+- **One check failed on the first run and it was the HOST, not the brief**:
+  Belo Horizonte's OSM check got `429 Too Many Requests` after seven Overpass
+  checks back to back, and the second mirror timed out. Re-run alone, it
+  passed (4 relations, 2 refs). Recorded because the reflex to "fix" a
+  failing check by editing it is the one `brief_check.py` exists to refuse; a
+  failure's first question is whether it is about the claim or the host.
+
+- **Taipei's brief carries a TDX tripwire**: an `http_contains` check that
+  expects `401 Valid API Key Required`, and fails the day TDX's access
+  changes - the `endpoint_absent` pattern CNPJ's geo-block uses, expressed
+  with `expect_status` so it can also check the refusal's wording.
 
 ### 2026-09-23 - The geocoding retrospective, written to prepare Japan; the lesson placed where the next country passes through it
 

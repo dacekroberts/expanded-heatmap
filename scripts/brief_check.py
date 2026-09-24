@@ -57,6 +57,18 @@ from pathlib import Path
 
 import requests
 
+# Verify against the OPERATING SYSTEM's trust store, not only Python's bundle.
+# Python's bundle lacks Taiwan's government root (GRCA), so every data.taipei /
+# FIA check failed on certificates rather than on facts; the OS store trusts
+# it. Verification stays ON - this widens what is trusted to what the OS
+# trusts, and never switches checking off. Optional: absent truststore, the
+# bundle is used as before.
+try:
+    import truststore
+    truststore.inject_into_ssl()
+except ImportError:
+    pass
+
 ROOT = Path(__file__).parent.parent
 # --vs-config imports pipeline.<city>.config, and this runs as a script, so the
 # repo root is not on sys.path the way it is for the step scripts.
