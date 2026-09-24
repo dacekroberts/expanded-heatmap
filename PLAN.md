@@ -90,9 +90,11 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     business leg (`docs/build_briefs/prague.md`, 12/12), with its sole-trader
     owner call.
 
-- [~] **Label collisions at phone width - FIXED ON `worktree-cleanup`
-  2026-09-24, NOT YET PUSHED: `deploy-verify` scope `map-chrome` must run
-  first** (held for the owner's usage limit). `LABEL_CLAMP_SCRIPT` now
+- [x] **Label collisions at phone width - FIXED AND PUSHED 2026-09-24**, after
+  `deploy-verify` (`map-chrome`) PASSED with only the two expected Madrid
+  pairs. Open follow-ups, if wanted: a few re-placed labels sit ~54 px from
+  their tip (Amsterdam's Metro 51), and labels may sit on cluster bubbles,
+  which the placer does not avoid. `LABEL_CLAMP_SCRIPT` now
   re-places a colliding label around its own line's tip: 56 overlapping pairs
   and 6 labels under a button or the legend at 375/343 became **2** (Madrid's
   core at 343, where eight line ends sit within ~60 px). 1280 unchanged, the

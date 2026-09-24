@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**322 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**323 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Phone-width label placer verified and pushed](#2026-09-24---phone-width-label-placer-verified-and-pushed)
 - [Phone-width line labels re-placed at runtime: 62 problems to 2](#2026-09-24---phone-width-line-labels-re-placed-at-runtime-62-problems-to-2)
 - [Japan: the Shinkansen is out; confectioners and delis count](#2026-09-24---japan-the-shinkansen-is-out-confectioners-and-delis-count)
 - [Japan's join moved into the pipeline, unchanged, before any Japanese build](#2026-09-24---japans-join-moved-into-the-pipeline-unchanged-before-any-japanese-build)
@@ -364,6 +365,23 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Phone-width label placer verified and pushed
+
+- **`deploy-verify` (`map-chrome`) PASSED on the placer, so it is pushed.**
+  `check_map_labels.js` on all 30 cities at 375, 343, 854 and 1280 (120
+  loads) found only the two expected Madrid pairs at 343. The legend and dark
+  toggle worked on every load. `check_map_view.js`: every zoom as expected on
+  120 fresh loads, with 0 guard corrections. `check_map_attribution.js`: the
+  credit was never covered in 36 runs at 650, 768 and 812 px. Interaction on
+  Amsterdam at 375, with real clicks: opening the legend shows 13 labels
+  under it, by design (an open legend is not an obstacle); closing it
+  restores 0 problems; zooming in re-places cleanly; no console errors.
+  **Worth knowing, not failures:** some labels use the farthest spot, about
+  54 px from their tip (Amsterdam's Metro 51, floating above Metro 50's label
+  and tied to its line only by colour), and labels can sit on cluster
+  bubbles, which the placer does not avoid. Both are in `PLAN.md` as optional
+  follow-ups. No `app/` change, so no reboot.
 
 ### 2026-09-24 - Phone-width line labels re-placed at runtime: 62 problems to 2
 
