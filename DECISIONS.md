@@ -16,7 +16,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**269 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**270 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
@@ -27,6 +27,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 **2026-09-23**
 
+- [gated_access.md: Taiwan's key gate retired, Kaohsiung's request added](#2026-09-23---gated_accessmd-taiwans-key-gate-retired-kaohsiungs-request-added)
 - [The licence-read agent runs the stray-download check before reporting](#2026-09-23---the-licence-read-agent-runs-the-stray-download-check-before-reporting)
 - [Kaohsiung moves to a reopened access-blocked band (D); Band B becomes Japan only](#2026-09-23---kaohsiung-moves-to-a-reopened-access-blocked-band-d-band-b-becomes-japan-only)
 - [A check for downloads that land in a checkout's root](#2026-09-23---a-check-for-downloads-that-land-in-a-checkouts-root)
@@ -311,6 +312,20 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - gated_access.md: Taiwan's key gate retired, Kaohsiung's request added
+
+- **Row 16 (a `data.gov.tw` API key for four Taiwanese cities) moved to
+  "Closed, kept as evidence" as never needed, and Kaohsiung gets a live row
+  20: a request to 高雄市政府民政局.** Handed over by the Staging Session and
+  checked against the record. The catalogue exports whole and keyless, the
+  door-plate file is keyless, and three cities moved to the buildable band
+  (*"Taiwan is a door-plate JOIN at 92.5%"*, *"Taiwan finished"*).
+  Kaohsiung's block is a host that answers only inside Taiwan, and its way
+  through is a request, not a key (*"Kaohsiung moves to a reopened
+  access-blocked band"*). Section C's heading now reads "Free account, API
+  key or access request", since a request to a publisher is the same kind
+  of person-only gate. Nothing linked to the old heading's anchor.
 
 ### 2026-09-23 - The licence-read agent runs the stray-download check before reporting
 
