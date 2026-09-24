@@ -1896,7 +1896,7 @@ Measured layer by layer from here: every Kaohsiung data host — `data.kcg.gov.t
 
 The national catalogue (the on-disk export, 52,436 datasets) lists **3,342 Kaohsiung-published datasets and no other host** for any of its files: 6,951 URLs on `data.kcg.gov.tw`, 6,932 on `openapi.kcg.gov.tw`, 9 on `api.kcg.gov.tw`. The door-plate file exists in a **2026 edition** (`高雄市115年門牌坐標資料-TWD97`, dataset 177859, six resources, updated 2026-06-25) with the same street / lane / alley / number / TWD97 columns as the other cities. Kaohsiung's metro station coordinates (`高雄紅橘線捷運車站中心座標`, `高雄輕軌車站中心座標`) sit behind the same filter. `openapi.kcg.gov.tw`'s root redirects to `/Account/Login` even from Taiwan. **No national door-plate file** exists in the catalogue — MOI publishes only counts of what the cities supply.
 
-**The way through is the publisher, not the network**: 高雄市政府民政局 could publish the file on data.gov.tw or lift the filter for it. Until then Kaohsiung stays in Band B.
+**The way through is the publisher, not the network**: 高雄市政府民政局 could publish the file on data.gov.tw or lift the filter for it. Until then Kaohsiung waits on the publisher *(placed in the access-blocked band, 2026-09-23)*.
 
 #### ▲ 2026-09-24 — Czechia: RŽP's *provozovny* ARE reachable in bulk, as a batched search
 

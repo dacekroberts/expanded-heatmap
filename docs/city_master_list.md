@@ -36,7 +36,7 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 > | | |
 > |---|---|
 > | **Built** | **25** across 7 countries *(Toulouse, Lille (Regional) and Rennes, 2026-09-23)* |
-> | **Candidates** | **32**, all at least partially viable — A 16 · B 11 · C 5 *(Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built; Prague paused to the open gap 2026-09-24)* |
+> | **Candidates** | **32**, all at least partially viable — A 16 · B 10 · C 5 · D 1 *(Kaohsiung moved from B to a reopened access-blocked band D 2026-09-23, owner's call; Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built; Prague paused to the open gap 2026-09-24)* |
 > | **Open screening gap** | **4**, resting on an absence — neither candidates nor discards |
 > | **Discarded** | **32**, each naming its evidence |
 >
@@ -115,8 +115,9 @@ yet* with *we looked at everything and this is what is there*.
 | Band | What these cities ARE | Cities |
 |---|---|---|
 | 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates answered, rail answered — every remaining question is answerable inside the build | **16** *(+ 11 built)* |
-| 🟠 **B** | **Geocoding at national scale.** The address work is a project, justified only by reuse across many cities | **11** |
+| 🟠 **B** | **Geocoding at national scale.** The address work is a project, justified only by reuse across many cities | **10** |
 | 🟣 **C** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **5** |
+| 🔴 **D** | **Access blocked by the publisher.** Screening complete, the file exists and is measured; the publisher's own access control is the only thing stopping it, so it is unblocked by ASKING, not by probing | **1** |
 | | **Candidates** | **32** |
 | *Open gap* | Unscreened — a row resting on an absence, so not a discard | *4* |
 | *Discarded* | Measured negative, evidence named | *32* |
@@ -144,7 +145,7 @@ part of it, the condition that stopped being true is.
 | **F** | **D** → **C** *(2026-09-23)* | Stockholm, Zurich |
 | B | *(closed)* | **awaiting permission** — Tel Aviv, discarded on terms |
 | D | *(closed)* | **coordinates and unfinished screening** — Bucharest finished its screening |
-| G | *(closed)* | **access blocked** — Hong Kong left upward, Hyderabad and Kochi measured out |
+| G | *(closed)* → **D** *(2026-09-23, reopened)* | **access blocked** — Hong Kong left upward, Hyderabad and Kochi measured out; **the condition came back true of Kaohsiung**, so it is a live band again under the next free letter |
 
 **Rule this renumber established: a LETTER is for a heading, a CONDITION is
 for a sentence.** Prose that says *"moved to the coordinates band"* survives
@@ -436,14 +437,14 @@ measured.
   when it is guessing is worth more than one with a higher raw hit rate** —
   which is exactly what Oslo's `fuzzy` lacked.
 
-## 🟠 Band B — geocoding at national scale (11 cities)
+## 🟠 Band B — geocoding at national scale (10 cities)
 
 **The investment tier.** These share one property that separates them from
 the buildable band: the address work is a project rather than a step, and it is worth
 doing only because the machinery, once written, is reused across many
-cities. **Japan is ten cities from one schema, and after 2026-09-23 it is
-nearly the whole band** — Kaohsiung stays only because its address file is
-**geo-blocked to Taiwan** (measured 2026-09-23).
+cities. **Japan is ten cities from one schema, and since 2026-09-23 it is
+the whole band.** Kaohsiung left for the access-blocked band (D) the same
+night: it needs no geocoder, only a publisher who opens its file.
 
 ▲ **São Paulo and Rio left this band on 2026-09-23 — upward, to A — by not
 needing a geocoder at all.** Brazil's census address file turned out to carry
@@ -455,7 +456,6 @@ turned "a geocoding project" into a join or into nothing.
 
 | Cities | Country | Business leg | The coordinate step |
 |---|---|---|---|
-| **Kaohsiung** *(1)* | 🇹🇼 | ▼ **The one Taiwanese city left here, 2026-09-23 — Taipei (Regional), Taoyuan and Taichung moved to Band A.** Kaohsiung's business side is measured (**72,550** storefronts in the national tax register) and its licence is the same OGDL v1; **its door-plate file (the 2026 edition, `高雄市115年門牌坐標資料-TWD97`, updated 2026-06-25) and its own metro station files sit on `data.kcg.gov.tw` / `openapi.kcg.gov.tw` / `api.kcg.gov.tw`.** 🚧 **GEO-BLOCKED, MEASURED 2026-09-23 (night)**: `data.kcg.gov.tw` answers **HTTP 200 to 3 of 3 Taiwanese probes** (two networks) and times out from Japan and the US, while `www.kcg.gov.tw` on the same network answers from everywhere — **a foreign-address filter on the data hosts, the publisher's access control, NOT routed around.** The national catalogue lists **no other host** for any Kaohsiung file. Moves to A only if the publisher opens it or publishes elsewhere — **the way through is asking the publisher**, an owner action. **The history of this row, kept:** ▲▲▲ **FINISHED 2026-09-23 (evening) — see "Taiwan finished" in `global_country_shortlist.md`.** Joins **Taipei 92.4% · Taoyuan 94.0% · Taichung 92.7%**; Kaohsiung's door-plate host unreachable, its business side measured at 72,550. **Rail needs no TDX** (now key-gated, and a Taiwanese mobile number to register): the agencies publish stations everywhere and Taipei's line geometry, keyless, under OGDL v1. **Taipei's door-plate licence: PERMITTED WITH CONDITIONS** (OGDL v1 — a prescribed attribution statement whose absence voids the grant, and a fault-based liability clause). **Head-office trap measured**: 38.7% of company rows look like offices, against 7.1% of sole proprietors. ⚠️ **Scope question: New Taipei** (76,320 storefronts) surrounds Taipei and its metro crosses the boundary — the Dublin/Lille regional shape. **The rows below are the earlier readings of the same day.** ▲▲ **2026-09-23: the national BUSINESS TAX REGISTER** (`全國營業(稅籍)登記資料集`, Fiscal Information Agency) — keyless, **refreshed daily**, one row per trading location with `營業地址` (the business address), a parent ID so **branches are their own rows**, a trade name, and a 6-digit industry code whose **47/48 · 56 · 96** are retail · food · personal services. **No personal-name column.** Taipei: **76,519 storefronts** after excluding 4,954 online-shopping rows (code 487, NAICS 454's twin) | ▲▲ **A JOIN, not a geocoder — MEASURED 2026-09-23 in Taipei at 92.5%** (food 95.1%, personal 99.0%, retail 90.0%) against the city's **door-plate coordinate file** (`門牌位置數值資料`, monthly, keyless, Open Government Data License v1.0). **Door-plate files exist for all four cities** on the national catalogue, which **exports whole and keyless** — the `ER0001` key error was one API endpoint, not the portal. Retail's misses are mostly **market stalls and under-viaduct stalls** with no door plate. ⚠️ **Still open before Band A:** the other three cities' joins (Kaohsiung's portal timed out from six nodes in five countries), the licence read, and whether company rows in the storefront codes are shops or head offices (Taipei's register is 104,489 有限公司 and 56,483 股份有限公司 against 69,156 sole proprietors). **Rail is NOT open**: TDX's metro endpoints answered unauthenticated on 2026-09-21 — 122 Taipei stations, line shapes and `LineColor` (see `global_country_shortlist.md`); re-verify at build. **The record below is the 2026-09-22 reading, superseded:** ⚠️ **MOVED HERE FROM BAND B 2026-09-22, on a probe rather than on a resemblance.** The row used to read *"moderate — NLSC's geocoder is keyless"*, and **that claim did not survive**: NLSC's API is alive and keyless, but the keyless endpoint is **reverse** geocoding (point → 村里) and administrative lists, not forward geocoding, and **no bulk 門牌 address-point file was reached**. `data.gov.tw`'s dataset API **requires an API key** (`ER0001:API Key錯誤`); its web pages are reachable, and `addr.tgos.tw` answers but has historically required registration. **Blocked, not negative** — and the Prague-shaped bulk join is still the thing to look for |
 | **Tokyo**, Osaka, Nagoya, Yokohama, Sapporo, Fukuoka, Kyoto, Kobe, Sendai, Hiroshima *(10)* | 🇯🇵 | Premises-level food permits, CC BY, one national schema. **Two buckets — no general retail** | **Hardest met** — chōme/ban/gō, full-width numerals, `町字ID` 0% populated |
 
 
@@ -743,9 +743,32 @@ carry three buckets?* **Answer it once and two cities move together.**
 
 ---
 
+## 🔴 Band D — access blocked by the publisher (1 city)
+
+**Reopened 2026-09-23 (owner's call) for a condition the other bands cannot
+say**: screening is COMPLETE and passed, the file exists and is measured, and
+the one thing stopping the city is **the publisher's own access control**.
+**What unblocks it is asking, not probing** — which is the difference from
+the closed band below, whose members were *not yet reached properly* and all
+left it once they were.
+
+| City | Screened and passed | What blocks it — MEASURED | The way through |
+|---|---|---|---|
+| **Kaohsiung** 🇹🇼 | **72,550 storefronts** in the national tax register; OGDL v1 read and accepted (the same decision as Taiwan's other cities); the door-plate file exists in a **2026 edition** (`高雄市115年門牌坐標資料-TWD97`, updated 2026-06-25) with the same columns the three joined cities used (**92.7–95.5%**) | 🚧 **Geo-blocked to Taiwan**: `data.kcg.gov.tw` answers **HTTP 200 to 3 of 3 Taiwanese probes** (two networks) and times out from Japan and the US; `www.kcg.gov.tw` on the same network answers everywhere. The national catalogue lists **no other host** for any of 3,342 Kaohsiung datasets. **Not routed around** — no proxy, no VPN | **A request to 高雄市政府民政局** to publish the file on data.gov.tw or lift the filter for it — an owner action. Nothing sent |
+
+<details><summary>Kaohsiung's full record while it sat in Band B (kept)</summary>
+
+| Cities | Country | Business leg | The coordinate step |
+|---|---|---|---|
+| **Kaohsiung** *(1)* | 🇹🇼 | ▼ **The one Taiwanese city left here, 2026-09-23 — Taipei (Regional), Taoyuan and Taichung moved to Band A.** Kaohsiung's business side is measured (**72,550** storefronts in the national tax register) and its licence is the same OGDL v1; **its door-plate file (the 2026 edition, `高雄市115年門牌坐標資料-TWD97`, updated 2026-06-25) and its own metro station files sit on `data.kcg.gov.tw` / `openapi.kcg.gov.tw` / `api.kcg.gov.tw`.** 🚧 **GEO-BLOCKED, MEASURED 2026-09-23 (night)**: `data.kcg.gov.tw` answers **HTTP 200 to 3 of 3 Taiwanese probes** (two networks) and times out from Japan and the US, while `www.kcg.gov.tw` on the same network answers from everywhere — **a foreign-address filter on the data hosts, the publisher's access control, NOT routed around.** The national catalogue lists **no other host** for any Kaohsiung file. Moves to A only if the publisher opens it or publishes elsewhere — **the way through is asking the publisher**, an owner action. **The history of this row, kept:** ▲▲▲ **FINISHED 2026-09-23 (evening) — see "Taiwan finished" in `global_country_shortlist.md`.** Joins **Taipei 92.4% · Taoyuan 94.0% · Taichung 92.7%**; Kaohsiung's door-plate host unreachable, its business side measured at 72,550. **Rail needs no TDX** (now key-gated, and a Taiwanese mobile number to register): the agencies publish stations everywhere and Taipei's line geometry, keyless, under OGDL v1. **Taipei's door-plate licence: PERMITTED WITH CONDITIONS** (OGDL v1 — a prescribed attribution statement whose absence voids the grant, and a fault-based liability clause). **Head-office trap measured**: 38.7% of company rows look like offices, against 7.1% of sole proprietors. ⚠️ **Scope question: New Taipei** (76,320 storefronts) surrounds Taipei and its metro crosses the boundary — the Dublin/Lille regional shape. **The rows below are the earlier readings of the same day.** ▲▲ **2026-09-23: the national BUSINESS TAX REGISTER** (`全國營業(稅籍)登記資料集`, Fiscal Information Agency) — keyless, **refreshed daily**, one row per trading location with `營業地址` (the business address), a parent ID so **branches are their own rows**, a trade name, and a 6-digit industry code whose **47/48 · 56 · 96** are retail · food · personal services. **No personal-name column.** Taipei: **76,519 storefronts** after excluding 4,954 online-shopping rows (code 487, NAICS 454's twin) | ▲▲ **A JOIN, not a geocoder — MEASURED 2026-09-23 in Taipei at 92.5%** (food 95.1%, personal 99.0%, retail 90.0%) against the city's **door-plate coordinate file** (`門牌位置數值資料`, monthly, keyless, Open Government Data License v1.0). **Door-plate files exist for all four cities** on the national catalogue, which **exports whole and keyless** — the `ER0001` key error was one API endpoint, not the portal. Retail's misses are mostly **market stalls and under-viaduct stalls** with no door plate. ⚠️ **Still open before Band A:** the other three cities' joins (Kaohsiung's portal timed out from six nodes in five countries), the licence read, and whether company rows in the storefront codes are shops or head offices (Taipei's register is 104,489 有限公司 and 56,483 股份有限公司 against 69,156 sole proprietors). **Rail is NOT open**: TDX's metro endpoints answered unauthenticated on 2026-09-21 — 122 Taipei stations, line shapes and `LineColor` (see `global_country_shortlist.md`); re-verify at build. **The record below is the 2026-09-22 reading, superseded:** ⚠️ **MOVED HERE FROM BAND B 2026-09-22, on a probe rather than on a resemblance.** The row used to read *"moderate — NLSC's geocoder is keyless"*, and **that claim did not survive**: NLSC's API is alive and keyless, but the keyless endpoint is **reverse** geocoding (point → 村里) and administrative lists, not forward geocoding, and **no bulk 門牌 address-point file was reached**. `data.gov.tw`'s dataset API **requires an API key** (`ER0001:API Key錯誤`); its web pages are reachable, and `addr.tgos.tw` answers but has historically required registration. **Blocked, not negative** — and the Prague-shaped bulk join is still the thing to look for |
+
+</details>
+
 ## ✗ Closed bands — kept in full as evidence, not as candidates
 
 ### ✗ CLOSED — access blocked (formerly Band G)
+
+*▲ The condition is live again as **Band D** above since 2026-09-23 — Kaohsiung. This record is the band as it closed on 2026-09-22.*
 
 **The band's premise was that the register exists and we cannot reach it, so
 none of its members was a data negative.** That premise was correct and all
@@ -1326,7 +1349,7 @@ the tier is stale.
 | 🇳🇴 Norway | — | **1** — Oslo | A | Build |
 | 🇰🇷 South Korea | — | **1** — Seoul | A | Build, but its brief is **deliberately partial** — seven Step-0 items undone |
 | 🇧🇷 Brazil | — | **9** — São Paulo, Rio, Salvador, Fortaleza, Belo Horizonte, Brasília, Recife, Porto Alegre, Santos | A | **Nothing but the builds** — one national source (IBGE CNEFE 2022), no geocoder. Briefs next, São Paulo and Rio first |
-| 🇹🇼 Taiwan | — | **4** — Taipei (Regional), Taoyuan, Taichung · Kaohsiung | A · B | **No geocoder** — a door-plate JOIN at 92.7–95.5%. Three cities build-ready; **Kaohsiung's address file is geo-blocked to Taiwan** |
+| 🇹🇼 Taiwan | — | **4** — Taipei (Regional), Taoyuan, Taichung · Kaohsiung | A · D | **No geocoder** — a door-plate JOIN at 92.7–95.5%. Three cities build-ready; **Kaohsiung's address file is geo-blocked to Taiwan** |
 | 🇯🇵 Japan | — | **10** | B | The hardest geocode; **decided: last** |
 | 🇸🇪 Sweden | — | **2** — Stockholm, Göteborg | C | One owner decision (food-only pages) |
 | 🇨🇭 Switzerland | — | **1** — Zurich | C | The same decision |

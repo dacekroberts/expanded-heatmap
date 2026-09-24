@@ -16,7 +16,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**265 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**266 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
@@ -27,6 +27,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 **2026-09-23**
 
+- [Kaohsiung moves to a reopened access-blocked band (D); Band B becomes Japan only](#2026-09-23---kaohsiung-moves-to-a-reopened-access-blocked-band-d-band-b-becomes-japan-only)
 - [Four Brazilian cities go regional (owner); Brasilia's dwelling test keys on the lot (owner); neighbours measured](#2026-09-23---four-brazilian-cities-go-regional-owner-brasilias-dwelling-test-keys-on-the-lot-owner-neighbours-measured)
 - [Brazil's agency rail searched for seven cities; station share per municipio measured; Brasilia's 90% is its address key; BH Line 2 is open](#2026-09-23---brazils-agency-rail-searched-for-seven-cities-station-share-per-municipio-measured-brasilias-90-is-its-address-key-bh-line-2-is-open)
 - [Stray downloads in the main checkout's root filed](#2026-09-23---stray-downloads-in-the-main-checkouts-root-filed)
@@ -307,6 +308,28 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Kaohsiung moves to a reopened access-blocked band (D); Band B becomes Japan only
+
+- **Decided by the owner: Kaohsiung leaves the geocoding band for a live
+  access-blocked band, reopened as D.** Supersedes the earlier entry the
+  same night that kept it in Band B. Band B's caption names geocoding as
+  the unblocking work, and Kaohsiung needs none - the Taiwan join is proven
+  at 92.7-95.5% on the same file shape; what unblocks it is the publisher
+  opening a file that answers only inside Taiwan. **Rejected: the open
+  screening gap**, which the owner asked about first - that band holds rows
+  resting on an ABSENCE (never screened), and every leg of Kaohsiung is
+  measured, the block included; putting it beside Cairo would blur what the
+  gap means. **Rejected: keeping it in B under a widened caption**, which
+  would make one caption describe two kinds of work. The closed band G's
+  lesson stands and is why D is captioned differently: G's members were
+  "not yet reached properly" and all left once they were; D's member has
+  been reached every way there is, and its way through is a request, not a
+  probe. Counts: A 16 · B 10 · C 5 · D 1 = 32 candidates, unchanged.
+  Touched `docs/city_master_list.md` (counts box, band table, renumber
+  table, Band B, new Band D, the closed band's note, the by-country row) and
+  one sentence in `docs/global_country_shortlist.md` that named a letter
+  where it should name a condition.
 
 ### 2026-09-24 - Prague: RŽP's establishments are reachable in batches through ARES v3, each with a RÚIAN code; Prague stays paused until measured
 
