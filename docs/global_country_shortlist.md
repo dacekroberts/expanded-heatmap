@@ -2297,7 +2297,7 @@ city.
 | **Kochi** | IN | subway 1 | current |
 | **Guadalajara** | MX | tram/LRT 3 | current |
 | **Zagreb** | HR | tram 19 | **expired 20190616** |
-| **Poznań** | PL | tram 22 | **expired 20260605** |
+| **Poznań** | PL | tram 22 | **expired 20260605** in the catalogue's copy. ▼ *2026-09-24: the city's own portal carries a tram GTFS modified 2026-09-18 (a side find of the re-probe), so the rail is current. The city was discarded on its business leg, not on rail* |
 | **Riga** | LV | tram 7 | current |
 | **Bratislava** | SK | tram 6 | **expired 20221231** |
 | **Tallinn** | EE | tram 5 | **expired 20260831** |

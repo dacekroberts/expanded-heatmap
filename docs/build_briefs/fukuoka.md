@@ -5,6 +5,8 @@
 Coordinates: the `address-join` skill, measured by
 `scripts/screen_japan_join.py fukuoka`, `fukuoka-mhlw` and `fukuoka-life`.
 
+**✅ Decided by the owner, 2026-09-24, for every Japanese city:** (1) **the Shinkansen does not count**, since it is long-distance travel between cities; (2) **the city line only**: only stations inside the city get rings, matching the city-only permit list, with a per-line stub test at build (any urban line cut to a stub goes back to the owner); (3) **菓子製造業 and そうざい製造業 count**, in the Retail bucket (bakeries, confectioners and delis sell over a counter), with the factory and central-kitchen share measured from trade names before publishing. Open items below that ask these questions are answered.
+
 ---
 
 ## The one-line summary
@@ -150,8 +152,8 @@ type and premises address** (plus MHLW's lat/lon). Run
 - ✅ Both licences read: BODIK (CC BY 4.0) and MHLW (PDL 1.0), each PERMITTED WITH CONDITIONS. MHLW has one minor commercial-use OPEN point.
 - ⚠️ **Privacy**: per MHLW's FAQ, sole traders may enter 「個人名及び自宅住所」 as their 屋号 in their account. Whether that reaches `営業施設名称` is unchecked, so `check_personal_exposure.py` must look at trade names that are personal names.
 - ⚠️ **The ~20% of restaurants with no published address**: whether they cluster spatially. The owner decides whether a disclosed undercount is acceptable.
-- ⚠️ 菓子製造業 / そうざい製造業; the food-retail bucket's disclosure.
-- ⚠️ Scope beyond the city line; the Shinkansen; N02's line list for Fukuoka.
+- ✅ decided 2026-09-24 (owner): see the block at the top (菓子製造業 / そうざい製造業 count, in Retail).
+- ✅ decided 2026-09-24 (owner): see the block at the top (city line only; Shinkansen out). ⚠️ Still open: N02's line list for Fukuoka.
 - ⚠️ The Economic Census food control (the owner's chosen control).
 
 ```brief-checks
