@@ -16,13 +16,17 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**341 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**345 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Renderer fixes verified and pushed; the dark-label model corrected next, with the light-mode halo swap (owner)](#2026-09-24---renderer-fixes-verified-and-pushed-the-dark-label-model-corrected-next-with-the-light-mode-halo-swap-owner)
 - [City switcher grouped by country (owner)](#2026-09-24---city-switcher-grouped-by-country-owner)
+- [Tokyo's four own-site wards read: all CC BY 4.0, none like Sendai](#2026-09-24---tokyos-four-own-site-wards-read-all-cc-by-40-none-like-sendai)
 - [Japan: cost clauses accepted country-wide; N03 never drawn; Kyoto before Tokyo](#2026-09-24---japan-cost-clauses-accepted-country-wide-n03-never-drawn-kyoto-before-tokyo)
+- [Renderer: dark-mode line labels lifted to 4.5:1, the legend's style repaired; a check for both](#2026-09-24---renderer-dark-mode-line-labels-lifted-to-451-the-legends-style-repaired-a-check-for-both)
 - [Japan's licence reads consolidated into data_sources.md; five were never read](#2026-09-24---japans-licence-reads-consolidated-into-data_sourcesmd-five-were-never-read)
+- [Brazil deployed; the live site measured after the reboot](#2026-09-24---brazil-deployed-the-live-site-measured-after-the-reboot)
 - [Brazil's batch deploy check passed; two renderer defects shipped now, fixed next (owner)](#2026-09-24---brazils-batch-deploy-check-passed-two-renderer-defects-shipped-now-fixed-next-owner)
 - [Kyoto enters Band A: licence read, brief written, row moved](#2026-09-24---kyoto-enters-band-a-licence-read-brief-written-row-moved)
 - [Kyoto's rail scope: Keishin kept, funiculars drawn, Sagano out (owner)](#2026-09-24---kyotos-rail-scope-keishin-kept-funiculars-drawn-sagano-out-owner)
@@ -384,6 +388,50 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-24 - Renderer fixes verified and pushed; the dark-label model corrected next, with the light-mode halo swap (owner)
+
+- **`deploy-verify` (`map-chrome`, dark mode included) PASSED the two renderer
+  fixes** at 5684c4c:
+  - **Labels:** exactly the 17 labels carry `--dm-label` and render in it; the
+    other 218 inline colours are byte-identical to the previous commit; light
+    mode shows every original colour.
+  - **Legend:** 13 px, its shadow and the full 15-font stack on all 39 maps,
+    and exactly three attributes on the element.
+  - **100 fresh loads** (10 cities, 10 frame sizes): attribution never
+    covered, 0 zoom corrections, the legend collapses and the theme toggles
+    every time. The only label report is Madrid's 1-6 px pair at 343 px,
+    which predates this change.
+  - `check_map_markup.py` and `check_render_current.py` pass. `app/` is
+    unchanged, so no reboot is needed.
+- **It found the dark-label model measuring against the wrong background.**
+  Nothing here blocks the push.
+  - The `brightness()` filter sits on the label element, so it brightens the
+    halo too. The halo renders `#132039`, not the `#0B1220` that
+    `linecolour.py` and `check_map_markup.py` assume.
+  - Against the halo actually drawn, the 17 lifted labels read 3.89-4.18:1
+    (from as low as 1.91), and 44 of 235 labels are under 4.5.
+  - Vancouver's Expo Line has no margin: 4.53:1 as modelled and 4.49:1 as
+    the browser truncates.
+  - **Decided** (owner's order, "push the verified dark-mode fixes first"):
+    push now, since this is a large improvement on what is live. The model
+    correction lands with the light-mode halo swap, in the same code, and is
+    verified in Rotterdam's deploy check. That correction means no filter:
+    every dark-mode label gets an explicit colour, measured against the halo
+    actually drawn, with channels truncated as the browser does.
+- **Light-mode labels: the owner approved the halo swap.** The owner asked
+  for the dark treatment mirrored ("darken until 4.5:1 on white"). Measured,
+  it was not viable: a median CIE76 shift of 19.9, with 48 labels moving 25 or
+  more and every yellow turning olive (`#FFD700` to `#8a7400`), which would
+  break the match between a line and its label. Instead, each label under
+  4.5:1 on white keeps its colour and takes the halo it reads better on: the
+  dark page colour for 139 of 145, white for 6. The 13 mid-tones that miss on
+  both (4.2-4.45:1) get the smallest lightness step away from their halo, at
+  most ΔE 3.7. The cost is a mix of white and dark halos on one light-mode
+  map. A single halo cannot work, since navy needs white and yellow needs
+  dark. The owner saw the swatches (`light_labels_options.html`) and agreed.
+  Built next, and verified inside Rotterdam's deploy check rather than in a
+  separate run.
+
 ### 2026-09-24 - City switcher grouped by country (owner)
 
 - **The owner asked for cities of one country to sit back to back** in the
@@ -407,6 +455,40 @@ onwards; the early ones are split by phase rather than by hour.
   imported 40 cities, 8 regions, and was then reverted. **Any build branch
   that adds a city after this lands needs the field**, and
   `check_deploy_imports.py` refuses the branch until it has it.
+### 2026-09-24 - Tokyo's four own-site wards read: all CC BY 4.0, none like Sendai
+
+- **Read the terms of the four Tokyo wards whose files come from their own
+  sites**, at the owner's request: Shibuya, Taitō, Setagaya and Meguro. The
+  owner had accepted their hosts as the wards' own channels earlier the same
+  day, but their terms were never read. The Tokyo read covered only the
+  Tokyo catalogue's wards.
+- **All four are PERMITTED WITH CONDITIONS under CC BY 4.0, and nothing is
+  owed to any ward.** Each ward's default no-copying rule gives way to its
+  open-data terms, so none is in Sendai's position.
+  - **Shibuya**: 渋谷区オープンデータ利用規約, accepted on download from its
+    ArcGIS site; no cost clause. The dashboard's broader 補償 clause governs
+    only the dashboard.
+  - **Taitō**: its licence page puts its オープンデータ一覧 under CC BY 4.0,
+    and the list is on it. It is also on the Tokyo catalogue as a link-only
+    entry, so both sets of terms apply, and they agree.
+  - **Setagaya**: 世田谷区オープンデータ利用規約 §2. Not on the Tokyo catalogue.
+  - **Meguro**: BODIK's `131105/tos/`, the Tokyo template with the ward's
+    name.
+- **Cost clauses.** Setagaya's §4 and Meguro's 第8項 match Tokyo §6 (Meguro's
+  character for character), and Taitō inherits Tokyo §6. All fall within the
+  owner's Japan-wide acceptance, so nothing new goes to the owner.
+- **The credits differ by ward.** Taitō prescribes a no-warranty sentence,
+  Setagaya a 「改変して利用」 form, and Meguro a labelled catalogue link. So the
+  Tokyo page needs per-ward credits, not only the catalogue's combined
+  notice. The forms are in `docs/data_sources.md` (Japan section) and
+  `tokyo.md`.
+- **Two corrections and one find.**
+  - `tokyo.md` said Taitō's file carries operators' home addresses. The ward
+    masks individual operators at source (※, 2,738 of 7,676 rows), and the
+    unmasked operators are almost all companies. The project reads none of
+    those columns either way.
+  - Meguro's barber, beauty and laundry registers, listed as deferred in the
+    brief, are on BODIK under the same licence. They are not yet joined.
 
 ### 2026-09-24 - Japan: cost clauses accepted country-wide; N03 never drawn; Kyoto before Tokyo
 
@@ -449,6 +531,54 @@ onwards; the early ones are split by phase rather than by hour.
   which stays last. The order is now Osaka → Kobe → Sapporo → Fukuoka → Kyoto
   → Tokyo.
 
+### 2026-09-24 - Renderer: dark-mode line labels lifted to 4.5:1, the legend's style repaired; a check for both
+
+- **A line label under 4.5:1 in dark mode now carries its own lighter shade**
+  (owner's call, "lighten failing labels", among three options). Dark mode is
+  the default theme. It lifts labels with `brightness(1.8)`, which scales each
+  sRGB channel and so does nothing for a colour whose light is all in blue.
+  `pipeline/linecolour.py` gains `contrast_ratio`, `brightened` and
+  `dark_label_colour`. For a failing label, `dark_label_colour` returns the
+  colour with its HSL lightness raised by the smallest 0.01 step that reads at
+  4.5:1 against `DARK["page"]` after the same filter. `add_line_label` puts that
+  shade in `--dm-label`, and one dark-theme rule applies it. The filter's
+  factor now comes from the same constant as the CSS, so the two cannot drift.
+  Light mode, passing labels and the lines themselves are untouched. **17 of
+  235 labels changed, in 15 cities.** Seven moved visibly:
+  - Porto Alegre's Trensurb `#000080` to `#3e3eff`, 1.91 to 4.86:1;
+  - Rio's VLT Linha 1 and Salvador's Linha 2-Azul `#0000FF` to `#3d3dff`,
+    2.18 to 4.76:1;
+  - Milan's M4 `#0000ee` to `#3c3cff`;
+  - Belo Horizonte's Linha 2 `#2F1F85` to `#4d35d0`;
+  - Calgary's and Edmonton's `#082F49` to `#0d4a72`.
+
+  The other ten changed by a shade or two: Barcelona's Vallvidrera
+  funicular, Boston's and Madrid's blues, Chicago's Purple and Brown, Mexico
+  City's Línea 9 and Tren Ligero, Paris's Ligne 14, Toronto's Line 2 and
+  Vancouver's Expo Line.
+- **The legend's inline style no longer breaks at its font list.**
+  `FONT_STACK` quotes family names in double quotes, and the legend's `style`
+  is a double-quoted attribute, so `"Segoe UI"` closed it. Every legend lost
+  its 13 px size, its shadow and every fallback font, and rendered in
+  Leaflet's Latin-only default. The inline copy now uses single quotes.
+  `position` and `bottom` came before the break, which is why the attribution
+  clamp held throughout.
+- **`scripts/check_map_markup.py` checks both, over every committed map**,
+  because neither showed up in any browser script. Run against HEAD's Porto
+  Alegre map it fails three ways: 1.91:1, font-size and box-shadow missing.
+  After the fix it reports PROBLEMS 0 on 39 maps and 235 labels.
+  **Light-mode contrast is reported, not failed: 145 of 235 labels are under
+  4.5:1 on their white halo**, most of them yellows and oranges. Examples:
+  Milan's M3 `#fcff01` 1.08:1, São Paulo's Linha 4 1.40:1, Washington's
+  Yellow 1.46:1. The owner's call covered dark mode only, so this is raised
+  as its own question rather than fixed by extension.
+- **All 39 maps re-rendered**, with every city's data linked into this
+  worktree (Copenhagen's from its own worktree, since the main checkout has
+  none). Ring counts were unchanged. `check_render_current.py`,
+  `check_provenance.py`, `check_scope_disclosure.py` and
+  `check_no_fetch_in_steps.py` all pass. A `map-chrome` deploy check,
+  including dark mode, comes before the push this gate was waiting for.
+
 ### 2026-09-24 - Japan's licence reads consolidated into data_sources.md; five were never read
 
 - **Consolidated every Japanese licence read into `docs/data_sources.md`** (the
@@ -476,6 +606,28 @@ onwards; the early ones are split by phase rather than by hour.
   - Whether one decision covers every Japanese source, as it did for Taiwan,
     is raised to the owner (`PLAN.md`).
 - `check_provenance.py`: all recorded.
+### 2026-09-24 - Brazil deployed; the live site measured after the reboot
+
+- **The nine Brazilian cities are live, checked after the owner's reboot.**
+  The branch was pushed as `adcfe16` (master had moved 9 commits since the
+  deploy check, none under `app/`, so a merge was all that was needed; it
+  brought Kyoto into Band A, and the master list now reads 39 built, Band A 12,
+  22 candidates). The live Overview offers South America (9), frames all nine
+  with São Paulo's name west, Rio's east and Santos's below, and its caption
+  accounts for 39 cities. Each of the nine pages carries its approved title
+  and a caption dated from provenance ("file dated 2024-05-20", "files" on the
+  four regional pages, Rio's with its two rail sources, Santos's "VLT lines and
+  stops"). Each map renders with the OpenStreetMap credit, at zooms of 11.25
+  (São Paulo), 11.75 (Rio), 12.5 (Belo Horizonte), 12 (Brasília), 12.5
+  (Salvador), 12.25 (Fortaleza), 11 (Porto Alegre), 12.5 (Recife) and 13.5
+  (Santos) in the 854 px pane. Notices 38 and 39 and the OpenStreetMap
+  credit's Brazil clause are shown, and no page has an exception. Rome's base
+  layer reads "Rome Metro and Roma–Viterbo Business Density Heatmap".
+  Chicago, spot-checked, still renders with its own notice. The
+  `sao-paulo-*-tmp` launch entries were removed.
+- **The next push waits for the two renderer fixes** (owner, same day), so
+  this entry and the PLAN tick stay on the branch until then.
+
 ### 2026-09-24 - Brazil's batch deploy check passed; two renderer defects shipped now, fixed next (owner)
 
 - **One `deploy-verify` (`city-added`) over all nine cities PASSED**, at

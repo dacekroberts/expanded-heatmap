@@ -21,37 +21,44 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [~] **🇧🇷 BRAZIL - NINE CITIES publishing 2026-09-24, on `sao-paulo-build`.**
-  São Paulo, Rio de Janeiro, Belo Horizonte, Brasília and Salvador, and
-  Fortaleza, Porto Alegre, Recife and Santos as regional builds - one national
-  CNEFE module (`pipeline/countries/brazil*.py`, `pipeline/taxonomies/brazil_cnefe.py`)
-  and the `brazil-city` skill.
-  - [x] Owner: the classifier written by this session; region "South America";
-    rules version 2; CPTM Line 9 drawn and Lines 7, 8, 10-13 not.
-  - [x] Owner: the rail test for commuter and diesel lines; SuperVia Deodoro
-    and Saracuruna drawn; Belford Roxo, Santa Cruz and Fortaleza's
-    Parangaba-Mucuripe VLT out; the Fortaleza and Recife regional scopes kept;
-    Santos Linha 2 drawn with its hours.
-  - [x] Owner: all nine pages' text, notices 38-39, the OSM credit and the
-    exclusions sections approved as drafted.
-  - [x] Pages 31-39, notices 38-39 and the OSM credit, `cities.py` (South
-    America, labels scored PROBLEMS 0), docs, master merged, re-rendered on
-    the current renderer (Rome's title too) - DECISIONS, "Brazil's nine
-    cities to the app".
-  - [x] ONE `deploy-verify` (`city-added`) for the batch - PASSED;
-    `check_deploy_imports` PROBLEMS 0.
-  - [ ] Fetch, merge, push, reboot (cities.py and components.py change),
-    live check.
-  - [ ] AFTER PUBLISH: remove the `sao-paulo-*-tmp` launch entries.
-  - [ ] **BLOCKS THE NEXT DEPLOY (owner: "ship now, fix after" and "fix
-    before next deploy") - no further push until these land: two renderer
-    defects the batch's deploy check found, both older than Brazil** - (1) dark mode
-    cannot lift pure blue / navy line labels (Porto Alegre 1.91:1, Rio VLT 1
-    and Salvador L2 2.18:1, Belo Horizonte L2 2.85:1; Barcelona, Calgary and
-    Edmonton alike); (2) the legend's inline `style` breaks at its font list
-    (`map_common.py:432`, a double quote inside a double-quoted attribute).
-    Fix both once in `pipeline/map_common.py`, re-render all maps,
-    `check_render_current.py`, a `map-chrome` deploy check, push.
+- [ ] **🛠 LINE-LABEL CONTRAST, BOTH THEMES - build before Rotterdam, verify in
+  Rotterdam's deploy check** (owner 2026-09-24: "push the verified dark-mode
+  fixes first, then build the swap and include it in Rotterdam's deploy check").
+  The renderer gate itself closed with the push of the dark-mode and legend
+  fixes (DECISIONS, "Renderer fixes verified and pushed").
+  - [ ] **Correct the dark model**: the `brightness(1.8)` filter also
+    brightens the halo (renders `#132039`, not `#0B1220`), so 44 of 235 labels
+    are under 4.5:1 against what is drawn, and Vancouver's Expo Line has no
+    margin (4.49 as the browser truncates). Drop the filter; give every
+    dark-mode label an explicit colour measured against the halo actually
+    drawn, channels truncated as the browser does; `check_map_markup.py`
+    measures the same way.
+  - [ ] **Light-mode halo swap** (owner-approved over darkening): a label
+    under 4.5:1 on white keeps its colour and takes the halo it reads better
+    on - dark for 139 of 145, white for 6 - and the 13 mid-tones that miss on
+    both get the smallest lightness step away from their halo (at most
+    ΔE 3.7).
+    `check_map_markup.py` then FAILS light mode too.
+  - [ ] Re-render all maps with Rotterdam's; one `deploy-verify` for
+    Rotterdam covering `city-added` and `map-chrome` (both themes).
+
+- [ ] **NEXT BUILDS (owner, 2026-09-24): 🇳🇱 Rotterdam, then 🇹🇼 Taiwan** -
+  Rotterdam's deploy check also verifies the label-contrast work above. Rotterdam is
+  Amsterdam's shape (permit-notice food layer rebuilt from the Gemeenteblad,
+  BAG shop units, CBS vacancy) - `docs/build_briefs/rotterdam.md`. Taiwan:
+  Taipei (Regional), Taichung, Taoyuan; write a `taiwan-city` skill after the
+  first (owner). This replaces the earlier order Hong Kong, Taiwan, Seoul,
+  Japan; what follows Taiwan is to be confirmed.
+
+- [x] **🇧🇷 BRAZIL - NINE CITIES BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24**,
+  as one batch on `sao-paulo-build`: São Paulo, Rio de Janeiro, Belo
+  Horizonte, Brasília and Salvador, and Fortaleza, Porto Alegre, Recife and
+  Santos as regional pages - one national CNEFE module and the `brazil-city`
+  skill. All text, notices 38-39 and the five batch calls approved by the
+  owner; one `deploy-verify` passed; pushed `adcfe16`; live after the owner's
+  reboot (every page, caption, map, notice and the South America view
+  measured). `sao-paulo-*-tmp` launch entries removed. See DECISIONS, "Brazil
+  deployed; the live site measured after the reboot".
 
 - [x] **🇳🇱 AMSTERDAM - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro
   50-54 and 16 trams, gemeente 0363: **13,238 storefronts, 144 stations**;
@@ -685,9 +692,12 @@ brief names.
     boundaries as a map may need GSI's approval under the Survey Act, and
     that question is open. The maps never draw a boundary, so nothing is
     blocked. The rule is in `japan.city_boundary()` and every Japanese brief.
-  - [ ] **Four Tokyo wards whose terms were never read**: Shibuya (its ArcGIS
-    site), Taitō, Setagaya and Meguro (BODIK). Only their hosts were
-    accepted. Four `licence-read` runs, due before Tokyo's build.
+  - [x] **Four Tokyo wards whose terms were never read**: Shibuya (its ArcGIS
+    site), Taitō, Setagaya and Meguro (BODIK). **Read 2026-09-24 (owner):
+    all PERMITTED WITH CONDITIONS, CC BY 4.0, nothing owed.** Their cost
+    clauses are within the Japan-wide acceptance, and Shibuya has none. Each
+    needs its own credit. Found on the way: Meguro's 生活衛生 registers on BODIK
+    (Tokyo's still-unknown list).
   - [x] **The fault-based cost clauses: ✅ ACCEPTED by the owner
     2026-09-24 for every Japanese source**, as for Taiwan. That covers
     Fukuoka 第４条, Hiroshima 第3条 and MHLW 免責 1) エ, beside Tokyo's and

@@ -903,9 +903,11 @@ rail. The `brazil-city` skill carries the traps, and
 `scripts/measure_rail_backbone.py` answers two of the rail test's three parts
 from cached OSM.
 
-Next is another new country rather than a new city: the owner's order after
-Brazil is Hong Kong, Taiwan, Seoul, then Japan, with a per-country skill
-written after the first Taiwanese and the first Japanese city. New
+Next is Rotterdam, the Netherlands' second city, then Taiwan (the owner's
+order of 2026-09-24, revising an earlier Hong Kong, Taiwan, Seoul, Japan).
+Taiwan and Japan each get a per-country skill written after their first city.
+The two renderer fixes Brazil's deploy check found go first: the owner gated
+the next deploy on them. New
 Orleans and Seattle remain deferred, both needing decisions before code. Take
 the candidate ordering from `docs/city_master_list.md`, which is current state;
 `docs/global_country_shortlist.md` is its evidence trail, and the `add-country`
