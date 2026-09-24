@@ -35,10 +35,11 @@ reads it directly and never runs the pipeline. Each `heatmap.html` embeds
 material derived from third-party sources that this project does not own and
 therefore cannot license to anyone:
 
-  * transit line geometry, redrawn from each agency's GTFS `shapes.txt`, and
-    station names and positions from `stops.txt`;
-  * business trade names and mapped coordinates, derived from municipal and
-    state licence registers;
+  * transit line geometry and station names and positions, redrawn from each
+    operator's published feed or layers, or from OpenStreetMap where no usable
+    feed exists;
+  * business trade names and mapped coordinates, derived from municipal,
+    state and national business registers;
   * basemap tiles, fetched at view time from their provider rather than
     stored here.
 

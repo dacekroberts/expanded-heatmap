@@ -16,11 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**287 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**288 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Discard table gets evidence columns and a check; five more rows to the open gap (owner)](#2026-09-24---discard-table-gets-evidence-columns-and-a-check-five-more-rows-to-the-open-gap-owner)
+- [GitHub repo reviewed: README brought current, LICENSE's disclaimer kept where Edmonton relies on it](#2026-09-24---github-repo-reviewed-readme-brought-current-licenses-disclaimer-kept-where-edmonton-relies-on-it)
 - [Discard audit: 12 single-method rows to the open gap (owner); Amsterdam re-probed on its own host and moved to Band C](#2026-09-24---discard-audit-12-single-method-rows-to-the-open-gap-owner-amsterdam-re-probed-on-its-own-host-and-moved-to-band-c)
 - [Rome to Band A with a build check: 95,493 premises joined to ANNCSU at 95.7%, both licences CC BY 4.0, a 2.60x control to settle at build](#2026-09-24---rome-to-band-a-with-a-build-check-95493-premises-joined-to-anncsu-at-957-both-licences-cc-by-40-a-260x-control-to-settle-at-build)
 - [Barcelona's notification adjourned](#2026-09-24---barcelonas-notification-adjourned)
@@ -364,6 +365,38 @@ onwards; the early ones are split by phase rather than by hour.
   Touched `docs/city_master_list.md`, `docs/global_country_shortlist.md`,
   `scripts/check_discard_evidence.py`, `CLAUDE.md`,
   `.claude/skills/add-country/SKILL.md`, `.claude/skills/consistency-sweep/SKILL.md`.
+### 2026-09-24 - GitHub repo reviewed: README brought current, LICENSE's disclaimer kept where Edmonton relies on it
+
+- **The README described a fourteen-city, GTFS-only project; it now lists all
+  four regions by country, with no hand-kept total.** Found by reviewing the
+  GitHub repository end to end. There were no open PRs, issues, releases or
+  stray branches (only `master` and `worktree-staging`), and no stray or
+  secret files among the 449 tracked. Fixed in the README: the city list
+  (Mexico's and Europe's cities were missing, and `app/cities.py` is now named
+  as the list the app reads), "every transit line is drawn from real GTFS
+  geometry" (Mexico City and Guadalajara use OpenStreetMap), the geocoding
+  step (New York and Toronto have one too), "business-license data" (France,
+  Mexico and Norway use national registers), and the repository guide
+  (`city_master_list.md`, not `city_shortlist.md`, plus `data_sources.md`).
+
+- **Rejected after being approved: splitting LICENSE so GitHub detects MIT.**
+  GitHub reports `NOASSERTION` because LICENSE carries a scope section after
+  the MIT text, and the plan was to move that section to a sibling
+  `DATA_NOTICE.md`. The owner approved it; the pointer search that followed
+  found that **Edmonton's compliance is recorded as resting on it**.
+  `docs/data_sources.md` and `app/components.py` both say Edmonton's "without
+  introducing any further restrictions" is satisfied because "the
+  repository's own LICENSE explicitly disclaims MIT over everything under
+  `outputs/`". A plain-MIT LICENSE would read as covering that data, so the
+  split changes a licence position, not just a layout. Brought back to the
+  owner, who chose to keep it. Only its stale wording changed ("GTFS
+  `shapes.txt`" and "municipal and state licence registers"). The README now
+  says why GitHub cannot name the licence.
+
+- **The GitHub About panel needs the owner:** the description ("…Covers
+  multiple cities in US…", with "commerical" misspelled) is out of date, and
+  the Website field and topics are empty. This project never handles GitHub
+  credentials, so replacement text was handed to the owner to paste.
 
 ### 2026-09-24 - Discard audit: 12 single-method rows to the open gap (owner); Amsterdam re-probed on its own host and moved to Band C
 
