@@ -1898,6 +1898,14 @@ The national catalogue (the on-disk export, 52,436 datasets) lists **3,342 Kaohs
 
 **The way through is the publisher, not the network**: 高雄市政府民政局 could publish the file on data.gov.tw or lift the filter for it. Until then Kaohsiung stays in Band B.
 
+#### ▲ 2026-09-24 — Czechia: RŽP's *provozovny* ARE reachable in bulk, as a batched search
+
+Asked by the build session after Prague paused on RES (a register of seats). **NKOD**'s SPARQL endpoint timed out on a full-text query over titles and descriptions — a cost failure, not an answer. `rzp.gov.cz` and ARES's developer page are JavaScript apps that a plain fetch sees empty. **ARES v3's own OpenAPI spec** (`/ekonomicke-subjekty-v-be/rest/v3/api-docs`, 132,958 B) answered it: besides the per-IČO `GET /ekonomicke-subjekty-rzp/{ico}` there is **`POST /ekonomicke-subjekty-rzp/vyhledat`**, whose filter accepts paging and — as a live call showed, since an empty filter is refused with `VSTUP_PRAZDNY` — **a list of IČOs**. Its schema `ProvozovnaZaklad` carries `icp` (the establishment's own number), `nazev`, `typProvozovny`, `platnostOd`/`platnostDo`, and `sidloProvozovny`, a full address **with `kodAdresnihoMista`** — the RÚIAN address-point code Prague's join already matches at 99.8%.
+
+**One call, two retail chains** (Billa 00685976, Albert 44012373): HTTP 200, both full records (1.2 MB and 1.4 MB), **1,258 and 1,723 establishment entries carrying `kodAdresnihoMista`**, of which Praha 259 and 398; `typProvozovny` codes 1 (the large majority), 0 and 6. Entries repeat per licence and include ended establishments, so a count needs `icp` de-duplication and a `platnostDo` filter.
+
+**So the provozovny exist in bulk, but as a batched search rather than a dump.** Open before Prague resumes: the list-size cap per call; **ARES's terms and rate limits** (unread); the IČO universe — a Praha shop can belong to a subject seated anywhere, so the RES seat filter under-covers and the national CZ-NACE 47/56/96 set is the honest universe; the `TypProvozovny` code list; and the restaurant control against OSM, re-run on establishments instead of seats.
+
 #### A refinement the Korea probe produced: stations are not lines
 
 Japan's N02 carries **both** — 10,235 station points *and* 21,932 line

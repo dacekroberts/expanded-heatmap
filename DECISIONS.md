@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**264 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**265 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Prague: RŽP's establishments are reachable in batches through ARES v3, each with a RÚIAN code; Prague stays paused until measured](#2026-09-24---prague-ržps-establishments-are-reachable-in-batches-through-ares-v3-each-with-a-rúian-code-prague-stays-paused-until-measured)
 - [Prague paused at Step 0: RES is a register of seats, not of shops](#2026-09-24---prague-paused-at-step-0-res-is-a-register-of-seats-not-of-shops)
 - [France deployed: the deferred deploy-verify passed, and phone-width labels clip](#2026-09-24---france-deployed-the-deferred-deploy-verify-passed-and-phone-width-labels-clip)
 - [Rennes' gate 3 confirmed against STAR's own layer after the quota reset](#2026-09-24---rennes-gate-3-confirmed-against-stars-own-layer-after-the-quota-reset)
@@ -306,6 +307,29 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Prague: RŽP's establishments are reachable in batches through ARES v3, each with a RÚIAN code; Prague stays paused until measured
+
+- **Found the bulk route the paused Prague build asked for: ARES v3's
+  `POST /ekonomicke-subjekty-rzp/vyhledat` takes a LIST of IČOs and returns
+  each subject's full trade-register record, every licence's `provozovny`
+  included, each carrying `kodAdresnihoMista`** - the RÚIAN address-point
+  code Prague's join already matches at 99.8%. Found in ARES's own OpenAPI
+  spec after three other routes failed differently (NKOD's SPARQL timed out
+  on cost; the RŽP portal and ARES's developer page are JavaScript apps),
+  then confirmed with one live call on two chains: Billa 1,258 establishment
+  entries (259 in Praha), Albert 1,723 (398). It answers the 2026-09-22
+  screen's "per-ICO lookup with no bulk export": the export is still absent,
+  but a batched search is a pipeline where ~85,000 single lookups are not.
+- **Prague is NOT re-banded yet**: the route is found, not measured. Open:
+  the per-call list cap, ARES's terms and rate limits (unread - a rate gate
+  would disqualify it under `add-country`), the IČO universe (a Praha shop
+  can belong to a subject seated anywhere, so the RES seat filter
+  under-covers), the `TypProvozovny` codes, and the restaurant control
+  re-run on establishments. Rejected: moving Prague back to Band A on one
+  call, which is the n=1 mistake the add-country skill records for Finland.
+  Touched `docs/city_master_list.md` (Prague's gap row),
+  `docs/global_country_shortlist.md`.
 
 ### 2026-09-23 - Four Brazilian cities go regional (owner); Brasilia's dwelling test keys on the lot (owner); neighbours measured
 
