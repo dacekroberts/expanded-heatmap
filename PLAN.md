@@ -590,12 +590,20 @@ brief names.
     two of its rules (菓子製造業 / そうざい製造業; rail). **Osaka is the recommended
   first build**: the cleanest list, 99.1% block, 38 m against the city's own
   coordinates.
-- [ ] **Japan — three owner calls that recur in all five briefs.** Decide them
-  once:
-  1. Do the Shinkansen and limited-express-only lines count as rail?
-  2. What is the scope beyond each city line? JR and the private railways run
-     into neighbouring cities.
-  3. Do 菓子製造業 and そうざい製造業 count as counter shops?
+- [~] **Japan — three owner calls that recur in all five briefs.**
+  1. [x] **The Shinkansen does NOT count** (owner, 2026-09-24): it is
+     long-distance travel between cities.
+  2. [ ] **The scope beyond each city line**: the owner asked for detail
+     first. The business lists are city-only.
+  3. [x] **菓子製造業 and そうざい製造業 COUNT** (owner, 2026-09-24): bakeries,
+     confectioners and delis are counter shops. They join the Retail bucket
+     with the other food-retail permit types.
+  - [ ] Stage 2 carries 1 and 3 into the taxonomy and the five briefs' open
+    items.
+- [ ] **premises-taxonomy skill** — add the São Paulo session's sampling
+  lesson (CNEFE rules v2): words chosen from a sample of unmatched rows rescued
+  14.7% of that sample but 3.5% of all rows. **Measure a rule's yield on a
+  FRESH sample**, never the one it was chosen from.
 - [ ] **Tokyo** — buildable now as 8 wards (owner). The page names the wards
   with no published list. Owner action: request Chiyoda's ledger
   (即時公開請求, a CD-R for ¥100).

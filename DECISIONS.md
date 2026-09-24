@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**320 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**321 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Japan: the Shinkansen is out; confectioners and delis count](#2026-09-24---japan-the-shinkansen-is-out-confectioners-and-delis-count)
 - [Japan's join moved into the pipeline, unchanged, before any Japanese build](#2026-09-24---japans-join-moved-into-the-pipeline-unchanged-before-any-japanese-build)
 - [check_city_registry.py: a merge that fuses two cities' entries now fails](#2026-09-24---check_city_registrypy-a-merge-that-fuses-two-cities-entries-now-fails)
 - [Japan re-banded and the geocoding band closed; Rotterdam to A](#2026-09-24---japan-re-banded-and-the-geocoding-band-closed-rotterdam-to-a)
@@ -362,6 +363,23 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Japan: the Shinkansen is out; confectioners and delis count
+
+- **Owner, 2026-09-24: the Shinkansen does not count as rail for any Japanese
+  city.** It is long-distance travel between cities at large, not the urban
+  and commuter network this project maps. JR's and the private railways'
+  commuter lines stay in (the earlier call). **菓子製造業 and そうざい製造業
+  count**: bakeries, confectioners and delis sell over a counter. They go in
+  the Retail bucket with 食肉販売業 and 魚介類販売業, the food-retail permit
+  types. That is the default, and the owner can move them to Food service.
+  Their counts across the five Band A cities, from the briefs: Osaka 3,580 +
+  1,209, Kobe 2,024 + 611, Sendai 989 + 232 (the permits, before
+  de-duplication). ⚠️ **A share are factories and central kitchens**
+  (そうざい製造業 includes school-lunch caterers). The taxonomy cannot see
+  that, so the build measures it from trade names before publishing, as Rome
+  measured its over-count. The scope beyond city lines is still open: the
+  owner asked for detail first.
 
 ### 2026-09-24 - Japan's join moved into the pipeline, unchanged, before any Japanese build
 
