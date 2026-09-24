@@ -368,8 +368,10 @@ LYON_REQUIRES_ACCOUNT = True
 
 # --- the build sequence -----------------------------------------------------
 #
-# **LYON IS DROPPED FROM THE FOLLOWER SEQUENCE, 2026-09-22.** Not discarded as
-# a city - its data is fine and its 19,449 estimated bucket rows are the third
+# **LYON IS DROPPED FROM THE FOLLOWER SEQUENCE, 2026-09-22.** (Superseded the
+# next day: Lyon was then DISCARDED as a city on four blockers - see
+# `DISCARDED` below. What follows is the 2026-09-22 reasoning, kept as written.)
+# Not discarded as a city - its data is fine and its 19,449 estimated bucket rows are the third
 # largest of the six - but it is no longer a cheap follower, and the whole
 # argument for building France first was that the followers are cheap. Three
 # independent gates, any one of which would be enough:

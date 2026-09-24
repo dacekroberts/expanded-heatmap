@@ -16,12 +16,29 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**277 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**295 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [The Amsterdam process becomes the `reprobe-city` skill (owner's request)](#2026-09-24---the-amsterdam-process-becomes-the-reprobe-city-skill-owners-request)
+- [Amsterdam to Band A (owner): both licences read, the permits credited as CC BY 4.0, brief written](#2026-09-24---amsterdam-to-band-a-owner-both-licences-read-the-permits-credited-as-cc-by-40-brief-written)
+- [Amsterdam: BAG accepted as a second layer, with its vacancy disclosed (owner)](#2026-09-24---amsterdam-bag-accepted-as-a-second-layer-with-its-vacancy-disclosed-owner)
+- [Amsterdam's empty shops: not filterable per unit from open data, but measured at 4.6%](#2026-09-24---amsterdams-empty-shops-not-filterable-per-unit-from-open-data-but-measured-at-46)
+- [Amsterdam's other routes: the gated register is staff-only; BAG measured as a possible retail layer, band question left open](#2026-09-24---amsterdams-other-routes-the-gated-register-is-staff-only-bag-measured-as-a-possible-retail-layer-band-question-left-open)
+- [Discard table gets evidence columns and a check; five more rows to the open gap (owner)](#2026-09-24---discard-table-gets-evidence-columns-and-a-check-five-more-rows-to-the-open-gap-owner)
+- [GitHub repo reviewed: README brought current, LICENSE's disclaimer kept where Edmonton relies on it](#2026-09-24---github-repo-reviewed-readme-brought-current-licenses-disclaimer-kept-where-edmonton-relies-on-it)
+- [Discard audit: 12 single-method rows to the open gap (owner); Amsterdam re-probed on its own host and moved to Band C](#2026-09-24---discard-audit-12-single-method-rows-to-the-open-gap-owner-amsterdam-re-probed-on-its-own-host-and-moved-to-band-c)
+- [Rome to Band A with a build check: 95,493 premises joined to ANNCSU at 95.7%, both licences CC BY 4.0, a 2.60x control to settle at build](#2026-09-24---rome-to-band-a-with-a-build-check-95493-premises-joined-to-anncsu-at-957-both-licences-cc-by-40-a-260x-control-to-settle-at-build)
+- [Barcelona's notification adjourned](#2026-09-24---barcelonas-notification-adjourned)
+- [Stale-prose sweep: 48 unused settings, 37 counts, 2 tense hits read](#2026-09-24---stale-prose-sweep-48-unused-settings-37-counts-2-tense-hits-read)
+- [PLAN.md trimmed of 14 done items; three merged branches deleted](#2026-09-24---planmd-trimmed-of-14-done-items-three-merged-branches-deleted)
+- [Rome is a JOIN: its business register matches ANNCSU on the municipal street code, 92.4% at civic level](#2026-09-24---rome-is-a-join-its-business-register-matches-anncsu-on-the-municipal-street-code-924-at-civic-level)
 - [The Datafordeler key was exposed; it is not rotated, and the account closes after publish](#2026-09-24---the-datafordeler-key-was-exposed-it-is-not-rotated-and-the-account-closes-after-publish)
+- [Open gap probed (Rome reached; Turin, Cairo discarded); Brasília and Recife rail licences read; Taipei's head-office rule tested; the address-join skill](#2026-09-24---open-gap-probed-rome-reached-turin-cairo-discarded-brasília-and-recife-rail-licences-read-taipeis-head-office-rule-tested-the-address-join-skill)
+- [The oslo worktree retired; prague's empty folder kept](#2026-09-24---the-oslo-worktree-retired-pragues-empty-folder-kept)
+- [A check that every map was rendered by the current renderer; the zoom-lag worktree retired](#2026-09-24---a-check-that-every-map-was-rendered-by-the-current-renderer-the-zoom-lag-worktree-retired)
 - [Copenhagen opened: four owner calls, and the brief's coordinate leg is closing](#2026-09-24---copenhagen-opened-four-owner-calls-and-the-briefs-coordinate-leg-is-closing)
+- [Prague back in Band A: establishments from ROS02 open data + RES activity; RŽP rejected on GDPR; the paused control was mis-specified](#2026-09-24---prague-back-in-band-a-establishments-from-ros02-open-data-res-activity-ržp-rejected-on-gdpr-the-paused-control-was-mis-specified)
 - [Two checks closed: the macro map's controls, and clones leaking into %TEMP%](#2026-09-24---two-checks-closed-the-macro-maps-controls-and-clones-leaking-into-temp)
 - [Oslo deployed; the live site measured after the reboot](#2026-09-24---oslo-deployed-the-live-site-measured-after-the-reboot)
 - [Oslo's deploy-verify found two phone-width failures the per-city checks passed](#2026-09-24---oslos-deploy-verify-found-two-phone-width-failures-the-per-city-checks-passed)
@@ -33,6 +50,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 **2026-09-23**
 
+- [Wheel zoom stops discarding notches; cluster animation off](#2026-09-23---wheel-zoom-stops-discarding-notches-cluster-animation-off)
 - [The site says "rapid-transit", not "rail-transit"](#2026-09-23---the-site-says-rapid-transit-not-rail-transit)
 - [gated_access.md: Taiwan's key gate retired, Kaohsiung's request added](#2026-09-23---gated_accessmd-taiwans-key-gate-retired-kaohsiungs-request-added)
 - [The licence-read agent runs the stray-download check before reporting](#2026-09-23---the-licence-read-agent-runs-the-stray-download-check-before-reporting)
@@ -320,6 +338,335 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-24 - The Amsterdam process becomes the `reprobe-city` skill (owner's request)
+
+- **Wrote `.claude/skills/reprobe-city/SKILL.md`** from the Amsterdam
+  re-probe, for the open gap's 17 rows and Band C's one-bucket cities: the
+  city's own host before the national portal; enumerate, don't search, with a
+  nonsense value before trusting any filter; read a 403's authorisation scope
+  rather than work around it; look for a second layer in a different shape (a
+  building register's use class); measure that shape's defect and look for a
+  per-unit filter before settling for a disclosed rate; control each layer on
+  its own; one `licence-read` agent per source in parallel; record with the
+  discard check and the master list's four count sites.
+- Chose a skill over a doc section because a skill is what a session loads at
+  the moment of work, and the lesson this project keeps relearning is that a
+  lesson filed beside the work does not reach the next city (`osm-rail`'s
+  opening). The per-country use-class targets for Band C (Sweden, Switzerland,
+  Denmark, Norway, Czechia, Spain, Finland) are labelled ASSERTED - probe
+  targets, not findings. Pointers added in `CLAUDE.md` and the master list's
+  open gap and Band C sections.
+
+### 2026-09-24 - Amsterdam to Band A (owner): both licences read, the permits credited as CC BY 4.0, brief written
+
+- **Read both licences** (two `licence-read` runs). **BAG - PERMITTED**: the
+  Kadaster's terms govern the national fields used - *"geldt de Creative
+  Commons Public Domain Mark v1.0"* - and PDOK's geo-register record says *"Geen
+  beperkingen"*; Amsterdam's copy is SILENT and incorporates nothing, so only
+  national BAG fields are used (the city's "BAG-plus" fields carry no licence).
+  **Hospitality permits - SILENT**: the live schema has no `license` key (55 of
+  the city's 141 schemas carry one, so the omission is this dataset's), the API
+  says `Licentie: -`, and the city's unversioned `cc-by` lived in a retired
+  catalogue record (live 2023-09-26, 404 by 2026-01-18); data.overheid.nl's
+  "4.0" is the national catalogue's mapping. Databankenwet art. 8(2) and
+  Auteurswet art. 15b put government databases and works outside protection
+  unless reserved, and no reservation was found.
+- **Owner's call: display the permits as CC BY 4.0** - credit Gemeente
+  Amsterdam, link the licence, state the filtering and mapping - because it
+  satisfies both readings. Rejected: a plain credit, which matches today's
+  silence but falls short if the old grant binds.
+- **Owner's call: Band A.** Brief `docs/build_briefs/amsterdam.md`, 8/8 checks
+  live. Its open items are build-time calls (trams, four permit categories,
+  1,061 mixed-use units, de-duplication), as Rome's and Oslo's were. Rejected:
+  staying in Band C until those are answered. Also recorded: the city will make
+  an API key mandatory from an unset date - a form the owner fills in, never
+  this project; and nothing may present the map as the official permit record.
+- Counts: candidates 34 (A 18 · B 10 · C 5 · D 1), open gap 17, discarded 16.
+  Touched `docs/build_briefs/amsterdam.md`, `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md`.
+
+### 2026-09-24 - Amsterdam: BAG accepted as a second layer, with its vacancy disclosed (owner)
+
+- **Owner's decision: BAG shop-class units become Amsterdam's second layer**
+  beside the hospitality permits, on the condition that the page discloses the
+  vacancy rate (wording along the lines of *"about 5% of shop units are empty
+  (Locatus, 2026)"*). Empty shops were the owner's one concern and measured at
+  4.6% (entry below); the missing names and activity were accepted.
+- **What it commits the build to**: two layers, food (permits) and shop
+  premises (BAG); **retail and personal services share one category**, because
+  BAG's use class cannot separate them - every other city splits them, so the
+  page says so; units that are shop-class in BAG AND hold a hospitality permit
+  (takeaways) are de-duplicated by address at build.
+- **Conditional on two licence reads, run the same night**: BAG's (Kadaster
+  and Amsterdam's copy) and the permits', whose SILENT-with-conflict position
+  is unresolved. If both pass, a build brief is written and the band question
+  goes to the owner; Amsterdam stays in Band C until then. Supersedes the
+  "OPEN (owner)" line in `docs/city_master_list.md`, rewritten to match.
+
+### 2026-09-24 - Amsterdam's empty shops: not filterable per unit from open data, but measured at 4.6%
+
+- **Found no open source that marks a BAG unit empty**, answering the owner's
+  one concern about a BAG retail layer. `standvastgoed/gebouwen` (134 fields
+  per address, keyed to BAG) carries no occupancy field;
+  `energieverbruik_mra` is per neighbourhood; Locatus and the KvK hold the fact
+  per unit but are paid or staff-only (not pursued).
+- **Found the rate instead**: the city's `bbga` statistics publish Locatus's
+  vacant sales points - **660 of 14,314 on 1 January 2026, 4.6%**, 0-7% by
+  district (Centrum 4.0%, 208 of 5,001), with a rate for all 110 *wijken* and
+  465 of 545 *buurten*. So about one BAG shop in twenty is likely empty -
+  disclosable on the page, not removable from it. A per-neighbourhood discount
+  was considered and not proposed: pins would still include the empty units,
+  and no other city is adjusted that way. Band question still OPEN for the
+  owner; licences of BAG and `bbga` not read. Touched
+  `docs/city_master_list.md`, `docs/global_country_shortlist.md`.
+
+### 2026-09-24 - Amsterdam's other routes: the gated register is staff-only; BAG measured as a possible retail layer, band question left open
+
+- **Listed all 100 datasets on `api.data.amsterdam.nl/v1/`** rather than
+  searching. The earlier "383 datasets" (entry below, 2026-09-24) was dataset
+  and table paths counted as datasets; corrected in the master list and the
+  shortlist. Nothing premises-shaped beyond what was already known:
+  shopping-area polygons (`winkelgebieden`, 142), terrace tariff zones (11),
+  B&B and mooring permits, city-owned property.
+- **The two gated datasets are staff-only by their published schema**:
+  `hr_kvk` carries scopes `FP/MDW` and `HR/R`, `standbedrijven`
+  `BSK/BEDRIJVEN`. Read from `schemas.data.amsterdam.nl`, no credentials sent.
+  So a written access request, the one legitimate route to them, is unlikely
+  to be granted; not drafted.
+- **Measured BAG on the same API as a possible second layer**: 10,898
+  verblijfsobjecten with use class *winkelfunctie* and status *in gebruik*,
+  every one current and with a point, 9,837 (90%) shop-only; **1.77x** OSM's
+  6,150 `shop=*` in the gemeente (overpass-api.de; the other host 504'd).
+  Server-side filter confirmed with a nonsense-term control (0). But BAG
+  records what a unit is built for, not what is there: no name, no activity,
+  `feitelijkGebruik` empty on all 10,898 - vacancies count, and personal
+  services share the class. Licence not read.
+- **Left OPEN for the owner**: whether a use-class layer may stand in for a
+  register's retail bucket. It would be the first source of that shape here,
+  and the answer also decides Rotterdam's re-probe, since BAG is national.
+  Amsterdam stays in Band C meanwhile. Touched `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md`.
+
+### 2026-09-24 - Discard table gets evidence columns and a check; five more rows to the open gap (owner)
+
+- **Gave the discard table three columns - Kind, Methods, City host asked? -
+  and wrote `scripts/check_discard_evidence.py` to decide them**, the proposal
+  in the entry below. Kinds: absence, coverage, measured, terms, rail. An
+  *absence* or *coverage* row rests on something NOT being found, so it needs
+  the city's own host asked and two methods, or one that enumerated a whole
+  catalogue or measured a register; *measured*, *terms* and *rail* rows rest on
+  something that exists and was read, and need one. Each method opens with its
+  shape (search, enumerated, measured, read; blocked counts for nothing). It
+  also checks the heading's count, and `--selftest` watches it fail eight ways.
+  Rejected: the two proposed columns alone (a column nothing reads decays as
+  the prose did), and a flat "two methods for every row" rule, which would have
+  failed Tel Aviv and Jakarta - discards on a thing that exists and was read -
+  and a guard that cries wolf gets disabled.
+- **Filling the columns from the probe trail failed five of the 21 rows the
+  audit had just passed**: Naples and Messina (one search of the city's portal
+  each), Santiago and Lima (coverage verdicts that never asked the missing
+  comunas' or districts' own sites), and Hyderabad (GHMC's own host blocked,
+  403 F5 WAF, never diagnosed from inside India - Kaohsiung's shape). The audit
+  had sorted on the rows' wording again, the failure its own entry named.
+  **Owner's call: all five to the open gap**, below the twelve, cheapest probe
+  first. Rejected: Hyderabad straight to Band D (not yet known to be a block),
+  and an owner-kept override (the exception that let thin rows through before).
+- Weakest survivors, recorded so they are not read as strong: Sofia, Valencia,
+  Málaga, Zagreb and Jakarta pass on ONE method - a whole catalogue enumerated,
+  or the register measured - and Berlin on two searches.
+- Fixed on the way: the by-country table (built 24 -> 26; Italy and Egypt rows;
+  a Netherlands row for Amsterdam; "+ 3 in the open gap" -> 17) and the "two
+  rules" section's Germany sentence, stale since Hamburg left the discards.
+- Counts: candidates 34 (A 17 · B 10 · C 6 · D 1), open gap 17, discarded 16.
+  Touched `docs/city_master_list.md`, `docs/global_country_shortlist.md`,
+  `scripts/check_discard_evidence.py`, `CLAUDE.md`,
+  `.claude/skills/add-country/SKILL.md`, `.claude/skills/consistency-sweep/SKILL.md`.
+### 2026-09-24 - GitHub repo reviewed: README brought current, LICENSE's disclaimer kept where Edmonton relies on it
+
+- **The README described a fourteen-city, GTFS-only project; it now lists all
+  four regions by country, with no hand-kept total.** Found by reviewing the
+  GitHub repository end to end. There were no open PRs, issues, releases or
+  stray branches (only `master` and `worktree-staging`), and no stray or
+  secret files among the 449 tracked. Fixed in the README: the city list
+  (Mexico's and Europe's cities were missing, and `app/cities.py` is now named
+  as the list the app reads), "every transit line is drawn from real GTFS
+  geometry" (Mexico City and Guadalajara use OpenStreetMap), the geocoding
+  step (New York and Toronto have one too), "business-license data" (France,
+  Mexico and Norway use national registers), and the repository guide
+  (`city_master_list.md`, not `city_shortlist.md`, plus `data_sources.md`).
+
+- **Rejected after being approved: splitting LICENSE so GitHub detects MIT.**
+  GitHub reports `NOASSERTION` because LICENSE carries a scope section after
+  the MIT text, and the plan was to move that section to a sibling
+  `DATA_NOTICE.md`. The owner approved it; the pointer search that followed
+  found that **Edmonton's compliance is recorded as resting on it**.
+  `docs/data_sources.md` and `app/components.py` both say Edmonton's "without
+  introducing any further restrictions" is satisfied because "the
+  repository's own LICENSE explicitly disclaims MIT over everything under
+  `outputs/`". A plain-MIT LICENSE would read as covering that data, so the
+  split changes a licence position, not just a layout. Brought back to the
+  owner, who chose to keep it. Only its stale wording changed ("GTFS
+  `shapes.txt`" and "municipal and state licence registers"). The README now
+  says why GitHub cannot name the licence.
+
+- **The GitHub About panel needs the owner:** the description ("…Covers
+  multiple cities in US…", with "commerical" misspelled) is out of date, and
+  the Website field and topics are empty. This project never handles GitHub
+  credentials, so replacement text was handed to the owner to paste.
+
+### 2026-09-24 - Discard audit: 12 single-method rows to the open gap (owner); Amsterdam re-probed on its own host and moved to Band C
+
+- **Found Amsterdam's discard ("register is aggregate") rested on the top
+  hits of one national search**, with the city's own host never asked. Its
+  DSO API answers: the KvK register (`hr_kvk`) is gated to authorised users
+  (403, not worked around), and KvK's national HVD open dataset cuts
+  addresses to two postcode digits; but **`horeca/exploitatievergunning`
+  holds 4,094 live hospitality permits** - all granted, every end date
+  2026-2031, 96.7% with a point - at **0.89x** OSM restaurants. Licence read:
+  **SILENT** (the live API declares none; a 2022 harvest of the retired
+  catalogue said CC BY 4.0 - flagged, not resolved in the project's favour).
+  **Moved to Band C** (one bucket), beside Stockholm, Göteborg and Zurich.
+- **Audited all 34 discards** (a read-only pass, corrected by hand where it
+  searched city names and the evidence sat under the country). 21 rest on two
+  methods, a measured register, or their terms. **12 rested on one method** -
+  a national portal only, the city never asked, or one search's top hits.
+  **Owner's call: all 12 to the open gap** as a re-probe queue in order -
+  Vienna, Rotterdam, Helsinki, Lisbon, Kuala Lumpur, Tallinn, Warsaw,
+  Hamburg, Riga, Athens, Poznań, Bratislava - each keeping its evidence and
+  naming its next probe. Rejected: keeping them as flagged discards (the
+  list's own rule says a single-method negative is asserted, not found), and
+  moving only the top five. Eight countries left "Countries ruled out";
+  **Germany is no longer a country-level negative** (Hamburg's row was one
+  search term).
+- **Why the 2026-09-23 sweep missed these**: it checked discard rows for the
+  words "unprobed" and "not reached", and a one-search negative worded as a
+  finding passed. Proposed, not done: give the discard table *methods used*
+  and *city host asked?* columns, so a thin row shows in the row itself.
+- Counts: candidates 34 (A 17 · B 10 · C 6 · D 1), open gap 12, discarded
+  21. Touched `docs/city_master_list.md`, `docs/global_country_shortlist.md`.
+
+### 2026-09-24 - Rome to Band A with a build check: 95,493 premises joined to ANNCSU at 95.7%, both licences CC BY 4.0, a 2.60x control to settle at build
+
+- **Screened Rome in full** (owner-approved download of the July 2025
+  register, 25,646,982 B). 168,255 rows are **155,448 establishments** keyed on
+  (STRUTTURA_GESTIONE, NUMERO_ESERCIZIO) - the number alone restarts per
+  municipio - and **95,493** fall in the three buckets (retail 65,107, food
+  19,223, personal 11,163), with more food and personal trades inside the
+  *Laboratorio Artigianale* catch-all for the taxonomy to take at build.
+  `DATA_INIZIO` is an Excel serial; starts run to 4,146 in January-July 2025,
+  so the stock is live. The register carries **no names**.
+- **The join, all rows: 95.7% civic-level** (92.0% exact on street code +
+  civic + suffix, 3.7% suffix ignored), 4.2% street centroid, 0.2% unmatched;
+  every municipio at 90.9% or better. The Municipio I sample's 92.4% was
+  lower, not a flattering ceiling.
+- **Both licences read: CC BY 4.0, PERMITTED WITH CONDITIONS** - SUAP by
+  the portal's own Licenze page and each resource's `A21_CCBY40` code; ANNCSU
+  by dati.gov.it, with the EU HVD regulation mandating CC BY 4.0 or looser for
+  addresses. Credit, licence link and a statement of modification each; no
+  wording prescribed; no act owed.
+- **The control reads 2.60x** (SUAP food service 19,223 against OSM's 7,405
+  food-and-drink amenities), above France's and Prague's range, and cannot
+  be sharpened because the register does not separate restaurants from bars.
+  **Owner's call: Band A with a build check** - compare with OSM street by
+  street, split the excess by start year, then an age cut-off or a stated
+  over-count. Rejected: holding Rome until the city explains closures (a
+  question the owner would have to send), and accepting 2.60x silently.
+  Distinguished from Prague: Prague's register recorded seats, Rome's records
+  premises.
+- **Rail**: OSM A, B/B1, C and Metromare, all coloured; **a Metro D relation
+  exists for an unbuilt line and must be excluded** (Tel Aviv's trap);
+  Metromare's inclusion is an owner call at build.
+- Counts: candidates 33 (A 17 · B 10 · C 5 · D 1); the open screening gap is
+  empty. Touched `docs/build_briefs/rome.md` (new, 6/6 live),
+  `docs/city_master_list.md`, `docs/global_country_shortlist.md`.
+
+### 2026-09-24 - Barcelona's notification adjourned
+
+- **Owner's decision: the notification to Barcelona City Council is
+  adjourned until a working contact channel exists.** Raised by the
+  stale-prose sweep as an open obligation on a live city. Both 2026-09-22
+  attempts had failed (the portal form stalled after its hCaptcha; the named
+  electronic office timed out), the electronic registry needs a Spanish
+  digital certificate, and no email address is published. A fresh look on
+  2026-09-24 found no valid route either. The clause sets no deadline, so the
+  map stays up and the draft stays ready. `docs/gated_access.md` item 2 now
+  records the pause, so later sweeps read it as deliberate, not as a gap.
+
+### 2026-09-24 - Stale-prose sweep: 48 unused settings, 37 counts, 2 tense hits read
+
+- **Three corrections out of 87 flagged lines. The rest were read and are
+  right as written.** `check_stale_claims.py` categories D, B and A, each
+  item read in context. **D (48 config settings no script reads):** almost
+  all are deliberate records - rejected options kept so the rejection is
+  checkable (`STALE_BOUNDARY_IDS`, `CKAN_RESOURCE_ID_2024_INCOMPLETE`) and
+  measurements kept as provenance (`NAF25_POPULATED_MEASURED`), each saying
+  so. One comment contradicted the file it sits in: `countries/france.py`
+  said Lyon was "Not discarded as a city" above a `DISCARDED` setting dated
+  the next day. It now carries a dated superseded note, with the original
+  reasoning kept as written. `barcelona/config.py`'s "the other sixteen
+  cities" became "every other city". **B (37 hand-kept counts):** scoped
+  facts that stay true - "all five boroughs", "the two Mexican cities", "the
+  nine US cities", "all fourteen cities before Mexico City" - apart from
+  `docs/licenses/france-licence-ouverte-2.0.md`, where SIRENE served "all six
+  cities" including the discarded Lyon; it now reads "every French city", a
+  category rather than a number. `docs/france_step0_endpoints.md`'s "all six
+  cities" describes the six screened and stays. **A (2 future-tense hits):**
+  the map-view skill's "not yet a finding" is correct. Barcelona's
+  notification "drafted, not yet sent" is also correct: `docs/gated_access.md`
+  item 2 agrees. That makes it an open owner action on a live city, raised
+  with the owner rather than edited.
+
+### 2026-09-24 - PLAN.md trimmed of 14 done items; three merged branches deleted
+
+- **PLAN.md loses 201 lines (1,695 to 1,494), all of them done items that
+  already have their DECISIONS entry, and `scripts/check_plan_done.py` now
+  reports what is next in line.** PLAN.md's own legend says a `[x]` item
+  "stays only until its DECISIONS.md entry exists"; nothing enforced it, and
+  43 had piled up in the file every session reads first. The report sorts
+  each done item three ways: REMOVABLE (it cites an entry that exists),
+  CANDIDATE (a best-effort match on date and words), or KEEP?. Its matches
+  are only a starting point - it paired Boston with "Residence exposure
+  checked" - so nothing was removed on its word. An item went only when an
+  exact DECISIONS heading was found for it by hand AND it held no open work:
+  no `[ ]` sub-item, and none of "left behind", "still open", "to settle",
+  "not yet" or TODO. That filter kept Miami, Madrid/Barcelona, Korea's
+  "do not attempt" item and the stale-claims one. A second, manual read kept
+  Washington D.C., whose follow-ups are phrased in other words ("Worth
+  deciding whether the drift check should say so"). The deploy-gate sweep
+  item stays because `app/pages/9_Washington_DC_Heatmap.py` points readers
+  to it. **Removed:** Oslo, France, the label fix, the zoom fix, New York,
+  Mexico, Lyon (its reinstatement test lives in its DECISIONS entry and in
+  `docs/gated_access.md` rows 17-18), the three fetch/geocoder/DENUE
+  refactors, the category-B pass, rings off by default, the catch-all sweep,
+  Canada's re-ranking, and Vancouver. The diff is deletions only. Report-only
+  by design: some done items are kept on purpose.
+
+- **Deleted `dublin-build`, `milan-build` and `spain-app-wiring` on
+  GitHub**, on the owner's instruction. Each had 0 commits outside master,
+  re-checked immediately before, so every commit remains reachable from
+  master. `worktree-staging` stays; the Staging Session uses it.
+### 2026-09-24 - Rome is a JOIN: its business register matches ANNCSU on the municipal street code, 92.4% at civic level
+
+- **Downloaded ANNCSU's Lazio address list** (owner-approved,
+  24,574,080 B, dated 2026-09-15) and found **Roma's 516,337 civic numbers
+  carry the municipal street code and WGS84 coordinates on 100% of rows** -
+  and the street code is the SUAP register's own `CODICE_VIA` (440 = Arco
+  degli Acetari in both). **Measured on the 1,916-row Municipio I sample
+  already on disk: 91.6% exact on (street code, civic, suffix), 0.8% with
+  the suffix ignored - 92.4% at civic level - 5.5% at street centroid, 2.1%
+  unmatched**, 27 of the 40 in Galleria Termini, the station's shopping
+  arcade (premises with no civic number, Taipei's market-stall shape).
+- **Rome no longer rests on an absence**, so the gap row now says what is
+  left before Band A: the full register's counts and composition (a ~26 MB
+  monthly file, not yet downloaded), both licence reads, rail, and the
+  register's age (newest file July 2025). Not moved to Band A on a
+  one-municipio sample - the historic centre is the best-addressed part of
+  the city, so the rate is a ceiling until the other municipi are measured.
+- **Italy is no longer a Milan-only country**; ANNCSU is national, but its
+  fill varies by comune (empty for the first comune in the Lazio file), so
+  every Italian city must be checked on its own rows. Touched
+  `docs/city_master_list.md`, `docs/global_country_shortlist.md`.
+
 ### 2026-09-24 - The Datafordeler key was exposed; it is not rotated, and the account closes after publish
 
 - **Owner decision: the build's Datafordeler API key stays in use although it
@@ -347,6 +694,101 @@ onwards; the early ones are split by phase rather than by hour.
   history - and the instruction, given up front, to describe an error in words
   rather than screenshot it. Korea's `data.go.kr`, Taiwan's TDX and Japan's
   ODPT are all registration-gated, so this recurs.
+
+### 2026-09-24 - Open gap probed (Rome reached; Turin, Cairo discarded); Brasília and Recife rail licences read; Taipei's head-office rule tested; the address-join skill
+
+- **Rome reached, not yet placed.** The SUAP register is real and
+  premises-level (location as street code + civic number, activity as a
+  macro class and a description, CC BY declared, monthly to July 2025); the
+  recorded TLS failure was this project's trust store. It has no
+  coordinates. **ANNCSU**, Italy's national house-number archive, publishes
+  the municipal street code and coordinates per civic number as open data,
+  but both fields are empty for the first comune in the Lazio file - whether
+  Roma's rows fill them decides the city, and needs one 24.6 MB download the
+  owner has not yet approved. Kept in the gap with that row rewritten.
+- **Turin and Cairo discarded**, two methods each. Turin: the city's CKAN
+  and Italy's national catalogue agree the premises stock stops at 2019.
+  Cairo: the Governorate's own site has no data section, only a curated
+  tourism guide of ~220 restaurants for a city of 10 million (the Kuala
+  Lumpur coverage trap); CAPMAS nationally serves HTML only. Discarded 34,
+  open gap 1.
+- **Brasília's IPEDF rail layers: PERMITTED** (public domain on every
+  layer, backed by DF decree 38.354/2017). **Recife's CBTU file: ODbL,
+  PERMITTED WITH CONDITIONS**, no obligation while it stays a cross-check;
+  flagged, not resolved in the project's favour, that CBTU rather than the
+  city is its rightsholder and nothing shows CBTU authorised the label.
+- **Taipei's head-office rule survives the department-store test**, because
+  the tax register holds only the store operator (1-4 rows per store, 20 over
+  ten stores, 0 dropped): counters are not registered there, so **a
+  department store draws as one point** - a disclosure, like Brazil's
+  malls. Refinement measured: exempting addresses with 20+ storefront rows,
+  the rule drops 6,650. Market stalls counted: 5,239 rows (6.8%). The first
+  run matched nothing because the register inserts 里/鄰 between district and
+  street - recorded in the new skill as "a measurement near zero usually
+  means the matcher is wrong".
+- **Japan's national catalogue ignores its search parameter** (18,140 for a
+  nonsense term) and, enumerated whole, holds no municipal food permit at
+  all; the per-city portals are the route.
+- **Wrote the `address-join` skill** (owner's yes): the seven-step method
+  from `docs/geocoding_retrospective.md` as a checklist, with tonight's
+  traps added (in-country reachability via Globalping, HEAD refused where GET
+  works, the key coarser than the address, a register's premises published
+  by a different agency). Pointed to from `CLAUDE.md`, `add-country` and the
+  retrospective; the 01:12 Japan run was re-created to open it first.
+### 2026-09-24 - The oslo worktree retired; prague's empty folder kept
+
+- **Retired `.claude/worktrees/oslo` and deleted `oslo-build`, on the owner's
+  word that Oslo was finished.** Checked first: 0 commits outside master (last
+  `7875bcc`, "Oslo deployed"), a clean tree, no links anywhere in the folder,
+  and no `data/<city>` cache that the main checkout lacked. The Main Building
+  Session confirmed it had launched in the main checkout and now works in
+  `copenhagen`, so no session held the folder. `git worktree remove` completed
+  in one pass, with no long-path stop despite the folder's own `.venv-lean`.
+  **`.claude/worktrees/prague` is kept on the owner's instruction.** It is an
+  empty folder, unregistered with git and with no branch, left by an
+  interrupted session. Prague has since been re-upgraded to viable by
+  staging's research, so a build may use that folder again.
+
+### 2026-09-24 - A check that every map was rendered by the current renderer; the zoom-lag worktree retired
+
+- **`scripts/check_render_current.py` fails any committed map that lacks, or
+  carries an older version of, a shared block the current
+  `pipeline/map_common.py` injects.** Proposed by the zoom-lag session, and
+  the owner asked whether cleanup should make future cities follow its
+  changes. A convention would not have caught the failure that happened: Oslo
+  was built on a branch while `WHEEL_ZOOM_SCRIPT` landed on master, and its
+  committed map shipped without it until that session happened to re-render
+  it. Only a full `drift_check.py` would have noticed. This check takes
+  seconds and runs no pipeline. **Derived from the source, not listed:**
+  every module-level `*_SCRIPT` / `*_HTML` / `*_CSS` string the module also
+  references, split at its per-city slots (`__NAME__` and `{field}`), with
+  every fixed piece required verbatim. That catches a stale EDIT, not only a
+  missing block. Two rules came from the first control runs. A piece that also
+  occurs in another block is dropped, because every script block opens with
+  the same boilerplate, which let Oslo's pre-wheel map read as an "older
+  version" of a script it never had. A block whose whole text sits inside
+  another (`_LEGEND_BOTTOM_CSS`, inside `LEGEND_HTML`) is a fragment and is
+  covered by its container. **Controls:** Oslo at `719ad23` →
+  `WHEEL_ZOOM_SCRIPT is MISSING`; Rennes before the label fix → the label and
+  wheel scripts MISSING; a current map with `PAD = [26, 19]` →
+  `PHONE_FIT_SCRIPT is an OLDER version`. All 26 committed maps pass, with 7
+  blocks derived. Not covered: per-city options such as `animate_clusters`,
+  and anything outside these blocks, which stays `drift_check.py`'s job.
+
+- **Retired the zoom-lag session's worktree (`gallant-brattain-00d045`) and
+  deleted `claude/gallant-brattain-00d045`.** The owner authorised this when
+  the task was created. Every stated fact was re-checked, not taken from the
+  message: 0 commits outside master, a clean tree, and the session idle,
+  confirmed by the owner after it first read as running. Its one junction
+  (`data\france\raw` → the shared SIRENE pair) was the only reparse point
+  anywhere in the folder, and was removed alone and non-recursively. Both
+  files kept their exact size and timestamps before and after. No city cache
+  existed only there. `git worktree remove` stopped at `Filename too long`
+  (263 characters inside `.venv-lean`) after unregistering the worktree; a
+  whole-folder re-scan found 0 reparse points, and the rest went with
+  `rmdir /s /q "\\?\…"`. An empty folder stays, locked by the still-open idle
+  session, to be removed once it is closed. Both obstacles are now step 4 of
+  the retirement procedure in `docs/session_roles.md`.
 
 ### 2026-09-24 - Copenhagen opened: four owner calls, and the brief's coordinate leg is closing
 
@@ -455,6 +897,46 @@ onwards; the early ones are split by phase rather than by hour.
   file's generation and refuses a MIXED set instead - the four entities
   already on disk are generation 505, and the next generation is built 03:00-
   06:00 Danish time on Saturday 26 September.
+### 2026-09-24 - Prague back in Band A: establishments from ROS02 open data + RES activity; RŽP rejected on GDPR; the paused control was mis-specified
+
+- **Moved Prague from the open screening gap back to Band A**, on the
+  owner's instruction to resolve the ambiguity first and park it awaiting
+  permission only if it stood. It did not stand, because a different source
+  made it moot. **ROS02** (*Registr osob – aktivní provozovny*, Digitální a
+  informační agentura, open data under 106/1999 § 5a) lists every active
+  establishment with its RÚIAN address code; joined to RES by IČO for
+  activity, it gives **27,065** Praha storefront establishments (retail
+  9,492 · food 8,037 · personal 9,536), 5,057 of them owned from outside
+  Praha. Both downloads (58,507,315 B and RÚIAN's 3,395,881 B Praha file)
+  were approved by the owner. **ROS02's terms read in full: PERMITTED** - all
+  four data.gov.cz declarations are "does not contain", including no
+  personal data, which the national terms guide calls an assurance of no
+  legal restriction; nothing to display.
+- **Found that the restaurant control which paused Prague was
+  mis-specified**: it set all of CZ-NACE 5610 (restaurants, fast food,
+  cafés, stands) against OSM `amenity=restaurant` alone, where every French
+  city compared NAF 56.10A. Like-for-like (restaurant + fast_food + cafe +
+  food_court + ice_cream = 4,652): **RES's seats read 4.48x, not 8.02x - the
+  pause was still right** - and **ROS02's establishments read 1.63x** (1.55x
+  without sole traders at their own seat), inside France's 1.26-1.80x.
+- **Rejected ARES's RŽP search as the source**, though it works (100 IČOs a
+  call, 500 calls a minute, 4,038 calls nationally) and carries a premises
+  type. Trade Licensing Act § 60(6) was the first worry and **does not reach
+  it**: the 2017 bill's separate ban on republishing the online public part
+  was struck in committee (tisk 1014, resolution 386), and ÚOOÚ reads the ban
+  as covering only a sestava. **GDPR does**: ÚOOÚ fined a site mirroring sole
+  traders' RŽP data in 2019 (UOOU-10201/18-31) because the trade register is
+  not open data. Rejected too: building on the permitting reading of §
+  60(6), and parking Prague awaiting permission, both of which ROS02 made
+  unnecessary.
+- **One owner call left for the build**: sole traders. ROS02's publisher
+  declares no personal data, but ~80% of the subjects are natural persons;
+  1,429 establishments (5.3%) sit at a sole trader's own seat. Recommended
+  in the brief: exclude those, and names only when they are trade names.
+- Counts: candidates 32 (A 16 · B 10 · C 5 · D 1, with Oslo built the
+  same day), open gap 3. Touched
+  `docs/build_briefs/prague.md` (business leg, licence, open items, two new
+  checks), `docs/city_master_list.md`, `docs/global_country_shortlist.md`.
 
 ### 2026-09-24 - Two checks closed: the macro map's controls, and clones leaking into %TEMP%
 
@@ -523,6 +1005,145 @@ onwards; the early ones are split by phase rather than by hour.
   dark themes; the three new notices linked; Paris's label below its dot, clear
   of Lille and Rennes, at every width; all 26 pages free of error blocks.
 
+### 2026-09-23 - Wheel zoom stops discarding notches; cluster animation off
+
+- **Live-verified after the push (`b8b2931`, no reboot: the push changed
+  nothing under `app/`).** Headless Edge on the deployed site, each page
+  loaded fresh, the map reached in its own frame. Paris embedded at 1000:
+  `check_map_view.js` zoom 12.5 against 12.5, 0 problems; the served map
+  carries the patched wheel handler and `animate: false` on all three cluster
+  groups; five trusted notches 60 ms apart zoomed 12.5 -> 17.5 (steps 13.5,
+  16.5, 17.5), settling in 1,579 ms, and the view held six seconds later with
+  `touched` set and 0 corrections. Paris at 343 (a 375 phone): 11 against 11,
+  0 problems, five notches 11 -> 16 in 1,192 ms, held. Oslo at 1000: 11.5
+  against 11.5, 0 problems, 11.5 -> 16.5 in 1,148 ms, held. Before this
+  change the same five notches zoomed Paris 1.5 levels.
+
+- **Oslo landed on master during this gate and was re-rendered on the change
+  before pushing.** Its map had been built without `WHEEL_ZOOM_SCRIPT`, so a
+  plain merge would have shipped 25 cities with the fix and one without it.
+  `drift_check.py oslo`: only `heatmap.html` drifted, additions only (72
+  lines, as in every three-bucket city); the other 25 maps identical to master.
+  `check_map_view.js` 8 fresh loads at 1280/854/375/343, `check_map_labels.js`
+  at the same four widths and `check_map_attribution.js` at four heights: 0
+  problems. Three notches after load zoomed it three levels at 1280 and 375,
+  and the view held six seconds with 0 corrections. The push's `app/` diff
+  against `origin/master` is empty, so no reboot.
+
+- **deploy-verify (`scope: map-chrome`) passed, and found one residual gap in
+  the wheel merge, measured as rare and left open.** Embedded in the app from
+  `.venv-lean`: Paris, Toulouse, New York and Boston render cleanly, the view
+  is right untouched at 1000 and 343 with 0 corrections, a real notch took
+  Paris 12.5 -> 13.5 and the view held for 8 s with `touched` set, and cluster
+  clicks, +/-, the legend, the layer control and the theme button all work;
+  its own 25-city sweep of the three checks matched the one above.
+  `check_deploy_imports.py` passed; nothing under `app/` changed, so no reboot.
+  **The gap:** Leaflet starts a zoom animation on the NEXT frame, so until one
+  is drawn `_animatingZoom` is false and `getZoom()` is still the old zoom. A
+  second wheel batch firing in that window is computed from the old zoom, and
+  the last target wins - notches lost. deploy-verify produced it by sending
+  notches while its pane drew no frames (16.25 -> 15.25 instead of 11.25).
+  Measured with trusted input in a rendering browser, it did not occur: five
+  notches 45 ms apart - each batch just past Leaflet's 40 ms debounce, the
+  worst spacing - zoomed Paris 12.5 -> 17.5 and New York 10.5 -> 15.5 in all
+  six runs (`profile_zoom.mjs`, new `wheel45` case). It needs the main thread
+  to go 40 ms without a frame between batches. Stock Leaflet has the same
+  window, so it is not a regression. If it is ever seen, the fix is small:
+  treat the map as busy from the `setZoomAround` call until the next
+  animation frame, not only while `_animatingZoom` is set.
+
+- **The mouse wheel felt laggier than +/- because Leaflet DISCARDED most of a
+  fast roll, not because the wheel was slow - measured, and the opposite of
+  the recorded hypothesis.** The owner reported wheel zoom and cluster-click
+  zoom as laggy. `.claude/skills/map-view/` had put it down to a wheel gesture
+  walking through many quarter levels (`zoomSnap` 0.25). Profiled on Paris
+  (84,125 heat points, the heaviest map) and Toulouse (the light one) with
+  `scripts/profile_zoom.mjs`, committed for the next such question: headless
+  Edge driven over the DevTools protocol, so the wheel events were trusted
+  input rather than synthetic, with a timer around every map event, the heat
+  layer's redraw and long tasks; median of three fresh loads per case. The browser pane was not used: hidden, it pauses animation frames and
+  no zoom completes at all. **Leaflet 1.9's `_tryAnimatedZoom` returns early
+  while a zoom animation is running**, so every wheel step that fires during
+  the 250 ms animation is dropped. On the committed map, three notches in
+  50 ms zoomed Paris 0.75 of a level and five notches in 240 ms 1.5 levels -
+  the reader rolls again and waits again, which reads as lag. One notch was
+  also 0.75 of a level against a button's 1, because the wheel snaps to
+  `zoomSnap`. The first wheel step starts ~67 ms after the notch (Leaflet's
+  40 ms debounce plus a frame) against ~15 ms for a click; left alone. The
+  hypothesis held only for a TRACKPAD: many small deltas walked Paris through
+  4 quarter-steps and 4 heat redraws in a half-second swipe.
+  **Every zoom step, wheel or button, then blocks Paris's main thread
+  ~130-200 ms**: markercluster re-clustering its three groups at `zoomend`
+  (~60-110 ms) and Leaflet.heat redrawing all 84,125 points at `moveend`
+  (~65-75 ms), followed by markercluster's own ~300 ms split/merge animation.
+  Toulouse pays about a quarter of that.
+
+- **Decided, by the owner: one wheel notch zooms one whole level and nothing
+  is discarded; trackpads keep Leaflet's own curve.** `WHEEL_ZOOM_SCRIPT` in
+  `pipeline/map_common.py` replaces the map's `scrollWheelZoom` handler: a
+  step due during an animation waits for it to land and is merged with
+  whatever arrived meanwhile; a batch containing a notch-sized event (at least
+  25 normalised units - Chrome/Edge on Windows give 50 per notch, Firefox's
+  line mode 60) zooms one level per notch, capped at `zoomAnimationThreshold`
+  so it still animates; anything finer keeps Leaflet's curve and quarter snap
+  verbatim. **Rejected, measured: whole levels for all input.** With nothing
+  discarded, a half-second trackpad swipe went from 12.5 to 19. **Rejected:
+  only stopping the drops**, offered and declined in favour of matching the
+  buttons. `zoomSnap` is untouched (`_fit_view`, the guard and
+  `check_map_view.js` all depend on it); a whole step from x.5 lands on x.5,
+  so wheel and buttons now share one ladder of zooms. The guard's touch
+  detection is untouched too - a capture listener on the container, which
+  runs before this handler.
+
+- **Decided, by the owner: markercluster's split/merge animation is off, with
+  `render_heatmap(animate_clusters=...)` kept as a per-city switch.** The map
+  still animates its own zoom; clusters regroup at the end instead of flying
+  apart. Recorded for re-implementation per the owner: a light map could have
+  it back, and the owner's suggested rule is a measured lag threshold - open
+  in `PLAN.md`. `add_pin_layer` passes it to `FastMarkerCluster(options=)`.
+
+- **Before and after, same harness, both on master's label clamp (`cadf14e`),
+  median of three fresh loads.** Settle = last map event handled.
+
+  | Paris | before | after |
+  |---|---|---|
+  | +/- click, settle | 647 ms | 366 ms |
+  | cluster click (3,592 pins), settle | 818 ms | 428 ms |
+  | cluster click, longest task | 192 ms | 152 ms |
+  | 1 notch | 0.75 level | 1 level |
+  | 3 notches in 50 ms | 1.25 levels, 1 step | 3 levels, 2 steps |
+  | 5 notches in 240 ms | 1.5 levels, 2 steps, 1,023 ms | 5 levels, 3 steps, 1,393 ms |
+  | 4 notches 300 ms apart | 3 levels, 2,752 ms | 4 levels, 2,636 ms |
+  | trackpad swipe (30 x 8 px) | 1.0 level, 4 steps | 2.25 levels, 6 steps |
+
+  | Toulouse | before | after |
+  |---|---|---|
+  | +/- click, settle | 588 ms | 299 ms |
+  | cluster click (504 pins), settle | 602 ms | 310 ms |
+  | 5 notches in 240 ms | 1.5 levels | 5 levels |
+
+  The three-notch "before" read 0.75 of a level in an earlier run of the same
+  case - how much of a roll survives depends on where the notches fall against
+  the animation, which is the defect. The heat redraw (~65 ms per step on
+  Paris) is unchanged; deferring it to the end of a burst was considered and
+  not built, because with notches merged there are fewer steps to save it on,
+  and a heat canvas left CSS-scaled between steps would be a visible change.
+
+- **Verification, all 25 cities, headless Edge at real viewports (the pane
+  was hidden).** `drift_check.py --jobs 4`: every `heatmap.html` drifted and
+  nothing else, and with Folium ids and line endings normalised each diff is
+  additions only - 72 lines, 71 in Boston and Philadelphia, which have two
+  buckets and so one fewer `"animate": false`. Baseline figures unchanged
+  where recorded. `check_provenance.py --strict` all recorded.
+  `check_map_view.js` at 1280, 854, 375 and 343: 100 fresh loads, 0 problems,
+  0 guard corrections. `check_map_labels.js` at 375, 343, 854 and 1280: 0
+  clipped, 0 over the credit; the 28 overlapping pairs in seven cities and
+  the labels under the legend in Edmonton and San Diego are the ones `PLAN.md`
+  already records. `check_map_attribution.js` at 1000x650, 1000x768, 1000x812
+  and 1280x1000: 100 runs, 0 problems. **The guard still yields to the wheel**:
+  three notches after load on Paris, Toulouse and New York at 1280, 854 and
+  375 zoomed each three levels, set `touched`, and the view was unchanged six
+  seconds later with 0 corrections.
 ### 2026-09-24 - Oslo built: 10,718 storefronts, 155 stations, and Norway's first city
 
 - **Oslo is the 26th city and Norway's first, built off a register of PREMISES

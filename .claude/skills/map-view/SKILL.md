@@ -102,7 +102,13 @@ re-run the action you are blaming before you blame it.**
 
 ## Related, and not this skill
 
-Wheel zoom and cluster-click zoom feel laggy compared with the +/- buttons.
-That is a PERFORMANCE question about how many fractional zoom levels a wheel
-gesture walks through (`zoomSnap` is 0.25), and it is separate from whether the
-map opens at the right view. Do not tune the guard to address it.
+Wheel zoom and cluster-click zoom felt laggy compared with the +/- buttons.
+That was a separate question from whether the map opens at the right view, and
+it was answered on 2026-09-23 by `WHEEL_ZOOM_SCRIPT` and `animate_clusters` in
+`pipeline/map_common.py` - see `DECISIONS.md`. The hypothesis written here
+before it was measured ("how many fractional zoom levels a wheel gesture walks
+through") held only for a trackpad; a mouse wheel did the OPPOSITE, zooming
+less than asked because Leaflet discards every step that fires during a zoom
+animation. Both fixes leave the guard alone: its touch detection is a capture
+listener on the container, which runs before the wheel handler. Do not tune
+the guard for zoom feel, and do not change `zoomSnap` for it.

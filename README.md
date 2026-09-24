@@ -9,13 +9,21 @@ A multi-city map of how commercial activity clusters around rapid-transit
 stations. For each city it shows retail, food-service and personal-service
 businesses by distance from the nearest station (0-0.1, 0.1-0.2, 0.2-0.3 and
 0.3-0.6 miles), as heat layers, distance rings and clustered category pins.
-Every transit line is drawn from real GTFS geometry, labelled with its public
-name, and listed in a collapsible legend.
+Every transit line is drawn from its operator's published geometry, or from
+OpenStreetMap where no usable feed exists, labelled with its public name, and
+listed in a collapsible legend.
 
-Mapped so far: San Diego, San Francisco, Los Angeles, Chicago, New York,
-Philadelphia, Miami (regional), Boston, Washington D.C., Vancouver (regional,
-with Surrey), Montréal, Calgary, Edmonton and Toronto — fourteen cities, nine
-of them in the United States and five in Canada.
+Mapped so far:
+
+- **United States:** San Diego, San Francisco, Los Angeles, Chicago, New York,
+  Philadelphia, Miami (regional), Boston, Washington D.C.
+- **Canada:** Vancouver (regional, with Surrey), Montréal, Calgary, Edmonton,
+  Toronto
+- **Mexico:** Mexico City, Guadalajara (regional)
+- **Europe:** Madrid, Barcelona, Dublin, Milan, Paris, Marseille, Toulouse,
+  Lille (regional), Rennes, Oslo
+
+The list the app itself reads is `app/cities.py`.
 
 **Read every map as a snapshot of a public register on its retrieval date**,
 redrawn and filtered, not as a census of what is open. Registers lag the
@@ -33,7 +41,7 @@ route symbol is reproduced.
 The project is split in two so the deployed app stays light.
 
 - **Pipeline (offline):** per-city scripts in `pipeline/<city>/` turn raw
-  transit and business-license data into `outputs/<city>/` (a station list,
+  transit and business-register data into `outputs/<city>/` (a station list,
   an excluded-stations audit file, and a self-contained `heatmap.html`).
   Heavy dependencies (geopandas, folium) live only here.
 - **App (deployed):** a Streamlit app in `app/` that reads `outputs/` and
@@ -55,8 +63,10 @@ python pipeline/<city_slug>/step2_clean_businesses.py
 python pipeline/<city_slug>/step3_map.py
 ```
 
-Los Angeles and Washington D.C. each have an extra geocoding step
-(`step3_geocode.py`), so their map script is `step4_map.py`. Washington D.C.
+Los Angeles, New York, Toronto and Washington D.C. each have an extra
+geocoding step (`step3_geocode.py`), so their map script is `step4_map.py`.
+Some cities also have a `fetch_sources.py`, which does their downloading; a
+numbered step never fetches. Washington D.C.
 also needs a free WMATA API key in `WMATA_API_KEY` before
 `pipeline/washington_dc/fetch_sources.py` will run, and its transit feed is
 only valid for ten days at a time. Raw data is not committed; each `step1`/`step2`
@@ -77,7 +87,8 @@ python -m venv .venv-lean
 | `docs/project_context.md` | Stable briefing: scope, architecture, lessons |
 | `DECISIONS.md` | Append-only log of every judgment call |
 | `PLAN.md` | Open work |
-| `docs/city_shortlist.md` | Which cities are viable, and why others were ruled out |
+| `docs/city_master_list.md` | Which cities are candidates next, what is stopping each, and which were ruled out |
+| `docs/data_sources.md` | Every source, its endpoint, retrieval date and terms |
 | `CLAUDE.md` | Working conventions and invariants |
 | `.claude/skills/add-city/` | Step-by-step process for adding a city |
 
@@ -90,13 +101,15 @@ Ridership and deeper analysis are out of scope.
 
 ## Licence
 
-**The code is MIT.** See `LICENSE`.
+**The code is MIT.** See `LICENSE`, which also states what that grant does
+not cover. (That added scope section is why GitHub does not name the licence
+as MIT; it is kept there deliberately, because one source's terms rely on it.)
 
 **The data is not, and could not be.** `outputs/<city>/` is committed so the
 deployed app can read it without running the pipeline, and each `heatmap.html`
 embeds material derived from sources this project does not own: transit line
-geometry redrawn from agency GTFS feeds, and business names and coordinates
-from municipal and state licence registers. Their terms range from
+geometry redrawn from operator feeds or OpenStreetMap, and business names and
+coordinates from municipal, state and national registers. Their terms range from
 public-domain dedications to a feed that forbids modifying its data and one
 that prohibits redistributing it to third parties; two say nothing about reuse
 at all, and at least two are revocable without notice.

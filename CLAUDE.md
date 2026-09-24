@@ -49,6 +49,20 @@ are already banked there (endpoints, columns, CRS, traps, required notices, and
 an explicit list of what is still unknown). It is a cache, not a prerequisite:
 no brief means `add-city` Step 0 as usual, never waiting for one.
 
+**Does the register have addresses but no coordinates? Use `address-join`**
+(`.claude/skills/address-join/`) **before writing any geocoder.** Prague,
+Copenhagen, Brazil and Taiwan each looked like a geocoding project and each
+turned out to publish an address file that already carries the coordinate,
+so the work became a join measured against a control city - or nothing.
+Japan is the next one through it.
+
+**Re-probing a city the screen left thin - an open-gap row, or a one-bucket
+city in Band C? Use `reprobe-city`** (`.claude/skills/reprobe-city/`).
+Amsterdam went from discard to Band A in one evening on probes the first
+screen never ran: the city's own host, its whole catalogue, the scope on a
+403, and a second layer in a different shape (a building register's use
+class), with that shape's defect measured before the owner was asked.
+
 **Is the city's rail coming from OpenStreetMap rather than GTFS? Use
 `osm-rail`** (`.claude/skills/osm-rail/`). Mexico City and Guadalajara both
 needed it - one because every agency host is unreachable, one because the only
@@ -353,9 +367,13 @@ python scripts/check_no_fetch_in_steps_selftest.py      # watch that check fail 
 python scripts/check_scope_disclosure.py                # every city's rail AND business scope reaches the published page
 python scripts/check_scope_disclosure_selftest.py       # watch that check fail 8 ways; touches nothing
 python scripts/check_stray_downloads.py                 # untracked files at ANY checkout's root - where browser-pane downloads land
+python scripts/check_render_current.py                  # every committed map carries the CURRENT renderer's shared blocks; run after merging
+python scripts/check_plan_done.py [--verbose]           # REPORTS only: PLAN.md's [x] items and which already have their DECISIONS entry
 python scripts/check_stale_claims.py                    # REPORTS only: prose that stopped being true (stale tense, drifted counts)
 python scripts/check_stale_claims.py --only E           # "the only city"/"no other city" claims: re-read whenever a city lands
+python scripts/check_discard_evidence.py [--selftest]   # every discard row carries enough evidence for its kind; run when the discard table changes
 python scripts/check_deploy_imports.py [--ref REF]      # clean clone + lean venv: run before ANY push touching app/
+node scripts/profile_zoom.mjs <baseUrl> <city,city> [reps]   # wheel/click/cluster zoom lag, headless Edge, trusted input
 python scripts/decisions_index.py [--check]             # refresh DECISIONS.md's index
 python scripts/merge_append_only.py DECISIONS.md [--dry-run]   # resolve an append-only merge conflict
 python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon>   # add --dry-run first

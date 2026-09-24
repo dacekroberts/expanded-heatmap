@@ -4,7 +4,7 @@
 
 | # | Source | Used for |
 |---|---|---|
-| 1 | **SIRENE `StockEtablissement`** (INSEE) | the business register, all six cities |
+| 1 | **SIRENE `StockEtablissement`** (INSEE) | the business register, every French city |
 | 2 | **INSEE geolocation file** | the `siret` coordinate join |
 | 3 | **Marseille GTFS** (Métropole d'Aix-Marseille-Provence) | rail |
 | 4 | **Lille GTFS** (Métropole Européenne de Lille) | rail |

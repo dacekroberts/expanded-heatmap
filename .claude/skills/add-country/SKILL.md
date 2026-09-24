@@ -73,6 +73,12 @@ reason is "not reached", "unprobed" or a regional pattern **is not a discard at
 all** - it belongs in the still-open band. Re-read the discard list against the
 probe log whenever either changes.
 
+**Reading it did not hold either, so a script reads it now.** On 2026-09-24 an
+audit passed 21 discard rows and, the same night, filling in evidence columns
+from the probe log failed five of them. The table carries *Kind*, *Methods*
+and *City host asked?* per row, and `python scripts/check_discard_evidence.py`
+refuses an absence resting on one search or on a host nobody asked.
+
 **The FIRST record an API returns is not a random one, and n=1 is not a
 measurement.** Finland was ruled out on a single record - the first the PRH
 API returned, a financial holding company with an empty street, a PO box and a
@@ -547,6 +553,9 @@ may have no address either - Edmonton's placeholders, Vancouver's rentals and
 contractors.
 
 #### ⛔ Before writing ANY geocoder: find the address file that already carries the coordinate
+
+**The procedure is the `address-join` skill** — find the file, measure the join
+against a control, report tiers, read the misses. This section is why.
 
 **Four for four, the same week.** Every country this project filed under
 "geocoding at national scale" turned out to publish an address-point file

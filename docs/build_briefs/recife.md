@@ -49,8 +49,18 @@ first name at a dwelling address is **301 (1.2%)**.
 CBTU, maintainer EMPREL): `estacoes-de-trem-do-grande-recife.geojson`, 11,899 B
 — **36 station points** (`name` only; OSM also counts 36) and **six line
 strings whose `name` carries line, length and status** (*"Linha Sul (diesel)
-- 17,6 km / Cajueiro Seco - Cabo / Operação em VLT"*). Declared licence
-**ODbL** in CKAN and the data dictionary — **not read**. ⚠️ **It reads like a
+- 17,6 km / Cajueiro Seco - Cabo / Operação em VLT"*). Licence: **ODbL, PERMITTED WITH
+CONDITIONS — READ 2026-09-24.** As a **cross-check only**, no ODbL obligation
+attaches. If any station point from it reaches the published table, the
+table is a Derivative Database: the §4.3 notice (*"Contains information from
+Malha Viária de Trens do Grande Recife, which is made available here under
+the Open Database License (ODbL)"*) and the §4.6 offer, discharged by the
+public repository linked from the site — the Toulouse/Rennes mechanism.
+⚠️ **Not resolved in the project's favour**: Recife's own open-data decree
+authorises reuse of data *the municipality* owns and requires third-party
+rightsholders to be named; this file names **CBTU** (federal) as
+responsible, and no document shows CBTU authorised the portal's ODbL label.
+Another reason to keep it a cross-check. ⚠️ **It reads like a
 planning map**: one segment is labelled *"Expansão - 4,7 km / Rodoviária -
 Camaragibe"* while OSM shows Camaragibe in service, so its status text is not
 evidence of today's service. **Recommendation: OSM for geometry and stations

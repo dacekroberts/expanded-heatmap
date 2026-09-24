@@ -21,14 +21,13 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [~] **🇩🇰 COPENHAGEN - building on `copenhagen-build`.** Kobenhavn +
-  Frederiksberg, Metro M1-M4 and S-tog, rail from OSM, coordinates from DAR.
-  Step 1 done (64 stations, gate 3 exact). **Waiting on the owner's
-  Datafordeler fetch** - `Virksomhed`, `Virksomhedsform` and DAR for 0101/0147
-  - which must run **before Friday 25 September, 6 pm Pacific** (the next
-  weekly generation) or the CVR set has to be re-fetched whole with
-  `--refresh-cvr`. Then step 2, the page prose for approval, deploy-verify,
-  publish. See `DECISIONS.md`, *"Copenhagen opened: four owner calls"*.
+- [~] **🇩🇰 COPENHAGEN - built on `copenhagen-build`, not yet published.**
+  Kobenhavn + Frederiksberg, Metro M1-M4 and S-tog, rail from OSM, coordinates
+  from DAR: **14,978 storefronts, 64 stations**, page text and notices 30-31
+  approved by the owner 2026-09-24. Remaining: `excluded_categories.md`
+  section (owner to approve), docs, drift check, city-scoped `deploy-verify`,
+  publish. See `DECISIONS.md`, *"Copenhagen opened: four owner calls"* and the
+  entries after it.
   - [ ] ⏰ **AFTER PUBLISH: the owner closes the Datafordeler account.** Its API
     key was visible in a terminal screenshot shared into the build
     conversation on 2026-09-24 and sits in that terminal's PowerShell history;
@@ -36,35 +35,13 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     only), because closing the account revokes it. Closing is licence-safe
     (CC BY 4.0 is irrevocable); a future refresh means a new free account and
     the 15-minute key propagation. `docs/gated_access.md` item 3.
+  - [ ] ⏰ **AFTER PUBLISH: the owner removes the two `-tmp` entries** from the
+    main checkout's `.claude/launch.json` (`copenhagen-static-tmp`,
+    `copenhagen-app-tmp`). They point into this worktree; the build session
+    was confined to it and could not edit that file itself.
   - [ ] **Next build after Copenhagen: Prague**, on staging's new ROS02 + RES
     business leg (`docs/build_briefs/prague.md`, 12/12), with its sole-trader
     owner call.
-
-- [x] **🇳🇴 OSLO - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** 10,718
-  storefronts, 155 stations, T-bane 1-5 and trams 12-19, Oslo kommune only.
-  City-scoped `deploy-verify` found two phone-width failures (Oslo's macro
-  label under the Light mode button; Trikk 17/18 labels overlapping), both
-  fixed before the push. Norway's national modules are ready for a second
-  city. See `DECISIONS.md`, *"Oslo built"* and the verify entry after it.
-
-- [x] **🇫🇷 FRANCE — COMPLETE AND DEPLOYED 2026-09-23: Paris, Marseille,
-  Toulouse, Lille (Regional) and Rennes, all live.** The city-scoped
-  `deploy-verify` the owner deferred to the last French city ran before Rennes
-  merged and passed; the live site was checked after the reboot. See
-  `DECISIONS.md`, *"France deployed: the deferred deploy-verify passed"*.
-  **Carried forward, not closed:** line labels clip at phone width (Rennes'
-  Métro b, Paris's Ligne 10, Marseille's Tramway 1) - handed to the cleanup
-  role as a CHECK first (`check_map_labels.js` never runs at phone width, and
-  misreports at 375), with any placement fix going to app/chrome.
-
-- [x] **Line labels clipped at phone width in 22 of 25 cities - FIXED
-  2026-09-23** (cleanup session, by the owner's call). Cause confirmed:
-  `PHONE_FIT_SCRIPT` fits label ANCHORS with 26px of padding, while a label's
-  text reaches up to ~220px past its anchor. A label that would be cut now
-  slides inward (`LABEL_CLAMP_SCRIPT`), and the view is unchanged. 35 + 33
-  clipped labels became 0 at 375, 343, 854 and 1280 in all 25 cities. See
-  `DECISIONS.md`, *"Line labels no longer run off the map at phone width"*,
-  including the zoom-out alternative that was measured and rejected.
 
 - [ ] **Label collisions at phone width - app/chrome.** Pre-existing, and
   unchanged by the clipping fix. `scripts/check_map_labels.js` at 375/343
@@ -344,28 +321,6 @@ Desktop is unaffected — the label is fully visible there.
 
 ## Next cities, in ease order
 
-- [x] **New York - built 2026-09-21.** The premise recorded here was wrong:
-  DCWP `w7w3-xahh` is a regulated-activity licence list, not a business
-  registry (no restaurants, grocery, clothing or salons in it at all), and New
-  York has no general business licence. Coverage is assembled from four
-  registries instead, the `nyc_dca` skeleton was retired, and 29 subway
-  services are drawn as the 11 trunk lines MTA itself signs. See `DECISIONS.md`.
-  Open follow-ups:
-  - Its map is **10.3 MB**, against 3.5 MB for Los Angeles - 44,361 pins,
-    because dense stations put 71% of businesses inside a ring (Los Angeles:
-    24%). Measured levers: rounding coordinates to 5 dp saves 1.4 MB and loses
-    nothing (Folium emits 17 significant digits for a 5-pixel dot, and it would
-    re-baseline all five cities' committed outputs) — **and as of 2026-09-21
-    this is now safe to do, but only for business points.** Transit coordinates
-    are exempt from `COORD_DP` (see `pipeline/map_common.py` and
-    `DECISIONS.md`): at 5 dp the old behaviour would have started modifying
-    MTA's and LA Metro's geometry as a silent side effect of a size tweak,
-    which their terms restrict. Keep the exemption if you lower `COORD_DP`; indexing repeated station
-    and ring strings saves ~1.2 MB; dropping the opt-in all-city heat layer
-    saves 2.0 MB. Decide before the public deploy.
-  - Retail is less complete here than elsewhere (a clothing shop needs no
-    licence from any of the four registries). Said plainly on the city page;
-    worth repeating in `docs/excluded_categories.md`.
 - [x] **Philadelphia - built 2026-09-21.** The WKB parsing this item predicted
   was never needed (the Carto SQL API evaluates `ST_X`/`ST_Y` server-side), and
   `phl_licensetype` is filled from the full 50-type pull. What it left behind:
@@ -456,25 +411,6 @@ Desktop is unaffected — the label is fully visible there.
   - Ring coverage is 12.6%, the lowest here, because the business set is
     county-wide while the rail is one line plus a loop. Consider whether the
     all-businesses toggle should be scoped to station municipalities.
-- [x] **Mexico - BUILT 2026-09-22, two cities.** Mexico City (city 15) and
-  Guadalajara (Regional) (city 16). Monterrey remains out: it matches no feed
-  under `monterrey`, `metrorrey` or `nuevo leon`. What the build produced
-  beyond the two cities:
-  - **`pipeline/taxonomies/scian.py`**, because SCIAN is NOT NAICS where it
-    matters - retail is 46 against NAICS's 44-45, so `naics.py` would have left
-    ~46% of a DENUE file unclassified. Food 722 and personal 812 do transfer.
-  - **`pipeline/countries/`**, the country/city config split, done at the
-    SECOND city as scheduled and proven behaviour-neutral by zero drift.
-  - **`.claude/skills/osm-rail/`**, because neither city could use GTFS: Mexico
-    City's agency hosts are unreachable and Guadalajara's only feed expired
-    2023-01-28 and predates an operating line. Taipei, Sao Paulo and Israel are
-    non-GTFS too, so this stops being an exception.
-  - Gate 3 ran for Guadalajara and passed against SITEUR's published counts; it
-    is UNAVAILABLE for Mexico City and recorded as such rather than faked.
-  - Densities are 818 and 659 per station and are **not comparable** with the
-    licence-register cities: DENUE is an establishment census. Said on both
-    pages.
-
 - [ ] **New Orleans - DEFERRED POST-DEPLOY by the owner (2026-09-21),
   alongside Seattle.** The pre-deploy city scope is the nine that are
   built; this and Seattle's multi-municipality build come after. Findings
@@ -652,32 +588,6 @@ mistakes as confidently as its findings.
      lines, not one credit.**
   7. Open: whether `navn` is a trade name or a legal name — the question that
      caught Milan and Paris.
-
-- [x] **Lyon** 🇫🇷 — **DISCARDED 2026-09-23.** Four independent
-  blockers, not one: the account this project will not create, CGU **9.4**'s
-  open-ended indemnity, CGU **6.2**'s bar on the producers' *signes
-  distinctifs* (which collides with naming **TCL** on the map), and a National
-  Access Point feed **dead since 2022-04-14**. **Its DATA is fine** — ~18,082
-  bucket rows at **51.4% named**, better than Paris — so this is a discard on
-  **terms and access**, never on data. **Reinstatement template below**, kept
-  because the business leg would not need re-measuring.
-  - **If new evidence suggests viability, these four must ALL clear:**
-    1. An account at `https://data.grandlyon.com/portail/fr/connexion` —
-       **owner action; this project does not create accounts.** CGU 5.5 makes
-       first access rights valid **30 days** before reconfirmation, and
-       Licence Mobilités Art. 4.2 requires **one account per Licensee**.
-    2. **Accept CGU 9.4's indemnity** — owner decision. Precedent exists:
-       Hong Kong's was accepted 2026-09-22 on the reasoning in
-       `docs/data_sources.md`.
-    3. **Settle CGU 6.2** — whether naming **TCL** is barred.
-       `contactopendata@tcl.fr` can grant prior authorisation cheaply.
-    4. **Source the rail from `data.grandlyon.com`, not the NAP** — its NAP
-       copy shows **0% availability, last modified 2022-04-14**, against a
-       source portal current to 2026-09-22. **The stale-mirror trap.**
-  - ⚠️ **Do not generalise Lyon's clauses to France.** Toulouse's and Rennes'
-    CGU were read 2026-09-23 and are **clean** — Opendatasoft template, no
-    indemnity, marks clause expressly excluding the published data. **Lyon's
-    are Grand Lyon's own.**
 
 - [ ] **Marseille · Toulouse · Lille · Rennes** 🇫🇷 — **NOT
   brief-ready; country-ready.** No brief file exists for any of them. They
@@ -916,27 +826,6 @@ mistakes as confidently as its findings.
   three it asks "does the current upstream still produce the committed output"
   rather than "does the committed code". Build-session work - each city's
   context is needed.
-- [x] ~~Three `step3_geocode.py` files still reach the network, one import
-  deep~~ - **closed 2026-09-22, by moving the boundary rather than the code.**
-  Los Angeles, New York and Washington DC import `geocode_addresses` from
-  `pipeline/census_geocoder.py`, which POSTs address batches to the US Census
-  geocoder on a cache miss; `drift_check.py` globs `step*.py`, so it ran them
-  like any other step and a fresh checkout geocoded over the network inside a
-  drift check. That module's docstring gave it away: "off the network **after
-  the first run**".
-
-  The recorded plan was to hoist the download into `fetch_sources.py` as the
-  four cities did, and **that was the wrong fix.** There is no URL to hoist:
-  the batch is derived from the step's own filtering, so moving it means
-  moving the address preparation with it. What was actually wrong is narrower
-  - **a step may fetch when a person runs it; a drift check may never fetch**
-  - so `pipeline/offline.py` puts the guard at that boundary, `drift_check.py`
-  sets `HEATMAP_NO_NETWORK` for every step it runs, and an uncached batch
-  under that flag refuses instead of requesting. Proved three ways: refuses
-  uncached, still serves a cached batch, and is inert when the flag is unset,
-  so a person running step 3 is unaffected. `check_no_fetch_in_steps.py`
-  reports such a module as **guarded** - a third answer, not a pass in
-  disguise - and fails if `drift_check.py` stops arming the guard.
 - [x] ~~Wire Toronto's `STATIONS_COLLAPSED_EXPECTED`~~ - **done 2026-09-22,
   and it was a mis-wiring rather than a missing check.** Step 1 compared the
   COLLAPSED count (110) against `IN_CITY_STATIONS_EXPECTED` (108), printing a
@@ -944,22 +833,6 @@ mistakes as confidently as its findings.
   name, an in-city check was added after the boundary filter, and the docstring
   no longer claims `excluded_stations.csv` is empty (it has two rows). Verified
   by running step 1: 234 -> 110 -> 108, two excluded, zero NOTEs.
-- [x] ~~Have Guadalajara's step 2 import `DENUE_STATE_COLUMN` and
-  `DENUE_MUNICIPIO_COLUMN`~~ - **done 2026-09-22, and it was BOTH Mexican
-  cities.** Zero drift on both after the substitution. The `municipio` in each
-  city's output-column list is left as a literal on purpose: that is this
-  project's output schema, not DENUE's input column, and both sites say so.
-
-- [x] ~~Finish the `check_stale_claims.py` category-B pass~~ - **done
-  2026-09-22**, seven passes, **74 flagged counts to 35**, files scanned 39 to
-  27 as dated records were recognised. Stopped at the floor rather than at
-  zero: what remains is correctly scoped facts ("all five boroughs", "the six
-  pre-1998 municipalities"), dated evidence in the two country trails, and
-  three false positives from single-line quote matching. **Continuing would
-  mean tuning the checker to silence rather than finding defects.** Real finds
-  are listed in that day's `DECISIONS.md` entries. If a future pass wants more
-  signal, the lever is a new detector - not a narrower category B.
-
 - [x] ~~Write `scripts/check_stale_claims.py`~~ - **done 2026-09-22.**
   Reports and always exits 0. On its first real run it found three notices in
   the deploy gate marked NOT YET DISPLAYED - Chicago, SFMTA and LA Metro - that
@@ -1475,12 +1348,6 @@ mistakes as confidently as its findings.
 
 ## Data quality follow-ups
 
-- [x] **Rings start switched off on every city (2026-09-21, owner's call)** for a
-  cleaner first view. `rings_shown` defaults to False in `map_common.py`; New
-  York's and Miami's explicit overrides are removed as redundant. The counts
-  are unaffected - businesses are assigned to their nearest station whatever
-  the rings show - and the rings remain in each map's layer control.
-
 - [x] Los Angeles map size: **3.5 MB** after the 2026-09-21 exclusions (was
   5.8), against 2.4 MB for San Francisco. Largely resolved; revisit only if a
   deploy shows it is still slow.
@@ -1527,24 +1394,21 @@ mistakes as confidently as its findings.
     it is worth doing only if phone traffic matters. Not started. **Blocks the public deploy:** the legends were deliberately left
   broad (2026-09-21), so "Retail - NAICS Code: 44/45" overstates what the map
   now contains until this page is reachable from it.
-- [x] Catch-all and non-storefront classifications: swept 2026-09-21 and
-  resolved. Excluded everywhere: NAICS `454` (nonstore retailers) and `81293`
-  (parking). Excluded per city: 812990 in Los Angeles and in San Francisco (for
-  different reasons - see `DECISIONS.md`). Kept: 459999 (~70% plausible
-  storefronts). San Diego left in, with its measurement limit recorded. All
-  listed in `docs/excluded_categories.md`. Remaining open questions:
-  - A residual ~850 rows in Los Angeles and ~201 in San Francisco carry a
-    person-like name at a residential address, spread across ordinary storefront
-    categories. Probably sole traders named after themselves (legitimate), but
-    unverified row by row.
-  - San Diego has no usable residence signal in its address text; its
-    `ownership_type` (1,298 SOLE of 3,117 mapped) is the better proxy if this is
-    revisited.
 - [ ] **Run `python scripts/check_personal_exposure.py` before publishing any
   city**, and after any change to a city's step 2 or taxonomy. It is a
   pre-publish gate in `CLAUDE.md` and `add-city` Step 7.
 
 ## Later / maybe
+
+- [ ] **Cluster split/merge animation back, per city, by a lag threshold.**
+  Turned off for every city on 2026-09-23 (`render_heatmap(animate_clusters=
+  False)`); the owner asked for it to be recorded for re-implementation. The
+  switch already exists per city. What is missing is the rule: the owner's
+  suggestion is a measured ms threshold - e.g. animate only where a +/- click
+  settles under some figure with the animation on. Toulouse settled in 588 ms
+  with it and 299 without, Paris 647 and 366, so the threshold has to be
+  chosen against a harness run, not guessed: `scripts/profile_zoom.mjs`
+  produced those figures and runs any city (`button+1` is the case).
 
 - [ ] Macro map at scale: with ~10+ cities, consider grouping nearby cities,
   and showing each city's mapped extent or a one-line summary in the tooltip.
@@ -1575,48 +1439,6 @@ mistakes as confidently as its findings.
   Two entries there are already settled: `drift_check.py` went incremental on
   2026-09-21, and page-number ordering was verified *not* to be a problem
   (Streamlit sorts the prefix numerically), so neither needs re-raising.
-
-- [x] **RE-RANKED on storefront counts, 2026-09-21** (was: do this before
-  choosing the next city).
-  `scripts/rank_canada_storefront_density.py` is committed so it is
-  reproducible. Result, storefronts in the 0.6 mi ring per in-city station:
-  **Vancouver 206, Montreal 151, Surrey 135, Edmonton 76, Calgary 75,
-  Toronto 41** - against D.C. ~173 and Boston ~39. **TORONTO'S 41 WAS
-  CORRECTED TWICE on 2026-09-21, to 81 and then to 86**, after its 234
-  "stations" turned out to be PLATFORMS (`parent_station` never populated).
-  **The second correction came from `scripts/brief_check.py`**: the first pass
-  wrote a collapse pattern for the subway's hyphenated
-  `X Station - Southbound Platform` and missed that the LRT omits the hyphen
-  (`X Station Eastbound Platform`), leaving all 86 LRT platforms uncollapsed,
-  and missed three stations appearing twice via a `- Subway` suffix. The real
-  figures are **148 platforms / 72 stations** on the subway and **234 / 111**
-  with the two LRT lines, which agree with the operator's own counts (38 + 31 +
-  5 less 3 interchanges = 71) where 77 and 118 agree with nothing. So the
-  corrected order is **Vancouver 206, Montreal 151, Calgary 137, Surrey 135,
-  Toronto 86, Edmonton 79**. **Toronto's open question 1 is also closed**
-  (2026-09-21): the unmatched addresses are NOT materially biased - storefront
-  coverage is **92.8%**, not the 71.4% its brief quoted, because that figure
-  counted person-licences with no premises address to match; the ward spread is
-  1.3x and there is no temporal bias. Its category count is **92, not the 72
-  recorded here**. It does NOT change which city to build next: Toronto is a
-  two-bucket city with no general-retail source - **measured, Retail is 2.3% of
-  its storefronts and consists of the single category `SECOND HAND SHOP`** -
-  which is a coverage problem no denominator fixes. See `docs/build_briefs/toronto.md`. Published inflation ran
-  1.0x-4.2x and was NOT uniform, so **Montreal and Surrey swap** and
-  Edmonton/Calgary become a tie. Toronto stays last. **Next build: MONTREAL** -
-  densest remaining, cheapest (SCIAN is NAICS, so no taxonomy module at all),
-  and the best-matched source in the project at 69.4% storefront. Five further
-  corrections to the profile are in `DECISIONS.md`, including that Edmonton has
-  a licence-level home flag and that two of three catalogue feeds are stale.
-  The original, non-comparable figures are left in place below rather than
-  edited, since `docs/` belongs to the staging role.
-
-- [x] Vancouver + Surrey, built 2026-09-21 at REGIONAL scope. 11,724
-  storefronts on 24 stations (20 Vancouver, 4 Surrey), two registries
-  dispatched on a `source` column. The residence filter below was built and
-  **drops nothing**, which is a measured result rather than a shortcut - see
-  `DECISIONS.md`. Three required notices went onto the deploy gate, the first
-  city to add more than one.
 
 - [~] Non-US cities. **Canada is screened and ready to build - see
   `docs/canada_step0_endpoints.md` and the 2026-09-21 `DECISIONS.md` entry.**

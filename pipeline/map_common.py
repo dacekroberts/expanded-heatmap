@@ -784,6 +784,102 @@ LABEL_CLAMP_SCRIPT = """
 })();
 </script>
 """
+# Mouse-wheel zoom. Measured 2026-09-23 on Paris and Toulouse (headless Edge,
+# trusted input over CDP, median of three fresh loads; DECISIONS.md has the
+# tables). The wheel felt laggier than +/- for a reason that was not speed:
+# Leaflet's _tryAnimatedZoom returns early while a zoom animation is running,
+# so every wheel step that fires during the 250 ms animation is DISCARDED. A
+# five-notch roll zoomed Paris 1.5 levels and three quick notches 0.75, so the
+# reader rolled again and waited again. One notch was also 0.75 of a level
+# against the buttons' 1, because the wheel snaps to zoomSnap (0.25).
+#
+# So the map's wheel handler is replaced with one that:
+#   * never discards: a step due while an animation runs waits for it to land
+#     and is merged with whatever else arrived meanwhile;
+#   * zooms a NOTCHED wheel one whole level per notch, like one click on +/-
+#     (owner's decision 2026-09-23), capped at zoomAnimationThreshold so a big
+#     roll still animates;
+#   * leaves anything finer - a trackpad - on Leaflet's own curve and snap.
+#     Whole levels there were measured and rejected: with nothing discarded,
+#     a half-second trackpad swipe went from 12.5 to 19.
+#
+# zoomSnap stays 0.25 - _fit_view, PHONE_FIT_SCRIPT's guard and
+# scripts/check_map_view.js all depend on it. A whole-level step from x.5
+# lands on x.5, so the wheel and the buttons now share one ladder of zooms.
+#
+# The guard's touch detection is untouched: it listens for `wheel` on the
+# container in the CAPTURE phase, which runs before this handler, so a wheel
+# zoom still ends the guard exactly as before.
+WHEEL_ZOOM_SCRIPT = """
+<script>
+(function () {
+    var NAME = "__MAP_NAME__";
+    // One event of at least this many normalised units (L.DomEvent.
+    // getWheelDelta) marks a notched wheel: Chrome and Edge on Windows give
+    // 50 per notch, Firefox's line mode 60. Trackpads send many events of a
+    // few units each.
+    var NOTCH = 25;
+
+    function install(m) {
+        var h = m.scrollWheelZoom;
+        if (!h) return;
+        // Re-registering is the only way in: Leaflet bound the listener to the
+        // handler's own _onWheelScroll when it enabled it.
+        var was = h.enabled();
+        h.disable();
+        h._onWheelScroll = function (e) {
+            var delta = L.DomEvent.getWheelDelta(e);
+            this._delta += delta;
+            this._maxEvent = Math.max(this._maxEvent || 0, Math.abs(delta));
+            this._lastMousePos = this._map.mouseEventToContainerPoint(e);
+            if (!this._startTime) this._startTime = +new Date();
+            var left = Math.max(this._map.options.wheelDebounceTime -
+                                (+new Date() - this._startTime), 0);
+            clearTimeout(this._timer);
+            this._timer = setTimeout(L.bind(this._performZoom, this), left);
+            L.DomEvent.stop(e);
+        };
+        h._performZoom = function () {
+            var map = this._map;
+            if (map._animatingZoom) {
+                clearTimeout(this._timer);
+                this._timer = setTimeout(L.bind(this._performZoom, this), 20);
+                return;
+            }
+            var zoom = map.getZoom(), step;
+            map._stop();
+            if (this._maxEvent >= NOTCH) {
+                step = Math.min(Math.max(Math.round(Math.abs(this._delta) / this._maxEvent), 1),
+                                map.options.zoomAnimationThreshold);
+            } else {
+                // Leaflet 1.9's own curve and snap, verbatim.
+                var snap = map.options.zoomSnap || 0,
+                    d2 = this._delta / (map.options.wheelPxPerZoomLevel * 4),
+                    d3 = 4 * Math.log(2 / (1 + Math.exp(-Math.abs(d2)))) / Math.LN2;
+                step = snap ? Math.ceil(d3 / snap) * snap : d3;
+            }
+            var delta = map._limitZoom(zoom + (this._delta > 0 ? step : -step)) - zoom;
+            this._delta = 0;
+            this._maxEvent = 0;
+            this._startTime = null;
+            if (!delta) return;
+            if (map.options.scrollWheelZoom === "center") map.setZoom(zoom + delta);
+            else map.setZoomAround(this._lastMousePos, zoom + delta);
+        };
+        if (was) h.enable();
+    }
+
+    // Folium's map script is inline at the end of the body, so the map exists
+    // once parsing is done.
+    function start() { if (window[NAME]) install(window[NAME]); }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+    } else {
+        start();
+    }
+})();
+</script>
+"""
 LEGEND_ROW = """
   <div style="display:flex; align-items:center; margin:3px 0;">
     <span style="display:inline-block; width:11px; height:11px;
@@ -1423,9 +1519,10 @@ def _esc(value):
 
 
 def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
-                  value_column, show=True, display=None):
+                  value_column, show=True, display=None, animate=False):
     """One toggleable, clustered, coloured pin layer for a category bucket.
-    Returns the number of points (0 = nothing added)."""
+    Returns the number of points (0 = nothing added). `animate`: see
+    render_heatmap's `animate_clusters`."""
     # Station name, ring band AND the classification value each repeat once per
     # pin, so each is emitted ONCE in a lookup table and referenced by integer
     # index. Nothing is lost: the callback resolves them before display.
@@ -1514,7 +1611,8 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
     # it at load. Wrap it in a FeatureGroup, which does respect show=.
     # Do not "simplify" this back to FastMarkerCluster(show=...).
     fg = folium.FeatureGroup(name=f"<b>Businesses: {group_name} ({len(data):,})</b>", show=show)
-    FastMarkerCluster(data, callback=callback, icon_create_function=icon_create_function).add_to(fg)
+    FastMarkerCluster(data, callback=callback, icon_create_function=icon_create_function,
+                      options={"animate": animate}).add_to(fg)
     fg.add_to(m)
     return len(data)
 
@@ -1605,7 +1703,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
                    stations, businesses, taxonomy_system, lines,
                    crs_geographic, crs_projected, ring_edges_meters, ring_labels,
                    center=None, zoom=None, label_focus=None, rings_shown=False,
-                   all_city_heat=True):
+                   all_city_heat=True, animate_clusters=False):
     """Render one city's heatmap to a standalone HTML file.
 
     stations: DataFrame(station, latitude, longitude). businesses: the
@@ -1633,6 +1731,16 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     the general case rather than two special ones, since every city's downtown
     cluster does some of this. Passing True is still supported for a city whose
     stations are sparse enough to want them on.
+
+    animate_clusters: whether Leaflet.markercluster animates clusters splitting
+    and merging at the end of each zoom. **FALSE for every city since
+    2026-09-23** - the owner's call, on measurement: the animation runs a
+    further ~300 ms after the map's own zoom animation, and turning it off took
+    a Paris cluster click from 828 ms to settle to 408 ms (Toulouse 615 to 311)
+    and a +/- click from 653 to 384 ms. The map's zoom still animates; the
+    clusters simply regroup at the end instead of flying apart. Kept as a
+    per-city switch so a light map can have it back - the owner's suggested
+    rule is a measured lag threshold, and PLAN.md holds that open item.
     """
     taxonomy = load_taxonomy_module(taxonomy_system)
     bucket_colors = dict(CATEGORY_BUCKETS)
@@ -1753,7 +1861,8 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
         rows = in_rings[in_rings["_bucket"] == name]
         if add_pin_layer(m, rows, name, color, taxonomy.FIELD_LABEL,
                          taxonomy.VALUE_COLUMN,
-                         display=getattr(taxonomy, "display_value", None)):
+                         display=getattr(taxonomy, "display_value", None),
+                         animate=animate_clusters):
             present.append((name, color))
 
     m.get_root().html.add_child(folium.Element(
@@ -1799,6 +1908,10 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # sliding it, not by zooming. See LABEL_CLAMP_SCRIPT.
     m.get_root().html.add_child(folium.Element(
         LABEL_CLAMP_SCRIPT.replace("__MAP_NAME__", m.get_name())))
+    # Mouse-wheel zoom that neither drops notches nor moves less than a click.
+    # See WHEEL_ZOOM_SCRIPT.
+    m.get_root().html.add_child(folium.Element(
+        WHEEL_ZOOM_SCRIPT.replace("__MAP_NAME__", m.get_name())))
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     m.save(str(output_path))

@@ -297,7 +297,7 @@ FORBIDDEN_COLUMNS = ("nom_propietari", "nif", "titular", "referencia_cadastral")
 # Barcelona's mall, gallery and market flags are the only ones of their kind in
 # this project. They are KEPT rather than used to exclude: a mall near a station
 # is real commercial density a rider can reach, and excluding it would make
-# Barcelona measure something different from the other sixteen cities on a map
+# Barcelona measure something different from every other city on a map
 # that invites comparison. Recorded as available-but-unused so a later decision
 # can reach for them.
 SITE_TYPE_FLAGS_AVAILABLE_UNUSED = ("SN_CComercial", "SN_Galeria", "SN_Mercat",

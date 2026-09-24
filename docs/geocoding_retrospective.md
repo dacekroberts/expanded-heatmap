@@ -4,7 +4,10 @@
 called *"geocoding at national scale"*. The evidence is in
 `docs/global_country_shortlist.md` (the Brazil section and "Taiwan finished"),
 the licences in `docs/data_sources.md`, and the reasoning in `DECISIONS.md`
-under the same date. This file is the lesson, not the log.
+under the same date. This file is the lesson, not the log. **The checklist
+distilled from it is the `address-join` skill** (`.claude/skills/address-join/`),
+written 2026-09-23 so that Japan passes through a procedure rather than a
+document.
 
 **Read it before starting Japan.** Japan is the last country in that band and
 the one this project has called its hardest. The single most useful thing
