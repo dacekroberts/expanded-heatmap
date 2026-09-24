@@ -36,8 +36,8 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 > | | |
 > |---|---|
 > | **Built** | **26** across 8 countries *(Toulouse, Lille (Regional) and Rennes, 2026-09-23; Oslo, 2026-09-24)* |
-> | **Candidates** | **31**, all at least partially viable — A 15 · B 10 · C 5 · D 1 *(Kaohsiung moved from B to a reopened access-blocked band D 2026-09-23, owner's call; Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built; Prague paused to the open gap 2026-09-24)* |
-> | **Open screening gap** | **4**, resting on an absence — neither candidates nor discards |
+> | **Candidates** | **32**, all at least partially viable — A 16 · B 10 · C 5 · D 1 *(Prague back to A 2026-09-24 on open data — ROS02 establishments + RES; Kaohsiung moved from B to a reopened access-blocked band D 2026-09-23, owner's call; Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built; Prague paused to the open gap 2026-09-24)* |
+> | **Open screening gap** | **3**, resting on an absence — neither candidates nor discards |
 > | **Discarded** | **32**, each naming its evidence |
 >
 > *Counts corrected 2026-09-23. This box had read 20 / 33 / 30 since
@@ -87,7 +87,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 31
+## Candidates — 32
 
 Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 **Eight cities moved to discarded on measurement** and **two were upgraded**.
@@ -114,12 +114,12 @@ yet* with *we looked at everything and this is what is there*.
 
 | Band | What these cities ARE | Cities |
 |---|---|---|
-| 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates answered, rail answered — every remaining question is answerable inside the build | **15** *(+ 12 built)* |
+| 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates answered, rail answered — every remaining question is answerable inside the build | **16** *(+ 12 built)* |
 | 🟠 **B** | **Geocoding at national scale.** The address work is a project, justified only by reuse across many cities | **10** |
 | 🟣 **C** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **5** |
 | 🔴 **D** | **Access blocked by the publisher.** Screening complete, the file exists and is measured; the publisher's own access control is the only thing stopping it, so it is unblocked by ASKING, not by probing | **1** |
-| | **Candidates** | **31** |
-| *Open gap* | Unscreened — a row resting on an absence, so not a discard | *4* |
+| | **Candidates** | **32** |
+| *Open gap* | Unscreened — a row resting on an absence, so not a discard | *3* |
 | *Discarded* | Measured negative, evidence named | *32* |
 
 *Band A's caption briefly said "brief written" (2026-09-23, morning). That was
@@ -204,9 +204,9 @@ results in the sweep.
 
 ---
 
-## 🟢 Band A — ready to build (15 ready + 12 ✅ BUILT)
+## 🟢 Band A — ready to build (16 ready + 12 ✅ BUILT)
 
-**The fifteen:** Seoul · Copenhagen · Hong Kong — **each with a brief** in `docs/build_briefs/` — **nine
+**The sixteen:** Seoul · Prague ▲ · Copenhagen · Hong Kong — **each with a brief** in `docs/build_briefs/` — **nine
 Brazilian cities from one national source**: São Paulo (7/7) · Rio de Janeiro
 (8/8) · Belo Horizonte · Brasília · Recife (Regional) · Santos (Regional)
 (5/5 each) · Salvador · Fortaleza (Regional) · Porto Alegre (Regional) (4/4 each) — and **three Taiwanese cities**: Taipei (Regional) (6/6) ·
@@ -411,7 +411,7 @@ measured.
 
 | Cities | Country | The coordinate step — MEASURED | Rate |
 |---|---|---|---|
-| **Prague** ▲▲ *(1)* | 🇨🇿 | **A JOIN, confirmed.** RÚIAN's Praha export is **3.4 MB zipped, keyless** (`vdp.cuzk.gov.cz`; the old `cuzk.cz` redirects rather than dying) and holds **134,627 addresses, every one a unique `Kód ADM`, 99.99% carrying coordinates**. Measured on **6,000 active Praha rows** in CZ-NACE 47/56/96 streamed from RES | **99.8%** — 99.9% carry a code, 100.0% of those resolve |
+| **Prague** ▲▲ *(1)* | 🇨🇿 | ▶ **BACK IN THIS BAND 2026-09-24, on a new business leg**: paused the same day because RES is a seat register, then answered with **ROS02** — open-data *active establishments* with RÚIAN codes — joined to RES for activity. **27,065** storefront establishments, **restaurant control 1.63x** like-for-like (the paused 8.02x compared all of NACE 5610 with OSM restaurants alone; like-for-like, RES's seats read 4.48x). ROS02's terms **PERMITTED**, nothing to display. ARES/RŽP rejected on a 2019 ÚOOÚ GDPR fine, not on § 60(6), which Parliament narrowed. One owner call at build: sole traders (1,429 at their own seat). Brief: `docs/build_briefs/prague.md`. **The coordinate step, as measured before:** **A JOIN, confirmed.** RÚIAN's Praha export is **3.4 MB zipped, keyless** (`vdp.cuzk.gov.cz`; the old `cuzk.cz` redirects rather than dying) and holds **134,627 addresses, every one a unique `Kód ADM`, 99.99% carrying coordinates**. Measured on **6,000 active Praha rows** in CZ-NACE 47/56/96 streamed from RES | **99.8%** — 99.9% carry a code, 100.0% of those resolve |
 | **Copenhagen** *(1)* | 🇩🇰 | **A JOIN, confirmed — and the account gate was on the wrong leg.** DAWA (`api.dataforsyningen.dk`) is **keyless**; the `distribution.virk.dk` 401 gates the BUSINESS register only. The whole city downloads as CSV: **85,351 access addresses, 100% with WGS84**, joinable on `vejnavn` + `husnr`. ⚠️ **Frederiksberg (0147) is a separate kommune entirely surrounded by Copenhagen** — scope to 0101 alone and the map has a hole in its middle; its 9,584 addresses come from the same call | **100%** of addresses carry coordinates ✅ **BRIEF WRITTEN 2026-09-23, 4/4 — `docs/build_briefs/copenhagen.md`.** **14,887 storefront rows** (retail 6,689 / food 5,163 / personal 3,035) at **100.0% named**, measured from the real 2.00 GB download rather than from metadata. **96.9% carry a DAR address UUID**, so coordinates are a JOIN. ⚠️ **Four files joined on `CVREnhedsId`** — `Produktionsenhed` alone is almost empty. 🚨 **`v/` marks a sole trader: 7.2%, a FLOOR**; `coNavn` is a second exposure at 26.0%. ⚠️ **Rail: M1–M4 only** — this list's "tram 4" was WRONG, Copenhagen has no tram |
 | **Hong Kong** ▲▲▲ *(1)* | 🇭🇰 | **A GEOCODE, confirmed keyless.** The government **Address Lookup Service** (`als.gov.hk/lookup`) answers without a key and returns **lat/long AND HK1980 Grid easting/northing AND a confidence `Score`** (76.15, 88.75, 97.69 on three test premises). ✅ **INDEMNITY ACCEPTED by the owner 2026-09-22** — the project's only uncapped liability, priced deliberately. Three conditions bind the build: display source + Government IP acknowledgement + DATA.GOV.HK attribution exactly; run `check_personal_exposure.py` and exclude catch-alls; the dated record in `data_sources.md`. ⚠️ Re-reading the live clause corrected this project's OWN earlier quote twice: it arises **directly or indirectly**, and there is **no notice-and-defend right** | ✅ **100.0% — RE-MEASURED 2026-09-23 on 200 random register rows, as a TWO-STAGE lookup.** This cell read *"per-row rate not yet measured"* for a day after the brief measured it. **Brief 8/8 — `docs/build_briefs/hong-kong.md`** |
 | **Oslo** *(1)* | 🇳🇴 | **A GEOCODE, keyless — with two traps.** Kartverket (`ws.geonorge.no/adresser`) answers and returns `representasjonspunkt`. ⚠️ **`fuzzy=true` MUST NOT BE USED**: it "rescued" `Karenslyst allé 8B` as **`allé 1B`** — a different building — and turned `7-Eleven` into `Ellen Gleditsch' vei 7`. It returns plausible coordinates for the wrong place. ⚠️ The API caps at **10,000 rows** (offset 9,900 works, 15,000 returns nothing), so it cannot enumerate the city | **97.8%** via two stages: exact `adressetekst`, then plain `sok`. Never fuzzy |
@@ -485,7 +485,7 @@ block-level JOIN too** — the permits split the address into municipality /
 components with a coordinate per block — **ASSERTED, not measured**, with the
 order of work to test it.
 
-## ⚠️ OPEN SCREENING GAP — rows that rest on an absence (4 cities)
+## ⚠️ OPEN SCREENING GAP — rows that rest on an absence (3 cities)
 
 **Not candidates yet and not discards — unscreened.** `global_country_shortlist.md`
 records *"Italy stays a Milan-only country"*, but that rests on **Naples** and
@@ -498,7 +498,8 @@ discard.
 | **Rome** 🇮🇹 | `dati.comune.roma.it`, CKAN, **365 datasets**. Carries **`elenco-delle-attivita-produttive-del-suap-di-roma-capitale-anno-2025`** and its 2024 edition — SUAP is the *Sportello Unico Attività Produttive*, the one-stop business register every comune runs, and **2025 is current** | **Schema unread** — the host failed its TLS handshake *after* the catalogue answered. The **LOCATION and ACTIVITY** columns have not been checked separately |
 | **Turin** 🇮🇹 | `aperto.comune.torino.it`, CKAN, **2,118 datasets**, 143 with a commerce term. Its naming makes the Messina distinction itself: `aperte`/`chiuse` are the FLOW, **`presenti` is the STOCK**. Geoportale also publishes **SHP**, so geometry exists. **CC-BY** | ⚠️ **The series STOPS AT 2019** — latest `presenti` is 2019, geoportale layer last modified 2019-05-17. Six years stale against a project mapping *current* density. Schema unread; `risorse.comune.torino.it` timed out at TCP connect |
 | **Cairo** 🇪🇬 ▼ *moved here from the discards 2026-09-23* | **One probe, of one national host:** CAPMAS, the statistics agency, *"serves HTML only"* — recorded in `global_country_shortlist.md` as **NO OPEN API**. No city-level host has ever been asked | **Everything.** It sat in the discard table as *"No open-data infrastructure"* while this file's own 2026-09-23 sweep recorded it **STILL UNPROBED**. **A national statistics agency not having an API is not a finding about Cairo's premises**, and `add-country` says to try the city's own host before recording a negative — which was never done. **Moved by this file's own rule**, not re-judged |
-| **Prague** 🇨🇿 ▼ *moved here from Band A 2026-09-24, at the build's Step 0* | **RES, the business leg the brief chose, is a REGISTERED-SEAT register.** Measured at the build: restaurant control **8.02x** OSM (NACE 5610* 20,829 vs 2,596) against France's 1.26-1.80x; **767** registrants at one address (Rybná 716/24), 44 addresses holding 50+; **67.9%** sole traders located at their seat - usually home - under their own name. Everything else passed: RÚIAN join 99.8%, PID's keyless GTFS (CC BY 4.0), metro 16/24/20 all inside the city, two owner calls banked in `docs/build_briefs/prague.md` | **A bulk source for RŽP's *provozovny*** - establishments with a location address and an activity. The 2026-09-22 screen found only a per-IČO lookup. Owner's call: staging chases it; Prague resumes only if one exists. ▲ **2026-09-24: FOUND, in batches — not a dump.** ARES v3's `POST /ekonomicke-subjekty-rzp/vyhledat` takes a LIST of IČOs and returns each subject's full RŽP record, every licence's `provozovny` included, **each with `kodAdresnihoMista` — the RÚIAN key the join already matches at 99.8%**. Two chains in one call: Billa 1,258 establishment entries (259 in Praha), Albert 1,723 (398). **Unmeasured**: the batch cap, ARES's rate terms, the national IČO universe (a shop in Praha can belong to a subject seated anywhere), the `typProvozovny` codes (0/1/6), and the Praha count after dropping ended ones |
+
+*▲ **Prague left this gap on 2026-09-24, back to Band A**, the same day it arrived: the premises source it lacked turned out to be published as open data (ROS02). Its row is in Band A.*
 
 **Neither Italian city changes the Italy profile answer** — Italy is bespoke per city, so
 each would be its own Step 0 regardless. See `DECISIONS.md`, 2026-09-22.
@@ -1343,7 +1344,7 @@ the tier is stale.
 | 🇮🇪 Ireland | **1** | — | — | Complete |
 | 🇮🇹 Italy | **1** | Rome, Turin *(open gap)* | — | Neither is screened; Turin's series stops in 2019 |
 | 🇫🇷 France | **5** | — | — | **Complete** — Rennes built 2026-09-23. Lyon discarded |
-| 🇨🇿 Czechia | — | **1** — Prague | gap | ⏸ **Paused 2026-09-24**: RES is a seat register; staging is chasing a bulk source for RŽP's *provozovny* |
+| 🇨🇿 Czechia | — | **1** — Prague | A | ▶ **Back in A 2026-09-24**: establishments from ROS02 (open data) + RES activity, RÚIAN join; restaurant control 1.63x like-for-like |
 | 🇩🇰 Denmark | — | **1** — Copenhagen | A | Build; the Danish API key closes when it starts |
 | 🇭🇰 Hong Kong | — | **1** | A | Build; indemnity accepted; map-region call |
 | 🇳🇴 Norway | **1** | — | — | **Oslo built 2026-09-24**; the national modules are ready for a second city |
@@ -1909,7 +1910,7 @@ not a country ruling. See the open screening gap.*
 
 > **Current position, 2026-09-23.** Mexico, Spain, Ireland and Italy's Milan
 > are built; France is **complete at five** (Paris, Marseille, Toulouse, Lille, Rennes).
-> **The fifteen Band A cities are build-ready now**, nine of them Brazilian
+> **The sixteen Band A cities are build-ready now**, nine of them Brazilian
 > and three Taiwanese. **Brazil was
 > picked to go first in the geocoding band and turned out to need no geocoder**
 > (IBGE's census address file carries every establishment's coordinate), so

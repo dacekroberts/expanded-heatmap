@@ -1906,6 +1906,14 @@ Asked by the build session after Prague paused on RES (a register of seats). **N
 
 **So the provozovny exist in bulk, but as a batched search rather than a dump.** Open before Prague resumes: the list-size cap per call; **ARES's terms and rate limits** (unread); the IČO universe — a Praha shop can belong to a subject seated anywhere, so the RES seat filter under-covers and the national CZ-NACE 47/56/96 set is the honest universe; the `TypProvozovny` code list; and the restaurant control against OSM, re-run on establishments instead of seats.
 
+#### ▲▲ 2026-09-24 — Czechia: Prague's establishments are OPEN DATA (ROS02); back to Band A
+
+The batched RŽP route above was measured and then **set aside**. Measured: 100 IČOs a call (the API's own error: *"Limit je maximálně 100"*), 500 calls a minute, a national universe of **403,793** active 47/56/96 subjects (4,038 calls); a 5,000-subject sample estimated ~28,970 active Praha establishments. Read: ARES's terms permit querying; the Trade Licensing Act § 60(6) bans publishing a *sestava*, and its legislative history shows Parliament **struck** a second ban aimed at the online public part (zákon 289/2017, tisk 1014, committee resolution 386); but **ÚOOÚ fined a site mirroring sole traders' RŽP data in 2019** (UOOU-10201/18-31), because RŽP is not open data.
+
+**The research that read the fine also found the way round it**: the Digitální a informační agentura publishes **ROS02, *Registr osob – aktivní provozovny***, under zákon 106/1999 § 5a — ICP, IČO, dates and the RÚIAN code of every establishment, 58.5 MB, declared no copyright, no database right, **no personal data**, CC0 match; read in full 2026-09-24, **PERMITTED**. Joined to RES by IČO: **27,065** Praha storefront establishments (9,492 / 8,037 / 9,536), **5,057** of them owned from outside Praha, and the restaurant control at **1.63x** against a like-for-like OSM count of **4,652**. **That control was mis-specified when it paused Prague**: all of NACE 5610 against `amenity=restaurant` alone, where France had compared NAF 56.10A — like-for-like, RES's seats read 4.48x, still a fail.
+
+**The generalisable lesson: a register's establishments may be published by a DIFFERENT agency than the register.** RŽP owns the provozovny; the basic-registers agency publishes them as open data. Asking only the owner's API found a legal problem the open copy does not have.
+
 #### A refinement the Korea probe produced: stations are not lines
 
 Japan's N02 carries **both** — 10,235 station points *and* 21,932 line

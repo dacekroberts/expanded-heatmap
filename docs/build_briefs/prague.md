@@ -5,6 +5,13 @@ before writing code.
 
 ---
 
+> ▶ **RESUMED 2026-09-24 — the business leg is now ESTABLISHMENTS, from open
+> data.** ROS02 (*Registr osob – aktivní provozovny*) gives every active
+> establishment's RÚIAN address; RES gives its owner's activity by IČO.
+> **27,065** Prague storefront establishments; restaurant control **1.63x**
+> like-for-like, inside France's range. See "Business leg — ROS02" below.
+> The pause that preceded it, kept:
+>
 > ⏸ **PAUSED 2026-09-24 AT STEP 0 — THE BUSINESS LEG FAILED THE PREMISES
 > TEST.** RES records a subject's **registered seat** (*sídlo*), not where it
 > trades, and the build measured what that means: the restaurant control reads
@@ -29,7 +36,42 @@ reach the finest level and 31.4% stop at the 3-digit group.
 
 ---
 
+## ▲ Business leg — ROS02 establishments + RES activity (2026-09-24)
+
+**Where each business TRADES, from open data only.** RES (below) is kept as the
+activity and name lookup by IČO; it no longer supplies the location.
+
+| | |
+|---|---|
+| **Establishments** | `https://www.szrcr.cz/images/dokumenty/ROS/Otevrena%20data/ros02_data.csv` — *Registr osob – aktivní provozovny*, Digitální a informační agentura. **58,507,315 bytes**, updated 2026-09-01, monthly. Columns `ICP` (establishment ID), `ICO`, `DATZAH` / `DATUKON` (start / end), **`PKODADM`** (the RÚIAN address code), `PTEXTADR` |
+| Rows | 804,609 nationally → **763,834 distinct establishments** (rows repeat; dedupe on `ICP`), **574,446 active** (no `DATUKON`, or one in the future) |
+| **In Praha** | **84,170 active** (`PKODADM` in RÚIAN's Praha list, 134,627 codes) |
+| **In the three buckets** (owner's RES CZ-NACE) | **27,065** — retail (47) **9,492** · food (56) **8,037** · personal (96) **9,536** — of which **5,057** belong to subjects **seated outside Praha**, which a seat register could never find |
+| **Restaurant control** (NACE 5610*) | **7,576** establishments — **1.63x** OSM like-for-like (**4,652** = `restaurant` + `fast_food` + `cafe` + `food_court` + `ice_cream`, node+way, measured 2026-09-24); **1.55x** without sole traders at their own seat. France: 1.26–1.80x |
+| Cross-check | RŽP's own establishment records, sampled through ARES (5,000 subjects), estimated **~28,970** — a different source agreeing |
+
+🚨 **The control that paused this city compared unlike things.** CZ-NACE 5610
+is restaurants AND fast food, cafés, stands and mobile food; France's control
+used NAF **56.10A**, traditional restaurants only. Against the like-for-like
+4,652, **RES's seats read 4.48x, not 8.02x** — still failing, so the pause was
+right — and **establishments read 1.63x**.
+
+⚠️ **Coverage, measured**: **57,017** active Praha establishments belong to
+subjects whose primary CZ-NACE is outside 47/56/96 (a wholesaler's shop, a
+brewery's pub) and are not drawn; **6.6%** of active establishments nationally
+carry no `PKODADM` and cannot be placed. Both are build questions.
+
+**Not used: ARES's RŽP search.** It returns the same establishments with a
+type field (`typProvozovny`: 1 = *Kolaudovaná*, 2 = *Byt* …), 100 IČOs per
+call, 500 calls a minute — but see Licence: publishing RŽP-derived trade data
+about sole traders is what the data protection authority fined in 2019, and
+ROS02 carries the locations as open data without it.
+
 ## Business leg — the Statistical Office's RES
+
+*Since 2026-09-24: the activity (`NACE`), form (`FORMA`) and name (`FIRMA`) lookup
+by IČO for ROS02's establishments. The seat-based figures below are what
+paused the city.*
 
 | | |
 |---|---|
@@ -181,7 +223,38 @@ on-map label regardless, so assign colours for those rather than dropping them.
 
 ---
 
-## ✅ Licence — BOTH READ 2026-09-23, both CC BY 4.0
+## ✅ Licence — ROS02 read 2026-09-24; RES and RÚIAN read 2026-09-23 (CC BY 4.0)
+
+- ✅ **ROS02 / DIA — READ 2026-09-24. PERMITTED.** The distribution's
+  `podmínky-užití` record declares all four "does not contain": no authorial
+  works, not a copyright database, **no sui generis database right**
+  (*"Data … je tak možné bez omezení vytěžovat, zužitkovat a opětovně
+  užívat"*), and **no personal data**; narrowMatch CC0. The national
+  terms guide (data.gov.cz, *Stanovení podmínek užití*) says a record with all
+  four such values *"působí … jako ujištění pro příjemce dat, že s nimi může
+  bezpečně nakládat bez jakýchkoli rizik právního omezení"*, and zákon
+  106/1999 § 3(5) defines open data as data whose reuse the publisher does not
+  restrict. **MUST DISPLAY: nothing. MUST DO: nothing. MUST NOT SAY:
+  nothing.** szrcr.cz has no terms page; its dataset pages are silent. ⚠️ The
+  file is also mirrored on `opendata.csu.gov.cz` — **fetch from szrcr.cz**; the
+  mirror's own record was not read.
+- ⛔ **ARES / RŽP — READ 2026-09-24, and NOT USED.** Two findings, both kept
+  because the next Czech city will meet them:
+  - **Trade Licensing Act § 60(6)** forbids the requester to publish a
+    *sestava* — a bulk listing a trade office compiles on request (name, seat,
+    IČO, activity, **establishment location**). **It does not reach the online
+    public part**: the 2017 government bill (zákon 289/2017, sněmovní tisk
+    1014) carried a SECOND ban, *"Takto zveřejněné údaje nelze znovu
+    zveřejnit"*, aimed at exactly the remote-access data, and the economic
+    committee **struck it** (resolution 386, 3.5.2017); ÚOOÚ reads the ban as
+    covering only the sestava.
+  - **GDPR is the real obstacle**: ÚOOÚ decision UOOU-10201/18-31
+    (18.12.2019) fined a site mirroring sole traders' ARES/RŽP data 50,000 Kč
+    — *"Živnostenský rejstřík není uveden v seznamu informací zveřejňovaných
+    jako otevřená data"*, so publishing trade information about them was
+    unlawful; data overlapping ARES's open data could be published on
+    legitimate interest. **ROS02 + RES are both open data**, which is why this
+    build uses them and not RŽP.
 
 **Nothing licence-shaped blocks this city any more.** Both are PERMITTED WITH CONDITIONS, and between them they impose **five display obligations**.
 
@@ -309,10 +382,20 @@ trade names.
   části). Whether the tram network's reach justifies a wider scope is unasked.~~
   ✅ **Settled 2026-09-24**: metro only (owner), and all 60 metro station-line
   pairs are inside obec 554782, so the city scope costs nothing.
-- 🚨 **THE BLOCKER: a bulk source for RŽP's *provozovny*** - establishment
-  records with a location address and an activity. RES is a seat register
-  (see the note at the top); nothing else on this list matters until this
-  is answered.
+- ~~🚨 **THE BLOCKER: a bulk source for RŽP's *provozovny***~~ ✅ **ANSWERED
+  2026-09-24: ROS02**, open data — see "Business leg — ROS02".
+- 🔒 **Sole traders — an OWNER CALL at build.** ROS02's publisher declares
+  "no personal data", but ~80% of the subjects are natural persons, and
+  data.gov.cz's own 2022 article says recipients of register data holding
+  personal data become controllers. Measured: **1,429** establishments
+  (5.3%) sit at a sole trader's own seat — most likely a home. Recommend:
+  **exclude those**, and show a **name only when it is a trade name**
+  (Taiwan's rule; `FIRMA` for `FORMA 101` is the person's name), then run
+  `check_personal_exposure.py`.
+- ⚠️ **57,017** Praha establishments of subjects outside 47/56/96 — how many
+  are shops, and whether a second activity source is worth it.
+- ⚠️ **6.6%** of active establishments carry no `PKODADM` — Praha's share
+  unmeasured; `PTEXTADR` is the only fallback.
 - **The employee filter.** `KATPO` is an employee-count band and 46,447 of
   85,022 are `000`; applying it would leave **38,575**. Whether to apply it is
   an owner call, unresolved. ⚠️ **The Paris precedent this used to
@@ -338,8 +421,27 @@ trade names.
 ```brief-checks
 [
   {
+    "id": "ros02-establishments-downloads",
+    "claim": "ROS02, the open-data list of active establishments with RUIAN address codes, downloads keyless from szrcr.cz - 58.5 MB, 804,609 rows. This is Prague's business leg since 2026-09-24: where businesses TRADE, not where they are seated",
+    "kind": "http_ok",
+    "url": "https://www.szrcr.cz/images/dokumenty/ROS/Otevrena%20data/ros02_data.csv",
+    "min_bytes": 40000000
+  },
+  {
+    "id": "ros02-schema",
+    "claim": "ROS02's own metadata carries the establishment ID, the owner's ICO, the end date and the RUIAN address code - the four columns the join needs",
+    "kind": "http_contains",
+    "url": "https://www.szrcr.cz/images/dokumenty/ROS/Otevrena%20data/ros02_data-metadata.json",
+    "present": [
+      "\"ICP\"",
+      "\"ICO\"",
+      "\"DATUKON\"",
+      "\"PKODADM\""
+    ]
+  },
+  {
     "id": "czso-res-downloads",
-    "claim": "The Statistical Office's RES file downloads with no key. 543 MB, 3,528,951 rows nationally. This is the business leg - use RES, not ARES, because CZ-NACE here is single-valued",
+    "claim": "The Statistical Office's RES file downloads with no key. 543 MB, 3,528,951 rows nationally. Since 2026-09-24 it is the ACTIVITY lookup by ICO for ROS02's establishments, not the location - use RES, not ARES, because CZ-NACE here is single-valued",
     "kind": "http_ok",
     "url": "https://opendata.czso.cz/data/od_org03/res_data.csv",
     "min_bytes": 1000000

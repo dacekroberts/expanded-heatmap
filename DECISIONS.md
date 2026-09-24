@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**275 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**276 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Prague back in Band A: establishments from ROS02 open data + RES activity; RŽP rejected on GDPR; the paused control was mis-specified](#2026-09-24---prague-back-in-band-a-establishments-from-ros02-open-data-res-activity-ržp-rejected-on-gdpr-the-paused-control-was-mis-specified)
 - [Two checks closed: the macro map's controls, and clones leaking into %TEMP%](#2026-09-24---two-checks-closed-the-macro-maps-controls-and-clones-leaking-into-temp)
 - [Oslo deployed; the live site measured after the reboot](#2026-09-24---oslo-deployed-the-live-site-measured-after-the-reboot)
 - [Oslo's deploy-verify found two phone-width failures the per-city checks passed](#2026-09-24---oslos-deploy-verify-found-two-phone-width-failures-the-per-city-checks-passed)
@@ -317,6 +318,47 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Prague back in Band A: establishments from ROS02 open data + RES activity; RŽP rejected on GDPR; the paused control was mis-specified
+
+- **Moved Prague from the open screening gap back to Band A**, on the
+  owner's instruction to resolve the ambiguity first and park it awaiting
+  permission only if it stood. It did not stand, because a different source
+  made it moot. **ROS02** (*Registr osob – aktivní provozovny*, Digitální a
+  informační agentura, open data under 106/1999 § 5a) lists every active
+  establishment with its RÚIAN address code; joined to RES by IČO for
+  activity, it gives **27,065** Praha storefront establishments (retail
+  9,492 · food 8,037 · personal 9,536), 5,057 of them owned from outside
+  Praha. Both downloads (58,507,315 B and RÚIAN's 3,395,881 B Praha file)
+  were approved by the owner. **ROS02's terms read in full: PERMITTED** - all
+  four data.gov.cz declarations are "does not contain", including no
+  personal data, which the national terms guide calls an assurance of no
+  legal restriction; nothing to display.
+- **Found that the restaurant control which paused Prague was
+  mis-specified**: it set all of CZ-NACE 5610 (restaurants, fast food,
+  cafés, stands) against OSM `amenity=restaurant` alone, where every French
+  city compared NAF 56.10A. Like-for-like (restaurant + fast_food + cafe +
+  food_court + ice_cream = 4,652): **RES's seats read 4.48x, not 8.02x - the
+  pause was still right** - and **ROS02's establishments read 1.63x** (1.55x
+  without sole traders at their own seat), inside France's 1.26-1.80x.
+- **Rejected ARES's RŽP search as the source**, though it works (100 IČOs a
+  call, 500 calls a minute, 4,038 calls nationally) and carries a premises
+  type. Trade Licensing Act § 60(6) was the first worry and **does not reach
+  it**: the 2017 bill's separate ban on republishing the online public part
+  was struck in committee (tisk 1014, resolution 386), and ÚOOÚ reads the ban
+  as covering only a sestava. **GDPR does**: ÚOOÚ fined a site mirroring sole
+  traders' RŽP data in 2019 (UOOU-10201/18-31) because the trade register is
+  not open data. Rejected too: building on the permitting reading of §
+  60(6), and parking Prague awaiting permission, both of which ROS02 made
+  unnecessary.
+- **One owner call left for the build**: sole traders. ROS02's publisher
+  declares no personal data, but ~80% of the subjects are natural persons;
+  1,429 establishments (5.3%) sit at a sole trader's own seat. Recommended
+  in the brief: exclude those, and names only when they are trade names.
+- Counts: candidates 32 (A 16 · B 10 · C 5 · D 1, with Oslo built the
+  same day), open gap 3. Touched
+  `docs/build_briefs/prague.md` (business leg, licence, open items, two new
+  checks), `docs/city_master_list.md`, `docs/global_country_shortlist.md`.
 
 ### 2026-09-24 - Two checks closed: the macro map's controls, and clones leaking into %TEMP%
 
