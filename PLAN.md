@@ -26,14 +26,14 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   fixes first, then build the swap and include it in Rotterdam's deploy check").
   The renderer gate itself closed with the push of the dark-mode and legend
   fixes (DECISIONS, "Renderer fixes verified and pushed").
-  - [ ] **Correct the dark model**: the `brightness(1.8)` filter also
+  - [x] **Correct the dark model** (built; DECISIONS "Line labels read at 4.5:1 in both themes"): the `brightness(1.8)` filter also
     brightens the halo (renders `#132039`, not `#0B1220`), so 44 of 235 labels
     are under 4.5:1 against what is drawn, and Vancouver's Expo Line has no
     margin (4.49 as the browser truncates). Drop the filter; give every
     dark-mode label an explicit colour measured against the halo actually
     drawn, channels truncated as the browser does; `check_map_markup.py`
     measures the same way.
-  - [ ] **Light-mode halo swap** (owner-approved over darkening): a label
+  - [x] **Light-mode halo swap** (built, 139 of 235 on a dark halo) (owner-approved over darkening): a label
     under 4.5:1 on white keeps its colour and takes the halo it reads better
     on - dark for 139 of 145, white for 6 - and the 13 mid-tones that miss on
     both get the smallest lightness step away from their halo (at most

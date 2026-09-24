@@ -25,7 +25,7 @@ import numpy as np
 import pandas as pd
 from folium.plugins import HeatMap, FastMarkerCluster
 
-from pipeline.linecolour import DARK_LABEL_BRIGHTNESS, check_line_colours, dark_label_colour
+from pipeline.linecolour import check_line_colours, label_colours
 from pipeline.taxonomies import CATEGORY_BUCKETS, load_taxonomy_module
 from pipeline.theme import AMBIENT_THEME_JS, DARK, FONT_STACK, LIGHT, css_vars, rgba
 
@@ -138,15 +138,16 @@ _THEME_TOGGLE_TEMPLATE = """
         stroke: var(--dm-station); fill: var(--dm-station); }
     .dark-base .leaflet-overlay-pane path[stroke-width="4"] { filter: brightness(1.55) saturate(0.9); }
     .dark-base .map-legend span[style*="height:3px"] { filter: brightness(1.55) saturate(0.9); }
+    /* NO FILTER on a line label: a brightness() filter here once lifted the
+       halo with the text, so the dark page colour rendered #132039 and every
+       contrast figure measured a halo nobody saw. Each label carries its own
+       dark-theme colour in --dm-label instead (pipeline/linecolour.py,
+       "LINE LABELS"), read at 4.5:1 against exactly this halo. */
     .dark-base .leaflet-marker-icon div[style*="text-shadow"] {
-        filter: brightness(@@LABEL_BRIGHTNESS@@);
         text-shadow: -1px -1px 0 var(--dm-page), 1px -1px 0 var(--dm-page),
                      -1px 1px 0 var(--dm-page), 1px 1px 0 var(--dm-page),
                      0 0 6px var(--dm-page) !important; }
-    /* A label whose colour the filter above cannot lift to 4.5:1 (pure blue,
-       navy) carries a lighter shade of itself in --dm-label; add_line_label
-       sets it only on those labels. */
-    .dark-base .hm-line-label[style*="--dm-label"] { color: var(--dm-label) !important; }
+    .dark-base .hm-line-label { color: var(--dm-label) !important; }
     .dark-base .map-legend { background: var(--dm-surface) !important;
         color: var(--dm-text) !important; border-color: var(--dm-border) !important; }
     .dark-base .leaflet-bar, .dark-base .leaflet-control-layers {
@@ -307,7 +308,6 @@ THEME_TOGGLE_HTML = (
     .replace("@@AMBIENT_JS@@", AMBIENT_THEME_JS)
     .replace("@@FONT_STACK@@", FONT_STACK)
     .replace("@@DARK_VARS@@", css_vars(DARK))
-    .replace("@@LABEL_BRIGHTNESS@@", str(DARK_LABEL_BRIGHTNESS))
     .replace("@@DARK_ATTRIB_BG@@", rgba(DARK["page"], 0.8))
     .replace("@@LIGHT_SURFACE@@", LIGHT["surface"])
     .replace("@@LIGHT_TEXT@@", LIGHT["text"])
@@ -1372,6 +1372,11 @@ def _clearance(tip):
     return tip[4] if len(tip) > 4 else 0.0
 
 
+# The light theme's default label halo. A label that cannot read on it takes
+# the dark theme's page colour instead (label_colours decides, per label).
+LIGHT_LABEL_HALO = "#ffffff"
+
+
 def add_line_label(feature_group, tip, label, color):
     """A permanent, always-visible line-name label at the tail end of the line
     - NOT a hover tooltip. Use the line's real public-facing name.
@@ -1383,11 +1388,12 @@ def add_line_label(feature_group, tip, label, color):
     and it stays put relative to the tip at every zoom."""
     lat, lon, ux, uy = tip[:4]
     dx, dy, _hw, _hh = _label_offset(label, ux, uy, _clearance(tip))
-    # A colour too dark to read on the dark theme's halo carries its own
-    # lighter shade, which only the dark theme applies - see
-    # pipeline/linecolour.py, "DARK-MODE LINE LABELS".
-    dark = dark_label_colour(color, DARK["page"])
-    dark_css = f" --dm-label: {dark};" if dark else ""
+    # Both themes read at 4.5:1: the light theme's colour and halo (a yellow
+    # keeps its colour on a dark halo rather than turning olive), and the dark
+    # theme's colour, applied by the .dark-base rule - see
+    # pipeline/linecolour.py, "LINE LABELS".
+    light, halo, dark = label_colours(color, light_halo=LIGHT_LABEL_HALO,
+                                      dark_halo=DARK["page"])
     # zIndexOffset lifts the label above the business-cluster badges: without
     # it a large downtown cluster is drawn on top of the label and hides it.
     folium.Marker(
@@ -1400,10 +1406,10 @@ def add_line_label(feature_group, tip, label, color):
             <div class="hm-line-label" style="
                 position: absolute; left: 0; top: 0;
                 transform: translate(-50%, -50%) translate({dx:.1f}px, {dy:.1f}px);
-                font-size: 14px; font-weight: bold; color: {color};{dark_css}
-                text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff,
-                             -1px 1px 0 #fff, 1px 1px 0 #fff,
-                             0 0 6px #fff;
+                font-size: 14px; font-weight: bold; color: {light}; --dm-label: {dark};
+                text-shadow: -1px -1px 0 {halo}, 1px -1px 0 {halo},
+                             -1px 1px 0 {halo}, 1px 1px 0 {halo},
+                             0 0 6px {halo};
                 white-space: nowrap; pointer-events: none;
             ">{html.escape(label)}</div>
         """),

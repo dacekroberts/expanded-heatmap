@@ -88,19 +88,37 @@ def delta_e(a, b):
     return math.sqrt((la - lb) ** 2 + (aa - ab) ** 2 + (ba - bb) ** 2)
 
 
-# DARK-MODE LINE LABELS, and a reader who could not read them. A line label is
-# drawn in its line's colour on a halo of the page colour, and dark mode (the
-# default) lifts it with a CSS `brightness()` filter - which multiplies each
-# sRGB channel, so it can do nothing for a colour whose light is all in blue.
-# Brazil's deploy check measured four labels at 1.91-2.85:1 against the dark
-# halo (Porto Alegre's navy Trensurb, Rio's and Salvador's pure blue, Belo
-# Horizonte's indigo), with Barcelona, Calgary and Edmonton in the same group.
-# The owner's call (2026-09-24): a label below 4.5:1 in dark mode - WCAG's
-# figure for text of this size - is drawn in its own colour with the HSL
-# lightness raised by the smallest step that reaches it. Labels that already
-# pass, light mode and the lines themselves are untouched.
+# LINE LABELS, in both themes, and readers who could not read them. A line label
+# is drawn in its line's colour on a halo, and until 2026-09-24 both themes got
+# it wrong in different ways:
+#
+#   - DARK (the default) lifted every label with `filter: brightness(1.8)`,
+#     which scales each sRGB channel and so does nothing for a colour whose
+#     light is all in blue (Porto Alegre's navy Trensurb read at 1.91:1). The
+#     filter sat on the label element, so it brightened the HALO too: the dark
+#     page colour rendered #132039, and a model measuring against #0B1220 was
+#     measuring a halo nobody saw (the map-chrome deploy check, 2026-09-24).
+#   - LIGHT drew every label on a white halo, where 145 of 235 - the agencies'
+#     yellows and oranges - read under 4.5:1 (Milan's M3 at 1.08:1).
+#
+# The owner's calls (2026-09-24), both at WCAG's 4.5:1 for text of this size:
+#
+#   - Dark: lighten a label that fails (the owner's option), and - since the
+#     deploy check - with no filter. Each label carries an explicit dark-theme
+#     colour: what the old filter produced (so a label that already read is
+#     unchanged), with its HSL lightness raised by the smallest step that
+#     reaches 4.5:1 against the halo actually drawn, the page colour.
+#   - Light: NOT the dark treatment mirrored. Darkening to 4.5:1 moved the
+#     median failing label by CIE76 19.9 and turned every yellow olive, so a
+#     label no longer matched its line. Instead a label keeps its colour and
+#     takes the halo it reads better on - the dark page colour for most, white
+#     for navy - and a mid-tone that misses on both gets the smallest
+#     lightness step away from its halo (at most Delta-E 3.7 in the survey).
+#
+# The lines themselves are untouched in both themes.
+# scripts/check_map_markup.py measures every committed label the same way.
 LABEL_MIN_CONTRAST = 4.5
-DARK_LABEL_BRIGHTNESS = 1.8     # the CSS filter the dark theme puts on labels
+DARK_LABEL_BRIGHTNESS = 1.8     # the retired dark filter, kept as the starting shade
 
 
 def _rgb(hex_colour):
@@ -114,35 +132,49 @@ def _hex(rgb):
     return "#" + "".join(f"{max(0, min(255, round(v))):02x}" for v in rgb)
 
 
+def _lum(hex_colour):
+    r, g, b = (_srgb_to_linear(v) for v in _rgb(hex_colour))
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+
 def contrast_ratio(a, b):
     """WCAG 2 contrast ratio between two hex colours."""
-    def lum(hex_colour):
-        r, g, b_ = (_srgb_to_linear(v) for v in _rgb(hex_colour))
-        return 0.2126 * r + 0.7152 * g + 0.0722 * b_
-    hi, lo = sorted((lum(a), lum(b)), reverse=True)
+    hi, lo = sorted((_lum(a), _lum(b)), reverse=True)
     return (hi + 0.05) / (lo + 0.05)
 
 
 def brightened(hex_colour, factor=DARK_LABEL_BRIGHTNESS):
-    """What CSS `filter: brightness(factor)` renders: each sRGB channel scaled
-    and clipped."""
-    return _hex(v * factor for v in _rgb(hex_colour))
+    """The shade CSS `brightness(factor)` gave: each sRGB channel scaled and
+    clipped, truncated as the browser does (rounding once put a label 0.04 on
+    the wrong side of 4.5:1)."""
+    return "#" + "".join(f"{min(255, math.floor(v * factor)):02x}" for v in _rgb(hex_colour))
 
 
-def dark_label_colour(colour, page, *, brightness=DARK_LABEL_BRIGHTNESS,
-                      minimum=LABEL_MIN_CONTRAST):
-    """None when `colour`'s label already reads at `minimum` against `page` in
-    dark mode; otherwise `colour` with its HSL lightness raised by the smallest
-    0.01 step that does, before the same brightness filter."""
-    if contrast_ratio(brightened(colour, brightness), page) >= minimum:
-        return None
+def _away_from(colour, halo, minimum):
+    """`colour` with its HSL lightness moved away from `halo` by the smallest
+    0.01 step that reads at `minimum` against it."""
     r, g, b = (v / 255 for v in _rgb(colour))
     h, l, s = colorsys.rgb_to_hls(r, g, b)
+    sign = -1 if _lum(halo) > _lum(colour) else 1
     for step in range(1, 101):
-        lifted = _hex(v * 255 for v in colorsys.hls_to_rgb(h, min(1.0, l + step / 100), s))
-        if contrast_ratio(brightened(lifted, brightness), page) >= minimum:
-            return lifted
-    raise ValueError(f"{colour}: no lightness reaches {minimum}:1 against {page}")
+        c = _hex(v * 255 for v in colorsys.hls_to_rgb(h, min(1.0, max(0.0, l + sign * step / 100)), s))
+        if contrast_ratio(c, halo) >= minimum:
+            return c
+    raise ValueError(f"{colour}: no lightness reaches {minimum}:1 against {halo}")
+
+
+def label_colours(colour, *, light_halo, dark_halo, minimum=LABEL_MIN_CONTRAST):
+    """(light-theme colour, light-theme halo, dark-theme colour) for a line
+    label drawn in `colour`. Every result reads at `minimum` against its halo."""
+    on_light, on_dark = contrast_ratio(colour, light_halo), contrast_ratio(colour, dark_halo)
+    if on_light >= minimum:
+        light, halo = colour, light_halo
+    else:
+        halo = dark_halo if on_dark >= on_light else light_halo
+        light = colour if max(on_light, on_dark) >= minimum else _away_from(colour, halo, minimum)
+    base = brightened(colour)
+    dark = base if contrast_ratio(base, dark_halo) >= minimum else _away_from(base, dark_halo, minimum)
+    return light, halo, dark
 
 
 def check_line_colours(line_colours, category_colours, *, city=""):

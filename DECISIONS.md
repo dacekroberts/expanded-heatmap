@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**344 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**345 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Line labels read at 4.5:1 in both themes: no dark filter, a halo swap in light mode](#2026-09-24---line-labels-read-at-451-in-both-themes-no-dark-filter-a-halo-swap-in-light-mode)
 - [Renderer fixes verified and pushed; the dark-label model corrected next, with the light-mode halo swap (owner)](#2026-09-24---renderer-fixes-verified-and-pushed-the-dark-label-model-corrected-next-with-the-light-mode-halo-swap-owner)
 - [Tokyo's four own-site wards read: all CC BY 4.0, none like Sendai](#2026-09-24---tokyos-four-own-site-wards-read-all-cc-by-40-none-like-sendai)
 - [Japan: cost clauses accepted country-wide; N03 never drawn; Kyoto before Tokyo](#2026-09-24---japan-cost-clauses-accepted-country-wide-n03-never-drawn-kyoto-before-tokyo)
@@ -386,6 +387,33 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Line labels read at 4.5:1 in both themes: no dark filter, a halo swap in light mode
+
+- **Built the owner's two label calls into the renderer**, on the Rotterdam
+  branch; they are verified inside Rotterdam's deploy check (owner's order).
+  `pipeline/linecolour.label_colours()` gives every line label three values:
+  its light-theme colour, its light-theme halo, and its dark-theme colour.
+  `add_line_label` writes all three inline.
+  - **Dark: the `brightness()` filter is gone.** It brightened the halo with
+    the text. Each label now carries `--dm-label`, which starts from the shade
+    the filter produced (channels truncated as the browser does). A label that
+    already read is therefore unchanged. A label that falls short gets the
+    smallest HSL lightness step that reaches 4.5:1 against `#0B1220`, the
+    halo the browser now actually draws. Porto Alegre's Trensurb, for
+    example, is `#6c6cff`.
+  - **Light: the halo swap**, chosen over darkening, which would have moved
+    the median failing label by ΔE 19.9 and turned every yellow olive. A label
+    under 4.5:1 on white keeps its colour and takes the halo it reads better
+    on. **139 of 235 labels now sit on the dark page colour in light mode**,
+    and the 13 mid-tones that miss 4.5:1 on both halos get a nudge of at most
+    ΔE 3.7.
+- **`scripts/check_map_markup.py` now FAILS both themes.** It checks each
+  label's own colour against its own halo, requires `--dm-label` on every
+  label, and refuses a filter on the dark label rule. On the maps committed
+  before this change it reports 419 problems. After all 39 maps were
+  re-rendered it reports PROBLEMS 0 (235 labels, 139 on a dark halo), and
+  `check_render_current.py` reports all 39 maps current.
 
 ### 2026-09-24 - Renderer fixes verified and pushed; the dark-label model corrected next, with the light-mode halo swap (owner)
 
