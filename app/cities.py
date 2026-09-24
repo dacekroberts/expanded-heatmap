@@ -503,13 +503,16 @@ CITIES = [
         "blurb": "Métro (Lignes 1–14, plus 3bis and 7bis)",
         "region": "Europe",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        # TURNED BELOW THE DOT 2026-09-24, when Oslo joined Europe, and the
+        # check chose it. Oslo is far enough north that the Europe frame
+        # zoomed out, which pressed the French cities together: at the old
+        # ("middle", 0, -22) Paris's pill covered Lille (Regional)'s marker
+        # and overlapped Rennes' label at all three widths (6 problems).
+        # Scored alternatives: below, right ("start", 12, 4) and upper-right
+        # ("start", 10, -14) all 0; left ("end", -12, 4) covered Rennes.
+        # Below keeps it clear of both neighbours that crowd it - Lille to
+        # the north, Rennes to the west.
+        "label_offset": ("middle", 0, 22),
     },
     {
         "name": "Marseille",
@@ -606,6 +609,26 @@ CITIES = [
         # 375 px. It sits alone in the west of France, 3.4 degrees of
         # longitude from Paris, so a label pointing up has nothing to meet.
         "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Oslo",
+        "lat": 59.9139,
+        "lon": 10.7522,
+        "page": "pages/26_Oslo_Heatmap.py",
+        "blurb": "Ruter T-bane 1–5 and Trikk 12, 13, 15, 17, 18, 19",
+        "region": "Europe",
+        "in_default_view": False,
+        # TURNED BELOW THE DOT, and not by check_macro_labels.py. Width 29.0
+        # px, measured in the deployed app's own frame with six table entries
+        # reproducing exactly. The scaffold's ("middle", 0, -22) scored clean
+        # against every label and dot - but Oslo is the northernmost city in
+        # the Europe frame, and deploy-verify (2026-09-24) found its name
+        # ENTIRELY under the macro map's "Light mode" button at 375 px (label
+        # x 242-281, y 18-36; button x 180-291, y 10-42). The checker does not
+        # model that button, so its PROBLEMS 0 could not see this. Below the
+        # dot the label clears the button's bottom edge. Oslo also changed
+        # the frame itself - see Paris's entry.
+        "label_offset": ("middle", 0, 22),
     },
 ]
 

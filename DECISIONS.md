@@ -16,10 +16,15 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**271 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**277 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Prague back in Band A: establishments from ROS02 open data + RES activity; RŽP rejected on GDPR; the paused control was mis-specified](#2026-09-24---prague-back-in-band-a-establishments-from-ros02-open-data-res-activity-ržp-rejected-on-gdpr-the-paused-control-was-mis-specified)
+- [Two checks closed: the macro map's controls, and clones leaking into %TEMP%](#2026-09-24---two-checks-closed-the-macro-maps-controls-and-clones-leaking-into-temp)
+- [Oslo deployed; the live site measured after the reboot](#2026-09-24---oslo-deployed-the-live-site-measured-after-the-reboot)
+- [Oslo's deploy-verify found two phone-width failures the per-city checks passed](#2026-09-24---oslos-deploy-verify-found-two-phone-width-failures-the-per-city-checks-passed)
+- [Oslo built: 10,718 storefronts, 155 stations, and Norway's first city](#2026-09-24---oslo-built-10718-storefronts-155-stations-and-norways-first-city)
 - [Prague: RŽP's establishments are reachable in batches through ARES v3, each with a RÚIAN code; Prague stays paused until measured](#2026-09-24---prague-ržps-establishments-are-reachable-in-batches-through-ares-v3-each-with-a-rúian-code-prague-stays-paused-until-measured)
 - [Prague paused at Step 0: RES is a register of seats, not of shops](#2026-09-24---prague-paused-at-step-0-res-is-a-register-of-seats-not-of-shops)
 - [France deployed: the deferred deploy-verify passed, and phone-width labels clip](#2026-09-24---france-deployed-the-deferred-deploy-verify-passed-and-phone-width-labels-clip)
@@ -28,6 +33,7 @@ onwards; the early ones are split by phase rather than by hour.
 **2026-09-23**
 
 - [Wheel zoom stops discarding notches; cluster animation off](#2026-09-23---wheel-zoom-stops-discarding-notches-cluster-animation-off)
+- [The site says "rapid-transit", not "rail-transit"](#2026-09-23---the-site-says-rapid-transit-not-rail-transit)
 - [gated_access.md: Taiwan's key gate retired, Kaohsiung's request added](#2026-09-23---gated_accessmd-taiwans-key-gate-retired-kaohsiungs-request-added)
 - [The licence-read agent runs the stray-download check before reporting](#2026-09-23---the-licence-read-agent-runs-the-stray-download-check-before-reporting)
 - [Kaohsiung moves to a reopened access-blocked band (D); Band B becomes Japan only](#2026-09-23---kaohsiung-moves-to-a-reopened-access-blocked-band-d-band-b-becomes-japan-only)
@@ -314,6 +320,114 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-24 - Prague back in Band A: establishments from ROS02 open data + RES activity; RŽP rejected on GDPR; the paused control was mis-specified
+
+- **Moved Prague from the open screening gap back to Band A**, on the
+  owner's instruction to resolve the ambiguity first and park it awaiting
+  permission only if it stood. It did not stand, because a different source
+  made it moot. **ROS02** (*Registr osob – aktivní provozovny*, Digitální a
+  informační agentura, open data under 106/1999 § 5a) lists every active
+  establishment with its RÚIAN address code; joined to RES by IČO for
+  activity, it gives **27,065** Praha storefront establishments (retail
+  9,492 · food 8,037 · personal 9,536), 5,057 of them owned from outside
+  Praha. Both downloads (58,507,315 B and RÚIAN's 3,395,881 B Praha file)
+  were approved by the owner. **ROS02's terms read in full: PERMITTED** - all
+  four data.gov.cz declarations are "does not contain", including no
+  personal data, which the national terms guide calls an assurance of no
+  legal restriction; nothing to display.
+- **Found that the restaurant control which paused Prague was
+  mis-specified**: it set all of CZ-NACE 5610 (restaurants, fast food,
+  cafés, stands) against OSM `amenity=restaurant` alone, where every French
+  city compared NAF 56.10A. Like-for-like (restaurant + fast_food + cafe +
+  food_court + ice_cream = 4,652): **RES's seats read 4.48x, not 8.02x - the
+  pause was still right** - and **ROS02's establishments read 1.63x** (1.55x
+  without sole traders at their own seat), inside France's 1.26-1.80x.
+- **Rejected ARES's RŽP search as the source**, though it works (100 IČOs a
+  call, 500 calls a minute, 4,038 calls nationally) and carries a premises
+  type. Trade Licensing Act § 60(6) was the first worry and **does not reach
+  it**: the 2017 bill's separate ban on republishing the online public part
+  was struck in committee (tisk 1014, resolution 386), and ÚOOÚ reads the ban
+  as covering only a sestava. **GDPR does**: ÚOOÚ fined a site mirroring sole
+  traders' RŽP data in 2019 (UOOU-10201/18-31) because the trade register is
+  not open data. Rejected too: building on the permitting reading of §
+  60(6), and parking Prague awaiting permission, both of which ROS02 made
+  unnecessary.
+- **One owner call left for the build**: sole traders. ROS02's publisher
+  declares no personal data, but ~80% of the subjects are natural persons;
+  1,429 establishments (5.3%) sit at a sole trader's own seat. Recommended
+  in the brief: exclude those, and names only when they are trade names.
+- Counts: candidates 32 (A 16 · B 10 · C 5 · D 1, with Oslo built the
+  same day), open gap 3. Touched
+  `docs/build_briefs/prague.md` (business leg, licence, open items, two new
+  checks), `docs/city_master_list.md`, `docs/global_country_shortlist.md`.
+
+### 2026-09-24 - Two checks closed: the macro map's controls, and clones leaking into %TEMP%
+
+- **`check_macro_labels.py` now scores the map's own controls, and it
+  reproduces the Oslo failure to 0.1 px.** Handed over by the Main Building
+  Session: Oslo's deploy-verify found Oslo's pill entirely under the theme
+  button at 375 px, which this check had scored PROBLEMS 0 because it did not
+  model the button at all. It now refuses a pill that overlaps, or a labelled
+  city's dot under, the theme button, Mapbox's zoom group or the map credit.
+  All three were measured in the deployed app's own frame at 375 and 1200 px,
+  each after a screenshot forced a real frame; a hidden pane had reported the
+  Mapbox controls at a 300 px layout. The button and zoom group sit at fixed
+  offsets from the canvas's right edge at both widths (button W−163 to W−52 by
+  10–42, using the wider "☀ Light mode" label; zoom group W−42 to W−13.2 by
+  12–69.6). The credit is 244.1 × 20, inset 10 px in Mapbox's compact form
+  below 640 px of map width and flush in the corner above it. **Positive
+  control:** Oslo's label put back above its dot is computed at x 242.0–281.0,
+  y 17.9–35.9, against the measured 242–281 and 18–36, and fails with
+  "Europe 375px Oslo's pill is under the theme button (39.0 x 18.0 px)". That
+  was its only problem. With the fixed placement, all 26 cities in 7 regions
+  at 3 widths pass: nothing else was ever hidden this way.
+
+- **`check_deploy_imports.py` no longer leaves its clone behind on Windows.**
+  53 `deploy-imports-*` folders (1.7 GB) had accumulated in `%TEMP%`. Each
+  held exactly three read-only git pack files (`.idx`, `.pack`, `.rev`), which
+  Windows will not delete. `rmtree(..., ignore_errors=True)` hid every
+  failure. Removal now clears the read-only bit and retries, and warns if a
+  folder still survives. Each run also clears clones older than two hours, so
+  a concurrent run's clone is never touched. The first run took the count
+  from 54 to 5, and the 5 left are today's, under two hours old.
+
+### 2026-09-24 - Oslo deployed; the live site measured after the reboot
+
+- **Oslo is live, and the reboot took.** Pushed `06bf63d..cef5444`; the push
+  changed `app/cities.py` and `app/components.py`, so the app was rebooted.
+  Measured on the map object afterwards: the Oslo page renders its title, the
+  snapshot caption, Entur's credit with its logo loaded (56 px), and all three
+  new notices, with no error block; zoom 11.5 against 11.5 at the embedded
+  1000 px and 10.25 against 10.25 at 375 (frame 343), 0 corrections both; at
+  375 all 11 line labels present with no overlap and none clipped - the Trikk
+  17/18 fix, live. The Overview lists Oslo, reads "Europe (10)" and carries the
+  cleanup role's "rapid-transit" wording, which is the rebooted modules rather
+  than cached ones.
+
+### 2026-09-24 - Oslo's deploy-verify found two phone-width failures the per-city checks passed
+
+- **Oslo's name was hidden on the Europe map at 375 px, under the map's own
+  "Light mode" button, while `check_macro_labels.py` scored PROBLEMS 0.** Oslo
+  is the northernmost city in the frame, so its label above the dot (x 242-281,
+  y 18-36) sat entirely inside the button (x 180-291, y 10-42); it cleared at
+  768 and 1280. The checker compares labels with labels and dots and does not
+  model the button, so it could not see this - handed to the cleanup role, which
+  owns the checks. Oslo's label now sits below its dot, confirmed in the app at
+  375: readable and clear of the button, and the checker still scores 0.
+
+- **"Trikk 17" and "Trikk 18" overlapped on Oslo's own map at phone width** -
+  47 x 10 px at 375, 50 x 11 at 343, where Trikk 15 also touched. Both trams end
+  at Rikshospitalet, and the default placement put both labels at that shared
+  tail. Forcing Trikk 18 to its shape's "start" moved nothing (that end is also
+  Rikshospitalet); "end" cleared it. The label tests are now clean at 375, 343,
+  854 and 1280. Recorded beside `LINE_LABEL_ENDS` in `step3_map.py`.
+
+- **Everything else passed**: check_map_view 10.25/10.25 at 343 and 11.5/11.5
+  at 854, twice each, 0 corrections; the basemap credit uncovered at three
+  heights; the Entur logo rendering on its white chip in the app's light and
+  dark themes; the three new notices linked; Paris's label below its dot, clear
+  of Lille and Rennes, at every width; all 26 pages free of error blocks.
+
 ### 2026-09-23 - Wheel zoom stops discarding notches; cluster animation off
 
 - **deploy-verify (`scope: map-chrome`) passed, and found one residual gap in
@@ -430,6 +544,133 @@ onwards; the early ones are split by phase rather than by hour.
   three notches after load on Paris, Toulouse and New York at 1280, 854 and
   375 zoomed each three levels, set `touched`, and the view was unchanged six
   seconds later with 0 corrections.
+### 2026-09-24 - Oslo built: 10,718 storefronts, 155 stations, and Norway's first city
+
+- **Oslo is the 26th city and Norway's first, built off a register of PREMISES
+  rather than companies.** Brønnøysundregistrene's Enhetsregisteret SUB-UNITS
+  carry `beliggenhetsadresse`, each premises' physical location, kept apart
+  from the company's registered address - the distinction Czechia's RES lacked
+  when Prague was paused. Step 2 read 864,903 sub-units nationally: 138,896
+  located in kommune 0301, 13,458 in SN2025 divisions 47/56/96 (the brief's
+  figure, reproduced exactly), 12,144 after 1,314 structural exclusions, 11,884
+  after dropping 260 whose parent is bankrupt or being wound up, 11,073 after
+  the catch-all verdict, and **10,718** placed on a street address. 8,107 fall
+  within a station ring, **75.6%**. Built in the `oslo` worktree on
+  `oslo-build`; the national register files are cached once for the country at
+  `data/norway/raw/`, as France's are.
+
+- **Owner's calls: Oslo kommune only, trams drawn, ferries excluded.** Measured
+  against Kartverket's own kommune polygon: T-bane 1 37/37, 2 38/47, 3 29/38,
+  4 37/37, 5 45/51, and all six tram lines 100% inside. The worst line keeps
+  76%, better than Toulouse's T1 (52%) and Rennes' Métro b (73%), both
+  commune-only - the rule the French cities settled. All 12 stations outside
+  are in Bærum, on the Kolsås and Østerås branches, named from Kartverket's own
+  Bærum polygon. Oslo's trams serve corridors the T-bane does not (Grünerløkka,
+  Frogner, Torshov, Sagene), Marseille's and Toulouse's shape rather than
+  Paris's dense overlay; the 6 ferry routes go on Marseille's call.
+
+- **Three of the brief's claims did not survive, and each is corrected in
+  place.** (1) **The register is SN2025 (NACE Rev. 2.1), not SN2007** - its own
+  labels show it (`47.810` motor-vehicle retail, `96.230` day spas). Rev. 2.1
+  moved car retail INTO division 47 (kept, on Madrid's precedent that NAICS 441
+  counts car dealers) and ABOLISHED the store/non-store split, so a web shop is
+  filed under its product and cannot be excluded by code as France excludes
+  distance selling - disclosed on the page. (2) **Coordinates are a join, not a
+  geocode**: Kartverket publishes each kommune's whole address register in bulk
+  (5.7 MB for Oslo, 106,254 addresses), so the brief's ~13,000 geocoder calls
+  and its `fuzzy=true` trap were never needed. 96.8% placed - 10,090 exact,
+  611 letter-agnostic, 12 on an old street spelling, 5 on a unique match that
+  ignores a stale postcode; the 355 unmatched lean to companies (13.2% sole
+  traders against 28.1%), mostly a building name or c/o on the address line.
+  (3) **OSM's route relations are too partial for gate 3 here** (line 2 lists 25
+  stations against the feed's 47), unlike Lille and Rennes.
+
+- **A new national taxonomy, `norway_sn2025`, keyed at the 5-digit level.**
+  Structural exclusions by label, national: the four intermediation codes new in
+  Rev. 2.1 (47.910, 47.920, 56.400, 96.400), mobile food (56.120), canteens and
+  other catering (56.220, France's 56.29A shape), household services (96.910),
+  and **event catering (56.210) - deliberately unlike France**, which keeps its
+  *traiteurs* because a French traiteur is usually a shop; Norway's label says
+  the work happens at the event, and 53% of Oslo's have an ENK parent. The
+  per-city catch-all verdict: **`96.990` excluded** - 811 rows, 5% with any
+  registered employee and 87% with a sole-trader parent, the strongest
+  home-based signature measured anywhere here. The retail catch-alls are kept.
+
+- **Privacy: a sole trader's name is never shown, and the guard is structural.**
+  The legal form lives on the PARENT unit - a sub-unit's own form is BEDR/AAFY on
+  100% of rows and never ENK - so every premises is joined to its parent (99.2%
+  found) and an ENK's premises (32.1% after the filters) shows its address;
+  89.3% of those carry the owner's own name. `check_personal_exposure.py oslo`:
+  0 sole-trader rows show a name; 0 e-mails, 0 phone numbers (the CSV carries
+  both, never loaded - asserted); the heuristic's 1,403 "person-like" pins are
+  company names (`AS` limited companies above all - "LUMI CANDLES", "NORTH
+  PINE"), trade names by the project's rule. Its "0 at a residential unit" is a
+  measurement GAP, not a clean result: Norwegian addresses carry no APT/UNIT
+  token for it to find. Trade names shown on 71.4% of pins.
+
+- **Gate 3 network-level, a secondary source, recorded as such.** The feed's
+  101 distinct T-bane stations match the figure Norwegian Wikipedia gives; no
+  operator page states a count, and no tram figure from outside the feed was
+  found. One station stood under two names - the tram stop "Forskningsparken T"
+  12 m from the T-bane's "Forskningsparken" - merged by an explicit alias after
+  the spacing gate flagged it; the other four pairs under 200 m are real stops.
+  Collapsed median spacing 475 m network-wide, 465 m in the kommune: the shared
+  400 m floor passes, and New York's tight ring edges apply on Toulouse's fit
+  argument.
+
+- **Colours: Ruter's per-line colours from OSM, two lightened in hue.** The feed
+  colours every T-bane line `EC700C` and every tram `0B91EF`. The shared check
+  refused Ruter's T-bane 1 (ΔE 6.5 from the Retail pins) and Trikk 12 (5.7 from
+  T-bane 3); both were lightened in HSL lightness only, hue kept - lighter
+  because darker shades vanish on the dark basemap the check does not score.
+  Tram 15, line 12's route while the Briskeby line is closed, has no colour
+  anywhere read and takes this project's teal. Confirmed in the browser on both
+  basemaps.
+
+- **Licences read, all PERMITTED WITH CONDITIONS, three notices added.** 27
+  Brønnøysund (NLOD; §5's default sentence verbatim, since Brønnøysund specifies
+  none), 28 Kartverket (CC BY 4.0, `© Kartverket`, both datasets on one line), 29
+  Entur (NLOD; Entur's specified "Data made available by Entur" **with its logo -
+  owner's call**, since the old developer portal still asks for it: Entur's own
+  unaltered SVG, shown on the Oslo page on a white chip at ≥20 px). Ruter's APP
+  agreement bars copying "data som Ruter gjør tilgjengelig"; it is formed on
+  installing the app and no data page incorporates it, so it is read as
+  governing the app - recorded, not buried. The kommune endpoint moved to
+  `api.kartverket.no` on Kartverket's recommendation (identical geometry).
+
+- **Adding Oslo moved Paris's macro label.** Oslo's own label (29.0 px) scored
+  clean, but Oslo widened the Europe frame, which pressed the French cities
+  together: Paris's pill covered Lille's marker and met Rennes' label at every
+  width. The checker scored four placements; Paris now sits below its dot
+  (PROBLEMS 0, 26 cities). Map re-rendered after the merge on the cleanup
+  role's phone-width label fix (`2cdcdcd`), point counts unchanged.
+### 2026-09-23 - The site says "rapid-transit", not "rail-transit"
+
+- **Owner's decision: the site-wide wording follows the scope the project
+  actually applies, so Toulouse's Téléo cable car no longer contradicts the
+  front page.** Drawing Téléo was decided earlier the same day. What was
+  left open was that the front-page caption and intro, the README, and What
+  Is Excluded still said "rail-transit stations" and "one rail network",
+  while the Toulouse page said Téléo "is the first thing on this site that is
+  not a train". `docs/excluded_categories.md`'s station-scope section had
+  already been corrected to "one city's rapid-transit network", and its test
+  was never about rails: "is it part of the network this city's riders use as
+  its rapid transit". That test is also why commuter rail is out and some
+  trams are in. **Rejected:** keeping "rail" with a "(plus one cable car, in
+  Toulouse)" footnote, which is clunky and fails again with the next non-rail
+  city; and dropping Téléo, which would reverse the earlier decision and
+  remove the only line crossing the Garonne. Changed: `app/Overview.py`
+  (caption and intro), `app/pages/91_What_Is_Excluded.py` (two sentences),
+  `README.md`, the opening sentence of `docs/excluded_categories.md`,
+  `docs/project_context.md`, and CLAUDE.md's one-line description, the last
+  approved by the owner as part of this choice. A draft that named Toulouse
+  as the one exception was cut before commit, since it would be the next
+  stale universal claim; `check_stale_claims.py --only E` still reports 25.
+  **Left as written:** the sent Philadelphia letter,
+  `docs/passover_opus5.md` (a historical handoff), `docs/city_shortlist.md`'s
+  screening criteria, and a code comment that quotes the old tagline as
+  history. City titles that say "rail" (New York's "MTA rail", LA's "Metro
+  Rail") describe networks that are rail.
 
 ### 2026-09-23 - gated_access.md: Taiwan's key gate retired, Kaohsiung's request added
 

@@ -38,7 +38,7 @@ three categories as a fact about Toronto's licensing, not about its high
 streets.** Food service is close to fully covered; Retail is a narrow slice of
 what is actually on the street.
 
-**This register has no coordinates at all — not one row.** Toronto is the only
+**This register has no coordinates at all — not one row.** Toronto was the first
 city on this site whose addresses had to be matched against a separate
 address-point layer to be placed on a map, because Canada has no national
 geocoding service the way the United States does. The City's own One Address

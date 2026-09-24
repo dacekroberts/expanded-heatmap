@@ -1,0 +1,15 @@
+{
+  "fetched_utc": "2026-09-24T01:42:54+00:00",
+  "gtfs_url": "https://storage.googleapis.com/marduk-production/outbound/gtfs/rb_rut-aggregated-gtfs.zip",
+  "boundary_url": "https://ws.geonorge.no/kommuneinfo/v1/kommuner/0301/omrade",
+  "address_url": "https://nedlasting.geonorge.no/geonorge/Basisdata/MatrikkelenAdresse/CSV/Basisdata_0301_Oslo_4258_MatrikkelenAdresse_CSV.zip",
+  "subunits_url": "https://data.brreg.no/enhetsregisteret/api/underenheter/lastned/csv",
+  "units_url": "https://data.brreg.no/enhetsregisteret/api/enheter/lastned/csv",
+  "gtfs_self_attests": false,
+  "feed_info": {
+    "feed_id": "ENTUR",
+    "feed_publisher_name": "Entur",
+    "feed_publisher_url": "https://www.entur.org",
+    "feed_lang": "no"
+  }
+}

@@ -76,6 +76,10 @@ TEXT_WIDTH = {
     # differently (Toulouse 61.2, Paris 34.2) with the font reported loaded,
     # so measure in the app frame, never the top document.
     "Rennes": 49.7,
+    # Oslo measured 2026-09-24 in the app frame the same way; six entries -
+    # Rennes 49.7, Toulouse 60.4, Paris 32.9, Marseille 60.3, Milan 36.3,
+    # Boston 48.4 - reproduced exactly in the same run.
+    "Oslo": 29.0,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,
@@ -127,6 +131,32 @@ TOUCH = 1.0
 # looked at - and nothing else has. It is not a loosened threshold.
 ACCEPTED_OVERLAPS = {}
 ACCEPTED_TOL = 0.5
+
+# THE MAP'S OWN CONTROLS, which sit above the label canvas and hide whatever is
+# under them. Not modelled until 2026-09-23, so the check scored PROBLEMS 0
+# while Oslo's pill - the Europe frame's northernmost city, label above its dot
+# - was entirely under the theme button at 375px (label x 242-281 y 18-36,
+# button x 180-291 y 10-42; found by Oslo's deploy-verify, not by this).
+#
+# Measured in the deployed app's own frame (/~/+/) at 375px (canvas 343) and
+# 1200px (canvas 1030), each after a screenshot forced a real frame - a hidden
+# pane reported the Mapbox controls at a 300px-wide layout. Offsets are from
+# the canvas's RIGHT edge because that is how the CSS places them:
+#   theme button  `#macro-theme-toggle { top: 10px; right: 52px }` - 111 px wide
+#                 with "☀ Light mode", 103.5 with "☾ Dark mode"; the wider is
+#                 used, since either can be showing. 32 px tall.
+#   zoom group    Mapbox's top-right navigation control, 28.8 x 57.6.
+#   credit        Mapbox's attribution, 244.1 x 20: inset 10 px in its compact
+#                 form on a narrow map (375) and flush in the corner on a wide one
+#                 (1200). Mapbox goes compact below 640 px of map width.
+# The button's width depends on the system sans-serif, so re-measure if the
+# label text or font changes.
+def controls(cw):
+    credit = ((cw - 10 - 244.1, CANVAS_H - 30, cw - 10, CANVAS_H - 10) if cw < 640
+              else (cw - 244.1, CANVAS_H - 20, cw, CANVAS_H))
+    return [("theme button", (cw - 163.0, 10.0, cw - 52.0, 42.0)),
+            ("zoom buttons", (cw - 42.0, 12.0, cw - 13.2, 69.6)),
+            ("map credit", credit)]
 
 
 def fit_view(lats, lons, west_pad=0.12):
@@ -301,6 +331,19 @@ def main():
                 if marker_on and (box[1] < 0 or box[3] > CANVAS_H):
                     problems.append(f"{region['name']:<20} {vw:>4}px  "
                                     f"{city['name']} falls off vertically")
+                # Under one of the map's own controls: the pill, or the dot of
+                # a city this region labels.
+                for what, cb in controls(cw):
+                    ox, oy = overlap(box, cb)
+                    if ox > TOUCH and oy > TOUCH:
+                        problems.append(
+                            f"{region['name']:<20} {vw:>4}px  "
+                            f"{city['name']}'s pill is under the {what} "
+                            f"({ox:.1f} x {oy:.1f} px)")
+                    if cb[0] < x < cb[2] and cb[1] < y < cb[3]:
+                        problems.append(
+                            f"{region['name']:<20} {vw:>4}px  "
+                            f"{city['name']}'s marker is under the {what}")
 
             for i, (a, _, _, ab, _) in enumerate(placed):
                 for b, _, _, bb, _ in placed[i + 1:]:

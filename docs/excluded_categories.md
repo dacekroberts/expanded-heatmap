@@ -1,6 +1,6 @@
 # What this map leaves out, and why
 
-This project maps **storefront** commercial density around rail-transit
+This project maps **storefront** commercial density around rapid-transit
 stations: the kind of business you might walk into on your way from a station.
 
 That sentence holds two separate scoping decisions, and this page is both of
@@ -1098,6 +1098,44 @@ same national register, so this is a scoping choice rather than a data limit.
 **About one active establishment in six is withheld by INSEE, not by this
 project** - 17.5% here - with the name, the address and the coordinates removed
 together, so those rows cannot reach the map.
+
+### Oslo - premises rather than companies, and a sole trader's name kept off the map
+
+**Excluded by the classification itself, anywhere in Norway** - eight SN2025
+codes whose own labels place the work away from a shop: the four intermediation
+codes new in NACE Rev. 2.1 (agents arranging a sale or a service for someone
+else), mobile food outlets, canteens and other catering, catering for events,
+and personal services performed in the customer's home - 1,314 rows. Event
+catering is excluded here and kept in France, deliberately: a French *traiteur*
+is usually a shop, while Norway's label says the work happens at the event.
+
+**Excluded as a catch-all, on Oslo's own numbers** - `96.990`, *other personal
+services not elsewhere classified*: 811 rows, of which 5% record any employee
+and 87% belong to a sole trader, the strongest home-based signature measured in
+any city here. The five retail catch-alls are kept.
+
+**Excluded because the business is ending** - 260 premises whose parent
+company is bankrupt or being wound up.
+
+**Left off because they could not be placed** - about 3% of premises whose
+address did not match Kartverket's register, mostly entries whose address line
+is a building name or a "c/o".
+
+**What cannot be excluded: web shops.** Norway's classification follows NACE
+Rev. 2.1, which abolished the separate codes for selling online or from market
+stalls, so an online-only clothes seller carries the same code as a clothes
+shop. France excludes distance selling by code; Oslo cannot, and the map
+includes some businesses with no storefront.
+
+**Shown, but not named: sole traders.** Every premises belonging to a sole
+trader shows its address instead of its name, because in 89% of them the
+business name is the owner's own. They remain on the map; only the name is
+withheld.
+
+**Twelve T-bane stations are excluded for being in Bærum**, on the western
+branches of lines 2, 3 and 5, and are listed with their municipality in
+`outputs/oslo/excluded_stations.csv`. **Ferries are not drawn**, as in
+Marseille.
 
 ## Kept, and why
 

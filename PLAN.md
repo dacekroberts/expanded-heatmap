@@ -21,6 +21,13 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [x] **🇳🇴 OSLO - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** 10,718
+  storefronts, 155 stations, T-bane 1-5 and trams 12-19, Oslo kommune only.
+  City-scoped `deploy-verify` found two phone-width failures (Oslo's macro
+  label under the Light mode button; Trikk 17/18 labels overlapping), both
+  fixed before the push. Norway's national modules are ready for a second
+  city. See `DECISIONS.md`, *"Oslo built"* and the verify entry after it.
+
 - [x] **🇫🇷 FRANCE — COMPLETE AND DEPLOYED 2026-09-23: Paris, Marseille,
   Toulouse, Lille (Regional) and Rennes, all live.** The city-scoped
   `deploy-verify` the owner deferred to the last French city ran before Rennes

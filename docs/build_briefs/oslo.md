@@ -5,6 +5,28 @@ before writing code.
 
 ---
 
+> ✅ **BUILT 2026-09-24 - 10,718 storefronts, 155 stations, T-bane AND trams,
+> Oslo kommune only.** Three claims below did not survive the build, and each
+> is corrected where it stands:
+> - **The register is SN2025 (NACE Rev. 2.1), not SN2007.** Its own labels
+>   show it: `47.810` *Detaljhandel med motorvogner*, `96.230` *dagspa*. Car
+>   retail moved INTO division 47 (kept, Madrid's precedent), and the
+>   store/non-store split is GONE - a web shop is filed under its product, so
+>   distance selling cannot be excluded by code as France does. New taxonomy:
+>   `pipeline/taxonomies/norway_sn2025.py`.
+> - **Coordinates are a JOIN, not a geocode.** Kartverket publishes the whole
+>   kommune's address register in bulk (`Basisdata_0301_Oslo_4258_
+>   MatrikkelenAdresse_CSV.zip`, 5.7 MB, 106,254 addresses): **96.8%** joined,
+>   no API calls, no `fuzzy` trap, deterministic across drift checks.
+> - **OSM's route relations are PARTIAL here** (line 2: 25 stations against the
+>   feed's 47), so they could not serve as gate 3 the way they did for Lille
+>   and Rennes. Gate 3 is network-level: 101 T-bane stations, a secondary
+>   source. OSM DID supply what the feed lacks - Ruter's per-line colours.
+>
+> Owner's calls: **kommune only** (worst line, T-bane 3, keeps 76%), **trams
+> drawn**, **ferries excluded**. ENK is **31.3%** of bucket sub-units measured
+> on all of them (not 28.6% from a sample of 220). See `DECISIONS.md`.
+
 ## The one-line summary
 
 **A clean NACE register with a keyless two-stage geocoder — and a headline
@@ -214,7 +236,9 @@ attribution line.** Do not collapse them into one credit.
 - ~~`navn` usable share~~ — ✅ **MEASURED 2026-09-23, and the framing was
   wrong.** See the section below; it is **100%**, and the real problem is a
   different one.
-- **Scope** — Oslo kommune only, or the wider Osloområdet.
+- ~~**Scope** — Oslo kommune only, or the wider Osloområdet.~~ ✅ **Settled
+  2026-09-24: kommune only** (owner), on the worst line's survival -
+  T-bane 3 keeps 29 of 38; the 12 stations outside are all in Bærum.
 
 ---
 
@@ -308,14 +332,40 @@ would have returned a clean 0% natural persons and been believed.**
     "claim": "THE PRIVACY GUARD, and the trap that hides it. A sub-unit's own organisasjonsform is BEDR or AAFY on 100% of rows and NEVER ENK, because those are sub-unit forms - a complete, populated field that answers a different question. The sole-trader form lives on the parent enhet, reached by overordnetEnhet, which 100% of sub-units carry. Sampling 220 parents: 28.6% are ENK, and 86% of those share the sub-unit's name. Reading the sub-unit field instead would report 0% natural persons and be believed",
     "kind": "http_contains",
     "url": "https://data.brreg.no/enhetsregisteret/api/underenheter?kommunenummer=0301&naeringskode=47&size=1",
-    "present": ["overordnetEnhet"]
+    "present": [
+      "overordnetEnhet"
+    ]
   },
   {
     "id": "brreg-enheter-endpoint-serves-the-legal-form",
     "claim": "The parent endpoint is live and returns organisasjonsform, which is where ENK is actually visible. If this breaks, Oslo has no natural-person guard and must not ship - Norway is 3x more exposed than Paris at 28.6% against 8.7%",
     "kind": "http_contains",
     "url": "https://data.brreg.no/enhetsregisteret/api/enheter?kommunenummer=0301&organisasjonsform=ENK&size=1",
-    "present": ["ENK"]
+    "present": [
+      "ENK"
+    ]
+  },
+  {
+    "id": "oslo-address-bulk-file",
+    "claim": "Kartverket publishes Oslo's whole address register in bulk, keyless, ~5.7 MB - what makes the coordinate step a JOIN (96.8% measured) rather than ~13,000 geocoder calls",
+    "kind": "http_ok",
+    "url": "https://nedlasting.geonorge.no/geonorge/Basisdata/MatrikkelenAdresse/CSV/Basisdata_0301_Oslo_4258_MatrikkelenAdresse_CSV.zip",
+    "min_bytes": 4000000
+  },
+  {
+    "id": "ruter-gtfs-has-shapes",
+    "claim": "Ruter's GTFS via Entur carries shapes.txt so all eleven lines are drawn from the operator's geometry, and a feed_info.txt that names Entur but declares no validity window",
+    "kind": "gtfs_files",
+    "url": "https://storage.googleapis.com/marduk-production/outbound/gtfs/rb_rut-aggregated-gtfs.zip",
+    "present": [
+      "routes.txt",
+      "trips.txt",
+      "stops.txt",
+      "stop_times.txt",
+      "shapes.txt",
+      "feed_info.txt"
+    ],
+    "absent": []
   }
 ]
 ```

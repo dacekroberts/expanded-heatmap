@@ -592,7 +592,8 @@ _NOTICES = [
      "Rail route geometry and station locations for Mexico City (Metro CDMX "
      "and Tren Ligero), Guadalajara (Tren Ligero) and Barcelona (Metro de "
      "Barcelona, including its FGC lines and both funiculars), and the route "
-     "geometry of Lille's two métro lines, are from OpenStreetMap, "
+     "geometry of Lille's two métro lines and the per-line colours of "
+     "Oslo's T-bane and tram lines, are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
      "geometry; stations, rings and categories are this project's work.",
@@ -748,6 +749,51 @@ _NOTICES = [
      "the rings, the categories and the densities are this project's own work "
      "and are not produced or endorsed by STAR, Keolis Rennes or Rennes "
      "Métropole.",
+     True),
+    # BRØNNØYSUNDREGISTRENE - Oslo's business register. NLOD 2.0: section 5
+    # says to attribute "as specified by the licensor", and Brønnøysund's API
+    # documentation specifies nothing beyond "License: NLOD" (read
+    # 2026-09-24) - so this is section 5's own default sentence, VERBATIM,
+    # with the licence linked. Section 5 also requires changes to be
+    # indicated clearly, which the second sentence does.
+    ("Brønnøysundregistrene (Oslo)",
+     "Contains data under the Norwegian licence for Open Government data "
+     "(NLOD) distributed by Brønnøysundregistrene "
+     "([NLOD 2.0](https://data.norge.no/nlod/en/2.0)). Oslo's business "
+     "premises are selected, classified and placed by this project, and a "
+     "sole trader's premises is shown by its address rather than its name; "
+     "the categories and densities are this project's own work.",
+     True),
+    # KARTVERKET - two datasets, one licensor, one licence (CC BY 4.0), so one
+    # line: the address register (the coordinate join) and the kommune
+    # boundaries (station scope and the naming of excluded stations).
+    # Kartverket's own terms prescribe "© Kartverket" and a link; CC BY 4.0
+    # 3(a) adds the licence link and a statement of modification. The
+    # boundaries' municipality names come from SSR, whose rule asks for
+    # "SSR ©Kartverket" - cheap, so included rather than argued.
+    ("Kartverket (Oslo)",
+     "© [Kartverket](https://www.kartverket.no). Oslo's address register "
+     "(Matrikkelen – Adresse) and the municipal boundaries of Oslo and Bærum "
+     "(Administrative enheter kommuner), under "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); municipality "
+     "names from SSR ©Kartverket. This project joins the addresses to the "
+     "business register to place each premises, and uses the boundaries to "
+     "select and label stations.",
+     True),
+    # ENTUR - Ruter's GTFS. NLOD, and Entur SPECIFIES its credit: "Data made
+    # available by Entur + (logo)" (developer.entur.org, read 2026-09-24).
+    # The LOGO is shown on the Oslo page beside this data (owner's call
+    # 2026-09-24: the old portal's instruction is still live, so it is
+    # treated as owed) - Entur's own unaltered file,
+    # app/assets/entur/Enturlogo_Blue_RGB.svg. NLOD section 6 bars using the
+    # licensor's or other contributors' names to endorse, which reaches Ruter.
+    ("Entur (Oslo)",
+     "Data made available by Entur, under the Norwegian licence for Open "
+     "Government data ([NLOD 2.0](https://data.norge.no/nlod/en/2.0)); source: "
+     "Ruter's timetable data via [Entur](https://developer.entur.org). The "
+     "T-bane and tram lines and stations are selected, limited to Oslo kommune "
+     "and redrawn by this project, and the line colours are not from this "
+     "data. Not produced or endorsed by Entur, Ruter or Sporveien.",
      True),
 ]
 
