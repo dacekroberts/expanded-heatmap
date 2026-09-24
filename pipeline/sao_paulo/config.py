@@ -79,6 +79,12 @@ NOT_YET_OPEN_REFS = ("6", "17")
 LINE_ORDER = ("1", "2", "3", "4", "5", "15")
 LINE_NAMES = {"1": "Linha 1-Azul", "2": "Linha 2-Verde", "3": "Linha 3-Vermelha",
               "4": "Linha 4-Amarela", "5": "Linha 5-Lilás", "15": "Linha 15-Prata"}
+# OSM's colours (GeoSampa carries none), measured 2026-09-24 against the pins:
+# all clear the floor unchanged; Linha 1 is 13.7 from Retail and recorded, as
+# agency colours below the preferred 45 are. Linha 3's two direction relations
+# disagree (#ef3f32 / #D9001C, 10.5 apart); the first relation's is taken.
+LINE_COLOURS = {"1": "#1266af", "2": "#008162", "3": "#ef3f32", "4": "#FFD700",
+                "5": "#9200C3", "15": "#7b9192"}
 # Gate 3: GeoSampa's operating layer, 85 distinct stations (brief, 2026-09-23);
 # re-counted from the cached layer at every run - with ONE recorded correction.
 # The layer lacks Jardim Colonial, Linha 15's terminus, which OSM carries and
