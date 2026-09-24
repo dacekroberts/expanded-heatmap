@@ -579,7 +579,15 @@ brief names.
   (staging, started 2026-09-24).** Five cities run on one join. Lift
   `scripts/screen_japan_join.py` into `pipeline/japan_join.py`, and write a
   shared taxonomy for 営業の種類 in `pipeline/taxonomies/`, as Brazil's CNEFE
-  module was written before its second build. **Osaka is the recommended
+  module was written before its second build.
+  - [x] **Stage 1 (2026-09-24): the join core MOVED unchanged** into
+    `pipeline/countries/japan_register.py` (20 definitions). The script now
+    imports it and keeps only the measurement. Identical output on all 24
+    city and ward keys, with Minato at 99.8%.
+  - [ ] Stage 2: `pipeline/countries/japan.py` (national facts: the MLIT URL
+    templates, N02, the per-city ward codes and projected CRS), the 営業の種類
+    taxonomy module and its registry entry. The three owner calls above decide
+    two of its rules (菓子製造業 / そうざい製造業; rail). **Osaka is the recommended
   first build**: the cleanest list, 99.1% block, 38 m against the city's own
   coordinates.
 - [ ] **Japan — three owner calls that recur in all five briefs.** Decide them

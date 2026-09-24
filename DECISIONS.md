@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**318 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**319 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Japan's join moved into the pipeline, unchanged, before any Japanese build](#2026-09-24---japans-join-moved-into-the-pipeline-unchanged-before-any-japanese-build)
 - [Japan re-banded and the geocoding band closed; Rotterdam to A](#2026-09-24---japan-re-banded-and-the-geocoding-band-closed-rotterdam-to-a)
 - [Rome: the page text written, notices 36 and 37, merged with Amsterdam](#2026-09-24---rome-the-page-text-written-notices-36-and-37-merged-with-amsterdam)
 - [Amsterdam deployed; the live site measured after the reboot](#2026-09-24---amsterdam-deployed-the-live-site-measured-after-the-reboot)
@@ -360,6 +361,25 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Japan's join moved into the pipeline, unchanged, before any Japanese build
+
+- **Moved the Japan join core from `scripts/screen_japan_join.py` into
+  `pipeline/countries/japan_register.py`, without editing it**, so the screen
+  and the five Band A builds share one set of rules. The owner approved it as
+  the handoff's first item. Twenty definitions were lifted by AST with their
+  leading comments: normalisation, the ISJ loaders (the 小字 key included),
+  the three permit readers, and both joins. The script keeps only the
+  measurement (tiers, misses, the GSI check, the per-city configs). **The proof
+  is output, not review**: every city and ward key was run before and after
+  (24 keys, `--misses` samples included), and the two outputs are identical.
+  `check_no_fetch_in_steps.py` passes: the module does no network access. The
+  rejected alternative was writing the pipeline module fresh from the script,
+  which is how two copies drift. Brazil's CNEFE taxonomy took this route for
+  the same reason, and a peer session asked this session not to create a
+  second copy of that. Stage 2 is the national facts module (`japan.py`) and
+  the 営業の種類 taxonomy. Two of its rules wait on owner calls (菓子製造業 and
+  そうざい製造業; intercity rail).
 
 ### 2026-09-24 - Japan re-banded and the geocoding band closed; Rotterdam to A
 
