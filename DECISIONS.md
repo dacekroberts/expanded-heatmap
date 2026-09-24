@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**331 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**332 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Kyoto enters Band A: licence read, brief written, row moved](#2026-09-24---kyoto-enters-band-a-licence-read-brief-written-row-moved)
 - [Kyoto's rail scope: Keishin kept, funiculars drawn, Sagano out (owner)](#2026-09-24---kyotos-rail-scope-keishin-kept-funiculars-drawn-sagano-out-owner)
 - [Kyoto's register rebuild moves into the pipeline; its stub test passes](#2026-09-24---kyotos-register-rebuild-moves-into-the-pipeline-its-stub-test-passes)
 - [Kyoto's four join rules land in the shared module; rule C corrected before it did](#2026-09-24---kyotos-four-join-rules-land-in-the-shared-module-rule-c-corrected-before-it-did)
@@ -373,6 +374,44 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Kyoto enters Band A: licence read, brief written, row moved
+
+- **Kyoto's permit lists are PERMITTED WITH CONDITIONS under CC BY 4.0**
+  (the `licence-read` agent).
+  - **The grant**: the portal's 京都市オープンデータ利用規約 (第3版, 2023-06-01)
+    clause 1 applies each dataset's licence. All three dataset pages, and all
+    340 of their resource pages, declare CC BY 4.0 with 著作権者 京都市. There
+    is no click-through, and the government standard terms are not adopted.
+  - **The notice** names 京都市 and the name 京都市オープンデータ, links the
+    datasets and the licence, and says the data was processed.
+  - **The one judgment in it:** the portal words its credit request as a
+    request (お願いします), outside the numbered clauses. It was treated as
+    binding through CC §3(a)(1)(A)(i), which makes a licensor's reasonable
+    form of credit a condition. The rejected alternative, treating it as
+    optional, saves one phrase.
+  - **Nothing is owed to the City.** Must not imply endorsement or use the
+    emblem.
+  - **Fetch only from the portal**: older copies of some lists sat on
+    `www.city.kyoto.lg.jp`, whose copyright page bars copying.
+  - The dataset notes also rule out calling the map "currently operating
+    businesses", which the rebuild could not support anyway.
+- **`docs/build_briefs/kyoto.md` is written, and its 8 checks pass live**:
+  the three licence declarations, the terms' credit request, the absent API,
+  the ISJ and N03 files, and the CRS.
+  - It carries the disclosures: a rebuilt register, closures unseen (an upper
+    bound), vehicles, short-term permits and twin-town rows left out, and food
+    retail by permit type only.
+  - **One change to the stitch, made while writing it**: `kyoto_permit_stream`
+    now also returns `許可開始日`. Without it, a build could not apply the
+    rebuild's own filter on terms under a year (48 restaurants). The screen's
+    numbers are unchanged.
+- **The master list moves Kyoto from the open gap to Band A** (A 21, gap 8),
+  as the owner decided. A row joins the Japan table, and Kyoto's line in the
+  gap table is replaced by a marker, as Rome's was.
+- **Kyoto's build-order position is left to the owner**
+  (`PLAN.md`). The recommendation is after Fukuoka and before Tokyo, which
+  stays last.
 
 ### 2026-09-24 - Kyoto's rail scope: Keishin kept, funiculars drawn, Sagano out (owner)
 

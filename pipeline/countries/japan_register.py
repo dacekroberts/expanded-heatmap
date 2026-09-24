@@ -333,7 +333,7 @@ def workbook_tables(path):
 # deduplicated, kept while its term runs. Closures are INVISIBLE, so this is an
 # upper bound and must be disclosed as one (Rotterdam's method).
 KYOTO_COLS = {"a1": "営業所＿所在地１", "a2": "営業所＿所在地２", "name": "営業所＿名称（屋号・商号）１",
-              "type": "業種", "end": "許可終了日", "granted": "許可年月日"}  # premises columns only
+              "type": "業種", "start": "許可開始日", "end": "許可終了日", "granted": "許可年月日"}  # premises columns only
 KYOTO_CORP = re.compile(r"株式会社|有限会社|合同会社|合資会社|合名会社|一般社団法人|公益社団法人|一般財団法人|"
                         r"公益財団法人|社会福祉法人|医療法人|学校法人|宗教法人|特定非営利活動法人|[(]株[)]|[(]有[)]|㈱|㈲")
 
@@ -388,12 +388,16 @@ def kyoto_permit_stream(raw_dir, as_of):
     for f in files:
         for r in workbook_tables(f):
             rec = {k: r.get(v, "") for k, v in KYOTO_COLS.items()}
-            rec["d_end"], rec["d_granted"] = wareki_date(rec["end"]), wareki_date(rec["granted"])
+            rec["d_start"], rec["d_end"], rec["d_granted"] = (wareki_date(rec["start"]), wareki_date(rec["end"]),
+                                                              wareki_date(rec["granted"]))
             rank = (rec["d_end"] or datetime.date(1900, 1, 1), rec["d_granted"] or datetime.date(1900, 1, 1))
             key = _kyoto_key(rec)
             if key not in best or rank > best[key][0]:
                 best[key] = (rank, rec)
+    # the start date lets a build drop permits whose term is under a year (48
+    # restaurants on 2026-09-24), as the rebuild's own count did
     return [{"営業所所在地": rec["a1"] + rec["a2"], "業種": rec["type"], "屋号": rec["name"],
+             "許可開始日": rec["d_start"].isoformat() if rec["d_start"] else "",
              "許可終了日": rec["d_end"].isoformat()}
             for _, rec in best.values() if rec["d_end"] and rec["d_end"] >= as_of]
 
