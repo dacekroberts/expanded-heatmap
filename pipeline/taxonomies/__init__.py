@@ -105,6 +105,7 @@ TAXONOMY_MODULES = {
     "norway_sn2025": "pipeline.taxonomies.norway_sn2025",
     "denmark_db25": "pipeline.taxonomies.denmark_db25",
     "czech_nace2025": "pipeline.taxonomies.czech_nace2025",
+    "rome_suap": "pipeline.taxonomies.rome_suap",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 
