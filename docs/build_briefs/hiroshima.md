@@ -52,12 +52,18 @@ MLIT files for the **8 wards** (34101 中, 34102 東, 34103 南, 34104 西,
 
 | Tier | Own list (9,235 fixed) | MHLW, addressed (7,397) |
 |---|---|---|
-| Block | **95.9%** | **94.7%** |
-| Town-chōme / 大字 centroid | 1.5% | 1.5% |
-| Unplaced | 2.6% | 3.7% |
+| Block | **96.0%** | **95.0%** |
+| Town-chōme / 大字 centroid | 1.7% | 1.7% |
+| Unplaced | 2.3% | 3.3% |
+
+*(Re-measured 2026-09-24 after Kyoto's rules A–D in `japan_register.py`: was
+95.9 / 94.7% block, 2.6 / 3.7% unplaced. Hiroshima is where rule C was
+corrected before it landed: its first form put 佐伯区's `五日市町石内` rows at
+the 大字 五日市町's 地番, a median 2.1 km from MHLW's own point, because 110 of
+the 588 地番 numbers there repeat across 小字.)*
 
 **Independent check**: MHLW's own coordinates against the block point sit a
-**median 35 m** apart, **96.3% within 250 m** (7,006 rows).
+**median 35 m** apart, **96.3% within 250 m** (7,027 rows).
 
 ## 🚇 Rail — MLIT N02, commuter rail INCLUDED (owner, 2026-09-24)
 

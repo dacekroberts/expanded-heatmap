@@ -629,8 +629,15 @@ brief names.
     taxonomy from the shared modules.
   - [ ] Owner, minor: アイスクリーム類製造業 (692 rows; many are gelato
     counters) is OUT for now, since the owner's call named 菓子 and そうざい.
-- [ ] **Kyoto → Band A (owner, 2026-09-24), in this order, after a /compact:**
-  1. Add the rebuild's rules A–D to `pipeline/countries/japan_register.py`.
+- [x] **Kyoto → Band A (owner, 2026-09-24), in this order, after a /compact:**
+  all five steps done 2026-09-24. Brief checks pass 8/8.
+  1. [x] **Done 2026-09-24.** Kyoto food 92.7% block, 6.0% chōme, 1.3% none;
+     personal services 94.4% / 4.1% / 1.6%. Minato stays at 99.8%. Two changes
+     from the text below, both measured: the private-use codes sit in a
+     Kyoto-only table, and C's prefix match on a 大字 that has 小字 looks the
+     地番 up under that 小字 or leaves the row unplaced. Kobe, Sapporo, Sendai,
+     Fukuoka and Hiroshima briefs updated. See DECISIONS.
+     Add the rebuild's rules A–D to `pipeline/countries/japan_register.py`.
      The rule text is in `scratchpad/japan_run/kyoto/result.json`.
      - A: strip the street-intersection part (上る/下る/入る), Kyoto only.
      - B: character variants in `VARIANTS` (祇/祗 and Kyoto's private-use
@@ -643,16 +650,41 @@ brief names.
      B and C apply to every city. Capture a before/after of all 24 keys plus
      Kyoto (`scratchpad/japan_run/baseline_all.py`), keep Minato at 99.8%,
      and update any brief whose number moves.
-  2. Add a `kyoto` entry to `scripts/screen_japan_join.py` (the stitched list,
+  2. [x] **Done 2026-09-24.** The stitch moved into the pipeline as
+     `japan_register.kyoto_permit_stream(raw_dir, as_of)`, so the screen and
+     the build run one copy. The build must pin `as_of` and never use today.
+     The screen's `kyoto` and `kyoto-life` keys read 28,459 / 5,828 fixed
+     premises at 92.7% / 94.4% block. `xlrd` was added for the 2021 `.xls`.
+     **Stub test passes.** Karasuma keeps 15 of 15 stations and Tōzai 16 of 17.
+     Randen, Eizan, Keihan Ōtō and Hankyū Arashiyama keep all of theirs. JR and
+     the private railways are cut at the line.
+     ✅ **Owner, 2026-09-24:** Keihan Keishin passes (3 of 7 stations is half
+     a line, not a stub). The two funiculars (Eizan cable, Kurama-dera) are
+     drawn. The Sagano scenic line is left out as a tourist line. The brief
+     carries all three.
+     Add a `kyoto` entry to `scripts/screen_japan_join.py` (the stitched list,
      `data/kyoto/raw/isj`), and put Kyoto's ward codes (26101–26111) and
      EPSG:32653 in `japan.py`. Run the stub test.
-  3. `licence-read` on data.city.kyoto.lg.jp (CC BY 4.0 declared).
-  4. Write `docs/build_briefs/kyoto.md` with a checks block. It must disclose
+  3. [x] **Done 2026-09-24: PERMITTED WITH CONDITIONS** (CC BY 4.0, applied
+     by the portal's terms, 第3版). The notice names 京都市オープンデータ and
+     says the data was processed. Nothing is owed to the City. Fetch only
+     from the portal. Recorded in the brief and in `data_sources.md`.
+     `licence-read` on data.city.kyoto.lg.jp (CC BY 4.0 declared).
+  4. [x] **Done 2026-09-24**: `docs/build_briefs/kyoto.md`, checks 8/8.
+     Write `docs/build_briefs/kyoto.md` with a checks block. It must disclose
      a rebuilt register (the 2021 list plus monthly permits within their
      term), closures unknown (an upper bound), and vehicles excluded.
-  5. Move Kyoto's master-list row from the open gap to Band A. **Osaka is the recommended
+  5. [x] **Done 2026-09-24**: A 21, gap 8.
+     Move Kyoto's master-list row from the open gap to Band A. **Osaka is the recommended
   first build**: the cleanest list, 99.1% block, 38 m against the city's own
   coordinates.
+- [ ] **Kyoto's place in the Japanese build order (owner).** Recommended:
+  after Fukuoka and before Tokyo, which stays last. Kyoto is the first
+  rebuilt register in Japan, so it benefits from the join being settled on
+  four cities first.
+- [ ] **Kyoto, at build**: pin `as_of` to the fetch date. Before publishing,
+  measure same-address successors and the factory share of 菓子 and そうざい
+  (brief, "Still unknown").
 - [~] **Japan — three owner calls that recur in all five briefs.**
   1. [x] **The Shinkansen does NOT count** (owner, 2026-09-24): it is
      long-distance travel between cities.
@@ -694,7 +726,7 @@ brief names.
   belong beside three-bucket cities?
 - **Band D (4)** — each waits on an owner act or on access: Sendai's request
   (drafted), Kaohsiung's request, and reads from inside Poland and India.
-- **The open gap (9)** — re-probes, not builds.
+- **The open gap (8)** — re-probes, not builds.
 
 **Owner's outside actions** are tracked in `docs/gated_access.md`, the list of
 every key, account and letter:

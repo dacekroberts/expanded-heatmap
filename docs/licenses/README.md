@@ -93,7 +93,8 @@ changes is the **scope of an attribution the project already carries** - see
 
 | File | Source | Source URL | Retrieved |
 |---|---|---|---|
-| `mhlw-food-sanitation-system-terms-2020.pdf` | **Ministry of Health, Labour and Welfare** — 薬生食監発0710第1号 (2020-07-10), *食品衛生申請等システムの運用開始を踏まえた利用規約及び営業者等の個人情報の取扱いについて*. It carries the system's 利用規約: **第3条** limits the terms to システム利用者 and 利用行政庁 (the businesses that file and the authorities), which is what lets the **MHLW open-data verdict** in `../build_briefs/fukuoka.md` and `../build_briefs/hiroshima.md` read 第7条's ban on 改変・編集・頒布 as not reaching reusers of the open data. The notice never mentions open data. The per-field consent finding (開示情報設定) comes from the system's own FAQ, not from here. ⚠ **A 2026-03-31 amendment exists** (`https://www.mhlw.go.jp/content/001683424.pdf`); it is not stored here yet, so check it before relying on this text as current | `https://www.mhlw.go.jp/content/11130500/000648204.pdf` — saved by a browser-pane download during the Staging Session's `licence-read` run, and identical (same SHA-256 and size) to that run's own curl copy | 2026-09-24 |
+| `mhlw-food-sanitation-system-terms-2020.pdf` | **Ministry of Health, Labour and Welfare** — 薬生食監発0710第1号 (2020-07-10), *食品衛生申請等システムの運用開始を踏まえた利用規約及び営業者等の個人情報の取扱いについて*. It carries the system's 利用規約: **第3条** limits the terms to システム利用者 and 利用行政庁 (the businesses that file and the authorities), which is what lets the **MHLW open-data verdict** - for every city that uses MHLW's open data, argued in `../build_briefs/fukuoka.md` and relied on by Hiroshima's brief as of 2026-09-24 - read 第7条's ban on 改変・編集・頒布 as not reaching reusers of the open data. The notice never mentions open data. The per-field consent finding (開示情報設定) comes from the system's own FAQ, not from here. **Amended 2026-03-31 - see the next row - but only in 別添2, so the 利用規約 quoted above is still current** | `https://www.mhlw.go.jp/content/11130500/000648204.pdf` — saved by a browser-pane download during the Staging Session's `licence-read` run, and identical (same SHA-256 and size) to that run's own curl copy | 2026-09-24 |
+| `mhlw-food-sanitation-system-terms-amendment-2026.pdf` | **Ministry of Health, Labour and Welfare** — 健生食監発0331第2号 (2026-03-31), the partial amendment of the notice above, made to add reporting of health damage from so-called 健康食品. **It amends 別添2 (the handling of personal information) only.** 別添1 - the 利用規約 - is not in its comparison table, and 第3条, 第7条, 改変 and 頒布 appear nowhere in it (read from its extracted text), so the MHLW open-data verdict's basis is unchanged for every city that uses that data. 3 pages | `https://www.mhlw.go.jp/content/001683424.pdf` — fetched with `curl` (HTTP 200, `application/pdf`, 705,401 bytes) | 2026-09-24 |
 
 ## SHA-256, as retrieved
 
@@ -137,6 +138,7 @@ c389fcab88815aee4b2b39b76350a5bac85e080c52ccd794f9c647911fbeae37  translink-gtfs
 9e16f09354b83d665ffcdd1bbe15e56fc509e59934bddd497ff6eb3f767ec39a  barcelona-avis-legal.txt
 64db5ecdb13ba290f578c4b8b75b88cc3501aa4760f73cf92dc7e62123b6583d  rio-decreto-38879-siurb.pdf
 e1836a9aad4c134d86df8bd92680d2bf53359a95037171066238ffce79a6062d  mhlw-food-sanitation-system-terms-2020.pdf
+1483b30fb7d7d501a6e3e9ff0056b7fb8fb5d71da7c3493f842948e1292e4836  mhlw-food-sanitation-system-terms-amendment-2026.pdf
 ```
 
 ## Two files here are NOT licences

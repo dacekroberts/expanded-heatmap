@@ -32,6 +32,7 @@ Usage:
     python scripts/screen_japan_join.py minato --gsi 100   # cross-check 100 block hits against GSI, 1 req/s
 """
 import collections
+import datetime
 import json
 import random
 import sys
@@ -45,7 +46,8 @@ DATA = Path(__file__).resolve().parent.parent / "data"
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 # The join itself lives in the pipeline, shared with the builds; this script MEASURES it.
 from pipeline.countries.japan_register import (  # noqa: E402
-    haversine_m, join, join_city, load_city_isj, load_city_permits, load_isj, load_permits)
+    haversine_m, join, join_city, kyoto_permit_stream, load_city_isj, load_city_permits, load_isj, load_permits,
+    permits_from_rows)
 
 # municipality -> (municipality code, name, permit CSV, ISJ block zip, ISJ chōme zip)
 MUNICIPALITIES = {
@@ -110,6 +112,12 @@ CITIES = {
     "taito": ("東京都", "台東区", ["tokyo/raw/13106/2026ALL-IND-CSV.csv"], "tokyo/raw/13106"),
     "setagaya": ("東京都", "世田谷区", ["tokyo/raw/13112/zenkenr080331.csv"], "tokyo/raw/13112"),
     "meguro": ("東京都", "目黒区", ["tokyo/raw/13110/all_new_8.csv", "tokyo/raw/13110/all_old_8.csv"], "tokyo/raw/13110"),
+    # Kyoto publishes no current full list: the register is REBUILT from the 2021
+    # list and every monthly list, as of the day they were downloaded. Personal
+    # services are the city's own complete lists (2026-03-31) plus each month's new.
+    "kyoto": ("京都府", "京都市", [lambda: kyoto_permit_stream(DATA / "kyoto/raw", datetime.date(2026, 9, 24))],
+              "kyoto/raw/isj"),
+    "kyoto-life": ("京都府", "京都市", ["kyoto/raw/00530/*令和8年3月末*", "kyoto/raw/00530/*新規*"], "kyoto/raw/isj"),
 }
 
 
@@ -118,7 +126,13 @@ def run_city(key, show_misses=False):
     blocks, chome = load_city_isj(DATA / isj)
     ps = []
     for f in files:
-        ps += load_city_permits(DATA / f, pref, city)
+        if callable(f):  # a rebuilt register (Kyoto)
+            ps += permits_from_rows(f(), pref, city)
+        elif "*" in f:
+            for path in sorted(DATA.glob(f)):
+                ps += load_city_permits(path, pref, city)
+        else:
+            ps += load_city_permits(DATA / f, pref, city)
     join_city(ps, blocks, chome)
     fixed = [p for p in ps if not p["mobile"]]
     t = collections.Counter(p["tier"] for p in fixed)

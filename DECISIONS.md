@@ -16,13 +16,18 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**333 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**338 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Brazil's batch deploy check passed; two renderer defects shipped now, fixed next (owner)](#2026-09-24---brazils-batch-deploy-check-passed-two-renderer-defects-shipped-now-fixed-next-owner)
+- [Kyoto enters Band A: licence read, brief written, row moved](#2026-09-24---kyoto-enters-band-a-licence-read-brief-written-row-moved)
+- [Kyoto's rail scope: Keishin kept, funiculars drawn, Sagano out (owner)](#2026-09-24---kyotos-rail-scope-keishin-kept-funiculars-drawn-sagano-out-owner)
+- [Kyoto's register rebuild moves into the pipeline; its stub test passes](#2026-09-24---kyotos-register-rebuild-moves-into-the-pipeline-its-stub-test-passes)
 - [Brazil's nine cities to the app: text approved, five calls taken, pages 31-39](#2026-09-24---brazils-nine-cities-to-the-app-text-approved-five-calls-taken-pages-31-39)
 - [Rome deployed; the live site measured after the reboot](#2026-09-24---rome-deployed-the-live-site-measured-after-the-reboot)
+- [Kyoto's four join rules land in the shared module; rule C corrected before it did](#2026-09-24---kyotos-four-join-rules-land-in-the-shared-module-rule-c-corrected-before-it-did)
+- [MHLW's 2026 amendment archived: it leaves the terms the Japan verdict relies on untouched](#2026-09-24---mhlws-2026-amendment-archived-it-leaves-the-terms-the-japan-verdict-relies-on-untouched)
 - [MHLW's permit-system terms stored with the licences; its 2026 amendment flagged](#2026-09-24---mhlws-permit-system-terms-stored-with-the-licences-its-2026-amendment-flagged)
 - [Kyoto rebuilt from its permit stream; Band A decided, pending four join rules](#2026-09-24---kyoto-rebuilt-from-its-permit-stream-band-a-decided-pending-four-join-rules)
 - [Phone-width label placer verified and pushed](#2026-09-24---phone-width-label-placer-verified-and-pushed)
@@ -412,6 +417,96 @@ onwards; the early ones are split by phase rather than by hour.
     labels sit end to end. The regional pages drop "(Regional)" from their
     heading, as Guadalajara's and Miami's do.
 
+### 2026-09-24 - Kyoto enters Band A: licence read, brief written, row moved
+
+- **Kyoto's permit lists are PERMITTED WITH CONDITIONS under CC BY 4.0**
+  (the `licence-read` agent).
+  - **The grant**: the portal's 京都市オープンデータ利用規約 (第3版, 2023-06-01)
+    clause 1 applies each dataset's licence. All three dataset pages, and all
+    340 of their resource pages, declare CC BY 4.0 with 著作権者 京都市. There
+    is no click-through, and the government standard terms are not adopted.
+  - **The notice** names 京都市 and the name 京都市オープンデータ, links the
+    datasets and the licence, and says the data was processed.
+  - **The one judgment in it:** the portal words its credit request as a
+    request (お願いします), outside the numbered clauses. It was treated as
+    binding through CC §3(a)(1)(A)(i), which makes a licensor's reasonable
+    form of credit a condition. The rejected alternative, treating it as
+    optional, saves one phrase.
+  - **Nothing is owed to the City.** Must not imply endorsement or use the
+    emblem.
+  - **Fetch only from the portal**: older copies of some lists sat on
+    `www.city.kyoto.lg.jp`, whose copyright page bars copying.
+  - The dataset notes also rule out calling the map "currently operating
+    businesses", which the rebuild could not support anyway.
+- **`docs/build_briefs/kyoto.md` is written, and its 8 checks pass live**:
+  the three licence declarations, the terms' credit request, the absent API,
+  the ISJ and N03 files, and the CRS.
+  - It carries the disclosures: a rebuilt register, closures unseen (an upper
+    bound), vehicles, short-term permits and twin-town rows left out, and food
+    retail by permit type only.
+  - **One change to the stitch, made while writing it**: `kyoto_permit_stream`
+    now also returns `許可開始日`. Without it, a build could not apply the
+    rebuild's own filter on terms under a year (48 restaurants). The screen's
+    numbers are unchanged.
+- **The master list moves Kyoto from the open gap to Band A** (A 21, gap 8),
+  as the owner decided. A row joins the Japan table, and Kyoto's line in the
+  gap table is replaced by a marker, as Rome's was.
+- **Kyoto's build-order position is left to the owner**
+  (`PLAN.md`). The recommendation is after Fukuoka and before Tokyo, which
+  stays last.
+
+### 2026-09-24 - Kyoto's rail scope: Keishin kept, funiculars drawn, Sagano out (owner)
+
+- **The owner settled the two rail questions Kyoto's stub test raised.**
+  - **Keihan Keishin passes.** It is legally a tramway, and 3 of its 7
+    stations are inside the city line, the rest in Ōtsu. As with the Hankai
+    tram (17 of 32), that is half a line, not a stub.
+  - **The two mountain funiculars are drawn**: 京福 鋼索線 (the Eizan cable)
+    and 鞍馬山鋼索鉄道 (Kurama-dera's), both wholly inside the city.
+  - **The Sagano scenic railway is left out** as a tourist line, as Lille's
+    heritage tram and Santos's tourist tram were.
+  - These are Kyoto's calls. Kobe's funiculars (Maya, Rokkō) are still
+    recorded in its brief as a build call, with this one as the nearest
+    precedent.
+
+### 2026-09-24 - Kyoto's register rebuild moves into the pipeline; its stub test passes
+
+- **Moved Kyoto's register stitch from a scratch script into
+  `pipeline/countries/japan_register.py` as `kyoto_permit_stream(raw_dir,
+  as_of)`**, the same move the join made earlier today and for the same
+  reason: the screen that measures it and the build that uses it run one copy.
+  - **The rejected alternative** was having the screen read a stitched CSV,
+    with the build porting the logic, which makes two copies.
+  - **`as_of` is required and never defaults to today.** A step that filtered
+    on today's date would drift every day, and the drift check could not tell
+    that from a real change. The build must pin it (the screen uses
+    2026-09-24, the download date).
+  - **Verified against the scratch stitch.** The same 30,351 rows came out,
+    identical row for row. The screen's `kyoto` key reads **28,459 fixed
+    premises at 92.7 / 6.0 / 1.3%**. That is one more than the prototype's
+    28,458, because its intermediate CSV had lost a row (30,350 rows against
+    30,351). `kyoto-life` (the city's complete barber, beauty and laundry
+    lists, plus each month's new premises) reads 5,828 at 94.4 / 4.1 / 1.6%.
+  - The other 24 keys are unchanged.
+  - `load_city_permits` is split so the stitch's rows reach the same parser
+    (`permits_from_rows`). `xlrd>=2.0` joins `requirements-pipeline.txt` for
+    the 2021 list, which is `.xls`.
+- **Kyoto passes the stub test** (N03 for prefecture 26 downloaded: 4.3 MB,
+  MLIT, logged).
+  - The subway keeps its stations: Karasuma 15 of 15, Tōzai 16 of 17 (六地蔵 is
+    in Uji).
+  - The Randen trams and every line wholly inside the city (Eizan's two,
+    Keihan Ōtō, Hankyū Arashiyama) keep all of their stations.
+  - JR and the private railways are cut at the line, as the owner's scope
+    intends: Keihan main line 15 of 41, Kintetsu Kyōto 9 of 26.
+- **Two items go to the owner through the brief.** Neither blocks Band A.
+  - Keihan Keishin, legally a tramway, keeps 3 of its 7 stations, the rest
+    being in Ōtsu. The Hankai precedent (17 of 32, "half a line, not a stub")
+    reads it as passing.
+  - The data carries two mountain funiculars and the Sagano scenic line. Kobe's
+    brief left its funiculars as a build call, while Lille and Santos left out
+    their tourist lines.
+
 ### 2026-09-24 - Brazil's nine cities to the app: text approved, five calls taken, pages 31-39
 
 - **The owner approved every draft and all five batch calls as recommended**
@@ -500,6 +595,64 @@ onwards; the early ones are split by phase rather than by hour.
   and Roma–Viterbo. The zoom was 11.5 at the 1000x650 frame. Notices 36 and 37
   and the OpenStreetMap Rome clause were shown, with no exceptions, and the
   Overview read Europe (14). The `rome-*-tmp` launch entries were removed.
+### 2026-09-24 - Kyoto's four join rules land in the shared module; rule C corrected before it did
+
+- **Rules A–D from Kyoto's rebuild are now in
+  `pipeline/countries/japan_register.py`, and Kyoto joins at 92.7% block, 6.0%
+  chōme, 1.3% unplaced** (food, 28,458 fixed rows; restaurants 20,760 / 1,266 /
+  280). Personal services are at 94.4 / 4.1 / 1.6% (5,828). That is the
+  prototype's 93.0 / 6.5 / 0.5% with its 237 ambiguous twin-town rows moved to
+  unplaced, as rule D intends. Two rows differ because C now runs last, after
+  the hyphen shift and the 大字 fallback, rather than first. The Minato control
+  stays at 99.8%. The before/after of all 24 keys is in the scratchpad
+  (`japan_run/rulesAD_before.txt`, `rulesAD_after.txt`).
+- **Two departures from the proposal, both measured.** First, Kyoto's
+  private-use code points for 祇 (U+E2D3, U+E014, U+E004) sit in a Kyoto-only
+  table rather than in `VARIANTS`: each publisher assigns private-use
+  characters for itself. Second, and more important, **rule C as proposed was
+  wrong outside Kyoto.** Its prefix match drops a tail that can be a 小字
+  (`六甲山町北六甲`, `五日市町上河内`), and then looked the 地番 up under the
+  bare 大字, where the numbers restart in every 小字: 110 of 五日市町's 588
+  recur in two or more. Against MHLW's own coordinates in Hiroshima, those
+  rows sat a median 2.1 km off, 29 of 58 more than 1 km away. The 大字's
+  centroid, the obvious fallback, was a median 5.2 km off. So a prefix match on
+  a 大字 that has 小字 now looks the 地番 up under 大字 + 字 + tail, the key
+  Sendai's rule already builds, or leaves the row unplaced.
+  - After the correction, suffix matches sit a median 12–27 m from publisher
+    points, and prefix block matches 30–146 m. Hiroshima's rows more than 1 km
+    off are back to 33, where they were before the rules.
+  - Kobe publishes no coordinates, so GSI's address search is the check there:
+    on 20 sampled prefix placements it agrees at a median of 1 m.
+  - Kyoto's suffix matches first looked 838 m off GSI. GSI had matched only a
+    fragment of the intersection-style address (the ward, or 八坂上町). Given
+    the stripped ward + town + 地番 form, it agreed within 0–1 m on 12 of 12.
+- **The side-effect checks came back clean.** B merges no two MLIT towns in
+  any of the 23 address sets on disk. Twin town names exist only in Kyoto (123
+  of them), so D touches no other city.
+- **These numbers moved, and the briefs and master list now carry them**:
+  - Kobe block 96.5 → 97.1% (unplaced 1.0 → 0.3%); personal services
+    97.3 → 97.5%.
+  - Sapporo 84.5 → 84.7%.
+  - Fukuoka 98.1 / 96.7 / 99.1 → 98.1 / 96.8 / 99.2%.
+  - Hiroshima 95.9 / 94.7 → 96.0 / 95.0%.
+  - Sendai: one personal-services row.
+
+  Osaka and every Tokyo ward are unchanged.
+### 2026-09-24 - MHLW's 2026 amendment archived: it leaves the terms the Japan verdict relies on untouched
+
+- **On the owner's instruction, 健生食監発0331第2号 (2026-03-31) is stored at
+  `docs/licenses/mhlw-food-sanitation-system-terms-amendment-2026.pdf`**,
+  fetched from `https://www.mhlw.go.jp/content/001683424.pdf` (HTTP 200,
+  705,401 bytes, SHA-256 `1483b30f...2e4836`). Read before filing, because
+  the MHLW open-data verdict in the Fukuoka and Hiroshima briefs rests on the
+  2020 notice's 利用規約 (別添1, 第3条 against 第7条). **The amendment changes
+  別添2 only** - the handling of personal information, to add reporting of
+  health damage from 健康食品. 別添1 does not appear in its comparison table,
+  and 第3条, 第7条, 改変 and 頒布 appear nowhere in its text. So the verdict's
+  basis is unchanged, and the 2020 row's "check the amendment" warning now
+  records that finding instead. Read from extracted text, not a rendered
+  comparison; the table printed as 別添2 alone. Worth a line to the Staging
+  Session when it resumes, since its briefs cite the 2020 text.
 
 ### 2026-09-24 - MHLW's permit-system terms stored with the licences; its 2026 amendment flagged
 

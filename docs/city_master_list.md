@@ -36,8 +36,8 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 > | | |
 > |---|---|
 > | **Built** | **39** across 12 countries *(Toulouse, Lille (Regional) and Rennes, 2026-09-23; Oslo, Copenhagen, Prague, Amsterdam and Rome, 2026-09-24; Brazil's nine cities as one batch, 2026-09-24)* |
-> | **Candidates** | **21**, all at least partially viable — A 11 · B 0 (closed) · C 6 · D 4 *(**Brazil's nine built 2026-09-24**, leaving Band A by being built; **Japan re-banded 2026-09-24 and the geocoding band closed** — Tokyo (8 wards), Osaka, Kobe, Sapporo and Fukuoka to A, Hiroshima to C, Sendai to D, Yokohama, Nagoya and Kyoto to the open gap; Rotterdam from the open gap to A; all owner's calls; Warsaw and Hyderabad to D 2026-09-24 from the open gap, owner's calls — each geo-blocked before measurement; Copenhagen, Prague, Amsterdam and Rome built 2026-09-24; Amsterdam to A 2026-09-24 — permits + BAG shop units, both licences read, owner's call; Amsterdam from the discards to C earlier the same night; Rome to A 2026-09-24 — SUAP premises joined to ANNCSU, owner's call with a build check; Prague back to A 2026-09-24 on open data — ROS02 establishments + RES; Kaohsiung moved from B to a reopened access-blocked band D 2026-09-23, owner's call; Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built; Prague paused to the open gap 2026-09-24)* |
-> | **Open screening gap** | **9**, resting on an absence — neither candidates nor discards *(Yokohama, Nagoya and Kyoto in, Rotterdam out to A, 2026-09-24; ten left 2026-09-24 on the owner's calls after their re-probes: eight to the discards, Warsaw and Hyderabad to D)* |
+> | **Candidates** | **22**, all at least partially viable — A 12 · B 0 (closed) · C 6 · D 4 *(**Brazil's nine built 2026-09-24**, leaving Band A by being built; Kyoto from the open gap to A 2026-09-24 — its register rebuilt from the permit stream, owner's call; **Japan re-banded 2026-09-24 and the geocoding band closed** — Tokyo (8 wards), Osaka, Kobe, Sapporo and Fukuoka to A, Hiroshima to C, Sendai to D, Yokohama, Nagoya and Kyoto to the open gap; Rotterdam from the open gap to A; all owner's calls; Warsaw and Hyderabad to D 2026-09-24 from the open gap, owner's calls — each geo-blocked before measurement; Copenhagen, Prague, Amsterdam and Rome built 2026-09-24; Amsterdam to A 2026-09-24 — permits + BAG shop units, both licences read, owner's call; Amsterdam from the discards to C earlier the same night; Rome to A 2026-09-24 — SUAP premises joined to ANNCSU, owner's call with a build check; Prague back to A 2026-09-24 on open data — ROS02 establishments + RES; Kaohsiung moved from B to a reopened access-blocked band D 2026-09-23, owner's call; Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built; Prague paused to the open gap 2026-09-24)* |
+> | **Open screening gap** | **8**, resting on an absence — neither candidates nor discards *(Kyoto out again to A later the same day, on a rebuilt register; Yokohama, Nagoya and Kyoto in, Rotterdam out to A, 2026-09-24; ten left 2026-09-24 on the owner's calls after their re-probes: eight to the discards, Warsaw and Hyderabad to D)* |
 > | **Discarded** | **24**, each naming its evidence *(Kuala Lumpur, Athens, Poznań, Bratislava, Hamburg, Naples, Lima and Messina from the open gap 2026-09-24, owner's calls after their re-probes; an audit moved 12 single-method rows to the open gap and Amsterdam to Band C, 2026-09-24; the evidence check moved 5 more the same night)* |
 >
 > *Counts corrected 2026-09-23. This box had read 20 / 33 / 30 since
@@ -88,7 +88,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 30
+## Candidates — 31
 
 Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 **Eight cities moved to discarded on measurement** and **two were upgraded**.
@@ -115,12 +115,12 @@ yet* with *we looked at everything and this is what is there*.
 
 | Band | What these cities ARE | Cities |
 |---|---|---|
-| 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates answered, rail answered — every remaining question is answerable inside the build | **11** *(+ 25 built)* |
+| 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates answered, rail answered — every remaining question is answerable inside the build | **12** *(+ 25 built)* |
 | ~~🟠 **B**~~ | ~~**Geocoding at national scale.**~~ **CLOSED 2026-09-24**: Japan's address work was a join, so the condition stopped being true of all ten | **0** |
 | 🟣 **C** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **6** |
 | 🔴 **D** | **Access blocked by the publisher.** Screening complete, the file exists and is measured; the publisher's own access control is the only thing stopping it, so it is unblocked by ASKING, not by probing *(Warsaw and Hyderabad, 2026-09-24: blocked before measurement — a read from inside the country first; Sendai, 2026-09-24: the city's permission)* | **4** |
-| | **Candidates** | **21** |
-| *Open gap* | Unscreened — a row resting on an absence, so not a discard | *9* |
+| | **Candidates** | **22** |
+| *Open gap* | Unscreened — a row resting on an absence, so not a discard | *8* |
 | *Discarded* | Measured negative, evidence named | *24* |
 
 *Band A's caption briefly said "brief written" (2026-09-23, morning). That was
@@ -205,12 +205,12 @@ results in the sweep.
 
 ---
 
-## 🟢 Band A — ready to build (11 ready + 25 ✅ BUILT)
+## 🟢 Band A — ready to build (12 ready + 25 ✅ BUILT)
 
-**The eleven:** Seoul · Hong Kong — **each with a brief** in `docs/build_briefs/` — ✅ ~~nine
+**The twelve:** Seoul · Hong Kong — **each with a brief** in `docs/build_briefs/` — ✅ ~~nine
 Brazilian cities~~ **built 2026-09-24** (below) — **three Taiwanese cities**: Taipei (Regional) (6/6) ·
-Taichung (3/3) · Taoyuan (3/3) — ▲ **and six more on 2026-09-24**: **five Japanese cities**, Tokyo (8 wards) (7/7) ·
-Osaka · Kobe · Sapporo · Fukuoka (4/4 each), and **Rotterdam** (6/6). ✅ **Every Band A city has a brief**, and
+Taichung (3/3) · Taoyuan (3/3) — ▲ **and seven more on 2026-09-24**: **six Japanese cities**, Tokyo (8 wards) (7/7) ·
+Osaka · Kobe · Sapporo · Fukuoka (4/4 each) · Kyoto (8/8), and **Rotterdam** (6/6). ✅ **Every Band A city has a brief**, and
 every brief's checks pass live *(Fukuoka's BODIK host is flaky — re-run before correcting)*.
 
 ### ▲▲ Taiwan — three cities, one tax register, a door-plate JOIN (2026-09-23)
@@ -460,7 +460,7 @@ licence reads** (BAG; the permits' SILENT-with-conflict position) — if both
 pass, a build brief follows and the band question returns to the owner. The
 same answer carries to Rotterdam's re-probe, since BAG is national.
 
-### ▲▲ 🇯🇵 Japan — five cities, a block-level JOIN, not a geocoder (2026-09-24)
+### ▲▲ 🇯🇵 Japan — six cities, a block-level JOIN, not a geocoder (2026-09-24)
 
 **Moved here from the geocoding band on 2026-09-24 (owner's calls), which then
 closed.** Japan's coordinate step was a JOIN: the permit lists spell the
@@ -475,9 +475,10 @@ count, not OSM (owner).
 |---|---|---|---|---|---|
 | **Tokyo (8 wards)** | **≈59,400** — Chūō, Minato, Shinjuku (2023, disclosed), Kōtō, Shibuya, Taitō, Setagaya, Meguro | **99.1–100%** | the wards' own coordinates, median **22–43 m** | 生活衛生 registers, 11 wards (14,887) | Tokyo Open Data Terms / ward CC BY 4.0; §6 cost clause accepted |
 | **Osaka** | **61,752** | **99.1%** | the city's own (mislabelled) coordinates, median **38 m** | 15,775 | CC BY 4.0 / 政府標準利用規約 2.0 |
-| **Kobe** | **24,761** | **96.5%** | — | 4,993 | CC BY 2.1 JP |
-| **Sapporo** | **24,257** | **84.5%** + 15.2% chōme | — | 5,993 | CC BY 4.0; 第9条3 accepted |
-| **Fukuoka** | 3,231 (own list, pre-2021) + **21,088** restaurants from MHLW | **98.1% / 96.7%** | MHLW's own coordinates, median **36 m** | 5,846 (99.1%) | BODIK CC BY 4.0 + MHLW PDL 1.0 |
+| **Kobe** | **24,761** | **97.1%** | — | 4,993 | CC BY 2.1 JP |
+| **Sapporo** | **24,257** | **84.7%** + 15.2% chōme | — | 5,993 | CC BY 4.0; 第9条3 accepted |
+| **Fukuoka** | 3,231 (own list, pre-2021) + **21,088** restaurants from MHLW | **98.1% / 96.8%** | MHLW's own coordinates, median **36 m** | 5,846 (99.2%) | BODIK CC BY 4.0 + MHLW PDL 1.0 |
+| **Kyoto** ▲ | **22,259** restaurants, a register **rebuilt** from the permit stream (an upper bound: closures unseen) | **92.7%** | GSI on the stripped address, 0–1 m (12 of 12) | 5,828 (94.4%) | CC BY 4.0 (京都市オープンデータ) |
 
 - **Tokyo**: 🚩 the owner requests **Chiyoda's** ledger (即時公開請求, a CD-R for
   ¥100) to fill the centre. Until then the page names the wards with no
@@ -488,8 +489,16 @@ count, not OSM (owner).
   overlap by 1.3% (measured at block level).
 - **The other five**: Hiroshima to the one-bucket band (no personal-services
   list), Sendai to the access-blocked band (the city's permission), and
-  Yokohama, Nagoya and Kyoto to the open gap (no current food list).
-- Briefs: `docs/build_briefs/{tokyo,osaka,kobe,sapporo,fukuoka}.md`.
+  Yokohama and Nagoya to the open gap (no current food list). Kyoto went there
+  too, and came back the same day on a rebuilt register.
+- **Kyoto** ▲ *from the open gap 2026-09-24 (owner's call)*: no full list since
+  the 2021 reform, so the register is **rebuilt**: the 2021-03-31 list plus
+  every monthly list, kept while each permit's term runs
+  (`japan_register.kyoto_permit_stream`, Rotterdam's method). 15.5 restaurants
+  per 1,000, inside the yardstick. ⚠️ Closures are invisible, so the count is
+  an upper bound and the page says so. Rail (owner): Keihan Keishin passes the
+  stub test, the two funiculars are drawn, the Sagano scenic line is out.
+- Briefs: `docs/build_briefs/{tokyo,osaka,kobe,sapporo,fukuoka,kyoto}.md`.
 
 ### ▲ 🇳🇱 Rotterdam — Amsterdam's shape, the food layer rebuilt (2026-09-24)
 
@@ -615,7 +624,7 @@ block-level JOIN too** — the permits split the address into municipality /
 components with a coordinate per block — **ASSERTED, not measured**, with the
 order of work to test it.
 
-## ⚠️ OPEN SCREENING GAP — rows that rest on an absence (9 cities — a re-probe queue since 2026-09-24)
+## ⚠️ OPEN SCREENING GAP — rows that rest on an absence (8 cities — a re-probe queue since 2026-09-24)
 
 **Not candidates yet and not discards — unscreened.** `global_country_shortlist.md`
 records *"Italy stays a Milan-only country"*, but that rests on **Naples** and
@@ -654,9 +663,10 @@ first.
 | **Santiago 🇨🇱** ▼ *from the discards 2026-09-24, on the evidence check* | `datos.gob.cl`, searched and its 272 publishers enumerated: 5 of ~33 Metro comunas publish patentes. The Santiago comuna is not on the portal, and its own site was never asked | The Santiago, Providencia and Las Condes municipalities' own sites for a patentes register — the comunas the Metro converges on ▶ **Re-probed 2026-09-24 — STILL THIN on coverage; Providencia found.** Providencia publishes its current commercial licences monthly under the transparency law (`transparencia.providencia.cl`, a 31/08/2026 XLSX of 74,712 rows; name, address and activity text 100% filled; about 78% offices or tax addresses, and a first keyword pass leaves at least 6,309 storefronts: 2,034 food, 2,533 retail, 1,742 personal services; 2.07× OSM food, 2.56× shops) — no coordinates, no named address file, no licence declared. The Santiago comuna publishes patentes only as 2016–2019 lists and, since 2020, as decrees; its file host `transparencia.munistgo.cl` returns 403 to everyone, Chilean probes included; its observatory shows 2019 density classes only. Las Condes marks its Maestro Patentes unpublished. Coverage is now 6 of about 33 comunas, downtown still missing. **Next (owner): a transparency-law request to the Santiago comuna (a form with a name, so the owner's act); for Providencia, an address file and a licence read** ▶ **Downtown probe 2026-09-24 (owner's call) — PARTIAL, alcohol licences only; STAYS IN THE GAP.** The comuna's own document site (`documentos.munistgo.cl`, never asked before; its sitemap lists 396 posts, 37 on patentes) carries the semester decrees renewing ALCOHOL licences with full lists: Decreto N° 330, 1st semester 2025, 1,832 rows (about 2,084 across the semester's group decrees), with name, street address and licence class (restaurants day and night, cantinas, liquor stores, beer sellers). But they are scanned PDFs with no text layer, about 20 months old, food and liquor only — and the later decrees sit on `transparencia.munistgo.cl`, still 403 to everyone. Individuals appear by name and RUT (never published). A placement route exists: the comuna's own ArcGIS Enterprise (`gis.munistgo.cl`) has street centrelines with address ranges (3,967 of 4,479) and 74,506 house numbers — no licence declared, join unmeasured. Other routes negative: the transparency council's catalogue (8 datasets), the comuna's 429 ArcGIS Online items, its observatory hub, `datos.gob.cl` (neither the comuna nor the SII publishes there); the SII's property file with use classes is behind a taxpayer login. OSM (comuna): food 1,092, shops 3,400. **Next (owner's act only): a Ley 20.285 transparency request for the current commercial-licence list** |
 | **Yokohama 🇯🇵** ▼ *from the Japan band 2026-09-24 (owner's call)* | The overnight screen found **no current food list** on the city's own hosts: city lists stop at the 2021 food-hygiene reform, which moved filing to MHLW's 食品衛生申請等システム. That system's open data is an **opt-in slice of online filings**: 2,912 restaurants here, and 1.9–8.1% of the restaurants on the complete lists it was measured against. The coordinate step is solved (the Japanese join), so only the list is missing | A `reprobe-city` pass of the city's own hosts and catalogue for a current list, or a request to the city — Fukuoka and Hiroshima show the own-list-plus-MHLW shape works where the city keeps its counter filings ▶ **Low-cost probe 2026-09-24 — food NEGATIVE on two methods; personal services only.** The city's CKAN (`data.city.yokohama.lg.jp`) has no food-permit dataset: 食品 returns 11 newsletters and statistics, 営業許可 6 statistics, nonsense 0. The overnight screen found no list on the city's own pages. Personal services are complete: 環境衛生関係施設一覧, barber, beauty and cleaning ZIPs split per ward, as of 2026-04-01, CC BY. MHLW's opt-in slice holds 2,912 restaurants. **A one-bucket city whose one bucket is personal services**, a shape no band holds yet. **RECOMMEND: stays in the gap**; a request to the city for its food list is the next step, and the owner's act |
 | **Nagoya 🇯🇵** ▼ *from the Japan band 2026-09-24 (owner's call)* | The overnight screen found **no current food list** on the city's own hosts: city lists stop at the 2021 food-hygiene reform, which moved filing to MHLW's 食品衛生申請等システム. That system's open data is an **opt-in slice of online filings**: 1,058 restaurants here, and 1.9–8.1% of the restaurants on the complete lists it was measured against. The coordinate step is solved (the Japanese join), so only the list is missing | A `reprobe-city` pass of the city's own hosts and catalogue for a current list, or a request to the city — Fukuoka and Hiroshima show the own-list-plus-MHLW shape works where the city keeps its counter filings ▶ **Noted 2026-09-24 — not rebuildable.** BODIK keeps only 12 rolling months of new food permits (2025-09 to 2026-08), and the city publishes no full standing list, so Kyoto's stitch cannot be done. The beauty-salon list is current (city page, as of 2026-08-31, CC BY 4.0). **Next: a request to the city for its full list (the owner's act), or older monthly files from an archive** |
-| **Kyoto 🇯🇵** ▼ *from the Japan band 2026-09-24 (owner's call)* | The overnight screen found **no current food list** on the city's own hosts: city lists stop at the 2021 food-hygiene reform, which moved filing to MHLW's 食品衛生申請等システム. That system's open data is an **opt-in slice of online filings**: 26 restaurants here, and 1.9–8.1% of the restaurants on the complete lists it was measured against. The coordinate step is solved (the Japanese join), so only the list is missing | A `reprobe-city` pass of the city's own hosts and catalogue for a current list, or a request to the city — Fukuoka and Hiroshima show the own-list-plus-MHLW shape works where the city keeps its counter filings ▶ **Low-cost probe 2026-09-24 — REBUILDABLE, Rotterdam's method.** The city portal (`data.city.kyoto.lg.jp`, CC BY 4.0) holds a **full food-permit list as of 2021-03-31** (dataset 00414, just before the reform) and **every month's new permits since 2021-06** (dataset 00541, 124 resources; the newest is 令和８年７月, July 2026). Stitched together, allowing for permit terms, that approximates the current register, as Rotterdam's five-year permit notices did. Personal services are complete (dataset 00530: barber, beauty and cleaning as of 2026-03-31). ⚠️ **Every download is a web-form POST** (`action="./?id=…"`, fields `upload_file`, `upload_url`, `download`) with no direct link, so nothing was fetched: **the owner's call** (read-only API POSTs count as GET, and web forms do not). **Next: owner approval for the portal's download form, then fetch, stitch, join and measure against MHLW and the per-capita yardstick** ▶ **Rebuilt 2026-09-24 (owner approved the portal's download form) — PASS, Rotterdam's method.** 82 XLSX (14.1 MB, CC BY 4.0) through the portal's own download button: the 2021-03-31 full list (35,019 rows) plus 64 monthly lists (34,632), deduplicated to 50,178, and **30,351 still inside their permit term** on 2026-09-24 (expiry dates on about 100% of rows; renewals appear as monthly rows, and terms run 5–6 years). **22,259 fixed restaurants = 15.5 per 1,000** residents, against Kyoto's own complete 2021 list at 16.7 and a pessimistic closure floor of 11.6, all inside the yardstick (9.5–19.0). MHLW's slice (26 restaurants) is wholly inside the stitch. Food retail: 菓子 2,759, そうざい 1,186, fish 512, meat 483. Personal services are the city's own complete lists (barber, beauty, cleaning 5,828). **Join: the shared module alone gives 61.4% block and 35.5% unplaced**, because Kyoto's addresses name the street intersection (上る/下る/入る) before the town. **With four proposed rules** (A: strip the intersection part, Kyoto only; B: character variants such as 祇/祗 and 藪/薮; C: a known-town fallback; D: leave the 0.8% in same-named twin towns unplaced) it reaches **93.0% block, 6.5% chōme, 0.5% none** (personal services 94.6 / 4.6 / 0.9), with the Minato control at 99.8%. **Must disclose**: a rebuilt register in which closures are unknown (an upper bound), vehicles excluded, and food retail by permit type only. **RECOMMEND (owner): Band A** after rules A–D land in the shared module, the portal's licence is read, and a brief is written |
 
 *▲ **Rome left this gap on 2026-09-24 for Band A** — see its section there.*
+
+*▲ **Kyoto left this gap on 2026-09-24 for Band A**, its register rebuilt from the permit stream — see the Japan section there.*
 
 *▼ **Turin and Cairo left this gap on 2026-09-24 for the discard table**, each measured by two methods — see there.*
 
@@ -860,7 +870,7 @@ count settles the size question in Stockholm's favour. *(This paragraph read
 | | |
 |---|---|
 | **The one bucket (food)** | Two lists that split by filing channel: the city's counter applications (**7,479** restaurants) and MHLW's open data for online filings (**5,195**, 66% addressed), overlapping by 1.2% at block level. **10.7 restaurants per 1,000 residents** (9.2 placeable), beside Sendai's 9.5 |
-| **Joined** | own list **95.9%**, MHLW **94.7%** block; MHLW's own coordinates median **35 m** |
+| **Joined** | own list **96.0%**, MHLW **95.0%** block; MHLW's own coordinates median **35 m** |
 | **Why one bucket** | **no personal-services list**: new openings are published as PDFs only. Food retail exists only as MHLW's partial, opt-in notifications |
 | **Licences** | both **PERMITTED WITH CONDITIONS**: the city's list under PDL 1.0 (the dataset-level declaration accepted for the full-list file, owner 2026-09-24) and MHLW's PDL 1.0 |
 | **Brief** | `docs/build_briefs/hiroshima.md` (4/4). Hiroden's streetcars are the network's backbone, and whether trams count is the owner's call |

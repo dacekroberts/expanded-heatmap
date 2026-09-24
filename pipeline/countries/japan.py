@@ -62,6 +62,9 @@ CITIES = {
                 "wards": [f"011{n:02d}" for n in range(1, 11)]},
     "fukuoka": {"name": "福岡市", "pref": "40", "epsg": 32652,
                 "wards": [f"4013{n}" for n in range(1, 8)]},
+    # Band A 2026-09-24 (owner), on a register rebuilt from its permit stream
+    "kyoto": {"name": "京都市", "pref": "26", "epsg": 32653,
+              "wards": [f"261{n:02d}" for n in range(1, 12)]},
 }
 
 

@@ -17,7 +17,7 @@ of permits held since before 2021-06 (3,231 restaurants), and MHLW's
 They overlap by 1.3%, and together make 14.8 restaurants per 1,000
 residents, inside the Kobe (13.0) to Osaka (19.0) range.** ⚠️ **But 24% of
 MHLW's restaurants withhold their address** (per-field consent), so about 80%
-of the city's restaurants can be placed. Personal services 5,846 at 99.1%
+of the city's restaurants can be placed. Personal services 5,846 at 99.2%
 block.
 
 ---
@@ -67,12 +67,15 @@ MLIT files for the **7 wards** (40131 東, 40132 博多, 40133 中央, 40134 南
 
 | Tier | Own food list (3,977) | MHLW, addressed (25,982) | Personal services (5,846) |
 |---|---|---|---|
-| Block | **98.1%** | **96.7%** | **99.1%** |
-| Town-chōme / 大字 centroid | 0.3% | 0.8% | 0.3% |
-| Unplaced | 1.6% | 2.5% | 0.6% |
+| Block | **98.1%** | **96.8%** | **99.2%** |
+| Town-chōme / 大字 centroid | 0.4% | 0.8% | 0.3% |
+| Unplaced | 1.5% | 2.4% | 0.6% |
+
+*(Re-measured 2026-09-24 after Kyoto's rules A–D in `japan_register.py`: was
+98.1 / 96.7 / 99.1% block, 1.6 / 2.5 / 0.6% unplaced.)*
 
 **Independent check**: MHLW's own coordinates against the block point sit a
-**median 36 m** apart, **97.1% within 250 m** (25,093 rows). So an MHLW row the
+**median 36 m** apart, **97.1% within 250 m** (25,120 rows). So an MHLW row the
 join misses can use the publisher's point. The unplaced are rural 大字
 (元岡, 西浦, 志賀島) and on-train sales (not premises).
 
