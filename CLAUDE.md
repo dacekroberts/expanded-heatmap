@@ -356,6 +356,7 @@ python scripts/check_stray_downloads.py                 # untracked files at ANY
 python scripts/check_stale_claims.py                    # REPORTS only: prose that stopped being true (stale tense, drifted counts)
 python scripts/check_stale_claims.py --only E           # "the only city"/"no other city" claims: re-read whenever a city lands
 python scripts/check_deploy_imports.py [--ref REF]      # clean clone + lean venv: run before ANY push touching app/
+node scripts/profile_zoom.mjs <baseUrl> <city,city> [reps]   # wheel/click/cluster zoom lag, headless Edge, trusted input
 python scripts/decisions_index.py [--check]             # refresh DECISIONS.md's index
 python scripts/merge_append_only.py DECISIONS.md [--dry-run]   # resolve an append-only merge conflict
 python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon>   # add --dry-run first

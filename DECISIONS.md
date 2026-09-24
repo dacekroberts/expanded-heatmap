@@ -16,7 +16,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**270 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**271 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
@@ -27,6 +27,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 **2026-09-23**
 
+- [Wheel zoom stops discarding notches; cluster animation off](#2026-09-23---wheel-zoom-stops-discarding-notches-cluster-animation-off)
 - [gated_access.md: Taiwan's key gate retired, Kaohsiung's request added](#2026-09-23---gated_accessmd-taiwans-key-gate-retired-kaohsiungs-request-added)
 - [The licence-read agent runs the stray-download check before reporting](#2026-09-23---the-licence-read-agent-runs-the-stray-download-check-before-reporting)
 - [Kaohsiung moves to a reopened access-blocked band (D); Band B becomes Japan only](#2026-09-23---kaohsiung-moves-to-a-reopened-access-blocked-band-d-band-b-becomes-japan-only)
@@ -312,6 +313,101 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-23 - Wheel zoom stops discarding notches; cluster animation off
+
+- **The mouse wheel felt laggier than +/- because Leaflet DISCARDED most of a
+  fast roll, not because the wheel was slow - measured, and the opposite of
+  the recorded hypothesis.** The owner reported wheel zoom and cluster-click
+  zoom as laggy. `.claude/skills/map-view/` had put it down to a wheel gesture
+  walking through many quarter levels (`zoomSnap` 0.25). Profiled on Paris
+  (84,125 heat points, the heaviest map) and Toulouse (the light one) with
+  `scripts/profile_zoom.mjs`, committed for the next such question: headless
+  Edge driven over the DevTools protocol, so the wheel events were trusted
+  input rather than synthetic, with a timer around every map event, the heat
+  layer's redraw and long tasks; median of three fresh loads per case. The browser pane was not used: hidden, it pauses animation frames and
+  no zoom completes at all. **Leaflet 1.9's `_tryAnimatedZoom` returns early
+  while a zoom animation is running**, so every wheel step that fires during
+  the 250 ms animation is dropped. On the committed map, three notches in
+  50 ms zoomed Paris 0.75 of a level and five notches in 240 ms 1.5 levels -
+  the reader rolls again and waits again, which reads as lag. One notch was
+  also 0.75 of a level against a button's 1, because the wheel snaps to
+  `zoomSnap`. The first wheel step starts ~67 ms after the notch (Leaflet's
+  40 ms debounce plus a frame) against ~15 ms for a click; left alone. The
+  hypothesis held only for a TRACKPAD: many small deltas walked Paris through
+  4 quarter-steps and 4 heat redraws in a half-second swipe.
+  **Every zoom step, wheel or button, then blocks Paris's main thread
+  ~130-200 ms**: markercluster re-clustering its three groups at `zoomend`
+  (~60-110 ms) and Leaflet.heat redrawing all 84,125 points at `moveend`
+  (~65-75 ms), followed by markercluster's own ~300 ms split/merge animation.
+  Toulouse pays about a quarter of that.
+
+- **Decided, by the owner: one wheel notch zooms one whole level and nothing
+  is discarded; trackpads keep Leaflet's own curve.** `WHEEL_ZOOM_SCRIPT` in
+  `pipeline/map_common.py` replaces the map's `scrollWheelZoom` handler: a
+  step due during an animation waits for it to land and is merged with
+  whatever arrived meanwhile; a batch containing a notch-sized event (at least
+  25 normalised units - Chrome/Edge on Windows give 50 per notch, Firefox's
+  line mode 60) zooms one level per notch, capped at `zoomAnimationThreshold`
+  so it still animates; anything finer keeps Leaflet's curve and quarter snap
+  verbatim. **Rejected, measured: whole levels for all input.** With nothing
+  discarded, a half-second trackpad swipe went from 12.5 to 19. **Rejected:
+  only stopping the drops**, offered and declined in favour of matching the
+  buttons. `zoomSnap` is untouched (`_fit_view`, the guard and
+  `check_map_view.js` all depend on it); a whole step from x.5 lands on x.5,
+  so wheel and buttons now share one ladder of zooms. The guard's touch
+  detection is untouched too - a capture listener on the container, which
+  runs before this handler.
+
+- **Decided, by the owner: markercluster's split/merge animation is off, with
+  `render_heatmap(animate_clusters=...)` kept as a per-city switch.** The map
+  still animates its own zoom; clusters regroup at the end instead of flying
+  apart. Recorded for re-implementation per the owner: a light map could have
+  it back, and the owner's suggested rule is a measured lag threshold - open
+  in `PLAN.md`. `add_pin_layer` passes it to `FastMarkerCluster(options=)`.
+
+- **Before and after, same harness, both on master's label clamp (`cadf14e`),
+  median of three fresh loads.** Settle = last map event handled.
+
+  | Paris | before | after |
+  |---|---|---|
+  | +/- click, settle | 647 ms | 366 ms |
+  | cluster click (3,592 pins), settle | 818 ms | 428 ms |
+  | cluster click, longest task | 192 ms | 152 ms |
+  | 1 notch | 0.75 level | 1 level |
+  | 3 notches in 50 ms | 1.25 levels, 1 step | 3 levels, 2 steps |
+  | 5 notches in 240 ms | 1.5 levels, 2 steps, 1,023 ms | 5 levels, 3 steps, 1,393 ms |
+  | 4 notches 300 ms apart | 3 levels, 2,752 ms | 4 levels, 2,636 ms |
+  | trackpad swipe (30 x 8 px) | 1.0 level, 4 steps | 2.25 levels, 6 steps |
+
+  | Toulouse | before | after |
+  |---|---|---|
+  | +/- click, settle | 588 ms | 299 ms |
+  | cluster click (504 pins), settle | 602 ms | 310 ms |
+  | 5 notches in 240 ms | 1.5 levels | 5 levels |
+
+  The three-notch "before" read 0.75 of a level in an earlier run of the same
+  case - how much of a roll survives depends on where the notches fall against
+  the animation, which is the defect. The heat redraw (~65 ms per step on
+  Paris) is unchanged; deferring it to the end of a burst was considered and
+  not built, because with notches merged there are fewer steps to save it on,
+  and a heat canvas left CSS-scaled between steps would be a visible change.
+
+- **Verification, all 25 cities, headless Edge at real viewports (the pane
+  was hidden).** `drift_check.py --jobs 4`: every `heatmap.html` drifted and
+  nothing else, and with Folium ids and line endings normalised each diff is
+  additions only - 72 lines, 71 in Boston and Philadelphia, which have two
+  buckets and so one fewer `"animate": false`. Baseline figures unchanged
+  where recorded. `check_provenance.py --strict` all recorded.
+  `check_map_view.js` at 1280, 854, 375 and 343: 100 fresh loads, 0 problems,
+  0 guard corrections. `check_map_labels.js` at 375, 343, 854 and 1280: 0
+  clipped, 0 over the credit; the 28 overlapping pairs in seven cities and
+  the labels under the legend in Edmonton and San Diego are the ones `PLAN.md`
+  already records. `check_map_attribution.js` at 1000x650, 1000x768, 1000x812
+  and 1280x1000: 100 runs, 0 problems. **The guard still yields to the wheel**:
+  three notches after load on Paris, Toulouse and New York at 1280, 854 and
+  375 zoomed each three levels, set `touched`, and the view was unchanged six
+  seconds later with 0 corrections.
 
 ### 2026-09-23 - gated_access.md: Taiwan's key gate retired, Kaohsiung's request added
 
