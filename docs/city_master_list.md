@@ -2094,6 +2094,10 @@ failing row moves to the open gap; the rule is not relaxed to keep it.
 
 ## Before building any city on this list
 
+**Check `docs/commuter_rail_list.md`** — which cities have commuter rail, the
+two built maps that draw it (Dublin's DART, Copenhagen's S-tog), and the
+candidates whose build must decide it (Japan, Seoul, Hong Kong, São Paulo).
+
 - `docs/build_briefs/<city>.md` if one exists, then
   `python scripts/brief_check.py <city>` — a brief caches Step 0's mistakes as
   confidently as its findings.
