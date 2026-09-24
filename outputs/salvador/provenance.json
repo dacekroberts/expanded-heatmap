@@ -1,0 +1,20 @@
+{
+  "cnefe:2927408_SALVADOR.zip": {
+    "file": "2927408_SALVADOR.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/29_BA/2927408_SALVADOR.zip",
+    "bytes": 52084744,
+    "sha256": "9157a664cebff83d22b79a6865e7dd0e41952f1c7c1458b9abc827e906977610",
+    "retrieved": "2026-09-24T15:56:38+00:00 (cache file time)",
+    "last_modified": "Mon, 20 May 2024 22:52:57 GMT"
+  },
+  "osm_municipios": {
+    "file": "osm_municipios.json",
+    "host": "overpass.kumi.systems",
+    "retrieved": "2026-09-24T16:07:09+00:00 (cache file time)"
+  },
+  "osm_rail": {
+    "file": "osm_rail.json",
+    "host": "overpass-api.de",
+    "retrieved": "2026-09-24T16:07:12+00:00 (cache file time)"
+  }
+}

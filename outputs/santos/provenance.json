@@ -1,0 +1,28 @@
+{
+  "cnefe:3548500_SANTOS.zip": {
+    "file": "3548500_SANTOS.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/35_SP/3548500_SANTOS.zip",
+    "bytes": 3948134,
+    "sha256": "f49d02bb7f71373b65c3c73e5636a89633116209668a1754a4d1fb8e94121d4f",
+    "retrieved": "2026-09-24T15:57:15+00:00 (cache file time)",
+    "last_modified": "Mon, 20 May 2024 22:54:01 GMT"
+  },
+  "cnefe:3551009_SAO_VICENTE.zip": {
+    "file": "3551009_SAO_VICENTE.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/35_SP/3551009_SAO_VICENTE.zip",
+    "bytes": 3189142,
+    "sha256": "6e88b5ad49f8d1482d7134abacb2c51496ee00e6174f2f73aad4e7558d809c5b",
+    "retrieved": "2026-09-24T15:57:18+00:00 (cache file time)",
+    "last_modified": "Mon, 20 May 2024 22:54:03 GMT"
+  },
+  "osm_municipios": {
+    "file": "osm_municipios.json",
+    "host": "overpass-api.de",
+    "retrieved": "2026-09-24T17:05:37+00:00 (cache file time)"
+  },
+  "osm_rail": {
+    "file": "osm_rail.json",
+    "host": "overpass-api.de",
+    "retrieved": "2026-09-24T17:05:40+00:00 (cache file time)"
+  }
+}

@@ -51,8 +51,10 @@ the Coaster and Sprinter in San Diego, SEPTA's Regional Rail in Philadelphia,
 the MBTA's Regional Rail in Boston, Tri-Rail in Miami, GO Transit in Toronto,
 the West Coast Express in Vancouver, Cercanías in Madrid, the Passante and
 Trenord's suburban services in Milan, and Iarnród Éireann's Commuter and
-InterCity trains in Dublin, RER and Transilien in Paris, and the TER services
-in Marseille.
+InterCity trains in Dublin, RER and Transilien in Paris, the TER services
+in Marseille, CPTM's Linhas 7, 8 and 10 to 13 in São Paulo, SuperVia's Japeri,
+Santa Cruz and Belford Roxo lines in Rio de Janeiro, Metrofor's three diesel
+lines in Fortaleza, and the two diesel VLTs in Recife.
 
 **Trams are NOT excluded as a class, and the test is whether the tram is the
 rapid-transit system or an overlay on one.** Many of these maps draw light rail
@@ -80,6 +82,10 @@ Copenhagen's S-tog is the second such case: a suburban network on its own
 tracks, drawn because inside the city its stations sit about a kilometre and
 a quarter apart, every line runs every ten minutes, and most of its stations
 there have no Metro station nearby.
+Rome's Roma–Viterbo urban service, São Paulo's CPTM Linha 9 and Rio's SuperVia
+Deodoro and Saracuruna lines were decided the same way, and Brazil made the
+third part of the test explicit: how many of a line's stations have no drawn
+station within walking distance.
 
 ### Stations left out of a network that IS mapped
 
@@ -1282,6 +1288,193 @@ Monte Compatri – Pantano, in Monte Compatri, is left out. Not drawn: trams, wh
 run over the metro in the centre; the Roma–Lido railway (Metromare), whose
 stations are about two kilometres apart and whose trains run every 15 to 20
 minutes; the Roma–Viterbo railway beyond Montebello; and suburban trains.
+
+### São Paulo - a census of establishments, read from free text
+
+**Excluded by what the enumerator wrote** - offices and professional premises (52,407),
+parking and storage (44,793), vehicle and repair workshops (40,992), industry and trades
+(33,360), vacant premises (32,653), public, civic and education premises (16,201),
+places of worship (9,154), events venues (2,306), accommodation (1,766) and other
+non-premises (2,495); and 5,940 rows with no usable description.
+
+**Missing rather than excluded** - 108,311 establishments whose description no rule can
+read, mostly bare brand or trade names: about a third of those that might be
+storefronts, commoner near stations and in commercial districts. By hand-read samples,
+roughly one storefront in ten to one in seven within the station rings is missing.
+
+**What cannot be excluded: change since 2022.** The census recorded what was trading
+during its fieldwork.
+
+**Shown, but not named** - at an address that is also a home (37% of dots), the dot
+shows its category, never the enumerator's description.
+
+**One dot for many** - a shopping centre or gallery recorded as one entry is one dot.
+
+**Stations.** Metrô Linhas 1–5 and 15 and CPTM Linha 9 are drawn; Linha 9's two
+stations in Osasco are left out. Not drawn: CPTM Linhas 7, 8 and 10 to 13, whose
+stations inside the city are 2 to 3.5 km apart; Linhas 6 and 17, under construction;
+buses and bus corridors.
+
+### Rio de Janeiro - the same census, and rail from two sources
+
+**Excluded by what the enumerator wrote** - vacant premises (22,954), parking and storage (18,528), vehicle and repair workshops (15,286), offices and professional premises (14,669), industry and trades (9,827), public, civic and education premises (8,131), places of worship (6,692), events venues (2,526), accommodation (1,930) and other non-premises (1,657); and 4,155 rows with no
+usable description.
+
+**Missing rather than excluded** - 51,532 establishments whose description no rule can
+read, mostly bare brand or trade names: about a third of those that might be storefronts, a little more near the stations - about 35 in a hundred.
+
+**What cannot be excluded: change since 2022.** The census recorded what was trading
+during its fieldwork.
+
+**Shown, but not named** - at an address that is also a home (55% of dots), the dot
+shows its category, never the enumerator's description.
+
+**One dot for many** - a shopping centre or gallery recorded as one entry is one dot.
+
+**Stations.** MetrôRio Linhas 1, 2 and 4, the VLT Carioca's four lines and SuperVia's
+Deodoro and Saracuruna lines are drawn; the Saracuruna line's three stations in Duque de
+Caxias are left out. Not drawn: SuperVia's Japeri, Santa Cruz and Belford Roxo lines,
+with stations further apart or trains less often; the Santa Teresa tram; the Corcovado
+railway; and the Complexo do Alemão cable car, closed since 2016.
+
+### Belo Horizonte - the same census, and a line opened in July 2026
+
+**Excluded by what the enumerator wrote** - vacant premises (12,939), vehicle and repair workshops (8,628), offices and professional premises (8,370), parking and storage (7,514), industry and trades (6,007), public, civic and education premises (3,767), places of worship (1,917), events venues (580), accommodation (246) and other non-premises (557); and 1,203 rows with no
+usable description.
+
+**Missing rather than excluded** - 27,675 establishments whose description no rule can
+read, mostly bare brand or trade names: about four in ten of those that might be storefronts, slightly more near the stations.
+
+**What cannot be excluded: change since 2022.** The census recorded what was trading
+during its fieldwork.
+
+**Shown, but not named** - at an address that is also a home (36% of dots), the dot
+shows its category, never the enumerator's description.
+
+**One dot for many** - a shopping centre or gallery recorded as one entry is one dot.
+
+**Stations.** Metrô BH Linhas 1 and 2 are drawn, Linha 2 running at weekday peak hours
+only since it opened on 3 July 2026; Linha 1's two stations in Contagem are left out.
+
+### Brasília - the same census, where an address names a block
+
+**Excluded by what the enumerator wrote** - vacant premises (6,925), vehicle and repair workshops (6,893), offices and professional premises (6,621), industry and trades (5,322), parking and storage (5,025), public, civic and education premises (3,347), places of worship (1,821), events venues (503), accommodation (269) and other non-premises (392); and 989 rows with no
+usable description.
+
+**Missing rather than excluded** - 26,057 establishments whose description no rule can
+read, mostly bare brand or trade names: about four in ten of those that might be storefronts.
+
+**What cannot be excluded: change since 2022.** The census recorded what was trading
+during its fieldwork.
+
+**Shown, but not named** - at an address that is also a home (69% of dots), the dot
+shows its category, never the enumerator's description. Brasília's addresses name a block rather than a door, so
+this is judged by the block's lot.
+
+**One dot for many** - a shopping centre or gallery recorded as one entry is one dot.
+
+**Stations.** Metrô-DF's Linha Verde and Linha Laranja are drawn, across the whole
+Federal District. Not drawn: 104 Sul and Onoyama, still being built.
+
+### Salvador - the same census, and one station over the boundary
+
+**Excluded by what the enumerator wrote** - parking and storage (12,006), vehicle and repair workshops (7,241), vacant premises (5,999), industry and trades (4,290), offices and professional premises (4,207), public, civic and education premises (3,458), places of worship (2,570), events venues (468), accommodation (339) and other non-premises (282); and 2,631 rows with no
+usable description.
+
+**Missing rather than excluded** - 25,502 establishments whose description no rule can
+read, mostly bare brand or trade names: about a third of those that might be storefronts.
+
+**What cannot be excluded: change since 2022.** The census recorded what was trading
+during its fieldwork.
+
+**Shown, but not named** - at an address that is also a home (56% of dots), the dot
+shows its category, never the enumerator's description.
+
+**One dot for many** - a shopping centre or gallery recorded as one entry is one dot.
+
+**Stations.** Linha 1-Vermelha and Linha 2-Azul are drawn; Linha 2's last station,
+Aeroporto, in Lauro de Freitas, is left out.
+
+### Fortaleza (Regional) - the same census, and a município with no station
+
+**Excluded by what the enumerator wrote** - vacant premises (12,203), vehicle and repair workshops (11,021), parking and storage (10,972), industry and trades (8,994), offices and professional premises (7,306), public, civic and education premises (4,179), places of worship (2,247), events venues (607), accommodation (470) and other non-premises (482); and 2,143 rows with no
+usable description.
+
+**Missing rather than excluded** - 42,506 establishments whose description no rule can
+read, mostly bare brand or trade names: about four in ten of those that might be storefronts, slightly more near the stations.
+
+**What cannot be excluded: change since 2022.** The census recorded what was trading
+during its fieldwork.
+
+**Shown, but not named** - at an address that is also a home (54% of dots), the dot
+shows its category, never the enumerator's description.
+
+**One dot for many** - a shopping centre or gallery recorded as one entry is one dot.
+
+**Stations.** Metrofor's Linha Sul is drawn. Not drawn: Metrofor's three diesel lines -
+Linha Oeste, the Parangaba–Mucuripe VLT and the airport branch - which run every 30 to
+60 minutes. Caucaia's only stations were Linha Oeste's, so its businesses are counted
+with no station of its own.
+
+### Porto Alegre (Regional) - the same census, six municípios along one line
+
+**Excluded by what the enumerator wrote** - vacant premises (10,630), offices and professional premises (9,113), parking and storage (7,789), vehicle and repair workshops (7,170), industry and trades (5,530), public, civic and education premises (3,933), places of worship (1,609), events venues (584), accommodation (286) and other non-premises (376); and 1,026 rows with no
+usable description.
+
+**Missing rather than excluded** - 31,465 establishments whose description no rule can
+read, mostly bare brand or trade names: almost half of those that might be storefronts, and about half near the stations, so the station areas are the most under-drawn part of this map.
+
+**What cannot be excluded: change since 2022.** The census recorded what was trading
+during its fieldwork.
+
+**Shown, but not named** - at an address that is also a home (42% of dots), the dot
+shows its category, never the enumerator's description.
+
+**One dot for many** - a shopping centre or gallery recorded as one entry is one dot.
+
+**Stations.** Trensurb's Linha 1 is drawn, Mercado to Novo Hamburgo, across the six
+municípios it runs through. Not drawn: the airport people mover.
+
+### Recife (Regional) - the same census, and a município with no station
+
+**Excluded by what the enumerator wrote** - parking and storage (9,188), vehicle and repair workshops (7,452), vacant premises (7,387), offices and professional premises (5,653), industry and trades (4,992), public, civic and education premises (3,418), places of worship (1,677), events venues (416), accommodation (301) and other non-premises (550); and 2,568 rows with no
+usable description.
+
+**Missing rather than excluded** - 33,903 establishments whose description no rule can
+read, mostly bare brand or trade names: about four in ten of those that might be storefronts.
+
+**What cannot be excluded: change since 2022.** The census recorded what was trading
+during its fieldwork.
+
+**Shown, but not named** - at an address that is also a home (44% of dots), the dot
+shows its category, never the enumerator's description.
+
+**One dot for many** - a shopping centre or gallery recorded as one entry is one dot.
+
+**Stations.** The Metrô do Recife's Linha Centro, on its Camaragibe and Jaboatão branches,
+and Linha Sul are drawn. Not drawn: the diesel VLTs to Curado and Cabo, whose stations
+are 3 to 4 km apart. Cabo's only stations were its VLT's, so its businesses are counted
+with no station of its own.
+
+### Santos (Regional) - the same census, two cities joined by a VLT
+
+**Excluded by what the enumerator wrote** - vacant premises (2,521), offices and professional premises (2,328), parking and storage (2,240), vehicle and repair workshops (1,910), industry and trades (1,260), public, civic and education premises (1,190), places of worship (565), events venues (200), accommodation (99) and other non-premises (173); and 343 rows with no
+usable description.
+
+**Missing rather than excluded** - 7,127 establishments whose description no rule can
+read, mostly bare brand or trade names: almost four in ten of those that might be storefronts, slightly more near the stops.
+
+**What cannot be excluded: change since 2022.** The census recorded what was trading
+during its fieldwork.
+
+**Shown, but not named** - at an address that is also a home (35% of dots), the dot
+shows its category, never the enumerator's description.
+
+**One dot for many** - a shopping centre or gallery recorded as one entry is one dot.
+
+**Stations.** The VLT's Linha 1 and Linha 2 are drawn across Santos and São Vicente,
+Linha 2 running from 9 to 15h since it opened on 1 December 2025. Not drawn: the
+heritage tourist tram.
 
 ## Kept, and why
 

@@ -166,6 +166,35 @@ REGISTRIES = {
     # the sole-trader marker "v/" - shows its address, never its name. CVR's
     # `coNavn` (c/o, a person on 25% of storefront rows) is never loaded and
     # step 2 asserts it. No registrant-name column exists to fall back to.
+    # São Paulo, the first Brazilian city: IBGE's CNEFE has NO owner or
+    # registrant column at all - a pin shows the census enumerator's
+    # description of the establishment, or, at an address that also holds a
+    # dwelling, only its category (the owner's decision of 2026-09-23,
+    # structural, in pipeline/countries/brazil_register.py). So the fallback
+    # failure cannot occur; the only route to a person's name is a first name
+    # inside a description at a non-dwelling address (`BAR DO PAULO`), which
+    # is a trade name there. No address column is carried, so the unit check
+    # is skipped.
+    "sao_paulo": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv", address=None),
+    # Every other Brazilian city reads CNEFE through the same national reader,
+    # so São Paulo's structural answer holds for each; measured per city.
+    "belo_horizonte": dict(raw=None, trade=None, owner=None,
+                           processed="businesses_clean.csv", address=None),
+    "brasilia": dict(raw=None, trade=None, owner=None,
+                     processed="businesses_clean.csv", address=None),
+    "salvador": dict(raw=None, trade=None, owner=None,
+                     processed="businesses_clean.csv", address=None),
+    "fortaleza": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv", address=None),
+    "porto_alegre": dict(raw=None, trade=None, owner=None,
+                         processed="businesses_clean.csv", address=None),
+    "recife": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv", address=None),
+    "santos": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv", address=None),
+    "rio_de_janeiro": dict(raw=None, trade=None, owner=None,
+                           processed="businesses_clean.csv", address=None),
     "copenhagen": dict(raw=None, trade=None, owner=None,
                        processed="businesses_clean.csv",
                        address=("business_name",)),

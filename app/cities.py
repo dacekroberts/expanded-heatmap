@@ -695,6 +695,137 @@ CITIES = [
         # Amsterdam, built on a separate branch the same night.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "São Paulo",
+        "lat": -23.5505,
+        "lon": -46.6333,
+        "page": "pages/31_Sao_Paulo_Heatmap.py",
+        "blurb": "Metrô Linhas 1–5 and 15, CPTM Linha 9",
+        "region": "South America",
+        "in_default_view": False,
+        # LEFT of the dot, not above: Santos's dot is 6 px away at South
+        # America's zoom (3.04) and Rio's 40 px east, so the three names
+        # go three ways - São Paulo west, Rio east, Santos below. Scored: the
+        # label width was measured in the app's own document with eleven
+        # entries reproduced, and check_macro_labels.py passes every region at
+        # 375, 768 and 1200 with PROBLEMS 0.
+        "label_offset": ("end", -11, 0),
+    },
+    {
+        "name": "Rio de Janeiro",
+        "lat": -22.9068,
+        "lon": -43.1729,
+        "page": "pages/32_Rio_de_Janeiro_Heatmap.py",
+        "blurb": "MetrôRio 1, 2 and 4, VLT Carioca, SuperVia Deodoro and Saracuruna",
+        "region": "South America",
+        "in_default_view": False,
+        # RIGHT of the dot, clear of São Paulo's name 40 px west. Scored: the
+        # label width was measured in the app's own document with eleven
+        # entries reproduced, and check_macro_labels.py passes every region at
+        # 375, 768 and 1200 with PROBLEMS 0.
+        "label_offset": ("start", 11, 0),
+    },
+    {
+        "name": "Belo Horizonte",
+        "lat": -19.9167,
+        "lon": -43.9345,
+        "page": "pages/33_Belo_Horizonte_Heatmap.py",
+        "blurb": "Metrô BH Linhas 1 and 2",
+        "region": "South America",
+        "in_default_view": False,
+        # Above the dot, and SCORED rather than assumed: the label width was
+        # measured in the app's own document with eleven entries reproduced,
+        # and check_macro_labels.py passes every region at 375, 768 and 1200
+        # with PROBLEMS 0.
+        "label_offset": ('middle', 0, -22),
+    },
+    {
+        "name": "Brasília",
+        "lat": -15.7939,
+        "lon": -47.8828,
+        "page": "pages/34_Brasilia_Heatmap.py",
+        "blurb": "Metrô-DF Linha Verde and Linha Laranja",
+        "region": "South America",
+        "in_default_view": False,
+        # Above the dot, and SCORED rather than assumed: the label width was
+        # measured in the app's own document with eleven entries reproduced,
+        # and check_macro_labels.py passes every region at 375, 768 and 1200
+        # with PROBLEMS 0.
+        "label_offset": ('middle', 0, -22),
+    },
+    {
+        "name": "Salvador",
+        "lat": -12.9714,
+        "lon": -38.5014,
+        "page": "pages/35_Salvador_Heatmap.py",
+        "blurb": "Metrô Linhas 1 and 2",
+        "region": "South America",
+        "in_default_view": False,
+        # Above the dot, and SCORED rather than assumed: the label width was
+        # measured in the app's own document with eleven entries reproduced,
+        # and check_macro_labels.py passes every region at 375, 768 and 1200
+        # with PROBLEMS 0.
+        "label_offset": ('middle', 0, -22),
+    },
+    {
+        "name": "Fortaleza (Regional)",
+        "lat": -3.7319,
+        "lon": -38.5267,
+        "page": "pages/36_Fortaleza_Heatmap.py",
+        "blurb": "Metrofor Linha Sul",
+        "region": "South America",
+        "in_default_view": False,
+        # Above the dot, and SCORED rather than assumed: the label width was
+        # measured in the app's own document with eleven entries reproduced,
+        # and check_macro_labels.py passes every region at 375, 768 and 1200
+        # with PROBLEMS 0.
+        "label_offset": ('middle', 0, -22),
+    },
+    {
+        "name": "Porto Alegre (Regional)",
+        "lat": -30.0346,
+        "lon": -51.2177,
+        "page": "pages/37_Porto_Alegre_Heatmap.py",
+        "blurb": "Trensurb Linha 1",
+        "region": "South America",
+        "in_default_view": False,
+        # Above the dot, and SCORED rather than assumed: the label width was
+        # measured in the app's own document with eleven entries reproduced,
+        # and check_macro_labels.py passes every region at 375, 768 and 1200
+        # with PROBLEMS 0.
+        # 7.5 px (5%) clipped at the west edge at phone width -
+        # reported, not failed, the class Guadalajara's 6% is in.
+        "label_offset": ('middle', 0, -22),
+    },
+    {
+        "name": "Recife (Regional)",
+        "lat": -8.0476,
+        "lon": -34.877,
+        "page": "pages/38_Recife_Heatmap.py",
+        "blurb": "Metrô do Recife Linhas Centro and Sul",
+        "region": "South America",
+        "in_default_view": False,
+        # Above the dot, and SCORED rather than assumed: the label width was
+        # measured in the app's own document with eleven entries reproduced,
+        # and check_macro_labels.py passes every region at 375, 768 and 1200
+        # with PROBLEMS 0.
+        "label_offset": ('middle', 0, -22),
+    },
+    {
+        "name": "Santos (Regional)",
+        "lat": -23.9608,
+        "lon": -46.3336,
+        "page": "pages/39_Santos_Heatmap.py",
+        "blurb": "VLT Linhas 1 and 2",
+        "region": "South America",
+        "in_default_view": False,
+        # BELOW the dot: São Paulo's dot sits 6 px away, so its name runs
+        # west and this one drops under both. Scored: the label width was
+        # measured in the app's own document with eleven entries reproduced,
+        # and check_macro_labels.py passes every region at 375, 768 and 1200
+        # with PROBLEMS 0.
+        "label_offset": ('middle', 0, 22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -804,6 +935,14 @@ REGION_ORDER = [
     # force the frame open; that is a measurement (`check_macro_labels.py`
     # scores every city in every region at three widths), not a judgement.
     "Europe",
+    # SOUTH AMERICA, not "Brazil" - the owner's call of 2026-09-24, so a
+    # further country on the continent joins this view rather than adding one.
+    # Brazil alone spans Porto Alegre to Fortaleza, about 3,200 km: the width
+    # Canada was split for. It is one region because every city frames at a
+    # zoom where each is distinguishable except São Paulo and Santos, 55 km
+    # apart, whose labels are placed apart instead (scored by
+    # check_macro_labels.py like every other region).
+    "South America",
 ]
 
 # The regions a city may actually be TAGGED with: everything that is not a

@@ -116,6 +116,10 @@ TAXONOMY_MODULES = {
     # abbreviated). Food service and FOOD-ONLY Retail from the food-hygiene
     # permits; Personal services by `source` from the 生活衛生 registers.
     "japan_eigyo": "pipeline.taxonomies.japan_eigyo",
+    # IBGE's CNEFE 2022 - the first FREE-TEXT taxonomy: no code list, so
+    # ordered keyword rules on the enumerator's description, lifted unchanged
+    # from staging's scripts/screen_cnefe.py. National, like france_naf.
+    "brazil_cnefe": "pipeline.taxonomies.brazil_cnefe",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

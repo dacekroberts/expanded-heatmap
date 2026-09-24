@@ -1,0 +1,44 @@
+{
+  "cnefe:2611606_RECIFE.zip": {
+    "file": "2611606_RECIFE.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/26_PE/2611606_RECIFE.zip",
+    "bytes": 17729524,
+    "sha256": "db8987a56019df7aaa4a2793b4fc31c8b2a439ede5a6bea3661e069d208e75c6",
+    "retrieved": "2026-09-24T15:57:06+00:00 (cache file time)",
+    "last_modified": "Mon, 20 May 2024 22:52:32 GMT"
+  },
+  "cnefe:2607901_JABOATAO_DOS_GUARARAPES.zip": {
+    "file": "2607901_JABOATAO_DOS_GUARARAPES.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/26_PE/2607901_JABOATAO_DOS_GUARARAPES.zip",
+    "bytes": 7528738,
+    "sha256": "3aa0581f96bcc6ebf74967a61810c47d036d55677936f74cb906eed15a729cc9",
+    "retrieved": "2026-09-24T15:57:09+00:00 (cache file time)",
+    "last_modified": "Mon, 20 May 2024 22:52:28 GMT"
+  },
+  "cnefe:2602902_CABO_DE_SANTO_AGOSTINHO.zip": {
+    "file": "2602902_CABO_DE_SANTO_AGOSTINHO.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/26_PE/2602902_CABO_DE_SANTO_AGOSTINHO.zip",
+    "bytes": 2470937,
+    "sha256": "5a4581fdf2cbccbcfcb2b238de76d2788805e964a7a4dae7a8f3b5effa35b596",
+    "retrieved": "2026-09-24T15:57:11+00:00 (cache file time)",
+    "last_modified": "Mon, 20 May 2024 22:52:26 GMT"
+  },
+  "cnefe:2603454_CAMARAGIBE.zip": {
+    "file": "2603454_CAMARAGIBE.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/26_PE/2603454_CAMARAGIBE.zip",
+    "bytes": 1592566,
+    "sha256": "747dc81136861280232752c37478364b760a03a807ac72884fdc7348674b8afa",
+    "retrieved": "2026-09-24T15:57:13+00:00 (cache file time)",
+    "last_modified": "Mon, 20 May 2024 22:52:26 GMT"
+  },
+  "osm_municipios": {
+    "file": "osm_municipios.json",
+    "host": "overpass-api.de",
+    "retrieved": "2026-09-24T16:52:12+00:00 (cache file time)"
+  },
+  "osm_rail": {
+    "file": "osm_rail.json",
+    "host": "overpass-api.de",
+    "retrieved": "2026-09-24T17:05:26+00:00 (cache file time)"
+  }
+}

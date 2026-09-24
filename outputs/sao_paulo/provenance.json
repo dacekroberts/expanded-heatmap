@@ -1,0 +1,33 @@
+{
+  "cnefe": {
+    "file": "3550308_SAO_PAULO.zip",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/35_SP/3550308_SAO_PAULO.zip",
+    "bytes": 185731999,
+    "sha256": "6071947b633a096e093c7a04399ba6b24f8bcfef41b8d034c462cd70dc6fecc3",
+    "retrieved": "2026-09-24T10:57:58+00:00",
+    "last_modified": "Mon, 20 May 2024 22:54:08 GMT"
+  },
+  "geosampa_stations": {
+    "file": "geosampa_estacao_metro.json",
+    "url": "https://wfs.geosampa.prefeitura.sp.gov.br/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=geoportal:estacao_metro&outputFormat=application/json",
+    "bytes": 44818,
+    "sha256": "9924900d8c0b1233d8385412793d74a475edf31db4a30790ad4ed76342506fd2",
+    "retrieved": "2026-09-24T10:57:59+00:00"
+  },
+  "osm_host": "overpass-api.de",
+  "geosampa_train_stations": {
+    "file": "geosampa_estacao_trem.json",
+    "url": "https://wfs.geosampa.prefeitura.sp.gov.br/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=geoportal:estacao_trem&outputFormat=application/json",
+    "bytes": 51848,
+    "sha256": "e49c50a4359f3ce061086b74b564ddd1c6627dbcc278602faa585ee99f763a48",
+    "retrieved": "cached before provenance"
+  },
+  "osm_rail": {
+    "file": "osm_rail.json",
+    "retrieved": "2026-09-24T10:58:04+00:00 (cache file time)"
+  },
+  "osm_train": {
+    "file": "osm_train.json",
+    "retrieved": "2026-09-24T15:57:39+00:00 (cache file time)"
+  }
+}

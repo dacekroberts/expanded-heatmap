@@ -21,6 +21,38 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [~] **🇧🇷 BRAZIL - NINE CITIES publishing 2026-09-24, on `sao-paulo-build`.**
+  São Paulo, Rio de Janeiro, Belo Horizonte, Brasília and Salvador, and
+  Fortaleza, Porto Alegre, Recife and Santos as regional builds - one national
+  CNEFE module (`pipeline/countries/brazil*.py`, `pipeline/taxonomies/brazil_cnefe.py`)
+  and the `brazil-city` skill.
+  - [x] Owner: the classifier written by this session; region "South America";
+    rules version 2; CPTM Line 9 drawn and Lines 7, 8, 10-13 not.
+  - [x] Owner: the rail test for commuter and diesel lines; SuperVia Deodoro
+    and Saracuruna drawn; Belford Roxo, Santa Cruz and Fortaleza's
+    Parangaba-Mucuripe VLT out; the Fortaleza and Recife regional scopes kept;
+    Santos Linha 2 drawn with its hours.
+  - [x] Owner: all nine pages' text, notices 38-39, the OSM credit and the
+    exclusions sections approved as drafted.
+  - [x] Pages 31-39, notices 38-39 and the OSM credit, `cities.py` (South
+    America, labels scored PROBLEMS 0), docs, master merged, re-rendered on
+    the current renderer (Rome's title too) - DECISIONS, "Brazil's nine
+    cities to the app".
+  - [x] ONE `deploy-verify` (`city-added`) for the batch - PASSED;
+    `check_deploy_imports` PROBLEMS 0.
+  - [ ] Fetch, merge, push, reboot (cities.py and components.py change),
+    live check.
+  - [ ] AFTER PUBLISH: remove the `sao-paulo-*-tmp` launch entries.
+  - [ ] **BLOCKS THE NEXT DEPLOY (owner: "ship now, fix after" and "fix
+    before next deploy") - no further push until these land: two renderer
+    defects the batch's deploy check found, both older than Brazil** - (1) dark mode
+    cannot lift pure blue / navy line labels (Porto Alegre 1.91:1, Rio VLT 1
+    and Salvador L2 2.18:1, Belo Horizonte L2 2.85:1; Barcelona, Calgary and
+    Edmonton alike); (2) the legend's inline `style` breaks at its font list
+    (`map_common.py:432`, a double quote inside a double-quoted attribute).
+    Fix both once in `pipeline/map_common.py`, re-render all maps,
+    `check_render_current.py`, a `map-chrome` deploy check, push.
+
 - [x] **🇳🇱 AMSTERDAM - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro
   50-54 and 16 trams, gemeente 0363: **13,238 storefronts, 144 stations**;
   page text, notice 35 and the exclusions section approved as drafted,
@@ -33,23 +65,16 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   removed. Left for the owner: `data/amsterdam/raw/gtfs-nl.zip` (243.8 MB)
   may be deleted - superseded by `gtfs-openov-nl.zip`.
 
-- [~] **🇮🇹 ROME - publishing 2026-09-24, on `rome-build`.** 98,897
-  storefronts, **87 stations**: Metro A, B, B1 and C, and the Roma-Viterbo
-  urban service (owner's call on the DART / S-tog test; Metromare out).
-  - [x] Owner: **rail source** - OSM, kept.
-  - [x] Owner: **Metromare and the Roma-Viterbo urban service** - measured;
-    Roma-Viterbo urban drawn, Metromare out.
-  - [x] Owner: **the food over-count** - stated on the page, no cut-off.
-  - [x] Owner: approved the page text (revised for Roma-Viterbo), notices 36
-    and 37 and the `excluded_categories.md` section.
-  - [x] Merged with master (Amsterdam); `app/cities.py`'s two appended
-    entries had merged INTO ONE DICT - Rome's keys over Amsterdam's - and
-    were split by hand; re-score check_macro_labels.
-  - [ ] Notices 36-37, re-render on the current renderer, scoped
-    `deploy-verify`, `check_deploy_imports`, fetch, push, reboot, live check.
-  - [ ] AFTER PUBLISH: remove the two `rome-*-tmp` launch entries.
-  - [ ] The owner may delete `data/rome/raw/rome_static_gtfs.zip` (46.8 MB) -
-    downloaded, then not used.
+- [x] **🇮🇹 ROME - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro A,
+  B, B1 and C, and the Roma-Viterbo urban service (owner's call on the DART /
+  S-tog test; Metromare out): 98,897 storefronts, 87 stations. Pushed
+  `14e6461`; live after the owner's reboot - title, caption, legend (Metro A,
+  B, B1, C and Roma-Viterbo), zoom 11.5 at the 1000x650 frame, notices 36 and
+  37 and the OSM Rome clause shown, no exceptions; the Overview reads Europe
+  (14). `rome-*-tmp` launch entries removed. The map's system name now names
+  Roma-Viterbo (fixed in the Brazil push). Left for the owner:
+  `data/rome/raw/rome_static_gtfs.zip` (46.8 MB) may be deleted - downloaded,
+  then not used.
 
 - [x] **🇨🇿 PRAGUE - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro A,
   B and C, obec 554782: **25,275 storefronts, 58 stations**; page text, notices
