@@ -21,26 +21,35 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [~] **🇳🇱 AMSTERDAM - PARKED 2026-09-24 at "page text drafted", on
-  `amsterdam-build`.** 13,238 storefronts, 144 stations, metro 50-54 and 16
-  trams. Pipeline, map, drift baseline, privacy verdict, provenance rows and
-  the DECISIONS entry are committed; **held uncommitted on purpose** until the
-  owner approves the text, so no commit names a page that does not exist yet:
-  `app/cities.py` (entry + Lille's label turned), `app/pages/29_Amsterdam_Heatmap.py`,
-  `docs/city_master_list.md` (29 built), `docs/project_context.md`.
-  Morning, in order:
-  - [x] Owner: approve the page text, notice 35 (Gemeente Amsterdam, CC BY
-    4.0) and the `excluded_categories.md` section - approved 2026-09-24.
-  - [x] Owner: **scope** - gemeente-only kept, tram 6 at 5 of 16 stops.
-  - [x] Owner: **phone labels** - shipped with 11 overlapping pairs at 375 px;
-    the phone layout is the app/chrome item below.
-  - [x] Write the approved text; `_NOTICES` in `app/components.py`; commit.
-  - [ ] Scoped `deploy-verify` (city-added), `check_deploy_imports`, then
-    fetch, merge, push, reboot, live check - one city at a time.
-  - [ ] AFTER PUBLISH: remove the two `amsterdam-*-tmp` entries from the main
-    checkout's `.claude/launch.json` (standing permission).
-  - [ ] The owner may delete `data/amsterdam/raw/gtfs-nl.zip` (243.8 MB) -
-    superseded by `gtfs-openov-nl.zip`, kept rather than deleted by Claude.
+- [x] **🇳🇱 AMSTERDAM - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro
+  50-54 and 16 trams, gemeente 0363: **13,238 storefronts, 144 stations**;
+  page text, notice 35 and the exclusions section approved as drafted,
+  gemeente-only scope and the phone labels shipped as they are (owner's
+  calls). Its deploy-verify found the open legend over the map's buttons and
+  a Retail / "Shops and services" layer name - both fixed in the shared
+  renderer before pushing (owner's call), all 29 maps re-rendered. Pushed
+  `bc8b52c`; live after the owner's reboot, legend 56-626 px under buttons
+  ending at 45, zoom 12, notice 35 shown. `amsterdam-*-tmp` launch entries
+  removed. Left for the owner: `data/amsterdam/raw/gtfs-nl.zip` (243.8 MB)
+  may be deleted - superseded by `gtfs-openov-nl.zip`.
+
+- [~] **🇮🇹 ROME - publishing 2026-09-24, on `rome-build`.** 98,897
+  storefronts, **87 stations**: Metro A, B, B1 and C, and the Roma-Viterbo
+  urban service (owner's call on the DART / S-tog test; Metromare out).
+  - [x] Owner: **rail source** - OSM, kept.
+  - [x] Owner: **Metromare and the Roma-Viterbo urban service** - measured;
+    Roma-Viterbo urban drawn, Metromare out.
+  - [x] Owner: **the food over-count** - stated on the page, no cut-off.
+  - [x] Owner: approved the page text (revised for Roma-Viterbo), notices 36
+    and 37 and the `excluded_categories.md` section.
+  - [x] Merged with master (Amsterdam); `app/cities.py`'s two appended
+    entries had merged INTO ONE DICT - Rome's keys over Amsterdam's - and
+    were split by hand; re-score check_macro_labels.
+  - [ ] Notices 36-37, re-render on the current renderer, scoped
+    `deploy-verify`, `check_deploy_imports`, fetch, push, reboot, live check.
+  - [ ] AFTER PUBLISH: remove the two `rome-*-tmp` launch entries.
+  - [ ] The owner may delete `data/rome/raw/rome_static_gtfs.zip` (46.8 MB) -
+    downloaded, then not used.
 
 - [x] **🇨🇿 PRAGUE - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro A,
   B and C, obec 554782: **25,275 storefronts, 58 stations**; page text, notices

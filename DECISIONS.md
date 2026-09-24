@@ -16,17 +16,21 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**314 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**318 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Japan re-banded and the geocoding band closed; Rotterdam to A](#2026-09-24---japan-re-banded-and-the-geocoding-band-closed-rotterdam-to-a)
+- [Rome: the page text written, notices 36 and 37, merged with Amsterdam](#2026-09-24---rome-the-page-text-written-notices-36-and-37-merged-with-amsterdam)
+- [Amsterdam deployed; the live site measured after the reboot](#2026-09-24---amsterdam-deployed-the-live-site-measured-after-the-reboot)
 - [Four more band calls; Tokyo reaches 8 wards; MHLW's terms read](#2026-09-24---four-more-band-calls-tokyo-reaches-8-wards-mhlws-terms-read)
 - [The open legend capped below the map's buttons, and a taxonomy may name its layer (owner, from Amsterdam's deploy-verify)](#2026-09-24---the-open-legend-capped-below-the-maps-buttons-and-a-taxonomy-may-name-its-layer-owner-from-amsterdams-deploy-verify)
 - [MHLW's national food open data is an opt-in slice; it completes Fukuoka and Hiroshima only](#2026-09-24---mhlws-national-food-open-data-is-an-opt-in-slice-it-completes-fukuoka-and-hiroshima-only)
 - [The owner's answers to the overnight question points; Sendai's lists need permission](#2026-09-24---the-owners-answers-to-the-overnight-question-points-sendais-lists-need-permission)
+- [Rome: the Roma-Viterbo urban service drawn, Metromare not (owner, on the DART / S-tog test)](#2026-09-24---rome-the-roma-viterbo-urban-service-drawn-metromare-not-owner-on-the-dart-s-tog-test)
 - [Amsterdam: the owner's calls, and the page text written](#2026-09-24---amsterdam-the-owners-calls-and-the-page-text-written)
 - [Sendai joined at 95.1% block; MLIT's 小字 column places 字 addresses](#2026-09-24---sendai-joined-at-951-block-mlits-小字-column-places-字-addresses)
+- [Rome built on its branch: 98,897 storefronts, 73 stations](#2026-09-24---rome-built-on-its-branch-98897-storefronts-73-stations)
 - [Amsterdam built on its branch: 13,238 storefronts, 144 stations](#2026-09-24---amsterdam-built-on-its-branch-13238-storefronts-144-stations)
 - [Prague deployed; the live site measured after the reboot](#2026-09-24---prague-deployed-the-live-site-measured-after-the-reboot)
 - [Prague's deploy-verify passed; the Europe view zoomed out](#2026-09-24---pragues-deploy-verify-passed-the-europe-view-zoomed-out)
@@ -388,6 +392,49 @@ onwards; the early ones are split by phase rather than by hour.
   dated Japan paragraph. A stale-offset bug in the edit script, which spliced
   with a position computed before an insertion, was caught by its own assert
   before anything was written.
+### 2026-09-24 - Rome: the page text written, notices 36 and 37, merged with Amsterdam
+
+- **Rome's page, notices 36 (Roma Capitale) and 37 (ANNCSU), its
+  `excluded_categories.md` section and the OpenStreetMap notice's Rome clause
+  are written as the owner approved them on 2026-09-24** - the overnight
+  drafts, with the rail paragraph, the title ("metro and urban rail
+  stations"), the ring sentence ("Rome's rail") and the blurb revised for the
+  Roma-Viterbo urban service and re-approved the same morning. The snapshot
+  caption reads its three dates from `outputs/rome/provenance.json`: the SUAP
+  file's month (only its name carries one), the ANNCSU extract's date, and
+  the fetch day for the OSM rail. **The merge with master (Amsterdam) put the
+  two cities' appended `app/cities.py` entries INTO ONE DICT** - the conflict
+  region held only each entry's interior, so taking both sides gave one `{...}`
+  with Amsterdam's keys then Rome's, and Rome's silently won: 29 cities, no
+  Amsterdam, and no error. Caught by importing the file and counting, and split
+  by hand. The lesson for any merge of two appended list entries: count the
+  entries after resolving, never trust a clean parse. Re-rendered on the merged
+  renderer (the legend cap): `drift_check.py rome` - only `heatmap.html`
+  changed, 9 figures unchanged; `check_render_current.py` 30 of 30;
+  `check_macro_labels.py` PROBLEMS 0 over 30 cities; `check_provenance.py` all
+  recorded, 37 notices numbered; `check_scope_disclosure.py` 30 cities;
+  `check_personal_exposure.py rome` 0 person-like names. `docs/city_master_list.md`
+  (30 built; Italy 2; its country table's Total corrected from a stale 26 / 34
+  / 17 to 30 / 31 / 11, and Poland added for Warsaw's Band D row, which the
+  header already counted), `docs/commuter_rail_list.md` (Rome the third city to
+  draw suburban rail; Prague and Amsterdam rows added), `docs/project_context.md`.
+
+### 2026-09-24 - Amsterdam deployed; the live site measured after the reboot
+
+- **Amsterdam is live: pushed `bc8b52c` (master `cf0c8d5..bc8b52c`), rebooted
+  by the owner, and measured on the deployed site.** The Overview's region
+  picker reads Europe (13); the Amsterdam page shows the approved title, the
+  snapshot caption (permits and shop units 2026-09-24; OVapi timetable
+  2026-09-23 to 2026-12-12), notice 35 and the OpenStreetMap notice naming
+  Amsterdam's boundary, with no exceptions. **The legend fix measured live**,
+  at a 1400x900 window (map frame 1000x650): open legend y 56-626, 570 px,
+  scrolling, under buttons ending at 45; zoom 12, as expected; the layer
+  control "Businesses: Shops and services (9,215)". A 770 px window loads it
+  collapsed, as the autofit intends. Paris spot-checked: legend top 84,
+  unchanged, no scrollbar, no exceptions. The two `amsterdam-*-tmp` launch
+  entries were removed, and the 32 data junctions added to the Amsterdam
+  worktree for the 29-city re-render were unlinked non-recursively (targets
+  checked intact).
 
 ### 2026-09-24 - Four more band calls; Tokyo reaches 8 wards; MHLW's terms read
 
@@ -563,6 +610,40 @@ onwards; the early ones are split by phase rather than by hour.
   notice selected rows by a wrong filter and printed the first two data rows
   of each food sheet, operator names included, to the session. Nothing was
   written to disk, and the script was deleted.
+### 2026-09-24 - Rome: the Roma-Viterbo urban service drawn, Metromare not (owner, on the DART / S-tog test)
+
+- **Rome draws COTRAL's Roma-Viterbo urban service (Flaminio-Montebello)
+  beside Metro A, B, B1 and C, and leaves Metromare (the Roma-Lido railway)
+  out - the owner's call of 2026-09-24, on the project's published
+  spacing-and-frequency test rather than as an exception to the commuter-rail
+  rule.** The owner approved Rome's drafted page and calls with one condition:
+  leave the two COTRAL lines out "unless commuter rail holds a backbone
+  distinction like in Dublin or Copenhagen". Measured from the cached OSM
+  relations, both lines wholly inside the comune:
+  - **Roma-Viterbo urban** - 15 stations, straight-line median **895 m** apart
+    (S-tog 1,227 m, DART ~1 km), **14 of 15 with no metro station within
+    800 m** (Tor di Quinto to Prima Porta - Rome's north along the Tiber has
+    no other rail), and every **10-15 minutes** in normal service, which
+    it.wikipedia calls "servizio di tipo metropolitano" (secondary; read
+    2026-09-24). The summer 2026 works ran it at 16/32 minutes and closed it
+    10-23 August; regular service resumed 7 September. **Passes.**
+  - **Metromare** - 14 stations, median **2,171 m** apart with gaps to
+    3.97 km, and every **15-20 minutes** as of July 2026 (vivereroma,
+    2026-07-27; the Regione's 10-minute service promised for March 2026 had not
+    started). Coverage passes - **11 of 14 stations, Ostia's and Acilia's, have
+    no metro nearby** - but spacing and frequency both fail. **Left out, and the
+    page says Ostia has no station rings and why.**
+  Rejected: both lines (Metromare fails two of the three parts); neither (the
+  urban service passes all three, near-metro frequency aside). Effect: **87
+  stations in scope, up from 73**; gate 3 exact on all five counts (A 27,
+  B + B1 26, C 24, metro network 74, Roma-Viterbo urban 15); Flaminio collapses
+  to one interchange (A and Roma-Viterbo, 129 m); **52,895 storefronts within
+  a ring, up from 51,209 (53.5%)**. OSM's own colour `#7e7bb4` clears every
+  check unchanged (19.4 from B, 25.8 from the Retail pins). The approved page
+  text's rail paragraph changes to match and goes back to the owner. Files:
+  `pipeline/rome/config.py`, `pipeline/rome/step1_stations.py`,
+  `outputs/rome/`, `docs/data_sources.md`.
+
 ### 2026-09-24 - Amsterdam: the owner's calls, and the page text written
 
 - **The owner approved Amsterdam's page text, notice 35 and its
@@ -614,6 +695,89 @@ onwards; the early ones are split by phase rather than by hour.
   34 m, all within 250 m. `run_city` now accepts `--gsi N`. Brief:
   `docs/build_briefs/sendai.md` (4/4). The city's licence was not declared on
   either page, and its read is in progress.
+### 2026-09-24 - Rome built on its branch: 98,897 storefronts, 73 stations
+
+- **Rome is built on `rome-build`, Italy's second city: 98,897 storefronts
+  around 73 metro stations, 51.8% within a ring** - a 1,286 km² comune whose
+  metro is sparse outside the centre. The row counts, the drift baseline
+  (zero drift offline):
+  - **step 1** - OSM route relations for Metro A, B, B1 and C -> 154 stop
+    positions -> **74 stations** (one alias: Colosseo / Colosseo - Fori
+    Imperiali, one interchange) -> **73 inside comune 058091**; Monte
+    Compatri - Pantano, Metro C's terminus, is in Monte Compatri (058060).
+    Gate 3 exact against English Wikipedia (secondary): A 27, B 26 with B1,
+    C 24, 74 network-wide.
+  - **step 2** - SUAP 168,255 rows -> 155,448 establishments -> **103,375**
+    storefronts (Retail 63,559, Food service 25,826, Personal services
+    13,990) -> **98,897 placed** by the ANNCSU join: 92.2% exact, 3.5% civic
+    with the suffix dropped, 2.7% not found, 1.6% with no civic number;
+    worst municipio IX at 90.6%.
+  - **step 3** - 51,209 within a ring, 47,688 outside.
+
+- **Decided on measurement, each flagged to the owner:**
+  - **The SUAP file is not valid CSV** - no quoting, and SPECIALIZZAZIONE
+    carries commas on 30,075 rows, a few street names too. `pipeline/rome/
+    suap.py` reads it by its fixed shape (eleven comma-free fields, two
+    fixed-vocabulary fields at the end) and validates every row; some
+    values were UTF-8 encoded twice and are repaired only where the round
+    trip succeeds. The brief's "comma-separated" was true and not enough.
+  - **The workshop catch-all mapped trade by trade** (`premises-taxonomy`):
+    `Laboratorio Artigianale e non` is 22% of rows, its SPECIALIZZAZIONE
+    blank on 19,963 (53%) - dropped and disclosed. Personal services follow
+    NAICS 812 (laundry, dry cleaning, nails, tattoo, piercing, pet grooming),
+    artisan food follows Milan (pizza by the slice, pastry, gelato,
+    delicatessen - Food service; a bakery is Retail), and repairs, car work,
+    manufacturing, printing and catering stay out. `Trattenimento e Svago`
+    (bars and clubs with entertainment) is Food service, NAICS 7224.
+  - **An establishment with two authorisations takes the more specific** -
+    Food service, then Personal services, then Retail (3,110; a bar that
+    also sells goods is a bar).
+  - **Civic level only**: a street's centroid is never used to place a
+    premises - on a long Roman street it can be kilometres off. Rejected:
+    the brief's street-centroid tier (4.2%).
+
+- **The owner's build check, measured (`pipeline/rome/build_check.py`): the
+  food-and-drink register reads 2.67x OSM (19,803 SUAP `Somministrazione`
+  premises placed against 7,408 OSM places), and the excess is NOT old
+  registrations.** 45.4% of SUAP premises have an OSM food place within 30 m,
+  and the OLDEST match best - 56-60% for premises started before 2000,
+  49% for 2000-2009, 41% for 2010-2019, 32-36% since 2020. If ceased premises
+  lingered in a register with no closure date, the old cohorts would match
+  worst. An age cut-off would therefore remove the best-verified premises
+  first; the excess reads as OSM under-mapping Rome's bars (the major
+  consular roads match 15-66%) plus recent registrations not yet open.
+  **Recommended: no cut-off, state the over-count on the page** - put to the
+  owner with the page text.
+
+- **Rail from OpenStreetMap, on a recorded ground - put to the owner.**
+  `licence-read` found Roma Mobilità's static GTFS AMBIGUOUS IN A WAY THAT
+  MATTERS: its own open-data page says the data may be used "esclusivamente
+  a titolo di supporto al viaggio" (only as travel support), and the file
+  carries five inconsistent licence declarations (CC BY-SA with no version,
+  "Licenza Sconosciuta", CC BY 4.0 by harvest). Not resolved in the
+  project's favour; downloaded once, not used, not fetched. RSM's ArcGIS
+  metro layers are CC BY 4.0 but last edited 2023-05-19, missing Metro C's
+  two stations opened 2025-12-16. OSM carries all four lines to the current
+  termini. B1 is tagged ref "B" in OSM, so lines are keyed on relation ids
+  and B1 is cut to its own ways for drawing; its shared blue moves +0.11 in
+  HSL lightness (#629ed3), 13.7 from B.
+
+- **Privacy verdict: publish.** The register has no name column; every pin
+  shows its activity and street address. `check_personal_exposure.py rome`:
+  0 contact details, 0 person-like names.
+
+- **Checked in the browser**: check_map_view 12/12 at 1280 and 10.5/10.5 at
+  375, 0 corrections; all four labels clear at both; the basemap credit
+  uncovered at 1000x650, 1280x768 and 375x812 with the clamp in force.
+  Overview label measured at 37.5 px; check_macro_labels PROBLEMS 0 on this
+  branch - to be re-scored with Amsterdam's branch merged.
+
+- **Put to the owner, not decided:** the rail source (OSM, or accept the
+  GTFS / RSM layers); **Metromare** (Roma-Lido, COTRAL - not in the GTFS
+  at all, OSM would supply it) and the **Roma-Viterbo urban service**, both
+  left out under the commuter-rail rule; the food over-count (recommended:
+  state it, no cut-off). Trams (five lines) are left out under the standing
+  test - they run over the metro in the centre.
 ### 2026-09-24 - Amsterdam built on its branch: 13,238 storefronts, 144 stations
 
 - **Amsterdam is built on `amsterdam-build`, the Netherlands' first city:

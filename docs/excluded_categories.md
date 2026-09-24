@@ -1249,6 +1249,40 @@ in Uithoorn, 2 in Ouder-Amstel - and 59 tram stops are thinned to about one per
 half mile. Tram 3, which is not running, the museum tram, ferries and NS trains
 are not drawn.
 
+### Rome - a register of premises with no names and no closing dates
+
+**Excluded by the register's own types** - online shops (8,995), storage and
+display premises (5,150), wholesale (2,097), door-to-door (1,909) and mail-order
+(644) selling, vehicle hire (1,776) and garages (1,086), private members' clubs
+(1,144), phone centres (649), business agencies (627), arcades and gaming
+machines (910), vending machines (289), internal company shops (230), festival
+stalls (189) and farm stays (2).
+
+**Workshops** - 17,086 workshops record no trade and are left out. Of those that
+do, repairs, car work, tailoring, dental laboratories, metalwork and similar
+trades (9,290) are left out; food makers count as food service, and laundries,
+nail bars, tattoo studios and dog groomers as personal services.
+
+**Missing rather than excluded** - 4,478 premises whose address could not be
+matched to a house number (2,783 not found, 1,695 with no number), and any
+premises registered since July 2025.
+
+**What cannot be excluded: closed premises.** The register records no closing
+date. It lists about 2.7 times as many restaurants, bars and cafés as
+OpenStreetMap, and the oldest registrations match a mapped place most often, so
+the excess is not old closures that a cut-off could remove.
+
+**Not named** - the register has no business names; every dot shows its activity
+and address.
+
+**Stations.** Metro A, B, B1 and C and the Roma–Viterbo railway's urban service,
+Flaminio to Montebello, are drawn; the urban service passes the
+spacing-and-frequency test that Dublin's DART and Copenhagen's S-tog passed.
+Monte Compatri – Pantano, in Monte Compatri, is left out. Not drawn: trams, which
+run over the metro in the centre; the Roma–Lido railway (Metromare), whose
+stations are about two kilometres apart and whose trains run every 15 to 20
+minutes; the Roma–Viterbo railway beyond Montebello; and suburban trains.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

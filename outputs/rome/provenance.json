@@ -1,0 +1,18 @@
+{
+  "suap": {
+    "file": "opendata_suap_luglio_2025.csv",
+    "url": "https://dati.comune.roma.it/catalog/it/dataset/94848d96-0197-486b-b143-485f00285928/resource/3fc5fd67-6ed5-428a-88c4-cf5245f9ec0f/download/opendata_suap_luglio_2025.csv",
+    "bytes": 25646982,
+    "sha256": "3064aaf1f3c0e3d22168060b9a00151b1c7223c7e43d9413ec4c61e7be653748",
+    "retrieved": "2026-09-24T10:28:10+00:00"
+  },
+  "anncsu": {
+    "file": "indirizzario_lazio.zip",
+    "url": "https://anncsu.open.agenziaentrate.gov.it/age-inspire/opendata/anncsu/getds.php?INDIR_LAZI",
+    "bytes": 24574080,
+    "sha256": "8fd5f9505a846106894a10ef150b0572748b3419f48ca09314fc3e1787617681",
+    "retrieved": "2026-09-24T10:28:13+00:00",
+    "member": "INDIR_LAZI_20260915.csv"
+  },
+  "osm_host": "overpass-api.de"
+}

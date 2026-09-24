@@ -680,6 +680,21 @@ CITIES = [
         # and west, since Lille's pill had covered this marker.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Rome",
+        "lat": 41.8933,
+        "lon": 12.4829,
+        "page": "pages/30_Rome_Heatmap.py",
+        "blurb": "Metro A, B, B1, C and Roma–Viterbo",
+        "region": "Europe",
+        "in_default_view": False,
+        # Above the dot, and SCORED rather than assumed: the label width was
+        # measured at 37.5 px in the app's own document with nine entries
+        # reproduced, and check_macro_labels.py passes every region at 375,
+        # 768 and 1200 with PROBLEMS 0 - re-scored after merging with
+        # Amsterdam, built on a separate branch the same night.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

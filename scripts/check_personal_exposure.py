@@ -179,6 +179,12 @@ REGISTRIES = {
     "amsterdam": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv",
                       address=("address",)),
+    # Rome: Roma Capitale's SUAP register carries NO name column at all, so
+    # every pin shows its activity and street address and no person's name
+    # can appear. Measured anyway, as a structural claim should be.
+    "rome": dict(raw=None, trade=None, owner=None,
+                 processed="businesses_clean.csv",
+                 address=("business_name",)),
     "san_diego": dict(raw="sd_businesses_active_datasd.csv", trade="dba_name",
                       owner="business_owner_name", processed="businesses_clean.csv",
                       address=("address_no", "address_road", "address_suite")),
