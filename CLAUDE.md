@@ -63,6 +63,15 @@ screen never ran: the city's own host, its whole catalogue, the scope on a
 403, and a second layer in a different shape (a building register's use
 class), with that shape's defect measured before the owner was asked.
 
+**Building a Brazilian city? Use `brazil-city`** (`.claude/skills/brazil-city/`).
+São Paulo built the national CNEFE modules - the free-text classifier, the
+reader with its dwelling rule, the município boundaries - so a further city
+adds a config, its rail step and three thin steps. The skill carries the
+traps São Paulo paid for (a keyword added to the wrong rule list re-routed 238
+classified rows; a sample cannot measure the words chosen from it) and the
+rail test the owner applies to commuter lines, which
+`scripts/measure_rail_backbone.py` half-answers from cached OSM.
+
 **Is the city's rail coming from OpenStreetMap rather than GTFS? Use
 `osm-rail`** (`.claude/skills/osm-rail/`). Mexico City and Guadalajara both
 needed it - one because every agency host is unreachable, one because the only
@@ -372,6 +381,7 @@ python scripts/check_plan_done.py [--verbose]           # REPORTS only: PLAN.md'
 python scripts/check_stale_claims.py                    # REPORTS only: prose that stopped being true (stale tense, drifted counts)
 python scripts/check_stale_claims.py --only E           # "the only city"/"no other city" claims: re-read whenever a city lands
 python scripts/check_discard_evidence.py [--selftest]   # every discard row carries enough evidence for its kind; run when the discard table changes
+python scripts/measure_rail_backbone.py --osm <json> --relation <id> --municipios <json> --codes <ibge> --stations <csv> --crs <epsg>   # a commuter line's spacing + coverage for the rail test; frequency is a cited read
 python scripts/check_deploy_imports.py [--ref REF]      # clean clone + lean venv: run before ANY push touching app/
 node scripts/profile_zoom.mjs <baseUrl> <city,city> [reps]   # wheel/click/cluster zoom lag, headless Edge, trusted input
 python scripts/decisions_index.py [--check]             # refresh DECISIONS.md's index
