@@ -16,11 +16,13 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**277 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**280 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Open gap probed (Rome reached; Turin, Cairo discarded); Brasília and Recife rail licences read; Taipei's head-office rule tested; the address-join skill](#2026-09-24---open-gap-probed-rome-reached-turin-cairo-discarded-brasília-and-recife-rail-licences-read-taipeis-head-office-rule-tested-the-address-join-skill)
+- [The oslo worktree retired; prague's empty folder kept](#2026-09-24---the-oslo-worktree-retired-pragues-empty-folder-kept)
+- [A check that every map was rendered by the current renderer; the zoom-lag worktree retired](#2026-09-24---a-check-that-every-map-was-rendered-by-the-current-renderer-the-zoom-lag-worktree-retired)
 - [Prague back in Band A: establishments from ROS02 open data + RES activity; RŽP rejected on GDPR; the paused control was mis-specified](#2026-09-24---prague-back-in-band-a-establishments-from-ros02-open-data-res-activity-ržp-rejected-on-gdpr-the-paused-control-was-mis-specified)
 - [Two checks closed: the macro map's controls, and clones leaking into %TEMP%](#2026-09-24---two-checks-closed-the-macro-maps-controls-and-clones-leaking-into-temp)
 - [Oslo deployed; the live site measured after the reboot](#2026-09-24---oslo-deployed-the-live-site-measured-after-the-reboot)
@@ -33,6 +35,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 **2026-09-23**
 
+- [Wheel zoom stops discarding notches; cluster animation off](#2026-09-23---wheel-zoom-stops-discarding-notches-cluster-animation-off)
 - [The site says "rapid-transit", not "rail-transit"](#2026-09-23---the-site-says-rapid-transit-not-rail-transit)
 - [gated_access.md: Taiwan's key gate retired, Kaohsiung's request added](#2026-09-23---gated_accessmd-taiwans-key-gate-retired-kaohsiungs-request-added)
 - [The licence-read agent runs the stray-download check before reporting](#2026-09-23---the-licence-read-agent-runs-the-stray-download-check-before-reporting)
@@ -360,6 +363,60 @@ onwards; the early ones are split by phase rather than by hour.
   works, the key coarser than the address, a register's premises published
   by a different agency). Pointed to from `CLAUDE.md`, `add-country` and the
   retrospective; the 01:12 Japan run was re-created to open it first.
+### 2026-09-24 - The oslo worktree retired; prague's empty folder kept
+
+- **Retired `.claude/worktrees/oslo` and deleted `oslo-build`, on the owner's
+  word that Oslo was finished.** Checked first: 0 commits outside master (last
+  `7875bcc`, "Oslo deployed"), a clean tree, no links anywhere in the folder,
+  and no `data/<city>` cache that the main checkout lacked. The Main Building
+  Session confirmed it had launched in the main checkout and now works in
+  `copenhagen`, so no session held the folder. `git worktree remove` completed
+  in one pass, with no long-path stop despite the folder's own `.venv-lean`.
+  **`.claude/worktrees/prague` is kept on the owner's instruction.** It is an
+  empty folder, unregistered with git and with no branch, left by an
+  interrupted session. Prague has since been re-upgraded to viable by
+  staging's research, so a build may use that folder again.
+
+### 2026-09-24 - A check that every map was rendered by the current renderer; the zoom-lag worktree retired
+
+- **`scripts/check_render_current.py` fails any committed map that lacks, or
+  carries an older version of, a shared block the current
+  `pipeline/map_common.py` injects.** Proposed by the zoom-lag session, and
+  the owner asked whether cleanup should make future cities follow its
+  changes. A convention would not have caught the failure that happened: Oslo
+  was built on a branch while `WHEEL_ZOOM_SCRIPT` landed on master, and its
+  committed map shipped without it until that session happened to re-render
+  it. Only a full `drift_check.py` would have noticed. This check takes
+  seconds and runs no pipeline. **Derived from the source, not listed:**
+  every module-level `*_SCRIPT` / `*_HTML` / `*_CSS` string the module also
+  references, split at its per-city slots (`__NAME__` and `{field}`), with
+  every fixed piece required verbatim. That catches a stale EDIT, not only a
+  missing block. Two rules came from the first control runs. A piece that also
+  occurs in another block is dropped, because every script block opens with
+  the same boilerplate, which let Oslo's pre-wheel map read as an "older
+  version" of a script it never had. A block whose whole text sits inside
+  another (`_LEGEND_BOTTOM_CSS`, inside `LEGEND_HTML`) is a fragment and is
+  covered by its container. **Controls:** Oslo at `719ad23` →
+  `WHEEL_ZOOM_SCRIPT is MISSING`; Rennes before the label fix → the label and
+  wheel scripts MISSING; a current map with `PAD = [26, 19]` →
+  `PHONE_FIT_SCRIPT is an OLDER version`. All 26 committed maps pass, with 7
+  blocks derived. Not covered: per-city options such as `animate_clusters`,
+  and anything outside these blocks, which stays `drift_check.py`'s job.
+
+- **Retired the zoom-lag session's worktree (`gallant-brattain-00d045`) and
+  deleted `claude/gallant-brattain-00d045`.** The owner authorised this when
+  the task was created. Every stated fact was re-checked, not taken from the
+  message: 0 commits outside master, a clean tree, and the session idle,
+  confirmed by the owner after it first read as running. Its one junction
+  (`data\france\raw` → the shared SIRENE pair) was the only reparse point
+  anywhere in the folder, and was removed alone and non-recursively. Both
+  files kept their exact size and timestamps before and after. No city cache
+  existed only there. `git worktree remove` stopped at `Filename too long`
+  (263 characters inside `.venv-lean`) after unregistering the worktree; a
+  whole-folder re-scan found 0 reparse points, and the rest went with
+  `rmdir /s /q "\\?\…"`. An empty folder stays, locked by the still-open idle
+  session, to be removed once it is closed. Both obstacles are now step 4 of
+  the retirement procedure in `docs/session_roles.md`.
 
 ### 2026-09-24 - Prague back in Band A: establishments from ROS02 open data + RES activity; RŽP rejected on GDPR; the paused control was mis-specified
 
@@ -469,6 +526,145 @@ onwards; the early ones are split by phase rather than by hour.
   dark themes; the three new notices linked; Paris's label below its dot, clear
   of Lille and Rennes, at every width; all 26 pages free of error blocks.
 
+### 2026-09-23 - Wheel zoom stops discarding notches; cluster animation off
+
+- **Live-verified after the push (`b8b2931`, no reboot: the push changed
+  nothing under `app/`).** Headless Edge on the deployed site, each page
+  loaded fresh, the map reached in its own frame. Paris embedded at 1000:
+  `check_map_view.js` zoom 12.5 against 12.5, 0 problems; the served map
+  carries the patched wheel handler and `animate: false` on all three cluster
+  groups; five trusted notches 60 ms apart zoomed 12.5 -> 17.5 (steps 13.5,
+  16.5, 17.5), settling in 1,579 ms, and the view held six seconds later with
+  `touched` set and 0 corrections. Paris at 343 (a 375 phone): 11 against 11,
+  0 problems, five notches 11 -> 16 in 1,192 ms, held. Oslo at 1000: 11.5
+  against 11.5, 0 problems, 11.5 -> 16.5 in 1,148 ms, held. Before this
+  change the same five notches zoomed Paris 1.5 levels.
+
+- **Oslo landed on master during this gate and was re-rendered on the change
+  before pushing.** Its map had been built without `WHEEL_ZOOM_SCRIPT`, so a
+  plain merge would have shipped 25 cities with the fix and one without it.
+  `drift_check.py oslo`: only `heatmap.html` drifted, additions only (72
+  lines, as in every three-bucket city); the other 25 maps identical to master.
+  `check_map_view.js` 8 fresh loads at 1280/854/375/343, `check_map_labels.js`
+  at the same four widths and `check_map_attribution.js` at four heights: 0
+  problems. Three notches after load zoomed it three levels at 1280 and 375,
+  and the view held six seconds with 0 corrections. The push's `app/` diff
+  against `origin/master` is empty, so no reboot.
+
+- **deploy-verify (`scope: map-chrome`) passed, and found one residual gap in
+  the wheel merge, measured as rare and left open.** Embedded in the app from
+  `.venv-lean`: Paris, Toulouse, New York and Boston render cleanly, the view
+  is right untouched at 1000 and 343 with 0 corrections, a real notch took
+  Paris 12.5 -> 13.5 and the view held for 8 s with `touched` set, and cluster
+  clicks, +/-, the legend, the layer control and the theme button all work;
+  its own 25-city sweep of the three checks matched the one above.
+  `check_deploy_imports.py` passed; nothing under `app/` changed, so no reboot.
+  **The gap:** Leaflet starts a zoom animation on the NEXT frame, so until one
+  is drawn `_animatingZoom` is false and `getZoom()` is still the old zoom. A
+  second wheel batch firing in that window is computed from the old zoom, and
+  the last target wins - notches lost. deploy-verify produced it by sending
+  notches while its pane drew no frames (16.25 -> 15.25 instead of 11.25).
+  Measured with trusted input in a rendering browser, it did not occur: five
+  notches 45 ms apart - each batch just past Leaflet's 40 ms debounce, the
+  worst spacing - zoomed Paris 12.5 -> 17.5 and New York 10.5 -> 15.5 in all
+  six runs (`profile_zoom.mjs`, new `wheel45` case). It needs the main thread
+  to go 40 ms without a frame between batches. Stock Leaflet has the same
+  window, so it is not a regression. If it is ever seen, the fix is small:
+  treat the map as busy from the `setZoomAround` call until the next
+  animation frame, not only while `_animatingZoom` is set.
+
+- **The mouse wheel felt laggier than +/- because Leaflet DISCARDED most of a
+  fast roll, not because the wheel was slow - measured, and the opposite of
+  the recorded hypothesis.** The owner reported wheel zoom and cluster-click
+  zoom as laggy. `.claude/skills/map-view/` had put it down to a wheel gesture
+  walking through many quarter levels (`zoomSnap` 0.25). Profiled on Paris
+  (84,125 heat points, the heaviest map) and Toulouse (the light one) with
+  `scripts/profile_zoom.mjs`, committed for the next such question: headless
+  Edge driven over the DevTools protocol, so the wheel events were trusted
+  input rather than synthetic, with a timer around every map event, the heat
+  layer's redraw and long tasks; median of three fresh loads per case. The browser pane was not used: hidden, it pauses animation frames and
+  no zoom completes at all. **Leaflet 1.9's `_tryAnimatedZoom` returns early
+  while a zoom animation is running**, so every wheel step that fires during
+  the 250 ms animation is dropped. On the committed map, three notches in
+  50 ms zoomed Paris 0.75 of a level and five notches in 240 ms 1.5 levels -
+  the reader rolls again and waits again, which reads as lag. One notch was
+  also 0.75 of a level against a button's 1, because the wheel snaps to
+  `zoomSnap`. The first wheel step starts ~67 ms after the notch (Leaflet's
+  40 ms debounce plus a frame) against ~15 ms for a click; left alone. The
+  hypothesis held only for a TRACKPAD: many small deltas walked Paris through
+  4 quarter-steps and 4 heat redraws in a half-second swipe.
+  **Every zoom step, wheel or button, then blocks Paris's main thread
+  ~130-200 ms**: markercluster re-clustering its three groups at `zoomend`
+  (~60-110 ms) and Leaflet.heat redrawing all 84,125 points at `moveend`
+  (~65-75 ms), followed by markercluster's own ~300 ms split/merge animation.
+  Toulouse pays about a quarter of that.
+
+- **Decided, by the owner: one wheel notch zooms one whole level and nothing
+  is discarded; trackpads keep Leaflet's own curve.** `WHEEL_ZOOM_SCRIPT` in
+  `pipeline/map_common.py` replaces the map's `scrollWheelZoom` handler: a
+  step due during an animation waits for it to land and is merged with
+  whatever arrived meanwhile; a batch containing a notch-sized event (at least
+  25 normalised units - Chrome/Edge on Windows give 50 per notch, Firefox's
+  line mode 60) zooms one level per notch, capped at `zoomAnimationThreshold`
+  so it still animates; anything finer keeps Leaflet's curve and quarter snap
+  verbatim. **Rejected, measured: whole levels for all input.** With nothing
+  discarded, a half-second trackpad swipe went from 12.5 to 19. **Rejected:
+  only stopping the drops**, offered and declined in favour of matching the
+  buttons. `zoomSnap` is untouched (`_fit_view`, the guard and
+  `check_map_view.js` all depend on it); a whole step from x.5 lands on x.5,
+  so wheel and buttons now share one ladder of zooms. The guard's touch
+  detection is untouched too - a capture listener on the container, which
+  runs before this handler.
+
+- **Decided, by the owner: markercluster's split/merge animation is off, with
+  `render_heatmap(animate_clusters=...)` kept as a per-city switch.** The map
+  still animates its own zoom; clusters regroup at the end instead of flying
+  apart. Recorded for re-implementation per the owner: a light map could have
+  it back, and the owner's suggested rule is a measured lag threshold - open
+  in `PLAN.md`. `add_pin_layer` passes it to `FastMarkerCluster(options=)`.
+
+- **Before and after, same harness, both on master's label clamp (`cadf14e`),
+  median of three fresh loads.** Settle = last map event handled.
+
+  | Paris | before | after |
+  |---|---|---|
+  | +/- click, settle | 647 ms | 366 ms |
+  | cluster click (3,592 pins), settle | 818 ms | 428 ms |
+  | cluster click, longest task | 192 ms | 152 ms |
+  | 1 notch | 0.75 level | 1 level |
+  | 3 notches in 50 ms | 1.25 levels, 1 step | 3 levels, 2 steps |
+  | 5 notches in 240 ms | 1.5 levels, 2 steps, 1,023 ms | 5 levels, 3 steps, 1,393 ms |
+  | 4 notches 300 ms apart | 3 levels, 2,752 ms | 4 levels, 2,636 ms |
+  | trackpad swipe (30 x 8 px) | 1.0 level, 4 steps | 2.25 levels, 6 steps |
+
+  | Toulouse | before | after |
+  |---|---|---|
+  | +/- click, settle | 588 ms | 299 ms |
+  | cluster click (504 pins), settle | 602 ms | 310 ms |
+  | 5 notches in 240 ms | 1.5 levels | 5 levels |
+
+  The three-notch "before" read 0.75 of a level in an earlier run of the same
+  case - how much of a roll survives depends on where the notches fall against
+  the animation, which is the defect. The heat redraw (~65 ms per step on
+  Paris) is unchanged; deferring it to the end of a burst was considered and
+  not built, because with notches merged there are fewer steps to save it on,
+  and a heat canvas left CSS-scaled between steps would be a visible change.
+
+- **Verification, all 25 cities, headless Edge at real viewports (the pane
+  was hidden).** `drift_check.py --jobs 4`: every `heatmap.html` drifted and
+  nothing else, and with Folium ids and line endings normalised each diff is
+  additions only - 72 lines, 71 in Boston and Philadelphia, which have two
+  buckets and so one fewer `"animate": false`. Baseline figures unchanged
+  where recorded. `check_provenance.py --strict` all recorded.
+  `check_map_view.js` at 1280, 854, 375 and 343: 100 fresh loads, 0 problems,
+  0 guard corrections. `check_map_labels.js` at 375, 343, 854 and 1280: 0
+  clipped, 0 over the credit; the 28 overlapping pairs in seven cities and
+  the labels under the legend in Edmonton and San Diego are the ones `PLAN.md`
+  already records. `check_map_attribution.js` at 1000x650, 1000x768, 1000x812
+  and 1280x1000: 100 runs, 0 problems. **The guard still yields to the wheel**:
+  three notches after load on Paris, Toulouse and New York at 1280, 854 and
+  375 zoomed each three levels, set `touched`, and the view was unchanged six
+  seconds later with 0 corrections.
 ### 2026-09-24 - Oslo built: 10,718 storefronts, 155 stations, and Norway's first city
 
 - **Oslo is the 26th city and Norway's first, built off a register of PREMISES

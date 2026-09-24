@@ -60,6 +60,16 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   not seen again in the later sweeps. Done when the check reports no
   `overlap` or `under` problem at 375 and 343.
 
+- [x] **Laggy wheel and cluster-click zoom - FIXED 2026-09-23** (app/chrome
+  session, owner's calls). Measured cause: Leaflet discards every wheel step
+  that fires during a zoom animation, so a fast roll lost most of its notches
+  (five notches zoomed Paris 1.5 levels). One notch now zooms one level and
+  nothing is dropped (`WHEEL_ZOOM_SCRIPT`); markercluster's split/merge
+  animation is off (`animate_clusters`), halving Paris's cluster-click settle
+  from 818 to 428 ms. See `DECISIONS.md`, *"Wheel zoom stops discarding
+  notches; cluster animation off"*. A wheel over the map still zooms rather
+  than scrolling the page - the owner's call to leave it.
+
 - [ ] **🇫🇷 PARIS — ✅ BUILT AND DEPLOYED 2026-09-23. Kept for the checklist
   below, which the follower cities still read.**
 
@@ -1526,6 +1536,16 @@ mistakes as confidently as its findings.
   pre-publish gate in `CLAUDE.md` and `add-city` Step 7.
 
 ## Later / maybe
+
+- [ ] **Cluster split/merge animation back, per city, by a lag threshold.**
+  Turned off for every city on 2026-09-23 (`render_heatmap(animate_clusters=
+  False)`); the owner asked for it to be recorded for re-implementation. The
+  switch already exists per city. What is missing is the rule: the owner's
+  suggestion is a measured ms threshold - e.g. animate only where a +/- click
+  settles under some figure with the animation on. Toulouse settled in 588 ms
+  with it and 299 without, Paris 647 and 366, so the threshold has to be
+  chosen against a harness run, not guessed: `scripts/profile_zoom.mjs`
+  produced those figures and runs any city (`button+1` is the case).
 
 - [ ] Macro map at scale: with ~10+ cities, consider grouping nearby cities,
   and showing each city's mapped extent or a one-line summary in the tooltip.
