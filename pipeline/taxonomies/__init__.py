@@ -57,6 +57,10 @@ CATEGORY_BUCKETS = [
 #       the legend row text for a bucket (NAICS appends its prefixes,
 #       e.g. "Retail - NAICS Code: 44/45"; a local taxonomy can just return
 #       the bucket name).
+# and MAY expose:
+#   layer_label(bucket: str) -> str
+#       the bucket's name in the layer control, when a taxonomy renames it
+#       (Amsterdam: "Shops and services"). Defaults to the bucket name.
 TAXONOMY_MODULES = {
     "naics": "pipeline.taxonomies.naics",
     "chicago_license": "pipeline.taxonomies.chicago_license",

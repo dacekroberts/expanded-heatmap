@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**309 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**310 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [The open legend capped below the map's buttons, and a taxonomy may name its layer (owner, from Amsterdam's deploy-verify)](#2026-09-24---the-open-legend-capped-below-the-maps-buttons-and-a-taxonomy-may-name-its-layer-owner-from-amsterdams-deploy-verify)
 - [Amsterdam: the owner's calls, and the page text written](#2026-09-24---amsterdam-the-owners-calls-and-the-page-text-written)
 - [Sendai joined at 95.1% block; MLIT's 小字 column places 字 addresses](#2026-09-24---sendai-joined-at-951-block-mlits-小字-column-places-字-addresses)
 - [Amsterdam built on its branch: 13,238 storefronts, 144 stations](#2026-09-24---amsterdam-built-on-its-branch-13238-storefronts-144-stations)
@@ -351,6 +352,43 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - The open legend capped below the map's buttons, and a taxonomy may name its layer (owner, from Amsterdam's deploy-verify)
+
+- **The open map legend is now capped at the visible map height less the
+  button row and scrolls, with a sticky header; and a taxonomy may define
+  `layer_label()` to name a bucket's layer the way its legend does. Fixed in
+  the shared renderer before Amsterdam shipped - the owner's call of
+  2026-09-24, over handing both to app/chrome beside the phone label layout.**
+  `deploy-verify` (city-added) found two defects on Amsterdam's map that no
+  earlier city could show. **The legend**: 21 lines, the first map past 20, made
+  the open legend 634 px tall at the 650 px embed, so its top sat at y = -8 and
+  its header and Hide control were under the "All cities" and theme buttons
+  (Paris's had been the tallest, its top at y 84). **The layer name**: the layer
+  control said "Businesses: Retail" beside a legend and a page that say "Shops
+  and services", because layers were named by bucket while the legend goes
+  through `legend_label()`. Fixes in `pipeline/map_common.py`: `.map-legend`
+  gets `max-height: calc(min(100vh, 650px) - 80px)`, `overflow-y: auto`,
+  border-box and contained overscroll; the `<summary>` is sticky with an
+  explicit background - `inherit` was tried and FAILED, measured: a summary is
+  slotted into the `<details>` shadow root, so it inherits from a transparent
+  slot and the rows showed through the header in dark mode; `_layout_labels`
+  caps its legend obstacle at the same height; `render_heatmap` names each pin
+  layer through `taxonomy.layer_label` when defined, else the bucket
+  (`legend_label()` itself cannot serve - NAICS's appends its code prefixes).
+  `amsterdam_source.py` sets `layer_label = legend_label`. Measured on
+  Amsterdam at 1000x650: the legend spans y 56-626 (the buttons end at 45), 570
+  px, scrolling 62; the header stays at y 57 when scrolled, background matching
+  the panel in both themes; the layer control reads "Businesses: Shops and
+  services (9,215)". **Rejected: shipping and handing off** - unlike the phone
+  label overlaps, this was the desktop embed, the most-viewed state. The CSS is
+  a shared block, so every map was re-rendered: the full `drift_check.py --jobs
+  4` over 29 cities showed all 29 `heatmap.html` changed and **all 51 other
+  outputs identical, every baseline unchanged**; `check_render_current.py` 29
+  of 29 current; `check_provenance.py` all recorded. Shared code normally
+  app/chrome's (`docs/session_roles.md`); the owner assigned it to this session.
+  Files: `pipeline/map_common.py`, `pipeline/taxonomies/__init__.py`,
+  `pipeline/taxonomies/amsterdam_source.py`, `outputs/*/heatmap.html`.
 
 ### 2026-09-24 - Amsterdam: the owner's calls, and the page text written
 

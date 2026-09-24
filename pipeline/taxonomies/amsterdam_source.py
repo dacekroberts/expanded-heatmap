@@ -106,3 +106,8 @@ def classify(row):
 
 def legend_label(bucket):
     return {"Retail": "Shops and services"}.get(bucket, bucket)
+
+
+# The layer control names the bucket the way the legend does - otherwise it
+# said "Retail" beside a legend and a page that say "Shops and services".
+layer_label = legend_label

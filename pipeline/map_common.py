@@ -319,6 +319,11 @@ assert "@@" not in THEME_TOGGLE_HTML, "unresolved placeholder in THEME_TOGGLE_HT
 # KEPT OUT OF LEGEND_HTML ON PURPOSE: that string goes through .format(), so
 # every CSS brace in it would have to be doubled, and a single missed one is a
 # KeyError at render time rather than a visible mistake. Concatenated instead.
+#
+# How far below the map's top edge the open legend must stop: the button row
+# (#map-actions, top 10px, ~30 px tall) plus a gap. _layout_labels caps its
+# legend obstacle with the same number, so the model and the render agree.
+_LEGEND_TOP_CLEAR = 56
 _LEGEND_CSS = """
 <style>
 /* THE HEADER IS THE CONTROL, AND IT HAS TO SAY SO. A native <summary> does
@@ -350,6 +355,24 @@ _LEGEND_CSS = """
 .map-legend > summary:hover::after { opacity: 1; text-decoration: underline; }
 .map-legend > summary:focus-visible { outline: 2px solid currentColor;
     outline-offset: 2px; }
+/* THE OPEN LEGEND IS CAPPED BELOW THE BUTTON ROW, AND SCROLLS. Amsterdam
+   (2026-09-24) was the first map with 21 lines: open, its legend was 634 px
+   tall at the 650 px embed, so its top sat at y = -8 and its header and Hide
+   control were under the "All cities" and theme buttons (#map-actions, fixed
+   at top 10px, ~30 px tall) - found by deploy-verify. Every earlier legend was
+   shorter than the cap (Paris's the tallest, its top at y 84), so none of
+   them changes. min(100vh, MAP_H) is the visible map height whichever way
+   _LEGEND_BOTTOM_CSS resolves; border-box so the cap is the whole panel. The
+   header sticks, so Hide stays in reach while the rows scroll. Its background
+   is set, NOT `inherit`: a <summary> is slotted into the <details> shadow
+   root, so it inherits from a transparent slot - measured, the rows showed
+   through the header in dark mode. */
+.map-legend { box-sizing: border-box; overflow-y: auto;
+    overscroll-behavior: contain;
+    max-height: calc(min(100vh, """ + str(_MAP_H) + """px) - """ + str(24 + _LEGEND_TOP_CLEAR) + """px); }
+.map-legend > summary { position: sticky; top: -8px; z-index: 1;
+    padding-top: 8px; margin-top: -8px; background: white; }
+.dark-base .map-legend > summary { background: var(--dm-surface); }
 </style>
 """
 
@@ -1355,7 +1378,8 @@ def _layout_labels(points, candidates, labels, n_lines, center, zoom):
             return None
 
     # The legend (open) sits bottom-right; the zoom and layer controls top-left.
-    legend_h = 178 + 19 * n_lines
+    # Capped as _LEGEND_CSS caps it (only a map past ~20 lines reaches it).
+    legend_h = min(178 + 19 * n_lines, _MAP_H - 24 - _LEGEND_TOP_CLEAR)
     obstacles = [(_MAP_W - 24 - 274, _MAP_H - 24 - legend_h, _MAP_W - 24, _MAP_H - 24), (0, 0, 60, 110)]
     placed, chosen, unplaced = [], {}, []
     # Longest names first: they have the fewest places they fit.
@@ -1856,10 +1880,16 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     if unmatched:
         print(f"WARNING: {unmatched} businesses matched no category bucket.")
 
+    # A taxonomy may define layer_label() to name a bucket's layer the way its
+    # legend names it. Amsterdam's legend reads "Shops and services" for the
+    # Retail bucket (a building register cannot split retail from personal
+    # services), and until 2026-09-24 its layer control still said "Retail".
+    # Not legend_label() itself: NAICS's appends its code prefixes.
+    layer_label = getattr(taxonomy, "layer_label", lambda bucket: bucket)
     present = []
     for name, color in CATEGORY_BUCKETS:
         rows = in_rings[in_rings["_bucket"] == name]
-        if add_pin_layer(m, rows, name, color, taxonomy.FIELD_LABEL,
+        if add_pin_layer(m, rows, layer_label(name), color, taxonomy.FIELD_LABEL,
                          taxonomy.VALUE_COLUMN,
                          display=getattr(taxonomy, "display_value", None),
                          animate=animate_clusters):
