@@ -1,0 +1,16 @@
+{
+  "districts": 29,
+  "doorplate_keys": 741550,
+  "join_base_number": 835,
+  "join_exact": 65280,
+  "join_no_plate": 3394,
+  "join_unparsed": 2205,
+  "lines_drawn": 1,
+  "names_hidden": 11907,
+  "office_like_dropped": 1521,
+  "osm_stops": 18,
+  "out_of_bounds": 0,
+  "stations_kept": 18,
+  "storefront_rows": 73235,
+  "storefronts": 66115
+}
