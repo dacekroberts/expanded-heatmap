@@ -766,11 +766,13 @@ brief names.
     - Two COVID-era Tokyo lists would lift Chūō, Kōtō and Minato to about
       50–60%, but they ask not to be used beyond COVID measures.
     - `tokyo.md` has the table.
-  - [ ] **Owner decisions for Tokyo (it builds last, so nothing is waiting):**
-    1. the COVID-era lists: use them or not (recommended: not);
-    2. how Tokyo ships: all 8 wards with per-ward disclosure, or a scope
-       limited to the wards whose lists are close to complete;
-    3. whether to add MHLW's small slice (about +3% at most).
+  - [x] **Owner decisions for Tokyo (2026-09-24):**
+    1. **The COVID-era lists are NOT used.** Honour the stated purpose and
+       the shops' limited consent.
+    2. **Tokyo ships all 8 food wards, each ward's share of the official
+       count disclosed** on the page (Shibuya 101% down to Kōtō 9%).
+    3. **MHLW's slice is added** to the four partial wards at build (PDL 1.0,
+       already accepted), de-duplicated by address and name.
     **Drafted 2026-09-24** in formal Japanese, one per ward:
     `docs/notifications/tokyo-{chuo,koto,minato,shinjuku}-request.md`. Each
     asks for open publication first. Before sending, confirm each ward's

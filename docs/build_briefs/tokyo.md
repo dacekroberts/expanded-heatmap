@@ -230,11 +230,14 @@ tried for Chūō, Kōtō, Minato and Shinjuku. None fills a ward openly.
 | **OpenStreetMap**, calibrated in Shibuya | **Not viable.** It holds only 8–10% of the registered restaurants (15% at most). Chains are found 50% of the time and independents 7%, bars on upper floors are almost absent, and at least 1 in 9 of its points is closed. Added to the lists it lifts Chūō to about 17–20% and Kōtō to 15–18% |
 | **Shinjuku's 2026-03-31 PDF list**, licence re-read | **NOT PERMITTED, or ambiguous in a way that matters.** The site terms name PDFs and forbid secondary use and modification without permission. The open-data terms reach only the portal. The "open data" wording comes from the application form, which addresses applicants, not users. **Shinjuku stays on its 2023 CSV** (84%, vintage disclosed). Any credit links the page, never a PDF (the site's linking rule) |
 
-**What is left, without contacting anyone:**
-- accept the partial lists, disclosed;
-- add MHLW's slice (at most about +3%);
-- the COVID lists, the owner's call;
-- narrow Tokyo's scope to the wards whose lists are close to complete.
+✅ **Decided by the owner, 2026-09-24:**
+1. **The COVID-era lists are not used**, honouring their stated purpose and
+   the shops' limited consent.
+2. **Tokyo ships all 8 food wards, and the page gives each ward's share of
+   the official count**, so the partial wards read as partial.
+3. **MHLW's slice is added** to Chūō, Kōtō, Minato and Shinjuku at build,
+   de-duplicated by address and name against the ward's list. The probe's
+   matcher is in `scratchpad/tokyo_alt/`.
 
 **Tokyo now: 8 wards with food lists, one essentially complete** (Shibuya;
 the rest 9–84% of the official count, above), about **59,400 food permit

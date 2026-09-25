@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**360 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**361 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Tokyo ships all 8 wards, disclosed; the COVID lists are not used; MHLW's slice is added (owner)](#2026-09-24---tokyo-ships-all-8-wards-disclosed-the-covid-lists-are-not-used-mhlws-slice-is-added-owner)
 - [Tokyo's own-time probe round: nothing fills the partial wards openly](#2026-09-24---tokyos-own-time-probe-round-nothing-fills-the-partial-wards-openly)
 - [Osaka's 67%: the official count is most likely inflated, not the list short](#2026-09-24---osakas-67-the-official-count-is-most-likely-inflated-not-the-list-short)
 - [Rotterdam is live: pushed as bec3af1, rebooted by the owner, and checked on the live site](#2026-09-24---rotterdam-is-live-pushed-as-bec3af1-rebooted-by-the-owner-and-checked-on-the-live-site)
@@ -402,6 +403,22 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Tokyo ships all 8 wards, disclosed; the COVID lists are not used; MHLW's slice is added (owner)
+
+- **The owner decided Tokyo's three open calls**, each as recommended:
+  - **The 総務局 COVID-era lists are not used.** Their notes ask users not to
+    use them beyond COVID measures, and the shops consented for that purpose
+    only. The rejected alternative (relying on the catalogue's CC BY 4.0
+    label) would have lifted Chūō, Kōtō and Minato to about 50–60%.
+  - **Tokyo ships all 8 food wards, and the page gives each ward's share of
+    the official count** (from `docs/japan_city_list.md`), so the partial
+    wards read as partial. The rejected alternative was a food layer limited
+    to the near-complete wards.
+  - **MHLW's slice is added to the four partial wards at build**, at most
+    about +3% (PDL 1.0, already accepted).
+- **The parked requests stay parked** as the last resort.
+- Recorded in `tokyo.md`, `data_sources.md` and `PLAN.md`.
 
 ### 2026-09-24 - Tokyo's own-time probe round: nothing fills the partial wards openly
 
