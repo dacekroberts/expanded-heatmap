@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**394 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**395 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-25**
 
+- [Seoul's mobile mode: phones get a light map without business dots (owner); the renderer gains a pins switch](#2026-09-25---seouls-mobile-mode-phones-get-a-light-map-without-business-dots-owner-the-renderer-gains-a-pins-switch)
 - [Seoul's whole-city heat layer dropped: the map would not load on the owner's phone; 30.1 MB to 24.2 MB, and the page says why](#2026-09-25---seouls-whole-city-heat-layer-dropped-the-map-would-not-load-on-the-owners-phone-301-mb-to-242-mb-and-the-page-says-why)
 - [Edmonton's drift fixed at the root: "lapsed" is judged as of the snapshot, not as of the day step 2 runs; the map is back to the built 10,721](#2026-09-25---edmontons-drift-fixed-at-the-root-lapsed-is-judged-as-of-the-snapshot-not-as-of-the-day-step-2-runs-the-map-is-back-to-the-built-10721)
 - [Full drift check after the four-city batch: 45 of 46 cities zero drift, Edmonton's map off by two Retail pins; the six Japanese briefs hold 31/31](#2026-09-25---full-drift-check-after-the-four-city-batch-45-of-46-cities-zero-drift-edmontons-map-off-by-two-retail-pins-the-six-japanese-briefs-hold-3131)
@@ -439,6 +440,31 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-25 - Seoul's mobile mode: phones get a light map without business dots (owner); the renderer gains a pins switch
+
+- **Seoul's map was still blank on the owner's phone after the heat layer
+  was dropped** (24.2 MB). The page loaded; the map did not.
+  - Emulating a phone found no error. The page held about **758 MB** of
+    JavaScript memory once the map was built, and emulation borrows the
+    desktop's memory. The 224,381 business dots are the likely cost.
+- **The owner asked for a mobile-only mode rather than removing the dots
+  for everyone:**
+  - `render_heatmap()` gains `pins=True`. With `pins=False` it draws no
+    business dots, and the legend lists only lines. Every other map keeps
+    the default and is unchanged.
+  - Seoul's step 3 renders twice: the full map, and `heatmap_lite.html`
+    (6.8 MB against 24.2 MB), which keeps the heat layer, rings, stations
+    and all 15 labelled lines.
+  - Page 43 gains a **"Mobile mode"** toggle. It defaults ON when the
+    browser's user agent reads as a phone (`st.context.headers`: Mobi,
+    Android, iPhone, iPad), and anyone can switch it either way.
+  - A caption under the toggle says what it does and why.
+- **This push needed a reboot.** Page 43 imports a new name from
+  `pipeline/seoul/config.py`, a module the running app keeps cached (gate
+  item 9).
+- **The PLAN item stays open.** The proper fix is a renderer that holds
+  fewer dot objects at once, so phones get the dots too.
 
 ### 2026-09-25 - Seoul's whole-city heat layer dropped: the map would not load on the owner's phone; 30.1 MB to 24.2 MB, and the page says why
 

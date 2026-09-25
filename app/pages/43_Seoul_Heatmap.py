@@ -12,7 +12,8 @@ from pathlib import Path
 import streamlit as st
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-from pipeline.seoul.config import HEATMAP_HTML, PROVENANCE_JSON, REGISTERS  # noqa: E402
+from pipeline.seoul.config import (  # noqa: E402
+    HEATMAP_HTML, HEATMAP_LITE_HTML, PROVENANCE_JSON, REGISTERS)
 from components import (  # noqa: E402
     render_city_nav,
     render_site_notices,
@@ -93,7 +94,22 @@ if PROVENANCE_JSON.exists():
         # A malformed provenance file must not take the page down.
         pass
 
-if HEATMAP_HTML.exists():
+# Mobile mode (owner, 2026-09-25): Seoul's 224,381 business dots exhaust a
+# phone's memory and its map renders blank, so phones get the light map
+# (no dots) by default, detected from the browser's user agent; anyone can
+# switch either way.
+try:
+    _ua = st.context.headers.get("User-Agent") or ""
+except Exception:  # an older Streamlit, or no request context
+    _ua = ""
+_phone = any(k in _ua for k in ("Mobi", "Android", "iPhone", "iPad"))
+_lite = st.toggle("Mobile mode", value=_phone)
+st.caption("Mobile mode shows the heat layer, rings, stations and lines without the "
+           "individual dots: Seoul's nearly quarter-million storefronts are more than a "
+           "phone can hold in memory. It switches on by itself on phones.")
+if _lite and HEATMAP_LITE_HTML.exists():
+    st.iframe(HEATMAP_LITE_HTML, width=1000, height=650)
+elif HEATMAP_HTML.exists():
     # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
     # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).
     st.iframe(HEATMAP_HTML, width=1000, height=650)

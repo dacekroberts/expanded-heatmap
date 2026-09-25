@@ -24,6 +24,8 @@ DATA_PROCESSED = ROOT / "data" / "seoul" / "processed"
 OUTPUTS = ROOT / "outputs" / "seoul"
 
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
+# The light map for phones (mobile mode on page 43): no business dots.
+HEATMAP_LITE_HTML = OUTPUTS / "heatmap_lite.html"
 # Stations outside the city, with where each is (a citable scoping record, as
 # in the other cities).
 EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"

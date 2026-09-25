@@ -1904,7 +1904,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
                    stations, businesses, taxonomy_system, lines,
                    crs_geographic, crs_projected, ring_edges_meters, ring_labels,
                    center=None, zoom=None, label_focus=None, rings_shown=False,
-                   all_city_heat=True, animate_clusters=False, lang=None):
+                   all_city_heat=True, animate_clusters=False, lang=None, pins=True):
     """Render one city's heatmap to a standalone HTML file.
 
     lang: the language the map's own names are written in, as a BCP 47 tag
@@ -2077,7 +2077,10 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     present = []
     for name, color in CATEGORY_BUCKETS:
         rows = in_rings[in_rings["_bucket"] == name]
-        if add_pin_layer(m, rows, layer_label(name), color, taxonomy.FIELD_LABEL,
+        # pins=False draws no business dots at all - a LIGHT map for phones
+        # (Seoul's mobile mode, 2026-09-25: 224,381 pins exhausted a phone's
+        # memory and the map rendered blank). The legend then lists only lines.
+        if pins and add_pin_layer(m, rows, layer_label(name), color, taxonomy.FIELD_LABEL,
                          taxonomy.VALUE_COLUMN,
                          display=getattr(taxonomy, "display_value", None),
                          animate=animate_clusters):
