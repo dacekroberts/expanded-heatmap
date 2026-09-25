@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**379 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**380 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Fukuoka's address disclosure worded (owner), and the sampling lesson reaches premises-taxonomy](#2026-09-24---fukuokas-address-disclosure-worded-owner-and-the-sampling-lesson-reaches-premises-taxonomy)
 - [Riga builds next, before Taiwan (owner), and its brief is written](#2026-09-24---riga-builds-next-before-taiwan-owner-and-its-brief-is-written)
 - [The open gap emptied: a final re-probe of its last eight, a verdict on each (owner)](#2026-09-24---the-open-gap-emptied-a-final-re-probe-of-its-last-eight-a-verdict-on-each-owner)
 - [The city menu groups by region, then country (owner)](#2026-09-24---the-city-menu-groups-by-region-then-country-owner)
@@ -421,6 +422,28 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Fukuoka's address disclosure worded (owner), and the sampling lesson reaches premises-taxonomy
+
+- **The owner approved Fukuoka's page wording, the short version**: "About one
+  restaurant in five in Fukuoka chose not to publish its address in the
+  national filing system and is not on this map. Where they are is not
+  known."
+  - The rejected alternative was a fuller paragraph. It explained the two
+    lists and said the lists "match" the official count (101%), and it was
+    the recommendation.
+  - The figures: 4,978 of 24,319 restaurants withheld their address (MHLW's
+    21,088 less the 16,110 with one), so 19,341 are placeable (79.5%).
+  - Clustering stays unmeasured, and the wording claims nothing about it.
+  - Recorded in `fukuoka.md` and `PLAN.md`.
+- **Added São Paulo's sampling lesson to `premises-taxonomy`.** It sat only in
+  `brazil-city`, where no non-Brazilian free-text classifier would meet it.
+  The words rules version 2 chose from 150 unmatched in-ring rows rescued
+  14.7% of those rows but 3.5% of all in-ring rows. The lesson: measure a
+  rule's yield on a fresh sample drawn after the change, never on the one it
+  was chosen from.
+  - It is a new subsection under Step 7, with a checklist line.
+  - It points to `brazil-city` for the rest.
 
 ### 2026-09-24 - Riga builds next, before Taiwan (owner), and its brief is written
 

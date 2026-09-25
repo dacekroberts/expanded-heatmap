@@ -758,10 +758,10 @@ brief names.
      with the other food-retail permit types.
   - [ ] Stage 2 carries 1 and 3 into the taxonomy and the five briefs' open
     items.
-- [ ] **premises-taxonomy skill** — add the São Paulo session's sampling
-  lesson (CNEFE rules v2): words chosen from a sample of unmatched rows rescued
-  14.7% of that sample but 3.5% of all rows. **Measure a rule's yield on a
-  FRESH sample**, never the one it was chosen from.
+- [x] **premises-taxonomy skill — São Paulo's sampling lesson added
+  (2026-09-24).** Words chosen from a sample of unmatched rows rescued 14.7%
+  of that sample but 3.5% of all rows, so measure a rule's yield on a FRESH
+  sample. It is a new subsection under Step 7 plus a checklist line.
 - [x] **Japanese build order (owner, 2026-09-24): Osaka → Kobe → Sapporo →
   Fukuoka → Kyoto → Tokyo LAST.** (Kyoto was added later the same day, owner.) The stub test cleared the first four: every urban
   line keeps 80–100% of its stations inside the city line. Tokyo failed, with
@@ -833,8 +833,11 @@ brief names.
 - [x] **Osaka's page wording revised (owner, 2026-09-24)**: expired permits
   explain most of the gap, and about a tenth of the count is permits the city
   counts but does not list (`osaka.md`).
-- [ ] **Fukuoka** — agree the wording that discloses the ~20% of restaurants
-  with no published address. BODIK is flaky, so `fetch_sources.py` retries.
+- [x] **Fukuoka's disclosure wording agreed (owner, 2026-09-24)**: "About
+  one restaurant in five in Fukuoka chose not to publish its address in the
+  national filing system and is not on this map. Where they are is not
+  known." (`fukuoka.md`). At build, BODIK is flaky, so `fetch_sources.py`
+  retries.
 - [x] **Seoul's Step 0 completed (2026-09-24, `seoul.md`).** Seventeen
   citywide registers, three buckets, restaurant coordinates filled to 97.7%
   from the register itself, rail measured.
