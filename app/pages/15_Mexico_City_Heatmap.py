@@ -13,6 +13,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.mexico_city.config import HEATMAP_HTML  # noqa: E402
 from components import (  # noqa: E402
+    mobile_mode,
     render_city_nav,
     render_site_notices,
     set_base_font,
@@ -77,6 +78,7 @@ cluster."
 """
 )
 
+HEATMAP_HTML = mobile_mode(HEATMAP_HTML)  # the light map on phones
 if HEATMAP_HTML.exists():
     # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
     # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).

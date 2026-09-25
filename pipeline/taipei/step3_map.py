@@ -35,6 +35,8 @@ def main():
     stations = pd.read_csv(config.STATIONS_CSV)
     render_heatmap(
         output_path=config.HEATMAP_HTML,
+        # Mobile mode (owner, 2026-09-25): a light map without dots.
+        lite_output_path=config.HEATMAP_HTML.with_name("heatmap_lite.html"),
         map_title="Taipei (Regional) Metro Business Density Heatmap",
         city_name="Taipei (Regional)",
         system_name="Taipei Metro",

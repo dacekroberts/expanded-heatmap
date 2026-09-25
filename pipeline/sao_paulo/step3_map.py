@@ -60,6 +60,8 @@ def main():
         sys.exit(f"no geometry for {missing}")
     render_heatmap(
         output_path=HEATMAP_HTML,
+        # Mobile mode (owner, 2026-09-25): a light map without dots.
+        lite_output_path=HEATMAP_HTML.with_name("heatmap_lite.html"),
         map_title="São Paulo Metrô and CPTM Business Density Heatmap",
         city_name="São Paulo",
         system_name=SYSTEM,

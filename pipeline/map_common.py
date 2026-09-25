@@ -1904,7 +1904,8 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
                    stations, businesses, taxonomy_system, lines,
                    crs_geographic, crs_projected, ring_edges_meters, ring_labels,
                    center=None, zoom=None, label_focus=None, rings_shown=False,
-                   all_city_heat=True, animate_clusters=False, lang=None, pins=True):
+                   all_city_heat=True, animate_clusters=False, lang=None, pins=True,
+                   lite_output_path=None):
     """Render one city's heatmap to a standalone HTML file.
 
     lang: the language the map's own names are written in, as a BCP 47 tag
@@ -1949,6 +1950,15 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     per-city switch so a light map can have it back - the owner's suggested
     rule is a measured lag threshold, and PLAN.md holds that open item.
     """
+    # lite_output_path (mobile mode, 2026-09-25): ALSO write the same map with
+    # pins=False there - no business dots - from copies of the inputs, so the
+    # full map below is rendered exactly as before.
+    if lite_output_path is not None:
+        _args = dict(locals())
+        _args.update(output_path=lite_output_path, pins=False, lite_output_path=None,
+                     businesses=businesses.copy(), stations=stations.copy())
+        render_heatmap(**_args)
+
     taxonomy = load_taxonomy_module(taxonomy_system)
     bucket_colors = dict(CATEGORY_BUCKETS)
 

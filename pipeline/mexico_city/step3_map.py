@@ -75,6 +75,8 @@ def main():
 
     render_heatmap(
         output_path=HEATMAP_HTML,
+        # Mobile mode (owner, 2026-09-25): a light map without dots.
+        lite_output_path=HEATMAP_HTML.with_name("heatmap_lite.html"),
         map_title="Metro CDMX: commercial density around stations",
         city_name="Mexico City",
         system_name="Metro CDMX and Tren Ligero",

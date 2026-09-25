@@ -1163,6 +1163,26 @@ _AS_RECORDED = (
 )
 
 
+def mobile_mode(heatmap_html):
+    """Mobile mode (owner, 2026-09-25): on phones the map's business dots exhaust
+    the browser's memory and it renders blank. Shows a toggle - on by default for
+    a phone user agent - and returns the light map (no dots) when it is on and one
+    was rendered beside the full map, else the full map."""
+    lite = heatmap_html.with_name("heatmap_lite.html")
+    if not lite.exists():
+        return heatmap_html
+    try:
+        ua = st.context.headers.get("User-Agent") or ""
+    except Exception:  # an older Streamlit, or no request context
+        ua = ""
+    phone = any(k in ua for k in ("Mobi", "Android", "iPhone", "iPad"))
+    on = st.toggle("Mobile mode", value=phone)
+    st.caption("Mobile mode shows the heat layer, rings, stations and lines without the "
+               "individual dots, which are more than a phone can hold in memory on this "
+               "map. It switches on by itself on phones.")
+    return lite if on else heatmap_html
+
+
 def render_site_notices(show_links: bool = True):
     """The site-level footer: the two data documents, then every notice that
     publishing these maps requires.
