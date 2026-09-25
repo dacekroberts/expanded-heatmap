@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**369 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**370 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Nine stale "only city" claims corrected on the site (owner-approved wording)](#2026-09-24---nine-stale-only-city-claims-corrected-on-the-site-owner-approved-wording)
 - [Seoul's four calls decided, and Osaka's page wording revised (owner)](#2026-09-24---seouls-four-calls-decided-and-osakas-page-wording-revised-owner)
 - [Seoul's Step 0 completed: 17 registers, three buckets, coordinates from the register itself, four owner calls](#2026-09-24---seouls-step-0-completed-17-registers-three-buckets-coordinates-from-the-register-itself-four-owner-calls)
 - [Dark-mode line labels start from their line's own colour (owner)](#2026-09-24---dark-mode-line-labels-start-from-their-lines-own-colour-owner)
@@ -411,6 +412,39 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Nine stale "only city" claims corrected on the site (owner-approved wording)
+
+- **Found by the cross-city inconsistency draft** (`docs/map_inconsistencies.md`,
+  open questions 1-8 and 19). Every one was a superlative or a count that was
+  true when written and stopped being true as cities landed.
+- **Each fact was re-verified before drafting.**
+  - **8 regional maps.**
+  - **5 maps draw some commuter-style rail**: DART, S-tog, Roma–Viterbo, CPTM
+    9 and SuperVia.
+  - **15 maps take their rail from OpenStreetMap.**
+  - **Rome and Rotterdam also name no businesses.**
+  - **5 cities use the stop-spacing filter**, confirmed from their
+    `excluded_stations.csv` (SF 65, Philadelphia 161, Boston 25, Amsterdam
+    59, Rotterdam 23).
+  - **7 cities use the half-size rings**: New York, the five French cities
+    and Oslo.
+- **Pages changed:**
+  - **Miami**: "the only regional map" became "the site's first regional map".
+  - **San Francisco**: commuter rail is "left out here as on most maps",
+    the wording already approved for Miami and Boston.
+  - **Mexico City** and **Dublin**: the superlative is dropped.
+  - **Paris**: "seven maps" became "several".
+  - **New York**: "unlike the other cities here" is dropped, and its
+    "half-mile rings used elsewhere" became "the 0.6-mile rings most cities
+    here use". The outer ring was never half a mile.
+- **`docs/excluded_categories.md` changed:**
+  - the counts header;
+  - the ring sizes and the spacing filter's five cities;
+  - Dublin's "only city that names no businesses";
+  - New York's "other four cities".
+- **The principle applied**: where a count would drift again as cities land,
+  the comparison is removed rather than the number updated.
 
 ### 2026-09-24 - Seoul's four calls decided, and Osaka's page wording revised (owner)
 

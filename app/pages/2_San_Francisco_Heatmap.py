@@ -36,7 +36,7 @@ and any transfer points) so the rings stay readable - the excluded
 stations are documented in `outputs/san_francisco/excluded_stations.csv`.
 
 **BART and Caltrain are not on this map.** Both are regional rail crossing
-county lines, and commuter rail is left out of every city map on this site.
+county lines, and commuter rail is left out here as on most maps on this site.
 Where BART and Muni Metro share a station, the station is here as the Muni one
 it also is — Embarcadero, Montgomery, Powell and Civic Center are all mapped,
 as are the Balboa Park and Glen Park interchanges. The F Market heritage
