@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**357 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**358 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [The front page's credit: legible in light mode, opaque, linked to /copyright](#2026-09-24---the-front-pages-credit-legible-in-light-mode-opaque-linked-to-copyright)
 - [The front page's OSM credit is lifted above the city dots](#2026-09-24---the-front-pages-osm-credit-is-lifted-above-the-city-dots)
 - [Rotterdam's deploy check passed, with the labels in both themes and the Global View button; three findings recorded, none blocking](#2026-09-24---rotterdams-deploy-check-passed-with-the-labels-in-both-themes-and-the-global-view-button-three-findings-recorded-none-blocking)
 - [Four Tokyo ward requests drafted; none sent](#2026-09-24---four-tokyo-ward-requests-drafted-none-sent)
@@ -399,6 +400,33 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - The front page's credit: legible in light mode, opaque, linked to /copyright
+
+- **Found by the deploy check** that verified the paint-order fix (the entry
+  below). All three problems are older than it.
+  - **Light mode**: the credit's plain text inherited the dark page's
+    near-white, `rgb(230,237,247)`. On Mapbox's half-white strip it read at
+    **1.18:1**, so the credit showed as its two links and nothing else. Only
+    dark mode had ever been styled.
+  - **Transparency**: both strips were half-transparent (light 0.5, dark
+    0.8), so a name pill under the credit showed through its text.
+  - **The link**: CARTO's style points the OSM link at `/about/`, and
+    CLAUDE.md requires the OSM copyright page.
+- **Fixed in `app/components.py`.**
+  - Both themes now have explicit credit colours on an opaque strip. Light
+    mode's links use the text colour, because the teal accent is ~3.7:1 on
+    white.
+  - The macro map's theme script re-points any openstreetmap.org link in the
+    credit at `/copyright`, on every re-render. Only the href changes: the
+    credit element and its text stay Mapbox's.
+- **`check_macro_attribution.mjs` now measures all of it, in both themes.**
+  It checks that the strip is opaque, that the text and every link read at
+  4.5:1, and that the OSM link goes to /copyright.
+  - **Positive control**: the live, unfixed site fails 13 ways across 375 and
+    1200 px, covering all four failure kinds.
+  - **After the fix**: 0 failures at 375, 768 and 1200 in both themes (text
+    5.6:1 light and 6.6:1 dark, links 12.7:1 or better).
 
 ### 2026-09-24 - The front page's OSM credit is lifted above the city dots
 

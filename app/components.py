@@ -136,8 +136,22 @@ _MACRO_THEME_JS = """
     apply(choice === 'dark' || choice === 'light'
           ? choice === 'dark'
           : ambientPrefersDark());
-    ensure();
-    new window.parent.MutationObserver(ensure).observe(doc.body, { childList: true, subtree: true });
+    // CLAUDE.md: the OSM credit links to the OSM COPYRIGHT page. CARTO's style
+    // ships it pointing at /about/; the credit is Mapbox's own element, built
+    // from the style, so it is corrected here, on every re-render, rather than
+    // replaced. Only the href changes - the text and the credit stay Mapbox's.
+    var OSM_COPYRIGHT = 'https://www.openstreetmap.org/copyright';
+    function fixCredit() {
+        var links = doc.querySelectorAll('[data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib a');
+        for (var i = 0; i < links.length; i++) {
+            if (/openstreetmap[.]org/.test(links[i].href) && links[i].href !== OSM_COPYRIGHT) {
+                links[i].href = OSM_COPYRIGHT;
+            }
+        }
+    }
+    ensure(); fixCredit();
+    new window.parent.MutationObserver(function () { ensure(); fixCredit(); })
+        .observe(doc.body, { childList: true, subtree: true });
     if (window.matchMedia) {
         var mq = window.matchMedia('(prefers-color-scheme: dark)');
         if (mq.addEventListener) {
@@ -197,6 +211,15 @@ _MACRO_CONTROLS_CSS = """
 /* Invert the whole zoom group (white -> near-black, dark glyph -> light); the
    glyph is the button's own background image, so it cannot be inverted alone. */
 body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-group { filter: invert(0.9); }
+/* THE CREDIT'S OWN COLOURS, IN BOTH THEMES, ON AN OPAQUE STRIP. Until
+   2026-09-24 only dark mode was styled, so in light mode the credit inherited
+   the (dark-themed) page's near-white text - rgb(230,237,247) on Mapbox's
+   half-white strip - and read only as its two links. The strip was also
+   half-transparent, so a name pill under it showed through the text. Links use
+   the TEXT colour in light mode, not the accent: the teal accent is ~3.7:1 on
+   white. check_macro_attribution.mjs measures all of this at 4.5:1. */
+[data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib { background: @@LIGHT_SURFACE@@ !important; color: @@LIGHT_MUTED@@; }
+[data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib a { color: @@LIGHT_TEXT@@; }
 body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib { background: @@DARK_ATTRIB_BG@@ !important; color: @@DARK_MUTED@@; }
 body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib a { color: @@DARK_ACCENT@@; }
 /* deck.gl's tooltip is an HTML overlay (class `deck-tooltip`), so unlike the
@@ -226,7 +249,8 @@ def render_macro_map_theme():
         .replace("@@DARK_BORDER@@", DARK["border"])
         .replace("@@DARK_MUTED@@", DARK["muted"])
         .replace("@@DARK_ACCENT@@", DARK["accent"])
-        .replace("@@DARK_ATTRIB_BG@@", rgba(DARK["page"], 0.8))
+        .replace("@@DARK_ATTRIB_BG@@", DARK["page"])   # opaque: see the credit's CSS
+        .replace("@@LIGHT_MUTED@@", LIGHT["muted"])
     )
     assert "@@" not in css, "unresolved placeholder in _MACRO_THEME_CSS"
     st.markdown(css, unsafe_allow_html=True)
