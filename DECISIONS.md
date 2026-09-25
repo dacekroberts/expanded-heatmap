@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**361 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**362 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Meguro's 52%: its lists hold first permits only](#2026-09-24---meguros-52-its-lists-hold-first-permits-only)
 - [Tokyo ships all 8 wards, disclosed; the COVID lists are not used; MHLW's slice is added (owner)](#2026-09-24---tokyo-ships-all-8-wards-disclosed-the-covid-lists-are-not-used-mhlws-slice-is-added-owner)
 - [Tokyo's own-time probe round: nothing fills the partial wards openly](#2026-09-24---tokyos-own-time-probe-round-nothing-fills-the-partial-wards-openly)
 - [Osaka's 67%: the official count is most likely inflated, not the list short](#2026-09-24---osakas-67-the-official-count-is-most-likely-inflated-not-the-list-short)
@@ -403,6 +404,37 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Meguro's 52%: its lists hold first permits only
+
+- **Found why Meguro's food lists hold 52% of the official count: both
+  publish first permits (新規) only, so a premises that moved from an old-law
+  permit onto the revised law since 2021 is in neither.**
+  - **Data**: `all_new_8.csv` (revised law) and `all_old_8.csv` (old law),
+    both as at 2026-04-01. Read by exact column name; 営業者氏名 and
+    施設電話番号 were never read.
+  - **Overlap**: none by 施設NO or 許可番号. The two lists hold 2,279
+    restaurant rows (1,443 + 836), 52.2% of 4,370, with none expired.
+  - **Every revised-law row is 新規**: 2,495 of 2,495. The old-law list has
+    590 新規 and 497 更新.
+  - **The flow is flat**: revised-law restaurant permits by fiscal year run
+    274, 250, 314, 316, 289. Across Tokyo, the revised-law count grew by
+    27,419 in FY2024 alone (e-Stat 5-4-1: 94,354 → 121,773), and the old-law
+    count fell by 27,277.
+  - **Monthly lists**: seven 「新規、更新、届出施設一覧」 files (令和7年9月 to
+    令和8年3月, fetched from BODIK) have 255 rows, all 新規 despite the title,
+    and 252 of them are in `all_new_8.csv`.
+- **The ward's list page carries no opt-out wording.** It warns only that
+  closed or changed premises and staff canteens may be included. So
+  `tokyo.md`'s line grouping Meguro with Taitō and Setagaya as leaving out
+  opt-outs was wrong. It was corrected in the brief.
+- **The share will fall.** The 1,087 old-law permits in the list expire by
+  2029 (584 in 2026), and each one that moves across drops out of both lists.
+  How the ward records a move-over is not published.
+- **No own-time fix exists, so Meguro ships at its measured share, disclosed**,
+  under the owner's all-8-wards decision.
+- `japan_ward_table.py`'s note and `docs/japan_city_list.md` were updated,
+  along with `tokyo.md` and `PLAN.md`.
 
 ### 2026-09-24 - Tokyo ships all 8 wards, disclosed; the COVID lists are not used; MHLW's slice is added (owner)
 

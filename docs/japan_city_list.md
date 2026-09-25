@@ -116,7 +116,7 @@
 | Setagaya | **5,873** | 1,342 | 0 | 100.0% | 38 | ⚠️ **63%** of 9,291 | opted-out premises left out (the ward's page) |
 | Taitō | **5,779** | 1,219 | 1,048 | 100.0% | 16 | ⚠️ **81%** of 8,112 | opted-out premises left out (the ward's page) |
 | Minato | **4,781** | 730 | 2,576 | 99.8% | 35 | ⚠️ **31%** of 15,939 | permits 2021–2026 only; consent-filtered. No old-law list is published |
-| Meguro | **2,022** | 1,045 | 1,412 | 100.0% | 10 | ⚠️ **52%** of 4,370 | new-law and old-law lists. The gap is not yet explained |
+| Meguro | **2,022** | 1,045 | 1,412 | 100.0% | 10 | ⚠️ **52%** of 4,370 | first permits only: premises moved from an old-law permit since 2021 are in neither list, so the share falls as old permits expire |
 | Chūō | **1,324** | 992 | 0 | 99.1% | 22 | ⚠️ **12%** of 11,056 | permits 2021–2022 only; never updated since |
 | Kōtō | **526** | 902 | 0 | 99.9% | 28 | ⚠️ **9%** of 6,102 | permits 2021–2022 only; consent-only new permits |
 

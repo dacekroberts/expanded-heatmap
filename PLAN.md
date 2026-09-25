@@ -777,8 +777,15 @@ brief names.
     `docs/notifications/tokyo-{chuo,koto,minato,shinjuku}-request.md`. Each
     asks for open publication first. Before sending, confirm each ward's
     address, which is not verified in any of the four.
-  - [ ] **Meguro's 46%**: why, when both halves are published. Measure the
-    all_new / all_old overlap and any consent wording on its page.
+  - [x] **Meguro's 52% explained (2026-09-24): its lists hold first permits
+    only.** Every revised-law row is 新規 (2,495 of 2,495), and so is every row
+    of seven monthly 「新規、更新、届出」 lists. Restaurant permits run flat at
+    about 290 a year, while Tokyo's revised-law count grew by 27,419 in FY2024
+    as old-law holders moved across. Premises that moved from an old-law
+    permit are in neither list. No overlap between the halves, and the ward's
+    page carries no opt-out wording. **Coverage will shrink** as the
+    remaining 1,087 old-law permits expire (584 in 2026). No own-time fix, so
+    it ships disclosed.
   - [ ] **Licence reads** for two side finds: Chūō's complete
     personal-services lists (August 2026) and Shinjuku's (June 2026, PDF).
   - [x] **The designated cities against the same kind of count** (MHLW's
