@@ -931,6 +931,19 @@ CITIES = [
         # 37.5 px, measured 2026-09-25).
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Taichung",
+        "lat": 24.1477,
+        "lon": 120.6736,
+        "page": "pages/44_Taichung_Heatmap.py",
+        "blurb": "Taichung Metro's Green Line",
+        "region": "East Asia",
+        "country": "Taiwan",
+        "in_default_view": False,
+        # Above the dot, the default, scored by check_macro_labels.py (width
+        # 61.7 px, measured 2026-09-25).
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

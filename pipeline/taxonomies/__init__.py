@@ -124,6 +124,7 @@ TAXONOMY_MODULES = {
     "hong_kong_fehd": "pipeline.taxonomies.hong_kong_fehd",
     "riga_source": "pipeline.taxonomies.riga_source",
     "korea_localdata": "pipeline.taxonomies.korea_localdata",
+    "taiwan_fia": "pipeline.taxonomies.taiwan_fia",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

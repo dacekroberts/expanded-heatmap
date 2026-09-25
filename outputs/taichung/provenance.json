@@ -1,0 +1,40 @@
+{
+  "fia_register": {
+    "file": "BGMOPEN1.zip",
+    "url": "https://eip.fia.gov.tw/data/BGMOPEN1.zip",
+    "bytes": 66343427,
+    "sha256": "95b08653facc371b44c3281e45256de6dbed3c68955d467faa28ea9a28155000",
+    "retrieved": "2026-09-25T07:19:21+00:00",
+    "data_date": "2026-09-25"
+  },
+  "doorplates": {
+    "file": "taichung_doorplate.csv",
+    "edition": "臺中市115年8月GIS門牌號碼",
+    "drive_id": "1oCjMy_eccQHv7R-VUEBZiC9gtJZ18GcV",
+    "index": "https://newdatacenter.taichung.gov.tw/api/v1/no-auth/resource.download?rid=03d9c01c-4a7c-4bd8-ae88-12ed011391b3",
+    "url": "https://drive.usercontent.google.com/download?id=1oCjMy_eccQHv7R-VUEBZiC9gtJZ18GcV&export=download",
+    "bytes": 159271987,
+    "sha256": "965f8def67f0b6a2af47f40f656303ae5785ba27ff0fa00168e2508bdbfe74b2",
+    "retrieved": "2026-09-25T07:19:30+00:00"
+  },
+  "stations": {
+    "file": "green_line_stations.csv",
+    "url": "https://newdatacenter.taichung.gov.tw/api/v1/no-auth/resource.download?rid=f9511cc5-4799-4df9-98b7-0b0f89fc2be9",
+    "rows": 18,
+    "sha256": "edac6764b887cb48f8e07c5a9cf29a948a7b2728d26dafa3ca8a5a7b7da40532",
+    "retrieved": "2026-09-25T07:19:30+00:00"
+  },
+  "osm_rail": {
+    "file": "osm_rail_routes.json",
+    "url": "https://overpass-api.de/api/interpreter",
+    "query": "[out:json][timeout:300];relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|train|monorail)$\"](23.99,120.46,24.45,121.46)->.r;.r out geom;node(r.r);out body;",
+    "bytes": 24042927,
+    "sha256": "3854c0950f289c2d66ad1b16e416c1ae4a8c2b0b2aa400eb9ef017f50916c7c2",
+    "elements": {
+      "relation": 183,
+      "node": 104
+    },
+    "osm_base": "2026-09-25T07:18:10Z",
+    "retrieved": "2026-09-25T07:19:49+00:00"
+  }
+}

@@ -237,6 +237,12 @@ REGISTRIES = {
     # column is never read, which step 2 asserts. So there is no fallback pair,
     # and the Latin heuristic cannot read Hangul: `korean` runs the Korean pass
     # (pipeline/korean_names.py) instead.
+    # Taiwan's national tax register publishes no owner column; the risk is a
+    # sole proprietor registered under the owner's own name. `taiwan` runs the
+    # rule test above; the Latin heuristic cannot read Chinese.
+    "taichung": dict(raw=None, trade=None, owner=None,
+                     processed="businesses_clean.csv",
+                     address=("address",), taiwan=True),
     "seoul": dict(raw=None, trade=None, owner=None,
                   processed="businesses_clean.csv",
                   address=("address",), korean=True, withheld="Name withheld"),
@@ -755,6 +761,25 @@ def check(slug):
             at_home = [personal_name_at_home(n, a) for n, a in zip(d.business_name, d.address)]
             print(f"    KOREAN PERSONAL NAME AT A RESIDENTIAL ADDRESS, still shown: "
                   f"{sum(at_home):,} of {len(d):,} rows (should be 0)")
+
+    # THE TAIWAN PASS. The national tax register has no owner column, but for a
+    # sole proprietor the registered NAME is often the owner's own, and the FIA
+    # itself refuses to publish owners' names. The owner's rule (2026-09-23): a
+    # name is shown only when it is a trade name (pipeline/countries/taiwan.py,
+    # is_trade_name); otherwise the pin shows its industry. This tests the RULE
+    # on what reached the map, not a name list - the count should be ZERO.
+    if spec.get("taiwan") and proc.exists():
+        sys.path.insert(0, str(ROOT))
+        from pipeline.countries.taiwan import SOLE_PROPRIETOR, is_trade_name
+        d = pd.read_csv(proc, dtype=str, low_memory=False).fillna("")
+        sole = d.org.str.contains(SOLE_PROPRIETOR)
+        shown = d.business_name != d.industry
+        breach = [not is_trade_name(n, o) for n, o in zip(d.business_name[sole & shown],
+                                                          d.org[sole & shown])]
+        print(f"  sole proprietors: {int(sole.sum()):,} of {len(d):,} rows; name shown on "
+              f"{int((sole & shown).sum()):,}, industry shown on {int((sole & ~shown).sum()):,}")
+        print(f"    SOLE PROPRIETOR NAME SHOWN WITHOUT A BUSINESS MARKER: {sum(breach):,} "
+              f"(should be 0)  [Taiwan rule]")
 
     # Where the registry records the entity type itself, report that first: it
     # is what the publisher asserts, not what a regex guesses.

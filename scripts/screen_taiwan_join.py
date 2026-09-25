@@ -50,12 +50,17 @@ import csv
 import io
 import re
 import sys
-import unicodedata
 import zipfile
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+# The parser lives in the pipeline since 2026-09-25 (moved unchanged), so the
+# screen and the builds share ONE copy. Taipei stays the control for it.
+from pipeline.countries.taiwan import (  # noqa: E402
+    BUCKET, EXCLUDE_PREFIXES, REGISTER_ZIP as REGISTER, canon_number, canon_street, nfkc,
+    parse)
+
 DATA = Path(__file__).resolve().parent.parent / "data"
-REGISTER = DATA / "taipei" / "raw" / "BGMOPEN1.zip"
 
 # city -> (address prefixes, door-plate CSV, column names)
 CITIES = {
@@ -67,65 +72,9 @@ CITIES = {
     "taoyuan": (("桃園市", "桃園縣"), "taoyuan/raw/TGOS_A68000_11508.csv",
                 {"street": "街路段", "lane": "巷", "alley": "弄", "num": "號"}),
     "taichung": (("臺中市", "台中市", "臺中縣", "台中縣"),
-                 "taichung/raw/taichung_doorplate_11508.csv",
+                 "taichung/raw/taichung_doorplate.csv",
                  {"street": "街、路段", "lane": "巷", "alley": "弄", "num": "號"}),
 }
-# ISIC-aligned divisions, read from the register's own code names. 487 is
-# online shopping - non-store retail, excluded as NAICS 454 is everywhere.
-BUCKET = {"47": "Retail", "48": "Retail", "56": "Food service", "96": "Personal services"}
-EXCLUDE_PREFIXES = ("487",)
-
-CN = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
-SEP = r"[之\-－~―—–]+"
-
-
-def cn_num(s):
-    if s.isdigit():
-        return str(int(s))
-    if s == "十":
-        return "10"
-    if "十" in s:
-        a, b = s.split("十", 1)
-        return str(CN.get(a, 1) * 10 + (CN.get(b, 0) if b else 0))
-    return str(CN.get(s, s))
-
-
-def nfkc(s):
-    return unicodedata.normalize("NFKC", s or "").replace(" ", "").replace("　", "")
-
-
-def canon_street(s):
-    s = re.sub(r"([一二三四五六七八九十]+|\d+)段", lambda m: cn_num(m.group(1)) + "段", nfkc(s))
-    return s.replace("台", "臺")
-
-
-def canon_number(num):
-    num = re.sub(r"(\d+)" + SEP + r"(?=\d)", r"\1-", nfkc(num))
-    m = re.match(r"(\d+(?:-\d+)*)", num)
-    return m.group(1) if m else None
-
-
-# The street may CONTAIN 市, 鎮 or 里; district and village are stripped first.
-ADDR = re.compile(
-    r"^(?P<street>.+?(?:路|街|大道|道)(?:\d+段)?|.+?段)"
-    r"(?:(?P<lane>\d+)巷)?(?:(?P<alley>\d+)弄)?(?P<num>\d+(?:-\d+)*)號")
-
-
-def parse(addr, prefixes):
-    a = nfkc(addr).replace("台", "臺")
-    for p in prefixes:
-        a = a.replace(nfkc(p).replace("台", "臺"), "", 1)
-    a = re.sub(r"^.{1,3}?(區|鄉|鎮|市)", "", a)          # district / old township
-    a = re.sub(r"^[^路街道段]{1,4}?里", "", a)            # village
-    a = re.sub(r"^\d+鄰", "", a)                           # neighbourhood
-    a = re.sub(r"([一二三四五六七八九十]+)段", lambda m: cn_num(m.group(1)) + "段", a)
-    a = re.sub(r"(\d+)" + SEP + r"(?=\d)", r"\1-", a)
-    a = re.sub(r"(\d+)[、,]\d+號", r"\1號", a)
-    m = ADDR.search(a)
-    if not m:
-        return None
-    return (canon_street(m.group("street")), m.group("lane") or "",
-            m.group("alley") or "", m.group("num"))
 
 
 def main():
