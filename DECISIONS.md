@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**362 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**363 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Chūō's and Shinjuku's personal-services lists: not open data, not used](#2026-09-24---chūōs-and-shinjukus-personal-services-lists-not-open-data-not-used)
 - [Meguro's 52%: its lists hold first permits only](#2026-09-24---meguros-52-its-lists-hold-first-permits-only)
 - [Tokyo ships all 8 wards, disclosed; the COVID lists are not used; MHLW's slice is added (owner)](#2026-09-24---tokyo-ships-all-8-wards-disclosed-the-covid-lists-are-not-used-mhlws-slice-is-added-owner)
 - [Tokyo's own-time probe round: nothing fills the partial wards openly](#2026-09-24---tokyos-own-time-probe-round-nothing-fills-the-partial-wards-openly)
@@ -404,6 +405,32 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Chūō's and Shinjuku's personal-services lists: not open data, not used
+
+- **Read the terms of the two personal-services lists found during the Tokyo
+  probes. Both are NOT PERMITTED, or ambiguous in a way that matters, and
+  neither is used.**
+- **Chūō** (理容所, 美容所 and クリーニング所 xlsx, as of 2026-08-31):
+  - Not on the ward's open-data page (36 files) or the Tokyo catalogue
+    (organisation `t131024`: 47 packages).
+  - The open-data licence applies only to that page's files, and sends other
+    data to the site's copyright clause. That clause names 「PDFその他のデータ」
+    and bars reproduction or modification without permission.
+- **Shinjuku** (理容所, 美容所, クリーニング所 and 旅館業 PDFs, as of 2026-06-30):
+  - The same site terms as its food PDF.
+  - No open-data version exists: not on the ward's list (142 rows), the Tokyo
+    catalogue (137 packages), LinkData, or the 2021 archived page.
+  - Unlike food, the opening forms say nothing about open data, so the
+    reading that the ward treats the list as open data is gone.
+  - The PDFs carry 営業者住所 (the operator's address) unmasked.
+- **The remaining permitting reading**, that premises facts are not 著作物,
+  was declined for both, as it was for Sendai and for Shinjuku's food PDF. The
+  rejected alternative was to rely on it for a complete personal-services
+  layer in two wards.
+- **Asking either ward is the owner's last resort.** Neither publishes an
+  e-mail channel, only phone and fax (or a form, for Shinjuku's 区政情報課).
+- Recorded in `data_sources.md` (two rows), `tokyo.md` and `PLAN.md`.
 
 ### 2026-09-24 - Meguro's 52%: its lists hold first permits only
 

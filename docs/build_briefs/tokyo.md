@@ -191,7 +191,7 @@ for 東京都. Four ward probes followed the same day.
 | Setagaya | 63% of 9,291 | the ward's page: premises that opted out are left out | — |
 | Meguro | 52% of 4,370 | **first permits only** (measured 2026-09-24, below): premises that moved from an old-law permit onto the revised law since 2021 are in neither list. The share falls as the remaining old-law permits expire | **Nothing.** The monthly 「新規、更新、届出」 lists are first permits only too |
 | **Minato** | **31%** of 15,939 | **consent-filtered** (the resource says so); new-law permits only | **Nothing.** No old-law list exists anywhere (ward site, both catalogues, web archive). The ward's own report: 16,073 restaurants in force at 2026-03-31, 11,631 new-law and 4,442 old-law |
-| **Chūō** | **12%** of 11,056 | permits of 2021-06 to 2022-12 only, published 2024-03 and never updated | **Nothing.** No other list in any format. Side find: **complete personal-services lists** (August 2026) on the ward's site, licence not yet read (possibly site terms) |
+| **Chūō** | **12%** of 11,056 | permits of 2021-06 to 2022-12 only, published 2024-03 and never updated | **Nothing.** No other list in any format. Side find: **complete personal-services lists** (August 2026) on the ward's site. **Not used**: they are not open data, and the site's copyright clause bars reuse without permission (licence read 2026-09-24, `data_sources.md`) |
 | **Kōtō** | **9%** of 6,102 | consent-only new permits, 2021-06 to 2022-11 | Monthly lists of the last 12 months, but under site terms that bar reuse. Health bureau FY2024: 3,760 new-law + 2,285 old-law restaurants |
 
 **Why Tokyo differs from the designated cities:**

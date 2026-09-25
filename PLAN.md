@@ -786,8 +786,12 @@ brief names.
     page carries no opt-out wording. **Coverage will shrink** as the
     remaining 1,087 old-law permits expire (584 in 2026). No own-time fix, so
     it ships disclosed.
-  - [ ] **Licence reads** for two side finds: Chūō's complete
-    personal-services lists (August 2026) and Shinjuku's (June 2026, PDF).
+  - [x] **Licence reads** for two side finds, 2026-09-24: Chūō's complete
+    personal-services lists (August 2026, xlsx) and Shinjuku's (June 2026,
+    PDF). **Both NOT PERMITTED or ambiguous; neither is used.** Neither is
+    open data, and each ward's site terms bar reuse without permission.
+    Chūō, Shinjuku, Setagaya and Kōtō keep no personal-services layer. Asking
+    either ward is the owner's last resort.
   - [x] **The designated cities against the same kind of count** (MHLW's
     衛生行政報告例, FY2024, old law + revised law): Kobe 101%, Sapporo 100%,
     Fukuoka 101%, Kyoto 93%, Hiroshima 99%, Sendai 101%. These lists are
