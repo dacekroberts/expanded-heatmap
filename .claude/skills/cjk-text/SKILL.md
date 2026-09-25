@@ -31,6 +31,10 @@ code page (cp1252), not UTF-8. Three things followed from that in one build:
   (`ä¹\udc9d...`) because the pipe was decoded as cp1252. The data was
   fine. Judge an encoding from the file, opened with an explicit encoding, never
   from terminal output.
+- **Several BOMs can hide in the first header (Taiwan, MEASURED).** Taichung's
+  portal serves CSVs that begin with U+FEFF FIVE times; `utf-8-sig` strips one
+  and the first column still misses its lookup. Decode as UTF-8 and
+  `lstrip(chr(0xFEFF))`.
 - **A BOM hides in the first header.** MTR's CSV begins with U+FEFF, so its first
   column read `﻿Line Code` and a lookup by `"Line Code"` failed. Read CSVs
   with `encoding="utf-8-sig"`; it strips a BOM when there is one and is harmless
@@ -89,7 +93,11 @@ And one project rule bites harder here: a regex holding a Unicode escape
   English edition (2 duplicates found). For CJK text, normalise first with
   `unicodedata.normalize("NFKC", s)`. It folds full-width Latin and digits
   (`ＡＢＣ１２３` to `ABC123`), full-width parentheses (`（）`) and the
-  ideographic space (U+3000). TO CHECK: how much of Taiwan's and Japan's text is
+  ideographic space (U+3000). **MEASURED for Taiwan (2026-09-25):** the door-plate
+  numbers are full-width (`１７５之２號`) and the register pads one-character
+  district names with an ideographic space (`臺中市中　區`), so NFKC plus removing
+  U+3000 is required before any key - `pipeline/countries/taiwan.nfkc` does both.
+  TO CHECK: how much of Japan's text is
   full-width - count before and after normalising.
 - **Addresses insert units a join does not expect.** Taipei's brief measured
   its register inserting `里` and `鄰` between district and street, so the first
@@ -125,7 +133,15 @@ Hong Kong it misread in both directions:
   comma and no space. So on a Chinese-only, Korean or Japanese register its
   **zero is not a finding.**
 
-Until the check has a CJK-aware pass (Seoul's brief already asks for one, and it
+**Now built, two ways (2026-09-25):** Seoul's `korean=True` pass
+(`pipeline/korean_names.py`: a bare surname-plus-two-syllables name at an
+address that reads residential is withheld; 138 withheld) and Taiwan's
+`taiwan=True` pass, which tests the owner's RULE rather than a name list (a sole
+proprietor's name is shown only with a business marker; the marker list leaves
+out characters that occur in given names - 美, 軒, and the surname 莊). Both print
+a count that must be ZERO. A Japanese city adds its own pass the same way.
+
+Before those existed - and for any CJK script without one - until the check has a CJK-aware pass (Seoul's brief already asks for one, and it
 belongs in the check rather than here), do what Hong Kong did. Find out whether
 the register carries a person's name at all - FEHD's carries the shop sign and
 no licensee, which settled Hong Kong structurally. Then read a sample of the
@@ -152,6 +168,8 @@ flagged pins in the original script, decide, and record the verdict in
   **`render_heatmap` now RAISES** when business names contain CJK characters
   and no `lang` is given, so this cannot be forgotten. A new language needs its
   faces and order added to `_CJK_FACES` and `_CJK_ORDER` in `theme.py` first.
+- **Languages used so far**: `zh-HK` (Hong Kong), `ko` (Seoul), `zh-TW` (Taichung,
+  Taoyuan). The render raised without one on every CJK city, as designed.
 - **Tooltip metrics.** A CJK face changes line height and width; the Hong Kong
   deploy check saw no overflow, but a Chinese-only or Japanese-only register
   puts CJK in every tooltip, so look again.

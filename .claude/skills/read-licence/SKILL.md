@@ -87,6 +87,15 @@ sentence on a page its own licence linked.
 
 ### 3. Grep the dataset page for incorporation by reference
 
+**And read the PORTAL's FAQ, not only its licence page.** Taoyuan's portal
+(2026-09-25) declares OGDL v1 on the dataset, whose text forbids nothing a
+map does - while its 常見問答 adds, outside the licence, that value-added use
+must not *mislead the public* or *jeopardise the City Government's interests*.
+Neither is defined. It is not incorporated by reference, so the grep below
+does not find it; a reader of the FAQ does. Record such a condition and put it
+to the owner - it was accepted for Taoyuan - rather than deciding it is
+harmless.
+
 This is the step that would have caught Philadelphia, and the one most easily
 skipped because the dataset already has a named licence.
 

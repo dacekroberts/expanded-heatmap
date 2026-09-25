@@ -113,6 +113,23 @@ An average hides which tier the map is standing on.
   a sign flip AND a swap; the wrong orders land in Germany and the Arctic.
   Transform one known landmark before trusting a CRS.
 - **The first page of a register is its oldest rows** — sample several pages.
+- **A street name can recur across districts, and a key without the district
+  joins to the wrong one — silently, at a HIGHER rate.** Taichung's 2010
+  city-county merger left 14,723 street/number keys in more than one district
+  (Taoyuan: 11,301). The screen's district-free key read 92.7%; the build keys
+  on district too and reads 92.2%, and the half point it gave up was wrong
+  answers. Count the keys that occur in more than one district before
+  trusting any rate.
+- **The two files can name the same district differently.** Taiwan's door-plate
+  files carry a district CODE (`鄉鎮市區代碼`, 6600100…) and the register a
+  NAME (`西屯區`). Do not hand-type the mapping: learn it from keys that exist
+  in ONE district only, print the table, and refuse any district below 90%
+  agreement (`pipeline/countries/taiwan_step2.py`, `district_codes`). All 42
+  districts of the first two cities mapped at 96.6–100%.
+- **An address file may carry projected coordinates only.** Taichung's has
+  WGS84 beside TWD97; Taoyuan's has TWD97 (EPSG:3826) alone. Reproject in one
+  batch after the keys are built (a per-row transform on 500,000 plates is
+  the slow way), and check a landmark.
 
 ## Before the join is published
 

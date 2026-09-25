@@ -265,6 +265,22 @@ once a city's line geometry is OSM that credit covers **data** too. Say so in
 about tiles. No file goes in `docs/licenses/` - ODbL is a published public
 licence, not an agency document that can be revoked without notice.
 
+## Three more, from Taiwan (2026-09-25)
+
+- **Do not pull `route=train` across a city's box for a metro.** Taichung's
+  query did, and fetched 24 MB of high-speed and Taiwan Railway geometry for
+  an 18-station line. Ask for the metro modes, or the line by name, bounded.
+- **The operator's own list can be STALE rather than wrong.** Taoyuan Metro's
+  station XML is dated 2018 and lacks a station opened in 2023, which OSM and
+  the national layer both carry. Add the station BY ID with its date, and make
+  the step refuse the addition once the operator lists it - gate 3 stays exact
+  for every other station instead of being loosened for all of them.
+- **A national station layer can settle scope without a boundary.** Taiwan's
+  `捷運車站` (內政部國土測繪中心) gives each station a point AND an address, and
+  the address names its city - which decided Taoyuan's 15 of 22 stations when
+  Overpass 504ed on every boundary query. Entrances sit in the same layer
+  (`…站-出入口1`): select the station rows by name pattern, a whitelist.
+
 ## Checklist
 
 - [ ] Ground for not using GTFS recorded in the city's config, and approved -
