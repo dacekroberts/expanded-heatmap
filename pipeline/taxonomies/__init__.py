@@ -123,6 +123,7 @@ TAXONOMY_MODULES = {
     "brazil_cnefe": "pipeline.taxonomies.brazil_cnefe",
     "hong_kong_fehd": "pipeline.taxonomies.hong_kong_fehd",
     "riga_source": "pipeline.taxonomies.riga_source",
+    "korea_localdata": "pipeline.taxonomies.korea_localdata",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

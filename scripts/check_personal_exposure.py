@@ -232,6 +232,14 @@ REGISTRIES = {
     "hong_kong": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv",
                       address=("address",)),
+    # Seoul's seventeen LOCALDATA registers carry the premises' trade name and
+    # NO operator column (no 대표자, 성명 or 이름 in any of them); the telephone
+    # column is never read, which step 2 asserts. So there is no fallback pair,
+    # and the Latin heuristic cannot read Hangul: `korean` runs the Korean pass
+    # (pipeline/korean_names.py) instead.
+    "seoul": dict(raw=None, trade=None, owner=None,
+                  processed="businesses_clean.csv",
+                  address=("address",), korean=True, withheld="Name withheld"),
     "san_diego": dict(raw="sd_businesses_active_datasd.csv", trade="dba_name",
                       owner="business_owner_name", processed="businesses_clean.csv",
                       address=("address_no", "address_road", "address_suite")),
@@ -727,6 +735,26 @@ def check(slug):
         print(f"  their top classifications: {by_class.to_dict()}")
 
     proc = ROOT / "data" / slug / "processed" / spec["processed"]
+
+    # THE KOREAN PASS. The heuristic above reads Latin script only, so on a
+    # Korean register its zero is not a finding (cjk-text section 5). A bare
+    # Korean personal name is a surname and two syllables; the case that
+    # matters is one at an address that reads residential. Shared with Seoul's
+    # step 2, which withholds those names - so the residential count here
+    # should be ZERO, and the withheld count is what step 2 caught.
+    if spec.get("korean"):
+        sys.path.insert(0, str(ROOT))
+        from pipeline.korean_names import looks_like_personal_name, personal_name_at_home
+        bare = [n for n in names if looks_like_personal_name(n)]
+        print(f"  pins whose name is a bare Korean personal-name shape: {len(bare):,} "
+              f"({100 * len(bare) / len(rows):.2f}%)  [Korean heuristic]")
+        withheld = sum(n == spec["withheld"] for n in names)
+        print(f"  pins whose name step 2 withheld: {withheld:,}")
+        if proc.exists():
+            d = pd.read_csv(proc, dtype=str, low_memory=False).fillna("")
+            at_home = [personal_name_at_home(n, a) for n, a in zip(d.business_name, d.address)]
+            print(f"    KOREAN PERSONAL NAME AT A RESIDENTIAL ADDRESS, still shown: "
+                  f"{sum(at_home):,} of {len(d):,} rows (should be 0)")
 
     # Where the registry records the entity type itself, report that first: it
     # is what the publisher asserts, not what a regex guesses.
