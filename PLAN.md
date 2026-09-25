@@ -783,22 +783,22 @@ brief names.
   `korea_localdata.py` and the Korean pass of `check_personal_exposure.py`
   (113 premises sized). Done 2026-09-25: Line 7 has 39 stations in Seoul and
   신림선 11; the Korean pass is `pipeline/korean_names.py` (138 withheld).
-- [~] **🇰🇷 SEOUL - built on `worktree-seoul`, text approved (owner 2026-09-25): 239,410
+- [x] **🇰🇷 SEOUL - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-25 (master 5320f6a), text approved (owner 2026-09-25): 239,410
   storefronts, 308 stations.** Page 43, notice 18; the map is 30 MB (kept, owner: time it
   live). Line 8 darkened for contrast; withheld names read "Name withheld" (owner).
-  - [ ] `deploy-verify` (city-added Seoul + East Asia), fetch, push, reboot, live check;
+  - [x] `deploy-verify` (city-added Seoul + East Asia), fetch, push, reboot, live check;
     remove the worktree's junction and the `seoul-*-tmp` launch entries. **Publishes in one
     batch with the Taiwanese cities (owner, 2026-09-25).**
-- [~] **🇹🇼 TAICHUNG - built on `worktree-taichung` (stacked on Seoul), text and notices 44
+- [x] **🇹🇼 TAICHUNG - LIVE 2026-09-25 (master 5320f6a); built on `worktree-taichung` (stacked on Seoul), text and notices 44
   and 45 approved (owner 2026-09-25): 66,115 storefronts, 18 stations.** Page 44; the project's
   green for the line (owner); the `taiwan-city` skill written from it. Publishes with Seoul.
-- [~] **🇹🇼 TAOYUAN - built on the same branch, text and notice 46 approved (owner 2026-09-25):
+- [x] **🇹🇼 TAOYUAN - LIVE 2026-09-25 (master 5320f6a); built on the same branch, text and notice 46 approved (owner 2026-09-25):
   45,014 storefronts, 15 stations.** Page 45; the portal FAQ's condition accepted (owner).
   Publishes with Seoul and Taichung.
-- [~] **🇹🇼 TAIPEI (REGIONAL) - built on the same branch, text and notice 47 approved (owner
+- [x] **🇹🇼 TAIPEI (REGIONAL) - LIVE 2026-09-25 (master 5320f6a); built on the same branch, text and notice 47 approved (owner
   2026-09-25): 133,335 storefronts, 153 stations, twelve lines.** Page 46; R01 kept, Taipei
   Metro's declaration accepted, market stalls left off (owner).
-- [ ] **The batch publish** - Seoul, Taichung, Taoyuan, Taipei (Regional): `deploy-verify`
+- [x] **The batch publish** (2026-09-25, owner rebooted; live-checked) - Seoul, Taichung, Taoyuan, Taipei (Regional): `deploy-verify`
   (city-added x4 + East Asia), merge master, fetch, push, reboot, live check; retire the
   junctions and the `-tmp` launch entries.
 - [x] **No pre-build items**: Hong Kong, the nine Brazilian

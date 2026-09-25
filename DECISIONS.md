@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**390 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**391 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-25**
 
+- [Seoul, Taichung, Taoyuan and Taipei (Regional) are live: one batch, pushed as 5320f6a, rebooted by the owner, checked on the live site](#2026-09-25---seoul-taichung-taoyuan-and-taipei-regional-are-live-one-batch-pushed-as-5320f6a-rebooted-by-the-owner-checked-on-the-live-site)
 - [Taipei (Regional) built on the same branch: 133,335 storefronts, 153 stations, twelve lines; notice 47 and page 46 approved by the owner](#2026-09-25---taipei-regional-built-on-the-same-branch-133335-storefronts-153-stations-twelve-lines-notice-47-and-page-46-approved-by-the-owner)
 - [Taoyuan built on the same branch: 45,014 storefronts, 15 stations; notice 46 and page 45 approved by the owner, and Taiwan's step 2 made shared](#2026-09-25---taoyuan-built-on-the-same-branch-45014-storefronts-15-stations-notice-46-and-page-45-approved-by-the-owner-and-taiwans-step-2-made-shared)
 - [Taichung built on `worktree-taichung`: Taiwan's first city, 66,115 storefronts, 18 stations; notices 44 and 45 and page 44 approved by the owner](#2026-09-25---taichung-built-on-worktree-taichung-taiwans-first-city-66115-storefronts-18-stations-notices-44-and-45-and-page-44-approved-by-the-owner)
@@ -435,6 +436,40 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-25 - Seoul, Taichung, Taoyuan and Taipei (Regional) are live: one batch, pushed as 5320f6a, rebooted by the owner, checked on the live site
+
+- **Published as one batch (owner).** Seoul's branch was stacked under the
+  three Taiwanese cities, and origin/master (7d6de9d) was an ancestor, so no
+  merge was needed. It was checked with a fetch immediately before the push.
+- **Before the push:**
+  - `check_deploy_imports.py` reported PROBLEMS 0, twice.
+  - The drift check found zero drift on all four cities, and their baselines
+    were recorded (4684c30).
+  - `deploy-verify` (city-added ×4 plus the East Asia view) passed every
+    render check and found one defect, now fixed: the OpenStreetMap
+    rail-geometry notice still ended at Hong Kong. It now names the four
+    cities (5320f6a).
+  - Its minor observations are recorded, not acted on. An opened legend
+    covers some labels on narrow screens (it loads collapsed there). Two of
+    Taipei's pale colours (Danhai #FEBEB5, Xinbeitou #F890A5) are faint in
+    light mode, though their labels pass contrast.
+- **Live, after the owner's reboot:**
+  - The Overview shows no errors. The regions read Global (46), Europe
+    (16), South America (9) and East Asia (5).
+  - Notices 18 and 44–47 are displayed, and the updated OpenStreetMap notice
+    is live.
+  - Each of pages 43–46 has no errors, its title, and its snapshot caption
+    (register dates and door-plate editions).
+  - Line labels: Seoul 15, Taipei (Regional) 12, Taichung 1, Taoyuan 1.
+- **Seoul's 30 MB map, timed as the owner asked.** Opened directly, the map
+  was built at 8.2 s on the live site. Locally it took 5.5–6.0 s direct and
+  3.4 s from its Overview marker. Taipei (Regional), at 15 MB, took 6.4 s;
+  Taichung 5.6 s; Taoyuan 5.5 s. The owner's rule was to shrink Seoul only
+  if the live page is slow. 8.2 s against 5.5 s for a 1.8 MB map is slower,
+  not broken, so it is left to the owner.
+- **Retired:** the `batch-*-tmp` launch entries, and the worktrees' data and
+  lean-venv junctions (removed non-recursively).
 
 ### 2026-09-25 - Taipei (Regional) built on the same branch: 133,335 storefronts, 153 stations, twelve lines; notice 47 and page 46 approved by the owner
 
