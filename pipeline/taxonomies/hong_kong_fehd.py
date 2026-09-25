@@ -57,6 +57,11 @@ def legend_label(bucket: str) -> str:
     return {"Retail": "Food shops", "Personal services": "Bathhouses"}.get(bucket, bucket)
 
 
+# The layer menu names the categories as the legend and the page do (the hook
+# Amsterdam added; without it the menu read "Retail" and "Personal services").
+layer_label = legend_label
+
+
 def classify(row: dict):
     """Taxonomy-module interface (see pipeline/taxonomies/__init__.py)."""
     code = str(row.get("licence_code") or "").strip().upper()
