@@ -139,18 +139,19 @@ flagged pins in the original script, decide, and record the verdict in
   Hong Kong's tooltips rendered Chinese on a real hover with no empty boxes.
   Keep the Latin faces first, as that file's comment explains: browsers fall
   through per glyph, and a CJK face first would restyle every Latin name.
-- **But the CJK faces are in Japanese-first order, so Chinese renders in
-  Japanese forms.** Han unification gives Chinese and Japanese the same code
-  points with different regional glyph standards (`骨` and `直` are the classic
-  pairs). A Japanese face draws Hong Kong's shop signs in Japanese shapes, and
-  Cantonese characters it lacks (`嘅`, `冇`, `啲`) drop to the next face, so one
-  sign can mix two typefaces. It is legible and it is wrong for a Chinese reader.
-  **Handed to the Cleanup session 2026-09-24**; the likely fix is a per-map
-  language (`zh-HK`, `zh-TW`, `ko`, `ja`) that sets the map's `lang` and orders
-  the CJK faces for it. **Before building a CJK city, check whether that has
-  landed.** If it has not, Taiwan renders in Japanese forms too; Japan is
-  unaffected, and Korean Hangul is unaffected (the Japanese faces lack it) apart
-  from any Hanja.
+- **Pass the map's language: `render_heatmap(..., lang="zh-TW")`**, or
+  `zh-HK`, `zh-CN`, `ja`, `ko`. Han unification gives Chinese and Japanese the
+  same code points with different regional glyph standards (`骨` and `直` are
+  the classic pairs), so whichever CJK face comes first draws every Han
+  character. Until 2026-09-24 the order was Japanese-first for every map, and
+  Hong Kong's signs rendered in Japanese forms. Measured with the browser's
+  own record of which font drew each glyph: Yu Gothic drew 3 of `骨直嘅冇啲`
+  and JhengHei the other 2, so one sign mixed two typefaces. `lang` sets
+  `<html lang>` and orders the CJK faces for that script
+  (`pipeline/theme.font_stack`); with `zh-HK`, JhengHei drew all five.
+  **`render_heatmap` now RAISES** when business names contain CJK characters
+  and no `lang` is given, so this cannot be forgotten. A new language needs its
+  faces and order added to `_CJK_FACES` and `_CJK_ORDER` in `theme.py` first.
 - **Tooltip metrics.** A CJK face changes line height and width; the Hong Kong
   deploy check saw no overflow, but a Chinese-only or Japanese-only register
   puts CJK in every tooltip, so look again.
@@ -173,6 +174,6 @@ flagged pins in the original script, decide, and record the verdict in
 - [ ] Privacy: does the register carry a person's name at all? A sample read in
       the original script, with the verdict recorded - the heuristic's zero is
       not one
-- [ ] Font order: has the per-map language landed? If not, say what the reader
-      sees
+- [ ] `lang=` passed to render_heatmap (it raises without one on CJK names);
+      the drawn font checked on a hovered tooltip, not assumed
 - [ ] Tooltips with CJK hovered in the rendered map, in both themes

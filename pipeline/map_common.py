@@ -1875,6 +1875,31 @@ def drop_contact_details(businesses):
     return businesses[~flagged]
 
 
+# Han, kana, Hangul and CJK compatibility/extension ranges: enough to tell that
+# a register's names are in a CJK script, not to classify which one.
+_CJK_RE = re.compile("[぀-ヿ㐀-䶿一-鿿가-힯豈-﫿\U00020000-\U0002ebef]")
+
+
+def _require_lang_for_cjk(businesses, lang, city_name):
+    """Refuse to render CJK business names without a declared map language.
+
+    Without one, the shared font stack's first CJK face draws every Han
+    character, and Hong Kong's signs rendered in Japanese forms until
+    2026-09-24. The lesson lived in a skill; this puts it where the next CJK
+    city (Taiwan, Seoul, Japan) must pass through it, per osm-rail's rule."""
+    if lang is not None or "business_name" not in businesses.columns:
+        return
+    names = businesses["business_name"].dropna().astype(str)
+    n = int(names.map(lambda s: bool(_CJK_RE.search(s))).sum())
+    if n:
+        raise ValueError(
+            f"{city_name}: {n:,} business names contain Chinese, Japanese or "
+            f"Korean characters, but render_heatmap() was given no lang. Pass "
+            f"lang='zh-HK', 'zh-TW', 'zh-CN', 'ja' or 'ko' so the map's CJK "
+            f"faces are ordered for its script - see pipeline/theme.font_stack "
+            f"and the cjk-text skill.")
+
+
 def render_heatmap(*, output_path, map_title, city_name, system_name,
                    stations, businesses, taxonomy_system, lines,
                    crs_geographic, crs_projected, ring_edges_meters, ring_labels,
@@ -1940,6 +1965,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
 
     businesses = businesses.dropna(subset=["latitude", "longitude"]).copy()
     businesses = drop_contact_details(businesses)
+    _require_lang_for_cjk(businesses, lang, city_name)
     businesses["nearest_station"], businesses["ring_band"] = nearest_station_and_ring(
         businesses, stations, crs_geographic, crs_projected, ring_edges_meters, ring_labels
     )

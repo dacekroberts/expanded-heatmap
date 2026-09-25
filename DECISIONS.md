@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**374 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**375 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [render_heatmap refuses CJK names without a declared language](#2026-09-24---render_heatmap-refuses-cjk-names-without-a-declared-language)
 - [A map declares its language, and its CJK faces follow it](#2026-09-24---a-map-declares-its-language-and-its-cjk-faces-follow-it)
 - [Hong Kong is live; the cjk-text skill written for Taiwan, Seoul and Japan; one stale claim dropped (owner)](#2026-09-24---hong-kong-is-live-the-cjk-text-skill-written-for-taiwan-seoul-and-japan-one-stale-claim-dropped-owner)
 - [Hong Kong's deploy check: four of six passed first time; two defects fixed, and the map re-rendered on master's per-city dark-mode colours](#2026-09-24---hong-kongs-deploy-check-four-of-six-passed-first-time-two-defects-fixed-and-the-map-re-rendered-on-masters-per-city-dark-mode-colours)
@@ -416,6 +417,23 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - render_heatmap refuses CJK names without a declared language
+
+- **The rule now lives where the next city must pass through it.** It would
+  otherwise sit in the `cjk-text` skill's prose and a sibling city's step 3:
+  the lesson in osm-rail's opening section.
+- **`render_heatmap` raises** when any business name contains Han, kana or
+  Hangul and no `lang` is given. The message names the five tags and points to
+  `theme.font_stack` and the skill.
+- **Controls:**
+  - Hong Kong without `lang` raises, naming 7,933 CJK names.
+  - Hong Kong with `zh-HK` passes, and so does Paris.
+  - A scan of all 41 cities' cleaned names found CJK only in Hong Kong. No
+    Latin-script city (Vancouver, New York and San Francisco included) trips
+    the guard.
+- **`cjk-text` section 6 and its checklist** now say to pass `lang=`, with the
+  measured before and after, instead of "check whether the fix has landed".
 
 ### 2026-09-24 - A map declares its language, and its CJK faces follow it
 
