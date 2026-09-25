@@ -57,6 +57,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline.baseline import emit  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # noqa: E402
 from pipeline.edmonton.config import (  # noqa: E402
     ADDRESS_COLUMN,
@@ -68,6 +69,7 @@ from pipeline.edmonton.config import (  # noqa: E402
     CRS_GEOGRAPHIC,
     CRS_PROJECTED,
     EDMONTON_BBOX,
+    AS_OF_DATE,
     EXPIRY_COLUMN,
     FORBIDDEN_COLUMNS,
     LICENCE_TYPE_COLUMN,
@@ -150,14 +152,18 @@ def main():
 
     # --- active licences ----------------------------------------------------
     exp = pd.to_datetime(df[EXPIRY_COLUMN], errors="coerce", format="mixed")
-    today = pd.Timestamp.today().normalize()
-    lapsed = exp.notna() & (exp < today)
-    print(f"\n{EXPIRY_COLUMN}: {int(lapsed.sum()):,} already lapsed "
+    # As of the snapshot, never as of today - see AS_OF_DATE in config.
+    as_of = pd.Timestamp(AS_OF_DATE)
+    lapsed = exp.notna() & (exp < as_of)
+    print(f"\n{EXPIRY_COLUMN}: {int(lapsed.sum()):,} lapsed as of {AS_OF_DATE} "
           f"({int(exp.isna().sum())} unparseable). The register publishes "
           f"current licences rather than a term history, so this is the active "
           f"flag and it removes very little.")
     df = df[~lapsed].copy()
     print(f"  active: {len(df):,}")
+    # Baseline figures (2026-09-25): the next drift names the stage that moved.
+    emit("lapsed", int(lapsed.sum()))
+    emit("active", len(df))
 
     # --- classification -----------------------------------------------------
     cats = set()
@@ -244,6 +250,7 @@ def main():
          ADDRESS_COLUMN, PREMISES_KEY]].rename(
         columns={ADDRESS_COLUMN: "address"})
     BUSINESSES_CLEAN_CSV.parent.mkdir(parents=True, exist_ok=True)
+    emit("storefronts", len(out))
     out.sort_values(PREMISES_KEY).to_csv(BUSINESSES_CLEAN_CSV, index=False)
     print(f"\nWrote {len(out):,} storefronts to {BUSINESSES_CLEAN_CSV}")
 

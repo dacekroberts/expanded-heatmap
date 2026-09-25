@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**392 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**393 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-25**
 
+- [Edmonton's drift fixed at the root: "lapsed" is judged as of the snapshot, not as of the day step 2 runs; the map is back to the built 10,721](#2026-09-25---edmontons-drift-fixed-at-the-root-lapsed-is-judged-as-of-the-snapshot-not-as-of-the-day-step-2-runs-the-map-is-back-to-the-built-10721)
 - [Full drift check after the four-city batch: 45 of 46 cities zero drift, Edmonton's map off by two Retail pins; the six Japanese briefs hold 31/31](#2026-09-25---full-drift-check-after-the-four-city-batch-45-of-46-cities-zero-drift-edmontons-map-off-by-two-retail-pins-the-six-japanese-briefs-hold-3131)
 - [Seoul, Taichung, Taoyuan and Taipei (Regional) are live: one batch, pushed as 5320f6a, rebooted by the owner, checked on the live site](#2026-09-25---seoul-taichung-taoyuan-and-taipei-regional-are-live-one-batch-pushed-as-5320f6a-rebooted-by-the-owner-checked-on-the-live-site)
 - [Taipei (Regional) built on the same branch: 133,335 storefronts, 153 stations, twelve lines; notice 47 and page 46 approved by the owner](#2026-09-25---taipei-regional-built-on-the-same-branch-133335-storefronts-153-stations-twelve-lines-notice-47-and-page-46-approved-by-the-owner)
@@ -437,6 +438,37 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-25 - Edmonton's drift fixed at the root: "lapsed" is judged as of the snapshot, not as of the day step 2 runs; the map is back to the built 10,721
+
+- **The cause was a date, not the data.** Edmonton's step 2 dropped licences
+  whose `expiry_date` was earlier than `pd.Timestamp.today()`. The same raw
+  file therefore gave a different map every time a licence passed its expiry.
+  - The full drift check caught two: JUST COZY and JAYGO AUTO LTD., both
+    expiring 2026-09-24. They were in the map re-rendered that day and out of
+    one rendered the next.
+  - Found by diffing the committed map's pins against a fresh render, and
+    reading those two rows in the raw register.
+- **Fixed as Chicago's `AS_OF_DATE` does it.** Edmonton's config gains
+  `AS_OF_DATE = "2026-09-21"`, the raw file's own download date, and step 2
+  judges expiry against it.
+  - As of that date, 71 licences are lapsed, exactly the figure the config
+    recorded at the build. There are **10,721** storefronts, exactly the
+    count logged when Edmonton was added.
+  - So the map returns to the reviewed build: the two pins are kept, and 8
+    more come back (licences that expired 2026-09-21 to 09-23). The
+    2026-09-24 batch re-render had silently dropped those 8.
+  - 2,380 pins sit in the rings.
+- **The rejected alternative:** keep "today" and re-render. That hides the
+  defect until the next expiry, and makes every drift check on Edmonton a
+  calendar question.
+- **Edmonton now emits baseline figures** (lapsed, active, storefronts), so a
+  future drift names the stage that moved. The drift check reports zero drift
+  against the new commit.
+- **Other cities:** any other city with a "today"-dependent step would have
+  shown the same symptom in the full check, and none did. The pattern (a
+  wall-clock comparison inside a step) is worth a check script if it
+  reappears.
 
 ### 2026-09-25 - Full drift check after the four-city batch: 45 of 46 cities zero drift, Edmonton's map off by two Retail pins; the six Japanese briefs hold 31/31
 

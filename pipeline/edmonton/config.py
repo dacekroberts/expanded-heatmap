@@ -263,6 +263,14 @@ ADDRESS_COLUMN = "business_address"
 # is no status column - but `expiry_date` is populated on every row and 71
 # Commercial rows have already lapsed. Filtering on it is the active flag.
 EXPIRY_COLUMN = "expiry_date"
+# "Lapsed" is judged AS OF THE SNAPSHOT, not as of the day step 2 runs
+# (Chicago's AS_OF_DATE model). Until 2026-09-25 step 2 compared expiry with
+# today's date, so the same raw file gave a different map every time a licence
+# passed its expiry - the full drift check of 2026-09-25 caught two (JUST COZY,
+# JAYGO AUTO LTD., both expiring 2026-09-24). The date is the raw file's own
+# download date (business_licences.csv, modified 2026-09-21); update it with
+# each re-fetch.
+AS_OF_DATE = "2026-09-21"
 
 # Sanity bounds for the supplied lat/lng, tightened to the corporate boundary's
 # real extent (lat 53.3374-53.7159, lon -113.7139 to -113.2715) plus a margin.
