@@ -43,24 +43,6 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     Rotterdam covering `city-added` and `map-chrome` (both themes). **Passed
     and live 2026-09-24** (DECISIONS, "Rotterdam's deploy check passed").
 
-- [x] **🇳🇱 ROTTERDAM - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24** (master
-  bec3af1), text approved by the owner: **7,520 storefronts, 132 stations.** Trams drawn (owner); 14 and 18
-  found temporary, so not drawn; page 40, notice 40 (CBS), docs written.
-  - [x] ONE `deploy-verify` (city-added Rotterdam + map-chrome both themes, for
-    the label work above), fetch, push, reboot (cities.py), live check; remove
-    the `rotterdam-*-tmp` launch entries and the worktree's data junctions.
-    Shipped with it: the "All cities" button renamed "Global View" (owner).
-
-- [x] **🇭🇰 HONG KONG - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24** (master 480e1dc),
-  text approved by the owner: **21,135 storefronts, 141 stations.** Built ahead of Taiwan so
-  the week's budget held a whole city. FEHD's registers at FEHD's own CSDI points (the ALS
-  geocode dropped, owner); the East Asia region; page 41, notice 41.
-  - [x] ONE `deploy-verify` (city-added Hong Kong), fetch, push, reboot (cities.py),
-    live check; remove the `hongkong-*-tmp` launch entries and the worktree's junctions.
-  - [x] `cjk-text` skill written for Taiwan, Seoul and Japan (owner).
-  - [ ] **Cleanup's lane:** CJK font order per map language (`pipeline/theme.py`) - Chinese
-    renders in Japanese glyph forms today; handed over 2026-09-24.
-
 - [ ] **NEXT BUILDS (owner, 2026-09-24): 🇳🇱 Rotterdam (✅ live 2026-09-24), 🇭🇰 Hong Kong (✅ live
   2026-09-24), then 🇱🇻 RIGA (owner, 2026-09-24 evening: a small build that fits the week's
   remaining budget; `docs/build_briefs/riga.md`, 4/4; its FIRST step is four licence reads), then
@@ -70,16 +52,6 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   Taipei (Regional), Taichung, Taoyuan; write a `taiwan-city` skill after the
   first (owner). This replaces the earlier order Hong Kong, Taiwan, Seoul,
   Japan; what follows Taiwan is to be confirmed.
-
-- [x] **🇧🇷 BRAZIL - NINE CITIES BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24**,
-  as one batch on `sao-paulo-build`: São Paulo, Rio de Janeiro, Belo
-  Horizonte, Brasília and Salvador, and Fortaleza, Porto Alegre, Recife and
-  Santos as regional pages - one national CNEFE module and the `brazil-city`
-  skill. All text, notices 38-39 and the five batch calls approved by the
-  owner; one `deploy-verify` passed; pushed `adcfe16`; live after the owner's
-  reboot (every page, caption, map, notice and the South America view
-  measured). `sao-paulo-*-tmp` launch entries removed. See DECISIONS, "Brazil
-  deployed; the live site measured after the reboot".
 
 - [x] **🇳🇱 AMSTERDAM - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** Metro
   50-54 and 16 trams, gemeente 0363: **13,238 storefronts, 144 stations**;
@@ -117,31 +89,6 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     entries.
   - [ ] ⏰ **Flora reopens around December 2026**: when PID's feed serves it
     again, step 1 STOPS the build on purpose - remove the override then.
-
-- [x] **🇩🇰 COPENHAGEN - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24.** 14,978
-  storefronts, 64 stations, Metro M1-M4 and S-tog, Kobenhavn + Frederiksberg.
-  City-scoped `deploy-verify` passed with no defects; pushed `646f850..cf7a765`
-  and rebooted. Denmark's national modules are ready for a second city. See
-  `DECISIONS.md`, *"Copenhagen built"* and the entries after it. Two owner
-  actions remain open below.
-  - [x] **DONE 2026-09-24: the owner deactivated the Datafordeler IT system
-    AND the user**, so the exposed key is dead. Was:
-    ⏰ **AFTER PUBLISH: the owner closes the Datafordeler account.** Its API
-    key was visible in a terminal screenshot shared into the build
-    conversation on 2026-09-24 and sits in that terminal's PowerShell history;
-    it was deliberately not rotated (owner's call - free, unrestricted data
-    only), because closing the account revokes it. Closing is licence-safe
-    (CC BY 4.0 is irrevocable); a future refresh means a new free account and
-    the 15-minute key propagation. `docs/gated_access.md` item 3.
-  - [x] **DONE 2026-09-24: the owner removed both `-tmp` entries**; the file
-    parses with its two original entries. Was:
-    ⏰ **AFTER PUBLISH: the owner removes the two `-tmp` entries** from the
-    main checkout's `.claude/launch.json` (`copenhagen-static-tmp`,
-    `copenhagen-app-tmp`). They point into this worktree; the build session
-    was confined to it and could not edit that file itself.
-  - [ ] **Next build after Copenhagen: Prague**, on staging's new ROS02 + RES
-    business leg (`docs/build_briefs/prague.md`, 12/12), with its sole-trader
-    owner call.
 
 - [x] **Label collisions at phone width - FIXED AND PUSHED 2026-09-24**, after
   `deploy-verify` (`map-chrome`) PASSED with only the two expected Madrid
@@ -310,28 +257,6 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   an order of magnitude below Paris** — a separate scope call about whether a
   ~2,000-point city earns a page, not a data problem.
 
-
-- [x] **Region switcher on the macro map — DONE 2026-09-22 (`2121ada`).**
-
-The macro map opens on the United States and re-centres on any other region,
-which is what `docs/scaling_thresholds.md` required before a city outside North
-America. `app/cities.py` carries the region model (`f80d04b`); `app/Overview.py`
-carries the radio, the region-aware caption and the fix.
-
-**The fix was `st.session_state.pop("macro_map", None)` on a region change.**
-`st.pydeck_chart(on_select="rerun")` persists the viewer's view under its widget
-key and restores it on rerun, ignoring `initial_view_state`. A per-region key
-was tried and rejected: Streamlit restores the previous key's state when the
-viewer switches back.
-
-**The constraint held and was measured:** zoom 1.4525 in both regions, centre
-34.067N to 48.599N. Re-fitting on Canada's cities would give 1.5048 and
-invalidate all fourteen pixel `label_offset` values.
-
-**Keep this warning for anyone editing the macro map's view:** that same
-persistence makes a changed `initial_view_state` invisible in a browser session
-that has already rendered the page, across server restarts included. Test in a
-fresh session (a new query string is enough) or you will debug correct code.
 
 - [x] **`deploy-verify` on the switcher — steps 1, 2, 3, 6, 7, 8, 9, run
 2026-09-22.** No named scope fitted: the change is the Streamlit macro map plus
@@ -1136,93 +1061,6 @@ mistakes as confidently as its findings.
 
 ## Structure
 
-- [x] **Re-render `outputs/dublin/heatmap.html` so the Use tooltip drops the
-  `-` placeholder — DONE 2026-09-23 (`383687a`), without anyone setting out to
-  do it.** A session re-rendering every city to fix map widths re-rendered
-  Dublin with the fix in place. Measured on the committed map at each commit:
-  `eb1b68d` (the original build) 88.9% of 7,595 pins carry the placeholder;
-  `383687a` and every commit since, **0%**. That is also the first end-to-end
-  proof the fix works through the real render path - the note below verified
-  the function against extracted values, never an actual render. It sat open
-  here for a day after it was done, which is the argument for closing an item
-  by measuring the output rather than by remembering who was going to do it.
-  Original note, kept as it was:
-
-  The code fix landed 2026-09-22
-  (`dublin_uses.display_value()`, used by `map_common.py`) and is verified
-  against every value in the committed map: **88.9% of 7,595 pins improve and
-  none is left with an empty Use line**. But the rendered map is committed
-  output, and this worktree has no `data/dublin/raw/`, so the live site still
-  shows "Use: -, SHOP". Needs a session holding Dublin's cache: run step 3
-  and `drift_check.py dublin`, expecting a diff ONLY in the tooltip strings.
-  If the cache is gone, `pipeline/dublin/fetch_sources.py` will rebuild it -
-  but that is a re-fetch, so report what changed upstream rather than letting
-  it ride in with the tooltip fix.
-
-- [x] ~~**Collapse the European macro-map regions into one "Europe"**~~ -
-  **done 2026-09-22, the same day the problem appeared.** `app/cities.py` gave
-  every European country its own `region` - Spain (Madrid, Barcelona), then
-  Ireland (Dublin) and Italy (Milan) - three regions holding four cities, and
-  growing by one entry per country while the map it indexes stayed the same
-  size. Collapsed on the owner's call **before France's six cities could make
-  it five**, which is why it stopped being "not urgent".
-
-  Done as one change: `REGION_ORDER` loses the three country entries and gains
-  `Europe`, and all four cities are retagged. **No `label_offset` moved.**
-  `scripts/check_macro_labels.py` scores every city in every region at three
-  widths and reports **PROBLEMS 0** across the new 7-region layout - and one
-  fewer clipped label than before (11, from 12), because collapsing three
-  narrow frames into one wider one moves labels away from a canvas edge rather
-  than toward it.
-
-  ⚠️ **Two label widths had to be MEASURED first**, and neither city had done
-  it: `TEXT_WIDTH` carried no Dublin and no Milan, so the checker would have
-  refused regardless of this change. Measured in a real browser at
-  `600 14px "Space Grotesk"` - **Dublin 42.8 px, Milan 36.3 px** - with the
-  method validated by reproducing five existing entries (Barcelona 67.9,
-  Madrid 47.2, Boston 48.4, Toronto 52.4, Washington D.C. 110.3) exactly.
-
-  **Revisit the single-region decision on a measurement, not a feeling.**
-  Europe's four cities span Dublin to Milan, about 1,700 km, and frame together
-  at a zoom where each is still distinguishable; North America is split because
-  its countries are 3,300 km wide. A city far enough east or south to force the
-  frame open is what changes it, and `check_macro_labels.py` is what says so.
-
-- [x] ~~Move GUADALAJARA's and MADRID's fetching out of their step files~~ -
-  **done 2026-09-22; all three exceptions are closed.** Mexico City first as
-  the worked pattern, Madrid by its own session on the unmerged
-  `spain-app-wiring` branch, Guadalajara last -
-  `pipeline/guadalajara/fetch_sources.py`, which took the three Overpass
-  queries with it because each one's comment is addressed to whoever edits
-  the query, and that is no longer the step. Proved both ways: zero drift
-  with the cache present, and step 1 and step 2 both exiting 1 with "Run
-  pipeline/guadalajara/fetch_sources.py first" with `data/guadalajara/raw/`
-  moved aside. **Guadalajara's two-pass retry was kept rather than unified
-  with Mexico City's single pass** - neither has been measured against the
-  other, and a refactor is a bad moment to quietly change a retry policy. At
-  the `spain-app-wiring` merge the two sessions' Guadalajara fetchers were
-  resolved in the BRANCH's favour, because that one goes through the shared
-  `pipeline/osm.py` (which rejects a `remark` and a partial 200, not only an
-  empty one, and still retries twice) while master's repeated the logic in the
-  city; its two step files were taken from MASTER, so both Mexican cities name
-  the reader `read_cached`. **The rule is now a check rather than a
-  convention:** `scripts/check_no_fetch_in_steps.py`. Madrid was listed there
-  under `KNOWN_GAPS` until `spain-app-wiring` landed, and the check fails on a
-  gap that has silently been fixed, so landing the branch forced both entries
-  out - which is what that failure mode is for.
-
-  The original finding: move the fetching into a `fetch_*.py`, as the other
-  fourteen cities do.
-  Demonstrated 2026-09-22: `python pipeline/drift_check.py` in a worktree with
-  no `data/<city>/raw/` **fetched over the network for all three** - a 39 MB
-  DENUE zip, a Madrid census CSV, Overpass responses and CRTM layers - and
-  then reported zero drift. Toronto, by contrast, stopped with "no
-  data/<city>/raw/ - nothing to run against", which is the correct behaviour.
-  The calls are cache-guarded, so this is invisible on a machine that already
-  has the data. **It changes what a passing drift check means:** for those
-  three it asks "does the current upstream still produce the committed output"
-  rather than "does the committed code". Build-session work - each city's
-  context is needed.
 - [x] ~~Wire Toronto's `STATIONS_COLLAPSED_EXPECTED`~~ - **done 2026-09-22,
   and it was a mis-wiring rather than a missing check.** Step 1 compared the
   COLLAPSED count (110) against `IN_CITY_STATIONS_EXPECTED` (108), printing a
@@ -1756,19 +1594,6 @@ mistakes as confidently as its findings.
   whether to include them.
 - [ ] San Francisco: only ~37% of rows carry a NAICS code; consider whether
   the caveat needs to be visible on the city page.
-- [x] **Surface `docs/excluded_categories.md` AND `docs/data_sources.md` in
-  the app - DONE 2026-09-21**, as `pages/10_About_the_Data.py` and
-  `pages/11_What_Is_Excluded.py`, each rendering its document as committed
-  rather than a hand-maintained web copy that would drift. Both are linked
-  from the footer on every page, which is also where the required notices
-  now render. Original item:
-- [x] (reference) Surface both docs, together (a page each, or one "About the data" section, linked from
-  every city page). Deliberately paired and deferred as one job (2026-09-21):
-  both are external necessities for a live site rather than development work,
-  both are already written to be published as-is, and surfacing the exclusions
-  without the provenance would be half an answer. **Blocks the public deploy:**
-  the legends were left broad, so "Retail - NAICS Code: 44/45" overstates what
-  the maps contain until the exclusions page is reachable from them.
 - [ ] **Carry into the mandatory `full` `deploy-verify` run before deploy:** the
   three fixes made after the 2026-09-21 scoped `map-chrome` run (legend
   breakpoint dead on a wide load, container ~15px short, fit bounds excluding

@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**379 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**380 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Seven worktrees retired; PLAN.md trimmed; the Riga PDF filed](#2026-09-24---seven-worktrees-retired-planmd-trimmed-the-riga-pdf-filed)
 - [Riga builds next, before Taiwan (owner), and its brief is written](#2026-09-24---riga-builds-next-before-taiwan-owner-and-its-brief-is-written)
 - [The open gap emptied: a final re-probe of its last eight, a verdict on each (owner)](#2026-09-24---the-open-gap-emptied-a-final-re-probe-of-its-last-eight-a-verdict-on-each-owner)
 - [The city menu groups by region, then country (owner)](#2026-09-24---the-city-menu-groups-by-region-then-country-owner)
@@ -421,6 +422,48 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Seven worktrees retired; PLAN.md trimmed; the Riga PDF filed
+
+- **Retired on the owner's approval**: amsterdam, rome, prague, sao-paulo,
+  hong-kong, rotterdam and copenhagen. Copenhagen was confirmed closed out:
+  both owner actions done, and its one open sub-item was "next build: Prague",
+  now live.
+  - **All fully merged**, with clean trees and nothing unpushed. Staging and
+    the Main Building Session each said directly that they were working in
+    none of them.
+  - **Data first.** Copenhagen's cache lived ONLY inside its worktree, as the
+    Main Building Session warned. `data/copenhagen` (4 files, 7.8 MB) was
+    copied to the main checkout and verified byte-identical before removal.
+    Prague's newer PID GTFS brief-check cache replaced the main checkout's
+    older copy.
+  - **Junctions removed alone, non-recursively**: data links in amsterdam,
+    rome, prague (czechia, prague) and copenhagen (denmark). Every target in
+    main `data/` kept its file count.
+  - **Five `.venv-lean` junctions** the pre-check missed (it filtered on the
+    name) were also removed the same safe way, and the main `.venv-lean`
+    still imports streamlit and pandas. **The retirement procedure's step 2
+    must scan `.venv*` too.**
+  - **Then** `git worktree remove` and `git branch -d` for all seven, with no
+    leftovers. What remains: cleanup, staging, and riga (live, locked).
+- **`open-data-guide_1.pdf`** (Latvian, 1.16 MB) at the main checkout's root
+  was the Main Building Session's. A licence-read agent's browser-pane save
+  dialog for VZD's open-data guide produced it: never an approved download,
+  and not needed. It was moved (not deleted) to that session's licence
+  scratch folder, at its request. Deleting it is the owner's call.
+  `check_stray_downloads.py`: clean across all 4 checkouts.
+- **PLAN.md 1,913 -> 1,738 lines.** Finished blocks with their DECISIONS
+  record and no open follow-up were removed: Rotterdam, Hong Kong, Brazil,
+  Copenhagen, the region switcher, the Dublin re-render, the Europe collapse,
+  the fetch moves, and surfacing the two docs. Hong Kong's open "CJK font
+  order" sub-item was done as bf95720. Kept, because each still holds
+  something open: Amsterdam and Rome (owner deletions), Prague (the Flora
+  reminder), the label follow-ups, Washington's follow-ups, SF's endpoint
+  note, repo visibility.
+- **Toronto's two retail shares are both real** (open question 18 in
+  `docs/map_inconsistencies.md`): the baseline's category counts versus the
+  cleaned rows the map is drawn from. Recorded there, and deliberately not
+  edited.
 
 ### 2026-09-24 - Riga builds next, before Taiwan (owner), and its brief is written
 
