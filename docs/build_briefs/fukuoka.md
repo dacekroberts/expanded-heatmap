@@ -41,6 +41,13 @@ block.
   shortfall is premises that chose not to publish their address.** Whether
   they cluster spatially is unmeasured. It is a disclosed defect, like
   Amsterdam's vacancy.
+  - ✅ **What the page says, approved by the owner 2026-09-24** (the short
+    version, chosen over a fuller draft): "About one restaurant in five in
+    Fukuoka chose not to publish its address in the national filing system
+    and is not on this map. Where they are is not known." The basis: 4,978 of
+    24,319 restaurants (MHLW's 21,088 less the 16,110 with an address), so
+    19,341 placeable (79.5%). The two lists together read 101% of the
+    official count.
 - **Food retail**: MHLW's notifications add a PARTIAL, opt-in food-retail
   bucket (その他の食料・飲料販売業, コンビニエンスストア, 百貨店・総合スーパー…).
   Disclose as partial, per the owner's rule for Tokyo.
@@ -163,7 +170,7 @@ type and premises address** (plus MHLW's lat/lon). Run
 
 - ✅ Both licences read: BODIK (CC BY 4.0) and MHLW (PDL 1.0), each PERMITTED WITH CONDITIONS. MHLW has one minor commercial-use OPEN point.
 - ⚠️ **Privacy**: per MHLW's FAQ, sole traders may enter 「個人名及び自宅住所」 as their 屋号 in their account. Whether that reaches `営業施設名称` is unchecked, so `check_personal_exposure.py` must look at trade names that are personal names.
-- ⚠️ **The ~20% of restaurants with no published address**: whether they cluster spatially. The owner decides whether a disclosed undercount is acceptable.
+- ✅ **The ~20% of restaurants with no published address**: disclosed on the page in the owner's approved wording (2026-09-24, above). Whether they cluster spatially stays unmeasured, and the wording says so.
 - ✅ decided 2026-09-24 (owner): see the block at the top (菓子製造業 / そうざい製造業 count, in Retail).
 - ✅ decided 2026-09-24 (owner): see the block at the top (city line only; Shinkansen out). ⚠️ Still open: N02's line list for Fukuoka.
 - ⚠️ The Economic Census food control (the owner's chosen control).

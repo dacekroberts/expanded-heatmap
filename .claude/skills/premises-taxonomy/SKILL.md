@@ -171,6 +171,31 @@ data.
   alongside; it is what the tooltip should show, and it is what a reader
   checking your work searches for.
 
+### When the scheme is free text: a sample cannot measure the words chosen from it
+
+Some registers have no code to key on, only a description to match words
+against. Brazil's CNEFE is the worked case (`pipeline/taxonomies/brazil_cnefe.py`).
+A classifier like that grows by reading a sample of the rows it could not
+place, choosing words that would catch them, and adding those words. **Do not
+measure the new words on the sample they came from.**
+
+- **São Paulo, 2026-09-24 (rules version 2)**: on the same 150 unmatched
+  in-ring rows the new words were chosen from, they rescued **22 (14.7%)**.
+  Across all in-ring rows they rescued **3.5%**. The sample said the classifier
+  had improved four times more than it had.
+- **Measure a rule's yield on a FRESH sample**, drawn after the change with a
+  new seed. São Paulo's fresh 100 rows (seed 7) read 15 clear storefronts, 39
+  undecidable and 46 clearly not. That is what set the figure its page states:
+  the map misses roughly one storefront in ten to one in seven near the
+  stations.
+- **Read each new word's most frequent captures before keeping it.** São Paulo
+  rejected SOFA, FRUTA and PECAS that way. **Check which rule list a word
+  lands in**: one keyword added to the wrong list re-routed 238
+  already-classified rows (`brazil-city`, which carries the rest of São Paulo's
+  classifier lessons).
+- The same rule holds for any threshold or pattern tuned on data: **the rows
+  used to choose it cannot also be the rows that test it.**
+
 ## Step 8 — Record what the choice was, not just what it was
 
 In `DECISIONS.md`: the level chosen, **the catch-all share at each level that
@@ -188,5 +213,6 @@ checkable and "35% versus 2.6%" is.
 - [ ] Publisher's hierarchy used to settle ambiguous values, not a translation
 - [ ] Every surviving distinct value has an explicit home; `classify()` raises otherwise
 - [ ] Import-time assertions for the expensive findings
+- [ ] Free-text schemes: every new rule's yield measured on a FRESH sample, never the one it was chosen from
 - [ ] The check declared in the city's brief so the decision re-runs
 - [ ] `DECISIONS.md` carries the shares that decided the level

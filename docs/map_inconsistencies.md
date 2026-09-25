@@ -485,7 +485,8 @@ Contradictions between files, and claims that have gone stale, which the owner
 would need to settle before this becomes a page.
 
 **Resolved 2026-09-24** (owner-approved wording, see DECISIONS): 1, 3, 4, 5, 6,
-7 and 8. Also resolved: in 2, the ring wording in EC and on the New York page;
+7, 8 and 17 (each French page now states its measured share of address-only
+dots). Also resolved: in 2, the ring wording in EC and on the New York page;
 in 19, the stale "2026-09-21 rebuild" header and "the other four cities". The
 rest of 2 (the NY config's "THE ONE CITY" comment) and everything from 9 on
 remain open.
@@ -556,7 +557,13 @@ remain open.
     Marseille brief). No French page says so, while the Oslo, Copenhagen, Prague,
     Milan and Amsterdam pages do explain their address-only pins.
 18. **Toronto's retail share:** EC gives 870 of 19,575 storefront rows (4.4%);
-    `pipeline/taxonomies/__init__.py` gives 4.2%.
+    `pipeline/taxonomies/__init__.py` gives 4.2%. **Measured 2026-09-24: both
+    are real, from two stages of one build.** `outputs/toronto/baseline.json`
+    records buckets 870 / 14,408 / 4,297 (summing to EC's 19,575), while
+    `businesses_clean.csv`, which the map is drawn from, has 19,384 rows
+    classifying as 814 / 14,289 / 4,281 (4.2%). Which figure the page should
+    quote depends on where step 2 counts its buckets; to be settled by reading
+    Toronto's step 2, not by editing either number.
 19. **Stale counts in EC:** the header says "Business counts are from the 2026-09-21
     rebuild", but more than half the cities were built from 2026-09-22 to 09-24; line
     1540 compares New York with "the other four cities".
