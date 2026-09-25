@@ -811,6 +811,13 @@ brief names.
     (9.7 MB), Mexico City (11.4 MB), Taipei (Regional) (14.7 MB) and Seoul's full map fail.
     **First after the reset: give those three the same mobile mode** (move the toggle into a
     shared helper in `app/components.py` - a reboot), then the renderer fix for everyone.
+  - **For the cleanup session's review (owner, 2026-09-25):** the failure is BROWSER memory,
+    not the server - the page loads, the map goes blank (Seoul full: 758 MB of page memory;
+    light: 90 MB). The renderer fix to review: pre-compute clusters at build time so a phone
+    loads cluster counts rather than every dot; send a viewport's dots only when zoomed in;
+    trim per-dot payload (coordinate precision, repeated tooltip text). Static images were
+    considered and rejected as the fix (they remove zoom and hover, the map's purpose).
+    Verify on a real phone against the threshold above before shipping.
 - [x] **Edmonton's map drifts by two Retail pins** FIXED 2026-09-25 (AS_OF_DATE; see DECISIONS) (full drift check 2026-09-25: 1,032 in the
   rings against the committed 1,034; raw data and Edmonton's own code unchanged since 09-21).
   Find whether a shared module changed its output or the 2026-09-24 batch re-render used a
