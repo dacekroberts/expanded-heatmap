@@ -603,7 +603,7 @@ right.
   page path, blurb). That one entry feeds the clickable macro map on the
   Overview, its fallback link list, and every city page's switcher. In the
   new page, call `components.render_city_nav("<City name>")` (in the map-only
-  pilot it renders only the hidden link the map's "All cities" button clicks, so
+  pilot it renders only the hidden link the map's "Global View" button clicks, so
   never omit it) (the name must
   match the entry) instead of a bare back-link. If a page file is ever
   renamed, update its `page` path in `cities.py`.

@@ -63,7 +63,7 @@ st.set_page_config(page_title=f"What is excluded — {SITE_NAME}",
 set_base_font()
 
 with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
-    st.page_link(OVERVIEW_PAGE, label="← All cities (map)")
+    st.page_link(OVERVIEW_PAGE, label="← Global View")
     st.page_link(ABOUT_DATA_PAGE, label="Where this data comes from")
 
 st.title("What is counted, and what is not")

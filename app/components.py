@@ -31,10 +31,12 @@ def render_city_nav(current: str):
 
     In the map-only pilot (cities.MAP_ONLY_NAV) there is no visible switcher.
     The links are still rendered, hidden (see set_base_font): one to the Overview
-    and one per city, because the city map's own "All cities" button and city
+    and one per city, because the city map's own "Global View" button and city
     menu navigate by clicking them (and read the city names from them)."""
     if MAP_ONLY_NAV:
         with st.container(key="map-only-nav"):
+            # Keep this text: the maps' JS finds this link, and leaves it out of
+            # the Cities menu, by "All cities" (pipeline/map_common.py).
             st.page_link(OVERVIEW_PAGE, label="All cities")
             for city in SWITCHER_ORDER:   # grouped by country; see cities.py
                 st.page_link(city["page"], label=city["name"])
@@ -43,7 +45,7 @@ def render_city_nav(current: str):
     # second line when the row is too narrow; fixed-width columns clipped the
     # longer city names once a fourth city was added.
     with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
-        st.page_link(OVERVIEW_PAGE, label="← All cities (map)")
+        st.page_link(OVERVIEW_PAGE, label="← Global View")
         for city in SWITCHER_ORDER:
             if city["name"] == current:
                 st.markdown(f"**{city['name']}**")
@@ -600,7 +602,7 @@ _NOTICES = [
      "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "
      "Horizonte, Brasília, Salvador, Fortaleza, Porto Alegre, Recife and "
      "Santos, and those cities' município boundaries, and "
-     "Prague's, Amsterdam's and Rome's city boundaries, are from OpenStreetMap, "
+     "Prague's, Amsterdam's, Rome's and Rotterdam's city boundaries, are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
      "geometry; stations, rings and categories are this project's work.",
@@ -927,6 +929,17 @@ _NOTICES = [
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Reprojected, "
      "filtered and redrawn by this project; station rings and density figures "
      "are this project's own analysis.",
+     False),
+    # CBS - the shop-vacancy share Rotterdam's page quotes. CC BY 4.0
+    # (cbs.nl copyright page, read 2026-09-24): credit CBS, link the licence,
+    # say when a figure is recalculated; no endorsement implied, no logo.
+    # Wording approved by the owner 2026-09-24.
+    ("CBS (Rotterdam)",
+     "The shop-vacancy figure for Rotterdam is from CBS (Statistics Netherlands), "
+     "Landelijke Monitor Leegstand 2025, table 1, 1 January 2025, used under "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) "
+     "([cbs.nl](https://www.cbs.nl/)); the share is rounded from CBS's counts. "
+     "CBS did not produce or endorse this map.",
      False),
 ]
 

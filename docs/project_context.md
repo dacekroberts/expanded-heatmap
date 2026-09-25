@@ -798,6 +798,20 @@ Cities built and running end to end (pipeline, map, app page):
   Saracuruna lines and left the rest out. Rail is OpenStreetMap's everywhere
   but Rio's metro, which is the city's own layer.
 
+- **Rotterdam** - RET's metro A-E and nine tram lines, inside the gemeente. The
+  Netherlands' second city: Amsterdam's shape, with the food layer REBUILT
+  rather than read. Rotterdam publishes no hospitality register, but every
+  exploitation permit it grants is a notice in its official gazette with a
+  point, and a permit runs five years - so the premises are the places with a
+  grant inside that term, sorted by each notice's own title (three title forms
+  over five years) and merged where they share a place. Tested on Amsterdam's
+  live register, the method finds almost every premises and overcounts about
+  one in seven, and the page says so. Shops and services are BAG shop units,
+  as in Amsterdam. **Its rail is measured on the timetable after a works
+  period**: the national feed's window opened on works that shorten three tram
+  lines, and two temporary lines that fill the gap had looked like permanent
+  ones - neither of RET's own maps carries them.
+
 **Canada is closed at five built cities** - Vancouver (regional, with Surrey),
 Montréal, Calgary, Edmonton and Toronto - out of six candidates screened. The
 sixth, Surrey, is not pending: it shipped inside the Vancouver regional map.
@@ -908,8 +922,8 @@ rail. The `brazil-city` skill carries the traps, and
 `scripts/measure_rail_backbone.py` answers two of the rail test's three parts
 from cached OSM.
 
-Next is Rotterdam, the Netherlands' second city, then Taiwan (the owner's
-order of 2026-09-24, revising an earlier Hong Kong, Taiwan, Seoul, Japan).
+Next is Taiwan, after Rotterdam (the owner's order of 2026-09-24, revising an
+earlier Hong Kong, Taiwan, Seoul, Japan).
 Taiwan and Japan each get a per-country skill written after their first city.
 The two renderer fixes Brazil's deploy check found go first: the owner gated
 the next deploy on them. New
@@ -944,7 +958,7 @@ house, which carries no unit indicator to detect.
 with Streamlit; no folium) with a labelled marker per city, where clicking a
 marker opens that city's page (`st.switch_page`), plus a plain link list as a
 fallback. In the map-only pilot (`MAP_ONLY_NAV` in `app/cities.py`) the sidebar page
-list and the city switcher are hidden, and each city map has an "All cities"
+list and the city switcher are hidden, and each city map has a "Global View"
 button back to the macro map; with the flag off, every city page has a switcher
 row to jump to another city or back to the map (see
 `docs/navigation_sidebar_and_city_links.md`). The city list lives in `app/cities.py`.

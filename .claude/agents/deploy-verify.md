@@ -141,7 +141,7 @@ Run only the steps your scope lists (see Scope above).
    page: every other city links correctly, the current one is plain text -
    but only when `MAP_ONLY_NAV` in `app/cities.py` is False. In the map-only
    pilot (True) there is no sidebar or switcher: check instead that the sidebar
-   is hidden and that each city map's "All cities" button and "Cities" dropdown (top-right,
+   is hidden and that each city map's "Global View" button and "Cities" dropdown (top-right,
    left of the Dark Mode button, inside the map iframe) work: the button returns
    to the Overview in place, the dropdown lists the other cities (not the
    current one) and opens the chosen one in place, and the light/dark mode

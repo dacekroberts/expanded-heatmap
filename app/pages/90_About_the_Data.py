@@ -42,7 +42,7 @@ st.set_page_config(page_title=f"Where this data comes from — {SITE_NAME}",
 set_base_font()
 
 with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
-    st.page_link(OVERVIEW_PAGE, label="← All cities (map)")
+    st.page_link(OVERVIEW_PAGE, label="← Global View")
     st.page_link(EXCLUSIONS_PAGE, label="What is counted, and what is not")
 
 st.title("Where this data comes from")

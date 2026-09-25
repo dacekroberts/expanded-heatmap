@@ -77,7 +77,7 @@ adding a city whose name is long.
 `MAP_ONLY_NAV` (below) switches the app between two ways of moving around: True
 (the current pilot) hides the sidebar page list and the city switcher on every
 city page, so the map is the only navigation (a city's page opens from its
-marker, and each city map has an "All cities" button back); False restores the
+marker, and each city map has a "Global View" button back); False restores the
 sidebar and the switcher. Both are documented in
 docs/navigation_sidebar_and_city_links.md.
 """
@@ -869,6 +869,24 @@ CITIES = [
         # and check_macro_labels.py passes every region at 375, 768 and 1200
         # with PROBLEMS 0.
         "label_offset": ('middle', 0, 22),
+    },
+    {
+        "name": "Rotterdam",
+        "lat": 51.9225,
+        "lon": 4.4792,
+        "page": "pages/40_Rotterdam_Heatmap.py",
+        "blurb": "RET metro A–E and 9 tram lines",
+        "region": "Europe",
+        "country": "Netherlands",
+        "in_default_view": False,
+        # UP AND LEFT of the dot, the only placement that scores: Amsterdam's
+        # name sits above, Lille's to the south-west and Prague's pill to the
+        # east. Width 70.7 px measured in the app's own document, thirteen
+        # entries reproduced; check_macro_labels.py passes every region at
+        # 375, 768 and 1200 with PROBLEMS 0. TIGHT: dy -11 touches Lille's pill
+        # and -13 Amsterdam's (1-2 px), so the next European city near here
+        # re-scores this one first.
+        "label_offset": ("end", -9, -12),
     },
 ]
 

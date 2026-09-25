@@ -73,7 +73,7 @@ When categories are enabled, density shows as numbered circles that sum areas
 when zoomed out. Zooming in reveals individual dots; hover over one for its
 details.
 
-Top right: a **Cities** menu and an **All cities** button for moving between
+Top right: a **Cities** menu and a **Global View** button for moving between
 maps, and a light/dark switch. The map opens in whichever mode the page is
 using; once you pick one, it carries across the other city maps.
 

@@ -16,18 +16,22 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**353 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**357 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Agency contact is the last resort: the Tokyo requests are parked (owner)](#2026-09-24---agency-contact-is-the-last-resort-the-tokyo-requests-are-parked-owner)
+- [Rotterdam's deploy check passed, with the labels in both themes and the Global View button; three findings recorded, none blocking](#2026-09-24---rotterdams-deploy-check-passed-with-the-labels-in-both-themes-and-the-global-view-button-three-findings-recorded-none-blocking)
 - [Four Tokyo ward requests drafted; none sent](#2026-09-24---four-tokyo-ward-requests-drafted-none-sent)
 - [Every Japanese city against MHLW's official count: complete except Osaka (67%) and Tokyo](#2026-09-24---every-japanese-city-against-mhlws-official-count-complete-except-osaka-67-and-tokyo)
+- [The city map's "All cities" button is now "Global View" (owner); the hidden link keeps its text](#2026-09-24---the-city-maps-all-cities-button-is-now-global-view-owner-the-hidden-link-keeps-its-text)
 - [Tokyo's food lists against an official count: one complete, and no open file fills the rest](#2026-09-24---tokyos-food-lists-against-an-official-count-one-complete-and-no-open-file-fills-the-rest)
 - [The macro map lands on "Global", which labels every city (owner)](#2026-09-24---the-macro-map-lands-on-global-which-labels-every-city-owner)
+- [Rotterdam built: 7,520 storefronts, 132 stations; the food layer rebuilt from permit notices](#2026-09-24---rotterdam-built-7520-storefronts-132-stations-the-food-layer-rebuilt-from-permit-notices)
 - [Three of Tokyo's eight food lists are partial; a per-ward table for Japan](#2026-09-24---three-of-tokyos-eight-food-lists-are-partial-a-per-ward-table-for-japan)
 - [Meguro's personal-services registers joined: 1,412 premises at 100% block](#2026-09-24---meguros-personal-services-registers-joined-1412-premises-at-100-block)
 - [Overview's city list grouped by country too (owner)](#2026-09-24---overviews-city-list-grouped-by-country-too-owner)
+- [Line labels read at 4.5:1 in both themes: no dark filter, a halo swap in light mode](#2026-09-24---line-labels-read-at-451-in-both-themes-no-dark-filter-a-halo-swap-in-light-mode)
 - [Renderer fixes verified and pushed; the dark-label model corrected next, with the light-mode halo swap (owner)](#2026-09-24---renderer-fixes-verified-and-pushed-the-dark-label-model-corrected-next-with-the-light-mode-halo-swap-owner)
 - [City switcher grouped by country (owner)](#2026-09-24---city-switcher-grouped-by-country-owner)
 - [Tokyo's four own-site wards read: all CC BY 4.0, none like Sendai](#2026-09-24---tokyos-four-own-site-wards-read-all-cc-by-40-none-like-sendai)
@@ -416,6 +420,55 @@ onwards; the early ones are split by phase rather than by hour.
     open-data terms.
 - **Saved as a standing preference** (memory): exhaust the methods we control
   before recommending any contact with a publisher.
+### 2026-09-24 - Rotterdam's deploy check passed, with the labels in both themes and the Global View button; three findings recorded, none blocking
+
+- **One `deploy-verify` (city-added Rotterdam + map-chrome, both themes) passed
+  all five items on `worktree-rotterdam` at 69e305f**, as the owner asked:
+  the label work is checked inside Rotterdam's deploy check rather than in a
+  separate run.
+  - **Labels.** `check_map_markup` reports 40 maps, 249 labels and 146 dark
+    halos in light mode. Checked in the browser on Rotterdam, Washington D.C.
+    and Milan:
+    - Dark: the computed colour equals `--dm-label`, `filter` is `none` on
+      every ancestor, and the halo is rgb(11, 18, 32).
+    - Light: every halo matches the inline one.
+  - **Rotterdam.**
+    - The page's map shows 14 lines, each labelled with its own legend row.
+    - There are no JS errors.
+    - The credit is uncovered at 1000x650, 1024x768 and 375x812.
+    - The view is exact at 1000, 375 and 343 px, with 0 guard corrections.
+    - Notice 40 is displayed on the page, on About the Data and on What Is
+      Excluded, which also carries the exclusions section.
+  - **Overview.** It lands on Global (40). In Europe, Rotterdam's pill clears
+    Amsterdam's, Lille's and Prague's at 375, 768 and 1200. The list reads
+    "Prague, Amsterdam, Rotterdam, São Paulo".
+  - **Navigation.**
+    - "← Global View" returns to the Overview in the same theme.
+    - The Cities menu omits the current city and holds no "Global View" or
+      "All cities" item.
+    - The hidden link and the sidebar stay `display: none`.
+  - **Every map.**
+    - `check_map_labels.js` is clean on 40 of 40 at three sizes. At 343 px
+      Madrid's two known overlaps remain, identical on master.
+    - Attribution and view: 120 fresh loads, 0 problems.
+    - Deploy imports PROBLEMS 0. The push changes `cities.py` and
+      `components.py`, so the app needs a reboot.
+- **Three findings, none a regression from this branch and none blocking:**
+  - **Dark mode gives 20 pairs of different lines the same label colour, in
+    11 cities.** Paris Lignes 1, 9 and 10 are all `#ffff00`; D.C.'s Orange is
+    `#fffa00` beside its Yellow. Simulating the old `brightness(1.8)` filter
+    on master's maps gives exactly the same 20 pairs, and Rotterdam has none.
+    `check_map_markup` measures contrast against the halo, not how distinct
+    lines are from each other, so no check covers it. Recorded as open work
+    for the owner.
+  - **On the Global view at desktop widths, Rotterdam's pill overlaps Lille's.**
+    It is part of the European pile the owner accepted when Global was made
+    the landing view: Madrid already overlaps Paris, and Toulouse overlaps
+    Marseille. `check_macro_labels` scores Global only on its opening frame,
+    by design.
+  - **The Overview's basemap credit sits under deck.gl's overlay.** At 800x700
+    a city dot lands in the credit strip; the text stays legible. This
+    predates the branch and is recorded as open work.
 
 ### 2026-09-24 - Four Tokyo ward requests drafted; none sent
 
@@ -471,6 +524,30 @@ onwards; the early ones are split by phase rather than by hour.
 - **`scripts/japan_ward_table.py`** now puts an official-count column on every
   city, reading the cached e-Stat tables (`data/japan/raw/estat_eisei_r6_*`).
   Yokohama and Nagoya show their counts (29,358 and 33,776) with no list.
+
+### 2026-09-24 - The city map's "All cities" button is now "Global View" (owner); the hidden link keeps its text
+
+- **Renamed at the owner's request, which the Cleanup session relayed; the
+  owner approved the wording in the Rotterdam session.** The name matches the
+  macro map's new landing region.
+  - **On the maps:** the button reads "← Global View", with the aria-label
+    "Back to the Global View map". All 40 maps are re-rendered, in the same
+    push as the label-contrast work.
+  - **In the app:** "← Global View" replaces "← All cities (map)" on About the
+    Data, What Is Excluded and the switcher row that `MAP_ONLY_NAV = False`
+    restores. The Overview's sentence and the "Top right" line on pages 1-6
+    name the button the same way. The docs and the deploy-verify and add-city
+    mentions changed too. The app never names it two ways.
+- **The hidden map-only link still reads "All cities", deliberately.** The
+  maps' JS finds the Overview link by that text and leaves it out of the
+  Cities menu. A renamed hidden link would show up as a city in any map drawn
+  before the change. `overviewLink()` now also matches "Global View", so the
+  switcher row finds its link by text rather than through the root-path
+  fallback. `check_stale_claims.py`'s `UI_LABELS` keeps "All cities" for the
+  same reason, because the literal is still in `components.py`.
+- **Left as written:** `docs/passover_opus5.md` (a dated handover) and a
+  measurement note in `pipeline/boston/config.py`. Both describe the button
+  as it was then.
 
 ### 2026-09-24 - Tokyo's food lists against an official count: one complete, and no open file fills the rest
 
@@ -560,6 +637,79 @@ onwards; the early ones are split by phase rather than by hour.
     that failed to find it would list the renamed link as a city in its
     menu.
 
+### 2026-09-24 - Rotterdam built: 7,520 storefronts, 132 stations; the food layer rebuilt from permit notices
+
+- **Rotterdam is built on `worktree-rotterdam`, as Amsterdam's shape with the
+  food layer REBUILT rather than read.** Rotterdam publishes no hospitality
+  register, but every permit decision is a Gemeenteblad notice with a point.
+  - **The harvest** (KOOP's SRU, year by year since 2021) took 5,724 notices.
+    It is the UNION of the exploitation-permit rubric and the permit words in a
+    title: 424 provisional permits and 270 exploitation-titled notices sat
+    outside the rubric.
+  - **Sorted by each notice's own title**, in three forms: the decision
+    sentence, "kind - street number", and, until early 2022, "…verleend aan
+    <name>". That gives 2,587 exploitation, 888 provisional and 232 coffeeshop
+    notices. Out: 991 alcohol licences (165 of them under the Drank- en
+    Horecawet form), 589 terrace, 366 gaming-machine, 27 event, 14
+    sex-business and 8 bylaw notices, one refusal, one withdrawal, and 20
+    non-permits (pre-emption rights among them).
+  - **Kept:** grants inside the permit term, counted back from the HARVEST
+    date so a rebuild is stable. That is five years for exploitation and
+    provisional permits and one for coffeeshops, which Amsterdam's register
+    also keeps as food service. The 3,223 grants merge within 3 m into
+    **1,939 premises**, the brief's 1,937: 1,799 exploitation, 101
+    provisional, 39 coffeeshops.
+  - **No names**: the dots read "Hospitality premises".
+- **Shops and services are BAG shop units, from PDOK's WFS with their
+  address.** 6,170 are in use. 26 are also registered as a dwelling and left
+  off, on Amsterdam's owner call applied the same way. The layers are
+  **de-duplicated by distance**, since the notices carry no address: 541 shop
+  units sit within 1 m of a permit premises (the same address point), 563
+  within the 3 m used, and 660 within 5 m. The permit is kept, leaving 5,581
+  units and **7,520 storefronts**.
+- **Rail: RET's metro A–E and trams 1–8 and 11**, from OVapi's national GTFS,
+  copied from Amsterdam's cache (sha256 checked). The brief's "from OSM as in
+  Amsterdam" was wrong; Amsterdam read this same feed, and the brief is
+  corrected. The owner's call: **trams drawn**, on Amsterdam's precedent, since
+  they reach Noord, Blijdorp, Delfshaven, Kralingen and Charlois, where no metro
+  runs.
+  - **The feed opened on a works timetable, and nearly drew the wrong
+    network.** Trams 14 and 18 run every day from 2026-09-22 to 2026-11-22 and
+    then stop, while trams 4, 6 and 8 are shortened (4 serves 17 of its 31
+    stops). Over the whole window, 14 and 18 looked like lines serving seven
+    stations nothing else did.
+  - **It was caught by the owner's own call to take their colours from RET's
+    map.** Neither RET map carries a 14 or an 18: the tram map of October 2025
+    (1.95 MB, now in `data/rotterdam/raw`) or the schematic of January 2026
+    (2.69 MB, the owner approved the second download too).
+  - So regular routes are measured from 2026-11-23, 14 and 18 are not drawn,
+    and the owner approved revising the page text to say so.
+  - Tram 12, the stadium event service (7 of 82 days), is out.
+  - RET's platform-suffixed stop names ("spoor 1", "perron A") are normalised
+    before platforms are grouped, and three turning sidings are dropped.
+- **The stations: 155 stops inside the gemeente, 132 after thinning, 52
+  outside it** (18 in Schiedam; metro E keeps 12 of 23), and 23 thinned.
+  - **Gate 3 is exact against nl.wikipedia**: B 32, C 26, D 17, E 23, network
+    71.
+  - **Line A is a recorded correction.** Both Wikipedias say 24, but
+    en.wikipedia's terminus is Vlaardingen West, the extension beyond Schiedam.
+    The feed, valid to 2026-12-12, runs 20, and the four in between are
+    outside the gemeente.
+- **Colours:** RET gives trams 1 and 11 one colour, 8.6 from metro E's. Both
+  move in lightness only: tram 1 to `#3f5ebe`, tram 11 to `#293e7d`.
+- **Checks:**
+  - Privacy: 0 names, 0 contact details, 0 person-like names.
+  - Labels read at 4.5:1 in both themes, and macro labels score PROBLEMS 0.
+    Rotterdam's pill sits up and left, a 1 px fit between Amsterdam's and
+    Lille's.
+  - Provenance, scope disclosure and render currency all pass.
+  - Baseline: 11 figures.
+- **Page 40, notice 40 (CBS) and the exclusions section**, as approved by the
+  owner, with the first paragraph and the station line revised for 14 and 18.
+  The CBS notice is required (CC BY 4.0) because the page quotes the
+  shop-vacancy share, about one in fourteen: 430 of 6,060 units on
+  2025-01-01.
+
 ### 2026-09-24 - Three of Tokyo's eight food lists are partial; a per-ward table for Japan
 
 - **Found that Chūō's, Kōtō's and Minato's food files are NOT complete lists**,
@@ -635,6 +785,32 @@ onwards; the early ones are split by phase rather than by hour.
 - This supersedes that one line of the previous entry, "The Overview list is
   unchanged". `CITIES` stays in build order, because page numbers and the
   macro map follow it.
+### 2026-09-24 - Line labels read at 4.5:1 in both themes: no dark filter, a halo swap in light mode
+
+- **Built the owner's two label calls into the renderer**, on the Rotterdam
+  branch; they are verified inside Rotterdam's deploy check (owner's order).
+  `pipeline/linecolour.label_colours()` gives every line label three values:
+  its light-theme colour, its light-theme halo, and its dark-theme colour.
+  `add_line_label` writes all three inline.
+  - **Dark: the `brightness()` filter is gone.** It brightened the halo with
+    the text. Each label now carries `--dm-label`, which starts from the shade
+    the filter produced (channels truncated as the browser does). A label that
+    already read is therefore unchanged. A label that falls short gets the
+    smallest HSL lightness step that reaches 4.5:1 against `#0B1220`, the
+    halo the browser now actually draws. Porto Alegre's Trensurb, for
+    example, is `#6c6cff`.
+  - **Light: the halo swap**, chosen over darkening, which would have moved
+    the median failing label by ΔE 19.9 and turned every yellow olive. A label
+    under 4.5:1 on white keeps its colour and takes the halo it reads better
+    on. **139 of 235 labels now sit on the dark page colour in light mode**,
+    and the 13 mid-tones that miss 4.5:1 on both halos get a nudge of at most
+    ΔE 3.7.
+- **`scripts/check_map_markup.py` now FAILS both themes.** It checks each
+  label's own colour against its own halo, requires `--dm-label` on every
+  label, and refuses a filter on the dark label rule. On the maps committed
+  before this change it reports 419 problems. After all 39 maps were
+  re-rendered it reports PROBLEMS 0 (235 labels, 139 on a dark halo), and
+  `check_render_current.py` reports all 39 maps current.
 
 ### 2026-09-24 - Renderer fixes verified and pushed; the dark-label model corrected next, with the light-mode halo swap (owner)
 

@@ -1,0 +1,33 @@
+{
+  "notices": {
+    "file": "koop_notices.json",
+    "url": "https://repository.overheid.nl/sru?query=c.product-area%3D%3Dofficielepublicaties%20AND%20dt.creator%3D%3D%22Rotterdam%22%20AND%20%28dt.type%3D%3D%22exploitatievergunning%22%20OR%20dt.title%20any%20%22exploitatievergunning%20voorlopige%20alcoholwetvergunning%20terrasvlonder%20aanwezigheidsvergunning%20horeca%22%29",
+    "bytes": 8226581,
+    "sha256": "0570da2f1ed87a50490712630943a63d01e06613cff5a443d3305ca0fc83bdd7",
+    "retrieved": "2026-09-24T21:39:15+00:00",
+    "records": 5724
+  },
+  "bag_units": {
+    "file": "bag_verblijfsobjecten_winkelfunctie.json",
+    "url": "https://service.pdok.nl/lv/bag/wfs/v2_0",
+    "bytes": 4522650,
+    "sha256": "1336b14866fcdbe295bc16ea0759651ccf2e27b4422bd770d38154f8ebb7cb9a",
+    "retrieved": "2026-09-24T21:39:36+00:00",
+    "records": 6170
+  },
+  "gtfs": {
+    "file": "gtfs-openov-nl.zip",
+    "url": "https://gtfs.openov.nl/gtfs-rt/gtfs-openov-nl.zip",
+    "bytes": 242421105,
+    "sha256": "57a07bc481bb02e25d8660fe13d4d7cefceded437ef1392cfaffcb019879f57c",
+    "retrieved": "2026-09-24T09:44:24+00:00",
+    "copied_from": "data/amsterdam/raw/gtfs-openov-nl.zip"
+  },
+  "gtfs_feed_info": {
+    "feed_start_date": "20260923",
+    "feed_end_date": "20261212",
+    "publisher": "OVapi",
+    "version": "gtransit_chb:1.0.3:9601"
+  },
+  "osm_host": "overpass-api.de"
+}
