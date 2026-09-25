@@ -50,6 +50,9 @@ def main():
         ring_edges_meters=config.RING_EDGES_METERS,
         ring_labels=config.RING_LABELS,
         label_focus=boundary_polygon(),
+        # Shop signs are Traditional Chinese in Hong Kong's own forms; without
+        # this the Japanese faces drew every Han character (theme.font_stack).
+        lang="zh-HK",
     )
 
 

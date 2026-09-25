@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**372 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**373 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [A map declares its language, and its CJK faces follow it](#2026-09-24---a-map-declares-its-language-and-its-cjk-faces-follow-it)
 - [Hong Kong's deploy check: four of six passed first time; two defects fixed, and the map re-rendered on master's per-city dark-mode colours](#2026-09-24---hong-kongs-deploy-check-four-of-six-passed-first-time-two-defects-fixed-and-the-map-re-rendered-on-masters-per-city-dark-mode-colours)
 - [Nine stale "only city" claims corrected on the site (owner-approved wording)](#2026-09-24---nine-stale-only-city-claims-corrected-on-the-site-owner-approved-wording)
 - [Hong Kong built: 21,135 storefronts at FEHD's own points, 141 stations; no geocoder after all](#2026-09-24---hong-kong-built-21135-storefronts-at-fehds-own-points-141-stations-no-geocoder-after-all)
@@ -414,6 +415,39 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - A map declares its language, and its CJK faces follow it
+
+- **Found by Hong Kong's deploy check**, handed to Cleanup: Hong Kong's
+  Chinese shop signs rendered in JAPANESE glyph forms.
+  - **Cause**: `theme.FONT_STACK` lists the Japanese faces before the
+    Traditional Chinese ones. Han unification puts both languages on the
+    same code points, so the first CJK face draws every Han character.
+- **Measured, not assumed**, with the browser's own record of which platform
+  font drew each glyph (CDP `CSS.getPlatformFontsForNode`) on a tooltip
+  holding 骨直嘅冇啲:
+  - **Before**: Yu Gothic (Japanese) drew 3 of them and Microsoft JhengHei
+    drew 2. One sign mixed two typefaces.
+  - **After**: Microsoft JhengHei drew all 5. Latin text is in Segoe UI both
+    times.
+- **Design**: `theme.font_stack(lang)` orders the CJK faces for a map's
+  language, with the Latin faces always first. `render_heatmap(lang=...)`
+  sets `<html lang>` and puts that order on a `--hm-font` custom property.
+  - **Every shared block reads `var(--hm-font, FONT_STACK)`**, so the blocks
+    stay byte-identical across maps and `check_render_current.py` still
+    compares them. A per-map font list pasted into the blocks would have
+    failed that check for every other city.
+  - **FONT_STACK, the no-language default, is unchanged**, byte for byte.
+  - **Orders exist for zh-HK, zh-TW, ko, ja and zh-CN.** Taiwan's, Korea's and
+    Japan's cities should pass their tag when they are built.
+- **Hong Kong passes `lang="zh-HK"`. All 41 maps re-rendered**, because the
+  shared blocks changed.
+  - With ids masked and the var() wrapper undone, the 40 other maps are
+    identical to master. Hong Kong differs only by its lang attribute and
+    style.
+  - `drift_check --jobs 4`: no data drift, baselines unchanged.
+  - Also passing: `check_render_current` (41), `check_map_markup`, and
+    `check_provenance --strict`.
 
 ### 2026-09-24 - Hong Kong's deploy check: four of six passed first time; two defects fixed, and the map re-rendered on master's per-city dark-mode colours
 

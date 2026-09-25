@@ -27,7 +27,7 @@ from folium.plugins import HeatMap, FastMarkerCluster
 
 from pipeline.linecolour import check_line_colours, dark_label_colours, label_colours
 from pipeline.taxonomies import CATEGORY_BUCKETS, load_taxonomy_module
-from pipeline.theme import AMBIENT_THEME_JS, DARK, FONT_STACK, LIGHT, css_vars, rgba
+from pipeline.theme import AMBIENT_THEME_JS, DARK, FONT_VAR, LIGHT, css_vars, font_stack, rgba
 
 # Decimal places BUSINESS coordinates are rounded to before reaching the HTML.
 # Folium emits a float's full repr - "40.76248502732357", 17 significant
@@ -307,7 +307,7 @@ _THEME_TOGGLE_TEMPLATE = """
 THEME_TOGGLE_HTML = (
     _THEME_TOGGLE_TEMPLATE
     .replace("@@AMBIENT_JS@@", AMBIENT_THEME_JS)
-    .replace("@@FONT_STACK@@", FONT_STACK)
+    .replace("@@FONT_STACK@@", FONT_VAR)
     .replace("@@DARK_VARS@@", css_vars(DARK))
     .replace("@@DARK_ATTRIB_BG@@", rgba(DARK["page"], 0.8))
     .replace("@@LIGHT_SURFACE@@", LIGHT["surface"])
@@ -355,7 +355,7 @@ _LEGEND_CSS = """
     align-items: baseline; justify-content: space-between; gap: 12px; }
 .map-legend > summary::-webkit-details-marker { display: none; }
 .map-legend > summary::after {
-    content: "\\25BE\\00A0Hide"; font: 600 11px """ + FONT_STACK + """;
+    content: "\\25BE\\00A0Hide"; font: 600 11px """ + FONT_VAR + """;
     opacity: 0.7; white-space: nowrap; }
 .map-legend:not([open]) > summary::after { content: "\\25B8\\00A0Show"; }
 .map-legend > summary:hover::after { opacity: 1; text-decoration: underline; }
@@ -437,7 +437,7 @@ _LEGEND_BOTTOM_CSS = f"max(24px, calc(100vh - {_MAP_H - 24}px))"
 # its shadow and every fallback font, rendering in Leaflet's Latin-only default
 # (Brazil's deploy check found it; Chicago's map had the same markup). CSS
 # accepts either quote, so the inline copy uses single quotes.
-_LEGEND_FONT_STACK = FONT_STACK.replace('"', "'")
+_LEGEND_FONT_STACK = FONT_VAR.replace('"', "'")
 
 LEGEND_HTML = """
 <details open class="map-legend" style="
@@ -1879,8 +1879,14 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
                    stations, businesses, taxonomy_system, lines,
                    crs_geographic, crs_projected, ring_edges_meters, ring_labels,
                    center=None, zoom=None, label_focus=None, rings_shown=False,
-                   all_city_heat=True, animate_clusters=False):
+                   all_city_heat=True, animate_clusters=False, lang=None):
     """Render one city's heatmap to a standalone HTML file.
+
+    lang: the language the map's own names are written in, as a BCP 47 tag
+    ("zh-HK", "zh-TW", "ko", "ja"), or None. It sets <html lang> and orders the
+    CJK faces for that script (pipeline/theme.font_stack). Han characters share
+    code points across Chinese and Japanese, so without it the first CJK face in
+    the stack decides their glyph forms. Hong Kong's signs rendered Japanese.
 
     stations: DataFrame(station, latitude, longitude). businesses: the
     city's businesses_clean.csv as a DataFrame (needs latitude, longitude,
@@ -2099,8 +2105,22 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     m.get_root().html.add_child(folium.Element(
         WHEEL_ZOOM_SCRIPT.replace("__MAP_NAME__", m.get_name())))
 
+    # A declared language: its font order on --hm-font, which every shared
+    # block reads through theme.FONT_VAR, so the shared blocks stay identical.
+    if lang is not None:
+        m.get_root().header.add_child(folium.Element(
+            f"<style>:root {{ --hm-font: {font_stack(lang)}; }}</style>"))
+
     output_path.parent.mkdir(parents=True, exist_ok=True)
     m.save(str(output_path))
+    if lang is not None:
+        # folium's template has no slot for it, so it goes in after saving.
+        # lang also lets a browser choose the right system fallback face for
+        # any character no listed face carries.
+        doc = output_path.read_text(encoding="utf-8")
+        if "<html>" not in doc:
+            raise ValueError(f"{output_path}: no bare <html> tag to give lang={lang!r}")
+        output_path.write_text(doc.replace("<html>", f'<html lang="{lang}">', 1), encoding="utf-8")
     print(f"Wrote {output_path}")
     if all_city_heat:
         print(f"{len(in_rings):,} points plotted (within-ring default) / "
