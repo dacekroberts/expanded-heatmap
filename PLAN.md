@@ -746,11 +746,11 @@ brief names.
     Setagaya 63% (opt-outs left out), Meguro 46%, Minato 30%
     (consent-filtered), Chūō 12% and Kōtō 9% (never updated). The ward probes
     found no open file that fills any gap. `tokyo.md` has the table.
-  - [ ] **Owner: four requests** (`docs/gated_access.md` items 29–32): Chūō
-    disclosure; Kōtō 情報提供; Minato, asking the ward to publish the full list;
-    Shinjuku, permission for its 2026-03-31 PDF. None drafted yet. Drafting
-    them in formal Japanese, as Sendai's was, is a staging task on the
-    owner's word.
+  - [ ] **Owner: send four requests** (`docs/gated_access.md` items 29–32).
+    **Drafted 2026-09-24** in formal Japanese, one per ward:
+    `docs/notifications/tokyo-{chuo,koto,minato,shinjuku}-request.md`. Each
+    asks for open publication first. Before sending, confirm each ward's
+    address, which is not verified in any of the four.
   - [ ] **Meguro's 46%**: why, when both halves are published. Measure the
     all_new / all_old overlap and any consent wording on its page.
   - [ ] **Licence reads** for two side finds: Chūō's complete

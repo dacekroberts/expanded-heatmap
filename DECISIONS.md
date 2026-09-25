@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**351 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**352 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Four Tokyo ward requests drafted; none sent](#2026-09-24---four-tokyo-ward-requests-drafted-none-sent)
 - [Every Japanese city against MHLW's official count: complete except Osaka (67%) and Tokyo](#2026-09-24---every-japanese-city-against-mhlws-official-count-complete-except-osaka-67-and-tokyo)
 - [Tokyo's food lists against an official count: one complete, and no open file fills the rest](#2026-09-24---tokyos-food-lists-against-an-official-count-one-complete-and-no-open-file-fills-the-rest)
 - [The macro map lands on "Global", which labels every city (owner)](#2026-09-24---the-macro-map-lands-on-global-which-labels-every-city-owner)
@@ -393,6 +394,30 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Four Tokyo ward requests drafted; none sent
+
+- **Drafted the four requests that are the only route to filling Tokyo's
+  food lists**, in formal Japanese, after the usage reset (owner): Chūō, Kōtō,
+  Minato and Shinjuku, at `docs/notifications/tokyo-<ward>-request.md`. They
+  are items 29–32 in `docs/gated_access.md`, now DRAFTED, NOT SENT.
+- **Each asks for open publication first**, because that route comes with CC
+  BY, and falls back to a premises-only list:
+  - **Chūō**: update its open data. The disclosure-request form text is
+    included as the last resort.
+  - **Kōtō**: the 情報提供 its own disclosure page offers, plus permission to
+    use it.
+  - **Minato**: publish every permit in force, citing its application form's
+    own "in principle published as open data".
+  - **Shinjuku**: publish its FY2025-end list as CSV, or permit use of the
+    PDF.
+- **Every letter makes the same commitments as Sendai's**: only trade name,
+  business type and address; no operator names or phones; no redistribution;
+  a "processed from" credit that does not imply the ward made the map;
+  removal on request.
+- **Nothing is sent.** Sending is the owner's act. Each ward's address is
+  unverified, and each draft says so. A list provided without a stated
+  permission is not published, and silence is not consent.
 
 ### 2026-09-24 - Every Japanese city against MHLW's official count: complete except Osaka (67%) and Tokyo
 
