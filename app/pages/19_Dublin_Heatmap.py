@@ -49,7 +49,7 @@ register, published by Tailte Eireann, records *premises* rather than
 occupiers - it has no trade-name column, no occupier column and no owner
 column. Each pin therefore shows the address a valuation is filed against, and
 the use recorded against it. That is the whole of what the source knows, and it
-is why this is the one city here that names no businesses.
+is why this map names no businesses.
 
 Categories are the register's own recorded uses, grouped into three. A premises
 can carry more than one use - a shop with offices above it, a salon behind a

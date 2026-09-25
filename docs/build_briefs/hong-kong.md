@@ -1,5 +1,19 @@
 # Hong Kong — build brief
 
+> ✅ **BUILT 2026-09-24** (`pages/41_Hong_Kong_Heatmap.py`; 21,135 storefronts, 141 stations).
+> **Three things this brief got wrong or left open, corrected by the build:**
+> 1. **No geocode was needed.** FEHD publishes the same three registers WITH its own point
+>    per licence on the CSDI Portal (`fehd_rcd_1630036390312_58893`, `..._75446`,
+>    `..._61763`), keyed by licence number - found by the licence read of ALS, the step
+>    that was supposed to justify geocoding. 21,137 of 21,165 storefront licences placed;
+>    the ALS hits the build's rules would have accepted sit a median 12 m from FEHD's point.
+>    The ALS measurements below stand as a record of the service, not of this build.
+> 2. **Composition:** cinemas, karaoke and public entertainment (397) are OUT, as NAICS 512
+>    and 713 are out everywhere; "personal services / entertainment" is 35 bathhouses.
+> 3. **Rail is not "use osm-rail" by default:** it is OSM because MTR's open data is station
+>    lists without geometry and the Transport Department's GTFS has no MTR rail. Region:
+>    East Asia (owner).
+
 **Step 0 measured 2026-09-22. The indemnity is ACCEPTED, so nothing gates this
 city.** Run `python scripts/brief_check.py hong-kong` before writing code.
 
@@ -344,6 +358,13 @@ groups cities into one readable view.
     "kind": "http_contains",
     "url": "https://www.als.gov.hk/lookup?q=NO.%2028%20STANLEY%20STREET%2C%20CENTRAL%2C%20HONG%20KONG",
     "present": ["Latitude"]
+  },
+  {
+    "id": "fehd-csdi-points-exist",
+    "claim": "FEHD publishes its restaurant register WITH a point per licence on the CSDI Portal - the build's placement source, joined by licence number (17,266 points on 2026-09-25)",
+    "kind": "http_contains",
+    "url": "https://portal.csdi.gov.hk/server/rest/services/common/fehd_rcd_1630036390312_58893/FeatureServer/0/query?where=1%3D1&outFields=SEARCH02_EN,LATITUDE&resultRecordCount=1&f=json",
+    "present": ["LATITUDE", "SEARCH02_EN"]
   },
   {
     "id": "datagovhk-org-count-is-unreliable",

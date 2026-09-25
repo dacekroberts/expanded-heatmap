@@ -462,8 +462,10 @@ elif len(REGIONS) > 1:
     _elsewhere = ", ".join(
         f"{n_cities} in {n}" for n, n_cities in elsewhere_counts(region)
     )
+    _n_here = len(_region_cities[region])
     st.caption(
-        f"Showing {len(_region_cities[region])} cities in {region} — "
+        # East Asia (Hong Kong, 2026-09-24) was the first one-city region.
+        f"Showing {_n_here} {'city' if _n_here == 1 else 'cities'} in {region} — "
         f"{_elsewhere} elsewhere. Every city is on the map: switch region "
         "above to re-centre, or use the list below, which always has all of "
         "them."

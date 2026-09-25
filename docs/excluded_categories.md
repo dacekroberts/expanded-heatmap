@@ -8,8 +8,8 @@ them — **which stations** a map is drawn around, and **which businesses** are
 counted near them. Each one leaves things out on purpose. Neither is visible
 from the map itself, which is why they are written down here.
 
-It is written to be published as-is alongside the maps. Business counts are
-from the 2026-09-21 rebuild; station counts are computed from the repository's
+It is written to be published as-is alongside the maps. Business counts were
+recorded when each city was built or last rebuilt; station counts are computed from the repository's
 own `outputs/<city>/excluded_stations.csv` files each time this page is
 rendered, so they cannot drift. The reasoning behind each decision, with sample
 sizes, is in `DECISIONS.md`. Where each city's data comes from is in
@@ -111,13 +111,15 @@ repository, and every one of them is counted in the table on this page.
   on the same ground as a station across a boundary.
 - **Its stops are too close together to draw rings around.** Street-running
   light rail can stop every block or two — far denser than the innermost ring,
-  which is a tenth of a mile in most cities and finer in New York — so
+  which is a tenth of a mile in most cities and half that in New York, the five
+  French cities and Oslo — so
   unthinned, nearly every point in the west of San Francisco would read as
   "next to a station". Where that happens, surface stops are thinned to roughly
   one every half mile measured along the line's own route, while every
   underground station, every terminus and every interchange is kept. It applies
-  to three cities: San Francisco's Muni Metro, Philadelphia's trolleys, and the
-  Boston Green Line's surface branches. The reasoning is in
+  to San Francisco's Muni Metro, Philadelphia's trolleys, the Boston Green
+  Line's surface branches, the trams of Amsterdam and Rotterdam, and Hong Kong's
+  Light Rail. The reasoning is in
   `docs/sub_transit_line_filters.md`.
 
 **A thinned stop does not leave a hole in the map.** Stops are thinned to half a
@@ -944,8 +946,8 @@ mall beside a station is commercial density a rider can reach.
 no name is published at all.** Tailte Éireann's rateable valuation register
 records *premises* rather than occupiers: no trade name, no occupier, no owner.
 Each pin shows the address a valuation is filed against and the use recorded
-against it. This is the only city on the site that names no businesses, and the
-only one where the personal-name question does not arise.
+against it. No business is named on this map, so the personal-name question
+does not arise.
 
 **Where a premises carries more than one use, the more specific trading use is
 what it is counted as** - a shop with offices above it is a shop, a salon
@@ -1505,6 +1507,32 @@ Leidschendam-Voorburg - and 23 tram stops are thinned by the spacing filter to a
 mile. Not drawn: tram 12 (event days), temporary trams 14 and 18 (during the works), ferries and
 NS trains.
 
+### Hong Kong - licensed food premises only, at FEHD's own points
+
+**What the registers cannot show: general retail and personal services.** FEHD licenses
+restaurants, food shops and a few specified trades; clothing, electronics and general shops, and
+hair and beauty salons, need no FEHD licence and are simply absent. Read the balance between
+categories as a fact about Hong Kong's licensing, not about its streets.
+
+**Left out of the registers** - food factories (11,568), frozen confection factories (558),
+factory canteens (444), cold stores (90) and milk factories (9); swimming pools (1,441),
+undertakers (145), funeral parlours (7), offensive trades (4) and slaughterhouses (2); places of
+public entertainment (262), cinemas and theatres (73) and karaoke establishments (62).
+
+**Not placed** - 28 licences with no point yet on FEHD's CSDI layers; none is placed by guessing
+from its address.
+
+**Counted once** - 2 second licences held under the same shop sign at the same address.
+
+**Named** - each dot carries the shop sign on its licence; the registers hold no licensee's name.
+308 licences carry FEHD's "no record" placeholder and show "No shop sign on the licence".
+
+**Stations.** MTR's Island, Tsuen Wan, Kwun Tong, Tseung Kwan O, South Island, Tung Chung, Tuen Ma
+and East Rail lines and the Light Rail are drawn. Not drawn: the Airport Express (Airport and
+AsiaWorld-Expo left out), the Disneyland Resort Line (Disneyland Resort), the high-speed rail, the
+Peak Tram and Hong Kong Tramways. Racecourse, open on race days only, is left out, and 17 Light
+Rail stops are thinned by the spacing filter to about one per half mile.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found
@@ -1536,8 +1564,8 @@ needs no licence from any of these four registries, and so does not appear at
 all.
 
 The practical effect is that New York's Retail category is thinner than its
-Food service one, and thinner than Retail in the other four cities, which draw
-on registries that cover all trades. **Read the balance between categories in
+Food service one, and thinner than Retail in the cities whose registries cover
+all trades. **Read the balance between categories in
 New York as a fact about the city's licensing, not about its high streets.**
 
 **Vancouver loses about half its register to missing coordinates, and no

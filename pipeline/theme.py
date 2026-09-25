@@ -45,14 +45,58 @@ docs/theming.md.
 # falls past them to Yu Gothic or Hiragino rather than being rendered by a face
 # that has the character but not the design. Putting a CJK face first would
 # silently restyle every Latin name on the map.
-FONT_STACK = (
-    '-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", '        # Latin, Greek, Cyrillic, Hebrew
-    '"Hiragino Sans", "Yu Gothic", Meiryo, '                              # Japanese
-    '"Apple SD Gothic Neo", "Malgun Gothic", '                            # Korean
-    '"PingFang TC", "Microsoft JhengHei", '                               # Traditional Chinese
-    '"PingFang SC", "Microsoft YaHei", '                                  # Simplified Chinese
-    'Arial, sans-serif'
-)
+#
+# THE CJK ORDER DEPENDS ON THE MAP'S LANGUAGE, and a single order was wrong for
+# every map but one script's. Han unification puts Chinese and Japanese on the
+# same code points, so whichever CJK face comes first draws EVERY Han
+# character: with Japanese first, Hong Kong's shop signs rendered in Japanese
+# glyph forms (骨 and 直 are the classic cases). They were legible, and to a
+# Hong Kong reader they looked foreign. Cantonese-only characters a Japanese
+# face lacks (嘅, 冇, 啲) fell through to the next face, so one sign could mix
+# two typefaces. Found by Hong Kong's deploy check, 2026-09-24.
+#
+# So font_stack(lang) puts the map's own script's faces first among the CJK
+# ones, and the Latin faces stay ahead of all of them (the reason is above).
+# FONT_STACK, the no-language default, is unchanged. A map declares its
+# language through render_heatmap(lang=...), which also sets <html lang>.
+_LATIN_FACES = '-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", '  # Latin, Greek, Cyrillic, Hebrew
+_CJK_FACES = {
+    "ja": '"Hiragino Sans", "Yu Gothic", Meiryo, ',
+    "ko": '"Apple SD Gothic Neo", "Malgun Gothic", ',
+    "zh-HK": '"PingFang HK", "Noto Sans HK", ',        # Hong Kong forms where a face has them
+    "zh-TW": '"PingFang TC", "Microsoft JhengHei", ',   # Traditional (Taiwan forms)
+    "zh-CN": '"PingFang SC", "Microsoft YaHei", ',      # Simplified
+}
+# The fallback order after a map's own faces, per language. Hong Kong falls to
+# the Traditional faces before anything else: Microsoft JhengHei, the only
+# Traditional face Windows ships, is far closer to Hong Kong's forms than a
+# Japanese or Simplified face.
+_CJK_ORDER = {
+    None:    ("ja", "ko", "zh-TW", "zh-CN"),            # the original order, unchanged
+    "ja":    ("ja", "ko", "zh-TW", "zh-CN"),
+    "ko":    ("ko", "ja", "zh-TW", "zh-CN"),
+    "zh-HK": ("zh-HK", "zh-TW", "zh-CN", "ja", "ko"),
+    "zh-TW": ("zh-TW", "zh-HK", "zh-CN", "ja", "ko"),
+    "zh-CN": ("zh-CN", "zh-TW", "ja", "ko"),
+}
+
+
+def font_stack(lang=None):
+    """The CSS font stack for a map in `lang` (None: no declared language)."""
+    try:
+        order = _CJK_ORDER[lang]
+    except KeyError:
+        raise ValueError(f"no font order for lang={lang!r}; add one to "
+                         f"pipeline/theme.py _CJK_ORDER") from None
+    return _LATIN_FACES + "".join(_CJK_FACES[k] for k in order) + "Arial, sans-serif"
+
+
+FONT_STACK = font_stack()
+
+# What the shared map CSS uses. A map that declares a language sets --hm-font
+# on its root (render_heatmap), so every shared block stays byte-identical
+# across maps and scripts/check_render_current.py can still compare them.
+FONT_VAR = f"var(--hm-font, {FONT_STACK})"
 
 
 # --- Dark: "midnight slate" -------------------------------------------------

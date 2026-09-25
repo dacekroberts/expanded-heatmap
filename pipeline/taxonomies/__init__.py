@@ -121,6 +121,7 @@ TAXONOMY_MODULES = {
     # ordered keyword rules on the enumerator's description, lifted unchanged
     # from staging's scripts/screen_cnefe.py. National, like france_naf.
     "brazil_cnefe": "pipeline.taxonomies.brazil_cnefe",
+    "hong_kong_fehd": "pipeline.taxonomies.hong_kong_fehd",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

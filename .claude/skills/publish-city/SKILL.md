@@ -27,7 +27,7 @@ Run these in order. Each catches a class nothing else does.
 | 1 | `python scripts/check_no_fetch_in_steps.py` | a step that reaches the network, **including through a shared module** |
 | 2 | `python pipeline/drift_check.py --jobs 4` | committed outputs that no longer regenerate |
 | 3 | `python scripts/check_personal_exposure.py <city>` | a person's name at their address |
-| 4 | `python scripts/check_provenance.py` | a city whose sources were never recorded; notices vs `_NOTICES` |
+| 4 | `python scripts/check_provenance.py` and `python scripts/check_inconsistency_list.py` | a city whose sources were never recorded; notices vs `_NOTICES`; a city with no row in `docs/map_inconsistencies.md`, the cross-city "why maps differ" list the owner will publish |
 | 5 | `python scripts/brief_check.py <city>` | a brief's claims that stopped being true |
 | 6 | **merge to your branch, commit** | — |
 | 7 | `python scripts/check_deploy_imports.py` | an import that works locally and not on a clean clone under the lean venv |

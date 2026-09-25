@@ -812,6 +812,16 @@ Cities built and running end to end (pipeline, map, app page):
   lines, and two temporary lines that fill the gap had looked like permanent
   ones - neither of RET's own maps carries them.
 
+- **Hong Kong** - MTR's eight urban lines and the Light Rail, across the SAR,
+  and the first city in the **East Asia** region. The business leg is FEHD's
+  licence registers, which cover food premises and a few specified trades but
+  no general retail, so the map is mostly restaurants and the page says so.
+  **It needed no geocoder after all**: the brief planned an address lookup for
+  every licence, and reading that service's terms turned up FEHD's own points
+  for the same registers on the Government's spatial data portal, joined by
+  licence number. Rail is OpenStreetMap's, because MTR publishes station lists
+  without locations; those lists are gate 3.
+
 **Canada is closed at five built cities** - Vancouver (regional, with Surrey),
 Montréal, Calgary, Edmonton and Toronto - out of six candidates screened. The
 sixth, Surrey, is not pending: it shipped inside the Vancouver regional map.
@@ -922,8 +932,9 @@ rail. The `brazil-city` skill carries the traps, and
 `scripts/measure_rail_backbone.py` answers two of the rail test's three parts
 from cached OSM.
 
-Next is Taiwan, after Rotterdam (the owner's order of 2026-09-24, revising an
-earlier Hong Kong, Taiwan, Seoul, Japan).
+Next is Taiwan, after Hong Kong (the owner built Hong Kong first on 2026-09-24
+so the week's remaining budget held a whole city; the order before that was
+Rotterdam, then Taiwan).
 Taiwan and Japan each get a per-country skill written after their first city.
 The two renderer fixes Brazil's deploy check found go first: the owner gated
 the next deploy on them. New

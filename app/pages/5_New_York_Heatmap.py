@@ -37,8 +37,7 @@ st.title("New York: commercial density around MTA rail station areas")
 st.markdown(
     """
 Every MTA rail station in the five boroughs is included, and none was excluded
-for lying outside the city — unlike the other cities here, the network does not
-leave its own city. What is drawn is **lines, not services**: the 4, 5 and 6 are
+for lying outside the city: the network does not leave it. What is drawn is **lines, not services**: the 4, 5 and 6 are
 one physical line up Lexington Avenue, so they appear once, grouped the way the
 MTA's own map colours them. Each of the eleven — the numbered Manhattan trunks,
 the lettered Brooklyn and Queens lines, the three shuttles and the Staten Island
@@ -46,7 +45,7 @@ Railway — is labelled directly on the map and in the legend, and a trunk's
 branches are drawn wherever its services diverge.
 
 **The station rings are smaller here.** Stations sit a median 480 m apart, so
-the half-mile rings used elsewhere would reach past the next two stations in
+the 0.6-mile rings most cities here use would reach past the next two stations in
 every direction and merge into one wash over Manhattan. These rings run to
 0.3 mi instead. Like every city on this site they start switched off, and they
 read most clearly around the outer-borough and Staten Island stations — turn

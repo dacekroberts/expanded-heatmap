@@ -10,7 +10,7 @@ recorded, because inside the city the service runs at metro spacing and
 frequency. Rows marked *ASSERTED* rest on general knowledge, not on this
 project's record — verify before relying on them.
 
-## Built (40) — five draw commuter rail
+## Built (41) — five draw commuter rail
 
 | City | Commuter / suburban rail | On the map? |
 |---|---|---|
@@ -42,6 +42,7 @@ project's record — verify before relying on them.
 | Prague | Esko suburban trains | ✗ Excluded (named on the page) |
 | Amsterdam | NS trains | ✗ Excluded (named on the page) |
 | Rotterdam | NS trains | ✗ Excluded (named on the page) |
+| Hong Kong | High-speed rail to the mainland (and the Airport Express) | ✗ Excluded (named on the page). East Rail, once KCR's commuter line, runs as an MTR metro line and is drawn |
 | Calgary · Edmonton · Guadalajara | none | — |
 | Fortaleza (Regional) | Metrofor's diesel lines: Linha Oeste, the Parangaba–Mucuripe VLT, the airport branch | ✗ Excluded (the rail test, 2026-09-24) — Oeste 2.1 km apart and hourly, the airport branch every 30 minutes, Parangaba–Mucuripe every 40 (the owner's call on a borderline result). Linha Sul, the metro, is drawn |
 | Recife (Regional) | the diesel VLTs to Cabo and Curado | ✗ Excluded (the rail test, 2026-09-24) — 3.1 and 3.9 km apart |

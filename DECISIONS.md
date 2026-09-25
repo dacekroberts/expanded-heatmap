@@ -16,11 +16,19 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**370 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**378 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [The open gap emptied: a final re-probe of its last eight, a verdict on each (owner)](#2026-09-24---the-open-gap-emptied-a-final-re-probe-of-its-last-eight-a-verdict-on-each-owner)
+- [The city menu groups by region, then country (owner)](#2026-09-24---the-city-menu-groups-by-region-then-country-owner)
+- [The cross-city inconsistency list is kept current by a check (owner)](#2026-09-24---the-cross-city-inconsistency-list-is-kept-current-by-a-check-owner)
+- [render_heatmap refuses CJK names without a declared language](#2026-09-24---render_heatmap-refuses-cjk-names-without-a-declared-language)
+- [A map declares its language, and its CJK faces follow it](#2026-09-24---a-map-declares-its-language-and-its-cjk-faces-follow-it)
+- [Hong Kong is live; the cjk-text skill written for Taiwan, Seoul and Japan; one stale claim dropped (owner)](#2026-09-24---hong-kong-is-live-the-cjk-text-skill-written-for-taiwan-seoul-and-japan-one-stale-claim-dropped-owner)
+- [Hong Kong's deploy check: four of six passed first time; two defects fixed, and the map re-rendered on master's per-city dark-mode colours](#2026-09-24---hong-kongs-deploy-check-four-of-six-passed-first-time-two-defects-fixed-and-the-map-re-rendered-on-masters-per-city-dark-mode-colours)
+- [Nine stale "only city" claims corrected on the site (owner-approved wording)](#2026-09-24---nine-stale-only-city-claims-corrected-on-the-site-owner-approved-wording)
+- [Hong Kong built: 21,135 storefronts at FEHD's own points, 141 stations; no geocoder after all](#2026-09-24---hong-kong-built-21135-storefronts-at-fehds-own-points-141-stations-no-geocoder-after-all)
 - [Seoul's four calls decided, and Osaka's page wording revised (owner)](#2026-09-24---seouls-four-calls-decided-and-osakas-page-wording-revised-owner)
 - [Seoul's Step 0 completed: 17 registers, three buckets, coordinates from the register itself, four owner calls](#2026-09-24---seouls-step-0-completed-17-registers-three-buckets-coordinates-from-the-register-itself-four-owner-calls)
 - [Dark-mode line labels start from their line's own colour (owner)](#2026-09-24---dark-mode-line-labels-start-from-their-lines-own-colour-owner)
@@ -475,6 +483,306 @@ onwards; the early ones are split by phase rather than by hour.
   - `PLAN.md`.
   Riga needs a brief before its build.
 
+### 2026-09-24 - The city menu groups by region, then country (owner)
+
+- **The owner asked for continents to stay together** in each city map's
+  "Cities" menu and the Overview's list: all US cities, then Canadian,
+  Mexican, European, South American, East Asian.
+- **The order follows `REGION_ORDER`**, the macro map's own selector, then
+  countries by first build within a region, then cities by build order. A
+  country in two regions (Canada West/East) sorts by the earlier one.
+- **Today's order is unchanged**, verified by comparing the old and new
+  `SWITCHER_ORDER` name by name. Country-by-first-build had happened to keep
+  continents together only because countries were built continent by
+  continent.
+- **Why it still needed doing**: a simulated future, running the real
+  `cities.py` code, adds Taipei and then a later-built Lisbon.
+  - **The old rule** ordered them Hong Kong > Taiwan > Portugal, putting
+    Portugal after East Asia.
+  - **The new rule** orders them Netherlands > Portugal > Brazil > Hong Kong >
+    Taiwan.
+
+### 2026-09-24 - The cross-city inconsistency list is kept current by a check (owner)
+
+- **The owner asked that `docs/map_inconsistencies.md` be updated as cities
+  land**, not rebuilt at the end.
+- **`scripts/check_inconsistency_list.py` (new)** fails when a city in
+  `app/cities.py` has no row in any of the list's four city-by-city tables.
+  - A country-wide "All nine" row covers its country only while the number
+    matches the country's city count.
+  - A row for a name not in `cities.py` is reported too.
+  - **Controls**: the committed list before tonight fails with "no row for
+    Hong Kong" in all four tables; an "All eight" under Brazil fails on the
+    count.
+  - **Wired in** at publish-city step 4 (beside check_provenance), in
+    add-city's wrap-up and in CLAUDE.md's commands.
+- **Hong Kong added**: its row in each table, from its page, config and
+  committed outputs (in-ring Food service 15,833, Food shops 3,408,
+  Bathhouses 34; 91% in-ring; 17 Light Rail stops thinned; 28 licences
+  unplaced). It is also added to themes 1, 2 and 4.
+- **Two drifting counts removed from the list** ("the 40 cities", "the other
+  33"), on the principle approved for the site prose earlier the same day.
+- **The published spacing-filter sentence** in `docs/excluded_categories.md`
+  had just been corrected to "five cities". Hong Kong's Light Rail makes six,
+  measured from every `excluded_stations.csv`. It now names the systems with
+  no count, the same principle.
+
+### 2026-09-24 - render_heatmap refuses CJK names without a declared language
+
+- **The rule now lives where the next city must pass through it.** It would
+  otherwise sit in the `cjk-text` skill's prose and a sibling city's step 3:
+  the lesson in osm-rail's opening section.
+- **`render_heatmap` raises** when any business name contains Han, kana or
+  Hangul and no `lang` is given. The message names the five tags and points to
+  `theme.font_stack` and the skill.
+- **Controls:**
+  - Hong Kong without `lang` raises, naming 7,933 CJK names.
+  - Hong Kong with `zh-HK` passes, and so does Paris.
+  - A scan of all 41 cities' cleaned names found CJK only in Hong Kong. No
+    Latin-script city (Vancouver, New York and San Francisco included) trips
+    the guard.
+- **`cjk-text` section 6 and its checklist** now say to pass `lang=`, with the
+  measured before and after, instead of "check whether the fix has landed".
+
+### 2026-09-24 - A map declares its language, and its CJK faces follow it
+
+- **Found by Hong Kong's deploy check**, handed to Cleanup: Hong Kong's
+  Chinese shop signs rendered in JAPANESE glyph forms.
+  - **Cause**: `theme.FONT_STACK` lists the Japanese faces before the
+    Traditional Chinese ones. Han unification puts both languages on the
+    same code points, so the first CJK face draws every Han character.
+- **Measured, not assumed**, with the browser's own record of which platform
+  font drew each glyph (CDP `CSS.getPlatformFontsForNode`) on a tooltip
+  holding 骨直嘅冇啲:
+  - **Before**: Yu Gothic (Japanese) drew 3 of them and Microsoft JhengHei
+    drew 2. One sign mixed two typefaces.
+  - **After**: Microsoft JhengHei drew all 5. Latin text is in Segoe UI both
+    times.
+- **Design**: `theme.font_stack(lang)` orders the CJK faces for a map's
+  language, with the Latin faces always first. `render_heatmap(lang=...)`
+  sets `<html lang>` and puts that order on a `--hm-font` custom property.
+  - **Every shared block reads `var(--hm-font, FONT_STACK)`**, so the blocks
+    stay byte-identical across maps and `check_render_current.py` still
+    compares them. A per-map font list pasted into the blocks would have
+    failed that check for every other city.
+  - **FONT_STACK, the no-language default, is unchanged**, byte for byte.
+  - **Orders exist for zh-HK, zh-TW, ko, ja and zh-CN.** Taiwan's, Korea's and
+    Japan's cities should pass their tag when they are built.
+- **Hong Kong passes `lang="zh-HK"`. All 41 maps re-rendered**, because the
+  shared blocks changed.
+  - With ids masked and the var() wrapper undone, the 40 other maps are
+    identical to master. Hong Kong differs only by its lang attribute and
+    style.
+  - `drift_check --jobs 4`: no data drift, baselines unchanged.
+  - Also passing: `check_render_current` (41), `check_map_markup`, and
+    `check_provenance --strict`.
+### 2026-09-24 - Hong Kong is live; the cjk-text skill written for Taiwan, Seoul and Japan; one stale claim dropped (owner)
+
+- **Live-checked after the owner's reboot (master 480e1dc).**
+  - Page 41 renders with no errors. Its snapshot caption carries all three
+    dates, and notice 41 is displayed.
+  - The map shows all nine line labels, each with `--dm-label`. They are
+    correct in both themes on the real toggle, with no filter.
+  - The layer menu reads Food shops (3,408), Food service (15,833) and
+    Bathhouses (34).
+  - "← Global View" is in place, and the Cities menu shows 40 cities with no
+    Hong Kong, "Global View" or "All cities" item.
+  - The Overview lists "East Asia (1)", and choosing it reads "Showing 1 city
+    in East Asia".
+- **"as they are in every other city" dropped from page 41 (owner),** and the
+  same clause dropped from Hong Kong's section of
+  `docs/excluded_categories.md`. It was true, but it was the claim shape
+  `check_stale_claims --only E` exists for, since the next city to land can
+  falsify it. The edit is page-only, so no reboot is needed.
+- **`.claude/skills/cjk-text/` written (owner),** from what Hong Kong met, for
+  the Taiwanese cities, Seoul and Japan. Each item is labelled MEASURED or TO
+  CHECK:
+  - Windows console and BOM encodings;
+  - bilingual OSM names and matching renames by ID;
+  - choosing a language edition;
+  - NFKC before every text key, with CJK regex ranges that reach the
+    supplementary planes;
+  - the privacy heuristic's blindness to CJK names;
+  - the Japanese-first font order, handed to the Cleanup session as a
+    per-map-language fix.
+  - `CLAUDE.md` points to it beside `address-join`, which now also names
+    Hong Kong's find.
+
+### 2026-09-24 - Hong Kong's deploy check: four of six passed first time; two defects fixed, and the map re-rendered on master's per-city dark-mode colours
+
+- **One `deploy-verify` (city-added Hong Kong)** ran on the branch before master was merged.
+  - **Page 41.** It rendered with no errors, the snapshot caption carried all
+    three dates, and the frame was 1000x650.
+  - **Pins.** Chinese shop signs render (7,159 in-ring tooltips contain
+    Chinese), and "No shop sign on the licence" reads sensibly.
+  - **Zoom** was faster than Paris: one wheel notch 355 ms against 455, five
+    notches 955 against 1,516. The longest blocking task was 0 ms.
+  - **Labels** passed in both themes. Attribution was uncovered at five sizes.
+    The view took 0 corrections at zoom 11.25 on desktop and 10.25 on a phone,
+    framing the network from Tung Chung to Lo Wu rather than the sea.
+  - **Pages and checks.** Notice 41 and the OSM credit are displayed. What Is
+    Excluded shows the Hong Kong section and a 0 / 17 station row.
+    Provenance, scope and imports pass, and the push needs a reboot for
+    `cities.py` and `components.py`.
+- **Two defects, both fixed:**
+  - **The map's layer menu said "Retail" and "Personal services"** while the
+    legend and page said Food shops and Bathhouses. The taxonomy lacked the
+    `layer_label` hook Amsterdam added; it is now `layer_label = legend_label`.
+  - **The Overview caption said "Showing 1 cities in East Asia".** East Asia
+    is the first one-city region, and `Overview.py` now counts in the singular.
+- **Master had moved 12 commits**, among them 0f3f159, which gives each city
+  its own dark-mode label colours and adds a check that no two lines share
+  one. The agent measured the old render against that rule: South Island
+  and Light Rail were only 8.8 apart, and Tung Chung was an orange line with
+  a yellow label. After the merge, Hong Kong was re-rendered on master's
+  renderer:
+  - `check_map_markup` PROBLEMS 0 on all three rules;
+  - render currency 41;
+  - drift zero, baseline 13 figures unchanged.
+- **Noted, not changed:**
+  - **Chinese shop signs render in Japanese typefaces** on Windows and Mac,
+    because the shared font stack lists Hiragino, Yu Gothic and Meiryo before
+    PingFang TC and JhengHei. That is a cross-city renderer question.
+  - **Central Kowloon's clusters stack food shops over restaurants**, which
+    is how clusters stack in every city.
+  - **The approved text's "as they are in every other city"** is flagged by
+    `check_stale_claims --only E`. It is true today and offered to the owner
+    as a page-only edit.
+
+### 2026-09-24 - Nine stale "only city" claims corrected on the site (owner-approved wording)
+
+- **Found by the cross-city inconsistency draft** (`docs/map_inconsistencies.md`,
+  open questions 1-8 and 19). Every one was a superlative or a count that was
+  true when written and stopped being true as cities landed.
+- **Each fact was re-verified before drafting.**
+  - **8 regional maps.**
+  - **5 maps draw some commuter-style rail**: DART, S-tog, Roma–Viterbo, CPTM
+    9 and SuperVia.
+  - **15 maps take their rail from OpenStreetMap.**
+  - **Rome and Rotterdam also name no businesses.**
+  - **5 cities use the stop-spacing filter**, confirmed from their
+    `excluded_stations.csv` (SF 65, Philadelphia 161, Boston 25, Amsterdam
+    59, Rotterdam 23).
+  - **7 cities use the half-size rings**: New York, the five French cities
+    and Oslo.
+- **Pages changed:**
+  - **Miami**: "the only regional map" became "the site's first regional map".
+  - **San Francisco**: commuter rail is "left out here as on most maps",
+    the wording already approved for Miami and Boston.
+  - **Mexico City** and **Dublin**: the superlative is dropped.
+  - **Paris**: "seven maps" became "several".
+  - **New York**: "unlike the other cities here" is dropped, and its
+    "half-mile rings used elsewhere" became "the 0.6-mile rings most cities
+    here use". The outer ring was never half a mile.
+- **`docs/excluded_categories.md` changed:**
+  - the counts header;
+  - the ring sizes and the spacing filter's five cities;
+  - Dublin's "only city that names no businesses";
+  - New York's "other four cities".
+- **The principle applied**: where a count would drift again as cities land,
+  the comparison is removed rather than the number updated.
+
+### 2026-09-24 - Hong Kong built: 21,135 storefronts at FEHD's own points, 141 stations; no geocoder after all
+
+- **Built ahead of Taiwan (owner).** Hong Kong's brief left the least open, so a
+  whole city fitted in the week's remaining budget; Taiwan follows the Sunday
+  reset. The staging session took Seoul's Step 0.
+- **The business leg is FEHD's three licence registers.** Each is an XML file,
+  regenerated daily, that carries its own generation date (2026-09-25) and its
+  own code lists.
+  - 35,830 licences, of which 21,165 are storefront types: 12,617 general
+    restaurants, 4,657 light-refreshment, 5 marine, 3,087 fresh-provision
+    shops, 408 bakeries, 356 siu mei and lo mei shops, and 35 commercial
+    bathhouses.
+  - **One scope call on precedent, owner-accepted.** The brief grouped
+    cinemas, karaoke and public entertainment (397) with the bathhouses. They
+    are out, as NAICS 512 and 713 are out everywhere. The map is mostly
+    restaurants because Hong Kong licenses no general retail, and the page
+    says so.
+  - The unused lookup code `CL` (Composite Food Shop, 0 rows) maps to Retail.
+    Any other unknown code raises.
+- **Placement: FEHD's OWN points, not the planned ALS geocode (owner).**
+  - ALS lookups were running when the licence-read agent, reading ALS's
+    terms, noticed that FEHD publishes the same three registers on the CSDI
+    portal with a latitude and longitude per licence, keyed by licence
+    number.
+  - A probe of 2,000 CSDI records settled it. 1,999 matched the XML by
+    number, and 99.7% of shop signs were identical. Where an ALS hit passed
+    this build's rules, FEHD's point sat a median 12 m away, with 89% within
+    50 m. Every ALS hit taken together gave a 90th percentile of 486 m, and
+    9.4% lay beyond 500 m.
+  - The ALS run was stopped at about 2,000 of 21,162 lookups. Those answers
+    stay in `raw/` as the record of the check and are never published.
+  - Result: 21,137 of 21,165 placed, and 28 licences with no CSDI point yet
+    left off.
+  - **The rules built for ALS, recorded because they were measured:**
+    - a hit in a different District Council district from the licence's own
+      is refused at any score (19 MILES, CASTLE PEAK ROAD, TUEN MUN had landed
+      in Tsuen Wan);
+    - at score 80 or above, 92–98% of hits named the register's street and
+      number or building, and at 75–80 only 72% did;
+    - floor prefixes are stripped for a second try.
+  - **Terms.** ALS falls under DATA.GOV.HK's Terms of Use v1.2, by its own
+    redirect. One reading, unresolved and not settled in this project's
+    favour, gives no grant at all, which is moot for an unpublished check.
+    The CSDI portal's terms carry the same uncapped indemnity plus "identify
+    clearly the Government and the CSDI Portal as the source". The owner
+    accepted them with the switch, and notice 41 names both.
+- **One pin per premises.** 2 second licences under the same shop sign at the
+  same address are dropped. 308 licences carry FEHD's "no record" placeholder
+  for a shop sign and show "No shop sign on the licence". Result: **21,135
+  storefronts**, of which 17,254 are food service, 3,846 food shops and 35
+  bathhouses; 19,275 fall within a ring.
+- **Privacy.**
+  - The registers hold the shop sign and no licensee name, so no pin can be a
+    person's name.
+  - 0 emails and 0 phone numbers. The one "c/o" hit is "C.O.C.", a chamber of
+    commerce.
+  - The 144 "person-like name at a residential unit" hits were read: all are
+    mall and office-tower units ("SHOP UNIT LG19, THE SOUTHSIDE"), because
+    UNIT is how Hong Kong numbers commercial space, and the names are trade
+    names ("Starbucks Coffee", "Mos Burger").
+  - Verdict: no personal information published.
+- **Rail: MTR's eight urban lines and the Light Rail, from OpenStreetMap
+  (owner's scope).**
+  - **Ground.** MTR's open data is station lists without coordinates or
+    geometry, and the Transport Department's GTFS has no MTR rail. Its
+    agency.txt holds buses, minibuses, ferries, the trams, the Peak Tram and
+    MTR Bus.
+  - **Relations** are matched on the relation's network and ref. The bbox also
+    held Shenzhen's metro, kept out by the network tag.
+  - **Stations** come from stop-node membership, collapsed by English name.
+    One node had no `name:en`, and its bilingual `name` supplied it.
+  - **Gate 3 is exact on all nine lines against MTR's lists**, after two
+    recorded corrections:
+    - Racecourse, open on race days only and absent from MTR's list, is left
+      out.
+    - Light Rail stop 250 takes MTR's current name, Hoi Wong Road. OSM still
+      calls it Tuen Mun Swimming Pool, and the stop ID is the same in both.
+  - **Drawing.** Each line is drawn from its longest relation plus only the
+    track other relations add more than 60 m from it: East Rail's Lok Ma Chau
+    spur and the TKO line's LOHAS Park branch. The Light Rail's twelve routes
+    become one line (owner), in this project's own colour, `#b8860b`.
+  - **Thinning.** Light Rail stops go to one per half mile, keeping MTR
+    stations and route ends: 17 thinned, giving **141 stations**.
+  - **Not drawn (owner):** Airport Express, Disneyland Resort Line,
+    high-speed rail, Peak Tram and the trams. Their stations are named in
+    prose, not in `excluded_stations.csv`, which holds only stations of drawn
+    lines, as in every city.
+  - **Boundary.** OSM relation 913110 measures 2,759 km2 because its waters
+    are included, and the gate is set to that.
+- **App side.**
+  - Page 41 and notice 41 carry the owner-approved wording, with the third
+    paragraph and the notice revised for the switch.
+  - The new **East Asia** region (owner), named for the Taiwanese, Korean and
+    Japanese cities behind it.
+  - `country` is "Hong Kong", for grouping only; the value is never
+    displayed.
+  - The label width, 73.5, was measured in the live app's frame, with five
+    known widths reproduced exactly. Macro labels score PROBLEMS 0 over 10
+    regions.
+  - Provenance, scope disclosure, the registry, no-fetch, render currency and
+    label contrast all pass.
 ### 2026-09-24 - Seoul's four calls decided, and Osaka's page wording revised (owner)
 
 - **The owner decided Seoul's four calls:**
