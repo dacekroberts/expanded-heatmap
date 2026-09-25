@@ -26,6 +26,7 @@ from cities import (
     IN_DEFAULT_VIEW,
     MAP_ONLY_NAV,
     REGION_MEMBERS,
+    REGION_ZOOM_WITHOUT,
     REGIONS,
     SWITCHER_ORDER,
 )
@@ -346,7 +347,11 @@ def fit_view(lats, lons, width_px=320, height_px=460, fill=0.7, west_pad=0.12):
 # See DEFAULT_REGION in cities.py.
 _frame_region = DEFAULT_FRAME if region == DEFAULT_REGION else region
 _here = _region_cities[_frame_region]
-view = fit_view([c["lat"] for c in _here], [c["lon"] for c in _here])
+# The ZOOM may leave out a region's outlier (cities.REGION_ZOOM_WITHOUT); the
+# centre below still takes every city in the region.
+_skip = REGION_ZOOM_WITHOUT.get(_frame_region, ())
+_zoom_set = [c for c in _here if c["name"] not in _skip] or _here
+view = fit_view([c["lat"] for c in _zoom_set], [c["lon"] for c in _zoom_set])
 
 # RE-CENTRE ON THE REGION'S OWN MIDPOINT, KEEPING THE FITTED ZOOM. The heading
 # on this block used to read "RE-CENTRE, NEVER RE-ZOOM", which stopped being

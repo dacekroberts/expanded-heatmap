@@ -1063,6 +1063,17 @@ REGION_ORDER = [
     "East Asia",
 ]
 
+# A REGION'S ZOOM FITTED WITHOUT AN OUTLIER; its centre still takes every city.
+# Riga (2026-09-24) sits far north-east of Europe's other 15 cities, and fitting
+# Europe to it lowered the region's zoom one step - which, since the offsets are
+# pixels and the zoom is the same at every width, put nine label pairs on top of
+# each other (Paris and Marseille, Oslo and Copenhagen, Rotterdam with Lille and
+# Amsterdam...). The owner's call: keep Europe's zoom as its 15 cities fit it,
+# and centre on the midpoint of all 16 - central Europe. On tablet and desktop
+# every city shows; on a phone Dublin and Riga sit a pan away, and the list
+# beneath the map always has them. check_macro_labels.py reads this too.
+REGION_ZOOM_WITHOUT = {"Europe": ("Riga",)}
+
 # Global is every region that is not itself a composite, derived rather than
 # listed so a new region joins it without an edit here.
 REGION_MEMBERS["Global"] = tuple(

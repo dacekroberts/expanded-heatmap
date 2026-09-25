@@ -49,6 +49,7 @@ from cities import (  # noqa: E402
     DEFAULT_FRAME,
     DEFAULT_REGION,
     REGION_MEMBERS,
+    REGION_ZOOM_WITHOUT,
     REGIONS,
     cities_in,
     elsewhere_counts,
@@ -224,7 +225,11 @@ def region_view(region):
     frame = DEFAULT_FRAME if region["name"] == DEFAULT_REGION else region["name"]
     here = cities_in(frame)
     lats, lons = [c["lat"] for c in here], [c["lon"] for c in here]
-    centre_lat, centre_lon, zoom = fit_view(lats, lons)
+    # The zoom may leave out a region's outlier (cities.REGION_ZOOM_WITHOUT,
+    # Riga in Europe); the centre below still takes every city, as Overview does.
+    skip = REGION_ZOOM_WITHOUT.get(frame, ())
+    zs = [c for c in here if c["name"] not in skip] or here
+    centre_lat, centre_lon, zoom = fit_view([c["lat"] for c in zs], [c["lon"] for c in zs])
     if frame != DEFAULT_FRAME:                  # Overview.py's re-centring block
         centre_lat = (max(lats) + min(lats)) / 2
         centre_lon = (max(lons) + min(lons)) / 2
