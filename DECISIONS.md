@@ -16,13 +16,15 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**364 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**366 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Osaka's residual: the unlisted permit numbers are real permits, and a third of the gap is undetermined](#2026-09-24---osakas-residual-the-unlisted-permit-numbers-are-real-permits-and-a-third-of-the-gap-is-undetermined)
+- [The front page's credit: legible in light mode, opaque, linked to /copyright](#2026-09-24---the-front-pages-credit-legible-in-light-mode-opaque-linked-to-copyright)
 - [Chūō's and Shinjuku's personal-services lists: not open data, not used](#2026-09-24---chūōs-and-shinjukus-personal-services-lists-not-open-data-not-used)
 - [Meguro's 52%: its lists hold first permits only](#2026-09-24---meguros-52-its-lists-hold-first-permits-only)
+- [The front page's OSM credit is lifted above the city dots](#2026-09-24---the-front-pages-osm-credit-is-lifted-above-the-city-dots)
 - [Tokyo ships all 8 wards, disclosed; the COVID lists are not used; MHLW's slice is added (owner)](#2026-09-24---tokyo-ships-all-8-wards-disclosed-the-covid-lists-are-not-used-mhlws-slice-is-added-owner)
 - [Tokyo's own-time probe round: nothing fills the partial wards openly](#2026-09-24---tokyos-own-time-probe-round-nothing-fills-the-partial-wards-openly)
 - [Osaka's 67%: the official count is most likely inflated, not the list short](#2026-09-24---osakas-67-the-official-count-is-most-likely-inflated-not-the-list-short)
@@ -442,6 +444,33 @@ onwards; the early ones are split by phase rather than by hour.
 - Recorded in `osaka.md`, `city_master_list.md`, `japan_ward_table.py`
   (regenerated `japan_city_list.md`) and `PLAN.md`.
 
+### 2026-09-24 - The front page's credit: legible in light mode, opaque, linked to /copyright
+
+- **Found by the deploy check** that verified the paint-order fix (the entry
+  below). All three problems are older than it.
+  - **Light mode**: the credit's plain text inherited the dark page's
+    near-white, `rgb(230,237,247)`. On Mapbox's half-white strip it read at
+    **1.18:1**, so the credit showed as its two links and nothing else. Only
+    dark mode had ever been styled.
+  - **Transparency**: both strips were half-transparent (light 0.5, dark
+    0.8), so a name pill under the credit showed through its text.
+  - **The link**: CARTO's style points the OSM link at `/about/`, and
+    CLAUDE.md requires the OSM copyright page.
+- **Fixed in `app/components.py`.**
+  - Both themes now have explicit credit colours on an opaque strip. Light
+    mode's links use the text colour, because the teal accent is ~3.7:1 on
+    white.
+  - The macro map's theme script re-points any openstreetmap.org link in the
+    credit at `/copyright`, on every re-render. Only the href changes: the
+    credit element and its text stay Mapbox's.
+- **`check_macro_attribution.mjs` now measures all of it, in both themes.**
+  It checks that the strip is opaque, that the text and every link read at
+  4.5:1, and that the OSM link goes to /copyright.
+  - **Positive control**: the live, unfixed site fails 13 ways across 375 and
+    1200 px, covering all four failure kinds.
+  - **After the fix**: 0 failures at 375, 768 and 1200 in both themes (text
+    5.6:1 light and 6.6:1 dark, links 12.7:1 or better).
+
 ### 2026-09-24 - Chūō's and Shinjuku's personal-services lists: not open data, not used
 
 - **Read the terms of the two personal-services lists found during the Tokyo
@@ -498,6 +527,36 @@ onwards; the early ones are split by phase rather than by hour.
   under the owner's all-8-wards decision.
 - `japan_ward_table.py`'s note and `docs/japan_city_list.md` were updated,
   along with `tokyo.md` and `PLAN.md`.
+### 2026-09-24 - The front page's OSM credit is lifted above the city dots
+
+- **Found by Rotterdam's deploy check**, handed to Cleanup: a city dot sat in
+  the macro map's credit strip at 800x700, still legible.
+- **The cause was structural, not that one dot.**
+  - deck.gl wraps the whole Mapbox basemap, its credit included, in a
+    `z-index: -1` layer beneath its own drawing canvas.
+  - So any dot or name pill could paint over "© OpenStreetMap contributors"
+    wherever a city landed after a pan or a region switch.
+  - CLAUDE.md makes that credit's visibility a fact about the render, so this
+    was a live gap in the ODbL invariant.
+- **Measured before fixing**, with `scripts/check_macro_attribution.mjs`
+  (new). At 375, 768 and 1200 px the deck.gl canvas was above the credit at
+  all 5 points along it.
+- **Fixed in `components._MACRO_CONTROLS_CSS`.**
+  - The -1 wrapper is flattened, found by the element it wraps (`:has(>
+    .mapboxgl-map)`), not by its position.
+  - The layers are then ordered basemap < deck.gl canvas (1) < Mapbox
+    controls (2).
+  - After: the credit is on top at every point at all three widths. Dots and
+    pills still draw above the basemap, and a click on Chicago's label still
+    opens Chicago.
+- **The check had to be written twice, and both traps are recorded in it.**
+  - `document.elementFromPoint` skips deck.gl's `pointer-events: none` canvas,
+    so it would have passed the broken page.
+  - deck.gl's transparent tooltip container covers the whole map and paints
+    nothing, so counting it failed the fixed page. The check now reads the
+    full stack and counts only what can paint.
+- **A Streamlit server caches an imported module**, so the first run after
+  the edit still measured the old CSS. Restart it before re-measuring.
 
 ### 2026-09-24 - Tokyo ships all 8 wards, disclosed; the COVID lists are not used; MHLW's slice is added (owner)
 

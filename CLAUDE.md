@@ -386,6 +386,7 @@ python scripts/check_discard_evidence.py [--selftest]   # every discard row carr
 python scripts/measure_rail_backbone.py --osm <json> --relation <id> --municipios <json> --codes <ibge> --stations <csv> --crs <epsg>   # a commuter line's spacing + coverage for the rail test; frequency is a cited read
 python scripts/check_deploy_imports.py [--ref REF]      # clean clone + lean venv: run before ANY push touching app/
 node scripts/profile_zoom.mjs <baseUrl> <city,city> [reps]   # wheel/click/cluster zoom lag, headless Edge, trusted input
+node scripts/check_macro_attribution.mjs [baseUrl] [375,768,1200]   # the front page's OSM credit is painted ON TOP of the city dots; live: <app>/~/+
 python scripts/decisions_index.py [--check]             # refresh DECISIONS.md's index
 python scripts/merge_append_only.py DECISIONS.md [--dry-run]   # resolve an append-only merge conflict
 python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon> --region <region> --country <country>   # add --dry-run first

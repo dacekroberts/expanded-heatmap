@@ -419,6 +419,18 @@ Desktop is unaffected — the label is fully visible there.
   - [x] Reconciled the two overlapping handoffs into `docs/theming.md`
     (2026-09-21). Both originals are in git history.
 
+- [ ] **⏸ AFTER THE LAST VIABLE BUILD: put the cross-city inconsistency list
+  on the site** (owner, 2026-09-24).
+  - **The list**: `docs/map_inconsistencies.md` (draft, kept current by
+    Cleanup) is one place that answers "why does this map differ from that
+    one": what each map draws and what is missing, city by city. Readers should
+    not have to read each city's prose to learn it.
+  - **Placement is deliberately undecided.** The owner wants reminding only
+    once every valid build is done: presentation cleanup (mostly prose and UI)
+    comes after all the content is on the maps.
+  - **Until then**: keep the draft current as cities land, and don't raise
+    placement early.
+
 ## Next cities, in ease order
 
 - [x] **Philadelphia - built 2026-09-21.** The WKB parsing this item predicted
