@@ -822,8 +822,18 @@ brief names.
   missing from the list" is now stronger than the evidence (`osaka.md`).
 - [ ] **Fukuoka** — agree the wording that discloses the ~20% of restaurants
   with no published address. BODIK is flaky, so `fetch_sources.py` retries.
-- [x] **No pre-build items**: Seoul (its brief is deliberately partial, and
-  geocoding the rest of 一般飲食店 is build work), Hong Kong, the nine Brazilian
+- [x] **Seoul's Step 0 completed (2026-09-24, `seoul.md`).** Seventeen
+  citywide registers, three buckets, restaurant coordinates filled to 97.7%
+  from the register itself, rail measured.
+- [ ] 🚩 **Owner: Seoul's four calls** (`seoul.md`, top):
+  - the bucket map (lodging, vets and 유흥주점 out; 단란주점?);
+  - the five Korail metro lines (recommend 경의·중앙, 수인·분당 and 경춘 in);
+  - stations inside Seoul only;
+  - the "East Asia" map region.
+- [ ] Seoul, at build: re-measure Line 7 and 신림선 (Overpass failed); write
+  `korea_localdata.py` and the Korean pass of `check_personal_exposure.py`
+  (113 premises sized).
+- [x] **No pre-build items**: Hong Kong, the nine Brazilian
   cities (São Paulo is already with main), the three Taiwanese cities, and
   Rotterdam (its build-time calls are in its brief).
 

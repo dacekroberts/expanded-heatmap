@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**366 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**367 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Seoul's Step 0 completed: 17 registers, three buckets, coordinates from the register itself, four owner calls](#2026-09-24---seouls-step-0-completed-17-registers-three-buckets-coordinates-from-the-register-itself-four-owner-calls)
 - [Osaka's residual: the unlisted permit numbers are real permits, and a third of the gap is undetermined](#2026-09-24---osakas-residual-the-unlisted-permit-numbers-are-real-permits-and-a-third-of-the-gap-is-undetermined)
 - [The front page's credit: legible in light mode, opaque, linked to /copyright](#2026-09-24---the-front-pages-credit-legible-in-light-mode-opaque-linked-to-copyright)
 - [Chūō's and Shinjuku's personal-services lists: not open data, not used](#2026-09-24---chūōs-and-shinjukus-personal-services-lists-not-open-data-not-used)
@@ -408,6 +409,65 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Seoul's Step 0 completed: 17 registers, three buckets, coordinates from the register itself, four owner calls
+
+- **Completed Seoul's Step 0 at the owner's request, before the build.**
+  - **Correction first.** The 2026-09-23 brief's "never done" list was partly
+    stale on the day it was written. The eight core datasets, their KOGL
+    Type 1 licence, the no-operator-column check and the citywide scope had
+    been measured on 2026-09-22.
+  - The brief was rewritten from the measurements below, and passes 4/4.
+- **Found Seoul's retail registers, which no screen had seen.** The
+  2026-09-21 OA-id sweep skipped OA-16050 to 16280, which is exactly where
+  the citywide permit family lives. A GET sweep of 16040 to 16290, reading
+  each page's `<meta name="title">` (no search form), listed 118 citywide
+  types. Nine were downloaded through the page's own SHEET export.
+  - **Retail**: bakeries 4,228, delis 15,410, large food shops 660, butchers
+    6,317, tobacco retailers 15,590, large stores 740, in-store health-food
+    sellers 10,648.
+  - **Bars**: 단란주점 1,865 and 유흥주점 1,682 (73% 룸살롱).
+  - Each of the nine pages, read individually: KOGL Type 1, `제3저작권자 없음`.
+- **Measured the buckets.** 59,816 retail permits come to **53,215 premises**
+  once de-duplicated by building and brand; a convenience store often holds
+  three permits. The result is about 157,000 food, 53,000 retail and 40,000
+  personal-services premises. Recommendations follow existing precedents:
+  - lodging and vets out (every city; NAICS 541940);
+  - 유흥주점 out (the adult-services rule, owner 2026-09-21);
+  - public baths kept (Prague's saunas);
+  - convenience stores and bakeries in Retail (Boston, Japan).
+- **Keyed the taxonomy at the permit type.** Each dataset is one named type,
+  so the catch-all shares inside it (일반음식점 `기타` 17.7%) never decide a
+  bucket. The sub-type only removes or moves rows.
+- **Filled restaurant coordinates from the register itself.** The 11,121
+  active restaurants without a point (9.3%) bunch by district (종로구 1,861,
+  양천구 8), not by age. Borrowing the point of another row at the same
+  building, from 124,340 building points across 1.2 million rows, places
+  8,409 of them.
+  - **Control**: 93,048 restaurants with known points were re-placed this way
+    at median 0 m, 99th percentile 11 m.
+  - Restaurants go from 90.7% to **97.7%**; 2,712 stay unplaced, disclosed.
+  - The rejected alternative was a geocoding leg. The 2026-09-22 entry had
+    budgeted one.
+- **Sized the Korean personal-exposure pass**: a bare person's-name trade name
+  at a residential, non-commercial address. **113 premises** across the core
+  eight. `전화번호` is the only personal-adjacent column in any file, and it is
+  never read.
+- **Rail: both failed measurements now answered.**
+  - **369 stations**: the earlier "0" was a failed query.
+  - **3 light-rail lines**, all coloured.
+  - Spacing inside Seoul puts 경의·중앙, 수인·분당 and 경춘 (1.25–1.39 km)
+    within the subway's own range (0.91–1.36 km). 공항철도 is 3.37 km;
+    서해 and 김포 골드라인 are one-station stubs.
+  - **Two new failures are recorded as failures**: Line 7's "0 in Seoul" and
+    신림선, lost to Overpass 429/504s. Both are re-measured at build.
+- **Four owner calls, recommended, not decided**:
+  - the bucket map;
+  - the five Korail metro lines;
+  - stations inside Seoul only (Japan's rule);
+  - an "East Asia" map region, following South America's
+    continent-not-country call.
+- Files: `seoul.md`, `data_sources.md`, `city_master_list.md` and `PLAN.md`.
 
 ### 2026-09-24 - Osaka's residual: the unlisted permit numbers are real permits, and a third of the gap is undetermined
 

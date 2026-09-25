@@ -804,7 +804,7 @@ independent of what is *permitted*. That is in `docs/excluded_categories.md`.
 | San Diego businesses | Portal terms explicitly permit use and **"Derivative Work"**, defined as "a work that is based in any way or to any extent on the Data". No attribution requirement stated | — |
 | Boston — every source used above (food inspections, Licensing Board, cannabis, city boundary, plus the neighbourhood, SAM address and Property Assessment layers) | **Open Data Commons PDDL** (public domain dedication), declared per-dataset in CKAN's `license_id` as `odc-pddl` | none declared |
 | **Brazil — IBGE CNEFE 2022** (**built 2026-09-24**: nine cities, one national module) | **Free use by federal law** — Decree 8.777/2016 art. 4 and Lei 14.129/2021 art. 29 — subject to LGPD principles. **No IBGE licence document exists.** Read 2026-09-23; four restrictive readings recorded in the Brazil section below | **Required** (the decree's definition of open data: *"limitando-se a creditar a autoria ou a fonte"*). No wording prescribed; use `Fonte: IBGE, Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE), Censo Demográfico 2022.` |
-| **Seoul** — the eight `인허가 정보` datasets below (**candidate, not built**) | **공공누리 제1유형 / KOGL Type 1** — attribution required, commercial use and derivative works permitted | 저작권자 **서울특별시**; 제3저작권자 **없음** (none) |
+| **Seoul** — the seventeen `인허가 정보` datasets below (**candidate, not built**; 8 read 2026-09-22, 9 checked 2026-09-24) | **공공누리 제1유형 / KOGL Type 1** — attribution required, commercial use and derivative works permitted | 저작권자 **서울특별시**; 제3저작권자 **없음** (none) |
 | **Japan** — the candidate cities' permit lists, MHLW's open data, MLIT's address, rail and boundary layers (**candidates, not built**) | Mostly **PERMITTED WITH CONDITIONS** (CC BY 4.0, CC BY 2.1 JP, PDL 1.0). Sendai's lists need permission. N03's boundaries may never be drawn (Survey Act). One source per row in the Japan section below | Per source, below |
 | **Province of British Columbia** — the ABMS municipalities layer (`WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP`), which NAMES Vancouver/Surrey's 30 out-of-city stations | **Open Government Licence – British Columbia v2.0** — "worldwide, royalty-free, perpetual, non-exclusive licence… including for commercial purposes"; free to "Copy, modify, publish, translate, adapt, distribute". **Terminates automatically on breach.** Excludes Personal Information and the Province's own marks — neither of which a boundary polygon is. The WFS is also subject to the separate **API Terms of Use for OGL Information** (read 2026-09-22), which add operational limits and **no new notice**. Read 2026-09-22, stored at `docs/licenses/bc-open-government-licence.txt` | **Required, verbatim** — `Contains information licensed under the Open Government Licence – British Columbia.` See notice 17. **Two sibling BC layers are licensed "Access Only" and would NOT permit this**; see the stored file's header |
 | San Francisco assessor roll (`wv5m-vpq2`) — the residence-filter join | **Open Data Commons PDDL 1.0** (public domain dedication), declared in the dataset's own `license` field as "Open Data Commons Public Domain Dedication and License" | none declared |
@@ -943,7 +943,26 @@ downloaded via the SHEET CSV export (`ssUserId=SAMPLE_VIEW`, no account — see
 | `OA-16044` | 서울시 숙박업 인허가 정보 | Personal services | 2,788 |
 | `OA-16007` | 서울시 동물병원 인허가 정보 | Personal services | 981 |
 
-**All eight carry identical metadata**, checked individually rather than
+**Nine more, checked 2026-09-24** (the same fields on each page, read
+individually): all **공공누리 1유형**, `제3저작권자` 없음, 매일, 원본시스템
+지방행정 인허가정보. The pages also carry an empty `AI유형 -` tag. Buckets are
+the brief's recommendations, which are the owner's call (`seoul.md`). The
+bucket column above was the 2026-09-22 guess; the brief recommends
+**excluding** 숙박업 and 동물병원.
+
+| `infId` | Dataset | Recommended bucket | Active premises |
+|---|---|---|---|
+| `OA-16084` | 서울시 제과점영업 인허가 정보 | Retail | 4,228 |
+| `OA-16085` | 서울시 즉석판매제조가공업 인허가 정보 | Retail | 15,410 |
+| `OA-16080` | 서울시 식품판매업(기타) 인허가 정보 | Retail | 660 |
+| `OA-16071` | 서울시 축산판매업 인허가 정보 | Retail (식육판매업 only) | 6,317 of 11,628 |
+| `OA-16144` | 서울시 담배소매업 인허가 정보 | Retail | 15,590 |
+| `OA-16096` | 서울시 대규모점포 인허가 정보 | Retail | 740 |
+| `OA-16070` | 서울시 건강기능식품일반판매업 인허가 정보 | Retail (영업장판매 only) | 10,648 of 29,315 |
+| `OA-16089` | 서울시 단란주점영업 인허가 정보 | Excluded (recommended) | 1,865 |
+| `OA-16090` | 서울시 유흥주점영업 인허가 정보 | Excluded (adult services) | 1,682 |
+
+**The first eight carry identical metadata** (as do the nine), checked individually rather than
 inferred from one: `이용허락범위` = **공공누리 1유형 : 출처표시 (상업적 이용 및
 변경 가능)**, `저작권자` = 서울특별시, **`제3저작권자` = 없음**, `갱신주기` =
 매일 (daily). `원본시스템` is 공공데이터포털(지방행정 인허가정보) — i.e. these
