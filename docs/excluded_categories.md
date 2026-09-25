@@ -54,7 +54,7 @@ Trenord's suburban services in Milan, and Iarnród Éireann's Commuter and
 InterCity trains in Dublin, RER and Transilien in Paris, the TER services
 in Marseille, CPTM's Linhas 7, 8 and 10 to 13 in São Paulo, SuperVia's Japeri,
 Santa Cruz and Belford Roxo lines in Rio de Janeiro, Metrofor's three diesel
-lines in Fortaleza, and the two diesel VLTs in Recife.
+lines in Fortaleza, the two diesel VLTs in Recife, and Vivi's suburban trains in Riga.
 
 **Trams are NOT excluded as a class, and the test is whether the tram is the
 rapid-transit system or an overlay on one.** Many of these maps draw light rail
@@ -67,7 +67,7 @@ any of them, and Barcelona's tram falls outside the network-identity test that
 picks out its metro. San Francisco's F Market heritage streetcar and its cable
 cars are out on that same ground rather than on any question of mode: both are
 separately branded services running beside Muni Metro rather than part of it.
-Toulouse's cable car is the proof that "cable car" is not itself a reason.
+Toulouse's cable car is the proof that "cable car" is not itself a reason. Riga has no metro at all, so its seven tram routes are the network, and all are drawn.
 
 **The line is drawn by station spacing and service frequency, not by which
 company runs the trains.** SEPTA is the clearest case — the Market–Frankford
@@ -1532,6 +1532,34 @@ and East Rail lines and the Light Rail are drawn. Not drawn: the Airport Express
 AsiaWorld-Expo left out), the Disneyland Resort Line (Disneyland Resort), the high-speed rail, the
 Peak Tram and Hong Kong Tramways. Racecourse, open on race days only, is left out, and 17 Light
 Rail stops are thinned by the spacing filter to about one per half mile.
+
+### Riga - food from the excise register, shops from the cadastre, vacancy measured only in the centre
+
+**Two sources, two categories.** Food service is the premises licensed to sell alcohol or tobacco
+whose place type is food service; a café that sells neither is missing, so that layer is a lower
+bound. Shops and services is every trade premises in the cadastre whose name reads as a shop or a
+service; the cadastre records use, not occupancy, so that layer is an upper bound.
+
+**Left out of the excise register** - licences no longer in force or at a place that has closed;
+shops, fuel stations, warehouses, offices and kiosks (the cadastre is the shop layer); hotels.
+One premises per address and kind: a venue holds several licences, and the holder that would tell
+two venues apart is never read.
+
+**Left out of the cadastre** - trade premises named as fuel stations, wholesale or storage, food
+service (the excise register is the food layer), gambling, offices, dwellings and ancillary rooms;
+412 shops in buildings the city lists as degrading.
+
+**Not placed** - 48 food premises whose address matched no address point; 34 shops whose building
+had no footprint.
+
+**Not named** - food dots show the kind of place and the street address without its unit number;
+shop dots show the premises' registered name. No licence holder is ever read.
+
+**Vacancy.** 20.4% of 2,324 street-front ground-floor premises in the historic centre and its
+protection zone (2024), 15% in the Old Town (2025); not measured elsewhere.
+
+**Stations.** Rīgas satiksme's seven tram routes are drawn; 15 stops are thinned by the spacing
+filter to about one per half mile. Not drawn: buses, trolleybuses and Vivi's suburban trains.
 
 ## Kept, and why
 

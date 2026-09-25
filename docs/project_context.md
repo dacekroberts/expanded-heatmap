@@ -822,6 +822,17 @@ Cities built and running end to end (pipeline, map, app page):
   licence number. Rail is OpenStreetMap's, because MTR publishes station lists
   without locations; those lists are gate 3.
 
+- **Riga** - Rīgas satiksme's seven tram routes, across the city's 58
+  neighbourhoods; Latvia's first city, in Amsterdam's two-layer shape. Food
+  service is the State Revenue Service's excise-licence register - the premises
+  licensed to sell alcohol or tobacco - placed on the city's own address points;
+  its licence holders are never read. Shops and services are the cadastre's
+  trade premises, at their building footprints. The shop layer's one caveat is
+  vacancy, measured only in the historic centre, and the page quotes it with its
+  area and date. **The first city to change another region's view**: fitting
+  Europe to Riga would have zoomed every European label onto its neighbour, so
+  Europe keeps its zoom and Riga sits a pan away on phones.
+
 **Canada is closed at five built cities** - Vancouver (regional, with Surrey),
 Montréal, Calgary, Edmonton and Toronto - out of six candidates screened. The
 sixth, Surrey, is not pending: it shipped inside the Vancouver regional map.
@@ -932,7 +943,7 @@ rail. The `brazil-city` skill carries the traps, and
 `scripts/measure_rail_backbone.py` answers two of the rail test's three parts
 from cached OSM.
 
-Next is Taiwan, after Hong Kong (the owner built Hong Kong first on 2026-09-24
+Next is Taiwan, after Hong Kong and Riga (the owner built Hong Kong first on 2026-09-24
 so the week's remaining budget held a whole city; the order before that was
 Rotterdam, then Taiwan).
 Taiwan and Japan each get a per-country skill written after their first city.

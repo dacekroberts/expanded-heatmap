@@ -59,7 +59,7 @@ services. A few cannot, because the local records never cover that trade.
   Retail is only the regulated trades (second-hand, pawn, smoke/vape, pet shops,
   fireworks), 328 pins inside the rings against 6,461 Food service.
 - **Retail and Personal services merged into "Shops and services":** Amsterdam,
-  Rotterdam. The building register records a unit's intended use, not its trade.
+  Rotterdam, Riga. The building register records a unit's intended use, not its trade.
 - **Reason:** the city does not license that trade, or the source cannot tell the two
   apart. It is a gap in the data, not a choice about what to show.
 
@@ -87,7 +87,7 @@ run on top of a metro network.
   Philadelphia (trolleys), Boston (Green Line, Mattapan), Calgary, Edmonton, Toronto
   (Lines 5 and 6 only), Mexico City (Tren Ligero), Guadalajara, Dublin (Luas),
   Marseille, Toulouse, Lille, Oslo, Amsterdam, Rotterdam, Rio (VLT), Santos (VLT),
-  Hong Kong (Light Rail).
+  Hong Kong (Light Rail), Riga (its trams are the whole network).
 - **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Toronto's 18 streetcar routes, Milan (17 routes), Barcelona,
   Paris, Prague, Rome, Madrid (Metro Ligero), Copenhagen (the Letbane has no stop in
   scope).
@@ -145,7 +145,7 @@ how far the network reaches, not on the data.
 than a name, either because the source records no names or to avoid showing a person's
 name at their home.
 - **No names at all:** Dublin (address and recorded use), Rome (activity and address),
-  Rotterdam.
+  Rotterdam, Riga (the kind of place, or the premises' registered name).
 - **Mostly addresses:** Milan (a shop sign on about 1 pin in 7), Amsterdam's shop
   layer, the French cities where SIRENE has no sign or usual name (only about 40% of
   Paris rows and 43% of Marseille rows are named, per the Marseille brief).
@@ -178,13 +178,13 @@ really shopfronts. Several pages say which way their map leans.
   Lille's and Rennes's); Vancouver (1,583 licences with a real address but no
   coordinates);
   Madrid (9.2% have a zero coordinate); Toronto (6.2% unmatched addresses); Rome
-  (4.3% unmatched); Prague (about 57,000 establishments whose owner's main activity is
+  (4.3% unmatched); Riga's food layer (only premises licensed to sell alcohol or tobacco); Prague (about 57,000 establishments whose owner's main activity is
   something else); Miami (repair and service premises); Mexico City and Guadalajara
   (street stalls); Copenhagen (tattoo studios); Chicago (licences with no
   coordinates).
 - **Overcounts, or best read as upper bounds:** Milan (the six registers are not
   merged, so a business can count twice); Rome and Rotterdam (no closing dates, or a
-  five-year permit window); the SIRENE, Oslo, Copenhagen and Prague registers
+  five-year permit window); Riga's shops (the cadastre records use, not occupancy); the SIRENE, Oslo, Copenhagen and Prague registers
   (registered premises that may have no shopfront, including web shops); Edmonton
   (about 1 in 16 Personal services pins is a clinic); Amsterdam and Rotterdam (empty
   shop units cannot be removed).
@@ -292,6 +292,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Santos (Regional) | VLT L1, L2 | Heritage tram | OpenStreetMap | Santos + São Vicente | 0 / 0 |
 | **Hong Kong** | | | | | |
 | Hong Kong | MTR, 8 lines + Light Rail | Airport Express, Disneyland Resort Line, high-speed rail, Peak Tram, Hong Kong Tramways | OpenStreetMap (station counts checked against MTR's own lists) | Territory | 0 / 17 (Racecourse left out: race days only) |
+| **Latvia** | | | | | |
+| Riga | Rīgas satiksme trams, 7 routes | Buses, trolleybuses, Vivi suburban rail | Rīgas satiksme GTFS | City (58 neighbourhoods) | 0 / 15 |
 
 ### B. Business data (dimensions 4–6)
 
@@ -351,6 +353,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Santos (Regional) | | | | 3,113 / 1,482 / 792 | almost 4 in 10 |
 | **Hong Kong** | | | | | |
 | Hong Kong | Licence registers (food premises) | FEHD licence registers | Local (licence type) | Food service 15,833 / Food shops 3,408 / Bathhouses 34 | No general retail or personal services: FEHD does not license them |
+| **Latvia** | | | | | |
+| Riga | Excise licences + cadastre | VID excise-licence register; VZD premise groups | Per-source (2 buckets) | Shops & services 4,027 / Food 1,214 | Retail and Personal merged; food only where alcohol or tobacco is licensed |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -402,6 +406,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | All nine | Source points (census) | Unreadable descriptions (see B); change since 2022 | Offices, parking, workshops, vacant, worship etc.; dwelling addresses show category only |
 | **Hong Kong** | | | |
 | Hong Kong | Source points: FEHD's own CSDI points, matched by licence number (28 unplaced) | Mostly restaurants; premises on different floors share one point | Food factories, canteens, cold stores, pools, entertainment and funeral trades; 2 duplicate licences counted once |
+| **Latvia** | | | |
+| Riga | Address join to the city's address points (96.8%); building footprints (99.4%) | Food a lower bound (licensed premises only); shops an upper bound (vacancy measured only in the centre) | Holder never read and unit numbers dropped (owner); 412 shops in degrading buildings |
 
 ### D. Vintage and map features (dimensions 10–11, plus two added)
 
@@ -464,6 +470,8 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Santos (Regional) | same | B | 0.6 mi | Yes | 46% | same (35%) |
 | **Hong Kong** | | | | | | |
 | Hong Kong | Registers generated 2026-09-25, points to 2026-09-23 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 91% | Shop sign, Chinese or English (308 show "No shop sign") |
+| **Latvia** | | | | | | |
+| Riga | Excise daily; cadastre prepared 2026-09-20 (fetched 2026-09-25) | B | 0.6 mi | Yes | 78% | No names; the kind (food) or the premises' registered name (shops) |
 
 Features every map shares, so not a difference: permanent line labels and a legend
 entry for every line; rings start switched off; OSM basemap credit; the site-wide

@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**383 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**384 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Riga built: 6,730 storefronts, 108 tram stations; Latvia's first city, and Europe keeps its zoom](#2026-09-24---riga-built-6730-storefronts-108-tram-stations-latvias-first-city-and-europe-keeps-its-zoom)
 - [Fukuoka's address disclosure worded (owner), and the sampling lesson reaches premises-taxonomy](#2026-09-24---fukuokas-address-disclosure-worded-owner-and-the-sampling-lesson-reaches-premises-taxonomy)
 - [Toronto's legend passage and the French address-only dots (owner-approved wording)](#2026-09-24---torontos-legend-passage-and-the-french-address-only-dots-owner-approved-wording)
 - [PLAN's "carry into the mandatory full deploy-verify" item closed as stale (owner)](#2026-09-24---plans-carry-into-the-mandatory-full-deploy-verify-item-closed-as-stale-owner)
@@ -425,6 +426,76 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Riga built: 6,730 storefronts, 108 tram stations; Latvia's first city, and Europe keeps its zoom
+
+- **Built before Taiwan (owner),** so the week's remaining budget held a whole
+  city. The staging session's brief was used (`docs/build_briefs/riga.md`,
+  4/4). Riga has Amsterdam's two-layer shape.
+- **Four licence reads, one per source, none restrictive:**
+  - **VID excise register:** CC0, and VID's own open-data page says "without
+    re-use restrictions".
+  - **Rīgas satiksme's GTFS:** CC0, plus the operator's own grant.
+  - **VZD cadastre:** CC BY 4.0, adopted by VZD's data-use rules, which ask
+    for a DESCRIPTION of the changes and no implied approval. Notice 42.
+  - **Riga municipality's layers:** CC BY 4.0. Its neighbourhoods "have no
+    administrative-boundary status". Notice 43.
+  - **Privacy (the terms are silent):** VID's own public search turns a
+    premises address into its holder. The owner's call: food dots show the
+    kind of place and the street address WITHOUT the unit number, and never
+    a name; the holder column is never read. 327 premises carry a unit.
+  - **Process slips:** two readers' tools saved files without approval: a
+    2013 trolleybus PDF in the session scratchpad, and VZD's open-data guide
+    in the main checkout's root, moved out by the Cleanup session. Neither is
+    used.
+- **Food service: 1,517 premises, 1,469 placed.**
+  - The register has 144,151 rows nationally. 16,847 are current at a
+    still-open place, and 5,358 of those are in Riga. An empty place-ended
+    date is two SPACES, and the first run read none as current.
+  - 2,436 rows are food-service types, with hotels dropped.
+  - De-duplicated to one per address and KIND: 763 cafés, 412 bars, 298
+    restaurants, 26 pizzerias and 18 canteens or bistros. The brief's "holder
+    × address" needs the holder, which is never read.
+  - Joined to the city's address points: 75.3% exact, 21.6% after dropping
+    the unit, 3.2% unplaced. The brief measured 96.2% on the same method.
+- **Shops and services: 5,261.**
+  - Class 1230 holds 7,169 premise groups. The staging session's published
+    name rules keep 5,216 shop names and 491 services: hair, beauty, repairs
+    and pawnshops, which the category's own reason ("a building register
+    cannot tell a hairdresser from a clothes shop") includes.
+  - The brief's 4,816 came from a later classification not in the rules
+    file.
+  - 5,673 of 5,707 placed at their building footprint (99.4%), and 412 in
+    degrading buildings dropped.
+  - Privacy check: 0 names, 0 contact details, 0 person-like names.
+- **Trams: Rīgas satiksme's seven routes, from its own GTFS.**
+  - **Placement.** 243 platforms make 127 places: two stop names are two
+    places each (Brīvības iela 1,641 m apart, Jūrmalas gatve 704 m).
+  - **One stop, two names.** Four pairs are one stop, each name served in
+    opposite directions under 60 m apart (Autoosta / Centrāltirgus, K.Barona
+    iela / Brīvības iela, the two Jelgavas iela names, Kurzemes prospekts /
+    Jūrmalas gatve). A measured rule, not a hand list, merged them, leaving
+    123 stations.
+  - **Thinning.** 108 after thinning; interchanges and ends are kept.
+  - **Feed defect.** `stop_times.txt` has eight fields under a seven-field
+    header, which silently shifted every column.
+  - **Colours.** The feed and OSM give every route #FF000C, and the
+    operator's only tram map is dated 2 September 2013, so the palette is
+    this project's (owner).
+  - **No gate 3.** The operator publishes no station counts outside the
+    feed.
+- **The Europe view keeps its zoom (owner's option 1).**
+  - Fitting Europe to Riga lowered its zoom one step, and nine label pairs
+    collided at every width, because the zoom is width-independent.
+  - `cities.REGION_ZOOM_WITHOUT` now fits Europe's zoom without Riga and
+    centres on all 16 cities, around western Germany.
+  - Macro labels PROBLEMS 0 over 10 regions; Dublin's pill is clipped 1.6 px
+    at phone width.
+  - Rejected: a separate Baltics region; re-laying all 16 labels; a zoom
+    that varies with width.
+- **Checks:** provenance all recorded, the inconsistency list 42 of 42,
+  scope 42, and label contrast in both themes. Page 42's text, the notices
+  and the vacancy disclosure were approved as drafted.
 
 ### 2026-09-24 - Fukuoka's address disclosure worded (owner), and the sampling lesson reaches premises-taxonomy
 

@@ -1,5 +1,21 @@
 # Riga — build brief
 
+> ✅ **BUILT 2026-09-24** (`pages/42_Riga_Heatmap.py`; 6,730 storefronts, 108 stations). What the
+> build measured differently from this brief:
+> - **Food 1,517 premises (1,469 placed, 96.8%)**, not 1,596: one per address and KIND (café, bar,
+>   restaurant...), because the holder the brief's "holder × address" needs is a column never read.
+>   An empty place-ended date is two spaces, not a blank.
+> - **Shops and services 5,707 named** by the published `pg_classify.py` rules (5,216 shop names
+>   plus 491 services, which the category's own reason includes), not 4,816 - that figure came
+>   from a later classification (`pg_1230_final.csv`) that is not in the rules file. 412 in
+>   degrading buildings dropped, 5,261 kept.
+> - **Stations: 123 places, 108 after thinning.** Two stop names are two places each (Brīvības
+>   iela 1.6 km apart, Jūrmalas gatve 704 m), and four places are one stop under two names (e.g.
+>   Autoosta / Centrāltirgus), merged by a measured rule. `stop_times.txt` has eight fields under a
+>   seven-field header.
+> - **Colours:** the operator's only tram map is dated 2013-09-02, so the palette is this
+>   project's (owner).
+
 **Written 2026-09-24 from three re-probes and the open gap's final probe**,
 all run that day (`DECISIONS.md`; scratch in `reprobes/riga/` and
 `gap_final/riga/`). Run `python scripts/brief_check.py riga` before writing

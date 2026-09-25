@@ -43,6 +43,13 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     Rotterdam covering `city-added` and `map-chrome` (both themes). **Passed
     and live 2026-09-24** (DECISIONS, "Rotterdam's deploy check passed").
 
+- [~] **🇱🇻 RIGA - built on `worktree-riga`, text approved (owner 2026-09-24): 6,730 storefronts,
+  108 stations.** Built before Taiwan to use the week's budget. Four licence reads, none
+  restrictive; project palette for the trams; food dots without unit numbers; Europe keeps its
+  zoom (owner's option 1). Page 42, notices 42 and 43.
+  - [ ] `deploy-verify` (city-added Riga + the Europe view), fetch, push, reboot, live check;
+    remove the worktree's junctions.
+
 - [ ] **NEXT BUILDS (owner, 2026-09-24): 🇳🇱 Rotterdam (✅ live 2026-09-24), 🇭🇰 Hong Kong (✅ live
   2026-09-24), then 🇱🇻 RIGA (owner, 2026-09-24 evening: a small build that fits the week's
   remaining budget; `docs/build_briefs/riga.md`, 4/4; its FIRST step is four licence reads), then

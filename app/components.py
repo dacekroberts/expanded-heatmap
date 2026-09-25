@@ -1003,6 +1003,32 @@ _NOTICES = [
      "Filtered and redrawn by this project; station rings and density figures are this "
      "project's own analysis.",
      False),
+    # VZD cadastre open data (CC BY 4.0, adopted by VZD's own data-use rules,
+    # read 2026-09-24): credit, licence link, a DESCRIPTION of the changes, and
+    # no implied VZD approval. Wording approved by the owner 2026-09-24.
+    ("VZD (Riga)",
+     "Riga's shops and services are from the State Land Service of Latvia's (Valsts zemes "
+     "dienests) Cadastre Information System open data — premise groups and the Riga cadastral "
+     "map — via data.gov.lv, licensed under "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Modified by this project: "
+     "premise groups of use class 1230 whose name reads as a shop or a service were selected, "
+     "placed at their building's footprint by cadastre number and reprojected; those in "
+     "buildings the city lists as degrading were removed; all are shown as one \"Shops and "
+     "services\" category and counted around tram stops. VZD has not approved these changes or "
+     "this map.",
+     False),
+    # Riga municipality's GEO RĪGA layers (CC BY 4.0, read 2026-09-24). The
+    # neighbourhoods "have no administrative-boundary status", so the merged
+    # outline is never called the city's boundary. Approved by the owner 2026-09-24.
+    ("Riga municipality (Riga)",
+     "Riga's address points, neighbourhood boundaries and list of degrading buildings are from "
+     "Rīgas valstspilsētas pašvaldība (Riga State City Municipality), GEO RĪGA, via data.gov.lv, "
+     "licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Modified by "
+     "this project: the address points place licensed food premises by address; the 58 "
+     "neighbourhoods are merged into one outline used to select stations, which is not Riga's "
+     "administrative boundary; the degrading-buildings list is used only to leave out shops in "
+     "those buildings. None of the three is shown. The municipality does not endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route
