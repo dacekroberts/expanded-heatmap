@@ -16,11 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**367 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**368 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Seoul's Step 0 completed: 17 registers, three buckets, coordinates from the register itself, four owner calls](#2026-09-24---seouls-step-0-completed-17-registers-three-buckets-coordinates-from-the-register-itself-four-owner-calls)
+- [Dark-mode line labels start from their line's own colour (owner)](#2026-09-24---dark-mode-line-labels-start-from-their-lines-own-colour-owner)
 - [Osaka's residual: the unlisted permit numbers are real permits, and a third of the gap is undetermined](#2026-09-24---osakas-residual-the-unlisted-permit-numbers-are-real-permits-and-a-third-of-the-gap-is-undetermined)
 - [The front page's credit: legible in light mode, opaque, linked to /copyright](#2026-09-24---the-front-pages-credit-legible-in-light-mode-opaque-linked-to-copyright)
 - [Chūō's and Shinjuku's personal-services lists: not open data, not used](#2026-09-24---chūōs-and-shinjukus-personal-services-lists-not-open-data-not-used)
@@ -469,6 +470,39 @@ onwards; the early ones are split by phase rather than by hour.
     continent-not-country call.
 - Files: `seoul.md`, `data_sources.md`, `city_master_list.md` and `PLAN.md`.
 
+### 2026-09-24 - Dark-mode line labels start from their line's own colour (owner)
+
+- **Found by Rotterdam's deploy check**, handed to Cleanup: different lines
+  shared one dark-mode label colour. Paris 1, 9 and 10 were all `#ffff00`.
+- **Measured before choosing.**
+  - **The old rule**: each label was its colour x1.8 per channel, clipped at
+    255. That merged 21 pairs of different lines in 10 cities.
+  - **Worse, it changed hue**: orange lines got yellow labels (Washington's,
+    Boston's and San Diego's Orange Lines, Marseille's T1, Rome's Metro A). A
+    label's median distance from its own line's colour was CIE76 35.7.
+- **Owner's choice, of two measured options**: a label is its line's agency
+  colour, lightened by the smallest HSL step that reaches 4.5:1 on the dark
+  page only when it needs to. The median label is now its line's colour
+  exactly (distance 0.0).
+  - **The option not taken**: keep the x1.8 shade and separate only the
+    collided pairs. It changes 32 labels, but orange stays yellow.
+- **Lightening alone was not enough.** It brings dark colours together: 10
+  new pairs among navies and purples (Rotterdam's Trams 1 and 11, Boston's Red
+  Line and Mattapan).
+  - **The fix**: `linecolour.dark_label_colours()` chooses a city's labels
+    together and moves the originally lighter one of any too-close pair
+    lighter.
+  - **Result**: 0 pairs left.
+  - **Colours an agency made alike stay alike.**
+- **New check**: `check_map_markup.py` part C refuses two different lines
+  sharing a dark-mode label colour. Positive control: 21 on the committed maps
+  before the change, the same 21 the probe found. After: 0.
+- **All 40 maps re-rendered.** With folium's random ids masked, 37 differ from
+  the committed maps only in `--dm-label` and 3 are identical.
+  - `drift_check --jobs 4`: no data drift, every baseline figure unchanged.
+  - Also passing: `check_render_current` (40), `check_provenance --strict`,
+    and `check_map_markup` A-C.
+  - Label positions are untouched, since only a colour changed.
 ### 2026-09-24 - Osaka's residual: the unlisted permit numbers are real permits, and a third of the gap is undetermined
 
 - **Probed Osaka's 20–35% of permit numbers that no year-end list shows,

@@ -25,7 +25,7 @@ import numpy as np
 import pandas as pd
 from folium.plugins import HeatMap, FastMarkerCluster
 
-from pipeline.linecolour import check_line_colours, label_colours
+from pipeline.linecolour import check_line_colours, dark_label_colours, label_colours
 from pipeline.taxonomies import CATEGORY_BUCKETS, load_taxonomy_module
 from pipeline.theme import AMBIENT_THEME_JS, DARK, FONT_STACK, LIGHT, css_vars, rgba
 
@@ -1378,7 +1378,7 @@ def _clearance(tip):
 LIGHT_LABEL_HALO = "#ffffff"
 
 
-def add_line_label(feature_group, tip, label, color):
+def add_line_label(feature_group, tip, label, color, dark=None):
     """A permanent, always-visible line-name label at the tail end of the line
     - NOT a hover tooltip. Use the line's real public-facing name.
 
@@ -1392,9 +1392,10 @@ def add_line_label(feature_group, tip, label, color):
     # Both themes read at 4.5:1: the light theme's colour and halo (a yellow
     # keeps its colour on a dark halo rather than turning olive), and the dark
     # theme's colour, applied by the .dark-base rule - see
-    # pipeline/linecolour.py, "LINE LABELS".
+    # pipeline/linecolour.py, "LINE LABELS". `dark` comes from the city-level
+    # dark_label_colours(), which keeps two lines' labels apart.
     light, halo, dark = label_colours(color, light_halo=LIGHT_LABEL_HALO,
-                                      dark_halo=DARK["page"])
+                                      dark_halo=DARK["page"], dark=dark)
     # zIndexOffset lifts the label above the business-cluster badges: without
     # it a large downtown cluster is drawn on top of the label and hides it.
     folium.Marker(
@@ -2011,13 +2012,17 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
 
     # Transit lines: always-on context, permanent label + legend entry each
     # (label tips were worked out above, before the map was created).
+    # Dark-theme label colours are chosen for the whole city at once, so two
+    # different lines never share one - see linecolour.dark_label_colours.
+    dark_labels = dark_label_colours({k: v[1] for k, v in lines.items()},
+                                     dark_halo=DARK["page"], city=city_name)
     for key, (segments, color, label, _end) in lines.items():
         rail_layer = folium.FeatureGroup(name=f"{system_name}: {label}", show=True, control=False)
         # One polyline per alignment; a branching trunk keeps one label and one
         # legend entry (see load_line_shapes).
         for segment in segments:
             folium.PolyLine(segment, color=color, weight=4, opacity=0.85).add_to(rail_layer)
-        add_line_label(rail_layer, tips[key], label, color)
+        add_line_label(rail_layer, tips[key], label, color, dark=dark_labels[key])
         rail_layer.add_to(m)
 
     # Category grouping via the city's own taxonomy, never a hardcoded one.
