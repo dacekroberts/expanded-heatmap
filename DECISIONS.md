@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**363 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**364 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Osaka's residual: the unlisted permit numbers are real permits, and a third of the gap is undetermined](#2026-09-24---osakas-residual-the-unlisted-permit-numbers-are-real-permits-and-a-third-of-the-gap-is-undetermined)
 - [Chūō's and Shinjuku's personal-services lists: not open data, not used](#2026-09-24---chūōs-and-shinjukus-personal-services-lists-not-open-data-not-used)
 - [Meguro's 52%: its lists hold first permits only](#2026-09-24---meguros-52-its-lists-hold-first-permits-only)
 - [Tokyo ships all 8 wards, disclosed; the COVID lists are not used; MHLW's slice is added (owner)](#2026-09-24---tokyo-ships-all-8-wards-disclosed-the-covid-lists-are-not-used-mhlws-slice-is-added-owner)
@@ -405,6 +406,41 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Osaka's residual: the unlisted permit numbers are real permits, and a third of the gap is undetermined
+
+- **Probed Osaka's 20–35% of permit numbers that no year-end list shows,
+  using e-Stat's per-city flow tables.** Sixteen CSVs were fetched:
+  第1表-2 and 第3表-2 for FY2023–24, 第E1表 and 第E3表 for FY2020–22, and
+  第2表 and 第4表.
+  - **Not withdrawn numbers.** Osaka's reported issued count matches each
+    year's number sequence to within 3%, FY2020–FY2024.
+  - **Not closed in the count.** Reported revised-law closures match the
+    permits visibly leaving the list (FY2024: 2,674 against 2,565).
+- **So the restaurant gap at FY2024-end (24,976) has two parts.**
+  - **Old law, 16,260: almost all dead.** The list already sits below the
+    no-closure ceiling.
+  - **Revised law, about 8,700–9,300: counted as live, never listed, and
+    undetermined.**
+    - About a third comes in runs of consecutive numbers. That is the shape of
+      department-store event stalls valid for days, which expire with no
+      closure filed.
+    - The rest is scattered, rising from 15% of FY2020's numbers to 32% of
+      FY2024's.
+- **This supersedes part of the earlier Osaka entry.** That entry read the
+  whole gap as mainly an inflated count. The draft page wording "not to
+  restaurants missing from the list" is now stronger than the evidence, and
+  it goes to the owner. It was not rewritten here, because page wording is
+  the owner's call.
+- **The build is still not blocked.** Placement is unaffected, and the list
+  is still what the city publishes as valid.
+- **Limits.**
+  - The per-city flow tables cover all permit types combined. MHLW publishes
+    the split by type only nationally.
+  - Kobe and Sapporo are the controls. Kobe lists 88–99% of each year's
+    permits. Sapporo lists 56–64% but books the rest as closures.
+- Recorded in `osaka.md`, `city_master_list.md`, `japan_ward_table.py`
+  (regenerated `japan_city_list.md`) and `PLAN.md`.
 
 ### 2026-09-24 - Chūō's and Shinjuku's personal-services lists: not open data, not used
 

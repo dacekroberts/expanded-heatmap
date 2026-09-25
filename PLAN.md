@@ -801,9 +801,13 @@ brief names.
   about 12,000. The list is even across wards against the Economic Census,
   and every file since 2023 reads 69–76%. The build is NOT blocked. The page
   carries the disclosure drafted in `osaka.md`.
-- [ ] Optional, and ours to do: e-Stat 衛生行政報告例 tables 1-2 and 3-2
-  (permits issued and closed per city) would settle Osaka's residual: 20–35%
-  of each year's permit numbers are unexplained.
+- [x] **Osaka's residual probed (2026-09-24, e-Stat flow tables).** The
+  unlisted permit numbers are real permits, still in the count. About
+  two-thirds of the gap is dead old-law records. The other third, about 9,000
+  revised-law restaurants the city counts but never lists, is undetermined.
+  Some of it has the shape of short-lived event stalls. Build not blocked.
+- [ ] **Owner: Osaka's page wording.** The draft's "not to restaurants
+  missing from the list" is now stronger than the evidence (`osaka.md`).
 - [ ] **Fukuoka** — agree the wording that discloses the ~20% of restaurants
   with no published address. BODIK is flaky, so `fetch_sources.py` retries.
 - [x] **No pre-build items**: Seoul (its brief is deliberately partial, and
