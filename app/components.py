@@ -173,6 +173,23 @@ _MACRO_CONTROLS_CSS = """
     min-height: 0; padding: 0 5px; border-radius: 3px; margin: 0 10px 10px 0; }
 [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib.mapboxgl-compact
     .mapboxgl-ctrl-attrib-inner { display: block !important; }
+/* THE CREDIT MUST SIT ABOVE THE CITY DOTS, and deck.gl stacks it below them.
+   deck.gl wraps the whole Mapbox basemap - its controls and credit included -
+   in a `z-index: -1` layer beneath its own drawing canvas, so any dot or name
+   pill could paint over "(c) OpenStreetMap contributors" wherever a city
+   landed. Rotterdam's deploy check saw a dot there at 800x700 (2026-09-24);
+   scripts/check_macro_attribution.mjs found the canvas above the credit at
+   every point at 375, 768 and 1200 px.
+
+   A child cannot rise out of a z-index:-1 parent, so the wrapper is flattened
+   and the three layers ordered explicitly inside deck.gl's own wrapper:
+   basemap (auto) < deck.gl canvas (1) < Mapbox's controls (2, their default).
+   Found by the element it wraps, not by its position, so a deck.gl release
+   that reorders the wrapper's children does not silently undo this. */
+[data-testid="stDeckGlJsonChart"] div:has(> .mapboxgl-map) { z-index: auto !important; }
+[data-testid="stDeckGlJsonChart"] #deckgl-overlay { z-index: 1; }
+[data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-bottom-right,
+[data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-top-right { z-index: 2; }
 /* The (i) toggle itself, and the pseudo-element some versions draw it with. */
 [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib-button,
 [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib.mapboxgl-compact::after {

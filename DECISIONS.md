@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**356 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**357 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [The front page's OSM credit is lifted above the city dots](#2026-09-24---the-front-pages-osm-credit-is-lifted-above-the-city-dots)
 - [Rotterdam's deploy check passed, with the labels in both themes and the Global View button; three findings recorded, none blocking](#2026-09-24---rotterdams-deploy-check-passed-with-the-labels-in-both-themes-and-the-global-view-button-three-findings-recorded-none-blocking)
 - [Four Tokyo ward requests drafted; none sent](#2026-09-24---four-tokyo-ward-requests-drafted-none-sent)
 - [Every Japanese city against MHLW's official count: complete except Osaka (67%) and Tokyo](#2026-09-24---every-japanese-city-against-mhlws-official-count-complete-except-osaka-67-and-tokyo)
@@ -398,6 +399,37 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - The front page's OSM credit is lifted above the city dots
+
+- **Found by Rotterdam's deploy check**, handed to Cleanup: a city dot sat in
+  the macro map's credit strip at 800x700, still legible.
+- **The cause was structural, not that one dot.**
+  - deck.gl wraps the whole Mapbox basemap, its credit included, in a
+    `z-index: -1` layer beneath its own drawing canvas.
+  - So any dot or name pill could paint over "© OpenStreetMap contributors"
+    wherever a city landed after a pan or a region switch.
+  - CLAUDE.md makes that credit's visibility a fact about the render, so this
+    was a live gap in the ODbL invariant.
+- **Measured before fixing**, with `scripts/check_macro_attribution.mjs`
+  (new). At 375, 768 and 1200 px the deck.gl canvas was above the credit at
+  all 5 points along it.
+- **Fixed in `components._MACRO_CONTROLS_CSS`.**
+  - The -1 wrapper is flattened, found by the element it wraps (`:has(>
+    .mapboxgl-map)`), not by its position.
+  - The layers are then ordered basemap < deck.gl canvas (1) < Mapbox
+    controls (2).
+  - After: the credit is on top at every point at all three widths. Dots and
+    pills still draw above the basemap, and a click on Chicago's label still
+    opens Chicago.
+- **The check had to be written twice, and both traps are recorded in it.**
+  - `document.elementFromPoint` skips deck.gl's `pointer-events: none` canvas,
+    so it would have passed the broken page.
+  - deck.gl's transparent tooltip container covers the whole map and paints
+    nothing, so counting it failed the fixed page. The check now reads the
+    full stack and counts only what can paint.
+- **A Streamlit server caches an imported module**, so the first run after
+  the edit still measured the old CSS. Restart it before re-measuring.
 
 ### 2026-09-24 - Rotterdam's deploy check passed, with the labels in both themes and the Global View button; three findings recorded, none blocking
 
