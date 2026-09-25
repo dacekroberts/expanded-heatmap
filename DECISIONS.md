@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**372 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**373 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Hong Kong is live; the cjk-text skill written for Taiwan, Seoul and Japan; one stale claim dropped (owner)](#2026-09-24---hong-kong-is-live-the-cjk-text-skill-written-for-taiwan-seoul-and-japan-one-stale-claim-dropped-owner)
 - [Hong Kong's deploy check: four of six passed first time; two defects fixed, and the map re-rendered on master's per-city dark-mode colours](#2026-09-24---hong-kongs-deploy-check-four-of-six-passed-first-time-two-defects-fixed-and-the-map-re-rendered-on-masters-per-city-dark-mode-colours)
 - [Nine stale "only city" claims corrected on the site (owner-approved wording)](#2026-09-24---nine-stale-only-city-claims-corrected-on-the-site-owner-approved-wording)
 - [Hong Kong built: 21,135 storefronts at FEHD's own points, 141 stations; no geocoder after all](#2026-09-24---hong-kong-built-21135-storefronts-at-fehds-own-points-141-stations-no-geocoder-after-all)
@@ -414,6 +415,38 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Hong Kong is live; the cjk-text skill written for Taiwan, Seoul and Japan; one stale claim dropped (owner)
+
+- **Live-checked after the owner's reboot (master 480e1dc).**
+  - Page 41 renders with no errors. Its snapshot caption carries all three
+    dates, and notice 41 is displayed.
+  - The map shows all nine line labels, each with `--dm-label`. They are
+    correct in both themes on the real toggle, with no filter.
+  - The layer menu reads Food shops (3,408), Food service (15,833) and
+    Bathhouses (34).
+  - "← Global View" is in place, and the Cities menu shows 40 cities with no
+    Hong Kong, "Global View" or "All cities" item.
+  - The Overview lists "East Asia (1)", and choosing it reads "Showing 1 city
+    in East Asia".
+- **"as they are in every other city" dropped from page 41 (owner),** and the
+  same clause dropped from Hong Kong's section of
+  `docs/excluded_categories.md`. It was true, but it was the claim shape
+  `check_stale_claims --only E` exists for, since the next city to land can
+  falsify it. The edit is page-only, so no reboot is needed.
+- **`.claude/skills/cjk-text/` written (owner),** from what Hong Kong met, for
+  the Taiwanese cities, Seoul and Japan. Each item is labelled MEASURED or TO
+  CHECK:
+  - Windows console and BOM encodings;
+  - bilingual OSM names and matching renames by ID;
+  - choosing a language edition;
+  - NFKC before every text key, with CJK regex ranges that reach the
+    supplementary planes;
+  - the privacy heuristic's blindness to CJK names;
+  - the Japanese-first font order, handed to the Cleanup session as a
+    per-map-language fix.
+  - `CLAUDE.md` points to it beside `address-join`, which now also names
+    Hong Kong's find.
 
 ### 2026-09-24 - Hong Kong's deploy check: four of six passed first time; two defects fixed, and the map re-rendered on master's per-city dark-mode colours
 

@@ -51,12 +51,15 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     the `rotterdam-*-tmp` launch entries and the worktree's data junctions.
     Shipped with it: the "All cities" button renamed "Global View" (owner).
 
-- [~] **🇭🇰 HONG KONG - built on `worktree-hong-kong`, text approved (owner 2026-09-24):
-  21,135 storefronts, 141 stations.** Built ahead of Taiwan so the week's budget held a
-  whole city. FEHD's registers at FEHD's own CSDI points (the ALS geocode dropped, owner);
-  the East Asia region; page 41, notice 41.
-  - [ ] ONE `deploy-verify` (city-added Hong Kong), fetch, push, reboot (cities.py),
+- [x] **🇭🇰 HONG KONG - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24** (master 480e1dc),
+  text approved by the owner: **21,135 storefronts, 141 stations.** Built ahead of Taiwan so
+  the week's budget held a whole city. FEHD's registers at FEHD's own CSDI points (the ALS
+  geocode dropped, owner); the East Asia region; page 41, notice 41.
+  - [x] ONE `deploy-verify` (city-added Hong Kong), fetch, push, reboot (cities.py),
     live check; remove the `hongkong-*-tmp` launch entries and the worktree's junctions.
+  - [x] `cjk-text` skill written for Taiwan, Seoul and Japan (owner).
+  - [ ] **Cleanup's lane:** CJK font order per map language (`pipeline/theme.py`) - Chinese
+    renders in Japanese glyph forms today; handed over 2026-09-24.
 
 - [ ] **NEXT BUILDS (owner, 2026-09-24): 🇳🇱 Rotterdam (✅ live 2026-09-24), 🇭🇰 Hong Kong, then
   🇹🇼 Taiwan** - Rotterdam's deploy check also verified the label-contrast work above. Rotterdam is
