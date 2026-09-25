@@ -840,6 +840,26 @@ brief names.
       the limit). **Change `scripts/check_personal_exposure.py` in the same commit**: it
       parses those `var data` arrays out of the HTML. Apply to every map, not just the four
       failing ones - Rio is within ~20% of the limit and older phones may sit lower.
+    - [ ] **Hard threshold test - find the EXACT limit (owner, 2026-09-25), before choosing
+      any cap.** The probe above only brackets it (100,000 compiles, 131,000 does not).
+      Bisect to the exact element count, as a probe artifact the owner opens on the phone:
+      - Try one self-bisecting page first (the page builds each literal as text and runs it
+        as an injected `<script>`, halving the gap until it converges). If the artifact's
+        CSP refuses injected scripts, fall back to static ladders - coarse (100k-131k in 4k
+        steps), then fine around the break - split across pages to stay under 16 MB.
+      - **Test both shapes the maps ship**: heat triples `[lat, lon, w]` AND pin rows
+        `[lat, lon, "name", cat, station, band]` - the limit may be per element count or
+        per nesting/size, and the answer decides what the renderer caps.
+      - **Test Safari itself, not only the Claude app.** The 2026-09-25 probe ran inside
+        the Claude iOS app's web view (UA ends `Claude/1.260916.19`); Safari's stack may
+        differ. Open the artifact link in Safari too.
+      - Find the `JSON.parse` ceiling as well (e.g. 250k, 500k, 1M points), so the fix is
+        known to have headroom rather than assumed to.
+      - Record each result in DECISIONS: device, iOS version, browser, shape, exact count.
+        Repeat on any other phone available (Android, an older iPhone).
+      - **Turn the answer into a check, not a note**: a `scripts/check_*.py` that refuses
+        any committed map with an inline array literal above a cap set well under the
+        measured limit, so a future city cannot reintroduce it.
     - [ ] Re-render every city, drift baseline, `check_render_current.py`; then the
       browser tests below on the iPhone. If the full maps load, mobile mode may be
       unnecessary - decide then whether to keep it; the pre-computed-cluster renderer
