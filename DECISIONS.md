@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**378 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**379 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Riga builds next, before Taiwan (owner), and its brief is written](#2026-09-24---riga-builds-next-before-taiwan-owner-and-its-brief-is-written)
 - [The open gap emptied: a final re-probe of its last eight, a verdict on each (owner)](#2026-09-24---the-open-gap-emptied-a-final-re-probe-of-its-last-eight-a-verdict-on-each-owner)
 - [The city menu groups by region, then country (owner)](#2026-09-24---the-city-menu-groups-by-region-then-country-owner)
 - [The cross-city inconsistency list is kept current by a check (owner)](#2026-09-24---the-cross-city-inconsistency-list-is-kept-current-by-a-check-owner)
@@ -420,6 +421,35 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Riga builds next, before Taiwan (owner), and its brief is written
+
+- **The owner moved Riga ahead of Taiwan.** The owner asked "Wouldn't riga
+  now be a cheaper build that it's in A solo?" and confirmed the
+  recommendation.
+  - **Why Riga is cheaper**: small data (about 6,400 premises, 125 tram
+    stations, already cached), and Amsterdam and Rotterdam are a near-exact
+    template.
+  - **Why the budget decides it**: the weekly limit stood at 87% with a
+    Sunday reset. Taiwan's first build costs more but unlocks two cheap
+    followers, so its three fit better together after the reset.
+  - **The rejected alternative**: Taiwan first, as ordered earlier the same
+    day.
+- **A mistake was caught while answering: Riga went into Band A without its
+  licence reads.** No Riga source had a `data_sources.md` row, although Band
+  A's caption requires "licence read". The row was corrected, and the brief
+  makes four `licence-read` runs the build's first step. If any comes back
+  restrictive, Taiwan is the fallback.
+- **`docs/build_briefs/riga.md` written, 4/4 checks.** It records:
+  - the excise register's never-read columns (`Nodoklu_maksatajs`,
+    `NMR_kods`);
+  - the hotel keywords the earlier food classifier matched, to be dropped;
+  - the single red every tram route carries in OSM and the GTFS;
+  - OSM's stray route 8a, not to be drawn;
+  - the vacancy disclosure's two dated figures and the municipality's own
+    73% headline.
+- The build was handed to the main session by message. Files:
+  `riga.md`, `PLAN.md` and `city_master_list.md`.
 
 ### 2026-09-24 - The open gap emptied: a final re-probe of its last eight, a verdict on each (owner)
 

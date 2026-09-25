@@ -222,8 +222,8 @@ two-layer shape:
 - **The page carries the scoped vacancy disclosure**: 20.4% of 2,324 centre premises (2024), 15%
   in the Old Town (2025), and not measured elsewhere, about 62% of in-ring shops. Quote the
   municipal report's own definitions: its headline is 73% occupied.
-- **No brief yet.** Its evidence is its row in the open-gap table below and `DECISIONS.md`
-  2026-09-24.
+- ✅ **Brief written 2026-09-24**: `docs/build_briefs/riga.md` (4/4). **Builds next, before
+  Taiwan** (owner's call, 2026-09-24): a small build that fits the week's remaining budget.
 - ⚠️ **Its licences are NOT yet read**: the excise register and the Rīgas satiksme GTFS (both
   declared CC0 on `data.gov.lv`), the VZD cadastre (declared CC BY 4.0), and the address points.
   None has a row in `docs/data_sources.md`, so Band A's "licence read" condition is not met
@@ -232,7 +232,7 @@ two-layer shape:
 **The ten:** Seoul · ~~Hong Kong~~ ✅ **built 2026-09-24** — **each with a brief** in `docs/build_briefs/` — ✅ ~~nine
 Brazilian cities~~ **built 2026-09-24** (below) — **three Taiwanese cities**: Taipei (Regional) (6/6) ·
 Taichung (3/3) · Taoyuan (3/3) — ▲ **and seven more on 2026-09-24**: **six Japanese cities**, Tokyo (8 wards) (7/7) ·
-Osaka · Kobe · Sapporo · Fukuoka (4/4 each) · Kyoto (8/8), and ~~Rotterdam~~ ✅ **built 2026-09-24**. ✅ **Every Band A city has a brief except Riga (above, 2026-09-24)**, and
+Osaka · Kobe · Sapporo · Fukuoka (4/4 each) · Kyoto (8/8), and ~~Rotterdam~~ ✅ **built 2026-09-24**. ✅ **Every Band A city has a brief** (Riga's written 2026-09-24), and
 every brief's checks pass live *(Fukuoka's BODIK host is flaky — re-run before correcting)*.
 
 ### ▲▲ Taiwan — three cities, one tax register, a door-plate JOIN (2026-09-23)

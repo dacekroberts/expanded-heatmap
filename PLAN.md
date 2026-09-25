@@ -61,8 +61,10 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - [ ] **Cleanup's lane:** CJK font order per map language (`pipeline/theme.py`) - Chinese
     renders in Japanese glyph forms today; handed over 2026-09-24.
 
-- [ ] **NEXT BUILDS (owner, 2026-09-24): 🇳🇱 Rotterdam (✅ live 2026-09-24), 🇭🇰 Hong Kong, then
-  🇹🇼 Taiwan** - Rotterdam's deploy check also verified the label-contrast work above. Rotterdam is
+- [ ] **NEXT BUILDS (owner, 2026-09-24): 🇳🇱 Rotterdam (✅ live 2026-09-24), 🇭🇰 Hong Kong (✅ live
+  2026-09-24), then 🇱🇻 RIGA (owner, 2026-09-24 evening: a small build that fits the week's
+  remaining budget; `docs/build_briefs/riga.md`, 4/4; its FIRST step is four licence reads), then
+  🇹🇼 Taiwan after the weekly reset** - Rotterdam's deploy check also verified the label-contrast work above. Rotterdam is
   Amsterdam's shape (permit-notice food layer rebuilt from the Gemeenteblad,
   BAG shop units, CBS vacancy) - `docs/build_briefs/rotterdam.md`. Taiwan:
   Taipei (Regional), Taichung, Taoyuan; write a `taiwan-city` skill after the
@@ -849,10 +851,12 @@ brief names.
   cities (São Paulo is already with main), the three Taiwanese cities, and
   Rotterdam (its build-time calls are in its brief).
 
-- [ ] **Riga (Band A from 2026-09-24)**: first the licence reads, which
-  were never run: the excise register, the Rīgas satiksme GTFS, the VZD
-  cadastre and the address points. Then write `docs/build_briefs/riga.md`
-  from its master-list row and the final probe, with checks. The owner's calls
+- [x] **Riga's brief written** (2026-09-24, `docs/build_briefs/riga.md`,
+  4/4 checks).
+- [ ] **Riga build (next, owner 2026-09-24).** First the four licence reads,
+  never run before: the excise register, the Rīgas satiksme GTFS, the VZD
+  cadastre and the city's address points. Then build on Amsterdam's and
+  Rotterdam's two-layer pattern. The owner's calls
   are made: the scoped vacancy disclosure, all 7 tram routes (colours from
   Rīgas satiksme's route maps), and no suburban rail.
 
