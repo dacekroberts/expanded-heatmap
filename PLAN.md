@@ -821,6 +821,29 @@ brief names.
   - **Seoul's mobile mode does NOT work on the owner's iPhone 16 Pro (Safari)** - blank even
     with the toggle on, though Chrome phone emulation loaded it (~7 s, 90 MB). Emulation is
     not evidence; the fix must thin the HEAT layer's ~224k points too.
+  - **CAUSE FOUND AND CONFIRMED ON THE OWNER'S iPHONE, 2026-09-25 - it is not memory or file
+    size. START HERE.** Mobile mode went to Mexico City, São Paulo and Taipei too (ee865ea),
+    and none of the light maps loaded on the iPhone, in Safari or Brave, even Mexico City's at
+    3.9 MB, while Paris's full 9.4 MB map loads. What separates them is the size of the
+    largest single inline array literal: every failing map has an `L.heatLayer([...])` of
+    >= 133,335 points (Mexico City 133,362, Taipei 133,335, São Paulo 219,578, Seoul
+    224,381), every loading map <= 106,652 (Rio 106,652, Rome 98,897, Paris 87,164). A
+    phone probe with no map (claude.ai/artifact/Ru5SxsQYBNeZseEwpx143V) confirmed it:
+    WebKit compiled a 100,000-point literal, and 131,000, 131,200 and 224,381 each threw
+    `RangeError: Maximum call stack size exceeded` - while `JSON.parse` of the same 224,381
+    points as a string loaded. So the limit on that device lies between 106,652 and
+    131,000 elements per literal. **Every iOS browser is WebKit**, so Chrome and Firefox
+    on iPhone will fail the same way.
+    - [ ] **The fix: emit big arrays as `JSON.parse('...')`, not literals** - the heat data
+      (`HeatMap(...)` in `render_heatmap`, both layers) AND the pin data (`add_pin_layer`'s
+      `var data`, one per category - a full map fails the same way once one category passes
+      the limit). **Change `scripts/check_personal_exposure.py` in the same commit**: it
+      parses those `var data` arrays out of the HTML. Apply to every map, not just the four
+      failing ones - Rio is within ~20% of the limit and older phones may sit lower.
+    - [ ] Re-render every city, drift baseline, `check_render_current.py`; then the
+      browser tests below on the iPhone. If the full maps load, mobile mode may be
+      unnecessary - decide then whether to keep it; the pre-computed-cluster renderer
+      above becomes a speed question, not a blank-map fix.
   - **Browser tests before the fix ships (owner, 2026-09-25)** - for Seoul (full and light),
     Taipei (Regional), Mexico City, São Paulo and Paris (the control that loads), record
     loads / slow (seconds) / blank on each:
