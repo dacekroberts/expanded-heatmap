@@ -768,11 +768,14 @@ brief names.
     衛生行政報告例, FY2024, old law + revised law): Kobe 101%, Sapporo 100%,
     Fukuoka 101%, Kyoto 93%, Hiroshima 99%, Sendai 101%. These lists are
     complete. `docs/japan_city_list.md` now measures every city this way.
-- [ ] ⚠️ **Osaka, BEFORE its build (it builds first): the list holds only 67%
-  of the official restaurant count** (54,289 of 81,418). It is not a reform
-  split. A probe is finding the cause: opt-outs, a missing health office,
-  excluded temporary permits, or a second list. Until then the page must
-  not call Osaka's list complete.
+- [x] **Osaka's 67% probed (2026-09-24): the official count is most likely
+  inflated, not the list short.** Its old-law count exceeds what can exist by
+  about 12,000. The list is even across wards against the Economic Census,
+  and every file since 2023 reads 69–76%. The build is NOT blocked. The page
+  carries the disclosure drafted in `osaka.md`.
+- [ ] Optional, and ours to do: e-Stat 衛生行政報告例 tables 1-2 and 3-2
+  (permits issued and closed per city) would settle Osaka's residual: 20–35%
+  of each year's permit numbers are unexplained.
 - [ ] **Fukuoka** — agree the wording that discloses the ~20% of restaurants
   with no published address. BODIK is flaky, so `fetch_sources.py` retries.
 - [x] **No pre-build items**: Seoul (its brief is deliberately partial, and

@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**357 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**358 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Osaka's 67%: the official count is most likely inflated, not the list short](#2026-09-24---osakas-67-the-official-count-is-most-likely-inflated-not-the-list-short)
 - [Agency contact is the last resort: the Tokyo requests are parked (owner)](#2026-09-24---agency-contact-is-the-last-resort-the-tokyo-requests-are-parked-owner)
 - [Rotterdam's deploy check passed, with the labels in both themes and the Global View button; three findings recorded, none blocking](#2026-09-24---rotterdams-deploy-check-passed-with-the-labels-in-both-themes-and-the-global-view-button-three-findings-recorded-none-blocking)
 - [Four Tokyo ward requests drafted; none sent](#2026-09-24---four-tokyo-ward-requests-drafted-none-sent)
@@ -399,6 +400,39 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Osaka's 67%: the official count is most likely inflated, not the list short
+
+- **Probed why Osaka's list holds only 67% of the official restaurant
+  count.**
+- **Four possible causes were ruled out:** the file's date, a missing ward
+  or office, temporary or event permits, and a second list.
+  - Every quarterly file since 2023 reads 69–76% of the matching year-end
+    count, with all 24 wards present.
+  - Events file notifications, which carry no permit, and stalls are in the
+    list.
+  - No other list is published.
+- **The old-law count exceeds what can exist.** The city's own mid-2021
+  old-law register caps the permits that could still be valid, even assuming
+  no closures. The reported counts sit above that cap by **21,602, 10,308 and
+  12,159** at the FY2022–FY2024 year-ends. FY2023's count fell by 21,595
+  where at most 10,301 could expire.
+- **A third count agrees.** Against the 2021 Economic Census, the list is
+  even across the five health offices, while the official count is not.
+- **Decided: the build is not blocked.** The page discloses the gap with the
+  wording drafted in `osaka.md`.
+  - **The best-supported reading**: Osaka's national count includes expired
+    or closed permits, cleared unevenly by office.
+  - **It is labelled a hypothesis**: the city has not confirmed it, and
+    contacting the city is the last resort.
+  - **The residual** (20–35% of each year's permit numbers never seen) could
+    be settled from e-Stat's per-city issued and closed tables, an optional
+    step we can take ourselves.
+- **What this means for the official-count method**: it is a strong check,
+  not an infallible one. An official figure is itself a record-keeping
+  output, and a list can be more accurate than the statistic it is measured
+  against. When a list falls short, look for evidence of a stale count before
+  concluding that premises are missing.
 
 ### 2026-09-24 - Agency contact is the last resort: the Tokyo requests are parked (owner)
 

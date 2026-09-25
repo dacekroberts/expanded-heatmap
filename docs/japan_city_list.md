@@ -10,7 +10,7 @@
 
 | City | Band | Wards | Food service | Food retail | Personal services | Of the official count | Placed at block | Stations | Order / status |
 |---|---|---|---|---|---|---|---|---|---|
-| **Osaka** | 🟢 A | 24 | **52,184** | 7,928 | 15,766 | ⚠️ **67%** of 81,418 | **99.1%** | 214 | Builds 1st |
+| **Osaka** | 🟢 A | 24 | **52,184** | 7,928 | 15,766 | ⚠️ **67%** of 81,418 | **99.1%** | 214 | Builds 1st. The official count is most likely inflated by expired or closed permits (its old-law count exceeds what can exist), not the list short. See osaka.md |
 | **Kobe** | 🟢 A | 9 | **19,707** | 3,820 | 4,993 | ✅ **101%** of 21,554 | **97.3%** | 121 | 2nd |
 | **Sapporo** | 🟢 A | 10 | **19,883** | 3,358 | 5,993 | ✅ **100%** of 20,484 | **86.0%** | 93 | 3rd. Grid addresses resolve to the 条丁目 block, about 100 m |
 | **Fukuoka** | 🟢 A | 7 | **18,330** | 9,070 | 5,842 | ✅ **101%** of 25,505 | **97.6%** | 71 | 4th. Includes MHLW's addressed rows; about 20% of restaurants withhold their address |
