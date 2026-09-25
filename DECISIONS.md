@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**388 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**389 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-25**
 
+- [Taoyuan built on the same branch: 45,014 storefronts, 15 stations; notice 46 and page 45 approved by the owner, and Taiwan's step 2 made shared](#2026-09-25---taoyuan-built-on-the-same-branch-45014-storefronts-15-stations-notice-46-and-page-45-approved-by-the-owner-and-taiwans-step-2-made-shared)
 - [Taichung built on `worktree-taichung`: Taiwan's first city, 66,115 storefronts, 18 stations; notices 44 and 45 and page 44 approved by the owner](#2026-09-25---taichung-built-on-worktree-taichung-taiwans-first-city-66115-storefronts-18-stations-notices-44-and-45-and-page-44-approved-by-the-owner)
 - [Seoul built on `worktree-seoul`: 239,410 storefronts, 308 stations; page 43 and notice 18 approved by the owner](#2026-09-25---seoul-built-on-worktree-seoul-239410-storefronts-308-stations-page-43-and-notice-18-approved-by-the-owner)
 
@@ -433,6 +434,68 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-25 - Taoyuan built on the same branch: 45,014 storefronts, 15 stations; notice 46 and page 45 approved by the owner, and Taiwan's step 2 made shared
+
+- **Step 2 is now one shared module, `pipeline/countries/taiwan_step2.py`,
+  and Taichung's output was byte-identical after the move.** The 66,115-row
+  file compared equal with `cmp`, both after the move and after the step
+  learned to reproject a TWD97-only door-plate file (`PLATE_CRS`). Each
+  city's step 2 is three lines. The alternative, copying Taichung's step 2
+  into each city, was rejected: that is how three copies of one rule drift.
+- **Taoyuan's join: 93.6% of 48,111 rows placed, against the brief's 94.0%.**
+  - The August 2026 door-plate edition matched the brief's 94,461,884 bytes.
+  - 11,301 street/number keys occur in more than one district, the same trap
+    as Taichung's. All 13 districts mapped at 99%+.
+  - 1,177 office-like company head-office rows were dropped under the owner's
+    rule.
+  - 7,230 unmarked sole proprietors are shown by their industry.
+  - The privacy check's Taiwan pass reports 0 unmarked names shown.
+- **Stations: the national 捷運車站 layer, whose own ADDRESS says which city
+  each station is in.** Taoyuan Metro's XML gives names and order but no
+  coordinates. Its "StationList.xml" resource (data.gov.tw 128394) is
+  byte-identical to the route file.
+  - 15 of the line's 22 stations are in Taoyuan. A1–A6 and A9 are in Taipei
+    and New Taipei, and are recorded in `excluded_stations.csv`.
+  - The route is OSM's all-stop relation 6937083 (`#2C5AA5`, as OSM carries
+    it). Every station point is within 57 m of it.
+- **Gate 3 exact, 22 against 22, after one recorded addition.** The
+  operator's list is dated 2018-10-01 and lacks A22 老街溪, which opened in
+  2023. The national layer and OSM both carry it. It is added by ID in
+  `OPERATOR_LIST_ADDITIONS`, and step 1 refuses the addition once the
+  operator lists A22. The rejected alternative was comparing counts loosely,
+  which would hide a real missing station.
+- **Licences, read 2026-09-25 by two `licence-read` agents:**
+  - The door plates are OGDL v1: 桃園市政府民政局, 桃園市門牌位置坐標資料
+    (data.gov.tw 157689).
+  - The station list is OGDL v1. It is credited to **桃園捷運公司**, as the
+    publisher's own portal names it (owner). The national catalogue says
+    桃園市政府桃園捷運公司.
+  - The national layer's metadata declares `license: "1"` and names
+    內政部國土測繪中心.
+  - **A condition outside the licence was accepted by the owner.** Taoyuan's
+    portal FAQ says reuse must not mislead the public or "intentionally or
+    unintentionally" jeopardise the City Government's interests. Neither
+    phrase is defined; the condition is recorded under notice 46.
+- **Owner's calls, 2026-09-25:**
+  - Taoyuan gets its own page, counting only its own stations, with the line
+    drawn to its ends.
+  - Page 45's text and notice 46 were approved as drafted. Notice 44 (the
+    FIA's) now names Taichung and Taoyuan.
+- **The line misses the city's largest centre.** Only 11.6% of storefronts
+  (5,226) fall in a ring, because the airport line does not pass through
+  Taoyuan District. The page says so, without the number.
+- **Macro labels:** Taoyuan measures 57.4 px. Taichung's pill moved below its
+  dot, because above it the pill overlapped Taoyuan's by 59.8 × 3.5 px and
+  covered Taoyuan's marker. PROBLEMS 0. The Airport MRT's blue is Delta-E
+  15.2 from Retail: above the floor of 10, recorded.
+- **Baseline:**
+
+  | Step | Counts |
+  |---|---|
+  | Step 1 | stations_on_line 22; stations_kept 15; stations_outside 7; osm_stops 22; lines_drawn 1 |
+  | Step 2 | doorplate_keys 533,662; storefront_rows 49,288; districts 13; office_like_dropped 1,177; join_exact 44,853; join_base_number 161; join_no_plate 1,777; join_unparsed 1,320; out_of_bounds 0; names_hidden 7,230; storefronts 45,014 |
+  | Step 3 | 5,226 in rings of 45,014 |
 
 ### 2026-09-25 - Taichung built on `worktree-taichung`: Taiwan's first city, 66,115 storefronts, 18 stations; notices 44 and 45 and page 44 approved by the owner
 

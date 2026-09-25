@@ -137,6 +137,8 @@ TEXT_WIDTH = {
     # exactly in the same run (Seoul 37.5, Hong Kong 73.5, Riga 29.5, Amsterdam
     # 76.5, Rotterdam 70.7, Rome 37.5, Prague 47.3, Copenhagen 85.5).
     "Taichung": 61.7,
+    # Taoyuan measured in the same run as Taichung (2026-09-25).
+    "Taoyuan": 57.4,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,

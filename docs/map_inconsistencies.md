@@ -300,6 +300,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Seoul | Seoul Metropolitan Subway: Lines 1–9, Shinbundang, Ui LRT, Sillim + 3 Korail lines | AREX, GTX-A, Seohae Line, Gimpo Goldline | OpenStreetMap (no gate 3) | City | 223 / 0 |
 | **Taiwan** | | | | | |
 | Taichung | Taichung Metro Green Line | Taiwan Railway, high-speed rail | Operator's station table + OpenStreetMap route (gate 3 exact) | City | 0 / 0 |
+| Taoyuan | Taoyuan Airport MRT (line A) | Taiwan Railway, high-speed rail | National station layer + OSM route (gate 3 exact, one dated addition) | City | 7 / 0 |
 
 ### B. Business data (dimensions 4–6)
 
@@ -365,6 +366,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Seoul | Permit registers (17 types) | Seoul's LOCALDATA permit registers | Local (permit type) | 47,933 / 139,802 / 36,646 | Retail only the licensed trades; no general retail |
 | **Taiwan** | | | | | |
 | Taichung | National tax register | FIA business tax register | Industry code division | 6,307 / 4,145 / 2,136 | One line in a large city: 19% of storefronts in a ring |
+| Taoyuan | National tax register | FIA business tax register | Industry code division | 2,465 / 1,854 / 907 | The airport line misses the city's largest centre: 12% in a ring |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -422,6 +424,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Seoul | Source building points, gaps filled from other permits at the same building (98% placed; 4,875 unplaced) | Retail thin (licensed trades only) | Lodging, vets, hostess bars, food trucks, wholesale and online sellers; 138 personal names withheld; phone never read |
 | **Taiwan** | | | |
 | Taichung | Address join to the city's door plates (92.2%; 5,599 unplaced) | Stalls unplaced; a department store is one point | Online shopping; office-like head offices; unmarked sole proprietors shown by industry |
+| Taoyuan | Address join to the city's door plates (93.6%; 3,097 unplaced) | Stalls and rural addresses unplaced | Online shopping; office-like head offices; unmarked sole proprietors shown by industry |
 
 ### D. Vintage and map features (dimensions 10–11, plus two added)
 
@@ -490,6 +493,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Seoul | Registers daily, updated to 2026-09-24 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 94% | Trade name in Korean (138 show "Name withheld") |
 | **Taiwan** | | | | | | |
 | Taichung | Register daily, dated 2026-09-25; door plates August 2026 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 19% | Trade name in Chinese, or the line of business (11,907) |
+| Taoyuan | Register daily, dated 2026-09-25; door plates August 2026 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 12% | Trade name in Chinese, or the line of business (7,230) |
 
 Features every map shares, so not a difference: permanent line labels and a legend
 entry for every line; rings start switched off; OSM basemap credit; the site-wide

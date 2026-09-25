@@ -1,0 +1,52 @@
+{
+  "fia_register": {
+    "file": "BGMOPEN1.zip",
+    "url": "https://eip.fia.gov.tw/data/BGMOPEN1.zip",
+    "bytes": 66343427,
+    "data_date": "2026-09-25",
+    "sha256": "95b08653facc371b44c3281e45256de6dbed3c68955d467faa28ea9a28155000",
+    "retrieved": "2026-09-25T11:47:53+00:00"
+  },
+  "doorplates": {
+    "file": "taoyuan_doorplate.csv",
+    "edition": "TGOS_A68000_11508",
+    "url": "https://opendata.tycg.gov.tw/api/dataset/ec47dbd5-9ed8-4c8d-8ce1-ccb63b1b72e6/resource/d00ecba4-dec2-4a62-bfc7-989a8359cebe/download",
+    "bytes": 94461884,
+    "sha256": "8ada880927ab2ebfeaf60e0ba2efcf60662fb7859af35aa17808099b6dca0641",
+    "retrieved": "2026-09-25T11:49:57+00:00"
+  },
+  "metro_network": {
+    "file": "metro_network.xml",
+    "url": "https://opendata.tycg.gov.tw/api/dataset/434a3d9f-ebc1-474b-b8b7-da53eb340b48/resource/35cd3ed3-42a4-401d-90bd-7f5b82588169/download",
+    "bytes": 815,
+    "sha256": "92105db531ce3457dd59bd7b634f1d00056da78efbf7b2df355d3a64cae32e85",
+    "retrieved": "2026-09-25T11:49:57+00:00"
+  },
+  "metro_route_stations": {
+    "file": "metro_route_stations.xml",
+    "url": "https://opendata.tycg.gov.tw/api/dataset/8c1fe832-fe4a-4033-a283-25ab39a99d93/resource/5535111f-9af5-40b9-9e58-a4d382fb8b2c/download",
+    "bytes": 4574,
+    "sha256": "40ccbe31c60234eb4d5130d45a94e7ba9b66b7f96a95724a8a98543118fd8120",
+    "retrieved": "2026-09-25T11:49:58+00:00"
+  },
+  "national_stations": {
+    "file": "national_metro_stations.zip",
+    "url": "https://opdadm.moi.gov.tw/api/v1/no-auth/resource/api/dataset/63A7BA62-C429-4F2D-8B73-21AAB9E6EAE0/resource/4C11DFAE-ED20-4843-89E7-08D23CADAA16/download",
+    "bytes": 43634,
+    "sha256": "bb830f0a0cfe721df86e2435d29f90d36584d6c1809b48dd01c5cd0412f2c089",
+    "retrieved": "2026-09-25T11:49:59+00:00"
+  },
+  "osm_rail": {
+    "file": "osm_rail_routes.json",
+    "url": "https://overpass-api.de/api/interpreter",
+    "query": "[out:json][timeout:300];relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|train)$\"][\"name\"~\"機場\"](24.58,120.97,25.13,121.53)->.r;.r out geom;node(r.r);out body;",
+    "bytes": 326287,
+    "sha256": "4b34f9e198ea86751b0abd37628cf82ad134a142f7b5752cc16fd5227aa28420",
+    "elements": {
+      "relation": 7,
+      "node": 44
+    },
+    "osm_base": "2026-09-25T11:48:03Z",
+    "retrieved": "2026-09-25T11:50:05+00:00"
+  }
+}

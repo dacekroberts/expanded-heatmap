@@ -842,6 +842,13 @@ Cities built and running end to end (pipeline, map, app page):
   and the `taiwan-city` skill. One line in a large city, so most storefronts
   lie outside the rings, and the page says so.
 
+- **Taoyuan** - the Taoyuan Airport MRT, counted around its 15 stations inside
+  Taoyuan and drawn to its ends in Taipei. Taiwan's second city, built on
+  Taichung's national modules and the shared step 2; its station points come
+  from the national land-survey layer, whose own addresses say which city each
+  station is in. The line misses the city's largest centre, so most storefronts
+  lie outside the rings.
+
 - **Riga** - Rīgas satiksme's seven tram routes, across the city's 58
   neighbourhoods; Latvia's first city, in Amsterdam's two-layer shape. Food
   service is the State Revenue Service's excise-licence register - the premises
@@ -963,8 +970,8 @@ rail. The `brazil-city` skill carries the traps, and
 `scripts/measure_rail_backbone.py` answers two of the rail test's three parts
 from cached OSM.
 
-Taiwan is under way: Taichung was built 2026-09-25, Taoyuan is next, then Taipei
-(Regional); Seoul and the Taiwanese cities publish as one batch (owner). Before
+Taiwan is under way: Taichung and Taoyuan were built 2026-09-25; Taipei (Regional)
+is next; Seoul and the Taiwanese cities publish as one batch (owner). Before
 that came Hong Kong, Riga and Seoul (the owner built Hong Kong first on 2026-09-24
 so the week's remaining budget held a whole city; the order before that was
 Rotterdam, then Taiwan).

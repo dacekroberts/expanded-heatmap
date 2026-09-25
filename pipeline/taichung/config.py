@@ -111,7 +111,7 @@ OFFICE_FLOOR_MIN = 3
 OFFICE_EXEMPT_ROWS_AT_ADDRESS = 20
 
 # Sanity bounds for the joined points.
-TAICHUNG_BBOX = {
+CITY_BBOX = {
     "lat_min": OSM_BBOX[0],
     "lat_max": OSM_BBOX[2],
     "lon_min": OSM_BBOX[1],

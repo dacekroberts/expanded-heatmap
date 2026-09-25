@@ -1056,7 +1056,7 @@ _NOTICES = [
     # adds its name to it and a notice of its own sources. Approved by the owner
     # 2026-09-25.
     ("Fiscal Information Agency (Taiwan)",
-     "Taichung's storefronts are from 財政部財政資訊中心 2026 全國營業(稅籍)登記資料集 — Taiwan's "
+     "Taichung's and Taoyuan's storefronts are from 財政部財政資訊中心 2026 全國營業(稅籍)登記資料集 — Taiwan's "
      "national business tax register, published by the Fiscal Information Agency, Ministry of "
      "Finance (the data date is in each page's snapshot caption). 此開放資料依政府資料開放授權條款 "
      "(Open Government Data License) 進行公眾釋出，使用者於遵守本條款各項規定之前提下，得利用之。 "
@@ -1073,6 +1073,19 @@ _NOTICES = [
      "names. 此開放資料依政府資料開放授權條款 (Open Government Data License) 進行公眾釋出，使用者於遵守"
      "本條款各項規定之前提下，得利用之。 [data.gov.tw/license](https://data.gov.tw/license). The door "
      "plates themselves are not shown. Neither body endorses this map.",
+     False),
+    # Taoyuan: three OGDL v1 sources (read 2026-09-25), one statement each. The
+    # metro provider is named as the publisher's own portal names it (owner). The
+    # portal's FAQ adds that reuse must not mislead the public or jeopardise the
+    # City Government's interests - recorded and accepted (owner, 2026-09-25).
+    ("Taoyuan City Government, NLSC and Taoyuan Metro (Taoyuan)",
+     "提供機關／桃園市政府民政局 2026 桃園市門牌位置坐標資料 (the monthly file named in the page's "
+     "snapshot caption), used to place Taoyuan's storefronts by address; 提供機關／內政部國土測繪中心 "
+     "2026 捷運車站, the Airport MRT's station locations; and 提供機關／桃園捷運公司 2026 "
+     "桃園捷運路線車站基本資料, the line's stations and their names. 此開放資料依政府資料開放授權條款 "
+     "(Open Government Data License) 進行公眾釋出，使用者於遵守本條款各項規定之前提下，得利用之。 "
+     "[data.gov.tw/license](https://data.gov.tw/license). The door plates themselves are not "
+     "shown. None of these bodies endorses this map.",
      False),
 ]
 

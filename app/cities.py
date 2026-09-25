@@ -940,8 +940,23 @@ CITIES = [
         "region": "East Asia",
         "country": "Taiwan",
         "in_default_view": False,
+        # BELOW its dot: above it, the pill overlapped Taoyuan's by 59.8 x 3.5 px
+        # and covered Taoyuan's marker at every width in East Asia (Taoyuan sits
+        # just north-east). Scored clear by check_macro_labels.py (width 61.7 px,
+        # measured 2026-09-25).
+        "label_offset": ("middle", 0, 24),
+    },
+    {
+        "name": "Taoyuan",
+        "lat": 24.9936,
+        "lon": 121.301,
+        "page": "pages/45_Taoyuan_Heatmap.py",
+        "blurb": "The Taoyuan Airport MRT",
+        "region": "East Asia",
+        "country": "Taiwan",
+        "in_default_view": False,
         # Above the dot, the default, scored by check_macro_labels.py (width
-        # 61.7 px, measured 2026-09-25).
+        # 57.4 px, measured 2026-09-25).
         "label_offset": ("middle", 0, -22),
     },
 ]

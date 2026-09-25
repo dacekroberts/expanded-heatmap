@@ -6,8 +6,8 @@ description: Build a Taiwanese city on the national modules Taichung built - the
 # Building a Taiwanese city
 
 Written 2026-09-25 from **Taichung**, Taiwan's first city (`DECISIONS.md`,
-"Taichung built"). Two more are briefed: **Taoyuan** and **Taipei
-(Regional)** (Taipei + New Taipei). Kaohsiung is geo-blocked (Band D). Taiwan is
+"Taichung built"), and extended the same day from **Taoyuan**, the second.
+One more is briefed: **Taipei (Regional)** (Taipei + New Taipei). Kaohsiung is geo-blocked (Band D). Taiwan is
 **Mexico's shape**, like Brazil: one national business source, so the second
 city should cost a fraction of the first - a config, a door-plate file, a rail
 leg and three thin steps.
@@ -21,8 +21,8 @@ argument; `taichung.md` and `taoyuan.md` only what is theirs), then this.
 |---|---|
 | `pipeline/countries/taiwan.py` | The register URL and SHARED cache (`data/taiwan/raw/BGMOPEN1.zip`, one file for every city); `register_rows(prefixes)`; `register_date()` (the register's own date, from its first data row); `bucket_of(code)` (47/48 Retail, 56 Food, 96 Personal, 487 out); `parse()` and `plate_key()` - **the join method, moved unchanged from `scripts/screen_taiwan_join.py`**; `is_trade_name()` - the owner's name rule |
 | `pipeline/taxonomies/taiwan_fia.py` | The taxonomy: `industry` (the register's own Chinese name for the code) and `industry_code` |
-| `pipeline/taichung/step2_clean_businesses.py` | The template step 2: register → head-office rule → district-aware join → name rule. **Copy it**; change the config |
-| `pipeline/taichung/fetch_sources.py` | The template fetch, including a Google Drive large-file download and truststore |
+| `pipeline/countries/taiwan_step2.py` | THE step 2, shared since Taoyuan: register → head-office rule → district-aware join → name rule. A city's step 2 is three lines calling `run(config, city, slug)` |
+| `pipeline/taichung/fetch_sources.py` | The template fetch, including a Google Drive large-file download and truststore; Taoyuan's imports its helpers |
 | `scripts/check_personal_exposure.py` | `taiwan=True` on a city's entry runs the name-rule test (must print 0) |
 
 **`parse()` has a control: Taipei.** Any change to it re-runs
@@ -101,14 +101,31 @@ sentence + `https://data.gov.tw/license`. Taichung's sources:
 |---|---|---|
 | Tax register (every city) | 財政部財政資訊中心 | 全國營業(稅籍)登記資料集 - plus FIA's own: cite the source, no emblems, no endorsement, and **do not present the filtered points as the register** |
 | Taichung's Green Line stations | 臺中捷運股份有限公司 | 臺中捷運綠線車站資訊 |
-| Taichung's door plates | *(see `docs/data_sources.md`)* | 臺中市…GIS門牌號碼 |
+| Taichung's door plates | 臺中市政府數位發展局 | 臺中市115年1月至各月份GIS門牌資料 |
+| Taoyuan's door plates, station layer, station list | 桃園市政府民政局 · 內政部國土測繪中心 · 桃園捷運公司 | 桃園市門牌位置坐標資料 · 捷運車站 · 桃園捷運路線車站基本資料 |
 
 The FIA notice is national: the next city ADDS its own door-plate and rail
 notices and names itself in the FIA one; it does not add a second FIA notice.
 
-## The two cities still to build
+## What Taoyuan added (2026-09-25, the second city)
 
-**Taoyuan** (`taoyuan.md`): 49,282 storefronts, joined 94.0%. Door plates are
+- **Step 2 is shared now**: `pipeline/countries/taiwan_step2.py`, `run(config, city, slug)`.
+  Taichung's output was byte-identical after the move. A TWD97-only door-plate file names
+  its columns `x`/`y` in `PLATE_COLS` and sets `PLATE_CRS` (Taoyuan: EPSG:3826).
+- **The operator's list can be STALE, not wrong.** Taoyuan Metro's XML is dated 2018 and lacks
+  A22 (opened 2023). Add the station by ID with its date (`OPERATOR_LIST_ADDITIONS`) - the
+  step refuses the addition once the operator lists it - rather than loosening gate 3.
+- **The national 捷運車站 layer is the station source when the operator gives no points**, and
+  its ADDRESS column settles which city each station is in - no boundary needed.
+- **A portal FAQ can carry a condition outside the licence.** Taoyuan's: no misleading the
+  public, no harm to the City Government's interests. Accepted by the owner for Taoyuan;
+  check each city's portal FAQ, not only its licence page.
+- Macro labels: Taichung's pill moved below its dot, because Taoyuan sits just north-east.
+  Taipei (Regional) will sit next to Taoyuan - re-score all three.
+
+## The city still to build
+
+~~**Taoyuan**~~ ✅ built 2026-09-25 (above). Its brief's sheet, kept: 49,282 storefronts, joined 94.0%. Door plates are
 `TGOS_A68000_11508.csv` (the national TGOS edition) - check its district
 column. Rail: Taoyuan Metro's network XML; the railway bureau's airport-MRT
 file sits behind an Incapsula challenge and is NOT worked around - use the

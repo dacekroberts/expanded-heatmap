@@ -1609,6 +1609,21 @@ address, so a department store tends to appear as a single point.
 **Stations.** Taichung Metro's Green Line is drawn; every station is inside the city. Not
 drawn: Taiwan Railway and high-speed rail.
 
+### Taoyuan - the same register and rules as Taichung, on the Airport MRT
+
+**Left out** - online shopping; industries outside the three buckets; 1,177 office-like company
+head-office rows (owner's rule).
+
+**Not placed** - 3,097 rows whose address matched no door plate (rural addresses, stalls,
+intersections).
+
+**Names not shown** - 7,230 unmarked sole proprietors, shown by their line of business.
+
+**Stations.** The Airport MRT is drawn to its ends; its 15 stations inside Taoyuan are
+counted, and the seven in Taipei and New Taipei (A1-A6, A9) are left out. Not drawn: Taiwan
+Railway and high-speed rail. The line does not reach Taoyuan District, the city's largest
+centre, so most storefronts lie outside the rings.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found
