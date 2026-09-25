@@ -1,0 +1,18 @@
+{
+  "directional_pairs_merged": 4,
+  "excise_rows": 144151,
+  "food_placed_exact": 1142,
+  "food_placed_unit_dropped": 327,
+  "food_premises": 1517,
+  "food_unplaced": 48,
+  "food_with_unit_number": 327,
+  "platforms": 243,
+  "shops_and_services_named": 5707,
+  "shops_in_degrading_buildings": 412,
+  "shops_placed": 5673,
+  "station_names": 123,
+  "stations_kept": 108,
+  "stations_thinned": 15,
+  "storefronts": 6730,
+  "trade_premise_groups": 7169
+}
