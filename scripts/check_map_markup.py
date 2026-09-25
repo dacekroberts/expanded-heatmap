@@ -14,6 +14,12 @@ two deploy checks found by reading pixels and markup (2026-09-24).
   B  The legend's inline `style` attribute is intact. The font stack's double
      quotes once closed it at "Segoe UI", and every legend lost its size, its
      shadow and its fallback fonts while still looking roughly right.
+  C  No two DIFFERENT lines share a dark-mode label colour. Within one map, two
+     labels whose light-theme colours differ (CIE76 >= HARD_FLOOR) must not come
+     out within HARD_FLOOR of each other in dark mode. The x1.8 dark rule did
+     that 21 times in 10 cities - Paris 1, 9 and 10 all #ffff00 - and no check
+     looked (Rotterdam's deploy check, 2026-09-24). Lines an agency coloured
+     alike stay alike and are not counted.
 
     python scripts/check_map_markup.py [--verbose] [--root DIR]
 """
@@ -25,7 +31,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from pipeline.linecolour import LABEL_MIN_CONTRAST, contrast_ratio  # noqa: E402
+from pipeline.linecolour import HARD_FLOOR, LABEL_MIN_CONTRAST, contrast_ratio, delta_e  # noqa: E402
 from pipeline.theme import DARK  # noqa: E402
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -68,6 +74,17 @@ def main():
         found = LABEL_RE.findall(doc)
         if not found:
             problems.append(f"{city}: no line labels found")
+        # C: one entry per line name (a name can recur on one map).
+        by_name = {}
+        for colour, dark, _halo, raw in found:
+            by_name.setdefault(name_of(raw), (colour.lower(), (dark or "").lower()))
+        named = [(n, c, d) for n, (c, d) in by_name.items() if d]
+        for i, (a, ca, da) in enumerate(named):
+            for b, cb, db in named[i + 1:]:
+                if delta_e(ca, cb) >= HARD_FLOOR and delta_e(da, db) < HARD_FLOOR:
+                    problems.append(f"{city}: '{a}' {ca} and '{b}' {cb} are different lines "
+                                    f"sharing a dark-mode label colour ({da} / {db}, "
+                                    f"CIE76 {delta_e(da, db):.1f})")
         for colour, dark, halo, raw in found:
             labels += 1
             name, halo = name_of(raw), six(halo)
@@ -108,6 +125,7 @@ def main():
             print(f"  ... {len(problems) - 25} more; --verbose to list")
         return 1
     print(f"\nPROBLEMS 0 - every line label reads at {LABEL_MIN_CONTRAST}:1 in both themes, "
+          f"no two different lines share a dark-mode label colour, "
           f"and every legend's style is intact")
     return 0
 
