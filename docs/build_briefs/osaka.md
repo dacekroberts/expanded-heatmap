@@ -77,16 +77,17 @@ measure puts Kobe, Sapporo, Fukuoka, Kyoto, Hiroshima and Sendai at 93–101%.
     (FY2020–22), and 第2表 and 第4表. The per-city flow tables cover all permit
     types combined; restaurants are 87% of Osaka's new-law count. Credit:
     「衛生行政報告例」（厚生労働省）を加工して作成.
-- **What the page must say** (draft): "Osaka City's published list holds
+- **What the page must say** (✅ **revised wording approved by the owner,
+  2026-09-24**, after the flow probe): "Osaka City's published list holds
   about 70% of the restaurant permits Osaka reports to national statistics.
-  The evidence points mainly to that national figure including expired or
-  closed permits, not to restaurants missing from the list; the city has not
-  confirmed this." The 2,149 permits with no fixed address are not mapped.
-  - ⚠️ **Since the 2026-09-24 flow probe, "not to restaurants missing from the
-    list" is stronger than the evidence.** The new-law part, about 11% of
-    the count, is undetermined. About 6,000 of it (roughly 7% of the count)
-    does not even have the event-stall shape. The wording is for the owner to
-    settle.
+  Most of the difference appears to be expired permits still counted
+  nationally; the rest, about a tenth of the count, are permits the city
+  counts but does not list, some of them short-lived event permits. The city
+  has not confirmed either." The 2,149 permits with no fixed address are not
+  mapped.
+  - It replaces the first draft, whose "not to restaurants missing from the
+    list" became stronger than the evidence once the new-law part (about 11%
+    of the count) proved undetermined.
 - **Placement is unaffected**, and the build is not blocked.
 
 ---

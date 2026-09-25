@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**368 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**369 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Seoul's four calls decided, and Osaka's page wording revised (owner)](#2026-09-24---seouls-four-calls-decided-and-osakas-page-wording-revised-owner)
 - [Seoul's Step 0 completed: 17 registers, three buckets, coordinates from the register itself, four owner calls](#2026-09-24---seouls-step-0-completed-17-registers-three-buckets-coordinates-from-the-register-itself-four-owner-calls)
 - [Dark-mode line labels start from their line's own colour (owner)](#2026-09-24---dark-mode-line-labels-start-from-their-lines-own-colour-owner)
 - [Osaka's residual: the unlisted permit numbers are real permits, and a third of the gap is undetermined](#2026-09-24---osakas-residual-the-unlisted-permit-numbers-are-real-permits-and-a-third-of-the-gap-is-undetermined)
@@ -410,6 +411,32 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Seoul's four calls decided, and Osaka's page wording revised (owner)
+
+- **The owner decided Seoul's four calls:**
+  - **Buckets**: as recommended, except **단란주점 (karaoke bars, 1,865) in
+    Food service**. The condition was "if no privacy concerns, they see the
+    same crowd as pubs/bars". Checked before recording: no operator column,
+    and 0 active rows pair a person-like trade name with a residential
+    address; only 2 addresses read residential at all. 유흥주점 (73% hostess
+    bars) stays out under the adult-services rule.
+  - **Rail**: 경의·중앙, 수인·분당 and 경춘 are drawn; inside Seoul their
+    spacing matches the subway's. 공항철도, GTX-A, AREX express, the one-station
+    stubs (서해, 김포 골드라인) and intercity services are out.
+  - **Stations inside Seoul only**, Japan's rule, as the register is
+    Seoul-only.
+  - **Region: East Asia.** The owner pointed to Hong Kong's build, and its
+    worktree's `PLAN.md` confirms it creates "the East Asia region", not yet
+    on master. Seoul joins that region. The rejected alternative was a
+    region per country.
+- **Osaka's page wording revised (owner).** It now says expired permits
+  explain most of the gap, and that about a tenth of the count is permits the
+  city counts but does not list, some of them short-lived event permits. It
+  replaces "not to restaurants missing from the list", which the flow probe
+  made stronger than the evidence.
+- Files: `seoul.md`, `osaka.md`, `data_sources.md`, `city_master_list.md` and
+  `PLAN.md`.
 
 ### 2026-09-24 - Seoul's Step 0 completed: 17 registers, three buckets, coordinates from the register itself, four owner calls
 

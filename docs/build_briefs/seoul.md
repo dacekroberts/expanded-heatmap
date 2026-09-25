@@ -4,8 +4,23 @@
 2026-09-23, whose list of "never done" items was partly stale on the day it
 was written: the eight core datasets, their licence and the scope had been
 measured on 2026-09-22 (`DECISIONS.md`). Run `python scripts/brief_check.py
-seoul` before writing any code. **Four owner decisions are open (🚩 below).**
-Nothing else blocks the build.
+seoul` before writing any code. **✅ The four owner calls were decided
+2026-09-24** (below). Nothing blocks the build.
+
+**✅ Decided by the owner, 2026-09-24:**
+1. **Buckets as recommended, except 단란주점 (karaoke bars) → Food service**,
+   "if no privacy concerns, they see the same crowd as pubs/bars". Checked:
+   no operator column, and 0 of 1,865 pair a person-like name with a
+   residential address. 유흥주점 stays out.
+2. **Rail: 경의·중앙, 수인·분당 and 경춘 are drawn**, beside lines 1–9, 신분당,
+   우이신설 and 신림. Left out: 공항철도, GTX-A, AREX express, the 서해 and
+   김포 골드라인 stubs, and all intercity services.
+3. **Stations inside Seoul only** (Japan's rule), applied as stated.
+4. **Region: "East Asia"**, the region Hong Kong's build creates (on
+   `worktree-hong-kong`, not yet on master). Seoul joins it; it does not
+   create its own.
+
+*The recommendations as first put to the owner are kept below.*
 
 ---
 
@@ -19,7 +34,7 @@ the project.**
 
 ---
 
-## 🚩 Owner decisions (recommendations, not decided)
+## Owner decisions — the recommendations as put (✅ decided above)
 
 1. **Buckets.** Measured below; each recommendation follows an existing
    precedent:
@@ -221,8 +236,9 @@ The longest relation of each line: its stops in order, those inside relation
 
 ## Still unknown
 
-- The owner's four calls above.
 - Whether juso.go.kr can place the last 2.3% keylessly (only if wanted).
+- Line 7 and 신림선 station counts inside Seoul (Overpass failed; re-measure
+  at build).
 
 ```brief-checks
 [

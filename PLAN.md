@@ -818,18 +818,20 @@ brief names.
   two-thirds of the gap is dead old-law records. The other third, about 9,000
   revised-law restaurants the city counts but never lists, is undetermined.
   Some of it has the shape of short-lived event stalls. Build not blocked.
-- [ ] **Owner: Osaka's page wording.** The draft's "not to restaurants
-  missing from the list" is now stronger than the evidence (`osaka.md`).
+- [x] **Osaka's page wording revised (owner, 2026-09-24)**: expired permits
+  explain most of the gap, and about a tenth of the count is permits the city
+  counts but does not list (`osaka.md`).
 - [ ] **Fukuoka** — agree the wording that discloses the ~20% of restaurants
   with no published address. BODIK is flaky, so `fetch_sources.py` retries.
 - [x] **Seoul's Step 0 completed (2026-09-24, `seoul.md`).** Seventeen
   citywide registers, three buckets, restaurant coordinates filled to 97.7%
   from the register itself, rail measured.
-- [ ] 🚩 **Owner: Seoul's four calls** (`seoul.md`, top):
-  - the bucket map (lodging, vets and 유흥주점 out; 단란주점?);
-  - the five Korail metro lines (recommend 경의·중앙, 수인·분당 and 경춘 in);
+- [x] **Seoul's four calls decided (owner, 2026-09-24):**
+  - buckets as recommended, and 단란주점 in Food service (no privacy issue
+    found);
+  - 경의·중앙, 수인·분당 and 경춘 drawn;
   - stations inside Seoul only;
-  - the "East Asia" map region.
+  - the "East Asia" region that Hong Kong's build creates.
 - [ ] Seoul, at build: re-measure Line 7 and 신림선 (Overpass failed); write
   `korea_localdata.py` and the Korean pass of `check_personal_exposure.py`
   (113 premises sized).

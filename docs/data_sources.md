@@ -946,7 +946,7 @@ downloaded via the SHEET CSV export (`ssUserId=SAMPLE_VIEW`, no account — see
 **Nine more, checked 2026-09-24** (the same fields on each page, read
 individually): all **공공누리 1유형**, `제3저작권자` 없음, 매일, 원본시스템
 지방행정 인허가정보. The pages also carry an empty `AI유형 -` tag. Buckets are
-the brief's recommendations, which are the owner's call (`seoul.md`). The
+as the owner decided on 2026-09-24 (`seoul.md`). The
 bucket column above was the 2026-09-22 guess; the brief recommends
 **excluding** 숙박업 and 동물병원.
 
@@ -959,7 +959,7 @@ bucket column above was the 2026-09-22 guess; the brief recommends
 | `OA-16144` | 서울시 담배소매업 인허가 정보 | Retail | 15,590 |
 | `OA-16096` | 서울시 대규모점포 인허가 정보 | Retail | 740 |
 | `OA-16070` | 서울시 건강기능식품일반판매업 인허가 정보 | Retail (영업장판매 only) | 10,648 of 29,315 |
-| `OA-16089` | 서울시 단란주점영업 인허가 정보 | Excluded (recommended) | 1,865 |
+| `OA-16089` | 서울시 단란주점영업 인허가 정보 | Food service (owner, 2026-09-24) | 1,865 |
 | `OA-16090` | 서울시 유흥주점영업 인허가 정보 | Excluded (adult services) | 1,682 |
 
 **The first eight carry identical metadata** (as do the nine), checked individually rather than
