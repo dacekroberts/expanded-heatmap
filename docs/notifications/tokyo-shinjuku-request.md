@@ -1,4 +1,6 @@
-# Tokyo — Shinjuku: request to reuse or publish the FY2025-end food-permit list — DRAFTED 2026-09-24, NOT SENT
+# Tokyo — Shinjuku: request to reuse or publish the FY2025-end food-permit list — DRAFTED 2026-09-24, PARKED (last resort)
+
+⏸ **PARKED 2026-09-24 as the LAST RESORT (owner).** Contacting an agency comes only after the probe methods we control have failed, because the answer is out of our hands. Do not send, or present as the next step, until then.
 
 **Status**: drafted 2026-09-24 for the owner to send, from the owner's own
 address. Nothing sent yet. Tracked as item 32 in `docs/gated_access.md`.

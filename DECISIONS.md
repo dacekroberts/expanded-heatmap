@@ -16,11 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**357 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**358 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Rotterdam is live: pushed as bec3af1, rebooted by the owner, and checked on the live site](#2026-09-24---rotterdam-is-live-pushed-as-bec3af1-rebooted-by-the-owner-and-checked-on-the-live-site)
+- [Agency contact is the last resort: the Tokyo requests are parked (owner)](#2026-09-24---agency-contact-is-the-last-resort-the-tokyo-requests-are-parked-owner)
 - [Rotterdam's deploy check passed, with the labels in both themes and the Global View button; three findings recorded, none blocking](#2026-09-24---rotterdams-deploy-check-passed-with-the-labels-in-both-themes-and-the-global-view-button-three-findings-recorded-none-blocking)
 - [Four Tokyo ward requests drafted; none sent](#2026-09-24---four-tokyo-ward-requests-drafted-none-sent)
 - [Every Japanese city against MHLW's official count: complete except Osaka (67%) and Tokyo](#2026-09-24---every-japanese-city-against-mhlws-official-count-complete-except-osaka-67-and-tokyo)
@@ -428,6 +429,26 @@ onwards; the early ones are split by phase rather than by hour.
   junctions (40 data folders and `.venv-lean`). The junctions were removed
   non-recursively; their targets in the main checkout are intact.
 
+### 2026-09-24 - Agency contact is the last resort: the Tokyo requests are parked (owner)
+
+- **The owner parked the four Tokyo ward requests.** "Reaching out to
+  agencies is the last item we should be trying because we can't solve it on
+  our own time". Busy offices are unlikely to answer an unknown foreign
+  sender quickly, if at all.
+  - "Force integration" means resorting to agency contact.
+  - **Partial lists that are disclosed can still pass** in a greater-Tokyo
+    map, Minato's and Chūō's for example.
+  - The drafts stay on file, marked PARKED (items 29–32).
+- **The next step is an own-time probe round**, three background probes:
+  - **Official alternatives**: every publisher in the Tokyo catalogue, and
+    MHLW's national open data as a top-up per ward.
+  - **OpenStreetMap coverage** per ward, calibrated first against Shibuya,
+    whose registry is complete.
+  - **A fresh licence read of Shinjuku's current PDF list.** The page speaks
+    of an opt-out from "オープンデータ", which may place the list under the
+    open-data terms.
+- **Saved as a standing preference** (memory): exhaust the methods we control
+  before recommending any contact with a publisher.
 ### 2026-09-24 - Rotterdam's deploy check passed, with the labels in both themes and the Global View button; three findings recorded, none blocking
 
 - **One `deploy-verify` (city-added Rotterdam + map-chrome, both themes) passed
