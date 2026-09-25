@@ -49,8 +49,8 @@ def to_wgs(gdf):
 
 
 # --- layer 1 -------------------------------------------------------------------
-FOOD_KINDS = [("Kafejnīca", r"kafejn|kafe"), ("Restorāns", r"restor"), ("Picērija", r"picērij"),
-              ("Bārs", r"bār|pub\b|krog|klub"), ("Ēdnīca / bistro", r"ēdn|ēdin|bistro|suši|burger|grill")]
+FOOD_KINDS = [("Café", r"kafejn|kafe"), ("Restaurant", r"restor"), ("Pizzeria", r"picērij"),
+              ("Bar", r"bār|pub\b|krog|klub"), ("Canteen or bistro", r"ēdn|ēdin|bistro|suši|burger|grill")]
 
 
 def food_kind(t):
@@ -116,12 +116,14 @@ def excise_layer():
     unit = food["street_addr"].str.contains(config.UNIT_SUFFIX_RE, regex=True)
     print(f"  of those, {int(unit.sum()):,} carry a unit number in the register's address")
     emit("food_with_unit_number", int(unit.sum()))
-    # Displayed: the place type and the street address WITHOUT any unit number
-    # (pending the owner's call on natural-person holders; see DECISIONS).
+    # Displayed (owner, 2026-09-24): the STREET ADDRESS WITHOUT its unit number
+    # as the dot's title - the shared tooltip shows the name field, so that is
+    # where the address goes, as Rotterdam's shop units do - and the kind of
+    # place as "Kind". The holder is never read.
     return pd.DataFrame({
         "record_id": "excise:" + food.index.astype(str),
         "source": "excise",
-        "business_name": food["kind"],
+        "business_name": stripped[food.index],
         "address": stripped[food.index],
         "latitude": food["latitude"], "longitude": food["longitude"],
         "activity": food["kind"],
@@ -184,10 +186,12 @@ def cadastre_layer():
     return pd.DataFrame({
         "record_id": "cadastre:" + pts["pg"],
         "source": "cadastre",
+        # The premises' registered name (the cadastre's own word, e.g. "Veikals")
+        # as the title; whether it is a shop or a service as "Kind".
         "business_name": pts["name"].str.capitalize(),
         "address": "floor " + pts["floor"].fillna("?"),
         "latitude": pts.geometry.y, "longitude": pts.geometry.x,
-        "activity": pts["name"].str.capitalize(),
+        "activity": pts["cls"].map({"shop_retail": "Shop", "personal_service": "Service"}),
     })
 
 
