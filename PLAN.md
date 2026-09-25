@@ -805,6 +805,12 @@ brief names.
   2026-09-25: it would not load on the owner's phone at 30 MB).** After the reset: measure
   what fills it, then shrink further (coordinate precision, per-pin tooltip text, pin
   encoding in the shared renderer) and verify at phone width before shipping.
+  - **Interim, 2026-09-25: Seoul has a "Mobile mode"** (light map, no dots; on by default
+    for phone user agents) - live-checked: 90 MB of page memory against 758 MB.
+  - **The owner's phone threshold, measured 2026-09-25**: Paris (9.0 MB) loads; São Paulo
+    (9.7 MB), Mexico City (11.4 MB), Taipei (Regional) (14.7 MB) and Seoul's full map fail.
+    **First after the reset: give those three the same mobile mode** (move the toggle into a
+    shared helper in `app/components.py` - a reboot), then the renderer fix for everyone.
 - [x] **Edmonton's map drifts by two Retail pins** FIXED 2026-09-25 (AS_OF_DATE; see DECISIONS) (full drift check 2026-09-25: 1,032 in the
   rings against the committed 1,034; raw data and Edmonton's own code unchanged since 09-21).
   Find whether a shared module changed its output or the 2026-09-24 batch re-render used a
