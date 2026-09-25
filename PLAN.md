@@ -818,6 +818,22 @@ brief names.
     trim per-dot payload (coordinate precision, repeated tooltip text). Static images were
     considered and rejected as the fix (they remove zoom and hover, the map's purpose).
     Verify on a real phone against the threshold above before shipping.
+  - **Seoul's mobile mode does NOT work on the owner's iPhone 16 Pro (Safari)** - blank even
+    with the toggle on, though Chrome phone emulation loaded it (~7 s, 90 MB). Emulation is
+    not evidence; the fix must thin the HEAT layer's ~224k points too.
+  - **Browser tests before the fix ships (owner, 2026-09-25)** - for Seoul (full and light),
+    Taipei (Regional), Mexico City, São Paulo and Paris (the control that loads), record
+    loads / slow (seconds) / blank on each:
+    - [ ] iPhone Safari (real device - the owner's iPhone 16 Pro)
+    - [ ] iPhone Chrome (real device; iOS Chrome is WebKit underneath, so it may differ from
+      Safari only in memory handling, not engine)
+    - [ ] Android Chrome (real device)
+    - [ ] Android Samsung Internet or Firefox (real device, if one is available)
+    - [ ] iPad Safari (the toggle treats iPad as a phone - check that it should)
+    - [ ] Desktop Chrome, Edge, Firefox and Safari (the full map must still load everywhere)
+    - [ ] Chrome device emulation - useful for layout only; never counts as a phone pass
+    Record the results in DECISIONS with device, browser version and map; the threshold above
+    is the owner's iPhone only, so re-measure it per device.
 - [x] **Edmonton's map drifts by two Retail pins** FIXED 2026-09-25 (AS_OF_DATE; see DECISIONS) (full drift check 2026-09-25: 1,032 in the
   rings against the committed 1,034; raw data and Edmonton's own code unchanged since 09-21).
   Find whether a shared module changed its output or the 2026-09-24 batch re-render used a
