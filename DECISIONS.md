@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**371 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**372 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Hong Kong's deploy check: four of six passed first time; two defects fixed, and the map re-rendered on master's per-city dark-mode colours](#2026-09-24---hong-kongs-deploy-check-four-of-six-passed-first-time-two-defects-fixed-and-the-map-re-rendered-on-masters-per-city-dark-mode-colours)
 - [Nine stale "only city" claims corrected on the site (owner-approved wording)](#2026-09-24---nine-stale-only-city-claims-corrected-on-the-site-owner-approved-wording)
 - [Hong Kong built: 21,135 storefronts at FEHD's own points, 141 stations; no geocoder after all](#2026-09-24---hong-kong-built-21135-storefronts-at-fehds-own-points-141-stations-no-geocoder-after-all)
 - [Seoul's four calls decided, and Osaka's page wording revised (owner)](#2026-09-24---seouls-four-calls-decided-and-osakas-page-wording-revised-owner)
@@ -413,6 +414,47 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Hong Kong's deploy check: four of six passed first time; two defects fixed, and the map re-rendered on master's per-city dark-mode colours
+
+- **One `deploy-verify` (city-added Hong Kong)** ran on the branch before master was merged.
+  - **Page 41.** It rendered with no errors, the snapshot caption carried all
+    three dates, and the frame was 1000x650.
+  - **Pins.** Chinese shop signs render (7,159 in-ring tooltips contain
+    Chinese), and "No shop sign on the licence" reads sensibly.
+  - **Zoom** was faster than Paris: one wheel notch 355 ms against 455, five
+    notches 955 against 1,516. The longest blocking task was 0 ms.
+  - **Labels** passed in both themes. Attribution was uncovered at five sizes.
+    The view took 0 corrections at zoom 11.25 on desktop and 10.25 on a phone,
+    framing the network from Tung Chung to Lo Wu rather than the sea.
+  - **Pages and checks.** Notice 41 and the OSM credit are displayed. What Is
+    Excluded shows the Hong Kong section and a 0 / 17 station row.
+    Provenance, scope and imports pass, and the push needs a reboot for
+    `cities.py` and `components.py`.
+- **Two defects, both fixed:**
+  - **The map's layer menu said "Retail" and "Personal services"** while the
+    legend and page said Food shops and Bathhouses. The taxonomy lacked the
+    `layer_label` hook Amsterdam added; it is now `layer_label = legend_label`.
+  - **The Overview caption said "Showing 1 cities in East Asia".** East Asia
+    is the first one-city region, and `Overview.py` now counts in the singular.
+- **Master had moved 12 commits**, among them 0f3f159, which gives each city
+  its own dark-mode label colours and adds a check that no two lines share
+  one. The agent measured the old render against that rule: South Island
+  and Light Rail were only 8.8 apart, and Tung Chung was an orange line with
+  a yellow label. After the merge, Hong Kong was re-rendered on master's
+  renderer:
+  - `check_map_markup` PROBLEMS 0 on all three rules;
+  - render currency 41;
+  - drift zero, baseline 13 figures unchanged.
+- **Noted, not changed:**
+  - **Chinese shop signs render in Japanese typefaces** on Windows and Mac,
+    because the shared font stack lists Hiragino, Yu Gothic and Meiryo before
+    PingFang TC and JhengHei. That is a cross-city renderer question.
+  - **Central Kowloon's clusters stack food shops over restaurants**, which
+    is how clusters stack in every city.
+  - **The approved text's "as they are in every other city"** is flagged by
+    `check_stale_claims --only E`. It is true today and offered to the owner
+    as a page-only edit.
 
 ### 2026-09-24 - Nine stale "only city" claims corrected on the site (owner-approved wording)
 
