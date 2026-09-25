@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**363 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**364 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Hong Kong built: 21,135 storefronts at FEHD's own points, 141 stations; no geocoder after all](#2026-09-24---hong-kong-built-21135-storefronts-at-fehds-own-points-141-stations-no-geocoder-after-all)
 - [The front page's credit: legible in light mode, opaque, linked to /copyright](#2026-09-24---the-front-pages-credit-legible-in-light-mode-opaque-linked-to-copyright)
 - [The front page's OSM credit is lifted above the city dots](#2026-09-24---the-front-pages-osm-credit-is-lifted-above-the-city-dots)
 - [Tokyo ships all 8 wards, disclosed; the COVID lists are not used; MHLW's slice is added (owner)](#2026-09-24---tokyo-ships-all-8-wards-disclosed-the-covid-lists-are-not-used-mhlws-slice-is-added-owner)
@@ -405,6 +406,108 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Hong Kong built: 21,135 storefronts at FEHD's own points, 141 stations; no geocoder after all
+
+- **Built ahead of Taiwan (owner).** Hong Kong's brief left the least open, so a
+  whole city fitted in the week's remaining budget; Taiwan follows the Sunday
+  reset. The staging session took Seoul's Step 0.
+- **The business leg is FEHD's three licence registers.** Each is an XML file,
+  regenerated daily, that carries its own generation date (2026-09-25) and its
+  own code lists.
+  - 35,830 licences, of which 21,165 are storefront types: 12,617 general
+    restaurants, 4,657 light-refreshment, 5 marine, 3,087 fresh-provision
+    shops, 408 bakeries, 356 siu mei and lo mei shops, and 35 commercial
+    bathhouses.
+  - **One scope call on precedent, owner-accepted.** The brief grouped
+    cinemas, karaoke and public entertainment (397) with the bathhouses. They
+    are out, as NAICS 512 and 713 are out everywhere. The map is mostly
+    restaurants because Hong Kong licenses no general retail, and the page
+    says so.
+  - The unused lookup code `CL` (Composite Food Shop, 0 rows) maps to Retail.
+    Any other unknown code raises.
+- **Placement: FEHD's OWN points, not the planned ALS geocode (owner).**
+  - ALS lookups were running when the licence-read agent, reading ALS's
+    terms, noticed that FEHD publishes the same three registers on the CSDI
+    portal with a latitude and longitude per licence, keyed by licence
+    number.
+  - A probe of 2,000 CSDI records settled it. 1,999 matched the XML by
+    number, and 99.7% of shop signs were identical. Where an ALS hit passed
+    this build's rules, FEHD's point sat a median 12 m away, with 89% within
+    50 m. Every ALS hit taken together gave a 90th percentile of 486 m, and
+    9.4% lay beyond 500 m.
+  - The ALS run was stopped at about 2,000 of 21,162 lookups. Those answers
+    stay in `raw/` as the record of the check and are never published.
+  - Result: 21,137 of 21,165 placed, and 28 licences with no CSDI point yet
+    left off.
+  - **The rules built for ALS, recorded because they were measured:**
+    - a hit in a different District Council district from the licence's own
+      is refused at any score (19 MILES, CASTLE PEAK ROAD, TUEN MUN had landed
+      in Tsuen Wan);
+    - at score 80 or above, 92–98% of hits named the register's street and
+      number or building, and at 75–80 only 72% did;
+    - floor prefixes are stripped for a second try.
+  - **Terms.** ALS falls under DATA.GOV.HK's Terms of Use v1.2, by its own
+    redirect. One reading, unresolved and not settled in this project's
+    favour, gives no grant at all, which is moot for an unpublished check.
+    The CSDI portal's terms carry the same uncapped indemnity plus "identify
+    clearly the Government and the CSDI Portal as the source". The owner
+    accepted them with the switch, and notice 41 names both.
+- **One pin per premises.** 2 second licences under the same shop sign at the
+  same address are dropped. 308 licences carry FEHD's "no record" placeholder
+  for a shop sign and show "No shop sign on the licence". Result: **21,135
+  storefronts**, of which 17,254 are food service, 3,846 food shops and 35
+  bathhouses; 19,275 fall within a ring.
+- **Privacy.**
+  - The registers hold the shop sign and no licensee name, so no pin can be a
+    person's name.
+  - 0 emails and 0 phone numbers. The one "c/o" hit is "C.O.C.", a chamber of
+    commerce.
+  - The 144 "person-like name at a residential unit" hits were read: all are
+    mall and office-tower units ("SHOP UNIT LG19, THE SOUTHSIDE"), because
+    UNIT is how Hong Kong numbers commercial space, and the names are trade
+    names ("Starbucks Coffee", "Mos Burger").
+  - Verdict: no personal information published.
+- **Rail: MTR's eight urban lines and the Light Rail, from OpenStreetMap
+  (owner's scope).**
+  - **Ground.** MTR's open data is station lists without coordinates or
+    geometry, and the Transport Department's GTFS has no MTR rail. Its
+    agency.txt holds buses, minibuses, ferries, the trams, the Peak Tram and
+    MTR Bus.
+  - **Relations** are matched on the relation's network and ref. The bbox also
+    held Shenzhen's metro, kept out by the network tag.
+  - **Stations** come from stop-node membership, collapsed by English name.
+    One node had no `name:en`, and its bilingual `name` supplied it.
+  - **Gate 3 is exact on all nine lines against MTR's lists**, after two
+    recorded corrections:
+    - Racecourse, open on race days only and absent from MTR's list, is left
+      out.
+    - Light Rail stop 250 takes MTR's current name, Hoi Wong Road. OSM still
+      calls it Tuen Mun Swimming Pool, and the stop ID is the same in both.
+  - **Drawing.** Each line is drawn from its longest relation plus only the
+    track other relations add more than 60 m from it: East Rail's Lok Ma Chau
+    spur and the TKO line's LOHAS Park branch. The Light Rail's twelve routes
+    become one line (owner), in this project's own colour, `#b8860b`.
+  - **Thinning.** Light Rail stops go to one per half mile, keeping MTR
+    stations and route ends: 17 thinned, giving **141 stations**.
+  - **Not drawn (owner):** Airport Express, Disneyland Resort Line,
+    high-speed rail, Peak Tram and the trams. Their stations are named in
+    prose, not in `excluded_stations.csv`, which holds only stations of drawn
+    lines, as in every city.
+  - **Boundary.** OSM relation 913110 measures 2,759 km2 because its waters
+    are included, and the gate is set to that.
+- **App side.**
+  - Page 41 and notice 41 carry the owner-approved wording, with the third
+    paragraph and the notice revised for the switch.
+  - The new **East Asia** region (owner), named for the Taiwanese, Korean and
+    Japanese cities behind it.
+  - `country` is "Hong Kong", for grouping only; the value is never
+    displayed.
+  - The label width, 73.5, was measured in the live app's frame, with five
+    known widths reproduced exactly. Macro labels score PROBLEMS 0 over 10
+    regions.
+  - Provenance, scope disclosure, the registry, no-fetch, render currency and
+    label contrast all pass.
 
 ### 2026-09-24 - The front page's credit: legible in light mode, opaque, linked to /copyright
 

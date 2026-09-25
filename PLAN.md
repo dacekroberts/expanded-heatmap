@@ -51,7 +51,14 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     the `rotterdam-*-tmp` launch entries and the worktree's data junctions.
     Shipped with it: the "All cities" button renamed "Global View" (owner).
 
-- [ ] **NEXT BUILDS (owner, 2026-09-24): 🇳🇱 Rotterdam (✅ live 2026-09-24), then
+- [~] **🇭🇰 HONG KONG - built on `worktree-hong-kong`, text approved (owner 2026-09-24):
+  21,135 storefronts, 141 stations.** Built ahead of Taiwan so the week's budget held a
+  whole city. FEHD's registers at FEHD's own CSDI points (the ALS geocode dropped, owner);
+  the East Asia region; page 41, notice 41.
+  - [ ] ONE `deploy-verify` (city-added Hong Kong), fetch, push, reboot (cities.py),
+    live check; remove the `hongkong-*-tmp` launch entries and the worktree's junctions.
+
+- [ ] **NEXT BUILDS (owner, 2026-09-24): 🇳🇱 Rotterdam (✅ live 2026-09-24), 🇭🇰 Hong Kong, then
   🇹🇼 Taiwan** - Rotterdam's deploy check also verified the label-contrast work above. Rotterdam is
   Amsterdam's shape (permit-notice food layer rebuilt from the Gemeenteblad,
   BAG shop units, CBS vacancy) - `docs/build_briefs/rotterdam.md`. Taiwan:

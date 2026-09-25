@@ -888,6 +888,22 @@ CITIES = [
         # re-scores this one first.
         "label_offset": ("end", -9, -12),
     },
+    {
+        "name": "Hong Kong",
+        "lat": 22.3193,
+        "lon": 114.1694,
+        "page": "pages/41_Hong_Kong_Heatmap.py",
+        "blurb": "MTR's eight urban lines and the Light Rail",
+        "region": "East Asia",
+        # Grouping only - the switcher and the Overview list order by it and
+        # print no heading. Hong Kong keeps its own ISO 3166-1 code (HK).
+        "country": "Hong Kong",
+        "in_default_view": False,
+        # Above its dot, the default: alone in East Asia, and on the Global
+        # view it lies outside the United States opening frame the labels
+        # are scored on.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -1026,6 +1042,12 @@ REGION_ORDER = [
     # apart, whose labels are placed apart instead (scored by
     # check_macro_labels.py like every other region).
     "South America",
+    # East Asia (owner, 2026-09-24): Hong Kong first, and named for the
+    # cities queued behind it - Taipei, Taichung, Taoyuan, Seoul and the
+    # Japanese cities - so it is named once and never renamed. Hong Kong to
+    # Seoul is about 2,100 km and to Sapporo about 3,400, past the 3,300 at which
+    # Canada was split, so re-score it when Japan lands rather than assume.
+    "East Asia",
 ]
 
 # Global is every region that is not itself a composite, derived rather than

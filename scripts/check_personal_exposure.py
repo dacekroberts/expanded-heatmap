@@ -220,6 +220,12 @@ REGISTRIES = {
     "rotterdam": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv",
                       address=("address",)),
+    # FEHD's registers carry the SHOP SIGN (`SS`), the name on the licence
+    # premises, and no licensee name at all - there is no owner column to
+    # fall back to. The raw file is XML, so the processed file is read.
+    "hong_kong": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv",
+                      address=("address",)),
     "san_diego": dict(raw="sd_businesses_active_datasd.csv", trade="dba_name",
                       owner="business_owner_name", processed="businesses_clean.csv",
                       address=("address_no", "address_road", "address_suite")),

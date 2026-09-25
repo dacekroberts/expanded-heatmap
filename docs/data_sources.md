@@ -125,6 +125,7 @@ purchased, or behind a login.
 | Santos (Regional) | **IBGE CNEFE 2022** - the census's walk of every block: one row per use-type per address, the enumerator's description of each establishment (`DSC_ESTABELECIMENTO`) and point; classified by `pipeline/taxonomies/brazil_cnefe.py` (free text, rules version 2) | All three buckets: **11,813** storefronts placed; unreadable descriptions dropped, never guessed; at an address that also holds a dwelling the pin shows its category only | `https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/35_SP/3548500_SANTOS.zip` (3,948,134 bytes); `https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/35_SP/3551009_SAO_VICENTE.zip` (3,189,142 bytes) | none - the whole município file; `COD_ESPECIE` 6 read, 1-2 for the dwelling test, coordinate levels 1-4 kept | 2026-09-24 |
 | Rotterdam | **Exploitation-permit notices in the Gemeenteblad** (KOOP's official publications, SRU 2.0) - every hospitality-permit decision the burgemeester publishes, with a point; premises REBUILT, since Rotterdam publishes no register: exploitation and provisional grants in the five years before the harvest (a coffeeshop's one year), sorted by each notice's own title and merged within 3 m | Food service only: **1,939** premises; **no names** (titles and abstracts sometimes carry one and are never read into a pin) | `https://repository.overheid.nl/sru` | the union of the `exploitatievergunning` rubric and the permit words in a title, `dt.creator=="Rotterdam"`, by year since 2021 (5,724 notices) | 2026-09-24 |
 | Rotterdam | **BAG verblijfsobjecten, use class winkelfunctie, in use** (Kadaster, via PDOK's BAG WFS) - served with their address and a WGS84 point | Shops and services: **5,581** after 26 units also registered as a dwelling (left off, Amsterdam's owner call) and 563 within 3 m of a permit premises (the permit kept) | `https://service.pdok.nl/lv/bag/wfs/v2_0` (`typeName=bag:verblijfsobject`) | server-side: `identificatie` 0599*, `gebruiksdoel` *winkelfunctie*, `status` in gebruik (6,170) | 2026-09-24 |
+| Hong Kong | **FEHD's licence registers** (Food and Environmental Hygiene Department, via DATA.GOV.HK) - restaurants, other food premises and non-food premises, one XML each, regenerated daily with their own `GENERATION_DATE` and code lists; each licence placed at **FEHD's own point** from the same registers on the **CSDI Portal**, joined by licence number (the brief's ALS geocode was replaced, owner 2026-09-24) | Food service 17,254, food shops 3,846, bathhouses 35: **21,135** storefronts, each named by the shop sign on its licence (no licensee name exists in the data); 28 licences with no CSDI point yet left off | `https://www.fehd.gov.hk/english/licensing/license/text/LP_{Restaurants,OtherFood,NonFood}_EN.XML`; `https://portal.csdi.gov.hk/csdi-webpage/file-api?dataset_id=<id>&format=geojson&layer_name=FEHD_{RL,FL,TL}` (ids in `pipeline/hong_kong/config.py`) | none server-side; storefront licence types kept in step 2 (35,830 licences generated 2026-09-25; 17,266 / 16,519 / 2,032 CSDI points, latest record update 2026-09-23) | 2026-09-25 |
 
 **The two Mexican cities are one source, not two**, and that is why each takes a
 single row where Vancouver/Surrey takes two. DENUE is national, so
@@ -660,6 +661,7 @@ columns. Same section, its own subsection, its own columns.
 | Fortaleza (Regional) | **OpenStreetMap** - Metrofor Linha Sul | every rail route relation in the bbox | 2026-09-24 | The diesel lines through the rail test: Linha Oeste and the Aeroporto branch fail; the Parangaba-Mucuripe VLT is borderline and out (owner, 2026-09-24). Metrofor's GTFS host has an expired certificate - not bypassed. OpenStreetMap, ODbL 1.0 - notice 1 |
 | Porto Alegre (Regional) | **OpenStreetMap** - Trensurb Linha 1 | every rail route relation in the bbox | 2026-09-24 | The Aeromóvel airport connector not drawn (owner). OpenStreetMap, ODbL 1.0 - notice 1 |
 | Recife (Regional) | **OpenStreetMap** - Metrô do Recife Linha Centro (both branches) and Linha Sul | every rail route relation in the bbox | 2026-09-24 | The diesel VLTs fail the rail test on spacing. The city's ODbL station file is a cross-check only, never read by a step. OpenStreetMap, ODbL 1.0 - notice 1 |
+| Hong Kong | **OpenStreetMap** - MTR's Island, Tsuen Wan, Kwun Tong, Tseung Kwan O, South Island, Tung Chung, Tuen Ma and East Rail lines (relations matched on network `港鐵 MTR` and `ref`), and the Light Rail's twelve routes (network `輕鐵 Light Rail`) merged into ONE drawn line (owner) | every rail route relation in the SAR's bbox, via `https://overpass-api.de/api/interpreter`, `https://overpass.kumi.systems/api/interpreter` or `https://maps.mail.ru/osm/tools/overpass/api/interpreter` (tried in that order) | 2026-09-25 | **Why not the agency:** MTR's open data (`https://opendata.mtr.com.hk/data/` - `mtr_lines_and_stations.csv` and `light_rail_routes_and_stops.csv`, on DATA.GOV.HK, no licence declared) is station LISTS with no coordinates and no geometry - read for gate 3 only, not published; and the Transport Department's GTFS (`static.data.gov.hk/td/pt-headway-en/gtfs.zip`) carries no MTR rail - its agency.txt holds buses, minibuses, ferries, the trams, the Peak Tram and MTR Bus. Gate 3 exact on all nine lines after two recorded corrections: Racecourse (race days only, absent from MTR's list) left out, and Light Rail stop 250 given MTR's current name Hoi Wong Road (OSM still Tuen Mun Swimming Pool). Airport Express and Disneyland Resort Line not drawn (owner). OpenStreetMap, ODbL 1.0 - notice 1 |
 | Santos (Regional) | **OpenStreetMap** - VLT da Baixada Santista L1 and L2 (L2 in assisted operation since 2025-12-01) | every rail route relation in the bbox | 2026-09-24 | Three L2 stops named from their wikidata labels; the Bonde Turístico excluded; EMTU's CPGSTM layers a cross-check only. OpenStreetMap, ODbL 1.0 - notice 1 |
 | Rotterdam | **RET metro A-E and trams 1-8 and 11, via OVapi's national GTFS** (`agency_id` RET) - the file Amsterdam downloaded, COPIED from its cache (sha256 checked); regular routes measured on the timetable after the works, 2026-11-23 to 2026-12-12 | `https://gtfs.openov.nl/gtfs-rt/gtfs-openov-nl.zip` (242,421,105 bytes) | 2026-09-24 | CC0 (the producer's LICENSE.TXT, read for Amsterdam). Trams 12 (event days), 14 and 18 (temporary, during works to 2026-11-22) not drawn. RET's own tram map (`RET_Tramnet_v5.pdf`, 2025-10-07) and schematic (`RET_Schematische_krt_jan2026_v2_02.pdf`, 2025-12-24), from `https://bestanden.ret.nl/user_upload/Documenten/PDF/Kaarten_en_plattegronden/`, read for the line list only - neither carries a 14 or an 18. Gate 3 against nl.wikipedia: exact but for line A, a recorded correction (24 there is the extension to Vlaardingen West; the feed runs 20) |
 
@@ -740,6 +742,7 @@ in 23 other municipalities.
 | Recife (Regional) | **OpenStreetMap** admin_level-8 relations carrying `IBGE:GEOCODIGO` in the bbox (-8.4, -35.15, -7.92, -34.83), polygonised from outer and inner ways, area-gated | The three Overpass mirrors in `pipeline/osm.py` | IBGE 2611606, 2607901, 2602902, 2603454 (the owner's regional scope, 2026-09-23); the rest name excluded stations only. OpenStreetMap, ODbL 1.0 - notice 1 |
 | Santos (Regional) | **OpenStreetMap** admin_level-8 relations carrying `IBGE:GEOCODIGO` in the bbox (-24.05, -46.6, -23.85, -46.2), polygonised from outer and inner ways, area-gated | The three Overpass mirrors in `pipeline/osm.py` | IBGE 3548500, 3551009 (the owner's regional scope, 2026-09-23); the rest name excluded stations only. OpenStreetMap, ODbL 1.0 - notice 1 |
 | Rotterdam | **OpenStreetMap relation 324431** (gemeente 0599, `admin_level` 8, found by a bounded `ref:gemeentecode` search), polygonised from outer and inner ways and area-gated (324 km2); the 39 gemeente relations in a wider box used ONLY to name excluded stations | The three Overpass mirrors in `pipeline/osm.py` | Gemeente 0599. OpenStreetMap, ODbL 1.0 - notice 1 |
+| Hong Kong | **OpenStreetMap relation 913110** (`ISO3166-1`=HK, found by a bbox-bounded search), polygonised from outer ways and area-gated at its measured 2,759 km2 - the SAR's waters included, not its ~1,110 km2 of land | The Overpass mirrors in `pipeline/hong_kong/config.py` | The SAR; every drawn station falls inside it. OpenStreetMap, ODbL 1.0 - notice 1 |
 
 Chicago note: the sibling asset `ewy2-6yfk` ("Boundaries - City - Map") has
 null geometry; `qqq8-j68g` is the usable one.
@@ -778,6 +781,7 @@ publisher, one schema, one set of terms across all 34 of its municipalities.
 | Service | Used by | Endpoint | Note |
 |---|---|---|---|
 | US Census Bureau bulk geocoder | Los Angeles, New York, Washington D.C. | `https://geocoding.geo.census.gov/geocoder/locations/addressbatch` | Free, no API key, US addresses only. Benchmark `Public_AR_Current`. Responses cached by batch content hash, so re-runs and drift checks stay offline and deterministic. D.C.'s use is different in kind from Los Angeles': LA's flagged rows had CORRUPT coordinates, D.C.'s have none at all, and Step 0's expectation that `MAR_ID` would recover them was wrong — the same 452 rows lack both. 387 of 451 were matched and every one fell inside the District polygon |
+| Hong Kong Address Lookup Service (ALS) | Hong Kong - **a cross-check only, not published** | `https://www.als.gov.hk/lookup` | About 2,000 lookups of a planned 21,162 were made before the build switched to FEHD's own CSDI points (owner 2026-09-24); kept in `data/hong_kong/raw/als_cache.jsonl` as the record of the check that justified the switch (accepted ALS hits a median 12 m from FEHD's point, 89% within 50 m). Terms: DATA.GOV.HK's Terms of Use v1.2 by the service's own redirect (read 2026-09-24 by the licence-read agent), with an unresolved reading under which no terms grant use at all - moot for an unpublished check, and the reason ALS is not a published source |
 
 ## Basemap tiles
 
@@ -1909,6 +1913,13 @@ mis-priced, so it was priced deliberately.
    realistic complainant is an individual whose name sits at what looks like a
    home, so the privacy filter is the risk control, not a formality.
 3. **This entry is condition three**, dated and reasoned.
+
+**Extended 2026-09-24 to the CSDI Portal's terms.** The build places each licence at FEHD's
+own point from the CSDI Portal (`portal.csdi.gov.hk/csdi-webpage/doc/TNC`, read 2026-09-24 by
+the licence-read agent): the same shape, the same uncapped indemnity, and one addition - to
+*"identify clearly the Government and the CSDI Portal as the source"*, which notice 41 does.
+The owner accepted it in chat on 2026-09-24, with the switch from ALS. The privacy condition
+was run the same day: FEHD's registers carry the shop sign and no licensee name at all.
 
 #### One consistency note
 
@@ -3051,6 +3062,17 @@ of CBS's counts, which the notice says. **MUST NOT SAY**: that CBS produced or
 endorses the map; no CBS logo. KOOP's notices (Auteurswet art. 11, CC0 declared),
 the BAG (Public Domain Mark) and the national feed (CC0) need no notice. Wording
 approved by the owner 2026-09-24. **MUST DO: nothing.**
+
+**41. FEHD / DATA.GOV.HK / CSDI (Hong Kong) — required, and DISPLAYED.**
+
+**PERMITTED WITH CONDITIONS.** The registers under DATA.GOV.HK's Terms of Use v1.2 (read
+2026-09-22), FEHD's points under the CSDI Portal's terms (read 2026-09-24): identify the
+source, acknowledge the Government's and FEHD's intellectual property, attribute the
+Government, FEHD and DATA.GOV.HK, and name the CSDI Portal as a source - one paragraph. Both
+carry the uncapped indemnity the owner accepted (see "Hong Kong's indemnity"). Wording
+approved by the owner 2026-09-24. **MUST DO:** `check_personal_exposure.py hong_kong`, run
+2026-09-24 (the verdict is in `DECISIONS.md`). MTR's station lists (gate 3) and ALS (a
+cross-check) are not published and need no notice.
 
 What has grown instead is the pile of **permission questions**, now four: three
 "what does silence mean?" calls and the route-colour one. They are questions

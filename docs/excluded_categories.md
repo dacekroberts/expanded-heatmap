@@ -1505,6 +1505,33 @@ Leidschendam-Voorburg - and 23 tram stops are thinned by the spacing filter to a
 mile. Not drawn: tram 12 (event days), temporary trams 14 and 18 (during the works), ferries and
 NS trains.
 
+### Hong Kong - licensed food premises only, at FEHD's own points
+
+**What the registers cannot show: general retail and personal services.** FEHD licenses
+restaurants, food shops and a few specified trades; clothing, electronics and general shops, and
+hair and beauty salons, need no FEHD licence and are simply absent. Read the balance between
+categories as a fact about Hong Kong's licensing, not about its streets.
+
+**Left out of the registers** - food factories (11,568), frozen confection factories (558),
+factory canteens (444), cold stores (90) and milk factories (9); swimming pools (1,441),
+undertakers (145), funeral parlours (7), offensive trades (4) and slaughterhouses (2); places of
+public entertainment (262), cinemas and theatres (73) and karaoke establishments (62), as cinemas
+and entertainment venues are out in every city.
+
+**Not placed** - 28 licences with no point yet on FEHD's CSDI layers; none is placed by guessing
+from its address.
+
+**Counted once** - 2 second licences held under the same shop sign at the same address.
+
+**Named** - each dot carries the shop sign on its licence; the registers hold no licensee's name.
+308 licences carry FEHD's "no record" placeholder and show "No shop sign on the licence".
+
+**Stations.** MTR's Island, Tsuen Wan, Kwun Tong, Tseung Kwan O, South Island, Tung Chung, Tuen Ma
+and East Rail lines and the Light Rail are drawn. Not drawn: the Airport Express (Airport and
+AsiaWorld-Expo left out), the Disneyland Resort Line (Disneyland Resort), the high-speed rail, the
+Peak Tram and Hong Kong Tramways. Racecourse, open on race days only, is left out, and 17 Light
+Rail stops are thinned by the spacing filter to about one per half mile.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

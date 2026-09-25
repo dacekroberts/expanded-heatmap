@@ -1,0 +1,97 @@
+{
+  "fehd_restaurants": {
+    "file": "LP_Restaurants_EN.XML",
+    "url": "https://www.fehd.gov.hk/english/licensing/license/text/LP_Restaurants_EN.XML",
+    "bytes": 4865086,
+    "sha256": "68bc1a00537e2907953d0a824ecc5b470935c049e0240fe1cbc253b8c101cb15",
+    "retrieved": "2026-09-25T02:14:57+00:00",
+    "records": 17279,
+    "generation_date": "2026-09-25"
+  },
+  "fehd_other_food": {
+    "file": "LP_OtherFood_EN.XML",
+    "url": "https://www.fehd.gov.hk/english/licensing/license/text/LP_OtherFood_EN.XML",
+    "bytes": 4815384,
+    "sha256": "cbf8c849c14e2eb64d61ab173745f59a498b980d6f40b1498e8c051698005f1f",
+    "retrieved": "2026-09-25T02:15:05+00:00",
+    "records": 16520,
+    "generation_date": "2026-09-25"
+  },
+  "fehd_non_food": {
+    "file": "LP_NonFood_EN.XML",
+    "url": "https://www.fehd.gov.hk/english/licensing/license/text/LP_NonFood_EN.XML",
+    "bytes": 576446,
+    "sha256": "d2a6a897ed158c2ba315695b7c155f19de5056b78ad198930ae2f6e1ed831ec4",
+    "retrieved": "2026-09-25T02:15:13+00:00",
+    "records": 2031,
+    "generation_date": "2026-09-25"
+  },
+  "mtr_mtr_lines_and_stations": {
+    "file": "mtr_lines_and_stations.csv",
+    "url": "https://opendata.mtr.com.hk/data/mtr_lines_and_stations.csv",
+    "bytes": 14161,
+    "sha256": "e0e781152e2e6c5f6d7763262acbae76577b71ca4c66b4b7b72a97252175e0c3",
+    "retrieved": "2026-09-25T01:51:23+00:00",
+    "use": "gate 3 only - not published"
+  },
+  "mtr_light_rail_routes_and_stops": {
+    "file": "light_rail_routes_and_stops.csv",
+    "url": "https://opendata.mtr.com.hk/data/light_rail_routes_and_stops.csv",
+    "bytes": 14204,
+    "sha256": "f2fec60de38b72f38d3478fcdeecea4e3332b300b73c23bf41b22d412a2c2066",
+    "retrieved": "2026-09-25T01:51:23+00:00",
+    "use": "gate 3 only - not published"
+  },
+  "osm_rail": {
+    "file": "osm_rail_routes.json",
+    "url": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+    "bytes": 5565176,
+    "sha256": "1ce919e62a69c8af458c2f72b442c8993b6e0ce367fd9638fc2e32769c82d78f",
+    "retrieved": "2026-09-25T01:52:29+00:00",
+    "query": "[out:json][timeout:240];relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|train|monorail)$\"](22.13,113.82,22.57,114.45)->.r;.r out geom;node(r.r);out body;",
+    "elements": {
+      "relation": 127,
+      "node": 1198
+    },
+    "osm_base": "2026-09-25T01:50:50Z"
+  },
+  "osm_boundary": {
+    "file": "osm_boundary.json",
+    "url": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+    "bytes": 117239,
+    "sha256": "e46d94aca130f7e95c22ba19e326ec1f0d7ab07500bffee321362da16cb76d3c",
+    "retrieved": "2026-09-25T01:53:43+00:00",
+    "query": "[out:json][timeout:240];relation[\"boundary\"=\"administrative\"][\"ISO3166-1\"=\"HK\"](22.13,113.82,22.57,114.45);out geom;",
+    "elements": {
+      "relation": 1
+    },
+    "osm_base": "2026-09-25T01:51:47Z"
+  },
+  "csdi_restaurants": {
+    "file": "csdi_FEHD_RL.geojson",
+    "url": "https://portal.csdi.gov.hk/csdi-webpage/file-api?dataset_id=fehd_rcd_1630036390312_58893&format=geojson&layer_name=FEHD_RL",
+    "bytes": 19838567,
+    "sha256": "6820e8c2b9a6542c2c5a45a92c58ead54083cf74a124e82db13ac26bb6c4937f",
+    "retrieved": "2026-09-25T02:15:04+00:00",
+    "records": 17266,
+    "latest_record_update": "2026-09-23"
+  },
+  "csdi_other_food": {
+    "file": "csdi_FEHD_FL.geojson",
+    "url": "https://portal.csdi.gov.hk/csdi-webpage/file-api?dataset_id=fehd_rcd_1630036111498_75446&format=geojson&layer_name=FEHD_FL",
+    "bytes": 20053111,
+    "sha256": "688dc29ed92d587cce085e0649d122e4064d1bc9bc931ea4b9e7a0cb629bcfc7",
+    "retrieved": "2026-09-25T02:15:12+00:00",
+    "records": 16519,
+    "latest_record_update": "2026-09-23"
+  },
+  "csdi_non_food": {
+    "file": "csdi_FEHD_TL.geojson",
+    "url": "https://portal.csdi.gov.hk/csdi-webpage/file-api?dataset_id=fehd_rcd_1630036520303_61763&format=geojson&layer_name=FEHD_TL",
+    "bytes": 2299461,
+    "sha256": "84a6b0fbd38f8ebd14960b516cff8835254c8b029e4d909a6bffa0cd2675d276",
+    "retrieved": "2026-09-25T02:15:13+00:00",
+    "records": 2032,
+    "latest_record_update": "2026-09-23"
+  }
+}

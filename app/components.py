@@ -643,7 +643,8 @@ _NOTICES = [
      "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "
      "Horizonte, Brasília, Salvador, Fortaleza, Porto Alegre, Recife and "
      "Santos, and those cities' município boundaries, and "
-     "Prague's, Amsterdam's, Rome's and Rotterdam's city boundaries, are from OpenStreetMap, "
+     "Prague's, Amsterdam's, Rome's and Rotterdam's city boundaries, and Hong Kong's MTR and "
+     "Light Rail lines and stations, and its boundary, are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
      "geometry; stations, rings and categories are this project's work.",
@@ -981,6 +982,26 @@ _NOTICES = [
      "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) "
      "([cbs.nl](https://www.cbs.nl/)); the share is rounded from CBS's counts. "
      "CBS did not produce or endorse this map.",
+     False),
+    # FEHD's licence registers, via DATA.GOV.HK (Terms of Use v1.2, read
+    # 2026-09-22), and FEHD's point for each licence from the same registers on
+    # the CSDI Portal (its own terms, read 2026-09-24, add "identify clearly the
+    # Government and the CSDI Portal as the source"). Both carry the same
+    # uncapped indemnity, accepted by the owner. Identify the source,
+    # acknowledge the Government's and FEHD's IP, and attribute the Government,
+    # FEHD, DATA.GOV.HK and the CSDI Portal - in one paragraph. Wording
+    # approved by the owner 2026-09-24.
+    ("FEHD / DATA.GOV.HK / CSDI (Hong Kong)",
+     "Hong Kong's restaurants, food shops and bathhouses are from the Food and Environmental "
+     "Hygiene Department's licence registers for restaurants, other food premises and non-food "
+     "premises, obtained from DATA.GOV.HK ([data.gov.hk](https://data.gov.hk)), with each "
+     "licence's location from the same registers on the Common Spatial Data Infrastructure "
+     "(CSDI) Portal ([portal.csdi.gov.hk](https://portal.csdi.gov.hk)). The Government of the "
+     "Hong Kong Special Administrative Region and the Food and Environmental Hygiene Department "
+     "own the intellectual property in this data. Source: the Government of the Hong Kong SAR "
+     "and the Food and Environmental Hygiene Department, via DATA.GOV.HK and the CSDI Portal. "
+     "Filtered and redrawn by this project; station rings and density figures are this "
+     "project's own analysis.",
      False),
 ]
 
