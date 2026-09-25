@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**391 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**392 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-25**
 
+- [Full drift check after the four-city batch: 45 of 46 cities zero drift, Edmonton's map off by two Retail pins; the six Japanese briefs hold 31/31](#2026-09-25---full-drift-check-after-the-four-city-batch-45-of-46-cities-zero-drift-edmontons-map-off-by-two-retail-pins-the-six-japanese-briefs-hold-3131)
 - [Seoul, Taichung, Taoyuan and Taipei (Regional) are live: one batch, pushed as 5320f6a, rebooted by the owner, checked on the live site](#2026-09-25---seoul-taichung-taoyuan-and-taipei-regional-are-live-one-batch-pushed-as-5320f6a-rebooted-by-the-owner-checked-on-the-live-site)
 - [Taipei (Regional) built on the same branch: 133,335 storefronts, 153 stations, twelve lines; notice 47 and page 46 approved by the owner](#2026-09-25---taipei-regional-built-on-the-same-branch-133335-storefronts-153-stations-twelve-lines-notice-47-and-page-46-approved-by-the-owner)
 - [Taoyuan built on the same branch: 45,014 storefronts, 15 stations; notice 46 and page 45 approved by the owner, and Taiwan's step 2 made shared](#2026-09-25---taoyuan-built-on-the-same-branch-45014-storefronts-15-stations-notice-46-and-page-45-approved-by-the-owner-and-taiwans-step-2-made-shared)
@@ -436,6 +437,31 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-25 - Full drift check after the four-city batch: 45 of 46 cities zero drift, Edmonton's map off by two Retail pins; the six Japanese briefs hold 31/31
+
+- **45 of 46 cities reproduced their committed outputs.** The run covered
+  every city (`drift_check.py --jobs 4`) against master c3e6821, and every
+  recorded baseline was unchanged.
+- **Edmonton drifted, in `heatmap.html` only.**
+  - Its `excluded_stations.csv` and `non_revenue_stops.csv` are identical.
+  - After Folium ids are normalised, 8 lines differ. The Retail layer holds
+    **1,032** pins inside the rings where the committed map has **1,034**,
+    and three pin arrays differ to match.
+  - Edmonton's raw files are unchanged since 2026-09-21, and its
+    pipeline-specific code has not changed since. The committed map was last
+    re-rendered in the 41-map batch of 2026-09-24 (bf95720).
+  - So either a shared module (renderer, stations, taxonomies) changed its
+    output after that render, or that batch re-rendered from a processed
+    file older than the current step 2.
+  - Edmonton emits no baseline, so no row count pins down which. **Not
+    fixed today** (the owner's budget); the regenerated output was
+    discarded, and a PLAN item carries it.
+- **The six Japanese briefs' checks all hold, 31 of 31** (Tokyo 7, Osaka 4,
+  Kobe 4, Sapporo 4, Fukuoka 4, Kyoto 8). Every permit list, MLIT address
+  file, N02/N03 layer and licence page they rely on answered, including
+  Fukuoka's BODIK host, which its brief calls flaky. Japan starts next week
+  from briefs that are still true.
 
 ### 2026-09-25 - Seoul, Taichung, Taoyuan and Taipei (Regional) are live: one batch, pushed as 5320f6a, rebooted by the owner, checked on the live site
 
