@@ -16,12 +16,15 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**364 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**367 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Dark-mode line labels start from their line's own colour (owner)](#2026-09-24---dark-mode-line-labels-start-from-their-lines-own-colour-owner)
+- [Osaka's residual: the unlisted permit numbers are real permits, and a third of the gap is undetermined](#2026-09-24---osakas-residual-the-unlisted-permit-numbers-are-real-permits-and-a-third-of-the-gap-is-undetermined)
 - [The front page's credit: legible in light mode, opaque, linked to /copyright](#2026-09-24---the-front-pages-credit-legible-in-light-mode-opaque-linked-to-copyright)
+- [Chūō's and Shinjuku's personal-services lists: not open data, not used](#2026-09-24---chūōs-and-shinjukus-personal-services-lists-not-open-data-not-used)
+- [Meguro's 52%: its lists hold first permits only](#2026-09-24---meguros-52-its-lists-hold-first-permits-only)
 - [The front page's OSM credit is lifted above the city dots](#2026-09-24---the-front-pages-osm-credit-is-lifted-above-the-city-dots)
 - [Tokyo ships all 8 wards, disclosed; the COVID lists are not used; MHLW's slice is added (owner)](#2026-09-24---tokyo-ships-all-8-wards-disclosed-the-covid-lists-are-not-used-mhlws-slice-is-added-owner)
 - [Tokyo's own-time probe round: nothing fills the partial wards openly](#2026-09-24---tokyos-own-time-probe-round-nothing-fills-the-partial-wards-openly)
@@ -440,6 +443,40 @@ onwards; the early ones are split by phase rather than by hour.
   - Also passing: `check_render_current` (40), `check_provenance --strict`,
     and `check_map_markup` A-C.
   - Label positions are untouched, since only a colour changed.
+### 2026-09-24 - Osaka's residual: the unlisted permit numbers are real permits, and a third of the gap is undetermined
+
+- **Probed Osaka's 20–35% of permit numbers that no year-end list shows,
+  using e-Stat's per-city flow tables.** Sixteen CSVs were fetched:
+  第1表-2 and 第3表-2 for FY2023–24, 第E1表 and 第E3表 for FY2020–22, and
+  第2表 and 第4表.
+  - **Not withdrawn numbers.** Osaka's reported issued count matches each
+    year's number sequence to within 3%, FY2020–FY2024.
+  - **Not closed in the count.** Reported revised-law closures match the
+    permits visibly leaving the list (FY2024: 2,674 against 2,565).
+- **So the restaurant gap at FY2024-end (24,976) has two parts.**
+  - **Old law, 16,260: almost all dead.** The list already sits below the
+    no-closure ceiling.
+  - **Revised law, about 8,700–9,300: counted as live, never listed, and
+    undetermined.**
+    - About a third comes in runs of consecutive numbers. That is the shape of
+      department-store event stalls valid for days, which expire with no
+      closure filed.
+    - The rest is scattered, rising from 15% of FY2020's numbers to 32% of
+      FY2024's.
+- **This supersedes part of the earlier Osaka entry.** That entry read the
+  whole gap as mainly an inflated count. The draft page wording "not to
+  restaurants missing from the list" is now stronger than the evidence, and
+  it goes to the owner. It was not rewritten here, because page wording is
+  the owner's call.
+- **The build is still not blocked.** Placement is unaffected, and the list
+  is still what the city publishes as valid.
+- **Limits.**
+  - The per-city flow tables cover all permit types combined. MHLW publishes
+    the split by type only nationally.
+  - Kobe and Sapporo are the controls. Kobe lists 88–99% of each year's
+    permits. Sapporo lists 56–64% but books the rest as closures.
+- Recorded in `osaka.md`, `city_master_list.md`, `japan_ward_table.py`
+  (regenerated `japan_city_list.md`) and `PLAN.md`.
 
 ### 2026-09-24 - The front page's credit: legible in light mode, opaque, linked to /copyright
 
@@ -468,6 +505,62 @@ onwards; the early ones are split by phase rather than by hour.
   - **After the fix**: 0 failures at 375, 768 and 1200 in both themes (text
     5.6:1 light and 6.6:1 dark, links 12.7:1 or better).
 
+### 2026-09-24 - Chūō's and Shinjuku's personal-services lists: not open data, not used
+
+- **Read the terms of the two personal-services lists found during the Tokyo
+  probes. Both are NOT PERMITTED, or ambiguous in a way that matters, and
+  neither is used.**
+- **Chūō** (理容所, 美容所 and クリーニング所 xlsx, as of 2026-08-31):
+  - Not on the ward's open-data page (36 files) or the Tokyo catalogue
+    (organisation `t131024`: 47 packages).
+  - The open-data licence applies only to that page's files, and sends other
+    data to the site's copyright clause. That clause names 「PDFその他のデータ」
+    and bars reproduction or modification without permission.
+- **Shinjuku** (理容所, 美容所, クリーニング所 and 旅館業 PDFs, as of 2026-06-30):
+  - The same site terms as its food PDF.
+  - No open-data version exists: not on the ward's list (142 rows), the Tokyo
+    catalogue (137 packages), LinkData, or the 2021 archived page.
+  - Unlike food, the opening forms say nothing about open data, so the
+    reading that the ward treats the list as open data is gone.
+  - The PDFs carry 営業者住所 (the operator's address) unmasked.
+- **The remaining permitting reading**, that premises facts are not 著作物,
+  was declined for both, as it was for Sendai and for Shinjuku's food PDF. The
+  rejected alternative was to rely on it for a complete personal-services
+  layer in two wards.
+- **Asking either ward is the owner's last resort.** Neither publishes an
+  e-mail channel, only phone and fax (or a form, for Shinjuku's 区政情報課).
+- Recorded in `data_sources.md` (two rows), `tokyo.md` and `PLAN.md`.
+
+### 2026-09-24 - Meguro's 52%: its lists hold first permits only
+
+- **Found why Meguro's food lists hold 52% of the official count: both
+  publish first permits (新規) only, so a premises that moved from an old-law
+  permit onto the revised law since 2021 is in neither.**
+  - **Data**: `all_new_8.csv` (revised law) and `all_old_8.csv` (old law),
+    both as at 2026-04-01. Read by exact column name; 営業者氏名 and
+    施設電話番号 were never read.
+  - **Overlap**: none by 施設NO or 許可番号. The two lists hold 2,279
+    restaurant rows (1,443 + 836), 52.2% of 4,370, with none expired.
+  - **Every revised-law row is 新規**: 2,495 of 2,495. The old-law list has
+    590 新規 and 497 更新.
+  - **The flow is flat**: revised-law restaurant permits by fiscal year run
+    274, 250, 314, 316, 289. Across Tokyo, the revised-law count grew by
+    27,419 in FY2024 alone (e-Stat 5-4-1: 94,354 → 121,773), and the old-law
+    count fell by 27,277.
+  - **Monthly lists**: seven 「新規、更新、届出施設一覧」 files (令和7年9月 to
+    令和8年3月, fetched from BODIK) have 255 rows, all 新規 despite the title,
+    and 252 of them are in `all_new_8.csv`.
+- **The ward's list page carries no opt-out wording.** It warns only that
+  closed or changed premises and staff canteens may be included. So
+  `tokyo.md`'s line grouping Meguro with Taitō and Setagaya as leaving out
+  opt-outs was wrong. It was corrected in the brief.
+- **The share will fall.** The 1,087 old-law permits in the list expire by
+  2029 (584 in 2026), and each one that moves across drops out of both lists.
+  How the ward records a move-over is not published.
+- **No own-time fix exists, so Meguro ships at its measured share, disclosed**,
+  under the owner's all-8-wards decision.
+- `japan_ward_table.py`'s note and `docs/japan_city_list.md` were updated,
+  along with `tokyo.md` and `PLAN.md`.
 ### 2026-09-24 - The front page's OSM credit is lifted above the city dots
 
 - **Found by Rotterdam's deploy check**, handed to Cleanup: a city dot sat in

@@ -42,20 +42,51 @@ measure puts Kobe, Sapporo, Fukuoka, Kyoto, Hiroshima and Sendai at 93–101%.
 - **Best-supported reading, not confirmed by the city**: Osaka's national
   count includes expired or closed permits that each health office clears to
   a different degree. The list, of permits valid on its date, is the more
-  accurate of the two.
-- **Still open**: 20–35% of each year's permit-number sequence never appears
-  in any year-end file. These could be withdrawn numbers or unpublished
-  permits, and the files cannot tell which. Even on the most generous
-  allowance, at least about 3,300 of the 2025 count are provably dead
-  records.
-  - Settling it would take either e-Stat's per-city issued and closed tables
-    (衛生行政報告例 1-2 and 3-2, not yet fetched) or the city itself. Contacting
-    the city is the owner's last resort.
+  accurate of the two. That holds for the **old-law two-thirds** of the gap.
+  The new-law third (about 9,000 restaurants) is undetermined; see below.
+- **Partly settled (e-Stat flow tables, probed 2026-09-24): the permit
+  numbers no list shows are real permits, and the national count still holds
+  them.** Each year 20–32% of the permit-number sequence never appears in any
+  year-end file.
+  - **Not withdrawn numbers.** Osaka's reported issued count matches each
+    year's number sequence to within 3%, FY2020–FY2024, all permit types.
+    (Kobe's sequences run 2–7% over its count.)
+  - **Not closed in the count either.** Osaka's reported closures match the
+    permits visibly leaving the list (FY2024: 2,674 against 2,565).
+  - **So the restaurant gap at FY2024-end (24,976) has two parts.**
+    - **Old law, 16,260: almost all dead.** The list's 21,519 already sits
+      below the no-closure ceiling of 25,620.
+    - **New law, about 8,700–9,300 restaurants: undetermined.** Osaka counts
+      them as live and has never published them. This part grew from 2,837
+      (all types, FY2022) to 5,159 to 9,497.
+  - **What the new-law part might be.**
+    - **About a third are runs** of 5–38 consecutive numbers. That is the
+      shape of the only short-lived permits the lists show: department-store
+      event stalls at Abeno and Umeda, valid for days to weeks, which expire
+      with no closure filed.
+    - **The rest are scattered**, and they have risen from 15% of FY2020's
+      numbers to 32% of FY2024's. Only the city can say what they are.
+      Contacting it is the owner's last resort.
+  - **Controls.**
+    - Kobe lists 88–99% of each year's permits.
+    - Sapporo lists 56–64% but books the rest as closures, so its list still
+      equals its count.
+    - Osaka kept 41% of its FY2020 old-law permits at FY2024. Kobe, Kyoto,
+      Sapporo, Fukuoka and Yokohama kept 30–34%.
+  - **Tables**: e-Stat 第1表-2 and 第3表-2 (FY2023–24), 第E1表 and 第E3表
+    (FY2020–22), and 第2表 and 第4表. The per-city flow tables cover all permit
+    types combined; restaurants are 87% of Osaka's new-law count. Credit:
+    「衛生行政報告例」（厚生労働省）を加工して作成.
 - **What the page must say** (draft): "Osaka City's published list holds
   about 70% of the restaurant permits Osaka reports to national statistics.
   The evidence points mainly to that national figure including expired or
   closed permits, not to restaurants missing from the list; the city has not
   confirmed this." The 2,149 permits with no fixed address are not mapped.
+  - ⚠️ **Since the 2026-09-24 flow probe, "not to restaurants missing from the
+    list" is stronger than the evidence.** The new-law part, about 11% of
+    the count, is undetermined. About 6,000 of it (roughly 7% of the count)
+    does not even have the event-stall shape. The wording is for the owner to
+    settle.
 - **Placement is unaffected**, and the build is not blocked.
 
 ---

@@ -789,10 +789,21 @@ brief names.
     `docs/notifications/tokyo-{chuo,koto,minato,shinjuku}-request.md`. Each
     asks for open publication first. Before sending, confirm each ward's
     address, which is not verified in any of the four.
-  - [ ] **Meguro's 46%**: why, when both halves are published. Measure the
-    all_new / all_old overlap and any consent wording on its page.
-  - [ ] **Licence reads** for two side finds: Chūō's complete
-    personal-services lists (August 2026) and Shinjuku's (June 2026, PDF).
+  - [x] **Meguro's 52% explained (2026-09-24): its lists hold first permits
+    only.** Every revised-law row is 新規 (2,495 of 2,495), and so is every row
+    of seven monthly 「新規、更新、届出」 lists. Restaurant permits run flat at
+    about 290 a year, while Tokyo's revised-law count grew by 27,419 in FY2024
+    as old-law holders moved across. Premises that moved from an old-law
+    permit are in neither list. No overlap between the halves, and the ward's
+    page carries no opt-out wording. **Coverage will shrink** as the
+    remaining 1,087 old-law permits expire (584 in 2026). No own-time fix, so
+    it ships disclosed.
+  - [x] **Licence reads** for two side finds, 2026-09-24: Chūō's complete
+    personal-services lists (August 2026, xlsx) and Shinjuku's (June 2026,
+    PDF). **Both NOT PERMITTED or ambiguous; neither is used.** Neither is
+    open data, and each ward's site terms bar reuse without permission.
+    Chūō, Shinjuku, Setagaya and Kōtō keep no personal-services layer. Asking
+    either ward is the owner's last resort.
   - [x] **The designated cities against the same kind of count** (MHLW's
     衛生行政報告例, FY2024, old law + revised law): Kobe 101%, Sapporo 100%,
     Fukuoka 101%, Kyoto 93%, Hiroshima 99%, Sendai 101%. These lists are
@@ -802,9 +813,13 @@ brief names.
   about 12,000. The list is even across wards against the Economic Census,
   and every file since 2023 reads 69–76%. The build is NOT blocked. The page
   carries the disclosure drafted in `osaka.md`.
-- [ ] Optional, and ours to do: e-Stat 衛生行政報告例 tables 1-2 and 3-2
-  (permits issued and closed per city) would settle Osaka's residual: 20–35%
-  of each year's permit numbers are unexplained.
+- [x] **Osaka's residual probed (2026-09-24, e-Stat flow tables).** The
+  unlisted permit numbers are real permits, still in the count. About
+  two-thirds of the gap is dead old-law records. The other third, about 9,000
+  revised-law restaurants the city counts but never lists, is undetermined.
+  Some of it has the shape of short-lived event stalls. Build not blocked.
+- [ ] **Owner: Osaka's page wording.** The draft's "not to restaurants
+  missing from the list" is now stronger than the evidence (`osaka.md`).
 - [ ] **Fukuoka** — agree the wording that discloses the ~20% of restaurants
   with no published address. BODIK is flaky, so `fetch_sources.py` retries.
 - [x] **No pre-build items**: Seoul (its brief is deliberately partial, and

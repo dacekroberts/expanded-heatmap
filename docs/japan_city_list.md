@@ -10,7 +10,7 @@
 
 | City | Band | Wards | Food service | Food retail | Personal services | Of the official count | Placed at block | Stations | Order / status |
 |---|---|---|---|---|---|---|---|---|---|
-| **Osaka** | 🟢 A | 24 | **52,184** | 7,928 | 15,766 | ⚠️ **67%** of 81,418 | **99.1%** | 214 | Builds 1st. The official count is most likely inflated by expired or closed permits (its old-law count exceeds what can exist), not the list short. See osaka.md |
+| **Osaka** | 🟢 A | 24 | **52,184** | 7,928 | 15,766 | ⚠️ **67%** of 81,418 | **99.1%** | 214 | Builds 1st. About two-thirds of the gap is expired old-law permits still in the official count. The other third, revised-law permits the city counts but never lists, is undetermined. See osaka.md |
 | **Kobe** | 🟢 A | 9 | **19,707** | 3,820 | 4,993 | ✅ **101%** of 21,554 | **97.3%** | 121 | 2nd |
 | **Sapporo** | 🟢 A | 10 | **19,883** | 3,358 | 5,993 | ✅ **100%** of 20,484 | **86.0%** | 93 | 3rd. Grid addresses resolve to the 条丁目 block, about 100 m |
 | **Fukuoka** | 🟢 A | 7 | **18,330** | 9,070 | 5,842 | ✅ **101%** of 25,505 | **97.6%** | 71 | 4th. Includes MHLW's addressed rows; about 20% of restaurants withhold their address |
@@ -116,7 +116,7 @@
 | Setagaya | **5,873** | 1,342 | 0 | 100.0% | 38 | ⚠️ **63%** of 9,291 | opted-out premises left out (the ward's page) |
 | Taitō | **5,779** | 1,219 | 1,048 | 100.0% | 16 | ⚠️ **81%** of 8,112 | opted-out premises left out (the ward's page) |
 | Minato | **4,781** | 730 | 2,576 | 99.8% | 35 | ⚠️ **31%** of 15,939 | permits 2021–2026 only; consent-filtered. No old-law list is published |
-| Meguro | **2,022** | 1,045 | 1,412 | 100.0% | 10 | ⚠️ **52%** of 4,370 | new-law and old-law lists. The gap is not yet explained |
+| Meguro | **2,022** | 1,045 | 1,412 | 100.0% | 10 | ⚠️ **52%** of 4,370 | first permits only: premises moved from an old-law permit since 2021 are in neither list, so the share falls as old permits expire |
 | Chūō | **1,324** | 992 | 0 | 99.1% | 22 | ⚠️ **12%** of 11,056 | permits 2021–2022 only; never updated since |
 | Kōtō | **526** | 902 | 0 | 99.9% | 28 | ⚠️ **9%** of 6,102 | permits 2021–2022 only; consent-only new permits |
 
