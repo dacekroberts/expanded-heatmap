@@ -16,12 +16,19 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**364 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**371 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Nine stale "only city" claims corrected on the site (owner-approved wording)](#2026-09-24---nine-stale-only-city-claims-corrected-on-the-site-owner-approved-wording)
 - [Hong Kong built: 21,135 storefronts at FEHD's own points, 141 stations; no geocoder after all](#2026-09-24---hong-kong-built-21135-storefronts-at-fehds-own-points-141-stations-no-geocoder-after-all)
+- [Seoul's four calls decided, and Osaka's page wording revised (owner)](#2026-09-24---seouls-four-calls-decided-and-osakas-page-wording-revised-owner)
+- [Seoul's Step 0 completed: 17 registers, three buckets, coordinates from the register itself, four owner calls](#2026-09-24---seouls-step-0-completed-17-registers-three-buckets-coordinates-from-the-register-itself-four-owner-calls)
+- [Dark-mode line labels start from their line's own colour (owner)](#2026-09-24---dark-mode-line-labels-start-from-their-lines-own-colour-owner)
+- [Osaka's residual: the unlisted permit numbers are real permits, and a third of the gap is undetermined](#2026-09-24---osakas-residual-the-unlisted-permit-numbers-are-real-permits-and-a-third-of-the-gap-is-undetermined)
 - [The front page's credit: legible in light mode, opaque, linked to /copyright](#2026-09-24---the-front-pages-credit-legible-in-light-mode-opaque-linked-to-copyright)
+- [Chūō's and Shinjuku's personal-services lists: not open data, not used](#2026-09-24---chūōs-and-shinjukus-personal-services-lists-not-open-data-not-used)
+- [Meguro's 52%: its lists hold first permits only](#2026-09-24---meguros-52-its-lists-hold-first-permits-only)
 - [The front page's OSM credit is lifted above the city dots](#2026-09-24---the-front-pages-osm-credit-is-lifted-above-the-city-dots)
 - [Tokyo ships all 8 wards, disclosed; the COVID lists are not used; MHLW's slice is added (owner)](#2026-09-24---tokyo-ships-all-8-wards-disclosed-the-covid-lists-are-not-used-mhlws-slice-is-added-owner)
 - [Tokyo's own-time probe round: nothing fills the partial wards openly](#2026-09-24---tokyos-own-time-probe-round-nothing-fills-the-partial-wards-openly)
@@ -407,6 +414,39 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-24 - Nine stale "only city" claims corrected on the site (owner-approved wording)
+
+- **Found by the cross-city inconsistency draft** (`docs/map_inconsistencies.md`,
+  open questions 1-8 and 19). Every one was a superlative or a count that was
+  true when written and stopped being true as cities landed.
+- **Each fact was re-verified before drafting.**
+  - **8 regional maps.**
+  - **5 maps draw some commuter-style rail**: DART, S-tog, Roma–Viterbo, CPTM
+    9 and SuperVia.
+  - **15 maps take their rail from OpenStreetMap.**
+  - **Rome and Rotterdam also name no businesses.**
+  - **5 cities use the stop-spacing filter**, confirmed from their
+    `excluded_stations.csv` (SF 65, Philadelphia 161, Boston 25, Amsterdam
+    59, Rotterdam 23).
+  - **7 cities use the half-size rings**: New York, the five French cities
+    and Oslo.
+- **Pages changed:**
+  - **Miami**: "the only regional map" became "the site's first regional map".
+  - **San Francisco**: commuter rail is "left out here as on most maps",
+    the wording already approved for Miami and Boston.
+  - **Mexico City** and **Dublin**: the superlative is dropped.
+  - **Paris**: "seven maps" became "several".
+  - **New York**: "unlike the other cities here" is dropped, and its
+    "half-mile rings used elsewhere" became "the 0.6-mile rings most cities
+    here use". The outer ring was never half a mile.
+- **`docs/excluded_categories.md` changed:**
+  - the counts header;
+  - the ring sizes and the spacing filter's five cities;
+  - Dublin's "only city that names no businesses";
+  - New York's "other four cities".
+- **The principle applied**: where a count would drift again as cities land,
+  the comparison is removed rather than the number updated.
+
 ### 2026-09-24 - Hong Kong built: 21,135 storefronts at FEHD's own points, 141 stations; no geocoder after all
 
 - **Built ahead of Taiwan (owner).** Hong Kong's brief left the least open, so a
@@ -508,6 +548,158 @@ onwards; the early ones are split by phase rather than by hour.
     regions.
   - Provenance, scope disclosure, the registry, no-fetch, render currency and
     label contrast all pass.
+### 2026-09-24 - Seoul's four calls decided, and Osaka's page wording revised (owner)
+
+- **The owner decided Seoul's four calls:**
+  - **Buckets**: as recommended, except **단란주점 (karaoke bars, 1,865) in
+    Food service**. The condition was "if no privacy concerns, they see the
+    same crowd as pubs/bars". Checked before recording: no operator column,
+    and 0 active rows pair a person-like trade name with a residential
+    address; only 2 addresses read residential at all. 유흥주점 (73% hostess
+    bars) stays out under the adult-services rule.
+  - **Rail**: 경의·중앙, 수인·분당 and 경춘 are drawn; inside Seoul their
+    spacing matches the subway's. 공항철도, GTX-A, AREX express, the one-station
+    stubs (서해, 김포 골드라인) and intercity services are out.
+  - **Stations inside Seoul only**, Japan's rule, as the register is
+    Seoul-only.
+  - **Region: East Asia.** The owner pointed to Hong Kong's build, and its
+    worktree's `PLAN.md` confirms it creates "the East Asia region", not yet
+    on master. Seoul joins that region. The rejected alternative was a
+    region per country.
+- **Osaka's page wording revised (owner).** It now says expired permits
+  explain most of the gap, and that about a tenth of the count is permits the
+  city counts but does not list, some of them short-lived event permits. It
+  replaces "not to restaurants missing from the list", which the flow probe
+  made stronger than the evidence.
+- Files: `seoul.md`, `osaka.md`, `data_sources.md`, `city_master_list.md` and
+  `PLAN.md`.
+
+### 2026-09-24 - Seoul's Step 0 completed: 17 registers, three buckets, coordinates from the register itself, four owner calls
+
+- **Completed Seoul's Step 0 at the owner's request, before the build.**
+  - **Correction first.** The 2026-09-23 brief's "never done" list was partly
+    stale on the day it was written. The eight core datasets, their KOGL
+    Type 1 licence, the no-operator-column check and the citywide scope had
+    been measured on 2026-09-22.
+  - The brief was rewritten from the measurements below, and passes 4/4.
+- **Found Seoul's retail registers, which no screen had seen.** The
+  2026-09-21 OA-id sweep skipped OA-16050 to 16280, which is exactly where
+  the citywide permit family lives. A GET sweep of 16040 to 16290, reading
+  each page's `<meta name="title">` (no search form), listed 118 citywide
+  types. Nine were downloaded through the page's own SHEET export.
+  - **Retail**: bakeries 4,228, delis 15,410, large food shops 660, butchers
+    6,317, tobacco retailers 15,590, large stores 740, in-store health-food
+    sellers 10,648.
+  - **Bars**: 단란주점 1,865 and 유흥주점 1,682 (73% 룸살롱).
+  - Each of the nine pages, read individually: KOGL Type 1, `제3저작권자 없음`.
+- **Measured the buckets.** 59,816 retail permits come to **53,215 premises**
+  once de-duplicated by building and brand; a convenience store often holds
+  three permits. The result is about 157,000 food, 53,000 retail and 40,000
+  personal-services premises. Recommendations follow existing precedents:
+  - lodging and vets out (every city; NAICS 541940);
+  - 유흥주점 out (the adult-services rule, owner 2026-09-21);
+  - public baths kept (Prague's saunas);
+  - convenience stores and bakeries in Retail (Boston, Japan).
+- **Keyed the taxonomy at the permit type.** Each dataset is one named type,
+  so the catch-all shares inside it (일반음식점 `기타` 17.7%) never decide a
+  bucket. The sub-type only removes or moves rows.
+- **Filled restaurant coordinates from the register itself.** The 11,121
+  active restaurants without a point (9.3%) bunch by district (종로구 1,861,
+  양천구 8), not by age. Borrowing the point of another row at the same
+  building, from 124,340 building points across 1.2 million rows, places
+  8,409 of them.
+  - **Control**: 93,048 restaurants with known points were re-placed this way
+    at median 0 m, 99th percentile 11 m.
+  - Restaurants go from 90.7% to **97.7%**; 2,712 stay unplaced, disclosed.
+  - The rejected alternative was a geocoding leg. The 2026-09-22 entry had
+    budgeted one.
+- **Sized the Korean personal-exposure pass**: a bare person's-name trade name
+  at a residential, non-commercial address. **113 premises** across the core
+  eight. `전화번호` is the only personal-adjacent column in any file, and it is
+  never read.
+- **Rail: both failed measurements now answered.**
+  - **369 stations**: the earlier "0" was a failed query.
+  - **3 light-rail lines**, all coloured.
+  - Spacing inside Seoul puts 경의·중앙, 수인·분당 and 경춘 (1.25–1.39 km)
+    within the subway's own range (0.91–1.36 km). 공항철도 is 3.37 km;
+    서해 and 김포 골드라인 are one-station stubs.
+  - **Two new failures are recorded as failures**: Line 7's "0 in Seoul" and
+    신림선, lost to Overpass 429/504s. Both are re-measured at build.
+- **Four owner calls, recommended, not decided**:
+  - the bucket map;
+  - the five Korail metro lines;
+  - stations inside Seoul only (Japan's rule);
+  - an "East Asia" map region, following South America's
+    continent-not-country call.
+- Files: `seoul.md`, `data_sources.md`, `city_master_list.md` and `PLAN.md`.
+
+### 2026-09-24 - Dark-mode line labels start from their line's own colour (owner)
+
+- **Found by Rotterdam's deploy check**, handed to Cleanup: different lines
+  shared one dark-mode label colour. Paris 1, 9 and 10 were all `#ffff00`.
+- **Measured before choosing.**
+  - **The old rule**: each label was its colour x1.8 per channel, clipped at
+    255. That merged 21 pairs of different lines in 10 cities.
+  - **Worse, it changed hue**: orange lines got yellow labels (Washington's,
+    Boston's and San Diego's Orange Lines, Marseille's T1, Rome's Metro A). A
+    label's median distance from its own line's colour was CIE76 35.7.
+- **Owner's choice, of two measured options**: a label is its line's agency
+  colour, lightened by the smallest HSL step that reaches 4.5:1 on the dark
+  page only when it needs to. The median label is now its line's colour
+  exactly (distance 0.0).
+  - **The option not taken**: keep the x1.8 shade and separate only the
+    collided pairs. It changes 32 labels, but orange stays yellow.
+- **Lightening alone was not enough.** It brings dark colours together: 10
+  new pairs among navies and purples (Rotterdam's Trams 1 and 11, Boston's Red
+  Line and Mattapan).
+  - **The fix**: `linecolour.dark_label_colours()` chooses a city's labels
+    together and moves the originally lighter one of any too-close pair
+    lighter.
+  - **Result**: 0 pairs left.
+  - **Colours an agency made alike stay alike.**
+- **New check**: `check_map_markup.py` part C refuses two different lines
+  sharing a dark-mode label colour. Positive control: 21 on the committed maps
+  before the change, the same 21 the probe found. After: 0.
+- **All 40 maps re-rendered.** With folium's random ids masked, 37 differ from
+  the committed maps only in `--dm-label` and 3 are identical.
+  - `drift_check --jobs 4`: no data drift, every baseline figure unchanged.
+  - Also passing: `check_render_current` (40), `check_provenance --strict`,
+    and `check_map_markup` A-C.
+  - Label positions are untouched, since only a colour changed.
+### 2026-09-24 - Osaka's residual: the unlisted permit numbers are real permits, and a third of the gap is undetermined
+
+- **Probed Osaka's 20–35% of permit numbers that no year-end list shows,
+  using e-Stat's per-city flow tables.** Sixteen CSVs were fetched:
+  第1表-2 and 第3表-2 for FY2023–24, 第E1表 and 第E3表 for FY2020–22, and
+  第2表 and 第4表.
+  - **Not withdrawn numbers.** Osaka's reported issued count matches each
+    year's number sequence to within 3%, FY2020–FY2024.
+  - **Not closed in the count.** Reported revised-law closures match the
+    permits visibly leaving the list (FY2024: 2,674 against 2,565).
+- **So the restaurant gap at FY2024-end (24,976) has two parts.**
+  - **Old law, 16,260: almost all dead.** The list already sits below the
+    no-closure ceiling.
+  - **Revised law, about 8,700–9,300: counted as live, never listed, and
+    undetermined.**
+    - About a third comes in runs of consecutive numbers. That is the shape of
+      department-store event stalls valid for days, which expire with no
+      closure filed.
+    - The rest is scattered, rising from 15% of FY2020's numbers to 32% of
+      FY2024's.
+- **This supersedes part of the earlier Osaka entry.** That entry read the
+  whole gap as mainly an inflated count. The draft page wording "not to
+  restaurants missing from the list" is now stronger than the evidence, and
+  it goes to the owner. It was not rewritten here, because page wording is
+  the owner's call.
+- **The build is still not blocked.** Placement is unaffected, and the list
+  is still what the city publishes as valid.
+- **Limits.**
+  - The per-city flow tables cover all permit types combined. MHLW publishes
+    the split by type only nationally.
+  - Kobe and Sapporo are the controls. Kobe lists 88–99% of each year's
+    permits. Sapporo lists 56–64% but books the rest as closures.
+- Recorded in `osaka.md`, `city_master_list.md`, `japan_ward_table.py`
+  (regenerated `japan_city_list.md`) and `PLAN.md`.
 
 ### 2026-09-24 - The front page's credit: legible in light mode, opaque, linked to /copyright
 
@@ -536,6 +728,62 @@ onwards; the early ones are split by phase rather than by hour.
   - **After the fix**: 0 failures at 375, 768 and 1200 in both themes (text
     5.6:1 light and 6.6:1 dark, links 12.7:1 or better).
 
+### 2026-09-24 - Chūō's and Shinjuku's personal-services lists: not open data, not used
+
+- **Read the terms of the two personal-services lists found during the Tokyo
+  probes. Both are NOT PERMITTED, or ambiguous in a way that matters, and
+  neither is used.**
+- **Chūō** (理容所, 美容所 and クリーニング所 xlsx, as of 2026-08-31):
+  - Not on the ward's open-data page (36 files) or the Tokyo catalogue
+    (organisation `t131024`: 47 packages).
+  - The open-data licence applies only to that page's files, and sends other
+    data to the site's copyright clause. That clause names 「PDFその他のデータ」
+    and bars reproduction or modification without permission.
+- **Shinjuku** (理容所, 美容所, クリーニング所 and 旅館業 PDFs, as of 2026-06-30):
+  - The same site terms as its food PDF.
+  - No open-data version exists: not on the ward's list (142 rows), the Tokyo
+    catalogue (137 packages), LinkData, or the 2021 archived page.
+  - Unlike food, the opening forms say nothing about open data, so the
+    reading that the ward treats the list as open data is gone.
+  - The PDFs carry 営業者住所 (the operator's address) unmasked.
+- **The remaining permitting reading**, that premises facts are not 著作物,
+  was declined for both, as it was for Sendai and for Shinjuku's food PDF. The
+  rejected alternative was to rely on it for a complete personal-services
+  layer in two wards.
+- **Asking either ward is the owner's last resort.** Neither publishes an
+  e-mail channel, only phone and fax (or a form, for Shinjuku's 区政情報課).
+- Recorded in `data_sources.md` (two rows), `tokyo.md` and `PLAN.md`.
+
+### 2026-09-24 - Meguro's 52%: its lists hold first permits only
+
+- **Found why Meguro's food lists hold 52% of the official count: both
+  publish first permits (新規) only, so a premises that moved from an old-law
+  permit onto the revised law since 2021 is in neither.**
+  - **Data**: `all_new_8.csv` (revised law) and `all_old_8.csv` (old law),
+    both as at 2026-04-01. Read by exact column name; 営業者氏名 and
+    施設電話番号 were never read.
+  - **Overlap**: none by 施設NO or 許可番号. The two lists hold 2,279
+    restaurant rows (1,443 + 836), 52.2% of 4,370, with none expired.
+  - **Every revised-law row is 新規**: 2,495 of 2,495. The old-law list has
+    590 新規 and 497 更新.
+  - **The flow is flat**: revised-law restaurant permits by fiscal year run
+    274, 250, 314, 316, 289. Across Tokyo, the revised-law count grew by
+    27,419 in FY2024 alone (e-Stat 5-4-1: 94,354 → 121,773), and the old-law
+    count fell by 27,277.
+  - **Monthly lists**: seven 「新規、更新、届出施設一覧」 files (令和7年9月 to
+    令和8年3月, fetched from BODIK) have 255 rows, all 新規 despite the title,
+    and 252 of them are in `all_new_8.csv`.
+- **The ward's list page carries no opt-out wording.** It warns only that
+  closed or changed premises and staff canteens may be included. So
+  `tokyo.md`'s line grouping Meguro with Taitō and Setagaya as leaving out
+  opt-outs was wrong. It was corrected in the brief.
+- **The share will fall.** The 1,087 old-law permits in the list expire by
+  2029 (584 in 2026), and each one that moves across drops out of both lists.
+  How the ward records a move-over is not published.
+- **No own-time fix exists, so Meguro ships at its measured share, disclosed**,
+  under the owner's all-8-wards decision.
+- `japan_ward_table.py`'s note and `docs/japan_city_list.md` were updated,
+  along with `tokyo.md` and `PLAN.md`.
 ### 2026-09-24 - The front page's OSM credit is lifted above the city dots
 
 - **Found by Rotterdam's deploy check**, handed to Cleanup: a city dot sat in

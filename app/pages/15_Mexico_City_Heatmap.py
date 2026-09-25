@@ -45,8 +45,7 @@ are listed in `outputs/mexico_city/excluded_stations.csv`.
 Every public host for the Mexico City government, for STC Metro and for the STE
 is unreachable from where this was built, and the Metro's transit feed is
 refused at its download location. So the alignments are OpenStreetMap
-contributors' mapping of the network rather than the agency's own file — the one
-city here whose rail geometry does not come from its operator. For the same
+contributors' mapping of the network rather than the agency's own file. For the same
 reason, the station count has not been checked against what STC Metro
 publishes.
 

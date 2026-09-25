@@ -189,9 +189,9 @@ for 東京都. Four ward probes followed the same day.
 | Shinjuku | 84% of 15,356 | complete as of 2023-01-01 (its disclosed vintage) | ⚠️ **A full list at 2026-03-31**: PDF, 1,023 pages, 15,333 permits, plus monthly new-permit PDFs. **Not on the open-data portal, so the site terms bar reuse without permission**. The PDFs also carry operator columns |
 | Taitō | 81% of 8,112 | the ward's page: premises that opted out are left out | — |
 | Setagaya | 63% of 9,291 | the ward's page: premises that opted out are left out | — |
-| Meguro | 52% of 4,370 | new-law and old-law lists both published; **the gap is not yet explained** | — |
+| Meguro | 52% of 4,370 | **first permits only** (measured 2026-09-24, below): premises that moved from an old-law permit onto the revised law since 2021 are in neither list. The share falls as the remaining old-law permits expire | **Nothing.** The monthly 「新規、更新、届出」 lists are first permits only too |
 | **Minato** | **31%** of 15,939 | **consent-filtered** (the resource says so); new-law permits only | **Nothing.** No old-law list exists anywhere (ward site, both catalogues, web archive). The ward's own report: 16,073 restaurants in force at 2026-03-31, 11,631 new-law and 4,442 old-law |
-| **Chūō** | **12%** of 11,056 | permits of 2021-06 to 2022-12 only, published 2024-03 and never updated | **Nothing.** No other list in any format. Side find: **complete personal-services lists** (August 2026) on the ward's site, licence not yet read (possibly site terms) |
+| **Chūō** | **12%** of 11,056 | permits of 2021-06 to 2022-12 only, published 2024-03 and never updated | **Nothing.** No other list in any format. Side find: **complete personal-services lists** (August 2026) on the ward's site. **Not used**: they are not open data, and the site's copyright clause bars reuse without permission (licence read 2026-09-24, `data_sources.md`) |
 | **Kōtō** | **9%** of 6,102 | consent-only new permits, 2021-06 to 2022-11 | Monthly lists of the last 12 months, but under site terms that bar reuse. Health bureau FY2024: 3,760 new-law + 2,285 old-law restaurants |
 
 **Why Tokyo differs from the designated cities:**
@@ -200,9 +200,42 @@ for 東京都. Four ward probes followed the same day.
 - Four publish their own register (Shibuya, Taitō, Setagaya, Meguro).
 - Three publish an export in the national recommended format that is **opt-in
   or consent-filtered**, the same shape as MHLW's national open data.
-- Taitō, Setagaya and Meguro also leave out premises that declined
-  publication.
+- Taitō and Setagaya also leave out premises that declined publication.
+  (Meguro was grouped with them here until 2026-09-24. Its page says nothing
+  of the kind; its gap is a different one, below.)
+- Meguro publishes first permits only.
 - Chūō's is a one-off snapshot.
+
+**Meguro's 52%, measured 2026-09-24.** It publishes two lists as at
+2026-04-01: revised-law `all_new_8.csv` and old-law `all_old_8.csv`. Read
+by exact column name, with 営業者氏名 and 施設電話番号 never read:
+- **No overlap.** The two lists share no 施設NO or 許可番号. Together they hold
+  2,279 restaurant rows (1,443 revised-law and 836 old-law), which is 52.2% of
+  4,370. No row has expired.
+- **Every revised-law row is a first permit.** 新規更新の別 is 新規 on all
+  2,495 rows, where the old-law list has 590 新規 and 497 更新.
+- **The flow is flat.** Revised-law restaurant permits by fiscal year: 274
+  (FY2021, from June), 250, 314, 316, 289. Across Tokyo, the revised-law
+  count grew by **27,419 in FY2024 alone** (94,354 → 121,773) while the old-law
+  count fell by 27,277, because holders moved across as their old permits
+  expired. On Tokyo's split, Meguro held about 2,730 revised-law restaurants
+  at 2025-03-31, and the list has 1,154 permitted by then.
+- **The monthly lists confirm it.** Seven monthly 「新規、更新、届出施設一覧」
+  files (令和7年9月 to 令和8年3月) have 255 rows, **all 新規**, despite the
+  title. 252 are in `all_new_8.csv`.
+- **So a premises that moved onto the revised law is in neither list.** How
+  the ward records a move-over is not published: it may be a renewal-type
+  record the export leaves out. The ward has not said.
+- **Not opt-outs.** The ward's list page
+  (`/seikatsueisei/kenkoufukushi/eisei/seikatueisei_opendata.html`) warns
+  only that closed or changed premises and staff canteens may be included.
+- **The share will fall.** The 1,087 old-law permits still in the list
+  expire by 2029 (584 in 2026, 423 in 2027). Each one that moves across drops
+  out of both lists.
+- **No own-time fix.** Nothing else Meguro publishes carries them. MHLW's
+  slice added at most about 3% in the four wards probed, and it holds new
+  online filings, not move-overs. Meguro ships at its measured share,
+  disclosed, like the other partial wards (owner, 2026-09-24).
 
 **The ways through are all requests, and all are the owner's act**
 (`docs/gated_access.md`, items 29–32):

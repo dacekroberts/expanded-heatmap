@@ -105,9 +105,10 @@ def delta_e(a, b):
 #
 #   - Dark: lighten a label that fails (the owner's option), and - since the
 #     deploy check - with no filter. Each label carries an explicit dark-theme
-#     colour: what the old filter produced (so a label that already read is
-#     unchanged), with its HSL lightness raised by the smallest step that
-#     reaches 4.5:1 against the halo actually drawn, the page colour.
+#     colour, lightened by the smallest HSL step that reaches 4.5:1 against the
+#     halo actually drawn, the page colour. (Its STARTING shade was first the
+#     old filter's; superseded the same evening - see "DARK LABELS START FROM
+#     THE LINE'S OWN COLOUR" below.)
 #   - Light: NOT the dark treatment mirrored. Darkening to 4.5:1 moved the
 #     median failing label by CIE76 19.9 and turned every yellow olive, so a
 #     label no longer matched its line. Instead a label keeps its colour and
@@ -117,8 +118,24 @@ def delta_e(a, b):
 #
 # The lines themselves are untouched in both themes.
 # scripts/check_map_markup.py measures every committed label the same way.
+#
+# DARK LABELS START FROM THE LINE'S OWN COLOUR, NOT THE OLD FILTER'S SHADE
+# (owner, 2026-09-24, the same evening). The first dark rule kept "what the
+# filter produced": each channel x1.8, clipped at 255. Clipping destroys hue.
+# It turned orange lines' labels YELLOW (Washington's, Boston's and San Diego's
+# Orange Lines, Marseille's T1, Rome's Metro A), and it merged 21 pairs of
+# different lines into one label colour across 10 cities (Paris 1, 9 and 10 all
+# #ffff00). A label is now its line's agency colour, lightened by the smallest
+# HSL step that reaches 4.5:1 only when it needs to. Most do not, so the
+# median label is its line's colour exactly.
+#
+# Lightening alone brings DARK colours together (two navies or two purples
+# lifted to the same readable lightness), so dark_label_colours() then SEPARATES
+# any two lines whose agency colours differ (CIE76 >= HARD_FLOOR) but whose
+# dark labels came out within it. Measured on all 40 maps: 21 collapsed pairs
+# under the old rule, 10 new ones from lightening alone, 0 after separation.
 LABEL_MIN_CONTRAST = 4.5
-DARK_LABEL_BRIGHTNESS = 1.8     # the retired dark filter, kept as the starting shade
+SEPARATION_STEP = 2             # percent of HSL lightness per separating move
 
 
 def _rgb(hex_colour):
@@ -143,11 +160,14 @@ def contrast_ratio(a, b):
     return (hi + 0.05) / (lo + 0.05)
 
 
-def brightened(hex_colour, factor=DARK_LABEL_BRIGHTNESS):
-    """The shade CSS `brightness(factor)` gave: each sRGB channel scaled and
-    clipped, truncated as the browser does (rounding once put a label 0.04 on
-    the wrong side of 4.5:1)."""
-    return "#" + "".join(f"{min(255, math.floor(v * factor)):02x}" for v in _rgb(hex_colour))
+def _lightness(colour):
+    return colorsys.rgb_to_hls(*(v / 255 for v in _rgb(colour)))[1]
+
+
+def _shifted(colour, step):
+    """`colour` with its HSL lightness moved by `step` percent, hue kept."""
+    h, l, s = colorsys.rgb_to_hls(*(v / 255 for v in _rgb(colour)))
+    return _hex(v * 255 for v in colorsys.hls_to_rgb(h, min(1.0, max(0.0, l + step / 100)), s))
 
 
 def _away_from(colour, halo, minimum):
@@ -163,17 +183,62 @@ def _away_from(colour, halo, minimum):
     raise ValueError(f"{colour}: no lightness reaches {minimum}:1 against {halo}")
 
 
-def label_colours(colour, *, light_halo, dark_halo, minimum=LABEL_MIN_CONTRAST):
+def dark_label(colour, dark_halo, minimum=LABEL_MIN_CONTRAST):
+    """One line's dark-theme label: its own colour, lightened only as far as
+    `minimum` against the halo requires."""
+    return colour if contrast_ratio(colour, dark_halo) >= minimum else _away_from(colour, dark_halo, minimum)
+
+
+def dark_label_colours(line_colours, *, dark_halo, city="", minimum=LABEL_MIN_CONTRAST):
+    """{key: dark-theme label colour} for every line in one city, separated.
+
+    Starts from dark_label() per line, then, while two lines whose own colours
+    differ (CIE76 >= HARD_FLOOR) have labels within HARD_FLOOR of each other,
+    moves the originally LIGHTER one lighter by SEPARATION_STEP. When that one
+    is already at white, it moves the other darker instead, as long as the
+    other still reads at `minimum`. Two lines the agency itself coloured alike
+    are left alike: that sameness is the agency's, not this renderer's.
+    Raises rather than return a pair it could not separate.
+    """
+    own = {k: c.lower() for k, c in line_colours.items()}
+    dark = {k: dark_label(c, dark_halo, minimum) for k, c in own.items()}
+    keys = list(own)
+    for _ in range(500):
+        clash = next(((a, b) for i, a in enumerate(keys) for b in keys[i + 1:]
+                      if delta_e(own[a], own[b]) >= HARD_FLOOR
+                      and delta_e(dark[a], dark[b]) < HARD_FLOOR), None)
+        if clash is None:
+            return dark
+        a, b = clash
+        hi, lo = (a, b) if _lightness(own[a]) >= _lightness(own[b]) else (b, a)
+        up = _shifted(dark[hi], SEPARATION_STEP)
+        if delta_e(up, dark[hi]) > 0.3:
+            dark[hi] = up
+            continue
+        down = _shifted(dark[lo], -SEPARATION_STEP)
+        if contrast_ratio(down, dark_halo) >= minimum and delta_e(down, dark[lo]) > 0.3:
+            dark[lo] = down
+            continue
+        break
+    raise ValueError(
+        f"{city or 'this city'}: the dark-theme labels for {a!r} and {b!r} "
+        f"({dark[a]}, {dark[b]}) cannot be separated to CIE76 {HARD_FLOOR:.0f} "
+        f"while both read at {minimum}:1 - see pipeline/linecolour.py, LINE LABELS.")
+
+
+def label_colours(colour, *, light_halo, dark_halo, dark=None, minimum=LABEL_MIN_CONTRAST):
     """(light-theme colour, light-theme halo, dark-theme colour) for a line
-    label drawn in `colour`. Every result reads at `minimum` against its halo."""
+    label drawn in `colour`. Every result reads at `minimum` against its halo.
+    `dark` is the city-level choice from dark_label_colours(); without it the
+    label is computed alone, unseparated from its neighbours."""
     on_light, on_dark = contrast_ratio(colour, light_halo), contrast_ratio(colour, dark_halo)
     if on_light >= minimum:
         light, halo = colour, light_halo
     else:
         halo = dark_halo if on_dark >= on_light else light_halo
         light = colour if max(on_light, on_dark) >= minimum else _away_from(colour, halo, minimum)
-    base = brightened(colour)
-    dark = base if contrast_ratio(base, dark_halo) >= minimum else _away_from(base, dark_halo, minimum)
+    if dark is None:
+        dark = dark_label(colour, dark_halo, minimum)
     return light, halo, dark
 
 

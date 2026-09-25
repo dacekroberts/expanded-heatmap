@@ -46,8 +46,9 @@ OUT = ROOT / "docs" / "japan_city_list.md"
 # Not measured: band, build order and status (owner's calls). Keep in step
 # with docs/city_master_list.md.
 STATUS = {
-    "osaka": ("Osaka", "🟢 A", "Builds 1st. The official count is most likely inflated by expired or closed "
-                               "permits (its old-law count exceeds what can exist), not the list short. See osaka.md"),
+    "osaka": ("Osaka", "🟢 A", "Builds 1st. About two-thirds of the gap is expired old-law permits still in "
+                               "the official count. The other third, revised-law permits the city counts but "
+                               "never lists, is undetermined. See osaka.md"),
     "kobe": ("Kobe", "🟢 A", "2nd"),
     "sapporo": ("Sapporo", "🟢 A", "3rd. Grid addresses resolve to the 条丁目 block, about 100 m"),
     "fukuoka": ("Fukuoka", "🟢 A", "4th. Includes MHLW's addressed rows; about 20% of restaurants withhold their address"),
@@ -68,7 +69,8 @@ TOKYO_NOTE = {
     "世田谷区": "opted-out premises left out (the ward's page)",
     "台東区": "opted-out premises left out (the ward's page)",
     "港区": "consent-filtered. No old-law list is published",
-    "目黒区": "new-law and old-law lists. The gap is not yet explained",
+    "目黒区": "first permits only: premises moved from an old-law permit since 2021 are in neither list, "
+              "so the share falls as old permits expire",
     "中央区": "never updated since",
     "江東区": "consent-only new permits",
 }

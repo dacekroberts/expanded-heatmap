@@ -33,11 +33,11 @@ st.title("Miami-Dade: commercial density around Metrorail and Metromover "
 
 st.markdown(
     """
-**This is the only regional map here, and deliberately so.** Metrorail leaves
+**This was the site's first regional map, and deliberately so.** Metrorail leaves
 the City of Miami — its stations reach Hialeah, Medley, Coral Gables, South
-Miami and unincorporated Miami-Dade — and everywhere else in this project that
+Miami and unincorporated Miami-Dade — and for most cities in this project that
 would end the discussion, because mapping a neighbouring city means sourcing
-its business data separately. Miami is the exception: Miami-Dade County
+its business data separately. Miami was the first exception: Miami-Dade County
 licenses business tax receipts for all 34 of its municipalities in a single
 file, so covering the whole line cost nothing extra. Six municipalities hold
 stations, every station is on the map, and
