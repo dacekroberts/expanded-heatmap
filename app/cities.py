@@ -917,6 +917,20 @@ CITIES = [
         # other European city, and check_macro_labels.py scores it clear.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Seoul",
+        "lat": 37.5665,
+        "lon": 126.978,
+        "page": "pages/43_Seoul_Heatmap.py",
+        "blurb": "Lines 1–9 and six more subway lines",
+        "region": "East Asia",
+        "country": "South Korea",
+        "in_default_view": False,
+        # Above the dot, the default: Seoul and Hong Kong are far apart in
+        # East Asia, and check_macro_labels.py scores both clear (width
+        # 37.5 px, measured 2026-09-25).
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

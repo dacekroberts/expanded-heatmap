@@ -779,9 +779,15 @@ brief names.
   - 경의·중앙, 수인·분당 and 경춘 drawn;
   - stations inside Seoul only;
   - the "East Asia" region that Hong Kong's build creates.
-- [ ] Seoul, at build: re-measure Line 7 and 신림선 (Overpass failed); write
+- [x] Seoul, at build: re-measure Line 7 and 신림선 (Overpass failed); write
   `korea_localdata.py` and the Korean pass of `check_personal_exposure.py`
-  (113 premises sized).
+  (113 premises sized). Done 2026-09-25: Line 7 has 39 stations in Seoul and
+  신림선 11; the Korean pass is `pipeline/korean_names.py` (138 withheld).
+- [~] **🇰🇷 SEOUL - built on `worktree-seoul`, text approved (owner 2026-09-25): 239,410
+  storefronts, 308 stations.** Page 43, notice 18; the map is 30 MB (kept, owner: time it
+  live). Line 8 darkened for contrast; withheld names read "Name withheld" (owner).
+  - [ ] `deploy-verify` (city-added Seoul + East Asia), fetch, push, reboot, live check;
+    remove the worktree's junction and the `seoul-*-tmp` launch entries.
 - [x] **No pre-build items**: Hong Kong, the nine Brazilian
   cities (São Paulo is already with main), the three Taiwanese cities, and
   Rotterdam (its build-time calls are in its brief).

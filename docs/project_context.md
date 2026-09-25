@@ -822,6 +822,17 @@ Cities built and running end to end (pipeline, map, app page):
   licence number. Rail is OpenStreetMap's, because MTR publishes station lists
   without locations; those lists are gate 3.
 
+- **Seoul** - Lines 1 to 9, the Shinbundang Line, the Ui LRT, the Sillim Line
+  and three Korail lines Seoul signs as subway, with stations inside Seoul only;
+  South Korea's first city and the largest map by far. The business leg is
+  seventeen of Seoul's citywide permit registers (Korea's LOCALDATA), keyed on the
+  permit type; a permit with no point borrows another permit's at the same
+  building, and a shop holding several permits is one pin, convenience stores
+  matched by brand. **The first city with a Korean privacy pass**
+  (`pipeline/korean_names.py`, shared with `check_personal_exposure.py`): a bare
+  personal name at a home-looking address is withheld. Rail is OpenStreetMap's,
+  because Korea's station dataset carries no lines.
+
 - **Riga** - Rīgas satiksme's seven tram routes, across the city's 58
   neighbourhoods; Latvia's first city, in Amsterdam's two-layer shape. Food
   service is the State Revenue Service's excise-licence register - the premises
@@ -943,7 +954,7 @@ rail. The `brazil-city` skill carries the traps, and
 `scripts/measure_rail_backbone.py` answers two of the rail test's three parts
 from cached OSM.
 
-Next is Taiwan, after Hong Kong and Riga (the owner built Hong Kong first on 2026-09-24
+Next is Taiwan, after Hong Kong, Riga and Seoul (the owner built Hong Kong first on 2026-09-24
 so the week's remaining budget held a whole city; the order before that was
 Rotterdam, then Taiwan).
 Taiwan and Japan each get a per-country skill written after their first city.

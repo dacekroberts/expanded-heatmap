@@ -128,6 +128,7 @@ purchased, or behind a login.
 | Hong Kong | **FEHD's licence registers** (Food and Environmental Hygiene Department, via DATA.GOV.HK) - restaurants, other food premises and non-food premises, one XML each, regenerated daily with their own `GENERATION_DATE` and code lists; each licence placed at **FEHD's own point** from the same registers on the **CSDI Portal**, joined by licence number (the brief's ALS geocode was replaced, owner 2026-09-24) | Food service 17,254, food shops 3,846, bathhouses 35: **21,135** storefronts, each named by the shop sign on its licence (no licensee name exists in the data); 28 licences with no CSDI point yet left off | `https://www.fehd.gov.hk/english/licensing/license/text/LP_{Restaurants,OtherFood,NonFood}_EN.XML`; `https://portal.csdi.gov.hk/csdi-webpage/file-api?dataset_id=<id>&format=geojson&layer_name=FEHD_{RL,FL,TL}` (ids in `pipeline/hong_kong/config.py`) | none server-side; storefront licence types kept in step 2 (35,830 licences generated 2026-09-25; 17,266 / 16,519 / 2,032 CSDI points, latest record update 2026-09-23) | 2026-09-25 |
 | Riga | **VID excise-licence register** (`pdb_akclicences_odata.csv`, State Revenue Service, via data.gov.lv, daily) - premises licensed to sell alcohol or tobacco, with a place type; current licences at a still-open place, food-service types only, one per address and kind (the holder is never read), placed by joining the address to Riga's own address points | Food service: **1,469** placed (763 cafés, 412 bars, 298 restaurants...), 48 unplaced; the kind and street address shown, the unit number dropped (owner) | `https://data.gov.lv/dati/dataset/a1adb6dd-a4a1-41c9-9177-c1cd942e012e/resource/f88cd5ea-61b0-42e8-a0a8-25504dfbcdc9/download/pdb_akclicences_odata.csv` | none server-side; `Statuss` Spēkā and an empty (two-space) place-ended date in step 2; columns selected by exact name - never `Nodoklu_maksatajs` or `NMR_kods` | 2026-09-25 |
 | Riga | **VZD cadastre premise groups** (`premisegroup.zip`, part 6 of the Cadastre Information System open text data) of use class 1230 whose name reads as a shop or a service, placed at the building footprint in the Riga cadastral map (`0001000_kk_shp.zip`) by building cadastre number | Shops and services: **5,261** (5,707 named, 5,673 placed, 412 in degrading buildings dropped) | `https://data.gov.lv/dati/dataset/be841486-4af9-4d38-aa14-6502a2ddb517/resource/5d8b1cfa-1e67-4b77-a6ac-b4e37eba0d7e/download/premisegroup.zip`; `https://data.gov.lv/dati/dataset/b28f0eed-73b0-4e44-94e7-b04b11bf0b69/resource/bf88b763-98b8-445d-a51f-b76f45c362c5/download/0001000_kk_shp.zip` | ATVK 0001000; use kind 1230; the staging session's name rules (first match wins) | 2026-09-25 |
+| Seoul | **Seventeen citywide permit registers** (인허가 정보, Seoul Metropolitan Government, via Seoul Open Data Plaza, daily; the national LOCALDATA records): 일반음식점, 휴게음식점, 단란주점영업, 미용업, 이용업, 세탁업, 목욕장업, 제과점영업, 즉석판매제조가공업, 식품판매업(기타), 축산판매업, 담배소매업, 대규모점포, 건강기능식품일반판매업; 숙박업 and 동물병원 lend building points only; 유흥주점영업 read and excluded (owner) | Food service **148,256**, Retail **51,663** (11,401 convenience stores), Personal services **39,491**: **239,410** storefronts, one per premises; 4,875 open permits with no point at their building left off; 138 names withheld (a personal name at a home-looking address) | `https://datafile.seoul.go.kr/bigfile/iot/sheet/csv/download.do` (POST `infId=<OA id>`, `srvType=S`, `serviceKind=1`, `gridTotalCnt=999999`, `ssUserId=SAMPLE_VIEW`, the page's anonymous identity); dataset pages `https://data.seoul.go.kr/dataList/{oa}/S/1/datasetView.do` (OA ids in `pipeline/seoul/config.py`) | none server-side; `영업/정상` and the taxonomy's sub-type rules in step 2; columns read by exact name - never `전화번호` (asserted) | 2026-09-25 |
 
 **The two Mexican cities are one source, not two**, and that is why each takes a
 single row where Vancouver/Surrey takes two. DENUE is national, so
@@ -667,6 +668,7 @@ columns. Same section, its own subsection, its own columns.
 | Santos (Regional) | **OpenStreetMap** - VLT da Baixada Santista L1 and L2 (L2 in assisted operation since 2025-12-01) | every rail route relation in the bbox | 2026-09-24 | Three L2 stops named from their wikidata labels; the Bonde Turístico excluded; EMTU's CPGSTM layers a cross-check only. OpenStreetMap, ODbL 1.0 - notice 1 |
 | Rotterdam | **RET metro A-E and trams 1-8 and 11, via OVapi's national GTFS** (`agency_id` RET) - the file Amsterdam downloaded, COPIED from its cache (sha256 checked); regular routes measured on the timetable after the works, 2026-11-23 to 2026-12-12 | `https://gtfs.openov.nl/gtfs-rt/gtfs-openov-nl.zip` (242,421,105 bytes) | 2026-09-24 | CC0 (the producer's LICENSE.TXT, read for Amsterdam). Trams 12 (event days), 14 and 18 (temporary, during works to 2026-11-22) not drawn. RET's own tram map (`RET_Tramnet_v5.pdf`, 2025-10-07) and schematic (`RET_Schematische_krt_jan2026_v2_02.pdf`, 2025-12-24), from `https://bestanden.ret.nl/user_upload/Documenten/PDF/Kaarten_en_plattegronden/`, read for the line list only - neither carries a 14 or an 18. Gate 3 against nl.wikipedia: exact but for line A, a recorded correction (24 there is the extension to Vlaardingen West; the feed runs 20) |
 | Riga | **Rīgas satiksme's seven tram routes (1, 5, 7, 8, 10, 11, 14)** from its own GTFS on data.gov.lv - the newest monthly `marsrutusaraksti*.zip` (08_2026 when built, calendar to 2027-09-01) | `https://data.gov.lv/dati/dataset/6d78358a-0095-4ce3-b119-6cde5d0ac54f/` (resource chosen by `last_modified` through the catalogue API, `https://data.gov.lv/dati/api/3/action/`) | 2026-09-25 | **CC0** (dataset, and Rīgas satiksme's own open-data page, read 2026-09-24). Every route is `#FF000C` and the operator's only tram map is dated 2013-09-02, so the colours are this project's (owner). `stop_times.txt` has eight fields under a seven-field header (read with `index_col=False`). Two stop names are two places each and four places are one stop under two names (merged by a measured rule). No gate 3: the operator publishes no station counts outside the feed. Vivi suburban rail not drawn (frequency) |
+| Seoul | **OpenStreetMap** - Lines 1–9, 신분당 (Shinbundang), 우이신설 (Ui LRT, ref `W`), 신림 (Sillim), and Korail's 경의·중앙, 수인·분당 and 경춘, matched on the relation's `ref` within network `수도권 전철`; English station names from the `railway=station` objects where the stop nodes lack `name:en` | the network's route relations and the station objects in Seoul's bbox, via `https://overpass-api.de/api/interpreter`, `https://overpass.kumi.systems/api/interpreter` or `https://maps.mail.ru/osm/tools/overpass/api/interpreter` (tried in that order) | 2026-09-25 | **Why not the agency:** Korea's national urban-railway station standard dataset has 1,099 stations and no line geometry, and no agency GTFS is published. No gate 3 (no operator counts read). One stop node renamed by id (9459739637 is 삼양사거리, not 삼양) and one interchange under two names merged (이수 / 총신대입구). Line 8's #D11D70 darkened to #92144E for contrast with Food service. AREX, GTX-A, the Seohae Line and the Gimpo Goldline not drawn (owner). OpenStreetMap, ODbL 1.0 - notice 1 |
 
 **Why three Overpass mirrors, and how one is chosen.** They are tried **in the
 configured order**, and the first host returning HTTP 200 with a **non-empty
@@ -747,6 +749,7 @@ in 23 other municipalities.
 | Rotterdam | **OpenStreetMap relation 324431** (gemeente 0599, `admin_level` 8, found by a bounded `ref:gemeentecode` search), polygonised from outer and inner ways and area-gated (324 km2); the 39 gemeente relations in a wider box used ONLY to name excluded stations | The three Overpass mirrors in `pipeline/osm.py` | Gemeente 0599. OpenStreetMap, ODbL 1.0 - notice 1 |
 | Hong Kong | **OpenStreetMap relation 913110** (`ISO3166-1`=HK, found by a bbox-bounded search), polygonised from outer ways and area-gated at its measured 2,759 km2 - the SAR's waters included, not its ~1,110 km2 of land | The Overpass mirrors in `pipeline/hong_kong/config.py` | The SAR; every drawn station falls inside it. OpenStreetMap, ODbL 1.0 - notice 1 |
 | Riga | **Riga's 58 neighbourhoods** (`apkaimes.gpkg`, GEO RĪGA, CC BY 4.0), merged - 304.0 km2, equal to OSM relation 13048688 (304.1) as the brief measured; area-gated | `https://data.gov.lv/dati/dataset/ddc24ef1-4db4-46ce-a035-258b6ed69d91/resource/7c652b48-c5ca-44a9-8dd2-32e869253f29/download/apkaimes.gpkg` | The publisher: neighbourhood boundaries "have no administrative-boundary status", so the outline is never called the city's boundary. Notice 43, Riga municipality |
+| Seoul | **OpenStreetMap relation 2297418** (서울특별시, admin_level 4), fetched by id and checked by name, polygonised from outer ways and area-gated at its measured 606 km2 | The Overpass mirrors in `pipeline/seoul/config.py` | Seoul; the 223 stations of drawn lines outside it are recorded in `outputs/seoul/excluded_stations.csv`. OpenStreetMap, ODbL 1.0 - notice 1 |
 
 Chicago note: the sibling asset `ewy2-6yfk` ("Boundaries - City - Map") has
 null geometry; `qqq8-j68g` is the usable one.
@@ -813,7 +816,7 @@ independent of what is *permitted*. That is in `docs/excluded_categories.md`.
 | San Diego businesses | Portal terms explicitly permit use and **"Derivative Work"**, defined as "a work that is based in any way or to any extent on the Data". No attribution requirement stated | — |
 | Boston — every source used above (food inspections, Licensing Board, cannabis, city boundary, plus the neighbourhood, SAM address and Property Assessment layers) | **Open Data Commons PDDL** (public domain dedication), declared per-dataset in CKAN's `license_id` as `odc-pddl` | none declared |
 | **Brazil — IBGE CNEFE 2022** (**built 2026-09-24**: nine cities, one national module) | **Free use by federal law** — Decree 8.777/2016 art. 4 and Lei 14.129/2021 art. 29 — subject to LGPD principles. **No IBGE licence document exists.** Read 2026-09-23; four restrictive readings recorded in the Brazil section below | **Required** (the decree's definition of open data: *"limitando-se a creditar a autoria ou a fonte"*). No wording prescribed; use `Fonte: IBGE, Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE), Censo Demográfico 2022.` |
-| **Seoul** — the seventeen `인허가 정보` datasets below (**candidate, not built**; 8 read 2026-09-22, 9 checked 2026-09-24) | **공공누리 제1유형 / KOGL Type 1** — attribution required, commercial use and derivative works permitted | 저작권자 **서울특별시**; 제3저작권자 **없음** (none) |
+| **Seoul** — the seventeen `인허가 정보` datasets below (**built 2026-09-25**, notice 18, Seoul Metropolitan Government; 8 read 2026-09-22, 9 checked 2026-09-24) | **공공누리 제1유형 / KOGL Type 1** — attribution required, commercial use and derivative works permitted | 저작권자 **서울특별시**; 제3저작권자 **없음** (none) |
 | **Japan** — the candidate cities' permit lists, MHLW's open data, MLIT's address, rail and boundary layers (**candidates, not built**) | Mostly **PERMITTED WITH CONDITIONS** (CC BY 4.0, CC BY 2.1 JP, PDL 1.0). Sendai's lists need permission. N03's boundaries may never be drawn (Survey Act). One source per row in the Japan section below | Per source, below |
 | **Province of British Columbia** — the ABMS municipalities layer (`WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP`), which NAMES Vancouver/Surrey's 30 out-of-city stations | **Open Government Licence – British Columbia v2.0** — "worldwide, royalty-free, perpetual, non-exclusive licence… including for commercial purposes"; free to "Copy, modify, publish, translate, adapt, distribute". **Terminates automatically on breach.** Excludes Personal Information and the Province's own marks — neither of which a boundary polygon is. The WFS is also subject to the separate **API Terms of Use for OGL Information** (read 2026-09-22), which add operational limits and **no new notice**. Read 2026-09-22, stored at `docs/licenses/bc-open-government-licence.txt` | **Required, verbatim** — `Contains information licensed under the Open Government Licence – British Columbia.` See notice 17. **Two sibling BC layers are licensed "Access Only" and would NOT permit this**; see the stored file's header |
 | San Francisco assessor roll (`wv5m-vpq2`) — the residence-filter join | **Open Data Commons PDDL 1.0** (public domain dedication), declared in the dataset's own `license` field as "Open Data Commons Public Domain Dedication and License" | none declared |
@@ -934,10 +937,10 @@ regime of **article 11 of Ley 37/2007** on public-sector information reuse.
 Edmonton sense: the census carries premises, not people. `rotulo` is a shop
 sign. Obligation 6 above makes the project's own residence check contractual.
 
-#### Seoul — eight `인허가 정보` datasets, read 2026-09-22 (CANDIDATE, not built)
+#### Seoul — eight `인허가 정보` datasets, read 2026-09-22 (BUILT 2026-09-25)
 
-Recorded now because the licence was read now; **no Korean city is built, so
-nothing here is an active obligation yet.** Source: `data.seoul.go.kr`,
+Recorded when the licence was read; **Seoul was built 2026-09-25, so these are
+active obligations - notice 18, Seoul Metropolitan Government.** Source: `data.seoul.go.kr`,
 downloaded via the SHEET CSV export (`ssUserId=SAMPLE_VIEW`, no account — see
 `docs/global_country_shortlist.md`).
 
@@ -2485,8 +2488,16 @@ describes itself as superseded: "[Replacement Dataset: ABMS_MUNICIPALITIES_SP]".
 Calgary's two-boundary trap, with a licence consequence instead of a geometry
 one.
 
-**18. Seoul Metropolitan Government — WILL BE REQUIRED. Not yet, because no
-Korean city is built.** Read 2026-09-22 and recorded here so the cost is known
+**18. Seoul Metropolitan Government — required, and DISPLAYED.**
+
+**PERMITTED WITH CONDITIONS.** Displayed since the Seoul build (2026-09-25), wording
+approved by the owner: it names the institution, the year, the licence type (linked to
+`kogl.or.kr`) and the sixteen dataset titles used, links Seoul Open Data Plaza, describes
+the changes, and says the categories and counts are this project's own and that Seoul
+does not sponsor or endorse the map. **MUST DO:** `check_personal_exposure.py seoul`,
+run 2026-09-25 (the verdict is in `DECISIONS.md`).
+
+Read 2026-09-22 and recorded here so the cost was known
 before the build rather than discovered during it. All eight `인허가 정보`
 datasets are **공공누리 제1유형 (KOGL Type 1)**, and it is a **one-notice
 country on current evidence** — every dataset carries the same licence, the
@@ -2511,8 +2522,8 @@ label on the dataset page:
   which is now enough of a pattern to expect it rather than be surprised:
   budget it for any national statistical or licensing register.
 
-Nothing is displayed for this yet and nothing should be — displaying a notice
-for data the site does not carry would itself be misleading.
+Nothing was displayed for this until Seoul was built — displaying a notice for
+data the site did not carry would itself have been misleading.
 
 **19. Ayuntamiento de Madrid — required, and DISPLAYED.** The Censo de locales
 declares CC BY 4.0, which the *Condiciones generales de reutilización* then

@@ -1029,6 +1029,25 @@ _NOTICES = [
      "administrative boundary; the degrading-buildings list is used only to leave out shops in "
      "those buildings. None of the three is shown. The municipality does not endorse this map.",
      False),
+    # Seoul's permit registers, all Korea Open Government License Type 1 (read
+    # 2026-09-22 and 2026-09-24): KOGL's attribution form names the institution,
+    # year, licence type and dataset titles, with a link where one is possible;
+    # no implied sponsorship; and, under its moral-rights clause, the counts are
+    # said to be this project's derivation. Wording approved by the owner
+    # 2026-09-25. 유흥주점영업 is read and excluded, so it is not credited.
+    ("Seoul Metropolitan Government",
+     "Seoul's storefronts are from permit registers published by the Seoul Metropolitan "
+     "Government (서울특별시) in 2026 on Seoul Open Data Plaza "
+     "([data.seoul.go.kr](https://data.seoul.go.kr)) under the Korea Open Government License "
+     "Type 1 ([공공누리 제1유형](https://www.kogl.or.kr/info/licenseType1.do)): 서울시 일반음식점, "
+     "휴게음식점, 단란주점영업, 미용업, 이용업, 세탁업, 목욕장업, 제과점영업, 즉석판매제조가공업, "
+     "식품판매업(기타), 축산판매업, 담배소매업, 대규모점포, 건강기능식품일반판매업, 숙박업 and 동물병원 "
+     "인허가 정보. Modified by this project: open premises were selected, sorted into three "
+     "categories, counted once per building, placed at their building (or at another permit's "
+     "location at the same address where a permit has none) and counted around subway "
+     "stations. The categories and counts are this project's own, not figures published by the "
+     "Seoul Metropolitan Government, which does not sponsor or endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

@@ -54,7 +54,8 @@ Trenord's suburban services in Milan, and Iarnród Éireann's Commuter and
 InterCity trains in Dublin, RER and Transilien in Paris, the TER services
 in Marseille, CPTM's Linhas 7, 8 and 10 to 13 in São Paulo, SuperVia's Japeri,
 Santa Cruz and Belford Roxo lines in Rio de Janeiro, Metrofor's three diesel
-lines in Fortaleza, the two diesel VLTs in Recife, and Vivi's suburban trains in Riga.
+lines in Fortaleza, the two diesel VLTs in Recife, Vivi's suburban trains in Riga, and AREX and
+GTX-A in Seoul.
 
 **Trams are NOT excluded as a class, and the test is whether the tram is the
 rapid-transit system or an overlay on one.** Many of these maps draw light rail
@@ -1560,6 +1561,34 @@ protection zone (2024), 15% in the Old Town (2025); not measured elsewhere.
 
 **Stations.** Rīgas satiksme's seven tram routes are drawn; 15 stops are thinned by the spacing
 filter to about one per half mile. Not drawn: buses, trolleybuses and Vivi's suburban trains.
+
+### Seoul - Korea's permit registers: the trades Korea licenses, not every shop
+
+**Missing, not excluded.** Korea licenses food service, the personal-care trades and a set of
+food and tobacco retail trades, not retail in general: a clothes shop, a bookshop or a phone
+shop holds none of these permits, so the Retail category leans towards food and convenience
+stores.
+
+**Left out** - lodging (숙박업) and veterinary clinics (동물병원), whose registers only lend
+building points; hostess bars and cabarets (유흥주점, the adult-services rule); food trucks,
+caterers and mobile cooking; wholesale meat, milk and egg traders and meat importers (every
+축산판매업 channel but butchers); health-food sellers who trade online, door to door or by phone
+(every 건강기능식품 channel but in-store); closed, suspended and cancelled permits.
+
+**Counted once** - a premises holding several permits at one building: retail by brand for
+the five convenience-store chains and by name otherwise (58,514 retail permits to 51,663
+premises), food and personal services by name.
+
+**Not placed** - 4,875 open permits with no point of their own and none at their building
+(3,258 food, 1,301 retail, 316 personal services).
+
+**Names withheld** - 138 premises whose registered name is a bare personal name at an
+address that reads as a home. The telephone column is never read.
+
+**Stations.** Lines 1–9, the Shinbundang Line, the Ui LRT, the Sillim Line and three Korail
+lines are drawn, with stations inside Seoul only: 223 stations of those lines outside the city
+are left out. Not drawn: AREX, GTX-A, the Seohae Line, the Gimpo Goldline and intercity trains;
+every station they serve in Seoul is also on a drawn line.
 
 ## Kept, and why
 

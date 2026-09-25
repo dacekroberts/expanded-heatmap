@@ -16,7 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**386 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**387 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-09-25**
+
+- [Seoul built on `worktree-seoul`: 239,410 storefronts, 308 stations; page 43 and notice 18 approved by the owner](#2026-09-25---seoul-built-on-worktree-seoul-239410-storefronts-308-stations-page-43-and-notice-18-approved-by-the-owner)
 
 **2026-09-24**
 
@@ -428,6 +432,109 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-25 - Seoul built on `worktree-seoul`: 239,410 storefronts, 308 stations; page 43 and notice 18 approved by the owner
+
+- **Built from the brief without re-probing: all four brief checks passed,
+  and every Step 0 figure it recorded reproduced.** Seventeen registers:
+  eight were downloaded through the SHEET export (`ssUserId=SAMPLE_VIEW`) and
+  nine were copied from staging's cache of the same endpoint, downloaded the
+  same day. Provenance records which is which, with no local path in it,
+  because the file is committed to a public repo. The open rows match the
+  brief to within a day's churn: restaurants 120,228 against 120,182, cafés
+  37,122 against 37,113. Four of the restaurant file's 538,115 rows carry a
+  byte cp949 cannot decode (three trade names, all closed); these are read
+  with replacement.
+- **The taxonomy keys on the permit type (the file), as the brief measured
+  and the owner approved.** `pipeline/taxonomies/korea_localdata.py` uses
+  the sub-type (`업태구분명`, or `위생업태명` where a file has only that)
+  only to remove or move rows:
+  - Removed: food trucks, catering and mobile cooking; every 축산판매업
+    channel but butchers; every 건강기능식품 channel but in-store sales.
+  - Moved: 편의점 and 과자점 permits in the café register go to Retail.
+  - The tooltip shows an English kind written from the registers' own
+    values, such as "Korean barbecue" or "Laundromat".
+  - Open rows by bucket before de-duplication: Food 152,384, Retail 59,818,
+    Personal 39,979. Excluded: 30,040 open rows (lodging, vets, hostess
+    bars and the dropped channels).
+- **Coordinates: the brief's building join, measured again.** An open permit
+  with no point borrows the median point of the eight core registers' rows,
+  open or closed, at the same building. It tries the road address to the
+  building number first, then the lot address.
+  - Placed: 237,837 by their own point, 9,004 by road address and 465 by lot
+    address. 4,875 were unplaced and left off.
+  - The control compared each row's own point against its building's point
+    for 219,580 rows. The median was 0 m, the 99th percentile 9 m, and 0.3%
+    were over 100 m. The building's point here includes the row's own, which
+    is weaker than the brief's leave-one-out control; the brief's result
+    stands.
+  - EPSG:5174 was checked against landmarks: 롯데백화점 본점 is 16 m and
+    현대백화점 무역센터점 14 m from their known positions.
+- **One pin per premises:**
+  - Retail is de-duplicated once per building, matching the five
+    convenience-store chains by brand and everything else by name: 58,514 →
+    51,663.
+  - The most specific permit names a premises. The tobacco permit, an
+    adjunct, ranks last.
+  - Food and personal services are de-duplicated once per building and name:
+    149,125 → 148,256 and 39,663 → 39,491.
+  - 11,401 premises show as convenience stores.
+- **Privacy, recorded here as the verdict.** The registers carry no operator
+  column. The telephone column is never read, and step 2 asserts it.
+  - **The Korean pass the brief asked for is `pipeline/korean_names.py`.** It
+    looks for a bare personal name (a common surname and two syllables,
+    optionally with a trade word) at an address that reads residential and
+    not commercial. Step 2 uses it and `check_personal_exposure.py` runs it
+    (a `korean` flag on the registry entry).
+  - **138 names withheld** (61 food, 58 personal, 19 retail), against the
+    brief's 113 across the core eight only. The owner chose "Name withheld"
+    as the title.
+  - The check reports 0 Korean personal names at residential addresses still
+    shown, and no emails or phone numbers.
+  - 8,882 pins (3.96%) have a bare-name shape at commercial addresses. These
+    are trade names on shopfronts, public commercial information, and stay.
+- **Rail: OSM route-relation membership, matched on the relation's `ref`
+  within network `수도권 전철`.**
+  - 15 lines drawn and 308 stations kept inside relation 2297418 (606 km2);
+    223 stations are outside it.
+  - The brief's two failed measurements are now measured: Line 7 has 39
+    stations in Seoul and the Sillim Line 11.
+  - **English names**: 387 of 1,353 stop nodes lack `name:en`. Names were
+    taken from the `railway=station` objects (same Korean name, within
+    500 m), a small extra Overpass extract. Hong Kong's precedent is to show
+    English station names.
+  - **Two OSM corrections, both recorded in the config:**
+    - Stop node 9459739637 is tagged 삼양 but stands 6 m from the 삼양사거리
+      station object, so it is renamed by id.
+    - 이수 (Line 7) and 총신대입구(이수) (Line 4) are one interchange, 191 m
+      apart, and were merged.
+  - The closest remaining pairs (공항시장/송정, 신용산/용산,
+    몽촌토성/한성백제) are real separate stations.
+  - Two real name-sharing pairs are split by distance and carry their lines:
+    신촌, and 양평 (the Gyeongui–Jungang 양평 is outside Seoul).
+  - No gate 3: no operator counts were read.
+- **Line 8 darkened from Seoul Metro's #D11D70 to #92144E, keeping the hue.**
+  `check_line_colours` raised on #D11D70 at Delta-E 9.2 from Food service.
+  The darkened colour is at 18.0, Barcelona's margin.
+- **The map is 30 MB**: 224,381 pins inside the rings, 2.5 times Mexico
+  City's 12 MB. It loads locally in 2.9 s with no console errors. **Owner:
+  keep it and time it on the live site after the reboot.** It will be
+  shrunk only if the live page is slow.
+- **Macro label:** Seoul measures 37.5 px in the local app's own document,
+  with seven known widths reproduced exactly. `check_macro_labels.py` reports
+  PROBLEMS 0 and no clip in East Asia.
+- **Page 43, the blurb ("Lines 1–9 and six more subway lines") and notice 18
+  were approved as drafted by the owner, 2026-09-25.** The notice follows
+  KOGL Type 1's form: institution, year, the licence type linked, the
+  sixteen dataset titles, the portal linked, a description of the changes,
+  and that the counts are this project's own and not endorsed.
+- **Baseline:**
+
+  | Step | Counts |
+  |---|---|
+  | Step 1 | stop_nodes 1,353; stations_all 531; stations_kept 308; stations_outside 223; stations_off_map 0; lines_drawn 15 |
+  | Step 2 | open_rows 282,221; bucketed_rows 252,181; placed_own_point 237,837; placed_road_address 9,004; placed_lot_address 465; placed_unplaced 4,875; out_of_bounds 4; premises_food 148,256; premises_retail 51,663; premises_personal 39,491; convenience_stores 11,401; names_withheld 138; storefronts 239,410 |
+  | Step 3 | 224,381 in rings of 239,410 |
 
 ### 2026-09-24 - Riga is live: pushed as f0b84ff, rebooted by the owner, and checked on the live site
 
