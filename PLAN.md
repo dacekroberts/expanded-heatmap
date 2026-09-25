@@ -39,18 +39,20 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     both get the smallest lightness step away from their halo (at most
     ΔE 3.7).
     `check_map_markup.py` then FAILS light mode too.
-  - [ ] Re-render all maps with Rotterdam's; one `deploy-verify` for
-    Rotterdam covering `city-added` and `map-chrome` (both themes).
+  - [x] Re-render all maps with Rotterdam's; one `deploy-verify` for
+    Rotterdam covering `city-added` and `map-chrome` (both themes). **Passed
+    and live 2026-09-24** (DECISIONS, "Rotterdam's deploy check passed").
 
-- [~] **🇳🇱 ROTTERDAM - built on `worktree-rotterdam`, text approved (owner
-  2026-09-24): 7,520 storefronts, 132 stations.** Trams drawn (owner); 14 and 18
+- [x] **🇳🇱 ROTTERDAM - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24** (master
+  bec3af1), text approved by the owner: **7,520 storefronts, 132 stations.** Trams drawn (owner); 14 and 18
   found temporary, so not drawn; page 40, notice 40 (CBS), docs written.
-  - [ ] ONE `deploy-verify` (city-added Rotterdam + map-chrome both themes, for
+  - [x] ONE `deploy-verify` (city-added Rotterdam + map-chrome both themes, for
     the label work above), fetch, push, reboot (cities.py), live check; remove
     the `rotterdam-*-tmp` launch entries and the worktree's data junctions.
+    Shipped with it: the "All cities" button renamed "Global View" (owner).
 
-- [ ] **NEXT BUILDS (owner, 2026-09-24): 🇳🇱 Rotterdam, then 🇹🇼 Taiwan** -
-  Rotterdam's deploy check also verifies the label-contrast work above. Rotterdam is
+- [ ] **NEXT BUILDS (owner, 2026-09-24): 🇳🇱 Rotterdam (✅ live 2026-09-24), then
+  🇹🇼 Taiwan** - Rotterdam's deploy check also verified the label-contrast work above. Rotterdam is
   Amsterdam's shape (permit-notice food layer rebuilt from the Gemeenteblad,
   BAG shop units, CBS vacancy) - `docs/build_briefs/rotterdam.md`. Taiwan:
   Taipei (Regional), Taichung, Taoyuan; write a `taiwan-city` skill after the

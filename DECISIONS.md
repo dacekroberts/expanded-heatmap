@@ -16,11 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**358 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**359 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Osaka's 67%: the official count is most likely inflated, not the list short](#2026-09-24---osakas-67-the-official-count-is-most-likely-inflated-not-the-list-short)
+- [Rotterdam is live: pushed as bec3af1, rebooted by the owner, and checked on the live site](#2026-09-24---rotterdam-is-live-pushed-as-bec3af1-rebooted-by-the-owner-and-checked-on-the-live-site)
 - [Agency contact is the last resort: the Tokyo requests are parked (owner)](#2026-09-24---agency-contact-is-the-last-resort-the-tokyo-requests-are-parked-owner)
 - [Rotterdam's deploy check passed, with the labels in both themes and the Global View button; three findings recorded, none blocking](#2026-09-24---rotterdams-deploy-check-passed-with-the-labels-in-both-themes-and-the-global-view-button-three-findings-recorded-none-blocking)
 - [Four Tokyo ward requests drafted; none sent](#2026-09-24---four-tokyo-ward-requests-drafted-none-sent)
@@ -433,6 +434,33 @@ onwards; the early ones are split by phase rather than by hour.
   output, and a list can be more accurate than the statistic it is measured
   against. When a list falls short, look for evidence of a stale count before
   concluding that premises are missing.
+### 2026-09-24 - Rotterdam is live: pushed as bec3af1, rebooted by the owner, and checked on the live site
+
+- **Live-checked after the owner's reboot, in two halves.**
+  - **The Cleanup session** checked Rome's map and the Overview.
+    - Rome: "← Global View" returned to the Overview. The Cities menu held 40
+      options (Prague, Amsterdam, Rotterdam, São Paulo in that order) and no
+      "Global View" or "All cities" item.
+    - Overview: it opened on "Global (40)", with Europe (15), the caption
+      counting 40 and the follow-up sentence naming "Global View".
+  - **This session** checked Rotterdam's page on the live site. It showed:
+    - no error blocks;
+    - 14 line labels, each with `--dm-label`;
+    - the button "← Global View", with aria-label "Back to the Global View
+      map";
+    - the Cities menu with 39 cities and no Rotterdam, "Global View" or "All
+      cities" item;
+    - the OSM credit linked;
+    - notice 40 (CBS);
+    - the snapshot caption.
+- **Labels on the live site match the local check.**
+  - Dark mode (the default): all 14 labels take their `--dm-label` colour, no
+    ancestor has a filter, and the halo is rgb(11, 18, 32).
+  - Light mode (the real toggle): all 14 match their inline colour and halo,
+    7 white and 7 dark (Metro A, B, D and Trams 2, 3, 6, 7).
+- **Retired:** the `rotterdam-*-tmp` launch entries and the worktree's 41
+  junctions (40 data folders and `.venv-lean`). The junctions were removed
+  non-recursively; their targets in the main checkout are intact.
 
 ### 2026-09-24 - Agency contact is the last resort: the Tokyo requests are parked (owner)
 
