@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**380 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**381 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [PLAN's "carry into the mandatory full deploy-verify" item closed as stale (owner)](#2026-09-24---plans-carry-into-the-mandatory-full-deploy-verify-item-closed-as-stale-owner)
 - [Seven worktrees retired; PLAN.md trimmed; the Riga PDF filed](#2026-09-24---seven-worktrees-retired-planmd-trimmed-the-riga-pdf-filed)
 - [Riga builds next, before Taiwan (owner), and its brief is written](#2026-09-24---riga-builds-next-before-taiwan-owner-and-its-brief-is-written)
 - [The open gap emptied: a final re-probe of its last eight, a verdict on each (owner)](#2026-09-24---the-open-gap-emptied-a-final-re-probe-of-its-last-eight-a-verdict-on-each-owner)
@@ -422,6 +423,19 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - PLAN's "carry into the mandatory full deploy-verify" item closed as stale (owner)
+
+- **The item (2026-09-21)** held three map fixes for one batched `full`
+  `deploy-verify` before the first deploy: the legend breakpoint dead on a wide
+  load, the container ~15 px short, and fit bounds excluding label anchors.
+- **Closed on the owner's call.** The site has been live for days, and
+  `deploy-verify` has since gained scopes (`city-added`, `map-chrome`,
+  `app-deps`, `full`). A single pre-deploy full run is no longer how changes
+  are verified.
+- **Each area has since been reworked and re-verified** by scoped runs:
+  `LEGEND_AUTOFIT` and the legend clamp, the fit guard that checks its outcome
+  (`map-view`), and the phone-width label placer, all passing `map-chrome`.
 
 ### 2026-09-24 - Seven worktrees retired; PLAN.md trimmed; the Riga PDF filed
 

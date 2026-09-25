@@ -1594,12 +1594,6 @@ mistakes as confidently as its findings.
   whether to include them.
 - [ ] San Francisco: only ~37% of rows carry a NAICS code; consider whether
   the caveat needs to be visible on the city page.
-- [ ] **Carry into the mandatory `full` `deploy-verify` run before deploy:** the
-  three fixes made after the 2026-09-21 scoped `map-chrome` run (legend
-  breakpoint dead on a wide load, container ~15px short, fit bounds excluding
-  label anchors) are verified by screenshot on four cities but not by an agent
-  pass. Confirmed 2026-09-21 to batch them into that run rather than spend
-  another scoped one - which is the batching the scope policy encourages.
 - [x] **Phone-width city pages** - largely fixed 2026-09-21. The map keeps its
   fixed 1000px layout for initialisation (which is what dodges the Leaflet.heat
   `IndexSizeError`) and is resized to the frame immediately afterwards, then
