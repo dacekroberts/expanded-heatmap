@@ -53,7 +53,9 @@ Marseille use. **Toulouse withholds more than either of them.** INSEE marks
 roughly one active establishment in five here as non-diffusible and strips the
 name, the address and the coordinates together, so those never reach this map
 at all. Where a street looks thin, it may be a quiet street or it may be a
-private one, and nothing in the data distinguishes them.
+private one, and nothing in the data distinguishes them. **Where SIRENE records
+no shop sign or trading name, the dot shows the establishment's address
+instead** — about half the dots on this map.
 
 **Read the density as a register, not a street survey.** SIRENE records where a
 business is *registered*, and some registered establishments have no

@@ -44,7 +44,9 @@ harbour shuttles are closer to urban transit than that rule usually implies.
 Businesses come from **SIRENE**, France's national register of établissements,
 joined to INSEE's separate geolocation file — the same source Paris uses.
 Records INSEE marks non-diffusible are stripped at source, name, address and
-coordinates together, so they never reach this map.
+coordinates together, so they never reach this map. **Where SIRENE records no
+shop sign or trading name, the dot shows the establishment's address instead**
+— more than half the dots on this map.
 
 **Read the density as a register, not a street survey.** SIRENE records where a
 business is *registered*, and some registered establishments have no

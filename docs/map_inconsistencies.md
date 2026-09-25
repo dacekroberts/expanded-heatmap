@@ -485,7 +485,8 @@ Contradictions between files, and claims that have gone stale, which the owner
 would need to settle before this becomes a page.
 
 **Resolved 2026-09-24** (owner-approved wording, see DECISIONS): 1, 3, 4, 5, 6,
-7 and 8. Also resolved: in 2, the ring wording in EC and on the New York page;
+7, 8 and 17 (each French page now states its measured share of address-only
+dots). Also resolved: in 2, the ring wording in EC and on the New York page;
 in 19, the stale "2026-09-21 rebuild" header and "the other four cities". The
 rest of 2 (the NY config's "THE ONE CITY" comment) and everything from 9 on
 remain open.

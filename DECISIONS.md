@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**381 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**382 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Toronto's legend passage and the French address-only dots (owner-approved wording)](#2026-09-24---torontos-legend-passage-and-the-french-address-only-dots-owner-approved-wording)
 - [PLAN's "carry into the mandatory full deploy-verify" item closed as stale (owner)](#2026-09-24---plans-carry-into-the-mandatory-full-deploy-verify-item-closed-as-stale-owner)
 - [Seven worktrees retired; PLAN.md trimmed; the Riga PDF filed](#2026-09-24---seven-worktrees-retired-planmd-trimmed-the-riga-pdf-filed)
 - [Riga builds next, before Taiwan (owner), and its brief is written](#2026-09-24---riga-builds-next-before-taiwan-owner-and-its-brief-is-written)
@@ -423,6 +424,24 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Toronto's legend passage and the French address-only dots (owner-approved wording)
+
+- **`excluded_categories.md`, Toronto**: "would make Toronto the only city on
+  the site whose legend differs from the other thirteen" was stale twice. There
+  are 41 cities, and Hong Kong, Amsterdam, Rotterdam, Philadelphia and Boston
+  have different legends. The reasoning was true when written, so it is kept
+  and anchored in time: "would have made Toronto's legend the odd one out among
+  the fourteen cities built by then".
+- **The five French pages now disclose their address-only dots.**
+  `france_register` falls back to the address when SIRENE has no sign or usual
+  name, and no French page said so while the Oslo, Copenhagen, Prague, Milan
+  and Amsterdam pages explain theirs (inconsistency list Q17).
+  - **Measured from each city's `name_is_address` flag**: Paris 62.7%,
+    Marseille 56.2%, Lille 50.6%, Toulouse 48.1%, Rennes 40.9%.
+  - **Stated rounded** ("about three dots in five", "more than half", "about
+    half", "about two dots in five") so a rebuild does not make the sentence
+    wrong.
 
 ### 2026-09-24 - PLAN's "carry into the mandatory full deploy-verify" item closed as stale (owner)
 
