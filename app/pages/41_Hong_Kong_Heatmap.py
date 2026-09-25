@@ -48,8 +48,8 @@ hair salon needs no licence from FEHD. So **this map is mostly restaurants**, an
 categories are narrower than elsewhere: **Food shops** (fresh provisions, bakeries, and siu mei
 and lo mei shops) and **Bathhouses**. Read the balance between categories as a fact about Hong
 Kong's licensing, not about its streets. Food factories, cold stores, factory canteens, swimming
-pools, cinemas, karaoke and the funeral trades are licensed too, and are left out, as they are in
-every other city. Each dot carries the shop sign on its licence.
+pools, cinemas, karaoke and the funeral trades are licensed too, and are left out. Each dot
+carries the shop sign on its licence.
 
 The registers give an address but no location. FEHD publishes the same registers with a location
 for each licence on the Government's spatial data portal (CSDI), and this map uses FEHD's own

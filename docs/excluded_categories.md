@@ -1516,8 +1516,7 @@ categories as a fact about Hong Kong's licensing, not about its streets.
 **Left out of the registers** - food factories (11,568), frozen confection factories (558),
 factory canteens (444), cold stores (90) and milk factories (9); swimming pools (1,441),
 undertakers (145), funeral parlours (7), offensive trades (4) and slaughterhouses (2); places of
-public entertainment (262), cinemas and theatres (73) and karaoke establishments (62), as cinemas
-and entertainment venues are out in every city.
+public entertainment (262), cinemas and theatres (73) and karaoke establishments (62).
 
 **Not placed** - 28 licences with no point yet on FEHD's CSDI layers; none is placed by guessing
 from its address.

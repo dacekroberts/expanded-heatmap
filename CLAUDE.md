@@ -54,7 +54,16 @@ no brief means `add-city` Step 0 as usual, never waiting for one.
 Copenhagen, Brazil and Taiwan each looked like a geocoding project and each
 turned out to publish an address file that already carries the coordinate,
 so the work became a join measured against a control city - or nothing.
-Japan is the next one through it.
+Japan is the next one through it. **Hong Kong joined that list too:** its
+publisher carried a point per licence on a second portal, found while reading
+the geocoder's terms.
+
+**Does the city's data carry Chinese, Japanese or Korean text? Use `cjk-text`**
+(`.claude/skills/cjk-text/`) - Hong Kong, the Taiwanese cities, Seoul and
+Japan. Hong Kong met all of it at once: Windows consoles crashing on a name,
+a BOM in the first header, a bilingual OSM `name`, a privacy heuristic whose
+zero means nothing on CJK names, and a font order that draws Chinese in
+Japanese glyph forms.
 
 **Re-probing a city the screen left thin - an open-gap row, or a one-bucket
 city in Band C? Use `reprobe-city`** (`.claude/skills/reprobe-city/`).
