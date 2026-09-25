@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**389 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**390 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-25**
 
+- [Taipei (Regional) built on the same branch: 133,335 storefronts, 153 stations, twelve lines; notice 47 and page 46 approved by the owner](#2026-09-25---taipei-regional-built-on-the-same-branch-133335-storefronts-153-stations-twelve-lines-notice-47-and-page-46-approved-by-the-owner)
 - [Taoyuan built on the same branch: 45,014 storefronts, 15 stations; notice 46 and page 45 approved by the owner, and Taiwan's step 2 made shared](#2026-09-25---taoyuan-built-on-the-same-branch-45014-storefronts-15-stations-notice-46-and-page-45-approved-by-the-owner-and-taiwans-step-2-made-shared)
 - [Taichung built on `worktree-taichung`: Taiwan's first city, 66,115 storefronts, 18 stations; notices 44 and 45 and page 44 approved by the owner](#2026-09-25---taichung-built-on-worktree-taichung-taiwans-first-city-66115-storefronts-18-stations-notices-44-and-45-and-page-44-approved-by-the-owner)
 - [Seoul built on `worktree-seoul`: 239,410 storefronts, 308 stations; page 43 and notice 18 approved by the owner](#2026-09-25---seoul-built-on-worktree-seoul-239410-storefronts-308-stations-page-43-and-notice-18-approved-by-the-owner)
@@ -434,6 +435,77 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-25 - Taipei (Regional) built on the same branch: 133,335 storefronts, 153 stations, twelve lines; notice 47 and page 46 approved by the owner
+
+- **The join's control ran and reproduced exactly.** `screen_taiwan_join.py
+  taipei` read 92.4% on 76,520 rows against the brief's 92.4%, so moving
+  `parse()` into the pipeline changed nothing. New Taipei reproduced its 95.5%.
+  After the shared step 2, placement came to Taipei 91.8% (of 70,288, after
+  6,232 office-like rows were dropped) and New Taipei 95.0% (of 72,411, after
+  3,906). That gives 64,526 + 68,809 = **133,335** storefronts.
+- **Regional: the shared step 2 runs once per city and the results are
+  concatenated.** Each city's own door plates and district codes are used,
+  and each city's figures are tagged in the baseline. Taichung stayed
+  byte-identical and Taoyuan unchanged through both changes the step needed:
+  - A district with fewer than 20 single-district keys now takes a clear
+    majority instead of 90%. New Taipei's rural 雙溪區 has 6 of 9 keys
+    agreeing; the step exited at 90%.
+  - A blank district is never learned. Two addresses with no parsable
+    district voted for 中和區's code, and the step refused the collision.
+- **Rail (owner): every metro and light-rail line in the two cities, twelve
+  drawn, from OSM.** The lines are Taipei Metro's BR, R, G, O and BL, the
+  Xinbeitou and Xiaobitan branches as lines of their own in their own OSM
+  colours, the Circular Line, the Sanying Line (opened 2025), the Danhai and
+  Ankeng light rail, and the Airport MRT.
+  - The recorded ground for OSM: Taipei's network map carries no colours and
+    may lack New Taipei's lines.
+  - `colour=orange` was resolved through the CSS table to #FFA500.
+  - **Gate 3 is exact on all seven Taipei Metro lines and branches.**
+  - One unnamed Ankeng stop node was skipped and listed.
+- **Scope without any boundary.** A station is in the region when either
+  city's door-plate file has plates within 300 m of it. That kept 153
+  stations (74 Taipei, 79 New Taipei). The 15 left out are exactly the
+  Airport MRT's Taoyuan stations. Overpass 504ed on boundaries all day; two
+  files that each cover exactly one city serve as the boundary instead.
+- **Bugs caught before they shipped:**
+  - Step 1 first fed swapped coordinates into its projection, which split
+    one-place stations into phantom duplicates. The duplicate-name exit
+    caught it.
+  - OSM's English names carried "(Under construction)", a trailing "Station"
+    and a lower-case "main station". These are cleaned in `english()`.
+- **Owner's calls, 2026-09-25:**
+  - **R01 is kept.** It is in Taipei Metro's list dated 2026-09-02 and
+    tagged an active stop; only OSM's English label said otherwise.
+  - **Taipei Metro's own open-data declaration is accepted** (notice 47):
+    cite the source, no logo, no implied endorsement, and liability for
+    malicious alteration.
+  - **Market stalls are left off**, as in Taichung and Taoyuan: about 3,600
+    of Taipei's 5,762 unplaced rows.
+  - Page 46, notice 47, and notice 44 now naming the four cities were
+    approved as drafted.
+- **Licences, read 2026-09-25 by two `licence-read` agents:**
+  - New Taipei's door plates are OGDL v1 from 新北市政府民政局. The portal's
+    FAQ adds nothing.
+  - Taipei Metro's list is OGDL v1 from 臺北大眾捷運股份有限公司, plus the
+    declaration above.
+  - Taipei's door plates were read 2026-09-23.
+- **Privacy:** the Taiwan rule test reports 0 unmarked sole-proprietor names
+  shown, across 92,591 sole-proprietor rows (17,890 shown by industry).
+- **Macro labels:** Taipei (Regional) measures 112.5 px. Its dot sits a few
+  pixels from Taoyuan's at the East Asia zoom, so Taoyuan's name goes west
+  and Taipei's east. PROBLEMS 0.
+- **The map is 15 MB** (103,587 pins in rings, 78%). Label contrast passes
+  for all twelve lines.
+- **Baseline:**
+
+  | Step | Counts |
+  |---|---|
+  | Step 1 | stop_nodes 269; stations_all 168; stations_kept 153; stations_outside 15; lines_drawn 12 |
+  | Step 2, Taipei | doorplate_keys 251,607; storefront_rows 76,520; districts 12; office_like_dropped 6,232; join_exact 64,312; join_base_number 214; join_no_plate 1,092; join_unparsed 4,670; names_hidden 7,730; storefronts 64,526 |
+  | Step 2, New Taipei | doorplate_keys 449,647; storefront_rows 76,317; districts 29; office_like_dropped 3,906; join_exact 67,835; join_base_number 974; join_no_plate 1,598; join_unparsed 2,004; names_hidden 10,160; storefronts 68,809 |
+  | Step 2, total | storefronts 133,335 |
+  | Step 3 | 103,587 in rings of 133,335 |
 
 ### 2026-09-25 - Taoyuan built on the same branch: 45,014 storefronts, 15 stations; notice 46 and page 45 approved by the owner, and Taiwan's step 2 made shared
 

@@ -1624,6 +1624,21 @@ counted, and the seven in Taipei and New Taipei (A1-A6, A9) are left out. Not dr
 Railway and high-speed rail. The line does not reach Taoyuan District, the city's largest
 centre, so most storefronts lie outside the rings.
 
+### Taipei (Regional) - Taipei and New Taipei, the same register and rules
+
+**Left out** - online shopping; industries outside the three buckets; 10,138 office-like
+company head-office rows (6,232 in Taipei, 3,906 in New Taipei; owner's rule).
+
+**Not placed** - 9,364 rows whose address matched no door plate: about 3,600 stalls in
+Taipei's traditional markets and under viaducts (owner: left off rather than stacked on their
+market's plate), rural addresses and intersections.
+
+**Names not shown** - 17,890 unmarked sole proprietors, shown by their line of business.
+
+**Stations.** Every metro and light-rail line in the two cities is drawn; the Airport MRT's
+15 stations in Taoyuan are left out here and counted on Taoyuan's page. Not drawn: Taiwan
+Railway, high-speed rail and the Maokong Gondola.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

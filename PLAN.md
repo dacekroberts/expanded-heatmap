@@ -795,7 +795,12 @@ brief names.
 - [~] **🇹🇼 TAOYUAN - built on the same branch, text and notice 46 approved (owner 2026-09-25):
   45,014 storefronts, 15 stations.** Page 45; the portal FAQ's condition accepted (owner).
   Publishes with Seoul and Taichung.
-- [ ] 🇹🇼 Taipei (Regional) - next if the batch waits for it (owner's call).
+- [~] **🇹🇼 TAIPEI (REGIONAL) - built on the same branch, text and notice 47 approved (owner
+  2026-09-25): 133,335 storefronts, 153 stations, twelve lines.** Page 46; R01 kept, Taipei
+  Metro's declaration accepted, market stalls left off (owner).
+- [ ] **The batch publish** - Seoul, Taichung, Taoyuan, Taipei (Regional): `deploy-verify`
+  (city-added x4 + East Asia), merge master, fetch, push, reboot, live check; retire the
+  junctions and the `-tmp` launch entries.
 - [x] **No pre-build items**: Hong Kong, the nine Brazilian
   cities (São Paulo is already with main), the three Taiwanese cities, and
   Rotterdam (its build-time calls are in its brief).

@@ -34,6 +34,7 @@ from pipeline.taxonomies import filter_to_storefront  # noqa: E402
 DISTRICT = re.compile(r"^(.{1,3}?(?:區|鄉|鎮|市))")
 FLOOR = re.compile(r"(\d+|[一二三四五六七八九十]+)樓")
 COMPANY = "公司"
+SMALL_DISTRICT_KEYS = 20
 
 
 def need(path, what, arg, slug):
@@ -95,15 +96,22 @@ def district_codes(df, plates_nd):
     district whose rows disagree."""
     votes = collections.defaultdict(collections.Counter)
     for d, k in zip(df.district, df.key):
-        if k and len(plates_nd.get(k, ())) == 1:
+        # An address with no parsable district cannot be keyed; it is not a
+        # district to learn (New Taipei: two such rows voted 中和's code).
+        if d and k and len(plates_nd.get(k, ())) == 1:
             votes[d][next(iter(plates_nd[k]))] += 1
     mapping = {}
     print("  district name -> door-plate code (learned from single-district keys):")
     for d, c in sorted(votes.items(), key=lambda kv: -sum(kv[1].values())):
         code, n = c.most_common(1)[0]
         share = n / sum(c.values())
-        print(f"    {d:<6} {code}  {n:>6,} of {sum(c.values()):>6,} ({share:.1%})")
-        if share < 0.9:
+        total = sum(c.values())
+        small = total < SMALL_DISTRICT_KEYS
+        print(f"    {d:<6} {code}  {n:>6,} of {total:>6,} ({share:.1%})"
+              + ("  - small sample: majority taken" if small else ""))
+        # 90% where the sample is large; a clear majority where it is not
+        # (New Taipei's rural 雙溪區 has 9 single-district keys, 6 agreeing).
+        if share < (0.5 if small else 0.9):
             sys.exit(f"district {d} maps to several codes {dict(c)} - read the addresses")
         mapping[d] = code
     if len(set(mapping.values())) != len(mapping):
@@ -111,13 +119,15 @@ def district_codes(df, plates_nd):
     return mapping
 
 
-def run(config, city, slug):
+def run(config, city, slug, tag="", write=True):
+    """tag prefixes the baseline figures (a regional city runs this once per
+    city); write=False returns the table without writing it."""
     sys.stdout.reconfigure(encoding="utf-8")
     plates, plates_nd = load_plates(config, slug)
     shared = sum(1 for v in plates_nd.values() if len(v) > 1)
     print(f"  door plates: {len(plates):,} keys with district; {shared:,} street/number keys "
           f"occur in more than one district - why the district is part of the key")
-    emit("doorplate_keys", len(plates))
+    emit(tag + "doorplate_keys", len(plates))
 
     rows = []
     for r in taiwan.register_rows(config.ADDRESS_PREFIXES, need(taiwan.REGISTER_ZIP, "tax register", "register", slug)):
@@ -132,13 +142,13 @@ def run(config, city, slug):
     df = pd.DataFrame(rows)
     print(f"  register rows in {city}, storefront divisions: {len(df):,}  "
           f"{df.bucket.value_counts().to_dict()}")
-    emit("storefront_rows", len(df))
+    emit(tag + "storefront_rows", len(df))
 
     df["district"] = df.address.map(lambda a: district_of(a, config))
     parsed = [taiwan.parse(a, config.ADDRESS_PREFIXES) for a in df.address]
     df["key"] = parsed
     codes = district_codes(df, plates_nd)
-    emit("districts", len(codes))
+    emit(tag + "districts", len(codes))
     df["district"] = df.district.map(codes).fillna("")
     df["building"] = [(d, *k[:3], k[3].split("-")[0]) if k else None
                       for d, k in zip(df.district, parsed)]
@@ -152,7 +162,7 @@ def run(config, city, slug):
     print(f"  head-office rule: {int((company_hq & officey).sum()):,} company head-office rows look "
           f"like offices; {int((company_hq & officey & exempt).sum()):,} exempt (a building with "
           f"{config.OFFICE_EXEMPT_ROWS_AT_ADDRESS}+ storefront rows); {int(drop.sum()):,} dropped")
-    emit("office_like_dropped", int(drop.sum()))
+    emit(tag + "office_like_dropped", int(drop.sum()))
     df = df[~drop].copy()
 
     # --- the join --------------------------------------------------------------
@@ -174,7 +184,7 @@ def run(config, city, slug):
     ok = df.placed.isin(["exact", "base number"])
     print(f"  placed {ok.mean():.1%} of {len(df):,}")
     for k, n in df.placed.value_counts().items():
-        emit(f"join_{k.replace(' ', '_')}", int(n))
+        emit(tag + f"join_{k.replace(' ', '_')}", int(n))
     miss = df[~ok]
     stall = miss.address.str.contains("攤|市場|高架橋下")
     print(f"  of {len(miss):,} unplaced, {int(stall.sum()):,} read as market or viaduct stalls; samples:")
@@ -183,7 +193,7 @@ def run(config, city, slug):
     df = df[ok].copy()
     bb = config.CITY_BBOX
     inb = df.latitude.between(bb["lat_min"], bb["lat_max"]) & df.longitude.between(bb["lon_min"], bb["lon_max"])
-    emit("out_of_bounds", int((~inb).sum()))
+    emit(tag + "out_of_bounds", int((~inb).sum()))
     df = df[inb].copy()
 
     # --- the name rule -----------------------------------------------------------
@@ -192,14 +202,16 @@ def run(config, city, slug):
     hidden = len(df) - sum(trade)
     print(f"  names shown: {sum(trade):,}; sole proprietors shown by their industry instead: "
           f"{hidden:,} ({hidden / len(df):.1%})")
-    emit("names_hidden", hidden)
+    emit(tag + "names_hidden", hidden)
 
     out = df[["business_name", "industry", "industry_code", "latitude", "longitude", "address",
               "org"]]
     kept = filter_to_storefront(out, config.TAXONOMY_SYSTEM)
     if len(kept) != len(out):
         sys.exit("filter_to_storefront dropped rows the buckets already decided")
-    emit("storefronts", len(kept))
-    kept.to_csv(config.BUSINESSES_CLEAN_CSV, index=False, encoding="utf-8")
-    print(f"  wrote {config.BUSINESSES_CLEAN_CSV.name}: {len(kept):,} storefronts")
+    emit(tag + "storefronts", len(kept))
+    if write:
+        kept.to_csv(config.BUSINESSES_CLEAN_CSV, index=False, encoding="utf-8")
+        print(f"  wrote {config.BUSINESSES_CLEAN_CSV.name}: {len(kept):,} storefronts")
+    return kept
 

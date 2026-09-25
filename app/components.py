@@ -1056,7 +1056,8 @@ _NOTICES = [
     # adds its name to it and a notice of its own sources. Approved by the owner
     # 2026-09-25.
     ("Fiscal Information Agency (Taiwan)",
-     "Taichung's and Taoyuan's storefronts are from 財政部財政資訊中心 2026 全國營業(稅籍)登記資料集 — Taiwan's "
+     "Taichung's, Taoyuan's, Taipei's and New Taipei's storefronts are from 財政部財政資訊中心 2026 "
+     "全國營業(稅籍)登記資料集 — Taiwan's "
      "national business tax register, published by the Fiscal Information Agency, Ministry of "
      "Finance (the data date is in each page's snapshot caption). 此開放資料依政府資料開放授權條款 "
      "(Open Government Data License) 進行公眾釋出，使用者於遵守本條款各項規定之前提下，得利用之。 "
@@ -1086,6 +1087,19 @@ _NOTICES = [
      "(Open Government Data License) 進行公眾釋出，使用者於遵守本條款各項規定之前提下，得利用之。 "
      "[data.gov.tw/license](https://data.gov.tw/license). The door plates themselves are not "
      "shown. None of these bodies endorses this map.",
+     False),
+    # Taipei (Regional): three OGDL v1 sources (read 2026-09-23 and 2026-09-25),
+    # one statement each. Taipei Metro's own open-data declaration adds: cite the
+    # source, no logo or marks, no implied endorsement of a derivative, and
+    # liability for malicious alteration - accepted by the owner 2026-09-25.
+    ("Taipei and New Taipei City Governments and Taipei Metro (Taipei (Regional))",
+     "提供機關／臺北市政府民政局 2026 臺北市門牌位置數值資料 and 提供機關／新北市政府民政局 2026 "
+     "新北市門牌位置數值資料 (the editions named in the page's snapshot caption), used to place the "
+     "two cities' storefronts by address; and 提供機關／臺北大眾捷運股份有限公司 2026 "
+     "臺北捷運路線車站資料服務, Taipei Metro's station list, used to check the map's stations. "
+     "此開放資料依政府資料開放授權條款 (Open Government Data License) 進行公眾釋出，使用者於遵守本條款各項"
+     "規定之前提下，得利用之。 [data.gov.tw/license](https://data.gov.tw/license). The door plates "
+     "themselves are not shown. None of these bodies endorses or approves this map.",
      False),
 ]
 

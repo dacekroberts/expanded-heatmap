@@ -1,0 +1,46 @@
+{
+  "fia_register": {
+    "file": "BGMOPEN1.zip",
+    "url": "https://eip.fia.gov.tw/data/BGMOPEN1.zip",
+    "bytes": 66343427,
+    "data_date": "2026-09-25",
+    "sha256": "95b08653facc371b44c3281e45256de6dbed3c68955d467faa28ea9a28155000",
+    "retrieved": "2026-09-25T15:10:16+00:00"
+  },
+  "metro_list": {
+    "file": "taipei_metro_stations.csv",
+    "url": "https://data.taipei/api/dataset/8bf00fa8-86a5-437e-b5c7-9bc0fe0e2971/resource/e3c0e67f-5916-405f-ad9a-41f52a65c2d2/download",
+    "bytes": 3624,
+    "sha256": "68c5c58e2a574d79e4dee32181dde678cb16be72df097cbf318ba95d4d02221b",
+    "retrieved": "2026-09-25T15:10:16+00:00"
+  },
+  "osm_rail": {
+    "file": "osm_rail_routes.json",
+    "url": "https://overpass-api.de/api/interpreter",
+    "query": "[out:json][timeout:600];relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|monorail)$\"](24.93,121.36,25.2,121.66)->.r;.r out geom;node(r.r);out body;",
+    "bytes": 1191739,
+    "sha256": "8731fc76ebdf7e119510372023c3aca80ce8c688e9c61172eab92aa15ccc6168",
+    "elements": {
+      "relation": 37,
+      "node": 262
+    },
+    "osm_base": "2026-09-25T15:09:20Z",
+    "retrieved": "2026-09-25T15:10:26+00:00"
+  },
+  "taipei_doorplates": {
+    "file": "taipei_doorplate_20260902.csv",
+    "url": "https://data.taipei/api/dataset/b7c8e724-1e98-45ee-a0bd-f3840623ed97/resource/ce76ca0c-7f94-4935-ab47-1d2a41ca2abb/download",
+    "bytes": 124547303,
+    "sha256": "cdae1c5db7c76a729211fa5946cd2af6d7c6ef27b4ef8b1c14420a229682db55",
+    "retrieved": "2026-09-25T15:12:59+00:00",
+    "edition": "臺北市門牌位置數值資料 20260902"
+  },
+  "new_taipei_doorplates": {
+    "file": "new_taipei_doorplate.csv",
+    "url": "https://data.ntpc.gov.tw/api/datasets/d7b568ab-3819-40c8-a6e7-a6b199443101/csv/file",
+    "bytes": 192881415,
+    "sha256": "72007bb772475b817a8685dce8e9e99d390835ba0151b4c60c62f8af80ccf034",
+    "retrieved": "2026-09-25T15:18:59+00:00",
+    "edition": "新北市門牌位置數值資料 11509"
+  }
+}

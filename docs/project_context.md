@@ -842,6 +842,12 @@ Cities built and running end to end (pipeline, map, app page):
   and the `taiwan-city` skill. One line in a large city, so most storefronts
   lie outside the rings, and the page says so.
 
+- **Taipei (Regional)** - Taipei and New Taipei together, every metro and
+  light-rail line in the two cities, twelve in all. Taiwan's third city: each
+  city's own door plates through the shared step 2, the join's Taipei control
+  reproduced, and gate 3 exact on Taipei Metro's lines. No boundary is read -
+  a station is in the region when either city's door plates surround it.
+
 - **Taoyuan** - the Taoyuan Airport MRT, counted around its 15 stations inside
   Taoyuan and drawn to its ends in Taipei. Taiwan's second city, built on
   Taichung's national modules and the shared step 2; its station points come
@@ -970,8 +976,8 @@ rail. The `brazil-city` skill carries the traps, and
 `scripts/measure_rail_backbone.py` answers two of the rail test's three parts
 from cached OSM.
 
-Taiwan is under way: Taichung and Taoyuan were built 2026-09-25; Taipei (Regional)
-is next; Seoul and the Taiwanese cities publish as one batch (owner). Before
+Taiwan's three buildable cities were built 2026-09-25 - Taichung, Taoyuan and Taipei
+(Regional); Kaohsiung stays geo-blocked; Seoul and the Taiwanese cities publish as one batch (owner). Before
 that came Hong Kong, Riga and Seoul (the owner built Hong Kong first on 2026-09-24
 so the week's remaining budget held a whole city; the order before that was
 Rotterdam, then Taiwan).

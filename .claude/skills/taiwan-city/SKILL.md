@@ -123,6 +123,24 @@ notices and names itself in the FIA one; it does not add a second FIA notice.
 - Macro labels: Taichung's pill moved below its dot, because Taoyuan sits just north-east.
   Taipei (Regional) will sit next to Taoyuan - re-score all three.
 
+## What Taipei (Regional) added (2026-09-25, the third city)
+
+- **The `parse()` control ran and reproduced 92.4%** on Taipei, so the move into the pipeline
+  was clean. New Taipei reproduced 95.5%.
+- **A REGIONAL city runs the shared step 2 once per city** (`run(..., tag=..., write=False)`)
+  and concatenates - each city's own door plates and district codes, each city's figures
+  tagged in the baseline.
+- **District learning needs two guards found here:** a district with fewer than 20
+  single-district keys takes a clear majority rather than 90% (New Taipei's rural 雙溪區: 6 of
+  9), and a blank district (no parsable district in the address) is never learned - two such
+  rows voted 中和's code and collided.
+- **Scope without any boundary**: a station is in the region when either city's door-plate
+  file has plates within 300 m. Two files that each cover exactly one city are a boundary.
+- **Operator declarations beside the licence**: Taipei Metro publishes its own 政府網站資料
+  開放宣告 (cite, no logo, no endorsement, liability for malicious alteration) - accepted.
+- **OSM's English names need cleaning**: a status in parentheses ("(Under construction)" on
+  a station both structured sources count), a trailing "Station", lower-case "main station".
+
 ## The city still to build
 
 ~~**Taoyuan**~~ ✅ built 2026-09-25 (above). Its brief's sheet, kept: 49,282 storefronts, joined 94.0%. Door plates are

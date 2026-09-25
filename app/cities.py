@@ -955,9 +955,24 @@ CITIES = [
         "region": "East Asia",
         "country": "Taiwan",
         "in_default_view": False,
-        # Above the dot, the default, scored by check_macro_labels.py (width
-        # 57.4 px, measured 2026-09-25).
-        "label_offset": ("middle", 0, -22),
+        # WEST of its dot: Taipei (Regional)'s dot sits a few pixels east of
+        # Taoyuan's at the East Asia zoom, so the two names split west/east.
+        # Scored by check_macro_labels.py (width 57.4 px, measured 2026-09-25).
+        "label_offset": ("end", -10, 0),
+    },
+    {
+        "name": "Taipei (Regional)",
+        "lat": 25.0478,
+        "lon": 121.5319,
+        "page": "pages/46_Taipei_Heatmap.py",
+        "blurb": "Taipei and New Taipei's metro and light rail",
+        "region": "East Asia",
+        "country": "Taiwan",
+        "in_default_view": False,
+        # EAST of its dot: Taoyuan's dot sits a few pixels west at the East Asia
+        # zoom (Taoyuan's name goes west). Scored by check_macro_labels.py (width
+        # 112.5 px, measured 2026-09-25).
+        "label_offset": ("start", 10, 0),
     },
 ]
 

@@ -10,7 +10,7 @@ recorded, because inside the city the service runs at metro spacing and
 frequency. Rows marked *ASSERTED* rest on general knowledge, not on this
 project's record — verify before relying on them.
 
-## Built (45) — six draw commuter rail
+## Built (46) — six draw commuter rail
 
 | City | Commuter / suburban rail | On the map? |
 |---|---|---|
@@ -44,6 +44,7 @@ project's record — verify before relying on them.
 | Rotterdam | NS trains | ✗ Excluded (named on the page) |
 | Riga | Vivi suburban trains (five corridors, 24 stations in Riga) | ✗ Excluded (named on the page): 15 minutes at the best evening peak, 30 at midday |
 | **Seoul** | Korail's metropolitan lines, AREX, GTX-A, the Seohae Line | ✅ **Gyeongui–Jungang, Suin–Bundang and Gyeongchun drawn** (owner's call 2026-09-24) — Seoul signs them as subway lines, and inside the city they are 1.25–1.39 km apart, within the subway's own spacing. ✗ AREX (3.4 km apart, an airport line), GTX-A, the Seohae Line and intercity trains excluded; every station they serve in Seoul is also on a drawn line. Line 1, mostly Korail-run, is part of the numbered subway and drawn |
+| Taipei (Regional) | Taiwan Railway (TRA) and high-speed rail | ✗ Not drawn (named on the page): every metro and light-rail line is |
 | Taoyuan | Taiwan Railway (TRA) and high-speed rail | ✗ Not drawn (named on the page): the metro is the Airport MRT alone |
 | Taichung | Taiwan Railway (TRA) and high-speed rail | ✗ Not drawn (named on the page): the metro is the Green Line alone |
 | Hong Kong | High-speed rail to the mainland (and the Airport Express) | ✗ Excluded (named on the page). East Rail, once KCR's commuter line, runs as an MTR metro line and is drawn |
@@ -58,7 +59,6 @@ project's record — verify before relying on them.
 
 | City | Commuter / suburban rail | Status |
 |---|---|---|
-| Taipei | TRA — *ASSERTED* | Not recorded. (Seoul and Hong Kong built: see above) |
 | Japan (10) | JR and private railways — *ASSERTED* | ✅ **INCLUDE — owner's decision 2026-09-24.** Japan joins Dublin and Copenhagen as a place where commuter rail is drawn. Open for the build: whether intercity-only services (Shinkansen, limited-express-only lines) count — the decision covers the commuter network |
 | Stockholm · Göteborg · Zurich | Pendeltåg · Västtåg · S-Bahn — *ASSERTED* | Not recorded (Band C) |
 | Kaohsiung | TRA — *ASSERTED* | Not recorded (Band D) |
