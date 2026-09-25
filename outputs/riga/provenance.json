@@ -1,0 +1,58 @@
+{
+  "excise": {
+    "file": "pdb_akclicences_odata.csv",
+    "url": "https://data.gov.lv/dati/dataset/a1adb6dd-a4a1-41c9-9177-c1cd942e012e/resource/f88cd5ea-61b0-42e8-a0a8-25504dfbcdc9/download/pdb_akclicences_odata.csv",
+    "bytes": 222926577,
+    "sha256": "2310b00ec6605bce1c09aeabc94cf8d971b2c5bdc9fc1d9c6b26529e8c286c8f",
+    "retrieved": "2026-09-25T04:05:17+00:00",
+    "last_modified": "2026-09-24T05:04:37.962797"
+  },
+  "premise_groups": {
+    "file": "premisegroup.zip",
+    "url": "https://data.gov.lv/dati/dataset/be841486-4af9-4d38-aa14-6502a2ddb517/resource/5d8b1cfa-1e67-4b77-a6ac-b4e37eba0d7e/download/premisegroup.zip",
+    "bytes": 65616651,
+    "sha256": "4084dcf8323214cde466bbab41d0c796cb9f59b542a0e549ddd18fa6b439ad8f",
+    "retrieved": "2026-09-25T04:05:24+00:00",
+    "last_modified": "2026-09-20T19:10:59.319384"
+  },
+  "cadastral_map": {
+    "file": "0001000_kk_shp.zip",
+    "url": "https://data.gov.lv/dati/dataset/b28f0eed-73b0-4e44-94e7-b04b11bf0b69/resource/bf88b763-98b8-445d-a51f-b76f45c362c5/download/0001000_kk_shp.zip",
+    "bytes": 20783564,
+    "sha256": "7f940287c1a4d3cfdfb69c53985235dfcb9e9db9a2e2f4e196485a3ba08de97a",
+    "retrieved": "2026-09-25T04:05:28+00:00",
+    "last_modified": "2026-09-19T09:40:48.884083"
+  },
+  "address_points": {
+    "file": "adreses.gpkg",
+    "url": "https://data.gov.lv/dati/dataset/4e2bd2d1-69e1-4598-b2f0-713e963e55e3/resource/7fc97d43-2c34-4301-8776-a5682273115e/download/adreses.gpkg",
+    "bytes": 6672384,
+    "sha256": "1922aaff6ce85a0d2a64a7526b8546950966d1bdc484314e7677866e3d19a51b",
+    "retrieved": "2026-09-25T04:05:31+00:00",
+    "last_modified": "2026-09-20T09:33:55.708593"
+  },
+  "neighbourhoods": {
+    "file": "apkaimes.gpkg",
+    "url": "https://data.gov.lv/dati/dataset/ddc24ef1-4db4-46ce-a035-258b6ed69d91/resource/7c652b48-c5ca-44a9-8dd2-32e869253f29/download/apkaimes.gpkg",
+    "bytes": 196608,
+    "sha256": "6f6143885a2c5ae0bc6d29692f418b01780f92b23657df5a1ebefee2db9f959d",
+    "retrieved": "2026-09-25T04:05:33+00:00",
+    "last_modified": "2026-03-26T12:16:30.325396"
+  },
+  "degrading_buildings": {
+    "file": "vidi_degradejosas_buves.gpkg",
+    "url": "https://data.gov.lv/dati/dataset/9789c471-5751-4b20-87ac-7aba43c42f8b/resource/b9521b89-d158-4884-8e6d-c60873cf5241/download/vidi_degradejosas_buves.gpkg",
+    "bytes": 974848,
+    "sha256": "8428970c03d5efc2913b470b4da025abb9cb472731dec145871ce34e92ad807e",
+    "retrieved": "2026-09-25T04:05:35+00:00",
+    "last_modified": "2026-09-15T04:43:37.918274"
+  },
+  "gtfs": {
+    "file": "gtfs_rigas_satiksme.zip",
+    "url": "https://data.gov.lv/dati/dataset/6d78358a-0095-4ce3-b119-6cde5d0ac54f/resource/2e9922e8-d863-41d3-9ff4-9a97ec9031a3/download/marsrutusaraksti08_2026.zip",
+    "bytes": 2003791,
+    "sha256": "82cf04d494ee576a48e0df8b82b2374de02f78a9db00d6e5980add8c330d9b1a",
+    "retrieved": "2026-09-25T04:05:39+00:00",
+    "last_modified": "2026-09-08T07:00:08.774435"
+  }
+}

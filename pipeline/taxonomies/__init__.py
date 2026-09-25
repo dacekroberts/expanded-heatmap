@@ -122,6 +122,7 @@ TAXONOMY_MODULES = {
     # from staging's scripts/screen_cnefe.py. National, like france_naf.
     "brazil_cnefe": "pipeline.taxonomies.brazil_cnefe",
     "hong_kong_fehd": "pipeline.taxonomies.hong_kong_fehd",
+    "riga_source": "pipeline.taxonomies.riga_source",
     # Future, non-US: "nace": "pipeline.taxonomies.nace"
 }
 

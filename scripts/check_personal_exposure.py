@@ -220,6 +220,12 @@ REGISTRIES = {
     "rotterdam": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv",
                       address=("address",)),
+    # Riga shows the KIND of place (excise) or the premise group's registered
+    # name (cadastre); the excise holder (`Nodoklu_maksatajs`) is never read,
+    # and the unit number is dropped from displayed addresses (owner).
+    "riga": dict(raw=None, trade=None, owner=None,
+                 processed="businesses_clean.csv",
+                 address=("address",)),
     # FEHD's registers carry the SHOP SIGN (`SS`), the name on the licence
     # premises, and no licensee name at all - there is no owner column to
     # fall back to. The raw file is XML, so the processed file is read.

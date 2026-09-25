@@ -1,0 +1,16 @@
+station,lines,reason,latitude,longitude
+Alfa,1,"spacing filter on tram 1: 0.311 mi after Krustabaznīcas iela, under 0.5 mi",56.984295,24.202424999999998
+Aspazijas bulvāris,11,"spacing filter on tram 11: 0.213 mi after Merķeļa iela, under 0.5 mi",56.94811,24.11486
+Doles iela,10,"spacing filter on tram 10: 0.358 mi after Mazā Bauskas iela, under 0.5 mi",56.915845,24.133364999999998
+Dzemdību nams,11,"spacing filter on tram 11: 0.162 mi after Laima, under 0.5 mi",56.96565,24.133360000000003
+Džutas iela,1,"spacing filter on tram 1: 0.493 mi after Lēdmanes iela, under 0.5 mi",56.981089999999995,24.182949999999998
+Gaujas iela,11,"spacing filter on tram 11: 0.422 mi after Brāļu kapi, under 0.5 mi",56.9862,24.160085000000002
+Jūrmalas gatve,8,"spacing filter on tram 8: 0.394 mi after Elvīras iela, under 0.5 mi",56.951525000000004,24.045925
+Mazā Stērstu iela,10,"spacing filter on tram 10: 0.194 mi after Stērstu iela/CSDD, under 0.5 mi",56.913754999999995,24.116664999999998
+Meža skola,1,"spacing filter on tram 1: 0.261 mi after Sporta akadēmija, under 0.5 mi",56.986335,24.214695
+Mirdzas Ķempes iela,11,"spacing filter on tram 11: 0.276 mi after Rusova iela/Valsts biroji, under 0.5 mi",56.99361,24.163705
+Mārkalnes iela,1,"spacing filter on tram 1: 0.256 mi after Tirzas iela, under 0.5 mi",56.988034999999996,24.229084999999998
+Ormaņu iela,8,"spacing filter on tram 8: 0.432 mi after Āgenskalna tirgus, under 0.5 mi",56.937285,24.05943
+Pērnavas iela,1,"spacing filter on tram 1: 0.256 mi after Sporta nams ""Daugava"", under 0.5 mi",56.965289999999996,24.149034999999998
+Satiksmes iela,10,"spacing filter on tram 10: 0.461 mi after Arkādijas parks, under 0.5 mi",56.92748,24.090755
+Telts iela,10,"spacing filter on tram 10: 0.257 mi after Jelgavas iela / Jelgavas iela/Bērnu slimnīca, under 0.5 mi",56.92008,24.0889
