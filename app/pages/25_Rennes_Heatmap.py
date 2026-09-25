@@ -46,7 +46,9 @@ Businesses come from **SIRENE**, France's national register of établissements,
 joined to INSEE's separate geolocation file, the same sources as the other
 French cities. Roughly one active establishment in six here is marked
 non-diffusible by INSEE, which withholds its name, address and coordinates
-together, so those never reach this map.
+together, so those never reach this map. **Where SIRENE records no shop sign or
+trading name, the dot shows the establishment's address instead** — about two
+dots in five on this map.
 
 **Read the density as a register, not a street survey.** SIRENE records where a
 business is *registered*, and some registered establishments have no

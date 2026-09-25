@@ -43,7 +43,9 @@ street-running overlay on one. In Paris it is an overlay on the Métro.
 Businesses come from **SIRENE**, France's national register of établissements,
 joined to INSEE's separate geolocation file. Records INSEE marks non-diffusible
 are already stripped at source — name, address and coordinates — so they never
-reach this map.
+reach this map. **Where SIRENE records no shop sign or trading name, the dot
+shows the establishment's address instead** — about three dots in five on this
+map.
 
 **Read the density as a register, not a street survey.** SIRENE records where a
 business is *registered*, and some registered establishments have no

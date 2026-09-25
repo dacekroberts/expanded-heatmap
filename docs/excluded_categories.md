@@ -1663,8 +1663,8 @@ second source at any level of government that would fill Toronto's gap.
 **The bucket is drawn rather than omitted**, decided by the owner on
 2026-09-21. The rejected alternative was leaving Retail out and drawing two
 buckets: it reads as a stronger statement but discards 870 real storefronts and
-would make Toronto the only city on the site whose legend differs from the
-other thirteen. New York's page is the model for the disclosure.
+would have made Toronto's legend the odd one out among the fourteen cities
+built by then. New York's page is the model for the disclosure.
 
 **Toronto also loses about one storefront in sixteen to geocoding, and the loss
 is NOT spread by district.** Its register carries no coordinates at all, so

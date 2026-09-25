@@ -149,8 +149,14 @@ caches, and Rennes' feed is quota-limited. Before removing a worktree:
    alone - `cmd /c rmdir <link>` deletes a junction and never its target:
 
    ```powershell
-   Get-ChildItem -LiteralPath <worktree>\data -Recurse -Force -Attributes ReparsePoint
+   Get-ChildItem -LiteralPath <worktree> -Recurse -Force -Attributes ReparsePoint
    ```
+
+   **The WHOLE worktree, not just `data\`.** On 2026-09-24 five of seven
+   retired worktrees also had `.venv-lean` as a junction to the main
+   checkout's lean venv - a recursive delete through it would have emptied
+   the environment every deploy check runs in. A pre-check that filtered on
+   `data\` (or skipped `.venv*` by name) did not see them.
 
    That day the leftover folder was deleted recursively BEFORE its junction
    was noticed. The target survived - both SIRENE files kept their size and

@@ -16,11 +16,14 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**380 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**383 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Fukuoka's address disclosure worded (owner), and the sampling lesson reaches premises-taxonomy](#2026-09-24---fukuokas-address-disclosure-worded-owner-and-the-sampling-lesson-reaches-premises-taxonomy)
+- [Toronto's legend passage and the French address-only dots (owner-approved wording)](#2026-09-24---torontos-legend-passage-and-the-french-address-only-dots-owner-approved-wording)
+- [PLAN's "carry into the mandatory full deploy-verify" item closed as stale (owner)](#2026-09-24---plans-carry-into-the-mandatory-full-deploy-verify-item-closed-as-stale-owner)
+- [Seven worktrees retired; PLAN.md trimmed; the Riga PDF filed](#2026-09-24---seven-worktrees-retired-planmd-trimmed-the-riga-pdf-filed)
 - [Riga builds next, before Taiwan (owner), and its brief is written](#2026-09-24---riga-builds-next-before-taiwan-owner-and-its-brief-is-written)
 - [The open gap emptied: a final re-probe of its last eight, a verdict on each (owner)](#2026-09-24---the-open-gap-emptied-a-final-re-probe-of-its-last-eight-a-verdict-on-each-owner)
 - [The city menu groups by region, then country (owner)](#2026-09-24---the-city-menu-groups-by-region-then-country-owner)
@@ -444,6 +447,78 @@ onwards; the early ones are split by phase rather than by hour.
   was chosen from.
   - It is a new subsection under Step 7, with a checklist line.
   - It points to `brazil-city` for the rest.
+### 2026-09-24 - Toronto's legend passage and the French address-only dots (owner-approved wording)
+
+- **`excluded_categories.md`, Toronto**: "would make Toronto the only city on
+  the site whose legend differs from the other thirteen" was stale twice. There
+  are 41 cities, and Hong Kong, Amsterdam, Rotterdam, Philadelphia and Boston
+  have different legends. The reasoning was true when written, so it is kept
+  and anchored in time: "would have made Toronto's legend the odd one out among
+  the fourteen cities built by then".
+- **The five French pages now disclose their address-only dots.**
+  `france_register` falls back to the address when SIRENE has no sign or usual
+  name, and no French page said so while the Oslo, Copenhagen, Prague, Milan
+  and Amsterdam pages explain theirs (inconsistency list Q17).
+  - **Measured from each city's `name_is_address` flag**: Paris 62.7%,
+    Marseille 56.2%, Lille 50.6%, Toulouse 48.1%, Rennes 40.9%.
+  - **Stated rounded** ("about three dots in five", "more than half", "about
+    half", "about two dots in five") so a rebuild does not make the sentence
+    wrong.
+
+### 2026-09-24 - PLAN's "carry into the mandatory full deploy-verify" item closed as stale (owner)
+
+- **The item (2026-09-21)** held three map fixes for one batched `full`
+  `deploy-verify` before the first deploy: the legend breakpoint dead on a wide
+  load, the container ~15 px short, and fit bounds excluding label anchors.
+- **Closed on the owner's call.** The site has been live for days, and
+  `deploy-verify` has since gained scopes (`city-added`, `map-chrome`,
+  `app-deps`, `full`). A single pre-deploy full run is no longer how changes
+  are verified.
+- **Each area has since been reworked and re-verified** by scoped runs:
+  `LEGEND_AUTOFIT` and the legend clamp, the fit guard that checks its outcome
+  (`map-view`), and the phone-width label placer, all passing `map-chrome`.
+
+### 2026-09-24 - Seven worktrees retired; PLAN.md trimmed; the Riga PDF filed
+
+- **Retired on the owner's approval**: amsterdam, rome, prague, sao-paulo,
+  hong-kong, rotterdam and copenhagen. Copenhagen was confirmed closed out:
+  both owner actions done, and its one open sub-item was "next build: Prague",
+  now live.
+  - **All fully merged**, with clean trees and nothing unpushed. Staging and
+    the Main Building Session each said directly that they were working in
+    none of them.
+  - **Data first.** Copenhagen's cache lived ONLY inside its worktree, as the
+    Main Building Session warned. `data/copenhagen` (4 files, 7.8 MB) was
+    copied to the main checkout and verified byte-identical before removal.
+    Prague's newer PID GTFS brief-check cache replaced the main checkout's
+    older copy.
+  - **Junctions removed alone, non-recursively**: data links in amsterdam,
+    rome, prague (czechia, prague) and copenhagen (denmark). Every target in
+    main `data/` kept its file count.
+  - **Five `.venv-lean` junctions** the pre-check missed (it filtered on the
+    name) were also removed the same safe way, and the main `.venv-lean`
+    still imports streamlit and pandas. **The retirement procedure's step 2
+    must scan `.venv*` too.**
+  - **Then** `git worktree remove` and `git branch -d` for all seven, with no
+    leftovers. What remains: cleanup, staging, and riga (live, locked).
+- **`open-data-guide_1.pdf`** (Latvian, 1.16 MB) at the main checkout's root
+  was the Main Building Session's. A licence-read agent's browser-pane save
+  dialog for VZD's open-data guide produced it: never an approved download,
+  and not needed. It was moved (not deleted) to that session's licence
+  scratch folder, at its request. Deleting it is the owner's call.
+  `check_stray_downloads.py`: clean across all 4 checkouts.
+- **PLAN.md 1,913 -> 1,738 lines.** Finished blocks with their DECISIONS
+  record and no open follow-up were removed: Rotterdam, Hong Kong, Brazil,
+  Copenhagen, the region switcher, the Dublin re-render, the Europe collapse,
+  the fetch moves, and surfacing the two docs. Hong Kong's open "CJK font
+  order" sub-item was done as bf95720. Kept, because each still holds
+  something open: Amsterdam and Rome (owner deletions), Prague (the Flora
+  reminder), the label follow-ups, Washington's follow-ups, SF's endpoint
+  note, repo visibility.
+- **Toronto's two retail shares are both real** (open question 18 in
+  `docs/map_inconsistencies.md`): the baseline's category counts versus the
+  cleaned rows the map is drawn from. Recorded there, and deliberately not
+  edited.
 
 ### 2026-09-24 - Riga builds next, before Taiwan (owner), and its brief is written
 
