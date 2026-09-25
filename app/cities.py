@@ -1111,10 +1111,21 @@ if _untagged:
 #
 # The city pages' switcher (and the map's "Cities" menu, which reads its
 # options from that switcher's hidden links) and the Overview's text list of
-# cities are GROUPED BY COUNTRY: countries in the order their first city was
-# built, cities within a country in build order. Owner's request 2026-09-24 -
-# build order alone put Rome ten places after Milan. CITIES itself stays in
-# build order, because page numbers and the macro map follow it.
+# cities are GROUPED BY REGION, THEN COUNTRY (owner, 2026-09-24, both halves):
+#
+#   - regions in REGION_ORDER, the macro map's own selector order - so the
+#     United States, then Canada, Mexico, Europe, South America, East Asia;
+#   - within a region, countries in the order their first city was built;
+#   - within a country, cities in build order.
+#
+# Country grouping came first (build order alone put Rome ten places after
+# Milan); region grouping followed the same evening, because country order by
+# first build keeps a continent together only while countries happen to be
+# built continent by continent - the first city of a new European country
+# built after Taiwan would have landed after the East Asian cities. A country
+# whose cities sit in more than one region (Canada West/East) sorts by the
+# earliest of them. CITIES itself stays in build order, because page numbers
+# and the macro map follow it.
 #
 # `country` is not `region`: a region is a macro-map VIEW (Canada is two,
 # Europe is one), a country is what a reader groups by.
@@ -1125,5 +1136,11 @@ if _uncountried:
         f"the city switcher groups by it."
     )
 
-COUNTRY_ORDER = list(dict.fromkeys(c["country"] for c in CITIES))
+_first_built = list(dict.fromkeys(c["country"] for c in CITIES))
+_region_rank = {
+    k: min(REGION_ORDER.index(c["region"]) for c in CITIES if c["country"] == k)
+    for k in _first_built
+}
+# sorted() is stable, so countries sharing a region keep first-built order.
+COUNTRY_ORDER = sorted(_first_built, key=lambda k: _region_rank[k])
 SWITCHER_ORDER = [c for k in COUNTRY_ORDER for c in CITIES if c["country"] == k]

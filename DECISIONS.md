@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**376 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**377 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [The city menu groups by region, then country (owner)](#2026-09-24---the-city-menu-groups-by-region-then-country-owner)
 - [The cross-city inconsistency list is kept current by a check (owner)](#2026-09-24---the-cross-city-inconsistency-list-is-kept-current-by-a-check-owner)
 - [render_heatmap refuses CJK names without a declared language](#2026-09-24---render_heatmap-refuses-cjk-names-without-a-declared-language)
 - [A map declares its language, and its CJK faces follow it](#2026-09-24---a-map-declares-its-language-and-its-cjk-faces-follow-it)
@@ -418,6 +419,25 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - The city menu groups by region, then country (owner)
+
+- **The owner asked for continents to stay together** in each city map's
+  "Cities" menu and the Overview's list: all US cities, then Canadian,
+  Mexican, European, South American, East Asian.
+- **The order follows `REGION_ORDER`**, the macro map's own selector, then
+  countries by first build within a region, then cities by build order. A
+  country in two regions (Canada West/East) sorts by the earlier one.
+- **Today's order is unchanged**, verified by comparing the old and new
+  `SWITCHER_ORDER` name by name. Country-by-first-build had happened to keep
+  continents together only because countries were built continent by
+  continent.
+- **Why it still needed doing**: a simulated future, running the real
+  `cities.py` code, adds Taipei and then a later-built Lisbon.
+  - **The old rule** ordered them Hong Kong > Taiwan > Portugal, putting
+    Portugal after East Asia.
+  - **The new rule** orders them Netherlands > Portugal > Brazil > Hong Kong >
+    Taiwan.
 
 ### 2026-09-24 - The cross-city inconsistency list is kept current by a check (owner)
 
