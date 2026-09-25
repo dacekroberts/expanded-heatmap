@@ -643,8 +643,10 @@ _NOTICES = [
      "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "
      "Horizonte, Brasília, Salvador, Fortaleza, Porto Alegre, Recife and "
      "Santos, and those cities' município boundaries, and "
-     "Prague's, Amsterdam's, Rome's and Rotterdam's city boundaries, and Hong Kong's MTR and "
-     "Light Rail lines and stations, and its boundary, are from OpenStreetMap, "
+     "Prague's, Amsterdam's, Rome's and Rotterdam's city boundaries, Hong Kong's MTR and "
+     "Light Rail lines and stations, and its boundary, Seoul's subway lines and stations and "
+     "its boundary, the routes of Taichung's Green Line and Taoyuan's Airport MRT, and the "
+     "metro and light-rail lines and stations of Taipei and New Taipei are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
      "geometry; stations, rings and categories are this project's work.",
