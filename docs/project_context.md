@@ -833,6 +833,15 @@ Cities built and running end to end (pipeline, map, app page):
   personal name at a home-looking address is withheld. Rail is OpenStreetMap's,
   because Korea's station dataset carries no lines.
 
+- **Taichung** - Taichung Metro's Green Line, and Taiwan's first city. The
+  business leg is the national business tax register, joined to the city's
+  own door plates by district, street and number - no geocoder - with two
+  owner's rules the next Taiwanese cities inherit: office-like company head
+  offices are dropped, and a sole proprietor's name is shown only when it is
+  clearly a trade name. Its national modules are `pipeline/countries/taiwan.py`
+  and the `taiwan-city` skill. One line in a large city, so most storefronts
+  lie outside the rings, and the page says so.
+
 - **Riga** - Rīgas satiksme's seven tram routes, across the city's 58
   neighbourhoods; Latvia's first city, in Amsterdam's two-layer shape. Food
   service is the State Revenue Service's excise-licence register - the premises
@@ -954,7 +963,9 @@ rail. The `brazil-city` skill carries the traps, and
 `scripts/measure_rail_backbone.py` answers two of the rail test's three parts
 from cached OSM.
 
-Next is Taiwan, after Hong Kong, Riga and Seoul (the owner built Hong Kong first on 2026-09-24
+Taiwan is under way: Taichung was built 2026-09-25, Taoyuan is next, then Taipei
+(Regional); Seoul and the Taiwanese cities publish as one batch (owner). Before
+that came Hong Kong, Riga and Seoul (the owner built Hong Kong first on 2026-09-24
 so the week's remaining budget held a whole city; the order before that was
 Rotterdam, then Taiwan).
 Taiwan and Japan each get a per-country skill written after their first city.

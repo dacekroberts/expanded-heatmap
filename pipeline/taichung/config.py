@@ -91,9 +91,10 @@ LINE_NAME = "Green Line"
 # The line's two OSM relations (one per direction, 18 stops each) are named
 # 臺中捷運綠線…方向; matched on that name within route=subway.
 LINE_MATCH = "臺中捷運綠線"
-# Neither the operator's table nor OSM carries a colour (2026-09-25). A green
-# of this project's own, clear of the Personal services pins - PROVISIONAL,
-# pending the owner's call (Riga's precedent: the project palette).
+# Neither the operator's table nor OSM carries a colour (2026-09-25), and the
+# licence read found none on the dataset pages. A green of this project's own,
+# Delta-E 31 from the Personal services pins (owner 2026-09-25, Riga's
+# precedent: the project palette); the page says so.
 LINE_COLOUR = "#3B7D23"
 
 # --- Business filtering ------------------------------------------------

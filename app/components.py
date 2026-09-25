@@ -1048,6 +1048,32 @@ _NOTICES = [
      "stations. The categories and counts are this project's own, not figures published by the "
      "Seoul Metropolitan Government, which does not sponsor or endorse this map.",
      False),
+    # Taiwan: every source is OGDL v1 (read 2026-09-23 and 2026-09-25), whose
+    # attribution statement is LOAD-BEARING - without it the grant is deemed never
+    # made (§三(二)) - in the annex's prescribed form. The FIA's own declaration
+    # adds: cite, no emblems, no endorsement, and do not present the filtered
+    # points as the register. The FIA notice is NATIONAL: each Taiwanese city
+    # adds its name to it and a notice of its own sources. Approved by the owner
+    # 2026-09-25.
+    ("Fiscal Information Agency (Taiwan)",
+     "Taichung's storefronts are from 財政部財政資訊中心 2026 全國營業(稅籍)登記資料集 — Taiwan's "
+     "national business tax register, published by the Fiscal Information Agency, Ministry of "
+     "Finance (the data date is in each page's snapshot caption). 此開放資料依政府資料開放授權條款 "
+     "(Open Government Data License) 進行公眾釋出，使用者於遵守本條款各項規定之前提下，得利用之。 "
+     "[data.gov.tw/license](https://data.gov.tw/license). This map is not the register: this "
+     "project selected the storefront industries, left out online sellers and office-like "
+     "head-office rows, placed each location by matching its address to the city's door plates, "
+     "showed a sole proprietor's name only where it is clearly a trade name, and counted the "
+     "results around stations. The Fiscal Information Agency does not endorse this map.",
+     False),
+    ("Taichung City Government and Taichung MRT (Taichung)",
+     "提供機關／臺中市政府數位發展局 2026 臺中市115年1月至各月份GIS門牌資料 (the monthly file named in "
+     "the page's snapshot caption), used to place Taichung's storefronts by address; and "
+     "提供機關／臺中捷運股份有限公司 2026 臺中捷運綠線車站資訊, the Green Line's stations and their "
+     "names. 此開放資料依政府資料開放授權條款 (Open Government Data License) 進行公眾釋出，使用者於遵守"
+     "本條款各項規定之前提下，得利用之。 [data.gov.tw/license](https://data.gov.tw/license). The door "
+     "plates themselves are not shown. Neither body endorses this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

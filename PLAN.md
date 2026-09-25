@@ -787,7 +787,13 @@ brief names.
   storefronts, 308 stations.** Page 43, notice 18; the map is 30 MB (kept, owner: time it
   live). Line 8 darkened for contrast; withheld names read "Name withheld" (owner).
   - [ ] `deploy-verify` (city-added Seoul + East Asia), fetch, push, reboot, live check;
-    remove the worktree's junction and the `seoul-*-tmp` launch entries.
+    remove the worktree's junction and the `seoul-*-tmp` launch entries. **Publishes in one
+    batch with the Taiwanese cities (owner, 2026-09-25).**
+- [~] **🇹🇼 TAICHUNG - built on `worktree-taichung` (stacked on Seoul), text and notices 44
+  and 45 approved (owner 2026-09-25): 66,115 storefronts, 18 stations.** Page 44; the project's
+  green for the line (owner); the `taiwan-city` skill written from it. Publishes with Seoul.
+- [ ] **🇹🇼 TAOYUAN - next** (owner 2026-09-25: its own page, Taoyuan-only stations, downloads
+  approved). Then Taipei (Regional).
 - [x] **No pre-build items**: Hong Kong, the nine Brazilian
   cities (São Paulo is already with main), the three Taiwanese cities, and
   Rotterdam (its build-time calls are in its brief).

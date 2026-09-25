@@ -42,7 +42,9 @@ an industry code. Shops, food service and personal services are read from the co
 are left out. A company head office registered on an upper floor or in a numbered room is usually
 an office rather than a shop, so those rows are left out, except in buildings that hold many
 storefronts, such as markets and malls. Brands trading inside a department store are generally
-not registered at its address, so a department store tends to appear as a single point.
+not registered at its address, so a department store tends to appear as a single point. One line
+crosses a large city, so most of Taichung's storefronts lie outside the station rings; the
+whole-city heat layer shows them all.
 
 The register gives an address but no location. Each address is matched to Taichung's own
 door-plate file, which gives every door plate its coordinates; addresses with no door plate — most

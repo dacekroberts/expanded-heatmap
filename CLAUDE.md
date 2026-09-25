@@ -81,6 +81,14 @@ classified rows; a sample cannot measure the words chosen from it) and the
 rail test the owner applies to commuter lines, which
 `scripts/measure_rail_backbone.py` half-answers from cached OSM.
 
+**Building a Taiwanese city? Use `taiwan-city`** (`.claude/skills/taiwan-city/`).
+Taichung built the national modules (`pipeline/countries/taiwan.py`: the tax
+register, the door-plate join, the owner's name and head-office rules), so a
+further city adds a config, a door-plate file and its rail leg. The join's
+parser has a control - Taipei - and the skill carries the trap Taichung paid
+for: a door-plate file that names districts by code while one street name
+recurs in several districts.
+
 **Is the city's rail coming from OpenStreetMap rather than GTFS? Use
 `osm-rail`** (`.claude/skills/osm-rail/`). Mexico City and Guadalajara both
 needed it - one because every agency host is unreachable, one because the only

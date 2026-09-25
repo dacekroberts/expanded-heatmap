@@ -1590,6 +1590,25 @@ lines are drawn, with stations inside Seoul only: 223 stations of those lines ou
 are left out. Not drawn: AREX, GTX-A, the Seohae Line, the Gimpo Goldline and intercity trains;
 every station they serve in Seoul is also on a drawn line.
 
+### Taichung - Taiwan's national tax register, joined to the city's door plates
+
+**Left out** - online shopping (industry code 487); every industry outside retail, food service
+and personal services; 1,521 company head-office rows on an upper floor or in a numbered room,
+which read as offices (owner's rule; buildings with 20 or more storefront rows exempt).
+
+**Not placed** - 5,599 rows whose address matched no door plate: market and roadside stalls,
+intersections, and rural addresses.
+
+**Names not shown** - 11,907 sole proprietors whose registered name carries no business
+marker are shown by their line of business (owner's rule; the register publishes no owner
+column, and the Fiscal Information Agency declines to publish owners' names).
+
+**Department stores** - brands trading inside one are generally not registered at its
+address, so a department store tends to appear as a single point.
+
+**Stations.** Taichung Metro's Green Line is drawn; every station is inside the city. Not
+drawn: Taiwan Railway and high-speed rail.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

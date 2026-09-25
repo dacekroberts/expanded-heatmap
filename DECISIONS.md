@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**387 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**388 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-25**
 
+- [Taichung built on `worktree-taichung`: Taiwan's first city, 66,115 storefronts, 18 stations; notices 44 and 45 and page 44 approved by the owner](#2026-09-25---taichung-built-on-worktree-taichung-taiwans-first-city-66115-storefronts-18-stations-notices-44-and-45-and-page-44-approved-by-the-owner)
 - [Seoul built on `worktree-seoul`: 239,410 storefronts, 308 stations; page 43 and notice 18 approved by the owner](#2026-09-25---seoul-built-on-worktree-seoul-239410-storefronts-308-stations-page-43-and-notice-18-approved-by-the-owner)
 
 **2026-09-24**
@@ -432,6 +433,84 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-25 - Taichung built on `worktree-taichung`: Taiwan's first city, 66,115 storefronts, 18 stations; notices 44 and 45 and page 44 approved by the owner
+
+- **Built from the brief. All three of its checks passed, and the join
+  reproduced within half a point.** The tax register (66,343,427 bytes, dated
+  2026-09-25 by its own first row) went into a SHARED cache,
+  `data/taiwan/raw/`, for every Taiwanese city. The August 2026 door-plate
+  file matched the brief's 159,271,987 bytes. Taichung has 73,235 storefront
+  rows against the brief's 73,227.
+- **The national modules are `pipeline/countries/taiwan.py`.** It holds the
+  register reader, the register's own date, the buckets, the name rule, and
+  the join parser. **The parser was moved byte for byte** out of
+  `scripts/screen_taiwan_join.py`, which now imports it. It was not changed,
+  because its control (Taipei) could not be re-run: Taipei's files are not
+  cached. The skill says to run the control before any change.
+- **The join is keyed by district, a change from the screen.**
+  - Taichung's door-plate file names districts by code (`鄉鎮市區代碼`), and
+    **14,723 street/number keys occur in more than one district**. The 2010
+    merger left one street name in several districts, so a join without the
+    district can place an address in the wrong one.
+  - Step 2 learns code → name from the keys that exist in one district only,
+    prints the table, and refuses a district below 90% agreement. All 29
+    districts mapped at 96.6–100%.
+  - Placed: 92.2% of 71,714 (65,280 exact, 835 by parent number), against
+    the screen's 92.7% without the district check or the head-office rule.
+    5,599 unplaced; 301 of them read as stalls. The misses the parser does
+    not reach are recorded in the skill.
+- **The head-office rule (owner, as measured on Taipei).** 1,904 company
+  head-office rows look like offices (3rd floor or higher, or a room number).
+  383 are exempt because their building holds 20+ storefront rows; **1,521 are
+  dropped.**
+- **The name rule (owner, 2026-09-23), and a marker list chosen for privacy.**
+  - A sole proprietor's name is shown only with a business marker. **11,907
+    of 66,115 (18.0%) show their line of business instead.** That is well
+    above Taipei's 4.9% "reads as a person", because the rule hides every
+    unmarked sole proprietor. It errs toward hiding, as decided.
+  - 美, 軒 and 莊 were left off the marker list because they occur in given
+    names or are a surname.
+  - `check_personal_exposure.py` gained a `taiwan` pass that tests the rule
+    on the processed file: **0 unmarked sole-proprietor names shown.** It
+    also reports no contact details.
+- **Rail.** Stations come from Taichung Metro's own table, and the route
+  from OSM relation 11330356.
+  - Every station is within 23 m of the route.
+  - **Gate 3 is exact:** 18 OSM stops against the operator's 18.
+  - The operator's table gives two stations code G17, so stations are keyed
+    by name.
+  - **No OSM boundary.** Overpass 504ed on it from all three mirrors, and the
+    build does not need one: the register is scoped by address prefix, and
+    every station address in the operator's table begins with 臺中市.
+- **Owner's calls, 2026-09-25:**
+  - A one-line metro earns a full page.
+  - The line takes this project's green, #3B7D23 (Delta-E 31 from Personal
+    services). Neither OSM nor the operator's data carries a colour.
+  - Page 44's text was approved as drafted, plus one sentence saying most
+    storefronts lie outside the rings (19%: 12,588 of 66,115).
+  - Notices 44 and 45 were approved as drafted.
+- **Licences, read 2026-09-25 by two `licence-read` agents:**
+  - The door plates are OGDL v1, from 臺中市政府數位發展局 (named 數位治理局
+    until 2025-01), dataset 臺中市115年1月至各月份GIS門牌資料. This was read
+    off the portal's own page, which exposes no machine field.
+  - The station table is OGDL v1 (`license: "1"`) from 臺中捷運股份有限公司.
+  - Both carry the load-bearing attribution statement. The FIA notice is
+    national (notice 44), and notice 45 is Taichung's own.
+- **The `taiwan-city` skill was written from this build**, per the
+  per-country rule. It covers what to reuse, the owner's standing calls, the
+  nine measured traps, the notice pattern, and sheets for Taoyuan and Taipei
+  (Regional). CLAUDE.md points to it.
+- **Macro label:** Taichung measures 61.7 px, with ten widths reproduced.
+  PROBLEMS 0. Also measured for later: Taoyuan 57.4 px and Taipei (Regional)
+  112.5 px.
+- **Baseline:**
+
+  | Step | Counts |
+  |---|---|
+  | Step 1 | stations_kept 18; osm_stops 18; lines_drawn 1 |
+  | Step 2 | doorplate_keys 741,550; storefront_rows 73,235; districts 29; office_like_dropped 1,521; join_exact 65,280; join_base_number 835; join_no_plate 3,394; join_unparsed 2,205; out_of_bounds 0; names_hidden 11,907; storefronts 66,115 |
+  | Step 3 | 12,588 in rings of 66,115 |
 
 ### 2026-09-25 - Seoul built on `worktree-seoul`: 239,410 storefronts, 308 stations; page 43 and notice 18 approved by the owner
 
