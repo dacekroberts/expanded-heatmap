@@ -57,10 +57,13 @@ STATUS = {
     "hiroshima": ("Hiroshima", "🟣 C", "Food only: no personal-services list is published"),
     "sendai": ("Sendai", "🔴 D", "Needs the city's permission; letter drafted, not sent"),
 }
-GAP = [  # no list on disk: status only (key, name, wards, personal services, status)
-    ("yokohama", "Yokohama", 18, "complete (2026-04-01)",
-     "Only 2,912 restaurants online (MHLW's opt-in slice). A request to the city"),
-    ("nagoya", "Nagoya", 16, "beauty list only", "BODIK keeps only 12 months of new permits. A request to the city"),
+GAP = [  # no food list on disk: status only (key, name, wards, personal services, band, status)
+    ("yokohama", "Yokohama", 18, "complete (2026-04-01)", "🟣 C",
+     "Personal services only, no page for now (owner, 2026-09-24). No food list in any era; "
+     "MHLW's opt-in slice is 2,912 restaurants"),
+    ("nagoya", "Nagoya", 16, "beauty list only", "✗ discarded",
+     "Discarded 2026-09-24 (owner): no standing list ever, and the monthly files omit renewals, "
+     "so no rebuild can work"),
 ]
 # What the ward probes of 2026-09-24 found about each food list (not measured here).
 TOKYO_NOTE = {
@@ -292,9 +295,9 @@ def render(wards, span, yb, off):
             if count else "—"
         L.append(f"| **{name}** | {band} | {nw} | **{tot['Food service']:,}**{warn} | {tot['Retail']:,} | {ps} "
                  f"| {share} | **{pct(tot['block'], tot['bucketed'])}** | {stations} | {status}{extra} |")
-    for key, name, n, ps, status in GAP:
+    for key, name, n, ps, band, status in GAP:
         count = f"no list; official {off[key]:,}" if key in off else "no list"
-        L.append(f"| **{name}** | ⚠️ gap | {n} | no current list | — | {ps} | {count} | — | — | {status} |")
+        L.append(f"| **{name}** | {band} | {n} | no current list | — | {ps} | {count} | — | — | {status} |")
     for city, (name, band, _) in STATUS.items():
         ws = {w: v for w, v in wards[city].items() if w in ROMAJI[city]}
         has_st = any("stations" in v for v in ws.values())

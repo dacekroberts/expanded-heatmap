@@ -839,12 +839,23 @@ brief names.
   cities (São Paulo is already with main), the three Taiwanese cities, and
   Rotterdam (its build-time calls are in its brief).
 
+- [ ] **Riga (Band A from 2026-09-24)**: write `docs/build_briefs/riga.md`
+  from its master-list row and the final probe, with checks. The owner's calls
+  are made: the scoped vacancy disclosure, all 7 tram routes (colours from
+  Rīgas satiksme's route maps), and no suburban rail.
+
 **Not ready for main:**
-- **Band C (6)** — one owner decision moves all six: does a single-bucket page
-  belong beside three-bucket cities?
-- **Band D (4)** — each waits on an owner act or on access: Sendai's request
-  (drafted), Kaohsiung's request, and reads from inside Poland and India.
-- **The open gap (8)** — re-probes, not builds.
+- **Band C (7)** — one owner decision moves all seven: does a single-bucket
+  page belong beside three-bucket cities? Yokohama (personal services only)
+  has no page for now, whatever the answer (owner, 2026-09-24).
+- **Band D (7)** — each waits on an owner act or on access:
+  - Sendai's request (drafted) and Kaohsiung's request;
+  - reads from inside Poland, India, Finland (Helsinki) and Estonia
+    (Tallinn), by a person there, never a proxy;
+  - Lisbon's DGAE account (item 28);
+  - Tallinn's EHR order (item 23).
+- ✅ **The open gap is empty** (2026-09-24): its last eight each got a verdict
+  after a final re-probe.
 
 **Owner's outside actions** are tracked in `docs/gated_access.md`, the list of
 every key, account and letter:

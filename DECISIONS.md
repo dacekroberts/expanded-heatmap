@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**369 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**370 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [The open gap emptied: a final re-probe of its last eight, a verdict on each (owner)](#2026-09-24---the-open-gap-emptied-a-final-re-probe-of-its-last-eight-a-verdict-on-each-owner)
 - [Seoul's four calls decided, and Osaka's page wording revised (owner)](#2026-09-24---seouls-four-calls-decided-and-osakas-page-wording-revised-owner)
 - [Seoul's Step 0 completed: 17 registers, three buckets, coordinates from the register itself, four owner calls](#2026-09-24---seouls-step-0-completed-17-registers-three-buckets-coordinates-from-the-register-itself-four-owner-calls)
 - [Dark-mode line labels start from their line's own colour (owner)](#2026-09-24---dark-mode-line-labels-start-from-their-lines-own-colour-owner)
@@ -411,6 +412,68 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - The open gap emptied: a final re-probe of its last eight, a verdict on each (owner)
+
+- **The owner asked for "an exhaustive final search on all open gap cities"
+  and "a definitive verdict on each".** Four background agents each tried
+  only the methods not yet tried, under the standing rules: no bypassing
+  blocks, no accounts, no forms, and privacy columns never read.
+- **Verdicts, all confirmed by the owner:**
+  - **Riga → Band A.** Its rail, never examined before, passes:
+    - trams: Rīgas satiksme's GTFS (CC0), 7 routes and 125 stations, all
+      inside the city;
+    - rings: 78.5% of named shops and 82.6% of food premises;
+    - suburban rail: all five Vivi corridors fail on frequency (15–30
+      minutes at best) and would add only 164 shops.
+    The owner accepted the scoped vacancy disclosure (20.4% centre 2024, 15%
+    Old Town 2025, not measured elsewhere). OSM and the GTFS give every tram
+    route the same red, so colours come from the operator's route maps.
+  - **Yokohama → Band C, and no page for now.** No food list in any era: the
+    catalogue (649 packages), the archive, all 18 ward sites and the
+    prefecture. Personal services are complete (17,408).
+  - **Lisbon → Band D.** The city side is negative on three methods.
+    DGAE's national register needs a free account (item 28).
+  - **Helsinki → Band D** and **Tallinn → Band D**, geo-blocked; see the
+    harvest decision below.
+  - **Vienna → discarded**: absence, with the city's own hosts asked twice.
+  - **Santiago → discarded**: coverage. Four central comunas publish no
+    current list.
+  - **Nagoya → discarded**: no standing list ever. Its published monthly
+    files carry 44–49% of permits issued (Kyoto's control 98–102%), because
+    renewals are omitted, so no rebuild can work.
+- **The harvest decision (owner).** The agent recommended Helsinki → C and
+  Tallinn → A, each resting on bulk-harvesting a public lookup page's back
+  end to replace a geo-blocked bulk file:
+  - **Helsinki**: Oiva's search API, 217 queries to get past a 300-result
+    cap, with no licence declared.
+  - **Tallinn**: the food register's public view, reached by sending back the
+    page's session token. Its responses carried operators' ID codes and
+    birth dates, dropped on receipt.
+  Recommended against and declined: "Any other ways we can probe safely? If
+  not then both can go to D". No safe route remained. Both harvested files
+  were deleted.
+  - **The rule this sets**: a lookup page's back end is not a substitute for
+    a geo-blocked bulk file.
+  - The owner first asked whether their own ID code had been exposed. It had
+    not: the data was third parties', no login was used, and none of the
+    owner's details were sent anywhere.
+- **Privacy slips, all to agent consoles only, none in a report or the repo**:
+  - Vienna: 9 opt-in takeaway businesses' phones and e-mails (one
+    personal-looking) from a field summary. The scratch copy was deleted.
+  - Tallinn: city officials' names from a building-permit layer sample.
+  - Helsinki: one company name from a CSV header. That CSV, the city's 2019
+    food-control file, carries operator names as published; stale and
+    unused, it was deleted from `data/helsinki/raw/`.
+- **Files**:
+  - `city_master_list.md`: counts (Candidates 26: A 12, C 7, D 7; open gap
+    0; discards 27), a row in each receiving band, three discard rows that
+    pass `check_discard_evidence.py`, and six countries in the by-country
+    table;
+  - `japan_ward_table.py` (a band field for the no-list rows) and
+    `japan_city_list.md`;
+  - `PLAN.md`.
+  Riga needs a brief before its build.
 
 ### 2026-09-24 - Seoul's four calls decided, and Osaka's page wording revised (owner)
 

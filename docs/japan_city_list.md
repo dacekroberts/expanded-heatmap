@@ -18,8 +18,8 @@
 | **Tokyo (8 wards)** | 🟢 A | 8 food + 7 personal-services only | **43,638** ⚠️ | 11,895 | 16,299 | ⚠️ **56%** of 81,024 | **99.7%** | 197 | 6th, last. Chiyoda missing. ⚠️ 3 partial food lists |
 | **Hiroshima** | 🟣 C | 8 | **11,056** | 4,086 | **0**, none published | ✅ **99%** of 12,855 | **96.2%** | — | Food only: no personal-services list is published |
 | **Sendai** | 🔴 D | 5 | **10,544** | 1,700 | 3,377 | ✅ **101%** of 12,417 | **95.5%** | — | Needs the city's permission; letter drafted, not sent |
-| **Yokohama** | ⚠️ gap | 18 | no current list | — | complete (2026-04-01) | no list; official 29,358 | — | — | Only 2,912 restaurants online (MHLW's opt-in slice). A request to the city |
-| **Nagoya** | ⚠️ gap | 16 | no current list | — | beauty list only | no list; official 33,776 | — | — | BODIK keeps only 12 months of new permits. A request to the city |
+| **Yokohama** | 🟣 C | 18 | no current list | — | complete (2026-04-01) | no list; official 29,358 | — | — | Personal services only, no page for now (owner, 2026-09-24). No food list in any era; MHLW's opt-in slice is 2,912 restaurants |
+| **Nagoya** | ✗ discarded | 16 | no current list | — | beauty list only | no list; official 33,776 | — | — | Discarded 2026-09-24 (owner): no standing list ever, and the monthly files omit renewals, so no rebuild can work |
 
 ### Osaka — by ward
 

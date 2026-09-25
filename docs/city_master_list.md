@@ -36,9 +36,9 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 > | | |
 > |---|---|
 > | **Built** | **40** across 12 countries *(Rotterdam, 2026-09-24; Toulouse, Lille (Regional) and Rennes, 2026-09-23; Oslo, Copenhagen, Prague, Amsterdam and Rome, 2026-09-24; Brazil's nine cities as one batch, 2026-09-24)* |
-> | **Candidates** | **21**, all at least partially viable — A 11 · B 0 (closed) · C 6 · D 4 *(**Rotterdam and Brazil's nine built 2026-09-24**, leaving Band A by being built; Kyoto from the open gap to A 2026-09-24 — its register rebuilt from the permit stream, owner's call; **Japan re-banded 2026-09-24 and the geocoding band closed** — Tokyo (8 wards), Osaka, Kobe, Sapporo and Fukuoka to A, Hiroshima to C, Sendai to D, Yokohama, Nagoya and Kyoto to the open gap; Rotterdam from the open gap to A; all owner's calls; Warsaw and Hyderabad to D 2026-09-24 from the open gap, owner's calls — each geo-blocked before measurement; Copenhagen, Prague, Amsterdam and Rome built 2026-09-24; Amsterdam to A 2026-09-24 — permits + BAG shop units, both licences read, owner's call; Amsterdam from the discards to C earlier the same night; Rome to A 2026-09-24 — SUAP premises joined to ANNCSU, owner's call with a build check; Prague back to A 2026-09-24 on open data — ROS02 establishments + RES; Kaohsiung moved from B to a reopened access-blocked band D 2026-09-23, owner's call; Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built; Prague paused to the open gap 2026-09-24)* |
-> | **Open screening gap** | **8**, resting on an absence — neither candidates nor discards *(Kyoto out again to A later the same day, on a rebuilt register; Yokohama, Nagoya and Kyoto in, Rotterdam out to A, 2026-09-24; ten left 2026-09-24 on the owner's calls after their re-probes: eight to the discards, Warsaw and Hyderabad to D)* |
-> | **Discarded** | **24**, each naming its evidence *(Kuala Lumpur, Athens, Poznań, Bratislava, Hamburg, Naples, Lima and Messina from the open gap 2026-09-24, owner's calls after their re-probes; an audit moved 12 single-method rows to the open gap and Amsterdam to Band C, 2026-09-24; the evidence check moved 5 more the same night)* |
+> | **Candidates** | **26**, all at least partially viable — A 12 · B 0 (closed) · C 7 · D 7 *(**the open gap emptied 2026-09-24 after a final re-probe, owner's calls**: Riga to A (tram rings, scoped vacancy disclosure), Yokohama to C (personal services only, no page for now), Lisbon, Helsinki and Tallinn to D, Vienna, Santiago and Nagoya to the discards; **Rotterdam and Brazil's nine built 2026-09-24**, leaving Band A by being built; Kyoto from the open gap to A 2026-09-24 — its register rebuilt from the permit stream, owner's call; **Japan re-banded 2026-09-24 and the geocoding band closed** — Tokyo (8 wards), Osaka, Kobe, Sapporo and Fukuoka to A, Hiroshima to C, Sendai to D, Yokohama, Nagoya and Kyoto to the open gap; Rotterdam from the open gap to A; all owner's calls; Warsaw and Hyderabad to D 2026-09-24 from the open gap, owner's calls — each geo-blocked before measurement; Copenhagen, Prague, Amsterdam and Rome built 2026-09-24; Amsterdam to A 2026-09-24 — permits + BAG shop units, both licences read, owner's call; Amsterdam from the discards to C earlier the same night; Rome to A 2026-09-24 — SUAP premises joined to ANNCSU, owner's call with a build check; Prague back to A 2026-09-24 on open data — ROS02 establishments + RES; Kaohsiung moved from B to a reopened access-blocked band D 2026-09-23, owner's call; Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built; Prague paused to the open gap 2026-09-24)* |
+> | **Open screening gap** | **0** — **emptied 2026-09-24** by a final re-probe of its last eight, each given a verdict (owner's calls) *(before that: Kyoto out again to A later the same day, on a rebuilt register; Yokohama, Nagoya and Kyoto in, Rotterdam out to A, 2026-09-24; ten left 2026-09-24 on the owner's calls after their re-probes: eight to the discards, Warsaw and Hyderabad to D)* |
+> | **Discarded** | **27**, each naming its evidence *(Vienna, Santiago and Nagoya from the open gap 2026-09-24 after the final re-probe, owner's calls; Kuala Lumpur, Athens, Poznań, Bratislava, Hamburg, Naples, Lima and Messina from the open gap 2026-09-24, owner's calls after their re-probes; an audit moved 12 single-method rows to the open gap and Amsterdam to Band C, 2026-09-24; the evidence check moved 5 more the same night)* |
 >
 > *Counts corrected 2026-09-23. This box had read 20 / 33 / 30 since
 > 2026-09-22 while the sections below moved on — **the hand-kept summary is
@@ -88,7 +88,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 21
+## Candidates — 26
 
 Re-tiered 2026-09-22 after the browser sweep closed Tier 5 and reached Tier 6.
 **Eight cities moved to discarded on measurement** and **two were upgraded**.
@@ -115,13 +115,13 @@ yet* with *we looked at everything and this is what is there*.
 
 | Band | What these cities ARE | Cities |
 |---|---|---|
-| 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates answered, rail answered — every remaining question is answerable inside the build | **11** *(+ 26 built)* |
+| 🟢 **A** | **Ready to build.** Register measured, licence read, coordinates answered, rail answered — every remaining question is answerable inside the build | **12** *(+ 26 built)* |
 | ~~🟠 **B**~~ | ~~**Geocoding at national scale.**~~ **CLOSED 2026-09-24**: Japan's address work was a join, so the condition stopped being true of all ten | **0** |
-| 🟣 **C** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **6** |
-| 🔴 **D** | **Access blocked by the publisher.** Screening complete, the file exists and is measured; the publisher's own access control is the only thing stopping it, so it is unblocked by ASKING, not by probing *(Warsaw and Hyderabad, 2026-09-24: blocked before measurement — a read from inside the country first; Sendai, 2026-09-24: the city's permission)* | **4** |
-| | **Candidates** | **21** |
-| *Open gap* | Unscreened — a row resting on an absence, so not a discard | *8* |
-| *Discarded* | Measured negative, evidence named | *24* |
+| 🟣 **C** | **One bucket only.** Screening complete and successful; the map would be narrower than the others | **7** |
+| 🔴 **D** | **Access blocked by the publisher.** Screening complete, the file exists and is measured; the publisher's own access control is the only thing stopping it, so it is unblocked by ASKING, not by probing *(Warsaw and Hyderabad, 2026-09-24: blocked before measurement — a read from inside the country first; Sendai, 2026-09-24: the city's permission; Lisbon, Helsinki and Tallinn, 2026-09-24: a free account, and two geo-blocks)* | **7** |
+| | **Candidates** | **26** |
+| *Open gap* | Unscreened — a row resting on an absence, so not a discard | *0 (emptied 2026-09-24)* |
+| *Discarded* | Measured negative, evidence named | *27* |
 
 *Band A's caption briefly said "brief written" (2026-09-23, morning). That was
 wrong by `CLAUDE.md`'s own rule — **a brief is a cache, not a prerequisite** —
@@ -205,12 +205,29 @@ results in the sweep.
 
 ---
 
-## 🟢 Band A — ready to build (11 ready + 26 ✅ BUILT)
+## 🟢 Band A — ready to build (12 ready + 26 ✅ BUILT)
+
+▲ **Riga 🇱🇻 joined 2026-09-24 from the open gap (owner's call)**, the twelfth. Amsterdam's
+two-layer shape:
+- **Food**: the State Revenue Service's excise-licence register, 1,596 premises, 96.2% joined to
+  Riga's address points, CC0.
+- **Shops**: the cadastre's class-1230 premise groups, 4,816 named shops, 99.5% on building
+  outlines, CC BY 4.0.
+- **Rail**: all 7 Rīgas satiksme tram routes (GTFS, CC0; 125 stations, every one inside the city;
+  5–10 minute headways on routes 1, 7 and 11). Colours come from the operator's route maps,
+  because OSM and the GTFS give every route the same red. The rings hold 78.5% of the shops and
+  82.6% of the food premises. All five Vivi suburban corridors are out on frequency (15–30
+  minutes at best).
+- **The page carries the scoped vacancy disclosure**: 20.4% of 2,324 centre premises (2024), 15%
+  in the Old Town (2025), and not measured elsewhere, about 62% of in-ring shops. Quote the
+  municipal report's own definitions: its headline is 73% occupied.
+- **No brief yet.** Its evidence is its row in the open-gap table below and `DECISIONS.md`
+  2026-09-24.
 
 **The eleven:** Seoul · Hong Kong — **each with a brief** in `docs/build_briefs/` — ✅ ~~nine
 Brazilian cities~~ **built 2026-09-24** (below) — **three Taiwanese cities**: Taipei (Regional) (6/6) ·
 Taichung (3/3) · Taoyuan (3/3) — ▲ **and seven more on 2026-09-24**: **six Japanese cities**, Tokyo (8 wards) (7/7) ·
-Osaka · Kobe · Sapporo · Fukuoka (4/4 each) · Kyoto (8/8), and ~~Rotterdam~~ ✅ **built 2026-09-24**. ✅ **Every Band A city has a brief**, and
+Osaka · Kobe · Sapporo · Fukuoka (4/4 each) · Kyoto (8/8), and ~~Rotterdam~~ ✅ **built 2026-09-24**. ✅ **Every Band A city has a brief except Riga (above, 2026-09-24)**, and
 every brief's checks pass live *(Fukuoka's BODIK host is flaky — re-run before correcting)*.
 
 ### ▲▲ Taiwan — three cities, one tax register, a door-plate JOIN (2026-09-23)
@@ -629,7 +646,20 @@ block-level JOIN too** — the permits split the address into municipality /
 components with a coordinate per block — **ASSERTED, not measured**, with the
 order of work to test it.
 
-## ⚠️ OPEN SCREENING GAP — rows that rest on an absence (8 cities — a re-probe queue since 2026-09-24)
+## ⚠️ OPEN SCREENING GAP — rows that rest on an absence (0 cities — EMPTIED 2026-09-24)
+
+✅ **Emptied 2026-09-24 (evening) by a final re-probe of its last eight, each given a
+verdict on the owner's calls.** The owner asked for "an exhaustive final search on all open gap
+cities" and "a definitive verdict on each". Four agents tried only the methods not yet tried:
+- **Riga → Band A**: its rail was measured (trams pass; suburban rail fails on frequency), and
+  the owner accepted the scoped vacancy disclosure.
+- **Yokohama → Band C**: personal services only, and no page for now.
+- **Lisbon → Band D**: DGAE's register needs a free account.
+- **Helsinki and Tallinn → Band D**: geo-blocked. Their lookup-page harvests were declined.
+- **Vienna, Santiago and Nagoya → the discards.**
+
+**The rows below are kept as the evidence each verdict rests on**, not as a queue. A city
+enters this section again only on a row resting on an absence.
 
 **Not candidates yet and not discards — unscreened.** `global_country_shortlist.md`
 records *"Italy stays a Milan-only country"*, but that rests on **Naples** and
@@ -700,7 +730,23 @@ row, and three of this one's rows carried no reason at all.** Two of those now
 do. Göteborg was never ruled out — it was simply never placed anywhere, which
 is how a candidate disappears without anyone deciding to drop it.
 
-## 🟣 Band C — one bucket only: complete, but narrower than the others (6 cities)
+## 🟣 Band C — one bucket only: complete, but narrower than the others (7 cities)
+
+▼ **Yokohama 🇯🇵 joined 2026-09-24 from the open gap (owner's call): personal services only, and
+no page for now.**
+- **Personal services**: complete, 17,408 premises as of 2026-04-01, declared CC BY (barbers
+  3,380, beauty 11,062, cleaning 2,966). Also a pharmacy list (1,719) and a drug-store list (611),
+  whose licence page is unread.
+- **Food: none in any era.** Four places were checked:
+  - the city's catalogue, listed in full (649 packages);
+  - the web archive of the catalogue and the food-safety pages;
+  - a live crawl of all 18 ward sites;
+  - the prefecture, which holds no Yokohama permits.
+  MHLW's opt-in slice is 9.9% of the official 29,358.
+- **Why no page**: a map without its roughly 29,000 restaurants would read its stations as
+  emptier than Tokyo's or Osaka's, because of what is published, not what is there.
+- **What would change it**: the city publishing its food register (only by request, the last
+  resort), or MHLW's online system covering most permits as they renew online.
 
 **Screening is COMPLETE for all five, and all five passed.** Each has a real
 premises-level register with coordinates, current data and a usable licence.
@@ -938,7 +984,22 @@ carry three buckets?* **Answer it once and two cities move together.**
 
 ---
 
-## 🔴 Band D — access blocked by the publisher (4 cities)
+## 🔴 Band D — access blocked by the publisher (7 cities)
+
+▼ **Lisbon, Helsinki and Tallinn joined 2026-09-24 from the open gap (owner's calls)**, after a
+final re-probe. **Lisbon** waits on a free account. **Helsinki and Tallinn** are in Warsaw's
+weaker form: each one's bulk file sits behind a geo-block.
+
+**The rejected route, recorded so nobody takes it.** The re-probe reached both through the back
+ends of public lookup pages:
+- **Oiva's search API**: 3,424 Helsinki premises, pulled in 217 queries to get past a 300-result
+  cap. No licence is declared for per-premises results.
+- **Tallinn's food-register public view**: 5,131 premises, pulled by sending back the page's
+  own session token. Its responses carried operators' ID codes and birth dates, which were
+  dropped.
+
+The owner declined to rely on either (2026-09-24), and the harvested files were deleted. **A
+lookup page's back end is not a substitute for a geo-blocked bulk file.**
 
 **Reopened 2026-09-23 (owner's call) for a condition the other bands cannot
 say**: screening is COMPLETE and passed, the file exists and is measured, and
@@ -954,6 +1015,9 @@ left it once they were.
 | **Kaohsiung** 🇹🇼 | **72,550 storefronts** in the national tax register; OGDL v1 read and accepted (the same decision as Taiwan's other cities); the door-plate file exists in a **2026 edition** (`高雄市115年門牌坐標資料-TWD97`, updated 2026-06-25) with the same columns the three joined cities used (**92.7–95.5%**) | 🚧 **Geo-blocked to Taiwan**: `data.kcg.gov.tw` answers **HTTP 200 to 3 of 3 Taiwanese probes** (two networks) and times out from Japan and the US; `www.kcg.gov.tw` on the same network answers everywhere. The national catalogue lists **no other host** for any of 3,342 Kaohsiung datasets. **Not routed around** — no proxy, no VPN | **A request to 高雄市政府民政局** to publish the file on data.gov.tw or lift the filter for it — an owner action. Nothing sent |
 | **Warsaw** 🇵🇱 | ⚠️ **NOT screened behind the block — a weaker shape than Kaohsiung's (owner's call 2026-09-24).** Nothing behind the block has been read. The city's own catalogue is the one place a premises register could be; every reachable route is negative (the city's 21 datasets on `dane.gov.pl`; the map portal's layers, markets and café terraces only; CEIDG is company-level; the alcohol-sales-points lead was Gdańsk's) | 🚧 **Geo-blocked to Poland**: `api.um.warszawa.pl` / `dane.um.warszawa.pl` answer only from Poland (2 of 2 probes) and time out from Germany and the US, while `mapa.um.warszawa.pl` answers everywhere; the API is also key-gated. **Not routed around** | **A read from inside Poland first** (the catalogue listing — does a premises dataset exist?), and only then a request to the city for access. An owner action. Nothing sent |
 | **Hyderabad** 🇮🇳 | ⚠️ **NOT screened behind the block — Warsaw's shape (owner's call 2026-09-24).** India's national catalogue was walked in full (288,011 titles: trade-licence counts, never premises); GHMC's archived URL names show trade-licence status and lookup forms, no bulk register named. Nothing behind the block has been read | 🚧 **Geo-blocked to India**: GHMC's own site answers 3 of 3 Globalping probes inside India (Mumbai, Bengaluru, Hyderabad) and returns 403 at its F5 edge to 9 of 9 from the US, Germany and Singapore, and from here; Telangana's portal (`data.telangana.gov.in`) the same. **Not routed around** | **A read from inside India first** (does GHMC publish a trade-licence register as a file?), then a request. An owner action. Nothing sent |
+| **Lisbon** 🇵🇹 | ⚠️ **The city side is negative on three methods** (2026-09-24): its catalogue as mirrored on `dados.gov.pt` (220 of 316 datasets link to its ArcGIS services, which answer); its ArcGIS services directory (102) and org (nonsense control 0); and the archive's index of the challenged CKAN (1,966 dataset names). What exists: kiosks (373, CC0), markets, the stale 2010 commercial census, and a 2020 COVID "Estamos Abertos" layer marked internal use | 🚫 **A free account**: DGAE's national *cadastro comercial* (`cadastro.dgae.gov.pt/api/estabelecimentos`) returns 401 logged out, and a CMS key in the app's JavaScript was NOT used. Row count, activity codes, coordinates and terms are all unmeasured | Register the account (the owner's act, `docs/gated_access.md` item 28), then measure. With activity codes, points and reusable terms, **Lisbon and Porto** both go to A. Without them, a discard |
+| **Helsinki** 🇫🇮 | ⚠️ **Reachable hosts all negative for retail and personal services** (2026-09-24): the city catalogue, enumerated through `data.europa.eu`'s copy (373 datasets, 6 Helsinki publishers, nonsense publisher 0); `kartta.hel.fi` WMS (485 layers) and WFS (terraces, parklets); HSY's WFS (397 layers, jobs grid only); `api.hel.fi` servicemap (public services, and its search is inert). Food exists in Oiva (national inspections, current) but only behind a search API, which is not used (above). The city's own food-control CSV is frozen at 2019 | 🚧 **Geo-blocked**: `hri.fi`, `avoindata.fi` and `avoindata.suomi.fi` answer 403 outside Finland and Germany. The bulk files behind them (the city catalogue; Valvira/LVV's alcohol-premises register, CC BY 4.0; any Oiva release) are unread | A read from inside Europe, by a person there (no proxy or VPN), of HRI's catalogue and of whether Oiva or the alcohol register is a bulk file. Then asking Ruokavirasto, the last resort |
+| **Tallinn** 🇪🇪 | ⚠️ **A second layer is reachable, the first is not** (2026-09-24). Building-register use classes per building part come on a public WFS (`gsavalik.envir.ee`, `etak_ehr_hooned`; Maa- ja Ruumiamet, CC BY 4.0 equivalent): 2,077 commercial buildings; parts: food 1,496, retail 2,773 (0.79× OSM shops), personal services 342 plus 765 "other service". But these are registered use, not occupancy, with no names; 14% of lists are cut at 200 characters. It is not a premises register alone (Vienna's lesson). The city's GIS (1,173 layers) holds markets and malls only | 🚧 **Geo-blocked**: the food-handlers register `Toidukaitlejad.xml` (`avaandmed.agri.ee`, CC BY-SA 3.0) answers Estonia and Germany only. The public-view route is not used (above). The building register's full data needs an order carrying an e-mail (the owner's act, gated item 23). `www.tallinn.ee` is behind a Cloudflare challenge | A read of the food XML from inside the EU (no proxy or VPN), or the owner's EHR order. Then the Amsterdam shape: food register plus building-use layer, with a vacancy rate found and the trams-only call (5 lines; GTFS expired 2026-08-31, so OSM) |
 | **Sendai** 🇯🇵 | ✅ **Screened and joined**: 12,627 permanent food premises, **95.1%** block, GSI check median 34 m; personal services 3,378 at 96.5% (`docs/build_briefs/sendai.md`, 4/4) | 🚫 **The city's permission**: its site terms default to 「無断で複製・転用することはできません」 and neither list page overrides it; the lists carry no per-file CC BY badge and are not in the city's 5,907-row open-data catalogue | **A written request to 健康福祉局生活衛生課**, drafted in formal Japanese for the owner to send (2026-09-24). Nothing sent yet |
 
 <details><summary>Kaohsiung's full record while it sat in Band B (kept)</summary>
@@ -1457,7 +1521,9 @@ took was a different *host* — `services1.arcgis.com`, reachable all along.
 The rule held and protected the city from a premature discard; the cost
 estimate attached to it was guesswork. **See the resolution above.**
 
-## DISCARDED — 24 cities, each naming its evidence
+## DISCARDED — 27 cities, each naming its evidence
+
+▼ **2026-09-24 (evening) — the open gap's last three discards, on the owner's calls after a final re-probe**: Vienna (absence, now on the city's own hosts twice over), Santiago (coverage: four central comunas publish no current list) and Nagoya (the published permit stream carries only half the permits issued, so no rebuild can work).
 
 ▼ **2026-09-24 (morning) — five rows arrived from the open gap on the owner's calls**, each after its re-probe: Kuala Lumpur, Athens, Poznań and Bratislava on two-method negatives with the city's own host asked, and Hamburg on currency. Vienna, whose negative would also pass, stays in the gap by the owner's choice. **Naples, Lima and Messina followed later the same morning**, after the last re-probe batch.
 
@@ -1521,6 +1587,9 @@ open screening gap's table.
 | **Naples** 🇮🇹 | absence | enumerated the city's CKAN `dati.comune.napoli.it` (37 datasets, nonsense control 0) · enumerated `dati.gov.it` for the Comune (36), the Città Metropolitana (96), Regione Campania (368) and every Napoli hit (182) · read the SUAP (on the national impresainungiorno platform; publishes no register) | yes — its CKAN and its SUAP | **No premises register — moved here 2026-09-24 (owner's call) after its re-probe.** Commerce appears only as 2014 counts per procedure and district; the national catalogue's only premises lists are pharmacies, parafarmacie and historic shops; the SUAP's only lists are 2018–2019 outdoor-seating concessions. Italy's cadastral shop category is not open data, so there is no second layer. **Italy stays a Milan-and-Rome country** |
 | **Lima** 🇵🇪 | coverage | enumerated `www.datosabiertos.gob.pe`'s 78 licence datasets (1 of Línea 1's 9 districts publishes: La Victoria) · read five districts' own sites (Villa El Salvador, Villa María del Triunfo, San Juan de Miraflores, San Borja, El Agustino — forms, procedure pages, login-only systems) · search gob.pe per district · blocked the Municipalidad Metropolitana, Surco and San Juan de Lurigancho (answer from Peru only) | yes — five districts' own sites | **Coverage fails on measurement — moved here 2026-09-24 (owner's call) after its re-probe.** Licensing is per district; five of Línea 1's districts, including the whole southern arm, are confirmed to publish nothing, so the line cannot be covered even if the three geo-blocked districts publish |
 | **Messina** 🇮🇹 | absence | enumerated the city's catalogue (113 datasets) · enumerated `dati.gov.it` (113 for the Comune, 140 text hits) · measured the chamber's business list (18,467 rows, head offices only, 2022) | yes — its catalogue; the licensing office is behind SPID login | **No premises register — moved here 2026-09-24 (owner's call) after its re-probe.** The chamber's list is company-level with no local units; SCIA/DIA is a 2021 flow with no activity field; a 1,531-point POI sample is not a register |
+| **Vienna** 🇦🇹 | absence | enumerated the city's WFS (377 layers; the market layers are 550 unnamed stand outlines, and the only business list is 9 opt-in takeaways) · enumerated `data.gv.at` through its hub API (Stadt Wien 781 datasets; nonsense control 0) · read the national registers (GISA strips street addresses; Statistik Austria's company-to-activity file has no address; AGWR allows no public access to individual records) | yes — `data.wien.gv.at` and the city's map service, twice | **No premises register at any level.** The only premises rows on the city's hosts are outdoor-seating permits (no name, no activity, 0.42× OSM food) and market stands; the building use class is whole-building (0.19× OSM shops). The company register would give registered offices, not shops, and needs a ministry token. Re-probed twice (2026-09-24); the owner had held it in the gap after the first |
+| **Santiago** 🇨🇱 | coverage | enumerated `datos.gob.cl` (272 publishers: 5 Metro comunas publish patentes) · measured Providencia's register (74,712 rows) · enumerated the comuna's GIS server (15 services; no licence or activity layer) · read `documentos.munistgo.cl` (scanned alcohol decrees only) · read the web archive's index of `transparencia.munistgo.cl` (no licence list after 2014) · blocked `transparencia.munistgo.cl` (403 to everyone) · read Las Condes, Ñuñoa, Estación Central, Macul, Maipú, Puente Alto and San Ramón's own sites | yes — every central comuna's own site | **Coverage fails downtown: Daegu's shape.** About 6 of ~33 Metro comunas publish a current list, and the four the network converges on (Santiago, Las Condes, Ñuñoa, Estación Central) publish none. The fix would take at least four transparency requests, each the owner's act and the last resort |
+| **Nagoya** 🇯🇵 | absence | enumerated BODIK's food package and its full history (137 events, 61 resources: rolling 12 months of new permits) · read the web archive of the city's permit page (15 captures, 2019–2025: no standing list ever) · measured a Kyoto-style stitch against e-Stat's permits issued (new files carry 44–49% of issued, against Kyoto's 98–102%) | yes — the city's page and its catalogue | **No list, and none can be rebuilt.** The city never published a standing register, and its monthly files omit renewals, so a complete stream would reach at most about 54% of the official count, all opened since 2021. The recovered files reach 20.9%. Personal services: beauty salons only |
 
 Plus the no-urban-rail set (Winnipeg, Hamilton, Québec City, Halifax,
 Mississauga, Ottawa, ~30 single-feed countries) and access-not-data
@@ -1577,7 +1646,13 @@ the tier is stale.
 | 🇪🇬 Egypt | — | — | — | Cairo discarded 2026-09-24: no register at any level |
 | 🇵🇱 Poland | — | **1** — Warsaw | D | Geo-blocked before measurement; a read from inside Poland first (owner's call 2026-09-24) |
 | 🇮🇳 India | — | **1** — Hyderabad | D | Geo-blocked before measurement (owner's call 2026-09-24) |
-| **Total** | **30** | **32** | | *(+ 7 in the open gap)* |
+| 🇱🇻 Latvia | — | **1** — Riga | A | Build (2026-09-24): excise food layer, cadastre shops, 7 tram routes, scoped vacancy disclosure. A brief first |
+| 🇵🇹 Portugal | — | **1** — Lisbon | D | The DGAE account (gated item 28); Porto would follow |
+| 🇫🇮 Finland | — | **1** — Helsinki | D | Geo-blocked; a read from inside Europe |
+| 🇪🇪 Estonia | — | **1** — Tallinn | D | Food register geo-blocked; the EHR order (gated item 23) |
+| 🇦🇹 Austria | — | — | — | Vienna discarded 2026-09-24 (no premises register at any level) |
+| 🇨🇱 Chile | — | — | — | Santiago discarded 2026-09-24 (coverage fails downtown) |
+| **Total** | **30** | **32** | | *(the open gap emptied 2026-09-24. ⚠️ Several rows above predate that day's builds and re-bands, Brazil and Japan among them, so this table is for the consistency sweep to refresh: trust the bands)* |
 
 ---
 
