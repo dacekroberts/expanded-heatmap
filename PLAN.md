@@ -747,12 +747,30 @@ brief names.
   Routes: request Chiyoda's ledger (owner, gated item 22); extract Ōta's,
   Kita's and Arakawa's PDF lists; Shinagawa's and Itabashi's partial files;
   requests to Toshima, Nerima and Edogawa.
-  - [ ] ⚠️ **Three in-scope lists are PARTIAL (found 2026-09-24).** Chūō's
-    and Kōtō's hold only 2021–22 permits, and Minato's only new-law permits
-    since 2021. Next probe: whether each ward publishes its old-law (旧法)
-    half, as Meguro does (`all_old_8`), or a newer full file. Otherwise a
-    request to the ward. Until then those three wards' food layers are
-    undercounts, and the page must say so.
+  - [x] ⚠️ **Tokyo's food lists measured against an official count
+    (2026-09-24)**: Tokyo's statistical yearbook, table 19-8. Only Shibuya is
+    essentially complete (98%). The others: Shinjuku 83% (2023), Taitō 71% and
+    Setagaya 63% (opt-outs left out), Meguro 46%, Minato 30%
+    (consent-filtered), Chūō 12% and Kōtō 9% (never updated). The ward probes
+    found no open file that fills any gap. `tokyo.md` has the table.
+  - [ ] **Owner: send four requests** (`docs/gated_access.md` items 29–32).
+    **Drafted 2026-09-24** in formal Japanese, one per ward:
+    `docs/notifications/tokyo-{chuo,koto,minato,shinjuku}-request.md`. Each
+    asks for open publication first. Before sending, confirm each ward's
+    address, which is not verified in any of the four.
+  - [ ] **Meguro's 46%**: why, when both halves are published. Measure the
+    all_new / all_old overlap and any consent wording on its page.
+  - [ ] **Licence reads** for two side finds: Chūō's complete
+    personal-services lists (August 2026) and Shinjuku's (June 2026, PDF).
+  - [x] **The designated cities against the same kind of count** (MHLW's
+    衛生行政報告例, FY2024, old law + revised law): Kobe 101%, Sapporo 100%,
+    Fukuoka 101%, Kyoto 93%, Hiroshima 99%, Sendai 101%. These lists are
+    complete. `docs/japan_city_list.md` now measures every city this way.
+- [ ] ⚠️ **Osaka, BEFORE its build (it builds first): the list holds only 67%
+  of the official restaurant count** (54,289 of 81,418). It is not a reform
+  split. A probe is finding the cause: opt-outs, a missing health office,
+  excluded temporary permits, or a second list. Until then the page must
+  not call Osaka's list complete.
 - [ ] **Fukuoka** — agree the wording that discloses the ~20% of restaurants
   with no published address. BODIK is flaky, so `fetch_sources.py` retries.
 - [x] **No pre-build items**: Seoul (its brief is deliberately partial, and

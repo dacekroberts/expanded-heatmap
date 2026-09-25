@@ -473,8 +473,8 @@ count, not OSM (owner).
 
 | City | Food premises (fixed) | **Joined** (block) | Independent check | Personal services | Licences (all READ) |
 |---|---|---|---|---|---|
-| **Tokyo (8 wards)** | **≈59,400** permit rows — Chūō, Minato, Shinjuku (2023, disclosed), Kōtō, Shibuya, Taitō, Setagaya, Meguro. ⚠️ **Only 5 lists are complete (measured 2026-09-24)**: Chūō's and Kōtō's hold only 2021–22 permits, and Minato's only new-law permits since 2021 | **99.1–100%** | the wards' own coordinates, median **22–43 m** | 生活衛生 registers, 11 wards (16,299; Meguro's 1,412 added 2026-09-24) | Tokyo Open Data Terms / ward CC BY 4.0; §6 cost clause accepted |
-| **Osaka** | **61,752** | **99.1%** | the city's own (mislabelled) coordinates, median **38 m** | 15,775 | CC BY 4.0 / 政府標準利用規約 2.0 |
+| **Tokyo (8 wards)** | **≈59,400** permit rows — Chūō, Minato, Shinjuku (2023, disclosed), Kōtō, Shibuya, Taitō, Setagaya, Meguro. ⚠️ **Against Tokyo's yearbook count, only Shibuya's list is essentially complete (98%)** (measured 2026-09-24). The others hold 9–84%: consent-filtered exports, opt-outs, and snapshots never updated. Filling them takes requests to the wards (`gated_access.md` 29–32) | **99.1–100%** | the wards' own coordinates, median **22–43 m** | 生活衛生 registers, 11 wards (16,299; Meguro's 1,412 added 2026-09-24) | Tokyo Open Data Terms / ward CC BY 4.0; §6 cost clause accepted |
+| **Osaka** | **61,752**. ⚠️ **Only 67% of the official restaurant count** (MHLW 衛生行政報告例, FY2024: 54,289 of 81,418), where the other designated cities read 93–101%. The cause is being probed (2026-09-24) | **99.1%** | the city's own (mislabelled) coordinates, median **38 m** | 15,775 | CC BY 4.0 / 政府標準利用規約 2.0 |
 | **Kobe** | **24,761** | **97.1%** | — | 4,993 | CC BY 2.1 JP |
 | **Sapporo** | **24,257** | **84.7%** + 15.2% chōme | — | 5,993 | CC BY 4.0; 第9条3 accepted |
 | **Fukuoka** | 3,231 (own list, pre-2021) + **21,088** restaurants from MHLW | **98.1% / 96.8%** | MHLW's own coordinates, median **36 m** | 5,846 (99.2%) | BODIK CC BY 4.0 + MHLW PDL 1.0 |

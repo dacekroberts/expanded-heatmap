@@ -16,12 +16,15 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**353 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**356 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [Rotterdam's deploy check passed, with the labels in both themes and the Global View button; three findings recorded, none blocking](#2026-09-24---rotterdams-deploy-check-passed-with-the-labels-in-both-themes-and-the-global-view-button-three-findings-recorded-none-blocking)
+- [Four Tokyo ward requests drafted; none sent](#2026-09-24---four-tokyo-ward-requests-drafted-none-sent)
+- [Every Japanese city against MHLW's official count: complete except Osaka (67%) and Tokyo](#2026-09-24---every-japanese-city-against-mhlws-official-count-complete-except-osaka-67-and-tokyo)
 - [The city map's "All cities" button is now "Global View" (owner); the hidden link keeps its text](#2026-09-24---the-city-maps-all-cities-button-is-now-global-view-owner-the-hidden-link-keeps-its-text)
+- [Tokyo's food lists against an official count: one complete, and no open file fills the rest](#2026-09-24---tokyos-food-lists-against-an-official-count-one-complete-and-no-open-file-fills-the-rest)
 - [The macro map lands on "Global", which labels every city (owner)](#2026-09-24---the-macro-map-lands-on-global-which-labels-every-city-owner)
 - [Rotterdam built: 7,520 storefronts, 132 stations; the food layer rebuilt from permit notices](#2026-09-24---rotterdam-built-7520-storefronts-132-stations-the-food-layer-rebuilt-from-permit-notices)
 - [Three of Tokyo's eight food lists are partial; a per-ward table for Japan](#2026-09-24---three-of-tokyos-eight-food-lists-are-partial-a-per-ward-table-for-japan)
@@ -446,6 +449,61 @@ onwards; the early ones are split by phase rather than by hour.
     a city dot lands in the credit strip; the text stays legible. This
     predates the branch and is recorded as open work.
 
+### 2026-09-24 - Four Tokyo ward requests drafted; none sent
+
+- **Drafted the four requests that are the only route to filling Tokyo's
+  food lists**, in formal Japanese, after the usage reset (owner): Chūō, Kōtō,
+  Minato and Shinjuku, at `docs/notifications/tokyo-<ward>-request.md`. They
+  are items 29–32 in `docs/gated_access.md`, now DRAFTED, NOT SENT.
+- **Each asks for open publication first**, because that route comes with CC
+  BY, and falls back to a premises-only list:
+  - **Chūō**: update its open data. The disclosure-request form text is
+    included as the last resort.
+  - **Kōtō**: the 情報提供 its own disclosure page offers, plus permission to
+    use it.
+  - **Minato**: publish every permit in force, citing its application form's
+    own "in principle published as open data".
+  - **Shinjuku**: publish its FY2025-end list as CSV, or permit use of the
+    PDF.
+- **Every letter makes the same commitments as Sendai's**: only trade name,
+  business type and address; no operator names or phones; no redistribution;
+  a "processed from" credit that does not imply the ward made the map;
+  removal on request.
+- **Nothing is sent.** Sending is the owner's act. Each ward's address is
+  unverified, and each draft says so. A list provided without a stated
+  permission is not published, and silence is not consent.
+
+### 2026-09-24 - Every Japanese city against MHLW's official count: complete except Osaka (67%) and Tokyo
+
+- **Measured every Japanese city's list against MHLW's 衛生行政報告例** (e-Stat,
+  FY2024 year-end, old-law table 5-2-1 plus revised-law 5-4-1).
+  - **Why**: the owner's question was whether the designated cities are
+    fully complete where Tokyo is not. Their completeness had only ever been
+    judged by a per-capita yardstick drawn from the same lists, which is
+    circular.
+  - **Its basis**: the two tables summed for 東京都 equal Tokyo's yearbook
+    exactly (194,868), so the cities and Tokyo's wards are measured on one
+    basis. Credit is 「衛生行政報告例」（厚生労働省）を加工して作成.
+- **The designated cities are complete**: Kobe 101%, Sapporo 100%, Fukuoka
+  101%, Kyoto 93%, Hiroshima 99%, Sendai 101% (lists dated 2026, count
+  2025-03-31, so ±3%).
+- **Osaka is the exception: 67%** (54,289 of 81,418).
+  - **It is not a reform split**: expiry dates run 2026–2033 evenly.
+  - **A probe is finding the cause.** Osaka builds first, so this is a
+    pre-build item (`PLAN.md`, `osaka.md`).
+  - **The earlier "strongest Japanese city" was about placement, and that
+    stands (99.1%, 38 m).** Completeness was never measured until now.
+- **One mistake caught before recording.** The first comparison counted only
+  the taxonomy's Food-service rows, vehicles included. That put Sendai at 85%,
+  because the taxonomy drops 仮設, 臨時 and 自動車 permits (2,069 rows) as not
+  premises, while the official count includes them. Counting every 飲食店
+  permit row gives 101%. The Tokyo ward shares moved the same way (Taitō 71% →
+  81%, Meguro 46% → 52%). **Against an official count, count what the
+  official count counts**, then decide separately what the map shows.
+- **`scripts/japan_ward_table.py`** now puts an official-count column on every
+  city, reading the cached e-Stat tables (`data/japan/raw/estat_eisei_r6_*`).
+  Yokohama and Nagoya show their counts (29,358 and 33,776) with no list.
+
 ### 2026-09-24 - The city map's "All cities" button is now "Global View" (owner); the hidden link keeps its text
 
 - **Renamed at the owner's request, which the Cleanup session relayed; the
@@ -470,6 +528,49 @@ onwards; the early ones are split by phase rather than by hour.
   measurement note in `pipeline/boston/config.py`. Both describe the button
   as it was then.
 
+### 2026-09-24 - Tokyo's food lists against an official count: one complete, and no open file fills the rest
+
+- **Measured every Tokyo ward's food list against 飲食店営業 in Tokyo's
+  statistical yearbook, table 19-8, FY2024**, at the owner's request ("clean up
+  Tokyo's ward data as much as possible, in line with the other cities").
+  - **Only Shibuya is essentially complete: 98%.**
+  - Shinjuku 83% (its 2023 vintage).
+  - **Taitō 71% and Setagaya 63%**: each ward's page says premises that opted
+    out are left out.
+  - Meguro 46%, not yet explained.
+  - Minato 30%, Chūō 12%, Kōtō 9%.
+  - **This supersedes the earlier entry's "five are complete".** That was
+    judged from permit-date spans, which catch a truncated list but not one
+    filtered by consent. The count catches both.
+- **Four ward probes found no open file that fills any gap.**
+  - **Minato's file is consent-filtered**, as its own description says. No
+    old-law list exists anywhere; its report counts 16,073 restaurants in
+    force.
+  - **Chūō's only list** covers 2021-06 to 2022-12, published 2024-03 and
+    never updated.
+  - **Kōtō's is consent-only new permits.** Its monthly lists fall under
+    site terms that bar reuse.
+  - **Shinjuku has a complete list at 2026-03-31**, but only as a 1,023-page
+    PDF under site terms that bar reuse.
+  - **The way through is four requests, all the owner's act**
+    (`docs/gated_access.md` items 29–32).
+- **Why Tokyo differs.** Each ward runs its own health centre, so there are
+  23 publishers against one per designated city. Their choices vary: own
+  register, a consent-filtered national-format export, an opt-out rule, or a
+  one-off snapshot.
+  - **Whether the designated cities' lists are complete has never been
+    measured against an official count.** The per-capita yardstick was drawn
+    from those same lists.
+  - MHLW's 衛生行政報告例 is being fetched to measure them the same way.
+- **`scripts/japan_ward_table.py`** now shows each Tokyo ward's share of the
+  official count, reading the cached yearbook table. The monthly and PDF
+  lists were not used.
+- **Two side finds, licences unread**: complete personal-services lists for
+  Chūō (August 2026) and Shinjuku (June 2026, PDF).
+- **Privacy slip, disclosed.** The Shinjuku probe's first header check let
+  two digit-and-hyphen fragments of 所在地電話番号 (premises phone numbers) into
+  its output. It tightened the filter at once; nothing else was printed and
+  nothing was written to any file.
 ### 2026-09-24 - The macro map lands on "Global", which labels every city (owner)
 
 - **The front page opens on a new "Global" region**, first in the selector.

@@ -55,13 +55,33 @@ STATUS = {
     "hiroshima": ("Hiroshima", "🟣 C", "Food only: no personal-services list is published"),
     "sendai": ("Sendai", "🔴 D", "Needs the city's permission; letter drafted, not sent"),
 }
-GAP_ROWS = [  # no data on disk: status only
-    "| **Yokohama** | ⚠️ gap | 18 | no current list | — | complete (2026-04-01) | — | — | "
-    "Only 2,912 restaurants online (MHLW's opt-in slice). A request to the city |",
-    "| **Nagoya** | ⚠️ gap | 16 | no full list | — | beauty list only | — | — | "
-    "BODIK keeps only 12 months of new permits. A request to the city |",
+GAP = [  # no list on disk: status only (key, name, wards, personal services, status)
+    ("yokohama", "Yokohama", 18, "complete (2026-04-01)",
+     "Only 2,912 restaurants online (MHLW's opt-in slice). A request to the city"),
+    ("nagoya", "Nagoya", 16, "beauty list only", "BODIK keeps only 12 months of new permits. A request to the city"),
 ]
-TOKYO_NOTE = {"新宿区": "as of 2023 (disclosed)", "目黒区": "new-law and old-law lists"}
+# What the ward probes of 2026-09-24 found about each food list (not measured here).
+TOKYO_NOTE = {
+    "新宿区": "complete as of 2023-01-01. A 2026-03-31 full list exists only as PDF, under site terms that bar reuse",
+    "渋谷区": "open list, closed premises dropped",
+    "世田谷区": "opted-out premises left out (the ward's page)",
+    "台東区": "opted-out premises left out (the ward's page)",
+    "港区": "consent-filtered. No old-law list is published",
+    "目黒区": "new-law and old-law lists. The gap is not yet explained",
+    "中央区": "never updated since",
+    "江東区": "consent-only new permits",
+}
+# Tokyo's statistical yearbook, table 19-8: 飲食店営業 per ward at the end of
+# FY2024 - the official count each ward's list is measured against.
+YEARBOOK = S.DATA / "tokyo" / "raw" / "tn24qv190800.csv"
+# MHLW's 衛生行政報告例 on e-Stat, FY2024: permitted facilities at year-end,
+# old-law (table 5-2-1) + revised-law (5-4-1). Their sum for 東京都 equals the
+# yearbook exactly, so every city and ward is measured one way.
+ESTAT_OLD = S.DATA / "japan" / "raw" / "estat_eisei_r6_food_5-2-1_oldlaw_by_type.csv"
+ESTAT_NEW = S.DATA / "japan" / "raw" / "estat_eisei_r6_food_5-4-1_newlaw_by_type.csv"
+ESTAT_AREA = {"osaka": "大阪府大阪市", "kobe": "兵庫県神戸市", "sapporo": "北海道札幌市", "fukuoka": "福岡県福岡市",
+              "kyoto": "京都府京都市", "hiroshima": "広島県広島市", "sendai": "宮城県仙台市",
+              "yokohama": "神奈川県横浜市", "nagoya": "愛知県名古屋市"}
 
 ROMAJI = {
     "osaka": {"中央区": "Chūō", "北区": "Kita", "淀川区": "Yodogawa", "西区": "Nishi", "生野区": "Ikuno",
@@ -128,14 +148,19 @@ def measure():
 
     def tally(city, ps, source, ward_of=lambda p: p["ward"]):
         for p in ps:
+            # against the official count, every 飲食店 permit counts - vehicles and
+            # stalls too, which the official count includes and the taxonomy drops
+            if source == "food" and "飲食" in p["type"]:
+                wards[city][ward_of(p)]["fs_all"] += 1
+            b = T.classify({"permit_type": p["type"], "source": source})
+            if not b:
+                continue
+            w = wards[city][ward_of(p)]
             if p["mobile"]:
                 continue
-            b = T.classify({"permit_type": p["type"], "source": source})
-            if b:
-                w = wards[city][ward_of(p)]
-                w[b] += 1
-                w["bucketed"] += 1
-                w["block"] += p["tier"] == "block"
+            w[b] += 1
+            w["bucketed"] += 1
+            w["block"] += p["tier"] == "block"
 
     for city, keys in FOOD.items():
         for k in keys:
@@ -185,11 +210,45 @@ def tokyo_completeness():
     return span
 
 
+def yearbook():
+    """Ward name -> 飲食店営業 in the yearbook's latest fiscal year; {} if not cached."""
+    if not YEARBOOK.exists():
+        return {}
+    import csv
+    import io
+    rows = list(csv.reader(io.StringIO(J.decode(YEARBOOK.read_bytes()))))
+    col = next(i for i, c in enumerate(rows[0]) if c.startswith("飲食店営業"))
+    wards = [r for r in rows[1:] if len(r) > col and r[3].startswith("131") and r[3] != "13100"]
+    latest = max(r[1] for r in wards)
+    return {r[4]: int(r[col]) for r in wards if r[1] == latest}
+
+
+def official():
+    """City key -> 飲食店営業 permitted facilities, old law + revised law; {} if not cached."""
+    if not (ESTAT_OLD.exists() and ESTAT_NEW.exists()):
+        return {}
+    import csv
+    import io
+
+    def table(path, want):
+        rows = list(csv.reader(io.StringIO(path.read_bytes().decode("cp932"))))
+        h = next(i for i, r in enumerate(rows) if len(r) > 1 and r[1] == "総数")
+        labels = ["/".join(dict.fromkeys(p for p in (rows[h][j] if j < len(rows[h]) else "",
+                                                       rows[h + 1][j] if j < len(rows[h + 1]) else "")
+                                         if p and p != "施設")) for j in range(max(map(len, rows)))]
+        j = labels.index(want)
+        num = lambda x: 0 if x.strip() in ("-", "", "…") else int(x.replace(",", ""))  # noqa: E731
+        return {r[0].strip(): num(r[j]) for r in rows[h + 2:] if r and r[0].strip()}
+
+    old, new = table(ESTAT_OLD, "飲食店営業/総数"), table(ESTAT_NEW, "飲食店営業")
+    return {k: old[a] + new[a] for k, a in ESTAT_AREA.items() if a in old and a in new}
+
+
 def pct(n, d):
     return f"{100 * n / d:.1f}%" if d else "—"
 
 
-def render(wards, span):
+def render(wards, span, yb, off):
     today = datetime.date.today().isoformat()
     L = [f"# 🇯🇵 Japan — cities and wards ({today})", "",
          "**Generated by `python scripts/japan_ward_table.py --write` from the data on disk. Do not edit by hand:** "
@@ -201,9 +260,13 @@ def render(wards, span):
          "bakeries and delis included (owner).",
          "- **Counts** are fixed-premises permit rows, before build-time de-duplication.",
          "- **Stations** are distinct N02 station names inside each ward. The Shinkansen and the Sagano scenic line "
-         "are left out. \"—\" means that prefecture's N03 file is not cached.", "",
-         "| City | Band | Wards | Food service | Food retail | Personal services | Placed at block | Stations "
-         "| Order / status |", "|---|---|---|---|---|---|---|---|---|"]
+         "are left out. \"—\" means that prefecture's N03 file is not cached.",
+         "- **Of the official count**: every food-service row in the list, vehicles and stalls included, against "
+         "飲食店営業 permits in force at 2025-03-31. The count comes from MHLW's 衛生行政報告例, old law plus revised "
+         "law (for Tokyo's wards, Tokyo's yearbook, which equals it). The lists are dated 2026, so read about ±3%. "
+         "✅ marks 90% or more. Credit: 「衛生行政報告例」（厚生労働省）を加工して作成.", "",
+         "| City | Band | Wards | Food service | Food retail | Personal services | Of the official count "
+         "| Placed at block | Stations | Order / status |", "|---|---|---|---|---|---|---|---|---|---|"]
     partial = {w for w, (lo, _) in span.items() if lo and lo >= 2021}
     for city, (name, band, status) in STATUS.items():
         ws = {w: v for w, v in wards[city].items() if w in ROMAJI[city]}
@@ -217,16 +280,25 @@ def render(wards, span):
         extra = f". ⚠️ {len(partial)} partial food lists" if city == "tokyo" and partial else ""
         ps = f"{tot['Personal services']:,}" if tot["Personal services"] else "**0**, none published"
         stations = str(tot["stations"]) if any("stations" in v for v in ws.values()) else "—"
+        if city == "tokyo":  # the food wards against their own yearbook counts
+            fs_all = sum(v["fs_all"] for w, v in ws.items() if w in food_wards)
+            count = sum(yb.get(w, 0) for w in food_wards)
+        else:  # every row, vehicles and rows with no ward included
+            fs_all, count = sum(v["fs_all"] for v in wards[city].values()), off.get(city)
+        share = f"{'✅' if fs_all >= 0.9 * count else '⚠️'} **{100 * fs_all / count:.0f}%** of {count:,}" \
+            if count else "—"
         L.append(f"| **{name}** | {band} | {nw} | **{tot['Food service']:,}**{warn} | {tot['Retail']:,} | {ps} "
-                 f"| **{pct(tot['block'], tot['bucketed'])}** | {stations} | {status}{extra} |")
-    L += GAP_ROWS
+                 f"| {share} | **{pct(tot['block'], tot['bucketed'])}** | {stations} | {status}{extra} |")
+    for key, name, n, ps, status in GAP:
+        count = f"no list; official {off[key]:,}" if key in off else "no list"
+        L.append(f"| **{name}** | ⚠️ gap | {n} | no current list | — | {ps} | {count} | — | — | {status} |")
     for city, (name, band, _) in STATUS.items():
         ws = {w: v for w, v in wards[city].items() if w in ROMAJI[city]}
         has_st = any("stations" in v for v in ws.values())
         L += ["", f"### {name} — by ward", ""]
         head = "| Ward | Food service | Food retail | Personal services | Block |" + (" Stations |" if has_st else "")
         if city == "tokyo":
-            head += " Food list |"
+            head += " Of the official count | Food list |"
         L += [head, "|" + "---|" * (head.count("|") - 1)]
         order = sorted(ws.items(), key=lambda kv: (-kv[1]["Food service"], -kv[1]["Personal services"]))
         for w, v in order:
@@ -238,17 +310,20 @@ def render(wards, span):
                 row += f" {v.get('stations', '—')} |"
             if city == "tokyo":
                 lo, hi = span.get(w, (None, None))
-                row += (f" ⚠️ **permits {lo}–{hi} only**" if w in partial else " ✅ complete") \
-                    + (f", {TOKYO_NOTE[w]}" if w in TOKYO_NOTE else "") + " |"
+                share = v["fs_all"] / yb[w] if yb.get(w) else None
+                mark = "✅" if share and share >= 0.9 else "⚠️"
+                row += (f" {mark} **{100 * share:.0f}%** of {yb[w]:,} |" if share else " — |")
+                row += (f" permits {lo}–{hi} only; " if w in partial else " ") + TOKYO_NOTE.get(w, "") + " |"
             L.append(row)
         if city == "tokyo":
             only = [(ROMAJI[city][w], v["Personal services"]) for w, v in order if not v["Food service"]]
             L += ["", "**Personal services only, outside the food scope:** "
                   + " · ".join(f"{n} {c:,}" for n, c in sorted(only, key=lambda x: -x[1])) + "."]
-            if partial:
-                L += ["", "⚠️ **A partial list** holds only permits from 2021 on, the post-reform half. Its old-law "
-                      "permits still in term are missing, so that ward is an undercount until its other half is found "
-                      "(`docs/build_briefs/tokyo.md`)."]
+            L += ["", "**Of the official count**: each list's 飲食店 permit rows, vehicles included, against 飲食店営業 "
+                  "in Tokyo's statistical yearbook, table 19-8, for the latest fiscal year. ✅ marks 90% or more. "
+                  "**The wards differ because each is its own publisher.** "
+                  "Some publish their own register, some an opt-in or consent-filtered export, and some a snapshot "
+                  "never updated (`docs/build_briefs/tokyo.md`)."]
     stray = sum(v["bucketed"] for city in STATUS for w, v in wards[city].items() if w not in ROMAJI[city])
     L += ["", f"*{stray} rows had no ward in the address (or one outside the city) and are left out of the ward "
               "tables.*", ""]
@@ -257,7 +332,7 @@ def render(wards, span):
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
-    text = render(measure(), tokyo_completeness())
+    text = render(measure(), tokyo_completeness(), yearbook(), official())
     print(text)
     if "--write" in sys.argv:
         OUT.write_bytes(text.encode("utf-8"))
