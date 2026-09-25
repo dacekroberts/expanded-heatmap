@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**385 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**386 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Riga is live: pushed as f0b84ff, rebooted by the owner, and checked on the live site](#2026-09-24---riga-is-live-pushed-as-f0b84ff-rebooted-by-the-owner-and-checked-on-the-live-site)
 - [Riga's deploy check: one defect fixed (food dots showed no address); the Europe view verified unchanged in zoom](#2026-09-24---rigas-deploy-check-one-defect-fixed-food-dots-showed-no-address-the-europe-view-verified-unchanged-in-zoom)
 - [Riga built: 6,730 storefronts, 108 tram stations; Latvia's first city, and Europe keeps its zoom](#2026-09-24---riga-built-6730-storefronts-108-tram-stations-latvias-first-city-and-europe-keeps-its-zoom)
 - [Fukuoka's address disclosure worded (owner), and the sampling lesson reaches premises-taxonomy](#2026-09-24---fukuokas-address-disclosure-worded-owner-and-the-sampling-lesson-reaches-premises-taxonomy)
@@ -427,6 +428,24 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Riga is live: pushed as f0b84ff, rebooted by the owner, and checked on the live site
+
+- **Before the reboot, the Overview was down with an `ImportError`,** as
+  predicted: the push made `Overview.py` import `REGION_ZOOM_WITHOUT` from a
+  `cities.py` the running process still held stale. Page 42 already served.
+  This is the 2026-09-22 failure mode, and gate item 9 is the reason every
+  such push is followed by a reboot rather than "Updated app!".
+- **After the owner's reboot:**
+  - The Overview shows no errors and the regions read Global (42) and Europe
+    (16). Choosing Europe reads "Showing 16 cities in Europe".
+  - Page 42 has no errors. Its 7 tram labels are correct in both themes
+    (`--dm-label` in dark, the inline halo in light, no filter).
+  - The layer menu reads Shops and services (4,027) and Food service (1,214).
+  - Notices 42 and 43 are displayed, along with the snapshot caption and
+    "← Global View".
+- **Retired:** the `riga-*-tmp` launch entries and the worktree's junctions,
+  removed non-recursively.
 
 ### 2026-09-24 - Riga's deploy check: one defect fixed (food dots showed no address); the Europe view verified unchanged in zoom
 
