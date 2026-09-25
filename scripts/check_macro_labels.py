@@ -123,6 +123,10 @@ TEXT_WIDTH = {
     # as Rennes was, with five entries reproduced exactly in the same run -
     # Amsterdam 76.5, Copenhagen 85.5, Prague 47.3, Rome 37.5, Rotterdam 70.7.
     "Hong Kong": 73.5,
+    # Riga measured 2026-09-24 in the deployed app's own frame, five entries
+    # reproduced exactly in the same run - Amsterdam 76.5, Hong Kong 73.5,
+    # Prague 47.3, Rome 37.5, Rotterdam 70.7.
+    "Riga": 29.5,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,

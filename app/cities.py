@@ -904,6 +904,19 @@ CITIES = [
         # are scored on.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Riga",
+        "lat": 56.9496,
+        "lon": 24.1052,
+        "page": "pages/42_Riga_Heatmap.py",
+        "blurb": "Rīgas satiksme's seven tram lines",
+        "region": "Europe",
+        "country": "Latvia",
+        "in_default_view": False,
+        # Above the dot, the default: Riga sits well north-east of every
+        # other European city, and check_macro_labels.py scores it clear.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
