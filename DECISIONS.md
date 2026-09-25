@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**359 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**360 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Tokyo's own-time probe round: nothing fills the partial wards openly](#2026-09-24---tokyos-own-time-probe-round-nothing-fills-the-partial-wards-openly)
 - [Osaka's 67%: the official count is most likely inflated, not the list short](#2026-09-24---osakas-67-the-official-count-is-most-likely-inflated-not-the-list-short)
 - [Rotterdam is live: pushed as bec3af1, rebooted by the owner, and checked on the live site](#2026-09-24---rotterdam-is-live-pushed-as-bec3af1-rebooted-by-the-owner-and-checked-on-the-live-site)
 - [Agency contact is the last resort: the Tokyo requests are parked (owner)](#2026-09-24---agency-contact-is-the-last-resort-the-tokyo-requests-are-parked-owner)
@@ -401,6 +402,38 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Tokyo's own-time probe round: nothing fills the partial wards openly
+
+- **Ran the probe round the owner asked for before any agency contact**,
+  covering Chūō, Kōtō, Minato and Shinjuku. Four results:
+  - **MHLW's open data adds at most about +3%** (Kōtō +104 premises; the
+    others fewer than 50). Minato, where permit numbers overlap, checked the
+    matching at 97%.
+  - **OpenStreetMap is not viable.** Calibrated in Shibuya, where the
+    register is complete, it holds 8–10% of registered restaurants. It finds
+    chains 50% of the time and independents 7%, and at least 1 in 9 of its
+    points is closed.
+  - **Shinjuku's 2026-03-31 PDF is NOT PERMITTED, or ambiguous in a way that
+    matters.** Its site terms name PDFs and forbid secondary use. The
+    open-data terms reach only the portal. The application form's "published
+    as open data" is addressed to applicants. Not used: Shinjuku stays on its
+    2023 CSV.
+  - **Two 総務局 COVID-era lists (frozen May 2023) would lift Chūō, Kōtō and
+    Minato to about 50–60%.** Each dataset's note asks users not to use them
+    beyond COVID measures, although the catalogue says CC BY 4.0.
+- **Recommended not to use the COVID lists, and raised the choice to the
+  owner.** The publisher's stated wish and the shops' consent are both
+  limited to that purpose. This project honours a publisher's request rather
+  than arguing that a licence field overrides it.
+- **Decided to record the round's negatives as evidence.**
+  - Only three routes now fill these wards: the COVID lists, the parked
+    requests, or a narrower Tokyo scope.
+  - Three decisions go to the owner (`PLAN.md`): the COVID lists, how Tokyo
+    ships (all 8 wards disclosed, or a narrower scope), and whether to add
+    MHLW's slice.
+- The parked Shinjuku draft's channel is corrected: the page gives only a
+  phone number.
 
 ### 2026-09-24 - Osaka's 67%: the official count is most likely inflated, not the list short
 

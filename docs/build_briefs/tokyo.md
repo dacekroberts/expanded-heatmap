@@ -219,6 +219,23 @@ Minato stays valid as the join control. Whether the designated cities' own
 lists also leave out opt-outs is being measured against MHLW's 衛生行政報告例
 (PLAN.md).
 
+**The own-time probe round, 2026-09-24 (the owner: agency contact is the
+last resort, and the four drafted requests are PARKED).** Three methods were
+tried for Chūō, Kōtō, Minato and Shinjuku. None fills a ward openly.
+
+| Method | Result |
+|---|---|
+| **MHLW's 食品衛生申請等システム open data** per ward (PDL 1.0) | Almost nothing: new premises beyond our lists are Chūō +30, Kōtō +104, Minato +17, Shinjuku +43, i.e. **+0.1 to +3.1%** of the official count. It is an opt-in slice of online filings, mostly vending machines and office snack boxes |
+| **The whole Tokyo catalogue**: 9,697 packages, 98 organisations | Two 総務局 COVID-era lists, both frozen May 2023: 徹底点検TOKYOサポート 認証店 (79,840 rows) and 感染防止徹底宣言ステッカー. With them Chūō would reach about 55%, Kōtō 51% and Minato 60% of the official count (central estimates). ⚠️ **But each dataset's own note asks users not to use it beyond COVID measures** (「それ以外の目的に用いないようにお願いします」), although the catalogue says CC BY 4.0. It is **not used** unless the owner decides otherwise. Everything else adds a few dozen rows per ward, and the 食品衛生自主管理認証 list is gone (the scheme ended 2025-03) |
+| **OpenStreetMap**, calibrated in Shibuya | **Not viable.** It holds only 8–10% of the registered restaurants (15% at most). Chains are found 50% of the time and independents 7%, bars on upper floors are almost absent, and at least 1 in 9 of its points is closed. Added to the lists it lifts Chūō to about 17–20% and Kōtō to 15–18% |
+| **Shinjuku's 2026-03-31 PDF list**, licence re-read | **NOT PERMITTED, or ambiguous in a way that matters.** The site terms name PDFs and forbid secondary use and modification without permission. The open-data terms reach only the portal. The "open data" wording comes from the application form, which addresses applicants, not users. **Shinjuku stays on its 2023 CSV** (84%, vintage disclosed). Any credit links the page, never a PDF (the site's linking rule) |
+
+**What is left, without contacting anyone:**
+- accept the partial lists, disclosed;
+- add MHLW's slice (at most about +3%);
+- the COVID lists, the owner's call;
+- narrow Tokyo's scope to the wards whose lists are close to complete.
+
 **Tokyo now: 8 wards with food lists, one essentially complete** (Shibuya;
 the rest 9–84% of the official count, above), about **59,400 food permit
 rows**. **The remaining hole is the very centre**: Chiyoda (Marunouchi,

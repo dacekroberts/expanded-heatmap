@@ -5,9 +5,11 @@
 **Status**: drafted 2026-09-24 for the owner to send, from the owner's own
 address. Nothing sent yet. Tracked as item 32 in `docs/gated_access.md`.
 
-**To**: 新宿区 健康部 衛生課 食品保健係. ⚠️ **The address is not verified.**
-Take the e-mail address or inquiry form from `https://www.city.shinjuku.lg.jp/kenkou/eisei04.html`
-before sending.
+**To**: 新宿区 健康部 衛生課 食品保健係. ⚠️ **The page gives only a phone number**
+(03-5273-3827), with no e-mail address and no form (the licence read of
+2026-09-24). The section's inquiry page is `/soshiki/340500eisei_00001.html`
+(not opened). The site terms route reuse questions to that section or to
+区政情報課 (03-5273-4064).
 
 ## Why this exists
 

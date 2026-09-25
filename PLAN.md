@@ -758,6 +758,19 @@ brief names.
   - [ ] ⏸ **PARKED, the last resort (owner, 2026-09-24): four requests**
     (`docs/gated_access.md` items 29–32). Not sent, and not the next step.
     The next step is the own-time probe round below.
+  - [x] **The own-time probe round, 2026-09-24**:
+    - MHLW's slice adds at most about +3%.
+    - OSM holds 8–10% of Shibuya's register: not viable.
+    - Shinjuku's PDF list is NOT PERMITTED or ambiguous, so Shinjuku stays on
+      its 2023 CSV.
+    - Two COVID-era Tokyo lists would lift Chūō, Kōtō and Minato to about
+      50–60%, but they ask not to be used beyond COVID measures.
+    - `tokyo.md` has the table.
+  - [ ] **Owner decisions for Tokyo (it builds last, so nothing is waiting):**
+    1. the COVID-era lists: use them or not (recommended: not);
+    2. how Tokyo ships: all 8 wards with per-ward disclosure, or a scope
+       limited to the wards whose lists are close to complete;
+    3. whether to add MHLW's small slice (about +3% at most).
     **Drafted 2026-09-24** in formal Japanese, one per ward:
     `docs/notifications/tokyo-{chuo,koto,minato,shinjuku}-request.md`. Each
     asks for open publication first. Before sending, confirm each ward's
