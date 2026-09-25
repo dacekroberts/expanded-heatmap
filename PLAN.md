@@ -39,18 +39,20 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     both get the smallest lightness step away from their halo (at most
     ΔE 3.7).
     `check_map_markup.py` then FAILS light mode too.
-  - [ ] Re-render all maps with Rotterdam's; one `deploy-verify` for
-    Rotterdam covering `city-added` and `map-chrome` (both themes).
+  - [x] Re-render all maps with Rotterdam's; one `deploy-verify` for
+    Rotterdam covering `city-added` and `map-chrome` (both themes). **Passed
+    and live 2026-09-24** (DECISIONS, "Rotterdam's deploy check passed").
 
-- [~] **🇳🇱 ROTTERDAM - built on `worktree-rotterdam`, text approved (owner
-  2026-09-24): 7,520 storefronts, 132 stations.** Trams drawn (owner); 14 and 18
+- [x] **🇳🇱 ROTTERDAM - BUILT, DEPLOYED AND LIVE-CHECKED 2026-09-24** (master
+  bec3af1), text approved by the owner: **7,520 storefronts, 132 stations.** Trams drawn (owner); 14 and 18
   found temporary, so not drawn; page 40, notice 40 (CBS), docs written.
-  - [ ] ONE `deploy-verify` (city-added Rotterdam + map-chrome both themes, for
+  - [x] ONE `deploy-verify` (city-added Rotterdam + map-chrome both themes, for
     the label work above), fetch, push, reboot (cities.py), live check; remove
     the `rotterdam-*-tmp` launch entries and the worktree's data junctions.
+    Shipped with it: the "All cities" button renamed "Global View" (owner).
 
-- [ ] **NEXT BUILDS (owner, 2026-09-24): 🇳🇱 Rotterdam, then 🇹🇼 Taiwan** -
-  Rotterdam's deploy check also verifies the label-contrast work above. Rotterdam is
+- [ ] **NEXT BUILDS (owner, 2026-09-24): 🇳🇱 Rotterdam (✅ live 2026-09-24), then
+  🇹🇼 Taiwan** - Rotterdam's deploy check also verified the label-contrast work above. Rotterdam is
   Amsterdam's shape (permit-notice food layer rebuilt from the Gemeenteblad,
   BAG shop units, CBS vacancy) - `docs/build_briefs/rotterdam.md`. Taiwan:
   Taipei (Regional), Taichung, Taoyuan; write a `taiwan-city` skill after the
@@ -765,7 +767,24 @@ brief names.
     Setagaya 63% (opt-outs left out), Meguro 46%, Minato 30%
     (consent-filtered), Chūō 12% and Kōtō 9% (never updated). The ward probes
     found no open file that fills any gap. `tokyo.md` has the table.
-  - [ ] **Owner: send four requests** (`docs/gated_access.md` items 29–32).
+  - [ ] ⏸ **PARKED, the last resort (owner, 2026-09-24): four requests**
+    (`docs/gated_access.md` items 29–32). Not sent, and not the next step.
+    The next step is the own-time probe round below.
+  - [x] **The own-time probe round, 2026-09-24**:
+    - MHLW's slice adds at most about +3%.
+    - OSM holds 8–10% of Shibuya's register: not viable.
+    - Shinjuku's PDF list is NOT PERMITTED or ambiguous, so Shinjuku stays on
+      its 2023 CSV.
+    - Two COVID-era Tokyo lists would lift Chūō, Kōtō and Minato to about
+      50–60%, but they ask not to be used beyond COVID measures.
+    - `tokyo.md` has the table.
+  - [x] **Owner decisions for Tokyo (2026-09-24):**
+    1. **The COVID-era lists are NOT used.** Honour the stated purpose and
+       the shops' limited consent.
+    2. **Tokyo ships all 8 food wards, each ward's share of the official
+       count disclosed** on the page (Shibuya 101% down to Kōtō 9%).
+    3. **MHLW's slice is added** to the four partial wards at build (PDL 1.0,
+       already accepted), de-duplicated by address and name.
     **Drafted 2026-09-24** in formal Japanese, one per ward:
     `docs/notifications/tokyo-{chuo,koto,minato,shinjuku}-request.md`. Each
     asks for open publication first. Before sending, confirm each ward's
@@ -778,11 +797,14 @@ brief names.
     衛生行政報告例, FY2024, old law + revised law): Kobe 101%, Sapporo 100%,
     Fukuoka 101%, Kyoto 93%, Hiroshima 99%, Sendai 101%. These lists are
     complete. `docs/japan_city_list.md` now measures every city this way.
-- [ ] ⚠️ **Osaka, BEFORE its build (it builds first): the list holds only 67%
-  of the official restaurant count** (54,289 of 81,418). It is not a reform
-  split. A probe is finding the cause: opt-outs, a missing health office,
-  excluded temporary permits, or a second list. Until then the page must
-  not call Osaka's list complete.
+- [x] **Osaka's 67% probed (2026-09-24): the official count is most likely
+  inflated, not the list short.** Its old-law count exceeds what can exist by
+  about 12,000. The list is even across wards against the Economic Census,
+  and every file since 2023 reads 69–76%. The build is NOT blocked. The page
+  carries the disclosure drafted in `osaka.md`.
+- [ ] Optional, and ours to do: e-Stat 衛生行政報告例 tables 1-2 and 3-2
+  (permits issued and closed per city) would settle Osaka's residual: 20–35%
+  of each year's permit numbers are unexplained.
 - [ ] **Fukuoka** — agree the wording that discloses the ~20% of restaurants
   with no published address. BODIK is flaky, so `fetch_sources.py` retries.
 - [x] **No pre-build items**: Seoul (its brief is deliberately partial, and

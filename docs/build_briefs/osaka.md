@@ -16,14 +16,47 @@ confirmed against Osaka's own coordinates at a median 38 m.** Personal
 services from the city's barber, beauty and laundry registers (15,775). The
 strongest Japanese city measured.
 
-⚠️ **But the list holds only about 67% of the city's restaurant permits
-(measured 2026-09-24).** It has 54,289 飲食店営業 rows, vehicles included,
-against **81,418** in MHLW's 衛生行政報告例 at FY2024-end, old-law plus revised-law
-tables. The same measure puts Kobe, Sapporo, Fukuoka, Kyoto, Hiroshima and
-Sendai at 93–101%. It is not a reform split: expiry dates run 2026–2033
-evenly, so old-law permits are present. The cause is being probed (`PLAN.md`).
-Until it is known, the page must not call the list complete. Placement is
-unaffected.
+⚠️ **The list holds about 67–72% of the restaurant permits Osaka reports to
+national statistics, and the evidence says the COUNT is inflated, not the
+list short** (probed 2026-09-24). The list has 54,289 飲食店営業 rows, vehicles
+included, against **81,418** in MHLW's 衛生行政報告例 at FY2024-end. The same
+measure puts Kobe, Sapporo, Fukuoka, Kyoto, Hiroshima and Sendai at 93–101%.
+
+- **The gap is steady and even.** Every quarterly file the city has published
+  since 2023 reads 69–76% of the matching year-end count. All 24 wards are
+  present in each, and the page states no exclusion or opt-out.
+- **Not the cause**: temporary and event permits. Events file a 臨時出店届
+  (a notification, no permit), and stalls hold ordinary permits and are in
+  the list.
+- **The official old-law count exceeds what can exist.** No old-law permit
+  could be issued after 2021-05-31, and the city's own mid-2021 old-law
+  register has 62,451 restaurant permits.
+  - Assuming no closures at all, at most **25,620** could still be valid at
+    2025-03-31. Osaka reported **37,779**, 12,159 over that ceiling.
+  - The same held in FY2022 and FY2023. FY2023's count also fell by 21,595
+    where at most 10,301 could expire, which looks like a clean-up.
+- **A third count agrees.** Against the 2021 Economic Census's
+  accommodation-and-food establishments by ward, the list is even across all
+  five health offices, while the official count is not. The eastern office
+  (東部) holds 61% of the gap and 45% of the count.
+- **Best-supported reading, not confirmed by the city**: Osaka's national
+  count includes expired or closed permits that each health office clears to
+  a different degree. The list, of permits valid on its date, is the more
+  accurate of the two.
+- **Still open**: 20–35% of each year's permit-number sequence never appears
+  in any year-end file. These could be withdrawn numbers or unpublished
+  permits, and the files cannot tell which. Even on the most generous
+  allowance, at least about 3,300 of the 2025 count are provably dead
+  records.
+  - Settling it would take either e-Stat's per-city issued and closed tables
+    (衛生行政報告例 1-2 and 3-2, not yet fetched) or the city itself. Contacting
+    the city is the owner's last resort.
+- **What the page must say** (draft): "Osaka City's published list holds
+  about 70% of the restaurant permits Osaka reports to national statistics.
+  The evidence points mainly to that national figure including expired or
+  closed permits, not to restaurants missing from the list; the city has not
+  confirmed this." The 2,149 permits with no fixed address are not mapped.
+- **Placement is unaffected**, and the build is not blocked.
 
 ---
 

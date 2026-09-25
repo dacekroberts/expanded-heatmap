@@ -16,12 +16,17 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**358 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**363 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
 - [The front page's credit: legible in light mode, opaque, linked to /copyright](#2026-09-24---the-front-pages-credit-legible-in-light-mode-opaque-linked-to-copyright)
 - [The front page's OSM credit is lifted above the city dots](#2026-09-24---the-front-pages-osm-credit-is-lifted-above-the-city-dots)
+- [Tokyo ships all 8 wards, disclosed; the COVID lists are not used; MHLW's slice is added (owner)](#2026-09-24---tokyo-ships-all-8-wards-disclosed-the-covid-lists-are-not-used-mhlws-slice-is-added-owner)
+- [Tokyo's own-time probe round: nothing fills the partial wards openly](#2026-09-24---tokyos-own-time-probe-round-nothing-fills-the-partial-wards-openly)
+- [Osaka's 67%: the official count is most likely inflated, not the list short](#2026-09-24---osakas-67-the-official-count-is-most-likely-inflated-not-the-list-short)
+- [Rotterdam is live: pushed as bec3af1, rebooted by the owner, and checked on the live site](#2026-09-24---rotterdam-is-live-pushed-as-bec3af1-rebooted-by-the-owner-and-checked-on-the-live-site)
+- [Agency contact is the last resort: the Tokyo requests are parked (owner)](#2026-09-24---agency-contact-is-the-last-resort-the-tokyo-requests-are-parked-owner)
 - [Rotterdam's deploy check passed, with the labels in both themes and the Global View button; three findings recorded, none blocking](#2026-09-24---rotterdams-deploy-check-passed-with-the-labels-in-both-themes-and-the-global-view-button-three-findings-recorded-none-blocking)
 - [Four Tokyo ward requests drafted; none sent](#2026-09-24---four-tokyo-ward-requests-drafted-none-sent)
 - [Every Japanese city against MHLW's official count: complete except Osaka (67%) and Tokyo](#2026-09-24---every-japanese-city-against-mhlws-official-count-complete-except-osaka-67-and-tokyo)
@@ -459,6 +464,134 @@ onwards; the early ones are split by phase rather than by hour.
 - **A Streamlit server caches an imported module**, so the first run after
   the edit still measured the old CSS. Restart it before re-measuring.
 
+### 2026-09-24 - Tokyo ships all 8 wards, disclosed; the COVID lists are not used; MHLW's slice is added (owner)
+
+- **The owner decided Tokyo's three open calls**, each as recommended:
+  - **The 総務局 COVID-era lists are not used.** Their notes ask users not to
+    use them beyond COVID measures, and the shops consented for that purpose
+    only. The rejected alternative (relying on the catalogue's CC BY 4.0
+    label) would have lifted Chūō, Kōtō and Minato to about 50–60%.
+  - **Tokyo ships all 8 food wards, and the page gives each ward's share of
+    the official count** (from `docs/japan_city_list.md`), so the partial
+    wards read as partial. The rejected alternative was a food layer limited
+    to the near-complete wards.
+  - **MHLW's slice is added to the four partial wards at build**, at most
+    about +3% (PDL 1.0, already accepted).
+- **The parked requests stay parked** as the last resort.
+- Recorded in `tokyo.md`, `data_sources.md` and `PLAN.md`.
+
+### 2026-09-24 - Tokyo's own-time probe round: nothing fills the partial wards openly
+
+- **Ran the probe round the owner asked for before any agency contact**,
+  covering Chūō, Kōtō, Minato and Shinjuku. Four results:
+  - **MHLW's open data adds at most about +3%** (Kōtō +104 premises; the
+    others fewer than 50). Minato, where permit numbers overlap, checked the
+    matching at 97%.
+  - **OpenStreetMap is not viable.** Calibrated in Shibuya, where the
+    register is complete, it holds 8–10% of registered restaurants. It finds
+    chains 50% of the time and independents 7%, and at least 1 in 9 of its
+    points is closed.
+  - **Shinjuku's 2026-03-31 PDF is NOT PERMITTED, or ambiguous in a way that
+    matters.** Its site terms name PDFs and forbid secondary use. The
+    open-data terms reach only the portal. The application form's "published
+    as open data" is addressed to applicants. Not used: Shinjuku stays on its
+    2023 CSV.
+  - **Two 総務局 COVID-era lists (frozen May 2023) would lift Chūō, Kōtō and
+    Minato to about 50–60%.** Each dataset's note asks users not to use them
+    beyond COVID measures, although the catalogue says CC BY 4.0.
+- **Recommended not to use the COVID lists, and raised the choice to the
+  owner.** The publisher's stated wish and the shops' consent are both
+  limited to that purpose. This project honours a publisher's request rather
+  than arguing that a licence field overrides it.
+- **Decided to record the round's negatives as evidence.**
+  - Only three routes now fill these wards: the COVID lists, the parked
+    requests, or a narrower Tokyo scope.
+  - Three decisions go to the owner (`PLAN.md`): the COVID lists, how Tokyo
+    ships (all 8 wards disclosed, or a narrower scope), and whether to add
+    MHLW's slice.
+- The parked Shinjuku draft's channel is corrected: the page gives only a
+  phone number.
+
+### 2026-09-24 - Osaka's 67%: the official count is most likely inflated, not the list short
+
+- **Probed why Osaka's list holds only 67% of the official restaurant
+  count.**
+- **Four possible causes were ruled out:** the file's date, a missing ward
+  or office, temporary or event permits, and a second list.
+  - Every quarterly file since 2023 reads 69–76% of the matching year-end
+    count, with all 24 wards present.
+  - Events file notifications, which carry no permit, and stalls are in the
+    list.
+  - No other list is published.
+- **The old-law count exceeds what can exist.** The city's own mid-2021
+  old-law register caps the permits that could still be valid, even assuming
+  no closures. The reported counts sit above that cap by **21,602, 10,308 and
+  12,159** at the FY2022–FY2024 year-ends. FY2023's count fell by 21,595
+  where at most 10,301 could expire.
+- **A third count agrees.** Against the 2021 Economic Census, the list is
+  even across the five health offices, while the official count is not.
+- **Decided: the build is not blocked.** The page discloses the gap with the
+  wording drafted in `osaka.md`.
+  - **The best-supported reading**: Osaka's national count includes expired
+    or closed permits, cleared unevenly by office.
+  - **It is labelled a hypothesis**: the city has not confirmed it, and
+    contacting the city is the last resort.
+  - **The residual** (20–35% of each year's permit numbers never seen) could
+    be settled from e-Stat's per-city issued and closed tables, an optional
+    step we can take ourselves.
+- **What this means for the official-count method**: it is a strong check,
+  not an infallible one. An official figure is itself a record-keeping
+  output, and a list can be more accurate than the statistic it is measured
+  against. When a list falls short, look for evidence of a stale count before
+  concluding that premises are missing.
+### 2026-09-24 - Rotterdam is live: pushed as bec3af1, rebooted by the owner, and checked on the live site
+
+- **Live-checked after the owner's reboot, in two halves.**
+  - **The Cleanup session** checked Rome's map and the Overview.
+    - Rome: "← Global View" returned to the Overview. The Cities menu held 40
+      options (Prague, Amsterdam, Rotterdam, São Paulo in that order) and no
+      "Global View" or "All cities" item.
+    - Overview: it opened on "Global (40)", with Europe (15), the caption
+      counting 40 and the follow-up sentence naming "Global View".
+  - **This session** checked Rotterdam's page on the live site. It showed:
+    - no error blocks;
+    - 14 line labels, each with `--dm-label`;
+    - the button "← Global View", with aria-label "Back to the Global View
+      map";
+    - the Cities menu with 39 cities and no Rotterdam, "Global View" or "All
+      cities" item;
+    - the OSM credit linked;
+    - notice 40 (CBS);
+    - the snapshot caption.
+- **Labels on the live site match the local check.**
+  - Dark mode (the default): all 14 labels take their `--dm-label` colour, no
+    ancestor has a filter, and the halo is rgb(11, 18, 32).
+  - Light mode (the real toggle): all 14 match their inline colour and halo,
+    7 white and 7 dark (Metro A, B, D and Trams 2, 3, 6, 7).
+- **Retired:** the `rotterdam-*-tmp` launch entries and the worktree's 41
+  junctions (40 data folders and `.venv-lean`). The junctions were removed
+  non-recursively; their targets in the main checkout are intact.
+
+### 2026-09-24 - Agency contact is the last resort: the Tokyo requests are parked (owner)
+
+- **The owner parked the four Tokyo ward requests.** "Reaching out to
+  agencies is the last item we should be trying because we can't solve it on
+  our own time". Busy offices are unlikely to answer an unknown foreign
+  sender quickly, if at all.
+  - "Force integration" means resorting to agency contact.
+  - **Partial lists that are disclosed can still pass** in a greater-Tokyo
+    map, Minato's and Chūō's for example.
+  - The drafts stay on file, marked PARKED (items 29–32).
+- **The next step is an own-time probe round**, three background probes:
+  - **Official alternatives**: every publisher in the Tokyo catalogue, and
+    MHLW's national open data as a top-up per ward.
+  - **OpenStreetMap coverage** per ward, calibrated first against Shibuya,
+    whose registry is complete.
+  - **A fresh licence read of Shinjuku's current PDF list.** The page speaks
+    of an opt-out from "オープンデータ", which may place the list under the
+    open-data terms.
+- **Saved as a standing preference** (memory): exhaust the methods we control
+  before recommending any contact with a publisher.
 ### 2026-09-24 - Rotterdam's deploy check passed, with the labels in both themes and the Global View button; three findings recorded, none blocking
 
 - **One `deploy-verify` (city-added Rotterdam + map-chrome, both themes) passed
