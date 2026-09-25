@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**352 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**353 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Rotterdam's deploy check passed, with the labels in both themes and the Global View button; three findings recorded, none blocking](#2026-09-24---rotterdams-deploy-check-passed-with-the-labels-in-both-themes-and-the-global-view-button-three-findings-recorded-none-blocking)
 - [The city map's "All cities" button is now "Global View" (owner); the hidden link keeps its text](#2026-09-24---the-city-maps-all-cities-button-is-now-global-view-owner-the-hidden-link-keeps-its-text)
 - [The macro map lands on "Global", which labels every city (owner)](#2026-09-24---the-macro-map-lands-on-global-which-labels-every-city-owner)
 - [Rotterdam built: 7,520 storefronts, 132 stations; the food layer rebuilt from permit notices](#2026-09-24---rotterdam-built-7520-storefronts-132-stations-the-food-layer-rebuilt-from-permit-notices)
@@ -394,6 +395,56 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Rotterdam's deploy check passed, with the labels in both themes and the Global View button; three findings recorded, none blocking
+
+- **One `deploy-verify` (city-added Rotterdam + map-chrome, both themes) passed
+  all five items on `worktree-rotterdam` at 69e305f**, as the owner asked:
+  the label work is checked inside Rotterdam's deploy check rather than in a
+  separate run.
+  - **Labels.** `check_map_markup` reports 40 maps, 249 labels and 146 dark
+    halos in light mode. Checked in the browser on Rotterdam, Washington D.C.
+    and Milan:
+    - Dark: the computed colour equals `--dm-label`, `filter` is `none` on
+      every ancestor, and the halo is rgb(11, 18, 32).
+    - Light: every halo matches the inline one.
+  - **Rotterdam.**
+    - The page's map shows 14 lines, each labelled with its own legend row.
+    - There are no JS errors.
+    - The credit is uncovered at 1000x650, 1024x768 and 375x812.
+    - The view is exact at 1000, 375 and 343 px, with 0 guard corrections.
+    - Notice 40 is displayed on the page, on About the Data and on What Is
+      Excluded, which also carries the exclusions section.
+  - **Overview.** It lands on Global (40). In Europe, Rotterdam's pill clears
+    Amsterdam's, Lille's and Prague's at 375, 768 and 1200. The list reads
+    "Prague, Amsterdam, Rotterdam, São Paulo".
+  - **Navigation.**
+    - "← Global View" returns to the Overview in the same theme.
+    - The Cities menu omits the current city and holds no "Global View" or
+      "All cities" item.
+    - The hidden link and the sidebar stay `display: none`.
+  - **Every map.**
+    - `check_map_labels.js` is clean on 40 of 40 at three sizes. At 343 px
+      Madrid's two known overlaps remain, identical on master.
+    - Attribution and view: 120 fresh loads, 0 problems.
+    - Deploy imports PROBLEMS 0. The push changes `cities.py` and
+      `components.py`, so the app needs a reboot.
+- **Three findings, none a regression from this branch and none blocking:**
+  - **Dark mode gives 20 pairs of different lines the same label colour, in
+    11 cities.** Paris Lignes 1, 9 and 10 are all `#ffff00`; D.C.'s Orange is
+    `#fffa00` beside its Yellow. Simulating the old `brightness(1.8)` filter
+    on master's maps gives exactly the same 20 pairs, and Rotterdam has none.
+    `check_map_markup` measures contrast against the halo, not how distinct
+    lines are from each other, so no check covers it. Recorded as open work
+    for the owner.
+  - **On the Global view at desktop widths, Rotterdam's pill overlaps Lille's.**
+    It is part of the European pile the owner accepted when Global was made
+    the landing view: Madrid already overlaps Paris, and Toulouse overlaps
+    Marseille. `check_macro_labels` scores Global only on its opening frame,
+    by design.
+  - **The Overview's basemap credit sits under deck.gl's overlay.** At 800x700
+    a city dot lands in the credit strip; the text stays legible. This
+    predates the branch and is recorded as open work.
 
 ### 2026-09-24 - The city map's "All cities" button is now "Global View" (owner); the hidden link keeps its text
 
