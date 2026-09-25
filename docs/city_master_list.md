@@ -224,6 +224,10 @@ two-layer shape:
   municipal report's own definitions: its headline is 73% occupied.
 - **No brief yet.** Its evidence is its row in the open-gap table below and `DECISIONS.md`
   2026-09-24.
+- ⚠️ **Its licences are NOT yet read**: the excise register and the Rīgas satiksme GTFS (both
+  declared CC0 on `data.gov.lv`), the VZD cadastre (declared CC BY 4.0), and the address points.
+  None has a row in `docs/data_sources.md`, so Band A's "licence read" condition is not met
+  yet. Corrected 2026-09-24, the same evening it moved here. Run the reads before the build.
 
 **The ten:** Seoul · ~~Hong Kong~~ ✅ **built 2026-09-24** — **each with a brief** in `docs/build_briefs/` — ✅ ~~nine
 Brazilian cities~~ **built 2026-09-24** (below) — **three Taiwanese cities**: Taipei (Regional) (6/6) ·

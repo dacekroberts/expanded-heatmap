@@ -849,7 +849,9 @@ brief names.
   cities (São Paulo is already with main), the three Taiwanese cities, and
   Rotterdam (its build-time calls are in its brief).
 
-- [ ] **Riga (Band A from 2026-09-24)**: write `docs/build_briefs/riga.md`
+- [ ] **Riga (Band A from 2026-09-24)**: first the licence reads, which
+  were never run: the excise register, the Rīgas satiksme GTFS, the VZD
+  cadastre and the address points. Then write `docs/build_briefs/riga.md`
   from its master-list row and the final probe, with checks. The owner's calls
   are made: the scoped vacancy disclosure, all 7 tram routes (colours from
   Rīgas satiksme's route maps), and no suburban rail.
