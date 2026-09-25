@@ -627,6 +627,13 @@ clicking each marker opens its page, each switcher works, each map renders).
 - Update `docs/project_context.md` (current state only - which cities exist,
   what's distinctive; no counts), `docs/city_shortlist.md`, and tick or add
   items in `PLAN.md`.
+- **Add the city to `docs/map_inconsistencies.md`**: one row in each of its
+  four tables, under its country, from the city's page, config and outputs;
+  and add it to any theme it changes, such as a missing category, a different
+  ring size or a regional scope. The owner wants this list current as cities
+  land, so that "why is this map different?" has one answer when it goes on
+  the site. `python scripts/check_inconsistency_list.py` fails until every
+  table has the row.
 - **Run `python scripts/check_provenance.py` and make it name your city OK.**
   This replaces confirming the rows by eye, because confirming by eye is what
   failed: the sentence below has been in this skill since the start, was

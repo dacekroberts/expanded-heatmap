@@ -117,8 +117,9 @@ repository, and every one of them is counted in the table on this page.
   "next to a station". Where that happens, surface stops are thinned to roughly
   one every half mile measured along the line's own route, while every
   underground station, every terminus and every interchange is kept. It applies
-  to five cities: San Francisco's Muni Metro, Philadelphia's trolleys, the
-  Boston Green Line's surface branches, and the trams of Amsterdam and Rotterdam. The reasoning is in
+  to San Francisco's Muni Metro, Philadelphia's trolleys, the Boston Green
+  Line's surface branches, the trams of Amsterdam and Rotterdam, and Hong Kong's
+  Light Rail. The reasoning is in
   `docs/sub_transit_line_filters.md`.
 
 **A thinned stop does not leave a hole in the map.** Stops are thinned to half a

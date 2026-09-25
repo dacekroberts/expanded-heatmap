@@ -5,8 +5,10 @@ yet on the site, and its placement is deliberately undecided until the last
 viable city is built (PLAN.md, "AFTER THE LAST VIABLE BUILD"). Keep it current
 as cities land. Its figures were read from the repository on 2026-09-24, so
 re-check them before publishing any of it.
-**Scope:** the 40 cities in `app/cities.py` `CITIES`, in `SWITCHER_ORDER`
-(grouped by country).
+**Scope:** every city in `app/cities.py` `CITIES`, in `SWITCHER_ORDER`
+(grouped by country). `python scripts/check_inconsistency_list.py` fails when a
+built city has no row in any of the four tables, so a city is added here as part
+of landing it (the `add-city` and `publish-city` skills say so).
 **Method:** read-only. Each city's page prose (`app/pages/*_Heatmap.py`), config and
 step files, `docs/excluded_categories.md` (EC), `docs/data_sources.md` (DS), the
 build briefs, a grep of `DECISIONS.md` (DEC), and the committed maps. Several
@@ -39,6 +41,8 @@ dense-looking city may simply have more complete records.
   and Rotterdam for shops (BAG shop-use units).
 - **Permit lists:** Amsterdam's food layer (hospitality permits); Rotterdam's food
   layer, rebuilt from permit notices in the official gazette.
+- **A food-premises licence register only:** Hong Kong (FEHD's registers, which
+  license restaurants and food shops and nothing else a storefront needs).
 - **Reason:** each country and city publishes what it publishes. The pages for
   Montréal, Mexico City, Guadalajara, Madrid and Barcelona already say their density
   is "not comparable" with licence-register cities.
@@ -47,6 +51,8 @@ dense-looking city may simply have more complete records.
 **Reader sentence:** Most maps colour businesses as Retail, Food service and Personal
 services. A few cannot, because the local records never cover that trade.
 - **No Personal services at all:** Philadelphia, Boston.
+- **No Retail or Personal services at all:** Hong Kong. Its three categories are
+  Food service, Food shops and Bathhouses, because FEHD licenses nothing else.
 - **Retail limited to food retail (plus a few extras):** Philadelphia (bodegas and
   big-box stores that sell packaged food), Boston (grocers, package stores, cannabis).
 - **Retail thin:** New York (food stores plus a regulated slice of trades). Toronto:
@@ -80,8 +86,9 @@ run on top of a metro network.
 - **Trams or light rail drawn:** San Diego, San Francisco (Muni Metro), Los Angeles,
   Philadelphia (trolleys), Boston (Green Line, Mattapan), Calgary, Edmonton, Toronto
   (Lines 5 and 6 only), Mexico City (Tren Ligero), Guadalajara, Dublin (Luas),
-  Marseille, Toulouse, Lille, Oslo, Amsterdam, Rotterdam, Rio (VLT), Santos (VLT).
-- **Trams not drawn:** Toronto's 18 streetcar routes, Milan (17 routes), Barcelona,
+  Marseille, Toulouse, Lille, Oslo, Amsterdam, Rotterdam, Rio (VLT), Santos (VLT),
+  Hong Kong (Light Rail).
+- **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Toronto's 18 streetcar routes, Milan (17 routes), Barcelona,
   Paris, Prague, Rome, Madrid (Metro Ligero), Copenhagen (the Letbane has no stop in
   scope).
 - **Other modes on the map:** Toulouse's Téléo cable car, Barcelona's two
@@ -115,7 +122,7 @@ drawn at half size, so the pin counts in the layer menu cover a smaller area tha
 other cities.
 - **Rings 0.05 / 0.1 / 0.2 / 0.3 mi:** New York, Paris, Marseille, Toulouse, Lille,
   Rennes, Oslo.
-- **Rings 0.1 / 0.2 / 0.3 / 0.6 mi:** the other 33.
+- **Rings 0.1 / 0.2 / 0.3 / 0.6 mi:** every other city.
 - **Reason:** where stations are a median 340–540 m apart, a 0.6 mi ring reaches past
   the next stations (city configs, `RING_EDGES_MILES`).
 
@@ -283,6 +290,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Porto Alegre (Regional) | Trensurb Linha 1 | Aeromóvel | OpenStreetMap | 6 municípios | 0 / 0 |
 | Recife (Regional) | Metrô Centro (2 branches) + Sul | 2 diesel VLTs | OpenStreetMap | 4 municípios | 0 / 0 |
 | Santos (Regional) | VLT L1, L2 | Heritage tram | OpenStreetMap | Santos + São Vicente | 0 / 0 |
+| **Hong Kong** | | | | | |
+| Hong Kong | MTR, 8 lines + Light Rail | Airport Express, Disneyland Resort Line, high-speed rail, Peak Tram, Hong Kong Tramways | OpenStreetMap (station counts checked against MTR's own lists) | Territory | 0 / 17 (Racecourse left out: race days only) |
 
 ### B. Business data (dimensions 4–6)
 
@@ -340,6 +349,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Porto Alegre (Regional) | | | | 4,660 / 1,516 / 1,244 | almost half; about half near stations |
 | Recife (Regional) | | | | 6,547 / 2,058 / 1,783 | about 4 in 10 |
 | Santos (Regional) | | | | 3,113 / 1,482 / 792 | almost 4 in 10 |
+| **Hong Kong** | | | | | |
+| Hong Kong | Licence registers (food premises) | FEHD licence registers | Local (licence type) | Food service 15,833 / Food shops 3,408 / Bathhouses 34 | No general retail or personal services: FEHD does not license them |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -389,6 +400,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Rotterdam | Source points | Closed premises stay up to 5 years; about 7% vacant | Dwelling units (26); alcohol, terrace, gaming permits |
 | **Brazil** | | | |
 | All nine | Source points (census) | Unreadable descriptions (see B); change since 2022 | Offices, parking, workshops, vacant, worship etc.; dwelling addresses show category only |
+| **Hong Kong** | | | |
+| Hong Kong | Source points: FEHD's own CSDI points, matched by licence number (28 unplaced) | Mostly restaurants; premises on different floors share one point | Food factories, canteens, cold stores, pools, entertainment and funeral trades; 2 duplicate licences counted once |
 
 ### D. Vintage and map features (dimensions 10–11, plus two added)
 
@@ -449,6 +462,8 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Porto Alegre (Regional) | same | B | 0.6 mi | Yes | 20% | same (42%) |
 | Recife (Regional) | same | B | 0.6 mi | Yes | 23% | same (44%) |
 | Santos (Regional) | same | B | 0.6 mi | Yes | 46% | same (35%) |
+| **Hong Kong** | | | | | | |
+| Hong Kong | Registers generated 2026-09-25, points to 2026-09-23 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 91% | Shop sign, Chinese or English (308 show "No shop sign") |
 
 Features every map shares, so not a difference: permanent line labels and a legend
 entry for every line; rings start switched off; OSM basemap credit; the site-wide

@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**375 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**376 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [The cross-city inconsistency list is kept current by a check (owner)](#2026-09-24---the-cross-city-inconsistency-list-is-kept-current-by-a-check-owner)
 - [render_heatmap refuses CJK names without a declared language](#2026-09-24---render_heatmap-refuses-cjk-names-without-a-declared-language)
 - [A map declares its language, and its CJK faces follow it](#2026-09-24---a-map-declares-its-language-and-its-cjk-faces-follow-it)
 - [Hong Kong is live; the cjk-text skill written for Taiwan, Seoul and Japan; one stale claim dropped (owner)](#2026-09-24---hong-kong-is-live-the-cjk-text-skill-written-for-taiwan-seoul-and-japan-one-stale-claim-dropped-owner)
@@ -417,6 +418,31 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - The cross-city inconsistency list is kept current by a check (owner)
+
+- **The owner asked that `docs/map_inconsistencies.md` be updated as cities
+  land**, not rebuilt at the end.
+- **`scripts/check_inconsistency_list.py` (new)** fails when a city in
+  `app/cities.py` has no row in any of the list's four city-by-city tables.
+  - A country-wide "All nine" row covers its country only while the number
+    matches the country's city count.
+  - A row for a name not in `cities.py` is reported too.
+  - **Controls**: the committed list before tonight fails with "no row for
+    Hong Kong" in all four tables; an "All eight" under Brazil fails on the
+    count.
+  - **Wired in** at publish-city step 4 (beside check_provenance), in
+    add-city's wrap-up and in CLAUDE.md's commands.
+- **Hong Kong added**: its row in each table, from its page, config and
+  committed outputs (in-ring Food service 15,833, Food shops 3,408,
+  Bathhouses 34; 91% in-ring; 17 Light Rail stops thinned; 28 licences
+  unplaced). It is also added to themes 1, 2 and 4.
+- **Two drifting counts removed from the list** ("the 40 cities", "the other
+  33"), on the principle approved for the site prose earlier the same day.
+- **The published spacing-filter sentence** in `docs/excluded_categories.md`
+  had just been corrected to "five cities". Hong Kong's Light Rail makes six,
+  measured from every `excluded_stations.csv`. It now names the systems with
+  no count, the same principle.
 
 ### 2026-09-24 - render_heatmap refuses CJK names without a declared language
 

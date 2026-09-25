@@ -384,6 +384,7 @@ python scripts/check_no_fetch_in_steps.py [--list]      # no pipeline step may r
 python scripts/check_no_fetch_in_steps_selftest.py      # watch that check fail 6 ways; touches nothing
 python scripts/check_scope_disclosure.py                # every city's rail AND business scope reaches the published page
 python scripts/check_scope_disclosure_selftest.py       # watch that check fail 8 ways; touches nothing
+python scripts/check_inconsistency_list.py              # every city has a row in each table of docs/map_inconsistencies.md; run when a city lands
 python scripts/check_stray_downloads.py                 # untracked files at ANY checkout's root - where browser-pane downloads land
 python scripts/check_render_current.py                  # every committed map carries the CURRENT renderer's shared blocks; run after merging
 python scripts/check_map_markup.py [--verbose]          # every line label reads at 4.5:1 in DARK mode; every legend's inline style intact
