@@ -801,6 +801,10 @@ brief names.
 - [x] **The batch publish** (2026-09-25, owner rebooted; live-checked) - Seoul, Taichung, Taoyuan, Taipei (Regional): `deploy-verify`
   (city-added x4 + East Asia), merge master, fetch, push, reboot, live check; retire the
   junctions and the `-tmp` launch entries.
+- [ ] **Seoul's map still 24 MB after its whole-city heat layer was dropped (owner,
+  2026-09-25: it would not load on the owner's phone at 30 MB).** After the reset: measure
+  what fills it, then shrink further (coordinate precision, per-pin tooltip text, pin
+  encoding in the shared renderer) and verify at phone width before shipping.
 - [x] **Edmonton's map drifts by two Retail pins** FIXED 2026-09-25 (AS_OF_DATE; see DECISIONS) (full drift check 2026-09-25: 1,032 in the
   rings against the committed 1,034; raw data and Edmonton's own code unchanged since 09-21).
   Find whether a shared module changed its output or the 2026-09-24 batch re-render used a

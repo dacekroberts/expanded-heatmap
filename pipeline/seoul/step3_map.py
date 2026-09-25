@@ -42,6 +42,11 @@ def main():
         # Trade names are Korean; this orders the Korean faces first
         # (theme.font_stack) and render_heatmap raises without it.
         lang="ko",
+        # No whole-city heat layer (owner, 2026-09-25): at 239,410 storefronts it
+        # carried nearly a quarter of a million points a second time, and the
+        # 30 MB map would not load on the owner's phone. 94% of the storefronts
+        # are inside the rings anyway. Mexico City's precedent; the page says so.
+        all_city_heat=False,
     )
 
 

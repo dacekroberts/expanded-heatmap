@@ -493,7 +493,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | **Latvia** | | | | | | |
 | Riga | Excise daily; cadastre prepared 2026-09-20 (fetched 2026-09-25) | B | 0.6 mi | Yes | 78% | No names; the kind (food) or the premises' registered name (shops) |
 | **South Korea** | | | | | | |
-| Seoul | Registers daily, updated to 2026-09-24 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 94% | Trade name in Korean (138 show "Name withheld") |
+| Seoul | Registers daily, updated to 2026-09-24 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | No (dropped 2026-09-25: file size on phones) | 94% | Trade name in Korean (138 show "Name withheld") |
 | **Taiwan** | | | | | | |
 | Taichung | Register daily, dated 2026-09-25; door plates August 2026 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 19% | Trade name in Chinese, or the line of business (11,907) |
 | Taoyuan | Register daily, dated 2026-09-25; door plates August 2026 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 12% | Trade name in Chinese, or the line of business (7,230) |

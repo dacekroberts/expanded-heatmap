@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**393 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**394 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-25**
 
+- [Seoul's whole-city heat layer dropped: the map would not load on the owner's phone; 30.1 MB to 24.2 MB, and the page says why](#2026-09-25---seouls-whole-city-heat-layer-dropped-the-map-would-not-load-on-the-owners-phone-301-mb-to-242-mb-and-the-page-says-why)
 - [Edmonton's drift fixed at the root: "lapsed" is judged as of the snapshot, not as of the day step 2 runs; the map is back to the built 10,721](#2026-09-25---edmontons-drift-fixed-at-the-root-lapsed-is-judged-as-of-the-snapshot-not-as-of-the-day-step-2-runs-the-map-is-back-to-the-built-10721)
 - [Full drift check after the four-city batch: 45 of 46 cities zero drift, Edmonton's map off by two Retail pins; the six Japanese briefs hold 31/31](#2026-09-25---full-drift-check-after-the-four-city-batch-45-of-46-cities-zero-drift-edmontons-map-off-by-two-retail-pins-the-six-japanese-briefs-hold-3131)
 - [Seoul, Taichung, Taoyuan and Taipei (Regional) are live: one batch, pushed as 5320f6a, rebooted by the owner, checked on the live site](#2026-09-25---seoul-taichung-taoyuan-and-taipei-regional-are-live-one-batch-pushed-as-5320f6a-rebooted-by-the-owner-checked-on-the-live-site)
@@ -438,6 +439,25 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-25 - Seoul's whole-city heat layer dropped: the map would not load on the owner's phone; 30.1 MB to 24.2 MB, and the page says why
+
+- **The owner reported that Seoul's map had trouble loading on a phone**, the
+  risk flagged when the 30 MB map was kept ("time it live, shrink only if
+  slow"). The live desktop load was 8.2 s; no phone had been tested.
+- **Owner's call: drop the whole-city heat layer and say why on the page.**
+  - The renderer already supports this (`all_city_heat=False`), with Mexico
+    City as the precedent.
+  - That layer carried all 239,410 storefronts a second time. 94% of Seoul's
+    storefronts are inside the rings, so the toggle added little.
+  - The map went from **30.1 MB to 24.2 MB (-20%)**.
+  - Page 43's heat paragraph now says the layer is absent and why. The
+    sentence was shown in chat before it was written.
+  - `map_inconsistencies.md` table D now reads "No" for Seoul.
+- **Not enough to promise a phone load.** 24 MB is still twice the next
+  largest map. A PLAN item carries the next step: measure what fills the
+  file, shrink it in the shared renderer (coordinate precision, per-pin
+  tooltip text, pin encoding), and verify at phone width.
 
 ### 2026-09-25 - Edmonton's drift fixed at the root: "lapsed" is judged as of the snapshot, not as of the day step 2 runs; the map is back to the built 10,721
 

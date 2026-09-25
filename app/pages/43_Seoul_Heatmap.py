@@ -26,7 +26,8 @@ render_city_nav("Seoul")
 
 st.title("Seoul: commercial density around subway stations")
 
-# Approved by the owner 2026-09-25.
+# Approved by the owner 2026-09-25; the whole-city heat sentence added the same day
+# at the owner's request, when the layer was dropped for phones.
 st.markdown(
     """
 Fifteen lines are drawn — **Lines 1 to 9, the Shinbundang Line, the Ui LRT and the Sillim Line,
@@ -65,7 +66,10 @@ will display as numbered circles summing areas when zoomed out. Zooming in will 
 dots; hover over those to see further details.
 
 The heat layer is illustrative. Leaflet applies a visual blur rather than a statistical density
-estimate, so read the colour as "roughly where things cluster."
+estimate, so read the colour as "roughly where things cluster." Unlike most maps here, Seoul's has
+no whole-city heat layer: it would carry nearly a quarter of a million points a second time, more
+than many phones can load, and 94% of Seoul's storefronts already fall inside the station rings,
+so it showed little the ring view does not.
 """
 )
 
