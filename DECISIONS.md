@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**384 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**385 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-24**
 
+- [Riga's deploy check: one defect fixed (food dots showed no address); the Europe view verified unchanged in zoom](#2026-09-24---rigas-deploy-check-one-defect-fixed-food-dots-showed-no-address-the-europe-view-verified-unchanged-in-zoom)
 - [Riga built: 6,730 storefronts, 108 tram stations; Latvia's first city, and Europe keeps its zoom](#2026-09-24---riga-built-6730-storefronts-108-tram-stations-latvias-first-city-and-europe-keeps-its-zoom)
 - [Fukuoka's address disclosure worded (owner), and the sampling lesson reaches premises-taxonomy](#2026-09-24---fukuokas-address-disclosure-worded-owner-and-the-sampling-lesson-reaches-premises-taxonomy)
 - [Toronto's legend passage and the French address-only dots (owner-approved wording)](#2026-09-24---torontos-legend-passage-and-the-french-address-only-dots-owner-approved-wording)
@@ -426,6 +427,38 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-24 - Riga's deploy check: one defect fixed (food dots showed no address); the Europe view verified unchanged in zoom
+
+- **One `deploy-verify` (city-added Riga plus the Overview's Europe view)**
+  passed everything but the tooltips.
+  - **Page 42.** No errors, a three-date snapshot, and a 1000x650 frame.
+  - **Map.** 7 labelled lines and 2 categories, with labels correct in both
+    themes (`check_map_markup` PROBLEMS 0 over 42 maps). Attribution was clear
+    at five sizes. The view took 0 corrections (zoom 11.75 on desktop, 10.75
+    on a phone).
+  - **Notices and pages.** Notices 42 and 43 are displayed, and What Is
+    Excluded shows 0 / 15.
+  - **Europe view.** Its zoom is 2.7643, IDENTICAL to master's; only the
+    centre moved, from (50.17, 4.09) to (50.17, 8.92). Fitting all 16 cities
+    would have given 2.2113. The other 9 regions are unchanged. All 16 cities
+    show at 768 and 1280; at 375 Riga's pill ends at 338 of 343 px.
+  - **Imports and reboot.** Clean-clone imports pass, and a reboot is
+    required: `Overview.py` imports a new name from `cities.py`.
+- **The defect: page 42 says food dots show "the kind of place and its
+  street address", and no tooltip showed an address.** The shared tooltip
+  shows the name field and "Kind", and step 2 had put the kind in both.
+  - Fixed as Rotterdam's shop units already do. A food dot's title is its
+    street address without the unit number, the owner's privacy call, with
+    its kind (Café, Bar, Restaurant, Pizzeria, Canteen or bistro) as Kind.
+  - A shop dot keeps the cadastre's own name (Veikals, Frizētava...) with
+    Shop or Service as Kind.
+  - After the fix: privacy check 0 names or contacts, 0 food titles with a
+    unit number, drift zero, baseline unchanged.
+- **Noted, not changed:** on the Global landing view at desktop widths,
+  Riga's pill overlaps Copenhagen's (22.6 x 9.1 px). It is part of the
+  European pile-up the owner accepted when Global was made the landing
+  view, which `check_macro_labels` does not score by design.
 
 ### 2026-09-24 - Riga built: 6,730 storefronts, 108 tram stations; Latvia's first city, and Europe keeps its zoom
 
