@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**397 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**398 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Monterrey (Regional) screened into Band A: its only negative was obsolete](#2026-09-27---monterrey-regional-screened-into-band-a-its-only-negative-was-obsolete)
 - [Trams count; Band T (trams only) created; first blocker wins, universally (owner)](#2026-09-27---trams-count-band-t-trams-only-created-first-blocker-wins-universally-owner)
 - [iPhone blank maps: the cause is a per-literal compile limit, not memory; which layer trips it per city, and why Seoul's layer drop bought nothing](#2026-09-27---iphone-blank-maps-the-cause-is-a-per-literal-compile-limit-not-memory-which-layer-trips-it-per-city-and-why-seouls-layer-drop-bought-nothing)
 
@@ -445,6 +446,44 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Monterrey (Regional) screened into Band A: its only negative was obsolete
+
+- **Screened Monterrey at Step 0 depth, and it is Band A.**
+  - Its 2026-09-22 discard rested on rail alone: Nuevo León publishes no
+    Metrorrey data.
+  - Since then the owner approved OpenStreetMap as a rail source, and Mexico
+    City and Guadalajara were built on it. So the negative no longer
+    disqualified anything.
+  - It was found by asking "what rests on an obsolete reason", a question
+    the open-gap sweeps never asked of the discard trail's older entries.
+- **Business**: DENUE for Nuevo León, edition 05_2026 (21.5 MB, latin-1, the
+  same 42 columns and the same edition as the two built cities).
+  - **58,587 storefronts** in the four municipios: Retail 37,869, Food 12,639,
+    Personal 8,079.
+  - Coordinates are 100% filled; food is 13.5× OSM, against Guadalajara's
+    13.8×.
+  - The non-storefront share is 48.6%, mostly repair (SCIAN 811), which fits
+    an industrial city and is not a defect.
+- **Rail**: Metrorrey Líneas 1–3 from OSM, 6 relations and 38 stations. The
+  operator's 2026-05 map names exactly 19 / 13 / 9, and two Overpass mirrors
+  agree.
+- **Traps recorded in the brief**:
+  - 11 unbuilt monorail stations are tagged `railway=station` +
+    `construction=yes`;
+  - stop-position-only members;
+  - an accent split that turns 38 stations into 39;
+  - two misspelt public names;
+  - a renamed station.
+- **Three owner calls at the start of the build**:
+  - OSM as the rail ground (the same case as CDMX's);
+  - "Monterrey (Regional)" over four municipios, because city-only cuts
+    Línea 2 to 8 of 13 (62%), below Rennes' 73%;
+  - Línea 3's colour: OSM's orange against the operator's red.
+- **Side find for cleanup**: Guadalajara's published names include 11
+  phone-length digit runs, never checked.
+- Files: `docs/build_briefs/monterrey.md` (5/5) and `city_master_list.md`
+  (Band A, counts 20 → 21).
 
 ### 2026-09-27 - Trams count; Band T (trams only) created; first blocker wins, universally (owner)
 
