@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**402 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**403 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Mobile mode removed and Seoul's whole-city heat layer restored (owner): the full maps load on the iPhone once their data is JSON.parse](#2026-09-27---mobile-mode-removed-and-seouls-whole-city-heat-layer-restored-owner-the-full-maps-load-on-the-iphone-once-their-data-is-jsonparse)
 - [Monterrey's three calls decided (owner)](#2026-09-27---monterreys-three-calls-decided-owner)
 - [Threshold probe closed (owner): the exact per-device limit no longer decides anything, and the 20,000 inline-literal cap is final](#2026-09-27---threshold-probe-closed-owner-the-exact-per-device-limit-no-longer-decides-anything-and-the-20000-inline-literal-cap-is-final)
 - [Monterrey (Regional) screened into Band A: its only negative was obsolete](#2026-09-27---monterrey-regional-screened-into-band-a-its-only-negative-was-obsolete)
@@ -450,6 +451,49 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Mobile mode removed and Seoul's whole-city heat layer restored (owner): the full maps load on the iPhone once their data is JSON.parse
+
+- **What the owner saw**: after the JSON.parse fix went live, Seoul, São
+  Paulo and Mexico City loaded on the owner's iPhone, but with no business
+  clusters. That was mobile mode (2026-09-25, `6281d90`, `ee865ea`). It
+  served phones a light map without dots by default, and nothing had been
+  deleted: each full map still carried its three dot layers.
+- **The test that decided it**: with mobile mode switched off, **Seoul's
+  full map loaded on the owner's iPhone**, 224,381 dots and 18.8 MB, the
+  heaviest map. The owner took the other three as following from the same
+  data and asked for mobile mode to be removed.
+- **Superseded**: both 2026-09-25 entries, "Seoul's mobile mode" and
+  "Seoul's whole-city heat layer dropped". Both rested on the belief that
+  the phone ran out of memory. The cause was WebKit refusing any literal
+  over ~110,861 nested elements (entries above), and Seoul's station-area
+  layer alone exceeded it, so the layer drop never addressed it.
+- **Removed**:
+  - `components.mobile_mode()` and its calls on pages 15, 31 and 46.
+  - Seoul's inline toggle and caption on page 43, whose caption said "more
+    than a phone can hold in memory", which was never the cause.
+  - `HEATMAP_LITE_HTML` in `pipeline/seoul/config.py`.
+  - The light-map renders in four step 3 files.
+  - `render_heatmap(lite_output_path=)`.
+  - The four `heatmap_lite.html` files.
+  - `pins=` stays as an unused option, with a comment saying why it exists.
+- **Seoul's whole-city layer is back** (`all_city_heat` at its default),
+  239,410 points. The map goes from 18.78 to 24.23 MB, and the dots and
+  station-area layer are unchanged.
+  - **Page 43**: the sentence "Unlike most maps here, Seoul's has no
+    whole-city heat layer..." was removed. The paragraph is back to the
+    wording approved before it was added.
+  - **Inconsistency list**: its table D row now reads Yes (restored).
+- **The other three maps re-rendered identical** (data and markup, Folium
+  ids masked). Checks: inline arrays 0 over, render-current, scope
+  disclosure, city registry and inconsistency list all OK.
+  `check_provenance.py` fails only on `docs/build_briefs/monterrey.md`
+  (Staging's, citing notice item 1 beside INEGI), which predates this
+  change and was passed to Staging.
+- **Needs a reboot**: `app/components.py` and four pages changed.
+- **Not done here**: Mexico City's and Guadalajara's whole-city layers,
+  dropped for file size and for consistency before any phone test. They
+  are an owner decision on measurements (PLAN, the whole-city layer audit).
 
 ### 2026-09-27 - Monterrey's three calls decided (owner)
 
