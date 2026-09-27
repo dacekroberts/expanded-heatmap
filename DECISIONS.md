@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**406 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**407 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Every city drawn on every world copy on the front page (owner): East Asia shows on the left of the Global view; labels need only be collision-free within their own region](#2026-09-27---every-city-drawn-on-every-world-copy-on-the-front-page-owner-east-asia-shows-on-the-left-of-the-global-view-labels-need-only-be-collision-free-within-their-own-region)
 - [Cluster animation stays off (owner): re-measured after the JSON.parse rework, it still adds ~250-550 ms to every zoom, on the heaviest map as on Paris](#2026-09-27---cluster-animation-stays-off-owner-re-measured-after-the-jsonparse-rework-it-still-adds-250-550-ms-to-every-zoom-on-the-heaviest-map-as-on-paris)
 - [Mexico City's and Guadalajara's whole-city heat layers restored (owner): every map now has one](#2026-09-27---mexico-citys-and-guadalajaras-whole-city-heat-layers-restored-owner-every-map-now-has-one)
 - [The lost research data restored into main's data/: 466 files, and 82 HTML placeholders caught and replaced](#2026-09-27---the-lost-research-data-restored-into-mains-data-466-files-and-82-html-placeholders-caught-and-replaced)
@@ -454,6 +455,44 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Every city drawn on every world copy on the front page (owner): East Asia shows on the left of the Global view; labels need only be collision-free within their own region
+
+- **The defect, confirmed in a render before fixing**: on a canvas wider
+  than one world, the basemap repeated ("ASIA" and "AUSTRALIA" on the left)
+  but deck.gl drew the city layers only on the primary copy (-180..180).
+  Seoul, Hong Kong, Taipei, Taichung and Taoyuan appeared only past Europe.
+- **The fix**: `views=[pdk.View(type="MapView", controller=True,
+  repeat=True)]` on the `pdk.Deck` in `app/Overview.py`.
+  - pydeck's default view is this same MapView with `controller=True`, so
+    only `repeat` changes. pydeck 0.9.3 serialises it straight through.
+  - It applies to every region, as the owner asked.
+- **Verified in the lean app at 1200 px**:
+  - Seoul and Taipei (Regional) now draw at the left edge on load.
+  - Clicking Taipei's pill on the wrapped copy opened its page.
+  - `check_macro_attribution.mjs` passes at 375, 768 and 1200 px in both
+    themes; the credit is still on top of every copy.
+  - `check_macro_labels.py` reports 0 problems across 10 regions at 3
+    widths.
+  - `check_deploy_imports.py` passes on the commit.
+- **Owner's rules for the macro map, stated while this was built**:
+  - **Clipped labels are fine.** A city at the canvas edge is reached by
+    panning, as the East Coast labels already are at phone width. At 1200 px
+    Seoul's wrapped copy sits almost exactly on the left edge, so its pill
+    is half off-canvas; that is accepted.
+  - **What matters is that every city is drawn** where it is on screen.
+  - **Labels must not overlap within their own region, at that region's
+    fitted zoom.** Fitting the whole globe collision-free is not a goal.
+  - **Duplicates when zoomed far out** (one per world copy, both clickable)
+    are accepted.
+- **Therefore `check_macro_labels.py` was left scoring the primary copy.**
+  The handoff proposed adding the wrapped copies to its Global scoring. That
+  scoring was written and then reverted on the owner's rule, since Global is
+  not held to collision-free labels. Every leaf region is fitted at a zoom
+  where one world spans thousands of pixels, so no wrapped copy reaches its
+  canvas.
+- **No reboot is needed**: `app/Overview.py` is the entry script, which
+  "Updated app!" re-runs; no imported module changed.
 
 ### 2026-09-27 - Cluster animation stays off (owner): re-measured after the JSON.parse rework, it still adds ~250-550 ms to every zoom, on the heaviest map as on Paris
 

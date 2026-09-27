@@ -967,7 +967,8 @@ brief names.
       Toronto and D.C. draw exactly their geocoded rows (58,173 / 18,186 / 5,230); New York
       draws 62,441 of 62,444 geocoded rows, a 3-row gap worth one look but not a trim.
       Every other city's whole-city layer equals its storefront total. Seoul's is restored.
-- [ ] **East Asian cities missing from the front page's Global view until panned (owner,
+- [x] **DONE 2026-09-27: `repeat=True` on the Overview's MapView (DECISIONS, "Every city
+  drawn on every world copy").** Original item: **East Asian cities missing from the front page's Global view until panned (owner,
   2026-09-27; after the iPhone work).** Hong Kong, Taipei and Seoul are not drawn west of the
   Americas across the Pacific; they appear only past Europe. Owner: draw every city wherever
   it is on screen, on the WHOLE macro map, every region.
