@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**403 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**404 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [East Asia second-city screen: Daegu and Busan reopen on their cities' own portals; Busan's frozen snapshot accepted (owner)](#2026-09-27---east-asia-second-city-screen-daegu-and-busan-reopen-on-their-cities-own-portals-busans-frozen-snapshot-accepted-owner)
 - [The lost research data restored into main's data/: 466 files, and 82 HTML placeholders caught and replaced](#2026-09-27---the-lost-research-data-restored-into-mains-data-466-files-and-82-html-placeholders-caught-and-replaced)
 - [Monterrey's three calls decided (owner)](#2026-09-27---monterreys-three-calls-decided-owner)
 - [Threshold probe closed (owner): the exact per-device limit no longer decides anything, and the 20,000 inline-literal cap is final](#2026-09-27---threshold-probe-closed-owner-the-exact-per-device-limit-no-longer-decides-anything-and-the-20000-inline-literal-cap-is-final)
@@ -451,6 +452,75 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - East Asia second-city screen: Daegu and Busan reopen on their cities' own portals; Busan's frozen snapshot accepted (owner)
+
+- **Found that the 2026-09-22 closures of Daegu and Busan were findings about
+  a ROUTE, not about the data.** Both were closed on the per-district
+  data.go.kr route (Busan 4 of 16 districts; Daegu 4 of 9, downtown 중구
+  missing), the shape the closed tiers call "the Daegu failure". Each city's
+  own portal also republishes the national licence register (LOCALDATA)
+  CITYWIDE, keyless and with coordinates. This supersedes the 2026-09-22
+  "Busan and Daegu closed" record and the add-country line "Korea: 1 city
+  (Seoul only)".
+  - **Daegu**: `data.daegu.go.kr` monthly permit files (2026-08 edition),
+    the LOCALDATA schema with EPSG:5174 points, all 9 districts including
+    중구. Food 39,915 (30,530 restaurants, 9,385 cafés); personal at least
+    10,475; retail at least 6,492 from tobacco alone, with bakeries,
+    butchers and health-food in sibling files not yet pulled. Points on
+    96-99% of rows. Rail: Lines 1-3 (Line 3 a monorail), 86 stops in the
+    city, from OSM because Korea's station dataset lacks Daegu Metro.
+  - **Busan**: the city's keyless `LocalDataService` Open API (catalogued
+    OA_TT00001-39), 1,000 rows a page, all 16 districts. Food about 55.4k,
+    personal 16,240, retail about 22.7k before de-duplication. Points on
+    94-99.6%. Rail: Lines 1-4 (Line 4 a monorail), about 100 stations, plus
+    the Busan-Gimhae LRT.
+  - Both reuse Seoul's `korea_localdata` modules. **Licences are unread for
+    both**, so a `licence-read` runs before either brief.
+- **Busan's feed is frozen at 2026-04-15, and the owner accepted building
+  from that snapshot ("Busan snapshot ok").** Every operation's maximum
+  `updatedt` is that date, the day before LOCALDATA moved to data.go.kr. The
+  page states the snapshot date, as Fukuoka's page states its own gap. The
+  rejected alternative, waiting for a refreshing source, has no known end:
+  the refreshing route is the national portal's CAPTCHA-gated one. The API
+  is a catalogued Open API, not a page's lookup back end, so the 2026-09-24
+  rule against harvesting lookup back ends does not reach it.
+- **Gyeonggi's download page asks a "purpose of use" radio (U01-U05); the
+  owner ruled it is answered honestly at build ("answer Gyeonggi
+  honestly").** The screen skipped it and the server served the CSV anyway.
+  Serving without an answer is not permission to skip the question.
+- **Proposed bands, pending the owner's confirmation with the other
+  wave-1 screens:**
+  - **Incheon**: citywide active-only lists, keyless, all 10 districts, but
+    **addresses only** (a 2026-01 snapshot), retail only as health-food, and
+    an operator-name column (`업자명`) that must be dropped. Korea's official
+    address database (juso.go.kr) is the unprobed join.
+  - **Gyeonggi satellites** (Uijeongbu, Yongin, Gimpo named; the province's
+    registers cover all 31 시군): the café file has no name, location or
+    status, the takeaway-food file no status, restaurants X/Y but no address
+    (a boundary join places them).
+  - **Daejeon and Gwangju**: no city portal (DNS fails), and the national
+    portal is behind the residency and CAPTCHA wall: access-blocked.
+  - **Gimhae**: provincial hosts time out: access-blocked, noted light rail
+    only.
+  - **Kaohsiung**: the geo-block re-measured today (every data host times
+    out on TCP while `www` answers): stays access-blocked.
+  - **Tainan and Hsinchu**: no urban rail in OSM (Tainan's Blue Line under
+    construction, Hsinchu's light rail planned): discards. The claim that
+    their TRA locals fail the frequency test is ASSERTED, because TDX needs a
+    key.
+- **Trams-count applied to built cities: listed first, decided case by
+  case (owner).** The screen noted that Hong Kong's map left out Hong Kong
+  Tramways (83 stops) by the owner's call of 2026-09-24, before trams
+  counted. The owner asked for every built city in that position to be
+  listed before any rescoping, and each judged on its own. The listing was
+  sent to Cleanup; rescoping, if any, is main's, city by city.
+- **Privacy note.** A failed first Gyeonggi download printed raw CSV bytes
+  to the screen agent's console, including truncated phone fragments.
+  Nothing was saved or reported, and the code was fixed. Recorded so the
+  slip is on file, not only in a transcript.
+- Macau (separate jurisdiction, not a built country) was not screened for
+  business data; its LRT would class as an edge network.
 
 ### 2026-09-27 - The lost research data restored into main's data/: 466 files, and 82 HTML placeholders caught and replaced
 
