@@ -986,6 +986,28 @@ brief names.
     copies (lon +/- 360) to its Global scoring; re-check the credit with
     `check_macro_attribution.mjs`; verify in a real 1200 px render that the three show on
     the left on load.
+- [ ] **Trams left off built maps - owner decides case by case (listed 2026-09-27, after
+  "trams count").** Read-only list; nothing rescoped. Stops = distinct stop names in scope,
+  from cached GTFS/OSM. Rescoping is main's work, city by city, after the owner decides.
+  - **Recorded reason was only "not rapid transit / overlay" (reversed by the rule):**
+    Toronto streetcars (18 routes, 476 stops); Milan (17 routes, 323 of 341; ATM publishes
+    no colours); Prague (37 routes, 285); Paris T3a/T3b + edges of T2/T9 (62); Barcelona
+    TRAM T1-T6 (not counted - cache has no tram relations); Rome tram 8 (40; lines 2, 3, 5,
+    14 have no trips in the GTFS); Hong Kong Tramways (not counted - OSM query skipped
+    trams; excluded by the owner 2026-09-24).
+  - **Mixed or close:** Madrid Metro Ligero ML1 (9, run by Metro de Madrid); SF F Market
+    (46, heritage cars on a regular route); Fortaleza diesel VLT (11, every 40 min - failed
+    the rail test); D.C. Streetcar and Montreal's REM (both silent omissions; D.C.'s service
+    status unverified).
+  - **Reason still stands:** SF cable cars, Rio Santa Teresa, Santos, Lille Amitram
+    (heritage); Copenhagen Letbane, Marseille Aubagne, Philadelphia NHSL/D1/D2 (no stop in
+    scope); Amsterdam tram 3 (no trips until 2026-12-12); Rotterdam 12/14/18 (event or
+    works routes); Seoul Gimpo Goldline (1 stop, already drawn); Recife VLTs (fail the rail
+    test); Porto Alegre Aeromovel (people mover).
+  - **Blind spots:** Seoul's OSM query takes only subway/light_rail/train (Wirye Line
+    unverified); Hong Kong's and Barcelona's caches hold no tram relations. Mexico City's
+    Cablebús is also unstated (Toulouse's drawn Téléo is the precedent).
+    `docs/map_inconsistencies.md` shows D.C. as "—", which is incomplete.
 - [ ] **Write `.claude/agents/cleanup-sweep.md` (owner, 2026-09-24)** - a scoped agent on
   `deploy-verify.md`'s scope format, so recurring cleanup runs in its own context and returns
   a short report. Owner approvals and published wording still come back to the owner. Why:
