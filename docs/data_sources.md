@@ -1033,6 +1033,83 @@ than its current one, and Personal services is the bucket where a salon
 operating from a residential address is most plausible. **Flagged for
 `add-city` Step 0, not pre-judged.**
 
+### 🇰🇷 Daegu and Busan (candidates, not built) — read 2026-09-27 by the `licence-read` agent
+
+**The same national register (LOCALDATA, 행정안전부 / 한국지역정보개발원) carries
+different declared terms depending on who republishes it.** Seoul attaches KOGL
+Type 1; Daegu and Busan attach no KOGL type at all; data.go.kr now declares
+**이용허락범위 제한 없음** for the national listings (15096283, 15045016,
+15006730, and the successor API 15154916). `global_country_shortlist.md`
+records 15096283 as KOGL Type 1, which is no longer what data.go.kr shows.
+So **Seoul's three KOGL duties do not carry over by licence**, but the standing
+non-affiliation line is kept on both pages anyway.
+
+**Busan — the keyless `LocalDataService` Open API** (`data.busan.go.kr`,
+"구군 인허가포털", OA_TT00001–39; frozen at 2026-04-15). **PERMITTED WITH
+CONDITIONS; nothing to do beyond a credit.**
+- **The grant** is the portal's own 공공데이터 이용정책
+  (`https://data.busan.go.kr/bdip/publicDataPolicy.do`): *"데이터웨이브에서
+  제공하는 공공데이터는 공공데이터법에 따라 누구나 이용가능하고, 영리 목적의
+  이용을 포함한 자유로운 활용이 보장됩니다"*, and *"별도의 신청절차 없이
+  이용 가능"*. The catalogue's managing department is 행정안전부, whose
+  national listings say 제한 없음. 공공데이터법 제3조④ bars a public body from
+  restricting use.
+- **Machine metadata is NOT evidence here**: `usePrmisnEnnc` reads "없음" on
+  all 11 operations a build would use, but on a control dataset (15143208)
+  Busan's DCAT says 제한 없음 where data.go.kr says CC BY, and the list popup
+  writes the two fields into swapped cells. The permission rests on the policy
+  sentence and the Ministry's declaration, not on this field.
+- **Conditions**: a reasonable source credit (저작권법 제37조, no wording
+  prescribed), and good-faith use (공공데이터법 제3조⑤). **Credit**: Busan's
+  Big-데이터웨이브 (linked) as the channel, the Ministry's local-government
+  licence data as the source, and the snapshot date.
+- **Reasoned position, owner-accepted 2026-09-27: the portal terms' 제14조.**
+  *"플랫폼이 작성한 저작물에 대한 저작권 … 은 플랫폼에 귀속합니다"* and ②
+  bars republishing information whose IP belongs to the platform without
+  consent. Read as covering only works the platform itself authored: this
+  register is entered by the 16 districts through the Ministry's system. The
+  restrictive reading (API output as the platform's IP) is recorded, not
+  adopted. Any objection from Busan is honoured, not argued.
+- **Privacy**: no 대표자 or 성명 field; the API returns **`sitetel` (phone)**,
+  which is never published. The terms are silent on caching API output and on
+  the frozen feed; no retirement notice among 345 portal notices.
+
+**Daegu — D-데이터허브 monthly files** (`data.daegu.go.kr`,
+"26년08월_인허가데이터", DMI_0000119600–09 and 119690–95, origin 한국지역정보개발원).
+**AMBIGUOUS in a way that matters; proceeding on a disclosed reasoned
+position (owner, 2026-09-27).**
+- **The dataset pages declare nothing**: every licence field in the embedded
+  JSON is null, and no page text mentions 공공누리, 이용허락 or 약관. The only
+  reuse text is "[출처 : 한국지역정보개발원]".
+- **The permissive side**: D-데이터허브's 공공데이터 이용정책
+  (`https://data.daegu.go.kr/open/introduce/openData.do`) repeats the national
+  *"영리 목적의 이용을 포함한 자유로운 활용이 보장됩니다"*; its data page says
+  the permit data is *"공공데이터포털(data.go.kr)에서 제공하는 데이터"*; the
+  national listings say 제한 없음; and 공공데이터법 제3조④ forbids restricting
+  use.
+- **The restrictive side**: the City's own copyright guide
+  (`https://www.daegu.go.kr/index.do?menu_id=00050251`, the footer's
+  저작권정책) says *"공공누리가 부착되지 않은 자료들을 이용하고자 할 경우에는
+  공공저작물 관리책임관 및 실무담당자와 사전에 협의한 이후에 이용해 주시기
+  바랍니다."* The files carry no KOGL mark. On that reading, publishing waits on
+  a consultation (phone only: 053-803-3770 / 3785).
+- **Why the permissive reading was taken**: the guide is written under
+  저작권법 제24조의2 about 저작물 (its examples are photos and report
+  statistics), D-데이터허브 does not link to it, its wording is a request, and
+  the Public Data Act governs public data unless another law specially
+  provides (제4조).
+- **The route that would have avoided the question failed**: the national
+  file host the data.go.kr listings link to (`file.localdata.go.kr`) answered
+  403 to a plain fetch and to the browser on 2026-09-27. The listing's file was
+  last modified 2025-11-27, older than Daegu's 2026-08 edition.
+- **If Daegu objects, the page comes down** (the removal commitment below).
+  The consultation stays available as an owner act, not a prerequisite.
+- **Credit** (suggested, not prescribed): Daegu Metropolitan City,
+  D-데이터허브 (`data.daegu.go.kr`), originally 한국지역정보개발원.
+- **Unverified**: the XLSX columns. The screen's profiler suppresses anything
+  containing 전화, which implies a phone column. Never publish it, and select
+  columns by exact name.
+
 ### 🇧🇷 Brazil — IBGE's CNEFE 2022 (candidate, not built): the grant is a LAW, not a document
 
 **Source:** *Cadastro Nacional de Endereços para Fins Estatísticos*, Censo

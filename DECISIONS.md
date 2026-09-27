@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**410 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**411 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Daegu's and Busan's licences read: Busan permitted with a credit, Daegu on a reasoned position after the national route failed (owner)](#2026-09-27---daegus-and-busans-licences-read-busan-permitted-with-a-credit-daegu-on-a-reasoned-position-after-the-national-route-failed-owner)
 - [Wave-1 second-city screens banded: 43 candidates added, 32 of them trams-only; edge networks stay in T, Band C widened (owner)](#2026-09-27---wave-1-second-city-screens-banded-43-candidates-added-32-of-them-trams-only-edge-networks-stay-in-t-band-c-widened-owner)
 - [overpass.osm.ch removed from every Overpass host list; all-zero counts refused; check_overpass_hosts.py keeps regional extracts out](#2026-09-27---overpassosmch-removed-from-every-overpass-host-list-all-zero-counts-refused-check_overpass_hostspy-keeps-regional-extracts-out)
 - [East Asia second-city screen: Daegu and Busan reopen on their cities' own portals; Busan's frozen snapshot accepted (owner)](#2026-09-27---east-asia-second-city-screen-daegu-and-busan-reopen-on-their-cities-own-portals-busans-frozen-snapshot-accepted-owner)
@@ -458,6 +459,39 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Daegu's and Busan's licences read: Busan permitted with a credit, Daegu on a reasoned position after the national route failed (owner)
+
+- **Busan's `LocalDataService` API: PERMITTED WITH CONDITIONS.** The grant
+  is the portal's own data-use policy ("영리 목적의 이용을 포함한 자유로운
+  활용이 보장됩니다", no application needed). The conditions are a reasonable
+  source credit and good-faith use, with no wording prescribed. **The owner
+  accepted the natural reading of the portal terms' 제14조** (platform IP
+  covers only works the portal itself authored; this register is entered by
+  the districts through the Ministry's system). The restrictive reading was
+  recorded, not adopted. Busan's machine licence field was found unreliable on
+  a control dataset, so it carries no weight either way. The API returns a
+  phone field (`sitetel`), which is never published.
+- **Daegu's D-데이터허브 files: AMBIGUOUS, and the owner chose "probe the
+  national file host first; if not, fall back to the permissive reading".**
+  The dataset pages declare nothing, and the portal repeats the national
+  free-use guarantee. But the City's copyright guide asks that material
+  without a KOGL mark be used "after prior consultation" with its
+  public-works officers.
+  - **The probe failed.** `file.localdata.go.kr`, which the data.go.kr
+    listings link to, answered 403 to a plain fetch and to the browser. The
+    listing's file is dated 2025-11-27, older than Daegu's 2026-08 edition.
+  - **So Daegu proceeds on the permissive reading, disclosed.** The reasons:
+    the guide is about copyright works, the data portal does not link to it,
+    its wording is a request, and 공공데이터법 제3조④ forbids restricting
+    public data. The consultation stays an owner act, not a prerequisite. An
+    objection from Daegu takes the page down.
+- **Found that one national register carries three sets of declared terms**:
+  KOGL Type 1 via Seoul, none via Daegu and Busan, and 제한 없음 on data.go.kr
+  now (the evidence trail's "KOGL Type 1" for 15096283 is out of date).
+  Seoul's KOGL duties therefore do not carry over by licence.
+- Recorded in `docs/data_sources.md` (a new Daegu and Busan section) and in
+  `docs/city_master_list.md`'s Band A rows. Both cities go to a brief next.
 
 ### 2026-09-27 - Wave-1 second-city screens banded: 43 candidates added, 32 of them trams-only; edge networks stay in T, Band C widened (owner)
 
