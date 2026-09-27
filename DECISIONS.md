@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**396 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**397 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Trams count; Band T (trams only) created; first blocker wins, universally (owner)](#2026-09-27---trams-count-band-t-trams-only-created-first-blocker-wins-universally-owner)
 - [iPhone blank maps: the cause is a per-literal compile limit, not memory; which layer trips it per city, and why Seoul's layer drop bought nothing](#2026-09-27---iphone-blank-maps-the-cause-is-a-per-literal-compile-limit-not-memory-which-layer-trips-it-per-city-and-why-seouls-layer-drop-bought-nothing)
 
 **2026-09-25**
@@ -444,6 +445,51 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Trams count; Band T (trams only) created; first blocker wins, universally (owner)
+
+- **The owner ruled that trams count as rail for this project** ("count
+  trams").
+  - Tram, streetcar and light rail now qualify a city, beside metro.
+  - BRT, buses and trolleybuses still never count. Commuter rail still needs
+    the rail test.
+  - Riga, built on trams on 2026-09-24, had already used this in practice.
+  - It opens every tram city in the countries already built. Second-city
+    screens started the same day.
+- **Band T (trams only) created** at the owner's request: "put them into a
+  separate category of cities… similar to band C".
+  - It holds cities that pass on two or more buckets with open access, but
+    whose rail is trams or street-running light rail with no metro.
+  - Like C, it waits on one decision about the group. It starts empty.
+  - Edge cases are flagged per city, not sorted silently: metro-standard
+    light rail, Rouen's tunnel, Hiroshima's Astram Line.
+- **First blocker wins, made universal across every master list** (owner). A
+  city sits in ONE band, the band of its first blocker in the order a build
+  meets them:
+  1. access (D);
+  2. buckets (C);
+  3. network (T).
+  Every other blocker is noted beside it. So:
+  - Zurich and Göteborg stay in C, tagged "trams only";
+  - Tallinn stays in D, tagged "trams only";
+  - Hiroshima stays in C, noted as an edge case.
+  Written as the list's fourth maintenance rule, into
+  `scripts/japan_ward_table.py`'s header and Hiroshima's note, and into the
+  master-list format memory used for every chat republish.
+- **Two stale counts corrected while there.** The candidates table read A 10
+  (+28 built) and 24 candidates, while the header box read 20. It is now
+  A 6 (+32 built) and 20, matching the header and Band A's heading.
+- **Found while regenerating the Japan list: the old staging worktree's
+  gitignored `data/` went with it** when the worktree was retired. That was
+  about 1.2 GB of Japanese city files, MLIT layers and e-Stat tables.
+  - Builds are unaffected: each re-downloads through its own
+    `fetch_sources.py`.
+  - But `docs/japan_city_list.md` cannot be regenerated until the data is
+    fetched again, so the script change takes effect at the next
+    regeneration.
+  - Worth a line in the worktree-retirement checklist: save a research
+    worktree's `data/` first, as was done for Copenhagen's cache.
+- Files: `docs/city_master_list.md` and `scripts/japan_ward_table.py`.
 
 ### 2026-09-27 - iPhone blank maps: the cause is a per-literal compile limit, not memory; which layer trips it per city, and why Seoul's layer drop bought nothing
 
