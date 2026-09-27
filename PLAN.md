@@ -842,7 +842,14 @@ brief names.
       the limit). **Change `scripts/check_personal_exposure.py` in the same commit**: it
       parses those `var data` arrays out of the HTML. Apply to every map, not just the four
       failing ones - Rio is within ~20% of the limit and older phones may sit lower.
-    - [ ] **Hard threshold test - find the EXACT limit (owner, 2026-09-25), before choosing
+    - [x] **CLOSED 2026-09-27 by the owner: marked done as a problem-solving strategy for
+      the business clusters.** The JSON.parse fix took every business cluster and heat layer
+      out of literal form, so the exact limit no longer decides anything; the 20,000 cap in
+      `check_inline_arrays.py` stands as final (DECISIONS 2026-09-27, "Threshold probe
+      closed"). Its one run, owner's iPhone in the Claude app: heat pairs compile to 110,861,
+      dot rows to 110,852, flat numbers without limit; JSON.parse to 2,000,000. The probe page (claude.ai/artifact/1p4zAituB6PQy9Ksrrv6R3) stays available if
+      a future question needs the number. Original item, kept as written:
+      **Hard threshold test - find the EXACT limit (owner, 2026-09-25), before choosing
       any cap.** The probe above only brackets it (100,000 compiles, 131,000 does not).
       Bisect to the exact element count, as a probe artifact the owner opens on the phone:
       - Try one self-bisecting page first (the page builds each literal as text and runs it

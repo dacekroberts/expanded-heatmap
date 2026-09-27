@@ -40,11 +40,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 # Largest inline array literal (elements at its own level) a committed map may
-# carry. The owner's iPhone 16 Pro compiled 106,652 and refused 131,000
-# (2026-09-25); the exact figure comes from the threshold probe, recorded in
-# DECISIONS. After the JSON.parse fix the largest literal left on any map is
-# line geometry or a lookup table, far below this, so the cap costs nothing
-# and leaves a factor of five for slower or older devices.
+# carry. The owner's iPhone 16 Pro (iOS 18.7) compiles 110,861 heat pairs and
+# refuses 110,862 - a limit on literals made of literals; a flat array of a
+# million numbers compiled (probe, 2026-09-27). The owner then closed the
+# exact-limit question: with the
+# data out of literal form the exact number decides nothing, so this cap is
+# final rather than provisional. After the JSON.parse fix the largest literal
+# on any re-rendered map is about 1,000 elements, so the cap costs nothing and
+# leaves a factor of five under the proven figure for slower or older devices.
 CAP = 20_000
 
 SCRIPT = re.compile(r"<script\b[^>]*>(.*?)</script\s*>", re.S | re.I)

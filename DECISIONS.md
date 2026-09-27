@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**400 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**401 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Threshold probe closed (owner): the exact per-device limit no longer decides anything, and the 20,000 inline-literal cap is final](#2026-09-27---threshold-probe-closed-owner-the-exact-per-device-limit-no-longer-decides-anything-and-the-20000-inline-literal-cap-is-final)
 - [Monterrey (Regional) screened into Band A: its only negative was obsolete](#2026-09-27---monterrey-regional-screened-into-band-a-its-only-negative-was-obsolete)
 - [The old staging worktree went with ~1.2 GB of research data; the retirement rule now covers ALL of data/, and check_worktree_data.py refuses until it is saved](#2026-09-27---the-old-staging-worktree-went-with-12-gb-of-research-data-the-retirement-rule-now-covers-all-of-data-and-check_worktree_datapy-refuses-until-it-is-saved)
 - [Every map ships its heat points and business dots as JSON.parse("..."): no inline literal over 20,000 elements remains, 190.1 MB to 171.1 MB, and a check keeps it so](#2026-09-27---every-map-ships-its-heat-points-and-business-dots-as-jsonparse-no-inline-literal-over-20000-elements-remains-1901-mb-to-1711-mb-and-a-check-keeps-it-so)
@@ -448,6 +449,52 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Threshold probe closed (owner): the exact per-device limit no longer decides anything, and the 20,000 inline-literal cap is final
+
+- **Owner's call**: mark the array-limit probe done, as a problem-solving
+  strategy for the business clusters, rather than run it.
+- **Why it can close.** The probe was planned (2026-09-25) to find the
+  exact element count WebKit refuses, before choosing a cap. The JSON.parse
+  fix, live since this morning's push, took every business-cluster and heat
+  array out of literal form. The largest literal left on a re-rendered map
+  is about 1,000 elements, so no plausible per-device limit changes what is
+  shipped.
+- **What that makes final**: `check_inline_arrays.py`'s cap of 20,000,
+  entered as provisional in the fix's entry above. It sits five times under
+  the 106,652 the owner's phone is proven to compile.
+- **One run was recorded before it closed** - the owner's iPhone 16 Pro,
+  iOS 18.7, inside the Claude app's web view (UA ends
+  `Claude/1.260916.19`), 2026-09-27, injected-script method. It bisected
+  each shape to the exact count and repeated the two boundary sizes twice;
+  every repeat agreed.
+
+  | Shape | Largest that compiles | Smallest that fails |
+  |---|---|---|
+  | Heat pairs `[lat, lon]`, as `L.heatLayer(...)` | 110,861 | 110,862 (`RangeError: Maximum call stack size exceeded.`) |
+  | Dot rows `[lat, lon, "name", cat, station, band]`, as `var data` | 110,852 | 110,853 (same error) |
+  | Flat numbers | 1,048,576 (every size tried) | none found |
+  | `JSON.parse`, heat pairs | 2,000,000 in 0.19 s | none up to 2,000,000 |
+  | `JSON.parse`, dot rows | 1,000,000 in 0.20 s | none up to 1,000,000 |
+
+  - **The limit is on literals made of literals, not on element count.**
+    A flat million compiles, while 110,862 two-element pairs do not. The
+    nine-row gap between the two nested shapes fits the dot data's extra
+    function wrapper using a little more stack.
+  - **Rio's 106,652 was within 4% of the limit.** Nothing had been wrong
+    with it only by luck.
+  - **JSON.parse has at least seven times headroom over Seoul's 224,381,
+    and is fast.** Parse time is not what will make a big map slow.
+  - **Not measured**: Safari itself, other phones, older iOS. The closure
+    makes these unnecessary for the cap. The check's cap counts every
+    literal, flat ones included, which is stricter than the measured
+    behaviour and so safe.
+- **What stays open**: the real-device browser matrix on the fixed maps.
+  The probe could never answer whether a map loads, or how heavy it is once
+  it compiles. That decides the reversals (Seoul's whole-city layer, mobile
+  mode).
+- **The probe page stays up**, private
+  (claude.ai/artifact/1p4zAituB6PQy9Ksrrv6R3).
 
 ### 2026-09-27 - Monterrey (Regional) screened into Band A: its only negative was obsolete
 
