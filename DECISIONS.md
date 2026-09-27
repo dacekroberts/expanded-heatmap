@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**397 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**398 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [The old staging worktree went with ~1.2 GB of research data; the retirement rule now covers ALL of data/, and check_worktree_data.py refuses until it is saved](#2026-09-27---the-old-staging-worktree-went-with-12-gb-of-research-data-the-retirement-rule-now-covers-all-of-data-and-check_worktree_datapy-refuses-until-it-is-saved)
 - [Every map ships its heat points and business dots as JSON.parse("..."): no inline literal over 20,000 elements remains, 190.1 MB to 171.1 MB, and a check keeps it so](#2026-09-27---every-map-ships-its-heat-points-and-business-dots-as-jsonparse-no-inline-literal-over-20000-elements-remains-1901-mb-to-1711-mb-and-a-check-keeps-it-so)
 - [iPhone blank maps: the cause is a per-literal compile limit, not memory; which layer trips it per city, and why Seoul's layer drop bought nothing](#2026-09-27---iphone-blank-maps-the-cause-is-a-per-literal-compile-limit-not-memory-which-layer-trips-it-per-city-and-why-seouls-layer-drop-bought-nothing)
 
@@ -445,6 +446,44 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - The old staging worktree went with ~1.2 GB of research data; the retirement rule now covers ALL of data/, and check_worktree_data.py refuses until it is saved
+
+- **Reported by the Staging Session and the owner**: when the old staging
+  worktree was retired, its gitignored `data/` went with it. That held
+  Japan's city files (Osaka, Kobe, Sapporo, Fukuoka, Kyoto, Tokyo's wards,
+  Sendai, Hiroshima, Nagoya, Yokohama); `data/japan` (MLIT ISJ, N02, N03);
+  `data/mhlw` (e-Stat); and Helsinki, Tallinn, Vienna and part of Riga.
+  - **Builds are unaffected**: each re-downloads through its own
+    `fetch_sources.py`.
+  - **`scripts/japan_ward_table.py --write` cannot run** until Osaka's
+    `260630zenku.csv` and the rest are back.
+- **Why the rule did not catch it.** `docs/session_roles.md` step 2 said to
+  copy "any `data/<city>/` the main checkout lacks". A national folder
+  (`data/japan`, `data/mhlw`) does not read as a city, and nothing enforced
+  the step at all. Which route removed the worktree is not recorded here.
+- **The fix, as a check**: `scripts/check_worktree_data.py <worktree>` walks
+  the worktree's `data/` without following junctions, and refuses while any
+  file is absent from the main checkout or there at a different size.
+  - **Positive control**: the live staging worktree is refused, with
+    26 files and 215.5 MB (Monterrey and the French second-city screens)
+    that exist only there.
+  - **Negative control**: the cleanup worktree passes.
+- **Step 2 was rewritten** as "save the worktree's WHOLE `data/`", naming
+  the kinds of cache no fetch script re-creates, and it ends by running
+  the check.
+- **Recovery, found rather than assumed.**
+  - **Lost with nothing to recover**: the Recycle Bin is empty, File
+    History has never run, Documents is not under OneDrive, and no copy of
+    `260630zenku.csv` exists anywhere under the user profile.
+  - **What survived**: the Staging session's scratchpad (session
+    `0b2764e2`) still holds `japan_run/fetch_log.jsonl`, 567 entries each
+    mapping a `data/` path to its source URL and byte count. Also there:
+    the fetch scripts, and Kyoto's stitched register with its join files.
+  - **Measured by a dry run**: 524 files (959 MB) can be re-fetched from 41
+    hosts, 14 of them via the Wayback Machine. Seoul's files and six of
+    Riga's are still in the main checkout.
+  - **The re-fetch waits on the owner's yes**: downloads are asked for.
 
 ### 2026-09-27 - Every map ships its heat points and business dots as JSON.parse("..."): no inline literal over 20,000 elements remains, 190.1 MB to 171.1 MB, and a check keeps it so
 
