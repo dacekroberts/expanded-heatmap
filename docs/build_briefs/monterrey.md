@@ -12,7 +12,19 @@ no reachable operator or state GIS host. That negative stopped mattering when
 OpenStreetMap was approved as a rail source (`osm-rail`), and Mexico City and
 Guadalajara were built on it.
 
-## 🚩 Owner calls before the build
+**✅ Decided by the owner, 2026-09-27:**
+1. **OSM is the rail ground** ("OSM ok").
+2. **Scope: "Monterrey (Regional)"** over the four municipios, with 38
+   stations ("regional scope yes").
+3. **Línea 3 is drawn in the operator's RED** ("use operator's red"), not
+   OSM's orange.
+   - Take the hex from the operator's 2026-05-08 vector map at build (the
+     screen had no PDF library to read it).
+   - Keep Línea 1's and Línea 2's colours checked against the same map. The
+     map's orange belongs to Línea 6, which is not drawn.
+   - `check_map_markup.py`'s contrast parts still apply.
+
+## Owner calls, as put (✅ decided above)
 1. **OSM as the rail ground.** The grounds are the same as for Mexico City's
    per-city exception: there is no agency feed, `metrorrey.gob.mx` does not
    resolve, the state GIS (`mapas.nl.gob.mx`) times out, and `datos.nl.gob.mx`
@@ -117,7 +129,7 @@ cities. Only the owner's three calls stand before the build.**
 to −100.12) lies inside zone 14.
 
 ## Still unknown
-- The owner's three calls above.
+- Línea 3's exact red, from the operator's PDF at build.
 - Líneas 4 and 6 opening dates.
 - A Mobility Database re-check (its negative is from 2026-09-22).
 

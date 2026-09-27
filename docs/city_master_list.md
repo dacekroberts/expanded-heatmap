@@ -222,9 +222,9 @@ results in the sweep.
 - **Rail**: Metrorrey Líneas 1, 2 and 3 from OSM, **38 stations**. Gate 3
   matches the operator's map exactly (19 / 13 / 9). Líneas 4 and 6 are under
   construction and not drawn.
-- **Three owner calls at the start of the build**: OSM as the rail ground; the
-  four-municipio "(Regional)" scope (city-only would cut Línea 2 to 8 of 13);
-  and Línea 3's colour (OSM orange, the operator's red).
+- ✅ **The owner's three calls, decided 2026-09-27**: OSM as the rail ground;
+  the four-municipio "(Regional)" scope; and Línea 3 in the operator's red.
+  **Nothing blocks the build.**
 
 ✅ **Riga BUILT 2026-09-24** (6,730 storefronts, 108 stations). ▲ **Riga 🇱🇻 joined 2026-09-24 from the open gap (owner's call)**, the eleventh. Amsterdam's
 two-layer shape:
