@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**408 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**409 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Wave-1 second-city screens banded: 43 candidates added, 32 of them trams-only; edge networks stay in T, Band C widened (owner)](#2026-09-27---wave-1-second-city-screens-banded-43-candidates-added-32-of-them-trams-only-edge-networks-stay-in-t-band-c-widened-owner)
 - [East Asia second-city screen: Daegu and Busan reopen on their cities' own portals; Busan's frozen snapshot accepted (owner)](#2026-09-27---east-asia-second-city-screen-daegu-and-busan-reopen-on-their-cities-own-portals-busans-frozen-snapshot-accepted-owner)
 - [Every city drawn on every world copy on the front page (owner): East Asia shows on the left of the Global view; labels need only be collision-free within their own region](#2026-09-27---every-city-drawn-on-every-world-copy-on-the-front-page-owner-east-asia-shows-on-the-left-of-the-global-view-labels-need-only-be-collision-free-within-their-own-region)
 - [Cluster animation stays off (owner): re-measured after the JSON.parse rework, it still adds ~250-550 ms to every zoom, on the heaviest map as on Paris](#2026-09-27---cluster-animation-stays-off-owner-re-measured-after-the-jsonparse-rework-it-still-adds-250-550-ms-to-every-zoom-on-the-heaviest-map-as-on-paris)
@@ -456,6 +457,65 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Wave-1 second-city screens banded: 43 candidates added, 32 of them trams-only; edge networks stay in T, Band C widened (owner)
+
+- **Banded the three wave-1 screens under the first-blocker rule and the
+  owner's answers.** Candidates 21 → 64: A 9 (Daegu, Busan), C 13 (+6), T 32
+  (new), D 10 (+3). Discards 27 → 33. The per-city rows are in
+  `docs/city_master_list.md`; the per-country methods in
+  `docs/global_country_shortlist.md`'s new first section.
+- **France: 21 trams-only cities, and no new metro city exists.** SIRENE
+  through the built step-2 chain reproduced Rennes (3,479) and Toulouse
+  (8,635) exactly as the control, so the business counts are trusted. The
+  largest by storefronts within 966 m of a station: Bordeaux 10,754 (over 14
+  communes), Nice 9,379 (every line inside the commune, no scope call),
+  Montpellier 6,179 (87 stations), Strasbourg 5,482. The mode is decided per
+  city, because the NAP's flags and the feeds' `route_type` were wrong three
+  ways (Reims' tram typed as metro, school buses as tram, a Translohr as
+  tram).
+- **Czechia, Norway, Denmark and Latvia: 11 trams-only cities.** Brno is the
+  strongest trams-only find anywhere (7,229 storefronts, 146 stations, CC BY
+  GTFS, restaurant ratio 1.61× against Prague's 1.59-1.63×); Bergen the
+  cheapest (Oslo's modules unchanged, every licence read, 96.2% join).
+- **Edge networks stay in Band T, tagged EDGE (owner's call).** The
+  alternative, counting EDGE as metro, would have moved Nice, Rouen, Bergen
+  and Aarhus to A. Rejected for one rule: none has a metro, the tag lets any
+  one be pulled up, and Band T is buildable anyway (Riga).
+- **Band C widened to "one bucket only, or buckets with a measured gap"
+  (owner's call)**, for Incheon (no coordinates; retail only as health-food)
+  and the Gyeonggi satellites (no café layer; no status on takeaway food).
+  The rejected alternatives: reopening the coordinates band for Incheon alone,
+  or parking both in D, which is for access, not gaps. Den Haag, Utrecht,
+  Rijswijk and Delft join C in its original sense (shops, no current food).
+- **Denmark is placed through OSM's imported DAR address points (owner's
+  call: "OSM unless we need the data account, then let me know").** Their
+  `osak:identifier` is the DAR Husnummer id; 95% of central Copenhagen's are
+  in OSM at a median 0.03 m from DAR, placing 97.0% of Aarhus and 98.4% of
+  Odense, keyless, under ODbL. The Datafordeler account is reopened only if a
+  build proves it necessary, and the owner is told first.
+- **Discarded on rail**: Tainan and Hsinchu (no urban rail), Trondheim (its
+  one line, cut back to Ila-Lian this timetable, reaches 3.7% of storefronts
+  within 483 m), Aubagne (7 stations, 526 storefronts: a judgement, and
+  reversible), Clermont-Ferrand (a Translohr guided bus) and Saint-Louis (4
+  stops at the end of a Basel line).
+- **The overpass.osm.ch defect went to Cleanup (owner's call).** The
+  Swiss-only mirror in `pipeline/osm.py` answers other countries' queries with
+  HTTP 200 and zero results, and `fetch()` accepts it; it hit four of the
+  screen's counts. Also sent: `czechia_register.ruian()` hard-codes a Prague
+  address check, which must move into each city's config before Brno.
+- **Held by the owner**: the tram rescopes of built cities (Cleanup's list:
+  Toronto, Milan, Prague, Paris, Barcelona, Rome, Hong Kong to rescope;
+  Montréal's REM, Madrid's ML1, San Francisco's F Market, Fortaleza, D.C. and
+  Mexico City's Cablebús as calls), likely at the next reset; and wave 2 of
+  the screens.
+- **A second privacy slip, on file.** Reading the Latvian excise file's header,
+  the screen printed two raw rows to its console, including the holder
+  column the Riga build never reads; one name looked like a sole trader's.
+  Nothing was written, and every later read selected columns by exact name.
+- **The screens' 1.1 GB of downloads were copied into the main checkout's
+  `data/`** (no-clobber); `check_worktree_data.py` reports every file present
+  at the same size.
 
 ### 2026-09-27 - East Asia second-city screen: Daegu and Busan reopen on their cities' own portals; Busan's frozen snapshot accepted (owner)
 

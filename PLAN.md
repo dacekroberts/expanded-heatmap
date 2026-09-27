@@ -377,6 +377,21 @@ Desktop is unaffected — the label is fully visible there.
 
 ## Next cities, in ease order
 
+- [ ] **Second-city screens, 2026-09-27 (Staging).** Wave 1 done and banded
+  (France; Czechia, Norway, Denmark, the Netherlands, Latvia; Korea, Taiwan,
+  Hong Kong): see `docs/city_master_list.md` and DECISIONS. Open:
+  - [ ] **Licence reads for Daegu and Busan**, then their briefs. Daegu is the
+    recommended next Korean city. Held to save usage for main's builds.
+  - [ ] **Band T's group decision**: build trams-only cities, and in what
+    order (Nice, Montpellier, Brno and Bergen are the cheapest strong ones).
+  - [ ] **Wave 2 held by the owner** (the US; Canada, Brazil and Ireland;
+    Spain and Italy), possibly at a reset. Launch only on the owner's word,
+    after checking usage and whether main is mid-build.
+  - [ ] **Tram rescopes of built cities held by the owner**, likely at the
+    next reset; Cleanup's case-by-case list is in DECISIONS (2026-09-27).
+  - [ ] Cleanup: the `overpass.osm.ch` mirror in `pipeline/osm.py`, and
+    `czechia_register.ruian()`'s Prague-only check (before Brno).
+
 - [x] **Philadelphia - built 2026-09-21.** The WKB parsing this item predicted
   was never needed (the Carto SQL API evaluates `ST_X`/`ST_Y` server-side), and
   `phl_licensetype` is filled from the full 50-type pull. What it left behind:
