@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**398 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**399 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Monterrey's three calls decided (owner)](#2026-09-27---monterreys-three-calls-decided-owner)
 - [Monterrey (Regional) screened into Band A: its only negative was obsolete](#2026-09-27---monterrey-regional-screened-into-band-a-its-only-negative-was-obsolete)
 - [Trams count; Band T (trams only) created; first blocker wins, universally (owner)](#2026-09-27---trams-count-band-t-trams-only-created-first-blocker-wins-universally-owner)
 - [iPhone blank maps: the cause is a per-literal compile limit, not memory; which layer trips it per city, and why Seoul's layer drop bought nothing](#2026-09-27---iphone-blank-maps-the-cause-is-a-per-literal-compile-limit-not-memory-which-layer-trips-it-per-city-and-why-seouls-layer-drop-bought-nothing)
@@ -446,6 +447,19 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Monterrey's three calls decided (owner)
+
+- **The owner decided all three, each as recommended**:
+  - **OSM as the rail ground** ("OSM ok"), the same case as Mexico City's.
+  - **"Monterrey (Regional)"** over Monterrey, San Nicolás de los Garza,
+    Guadalupe and General Escobedo, 38 stations ("regional scope yes"). The
+    rejected alternative, city-only, cut Línea 2 to 8 of 13 stations.
+  - **Línea 3 in the operator's red** ("use operator's red"), not OSM's
+    `#FF8000`. The operator's map uses orange for the unbuilt Línea 6. The
+    exact hex is read from the operator's vector PDF at build.
+- Monterrey now has nothing blocking its build. Recorded in `monterrey.md`
+  and `city_master_list.md`.
 
 ### 2026-09-27 - Monterrey (Regional) screened into Band A: its only negative was obsolete
 
