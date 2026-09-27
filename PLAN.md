@@ -834,7 +834,9 @@ brief names.
     points as a string loaded. So the limit on that device lies between 106,652 and
     131,000 elements per literal. **Every iOS browser is WebKit**, so Chrome and Firefox
     on iPhone will fail the same way.
-    - [ ] **The fix: emit big arrays as `JSON.parse('...')`, not literals** - the heat data
+    - [x] **DONE 2026-09-27 (DECISIONS, "Every map ships its heat points and business dots
+      as JSON.parse"): `ParsedHeatMap`/`ParsedFastMarkerCluster`, `check_inline_arrays.py`
+      with a provisional 20,000 cap, 49 files re-rendered.** The fix: emit big arrays as `JSON.parse('...')`, not literals - the heat data
       (`HeatMap(...)` in `render_heatmap`, both layers) AND the pin data (`add_pin_layer`'s
       `var data`, one per category - a full map fails the same way once one category passes
       the limit). **Change `scripts/check_personal_exposure.py` in the same commit**: it

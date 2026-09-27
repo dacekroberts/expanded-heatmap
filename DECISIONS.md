@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**396 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**397 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Every map ships its heat points and business dots as JSON.parse("..."): no inline literal over 20,000 elements remains, 190.1 MB to 171.1 MB, and a check keeps it so](#2026-09-27---every-map-ships-its-heat-points-and-business-dots-as-jsonparse-no-inline-literal-over-20000-elements-remains-1901-mb-to-1711-mb-and-a-check-keeps-it-so)
 - [iPhone blank maps: the cause is a per-literal compile limit, not memory; which layer trips it per city, and why Seoul's layer drop bought nothing](#2026-09-27---iphone-blank-maps-the-cause-is-a-per-literal-compile-limit-not-memory-which-layer-trips-it-per-city-and-why-seouls-layer-drop-bought-nothing)
 
 **2026-09-25**
@@ -444,6 +445,72 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Every map ships its heat points and business dots as JSON.parse("..."): no inline literal over 20,000 elements remains, 190.1 MB to 171.1 MB, and a check keeps it so
+
+- **The cause** (the entry below): WebKit will not compile one inline array
+  literal above ~107k-131k elements, which blanked Mexico City, Taipei,
+  São Paulo and Seoul on the owner's iPhone.
+- **The fix, in `pipeline/map_common.py`**: `ParsedHeatMap` and
+  `ParsedFastMarkerCluster` subclass Folium's two data-carrying elements
+  with their own copies of Folium 0.20's templates, changed only on the data
+  line, which becomes `JSON.parse("...")`. Both heat layers and every pin
+  layer use them, in every map.
+  - **Escaping is library calls only** (`_js_json`): `json.dumps` of the
+    data with `allow_nan=False`, then `json.dumps` of that text, then `<`,
+    `>`, `&`, U+2028 and U+2029 replaced with their `\u` escapes. Those
+    decode back to the same characters inside the JS string, so no
+    `</script>` or `<!--` can reach the HTML.
+  - **NaN now fails the build**, not the published page: JSON.parse
+    rejects NaN, where a literal would have accepted it.
+- **`scripts/check_personal_exposure.py` changed in the same commit.**
+  `pins()` reads both forms in document order: the new one decodes with
+  two `json.loads`, and the old literal is still read.
+- **New check, `scripts/check_inline_arrays.py`**: it fails any committed
+  map whose largest inline array literal inside `<script>` exceeds 20,000
+  elements, skipping strings and comments.
+  - **Positive control**: run against the maps before the fix, it
+    reproduced every known count exactly (Seoul 224,381, São Paulo 219,578,
+    Mexico City 133,362, Taipei 133,335, Rio 106,652, Rome 98,897, Paris
+    87,164), with 29 of 50 maps over the cap.
+  - **After the fix**: 0 of 50 over.
+  - **`--selftest`** watches it fail six ways and round-trips eleven
+    hostile names through Node byte for byte: quotes, a backslash,
+    `</script>`, `<!--`, `&amp;`, CJK, emoji, U+2028 and a template-literal
+    `${}`.
+- **Why 20,000, provisionally.** The owner's phone compiled 106,652, so it
+  is at least five times under the proven figure. After the fix the
+  largest literal on any re-rendered map is about 1,000 elements; the
+  largest anywhere is Riga's 6,730, because Riga was not re-rendered (see
+  below). The cap costs nothing today. The exact limit comes from the threshold probe
+  (claude.ai/artifact/1p4zAituB6PQy9Ksrrv6R3), which bisects each shape,
+  so the cap is revisited with its result.
+- **Re-rendered 45 cities (49 files); Riga was left out.** Riga's map
+  belongs to the Main Building Session's live, uncommitted work, and its
+  largest literal (6,730) is under the cap. It picks the fix up at its next
+  render.
+  - **Old vs new, per file**: the decoded heat points and pin rows are
+    identical and in the same order. With the data and Folium's ids
+    masked, no other line differs.
+  - **Edmonton needed its step 2 re-run first.** This worktree's processed
+    cache predated the 2026-09-25 AS_OF_DATE fix (1,034 Retail pins against
+    the committed 1,039). Once re-run, it reproduced the committed data
+    exactly.
+  - **`check_personal_exposure.py` on every city**: HEAD's own script on
+    HEAD's maps against the new script on the new maps. Every line the old
+    run printed is reproduced, so the verdicts are unchanged.
+  - **Seoul's full map in Chromium**: 224,381 heat points and 224,381 dots
+    across three layers, with no console errors.
+- **The maps got smaller, not larger** (the handoff expected +0.4 MB on
+  Seoul): 190.1 to 171.1 MB in total, Seoul's full map 24.15 to 18.78 MB,
+  Taipei's 15.38 to 12.10 MB. Folium's `tojson` escaped every non-ASCII
+  character as `\uXXXX` (6 bytes against 3 in UTF-8), and it used `", "`
+  separators where the new data uses `","`.
+- **What this does NOT settle**: whether the four maps now load on a real
+  iPhone, and how heavy they are once they compile. Seoul's full map used
+  ~758 MB of page memory in Chrome. That needs the owner's browser matrix,
+  and none of the phone workarounds (Seoul's dropped layer, mobile mode) is
+  reversed until it has run.
 
 ### 2026-09-27 - iPhone blank maps: the cause is a per-literal compile limit, not memory; which layer trips it per city, and why Seoul's layer drop bought nothing
 
