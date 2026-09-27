@@ -683,7 +683,6 @@ def arcgis_layer(spec, ctx):
 OVERPASS_HOSTS = (
     "https://overpass-api.de/api/interpreter",
     "https://overpass.kumi.systems/api/interpreter",
-    "https://overpass.osm.ch/api/interpreter",
 )
 
 

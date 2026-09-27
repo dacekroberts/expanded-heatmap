@@ -16,11 +16,12 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**409 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**410 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
 - [Wave-1 second-city screens banded: 43 candidates added, 32 of them trams-only; edge networks stay in T, Band C widened (owner)](#2026-09-27---wave-1-second-city-screens-banded-43-candidates-added-32-of-them-trams-only-edge-networks-stay-in-t-band-c-widened-owner)
+- [overpass.osm.ch removed from every Overpass host list; all-zero counts refused; check_overpass_hosts.py keeps regional extracts out](#2026-09-27---overpassosmch-removed-from-every-overpass-host-list-all-zero-counts-refused-check_overpass_hostspy-keeps-regional-extracts-out)
 - [East Asia second-city screen: Daegu and Busan reopen on their cities' own portals; Busan's frozen snapshot accepted (owner)](#2026-09-27---east-asia-second-city-screen-daegu-and-busan-reopen-on-their-cities-own-portals-busans-frozen-snapshot-accepted-owner)
 - [Every city drawn on every world copy on the front page (owner): East Asia shows on the left of the Global view; labels need only be collision-free within their own region](#2026-09-27---every-city-drawn-on-every-world-copy-on-the-front-page-owner-east-asia-shows-on-the-left-of-the-global-view-labels-need-only-be-collision-free-within-their-own-region)
 - [Cluster animation stays off (owner): re-measured after the JSON.parse rework, it still adds ~250-550 ms to every zoom, on the heaviest map as on Paris](#2026-09-27---cluster-animation-stays-off-owner-re-measured-after-the-jsonparse-rework-it-still-adds-250-550-ms-to-every-zoom-on-the-heaviest-map-as-on-paris)
@@ -516,6 +517,40 @@ onwards; the early ones are split by phase rather than by hour.
 - **The screens' 1.1 GB of downloads were copied into the main checkout's
   `data/`** (no-clobber); `check_worktree_data.py` reports every file present
   at the same size.
+### 2026-09-27 - overpass.osm.ch removed from every Overpass host list; all-zero counts refused; check_overpass_hosts.py keeps regional extracts out
+
+- **Reported by Staging (second-city screens, relayed as owner-approved)**:
+  `overpass.osm.ch` serves a Swiss-only extract. Outside Switzerland it
+  answers HTTP 200 with nothing, or with zero counts for `out count`. It
+  gave zeros for Daugavpils, Aarhus, Zoetermeer and Amstelveen.
+- **Where it sat**: three host lists - `pipeline/osm.py` (the shared
+  fetcher), `pipeline/countries/mexico.py` (Mexico City and Guadalajara)
+  and `scripts/brief_check.py`. The East Asian configs and
+  `screen_stop_spacing.py` never had it.
+- **The hazard was narrower than first reported.** All three fetchers
+  already refused a fully EMPTY answer as a host failure; the mirror was
+  documented doing exactly that in 2026-09-22. What passed was an all-zero
+  `out count` answer, which is one element, not none. No pipeline step or
+  brief check uses `out count` (only the screens' scratch scripts did), so
+  no build could have taken an empty rail leg from it.
+- **No built city's rail came from it.** Of the cached OSM JSON files in
+  the main checkout that record their source (`_fetched_from`), 36 came
+  from overpass-api.de and 6 from overpass.kumi.systems. None came from
+  osm.ch.
+- **Changes**:
+  - The host is removed from all three lists.
+  - `osm.fetch()` treats an all-zero count answer like an empty 200 and
+    moves to the next mirror. Tested with a faked host sequence: the zero
+    count was refused and the real count from the next host accepted.
+  - New `scripts/check_overpass_hosts.py` scans `pipeline/` and `scripts/`
+    for every Overpass host URL. It fails on a known regional extract and
+    on any host not in its global allowlist; `--live` asks each host about
+    Tokyo and São Paulo, and `--selftest` watches it refuse. It passes now,
+    with 2 hosts.
+- **Not done, logged in PLAN**: Staging's second defect.
+  `czechia_register.ruian()` hard-codes Prague Castle as its coordinate
+  check and would stop any other Czech city. It is not urgent, since no
+  second Czech city is being built, but must be fixed before Brno.
 
 ### 2026-09-27 - East Asia second-city screen: Daegu and Busan reopen on their cities' own portals; Busan's frozen snapshot accepted (owner)
 
