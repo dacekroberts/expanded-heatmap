@@ -810,8 +810,11 @@ brief names.
   - [ ] `deploy-verify` (city-added, plus the Mexico and landing views for the three moved labels)
   - [ ] `check_deploy_imports.py` with `.venv-lean` linked, merge master, fetch, push, **reboot**
     (`cities.py` and `components.py` change), live check
-  - [ ] Staging: reconcile `city_master_list.md`'s Band A counts (Monterrey is counted in Built
-    on this branch and still in Band A's "7 ready")
+  - [x] `city_master_list.md`'s band counts reconciled on the branch, in Staging's wording
+    (A 6, Candidates 20, Built 47; 68f656c). **Merge notes from Staging**: if
+    `docs/build_briefs/monterrey.md` line 111 conflicts, take master's (the same fix,
+    dd3c75a); if Staging's wave-1 rewrite of the band counts lands first, take master's
+    numbers and apply the Monterrey move to them - A -1, Candidates -1, Built +1.
   - [ ] Retire the `data/` junction and the `monterrey-static-tmp` launch entry
 - [ ] **Seoul's map still 24 MB after its whole-city heat layer was dropped (owner,
   2026-09-25: it would not load on the owner's phone at 30 MB).** After the reset: measure
