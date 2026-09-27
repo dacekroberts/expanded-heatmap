@@ -16,7 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**395 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**396 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-09-27**
+
+- [iPhone blank maps: the cause is a per-literal compile limit, not memory; which layer trips it per city, and why Seoul's layer drop bought nothing](#2026-09-27---iphone-blank-maps-the-cause-is-a-per-literal-compile-limit-not-memory-which-layer-trips-it-per-city-and-why-seouls-layer-drop-bought-nothing)
 
 **2026-09-25**
 
@@ -440,6 +444,59 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - iPhone blank maps: the cause is a per-literal compile limit, not memory; which layer trips it per city, and why Seoul's layer drop bought nothing
+
+Recorded by the cleanup session from the Main Building Session's findings of
+2026-09-25 (PLAN.md, the "Seoul's map still 24 MB" item, master `6648419`,
+`20af557`), which until now lived only in PLAN and a handoff.
+
+- **The cause, confirmed on the owner's iPhone 16 Pro (iOS 18.7)**: WebKit,
+  which every iOS browser uses, refuses to compile a single inline JS array
+  literal above roughly 107k-131k elements. A no-map probe compiled 100,000
+  and threw `RangeError: Maximum call stack size exceeded` at 131,000,
+  131,200 and 224,381, while `JSON.parse` of the same 224,381 points loaded.
+  Every failing map has a heat literal of 133,335+ points; every loading map
+  is at 106,652 or below. File size and page memory do not separate them.
+- **Which heat layer trips it.** `render_heatmap` adds the station-area layer
+  (`in_rings`) first and the whole-city layer second; Taipei's second layer
+  equals its storefront total, which confirms the order.
+
+  | City | Station-area layer | Whole-city layer | What trips the limit |
+  |---|---|---|---|
+  | Seoul | 224,381 | dropped 2026-09-25 for the phone (`fb25ed7`) | the station-area layer alone |
+  | Mexico City | 133,362 | dropped 2026-09-22 for file size | the station-area layer alone |
+  | Taipei (Regional) | 103,587 | 133,335 | only the whole-city layer |
+  | São Paulo | 49,591 | 219,578 | only the whole-city layer |
+  | Paris (loads) | 84,125 | 87,164 | nothing |
+  | Rio (loads) | 30,269 | 106,652 | nothing, but the closest to the limit |
+
+- **Conclusions that follow:**
+  - **A whole-city layer is not a phone problem in itself.** Paris's and
+    Rio's load on the owner's iPhone. Only a single literal over the limit
+    fails.
+  - **Seoul's whole-city drop (2026-09-25) did not address the cause.** It
+    was made on the memory/size model; the map stayed blank because its
+    station-area layer alone is over the limit. After the JSON.parse fix,
+    restoring that layer is a question of weight, not of compiling. The
+    entry that reverses it should say so explicitly.
+  - **Taipei and São Paulo must not drop their whole-city layers** to fix
+    the phone: that would work only by accident. JSON.parse keeps the layer
+    and fixes the compile.
+  - **Mexico City's 2026-09-22 drop was a file-size decision** made before
+    any phone test. This neither supports nor undoes it; it is revisited on
+    size and parse cost only.
+- **A search artifact, cleared**: on 2026-09-25 a Grep of `pipeline/` with
+  glob `*/step*_map.py` for `all_city_heat` returned nothing, though three
+  cities use it. A plain recursive grep finds `all_city_heat=False` in
+  exactly `pipeline/guadalajara/step3_map.py`, `pipeline/mexico_city/step3_map.py`
+  and `pipeline/seoul/step3_map.py` - the three single-heat-layer maps. The
+  code matches the committed maps; there was no drift to clear. The lesson
+  went into the `consistency-sweep` skill: an audit that concludes "nothing
+  uses X" is confirmed with a grep that has no glob.
+- **Where the open work lives**: PLAN.md, the same item - the fix, the
+  threshold test, the browser matrix, the fix's downsides, the reversals
+  and the whole-city audit.
 
 ### 2026-09-25 - Seoul's mobile mode: phones get a light map without business dots (owner); the renderer gains a pins switch
 

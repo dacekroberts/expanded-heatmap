@@ -877,6 +877,133 @@ brief names.
     - [ ] Chrome device emulation - useful for layout only; never counts as a phone pass
     Record the results in DECISIONS with device, browser version and map; the threshold above
     is the owner's iPhone only, so re-measure it per device.
+  - **Order (owner, 2026-09-25)**: the JSON.parse fix -> the threshold and browser tests on
+    the current maps -> then each whole-city layer restored ONE AT A TIME, re-tested on the
+    phone and decided by the owner on the measurements. Which layer trips the limit in which
+    city is settled in DECISIONS (2026-09-27, "iPhone blank maps: the cause is a per-literal
+    compile limit").
+  - **Downsides of the JSON.parse fix - handle them while building it (moved from the
+    2026-09-24 handoff):**
+    - **NaN blanks the whole map**: `json.dumps` emits NaN by default and JSON.parse rejects
+      it. Use `allow_nan=False` so a bad row fails the BUILD, not the published page.
+    - **Pin rows need escaping twice** - JSON inside a JS string inside a script tag - and
+      carry quotes, apostrophes, backslashes, CJK and possibly `</script>`. Generate with
+      library calls only (`json.dumps` of the `json.dumps` output, then `</` -> `<\/`), and
+      add a test with hostile names. Heat data is numbers only.
+    - **Folium coupling**: the heat script comes from Folium's HeatMap template, so the fix
+      overrides it and a Folium upgrade could silently revert it. The oversized-literal check
+      catches a revert.
+    - **Other readers of the HTML**: `check_personal_exposure.py` parses the pin `var data`
+      arrays (same commit). Grep `scripts/` for anything else that pattern-matches map HTML.
+    - **Minor**: escaped quotes add ~0.4 MB to Seoul's full map (nothing to heat data); the
+      data is harder to grep; one large diff when every map re-renders.
+    - **THE BIG ONE: it fixes the compile limit, not the weight.** Seoul's full map used
+      ~758 MB of page memory in Chrome; on the iPhone a map may go from blank to slow, or to
+      a killed tab. That is why the threshold test and real-device matrix come before any
+      reversal below.
+    - Upside to record: JSON.parse is usually faster than compiling an equivalent literal.
+    - Rejected: chunking literals under the limit. No escaping, but it depends on a
+      device-specific number, so older phones stay at risk.
+  - **Phone workarounds to REVERSE if JSON.parse works on real phones** (all made 2026-09-25
+    on the memory/size belief). Reverse each only after the threshold test and browser matrix
+    show the relevant FULL map loading on a real iPhone (and Android if available); each
+    reversal gets a NEW DECISIONS entry superseding the old one.
+    - [ ] **Seoul's whole-city heat layer** (`fb25ed7`): now `all_city_heat=False` in
+      `pipeline/seoul/step3_map.py` plus page 43's sentence "Unlike most maps here, Seoul's
+      has no whole-city heat layer...". To reverse: set True, remove or rewrite the sentence
+      (owner-approved wording), re-render, re-test. The most likely to stay too heavy (~30 MB
+      with the layer).
+    - [ ] **Mobile mode, four cities.** Seoul (`6281d90`): the inline toggle and caption on
+      `app/pages/43_Seoul_Heatmap.py`, `HEATMAP_LITE_HTML` in `pipeline/seoul/config.py`,
+      `render(output_path, pins)` in its step 3. Mexico City, São Paulo, Taipei (`ee865ea`):
+      `components.mobile_mode()` called by pages 15, 31 and 46, `lite_output_path=` in their
+      step 3 files. Outputs: `outputs/{seoul,mexico_city,sao_paulo,taipei}/heatmap_lite.html`.
+      map_common's `pins=` and `lite_output_path=` can stay as harmless options, or go.
+      Removing the toggle changes `app/components.py`, so that push needs a REBOOT. Owner's
+      framing: keep mobile mode if the biggest full maps are slow even once they compile.
+  - [ ] **Wrong on the live site now, whatever happens with the fix**: the mobile-mode
+    captions (`components.mobile_mode`, and Seoul's own on page 43) say the dots are "more
+    than a phone can hold in memory". The cause was never memory. Page prose: draft the new
+    wording for the owner first. (On an iPhone mobile mode helps nothing yet - the light maps
+    fail on their heat arrays too.) The older sub-bullets of this item that frame it as
+    memory and a ~9 MB threshold are superseded by "CAUSE FOUND" and kept as history.
+  - [ ] **Audit EVERY city for a dropped or trimmed whole-city layer (owner, via Main,
+    2026-09-25).** Known so far: only Guadalajara, Mexico City and Seoul have a single
+    `L.heatLayer(` - the flag `all_city_heat=False` is passed in exactly those three step
+    files. Still to do: (1) confirm from DECISIONS and configs that no city trimmed its layer
+    another way (a filter, cap or sample) while still showing two - compare each whole-city
+    layer's point count with the city's storefront total; (2) for each one found, record why
+    (size, phone, or consistency) and whether that reason survives JSON.parse; (3) give the
+    owner ONE table - city, points restored, MB added to the full and light maps, original
+    reason, survives? - and the owner decides each.
+    - **Mexico City** (DECISIONS 2026-09-22, "`all_city_heat`, off for this city") was a
+      SIZE decision before any phone test: 25.7 MB, a 283,345-point layer; dropping it gave
+      19.0 MB, indexing the classification later 11.38 MB. Transfer was never the problem
+      (19 MB gzips to 3.07 MB); the reasons left were parse cost - which JSON.parse reduces -
+      and repository bytes, which do not change. Very likely reinstatable, as an owner call
+      on measurements. The JSON.parse ceiling test must reach at least 283,345 (the planned
+      500k does). Weight: about +6.7 MB in BOTH maps (full ~11.4 -> ~18 MB, light ~3.9 ->
+      ~10.6 MB, since the light map keeps every heat layer, and the data loads even with the
+      layer toggled off). Measure load and panning on the real iPhone with it off and on. If
+      reinstated: `all_city_heat=True` in `pipeline/mexico_city/step3_map.py`, rewrite page
+      15's "Unlike the other cities, this map has no whole-city layer ..." (draft for the
+      owner), update `excluded_categories.md`, new DECISIONS entry superseding 2026-09-22.
+    - **Guadalajara** switched its layer off only to match Mexico City: 3.4 MB, 36,925
+      points. Costs almost nothing; ask the owner alongside Mexico City.
+- [ ] **East Asian cities missing from the front page's Global view until panned (owner,
+  2026-09-27; after the iPhone work).** Hong Kong, Taipei and Seoul are not drawn west of the
+  Americas across the Pacific; they appear only past Europe. Owner: draw every city wherever
+  it is on screen, on the WHOLE macro map, every region.
+  - Likely cause, confirm first: the basemap repeats the world but deck.gl draws the layers
+    only on the primary copy (-180..180). At the US frame (zoom 1.4525) a wide screen shows
+    more than one world width; Seoul's wrapped longitude (-233) lands about at San
+    Francisco's height inside a 1200 px frame.
+  - Likely fix: `views=[pdk.View(type="MapView", controller=True, repeat=True)]` on the
+    `pdk.Deck` in `app/Overview.py`; verify pydeck/Streamlit honour it. App-only (no map
+    re-renders), but it changes `Overview.py`: `check_deploy_imports`, a scoped
+    `deploy-verify`, a reboot.
+  - Accepted for now: zoomed far out, a city may appear twice (both clickable); the owner
+    decides after implementation whether to handle duplicates.
+  - Checks: `check_macro_labels.py` scores only the primary copy - add each city's wrapped
+    copies (lon +/- 360) to its Global scoring; re-check the credit with
+    `check_macro_attribution.mjs`; verify in a real 1200 px render that the three show on
+    the left on load.
+- [ ] **Write `.claude/agents/cleanup-sweep.md` (owner, 2026-09-24)** - a scoped agent on
+  `deploy-verify.md`'s scope format, so recurring cleanup runs in its own context and returns
+  a short report. Owner approvals and published wording still come back to the owner. Why:
+  the 2026-09-24 worktree retirement took ~15 steps in a 580k-token session. Scopes:
+  - `city-landed`: the city's rows in all four tables of `docs/map_inconsistencies.md` (and
+    any theme it changes), `check_stale_claims.py --only E`, `check_render_current.py`,
+    `check_city_registry.py`, `check_inconsistency_list.py`, README entry under its country.
+  - `stale-claims`: run `check_stale_claims.py`, verify each flag against the source, return
+    DRAFT wording; never writes published prose.
+  - `retire-worktrees`: `docs/session_roles.md` steps 1-4 - copy data the main checkout
+    lacks, scan the WHOLE worktree for reparse points (five of seven had `.venv-lean`
+    junctioned), unlink junctions alone; never remove a worktree whose session has not
+    confirmed it is done.
+  - `plan-trim`: sort `check_plan_done.py` candidates into removable and keep, with reasons.
+  - Possibly `review`, for the efficiency review below.
+- [ ] **An honest efficiency review of the whole PROCESS, the owner's habits included (owner,
+  2026-09-24)** - only if the week's budget allows, at the start of a week, as ONE agent in
+  its own context. Not a code review: how work gets done, verified, approved and shipped.
+  - Evidence, not impressions: git history (`git log --since`, merge counts, files rewritten
+    per day), the size of what every session loads, DECISIONS' index (never the whole file),
+    `get_usage`, `check_*` run counts, approval round-trips per change.
+  - Starting figures measured 2026-09-24 - verify, don't trust: DECISIONS.md ~210k words
+    (~280k tokens), conflicting on every two-session push (archive older entries by month?);
+    CLAUDE.md ~4,200 words loaded every session (how much belongs in skills/docs?);
+    `docs/data_sources.md` ~52k words, PLAN.md ~16.7k; 2026-09-24 on master: 179 commits, 43
+    merges, 286 `heatmap.html` rewrites (~seven full re-renders - batch renderer changes?);
+    16 skills, 2 agents, 17 `check_*` scripts (which earn their keep?).
+  - The owner's end, stated plainly: per-change wording approvals vs a batched review;
+    batched `app/` pushes under one reboot; whether parallel sessions sharing one weekly
+    limit spend more on coordination and merges than they save.
+  - Deliverable, drafted for the owner: a ranked list (finding, evidence, estimated saving,
+    whose habit - owner, session or structure), the top three changes, and a rough weekly
+    saving for each. The owner decides.
+- [ ] **Toronto's retail share** (`docs/map_inconsistencies.md` Q18): the baseline's buckets
+  (870 of 19,575) and the cleaned rows the map draws (814 of 19,384) are both real. Settle by
+  reading Toronto's step 2, not by editing a number.
 - [x] **Edmonton's map drifts by two Retail pins** FIXED 2026-09-25 (AS_OF_DATE; see DECISIONS) (full drift check 2026-09-25: 1,032 in the
   rings against the committed 1,034; raw data and Edmonton's own code unchanged since 09-21).
   Find whether a shared module changed its output or the 2026-09-24 batch re-render used a

@@ -358,6 +358,23 @@ it needs that session's context.
 - **Say what you did not fix, and why.** A defect you decided to carry, with a
   date, is a work item. One you silently skipped is invisible in exactly the way
   this whole role exists to prevent.
+- **"Nothing uses X" is confirmed with a grep that has no glob.** On 2026-09-25
+  a Grep of `pipeline/` with glob `*/step*_map.py` found no `all_city_heat`,
+  though three step files pass it; a plain `grep -rn` (or the Grep tool with no
+  glob) found all three. A negative result from a filtered search is a claim
+  about the filter until an unfiltered one agrees.
+- **Start each batch in a FRESH session from the handoff.** The cleanup role
+  is permanent; a cleanup session is not. Every step costs in proportion to
+  everything the session already holds - by the end of 2026-09-24 one session
+  held three days of work and a one-line edit cost about what a small city
+  build did at its start. The handoff, `DECISIONS.md` and
+  `docs/map_inconsistencies.md` carry what matters between batches.
+- **Keep big text out of the conversation.** Print only the tail of a
+  command's output (`| tail -3`), read files by line range, let an agent do
+  broad reading and return a summary, and never `cat` a generated file (a
+  `heatmap.html`, a businesses CSV). "File changed on disk" notices for large
+  files like `app/cities.py` and `app/components.py` cost the same as pasting
+  them.
 
 ## Checks that exist today
 
