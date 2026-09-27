@@ -203,6 +203,8 @@ SLUG_OVERRIDES = {
     "Santos (Regional)": "santos",
     # Taiwan: Taipei + New Taipei as one regional page (2026-09-25).
     "Taipei (Regional)": "taipei",
+    # Mexico: four municipios as one regional page (2026-09-27).
+    "Monterrey (Regional)": "monterrey",
 }
 
 # A city's rows may name it differently from its page title - Vancouver's are
@@ -211,6 +213,7 @@ SLUG_OVERRIDES = {
 TABLE_ALIASES = {
     "Vancouver (Regional)": ("Vancouver", "Surrey"),
     "Guadalajara (Regional)": ("Guadalajara",),
+    "Monterrey (Regional)": ("Monterrey",),
     "Miami (Regional)": ("Miami",),
     "Lille (Regional)": ("Lille (Regional)",),
     "Taipei (Regional)": ("Taipei (Regional)",),

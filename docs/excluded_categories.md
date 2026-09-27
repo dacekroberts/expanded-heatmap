@@ -902,6 +902,42 @@ and for the same reason: it is tuned for English "SMITH JOHN" forms and the
 Spanish shop-sign convention pairs a trade type with a given name. Nothing is
 filtered on that number.
 
+### Monterrey (Regional) - four municipios by code, two lines under construction, and a whole-city layer
+
+**Everything excluded in Mexico City and Guadalajara is excluded here, from the
+same register:** Semifijo premises (3,269 units, 2.8%), SCIAN **469** nonstore
+retail and **812410** parking. Food service is anchored on **722** and personal
+services on **812**, so 721 accommodation, 811 repair and 813 associations never
+enter. Repair is the largest of those here - 9,593 fixed premises at the
+2026-09-27 screen, in an industrial city - and is most of why storefronts are a
+smaller share of fixed premises than in the other two Mexican cities.
+
+**No whole municipio is left out.** Monterrey, San Nicolás de los Garza,
+Guadalupe and General Escobedo are exactly the municipios a station's 0.6-mile
+ring reaches; no other municipio in Nuevo León has a Metrorrey station. They are
+selected by INEGI's municipio code, the same key OpenStreetMap carries, so the
+register and the boundaries cannot disagree about which municipio is which.
+
+**Storefronts located outside those four municipios are dropped: 22, 0.04%.**
+They are misplaced coordinates - some sit 550 km away - and the test is the
+municipios' own boundaries rather than a bounding box, which would have dropped
+about a hundred real storefronts in southern Monterrey.
+
+**Two lines are not drawn because they do not carry passengers yet.** Líneas 4
+and 6, a monorail network, are under construction; the operator's own map marks
+them so, and OpenStreetMap already carries eleven of their stations. The
+pipeline refuses to run if either appears in a Metrorrey route. Ecovía (bus
+rapid transit), TransMetro and MetroEnlace are buses, not rail.
+
+**The whole-city heat layer is ON here, unlike the other two Mexican cities**
+(owner's call, 2026-09-27). At 58,564 points it keeps the map small, and it
+loads on phones since heat data ships as `JSON.parse`.
+
+**The person-like reading is an artefact here too.** 34.4% of pins trip the
+heuristic; a hand-sample of 30 were all shop signs (a trade type with a name, or
+a brand), none a person presented as a person. One pin is dropped by the
+renderer's contact-detail scrub - a shop sign styled as an e-mail address.
+
 ### Madrid - accommodation, trades with no shopfront, and a zero where a location should be
 
 **Hotels and tourist flats are excluded** - accommodation rather than food

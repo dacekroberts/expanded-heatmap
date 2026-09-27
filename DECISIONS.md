@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**402 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**403 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Monterrey (Regional) built: Mexico's third city, scoped by INEGI's municipio code, Línea 3 in the operator's red](#2026-09-27---monterrey-regional-built-mexicos-third-city-scoped-by-inegis-municipio-code-línea-3-in-the-operators-red)
 - [Monterrey's three calls decided (owner)](#2026-09-27---monterreys-three-calls-decided-owner)
 - [Threshold probe closed (owner): the exact per-device limit no longer decides anything, and the 20,000 inline-literal cap is final](#2026-09-27---threshold-probe-closed-owner-the-exact-per-device-limit-no-longer-decides-anything-and-the-20000-inline-literal-cap-is-final)
 - [Monterrey (Regional) screened into Band A: its only negative was obsolete](#2026-09-27---monterrey-regional-screened-into-band-a-its-only-negative-was-obsolete)
@@ -450,6 +451,70 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Monterrey (Regional) built: Mexico's third city, scoped by INEGI's municipio code, Línea 3 in the operator's red
+
+- **Built Monterrey (Regional) on the national DENUE modules, and held it on
+  `worktree-monterrey` for a batch publish with a few smaller cities (owner).**
+  Step 1: 42 route-member nodes (37 `railway=station`, 5 `railway=stop`) → **38
+  stations**, all inside the four municipios (Monterrey 29 · San Nicolás de los
+  Garza 5 · Guadalupe 3 · General Escobedo 1); gate 3 exact against the
+  operator's 2026-05-08 network map, **19 / 13 / 9**; spacing minimum 519 m,
+  median 784 m. Step 2 baseline: `denue_rows` 211,349 → `in_scope_rows` 117,276
+  → `fijo_rows` 114,007 → `storefront_rows` 58,587 (Retail 37,869 · Food service
+  12,639 · Personal services 8,079) → `businesses_clean_rows` **58,565**. Step 3:
+  14,788 in-ring of 58,564 (the renderer's contact scrub drops one sign), a
+  2.7 MB map, no inline literal over the 20,000 cap. Page text, blurb and both
+  notice changes approved by the owner. Files: `pipeline/monterrey/`,
+  `app/pages/47_Monterrey_Heatmap.py`, `outputs/monterrey/`.
+- **Scoped by INEGI's municipio CODE, not its name - the first Mexican city to
+  do so.** OSM's `INEGI:MUNID` is DENUE's `cve_ent` + `cve_mun`, so the
+  boundaries (fetched by that tag) and the register join on one key with no
+  spelling between them; each code's DENUE name is still asserted, so a wrong
+  code raises. Rejected: Guadalajara's name match, whose "San Pedro Tlaquepaque"
+  trap is exactly what a code removes. `DENUE_MUNICIPIO_CODE_COLUMN` added to
+  `pipeline/countries/mexico.py`.
+- **Storefronts located by the four municipios' polygons, not a bounding
+  box.** The screen's OSM query box stops at 25.55 N while Monterrey municipio
+  runs to 25.48, so a box test dropped 121 storefronts, almost all real rows in
+  southern Monterrey (of the 218 fixed premises outside the box, 197 lie inside
+  the union). The polygon test drops 22, genuinely misplaced (some at 20.6 N).
+- **Línea 3 drawn in the operator's red, `#FF1646`**, per the owner's call. The
+  PDF carries CMYK; its only red, (0, 0.914, 0.726, 0), converts by the device
+  formula. With no PDF library installed, the content streams were inflated with
+  zlib and each colour's paths plotted with their transforms applied, so the
+  colour was identified by the ROUTE it draws (Línea 2's southern terminal
+  north-east to Hospital Metropolitano), not by hue; orange is Línea 6, purple
+  Línea 4. OSM's `#FF8000` rejected. Líneas 1 and 2 keep OSM's `#FEC04F` and
+  `#6BC069`, which agree in hue with the operator's. The PDF is never shown.
+- **The whole-city heat layer is ON (owner's call), unlike Mexico City and
+  Guadalajara**, whose layers stay under the cleanup session's reinstatement
+  review. 58,564 points in a 2.7 MB map, loading on phones since `JSON.parse`.
+- **Privacy verdict: publishable, the same structural position as Mexico City
+  and Guadalajara.** `check_personal_exposure.py monterrey`: 14,788 pins, no
+  registrant-name fallback, 0 e-mails and 0 phone numbers displayed; person-like
+  heuristic 34.4% (Mexico City 32.2%, Guadalajara 30.7%), and a hand-sample of 30
+  flagged names were all shop signs. Sign names searched for contact details:
+  one e-mail shape, a shop's sign ("MARY P@PER.COM PAPELERIA", dropped by the
+  renderer's scrub anyway); the 16 phone-shaped runs among fixed premises are
+  all Movistar branch codes, none of them in a storefront category.
+  `numero_int` measured at 7.4% and not published - a residence GAP, as for the
+  other two.
+- **Moved Guadalajara's and Mexico City's macro-map labels to make room for
+  Monterrey's.** Width 144.0 px, measured in the deployed app's frame with three
+  existing entries reproduced exactly. In the landing view the three Mexican
+  markers sit within ~25 px; Guadalajara's pill above its dot covered
+  Monterrey's marker, which no Monterrey offset could fix, and all 27 two-label
+  placements that cleared it put Guadalajara's pill left of its dot, clipping
+  it ~60% in the Mexico view at 375 px. A joint three-label search, scored with
+  `check_macro_labels.py`'s own geometry, chose Guadalajara `("middle", 0, 20)`,
+  Mexico City `("middle", 0, 32)` and Monterrey `("end", -12, 4)`: PROBLEMS 0,
+  Guadalajara's existing 9.8 px clip unchanged. To be seen in real pixels at
+  `deploy-verify`.
+- **Two records corrected in passing.** The brief cited "notice 1" beside
+  "OSM", which `check_provenance.py`'s citation check reads as naming INEGI;
+  it now names OpenStreetMap. `city_master_list.md`'s Built count is 47 on
+  this branch; its Band A counts are left to the staging session.
 
 ### 2026-09-27 - Monterrey's three calls decided (owner)
 

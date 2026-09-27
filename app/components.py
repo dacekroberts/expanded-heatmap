@@ -615,7 +615,8 @@ _NOTICES = [
     # many cities - every other source in this list serves exactly one.
     ("INEGI",
      "Fuente: INEGI, Directorio Estadístico Nacional de Unidades Económicas "
-     "(DENUE). Business locations for Mexico City and Guadalajara are from "
+     "(DENUE). Business locations for Mexico City, Guadalajara and Monterrey "
+     "are from "
      "DENUE, published by "
      "the Instituto Nacional de Estadística y Geografía, used under the "
      "Términos de Libre Uso de la Información del INEGI. The data has been "
@@ -633,7 +634,8 @@ _NOTICES = [
     # GEOMETRY too, which is data rather than tiles.
     ("OpenStreetMap (rail geometry)",
      "Rail route geometry and station locations for Mexico City (Metro CDMX "
-     "and Tren Ligero), Guadalajara (Tren Ligero) and Barcelona (Metro de "
+     "and Tren Ligero), Guadalajara (Tren Ligero), Monterrey (Metrorrey, with "
+     "the boundaries of its four municipios) and Barcelona (Metro de "
      "Barcelona, including its FGC lines and both funiculars), and the route "
      "geometry of Lille's two métro lines, the per-line colours of "
      "Oslo's T-bane and tram lines, and Copenhagen's Metro and S-tog lines "

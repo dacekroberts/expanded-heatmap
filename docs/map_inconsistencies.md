@@ -34,8 +34,8 @@ dense-looking city may simply have more complete records.
 - **Assembled from several activity-specific registers:** New York (4), Boston (3).
 - **Street surveys or censuses of premises:** Montréal, Madrid, Barcelona, and the
   nine Brazilian cities (IBGE's 2022 census walk).
-- **National statistical or establishment registers:** Mexico City and Guadalajara
-  (INEGI DENUE), the five French cities (SIRENE), Oslo (Enhetsregisteret sub-units),
+- **National statistical or establishment registers:** Mexico City, Guadalajara and
+  Monterrey (INEGI DENUE), the five French cities (SIRENE), Oslo (Enhetsregisteret sub-units),
   Copenhagen (CVR production units), Prague (ROS02 with RES).
 - **Property or building registers:** Dublin (rateable valuation list); Amsterdam
   and Rotterdam for shops (BAG shop-use units).
@@ -105,7 +105,7 @@ run on top of a metro network.
 are drawn on the line but get no ring. Some cover several municipalities because one
 register covers them all, or because the rail network only makes sense that way.
 - **Labelled "(Regional)":** Miami (Miami-Dade County), Vancouver (with Surrey),
-  Guadalajara (4 municipios), Lille (11 communes), Fortaleza (4), Porto Alegre (6),
+  Guadalajara (4 municipios), Monterrey (4 municipios), Lille (11 communes), Fortaleza (4), Porto Alegre (6),
   Recife (4), Santos (with São Vicente).
 - **Cover more than one municipality but are not labelled:** Montréal (the
   agglomeration: 19 boroughs and 15 related municipalities), Dublin (four local
@@ -181,8 +181,8 @@ really shopfronts. Several pages say which way their map leans.
   coordinates);
   Madrid (9.2% have a zero coordinate); Toronto (6.2% unmatched addresses); Rome
   (4.3% unmatched); Riga's food layer (only premises licensed to sell alcohol or tobacco); Prague (about 57,000 establishments whose owner's main activity is
-  something else); Miami (repair and service premises); Mexico City and Guadalajara
-  (street stalls); Copenhagen (tattoo studios); Chicago (licences with no
+  something else); Miami (repair and service premises); Mexico City, Guadalajara and
+  Monterrey (street stalls); Copenhagen (tattoo studios); Chicago (licences with no
   coordinates).
 - **Overcounts, or best read as upper bounds:** Milan (the six registers are not
   merged, so a business can count twice); Rome and Rotterdam (no closing dates, or a
@@ -208,7 +208,7 @@ classifies or licenses them.
   care in Vancouver/Surrey, where British Columbia regulates it.
 - **Adult premises:** body-rub and similar premises are excluded on sensitivity in
   Calgary, Edmonton, Toronto and Vancouver. UNKNOWN for other cities.
-- **Street stalls:** excluded in Mexico City and Guadalajara; market-stall trading is
+- **Street stalls:** excluded in Mexico City, Guadalajara and Monterrey; market-stall trading is
   excluded by code in France.
 - **Web shops:** excluded by code in France; cannot be excluded in Oslo, Copenhagen or
   Prague.
@@ -259,6 +259,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Mexico** | | | | | |
 | Mexico City | Metro, 12 lines + Tren Ligero | not stated (Tren Suburbano, Cablebús) | OpenStreetMap | CDMX | 10 / 0 |
 | Guadalajara (Regional) | Tren Ligero L1–L4 | — | OpenStreetMap (only GTFS expired 2023, lacks L4) | 4 municipios; Tonalá out | no CSV (all in scope) / 0 |
+| Monterrey (Regional) | Metrorrey L1–L3 | Líneas 4 and 6 (monorail, under construction) | OpenStreetMap (no agency data published); L3 in the operator's red | 4 municipios, by INEGI code | no CSV (all in scope) / 0 |
 | **Spain** | | | | | |
 | Madrid | Metro L1–L12 + Ramal | Cercanías; Metro Ligero | CRTM ArcGIS layers | Municipio | 49 / 0 |
 | Barcelona | Metro L1–L12 (TMB+FGC) + 2 funiculars | Trams | OpenStreetMap | Municipi | 50 / 0 |
@@ -326,6 +327,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Mexico** | | | | | |
 | Mexico City | National statistical register | INEGI DENUE | SCIAN | 94,642 / 24,938 / 13,782 | Street stalls excluded |
 | Guadalajara (Regional) | National statistical register | INEGI DENUE | SCIAN | 26,341 / 6,723 / 3,861 | Street stalls excluded |
+| Monterrey (Regional) | National statistical register | INEGI DENUE | SCIAN | 10,164 / 3,108 / 1,516 | Street stalls excluded |
 | **Spain** | | | | | |
 | Madrid | Premises census | Censo de locales | Own epígrafe | 26,109 / 16,151 / 8,032 | — |
 | Barcelona | Street survey (2022) | Cens de locals en planta baixa | Own 4-level scheme (finest level) | 20,287 / 9,976 / 5,673 | 458 mixed retail/wholesale rows dropped |
@@ -393,6 +395,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Mexico** | | | |
 | Mexico City | Source coordinates (100%) | Street stalls not shown | Semifijo units, SCIAN 469, 812410 |
 | Guadalajara (Regional) | Source coordinates | Street stalls not shown | Same as Mexico City; Tonalá |
+| Monterrey (Regional) | Source coordinates | Street stalls not shown | Same as Mexico City; 22 located outside the four municipios dropped |
 | **Spain** | | | |
 | Madrid | Source coordinates; 9.2% zero, dropped | 1 premises in 11 cannot be placed | Accommodation, wholesale, repair, no-shopfront |
 | Barcelona | Source coordinates; zeros dropped (count UNKNOWN) | Survey is 2022 | Vacant units (1 in 9), hotels, 458 mixed rows |
@@ -455,6 +458,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | **Mexico** | | | | | | |
 | Mexico City | UNKNOWN edition (2026-09-22) | — | 0.6 mi | **No** | — (about 47% per EC) | Shop sign |
 | Guadalajara (Regional) | UNKNOWN edition (2026-09-22) | — | 0.6 mi | **No** | — | Shop sign |
+| Monterrey (Regional) | DENUE 05_2026 (2026-09-27) | — | 0.6 mi | Yes | 25% | Shop sign |
 | **Spain** | | | | | | |
 | Madrid | Portal refreshed daily (2026-09-22) | — | 0.6 mi | Yes | 94% | Trade name |
 | Barcelona | 2022 survey (2026-09-22) | B (prose) | 0.6 mi | Yes | 100% | Unit name |

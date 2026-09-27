@@ -141,6 +141,10 @@ TEXT_WIDTH = {
     "Taoyuan": 57.4,
     # Taipei (Regional) measured in the same run as Taichung (2026-09-25).
     "Taipei (Regional)": 112.5,
+    # Monterrey (Regional) measured 2026-09-27 in the deployed app's own frame
+    # (/~/+/), font reported loaded, with three entries reproduced exactly in
+    # the same run (Guadalajara (Regional) 152.7, Los Angeles 80.8, Madrid 47.2).
+    "Monterrey (Regional)": 144.0,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,

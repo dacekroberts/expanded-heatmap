@@ -801,6 +801,18 @@ brief names.
 - [x] **The batch publish** (2026-09-25, owner rebooted; live-checked) - Seoul, Taichung, Taoyuan, Taipei (Regional): `deploy-verify`
   (city-added x4 + East Asia), merge master, fetch, push, reboot, live check; retire the
   junctions and the `-tmp` launch entries.
+- [ ] **🇲🇽 MONTERREY (REGIONAL) - BUILT 2026-09-27 on branch `worktree-monterrey`, HELD for a
+  batch publish with a few smaller cities (owner): 58,565 storefronts, 38 stations, Metrorrey
+  Líneas 1–3 across four municipios.** Page 47; text, blurb, notices and the whole-city layer
+  approved (owner). Done up to `deploy-verify`: steps 1–3, provenance, scope disclosure,
+  inconsistency rows, privacy verdict, label width (144.0) and placement - which moved
+  Guadalajara's pill below its dot and Mexico City's 10 px lower. Still to do, at the batch:
+  - [ ] `deploy-verify` (city-added, plus the Mexico and landing views for the three moved labels)
+  - [ ] `check_deploy_imports.py` with `.venv-lean` linked, merge master, fetch, push, **reboot**
+    (`cities.py` and `components.py` change), live check
+  - [ ] Staging: reconcile `city_master_list.md`'s Band A counts (Monterrey is counted in Built
+    on this branch and still in Band A's "7 ready")
+  - [ ] Retire the `data/` junction and the `monterrey-static-tmp` launch entry
 - [ ] **Seoul's map still 24 MB after its whole-city heat layer was dropped (owner,
   2026-09-25: it would not load on the owner's phone at 30 MB).** After the reset: measure
   what fills it, then shrink further (coordinate precision, per-pin tooltip text, pin

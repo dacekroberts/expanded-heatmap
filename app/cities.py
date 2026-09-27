@@ -394,7 +394,15 @@ CITIES = [
         # "Guadalajara (Regional)" (19x0 px). At dy +22 it sits y308-325 and
         # clears both - including the Los Angeles overlap, which predated this
         # city and was reported as out of scope.
-        "label_offset": ("middle", 0, 22),
+        #
+        # dy 22 -> 32 on 2026-09-27, when Monterrey arrived. In the landing
+        # view the three Mexican markers sit within ~25 px of each other, and
+        # Guadalajara's pill had to move from above its dot (where it covered
+        # Monterrey's marker) to below it - which needs this pill 10 px lower
+        # so the two stack instead of colliding. Chosen by a joint search of all
+        # three offsets scored with check_macro_labels.py's own geometry, then
+        # confirmed by the check itself.
+        "label_offset": ("middle", 0, 32),
     },
     {
         # REGIONAL, like Miami and Vancouver: SITEUR's own description has
@@ -434,7 +442,15 @@ CITIES = [
         # tall and a marker 5 px in radius, which needs |dy| >= 14. At
         # ("middle", 0, -16) the label sits above its dot, clears it, and also
         # clears Mexico City and Miami at every width.
-        "label_offset": ("middle", 0, -16),
+        #
+        # BELOW its dot since 2026-09-27: above it, the pill covered
+        # Monterrey's marker in the landing view, where Monterrey sits 21 px
+        # above and 12 px right of Guadalajara. dy stays well past the 14 px
+        # the marker needs, and "middle" keeps the west-edge clip where it was
+        # (the left-anchored placements that cleared Monterrey clipped this
+        # pill ~60% in the Mexico view at 375 px). Mexico City's pill moved 10 px
+        # lower to make room; see its entry.
+        "label_offset": ("middle", 0, 20),
     },
     {
         "name": "Madrid",
@@ -973,6 +989,28 @@ CITIES = [
         # zoom (Taoyuan's name goes west). Scored by check_macro_labels.py (width
         # 112.5 px, measured 2026-09-25).
         "label_offset": ("start", 10, 0),
+    },
+    {
+        # REGIONAL, owner's call 2026-09-27: Línea 2 runs through San Nicolás de
+        # los Garza to Sendero in General Escobedo and Línea 1 reaches Guadalupe,
+        # so a Monterrey-only build would cut Línea 2 short. The page file keeps
+        # the plain city name, as Guadalajara's and Miami's do.
+        "name": "Monterrey (Regional)",
+        "lat": 25.6866,
+        "lon": -100.3161,
+        "page": "pages/47_Monterrey_Heatmap.py",
+        "blurb": "Metrorrey (Líneas 1–3, across four municipios)",
+        "region": "Mexico",
+        "country": "Mexico",
+        # Outside the United States frame, like Mexico City and Guadalajara.
+        "in_default_view": False,
+        # WEST of its dot, slightly below. Above it (the scaffold's default)
+        # the pill sat under the theme button in the Mexico view at 375 px -
+        # Monterrey is that frame's north-easternmost city - and to its east
+        # it ran under the zoom buttons. Width measured, 144.0 px; placed with
+        # Guadalajara's and Mexico City's pills by one joint search (see
+        # theirs), confirmed by check_macro_labels.py.
+        "label_offset": ("end", -12, 4),
     },
 ]
 
