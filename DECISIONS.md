@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**404 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**405 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Mexico City's and Guadalajara's whole-city heat layers restored (owner): every map now has one](#2026-09-27---mexico-citys-and-guadalajaras-whole-city-heat-layers-restored-owner-every-map-now-has-one)
 - [The lost research data restored into main's data/: 466 files, and 82 HTML placeholders caught and replaced](#2026-09-27---the-lost-research-data-restored-into-mains-data-466-files-and-82-html-placeholders-caught-and-replaced)
 - [Mobile mode removed and Seoul's whole-city heat layer restored (owner): the full maps load on the iPhone once their data is JSON.parse](#2026-09-27---mobile-mode-removed-and-seouls-whole-city-heat-layer-restored-owner-the-full-maps-load-on-the-iphone-once-their-data-is-jsonparse)
 - [Monterrey's three calls decided (owner)](#2026-09-27---monterreys-three-calls-decided-owner)
@@ -452,6 +453,37 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Mexico City's and Guadalajara's whole-city heat layers restored (owner): every map now has one
+
+- **Owner's call**, after Seoul's full map (then 18.8 MB, now 24.2 MB with
+  its own layer back) loaded on the owner's iPhone.
+- **Superseded**:
+  - 2026-09-22's `all_city_heat` "off for this city" (Mexico City).
+    That was a file-size decision taken before any phone test, whose
+    remaining reasons were parse cost (which JSON.parse removes) and
+    repository bytes.
+  - Guadalajara's matching switch-off, which existed only for consistency
+    with Mexico City.
+- **Mexico City**: +283,345 points, 11.14 to 17.59 MB. **Guadalajara**:
+  +117,454 points, 3.19 to 5.98 MB.
+  - Guadalajara's figure was recorded in PLAN as 36,925, which is its
+    station-area layer. At 117,454, its layer as a literal would itself
+    have been over the iPhone's 110,861 limit.
+  - The dots and the station-area layers are unchanged (old vs new
+    decoded).
+- **Prose removed, none added**:
+  - Page 15's "Unlike the other cities, this map has no whole-city
+    layer..." and page 16's "Unlike most cities here...".
+  - The two paragraphs in `docs/excluded_categories.md` saying the layer is
+    OFF.
+  - In `docs/map_inconsistencies.md`, theme 12 is marked resolved (the
+    heading is kept so references resolve). Table D now reads Yes, with
+    in-ring shares of 47% and 31%, and theme 7's "cannot be measured"
+    bullet is gone.
+- **Checks**: inline arrays 0 over; scope disclosure, inconsistency list,
+  provenance and render-current all OK.
+- **App pages changed (15, 16)**, so a reboot is needed after the push.
 
 ### 2026-09-27 - The lost research data restored into main's data/: 466 files, and 82 HTML placeholders caught and replaced
 

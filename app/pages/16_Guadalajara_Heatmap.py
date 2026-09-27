@@ -68,10 +68,6 @@ Fixed premises only. DENUE separately records semi-fixed units — stalls and
 street posts — and those are not shown, although street commerce is a real part
 of the region's retail.
 
-Unlike most cities here, this map has no whole-city layer: there is no
-option to show every business in the region at once, only those near a
-station.
-
 Concentric ring boundaries and the three business categories (Retail, Food
 service and Personal services) are toggleable via the layer control in the top
 left. When enabled, business density will display as numbered circles summing

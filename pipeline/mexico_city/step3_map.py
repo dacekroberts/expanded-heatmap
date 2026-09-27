@@ -88,9 +88,9 @@ def main():
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
         label_focus=city_boundary(),
-        # 283,345 coordinate pairs against 133,362 in the default layer - see
-        # map_common. Stated on the city page rather than dropped silently.
-        all_city_heat=False,
+        # The whole-city layer (283,345 points) is back (owner, 2026-09-27). It
+        # was dropped 2026-09-22 for file size; once the data shipped as
+        # JSON.parse, Seoul's heavier map loaded on the owner's iPhone.
     )
 
 

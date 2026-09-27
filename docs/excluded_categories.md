@@ -848,13 +848,6 @@ professional associations never enter. Food service is anchored on **722**, not
 precision the NAICS cities use; a two-digit prefix would have been the
 obvious-looking mistake.
 
-**The whole-city heat layer is OFF for this city**, as it is for Guadalajara,
-built from the same census. Most cities here offer an opt-in layer showing all
-of their businesses, not only those within a station ring. Mexico City's would
-carry 283,345 points against 133,362 in the default layer, and dropping it cut
-the rendered file from 25.7 MB to 19.0 MB. So the map shows density **around
-stations** and does not offer the whole-city comparison most other cities do.
-
 **What is NOT excluded, and is worth stating because the number looks
 alarming:** `scripts/check_personal_exposure.py` reports that 32.2% of Mexico
 City's pins "look like a person". A hand-sample of 26 found **none** that were
@@ -883,10 +876,6 @@ businesses that no ring can ever contain, so including it would have inflated
 the city total while changing no ring. The four municipios kept -
 Guadalajara, Zapopan, San Pedro Tlaquepaque and Tlajomulco de Zúñiga - are the
 ones SITEUR's own line descriptions name.
-
-**The whole-city heat layer is OFF, as Mexico City's is.** The rings and the
-three categories toggle from the layer control; there is no option to show
-every business in the region at once.
 
 **An operating line is NOT excluded, and it nearly was.** The only GTFS feed
 available for Guadalajara expired on 28 January 2023 and contains three of the
