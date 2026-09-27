@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**402 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**403 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [The lost research data restored into main's data/: 466 files, and 82 HTML placeholders caught and replaced](#2026-09-27---the-lost-research-data-restored-into-mains-data-466-files-and-82-html-placeholders-caught-and-replaced)
 - [Monterrey's three calls decided (owner)](#2026-09-27---monterreys-three-calls-decided-owner)
 - [Threshold probe closed (owner): the exact per-device limit no longer decides anything, and the 20,000 inline-literal cap is final](#2026-09-27---threshold-probe-closed-owner-the-exact-per-device-limit-no-longer-decides-anything-and-the-20000-inline-literal-cap-is-final)
 - [Monterrey (Regional) screened into Band A: its only negative was obsolete](#2026-09-27---monterrey-regional-screened-into-band-a-its-only-negative-was-obsolete)
@@ -450,6 +451,47 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - The lost research data restored into main's data/: 466 files, and 82 HTML placeholders caught and replaced
+
+- **Restored the caches lost with the old staging worktree**, on the owner's
+  approval (relayed by Cleanup, whose script this was), into the MAIN
+  checkout's gitignored `data/`. The source was the surviving
+  `fetch_log.jsonl` (2026-09-24 entries), downloaded no-clobber.
+- **Excluded**:
+  - Cleanup's list: the Helsinki 2019 CSV (a privacy deletion), and every
+    discarded city's folder (Nagoya with its 14 Wayback files, Vienna,
+    Santiago, Athens, Messina).
+  - **Staging added 21 files**, all ruled NOT PERMITTED or unused on
+    2026-09-24: Shinjuku's six PDF lists and Chūō's three personal-services
+    xlsx, both carrying operator columns, and Kōtō's twelve monthly lists.
+    The same wards' USED open-data files were restored.
+- **Result: 466 files, none missing, none HTML, every file's first bytes
+  matching its extension.**
+  - **6 differ slightly in size from the log**: publisher updates to live
+    datasets (two Helsinki layers, two Riga files, Fukuoka's `r8.7.csv`, and
+    Tallinn's building layer).
+  - The first run crashed at about file 274 on a cp1252 console printing a
+    Japanese path. The UTF-8 re-run resumed with no-clobber, including one
+    MLIT 502.
+- **82 Kyoto files arrived as HTML, and a type check caught them.** The
+  restore compared sizes, not types.
+  - **Cause**: for Kyoto the fetch log recorded the resource PAGE
+    (`data.city.kyoto.lg.jp/resource/?id=…`), not the file.
+  - **Fix**: the portal's download is the page's own button, a POST back to
+    the page with a hidden `upload_file` field (no login, no personal data).
+    Pressing it restored all 82, byte-identical to the log.
+  - **For Kyoto's build**: its `fetch_sources.py` must press that button.
+    A GET on the logged URL yields the page.
+- **`docs/japan_city_list.md` regenerated from the restored data.** It now
+  carries the first-blocker rule and Hiroshima's tram note. Fukuoka moves by
+  about ten rows (18,330 → 18,319 restaurants), from the publisher's updated
+  `r8.7.csv`.
+- **Main was told** that Japanese builds wait for this, per the owner. It is
+  now done and checked.
+- Also fixed: `monterrey.md` cited notice 1 beside "OSM" without naming
+  OpenStreetMap, which `check_provenance.py` refused (Cleanup's catch). It
+  passes now.
 
 ### 2026-09-27 - Monterrey's three calls decided (owner)
 

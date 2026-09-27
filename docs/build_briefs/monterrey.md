@@ -108,7 +108,7 @@ cities. Only the owner's three calls stand before the build.**
   read** (`docs/data_sources.md`). **No new notice**: INEGI notice 8 covers it
   and already requires disclosing transformations. The page states the
   four-municipio scope and the `Fijo` and bucket filters.
-- OSM rail and boundaries: ODbL, notice 1.
+- OpenStreetMap rail and boundaries: ODbL, credited by notice 1 (© OpenStreetMap contributors).
 - Add a `data_sources.md` row for Monterrey (provenance) at build. The nl.gob.mx
   site terms are unread; the PDF is not republished.
 
