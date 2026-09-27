@@ -659,11 +659,21 @@ def pins(slug):
     A bare string at row[3] is still accepted, so a map rendered before the
     change reads correctly instead of raising - which matters because these
     outputs are committed and are re-rendered city by city.
+
+    SINCE 2026-09-27 the rows ship as `var data = JSON.parse("...")` - a JS
+    string holding the JSON, because WebKit will not compile a literal of
+    more than ~107k-131k elements (map_common, above `_js_json`). The string
+    is itself valid JSON, so it decodes with two json.loads calls. The old
+    literal form is still read, in the same document order, for the same
+    reason as the bare-string row[3] above.
     """
     text = (ROOT / "outputs" / slug / "heatmap.html").read_text(encoding="utf-8")
     tables = [json.loads(t) for t in
               re.findall(r"var CATEGORIES = (\[.*?\]);", text, re.S)]
-    blocks = re.findall(r"var data = (\[\[.*?\]\]);", text, re.S)
+    blocks = [json.loads(m.group(1)) if m.group(1) is not None else m.group(2)
+              for m in re.finditer(
+                  r'var data = (?:JSON\.parse\(("(?:[^"\\]|\\.)*")\)|(\[\[.*?\]\]));',
+                  text, re.S)]
     if tables and len(tables) != len(blocks):
         raise SystemExit(
             f"{slug}: {len(tables)} CATEGORIES tables against {len(blocks)} "

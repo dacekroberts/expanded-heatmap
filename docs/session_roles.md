@@ -161,8 +161,21 @@ caches, and Rennes' feed is quota-limited. Before removing a worktree:
    That day the leftover folder was deleted recursively BEFORE its junction
    was noticed. The target survived - both SIRENE files kept their size and
    timestamps - which was luck, not procedure.
-2. **Copy any `data/<city>/` the main checkout lacks** into the main
-   checkout's `data/`, no-clobber (`cp -rn`), and `diff -rq` the two.
+2. **Save the worktree's WHOLE `data/` first - every folder, not only built
+   cities.** Copy what the main checkout lacks into the main checkout's
+   `data/`, no-clobber (`cp -rn`), then run
+   `python scripts/check_worktree_data.py <worktree>` until it passes: it
+   refuses while any file is absent from main or has a different size there.
+   A research worktree holds caches that no `fetch_sources.py` re-creates:
+   national files (`data/japan`, `data/mhlw`), unbuilt cities, one-off probe
+   downloads, archive-recovered files and stitched registers. **On
+   2026-09-27 the old staging worktree was found gone with ~1.2 GB that
+   existed nowhere else** - Japan's city registers, the ISJ/N02/N03/e-Stat
+   files, and Helsinki, Tallinn, Vienna and part of Riga. The rule then
+   read "any `data/<city>/`", which a national folder does not match.
+   Copenhagen's cache (2026-09-24) was saved because someone looked. The
+   same applies to a worktree removed by any other route (a session's
+   worktree cleanup, a manual delete): run the check first.
 3. Then the three commands above. If Windows leaves an empty folder behind,
    re-run step 1's listing on it before deleting it.
 4. **`Filename too long` stops `git worktree remove` partway.** A worktree

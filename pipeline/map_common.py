@@ -24,6 +24,7 @@ import geopandas as gpd
 import numpy as np
 import pandas as pd
 from folium.plugins import HeatMap, FastMarkerCluster
+from folium.template import Template
 
 from pipeline.linecolour import check_line_colours, dark_label_colours, label_colours
 from pipeline.taxonomies import CATEGORY_BUCKETS, load_taxonomy_module
@@ -1687,6 +1688,96 @@ def nearest_station_and_ring(businesses, stations, crs_geographic, crs_projected
     return sta_gdf["station"].to_numpy()[nearest_idx], [band(d) for d in nearest_dist]
 
 
+# WHY THE BIG ARRAYS ARE SHIPPED AS JSON.parse("...") AND NOT AS LITERALS
+# (2026-09-27). WebKit - every iOS browser - refuses to compile one inline
+# array literal above roughly 107k-131k elements ("RangeError: Maximum call
+# stack size exceeded"), and the map goes blank with no visible error. Every
+# map that failed on the owner's iPhone had a heat literal of 133,335+ points;
+# every map that loaded was at 106,652 or below. JSON.parse of the same data
+# as one string loaded, because a string literal is one token to the compiler.
+# See DECISIONS 2026-09-27 and PLAN's "Seoul's map still 24 MB" item.
+#
+# So the two Folium elements that carry per-business data are subclassed with
+# their own templates, identical to Folium 0.20's except the data line. Folium
+# keeps no template source to patch, so these are copies: a Folium upgrade
+# does not change them, and scripts/check_inline_arrays.py fails any committed
+# map that has an oversized inline literal again, whatever the cause.
+#
+# COUPLED TO scripts/check_personal_exposure.py, which parses the pin arrays
+# back out of the rendered HTML. Change the two together.
+
+
+def _js_json(data):
+    """`data` as a JavaScript string literal holding its JSON, safe to place
+    inside a <script> element: JSON inside a JS string inside HTML.
+
+    Built only from library calls, never by hand: json.dumps of the data, then
+    json.dumps of that text (a JSON string is a valid JS string literal), then
+    the characters HTML or old engines could still misread are replaced with
+    their \\u escapes, which decode back to the same characters inside the
+    string - `<` (so no `</script>` or `<!--` can close or confuse the
+    element), `>`, `&`, and U+2028/U+2029 (line terminators in pre-2019 JS).
+
+    allow_nan=False because JSON.parse rejects NaN: a bad row must fail the
+    BUILD here, not blank the published map."""
+    inner = json.dumps(data, allow_nan=False, ensure_ascii=False, separators=(",", ":"))
+    outer = json.dumps(inner, ensure_ascii=False)
+    for ch, esc in (("<", "\\u003c"), (">", "\\u003e"), ("&", "\\u0026"),
+                    (" ", "\\u2028"), (" ", "\\u2029")):
+        outer = outer.replace(ch, esc)
+    return outer
+
+
+class ParsedHeatMap(HeatMap):
+    """Folium's HeatMap, with its points shipped as JSON.parse("...")."""
+    _template = Template(
+        """
+        {% macro script(this, kwargs) %}
+            var {{ this.get_name() }} = L.heatLayer(
+                JSON.parse({{ this.data_js }}),
+                {{ this.options|tojavascript }}
+            );
+        {% endmacro %}
+        """
+    )
+
+    @property
+    def data_js(self):
+        return _js_json(self.data)
+
+
+class ParsedFastMarkerCluster(FastMarkerCluster):
+    """Folium's FastMarkerCluster, with its rows shipped as JSON.parse("...")."""
+    _template = Template(
+        """
+        {% macro script(this, kwargs) %}
+            var {{ this.get_name() }} = (function(){
+                {{ this.callback }}
+
+                var data = JSON.parse({{ this.data_js }});
+                var cluster = L.markerClusterGroup({{ this.options|tojavascript }});
+                {%- if this.icon_create_function is not none %}
+                cluster.options.iconCreateFunction =
+                    {{ this.icon_create_function.strip() }};
+                {%- endif %}
+
+                for (var i = 0; i < data.length; i++) {
+                    var row = data[i];
+                    var marker = callback(row);
+                    marker.addTo(cluster);
+                }
+
+                cluster.addTo({{ this._parent.get_name() }});
+                return cluster;
+            })();
+        {% endmacro %}"""
+    )
+
+    @property
+    def data_js(self):
+        return _js_json(self.data)
+
+
 def _esc(value):
     """HTML-escape a value for the tooltip. Business names come from public
     datasets but are still free text - an unescaped '<' or '&' breaks the
@@ -1787,8 +1878,8 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
     # it at load. Wrap it in a FeatureGroup, which does respect show=.
     # Do not "simplify" this back to FastMarkerCluster(show=...).
     fg = folium.FeatureGroup(name=f"<b>Businesses: {group_name} ({len(data):,})</b>", show=show)
-    FastMarkerCluster(data, callback=callback, icon_create_function=icon_create_function,
-                      options={"animate": animate}).add_to(fg)
+    ParsedFastMarkerCluster(data, callback=callback, icon_create_function=icon_create_function,
+                            options={"animate": animate}).add_to(fg)
     fg.add_to(m)
     return len(data)
 
@@ -2012,10 +2103,10 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
 
     # Two heat layers, same tuning, different universe: within-rings is the
     # default; the whole-city one is an opt-in for context.
-    HeatMap(in_rings[["latitude", "longitude"]].round(COORD_DP).values.tolist(),
-            radius=HEAT_RADIUS, blur=HEAT_BLUR, min_opacity=HEAT_MIN_OPACITY,
-            gradient=HEAT_GRADIENT, name="Commercial Density (Within Station Proximity)",
-            show=True).add_to(m)
+    ParsedHeatMap(in_rings[["latitude", "longitude"]].round(COORD_DP).values.tolist(),
+                  radius=HEAT_RADIUS, blur=HEAT_BLUR, min_opacity=HEAT_MIN_OPACITY,
+                  gradient=HEAT_GRADIENT, name="Commercial Density (Within Station Proximity)",
+                  show=True).add_to(m)
     # The whole-city layer is OPT-OUT PER CITY, because it carries one
     # coordinate pair per business in the city and nothing filters it. In most
     # cities that is a modest cost; in Mexico City it is 283,345 pairs against
@@ -2024,10 +2115,10 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # Passing False drops the layer and says so on the city page - the map's
     # own question is density AROUND stations, and this layer is context.
     if all_city_heat:
-        HeatMap(businesses[["latitude", "longitude"]].round(COORD_DP).values.tolist(),
-                radius=HEAT_RADIUS, blur=HEAT_BLUR, min_opacity=HEAT_MIN_OPACITY,
-                gradient=HEAT_GRADIENT, name=f"Commercial Density (All {city_name} Businesses)",
-                show=False).add_to(m)
+        ParsedHeatMap(businesses[["latitude", "longitude"]].round(COORD_DP).values.tolist(),
+                      radius=HEAT_RADIUS, blur=HEAT_BLUR, min_opacity=HEAT_MIN_OPACITY,
+                      gradient=HEAT_GRADIENT, name=f"Commercial Density (All {city_name} Businesses)",
+                      show=False).add_to(m)
 
     for i, label in enumerate(ring_labels):
         layer = folium.FeatureGroup(name=f"Concentric Ring {i + 1}: {label}",

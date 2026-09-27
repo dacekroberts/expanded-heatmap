@@ -16,12 +16,15 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**399 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**402 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
 - [Monterrey's three calls decided (owner)](#2026-09-27---monterreys-three-calls-decided-owner)
+- [Threshold probe closed (owner): the exact per-device limit no longer decides anything, and the 20,000 inline-literal cap is final](#2026-09-27---threshold-probe-closed-owner-the-exact-per-device-limit-no-longer-decides-anything-and-the-20000-inline-literal-cap-is-final)
 - [Monterrey (Regional) screened into Band A: its only negative was obsolete](#2026-09-27---monterrey-regional-screened-into-band-a-its-only-negative-was-obsolete)
+- [The old staging worktree went with ~1.2 GB of research data; the retirement rule now covers ALL of data/, and check_worktree_data.py refuses until it is saved](#2026-09-27---the-old-staging-worktree-went-with-12-gb-of-research-data-the-retirement-rule-now-covers-all-of-data-and-check_worktree_datapy-refuses-until-it-is-saved)
+- [Every map ships its heat points and business dots as JSON.parse("..."): no inline literal over 20,000 elements remains, 190.1 MB to 171.1 MB, and a check keeps it so](#2026-09-27---every-map-ships-its-heat-points-and-business-dots-as-jsonparse-no-inline-literal-over-20000-elements-remains-1901-mb-to-1711-mb-and-a-check-keeps-it-so)
 - [Trams count; Band T (trams only) created; first blocker wins, universally (owner)](#2026-09-27---trams-count-band-t-trams-only-created-first-blocker-wins-universally-owner)
 - [iPhone blank maps: the cause is a per-literal compile limit, not memory; which layer trips it per city, and why Seoul's layer drop bought nothing](#2026-09-27---iphone-blank-maps-the-cause-is-a-per-literal-compile-limit-not-memory-which-layer-trips-it-per-city-and-why-seouls-layer-drop-bought-nothing)
 
@@ -460,6 +463,51 @@ onwards; the early ones are split by phase rather than by hour.
     exact hex is read from the operator's vector PDF at build.
 - Monterrey now has nothing blocking its build. Recorded in `monterrey.md`
   and `city_master_list.md`.
+### 2026-09-27 - Threshold probe closed (owner): the exact per-device limit no longer decides anything, and the 20,000 inline-literal cap is final
+
+- **Owner's call**: mark the array-limit probe done, as a problem-solving
+  strategy for the business clusters, rather than run it.
+- **Why it can close.** The probe was planned (2026-09-25) to find the
+  exact element count WebKit refuses, before choosing a cap. The JSON.parse
+  fix, live since this morning's push, took every business-cluster and heat
+  array out of literal form. The largest literal left on a re-rendered map
+  is about 1,000 elements, so no plausible per-device limit changes what is
+  shipped.
+- **What that makes final**: `check_inline_arrays.py`'s cap of 20,000,
+  entered as provisional in the fix's entry above. It sits five times under
+  the 106,652 the owner's phone is proven to compile.
+- **One run was recorded before it closed** - the owner's iPhone 16 Pro,
+  iOS 18.7, inside the Claude app's web view (UA ends
+  `Claude/1.260916.19`), 2026-09-27, injected-script method. It bisected
+  each shape to the exact count and repeated the two boundary sizes twice;
+  every repeat agreed.
+
+  | Shape | Largest that compiles | Smallest that fails |
+  |---|---|---|
+  | Heat pairs `[lat, lon]`, as `L.heatLayer(...)` | 110,861 | 110,862 (`RangeError: Maximum call stack size exceeded.`) |
+  | Dot rows `[lat, lon, "name", cat, station, band]`, as `var data` | 110,852 | 110,853 (same error) |
+  | Flat numbers | 1,048,576 (every size tried) | none found |
+  | `JSON.parse`, heat pairs | 2,000,000 in 0.19 s | none up to 2,000,000 |
+  | `JSON.parse`, dot rows | 1,000,000 in 0.20 s | none up to 1,000,000 |
+
+  - **The limit is on literals made of literals, not on element count.**
+    A flat million compiles, while 110,862 two-element pairs do not. The
+    nine-row gap between the two nested shapes fits the dot data's extra
+    function wrapper using a little more stack.
+  - **Rio's 106,652 was within 4% of the limit.** Nothing had been wrong
+    with it only by luck.
+  - **JSON.parse has at least seven times headroom over Seoul's 224,381,
+    and is fast.** Parse time is not what will make a big map slow.
+  - **Not measured**: Safari itself, other phones, older iOS. The closure
+    makes these unnecessary for the cap. The check's cap counts every
+    literal, flat ones included, which is stricter than the measured
+    behaviour and so safe.
+- **What stays open**: the real-device browser matrix on the fixed maps.
+  The probe could never answer whether a map loads, or how heavy it is once
+  it compiles. That decides the reversals (Seoul's whole-city layer, mobile
+  mode).
+- **The probe page stays up**, private
+  (claude.ai/artifact/1p4zAituB6PQy9Ksrrv6R3).
 
 ### 2026-09-27 - Monterrey (Regional) screened into Band A: its only negative was obsolete
 
@@ -499,6 +547,109 @@ onwards; the early ones are split by phase rather than by hour.
 - Files: `docs/build_briefs/monterrey.md` (5/5) and `city_master_list.md`
   (Band A, counts 20 → 21).
 
+### 2026-09-27 - The old staging worktree went with ~1.2 GB of research data; the retirement rule now covers ALL of data/, and check_worktree_data.py refuses until it is saved
+
+- **Reported by the Staging Session and the owner**: when the old staging
+  worktree was retired, its gitignored `data/` went with it. That held
+  Japan's city files (Osaka, Kobe, Sapporo, Fukuoka, Kyoto, Tokyo's wards,
+  Sendai, Hiroshima, Nagoya, Yokohama); `data/japan` (MLIT ISJ, N02, N03);
+  `data/mhlw` (e-Stat); and Helsinki, Tallinn, Vienna and part of Riga.
+  - **Builds are unaffected**: each re-downloads through its own
+    `fetch_sources.py`.
+  - **`scripts/japan_ward_table.py --write` cannot run** until Osaka's
+    `260630zenku.csv` and the rest are back.
+- **Why the rule did not catch it.** `docs/session_roles.md` step 2 said to
+  copy "any `data/<city>/` the main checkout lacks". A national folder
+  (`data/japan`, `data/mhlw`) does not read as a city, and nothing enforced
+  the step at all. Which route removed the worktree is not recorded here.
+- **The fix, as a check**: `scripts/check_worktree_data.py <worktree>` walks
+  the worktree's `data/` without following junctions, and refuses while any
+  file is absent from the main checkout or there at a different size.
+  - **Positive control**: the live staging worktree is refused, with
+    26 files and 215.5 MB (Monterrey and the French second-city screens)
+    that exist only there.
+  - **Negative control**: the cleanup worktree passes.
+- **Step 2 was rewritten** as "save the worktree's WHOLE `data/`", naming
+  the kinds of cache no fetch script re-creates, and it ends by running
+  the check.
+- **Recovery, found rather than assumed.**
+  - **Lost with nothing to recover**: the Recycle Bin is empty, File
+    History has never run, Documents is not under OneDrive, and no copy of
+    `260630zenku.csv` exists anywhere under the user profile.
+  - **What survived**: the Staging session's scratchpad (session
+    `0b2764e2`) still holds `japan_run/fetch_log.jsonl`, 567 entries each
+    mapping a `data/` path to its source URL and byte count. Also there:
+    the fetch scripts, and Kyoto's stitched register with its join files.
+  - **Measured by a dry run**: 524 files (959 MB) can be re-fetched from 41
+    hosts, 14 of them via the Wayback Machine. Seoul's files and six of
+    Riga's are still in the main checkout.
+  - **The re-fetch waits on the owner's yes**: downloads are asked for.
+
+### 2026-09-27 - Every map ships its heat points and business dots as JSON.parse("..."): no inline literal over 20,000 elements remains, 190.1 MB to 171.1 MB, and a check keeps it so
+
+- **The cause** (the entry below): WebKit will not compile one inline array
+  literal above ~107k-131k elements, which blanked Mexico City, Taipei,
+  São Paulo and Seoul on the owner's iPhone.
+- **The fix, in `pipeline/map_common.py`**: `ParsedHeatMap` and
+  `ParsedFastMarkerCluster` subclass Folium's two data-carrying elements
+  with their own copies of Folium 0.20's templates, changed only on the data
+  line, which becomes `JSON.parse("...")`. Both heat layers and every pin
+  layer use them, in every map.
+  - **Escaping is library calls only** (`_js_json`): `json.dumps` of the
+    data with `allow_nan=False`, then `json.dumps` of that text, then `<`,
+    `>`, `&`, U+2028 and U+2029 replaced with their `\u` escapes. Those
+    decode back to the same characters inside the JS string, so no
+    `</script>` or `<!--` can reach the HTML.
+  - **NaN now fails the build**, not the published page: JSON.parse
+    rejects NaN, where a literal would have accepted it.
+- **`scripts/check_personal_exposure.py` changed in the same commit.**
+  `pins()` reads both forms in document order: the new one decodes with
+  two `json.loads`, and the old literal is still read.
+- **New check, `scripts/check_inline_arrays.py`**: it fails any committed
+  map whose largest inline array literal inside `<script>` exceeds 20,000
+  elements, skipping strings and comments.
+  - **Positive control**: run against the maps before the fix, it
+    reproduced every known count exactly (Seoul 224,381, São Paulo 219,578,
+    Mexico City 133,362, Taipei 133,335, Rio 106,652, Rome 98,897, Paris
+    87,164), with 29 of 50 maps over the cap.
+  - **After the fix**: 0 of 50 over.
+  - **`--selftest`** watches it fail six ways and round-trips eleven
+    hostile names through Node byte for byte: quotes, a backslash,
+    `</script>`, `<!--`, `&amp;`, CJK, emoji, U+2028 and a template-literal
+    `${}`.
+- **Why 20,000, provisionally.** The owner's phone compiled 106,652, so it
+  is at least five times under the proven figure. After the fix the
+  largest literal on any re-rendered map is about 1,000 elements; the
+  largest anywhere is Riga's 6,730, because Riga was not re-rendered (see
+  below). The cap costs nothing today. The exact limit comes from the threshold probe
+  (claude.ai/artifact/1p4zAituB6PQy9Ksrrv6R3), which bisects each shape,
+  so the cap is revisited with its result.
+- **Re-rendered 45 cities (49 files); Riga was left out.** Riga's map
+  belongs to the Main Building Session's live, uncommitted work, and its
+  largest literal (6,730) is under the cap. It picks the fix up at its next
+  render.
+  - **Old vs new, per file**: the decoded heat points and pin rows are
+    identical and in the same order. With the data and Folium's ids
+    masked, no other line differs.
+  - **Edmonton needed its step 2 re-run first.** This worktree's processed
+    cache predated the 2026-09-25 AS_OF_DATE fix (1,034 Retail pins against
+    the committed 1,039). Once re-run, it reproduced the committed data
+    exactly.
+  - **`check_personal_exposure.py` on every city**: HEAD's own script on
+    HEAD's maps against the new script on the new maps. Every line the old
+    run printed is reproduced, so the verdicts are unchanged.
+  - **Seoul's full map in Chromium**: 224,381 heat points and 224,381 dots
+    across three layers, with no console errors.
+- **The maps got smaller, not larger** (the handoff expected +0.4 MB on
+  Seoul): 190.1 to 171.1 MB in total, Seoul's full map 24.15 to 18.78 MB,
+  Taipei's 15.38 to 12.10 MB. Folium's `tojson` escaped every non-ASCII
+  character as `\uXXXX` (6 bytes against 3 in UTF-8), and it used `", "`
+  separators where the new data uses `","`.
+- **What this does NOT settle**: whether the four maps now load on a real
+  iPhone, and how heavy they are once they compile. Seoul's full map used
+  ~758 MB of page memory in Chrome. That needs the owner's browser matrix,
+  and none of the phone workarounds (Seoul's dropped layer, mobile mode) is
+  reversed until it has run.
 ### 2026-09-27 - Trams count; Band T (trams only) created; first blocker wins, universally (owner)
 
 - **The owner ruled that trams count as rail for this project** ("count
