@@ -202,7 +202,9 @@ for every new language, and sample before believing a rate.
   prefixes. Rejected: a country flag on `naics.py`, which would put the most
   consequential constant in the project behind an argument.
 - **`all_city_heat=False`** — the opt-in whole-city heat layer, off for both
-  Mexican cities. 25.7 → 19.0 MB.
+  Mexican cities. 25.7 → 19.0 MB. *(Reversed 2026-09-27: both layers restored
+  once the map data shipped as JSON.parse and a heavier map loaded on an
+  iPhone - DECISIONS of that date.)*
 - **Indexed classification values in every rendered map.** Mexico City made the
   cost visible — **106 distinct values across 283,345 rows**, one 73-character
   string appearing **12,462 times in one file**. Total committed output
