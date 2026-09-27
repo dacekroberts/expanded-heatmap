@@ -1870,7 +1870,10 @@ mistakes as confidently as its findings.
 
 ## Later / maybe
 
-- [ ] **Cluster split/merge animation back, per city, by a lag threshold.**
+- [x] **CLOSED 2026-09-27 (owner): animation stays off.** Re-measured after the
+  JSON.parse rework - still +250-550 ms per zoom on Paris and on Seoul (DECISIONS,
+  "Cluster animation stays off"). Original item:
+  **Cluster split/merge animation back, per city, by a lag threshold.**
   Turned off for every city on 2026-09-23 (`render_heatmap(animate_clusters=
   False)`); the owner asked for it to be recorded for re-implementation. The
   switch already exists per city. What is missing is the rule: the owner's

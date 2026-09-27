@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**405 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**406 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Cluster animation stays off (owner): re-measured after the JSON.parse rework, it still adds ~250-550 ms to every zoom, on the heaviest map as on Paris](#2026-09-27---cluster-animation-stays-off-owner-re-measured-after-the-jsonparse-rework-it-still-adds-250-550-ms-to-every-zoom-on-the-heaviest-map-as-on-paris)
 - [Mexico City's and Guadalajara's whole-city heat layers restored (owner): every map now has one](#2026-09-27---mexico-citys-and-guadalajaras-whole-city-heat-layers-restored-owner-every-map-now-has-one)
 - [The lost research data restored into main's data/: 466 files, and 82 HTML placeholders caught and replaced](#2026-09-27---the-lost-research-data-restored-into-mains-data-466-files-and-82-html-placeholders-caught-and-replaced)
 - [Mobile mode removed and Seoul's whole-city heat layer restored (owner): the full maps load on the iPhone once their data is JSON.parse](#2026-09-27---mobile-mode-removed-and-seouls-whole-city-heat-layer-restored-owner-the-full-maps-load-on-the-iphone-once-their-data-is-jsonparse)
@@ -453,6 +454,51 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Cluster animation stays off (owner): re-measured after the JSON.parse rework, it still adds ~250-550 ms to every zoom, on the heaviest map as on Paris
+
+- **The owner's question**: the animation was switched off on 2026-09-23,
+  before the JSON.parse rework. Does it still cost lag on the heaviest
+  maps?
+- **Method**: `scripts/profile_zoom.mjs` (headless Edge, trusted input,
+  1280x900), median of three fresh loads per case.
+  - Paris was chosen to compare with the 2026-09-23 baseline, and Seoul as
+    the heaviest map (224,381 dots, 24.2 MB).
+  - Each city was rendered twice in the session scratchpad from the
+    committed pipeline: once as committed (`animate: false`) and once with
+    `animate_clusters=True`. No committed file changed.
+  - "Settle" is the time from the first input to the last map event.
+
+  | Scenario | Paris off | Paris on | Seoul off | Seoul on |
+  |---|---|---|---|---|
+  | +/- button, one click | 371 ms | 655 ms (+284) | 381 ms | 636 ms (+255) |
+  | Wheel, one notch | 443 ms | 715 ms (+272) | 448 ms | 687 ms (+239) |
+  | Cluster click | 436 ms | 987 ms (+551) | 440 ms | not finished |
+  | Three quick notches | 953 ms | 1,642 ms (+689) | 865 ms | 1,158 ms (+293) |
+  | +/- button, three clicks | 1,464 ms | 2,181 ms (+717) | 1,246 ms | 1,734 ms (+488) |
+  | Slow wheel roll | 2,423 ms | 3,638 ms (+1,215) | 1,987 ms | not finished |
+
+- **What it shows**:
+  - **The rework changed nothing here.** Paris's +/- click, 371 ms off
+    against 655 ms on, matches the 2026-09-23 figures of 366 and 647 ms.
+    JSON.parse changes how a map loads, once; the animation's cost is paid
+    on every zoom.
+  - **The cost does not grow with the map.** Seoul, with 2.7 times Paris's
+    dots, pays about the same +250 ms per click. It is the animation's own
+    duration, not the data.
+  - **The zoom levels reached were identical** with and without animation
+    in every paired scenario except the trackpad and 45 ms wheel bursts,
+    where both runs were already irregular.
+  - Seoul's remaining scenarios were still running when the owner decided;
+    the four finished pairs agree with Paris.
+- **Owner's call: keep `animate_clusters=False` for every city.** The
+  PLAN item "Cluster split/merge animation back, per city, by a lag
+  threshold" is closed on this measurement. The switch stays in
+  `render_heatmap` if the question returns.
+- **Kept as the standing reference** (owner): `docs/zoom_lag_reference.md`
+  holds all ten Paris scenarios, off and on, plus Seoul's, with the
+  conditions and the command to reproduce them. A future run is compared
+  against its Off column.
 
 ### 2026-09-27 - Mexico City's and Guadalajara's whole-city heat layers restored (owner): every map now has one
 

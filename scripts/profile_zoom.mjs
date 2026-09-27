@@ -7,7 +7,9 @@
 // Serve outputs/ first (the `heatmap-static` preview). Prints one JSON line per
 // run on stdout and a median table per (city, scenario) on stderr. Written
 // 2026-09-23 for the wheel/cluster lag fix; DECISIONS.md, "Wheel zoom stops
-// discarding notches; cluster animation off", holds what it measured.
+// discarding notches; cluster animation off", holds what it measured. The
+// reference figures to compare a new run against (animation off, Paris and
+// Seoul, 2026-09-27) are in docs/zoom_lag_reference.md.
 //
 // WHY HEADLESS EDGE OVER CDP AND NOT THE BROWSER PANE. A hidden pane pauses
 // animation frames, so no zoom animation ever completes there and every run
