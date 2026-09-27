@@ -1008,7 +1008,8 @@ brief names.
     unverified); Hong Kong's and Barcelona's caches hold no tram relations. Mexico City's
     Cablebús is also unstated (Toulouse's drawn Téléo is the precedent).
     `docs/map_inconsistencies.md` shows D.C. as "—", which is incomplete.
-- [ ] **Write `.claude/agents/cleanup-sweep.md` (owner, 2026-09-24)** - a scoped agent on
+- [x] **DONE 2026-09-27: `.claude/agents/cleanup-sweep.md`, scopes city-landed, stale-claims,
+  retire-worktrees, plan-trim, review.** Original item: **Write `.claude/agents/cleanup-sweep.md` (owner, 2026-09-24)** - a scoped agent on
   `deploy-verify.md`'s scope format, so recurring cleanup runs in its own context and returns
   a short report. Owner approvals and published wording still come back to the owner. Why:
   the 2026-09-24 worktree retirement took ~15 steps in a 580k-token session. Scopes:
