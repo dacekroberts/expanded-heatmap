@@ -386,7 +386,10 @@ Desktop is unaffected — the label is fully visible there.
     order (Nice, Montpellier, Brno and Bergen are the cheapest strong ones).
   - [ ] **Wave 2 held by the owner** (the US; Canada, Brazil and Ireland;
     Spain and Italy), possibly at a reset. Launch only on the owner's word,
-    after checking usage and whether main is mid-build.
+    after checking usage and whether main is mid-build. **Its agents use
+    `pipeline.osm.fetch`**, not the scratch `ovp.py`: since 2040dfc it refuses
+    an all-zero `out count` answer, which the wave-1 scratch fetcher accepted
+    (Amstelveen's density is still unmeasured for that reason).
   - [ ] **Tram rescopes of built cities held by the owner**, likely at the
     next reset; Cleanup's case-by-case list is in DECISIONS (2026-09-27).
   - [ ] Cleanup: the `overpass.osm.ch` mirror in `pipeline/osm.py`, and
