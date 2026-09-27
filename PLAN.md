@@ -957,8 +957,16 @@ brief names.
       reinstated: `all_city_heat=True` in `pipeline/mexico_city/step3_map.py`, rewrite page
       15's "Unlike the other cities, this map has no whole-city layer ..." (draft for the
       owner), update `excluded_categories.md`, new DECISIONS entry superseding 2026-09-22.
-    - **Guadalajara** switched its layer off only to match Mexico City: 3.4 MB, 36,925
-      points. Costs almost nothing; ask the owner alongside Mexico City.
+    - **Guadalajara** switched its layer off only to match Mexico City. CORRECTED
+      2026-09-27: its whole-city layer would be **117,454** points, not 36,925 (that is the
+      station-area layer); about +2.7 MB on a 3.2 MB map. Pre-fix it would itself have
+      exceeded the iPhone's 110,861 literal limit; after the fix it compiles. Ask the owner
+      alongside Mexico City.
+    - **Audit result 2026-09-27** (every committed map's heat layers against the city's
+      storefront rows): only Mexico City and Guadalajara lack a whole-city layer. LA,
+      Toronto and D.C. draw exactly their geocoded rows (58,173 / 18,186 / 5,230); New York
+      draws 62,441 of 62,444 geocoded rows, a 3-row gap worth one look but not a trim.
+      Every other city's whole-city layer equals its storefront total. Seoul's is restored.
 - [ ] **East Asian cities missing from the front page's Global view until panned (owner,
   2026-09-27; after the iPhone work).** Hong Kong, Taipei and Seoul are not drawn west of the
   Americas across the Pacific; they appear only past Europe. Owner: draw every city wherever
