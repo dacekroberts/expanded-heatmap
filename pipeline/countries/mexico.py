@@ -107,7 +107,6 @@ DENUE_INTERIOR_COLUMN = "numero_int"
 OVERPASS_HOSTS = (
     "https://overpass-api.de/api/interpreter",
     "https://overpass.kumi.systems/api/interpreter",
-    "https://overpass.osm.ch/api/interpreter",
 )
 OVERPASS_USER_AGENT = (
     "expanded-heatmap city profiling (github.com/dacekroberts/expanded-heatmap)"

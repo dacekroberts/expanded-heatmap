@@ -107,10 +107,14 @@ from pipeline.osm_cache import NEVER_A_STATION, load  # noqa: F401
 
 # More than one host, tried in order. A failure is a fact about that host, not
 # about the city.
+#
+# GLOBAL MIRRORS ONLY. overpass.osm.ch was removed 2026-09-27: it serves a
+# Swiss-only extract, so for anywhere else it answers HTTP 200 with nothing
+# (or zero counts). scripts/check_overpass_hosts.py fails if it, or any host
+# that is not global, appears in any Overpass host list in the repository.
 OVERPASS_HOSTS = (
     "https://overpass-api.de/api/interpreter",
     "https://overpass.kumi.systems/api/interpreter",
-    "https://overpass.osm.ch/api/interpreter",
 )
 OVERPASS_USER_AGENT = (
     "expanded-heatmap city profiling (github.com/dacekroberts/expanded-heatmap)"
@@ -182,6 +186,20 @@ def fetch(query, cache_path, *, force=False, timeout=180, retries=2,
             if not (payload.get("elements") or []):
                 problems.append(f"{name}: empty 200")
                 _say(f"[{attempt}] {name} -> empty 200 (not trusted)")
+                continue
+            # An `out count` answer is never empty - it is one `count` element
+            # - so a host holding no data for this area answers with zeros and
+            # passes the check above. overpass.osm.ch (a Swiss-only extract)
+            # did exactly that for Daugavpils, Aarhus, Zoetermeer and
+            # Amstelveen (Staging, 2026-09-27). All-zero counts are treated
+            # like an empty 200: a real "none here" is confirmed by another
+            # mirror answering the same.
+            els = payload["elements"]
+            if all(e.get("type") == "count" for e in els) and not any(
+                    str(v) not in ("0", "") for e in els
+                    for v in (e.get("tags") or {}).values()):
+                problems.append(f"{name}: all-zero count")
+                _say(f"[{attempt}] {name} -> all-zero count (not trusted)")
                 continue
             payload["_fetched_from"] = name
             payload["_query"] = query
