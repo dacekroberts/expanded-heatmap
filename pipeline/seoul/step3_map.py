@@ -19,13 +19,13 @@ from pipeline.seoul import config  # noqa: E402
 from pipeline.seoul.step1_stations import boundary_polygon  # noqa: E402
 
 
-def render(output_path, pins):
+def main():
     for path in (config.STATIONS_CSV, config.BUSINESSES_CLEAN_CSV, config.RAIL_LINES_JSON):
         if not path.exists():
             sys.exit(f"Missing {path}. Run the earlier steps first.")
 
     render_heatmap(
-        output_path=output_path,
+        output_path=config.HEATMAP_HTML,
         map_title="Seoul Metropolitan Subway Business Density Heatmap",
         city_name="Seoul",
         system_name="Seoul Metropolitan Subway",
@@ -42,20 +42,12 @@ def render(output_path, pins):
         # Trade names are Korean; this orders the Korean faces first
         # (theme.font_stack) and render_heatmap raises without it.
         lang="ko",
-        # No whole-city heat layer (owner, 2026-09-25): at 239,410 storefronts it
-        # carried nearly a quarter of a million points a second time, and the
-        # 30 MB map would not load on the owner's phone. 94% of the storefronts
-        # are inside the rings anyway. Mexico City's precedent; the page says so.
-        all_city_heat=False,
-        pins=pins,
+        # The whole-city heat layer is back (owner, 2026-09-27). It was dropped
+        # on 2026-09-25 because the 30 MB map would not load on the owner's
+        # phone, but the cause was WebKit refusing any single literal over
+        # ~110k elements, which the station-area layer alone exceeded; the
+        # JSON.parse data fixed that, and the full map loads on the phone.
     )
-
-
-def main():
-    render(config.HEATMAP_HTML, pins=True)
-    # Mobile mode (owner, 2026-09-25): the same map without business dots,
-    # which a phone cannot hold in memory for Seoul.
-    render(config.HEATMAP_LITE_HTML, pins=False)
 
 
 if __name__ == "__main__":

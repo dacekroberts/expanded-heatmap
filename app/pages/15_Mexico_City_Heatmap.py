@@ -13,7 +13,6 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.mexico_city.config import HEATMAP_HTML  # noqa: E402
 from components import (  # noqa: E402
-    mobile_mode,
     render_city_nav,
     render_site_notices,
     set_base_font,
@@ -62,10 +61,6 @@ Fixed premises only. DENUE separately records semi-fixed units — stalls and
 street posts — and those are not shown, although street commerce is a real and
 substantial part of the city's retail.
 
-Unlike the other cities, this map has no whole-city layer: there is no option
-to show every business in Mexico City at once, only those near a station. That
-layer would have carried more than twice the points of the default one.
-
 Concentric ring boundaries and the three business categories (Retail, Food
 service and Personal services) are toggleable via the layer control in the top
 left. When enabled, business density will display as numbered circles summing
@@ -78,7 +73,6 @@ cluster."
 """
 )
 
-HEATMAP_HTML = mobile_mode(HEATMAP_HTML)  # the light map on phones
 if HEATMAP_HTML.exists():
     # st.iframe embeds the HTML file (read as UTF-8) in a same-origin iframe; its
     # fixed 1000x650 matches the map (see the Leaflet.heat note in map_common.py).

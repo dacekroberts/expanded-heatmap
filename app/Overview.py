@@ -408,6 +408,14 @@ if _frame_region != DEFAULT_FRAME:
 deck = pdk.Deck(
     layers=[markers, labels],
     initial_view_state=view,
+    # repeat=True draws the layers on EVERY copy of the world, not only the
+    # primary one (-180..180). The basemap always repeats; without this, a
+    # canvas wider than one world at the Global frame showed Asia on the left
+    # with no cities on it - Seoul, Hong Kong and Taiwan appeared only past
+    # Europe (owner, 2026-09-27). pydeck's default view is this same MapView
+    # with controller=True, so nothing else changes. Zoomed far out a city can
+    # appear twice, once per copy, both clickable - accepted by the owner.
+    views=[pdk.View(type="MapView", controller=True, repeat=True)],
     map_provider="carto",
     map_style="light",
     # Unlike the layers above this tooltip is an HTML overlay, so CSS CAN reach

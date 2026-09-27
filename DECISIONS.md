@@ -16,12 +16,16 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**404 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**408 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
 - [East Asia second-city screen: Daegu and Busan reopen on their cities' own portals; Busan's frozen snapshot accepted (owner)](#2026-09-27---east-asia-second-city-screen-daegu-and-busan-reopen-on-their-cities-own-portals-busans-frozen-snapshot-accepted-owner)
+- [Every city drawn on every world copy on the front page (owner): East Asia shows on the left of the Global view; labels need only be collision-free within their own region](#2026-09-27---every-city-drawn-on-every-world-copy-on-the-front-page-owner-east-asia-shows-on-the-left-of-the-global-view-labels-need-only-be-collision-free-within-their-own-region)
+- [Cluster animation stays off (owner): re-measured after the JSON.parse rework, it still adds ~250-550 ms to every zoom, on the heaviest map as on Paris](#2026-09-27---cluster-animation-stays-off-owner-re-measured-after-the-jsonparse-rework-it-still-adds-250-550-ms-to-every-zoom-on-the-heaviest-map-as-on-paris)
+- [Mexico City's and Guadalajara's whole-city heat layers restored (owner): every map now has one](#2026-09-27---mexico-citys-and-guadalajaras-whole-city-heat-layers-restored-owner-every-map-now-has-one)
 - [The lost research data restored into main's data/: 466 files, and 82 HTML placeholders caught and replaced](#2026-09-27---the-lost-research-data-restored-into-mains-data-466-files-and-82-html-placeholders-caught-and-replaced)
+- [Mobile mode removed and Seoul's whole-city heat layer restored (owner): the full maps load on the iPhone once their data is JSON.parse](#2026-09-27---mobile-mode-removed-and-seouls-whole-city-heat-layer-restored-owner-the-full-maps-load-on-the-iphone-once-their-data-is-jsonparse)
 - [Monterrey's three calls decided (owner)](#2026-09-27---monterreys-three-calls-decided-owner)
 - [Threshold probe closed (owner): the exact per-device limit no longer decides anything, and the 20,000 inline-literal cap is final](#2026-09-27---threshold-probe-closed-owner-the-exact-per-device-limit-no-longer-decides-anything-and-the-20000-inline-literal-cap-is-final)
 - [Monterrey (Regional) screened into Band A: its only negative was obsolete](#2026-09-27---monterrey-regional-screened-into-band-a-its-only-negative-was-obsolete)
@@ -521,6 +525,119 @@ onwards; the early ones are split by phase rather than by hour.
   slip is on file, not only in a transcript.
 - Macau (separate jurisdiction, not a built country) was not screened for
   business data; its LRT would class as an edge network.
+### 2026-09-27 - Every city drawn on every world copy on the front page (owner): East Asia shows on the left of the Global view; labels need only be collision-free within their own region
+
+- **The defect, confirmed in a render before fixing**: on a canvas wider
+  than one world, the basemap repeated ("ASIA" and "AUSTRALIA" on the left)
+  but deck.gl drew the city layers only on the primary copy (-180..180).
+  Seoul, Hong Kong, Taipei, Taichung and Taoyuan appeared only past Europe.
+- **The fix**: `views=[pdk.View(type="MapView", controller=True,
+  repeat=True)]` on the `pdk.Deck` in `app/Overview.py`.
+  - pydeck's default view is this same MapView with `controller=True`, so
+    only `repeat` changes. pydeck 0.9.3 serialises it straight through.
+  - It applies to every region, as the owner asked.
+- **Verified in the lean app at 1200 px**:
+  - Seoul and Taipei (Regional) now draw at the left edge on load.
+  - Clicking Taipei's pill on the wrapped copy opened its page.
+  - `check_macro_attribution.mjs` passes at 375, 768 and 1200 px in both
+    themes; the credit is still on top of every copy.
+  - `check_macro_labels.py` reports 0 problems across 10 regions at 3
+    widths.
+  - `check_deploy_imports.py` passes on the commit.
+- **Owner's rules for the macro map, stated while this was built**:
+  - **Clipped labels are fine.** A city at the canvas edge is reached by
+    panning, as the East Coast labels already are at phone width. At 1200 px
+    Seoul's wrapped copy sits almost exactly on the left edge, so its pill
+    is half off-canvas; that is accepted.
+  - **What matters is that every city is drawn** where it is on screen.
+  - **Labels must not overlap within their own region, at that region's
+    fitted zoom.** Fitting the whole globe collision-free is not a goal.
+  - **Duplicates when zoomed far out** (one per world copy, both clickable)
+    are accepted.
+- **Therefore `check_macro_labels.py` was left scoring the primary copy.**
+  The handoff proposed adding the wrapped copies to its Global scoring. That
+  scoring was written and then reverted on the owner's rule, since Global is
+  not held to collision-free labels. Every leaf region is fitted at a zoom
+  where one world spans thousands of pixels, so no wrapped copy reaches its
+  canvas.
+- **No reboot is needed**: `app/Overview.py` is the entry script, which
+  "Updated app!" re-runs; no imported module changed.
+
+### 2026-09-27 - Cluster animation stays off (owner): re-measured after the JSON.parse rework, it still adds ~250-550 ms to every zoom, on the heaviest map as on Paris
+
+- **The owner's question**: the animation was switched off on 2026-09-23,
+  before the JSON.parse rework. Does it still cost lag on the heaviest
+  maps?
+- **Method**: `scripts/profile_zoom.mjs` (headless Edge, trusted input,
+  1280x900), median of three fresh loads per case.
+  - Paris was chosen to compare with the 2026-09-23 baseline, and Seoul as
+    the heaviest map (224,381 dots, 24.2 MB).
+  - Each city was rendered twice in the session scratchpad from the
+    committed pipeline: once as committed (`animate: false`) and once with
+    `animate_clusters=True`. No committed file changed.
+  - "Settle" is the time from the first input to the last map event.
+
+  | Scenario | Paris off | Paris on | Seoul off | Seoul on |
+  |---|---|---|---|---|
+  | +/- button, one click | 371 ms | 655 ms (+284) | 381 ms | 636 ms (+255) |
+  | Wheel, one notch | 443 ms | 715 ms (+272) | 448 ms | 687 ms (+239) |
+  | Cluster click | 436 ms | 987 ms (+551) | 440 ms | not finished |
+  | Three quick notches | 953 ms | 1,642 ms (+689) | 865 ms | 1,158 ms (+293) |
+  | +/- button, three clicks | 1,464 ms | 2,181 ms (+717) | 1,246 ms | 1,734 ms (+488) |
+  | Slow wheel roll | 2,423 ms | 3,638 ms (+1,215) | 1,987 ms | not finished |
+
+- **What it shows**:
+  - **The rework changed nothing here.** Paris's +/- click, 371 ms off
+    against 655 ms on, matches the 2026-09-23 figures of 366 and 647 ms.
+    JSON.parse changes how a map loads, once; the animation's cost is paid
+    on every zoom.
+  - **The cost does not grow with the map.** Seoul, with 2.7 times Paris's
+    dots, pays about the same +250 ms per click. It is the animation's own
+    duration, not the data.
+  - **The zoom levels reached were identical** with and without animation
+    in every paired scenario except the trackpad and 45 ms wheel bursts,
+    where both runs were already irregular.
+  - Seoul's remaining scenarios were still running when the owner decided;
+    the four finished pairs agree with Paris.
+- **Owner's call: keep `animate_clusters=False` for every city.** The
+  PLAN item "Cluster split/merge animation back, per city, by a lag
+  threshold" is closed on this measurement. The switch stays in
+  `render_heatmap` if the question returns.
+- **Kept as the standing reference** (owner): `docs/zoom_lag_reference.md`
+  holds all ten Paris scenarios, off and on, plus Seoul's, with the
+  conditions and the command to reproduce them. A future run is compared
+  against its Off column.
+
+### 2026-09-27 - Mexico City's and Guadalajara's whole-city heat layers restored (owner): every map now has one
+
+- **Owner's call**, after Seoul's full map (then 18.8 MB, now 24.2 MB with
+  its own layer back) loaded on the owner's iPhone.
+- **Superseded**:
+  - 2026-09-22's `all_city_heat` "off for this city" (Mexico City).
+    That was a file-size decision taken before any phone test, whose
+    remaining reasons were parse cost (which JSON.parse removes) and
+    repository bytes.
+  - Guadalajara's matching switch-off, which existed only for consistency
+    with Mexico City.
+- **Mexico City**: +283,345 points, 11.14 to 17.59 MB. **Guadalajara**:
+  +117,454 points, 3.19 to 5.98 MB.
+  - Guadalajara's figure was recorded in PLAN as 36,925, which is its
+    station-area layer. At 117,454, its layer as a literal would itself
+    have been over the iPhone's 110,861 limit.
+  - The dots and the station-area layers are unchanged (old vs new
+    decoded).
+- **Prose removed, none added**:
+  - Page 15's "Unlike the other cities, this map has no whole-city
+    layer..." and page 16's "Unlike most cities here...".
+  - The two paragraphs in `docs/excluded_categories.md` saying the layer is
+    OFF.
+  - In `docs/map_inconsistencies.md`, theme 12 is marked resolved (the
+    heading is kept so references resolve). Table D now reads Yes, with
+    in-ring shares of 47% and 31%, and theme 7's "cannot be measured"
+    bullet is gone.
+- **Checks**: inline arrays 0 over; scope disclosure, inconsistency list,
+  provenance and render-current all OK.
+- **App pages changed (15, 16)**, so a reboot is needed after the push.
 
 ### 2026-09-27 - The lost research data restored into main's data/: 466 files, and 82 HTML placeholders caught and replaced
 
@@ -562,6 +679,48 @@ onwards; the early ones are split by phase rather than by hour.
 - Also fixed: `monterrey.md` cited notice 1 beside "OSM" without naming
   OpenStreetMap, which `check_provenance.py` refused (Cleanup's catch). It
   passes now.
+### 2026-09-27 - Mobile mode removed and Seoul's whole-city heat layer restored (owner): the full maps load on the iPhone once their data is JSON.parse
+
+- **What the owner saw**: after the JSON.parse fix went live, Seoul, São
+  Paulo and Mexico City loaded on the owner's iPhone, but with no business
+  clusters. That was mobile mode (2026-09-25, `6281d90`, `ee865ea`). It
+  served phones a light map without dots by default, and nothing had been
+  deleted: each full map still carried its three dot layers.
+- **The test that decided it**: with mobile mode switched off, **Seoul's
+  full map loaded on the owner's iPhone**, 224,381 dots and 18.8 MB, the
+  heaviest map. The owner took the other three as following from the same
+  data and asked for mobile mode to be removed.
+- **Superseded**: both 2026-09-25 entries, "Seoul's mobile mode" and
+  "Seoul's whole-city heat layer dropped". Both rested on the belief that
+  the phone ran out of memory. The cause was WebKit refusing any literal
+  over ~110,861 nested elements (entries above), and Seoul's station-area
+  layer alone exceeded it, so the layer drop never addressed it.
+- **Removed**:
+  - `components.mobile_mode()` and its calls on pages 15, 31 and 46.
+  - Seoul's inline toggle and caption on page 43, whose caption said "more
+    than a phone can hold in memory", which was never the cause.
+  - `HEATMAP_LITE_HTML` in `pipeline/seoul/config.py`.
+  - The light-map renders in four step 3 files.
+  - `render_heatmap(lite_output_path=)`.
+  - The four `heatmap_lite.html` files.
+  - `pins=` stays as an unused option, with a comment saying why it exists.
+- **Seoul's whole-city layer is back** (`all_city_heat` at its default),
+  239,410 points. The map goes from 18.78 to 24.23 MB, and the dots and
+  station-area layer are unchanged.
+  - **Page 43**: the sentence "Unlike most maps here, Seoul's has no
+    whole-city heat layer..." was removed. The paragraph is back to the
+    wording approved before it was added.
+  - **Inconsistency list**: its table D row now reads Yes (restored).
+- **The other three maps re-rendered identical** (data and markup, Folium
+  ids masked). Checks: inline arrays 0 over, render-current, scope
+  disclosure, city registry and inconsistency list all OK.
+  `check_provenance.py` fails only on `docs/build_briefs/monterrey.md`
+  (Staging's, citing notice item 1 beside INEGI), which predates this
+  change and was passed to Staging.
+- **Needs a reboot**: `app/components.py` and four pages changed.
+- **Not done here**: Mexico City's and Guadalajara's whole-city layers,
+  dropped for file size and for consistency before any phone test. They
+  are an owner decision on measurements (PLAN, the whole-city layer audit).
 
 ### 2026-09-27 - Monterrey's three calls decided (owner)
 
