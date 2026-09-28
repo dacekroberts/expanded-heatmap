@@ -20,12 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**61 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**62 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Wave 2, group 2 banded: Florence and Santa Cruz–La Laguna to T, Palma to C, thirteen discards, five not reached (owner)](#2026-09-28---wave-2-group-2-banded-florence-and-santa-cruzla-laguna-to-t-palma-to-c-thirteen-discards-five-not-reached-owner)
 - [kobe and trams worktrees retired after review time landed them](#2026-09-28---kobe-and-trams-worktrees-retired-after-review-time-landed-them)
+- [Wave 2, the US banded: seven cities to T, Baltimore to C, sixteen discards; a Texas register reopens the Dallas question (owner)](#2026-09-28---wave-2-the-us-banded-seven-cities-to-t-baltimore-to-c-sixteen-discards-a-texas-register-reopens-the-dallas-question-owner)
 
 **2026-09-27**
 
@@ -2385,3 +2386,54 @@ Recorded by the cleanup session from the Main Building Session's findings of
   `git worktree list`.
 - **One interruption:** the permission check for commands returned no
   verdict for several minutes. Nothing was touched until it came back.
+### 2026-09-28 - Wave 2, the US banded: seven cities to T, Baltimore to C, sixteen discards; a Texas register reopens the Dallas question (owner)
+
+- **The US screened by two agents** (unbuilt metro and light-rail cities;
+  streetcar cities and the suburbs of built maps), then banded on the
+  owner's eight calls, each as recommended. Candidates 66 → 74 (C 8 → 9,
+  T 43 → 50), discards 64 → 80. **Load: about 14%** (39% → 53%). **Wave 2
+  in all came to about 44% of one 5-hour window**, against the 80–130%
+  estimate: the screens stopped each city at its first clear blocker.
+- **To T, on three buckets**: New Orleans (CC0 occupational licences, 110
+  streetcar stops all inside) and Tucson (the city's NAICS licence layer,
+  Sun Link's 21 stops).
+- **To T with a gap**, trams being the first blocker (D → T → C):
+  - Houston and Sacramento need an address join.
+  - Pittsburgh and Minneapolis have no personal-services source. Grocery
+    rows count as retail only where the source separates them (New York's
+    precedent, owner's call).
+- **Buffalo to T as EDGE, not A (owner's call).** Its Metro Rail is mostly
+  underground, but the edge rule kept Nice here; the tag lets it be pulled
+  up. Its business leg is New York's pattern, all three buckets.
+- **Baltimore to C**: a metro, a restaurants layer only.
+- **Sixteen discards**:
+  - No register: Portland, Cleveland, Salt Lake City, Phoenix, Mesa,
+    Honolulu, St. Paul, Oklahoma City and El Paso.
+  - Atlanta on currency, Dallas's precedent: licences 2019–22, last edited
+    2023.
+  - Norfolk: a stream of new licences, not a register (Nagoya's defect).
+  - Milwaukee, Detroit and Tampa: too thin, a reversible judgement
+    (Aubagne's). The alternative was three more food-only entries in T.
+  - Cincinnati (every 20–25 minutes) and Berkeley (3 BART stations; no built
+    map draws BART) on rail.
+- **The Texas Comptroller's sales-tax permit file is a new source** that the
+  2026-09-18..21 screens never found: NAICS, an inside-city-limits flag,
+  updated daily. It carries Houston, and it undercuts the premise of the
+  Dallas discard ("Texas has no general city business licence"). **The owner
+  approved a re-screen of Dallas, Fort Worth and Austin on it**; handed to
+  the next Staging session with the other wave-2 follow-ups (PLAN).
+- **Regional add-ons queued (owner's calls)**: Long Beach for Los Angeles
+  (8 A Line stations, a licence read first) and Arlington for D.C. (its
+  dataset needs the owner's browser). No add-on for Cambridge and Somerville
+  (food only beside Boston's three buckets).
+- **Not reached**: Tempe (403 to scripts) and St. Louis (an untested permit
+  API).
+- **A third privacy slip, on file.** Guessing Arlington's API paths, the
+  screen printed one sample row of the county's public Trade Names register,
+  including one person's name (a registered agent). Nothing was stored.
+- **A 228 MB Florida cosmetology file was deleted (owner's permission).** It
+  held 1.18M individual licensees, not salons, so it could not give Tampa a
+  personal bucket; only aggregate code columns were read.
+- **Overpass failed for most of the screen** (URLError and 504s with two
+  agents querying), so rail marked "from knowledge" is unmeasured, and a
+  quiet-hour re-run is queued.
