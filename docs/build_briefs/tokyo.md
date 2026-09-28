@@ -302,7 +302,7 @@ missing ward follows the table.
 | Kōtō | 13108 | **ON** (9%) | consent-only new permits, share disclosed | Tokyo catalogue, CC BY 4.0 | — |
 | Shinagawa | 13109 | **OFF** | partial, since 2024-04; re-check for a full list pending | — | ✓ |
 | Meguro | 13110 | **ON** (52%) | first permits only, the accepted exception | BODIK, CC BY 4.0 | ✓ (BODIK) |
-| Ōta | 13111 | **OPEN** | full list (ZIP of 2 PDFs, 2026-09-01); licence ambiguous, owner's call | ⚠️ site policy vs open-data terms | ✓ |
+| **Ōta** | 13111 | **OFF** | **full list is PDF only and not open data; the site policy bars reuse (owner, 2026-09-28)** | 🚫 not permitted | ✓ |
 | Setagaya | 13112 | **ON** (63%) | opt-outs left out | ward's own, CC BY 4.0 | — |
 | Shibuya | 13113 | **ON** (101%) | the ward's own register | ward's own, CC BY 4.0 | ✓ |
 | Nakano | 13114 | **OFF** | stale, to 2023-06; re-check pending | — | — |
@@ -316,7 +316,7 @@ missing ward follows the table.
 | Katsushika | 13122 | **OPEN** | none found; re-probe pending | — | ✓ |
 | Edogawa | 13123 | **OFF** | on request only (password after application); parked | — | — |
 
-**Tally, 2026-09-28**: ON 8 · OFF 11 · OPEN 4.
+**Tally, 2026-09-28**: ON 8 · OFF 12 · OPEN 3.
 
 ### Arakawa 荒川区, 13118 — OFF (read 2026-09-28)
 
@@ -333,6 +333,21 @@ missing ward follows the table.
 | join / share | not measured: the list is not used |
 | personal services | 美容所, 理容所 and クリーニング所 台帳 on the Tokyo catalogue (`t131181`), CC BY 4.0: already in the 11-ward layer |
 | route in | permission from 広報・シティプロモーション課 (the channel the copyright clause names), or publication on the ward's catalogue. Outreach is the owner's act and the last resort: **parked** |
+
+### Ōta 大田区, 13111 — OFF (owner, 2026-09-28)
+
+| Field | |
+|---|---|
+| verdict | **OFF**: the full list is PDF only and on no open-data list, so the site policy governs it and bars reuse. The open-data terms' site-wide preamble is not relied on |
+| file(s), host, size | page `https://www.city.ota.tokyo.jp/seikatsu/hoken/eisei/shokuhin/ippan/syokuhinsisetuitiran.html` (updated 2026-09-02; the host is `city.ota.tokyo.jp`, not `.lg.jp`). Full list `…/syokuhinsisetuitiran.files/r0809.zip`, 14,650,229 B, holding `新法施設一覧（2026年9月1日現在）.pdf` (35.8 MB) and `旧法施設一覧（2026年9月1日現在）.pdf` (5.3 MB), probably the 93 + 16 pages. Monthly new-premises PDFs `r0709.pdf` to `r0808.pdf` |
+| format | PDF only (in a ZIP); `.csv` / `.xlsx` siblings return 404. Address layout: 町名 / 番 / 号 / ビル名 |
+| as of | 2026-09-01; updated monthly (by the 10th). Includes 届出 premises |
+| closures | none; the page says closures after compilation are not reflected |
+| operator columns | 申請者氏名 (unmasked), 所在地電話番号 (from the monthly PDF; the ZIP's PDFs unverified) |
+| licence | 🚫 **NOT PERMITTED, or ambiguous in a way that matters**. The site policy (`/aboutweb/policy.html`) bars 無断での使用・転載、二次利用, except for 「大田区がオープンデータとして公開しているもの」. The open-data terms (`/kuseijoho/opendata/open-data.files/riyoukiyaku.pdf`, 政府標準利用規約 2.0, adopted about 2021-09-28) literally cover the whole site. **Why OFF**: the policy's exception dates from 2019-05, when open data meant the Tokyo catalogue, and was left unwidened in the 2021-09-26 and 2025-11-27 edits. The terms are framed around downloaded data. No page carries a site-wide badge. The same 生活衛生課 put its barber, beauty, laundry and inn registers on the Tokyo catalogue as CC BY CSV, and left the food list as PDF. The ward's own definition of open data requires 機械判読. Not on the ward's list (175 rows) or the Tokyo catalogue (`t131113`, 280 packages) |
+| join / share | not measured: the list is not used |
+| personal services | 美容所, 理容所, クリーニング所 and 旅館 台帳 on the Tokyo catalogue (`t131113`), CC BY 4.0: already in the 11-ward layer |
+| route in | permission from 生活衛生課 食品衛生 (03-5764-0697), or publication on the catalogue. Outreach is the owner's act and the last resort: **parked** |
 
 ### Kita 北区, 13117 — OFF (read 2026-09-28)
 

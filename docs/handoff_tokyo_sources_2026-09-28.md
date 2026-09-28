@@ -18,18 +18,11 @@ unless this session finds the data.
 
 ## The job, in the owner's order
 
-1. **Licence reads** (the `licence-read` agent, ONE source per call; never a
-   batch). The PDF-only full lists first, since only a permitted licence makes
-   extraction worth doing:
-   - **Ōta** (13111): full list, 93 + 16 pages.
-   - **Arakawa** (13118): 55 pages.
-   - **Sumida** (13107) and **Adachi** (13121): new permits only - read them
-     only if a full list turns up beside them; new-only lists fail the owner's
-     rule below.
-   - **Kita** (13117): its page says "not open data". Confirm that in one
-     read; if it holds, it is out.
-2. **PDF extraction**, only for a ward whose licence permits reuse and
-   modification. Write a `pdf-register` skill from the first one: extract the
+1. **Licence reads: DONE 2026-09-28.** Ōta, Arakawa and Kita are all OFF
+   (Ward cards, `docs/build_briefs/tokyo.md`). Sumida and Adachi stay unread
+   unless a full list turns up beside their new-permit PDFs.
+2. **PDF extraction: no ward qualifies yet**, so it waits. It applies only to
+   a ward whose licence permits reuse and modification. Write a `pdf-register` skill from the first one: extract the
    table rows to CSV (the tool, the page-by-page row count checked against
    the PDF's own totals, header rows repeated per page, wrapped cells), then
    the JOIN with `scripts/screen_japan_join.py` (add a key per ward) and the

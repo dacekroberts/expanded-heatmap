@@ -121,6 +121,41 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ### 2026-09-28 - Tokyo's missing wards: Arakawa OFF; a ward-by-ward list in the brief (owner)
 
+- **Ōta is OFF for food (owner, 2026-09-28), on the recommendation, after two
+  follow-up checks.** The full list is published (`r0809.zip`, two PDFs as
+  at 2026-09-01, 14.6 MB), but as PDF only, and it is on neither the ward's
+  open-data list nor the Tokyo catalogue (`t131113`). Two ward documents
+  conflict:
+  - The site policy bars reuse except for
+    「大田区がオープンデータとして公開しているもの」.
+  - The open-data terms (政府標準利用規約 2.0) name the whole 公式ホームページ.
+
+  The terms' literal scope was **rejected** as the governing reading, for
+  five reasons:
+  - The policy's exception dates from 2019-05, when the ward's open data meant
+    the Tokyo catalogue.
+  - The exception was left unwidened when the policy was edited on
+    2021-09-26, two days before the terms, and again on 2025-11-27.
+  - The terms are framed around downloaded data.
+  - No page carries a site-wide licence badge or statement.
+  - The same 生活衛生課 put its 生活衛生 registers on the catalogue as CC BY
+    CSV and left the food list as PDF. The ward's own definition of open data
+    also requires 機械判読.
+
+  This follows the Shinjuku precedent (an ambiguity that matters is not
+  resolved in the project's favour). It is closer than Shinjuku, Arakawa or
+  Kita, because one ward text does point to ON. The list also carries
+  unmasked 申請者氏名. Ōta keeps its personal-services registers. Ward cards
+  now stand at ON 8, OFF 12, OPEN 3 (Bunkyō, Suginami and Katsushika, re-probes
+  next). The two stray PDFs were moved to the Recycle Bin at the owner's
+  word, since neither belonged in `docs/licenses/` or `data/`.
+- **Rule recorded: no hand-written PDF decoder.** A licence agent's scratch
+  CMap and stream decoder drove python.exe to 47 GB committed memory on the
+  16 GB machine and crashed the app (the cleanup session's finding). PDFs are
+  read with `pdftotext` or `pypdf`, page by page, with memory measured on one
+  page first. The handoff carries the rule until the `pdf-register` skill
+  does.
+
 - **Confirmed Kita OFF for food, under the handoff's standing rule (if "not
   open data" holds, it is out).** It holds. The food page says:
   「…東京都北区情報公開条例に基づいて公開するもので、オープンデータとは異なります。」
