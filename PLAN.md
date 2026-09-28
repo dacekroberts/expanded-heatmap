@@ -82,11 +82,10 @@ Desktop is unaffected — the label is fully visible there.
     calls taken as recommended; the rows end 2025-08-31 (owner: build, date disclosed).
     Done: steps 1–3, drift baseline, provenance rows, inconsistency rows, privacy
     verdict, label width (42.9) and placement (below the dot), DECISIONS. Still to do:
-    - [ ] At the owner's review time: approve the page prose, blurb, credit notice
-      (48) and the `excluded_categories.md` section, drafted in chat; and look at Line
-      2's darkened green (#00664D) and Line 1's red (14.7 from Food service).
-    - [ ] Write them; `check_scope_disclosure.py`; `deploy-verify` (city-added, plus
-      East Asia for the label).
+    - [x] Page prose, blurb, credit notice 48, the `excluded_categories.md` section and
+      the line colours approved by the owner 2026-09-27, and written.
+    - [ ] `deploy-verify` (city-added, plus East Asia for the label) - **HELD until at
+      least after Busan is built** (owner, 2026-09-27), then run once for both.
     - [ ] Publish with the batch (`publish-city`): `check_deploy_imports.py` with
       `.venv-lean` linked, merge master, fetch, push, **reboot** (`cities.py`,
       `components.py`), live check. Retire the `data/` junction and the

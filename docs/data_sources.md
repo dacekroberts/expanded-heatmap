@@ -1036,7 +1036,7 @@ than its current one, and Personal services is the bucket where a salon
 operating from a residential address is most plausible. **Flagged for
 `add-city` Step 0, not pre-judged.**
 
-### 🇰🇷 Daegu and Busan (candidates, not built) — read 2026-09-27 by the `licence-read` agent
+### 🇰🇷 Daegu and Busan (Daegu built 2026-09-27, notice 48; Busan a candidate) — read 2026-09-27 by the `licence-read` agent
 
 **The same national register (LOCALDATA, 행정안전부 / 한국지역정보개발원) carries
 different declared terms depending on who republishes it.** Seoul attaches KOGL
@@ -3269,6 +3269,18 @@ own 政府網站資料開放宣告 adds, ACCEPTED by the owner 2026-09-25**: cit
 trademark or company logo is licensed; the grant implies no endorsement of a derivative; and
 whoever *maliciously* alters the data so that it misrepresents the original bears civil and
 criminal liability. Wording approved by the owner 2026-09-25. **MUST DO: nothing.**
+
+**48. Daegu Metropolitan City (Daegu) — required, and DISPLAYED.**
+
+**A DISCLOSED REASONED POSITION** (owner, 2026-09-27; the reasoning is under "Daegu and
+Busan" above). D-데이터허브's files declare no licence; the permission rests on the portal's own
+공공데이터 이용정책 and the Public Data Act, and the City's copyright guide's request to consult
+before using unmarked material is recorded, not adopted. The credit is the suggested one - Daegu
+Metropolitan City, D-데이터허브 (linked), originally 한국지역정보개발원 - with the fourteen permit
+types, the edition and **the rows' real date (2025-09-02; the edition is named August 2026)**,
+Seoul's describe-the-changes line and a non-endorsement line. Wording approved by the owner
+2026-09-27. **MUST DO:** `check_personal_exposure.py daegu`, run 2026-09-27 (the verdict is in
+`DECISIONS.md`). **If Daegu objects, the page comes down.**
 
 What has grown instead is the pile of **permission questions**, now four: three
 "what does silence mean?" calls and the route-colour one. They are questions

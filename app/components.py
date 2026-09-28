@@ -1050,6 +1050,24 @@ _NOTICES = [
      "stations. The categories and counts are this project's own, not figures published by the "
      "Seoul Metropolitan Government, which does not sponsor or endorse this map.",
      False),
+    # Daegu: D-데이터허브's files declare no licence; the permission rests on the
+    # portal's own policy and the Public Data Act, a reasoned position disclosed
+    # and accepted by the owner (docs/data_sources.md, "Daegu and Busan"). The
+    # credit is the suggested one, with Seoul's describe-the-changes and
+    # non-endorsement lines kept. The edition's rows end 2025-09-02, and the
+    # notice says so. Wording approved by the owner 2026-09-27.
+    ("Daegu Metropolitan City",
+     "Daegu's storefronts are from the permit data (인허가데이터) published by Daegu "
+     "Metropolitan City (대구광역시) on D-데이터허브 ([data.daegu.go.kr](https://data.daegu.go.kr)), "
+     "originally from 한국지역정보개발원: 일반음식점, 휴게음식점, 단란주점영업, 미용업, 이용업, 세탁업, "
+     "목욕장업, 제과점영업, 즉석판매제조가공업, 식품판매업(기타), 축산판매업, 담배소매업, 대규모점포 and "
+     "건강기능식품일반판매업, in the edition published as August 2026 (records to 2025-09-02). "
+     "Modified by this project: open premises were selected, sorted into three categories, "
+     "counted once per building, placed at their building (or at another permit's location at "
+     "the same address where a permit has none) and counted around subway stations. The "
+     "categories and counts are this project's own, not figures published by Daegu Metropolitan "
+     "City, which does not sponsor or endorse this map.",
+     False),
     # Taiwan: every source is OGDL v1 (read 2026-09-23 and 2026-09-25), whose
     # attribution statement is LOAD-BEARING - without it the grant is deemed never
     # made (§三(二)) - in the annex's prescribed form. The FIA's own declaration

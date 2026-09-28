@@ -974,6 +974,20 @@ CITIES = [
         # 112.5 px, measured 2026-09-25).
         "label_offset": ("start", 10, 0),
     },
+    {
+        "name": "Daegu",
+        "lat": 35.8714,
+        "lon": 128.6014,
+        "page": "pages/48_Daegu_Heatmap.py",
+        "blurb": "Daegu Metro Lines 1–3",
+        "region": "East Asia",
+        "country": "South Korea",
+        "in_default_view": False,
+        # Below the dot: above it, the pill covers Seoul's marker in East
+        # Asia at all three widths (check_macro_labels.py, width 42.9 px
+        # measured 2026-09-27).
+        "label_offset": ("middle", 0, 22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

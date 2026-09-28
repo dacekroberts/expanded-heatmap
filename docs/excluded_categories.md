@@ -1579,6 +1579,37 @@ lines are drawn, with stations inside Seoul only: 223 stations of those lines ou
 are left out. Not drawn: AREX, GTX-A, the Seohae Line, the Gimpo Goldline and intercity trains;
 every station they serve in Seoul is also on a drawn line.
 
+### Daegu - Korea's permit registers, as Seoul's, a year older than their label
+
+**Missing, not excluded.** Korea licenses food service, the personal-care trades and a set of
+food and tobacco retail trades, not retail in general: a clothes shop, a bookshop or a phone
+shop holds none of these permits, so the Retail category leans towards food and convenience
+stores.
+
+**Left out** - hostess bars and cabarets (유흥주점, the adult-services rule); lodging (숙박업) and
+veterinary clinics (동물병원), which are not read; food trucks, caterers and mobile cooking;
+wholesale meat, milk and egg traders and meat importers (every 축산판매업 channel but butchers);
+health-food sellers who trade online, door to door or by phone (every 건강기능식품 channel but
+in-store); closed, suspended and cancelled permits.
+
+**Counted once** - a premises holding several permits at one building: retail by brand for
+the five convenience-store chains and by name otherwise (18,400 retail permits to 16,269
+premises), food and personal services by name.
+
+**Not placed** - 612 open permits with no point of their own and none at their building
+(231 food, 335 retail, 46 personal services).
+
+**Names withheld** - 113 premises whose registered name is a bare personal name at an
+address that reads as a home. The telephone column is never read.
+
+**Dated** - the files are published as the August 2026 edition, but their records end in late
+August 2025 (the newest update is 2025-09-02), so the map shows Daegu as it stood then.
+
+**Stations.** Lines 1–3 are drawn, with stations inside Daegu only: 5 stations of Lines 1 and 2
+in Gyeongsan are left out. Not drawn: the Daegyeong Line (대경선), a Korail commuter line whose
+stops in Daegu are about 4 km apart, and intercity trains. Seodaegu, served only by the
+Daegyeong Line, has no ring.
+
 ### Taichung - Taiwan's national tax register, joined to the city's door plates
 
 **Left out** - online shopping (industry code 487); every industry outside retail, food service

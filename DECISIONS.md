@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**26 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**27 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Daegu's page, blurb, notice 48 and exclusions section approved and written; deploy-verify held until after Busan (owner)](#2026-09-27---daegus-page-blurb-notice-48-and-exclusions-section-approved-and-written-deploy-verify-held-until-after-busan-owner)
 - [Daegu built on its own branch: 67,212 storefronts, 86 stations, Lines 1-3, through a new shared Korean module](#2026-09-27---daegu-built-on-its-own-branch-67212-storefronts-86-stations-lines-1-3-through-a-new-shared-korean-module)
 - [Daegu's "2026-08" edition holds rows only to 2025-08-31; built anyway, with the real date on the page (owner)](#2026-09-27---daegus-2026-08-edition-holds-rows-only-to-2025-08-31-built-anyway-with-the-real-date-on-the-page-owner)
 - [The pre-push hook's first run broke the shared git config; restored by the owner, and every check now runs without git's hook variables](#2026-09-27---the-pre-push-hooks-first-run-broke-the-shared-git-config-restored-by-the-owner-and-every-check-now-runs-without-gits-hook-variables)
@@ -59,6 +60,26 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Daegu's page, blurb, notice 48 and exclusions section approved and written; deploy-verify held until after Busan (owner)
+
+- **Approved as drafted in chat**: the page prose (Seoul's, adapted, plus a
+  paragraph headed "The data is older than its label"), the snapshot caption
+  (the rows' own newest date from `provenance.json`, beside the edition's
+  name), the blurb "Daegu Metro Lines 1–3", **notice 48** (Daegu Metropolitan
+  City, D-데이터허브, originally 한국지역정보개발원; the fourteen permit types,
+  the edition and its real date, the changes, and non-endorsement), and
+  Daegu's section of `docs/excluded_categories.md`. The line colours (Line 2
+  darkened to #00664D, Line 1's red at 14.7 from Food service) were approved
+  with them.
+- **`deploy-verify` is held until at least after Busan is built** (owner),
+  then run once for both cities. This replaces a run per city with one
+  city-added sweep over two pages.
+- Checks after writing: `check_scope_disclosure.py` OK (47 cities),
+  `check_provenance.py` names Daegu OK (48 notices numbered, 47 displayed, the
+  same offset as before), `check_city_registry.py` OK,
+  `check_macro_labels.py` 0 problems, no TODO left in Daegu's page, config or
+  `cities.py` entry, and no heavy imports in `app/`.
 
 ### 2026-09-27 - Daegu built on its own branch: 67,212 storefronts, 86 stations, Lines 1-3, through a new shared Korean module
 
