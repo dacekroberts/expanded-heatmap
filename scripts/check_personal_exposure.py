@@ -258,6 +258,10 @@ REGISTRIES = {
     "daegu": dict(raw=None, trade=None, owner=None,
                   processed="businesses_clean.csv",
                   address=("address",), korean=True, withheld="Name withheld"),
+    # Busan: the same register through the city's API, the same module and pass.
+    "busan": dict(raw=None, trade=None, owner=None,
+                  processed="businesses_clean.csv",
+                  address=("address",), korean=True, withheld="Name withheld"),
     "san_diego": dict(raw="sd_businesses_active_datasd.csv", trade="dba_name",
                       owner="business_owner_name", processed="businesses_clean.csv",
                       address=("address_no", "address_road", "address_suite")),

@@ -73,7 +73,10 @@ def columns_to_read(header, source, never_read):
     """{field: source column} for one register's header. Raises on a missing
     field or an unguarded telephone column; never selects a never-read one."""
     header = [str(h).strip() for h in header]
-    phones = [h for h in header if PHONE_MARK in h and h not in never_read]
+    # A phone column is 전화 in the published files (전화번호, 소재지전화) and a
+    # ...tel code in the API's JSON (Busan's sitetel).
+    phones = [h for h in header
+              if (PHONE_MARK in h or h.lower().endswith("tel")) and h not in never_read]
     if phones:
         sys.exit(f"{source}: telephone column(s) {phones} are not in NEVER_READ - name the "
                  f"column that is actually there, or the guard covers nothing")
