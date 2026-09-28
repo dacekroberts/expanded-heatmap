@@ -276,6 +276,42 @@ The sheet as written before the build:
   inconsistent); the Sagano scenic line is left out.
 - Open: same-address successors, the short-term filter, U+E0EE and 三条通大橋東.
 
+**Tokyo** - 🔨 **BUILT on `worktree-japan` 2026-09-28, held for review time**
+(63,989 storefronts, 490 stations of which 293 hollow, 52 lines; DECISIONS
+"Tokyo step 2 on the roster" and "Tokyo's rail"). What it left for any big
+Japanese network:
+- **`route` on a LINES entry** (`japan_step1.route_sections`): a public
+  SERVICE over parts of several N02 legal lines, stopping at listed stations -
+  JR East's nine services over 山手線 / 東北線 / 東海道線 / 中央線 / 総武線 / 常磐線
+  / 京葉線 / 赤羽線 (owner: drawn in full, overlapping). `"~名"` passes a station
+  without stopping. N02's track can arrive in pieces; each hop picks the piece
+  nearest both stations.
+- **`GROUP_JOIN`**: a platform N02 grouped apart from its own station (Tokyo
+  Station's Keiyō platforms, 424 m) joins it; different stations of one name
+  stay apart. **`COLLAPSE_MAX_SPREAD_M`** is per city, citing the real
+  interchanges over it (Tokyo 550: 新宿 546 m).
+- **`SOURCE_KIND`** (`japan_step2.kind`): several sources of one kind (eight
+  wards' food lists) - the key names the source, the kind is what the
+  taxonomy reads.
+- **Line codes as on-map labels** (`render_heatmap(legend_names=...)`, owner):
+  52 full names do not fit (9 unplaceable at 1000 px; short names 59 overlaps at
+  343 px); the operators' own codes (JY, G) place all 52 at every width, and the
+  legend reads code and full name. Measure a big network's labels EARLY, in a
+  scratch render at 343 px, before tuning ends.
+- **`scripts/line_colour_search.py`**: the spatial colour search (>= 18 only
+  within 500 m, >= 10 city-wide) - 52 lines placed, where the city-wide search
+  topped out at Osaka's 34.
+- **Station names in SIGNAGE style** for Tokyo (owner): OSM's spellings follow
+  the operators' English signs (no macrons; Tokyo Metro's lowercase after a
+  hyphen); ties in JR's title case; line and ward names without macrons too.
+  The 丁目 figures rule still applies.
+- **Credits built from config** (`pipeline/tokyo/credits.py`, notice 56;
+  `check_provenance.py` L): one entry per file, each in its own ward's form.
+- **The app imports the city's config** (the page reads `HEATMAP_HTML`): never
+  run a data check at config import - the deployed app has no `data/`.
+
+The sheet as written before the build:
+
 **Tokyo (8 wards)** - ▶ **read the `tokyo-ward` skill** (2026-09-28): each ward
 is its own source (`SOURCE_MUNICIPALITY`, `source_rows`, MHLW's slice under
 `SUPERSEDES`), and `OFFICIAL_SHARES` measures each ward's share of the

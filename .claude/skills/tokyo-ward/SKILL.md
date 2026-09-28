@@ -181,11 +181,20 @@ once in prose. Tokyo's config lists its MHLW sources in `SHARE_SKIP`.
 1. The ward card, complete, with verdict ON (the owner's rule).
 2. `python scripts/screen_japan_join.py <key>`: the join, block rate against
    the other wards'.
-3. **The switch, in `pipeline/tokyo/wards.py` only**: `"status": "active"`,
+3. **The switch, in `pipeline/tokyo/wards.py`**: `"status": "active"`,
    its `food` files (and `personal`, `mhlw` if any), `encoding`,
-   `share_note`; delete `why`. Its operator columns go into
-   `japan_register.OPERATOR_COLS` if new (then the Minato control), and its
-   credit into the notice.
+   `share_note` (published on the page: plain facts only); each file's URL and
+   dataset page in `wards.URLS`; delete `why`. `wards.check()` refuses a file
+   without a URL. Then, outside the roster (2026-09-28, the build):
+   - its columns in `tokyo/config.py`'s `_COLUMNS` (`REQUIRED_COLUMNS`), the
+     operator column included where the list has one, and that spelling in
+     `japan_register.OPERATOR_COLS` if new (then the Minato control);
+   - its as-of in `_FOOD_AS_OF`, read from the permit dates;
+   - its credit in `pipeline/tokyo/credits.py`, in the form its terms
+     prescribe - `check_provenance.py` L refuses a roster file without one.
+   - A new register's name or type column that no reader knows reads as
+     empty: check `rows[0].keys()` against `NAME_COLS` / `TYPE_COLS` (the
+     catalogue registers' `名称` and `営業形態` were unknown until the build).
 4. `python pipeline/tokyo/fetch_sources.py isj` (its address files), then the
    three steps: step 1 turns its stations from hollow to ringed by itself, and
    step 2 prints and emits its share.

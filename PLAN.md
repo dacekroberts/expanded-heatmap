@@ -394,13 +394,15 @@ evidence section.
   - [ ] When the city publishes its August 2026 list: add its resource to
     `config.PORTAL_RESOURCES`, move `AS_OF` to 2026-08-31, re-run (a rebuilt
     register goes stale by one month a month).
-- [ ] **Join control** - like-for-like against the Economic Census per-ward
-  飲食店 count (the owner's chosen control) - at build. **Not yet run for
-  Kobe or Osaka**. **The e-Stat download is approved (owner, 2026-09-28)**:
-  one national per-ward table, run for Kobe and Osaka, then each city. Kobe's
-  join was checked instead against the Minato control and every screen, and a
-  GSI sample in the brief; Osaka's against the list's own coordinates (median
-  38 m).
+- [x] **Join control** - like-for-like against the Economic Census per-ward
+  飲食店 count (the owner's chosen control). **Run 2026-09-28 for all six
+  Japanese cities** (`scripts/japan_census_control.py`, peak 0.28 GB): every
+  complete list sits at 2.0-3.3 map pins per census establishment in every
+  ward (Kobe 2.38, Osaka 2.48, Sapporo 2.65, Fukuoka 2.01, Kyoto 2.62), so no
+  ward's pins land in another; Tokyo's complete wards sit in the same band
+  (Shibuya 2.49, Shinjuku 2.57, Taito 2.15) and its partial wards fall with
+  their measured shares (Chuo and Koto 0.33). DECISIONS 2026-09-28, "Tokyo's
+  census control". Re-run with each new Japanese city.
 - [x] **Rail: lines served only by limited expresses COUNT** (owner,
   2026-09-28; revertible). The Shinkansen stays out.
   - [ ] **Osaka's Umekita → 福島 stretch**, left out 2026-09-27 under the old

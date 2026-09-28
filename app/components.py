@@ -19,6 +19,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 # follow. It is the single source for every chrome colour, shared with the city
 # maps' own CSS so a reskin cannot leave the macro map on the old palette.
 from pipeline.theme import AMBIENT_THEME_JS, DARK, LIGHT, rgba  # noqa: E402
+from pipeline.tokyo import credits as tokyo_credits  # noqa: E402 - pure data, no imports
 
 OVERVIEW_PAGE = "Overview.py"
 
@@ -1273,6 +1274,22 @@ _NOTICES = [
      "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Kyoto City and MLIT did not make and do not "
      "endorse this map.",
+     False),
+    # Tokyo (notice 56): eight wards, each its own publisher, each credited in
+    # the form its own terms prescribe - BUILT from pipeline/tokyo/credits.py,
+    # which check_provenance.py holds to the roster (every file the build reads
+    # has a credit). MHLW as in Fukuoka's; MLIT as in Kobe's. Wording approved
+    # by the owner 2026-09-28.
+    ("Tokyo's wards, MHLW and MLIT (Tokyo)",
+     "Tokyo's businesses: " + tokyo_credits.notice() + ". "
+     "Processed by this project, which selected the storefront types, showed a premises in both a ward's "
+     "list and the national filings once, placed each by its address, and counted them around stations. "
+     "The national filings are not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
+     "closed. The wards, the Tokyo Metropolitan Government, MHLW and MLIT did not make and do not endorse "
+     "this map.",
      False),
 ]
 

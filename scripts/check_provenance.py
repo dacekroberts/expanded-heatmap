@@ -42,6 +42,10 @@ WHAT IT CHECKS
   D. Notice numbers are unique and contiguous from 1. They were neither: the
      list carried two item 8s and two item 15s from 2026-09-21 to 2026-09-22,
      because each country's block was appended without renumbering.
+  L. A notice BUILT from config credits every file the city reads: Tokyo's
+     (notice 56) comes from `pipeline/tokyo/credits.py`, one entry per file its
+     ward roster reads, and a roster file without one - a ward switched on
+     later - fails, as does a credit for a file no longer read (2026-09-28).
   K. Three of `CLAUDE.md`'s invariants that a new city could break silently:
 
      - **the basemap attribution is on every rendered map, and nothing is
@@ -339,6 +343,26 @@ def notice_headings(doc):
     out = []
     for m in re.finditer(r"^\*\*(\d+)\.\s+(.+?)\s+—", sec, re.M):
         out.append((int(m.group(1)), m.group(2).strip().strip("*")))
+    return out
+
+
+def check_built_credits():
+    """L: Tokyo's notice is BUILT from pipeline/tokyo/credits.py (notice 56),
+    one entry per file, because each of its eight wards is its own publisher
+    with its own prescribed credit. Every file the roster
+    (pipeline/tokyo/wards.py) reads must have an entry, and no entry may name a
+    file the roster does not read - so a ward switched on later cannot reach the
+    page uncredited, and a ward switched off does not stay credited (2026-09-28).
+    Both modules are import-safe: neither touches data/."""
+    sys.path.insert(0, str(ROOT))
+    from pipeline.tokyo import credits, wards
+    read_files = {f for w in wards.ACTIVE.values()
+                  for f in [*w["food"], *(p for ps in w.get("personal", {}).values() for p in ps)]}
+    out = [f"Tokyo reads {f} but credits.py has no credit for it" for f in sorted(read_files - set(credits.SOURCES))]
+    out += [f"credits.py credits {f}, which Tokyo's roster no longer reads"
+            for f in sorted(set(credits.SOURCES) - read_files)]
+    if tuple(credits.MHLW_FILES) != tuple(wards.MHLW_WARDS):
+        out.append(f"MHLW's slice is read for {wards.MHLW_WARDS} but credited for {credits.MHLW_FILES}")
     return out
 
 
@@ -922,6 +946,13 @@ def main():
                 f"item in data_sources.md"]))
 
     print(f"\n  notices: {len(numbered)} numbered, {len(shown)} displayed")
+
+    # --- L, a notice BUILT from config credits every source it reads ----------
+    lc = check_built_credits()
+    if lc:
+        failures.append(("built credits", lc))
+    else:
+        print("  built credits: every file Tokyo's roster reads has its credit")
 
     # --- E, the master list's own counts -------------------------------------
     regions = []

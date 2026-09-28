@@ -1773,6 +1773,49 @@ into `render_site_notices()`; displayed once Fukuoka lands).
   own name in the raw lists, 8 pins showing their permit type. The verdict is
   in `DECISIONS.md`.
 
+**56. Tokyo's wards, MHLW and MLIT (Tokyo) — required, and DISPLAYED** (written
+into `render_site_notices()`, its businesses part BUILT from
+`pipeline/tokyo/credits.py`; displayed once Tokyo lands).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-09-24; the Tokyo rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). Eight wards, each its own
+  publisher, and each credited in the form its own terms prescribe:
+  - **the Tokyo catalogue's ward files** (Chuo, Minato, Shinjuku and Koto's
+    food lists; Minato's, Taito's and Shibuya's barber, beauty and laundry
+    registers): ONE combined notice with each ward, the catalogue, each
+    dataset title and URL, the **date of use**, that the data was processed,
+    and CC BY 4.0 linked (Tokyo Open Data Terms §2);
+  - **Shibuya's food list**: 渋谷区オープンデータ利用規約 §2's pattern for
+    modified use, CC BY 4.0 linked;
+  - **Taito's food list**: the ward's four elements - 台東区, CC-BY表示4.0国際
+    linked, 本作品の内容について、台東区は一切保証しないものとする。, the page URL -
+    plus that it was modified; the link says it goes to 台東区公式ホームページ;
+  - **Setagaya's food list**: the §2 「…改変して利用しています」 form, with the
+    page URL;
+  - **Meguro's food lists and registers**: each resource title with its date,
+    目黒区, CC BY 4.0, that it was modified, and the catalogue link labelled
+    目黒区オープンデータカタログサイト;
+  - **MHLW's open data** for Chuo, Minato, Shinjuku and Koto: PDL 1.0, as in
+    54 (the source, processed, the top page only, no completeness claim).
+- **Every file the roster reads has a credit**: `check_provenance.py` refuses a
+  file in `pipeline/tokyo/wards.py` without an entry in `credits.py`, so a ward
+  switched on later cannot reach the page uncredited.
+- **MLIT's 位置参照情報 and N02** are PDL 1.0, credited as in 50. N03 (CC BY
+  4.0) only picks stations and is **never drawn**.
+- **MUST NOT**: imply any ward's, the Tokyo Metropolitan Government's, MHLW's
+  or MLIT's endorsement; use a ward logo; describe the pins as operating
+  businesses. Shinjuku: never link its PDF list (the site's linking rule; the
+  credit links the catalogue page). Shibuya: re-read its terms before each
+  republish (they may change without notice).
+- Cost clauses: Tokyo §6, Setagaya §4, Meguro 第8項, Taito's through Tokyo §6 -
+  the fault-based class the owner accepted 2026-09-24. Shibuya has none.
+- Wording approved by the owner 2026-09-28.
+- **MUST DO:** `check_personal_exposure.py tokyo` with its Japan pass, run
+  2026-09-28: 0 operator names shown; 4 trade names that are the operator's
+  own name in the raw lists, 2 pins showing their permit type. The lists
+  without an individual-operator column cannot be tested (owner accepted
+  2026-09-28, disclosed on the page). The verdict is in `DECISIONS.md`.
+
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1
 drawn": ML1 comes from CRTM's `M10_Red` (same licence, same 5 June 2026 edit date).

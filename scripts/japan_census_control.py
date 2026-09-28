@@ -53,9 +53,10 @@ def control(slug, census):
     pts = gpd.GeoDataFrame(d[[]], geometry=gpd.points_from_xy(d["longitude"].astype(float),
                                                               d["latitude"].astype(float)), crs=4326)
     wards = ward_polygons(slug)
-    hit = gpd.sjoin(pts, wards[["name", "geometry"]], predicate="within", how="left")
-    per = hit["index_right"].value_counts()
-    print(f"\n=== {slug}: {len(d):,} Food service pins; {int(hit['index_right'].isna().sum()):,} outside every ward")
+    w = wards[["name", "geometry"]].reset_index().rename(columns={"N03_007": "ward_code"})
+    hit = gpd.sjoin(pts, w, predicate="within", how="left")
+    per = hit["ward_code"].value_counts()
+    print(f"\n=== {slug}: {len(d):,} Food service pins; {int(hit['ward_code'].isna().sum()):,} outside every ward")
     print(f"    {'ward':10} {'code':6} {'map':>7} {'census':>7} {'map/census':>10}")
     rows = []
     for code, w in wards.iterrows():
@@ -78,6 +79,13 @@ def main():
     print(f"control: {japan_official.CENSUS_SOURCE}; {len(census):,} municipalities")
     for slug in sys.argv[1:] or CITIES:
         control(slug, census)
+        # its first version is a suspect in 2026-09-28's second crash: report
+        # the peak, so a heavy run is measured, not assumed light
+        try:
+            import psutil
+            print(f"    peak memory so far: {psutil.Process().memory_info().peak_wset / 2 ** 30:.2f} GB")
+        except (ImportError, AttributeError):
+            pass
 
 
 if __name__ == "__main__":

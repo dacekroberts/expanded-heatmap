@@ -30,4 +30,5 @@ from pipeline.countries import japan_fetch  # noqa: E402
 from pipeline.tokyo import config  # noqa: E402
 
 if __name__ == "__main__":
+    # no wards.check() here: the fetch is what supplies a missing file
     japan_fetch.main(config, __doc__)

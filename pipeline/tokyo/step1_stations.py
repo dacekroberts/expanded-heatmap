@@ -12,7 +12,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.countries.japan_step1 import run  # noqa: E402
-from pipeline.tokyo import config  # noqa: E402
+from pipeline.tokyo import config, wards  # noqa: E402
 
 if __name__ == "__main__":
+    wards.check()  # a half-made ward switch stops here (the roster)
     run(config)

@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**97 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**98 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Tokyo's census control, notice and page: the Economic Census control run for all six Japanese cities; zero drift in 55; Tokyo's texts approved (owner)](#2026-09-28---tokyos-census-control-notice-and-page-the-economic-census-control-run-for-all-six-japanese-cities-zero-drift-in-55-tokyos-texts-approved-owner)
 - [Tokyo's rail: JR East drawn as nine public services over N02's legal lines, 52 lines, 490 stations (293 hollow); station names in signage style; the name rule's gap accepted (owner)](#2026-09-28---tokyos-rail-jr-east-drawn-as-nine-public-services-over-n02s-legal-lines-52-lines-490-stations-293-hollow-station-names-in-signage-style-the-name-rules-gap-accepted-owner)
 - [Tokyo step 2 on the roster: 63,989 storefronts from 25 sources, 99.7% block; a source's key split from its kind; the registers read for the first time](#2026-09-28---tokyo-step-2-on-the-roster-63989-storefronts-from-25-sources-997-block-a-sources-key-split-from-its-kind-the-registers-read-for-the-first-time)
 - [Tokyo's groundwork built: the ward roster, hollow no-data stations, per-ward shares measured every build; the seven personal-services-only wards stay hollow (owner); the Tokyo build takes over this worktree](#2026-09-28---tokyos-groundwork-built-the-ward-roster-hollow-no-data-stations-per-ward-shares-measured-every-build-the-seven-personal-services-only-wards-stay-hollow-owner-the-tokyo-build-takes-over-this-worktree)
@@ -133,6 +134,49 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Tokyo's census control, notice and page: the Economic Census control run for all six Japanese cities; zero drift in 55; Tokyo's texts approved (owner)
+
+- **The Economic Census join control ran for all six Japanese cities**
+  (`scripts/japan_census_control.py`, new): Food service pins on the map per
+  ward against the 2021 census's 飲食店 establishments. Every complete list
+  sits at 2.0 to 3.3 pins per establishment in EVERY ward - Kobe 2.38 (wards
+  2.21-3.08), Osaka 2.48 (1.80-3.33), Sapporo 2.65 (2.07-3.07), Fukuoka 2.01
+  (1.78-2.11), Kyoto 2.62 (2.17-2.93) - so no ward's pins land in another's;
+  permits outnumber establishments steadily (a 2021 count, and one premises
+  can hold several permits of one kind under different names). Tokyo's
+  complete wards sit in the same band (Shibuya 2.49, Shinjuku 2.57, Taito
+  2.15) and its partial wards fall with their measured shares (Setagaya
+  1.95, Meguro 1.42, Minato 1.06, Chuo and Koto 0.33). **Light by design**:
+  the first version dissolved each prefecture's whole N03 file and died with
+  a MemoryError (a suspect in the second crash of the day); this keeps only
+  the city's own ward polygons and peaked at 0.28 GB across all six (Kobe
+  alone 0.18 GB, run first at Cleanup's request).
+- **Zero drift in all 55 cities** (`--jobs 2`, announced) after
+  `render_heatmap(legend_names=...)` and `japan_step1`'s routes: no other map
+  moved; Tokyo's committed outputs reproduce. Tokyo's baseline recorded
+  (`outputs/tokyo/baseline.json`).
+- **Approved (owner): the Tokyo page text, notice 56 and the hollow-station
+  wording** ("No business data: <ward> publishes no usable food-permit list";
+  the legend row "No business data (ward publishes no usable food-permit
+  list)"). The page's share table is READ from `official_shares.json` and the
+  roster's notes; two notes lost internal remarks before publication
+  (Meguro's "owner: ships at its measured share", Shinjuku's "its vintage").
+  The notice's businesses part is BUILT from `pipeline/tokyo/credits.py`, each
+  ward in its own prescribed form, the catalogue wards in one combined credit
+  with the date of use; Taito's list title read from its page
+  (食品営業許可施設一覧（業種順）), Meguro's resource titles from BODIK's API.
+  `check_provenance.py` gained check L: every file the roster reads has a
+  credit, and no credit names a file it does not read.
+- **Found and fixed before the page existed: the config ran `wards.check()`
+  at import.** The page imports `pipeline.tokyo.config` for `HEATMAP_HTML`,
+  and the deployed app has no `data/`, so the check would have refused every
+  file and the page would have died on deploy. It runs in Tokyo's steps now.
+- **`docs/japan_city_list.md` regenerated** (Cleanup's item): the five built
+  cities marked built, Tokyo building. Its re-measured counts moved slightly
+  since its 2026-09-27 generation (Hiroshima food 11,056 to 11,078; personal
+  services Osaka +9, Sapporo -16, Kobe -1, Tokyo -2) - the whole of
+  2026-09-28's reader and taxonomy changes; no built map moved (zero drift).
 
 ### 2026-09-28 - Tokyo's rail: JR East drawn as nine public services over N02's legal lines, 52 lines, 490 stations (293 hollow); station names in signage style; the name rule's gap accepted (owner)
 

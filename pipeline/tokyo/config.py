@@ -28,7 +28,9 @@ from pathlib import Path
 
 from pipeline.tokyo import wards
 
-wards.check()
+# wards.check() runs in the steps and the fetch, NEVER here: the deployed app
+# imports this module (its page reads HEATMAP_HTML) and has no data/, where the
+# check would refuse every missing file.
 
 # --- Paths ---------------------------------------------------------------
 
