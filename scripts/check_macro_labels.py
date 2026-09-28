@@ -155,6 +155,10 @@ TEXT_WIDTH = {
     # Kobe measured 2026-09-27 in the local app's own document (lean venv), font
     # reported loaded, with Busan 41.9 and Taichung 61.7 reproduced exactly.
     "Kobe": 34.2,
+    # Osaka measured 2026-09-27 in the local app's own document (lean venv), font
+    # reported loaded, with Kobe 34.2, Busan 41.9 and Taichung 61.7 reproduced
+    # exactly in the same run.
+    "Osaka": 40.6,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,

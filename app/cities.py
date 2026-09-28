@@ -1056,6 +1056,22 @@ CITIES = [
         # 34.2 px, measured 2026-09-27 in the app's own document).
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Osaka",
+        "lat": 34.6937,
+        "lon": 135.5023,
+        "page": "pages/51_Osaka_Heatmap.py",
+        "blurb": "Osaka Metro and the New Tram, JR, and the private railways and Hankai tram",
+        "region": "East Asia",
+        "country": "Japan",
+        "in_default_view": False,
+        # BELOW its dot: Kobe sits ~28 km west at the same latitude, and the
+        # two pills above their dots overlapped 44 x 18 px at every width.
+        # Kobe keeps its label above. Scored clear by check_macro_labels.py at
+        # 375, 768 and 1200 (width 40.6 px, measured 2026-09-27 in the app's
+        # own document).
+        "label_offset": ("middle", 0, 22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

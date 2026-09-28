@@ -75,6 +75,11 @@ def explain(value, source="food"):
             return None, "storeless pick-up (not a premises)"
         if "移動" in str(value or ""):  # Kobe's 移動美容室: a salon in a vehicle
             return None, "mobile salon (not a premises)"
+        # Osaka's laundry register: リネンサプライ (towel, oshibori and hospital
+        # linen suppliers, many named 工場) is industrial, not a counter; owner
+        # 2026-09-27. 一般リネン兼業 (a general laundry that also does linen) stays.
+        if source == "laundry" and normalise(value).startswith("リネンサプライ"):
+            return None, "linen supply (industrial, not a counter)"
         return "Personal services", f"{source} register"
     v = normalise(value)
     for name, bucket, pat in _COMPILED:
@@ -109,3 +114,5 @@ for _v, _want in (("飲食店営業", "Food service"), ("① 飲食店営業", "
 assert classify({VALUE_COLUMN: "取次所", "source": "laundry"}) == "Personal services"
 assert classify({VALUE_COLUMN: "無店舗取次店", "source": "laundry"}) is None
 assert classify({VALUE_COLUMN: "移動美容室", "source": "beauty"}) is None
+assert classify({VALUE_COLUMN: "リネンサプライ", "source": "laundry"}) is None
+assert classify({VALUE_COLUMN: "一般リネン兼業", "source": "laundry"}) == "Personal services"
