@@ -80,14 +80,7 @@ offline, so check which row is live before sending.
      Brampton is discarded until the Hurontario LRT (revisit mid-2027).
    - Record per country in `global_country_shortlist.md`, the results in the
      master list, and one DECISIONS entry per group.
-2. **Göteborg's rail (small-research item 5), attempted and FAILED on the
-   host.**
-   - The boundary lookup `admin_level=7, name="Göteborgs kommun"` returned
-     an empty 200 and a 504. That is a host or query problem, not a finding.
-   - Retry with a cheaper query: resolve the kommun by name inside a bbox, or
-     count stops by route membership inside a bbox first.
-   - The script is `gbg.py` in the durable scratch (below). The master list
-     still says its rail is "INHERITED, not measured".
+2. ✅ **Göteborg's rail: done 2026-09-27** (13 tram lines, 127 stops inside the city; master list and DECISIONS).
 3. **Band T's group decision is DEFERRED by the owner** until the tram list
    (done) AND wave 2 are complete. Don't raise it before then.
 4. **Tram rescopes, heavy category (Toronto, Milan, Prague): held.** It

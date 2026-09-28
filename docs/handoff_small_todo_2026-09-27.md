@@ -37,7 +37,7 @@ row change.
    could use? The `address-join` skill has the method, including a control.
    **If it needs an account or an API key, stop and report**; do not
    register.
-5. **TAKEN BY STAGING, not for this session** (attempted 2026-09-27; its
+5. **DONE by Staging 2026-09-27: skip it** (13 tram lines, 127 stops; see DECISIONS). (Was: attempted first; its
    boundary query failed on the host; the retry is in
    `docs/handoff_staging_2026-09-27.md`). **Göteborg's rail** (Band T row:
    "Trams, no metro — INHERITED, not
