@@ -6,6 +6,16 @@ the `address-join` skill, measured by `scripts/screen_japan_join.py sapporo`.
 
 **✅ Decided by the owner, 2026-09-24, for every Japanese city:** (1) **the Shinkansen does not count**, since it is long-distance travel between cities; (2) **the city line only**: only stations inside the city get rings, matching the city-only permit list, with a per-line stub test at build (any urban line cut to a stub goes back to the owner); (3) **菓子製造業 and そうざい製造業 count**, in the Retail bucket (bakeries, confectioners and delis sell over a counter), with the factory and central-kitchen share measured from trade names before publishing. Open items below that ask these questions are answered.
 
+**✅ Decided since, and corrected here at the build (2026-09-28):** (4) **the
+owner's name rule** (2026-09-27, every Japanese city) supersedes this brief's
+old privacy line: the operator columns are read IN MEMORY to compare with the
+trade name, never kept (Privacy, below); (5) **lines served only by limited
+expresses count** (owner, 2026-09-28); (6) **coin laundries count, as
+Personal services** (owner, 2026-09-28: near transit they draw steady
+short-term customers). Kobe and Osaka had no coin-laundry register; Sapporo
+publishes one. (7) JR Hokkaido is **cut at the city line** (the 2026-09-24
+city-line call), so Otaru, Ebetsu and Chitose fall outside.
+
 ---
 
 ## The one-line summary
@@ -26,6 +36,22 @@ near-block precision.** Personal services 5,993.
 
 **Personal services** (`sapporo_environmental_hygiene_services`, 2026-07-31):
 理容 / 美容 / クリーニング (+ coin laundries) — **5,993 premises**.
+
+*Read at the build, 2026-09-28 (`package_show`, CC-BY-4.0; the cached files,
+UTF-8 with a BOM, comma-separated):* four resources are used, each under
+`https://ckan.pf-sapporo.jp/dataset/0be3aa70-e0b3-4ac1-8674-35e995195627/resource/`:
+
+| Register | Resource / file | Rows |
+|---|---|---|
+| 理容所 | `c1edfb53-2440-4cda-9007-e76962d3d5eb/download/sapporo-eigyoshisetsu-riyo-r80731.csv` | 1,486 |
+| 美容所 | `78e5ffc3-19ac-4836-9bc6-fdd48d6104a9/download/sapporo-eigyoshisetsu-biyo-r80731.csv` | 3,838 |
+| クリーニング所 | `4fe5d75d-2f5b-4f6d-8f36-ca91788ff23f/download/sapporo-eigyoshisetsu-cleaning-r80731.csv` | 746 |
+| コインランドリー | `2e6f12c9-9e19-4b8d-a3f7-c588c9b2df0c/download/sapporo-eigyoshisetsu-coinlaundry-r80731.csv` | 254 |
+
+Columns: **業種区分**, **施設名称**, 都道府県, **施設所在地**, 施設ﾋﾞﾙ名, 施設TEL,
+開設者名, 開設者住所, 開設者ﾋﾞﾙ名, 開設者TEL, 許可年月日, 前月許可. The same
+dataset also lists inns (旅館), public baths and saunas (公衆浴場) and theatres
+(興行場): not storefronts in this project's three buckets, not used.
 
 ### Taxonomy — `業種名` (39 types)
 
@@ -71,7 +97,8 @@ centroid them. See `docs/commuter_rail_list.md`.
 ## Scope
 
 **Sapporo City (10 wards)**; JR lines run on to Otaru, Ebetsu and the airport
-(Chitose) — stations beyond the city fall outside; owner's call at build.
+(Chitose) — stations beyond the city fall outside. ✅ Decided: the city line
+(owner, 2026-09-24), so they stay outside.
 
 ## ✅ Licences — READ 2026-09-24
 
@@ -100,7 +127,17 @@ centroid them. See `docs/commuter_rail_list.md`.
 
 **申請者名** (applicant) carries individuals' names; the registers carry
 **開設者名 and 開設者住所** (the operator's own address) on 1,308 beauty rows.
-Read only 屋号 / 施設名称, 業種名 and 施設所在地. Run `check_personal_exposure.py`.
+~~Read only 屋号 / 施設名称, 業種名 and 施設所在地.~~ **Corrected 2026-09-28 by
+the owner's name rule (2026-09-27):** 申請者名 and 開設者名 are read IN MEMORY
+by `japan_register.name_is_operator()` (both are already in `OPERATOR_COLS`)
+and only its yes/no is kept; where the trade name is the operator's own name,
+the pin shows its permit type. **Never selected or written anywhere**:
+開設者住所, 開設者ﾋﾞﾙ名, 開設者TEL and 施設TEL (`city_rows()` loads whole rows,
+as for Kobe's phones; step 2 selects its columns by name, and nothing else
+leaves memory). The owner allowed this rule to be adapted if memory-only
+reads proved impractical (2026-09-28); they did not, since japan_step2
+already works this way. Run `check_personal_exposure.py`
+(`japan=True`; the Latin heuristic cannot read Japanese names).
 
 ## Region
 
@@ -126,6 +163,13 @@ Read only 屋号 / 施設名称, 業種名 and 施設所在地. Run `check_perso
     "kind": "http_contains",
     "url": "https://ckan.pf-sapporo.jp/api/3/action/package_show?id=sapporo_food_business_licences",
     "present": ["cc-by"]
+  },
+  {
+    "id": "sapporo-registers-licence",
+    "claim": "Sapporo's catalogue declares the personal-services registers (barber, beauty, cleaning, coin laundry) CC BY 4.0",
+    "kind": "http_contains",
+    "url": "https://ckan.pf-sapporo.jp/api/3/action/package_show?id=sapporo_environmental_hygiene_services",
+    "present": ["cc-by", "sapporo-eigyoshisetsu-coinlaundry-r80731.csv"]
   },
   {
     "id": "sapporo-isj-chuo-live",

@@ -24,6 +24,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 **2026-09-28**
 
+- [Sapporo's brief corrected before the build; coin laundries count as Personal services (owner)](#2026-09-28---sapporos-brief-corrected-before-the-build-coin-laundries-count-as-personal-services-owner)
 - [One shared Japanese fetch: pipeline/countries/japan_fetch.py, before Sapporo](#2026-09-28---one-shared-japanese-fetch-pipelinecountriesjapan_fetchpy-before-sapporo)
 - [Three review-time calls: Japanese limited-express lines count, the e-Stat download approved, Hong Kong and Riga move to the shared thin() (owner)](#2026-09-28---three-review-time-calls-japanese-limited-express-lines-count-the-e-stat-download-approved-hong-kong-and-riga-move-to-the-shared-thin-owner)
 - [Next builds: Band A's Japanese cities, ending with Tokyo, then the additions to built cities (owner)](#2026-09-28---next-builds-band-as-japanese-cities-ending-with-tokyo-then-the-additions-to-built-cities-owner)
@@ -112,6 +113,35 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Sapporo's brief corrected before the build; coin laundries count as Personal services (owner)
+
+- **Coin laundries count, in Personal services (owner):** near transit they
+  draw steady short-term customers. Sapporo publishes a コインランドリー
+  register (254 rows, 2026-07-31) beside its barber, beauty and cleaning
+  registers; Kobe and Osaka had none. Recommended as a question, not
+  against: an unstaffed premises is a thinner storefront than a staffed
+  laundry. The taxonomy change lands with step 2.
+- **`docs/build_briefs/sapporo.md` corrected, as the `japan-city` skill
+  requires of every pre-Kobe brief**, and its checks re-run live: **5 of 5
+  hold**, one added (the registers' dataset declares CC BY 4.0 and lists the
+  coin-laundry file).
+  - **The registers' four resource URLs recorded**, read from the city's
+    CKAN `package_show`: barber 1,486, beauty 3,838, cleaning 746, coin
+    laundry 254 rows. The same dataset's inns, public baths and theatres are
+    outside the three buckets and not used.
+  - **The privacy section follows the owner's name rule** (2026-09-27):
+    申請者名 and 開設者名 are read in memory by `name_is_operator()` (both
+    already in `OPERATOR_COLS`), and 開設者住所, 開設者ﾋﾞﾙ名, 開設者TEL and
+    施設TEL are never selected or written. The owner allowed the memory-only
+    read to be adapted if impractical; it is not, since `japan_step2`
+    already works this way.
+  - **Decided calls marked**: the limited-express rule and the city line
+    (JR Hokkaido cut at it).
+  - Everything the build reads is already cached from the screen (the food
+    list, the four registers, all 10 wards' block and chōme files, N02 and
+    Hokkaido's N03); only the OSM station and tram-stop names remain to
+    fetch.
 
 ### 2026-09-28 - One shared Japanese fetch: pipeline/countries/japan_fetch.py, before Sapporo
 
