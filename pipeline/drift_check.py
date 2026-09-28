@@ -256,6 +256,12 @@ def resolve_changed(ref: str, all_cities) -> list:
 
 
 def main():
+    # Steps print place and business names (Czech, Korean, Chinese...), and a
+    # Windows console defaults to cp1252: `drift_check.py prague` raised
+    # UnicodeEncodeError on a Czech letter (2026-09-27). UTF-8 regardless.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     args = sys.argv[1:]
     list_only = "--list" in args
     args = [a for a in args if a != "--list"]

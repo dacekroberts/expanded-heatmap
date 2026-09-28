@@ -438,8 +438,8 @@ Cities built and running end to end (pipeline, map, app page):
   which is what keeps the unbuilt Linea 4/6 monorail stations (already tagged
   `railway=station` in OSM) off the map. Gate 3 runs in full against the
   operator's network map, and Linea 3 is drawn in the operator's red rather
-  than OSM's orange. Unlike the other two Mexican cities it keeps the
-  whole-city heat layer.
+  than OSM's orange. It keeps the whole-city heat layer, as the other two
+  Mexican cities do again.
 
 - **Madrid** - Metro de Madrid: Líneas 1-12 and the Ramal Ópera-Príncipe Pío.
   **The first city in Europe.** Distinctive in four ways.

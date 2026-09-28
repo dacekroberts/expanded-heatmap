@@ -65,10 +65,8 @@ def main():
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
         label_focus=union,
-        # 117,454 businesses against a within-ring subset - the same shape that
-        # made Mexico City's map 6.7 MB heavier. Off here too, and stated on
-        # the city page.
-        all_city_heat=False,
+        # The whole-city layer (117,454 points) is back (owner, 2026-09-27),
+        # with Mexico City's; it had been dropped to match that city.
     )
 
 

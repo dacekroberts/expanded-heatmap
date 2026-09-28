@@ -16,11 +16,21 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**403 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**413 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Session loose ends closed (owner): Riga on JSON.parse, the main checkout current, UTF-8 output in two tools, and the Czech coordinate control per city](#2026-09-27---session-loose-ends-closed-owner-riga-on-jsonparse-the-main-checkout-current-utf-8-output-in-two-tools-and-the-czech-coordinate-control-per-city)
+- [Daegu's and Busan's licences read: Busan permitted with a credit, Daegu on a reasoned position after the national route failed (owner)](#2026-09-27---daegus-and-busans-licences-read-busan-permitted-with-a-credit-daegu-on-a-reasoned-position-after-the-national-route-failed-owner)
+- [Wave-1 second-city screens banded: 43 candidates added, 32 of them trams-only; edge networks stay in T, Band C widened (owner)](#2026-09-27---wave-1-second-city-screens-banded-43-candidates-added-32-of-them-trams-only-edge-networks-stay-in-t-band-c-widened-owner)
+- [overpass.osm.ch removed from every Overpass host list; all-zero counts refused; check_overpass_hosts.py keeps regional extracts out](#2026-09-27---overpassosmch-removed-from-every-overpass-host-list-all-zero-counts-refused-check_overpass_hostspy-keeps-regional-extracts-out)
 - [Monterrey (Regional) built: Mexico's third city, scoped by INEGI's municipio code, Línea 3 in the operator's red](#2026-09-27---monterrey-regional-built-mexicos-third-city-scoped-by-inegis-municipio-code-línea-3-in-the-operators-red)
+- [East Asia second-city screen: Daegu and Busan reopen on their cities' own portals; Busan's frozen snapshot accepted (owner)](#2026-09-27---east-asia-second-city-screen-daegu-and-busan-reopen-on-their-cities-own-portals-busans-frozen-snapshot-accepted-owner)
+- [Every city drawn on every world copy on the front page (owner): East Asia shows on the left of the Global view; labels need only be collision-free within their own region](#2026-09-27---every-city-drawn-on-every-world-copy-on-the-front-page-owner-east-asia-shows-on-the-left-of-the-global-view-labels-need-only-be-collision-free-within-their-own-region)
+- [Cluster animation stays off (owner): re-measured after the JSON.parse rework, it still adds ~250-550 ms to every zoom, on the heaviest map as on Paris](#2026-09-27---cluster-animation-stays-off-owner-re-measured-after-the-jsonparse-rework-it-still-adds-250-550-ms-to-every-zoom-on-the-heaviest-map-as-on-paris)
+- [Mexico City's and Guadalajara's whole-city heat layers restored (owner): every map now has one](#2026-09-27---mexico-citys-and-guadalajaras-whole-city-heat-layers-restored-owner-every-map-now-has-one)
+- [The lost research data restored into main's data/: 466 files, and 82 HTML placeholders caught and replaced](#2026-09-27---the-lost-research-data-restored-into-mains-data-466-files-and-82-html-placeholders-caught-and-replaced)
+- [Mobile mode removed and Seoul's whole-city heat layer restored (owner): the full maps load on the iPhone once their data is JSON.parse](#2026-09-27---mobile-mode-removed-and-seouls-whole-city-heat-layer-restored-owner-the-full-maps-load-on-the-iphone-once-their-data-is-jsonparse)
 - [Monterrey's three calls decided (owner)](#2026-09-27---monterreys-three-calls-decided-owner)
 - [Threshold probe closed (owner): the exact per-device limit no longer decides anything, and the 20,000 inline-literal cap is final](#2026-09-27---threshold-probe-closed-owner-the-exact-per-device-limit-no-longer-decides-anything-and-the-20000-inline-literal-cap-is-final)
 - [Monterrey (Regional) screened into Band A: its only negative was obsolete](#2026-09-27---monterrey-regional-screened-into-band-a-its-only-negative-was-obsolete)
@@ -452,6 +462,159 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Changes
 
+### 2026-09-27 - Session loose ends closed (owner): Riga on JSON.parse, the main checkout current, UTF-8 output in two tools, and the Czech coordinate control per city
+
+- **Riga re-rendered**: every one of the 46 maps now ships its data as
+  JSON.parse. The Main Building Session confirmed the Riga worktree was
+  removed with everything on master (`20af557`), so the render was free.
+  Decoded data are identical, and the map goes from 0.99 to 0.93 MB.
+- **Main checkout fast-forwarded** from `6ec6010` (2026-09-23), about 310
+  commits behind, to `origin/master` (`71a15e9`). It had no tracked changes.
+  One untracked stray download at its root, `opd.pdf`, was left for the
+  owner.
+- **UTF-8 output**: `scripts/check_personal_exposure.py` and
+  `pipeline/drift_check.py` now reconfigure stdout and stderr to UTF-8.
+  - Both raised `UnicodeEncodeError` on a Windows console partway through:
+    the privacy gate on Han and Hangul names, the drift check on a Czech
+    letter in Prague. The cities after the crash were then never checked.
+  - Both now run clean with no `PYTHONIOENCODING`: the privacy check on
+    Seoul, Hong Kong and Taipei, the drift check on Prague.
+- **The Czech RUIAN control is per city**: `czechia_register.ruian()` read
+  a module-level Prague Castle address and failed every other town
+  (Staging, second-city screens).
+  - It now reads `cfg.RUIAN_CRS_CONTROL` (code, lat, lon, label), and
+    refuses with instructions when a config has none.
+  - Prague's config carries the castle, and `drift_check.py prague`
+    reports zero drift.
+  - Brno, or any next Czech city, declares one known address in its own
+    obec.
+
+### 2026-09-27 - Daegu's and Busan's licences read: Busan permitted with a credit, Daegu on a reasoned position after the national route failed (owner)
+
+- **Busan's `LocalDataService` API: PERMITTED WITH CONDITIONS.** The grant
+  is the portal's own data-use policy ("영리 목적의 이용을 포함한 자유로운
+  활용이 보장됩니다", no application needed). The conditions are a reasonable
+  source credit and good-faith use, with no wording prescribed. **The owner
+  accepted the natural reading of the portal terms' 제14조** (platform IP
+  covers only works the portal itself authored; this register is entered by
+  the districts through the Ministry's system). The restrictive reading was
+  recorded, not adopted. Busan's machine licence field was found unreliable on
+  a control dataset, so it carries no weight either way. The API returns a
+  phone field (`sitetel`), which is never published.
+- **Daegu's D-데이터허브 files: AMBIGUOUS, and the owner chose "probe the
+  national file host first; if not, fall back to the permissive reading".**
+  The dataset pages declare nothing, and the portal repeats the national
+  free-use guarantee. But the City's copyright guide asks that material
+  without a KOGL mark be used "after prior consultation" with its
+  public-works officers.
+  - **The probe failed.** `file.localdata.go.kr`, which the data.go.kr
+    listings link to, answered 403 to a plain fetch and to the browser. The
+    listing's file is dated 2025-11-27, older than Daegu's 2026-08 edition.
+  - **So Daegu proceeds on the permissive reading, disclosed.** The reasons:
+    the guide is about copyright works, the data portal does not link to it,
+    its wording is a request, and 공공데이터법 제3조④ forbids restricting
+    public data. The consultation stays an owner act, not a prerequisite. An
+    objection from Daegu takes the page down.
+- **Found that one national register carries three sets of declared terms**:
+  KOGL Type 1 via Seoul, none via Daegu and Busan, and 제한 없음 on data.go.kr
+  now (the evidence trail's "KOGL Type 1" for 15096283 is out of date).
+  Seoul's KOGL duties therefore do not carry over by licence.
+- Recorded in `docs/data_sources.md` (a new Daegu and Busan section) and in
+  `docs/city_master_list.md`'s Band A rows. Both cities go to a brief next.
+
+### 2026-09-27 - Wave-1 second-city screens banded: 43 candidates added, 32 of them trams-only; edge networks stay in T, Band C widened (owner)
+
+- **Banded the three wave-1 screens under the first-blocker rule and the
+  owner's answers.** Candidates 21 → 64: A 9 (Daegu, Busan), C 13 (+6), T 32
+  (new), D 10 (+3). Discards 27 → 33. The per-city rows are in
+  `docs/city_master_list.md`; the per-country methods in
+  `docs/global_country_shortlist.md`'s new first section.
+- **France: 21 trams-only cities, and no new metro city exists.** SIRENE
+  through the built step-2 chain reproduced Rennes (3,479) and Toulouse
+  (8,635) exactly as the control, so the business counts are trusted. The
+  largest by storefronts within 966 m of a station: Bordeaux 10,754 (over 14
+  communes), Nice 9,379 (every line inside the commune, no scope call),
+  Montpellier 6,179 (87 stations), Strasbourg 5,482. The mode is decided per
+  city, because the NAP's flags and the feeds' `route_type` were wrong three
+  ways (Reims' tram typed as metro, school buses as tram, a Translohr as
+  tram).
+- **Czechia, Norway, Denmark and Latvia: 11 trams-only cities.** Brno is the
+  strongest trams-only find anywhere (7,229 storefronts, 146 stations, CC BY
+  GTFS, restaurant ratio 1.61× against Prague's 1.59-1.63×); Bergen the
+  cheapest (Oslo's modules unchanged, every licence read, 96.2% join).
+- **Edge networks stay in Band T, tagged EDGE (owner's call).** The
+  alternative, counting EDGE as metro, would have moved Nice, Rouen, Bergen
+  and Aarhus to A. Rejected for one rule: none has a metro, the tag lets any
+  one be pulled up, and Band T is buildable anyway (Riga).
+- **Band C widened to "one bucket only, or buckets with a measured gap"
+  (owner's call)**, for Incheon (no coordinates; retail only as health-food)
+  and the Gyeonggi satellites (no café layer; no status on takeaway food).
+  The rejected alternatives: reopening the coordinates band for Incheon alone,
+  or parking both in D, which is for access, not gaps. Den Haag, Utrecht,
+  Rijswijk and Delft join C in its original sense (shops, no current food).
+- **Denmark is placed through OSM's imported DAR address points (owner's
+  call: "OSM unless we need the data account, then let me know").** Their
+  `osak:identifier` is the DAR Husnummer id; 95% of central Copenhagen's are
+  in OSM at a median 0.03 m from DAR, placing 97.0% of Aarhus and 98.4% of
+  Odense, keyless, under ODbL. The Datafordeler account is reopened only if a
+  build proves it necessary, and the owner is told first.
+- **Discarded on rail**: Tainan and Hsinchu (no urban rail), Trondheim (its
+  one line, cut back to Ila-Lian this timetable, reaches 3.7% of storefronts
+  within 483 m), Aubagne (7 stations, 526 storefronts: a judgement, and
+  reversible), Clermont-Ferrand (a Translohr guided bus) and Saint-Louis (4
+  stops at the end of a Basel line).
+- **The overpass.osm.ch defect went to Cleanup (owner's call).** The
+  Swiss-only mirror in `pipeline/osm.py` answers other countries' queries with
+  HTTP 200 and zero results, and `fetch()` accepts it; it hit four of the
+  screen's counts. Also sent: `czechia_register.ruian()` hard-codes a Prague
+  address check, which must move into each city's config before Brno.
+- **Held by the owner**: the tram rescopes of built cities (Cleanup's list:
+  Toronto, Milan, Prague, Paris, Barcelona, Rome, Hong Kong to rescope;
+  Montréal's REM, Madrid's ML1, San Francisco's F Market, Fortaleza, D.C. and
+  Mexico City's Cablebús as calls), likely at the next reset; and wave 2 of
+  the screens.
+- **A second privacy slip, on file.** Reading the Latvian excise file's header,
+  the screen printed two raw rows to its console, including the holder
+  column the Riga build never reads; one name looked like a sole trader's.
+  Nothing was written, and every later read selected columns by exact name.
+- **The screens' 1.1 GB of downloads were copied into the main checkout's
+  `data/`** (no-clobber); `check_worktree_data.py` reports every file present
+  at the same size.
+### 2026-09-27 - overpass.osm.ch removed from every Overpass host list; all-zero counts refused; check_overpass_hosts.py keeps regional extracts out
+
+- **Reported by Staging (second-city screens, relayed as owner-approved)**:
+  `overpass.osm.ch` serves a Swiss-only extract. Outside Switzerland it
+  answers HTTP 200 with nothing, or with zero counts for `out count`. It
+  gave zeros for Daugavpils, Aarhus, Zoetermeer and Amstelveen.
+- **Where it sat**: three host lists - `pipeline/osm.py` (the shared
+  fetcher), `pipeline/countries/mexico.py` (Mexico City and Guadalajara)
+  and `scripts/brief_check.py`. The East Asian configs and
+  `screen_stop_spacing.py` never had it.
+- **The hazard was narrower than first reported.** All three fetchers
+  already refused a fully EMPTY answer as a host failure; the mirror was
+  documented doing exactly that in 2026-09-22. What passed was an all-zero
+  `out count` answer, which is one element, not none. No pipeline step or
+  brief check uses `out count` (only the screens' scratch scripts did), so
+  no build could have taken an empty rail leg from it.
+- **No built city's rail came from it.** Of the cached OSM JSON files in
+  the main checkout that record their source (`_fetched_from`), 36 came
+  from overpass-api.de and 6 from overpass.kumi.systems. None came from
+  osm.ch.
+- **Changes**:
+  - The host is removed from all three lists.
+  - `osm.fetch()` treats an all-zero count answer like an empty 200 and
+    moves to the next mirror. Tested with a faked host sequence: the zero
+    count was refused and the real count from the next host accepted.
+  - New `scripts/check_overpass_hosts.py` scans `pipeline/` and `scripts/`
+    for every Overpass host URL. It fails on a known regional extract and
+    on any host not in its global allowlist; `--live` asks each host about
+    Tokyo and São Paulo, and `--selftest` watches it refuse. It passes now,
+    with 2 hosts.
+- **Not done, logged in PLAN**: Staging's second defect.
+  `czechia_register.ruian()` hard-codes Prague Castle as its coordinate
+  check and would stop any other Czech city. It is not urgent, since no
+  second Czech city is being built, but must be fixed before Brno.
+
 ### 2026-09-27 - Monterrey (Regional) built: Mexico's third city, scoped by INEGI's municipio code, Línea 3 in the operator's red
 
 - **Built Monterrey (Regional) on the national DENUE modules, and held it on
@@ -515,6 +678,270 @@ onwards; the early ones are split by phase rather than by hour.
   "OSM", which `check_provenance.py`'s citation check reads as naming INEGI;
   it now names OpenStreetMap. `city_master_list.md`'s Built count is 47 on
   this branch; its Band A counts are left to the staging session.
+### 2026-09-27 - East Asia second-city screen: Daegu and Busan reopen on their cities' own portals; Busan's frozen snapshot accepted (owner)
+
+- **Found that the 2026-09-22 closures of Daegu and Busan were findings about
+  a ROUTE, not about the data.** Both were closed on the per-district
+  data.go.kr route (Busan 4 of 16 districts; Daegu 4 of 9, downtown 중구
+  missing), the shape the closed tiers call "the Daegu failure". Each city's
+  own portal also republishes the national licence register (LOCALDATA)
+  CITYWIDE, keyless and with coordinates. This supersedes the 2026-09-22
+  "Busan and Daegu closed" record and the add-country line "Korea: 1 city
+  (Seoul only)".
+  - **Daegu**: `data.daegu.go.kr` monthly permit files (2026-08 edition),
+    the LOCALDATA schema with EPSG:5174 points, all 9 districts including
+    중구. Food 39,915 (30,530 restaurants, 9,385 cafés); personal at least
+    10,475; retail at least 6,492 from tobacco alone, with bakeries,
+    butchers and health-food in sibling files not yet pulled. Points on
+    96-99% of rows. Rail: Lines 1-3 (Line 3 a monorail), 86 stops in the
+    city, from OSM because Korea's station dataset lacks Daegu Metro.
+  - **Busan**: the city's keyless `LocalDataService` Open API (catalogued
+    OA_TT00001-39), 1,000 rows a page, all 16 districts. Food about 55.4k,
+    personal 16,240, retail about 22.7k before de-duplication. Points on
+    94-99.6%. Rail: Lines 1-4 (Line 4 a monorail), about 100 stations, plus
+    the Busan-Gimhae LRT.
+  - Both reuse Seoul's `korea_localdata` modules. **Licences are unread for
+    both**, so a `licence-read` runs before either brief.
+- **Busan's feed is frozen at 2026-04-15, and the owner accepted building
+  from that snapshot ("Busan snapshot ok").** Every operation's maximum
+  `updatedt` is that date, the day before LOCALDATA moved to data.go.kr. The
+  page states the snapshot date, as Fukuoka's page states its own gap. The
+  rejected alternative, waiting for a refreshing source, has no known end:
+  the refreshing route is the national portal's CAPTCHA-gated one. The API
+  is a catalogued Open API, not a page's lookup back end, so the 2026-09-24
+  rule against harvesting lookup back ends does not reach it.
+- **Gyeonggi's download page asks a "purpose of use" radio (U01-U05); the
+  owner ruled it is answered honestly at build ("answer Gyeonggi
+  honestly").** The screen skipped it and the server served the CSV anyway.
+  Serving without an answer is not permission to skip the question.
+- **Proposed bands, pending the owner's confirmation with the other
+  wave-1 screens:**
+  - **Incheon**: citywide active-only lists, keyless, all 10 districts, but
+    **addresses only** (a 2026-01 snapshot), retail only as health-food, and
+    an operator-name column (`업자명`) that must be dropped. Korea's official
+    address database (juso.go.kr) is the unprobed join.
+  - **Gyeonggi satellites** (Uijeongbu, Yongin, Gimpo named; the province's
+    registers cover all 31 시군): the café file has no name, location or
+    status, the takeaway-food file no status, restaurants X/Y but no address
+    (a boundary join places them).
+  - **Daejeon and Gwangju**: no city portal (DNS fails), and the national
+    portal is behind the residency and CAPTCHA wall: access-blocked.
+  - **Gimhae**: provincial hosts time out: access-blocked, noted light rail
+    only.
+  - **Kaohsiung**: the geo-block re-measured today (every data host times
+    out on TCP while `www` answers): stays access-blocked.
+  - **Tainan and Hsinchu**: no urban rail in OSM (Tainan's Blue Line under
+    construction, Hsinchu's light rail planned): discards. The claim that
+    their TRA locals fail the frequency test is ASSERTED, because TDX needs a
+    key.
+- **Trams-count applied to built cities: listed first, decided case by
+  case (owner).** The screen noted that Hong Kong's map left out Hong Kong
+  Tramways (83 stops) by the owner's call of 2026-09-24, before trams
+  counted. The owner asked for every built city in that position to be
+  listed before any rescoping, and each judged on its own. The listing was
+  sent to Cleanup; rescoping, if any, is main's, city by city.
+- **Privacy note.** A failed first Gyeonggi download printed raw CSV bytes
+  to the screen agent's console, including truncated phone fragments.
+  Nothing was saved or reported, and the code was fixed. Recorded so the
+  slip is on file, not only in a transcript.
+- Macau (separate jurisdiction, not a built country) was not screened for
+  business data; its LRT would class as an edge network.
+### 2026-09-27 - Every city drawn on every world copy on the front page (owner): East Asia shows on the left of the Global view; labels need only be collision-free within their own region
+
+- **The defect, confirmed in a render before fixing**: on a canvas wider
+  than one world, the basemap repeated ("ASIA" and "AUSTRALIA" on the left)
+  but deck.gl drew the city layers only on the primary copy (-180..180).
+  Seoul, Hong Kong, Taipei, Taichung and Taoyuan appeared only past Europe.
+- **The fix**: `views=[pdk.View(type="MapView", controller=True,
+  repeat=True)]` on the `pdk.Deck` in `app/Overview.py`.
+  - pydeck's default view is this same MapView with `controller=True`, so
+    only `repeat` changes. pydeck 0.9.3 serialises it straight through.
+  - It applies to every region, as the owner asked.
+- **Verified in the lean app at 1200 px**:
+  - Seoul and Taipei (Regional) now draw at the left edge on load.
+  - Clicking Taipei's pill on the wrapped copy opened its page.
+  - `check_macro_attribution.mjs` passes at 375, 768 and 1200 px in both
+    themes; the credit is still on top of every copy.
+  - `check_macro_labels.py` reports 0 problems across 10 regions at 3
+    widths.
+  - `check_deploy_imports.py` passes on the commit.
+- **Owner's rules for the macro map, stated while this was built**:
+  - **Clipped labels are fine.** A city at the canvas edge is reached by
+    panning, as the East Coast labels already are at phone width. At 1200 px
+    Seoul's wrapped copy sits almost exactly on the left edge, so its pill
+    is half off-canvas; that is accepted.
+  - **What matters is that every city is drawn** where it is on screen.
+  - **Labels must not overlap within their own region, at that region's
+    fitted zoom.** Fitting the whole globe collision-free is not a goal.
+  - **Duplicates when zoomed far out** (one per world copy, both clickable)
+    are accepted.
+- **Therefore `check_macro_labels.py` was left scoring the primary copy.**
+  The handoff proposed adding the wrapped copies to its Global scoring. That
+  scoring was written and then reverted on the owner's rule, since Global is
+  not held to collision-free labels. Every leaf region is fitted at a zoom
+  where one world spans thousands of pixels, so no wrapped copy reaches its
+  canvas.
+- **No reboot is needed**: `app/Overview.py` is the entry script, which
+  "Updated app!" re-runs; no imported module changed.
+
+### 2026-09-27 - Cluster animation stays off (owner): re-measured after the JSON.parse rework, it still adds ~250-550 ms to every zoom, on the heaviest map as on Paris
+
+- **The owner's question**: the animation was switched off on 2026-09-23,
+  before the JSON.parse rework. Does it still cost lag on the heaviest
+  maps?
+- **Method**: `scripts/profile_zoom.mjs` (headless Edge, trusted input,
+  1280x900), median of three fresh loads per case.
+  - Paris was chosen to compare with the 2026-09-23 baseline, and Seoul as
+    the heaviest map (224,381 dots, 24.2 MB).
+  - Each city was rendered twice in the session scratchpad from the
+    committed pipeline: once as committed (`animate: false`) and once with
+    `animate_clusters=True`. No committed file changed.
+  - "Settle" is the time from the first input to the last map event.
+
+  | Scenario | Paris off | Paris on | Seoul off | Seoul on |
+  |---|---|---|---|---|
+  | +/- button, one click | 371 ms | 655 ms (+284) | 381 ms | 636 ms (+255) |
+  | Wheel, one notch | 443 ms | 715 ms (+272) | 448 ms | 687 ms (+239) |
+  | Cluster click | 436 ms | 987 ms (+551) | 440 ms | not finished |
+  | Three quick notches | 953 ms | 1,642 ms (+689) | 865 ms | 1,158 ms (+293) |
+  | +/- button, three clicks | 1,464 ms | 2,181 ms (+717) | 1,246 ms | 1,734 ms (+488) |
+  | Slow wheel roll | 2,423 ms | 3,638 ms (+1,215) | 1,987 ms | not finished |
+
+- **What it shows**:
+  - **The rework changed nothing here.** Paris's +/- click, 371 ms off
+    against 655 ms on, matches the 2026-09-23 figures of 366 and 647 ms.
+    JSON.parse changes how a map loads, once; the animation's cost is paid
+    on every zoom.
+  - **The cost does not grow with the map.** Seoul, with 2.7 times Paris's
+    dots, pays about the same +250 ms per click. It is the animation's own
+    duration, not the data.
+  - **The zoom levels reached were identical** with and without animation
+    in every paired scenario except the trackpad and 45 ms wheel bursts,
+    where both runs were already irregular.
+  - Seoul's remaining scenarios were still running when the owner decided;
+    the four finished pairs agree with Paris.
+- **Owner's call: keep `animate_clusters=False` for every city.** The
+  PLAN item "Cluster split/merge animation back, per city, by a lag
+  threshold" is closed on this measurement. The switch stays in
+  `render_heatmap` if the question returns.
+- **Kept as the standing reference** (owner): `docs/zoom_lag_reference.md`
+  holds all ten Paris scenarios, off and on, plus Seoul's, with the
+  conditions and the command to reproduce them. A future run is compared
+  against its Off column.
+
+### 2026-09-27 - Mexico City's and Guadalajara's whole-city heat layers restored (owner): every map now has one
+
+- **Owner's call**, after Seoul's full map (then 18.8 MB, now 24.2 MB with
+  its own layer back) loaded on the owner's iPhone.
+- **Superseded**:
+  - 2026-09-22's `all_city_heat` "off for this city" (Mexico City).
+    That was a file-size decision taken before any phone test, whose
+    remaining reasons were parse cost (which JSON.parse removes) and
+    repository bytes.
+  - Guadalajara's matching switch-off, which existed only for consistency
+    with Mexico City.
+- **Mexico City**: +283,345 points, 11.14 to 17.59 MB. **Guadalajara**:
+  +117,454 points, 3.19 to 5.98 MB.
+  - Guadalajara's figure was recorded in PLAN as 36,925, which is its
+    station-area layer. At 117,454, its layer as a literal would itself
+    have been over the iPhone's 110,861 limit.
+  - The dots and the station-area layers are unchanged (old vs new
+    decoded).
+- **Prose removed, none added**:
+  - Page 15's "Unlike the other cities, this map has no whole-city
+    layer..." and page 16's "Unlike most cities here...".
+  - The two paragraphs in `docs/excluded_categories.md` saying the layer is
+    OFF.
+  - In `docs/map_inconsistencies.md`, theme 12 is marked resolved (the
+    heading is kept so references resolve). Table D now reads Yes, with
+    in-ring shares of 47% and 31%, and theme 7's "cannot be measured"
+    bullet is gone.
+- **Checks**: inline arrays 0 over; scope disclosure, inconsistency list,
+  provenance and render-current all OK.
+- **App pages changed (15, 16)**, so a reboot is needed after the push.
+
+### 2026-09-27 - The lost research data restored into main's data/: 466 files, and 82 HTML placeholders caught and replaced
+
+- **Restored the caches lost with the old staging worktree**, on the owner's
+  approval (relayed by Cleanup, whose script this was), into the MAIN
+  checkout's gitignored `data/`. The source was the surviving
+  `fetch_log.jsonl` (2026-09-24 entries), downloaded no-clobber.
+- **Excluded**:
+  - Cleanup's list: the Helsinki 2019 CSV (a privacy deletion), and every
+    discarded city's folder (Nagoya with its 14 Wayback files, Vienna,
+    Santiago, Athens, Messina).
+  - **Staging added 21 files**, all ruled NOT PERMITTED or unused on
+    2026-09-24: Shinjuku's six PDF lists and Chūō's three personal-services
+    xlsx, both carrying operator columns, and Kōtō's twelve monthly lists.
+    The same wards' USED open-data files were restored.
+- **Result: 466 files, none missing, none HTML, every file's first bytes
+  matching its extension.**
+  - **6 differ slightly in size from the log**: publisher updates to live
+    datasets (two Helsinki layers, two Riga files, Fukuoka's `r8.7.csv`, and
+    Tallinn's building layer).
+  - The first run crashed at about file 274 on a cp1252 console printing a
+    Japanese path. The UTF-8 re-run resumed with no-clobber, including one
+    MLIT 502.
+- **82 Kyoto files arrived as HTML, and a type check caught them.** The
+  restore compared sizes, not types.
+  - **Cause**: for Kyoto the fetch log recorded the resource PAGE
+    (`data.city.kyoto.lg.jp/resource/?id=…`), not the file.
+  - **Fix**: the portal's download is the page's own button, a POST back to
+    the page with a hidden `upload_file` field (no login, no personal data).
+    Pressing it restored all 82, byte-identical to the log.
+  - **For Kyoto's build**: its `fetch_sources.py` must press that button.
+    A GET on the logged URL yields the page.
+- **`docs/japan_city_list.md` regenerated from the restored data.** It now
+  carries the first-blocker rule and Hiroshima's tram note. Fukuoka moves by
+  about ten rows (18,330 → 18,319 restaurants), from the publisher's updated
+  `r8.7.csv`.
+- **Main was told** that Japanese builds wait for this, per the owner. It is
+  now done and checked.
+- Also fixed: `monterrey.md` cited notice 1 beside "OSM" without naming
+  OpenStreetMap, which `check_provenance.py` refused (Cleanup's catch). It
+  passes now.
+### 2026-09-27 - Mobile mode removed and Seoul's whole-city heat layer restored (owner): the full maps load on the iPhone once their data is JSON.parse
+
+- **What the owner saw**: after the JSON.parse fix went live, Seoul, São
+  Paulo and Mexico City loaded on the owner's iPhone, but with no business
+  clusters. That was mobile mode (2026-09-25, `6281d90`, `ee865ea`). It
+  served phones a light map without dots by default, and nothing had been
+  deleted: each full map still carried its three dot layers.
+- **The test that decided it**: with mobile mode switched off, **Seoul's
+  full map loaded on the owner's iPhone**, 224,381 dots and 18.8 MB, the
+  heaviest map. The owner took the other three as following from the same
+  data and asked for mobile mode to be removed.
+- **Superseded**: both 2026-09-25 entries, "Seoul's mobile mode" and
+  "Seoul's whole-city heat layer dropped". Both rested on the belief that
+  the phone ran out of memory. The cause was WebKit refusing any literal
+  over ~110,861 nested elements (entries above), and Seoul's station-area
+  layer alone exceeded it, so the layer drop never addressed it.
+- **Removed**:
+  - `components.mobile_mode()` and its calls on pages 15, 31 and 46.
+  - Seoul's inline toggle and caption on page 43, whose caption said "more
+    than a phone can hold in memory", which was never the cause.
+  - `HEATMAP_LITE_HTML` in `pipeline/seoul/config.py`.
+  - The light-map renders in four step 3 files.
+  - `render_heatmap(lite_output_path=)`.
+  - The four `heatmap_lite.html` files.
+  - `pins=` stays as an unused option, with a comment saying why it exists.
+- **Seoul's whole-city layer is back** (`all_city_heat` at its default),
+  239,410 points. The map goes from 18.78 to 24.23 MB, and the dots and
+  station-area layer are unchanged.
+  - **Page 43**: the sentence "Unlike most maps here, Seoul's has no
+    whole-city heat layer..." was removed. The paragraph is back to the
+    wording approved before it was added.
+  - **Inconsistency list**: its table D row now reads Yes (restored).
+- **The other three maps re-rendered identical** (data and markup, Folium
+  ids masked). Checks: inline arrays 0 over, render-current, scope
+  disclosure, city registry and inconsistency list all OK.
+  `check_provenance.py` fails only on `docs/build_briefs/monterrey.md`
+  (Staging's, citing notice item 1 beside INEGI), which predates this
+  change and was passed to Staging.
+- **Needs a reboot**: `app/components.py` and four pages changed.
+- **Not done here**: Mexico City's and Guadalajara's whole-city layers,
+  dropped for file size and for consistency before any phone test. They
+  are an owner decision on measurements (PLAN, the whole-city layer audit).
 
 ### 2026-09-27 - Monterrey's three calls decided (owner)
 

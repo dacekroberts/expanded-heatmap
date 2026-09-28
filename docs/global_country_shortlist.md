@@ -19,6 +19,32 @@ Claims are labelled **MEASURED** (a number and the check that produced it) or
 **ASSERTED** (plausible, unchecked — verify before acting), per
 [`session_roles.md`](session_roles.md).
 
+## Second-city screens of the built countries — 2026-09-27 (MEASURED)
+
+**Wave 1 of the owner's screen of every built country for further cities,
+with trams counting as rail** (owner, 2026-09-27). The per-city numbers are in
+`city_master_list.md` (Bands A, C, T and D, and the discards); this entry
+records the METHOD behind each country, and the older negatives it supersedes.
+Wave 2 (the US; Canada, Brazil and Ireland; Spain and Italy) is held by the
+owner.
+
+| Country | Business method | Rail method | Outcome |
+|---|---|---|---|
+| 🇰🇷 Korea | Each city's OWN portal: Daegu's monthly LOCALDATA files, Busan's keyless `LocalDataService` API, Incheon's active lists, Gyeonggi's province registers; Daejeon and Gwangju have none (DNS fails) | OSM route relations by country bbox, plus the national station standard data (2026-06-25) by each station's own address | **Supersedes the 2026-09-22 "Busan and Daegu closed"** (a finding about the per-district data.go.kr route) and add-country's "Korea: 1 city". Daegu and Busan to A; Incheon and Gyeonggi to C; Daejeon, Gwangju and Gimhae to D |
+| 🇹🇼 Taiwan | Tax register (2026-09-25) | OSM route relations | Kaohsiung's geo-block re-measured, unchanged (D). Tainan and Hsinchu: no urban rail (discards) |
+| 🇭🇰 Hong Kong | — | OSM (a zero from the first query was re-run) | Nothing new; Hong Kong Tramways left out of the built map is a rescope question, held by the owner |
+| 🇫🇷 France | SIRENE through the built step-2 chain; control reproduced Rennes 3,479 and Toulouse 8,635 exactly | Every operator's GTFS through the National Access Point, OSM's 337 French route relations, and the NAP's mode flags (which proved unreliable) | 21 trams-only cities to T; Aubagne, Clermont-Ferrand, Saint-Louis discarded; no new metro city exists |
+| 🇨🇿 Czechia | ROS02, RES and RÚIAN as Prague | OSM, operator GTFS, and the national CIS JŘ NeTEx file | 6 to T (Brno strongest) |
+| 🇳🇴 Norway | Brønnøysund with SN2025, joined to Kartverket addresses | Entur GTFS and OSM | Bergen to T (EDGE); Trondheim discarded on coverage |
+| 🇩🇰 Denmark | CVR production units, placed by OSM's DAR address points (95% match in a Copenhagen control, median 0.03 m) | OSM | Aarhus (EDGE) and Odense to T |
+| 🇳🇱 Netherlands | BAG shop units, plus municipal food notices from the Gemeenteblad | The national GTFS and OSM | Den Haag, Utrecht, Rijswijk and Delft to C (no current food); suburbs regional add-ons only |
+| 🇱🇻 Latvia | Riga's two layers (VID excise, VZD cadastre), placed on VZD's address file | OSM, operator GTFS found through the Mobility Database | Daugavpils and Liepāja to T |
+
+**Two shared-code defects surfaced** and went to Cleanup: `pipeline/osm.py`
+lists `overpass.osm.ch`, a Swiss-only extract that answers other countries'
+queries with HTTP 200 and zero results; and `czechia_register.ruian()`
+hard-codes a Prague address as its coordinate check.
+
 ## The filter order, and two that were dropped
 
 The screen was originally posed as: map coverage → transit → business data →

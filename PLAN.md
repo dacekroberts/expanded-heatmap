@@ -377,6 +377,24 @@ Desktop is unaffected — the label is fully visible there.
 
 ## Next cities, in ease order
 
+- [ ] **Second-city screens, 2026-09-27 (Staging).** Wave 1 done and banded
+  (France; Czechia, Norway, Denmark, the Netherlands, Latvia; Korea, Taiwan,
+  Hong Kong): see `docs/city_master_list.md` and DECISIONS. Open:
+  - [ ] **Licence reads for Daegu and Busan**, then their briefs. Daegu is the
+    recommended next Korean city. Held to save usage for main's builds.
+  - [ ] **Band T's group decision**: build trams-only cities, and in what
+    order (Nice, Montpellier, Brno and Bergen are the cheapest strong ones).
+  - [ ] **Wave 2 held by the owner** (the US; Canada, Brazil and Ireland;
+    Spain and Italy), possibly at a reset. Launch only on the owner's word,
+    after checking usage and whether main is mid-build. **Its agents use
+    `pipeline.osm.fetch`**, not the scratch `ovp.py`: since 2040dfc it refuses
+    an all-zero `out count` answer, which the wave-1 scratch fetcher accepted
+    (Amstelveen's density is still unmeasured for that reason).
+  - [ ] **Tram rescopes of built cities held by the owner**, likely at the
+    next reset; Cleanup's case-by-case list is in DECISIONS (2026-09-27).
+  - [ ] Cleanup: the `overpass.osm.ch` mirror in `pipeline/osm.py`, and
+    `czechia_register.ruian()`'s Prague-only check (before Brno).
+
 - [x] **Philadelphia - built 2026-09-21.** The WKB parsing this item predicted
   was never needed (the Carto SQL API evaluates `ST_X`/`ST_Y` server-side), and
   `phl_licensetype` is filled from the full 50-type pull. What it left behind:
@@ -815,6 +833,10 @@ brief names.
     `docs/build_briefs/monterrey.md` line 111 conflicts, take master's (the same fix,
     dd3c75a); if Staging's wave-1 rewrite of the band counts lands first, take master's
     numbers and apply the Monterrey move to them - A -1, Candidates -1, Built +1.
+  - [x] origin/master merged into the branch early (owner, 2026-09-27): both merge notes
+    applied - the brief took master's line, and the band counts are master's with the
+    Monterrey move (A 8, Candidates 63, Built 47). The two lines that called Monterrey the
+    only Mexican city with a whole-city layer corrected. Merge again before the push.
   - [ ] Retire the `data/` junction and the `monterrey-static-tmp` launch entry
 - [ ] **Seoul's map still 24 MB after its whole-city heat layer was dropped (owner,
   2026-09-25: it would not load on the owner's phone at 30 MB).** After the reset: measure
@@ -972,9 +994,18 @@ brief names.
       reinstated: `all_city_heat=True` in `pipeline/mexico_city/step3_map.py`, rewrite page
       15's "Unlike the other cities, this map has no whole-city layer ..." (draft for the
       owner), update `excluded_categories.md`, new DECISIONS entry superseding 2026-09-22.
-    - **Guadalajara** switched its layer off only to match Mexico City: 3.4 MB, 36,925
-      points. Costs almost nothing; ask the owner alongside Mexico City.
-- [ ] **East Asian cities missing from the front page's Global view until panned (owner,
+    - **Guadalajara** switched its layer off only to match Mexico City. CORRECTED
+      2026-09-27: its whole-city layer would be **117,454** points, not 36,925 (that is the
+      station-area layer); about +2.7 MB on a 3.2 MB map. Pre-fix it would itself have
+      exceeded the iPhone's 110,861 literal limit; after the fix it compiles. Ask the owner
+      alongside Mexico City.
+    - **Audit result 2026-09-27** (every committed map's heat layers against the city's
+      storefront rows): only Mexico City and Guadalajara lack a whole-city layer. LA,
+      Toronto and D.C. draw exactly their geocoded rows (58,173 / 18,186 / 5,230); New York
+      draws 62,441 of 62,444 geocoded rows, a 3-row gap worth one look but not a trim.
+      Every other city's whole-city layer equals its storefront total. Seoul's is restored.
+- [x] **DONE 2026-09-27: `repeat=True` on the Overview's MapView (DECISIONS, "Every city
+  drawn on every world copy").** Original item: **East Asian cities missing from the front page's Global view until panned (owner,
   2026-09-27; after the iPhone work).** Hong Kong, Taipei and Seoul are not drawn west of the
   Americas across the Pacific; they appear only past Europe. Owner: draw every city wherever
   it is on screen, on the WHOLE macro map, every region.
@@ -992,7 +1023,34 @@ brief names.
     copies (lon +/- 360) to its Global scoring; re-check the credit with
     `check_macro_attribution.mjs`; verify in a real 1200 px render that the three show on
     the left on load.
-- [ ] **Write `.claude/agents/cleanup-sweep.md` (owner, 2026-09-24)** - a scoped agent on
+- [x] **DONE 2026-09-27: `cfg.RUIAN_CRS_CONTROL` per city; Prague zero drift.** Before Brno (or any second Czech city): move `czechia_register.ruian()`'s coordinate
+  sanity check into each city's config.** It hard-codes Prague Castle (RUIAN 21690278) and
+  calls sys.exit for any other town (Staging, 2026-09-27). One known address per city, in
+  `pipeline/<city>/config.py`, read by the shared function.
+- [ ] **PARKED by the owner 2026-09-27 (conserving usage) - come back to it.** **Trams left
+  off built maps - owner decides case by case (listed 2026-09-27, after "trams count").** Read-only list; nothing rescoped. Stops = distinct stop names in scope,
+  from cached GTFS/OSM. Rescoping is main's work, city by city, after the owner decides.
+  - **Recorded reason was only "not rapid transit / overlay" (reversed by the rule):**
+    Toronto streetcars (18 routes, 476 stops); Milan (17 routes, 323 of 341; ATM publishes
+    no colours); Prague (37 routes, 285); Paris T3a/T3b + edges of T2/T9 (62); Barcelona
+    TRAM T1-T6 (not counted - cache has no tram relations); Rome tram 8 (40; lines 2, 3, 5,
+    14 have no trips in the GTFS); Hong Kong Tramways (not counted - OSM query skipped
+    trams; excluded by the owner 2026-09-24).
+  - **Mixed or close:** Madrid Metro Ligero ML1 (9, run by Metro de Madrid); SF F Market
+    (46, heritage cars on a regular route); Fortaleza diesel VLT (11, every 40 min - failed
+    the rail test); D.C. Streetcar and Montreal's REM (both silent omissions; D.C.'s service
+    status unverified).
+  - **Reason still stands:** SF cable cars, Rio Santa Teresa, Santos, Lille Amitram
+    (heritage); Copenhagen Letbane, Marseille Aubagne, Philadelphia NHSL/D1/D2 (no stop in
+    scope); Amsterdam tram 3 (no trips until 2026-12-12); Rotterdam 12/14/18 (event or
+    works routes); Seoul Gimpo Goldline (1 stop, already drawn); Recife VLTs (fail the rail
+    test); Porto Alegre Aeromovel (people mover).
+  - **Blind spots:** Seoul's OSM query takes only subway/light_rail/train (Wirye Line
+    unverified); Hong Kong's and Barcelona's caches hold no tram relations. Mexico City's
+    Cablebús is also unstated (Toulouse's drawn Téléo is the precedent).
+    `docs/map_inconsistencies.md` shows D.C. as "—", which is incomplete.
+- [x] **DONE 2026-09-27: `.claude/agents/cleanup-sweep.md`, scopes city-landed, stale-claims,
+  retire-worktrees, plan-trim, review.** Original item: **Write `.claude/agents/cleanup-sweep.md` (owner, 2026-09-24)** - a scoped agent on
   `deploy-verify.md`'s scope format, so recurring cleanup runs in its own context and returns
   a short report. Owner approvals and published wording still come back to the owner. Why:
   the 2026-09-24 worktree retirement took ~15 steps in a 580k-token session. Scopes:
@@ -1877,7 +1935,10 @@ mistakes as confidently as its findings.
 
 ## Later / maybe
 
-- [ ] **Cluster split/merge animation back, per city, by a lag threshold.**
+- [x] **CLOSED 2026-09-27 (owner): animation stays off.** Re-measured after the
+  JSON.parse rework - still +250-550 ms per zoom on Paris and on Seoul (DECISIONS,
+  "Cluster animation stays off"). Original item:
+  **Cluster split/merge animation back, per city, by a lag threshold.**
   Turned off for every city on 2026-09-23 (`render_heatmap(animate_clusters=
   False)`); the owner asked for it to be recorded for re-implementation. The
   switch already exists per city. What is missing is the rule: the owner's

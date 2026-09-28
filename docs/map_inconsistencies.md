@@ -137,8 +137,6 @@ how far the network reaches, not on the data.
 - **Under 25%:** Miami 13%, Brasília 14%, Fortaleza 14%, Belo Horizonte 18%, Salvador
   19%, Porto Alegre 20%, Edmonton 22%, São Paulo 23%, Recife 23%, Los Angeles 24%,
   San Diego 24%.
-- **Cannot be measured on the map:** Mexico City and Guadalajara, which have no
-  whole-city layer (EC gives Mexico City as 133,362 of 283,345, about 47%).
 - **Reason:** network extent against the area in scope. Share = in-ring heat points ÷
   all-storefront heat points in each committed map.
 
@@ -220,13 +218,12 @@ classifies or licenses them.
   in the cities with a local taxonomy.
 - **Reason:** national classifications and provincial or state regulation.
 
-### 12. Mexico City and Guadalajara have no whole-city heat layer
-**Reader sentence:** On every other map you can switch on a heat layer of all the
-city's storefronts; on these two, the heat layer covers only businesses near a
-station.
-- **Cities:** Mexico City, Guadalajara.
-- **Reason:** file size. Mexico City's layer would have carried 283,345 points, and
-  dropping it took the file from 25.7 MB to 19.0 MB (EC, Mexico City section).
+### 12. RESOLVED 2026-09-27 - every map now has a whole-city heat layer
+Kept as a numbered heading so references to theme 12 still resolve. Mexico City
+and Guadalajara lacked the layer (dropped 2026-09-22 for file size, Guadalajara to
+match); Seoul lost it 2026-09-25 for phones. All three were restored 2026-09-27 once
+the map data shipped as JSON.parse and the full maps loaded on an iPhone (DECISIONS
+2026-09-27). No reader-facing difference remains.
 
 ---
 
@@ -456,8 +453,8 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Edmonton | UNKNOWN (2026-09-21) | — | 0.6 mi | Yes | 22% | Business name |
 | Toronto | Current licences (2026-09-21) | — | 0.6 mi | Yes | 48% | Operating name |
 | **Mexico** | | | | | | |
-| Mexico City | UNKNOWN edition (2026-09-22) | — | 0.6 mi | **No** | — (about 47% per EC) | Shop sign |
-| Guadalajara (Regional) | UNKNOWN edition (2026-09-22) | — | 0.6 mi | **No** | — | Shop sign |
+| Mexico City | UNKNOWN edition (2026-09-22) | — | 0.6 mi | Yes (restored 2026-09-27) | 47% | Shop sign |
+| Guadalajara (Regional) | UNKNOWN edition (2026-09-22) | — | 0.6 mi | Yes (restored 2026-09-27) | 31% | Shop sign |
 | Monterrey (Regional) | DENUE 05_2026 (2026-09-27) | — | 0.6 mi | Yes | 25% | Shop sign |
 | **Spain** | | | | | | |
 | Madrid | Portal refreshed daily (2026-09-22) | — | 0.6 mi | Yes | 94% | Trade name |
@@ -497,7 +494,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | **Latvia** | | | | | | |
 | Riga | Excise daily; cadastre prepared 2026-09-20 (fetched 2026-09-25) | B | 0.6 mi | Yes | 78% | No names; the kind (food) or the premises' registered name (shops) |
 | **South Korea** | | | | | | |
-| Seoul | Registers daily, updated to 2026-09-24 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | No (dropped 2026-09-25: file size on phones) | 94% | Trade name in Korean (138 show "Name withheld") |
+| Seoul | Registers daily, updated to 2026-09-24 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes (restored 2026-09-27; dropped 2026-09-25 for phones) | 94% | Trade name in Korean (138 show "Name withheld") |
 | **Taiwan** | | | | | | |
 | Taichung | Register daily, dated 2026-09-25; door plates August 2026 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 19% | Trade name in Chinese, or the line of business (11,907) |
 | Taoyuan | Register daily, dated 2026-09-25; door plates August 2026 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 12% | Trade name in Chinese, or the line of business (7,230) |
@@ -654,9 +651,8 @@ remain open.
 - **Theme 11 (category edges):** `pipeline/taxonomies/france_naf.py:223–273`;
   `madrid_epigrafe.py:58–65`; `norway_sn2025.py:15–18`; EC Vancouver, Calgary,
   Edmonton and Toronto sections; legend rows in each `heatmap.html`.
-- **Theme 12 (whole-city layer):** `all_city_heat=False` in
-  `pipeline/mexico_city/step3_map.py:93` and `pipeline/guadalajara/step3_map.py:71`;
-  EC lines 848–853.
+- **Theme 12 (whole-city layer, resolved):** no city passes `all_city_heat=False`
+  since 2026-09-27; DECISIONS of that date.
 - **Location rates:** DS Business registries rows (Toronto, Paris to Rennes, Oslo,
   Copenhagen, Prague, Rome); DEC around 18511 (LA), 16168 (D.C.), 18345 (NY), 19528
   (SD); the city configs' coordinate comments (Montréal, Calgary, Dublin, Madrid).

@@ -214,6 +214,7 @@ intermediate dead ends are worth keeping out of the caller's context.
 |---|---|
 | `licence-read` | One source, four possible verdicts. Most pages opened say nothing about reuse; Spain's two cities cost more licence reading than the nine US cities combined, and most of it was irrelevant pages |
 | `deploy-verify` | A noisy start/check/stop sequence with a short findings list, and it needs the browser rather than the repo |
+| `cleanup-sweep` | The cleanup role's recurring errands (a city landed, stale claims, retiring a worktree, trimming PLAN, the process review): many small reads and check runs that collapse to rows added and drafts for the owner. Never commits; removes a worktree only on stated owner and session confirmation |
 
 ### An agent's `description` has a length ceiling, and exceeding it fails SILENTLY
 
