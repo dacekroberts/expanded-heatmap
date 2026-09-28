@@ -20,11 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**109 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**111 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Tokyo landed: city-landed sweep; three cities' in-ring counts corrected in the inconsistency list](#2026-09-28---tokyo-landed-city-landed-sweep-three-cities-in-ring-counts-corrected-in-the-inconsistency-list)
+- [Tokyo live after the owner's reboot, checked on the live URL](#2026-09-28---tokyo-live-after-the-owners-reboot-checked-on-the-live-url)
+- [Tokyo landed on master; the build queue wiped for two new frontrunners, Berlin then London (owner)](#2026-09-28---tokyo-landed-on-master-the-build-queue-wiped-for-two-new-frontrunners-berlin-then-london-owner)
 - [Tokyo's review time: deploy-verify (city-added) found the legend covering 5 labels at the 1000 px frame; fixed, re-checked, published (owner)](#2026-09-28---tokyos-review-time-deploy-verify-city-added-found-the-legend-covering-5-labels-at-the-1000-px-frame-fixed-re-checked-published-owner)
 - [Berlin from the discards to Band B: shops and food on IHK Berlin's register (owner)](#2026-09-28---berlin-from-the-discards-to-band-b-shops-and-food-on-ihk-berlins-register-owner)
 - [Tokyo built: its page, macro-map entry, exclusions and table rows (owner-approved); Japan's sixth and last city, held for review time](#2026-09-28---tokyo-built-its-page-macro-map-entry-exclusions-and-table-rows-owner-approved-japans-sixth-and-last-city-held-for-review-time)
@@ -172,6 +174,30 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - **For the owner:** all six Japanese pages call their layer "the Retail
   layer", but every Japanese map (and Hong Kong's) labels it "Food shops".
   Published wording, queued for review time.
+### 2026-09-28 - Tokyo live after the owner's reboot, checked on the live URL
+
+- **The owner rebooted the app after `80a7a76`.** On the live URL: the Tokyo
+  page renders its title, the ward-share table (Shibuya 100.8% to Koto 9.3%),
+  notice 56 and the map with all 52 line-code labels, no error block (this
+  session). Cleanup's check, the same hour: Tokyo opens at zoom 11 against 11
+  expected with no guard correction, 563 markers, the OSM credit present;
+  Amsterdam, untouched, at 12 against 12, credit present; the front page
+  counts Global (55). Japan's six cities are all live.
+
+### 2026-09-28 - Tokyo landed on master; the build queue wiped for two new frontrunners, Berlin then London (owner)
+
+- **Tokyo is on master at `80a7a76`**, merged with master through `ce11b98`
+  (Berlin to Band B, Cleanup's brief for the "why the maps differ" page). The
+  push's `app/` diff changes `app/cities.py`, `app/components.py`,
+  `app/macro_facts.json` and adds the Tokyo page, so **the owner reboots the
+  app**; the live check follows the reboot. Cleanup was told the city landed
+  (owner's request).
+- **The build queue is wiped (owner)** and led by two new frontrunners,
+  **Berlin, then London**, both Band B and each the first city in a new
+  country (`add-country` first). Off the queue, still recorded in PLAN with
+  their measurements: Belo Horizonte + Contagem, Rio + Duque de Caxias,
+  Vancouver (Regional), Osaka's two fixes, and the Hong Kong / Riga `thin()`
+  port. PLAN's "Build order" and the handoff's section 7 say so.
 
 ### 2026-09-28 - Tokyo's review time: deploy-verify (city-added) found the legend covering 5 labels at the 1000 px frame; fixed, re-checked, published (owner)
 

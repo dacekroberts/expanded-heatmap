@@ -27,16 +27,14 @@ This session builds Tokyo, then carries the BUILD role (section 7).
 
 ## 2. Where things stand
 
-- **Tokyo is BUILT on `worktree-japan` and held for review time** (2026-09-28;
-  pushed to origin at `52c9334`, master merged in; nothing of Tokyo is on
-  master). 63,989 storefronts, 490 stations (293 hollow), 52 lines labelled by
-  line code; every text owner-approved; 23 of 23 checks, zero drift in 55
-  cities. What it built and decided: DECISIONS 2026-09-28, the four "Tokyo"
-  entries; what it left the next city: the `japan-city` skill's Tokyo sheet.
-  **At review time**: the full deploy-verify (scope `city-added`, Tokyo is the
-  only new city; `map_common` and `components.py` changed, so the other maps'
-  legends and the notices list are worth a `map-chrome` look), `publish-city`,
-  and the reboot (`app/cities.py` and `components.py` change).
+- **Tokyo LANDED on master at `80a7a76`** (review time, 2026-09-28): 63,989
+  storefronts, 490 stations (293 hollow), 52 lines labelled by line code.
+  deploy-verify (`city-added`) found the legend covering 5 labels at the 1000 px
+  frame; fixed and re-checked before the push. **Rebooted and checked live**
+  (Tokyo and untouched Amsterdam, 2026-09-28). What it
+  built and decided: DECISIONS 2026-09-28, the "Tokyo" entries; what it left
+  the next city: the `japan-city` skill's Tokyo sheet. PLAN: Tokyo's page
+  scrolls sideways on a phone (its table), for the next `app/` batch.
 - The earlier state, kept for the build role:
 
 - **Worktree** `.claude/worktrees/japan`, branch `worktree-japan`. **This
@@ -138,37 +136,43 @@ This session builds Tokyo, then carries the BUILD role (section 7).
   (`app/components.py` CSS, in the landed batch). Keep that in mind when
   touching `components.py`.
 
-## 7. The build role's queue after Tokyo (owner-approved, in PLAN)
+## 7. The build queue (owner, 2026-09-28, after Tokyo landed)
 
-In the owner's order, after Tokyo: the additions to built cities.
+**The earlier queue is wiped.** Two new frontrunners lead it, in this order:
 
-- **Belo Horizonte + Contagem**: Metrô BH's Eldorado and Novo Eldorado; CNEFE
-  13,011; the zip is cached in `data/contagem/raw/`. No rail test needed.
-- **Rio + Duque de Caxias**: SuperVia Saracuruna's three excluded stations;
-  CNEFE 18,698 (`data/duque_de_caxias/raw/`). **The Gramacho-Saracuruna
-  shuttle rail test comes first** (a staging probe).
-- **Vancouver (Regional)** + Burnaby, New Westminster, Coquitlam, Richmond:
-  28 SkyTrain stations. It waits on staging's probes (Richmond's licence
-  read, New Westminster's join) and the owner's Burnaby fetch.
-- **Osaka's two fixes**, a re-render each, for a review time:
-  - draw the Umekita-Fukushima stretch now that limited-express lines count
-    (its trains are the Haruka and Kuroshio; recommend a line to draw it as);
-  - the phone-width label overlaps (22 pairs at 343 px), a shared-label-code
-    fix that batches with a full re-render.
-- **Port Hong Kong's Light Rail thinning and Riga's loop to
-  `pipeline/stations.py` `thin()`** (owner-approved), each with its own drift
-  measurement. San Francisco, Boston and Philadelphia keep their
-  interchange-after-spacing variant until the owner decides.
-- Later, the owner's likely next phase: Band T (trams only; EDGE first,
-  perhaps) and Band B (one bucket) builds, once staging has their rules
-  ready.
-- **Durable scratch** (gitignored, main checkout):
-  `data/_staging_scratch_2026-09-28b/`. It holds:
-  - `incheon_probe/` (the lift-file join and road-interpolation
-    measurement, `join_measure.py`);
-  - `baltimore_probe/`;
-  - `colour_search.py`;
-  - `tiers2.ps1` (the tier-palette validation).
+1. **Berlin** (Band B, from the discards 2026-09-28; master list row). IHK
+   Berlin's Gewerbedaten: 367,575 per-premises points at their addresses (WFS
+   `gdi.berlin.de/services/wfs/gewerbedaten`, CSV 126 MB), WZ/NACE codes, no
+   names, monthly, CC0 / dl-de/zero-2.0. Food and shops only: hairdressers
+   and laundries belong to the crafts chamber, so Personal services is
+   missing (disclosed). Germany's first city: **`add-country` first**, then
+   `add-city`. Before the build, per the row: a `licence-read`; a WZ taxonomy
+   module keyed on subclasses (restaurants 5611); the personal-exposure check
+   (46-59% of storefront entries report 0 employees); registered offices
+   stacked at arcade addresses; the rail shape (U-Bahn, the S-Bahn ring,
+   trams). **Downloads need the owner's OK** (the CSV is 126 MB).
+2. **London** (Band B, from the transit-gap re-screen 2026-09-28). The FSA
+   food-hygiene register, keyless API: 81,633 premises, food only (no second
+   layer covers central London), 80.2% with coordinates in a sample. The
+   UK's first city: **`add-country` first**. Before the build: a
+   `licence-read` of the FSA register; placement for the ~20% without
+   coordinates (postcode centroids, their own `data_sources` row); the
+   personal-exposure check (mobile and home caterers); the rail shape
+   (Underground, Overground, DLR, Elizabeth line, Tramlink).
+
+Neither has a brief yet: the first step for each is the brief
+(`docs/build_briefs/<city>.md` with a `brief-checks` block), from staging's
+screen in the master list's Band B rows.
+
+**Off the queue** (still recorded in PLAN, measured, unqueued until the owner
+puts any back): Belo Horizonte + Contagem, Rio + Duque de Caxias, Vancouver
+(Regional), Osaka's two fixes (the Umekita stretch; the 343 px label
+overlaps), the Hong Kong / Riga `thin()` port.
+
+**Durable scratch** (gitignored, main checkout):
+`data/_staging_scratch_2026-09-28b/` (the Incheon and Baltimore probes, the
+old `colour_search.py` - superseded by `scripts/line_colour_search.py` -
+and `tiers2.ps1`).
 
 ## 8. Rules for this session
 

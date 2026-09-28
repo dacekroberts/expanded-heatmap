@@ -370,10 +370,14 @@ evidence section.
   "Hankyu Takarazuka Line" starts 11 px under the layer-control button. The
   project total at 343 was 2 (2026-09-20); Kobe has 0. A shared-label-code
   fix, so it batches with a full re-render at a review time.
-- **Build order (owner, 2026-09-28): Sapporo, Fukuoka, Kyoto, then Tokyo
-  (8 wards); then the additions to built cities** (Belo Horizonte +
-  Contagem, Rio + Duque de Caxias, Vancouver (Regional); "Second-city
-  screens" below).
+- **Build order (owner, 2026-09-28, after Tokyo landed): the build queue is
+  WIPED and two new frontrunners lead it - Berlin, then London** (both Band
+  B, each the first city in a new country: `add-country`, then `add-city`).
+  The earlier queue - the additions to built cities (Belo Horizonte +
+  Contagem, Rio + Duque de Caxias, Vancouver (Regional)), Osaka's two fixes and
+  the Hong Kong / Riga `thin()` port - is OFF the queue; its items stay below,
+  measured and unqueued, until the owner puts any back. (Before: Sapporo,
+  Fukuoka, Kyoto, then Tokyo - all built.)
 - [x] **Sapporo built 2026-09-28** (`build-sapporo`, held for review time):
   28,674 storefronts, 95 stations, 7 lines; texts owner-approved (DECISIONS).
   - [ ] At review time: `publish-city` (a new page, `cities.py` with Osaka's
