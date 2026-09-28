@@ -41,17 +41,29 @@ SHINKANSEN = "1"
 N03_URL_TEMPLATE = "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_{pref}_GML.zip"
 N03_ZIP_TEMPLATE = "N03-20250101_{pref}_GML.zip"
 
+# The join CONTROL (owner's choice, 2026-09-24; the download approved
+# 2026-09-28): the 2021 Economic Census for Business Activity, 第9-1A表
+# 「産業(小分類)別全事業所数－全国、都道府県、市区町村」 - every ward's 飲食店
+# (industry 76) establishments, all establishments (private and public), as of
+# 2021-06-01. One national XLSX; column B is "<code>_<name>". The 2024 基礎調査
+# table was not used: it drops sole traders with no employees, most small bars.
+ESTAT_CENSUS_URL = "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040067884&fileKind=0"
+ESTAT_CENSUS_XLSX = SHARED_RAW / "estat_census_r3_b1_009_1a.xlsx"
+
 # MLIT 位置参照情報, per municipality (ward): block level and town-chōme level.
 ISJ_BLOCK_URL_TEMPLATE = "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/{code}-24.0a.zip"
 ISJ_CHOME_URL_TEMPLATE = "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/{code}-19.0b.zip"
 
 # The buildable cities (Band A, 2026-09-24). `wards` are 全国地方公共団体コード
 # without the check digit, the keys of both N03 (`N03_007`) and the ISJ files.
-# Tokyo is the 8 wards with a full, current food list (owner): the others
-# publish none, or only partially (see docs/build_briefs/tokyo.md).
+# Tokyo is the wards with a full, current food list (owner), read from
+# pipeline/tokyo/wards.py - the one place a ward is switched on (2026-09-28);
+# the others' stations are drawn hollow (their codes: tokyo_wards.NO_DATA_WARDS).
+from pipeline.tokyo import wards as tokyo_wards  # noqa: E402 - dependency-free, no cycle
+
 CITIES = {
-    "tokyo": {"name": "東京都区部 (8 wards)", "pref": "13", "epsg": 32654,
-              "wards": ["13102", "13103", "13104", "13106", "13108", "13110", "13112", "13113"]},
+    "tokyo": {"name": "東京都区部", "pref": "13", "epsg": 32654,
+              "wards": tokyo_wards.ACTIVE_CODES},
     "osaka": {"name": "大阪市", "pref": "27", "epsg": 32653,
               "wards": ["27102", "27103", "27104", "27106", "27107", "27108", "27109", "27111", "27113",
                         "27114", "27115", "27116", "27117", "27118", "27119", "27120", "27121", "27122",

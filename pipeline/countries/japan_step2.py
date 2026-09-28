@@ -122,7 +122,10 @@ def official_shares(config, df):
 
     from pipeline.countries import japan_official
     codes = getattr(config, "MUNICIPALITY_CODES", {})
+    # config.SHARE_SKIP: sources left out of the share - Tokyo's MHLW slices,
+    # since the page states each ward's share of its OWN list (owner 2026-09-28)
     food = df[~df["source"].isin(japan_eigyo.PERSONAL_SOURCES) & ~df["closed"]
+              & ~df["source"].isin(getattr(config, "SHARE_SKIP", ()))
               & df["type"].fillna("").str.contains("飲食")]
     rows = food["muni"].value_counts()
     out = []

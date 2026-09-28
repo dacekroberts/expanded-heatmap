@@ -200,7 +200,19 @@ def fetch_osm(config, force):
                retrieved=when(path))
 
 
-PARTS = {"city": fetch_city, "isj": fetch_isj, "mlit": fetch_mlit, "osm": fetch_osm}
+def fetch_control(config, force):
+    """The Economic Census control table (japan.ESTAT_CENSUS_URL), one national
+    XLSX into the shared cache; a spreadsheet by its magic bytes or refused."""
+    dest = japan.ESTAT_CENSUS_XLSX
+    how = get(japan.ESTAT_CENSUS_URL, dest, force)
+    if not zipfile.is_zipfile(dest):
+        sys.exit(f"{dest.name}: not an XLSX (an error page?)")
+    print(f"  {dest.name:28s} {dest.stat().st_size:>12,} bytes  ({how})")
+    record(config, "estat_census", file=f"data/japan/raw/{dest.name}", url=japan.ESTAT_CENSUS_URL,
+           bytes=dest.stat().st_size, sha256=sha256(dest), retrieved=when(dest), how=how)
+
+
+PARTS = {"city": fetch_city, "isj": fetch_isj, "mlit": fetch_mlit, "osm": fetch_osm, "control": fetch_control}
 
 
 def main(config, doc):

@@ -1061,6 +1061,16 @@ LEGEND_LINE_ROW = """
       border-radius:2px;"></span>{label}
   </div>
 """
+# A hollow station swatch, under its own heading: only on a map that draws
+# stations with no business data (Tokyo's wards; owner 2026-09-28).
+LEGEND_NO_DATA_ROWS = """
+  <div style="font-weight: bold; margin: 10px 0 6px;">Stations</div>
+  <div style="display:flex; align-items:center; margin:3px 0;">
+    <span style="display:inline-block; width:9px; height:9px;
+      border-radius:50%; background:transparent; margin-right:7px;
+      border:2px solid {color};"></span>No business data (ward publishes no usable food-permit list)
+  </div>
+"""
 
 
 def load_line_shapes(gtfs_zip, line_specs, system_name):
@@ -1900,13 +1910,21 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
     return len(data)
 
 
-def build_legend(bucket_colors, legend_label, lines):
+def build_legend(bucket_colors, legend_label, lines, no_data_stations=False):
     """Fixed-position legend generated from the buckets actually present
     and the taxonomy's own legend text - nothing taxonomy-specific here.
 
     bucket_colors: [(bucket name, color)]; legend_label: bucket -> text;
-    lines: {key: (coords, color, label, end)}.
+    lines: {key: (coords, color, label, end)}. no_data_stations: the map draws
+    hollow stations (Tokyo's wards with no data), so the legend says what a
+    hollow station means; a map without them keeps its legend byte for byte.
     """
+    line_rows = "".join(
+        LEGEND_LINE_ROW.format(color=color, label=html.escape(label))
+        for _coords, color, label, _end in lines.values()
+    )
+    if no_data_stations:
+        line_rows += LEGEND_NO_DATA_ROWS.format(color=LIGHT["station"])
     # _LEGEND_CSS is prepended AFTER formatting, not concatenated into
     # LEGEND_HTML: .format() would otherwise try to read every CSS brace as a
     # replacement field and raise KeyError on the first selector.
@@ -1915,10 +1933,7 @@ def build_legend(bucket_colors, legend_label, lines):
             LEGEND_ROW.format(color=color, label=html.escape(legend_label(name)))
             for name, color in bucket_colors
         ),
-        line_rows="".join(
-            LEGEND_LINE_ROW.format(color=color, label=html.escape(label))
-            for _coords, color, label, _end in lines.values()
-        ),
+        line_rows=line_rows,
     ) + LEGEND_AUTOFIT_SCRIPT.replace("__MAP_W__", str(_MAP_W))
 
 
@@ -2073,8 +2088,17 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     businesses = businesses.dropna(subset=["latitude", "longitude"]).copy()
     businesses = drop_contact_details(businesses)
     _require_lang_for_cjk(businesses, lang, city_name)
+    # Stations in a ward with NO business data (a `no_data` column; Tokyo's,
+    # owner 2026-09-28) are drawn hollow and get no rings, and no business is
+    # counted to them - a business near a ward edge goes to its nearest station
+    # WITH data. Ward boundaries cannot be drawn (N03, the Survey Act), so the
+    # hollow station is the only place the map says so. A city without the
+    # column renders exactly as before.
+    no_data = (stations["no_data"].fillna(False).astype(bool) if "no_data" in stations.columns
+               else pd.Series(False, index=stations.index))
+    ringed = stations[~no_data] if no_data.any() else stations
     businesses["nearest_station"], businesses["ring_band"] = nearest_station_and_ring(
-        businesses, stations, crs_geographic, crs_projected, ring_edges_meters, ring_labels
+        businesses, ringed, crs_geographic, crs_projected, ring_edges_meters, ring_labels
     )
     in_rings = businesses[~businesses["ring_band"].str.startswith("Beyond")].copy()
     print(f"{len(businesses) - len(in_rings):,} of {len(businesses):,} businesses fall "
@@ -2129,7 +2153,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     for i, label in enumerate(ring_labels):
         layer = folium.FeatureGroup(name=f"Concentric Ring {i + 1}: {label}",
                                     show=rings_shown)
-        for _, station in stations.iterrows():
+        for _, station in ringed.iterrows():
             folium.Circle(
                 location=[round(station["latitude"], COORD_DP),
                           round(station["longitude"], COORD_DP)],
@@ -2140,12 +2164,25 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
         layer.add_to(m)
 
     station_layer = folium.FeatureGroup(name="Stations", control=False)
-    for _, station in stations.iterrows():
+    for _, station in ringed.iterrows():
         folium.CircleMarker(
             location=[round(station["latitude"], COORD_DP),
                       round(station["longitude"], COORD_DP)],
             radius=5, color=LIGHT["station"], fill=True, fill_opacity=0.9,
             tooltip=folium.Tooltip(f"<b>{html.escape(station['station'])}</b>", sticky=True),
+        ).add_to(station_layer)
+    # Hollow: filled at opacity 0, not unfilled, so the whole disc takes the
+    # hover, and the dark-theme rule that recolours a station's stroke AND fill
+    # (matched on LIGHT["station"]) leaves it hollow there too.
+    for _, station in stations[no_data].iterrows():
+        reason = station.get("no_data_reason")
+        reason = reason if isinstance(reason, str) and reason else "No business data"
+        folium.CircleMarker(
+            location=[round(station["latitude"], COORD_DP),
+                      round(station["longitude"], COORD_DP)],
+            radius=5, color=LIGHT["station"], weight=2, fill=True, fill_opacity=0,
+            tooltip=folium.Tooltip(f"<b>{html.escape(station['station'])}</b><br>{html.escape(reason)}",
+                                   sticky=True),
         ).add_to(station_layer)
     station_layer.add_to(m)
 
@@ -2196,7 +2233,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
             present.append((name, color))
 
     m.get_root().html.add_child(folium.Element(
-        build_legend(present, taxonomy.legend_label, lines)
+        build_legend(present, taxonomy.legend_label, lines, no_data_stations=bool(no_data.any()))
     ))
 
     # Collapsed by default: many toggleable layers would otherwise cover a

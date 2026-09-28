@@ -65,6 +65,36 @@ def estat():
     return {a: old[a] + new.get(a, 0) for a in old if a in new}
 
 
+CENSUS_SOURCE = "2021 Economic Census for Business Activity, table 9-1A (飲食店, industry 76, all establishments)"
+
+
+def census():
+    """Municipality code (5 digits, e.g. '13113') -> 飲食店 establishments in the
+    2021 Economic Census (japan.ESTAT_CENSUS_XLSX); {} if not cached. The
+    like-for-like CONTROL the owner chose (2026-09-24): establishments counted
+    on the ground, against the permits a list holds. The column is found by its
+    header label, never by position."""
+    if not japan.ESTAT_CENSUS_XLSX.exists():
+        return {}
+    import openpyxl
+    wb = openpyxl.load_workbook(japan.ESTAT_CENSUS_XLSX, read_only=True, data_only=True)
+    ws = wb.worksheets[0]
+    col, out = None, {}
+    for r in ws.iter_rows(values_only=True):
+        cells = ["" if c is None else str(c).strip() for c in r]
+        if col is None:
+            col = next((i for i, c in enumerate(cells) if c.startswith("76_") and "飲食店" in c), None)
+            continue
+        code = cells[1].split("_", 1)[0] if len(cells) > 1 else ""
+        if code.isdigit() and len(code) == 5 and col < len(cells):
+            v = cells[col]
+            out[code] = 0 if v in ("-", "") else int(float(v))
+    wb.close()
+    if col is None:
+        raise ValueError(f"{japan.ESTAT_CENSUS_XLSX.name}: no 76_飲食店 column - not the table the build read")
+    return out
+
+
 def restaurants(prefecture, municipality):
     """(the official 飲食店営業 count, its source) for one municipality: a Tokyo
     special ward from the yearbook, a designated city from e-Stat; (None, None)

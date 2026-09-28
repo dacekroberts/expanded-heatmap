@@ -30,10 +30,34 @@ is only what a WARD adds.
   +3.1% of the official count; it is not a fix.
 - **The COVID-era lists (徹底点検TOKYOサポート and the sticker list) are never
   used**, whatever the catalogue's licence says (2026-09-24).
-- **A ward with no business data**: its stations are drawn HOLLOW and labelled
-  "no business data" (2026-09-28), because ward boundaries cannot be drawn
-  (N03, the Survey Act) and the station is the only place to say it. A shared
-  renderer change, not built yet.
+- **A ward with no business data**: its stations are drawn HOLLOW, ringless,
+  with a tooltip "No business data: <ward> publishes no usable food-permit
+  list" and a legend row (2026-09-28), because ward boundaries cannot be drawn
+  (N03, the Survey Act) and the station is the only place to say it. Built
+  2026-09-28: `japan_step1` flags them from `config.NO_DATA_WARDS`
+  (`no_data`, `no_data_reason` in stations.csv); `map_common.render_heatmap`
+  draws them hollow (filled at opacity 0, so dark mode keeps them hollow),
+  rings and counts only the stations WITH data - a business near a ward edge
+  goes to its nearest station with data - and adds the legend row. A city
+  without the column renders exactly as before (all 54 maps identical).
+  **A ward with personal-services registers but no food list is still
+  inactive** (the owner's rule is the food list): 7 of the 15 publish
+  barber / beauty / laundry registers that stay unused, hence "food-permit
+  list" in the tooltip.
+
+## The roster: `pipeline/tokyo/wards.py`
+
+**The one place a ward is switched on.** All 23 wards, each `"status":
+"active"` (with its `food` files, optional `personal` and `mhlw`, its
+`encoding`, a `share_note`) or `"inactive"` (with its `why`, which names the
+gap for the page). `japan.CITIES["tokyo"]["wards"]` reads the active codes
+from it, so the city line, the address-file fetch and the share check follow;
+`NO_DATA_WARDS` (code -> English name) feeds step 1's hollow stations;
+`check()` refuses a half-made switch (an active ward with no files, an
+inactive one that still lists files, a missing file, a ward without a reason).
+It imports nothing from the pipeline, so `japan.py` reads it without a cycle.
+2026-09-28: 8 active (Chūō, Minato, Shinjuku, Taitō, Kōtō, Meguro, Setagaya,
+Shibuya), 15 inactive.
 - **Outreach is the last resort.** Requests to Chiyoda, Toshima, Nerima and
   Edogawa stay parked (`docs/gated_access.md`).
 
@@ -110,8 +134,9 @@ reads**. The eight wards' shares, reproduced exactly on 2026-09-28:
 | Chūō 13102 | 1,319 | 11,056 | 11.9% |
 | Kōtō 13108 | 570 | 6,102 | 9.3% |
 
-Measured BEFORE MHLW's slice is added; decide with the owner whether the page
-states the share with or without it (the brief's figures are without).
+**The page states each share WITHOUT MHLW's slice** (owner 2026-09-28): the
+share describes the ward's own publication; MHLW's +0.1 to +3.1 pt is said
+once in prose. Tokyo's config lists its MHLW sources in `SHARE_SKIP`.
 
 ## The traps the eight wards taught
 
@@ -154,10 +179,14 @@ states the share with or without it (the brief's figures are without).
 1. The ward card, complete, with verdict ON (the owner's rule).
 2. `python scripts/screen_japan_join.py <key>`: the join, block rate against
    the other wards'.
-3. A `WARDS` entry in `pipeline/tokyo/config.py` (source, municipality, code,
-   files, encoding, operator columns in `REQUIRED_COLUMNS`), its ISJ pair in
-   `fetch_sources.py`, its credit.
-4. Step 2: the share printed and emitted; the name rule's count; drift.
-5. Its stations turn from hollow to ringed: step 3, the map checks, the page's
+3. **The switch, in `pipeline/tokyo/wards.py` only**: `"status": "active"`,
+   its `food` files (and `personal`, `mhlw` if any), `encoding`,
+   `share_note`; delete `why`. Its operator columns go into
+   `japan_register.OPERATOR_COLS` if new (then the Minato control), and its
+   credit into the notice.
+4. `python pipeline/tokyo/fetch_sources.py isj` (its address files), then the
+   three steps: step 1 turns its stations from hollow to ringed by itself, and
+   step 2 prints and emits its share.
+5. The map checks, drift (`--update-baseline`: an intended change), the page's
    ward table (from `official_shares.json`), `excluded_categories.md`, the
    notice, DECISIONS. Published prose waits for the owner.

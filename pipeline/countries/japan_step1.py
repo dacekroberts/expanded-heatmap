@@ -108,6 +108,19 @@ def n03_municipalities(config):
     return n03.dissolve("muni").reset_index()[["muni", "geometry"]]
 
 
+def no_data_ward_polygons(config, nodata):
+    """[(English ward name, polygon)] for config.NO_DATA_WARDS, from N03 read
+    once - which ward a hollow station's tooltip names."""
+    pref = japan.CITIES[config.SLUG]["pref"]
+    z = japan.SHARED_RAW / japan.N03_ZIP_TEMPLATE.format(pref=pref)
+    n03 = japan._read_geojson(z, z.name.replace("_GML.zip", ".geojson")).to_crs(config.CRS_GEOGRAPHIC)
+    n03 = n03[n03["N03_007"].isin(list(nodata))].dissolve("N03_007")
+    missing = set(nodata) - set(n03.index)
+    if missing:
+        sys.exit(f"NO_DATA_WARDS names ward code(s) N03 does not have: {sorted(missing)}")
+    return [(nodata[code], geom) for code, geom in zip(n03.index, n03.geometry)]
+
+
 def english_names(config, groups):
     # the station query's file, and - in a city with a tram - the tram-stop
     # query's (Osaka's Hankai stops; japan.osm_tram_stop_query)
@@ -309,7 +322,14 @@ def run(config):
     config.DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
     config.OUTPUTS.mkdir(parents=True, exist_ok=True)
 
-    city = japan.city_boundary(config.SLUG)
+    # Wards with NO business data (config.NO_DATA_WARDS, {code: English name};
+    # Tokyo's, owner 2026-09-28): inside the city line, so their stations are
+    # drawn, but hollow and ringless (map_common). Without it the city is the
+    # data's wards and nothing here changes.
+    nodata = dict(getattr(config, "NO_DATA_WARDS", {}))
+    active = japan.city_boundary(config.SLUG)
+    city = (japan.city_boundary(config.SLUG, wards=[*japan.CITIES[config.SLUG]["wards"], *nodata])
+            if nodata else active)
     minx, miny, maxx, maxy = city.bounds
     bb = config.CITY_BBOX
     if not (bb["lon_min"] < minx and maxx < bb["lon_max"] and bb["lat_min"] < miny and maxy < bb["lat_max"]):
@@ -320,6 +340,7 @@ def run(config):
     st = japan.stations()
     st = st[st.geometry.within(near)].copy()
     st["inside"] = st.geometry.within(city)
+    st["active"] = st.geometry.within(active) if nodata else st["inside"]
     st["keys"] = [line_keys(config, o, ln, nm) for o, ln, nm in zip(st["N02_004"], st["N02_003"], st["N02_005"])]
     left = pd.Series([left_out(config, o, ln, nm) for o, ln, nm in zip(st["N02_004"], st["N02_003"], st["N02_005"])],
                      index=st.index)
@@ -414,7 +435,24 @@ def run(config):
     for a, b, d in close:
         print(f"    {d:>5.0f} m  {a}  /  {b}")
 
-    keep = keep[["station", "name_ja", "latitude", "longitude", "lines"]].sort_values("station")
+    cols = ["station", "name_ja", "latitude", "longitude", "lines"]
+    if nodata:
+        # A station with ANY platform in a ward that has data keeps its rings
+        # (the 太子橋今市 rule, above); the rest are hollow, each naming its ward.
+        has_data = keep["group"].map(platforms.groupby("group")["active"].any()).fillna(False).astype(bool)
+        keep["no_data"] = ~has_data
+        wards = no_data_ward_polygons(config, nodata)
+        keep["no_data_reason"] = [
+            "" if not nd else "No business data: " + next(
+                (name for name, poly in wards if poly.contains(g)), "this ward") + " publishes no usable food-permit list"
+            for nd, g in zip(keep["no_data"], keep.geometry)]
+        cols += ["no_data", "no_data_reason"]
+        by_ward = collections.Counter(r for r in keep.loc[keep["no_data"], "no_data_reason"])
+        print(f"  {int(keep['no_data'].sum())} stations in wards with no business data (hollow, no rings):")
+        for reason, n in by_ward.most_common():
+            print(f"    {n:>4}  {reason}")
+        emit("stations_no_data", int(keep["no_data"].sum()))
+    keep = keep[cols].sort_values("station")
     dup = keep["station"].duplicated(keep=False)
     if dup.any():
         sys.exit(f"two stations share an English name: {keep[dup].to_dict('records')}")
