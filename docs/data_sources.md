@@ -83,7 +83,7 @@ together, so a row in either counts and a row in neither still fails.
 |---|---|---|
 | United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles, Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C. |
 | Canada | [`data_sources/canada.md`](data_sources/canada.md) | Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto |
-| Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City, Guadalajara (Regional) |
+| Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City, Guadalajara (Regional), Monterrey (Regional) |
 | Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona |
 | Ireland | [`data_sources/ireland.md`](data_sources/ireland.md) | Dublin |
 | Italy | [`data_sources/italy.md`](data_sources/italy.md) | Milan, Rome |

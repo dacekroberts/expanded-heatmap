@@ -68,6 +68,26 @@ Desktop is unaffected — the label is fully visible there.
   - **Until then**: keep the draft current as cities land, and don't raise
     placement early.
 
+- [ ] **🇲🇽 MONTERREY (REGIONAL) - BUILT 2026-09-27 on branch `worktree-monterrey`, HELD for a
+  batch publish with a few smaller cities (owner): 58,565 storefronts, 38 stations, Metrorrey
+  Líneas 1–3 across four municipios.** Page 47; text, blurb, notices and the whole-city layer
+  approved (owner). Done up to `deploy-verify`: steps 1–3, provenance, scope disclosure,
+  inconsistency rows, privacy verdict, label width (144.0) and placement - which moved
+  Guadalajara's pill below its dot and Mexico City's 10 px lower. Still to do, at the batch:
+  - [ ] `deploy-verify` (city-added, plus the Mexico and landing views for the three moved labels)
+  - [ ] `check_deploy_imports.py` with `.venv-lean` linked, merge master, fetch, push, **reboot**
+    (`cities.py` and `components.py` change), live check
+  - [x] `city_master_list.md`'s band counts reconciled on the branch, in Staging's wording
+    (A 6, Candidates 20, Built 47; 68f656c). **Merge notes from Staging**: if
+    `docs/build_briefs/monterrey.md` line 111 conflicts, take master's (the same fix,
+    dd3c75a); if Staging's wave-1 rewrite of the band counts lands first, take master's
+    numbers and apply the Monterrey move to them - A -1, Candidates -1, Built +1.
+  - [x] origin/master merged into the branch early (owner, 2026-09-27): both merge notes
+    applied - the brief took master's line, and the band counts are master's with the
+    Monterrey move (A 8, Candidates 63, Built 47). The two lines that called Monterrey the
+    only Mexican city with a whole-city layer corrected. Merge again before the push.
+  - [ ] Retire the `data/` junction and the `monterrey-static-tmp` launch entry
+
 ## Next cities, in ease order
 
 - [ ] **Second-city screens, 2026-09-27 (Staging).** Wave 1 done and banded

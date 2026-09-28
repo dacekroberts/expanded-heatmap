@@ -47,6 +47,11 @@ DENUE_CODE_COLUMN = "codigo_act"       # -> `scian`, what classify() reads
 # by asking why nothing read these.
 DENUE_STATE_COLUMN = "cve_ent"
 DENUE_MUNICIPIO_COLUMN = "municipio"
+# The municipio's three-digit INEGI code. cve_ent + cve_mun is the same key
+# OpenStreetMap carries as `INEGI:MUNID` (e.g. 19039, Monterrey), so a city can
+# join its register to its boundaries on a CODE rather than on a name. Added
+# for Monterrey (2026-09-27), the first Mexican city to scope by code.
+DENUE_MUNICIPIO_CODE_COLUMN = "cve_mun"
 
 # SCIAN, via pipeline/taxonomies/scian.py. NOT naics.py: SCIAN numbers retail
 # 46 where NAICS uses 44-45, so naics.py would match nothing under 44/45 and

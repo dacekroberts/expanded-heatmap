@@ -430,6 +430,16 @@ Cities built and running end to end (pipeline, map, app page):
   Vancouver's regional shape. Rail from OpenStreetMap again, this time because
   the only GTFS feed expired 2023-01-28 and predates Linea 4. Gate 3 DOES run
   here and passes against SITEUR's published counts.
+- **Monterrey (Regional)** - Metrorrey Lineas 1-3, across Monterrey, San
+  Nicolas de los Garza, Guadalupe and General Escobedo. Mexico's third city on
+  the national DENUE modules, and the first to scope by INEGI's municipio CODE,
+  the same key OSM carries as `INEGI:MUNID`. Rail from OpenStreetMap because
+  Nuevo Leon publishes no Metrorrey data at all; stations from route membership,
+  which is what keeps the unbuilt Linea 4/6 monorail stations (already tagged
+  `railway=station` in OSM) off the map. Gate 3 runs in full against the
+  operator's network map, and Linea 3 is drawn in the operator's red rather
+  than OSM's orange. It keeps the whole-city heat layer, as the other two
+  Mexican cities do again.
 
 - **Madrid** - Metro de Madrid: Líneas 1-12 and the Ramal Ópera-Príncipe Pío.
   **The first city in Europe.** Distinctive in four ways.

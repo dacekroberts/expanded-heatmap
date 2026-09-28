@@ -515,6 +515,15 @@ REGISTRIES = {
     "guadalajara": dict(raw=None, trade=None, owner=None,
                         processed="businesses_clean.csv",
                         address=None),
+    # Monterrey (Regional), 2026-09-27: the third DENUE city, the same
+    # structural position again. `numero_int` measured at 7.4% and not
+    # published, so the residence check is a GAP here too. Sign names read by
+    # hand for contact details: one e-mail shape, a shop's sign ("MARY P@PER.COM
+    # PAPELERIA", which the renderer's contact scrub drops anyway), and every
+    # phone-shaped run among fixed premises is a Movistar branch code.
+    "monterrey": dict(raw=None, trade=None, owner=None,
+                      processed="businesses_clean.csv",
+                      address=None),
 }
 
 # Unit designators that suggest a residence, as opposed to a commercial suite.
