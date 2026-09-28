@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**97 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**98 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [German screen from the large-transit gap: Munich, Frankfurt and Cologne discarded; Berlin's register found (owner)](#2026-09-28---german-screen-from-the-large-transit-gap-munich-frankfurt-and-cologne-discarded-berlins-register-found-owner)
 - [Istanbul's second look run: Band N, pharmacies and opticians only (owner)](#2026-09-28---istanbuls-second-look-run-band-n-pharmacies-and-opticians-only-owner)
 - [Dubai and Manila re-screened from the large-transit gap: Dubai to Band D, Manila discarded (owner)](#2026-09-28---dubai-and-manila-re-screened-from-the-large-transit-gap-dubai-to-band-d-manila-discarded-owner)
 - [London re-screened from the large-transit gap: Band B, food only (owner)](#2026-09-28---london-re-screened-from-the-large-transit-gap-band-b-food-only-owner)
@@ -133,6 +134,52 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - German screen from the large-transit gap: Munich, Frankfurt and Cologne discarded; Berlin's register found (owner)
+
+- **Found Berlin's discard to be a statement about a search: IHK
+  Berlin publishes a per-premises register.** The row rested on two keyword
+  searches (`Gaststätten` → 0 on `datenregister.berlin.de`, and GovData).
+  Enumerating all 2,626 packages found it under "Gewerbedaten", a word no
+  query contained. It is published by IHK Berlin, the chamber of commerce:
+  a WFS at `gdi.berlin.de/services/wfs/gewerbedaten` and a 126 MB CSV on
+  IHK's GitHub (size read by HEAD only). It holds 367,575 points at their
+  addresses, with WZ/NACE codes, employee range, business type, no names,
+  and monthly updates (last 2026-09-28), under CC0 / dl-de/zero-2.0 (no
+  `licence-read` yet). By the agent's count, retail is 51,233, food 20,771
+  and personal services about 14,000, but hairdressers and laundries are
+  nearly absent (180 hairdressers), since they belong to the crafts chamber,
+  which publishes nothing. Berlin stays in the discards until its band is
+  decided (owner's call).
+- **Probed registered-office stacking in Berlin before banding it:
+  storefront counts sit at 1.2–1.5× OSM.** One WFS bbox request per 600 m
+  box, at Hackescher Markt, Kottbusser Tor, Wilmersdorfer Straße and Rathaus
+  Steglitz; storefront = NACE 47 (minus 4791/4799), 561x and 5630, and
+  9601/9602/9604. Food against OSM restaurants, cafés, fast food, bars and
+  pubs: 139/104, 148/119, 120/102, 63/43. Retail against OSM `shop=*`:
+  229/168, 157/112, 243/190, 192/163. The stacking is real (Hackescher
+  Markt: 1,900 businesses on 181 points, 65% of storefront entries on
+  addresses shared by 10 or more), but the ratios show no office inflation
+  of the storefront codes; the shared addresses are largely arcades and
+  courtyards. Personal-services storefronts in the four boxes: 5, 3, 1 and 0,
+  which confirms the crafts-chamber gap. Between 46% and 59% of storefront
+  entries report 0 employees, so the personal-exposure check matters at a
+  build. A first run keyed food on 5610 and found 10 restaurants at
+  Hackescher Markt; IHK's `nace_id` carries WZ subclasses (restaurants are
+  5611), which a taxonomy module must key on.
+- **Discarded Munich, Frankfurt and Cologne on full enumerations (owner's
+  call).** Munich: 337 datasets and ten geoportal workspaces; only aggregate
+  trade counts, 54 markets and planning graphics, and no open house
+  coordinates (Bavaria publishes building outlines only). Frankfurt: 303
+  portal entries and 555 geodata records; trade de-registrations by year,
+  and a points-of-interest WFS restricted to the administration. Cologne:
+  503 datasets and 85 ArcGIS services; a 59-club register, markets, and the
+  NRW tourism feed's curated restaurants. No other chamber publishes
+  Berlin's data: GovData, open.nrw and `open.bydata.de` hold none, IHK
+  München sells addresses, IHK Köln has lookups only, and IHK Frankfurt has
+  no open-data page. Files: `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - Istanbul's second look run: Band N, pharmacies and opticians only (owner)
 
