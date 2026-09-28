@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**37 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**38 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Tram rescopes, light and medium: specs written for five cities, and the D.C. Streetcar dropped because it no longer runs (owner)](#2026-09-27---tram-rescopes-light-and-medium-specs-written-for-five-cities-and-the-dc-streetcar-dropped-because-it-no-longer-runs-owner)
 - [Monterrey (Regional), Daegu and Busan are LIVE: rebooted by the owner, live-checked](#2026-09-27---monterrey-regional-daegu-and-busan-are-live-rebooted-by-the-owner-live-checked)
 - [Monterrey (Regional), Daegu and Busan published as one batch at the owner's review; reboot required](#2026-09-27---monterrey-regional-daegu-and-busan-published-as-one-batch-at-the-owners-review-reboot-required)
 - [Ottawa to Band C; the by-country table is now checked; local scratch folders in data/ ignored (owner)](#2026-09-27---ottawa-to-band-c-the-by-country-table-is-now-checked-local-scratch-folders-in-data-ignored-owner)
@@ -71,6 +72,32 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-27 - Tram rescopes, light and medium: specs written for five cities, and the D.C. Streetcar dropped because it no longer runs (owner)
+
+- **The owner cleared the light and medium rescopes** ("up to medium seems
+  doable in this session, with an adjacent build session") and chose the
+  split: Staging writes specs, the build session implements on a branch held
+  for review time.
+- **Specs in `docs/tram_rescope_specs.md`**, measured from the cached feeds and
+  live OSM/CRTM:
+  - **Montréal REM**: A1, A3, A4, needing a new source and a licence read.
+  - **Rome tram 8**: needs a new OSM fetch; choose between the base and
+    "prolungato" relations against the GTFS.
+  - **Madrid Metro Ligero**: 11 of 56 stations inside Madrid against ML1's
+    9, so another line's stations need a stub call.
+  - **Paris T3a/T3b**: all 58 stops inside Paris.
+  - **SF F Market**: 46 stops.
+- **Found that IDFM gives Paris's T3a and T3b the Métro's own colours** (ΔE 0
+  against Lignes 5 and 12), so both need overrides, as the bis lines did.
+  **T2 and T9 are stubs in Paris** (3 of 24 and 1 of 19 stops), recommended
+  out.
+- **The D.C. Streetcar is dropped: DDOT ended service on 2026-03-31** after
+  the Council cut its funding. PLAN's "status unverified" is closed. OSM's
+  only light-rail relations in D.C. are the Capitol's private people movers,
+  which must not be drawn.
+- **Colours measured with `pipeline/linecolour.py`**: REM ΔE 27 from Métro
+  Line 1, Rome's tram 8 ≈70 from every line, F Market 27 from J. All pass the
+  floor of 10.
 ### 2026-09-27 - Monterrey (Regional), Daegu and Busan are LIVE: rebooted by the owner, live-checked
 
 - **The owner rebooted** after the push of 9dc08de. The app woke within

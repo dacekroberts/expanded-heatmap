@@ -1,71 +1,82 @@
-# Handoff - build role (Main Building Session, 2026-09-27)
+# Handoff - build role (from "Main Build", 2026-09-27, late)
 
-Written for the session that takes over this worktree. Read it once and follow
-the pointers for detail. When a priority is done, delete its section rather
-than adding an addendum.
+Written for a FRESH build session. Read it once and follow the pointers.
+When a priority is done, delete its section rather than adding an addendum.
+
+## Where things stand
+
+- **Monterrey (Regional), Daegu and Busan are LIVE** (pushed `9dc08de`,
+  rebooted by the owner, live-checked; record `0deab2e`). DECISIONS
+  2026-09-27 has the build, publish and live entries for each.
+- **Worktrees:** `daegu` and `busan` are retired, with their branches deleted
+  and both confirmed contained in master. `monterrey` remains only because the
+  old session ran in it. Its branch is fast-forwarded to master and holds
+  nothing unmerged. **Retire it** once no session uses it: run
+  `scripts/check_worktree_data.py` on it, remove its `data/` junction with
+  `[System.IO.Directory]::Delete(path, $false)` (never recursively), then
+  `git worktree remove` and delete the branch.
+- **Leftover for the owner or Cleanup:** the `monterrey-static-tmp` entry in
+  the MAIN checkout's `.claude/launch.json`. A session started inside a
+  worktree cannot reach it.
+- **New shared code:** `pipeline/countries/korea.py`, Seoul's step-2 rules for
+  every later Korean city. It raises on a renamed column, an unguarded phone
+  column (`전화` or `...tel`), a blank sub-type column, a 구-only address
+  regex and undeclared address masking. Seoul keeps its own step 2.
+
+## The next job: tram rescopes (owner's instruction, relayed by Staging)
+
+**The specs are in `docs/tram_rescope_specs.md`** (Staging wrote them; you
+implement them). The owner's pacing for this job is to **start cheap and
+monitor `get_usage` until the 5-hour window reaches 90%**. Check between
+cities. At 90%, finish the current step, commit clean, and stop with a
+one-line note naming the next action.
+
+- **Use one new worktree from master** (e.g. `worktree-trams`), **HELD for
+  review time.** It rewrites `outputs/`, so nothing merges to master until the
+  owner calls review time (`docs/review_time.md`).
+- **Order:** REM → Rome 8 → Madrid Metro Ligero → Paris T3a/T3b → SF F Market.
+- **Every drawn line gets a label AND a legend entry.** New downloads go in
+  `fetch_sources.py` with the owner's OK (file, source, size). OSM goes through
+  `pipeline.osm.fetch`.
+- **Traps named in the relay** (the specs have the detail):
+  - **REM:** needs a new source. Try the operator's or ARTM's GTFS with a
+    `licence-read` first, else OSM via `osm-rail`. The scope is the
+    agglomeration, so the Brossard and Laval stops are excluded. Check the
+    current line numbering before labelling.
+  - **Rome 8:** the cached OSM has no tram relations, so fetch them. Pick the
+    relation pair (base, 16 stops; or "prolungato", 26) that matches the
+    GTFS's route 8, and key on relation ids. Don't draw 2/3/5/14/19, which
+    have 0 trips.
+  - **Madrid:** attribute stations to lines from CRTM's M10_Tramos. An ML2
+    stub inside Madrid is an owner call. Take the colour from M10_Lineas and
+    check it against Metro Line 1.
+  - **Paris:** T3a and T3b are ΔE 0 against Lignes 5 and 12, so override both
+    colours, clearing the lines and the pins (as with the bis lines). T2 and
+    T9 are stubs, recommended out, and are an owner call at review. Match
+    `route_type` 0 plus the exact short name.
+  - **SF:** match `route_id` F exactly. The cable cars share its #B49A36 and
+    stay out.
+  - **D.C. Streetcar:** dropped (DDOT ended service 2026-03-31). Change its
+    "—" in `docs/map_inconsistencies.md` to "no longer operating". Don't draw
+    the Capitol's private people movers, which OSM tags `light_rail`.
+- **Re-rendering touches live cities.** Run `drift_check.py` per city, and
+  `git checkout -- outputs/` after a zero-drift run.
 
 ## Before starting
 
-- **Work in `.claude/worktrees/monterrey` on `worktree-monterrey`.** Check with
-  `git branch --show-current` and `git worktree list`. The branch is committed
-  and NOT pushed. origin/master was merged in on 2026-09-27 (`d88c8e8`,
-  owner's yes); merge it again right before the push.
-- **`data/` in this worktree is a JUNCTION** to the main checkout's `data/`,
-  where Monterrey's raw files live. Remove a junction only with
-  `[System.IO.Directory]::Delete(path, $false)`, never recursively.
-  `git status` shows it as `?? data/`. That is the junction, not uncommitted
-  work: never stage it.
-  `.venv-lean` is NOT linked yet: link it the same way before
-  `check_deploy_imports.py` or `deploy-verify`.
-- **A temporary `monterrey-static-tmp` entry** (port 8823) in the MAIN
-  checkout's `.claude/launch.json` serves this worktree's `outputs/`. The
-  owner's standing OK covers stepping out of the worktree to add or remove
-  `-tmp` entries: `ExitWorktree` keep, edit, then `EnterWorktree` with the path.
-  A session STARTED inside this worktree may not be able to step out that way.
-  If so, put the preview entry in this worktree's own `.claude/launch.json`.
-- **Never check out `master` here.** The main folder has it checked out, and
-  git will not put one branch in two worktrees. It is never needed: merge
-  `origin/master` into this branch, and publish with
-  `git push origin worktree-monterrey:master`.
-- **Don't treat the main folder's files as current.** Cleanup fast-forwarded
-  it to origin/master on 2026-09-27 (it had been ~310 commits behind), but it
-  only moves when someone pulls it. Use `origin/master` (`git show`,
-  `git diff`) after a `git fetch`.
-- **On master since this branch's base**, and arrived with the 2026-09-27 merge (Cleanup,
-  `8f9d118`):
-  - `drift_check.py` and `check_personal_exposure.py` print UTF-8 themselves,
-    so `PYTHONIOENCODING` is no longer needed.
-  - `osm.fetch()` refuses an all-zero `out count` answer, and
-    `overpass.osm.ch` is gone from every host list.
-  - A Czech city's config needs `RUIAN_CRS_CONTROL`.
-  - Riga has been re-rendered, so every map ships `JSON.parse`.
-- **This session is "Main Build"**; Staging and Cleanup were told on
-  2026-09-27. A successor tells them its own name (from `ListAgents`).
-- Check `get_usage` before big work. **No weekly cap this week** (owner,
-  2026-09-27): raise the cap and efficiency together once the weekly passes 60%.
-
-## Priorities, in order
-
-1. **Next builds: the owner's small-city picks.** Staging is screening; the
-   owner relays the picks. They join Monterrey's batch. Where each lives is
-   the owner's call; the recommendation is this branch, pages from 48.
-   Monterrey needed these records, and each city will too: provenance rows,
-   scope disclosure, inconsistency rows, privacy entry, label width and
-   placement, DECISIONS, PLAN.
-2. **Batch publish, when the owner says.** The steps are in PLAN's Monterrey
-   item and the `publish-city` skill. A reboot is needed, because
-   `cities.py` and `components.py` changed.
-
-## Where the detail lives
-
-- **Monterrey:**
-  - DECISIONS 2026-09-27, "Monterrey (Regional) built..." (its counts are the
-    drift baseline, `outputs/monterrey/baseline.json`)
-  - PLAN's Monterrey item
-  - `docs/data_sources.md` (three rows)
-  - `docs/build_briefs/monterrey.md`
-- **iPhone blank maps:** resolved. See memory `project_mobile_map_memory.md`
-  and `docs/handoff_2026-09-27.md` (cleanup).
+- **Tell Staging and Cleanup your session name** (from `ListAgents`). The
+  old one was "Main Build".
+- **Never check out `master` in a worktree.** Merge `origin/master` into the
+  branch, and publish with `git push origin <branch>:master` after a
+  `git fetch` in the same breath.
+- **Previews:** the preview tool reads `.claude/launch.json` in the worktree
+  the session STARTED in (gitignored there). Put a `-tmp` entry in that file,
+  and remove it when done.
+- **A worktree needs `data/` (and, for `check_deploy_imports.py`,
+  `.venv-lean`) linked as junctions** to the main checkout's. `git status`
+  shows `?? data/`: never stage it.
+- **No weekly cap this week** (owner). Raise the cap and efficiency together
+  once the weekly passes 60%; it was 22% at this handoff.
 
 ## Rules this session worked under, beyond CLAUDE.md and memory
 
@@ -74,48 +85,27 @@ than adding an addendum.
     `git -c user.name=dacekroberts -c user.email=49654908+dacekroberts@users.noreply.github.com commit ...`
   - Never change git config, amend, or force-push.
   - Stage by name after reading `git status`.
-  - Push with `git push origin <branch>:master`, `git fetch` immediately
-    before.
   - Trailer: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
+  - A commit message with backticks goes in a file (`git commit -F`); the
+    heredoc hook refuses them inline.
+  - `git branch -d` judges "merged" against the current branch, not master.
+    Confirm with `git merge-base --is-ancestor <branch> origin/master` before
+    `-D`.
 - **Downloads** need the owner's explicit OK every time (file, source, size).
-- **Page and notice prose** is drafted in chat for approval before it is
-  written.
-- **Forbidden columns:** Riga's excise columns `Nodoklu_maksatajs` and
-  `NMR_kods` are never read. Seoul's `전화번호` is never read or published.
-- **Leave alone:**
-  - `opd.pdf` at the main checkout's root (a stray from another session; the
-    owner decides)
-  - the Taipei PDF in `data/taipei/raw` ("leave pdf")
-  - the two personal files in the home directory
+- **Published prose** (pages, blurbs, notices, `excluded_categories.md`) is
+  drafted in chat and waits for the owner's review.
+- **Forbidden columns:** Riga's `Nodoklu_maksatajs` and `NMR_kods`, Seoul's
+  `전화번호`, Daegu's `소재지전화` and Busan's `sitetel` are never read.
+- **Leave alone:** `opd.pdf` at the main checkout's root, the Taipei PDF in
+  `data/taipei/raw`, and the two personal files in the home directory.
 
 ## If the owner asks for a summary of a past day's work
 
-Sources, most authoritative first:
-
-- `DECISIONS.md`'s dated sections (118 for 2026-09-24 alone)
-- `git log --all --since=... --until=...` (191 commits that day)
-- PLAN's ticked items and the dated `docs/handoff_*.md` files (in git history)
-- the raw session transcripts: `.jsonl` files under `~/.claude/projects/`, one
-  folder per worktree, searchable with the app's transcript tools
-
-Three caveats:
-
-1. **A date is several sessions.** Build, staging and cleanup run in parallel,
-   so a summary by date combines them unless the owner names one ("the build
-   session's 9/24 work", "Riga's build"). Ask which, or say that it combines
-   them.
-2. **Hand the reading to a subagent and keep only its summary.** A day can be
-   100+ DECISIONS sections and ~200 commits, and a transcript is far larger.
-   Reading that in the main session spends the context the builds need. Have
-   an `Explore` or `general-purpose` agent read the sources and return a
-   summary with citations. Go to the transcripts only when the owner wants the
-   conversation itself, not the decisions.
-3. **Cite, so it can be checked.** DECISIONS and git are the record;
-   transcripts are raw. Every claim in a summary names the DECISIONS entry or
-   commit behind it.
-
-## A correction for other handoffs
-
-This session has no live Riga work. The `riga` worktree was removed on
-2026-09-27 with everything on master (`20af557`). Riga's re-render for
-`JSON.parse` is free for any session.
+- **Sources, in order:**
+  - `DECISIONS.md`, with past weeks in `docs/decisions/`
+  - `git log --all --since=... --until=...`
+  - PLAN's ticked items
+  - the transcripts, only if the owner wants the conversation itself
+- **Hand the reading to a subagent**, one per day, and cite a DECISIONS entry
+  or commit for every claim.
+- **A date is several sessions**, so say the summary combines them.
