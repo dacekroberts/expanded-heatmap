@@ -16,6 +16,7 @@ guard switched off (`--archive-glob ""`) does put them back and `--check`
 catches it. The second half is the control - a guard that cannot be seen to
 fail proves nothing.
 """
+import os
 import shutil
 import subprocess
 import sys
@@ -53,8 +54,12 @@ OLD = ["2026-09-24 - Second week", "2026-09-21 - Second week", "2026-09-18 - Fir
 
 
 def run(repo, *cmd, ok=True):
+    # A git hook runs with GIT_DIR, GIT_INDEX_FILE and friends pointing at the
+    # REAL repository; left in place they make every command here act on it
+    # instead of the throwaway one. Found when the pre-push hook first ran this.
+    env = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
     p = subprocess.run(list(cmd), cwd=repo, capture_output=True, text=True,
-                       encoding="utf-8", errors="replace")
+                       encoding="utf-8", errors="replace", env=env)
     if ok and p.returncode:
         raise SystemExit(f"setup failed: {' '.join(cmd)}\n{p.stdout}{p.stderr}")
     return p

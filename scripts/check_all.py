@@ -57,7 +57,13 @@ CHECKS = [
 
 
 def run(argv):
-    env = dict(os.environ, HEATMAP_NO_NETWORK="1", PYTHONIOENCODING="utf-8")
+    # Drop git's hook variables (GIT_DIR, GIT_INDEX_FILE, ...): as the pre-push
+    # hook they point at the real repository, and a check that builds a
+    # throwaway repo would write to ours instead. On 2026-09-27 that flipped
+    # core.bare to true and overwrote user.name in the shared .git/config. Each
+    # check runs with cwd=ROOT, so git still finds this repository on its own.
+    env = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
+    env.update(HEATMAP_NO_NETWORK="1", PYTHONIOENCODING="utf-8")
     start = time.monotonic()
     proc = subprocess.run([sys.executable, *argv], cwd=ROOT, env=env,
                           capture_output=True, text=True, encoding="utf-8",

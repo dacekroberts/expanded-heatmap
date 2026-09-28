@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**23 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**24 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [The pre-push hook's first run broke the shared git config; restored by the owner, and every check now runs without git's hook variables](#2026-09-27---the-pre-push-hooks-first-run-broke-the-shared-git-config-restored-by-the-owner-and-every-check-now-runs-without-gits-hook-variables)
 - [Daegu's brief corrected: bakeries, delis and other food shops ARE published, on later pages of a six-per-page file list](#2026-09-27---daegus-brief-corrected-bakeries-delis-and-other-food-shops-are-published-on-later-pages-of-a-six-per-page-file-list)
 - [DECISIONS.md archived weekly, not monthly, with a merge guard (owner)](#2026-09-27---decisionsmd-archived-weekly-not-monthly-with-a-merge-guard-owner)
 - [UTF-8 console output at every script entry point that lacked it, and in the scaffold's step-3 template (owner)](#2026-09-27---utf-8-console-output-at-every-script-entry-point-that-lacked-it-and-in-the-scaffolds-step-3-template-owner)
@@ -56,6 +57,36 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - The pre-push hook's first run broke the shared git config; restored by the owner, and every check now runs without git's hook variables
+
+- **Found: `archive_decisions_selftest.py` wrote to the REAL repository's
+  config when the pre-push hook ran it.** Git runs a hook with `GIT_DIR`
+  pointing at the repository. The self-test's setup commands, meant for a
+  throwaway repository in a temp folder, inherited it:
+  - `git init` re-initialised the real repository and set `core.bare=true`, so
+    every checkout and worktree failed with "this operation must be run in a
+    work tree".
+  - `git config` overwrote `user.name`/`user.email` with `selftest` and added
+    `core.autocrlf=false`.
+  - The next setup step failed, which ended the test, and the hook refused the
+    push. Nothing was committed or pushed, and no branch has a
+    selftest-authored commit (`git log --all --author=selftest`: 0).
+- **Restored by the owner by hand**, because the auto-mode classifier refused
+  the same edit as a change to a shared resource. `core.bare=false`;
+  `core.autocrlf` unset, so the system default of `true` applies; user
+  `dacekroberts <49654908+dacekroberts@users.noreply.github.com>`, recovered
+  from the author of `0fe4672`. All three worktrees were verified afterwards,
+  and Main Build and Staging were told.
+- **Fixed twice.** The self-test strips every `GIT_*` variable from its
+  subprocesses. `scripts/check_all.py` does the same for every check, so a
+  future check that builds a scratch repository cannot repeat it. Verified by
+  running `check_all.py` with `GIT_DIR` and `GIT_INDEX_FILE` set: 16 of 16
+  passed and `.git/config` was byte-identical afterwards.
+- **The lesson:** the self-test was run by hand, where no `GIT_*` variable is
+  set, and passed. It had never run in the one environment it was written
+  for. A check destined for a hook has to be tested under the hook's
+  environment.
 
 ### 2026-09-27 - Daegu's brief corrected: bakeries, delis and other food shops ARE published, on later pages of a six-per-page file list
 
