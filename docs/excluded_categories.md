@@ -1840,13 +1840,13 @@ Toronto licenses food and trades, and not general retail. There is no licence
 category for a grocer, a clothing shop, a pharmacy, a hardware store or general
 merchandise, so none of them exists in any register to map. What the Retail
 bucket holds instead is the **regulated slice alone** - the trades a city
-licenses because it wants to watch them: `SECOND HAND SHOP` (1,806),
-`VAPOUR PRODUCT RETAILER` (539), `PRECIOUS METAL SHOP` (413), `SMOKE SHOP`
-(317), `PAWN SHOP` (218), `PET SHOP` (118), `SECOND HAND SALVAGE SHOP` (33) and
-`PERMANENT FIREWORKS VENDOR` (31).
+licenses because it wants to watch them: `VAPOUR PRODUCT RETAILER` (351),
+`SECOND HAND SHOP` (219), `PRECIOUS METAL SHOP` (85), `PAWN SHOP` (41),
+`SMOKE SHOP` (28), `PET SHOP` (20), `SECOND HAND SALVAGE SHOP` (10) and
+`PERMANENT FIREWORKS VENDOR` (5).
 
-On the current licences that reach the map that is **870 of 19,575 storefront
-rows, 4.4%**, against 14,408 food service and 4,297 personal services. So
+Of the licences that reach the map, **759 of 18,186 (4.2%) are retail**,
+against 13,385 food service and 4,042 personal services. So
 **read Toronto's Retail layer as a narrow regulated slice of what is actually
 on the street, and the balance between its three categories as a fact about
 Toronto's licensing rather than about its high streets.** This is
