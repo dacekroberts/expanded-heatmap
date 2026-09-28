@@ -81,7 +81,12 @@ Desktop is unaffected — the label is fully visible there.
     handed to Main Build. Three owner calls open in it (buckets as Seoul's;
     동해선, recommended out; stations inside Busan with the Busan–Gimhae LRT
     drawn).
-  - [ ] **Band T's group decision**: build trams-only cities, and in what
+  - [ ] ⏸ **DEFERRED by the owner 2026-09-27: until the full tram list exists
+    AND the second-wave screens are done** (the screens wait for the 10pm
+    reset or later; wave 1 was very load-intensive). The tram list's open
+    counts are Barcelona's TRAM, Hong Kong Tramways, Seoul's Wirye Line,
+    D.C. Streetcar's status and Mexico City's Cablebús (below).
+    **Band T's group decision**: build trams-only cities, and in what
     order (Nice, Montpellier, Brno and Bergen are the cheapest strong ones).
   - [ ] **Wave 2 held by the owner** (the US; Canada, Brazil and Ireland;
     Spain and Italy), possibly at a reset. Launch only on the owner's word,
