@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**41 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**42 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Göteborg's rail measured: 13 tram lines and 127 stops inside the city](#2026-09-27---göteborgs-rail-measured-13-tram-lines-and-127-stops-inside-the-city)
 - [Kansas City's streetcar passes the stub test; the Linz lead is aggregate counts, closed](#2026-09-27---kansas-citys-streetcar-passes-the-stub-test-the-linz-lead-is-aggregate-counts-closed)
 - [Worktrees: monterrey retired, trams created for the next build session, main checkout fast-forwarded (owner)](#2026-09-27---worktrees-monterrey-retired-trams-created-for-the-next-build-session-main-checkout-fast-forwarded-owner)
 - [Four owner calls: Ottawa to Band C, Rijswijk and Delft to T as Den Haag add-ons, the Band C memo's last verdicts accepted, Paris T2/T9 out](#2026-09-27---four-owner-calls-ottawa-to-band-c-rijswijk-and-delft-to-t-as-den-haag-add-ons-the-band-c-memos-last-verdicts-accepted-paris-t2t9-out)
@@ -74,6 +75,20 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Göteborg's rail measured: 13 tram lines and 127 stops inside the city
+
+- **The Band T row carried "Trams, no metro - INHERITED, not measured" since
+  2026-09-23.** Measured from OSM through `pipeline.osm.fetch`: boundary
+  relation 935611 (Göteborgs Stad), found by a bbox-scoped name match after an
+  unscoped lookup failed on both mirrors.
+- **13 tram lines (refs 1-13, Göteborgs Spårvägar), 127 distinct stop names
+  inside the city.** Lines 4 and 12 run on into Mölndal (15 of 19 and 13 of 18
+  stops inside). Every line has its own OSM colour except line 11 ("black").
+  The heritage Lisebergslinjen is left out. No metro.
+- So Göteborg is a large tram network, closer to Prague's 37 routes than to a
+  single line. A build faces the same label and legend question as the heavy
+  tram rescopes.
 
 ### 2026-09-27 - Kansas City's streetcar passes the stub test; the Linz lead is aggregate counts, closed
 
