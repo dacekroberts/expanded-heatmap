@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**64 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**65 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
@@ -29,6 +29,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Wave 2, the US banded: seven cities to T, Baltimore to C, sixteen discards; a Texas register reopens the Dallas question (owner)](#2026-09-28---wave-2-the-us-banded-seven-cities-to-t-baltimore-to-c-sixteen-discards-a-texas-register-reopens-the-dallas-question-owner)
 - [check_map_view.js run live on the review-time batch: Kobe and Paris open at the right zoom](#2026-09-28---check_map_viewjs-run-live-on-the-review-time-batch-kobe-and-paris-open-at-the-right-zoom)
 - [staging worktree retired; its data/ was a real 1.09 GB copy, not a junction](#2026-09-28---staging-worktree-retired-its-data-was-a-real-109-gb-copy-not-a-junction)
+- [Two checks join the hook: stray bullets in the docs the app renders, and a master-list self-test that picks its own targets](#2026-09-28---two-checks-join-the-hook-stray-bullets-in-the-docs-the-app-renders-and-a-master-list-self-test-that-picks-its-own-targets)
 
 **2026-09-27**
 
@@ -2479,3 +2480,39 @@ Recorded by the cleanup session from the Main Building Session's findings of
   - An EMPTY `staging` folder remains, reported busy, most likely held as
     the idle session's working directory. Remove it with `rmdir` once that
     session is archived. The handoff records this.
+
+### 2026-09-28 - Two checks join the hook: stray bullets in the docs the app renders, and a master-list self-test that picks its own targets
+
+- **`scripts/check_stray_bullets.py` fails a `- ` line that continues a
+  sentence in a document the app renders.** It is the shape `deploy-verify`
+  found three times in `docs/excluded_categories.md` on 2026-09-27: a spaced
+  hyphen used as a dash, wrapped so it starts a line, which markdown turns into
+  a bullet mid-paragraph. The rule: a `- `, `* ` or `+ ` line, in a paragraph
+  that did not open as a list, after a line that ends mid-sentence (not in
+  `.:!?;`, and not bold from end to end).
+  - **Rejected: "the previous line is prose" alone.** The first prototype
+    flagged about forty lines across `docs/`, nearly all intended lists after
+    a lead-in sentence (nine in `map_inconsistencies.md`). The tightened rule
+    flags none of the 19 rendered docs, and 4 of all 125 under `docs/`
+    (`build_briefs/recife.md:52`, `build_briefs/kyoto.md:182`,
+    `project_context.md:372`, `session_roles.md:97`). None of those four is
+    rendered by the app; `--all` reports them and is not in the hook.
+  - **Scope read from `app/`, not listed.** The check takes every string
+    constant in `app/**/*.py` that names a file or folder under `docs/`, so a
+    new page that renders a document is covered with no edit. An empty scope
+    fails.
+  - `check_stray_bullets_selftest.py`: 12 cases, each checked for its
+    expected message. Three wraps that must fail, six real lists that must
+    pass (after a blank line, a `:` lead-in, a bold lead-in, a wrapped item,
+    a fence, a four-space indent), the 09-27 defect re-created in a copy of
+    the live `excluded_categories.md`, the scope, and the positive control.
+- **`check_master_list_counts_selftest.py` now picks its targets from the
+  live file by shape.** Five cases named rows (Bergen, Gimhae renamed Brno,
+  Avignon renamed Rennes, Canada twice, France), and each broke the hook
+  whenever that row changed; Staging re-aimed one on 2026-09-27 (`e56c471`).
+  The cases now find a row of the right shape through the check's own
+  parsers: a by-country row with one Bands letter, a Band D and a Band T
+  table row, a built city, a by-country row the Built table also lists. On
+  today's file they chose Italy, Zurich, San Diego and the United States.
+  18 of 18. The unused `swap()` helper was removed.
+- **`check_all.py`:** both new scripts added; 21 of 21 passed in 29.1s.
