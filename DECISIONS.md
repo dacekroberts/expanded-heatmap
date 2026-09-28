@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**88 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**89 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Vancouver's exclusion sentence no longer says "as in every city here" (owner)](#2026-09-28---vancouvers-exclusion-sentence-no-longer-says-as-in-every-city-here-owner)
 - [Kyoto built on the shared Japanese modules: Japan's fifth city (held for review time)](#2026-09-28---kyoto-built-on-the-shared-japanese-modules-japans-fifth-city-held-for-review-time)
 - [Macro-map completeness tiers built on `macro-tiers`, checked, held for review time](#2026-09-28---macro-map-completeness-tiers-built-on-macro-tiers-checked-held-for-review-time)
 - [Kyoto steps 1-3 on a rebuilt register, pinned at 2026-07-31; its funiculars left out after all (owner)](#2026-09-28---kyoto-steps-1-3-on-a-rebuilt-register-pinned-at-2026-07-31-its-funiculars-left-out-after-all-owner)
@@ -124,6 +125,16 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Vancouver's exclusion sentence no longer says "as in every city here" (owner)
+
+- **`docs/excluded_categories.md`, Vancouver: "Also excluded, as in every city
+  here: `Long-term Rental` ..." now reads "Also excluded: `Long-term Rental`
+  ..."; everything after the colon is unchanged (owner, confirmed in this
+  session; drafted by Cleanup).** The claim stopped being true when Kobe and
+  Osaka kept confectionery and deli manufacturing permits (菓子製造業,
+  そうざい製造業) as Retail, so not every city excludes manufacturing. Landed
+  with the 2026-09-28 review-time batch.
 
 ### 2026-09-28 - Kyoto built on the shared Japanese modules: Japan's fifth city (held for review time)
 
