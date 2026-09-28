@@ -1,6 +1,6 @@
 ---
 name: japan-city
-description: Build a Japanese city on the shared modules Kobe built - japan_step1 (MLIT N02 rail cut at the N03 city line, collapsed on N02's station-group code, English names from OSM), japan_step2 (the city's permit lists through the japan_eigyo taxonomy and the MLIT block join, the owner's name rule), the owner's standing calls, the traps Kobe measured, the notices, and a sheet for each city still to build (Osaka, Sapporo, Fukuoka, Kyoto, Tokyo's 8 wards). Use for any Japanese city after Kobe; read with add-city, address-join, cjk-text and publish-city, which it does not replace.
+description: Build a Japanese city on the shared modules Kobe built - japan_step1 (MLIT N02 rail cut at the N03 city line, collapsed on N02's station-group code, English names from OSM), japan_step2 (the city's permit lists through the japan_eigyo taxonomy and the MLIT block join, the owner's name rule), the owner's standing calls, the traps Kobe measured, the notices, and a sheet per city (Osaka, Sapporo, Fukuoka, Kyoto and Tokyo built, with what each left the next - Tokyo's service routes, line-code labels and built credits for any big network). Use for any Japanese city after Kobe; read with add-city, address-join, cjk-text and publish-city, which it does not replace.
 ---
 
 # Building a Japanese city
@@ -169,18 +169,22 @@ build (a brief to correct, never a check to relax), in particular:
   or the rule silently compares nothing - then re-run the Minato control.
 - Several still list as open what the owner decided on 2026-09-24 (the
   Shinkansen, 菓子/そうざい, the city-line scope). Mark them decided.
-- None has run the **Economic Census join control** (PLAN, "Join control");
-  Kobe and Osaka did not either. **The e-Stat download is approved (owner,
+- None has run the **Economic Census join control** (PLAN, "Join control"),
+  and none of the five built cities (Kobe to Kyoto) has. **The e-Stat download is approved (owner,
   2026-09-28)**: one national per-ward table serves every city; name its
   file, source and size when fetching it.
 
-## The cities still to build
+## The city sheets (Osaka, Sapporo, Fukuoka and Kyoto built; Tokyo to build)
 
 Sheets from the briefs (line numbers are the brief's), 2026-09-27. Every brief
 has a `brief-checks` block; run it first. What each city needs BEYOND Kobe's
-config is marked ▶.
+config is marked ▶. A built city's sheet is kept for what it left the next.
 
-**Osaka** (`osaka.md`; 24 wards, EPSG:32653) - the closest to Kobe.
+**Osaka** - ✅ **BUILT 2026-09-27** (72,999 storefronts, 216 stations, 34
+lines; DECISIONS "Osaka pipeline built on the shared Japanese steps" and
+"Shared code changed for Osaka"). The sheet as written before the build:
+
+(`osaka.md`; 24 wards, EPSG:32653) - the closest to Kobe.
 - One city CSV, `…/contents/wdu280/260630zenku.csv` (63,902 rows, as of
   2026-06-30; 61,752 fixed); the portal's `data-00000382` is a stale 2021 twin.
   Personal services: the city's ri/bi/cleaning CSVs, 15,775 premises.
@@ -198,7 +202,11 @@ config is marked ▶.
 - Notice: `「食品営業許可施設一覧」（大阪市）（…0000575579.html）を加工して作成`,
   and likewise pages 0000431136 and 0000552712.
 
-**Sapporo** (`sapporo.md`; 10 wards, **EPSG:32654**).
+**Sapporo** - ✅ **BUILT 2026-09-28** (28,674 storefronts, 95 stations, 7
+lines; DECISIONS "Sapporo built", "Sapporo's brief corrected before the build"
+and "Japanese station names"). The sheet as written before the build:
+
+(`sapporo.md`; 10 wards, **EPSG:32654**).
 - `ckan.pf-sapporo.jp` `shokuhin260331.csv` (25,163 rows; 24,257 fixed);
   personal services `sapporo_environmental_hygiene_services` (5,993; resource
   URLs to read at build). **Fetch from ckan.pf-sapporo.jp only.**
@@ -337,9 +345,8 @@ reproduced the brief's eight shares exactly. Wards without data get hollow
 
 ## Recommending the next city
 
-Osaka, on the owner's own order (Osaka → Kobe → Sapporo → Fukuoka → Kyoto →
-Tokyo): one city file, a 99% join with the city's own coordinates as a check,
-no new mechanism in `japan_step2`, and approved wording for its one hard
-question. It proves the shared steps on the largest single list. Then Sapporo
-(no new mechanism either), and only then the three that each need one
-(Fukuoka's second source, Kyoto's stream, Tokyo's per-ward files).
+None in Band A: all six on the owner's order (Osaka → Kobe → Sapporo →
+Fukuoka → Kyoto → Tokyo) are built (2026-09-28). The other Japanese cities
+wait in their bands (`docs/japan_city_list.md`): Hiroshima food only and on
+streetcars (T), Yokohama personal services only (N), Sendai the city's
+permission (D). A Tokyo ward whose list turns up is the `tokyo-ward` skill.

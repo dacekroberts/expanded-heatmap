@@ -234,7 +234,7 @@ them gained a usable register.
 | **India** | **Keyless catalogue opened** — `api.data.gov.in/lists` exposes **288,011 resources** with no API key | **Aggregate, and the wrong cities.** Hits are *"Shops And Establishment Licence : Ahmedabad : 2015-16 to 2018-19"* and *"Shop and Esta Statistical Details : Rajkot"* — multi-year statistical summaries for cities with no metro, not premises registers for Hyderabad or Kochi |
 | **Croatia** | **Route opened** — the working path is `/ckan/api/3/action/`, not `/api/3/action/` | **Statistics only** — *Trgovina na malo* (retail trade) as HTML and XLSX |
 | **Poland** | `api.dane.gov.pl/1.4/datasets` works | **No register.** Queries fuzzy-match to tourist organisations, vaccination points and financial statements. CEIDG and REGON both require keys |
-| **Germany** | `ckan.govdata.de` **and** Berlin's `datenregister.berlin.de` both work | **No premises register.** 18 Berlin hits for *Gewerbe* are all statistical XLS — turnover, broadband, load profiles |
+| **Germany** | `ckan.govdata.de` **and** Berlin's `datenregister.berlin.de` both work | **No premises register.** 18 Berlin hits for *Gewerbe* are all statistical XLS — turnover, broadband, load profiles. ▼ **2026-09-28: wrong for Berlin, a statement about the search.** Enumerating all 2,626 packages on `datenregister.berlin.de` found **IHK Berlin's "Gewerbedaten"**: 367,575 per-premises points (WFS `gdi.berlin.de/services/wfs/gewerbedaten`, CSV 126 MB on IHK's GitHub), NACE/WZ codes, no names, monthly (last 2026-09-28), CC0 / dl-de/zero-2.0. Retail 51,233, food 20,771; hairdressers and laundries nearly absent (crafts chamber, not IHK). A stacking probe at four station areas (600 m boxes) put storefront-coded counts at 1.18–1.47× OSM for food and 1.18–1.40× for shops. **Munich, Frankfurt and Cologne** (never screened) were enumerated in full the same day and publish no premises register; no other IHK publishes Berlin's data. Discarded (owner) |
 | **Singapore** | v2 API works | **Inconclusive** — page 1 of the catalogue holds 10 datasets, none business-related. Not paginated through |
 | **Estonia** | `avaandmed.eesti.ee/api/datasets` answers | Returns **0 results**; the ariregister bulk CSV **404s** on two URL forms. Unresolved |
 | **Thailand** | **403 on every strategy** — including browser headers with a `Referer`, and the DBD register directly | **BLOCKED.** Consistent across paths; consistent with geo-blocking |
@@ -1382,7 +1382,7 @@ the exact error this file forbids.
 ### DISCARD
 
 **Structural data defect — will not change**
-**UK** (NNDR is a tax register and will never gain a category) · **Austria**
+**UK** (NNDR is a tax register and will never gain a category; *▼ 2026-09-28: London passed food only on the FSA register, Band B - see Tier 4*) · **Austria**
 (GISA strips the street address by design) · **Latvia**, **Slovakia** (no
 activity classification at all) · **Belgium** (bulk access paid) · **Hong
 Kong** (food-only ceiling *and* no MTR feed) · **Dubai** (no agency feed
@@ -2082,7 +2082,7 @@ before the next country is profiled.
 
 | | Why | Basis |
 |---|---|---|
-| **United Kingdom** | **Re-checked 2026-09-21 and still out, for a sharper reason.** Beyond VOA (property without names), Companies House (registered offices) and the FSA (food only), councils publish **NNDR business-rates** data under the Local Government Transparency Code — premises address, rateable value, property description and ratepayer name. It fails on three counts: **names are given only for limited companies and redacted for sole traders and partnerships under GDPR**; the only classification is a property description (`shop`) which **cannot produce this project's three buckets**; and it is published **per council across 300+ authorities** in separate bespoke spreadsheets. The best UK source is premises without a usable category | MEASURED |
+| **United Kingdom** | **Re-checked 2026-09-21 and still out, for a sharper reason.** Beyond VOA (property without names), Companies House (registered offices) and the FSA (food only), councils publish **NNDR business-rates** data under the Local Government Transparency Code — premises address, rateable value, property description and ratepayer name. It fails on three counts: **names are given only for limited companies and redacted for sole traders and partnerships under GDPR**; the only classification is a property description (`shop`) which **cannot produce this project's three buckets**; and it is published **per council across 300+ authorities** in separate bespoke spreadsheets. The best UK source is premises without a usable category. ▼ **Re-screened 2026-09-28 for London (owner's call): Band B, food only.** The FSA food-hygiene API (keyless) counts **81,633** premises across London's 33 authorities: food storefronts 40,585 (restaurants and cafés 27,279, takeaways 9,441, pubs and bars 3,865) and food retail 19,088 (retailers 16,763, supermarkets 2,325); **80.2%** carry coordinates in a 3,300-row sample, and 2 of 3,300 have no address. **No second layer covers central London.** The VOA rating list does carry a description, but its terms are "Non Domestic Rating (NDR) purposes only" with onward disclosure barred, so the licence, not a missing category, is what rules it out. Borough NNDR lists with the VOA description are published by 4 of 33 (Camden, Islington, Barnet, Hounslow), none downtown (Westminster refuses its list under FOI): Santiago's failure. Special-treatment registers (nails, massage, beauty) are lookup-only in the five boroughs read. Newcastle and Glasgow not re-screened | MEASURED |
 | **Israel** | Transit measured and good — 332 points, 27 lines, CC-BY — but **the business leg has no route**. The national portal's only business-licensing register is Be'er Sheva's, a city with no rail; Tel Aviv's own portal returns **HTTP 472**, refusing automated requests. Moved here 2026-09-21: good rail with no reachable matching business data is not a candidate | MEASURED |
 | **Peru** | The Lima Line 1 station set is real and ODC-BY, but **dated March 2018 and Line 1 only** — Line 2 has been opening since 2023 and is absent, so the source understates the city and is seven years stale. Moved here 2026-09-21 | MEASURED |
 | ~~**Japan**~~ | **MOVED UP to Tier 3, 2026-09-21.** The earlier ruling rested on the Economic Census being aggregate — true, and the wrong source. Japanese municipalities publish **食品営業許可 (food business permits) as premises-level open data with coordinates**: Minato Ward alone is **5,723 premises**, CC BY, carrying `施設名称`, **`施設名称_英字`** (English name), `営業の種類`, a full address plus split components, **`緯度`/`経度`**, `法人番号`, and permit and closure dates. Crucially it follows Japan's **national 推奨データセット standard schema** (`全国地方公共団体コード`, `町字ID`), so every municipality publishing it uses identical columns and the per-ward assembly is mechanical rather than bespoke. **The real ceiling is two buckets** — Japan has no general retail permit, so retail would be absent, which is Toronto's and Boston's shape. 生活衛生関係営業 permits (理容所, 美容所) are the likely Personal services source and are unprobed | MEASURED |
@@ -2091,8 +2091,8 @@ before the next country is profiled.
 | **Jakarta** | **No MRT Jakarta or LRT Jakarta feed anywhere.** Transjakarta is BRT | MEASURED |
 | **Rio de Janeiro** | **No MetrôRio or SuperVia feed anywhere** | MEASURED |
 | **Kuala Lumpur, Tel Aviv, Lima, Medellín, Bogotá** | No metro operator feed anywhere in the catalogue | MEASURED |
-| **Dubai** | The catalogue's feed is an **anonymous personal GitLab job artefact** returning a non-zip; the transitland fallback 404s | MEASURED |
-| **Manila** | The LRTA feed codes its four rail lines as **commuter rail (type 2)**, which this project excludes. A coding question, but it fails as published | MEASURED |
+| **Dubai** | The catalogue's feed is an **anonymous personal GitLab job artefact** returning a non-zip; the transitland fallback 404s. ▼ **2026-09-28: rail from OSM instead (Metro and tram), and the register's hosts refuse this machine; Band D (owner). See the probe list's item 7** | MEASURED |
+| **Manila** | The LRTA feed codes its four rail lines as **commuter rail (type 2)**, which this project excludes. A coding question, but it fails as published. ▼ **2026-09-28: the rail reason is obsolete (OSM carries LRT-1, LRT-2 and MRT-3 with refs and colours), and the business side fails instead.** `data.gov.ph` holds 175 datasets from 17 agencies, none on businesses; none of the cities on the lines publishes a permit or business list (Makati an aggregate count, Quezon City's dashboards login-only; `manila.gov.ph`, Taguig, Caloocan and Parañaque 403); DTI's BNRS and the FDA portal are lookups; no open address file. **Discarded (owner)** | MEASURED |
 | **Belgium** | Establishment units exist; **bulk access requires application and payment** | MEASURED |
 | **Australia, New Zealand** | Auckland is commuter-only. **Melbourne's PTV feed is a nested zip** the screen cannot read, so its rail is *unverified rather than absent*. Business licensing is not municipal — **ASSERTED** | MIXED |
 | **Russia, Ukraine** | Access and conflict, not data | — |
@@ -3181,7 +3181,9 @@ of first-class non-food establishments … on a district and sector basis"** —
 Economic Census: a statistic, not a register. Turkey has 24 feeds and Istanbul
 has one of the largest metro networks in Europe, so if a premises-level source
 exists elsewhere on that portal this flips — **ASSERTED that it does not**,
-based on one dataset.
+based on one dataset. ▼ **2026-09-28: now MEASURED across the whole
+catalogue and seven central districts; Band N (owner). See the probe list's
+item 8.**
 
 **Has a metro and feeds, business data unprobed:**
 
@@ -3224,7 +3226,7 @@ premises-level business register, so the business leg would fail first.
 
 | Country | Why |
 |---|---|
-| **United Kingdom** | **MEASURED:** VOA's rating list "records property, not people: an address, a description, a floor area and a value" — premises-level but **no trade name and no category**. Companies House gives registered offices. The FSA food-hygiene register would work and is **food only** — Boston's two-bucket shape. |
+| **United Kingdom** | **MEASURED:** VOA's rating list "records property, not people: an address, a description, a floor area and a value" — premises-level but **no trade name and no category**. Companies House gives registered offices. The FSA food-hygiene register would work and is **food only** — Boston's two-bucket shape. ▼ **2026-09-28:** the "no category" half was wrong (the description is one); the VOA list is ruled out by its terms, "NDR purposes only". London passed food only on the FSA register (Band B, owner) - see Tier 4 |
 | **Japan** (data) | **MEASURED:** the Economic Census publishes **aggregate counts by area**, not an establishment register with addresses. |
 | **Belgium** | **MEASURED:** KBO/BCE does carry *vestigingseenheden* at specific addresses, but **full bulk data and API access require formal application and payment**. |
 | **Germany, Italy, Sweden, Ireland, Portugal, Austria, Switzerland, Czechia** | **ASSERTED**, none individually probed: the EU default is a *company* register — Handelsregister, Registro Imprese, Bolagsverket, CRO — recording registered offices, usually behind a fee. |
@@ -3288,7 +3290,14 @@ it to dominate the cost of any European profile.
    first.** The catalogue's Dubai feed is an anonymous personal GitLab
    repository returning a non-zip, and the transitland fallback 404s. The
    business register may well be excellent; there is no agency feed to pair it
-   with until one is found.
+   with until one is found. ▼ **2026-09-28: reopened and blocked.** Rail
+   comes from OpenStreetMap now (Metro Red and Green, 64 named stations, and
+   the tram), so the transit reason is obsolete. But every host of the register
+   refuses this machine: `dubaipulse.gov.ae` times out on HTTPS and HTTP,
+   `data.dubai` (its successor) returns a firewall "Request Rejected" on every
+   path, `dubaidet.gov.ae` 403, and the API wants a key. The location fields and
+   the dataset licence are still unread. Dubai to Band D (owner's call), in
+   Warsaw's shape: a read from inside the UAE first.
 7b. **Barcelona's real rail feed.** TMB was never tested — the catalogue's
    Barcelona entry is a bus operator. This is the single cheapest check that
    could promote Spain to Tier 1, since its business leg is already measured.
@@ -3298,7 +3307,16 @@ it to dominate the cost of any European profile.
    its own, but CDMX is the prize.
 8. **Istanbul, second look.** One dataset was aggregate; İBB's portal is large
    enough that a premises-level source may exist, and Istanbul's metro would
-   make it a strong candidate if one does.
+   make it a strong candidate if one does. ▼ **Run 2026-09-28: Band N
+   (owner).** All 557 public datasets on `data.ibb.gov.tr` were searched: the
+   only licence data is still the aggregate GSM table, and the one
+   premises-level private-business layer is the health-institutions dataset
+   (5,806 pharmacies, 1,672 opticians, 1,208 medical-supply shops, lat/lon),
+   frozen at 2024-03 and noted as "subject to a fee". Shops, restaurants and
+   salons are licensed by the 39 districts: Kadıköy (160 datasets) publishes
+   counts only, Üsküdar 7 unrelated datasets, and Beşiktaş, Şişli, Beyoğlu,
+   Fatih and Bakırköy have no open-data host. No open address layer. Rail
+   is strong in OSM (M1A–M11, 177 named stations; T1–T5).
 9. **Chile's municipal portals directly**, rather than the national
    aggregator — Santiago's national-portal copy is a decade stale, which says
    nothing about what the municipality publishes today.

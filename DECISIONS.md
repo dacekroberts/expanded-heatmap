@@ -20,14 +20,21 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**99 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**106 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Tokyo built: its page, macro-map entry, exclusions and table rows (owner-approved); Japan's sixth and last city, held for review time](#2026-09-28---tokyo-built-its-page-macro-map-entry-exclusions-and-table-rows-owner-approved-japans-sixth-and-last-city-held-for-review-time)
+- [German screen from the large-transit gap: Munich, Frankfurt and Cologne discarded; Berlin's register found (owner)](#2026-09-28---german-screen-from-the-large-transit-gap-munich-frankfurt-and-cologne-discarded-berlins-register-found-owner)
 - [Tokyo's census control, notice and page: the Economic Census control run for all six Japanese cities; zero drift in 55; Tokyo's texts approved (owner)](#2026-09-28---tokyos-census-control-notice-and-page-the-economic-census-control-run-for-all-six-japanese-cities-zero-drift-in-55-tokyos-texts-approved-owner)
+- [Crash 2: the rewritten census control measured at 0.28 GB; the cause stays unproven](#2026-09-28---crash-2-the-rewritten-census-control-measured-at-028-gb-the-cause-stays-unproven)
+- [Istanbul's second look run: Band N, pharmacies and opticians only (owner)](#2026-09-28---istanbuls-second-look-run-band-n-pharmacies-and-opticians-only-owner)
 - [Tokyo's rail: JR East drawn as nine public services over N02's legal lines, 52 lines, 490 stations (293 hollow); station names in signage style; the name rule's gap accepted (owner)](#2026-09-28---tokyos-rail-jr-east-drawn-as-nine-public-services-over-n02s-legal-lines-52-lines-490-stations-293-hollow-station-names-in-signage-style-the-name-rules-gap-accepted-owner)
+- [Dubai and Manila re-screened from the large-transit gap: Dubai to Band D, Manila discarded (owner)](#2026-09-28---dubai-and-manila-re-screened-from-the-large-transit-gap-dubai-to-band-d-manila-discarded-owner)
 - [Tokyo step 2 on the roster: 63,989 storefronts from 25 sources, 99.7% block; a source's key split from its kind; the registers read for the first time](#2026-09-28---tokyo-step-2-on-the-roster-63989-storefronts-from-25-sources-997-block-a-sources-key-split-from-its-kind-the-registers-read-for-the-first-time)
+- [London re-screened from the large-transit gap: Band B, food only (owner)](#2026-09-28---london-re-screened-from-the-large-transit-gap-band-b-food-only-owner)
+- [Worktrees `main-build` and `tokyo-sources` retired (owner)](#2026-09-28---worktrees-main-build-and-tokyo-sources-retired-owner)
+- [Sapporo, Fukuoka and Kyoto landed: city-landed sweep and live check after the reboot pass](#2026-09-28---sapporo-fukuoka-and-kyoto-landed-city-landed-sweep-and-live-check-after-the-reboot-pass)
 - [Tokyo's groundwork built: the ward roster, hollow no-data stations, per-ward shares measured every build; the seven personal-services-only wards stay hollow (owner); the Tokyo build takes over this worktree](#2026-09-28---tokyos-groundwork-built-the-ward-roster-hollow-no-data-stations-per-ward-shares-measured-every-build-the-seven-personal-services-only-wards-stay-hollow-owner-the-tokyo-build-takes-over-this-worktree)
 - [Review batch verified: the full deploy-verify passes; the macro tooltip becomes a corner panel; East Asia's global-frame label overlaps accepted (owner)](#2026-09-28---review-batch-verified-the-full-deploy-verify-passes-the-macro-tooltip-becomes-a-corner-panel-east-asias-global-frame-label-overlaps-accepted-owner)
 - [Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one heavy job at a time, drift --jobs 2 at most (owner)](#2026-09-28---two-app-crashes-traced-to-memory-exhaustion-python-capped-at-8-gb-a-process-one-heavy-job-at-a-time-drift---jobs-2-at-most-owner)
@@ -165,6 +172,51 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - **Held for review time**: nothing of Tokyo is on master. `app/` landing is
   deploying, and the owner calls it.
 
+### 2026-09-28 - German screen from the large-transit gap: Munich, Frankfurt and Cologne discarded; Berlin's register found (owner)
+
+- **Found Berlin's discard to be a statement about a search: IHK
+  Berlin publishes a per-premises register.** The row rested on two keyword
+  searches (`Gaststätten` → 0 on `datenregister.berlin.de`, and GovData).
+  Enumerating all 2,626 packages found it under "Gewerbedaten", a word no
+  query contained. It is published by IHK Berlin, the chamber of commerce:
+  a WFS at `gdi.berlin.de/services/wfs/gewerbedaten` and a 126 MB CSV on
+  IHK's GitHub (size read by HEAD only). It holds 367,575 points at their
+  addresses, with WZ/NACE codes, employee range, business type, no names,
+  and monthly updates (last 2026-09-28), under CC0 / dl-de/zero-2.0 (no
+  `licence-read` yet). By the agent's count, retail is 51,233, food 20,771
+  and personal services about 14,000, but hairdressers and laundries are
+  nearly absent (180 hairdressers), since they belong to the crafts chamber,
+  which publishes nothing. Berlin stays in the discards until its band is
+  decided (owner's call).
+- **Probed registered-office stacking in Berlin before banding it:
+  storefront counts sit at 1.2–1.5× OSM.** One WFS bbox request per 600 m
+  box, at Hackescher Markt, Kottbusser Tor, Wilmersdorfer Straße and Rathaus
+  Steglitz; storefront = NACE 47 (minus 4791/4799), 561x and 5630, and
+  9601/9602/9604. Food against OSM restaurants, cafés, fast food, bars and
+  pubs: 139/104, 148/119, 120/102, 63/43. Retail against OSM `shop=*`:
+  229/168, 157/112, 243/190, 192/163. The stacking is real (Hackescher
+  Markt: 1,900 businesses on 181 points, 65% of storefront entries on
+  addresses shared by 10 or more), but the ratios show no office inflation
+  of the storefront codes; the shared addresses are largely arcades and
+  courtyards. Personal-services storefronts in the four boxes: 5, 3, 1 and 0,
+  which confirms the crafts-chamber gap. Between 46% and 59% of storefront
+  entries report 0 employees, so the personal-exposure check matters at a
+  build. A first run keyed food on 5610 and found 10 restaurants at
+  Hackescher Markt; IHK's `nace_id` carries WZ subclasses (restaurants are
+  5611), which a taxonomy module must key on.
+- **Discarded Munich, Frankfurt and Cologne on full enumerations (owner's
+  call).** Munich: 337 datasets and ten geoportal workspaces; only aggregate
+  trade counts, 54 markets and planning graphics, and no open house
+  coordinates (Bavaria publishes building outlines only). Frankfurt: 303
+  portal entries and 555 geodata records; trade de-registrations by year,
+  and a points-of-interest WFS restricted to the administration. Cologne:
+  503 datasets and 85 ArcGIS services; a 59-club register, markets, and the
+  NRW tourism feed's curated restaurants. No other chamber publishes
+  Berlin's data: GovData, open.nrw and `open.bydata.de` hold none, IHK
+  München sells addresses, IHK Köln has lookups only, and IHK Frankfurt has
+  no open-data page. Files: `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
 ### 2026-09-28 - Tokyo's census control, notice and page: the Economic Census control run for all six Japanese cities; zero drift in 55; Tokyo's texts approved (owner)
 
 - **The Economic Census join control ran for all six Japanese cities**
@@ -207,6 +259,53 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   since its 2026-09-27 generation (Hiroshima food 11,056 to 11,078; personal
   services Osaka +9, Sapporo -16, Kobe -1, Tokyo -2) - the whole of
   2026-09-28's reader and taxonomy changes; no built map moved (zero drift).
+
+### 2026-09-28 - Crash 2: the rewritten census control measured at 0.28 GB; the cause stays unproven
+
+- **Measured (Tokyo build session, psutil `peak_wset`):** the rewritten
+  `scripts/japan_census_control.py`, which keeps only the city's own N03
+  ward polygons and runs one city at a time, peaked at 0.18 GB on Kobe and
+  0.28 GB across all six Japanese cities, under the cap.
+- **It does not settle crash 2** (the 47 GB `python.exe` at 12:05:04; entry
+  "Two app crashes traced to memory exhaustion", above). What ran then was
+  the earlier version, which dissolved each prefecture's whole N03 file; it
+  is gone and cannot be measured. Of the two suspects it remains the likelier:
+  no drift step measured that day passed 5.43 GB (Oslo), and the census
+  version failed on its first prefecture read 12 s before Windows logged the
+  47 GB process. Recorded as likelier, not proven. The 8 GB cap covers
+  either now.
+
+### 2026-09-28 - Istanbul's second look run: Band N, pharmacies and opticians only (owner)
+
+- **Moved Istanbul to Band N (no page for now) rather than discarding it
+  (owner's call).** The 2026-09-21 record ASSERTED from one aggregate dataset
+  that İBB publishes no premises-level source; the shortlist's probe 8 (a
+  second look) had never been run. Run now on light methods only:
+  `data.ibb.gov.tr` lists 564 datasets (557 public, 57 organisations), and
+  every one was searched on titles, notes, tags and resource names. The only
+  licence data is still the aggregate GSM count table. The one premises-level
+  private-business layer is the health-institutions dataset, with 5,806
+  pharmacies, 1,672 opticians and 1,208 medical-supply shops, each with
+  lat/lon and a street address. It is frozen at 2024-03, its notes say it "is
+  subject to a fee and will not be updated", and pharmacy names are often
+  the pharmacist's own. The other premises layers are İBB's own outlets,
+  fuel stations with anonymised names, and whole street markets.
+- **The districts license the storefronts, and none of them publishes a
+  list.** Ordinary shops, restaurants and salons get their işyeri licence
+  from the 39 district municipalities. Kadıköy (160 datasets, CC BY 4.0)
+  publishes counts only and Üsküdar has 7 unrelated datasets. Beşiktaş,
+  Şişli, Beyoğlu, Fatih and Bakırköy have no open-data host, only e-belediye
+  logins and GIS viewers. The Ministry of Agriculture's register sits behind
+  a CAPTCHA. No open address layer exists to join to.
+- **N was chosen over a discard because the row names what would reopen
+  it:** a central district publishing its licence list in bulk. A
+  pharmacy-and-optician map is not a storefront page, the same judgment as
+  Yokohama's personal-services-only row. Rail is strong in OSM: M1A–M11 with
+  177 named stations, T1–T5 with 156 stops, and funiculars F2 and F3; whether
+  to draw Marmaray (tagged train) is a question for a build. Files:
+  `docs/city_master_list.md`, `docs/global_country_shortlist.md` (probe 8,
+  the Istanbul paragraph), `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - Tokyo's rail: JR East drawn as nine public services over N02's legal lines, 52 lines, 490 stations (293 hollow); station names in signage style; the name rule's gap accepted (owner)
 
@@ -307,6 +406,44 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   names; its two "name (trade name)" hits are salon names with their kana
   reading (ALETTA DONA, Maison Lily). No personal information shown.
 
+### 2026-09-28 - Dubai and Manila re-screened from the large-transit gap: Dubai to Band D, Manila discarded (owner)
+
+- **Found both cities' transit reasons obsolete: OpenStreetMap carries the
+  rail.** Both were ruled out 2026-09-21 on transit feeds alone: Dubai's
+  catalogue feed was a personal GitLab artefact, and Manila's operator typed
+  its lines as commuter rail. The project now builds rail from OSM
+  (Monterrey's precedent). One Overpass query per city found Dubai Metro's
+  Red (two branches) and Green lines, with 64 named subway stations, plus the
+  tram. It found Manila's LRT-1, LRT-2 and MRT-3 with refs and colours, but
+  only 24 of the roughly 50 stations carry a station tag, so a build would
+  take them from the routes' stop members.
+- **Moved Dubai to Band D, in Warsaw's weaker form: blocked before
+  measurement (owner's call).** The 2026-09-21 record found the Department of
+  Economy's licence register (`ded_license_master`, mainland Dubai without
+  the free zones). It left two deciding questions open: whether the rows
+  carry locations, and the dataset licence. Neither can be read from here.
+  `dubaipulse.gov.ae` times out on HTTPS and HTTP, its successor `data.dubai`
+  returns a firewall "Request Rejected" on every path, `dubaidet.gov.ae`
+  answers 403, and the API wants a key. The Dubai Data Law (26/2015) was read
+  and describes open data as disseminated "without restrictions or with the
+  relevant minimum restrictions", deferring to a policy that could not be
+  reached. DMCC's free-zone directory forbids copying. A discard was
+  rejected: nothing behind the block was measured, and the register is the
+  right shape.
+- **Discarded Manila: no business list at any level (owner's call).** Business
+  permits are issued by each city's BPLO. `data.gov.ph`, enumerated in the
+  browser, holds 175 datasets from 17 agencies, none on businesses or
+  permits. Seven of the cities on the lines were read: Makati publishes only
+  an aggregate count, Quezon City's dashboards are login-only, and Pasig,
+  Pasay, Mandaluyong, Marikina and San Juan publish no list.
+  `manila.gov.ph`, Taguig, Caloocan and Parañaque answered 403 and were left
+  alone. DTI's BNRS and the FDA portal are lookups, PSA's establishment list
+  is released only as aggregates, and there is no open address file to join
+  to. Band D was rejected: every central city that could be read was
+  negative, so the 403s were not the only thing stopping it. Files:
+  `docs/city_master_list.md`, `docs/global_country_shortlist.md`,
+  `docs/global_transit_gap.md`, `docs/handoff_staging_2026-09-28.md`.
+
 ### 2026-09-28 - Tokyo step 2 on the roster: 63,989 storefronts from 25 sources, 99.7% block; a source's key split from its kind; the registers read for the first time
 
 - **Tokyo's config is built from the roster** (`pipeline/tokyo/config.py`, from
@@ -401,6 +538,88 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - The owner rebooted the app after the review batch landed (`c2864b8`), and
   `worktree-japan` is merged to master at `9248386`.
 
+### 2026-09-28 - London re-screened from the large-transit gap: Band B, food only (owner)
+
+- **Moved London from "Countries ruled out" to Band B, food only, on the FSA
+  food-hygiene register (owner's call).** The UK was ruled out 2026-09-21
+  (`docs/decisions/2026-09-20.md`), partly because the FSA register is food
+  only, before food-only pages passed on 2026-09-27. Re-screened first on
+  `docs/global_transit_gap.md`'s order, on light methods only: the FSA's
+  keyless API gives **81,633** premises across London's 33 authorities. Of
+  those, food storefronts are 40,585 (restaurants and cafés 27,279, takeaways
+  9,441, pubs and bars 3,865) and food retail 19,088 (retailers 16,763,
+  supermarkets 2,325). In a 3,300-row sample (100 per authority), **80.2%**
+  carry coordinates (lowest Merton, 63%) and 2 have no address, so the misses
+  are unmatched geocodes rather than withheld addresses. In every authority,
+  half the sampled ratings date from 2024-04 or later. Nothing was downloaded.
+- **Found the recorded UK reason wrong: the VOA rating list has a
+  description, and what rules it out is its terms.** The 2026-09-21 record
+  said the rating list "carries no category", yet quoted it as holding "a
+  description". The terms page linked from the download page limits use to
+  "Non Domestic Rating (NDR) purposes only" and bars onward disclosure for
+  anything else, so it cannot be published. That page was read, and the
+  terms were not accepted; no formal `licence-read` was run.
+- **Found no second layer that covers central London, so the page stays food
+  only.** Borough NNDR lists carrying the VOA description are published by 4
+  of 33 authorities (Camden, Islington, Barnet, Hounslow), none of them
+  downtown; Westminster refuses its list under FOI. That is Santiago's
+  failure ("coverage fails downtown"). A services layer in four outer
+  boroughs was rejected because it would mislead readers. Special-treatment
+  registers (nails, massage, beauty) are lookup-only in Westminster, Camden,
+  Hackney, Tower Hamlets and Lambeth. The London Datastore (1,303 datasets)
+  holds nothing premises-level for retail or services.
+- **Before a build:** a `licence-read` of the FSA register; placement for the
+  ~20% without coordinates (postcode centroids, with their own
+  `docs/data_sources.md` row); `check_personal_exposure.py` for mobile and
+  home caterers; and a rail-shape decision across the Underground, Overground,
+  DLR, Elizabeth line and Tramlink. Newcastle and Glasgow were not
+  re-screened. Files: `docs/city_master_list.md` (Band B, by country,
+  countries ruled out), `docs/global_country_shortlist.md` (the UK rows),
+  `docs/global_transit_gap.md`, `docs/handoff_staging_2026-09-28.md`.
+### 2026-09-28 - Worktrees `main-build` and `tokyo-sources` retired (owner)
+
+- **Retired on the owner's word and both sessions' own**, both sessions
+  closed and off the active list. Order, so a removal could not reach the
+  main checkout's data through a link: each worktree's `data/` and
+  `.venv-lean` were junctions to the main checkout's and were unlinked
+  alone (`[System.IO.Directory]::Delete(path, $false)`), after which the
+  main checkout's `data/japan/raw` and `.venv-lean` python were confirmed
+  present; `check_worktree_data.py` passed on both ("no data/ folder");
+  neither held anything else but `__pycache__`; `git worktree remove`
+  without force.
+- **Local branches deleted with `-d` only**: `worktree-main-build`,
+  `worktree-tokyo-sources` (its 9 commits are in `origin/worktree-japan`),
+  and, after the main checkout was fast-forwarded to `origin/master` (it
+  had no tracked changes), `review-2026-09-28b`, `macro-tiers` and
+  `build-sapporo`. Also the stale `worktree-seoul` and `worktree-taichung`,
+  both fully in master. Their GitHub copies stay until the owner deletes
+  them; auto mode refuses a remote branch delete.
+
+### 2026-09-28 - Sapporo, Fukuoka and Kyoto landed: city-landed sweep and live check after the reboot pass
+
+- **Live check after the owner's reboot (`c2864b8`) passed.** At 1280 x 800,
+  the map object itself (not a screenshot): Sapporo zoom 10.75 of 10.75,
+  126 markers; Fukuoka 11.75 of 11.75, 127; Kyoto 11.5 of 11.5, 192; Prague,
+  untouched, 12 of 12, 124. No guard correction fired; every map carries the
+  linked `© OpenStreetMap contributors` credit. The front page lists 54
+  cities, draws the tier colours with the three-tier legend, and hovering
+  Toronto opened the bottom-left tooltip panel (Narrowed data, 18,186
+  storefronts, joined by address 93.8%, fetched 2026-09-21) clear of the
+  credits. No One-category dot was visible in the default view; the tiers
+  themselves are `check_macro_facts.py`'s.
+- **The sweep found no stale published claim and made no drafts.** It
+  extended `docs/map_inconsistencies.md`'s themes 1-4 and 8-11 from Kobe
+  and Osaka to all five Japanese cities, marked Osaka and Sapporo BUILT in
+  the `japan-city` skill (Tokyo is now "next, last"), added the three to
+  `docs/project_context.md`, and gave Osaka its missing BUILT mark in
+  `docs/city_master_list.md`. `check_stale_claims.py --only E`: 15 flags,
+  all still true.
+- **Left to the Tokyo build session, which has `data/`:** regenerating
+  `docs/japan_city_list.md` (still "🟢 A" for the five built) through
+  `scripts/japan_ward_table.py`'s STATUS dict, and PLAN's "Join control"
+  item, which still names only Kobe and Osaka. Noted, not changed: Kyoto's
+  in-ring counts in the table add up to 27,975 against DECISIONS' "27,980
+  in a ring" (share 86% either way; the table takes the map's layer menu).
 ### 2026-09-28 - Tokyo's groundwork built: the ward roster, hollow no-data stations, per-ward shares measured every build; the seven personal-services-only wards stay hollow (owner); the Tokyo build takes over this worktree
 
 - **The roster, `pipeline/tokyo/wards.py`**, is the one place a ward is

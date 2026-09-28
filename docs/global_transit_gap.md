@@ -19,11 +19,13 @@ negative, kept out.
 "(kn)" marks a network size from general knowledge, not from the record; a
 "subway 35" in the record counts route relations in a feed, not stations.
 
-## Discarded (22) - `docs/city_master_list.md`, DISCARDED
+## Discarded (26) - `docs/city_master_list.md`, DISCARDED
 
 | City | Country | Network | Why not covered (the record's words, short) |
 |---|---|---|---|
-| Berlin | DE | U-Bahn 9 lines, ~175 stations (kn) | "`Gaststätten` → 0"; Gewerberegister not open - **two keyword searches only** |
+| Munich, Frankfurt, Cologne | DE | 96 / 86 / ~230 stops (kn) | No premises register on a full enumeration of each catalogue, geoportal and chamber (screened 2026-09-28, owner) |
+| Manila | PH | LRT-1, LRT-2, MRT-3 | No business list at any level (re-screened 2026-09-28, owner); the old commuter-rail reason is obsolete |
+| Berlin | DE | U-Bahn 9 lines, ~175 stations (kn) | "`Gaststätten` → 0"; Gewerberegister not open - **two keyword searches only**. ▼ **Under re-screen 2026-09-28**: IHK Berlin's Gewerbedaten is a per-premises register; band pending (owner) |
 | Kuala Lumpur | MY | 14 relations | "No register at any level, on three methods" |
 | Santiago | CL | L1-L6, L4A | "Coverage fails downtown": 4 central comunas publish no list |
 | Valencia | ES | metro + tram | "No premises register", 290 packages read |
@@ -46,25 +48,25 @@ negative, kept out.
 | Medellín | CO | 6 relations | "Three closed doors" |
 | Honolulu | US | Skyline (small) | No premises register |
 
-## Country ruled out (15) - "Countries ruled out" and the shortlist
+## Country ruled out (11) - "Countries ruled out" and the shortlist
 
 | City | Country | Network | Why not covered |
 |---|---|---|---|
 | Moscow, St Petersburg | RU | 250+ / 72 stations (kn) | Excluded: sanctions and access |
-| London, Newcastle, Glasgow | UK | 272 / 60 / 15 stations (kn) | Business rates (NNDR) carry no category; the national food register (FSA) is "food only" |
-| Istanbul | TR | 200+ stations (kn) | Aggregate counts per district, **ASSERTED on one dataset** |
+| Newcastle, Glasgow | UK | 60 / 15 stations (kn) | Recorded as "NNDR carries no category"; **wrong** (London's re-screen, 2026-09-28): the VOA list has a description and is ruled out by its terms. The FSA food register is untested for either city |
 | Melbourne, Sydney, Perth | AU | ~220 / 170+ / 80 stations (kn) | Licensing not municipal, **ASSERTED** |
 | Brussels | BE | 69 stations (kn) | Bulk access paid |
-| Manila | PH | 4 lines | The operator's feed types its lines as commuter rail |
-| Dubai | AE | 55 stations (kn) | No agency feed |
 | Kyiv | UA | 52 stations (kn) | Excluded for now: active war |
 | Auckland | NZ | commuter 5 | Commuter only; licensing not municipal |
 | Algiers | DZ | 1 metro line + trams (kn) | Filed under "no urban rail at all" - **wrong**; it has a metro |
 
-## In a band, not built (11)
+## In a band, not built (14)
 
 | City | Country | Network | Band and blocker |
 |---|---|---|---|
+| Istanbul | TR | M1A–M11, 177 stations; T1–T5 | N - pharmacies and opticians only; the districts publish no licence lists (re-screened 2026-09-28, owner) |
+| Dubai | AE | Metro Red and Green, 64 stations; tram | D - every host of its licence register refuses this machine (re-screened 2026-09-28, owner) |
+| London | UK | 272 stations (kn) | B - food only on the FSA register (re-screened 2026-09-28, owner); no second layer covers central London |
 | Tokyo (8 wards) | JP | 330 stations | A - the Tokyo build session; only Shibuya's list is complete, Chiyoda's ledger requested |
 | Stockholm | SE | T-bana, 92 stations | B - passed, food only |
 | Singapore | SG | MRT 21 relations | N - the food register is a 2016 snapshot |
@@ -77,13 +79,12 @@ negative, kept out.
 | Yokohama | JP | 43 stations | N - no food list in any era |
 | Warsaw | PL | 2 lines (kn) | D - geo-blocked |
 
-## Never screened (35)
+## Never screened (32)
 
 | Cities | Country | Network (kn) | Why not covered |
 |---|---|---|---|
 | Shanghai, Beijing, Guangzhou, Shenzhen, Chengdu, Wuhan, Hangzhou, Chongqing, Nanjing, Xi'an, Tianjin, Suzhou, Zhengzhou, Qingdao | CN | ~150-500 stations each | China is in no file: it was absent from the feed catalogue the 87-country screen started from |
 | Delhi, Mumbai, Bengaluru, Kolkata, Chennai | IN | Delhi ~290; others ~40-80 | Only India's national catalogue was read (counts, not premises); the city hosts were never asked |
-| Munich, Frankfurt, Cologne | DE | 96 / 86 / ~230 stops | Germany is not ruled out; no rows |
 | Tehran | IR | ~150 stations | No record |
 | Bangkok | TH | 4 subway + 5 light-rail relations | The national portal answered 403 on every strategy (2026-09-21); never given a city row |
 | Buenos Aires | AR | Subte, 6 lines | Its feed has no `routes.txt`; business data never probed |
@@ -95,16 +96,15 @@ negative, kept out.
 
 Recommended first for re-screening (the staging handoff's priority 1):
 
-1. **London** - ruled out 2026-09-21 partly because the UK's food register is
-   food only, before the owner passed food-only pages (Stockholm and
-   Bucharest, 2026-09-27). By today's rules it may be a Band B candidate.
-2. **Dubai and Manila** - ruled out on transit feeds alone; the project now
-   builds rail from OpenStreetMap, the reason Monterrey's rail-only negative
-   was called obsolete.
-3. **Istanbul** - rests on one dataset marked ASSERTED; the shortlist's own
-   "second look" (open probe 8) was never run.
-4. **Berlin** (two keyword searches) and **Munich, Frankfurt, Cologne** (never
-   screened).
+1. ~~**London**~~ - **done 2026-09-28: Band B, food only** (owner). See the
+   master list's Band B and the shortlist's United Kingdom row.
+2. ~~**Dubai and Manila**~~ - **done 2026-09-28** (owner): Dubai to Band D
+   (blocked before measurement), Manila discarded (no business list).
+3. ~~**Istanbul**~~ - **done 2026-09-28: Band N** (owner), pharmacies and
+   opticians only.
+4. ~~**Berlin**, **Munich, Frankfurt, Cologne**~~ - **done 2026-09-28**
+   (owner): the three discarded; Berlin's chamber register found, its band
+   pending.
 5. **Delhi and Mumbai** - only the national catalogue was read.
 6. **China's fourteen** - never looked at; the largest untouched block, with
    access and licensing likely hard.

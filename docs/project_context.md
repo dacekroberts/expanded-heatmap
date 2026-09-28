@@ -907,6 +907,26 @@ Cities built and running end to end (pipeline, map, app page):
   against the coordinates the city publishes beside each permit. The name rule
   now holds per premises across registers. Publishes after Kobe.
 
+- **Sapporo** - Japan's third city, almost entirely a config on the shared
+  steps: the Sapporo Municipal Subway, the streetcar (MLIT's four legal
+  sections drawn as one loop under its public name) and JR Hokkaido, cut at the
+  city line. On the 条 grid a chōme is about one block, so the chōme tier is
+  near block precision. Coin laundries count as Personal services, and
+  Japanese station names write block numbers as figures, enforced in step 1
+  (owner).
+
+- **Fukuoka** - Japan's fourth city and the first with two food sources: the
+  city's own list holds only permits from before June 2021, so MHLW's national
+  online filings supply the rest, with MHLW's own point where the block join
+  misses. About one restaurant in five withheld its address and is unplaced
+  (disclosed); MHLW's rows cannot take the name rule, having no operator
+  column (accepted). Yatai count as Food service (owner).
+
+- **Kyoto** - Japan's fifth city, on a REBUILT register: no complete food list
+  since 2021, so the 2021 list plus every monthly list since, pinned at the
+  last day the newest list covers. Closures are unpublished, so the map is an
+  upper bound and says so. Its funiculars are left out, as Kobe's are (owner).
+
 - **Riga** - Rīgas satiksme's seven tram routes, across the city's 58
   neighbourhoods; Latvia's first city, in Amsterdam's two-layer shape. Food
   service is the State Revenue Service's excise-licence register - the premises
@@ -1036,7 +1056,8 @@ Rotterdam, then Taiwan).
 Taiwan and Japan each get a per-country skill written after their first city.
 Japan's first, Kobe, was built 2026-09-27; the `japan-city` skill was written
 from it, and Osaka, the second, was built on it the same day (held for review
-time). Sapporo is next in the owner's Japanese order.
+time). Sapporo, Fukuoka and Kyoto followed on 2026-09-28 and landed together;
+Tokyo (8 wards) is the last in the owner's Japanese order.
 The two renderer fixes Brazil's deploy check found go first: the owner gated
 the next deploy on them. New
 Orleans and Seattle remain deferred, both needing decisions before code. Take

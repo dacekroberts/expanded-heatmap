@@ -33,8 +33,11 @@ dense-looking city may simply have more complete records.
   Toronto, Milan (six premises registers), Rome (SUAP authorisations).
 - **Assembled from several activity-specific registers:** New York (4), Boston (3),
   and the Korean permit registers: Seoul (17 types), Daegu (14), Busan (14). The
-  Japanese cities too: Kobe and Osaka each join the city's food-permit list to its
-  barber, beauty-salon and laundry registers (4).
+  Japanese cities too: Kobe, Osaka, Sapporo, Fukuoka and Kyoto each join the city's
+  food-permit list to its barber, beauty-salon and laundry registers (4; Sapporo 5,
+  with coin laundries). Fukuoka adds MHLW's national online food filings, because
+  the city's own list holds only permits from before June 2021; Kyoto's food list
+  is rebuilt from its 2021 list and every monthly list since.
 - **Street surveys or censuses of premises:** Montréal, Madrid, Barcelona, and the
   nine Brazilian cities (IBGE's 2022 census walk).
 - **National statistical or establishment registers:** Mexico City, Guadalajara and
@@ -67,7 +70,10 @@ services. A few cannot, because the local records never cover that trade.
   Kobe: Retail is food retail only (bakeries and confectioners, delis, butchers,
   fishmongers), because Japan licenses no other shop - 2,619 pins inside the rings
   against 16,980 Food service; food businesses that only notify the city are absent too.
-  Osaka the same: 6,418 Retail pins inside the rings against 50,109 Food service.
+  Osaka, Sapporo and Kyoto the same: 6,418, 2,111 and 3,736 Retail pins inside the
+  rings against 50,109, 16,219 and 19,313 Food service. Fukuoka: 5,184 against
+  14,865, with the food shops that only notify present where they published in
+  MHLW's opt-in list.
 - **Retail and Personal services merged into "Shops and services":** Amsterdam,
   Rotterdam, Riga. The building register records a unit's intended use, not its trade.
 - **Reason:** the city does not license that trade, or the source cannot tell the two
@@ -79,9 +85,10 @@ the city, they run like a metro: stations about a kilometre apart, frequent trai
 and districts no metro reaches.
 - **Included:** Dublin (DART), Copenhagen (S-tog, 7 lines), Rome (the Roma–Viterbo
   line's urban section), São Paulo (CPTM Linha 9), Rio de Janeiro (SuperVia's Deodoro
-  and Saracuruna lines), Kobe and Osaka (JR and the private railways, cut at the
-  city line; an owner call of 2026-09-24, recorded in the `japan-city` skill, not
-  the line-by-line test below).
+  and Saracuruna lines), the five Japanese cities (JR and the private railways, cut
+  at the city line: Kobe, Osaka, Sapporo (JR only), Fukuoka (JR and Nishitetsu) and
+  Kyoto; an owner call of 2026-09-24, recorded in the `japan-city` skill, not the
+  line-by-line test below).
 - **Excluded by name:** BART and Caltrain, Metra, Metrolink, Coaster/Sprinter, SEPTA
   Regional Rail, MBTA Commuter Rail, Tri-Rail, GO Transit, West Coast Express,
   Cercanías, Milan's Passante and Trenord, Iarnród Éireann Commuter/InterCity, RER and
@@ -105,7 +112,8 @@ run on top of a metro network.
   Hong Kong (Light Rail), Riga (its trams are the whole network), Montréal (the
   REM, an automated light metro), Rome (tram 8, thinned), Madrid (Metro Ligero
   ML1), Paris (T3a and T3b); these last four from 2026-09-27. Osaka (the Hankai
-  tram, Hankai and Uemachi lines).
+  tram, Hankai and Uemachi lines), Sapporo (the streetcar loop), Kyoto (the
+  Randen's two lines and the Keihan Keishin Line, tramways in MLIT's data).
 - **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Toronto's 18 streetcar routes, Milan (17 routes), Barcelona,
   Paris (all but T3a and T3b; T2 and T9 are stubs), Prague, Rome (all but tram
   8), Madrid (Metro Ligero ML2 and ML3, stubs), Copenhagen (the Letbane has no stop in
@@ -115,7 +123,8 @@ run on top of a metro network.
   mover), Daegu's Line 3 monorail, Busan's Line 4 (a rubber-tyred light metro, which
   OSM tags `route=monorail`) and the Busan–Gimhae LRT (an automated light metro),
   Kobe's Port Liner and Rokkō Liner and Osaka's New Tram (automated guideway lines).
-  Kobe's Maya and Rokkō cable cars are not drawn.
+  Kobe's Maya and Rokkō cable cars and Kyoto's Eizan and Kurama cable cars are not
+  drawn (funiculars left out in every Japanese city, owner).
 - **Reason:** "is the tram the rapid-transit system, or an overlay on one?", later
   widened to "does it serve corridors the metro does not?" (DEC, Oslo and Rotterdam
   entries). See Open questions 9 and 10: the stated reasons differ between cities.
@@ -175,7 +184,8 @@ name at their home.
   where the address is also a home (35–69% of dots, by city).
 - **Type in place of a personal name:** Vancouver/Surrey (88 pins). Kobe (10 pins: a
   trade name that is the operator's own name shows its permit type). Osaka (9 pins,
-  the same rule, applied to every permit at the premises).
+  the same rule, applied to every permit at the premises), Sapporo (7), Kyoto (8),
+  Fukuoka (5, on the city's lists only: MHLW publishes no operator column to test).
 - **Reason:** the source has no name column, or a privacy rule.
 
 ### 9. The data dates from different years, and not every page says when
@@ -186,9 +196,12 @@ a few sources are older: a 2022 census, a 2022 street survey, a July 2025 regist
   2025 file, the newest published), Prague (establishments as of 2026-08-31), Daegu
   (a 2026-08 edition whose rows end 2025-08-31), Busan (the feed froze 2026-04-15),
   Kobe (permits in force 2026-03-31), Osaka (food permits 2026-06-30, the other
-  registers 2026-03-31).
+  registers 2026-03-31), Sapporo (food permits 2026-03-31), Fukuoka (laundries
+  2026-03-31), Kyoto (registers 2026-03-31 plus the months since; food permits
+  rebuilt to 2026-07-31).
 - **Date of the business data shown on the page:** Barcelona, Copenhagen, Prague,
-  Amsterdam, Rome, the Brazilian cities, Rotterdam, Daegu, Busan, Kobe, Osaka.
+  Amsterdam, Rome, the Brazilian cities, Rotterdam, Daegu, Busan, the five Japanese
+  cities.
 - **Only the transit date shown:** Paris, Marseille, Toulouse, Lille, Rennes, Oslo.
 - **No date shown:** the nine US cities, the five Canadian, the three Mexican, Madrid,
   Dublin, Milan.
@@ -207,15 +220,19 @@ really shopfronts. Several pages say which way their map leans.
   (4.3% unmatched); Riga's food layer (only premises licensed to sell alcohol or tobacco); Prague (about 57,000 establishments whose owner's main activity is
   something else); Miami (repair and service premises); Mexico City, Guadalajara and
   Monterrey (street stalls); Copenhagen (tattoo studios); Chicago (licences with no
-  coordinates); Kobe and Osaka (food businesses that only notify the city hold no
-  permit and are absent; Osaka's list holds about 70% of the restaurant permits
-  Osaka reports nationally).
+  coordinates); Kobe, Osaka, Sapporo and Kyoto (food businesses that only notify
+  the city hold no permit and are absent; Osaka's list holds about 70% of the
+  restaurant permits Osaka reports nationally); Fukuoka (notifying food shops
+  appear only where they published in MHLW's opt-in list, and about one restaurant
+  in five withheld its address and is unplaced).
 - **Overcounts, or best read as upper bounds:** Milan (the six registers are not
   merged, so a business can count twice); Rome and Rotterdam (no closing dates, or a
   five-year permit window); Riga's shops (the cadastre records use, not occupancy); the SIRENE, Oslo, Copenhagen and Prague registers
   (registered premises that may have no shopfront, including web shops); Edmonton
   (about 1 in 16 Personal services pins is a clinic); Amsterdam and Rotterdam (empty
-  shop units cannot be removed); Kobe and Osaka (closed premises may remain listed).
+  shop units cannot be removed); Kobe, Osaka, Sapporo and Fukuoka's city list
+  (closed premises may remain listed); Kyoto (an upper bound: the city publishes no
+  closures, so a permit still in term counts).
 - **Undisclosed on the city page:** San Francisco (only about 37% of rows carry a
   NAICS code) and Los Angeles (about 9% carry none), so both are floors. San Diego
   undercounts neighbourhoods registered under their own name. All three are open
@@ -236,7 +253,8 @@ classifies or licenses them.
   Calgary, Edmonton, Toronto and Vancouver. UNKNOWN for other cities.
 - **Street stalls:** excluded in Mexico City, Guadalajara and Monterrey; market-stall trading is
   excluded by code in France; food trucks and stalls (permits valid city-wide) are
-  excluded in Kobe and Osaka.
+  excluded in the five Japanese cities, but Fukuoka's yatai (屋台, fixed street
+  stalls on long-term permits) are counted as Food service (owner).
 - **Web shops:** excluded by code in France; cannot be excluded in Oslo, Copenhagen or
   Prague.
 - **One premises with several licences:** counted once almost everywhere; counted
@@ -575,7 +593,8 @@ project-chosen), Edmonton (darkened), Toronto (Line 2 darkened), Oslo (two light
 tram 15 assigned), Copenhagen (A and F lightened), Prague (A lightened), Amsterdam
 (5 tram lines adjusted), Rome (B1 lightened), Lille (Tram T darkened), Rio (a few
 lightened), Rotterdam (trams 1 and 11 separated), Salvador (colours from line names;
-OSM has none), Paris (T3a and T3b lightened), Kobe and Osaka (all project-chosen).
+OSM has none), Paris (T3a and T3b lightened), the five Japanese cities (all
+project-chosen).
 Source: each page's prose.
 
 ---
