@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**92 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**93 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Sapporo, Fukuoka and Kyoto landed: city-landed sweep and live check after the reboot pass](#2026-09-28---sapporo-fukuoka-and-kyoto-landed-city-landed-sweep-and-live-check-after-the-reboot-pass)
 - [Review batch verified: the full deploy-verify passes; the macro tooltip becomes a corner panel; East Asia's global-frame label overlaps accepted (owner)](#2026-09-28---review-batch-verified-the-full-deploy-verify-passes-the-macro-tooltip-becomes-a-corner-panel-east-asias-global-frame-label-overlaps-accepted-owner)
 - [Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one heavy job at a time, drift --jobs 2 at most (owner)](#2026-09-28---two-app-crashes-traced-to-memory-exhaustion-python-capped-at-8-gb-a-process-one-heavy-job-at-a-time-drift---jobs-2-at-most-owner)
 - [Handoffs rewritten for the owner's session reorganisation; the large-transit gap saved](#2026-09-28---handoffs-rewritten-for-the-owners-session-reorganisation-the-large-transit-gap-saved)
@@ -128,6 +129,32 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Sapporo, Fukuoka and Kyoto landed: city-landed sweep and live check after the reboot pass
+
+- **Live check after the owner's reboot (`c2864b8`) passed.** At 1280 x 800,
+  the map object itself (not a screenshot): Sapporo zoom 10.75 of 10.75,
+  126 markers; Fukuoka 11.75 of 11.75, 127; Kyoto 11.5 of 11.5, 192; Prague,
+  untouched, 12 of 12, 124. No guard correction fired; every map carries the
+  linked `© OpenStreetMap contributors` credit. The front page lists 54
+  cities, draws the tier colours with the three-tier legend, and hovering
+  Toronto opened the bottom-left tooltip panel (Narrowed data, 18,186
+  storefronts, joined by address 93.8%, fetched 2026-09-21) clear of the
+  credits. No One-category dot was visible in the default view; the tiers
+  themselves are `check_macro_facts.py`'s.
+- **The sweep found no stale published claim and made no drafts.** It
+  extended `docs/map_inconsistencies.md`'s themes 1-4 and 8-11 from Kobe
+  and Osaka to all five Japanese cities, marked Osaka and Sapporo BUILT in
+  the `japan-city` skill (Tokyo is now "next, last"), added the three to
+  `docs/project_context.md`, and gave Osaka its missing BUILT mark in
+  `docs/city_master_list.md`. `check_stale_claims.py --only E`: 15 flags,
+  all still true.
+- **Left to the Tokyo build session, which has `data/`:** regenerating
+  `docs/japan_city_list.md` (still "🟢 A" for the five built) through
+  `scripts/japan_ward_table.py`'s STATUS dict, and PLAN's "Join control"
+  item, which still names only Kobe and Osaka. Noted, not changed: Kyoto's
+  in-ring counts in the table add up to 27,975 against DECISIONS' "27,980
+  in a ring" (share 86% either way; the table takes the map's layer menu).
 
 ### 2026-09-28 - Review batch verified: the full deploy-verify passes; the macro tooltip becomes a corner panel; East Asia's global-frame label overlaps accepted (owner)
 
