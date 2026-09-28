@@ -337,6 +337,10 @@ evidence section.
   (8 wards); then the additions to built cities** (Belo Horizonte +
   Contagem, Rio + Duque de Caxias, Vancouver (Regional); "Second-city
   screens" below).
+- [x] **Sapporo built 2026-09-28** (`build-sapporo`, held for review time):
+  28,674 storefronts, 95 stations, 7 lines; texts owner-approved (DECISIONS).
+  - [ ] At review time: `publish-city` (a new page, `cities.py` with Osaka's
+    label moved right, notice 53 "Sapporo City and MLIT"), deploy-verify `scope: city-added`, reboot.
 - [ ] **Join control** - like-for-like against the Economic Census per-ward
   飲食店 count (the owner's chosen control) - at build. **Not yet run for
   Kobe or Osaka**. **The e-Stat download is approved (owner, 2026-09-28)**:

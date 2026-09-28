@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**77 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**78 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Sapporo built on the shared Japanese modules: Japan's third city (held for review time)](#2026-09-28---sapporo-built-on-the-shared-japanese-modules-japans-third-city-held-for-review-time)
 - [Japanese station names: numbers before 丁目 (and a grid's 条) as figures, enforced in step 1; Sapporo's cited override table (owner)](#2026-09-28---japanese-station-names-numbers-before-丁目-and-a-grids-条-as-figures-enforced-in-step-1-sapporos-cited-override-table-owner)
 - [Sapporo's brief corrected before the build; coin laundries count as Personal services (owner)](#2026-09-28---sapporos-brief-corrected-before-the-build-coin-laundries-count-as-personal-services-owner)
 - [One shared Japanese fetch: pipeline/countries/japan_fetch.py, before Sapporo](#2026-09-28---one-shared-japanese-fetch-pipelinecountriesjapan_fetchpy-before-sapporo)
@@ -113,6 +114,59 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Sapporo built on the shared Japanese modules: Japan's third city (held for review time)
+
+- **Sapporo built on `build-sapporo`, almost entirely as a config**: its
+  `fetch_sources.py` is `japan_fetch.main()`, its steps 1 and 2 are the
+  shared ones, its step 3 Osaka's with Sapporo's names. **28,674 storefronts
+  (Retail 2,940 · Food service 19,689 · Personal services 6,045), 95
+  stations on 7 lines.** Nothing new was downloaded: every file was cached at
+  the 2026-09-24 screen except the OSM station and streetcar-stop names.
+- **Rail**: the Sapporo Municipal Subway's three lines, the Sapporo Streetcar
+  (N02's four legal sections, 1条線, 都心線, 山鼻西線 and 山鼻線, drawn as one
+  loop under its public name) and JR Hokkaido's Hakodate Main, Chitose and
+  Gakuen Toshi (札沼線) lines, cut at the city line. **Gate 3 exact**:
+  Namboku 16, Tōzai 19, Tōhō 14 against the operator's numbering; the
+  streetcar collapses to its real 24 stops. 4 stations excluded (Tōbetsu 2,
+  Otaru 1, Ebetsu 1). Widest real interchange 270 m (大通), inside Kobe's
+  300 m limit. English names: 29 cited overrides (the entry above).
+- **Business**: the food list (25,163 rows) and four registers (barber 1,486,
+  beauty 3,838, cleaning 746, coin laundry 254). Out: 983 not a premises
+  (市内一円, storeless pick-ups), 987 manufacturing, 3 vending, 14 linen supply,
+  and **16 salons inside hospitals and care homes (厚生施設理容所 /
+  厚生施設美容所), which serve their residents, not the public** - settled
+  without the owner on the institutional-catering precedent, a new rule in
+  `japan_eigyo` pinned by an assert; recorded here for the owner to overrule.
+  769 repeat permits collapsed to one pin per premises and bucket. 157 of
+  2,151 菓子 / そうざい rows (7.3%) read as factories: kept.
+- **The join: 86.0% block, 13.9% block group, 0.1% unplaced (41)**, a little
+  better than the brief's 84.7 / 15.2 / 0.2. Most unplaced rows are premises
+  the city registers outside Sapporo (Chitose, Ebetsu, Otaru).
+- **Privacy verdict (`check_personal_exposure.py sapporo`, Japan pass): 0
+  operator names shown in 28,674 rows; 6 trade names are the operator's own
+  name, shown by permit type on 7 pins.** 開設者住所, 開設者ﾋﾞﾙ名, 開設者TEL and
+  施設TEL are never selected.
+- **Line colours by Osaka's search** (sRGB step 8, 3,817 feasible): pins
+  45.0-74.8, closest line pair 18.2, 3:1 on both map pages. The streetcar left
+  green for olive and the Gakuen Toshi Line blue for violet to fit.
+- **Map checks** (`check_map_labels.js`, `check_map_view.js`): no problems at
+  343, 375 and 1280 px - 7 labels, the right zoom, legend and dark toggle
+  working. Unlike Osaka, no phone-width overlaps. `check_map_markup.py`,
+  `check_inline_arrays.py` and `check_render_current.py` pass. Drift
+  baseline: 23 figures.
+- **Macro map**: Sapporo's label measured at 56.9 px in the app's own
+  document, with Osaka 40.6 and Kobe 34.2 reproduced. Sapporo widened the East
+  Asia frame, and Osaka's pill below its dot then met Busan's (4.0 x 13.6 px
+  at every width); **Osaka's label moved to the right of its dot**, and
+  `check_macro_labels.py` reports 0 problems in 10 regions at 3 widths.
+- **Owner-approved texts written**: the page prose, notice 53 "Sapporo City
+  and MLIT (Sapporo)" (every URL an explicit link), the `excluded_categories.md`
+  section and the blurb. Data-source rows, notice 53's entry, the four
+  inconsistency rows, README's city list and the master list (52 built; A 3)
+  written. `app/` changes (a new page, `cities.py`, notice 53 in
+  `components.py`) wait for review time: publish through `publish-city`, one
+  deploy-verify (`scope: city-added`), and a reboot.
 
 ### 2026-09-28 - Japanese station names: numbers before 丁目 (and a grid's 条) as figures, enforced in step 1; Sapporo's cited override table (owner)
 

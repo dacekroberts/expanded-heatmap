@@ -1697,6 +1697,27 @@ route geometry", which stays true.
   2026-09-27: 0 operator names shown, 9 withheld. The verdict is in
   `DECISIONS.md`.
 
+**53. Sapporo City and MLIT (Sapporo) — required, and DISPLAYED** (written into
+`render_site_notices()`; displayed once Sapporo lands).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-09-24; the registers' package re-read
+  2026-09-28; the Japan rows in [`data_sources/japan.md`](data_sources/japan.md)).
+- **Sapporo City's two datasets are CC BY 4.0** (`package_show`: CC-BY-4.0 on
+  both). The platform is the city's own (`data.pf-sapporo.jp/tos/`, in force
+  2024-06-01) and defers to each dataset's licence; its 第9条3 compensation
+  clause was accepted by the owner 2026-09-24.
+- **The credit**: 札幌市, both dataset titles and URLs, the licence link and that
+  the data was processed (no wording is prescribed; the brief's example form),
+  with every URL an explicit link.
+- **MLIT's 位置参照情報 and N02** are PDL 1.0, credited as in 50. N03 (CC BY
+  4.0) only picks stations and is **never drawn**.
+- **MUST NOT**: imply endorsement; use city logos (第4条); call the pins
+  operating businesses. **Fetch from `ckan.pf-sapporo.jp` only.**
+- Wording approved by the owner 2026-09-28.
+- **MUST DO:** `check_personal_exposure.py sapporo` with its Japan pass, run
+  2026-09-28: 0 operator names shown, 6 withheld (7 pins). The verdict is in
+  `DECISIONS.md`.
+
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1
 drawn": ML1 comes from CRTM's `M10_Red` (same licence, same 5 June 2026 edit date).

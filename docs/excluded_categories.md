@@ -1801,6 +1801,42 @@ line.
   the Umeda freight line's track from the Umekita platforms to Fukushima, which
   only limited expresses use.
 
+### Sapporo - the city's food permits and 環境衛生 registers, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business licence,
+  so none is published.
+- Food businesses that only notify the city (届出).
+- Food manufacturing other than bakeries and confectioners (菓子) and delis
+  (そうざい): 987 rows.
+- 3 vending machines.
+- 983 food trucks, stalls and storeless laundry pick-ups registered to trade
+  anywhere in the city (市内一円) or with no counter.
+- 14 linen-supply laundries (リネンサプライ), industrial rather than counters.
+- 16 barbers and beauty salons inside hospitals and care homes (厚生施設),
+  which serve their residents rather than the public.
+
+**Counted** - coin laundries, as Personal services (owner, 2026-09-28: near
+transit they draw steady short-term customers). And 157 of the 2,151 bakery,
+confectioner and deli rows (7.3%) carry a trade name that reads as a factory
+or central kitchen; they are kept (owner, 2026-09-24).
+
+**Not placed** - 41 rows (0.1%), most of them premises the city registers at
+addresses outside Sapporo. Another 4,101 are placed at their block group's
+(条丁目) centre, which on Sapporo's grid is about one block.
+
+**Names not shown** - 6 premises whose trade name is the operator's own name
+are shown by their permit type. The owner's rule is applied to every permit at
+the premises.
+
+**Closed premises** - the list may keep premises that have closed; a dot is a
+permit on file, not a business open today.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: the stations beyond it, in Tōbetsu, Otaru and Ebetsu.
+- No Shinkansen reaches Sapporo yet.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

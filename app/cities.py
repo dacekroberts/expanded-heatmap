@@ -1070,23 +1070,23 @@ CITIES = [
         # Kobe keeps its label above. Scored clear by check_macro_labels.py at
         # 375, 768 and 1200 (width 40.6 px, measured 2026-09-27 in the app's
         # own document).
-        "label_offset": ("middle", 0, 22),
+        # RIGHT of its dot since 2026-09-28: Sapporo widened the East Asia
+        # frame, and below the dot Osaka's pill then met Busan's (4.0 x 13.6
+        # px at every width). Kobe's label stays above its own dot.
+        "label_offset": ("start", 10, 8),
     },
     {
         "name": "Sapporo",
         "lat": 43.0687,
         "lon": 141.3508,
         "page": "pages/52_Sapporo_Heatmap.py",
-        "blurb": "Sapporo Municipal Subway (TODO: list the lines)",
+        "blurb": "Sapporo Municipal Subway, the streetcar, and JR Hokkaido's lines",
         "region": "East Asia",
         "country": "Japan",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # ABOVE its dot, alone in the north of the region. Scored clear by
+        # check_macro_labels.py at 375, 768 and 1200 (width 56.9 px,
+        # measured 2026-09-28 in the app's own document).
         "label_offset": ("middle", 0, -22),
     },
 ]

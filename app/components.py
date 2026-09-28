@@ -1194,6 +1194,23 @@ _NOTICES = [
      "types, placed each premises by its address, and counted them around stations. The lists may "
      "include premises that have closed. Osaka City and MLIT did not make and do not endorse this map.",
      False),
+    # Sapporo (notice 53): both datasets CC BY 4.0 on the city's own CKAN
+    # (read 2026-09-24; the registers' package re-read 2026-09-28). No wording is
+    # prescribed: credit 札幌市, both dataset titles and URLs, the licence link and
+    # that the data was processed (the brief's example form); no endorsement, no
+    # logos, never "operating". MLIT as in Kobe's and Osaka's. URLs are explicit
+    # markdown links: bare ones ran on into the Japanese (fixed 2026-09-28).
+    # Wording approved by the owner 2026-09-28.
+    ("Sapporo City and MLIT (Sapporo)",
+     "Sapporo's businesses: 札幌市『札幌市内の食品営業許可施設一覧』（[https://ckan.pf-sapporo.jp/dataset/sapporo_food_business_licences](https://ckan.pf-sapporo.jp/dataset/sapporo_food_business_licences)）"
+     "『札幌市内の環境衛生営業施設一覧』（[https://ckan.pf-sapporo.jp/dataset/sapporo_environmental_hygiene_services](https://ckan.pf-sapporo.jp/dataset/sapporo_environmental_hygiene_services)）"
+     "（札幌市ICT活用プラットフォーム、[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)）を加工して作成. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). This project selected the storefront permit "
+     "types, placed each premises by its address, and counted them around stations. The lists may "
+     "include premises that have closed. Sapporo City and MLIT did not make and do not endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route
