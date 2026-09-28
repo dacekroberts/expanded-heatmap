@@ -34,7 +34,9 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 - [ ] ⏸ **Per-city restriction disclosures, on every city's page (owner,
   2026-09-28). WAITS until every Japanese city is built** (Fukuoka, Kyoto,
-  Tokyo); the prose edits come then, drafted in chat for the owner. Four
+  Tokyo); the prose edits come then, drafted in chat for the owner. **Before
+  any drafting, the owner looks over the live pages and gives general advice
+  first (owner 2026-09-28): ask for it, then wait.** Four
   facts per city, which the macro map's tooltip may also carry:
   - **Placement precision**: the register's own coordinates, a geocode, a
     block-level join (Japan), or interpolated along the road (Incheon, if
