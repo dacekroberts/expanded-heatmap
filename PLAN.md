@@ -32,6 +32,38 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   Philadelphia keep their own variant (interchanges added after the spacing
   pass) until the owner decides.
 
+- [ ] ⏸ **Per-city restriction disclosures, on every city's page (owner,
+  2026-09-28). WAITS until every Japanese city is built** (Fukuoka, Kyoto,
+  Tokyo); the prose edits come then, drafted in chat for the owner. **Before
+  any drafting, the owner looks over the live pages and gives general advice
+  first (owner 2026-09-28): ask for it, then wait.** Four
+  facts per city, which the macro map's tooltip may also carry:
+  - **Placement precision**: the register's own coordinates, a geocode, a
+    block-level join (Japan), or interpolated along the road (Incheon, if
+    built).
+  - **Data age**: the rows' own newest date, not the edition's label (Busan
+    frozen at 2026-04-15; Daegu's rows end 2025-08-31; Kyoto a rebuilt upper
+    bound).
+  - **Scope**: city only or "(Regional)".
+  - **Network type**: metro, trams only (Riga today), or EDGE. It could
+    become a macro-map tier once Band T builds exist.
+  - **The borderline "Full" cities' caveats (owner 2026-09-28)**, each on its
+    own page: **Brazil's nine** (a third to half of plausible storefronts
+    unreadable and dropped, across every bucket); **New York** (retail thinner
+    than its other layers, from four registers); **San Francisco** and **Los
+    Angeles** (9-37% of rows without an industry code, a floor on every
+    bucket); **Taichung** and **Taoyuan** (only 12-19% of storefronts in a
+    ring: one line through a large city). Each stays Full on the macro map.
+  - [ ] **Macro-map completeness tiers: APPROVED (owner 2026-09-28)**, not
+    tied to the wait above. Dots coloured **Full #0D9488** (the current teal)
+    · **Narrowed #9333EA** · **One bucket #C2410C**, one set for both themes
+    (the dots are WebGL, so dark mode filters only the basemap), with a text
+    legend. **No sizing** (owner: it would swallow neighbours and break the
+    scored labels); the tooltip carries storefront count, placement
+    precision and data age. Each city's tier is a `cities.py` field backed by
+    a check, never hand-kept. Per-city tiers go to the owner first. An `app/`
+    change: review time, `map-chrome` deploy-verify, reboot.
+
 - [ ] ⏰ **Prague: Flora reopens around December 2026**: when PID's feed serves
   it again, step 1 STOPS the build on purpose - remove the override then.
 

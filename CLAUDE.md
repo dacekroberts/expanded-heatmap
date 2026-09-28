@@ -161,6 +161,13 @@ a rule, not before obeying one.
 - **Re-check `origin/master` in the same breath as the push**: `git fetch`,
   merge if behind, push, nothing slow in between; re-fetch if a gate re-runs
   after that merge. [#fetch-before-push]
+- **Python is capped at 8 GB a process, 12 GB with its children**
+  (`scripts/python_memcap.py`, installed as `usercustomize.py`). **One heavy
+  job on the machine at a time, announced to every live session before it
+  starts and when it ends** (`docs/session_roles.md`); drift checks run
+  `--jobs 2` at most, one per machine. A `MemoryError` is a script to fix,
+  never a cap to raise. Never hand-write a PDF or font decoder: `pdftotext`
+  or `pypdf`, one page first. [#memory]
 - **Resolve a conflicted append-only file with
   `python scripts/merge_append_only.py DECISIONS.md`, never by rebuilding it
   from one side** - a conflict region is not everything the other side added.
@@ -172,7 +179,7 @@ a rule, not before obeying one.
 python pipeline/<city_slug>/step1_stations.py
 python pipeline/<city_slug>/step2_clean_businesses.py
 python pipeline/<city_slug>/step3_map.py
-python pipeline/drift_check.py [city_slug] [--jobs N]   # --jobs 4 does every city
+python pipeline/drift_check.py [city_slug] [--jobs N]   # every city; --jobs 2 at most, one run per machine
 python scripts/brief_check.py [city_slug]               # re-run a brief's claims live
 python scripts/check_all.py [--list]                    # every pass/fail check, ~30s; the pre-push hook runs it
 git config core.hooksPath .githooks                     # once per clone: turns that hook on
@@ -198,6 +205,7 @@ python scripts/check_deploy_imports.py [--ref REF]      # before ANY push touchi
 node scripts/profile_zoom.mjs <baseUrl> <city,city> [reps]   # zoom lag
 node scripts/check_macro_attribution.mjs [baseUrl] [375,768,1200]   # front page OSM credit; live: <app>/~/+
 python scripts/decisions_index.py [--check]
+python scripts/python_memcap.py [--install|--check|--selftest]   # per-process memory cap; --install with each Python
 python scripts/archive_decisions.py [--dry-run]          # start of each week: older entries -> docs/decisions/
 python scripts/merge_append_only.py DECISIONS.md [--dry-run]   # archived entries count as present
 python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon> --region <region> --country <country>   # add --dry-run first

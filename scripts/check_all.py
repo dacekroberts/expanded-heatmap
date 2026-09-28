@@ -42,6 +42,7 @@ CHECKS = [
     ["scripts/check_discard_evidence.py"],
     ["scripts/check_inconsistency_list.py"],
     ["scripts/check_inline_arrays.py"],
+    ["scripts/check_macro_facts.py"],
     ["scripts/check_macro_labels.py"],
     ["scripts/check_map_markup.py"],
     ["scripts/check_master_list_counts.py"],
@@ -57,6 +58,7 @@ CHECKS = [
     ["scripts/check_stray_bullets_selftest.py"],
     ["scripts/check_theme_sync.py"],
     ["scripts/decisions_index.py", "--check"],
+    ["scripts/python_memcap.py", "--check"],
     ["scripts/readme_cities.py", "--check"],
     ["scripts/archive_decisions_selftest.py"],
 ]

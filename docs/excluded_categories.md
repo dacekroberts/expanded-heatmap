@@ -478,8 +478,8 @@ at **4,544** mappable rows, with `Legal Services` (1,796),
 `Consulting and Management Services` (797) and `Real Estate Services` (678)
 adding most of the rest. Surrey's `Professional Practitioner-*` series,
 `Administration Office`, `Consultant`, `Immigration Consultant` and its
-headcount-banded `Real Estate` types are the same shape. Also excluded, as in
-every city here: `Long-term Rental` (3,451 in Vancouver - the Philadelphia
+headcount-banded `Real Estate` types are the same shape. Also excluded:
+`Long-term Rental` (3,451 in Vancouver - the Philadelphia
 `Rental` shape), wholesale, manufacturing, warehousing, construction trades,
 education, `Fitness Centre` and the arts/recreation and accommodation groups,
 and `Parking Area / Garage` (423) and Surrey's `Parking Lot` (103) under the

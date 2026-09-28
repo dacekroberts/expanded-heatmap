@@ -12,7 +12,9 @@ plain list of page links sits below the map as a fallback (keyboard access,
 and any browser where the map doesn't load).
 """
 
+import json
 import math
+from pathlib import Path
 
 import pandas as pd
 import pydeck as pdk
@@ -107,6 +109,9 @@ if st.session_state.get("_macro_region_shown") != region:
     st.session_state.pop("macro_map", None)
 
 cities = pd.DataFrame(CITIES)
+# Storefront counts for the tooltip, generated from the pipeline's own data by
+# scripts/check_macro_facts.py --write and checked by it before every push.
+_FACTS = json.loads((Path(__file__).parent / "macro_facts.json").read_text(encoding="utf-8"))
 
 # These are WebGL layer colours, so unlike every other colour in the app they
 # CANNOT be restyled by CSS - the dark-mode filter deliberately hits only
@@ -117,13 +122,40 @@ cities = pd.DataFrame(CITIES)
 #
 # Derived from pipeline/theme.py rather than written as literals, so they
 # cannot drift from the rest of the chrome. Alpha is appended per use.
-TEAL = rgb_list(LIGHT["accent"], 235)      # marker fill
+TEAL = rgb_list(LIGHT["accent"], 235)      # marker fill, and the "full" tier
+# COMPLETENESS TIERS (owner, 2026-09-28): each dot is coloured by how complete
+# its city's business data is. One set for both themes, because these are
+# WebGL colours the dark-mode filter never reaches; validated with the dataviz
+# skill's validate_palette.js on the light basemap and its filtered dark form
+# (normal-vision floor 27.1, worst colour-blind pair 13.7; DECISIONS). Each
+# city's tier is `coverage` in cities.py, which scripts/check_macro_facts.py
+# checks against docs/map_inconsistencies.md.
+TIERS = {
+    "full": ("Full data", TEAL),
+    "narrowed": ("Narrowed: a category missing, merged or partial", [0x93, 0x33, 0xEA, 235]),
+    "one_bucket": ("One category only", [0xC2, 0x41, 0x0C, 235]),
+}
 DARK = rgb_list(LIGHT["text"], 255)        # label text, on the pill below
 PILL = rgb_list(LIGHT["surface"], 235)     # the pill behind each name
 OUTLINE = rgb_list(LIGHT["surface"], 255)  # ring around each marker
 # Interaction feedback, deliberately outside the palette: it has to differ from
 # both the teal marker and the category colours to read as "this one".
 HIGHLIGHT = [251, 191, 36, 255]
+
+# Per-dot tier colour and tooltip text. A missing tier or count falls back
+# rather than raising: this page lists every city, and one city's absent fact
+# must not take the whole Overview down (the label_offset NaN lesson, below).
+_tier = cities["coverage"].where(cities["coverage"].isin(list(TIERS)), "full") \
+    if "coverage" in cities else pd.Series(["full"] * len(cities), index=cities.index)
+cities["fill"] = _tier.map(lambda t: TIERS[t][1])
+# The tooltip takes a short tier name; the legend under the map explains it.
+_TIER_SHORT = {"full": "Full data", "narrowed": "Narrowed data", "one_bucket": "One category only"}
+cities["tier_label"] = _tier.map(_TIER_SHORT.get)
+_counts = _FACTS.get("storefronts", {})
+cities["storefronts_text"] = cities["name"].map(
+    lambda n: f"{_counts[n]:,} storefronts" if n in _counts else "storefront count pending")
+for _col in ("placement", "data_age"):
+    cities[_col] = cities[_col].fillna("not recorded") if _col in cities else "not recorded"
 
 # Where each name sits relative to its marker: an explicit (anchor, dx, dy) in
 # pixels from cities.py's `label_offset`. See that file's docstring for why this
@@ -236,7 +268,7 @@ markers = pdk.Layer(
     # pdk.types.String, not a bare str: pydeck would serialize "pixels" as the
     # expression "@@=pixels" (an undefined variable) and break the radius.
     radius_units=pdk.types.String("pixels"),
-    get_fill_color=TEAL,
+    get_fill_color="fill",
     get_line_color=OUTLINE,
     stroked=True,
     line_width_min_pixels=1,
@@ -424,7 +456,11 @@ deck = pdk.Deck(
     # of staying this green-grey. A dark tooltip on the light basemap is
     # deliberate - it reads better than a pale one over map detail.
     tooltip={
-        "html": "<b>{name}</b><br/>{blurb}",
+        # The tier, storefront count, placement and data age (owner,
+        # 2026-09-28): the facts a dot's size would have carried, without
+        # letting big cities swallow their neighbours' dots and labels.
+        "html": "<b>{name}</b><br/>{blurb}<br/>{tier_label} · {storefronts_text}"
+                "<br/>Placed by: {placement}<br/>Data: {data_age}",
         "style": {
             "backgroundColor": LIGHT["text"],
             "color": LIGHT["surface"],
@@ -439,6 +475,20 @@ event = st.pydeck_chart(
     selection_mode="single-object",
     key="macro_map",
     height=460,
+)
+
+# The tier legend: text beside each swatch, so the tier never rests on colour
+# alone (the dataviz rule; several tiers sit under 3:1 over water). The ink is
+# the theme's own text colour; only the swatches carry the tier colours.
+st.markdown(
+    '<div style="display:flex;flex-wrap:wrap;gap:4px 18px;font-size:0.85rem;margin:2px 0 6px">'
+    + "".join(
+        f'<span style="white-space:nowrap"><span style="display:inline-block;width:10px;'
+        f'height:10px;border-radius:50%;background:rgb({c[0]},{c[1]},{c[2]});'
+        f'box-shadow:0 0 0 1px #ffffff;margin-right:6px;vertical-align:-1px"></span>{label}</span>'
+        for label, c in TIERS.values())
+    + "</div>",
+    unsafe_allow_html=True,
 )
 
 # Either the dot or its name pill opens the city - see the labels layer above

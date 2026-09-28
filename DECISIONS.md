@@ -20,14 +20,22 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**85 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**93 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Review batch verified: the full deploy-verify passes; the macro tooltip becomes a corner panel; East Asia's global-frame label overlaps accepted (owner)](#2026-09-28---review-batch-verified-the-full-deploy-verify-passes-the-macro-tooltip-becomes-a-corner-panel-east-asias-global-frame-label-overlaps-accepted-owner)
+- [Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one heavy job at a time, drift --jobs 2 at most (owner)](#2026-09-28---two-app-crashes-traced-to-memory-exhaustion-python-capped-at-8-gb-a-process-one-heavy-job-at-a-time-drift---jobs-2-at-most-owner)
+- [Handoffs rewritten for the owner's session reorganisation; the large-transit gap saved](#2026-09-28---handoffs-rewritten-for-the-owners-session-reorganisation-the-large-transit-gap-saved)
+- [Vancouver's exclusion sentence no longer says "as in every city here" (owner)](#2026-09-28---vancouvers-exclusion-sentence-no-longer-says-as-in-every-city-here-owner)
 - [Before Tokyo: a ward-source skill and share check here, a research worktree for the missing wards, hollow stations where a ward has no data (owner)](#2026-09-28---before-tokyo-a-ward-source-skill-and-share-check-here-a-research-worktree-for-the-missing-wards-hollow-stations-where-a-ward-has-no-data-owner)
 - [Kyoto built on the shared Japanese modules: Japan's fifth city (held for review time)](#2026-09-28---kyoto-built-on-the-shared-japanese-modules-japans-fifth-city-held-for-review-time)
+- [Macro-map completeness tiers built on `macro-tiers`, checked, held for review time](#2026-09-28---macro-map-completeness-tiers-built-on-macro-tiers-checked-held-for-review-time)
 - [Kyoto steps 1-3 on a rebuilt register, pinned at 2026-07-31; its funiculars left out after all (owner)](#2026-09-28---kyoto-steps-1-3-on-a-rebuilt-register-pinned-at-2026-07-31-its-funiculars-left-out-after-all-owner)
+- [Macro-map dots coloured by data completeness; storefront count in the tooltip, not the dot size (owner)](#2026-09-28---macro-map-dots-coloured-by-data-completeness-storefront-count-in-the-tooltip-not-the-dot-size-owner)
+- [Band T's EDGE cities grouped at its top; Band T below Band N (owner)](#2026-09-28---band-ts-edge-cities-grouped-at-its-top-band-t-below-band-n-owner)
 - [Fukuoka built on the shared Japanese modules: Japan's fourth city (held for review time)](#2026-09-28---fukuoka-built-on-the-shared-japanese-modules-japans-fourth-city-held-for-review-time)
+- [Band C's last five get verdicts; Band B reopened for the passed, Band N created for no page, Band C closed (owner)](#2026-09-28---band-cs-last-five-get-verdicts-band-b-reopened-for-the-passed-band-n-created-for-no-page-band-c-closed-owner)
 - [Fukuoka steps 1-2: the first two-source Japanese city; 業態 read beside the type, MHLW's own point where the block join misses; yatai count (owner)](#2026-09-28---fukuoka-steps-1-2-the-first-two-source-japanese-city-業態-read-beside-the-type-mhlws-own-point-where-the-block-join-misses-yatai-count-owner)
 - [Worktree `japan` created for a fresh session to build Fukuoka, then Kyoto, branched from build-sapporo (owner)](#2026-09-28---worktree-japan-created-for-a-fresh-session-to-build-fukuoka-then-kyoto-branched-from-build-sapporo-owner)
 - [Sapporo built on the shared Japanese modules: Japan's third city (held for review time)](#2026-09-28---sapporo-built-on-the-shared-japanese-modules-japans-third-city-held-for-review-time)
@@ -122,6 +130,119 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-28 - Review batch verified: the full deploy-verify passes; the macro tooltip becomes a corner panel; East Asia's global-frame label overlaps accepted (owner)
+
+- **The full deploy-verify on `review-2026-09-28b` passed with no blockers**
+  (after two runs lost to the day's crashes): all 54 standalone maps at five
+  viewports (270 fresh loads) and all 56 app pages clean apart from the two
+  label overlaps already in PLAN (Osaka and Madrid at phone width); the three
+  new cities' labels, zoom, OSM credit and notices 53-55 (13 link targets, all
+  HTTP 200) pass; the tier dots, legend and tooltip correct in both themes;
+  every older city's map byte-identical to the deployed one. Run alone, one
+  browser page at a time, announced to every session; free memory stayed above
+  5 GB.
+- **Finding A, fixed before the push (owner): the tooltip ran off the map.**
+  deck.gl anchors it right of the cursor, and with the new tier, count,
+  placement and data-age lines it clipped: Osaka's mostly off the map at 343
+  px, and Barcelona's by 176 px at 1200 px even under a 240 px width cap. It is
+  now a panel in the map's bottom-left corner at every width (CSS in
+  `app/components.py`: its containing block is a zero-height box at the map's
+  bottom-left, so `bottom: 8px` lands inside the map), measured inside at 1200
+  and 375 px, and the tooltip's tier name is short ("Full data", "Narrowed
+  data", "One category only") while the legend keeps the full wording.
+  Rejected on measurement: a width cap alone (still clipped near the right
+  edge); a panel fixed to the bottom of the screen (painted under the city
+  list unless the map was lifted into a new stacking layer). While shown, the
+  panel can cover the OSM credit at phone width; it disappears with the
+  tooltip.
+- **Finding B, accepted (owner): at the Global frame's zoom, East Asia's
+  labels overlap** (Taoyuan over Busan and Fukuoka, Seoul touching Kyoto) when
+  dragged into view; the East Asia region itself is clean. The same class the
+  owner accepted for Europe on 2026-09-23.
+
+### 2026-09-28 - Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one heavy job at a time, drift --jobs 2 at most (owner)
+
+- **Found: both crashes were the machine running out of commit, not a
+  graphics fault.** Windows' Resource-Exhaustion-Detector (System log, id
+  2004) logged "low virtual memory" at 11:59:37 (python.exe PID 13360,
+  47.34 GB) and 12:05:04 (PID 18300, 47.11 GB) on a 15.9 GB machine whose
+  commit limit is 29.2 GB. `claude.exe` was closed as hung at 12:00:38 and
+  12:15:43 (Application Hang 1002).
+  - The first process was Tokyo sources research's Ōta licence agent
+    running a hand-written PDF text decoder (`pdfscan.py`, started 18:57:30
+    UTC, backgrounded at 18:59:32, ended in MemoryError). It expanded each
+    ToUnicode `bfrange` into one dict entry per code and held every stream at
+    once.
+  - The second is unproven. In flight: the Japan session's four-job drift
+    check (started 67 s before, ended in MemoryError) and its census control
+    (12 s before, MemoryError), beside staging's `deploy-verify`. Staging's
+    identical four-job drift check had finished clean at 11:54, so no city
+    step needs 47 GB on its own.
+- **Decided (owner): cap every Python process at 8 GB, 12 GB with its
+  children.** `scripts/python_memcap.py`, installed as `usercustomize.py` in
+  the user site, puts each process in a Windows job object at start-up, so a
+  runaway gets its own MemoryError. Tested before install with a 0.5 GB test
+  cap: 100 MB allocates, 1 GB is a MemoryError, a child inherits the cap.
+  `HEATMAP_MEMCAP_TEST_GB` can only lower it. `--check` joins
+  `check_all.py`. Measured legitimate peaks during the Japan session's
+  one-job drift re-run (logged at each 0.5 GB rise past 1 GB): Oslo step 2
+  5.43 GB, Paris step 1 2.40 GB, every other step under 2 GB. So 8 GB leaves
+  Oslo about 2.5 GB of headroom.
+  - Rejected: a project-only cap through `.claude/settings.json`
+    (sessions already open stay uncovered until they restart). Not covered:
+    `.venv-lean`, which skips the user site.
+  - The install was refused by auto mode as persistence; the owner runs it.
+- **Decided (owner): one `drift_check.py` on the machine at a time.** It takes
+  an operating-system lock in the shared git directory (dies with the
+  process, so a crash leaves nothing stale); a second run exits naming the
+  holder. Tested: free, held (refused with the holder's pid), released.
+- **Decided (owner): drift checks run `--jobs 2` at most (`MAX_JOBS`), and
+  only one heavy job runs on the machine at a time, announced to every live
+  session before it starts and when it ends.** Staging proposed `--jobs 1` and
+  the announcement; cleanup recommended 2 rather than 1, because the cap
+  already bounds a runaway and Oslo plus Paris fit inside 12 GB. Four jobs
+  could pass the tree cap on their own. `--jobs 3` now exits naming the
+  limit. The rule is in `docs/session_roles.md`, "One heavy job on the
+  machine at a time"; `publish-city` gate step 2 and CLAUDE.md's command
+  line now say `--jobs 2`.
+- **Decided (owner): never hand-write a PDF or font decoder**; `pdftotext` or
+  `pypdf`, one page first. CLAUDE.md working rule `[#memory]`.
+- **Checked for crash damage: none.** `git fsck` clean; no stale `.lock`
+  in `.git`; every worktree's tracked files clean except the Japan session's
+  running drift re-render and cleanup's own edits; every file written
+  11:55-12:20 under `data/` and the worktrees intact (Python compiles, the
+  census xlsx passes a zip test, Sapporo's map ends in `</html>`); every
+  Claude and project JSON config parses; 17 memory files intact.
+### 2026-09-28 - Handoffs rewritten for the owner's session reorganisation; the large-transit gap saved
+
+- **"Staging and build handoff" hands over both of its roles (owner).** The
+  staging role goes to a fresh staging session
+  (`docs/handoff_staging_2026-09-28.md`); the build role joins the Tokyo build
+  session the owner is forming from the Japan build and Tokyo sources sessions
+  (`docs/handoff_tokyo_build_2026-09-28.md`). The 2026-09-27 staging and build
+  handoffs are deleted, their open items carried into the two new files.
+- **The review batch's state is recorded where it cannot be lost**: branch
+  `review-2026-09-28b` (Sapporo, Fukuoka, Kyoto, the macro-map tiers, the
+  Vancouver wording) pushed to origin as a backup, not to master; every cheap
+  gate green; the full deploy-verify still to run, after Cleanup confirms the
+  memory cap and a clear machine.
+- **`docs/global_transit_gap.md`** saves the owner's list of large-network
+  cities not built (22 discarded, 15 ruled out by country, 11 in a band, 35
+  never screened), with a recommended re-screen order led by London (ruled
+  out partly as food only, before food-only pages passed), Dubai and Manila
+  (ruled out on transit feeds alone) and Istanbul (one ASSERTED dataset).
+- Scratch that would have gone with this session's scratchpad is in
+  `data/_staging_scratch_2026-09-28b/` (the Incheon join and interpolation
+  scripts, the Baltimore listings, the line-colour search).
+### 2026-09-28 - Vancouver's exclusion sentence no longer says "as in every city here" (owner)
+
+- **`docs/excluded_categories.md`, Vancouver: "Also excluded, as in every city
+  here: `Long-term Rental` ..." now reads "Also excluded: `Long-term Rental`
+  ..."; everything after the colon is unchanged (owner, confirmed in this
+  session; drafted by Cleanup).** The claim stopped being true when Kobe and
+  Osaka kept confectionery and deli manufacturing permits (菓子製造業,
+  そうざい製造業) as Retail, so not every city excludes manufacturing. Landed
+  with the 2026-09-28 review-time batch.
 ### 2026-09-28 - Before Tokyo: a ward-source skill and share check here, a research worktree for the missing wards, hollow stations where a ward has no data (owner)
 
 - **The owner's order for Tokyo's groundwork**, from this session's five
@@ -169,6 +290,36 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - **Not run: the Economic Census join control** (PLAN, "Join control"),
   approved 2026-09-28; one national table serves all five Japanese cities.
 
+### 2026-09-28 - Macro-map completeness tiers built on `macro-tiers`, checked, held for review time
+
+- **Each city now carries `coverage`, `placement` and `data_age` in
+  `app/cities.py`; the macro map colours its dot by tier, shows a text
+  legend under the map, and adds the tier, storefront count, placement and
+  data age to the tooltip.** 39 Full, 12 Narrowed (Philadelphia, Boston,
+  Toronto, Amsterdam, Rotterdam, Riga, Hong Kong, Seoul, Daegu, Busan, Kobe,
+  Osaka), 0 One bucket; the borderline Full cities' caveats go to their pages
+  instead (PLAN).
+- **`scripts/check_macro_facts.py`, in the pre-push hook, decides three
+  things:** (1) `app/macro_facts.json`'s storefront counts, generated with
+  `--write` from the file each city's map step reads (`businesses_geocoded.csv`
+  where a geocoding step exists - Toronto's clean file has no coordinates),
+  counted as `render_heatmap` counts "available"; (2) each tier against the
+  city's row in table B of `docs/map_inconsistencies.md` - Narrowed needs a
+  structural gap (a dash, merged or relabelled buckets, or a note saying
+  "No ...", "... only", "merged" or "Retail ="), Full needs three plain
+  figures and no such note; (3) every date, year and percentage in a
+  `placement` or `data_age` phrase must appear in the city's row of table C or
+  D (Brazil's nine read the country's "All nine" row). A mutation test failed
+  as intended: Toronto set Full, and a false fetch date for Paris.
+- **The app falls back rather than raising** on a missing tier or count ("the
+  label_offset NaN lesson"), so one city's absent fact cannot take the
+  Overview down.
+- **Verified**: `check_all.py` 22 of 22; `check_deploy_imports.py --ref
+  macro-tiers` clean; one local render at 1200 px with no error, all three
+  legend entries, purple dots where expected. The tooltip phrases are
+  published text awaiting the owner's approval. **When Sapporo lands** its
+  entry needs the three fields (narrowed; its table C and D rows hold 86.0%,
+  2026-03-31 and 2026-07-31) and a `--write`, or the check refuses the push.
 ### 2026-09-28 - Kyoto steps 1-3 on a rebuilt register, pinned at 2026-07-31; its funiculars left out after all (owner)
 
 - **Built on `worktree-japan`**: 32,355 storefronts (Retail 4,598 · Food
@@ -227,6 +378,50 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   operator names shown in 32,355 rows.** 申請者＿役職名 and 申請者＿代表者 are
   never selected.
 
+### 2026-09-28 - Macro-map dots coloured by data completeness; storefront count in the tooltip, not the dot size (owner)
+
+- **The owner approved three completeness tiers as dot colours**: Full
+  **#0D9488** (the current teal, so most dots do not change), Narrowed
+  **#9333EA**, One bucket **#C2410C**. The dots are WebGL layers, which the
+  dark-mode filter never reaches, so one set must read on Carto's light
+  basemap (land about #FAFAF8, water #D4DADC) and on its filtered dark form
+  (land about #101011, water #282D2F). Validated with the dataviz skill's
+  `validate_palette.js`, all pairs, on all four surfaces: normal-vision
+  floor 27.1 (target 15), worst colour-blind pair 13.7 deutan / 17.0 tritan
+  (target 8); contrast on land 3.5-5.2 in both modes; below 3:1 only over
+  water (2.6-2.7), as today's teal already is, relieved by each dot's white
+  ring, its name pill and the text legend. #C2410C sits 58.2 from the amber
+  selection highlight.
+  - Rejected: every palette with a grey tier (slate #64748B, stone #78716C),
+    which failed the normal-vision floor against the teal (11.0, 12.1) and
+    colour-blind separation (5.0-5.3); rose #E11D48, which reads as a status
+    colour; orange #EA580C, nearer the amber highlight (52.4).
+- **No sizing by storefront count (owner)**: bigger dots would swallow
+  neighbours and break the labels `check_macro_labels.py` has scored. The
+  tooltip carries the count instead, with placement precision and data age.
+- Each city's tier becomes a `cities.py` field backed by a check. The per-city
+  list goes to the owner before any `app/` change; the change itself lands
+  at review time. `PLAN.md`.
+
+### 2026-09-28 - Band T's EDGE cities grouped at its top; Band T below Band N (owner)
+
+- **The 11 EDGE cities of Band T now sit in one group at the band's top
+  (owner, on the recommendation)**: Buffalo, Ottawa, Nice, Rouen, Den Haag,
+  Utrecht, Bergen, Aarhus, Kitchener–Waterloo, Pittsburgh and Hiroshima. EDGE
+  (2026-09-27) marks light rail built partly to metro standard; grouping them
+  lets the deferred trams decision take that slice first in one line.
+  Rejected: a summary line only, which would leave the rows spread over seven
+  country tables. Each row keeps its flag, its build-time call and any bucket
+  gap (six carry one); France's rows were folded into the group's four
+  columns. The country groups now count France 19, Denmark and Latvia 3, the
+  US 6, and Canada's group became a pointer (both its cities are EDGE); each
+  points to the group. Gimhae (D) and Gimpo (B) stay where their first
+  blocker put them.
+- **Band T moved below Band N (owner)**: sections, the band table, the
+  summary box and the Total row now run A, B, D, N, T. One
+  `check_master_list_counts_selftest.py` case aimed at the Total row's order
+  was re-aimed at D; 18 of 18 behave.
+
 ### 2026-09-28 - Fukuoka built on the shared Japanese modules: Japan's fourth city (held for review time)
 
 - **Built on `worktree-japan`**: 30,062 storefronts (Retail 7,004 · Food
@@ -267,6 +462,50 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   approved 2026-09-28 but not yet fetched; it serves every Japanese city at
   once.
 
+### 2026-09-28 - Band C's last five get verdicts; Band B reopened for the passed, Band N created for no page, Band C closed (owner)
+
+- **The five cities awaiting the Band C memo's verdict were settled as
+  recommended (owner), after two probes the owner ordered:**
+  - **Incheon: PASS, to B.** Its coordinates were the open question. The
+    two-hop route through parcel ids has no keyless file (juso's geometry and
+    coordinate products are application-only; V-World is geo-blocked to
+    Korea; nsdi.go.kr is retired). A one-hop file was found instead: the
+    Korea Elevator Safety Agency's lift-building coordinates (data.go.kr
+    15156424, 36.4 MB, declared unrestricted; downloaded on the owner's OK to
+    `data/incheon/raw/` with its sha256). **Exact matches place 41.0% of
+    33,256 restaurants; interpolating along the road between the two nearest
+    listed buildings (the owner's ground-floor workaround) adds 30.3%, for
+    71.3%.** Leave-one-out on 2,000 listed buildings: median error 15 m
+    between same-side neighbours, 52 m either side. Extrapolated pins
+    (11.4%, median 74 m, 90th percentile 526 m) are dropped; about 16%
+    unplaced, disclosed. Before a build: the file's licence read and
+    `data_sources` row, the health-food apartment-unit filter, and a 법정동
+    mapping for the 2026-07-01 district reorganisation on any refresh.
+  - **Gyeonggi satellites: PASS, to B**, the café file's gap disclosed; the
+    hold lapsed when Daegu and Busan were built. Which satellites is the
+    brief's question.
+  - **Ottawa: to T (EDGE)**: O-Train light rail with no metro, so trams are
+    its first blocker, as for Kitchener–Waterloo; it carries its food-only
+    gap there.
+  - **Palma: no page**: food only, with an address join for 87% of rows.
+  - **Baltimore: no page**: food only (1,327 restaurants). The probe listed
+    every item in Maryland's portal (1,531), the city's hub (693), iMAP
+    (1,423) and 175 city map services: no premises register for retail or
+    personal services; barber and cosmetology licences are a name-search page
+    only. Rail measured: SubwayLink 11 stations and Light RailLink 16 stops
+    inside the city.
+- **The owner restructured the bands around the verdicts:** **Band B
+  reopened as "Passed: narrower pages"** (Stockholm, Bucharest, Incheon, the
+  Gyeonggi satellites); **a new Band N, "No page for now"** (Singapore,
+  Yokohama, Palma, Baltimore); **Band C closed**, its condition true of no
+  city. Rejected: re-captioning C around the no-page cities, which the list's
+  own rule forbids (a band whose condition stops being true closes).
+  Candidates stay 73 on master: A 4 · B 4 · T 51 · D 10 · N 4 (Sapporo, on
+  its branch, makes A 3 when it lands).
+- **Checks changed with it** (Cleanup's scripts, told): the band letters in
+  `check_master_list_counts.py` became `LETTERS = "ABCDNT"`, and four
+  `check_master_list_counts_selftest.py` cases aimed at Band C's text were
+  re-aimed at B and T; 18 of 18 behave. Nothing a check decides was relaxed.
 ### 2026-09-28 - Fukuoka steps 1-2: the first two-source Japanese city; 業態 read beside the type, MHLW's own point where the block join misses; yatai count (owner)
 
 - **Two food lists, one shared step 2.** The city's BODIK list (permits from

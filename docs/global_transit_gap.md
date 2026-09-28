@@ -1,0 +1,111 @@
+# Large-transit cities not built - the gap, and why (2026-09-28)
+
+**What this is.** Every city in the world with an expansive rapid-transit
+network (roughly 50+ stations or several lines) that this project has not
+built, with the reason the record gives. Compiled 2026-09-28 at the owner's
+request, from `docs/city_master_list.md` (Built, every band, DISCARDED,
+"Countries ruled out", "Current by country"), `docs/global_country_shortlist.md`
+and `docs/city_master_list_evidence.md`, checked against a list of the world's
+largest systems. It is the starting list for the **re-screens** in the staging
+handoff; the master list stays the operative list, and this file is not
+counted by `check_master_list_counts.py`.
+
+**Why now.** With the 2026-09-28 review batch (Sapporo, Fukuoka, Kyoto) live,
+every city within the original candidate specs is built or banded; what is
+left is trams-only (Band T), one-bucket (Band B), access-blocked (D), no page
+(N), or Tokyo (A). The large networks below are the ones the specs, or an old
+negative, kept out.
+
+"(kn)" marks a network size from general knowledge, not from the record; a
+"subway 35" in the record counts route relations in a feed, not stations.
+
+## Discarded (22) - `docs/city_master_list.md`, DISCARDED
+
+| City | Country | Network | Why not covered (the record's words, short) |
+|---|---|---|---|
+| Berlin | DE | U-Bahn 9 lines, ~175 stations (kn) | "`Gaststätten` → 0"; Gewerberegister not open - **two keyword searches only** |
+| Kuala Lumpur | MY | 14 relations | "No register at any level, on three methods" |
+| Santiago | CL | L1-L6, L4A | "Coverage fails downtown": 4 central comunas publish no list |
+| Valencia | ES | metro + tram | "No premises register", 290 packages read |
+| Portland | US | 132 stops in the city | "No classified premises register" |
+| Vienna | AT | U-Bahn + 185 tram relations | "No premises register at any level", re-probed twice |
+| Nagoya | JP | 102 stations | "No list, and none can be rebuilt" (monthly files hold about half the permits) |
+| Hamburg | DE | U-Bahn 4 lines | Currency: its only register is a 2016 retail survey |
+| Cairo | EG | 3 lines (kn) | "No register at any level" |
+| Athens | GR | 3 lines | No premises register; the national list is from 2018, no addresses |
+| Dallas | US | DART ~65 stations (kn) | Currency: the register ends in 2022. **A re-screen on the Texas Comptroller's permit file is already queued** |
+| Jakarta | ID | 9 relations | "No activity field" |
+| Denver | US | RTD ~50+ stations (kn) | "No address, no classification, no geometry" |
+| Budapest | HU | 4 metro lines + trams | "Both routes closed" (the food authority's lookup is behind a CAPTCHA) |
+| Sofia | BG | 4 metro relations + trams | "Sofia's 76 datasets include none" |
+| Lyon | FR | 4 metro lines + trams | Terms: account required, indemnity, ban on operators' marks |
+| Naples | IT | 3 lines + trams | No premises register |
+| Atlanta | US | MARTA 38 stations (kn) | Currency: licences stop 2019-22 |
+| Tel Aviv | IL | "realistically 1" line | Municipal terms forbid building a database from the data |
+| Lima | PE | 4 relations | Coverage: 1 of Línea 1's 9 districts publishes |
+| Medellín | CO | 6 relations | "Three closed doors" |
+| Honolulu | US | Skyline (small) | No premises register |
+
+## Country ruled out (15) - "Countries ruled out" and the shortlist
+
+| City | Country | Network | Why not covered |
+|---|---|---|---|
+| Moscow, St Petersburg | RU | 250+ / 72 stations (kn) | Excluded: sanctions and access |
+| London, Newcastle, Glasgow | UK | 272 / 60 / 15 stations (kn) | Business rates (NNDR) carry no category; the national food register (FSA) is "food only" |
+| Istanbul | TR | 200+ stations (kn) | Aggregate counts per district, **ASSERTED on one dataset** |
+| Melbourne, Sydney, Perth | AU | ~220 / 170+ / 80 stations (kn) | Licensing not municipal, **ASSERTED** |
+| Brussels | BE | 69 stations (kn) | Bulk access paid |
+| Manila | PH | 4 lines | The operator's feed types its lines as commuter rail |
+| Dubai | AE | 55 stations (kn) | No agency feed |
+| Kyiv | UA | 52 stations (kn) | Excluded for now: active war |
+| Auckland | NZ | commuter 5 | Commuter only; licensing not municipal |
+| Algiers | DZ | 1 metro line + trams (kn) | Filed under "no urban rail at all" - **wrong**; it has a metro |
+
+## In a band, not built (11)
+
+| City | Country | Network | Band and blocker |
+|---|---|---|---|
+| Tokyo (8 wards) | JP | 330 stations | A - the Tokyo build session; only Shibuya's list is complete, Chiyoda's ledger requested |
+| Stockholm | SE | T-bana, 92 stations | B - passed, food only |
+| Singapore | SG | MRT 21 relations | N - the food register is a 2016 snapshot |
+| Kaohsiung | TW | ~75 stations (kn) | D - geo-blocked to Taiwan |
+| Bucharest | RO | M1-M5, 64 stations | B - food only; the file downloads only in a browser |
+| Incheon | KR | 64 stations | B - placed 71.3% by the lift-building join and road interpolation |
+| Hyderabad | IN | 6 relations | D - geo-blocked, nothing read behind it |
+| Lisbon | PT | 10 subway relations | D - a free account on the national register |
+| Helsinki | FI | metro + trams | D - geo-blocked |
+| Yokohama | JP | 43 stations | N - no food list in any era |
+| Warsaw | PL | 2 lines (kn) | D - geo-blocked |
+
+## Never screened (35)
+
+| Cities | Country | Network (kn) | Why not covered |
+|---|---|---|---|
+| Shanghai, Beijing, Guangzhou, Shenzhen, Chengdu, Wuhan, Hangzhou, Chongqing, Nanjing, Xi'an, Tianjin, Suzhou, Zhengzhou, Qingdao | CN | ~150-500 stations each | China is in no file: it was absent from the feed catalogue the 87-country screen started from |
+| Delhi, Mumbai, Bengaluru, Kolkata, Chennai | IN | Delhi ~290; others ~40-80 | Only India's national catalogue was read (counts, not premises); the city hosts were never asked |
+| Munich, Frankfurt, Cologne | DE | 96 / 86 / ~230 stops | Germany is not ruled out; no rows |
+| Tehran | IR | ~150 stations | No record |
+| Bangkok | TH | 4 subway + 5 light-rail relations | The national portal answered 403 on every strategy (2026-09-21); never given a city row |
+| Buenos Aires | AR | Subte, 6 lines | Its feed has no `routes.txt`; business data never probed |
+| Riyadh, Doha | SA, QA | 85 / 37 stations | No record |
+| Ankara, Caracas, Tashkent, Minsk, Baku | various | ~27-57 stations | No record |
+| Panama City, Hanoi, Ho Chi Minh City | PA, VN | ~14-30 stations | No record (small networks) |
+
+## The weakest or oldest reasons among the biggest networks
+
+Recommended first for re-screening (the staging handoff's priority 1):
+
+1. **London** - ruled out 2026-09-21 partly because the UK's food register is
+   food only, before the owner passed food-only pages (Stockholm and
+   Bucharest, 2026-09-27). By today's rules it may be a Band B candidate.
+2. **Dubai and Manila** - ruled out on transit feeds alone; the project now
+   builds rail from OpenStreetMap, the reason Monterrey's rail-only negative
+   was called obsolete.
+3. **Istanbul** - rests on one dataset marked ASSERTED; the shortlist's own
+   "second look" (open probe 8) was never run.
+4. **Berlin** (two keyword searches) and **Munich, Frankfurt, Cologne** (never
+   screened).
+5. **Delhi and Mumbai** - only the national catalogue was read.
+6. **China's fourteen** - never looked at; the largest untouched block, with
+   access and licensing likely hard.
+7. **Algiers** - misfiled as having no urban rail.

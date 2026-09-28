@@ -69,6 +69,7 @@ def bump(pattern, expect):
 def drop_bands(text):
     """Every band heading renamed: an unrecognised file must not pass."""
     out = text.replace("## 🟢 Band A", "## 🟢 Group A").replace("## 🟣 Band C", "## 🟣 Group C")
+    out = out.replace("## 🔵 Band B", "## 🔵 Group B").replace("## ⚪ Band N", "## ⚪ Group N")
     out = out.replace("## 🟤 Band T", "## 🟤 Group T").replace("## 🔴 Band D", "## 🔴 Group D")
     return out if out != text else None
 
@@ -159,7 +160,7 @@ def wrong_band(text):
     if col is None:
         return None
     for i, row in rows:
-        letters = re.findall(r"\b[ABCDT]\b", row[col])
+        letters = re.findall(rf"\b[{M.LETTERS}]\b", row[col])
         if len(letters) == 1 and re.match(r"\*\*\d+\*\*\s*—\s*\S", row[2]):
             return _set_cell(lines, i, col, "C" if letters[0] != "C" else "T")
     return None
@@ -183,11 +184,12 @@ def by_country_bump(col, expect):
 
 
 CASES = [
-    ("a band heading's count drifted (Band C, +1)",
-     bump(r"^## 🟣 Band C —[^\n]*?\((\d+) cities\)", "Band C holds"), None),
+    # Re-aimed from Band C to Band B 2026-09-28, when C closed (owner).
+    ("a band heading's count drifted (Band B, +1)",
+     bump(r"^## 🔵 Band B —[^\n]*?\((\d+) cities", "Band B holds"), None),
 
-    ("the summary box's band count drifted (C, +1)",
-     bump(r"· C (\d+) ·", "summary says C {new}"), None),
+    ("the summary box's band count drifted (B, +1)",
+     bump(r"· B (\d+) ·", "summary says B {new}"), None),
 
     ("the summary box's discard count drifted",
      bump(r"\| \*\*Discarded\*\* \| \*\*(\d+)\*\*", "summary says discarded {new}"), None),
@@ -220,7 +222,7 @@ CASES = [
      by_country_bump(1, "says {new} built, the Built table lists {old}"), None),
 
     ("by country: the Total row's band figure drifted",
-     bump(r"^\| \*\*Total\*\*.*· C (\d+) ·", "the Total row says C {new}"), None),
+     bump(r"^\| \*\*Total\*\*.*· D (\d+) ·", "the Total row says D {new}"), None),
 
     ("by country: a named city is not in the band its row lists",
      wrong_band, "its Bands column says"),
