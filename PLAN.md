@@ -32,6 +32,24 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   Philadelphia keep their own variant (interchanges added after the spacing
   pass) until the owner decides.
 
+- [ ] ⏸ **Per-city restriction disclosures, on every city's page (owner,
+  2026-09-28). WAITS until every Japanese city is built** (Fukuoka, Kyoto,
+  Tokyo); the prose edits come then, drafted in chat for the owner. Four
+  facts per city, which the macro map's tooltip may also carry:
+  - **Placement precision**: the register's own coordinates, a geocode, a
+    block-level join (Japan), or interpolated along the road (Incheon, if
+    built).
+  - **Data age**: the rows' own newest date, not the edition's label (Busan
+    frozen at 2026-04-15; Daegu's rows end 2025-08-31; Kyoto a rebuilt upper
+    bound).
+  - **Scope**: city only or "(Regional)".
+  - **Network type**: metro, trams only (Riga today), or EDGE. It could
+    become a macro-map tier once Band T builds exist.
+  - Related, proposed and **awaiting the owner**: the macro map's dots
+    coloured by **data completeness** (Full · Narrowed · One bucket) and
+    sized by storefront count, the tier derived from each city's outputs and
+    checked, never hand-kept. An `app/` change, so it lands at review time.
+
 - [ ] ⏰ **Prague: Flora reopens around December 2026**: when PID's feed serves
   it again, step 1 STOPS the build on purpose - remove the override then.
 
