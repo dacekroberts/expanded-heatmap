@@ -10,7 +10,9 @@ a page an earlier review had merely **cited**. Not from misreading a document â€
 from not reading a document that the first one pointed at. This skill is that
 one failure mode, turned into a procedure.
 
-Record the outcome in `docs/data_sources.md` as you go, per `add-city` Step 0.4.
+Record the outcome in the source's country file, `docs/data_sources/<country>.md`
+(the index at the top of `docs/data_sources.md` names it; notices go in that
+entry point's numbered gate), as you go, per `add-city` Step 0.4.
 Terms are not established until they are written there with the date.
 
 ## The three corrections this exists to prevent

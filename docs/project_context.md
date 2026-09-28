@@ -28,7 +28,7 @@ are stated here.
 2. this file
 3. [`PLAN.md`](../PLAN.md) - what's open and what's next
 4. [`DECISIONS.md`](../DECISIONS.md) - the reasoning trail and per-run baselines
-5. [`city_shortlist.md`](city_shortlist.md) - which cities are viable and why
+5. [`city_master_list.md`](city_master_list.md) - which cities are viable and why
 6. [`sub_transit_line_filters.md`](sub_transit_line_filters.md) - the station-thinning pattern
 7. `.claude/skills/add-city/` - the process for adding a city
 
@@ -1021,7 +1021,7 @@ correct, not a check to relax.
 **Check a candidate's registry actually covers all three buckets before
 assuming one source is enough** - that assumption failed for New York, and in
 Philadelphia a whole bucket had no source at any level of government. See
-`city_shortlist.md`, `data_sources.md` (every source's endpoint and filter) and
+`city_master_list.md`, `data_sources.md` (every source's endpoint and filter) and
 `PLAN.md`. Row counts, station counts and per-run figures are in
 `DECISIONS.md`.
 

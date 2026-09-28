@@ -1,4 +1,5 @@
-"""Where this data comes from - renders docs/data_sources.md in the app.
+"""Where this data comes from - renders docs/data_sources.md in the app, then
+each per-country file in docs/data_sources/.
 
 WHY THIS PAGE EXISTS, AND WHY IT BLOCKS PUBLISHING. Three separate obligations
 converge on it:
@@ -21,6 +22,7 @@ was written to be published as-is, and a hand-maintained web copy would drift
 from the file the pipeline's authors actually read.
 """
 
+import re
 import sys
 from pathlib import Path
 
@@ -36,6 +38,26 @@ from components import (  # noqa: E402
 )
 
 DOC = Path(__file__).parent.parent.parent / "docs" / "data_sources.md"
+# Split by country on 2026-09-27: the entry point above keeps the notices and
+# the gate, and each country's sources moved verbatim to docs/data_sources/.
+# Both are the provenance record, so the page renders both - the entry point
+# alone would publish the notices and drop every endpoint.
+COUNTRY_DOCS = sorted((DOC.parent / "data_sources").glob("*.md"))
+
+# The files link to each other as FILES (`data_sources/canada.md`,
+# `../data_sources.md`), which works on GitHub and opens a blank page here:
+# the app serves its own HTML for any path. deploy-verify found the index
+# table's links dead on 2026-09-27, the day of the split. On this page every
+# file is already rendered, so each file link becomes a jump to it.
+FILE_LINK = re.compile(r"\]\((?:\.\./)?data_sources/([a-z-]+)\.md\)")
+FOLDER_LINK = re.compile(r"\]\((?:\.\./)?data_sources/\)")
+ENTRY_LINK = re.compile(r"\]\(\.\./data_sources\.md\)")
+
+
+def in_page(text):
+    text = FILE_LINK.sub(r"](#ds-\1)", text)
+    text = FOLDER_LINK.sub("](#ds-countries)", text)
+    return ENTRY_LINK.sub("](#where-each-countrys-sources-live)", text)
 
 st.set_page_config(page_title=f"Where this data comes from — {SITE_NAME}",
                    page_icon="\U0001f5fa️", layout="wide")
@@ -66,8 +88,16 @@ the day it was pulled.
 )
 
 if DOC.exists():
-    st.markdown(DOC.read_text(encoding="utf-8"))
+    st.markdown(in_page(DOC.read_text(encoding="utf-8")))
 else:
     st.warning(f"{DOC.name} is missing from this checkout.")
+if not COUNTRY_DOCS:
+    st.warning("The per-country files in docs/data_sources/ are missing from "
+               "this checkout.")
+st.markdown('<div id="ds-countries"></div>', unsafe_allow_html=True)
+for country_doc in COUNTRY_DOCS:
+    st.divider()
+    st.markdown(f'<div id="ds-{country_doc.stem}"></div>', unsafe_allow_html=True)
+    st.markdown(in_page(country_doc.read_text(encoding="utf-8")))
 
 render_site_notices(show_links=False)

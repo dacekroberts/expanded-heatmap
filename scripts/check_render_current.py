@@ -29,6 +29,16 @@ before a block was EDITED fails too, not only one that lacks it entirely.
 `@@TOKEN@@` placeholders are resolved in Python before a block leaves the
 module (THEME_TOGGLE_HTML asserts it), so they never reach here.
 
+COMMENTS DO NOT COUNT (2026-09-27). Both the block and the map are compared
+with comments stripped: `/* ... */`, `<!-- ... -->`, and whole lines that
+start with `//`. Before this, editing only a comment in map_common.py failed
+every committed map, and the fix was a re-render of all 46 - the
+efficiency review found comment-only diffs inside a full re-render
+(docs/efficiency_review_2026-09-27.md, finding 4). A committed map may now
+carry an older comment; that is harmless, because nothing executes it. A
+trailing `code; // note` comment still counts, because stripping `//` in
+mid-line would also cut every `https://`.
+
 WHAT IT DOES NOT SEE: per-city options (a city's own label override, or
 render_heatmap(animate_clusters=...)), and anything outside these blocks -
 Folium's own markup, the data. That is drift_check.py's job; this is the fast
@@ -49,6 +59,12 @@ SOURCE = (ROOT / "pipeline" / "map_common.py").read_text(encoding="utf-8")
 NAME = re.compile(r"^_?[A-Z][A-Z0-9_]*_(SCRIPT|HTML|CSS)$")
 SLOT = re.compile(r"__[A-Z][A-Z0-9_]*__|\{[a-z_]+\}")
 MIN_PIECE = 20
+COMMENT = re.compile(r"/\*.*?\*/|<!--.*?-->|^[ \t]*//[^\n]*$", re.S | re.M)
+
+
+def uncommented(text):
+    """Text with comments removed - applied identically to blocks and maps."""
+    return COMMENT.sub("", text.replace("\r\n", "\n"))
 
 
 def shared_blocks():
@@ -62,7 +78,7 @@ def shared_blocks():
         uses = len(re.findall(rf"\b{re.escape(name)}\b", SOURCE))
         if uses < 2:
             continue
-        text = value.replace("\r\n", "\n")
+        text = uncommented(value)
         pieces = [p.strip() for p in SLOT.split(text)]
         blocks.append((name, [p for p in pieces if len(p) >= MIN_PIECE]))
     if not blocks:
@@ -73,7 +89,7 @@ def shared_blocks():
     # so the first control run called Oslo's pre-wheel map an "OLDER version"
     # of WHEEL_ZOOM_SCRIPT when it had never had one - that boilerplate piece
     # matched LABEL_CLAMP_SCRIPT's opening. Only distinctive pieces count.
-    texts = {name: vars(map_common)[name] for name, _ in blocks}
+    texts = {name: uncommented(vars(map_common)[name]) for name, _ in blocks}
     distinct = []
     for name, pieces in blocks:
         # A FRAGMENT pasted whole into another block (_LEGEND_BOTTOM_CSS lives
@@ -98,7 +114,7 @@ def preview(piece):
 
 
 def check_file(path, blocks):
-    html = path.read_text(encoding="utf-8").replace("\r\n", "\n")
+    html = uncommented(path.read_text(encoding="utf-8"))
     problems = []
     for name, pieces in blocks:
         missing = [p for p in pieces if p not in html]

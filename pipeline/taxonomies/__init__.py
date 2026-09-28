@@ -7,8 +7,9 @@ legend/coloring/toggle logic actually uses; no taxonomy-specific code
 (a NAICS prefix, a Chicago license_code) should leak past this layer into
 app/pipeline code that isn't the taxonomy module itself.
 
-This exists because criterion 3 of the city shortlist (docs/city_shortlist.md)
-was originally "has NAICS + geocoding," and live verification found that
+This exists because criterion 3 of the 2026-09-18 city screen
+(docs/decisions/2026-09-13.md, "City selection, live verification, taxonomy
+plurality") was originally "has NAICS + geocoding," and live verification found that
 requirement too strict: New York, Chicago, and Philadelphia all have solid,
 live, geocoded business-license data, just under their own local taxonomy
 instead of NAICS. Rather than disqualify real cities over a naming

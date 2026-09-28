@@ -128,6 +128,13 @@ ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(ROOT))
 
 DATA_SOURCES = ROOT / "docs" / "data_sources.md"
+# SPLIT BY COUNTRY 2026-09-27. The entry point keeps the preamble, the numbered
+# notices and the deploy gate; each country's rows of the three provenance
+# tables, and every section about its cities' sources, moved verbatim to
+# docs/data_sources/<country>.md under the same headings. A and B read the
+# entry point and every country file together; C, D and F read the notices,
+# which stay in the entry point only.
+DATA_SOURCES_DIR = ROOT / "docs" / "data_sources"
 CITIES_PY = ROOT / "app" / "cities.py"
 COMPONENTS_PY = ROOT / "app" / "components.py"
 MASTER_LIST = ROOT / "docs" / "city_master_list.md"
@@ -255,11 +262,24 @@ def read(path):
     return path.read_text(encoding="utf-8")
 
 
-def section(text, heading, headings):
-    """Return the slice of `text` under `heading`, up to the next heading."""
-    start = text.index(heading)
-    later = [text.index(h) for h in headings if text.index(h) > start]
-    return text[start:min(later)] if later else text[start:]
+def provenance_files():
+    """The entry point, then every per-country file."""
+    return [DATA_SOURCES] + sorted(DATA_SOURCES_DIR.glob("*.md"))
+
+
+def section(text, heading):
+    """Return the slice of `text` under the `## heading` LINE, up to the next
+    `## ` heading line, or "" when the file has no such heading.
+
+    Anchored to a whole line because "## Transit feeds" is a substring of
+    "### Transit feeds (GTFS) — checked ...". Ending at the next `## ` is what
+    the single-file version's list of four headings amounted to: nothing but
+    `###` headings sat between them."""
+    m = re.search(r"^" + re.escape(heading) + r"[ \t]*$", text, re.M)
+    if not m:
+        return ""
+    nxt = re.search(r"^## ", text[m.end():], re.M)
+    return text[m.start():m.end() + nxt.start()] if nxt else text[m.start():]
 
 
 def city_names():
@@ -528,15 +548,21 @@ def check_cited_outputs():
     return problems
 
 
+# The evidence file holds tables moved out of the master list on 2026-09-27;
+# they were checked here before the move and still are. So are the per-country
+# files of docs/data_sources/, added by glob in check_tables().
 TABLE_DOCS = ("docs/data_sources.md", "docs/excluded_categories.md",
-              "docs/city_master_list.md", "docs/session_roles.md")
+              "docs/city_master_list.md", "docs/city_master_list_evidence.md",
+              "docs/session_roles.md")
 
 
 def check_tables():
     """I: markdown tables that do not render, or whose rows are ragged."""
     delim = re.compile(r"^\|[\s:|-]+\|\s*$")
     problems = []
-    for rel in TABLE_DOCS:
+    per_country = [q.relative_to(ROOT).as_posix()
+                   for q in sorted(DATA_SOURCES_DIR.glob("*.md"))]
+    for rel in TABLE_DOCS + tuple(per_country):
         q = ROOT / rel
         if not q.exists():
             # Renaming a document must not quietly retire its table check.
@@ -802,11 +828,20 @@ def main():
                     help="ignore KNOWN_GAPS and fail on every finding")
     args = ap.parse_args()
 
-    doc = read(DATA_SOURCES)
-    headings = [h for h, _ in TABLES] + ["## Geocoding"]
-    blocks = {label: section(doc, h, headings) for h, label in TABLES}
+    doc = read(DATA_SOURCES)            # the entry point: notices, gate
+    files = provenance_files()
+    texts = [read(f) for f in files]
+    corpus = "\n".join(texts)           # every file: rows and endpoints
+    blocks = {label: "\n".join(section(t, h) for t in texts)
+              for h, label in TABLES}
 
     failures, gaps = [], []
+    # A glob over nothing would leave only the entry point, which holds no
+    # rows, and every city would fail - loudly, but for the wrong reason.
+    if len(files) == 1:
+        failures.append(("docs/data_sources/", [
+            "matched NO per-country files, so checks A and B read the entry "
+            "point alone. If the files moved, point DATA_SOURCES_DIR at them"]))
     names = city_names()
     print(f"check_provenance: {len(names)} cities in app/cities.py\n")
 
@@ -833,14 +868,14 @@ def main():
             # data_sources.md records the readable `county='San Francisco'`.
             # Those are the same request and a raw string compare calls them
             # different.
-            doc_plain = unquote(doc)
+            doc_plain = unquote(corpus)
             missing = sorted(
                 u for u in urls
                 if u not in URL_EXEMPT
-                and u not in doc and unquote(u) not in doc_plain
+                and u not in corpus and unquote(u) not in doc_plain
             )
-            problems += [f"endpoint not in data_sources.md: {u}"
-                         for u in missing]
+            problems += [f"endpoint not in data_sources.md or "
+                         f"data_sources/*.md: {u}" for u in missing]
 
         if problems:
             (gaps if known else failures).append((name, problems))

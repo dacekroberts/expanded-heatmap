@@ -706,7 +706,9 @@ So when the FIRST city in a profiled country is committed:
    resolves to is recorded. Do not add the city to `KNOWN_GAPS` to make it
    pass — that list is for defects someone has decided to carry, with a date,
    and it may only shrink.
-2. **Promote the country file's rows** into `docs/data_sources.md`, writing
+2. **Promote the country file's rows** into a new
+   `docs/data_sources/<country>.md` (plus the country's row in the index at the
+   top of `docs/data_sources.md`), writing
    them from each city's own `config.py` rather than copying them. The copy is
    not the same document: for Canada, re-deriving corrected three Step 0
    findings that had hardened into confident claims — a CRS trap that belonged
@@ -714,8 +716,8 @@ So when the FIRST city in a profiled country is committed:
    of splitting on the wrong delimiter, and a "this feed has no `feed_info.txt`"
    that was true of the mirror and false of the agency.
 3. **Relabel the country file as the evidence trail**, with an explicit
-   precedence line ("where this file and `data_sources.md` disagree,
-   `data_sources.md` wins") and the corrections named. Do the same for any
+   precedence line ("where this file and `data_sources/<country>.md`
+   disagree, `data_sources/<country>.md` wins") and the corrections named. Do the same for any
    `docs/licenses/<country>-required-notices.md` and for the licence store's
    README section. **Grep the repo for the country's name plus "not built",
    "none built", "if any", "would require" and "eventually"** — every one of
@@ -752,7 +754,7 @@ prescribed their own.
 
 1. **`docs/<country>_step0_endpoints.md`** - every endpoint fetched, per leg
    (business, transit, boundary), with the traps. Merge into
-   `docs/data_sources.md` only when a city is actually built.
+   `docs/data_sources/<country>.md` only when a city is actually built.
 2. **Licence texts in `docs/licenses/`**, one per publisher, with source URL,
    retrieval date and SHA-256 in that directory's README.
 3. **A privacy note** working through each jurisdiction's definition.
@@ -760,7 +762,10 @@ prescribed their own.
    `data_sources.md`'s numbered gate when a city is committed - not before, so
    the deploy gate stays a list of things that actually apply.
 5. **A `DECISIONS.md` entry** with the ranking and its evidence.
-6. **`docs/city_shortlist.md`** gains the country's section.
+6. **`docs/city_master_list.md`** gains the country's cities, each in one band
+   or in DISCARDED; the evidence behind them goes in
+   `docs/global_country_shortlist.md`. (`docs/city_shortlist.md` was retired
+   2026-09-27.)
 
 ## Rank ALSO on cost per marginal city - it decides how far a budget goes
 

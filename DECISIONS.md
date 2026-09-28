@@ -20,11 +20,15 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**29 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**33 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [data_sources.md split by country, landed at the first review time (owner)](#2026-09-27---data_sourcesmd-split-by-country-landed-at-the-first-review-time-owner)
 - [Busan built on its own branch, stacked on Daegu's: 89,798 storefronts, 110 stations, Lines 1-4 and the Busan-Gimhae LRT](#2026-09-27---busan-built-on-its-own-branch-stacked-on-daegus-89798-storefronts-110-stations-lines-1-4-and-the-busan-gimhae-lrt)
+- [Band T renamed "Contingent on trams" and five cities moved into it from Band C; Stockholm and Bucharest pass the Band C memo (owner)](#2026-09-27---band-t-renamed-contingent-on-trams-and-five-cities-moved-into-it-from-band-c-stockholm-and-bucharest-pass-the-band-c-memo-owner)
+- [Master list after the split: Denver, Dallas and Brampton get discard rows; Ottawa is a data case, not a no-rail one; the by-country table rebuilt (owner, via Cleanup)](#2026-09-27---master-list-after-the-split-denver-dallas-and-brampton-get-discard-rows-ottawa-is-a-data-case-not-a-no-rail-one-the-by-country-table-rebuilt-owner-via-cleanup)
+- [Efficiency findings 4, 5 and 7 acted on: renderer changes batch, the master list split and counted, city_shortlist.md retired, Kansas City to Band T (owner)](#2026-09-27---efficiency-findings-4-5-and-7-acted-on-renderer-changes-batch-the-master-list-split-and-counted-city_shortlistmd-retired-kansas-city-to-band-t-owner)
 - [Busan's brief: the API's state filter drops every permit since February 2025, large stores come only by id, and the frozen snapshot is genuine](#2026-09-27---busans-brief-the-apis-state-filter-drops-every-permit-since-february-2025-large-stores-come-only-by-id-and-the-frozen-snapshot-is-genuine)
 - [Daegu's page, blurb, notice 48 and exclusions section approved and written; deploy-verify held until after Busan (owner)](#2026-09-27---daegus-page-blurb-notice-48-and-exclusions-section-approved-and-written-deploy-verify-held-until-after-busan-owner)
 - [Daegu built on its own branch: 67,212 storefronts, 86 stations, Lines 1-3, through a new shared Korean module](#2026-09-27---daegu-built-on-its-own-branch-67212-storefronts-86-stations-lines-1-3-through-a-new-shared-korean-module)
@@ -63,6 +67,43 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-27 - data_sources.md split by country, landed at the first review time (owner)
+
+- **Per-country source sections moved verbatim to 17 files in
+  `docs/data_sources/` (`b6d70f1`), taking the entry point from 55,151 to
+  14,973 words.** It was the most-read document (58 recent transcripts, about
+  96k tokens), so a session reading about one city loaded every city. The
+  owner approved the split as part of finding 5.
+  - All 2,835 original non-blank lines are present exactly as often as before.
+  - `check_provenance.py` names all 46 cities OK before and after. Tested
+    negatively: removing Ireland's file fails Dublin, an empty folder trips a
+    new guard, and `KNOWN_GAPS` still behaves.
+- **What stayed in the entry point:**
+  - The rules, a country-to-file index, the shared transit and boundary notes,
+    the basemap, the removal-request commitment and the obligations that are
+    not notices.
+  - **The whole numbered notices section with the deploy gate.** At about
+    10.8k words it is most of what remains. Moving it would mean rewriting the
+    notice parser and citation check F, which `app/components.py`'s
+    `_NOTICES` is cross-checked against, and one list is safer than 17.
+  - **The United States stays one file** (10,013 words). Its licence tables
+    name several cities per row, so splitting it would mean re-cutting rows,
+    not moving them.
+  - A Brazilian source filed under Taiwan (CNPJ) moved to Brazil's file.
+- **The About the Data page renders the entry point, then each country file**
+  in alphabetical order. Without that change the live page would have kept the
+  notices and lost every endpoint, so the split had to land together with an
+  `app/` change, which is a deploy.
+  - The owner approved the new published wording (the index paragraph and
+    each file's opening note) and the page order. The owner then called review
+    time for this one item, rather than let it sit while every session kept
+    appending to the old file.
+  - Gate: `check_deploy_imports.py` clean (PROBLEMS 0), then `deploy-verify`
+    `scope: app-deps`. No reboot, because only a page script changed and no
+    imported module did.
+- **Skills now say which file a new row goes in:** read-licence, licence-read,
+  add-city, add-country, multi-source-city and brazil-city. CLAUDE.md gains one
+  clause.
 ### 2026-09-27 - Busan built on its own branch, stacked on Daegu's: 89,798 storefronts, 110 stations, Lines 1-4 and the Busan-Gimhae LRT
 
 - **Where and what (owner, 2026-09-27).** Its own worktree
@@ -123,6 +164,122 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   the owner; then `deploy-verify` once for Daegu and Busan (held until now,
   owner), and the batch publish.
 
+### 2026-09-27 - Band T renamed "Contingent on trams" and five cities moved into it from Band C; Stockholm and Bucharest pass the Band C memo (owner)
+
+- **Band T renamed "Contingent on trams" (owner's call).** Five Band C cities
+  whose build needs a yes on trams-only maps as well as a Band C verdict
+  moved in: **Zurich, Göteborg, Hiroshima, Utrecht and Den Haag**. Their rows
+  and write-ups moved verbatim; each keeps its Band C gap noted beside it.
+  C 13 → 8, T 33 → 38.
+- **The first-blocker order was amended to Access (D) → Trams (T) → Buckets
+  (C)**: the trams decision is the one that gates a trams-only city first.
+  **Rijswijk and Delft**, trams-only too, stay in C as the one open exception.
+  The Band C memo recommends no page of their own, and the owner said five.
+- **Stockholm and Bucharest pass the Band C memo (owner)**: food-only pages
+  beside the three-bucket cities, saying what is missing (Hong Kong and the
+  Japanese cities are the precedent). They sit in their own "Passed" group
+  within Band C, apart from the cities still waiting. Bucharest's two
+  conditions travel with it to the build: the owner fetches the file in a
+  browser that passed the site's challenge, and a silent licence is
+  disclosed. The memo's other verdicts are not yet decided.
+- **The tram-list count runs with wave 2 (owner).** The tram rescopes'
+  estimated load (about 55–85% of one 5-hour window) and a recommendation per
+  category are saved in `docs/tram_rescope_estimate.md` for later.
+
+### 2026-09-27 - Master list after the split: Denver, Dallas and Brampton get discard rows; Ottawa is a data case, not a no-rail one; the by-country table rebuilt (owner, via Cleanup)
+
+- **Three discard rows added from the archived record** (Cleanup's review
+  list, on the owner's instruction). Each passes `check_discard_evidence.py`:
+  - **Denver**: `measured`, no address, classification or geometry (2026-09-18).
+  - **Dallas**: `measured`, its only register stops in 2022 (2026-09-21).
+  - **Brampton**: `rail`, only GO commuter rail reaches it. Revisit mid-2027
+    for the Hurontario LRT.
+
+  Discards 37 → 40.
+- **Houston gets no row.** Its record is one line, "the same structural reason
+  (zero results)", which is a single search, so it sits with the search-level
+  screen-outs in prose.
+- **Ottawa was listed among the no-rail cities; it has 6 light-rail routes**
+  and was ruled out on data (food-safety inspections only, 697 catalogue
+  entries scanned). **That is Band C's food-only shape today**, since Band C was
+  created a day after Ottawa's ruling. So it gets no discard row: the owner
+  decides between Band C and a discard.
+- **"Current by country" rebuilt from the band tables**: 46 built, 65
+  candidates (A 9 · C 13 · T 33 · D 10), each country's row per band. It had
+  shown 30 built, Brazil as candidates and Japan in Band B. `check_master_list_counts.py`
+  does not read this table yet; suggested to Cleanup.
+- **The Linz lead** ("Linz publishes trade licences", unprobed) moved from the
+  evidence file into Austria's row. Linz is a tram city, so Band T's shape.
+- **Fixed a stale line**: Bucharest's section set its metro "against
+  Stockholm's … trams"; Stockholm has a metro (8 subway lines in the
+  kommune).
+- **Band T's group decision deferred by the owner** until the full tram list
+  exists and the second-wave screens are done (PLAN). The screens wait for
+  the 10pm reset or later, because wave 1 was very load-intensive.
+
+### 2026-09-27 - Efficiency findings 4, 5 and 7 acted on: renderer changes batch, the master list split and counted, city_shortlist.md retired, Kansas City to Band T (owner)
+
+- **Finding 4 (re-renders): a habit rule, not a shared asset (`c96e2c3`).**
+  - A measurement agent read the 14 full re-renders since 09-23. Only two had
+    to go out on their own: the live Paris view and the live iPhone failure.
+    The other 12 fell into three same-day groups.
+  - Renderer changes now iterate on 3-5 sample maps and re-render all 46 once,
+    at review time (`docs/review_time.md`, `publish-city`).
+  - `check_render_current.py` ignores comments. Tested on the real maps: a
+    comment-only edit passes, and a one-token code edit fails 46 of 46.
+  - **Rejected for now: serving the shared blocks from one file.** It would
+    have avoided only 10 of the 14 re-renders, since the three contrast fixes
+    change each map's own colours. It would also make every renderer change a
+    deploy, and could let the legend cover the OSM credit unnoticed if the
+    file failed to load. Revisit only if shared-block re-renders still exceed
+    about two a week under the rule.
+- **Finding 5 (hand-kept documents): the master list was split, not generated
+  (`9969e80`).**
+  - The measurement showed sessions read it in slices (about 14k tokens per
+    session, not 62k) and that it is rarely rewritten whole. The recurring
+    cost was counts: 79 of 149 edits changed one, and 5 commits existed only
+    to fix drift.
+  - Evidence already marked as such moved verbatim to
+    `docs/city_master_list_evidence.md`, taking the live file from 37,575 to
+    19,821 words.
+  - `check_master_list_counts.py` joined the pre-push hook. It paid for itself
+    within the hour: moving Kansas City changed nine numbers, and it named all
+    nine.
+  - Generating the list from data was rejected: half the file is prose with no
+    schema, and editing prose in a data file is worse than in Markdown.
+- **Finding 7 (the weekly limit): no new rule.** The owner's standing position
+  is that the weekly budget is meant to be spent. `scripts/efficiency_metrics.py`
+  re-takes the review's numbers each week, which is what the owner's
+  session-count decision waits on.
+- **`docs/city_shortlist.md` retired, after a strict check found it was NOT yet
+  redundant.**
+  - Of its 77 facts, 58 were covered elsewhere, 3 were contradicted, and 16
+    existed nowhere else, among them Seattle's registry detail, on which PLAN
+    relied.
+  - Seattle's detail moved to `docs/build_briefs/seattle.md` (4 of 4
+    brief-checks pass live). The re-read added a privacy column,
+    `BUSLIC_MAIL_ADRS_TEXT`.
+  - Four US discard rows were added (San Jose, Fort Worth, Austin, Charlotte).
+    The eight cities screened out for having no urban rail joined the list's
+    existing sentence for those. Baltimore, Buffalo and Phoenix went into
+    PLAN's shallow-screen item, and the Brampton notes into the global
+    shortlist.
+  - Live references were repointed; historical mentions were left alone.
+  - Five of the migrating agent's edits were refused by the auto-mode
+    classifier. The owner approved them explicitly, and the main session made
+    them.
+  - The counts self-test was re-aimed to read each number from the file, so
+    legitimate list changes no longer break the pre-push hook.
+- **Kansas City moved from DISCARDED to Band T (owner: "Kansas City trams
+  okay").** It had been discarded on 2026-09-21 for "too little rail", before
+  the owner ruled that trams count. It passes all three buckets on a
+  public-domain register (`kkhs-93m4`, 15,895 rows). Band T is now 33,
+  candidates 65, discards 37.
+- **Handed to Staging (owner):** Denver, Dallas, Houston, Ottawa and Brampton
+  have no discard rows. The live list also names Ottawa among the cities with
+  no urban rail, although it has 6 light-rail routes and was ruled out on data.
+  Separately, the list's "Current by country" table is stale (30 built, Brazil
+  as candidates, Japan in Band B), and no check covers it.
 ### 2026-09-27 - Busan's brief: the API's state filter drops every permit since February 2025, large stores come only by id, and the frozen snapshot is genuine
 
 - **Wrote `docs/build_briefs/busan.md`** (8/8 checks live) and handed it to

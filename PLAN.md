@@ -105,7 +105,14 @@ Desktop is unaffected — the label is fully visible there.
     - [ ] Then `deploy-verify` ONCE for Daegu and Busan (city-added x2, plus East Asia).
     - [ ] Publish with the batch: pushing `worktree-busan` carries Daegu too. Retire the
       `data/` junction and the `busan-static-tmp` entry.
-  - [ ] **Band T's group decision**: build trams-only cities, and in what
+  - [ ] ⏸ **DEFERRED by the owner 2026-09-27: until the full tram list exists
+    AND the second-wave screens are done** (the screens wait for the 10pm
+    reset or later; wave 1 was very load-intensive). The tram list's open
+    counts are Barcelona's TRAM, Hong Kong Tramways, Seoul's Wirye Line,
+    D.C. Streetcar's status and Mexico City's Cablebús (below). **The
+    tram-list count runs WITH wave 2** (owner). The rescopes' estimated load
+    and a recommendation per category: `docs/tram_rescope_estimate.md`.
+    **Band T's group decision**: build trams-only cities, and in what
     order (Nice, Montpellier, Brno and Bergen are the cheapest strong ones).
   - [ ] **Wave 2 held by the owner** (the US; Canada, Brazil and Ireland;
     Spain and Italy), possibly at a reset. Launch only on the owner's word,
@@ -113,6 +120,26 @@ Desktop is unaffected — the label is fully visible there.
     `pipeline.osm.fetch`**, not the scratch `ovp.py`: since 2040dfc it refuses
     an all-zero `out count` answer, which the wave-1 scratch fetcher accepted
     (Amstelveen's density is still unmeasured for that reason).
+    - **Estimated load (2026-09-27, judgement; wave 1's cost was never
+      recorded)**: about **80–130% of one 5-hour window** (roughly 10–16% of
+      the weekly limit), so probably more than one window. The 5-hour window
+      is shared by every session, so the anchor may overstate.
+
+      | Group | Estimate |
+      |---|---|
+      | Tram-list count (read-only, cached OSM) | 5–8% |
+      | Canada, Brazil, Ireland (Brazil's national modules exist; Waterloo's ION the one real Canadian lead) | 15–25% |
+      | Spain, Italy (registers found city by city; many tram cities) | 30–45% |
+      | US (no national register, several sources per city, ~15–20 rail cities) | 30–50% |
+
+    - **Run order, agreed by the owner 2026-09-27**, after the 10pm reset:
+      1. The cheapest first: the tram-list count plus Canada, Brazil and
+         Ireland.
+      2. Read `get_usage` before and after, and rescale the other two
+         groups' estimates.
+      3. Spain and Italy next. The US waits for a later window if they land
+         near the top of their range.
+      4. Every screen agent fetches OSM through `pipeline.osm.fetch`.
   - [ ] **Tram rescopes of built cities held by the owner**, likely at the
     next reset; Cleanup's case-by-case list is in DECISIONS (2026-09-27).
 
@@ -129,15 +156,17 @@ Desktop is unaffected — the label is fully visible there.
   "Active Occupational Licenses", 16,396 rows, and the **cleanest licence of
   any candidate: CC0 1.0, explicitly declared**. Has `businesstype`,
   `businessaddress`, `the_geom`. Two sibling datasets exist (`abc4-h3u3`, an
-  application-workflow file that also carries `naics`, `category` and an
-  `ishome` flag; `hjcd-grvu`, 37,902 rows) - pick one deliberately rather than
-  merging them. Rail is streetcar-only, which is a **scope** question for the
+  application-workflow file of 20,956 rows that also carries `naics`,
+  `category` and an `ishome` flag; `hjcd-grvu`, 37,902 rows) - pick one
+  deliberately rather than merging them. Rail is streetcar-only (RTA's 5
+  streetcar lines, dense in the core), which is a **scope** question for the
   owner, not a data one. Privacy flags: `ownername` and `businessphone`
   columns, and the name fields are inverted on some rows (blank `businessname`
   with the trade name sitting in `ownername`) - Boston's trap again.
 - [ ] **Seattle - deferred by the owner 2026-09-21, and scoped as the project's
   first MULTI-MUNICIPALITY city.** Do not re-probe the Seattle registry itself;
-  the findings are in `docs/city_shortlist.md`. On that evidence Seattle's own
+  the findings are in `docs/build_briefs/seattle.md`, with checks
+  (`python scripts/brief_check.py seattle`). On that evidence Seattle's own
   data is the best-equipped of any candidate - an official nightly export,
   **active-only by construction**, 54,604 rows with real NAICS (no new taxonomy
   module), a trade name, and point geometry (no geocoding step). It is on
@@ -186,7 +215,10 @@ Desktop is unaffected — the label is fully visible there.
   domain", and the ArcGIS pass searched titles only. **Seattle proves the
   point**: it came back "no matching datasets" on Socrata and has a 54,604-row
   official layer on ArcGIS. Any of these needs a proper per-portal check before
-  being written off.
+  being written off. What the shallow screen DID find (from the retired
+  `docs/city_shortlist.md`, 2026-09-27): **Baltimore** publishes liquor
+  licences only, **Buffalo** contractor licences only (no locations), and
+  **Phoenix** has two light-rail lines but no general city business licence.
 
 ### 🇯🇵 Japan — the plan (2026-09-24; evidence in `docs/global_country_shortlist.md`)
 
@@ -228,7 +260,18 @@ brief names.
     (`docs/gated_access.md` items 29–32). Not sent, and not the next step.
     The own-time probe round found nothing that fills the gaps openly (DECISIONS).
 - [ ] **PARKED by the owner 2026-09-27 (conserving usage) - come back to it.** **Trams left
-  off built maps - owner decides case by case (listed 2026-09-27, after "trams count").** Read-only list; nothing rescoped. Stops = distinct stop names in scope,
+  off built maps - owner decides case by case (listed 2026-09-27, after "trams count").**
+  **Estimated load and Staging's recommendations, saved for later (owner, 2026-09-27):
+  `docs/tram_rescope_estimate.md`**:
+  - the tram list first (it runs with wave 2);
+  - the light batch yes, REM first, D.C. once its service is verified;
+  - Paris T3 yes;
+  - the heavy three (Toronto, Milan, Prague) not yet: a label and legend
+    rule first, then a Toronto pilot;
+  - Barcelona likely yes, Hong Kong Tramways stays out, Cablebús yes;
+  - one batch overhead. About 55–85% of one 5-hour window in all.
+
+  Read-only list; nothing rescoped. Stops = distinct stop names in scope,
   from cached GTFS/OSM. Rescoping is main's work, city by city, after the owner decides.
   - **Recorded reason was only "not rapid transit / overlay" (reversed by the rule):**
     Toronto streetcars (18 routes, 476 stops); Milan (17 routes, 323 of 341; ATM publishes
@@ -264,7 +307,10 @@ brief names.
     guarded in `merge_append_only.py`, proven by `archive_decisions_selftest.py`.
     DECISIONS.md 222,930 -> 8,490 words.
   - [ ] **Run `python scripts/archive_decisions.py` at the start of each week** (cleanup
-    session, after the Sunday reset). Next: 2026-10-04.
+    session, after the Sunday reset). Next: 2026-10-04. In the same sitting run
+    `python scripts/efficiency_metrics.py --baseline` and show the owner the table: it is what
+    the owner's session-count decision waits on (baseline in
+    `docs/efficiency_review_2026-09-27.md`).
   - [ ] **The session count** - how many sessions run at once. A separate owner decision.
   - [ ] **The remaining findings, walked through with the owner** (asked 2026-09-27): 5
     (hand-kept documents that churn, e.g. a generated master list), what is left of 4

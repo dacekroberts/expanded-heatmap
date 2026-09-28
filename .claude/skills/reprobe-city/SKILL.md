@@ -13,8 +13,9 @@ Every step that moved it was a probe the original screen never ran. Evidence:
 `docs/global_country_shortlist.md`, the 2026-09-24 audit section; the brief is
 `docs/build_briefs/amsterdam.md`.
 
-**Two uses.** The **open screening gap** (17 rows in `docs/city_master_list.md`,
-each naming its next probe) — the question is whether a register exists at
+**Two uses.** The **open screening gap** (a section of `docs/city_master_list.md`,
+empty since 2026-09-24; its past rows, each naming its next probe, are in
+`docs/city_master_list_evidence.md`) — the question is whether a register exists at
 all. The **one-bucket cities in Band C** — the question is whether a SECOND
 source exists, and Step 4 is the step that matters.
 

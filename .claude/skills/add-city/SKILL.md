@@ -12,7 +12,7 @@ across four countries and most of what the skill had learned since came from
 the later ones. **Read `app/cities.py` for the current list.** Every step below
 either caught a real problem or is a design decision already made (see `docs/project_context.md`; the reasoning
 trail is in `DECISIONS.md`). If this is a fresh session, read those, plus
-`docs/city_shortlist.md` and `PLAN.md`, first.
+`docs/city_master_list.md` and `PLAN.md`, first.
 
 ## Adding a EUROPEAN city? Its region is `Europe`, and that is not negotiable
 
@@ -133,7 +133,7 @@ schema verification. Do this for every candidate before scaffolding:
    registration instructions when absent, and **never echo it, not even in an
    error message**, so the 401 path prints "the key was rejected" rather than
    the key. It is the agency's property and stays out of the repo. Record in
-   `docs/data_sources.md` that the city cannot be rebuilt from a clean checkout
+   the country's `docs/data_sources/<country>.md` that the city cannot be rebuilt from a clean checkout
    without it.
 3. **City boundary polygon.** Find a real GIS boundary layer (a regional
    MPO/COG portal is often the source, e.g. SANDAG). Not optional: San
@@ -143,20 +143,27 @@ schema verification. Do this for every candidate before scaffolding:
    plausibly crosses municipal borders.
 
 Only proceed once all three are confirmed live. If a city fails, record the
-real reason (cite the endpoint and response) in `docs/city_shortlist.md` and
-a `DECISIONS.md` entry, and move to the next candidate.
+real reason (cite the endpoint and response) as a row in the DISCARDED table
+of `docs/city_master_list.md`, whose evidence columns
+`scripts/check_discard_evidence.py` reads, and in a `DECISIONS.md` entry.
+Then move to the next candidate.
 
 **Give every probe an explicit output path under the session scratchpad.** The
 commands above are `curl`/`requests` dumps, and `-o la.json` writes wherever
 the shell happens to be: the 2026-09-18 screening left eight captures in the
 home directory, including a saved 404 and a file named `.json` that was HTML.
 Write probe output to the scratchpad (or a gitignored `data/<city>/raw/`), and
-put the *findings* in `docs/data_sources.md` and `docs/city_shortlist.md` - a
+put the *findings* in `docs/data_sources/<country>.md`, the city's
+`docs/build_briefs/<city>.md` and its row in `docs/city_master_list.md` - a
 raw capture is not a record, and it goes stale the moment the endpoint changes.
 
-**Record every confirmed source in `docs/data_sources.md` as you verify it** -
-endpoint, the server-side filter applied at download, and the date. That file
-is the project's master provenance list and the only way a build can be
+**Record every confirmed source in its country's file,
+`docs/data_sources/<country>.md`, as you verify it** - endpoint, the
+server-side filter applied at download, and the date, under the same table
+headings the other country files use. A country's first city creates the file
+and adds its row to the index at the top of `docs/data_sources.md`; required
+notices go in that entry point's numbered gate, not the country file. Those
+files are the project's master provenance list and the only way a build can be
 reproduced, because raw downloads are gitignored. Do it now, while the
 endpoints are in front of you: recording them later is how San Francisco's
 boundary layer ended up with no recorded URL at all. If an endpoint you tried
@@ -164,7 +171,7 @@ is dead, record that too, with its date - a replaced URL that leaves no trace
 hides the fact that dataset IDs get retired.
 
 4. **Licence and required notices, per source, in the same pass.** A city is
-   not verified until this is recorded in `docs/data_sources.md` alongside its
+   not verified until this is recorded in `docs/data_sources/<country>.md` alongside its
    endpoint. **Use the `read-licence` skill** - it carries the procedure plus
    the three corrections that motivated it, each of which came from not opening
    a page an earlier review had merely cited. The two steps most easily skipped:
@@ -625,7 +632,9 @@ clicking each marker opens its page, each switcher works, each map renders).
   alternative, workarounds (a mirror host, a hand-curated alias list), and
   known limitations. Counts go there, not in `project_context.md`.
 - Update `docs/project_context.md` (current state only - which cities exist,
-  what's distinctive; no counts), `docs/city_shortlist.md`, and tick or add
+  what's distinctive; no counts), `docs/city_master_list.md` (the Built
+  table, and the city's band row; `scripts/check_master_list_counts.py`
+  checks the counts), and tick or add
   items in `PLAN.md`.
 - **Add the city to `docs/map_inconsistencies.md`**: one row in each of its
   four tables, under its country, from the city's page, config and outputs;
@@ -640,11 +649,12 @@ clicking each marker opens its page, each switcher works, each map renders).
   followed for the US cities, and was silently skipped for every city that
   arrived through a country profile instead. The script checks that the
   city has a row in all three provenance tables, that **every URL its
-  `config.py` actually resolves to** appears in `docs/data_sources.md`, and
+  `config.py` actually resolves to** appears in `docs/data_sources.md` or a
+  `docs/data_sources/` country file, and
   that the notices list and `app/components.py`'s `_NOTICES` still match.
   A city listed under `KNOWN_GAPS` there is a defect with a date on it, not a
   city that passed.
-- **Confirm the city's licence rows are actually in `docs/data_sources.md`**
+- **Confirm the city's licence rows are actually in `docs/data_sources/<country>.md`**
   (Step 0 item 4) before calling the city done - endpoint, filter, retrieval
   date, licence, and any notice the source requires. A city whose data is
   mapped but whose terms are unrecorded is not finished, because the gap is
