@@ -94,7 +94,7 @@ CITIES = [
         "page": "pages/1_San_Diego_Heatmap.py",
         "coverage": "full",
         "placement": "Register coordinates (98.4%)",
-        "data_age": "Edition not stated; fetched 2026-09-18",
+        "data_age": "Fetched 2026-09-18 (no source date)",
         "blurb": "MTS Trolley (Blue, Orange, Green, Copper, Silver lines)",
         # East of its dot: it sits south-east of Los Angeles, so the two
         # names split left/below rather than colliding.
@@ -109,7 +109,7 @@ CITIES = [
         "page": "pages/2_San_Francisco_Heatmap.py",
         "coverage": "full",
         "placement": "Register coordinates",
-        "data_age": "Edition not stated; fetched 2026-09-19",
+        "data_age": "Fetched 2026-09-19 (no source date)",
         "blurb": "Muni Metro (J Church, K Ingleside, L Taraval, M Ocean View, N Judah, T Third Street) and the F Market & Wharves",
         "label_offset": ("middle", 0, -22),
     },
@@ -122,7 +122,7 @@ CITIES = [
         "page": "pages/3_Los_Angeles_Heatmap.py",
         "coverage": "full",
         "placement": "Register coordinates; corrupt ones geocoded (98.7%)",
-        "data_age": "Edition not stated; fetched 2026-09-19",
+        "data_age": "Fetched 2026-09-19 (no source date)",
         "blurb": "Metro Rail (A, B, C, D, E, K Lines)",
         # BELOW its dot, not west of it. Westward, "Los Angeles" ran off the
         # left edge at phone width - the "flush at 375 px" problem - and
@@ -171,7 +171,7 @@ CITIES = [
         "page": "pages/5_New_York_Heatmap.py",
         "coverage": "full",
         "placement": "Register coordinates, some geocoded (1.4% lost)",
-        "data_age": "Edition not stated; fetched 2026-09-21",
+        "data_age": "Fetched 2026-09-21 (no source date)",
         "blurb": "Subway trunk lines (8 Av, 6 Av, 7 Av, Lexington Av, Broadway, "
                  "Nassau St, Flushing, Crosstown, 14 St-Canarsie) and the Staten "
                  "Island Railway",
@@ -237,7 +237,7 @@ CITIES = [
         "page": "pages/8_Boston_Heatmap.py",
         "coverage": "narrowed",
         "placement": "Register coordinates",
-        "data_age": "Edition not stated; fetched 2026-09-21",
+        "data_age": "Fetched 2026-09-21 (no source date)",
         "blurb": "MBTA rapid transit (Red, Orange, Blue, Green Lines and the Mattapan Trolley)",
         # East of its dot, top of the eastern column - the northernmost of
         # the four, so it takes the largest upward offset.
@@ -345,7 +345,7 @@ CITIES = [
         # made. See pipeline/calgary/config.py.
         "coverage": "full",
         "placement": "Register coordinates",
-        "data_age": "Edition not stated; fetched 2026-09-21",
+        "data_age": "Fetched 2026-09-21 (no source date)",
         "blurb": "CTrain (Red and Blue Lines, 45 stations)",
         # Outside the default view, as every non-US city is - it keeps
         # fit_view's zoom pinned at 1.4525 so no existing label moves.
@@ -368,7 +368,7 @@ CITIES = [
         "page": "pages/13_Edmonton_Heatmap.py",
         "coverage": "full",
         "placement": "Register coordinates",
-        "data_age": "Edition not stated; fetched 2026-09-21",
+        "data_age": "Fetched 2026-09-21 (no source date)",
         "blurb": "ETS LRT (Capital, Metro and Valley Lines)",
         # OUTSIDE THE DEFAULT VIEW, like the other three Canadian cities. See
         # IN_DEFAULT_VIEW below.
@@ -415,7 +415,7 @@ CITIES = [
         "page": "pages/15_Mexico_City_Heatmap.py",
         "coverage": "full",
         "placement": "Register coordinates (100%)",
-        "data_age": "Edition not stated; fetched 2026-09-22",
+        "data_age": "Fetched 2026-09-22 (no source date)",
         "blurb": "Metro CDMX (Líneas 1–9, A, B and 12) and the STE Tren Ligero",
         "region": "Mexico",
         "country": "Mexico",
@@ -461,7 +461,7 @@ CITIES = [
         "page": "pages/16_Guadalajara_Heatmap.py",
         "coverage": "full",
         "placement": "Register coordinates",
-        "data_age": "Edition not stated; fetched 2026-09-22",
+        "data_age": "Fetched 2026-09-22 (no source date)",
         "blurb": "Tren Ligero (Líneas 1–4, across four municipios)",
         "region": "Mexico",
         "country": "Mexico",
@@ -563,7 +563,7 @@ CITIES = [
         "page": "pages/19_Dublin_Heatmap.py",
         "coverage": "full",
         "placement": "Register coordinates",
-        "data_age": "Edition not stated; fetched 2026-09-22",
+        "data_age": "Fetched 2026-09-22 (no source date)",
         "blurb": "Luas Red and Green Lines, and the DART",
         "region": "Europe",
         "country": "Ireland",
@@ -583,7 +583,7 @@ CITIES = [
         "page": "pages/20_Milan_Heatmap.py",
         "coverage": "full",
         "placement": "Register coordinates",
-        "data_age": "Edition not stated; fetched 2026-09-22",
+        "data_age": "Fetched 2026-09-22 (no source date)",
         "blurb": "Metro M1-M5 (rossa, verde, gialla, blu, lilla)",
         "region": "Europe",
         "country": "Italy",
@@ -744,7 +744,7 @@ CITIES = [
         "page": "pages/26_Oslo_Heatmap.py",
         "coverage": "full",
         "placement": "Joined by address (96.8%)",
-        "data_age": "Edition not stated; fetched 2026-09-24",
+        "data_age": "Fetched 2026-09-24 (no source date)",
         "blurb": "Ruter T-bane 1–5 and Trikk 12, 13, 15, 17, 18, 19",
         "region": "Europe",
         "country": "Norway",
