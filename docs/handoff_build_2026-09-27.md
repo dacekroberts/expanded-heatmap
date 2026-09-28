@@ -27,9 +27,18 @@ than adding an addendum.
   git will not put one branch in two worktrees. It is never needed: merge
   `origin/master` into this branch, and publish with
   `git push origin worktree-monterrey:master`.
-- **The main folder's local `master` is ~310 commits behind origin.** Never
-  read the main folder's files as current. Use `origin/master` (`git show`,
+- **Don't treat the main folder's files as current.** Cleanup fast-forwarded
+  it to origin/master on 2026-09-27 (it had been ~310 commits behind), but it
+  only moves when someone pulls it. Use `origin/master` (`git show`,
   `git diff`) after a `git fetch`.
+- **On master since this branch's base**, and arriving with the merge (Cleanup,
+  `8f9d118`):
+  - `drift_check.py` and `check_personal_exposure.py` print UTF-8 themselves,
+    so `PYTHONIOENCODING` is no longer needed.
+  - `osm.fetch()` refuses an all-zero `out count` answer, and
+    `overpass.osm.ch` is gone from every host list.
+  - A Czech city's config needs `RUIAN_CRS_CONTROL`.
+  - Riga has been re-rendered, so every map ships `JSON.parse`.
 - **Tell Staging and Cleanup your session name** (from `ListAgents`) so their
   relays reach you. They addressed the old one as "Main Building Session".
 - Check `get_usage` before big work, and confirm this week's cap with the owner.
