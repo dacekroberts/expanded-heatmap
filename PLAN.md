@@ -96,6 +96,26 @@ Desktop is unaffected — the label is fully visible there.
     `pipeline.osm.fetch`**, not the scratch `ovp.py`: since 2040dfc it refuses
     an all-zero `out count` answer, which the wave-1 scratch fetcher accepted
     (Amstelveen's density is still unmeasured for that reason).
+    - **Estimated load (2026-09-27, judgement; wave 1's cost was never
+      recorded)**: about **80–130% of one 5-hour window** (roughly 10–16% of
+      the weekly limit), so probably more than one window. The 5-hour window
+      is shared by every session, so the anchor may overstate.
+
+      | Group | Estimate |
+      |---|---|
+      | Tram-list count (read-only, cached OSM) | 5–8% |
+      | Canada, Brazil, Ireland (Brazil's national modules exist; Waterloo's ION the one real Canadian lead) | 15–25% |
+      | Spain, Italy (registers found city by city; many tram cities) | 30–45% |
+      | US (no national register, several sources per city, ~15–20 rail cities) | 30–50% |
+
+    - **Run order, agreed by the owner 2026-09-27**, after the 10pm reset:
+      1. The cheapest first: the tram-list count plus Canada, Brazil and
+         Ireland.
+      2. Read `get_usage` before and after, and rescale the other two
+         groups' estimates.
+      3. Spain and Italy next. The US waits for a later window if they land
+         near the top of their range.
+      4. Every screen agent fetches OSM through `pipeline.osm.fetch`.
   - [ ] **Tram rescopes of built cities held by the owner**, likely at the
     next reset; Cleanup's case-by-case list is in DECISIONS (2026-09-27).
 
