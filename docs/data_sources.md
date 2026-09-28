@@ -1106,9 +1106,11 @@ position (owner, 2026-09-27).**
   The consultation stays available as an owner act, not a prerequisite.
 - **Credit** (suggested, not prescribed): Daegu Metropolitan City,
   D-데이터허브 (`data.daegu.go.kr`), originally 한국지역정보개발원.
-- **Unverified**: the XLSX columns. The screen's profiler suppresses anything
-  containing 전화, which implies a phone column. Never publish it, and select
-  columns by exact name.
+- **The XLSX columns, measured 2026-09-27** (`docs/build_briefs/daegu.md`):
+  the phone column is **`소재지전화`**, never read. No 대표자 or 성명 column in
+  any of the eleven files a build reads. `권리주체일련번호` (the rights holder's
+  serial, in 축산판매업) and the tenure and rent columns are never read either.
+  Select columns by exact name.
 
 ### 🇧🇷 Brazil — IBGE's CNEFE 2022 (candidate, not built): the grant is a LAW, not a document
 
