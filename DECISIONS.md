@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**75 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**76 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
@@ -36,6 +36,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [staging worktree retired; its data/ was a real 1.09 GB copy, not a junction](#2026-09-28---staging-worktree-retired-its-data-was-a-real-109-gb-copy-not-a-junction)
 - [Two checks join the hook: stray bullets in the docs the app renders, and a master-list self-test that picks its own targets](#2026-09-28---two-checks-join-the-hook-stray-bullets-in-the-docs-the-app-renders-and-a-master-list-self-test-that-picks-its-own-targets)
 - [osaka and thin worktrees retired after review time landed them; Osaka checked live after the reboot](#2026-09-28---osaka-and-thin-worktrees-retired-after-review-time-landed-them-osaka-checked-live-after-the-reboot)
+- [city-landed sweep for Kobe, Osaka and the five tram rescopes: map_inconsistencies.md brought current](#2026-09-28---city-landed-sweep-for-kobe-osaka-and-the-five-tram-rescopes-map_inconsistenciesmd-brought-current)
 
 **2026-09-27**
 
@@ -2885,3 +2886,33 @@ Recorded by the cleanup session from the Main Building Session's findings of
     visible text is unchanged.
   - **Chicago (untouched control):** its map and OSM credit render, and
     Osaka is in its page list, so `cities.py` was reloaded.
+
+### 2026-09-28 - city-landed sweep for Kobe, Osaka and the five tram rescopes: map_inconsistencies.md brought current
+
+- **One file changed, `docs/map_inconsistencies.md`, by one
+  `cleanup-sweep` pass over all seven cities.** Kobe's and Osaka's rows in
+  tables A-D already matched their committed maps.
+- **Table B's pin figures were stale for the five tram rescopes,** because
+  their maps were re-rendered after the tram batch. The new figures come from
+  the committed maps: SF 5,065 / 5,568 / 2,159; Montréal 4,852 / 4,070 /
+  1,499; Madrid 26,189 / 16,238 / 8,070; Rome 38,121 / 14,534 / 8,084; Paris
+  40,771 / 32,871 / 11,859.
+- **Kobe and Osaka were added to the themes they belong to:**
+  - several registers;
+  - JR and the private railways drawn, cut at the city line (the owner's
+    call in `japan-city`);
+  - Osaka's Hankai tram drawn, the AGT lines listed as other modes, and
+    Kobe's cable cars not drawn;
+  - stations lost; as-of dates; undercount and overcount; food trucks;
+  - line colours.
+- **Seoul, Hong Kong, Taichung and Taoyuan were missing from theme 7**
+  (share inside the rings). Added, re-parsed from their maps: 94%, 91%, 19%
+  and 12%.
+- **Checks:** `check_inconsistency_list` 51 of 51. The 16 "only city" flags
+  from `check_stale_claims --only E` were re-read against the seven cities;
+  none had gone false.
+- **One wording draft is queued for review time,** in the handoff's queue:
+  Vancouver's "as in every city here" in `excluded_categories.md`. Kobe and
+  Osaka keep manufacturing permits as Retail, so the phrase no longer holds.
+- **Not audited:** the other hand-kept counts `check_stale_claims` flags (59
+  in all). Only those touching these seven cities were read.
