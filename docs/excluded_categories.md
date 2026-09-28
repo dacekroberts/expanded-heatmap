@@ -57,17 +57,19 @@ Santa Cruz and Belford Roxo lines in Rio de Janeiro, Metrofor's three diesel
 lines in Fortaleza, the two diesel VLTs in Recife, Vivi's suburban trains in Riga, and AREX and
 GTX-A in Seoul.
 
-**Trams are NOT excluded as a class, and the test is whether the tram is the
-rapid-transit system or an overlay on one.** Many of these maps draw light rail
+**Trams are NOT excluded as a class. A tram is drawn where it is the
+rapid-transit system, or where it reaches districts the metro does not; it is
+left out where it only runs over the top of a metro.** Many of these maps draw light rail
 - San Diego, San Francisco, Los Angeles, Edmonton, Calgary, Miami and Dublin
 among them - Marseille draws its three Tramway lines beside its two Métro
 lines, and Toulouse draws T1 beside Métro A and B. Where a tram network is left
 out, the city already has a metro and the trams run over the top of it: Milan's
 17 tram routes stop a block or two apart and the agency publishes no colour for
 any of them, and Barcelona's tram falls outside the network-identity test that
-picks out its metro. San Francisco's F Market heritage streetcar and its cable
-cars are out on that same ground rather than on any question of mode: both are
-separately branded services running beside Muni Metro rather than part of it.
+picks out its metro. San Francisco's cable cars are out as a different mode. Its
+F Market & Wharves streetcar, once left out as a separately branded service, is
+drawn for its waterfront, as Rome's tram 8, Madrid's Metro Ligero line 1, Paris's
+T3a and T3b and Montréal's REM are drawn for districts their metros do not reach.
 Toulouse's cable car is the proof that "cable car" is not itself a reason. Riga has no metro at all, so its seven tram routes are the network, and all are drawn.
 
 **The line is drawn by station spacing and service frequency, not by which
@@ -118,9 +120,9 @@ repository, and every one of them is counted in the table on this page.
   "next to a station". Where that happens, surface stops are thinned to roughly
   one every half mile measured along the line's own route, while every
   underground station, every terminus and every interchange is kept. It applies
-  to San Francisco's Muni Metro, Philadelphia's trolleys, the Boston Green
-  Line's surface branches, the trams of Amsterdam and Rotterdam, and Hong Kong's
-  Light Rail. The reasoning is in
+  to San Francisco's Muni Metro and F Market & Wharves, Philadelphia's
+  trolleys, the Boston Green Line's surface branches, the trams of Amsterdam and
+  Rotterdam, Rome's tram 8, and Hong Kong's Light Rail. The reasoning is in
   `docs/sub_transit_line_filters.md`.
 
 **A thinned stop does not leave a hole in the map.** Stops are thinned to half a

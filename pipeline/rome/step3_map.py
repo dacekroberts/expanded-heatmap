@@ -61,7 +61,7 @@ def main():
     print(f"  {len(stations):,} stations, {len(businesses):,} storefronts")
     render_heatmap(
         output_path=HEATMAP_HTML,
-        map_title="Rome Metro and Roma–Viterbo Business Density Heatmap",
+        map_title="Rome Metro, Roma–Viterbo and Tram 8 Business Density Heatmap",
         city_name="Rome",
         system_name=SYSTEM,
         stations=stations,

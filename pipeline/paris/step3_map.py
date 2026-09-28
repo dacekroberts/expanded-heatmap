@@ -150,7 +150,7 @@ def main():
 
     render_heatmap(
         output_path=HEATMAP_HTML,
-        map_title="Paris Metro Business Density Heatmap",
+        map_title="Paris Métro and Tram Business Density Heatmap",
         city_name="Paris",
         system_name="Métro and Tram",
         stations=stations,

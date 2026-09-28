@@ -87,7 +87,7 @@ def main():
 
     render_heatmap(
         output_path=HEATMAP_HTML,
-        map_title="Métro de Montréal: commercial density around stations",
+        map_title="Métro and REM de Montréal: commercial density around stations",
         city_name="Montréal",
         system_name="Métro and REM",
         stations=pd.read_csv(STATIONS_CSV),

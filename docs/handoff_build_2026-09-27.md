@@ -39,7 +39,7 @@ deploy-verify (`scope: map-chrome` or `full`, the owner's pick), one reboot.
   57 stations.
 
 **NOT app-free:** the batch needs a new Réseau express métropolitain credit
-(notice 50) and an amended CRTM credit (notice 20, now covering ML1) in
+(notice 51) and an amended CRTM credit (notice 20, now covering ML1) in
 `app/components.py`. Both are written on the branch, in wording the owner
 approved 2026-09-27. So the publish runs
 `check_deploy_imports.py` and needs a reboot. Landing: DECISIONS.md conflicts

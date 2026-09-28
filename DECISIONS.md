@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**46 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**47 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Tram rescopes, review time: the owner's calls, the page texts written, and the REM's notice renumbered 51](#2026-09-27---tram-rescopes-review-time-the-owners-calls-the-page-texts-written-and-the-rems-notice-renumbered-51)
 - [The REM's licence verdict, and two credits the tram batch cannot publish without (Cleanup's review)](#2026-09-27---the-rems-licence-verdict-and-two-credits-the-tram-batch-cannot-publish-without-cleanups-review)
 - [Measured before the shared thin() refactor: haversine vs projected moves no stop in Rotterdam or Amsterdam, but 62 reason strings change](#2026-09-27---measured-before-the-shared-thin-refactor-haversine-vs-projected-moves-no-stop-in-rotterdam-or-amsterdam-but-62-reason-strings-change)
 - [Tram rescope 5 of 5: San Francisco's F Market & Wharves drawn and thinned; two stacked stops merged into their subway stations (held for review time)](#2026-09-27---tram-rescope-5-of-5-san-franciscos-f-market-wharves-drawn-and-thinned-two-stacked-stops-merged-into-their-subway-stations-held-for-review-time)
@@ -79,6 +80,40 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Tram rescopes, review time: the owner's calls, the page texts written, and the REM's notice renumbered 51
+
+- **The owner settled the batch's open calls at review time.** T3a keeps
+  #FF7429 (the rule's smallest lighter step, 13.9 from Ligne 5), rather than
+  moving off orange as the bis lines did. The F keeps its whole route,
+  Market St stretch included, as built (57 stations), rather than a new
+  "overlay stops" rule. The REM and amended CRTM credits were approved
+  earlier (`df4cf7b`).
+- **The page texts, blurbs, map titles and `excluded_categories.md` wording
+  for all five cities were written as drafted and approved.**
+  - Titles name the new lines.
+  - Montréal: the REM paragraph, its seven excluded stations, and five of its
+    stations in related municipalities. Checked by spatial join: Mont-Royal,
+    Pointe-Claire (2), Kirkland and Sainte-Anne-de-Bellevue; none in the
+    unsurveyed Hampstead or L'Île-Dorval.
+  - Rome: "Six lines", tram 8's paragraph and thinning; "about half" in the
+    rings became "about three in five" (61%).
+  - Madrid: ML1's paragraph; "Forty-nine of the 249 stations on the lines
+    drawn here", Cleanup's catch.
+  - Paris: T3a/T3b and their colours, stated as this project's; T2/T9 as
+    stubs.
+  - San Francisco: seven lines; the F drawn for the waterfront.
+  - The excluded-categories tram test now reads "drawn where it is the
+    rapid-transit system, or where it reaches districts the metro does not",
+    and the thinning list adds the F and Rome's tram 8.
+  The five maps were re-rendered for the titles alone; counts are unchanged.
+- **REM's notice is 51, not 50: Kobe landed first with 50** (Cleanup). The
+  number is changed in `docs/data_sources.md`, `docs/data_sources/canada.md`,
+  `app/components.py`'s comment and the build handoff. On this branch alone
+  `check_provenance.py` now reports the notice numbers as 1-49 then 51. That
+  is the one check failing (18 of 19), and it is filled by the merge with
+  `worktree-kobe`, whose `data_sources.md` carries 50 and no 51. The two
+  data-source rows' "held for review time" notes were made plain statements.
 
 ### 2026-09-27 - The REM's licence verdict, and two credits the tram batch cannot publish without (Cleanup's review)
 

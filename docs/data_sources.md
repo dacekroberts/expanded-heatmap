@@ -1647,7 +1647,7 @@ describe-the-changes line and a non-endorsement line. Wording approved by the ow
 `check_personal_exposure.py busan`, run 2026-09-27 (the verdict is in `DECISIONS.md`). Any
 objection from Busan is honoured, not argued.
 
-**50. Réseau express métropolitain (Montréal) — required, and DISPLAYED with the
+**51. Réseau express métropolitain (Montréal) — required, and DISPLAYED with the
 tram batch** (written into `render_site_notices()` 2026-09-27, wording approved
 by the owner; displayed once the batch lands, as the REM maps are).
 Added 2026-09-27 with the tram rescope, which draws the REM from its own GTFS.

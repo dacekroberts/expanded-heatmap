@@ -518,7 +518,7 @@ _NOTICES = [
      "property of the Société de transport de Montréal, used under the "
      "Creative Commons Attribution 4.0 International licence.",
      False),
-    # The REM, added 2026-09-27 with the tram rescope (notice 50). CC BY 4.0
+    # The REM, added 2026-09-27 with the tram rescope (notice 51). CC BY 4.0
     # from the licence file bundled in the feed, which names no licensor, so
     # the credit goes to the creator feed_info/agency.txt identify - not
     # Pulsar, which serves the file. The licence prescribes no wording; it

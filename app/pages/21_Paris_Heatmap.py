@@ -24,21 +24,26 @@ set_base_font()
 
 render_city_nav("Paris")
 
-st.title("Paris: commercial density around Métro station areas")
+st.title("Paris: commercial density around Métro and tram station areas")
 
+# Trams T3a and T3b added 2026-09-27 (the tram rescope), wording approved by
+# the owner.
 st.markdown(
     """
 Sixteen Métro lines are drawn — Lignes 1 to 14 plus the two short branch lines,
 3bis and 7bis. Each is labelled on the map and in the legend, redrawn from
-Île-de-France Mobilités' own published geometry.
+Île-de-France Mobilités' own published geometry. Trams T3a and T3b are drawn
+too. They circle the city along the boulevards des Maréchaux and reach the edge
+districts between the Métro's radial ends. Île-de-France Mobilités gives them
+the same colours as Lignes 5 and 12, so this map draws them in lighter shades of
+its own. Those two colours are this project's, not RATP's.
 
 The map covers the **commune of Paris**. Métro stations outside it are not
 drawn, and every one is listed by name, with the commune it stands in, in
 `outputs/paris/excluded_stations.csv`. RER and Transilien are absent by a rule
-this project applies everywhere: they are commuter rail. The trams are absent
-by a narrower test — several maps on this site do draw light rail, and the
-question is whether the tram *is* the city's rapid-transit system or a
-street-running overlay on one. In Paris it is an overlay on the Métro.
+this project applies everywhere: they are commuter rail. The other trams are
+absent: T2 and T9 each have only a few stops inside the commune, and the rest
+never enter it.
 
 Businesses come from **SIRENE**, France's national register of établissements,
 joined to INSEE's separate geolocation file. Records INSEE marks non-diffusible

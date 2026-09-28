@@ -77,7 +77,7 @@ def main():
 
     render_heatmap(
         output_path=HEATMAP_HTML,
-        map_title="San Francisco Muni Metro Business Density Heatmap",
+        map_title="San Francisco Muni Metro and F Market Business Density Heatmap",
         city_name="San Francisco",
         system_name="Muni Metro",
         stations=pd.read_csv(STATIONS_CSV),

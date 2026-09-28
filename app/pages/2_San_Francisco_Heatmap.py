@@ -23,13 +23,16 @@ set_base_font()
 
 render_city_nav("San Francisco")
 
-st.title("San Francisco: commercial density around Muni Metro station areas")
+st.title("San Francisco: commercial density around Muni Metro and F-line station areas")
 
+# The F Market & Wharves added 2026-09-27 (the tram rescope), wording approved
+# by the owner.
 st.markdown(
     """
-Stations are represented by blue dots along Muni Metro's six lines (J
-Church, K Ingleside, L Taraval, M Ocean View, N Judah, T Third Street -
-each labeled directly on the map and in the legend). Every underground
+Stations are represented by blue dots along seven lines: Muni Metro's six (J
+Church, K Ingleside, L Taraval, M Ocean View, N Judah, T Third Street) and the
+F Market & Wharves streetcar, each labeled directly on the map and in the
+legend. Every underground
 subway station is shown; the street-running stretches of each line are
 thinned to roughly one station per half mile (plus each line's terminals
 and any transfer points) so the rings stay readable - the excluded
@@ -39,9 +42,10 @@ stations are documented in `outputs/san_francisco/excluded_stations.csv`.
 county lines, and commuter rail is left out here as on most maps on this site.
 Where BART and Muni Metro share a station, the station is here as the Muni one
 it also is — Embarcadero, Montgomery, Powell and Civic Center are all mapped,
-as are the Balboa Park and Glen Park interchanges. The F Market heritage
-streetcar and the cable cars are out too: a separately branded service, and a
-different mode.
+as are the Balboa Park and Glen Park interchanges. The cable cars are out, as a
+different mode. The F Market & Wharves streetcar is drawn, because it runs along
+the Embarcadero to Fisherman's Wharf, which no Muni Metro line reaches. Where it
+stops directly above a Muni Metro station, the two count as one station.
 
 Concentric ring boundaries and NAICS-geocoded storefronts are toggleable
 via the layer control in the top left. When enabled, business density
