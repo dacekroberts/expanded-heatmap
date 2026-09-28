@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**84 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**85 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Before Tokyo: a ward-source skill and share check here, a research worktree for the missing wards, hollow stations where a ward has no data (owner)](#2026-09-28---before-tokyo-a-ward-source-skill-and-share-check-here-a-research-worktree-for-the-missing-wards-hollow-stations-where-a-ward-has-no-data-owner)
 - [Kyoto built on the shared Japanese modules: Japan's fifth city (held for review time)](#2026-09-28---kyoto-built-on-the-shared-japanese-modules-japans-fifth-city-held-for-review-time)
 - [Kyoto steps 1-3 on a rebuilt register, pinned at 2026-07-31; its funiculars left out after all (owner)](#2026-09-28---kyoto-steps-1-3-on-a-rebuilt-register-pinned-at-2026-07-31-its-funiculars-left-out-after-all-owner)
 - [Fukuoka built on the shared Japanese modules: Japan's fourth city (held for review time)](#2026-09-28---fukuoka-built-on-the-shared-japanese-modules-japans-fourth-city-held-for-review-time)
@@ -120,6 +121,30 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Before Tokyo: a ward-source skill and share check here, a research worktree for the missing wards, hollow stations where a ward has no data (owner)
+
+- **The owner's order for Tokyo's groundwork**, from this session's five
+  suggestions: (1) a `tokyo-ward` skill making "a ward is a source" routine,
+  with a per-source municipality in the shared step 2; (2) a per-ward share
+  check against the official count, run every build; then, at the end,
+  (4) rail at Tokyo's scale (N02's legal lines against the public service
+  lines that share track; a spatial colour search and a phone-width label
+  budget) and (5) notices built from config. (1) and (2) are this session's,
+  on `worktree-japan`.
+- **A research worktree, `tokyo-sources`** (branch `worktree-tokyo-sources`,
+  from `origin/master` at `a21bf37`; `data/` and `.venv-lean` junctions),
+  for a fresh session: licence reads for the PDF-only full lists (Ōta,
+  Arakawa; Kita's "not open data" confirmed), a `pdf-register` skill if one
+  is permitted, re-probes of Bunkyō, Suginami and Katsushika, and the stale
+  wards. Its output is one **ward card** per ward in the Tokyo brief, in the
+  shape the `tokyo-ward` skill reads. Handoff:
+  `docs/handoff_tokyo_sources_2026-09-28.md` on that branch.
+- **(3) decided: a station in a ward with no business data is drawn HOLLOW and
+  labelled "no business data"**, rather than left out - unless the research
+  worktree finds the ward's data. Ward boundaries still cannot be drawn (N03,
+  the Survey Act), so the station is the only place to say it. A shared
+  renderer change: held for the Tokyo build and review time.
 
 ### 2026-09-28 - Kyoto built on the shared Japanese modules: Japan's fifth city (held for review time)
 
