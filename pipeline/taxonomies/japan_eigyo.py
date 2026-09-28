@@ -29,9 +29,11 @@ import unicodedata
 FIELD_LABEL = "Permit type (営業の種類)"
 VALUE_COLUMN = "permit_type"
 # the 生活衛生 registers carry no food-permit type: `source` names the register
-# ("food", "barber", "beauty", "laundry"), and decides Personal services.
+# ("food", "barber", "beauty", "laundry", "coinlaundry"), and decides Personal
+# services. Coin laundries count (owner 2026-09-28: near transit they draw
+# steady short-term customers); Sapporo is the first city to publish them.
 EXTRA_COLUMNS = ("source",)
-PERSONAL_SOURCES = {"barber", "beauty", "laundry"}
+PERSONAL_SOURCES = {"barber", "beauty", "laundry", "coinlaundry"}
 
 # (rule name, bucket or None, pattern) - searched in the NORMALISED value.
 RULES = [
@@ -75,6 +77,11 @@ def explain(value, source="food"):
             return None, "storeless pick-up (not a premises)"
         if "移動" in str(value or ""):  # Kobe's 移動美容室: a salon in a vehicle
             return None, "mobile salon (not a premises)"
+        # Sapporo's 厚生施設理容所 / 厚生施設美容所: a barber or salon inside a
+        # hospital or care home, for its residents - not open to the public,
+        # as institutional catering is not (2026-09-28; 16 rows).
+        if "厚生施設" in str(value or ""):
+            return None, "welfare-facility salon (not open to the public)"
         # Osaka's laundry register: リネンサプライ (towel, oshibori and hospital
         # linen suppliers, many named 工場) is industrial, not a counter; owner
         # 2026-09-27. 一般リネン兼業 (a general laundry that also does linen) stays.
@@ -116,3 +123,6 @@ assert classify({VALUE_COLUMN: "無店舗取次店", "source": "laundry"}) is No
 assert classify({VALUE_COLUMN: "移動美容室", "source": "beauty"}) is None
 assert classify({VALUE_COLUMN: "リネンサプライ", "source": "laundry"}) is None
 assert classify({VALUE_COLUMN: "一般リネン兼業", "source": "laundry"}) == "Personal services"
+assert classify({VALUE_COLUMN: "コインランドリー", "source": "coinlaundry"}) == "Personal services"
+assert classify({VALUE_COLUMN: "厚生施設美容所", "source": "beauty"}) is None
+assert classify({VALUE_COLUMN: "一般理容所", "source": "barber"}) == "Personal services"

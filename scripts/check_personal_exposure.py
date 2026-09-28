@@ -261,6 +261,9 @@ REGISTRIES = {
     "osaka": dict(raw=None, trade=None, owner=None,
                   processed="businesses_clean.csv",
                   address=("address",), japan=True),
+    "sapporo": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv",
+                    address=("address",), japan=True),
     # Daegu: Seoul's register and pass through pipeline/countries/korea.py.
     # The health-food file's addresses are masked by the publisher; the Korean
     # residence test reads a masked 동/호 unit as a unit (korean_names.py).
