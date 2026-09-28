@@ -139,9 +139,12 @@ a rule, not before obeying one.
   deploying; compute the reboot question from the WHOLE push's `app/` diff. [#publish-city]
 - **Reading a source's terms? The `licence-read` agent** - one source per call,
   out of the main conversation. [#licence-read]
-- **Verify app changes with the `deploy-verify` agent**, and **always state a
-  scope**: `city-added`, `map-chrome`, `app-deps` or `full` (`full` only before
-  a real deploy or for a backlog). Skip it for pipeline-only work and doc
+- **Verify app changes with the `deploy-verify` agent - once per batch, at
+  review time** (`docs/review_time.md`); during the day a session checks its
+  own `app/` change with at most one quick browser render. **Always state a
+  scope**: `city-added`, `map-chrome`, `app-deps` or `full` (`full` for a large
+  batch). Approvals, `app/` landings and full re-renders also wait for review
+  time, which only the owner calls. Skip it for pipeline-only work and doc
   edits: `drift_check.py`, a grep of `app/` for folium/geopandas/shapely/pyproj
   imports, and one browser render cover those. [#deploy-verify]
 - **Write probe and scratch output to the session scratchpad directory, never
