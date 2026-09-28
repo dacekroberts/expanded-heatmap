@@ -75,6 +75,9 @@ FLAG_RE = re.compile(FLAG)
 BOLD = re.compile(r"\*\*(.+?)\*\*")
 SEP = re.compile(r"^\|[\s:|-]+\|\s*$")
 BAND_HEAD = re.compile(r"^## .*\bBand ([A-Z])\b")
+# Every band letter a candidate can sit in. N (no page for now) was created
+# and B reopened (passed: narrower pages) by the owner 2026-09-28, when C closed.
+LETTERS = "ABCDNT"
 
 
 # --- reading the file -------------------------------------------------------
@@ -241,7 +244,7 @@ def check(text):
             else:
                 ready.setdefault(letter, {})[k] = name
     actual = {letter: len(ready.get(letter, {})) for letter in bands}
-    for letter in "ABCDT":
+    for letter in LETTERS:
         actual.setdefault(letter, 0)
 
     for letter, (t, s, e, mem) in bands.items():
@@ -282,7 +285,7 @@ def check(text):
         if m and int(m.group(1)) != len(discards):
             problems.append(f"heading '{t}' but the discard table holds {len(discards)}")
 
-    candidates = sum(actual[x] for x in "ABCDT")
+    candidates = sum(actual[x] for x in LETTERS)
     m = find(lambda t: t.startswith("## Candidates"))
     if not m:
         problems.append("no '## Candidates - N' section")
@@ -377,7 +380,7 @@ def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
         if len(names) != c:
             problems.append(f"line {i + 1}: '{country}' counts {c} candidates but names "
                             f"{len(names)}: {', '.join(names)}")
-        listed = set(re.findall(r"\b[ABCDT]\b", row[bands_col])) if bands_col else set()
+        listed = set(re.findall(rf"\b[{LETTERS}]\b", row[bands_col])) if bands_col else set()
         for n in names:
             letter = band_of.get(key(n))
             if letter is None:
@@ -399,7 +402,7 @@ def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
         if _count(row[1]) != n_built or _count(row[2]) != candidates:
             problems.append(f"line {i + 1}: the Total row says {row[1]} built / {row[2]} "
                             f"candidates, the file holds {n_built} / {candidates}")
-        for letter, n in re.findall(r"\b([ABCDT]) (\d+)\b", " ".join(row[3:])):
+        for letter, n in re.findall(rf"\b([{LETTERS}]) (\d+)\b", " ".join(row[3:])):
             if int(n) != actual[letter]:
                 problems.append(f"line {i + 1}: the Total row says {letter} {n}, Band "
                                 f"{letter} holds {actual[letter]}")
@@ -407,7 +410,7 @@ def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
 
 
 def _sum(actual):
-    return " + ".join(f"{x} {actual[x]}" for x in "ACTDB" if actual[x] or x != "B")
+    return " + ".join(f"{x} {actual[x]}" for x in "ABCTDN" if actual[x] or x == "A")
 
 
 def subgroups(lines, start, end, letter):

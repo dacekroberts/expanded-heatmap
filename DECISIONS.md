@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**78 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**79 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Band C's last five get verdicts; Band B reopened for the passed, Band N created for no page, Band C closed (owner)](#2026-09-28---band-cs-last-five-get-verdicts-band-b-reopened-for-the-passed-band-n-created-for-no-page-band-c-closed-owner)
 - [Worktree `japan` created for a fresh session to build Fukuoka, then Kyoto, branched from build-sapporo (owner)](#2026-09-28---worktree-japan-created-for-a-fresh-session-to-build-fukuoka-then-kyoto-branched-from-build-sapporo-owner)
 - [Sapporo's brief corrected before the build; coin laundries count as Personal services (owner)](#2026-09-28---sapporos-brief-corrected-before-the-build-coin-laundries-count-as-personal-services-owner)
 - [One shared Japanese fetch: pipeline/countries/japan_fetch.py, before Sapporo](#2026-09-28---one-shared-japanese-fetch-pipelinecountriesjapan_fetchpy-before-sapporo)
@@ -114,6 +115,51 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Band C's last five get verdicts; Band B reopened for the passed, Band N created for no page, Band C closed (owner)
+
+- **The five cities awaiting the Band C memo's verdict were settled as
+  recommended (owner), after two probes the owner ordered:**
+  - **Incheon: PASS, to B.** Its coordinates were the open question. The
+    two-hop route through parcel ids has no keyless file (juso's geometry and
+    coordinate products are application-only; V-World is geo-blocked to
+    Korea; nsdi.go.kr is retired). A one-hop file was found instead: the
+    Korea Elevator Safety Agency's lift-building coordinates (data.go.kr
+    15156424, 36.4 MB, declared unrestricted; downloaded on the owner's OK to
+    `data/incheon/raw/` with its sha256). **Exact matches place 41.0% of
+    33,256 restaurants; interpolating along the road between the two nearest
+    listed buildings (the owner's ground-floor workaround) adds 30.3%, for
+    71.3%.** Leave-one-out on 2,000 listed buildings: median error 15 m
+    between same-side neighbours, 52 m either side. Extrapolated pins
+    (11.4%, median 74 m, 90th percentile 526 m) are dropped; about 16%
+    unplaced, disclosed. Before a build: the file's licence read and
+    `data_sources` row, the health-food apartment-unit filter, and a 법정동
+    mapping for the 2026-07-01 district reorganisation on any refresh.
+  - **Gyeonggi satellites: PASS, to B**, the café file's gap disclosed; the
+    hold lapsed when Daegu and Busan were built. Which satellites is the
+    brief's question.
+  - **Ottawa: to T (EDGE)**: O-Train light rail with no metro, so trams are
+    its first blocker, as for Kitchener–Waterloo; it carries its food-only
+    gap there.
+  - **Palma: no page**: food only, with an address join for 87% of rows.
+  - **Baltimore: no page**: food only (1,327 restaurants). The probe listed
+    every item in Maryland's portal (1,531), the city's hub (693), iMAP
+    (1,423) and 175 city map services: no premises register for retail or
+    personal services; barber and cosmetology licences are a name-search page
+    only. Rail measured: SubwayLink 11 stations and Light RailLink 16 stops
+    inside the city.
+- **The owner restructured the bands around the verdicts:** **Band B
+  reopened as "Passed: narrower pages"** (Stockholm, Bucharest, Incheon, the
+  Gyeonggi satellites); **a new Band N, "No page for now"** (Singapore,
+  Yokohama, Palma, Baltimore); **Band C closed**, its condition true of no
+  city. Rejected: re-captioning C around the no-page cities, which the list's
+  own rule forbids (a band whose condition stops being true closes).
+  Candidates stay 73 on master: A 4 · B 4 · T 51 · D 10 · N 4 (Sapporo, on
+  its branch, makes A 3 when it lands).
+- **Checks changed with it** (Cleanup's scripts, told): the band letters in
+  `check_master_list_counts.py` became `LETTERS = "ABCDNT"`, and four
+  `check_master_list_counts_selftest.py` cases aimed at Band C's text were
+  re-aimed at B and T; 18 of 18 behave. Nothing a check decides was relaxed.
 
 ### 2026-09-28 - Worktree `japan` created for a fresh session to build Fukuoka, then Kyoto, branched from build-sapporo (owner)
 
