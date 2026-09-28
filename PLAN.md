@@ -45,6 +45,13 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - **Scope**: city only or "(Regional)".
   - **Network type**: metro, trams only (Riga today), or EDGE. It could
     become a macro-map tier once Band T builds exist.
+  - **The borderline "Full" cities' caveats (owner 2026-09-28)**, each on its
+    own page: **Brazil's nine** (a third to half of plausible storefronts
+    unreadable and dropped, across every bucket); **New York** (retail thinner
+    than its other layers, from four registers); **San Francisco** and **Los
+    Angeles** (9-37% of rows without an industry code, a floor on every
+    bucket); **Taichung** and **Taoyuan** (only 12-19% of storefronts in a
+    ring: one line through a large city). Each stays Full on the macro map.
   - [ ] **Macro-map completeness tiers: APPROVED (owner 2026-09-28)**, not
     tied to the wait above. Dots coloured **Full #0D9488** (the current teal)
     · **Narrowed #9333EA** · **One bucket #C2410C**, one set for both themes
