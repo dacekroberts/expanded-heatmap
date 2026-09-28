@@ -56,6 +56,16 @@ def need(path, slug):
     return path
 
 
+def source_rows(config, key):
+    """A source's rows: its file, or config.source_rows(key) where a city's
+    source is not one file - Kyoto's rebuilt food register
+    (japan_register.kyoto_permit_stream) and its registers, each a complete
+    list plus the months since (2026-09-28)."""
+    if hasattr(config, "source_rows"):
+        return config.source_rows(key)
+    return jr.city_rows(need(config.source_csv(key), config.SLUG))
+
+
 def key_addr(a):
     return re.sub(r"[‐‑‒–—―−ｰー－]", "-", unicodedata.normalize("NFKC", a or "").replace(" ", "").replace("　", ""))
 
@@ -138,7 +148,7 @@ def run(config, write=True):
 
     permits = []
     for key in config.SOURCES:
-        rows = list(jr.city_rows(need(config.source_csv(key), config.SLUG)))
+        rows = list(source_rows(config, key))
         missing = [c for c in config.REQUIRED_COLUMNS[key] if c not in rows[0]]
         if missing:
             sys.exit(f"{key}: header lacks {missing}")

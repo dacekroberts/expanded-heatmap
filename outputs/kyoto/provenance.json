@@ -1,0 +1,925 @@
+{
+  "city_00414_15447": {
+    "bytes": 9071104,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00414/",
+    "file": "00414/00414_15447_令和3年3月末時点許可施設一覧（全市）.xls",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:06+00:00",
+    "sha256": "ecfa33b140e28031d33bd5d549421c7682dda1b79472380056438c10c708fcf9",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=15447"
+  },
+  "city_00414_15533": {
+    "bytes": 47363,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00414/",
+    "file": "00414/00414_15533_許可施設一覧（令和3年4月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:01+00:00",
+    "sha256": "ad331d3949dd63d18becc11f8e24a54420d5c3ad10911dade071abf98bc59aa1",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=15533"
+  },
+  "city_00414_15570": {
+    "bytes": 52978,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00414/",
+    "file": "00414/00414_15570_許可施設一覧（令和3年5月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:00+00:00",
+    "sha256": "bb9351732dae23f9666d48589e3ffcdc36684bffc820f2a4167546fb9488d31e",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=15570"
+  },
+  "city_00530_21186": {
+    "bytes": 88829,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00530/",
+    "file": "00530/00530_21186_20260417171136_理容所営業施設一覧(令和8年3月末時点)(Excel).xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:37+00:00",
+    "sha256": "dbfe69cf13e4e9d9fd1c4a4a021cbe0382e901a8da0d08905f5a5082315ceb18",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21186"
+  },
+  "city_00530_21188": {
+    "bytes": 355972,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00530/",
+    "file": "00530/00530_21188_20260417171210_美容所営業施設一覧(令和8年3月末時点)(Excel).xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:35+00:00",
+    "sha256": "a35c21a0975bc72be37e4d637c4e8cf78c6d539772abc8ee37f8ff5abd57cf5e",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21188"
+  },
+  "city_00530_21190": {
+    "bytes": 74876,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00530/",
+    "file": "00530/00530_21190_20260417171250_クリーニング所営業施設一覧(令和8年3月末時点)(Excel).xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:34+00:00",
+    "sha256": "50699459b2f7141bd0b5b6c1ed78757f0e809d2404c8b8d00d2fc165ea47f97f",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21190"
+  },
+  "city_00530_21216": {
+    "bytes": 10408,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00530/",
+    "file": "00530/00530_21216_20260519150342_理容所施設一覧（令和８年４月新規）excel.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:33+00:00",
+    "sha256": "10f37f145d9ef90d12a2b93077ee4e6d0f0ae720d56c23842d87464c53c6f44c",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21216"
+  },
+  "city_00530_21218": {
+    "bytes": 12136,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00530/",
+    "file": "00530/00530_21218_20260519150542_美容所施設一覧（令和８年４月新規）excel.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:32+00:00",
+    "sha256": "f67f4d448112e6ea592ab3898de76435187b7816427d593c3e069bc5c0cd4ac9",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21218"
+  },
+  "city_00530_21259": {
+    "bytes": 10156,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00530/",
+    "file": "00530/00530_21259_20260623163755_理容所施設一覧（令和８年５月新規）excel.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:31+00:00",
+    "sha256": "232bb3bb41b01633df5caea4c6cd83c330bc40eba9d44d91110daa14a2098687",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21259"
+  },
+  "city_00530_21261": {
+    "bytes": 11967,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00530/",
+    "file": "00530/00530_21261_20260623163842_美容所施設一覧（令和８年５月新規）excel.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:30+00:00",
+    "sha256": "305dc38d4ab059000f9a2c2d259bf71e2e4ff34e1e0e381f904918879cf40b68",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21261"
+  },
+  "city_00530_21263": {
+    "bytes": 10177,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00530/",
+    "file": "00530/00530_21263_20260623163921_クリーニング所施設一覧（令和８年５月新規）excel.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:29+00:00",
+    "sha256": "eea4b22b24aa52b3e14c9b57accb68d98691e1571a50d371a2770e15c8486ca3",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21263"
+  },
+  "city_00530_21320": {
+    "bytes": 10254,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00530/",
+    "file": "00530/00530_21320_20260724163636_理容所施設一覧（令和８年６月新規）excel.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:28+00:00",
+    "sha256": "ea6d860140478e185f454f6d8a284d28529a312011e7b696b884278b14012e6f",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21320"
+  },
+  "city_00530_21322": {
+    "bytes": 12080,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00530/",
+    "file": "00530/00530_21322_20260724163751_美容所施設一覧（令和８年６月新規）excel.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:27+00:00",
+    "sha256": "bb2401739360a5733023de9189b02e8fb28ed5e63ee79c77b8d9389a867e84d3",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21322"
+  },
+  "city_00530_21324": {
+    "bytes": 10180,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00530/",
+    "file": "00530/00530_21324_20260724163818_クリーニング所施設一覧（令和８年６月新規）excel.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:26+00:00",
+    "sha256": "68e86ac2484c7140d306c70ebe408fc64ddfffbd6b2042346d24772dfdd95f40",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21324"
+  },
+  "city_00530_21413": {
+    "bytes": 10173,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00530/",
+    "file": "00530/00530_21413_20260820153227_理容所施設一覧（令和８年７月新規）excel.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:25+00:00",
+    "sha256": "ab173a56894b633cff901619267a1c4d9cec10323de124cf5fb443549da093c9",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21413"
+  },
+  "city_00530_21415": {
+    "bytes": 11682,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00530/",
+    "file": "00530/00530_21415_20260820153329_美容所施設一覧（令和８年７月新規）excel.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:24+00:00",
+    "sha256": "57ec4d3d02a4cffe7b0ee572c258ddcb6d2ae83bb91ca45b0cf65dad78dbf447",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21415"
+  },
+  "city_00530_21417": {
+    "bytes": 10292,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00530/",
+    "file": "00530/00530_21417_20260820153353_クリーニング所施設一覧（令和８年７月新規）excel.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:23+00:00",
+    "sha256": "bd3063286396de06dea18c1f2844d7797ecc710bcf6b1447a4964a70bc0b581f",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21417"
+  },
+  "city_00541_15820": {
+    "bytes": 79701,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_15820_許可取得施設一覧（令和3年6月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:22+00:00",
+    "sha256": "64415a77a20e2ab4732857256d6c1f7f75f66d48db915220d6f99d5c20f5999b",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=15820"
+  },
+  "city_00541_16122": {
+    "bytes": 55016,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_16122_許可施設一覧（R0307）_0.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:20+00:00",
+    "sha256": "526fbe080fd1e1322293b5690560fbfb2ed6390f79abd67ec4bc027c653fea38",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=16122"
+  },
+  "city_00541_16250": {
+    "bytes": 33435,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_16250_許可施設一覧（令和3年8月分）_0.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:19+00:00",
+    "sha256": "49209b567e3ca73d109fc31a1b3b9b12b85462c2397c65ddabc6e5e87927f8b9",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=16250"
+  },
+  "city_00541_16384": {
+    "bytes": 74936,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_16384_許可施設一覧（令和3年9月分）_1.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:18+00:00",
+    "sha256": "05e091f98455f4d53b1846abb080e822f21348f29313f61760555f2eee3575fd",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=16384"
+  },
+  "city_00541_16495": {
+    "bytes": 38718,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_16495_許可施設一覧（令和３年10月分）_0.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:17+00:00",
+    "sha256": "547d86fc66f4e22fd60105a2080c3e87893ce01c80dcce71a7f439784fc45764",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=16495"
+  },
+  "city_00541_16632": {
+    "bytes": 45079,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_16632_許可施設一覧（令和3年11月分）_0.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:16+00:00",
+    "sha256": "612e2fdd8b20660f8964429feb5bb32e2945b7219289d32aeec9bb819a0ca7d9",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=16632"
+  },
+  "city_00541_16634": {
+    "bytes": 37594,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_16634_新規許可施設一覧（令和3年12月分）_0.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:14+00:00",
+    "sha256": "308169e7107406e17506badb3b97ade79e41084875c0d3707f0d93cdeb75b675",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=16634"
+  },
+  "city_00541_16714": {
+    "bytes": 28656,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_16714_新規許可施設一覧（令和4年１月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:13+00:00",
+    "sha256": "25422613b62c45c881e016be09affd7cd55e7090083b8a03cb5d1a8b2b7f8130",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=16714"
+  },
+  "city_00541_16766": {
+    "bytes": 125810,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_16766_新規許可施設一覧（令和4年2月分）_0.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:12+00:00",
+    "sha256": "49ceaf77b13124e4133fde79498cdd541b608b8d2573d10ca20f8b4ea2efa430",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=16766"
+  },
+  "city_00541_17015": {
+    "bytes": 160078,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_17015_新規許可施設一覧（令和4年３月分）_1.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:11+00:00",
+    "sha256": "f1bc1b5b660c29c26d6668d7622da36672d3f287160fb1d4eee9e72fe5e9ac82",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=17015"
+  },
+  "city_00541_17082": {
+    "bytes": 39109,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_17082_新規許可施設一覧（令和４年４月分）_0.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:10+00:00",
+    "sha256": "cae918f5dc5b05d6c4fef458d302df4a797a17422c0846e500cee69eaeb9a142",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=17082"
+  },
+  "city_00541_17092": {
+    "bytes": 44423,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_17092_新規許可施設一覧（令和４年５月分）_0.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:08+00:00",
+    "sha256": "1c8b139baaad3ba35eae91252c68db5d54350c868170690396f33d1e33412b41",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=17092"
+  },
+  "city_00541_17132": {
+    "bytes": 75942,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_17132_新規許可施設一覧（令和４年６月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:07+00:00",
+    "sha256": "1979bfbf421ef11a3525ea7bfe4476e199584576863eebd14886d5c97dcfbf97",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=17132"
+  },
+  "city_00541_17230": {
+    "bytes": 49850,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_17230_新規許可施設一覧（令和４年7月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:06+00:00",
+    "sha256": "3e43ad8123167d2fb7deb855b208fb033bf5d896b73676c2547f7fb4ce86d81d",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=17230"
+  },
+  "city_00541_17325": {
+    "bytes": 34801,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_17325_新規許可施設一覧（令和４年8月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:05+00:00",
+    "sha256": "431967f309406eb8e9774a9d0b95528911c8a38554f970a131f2d88683cec0d1",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=17325"
+  },
+  "city_00541_17384": {
+    "bytes": 74343,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_17384_新規許可施設一覧（令和４年9月分）2.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:04+00:00",
+    "sha256": "b11d513bab0c71b712864c27db85ae07c429728b91c6895a685af4134e31b386",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=17384"
+  },
+  "city_00541_17625": {
+    "bytes": 46061,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_17625_新規許可施設一覧（令和４年10月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:02+00:00",
+    "sha256": "723aee9e59eecd8deb05872d238e9bdf88056f91dc602b0bec475728c3e98a89",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=17625"
+  },
+  "city_00541_17651": {
+    "bytes": 46935,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_17651_新規許可施設一覧（令和４年11月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:01+00:00",
+    "sha256": "1cb1349393293eaaa31e53e4334ff3fe017dfbdb31c4784bbdaa52a3244a630f",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=17651"
+  },
+  "city_00541_17723": {
+    "bytes": 32975,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_17723_新規許可施設一覧（令和４年12月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:59:00+00:00",
+    "sha256": "23681d3864af616bc42164b27ba74fba432fa0743cc35864fd58e65d0607a26a",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=17723"
+  },
+  "city_00541_17738": {
+    "bytes": 26476,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_17738_新規許可施設一覧（令和5年1月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:59+00:00",
+    "sha256": "c5429ad6aeb89dba07882bcef40c31ca273387c6e250c79b418d414e3a86c018",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=17738"
+  },
+  "city_00541_17773": {
+    "bytes": 112255,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_17773_新規許可施設一覧（令和5年2月分）1.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:58+00:00",
+    "sha256": "de56ccc11b7b42d678fe2946b61ef3dfa80bf8aba741ae82517ee6b7c88617f2",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=17773"
+  },
+  "city_00541_17835": {
+    "bytes": 137305,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_17835_新規許可施設一覧（令和5年3月分）1_0.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:56+00:00",
+    "sha256": "655e87fbc6c745c3829c37456e998f784b68f5c01933a1f5121d5cd50ab4c3c0",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=17835"
+  },
+  "city_00541_17859": {
+    "bytes": 46221,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_17859_新規許可施設一覧（令和5年4月分）1.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:55+00:00",
+    "sha256": "d224bb345444d03986d22b1c1790a42d19adfc5beb77b9cde8f79dfcfb3f0d68",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=17859"
+  },
+  "city_00541_17896": {
+    "bytes": 50527,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_17896_20230622095129_新規許可施設一覧（令和5年5月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:54+00:00",
+    "sha256": "2227c9ba508c8235d43d8fc53b4e72c0f810d8e4646957968af32233c393c6ac",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=17896"
+  },
+  "city_00541_18100": {
+    "bytes": 67832,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_18100_20230720085848_新規許可施設一覧（令和5年6月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:53+00:00",
+    "sha256": "81e0454df80f50ee1af02ba0010ad3575cf3d3921494fb99f6e71fe8d7d48779",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=18100"
+  },
+  "city_00541_18208": {
+    "bytes": 49837,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_18208_20230821162354_新規許可施設一覧（令和5年7月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:51+00:00",
+    "sha256": "a540c20fdf44d7c8ae036102c92f1666bc308927be450d33cef1f63f76c61da3",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=18208"
+  },
+  "city_00541_18286": {
+    "bytes": 36832,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_18286_20230928093139_新規許可施設一覧（令和5年8月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:50+00:00",
+    "sha256": "7badeb5eb3fe215e9d4ff3519bdd84c2023899d7fc8e8c04118dcca610add367",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=18286"
+  },
+  "city_00541_18337": {
+    "bytes": 64071,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_18337_20231102124609_新規許可施設一覧（令和5年9月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:49+00:00",
+    "sha256": "22e71d13346d7211ef87fa15bc20ecaf744170f69520750a9657f6b6c2e350c6",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=18337"
+  },
+  "city_00541_18532": {
+    "bytes": 46190,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_18532_20231128124435_新規許可施設一覧（令和5年10月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:48+00:00",
+    "sha256": "9e3bda6b14abaa7bdf9e150c389ae97d41bb151f426892ea9881431e45d297c8",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=18532"
+  },
+  "city_00541_18565": {
+    "bytes": 48630,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_18565_20240105095307_新規許可施設一覧（令和5年11月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:46+00:00",
+    "sha256": "39e1ab82f434e35592a89bbc5c54f7ba5e895ee45d7dae6dc427b85eeb199b95",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=18565"
+  },
+  "city_00541_18609": {
+    "bytes": 33765,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_18609_20240122132941_新規許可施設一覧（令和5年12月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:45+00:00",
+    "sha256": "03c160898d188ae4dc5e1c643045983359cb00cf71b19de5e42876860c52d044",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=18609"
+  },
+  "city_00541_18720": {
+    "bytes": 25441,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_18720_20240227134829_新規許可施設一覧（令和6年1月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:44+00:00",
+    "sha256": "330dbf84e6bdc44e466be5ba44090af65eac7f785b9fcb51d0f57f6bb154c168",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=18720"
+  },
+  "city_00541_18863": {
+    "bytes": 104570,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_18863_20240319084918_新規許可施設一覧（令和6年2月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:43+00:00",
+    "sha256": "528228a21dbf67ca96c8ccbee3d967e69074e9b8b0e85c81770be4fd0a2b9e3f",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=18863"
+  },
+  "city_00541_20028": {
+    "bytes": 139641,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20028_20240430110659_新規許可施設一覧（令和6年3月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:42+00:00",
+    "sha256": "9a9ddb572da319669f13aa8f7f4271447befd69b35d54126eb8ca76dd1f8fefa",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20028"
+  },
+  "city_00541_20063": {
+    "bytes": 38235,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20063_20240603112219_新規許可施設一覧（令和6年4月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:40+00:00",
+    "sha256": "31e6840b4ef90d40033e109963f3af6493093b096d605cfae3907dd792e7509a",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20063"
+  },
+  "city_00541_20087": {
+    "bytes": 44912,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20087_20240701145153_新規許可施設一覧（令和6年5月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:39+00:00",
+    "sha256": "cbda35bf37ffeefe00dc41ba6bd94344377fd2c6cdc7deb430553f94cacb3ec2",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20087"
+  },
+  "city_00541_20123": {
+    "bytes": 59599,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20123_20240726093419_新規許可施設一覧（令和6年6月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:38+00:00",
+    "sha256": "a4cd0e6eab04af104b6b2af9b7af6467b524728c68285294392f84fb4955c1d8",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20123"
+  },
+  "city_00541_20237": {
+    "bytes": 45454,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20237_20240903085129_新規許可施設一覧（令和6年7月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:37+00:00",
+    "sha256": "4123d845a7976e20b66274ab1c08cba50c50a8ba09fe1a4709d39635ce576515",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20237"
+  },
+  "city_00541_20317": {
+    "bytes": 32240,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20317_20241001103419_新規許可施設一覧（令和6年8月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:35+00:00",
+    "sha256": "506b392ed0ceacd1bf9273ec6e78ee398c7ef32a1cacee9e6ba241e348a7233a",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20317"
+  },
+  "city_00541_20387": {
+    "bytes": 60351,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20387_20241016135652_新規許可施設一覧（令和6年9月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:34+00:00",
+    "sha256": "691da728cda4d76177fa83d1ab9dc70978f97a93d4d34d906ee2c2d0ce8ad6f6",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20387"
+  },
+  "city_00541_20422": {
+    "bytes": 43509,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20422_20241122092757_新規許可施設一覧（令和6年10月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:33+00:00",
+    "sha256": "9ace0acc56141dc4ec13f3490ee0646c71d3abaffdad60a482479e5341ed8834",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20422"
+  },
+  "city_00541_20442": {
+    "bytes": 46580,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20442_20241227091853_新規許可施設一覧（令和6年11月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:32+00:00",
+    "sha256": "33167ea2d727d5b933ab8feb24411d49648a4fe9a7e88551e5a9742d4da97d4b",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20442"
+  },
+  "city_00541_20488": {
+    "bytes": 27366,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20488_20250120093912_新規許可施設一覧（令和6年12月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:30+00:00",
+    "sha256": "1c35310629664a5e5718902539e88dafcadf4b8e334e1c49e1e3d023a08f2b4c",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20488"
+  },
+  "city_00541_20523": {
+    "bytes": 31242,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20523_20250226165553_新規許可施設一覧（令和7年1月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:29+00:00",
+    "sha256": "143ed1bdd46d3aa74fd04b979a52e63920edecb259f0b020183260fa90229edc",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20523"
+  },
+  "city_00541_20550": {
+    "bytes": 112041,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20550_20250402115245_新規許可施設一覧（令和7年2月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:28+00:00",
+    "sha256": "83a756638adbb9315b66982a255ed0aa0f918b82061e014213afdfa40854a775",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20550"
+  },
+  "city_00541_20573": {
+    "bytes": 146173,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20573_20250416135711_新規許可施設一覧（令和7年3月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:27+00:00",
+    "sha256": "906f3c121e1b39417128e650e7ece7b74c0e26259879d933a031ebb29496696c",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20573"
+  },
+  "city_00541_20623": {
+    "bytes": 41806,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20623_20250821115457_食品営業許可施設一覧（令和７年４月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:26+00:00",
+    "sha256": "3ff578c8b8114bf7a5149f56ae20614487b150fc655d381f7d743bd5b190fc32",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20623"
+  },
+  "city_00541_20642": {
+    "bytes": 44456,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20642_20250821115617_営業許可施設一覧（令和７年５月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:25+00:00",
+    "sha256": "630ccfd972cab6d9119a02fa2609739ceeab126d3fb84e1d904368912341e6fd",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20642"
+  },
+  "city_00541_20691": {
+    "bytes": 67493,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20691_20250821115657_営業許可施設一覧（令和７年６月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:23+00:00",
+    "sha256": "5f00c89ed86d16deb36569c9194b0430da3d8db645fe8389610042225b856ccb",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20691"
+  },
+  "city_00541_20807": {
+    "bytes": 49249,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20807_20250825082650_営業許可施設一覧（令和７年７月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:22+00:00",
+    "sha256": "c7e94528e2704fe8f6c3884eab6f9abfb6fd728a153497a95eb388aee75b63c6",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20807"
+  },
+  "city_00541_20878": {
+    "bytes": 32700,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20878_20250926114054_営業許可施設一覧（令和７年８月分）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:21+00:00",
+    "sha256": "196b0cefae64bc970cdcdcf391b34277cb74f2deca34ece845c86c2c8f2f36c5",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20878"
+  },
+  "city_00541_20935": {
+    "bytes": 60569,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_20935_20251104155332_令和７年９月新規営業許可施設一覧.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:20+00:00",
+    "sha256": "ec172a8ab01c780d2010476e1237b016319747a588ae7ab835393448ce55800f",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=20935"
+  },
+  "city_00541_21002": {
+    "bytes": 39835,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_21002_20251204140215_営業許可施設一覧（令和７年１０月）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:18+00:00",
+    "sha256": "3401c0f9e7d154833684a406490daa4ada2de9e10083a1e9472c7b03ac4ef5ca",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21002"
+  },
+  "city_00541_21023": {
+    "bytes": 50459,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_21023_20251225105135_営業許可施設一覧（令和７年１１月）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:17+00:00",
+    "sha256": "e116c85df91e72e097f3522737b45a977d0160759c469b49361626cd900da7f1",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21023"
+  },
+  "city_00541_21079": {
+    "bytes": 30121,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_21079_20260130103234_営業許可施設一覧（令和７年１２月）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:16+00:00",
+    "sha256": "53248f840903fb575e680b7b181e44fc52c4f5dcc47516ab65c501b00d91624c",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21079"
+  },
+  "city_00541_21103": {
+    "bytes": 33939,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_21103_20260309091838_営業許可施設一覧（令和８年１月）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:15+00:00",
+    "sha256": "5829ff2545217309662cec4916bd79fbd892be5da9c34a21b8ead45e3c61c000",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21103"
+  },
+  "city_00541_21158": {
+    "bytes": 133960,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_21158_20260407101955_営業許可施設一覧（令和８年２月）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:14+00:00",
+    "sha256": "94d685d933376c6c162806186bd853df52644ad7ec476474155b2ac2384a4be6",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21158"
+  },
+  "city_00541_21244": {
+    "bytes": 172451,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_21244_20260610145419_営業許可施設一覧（令和8年3月）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:13+00:00",
+    "sha256": "734f6a8200833036c0726c3fe1acef48d6755845301b1e35326f4598b1f93ea3",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21244"
+  },
+  "city_00541_21246": {
+    "bytes": 40265,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_21246_20260610150424_営業許可施設一覧（令和8年4月）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:11+00:00",
+    "sha256": "3927b07f71b556aeb7310355b0aebbe3695245eb5d788f22d0a249803419f698",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21246"
+  },
+  "city_00541_21288": {
+    "bytes": 39220,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_21288_20260713083841_営業施設一覧（令和8年5月）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:10+00:00",
+    "sha256": "fa80eeb4895b826b321b477151963010f160d2c72405910e4592966e58f1c5fd",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21288"
+  },
+  "city_00541_21409": {
+    "bytes": 66451,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_21409_20260819102014_営業施設一覧（令和8年6月）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:09+00:00",
+    "sha256": "dd54cbdfb595e8d06d0d797a82165c94b467fc9044cec82b7f26a05cffbc8f69",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21409"
+  },
+  "city_00541_21424": {
+    "bytes": 44476,
+    "dataset_page": "https://data.city.kyoto.lg.jp/dataset/00541/",
+    "file": "00541/00541_21424_20260901090634_営業施設一覧（令和8年7月）.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:58:07+00:00",
+    "sha256": "17a0eae9e0bcfab3e7b5a764a5a5016634c035924fb5d3e6e4b5ca15ee331515",
+    "url": "https://data.city.kyoto.lg.jp/resource/?id=21424"
+  },
+  "isj_26101_block": {
+    "bytes": 111146,
+    "file": "26101-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:16+00:00",
+    "sha256": "2d4e478adb044776b68656c1e84f362aa4aa116558c15118e2b69a7e6851e8a3",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/26101-24.0a.zip"
+  },
+  "isj_26101_chome": {
+    "bytes": 11628,
+    "file": "26101-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:50+00:00",
+    "sha256": "60a443ab935128350276c90e43250556ea914c659272d1bec947ec4972c780c2",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/26101-19.0b.zip"
+  },
+  "isj_26102_block": {
+    "bytes": 81123,
+    "file": "26102-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:52+00:00",
+    "sha256": "b1c5924a1a7b354eeffaa1cfe7f28809855e437f83ae3012f7ffaa3a72922844",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/26102-24.0a.zip"
+  },
+  "isj_26102_chome": {
+    "bytes": 13705,
+    "file": "26102-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:53+00:00",
+    "sha256": "dc9c1380e9f0d258545e9ada2c978c4c9a410a204bf5c4be284cdbcbe5d44ea8",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/26102-19.0b.zip"
+  },
+  "isj_26103_block": {
+    "bytes": 185263,
+    "file": "26103-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:54+00:00",
+    "sha256": "711ac95425630751274fad78c9571686b3205d3f6d978511ffcf6a0246d0fde0",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/26103-24.0a.zip"
+  },
+  "isj_26103_chome": {
+    "bytes": 14111,
+    "file": "26103-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:55+00:00",
+    "sha256": "671f7a074a49d9e50c1ec07ac9963b88950d08f1358b73a41f054c05458e1783",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/26103-19.0b.zip"
+  },
+  "isj_26104_block": {
+    "bytes": 80468,
+    "file": "26104-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:56+00:00",
+    "sha256": "793abeb718cd2a9c3626f72b53743e05f7c495454032483e438ce35bbaf76eb6",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/26104-24.0a.zip"
+  },
+  "isj_26104_chome": {
+    "bytes": 12398,
+    "file": "26104-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:57+00:00",
+    "sha256": "2582560d070bc954278bb5d209d24c2e56b894529320a3aa4c6d1c6c0540aeee",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/26104-19.0b.zip"
+  },
+  "isj_26105_block": {
+    "bytes": 48500,
+    "file": "26105-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:57+00:00",
+    "sha256": "41e18a421902903251bd652e43b169d88cc3ebc4f26055ea16dac6421d8fd13a",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/26105-24.0a.zip"
+  },
+  "isj_26105_chome": {
+    "bytes": 8642,
+    "file": "26105-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:59+00:00",
+    "sha256": "494b6ec84f074931fb98544f1fea2965a5f0a732bfadb4e931d32750e8de3ec6",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/26105-19.0b.zip"
+  },
+  "isj_26106_block": {
+    "bytes": 80705,
+    "file": "26106-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:53:00+00:00",
+    "sha256": "7df80aabc4bbbbab9aef8dd9f42e837bab5c5fbfde7b7e0ea9247257c16de047",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/26106-24.0a.zip"
+  },
+  "isj_26106_chome": {
+    "bytes": 12617,
+    "file": "26106-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:53:02+00:00",
+    "sha256": "1ed625e509ebec03efd7038737f18ecf7d45a00b08e635f12f73c9fc2fbe6954",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/26106-19.0b.zip"
+  },
+  "isj_26107_block": {
+    "bytes": 90735,
+    "file": "26107-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:53:03+00:00",
+    "sha256": "410eff30cdeac6243ac9cb9f5506e42e4d028c54a2acbdb295b3be86bbc51ce2",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/26107-24.0a.zip"
+  },
+  "isj_26107_chome": {
+    "bytes": 9089,
+    "file": "26107-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:53:05+00:00",
+    "sha256": "161a34427b2011904eee7322c0c07922c1029ba73b4dac1583cc580f265c8617",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/26107-19.0b.zip"
+  },
+  "isj_26108_block": {
+    "bytes": 124639,
+    "file": "26108-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:53:06+00:00",
+    "sha256": "8c8257b33479976907e0276ca07143a4046bb11130e4eb983a01756c10337380",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/26108-24.0a.zip"
+  },
+  "isj_26108_chome": {
+    "bytes": 14554,
+    "file": "26108-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:53:08+00:00",
+    "sha256": "15406ba9313020f2250736af2af844237bae010399852c269051937012e52439",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/26108-19.0b.zip"
+  },
+  "isj_26109_block": {
+    "bytes": 244765,
+    "file": "26109-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:53:09+00:00",
+    "sha256": "e125fc2c89b16f132c3a4fc7ed5de4746e07639b65abb6542d15e24941efd163",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/26109-24.0a.zip"
+  },
+  "isj_26109_chome": {
+    "bytes": 16157,
+    "file": "26109-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:53:11+00:00",
+    "sha256": "a9e4a0f28845e332d607b0c090a420fef14d85a60021699dc067264ff2c5c29c",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/26109-19.0b.zip"
+  },
+  "isj_26110_block": {
+    "bytes": 109231,
+    "file": "26110-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:53:12+00:00",
+    "sha256": "fe433720cc0fc99bba15d93e17d07d40c752cab77b4b8c477564bdc475f8d3e3",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/26110-24.0a.zip"
+  },
+  "isj_26110_chome": {
+    "bytes": 9708,
+    "file": "26110-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:53:14+00:00",
+    "sha256": "695c132669a8d6f26d1994c7288379e73dbc18fb171a9a9f2e58695abaff68a5",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/26110-19.0b.zip"
+  },
+  "isj_26111_block": {
+    "bytes": 137300,
+    "file": "26111-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:53:16+00:00",
+    "sha256": "c211f4f2335924a2f595df433468107c9c4aa19d6c1ef06dc4d60155a82ef69d",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/26111-24.0a.zip"
+  },
+  "isj_26111_chome": {
+    "bytes": 9768,
+    "file": "26111-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:53:18+00:00",
+    "sha256": "f9b34bd2057d89b8cbe9930da8865feaaaa263ad55c0d42b8220288a0819372c",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/26111-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 12718026,
+    "file": "data/japan/raw/N02-24_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:06+00:00",
+    "sha256": "504eefd4411cd0fd3ad9a50f35da2f5da07949d5144ded7630df0972f8deaac7",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-24/N02-24_GML.zip"
+  },
+  "n03": {
+    "bytes": 4265154,
+    "file": "data/japan/raw/N03-20250101_26_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:54:03+00:00",
+    "sha256": "93318ba76fbc30bd6ce44b0bd3d0be599d6130cab07b6e734c9f464e40fd6515",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_26_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 126839,
+    "elements": 201,
+    "file": "osm_station_names.json",
+    "host": "overpass.kumi.systems",
+    "osm_base": "2026-05-06T03:25:00Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](34.85,135.53,35.35,135.9);way[\"railway\"=\"station\"](34.85,135.53,35.35,135.9););out tags center;",
+    "retrieved": "2026-09-28T18:09:01+00:00",
+    "sha256": "73785d57fd6dfb2847f9adf729ff634365ba2ffe31aa8510551076675c3f2e1b"
+  },
+  "osm_tram_stop_names": {
+    "bytes": 1197,
+    "elements": 2,
+    "file": "osm_tram_stop_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-09-28T18:15:36Z",
+    "query": "[out:json][timeout:120];node[\"railway\"=\"tram_stop\"](34.85,135.53,35.35,135.9);out body;",
+    "retrieved": "2026-09-28T18:16:49+00:00",
+    "sha256": "0a295dc505ace4f706865035941e92a4b5e1a6b2f4307fdeb48bae0d135eaa39"
+  }
+}

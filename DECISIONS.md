@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**82 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**83 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Kyoto steps 1-3 on a rebuilt register, pinned at 2026-07-31; its funiculars left out after all (owner)](#2026-09-28---kyoto-steps-1-3-on-a-rebuilt-register-pinned-at-2026-07-31-its-funiculars-left-out-after-all-owner)
 - [Fukuoka built on the shared Japanese modules: Japan's fourth city (held for review time)](#2026-09-28---fukuoka-built-on-the-shared-japanese-modules-japans-fourth-city-held-for-review-time)
 - [Fukuoka steps 1-2: the first two-source Japanese city; 業態 read beside the type, MHLW's own point where the block join misses; yatai count (owner)](#2026-09-28---fukuoka-steps-1-2-the-first-two-source-japanese-city-業態-read-beside-the-type-mhlws-own-point-where-the-block-join-misses-yatai-count-owner)
 - [Worktree `japan` created for a fresh session to build Fukuoka, then Kyoto, branched from build-sapporo (owner)](#2026-09-28---worktree-japan-created-for-a-fresh-session-to-build-fukuoka-then-kyoto-branched-from-build-sapporo-owner)
@@ -118,6 +119,64 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Kyoto steps 1-3 on a rebuilt register, pinned at 2026-07-31; its funiculars left out after all (owner)
+
+- **Built on `worktree-japan`**: 32,355 storefronts (Retail 4,598 · Food
+  service 22,050 · Personal services 5,707), 117 stations on 18 lines;
+  27,980 in a ring. Nothing new downloaded but the OSM names (owner-approved;
+  the tram-stop query needed six retries against Overpass 504s).
+- **The owner's calls (2026-09-28):**
+  - **Kyoto's two funiculars are LEFT OUT** - the Eizan Cable (京福 鋼索線)
+    and the Kurama Cable (鞍馬山鋼索鉄道) - reversing the brief's call of
+    2026-09-24, for consistency with Kobe's Maya and Rokkō funiculars
+    (2026-09-27). The Sagano scenic line stays out.
+  - **`as_of` pinned at 2026-07-31**, the last day the newest monthly list
+    (July 2026) covers: renewals are visible up to there and no later. On the
+    download day (2026-09-24) the stream would drop 498 permits whose terms end
+    in August or September and whose renewals, if any, sit in lists not yet
+    published. 30,849 permits in term; 62 short-term (under a year) left out.
+- **Shared changes, each naming Kyoto** (Kobe, Osaka, Sapporo and Fukuoka:
+  zero drift, every output identical; Minato control unchanged, 98.0 / 0.2 /
+  1.8; every Japanese screen reproduces its brief):
+  - `kyoto_permit_stream` answers the name rule while the operator column
+    (申請者＿申請者名) is in hand and carries only the yes or no;
+    `name_is_operator` honours it. `OPERATOR_COLS` gains 申請者＿申請者名 and
+    the registers' 申請者氏名. 21 trade names in the raw lists are an
+    operator's own; 8 pins show their permit type instead.
+  - `japan_step2.source_rows`: a source may be rows rather than one file
+    (`config.source_rows`) - the rebuilt register, and each register's
+    complete list plus its months. The privacy check reads the same way.
+  - `japan_fetch.portal_file`: the portal's own download button (GET the
+    resource page, POST its form with the session cookie), magic bytes
+    checked, HTML refused; a file on disk under its id is kept. 79 pinned
+    resources in `config.PORTAL_RESOURCES`.
+  - Ideographic variation selectors stripped before the join (20 rows, 高辻 +
+    U+E0100): 4 more premises placed.
+- **Measured, not dropped (the brief's open item)**: 1,321 permits (4.3%)
+  share an address and permit type with a newer, differently named permit -
+  probably predecessors that closed. The page's upper-bound wording covers
+  them.
+- **The join: 93.2% block, 5.5% town-chōme, 1.3% unplaced** (435; mostly
+  twin-named towns, rule D). 126 of 3,585 菓子 / そうざい rows (3.5%) read as
+  factories: kept.
+- **Step 1**: gate 3 exact on the five lines wholly inside (Karasuma 15,
+  Randen 13 and 10, Eiden 8 and 10). 25 stations excluded (Uji 7, Mukō 3,
+  Nagaokakyō 3, Yawata 2, Ōyamazaki 2). JR's 東海道線 split at Kyoto into
+  the Biwako Line (east) and the JR Kyoto Line (west); the walk needed
+  `junction_m` 350 at Kyoto's long platforms (it ran 32.9 km at 150). JR's
+  Kosei Line keeps one station (山科), a one-station stub kept as cut.
+  西院's operators read it differently (Hankyu Saiin, the Randen Sai):
+  Saiin. 41 cited name overrides into Sapporo's style (42 stations); "Kyoto"
+  keeps its exonym.
+- **Line colours by the search**: pins 45.0-74.8, closest line pair 18.0
+  (Hankyu's two lines), 3:1 on both pages. **Labels**: the Biwako Line's label
+  at its other end clears every overlap at 343, 375 and 1280 px (six variants
+  tried); view right at all three, no corrections. `check_map_markup.py`,
+  `check_inline_arrays.py`, `check_render_current.py` pass.
+- **Privacy verdict (`check_personal_exposure.py kyoto`, Japan pass): 0
+  operator names shown in 32,355 rows.** 申請者＿役職名 and 申請者＿代表者 are
+  never selected.
 
 ### 2026-09-28 - Fukuoka built on the shared Japanese modules: Japan's fourth city (held for review time)
 
