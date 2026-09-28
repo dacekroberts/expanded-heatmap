@@ -18,6 +18,7 @@ WHAT IS LEFT OUT, and why:
     session's stray file would block another session's push.
   - check_personal_exposure.py, check_worktree_data.py: take an argument.
   - check_plan_done.py, check_stale_claims.py: report only, never fail.
+  - check_stray_bullets.py --all: docs the app does not render; a report.
   - the .js/.mjs checks: they need a browser and a running server.
 
 It checks the working tree, not the commits being pushed. Push from a clean
@@ -52,6 +53,8 @@ CHECKS = [
     ["scripts/check_render_current.py"],
     ["scripts/check_scope_disclosure.py"],
     ["scripts/check_scope_disclosure_selftest.py"],
+    ["scripts/check_stray_bullets.py"],
+    ["scripts/check_stray_bullets_selftest.py"],
     ["scripts/check_theme_sync.py"],
     ["scripts/decisions_index.py", "--check"],
     ["scripts/readme_cities.py", "--check"],

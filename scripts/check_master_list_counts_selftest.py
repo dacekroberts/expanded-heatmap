@@ -33,6 +33,9 @@ ROOT = Path(__file__).resolve().parent.parent
 CHECK = ROOT / "scripts" / "check_master_list_counts.py"
 LIST = ROOT / "docs" / "city_master_list.md"
 
+sys.path.insert(0, str(CHECK.parent))
+import check_master_list_counts as M  # noqa: E402 - the check's own parsers
+
 
 def run(path):
     env = {**os.environ, "PYTHONIOENCODING": "utf-8"}
@@ -40,13 +43,6 @@ def run(path):
                        cwd=ROOT, capture_output=True, env=env)
     out = ((r.stdout or b"") + (r.stderr or b"")).decode("utf-8", errors="replace")
     return r.returncode, out
-
-
-def swap(old, new):
-    """A mutation replacing the FIRST occurrence of `old`, refusing a no-op."""
-    def apply(text):
-        return text.replace(old, new, 1) if old in text else None
-    return apply
 
 
 def bump(pattern, expect):
@@ -77,6 +73,115 @@ def drop_bands(text):
     return out if out != text else None
 
 
+# --- targets picked from the live file ---------------------------------------
+# The cases below used to name their rows (Ottawa, then Bergen; Gimhae renamed
+# Brno; Avignon renamed Rennes; Canada), and each broke - taking the pre-push
+# hook with it - whenever that row changed (Staging re-aimed one on 2026-09-27,
+# e56c471). They now find a row of the right SHAPE through the check's own
+# parsers, so an edit to any one city's row cannot break them.
+
+def _section(lines, pattern):
+    return next(((s, e) for t, s, e in M.sections(lines) if re.match(pattern, t)), None)
+
+
+def _bands(lines):
+    """{letter: {key: (name, line_index, marked)}} for every band section."""
+    out = {}
+    for t, s, e in M.sections(lines):
+        m = M.BAND_HEAD.match(t)
+        if m:
+            out[m.group(1)] = M.members(lines, s, e)
+    return out
+
+
+def _table_row(members, lines):
+    """(name, line) of the first unbuilt member written as a table row naming it."""
+    for name, i, marked in members.values():
+        if not marked and lines[i].startswith("|") and name in lines[i]:
+            return name, i
+    return None
+
+
+def _built(lines):
+    """[(line, country, stated, names, flags)] from the Built table."""
+    sec = _section(lines, r"^## Built\b")
+    return M.built_table(lines, *sec) if sec else []
+
+
+def _by_country(lines):
+    """(bands column or None, [(line, cells)]) of the by-country table, Total left out."""
+    sec = _section(lines, r"^## .*Current by country")
+    for head, rows in (M.tables(lines, *sec) if sec else []):
+        low = [h.lower() for h in head]
+        if low[:3] == ["country", "built", "candidates"]:
+            col = low.index("bands") if "bands" in low else None
+            return col, [(i, r) for i, r in rows if M.cell_name(r[0]).lower() != "total"]
+    return None, []
+
+
+def _set_cell(lines, i, col, new):
+    parts = lines[i].split("|")          # "| a | b |" -> ["", " a ", " b ", ""]
+    parts[col + 1] = f" {new} "
+    out = list(lines)
+    out[i] = "|".join(parts)
+    return "\n".join(out)
+
+
+def rename_into(src, dst):
+    """A Band `src` table row renamed to a city already in Band `dst`, or in
+    Built when `dst` is None. The check lists Built first, then bands A-Z."""
+    def apply(text):
+        lines = text.split("\n")
+        bands = _bands(lines)
+        row = _table_row(bands.get(src, {}), lines)
+        if dst is None:
+            names = [n for r in _built(lines) for n in r[3]]
+            target, places = (names[0] if names else None), f"Built AND Band {src}"
+        else:
+            hit = _table_row(bands.get(dst, {}), lines)
+            target = hit[0] if hit else None
+            places = " AND ".join(f"Band {x}" for x in sorted((src, dst)))
+        if not row or not target:
+            return None
+        name, i = row
+        apply.expect = f"{target} is in {places}"
+        out = list(lines)
+        out[i] = out[i].replace(name, target, 1)
+        return "\n".join(out)
+    return apply
+
+
+def wrong_band(text):
+    """A by-country row naming its cities, whose Bands column holds one letter,
+    changed to a letter none of them is in."""
+    lines = text.split("\n")
+    col, rows = _by_country(lines)
+    if col is None:
+        return None
+    for i, row in rows:
+        letters = re.findall(r"\b[ABCDT]\b", row[col])
+        if len(letters) == 1 and re.match(r"\*\*\d+\*\*\s*—\s*\S", row[2]):
+            return _set_cell(lines, i, col, "C" if letters[0] != "C" else "T")
+    return None
+
+
+def by_country_bump(col, expect):
+    """+1 on the leading **N** of cell `col` in the first by-country row that
+    has one - for the Built column, a country the Built table also lists."""
+    def apply(text):
+        lines = text.split("\n")
+        _, rows = _by_country(lines)
+        built = {M.key(c) for _, c, *_ in _built(lines)}
+        for i, row in rows:
+            m = re.match(r"\*\*(\d+)\*\*", row[col])
+            if m and (col != 1 or M.key(M.cell_name(row[0])) in built):
+                old = int(m.group(1))
+                apply.expect = expect.format(old=old, new=old + 1)
+                return _set_cell(lines, i, col, f"**{old + 1}**" + row[col][m.end():])
+        return None
+    return apply
+
+
 CASES = [
     ("a band heading's count drifted (Band C, +1)",
      bump(r"^## 🟣 Band C —[^\n]*?\((\d+) cities\)", "Band C holds"), None),
@@ -103,30 +208,28 @@ CASES = [
      bump(r"^## Built — (\d+)", "the Built table lists {old}"), None),
 
     ("a Built row's per-country count drifted",
-     bump(r"\*\*Canada\*\* \((\d+), complete\)", "lists {old} cities"), None),
+     bump(r"^\| \*\*[^*|]+\*\* \((\d+)", "lists {old} cities"), None),
 
-    ("a sub-group count drifted (France, +1)",
-     bump(r"\*\*🇫🇷 France \((\d+)\)\*\*", "the table below it has {old} rows"), None),
+    ("a sub-group count drifted (the first one-country sub-group, +1)",
+     bump(r"^\*\*\S+ [^*(,]+ \((\d+)\)\*\*", "the table below it has {old}"), None),
 
     ("by country: a row's Candidates figure drifted",
-     bump(r"^\| 🇨🇦 Canada \| \*\*\d+\*\* \| \*\*(\d+)\*\*", "the Candidates column sums to"),
-     None),
+     by_country_bump(2, "the Candidates column sums to"), None),
 
     ("by country: a row's Built figure disagrees with the Built table",
-     bump(r"^\| 🇨🇦 Canada \| \*\*(\d+)\*\*", "says {new} built, the Built table lists {old}"),
-     None),
+     by_country_bump(1, "says {new} built, the Built table lists {old}"), None),
 
     ("by country: the Total row's band figure drifted",
      bump(r"^\| \*\*Total\*\*.*· C (\d+) ·", "the Total row says C {new}"), None),
 
     ("by country: a named city is not in the band its row lists",
-     swap("| **1** — Bergen | T |", "| **1** — Bergen | C |"), "its Bands column says"),
+     wrong_band, "its Bands column says"),
 
-    ("a city in two bands (a Band D row renamed to Band T's Brno)",
-     swap("| **Gimhae** 🇰🇷 |", "| **Brno** 🇰🇷 |"), "Brno is in Band D AND Band T"),
+    ("a city in two bands (a Band D row renamed to a Band T city)",
+     rename_into("D", "T"), None),
 
-    ("a built city still listed in a band (Band T's Avignon renamed Rennes)",
-     swap("| Avignon |", "| Rennes |"), "is in Built AND Band T"),
+    ("a built city still listed in a band (a Band T row renamed to a built city)",
+     rename_into("T", None), None),
 
     ("no band recognised at all - the vacuous pass",
      drop_bands, "no '## ... Band X' sections"),
