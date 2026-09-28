@@ -833,6 +833,18 @@ Cities built and running end to end (pipeline, map, app page):
   personal name at a home-looking address is withheld. Rail is OpenStreetMap's,
   because Korea's station dataset carries no lines.
 
+- **Daegu** - Daegu Metro Lines 1 to 3, stations inside Daegu only; South
+  Korea's second city, built on its own branch and held for a batch publish.
+  Seoul's register and rules, republished monthly by the city as XLSX under
+  other column names, and read through **`pipeline/countries/korea.py`**, the
+  shared Korean module a further city (Busan) passes through: it raises on a
+  renamed column, an unguarded phone column, a blank sub-type column, an
+  address regex that misses a 군, and address masking the config has not
+  declared (the health-food file masks every number). Seoul keeps its own step
+  2. **The edition's name is not its date**: the "2026-08" files end
+  2025-08-31, and the page shows the rows' own date. Line 3 is a monorail,
+  matched by route type, never by network.
+
 - **Taichung** - Taichung Metro's Green Line, and Taiwan's first city. The
   business leg is the national business tax register, joined to the city's
   own door plates by district, street and number - no geocoder - with two

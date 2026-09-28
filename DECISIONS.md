@@ -20,10 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**24 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**26 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Daegu built on its own branch: 67,212 storefronts, 86 stations, Lines 1-3, through a new shared Korean module](#2026-09-27---daegu-built-on-its-own-branch-67212-storefronts-86-stations-lines-1-3-through-a-new-shared-korean-module)
+- [Daegu's "2026-08" edition holds rows only to 2025-08-31; built anyway, with the real date on the page (owner)](#2026-09-27---daegus-2026-08-edition-holds-rows-only-to-2025-08-31-built-anyway-with-the-real-date-on-the-page-owner)
 - [The pre-push hook's first run broke the shared git config; restored by the owner, and every check now runs without git's hook variables](#2026-09-27---the-pre-push-hooks-first-run-broke-the-shared-git-config-restored-by-the-owner-and-every-check-now-runs-without-gits-hook-variables)
 - [Daegu's brief corrected: bakeries, delis and other food shops ARE published, on later pages of a six-per-page file list](#2026-09-27---daegus-brief-corrected-bakeries-delis-and-other-food-shops-are-published-on-later-pages-of-a-six-per-page-file-list)
 - [DECISIONS.md archived weekly, not monthly, with a merge guard (owner)](#2026-09-27---decisionsmd-archived-weekly-not-monthly-with-a-merge-guard-owner)
@@ -57,6 +59,105 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Daegu built on its own branch: 67,212 storefronts, 86 stations, Lines 1-3, through a new shared Korean module
+
+- **Where and what (owner, 2026-09-27).** Its own worktree (`worktree-daegu`,
+  from master), page 48, held for a batch publish. The owner took the brief's
+  recommendations: Seoul's buckets, 대경선 not drawn on spacing (3 stops in
+  Daegu, 4.08 km apart), stations inside Daegu only. The first brief's
+  "retail without bakeries" call fell away when Staging found the three files
+  on later pages of the listing (24dc747).
+- **Counts (the drift baseline, `outputs/daegu/baseline.json`, 36
+  figures).** 14 registers, 67,660 open rows, 64,219 bucketed. Placement:
+  63,358 on their own point, 191 by road address and 74 by lot address from
+  another permit at the same building, 596 unplaced (0.9%), 8 outside the
+  sanity box. The control (own point against its building's donor point) is
+  0 m at the median, 90th and 99th percentiles. One pin per premises: Food
+  service 38,656 -> **38,468**, Retail 18,400 -> **16,269** (2,194
+  convenience stores), Personal services 12,501 -> **12,475**, so
+  **67,212 storefronts**, 47,724 inside a ring (71%). Rail: 188 stop nodes,
+  **86 stations** (Line 1 33, Line 2 26, Line 3 30, three transfers), 5 in
+  Gyeongsan excluded, median spacing 764 m (minimum 562). One Daegu station
+  sits on an undrawn line only: Seodaegu (대경선).
+- **The shared module, and why Seoul was not moved onto it.**
+  `pipeline/countries/korea.py` holds Seoul's step-2 rules and the traps the
+  brief named, each as a check that RAISES, so Busan passes through them:
+  - a field published under a new name;
+  - a telephone column that `NEVER_READ` does not name;
+  - the sub-type taken per ROW (`업태구분명`, else `위생업태명`), because the
+    health-food file's `업태구분명` is blank on every row and Seoul's
+    per-column choice would drop every row;
+  - a keep-only rule that keeps nothing;
+  - a building-key match rate under 95% (the regex takes 구 and 군, plus an
+    optional 읍/면 for 달성군 and 군위군).
+
+  Seoul keeps its own step 2: its outputs are the drift baseline, and
+  nothing here changes them. The taxonomy now accepts a permit type's own
+  name as its key (`PERMIT_TYPES`), and Seoul's OA ids pass through
+  unchanged. Bakeries gain a food-truck DROP (Daegu has 1). Seoul's bakery
+  file has none (4,228 open rows, one sub-type), so Seoul is unaffected.
+- **Found by the first run: the health-food register masks every address
+  number.** All 4,616 open rows of `건강기능식품일반판매업` read like
+  "대봉로**길 **, ***동 ****호", while 98% still carry a point. The other
+  files have 1 masked row between them. The module now RAISES on masking in
+  any file the config does not declare (`MASKED_ADDRESS_FILES`). Masked rows
+  keep their published point, and take the building of any row standing on
+  the same point (1,761 rows), so a convenience store's health-food permit is
+  not a second pin beside its tobacco permit. Privacy:
+  `korean_names._HOME` now reads a masked `동/호` unit as a unit. Seoul's
+  addresses carry no *, so this changes nothing there. The in-store rows
+  are shops (Daiso, CU, GS25, Olive Young, pharmacies); 3 of 2,366 have a
+  personal-name shape at a home-looking address, and the rule withholds all 3.
+- **Privacy verdict (`check_personal_exposure.py daegu`).** No owner
+  column exists. 113 names are withheld in step 2 (80 inside the rings). A
+  Korean personal name at a residential address that is still shown: **0 of
+  67,212**. No contact details in names. Published as it stands.
+- **Rail.** OpenStreetMap, matched on route TYPE and ref, never on network
+  (Lines 1-2 are `대구 도시철도`, Line 3 is `대구도시철도`, and 대경선 is
+  tagged `대구 도시철도` too). Line 3 is `route=monorail`. The query takes
+  every subway, light-rail, monorail and tram relation in the box, and step 1
+  refuses a relation it cannot place, including one of an unexpected route
+  type. **Gate 3 is exact at 35 / 29 / 30 whole-line stations, but against
+  Korean Wikipedia, a secondary source**: dtro.or.kr's route map rendered
+  blank, data.go.kr refused the connection, and the city's own route map is
+  dated 2022, before the Hayang extension. Wikipedia's table puts
+  대구한의대병원 in Gyeongsan, while OSM's boundary puts it 614 m inside
+  동구. The polygon decides scope, so it is kept.
+- **Colours.** Operator colours, except Line 2's #00AA80, which is Delta-E
+  6.2 from Personal services and below the floor of 10. It is darkened, hue
+  kept, to **#00664D (32.3)**, because only a near-black #004433 reaches the
+  preferred 45. Line 1's red stays at 14.7 from Food service, as Seoul's Line
+  8 stayed at 18.0. **For the owner's visual check at review.**
+- **Front-page label.** 42.9 px, measured in the deployed app's frame with
+  seven entries reproduced exactly. Placed BELOW the dot, because above it
+  the pill covered Seoul's marker in East Asia at all three widths. With
+  that change `check_macro_labels.py` reports 0 problems.
+- **Still to do before the batch** (PLAN): the page prose, blurb, credit
+  notice and exclusions section are drafted for the owner at review time;
+  then `deploy-verify` (city-added) and the publish gate.
+
+### 2026-09-27 - Daegu's "2026-08" edition holds rows only to 2025-08-31; built anyway, with the real date on the page (owner)
+
+- **Measured while recording provenance.** In the restaurant, tobacco and
+  beauty files, the newest `인허가일자`, `폐업일자`, `최종수정시점` and
+  `데이터갱신일자` all end between 2025-08-29 and 2025-09-02. Every file's
+  newest `데이터갱신일자` falls in the same window. Monthly activity is
+  steady up to that point (e.g. 179-288 new restaurant permits a month,
+  May-August 2025) and then stops. That is the shape of an extract taken
+  around 2025-09-02, not of a register tapering off. The portal labels it
+  "26년08월", so the label is about 12 months ahead of the rows.
+- **The owner's call: build it, with the date disclosed.** Busan was
+  accepted the same day as a dated 2026-04-15 snapshot, so this is the same
+  position with an older date. The page's snapshot caption reads the rows'
+  own newest date from `outputs/daegu/provenance.json` (Seoul's page does
+  the same), so it shows 2025 by construction rather than by a sentence that
+  could go stale.
+- **Staging was told.** The brief does not record it, and Busan's
+  "frozen at 2026-04-15" should be checked against its own rows the same
+  way. The licence read noted that the national file host's listing was last
+  modified 2025-11-27. That file might be FRESHER than Daegu's edition, but
+  the host answered 403.
 
 ### 2026-09-27 - The pre-push hook's first run broke the shared git config; restored by the owner, and every check now runs without git's hook variables
 

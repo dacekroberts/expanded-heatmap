@@ -77,7 +77,22 @@ Desktop is unaffected — the label is fully visible there.
   - [x] **Daegu's brief** (`docs/build_briefs/daegu.md`, 11/11, 2026-09-27,
     corrected the same evening), handed to Main Build. Three owner calls open
     in it (buckets as Seoul's; 대경선 out; stations inside Daegu).
-  - [ ] **Busan's brief.**
+  - [ ] **🇰🇷 DAEGU - BUILT 2026-09-27 on `worktree-daegu` (its own branch, owner), HELD
+    for a batch publish: 67,212 storefronts, 86 stations, Lines 1–3.** Page 48. Owner
+    calls taken as recommended; the rows end 2025-08-31 (owner: build, date disclosed).
+    Done: steps 1–3, drift baseline, provenance rows, inconsistency rows, privacy
+    verdict, label width (42.9) and placement (below the dot), DECISIONS. Still to do:
+    - [ ] At the owner's review time: approve the page prose, blurb, credit notice
+      (48) and the `excluded_categories.md` section, drafted in chat; and look at Line
+      2's darkened green (#00664D) and Line 1's red (14.7 from Food service).
+    - [ ] Write them; `check_scope_disclosure.py`; `deploy-verify` (city-added, plus
+      East Asia for the label).
+    - [ ] Publish with the batch (`publish-city`): `check_deploy_imports.py` with
+      `.venv-lean` linked, merge master, fetch, push, **reboot** (`cities.py`,
+      `components.py`), live check. Retire the `data/` junction and the
+      `daegu-static-tmp` entry in the monterrey worktree's `.claude/launch.json`.
+  - [ ] **Busan's brief.** Check its rows' own newest dates against the "frozen at
+    2026-04-15" label, as Daegu's turned out a year older than its edition name.
   - [ ] **Band T's group decision**: build trams-only cities, and in what
     order (Nice, Montpellier, Brno and Bergen are the cheapest strong ones).
   - [ ] **Wave 2 held by the owner** (the US; Canada, Brazil and Ireland;
