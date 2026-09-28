@@ -1,7 +1,14 @@
-"""Step 1 - STM Métro stations inside the agglomeration of Montréal.
+"""Step 1 - Métro and REM stations inside the agglomeration of Montréal.
 
 Input:  data/montreal/raw/gtfs.zip              (STM's own GTFS Static)
+        data/montreal/raw/rem_gtfs.zip          (the REM's own feed, 2026-09-27)
         data/montreal/raw/agglomeration.geojson (34 features, dissolved)
+
+THE REM JOINED ON 2026-09-27 (the tram rescope). Its stations come from its
+own feed, collapse into the Métro's by name where the two meet
+(Édouard-Montpetit, McGill), and are cut by the same boundary: the South Shore
+and Laval / Deux-Montagnes ends fall outside, with the line drawn to them.
+Everything below about the Métro predates it and still holds.
 Output: data/montreal/processed/stations.csv
         outputs/montreal/excluded_stations.csv
 
@@ -56,7 +63,13 @@ from pipeline.montreal.config import (  # noqa: E402
     GTFS_ZIP,
     IN_CITY_STATIONS_EXPECTED,
     LINE_NAMES,
+    INTERCHANGE_MAX_SPREAD_M,
     OFF_ISLAND_FARE_ZONE_SUFFIX,
+    REM_GTFS_ZIP,
+    REM_ISLAND_ZONE,
+    REM_LINE_NAME,
+    REM_ROUTE_IDS,
+    REM_STATION_NAME_STRIP_PREFIX,
     RING_EDGES_METERS,
     ROUTE_IDS,
     STATION_NAME_STRIP_PREFIX,
@@ -70,8 +83,73 @@ def load(zip_path, filename, **kw):
         return pd.read_csv(f, dtype=str, **kw)
 
 
+def rem_stations():
+    """The REM's parent stations, from the operator's own feed.
+
+    Parents (location_type 1) are already mixed case ("Station Du Ruisseau"),
+    so unlike STM's they name themselves; the children carry " - Quai 1".
+    `zone` is kept for the fare-zone cross-check in main().
+    """
+    routes = load(REM_GTFS_ZIP, "routes.txt")
+    missing = sorted(set(REM_ROUTE_IDS) - set(routes["route_id"]))
+    if missing:
+        sys.exit(f"REM route_id(s) {missing} are not in its feed - the "
+                 f"operator has renumbered; re-read routes.txt.")
+    trips = load(REM_GTFS_ZIP, "trips.txt")
+    trips = trips[trips["route_id"].isin(REM_ROUTE_IDS)]
+    stop_times = load(REM_GTFS_ZIP, "stop_times.txt", usecols=["trip_id", "stop_id"])
+    stops = load(REM_GTFS_ZIP, "stops.txt")
+    served = set(stop_times.loc[stop_times["trip_id"].isin(set(trips["trip_id"])),
+                                "stop_id"])
+    children = stops[stops["stop_id"].isin(served)]
+    if children["parent_station"].isna().any():
+        sys.exit("a served REM platform has no parent_station.")
+    p = stops[stops["stop_id"].isin(set(children["parent_station"]))].copy()
+    p["station"] = (p["stop_name"].str.strip()
+                    .str.replace(f"^{REM_STATION_NAME_STRIP_PREFIX}", "", regex=True)
+                    .str.strip())
+    p["latitude"] = p["stop_lat"].astype(float)
+    p["longitude"] = p["stop_lon"].astype(float)
+    p["lines"] = REM_LINE_NAME
+    p["feed"] = "REM"
+    p["zone"] = p["zone_id"]
+    print(f"\nREM: {len(children)} served platforms -> {len(p)} stations "
+          f"(routes {', '.join(REM_ROUTE_IDS)})")
+    return p[["stop_id", "station", "latitude", "longitude", "lines", "feed", "zone"]]
+
+
+def collapse_interchanges(metro, rem):
+    """One station per interchange, by NAME (Copenhagen's rule).
+
+    A REM station named like a Métro station is the same interchange: the
+    two collapse to the Métro's point, the lines are joined, and the spread
+    is printed so a merge of two different places cannot pass silently. A
+    spread past config.INTERCHANGE_MAX_SPREAD_M stops the run. The Métro's
+    point is kept so the 62 Métro-only stations and the two interchanges keep
+    the rings they were published with.
+    """
+    shared = sorted(set(metro["station"]) & set(rem["station"]))
+    print(f"\nInterchanges collapsed by name ({len(shared)}):")
+    for name in shared:
+        m = metro[metro["station"] == name].iloc[0]
+        r = rem[rem["station"] == name].iloc[0]
+        pts = gpd.GeoSeries(gpd.points_from_xy([m.longitude, r.longitude],
+                                               [m.latitude, r.latitude]),
+                            crs=CRS_GEOGRAPHIC).to_crs(CRS_PROJECTED)
+        spread = pts.iloc[0].distance(pts.iloc[1])
+        print(f"  {name:<24} spread {spread:>5.0f} m")
+        if spread > INTERCHANGE_MAX_SPREAD_M:
+            sys.exit(f"  {name}: the Métro and REM stations are {spread:.0f} m "
+                     f"apart, past the {INTERCHANGE_MAX_SPREAD_M:.0f} m limit. "
+                     f"Same name, different place? Decide before collapsing.")
+        metro.loc[metro["station"] == name, "lines"] = f"{m.lines}, {r.lines}"
+        metro.loc[metro["station"] == name, "feed"] = "STM+REM"
+    rem = rem[~rem["station"].isin(shared)]
+    return pd.concat([metro, rem], ignore_index=True)
+
+
 def main():
-    for path in (GTFS_ZIP, CITY_BOUNDARY_GEOJSON):
+    for path in (GTFS_ZIP, REM_GTFS_ZIP, CITY_BOUNDARY_GEOJSON):
         if not path.exists():
             sys.exit(f"Missing {path.name}. Run "
                      f"pipeline/montreal/fetch_sources.py first.")
@@ -136,6 +214,9 @@ def main():
                        line=served["trip_id"].map(trip_to_route).map(LINE_NAMES))
     parents["lines"] = parents["stop_id"].map(
         st.groupby("parent")["line"].apply(lambda s: ", ".join(sorted(set(s.dropna())))))
+    parents["feed"] = "STM"
+
+    parents = collapse_interchanges(parents, rem_stations())
 
     # --- the boundary -------------------------------------------------------
     b = gpd.read_file(CITY_BOUNDARY_GEOJSON)
@@ -164,19 +245,31 @@ def main():
         crs=CRS_GEOGRAPHIC).to_crs(CRS_PROJECTED)
     inside = gdf.geometry.within(geom)
 
-    # The cross-check: the spatial cut must agree with STM's own fare zone.
+    # The cross-checks: the spatial cut must agree with each feed's own fare
+    # zone - STM's suffix on the Métro, ARTM's zone_id on the REM.
+    stm = gdf["feed"].ne("REM")
     zone_b = gdf["station"].str.endswith(OFF_ISLAND_FARE_ZONE_SUFFIX)
-    if set(gdf.loc[~inside, "station"]) != set(gdf.loc[zone_b, "station"]):
+    if set(gdf.loc[stm & ~inside, "station"]) != set(gdf.loc[stm & zone_b, "station"]):
         sys.exit(
             "THE SPATIAL CUT AND STM'S FARE ZONE DISAGREE.\n"
-            f"  outside the boundary: {sorted(gdf.loc[~inside, 'station'])}\n"
+            f"  outside the boundary: {sorted(gdf.loc[stm & ~inside, 'station'])}\n"
             f"  marked '{OFF_ISLAND_FARE_ZONE_SUFFIX.strip()}': "
-            f"{sorted(gdf.loc[zone_b, 'station'])}\n"
+            f"{sorted(gdf.loc[stm & zone_b, 'station'])}\n"
             "  One of them has changed. Decide which is right rather than "
             "letting four stations in or out silently."
         )
     print(f"  spatial cut agrees with STM's '{OFF_ISLAND_FARE_ZONE_SUFFIX.strip()}' "
-          f"marking on all {len(gdf)} stations")
+          f"marking on all {int(stm.sum())} STM stations")
+    rem = gdf["feed"].eq("REM")
+    zoned = rem & gdf["zone"].notna()
+    island = gdf["zone"].eq(REM_ISLAND_ZONE)
+    if not (inside[zoned] == island[zoned]).all():
+        bad = gdf.loc[zoned & (inside != island), "station"].tolist()
+        sys.exit(f"THE SPATIAL CUT AND THE REM'S zone_id DISAGREE on {bad}. "
+                 f"Zone {REM_ISLAND_ZONE} is ARTM's zone A, the island.")
+    print(f"  spatial cut agrees with the REM's zone_id on {int(zoned.sum())} "
+          f"zoned REM stations; no zone in this feed (checked spatially only): "
+          f"{sorted(gdf.loc[rem & ~zoned, 'station'])}")
 
     gdf["distance_outside_m"] = [
         0.0 if ins else round(p.distance(geom), 1)
@@ -197,7 +290,7 @@ def main():
         print(f"  {r.station:<38} {r.distance_outside_m:>8.0f} m   {r.lines}")
 
     print("\nIn-scope stations per line (no line drops out of the map):")
-    for name in LINE_NAMES.values():
+    for name in [*LINE_NAMES.values(), REM_LINE_NAME]:
         n = int(kept["lines"].fillna("").str.contains(name, regex=False).sum())
         total = int(gdf["lines"].fillna("").str.contains(name, regex=False).sum())
         print(f"  {name:<18}{n:>4} of {total:>3}")

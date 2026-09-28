@@ -42,7 +42,7 @@ from pipeline.rome.config import (  # noqa: E402
 # Names the Roma–Viterbo urban service too, drawn since the owner's call of
 # 2026-09-24 - "Metro" alone mislabelled it. This prefixes the (hidden) line
 # layer names; map_title below is the name a reader sees in the layer control.
-SYSTEM = "Metro and Roma–Viterbo"
+SYSTEM = "Metro, Roma–Viterbo and Tram 8"
 LINE_LABEL_ENDS = {}
 
 
@@ -61,7 +61,7 @@ def main():
     print(f"  {len(stations):,} stations, {len(businesses):,} storefronts")
     render_heatmap(
         output_path=HEATMAP_HTML,
-        map_title="Rome Metro and Roma–Viterbo Business Density Heatmap",
+        map_title="Rome Metro, Roma–Viterbo and Tram 8 Business Density Heatmap",
         city_name="Rome",
         system_name=SYSTEM,
         stations=stations,

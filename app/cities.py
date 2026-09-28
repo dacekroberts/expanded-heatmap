@@ -104,7 +104,7 @@ CITIES = [
         "lat": 37.7509,
         "lon": -122.4414,
         "page": "pages/2_San_Francisco_Heatmap.py",
-        "blurb": "Muni Metro (J Church, K Ingleside, L Taraval, M Ocean View, N Judah, T Third Street)",
+        "blurb": "Muni Metro (J Church, K Ingleside, L Taraval, M Ocean View, N Judah, T Third Street) and the F Market & Wharves",
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -276,7 +276,7 @@ CITIES = [
         "lat": 45.5019,
         "lon": -73.5674,
         "page": "pages/11_Montreal_Heatmap.py",
-        "blurb": "STM Métro (4 lines, 64 stations on the island)",
+        "blurb": "STM Métro (4 lines) and the REM, 78 stations on the island",
         # OUTSIDE THE DEFAULT VIEW, for the same reason as Vancouver: it keeps
         # fit_view's zoom pinned at 1.4525 so no existing label moves. Its dot
         # is still on canvas at every width - it sits only ~18 px from
@@ -457,8 +457,8 @@ CITIES = [
         "lat": 40.4168,
         "lon": -3.7038,
         "page": "pages/17_Madrid_Heatmap.py",
-        "blurb": "Metro de Madrid (Líneas 1–12 and the Ramal, 193 stations "
-                 "inside the city)",
+        "blurb": "Metro de Madrid (Líneas 1–12 and the Ramal) and Metro "
+                 "Ligero line 1, 200 stations inside the city",
         "region": "Europe",
         "country": "Spain",
         # Outside the United States frame, like every non-US city - see
@@ -541,7 +541,7 @@ CITIES = [
         "lat": 48.8566,
         "lon": 2.3522,
         "page": "pages/21_Paris_Heatmap.py",
-        "blurb": "Métro (Lignes 1–14, plus 3bis and 7bis)",
+        "blurb": "Métro (Lignes 1–14, plus 3bis and 7bis) and trams T3a and T3b",
         "region": "Europe",
         "country": "France",
         "in_default_view": False,
@@ -735,7 +735,7 @@ CITIES = [
         "lat": 41.8933,
         "lon": 12.4829,
         "page": "pages/30_Rome_Heatmap.py",
-        "blurb": "Metro A, B, B1, C and Roma–Viterbo",
+        "blurb": "Metro A, B, B1, C, Roma–Viterbo and Tram 8",
         "region": "Europe",
         "country": "Italy",
         "in_default_view": False,

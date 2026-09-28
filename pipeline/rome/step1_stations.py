@@ -29,10 +29,19 @@ from pipeline.rome import config  # noqa: E402
 from pipeline.rome.boundary import city_polygon, neighbour_polygons  # noqa: E402
 
 
+def rail_elements():
+    """The metro cache and tram 8's own cache (2026-09-27), read as one.
+    Tram 8 has its own file so the metro cache stayed untouched."""
+    els = []
+    for path in (config.OSM_RAIL_JSON, config.OSM_TRAM8_JSON):
+        if not path.exists():
+            sys.exit(f"missing {path}\nRun: python pipeline/rome/fetch_sources.py")
+        els += json.loads(path.read_text(encoding="utf-8"))["elements"]
+    return els
+
+
 def stop_rows():
-    if not config.OSM_RAIL_JSON.exists():
-        sys.exit(f"missing {config.OSM_RAIL_JSON}\nRun: python pipeline/rome/fetch_sources.py")
-    els = json.loads(config.OSM_RAIL_JSON.read_text(encoding="utf-8"))["elements"]
+    els = rail_elements()
     nodes = {e["id"]: e for e in els if e["type"] == "node"}
     rels = {e["id"]: e for e in els if e["type"] == "relation"}
     line_of = {rid: ln for ln, ids in config.LINE_RELATIONS.items() for rid in ids}
@@ -65,11 +74,67 @@ def stop_rows():
     return pd.DataFrame(rows).drop_duplicates(["line", "node"])
 
 
+def thin(st_rows):
+    """San Francisco's filter on each line in config.THINNED_LINES (tram 8).
+
+    Walks each direction's relation in stop order, measuring along the line in
+    the projected CRS; a stop is kept at each terminus, at each interchange
+    (a name another line also serves) and whenever half a mile has run since
+    the last kept stop. Returns {name: reason} for the stops cut - worded with
+    "spacing", which app/station_scope.py reads as `thinned`.
+    Ported from pipeline/rotterdam/step1_stations.py `thin()`.
+    """
+    rels = {e["id"]: e for e in rail_elements() if e["type"] == "relation"}
+    nodes = {e["id"]: e for e in rail_elements() if e["type"] == "node"}
+    pts = gpd.GeoSeries(gpd.points_from_xy(st_rows["longitude"], st_rows["latitude"]),
+                        index=st_rows["stop_name"], crs=config.CRS_GEOGRAPHIC
+                        ).to_crs(config.CRS_PROJECTED)
+    lines_of = dict(zip(st_rows["stop_name"], st_rows["lines"].str.split()))
+    kept, cut = set(), {}
+    for ln in config.THINNED_LINES:
+        # Rotterdam's rule: add a direction only until every stop is covered.
+        # Thinning BOTH directions and keeping the union keeps whatever either
+        # walk happens to land on, which barely thins (4 of 16 cut, measured).
+        names = {n for n, ls in lines_of.items() if ln in ls}
+        covered = set()
+        for rid in config.LINE_RELATIONS[ln]:
+            if covered >= names:
+                break
+            seq = []
+            for m in rels[rid]["members"]:
+                if m["type"] == "node" and m.get("role", "").startswith("stop"):
+                    nm = nodes[m["ref"]]["tags"]["name"]
+                    nm = config.STATION_NAME_ALIASES.get(nm, nm)
+                    if not seq or seq[-1] != nm:
+                        seq.append(nm)
+            covered |= set(seq)
+            print(f"    walking {rid} ({rels[rid]['tags'].get('name')}): {len(seq)} stops")
+            mark = [len(lines_of[n]) > 1 for n in seq]
+            mark[0] = mark[-1] = True
+            since, last = 0.0, seq[0]
+            for i in range(1, len(seq)):
+                since += pts[seq[i - 1]].distance(pts[seq[i]])
+                if mark[i]:
+                    since, last = 0.0, seq[i]
+                elif since >= config.THIN_SPACING_M:
+                    mark[i], since, last = True, 0.0, seq[i]
+                else:
+                    cut.setdefault(seq[i], (
+                        f"spacing filter on {config.LINE_NAMES[ln]}: "
+                        f"{since / 1609.344:.3f} mi after {last}, under 0.5 mi"))
+            kept |= {n for n, k in zip(seq, mark) if k}
+    cut = {n: why for n, why in cut.items() if n not in kept}
+    print(f"\n  thinning ({', '.join(config.LINE_NAMES[l] for l in config.THINNED_LINES)}): "
+          f"{len(kept)} kept, {len(cut)} cut")
+    for n, why in sorted(cut.items()):
+        print(f"    cut  {n:<32} {why}")
+    return cut
+
+
 def write_lines():
     """The kept relations for step 3's load_osm_line_shapes, keyed by `ref`:
     B1's relations get ref "B1" and only the ways the B trunk does not use."""
-    els = json.loads(config.OSM_RAIL_JSON.read_text(encoding="utf-8"))["elements"]
-    rels = {e["id"]: e for e in els if e["type"] == "relation"}
+    rels = {e["id"]: e for e in rail_elements() if e["type"] == "relation"}
     trunk_ways = {m["ref"] for rid in config.LINE_RELATIONS["B"] for m in rels[rid]["members"]
                   if m["type"] == "way"}
     out = []
@@ -123,13 +188,17 @@ def main():
     actual = {"Metro A": count("A"), "Metro B + B1": count("B") + count("B1"),
               "Metro C": count("C"),
               "Metro (network)": int(sum(1 for v in st_rows["lines"] if metro & set(v.split()))),
-              "Roma–Viterbo (urban)": count("RV")}
+              "Roma–Viterbo (urban)": count("RV"), "Tram 8": count("8")}
     print()
     station_gates.verify_stations(
         city="Rome", platforms=platforms, stations=st_rows, crs_projected=config.CRS_PROJECTED,
         spacing_min=config.SPACING_MIN_M, expected_per_line=config.OPERATOR_STATION_COUNTS,
         actual_per_line=actual)
     print(f"    gate 3 source: {config.OPERATOR_COUNTS_SOURCE}")
+
+    thinned = thin(st_rows)
+    thinned_rows = st_rows[st_rows["stop_name"].isin(thinned)]
+    st_rows = st_rows[~st_rows["stop_name"].isin(thinned)]
 
     poly = city_polygon()
     pts = gpd.GeoDataFrame(st_rows, geometry=gpd.points_from_xy(st_rows["longitude"],
@@ -154,6 +223,10 @@ def main():
         excluded.append({"station": r["stop_name"], "lines": r["lines"],
                          "reason": f"in {hit.iloc[0]['name']} ({hit.iloc[0]['istat']}), "
                                    f"outside comune {config.ISTAT_COMUNE}",
+                         "latitude": r["latitude"], "longitude": r["longitude"]})
+    for _, r in thinned_rows.iterrows():
+        excluded.append({"station": r["stop_name"], "lines": r["lines"],
+                         "reason": thinned[r["stop_name"]],
                          "latitude": r["latitude"], "longitude": r["longitude"]})
     out = pd.DataFrame(excluded, columns=["station", "lines", "reason", "latitude", "longitude"])
     out.to_csv(config.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8")

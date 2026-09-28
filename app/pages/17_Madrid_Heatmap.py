@@ -23,7 +23,7 @@ set_base_font()
 
 render_city_nav("Madrid")
 
-st.title("Madrid: commercial density around Metro de Madrid station areas")
+st.title("Madrid: commercial density around Metro and Metro Ligero station areas")
 
 st.markdown(
     """
@@ -50,8 +50,15 @@ layers this map is drawn from. Where Metro de Madrid publishes a figure, the
 two reconcile: its 303 stations are 293 station-and-line records plus Metro
 Ligero's line 1, which it also operates.
 
-**Stations outside the city are not mapped.** Forty-nine of the network's 242
-stations lie in Alcorcón, Getafe, Arganda del Rey and fifteen other
+**Metro Ligero line 1 is drawn as well**, from the same CRTM layers. It runs
+from Pinar de Chamartín to Las Tablas through Sanchinarro, districts the Metro
+does not reach, and all nine of its stations are inside the city; two of them
+are shared with the Metro. Metro Ligero's lines 2 and 3 are not drawn: each has
+only one or two stations inside Madrid before running on into Pozuelo and
+Boadilla. Line 4 is Parla's own tram.
+
+**Stations outside the city are not mapped.** Forty-nine of the 249 stations on
+the lines drawn here lie in Alcorcón, Getafe, Arganda del Rey and fifteen other
 municipalities; lines 10 and 12 run well past the city and are drawn in full,
 but mapping their stations would need each municipality's own business
 register. They are listed in `outputs/madrid/excluded_stations.csv`.

@@ -20,14 +20,22 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**48 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**56 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Tram rescopes, review time: the owner's calls, the page texts written, and the REM's notice renumbered 51](#2026-09-27---tram-rescopes-review-time-the-owners-calls-the-page-texts-written-and-the-rems-notice-renumbered-51)
+- [The REM's licence verdict, and two credits the tram batch cannot publish without (Cleanup's review)](#2026-09-27---the-rems-licence-verdict-and-two-credits-the-tram-batch-cannot-publish-without-cleanups-review)
+- [Measured before the shared thin() refactor: haversine vs projected moves no stop in Rotterdam or Amsterdam, but 62 reason strings change](#2026-09-27---measured-before-the-shared-thin-refactor-haversine-vs-projected-moves-no-stop-in-rotterdam-or-amsterdam-but-62-reason-strings-change)
 - [The japan-city skill written from Kobe; Osaka recommended next](#2026-09-27---the-japan-city-skill-written-from-kobe-osaka-recommended-next)
 - [Kobe's page, notice and docs approved by the owner; Taoyuan's macro label moved; the funicular stations out of the excluded file](#2026-09-27---kobes-page-notice-and-docs-approved-by-the-owner-taoyuans-macro-label-moved-the-funicular-stations-out-of-the-excluded-file)
+- [Tram rescope 5 of 5: San Francisco's F Market & Wharves drawn and thinned; two stacked stops merged into their subway stations (held for review time)](#2026-09-27---tram-rescope-5-of-5-san-franciscos-f-market-wharves-drawn-and-thinned-two-stacked-stops-merged-into-their-subway-stations-held-for-review-time)
+- [Tram rescope 4 of 5: Paris's T3a and T3b drawn, in this project's own colours (held for review time)](#2026-09-27---tram-rescope-4-of-5-pariss-t3a-and-t3b-drawn-in-this-projects-own-colours-held-for-review-time)
 - [Kobe pipeline built: the first Japanese city, on shared Japanese steps 1 and 2 (owner calls on rail and names)](#2026-09-27---kobe-pipeline-built-the-first-japanese-city-on-shared-japanese-steps-1-and-2-owner-calls-on-rail-and-names)
+- [Tram rescope 3 of 5: Madrid's Metro Ligero ML1 drawn from CRTM's M10 layers; ML2 and ML3 left out as stubs (owner; held for review time)](#2026-09-27---tram-rescope-3-of-5-madrids-metro-ligero-ml1-drawn-from-crtms-m10-layers-ml2-and-ml3-left-out-as-stubs-owner-held-for-review-time)
 - [Göteborg's rail measured: 13 tram lines and 127 stops inside the city](#2026-09-27---göteborgs-rail-measured-13-tram-lines-and-127-stops-inside-the-city)
+- [Tram rescope 2 of 5: Rome's tram 8 drawn (the base service, Casaletto - Venezia) and thinned to 7 of its 16 stops (held for review time)](#2026-09-27---tram-rescope-2-of-5-romes-tram-8-drawn-the-base-service-casaletto---venezia-and-thinned-to-7-of-its-16-stops-held-for-review-time)
+- [Tram rescope 1 of 5: Montréal's REM drawn as one line, from the operator's own feed (held for review time)](#2026-09-27---tram-rescope-1-of-5-montréals-rem-drawn-as-one-line-from-the-operators-own-feed-held-for-review-time)
 - [Kansas City's streetcar passes the stub test; the Linz lead is aggregate counts, closed](#2026-09-27---kansas-citys-streetcar-passes-the-stub-test-the-linz-lead-is-aggregate-counts-closed)
 - [Worktrees: monterrey retired, trams created for the next build session, main checkout fast-forwarded (owner)](#2026-09-27---worktrees-monterrey-retired-trams-created-for-the-next-build-session-main-checkout-fast-forwarded-owner)
 - [Four owner calls: Ottawa to Band C, Rijswijk and Delft to T as Den Haag add-ons, the Band C memo's last verdicts accepted, Paris T2/T9 out](#2026-09-27---four-owner-calls-ottawa-to-band-c-rijswijk-and-delft-to-t-as-den-haag-add-ons-the-band-c-memos-last-verdicts-accepted-paris-t2t9-out)
@@ -81,6 +89,94 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Tram rescopes, review time: the owner's calls, the page texts written, and the REM's notice renumbered 51
+
+- **The owner settled the batch's open calls at review time.** T3a keeps
+  #FF7429 (the rule's smallest lighter step, 13.9 from Ligne 5), rather than
+  moving off orange as the bis lines did. The F keeps its whole route,
+  Market St stretch included, as built (57 stations), rather than a new
+  "overlay stops" rule. The REM and amended CRTM credits were approved
+  earlier (`df4cf7b`).
+- **The page texts, blurbs, map titles and `excluded_categories.md` wording
+  for all five cities were written as drafted and approved.**
+  - Titles name the new lines.
+  - Montréal: the REM paragraph, its seven excluded stations, and five of its
+    stations in related municipalities. Checked by spatial join: Mont-Royal,
+    Pointe-Claire (2), Kirkland and Sainte-Anne-de-Bellevue; none in the
+    unsurveyed Hampstead or L'Île-Dorval.
+  - Rome: "Six lines", tram 8's paragraph and thinning; "about half" in the
+    rings became "about three in five" (61%).
+  - Madrid: ML1's paragraph; "Forty-nine of the 249 stations on the lines
+    drawn here", Cleanup's catch.
+  - Paris: T3a/T3b and their colours, stated as this project's; T2/T9 as
+    stubs.
+  - San Francisco: seven lines; the F drawn for the waterfront.
+  - The excluded-categories tram test now reads "drawn where it is the
+    rapid-transit system, or where it reaches districts the metro does not",
+    and the thinning list adds the F and Rome's tram 8.
+  The five maps were re-rendered for the titles alone; counts are unchanged.
+- **REM's notice is 51, not 50: Kobe landed first with 50** (Cleanup). The
+  number is changed in `docs/data_sources.md`, `docs/data_sources/canada.md`,
+  `app/components.py`'s comment and the build handoff. On this branch alone
+  `check_provenance.py` now reports the notice numbers as 1-49 then 51. That
+  is the one check failing (18 of 19), and it is filled by the merge with
+  `worktree-kobe`, whose `data_sources.md` carries 50 and no 51. The two
+  data-source rows' "held for review time" notes were made plain statements.
+
+### 2026-09-27 - The REM's licence verdict, and two credits the tram batch cannot publish without (Cleanup's review)
+
+- **The REM feed is PERMITTED WITH CONDITIONS under CC BY 4.0** (`licence-read`,
+  2026-09-27). This supersedes the "licence row pending, provenance fails" line
+  in "Tram rescope 1 of 5", which was true when written: `51a3b65` then recorded
+  the rows in `docs/data_sources/canada.md` and `check_provenance.py` names
+  Montréal OK. The grant is the unmodified CC BY 4.0 legal code bundled in the
+  zip as `__Licence.txt`; no publisher web page states it (rem.info,
+  pulsaroperations.ca and the feed host carry no data terms), and Transitland's
+  CC-BY-4.0 is a copied Québec template. Credit **Réseau express métropolitain
+  (REM)**, the creator `feed_info`/`agency.txt` name (not Pulsar, which serves
+  the file, nor CDPQ Infra); state modification; link the licence; no
+  endorsement or logo.
+- **Two credits must reach `app/components.py` before the batch lands**, found
+  by Cleanup's review of this branch (REM) and while fixing it (CRTM). Landing
+  `outputs/` publishes the maps, so the batch is NOT app-free as recorded:
+  - a new REM credit, notice 50 in `docs/data_sources.md`, required and not
+    yet displayed;
+  - notice 20 (CRTM) amended: its displayed text names only the Metro's
+    "thirteen real lines", and ML1 now comes from CRTM's `M10_Red` too.
+  Both wordings are drafted for the owner, not written. With them, the
+  publish needs `check_deploy_imports.py` and a reboot (`publish-city`).
+- **Cleanup's other fixes, applied:** the in-ring shares in
+  `docs/map_inconsistencies.md` (Montréal 56 -> 60%, Rome 53 -> 61%, San
+  Francisco 69 -> 72%, Paris 97 -> 98%, Madrid 94 -> 95%, and Theme 7's
+  90%-or-more list); the "on its branch until review time" notes, which
+  would turn false on landing, rewritten as plain dated statements; Rome,
+  Madrid and Paris added to the "Trams or light rail drawn" list; the thin()
+  handoff's readiness test changed from commit ancestry, which a squash would
+  defeat, to the content on master. "Tram rescope 1 of 5"'s Files line left
+  out `outputs/montreal/{excluded_stations.csv, heatmap.html}`; both are in
+  `c8c1c53`.
+
+### 2026-09-27 - Measured before the shared thin() refactor: haversine vs projected moves no stop in Rotterdam or Amsterdam, but 62 reason strings change
+
+- **Switching the tram thinning filter from haversine on lat/lon to the
+  projected CRS moves NO stop across the 0.5 mi threshold, in Rotterdam or
+  in Amsterdam** (both used haversine; the invariant forbids measuring in
+  EPSG:4326). Measured 2026-09-27 by wrapping each city's `thin()` to run the
+  original and a projected (EPSG:32631) copy on the same inputs during a real
+  step 1, and returning the original: every line's kept and cut sets are
+  identical. Closest to the threshold: Amsterdam's Inaristraat (6.8 m),
+  Nassaukade (8.0 m) and Olympiaweg (8.8 m); Rotterdam's Lommerrijk (14.6 m).
+  The two methods differ by about 0.2% here, 1-2 m over half a mile.
+- **But the cut reasons' 3-dp mileage changes in 62 strings**: 21 in
+  Rotterdam, 41 in Amsterdam, each by 0.001-0.002 mi (e.g. "0.308 mi" to
+  "0.309 mi"). So the shared-`thin()` refactor cannot be zero-drift for those
+  two cities: the expected drift is those digits in
+  `excluded_stations.csv`'s reason column and nothing else. Rome already
+  measures in its projected CRS and should drift zero. Outputs were restored
+  after the runs (the diff ignoring line endings was empty). The refactor is
+  handed over in `docs/handoff_thin_refactor_2026-09-27.md`, to start after
+  this branch lands.
 
 ### 2026-09-27 - The japan-city skill written from Kobe; Osaka recommended next
 
@@ -154,6 +250,76 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
     27,251);
   - `check_all.py`: 19 of 19. One local render of the page: prose, map and
     notice present.
+
+### 2026-09-27 - Tram rescope 5 of 5: San Francisco's F Market & Wharves drawn and thinned; two stacked stops merged into their subway stations (held for review time)
+
+- **The F is drawn, matched on its exact route_id "F"** (route_type 0, 852
+  trips); the cable cars (PH, PM, CA; route_type 5) share its #B49A36 and stay
+  out. The config's first reason for excluding it ("a separate branded
+  service - different rolling stock") is replaced: the owner's rule that trams
+  count where they reach districts the metro does not covers the Embarcadero
+  to Fisherman's Wharf, which no Muni Metro line reaches. Shape 19851 (its
+  most-run, 426 of 852 trips; 30 stops one way).
+- **Colour: SFMTA's own #B49A36, unlike J-T.** The spec's Delta-E figures were
+  measured against SFMTA's official colours, but this map draws J-T in this
+  project's own palette, so they were re-measured against what is drawn: 35.3
+  from L's gold, 40.0 from N's brown, 60.2 from the nearest pin.
+- **Thinned by SF's existing surface-stop filter, as J-T are: 10 of 30 kept.**
+  First run: two kept F stops sat directly above Muni Metro stations, 17th St &
+  Castro St 27 m from Metro Castro and Market St & South Van Ness Ave 17 m
+  from Metro Van Ness - duplicate ring centres splitting the same businesses.
+  **They are merged through SF's own `STATION_NAME_ALIASES`**, whose rule is
+  "the same physical station named differently by different lines' trips",
+  under 200 ft; both qualify, so no new rule was needed. Merged, they are
+  interchanges, and the spacing walk restarts there. Stations 49 -> 57 (8
+  new); thinned stops 65 -> 85.
+- **Open for review: the F's Market St stretch runs directly over the
+  subway.** Four kept F stops sit 170-282 m from a subway station (Market & 1st
+  282 m from Embarcadero, 4th 170 m from Union Square/Market St, 7th 170 m
+  from Civic Center, Dolores 213 m from Duboce & Church). They are separate
+  street stops under the 200 ft rule and stay. Dropping the F's Market stretch
+  as "an overlay on the metro" (the tram test's own words) would be a new rule
+  and is the owner's call; the waterfront stops are the F's reason to exist.
+- Storefronts within a ring 12,792 of 17,837. Drift `excluded_stations.csv`
+  and `heatmap.html`; `check_map_view.js` 12.5 = expected, 0 corrections;
+  markup, inline arrays, scope disclosure and provenance pass. The page still
+  says Muni Metro only: a draft for the owner's review. The two "6 lines"
+  messages in step 1 now count the lines. Files:
+  `pipeline/san_francisco/{config, step1_stations, step3_map}.py`,
+  `outputs/san_francisco/{excluded_stations.csv, heatmap.html}`,
+  `docs/map_inconsistencies.md`.
+
+### 2026-09-27 - Tram rescope 4 of 5: Paris's T3a and T3b drawn, in this project's own colours (held for review time)
+
+- **T3a (`IDFM:C01391`) and T3b (`IDFM:C01679`) are drawn from the cached
+  IDFM GTFS, matched on route_type 0 AND the exact route_id AND the exact
+  short name**; step 1 stops if any of the three moves. T2 and T9 stay out as
+  stubs (owner's call, 2026-09-27). Labels "Tram T3a" and "Tram T3b": the mode
+  word, Copenhagen's convention, where the spec wrote the bare refs.
+- **IDFM shares ONE parent_station between the trams and the Métro at every
+  interchange** (22 of the trams' 57 stops, measured at 0 m), so Paris's
+  existing parent_station collapse merges them with no name rule. Stations
+  245 -> 280 (35 new, all inside the commune); excluded unchanged at 76; all
+  18 drawn lines keep a station inside. Tram spacing median 411 m against the
+  Métro's 399 m, so no thinning (Paris's outer ring is 0.3 mi). Gate 3 still
+  covers the 16 Métro lines only: IDFM's per-line layer was not re-read for
+  trams, and the feed's own 25 / 33 would not be independent.
+- **The colours are this project's, not RATP's.** IDFM gives T3a Ligne 5's
+  FF5A00 and T3b Ligne 12's 00643C (Delta-E 0 each). Hue and saturation kept,
+  LIGHTER by the smallest HSL step clearing 13 against every Métro line and
+  every pin (Amsterdam's, Oslo's and Copenhagen's rule; lighter for the dark
+  basemap): T3a #FF7429 (+0.08), 13.9 from Ligne 5; T3b #00834E (+0.06), 14.5
+  from Ligne 12 and 16.8 from the Personal services pin (+0.08 would land
+  13.2 from that pin). **For review**: T3a still reads as an orange near
+  Ligne 5's in the render. They are told apart by route (the peripheral
+  boulevards against a radial line) and by label; a hue change would be the
+  bis lines' remedy if the owner wants more.
+- Storefronts within a ring 85,501 of 87,164. Drift `heatmap.html` only;
+  `check_map_view.js` 12.5 = expected, 0 corrections; markup (dark-mode label
+  contrast), inline arrays, scope disclosure and provenance pass. The page
+  still says Métro only: a draft for the owner's review. Files:
+  `pipeline/paris/{config, step1_stations, step3_map}.py`,
+  `outputs/paris/heatmap.html`, `docs/map_inconsistencies.md`.
 
 ### 2026-09-27 - Kobe pipeline built: the first Japanese city, on shared Japanese steps 1 and 2 (owner calls on rail and names)
 
@@ -250,6 +416,45 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   - Hiroshima rose (block 96.0% -> 96.3%, unplaced 2.3% -> 2.0%), the same
     pattern with 広島市立.
   - Kobe's screen is unchanged at 97.1 / 2.6 / 0.3.
+### 2026-09-27 - Tram rescope 3 of 5: Madrid's Metro Ligero ML1 drawn from CRTM's M10 layers; ML2 and ML3 left out as stubs (owner; held for review time)
+
+- **ML1 is drawn, from CRTM's `M10_Red` feature services, the Metro layers'
+  sibling under the same terms.** The ArcGIS item declares the same
+  `crtm.es/licencia-de-uso` and "© CRTM" as `M4_Red` and was last edited the
+  same day (2026-06-05), so the existing CRTM notice and its date cover it.
+  Cached `crtm_m10_estaciones.json` (86,277 B, 57 records) and
+  `crtm_m10_tramos.json` (233,439 B, 100 tramos); the owner OK'd the
+  download. This supersedes the first build's reason for leaving Metro Ligero
+  out ("so the city ships one agency's rail system", `pipeline/madrid/
+  config.py`), which was never the tram test: ML1 reaches Sanchinarro and Las
+  Tablas, which the Metro does not.
+- **ML2 and ML3 are left out as stubs (owner's call, as recommended).**
+  Inside Madrid ML2 has 2 of its 13 stations (Estación de Aravaca, and Colonia
+  Jardín, already Metro Línea 10's) and ML3 only Colonia Jardín; ML4 is
+  Parla's tram. The spec's "11 of 56 inside Madrid" was 12 records of 57,
+  i.e. 11 names with Colonia Jardín counted once per line. ML2's CRTM colour
+  #7B1265 is also Delta-E 9.5 from Línea 9, under the floor, so drawing it
+  would have meant this project's own shade. Every undrawn code is named in
+  `config.LIGERO_LEFT_OUT`; an unrecorded one stops step 1, which caught that
+  Parla's stations say `LINEAS` "4" while its tramos say "4-1"/"4-2".
+- **Colour #2754D3, CRTM's own** (the `M10_Lineas` renderer, rgb 39, 84, 211;
+  the station layer carries none). Delta-E 15.1 from Línea 10 (#003DA5),
+  which it meets at Las Tablas, and 28.0 from the Retail pin: clears the
+  floor, below the preferred 45, recorded. Not the "light blue near Línea 1"
+  the spec feared: 51.6+ from Línea 1.
+- **Stations 193 -> 200.** ML1's records join the Metro's before the name
+  collapse, so Pinar de Chamartín and Las Tablas average over every line's
+  point as Metro interchanges already do, and move slightly; 7 new stations.
+  Polygon and CODIGOMUNICIPIO agree on all 200; excluded unchanged at 49.
+  ML1 averages about 670 m between stops, so no thinning (San Diego's shape).
+  Premises within a ring 50,497 of 53,355. Baseline recorded; drift
+  `heatmap.html` only. `check_map_view.js` 11.25 = expected, 0 corrections;
+  markup, inline arrays, scope disclosure and provenance pass. The page text
+  still describes the Metro only: a draft for the owner's review. Files:
+  `pipeline/madrid/{config, fetch_sources, step1_stations, step3_map}.py`,
+  `outputs/madrid/{baseline.json, heatmap.html}`,
+  `docs/data_sources/spain.md`, `docs/map_inconsistencies.md`.
+
 ### 2026-09-27 - Göteborg's rail measured: 13 tram lines and 127 stops inside the city
 
 - **The Band T row carried "Trams, no metro - INHERITED, not measured" since
@@ -263,6 +468,91 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - So Göteborg is a large tram network, closer to Prague's 37 routes than to a
   single line. A build faces the same label and legend question as the heavy
   tram rescopes.
+
+### 2026-09-27 - Tram rescope 2 of 5: Rome's tram 8 drawn (the base service, Casaletto - Venezia) and thinned to 7 of its 16 stops (held for review time)
+
+- **Tram 8 is drawn from OSM relations 385213 and 1674659, the BASE service,
+  chosen against the GTFS's route 8.** The cached Roma Mobilità GTFS (read
+  only as a check; its terms stay ambiguous) runs 2,985 of route 8's 3,207
+  trips (93%) on the 16-stop Casaletto - Venezia pattern and about 213 on the
+  "8 prolungato" to Porta Maggiore, so the prolungato pair (5376334, 5376335)
+  is recorded in `LEFT_OUT_RELATIONS` rather than drawn. Keyed on relation
+  ids, Rome's rule. Gate 3 matches: 16 of 16 stop names. Trams 2, 3, 5, 14
+  and 19 are not fetched (0 trips; bus-replaced). Colour #bfdf14 (OSM's,
+  ATAC's): Delta-E 68.8 from the nearest pin.
+- **Fetched on its own**: `data/rome/raw/osm_tram8.json`, 125,640 B, the four
+  candidate relations by id through `pipeline.osm.fetch` (owner OK'd). The
+  metro cache is untouched; step 1 reads both. `osm_rail.json`'s bbox query
+  asks for subway|light_rail only, which is why it held no trams.
+- **Tram 8 is THINNED, a call the existing rule settles rather than a new
+  one.** Measured: a median 322 m between its stops (min 144 m, Arenula's
+  two), and 15 of 16 more than the 966 m outer ring from any metro or
+  Roma-Viterbo station - the street-running offshoot shape
+  `docs/sub_transit_line_filters.md` was written for (San Francisco,
+  Amsterdam, Rotterdam). Rotterdam's `thin()` was ported with projected
+  distances: one stop per half mile along the line, termini and interchanges
+  kept, walking directions only until every stop is covered (Rotterdam's
+  rule). Thinning BOTH directions and keeping the union cut only 4 of 16,
+  which barely thins; the one-direction walk cuts 9. Kept: Casaletto,
+  Gianicolense/Ravizza, Gianicolense/Ponte Bianco, Trastevere/Pascarella,
+  Trastevere/Min. P. Istruzione, Arenula/Min. G. Giustizia, Venezia. **Staz.ne
+  Trastevere is cut**: the FS station is not a drawn line, so it is not an
+  interchange under the rule. A third copy of `thin()` now exists (Amsterdam,
+  Rotterdam, Rome); lifting it into shared code is flagged separately.
+- **Stations in scope 87 -> 94; excluded 1 -> 10** (9 thinned); stop
+  positions 182 -> 212; storefronts within a ring 60,739 of 98,897 (step 2
+  unchanged). Baseline recorded with `--update-baseline`; drift is
+  `excluded_stations.csv` and `heatmap.html` only. `check_map_view.js` 11.5 =
+  expected, 0 corrections; markup, inline arrays, scope disclosure and
+  provenance pass. The map title and page still say "Metro and Roma–Viterbo":
+  drafts for the owner's review. Files: `pipeline/rome/{config, fetch_sources,
+  step1_stations, step3_map}.py`, `outputs/rome/{baseline.json,
+  excluded_stations.csv, heatmap.html}`, `docs/map_inconsistencies.md`.
+
+### 2026-09-27 - Tram rescope 1 of 5: Montréal's REM drawn as one line, from the operator's own feed (held for review time)
+
+- **The REM is drawn on Montréal's map, from its operator's own GTFS, as ONE
+  line labelled "REM (A1, A3, A4)" (owner's call on the label).** Source
+  `https://gtfs.gpmmom.ca/gtfs/gtfs.zip` (287,495 B, Last-Modified
+  2026-05-25, valid 2026-05-19 to 2026-12-31; the owner OK'd the download),
+  the feed Transitland indexes for the REM. STM's feed carries only the
+  Métro. The zip bundles `__Licence.txt`, the unmodified CC BY 4.0 legal code;
+  the `licence-read` verdict and the `docs/data_sources/` row are still
+  pending, and `check_provenance.py` names Montréal FAILED until the row
+  lands. **One line, not three**: A1, A3 and A4 share one colour,
+  `pipeline/linecolour.py` refuses two drawn lines under Delta-E 10 apart, and
+  three invented shades would misstate the branding. It is New York's
+  shared-trunk tuple (shapes S10014 and S30008, the most-run shape per branch).
+  Colour #73A400, the feed's own `route_color` rather than OSM's #84BD00:
+  Delta-E 29.8 from Ligne Verte, 48.5 from the Personal services pin.
+- **The numbering came from the feed, and English Wikipedia had it wrong.**
+  `routes.txt`: "A4 - Deux-Montagnes / A1 - Brossard" and "A3 -
+  Anse-à-l'Orme / A1 - Brossard". English Wikipedia swapped A3 and A4 on
+  2026-09-27; French Wikipedia agreed with the feed. The spec's warning (check
+  the operator before labelling) was the right one.
+- **Stations 64 -> 78; excluded 4 -> 11.** 23 REM stations; 16 are inside the
+  agglomeration. Two collapse into Métro stations BY NAME (Copenhagen's rule),
+  keeping the Métro's point: McGill (spread 180 m) and Édouard-Montpetit
+  (26 m); a spread past 250 m stops the run. Gare Centrale stays its own
+  station, 222 m from Bonaventure under a different name, now the tightest
+  pair on the map (no thinning; nearest-station assignment). Excluded: Brossard
+  (7,298 m outside), Du Quartier, Panama (South Shore), and Sainte-Dorothée
+  (402 m), Île-Bigras, Grand-Moulin and Deux-Montagnes (Laval / North Shore),
+  with the line drawn to its ends.
+- **The spatial cut is cross-checked against the REM's own fare zone**, as the
+  Métro's is against STM's " -Zone B" suffix: `zone_id` 1 (ARTM zone A) agrees
+  on all 17 zoned stations. The four West Island stations opened 2026-05-18
+  carry no zone in this feed version (20260520) and are checked spatially only.
+- **Storefronts within a ring: 10,421 of 17,231** (step 2 unchanged at
+  17,231; Retail 8,283, Food service 6,117, Personal services 2,831).
+  Drift: `excluded_stations.csv` and `heatmap.html` only, as intended.
+  `check_map_view.js` zoom 11.5 = expected, 0 corrections;
+  `check_map_markup.py`, `check_inline_arrays.py`, `check_scope_disclosure.py`
+  and `check_no_fetch_in_steps.py` pass. The page text, the city blurb and the
+  map title still say Métro only: drafts for the owner's review, with the
+  `excluded_categories.md` line. Files: `pipeline/montreal/{config,
+  fetch_sources,step1_stations,step3_map}.py`, `docs/map_inconsistencies.md`
+  (Montréal rows, and the D.C. Streetcar "no longer operating").
 
 ### 2026-09-27 - Kansas City's streetcar passes the stub test; the Linz lead is aggregate counts, closed
 

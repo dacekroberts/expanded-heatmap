@@ -47,6 +47,9 @@ LINE_SHAPES = {
     "M": ("9651", "#f72585"),   # magenta
     "N": ("9717", "#6f4518"),   # brown
     "T": ("354", "#495057"),    # dark gray
+    # F (2026-09-27): SFMTA's OWN colour, unlike J-T - it is distinct already:
+    # Delta-E 35.3 from L's gold, 40.0 from N's brown, 60.2 from the nearest pin.
+    "F": ("19851", "#B49A36"),  # heritage gold
 }
 # Per-line label end override: "start" or "end" forces which end of a line its
 # label goes at; the default (automatic) picks the tail end farthest from the
@@ -74,7 +77,7 @@ def main():
 
     render_heatmap(
         output_path=HEATMAP_HTML,
-        map_title="San Francisco Muni Metro Business Density Heatmap",
+        map_title="San Francisco Muni Metro and F Market Business Density Heatmap",
         city_name="San Francisco",
         system_name="Muni Metro",
         stations=pd.read_csv(STATIONS_CSV),

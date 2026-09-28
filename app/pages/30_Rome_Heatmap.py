@@ -25,14 +25,15 @@ set_base_font()
 
 render_city_nav("Rome")
 
-st.title("Rome: commercial density around metro and urban rail stations")
+st.title("Rome: commercial density around metro, urban rail and tram stations")
 
 # Approved by the owner 2026-09-24, with the Roma-Viterbo urban service drawn
-# on the owner's call the same morning.
+# on the owner's call the same morning. Tram 8 added 2026-09-27 (the tram
+# rescope), wording approved by the owner.
 st.markdown(
     """
-Five lines are drawn — **Metro A, B, B1 and C, and the Roma–Viterbo railway's
-urban service** from Piazzale Flaminio to Montebello — each labelled on the map
+Six lines are drawn — **Metro A, B, B1 and C, the Roma–Viterbo railway's urban
+service** from Piazzale Flaminio to Montebello, **and Tram 8** — each labelled on the map
 and in the legend. The metro is in ATAC's colours, with the B1 branch a shade
 lighter than line B so the two stay distinct. The lines and stations are
 OpenStreetMap's, because the data Rome's transport agency publishes comes with a
@@ -44,8 +45,17 @@ kilometre apart, a train comes every 10 to 15 minutes, and it serves the
 districts north of Flaminio that no metro line reaches. The Roma–Lido railway
 (Metromare) does not, because its stations are about two kilometres apart and
 its trains come every 15 to 20 minutes, so Ostia and Acilia have no station
-rings. Trams, the Roma–Viterbo railway beyond Montebello and suburban trains are
-not drawn.
+rings. Rome's other trams, the Roma–Viterbo railway beyond Montebello and
+suburban trains are not drawn.
+
+**Tram 8 is drawn** from Casaletto to Piazza Venezia, because it serves
+Monteverde and Trastevere, which no metro line reaches. It is shown as it runs
+most of the time: a longer variant to Porta Maggiore makes about one trip in
+fourteen and is not drawn. Its stops are only a few hundred metres apart, closer
+than the rings are built for, so one stop about every half mile along the line
+is kept, plus both ends. San Francisco's, Amsterdam's and Rotterdam's tram lines
+are thinned the same way. The stops left out are listed in
+`outputs/rome/excluded_stations.csv`.
 
 The map covers the **comune di Roma**, Ostia included. Metro C's last stop,
 Monte Compatri – Pantano, is in a neighbouring comune and is not counted; the
@@ -71,7 +81,7 @@ that do, food makers such as pizza-by-the-slice counters and pastry shops count
 as food service, and laundries, nail bars and tattoo studios as personal
 services, while repair shops and garages are left out.
 
-**About half the storefronts sit within a station ring**, because Rome's rail,
+**About three storefronts in five sit within a station ring**, because Rome's rail,
 dense in the centre, leaves much of a very large comune beyond walking distance
 of a station.
 

@@ -197,6 +197,17 @@ ROUTE_IDS = [
     "IDFM:C01383", "IDFM:C01384", "IDFM:C01386", "IDFM:C01387",
 ]
 
+# TRAMS T3a AND T3b (the tram rescope, 2026-09-27): the two lines that run the
+# boulevards des Maréchaux, wholly inside the commune (T3a 25 stops, T3b 33,
+# meeting at Porte de Vincennes), reaching the edge districts between the
+# Métro's radial ends. Matched on route_type 0 AND the exact route_id AND the
+# exact short name, never a substring. T2 and T9 are stubs (3 of 24 and 1 of
+# 19 stops inside Paris) and stay out (owner, 2026-09-27); the other trams do
+# not enter the commune. IDFM gives the trams and the Métro ONE parent_station
+# at each of the 22 interchanges, so the existing collapse merges them.
+ROUTE_TYPE_TRAM = "0"
+TRAM_ROUTES = {"IDFM:C01391": "T3a", "IDFM:C01679": "T3b"}
+
 # GATE 3: the OPERATOR'S OWN per-line station counts, from a source that
 # shares no code path with the feed.
 #
@@ -235,6 +246,7 @@ LINE_NAMES = {
     "9": "Ligne 9", "10": "Ligne 10", "11": "Ligne 11", "12": "Ligne 12",
     "13": "Ligne 13", "14": "Ligne 14",
     "3B": "Ligne 3bis", "7B": "Ligne 7bis",
+    "T3a": "Tram T3a", "T3b": "Tram T3b",
 }
 
 # RATP's official livery from the feed's own route_color, with TWO OVERRIDES.
@@ -261,6 +273,15 @@ LINE_COLOURS = {
     "3B": "#3D7A99",   # was 82C8E6, identical to Ligne 13
     "7B": "#00838F",   # was 82DC73, identical to Ligne 6; then 2E8B57, too
                        # close to the Personal services pin
+    # THE TRAMS GET THE MÉTRO'S COLOURS in IDFM's feed: T3a FF5A00 is Ligne 5
+    # and T3b 00643C is Ligne 12, Delta-E 0 each. THIS PROJECT'S colours, not
+    # RATP's: hue and saturation kept, LIGHTER by the smallest HSL step that
+    # clears 13 against every Métro line and every pin (Amsterdam's, Oslo's
+    # and Copenhagen's rule; lighter for the dark basemap, Lille's reason).
+    # Measured 2026-09-27: T3a +0.08 -> 13.9 from Ligne 5; T3b +0.06 -> 14.5
+    # from Ligne 12 (+0.08 lands 13.2 from the Personal services pin).
+    "T3a": "#FF7429",  # was FF5A00, identical to Ligne 5
+    "T3b": "#00834E",  # was 00643C, identical to Ligne 12
 }
 
 # --- Business filtering ------------------------------------------------
