@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**45 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**46 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [The REM's licence verdict, and two credits the tram batch cannot publish without (Cleanup's review)](#2026-09-27---the-rems-licence-verdict-and-two-credits-the-tram-batch-cannot-publish-without-cleanups-review)
 - [Measured before the shared thin() refactor: haversine vs projected moves no stop in Rotterdam or Amsterdam, but 62 reason strings change](#2026-09-27---measured-before-the-shared-thin-refactor-haversine-vs-projected-moves-no-stop-in-rotterdam-or-amsterdam-but-62-reason-strings-change)
 - [Tram rescope 5 of 5: San Francisco's F Market & Wharves drawn and thinned; two stacked stops merged into their subway stations (held for review time)](#2026-09-27---tram-rescope-5-of-5-san-franciscos-f-market-wharves-drawn-and-thinned-two-stacked-stops-merged-into-their-subway-stations-held-for-review-time)
 - [Tram rescope 4 of 5: Paris's T3a and T3b drawn, in this project's own colours (held for review time)](#2026-09-27---tram-rescope-4-of-5-pariss-t3a-and-t3b-drawn-in-this-projects-own-colours-held-for-review-time)
@@ -78,6 +79,39 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - The REM's licence verdict, and two credits the tram batch cannot publish without (Cleanup's review)
+
+- **The REM feed is PERMITTED WITH CONDITIONS under CC BY 4.0** (`licence-read`,
+  2026-09-27). This supersedes the "licence row pending, provenance fails" line
+  in "Tram rescope 1 of 5", which was true when written: `51a3b65` then recorded
+  the rows in `docs/data_sources/canada.md` and `check_provenance.py` names
+  Montréal OK. The grant is the unmodified CC BY 4.0 legal code bundled in the
+  zip as `__Licence.txt`; no publisher web page states it (rem.info,
+  pulsaroperations.ca and the feed host carry no data terms), and Transitland's
+  CC-BY-4.0 is a copied Québec template. Credit **Réseau express métropolitain
+  (REM)**, the creator `feed_info`/`agency.txt` name (not Pulsar, which serves
+  the file, nor CDPQ Infra); state modification; link the licence; no
+  endorsement or logo.
+- **Two credits must reach `app/components.py` before the batch lands**, found
+  by Cleanup's review of this branch (REM) and while fixing it (CRTM). Landing
+  `outputs/` publishes the maps, so the batch is NOT app-free as recorded:
+  - a new REM credit, notice 50 in `docs/data_sources.md`, required and not
+    yet displayed;
+  - notice 20 (CRTM) amended: its displayed text names only the Metro's
+    "thirteen real lines", and ML1 now comes from CRTM's `M10_Red` too.
+  Both wordings are drafted for the owner, not written. With them, the
+  publish needs `check_deploy_imports.py` and a reboot (`publish-city`).
+- **Cleanup's other fixes, applied:** the in-ring shares in
+  `docs/map_inconsistencies.md` (Montréal 56 -> 60%, Rome 53 -> 61%, San
+  Francisco 69 -> 72%, Paris 97 -> 98%, Madrid 94 -> 95%, and Theme 7's
+  90%-or-more list); the "on its branch until review time" notes, which
+  would turn false on landing, rewritten as plain dated statements; Rome,
+  Madrid and Paris added to the "Trams or light rail drawn" list; the thin()
+  handoff's readiness test changed from commit ancestry, which a squash would
+  defeat, to the content on master. "Tram rescope 1 of 5"'s Files line left
+  out `outputs/montreal/{excluded_stations.csv, heatmap.html}`; both are in
+  `c8c1c53`.
 
 ### 2026-09-27 - Measured before the shared thin() refactor: haversine vs projected moves no stop in Rotterdam or Amsterdam, but 62 reason strings change
 

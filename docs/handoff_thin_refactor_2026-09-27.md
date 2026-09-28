@@ -7,12 +7,13 @@ pointers. Delete this file in the commit that finishes the job.
 
 ```bash
 git fetch origin
-git merge-base --is-ancestor eedeb32 origin/master && echo ready || echo "not yet - stop"
+git show origin/master:pipeline/rome/step1_stations.py | grep -q "^def thin(" && echo ready || echo "not yet - stop"
 ```
 
-`eedeb32` is the commit that added Rome's copy of `thin()`, on
-`worktree-trams`. If it is not an ancestor of `origin/master`, stop: the owner
-has not called review time yet. Doing this on master first would leave two
+This tests the CONTENT: Rome's copy of `thin()` (added in `eedeb32` on
+`worktree-trams`) is on master. It does not test commit ancestry, which a
+squash or cherry-pick landing would never satisfy. If it prints "not yet",
+stop: the owner has not called review time yet. Doing this on master first would leave two
 copies to refactor and a conflict when the tram batch merges.
 
 Once it is, make a new worktree and branch from `origin/master` (e.g.

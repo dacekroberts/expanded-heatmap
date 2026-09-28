@@ -81,8 +81,7 @@ and districts no metro reaches.
   three lines, Fortaleza's and Recife's diesel lines, Korail's Daegyeong Line (Daegu)
   and Donghae Line (Busan).
 - **Not mentioned either way:** Montréal (exo), Mexico City (Tren Suburbano).
-  Montréal's REM is drawn from 2026-09-27 (the tram rescope, on its branch until
-  review time).
+  Montréal's REM is drawn from 2026-09-27 (the tram rescope).
 - **Reason:** a spacing, frequency and coverage test, applied line by line (EC
   "Which stations these maps are drawn around").
 
@@ -91,17 +90,16 @@ and districts no metro reaches.
 transit, or where they reach areas the metro does not. They are left off where they
 run on top of a metro network.
 - **Trams or light rail drawn:** San Diego, San Francisco (Muni Metro; the F Market &
-  Wharves from 2026-09-27 on the tram-rescope branch), Los Angeles,
+  Wharves from 2026-09-27), Los Angeles,
   Philadelphia (trolleys), Boston (Green Line, Mattapan), Calgary, Edmonton, Toronto
   (Lines 5 and 6 only), Mexico City (Tren Ligero), Guadalajara, Dublin (Luas),
   Marseille, Toulouse, Lille, Oslo, Amsterdam, Rotterdam, Rio (VLT), Santos (VLT),
   Hong Kong (Light Rail), Riga (its trams are the whole network), Montréal (the
-  REM, an automated light metro; from 2026-09-27, on its branch until review time).
+  REM, an automated light metro), Rome (tram 8, thinned), Madrid (Metro Ligero
+  ML1), Paris (T3a and T3b); these last four from 2026-09-27.
 - **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Toronto's 18 streetcar routes, Milan (17 routes), Barcelona,
-  Paris (all but T3a and T3b, drawn from 2026-09-27 on the tram-rescope branch;
-  T2 and T9 are stubs), Prague, Rome (all but tram 8, drawn and thinned from 2026-09-27 on the
-  tram-rescope branch), Madrid (Metro Ligero ML2 and ML3, stubs; ML1 drawn from
-  2026-09-27 on the tram-rescope branch), Copenhagen (the Letbane has no stop in
+  Paris (all but T3a and T3b; T2 and T9 are stubs), Prague, Rome (all but tram
+  8), Madrid (Metro Ligero ML2 and ML3, stubs), Copenhagen (the Letbane has no stop in
   scope).
 - **Other modes on the map:** Toulouse's Téléo cable car, Barcelona's two
   funiculars, São Paulo's Linha 15 monorail, Miami's Metromover (automated people
@@ -143,8 +141,8 @@ other cities.
 **Reader sentence:** On some maps nearly every shop is inside a station ring; on
 others most of the city is beyond walking distance of the network. That depends on
 how far the network reaches, not on the data.
-- **90% or more inside the rings:** Barcelona 100%, Paris 97%, Amsterdam 96%, Madrid
-  94%, Copenhagen 94%, Rotterdam 93%.
+- **90% or more inside the rings:** Barcelona 100%, Paris 98%, Amsterdam 96%, Madrid
+  95%, Copenhagen 94%, Rotterdam 93%.
 - **Under 25%:** Miami 13%, Brasília 14%, Fortaleza 14%, Belo Horizonte 18%, Salvador
   19%, Porto Alegre 20%, Edmonton 22%, São Paulo 23%, Recife 23%, Los Angeles 24%,
   San Diego 24%.
@@ -456,7 +454,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 |---|---|---|---|---|---|---|
 | **United States** | | | | | | |
 | San Diego | UNKNOWN (2026-09-18) | — | 0.6 mi | Yes | 24% | Trade name |
-| San Francisco | UNKNOWN (≈2026-09-19) | — | 0.6 mi | Yes | 69% | Name |
+| San Francisco | UNKNOWN (≈2026-09-19) | — | 0.6 mi | Yes | 72% | Name |
 | Los Angeles | UNKNOWN (≈2026-09-19) | — | 0.6 mi | Yes | 24% | Trade name, else registrant |
 | Chicago | Active licences (2026-09-20) | — | 0.6 mi | Yes | 57% | Name |
 | New York | UNKNOWN (2026-09-21) | — | 0.3 mi | Yes | 71% | Name |
@@ -466,7 +464,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Washington D.C. | Active licences (2026-09-21) | — | 0.6 mi | Yes | 74% | Name |
 | **Canada** | | | | | | |
 | Vancouver (Regional) | Current-year licences (2026-09-21) | — | 0.6 mi | Yes | 40% | Name; type on 88 pins |
-| Montréal | 2025 survey (2026-09-21) | — | 0.6 mi | Yes | 56% | Establishment name |
+| Montréal | 2025 survey (2026-09-21) | — | 0.6 mi | Yes | 60% | Establishment name |
 | Calgary | UNKNOWN (2026-09-21) | — | 0.6 mi | Yes | 41% | Trade name |
 | Edmonton | UNKNOWN (2026-09-21) | — | 0.6 mi | Yes | 22% | Business name |
 | Toronto | Current licences (2026-09-21) | — | 0.6 mi | Yes | 48% | Operating name |
@@ -475,15 +473,15 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Guadalajara (Regional) | UNKNOWN edition (2026-09-22) | — | 0.6 mi | Yes (restored 2026-09-27) | 31% | Shop sign |
 | Monterrey (Regional) | DENUE 05_2026 (2026-09-27) | — | 0.6 mi | Yes | 25% | Shop sign |
 | **Spain** | | | | | | |
-| Madrid | Portal refreshed daily (2026-09-22) | — | 0.6 mi | Yes | 94% | Trade name |
+| Madrid | Portal refreshed daily (2026-09-22) | — | 0.6 mi | Yes | 95% | Trade name |
 | Barcelona | 2022 survey (2026-09-22) | B (prose) | 0.6 mi | Yes | 100% | Unit name |
 | **Ireland** | | | | | | |
 | Dublin | UNKNOWN (2026-09-22) | — | 0.6 mi | Yes | 58% | Address + use |
 | **Italy** | | | | | | |
 | Milan | UNKNOWN (2026-09-22) | — | 0.6 mi | Yes | 87% | Sign on about 1 in 7; else address |
-| Rome | July 2025 (2026-09-24) | B | 0.6 mi | Yes | 53% | Activity + address |
+| Rome | July 2025 (2026-09-24) | B | 0.6 mi | Yes | 61% | Activity + address |
 | **France** | | | | | | |
-| Paris | SIRENE monthly; month UNKNOWN (2026-09-22) | T | 0.3 mi | Yes | 97% | Sign/usual name (about 40%), else address |
+| Paris | SIRENE monthly; month UNKNOWN (2026-09-22) | T | 0.3 mi | Yes | 98% | Sign/usual name (about 40%), else address |
 | Marseille | same (2026-09-23) | T | 0.3 mi | Yes | 55% | same (43% named) |
 | Toulouse | same (2026-09-23) | T | 0.3 mi | Yes | 64% | same (share UNKNOWN) |
 | Lille (Regional) | same (2026-09-23) | T | 0.3 mi | Yes | 61% | same (share UNKNOWN) |
@@ -586,14 +584,14 @@ remain open.
     spacing filter. Should one sentence govern all three?
 11. **Madrid's Metro Ligero** is left out "so the city ships one agency's rail
     system" (`pipeline/madrid/config.py:92–96`). That is not the tram test, and it
-    appears neither on the Madrid page nor in EC. *(2026-09-27: ML1 is now drawn,
-    on the tram-rescope branch; ML2 and ML3 are left out as stubs, owner's call.
-    The page and EC still need the sentence.)*
+    appears neither on the Madrid page nor in EC. *(2026-09-27: ML1 is now drawn;
+    ML2 and ML3 are left out as stubs, owner's call. The page and EC still need
+    the sentence.)*
 12. **Cable cars and unmentioned systems.** Toulouse establishes that "cable car" is
     not a reason to exclude. Mexico City's Cablebús and Tren Suburbano, and
     Montréal's REM and exo, are not mentioned in any file read. Unknown whether they
-    were considered. *(2026-09-27: the REM is now drawn, on the tram-rescope
-    branch; exo, Cablebús and the Tren Suburbano remain open.)*
+    were considered. *(2026-09-27: the REM is now drawn; exo, Cablebús and the
+    Tren Suburbano remain open.)*
 13. **Undisclosed floors in the first US cities.** San Francisco (about 37% of rows
     have NAICS) and Los Angeles (about 9% have none), from DEC's 2026-09-18/19
     entries, and San Diego's neighbourhood undercount (La Jolla). All three are open
