@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**81 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**82 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Tokyo's missing wards: Arakawa OFF; a ward-by-ward list in the brief (owner)](#2026-09-28---tokyos-missing-wards-arakawa-off-a-ward-by-ward-list-in-the-brief-owner)
 - [Macro-map dots coloured by data completeness; storefront count in the tooltip, not the dot size (owner)](#2026-09-28---macro-map-dots-coloured-by-data-completeness-storefront-count-in-the-tooltip-not-the-dot-size-owner)
 - [Band T's EDGE cities grouped at its top; Band T below Band N (owner)](#2026-09-28---band-ts-edge-cities-grouped-at-its-top-band-t-below-band-n-owner)
 - [Band C's last five get verdicts; Band B reopened for the passed, Band N created for no page, Band C closed (owner)](#2026-09-28---band-cs-last-five-get-verdicts-band-b-reopened-for-the-passed-band-n-created-for-no-page-band-c-closed-owner)
@@ -117,6 +118,35 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Tokyo's missing wards: Arakawa OFF; a ward-by-ward list in the brief (owner)
+
+- **Found Arakawa's food list NOT PERMITTED, so Arakawa is OFF for food: its
+  stations are drawn hollow.** The list is full and current (全許可施設リスト,
+  as of 2026-03-31, `r08kyokarisuto.pdf`, 55 pages, 1,563,829 B), but PDF
+  only. The ward says there is no CSV or Excel version because names use
+  characters outside Shift_JIS. The site's 著作権について forbids
+  「各ファイルの無断使用・転載・引用」, which reaches the files' contents and
+  even quotation, so it is stricter than Shinjuku's. 荒川区オープンデータ利用規約
+  (CC BY 4.0) covers only catalogue items: 204, none of them food. Neither the
+  Tokyo catalogue (`t131181`, 33 packages) nor BODIK holds a food list. The
+  permitting reading that premises facts are not 著作物 was not relied on,
+  following the Shinjuku precedent (2026-09-24). The list also carries
+  unmasked 営業者氏名, 営業者住所 and 住所電話. Asking the ward for permission
+  is the owner's act and the last resort, so it is parked. Arakawa keeps its
+  personal-services registers (Tokyo catalogue, CC BY 4.0). Read by the
+  `licence-read` agent.
+- **Recorded every ward's state in one list, at the owner's request**: a
+  "Ward cards" section in `docs/build_briefs/tokyo.md`, with ON / OFF / OPEN
+  for all 23 wards (ON 8, OFF 10, OPEN 5 on 2026-09-28), a personal-services
+  column, and a detailed card for each settled missing ward, starting with
+  Arakawa. The row for Arakawa is in `docs/data_sources/japan.md`.
+- **Two stray downloads**: the licence reads opened PDF URLs in the Browser
+  pane, and the ward servers sent them as downloads that were saved at the
+  main checkout's root. They are `r08kyokarisuto.pdf` (Arakawa's full list)
+  and `ota data.pdf` (Ōta's August 2026 new-permits PDF, 331,986 B). Both hold
+  operators' names and are awaiting the owner's call. Later licence reads are
+  told never to open a PDF in the browser: HEAD and WebFetch only.
 
 ### 2026-09-28 - Macro-map dots coloured by data completeness; storefront count in the tooltip, not the dot size (owner)
 
