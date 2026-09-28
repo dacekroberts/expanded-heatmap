@@ -52,7 +52,8 @@ query would drop.
 |---|---|
 | Source | `data.daegu.go.kr` (D-데이터허브), "26년08월_인허가데이터", one dataset per GROUP of permit types, each a set of XLSX files. Origin: 한국지역정보개발원 |
 | Access | ✅ **No account.** The page's own download button: `GET https://data.daegu.go.kr/cmm/fms/FileDown.do?atchFileId=<FILE_id>&fileSn=0` (`Content-Type: application/x-msdownload`, a zip body). A re-download of the restaurant file was **byte-identical** to the copy cached earlier the same day |
-| Edition | **Monthly.** Each month is a NEW set of dataset ids and file ids (July's barbers are DMI_0000119244, August's 119503). Pin the edition in `config.py`, and record the edition month on the page |
+| Edition | **Monthly.** Each month is a NEW set of dataset ids and file ids (July's barbers are DMI_0000119244, August's 119503). Pin the edition in `config.py` |
+| 🚨 **Real date** | **The "26년08월" edition holds data only through 2025-08-29** (found by Main Build, 2026-09-27). In 일반음식점, 담배소매업 and 미용업 the newest 인허가일자, 폐업일자, 최종수정시점 and 데이터갱신일자 all end in late August 2025, after steady monthly activity: an extract taken about 2025-09-02, not a register tapering off. **The edition label is the portal's month, not the data's.** Owner's call: build it, and state **"as of 2025-08-31"** on the page. Read the rows' own newest dates for any later edition rather than trusting its label |
 | Coverage | all **9 authorities**: the 7 gu, 달성군 and **군위군** (code 5141000, part of Daegu since 2023-07). 중구 is present (2,981 open restaurants), which the 2026-09-22 data.go.kr route lacked |
 | CRS | **EPSG:5174**, as Seoul. 66,697 open points land inside OSM's 대구광역시 boundary and **11 outside** |
 | Licence | Decided: a disclosed reasoned position; credit and removal line in `docs/data_sources.md` |
@@ -125,6 +126,11 @@ worse, silently read nothing**:
   health-food row. Fall back per ROW, not per column.
   - Daegu's channels: 영업장판매 **2,366** (kept), 전자상거래(통신판매업) 1,811,
     방문판매 313, others under 40.
+  - 🚨 **The health-food file masks every house and unit number with `*`**
+    (4,616 of 4,616 open rows; found by Main Build). 98% still carry a point,
+    but the address cannot key the donor join or a building de-duplication.
+    `pipeline/countries/korea.py` now raises on masking in any file its
+    config does not declare.
 - **Tobacco**: `업태구분명` is blank, as in Seoul. Its status adds
   `취소/말소/만료/정지/중지` (3,613) and `휴업` (11); keep `영업/정상` only.
 - **축산판매업**: 식육판매업 (butchers) **2,416** of 3,471. The rest is milk, egg

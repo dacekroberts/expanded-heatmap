@@ -90,8 +90,10 @@ Desktop is unaffected — the label is fully visible there.
       `.venv-lean` linked, merge master, fetch, push, **reboot** (`cities.py`,
       `components.py`), live check. Retire the `data/` junction and the
       `daegu-static-tmp` entry in the monterrey worktree's `.claude/launch.json`.
-  - [ ] **Busan's brief.** Check its rows' own newest dates against the "frozen at
-    2026-04-15" label, as Daegu's turned out a year older than its edition name.
+  - [x] **Busan's brief** (`docs/build_briefs/busan.md`, 8/8, 2026-09-27),
+    handed to Main Build. Three owner calls open in it (buckets as Seoul's;
+    동해선, recommended out; stations inside Busan with the Busan–Gimhae LRT
+    drawn).
   - [ ] **Band T's group decision**: build trams-only cities, and in what
     order (Nice, Montpellier, Brno and Bergen are the cheapest strong ones).
   - [ ] **Wave 2 held by the owner** (the US; Canada, Brazil and Ireland;
