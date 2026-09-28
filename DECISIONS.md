@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**81 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**82 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Macro-map completeness tiers built on `macro-tiers`, checked, held for review time](#2026-09-28---macro-map-completeness-tiers-built-on-macro-tiers-checked-held-for-review-time)
 - [Macro-map dots coloured by data completeness; storefront count in the tooltip, not the dot size (owner)](#2026-09-28---macro-map-dots-coloured-by-data-completeness-storefront-count-in-the-tooltip-not-the-dot-size-owner)
 - [Band T's EDGE cities grouped at its top; Band T below Band N (owner)](#2026-09-28---band-ts-edge-cities-grouped-at-its-top-band-t-below-band-n-owner)
 - [Band C's last five get verdicts; Band B reopened for the passed, Band N created for no page, Band C closed (owner)](#2026-09-28---band-cs-last-five-get-verdicts-band-b-reopened-for-the-passed-band-n-created-for-no-page-band-c-closed-owner)
@@ -117,6 +118,37 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Macro-map completeness tiers built on `macro-tiers`, checked, held for review time
+
+- **Each city now carries `coverage`, `placement` and `data_age` in
+  `app/cities.py`; the macro map colours its dot by tier, shows a text
+  legend under the map, and adds the tier, storefront count, placement and
+  data age to the tooltip.** 39 Full, 12 Narrowed (Philadelphia, Boston,
+  Toronto, Amsterdam, Rotterdam, Riga, Hong Kong, Seoul, Daegu, Busan, Kobe,
+  Osaka), 0 One bucket; the borderline Full cities' caveats go to their pages
+  instead (PLAN).
+- **`scripts/check_macro_facts.py`, in the pre-push hook, decides three
+  things:** (1) `app/macro_facts.json`'s storefront counts, generated with
+  `--write` from the file each city's map step reads (`businesses_geocoded.csv`
+  where a geocoding step exists - Toronto's clean file has no coordinates),
+  counted as `render_heatmap` counts "available"; (2) each tier against the
+  city's row in table B of `docs/map_inconsistencies.md` - Narrowed needs a
+  structural gap (a dash, merged or relabelled buckets, or a note saying
+  "No ...", "... only", "merged" or "Retail ="), Full needs three plain
+  figures and no such note; (3) every date, year and percentage in a
+  `placement` or `data_age` phrase must appear in the city's row of table C or
+  D (Brazil's nine read the country's "All nine" row). A mutation test failed
+  as intended: Toronto set Full, and a false fetch date for Paris.
+- **The app falls back rather than raising** on a missing tier or count ("the
+  label_offset NaN lesson"), so one city's absent fact cannot take the
+  Overview down.
+- **Verified**: `check_all.py` 22 of 22; `check_deploy_imports.py --ref
+  macro-tiers` clean; one local render at 1200 px with no error, all three
+  legend entries, purple dots where expected. The tooltip phrases are
+  published text awaiting the owner's approval. **When Sapporo lands** its
+  entry needs the three fields (narrowed; its table C and D rows hold 86.0%,
+  2026-03-31 and 2026-07-31) and a `--write`, or the check refuses the push.
 
 ### 2026-09-28 - Macro-map dots coloured by data completeness; storefront count in the tooltip, not the dot size (owner)
 
