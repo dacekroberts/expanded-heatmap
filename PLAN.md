@@ -81,7 +81,14 @@ Desktop is unaffected — the label is fully visible there.
     handed to Main Build. Three owner calls open in it (buckets as Seoul's;
     동해선, recommended out; stations inside Busan with the Busan–Gimhae LRT
     drawn).
-  - [ ] **Band T's group decision**: build trams-only cities, and in what
+  - [ ] ⏸ **DEFERRED by the owner 2026-09-27: until the full tram list exists
+    AND the second-wave screens are done** (the screens wait for the 10pm
+    reset or later; wave 1 was very load-intensive). The tram list's open
+    counts are Barcelona's TRAM, Hong Kong Tramways, Seoul's Wirye Line,
+    D.C. Streetcar's status and Mexico City's Cablebús (below). **The
+    tram-list count runs WITH wave 2** (owner). The rescopes' estimated load
+    and a recommendation per category: `docs/tram_rescope_estimate.md`.
+    **Band T's group decision**: build trams-only cities, and in what
     order (Nice, Montpellier, Brno and Bergen are the cheapest strong ones).
   - [ ] **Wave 2 held by the owner** (the US; Canada, Brazil and Ireland;
     Spain and Italy), possibly at a reset. Launch only on the owner's word,
@@ -89,6 +96,26 @@ Desktop is unaffected — the label is fully visible there.
     `pipeline.osm.fetch`**, not the scratch `ovp.py`: since 2040dfc it refuses
     an all-zero `out count` answer, which the wave-1 scratch fetcher accepted
     (Amstelveen's density is still unmeasured for that reason).
+    - **Estimated load (2026-09-27, judgement; wave 1's cost was never
+      recorded)**: about **80–130% of one 5-hour window** (roughly 10–16% of
+      the weekly limit), so probably more than one window. The 5-hour window
+      is shared by every session, so the anchor may overstate.
+
+      | Group | Estimate |
+      |---|---|
+      | Tram-list count (read-only, cached OSM) | 5–8% |
+      | Canada, Brazil, Ireland (Brazil's national modules exist; Waterloo's ION the one real Canadian lead) | 15–25% |
+      | Spain, Italy (registers found city by city; many tram cities) | 30–45% |
+      | US (no national register, several sources per city, ~15–20 rail cities) | 30–50% |
+
+    - **Run order, agreed by the owner 2026-09-27**, after the 10pm reset:
+      1. The cheapest first: the tram-list count plus Canada, Brazil and
+         Ireland.
+      2. Read `get_usage` before and after, and rescale the other two
+         groups' estimates.
+      3. Spain and Italy next. The US waits for a later window if they land
+         near the top of their range.
+      4. Every screen agent fetches OSM through `pipeline.osm.fetch`.
   - [ ] **Tram rescopes of built cities held by the owner**, likely at the
     next reset; Cleanup's case-by-case list is in DECISIONS (2026-09-27).
 
@@ -209,7 +236,18 @@ brief names.
     (`docs/gated_access.md` items 29–32). Not sent, and not the next step.
     The own-time probe round found nothing that fills the gaps openly (DECISIONS).
 - [ ] **PARKED by the owner 2026-09-27 (conserving usage) - come back to it.** **Trams left
-  off built maps - owner decides case by case (listed 2026-09-27, after "trams count").** Read-only list; nothing rescoped. Stops = distinct stop names in scope,
+  off built maps - owner decides case by case (listed 2026-09-27, after "trams count").**
+  **Estimated load and Staging's recommendations, saved for later (owner, 2026-09-27):
+  `docs/tram_rescope_estimate.md`**:
+  - the tram list first (it runs with wave 2);
+  - the light batch yes, REM first, D.C. once its service is verified;
+  - Paris T3 yes;
+  - the heavy three (Toronto, Milan, Prague) not yet: a label and legend
+    rule first, then a Toronto pilot;
+  - Barcelona likely yes, Hong Kong Tramways stays out, Cablebús yes;
+  - one batch overhead. About 55–85% of one 5-hour window in all.
+
+  Read-only list; nothing rescoped. Stops = distinct stop names in scope,
   from cached GTFS/OSM. Rescoping is main's work, city by city, after the owner decides.
   - **Recorded reason was only "not rapid transit / overlay" (reversed by the rule):**
     Toronto streetcars (18 routes, 476 stops); Milan (17 routes, 323 of 341; ATM publishes
