@@ -22,6 +22,13 @@ one push, with one reboot and one live check. Only a broken live site or a
 removal request goes out on its own. Why:
 `docs/efficiency_review_2026-09-27.md`, change 2.
 
+**Renderer changes batch the same way.** This covers `map_common.py`,
+`theme.py`, `linecolour.py` and the shared blocks. Iterate on 3-5 sample maps
+and re-render all 46 once, at review time, as part of that one push. Until
+then `check_render_current.py` fails, so the pre-push hook holds the branch
+back. Comment-only edits do not count. Of 14 full re-renders from 09-23 to
+09-27, 12 would have fitted into three (finding 4).
+
 ---
 
 ## The order, and what each step can see that the others cannot
