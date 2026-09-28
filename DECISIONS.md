@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**39 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**40 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Kansas City's streetcar passes the stub test; the Linz lead is aggregate counts, closed](#2026-09-27---kansas-citys-streetcar-passes-the-stub-test-the-linz-lead-is-aggregate-counts-closed)
 - [Four owner calls: Ottawa to Band C, Rijswijk and Delft to T as Den Haag add-ons, the Band C memo's last verdicts accepted, Paris T2/T9 out](#2026-09-27---four-owner-calls-ottawa-to-band-c-rijswijk-and-delft-to-t-as-den-haag-add-ons-the-band-c-memos-last-verdicts-accepted-paris-t2t9-out)
 - [Tram rescopes, light and medium: specs written for five cities, and the D.C. Streetcar dropped because it no longer runs (owner)](#2026-09-27---tram-rescopes-light-and-medium-specs-written-for-five-cities-and-the-dc-streetcar-dropped-because-it-no-longer-runs-owner)
 - [Monterrey (Regional), Daegu and Busan are LIVE: rebooted by the owner, live-checked](#2026-09-27---monterrey-regional-daegu-and-busan-are-live-rebooted-by-the-owner-live-checked)
@@ -72,6 +73,21 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Kansas City's streetcar passes the stub test; the Linz lead is aggregate counts, closed
+
+- **Kansas City** (Band T): OSM relations 7825409/7825410 run Riverfront to
+  UMKC, Main Street extension included. **18 stops, all inside Kansas City,
+  Missouri**, about 9.6 km at a mean 0.56 km, so the stub test passes. OSM
+  has no colour tag, and frequency is unread (the RideKC GTFS, at build).
+- **Linz** (Austria's row): the "Gewerbeberechtigungen (Linz)" dataset found
+  through data.europa.eu's harvest of data.gv.at (nonsense control 0) is
+  **annual aggregate counts by trade type from the central trade register**,
+  about 200 bytes a year, from 2003 to 2014, CC BY 4.0. No premises and no
+  addresses, so the lead carried from Vienna's row is closed. The city's own
+  host was not asked, so Linz is not discarded; it was never a candidate.
+- data.gv.at's own CKAN search API answered non-JSON to every query this
+  evening; data.europa.eu was the route.
 
 ### 2026-09-27 - Four owner calls: Ottawa to Band C, Rijswijk and Delft to T as Den Haag add-ons, the Band C memo's last verdicts accepted, Paris T2/T9 out
 
