@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**72 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**73 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
@@ -33,6 +33,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [check_map_view.js run live on the review-time batch: Kobe and Paris open at the right zoom](#2026-09-28---check_map_viewjs-run-live-on-the-review-time-batch-kobe-and-paris-open-at-the-right-zoom)
 - [staging worktree retired; its data/ was a real 1.09 GB copy, not a junction](#2026-09-28---staging-worktree-retired-its-data-was-a-real-109-gb-copy-not-a-junction)
 - [Two checks join the hook: stray bullets in the docs the app renders, and a master-list self-test that picks its own targets](#2026-09-28---two-checks-join-the-hook-stray-bullets-in-the-docs-the-app-renders-and-a-master-list-self-test-that-picks-its-own-targets)
+- [osaka and thin worktrees retired after review time landed them; Osaka checked live after the reboot](#2026-09-28---osaka-and-thin-worktrees-retired-after-review-time-landed-them-osaka-checked-live-after-the-reboot)
 
 **2026-09-27**
 
@@ -2806,3 +2807,28 @@ Recorded by the cleanup session from the Main Building Session's findings of
   today's file they chose Italy, Zurich, San Diego and the United States.
   18 of 18. The unused `swap()` helper was removed.
 - **`check_all.py`:** both new scripts added; 21 of 21 passed in 29.1s.
+
+### 2026-09-28 - osaka and thin worktrees retired after review time landed them; Osaka checked live after the reboot
+
+- **Confirmed by both:** the owner, in chat, and "Staging and build handoff",
+  which relayed each worktree's own session (the Osaka session handed
+  `osaka` over to retire once landed; the thin() session's close-out said
+  retire after it lands).
+- **Checks passed:**
+  - `worktree-osaka` (14cf6da) and `worktree-thin` (eaf19a8) are both
+    ancestors of origin/master (landed in `52fdf9f`, merged at `b9ba334`);
+  - each tree was clean, and no session had either folder open;
+  - `check_worktree_data.py` found every data file already in the main
+    checkout;
+  - no `-tmp` launch entries remained.
+- **Removal:** `data/` and `.venv-lean` were junctions in both, unlinked
+  non-recursively; the main checkout's `data/` and `.venv-lean` were
+  confirmed intact. Then `git worktree remove` and `git branch -d`.
+- **Live check after the owner's reboot**, at 1280x900:
+  - **Osaka** renders with no traceback. `check_map_view.js`: zoom 11.5
+    against 11.5 expected, 0 corrections.
+  - **The notice 50 (Kobe) and 52 (Osaka) links:** all six resolve to their
+    exact URLs, with no full-width bracket swallowed into an href. The
+    visible text is unchanged.
+  - **Chicago (untouched control):** its map and OSM credit render, and
+    Osaka is in its page list, so `cities.py` was reloaded.
