@@ -148,7 +148,9 @@ HIGHLIGHT = [251, 191, 36, 255]
 _tier = cities["coverage"].where(cities["coverage"].isin(list(TIERS)), "full") \
     if "coverage" in cities else pd.Series(["full"] * len(cities), index=cities.index)
 cities["fill"] = _tier.map(lambda t: TIERS[t][1])
-cities["tier_label"] = _tier.map(lambda t: TIERS[t][0])
+# The tooltip takes a short tier name; the legend under the map explains it.
+_TIER_SHORT = {"full": "Full data", "narrowed": "Narrowed data", "one_bucket": "One category only"}
+cities["tier_label"] = _tier.map(_TIER_SHORT.get)
 _counts = _FACTS.get("storefronts", {})
 cities["storefronts_text"] = cities["name"].map(
     lambda n: f"{_counts[n]:,} storefronts" if n in _counts else "storefront count pending")

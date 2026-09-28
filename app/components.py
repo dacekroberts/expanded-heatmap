@@ -230,6 +230,19 @@ body.dark-base [data-testid="stDeckGlJsonChart"] .mapboxgl-ctrl-attrib a { color
 body.dark-base [data-testid="stDeckGlJsonChart"] .deck-tooltip {
     background: @@DARK_SURFACE@@ !important; color: @@DARK_TEXT@@ !important;
     border: 1px solid @@DARK_BORDER@@; border-radius: 4px; }
+/* Both themes, every width: the tooltip is a panel in the map's BOTTOM-LEFT
+   corner, not a box at the cursor. deck.gl anchors it right of the cursor by
+   an inline transform (hence !important), and with the five-line tooltip
+   (tier, storefronts, placement, data age; 2026-09-28) it ran off the map's
+   right edge: 343 px wide and mostly clipped at 343 px (Osaka), 176 px clipped
+   at 1200 px even under a 240 px cap (Barcelona). Its containing block is a
+   zero-height box at the map's bottom-left, so `bottom: 8px` puts the panel
+   inside the map there; measured inside at 1200 and 375 px (2026-09-28). */
+[data-testid="stDeckGlJsonChart"] .deck-tooltip {
+    transform: none !important; left: 8px !important; right: auto !important;
+    top: auto !important; bottom: 8px !important;
+    max-width: min(260px, calc(100vw - 48px)) !important;
+    white-space: normal !important; overflow-wrap: anywhere; line-height: 1.35; }
 """
 
 

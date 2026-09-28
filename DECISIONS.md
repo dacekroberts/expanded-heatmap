@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**91 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**92 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Review batch verified: the full deploy-verify passes; the macro tooltip becomes a corner panel; East Asia's global-frame label overlaps accepted (owner)](#2026-09-28---review-batch-verified-the-full-deploy-verify-passes-the-macro-tooltip-becomes-a-corner-panel-east-asias-global-frame-label-overlaps-accepted-owner)
 - [Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one heavy job at a time, drift --jobs 2 at most (owner)](#2026-09-28---two-app-crashes-traced-to-memory-exhaustion-python-capped-at-8-gb-a-process-one-heavy-job-at-a-time-drift---jobs-2-at-most-owner)
 - [Handoffs rewritten for the owner's session reorganisation; the large-transit gap saved](#2026-09-28---handoffs-rewritten-for-the-owners-session-reorganisation-the-large-transit-gap-saved)
 - [Vancouver's exclusion sentence no longer says "as in every city here" (owner)](#2026-09-28---vancouvers-exclusion-sentence-no-longer-says-as-in-every-city-here-owner)
@@ -127,6 +128,36 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Review batch verified: the full deploy-verify passes; the macro tooltip becomes a corner panel; East Asia's global-frame label overlaps accepted (owner)
+
+- **The full deploy-verify on `review-2026-09-28b` passed with no blockers**
+  (after two runs lost to the day's crashes): all 54 standalone maps at five
+  viewports (270 fresh loads) and all 56 app pages clean apart from the two
+  label overlaps already in PLAN (Osaka and Madrid at phone width); the three
+  new cities' labels, zoom, OSM credit and notices 53-55 (13 link targets, all
+  HTTP 200) pass; the tier dots, legend and tooltip correct in both themes;
+  every older city's map byte-identical to the deployed one. Run alone, one
+  browser page at a time, announced to every session; free memory stayed above
+  5 GB.
+- **Finding A, fixed before the push (owner): the tooltip ran off the map.**
+  deck.gl anchors it right of the cursor, and with the new tier, count,
+  placement and data-age lines it clipped: Osaka's mostly off the map at 343
+  px, and Barcelona's by 176 px at 1200 px even under a 240 px width cap. It is
+  now a panel in the map's bottom-left corner at every width (CSS in
+  `app/components.py`: its containing block is a zero-height box at the map's
+  bottom-left, so `bottom: 8px` lands inside the map), measured inside at 1200
+  and 375 px, and the tooltip's tier name is short ("Full data", "Narrowed
+  data", "One category only") while the legend keeps the full wording.
+  Rejected on measurement: a width cap alone (still clipped near the right
+  edge); a panel fixed to the bottom of the screen (painted under the city
+  list unless the map was lifted into a new stacking layer). While shown, the
+  panel can cover the OSM credit at phone width; it disappears with the
+  tooltip.
+- **Finding B, accepted (owner): at the Global frame's zoom, East Asia's
+  labels overlap** (Taoyuan over Busan and Fukuoka, Seoul touching Kyoto) when
+  dragged into view; the East Asia region itself is clean. The same class the
+  owner accepted for Europe on 2026-09-23.
 
 ### 2026-09-28 - Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one heavy job at a time, drift --jobs 2 at most (owner)
 
