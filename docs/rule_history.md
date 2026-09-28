@@ -508,6 +508,12 @@ reader had already found and immediately found five more.
   `MemoryError` of its own. `drift_check.py` takes an operating-system lock
   in the shared git directory, which dies with the process. The cap does
   not reach `.venv-lean`, which skips the user site.
+- **Drift checks run `--jobs 2` at most, and only one heavy job runs at a
+  time, announced to every live session.** Measured the same day: Oslo's
+  step 2 peaks near 5.4 GB and Paris's step 1 near 2.4 GB, so four cities at
+  once can pass the 12 GB tree cap by themselves. The cap stops one runaway;
+  it cannot stop two capped jobs from filling the machine, so the
+  announcement covers what the cap does not (`docs/session_roles.md`).
 
 ## Commands
 
@@ -519,7 +525,7 @@ reader had already found and immediately found five more.
 python pipeline/<city_slug>/step1_stations.py
 python pipeline/<city_slug>/step2_clean_businesses.py
 python pipeline/<city_slug>/step3_map.py
-python pipeline/drift_check.py [city_slug] [--jobs N]   # --jobs 4 does all 13 in ~37s
+python pipeline/drift_check.py [city_slug] [--jobs N]   # --jobs 2 at most since 2026-09-28's memory crashes; one run per machine
 python scripts/brief_check.py [city_slug]               # re-run a brief's claims against live sources
                                                        # (16 kinds; taxonomy_catchall picks a taxonomy's level)
 python scripts/check_provenance.py [--strict]           # every built city's sources actually recorded; run after adding a city

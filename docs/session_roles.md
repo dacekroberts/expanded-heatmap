@@ -200,6 +200,31 @@ One courtesy that avoids most of it: **do not edit a shared file that another
 session currently has modified and uncommitted.** `git status` in the main
 checkout shows this. Leave the line for them, or add it after they commit.
 
+## One heavy job on the machine at a time
+
+Every session shares one 16 GB machine. On 2026-09-28 heavy jobs from several
+sessions overlapped, the machine ran out of memory, and Windows closed the
+Claude app twice, ending every session's turn (DECISIONS; `CLAUDE.md`
+`[#memory]`). Owner's rule, 2026-09-28:
+
+- **A heavy job** is anything likely to pass 2 GB or run for minutes: a
+  multi-city drift check, a full re-render, `deploy-verify`, a join or read
+  of a national or prefecture-wide file, a whole-document PDF extraction,
+  and a single city whose step 2 loads a large register (Oslo's peaks near
+  5.4 GB).
+- **Only one runs at a time, across all sessions.** Before starting one,
+  message every other live session (`ListAgents`, then `SendMessage`): what
+  it is and roughly how long. Message again when it ends, whether it passed
+  or failed. A session that has a start notice holds its own heavy job until
+  the end notice.
+- If two start notices cross, the earlier one goes first.
+- `drift_check.py` enforces its own share: one run per machine, `--jobs 2`
+  at most. The Python cap (8 GB a process, 12 GB with its children) turns a
+  runaway into a `MemoryError` instead of a crash, but two capped jobs can
+  still fill the machine, so the notice is still needed.
+- Light work needs no notice: greps, git, `check_all.py`, one small city's
+  steps.
+
 ## Subagents are not sessions, and the split is not the same one
 
 A **session** is a long-lived role with owned paths, its own worktree and its

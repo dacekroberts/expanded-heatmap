@@ -24,7 +24,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 **2026-09-28**
 
-- [Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one drift check at a time (owner)](#2026-09-28---two-app-crashes-traced-to-memory-exhaustion-python-capped-at-8-gb-a-process-one-drift-check-at-a-time-owner)
+- [Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one heavy job at a time, drift --jobs 2 at most (owner)](#2026-09-28---two-app-crashes-traced-to-memory-exhaustion-python-capped-at-8-gb-a-process-one-heavy-job-at-a-time-drift---jobs-2-at-most-owner)
 - [Macro-map dots coloured by data completeness; storefront count in the tooltip, not the dot size (owner)](#2026-09-28---macro-map-dots-coloured-by-data-completeness-storefront-count-in-the-tooltip-not-the-dot-size-owner)
 - [Band T's EDGE cities grouped at its top; Band T below Band N (owner)](#2026-09-28---band-ts-edge-cities-grouped-at-its-top-band-t-below-band-n-owner)
 - [Band C's last five get verdicts; Band B reopened for the passed, Band N created for no page, Band C closed (owner)](#2026-09-28---band-cs-last-five-get-verdicts-band-b-reopened-for-the-passed-band-n-created-for-no-page-band-c-closed-owner)
@@ -119,7 +119,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
-### 2026-09-28 - Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one drift check at a time (owner)
+### 2026-09-28 - Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one heavy job at a time, drift --jobs 2 at most (owner)
 
 - **Found: both crashes were the machine running out of commit, not a
   graphics fault.** Windows' Resource-Exhaustion-Detector (System log, id
@@ -144,7 +144,9 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   cap: 100 MB allocates, 1 GB is a MemoryError, a child inherits the cap.
   `HEATMAP_MEMCAP_TEST_GB` can only lower it. `--check` joins
   `check_all.py`. Measured legitimate peaks during the Japan session's
-  one-job drift re-run: 1.79 GB at most (Fukuoka step 1).
+  one-job drift re-run (logged at each 0.5 GB rise past 1 GB): Oslo step 2
+  5.43 GB, Paris step 1 2.40 GB, every other step under 2 GB. So 8 GB leaves
+  Oslo about 2.5 GB of headroom.
   - Rejected: a project-only cap through `.claude/settings.json`
     (sessions already open stay uncovered until they restart). Not covered:
     `.venv-lean`, which skips the user site.
@@ -153,6 +155,15 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   an operating-system lock in the shared git directory (dies with the
   process, so a crash leaves nothing stale); a second run exits naming the
   holder. Tested: free, held (refused with the holder's pid), released.
+- **Decided (owner): drift checks run `--jobs 2` at most (`MAX_JOBS`), and
+  only one heavy job runs on the machine at a time, announced to every live
+  session before it starts and when it ends.** Staging proposed `--jobs 1` and
+  the announcement; cleanup recommended 2 rather than 1, because the cap
+  already bounds a runaway and Oslo plus Paris fit inside 12 GB. Four jobs
+  could pass the tree cap on their own. `--jobs 3` now exits naming the
+  limit. The rule is in `docs/session_roles.md`, "One heavy job on the
+  machine at a time"; `publish-city` gate step 2 and CLAUDE.md's command
+  line now say `--jobs 2`.
 - **Decided (owner): never hand-write a PDF or font decoder**; `pdftotext` or
   `pypdf`, one page first. CLAUDE.md working rule `[#memory]`.
 - **Checked for crash damage: none.** `git fsck` clean; no stale `.lock`
