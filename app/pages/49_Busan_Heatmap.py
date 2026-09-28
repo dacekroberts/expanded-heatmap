@@ -32,7 +32,7 @@ st.markdown(
     """
 Five lines are drawn — **Busan Metro Lines 1 to 4 and the Busan–Gimhae LRT** — each labelled on
 the map and in the legend, in the operators' colours; Line 4's blue is darkened so it stays
-distinct from the Retail dots, and Line 4 is a monorail. Routes and stations come from
+distinct from the Retail dots, and Line 4 runs on rubber tyres (a light metro). Routes and stations come from
 OpenStreetMap, because no transit feed is published. Businesses are counted around stations
 inside Busan only, since the permit data covers Busan only; Line 2 and the LRT are still drawn to
 their ends in Yangsan and Gimhae. Not drawn: the Donghae Line (동해선), a Korail commuter line

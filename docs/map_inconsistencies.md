@@ -98,8 +98,8 @@ run on top of a metro network.
   scope).
 - **Other modes on the map:** Toulouse's Téléo cable car, Barcelona's two
   funiculars, São Paulo's Linha 15 monorail, Miami's Metromover (automated people
-  mover), Daegu's Line 3 monorail, Busan's Line 4 (its page calls it a monorail,
-  from the OSM route type) and the Busan–Gimhae LRT (an automated light metro).
+  mover), Daegu's Line 3 monorail, Busan's Line 4 (a rubber-tyred light metro, which
+  OSM tags `route=monorail`) and the Busan–Gimhae LRT (an automated light metro).
 - **Reason:** "is the tram the rapid-transit system, or an overlay on one?", later
   widened to "does it serve corridors the metro does not?" (DEC, Oslo and Rotterdam
   entries). See Open questions 9 and 10: the stated reasons differ between cities.
@@ -302,7 +302,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **South Korea** | | | | | |
 | Seoul | Seoul Metropolitan Subway: Lines 1–9, Shinbundang, Ui LRT, Sillim + 3 Korail lines | AREX, GTX-A, Seohae Line, Gimpo Goldline | OpenStreetMap (no gate 3) | City | 223 / 0 |
 | Daegu | Daegu Metro Lines 1–3 (Line 3 a monorail) | 대경선 (Korail, on spacing) | OpenStreetMap (gate 3 against Korean Wikipedia; operator unreachable) | City | 5 / 0 |
-| Busan | Busan Metro Lines 1–4 (Line 4 a monorail) and the Busan–Gimhae LRT | 동해선 (Korail, on spacing) | OpenStreetMap (gate 3 against Korean Wikipedia) | City | 17 / 0 |
+| Busan | Busan Metro Lines 1–4 (Line 4 a rubber-tyred light metro) and the Busan–Gimhae LRT | 동해선 (Korail, on spacing) | OpenStreetMap (gate 3 against Korean Wikipedia) | City | 17 / 0 |
 | **Taiwan** | | | | | |
 | Taichung | Taichung Metro Green Line | Taiwan Railway, high-speed rail | Operator's station table + OpenStreetMap route (gate 3 exact) | City | 0 / 0 |
 | Taoyuan | Taoyuan Airport MRT (line A) | Taiwan Railway, high-speed rail | National station layer + OSM route (gate 3 exact, one dated addition) | City | 7 / 0 |

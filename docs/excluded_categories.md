@@ -1926,7 +1926,7 @@ of 5.7 points.
   name and an email address is a direct line to a person rather than a
   description of a business. This is enforced once in the shared renderer, so
   it applies to every city including ones added later. Three rows in New York
-  were removed this way on 2026-09-21; no other city had any.
+  were removed this way on 2026-09-21, and one in Monterrey on 2026-09-27.
 - **Where a registry records a licence holder and a trading name in one field,
   the trading name is what is shown.** Philadelphia formats these as "LEGAL
   NAME (TRADE NAME)", so 456 pins that would have displayed a licence holder's

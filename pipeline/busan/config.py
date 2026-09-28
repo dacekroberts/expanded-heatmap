@@ -150,7 +150,9 @@ LINES = {
 # Where the drawn colour differs from the one OSM carries, OSM's (step 1 checks
 # every relation still carries it).
 OSM_COLOUR = {"L4": "#217DCB"}
-# Line 4 is a MONORAIL (route=monorail), as Daegu's Line 3.
+# Line 4 is TAGGED route=monorail in OSM, as Daegu's Line 3 is, so the query
+# needs that route type. Unlike Daegu's, it is not a monorail: it is a
+# rubber-tyred automated light metro (K-AGT) - never call it one on the page.
 LINES_ROUTE_TYPES = {"subway", "monorail", "light_rail", "train", "tram"}
 # Gate 3: each WHOLE line's station count, termini to termini (inside Busan and
 # out). Korean Wikipedia's 부산 도시철도 and 부산김해경전철 articles, read

@@ -54,6 +54,7 @@ CHECKS = [
     ["scripts/check_scope_disclosure_selftest.py"],
     ["scripts/check_theme_sync.py"],
     ["scripts/decisions_index.py", "--check"],
+    ["scripts/readme_cities.py", "--check"],
     ["scripts/archive_decisions_selftest.py"],
 ]
 
