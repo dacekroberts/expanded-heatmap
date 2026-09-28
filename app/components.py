@@ -447,15 +447,18 @@ _NOTICES = [
     # and relabels the network, so the answer is "explotados" and a bare credit
     # would not satisfy it.
     ("CRTM (Consorcio Regional de Transportes de Madrid)",
-     "Powered by CRTM - www.crtm.es. Metro de Madrid station locations and "
-     "line geometry are from CRTM's open data, last updated by CRTM on "
-     "5 June 2026 and shown here as recorded on that date. Used as datos "
-     "explotados "
-     "rather than en bruto: the network has been redrawn, its 293 "
-     "station-per-line records collapsed to one point per station, stations "
-     "outside the termino municipal removed, and each line's eighteen "
-     "published codes collapsed to its thirteen real lines. CRTM does not "
-     "participate in, sponsor or support this project.",
+     # Amended 2026-09-27 for Metro Ligero ML1 (the tram rescope), from the
+     # M10_Red layers: same licence, same 5 June 2026 edit date. Wording
+     # approved by the owner 2026-09-27; "Powered by CRTM" stays verbatim.
+     "Powered by CRTM - www.crtm.es. Metro de Madrid and Metro Ligero "
+     "station locations and line geometry are from CRTM's open data, last "
+     "updated by CRTM on 5 June 2026 and shown here as recorded on that "
+     "date. Used as datos explotados rather than en bruto: the network has "
+     "been redrawn, its station-per-line records collapsed to one point per "
+     "station, stations outside the término municipal removed, the Metro's "
+     "eighteen published codes collapsed to its thirteen real lines, and of "
+     "Metro Ligero only line ML1 drawn. CRTM does not participate in, "
+     "sponsor or support this project.",
      True),
     ("TransLink",
      "Route and arrival data used in this product or service is provided by "
@@ -514,6 +517,23 @@ _NOTICES = [
      "Métro route geometry and station locations for Montréal are the "
      "property of the Société de transport de Montréal, used under the "
      "Creative Commons Attribution 4.0 International licence.",
+     False),
+    # The REM, added 2026-09-27 with the tram rescope (notice 50). CC BY 4.0
+    # from the licence file bundled in the feed, which names no licensor, so
+    # the credit goes to the creator feed_info/agency.txt identify - not
+    # Pulsar, which serves the file. The licence prescribes no wording; it
+    # requires the credit, a statement of modification and a licence link, and
+    # forbids implying endorsement (s.2(a)(6)) or using the logo (s.2(b)(2)).
+    # Wording approved by the owner 2026-09-27.
+    ("Réseau express métropolitain",
+     "REM route geometry and station locations for Montréal are from the "
+     "Réseau express métropolitain (REM) GTFS feed, used under the "
+     "[Creative Commons Attribution 4.0 International licence]"
+     "(https://creativecommons.org/licenses/by/4.0/). The data has been "
+     "modified: its three services are drawn as one line, stations outside "
+     "the agglomeration are removed, and two stations are merged with the "
+     "Métro stations of the same name. The Réseau express métropolitain does "
+     "not endorse this project or its use of the data.",
      False),
     # Calgary, added 2026-09-21. ONE notice covers BOTH the business register
     # and Calgary Transit's GTFS - the only Canadian city where a single

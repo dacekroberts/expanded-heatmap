@@ -38,9 +38,10 @@ deploy-verify (`scope: map-chrome` or `full`, the owner's pick), one reboot.
 - **SF:** the F, thinned; two stops stacked over subway stations merged.
   57 stations.
 
-**NOT app-free:** the batch cannot publish until `app/components.py` carries a
-new REM credit (notice 50) and an amended CRTM credit (notice 20, which must
-cover ML1). The wordings are drafted in chat for the owner. So the publish runs
+**NOT app-free:** the batch needs a new Réseau express métropolitain credit
+(notice 50) and an amended CRTM credit (notice 20, now covering ML1) in
+`app/components.py`. Both are written on the branch, in wording the owner
+approved 2026-09-27. So the publish runs
 `check_deploy_imports.py` and needs a reboot. Landing: DECISIONS.md conflicts
 with master; resolve it with `scripts/merge_append_only.py`, then
 `decisions_index.py` (Cleanup's review).

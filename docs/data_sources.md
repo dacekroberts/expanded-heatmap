@@ -1647,23 +1647,24 @@ describe-the-changes line and a non-endorsement line. Wording approved by the ow
 `check_personal_exposure.py busan`, run 2026-09-27 (the verdict is in `DECISIONS.md`). Any
 objection from Busan is honoured, not argued.
 
-**50. Réseau express métropolitain (Montréal) — required, and NOT YET DISPLAYED.**
+**50. Réseau express métropolitain (Montréal) — required, and DISPLAYED with the
+tram batch** (written into `render_site_notices()` 2026-09-27, wording approved
+by the owner; displayed once the batch lands, as the REM maps are).
 Added 2026-09-27 with the tram rescope, which draws the REM from its own GTFS.
 **PERMITTED WITH CONDITIONS** (CC BY 4.0, from the licence file bundled in the feed;
 the reasoning is in `docs/data_sources/canada.md`): credit **Réseau express
 métropolitain (REM)**, state that the data was modified, link the CC BY 4.0 licence; no
 wording prescribed. **MUST NOT:** imply endorsement or official status (§2(a)(6)); use the
-REM logo (§2(b)(2)). Remove the credit if the REM asks (§3(a)(3)). **The tram batch
-cannot publish until this is in `app/components.py`'s `render_site_notices()`**:
-landing `outputs/montreal/` shows REM lines and stations. Wording is drafted for the
-owner's review, not written yet. The STM credit beside it (13) still reads "Métro
+REM logo (§2(b)(2)). Remove the credit if the REM asks (§3(a)(3)). The credit names
+the REM, links CC BY 4.0, states the three modifications (services drawn as one line,
+stations outside the agglomeration removed, two merged with same-named Métro
+stations) and disclaims endorsement. The STM credit beside it (13) still reads "Métro
 route geometry", which stays true.
 
-**20 needs amending before the same landing.** Its displayed text says "Metro de
-Madrid station locations and line geometry … its thirteen real lines"; the rescope
-adds Metro Ligero ML1 from CRTM's `M10_Red` (same licence, same 5 June 2026 edit
-date), so the "datos explotados" disclosure must cover ML1 too. Also drafted for the
-owner.
+**20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
+Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1
+drawn": ML1 comes from CRTM's `M10_Red` (same licence, same 5 June 2026 edit date).
+"Powered by CRTM" stays verbatim.
 
 What has grown instead is the pile of **permission questions**, now four: three
 "what does silence mean?" calls and the route-colour one. They are questions
