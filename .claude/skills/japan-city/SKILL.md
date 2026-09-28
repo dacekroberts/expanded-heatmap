@@ -28,6 +28,7 @@ worked example: `pipeline/kobe/config.py` holds every city-specific choice.
 | `pipeline/countries/japan_step2.py` | THE step 2: `run(config)`. `config.SOURCES` → closed (廃業) out → not-a-premises → `japan_eigyo` → the join (tiers) → the publisher's own point where the block join misses (`OWN_POINT_FALLBACK`, tier `own`) → one premises in two lists once (`SUPERSEDES`) → one pin per premises and bucket → the name rule → the 菓子/そうざい factory measurement. `ADDRESS_BY_CONSENT` counts a withheld address apart from "not a premises". All four optional, all Fukuoka's (2026-09-28) |
 | `pipeline/taxonomies/japan_eigyo.py` | Every permit-type spelling across ten screened lists (289 values); `source` decides Personal services; **`FORM_RULES` read 業態 beside the type** where a list keeps it in its own column (Fukuoka's two; MHLW's everywhere): vehicles, stalls, school kitchens, hotel restaurants out, konbini Retail, yatai in - a form never brings a row in; import-time asserts pin the rule order |
 | `pipeline/countries/japan_fetch.py` | THE fetch (2026-09-28): city files from `config.SOURCE_FILES` ({key: (file, URL, dataset page)}), ISJ per ward, N02/N03 into the shared cache, the OSM names query plus the tram-stop query where the config declares `TRAM_OSM_JSON`; keeps what is on disk and records provenance. A city's `fetch_sources.py` is its docstring and `japan_fetch.main(config, __doc__)` |
+| `pipeline/countries/japan_official.py` | The official restaurant counts a list is measured against: Tokyo's yearbook table 19-8 per ward, e-Stat's 衛生行政報告例 per city (2026-09-28); `japan_step2.official_shares` reads them where `OFFICIAL_SHARES` is set |
 | `pipeline/kobe/step3_map.py` | The template map: `load_geojson_line_shapes` over step 1's GeoJSON, `label_focus=japan.city_boundary(slug)`, **`lang="ja"`** |
 | `scripts/check_personal_exposure.py` | `japan=True` on a city's entry runs the name-rule test on what reached the map (must print 0) |
 | `scripts/screen_japan_join.py` | The join's measurement, with **Minato as the control** |
@@ -275,7 +276,16 @@ The sheet as written before the build:
   inconsistent); the Sagano scenic line is left out.
 - Open: same-address successors, the short-term filter, U+E0EE and 三条通大橋東.
 
-**Tokyo (8 wards)** (`tokyo.md`; EPSG:32654) - LAST, and not like the others.
+**Tokyo (8 wards)** - ▶ **read the `tokyo-ward` skill** (2026-09-28): each ward
+is its own source (`SOURCE_MUNICIPALITY`, `source_rows`, MHLW's slice under
+`SUPERSEDES`), and `OFFICIAL_SHARES` measures each ward's share of the
+official count every build (`pipeline/countries/japan_official.py`, the
+yearbook and e-Stat readers, shared with `scripts/japan_ward_table.py`). The
+shared step 2 read all eight food wards at 99.7% block on 2026-09-28 and
+reproduced the brief's eight shares exactly. Wards without data get hollow
+"no business data" stations (owner). The sheet as written before that:
+
+(`tokyo.md`; EPSG:32654) - LAST, and not like the others.
 - ▶ One file per ward, in five encodings and three formats (Chūō cp932 with
   `所在地_連結表記`; Shinjuku UTF-16, a 2023 snapshot; Taitō Shift_JIS, own
   format, addresses start at the town; Meguro quoted TSV; Shibuya: rows with an

@@ -38,6 +38,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 from pipeline.countries import japan as JP  # noqa: E402
 from pipeline.countries import japan_register as J  # noqa: E402
+from pipeline.countries import japan_official as O  # noqa: E402
 from pipeline.taxonomies import japan_eigyo as T  # noqa: E402
 import screen_japan_join as S  # noqa: E402
 
@@ -79,14 +80,10 @@ TOKYO_NOTE = {
     "中央区": "never updated since",
     "江東区": "consent-only new permits",
 }
-# Tokyo's statistical yearbook, table 19-8: 飲食店営業 per ward at the end of
-# FY2024 - the official count each ward's list is measured against.
-YEARBOOK = S.DATA / "tokyo" / "raw" / "tn24qv190800.csv"
-# MHLW's 衛生行政報告例 on e-Stat, FY2024: permitted facilities at year-end,
-# old-law (table 5-2-1) + revised-law (5-4-1). Their sum for 東京都 equals the
-# yearbook exactly, so every city and ward is measured one way.
-ESTAT_OLD = S.DATA / "japan" / "raw" / "estat_eisei_r6_food_5-2-1_oldlaw_by_type.csv"
-ESTAT_NEW = S.DATA / "japan" / "raw" / "estat_eisei_r6_food_5-4-1_newlaw_by_type.csv"
+# The official counts (Tokyo's yearbook table 19-8 per ward, MHLW's 衛生行政報告例
+# per city) are read by pipeline/countries/japan_official.py, which the build's
+# share check reads too (moved there 2026-09-28).
+YEARBOOK = O.YEARBOOK
 ESTAT_AREA = {"osaka": "大阪府大阪市", "kobe": "兵庫県神戸市", "sapporo": "北海道札幌市", "fukuoka": "福岡県福岡市",
               "kyoto": "京都府京都市", "hiroshima": "広島県広島市", "sendai": "宮城県仙台市",
               "yokohama": "神奈川県横浜市", "nagoya": "愛知県名古屋市"}
@@ -220,36 +217,13 @@ def tokyo_completeness():
 
 def yearbook():
     """Ward name -> 飲食店営業 in the yearbook's latest fiscal year; {} if not cached."""
-    if not YEARBOOK.exists():
-        return {}
-    import csv
-    import io
-    rows = list(csv.reader(io.StringIO(J.decode(YEARBOOK.read_bytes()))))
-    col = next(i for i, c in enumerate(rows[0]) if c.startswith("飲食店営業"))
-    wards = [r for r in rows[1:] if len(r) > col and r[3].startswith("131") and r[3] != "13100"]
-    latest = max(r[1] for r in wards)
-    return {r[4]: int(r[col]) for r in wards if r[1] == latest}
+    return O.yearbook()
 
 
 def official():
     """City key -> 飲食店営業 permitted facilities, old law + revised law; {} if not cached."""
-    if not (ESTAT_OLD.exists() and ESTAT_NEW.exists()):
-        return {}
-    import csv
-    import io
-
-    def table(path, want):
-        rows = list(csv.reader(io.StringIO(path.read_bytes().decode("cp932"))))
-        h = next(i for i, r in enumerate(rows) if len(r) > 1 and r[1] == "総数")
-        labels = ["/".join(dict.fromkeys(p for p in (rows[h][j] if j < len(rows[h]) else "",
-                                                       rows[h + 1][j] if j < len(rows[h + 1]) else "")
-                                         if p and p != "施設")) for j in range(max(map(len, rows)))]
-        j = labels.index(want)
-        num = lambda x: 0 if x.strip() in ("-", "", "…") else int(x.replace(",", ""))  # noqa: E731
-        return {r[0].strip(): num(r[j]) for r in rows[h + 2:] if r and r[0].strip()}
-
-    old, new = table(ESTAT_OLD, "飲食店営業/総数"), table(ESTAT_NEW, "飲食店営業")
-    return {k: old[a] + new[a] for k, a in ESTAT_AREA.items() if a in old and a in new}
+    e = O.estat()
+    return {k: e[a] for k, a in ESTAT_AREA.items() if a in e}
 
 
 def pct(n, d):

@@ -233,11 +233,14 @@ def join(permits, blocks, chome):
 
 
 ADDR_COLS = ("施設所在地", "営業所所在地", "所在地_連結表記", "営業所住所", "営業施設所在地",
-             "営業所所在地（所在地_連結標記", "施設所在地（所在地_連結標記）")
+             "営業所所在地（所在地_連結標記", "施設所在地（所在地_連結標記）",
+             # Shibuya's national-schema export (Tokyo, 2026-09-28): without it
+             # the shared step read none of its 39,304 rows
+             "施設所在地_連結表記")
 
 
 TYPE_COLS = ("業種名", "業種分類", "業種情報公開名称", "営業の種類", "業種区分", "営業種類", "施設（種別）", "施設（種別）等", "種別", "業種",
-             "業務種別")
+             "業務種別", "営業の種類もしくは営業の形態")  # the last is Shibuya's (Tokyo)
 
 
 NAME_COLS = ("屋号", "施設名称", "営業施設名称、屋号又は商号", "施設の名称", "施設屋号")
@@ -514,8 +517,10 @@ def permits_from_rows(rows, pref, city):
                     # form of business, and only there are vehicles, stalls and
                     # school kitchens marked; japan_eigyo reads it beside the type
                     "form": (r.get("業態") or "").strip(),
-                    # MHLW keeps closed premises, marked 許可(廃業) / 届出(廃業)
-                    "closed": bool((r.get("廃業年月日") or "").strip()) or "廃業" in (r.get("申請区分") or ""),
+                    # MHLW keeps closed premises, marked 許可(廃業) / 届出(廃業);
+                    # Shibuya keeps them with a 廃業日 (22,311 of 39,304 rows)
+                    "closed": bool((r.get("廃業年月日") or r.get("廃業日") or "").strip())
+                    or "廃業" in (r.get("申請区分") or ""),
                     "name": next((r[c] for c in NAME_COLS if r.get(c)), ""), "pub": pub,
                     # not a premises: vehicles, and 市内一円 / 仙台市内一円 ("anywhere in
                     # the city") - Sendai's festival stalls (仮設, 臨時) are written so -

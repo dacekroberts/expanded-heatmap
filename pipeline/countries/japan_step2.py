@@ -27,8 +27,10 @@ city's step 2 calls run(config).
      for the page and DECISIONS.md, not filtered.
 
 Config needs: SOURCES, source_csv(), REQUIRED_COLUMNS, ISJ_DIR, PREFECTURE,
-MUNICIPALITY, CITY_BBOX, TAXONOMY_SYSTEM, BUSINESSES_CLEAN_CSV, SLUG. Reads the
-cache and NEVER fetches.
+MUNICIPALITY, CITY_BBOX, TAXONOMY_SYSTEM, BUSINESSES_CLEAN_CSV, SLUG. Optional,
+each named where it is defined: source_rows, SOURCE_MUNICIPALITY,
+ADDRESS_BY_CONSENT, OWN_POINT_FALLBACK, SUPERSEDES. Reads the cache and NEVER
+fetches.
 """
 import collections
 import re
@@ -66,6 +68,14 @@ def source_rows(config, key):
     return jr.city_rows(need(config.source_csv(key), config.SLUG))
 
 
+def municipality(config, key):
+    """The municipality a source's addresses are read against: the city's, or
+    config.SOURCE_MUNICIPALITY[key] where each source is one municipality of
+    its own - Tokyo's special wards, each its own publisher, where the WARD is
+    the municipality (港区, 渋谷区) and an address may start at the town (Taitō)."""
+    return getattr(config, "SOURCE_MUNICIPALITY", {}).get(key, config.MUNICIPALITY)
+
+
 def key_addr(a):
     return re.sub(r"[‐‑‒–—―−ｰー－]", "-", unicodedata.normalize("NFKC", a or "").replace(" ", "").replace("　", ""))
 
@@ -95,6 +105,43 @@ def own_coordinates_check(config, df):
                   f"over 1 km {int((t > 1000).sum()):,}")
             emit(f"own_coords_{tier}_median_m", int(round(t.median())))
             emit(f"own_coords_{tier}_within_250m_pct", round(100 * (t <= 250).mean(), 1))
+
+
+def official_shares(config, df):
+    """Each municipality's share of the official restaurant count
+    (japan_official: Tokyo's yearbook per ward, e-Stat per city), measured the
+    Tokyo brief's way: the lists' 飲食店 permit rows, vehicles and stalls
+    included, closed rows out. Opt-in (config.OFFICIAL_SHARES = True): Tokyo's
+    page states each ward's share, and a share it states must be the one this
+    build measured (owner 2026-09-28). Emitted to the baseline - rows and count,
+    so drift_check flags a moved share - and written to
+    outputs/<slug>/official_shares.json for the page to read, never retyped."""
+    if not getattr(config, "OFFICIAL_SHARES", False):
+        return
+    import json
+
+    from pipeline.countries import japan_official
+    codes = getattr(config, "MUNICIPALITY_CODES", {})
+    food = df[~df["source"].isin(japan_eigyo.PERSONAL_SOURCES) & ~df["closed"]
+              & df["type"].fillna("").str.contains("飲食")]
+    rows = food["muni"].value_counts()
+    out = []
+    print("  share of the official restaurant count (飲食店 rows, vehicles in, closed out):")
+    for muni in dict.fromkeys(municipality(config, k) for k in config.SOURCES):
+        n = int(rows.get(muni, 0))
+        official, source = japan_official.restaurants(config.PREFECTURE, muni)
+        if not official:
+            sys.exit(f"no official count for {muni}: is its yearbook or e-Stat table cached?")
+        share = round(100 * n / official, 1)
+        code = codes.get(muni, muni)
+        print(f"    {muni:6} {n:>7,} of {official:>7,}  {share:5.1f}%   ({source})")
+        emit(f"official_rows_{code}", n)
+        emit(f"official_count_{code}", official)
+        out.append({"municipality": muni, "code": code, "rows": n, "official": official, "share_pct": share,
+                    "source": source})
+    config.OUTPUTS.mkdir(parents=True, exist_ok=True)
+    (config.OUTPUTS / "official_shares.json").write_text(
+        json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def own_point_fallback(config, joined):
@@ -153,9 +200,9 @@ def run(config, write=True):
         if missing:
             sys.exit(f"{key}: header lacks {missing}")
         flags = [jr.name_is_operator(r) for r in rows]
-        ps = jr.permits_from_rows(rows, config.PREFECTURE, config.MUNICIPALITY)
+        ps = jr.permits_from_rows(rows, config.PREFECTURE, municipality(config, key))
         for p, f in zip(ps, flags):
-            p["source"], p["name_is_operator"] = key, f
+            p["source"], p["name_is_operator"], p["muni"] = key, f, municipality(config, key)
         permits += ps
         emit(f"rows_{key}", len(ps))
         print(f"  {key:8} {len(ps):>7,} rows")
@@ -177,6 +224,7 @@ def run(config, write=True):
     df["name_is_operator"] = df["name_is_operator"] | prem.isin(flagged)
     print(f"  name rule by premises: {int(spread.sum())} more row(s) share a flagged row's block and trade name")
     emit("name_rule_spread_rows", int(spread.sum()))
+    official_shares(config, df)
     # MHLW's open data keeps closed premises, marked (Fukuoka's second source)
     closed = df["closed"]
     if closed.any():
