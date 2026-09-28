@@ -65,7 +65,7 @@ negative, kept out.
 | City | Country | Network | Band and blocker |
 |---|---|---|---|
 | Delhi | IN | Delhi Metro, ~290 stations (kn) | D - the current register behind a CAPTCHA; every Delhi-government host refuses this machine (screened 2026-09-28, owner) |
-| Berlin | DE | U-Bahn 9 lines, ~175 stations (kn); S-Bahn | B - IHK Berlin's per-premises register, shops and food; personal services missing (from the discards 2026-09-28, owner) |
+| Berlin | DE | U-Bahn 9 lines, ~175 stations (kn); S-Bahn | B - IHK Berlin's per-premises register; hairdressers and laundries missing (from the discards 2026-09-28, owner) |
 | Istanbul | TR | M1A–M11, 177 stations; T1–T5 | N - pharmacies and opticians only; the districts publish no licence lists (re-screened 2026-09-28, owner) |
 | Dubai | AE | Metro Red and Green, 64 stations; tram | D - every host of its licence register refuses this machine (re-screened 2026-09-28, owner) |
 | London | UK | 272 stations (kn) | B - food only on the FSA register (re-screened 2026-09-28, owner); no second layer covers central London |

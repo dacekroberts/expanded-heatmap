@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**112 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**113 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Berlin's personal-services gap corrected: only hairdressers and laundries are missing](#2026-09-28---berlins-personal-services-gap-corrected-only-hairdressers-and-laundries-are-missing)
 - [Delhi and Mumbai re-screened on their city hosts: Delhi to Band D, Mumbai discarded (owner)](#2026-09-28---delhi-and-mumbai-re-screened-on-their-city-hosts-delhi-to-band-d-mumbai-discarded-owner)
 - [Tokyo landed: city-landed sweep; three cities' in-ring counts corrected in the inconsistency list](#2026-09-28---tokyo-landed-city-landed-sweep-three-cities-in-ring-counts-corrected-in-the-inconsistency-list)
 - [Tokyo live after the owner's reboot, checked on the live URL](#2026-09-28---tokyo-live-after-the-owners-reboot-checked-on-the-live-url)
@@ -148,6 +149,26 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Berlin's personal-services gap corrected: only hairdressers and laundries are missing
+
+- **Corrected the Berlin probe's personal-services finding: the register
+  carries beauty and spa premises, and only hairdressers and laundries are
+  missing.** This supersedes the personal-services lines of today's entries
+  "German screen from the large-transit gap..." and "Berlin from the discards
+  to Band B...". The probe keyed personal services on NACE Rev. 2 codes
+  (9601, 9602, 9604) and found 5, 3, 1 and 0 in the four station boxes. The
+  Berlin build session measured live that IHK's `nace_id` is NACE Rev. 2.1 /
+  WZ 2025. In that edition 5610 and 9602 do not exist, restaurants are 5611,
+  hair 9621, beauty 9622, spa/sauna 9623 and laundry 9610. City-wide, beauty
+  has 1,792 and spa/sauna 1,595, beside a 9699 catch-all of 10,170; hair
+  (180) and laundry (215) are the crafts-chamber gap. The food and retail
+  ratios stand, since 561x and 47xx were keyed correctly. "Restaurants are
+  5611, a WZ subclass" was also wrong: 5611 is a 2.1 class, and IHK's own
+  `ihk_branch_id` (5–6 digits) is the finer code. Band B is unchanged; the
+  row now reads "without hairdressers and laundries" instead of "personal
+  services missing". Files: `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`.
 
 ### 2026-09-28 - Delhi and Mumbai re-screened on their city hosts: Delhi to Band D, Mumbai discarded (owner)
 
