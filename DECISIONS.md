@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**44 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**45 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Measured before the shared thin() refactor: haversine vs projected moves no stop in Rotterdam or Amsterdam, but 62 reason strings change](#2026-09-27---measured-before-the-shared-thin-refactor-haversine-vs-projected-moves-no-stop-in-rotterdam-or-amsterdam-but-62-reason-strings-change)
 - [Tram rescope 5 of 5: San Francisco's F Market & Wharves drawn and thinned; two stacked stops merged into their subway stations (held for review time)](#2026-09-27---tram-rescope-5-of-5-san-franciscos-f-market-wharves-drawn-and-thinned-two-stacked-stops-merged-into-their-subway-stations-held-for-review-time)
 - [Tram rescope 4 of 5: Paris's T3a and T3b drawn, in this project's own colours (held for review time)](#2026-09-27---tram-rescope-4-of-5-pariss-t3a-and-t3b-drawn-in-this-projects-own-colours-held-for-review-time)
 - [Tram rescope 3 of 5: Madrid's Metro Ligero ML1 drawn from CRTM's M10 layers; ML2 and ML3 left out as stubs (owner; held for review time)](#2026-09-27---tram-rescope-3-of-5-madrids-metro-ligero-ml1-drawn-from-crtms-m10-layers-ml2-and-ml3-left-out-as-stubs-owner-held-for-review-time)
@@ -77,6 +78,27 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Measured before the shared thin() refactor: haversine vs projected moves no stop in Rotterdam or Amsterdam, but 62 reason strings change
+
+- **Switching the tram thinning filter from haversine on lat/lon to the
+  projected CRS moves NO stop across the 0.5 mi threshold, in Rotterdam or
+  in Amsterdam** (both used haversine; the invariant forbids measuring in
+  EPSG:4326). Measured 2026-09-27 by wrapping each city's `thin()` to run the
+  original and a projected (EPSG:32631) copy on the same inputs during a real
+  step 1, and returning the original: every line's kept and cut sets are
+  identical. Closest to the threshold: Amsterdam's Inaristraat (6.8 m),
+  Nassaukade (8.0 m) and Olympiaweg (8.8 m); Rotterdam's Lommerrijk (14.6 m).
+  The two methods differ by about 0.2% here, 1-2 m over half a mile.
+- **But the cut reasons' 3-dp mileage changes in 62 strings**: 21 in
+  Rotterdam, 41 in Amsterdam, each by 0.001-0.002 mi (e.g. "0.308 mi" to
+  "0.309 mi"). So the shared-`thin()` refactor cannot be zero-drift for those
+  two cities: the expected drift is those digits in
+  `excluded_stations.csv`'s reason column and nothing else. Rome already
+  measures in its projected CRS and should drift zero. Outputs were restored
+  after the runs (the diff ignoring line endings was empty). The refactor is
+  handed over in `docs/handoff_thin_refactor_2026-09-27.md`, to start after
+  this branch lands.
 
 ### 2026-09-27 - Tram rescope 5 of 5: San Francisco's F Market & Wharves drawn and thinned; two stacked stops merged into their subway stations (held for review time)
 
