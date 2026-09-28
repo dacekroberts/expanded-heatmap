@@ -22,7 +22,6 @@ WHAT MAKES THIS CITY'S STEP 1 DIFFERENT:
 """
 import io
 import json
-import math
 import sys
 import zipfile
 from pathlib import Path
@@ -44,14 +43,6 @@ def need(path, what):
     if not path.exists():
         sys.exit(f"missing {what}: {path}\nRun: python pipeline/amsterdam/fetch_sources.py")
     return path
-
-
-def haversine_miles(a, b):
-    (lat1, lon1), (lat2, lon2) = a, b
-    p1, p2 = math.radians(lat1), math.radians(lat2)
-    h = (math.sin(math.radians(lat2 - lat1) / 2) ** 2
-         + math.cos(p1) * math.cos(p2) * math.sin(math.radians(lon2 - lon1) / 2) ** 2)
-    return 2 * 3958.8 * math.asin(math.sqrt(h))
 
 
 def short(key):
@@ -180,29 +171,6 @@ def sequences(line, trips, st, stops, regular):
     return chosen, shapes
 
 
-def thin(line, seqs, inside_names, keep_always, interchange, coords):
-    """San Francisco's four filters on one line's in-gemeente stretch."""
-    kept, cut = set(), []
-    for seq in seqs:
-        seq = [n for n in seq if n in inside_names]
-        if not seq:
-            continue
-        mark = [n in keep_always or n in interchange for n in seq]
-        mark[0] = mark[-1] = True                          # the in-gemeente terminals
-        since, last = 0.0, seq[0]
-        for i in range(1, len(seq)):
-            since += haversine_miles(coords[seq[i - 1]], coords[seq[i]])
-            if mark[i]:
-                since, last = 0.0, seq[i]
-            elif since >= config.THIN_SPACING_MILES:
-                mark[i], since, last = True, 0.0, seq[i]
-            else:
-                cut.append({"station": seq[i], "line": config.LINE_NAMES[line],
-                            "nearest_kept": last, "miles_since_kept": round(since, 3)})
-        kept |= {n for n, m in zip(seq, mark) if m}
-    return kept, [c for c in cut if c["station"] not in kept]
-
-
 def neighbour_polygons():
     els = json.loads(need(config.OSM_NEIGHBOURS_JSON, "the neighbouring gemeenten")
                      .read_text(encoding="utf-8"))["elements"]
@@ -313,16 +281,20 @@ def main():
         sys.exit("gemeente-only scope drops a whole line; the scope decision needs re-taking")
 
     # --- thinning ------------------------------------------------------------
-    coords = {n: (r["latitude"], r["longitude"]) for n, r in by_name.iterrows()}
+    xy = station_gates.projected_xy(by_name.index, by_name["longitude"], by_name["latitude"],
+                                    config.CRS_PROJECTED, config.CRS_GEOGRAPHIC)
     interchange = {n for n in inside if len(lines_of[n]) >= 2}
     kept, cuts, all_shapes, line_shapes = set(), [], [], {}
     for ln in config.LINE_ORDER:
         seqs, shapes = sequences(ln, trips, st, stops, regular[ln])
         line_shapes[ln] = shapes
         all_shapes += shapes
-        k, c = thin(ln, seqs, inside, metro_names, interchange, coords)
+        # Each line's in-gemeente stretch: its terminals there are kept.
+        k, c = station_gates.thin([[n for n in seq if n in inside] for seq in seqs], xy,
+                                  spacing_m=config.THIN_SPACING_MILES * 1609.344,
+                                  keep_always=metro_names, interchange=interchange)
         kept |= k
-        cuts += c
+        cuts += [{**x, "line": config.LINE_NAMES[ln]} for x in c]
     cuts = [c for c in cuts if c["station"] not in kept]
     print(f"\n  thinning (metro kept, terminals kept, {len(interchange)} interchanges kept, "
           f"the rest one per {config.THIN_SPACING_MILES} mi): {len(inside)} in-gemeente stop "
@@ -352,7 +324,8 @@ def main():
                          # "spacing filter" is the phrase app/station_scope.py
                          # reads to count a stop as thinned on the published
                          # scope table (check_scope_disclosure.py).
-                         "reason": f"spacing filter on {c['line']}: {c['miles_since_kept']} mi after "
+                         "reason": f"spacing filter on {c['line']}: "
+                                   f"{round(c['metres_since_kept'] / 1609.344, 3)} mi after "
                                    f"{short(c['nearest_kept'])}, under "
                                    f"{config.THIN_SPACING_MILES} mi",
                          "latitude": by_name.at[c["station"], "latitude"],

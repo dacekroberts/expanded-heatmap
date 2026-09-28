@@ -52,6 +52,8 @@ are automatic; that one requires going and reading what the agency publishes,
 which is exactly why it kept being skipped.
 """
 
+import math
+
 import numpy as np
 
 # Below this, points are platforms rather than stations. Measured medians:
@@ -90,6 +92,53 @@ def boardable_stop_ids(stop_times, *, pickup="pickup_type",
     ok = ((stop_times[pickup].fillna("0").astype(str) == "0")
           | (stop_times[drop_off].fillna("0").astype(str) == "0"))
     return set(stop_times.loc[ok, "stop_id"])
+
+
+def projected_xy(names, lon, lat, crs_projected, crs_geographic="EPSG:4326"):
+    """{name: (x, y)} in metres, for `thin()`."""
+    import geopandas as gpd
+    pts = gpd.GeoSeries(gpd.points_from_xy(lon, lat),
+                        crs=crs_geographic).to_crs(crs_projected)
+    return {n: (p.x, p.y) for n, p in zip(names, pts)}
+
+
+def thin(seqs, xy, *, spacing_m, keep_always=(), interchange=()):
+    """The sub-transit-line thinning filter (docs/sub_transit_line_filters.md),
+    San Francisco's rule: along each ordered stop-name sequence, keep both
+    ends, every name in `keep_always` or `interchange`, and the first stop at
+    or past `spacing_m` of track since the last kept one; cut the rest.
+
+    Distance is summed stop to stop over `xy` ({name: (x, y)}, projected
+    metres - never degrees). Which sequences to thin is the CITY's call:
+    thinning both directions of a line and keeping the union barely thins
+    (Rome: 4 of 16 cut, against 9), so each city passes only as many as cover
+    the line. So is the reason's wording, which must keep the word "spacing"
+    for app/station_scope.py.
+
+    Returns (kept, cuts): the kept names, and one dict per cut not kept by
+    another sequence in this call - {station, nearest_kept, metres_since_kept}
+    - in sequence order. A caller thinning line by line still filters the
+    cuts against every line's kept set.
+    """
+    kept, cuts = set(), []
+    for seq in seqs:
+        if not seq:
+            continue
+        mark = [n in keep_always or n in interchange for n in seq]
+        mark[0] = mark[-1] = True
+        since, last = 0.0, seq[0]
+        for i in range(1, len(seq)):
+            (x0, y0), (x1, y1) = xy[seq[i - 1]], xy[seq[i]]
+            since += math.hypot(x1 - x0, y1 - y0)
+            if mark[i]:
+                since, last = 0.0, seq[i]
+            elif since >= spacing_m:
+                mark[i], since, last = True, 0.0, seq[i]
+            else:
+                cuts.append({"station": seq[i], "nearest_kept": last,
+                             "metres_since_kept": since})
+        kept |= {n for n, m in zip(seq, mark) if m}
+    return kept, [c for c in cuts if c["station"] not in kept]
 
 
 def verify_stations(*, city, platforms, stations, crs_projected,

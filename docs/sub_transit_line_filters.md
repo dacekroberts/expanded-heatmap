@@ -76,6 +76,25 @@ distant districts on the map without drowning the whole map in
 closely-spaced surface stops. A system without that branching/central-vs-
 surface shape doesn't need it.
 
+## The shared implementation
+
+**Use `pipeline/stations.py` `thin()`; don't write another copy.** It takes
+ordered stop-name sequences, a name -> projected x/y lookup (metres, from
+`projected_xy()`), the keep-always and interchange sets and a spacing in
+metres, and returns the kept set and each cut with its nearest kept stop and
+the metres since it. Rome, Amsterdam and Rotterdam use it (2026-09-27). The
+city keeps two things:
+- **which sequences** to pass - only as many as cover the line, since
+  thinning both directions and keeping the union barely thins;
+- **the reason's wording**, which must contain "spacing" for
+  `app/station_scope.py`.
+
+It marks interchanges before the spacing pass, so an interchange resets the
+count. San Francisco's own `select_line_stations()` (and Boston's copy)
+force-keeps them afterwards instead, so an interchange there does not reset
+the count. Hong Kong and Riga still have their own haversine copies of the
+shared rule.
+
 ## Implementation notes (from San Francisco's build)
 
 - **Canonicalize direction-suffix duplicates before running any of
