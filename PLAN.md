@@ -75,7 +75,7 @@ Desktop is unaffected — the label is fully visible there.
   inconsistency rows, privacy verdict, label width (144.0) and placement - which moved
   Guadalajara's pill below its dot and Mexico City's 10 px lower. Still to do, at the batch:
   - [x] `deploy-verify` (city-added, plus the Mexico and landing views for the three moved labels) (2026-09-27, one run for the three-city batch: all PASS; DECISIONS)
-  - [ ] `check_deploy_imports.py` (done, 0 problems) with `.venv-lean` linked, merge master (done), fetch, push, **reboot**
+  - [x] `check_deploy_imports.py` (0 problems) with `.venv-lean` linked, merge master, fetch, push, **reboot**
     (`cities.py` and `components.py` change), live check
   - [x] `city_master_list.md`'s band counts reconciled on the branch, in Staging's wording
     (A 6, Candidates 20, Built 47; 68f656c). **Merge notes from Staging**: if
@@ -106,7 +106,7 @@ Desktop is unaffected — the label is fully visible there.
       the line colours approved by the owner 2026-09-27, and written.
     - [x] `deploy-verify` (city-added, plus East Asia for the label) - **HELD until at
       least after Busan is built** (owner, 2026-09-27), then run once for both.
-    - [ ] Publish with the batch (`publish-city`): `check_deploy_imports.py` with
+    - [x] Publish with the batch (`publish-city`): LIVE 2026-09-27 (pushed 9dc08de, rebooted by the owner, live-checked; DECISIONS). `check_deploy_imports.py` with
       `.venv-lean` linked, merge master, fetch, push, **reboot** (`cities.py`,
       `components.py`), live check. Retire the `data/` junction and the
       `daegu-static-tmp` entry in the monterrey worktree's `.claude/launch.json`.
@@ -123,7 +123,7 @@ Desktop is unaffected — the label is fully visible there.
     - [ ] At the owner's review: the page prose, blurb and credit notice 49, drafted in
       chat, and Line 4's darkened blue (#144B7A).
     - [x] Then `deploy-verify` ONCE for Daegu and Busan (city-added x2, plus East Asia). (2026-09-27, one run for the three-city batch: all PASS; DECISIONS)
-    - [ ] Publish with the batch: pushing `worktree-busan` carries Daegu too. Retire the
+    - [x] Publish with the batch: LIVE 2026-09-27 (pushed 9dc08de, rebooted by the owner, live-checked; DECISIONS). Pushing `worktree-busan` carried Daegu too. Retire the
       `data/` junction and the `busan-static-tmp` entry.
   - [ ] ⏸ **DEFERRED by the owner 2026-09-27: until the full tram list exists
     AND the second-wave screens are done** (the screens wait for the 10pm

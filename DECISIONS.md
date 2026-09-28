@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**37 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**38 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
 - [Tram rescopes, light and medium: specs written for five cities, and the D.C. Streetcar dropped because it no longer runs (owner)](#2026-09-27---tram-rescopes-light-and-medium-specs-written-for-five-cities-and-the-dc-streetcar-dropped-because-it-no-longer-runs-owner)
+- [Monterrey (Regional), Daegu and Busan are LIVE: rebooted by the owner, live-checked](#2026-09-27---monterrey-regional-daegu-and-busan-are-live-rebooted-by-the-owner-live-checked)
 - [Monterrey (Regional), Daegu and Busan published as one batch at the owner's review; reboot required](#2026-09-27---monterrey-regional-daegu-and-busan-published-as-one-batch-at-the-owners-review-reboot-required)
 - [Ottawa to Band C; the by-country table is now checked; local scratch folders in data/ ignored (owner)](#2026-09-27---ottawa-to-band-c-the-by-country-table-is-now-checked-local-scratch-folders-in-data-ignored-owner)
 - [data_sources.md split by country, landed at the first review time (owner)](#2026-09-27---data_sourcesmd-split-by-country-landed-at-the-first-review-time-owner)
@@ -97,6 +98,29 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - **Colours measured with `pipeline/linecolour.py`**: REM ΔE 27 from Métro
   Line 1, Rome's tram 8 ≈70 from every line, F Market 27 from J. All pass the
   floor of 10.
+### 2026-09-27 - Monterrey (Regional), Daegu and Busan are LIVE: rebooted by the owner, live-checked
+
+- **The owner rebooted** after the push of 9dc08de. The app woke within
+  about a minute.
+- **Live check, in the deployed app's own frame** (`/~/+/`):
+  - The Overview loads with no exception and lists all three cities.
+  - **Daegu:** title, and the caption "permit records dated up to
+    2025-09-02 ... published as the 2026-08 edition". Lines 1-3 labelled,
+    OSM credit present. The view is 11.75 against 11.75 expected, recomputed
+    for the 854 px frame, with 0 corrections. Notices 48 and 49 render.
+  - **Busan:** caption "updated to 2026-04-15". All five line labels (Lines
+    1-4, Busan-Gimhae LRT) and the credit are present. The view is 11.5
+    against 11.5, with 0 corrections.
+  - **Monterrey (Regional):** Líneas 1-3 labelled, the credit present, and
+    INEGI's notice reads "Mexico City, Guadalajara and Monterrey". The view
+    is 12.75 against 12.75, with 0 corrections.
+  - **Seoul, not in the batch:** all 15 line labels, the credit, 0
+    corrections, no errors.
+  - `scripts/check_macro_attribution.mjs` against the live app at 375, 768
+    and 1200 px, both themes: **PROBLEMS 0**.
+- **Carried forward**, noted by deploy-verify: Mexico City's macro pill sits
+  about 0.75 px above the basemap credit at 375 px, and Guadalajara's is
+  clipped 9.8 px at 375 as before. The captions' OSM date is UTC.
 
 ### 2026-09-27 - Monterrey (Regional), Daegu and Busan published as one batch at the owner's review; reboot required
 
