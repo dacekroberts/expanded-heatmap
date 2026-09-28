@@ -49,7 +49,8 @@ re-download. It prints each raw input's size and modified time so a reader
 can tell code drift (raw files unchanged, outputs changed) from source
 drift (raw files were refreshed since the baseline).
 
-`--jobs N` runs CITIES concurrently (default 1, unchanged). The full sweep is
+`--jobs N` runs CITIES concurrently (default 1, at most MAX_JOBS = 2 since
+2026-09-28's memory crashes; one drift check per machine at a time). The full sweep is
 this project's only O(n)-in-pipeline-runs cost, so it is the binding
 operational limiter as the city count grows - see
 `docs/scaling_thresholds.md`. Steps WITHIN a city stay sequential, because
@@ -255,6 +256,47 @@ def resolve_changed(ref: str, all_cities) -> list:
     return sorted(cities)
 
 
+# Owner, 2026-09-28, after two memory-exhaustion crashes: at most two cities
+# at once on this 16 GB machine, whose Python is capped at 12 GB a process tree
+# (scripts/python_memcap.py). Change it with the owner's word, not to go faster.
+MAX_JOBS = 2
+LOCK_OFFSET = 1 << 20  # lock a byte past the text, so a waiter can read who holds it
+
+
+def hold_machine_lock():
+    """One drift check at a time on this machine, across every worktree.
+
+    On 2026-09-28 heavy jobs from several sessions overlapped and the machine
+    ran out of memory twice, closing the Claude app (DECISIONS). The lock file
+    sits in the git directory every worktree shares, and the lock is the
+    operating system's: it dies with the process, so a crash leaves nothing
+    stale to clear. Returns the open file; the lock lasts while it is open.
+    """
+    common = subprocess.run(["git", "rev-parse", "--git-common-dir"], cwd=ROOT,
+                            capture_output=True, text=True).stdout.strip()
+    path = (ROOT / common).resolve() / "drift_check.lock"
+    path.touch(exist_ok=True)
+    fh = open(path, "r+", encoding="utf-8")
+    try:
+        fh.seek(LOCK_OFFSET)
+        if os.name == "nt":
+            import msvcrt
+            msvcrt.locking(fh.fileno(), msvcrt.LK_NBLCK, 1)
+        else:
+            import fcntl
+            fcntl.lockf(fh, fcntl.LOCK_EX | fcntl.LOCK_NB, 1, LOCK_OFFSET)
+    except OSError:
+        fh.seek(0)
+        holder = fh.readline().strip() or "holder unknown"
+        sys.exit(f"Another drift check is running on this machine ({holder}). "
+                 "One at a time: wait for it to finish, then run this again.")
+    fh.seek(0)
+    fh.write(f"pid {os.getpid()} in {ROOT.name}, since "
+             f"{datetime.datetime.now():%Y-%m-%d %H:%M:%S}".ljust(120) + "\n")
+    fh.flush()
+    return fh
+
+
 def main():
     # Steps print place and business names (Czech, Korean, Chinese...), and a
     # Windows console defaults to cp1252: `drift_check.py prague` raised
@@ -276,8 +318,13 @@ def main():
     if "--jobs" in args:
         i = args.index("--jobs")
         if i + 1 >= len(args) or not args[i + 1].isdigit() or int(args[i + 1]) < 1:
-            sys.exit("--jobs needs a positive integer, e.g. --jobs 4")
+            sys.exit("--jobs needs a positive integer, e.g. --jobs 2")
         jobs = int(args[i + 1])
+        if jobs > MAX_JOBS:
+            sys.exit(f"--jobs {jobs} is over this machine's limit of {MAX_JOBS} "
+                     "(owner, 2026-09-28: Oslo's step 2 alone peaks near 5.4 GB, and "
+                     "Python is capped at 12 GB a process tree). Use --jobs "
+                     f"{MAX_JOBS} or fewer.")
         del args[i:i + 2]
 
     all_cities = cities_with_pipelines()
@@ -308,6 +355,7 @@ def main():
         print("\n".join(requested))
         sys.exit(0)
 
+    lock = hold_machine_lock()  # noqa: F841 - held until the process exits
     all_clean = True
     if jobs == 1:
         # The default path, unchanged: print straight to stdout as it goes, so
@@ -347,9 +395,8 @@ def main():
         # city's step 2 loads a full business dataset through geopandas, and
         # four of those at once is four times the peak memory: New York's is the
         # largest, so --jobs 4 on a small machine can swap or be killed, and a
-        # killed sweep before a deploy is worse than a slow one. Raise it
-        # deliberately: --jobs 4 is a reasonable pre-deploy setting on a machine
-        # with room, and the default stays the one that always works.
+        # killed sweep before a deploy is worse than a slow one. MAX_JOBS caps
+        # it (see there); the default stays the one that always works.
         print(f"\n(running {len(requested)} cities with --jobs {jobs}; "
               "each city's report is printed as a block when it finishes)")
 

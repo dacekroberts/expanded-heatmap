@@ -24,7 +24,7 @@ row change.
    Incheon's coordinate file needs the owner's application (its row).
 5. **DONE by Staging 2026-09-27: skip it** (13 tram lines, 127 stops; see DECISIONS). (Was: attempted first; its
    boundary query failed on the host; the retry is in
-   `docs/handoff_staging_2026-09-27.md`). **Göteborg's rail** (Band T row:
+   `docs/handoff_staging_2026-09-27.md`, retired 2026-09-28; in git history). **Göteborg's rail** (Band T row:
    "Trams, no metro — INHERITED, not
    measured"). Count Västtrafik's tram lines and stops inside Göteborgs
    kommun from OSM through `pipeline.osm.fetch`. Its colours are needed too.

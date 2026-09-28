@@ -20,10 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**82 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**84 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one heavy job at a time, drift --jobs 2 at most (owner)](#2026-09-28---two-app-crashes-traced-to-memory-exhaustion-python-capped-at-8-gb-a-process-one-heavy-job-at-a-time-drift---jobs-2-at-most-owner)
+- [Handoffs rewritten for the owner's session reorganisation; the large-transit gap saved](#2026-09-28---handoffs-rewritten-for-the-owners-session-reorganisation-the-large-transit-gap-saved)
 - [Tokyo's missing wards: Arakawa OFF; a ward-by-ward list in the brief (owner)](#2026-09-28---tokyos-missing-wards-arakawa-off-a-ward-by-ward-list-in-the-brief-owner)
 - [Macro-map dots coloured by data completeness; storefront count in the tooltip, not the dot size (owner)](#2026-09-28---macro-map-dots-coloured-by-data-completeness-storefront-count-in-the-tooltip-not-the-dot-size-owner)
 - [Band T's EDGE cities grouped at its top; Band T below Band N (owner)](#2026-09-28---band-ts-edge-cities-grouped-at-its-top-band-t-below-band-n-owner)
@@ -119,6 +121,80 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-28 - Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one heavy job at a time, drift --jobs 2 at most (owner)
+
+- **Found: both crashes were the machine running out of commit, not a
+  graphics fault.** Windows' Resource-Exhaustion-Detector (System log, id
+  2004) logged "low virtual memory" at 11:59:37 (python.exe PID 13360,
+  47.34 GB) and 12:05:04 (PID 18300, 47.11 GB) on a 15.9 GB machine whose
+  commit limit is 29.2 GB. `claude.exe` was closed as hung at 12:00:38 and
+  12:15:43 (Application Hang 1002).
+  - The first process was Tokyo sources research's Ōta licence agent
+    running a hand-written PDF text decoder (`pdfscan.py`, started 18:57:30
+    UTC, backgrounded at 18:59:32, ended in MemoryError). It expanded each
+    ToUnicode `bfrange` into one dict entry per code and held every stream at
+    once.
+  - The second is unproven. In flight: the Japan session's four-job drift
+    check (started 67 s before, ended in MemoryError) and its census control
+    (12 s before, MemoryError), beside staging's `deploy-verify`. Staging's
+    identical four-job drift check had finished clean at 11:54, so no city
+    step needs 47 GB on its own.
+- **Decided (owner): cap every Python process at 8 GB, 12 GB with its
+  children.** `scripts/python_memcap.py`, installed as `usercustomize.py` in
+  the user site, puts each process in a Windows job object at start-up, so a
+  runaway gets its own MemoryError. Tested before install with a 0.5 GB test
+  cap: 100 MB allocates, 1 GB is a MemoryError, a child inherits the cap.
+  `HEATMAP_MEMCAP_TEST_GB` can only lower it. `--check` joins
+  `check_all.py`. Measured legitimate peaks during the Japan session's
+  one-job drift re-run (logged at each 0.5 GB rise past 1 GB): Oslo step 2
+  5.43 GB, Paris step 1 2.40 GB, every other step under 2 GB. So 8 GB leaves
+  Oslo about 2.5 GB of headroom.
+  - Rejected: a project-only cap through `.claude/settings.json`
+    (sessions already open stay uncovered until they restart). Not covered:
+    `.venv-lean`, which skips the user site.
+  - The install was refused by auto mode as persistence; the owner runs it.
+- **Decided (owner): one `drift_check.py` on the machine at a time.** It takes
+  an operating-system lock in the shared git directory (dies with the
+  process, so a crash leaves nothing stale); a second run exits naming the
+  holder. Tested: free, held (refused with the holder's pid), released.
+- **Decided (owner): drift checks run `--jobs 2` at most (`MAX_JOBS`), and
+  only one heavy job runs on the machine at a time, announced to every live
+  session before it starts and when it ends.** Staging proposed `--jobs 1` and
+  the announcement; cleanup recommended 2 rather than 1, because the cap
+  already bounds a runaway and Oslo plus Paris fit inside 12 GB. Four jobs
+  could pass the tree cap on their own. `--jobs 3` now exits naming the
+  limit. The rule is in `docs/session_roles.md`, "One heavy job on the
+  machine at a time"; `publish-city` gate step 2 and CLAUDE.md's command
+  line now say `--jobs 2`.
+- **Decided (owner): never hand-write a PDF or font decoder**; `pdftotext` or
+  `pypdf`, one page first. CLAUDE.md working rule `[#memory]`.
+- **Checked for crash damage: none.** `git fsck` clean; no stale `.lock`
+  in `.git`; every worktree's tracked files clean except the Japan session's
+  running drift re-render and cleanup's own edits; every file written
+  11:55-12:20 under `data/` and the worktrees intact (Python compiles, the
+  census xlsx passes a zip test, Sapporo's map ends in `</html>`); every
+  Claude and project JSON config parses; 17 memory files intact.
+### 2026-09-28 - Handoffs rewritten for the owner's session reorganisation; the large-transit gap saved
+
+- **"Staging and build handoff" hands over both of its roles (owner).** The
+  staging role goes to a fresh staging session
+  (`docs/handoff_staging_2026-09-28.md`); the build role joins the Tokyo build
+  session the owner is forming from the Japan build and Tokyo sources sessions
+  (`docs/handoff_tokyo_build_2026-09-28.md`). The 2026-09-27 staging and build
+  handoffs are deleted, their open items carried into the two new files.
+- **The review batch's state is recorded where it cannot be lost**: branch
+  `review-2026-09-28b` (Sapporo, Fukuoka, Kyoto, the macro-map tiers, the
+  Vancouver wording) pushed to origin as a backup, not to master; every cheap
+  gate green; the full deploy-verify still to run, after Cleanup confirms the
+  memory cap and a clear machine.
+- **`docs/global_transit_gap.md`** saves the owner's list of large-network
+  cities not built (22 discarded, 15 ruled out by country, 11 in a band, 35
+  never screened), with a recommended re-screen order led by London (ruled
+  out partly as food only, before food-only pages passed), Dubai and Manila
+  (ruled out on transit feeds alone) and Istanbul (one ASSERTED dataset).
+- Scratch that would have gone with this session's scratchpad is in
+  `data/_staging_scratch_2026-09-28b/` (the Incheon join and interpolation
+  scripts, the Baltimore listings, the line-colour search).
 ### 2026-09-28 - Tokyo's missing wards: Arakawa OFF; a ward-by-ward list in the brief (owner)
 
 - **Found that Bunkyō publishes no food-premises list at all, so it is OFF
