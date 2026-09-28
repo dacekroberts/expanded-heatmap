@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**411 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**412 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Session loose ends closed (owner): Riga on JSON.parse, the main checkout current, UTF-8 output in two tools, and the Czech coordinate control per city](#2026-09-27---session-loose-ends-closed-owner-riga-on-jsonparse-the-main-checkout-current-utf-8-output-in-two-tools-and-the-czech-coordinate-control-per-city)
 - [Daegu's and Busan's licences read: Busan permitted with a credit, Daegu on a reasoned position after the national route failed (owner)](#2026-09-27---daegus-and-busans-licences-read-busan-permitted-with-a-credit-daegu-on-a-reasoned-position-after-the-national-route-failed-owner)
 - [Wave-1 second-city screens banded: 43 candidates added, 32 of them trams-only; edge networks stay in T, Band C widened (owner)](#2026-09-27---wave-1-second-city-screens-banded-43-candidates-added-32-of-them-trams-only-edge-networks-stay-in-t-band-c-widened-owner)
 - [overpass.osm.ch removed from every Overpass host list; all-zero counts refused; check_overpass_hosts.py keeps regional extracts out](#2026-09-27---overpassosmch-removed-from-every-overpass-host-list-all-zero-counts-refused-check_overpass_hostspy-keeps-regional-extracts-out)
@@ -459,6 +460,33 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Session loose ends closed (owner): Riga on JSON.parse, the main checkout current, UTF-8 output in two tools, and the Czech coordinate control per city
+
+- **Riga re-rendered**: every one of the 46 maps now ships its data as
+  JSON.parse. The Main Building Session confirmed the Riga worktree was
+  removed with everything on master (`20af557`), so the render was free.
+  Decoded data are identical, and the map goes from 0.99 to 0.93 MB.
+- **Main checkout fast-forwarded** from `6ec6010` (2026-09-23), about 310
+  commits behind, to `origin/master` (`71a15e9`). It had no tracked changes.
+  One untracked stray download at its root, `opd.pdf`, was left for the
+  owner.
+- **UTF-8 output**: `scripts/check_personal_exposure.py` and
+  `pipeline/drift_check.py` now reconfigure stdout and stderr to UTF-8.
+  - Both raised `UnicodeEncodeError` on a Windows console partway through:
+    the privacy gate on Han and Hangul names, the drift check on a Czech
+    letter in Prague. The cities after the crash were then never checked.
+  - Both now run clean with no `PYTHONIOENCODING`: the privacy check on
+    Seoul, Hong Kong and Taipei, the drift check on Prague.
+- **The Czech RUIAN control is per city**: `czechia_register.ruian()` read
+  a module-level Prague Castle address and failed every other town
+  (Staging, second-city screens).
+  - It now reads `cfg.RUIAN_CRS_CONTROL` (code, lat, lon, label), and
+    refuses with instructions when a config has none.
+  - Prague's config carries the castle, and `drift_check.py prague`
+    reports zero drift.
+  - Brno, or any next Czech city, declares one known address in its own
+    obec.
 
 ### 2026-09-27 - Daegu's and Busan's licences read: Busan permitted with a credit, Daegu on a reasoned position after the national route failed (owner)
 

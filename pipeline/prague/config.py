@@ -32,6 +32,13 @@ BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 # obec, and the rail and boundary are Prague's own.
 GTFS_ZIP = DATA_RAW / "pid_gtfs.zip"
 RUIAN_ZIP = DATA_RAW / "ruian_adr_554782.csv.zip"
+# The RUIAN coordinate control czechia_register.ruian() re-checks: one known
+# address IN THIS OBEC, as (RUIAN code, lat, lon, label). Prague Castle, Hrad
+# I. nádvoří, measured in the brief at 50.08948, 14.39861 under EPSG:5513 with
+# (X, Y) as published. The wrong axis orders land in Germany or the Arctic and
+# still look like coordinates. Each Czech city declares its own - this lived
+# in the shared module until 2026-09-27 and would have stopped Brno.
+RUIAN_CRS_CONTROL = ("21690278", 50.08948, 14.39861, "Prague Castle")
 OSM_BOUNDARY_JSON = DATA_RAW / "osm_boundary.json"
 OSM_RAIL_JSON = DATA_RAW / "osm_rail.json"
 PROVENANCE_JSON = OUTPUTS / "provenance.json"
@@ -142,8 +149,8 @@ CATCH_ALL_EXCLUDE = ()
 
 # Sanity bounds: the placed storefronts' measured extent (49.9488-50.1716 N,
 # 14.2657-14.6867 E, 2026-09-24) plus ~0.02 deg. The join to RUIAN does the
-# placing; this catches a CRS or axis error, which the castle control in
-# czechia_register.py catches first.
+# placing; this catches a CRS or axis error, which the castle control
+# (RUIAN_CRS_CONTROL above) catches first.
 PRAGUE_BBOX = {
     "lat_min": 49.93,
     "lat_max": 50.19,

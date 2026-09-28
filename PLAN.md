@@ -1004,7 +1004,7 @@ brief names.
     copies (lon +/- 360) to its Global scoring; re-check the credit with
     `check_macro_attribution.mjs`; verify in a real 1200 px render that the three show on
     the left on load.
-- [ ] **Before Brno (or any second Czech city): move `czechia_register.ruian()`'s coordinate
+- [x] **DONE 2026-09-27: `cfg.RUIAN_CRS_CONTROL` per city; Prague zero drift.** Before Brno (or any second Czech city): move `czechia_register.ruian()`'s coordinate
   sanity check into each city's config.** It hard-codes Prague Castle (RUIAN 21690278) and
   calls sys.exit for any other town (Staging, 2026-09-27). One known address per city, in
   `pipeline/<city>/config.py`, read by the shared function.

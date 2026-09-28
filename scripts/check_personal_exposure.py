@@ -871,6 +871,14 @@ def check(slug):
 
 
 def main():
+    # The report prints business names, and since Hong Kong, Seoul and Taiwan
+    # those include Han and Hangul. A Windows console defaults to cp1252 and
+    # raised UnicodeEncodeError partway through the run (2026-09-27), so the
+    # privacy gate stopped before the cities after it. UTF-8 regardless of the
+    # console; the cjk-text skill records the same trap.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     slugs = sys.argv[1:] or sorted(p.name for p in (ROOT / "outputs").iterdir() if p.is_dir())
     print("Personal-data exposure in the rendered maps (read-only).")
     print("A trade name is public commercial information; a registrant's name at a")

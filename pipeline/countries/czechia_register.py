@@ -24,11 +24,10 @@ from pipeline.countries import czechia as CZ
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module
 
 BUCKET_DIVISIONS = ("47", "56", "96")
-# Prague Castle, Hrad I. nádvoří - RUIAN code 21690278 - measured in the brief
-# at 50.08948, 14.39861 under EPSG:5513 with (X, Y) as published. The step
-# re-checks it, because the wrong axis orders land in Germany or the Arctic
-# and still look like coordinates.
-CRS_CONTROL = ("21690278", 50.08948, 14.39861)
+# The RUIAN coordinate control is PER CITY: `cfg.RUIAN_CRS_CONTROL`, one known
+# address in that city's own obec (Prague's is the castle - see its config).
+# It was a module constant here until 2026-09-27, which made every other Czech
+# town fail the check (Staging, the second-city screens).
 
 
 def _need(path, cfg):
@@ -65,10 +64,15 @@ def ruian(cfg):
     # and fail the bounding box instead, misreported as a bad coordinate.
     a["latitude"] = pd.Series(lat, index=a.index).where(pd.Series(lat).abs().lt(90).values)
     a["longitude"] = pd.Series(lon, index=a.index).where(pd.Series(lon).abs().lt(180).values)
-    code, want_lat, want_lon = CRS_CONTROL
+    control = getattr(cfg, "RUIAN_CRS_CONTROL", None)
+    if control is None:
+        sys.exit(f"pipeline/{cfg.SLUG}/config.py has no RUIAN_CRS_CONTROL. Declare one "
+                 f"known address in obec {cfg.OBEC} as (RUIAN code, lat, lon, label), "
+                 f"measured from a source other than this file - Prague's is the castle.")
+    code, want_lat, want_lon, label = control
     got = a.loc[a[CZ.RUIAN_CODE] == code, ["latitude", "longitude"]]
     if got.empty or abs(got.iloc[0, 0] - want_lat) > 0.001 or abs(got.iloc[0, 1] - want_lon) > 0.001:
-        sys.exit(f"RUIAN CRS control failed: Prague Castle ({code}) came out at "
+        sys.exit(f"RUIAN CRS control failed: {label} ({code}) came out at "
                  f"{got.values.tolist()}, expected {want_lat}, {want_lon} - the axis "
                  f"order or the CRS is wrong")
     street = a[CZ.RUIAN_STREET].fillna(a[CZ.RUIAN_PART]).fillna("")
@@ -76,7 +80,7 @@ def ruian(cfg):
     orient = (a[CZ.RUIAN_ORIENT].fillna("") + a[CZ.RUIAN_ORIENT_LETTER].fillna("")).str.strip()
     a["address"] = (street + " " + num + ("/" + orient).where(orient != "", "")).str.strip()
     print(f"RUIAN addresses in obec {cfg.OBEC}: {len(a):,}; coordinates on "
-          f"{a['latitude'].notna().mean():.2%}; CRS control (Prague Castle) passed")
+          f"{a['latitude'].notna().mean():.2%}; CRS control ({label}) passed")
     return a.set_index(CZ.RUIAN_CODE)[["latitude", "longitude", "address"]]
 
 
