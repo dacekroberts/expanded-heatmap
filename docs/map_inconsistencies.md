@@ -97,7 +97,8 @@ run on top of a metro network.
   Hong Kong (Light Rail), Riga (its trams are the whole network), Montréal (the
   REM, an automated light metro; from 2026-09-27, on its branch until review time).
 - **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Toronto's 18 streetcar routes, Milan (17 routes), Barcelona,
-  Paris, Prague, Rome (all but tram 8, drawn and thinned from 2026-09-27 on the
+  Paris (all but T3a and T3b, drawn from 2026-09-27 on the tram-rescope branch;
+  T2 and T9 are stubs), Prague, Rome (all but tram 8, drawn and thinned from 2026-09-27 on the
   tram-rescope branch), Madrid (Metro Ligero ML2 and ML3, stubs; ML1 drawn from
   2026-09-27 on the tram-rescope branch), Copenhagen (the Letbane has no stop in
   scope).
@@ -276,7 +277,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Milan | Metro M1–M5 | 17 trams; Passante, Trenord | ATM GIS layers (+GTFS colours) | Comune | 21 / 0 |
 | Rome | Metro A, B, B1, C + Roma–Viterbo (urban) + Tram 8 | Other trams (2, 3, 5, 14, 19 bus-replaced); 8 prolungato; Roma–Lido; suburban | OpenStreetMap | Comune | 1 / 9 |
 | **France** | | | | | |
-| Paris | Métro, 16 lines | RER, Transilien, trams | IDFM GTFS | Commune | 76 / 0 |
+| Paris | Métro, 16 lines + Trams T3a, T3b | RER, Transilien, other trams (T2 and T9 stubs) | IDFM GTFS | Commune | 76 / 0 |
 | Marseille | Métro 1–2 + Tramway 1–3 | TER; ferries; Aubagne tram | Métropole AMP GTFS (RTM) | Commune | 7 (Aubagne tram) / 0 |
 | Toulouse | Métro A–B + Tram T1 + Téléo cable car | — | Tisséo GTFS | Commune | 14 / 0 |
 | Lille (Regional) | Métro 1–2 + Tram R, T | heritage tram, disused line | MEL GIS + OpenStreetMap (métro lines) | 11 communes | no CSV (none lost) / 0 |

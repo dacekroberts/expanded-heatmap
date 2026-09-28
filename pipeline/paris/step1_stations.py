@@ -64,6 +64,17 @@ def main():
                  f"  config: {sorted(config.ROUTE_IDS)}\n"
                  f"A line added or withdrawn is a scope decision, not a "
                  f"config edit - see docs/build_briefs/paris.md.")
+    # Trams T3a and T3b (2026-09-27): exact route_id, route_type AND short name.
+    trams = routes[routes["route_id"].isin(set(config.TRAM_ROUTES))]
+    for rid, short in config.TRAM_ROUTES.items():
+        row = trams[trams["route_id"] == rid]
+        if (len(row) != 1 or row["route_type"].iloc[0] != config.ROUTE_TYPE_TRAM
+                or row["route_short_name"].iloc[0] != short):
+            sys.exit(f"tram {short} ({rid}) is not in the feed as route_type "
+                     f"{config.ROUTE_TYPE_TRAM} with that exact short name - "
+                     f"IDFM has renumbered; re-read routes.txt")
+    print(f"  + trams: {', '.join(config.TRAM_ROUTES.values())} (exact match)")
+    metro = pd.concat([metro, trams])
     short_of = dict(zip(metro["route_id"], metro["route_short_name"]))
     missing = sorted(set(short_of.values()) - set(config.LINE_NAMES))
     if missing:

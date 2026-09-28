@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**42 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**43 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Tram rescope 4 of 5: Paris's T3a and T3b drawn, in this project's own colours (held for review time)](#2026-09-27---tram-rescope-4-of-5-pariss-t3a-and-t3b-drawn-in-this-projects-own-colours-held-for-review-time)
 - [Tram rescope 3 of 5: Madrid's Metro Ligero ML1 drawn from CRTM's M10 layers; ML2 and ML3 left out as stubs (owner; held for review time)](#2026-09-27---tram-rescope-3-of-5-madrids-metro-ligero-ml1-drawn-from-crtms-m10-layers-ml2-and-ml3-left-out-as-stubs-owner-held-for-review-time)
 - [Tram rescope 2 of 5: Rome's tram 8 drawn (the base service, Casaletto - Venezia) and thinned to 7 of its 16 stops (held for review time)](#2026-09-27---tram-rescope-2-of-5-romes-tram-8-drawn-the-base-service-casaletto---venezia-and-thinned-to-7-of-its-16-stops-held-for-review-time)
 - [Tram rescope 1 of 5: Montréal's REM drawn as one line, from the operator's own feed (held for review time)](#2026-09-27---tram-rescope-1-of-5-montréals-rem-drawn-as-one-line-from-the-operators-own-feed-held-for-review-time)
@@ -75,6 +76,38 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Tram rescope 4 of 5: Paris's T3a and T3b drawn, in this project's own colours (held for review time)
+
+- **T3a (`IDFM:C01391`) and T3b (`IDFM:C01679`) are drawn from the cached
+  IDFM GTFS, matched on route_type 0 AND the exact route_id AND the exact
+  short name**; step 1 stops if any of the three moves. T2 and T9 stay out as
+  stubs (owner's call, 2026-09-27). Labels "Tram T3a" and "Tram T3b": the mode
+  word, Copenhagen's convention, where the spec wrote the bare refs.
+- **IDFM shares ONE parent_station between the trams and the Métro at every
+  interchange** (22 of the trams' 57 stops, measured at 0 m), so Paris's
+  existing parent_station collapse merges them with no name rule. Stations
+  245 -> 280 (35 new, all inside the commune); excluded unchanged at 76; all
+  18 drawn lines keep a station inside. Tram spacing median 411 m against the
+  Métro's 399 m, so no thinning (Paris's outer ring is 0.3 mi). Gate 3 still
+  covers the 16 Métro lines only: IDFM's per-line layer was not re-read for
+  trams, and the feed's own 25 / 33 would not be independent.
+- **The colours are this project's, not RATP's.** IDFM gives T3a Ligne 5's
+  FF5A00 and T3b Ligne 12's 00643C (Delta-E 0 each). Hue and saturation kept,
+  LIGHTER by the smallest HSL step clearing 13 against every Métro line and
+  every pin (Amsterdam's, Oslo's and Copenhagen's rule; lighter for the dark
+  basemap): T3a #FF7429 (+0.08), 13.9 from Ligne 5; T3b #00834E (+0.06), 14.5
+  from Ligne 12 and 16.8 from the Personal services pin (+0.08 would land
+  13.2 from that pin). **For review**: T3a still reads as an orange near
+  Ligne 5's in the render. They are told apart by route (the peripheral
+  boulevards against a radial line) and by label; a hue change would be the
+  bis lines' remedy if the owner wants more.
+- Storefronts within a ring 85,501 of 87,164. Drift `heatmap.html` only;
+  `check_map_view.js` 12.5 = expected, 0 corrections; markup (dark-mode label
+  contrast), inline arrays, scope disclosure and provenance pass. The page
+  still says Métro only: a draft for the owner's review. Files:
+  `pipeline/paris/{config, step1_stations, step3_map}.py`,
+  `outputs/paris/heatmap.html`, `docs/map_inconsistencies.md`.
 
 ### 2026-09-27 - Tram rescope 3 of 5: Madrid's Metro Ligero ML1 drawn from CRTM's M10 layers; ML2 and ML3 left out as stubs (owner; held for review time)
 
