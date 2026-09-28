@@ -122,9 +122,8 @@ feeds and live OSM/CRTM the same evening.
     in `pipeline/paris/config.py`).
   - Each override must clear the Métro lines AND the three category pins.
   - Record the choice as this project's, not RATP's.
-- **T2 and T9 are stubs** (T2: 3 of 24 stops inside Paris; T9: 1 of 19).
-  Recommendation: leave both out. That is the owner's stub call, put at
-  review time.
+- **T2 and T9 are LEFT OUT (owner's call, 2026-09-27)**: stubs, with 3 of
+  24 and 1 of 19 stops inside Paris. Draw T3a and T3b only.
 - **Match on route_type 0 AND the exact short name** (`T3a`, `T3b`), never a
   substring. The config already warns that "1" matches too much.
 - **Labels**: "T3a", "T3b".

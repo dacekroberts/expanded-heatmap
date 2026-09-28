@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**39 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**40 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
 - [Worktrees: monterrey retired, trams created for the next build session, main checkout fast-forwarded (owner)](#2026-09-27---worktrees-monterrey-retired-trams-created-for-the-next-build-session-main-checkout-fast-forwarded-owner)
+- [Four owner calls: Ottawa to Band C, Rijswijk and Delft to T as Den Haag add-ons, the Band C memo's last verdicts accepted, Paris T2/T9 out](#2026-09-27---four-owner-calls-ottawa-to-band-c-rijswijk-and-delft-to-t-as-den-haag-add-ons-the-band-c-memos-last-verdicts-accepted-paris-t2t9-out)
 - [Tram rescopes, light and medium: specs written for five cities, and the D.C. Streetcar dropped because it no longer runs (owner)](#2026-09-27---tram-rescopes-light-and-medium-specs-written-for-five-cities-and-the-dc-streetcar-dropped-because-it-no-longer-runs-owner)
 - [Monterrey (Regional), Daegu and Busan are LIVE: rebooted by the owner, live-checked](#2026-09-27---monterrey-regional-daegu-and-busan-are-live-rebooted-by-the-owner-live-checked)
 - [Monterrey (Regional), Daegu and Busan published as one batch at the owner's review; reboot required](#2026-09-27---monterrey-regional-daegu-and-busan-published-as-one-batch-at-the-owners-review-reboot-required)
@@ -102,6 +103,20 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   tracked changes. A session started there would otherwise have read the
   rules from before today's changes: the long CLAUDE.md, no pre-push hook and
   no archive.
+### 2026-09-27 - Four owner calls: Ottawa to Band C, Rijswijk and Delft to T as Den Haag add-ons, the Band C memo's last verdicts accepted, Paris T2/T9 out
+
+- **Ottawa → Band C** (food only), as recommended. Cleanup had already
+  placed it.
+- **Rijswijk and Delft → Band T as Den Haag add-ons**: candidates for a Den
+  Haag (Regional) scope, not pages of their own. This closes the open
+  exception to the Access → Trams → Buckets order. C 9 → 7, T 38 → 40.
+- **The Band C memo's remaining verdicts accepted**: Singapore no page (its
+  food register is from 2016); Gyeonggi on hold until Daegu and Busan are
+  built; Incheon probes the address join (juso.go.kr) first.
+- **Paris T2 and T9 left out of the rescope as stubs.** Written into
+  `docs/tram_rescope_specs.md`. The message to Main Build could not reach it:
+  its local session was no longer listed, and a copy went to its offline
+  Remote Control twin.
 
 ### 2026-09-27 - Tram rescopes, light and medium: specs written for five cities, and the D.C. Streetcar dropped because it no longer runs (owner)
 
