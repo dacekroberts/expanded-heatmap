@@ -85,7 +85,9 @@ Desktop is unaffected — the label is fully visible there.
     AND the second-wave screens are done** (the screens wait for the 10pm
     reset or later; wave 1 was very load-intensive). The tram list's open
     counts are Barcelona's TRAM, Hong Kong Tramways, Seoul's Wirye Line,
-    D.C. Streetcar's status and Mexico City's Cablebús (below).
+    D.C. Streetcar's status and Mexico City's Cablebús (below). **The
+    tram-list count runs WITH wave 2** (owner). The rescopes' estimated load
+    and a recommendation per category: `docs/tram_rescope_estimate.md`.
     **Band T's group decision**: build trams-only cities, and in what
     order (Nice, Montpellier, Brno and Bergen are the cheapest strong ones).
   - [ ] **Wave 2 held by the owner** (the US; Canada, Brazil and Ireland;

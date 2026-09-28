@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**27 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**28 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Band T renamed "Contingent on trams" and five cities moved into it from Band C; Stockholm and Bucharest pass the Band C memo (owner)](#2026-09-27---band-t-renamed-contingent-on-trams-and-five-cities-moved-into-it-from-band-c-stockholm-and-bucharest-pass-the-band-c-memo-owner)
 - [Master list after the split: Denver, Dallas and Brampton get discard rows; Ottawa is a data case, not a no-rail one; the by-country table rebuilt (owner, via Cleanup)](#2026-09-27---master-list-after-the-split-denver-dallas-and-brampton-get-discard-rows-ottawa-is-a-data-case-not-a-no-rail-one-the-by-country-table-rebuilt-owner-via-cleanup)
 - [Efficiency findings 4, 5 and 7 acted on: renderer changes batch, the master list split and counted, city_shortlist.md retired, Kansas City to Band T (owner)](#2026-09-27---efficiency-findings-4-5-and-7-acted-on-renderer-changes-batch-the-master-list-split-and-counted-city_shortlistmd-retired-kansas-city-to-band-t-owner)
 - [Busan's brief: the API's state filter drops every permit since February 2025, large stores come only by id, and the frozen snapshot is genuine](#2026-09-27---busans-brief-the-apis-state-filter-drops-every-permit-since-february-2025-large-stores-come-only-by-id-and-the-frozen-snapshot-is-genuine)
@@ -60,6 +61,28 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Band T renamed "Contingent on trams" and five cities moved into it from Band C; Stockholm and Bucharest pass the Band C memo (owner)
+
+- **Band T renamed "Contingent on trams" (owner's call).** Five Band C cities
+  whose build needs a yes on trams-only maps as well as a Band C verdict
+  moved in: **Zurich, Göteborg, Hiroshima, Utrecht and Den Haag**. Their rows
+  and write-ups moved verbatim; each keeps its Band C gap noted beside it.
+  C 13 → 8, T 33 → 38.
+- **The first-blocker order was amended to Access (D) → Trams (T) → Buckets
+  (C)**: the trams decision is the one that gates a trams-only city first.
+  **Rijswijk and Delft**, trams-only too, stay in C as the one open exception.
+  The Band C memo recommends no page of their own, and the owner said five.
+- **Stockholm and Bucharest pass the Band C memo (owner)**: food-only pages
+  beside the three-bucket cities, saying what is missing (Hong Kong and the
+  Japanese cities are the precedent). They sit in their own "Passed" group
+  within Band C, apart from the cities still waiting. Bucharest's two
+  conditions travel with it to the build: the owner fetches the file in a
+  browser that passed the site's challenge, and a silent licence is
+  disclosed. The memo's other verdicts are not yet decided.
+- **The tram-list count runs with wave 2 (owner).** The tram rescopes'
+  estimated load (about 55–85% of one 5-hour window) and a recommendation per
+  category are saved in `docs/tram_rescope_estimate.md` for later.
 
 ### 2026-09-27 - Master list after the split: Denver, Dallas and Brampton get discard rows; Ottawa is a data case, not a no-rail one; the by-country table rebuilt (owner, via Cleanup)
 
