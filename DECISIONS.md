@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**96 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**97 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Tokyo's rail: JR East drawn as nine public services over N02's legal lines, 52 lines, 490 stations (293 hollow); station names in signage style; the name rule's gap accepted (owner)](#2026-09-28---tokyos-rail-jr-east-drawn-as-nine-public-services-over-n02s-legal-lines-52-lines-490-stations-293-hollow-station-names-in-signage-style-the-name-rules-gap-accepted-owner)
 - [Tokyo step 2 on the roster: 63,989 storefronts from 25 sources, 99.7% block; a source's key split from its kind; the registers read for the first time](#2026-09-28---tokyo-step-2-on-the-roster-63989-storefronts-from-25-sources-997-block-a-sources-key-split-from-its-kind-the-registers-read-for-the-first-time)
 - [Tokyo's groundwork built: the ward roster, hollow no-data stations, per-ward shares measured every build; the seven personal-services-only wards stay hollow (owner); the Tokyo build takes over this worktree](#2026-09-28---tokyos-groundwork-built-the-ward-roster-hollow-no-data-stations-per-ward-shares-measured-every-build-the-seven-personal-services-only-wards-stay-hollow-owner-the-tokyo-build-takes-over-this-worktree)
 - [Review batch verified: the full deploy-verify passes; the macro tooltip becomes a corner panel; East Asia's global-frame label overlaps accepted (owner)](#2026-09-28---review-batch-verified-the-full-deploy-verify-passes-the-macro-tooltip-becomes-a-corner-panel-east-asias-global-frame-label-overlaps-accepted-owner)
@@ -132,6 +133,105 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Tokyo's rail: JR East drawn as nine public services over N02's legal lines, 52 lines, 490 stations (293 hollow); station names in signage style; the name rule's gap accepted (owner)
+
+- **Decided (owner, recommended): JR East is drawn as its nine public
+  services, each along its full route**, overlapping where two share track:
+  Yamanote (30 stations in the wards), Keihin-Tohoku (22, 15 shared with the
+  Yamanote), Chuo Rapid (10), Chuo-Sobu (24), Yokosuka / Sobu Rapid (8),
+  Keiyo (6), Joban (8), Saikyo (10) and Utsunomiya / Takasaki (4). N02 files
+  JR East under eight legal lines (山手線, 東北線, 東海道線, 中央線, 総武線,
+  常磐線, 京葉線, 赤羽線), and one legal line carries several services.
+  Rejected: New York's draw-each-track-once (about six JR lines, fewer
+  labels), which would have split the Chuo-Sobu and Keihin-Tohoku across
+  stretches named after other services. The Tokaido Line and the
+  Shonan-Shinjuku Line are not drawn on their own: every station they serve
+  in the wards is on a drawn line, on track they share (the page says so).
+- **The mechanism is a `route` on a LINES entry** (`japan_step1.route_sections`,
+  shared): legs of (operator, legal line, [stops in order]), each hop drawn
+  along the shortest path over its legal line's sections, and a station row
+  belonging to the line only where it is a listed stop. `check_routes` stops
+  on a stop that is not on its leg, and the old check still stops on any
+  in-ward station row no line claims, so a forgotten stop cannot pass. N02's
+  東北線 arrives in two pieces (an 8-node piece at 日暮里, 67 m from the rest):
+  each hop takes both ends from the one piece nearest both stations. No other
+  city has a `route`, so nothing else changes. The Fukutoshin also takes a
+  route leg over the Yurakucho's track to 和光市 (F01-F06; N02 files it
+  there only).
+- **Every other operator is one line per N02 line** under its public name
+  (Tobu Skytree Line for 伊勢崎線, Tsukuba Express for 常磐新線, Tokyo Sakura
+  Tram for 荒川線, Rinkai Line, Yurikamome), the Marunouchi's Honancho branch
+  drawn as the Marunouchi. **Left out as Fukuoka's Hakata-Minami line**
+  (owner): Keisei's Narita Sky Access (only 京成高砂 inside, on the Hokuso's
+  track) and the Saitama Railway (only 赤羽岩淵, the Namboku's terminus). The
+  Hokuso keeps 2 of 15, cut at the ward line.
+- **Gate 3 exact on all fifteen Tokyo Metro and Toei lines** against their
+  station numbering (Ginza 19, Marunouchi 28, Hibiya 22, Tozai 17, Chiyoda 20,
+  Yurakucho 23, Hanzomon 14, Namboku 19, Fukutoshin 15, Asakusa 20, Mita 27,
+  Shinjuku 20, Oedo 38, Sakura Tram 30, Nippori-Toneri 13). The JR services
+  are their route lists, so they have no independent count.
+- **490 stations inside the 23 wards, 293 of them hollow** in the 15 wards
+  without data (Ota 39, Toshima 25, Shinagawa 25 ... Edogawa 11); 55 excluded
+  beyond the ward line. Tokyo's interchanges are wider than Kobe's 300 m, so
+  `COLLAPSE_MAX_SPREAD_M` is 550, citing the six real ones over 300 (新宿 546,
+  大手町 450, 池袋 392, 飯田橋 379, 浅草 366, 日比谷 321). **Two platforms
+  join their station** (`GROUP_JOIN`, shared): the Keiyo Line's 東京 (424 m,
+  part of Tokyo Station) and the Fukutoshin's 池袋 (356 m, one Ikebukuro to
+  Tokyo Metro); 両国, 早稲田 and the TX's 浅草 are different stations and take
+  their operators.
+- **Decided (owner, recommended): station and line names in signage style.**
+  OSM's Tokyo names follow each operator's English signs: no macrons (9 of
+  492 had one), Tokyo Metro's lowercase after a hyphen (Naka-meguro) beside
+  JR's title case (Nishi-Nippori). Kept as OSM has them; the 9 macrons
+  stripped, splits and ties settled in JR's title case, OSM's defects fixed
+  (TOKYO SKYTREE, "Shakujii-koen Station", Shimo-simmei, three quoted
+  subtitles), 9 ヶ/ケ and subtitle aliases, and the 15 丁目 names with their
+  number as a figure (the Japan-wide rule: Roppongi-1-Chome). Line and ward
+  names lose their macrons too (Tozai, Keio, Tokyu; Ota, Bunkyo). Rejected:
+  Fukuoka's house style (macrons and title case throughout), several hundred
+  hand edits against the signs riders read. 29 cited overrides in
+  `pipeline/tokyo/config.py`.
+- **Decided (owner, recommended): the name rule's gap is accepted and
+  disclosed**, as for Fukuoka's MHLW rows. Five wards' food lists (64,057
+  rows, Shibuya's among them) carry company names only, and Taito and
+  Setagaya mask individual operators themselves. Shibuya marks 2,874 of its
+  16,993 open premises as run by an individual (個人事業主); showing all of
+  them by permit type was rejected, because it would hide mostly real shop
+  names. The page says the check covers only the lists that name their
+  operators.
+- **OSM names fetched (owner's OK)**: `osm_station_names.json` 494,360 bytes
+  (796 objects, 788 with name:en) and `osm_tram_stop_names.json` 26,997 bytes
+  (59), from overpass-api.de.
+- **Line colours from a spatial search** (`scripts/line_colour_search.py`,
+  new and shared): Osaka's 34 lines already sat at the city-wide search's
+  limit, so lines within 500 m of each other must differ by CIE76 18, and
+  every pair by 10 (the renderer's floor). All 52 placed: closest pair within
+  500 m 18.1, anywhere 10.1, all 52 dark-mode labels separate. As in Fukuoka,
+  no blue clears Retail's pin, so the blue lines went slate, grey and mauve.
+- **Decided (owner, recommended): the map labels each line with its
+  operator's line code, and the full name is on the page** (and beside the
+  code in the legend: "JY  JR Yamanote Line"). Measured first, in memory and
+  in a scratch render: full names left 9 of 52 labels unplaceable at 1000 px
+  even after a greedy search over label ends; short names ("Yamanote") placed
+  all but one or two on desktop but gave 59 overlapping pairs at 343 px,
+  burying the network; the codes placed all 52 at the solver's first view
+  with no tuning, and `check_map_labels.js` found 0 problems at 343, 375 and
+  1280 px. The codes are the operators' own letters as Tokyo's signs show
+  them; Seibu (SI), Tobu (TS), Keisei (KS) and Keikyu (KK) give several lines
+  one code, told apart by colour and the legend. Shared change:
+  `render_heatmap(legend_names=...)` - the spec's label is drawn, the legend
+  row reads code and name, and the colour checks and layer names use the
+  full name (so three lines coded SI are still checked apart). Omitted, as
+  for every other city, nothing changes.
+- **Map checks on the rendered map**: `check_map_view.js` zoom 10 at 343 px
+  (twice) and 11 at 1280, as expected, no corrections; the OSM credit clear
+  and clamped at 650 and 812 px high; dark mode flips and restores.
+- **`check_personal_exposure.py tokyo`**: 0 operator names shown as trade
+  names (the Japan pass; 4 in the raw lists, 2 pins show their permit type).
+  The Latin heuristic's 431 person-like names are not a finding for Japanese
+  names; its two "name (trade name)" hits are salon names with their kana
+  reading (ALETTA DONA, Maison Lily). No personal information shown.
 
 ### 2026-09-28 - Tokyo step 2 on the roster: 63,989 storefronts from 25 sources, 99.7% block; a source's key split from its kind; the registers read for the first time
 

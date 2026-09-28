@@ -417,5 +417,25 @@
     "retrieved": "2026-09-27T19:52:08+00:00",
     "sha256": "e73a70ca903c5a37daba66158ee5de7c48bb7cd7d45f31f7fa4a178c9456702f",
     "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_13_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 494360,
+    "elements": 796,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-09-28T21:35:36Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](35.5,139.54,35.84,139.94);way[\"railway\"=\"station\"](35.5,139.54,35.84,139.94););out tags center;",
+    "retrieved": "2026-09-28T21:36:53+00:00",
+    "sha256": "eef3f08f1fe5c22d5ceb7b64545365d8eccc9ef7f7e25d500acd887d7b24a2b3"
+  },
+  "osm_tram_stop_names": {
+    "bytes": 26997,
+    "elements": 59,
+    "file": "osm_tram_stop_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-09-28T21:35:36Z",
+    "query": "[out:json][timeout:120];node[\"railway\"=\"tram_stop\"](35.5,139.54,35.84,139.94);out body;",
+    "retrieved": "2026-09-28T21:36:56+00:00",
+    "sha256": "f63236fcb20a5cec992f49fad5791ddd6be20cdfd6a021f4063f69d9c6218661"
   }
 }

@@ -47,14 +47,17 @@ OUT = ROOT / "docs" / "japan_city_list.md"
 # Not measured: band, build order and status (owner's calls). Keep in step
 # with docs/city_master_list.md.
 STATUS = {
-    "osaka": ("Osaka", "🟢 A", "Builds 1st. About two-thirds of the gap is expired old-law permits still in "
-                               "the official count. The other third, revised-law permits the city counts but "
-                               "never lists, is undetermined. See osaka.md"),
-    "kobe": ("Kobe", "🟢 A", "2nd"),
-    "sapporo": ("Sapporo", "🟢 A", "3rd. Grid addresses resolve to the 条丁目 block, about 100 m"),
-    "fukuoka": ("Fukuoka", "🟢 A", "4th. Includes MHLW's addressed rows; about 20% of restaurants withhold their address"),
-    "kyoto": ("Kyoto", "🟢 A", "5th. Rebuilt register: an upper bound"),
-    "tokyo": ("Tokyo (8 wards)", "🟢 A", "6th, last. Chiyoda missing"),
+    "osaka": ("Osaka", "✅ built", "Built 2026-09-27, Japan's second. About two-thirds of the gap is expired "
+                                  "old-law permits still in the official count. The other third, revised-law "
+                                  "permits the city counts but never lists, is undetermined. See osaka.md"),
+    "kobe": ("Kobe", "✅ built", "Built 2026-09-27, Japan's first"),
+    "sapporo": ("Sapporo", "✅ built", "Built 2026-09-28, Japan's third. Grid addresses resolve to the 条丁目 "
+                                      "block, about 100 m"),
+    "fukuoka": ("Fukuoka", "✅ built", "Built 2026-09-28, Japan's fourth. Includes MHLW's addressed rows; about "
+                                      "20% of restaurants withhold their address"),
+    "kyoto": ("Kyoto", "✅ built", "Built 2026-09-28, Japan's fifth. Rebuilt register: an upper bound"),
+    "tokyo": ("Tokyo (8 wards)", "🟢 A", "Building, the last. 8 food wards on; the 15 without a usable food "
+                                        "list drawn as hollow stations (owner, 2026-09-28)"),
     "hiroshima": ("Hiroshima", "🟣 C", "Food only: no personal-services list is published. Also: the network "
                                      "is streetcars plus the elevated Astram Line, a trams-only edge case (Band T's "
                                      "question), noted under the first-blocker rule"),

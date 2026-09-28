@@ -1910,7 +1910,7 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
     return len(data)
 
 
-def build_legend(bucket_colors, legend_label, lines, no_data_stations=False):
+def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, legend_names=None):
     """Fixed-position legend generated from the buckets actually present
     and the taxonomy's own legend text - nothing taxonomy-specific here.
 
@@ -1918,10 +1918,14 @@ def build_legend(bucket_colors, legend_label, lines, no_data_stations=False):
     lines: {key: (coords, color, label, end)}. no_data_stations: the map draws
     hollow stations (Tokyo's wards with no data), so the legend says what a
     hollow station means; a map without them keeps its legend byte for byte.
+    legend_names: {key: full name} where the on-map label is a line code
+    (render_heatmap); the row reads "code  full name".
     """
+    names = legend_names or {}
     line_rows = "".join(
-        LEGEND_LINE_ROW.format(color=color, label=html.escape(label))
-        for _coords, color, label, _end in lines.values()
+        LEGEND_LINE_ROW.format(color=color, label=html.escape(
+            f"{label} {names[key]}" if key in names else label))
+        for key, (_coords, color, label, _end) in lines.items()
     )
     if no_data_stations:
         line_rows += LEGEND_NO_DATA_ROWS.format(color=LIGHT["station"])
@@ -2026,8 +2030,19 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
                    stations, businesses, taxonomy_system, lines,
                    crs_geographic, crs_projected, ring_edges_meters, ring_labels,
                    center=None, zoom=None, label_focus=None, rings_shown=False,
-                   all_city_heat=True, animate_clusters=False, lang=None, pins=True):
+                   all_city_heat=True, animate_clusters=False, lang=None, pins=True,
+                   legend_names=None):
     """Render one city's heatmap to a standalone HTML file.
+
+    legend_names: optional {line key: full public name}, for a city whose
+    on-map labels are the operators' LINE CODES (Tokyo's 52 lines, owner
+    2026-09-28: full names left 9 labels unplaceable at 1000 px and short names
+    59 overlapping pairs at 343 px; the codes place all 52 at both). The line
+    spec's label is then the code drawn on the map, and the legend row reads
+    "code  full name" - so every line keeps a permanent label AND a legend
+    entry, and check_map_labels.js still finds each label in the legend. The
+    colour checks and layer names use the full name, since one operator may
+    give several lines one code (Seibu's SI). Omitted, nothing changes.
 
     lang: the language the map's own names are written in, as a BCP 47 tag
     ("zh-HK", "zh-TW", "ko", "ja"), or None. It sets <html lang> and orders the
@@ -2081,8 +2096,9 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # genuine-duplicate range; agency colours below the preferred figure are
     # reported every render and kept, per the owner's branding decision. See
     # pipeline/linecolour.py for why there are two thresholds.
+    names = legend_names or {}
     check_line_colours(
-        {label: color for _coords, color, label, _end in lines.values()},
+        {names.get(key, label): color for key, (_coords, color, label, _end) in lines.items()},
         bucket_colors, city=city_name)
 
     businesses = businesses.dropna(subset=["latitude", "longitude"]).copy()
@@ -2193,7 +2209,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     dark_labels = dark_label_colours({k: v[1] for k, v in lines.items()},
                                      dark_halo=DARK["page"], city=city_name)
     for key, (segments, color, label, _end) in lines.items():
-        rail_layer = folium.FeatureGroup(name=f"{system_name}: {label}", show=True, control=False)
+        rail_layer = folium.FeatureGroup(name=f"{system_name}: {names.get(key, label)}", show=True, control=False)
         # One polyline per alignment; a branching trunk keeps one label and one
         # legend entry (see load_line_shapes).
         for segment in segments:
@@ -2233,7 +2249,8 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
             present.append((name, color))
 
     m.get_root().html.add_child(folium.Element(
-        build_legend(present, taxonomy.legend_label, lines, no_data_stations=bool(no_data.any()))
+        build_legend(present, taxonomy.legend_label, lines, no_data_stations=bool(no_data.any()),
+                     legend_names=names)
     ))
 
     # Collapsed by default: many toggleable layers would otherwise cover a

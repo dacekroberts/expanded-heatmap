@@ -23,7 +23,10 @@ one copy. A city's step 1 calls run(config).
     with its own public name inside one N02 line (Kobe's Wadamisaki Line in
     JR's 山陽線) is config.BRANCHES, split off by walking the track graph. A
     branch may instead be drawn as another line (`draw_as`) or left out
-    (`draw_as: None`) - Osaka's Umeda freight track in 東海道線.
+    (`draw_as: None`) - Osaka's Umeda freight track in 東海道線. A public
+    SERVICE that runs over parts of several legal lines, stopping at some of
+    their stations (Tokyo's JR East: the Yamanote over 山手線, 東北線 and
+    東海道線), is a LINES entry with a `route` (route_sections, below).
   * Excluded: the drawn lines' stations beyond the city line, named by their N03
     municipality. A left-out line's stations are printed, not written there.
 
@@ -96,8 +99,134 @@ def line_keys(config, op, line, name):
             # branch shares with its N02 line (Osaka's Umekita track: 大阪, 新大阪)
             if name in b.get("shared", (b["junction"],)):
                 branch_keys.add(draw)
-    keys = tuple(k for k, v in config.LINES.items() if (op, line) in v["n02"] and k not in branch_only(config))
+    keys = tuple(k for k, v in config.LINES.items()
+                 if (op, line) in v.get("n02", ()) and k not in branch_only(config))
+    keys += tuple(k for k in route_keys(config, op, line, name) if k not in keys)
     return keys + tuple(sorted(branch_keys - set(keys)))
+
+
+# --- service routes (Tokyo, 2026-09-28) ----------------------------------------
+# N02 files JR East under its LEGAL lines, and one legal line carries several
+# public services: 東北線 between 田端 and 東京 is the Yamanote's, the
+# Keihin-Tōhoku's and (through 上野) the Utsunomiya Line's track; the Chūō-Sōbu
+# Line runs over 中央線 and 総武線. BRANCHES only splits one line in two. A
+# LINES entry may instead carry a `route`: legs of (operator, legal line,
+# [stops in order]), where an entry written "~名" is passed without stopping
+# (geometry only). A station row belongs to the line only where it is a listed
+# stop; the line is drawn along its legal line's track between consecutive
+# entries. A line may carry both `n02` (whole legal lines) and a `route` (Tokyo's
+# Fukutoshin Line: its own line, plus the Yūrakuchō's track it shares to 和光市).
+# Two services on one track are drawn over one another (owner 2026-09-28: the
+# nine JR services in full rather than each track once).
+
+def route_entry(entry):
+    """(station name, is a stop) for a route entry: '~名' is passed through."""
+    return entry.lstrip("~"), not entry.startswith("~")
+
+
+def route_keys(config, op, line, name):
+    """The LINES keys whose route STOPS at this N02 station row."""
+    return tuple(dict.fromkeys(
+        k for k, v in config.LINES.items() for rop, rline, entries in v.get("route", ())
+        if (rop, rline) == (op, line) and any(route_entry(e) == (name, True) for e in entries)))
+
+
+def join_groups(config, st):
+    """config.GROUP_JOIN = {(operator, line, name): why}: a platform N02 gave
+    its own group code although it is part of a station of the same name, joins
+    that station's nearest group (Tokyo, 2026-09-28: the Keiyō Line's 東京
+    platforms, 424 m from the rest of Tokyo Station; the Fukutoshin's 池袋, 356
+    m, one Ikebukuro to Tokyo Metro). Different stations of one name stay apart
+    (両国, 早稲田, the TX's 浅草) and take their operators. Changes st in place."""
+    for (op, line, name), _why in getattr(config, "GROUP_JOIN", {}).items():
+        m = (st["N02_004"] == op) & (st["N02_003"] == line) & (st["N02_005"] == name)
+        if not m.any():
+            sys.exit(f"GROUP_JOIN: no {name} on {op} {line}")
+        others = st[(st["N02_005"] == name) & ~st["N02_005g"].isin(set(st.loc[m, "N02_005g"]))]
+        if others.empty:
+            sys.exit(f"GROUP_JOIN: no other {name} group for the {line} platform to join")
+        p = st.to_crs(config.CRS_PROJECTED).geometry  # distances in metres, never degrees
+        here = unary_union(list(p[m])).centroid
+        target = min(others.index.groupby(others["N02_005g"]).items(),
+                     key=lambda kv: unary_union(list(p[kv[1]])).centroid.distance(here))[0]
+        st.loc[m, "N02_005g"] = target
+        print(f"  {name} ({line}) joins the {name} group {target}")
+
+
+def check_routes(config, st):
+    """Every route entry names a station of its leg's legal line within the drawn
+    area - a typo, or a station on another legal line, stops the step."""
+    have = set(zip(st["N02_004"], st["N02_003"], st["N02_005"]))
+    bad = [f"{config.LINES[k]['name']}: {e} not on {op} {line}"
+           for k, v in config.LINES.items() for op, line, entries in v.get("route", ())
+           for e in entries if (op, line, route_entry(e)[0]) not in have]
+    if bad:
+        sys.exit("route entries naming no N02 station of their leg:\n  " + "\n  ".join(bad))
+
+
+def route_sections(config, key, sec, pair, st):
+    """Index of the N02 sections a line's route runs over: per leg, the shortest
+    path along its legal line's track between each pair of consecutive entries
+    (Dijkstra over the sections' end points, in metres)."""
+    import heapq
+    idx = set()
+    for op, line, entries in config.LINES[key].get("route", ()):
+        s = sec[pair == (op, line)].to_crs(config.CRS_PROJECTED)
+        by_node = collections.defaultdict(list)
+        for i, g in zip(s.index, s.geometry):
+            a, b = _ends(g)
+            by_node[a].append((b, i, g.length))
+            by_node[b].append((a, i, g.length))
+        # N02's track can arrive in pieces (Tokyo's 東北線: an 8-node piece at
+        # 日暮里, 67 m from the rest), so both ends of a hop are taken from the
+        # one connected piece that lies closest to both stations
+        piece, n_piece = {}, 0
+        for n0 in by_node:
+            if n0 in piece:
+                continue
+            todo = [n0]
+            while todo:
+                n = todo.pop()
+                if n not in piece:
+                    piece[n] = n_piece
+                    todo.extend(m for m, _, _ in by_node[n])
+            n_piece += 1
+        plat = st[(st["N02_004"] == op) & (st["N02_003"] == line)].to_crs(config.CRS_PROJECTED)
+
+        def at(name):
+            return unary_union(list(plat[plat["N02_005"] == route_entry(name)[0]].geometry)).centroid
+
+        def ends_of_hop(p1, p2):
+            best = None
+            for c in range(n_piece):
+                ns = [n for n in by_node if piece[n] == c]
+                a = min(ns, key=lambda n: Point(n).distance(p1))
+                b = min(ns, key=lambda n: Point(n).distance(p2))
+                d = Point(a).distance(p1) + Point(b).distance(p2)
+                if best is None or d < best[0]:
+                    best = (d, a, b)
+            return best[1], best[2]
+
+        for e1, e2 in zip(entries, entries[1:]):
+            start, goal = ends_of_hop(at(e1), at(e2))
+            dist, prev, todo = {start: 0.0}, {}, [(0.0, start)]
+            while todo:
+                d, n = heapq.heappop(todo)
+                if n == goal:
+                    break
+                if d > dist[n]:
+                    continue
+                for m, i, length in by_node[n]:
+                    if d + length < dist.get(m, float("inf")):
+                        dist[m], prev[m] = d + length, (n, i)
+                        heapq.heappush(todo, (d + length, m))
+            if goal not in dist:
+                sys.exit(f"the {config.LINE_NAMES[key]}: no track on {op} {line} from {e1} to {e2}")
+            n = goal
+            while n != start:
+                n, i = prev[n]
+                idx.add(i)
+    return idx
 
 
 def n03_municipalities(config):
@@ -289,7 +418,7 @@ def branch_split(config, key, sections, claimed=()):
     return sorted(seen)
 
 
-def write_lines(config, near):
+def write_lines(config, near, st):
     sec = japan._read_geojson(japan.N02_ZIP, japan.N02_SECTIONS).to_crs(config.CRS_GEOGRAPHIC)
     sec = sec[sec["N02_002"] != japan.SHINKANSEN]
     sec = sec[sec.geometry.intersects(near)]
@@ -304,9 +433,11 @@ def write_lines(config, near):
         if key in only:
             idx = set(branch[key])
         else:
-            idx = set(sec.index[pair.isin(spec["n02"]) & ~sec.index.isin(in_branch)])
+            idx = set(sec.index[pair.isin(spec.get("n02", [])) & ~sec.index.isin(in_branch)])
         # a branch drawn as this line (Osaka's Umekita track, the Osaka Higashi Line's)
         idx |= {i for k, b in config.BRANCHES.items() if k not in only and draw_key(k, b) == key for i in branch[k]}
+        if "route" in spec:
+            idx |= route_sections(config, key, sec, pair, st)
         parts = sec.loc[sorted(idx)]
         if parts.empty:
             sys.exit(f"no N02 track for the {spec['name']}")
@@ -339,6 +470,9 @@ def run(config):
 
     st = japan.stations()
     st = st[st.geometry.within(near)].copy()
+    check_routes(config, st)
+    join_groups(config, st)
+    all_near = st.copy()
     st["inside"] = st.geometry.within(city)
     st["active"] = st.geometry.within(active) if nodata else st["inside"]
     st["keys"] = [line_keys(config, o, ln, nm) for o, ln, nm in zip(st["N02_004"], st["N02_003"], st["N02_005"])]
@@ -459,7 +593,7 @@ def run(config):
     keep.to_csv(config.STATIONS_CSV, index=False, encoding="utf-8")
     print(f"  {len(keep)} stations -> {config.STATIONS_CSV.name}")
 
-    write_lines(config, near)
+    write_lines(config, near, all_near)
     emit("line_station_rows", len(platforms))
     emit("stations_collapsed", len(groups))
     emit("stations_in_scope", len(keep))
