@@ -57,6 +57,33 @@ def key_addr(a):
     return re.sub(r"[‐‑‒–—―−ｰー－]", "-", unicodedata.normalize("NFKC", a or "").replace(" ", "").replace("　", ""))
 
 
+def own_coordinates_check(config, df):
+    """Where a list carries its OWN coordinates (Osaka's swapped 経度 / 緯度;
+    japan_register.permits_from_rows swaps them back), measure the join against
+    them: an independent check, never the map's source. Printed and emitted
+    per tier; a list without coordinates (Kobe's) prints nothing. Distances in
+    the city's projected CRS, never in degrees."""
+    has = df[df["pub"].notna()]
+    if has.empty:
+        return
+    import geopandas as gpd
+
+    def proj(lats, lons):
+        return gpd.GeoSeries(gpd.points_from_xy(lons, lats), crs=config.CRS_GEOGRAPHIC).to_crs(config.CRS_PROJECTED)
+
+    d = proj(has["latitude"].values, has["longitude"].values).distance(
+        proj([p[0] for p in has["pub"]], [p[1] for p in has["pub"]]), align=False)
+    d.index = has.index
+    print(f"  the list's own coordinates against the join ({len(has):,} of {len(df):,} placed rows carry them):")
+    for tier in ("block", "chome"):
+        t = d[has["tier"] == tier]
+        if len(t):
+            print(f"    {tier:6} {len(t):>7,}  median {t.median():>5.0f} m   within 250 m {(t <= 250).mean():.1%}   "
+                  f"over 1 km {int((t > 1000).sum()):,}")
+            emit(f"own_coords_{tier}_median_m", int(round(t.median())))
+            emit(f"own_coords_{tier}_within_250m_pct", round(100 * (t <= 250).mean(), 1))
+
+
 def run(config, write=True):
     sys.stdout.reconfigure(encoding="utf-8")
     need(config.ISJ_DIR, config.SLUG)
@@ -107,6 +134,7 @@ def run(config, write=True):
     df = joined[joined["tier"] != "none"].copy()
     df["latitude"] = [p[0] for p in df["pt"]]
     df["longitude"] = [p[1] for p in df["pt"]]
+    own_coordinates_check(config, df)
     bb = config.CITY_BBOX
     inb = df["latitude"].between(bb["lat_min"], bb["lat_max"]) & df["longitude"].between(bb["lon_min"], bb["lon_max"])
     if not inb.all():

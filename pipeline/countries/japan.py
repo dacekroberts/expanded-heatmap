@@ -68,6 +68,25 @@ CITIES = {
 }
 
 
+def osm_station_query(bbox):
+    """The Overpass query for station NAMES in a city's box (S, W, N, E): which
+    stations exist is N02's; OSM supplies name:en. Nodes and station ways, the
+    ways by their centre (a big station is mapped as an area). Kobe's."""
+    box = "({},{},{},{})".format(*bbox)
+    return (f'[out:json][timeout:120];'
+            f'(node["railway"~"^(station|halt)$"]{box};way["railway"="station"]{box};);out tags center;')
+
+
+def osm_tram_stop_query(bbox):
+    """OSM tags a tram stop railway=tram_stop, which osm_station_query does not
+    take: Osaka's 22 in-city Hankai stops had no name until this ran
+    (2026-09-27). Any city with a tram N02 draws needs it (Sapporo's streetcar,
+    Tokyo's Arakawa Line)."""
+    box = "({},{},{},{})".format(*bbox)
+    # `out body`, not `out tags`: a node's coordinates come only with its body
+    return f'[out:json][timeout:120];node["railway"="tram_stop"]{box};out body;'
+
+
 def _read_geojson(zip_path, member):
     import io
     import zipfile
