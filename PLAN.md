@@ -303,8 +303,11 @@ brief names.
     trams; excluded by the owner 2026-09-24).
   - **Mixed or close:** Madrid Metro Ligero ML1 (9, run by Metro de Madrid); SF F Market
     (46, heritage cars on a regular route); Fortaleza diesel VLT (11, every 40 min - failed
-    the rail test); D.C. Streetcar and Montreal's REM (both silent omissions; D.C.'s service
-    status unverified).
+    the rail test); D.C. Streetcar and Montreal's REM (both silent omissions). **D.C.
+    Streetcar: no longer operating** (DDOT ended it 2026-03-31; checked 2026-09-27).
+  - ▶ **IN PROGRESS 2026-09-27 (owner cleared light and medium): specs for REM, Rome 8,
+    Madrid ML1, Paris T3a/T3b and SF F Market in `docs/tram_rescope_specs.md`**, handed to
+    Main Build to implement on a branch held for review time.
   - **Reason still stands:** SF cable cars, Rio Santa Teresa, Santos, Lille Amitram
     (heritage); Copenhagen Letbane, Marseille Aubagne, Philadelphia NHSL/D1/D2 (no stop in
     scope); Amsterdam tram 3 (no trips until 2026-12-12); Rotterdam 12/14/18 (event or
