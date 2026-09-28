@@ -19,6 +19,15 @@ than adding an addendum.
   checkout's `.claude/launch.json` serves this worktree's `outputs/`. The
   owner's standing OK covers stepping out of the worktree to add or remove
   `-tmp` entries: `ExitWorktree` keep, edit, then `EnterWorktree` with the path.
+  A session STARTED inside this worktree may not be able to step out that way.
+  If so, put the preview entry in this worktree's own `.claude/launch.json`.
+- **Never check out `master` here.** The main folder has it checked out, and
+  git will not put one branch in two worktrees. It is never needed: merge
+  `origin/master` into this branch, and publish with
+  `git push origin worktree-monterrey:master`.
+- **The main folder's local `master` is ~310 commits behind origin.** Never
+  read the main folder's files as current. Use `origin/master` (`git show`,
+  `git diff`) after a `git fetch`.
 - **Tell Staging and Cleanup your session name** (from `ListAgents`) so their
   relays reach you. They addressed the old one as "Main Building Session".
 - Check `get_usage` before big work, and confirm this week's cap with the owner.
