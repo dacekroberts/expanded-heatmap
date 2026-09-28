@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**107 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**108 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Tokyo's review time: deploy-verify (city-added) found the legend covering 5 labels at the 1000 px frame; fixed, re-checked, published (owner)](#2026-09-28---tokyos-review-time-deploy-verify-city-added-found-the-legend-covering-5-labels-at-the-1000-px-frame-fixed-re-checked-published-owner)
+- [Berlin from the discards to Band B: shops and food on IHK Berlin's register (owner)](#2026-09-28---berlin-from-the-discards-to-band-b-shops-and-food-on-ihk-berlins-register-owner)
 - [Tokyo built: its page, macro-map entry, exclusions and table rows (owner-approved); Japan's sixth and last city, held for review time](#2026-09-28---tokyo-built-its-page-macro-map-entry-exclusions-and-table-rows-owner-approved-japans-sixth-and-last-city-held-for-review-time)
 - [German screen from the large-transit gap: Munich, Frankfurt and Cologne discarded; Berlin's register found (owner)](#2026-09-28---german-screen-from-the-large-transit-gap-munich-frankfurt-and-cologne-discarded-berlins-register-found-owner)
 - [Tokyo's census control, notice and page: the Economic Census control run for all six Japanese cities; zero drift in 55; Tokyo's texts approved (owner)](#2026-09-28---tokyos-census-control-notice-and-page-the-economic-census-control-run-for-all-six-japanese-cities-zero-drift-in-55-tokyos-texts-approved-owner)
@@ -178,6 +179,22 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   the lines, so not every hollow station can be hovered at the default zoom (as
   in Kyoto).
 
+### 2026-09-28 - Berlin from the discards to Band B: shops and food on IHK Berlin's register (owner)
+
+- **Moved Berlin from the discards to Band B (owner's call), a narrower page
+  of shops and food with personal services disclosed as missing.** The
+  evidence is in the German screen's entry below: IHK Berlin's Gewerbedaten
+  has 367,575 per-premises points (CC0 / dl-de/zero-2.0, monthly), and
+  storefront counts run at 1.18–1.47× OSM for food and 1.18–1.40× for shops
+  at four station boxes. Hairdressers and laundries belong to the crafts
+  chamber, which publishes nothing. Band A was rejected: the register's
+  licence has had no `licence-read`, and no taxonomy module exists yet for
+  the WZ subclasses (restaurants are 5611). Before a build: that read, the
+  module, `check_personal_exposure.py` (46–59% of storefront entries report
+  0 employees) and the rail shape. The master list went 73 → 74 candidates
+  (B 5 → 6) and 84 → 83 discards. Files: `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
 ### 2026-09-28 - Tokyo built: its page, macro-map entry, exclusions and table rows (owner-approved); Japan's sixth and last city, held for review time
 
 - **Approved (owner) and written**: Tokyo's section in
