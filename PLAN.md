@@ -310,10 +310,23 @@ brief names.
       one colour (#007165) in OSM, so a rescope needs a colour rule.
     - **Hong Kong Tramways**: 6 services, up to 54 stops, all in Hong Kong.
       The owner excluded it 2026-09-24; recommended out.
-    - **Seoul's Wirye Line**: no route relation in OSM, so most likely not
-      open (unconfirmed).
+    - **Seoul's Wirye Line: NOT OPEN (confirmed 2026-09-27).** Seoul's own
+      page (2026-02-10) puts its pilot running at February–December 2026;
+      Newspim (2026-01-21) names the traffic-safety review and signal
+      priority as what the opening hangs on; Wikipedia's target is
+      2026-12-26. 12 stops, 5.4 km, Macheon (Songpa-gu) to Namwirye and
+      Bokjeong - how many stops lie inside Seoul is unmeasured. **Re-check
+      in January 2027**; if it opened, count it for Seoul's rescope.
     - **Cablebús**: L1 6 and L2 7 stations, all in CDMX; L3 is incomplete in
-      OSM (1 stop). No OSM colours.
+      OSM (1 stop). No OSM colours. **L3 = 6 stations (2026-09-27)**, all in
+      CDMX (Miguel Hidalgo, Álvaro Obregón): Los Pinos/Constituyentes,
+      Panteón de Dolores, Charrería, PARCUR, Cineteca Nacional, Vasco de
+      Quiroga; opened 2024-09-24, 5.42 km. Three sources agree (es and en
+      Wikipedia, Expansión 2024-09-25), but **no official list or
+      coordinates yet**: datos.cdmx.gob.mx, STE and SEMOVI (one IP) refused
+      every connection that day. The build retries CDMX's GTFS (`mdb-3126`
+      carries Cablebús) before placing any station. L4 (Universidad–San
+      Nicolás) under construction, about 20% in August 2026: out.
   - ▶ **IN PROGRESS 2026-09-27 (owner cleared light and medium): specs for REM, Rome 8,
     Madrid ML1, Paris T3a/T3b and SF F Market in `docs/tram_rescope_specs.md`**, handed to
     Main Build to implement on a branch held for review time.
@@ -323,7 +336,7 @@ brief names.
     works routes); Seoul Gimpo Goldline (1 stop, already drawn); Recife VLTs (fail the rail
     test); Porto Alegre Aeromovel (people mover).
   - **Blind spots:** Seoul's OSM query takes only subway/light_rail/train (Wirye Line
-    unverified); Hong Kong's and Barcelona's caches hold no tram relations. Mexico City's
+    not open, checked 2026-09-27); Hong Kong's and Barcelona's caches hold no tram relations. Mexico City's
     Cablebús is also unstated (Toulouse's drawn Téléo is the precedent).
     `docs/map_inconsistencies.md` shows D.C. as "—", which is incomplete.
 - [x] **An honest efficiency review of the whole PROCESS, the owner's habits included (owner,

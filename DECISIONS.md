@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**44 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**45 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
@@ -68,6 +68,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [iPhone blank maps: the cause is a per-literal compile limit, not memory; which layer trips it per city, and why Seoul's layer drop bought nothing](#2026-09-27---iphone-blank-maps-the-cause-is-a-per-literal-compile-limit-not-memory-which-layer-trips-it-per-city-and-why-seouls-layer-drop-bought-nothing)
 - [Toronto's retail share settled (Q18): EC quotes the pins the map draws, 759 of 18,186 (owner-approved wording)](#2026-09-27---torontos-retail-share-settled-q18-ec-quotes-the-pins-the-map-draws-759-of-18186-owner-approved-wording)
 - [Toronto's per-category retail counts now come from the drawn pins and sum to 759 (owner-approved wording)](#2026-09-27---torontos-per-category-retail-counts-now-come-from-the-drawn-pins-and-sum-to-759-owner-approved-wording)
+- [Four small probes: Wirye Line not open, Cablebús L3 has 6 stations, the KC streetcar runs every 10 minutes, Incheon's coordinates need an application](#2026-09-27---four-small-probes-wirye-line-not-open-cablebús-l3-has-6-stations-the-kc-streetcar-runs-every-10-minutes-incheons-coordinates-need-an-application)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -1708,3 +1709,34 @@ Recorded by the cleanup session from the Main Building Session's findings of
   because the app renders `docs/excluded_categories.md`. It lands at review
   time; PLAN.md carries that item.
 
+
+### 2026-09-27 - Four small probes: Wirye Line not open, Cablebús L3 has 6 stations, the KC streetcar runs every 10 minutes, Incheon's coordinates need an application
+
+- **Staging took items 1-4 of `docs/handoff_small_todo_2026-09-27.md`**
+  (owner), after wave 2's first group. Findings only; no band moved.
+- **Seoul's Wirye Line is not open.** Seoul's own page (2026-02-10) runs its
+  pilot February to December 2026; Newspim (2026-01-21) names the
+  traffic-safety review and signal priority as what the opening hangs on;
+  Wikipedia's target is 2026-12-26. Recorded in PLAN's tram item with a
+  January 2027 re-check. How many of its 12 stops lie inside Seoul is
+  unmeasured.
+- **Cablebús Línea 3 has 6 stations, all inside CDMX** (Los Pinos to Vasco de
+  Quiroga, opened 2024-09-24). Three sources agree (es and en Wikipedia,
+  Expansión). **Not official yet**: datos.cdmx.gob.mx, STE and SEMOVI, one
+  IP, refused every connection. The rescope retries CDMX's GTFS (`mdb-3126`
+  carries Cablebús) before placing a station. Línea 4 is under construction.
+- **Kansas City's streetcar passes on frequency.** RideKC's GTFS
+  (`gtfs_8_27_26.zip`, valid to 2026-10-03, route 601, `route_type` 0) gives
+  about 10 minutes all day, every day, 05:15 to past midnight, and
+  kcstreetcar.org says 10-minute headways. Its terms are declared ("free for
+  anyone to use"), not read. The row's last rail question is closed; it
+  still waits on Band T's group decision.
+- **Incheon has no keyless route to coordinates.** juso.go.kr's keyless
+  files carry none (their schema guides read). The one that does,
+  위치정보요약DB, is application-only: Korean identity verification, a
+  purpose statement and a review, and the site's code refuses overseas IPs.
+  data.go.kr 15050410 says the same (two methods). OSM's addresses place
+  7.8% of restaurants and 11.1% of cafés exactly: OSM's gaps, not the
+  parser's. **What moves it is the owner's act** (the application) or an
+  unprobed two-hop through 건물DB's parcel ids. Its health-food list holds
+  apartment-unit addresses, a privacy filter for any build.
