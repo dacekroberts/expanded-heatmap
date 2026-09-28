@@ -40,8 +40,9 @@ then follow the pointers. **Delete a section when its item is done.**
   Yokohama, Palma, Baltimore) · T contingent on trams, **opening with its EDGE
   sub-group** (11 cities) · **C closed**. Section order A, B, D, N, T. The chat
   republish format is in the owner's memory (`feedback_master_list_format.md`).
-- **`docs/global_transit_gap.md`**: every large-network city not built (25
-  discarded, 11 ruled out by country, 15 in a band, 32 never screened;
+- **`docs/global_transit_gap.md`**: every large-network city not built (26
+  discarded, 11 ruled out by country, 15 in a band, 30 never screened;
+  Delhi to D and Mumbai discarded 2026-09-28; Tokyo built;
   re-screened 2026-09-28: London to B, Dubai to D, Manila discarded,
   Istanbul to N, Munich, Frankfurt and Cologne discarded, Berlin to B) with
   the record's reason and a recommended re-screen order.
@@ -61,7 +62,6 @@ then follow the pointers. **Delete a section when its item is done.**
    at a time, light methods only. The owner asked for the list 2026-09-28 and
    is likely to steer here before the small tram and one-bucket builds.
    Propose each screen and its cost before running it. Recommended order:
-   - **Delhi, Mumbai**: ask the city hosts, not the national catalogue.
    - **China's fourteen**: a country profile first (`add-country`).
    - **Algiers**: fix its misfiling ("no urban rail"), then screen.
    Record per country in `global_country_shortlist.md`, the result in the

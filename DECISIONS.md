@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**111 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**112 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Delhi and Mumbai re-screened on their city hosts: Delhi to Band D, Mumbai discarded (owner)](#2026-09-28---delhi-and-mumbai-re-screened-on-their-city-hosts-delhi-to-band-d-mumbai-discarded-owner)
 - [Tokyo landed: city-landed sweep; three cities' in-ring counts corrected in the inconsistency list](#2026-09-28---tokyo-landed-city-landed-sweep-three-cities-in-ring-counts-corrected-in-the-inconsistency-list)
 - [Tokyo live after the owner's reboot, checked on the live URL](#2026-09-28---tokyo-live-after-the-owners-reboot-checked-on-the-live-url)
 - [Tokyo landed on master; the build queue wiped for two new frontrunners, Berlin then London (owner)](#2026-09-28---tokyo-landed-on-master-the-build-queue-wiped-for-two-new-frontrunners-berlin-then-london-owner)
@@ -147,6 +148,39 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Delhi and Mumbai re-screened on their city hosts: Delhi to Band D, Mumbai discarded (owner)
+
+- **Moved Delhi to Band D (owner's call): the current register sits behind a
+  CAPTCHA and the state hosts refuse this machine.** India's record rested on
+  the national catalogue alone (288,011 titles, counts only), so the city
+  hosts were asked this time. MCD's current trade and health licence register
+  (`gtlLicenseDetail` / `htlLicenseDetail`: trade × 12 zones × year, with an
+  Excel export) needs an image CAPTCHA, as does FSSAI FoSCoS; neither was
+  attempted. What is open is stale or partial. MCD's 2021-22 general trade
+  licence list (366 KB, ~4,100 rows) covers the former South DMC only and
+  places rows to colony, not street. NDMC's current health licences (453 in
+  2025) carry unit addresses but cover central New Delhi only, with no trade
+  type. Every Delhi-government host timed out on HTTP and HTTPS
+  (delhi.gov.in and its labour, food-safety, DES and health subdomains on one
+  IP; `gsdl.org.in`; `edistrict`), and no address or coordinate layer was
+  reachable. A discard was rejected because the current register exists and
+  only its access control stops it, as with Daejeon's CAPTCHA wall.
+  Placement stays unresolved beside it.
+- **Discarded Mumbai (owner's call): no storefront list on any reachable
+  host.** MCGM's portal has application forms only, and its RTI disclosures
+  say nothing on licences. Its ArcGIS Online org (437 public items) holds one
+  licence layer: 7,361 Section 394 trade licences, mostly hazardous goods and
+  manufacturing, with no licence text and personal names on 3,536 rows. FDA
+  Maharashtra publishes counts only (187,030 licences), and the state DES
+  describes a business register with no public list. The state's Shops &
+  Establishments system and MCGM's GIS servers timed out from here. Band D
+  was rejected because those are application and planning systems, not a
+  register. MCGM's ArcGIS Online also publicly serves a supplier layer with a
+  tax-ID field and a hawker layer with phone numbers; neither was used or
+  recorded. Files: `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md` (India),
+  `docs/global_transit_gap.md`, `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - Tokyo landed: city-landed sweep; three cities' in-ring counts corrected in the inconsistency list
 
