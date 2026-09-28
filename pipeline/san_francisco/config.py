@@ -82,13 +82,18 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 
 # Muni Metro proper: J Church, K Ingleside, L Taraval, M Ocean View,
 # N Judah, T Third Street - route_type "0" (tram/light rail) in the GTFS
-# feed. Deliberately excludes the F Market & Wharves heritage streetcar
-# (also route_type 0, but a separate branded service - different rolling
-# stock, not part of "Muni Metro" in SFMTA's own naming) and the CA/PH/PM
-# cable cars (route_type 5, a different mode entirely). Same real-world-
-# name-grounded scoping as San Diego's Trolley - include the system riders
-# actually call by this name, not everything technically rail-adjacent.
-MUNI_METRO_ROUTE_IDS = ["J", "K", "L", "M", "N", "T"]
+# feed. The CA/PH/PM cable cars (route_type 5, a different mode entirely)
+# stay out, and they share the F's route_color #B49A36, so the F is matched on
+# its EXACT route_id, never on colour or mode.
+#
+# THE F MARKET & WHARVES IS DRAWN FROM 2026-09-27 (the tram rescope). It was
+# first left out as "a separate branded service - different rolling stock,
+# not part of Muni Metro in SFMTA's own naming"; the owner's later rule that
+# trams count where they reach districts the metro does not reversed that:
+# the F runs the Embarcadero to Fisherman's Wharf, which no Muni Metro line
+# reaches. route_id "F", route_type 0, 852 trips, all stops in the county.
+# It is thinned by the same surface-stop filter as J-T.
+MUNI_METRO_ROUTE_IDS = ["J", "K", "L", "M", "N", "T", "F"]
 
 # Real public-facing names (confirmed against route_long_name in the GTFS
 # feed itself, which matches common usage/signage - "J Church" etc.).
@@ -99,6 +104,7 @@ MUNI_METRO_LINE_NAMES = {
     "M": "M Ocean View",
     "N": "N Judah",
     "T": "T Third Street",
+    "F": "F Market & Wharves",
 }
 
 # Raw GTFS stop names that are the SAME physical station but were named
@@ -112,6 +118,13 @@ STATION_NAME_ALIASES = {
     "Church St & Market St": "Metro Church Station",
     "Forest Hill Station": "Metro Forest Hill Station",
     "King St & 4th St": "4th St & King St",
+    # The F's surface stops directly above two Muni Metro stations (measured
+    # 2026-09-27, the same under-200-ft test): 27 m and 17 m apart. Merged, they
+    # are interchanges - force-kept, and the F's spacing walk restarts there.
+    # Its Market St stops 170-282 m from a subway station (4th, 7th, 1st) are
+    # separate street stops by this rule and are left to the spacing filter.
+    "17th St & Castro St": "Metro Castro Station",
+    "Market St & South Van Ness Ave": "Metro Van Ness Station",
 }
 
 # Canonical-name substrings identifying a stop as underground/grade-

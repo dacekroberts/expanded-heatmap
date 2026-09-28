@@ -90,7 +90,8 @@ and districts no metro reaches.
 **Reader sentence:** Trams and light rail are drawn where they are the city's rapid
 transit, or where they reach areas the metro does not. They are left off where they
 run on top of a metro network.
-- **Trams or light rail drawn:** San Diego, San Francisco (Muni Metro), Los Angeles,
+- **Trams or light rail drawn:** San Diego, San Francisco (Muni Metro; the F Market &
+  Wharves from 2026-09-27 on the tram-rescope branch), Los Angeles,
   Philadelphia (trolleys), Boston (Green Line, Mattapan), Calgary, Edmonton, Toronto
   (Lines 5 and 6 only), Mexico City (Tren Ligero), Guadalajara, Dublin (Luas),
   Marseille, Toulouse, Lille, Oslo, Amsterdam, Rotterdam, Rio (VLT), Santos (VLT),
@@ -250,7 +251,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 |---|---|---|---|---|---|
 | **United States** | | | | | |
 | San Diego | Trolley (light rail), 5 lines | Coaster, Sprinter | MTS GTFS | City | 16 / 0 |
-| San Francisco | Muni Metro J K L M N T | BART, Caltrain, F Market, cable cars | SFMTA GTFS (mirror) | City and County | 0 / 65 |
+| San Francisco | Muni Metro J K L M N T + F Market & Wharves | BART, Caltrain, cable cars | SFMTA GTFS (mirror) | City and County | 0 / 85 |
 | Los Angeles | Metro Rail A B C D E K (heavy + light) | Metrolink | LA Metro rail GTFS | City | 54 / 0 |
 | Chicago | 'L', 7 lines | Metra; Yellow Line | CTA GTFS | City | 18 / 0 |
 | New York | Subway (11 trunk groups) + Staten Island Rwy | LIRR | MTA GTFS | Five boroughs | 0 / 0 |

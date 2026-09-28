@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**43 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**44 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Tram rescope 5 of 5: San Francisco's F Market & Wharves drawn and thinned; two stacked stops merged into their subway stations (held for review time)](#2026-09-27---tram-rescope-5-of-5-san-franciscos-f-market-wharves-drawn-and-thinned-two-stacked-stops-merged-into-their-subway-stations-held-for-review-time)
 - [Tram rescope 4 of 5: Paris's T3a and T3b drawn, in this project's own colours (held for review time)](#2026-09-27---tram-rescope-4-of-5-pariss-t3a-and-t3b-drawn-in-this-projects-own-colours-held-for-review-time)
 - [Tram rescope 3 of 5: Madrid's Metro Ligero ML1 drawn from CRTM's M10 layers; ML2 and ML3 left out as stubs (owner; held for review time)](#2026-09-27---tram-rescope-3-of-5-madrids-metro-ligero-ml1-drawn-from-crtms-m10-layers-ml2-and-ml3-left-out-as-stubs-owner-held-for-review-time)
 - [Tram rescope 2 of 5: Rome's tram 8 drawn (the base service, Casaletto - Venezia) and thinned to 7 of its 16 stops (held for review time)](#2026-09-27---tram-rescope-2-of-5-romes-tram-8-drawn-the-base-service-casaletto---venezia-and-thinned-to-7-of-its-16-stops-held-for-review-time)
@@ -76,6 +77,44 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Tram rescope 5 of 5: San Francisco's F Market & Wharves drawn and thinned; two stacked stops merged into their subway stations (held for review time)
+
+- **The F is drawn, matched on its exact route_id "F"** (route_type 0, 852
+  trips); the cable cars (PH, PM, CA; route_type 5) share its #B49A36 and stay
+  out. The config's first reason for excluding it ("a separate branded
+  service - different rolling stock") is replaced: the owner's rule that trams
+  count where they reach districts the metro does not covers the Embarcadero
+  to Fisherman's Wharf, which no Muni Metro line reaches. Shape 19851 (its
+  most-run, 426 of 852 trips; 30 stops one way).
+- **Colour: SFMTA's own #B49A36, unlike J-T.** The spec's Delta-E figures were
+  measured against SFMTA's official colours, but this map draws J-T in this
+  project's own palette, so they were re-measured against what is drawn: 35.3
+  from L's gold, 40.0 from N's brown, 60.2 from the nearest pin.
+- **Thinned by SF's existing surface-stop filter, as J-T are: 10 of 30 kept.**
+  First run: two kept F stops sat directly above Muni Metro stations, 17th St &
+  Castro St 27 m from Metro Castro and Market St & South Van Ness Ave 17 m
+  from Metro Van Ness - duplicate ring centres splitting the same businesses.
+  **They are merged through SF's own `STATION_NAME_ALIASES`**, whose rule is
+  "the same physical station named differently by different lines' trips",
+  under 200 ft; both qualify, so no new rule was needed. Merged, they are
+  interchanges, and the spacing walk restarts there. Stations 49 -> 57 (8
+  new); thinned stops 65 -> 85.
+- **Open for review: the F's Market St stretch runs directly over the
+  subway.** Four kept F stops sit 170-282 m from a subway station (Market & 1st
+  282 m from Embarcadero, 4th 170 m from Union Square/Market St, 7th 170 m
+  from Civic Center, Dolores 213 m from Duboce & Church). They are separate
+  street stops under the 200 ft rule and stay. Dropping the F's Market stretch
+  as "an overlay on the metro" (the tram test's own words) would be a new rule
+  and is the owner's call; the waterfront stops are the F's reason to exist.
+- Storefronts within a ring 12,792 of 17,837. Drift `excluded_stations.csv`
+  and `heatmap.html`; `check_map_view.js` 12.5 = expected, 0 corrections;
+  markup, inline arrays, scope disclosure and provenance pass. The page still
+  says Muni Metro only: a draft for the owner's review. The two "6 lines"
+  messages in step 1 now count the lines. Files:
+  `pipeline/san_francisco/{config, step1_stations, step3_map}.py`,
+  `outputs/san_francisco/{excluded_stations.csv, heatmap.html}`,
+  `docs/map_inconsistencies.md`.
 
 ### 2026-09-27 - Tram rescope 4 of 5: Paris's T3a and T3b drawn, in this project's own colours (held for review time)
 

@@ -1,4 +1,24 @@
 station,line,latitude,longitude,reason,nearest_kept_station,miles_since_nearest_kept
+Don Chee Way/Steuart St,F,37.793918,-122.393438,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Market St & 1st St,0.385
+Embarcadero & Sansome St,F,37.805146,-122.403233,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",The Embarcadero & Greenwich St,0.174
+Jefferson St & Powell St,F,37.808594,-122.413357,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",The Embarcadero & Stockton St,0.168
+Jefferson St & Taylor St,F,37.80832,-122.415514,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",The Embarcadero & Stockton St,0.288
+Market St & 3rd St,F,37.787525,-122.403519,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Market St & 4th St,0.179
+Market St & 5th St,F,37.783886,-122.408141,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Market St & 7th St,0.345
+Market St & 6th St,F,37.782102,-122.4104,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Market St & 7th St,0.17
+Market St & 8th St,F,37.778606,-122.414826,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Metro Van Ness Station,0.347
+Market St & 9th St,F,37.77741,-122.41634,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Metro Van Ness Station,0.23
+Market St & Church St,F,37.76725,-122.429214,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Metro Castro Station,0.451
+Market St & Gough St,F,37.772875,-122.421991,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Market St & Dolores St,0.393
+Market St & Guerrero St,F,37.77057,-122.424971,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Market St & Dolores St,0.165
+Market St & Main St,F,37.792984,-122.396627,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Market St & 1st St,0.199
+Market St & New Montgomery St,F,37.788613,-122.402163,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Market St & 4th St,0.284
+Market St & Noe St,F,37.763958,-122.433323,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Metro Castro Station,0.132
+Market St & Sanchez St,F,37.765632,-122.431216,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Metro Castro Station,0.295
+The Embarcadero & Bay St,F,37.806945,-122.406278,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",The Embarcadero & Greenwich St,0.382
+The Embarcadero & Broadway,F,37.799552,-122.397869,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",The Embarcadero & Washington St,0.208
+The Embarcadero & Ferry Building,F,37.79489,-122.393552,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Market St & 1st St,0.452
+The Embarcadero & Green St,F,37.801264,-122.399369,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",The Embarcadero & Washington St,0.352
 Church St & 16th St,J,37.764621,-122.428722,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Metro Church Station,0.185
 Church St & 18th St,J,37.761467,-122.428416,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Metro Church Station,0.404
 Church St & 22nd St,J,37.754607,-122.42775,"spacing filter (surface stop, < 0.5mi since nearest kept stop)",Right Of Way/20th St,0.279
