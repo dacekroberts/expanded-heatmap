@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**24 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**25 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Efficiency findings 4, 5 and 7 acted on: renderer changes batch, the master list split and counted, city_shortlist.md retired, Kansas City to Band T (owner)](#2026-09-27---efficiency-findings-4-5-and-7-acted-on-renderer-changes-batch-the-master-list-split-and-counted-city_shortlistmd-retired-kansas-city-to-band-t-owner)
 - [The pre-push hook's first run broke the shared git config; restored by the owner, and every check now runs without git's hook variables](#2026-09-27---the-pre-push-hooks-first-run-broke-the-shared-git-config-restored-by-the-owner-and-every-check-now-runs-without-gits-hook-variables)
 - [Daegu's brief corrected: bakeries, delis and other food shops ARE published, on later pages of a six-per-page file list](#2026-09-27---daegus-brief-corrected-bakeries-delis-and-other-food-shops-are-published-on-later-pages-of-a-six-per-page-file-list)
 - [DECISIONS.md archived weekly, not monthly, with a merge guard (owner)](#2026-09-27---decisionsmd-archived-weekly-not-monthly-with-a-merge-guard-owner)
@@ -57,6 +58,70 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Efficiency findings 4, 5 and 7 acted on: renderer changes batch, the master list split and counted, city_shortlist.md retired, Kansas City to Band T (owner)
+
+- **Finding 4 (re-renders): a habit rule, not a shared asset (`c96e2c3`).**
+  - A measurement agent read the 14 full re-renders since 09-23. Only two had
+    to go out on their own: the live Paris view and the live iPhone failure.
+    The other 12 fell into three same-day groups.
+  - Renderer changes now iterate on 3-5 sample maps and re-render all 46 once,
+    at review time (`docs/review_time.md`, `publish-city`).
+  - `check_render_current.py` ignores comments. Tested on the real maps: a
+    comment-only edit passes, and a one-token code edit fails 46 of 46.
+  - **Rejected for now: serving the shared blocks from one file.** It would
+    have avoided only 10 of the 14 re-renders, since the three contrast fixes
+    change each map's own colours. It would also make every renderer change a
+    deploy, and could let the legend cover the OSM credit unnoticed if the
+    file failed to load. Revisit only if shared-block re-renders still exceed
+    about two a week under the rule.
+- **Finding 5 (hand-kept documents): the master list was split, not generated
+  (`9969e80`).**
+  - The measurement showed sessions read it in slices (about 14k tokens per
+    session, not 62k) and that it is rarely rewritten whole. The recurring
+    cost was counts: 79 of 149 edits changed one, and 5 commits existed only
+    to fix drift.
+  - Evidence already marked as such moved verbatim to
+    `docs/city_master_list_evidence.md`, taking the live file from 37,575 to
+    19,821 words.
+  - `check_master_list_counts.py` joined the pre-push hook. It paid for itself
+    within the hour: moving Kansas City changed nine numbers, and it named all
+    nine.
+  - Generating the list from data was rejected: half the file is prose with no
+    schema, and editing prose in a data file is worse than in Markdown.
+- **Finding 7 (the weekly limit): no new rule.** The owner's standing position
+  is that the weekly budget is meant to be spent. `scripts/efficiency_metrics.py`
+  re-takes the review's numbers each week, which is what the owner's
+  session-count decision waits on.
+- **`docs/city_shortlist.md` retired, after a strict check found it was NOT yet
+  redundant.**
+  - Of its 77 facts, 58 were covered elsewhere, 3 were contradicted, and 16
+    existed nowhere else, among them Seattle's registry detail, on which PLAN
+    relied.
+  - Seattle's detail moved to `docs/build_briefs/seattle.md` (4 of 4
+    brief-checks pass live). The re-read added a privacy column,
+    `BUSLIC_MAIL_ADRS_TEXT`.
+  - Four US discard rows were added (San Jose, Fort Worth, Austin, Charlotte).
+    The eight cities screened out for having no urban rail joined the list's
+    existing sentence for those. Baltimore, Buffalo and Phoenix went into
+    PLAN's shallow-screen item, and the Brampton notes into the global
+    shortlist.
+  - Live references were repointed; historical mentions were left alone.
+  - Five of the migrating agent's edits were refused by the auto-mode
+    classifier. The owner approved them explicitly, and the main session made
+    them.
+  - The counts self-test was re-aimed to read each number from the file, so
+    legitimate list changes no longer break the pre-push hook.
+- **Kansas City moved from DISCARDED to Band T (owner: "Kansas City trams
+  okay").** It had been discarded on 2026-09-21 for "too little rail", before
+  the owner ruled that trams count. It passes all three buckets on a
+  public-domain register (`kkhs-93m4`, 15,895 rows). Band T is now 33,
+  candidates 65, discards 37.
+- **Handed to Staging (owner):** Denver, Dallas, Houston, Ottawa and Brampton
+  have no discard rows. The live list also names Ottawa among the cities with
+  no urban rail, although it has 6 light-rail routes and was ruled out on data.
+  Separately, the list's "Current by country" table is stale (30 built, Brazil
+  as candidates, Japan in Band B), and no check covers it.
 
 ### 2026-09-27 - The pre-push hook's first run broke the shared git config; restored by the owner, and every check now runs without git's hook variables
 

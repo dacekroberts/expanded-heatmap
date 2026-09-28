@@ -7,7 +7,7 @@ ruled out, but not missed by omission. The United States and Canada are
 excluded throughout as already built or screened.
 
 The layer above [`add-country`](../.claude/skills/add-country/SKILL.md), as
-[`city_shortlist.md`](city_shortlist.md) is the layer above `add-city`. This
+[`city_master_list.md`](city_master_list.md) is the layer above `add-city`. This
 file decides *which country is worth a profile*; the profile itself is a
 separate and much larger job.
 
@@ -1318,6 +1318,16 @@ Bogotá (Metro Line 1 opens) · Brampton (Hurontario LRT, mid-2027) · Denmark
 refresh) · **Israel, Thailand, Bulgaria — see the IP-block finding below; the
 trigger is a different NETWORK, not a different client** · Romania (host
 answers nothing at all)
+
+*Brampton's trigger in full (moved from `docs/city_shortlist.md` on
+2026-09-27, when that file was retired).* **ASSERTED:** the owner, citing a
+web search on 2026-09-21, reported that repeated delays put the Hurontario
+LRT's civil-infrastructure completion at 2027–2028, with passenger service to
+follow after testing and commissioning. This was not independently verified.
+In mid-2027, ask "has an opening date been announced?", not "is it open?".
+Mississauga comes into scope with the line, but not on Brampton's kind of
+source. Its Business Directory is opt-in. Its Licensed Eateries set
+(**MEASURED 2026-09-21**) is food-only: 2,225 rows, with no coordinates.
 
 #### Bot-protection is not one thing, and the browser does not defeat it
 

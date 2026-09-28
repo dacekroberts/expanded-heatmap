@@ -102,15 +102,17 @@ Desktop is unaffected — the label is fully visible there.
   "Active Occupational Licenses", 16,396 rows, and the **cleanest licence of
   any candidate: CC0 1.0, explicitly declared**. Has `businesstype`,
   `businessaddress`, `the_geom`. Two sibling datasets exist (`abc4-h3u3`, an
-  application-workflow file that also carries `naics`, `category` and an
-  `ishome` flag; `hjcd-grvu`, 37,902 rows) - pick one deliberately rather than
-  merging them. Rail is streetcar-only, which is a **scope** question for the
+  application-workflow file of 20,956 rows that also carries `naics`,
+  `category` and an `ishome` flag; `hjcd-grvu`, 37,902 rows) - pick one
+  deliberately rather than merging them. Rail is streetcar-only (RTA's 5
+  streetcar lines, dense in the core), which is a **scope** question for the
   owner, not a data one. Privacy flags: `ownername` and `businessphone`
   columns, and the name fields are inverted on some rows (blank `businessname`
   with the trade name sitting in `ownername`) - Boston's trap again.
 - [ ] **Seattle - deferred by the owner 2026-09-21, and scoped as the project's
   first MULTI-MUNICIPALITY city.** Do not re-probe the Seattle registry itself;
-  the findings are in `docs/city_shortlist.md`. On that evidence Seattle's own
+  the findings are in `docs/build_briefs/seattle.md`, with checks
+  (`python scripts/brief_check.py seattle`). On that evidence Seattle's own
   data is the best-equipped of any candidate - an official nightly export,
   **active-only by construction**, 54,604 rows with real NAICS (no new taxonomy
   module), a trade name, and point geometry (no geocoding step). It is on
@@ -159,7 +161,10 @@ Desktop is unaffected — the label is fully visible there.
   domain", and the ArcGIS pass searched titles only. **Seattle proves the
   point**: it came back "no matching datasets" on Socrata and has a 54,604-row
   official layer on ArcGIS. Any of these needs a proper per-portal check before
-  being written off.
+  being written off. What the shallow screen DID find (from the retired
+  `docs/city_shortlist.md`, 2026-09-27): **Baltimore** publishes liquor
+  licences only, **Buffalo** contractor licences only (no locations), and
+  **Phoenix** has two light-rail lines but no general city business licence.
 
 ### 🇯🇵 Japan — the plan (2026-09-24; evidence in `docs/global_country_shortlist.md`)
 

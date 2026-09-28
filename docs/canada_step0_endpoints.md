@@ -1,6 +1,6 @@
 # Canada — Step 0 endpoints, verified live 2026-09-21
 
-Companion to the Canada section of [`city_shortlist.md`](city_shortlist.md)
+Companion to [`canada_retrospective.md`](canada_retrospective.md)
 and the licence store in [`licenses/`](licenses/). **This is now the EVIDENCE
 TRAIL, not the provenance record.** Six Canadian municipalities are built, as
 five maps — Vancouver and Surrey together as one regional map, then Montréal,

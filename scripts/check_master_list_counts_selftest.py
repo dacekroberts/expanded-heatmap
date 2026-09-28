@@ -23,6 +23,7 @@ found" (the trap check_scope_disclosure_selftest.py met twice).
 """
 
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -48,6 +49,27 @@ def swap(old, new):
     return apply
 
 
+def bump(pattern, expect):
+    """A mutation adding 1 to the count captured by `pattern`, whatever it is now.
+
+    The counts cases used to name the number ("**33**" -> "**34**"), so every
+    legitimate change to the list - five discards added, Kansas City moved to
+    Band T, both on 2026-09-27 - broke the self-test and with it the pre-push
+    hook. Reading the current number keeps each case aimed. `expect` may use
+    {old} and {new}.
+    """
+    rx = re.compile(pattern, re.M)
+
+    def apply(text):
+        m = rx.search(text)
+        if not m:
+            return None
+        old = int(m.group(1))
+        apply.expect = expect.format(old=old, new=old + 1)
+        return text[:m.start(1)] + str(old + 1) + text[m.end(1):]
+    return apply
+
+
 def drop_bands(text):
     """Every band heading renamed: an unrecognised file must not pass."""
     out = text.replace("## 🟢 Band A", "## 🟢 Group A").replace("## 🟣 Band C", "## 🟣 Group C")
@@ -56,36 +78,35 @@ def drop_bands(text):
 
 
 CASES = [
-    ("a band heading's count drifted (C 13 -> 14)",
-     swap("(13 cities)", "(14 cities)"), "Band C holds"),
+    ("a band heading's count drifted (Band C, +1)",
+     bump(r"^## 🟣 Band C —[^\n]*?\((\d+) cities\)", "Band C holds"), None),
 
-    ("the summary box's band count drifted (C 13 -> 12)",
-     swap("· C 13 ·", "· C 12 ·"), "summary says C 12"),
+    ("the summary box's band count drifted (C, +1)",
+     bump(r"· C (\d+) ·", "summary says C {new}"), None),
 
     ("the summary box's discard count drifted",
-     swap("| **Discarded** | **33**", "| **Discarded** | **34**"), "summary says discarded 34"),
+     bump(r"\| \*\*Discarded\*\* \| \*\*(\d+)\*\*", "summary says discarded {new}"), None),
 
     ("the summary box's country count drifted",
-     swap("across 16 countries", "across 15 countries"), "across 15 countries"),
+     bump(r"across (\d+) countries", "across {new} countries"), None),
 
     ("Band A's built figure drifted in its heading",
-     swap("ready + 32 ✅ BUILT", "ready + 31 ✅ BUILT"), "says 31 built"),
+     bump(r"ready \+ (\d+) ✅ BUILT", "says {new} built"), None),
 
-    ("the band table's count drifted (T 32 -> 33)",
-     swap("| **32** *(the 2026-09-27 second-city screens)*",
-          "| **33** *(the 2026-09-27 second-city screens)*"), "band table says T 33"),
+    ("the band table's count drifted (T, +1)",
+     bump(r"^\| 🟤 \*\*T\*\* \|.*\| \*\*(\d+)\*\*", "band table says T {new}"), None),
 
     ("the candidate total drifted in its heading",
-     swap("## Candidates — 64", "## Candidates — 65"), "but the bands hold 64"),
+     bump(r"^## Candidates — (\d+)", "but the bands hold {old}"), None),
 
     ("the Built heading drifted",
-     swap("## Built — 46", "## Built — 47"), "the Built table lists 46"),
+     bump(r"^## Built — (\d+)", "the Built table lists {old}"), None),
 
     ("a Built row's per-country count drifted",
-     swap("**Canada** (5, complete)", "**Canada** (6, complete)"), "lists 5 cities"),
+     bump(r"\*\*Canada\*\* \((\d+), complete\)", "lists {old} cities"), None),
 
-    ("a sub-group count drifted (France 21 -> 22)",
-     swap("**🇫🇷 France (21)**", "**🇫🇷 France (22)**"), "the table below it has 21 rows"),
+    ("a sub-group count drifted (France, +1)",
+     bump(r"\*\*🇫🇷 France \((\d+)\)\*\*", "the table below it has {old} rows"), None),
 
     ("a city in two bands (a Band D row renamed to Band T's Brno)",
      swap("| **Gimhae** 🇰🇷 |", "| **Brno** 🇰🇷 |"), "Brno is in Band D AND Band T"),
@@ -104,6 +125,7 @@ def case(label, mutate, expect_in, text, tmp):
         print(f"BROKEN TEST  {label}\n      the mutation matched nothing in the live "
               f"file, so this case proves nothing - re-aim it")
         return False
+    expect_in = getattr(mutate, "expect", None) or expect_in
     path = Path(tmp) / "city_master_list.md"
     path.write_text(changed, encoding="utf-8", newline="\n")
     code, out = run(path)

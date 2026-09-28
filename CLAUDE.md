@@ -3,8 +3,8 @@
 Multi-city map of commercial density around rapid-transit stations. Read
 `docs/project_context.md` first - it is the stable briefing (what's settled,
 architecture, current state, lessons). `PLAN.md` is the open work,
-`DECISIONS.md` the append-only reasoning trail, `docs/city_shortlist.md`
-the city research. **How each rule below was learned is in
+`DECISIONS.md` the append-only reasoning trail, `docs/city_master_list.md`
+the city list. **How each rule below was learned is in
 `docs/rule_history.md`, at the anchor in brackets** - read it before relaxing
 a rule, not before obeying one.
 
@@ -150,7 +150,7 @@ a rule, not before obeying one.
 - **Write probe and scratch output to the session scratchpad directory, never
   to the working directory or the home directory** - an explicit path, or a
   gitignored `data/<city>/raw/`. Never commit it; findings go in
-  `docs/data_sources.md` and `docs/city_shortlist.md`. [#scratch]
+  `docs/data_sources.md` and `docs/city_master_list.md`. [#scratch]
 - Draft interpretive prose in chat before writing it to a file.
 - **A backslash or a backtick never goes into a Bash command. Write the
   content to a file with the Write tool and run the file.** Escapes, not

@@ -7,7 +7,7 @@ confirmed populated, but a catalog-wide search for "NAICS" on that portal
 returned zero results. The real classification fields are
 `license_code`/`license_description` (e.g. "7009 / Pharmaceutical
 Representative") and `business_activity_id`/`business_activity` (e.g.
-"990 / Markets/Promotes Pharmaceuticals..."). See docs/city_shortlist.md
+"990 / Markets/Promotes Pharmaceuticals..."). See docs/data_sources.md
 and docs/project_context.md ("Taxonomy plurality").
 
 Only 55 license_description values are active in the city (2026-09-20), and
