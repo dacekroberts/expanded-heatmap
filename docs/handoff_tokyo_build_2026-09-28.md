@@ -7,39 +7,14 @@ handoff (`docs/handoff_japan_2026-09-28.md`) and the `tokyo-ward` skill; this
 file is everything else the build role owns. The staging role has its own
 handoff (`docs/handoff_staging_2026-09-28.md`). **Delete a section when done.**
 
-## 1. The review batch: merged, verified by the cheap gates, NOT pushed
+## 1. The review batch: LANDED (c2864b8)
 
-- **Branch `review-2026-09-28b`** (origin has it, head `97185f5`), built in
-  `.claude/worktrees/main-build`. It holds, in order: `worktree-japan` pinned at
-  **`02637d6`** (Sapporo, Fukuoka, Kyoto - nothing of Tokyo), `macro-tiers`
-  (the completeness-tier dots, legend and tooltip), the storefront counts for
-  the three cities (`app/macro_facts.json`), the Vancouver wording in
-  `docs/excluded_categories.md` (owner-confirmed), and master's docs to
-  `72fa09a`.
-- **Passed on it:** zero drift in all 54 cities; `check_all.py` 22 of 22 (with
-  the new `check_macro_facts.py`); `check_deploy_imports.py` clean; privacy 0
-  operator names shown in all three cities; provenance names all three OK;
-  briefs Sapporo 5/5, Fukuoka 4/4, Kyoto 8/8; the three cities' new credit
-  numbers unique (none shared, unlike the batch before);
-  `check_city_registry.py` and `check_macro_labels.py` clean; master list
-  counts: 54 built, A 1 · B 4 · D 10 · N 4 · T 51 = 70.
-- **NOT done: the `deploy-verify` (`scope: full`).** It was cut off twice by
-  the app crashes. **Wait for Cleanup's word that the memory cap is installed
-  and no other heavy job is running**, announce it to the other sessions, then
-  run it alone. `.claude/launch.json` in the main-build worktree already holds
-  `review-app-tmp` (:8822) and `review-static-tmp` (:8823); the session that
-  runs it must be the one started in that worktree, or put the same entries in
-  its own. Remove the file afterwards.
-- **Then**: fetch; merge `origin/master` into the branch (a docs-only move
-  since 72fa09a is expected; re-run `check_all.py` if anything else moved);
-  `check_deploy_imports.py` on the final commit; push `HEAD:master`. The push
-  changes `app/cities.py`, `app/components.py` and `app/Overview.py`: **the
-  owner must reboot the app.** Then tell Cleanup it has landed: Cleanup runs
-  `cleanup-sweep scope: city-landed sapporo fukuoka kyoto` and the live check
-  (including one untouched city).
-- After the push, `worktree-japan` (Tokyo work past 02637d6) merges
-  `origin/master` before its next commit to `app/cities.py`, `DECISIONS.md` or
-  the master list.
+- Sapporo, Fukuoka, Kyoto, the macro-map tiers, the Vancouver wording and a
+  tooltip fix (a panel in the map's bottom-left corner) are on master at
+  `c2864b8`, after a full deploy-verify passed (DECISIONS 2026-09-28). The
+  owner's reboot and Cleanup's live check follow; once the reboot is
+  confirmed, `worktree-japan` merges `origin/master` before its next commit to
+  `app/cities.py`, `DECISIONS.md` or the master list.
 
 ## 2. The macro-map tiers - what every new city now needs
 
