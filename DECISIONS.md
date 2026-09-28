@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**89 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**90 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Handoffs rewritten for the owner's session reorganisation; the large-transit gap saved](#2026-09-28---handoffs-rewritten-for-the-owners-session-reorganisation-the-large-transit-gap-saved)
 - [Vancouver's exclusion sentence no longer says "as in every city here" (owner)](#2026-09-28---vancouvers-exclusion-sentence-no-longer-says-as-in-every-city-here-owner)
 - [Kyoto built on the shared Japanese modules: Japan's fifth city (held for review time)](#2026-09-28---kyoto-built-on-the-shared-japanese-modules-japans-fifth-city-held-for-review-time)
 - [Macro-map completeness tiers built on `macro-tiers`, checked, held for review time](#2026-09-28---macro-map-completeness-tiers-built-on-macro-tiers-checked-held-for-review-time)
@@ -126,6 +127,27 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-28 - Handoffs rewritten for the owner's session reorganisation; the large-transit gap saved
+
+- **"Staging and build handoff" hands over both of its roles (owner).** The
+  staging role goes to a fresh staging session
+  (`docs/handoff_staging_2026-09-28.md`); the build role joins the Tokyo build
+  session the owner is forming from the Japan build and Tokyo sources sessions
+  (`docs/handoff_tokyo_build_2026-09-28.md`). The 2026-09-27 staging and build
+  handoffs are deleted, their open items carried into the two new files.
+- **The review batch's state is recorded where it cannot be lost**: branch
+  `review-2026-09-28b` (Sapporo, Fukuoka, Kyoto, the macro-map tiers, the
+  Vancouver wording) pushed to origin as a backup, not to master; every cheap
+  gate green; the full deploy-verify still to run, after Cleanup confirms the
+  memory cap and a clear machine.
+- **`docs/global_transit_gap.md`** saves the owner's list of large-network
+  cities not built (22 discarded, 15 ruled out by country, 11 in a band, 35
+  never screened), with a recommended re-screen order led by London (ruled
+  out partly as food only, before food-only pages passed), Dubai and Manila
+  (ruled out on transit feeds alone) and Istanbul (one ASSERTED dataset).
+- Scratch that would have gone with this session's scratchpad is in
+  `data/_staging_scratch_2026-09-28b/` (the Incheon join and interpolation
+  scripts, the Baltimore listings, the line-colour search).
 ### 2026-09-28 - Vancouver's exclusion sentence no longer says "as in every city here" (owner)
 
 - **`docs/excluded_categories.md`, Vancouver: "Also excluded, as in every city
