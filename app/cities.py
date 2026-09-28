@@ -1109,6 +1109,23 @@ CITIES = [
         # 375, 768 and 1200.
         "label_offset": ("middle", 0, 22),
     },
+    {
+        "name": "Kyoto",
+        "lat": 35.01,
+        "lon": 135.77,
+        "page": "pages/54_Kyoto_Heatmap.py",
+        "blurb": "Kyoto City Subway, JR West, Keihan, Hankyu, Kintetsu, the Randen and Eiden",
+        "region": "East Asia",
+        "country": "Japan",
+        "in_default_view": False,
+        # FAR ABOVE its dot (width 40.2 px, measured 2026-09-28 in the app's
+        # own document): at the usual 22 px it met Kobe's label, which sits
+        # above Kobe's dot to the south-west; right of the dot it met Osaka's.
+        # Of 35 Kyoto / Kobe placements scored, 40 px up is the nearest clean
+        # one that moves no existing label. check_macro_labels.py: clear at
+        # 375, 768 and 1200.
+        "label_offset": ("middle", 0, -40),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

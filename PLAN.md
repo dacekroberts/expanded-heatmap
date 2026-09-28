@@ -347,6 +347,15 @@ evidence section.
     label moved lower left, notice 54 "Fukuoka City, MHLW and MLIT"),
     deploy-verify `scope: city-added`, reboot. `worktree-japan` also carries
     Sapporo's branch, so the two land together.
+- [x] **Kyoto built 2026-09-28** (`worktree-japan`, held for review time):
+  32,355 storefronts, 117 stations, 18 lines, a register rebuilt as of
+  2026-07-31; texts owner-approved (DECISIONS).
+  - [ ] At review time: `publish-city` with Sapporo and Fukuoka (a new page,
+    `cities.py` with Kyoto's label far above its dot, notice 55 "Kyoto City
+    and MLIT"), deploy-verify `scope: city-added`, reboot.
+  - [ ] When the city publishes its August 2026 list: add its resource to
+    `config.PORTAL_RESOURCES`, move `AS_OF` to 2026-08-31, re-run (a rebuilt
+    register goes stale by one month a month).
 - [ ] **Join control** - like-for-like against the Economic Census per-ward
   飲食店 count (the owner's chosen control) - at build. **Not yet run for
   Kobe or Osaka**. **The e-Stat download is approved (owner, 2026-09-28)**:

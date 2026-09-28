@@ -1749,6 +1749,30 @@ into `render_site_notices()`; displayed once Fukuoka lands).
   individual-operator column; owner accepted 2026-09-28). The verdict is in
   `DECISIONS.md`.
 
+**55. Kyoto City and MLIT (Kyoto) — required, and DISPLAYED** (written into
+`render_site_notices()`; displayed once Kyoto lands).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-09-24; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)).
+- **The City's three datasets (00414, 00541, 00530) are CC BY 4.0**, 著作権者
+  京都市, on every dataset and resource page; the portal's 京都市オープンデータ利用規約
+  (第3版) applies each dataset's own licence. No click-through.
+- **MUST DISPLAY**: 京都市 as the creator; the name **京都市オープンデータ**, which
+  the portal asks for (binding through CC §3(a)(1)(A)(i)); the dataset names
+  and URLs; CC BY 4.0 linked; that the data was processed - here, a register
+  REBUILT from the monthly lists, pinned at 2026-07-31.
+- **MLIT's 位置参照情報 and N02** are PDL 1.0, credited as in 50. N03 (CC BY
+  4.0) only picks stations and is **never drawn**.
+- **MUST NOT**: imply the City's endorsement; use its emblem or logos; describe
+  the pins as operating businesses - closures are invisible in a rebuilt
+  register, and the page says it is an upper bound. **Fetch from
+  `data.city.kyoto.lg.jp` only.**
+- Wording approved by the owner 2026-09-28.
+- **MUST DO:** `check_personal_exposure.py kyoto` with its Japan pass, run
+  2026-09-28: 0 operator names shown; 21 trade names that are the operator's
+  own name in the raw lists, 8 pins showing their permit type. The verdict is
+  in `DECISIONS.md`.
+
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1
 drawn": ML1 comes from CRTM's `M10_Red` (same licence, same 5 June 2026 edit date).

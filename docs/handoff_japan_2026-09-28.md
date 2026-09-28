@@ -8,8 +8,9 @@ addendum.
 
 - **Build Fukuoka, then Kyoto**, the owner's order after Sapporo (DECISIONS
   2026-09-28, "Next builds"). Tokyo (8 wards) comes after them, and is not in
-  this handoff. **Fukuoka built 2026-09-28** (DECISIONS "Fukuoka built";
-  held for review time on this branch).
+  this handoff. **Both built 2026-09-28** (DECISIONS "Fukuoka built",
+  "Kyoto built"; held for review time on this branch). What remains here is
+  the queue below.
 - Both are held for the owner's review time: nothing merges to master until
   the owner calls it (`docs/review_time.md`), then `publish-city`.
 - **The `japan-city` skill is the manual.** Its sheets for Fukuoka and Kyoto
@@ -41,19 +42,6 @@ addendum.
   the template it copied.
 - **Pacing:** `get_usage` between steps; at 90% of the 5-hour window finish
   the current step, commit clean and stop with a one-line next action.
-
-## Kyoto (second)
-
-- **A REBUILT register**: `japan_register.kyoto_permit_stream(raw_dir,
-  as_of)` from the 2021 `.xls` and 62 monthly XLSX. **Pin `as_of`.** It is an
-  upper bound (closures unseen): the page says so. The stream must carry
-  `name_is_operator`'s answer (it drops the operator columns today); Kyoto's
-  申請者＿申請者名 / 申請者氏名 go into `OPERATOR_COLS`.
-- Fetch: no API - GET the resource page, POST with the session cookie; check
-  magic bytes, refuse HTML. `data.city.kyoto.lg.jp` only.
-- **Re-ask the owner about Kyoto's two funiculars**: the brief says drawn
-  (decided 2026-09-24), but Kobe's sightseeing funiculars were left out
-  2026-09-27. Recommend, then wait.
 
 ## Owner's calls made 2026-09-28 that bind these builds
 

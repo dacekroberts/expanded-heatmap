@@ -1238,6 +1238,29 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
      "closed. Fukuoka City, MHLW and MLIT did not make and do not endorse this map.",
      False),
+    # Kyoto (notice 55): the portal's three datasets are CC BY 4.0 with 京都市 as
+    # 著作権者 (read 2026-09-24). MUST DISPLAY 京都市 as creator, the name
+    # 京都市オープンデータ (the portal's terms ask for it), the dataset names and
+    # URLs, the licence link and that the data was processed; never "operating"
+    # (closures are invisible in a rebuilt register). MLIT as in Kobe's. Every
+    # URL an explicit markdown link. Wording approved by the owner 2026-09-28.
+    ("Kyoto City and MLIT (Kyoto)",
+     "Kyoto's businesses: 出典：京都市オープンデータ「食品営業許可施設一覧について」"
+     "（[https://data.city.kyoto.lg.jp/dataset/00414/](https://data.city.kyoto.lg.jp/dataset/00414/)）"
+     "「食品営業許可施設一覧について（令和3年6月以降）」"
+     "（[https://data.city.kyoto.lg.jp/dataset/00541/](https://data.city.kyoto.lg.jp/dataset/00541/)）"
+     "「理容所・美容所・クリーニング所の施設一覧について」"
+     "（[https://data.city.kyoto.lg.jp/dataset/00530/](https://data.city.kyoto.lg.jp/dataset/00530/)）"
+     "（京都市、[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode.ja)）を加工して作成. "
+     "This project rebuilt the food register from the 2021 list and the monthly lists, keeping permits "
+     "in term on 31 July 2026, selected the storefront permit types, placed each premises by its "
+     "address, and counted them around stations. Closures are not published, so the lists may include "
+     "premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Kyoto City and MLIT did not make and do not "
+     "endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

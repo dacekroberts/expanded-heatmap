@@ -244,7 +244,22 @@ replaced under the same resource id (Fukuoka's, 2026-09-25): check
   and BODIK (CC BY 4.0: each dataset's 作成者, the resource name with its date,
   the URL). One minor MHLW point, 2)ウ, is open.
 
-**Kyoto** (`kyoto.md`; 11 wards, EPSG:32653) - ▶ a REBUILT register.
+**Kyoto** - ✅ **BUILT 2026-09-28** (32,355 storefronts, 117 stations, 18
+lines; DECISIONS "Kyoto steps 1-3" and "Kyoto built"). What it left for the
+cities after it: `config.source_rows` (a source that is rows, not one file:
+a rebuilt register, or a complete list plus its months - Tokyo's per-ward
+files fit it), `japan_fetch.portal_file` (a portal's own download button,
+magic bytes checked), the stream carrying the name rule's ANSWER rather than
+the operator's name, and variation selectors stripped before the join.
+Owner's calls: the funiculars left out (Kobe's rule now covers every city);
+`as_of` = the last day the newest list covers, never the download date. Traps:
+a branch whose junction is a long station needs `junction_m` (Kyoto's 350 m,
+as Osaka's 大阪); list a branch's stations BEYOND the city line in its
+`stations` too, or `excluded_stations.csv` files them under the parent line;
+one interchange its operators READ differently (西院: Saiin / Sai) needs a tie.
+The sheet as written before the build:
+
+(`kyoto.md`; 11 wards, EPSG:32653) - ▶ a REBUILT register.
 - `japan_register.kyoto_permit_stream(raw_dir, as_of)` rebuilds it from the
   2021 `.xls` and 62 monthly XLSX (82 files): 30,351 in term. **Pin `as_of`,
   never today.** It is an upper bound (closures are invisible) - the page says so.

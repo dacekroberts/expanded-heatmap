@@ -1882,6 +1882,41 @@ line.
 - The JR Hakata-Minami line (only Hakata is inside the city).
 - The Shinkansen does not count.
 
+### Kyoto - a food register rebuilt from the city's monthly lists, and its registers, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business licence.
+- Shops that sell only packaged food: a notification since 2021, not in these
+  lists.
+- 1,993 food trucks and other permits with no fixed address.
+- 62 permits for less than a year.
+- 1,144 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい).
+- 166 vending machines.
+
+**Counted** - permits still in their term on 31 July 2026. Closures are not
+published, so this is an upper bound. 1,321 of them share an address and permit
+type with a newer permit under another name; they are probably predecessors
+that closed, but they are kept. Also, 126 of the 3,586 bakery, confectioner and
+deli rows (3.5%) have a trade name that reads as a factory; they are kept
+(owner, 2026-09-24).
+
+**One pin per premises** - 523 repeat permits are shown once.
+
+**Not placed** - 435 rows (1.3%), mostly in town names that occur twice in one
+ward. Another 1,836 sit at their town's centre.
+
+**Names not shown** - 8 pins whose trade name is the operator's own name show
+their permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 25 stations beyond it: 8 in Ōtsu (Shiga), 7 in Uji, 3 each in
+  Mukō and Nagaokakyō, and 2 each in Yawata and Ōyamazaki.
+- The Sagano Scenic Railway and the Eizan and Kurama cable cars are not drawn
+  (owner, 2026-09-28).
+- The Shinkansen does not count.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

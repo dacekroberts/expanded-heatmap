@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**83 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**84 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Kyoto built on the shared Japanese modules: Japan's fifth city (held for review time)](#2026-09-28---kyoto-built-on-the-shared-japanese-modules-japans-fifth-city-held-for-review-time)
 - [Kyoto steps 1-3 on a rebuilt register, pinned at 2026-07-31; its funiculars left out after all (owner)](#2026-09-28---kyoto-steps-1-3-on-a-rebuilt-register-pinned-at-2026-07-31-its-funiculars-left-out-after-all-owner)
 - [Fukuoka built on the shared Japanese modules: Japan's fourth city (held for review time)](#2026-09-28---fukuoka-built-on-the-shared-japanese-modules-japans-fourth-city-held-for-review-time)
 - [Fukuoka steps 1-2: the first two-source Japanese city; 業態 read beside the type, MHLW's own point where the block join misses; yatai count (owner)](#2026-09-28---fukuoka-steps-1-2-the-first-two-source-japanese-city-業態-read-beside-the-type-mhlws-own-point-where-the-block-join-misses-yatai-count-owner)
@@ -119,6 +120,29 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Kyoto built on the shared Japanese modules: Japan's fifth city (held for review time)
+
+- **Texts approved by the owner 2026-09-28**, as drafted: the page prose (the
+  rebuild and its upper bound, the street-corner addresses, twin towns left
+  unplaced), the blurb, **notice 55 "Kyoto City and MLIT (Kyoto)"**
+  (京都市オープンデータ, the three dataset names and URLs, 京都市, CC BY 4.0, that
+  the register was rebuilt and processed) and the excluded-categories section.
+- **Macro map**: Kyoto's label measured at 40.2 px in the app's own document
+  (Fukuoka, Osaka and Kobe reproduced exactly), placed 40 px above its dot:
+  at the usual 22 px it met Kobe's label, to the right Osaka's. Of 35 Kyoto /
+  Kobe placements scored, the nearest clean one that moves no existing label.
+  `check_macro_labels.py`: 0 problems.
+- **A fix before landing**: 大津 and 膳所, beyond the city line on the Biwako
+  side, were filed under the JR Kyoto Line in `excluded_stations.csv`; the
+  branch now lists them.
+- **Docs**: data-source rows, inconsistency rows (in-ring 3,736 / 19,313 /
+  4,926, 86%), README, PLAN (with a standing item: the rebuilt register goes
+  stale a month a month - add each new monthly list and move `AS_OF`), master
+  list (54 built, A 1 - Tokyo), the brief corrected, the `japan-city` skill's
+  Kyoto sheet, and the handoff's Kyoto section deleted.
+- **Not run: the Economic Census join control** (PLAN, "Join control"),
+  approved 2026-09-28; one national table serves all five Japanese cities.
 
 ### 2026-09-28 - Kyoto steps 1-3 on a rebuilt register, pinned at 2026-07-31; its funiculars left out after all (owner)
 
