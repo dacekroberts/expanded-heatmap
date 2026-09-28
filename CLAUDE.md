@@ -33,7 +33,8 @@ a rule, not before obeying one.
   geocoder.** [#address-join]
 - Chinese, Japanese or Korean text -> `cjk-text`. [#cjk-text]
 - Re-probing a thin city (open-gap row, one-bucket Band C) -> `reprobe-city`. [#reprobe-city]
-- Brazilian city -> `brazil-city`; Taiwanese city -> `taiwan-city`. [#country-skills]
+- Brazilian city -> `brazil-city`; Taiwanese city -> `taiwan-city`; Japanese
+  city -> `japan-city`. [#country-skills]
 - Rail from OpenStreetMap, not GTFS -> `osm-rail`. Put a lesson where the next
   city must pass through it - a raising check in shared code, then a skill - not
   in a sibling city's comments. [#osm-rail]

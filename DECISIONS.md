@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**42 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**43 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [The japan-city skill written from Kobe; Osaka recommended next](#2026-09-27---the-japan-city-skill-written-from-kobe-osaka-recommended-next)
 - [Kobe's page, notice and docs approved by the owner; Taoyuan's macro label moved; the funicular stations out of the excluded file](#2026-09-27---kobes-page-notice-and-docs-approved-by-the-owner-taoyuans-macro-label-moved-the-funicular-stations-out-of-the-excluded-file)
 - [Kobe pipeline built: the first Japanese city, on shared Japanese steps 1 and 2 (owner calls on rail and names)](#2026-09-27---kobe-pipeline-built-the-first-japanese-city-on-shared-japanese-steps-1-and-2-owner-calls-on-rail-and-names)
 - [Worktrees: monterrey retired, trams created for the next build session, main checkout fast-forwarded (owner)](#2026-09-27---worktrees-monterrey-retired-trams-created-for-the-next-build-session-main-checkout-fast-forwarded-owner)
@@ -75,6 +76,37 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - The japan-city skill written from Kobe; Osaka recommended next
+
+- **`.claude/skills/japan-city/SKILL.md` was written before any other Japanese
+  city starts**, per the owner's standing rule. It covers:
+  - the shared modules (`japan_step1`, `japan_step2`, `japan_register`, the
+    taxonomy, the Japan privacy pass);
+  - the owner's standing calls;
+  - twelve traps Kobe measured;
+  - the notice pattern;
+  - a sheet per remaining city, from its brief (read by a subagent, with line
+    numbers).
+  - `CLAUDE.md` now routes a Japanese city to it.
+- **Found while writing the sheets:**
+  - **All five remaining briefs say never to read the operator columns.**
+    The owner's name rule of 2026-09-27, made for every Japanese city,
+    supersedes that, and the skill says so. Three cities spell the operator
+    column in ways `japan_register.OPERATOR_COLS` does not yet list (Tokyo
+    営業者氏名, Fukuoka 開設者法人名（開設者氏名）, Kyoto 申請者＿申請者名), so each
+    build must add its spelling, or the rule compares nothing.
+  - Kyoto's rebuilt stream drops those columns today.
+  - Kyoto's brief draws its two funiculars, where Kobe left its two out. The
+    skill flags it for the owner.
+- **Recommended next: Osaka**, first in the owner's 2026-09-24 order.
+  - It has one city file and a 99.1% block join, checked against the city's
+    own coordinates.
+  - It needs no new mechanism in `japan_step2`.
+  - Its one hard question, the list at 67% of MHLW's count, already has
+    owner-approved wording.
+  - Sapporo would follow. Fukuoka, Kyoto and Tokyo each need a step 2
+    extension: a second source, the rebuilt stream, and per-ward files.
 
 ### 2026-09-27 - Kobe's page, notice and docs approved by the owner; Taoyuan's macro label moved; the funicular stations out of the excluded file
 

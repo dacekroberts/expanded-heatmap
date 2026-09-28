@@ -252,8 +252,10 @@ evidence section.
   27,251 storefronts, 121 stations, on the shared Japanese steps. Publish
   through `publish-city` at review time (`app/` changes: a new page, notice
   50, Taoyuan's macro label).
-- [ ] **The `japan-city` skill**, written from Kobe before any other Japanese
-  city starts (owner's standing rule).
+- [x] **The `japan-city` skill**, written from Kobe 2026-09-27
+  (`.claude/skills/japan-city/SKILL.md`): shared modules, standing calls,
+  twelve traps, notices, and a sheet per remaining city. Next city
+  recommended: Osaka.
 - [ ] **Join control** - like-for-like against the Economic Census per-ward
   飲食店 count (the owner's chosen control) - at build. **Not yet run for
   Kobe**: it needs an e-Stat download (the owner's OK first). Kobe's join was
