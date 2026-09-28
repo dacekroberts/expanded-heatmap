@@ -57,17 +57,19 @@ Santa Cruz and Belford Roxo lines in Rio de Janeiro, Metrofor's three diesel
 lines in Fortaleza, the two diesel VLTs in Recife, Vivi's suburban trains in Riga, and AREX and
 GTX-A in Seoul.
 
-**Trams are NOT excluded as a class, and the test is whether the tram is the
-rapid-transit system or an overlay on one.** Many of these maps draw light rail
-- San Diego, San Francisco, Los Angeles, Edmonton, Calgary, Miami and Dublin
+**Trams are NOT excluded as a class. A tram is drawn where it is the
+rapid-transit system, or where it reaches districts the metro does not; it is
+left out where it only runs over the top of a metro.** Many of these maps draw light rail -
+San Diego, San Francisco, Los Angeles, Edmonton, Calgary, Miami and Dublin
 among them - Marseille draws its three Tramway lines beside its two Métro
 lines, and Toulouse draws T1 beside Métro A and B. Where a tram network is left
 out, the city already has a metro and the trams run over the top of it: Milan's
 17 tram routes stop a block or two apart and the agency publishes no colour for
 any of them, and Barcelona's tram falls outside the network-identity test that
-picks out its metro. San Francisco's F Market heritage streetcar and its cable
-cars are out on that same ground rather than on any question of mode: both are
-separately branded services running beside Muni Metro rather than part of it.
+picks out its metro. San Francisco's cable cars are out as a different mode. Its
+F Market & Wharves streetcar, once left out as a separately branded service, is
+drawn for its waterfront, as Rome's tram 8, Madrid's Metro Ligero line 1, Paris's
+T3a and T3b and Montréal's REM are drawn for districts their metros do not reach.
 Toulouse's cable car is the proof that "cable car" is not itself a reason. Riga has no metro at all, so its seven tram routes are the network, and all are drawn.
 
 **The line is drawn by station spacing and service frequency, not by which
@@ -118,9 +120,9 @@ repository, and every one of them is counted in the table on this page.
   "next to a station". Where that happens, surface stops are thinned to roughly
   one every half mile measured along the line's own route, while every
   underground station, every terminus and every interchange is kept. It applies
-  to San Francisco's Muni Metro, Philadelphia's trolleys, the Boston Green
-  Line's surface branches, the trams of Amsterdam and Rotterdam, and Hong Kong's
-  Light Rail. The reasoning is in
+  to San Francisco's Muni Metro and F Market & Wharves, Philadelphia's
+  trolleys, the Boston Green Line's surface branches, the trams of Amsterdam and
+  Rotterdam, Rome's tram 8, and Hong Kong's Light Rail. The reasoning is in
   `docs/sub_transit_line_filters.md`.
 
 **A thinned stop does not leave a hole in the map.** Stops are thinned to half a
@@ -1044,8 +1046,8 @@ verdict was re-measured rather than inherited: the two cities' compositions
 differ, which is why the shares were counted for Marseille instead of Paris's
 being assumed.
 
-**The gap against OpenStreetMap is wider here - about 2.6 times as many points
-- and most of that is not the register.** OpenStreetMap covers Marseille far
+**The gap against OpenStreetMap is wider here - about 2.6 times as many points -
+and most of that is not the register.** OpenStreetMap covers Marseille far
 less completely than it covers Paris. On restaurants, where the two schemes
 mean nearly the same thing, the ratio falls to **1.7×**, close to Paris's 1.8×,
 which is the comparison worth trusting.
@@ -1866,18 +1868,18 @@ Toronto licenses food and trades, and not general retail. There is no licence
 category for a grocer, a clothing shop, a pharmacy, a hardware store or general
 merchandise, so none of them exists in any register to map. What the Retail
 bucket holds instead is the **regulated slice alone** - the trades a city
-licenses because it wants to watch them: `SECOND HAND SHOP` (1,806),
-`VAPOUR PRODUCT RETAILER` (539), `PRECIOUS METAL SHOP` (413), `SMOKE SHOP`
-(317), `PAWN SHOP` (218), `PET SHOP` (118), `SECOND HAND SALVAGE SHOP` (33) and
-`PERMANENT FIREWORKS VENDOR` (31).
+licenses because it wants to watch them: `VAPOUR PRODUCT RETAILER` (351),
+`SECOND HAND SHOP` (219), `PRECIOUS METAL SHOP` (85), `PAWN SHOP` (41),
+`SMOKE SHOP` (28), `PET SHOP` (20), `SECOND HAND SALVAGE SHOP` (10) and
+`PERMANENT FIREWORKS VENDOR` (5).
 
-On the current licences that reach the map that is **870 of 19,575 storefront
-rows, 4.4%**, against 14,408 food service and 4,297 personal services. So
+Of the licences that reach the map, **759 of 18,186 (4.2%) are retail**,
+against 13,385 food service and 4,042 personal services. So
 **read Toronto's Retail layer as a narrow regulated slice of what is actually
 on the street, and the balance between its three categories as a fact about
 Toronto's licensing rather than about its high streets.** This is
-`multi-source-city`'s "Retail - regulated slice" archetype, and unlike New York
-- whose four registries at least covered all three buckets thinly - there is no
+`multi-source-city`'s "Retail - regulated slice" archetype, and unlike New York -
+whose four registries at least covered all three buckets thinly - there is no
 second source at any level of government that would fill Toronto's gap.
 
 **The bucket is drawn rather than omitted**, decided by the owner on

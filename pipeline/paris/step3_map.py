@@ -48,6 +48,7 @@ from pipeline.paris.config import (  # noqa: E402
     RING_LABELS,
     ROUTE_IDS,
     ROUTE_TYPE_METRO,
+    TRAM_ROUTES,
     STATIONS_CSV,
     TAXONOMY_SYSTEM,
 )
@@ -57,6 +58,9 @@ from pipeline.paris.config import (  # noqa: E402
 # other lines, on the stretch inside the commune. Override only if a rendered
 # map shows one landing badly.
 LINE_LABEL_ENDS = {}
+
+# The Métro's 16 routes, then the two trams (2026-09-27).
+DRAWN_ROUTE_IDS = [*ROUTE_IDS, *TRAM_ROUTES]
 
 
 def shape_ids_for_routes(zf):
@@ -68,6 +72,8 @@ def shape_ids_for_routes(zf):
     routes = pd.read_csv(zf.open("routes.txt"), dtype=str)
     metro = routes[routes["route_type"] == ROUTE_TYPE_METRO]
     metro = metro[metro["route_id"].isin(ROUTE_IDS)]
+    # T3a and T3b (2026-09-27); step 1 has already checked their exact match.
+    metro = pd.concat([metro, routes[routes["route_id"].isin(set(TRAM_ROUTES))]])
     short_of = dict(zip(metro["route_id"], metro["route_short_name"]))
 
     trips = pd.read_csv(zf.open("trips.txt"), dtype=str,
@@ -87,7 +93,7 @@ def shape_ids_for_routes(zf):
     route_stops = link.groupby("route_id")["stop_id"].agg(set).to_dict()
 
     chosen = {}
-    for rid in ROUTE_IDS:
+    for rid in DRAWN_ROUTE_IDS:
         want = route_stops.get(rid, set())
         ranked = sorted((k for k in shape_trips if k[0] == rid),
                         key=lambda k: (-shape_trips[k], k[1]))
@@ -135,7 +141,7 @@ def main():
               LINE_COLOURS[short_of[rid]],
               LINE_NAMES[short_of[rid]],
               LINE_LABEL_ENDS.get(rid))
-        for rid in ROUTE_IDS
+        for rid in DRAWN_ROUTE_IDS
     }
 
     stations = pd.read_csv(STATIONS_CSV)
@@ -144,13 +150,13 @@ def main():
 
     render_heatmap(
         output_path=HEATMAP_HTML,
-        map_title="Paris Metro Business Density Heatmap",
+        map_title="Paris Métro and Tram Business Density Heatmap",
         city_name="Paris",
-        system_name="Métro",
+        system_name="Métro and Tram",
         stations=stations,
         businesses=businesses,
         taxonomy_system=TAXONOMY_SYSTEM,
-        lines=load_line_shapes(GTFS_ZIP, line_specs, "Métro"),
+        lines=load_line_shapes(GTFS_ZIP, line_specs, "Métro and Tram"),
         crs_geographic=CRS_GEOGRAPHIC,
         crs_projected=CRS_PROJECTED,
         ring_edges_meters=RING_EDGES_METERS,

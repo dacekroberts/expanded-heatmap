@@ -25,8 +25,8 @@ Claims are labelled **MEASURED** (a number and the check that produced it) or
 with trams counting as rail** (owner, 2026-09-27). The per-city numbers are in
 `city_master_list.md` (Bands A, C, T and D, and the discards); this entry
 records the METHOD behind each country, and the older negatives it supersedes.
-Wave 2 (the US; Canada, Brazil and Ireland; Spain and Italy) is held by the
-owner.
+Wave 2 launched 2026-09-27: Canada, Brazil and Ireland are in the table below;
+Spain and Italy are running; the US follows.
 
 | Country | Business method | Rail method | Outcome |
 |---|---|---|---|
@@ -39,6 +39,9 @@ owner.
 | 🇩🇰 Denmark | CVR production units, placed by OSM's DAR address points (95% match in a Copenhagen control, median 0.03 m) | OSM | Aarhus (EDGE) and Odense to T |
 | 🇳🇱 Netherlands | BAG shop units, plus municipal food notices from the Gemeenteblad | The national GTFS and OSM | Den Haag, Utrecht, Rijswijk and Delft to C (no current food); suburbs regional add-ons only |
 | 🇱🇻 Latvia | Riga's two layers (VID excise, VZD cadastre), placed on VZD's address file | OSM, operator GTFS found through the Mobility Database | Daugavpils and Liepāja to T |
+| 🇨🇦 Canada *(wave 2)* | No national register: each municipality's own catalogue enumerated (the three Waterloo Region hubs, Données Québec's organisations, the BC municipalities' portals, York Region) | OSM stub test per municipality; the Region of Waterloo's GTFS; each unopened line's official status | **Kitchener–Waterloo (Regional) to T** (ION; the Region's food and personal-services inspection layers, no retail). Laval, Longueuil, Brossard, Vaughan discarded. Vancouver's four SkyTrain suburbs are a rescope in PLAN. Québec's *Registre des entreprises* is CC BY-NC-SA: unused |
+| 🇧🇷 Brazil *(wave 2)* | CNEFE through the built national module (`build_storefronts()` with a stub config), per whole município | OSM; frequency from timetables and press where the operators' own hosts fail (Metrofor's certificate, CBTU's image-only timetables); CPTM spacing with `measure_rail_backbone.py` | No new city: every remaining rail city runs suburban trains or a diesel VLT at 20–90 minutes (six discards). **Contagem and Duque de Caxias become regional add-ons** to Belo Horizonte and Rio |
+| 🇮🇪 Ireland *(wave 2)* | Not reached (every candidate failed rail); Tailte Éireann's valuation register answers for Cork | The NTA's national GTFS (the only trams are Dublin's Luas), TII's Luas Cork status; OSM failed on both mirrors, so not used | Nothing new: Dublin's map already covers all four Dublin councils; Cork discarded, Limerick, Galway and Waterford have no urban rail |
 
 **Two shared-code defects surfaced** and went to Cleanup: `pipeline/osm.py`
 lists `overpass.osm.ch`, a Swiss-only extract that answers other countries'

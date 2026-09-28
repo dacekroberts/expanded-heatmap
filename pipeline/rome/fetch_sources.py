@@ -90,6 +90,17 @@ def fetch_osm(force):
     if any(not r.get("members") for r in rels):
         sys.exit("  a route relation came back without members - `out geom` is required")
     print(f"  {'osm_rail':28s} {len(rels)} route relations via {host}")
+    # Tram 8 alone, by relation id (the tram rescope, 2026-09-27; owner OK'd
+    # the fetch). The bbox rail query above asks for subway|light_rail only,
+    # which is why the metro cache has no trams.
+    ids = ",".join(str(r) for r in config.TRAM_8_CANDIDATE_RELATIONS)
+    els, host = osm.fetch(f"[out:json][timeout:180];rel(id:{ids});out geom;node(r);out tags center;",
+                          config.OSM_TRAM8_JSON, force=force)
+    got = {x["id"] for x in els if x["type"] == "relation"}
+    if got != set(config.TRAM_8_CANDIDATE_RELATIONS):
+        sys.exit(f"  osm_tram8: expected relations {config.TRAM_8_CANDIDATE_RELATIONS}, got "
+                 f"{sorted(got)} - one was deleted or renumbered in OSM")
+    print(f"  {'osm_tram8':28s} {len(got)} route relations via {host}")
     nb = ('[out:json][timeout:240];rel["boundary"="administrative"]["admin_level"="8"]'
           f'["ref:ISTAT"]({bbox});out geom;')
     els, host = osm.fetch(nb, config.OSM_NEIGHBOURS_JSON, force=force)

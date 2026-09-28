@@ -36,9 +36,12 @@ from pipeline.madrid.config import (
     BUSINESSES_RAW_CSV,
     CITY_BOUNDARY_URL,
     CITY_BOUNDARY_ZIP,
+    CRTM_LIGERO_SERVICE,
     CRTM_METRO_SERVICE,
     CRTM_STATIONS_LAYER,
     CRTM_TRAMOS_LAYER,
+    LIGERO_STATIONS_RAW_JSON,
+    LIGERO_TRAMOS_RAW_JSON,
     STATIONS_RAW_JSON,
     TRAMOS_RAW_JSON,
 )
@@ -46,12 +49,12 @@ from pipeline.madrid.config import (
 UA = {"User-Agent": "expanded-heatmap (github.com/dacekroberts/expanded-heatmap)"}
 
 
-def fetch_layer(layer, cache, force):
+def fetch_layer(layer, cache, force, service=CRTM_METRO_SERVICE):
     """One ArcGIS layer, cached to the gitignored raw directory."""
     if cache.exists() and not force:
         print(f"  cached {cache.name}")
         return
-    url = (f"{CRTM_METRO_SERVICE}/{layer}/query?where=1%3D1&outFields=*"
+    url = (f"{service}/{layer}/query?where=1%3D1&outFields=*"
            f"&returnGeometry=true&outSR=25830&f=json&resultRecordCount=5000")
     print(f"  fetching layer {layer} ...")
     with urllib.request.urlopen(urllib.request.Request(url, headers=UA),
@@ -113,6 +116,11 @@ def main():
     print("CRTM feature layers:")
     fetch_layer(CRTM_STATIONS_LAYER, STATIONS_RAW_JSON, args.force)
     fetch_layer(CRTM_TRAMOS_LAYER, TRAMOS_RAW_JSON, args.force)
+    # Metro Ligero, same layer numbers on the M10 service (2026-09-27).
+    fetch_layer(CRTM_STATIONS_LAYER, LIGERO_STATIONS_RAW_JSON, args.force,
+                service=CRTM_LIGERO_SERVICE)
+    fetch_layer(CRTM_TRAMOS_LAYER, LIGERO_TRAMOS_RAW_JSON, args.force,
+                service=CRTM_LIGERO_SERVICE)
 
     print("\nBoundary:")
     fetch_boundary(args.force)

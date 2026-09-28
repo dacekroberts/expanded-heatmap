@@ -134,9 +134,8 @@ Desktop is unaffected — the label is fully visible there.
     and a recommendation per category: `docs/tram_rescope_estimate.md`.
     **Band T's group decision**: build trams-only cities, and in what
     order (Nice, Montpellier, Brno and Bergen are the cheapest strong ones).
-  - [ ] **Wave 2 held by the owner** (the US; Canada, Brazil and Ireland;
-    Spain and Italy), possibly at a reset. Launch only on the owner's word,
-    after checking usage and whether main is mid-build. **Its agents use
+  - [ ] **Wave 2 of the screens, launched 2026-09-27 after the 10pm reset**
+    (the US; Canada, Brazil and Ireland; Spain and Italy). **Its agents use
     `pipeline.osm.fetch`**, not the scratch `ovp.py`: since 2040dfc it refuses
     an all-zero `out count` answer, which the wave-1 scratch fetcher accepted
     (Amstelveen's density is still unmeasured for that reason).
@@ -162,6 +161,40 @@ Desktop is unaffected — the label is fully visible there.
       3. Spain and Italy next. The US waits for a later window if they land
          near the top of their range.
       4. Every screen agent fetches OSM through `pipeline.osm.fetch`.
+    - [x] **Group 1 (Canada, Brazil, Ireland) DONE 2026-09-27**, banded on the
+      owner's calls (DECISIONS): Kitchener–Waterloo (Regional) to T; eleven
+      discards. **Actual load: about 15% of the 5-hour window** (1% → 16%),
+      the bottom of its range. Rescaled: Spain and Italy about 25–35%, the US
+      about 25–40%.
+    - [ ] **Group 2 (Spain, Italy) RUNNING 2026-09-27** (Staging).
+    - [ ] **Group 3 (the US)**: after group 2's cost is read.
+    - [ ] **Regional add-ons to built cities (owner, 2026-09-27)**, main's
+      work on a branch held for review time:
+      - **Rio + Duque de Caxias**: SuperVia Saracuruna's three excluded
+        stations (Duque de Caxias, Corte Oito, Gramacho); CNEFE 18,698
+        storefronts. **First a rail test for the Gramacho–Saracuruna shuttle**,
+        which the scope would bring in.
+      - **Belo Horizonte + Contagem**: Metrô BH L1's Eldorado and Novo
+        Eldorado; CNEFE 13,011. Belo Horizonte becomes "(Regional)".
+      - Both CNEFE zips are cached in the main checkout's `data/contagem/raw/`
+        and `data/duque_de_caxias/raw/` (and the staging worktree's).
+    - [ ] **Vancouver (Regional) + Burnaby, New Westminster, Coquitlam,
+      Richmond (owner: a PLAN item, probes first)** - 28 SkyTrain stations
+      now excluded. Measured: Coquitlam (licences with lat/long, OGL-BC 2.0,
+      each listed twice) and New Westminster (NAICS licences, addresses only:
+      an address join; drop `RESIDENT_STATUS` = NON-RESIDENT). **Probes
+      left**: Burnaby's `gis.burnaby.ca` refuses scripted requests (17,286
+      licences per the portal: an owner's browser fetch, as Bucharest);
+      Richmond's business directory declares no licence (a `licence-read`).
+    - **Watch items from group 1**, each a dated re-check: Salvador's VLT
+      (trial running since 2026-06-29; draw it on Salvador's map once in
+      revenue service); Teresina (all-day 15-minute service); the Hazel
+      McCallion Line (construction to early 2028); Luas Cork (no Railway
+      Order before the end of 2028); ION Stage 2 to Cambridge (planning).
+    - Kept out (owner, 2026-09-27): Fortaleza's Parangaba–Mucuripe VLT (now
+      "Linha Nordeste") under the trams rule, and so Sobral; Osasco (São
+      Paulo's L9-only rule stands); Lauro de Freitas (1 station); Québec's
+      *Registre des entreprises* (CC BY-NC-SA).
   - [ ] **Tram rescopes of built cities held by the owner**, likely at the
     next reset; Cleanup's case-by-case list is in DECISIONS (2026-09-27).
 
@@ -316,6 +349,28 @@ brief names.
     (46, heritage cars on a regular route); Fortaleza diesel VLT (11, every 40 min - failed
     the rail test); D.C. Streetcar and Montreal's REM (both silent omissions). **D.C.
     Streetcar: no longer operating** (DDOT ended it 2026-03-31; checked 2026-09-27).
+  - ✅ **Tram list COMPLETE 2026-09-27 (wave 2's first item, run early)**:
+    - **Barcelona TRAM** T1–T6: 9–10 stops inside the city each; all six are
+      one colour (#007165) in OSM, so a rescope needs a colour rule.
+    - **Hong Kong Tramways**: 6 services, up to 54 stops, all in Hong Kong.
+      The owner excluded it 2026-09-24; recommended out.
+    - **Seoul's Wirye Line: NOT OPEN (confirmed 2026-09-27).** Seoul's own
+      page (2026-02-10) puts its pilot running at February–December 2026;
+      Newspim (2026-01-21) names the traffic-safety review and signal
+      priority as what the opening hangs on; Wikipedia's target is
+      2026-12-26. 12 stops, 5.4 km, Macheon (Songpa-gu) to Namwirye and
+      Bokjeong - how many stops lie inside Seoul is unmeasured. **Re-check
+      in January 2027**; if it opened, count it for Seoul's rescope.
+    - **Cablebús**: L1 6 and L2 7 stations, all in CDMX; L3 is incomplete in
+      OSM (1 stop). No OSM colours. **L3 = 6 stations (2026-09-27)**, all in
+      CDMX (Miguel Hidalgo, Álvaro Obregón): Los Pinos/Constituyentes,
+      Panteón de Dolores, Charrería, PARCUR, Cineteca Nacional, Vasco de
+      Quiroga; opened 2024-09-24, 5.42 km. Three sources agree (es and en
+      Wikipedia, Expansión 2024-09-25), but **no official list or
+      coordinates yet**: datos.cdmx.gob.mx, STE and SEMOVI (one IP) refused
+      every connection that day. The build retries CDMX's GTFS (`mdb-3126`
+      carries Cablebús) before placing any station. L4 (Universidad–San
+      Nicolás) under construction, about 20% in August 2026: out.
   - ▶ **IN PROGRESS 2026-09-27 (owner cleared light and medium): specs for REM, Rome 8,
     Madrid ML1, Paris T3a/T3b and SF F Market in `docs/tram_rescope_specs.md`**, handed to
     Main Build to implement on a branch held for review time.
@@ -325,7 +380,7 @@ brief names.
     works routes); Seoul Gimpo Goldline (1 stop, already drawn); Recife VLTs (fail the rail
     test); Porto Alegre Aeromovel (people mover).
   - **Blind spots:** Seoul's OSM query takes only subway/light_rail/train (Wirye Line
-    unverified); Hong Kong's and Barcelona's caches hold no tram relations. Mexico City's
+    not open, checked 2026-09-27); Hong Kong's and Barcelona's caches hold no tram relations. Mexico City's
     Cablebús is also unstated (Toulouse's drawn Téléo is the precedent).
     `docs/map_inconsistencies.md` shows D.C. as "—", which is incomplete.
 - [x] **An honest efficiency review of the whole PROCESS, the owner's habits included (owner,
@@ -368,9 +423,14 @@ brief names.
   - Deliverable, drafted for the owner: a ranked list (finding, evidence, estimated saving,
     whose habit - owner, session or structure), the top three changes, and a rough weekly
     saving for each. The owner decides.
-- [ ] **Toronto's retail share** (`docs/map_inconsistencies.md` Q18): the baseline's buckets
-  (870 of 19,575) and the cleaned rows the map draws (814 of 19,384) are both real. Settle by
-  reading Toronto's step 2, not by editing a number.
+- [ ] **A check for dashes that render as bullets** (cleanup): a line in an app-rendered doc
+  that starts `- ` mid-paragraph renders as a stray bullet. `deploy-verify` found three in
+  `docs/excluded_categories.md` on 2026-09-27 (fixed by moving the dash up a line).
+- [ ] **`check_master_list_counts_selftest.py` picks its target row from the live table**
+  (cleanup): a fixed target ("Ottawa", then "Bergen") breaks whenever that country's row
+  changes; Staging had to re-aim it on 2026-09-27 (e56c471).
+- [ ] **Madrid at 343 px:** "Línea 5" and "Ramal Ópera–Príncipe Pío" label boxes touch at one
+  corner (~0.5 px; both readable). Predates the tram batch. Cosmetic.
 
 **Not ready for main:**
 - **Band C (7)** — one owner decision moves all seven: does a single-bucket

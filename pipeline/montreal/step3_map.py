@@ -5,7 +5,8 @@ specific to Montréal.
 
 Input:  data/montreal/processed/stations.csv
         data/montreal/processed/businesses_clean.csv
-        data/montreal/raw/gtfs.zip              (line overlay)
+        data/montreal/raw/gtfs.zip              (Métro line overlay)
+        data/montreal/raw/rem_gtfs.zip          (REM line overlay)
         data/montreal/raw/agglomeration.geojson (label anchoring)
 Output: outputs/montreal/heatmap.html
 
@@ -41,6 +42,11 @@ from pipeline.montreal.config import (  # noqa: E402
     LINE_SHAPES,
     RING_EDGES_METERS,
     RING_LABELS,
+    REM_GTFS_ZIP,
+    REM_LINE_COLOUR,
+    REM_LINE_KEY,
+    REM_LINE_NAME,
+    REM_SHAPES,
     ROUTE_IDS,
     STATIONS_CSV,
     TAXONOMY_SYSTEM,
@@ -52,6 +58,11 @@ LINE_SPECS = {
                LINE_NAMES[route_id], LINE_LABEL_ENDS.get(route_id))
     for route_id in ROUTE_IDS
 }
+
+# THE REM, one key for its three services (owner, 2026-09-27; see config):
+# the two branch shapes from Brossard, sharing one colour, label and legend
+# entry - New York's shared-trunk tuple.
+REM_SPECS = {REM_LINE_KEY: (REM_SHAPES, REM_LINE_COLOUR, REM_LINE_NAME, None)}
 
 
 def mapped_area():
@@ -68,7 +79,7 @@ def mapped_area():
 
 
 def main():
-    for path in (STATIONS_CSV, BUSINESSES_CLEAN_CSV, GTFS_ZIP,
+    for path in (STATIONS_CSV, BUSINESSES_CLEAN_CSV, GTFS_ZIP, REM_GTFS_ZIP,
                  CITY_BOUNDARY_GEOJSON):
         if not path.exists():
             sys.exit(f"Missing {path}. Run the earlier steps first "
@@ -76,13 +87,14 @@ def main():
 
     render_heatmap(
         output_path=HEATMAP_HTML,
-        map_title="Métro de Montréal: commercial density around stations",
+        map_title="Métro and REM de Montréal: commercial density around stations",
         city_name="Montréal",
-        system_name="Métro",
+        system_name="Métro and REM",
         stations=pd.read_csv(STATIONS_CSV),
         businesses=pd.read_csv(BUSINESSES_CLEAN_CSV),
         taxonomy_system=TAXONOMY_SYSTEM,
-        lines=load_line_shapes(GTFS_ZIP, LINE_SPECS, "Métro"),
+        lines={**load_line_shapes(GTFS_ZIP, LINE_SPECS, "Métro"),
+               **load_line_shapes(REM_GTFS_ZIP, REM_SPECS, "REM")},
         crs_geographic=CRS_GEOGRAPHIC,
         crs_projected=CRS_PROJECTED,
         ring_edges_meters=RING_EDGES_METERS,

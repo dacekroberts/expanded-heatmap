@@ -33,6 +33,12 @@ OSM_BOUNDARY_JSON = DATA_RAW / "osm_boundary.json"
 OSM_RAIL_JSON = DATA_RAW / "osm_rail.json"
 OSM_NEIGHBOURS_JSON = DATA_RAW / "osm_neighbour_comuni.json"
 OSM_FOOD_JSON = DATA_RAW / "osm_food_control.json"
+# Tram 8 (the tram rescope, 2026-09-27): its own small fetch, so the metro
+# cache above is untouched. BOTH candidate relation pairs are fetched - the
+# base service and the "8 prolungato" - and step 1 keeps the pair that
+# config.TRAM_8_RELATIONS names, chosen against the GTFS's route 8.
+OSM_TRAM8_JSON = DATA_RAW / "osm_tram8.json"
+TRAM_8_CANDIDATE_RELATIONS = (385213, 1674659, 5376334, 5376335)
 
 # --- Endpoints ---------------------------------------------------------------
 
@@ -92,10 +98,17 @@ LINE_RELATIONS = {
     "B1": (2172804, 2172805),
     "C": (398053, 2172845),
     "RV": (387417, 1721478),
+    # TRAM 8 (the tram rescope, 2026-09-27): the BASE service, Casaletto -
+    # Venezia, 16 stops. Chosen against the GTFS's route 8 (read only as a
+    # check, its terms being ambiguous): 2,985 of 3,207 trips (93%) run the
+    # 16-stop pattern, the "8 prolungato" to Porta Maggiore about 213.
+    "8": (385213, 1674659),
 }
-LINE_ORDER = ("A", "B", "B1", "C", "RV")
+LINE_ORDER = ("A", "B", "B1", "C", "RV", "8")
 LINE_NAMES = {"A": "Metro A", "B": "Metro B", "B1": "Metro B1", "C": "Metro C",
-              "RV": "Roma–Viterbo"}
+              "RV": "Roma–Viterbo", "8": "Tram 8"}
+# Where each relation is read from: the metro cache, or tram 8's own.
+TRAM_LINES = frozenset({"8"})
 # COMMUTER RAIL, MEASURED AGAINST THE PUBLISHED TEST - the owner's call of
 # 2026-09-24: draw it where it runs at metro spacing and frequency in districts
 # the metro does not reach (Dublin's DART, Copenhagen's S-tog), not by who runs
@@ -114,7 +127,11 @@ LINE_NAMES = {"A": "Metro A", "B": "Metro B", "B1": "Metro B1", "C": "Metro C",
 # Palestrina's scala mobile.
 LEFT_OUT_RELATIONS = {208013: "Metromare", 1721156: "Metromare",
                       2703073: "Metro D (not built)", 2581270: "Palestrina escalator",
-                      2581271: "Palestrina escalator"}
+                      2581271: "Palestrina escalator",
+                      5376334: "8 prolungato (7% of route 8's trips)",
+                      5376335: "8 prolungato (7% of route 8's trips)"}
+# Trams 2, 3, 5, 14 and 19 are NOT fetched: 0 trips in the GTFS (19 is not in
+# it at all), bus-replaced during works (spec, 2026-09-27).
 
 # OSM's colours, ATAC's brand colours (A orange, B blue, C green). B and B1
 # share one blue, and this project's check refuses two lines under Delta-E
@@ -123,7 +140,7 @@ LEFT_OUT_RELATIONS = {208013: "Metromare", 1721156: "Metromare",
 # Roma-Viterbo is OSM's own #7e7bb4, unchanged: 19.4 from B, 21.2 from B1,
 # 25.8 from the Retail pins.
 LINE_COLOURS = {"A": "#F68B1F", "B": "#3783C6", "B1": "#629ed3", "C": "#008751",
-                "RV": "#7e7bb4"}
+                "RV": "#7e7bb4", "8": "#bfdf14"}   # 8: OSM's = ATAC's
 
 # Step 1 writes the kept relations here for step 3, with B1 relabelled and cut
 # to its OWN ways (Bologna to Jonio): OSM tags it ref "B", and its relations
@@ -138,13 +155,25 @@ STATION_NAME_ALIASES = {"Colosseo – Fori Imperiali": "Colosseo"}
 # Gate 3: English Wikipedia's "Rome Metro" (read 2026-09-24, SECONDARY): A 27,
 # B 26 including B1's four, C 24, network 74.
 OPERATOR_STATION_COUNTS = {"Metro A": 27, "Metro B + B1": 26, "Metro C": 24,
-                           "Metro (network)": 74, "Roma–Viterbo (urban)": 15}
+                           "Metro (network)": 74, "Roma–Viterbo (urban)": 15,
+                           "Tram 8": 16}
 OPERATOR_COUNTS_SOURCE = ("en.wikipedia.org/wiki/Rome_Metro, read 2026-09-24 - secondary; "
                           "A 27, B 26 (with B1), C 24, network 74. "
                           "it.wikipedia.org/wiki/Ferrovia_Roma-Civita_Castellana-Viterbo, "
-                          "read 2026-09-24 - secondary; the urban section's 15 stations")
+                          "read 2026-09-24 - secondary; the urban section's 15 stations. "
+                          "Tram 8: the cached Roma Mobilità GTFS, route 8's base pattern, "
+                          "16 distinct stop names (read 2026-09-27, as a check only)")
 SPACING_MIN_M = 400.0
 COLLAPSE_MAX_SPREAD_M = 400
+
+# TRAM 8 IS THINNED, San Francisco's filter as Amsterdam and Rotterdam run it
+# (docs/sub_transit_line_filters.md): measured 2026-09-27, its 16 stops sit a
+# median 322 m from the next (min 144, Arenula's two), and 15 of 16 are more
+# than the 966 m outer ring from any metro or Roma-Viterbo station - the
+# street-running offshoot shape the filter was written for. One stop per half
+# mile along the line, every terminus and every interchange kept.
+THINNED_LINES = ("8",)
+THIN_SPACING_M = 0.5 * 1609.344
 
 # --- Business filtering ------------------------------------------------------
 

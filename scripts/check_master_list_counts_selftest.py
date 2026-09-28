@@ -120,7 +120,7 @@ CASES = [
      bump(r"^\| \*\*Total\*\*.*· C (\d+) ·", "the Total row says C {new}"), None),
 
     ("by country: a named city is not in the band its row lists",
-     swap("| **1** — Ottawa | C |", "| **1** — Ottawa | T |"), "its Bands column says"),
+     swap("| **1** — Bergen | T |", "| **1** — Bergen | C |"), "its Bands column says"),
 
     ("a city in two bands (a Band D row renamed to Band T's Brno)",
      swap("| **Gimhae** 🇰🇷 |", "| **Brno** 🇰🇷 |"), "Brno is in Band D AND Band T"),

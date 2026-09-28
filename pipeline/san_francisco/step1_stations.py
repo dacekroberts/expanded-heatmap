@@ -66,7 +66,8 @@ from pipeline.san_francisco.config import (  # noqa: E402
 # stop sequence). Found by inspection (2026-09-18): counted
 # trips per shape_id per route and took the mode. Re-derive if the GTFS
 # feed is re-downloaded.
-LINE_SHAPES = {"J": "9301", "K": "9436", "L": "9501", "M": "9651", "N": "9717", "T": "354"}
+LINE_SHAPES = {"J": "9301", "K": "9436", "L": "9501", "M": "9651", "N": "9717", "T": "354",
+               "F": "19851"}   # F: its most-run shape, 426 of 852 trips (2026-09-27)
 
 # Strips GTFS direction-suffix variants of the same physical station down
 # to one canonical name (e.g. "Metro Church Station/Downtown" and
@@ -245,7 +246,7 @@ def main():
     EXCLUDED_STATIONS_CSV.parent.mkdir(parents=True, exist_ok=True)
     excluded_stations.to_csv(EXCLUDED_STATIONS_CSV, index=False)
     print(f"\n{len(excluded_stations)} surface stops cut by the spacing filter across all "
-          f"6 lines - documented in {EXCLUDED_STATIONS_CSV}")
+          f"{len(line_sequences)} lines - documented in {EXCLUDED_STATIONS_CSV}")
 
     all_selected = pd.concat(kept_per_line.values(), ignore_index=True)
     stations = (
@@ -253,7 +254,7 @@ def main():
         .agg(latitude=("latitude", "mean"), longitude=("longitude", "mean"))
         .rename(columns={"canonical": "station"})
     )
-    print(f"\n{len(stations)} distinct stations selected across all 6 lines "
+    print(f"\n{len(stations)} distinct stations selected across all {len(line_sequences)} lines "
           f"(before the city-boundary check below).")
 
     # --- Spatial filter to San Francisco (its own county boundary) --------
