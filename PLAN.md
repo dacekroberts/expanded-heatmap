@@ -45,10 +45,15 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - **Scope**: city only or "(Regional)".
   - **Network type**: metro, trams only (Riga today), or EDGE. It could
     become a macro-map tier once Band T builds exist.
-  - Related, proposed and **awaiting the owner**: the macro map's dots
-    coloured by **data completeness** (Full · Narrowed · One bucket) and
-    sized by storefront count, the tier derived from each city's outputs and
-    checked, never hand-kept. An `app/` change, so it lands at review time.
+  - [ ] **Macro-map completeness tiers: APPROVED (owner 2026-09-28)**, not
+    tied to the wait above. Dots coloured **Full #0D9488** (the current teal)
+    · **Narrowed #9333EA** · **One bucket #C2410C**, one set for both themes
+    (the dots are WebGL, so dark mode filters only the basemap), with a text
+    legend. **No sizing** (owner: it would swallow neighbours and break the
+    scored labels); the tooltip carries storefront count, placement
+    precision and data age. Each city's tier is a `cities.py` field backed by
+    a check, never hand-kept. Per-city tiers go to the owner first. An `app/`
+    change: review time, `map-chrome` deploy-verify, reboot.
 
 - [ ] ⏰ **Prague: Flora reopens around December 2026**: when PID's feed serves
   it again, step 1 STOPS the build on purpose - remove the override then.

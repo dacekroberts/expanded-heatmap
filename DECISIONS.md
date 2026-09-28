@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**80 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**81 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Macro-map dots coloured by data completeness; storefront count in the tooltip, not the dot size (owner)](#2026-09-28---macro-map-dots-coloured-by-data-completeness-storefront-count-in-the-tooltip-not-the-dot-size-owner)
 - [Band T's EDGE cities grouped at its top; Band T below Band N (owner)](#2026-09-28---band-ts-edge-cities-grouped-at-its-top-band-t-below-band-n-owner)
 - [Band C's last five get verdicts; Band B reopened for the passed, Band N created for no page, Band C closed (owner)](#2026-09-28---band-cs-last-five-get-verdicts-band-b-reopened-for-the-passed-band-n-created-for-no-page-band-c-closed-owner)
 - [Worktree `japan` created for a fresh session to build Fukuoka, then Kyoto, branched from build-sapporo (owner)](#2026-09-28---worktree-japan-created-for-a-fresh-session-to-build-fukuoka-then-kyoto-branched-from-build-sapporo-owner)
@@ -116,6 +117,31 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Macro-map dots coloured by data completeness; storefront count in the tooltip, not the dot size (owner)
+
+- **The owner approved three completeness tiers as dot colours**: Full
+  **#0D9488** (the current teal, so most dots do not change), Narrowed
+  **#9333EA**, One bucket **#C2410C**. The dots are WebGL layers, which the
+  dark-mode filter never reaches, so one set must read on Carto's light
+  basemap (land about #FAFAF8, water #D4DADC) and on its filtered dark form
+  (land about #101011, water #282D2F). Validated with the dataviz skill's
+  `validate_palette.js`, all pairs, on all four surfaces: normal-vision
+  floor 27.1 (target 15), worst colour-blind pair 13.7 deutan / 17.0 tritan
+  (target 8); contrast on land 3.5-5.2 in both modes; below 3:1 only over
+  water (2.6-2.7), as today's teal already is, relieved by each dot's white
+  ring, its name pill and the text legend. #C2410C sits 58.2 from the amber
+  selection highlight.
+  - Rejected: every palette with a grey tier (slate #64748B, stone #78716C),
+    which failed the normal-vision floor against the teal (11.0, 12.1) and
+    colour-blind separation (5.0-5.3); rose #E11D48, which reads as a status
+    colour; orange #EA580C, nearer the amber highlight (52.4).
+- **No sizing by storefront count (owner)**: bigger dots would swallow
+  neighbours and break the labels `check_macro_labels.py` has scored. The
+  tooltip carries the count instead, with placement precision and data age.
+- Each city's tier becomes a `cities.py` field backed by a check. The per-city
+  list goes to the owner before any `app/` change; the change itself lands
+  at review time. `PLAN.md`.
 
 ### 2026-09-28 - Band T's EDGE cities grouped at its top; Band T below Band N (owner)
 
