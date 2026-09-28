@@ -19,8 +19,10 @@ changed `app/components.py`.
 **Deploys are batched (owner, 2026-09-27).** A finished `app/` change waits on
 its branch until the owner calls "review time". Everything queued then lands in
 one push, with one reboot and one live check. Only a broken live site or a
-removal request goes out on its own. Why:
-`docs/efficiency_review_2026-09-27.md`, change 2.
+removal request goes out on its own. `deploy-verify` runs once per batch, at
+review time; during the day a session checks its own `app/` change with at most
+one quick browser render. The whole process is in
+`docs/review_time.md`. Why: `docs/efficiency_review_2026-09-27.md`, change 2.
 
 **Renderer changes batch the same way.** This covers `map_common.py`,
 `theme.py`, `linecolour.py` and the shared blocks. Iterate on 3-5 sample maps
