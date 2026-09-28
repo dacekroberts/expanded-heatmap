@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**412 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**413 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Process efficiency review: batch approvals first, then trim what loads, then archive DECISIONS by month (owner)](#2026-09-27---process-efficiency-review-batch-approvals-first-then-trim-what-loads-then-archive-decisions-by-month-owner)
 - [Session loose ends closed (owner): Riga on JSON.parse, the main checkout current, UTF-8 output in two tools, and the Czech coordinate control per city](#2026-09-27---session-loose-ends-closed-owner-riga-on-jsonparse-the-main-checkout-current-utf-8-output-in-two-tools-and-the-czech-coordinate-control-per-city)
 - [Daegu's and Busan's licences read: Busan permitted with a credit, Daegu on a reasoned position after the national route failed (owner)](#2026-09-27---daegus-and-busans-licences-read-busan-permitted-with-a-credit-daegu-on-a-reasoned-position-after-the-national-route-failed-owner)
 - [Wave-1 second-city screens banded: 43 candidates added, 32 of them trams-only; edge networks stay in T, Band C widened (owner)](#2026-09-27---wave-1-second-city-screens-banded-43-candidates-added-32-of-them-trams-only-edge-networks-stay-in-t-band-c-widened-owner)
@@ -460,6 +461,34 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Process efficiency review: batch approvals first, then trim what loads, then archive DECISIONS by month (owner)
+
+- **The owner chose the order: change 2 (one approval review a day and one
+  `app/` push per batch) first, change 3 (trim what every session loads)
+  second, and for change 1 only DECISIONS.md archived by month.** How many
+  sessions run at once was left as a separate decision.
+  - **Source.** The PLAN.md item "An honest efficiency review" was run as one
+    read-only `cleanup-sweep` agent (`scope: review`) on `8f9d118`. Its window
+    was 2026-09-21 to 09-25: 593 non-merge commits and 160 merges. The seven
+    findings, the agent's top three changes and the refreshed starting figures
+    are kept in `docs/efficiency_review_2026-09-27.md`.
+  - **Checked against git.** Word counts for CLAUDE.md (4,345), DECISIONS.md
+    (222,930) and PLAN.md (20,502) matched exactly. A re-count found 159
+    merges since 09-21, of which 110-129 were catch-ups of `origin/master`
+    depending on how they are counted; the agent counted 104.
+  - **Why change 2 first.** It needs no code and has the largest saving the
+    owner controls directly. On 09-21 to 09-25, `app/` landed on master 9-25
+    times a day, each landing a deploy and most of them a reboot.
+  - **Why only half of change 1.** One file per entry was rejected because
+    `scripts/merge_append_only.py`, `scripts/decisions_index.py` and the
+    `decisions-entry` skill all depend on the single file. Archiving by month
+    shrinks what gets read and merged, and breaks none of them.
+  - **The savings are rankings, not forecasts.** They are in "token-reads"
+    (one full re-read of an assumed 300k-token context), which overstates
+    cost because cached context is cheap. Finding 7, that the weekly limit ran
+    out on 09-26, is inferred from there being no commits that day; nothing
+    records it.
 
 ### 2026-09-27 - Session loose ends closed (owner): Riga on JSON.parse, the main checkout current, UTF-8 output in two tools, and the Czech coordinate control per city
 

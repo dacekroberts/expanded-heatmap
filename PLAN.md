@@ -1046,8 +1046,19 @@ brief names.
     confirmed it is done.
   - `plan-trim`: sort `check_plan_done.py` candidates into removable and keep, with reasons.
   - Possibly `review`, for the efficiency review below.
-- [ ] **An honest efficiency review of the whole PROCESS, the owner's habits included (owner,
-  2026-09-24)** - only if the week's budget allows, at the start of a week, as ONE agent in
+- [x] **An honest efficiency review of the whole PROCESS, the owner's habits included (owner,
+  2026-09-24)** DONE 2026-09-27: findings in `docs/efficiency_review_2026-09-27.md`, the
+  owner's order in DECISIONS (2026-09-27). Follow-ups, in that order:
+  - [ ] **Change 2 - batch approvals and deploys.** One owner approval review a day for
+    wording, labels and renderer changes, and one `app/` push per batch under one reboot.
+    Owner habit; no code needed.
+  - [ ] **Change 3 - trim what every session loads.** CLAUDE.md toward ~1,500 words (incident
+    history to skills/DECISIONS), a DECISIONS index of the last 7 days, a `plan-trim` pass,
+    `check_all.py` as a pre-push hook. Draft each cut for the owner before writing.
+  - [ ] **Change 1, half - archive DECISIONS.md by month.** Keep `merge_append_only.py`,
+    `decisions_index.py` and the `decisions-entry` skill working. The session count is a
+    separate owner decision.
+  - Original item, kept for its method: only if the week's budget allows, at the start of a week, as ONE agent in
   its own context. Not a code review: how work gets done, verified, approved and shipped.
   - Evidence, not impressions: git history (`git log --since`, merge counts, files rewritten
     per day), the size of what every session loads, DECISIONS' index (never the whole file),
