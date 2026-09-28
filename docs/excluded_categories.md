@@ -59,8 +59,8 @@ GTX-A in Seoul.
 
 **Trams are NOT excluded as a class. A tram is drawn where it is the
 rapid-transit system, or where it reaches districts the metro does not; it is
-left out where it only runs over the top of a metro.** Many of these maps draw light rail
-- San Diego, San Francisco, Los Angeles, Edmonton, Calgary, Miami and Dublin
+left out where it only runs over the top of a metro.** Many of these maps draw light rail -
+San Diego, San Francisco, Los Angeles, Edmonton, Calgary, Miami and Dublin
 among them - Marseille draws its three Tramway lines beside its two Métro
 lines, and Toulouse draws T1 beside Métro A and B. Where a tram network is left
 out, the city already has a metro and the trams run over the top of it: Milan's
@@ -1046,8 +1046,8 @@ verdict was re-measured rather than inherited: the two cities' compositions
 differ, which is why the shares were counted for Marseille instead of Paris's
 being assumed.
 
-**The gap against OpenStreetMap is wider here - about 2.6 times as many points
-- and most of that is not the register.** OpenStreetMap covers Marseille far
+**The gap against OpenStreetMap is wider here - about 2.6 times as many points -
+and most of that is not the register.** OpenStreetMap covers Marseille far
 less completely than it covers Paris. On restaurants, where the two schemes
 mean nearly the same thing, the ratio falls to **1.7×**, close to Paris's 1.8×,
 which is the comparison worth trusting.
@@ -1878,8 +1878,8 @@ against 13,385 food service and 4,042 personal services. So
 **read Toronto's Retail layer as a narrow regulated slice of what is actually
 on the street, and the balance between its three categories as a fact about
 Toronto's licensing rather than about its high streets.** This is
-`multi-source-city`'s "Retail - regulated slice" archetype, and unlike New York
-- whose four registries at least covered all three buckets thinly - there is no
+`multi-source-city`'s "Retail - regulated slice" archetype, and unlike New York -
+whose four registries at least covered all three buckets thinly - there is no
 second source at any level of government that would fill Toronto's gap.
 
 **The bucket is drawn rather than omitted**, decided by the owner on

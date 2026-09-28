@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**56 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**57 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
@@ -80,6 +80,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Toronto's retail share settled (Q18): EC quotes the pins the map draws, 759 of 18,186 (owner-approved wording)](#2026-09-27---torontos-retail-share-settled-q18-ec-quotes-the-pins-the-map-draws-759-of-18186-owner-approved-wording)
 - [Toronto's per-category retail counts now come from the drawn pins and sum to 759 (owner-approved wording)](#2026-09-27---torontos-per-category-retail-counts-now-come-from-the-drawn-pins-and-sum-to-759-owner-approved-wording)
 - [Four small probes: Wirye Line not open, Cablebús L3 has 6 stations, the KC streetcar runs every 10 minutes, Incheon's coordinates need an application](#2026-09-27---four-small-probes-wirye-line-not-open-cablebús-l3-has-6-stations-the-kc-streetcar-runs-every-10-minutes-incheons-coordinates-need-an-application)
+- [Review-time batch published: Kobe, the tram rescope of five cities and Toronto's retail wording, in one push under one reboot](#2026-09-27---review-time-batch-published-kobe-the-tram-rescope-of-five-cities-and-torontos-retail-wording-in-one-push-under-one-reboot)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -2201,3 +2202,49 @@ Recorded by the cleanup session from the Main Building Session's findings of
   parser's. **What moves it is the owner's act** (the application) or an
   unprobed two-hop through 건물DB's parcel ids. Its health-food list holds
   apartment-unit addresses, a privacy filter for any build.
+
+### 2026-09-27 - Review-time batch published: Kobe, the tram rescope of five cities and Toronto's retail wording, in one push under one reboot
+
+- **Called by the owner.** Three items landed:
+  - Toronto's EC wording, pushed first on its own (da14c1e). It is docs
+    only, read fresh on each page load, so it needed no reboot.
+  - `worktree-kobe` (843929c).
+  - `worktree-trams` (a66629b).
+
+  The last two were merged into `worktree-cleanup` as real merges and go
+  out in ONE push, under the batch rule in `docs/review_time.md`. The Tram
+  rescopes session had planned to land its own branch; it was asked not to.
+- **Gate (`publish-city`), all green:**
+  - no-fetch check: pass;
+  - `drift_check`: zero drift for Kobe (run by the Kobe session) and for
+    Montréal, Rome, Madrid, Paris and San Francisco (run by the Tram
+    rescopes session). The data sat in their worktrees;
+  - `check_personal_exposure kobe`: its Japan pass shows 0 operators' own
+    names used as trade names. Nobody read a sample of the CJK names by eye,
+    as the Kobe entry records;
+  - `check_provenance` and `check_inconsistency_list`: 50 cities;
+  - `brief_check kobe`: 4 of 4 claims hold;
+  - `check_all`: 19 of 19 on the combined commit;
+  - `check_deploy_imports` on be2e371: PROBLEMS 0.
+- **`deploy-verify`, scope `city-added`:** covered Kobe, the five
+  rescoped cities, the Overview, What Is Excluded, and Chicago as the
+  control. Nothing failed.
+  - Zoom, labels and legend entries pass at four widths, and the OSM credit
+    at three heights.
+  - All three new or amended credits show.
+  - Kobe is on the macro map and in the switcher, and Taoyuan's label is
+    clear.
+- **Conflicts:**
+  - `DECISIONS.md` conflicted three times, each resolved with
+    `merge_append_only.py`.
+  - `docs/data_sources.md`: both branches had numbered their new notice 50.
+    Kobe keeps 50; the REM was renumbered 51 on its branch before the merge,
+    and both are kept.
+  - `app/components.py` merged on its own and holds all three credits.
+- **Fixed during the review:** three dashes in
+  `docs/excluded_categories.md` sat at the start of a line and rendered as
+  stray bullets, at lines 63, 1050 and 1882. Each dash moved up a line, with
+  no wording change. A check for this shape is in PLAN.md.
+- **Reboot required** (owner's action): this push changes `app/cities.py`
+  and `app/components.py`. The live check, including one untouched city,
+  follows the reboot.

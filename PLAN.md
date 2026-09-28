@@ -390,8 +390,14 @@ brief names.
   - Deliverable, drafted for the owner: a ranked list (finding, evidence, estimated saving,
     whose habit - owner, session or structure), the top three changes, and a rough weekly
     saving for each. The owner decides.
-- [ ] **Land branch `review-toronto-q18` at review time** (Q18's EC wording, owner-approved
-  2026-09-27; the app renders `docs/excluded_categories.md`). Delete the branch after.
+- [ ] **A check for dashes that render as bullets** (cleanup): a line in an app-rendered doc
+  that starts `- ` mid-paragraph renders as a stray bullet. `deploy-verify` found three in
+  `docs/excluded_categories.md` on 2026-09-27 (fixed by moving the dash up a line).
+- [ ] **`check_master_list_counts_selftest.py` picks its target row from the live table**
+  (cleanup): a fixed target ("Ottawa", then "Bergen") breaks whenever that country's row
+  changes; Staging had to re-aim it on 2026-09-27 (e56c471).
+- [ ] **Madrid at 343 px:** "Línea 5" and "Ramal Ópera–Príncipe Pío" label boxes touch at one
+  corner (~0.5 px; both readable). Predates the tram batch. Cosmetic.
 
 **Not ready for main:**
 - **Band C (7)** — one owner decision moves all seven: does a single-bucket
