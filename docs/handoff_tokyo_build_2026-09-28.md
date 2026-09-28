@@ -19,7 +19,8 @@ handoff (`docs/handoff_staging_2026-09-28.md`). **Delete a section when done.**
 - **Passed on it:** zero drift in all 54 cities; `check_all.py` 22 of 22 (with
   the new `check_macro_facts.py`); `check_deploy_imports.py` clean; privacy 0
   operator names shown in all three cities; provenance names all three OK;
-  briefs Sapporo 5/5, Fukuoka 4/4, Kyoto 8/8; notices 53, 54, 55 unique;
+  briefs Sapporo 5/5, Fukuoka 4/4, Kyoto 8/8; the three cities' new credit
+  numbers unique (none shared, unlike the batch before);
   `check_city_registry.py` and `check_macro_labels.py` clean; master list
   counts: 54 built, A 1 · B 4 · D 10 · N 4 · T 51 = 70.
 - **NOT done: the `deploy-verify` (`scope: full`).** It was cut off twice by
