@@ -1610,6 +1610,38 @@ in Gyeongsan are left out. Not drawn: the Daegyeong Line (대경선), a Korail c
 stops in Daegu are about 4 km apart, and intercity trains. Seodaegu, served only by the
 Daegyeong Line, has no ring.
 
+### Busan - Korea's permit registers, as Seoul's, frozen at 15 April 2026
+
+**Missing, not excluded.** Korea licenses food service, the personal-care trades and a set of
+food and tobacco retail trades, not retail in general: a clothes shop, a bookshop or a phone
+shop holds none of these permits, so the Retail category leans towards food and convenience
+stores.
+
+**Left out** - hostess bars and cabarets (유흥주점, the adult-services rule); lodging (숙박업) and
+veterinary clinics (동물병원), which are not read; food trucks, caterers and mobile cooking;
+wholesale meat, milk and egg traders and meat importers (every 축산판매업 channel but butchers);
+health-food sellers who trade online, door to door or by phone (every 건강기능식품 channel but
+in-store); closed, suspended and cancelled permits.
+
+**Counted once** - a premises holding several permits at one building: retail by brand for
+the five convenience-store chains and by name otherwise (22,571 retail permits to 20,140
+premises), food and personal services by name.
+
+**Not placed** - 810 open permits with no point of their own and none at their building
+(279 food, 468 retail, 63 personal services).
+
+**Names withheld** - 114 premises whose registered name is a bare personal name at an
+address that reads as a home. The telephone field is never read.
+
+**Dated** - the city's feed stopped updating on 15 April 2026, when the national licensing data
+moved to a new service; permits granted or closed after early April 2026 are not shown.
+
+**Stations.** Lines 1–4 and the Busan–Gimhae LRT are drawn, with stations inside Busan only: 5
+stations of Line 2 in Yangsan and 12 of the LRT in Gimhae are left out. Not drawn: the Donghae
+Line (동해선), a Korail commuter line whose stops in Busan are about 2.3 km apart, and intercity
+trains. Ten stations served only by the Donghae Line, from Centum and Sinhaeundae to Gijang and
+Ilgwang, have no ring.
+
 ### Taichung - Taiwan's national tax register, joined to the city's door plates
 
 **Left out** - online shopping (industry code 487); every industry outside retail, food service

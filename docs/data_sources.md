@@ -3285,6 +3285,19 @@ Seoul's describe-the-changes line and a non-endorsement line. Wording approved b
 2026-09-27. **MUST DO:** `check_personal_exposure.py daegu`, run 2026-09-27 (the verdict is in
 `DECISIONS.md`). **If Daegu objects, the page comes down.**
 
+**49. Busan Metropolitan City (Busan) — required, and DISPLAYED.**
+
+**PERMITTED WITH CONDITIONS** (read 2026-09-27; the reasoning is under "Daegu and Busan"
+above): a reasonable source credit under the portal's own 공공데이터 이용정책 (저작권법 제37조, no
+wording prescribed), and good-faith use. The terms' 제14조 is read as covering only works the
+platform itself authored (owner-accepted). The credit names the Ministry's local-government
+licensing data as the source, Big-데이터웨이브 (linked) and its 구군 인허가포털 Open API as the
+channel, the fourteen permit types and **the frozen snapshot's date (2026-04-15)**, with Seoul's
+describe-the-changes line and a non-endorsement line. Wording approved by the owner 2026-09-27.
+**MUST DO:** never read or publish `sitetel` (asserted in step 2);
+`check_personal_exposure.py busan`, run 2026-09-27 (the verdict is in `DECISIONS.md`). Any
+objection from Busan is honoured, not argued.
+
 What has grown instead is the pile of **permission questions**, now four: three
 "what does silence mean?" calls and the route-colour one. They are questions
 about permission rather than implementation, and they are the only items of

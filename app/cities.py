@@ -983,9 +983,23 @@ CITIES = [
         "region": "East Asia",
         "country": "South Korea",
         "in_default_view": False,
-        # Below the dot: above it, the pill covers Seoul's marker in East
-        # Asia at all three widths (check_macro_labels.py, width 42.9 px
-        # measured 2026-09-27).
+        # Left of the dot (width 42.9 px, measured 2026-09-27): above it, the
+        # pill covers Seoul's marker in East Asia; below it, it grazes Busan's.
+        "label_offset": ("end", -14, 0),
+    },
+    {
+        "name": "Busan",
+        "lat": 35.1796,
+        "lon": 129.0756,
+        "page": "pages/49_Busan_Heatmap.py",
+        "blurb": "Busan Metro Lines 1–4 and the Busan–Gimhae LRT",
+        "region": "East Asia",
+        "country": "South Korea",
+        "in_default_view": False,
+        # Below the dot, away from Daegu to the north-west (width 41.9 px,
+        # measured 2026-09-27): above it, Busan's pill grazed Daegu's marker,
+        # and to its right the two pills overlapped (check_macro_labels.py
+        # --verbose). With Daegu's label to its left, neither grazes.
         "label_offset": ("middle", 0, 22),
     },
 ]

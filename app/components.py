@@ -1068,6 +1068,23 @@ _NOTICES = [
      "categories and counts are this project's own, not figures published by Daegu Metropolitan "
      "City, which does not sponsor or endorse this map.",
      False),
+    # Busan: PERMITTED WITH CONDITIONS - a reasonable source credit (the portal's
+    # policy; 저작권법 제37조), no wording prescribed. The licence read's credit:
+    # Big-데이터웨이브 (linked) as the channel, the Ministry's local-government
+    # licence data as the source, and the snapshot date. Wording approved by the
+    # owner 2026-09-27.
+    ("Busan Metropolitan City",
+     "Busan's storefronts are from the local-government licensing data (지방행정 인허가데이터) of "
+     "the Ministry of the Interior and Safety (행정안전부), served by Busan Metropolitan City's "
+     "Big-데이터웨이브 ([data.busan.go.kr](https://data.busan.go.kr)) through its 구군 인허가포털 "
+     "Open API: 일반음식점, 휴게음식점, 단란주점영업, 미용업, 이용업, 세탁업, 목욕장업, 제과점영업, "
+     "즉석판매제조가공업, 식품판매업(기타), 축산판매업, 담배소매업, 대규모점포 and 건강기능식품일반판매업, as "
+     "last updated on 2026-04-15. Modified by this project: open premises were selected, sorted "
+     "into three categories, counted once per building, placed at their building (or at another "
+     "permit's location at the same address where a permit has none) and counted around subway "
+     "stations. The categories and counts are this project's own, not figures published by Busan "
+     "Metropolitan City or the Ministry, neither of which sponsors or endorses this map.",
+     False),
     # Taiwan: every source is OGDL v1 (read 2026-09-23 and 2026-09-25), whose
     # attribution statement is LOAD-BEARING - without it the grant is deemed never
     # made (§三(二)) - in the annex's prescribed form. The FIA's own declaration
