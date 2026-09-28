@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**99 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**100 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Berlin from the discards to Band B: shops and food on IHK Berlin's register (owner)](#2026-09-28---berlin-from-the-discards-to-band-b-shops-and-food-on-ihk-berlins-register-owner)
 - [German screen from the large-transit gap: Munich, Frankfurt and Cologne discarded; Berlin's register found (owner)](#2026-09-28---german-screen-from-the-large-transit-gap-munich-frankfurt-and-cologne-discarded-berlins-register-found-owner)
 - [Crash 2: the rewritten census control measured at 0.28 GB; the cause stays unproven](#2026-09-28---crash-2-the-rewritten-census-control-measured-at-028-gb-the-cause-stays-unproven)
 - [Istanbul's second look run: Band N, pharmacies and opticians only (owner)](#2026-09-28---istanbuls-second-look-run-band-n-pharmacies-and-opticians-only-owner)
@@ -135,6 +136,23 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Berlin from the discards to Band B: shops and food on IHK Berlin's register (owner)
+
+- **Moved Berlin from the discards to Band B (owner's call), a narrower page
+  of shops and food with personal services disclosed as missing.** The
+  evidence is in the German screen's entry below: IHK Berlin's Gewerbedaten
+  has 367,575 per-premises points (CC0 / dl-de/zero-2.0, monthly), and
+  storefront counts run at 1.18–1.47× OSM for food and 1.18–1.40× for shops
+  at four station boxes. Hairdressers and laundries belong to the crafts
+  chamber, which publishes nothing. Band A was rejected: the register's
+  licence has had no `licence-read`, and no taxonomy module exists yet for
+  the WZ subclasses (restaurants are 5611). Before a build: that read, the
+  module, `check_personal_exposure.py` (46–59% of storefront entries report
+  0 employees) and the rail shape. The master list went 73 → 74 candidates
+  (B 5 → 6) and 84 → 83 discards. Files: `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - German screen from the large-transit gap: Munich, Frankfurt and Cologne discarded; Berlin's register found (owner)
 
