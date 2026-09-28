@@ -69,9 +69,9 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   "retail without bakeries" call fell away when Staging found the three files
   on later pages of the listing (24dc747).
 - **Counts (the drift baseline, `outputs/daegu/baseline.json`, 36
-  figures).** 14 registers, 67,660 open rows, 64,219 bucketed. Placement:
-  63,358 on their own point, 191 by road address and 74 by lot address from
-  another permit at the same building, 596 unplaced (0.9%), 8 outside the
+  figures).** 14 registers, 73,619 open rows, 70,177 bucketed. Placement:
+  69,283 on their own point, 204 by road address and 78 by lot address from
+  another permit at the same building, 612 unplaced (0.9%), 8 outside the
   sanity box. The control (own point against its building's donor point) is
   0 m at the median, 90th and 99th percentiles. One pin per premises: Food
   service 38,656 -> **38,468**, Retail 18,400 -> **16,269** (2,194

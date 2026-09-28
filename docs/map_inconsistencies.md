@@ -423,7 +423,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Riga | Address join to the city's address points (96.8%); building footprints (99.4%) | Food a lower bound (licensed premises only); shops an upper bound (vacancy measured only in the centre) | Holder never read and unit numbers dropped (owner); 412 shops in degrading buildings |
 | **South Korea** | | | |
 | Seoul | Source building points, gaps filled from other permits at the same building (98% placed; 4,875 unplaced) | Retail thin (licensed trades only) | Lodging, vets, hostess bars, food trucks, wholesale and online sellers; 138 personal names withheld; phone never read |
-| Daegu | Source building points, gaps filled from other permits at the same building (99% placed; 596 unplaced) | Retail thin (licensed trades only) | Lodging, vets, hostess bars, food trucks, wholesale and online sellers; 113 personal names withheld; phone never read; health-food addresses masked by the publisher |
+| Daegu | Source building points, gaps filled from other permits at the same building (99% placed; 612 unplaced) | Retail thin (licensed trades only) | Lodging, vets, hostess bars, food trucks, wholesale and online sellers; 113 personal names withheld; phone never read; health-food addresses masked by the publisher |
 | **Taiwan** | | | |
 | Taichung | Address join to the city's door plates (92.2%; 5,599 unplaced) | Stalls unplaced; a department store is one point | Online shopping; office-like head offices; unmarked sole proprietors shown by industry |
 | Taoyuan | Address join to the city's door plates (93.6%; 3,097 unplaced) | Stalls and rural addresses unplaced | Online shopping; office-like head offices; unmarked sole proprietors shown by industry |
