@@ -30,8 +30,8 @@ This session builds Tokyo, then carries the BUILD role (section 7).
 - **Tokyo LANDED on master at `80a7a76`** (review time, 2026-09-28): 63,989
   storefronts, 490 stations (293 hollow), 52 lines labelled by line code.
   deploy-verify (`city-added`) found the legend covering 5 labels at the 1000 px
-  frame; fixed and re-checked before the push. **Open: the owner's reboot, then
-  the live check** (the Tokyo page, the macro map, one untouched city). What it
+  frame; fixed and re-checked before the push. **Rebooted and checked live**
+  (Tokyo and untouched Amsterdam, 2026-09-28). What it
   built and decided: DECISIONS 2026-09-28, the "Tokyo" entries; what it left
   the next city: the `japan-city` skill's Tokyo sheet. PLAN: Tokyo's page
   scrolls sideways on a phone (its table), for the next `app/` batch.

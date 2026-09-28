@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**109 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**110 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Tokyo live after the owner's reboot, checked on the live URL](#2026-09-28---tokyo-live-after-the-owners-reboot-checked-on-the-live-url)
 - [Tokyo landed on master; the build queue wiped for two new frontrunners, Berlin then London (owner)](#2026-09-28---tokyo-landed-on-master-the-build-queue-wiped-for-two-new-frontrunners-berlin-then-london-owner)
 - [Tokyo's review time: deploy-verify (city-added) found the legend covering 5 labels at the 1000 px frame; fixed, re-checked, published (owner)](#2026-09-28---tokyos-review-time-deploy-verify-city-added-found-the-legend-covering-5-labels-at-the-1000-px-frame-fixed-re-checked-published-owner)
 - [Berlin from the discards to Band B: shops and food on IHK Berlin's register (owner)](#2026-09-28---berlin-from-the-discards-to-band-b-shops-and-food-on-ihk-berlins-register-owner)
@@ -145,6 +146,16 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Tokyo live after the owner's reboot, checked on the live URL
+
+- **The owner rebooted the app after `80a7a76`.** On the live URL: the Tokyo
+  page renders its title, the ward-share table (Shibuya 100.8% to Koto 9.3%),
+  notice 56 and the map with all 52 line-code labels, no error block (this
+  session). Cleanup's check, the same hour: Tokyo opens at zoom 11 against 11
+  expected with no guard correction, 563 markers, the OSM credit present;
+  Amsterdam, untouched, at 12 against 12, credit present; the front page
+  counts Global (55). Japan's six cities are all live.
 
 ### 2026-09-28 - Tokyo landed on master; the build queue wiped for two new frontrunners, Berlin then London (owner)
 
