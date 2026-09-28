@@ -59,6 +59,22 @@ was not chosen, because `merge_append_only.py`, `decisions_index.py` and the
 | `heatmap.html` rewrites on 09-24 | 286 | 288 |
 | Skills / agents / `check_*` scripts | 16 / 2 / 17 | 17 / 3 / 24 |
 
+## Measuring progress
+
+`python scripts/efficiency_metrics.py --baseline` re-takes the review's numbers
+the same way every time, for any window. Its baseline for 2026-09-21 to 09-25
+(committer dates, so slightly different from the agent's hand count):
+
+| Measure | 09-21 to 09-25 |
+|---|---|
+| Non-merge commits | 645 |
+| Merges / catch-up merges | 155 / 107 |
+| `app/` landings on master | 76 (15.2 a day) |
+| Mass re-renders (20+ maps) | 13 |
+| Share of commits touching only `.md` | 55% |
+
+The owner decides the number of parallel sessions after seeing these move.
+
 PLAN.md's claim that DECISIONS.md "conflicts on every two-session push" is
 only partly supported. 59 landing merges touched it, but only 8 merge
 messages mention a conflict.

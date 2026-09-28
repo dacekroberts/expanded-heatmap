@@ -12,7 +12,7 @@ across four countries and most of what the skill had learned since came from
 the later ones. **Read `app/cities.py` for the current list.** Every step below
 either caught a real problem or is a design decision already made (see `docs/project_context.md`; the reasoning
 trail is in `DECISIONS.md`). If this is a fresh session, read those, plus
-`docs/city_shortlist.md` and `PLAN.md`, first.
+`docs/city_master_list.md` and `PLAN.md`, first.
 
 ## Adding a EUROPEAN city? Its region is `Europe`, and that is not negotiable
 
@@ -143,15 +143,18 @@ schema verification. Do this for every candidate before scaffolding:
    plausibly crosses municipal borders.
 
 Only proceed once all three are confirmed live. If a city fails, record the
-real reason (cite the endpoint and response) in `docs/city_shortlist.md` and
-a `DECISIONS.md` entry, and move to the next candidate.
+real reason (cite the endpoint and response) as a row in the DISCARDED table
+of `docs/city_master_list.md`, whose evidence columns
+`scripts/check_discard_evidence.py` reads, and in a `DECISIONS.md` entry.
+Then move to the next candidate.
 
 **Give every probe an explicit output path under the session scratchpad.** The
 commands above are `curl`/`requests` dumps, and `-o la.json` writes wherever
 the shell happens to be: the 2026-09-18 screening left eight captures in the
 home directory, including a saved 404 and a file named `.json` that was HTML.
 Write probe output to the scratchpad (or a gitignored `data/<city>/raw/`), and
-put the *findings* in `docs/data_sources.md` and `docs/city_shortlist.md` - a
+put the *findings* in `docs/data_sources.md`, the city's
+`docs/build_briefs/<city>.md` and its row in `docs/city_master_list.md` - a
 raw capture is not a record, and it goes stale the moment the endpoint changes.
 
 **Record every confirmed source in `docs/data_sources.md` as you verify it** -
@@ -625,7 +628,9 @@ clicking each marker opens its page, each switcher works, each map renders).
   alternative, workarounds (a mirror host, a hand-curated alias list), and
   known limitations. Counts go there, not in `project_context.md`.
 - Update `docs/project_context.md` (current state only - which cities exist,
-  what's distinctive; no counts), `docs/city_shortlist.md`, and tick or add
+  what's distinctive; no counts), `docs/city_master_list.md` (the Built
+  table, and the city's band row; `scripts/check_master_list_counts.py`
+  checks the counts), and tick or add
   items in `PLAN.md`.
 - **Add the city to `docs/map_inconsistencies.md`**: one row in each of its
   four tables, under its country, from the city's page, config and outputs;

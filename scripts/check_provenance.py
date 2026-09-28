@@ -528,8 +528,11 @@ def check_cited_outputs():
     return problems
 
 
+# The evidence file holds tables moved out of the master list on 2026-09-27;
+# they were checked here before the move and still are.
 TABLE_DOCS = ("docs/data_sources.md", "docs/excluded_categories.md",
-              "docs/city_master_list.md", "docs/session_roles.md")
+              "docs/city_master_list.md", "docs/city_master_list_evidence.md",
+              "docs/session_roles.md")
 
 
 def check_tables():

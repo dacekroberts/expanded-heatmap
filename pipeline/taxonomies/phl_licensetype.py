@@ -20,7 +20,8 @@ per-licence lookup with no bulk export. So Personal services is **absent, not
 thin** - there is no source to add. That is a fact about Philadelphia's
 licensing, and the city page and docs/excluded_categories.md say so under what
 is *missing* rather than *excluded*, because everything else was a choice and
-this was not. See docs/city_shortlist.md and the `multi-source-city` skill,
+this was not. See docs/decisions/2026-09-20.md (Philadelphia, 2026-09-21)
+and the `multi-source-city` skill,
 whose Step 2 archetypes all failed here.
 
 Two findings from hand-sampling that a licence type's NAME does not give you,

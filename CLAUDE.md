@@ -3,16 +3,17 @@
 Multi-city map of commercial density around rapid-transit stations. Read
 `docs/project_context.md` first - it is the stable briefing (what's settled,
 architecture, current state, lessons). `PLAN.md` is the open work,
-`DECISIONS.md` the append-only reasoning trail, `docs/city_shortlist.md`
-the city research. **How each rule below was learned is in
+`DECISIONS.md` the append-only reasoning trail, `docs/city_master_list.md`
+the city list. **How each rule below was learned is in
 `docs/rule_history.md`, at the anchor in brackets** - read it before relaxing
 a rule, not before obeying one.
 
 ## Where to start
 
 - Picking the next city -> `docs/city_master_list.md` (read counts there, never
-  repeat them here); its evidence trail, `docs/global_country_shortlist.md`,
-  wins when they disagree. [#master-list]
+  repeat them here; `check_master_list_counts.py` enforces them, and closed
+  bands live in `city_master_list_evidence.md`); its evidence trail,
+  `docs/global_country_shortlist.md`, wins when they disagree. [#master-list]
 - First city in a new country -> `add-country`, then
   `docs/mexico_retrospective.md` (one national register) or
   `docs/spain_retrospective.md` (bespoke per city; also read it before trusting
@@ -138,15 +139,18 @@ a rule, not before obeying one.
   deploying; compute the reboot question from the WHOLE push's `app/` diff. [#publish-city]
 - **Reading a source's terms? The `licence-read` agent** - one source per call,
   out of the main conversation. [#licence-read]
-- **Verify app changes with the `deploy-verify` agent**, and **always state a
-  scope**: `city-added`, `map-chrome`, `app-deps` or `full` (`full` only before
-  a real deploy or for a backlog). Skip it for pipeline-only work and doc
+- **Verify app changes with the `deploy-verify` agent - once per batch, at
+  review time** (`docs/review_time.md`); during the day a session checks its
+  own `app/` change with at most one quick browser render. **Always state a
+  scope**: `city-added`, `map-chrome`, `app-deps` or `full` (`full` for a large
+  batch). Approvals, `app/` landings and full re-renders also wait for review
+  time, which only the owner calls. Skip it for pipeline-only work and doc
   edits: `drift_check.py`, a grep of `app/` for folium/geopandas/shapely/pyproj
   imports, and one browser render cover those. [#deploy-verify]
 - **Write probe and scratch output to the session scratchpad directory, never
   to the working directory or the home directory** - an explicit path, or a
   gitignored `data/<city>/raw/`. Never commit it; findings go in
-  `docs/data_sources.md` and `docs/city_shortlist.md`. [#scratch]
+  `docs/data_sources.md` and `docs/city_master_list.md`. [#scratch]
 - Draft interpretive prose in chat before writing it to a file.
 - **A backslash or a backtick never goes into a Bash command. Write the
   content to a file with the Write tool and run the file.** Escapes, not

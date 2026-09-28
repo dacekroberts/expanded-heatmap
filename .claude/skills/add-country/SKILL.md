@@ -760,7 +760,10 @@ prescribed their own.
    `data_sources.md`'s numbered gate when a city is committed - not before, so
    the deploy gate stays a list of things that actually apply.
 5. **A `DECISIONS.md` entry** with the ranking and its evidence.
-6. **`docs/city_shortlist.md`** gains the country's section.
+6. **`docs/city_master_list.md`** gains the country's cities, each in one band
+   or in DISCARDED; the evidence behind them goes in
+   `docs/global_country_shortlist.md`. (`docs/city_shortlist.md` was retired
+   2026-09-27.)
 
 ## Rank ALSO on cost per marginal city - it decides how far a budget goes
 
