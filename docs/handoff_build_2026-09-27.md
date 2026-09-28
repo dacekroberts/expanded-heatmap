@@ -13,6 +13,8 @@ than adding an addendum.
 - **`data/` in this worktree is a JUNCTION** to the main checkout's `data/`,
   where Monterrey's raw files live. Remove a junction only with
   `[System.IO.Directory]::Delete(path, $false)`, never recursively.
+  `git status` shows it as `?? data/`. That is the junction, not uncommitted
+  work: never stage it.
   `.venv-lean` is NOT linked yet: link it the same way before
   `check_deploy_imports.py` or `deploy-verify`.
 - **A temporary `monterrey-static-tmp` entry** (port 8823) in the MAIN
