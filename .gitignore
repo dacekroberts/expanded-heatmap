@@ -19,6 +19,11 @@ venv/
 # committed (see docs/project_context.md, "Architecture").
 data/*/raw/
 data/*/processed/
+# A folder in data/ whose name starts with "_" is local-only: a session's
+# durable scratch copy, for example data/_staging_scratch_2026-09-27/ (285 MB
+# of licence pages and API captures). Found untracked, and not ignored, in four
+# checkouts on 2026-09-27, one `git add -A` away from being committed.
+data/_*/
 
 # outputs/<city>/ IS committed - the deployed app only ever reads from
 # there, per the pipeline/app split.

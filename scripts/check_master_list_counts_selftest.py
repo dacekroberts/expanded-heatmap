@@ -1,4 +1,4 @@
-"""Watch scripts/check_master_list_counts.py fail, thirteen ways.
+"""Watch scripts/check_master_list_counts.py fail, seventeen ways.
 
     python scripts/check_master_list_counts_selftest.py
 
@@ -107,6 +107,20 @@ CASES = [
 
     ("a sub-group count drifted (France, +1)",
      bump(r"\*\*🇫🇷 France \((\d+)\)\*\*", "the table below it has {old} rows"), None),
+
+    ("by country: a row's Candidates figure drifted",
+     bump(r"^\| 🇨🇦 Canada \| \*\*\d+\*\* \| \*\*(\d+)\*\*", "the Candidates column sums to"),
+     None),
+
+    ("by country: a row's Built figure disagrees with the Built table",
+     bump(r"^\| 🇨🇦 Canada \| \*\*(\d+)\*\*", "says {new} built, the Built table lists {old}"),
+     None),
+
+    ("by country: the Total row's band figure drifted",
+     bump(r"^\| \*\*Total\*\*.*· C (\d+) ·", "the Total row says C {new}"), None),
+
+    ("by country: a named city is not in the band its row lists",
+     swap("| **1** — Ottawa | C |", "| **1** — Ottawa | T |"), "its Bands column says"),
 
     ("a city in two bands (a Band D row renamed to Band T's Brno)",
      swap("| **Gimhae** 🇰🇷 |", "| **Brno** 🇰🇷 |"), "Brno is in Band D AND Band T"),
