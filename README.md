@@ -19,9 +19,10 @@ Mapped so far:
   Philadelphia, Miami (regional), Boston, Washington D.C.
 - **Canada:** Vancouver (regional, with Surrey), Montréal, Calgary, Edmonton,
   Toronto
-- **Mexico:** Mexico City, Guadalajara (regional)
+- **Mexico:** Mexico City, Guadalajara (regional), Monterrey (regional)
 - **Europe:** Madrid, Barcelona, Dublin, Milan, Paris, Marseille, Toulouse,
   Lille (regional), Rennes, Oslo
+- **South Korea:** Seoul, Daegu, Busan
 
 The list the app itself reads is `app/cities.py`.
 

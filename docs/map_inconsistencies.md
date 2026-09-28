@@ -31,7 +31,8 @@ dense-looking city may simply have more complete records.
 - **Municipal licence or tax registers:** San Diego, San Francisco, Los Angeles,
   Chicago, Philadelphia, Miami, Washington D.C., Vancouver/Surrey, Calgary, Edmonton,
   Toronto, Milan (six premises registers), Rome (SUAP authorisations).
-- **Assembled from several activity-specific registers:** New York (4), Boston (3).
+- **Assembled from several activity-specific registers:** New York (4), Boston (3),
+  and the Korean permit registers: Seoul (17 types), Daegu (14), Busan (14).
 - **Street surveys or censuses of premises:** Montréal, Madrid, Barcelona, and the
   nine Brazilian cities (IBGE's 2022 census walk).
 - **National statistical or establishment registers:** Mexico City, Guadalajara and
@@ -44,7 +45,7 @@ dense-looking city may simply have more complete records.
 - **A food-premises licence register only:** Hong Kong (FEHD's registers, which
   license restaurants and food shops and nothing else a storefront needs).
 - **Reason:** each country and city publishes what it publishes. The pages for
-  Montréal, Mexico City, Guadalajara, Madrid and Barcelona already say their density
+  Montréal, Mexico City, Guadalajara, Monterrey, Madrid and Barcelona already say their density
   is "not comparable" with licence-register cities.
 
 ### 2. Some maps have only two categories, and some have a thin one
@@ -59,7 +60,8 @@ services. A few cannot, because the local records never cover that trade.
   Retail is only the regulated trades (second-hand, pawn, smoke/vape, pet shops,
   fireworks), 328 pins inside the rings against 6,461 Food service. Seoul: Retail is
   only the licensed trades (bakeries, butchers, food shops, tobacco, marts, health food),
-  47,933 pins inside the rings against 139,802 Food service.
+  47,933 pins inside the rings against 139,802 Food service. Daegu and Busan: the same
+  licensed trades (11,031 and 14,330 Retail pins against 27,271 and 39,487 Food service).
 - **Retail and Personal services merged into "Shops and services":** Amsterdam,
   Rotterdam, Riga. The building register records a unit's intended use, not its trade.
 - **Reason:** the city does not license that trade, or the source cannot tell the two
@@ -76,7 +78,8 @@ and districts no metro reaches.
   Regional Rail, MBTA Commuter Rail, Tri-Rail, GO Transit, West Coast Express,
   Cercanías, Milan's Passante and Trenord, Iarnród Éireann Commuter/InterCity, RER and
   Transilien, the TER around Marseille, CPTM Linhas 7, 8 and 10–13, SuperVia's other
-  three lines, Fortaleza's and Recife's diesel lines.
+  three lines, Fortaleza's and Recife's diesel lines, Korail's Daegyeong Line (Daegu)
+  and Donghae Line (Busan).
 - **Not mentioned either way:** Montréal (REM, exo), Mexico City (Tren Suburbano).
 - **Reason:** a spacing, frequency and coverage test, applied line by line (EC
   "Which stations these maps are drawn around").
@@ -95,7 +98,8 @@ run on top of a metro network.
   scope).
 - **Other modes on the map:** Toulouse's Téléo cable car, Barcelona's two
   funiculars, São Paulo's Linha 15 monorail, Miami's Metromover (automated people
-  mover).
+  mover), Daegu's Line 3 monorail, Busan's Line 4 (its page calls it a monorail,
+  from the OSM route type) and the Busan–Gimhae LRT (an automated light metro).
 - **Reason:** "is the tram the rapid-transit system, or an overlay on one?", later
   widened to "does it serve corridors the metro does not?" (DEC, Oslo and Rotterdam
   entries). See Open questions 9 and 10: the stated reasons differ between cities.
@@ -160,11 +164,12 @@ name at their home.
 a few sources are older: a 2022 census, a 2022 street survey, a July 2025 register.
 - **Older as-of dates:** the nine Brazilian cities (2022 census fieldwork), Barcelona
   (2022 survey; the 2024 survey is incomplete), Montréal (2025 survey), Rome (July
-  2025 file, the newest published), Prague (establishments as of 2026-08-31).
+  2025 file, the newest published), Prague (establishments as of 2026-08-31), Daegu
+  (a 2026-08 edition whose rows end 2025-08-31), Busan (the feed froze 2026-04-15).
 - **Date of the business data shown on the page:** Barcelona, Copenhagen, Prague,
-  Amsterdam, Rome, the Brazilian cities, Rotterdam.
+  Amsterdam, Rome, the Brazilian cities, Rotterdam, Daegu, Busan.
 - **Only the transit date shown:** Paris, Marseille, Toulouse, Lille, Rennes, Oslo.
-- **No date shown:** the nine US cities, the five Canadian, the two Mexican, Madrid,
+- **No date shown:** the nine US cities, the five Canadian, the three Mexican, Madrid,
   Dublin, Milan.
 - **Reason:** what each source publishes. France's licence requires a snapshot date,
   so the French pages show one for the rail data.
@@ -366,8 +371,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Riga | Excise licences + cadastre | VID excise-licence register; VZD premise groups | Per-source (2 buckets) | Shops & services 4,027 / Food 1,214 | Retail and Personal merged; food only where alcohol or tobacco is licensed |
 | **South Korea** | | | | | |
 | Seoul | Permit registers (17 types) | Seoul's LOCALDATA permit registers | Local (permit type) | 47,933 / 139,802 / 36,646 | Retail only the licensed trades; no general retail |
-| Daegu | Permit registers (14 types) | Daegu's republication of the national LOCALDATA registers (D-데이터허브) | Local (permit type) | 11,027 / 27,262 / 9,419 | Retail only the licensed trades; no general retail |
-| Busan | Permit registers (14 types) | Busan's LOCALDATA API (the national permit registers) | Local (permit type) | 14,326 / 39,481 / 12,530 | Retail only the licensed trades; no general retail |
+| Daegu | Permit registers (14 types) | Daegu's republication of the national LOCALDATA registers (D-데이터허브) | Local (permit type) | 11,031 / 27,271 / 9,422 | Retail only the licensed trades; no general retail |
+| Busan | Permit registers (14 types) | Busan's LOCALDATA API (the national permit registers) | Local (permit type) | 14,330 / 39,487 / 12,531 | Retail only the licensed trades; no general retail |
 | **Taiwan** | | | | | |
 | Taichung | National tax register | FIA business tax register | Industry code division | 6,307 / 4,145 / 2,136 | One line in a large city: 19% of storefronts in a ring |
 | Taoyuan | National tax register | FIA business tax register | Industry code division | 2,465 / 1,854 / 907 | The airport line misses the city's largest centre: 12% in a ring |
