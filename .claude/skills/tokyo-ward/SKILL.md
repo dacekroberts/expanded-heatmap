@@ -41,7 +41,9 @@ is only what a WARD adds.
   goes to its nearest station with data - and adds the legend row. A city
   without the column renders exactly as before (all 54 maps identical).
   **A ward with personal-services registers but no food list is still
-  inactive** (the owner's rule is the food list): 7 of the 15 publish
+  inactive** (owner, 2026-09-28: food is most of any station's count, and
+  Ikebukuro drawn from barbers alone would read as a desert). 7 of the 15
+  (Chiyoda, Bunkyō, Shinagawa, Ōta, Toshima, Arakawa, Katsushika) publish
   barber / beauty / laundry registers that stay unused, hence "food-permit
   list" in the tooltip.
 
@@ -101,7 +103,7 @@ Tokyo or the city that taught it):
   (Fukuoka's mechanisms), and **`SUPERSEDES = {"minato": ("mhlw_13103",)}`**:
   the ward's own row wins where both lists hold a premises (same ward, town,
   block, trade name and bucket). MHLW's files are cached in `data/mhlw/raw/`
-  (13101-13116).
+  (13101-13104, 13108, 13113, 13116).
 - **One ISJ directory for all the wards** (`ISJ_DIR`): `load_city_isj` keys each
   block by its ward, so eight wards' files sit side by side. Minato's pair is
   at `data/tokyo/raw/` itself, the rest under `data/tokyo/raw/<code>/`.
