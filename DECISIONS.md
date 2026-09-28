@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**74 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**75 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [One shared Japanese fetch: pipeline/countries/japan_fetch.py, before Sapporo](#2026-09-28---one-shared-japanese-fetch-pipelinecountriesjapan_fetchpy-before-sapporo)
 - [Three review-time calls: Japanese limited-express lines count, the e-Stat download approved, Hong Kong and Riga move to the shared thin() (owner)](#2026-09-28---three-review-time-calls-japanese-limited-express-lines-count-the-e-stat-download-approved-hong-kong-and-riga-move-to-the-shared-thin-owner)
 - [Next builds: Band A's Japanese cities, ending with Tokyo, then the additions to built cities (owner)](#2026-09-28---next-builds-band-as-japanese-cities-ending-with-tokyo-then-the-additions-to-built-cities-owner)
 - [Osaka and the shared thin() refactor landed at review time; two defects found, one fixed before the push (owner)](#2026-09-28---osaka-and-the-shared-thin-refactor-landed-at-review-time-two-defects-found-one-fixed-before-the-push-owner)
@@ -110,6 +111,30 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - One shared Japanese fetch: pipeline/countries/japan_fetch.py, before Sapporo
+
+- **Kobe's and Osaka's `fetch_sources.py` became one shared module,
+  `pipeline/countries/japan_fetch.py`, before Sapporo made a third copy
+  (PLAN, "Japan").** Each city's file is now its docstring and
+  `japan_fetch.main(config, __doc__)`. The two copies differed in three
+  places, each now a config declaration rather than code:
+  - the file list: every Japanese city declares `SOURCE_FILES` ({key:
+    (file, URL, dataset page)}); Kobe's is built from its `FILE_BASE` and
+    single `DATASET_PAGE`, so its recorded URLs are unchanged;
+  - the registers' as-of date: `REGISTERS_AS_OF` where a city states one
+    (Osaka), else none (Kobe);
+  - the tram-stop query runs only where the config declares
+    `TRAM_OSM_JSON` (Osaka's Hankai line; Sapporo's streetcar next).
+    `japan.osm_station_query()` is byte-identical to Kobe's inline query.
+  Rejected: copying Osaka's file for Sapporo, the third copy of 160 lines.
+- **Verified with the network off (`HEATMAP_NO_NETWORK=1`)**: both cities'
+  `fetch_sources.py all` kept every file and rewrote `provenance.json` with
+  no content change (line endings only, checked out);
+  `check_no_fetch_in_steps.py` and its selftest (7 of 7) pass;
+  `drift_check.py kobe osaka`: zero drift, baselines 22 and 26 figures
+  unchanged. No `app/` or `outputs/` change. `japan-city` skill and PLAN
+  updated.
 
 ### 2026-09-28 - Three review-time calls: Japanese limited-express lines count, the e-Stat download approved, Hong Kong and Riga move to the shared thin() (owner)
 

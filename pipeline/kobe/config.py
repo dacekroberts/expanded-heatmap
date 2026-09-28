@@ -60,6 +60,9 @@ SOURCES = {
     "beauty": "r7_biyousho.csv",
     "laundry": "r7_cleaning.csv",
 }
+# source key -> (file, URL, the page that links it and carries its licence),
+# the shape japan_fetch reads for every Japanese city; one page covers all four.
+SOURCE_FILES = {k: (f, FILE_BASE + f, DATASET_PAGE) for k, f in SOURCES.items()}
 # The columns each file must carry; fetch_sources.py stops on a header without
 # them. These are the only columns step 2 reads. The operator columns
 # (営業者名 / 開設者名) and the phone columns are NEVER read: they carry

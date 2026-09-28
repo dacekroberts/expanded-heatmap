@@ -349,9 +349,9 @@ evidence section.
   - [ ] **Osaka's Umekita → 福島 stretch**, left out 2026-09-27 under the old
     one-off, is now to be drawn. It has no station, so only the line changes:
     a re-render, held for the next review time.
-- [ ] **Share `fetch_sources.py` across Japanese cities.** Osaka's is Kobe's
-  with a per-source URL map; Sapporo would be a third copy. Move it to
-  `pipeline/countries/japan_fetch.py` before Sapporo.
+- [x] **Share `fetch_sources.py` across Japanese cities: DONE 2026-09-28**,
+  `pipeline/countries/japan_fetch.py`; Kobe and Osaka call it, provenance
+  unchanged, zero drift (DECISIONS).
 
 ### ▶ Handoff to main — the Band A candidates, 2026-09-24
 

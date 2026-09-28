@@ -27,7 +27,7 @@ worked example: `pipeline/kobe/config.py` holds every city-specific choice.
 | `pipeline/countries/japan_step1.py` | THE step 1: `run(config)`. N02 stations inside the city line → collapse on `N02_005g` → OSM `name:en` → gate 3 → excluded stations named by N03 municipality → a lines GeoJSON keyed by `config.LINES` |
 | `pipeline/countries/japan_step2.py` | THE step 2: `run(config)`. `config.SOURCES` → not-a-premises → `japan_eigyo` → the join (tiers) → one pin per premises and bucket → the name rule → the 菓子/そうざい factory measurement |
 | `pipeline/taxonomies/japan_eigyo.py` | Every permit-type spelling across ten screened lists (289 values); `source` decides Personal services; import-time asserts pin the rule order |
-| `pipeline/kobe/fetch_sources.py` | The template fetch: city files, ISJ per ward, N02/N03 into the shared cache, the OSM names query; keeps what is on disk and records provenance |
+| `pipeline/countries/japan_fetch.py` | THE fetch (2026-09-28): city files from `config.SOURCE_FILES` ({key: (file, URL, dataset page)}), ISJ per ward, N02/N03 into the shared cache, the OSM names query plus the tram-stop query where the config declares `TRAM_OSM_JSON`; keeps what is on disk and records provenance. A city's `fetch_sources.py` is its docstring and `japan_fetch.main(config, __doc__)` |
 | `pipeline/kobe/step3_map.py` | The template map: `load_geojson_line_shapes` over step 1's GeoJSON, `label_focus=japan.city_boundary(slug)`, **`lang="ja"`** |
 | `scripts/check_personal_exposure.py` | `japan=True` on a city's entry runs the name-rule test on what reached the map (must print 0) |
 | `scripts/screen_japan_join.py` | The join's measurement, with **Minato as the control** |
