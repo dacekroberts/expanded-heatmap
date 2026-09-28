@@ -22,8 +22,8 @@ one copy. A city's step 1 calls run(config).
     config.LINES maps each drawn line to its (operator, line) pairs. A branch
     with its own public name inside one N02 line (Kobe's Wadamisaki Line in
     JR's 山陽線) is config.BRANCHES, split off by walking the track graph.
-  * Excluded: the drawn lines' stations beyond the city line (named by their N03
-    municipality) and the left-out lines' stations inside it.
+  * Excluded: the drawn lines' stations beyond the city line, named by their N03
+    municipality. A left-out line's stations are printed, not written there.
 
 Config needs: SLUG, NAME, CITY_BBOX, CRS_*, STATION_OSM_JSON, OSM_NAME_MATCH_M,
 COLLAPSE_MAX_SPREAD_M, LEFT_OUT_LINES, LINES, LINE_ORDER, LINE_NAMES, BRANCHES,
@@ -255,10 +255,10 @@ def run(config):
                          "reason": f"in {where}, outside {japan.CITIES[config.SLUG]['name']} "
                                    "(the permit list covers the city only)",
                          "latitude": r["latitude"], "longitude": r["longitude"]})
-    for _, r in left_out.iterrows():
-        excluded.append({"station": r["N02_005"], "lines": r["N02_003"],
-                         "reason": config.LEFT_OUT_LINES[(r["N02_004"], r["N02_003"])],
-                         "latitude": r.geometry.y, "longitude": r.geometry.x})
+    # A left-out LINE's stations are not written here: the file records stations
+    # cut from a network that IS mapped (app/station_scope.py reads only
+    # boundary and spacing reasons), as Taipei's undrawn Maokong Gondola is not
+    # in its file. The page and docs/excluded_categories.md disclose the line.
     ex = pd.DataFrame(excluded, columns=["station", "lines", "reason", "latitude", "longitude"])
     ex = ex.drop_duplicates(["station", "lines"]).sort_values(["reason", "station"])
     ex.to_csv(config.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8")

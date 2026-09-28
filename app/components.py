@@ -1140,6 +1140,23 @@ _NOTICES = [
      "規定之前提下，得利用之。 [data.gov.tw/license](https://data.gov.tw/license). The door plates "
      "themselves are not shown. None of these bodies endorses or approves this map.",
      False),
+    # Kobe: the city's lists are CC BY 2.1 JP (the badge on each CSV; read
+    # 2026-09-24), whose 出典 line and 「…を加工して作成」 are prescribed; MLIT's
+    # 位置参照情報 and N02 are PDL 1.0 with their own credit lines; N03 (CC BY 4.0)
+    # only picks stations and is never drawn (the Survey Act). The city's page
+    # warns closed premises may remain, so nothing here says "open". Wording
+    # approved by the owner 2026-09-27.
+    ("City of Kobe and MLIT (Kobe)",
+     "Kobe's businesses: 出典：「生活衛生関係許可施設等の情報提供」（神戸市）"
+     "（https://www.city.kobe.lg.jp/a99427/kenko/health/hygiene/dataset.html）を加工して作成 "
+     "(© City of Kobe; [CC BY 2.1 JP](https://creativecommons.org/licenses/by/2.1/jp/)). Their "
+     "locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（https://nlftp.mlit.go.jp/isj/）"
+     "を加工して作成. Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, "
+     "stations chosen with 国土数値情報（行政区域データ） (CC BY 4.0; not drawn). This project "
+     "selected the storefront permit types, placed each premises by its address, and counted them "
+     "around stations. The list may include premises that have closed. The City of Kobe and MLIT "
+     "did not make and do not endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

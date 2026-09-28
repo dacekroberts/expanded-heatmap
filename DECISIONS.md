@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**41 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**42 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Kobe's page, notice and docs approved by the owner; Taoyuan's macro label moved; the funicular stations out of the excluded file](#2026-09-27---kobes-page-notice-and-docs-approved-by-the-owner-taoyuans-macro-label-moved-the-funicular-stations-out-of-the-excluded-file)
 - [Kobe pipeline built: the first Japanese city, on shared Japanese steps 1 and 2 (owner calls on rail and names)](#2026-09-27---kobe-pipeline-built-the-first-japanese-city-on-shared-japanese-steps-1-and-2-owner-calls-on-rail-and-names)
 - [Worktrees: monterrey retired, trams created for the next build session, main checkout fast-forwarded (owner)](#2026-09-27---worktrees-monterrey-retired-trams-created-for-the-next-build-session-main-checkout-fast-forwarded-owner)
 - [Four owner calls: Ottawa to Band C, Rijswijk and Delft to T as Den Haag add-ons, the Band C memo's last verdicts accepted, Paris T2/T9 out](#2026-09-27---four-owner-calls-ottawa-to-band-c-rijswijk-and-delft-to-t-as-den-haag-add-ons-the-band-c-memos-last-verdicts-accepted-paris-t2t9-out)
@@ -74,6 +75,48 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Kobe's page, notice and docs approved by the owner; Taoyuan's macro label moved; the funicular stations out of the excluded file
+
+- **Owner, 2026-09-27: all five drafts approved as written.** They are:
+  - the Kobe page prose (`app/pages/50_Kobe_Heatmap.py`);
+  - the switcher blurb;
+  - notice **50**, "City of Kobe and MLIT (Kobe)" (`app/components.py`
+    `_NOTICES` and `docs/data_sources.md`). It carries Kobe's prescribed 出典
+    line with 「…を加工して作成」, the CC BY 2.1 JP link, MLIT's two PDL credit
+    lines and N03 credited as not drawn, and says neither that the premises
+    are open nor that the city made the map;
+  - Kobe's section in `docs/excluded_categories.md`;
+  - **the 115 factory-like 菓子 / そうざい pins are kept** (0.4% of all pins),
+    the recommendation. Dropping names matching 工場 / センター / 本社 was
+    rejected because real shops are named …センター.
+- **Correction to the entry below: the four funicular stations are NOT in
+  `excluded_stations.csv`.** `check_scope_disclosure.py` failed on their
+  reason, which is neither a boundary nor a spacing filter. The file records
+  stations cut from a network that IS mapped, as Taipei's undrawn Maokong
+  Gondola is absent from its file. So `japan_step1` prints a left-out line's
+  stations and does not write them: Kobe's file has **32** rows (was 36), and
+  the baseline was updated. The page and `excluded_categories.md` disclose the
+  cable cars. Changing `app/station_scope.py` to read a new category was the
+  rejected alternative.
+- **Taoyuan's macro-map label moved above its dot.** Kobe widened the East
+  Asia frame, and at the lower zoom Taoyuan's west-side pill covered
+  Taichung's marker and overlapped Hong Kong's pill at all three widths. A
+  search over the five East Asia labels (four positions each), with
+  `check_macro_labels.py`'s own scoring, found 48 clean layouts. Moving
+  Taoyuan above is the only one that changes a single label. Kobe's width,
+  34.2 px, was measured in the app's own document, with Busan 41.9 and
+  Taichung 61.7 reproduced exactly. PROBLEMS 0.
+- **Recorded for Kobe:**
+  - `docs/data_sources/japan.md` gained business, rail and boundary rows;
+  - `docs/city_master_list.md`: Built 50 across 17 countries, Band A 5,
+    candidates 62;
+  - `docs/map_inconsistencies.md` gained all four rows, plus Kobe under
+    themes 2 (food-only Retail) and 8 (type in place of a name). In rings:
+    Retail 2,619, Food service 16,980, Personal services 4,186 (87% of
+    27,251);
+  - `check_all.py`: 19 of 19. One local render of the page: prose, map and
+    notice present.
 
 ### 2026-09-27 - Kobe pipeline built: the first Japanese city, on shared Japanese steps 1 and 2 (owner calls on rail and names)
 
