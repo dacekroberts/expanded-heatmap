@@ -1845,8 +1845,8 @@ licenses because it wants to watch them: `SECOND HAND SHOP` (1,806),
 (317), `PAWN SHOP` (218), `PET SHOP` (118), `SECOND HAND SALVAGE SHOP` (33) and
 `PERMANENT FIREWORKS VENDOR` (31).
 
-On the current licences that reach the map that is **870 of 19,575 storefront
-rows, 4.4%**, against 14,408 food service and 4,297 personal services. So
+Of the licences that reach the map, **759 of 18,186 (4.2%) are retail**,
+against 13,385 food service and 4,042 personal services. So
 **read Toronto's Retail layer as a narrow regulated slice of what is actually
 on the street, and the balance between its three categories as a fact about
 Toronto's licensing rather than about its high streets.** This is
