@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**57 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**58 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
@@ -81,6 +81,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Toronto's per-category retail counts now come from the drawn pins and sum to 759 (owner-approved wording)](#2026-09-27---torontos-per-category-retail-counts-now-come-from-the-drawn-pins-and-sum-to-759-owner-approved-wording)
 - [Four small probes: Wirye Line not open, Cablebús L3 has 6 stations, the KC streetcar runs every 10 minutes, Incheon's coordinates need an application](#2026-09-27---four-small-probes-wirye-line-not-open-cablebús-l3-has-6-stations-the-kc-streetcar-runs-every-10-minutes-incheons-coordinates-need-an-application)
 - [Review-time batch published: Kobe, the tram rescope of five cities and Toronto's retail wording, in one push under one reboot](#2026-09-27---review-time-batch-published-kobe-the-tram-rescope-of-five-cities-and-torontos-retail-wording-in-one-push-under-one-reboot)
+- [Wave 2, group 1 banded: Kitchener–Waterloo to T, eleven discards, Contagem and Duque de Caxias as regional add-ons (owner)](#2026-09-27---wave-2-group-1-banded-kitchenerwaterloo-to-t-eleven-discards-contagem-and-duque-de-caxias-as-regional-add-ons-owner)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -2248,3 +2249,51 @@ Recorded by the cleanup session from the Main Building Session's findings of
 - **Reboot required** (owner's action): this push changes `app/cities.py`
   and `app/components.py`. The live check, including one untouched city,
   follows the reboot.
+### 2026-09-27 - Wave 2, group 1 banded: Kitchener–Waterloo to T, eleven discards, Contagem and Duque de Caxias as regional add-ons (owner)
+
+- **Canada, Brazil and Ireland screened by three agents** on the wave-1 brief
+  (every OSM query through `pipeline.osm.fetch`), then banded on the owner's
+  calls, each taken as recommended. Candidates 63 → 64 (T 40 → 41),
+  discards 40 → 51. **Load: about 15% of the 5-hour window** (1% → 16%),
+  the bottom of the 15–25% estimate; Spain and Italy rescaled to about
+  25–35%, the US to 25–40%.
+- **Kitchener–Waterloo (Regional) to T, not A (owner's call).** ION, one
+  light-rail line, 19 stops; either city alone is a stub, the pair keeps
+  every stop. The Region's inspection layers give food 2,008 (2.0× OSM) and
+  personal services about 636 (2.7×), points on 100%, under the Region's
+  open data licence. The screen proposed A; T won on the rule that put
+  Bergen and Aarhus there: no metro. It also carries a Band C gap, no
+  retail, with grocery inside food.
+- **Eleven discards, each with two methods.**
+  - Canada: Laval (no register), Longueuil (one station), Brossard (three
+    at the end of the REM's south branch, no register), Vaughan (two
+    stations, already excluded from Toronto).
+  - Ireland: Cork. Its suburban line runs every 13–17 minutes by day, but
+    Kent is its only stop inside the city. Limerick, Galway and Waterford
+    joined the no-urban-rail sentence.
+  - Brazil: Sobral, the VLT do Cariri, Teresina, Maceió, João Pessoa and
+    Natal, all suburban trains or diesel VLTs at 20 to 90 minutes. The four
+    that 2026-09-23 had "not carried forward" are now measured.
+- **Parangaba–Mucuripe stays out under the trams rule (owner's call).**
+  Fortaleza's diesel VLT runs every 40 minutes, a commuter's frequency
+  whatever the vehicle; Sobral falls with it. The rejected alternative,
+  re-ruling it a tram, would have opened Sobral as well.
+- **Regional add-ons (owner's calls)**, main's work on a branch:
+  - **Rio + Duque de Caxias** (three SuperVia stations, 18,698 CNEFE
+    storefronts), after a rail test of the Gramacho–Saracuruna shuttle the
+    scope brings in.
+  - **Belo Horizonte + Contagem** (Eldorado and Novo Eldorado, 13,011).
+  - **Vancouver + Burnaby, New Westminster, Coquitlam and Richmond**: a PLAN
+    item with probes first. Burnaby's host refuses scripted requests;
+    Richmond's directory declares no licence.
+  - **No** to Osasco (it would need Linha 8, which São Paulo's map leaves
+    out) and Lauro de Freitas (one station).
+- **Québec's *Registre des entreprises* stays unused (owner's call)**: it is
+  CC BY-NC-SA 4.0, and the non-commercial term is the one this project has
+  refused before. It would have served Laval, Brossard and Québec City.
+- **Watch items** are in PLAN: Salvador's VLT (trial running), Teresina,
+  the Hazel McCallion Line (construction to early 2028), Luas Cork, and
+  ION's Stage 2.
+- **Downloads**: five CNEFE zips (30.8 MB) and RideKC's GTFS, copied into
+  the main checkout's `data/` (no-clobber). Ireland's OSM cross-check failed
+  on both mirrors and was not used as evidence.

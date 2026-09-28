@@ -69,10 +69,10 @@ offline, so check which row is live before sending.
 
 1. **Wave 2 of the second-city screens: the owner's agreed order.**
    - The tram-list count (item 1 of wave 2) is **already done**.
-   - **Next: Canada, Brazil and Ireland** (est. 15-25% of a window). Read
-     `get_usage` before and after, then rescale.
-   - Then **Spain and Italy** (30-45%), then **the US** (30-50%, a later
-     window if the others ran high).
+   - ✅ **Canada, Brazil and Ireland: done and banded 2026-09-27** (about
+     15% of a window; DECISIONS, PLAN).
+   - **Spain and Italy: running 2026-09-27** (rescaled 25-35%), then **the
+     US** (rescaled 25-40%, a later window if Spain and Italy ran high).
    - Reuse wave 1's `COMMON_BRIEF.md` (durable copy:
      `data/_staging_scratch_2026-09-27/second_cities/`), but **every agent
      fetches OSM through `pipeline.osm.fetch`**.
