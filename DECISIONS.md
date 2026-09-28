@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**98 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**99 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [German screen from the large-transit gap: Munich, Frankfurt and Cologne discarded; Berlin's register found (owner)](#2026-09-28---german-screen-from-the-large-transit-gap-munich-frankfurt-and-cologne-discarded-berlins-register-found-owner)
+- [Crash 2: the rewritten census control measured at 0.28 GB; the cause stays unproven](#2026-09-28---crash-2-the-rewritten-census-control-measured-at-028-gb-the-cause-stays-unproven)
 - [Istanbul's second look run: Band N, pharmacies and opticians only (owner)](#2026-09-28---istanbuls-second-look-run-band-n-pharmacies-and-opticians-only-owner)
 - [Dubai and Manila re-screened from the large-transit gap: Dubai to Band D, Manila discarded (owner)](#2026-09-28---dubai-and-manila-re-screened-from-the-large-transit-gap-dubai-to-band-d-manila-discarded-owner)
 - [London re-screened from the large-transit gap: Band B, food only (owner)](#2026-09-28---london-re-screened-from-the-large-transit-gap-band-b-food-only-owner)
@@ -180,6 +181,20 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   no open-data page. Files: `docs/city_master_list.md`,
   `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
   `docs/handoff_staging_2026-09-28.md`.
+### 2026-09-28 - Crash 2: the rewritten census control measured at 0.28 GB; the cause stays unproven
+
+- **Measured (Tokyo build session, psutil `peak_wset`):** the rewritten
+  `scripts/japan_census_control.py`, which keeps only the city's own N03
+  ward polygons and runs one city at a time, peaked at 0.18 GB on Kobe and
+  0.28 GB across all six Japanese cities, under the cap.
+- **It does not settle crash 2** (the 47 GB `python.exe` at 12:05:04; entry
+  "Two app crashes traced to memory exhaustion", above). What ran then was
+  the earlier version, which dissolved each prefecture's whole N03 file; it
+  is gone and cannot be measured. Of the two suspects it remains the likelier:
+  no drift step measured that day passed 5.43 GB (Oslo), and the census
+  version failed on its first prefecture read 12 s before Windows logged the
+  47 GB process. Recorded as likelier, not proven. The 8 GB cap covers
+  either now.
 
 ### 2026-09-28 - Istanbul's second look run: Band N, pharmacies and opticians only (owner)
 
