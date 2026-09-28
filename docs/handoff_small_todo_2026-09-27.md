@@ -37,7 +37,10 @@ row change.
    could use? The `address-join` skill has the method, including a control.
    **If it needs an account or an API key, stop and report**; do not
    register.
-5. **Göteborg's rail** (Band T row: "Trams, no metro — INHERITED, not
+5. **TAKEN BY STAGING, not for this session** (attempted 2026-09-27; its
+   boundary query failed on the host; the retry is in
+   `docs/handoff_staging_2026-09-27.md`). **Göteborg's rail** (Band T row:
+   "Trams, no metro — INHERITED, not
    measured"). Count Västtrafik's tram lines and stops inside Göteborgs
    kommun from OSM through `pipeline.osm.fetch`. Its colours are needed too.
 
