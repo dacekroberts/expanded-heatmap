@@ -166,8 +166,15 @@ Desktop is unaffected — the label is fully visible there.
       discards. **Actual load: about 15% of the 5-hour window** (1% → 16%),
       the bottom of its range. Rescaled: Spain and Italy about 25–35%, the US
       about 25–40%.
-    - [ ] **Group 2 (Spain, Italy) RUNNING 2026-09-27** (Staging).
-    - [ ] **Group 3 (the US)**: after group 2's cost is read.
+    - [x] **Group 2 (Spain, Italy) DONE 2026-09-28**, banded on the owner's
+      calls (DECISIONS): Florence and Santa Cruz–La Laguna (Regional) to T,
+      Palma to C, thirteen discards, five not reached. **Load: about 15%**
+      (24% → 39%). Watch: Bologna's Linea Rossa (spring 2027), Jaén's tram
+      ("autumn 2026"), Florence's T3 (end of 2026). **Owner's-browser reads
+      that could reopen a city**: Zaragoza (`zaragoza.es`), Brescia,
+      Catania, Cagliari, Alicante, Alcobendas.
+    - [ ] **Group 3 (the US) SCREENED 2026-09-28**, about 14% (39% → 53%);
+      eight owner calls proposed in chat, not yet answered.
     - [ ] **Regional add-ons to built cities (owner, 2026-09-27)**, main's
       work on a branch held for review time:
       - **Rio + Duque de Caxias**: SuperVia Saracuruna's three excluded

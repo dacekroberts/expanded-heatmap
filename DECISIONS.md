@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**59 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**60 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-09-28**
+
+- [Wave 2, group 2 banded: Florence and Santa Cruz–La Laguna to T, Palma to C, thirteen discards, five not reached (owner)](#2026-09-28---wave-2-group-2-banded-florence-and-santa-cruzla-laguna-to-t-palma-to-c-thirteen-discards-five-not-reached-owner)
 
 **2026-09-27**
 
@@ -2317,3 +2321,46 @@ Recorded by the cleanup session from the Main Building Session's findings of
 - Rome, Paris and San Francisco were not opened live. `deploy-verify`
   passed them locally on the same commit, and they share Madrid's and
   Montréal's code path.
+
+### 2026-09-28 - Wave 2, group 2 banded: Florence and Santa Cruz–La Laguna to T, Palma to C, thirteen discards, five not reached (owner)
+
+- **Spain and Italy screened by two agents** on the wave-2 brief, then banded
+  on the owner's calls, each as recommended. Candidates 63 → 66 (C 7 → 8,
+  T 41 → 43), discards 51 → 64. **Load: about 15% of the 5-hour window**
+  (24% → 39%), under half the 25–35% estimate.
+- **Florence to T.** Tramvia T1 and T2, 39 stations inside the comune. The
+  Comune's own layers (dati.toscana.it, declared CC BY 4.0) give 7,355 /
+  3,024 / 1,673 with coordinates on every row and no names. Open at build:
+  639 exempt-category food rows (Milan's *fuori piano* question) and
+  Scandicci's 4 stops.
+- **Santa Cruz–La Laguna (Regional) to T, currency first.** Either
+  municipality alone cuts a Metrotenerife line to a stub; together they keep
+  every stop. The Cabildo's layers give 3,786 / 2,528 / 494 with coordinates,
+  but they are a directory from about 2016. The owner took T over a discard:
+  Dallas's precedent (a four-year-old snapshot cannot be disclosed away) is
+  the first thing the brief must answer, and the Cabildo's current hostelería
+  register (addresses only) is the likely food fix.
+- **Palma to C**: a metro, but food only (Mallorca's register, 4,375), and
+  13% of it placed.
+- **Zaragoza discarded on placement (owner's call).** Aragón's register has no
+  coordinates, a bare street name on 61% of rows, no closure field, and a
+  food list with no bars. The rejected alternative was a weak T with about 64%
+  of pins at street level. `zaragoza.es` refused every connection, so the
+  city's own layer, read in the owner's browser, is what could reopen it.
+- **Bologna discarded for now, revisit spring 2027 (owner's call).** Its SUAP
+  lists are among the best screened anywhere; the Linea Rossa is not yet in
+  service. Brampton's row is the shape.
+- **Twelve more discards**: Genoa, Palermo, Bergamo, Sassari, Vitoria-Gasteiz,
+  Murcia and Granada (no premises register, each city's own host asked);
+  Padua and Venice-Mestre (Translohr guided buses, Clermont-Ferrand's rule);
+  Jaén (the tram is in driver training); Fuenlabrada (a real register with no
+  house numbers). Valencia, Bilbao, Málaga and Sevilla stay out on data.
+- **Five not reached, no row (owner's call)**: Brescia and Catania (both
+  metro), Cagliari, Alicante and Alcobendas. Their own hosts refused or never
+  answered, and `check_discard_evidence.py` refuses an absence row without
+  them. Each waits on a read from the owner's browser.
+- **Suburbs of Milan, Madrid and Barcelona**: no register in any, recorded in
+  one sentence rather than rows.
+- **Downloads**: Florence's four layers, Tenerife's five, Aragón's two,
+  Mallorca's and Fuenlabrada's files, copied into the main checkout's `data/`
+  (no-clobber).
