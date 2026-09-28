@@ -1053,8 +1053,12 @@ brief names.
     which only the owner calls; `app/` lands in one batch under one reboot. Rule and reminder
     threshold in memory (`batched-review-time`) and the `publish-city` skill.
   - [ ] **Change 3 - trim what every session loads.** CLAUDE.md toward ~1,500 words (incident
-    history to skills/DECISIONS), a DECISIONS index of the last 7 days, a `plan-trim` pass,
-    `check_all.py` as a pre-push hook. Draft each cut for the owner before writing.
+    history to `docs/rule_history.md`), a `plan-trim` pass. Draft each cut for the owner
+    before writing. The 7-day DECISIONS index was DROPPED (owner): drift_check finds older
+    baseline entries through it; the monthly archive shrinks it instead.
+    - [x] `scripts/check_all.py` (15 pass/fail checks, ~27s, parallel) as `.githooks/pre-push`,
+      enabled with `git config core.hooksPath .githooks` (shared repo config, so every
+      worktree whose branch carries the file). Tested: exit 0 clean, exit 1 on a stale index.
   - [ ] **Change 1, half - archive DECISIONS.md by month.** Keep `merge_append_only.py`,
     `decisions_index.py` and the `decisions-entry` skill working. The session count is a
     separate owner decision.
