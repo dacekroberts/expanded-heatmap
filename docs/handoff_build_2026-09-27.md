@@ -23,44 +23,28 @@ When a priority is done, delete its section rather than adding an addendum.
   column (`전화` or `...tel`), a blank sub-type column, a 구-only address
   regex and undeclared address masking. Seoul keeps its own step 2.
 
-## The next job: tram rescopes (owner's instruction, relayed by Staging)
+## Tram rescopes: BUILT, on `worktree-trams`, HELD for review time
 
-**The specs are in `docs/tram_rescope_specs.md`** (Staging wrote them; you
-implement them). The owner's pacing for this job is to **start cheap and
-monitor `get_usage` until the 5-hour window reaches 90%**. Check between
-cities. At 90%, finish the current step, commit clean, and stop with a
-one-line note naming the next action.
+All five are committed on `worktree-trams` (`c8c1c53` through `f3e051d`),
+one DECISIONS entry each, and `check_all.py` passes 19 of 19. Nothing is
+merged. At review time the batch lands once through `publish-city`: one
+deploy-verify (`scope: map-chrome` or `full`, the owner's pick), one reboot.
 
-- **Use one new worktree from master** (e.g. `worktree-trams`), **HELD for
-  review time.** It rewrites `outputs/`, so nothing merges to master until the
-  owner calls review time (`docs/review_time.md`).
-- **Order:** REM → Rome 8 → Madrid Metro Ligero → Paris T3a/T3b → SF F Market.
-- **Every drawn line gets a label AND a legend entry.** New downloads go in
-  `fetch_sources.py` with the owner's OK (file, source, size). OSM goes through
-  `pipeline.osm.fetch`.
-- **Traps named in the relay** (the specs have the detail):
-  - **REM:** needs a new source. Try the operator's or ARTM's GTFS with a
-    `licence-read` first, else OSM via `osm-rail`. The scope is the
-    agglomeration, so the Brossard and Laval stops are excluded. Check the
-    current line numbering before labelling.
-  - **Rome 8:** the cached OSM has no tram relations, so fetch them. Pick the
-    relation pair (base, 16 stops; or "prolungato", 26) that matches the
-    GTFS's route 8, and key on relation ids. Don't draw 2/3/5/14/19, which
-    have 0 trips.
-  - **Madrid:** attribute stations to lines from CRTM's M10_Tramos. An ML2
-    stub inside Madrid is an owner call. Take the colour from M10_Lineas and
-    check it against Metro Line 1.
-  - **Paris:** T3a and T3b are ΔE 0 against Lignes 5 and 12, so override both
-    colours, clearing the lines and the pins (as with the bis lines). T2 and
-    T9 are stubs, recommended out, and are an owner call at review. Match
-    `route_type` 0 plus the exact short name.
-  - **SF:** match `route_id` F exactly. The cable cars share its #B49A36 and
-    stay out.
-  - **D.C. Streetcar:** dropped (DDOT ended service 2026-03-31). Change its
-    "—" in `docs/map_inconsistencies.md` to "no longer operating". Don't draw
-    the Capitol's private people movers, which OSM tags `light_rail`.
-- **Re-rendering touches live cities.** Run `drift_check.py` per city, and
-  `git checkout -- outputs/` after a zero-drift run.
+- **Montréal:** the REM, one line "REM (A1, A3, A4)" (owner), from the
+  operator's own GTFS (CC BY 4.0, recorded). 78 stations.
+- **Rome:** tram 8, the base service, thinned to 7 of 16 stops. 94 stations.
+- **Madrid:** ML1 only (ML2/ML3 stubs, owner). 200 stations.
+- **Paris:** T3a and T3b in this project's own colours. 280 stations.
+- **SF:** the F, thinned; two stops stacked over subway stations merged.
+  57 stations.
+
+**Waiting on the owner at review:**
+- the page text, blurbs and map titles for all five (still name the old
+  networks), the REM's new CC BY notice, and the `excluded_categories.md`
+  sentences: drafted in chat, not yet written;
+- T3a's orange reads close to Ligne 5's in the render (ΔE 13.9);
+- whether the F's Market St stretch, which runs over the subway, should
+  count at all (four stops 170–282 m from subway stations).
 
 ## Before starting
 
