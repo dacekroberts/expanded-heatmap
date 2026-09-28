@@ -42,7 +42,7 @@ from pipeline.rome.config import (  # noqa: E402
 # Names the Roma–Viterbo urban service too, drawn since the owner's call of
 # 2026-09-24 - "Metro" alone mislabelled it. This prefixes the (hidden) line
 # layer names; map_title below is the name a reader sees in the layer control.
-SYSTEM = "Metro and Roma–Viterbo"
+SYSTEM = "Metro, Roma–Viterbo and Tram 8"
 LINE_LABEL_ENDS = {}
 
 

@@ -97,7 +97,8 @@ run on top of a metro network.
   Hong Kong (Light Rail), Riga (its trams are the whole network), Montréal (the
   REM, an automated light metro; from 2026-09-27, on its branch until review time).
 - **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Toronto's 18 streetcar routes, Milan (17 routes), Barcelona,
-  Paris, Prague, Rome, Madrid (Metro Ligero), Copenhagen (the Letbane has no stop in
+  Paris, Prague, Rome (all but tram 8, drawn and thinned from 2026-09-27 on the
+  tram-rescope branch), Madrid (Metro Ligero), Copenhagen (the Letbane has no stop in
   scope).
 - **Other modes on the map:** Toulouse's Téléo cable car, Barcelona's two
   funiculars, São Paulo's Linha 15 monorail, Miami's Metromover (automated people
@@ -272,7 +273,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Dublin | Luas Red, Green + DART | Commuter, InterCity | NTA national GTFS | 4 local authorities | 2 / 0 |
 | **Italy** | | | | | |
 | Milan | Metro M1–M5 | 17 trams; Passante, Trenord | ATM GIS layers (+GTFS colours) | Comune | 21 / 0 |
-| Rome | Metro A, B, B1, C + Roma–Viterbo (urban) | Trams; Roma–Lido; suburban | OpenStreetMap | Comune | 1 / 0 |
+| Rome | Metro A, B, B1, C + Roma–Viterbo (urban) + Tram 8 | Other trams (2, 3, 5, 14, 19 bus-replaced); 8 prolungato; Roma–Lido; suburban | OpenStreetMap | Comune | 1 / 9 |
 | **France** | | | | | |
 | Paris | Métro, 16 lines | RER, Transilien, trams | IDFM GTFS | Commune | 76 / 0 |
 | Marseille | Métro 1–2 + Tramway 1–3 | TER; ferries; Aubagne tram | Métropole AMP GTFS (RTM) | Commune | 7 (Aubagne tram) / 0 |

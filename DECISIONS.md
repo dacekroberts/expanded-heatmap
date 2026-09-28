@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**40 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**41 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Tram rescope 2 of 5: Rome's tram 8 drawn (the base service, Casaletto - Venezia) and thinned to 7 of its 16 stops (held for review time)](#2026-09-27---tram-rescope-2-of-5-romes-tram-8-drawn-the-base-service-casaletto---venezia-and-thinned-to-7-of-its-16-stops-held-for-review-time)
 - [Tram rescope 1 of 5: Montréal's REM drawn as one line, from the operator's own feed (held for review time)](#2026-09-27---tram-rescope-1-of-5-montréals-rem-drawn-as-one-line-from-the-operators-own-feed-held-for-review-time)
 - [Four owner calls: Ottawa to Band C, Rijswijk and Delft to T as Den Haag add-ons, the Band C memo's last verdicts accepted, Paris T2/T9 out](#2026-09-27---four-owner-calls-ottawa-to-band-c-rijswijk-and-delft-to-t-as-den-haag-add-ons-the-band-c-memos-last-verdicts-accepted-paris-t2t9-out)
 - [Tram rescopes, light and medium: specs written for five cities, and the D.C. Streetcar dropped because it no longer runs (owner)](#2026-09-27---tram-rescopes-light-and-medium-specs-written-for-five-cities-and-the-dc-streetcar-dropped-because-it-no-longer-runs-owner)
@@ -73,6 +74,46 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Tram rescope 2 of 5: Rome's tram 8 drawn (the base service, Casaletto - Venezia) and thinned to 7 of its 16 stops (held for review time)
+
+- **Tram 8 is drawn from OSM relations 385213 and 1674659, the BASE service,
+  chosen against the GTFS's route 8.** The cached Roma Mobilità GTFS (read
+  only as a check; its terms stay ambiguous) runs 2,985 of route 8's 3,207
+  trips (93%) on the 16-stop Casaletto - Venezia pattern and about 213 on the
+  "8 prolungato" to Porta Maggiore, so the prolungato pair (5376334, 5376335)
+  is recorded in `LEFT_OUT_RELATIONS` rather than drawn. Keyed on relation
+  ids, Rome's rule. Gate 3 matches: 16 of 16 stop names. Trams 2, 3, 5, 14
+  and 19 are not fetched (0 trips; bus-replaced). Colour #bfdf14 (OSM's,
+  ATAC's): Delta-E 68.8 from the nearest pin.
+- **Fetched on its own**: `data/rome/raw/osm_tram8.json`, 125,640 B, the four
+  candidate relations by id through `pipeline.osm.fetch` (owner OK'd). The
+  metro cache is untouched; step 1 reads both. `osm_rail.json`'s bbox query
+  asks for subway|light_rail only, which is why it held no trams.
+- **Tram 8 is THINNED, a call the existing rule settles rather than a new
+  one.** Measured: a median 322 m between its stops (min 144 m, Arenula's
+  two), and 15 of 16 more than the 966 m outer ring from any metro or
+  Roma-Viterbo station - the street-running offshoot shape
+  `docs/sub_transit_line_filters.md` was written for (San Francisco,
+  Amsterdam, Rotterdam). Rotterdam's `thin()` was ported with projected
+  distances: one stop per half mile along the line, termini and interchanges
+  kept, walking directions only until every stop is covered (Rotterdam's
+  rule). Thinning BOTH directions and keeping the union cut only 4 of 16,
+  which barely thins; the one-direction walk cuts 9. Kept: Casaletto,
+  Gianicolense/Ravizza, Gianicolense/Ponte Bianco, Trastevere/Pascarella,
+  Trastevere/Min. P. Istruzione, Arenula/Min. G. Giustizia, Venezia. **Staz.ne
+  Trastevere is cut**: the FS station is not a drawn line, so it is not an
+  interchange under the rule. A third copy of `thin()` now exists (Amsterdam,
+  Rotterdam, Rome); lifting it into shared code is flagged separately.
+- **Stations in scope 87 -> 94; excluded 1 -> 10** (9 thinned); stop
+  positions 182 -> 212; storefronts within a ring 60,739 of 98,897 (step 2
+  unchanged). Baseline recorded with `--update-baseline`; drift is
+  `excluded_stations.csv` and `heatmap.html` only. `check_map_view.js` 11.5 =
+  expected, 0 corrections; markup, inline arrays, scope disclosure and
+  provenance pass. The map title and page still say "Metro and Roma–Viterbo":
+  drafts for the owner's review. Files: `pipeline/rome/{config, fetch_sources,
+  step1_stations, step3_map}.py`, `outputs/rome/{baseline.json,
+  excluded_stations.csv, heatmap.html}`, `docs/map_inconsistencies.md`.
 
 ### 2026-09-27 - Tram rescope 1 of 5: Montréal's REM drawn as one line, from the operator's own feed (held for review time)
 
