@@ -8,8 +8,8 @@ than adding an addendum.
 
 - **Work in `.claude/worktrees/monterrey` on `worktree-monterrey`.** Check with
   `git branch --show-current` and `git worktree list`. The branch is committed
-  and NOT pushed. Its base is `b90e1af`, and origin/master has moved since
-  (mobile mode removed, whole-city layers restored, renderer changes).
+  and NOT pushed. origin/master was merged in on 2026-09-27 (`d88c8e8`,
+  owner's yes); merge it again right before the push.
 - **`data/` in this worktree is a JUNCTION** to the main checkout's `data/`,
   where Monterrey's raw files live. Remove a junction only with
   `[System.IO.Directory]::Delete(path, $false)`, never recursively.
@@ -31,7 +31,7 @@ than adding an addendum.
   it to origin/master on 2026-09-27 (it had been ~310 commits behind), but it
   only moves when someone pulls it. Use `origin/master` (`git show`,
   `git diff`) after a `git fetch`.
-- **On master since this branch's base**, and arriving with the merge (Cleanup,
+- **On master since this branch's base**, and arrived with the 2026-09-27 merge (Cleanup,
   `8f9d118`):
   - `drift_check.py` and `check_personal_exposure.py` print UTF-8 themselves,
     so `PYTHONIOENCODING` is no longer needed.
@@ -39,9 +39,10 @@ than adding an addendum.
     `overpass.osm.ch` is gone from every host list.
   - A Czech city's config needs `RUIAN_CRS_CONTROL`.
   - Riga has been re-rendered, so every map ships `JSON.parse`.
-- **Tell Staging and Cleanup your session name** (from `ListAgents`) so their
-  relays reach you. They addressed the old one as "Main Building Session".
-- Check `get_usage` before big work, and confirm this week's cap with the owner.
+- **This session is "Main Build"**; Staging and Cleanup were told on
+  2026-09-27. A successor tells them its own name (from `ListAgents`).
+- Check `get_usage` before big work. **No weekly cap this week** (owner,
+  2026-09-27): raise the cap and efficiency together once the weekly passes 60%.
 
 ## Priorities, in order
 
@@ -51,22 +52,7 @@ than adding an addendum.
    Monterrey needed these records, and each city will too: provenance rows,
    scope disclosure, inconsistency rows, privacy entry, label width and
    placement, DECISIONS, PLAN.
-2. **Waiting on the owner's yes (asked, not answered): merge origin/master
-   into this branch now.** Then:
-   - **Fix two lines** made stale when master restored Mexico City's and
-     Guadalajara's whole-city layers. In `docs/excluded_categories.md`'s
-     Monterrey section: "ON here, unlike the other two Mexican cities". In
-     `docs/project_context.md`'s Monterrey bullet: "Unlike the other two
-     Mexican cities...".
-   - **Resolve conflicts** with Staging's notes in PLAN's Monterrey item
-     (brief line 111 → take master's; band counts → take master's numbers,
-     then A −1, Candidates −1, Built +1). Resolve DECISIONS with
-     `scripts/merge_append_only.py`.
-   - **Re-check** with `check_render_current.py` and `check_inline_arrays.py`,
-     and re-render Monterrey if the renderer changed. Re-run
-     `check_macro_labels.py`, because Monterrey moved Guadalajara's and Mexico
-     City's pills.
-3. **Batch publish, when the owner says.** The steps are in PLAN's Monterrey
+2. **Batch publish, when the owner says.** The steps are in PLAN's Monterrey
    item and the `publish-city` skill. A reboot is needed, because
    `cities.py` and `components.py` changed.
 
