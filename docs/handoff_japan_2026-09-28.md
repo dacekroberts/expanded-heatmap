@@ -38,7 +38,8 @@ rather than adding an addendum.**
   personal-services layer is therefore Minato, Taitō, Meguro and Shibuya.
 - **Each ward's share is on the page, WITHOUT MHLW's slice**; MHLW's +0.1 to
   +3.1 pt is said once, in prose. The shares are measured every build
-  (`OFFICIAL_SHARES`, `outputs/tokyo/official_shares.json`), never typed.
+  (`OFFICIAL_SHARES`; step 2 writes `official_shares.json` to Tokyo's
+  outputs), never typed.
 - **MHLW's slice is added to Chūō, Kōtō, Minato and Shinjuku**, de-duplicated
   (`SUPERSEDES`), and listed in `SHARE_SKIP`.
 - Standing Japan calls: lines served only by limited expresses COUNT;
