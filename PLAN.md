@@ -25,6 +25,13 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   `gtfs-openov-nl.zip`) and `data/rome/raw/rome_static_gtfs.zip` (46.8 MB,
   downloaded, then not used) may be deleted from the main checkout.
 
+- [ ] **Port Hong Kong's Light Rail thinning and Riga's inline loop to
+  `pipeline/stations.py` `thin()`** (owner, 2026-09-28). Both measure in
+  haversine; each port gets its own drift measurement first. Pipeline only,
+  on a branch for the next review time. San Francisco, Boston and
+  Philadelphia keep their own variant (interchanges added after the spacing
+  pass) until the owner decides.
+
 - [ ] ⏰ **Prague: Flora reopens around December 2026**: when PID's feed serves
   it again, step 1 STOPS the build on purpose - remove the override then.
 
@@ -332,14 +339,16 @@ evidence section.
   screens" below).
 - [ ] **Join control** - like-for-like against the Economic Census per-ward
   飲食店 count (the owner's chosen control) - at build. **Not yet run for
-  Kobe or Osaka**: it needs an e-Stat download (the owner's OK first). Kobe's
+  Kobe or Osaka**. **The e-Stat download is approved (owner, 2026-09-28)**:
+  one national per-ward table, run for Kobe and Osaka, then each city. Kobe's
   join was checked instead against the Minato control and every screen, and a
   GSI sample in the brief; Osaka's against the list's own coordinates (median
   38 m).
-- [ ] **Rail** - whether lines served only by limited-express trains count was
-  never ruled on as a rule (the Shinkansen is out, owner 2026-09-24). One case
-  is decided: Osaka's Umekita → 福島 track, limited expresses only, is left out
-  (owner 2026-09-27). **Owner, once for the rest.**
+- [x] **Rail: lines served only by limited expresses COUNT** (owner,
+  2026-09-28; revertible). The Shinkansen stays out.
+  - [ ] **Osaka's Umekita → 福島 stretch**, left out 2026-09-27 under the old
+    one-off, is now to be drawn. It has no station, so only the line changes:
+    a re-render, held for the next review time.
 - [ ] **Share `fetch_sources.py` across Japanese cities.** Osaka's is Kobe's
   with a per-source URL map; Sapporo would be a third copy. Move it to
   `pipeline/countries/japan_fetch.py` before Sapporo.

@@ -45,6 +45,11 @@ the owner reminded Kobe's build that it exists for the cities after it.
 ## The owner's standing calls - do not re-ask
 
 - **The Shinkansen does not count** (2026-09-24); `japan.stations()` drops it.
+- **Lines served only by limited expresses (特急) DO count** (2026-09-28):
+  in Japan a limited express is regularly scheduled commuter traffic, not
+  intercity service. Draw such a stretch like any other line. This reverses
+  the one-off that left Osaka's Umekita → 福島 track out (2026-09-27);
+  revertible if a city shows why (owner).
 - **The city line only** (2026-09-24): only stations inside the city get
   rings, because each permit list covers its own city. JR and the private
   railways are drawn and cut at the line - **a one-station stub stays as cut**
@@ -155,7 +160,9 @@ build (a brief to correct, never a check to relax), in particular:
 - Several still list as open what the owner decided on 2026-09-24 (the
   Shinkansen, 菓子/そうざい, the city-line scope). Mark them decided.
 - None has run the **Economic Census join control** (PLAN, "Join control");
-  Kobe did not either - it needs an e-Stat download, the owner's OK first.
+  Kobe and Osaka did not either. **The e-Stat download is approved (owner,
+  2026-09-28)**: one national per-ward table serves every city; name its
+  file, source and size when fetching it.
 
 ## The cities still to build
 

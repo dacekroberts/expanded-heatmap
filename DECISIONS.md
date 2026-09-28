@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**71 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**72 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Three review-time calls: Japanese limited-express lines count, the e-Stat download approved, Hong Kong and Riga move to the shared thin() (owner)](#2026-09-28---three-review-time-calls-japanese-limited-express-lines-count-the-e-stat-download-approved-hong-kong-and-riga-move-to-the-shared-thin-owner)
 - [Next builds: Band A's Japanese cities, ending with Tokyo, then the additions to built cities (owner)](#2026-09-28---next-builds-band-as-japanese-cities-ending-with-tokyo-then-the-additions-to-built-cities-owner)
 - [Osaka and the shared thin() refactor landed at review time; two defects found, one fixed before the push (owner)](#2026-09-28---osaka-and-the-shared-thin-refactor-landed-at-review-time-two-defects-found-one-fixed-before-the-push-owner)
 - [Osaka's page, notice 52 and scope section written as approved (owner)](#2026-09-28---osakas-page-notice-52-and-scope-section-written-as-approved-owner)
@@ -107,6 +108,33 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Three review-time calls: Japanese limited-express lines count, the e-Stat download approved, Hong Kong and Riga move to the shared thin() (owner)
+
+- **Lines served only by limited expresses (特急) count on Japanese maps,
+  revertible (owner).** Recommended against: leaving out any stretch with no
+  local stopping service, as intercity service like the Shinkansen. The
+  owner's reason: in Japan a limited express is regularly scheduled commuter
+  traffic. **This reverses the 2026-09-27 one-off** in "Osaka pipeline built
+  on the shared Japanese steps" that left Osaka's Umekita → 福島 track out
+  (Haruka and Kuroshio only, no station). Drawing it changes Osaka's line
+  geometry and no station, so it waits for the next review time's re-render
+  (PLAN). The Shinkansen stays out. `japan-city` skill and PLAN updated.
+- **The e-Stat download for the Economic Census join control is approved
+  (owner)**: one national per-ward 飲食店 table, run for Kobe and Osaka and
+  then for each Japanese city. Its file, source and size are named when it is
+  fetched.
+- **Hong Kong's Light Rail thinning and Riga's inline loop move to
+  `pipeline/stations.py` `thin()` (owner)**, each with its own drift
+  measurement first, on a branch for review time. Both use the shared rule
+  already, in haversine; the Dutch ports predict no stop moves.
+- **San Francisco, Boston and Philadelphia keep their own variant for now.**
+  All three thin their surface lines, but add interchanges AFTER the spacing
+  pass, so an interchange does not restart the spacing count; the shared
+  function restarts it. Porting them changes the rule and can change which
+  stops the live maps show. The thin() refactor's entry named SF and Boston;
+  Philadelphia's `select_line_stations()` is the same variant. The owner asked
+  for the comparison before deciding.
 
 ### 2026-09-28 - Next builds: Band A's Japanese cities, ending with Tokyo, then the additions to built cities (owner)
 
