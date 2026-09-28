@@ -123,6 +123,12 @@ def fetch_osm(force):
 
 
 if __name__ == "__main__":
+    # A Windows console defaults to cp1252 and raises UnicodeEncodeError on
+    # Hangul, Han and kana, and on Czech and Latvian letters (brief_check.py
+    # crashed on a Korean claim, 2026-09-27). UTF-8 regardless of the console.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--force", action="store_true")
     args = ap.parse_args()

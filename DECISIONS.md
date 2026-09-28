@@ -20,12 +20,15 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**20 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**23 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Daegu's brief corrected: bakeries, delis and other food shops ARE published, on later pages of a six-per-page file list](#2026-09-27---daegus-brief-corrected-bakeries-delis-and-other-food-shops-are-published-on-later-pages-of-a-six-per-page-file-list)
 - [DECISIONS.md archived weekly, not monthly, with a merge guard (owner)](#2026-09-27---decisionsmd-archived-weekly-not-monthly-with-a-merge-guard-owner)
+- [UTF-8 console output at every script entry point that lacked it, and in the scaffold's step-3 template (owner)](#2026-09-27---utf-8-console-output-at-every-script-entry-point-that-lacked-it-and-in-the-scaffolds-step-3-template-owner)
 - [Efficiency change 3 done: CLAUDE.md 4,345 -> 1,685 words, PLAN.md 20,675 -> 3,136, check_all.py as a pre-push hook (owner)](#2026-09-27---efficiency-change-3-done-claudemd-4345---1685-words-planmd-20675---3136-check_allpy-as-a-pre-push-hook-owner)
+- [Daegu's brief: the national edition has no bakeries or delis, the edition is scattered across four id blocks, and Line 3 is a monorail](#2026-09-27---daegus-brief-the-national-edition-has-no-bakeries-or-delis-the-edition-is-scattered-across-four-id-blocks-and-line-3-is-a-monorail)
 - [Process efficiency review: batch approvals first, then trim what loads, then archive DECISIONS by month (owner)](#2026-09-27---process-efficiency-review-batch-approvals-first-then-trim-what-loads-then-archive-decisions-by-month-owner)
 - [Session loose ends closed (owner): Riga on JSON.parse, the main checkout current, UTF-8 output in two tools, and the Czech coordinate control per city](#2026-09-27---session-loose-ends-closed-owner-riga-on-jsonparse-the-main-checkout-current-utf-8-output-in-two-tools-and-the-czech-coordinate-control-per-city)
 - [Daegu's and Busan's licences read: Busan permitted with a credit, Daegu on a reasoned position after the national route failed (owner)](#2026-09-27---daegus-and-busans-licences-read-busan-permitted-with-a-credit-daegu-on-a-reasoned-position-after-the-national-route-failed-owner)
@@ -53,6 +56,36 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Daegu's brief corrected: bakeries, delis and other food shops ARE published, on later pages of a six-per-page file list
+
+- **The earlier entry today ("Daegu's brief: the national edition has no
+  bakeries or delis…") was wrong on its headline.** 제과점영업 (1,020 open),
+  즉석판매제조가공업 (4,631) and 식품판매업(기타) (308) are in Daegu's 2026-08
+  edition, as files 33020, 33002 and 32999 of the food-manufacturing group,
+  on pages 2–4 of its file list.
+- **How it happened**: a D-데이터허브 dataset page embeds its files six at a
+  time. Its own `search` object said `"totalRecordCount":23` for that group,
+  and the probe never compared the list against that count. Every group read
+  showed at most six files, which was the page size, not the data.
+  - The corroboration was also wrong. "Busan's API has the same eleven
+    groups" compared group NAMES. Busan's food-manufacturing operation holds
+    21 permit types, bakeries included. The profile of Busan's cached pull,
+    started for Busan's brief, is what exposed it.
+  - The brief check written to guard the claim (`absent` on page 1) passed,
+    because it could not see past page 1.
+- **Found the way to read the whole list**: the page's own
+  `getDataSetDetailListInfo.do`, posted with its embedded `search` object and
+  the page's `Origin` and `Accept` headers, answers JSON; without them it
+  answers an HTML error page. Paged through all 36 groups, every one matches
+  its `totalRecordCount`: **195 files**, the national scheme's full set.
+- **Corrected**: the brief (now 11/11, a check pinned to the count and one on
+  the bakery file), its owner calls (the retail call is gone; three remain),
+  Daegu's master-list row and PLAN. Retail is now **18,737** permit rows
+  before de-duplication, against 12,779 before. Seven more names are flagged
+  (123). The three files are cached beside the others.
+- **Main Build was told** the corrected brief supersedes the one handed over
+  an hour earlier.
 
 ### 2026-09-27 - DECISIONS.md archived weekly, not monthly, with a merge guard (owner)
 
@@ -87,6 +120,36 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   `outputs/<city>/baseline.json` since before this review
   (`pipeline/drift_check.py:411-418`), not against DECISIONS. The decision
   stands on the archive alone.
+
+### 2026-09-27 - UTF-8 console output at every script entry point that lacked it, and in the scaffold's step-3 template (owner)
+
+- **The defect**: `scripts/brief_check.py daegu` raised `UnicodeEncodeError`
+  printing a Korean claim, because a Windows console defaults to cp1252. It is
+  the defect fixed the same day in `drift_check.py` and
+  `check_personal_exposure.py`, one script at a time.
+- **Fixed at 32 entry points in one pass** (owner's call, "fix scripts for
+  asian characters"), each with the same block under its
+  `if __name__ == "__main__":`:
+  - 21 files in `scripts/`: every one that printed without it;
+  - the step and fetch files of the built cities whose names fall outside
+    cp1252: Hong Kong and Taipei (Han), Prague and Riga (Czech, Latvian).
+    Seoul, Taichung and Taoyuan already had it;
+  - `scaffold_city.py`'s generated `step3_map.py`, so every future city
+    inherits it.
+- **Rejected: one fix in `pipeline/__init__.py`.** Every step imports the
+  package, but so does the deployed app (`app/components.py`, every page's
+  config import), so it would change the live app's process and put a reboot
+  question on a console fix.
+- **Checked**: all 32 compile; the diff is additions only, every added line
+  one of the block's; `brief_check.py daegu` and `seoul` run without
+  `PYTHONIOENCODING`; both selftests and `check_no_fetch_in_steps.py` pass; a
+  scaffold dry-run with a Korean name completes. **The drift check could not
+  run** for the four cities from the staging worktree, which holds no raw
+  data. The change re-encodes the console only, and no step writes a file
+  through stdout.
+- **One `brief_check.py daegu` run of four reported 9/10.** The failing claim
+  was not captured, and three re-runs passed 10/10, so it reads as a transient
+  host. It is recorded, not diagnosed.
 
 ### 2026-09-27 - Efficiency change 3 done: CLAUDE.md 4,345 -> 1,685 words, PLAN.md 20,675 -> 3,136, check_all.py as a pre-push hook (owner)
 
@@ -134,6 +197,45 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   decision already open in `PLAN.md`". PLAN had marked it decided on
   2026-09-21, before the trim, so that sentence was already stale.
 
+### 2026-09-27 - Daegu's brief: the national edition has no bakeries or delis, the edition is scattered across four id blocks, and Line 3 is a monorail
+
+- **Wrote `docs/build_briefs/daegu.md`** (10/10 checks live) and handed it to
+  Main Build. Four owner calls are open in it, each with a recommendation.
+- **Found that the 2026-08 edition is 36 group datasets in four id blocks**
+  (DMI_0000119500–09, 119560–69, 119600–09 and 119690–95). The screen had
+  recorded only the last two, so its "barbers, laundries and baths are in
+  sibling files not yet pulled" was a statement about two blocks. They were
+  in the other two. Every id between the blocks is a "page not found" stub
+  under every `provdMethod`.
+- **Found that 제과점영업, 즉석판매제조가공업 and 식품판매업(기타) are in no Daegu
+  file, in any month read** (2026-02, 07, 08). Busan's API, the same national
+  register, has the same eleven groups. Seoul's 20,298 retail permit rows of
+  those types came from Seoul's own system. **Recommended: build with the
+  narrower retail, disclosed on the page, and not to Band C**, because the
+  retail bucket is present (tobacco 6,492, butchers 2,416, in-store
+  health-food 2,366, large stores 161, 1,344 convenience stores and
+  confectioners holding café permits). The owner's call.
+- **Measured the files a build reads**: food 38,893, personal 12,548 and
+  retail 12,779 permit rows before de-duplication. Points on 95.9–100%
+  (large stores 72.0%). 66,697 land inside OSM's 대구광역시 and 11 outside.
+  `korean_names.py` flags 116. There is no operator column.
+- **Four traps recorded for the build**, each silent in Seoul's code as
+  written:
+  - The columns are renamed (`좌표정보X(EPSG5174)`, `도로명전체주소`,
+    `소재지전체주소`, phone `소재지전화`).
+  - The health-food channel is in `위생업태명` while `업태구분명` is present
+    and blank, so Seoul's rule would drop every health-food row.
+  - Seoul's address regexes need `[구군]` for 달성군 and 군위군.
+  - Line 3 is OSM `route=monorail`, which Seoul's rail query does not ask
+    for.
+- **대경선 recommended out on spacing**: 3 stops inside Daegu at a mean 4.08
+  km, against the subway's 0.77–1.07 km (Seoul's 공항철도 was 3.37 km).
+  Frequency unmeasured.
+- The eleven files (9.6 MB added today) are in the main checkout's
+  `data/daegu/raw/`. A control re-download of the restaurant file was
+  byte-identical. Column names and counts only were read; no row was printed.
+- `scripts/brief_check.py` crashes printing a Korean claim to a cp1252
+  console; `PYTHONIOENCODING=utf-8` works around it. Not fixed here.
 ### 2026-09-27 - Process efficiency review: batch approvals first, then trim what loads, then archive DECISIONS by month (owner)
 
 - **The owner chose the order: change 2 (one approval review a day and one
