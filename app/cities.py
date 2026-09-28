@@ -1072,6 +1072,23 @@ CITIES = [
         # own document).
         "label_offset": ("middle", 0, 22),
     },
+    {
+        "name": "Sapporo",
+        "lat": 43.0687,
+        "lon": 141.3508,
+        "page": "pages/52_Sapporo_Heatmap.py",
+        "blurb": "Sapporo Municipal Subway (TODO: list the lines)",
+        "region": "East Asia",
+        "country": "Japan",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
