@@ -1,114 +1,46 @@
-# Handoff - Tokyo's missing wards: licence reads, PDF extraction, re-probes (from "Fukuoka handoff", 2026-09-28)
+# Handoff - Tokyo's missing wards: CLOSED 2026-09-28
 
-Written for a FRESH research session in the `tokyo-sources` worktree. Read it
-once and follow the pointers. When a section is done, delete it rather than
-adding an addendum.
+The Tokyo sources research session (`worktree-tokyo-sources`) finished its
+job the same day and passed back to the Japan build session ("Fukuoka
+handoff"). The owner plans to pass everything from there to the Tokyo build
+session. Delete this file once that session has read it.
 
-## Why this exists
+## The result
 
-Tokyo is the last Japanese city (owner). Its brief
-(`docs/build_briefs/tokyo.md`) found food-permit lists for 8 of the 23 special
-wards; the rest are PDF-only, stale, partial, request-only or not found. The
-build session (`worktree-japan`, "Fukuoka handoff") is writing the
-`tokyo-ward` skill and a per-ward share check meanwhile. **This session finds
-out, ward by ward, whether any missing ward can join the map** - before the
-Tokyo build starts. The owner's decision of 2026-09-28: **stations in a ward
-with no business data are drawn hollow and labelled "no business data"**,
-unless this session finds the data.
+**Every one of the 23 wards is settled: ON 8, OFF 15.** None of the 15
+missing wards can join the map from its own publications. The build reads
+the **Ward cards** section of `docs/build_briefs/tokyo.md`:
+- one row per ward (food ON or OFF, the reason, the licence, and whether the
+  ward has personal-services registers);
+- a full card for each ward settled on 2026-09-28: Suginami, Katsushika,
+  Bunkyō, Ōta, Kita and Arakawa.
 
-## The job, in the owner's order
+The reasoning is in `DECISIONS.md`, 2026-09-28, "Tokyo's missing wards".
 
-1. **Licence reads: DONE 2026-09-28.** Ōta, Arakawa and Kita are all OFF
-   (Ward cards, `docs/build_briefs/tokyo.md`). Sumida and Adachi stay unread
-   unless a full list turns up beside their new-permit PDFs.
-2. **PDF extraction: no ward qualifies yet**, so it waits. It applies only to
-   a ward whose licence permits reuse and modification. Write a `pdf-register` skill from the first one: extract the
-   table rows to CSV (the tool, the page-by-page row count checked against
-   the PDF's own totals, header rows repeated per page, wrapped cells), then
-   the JOIN with `scripts/screen_japan_join.py` (add a key per ward) and the
-   share of the official count (yearbook table 19-8,
-   `data/tokyo/raw/tn24qv190800.csv`). Operator columns in a PDF are read in
-   memory for the name rule only, never kept (owner 2026-09-27).
-3. **Re-probes** (`reprobe-city`) for the three wards where nothing was found:
-   **Bunkyō** (13105), **Suginami** (13115), **Katsushika** (13122). Ask each
-   ward's OWN host, enumerate its whole catalogue, read who a 403 is for, look
-   for a second shape. Bunkyō first: it is central (with Chiyoda and Toshima
-   it is the hole in the middle of the map).
-4. If time allows: re-check the stale and partial wards for a newer full list -
-   **Nakano** (to 2023-06), **Shinagawa** (since 2024-04), **Itabashi** (since
-   2025-04), and **Shinjuku** (a 2026 CSV on its portal would replace the 2023
-   snapshot).
-
-## What NOT to do (the owner's standing calls)
-
-- **Outreach is the last resort.** Chiyoda, Toshima, Nerima and Edogawa
-  release their lists only on request: the drafted requests stay PARKED
-  (`docs/gated_access.md`). Do not contact any agency.
-- **A ward joins the map only with a full, current list** (2026-09-24).
-  Partial, first-permit-only or stale lists are recorded, not used (Meguro's
-  first-permits list is the one accepted exception, at its measured share).
-- **The COVID-era lists are not used** (2026-09-24), whatever their licence.
-- **Downloads need the owner's OK**: name the file, source and size first.
-  **Never open a PDF or ZIP URL in the Browser pane**: the ward servers send
-  it as a download, and it lands at the checkout root (it happened twice on
-  2026-09-28). Use HEAD requests and WebFetch.
-- **Never hand-write a PDF decoder** (a ToUnicode / CMap or stream parser).
-  One built every stream in memory, and a dict entry for every code in each
-  bfrange. It drove python.exe to 47 GB committed on this 16 GB machine and
-  crashed the app (2026-09-28, found by the cleanup session). Use `pdftotext`
-  or `pypdf`, page by page, and measure memory on ONE page before running a
-  whole file. The `pdf-register` skill must carry this rule.
-- Published prose waits for the owner; so do judgment calls (recommend, then
-  wait).
-
-## The output: one ward card per ward
-
-The build reads these; write them into a new section of
-`docs/build_briefs/tokyo.md`, "Ward cards", one table row or block per ward,
-so the `tokyo-ward` skill can consume them unchanged:
-
-| Field | Meaning |
+| Why OFF | Wards |
 |---|---|
-| ward, code | 大田区, 13111 |
-| verdict | **ON** (full, current, permitted) / **OFF** (why, in one phrase) / **OPEN** (what is still unknown) |
-| file(s), host, size | exact URLs; the host is the ward's own, or one the ward's own pages name |
-| format | CSV / XLSX / PDF (pages); encoding; header shape; address layout (split / one string / starts at the town) |
-| as of | the list's own date |
-| closures | a closure column (Shibuya's 廃業日) or none |
-| operator columns | their exact names - the name rule reads them in memory |
-| own coordinates | columns, if any (a check on the join, never the map's source) |
-| licence | the verdict shape from `licence-read`, and the credit it prescribes |
-| join | block / chōme / none, from `screen_japan_join.py <key>` |
-| share | of the yearbook's FY2024 飲食店営業 count for the ward |
-| personal services | the ward's barber / beauty / laundry registers, if any, and their date |
+| released only on request (parked) | Chiyoda, Toshima, Nerima, Edogawa |
+| PDF under site terms that bar reuse | Ōta (owner's call), Arakawa, Kita |
+| nothing published at all | Bunkyō, Suginami, Katsushika |
+| stale, partial or new permits only | Nakano, Shinagawa, Itabashi, Sumida, Adachi |
 
-## Where things stand
+## Not done, and why
 
-- **Worktree:** `.claude/worktrees/tokyo-sources`, branch
-  `worktree-tokyo-sources`, from `origin/master` at `a21bf37`. `data/` and
-  `.venv-lean` are junctions to the main checkout's - **unlink them alone
-  before any removal** (`docs/session_roles.md`). Ward files belong in
-  `data/tokyo/raw/<code>/`.
-- **Paths this session owns**: `docs/build_briefs/tokyo.md` (the Ward cards
-  section and corrections), the Tokyo rows of `docs/data_sources/japan.md`,
-  `docs/gated_access.md`, new keys in `scripts/screen_japan_join.py`,
-  `data/tokyo/raw/`, and a new `.claude/skills/pdf-register/`. **Not**:
-  `pipeline/countries/*`, `.claude/skills/japan-city/`, `.claude/skills/tokyo-ward/`
-  and `scripts/japan_ward_table.py`, which the build session is changing on
-  `worktree-japan`.
-- **Pacing:** `get_usage` between wards; at 90% of the 5-hour window finish the
-  current ward, commit clean and stop with a one-line next action.
+- **PDF extraction and the `pdf-register` skill**: no ward's licence permits
+  reuse, so there was nothing to extract. Whoever writes the skill later must
+  carry CLAUDE.md's [#memory] rule (no hand-written PDF or font decoder).
+- **No new keys in `scripts/screen_japan_join.py`**: no new list to join.
+- **No outreach drafted.** Each card's "route in" names the office. All
+  routes are parked (owner: outreach is the last resort).
 
-## Before starting
+## Traps the build inherits
 
-- **Tell "Fukuoka handoff" (the build session) and "Project cleanup session"
-  your session name** (`ListAgents`).
-- **Git:** identity per command only
-  (`git -c user.name=dacekroberts -c user.email=49654908+dacekroberts@users.noreply.github.com commit ...`);
-  never change git config, amend or force-push; stage by name; commit messages
-  with backticks through a file (`git commit -F`). Trailer:
-  `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
-- **Never push this branch to master.** Back it up with
-  `git push origin worktree-tokyo-sources`. Each finding is logged in
-  `DECISIONS.md` as it is made (`decisions-entry`), and
-  `python scripts/decisions_index.py` run after.
+- **Dates that do not mean new data.** wagmap labels Nakano's file 2026/6/30,
+  but its permits end 2023-06-27. Shinjuku's server re-stamped its 2023 CSV
+  with Last-Modified 2026-08-31. Read a list's own permit dates.
+- **Ward servers send a PDF or ZIP as a download.** Opened in the Browser
+  pane, it lands at the checkout root, which happened twice here. Use HEAD
+  and WebFetch.
+- **WebFetch on a PDF or ZIP saves the binary** under the home directory, in
+  the session's `tool-results` folder. `check_stray_downloads.py` does not see
+  it.

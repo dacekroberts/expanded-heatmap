@@ -197,6 +197,32 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   scripts, the Baltimore listings, the line-colour search).
 ### 2026-09-28 - Tokyo's missing wards: Arakawa OFF; a ward-by-ward list in the brief (owner)
 
+- **Found that Suginami publishes no food-premises list at all, so it is OFF,
+  and every one of Tokyo's 23 wards is now settled: ON 8, OFF 15.** For
+  Suginami the probe read:
+  - all 16 pages of the ward's food block;
+  - the ward's whole catalogue (5,988 files on 519 dataset pages, none food,
+    and no 生活衛生課 among its departments);
+  - the Tokyo catalogue (`t131156`: 103 packages) and BODIK (none);
+  - 372 archived documents under the old food pages.
+
+  No page offers a list on request. The ward publishes lodging lists (旅館業,
+  民泊) as PDFs, but nothing for food. **Rejected: MHLW's slice**, with 175 live
+  飲食店営業 permits, **3.0%** of the ward's own count of 5,852 (statistics
+  table 10-12, the same as the yearbook). `suginami.geocloud.jp` answers 403
+  with no statement of who it is for; it was not worked around.
+
+  **The conclusion of the round**: none of the 15 missing wards can join the
+  map from its own publications. Four release theirs only on request, three
+  are PDF under terms that bar reuse, three publish nothing, and five are
+  stale, partial or new-only. Every way in is a request, which is the owner's
+  act and parked. Tokyo builds its 8 wards, and the other stations are drawn
+  hollow (owner, 2026-09-28).
+- **Lesson: WebFetch on a PDF or ZIP saves the binary** in the session's
+  `tool-results` folder under the home directory. That is outside the
+  repository and not caught by `check_stray_downloads.py`. The probe agents
+  kept to files under 5 MB, and one agent deleted its cached 2.3 MB guide.
+
 - **Found that Katsushika publishes no food-premises list at all, so it is
   OFF for food** (re-probed the same way as Bunkyō). The probe covered:
   - the whole food-hygiene block on the ward's own host (90 pages and 72

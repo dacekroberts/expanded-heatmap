@@ -306,7 +306,7 @@ missing ward follows the table.
 | Setagaya | 13112 | **ON** (63%) | opt-outs left out | ward's own, CC BY 4.0 | — |
 | Shibuya | 13113 | **ON** (101%) | the ward's own register | ward's own, CC BY 4.0 | ✓ |
 | Nakano | 13114 | **OFF** | stale, to 2023-06-27; re-checked 2026-09-28: unchanged. ⚠️ wagmap now labels it データ作成基準日 2026/6/30, but the file is still the 2023 one (Last-Modified 2023-10-04) | — | — |
-| Suginami | 13115 | **OPEN** | none found; re-probe pending | — | — |
+| **Suginami** | 13115 | **OFF** | **no list exists in any format; MHLW's slice is 3.0% (re-probed 2026-09-28)** | — | — |
 | Toshima | 13116 | **OFF** | in-person viewing only; parked | — | ✓ |
 | **Kita** | 13117 | **OFF** | **PDF list "not open data", site terms bar reuse; the CC BY CSV holds 52 permits, 2022–2024 (read 2026-09-28)** | 🚫 not permitted (PDF) | — |
 | **Arakawa** | 13118 | **OFF** | **site terms bar all reuse; no open-data route (read 2026-09-28)** | 🚫 not permitted | ✓ |
@@ -316,7 +316,10 @@ missing ward follows the table.
 | **Katsushika** | 13122 | **OFF** | **no list exists in any format; MHLW's slice is 3.5% (re-probed 2026-09-28)** | — | ✓ |
 | Edogawa | 13123 | **OFF** | on request only (password after application); parked | — | — |
 
-**Tally, 2026-09-28**: ON 8 · OFF 14 · OPEN 1.
+**Tally, 2026-09-28 — every ward settled**: ON 8 · OFF 15 · OPEN 0. No
+missing ward can join the map from its own publications. The ways in are all
+requests (`docs/gated_access.md` and each card's "route in"), and all are
+parked.
 
 ### Arakawa 荒川区, 13118 — OFF (read 2026-09-28)
 
@@ -344,6 +347,19 @@ missing ward follows the table.
 | second shapes | **MHLW 食品衛生申請等システム** (`13105_food_business_all.csv`, PDL 1.0, to 2026-08): 1,100 rows, but only 97 live permits, 88 of them 飲食店営業, so **2.4% of the yearbook's 3,716**. The rest are notifications (office snack freezers, vending machines, canteens). **Not used**. The 食品衛生優良施設 award lists (9 and 8 premises) are negligible |
 | personal services | 美容所 372, 理容所 109, クリーニング所 208 and 旅館 55 on the Tokyo catalogue (`t131059`, CC BY): already in the 11-ward layer. The ledgers carry 営業者氏名 and 法人代表者氏名, never read |
 | route in | a request to 文京保健所生活衛生課食品衛生担当 (03-5803-1228). Outreach is the owner's act and the last resort: **parked**, and not drafted |
+
+### Suginami 杉並区, 13115 — OFF (re-probed 2026-09-28)
+
+| Field | |
+|---|---|
+| verdict | **OFF**: no food-premises list exists, in any format, current or historical, and no page offers one on request |
+| where it was looked for | **The ward's own host**: all 16 pages of the 食品の衛生 block (`/kenkou/eisei/shokuhineisei/`), which hold guides and leaflets only. **The ward's catalogue** (`/opendata/index.php`): 5,988 files on 519 dataset pages, none food, and no 生活衛生課 among its 19 departments. Its index `documents/8444/open-data-list.csv` has 142 titles. The only ZIP is a GTFS feed. **The Tokyo catalogue** (`t131156`): 103 packages, none food. BODIK: none. **Web Archive**: 372 archived documents under the old food and hygiene pages, none of them a list |
+| the section's other lists | 旅館業営業許可施設一覧 (`/documents/870/ryokan202608.pdf`) and the 民泊 届出住宅 list (`/documents/871/todokede.pdf`, with a no-commercial-use request). No food, barber, beauty or laundry list |
+| control | the ward's own statistics table 10-12 (`/documents/25287/r7-10-12-01.csv`): 飲食店営業 3,631 new-law + 2,221 old-law = **5,852** at FY2024 end, the same as the yearbook |
+| second shapes | **MHLW 食品衛生申請等システム** (`13115_food_business_all.csv`): 1,246 rows, 175 live 飲食店営業 permits dated 2022-02 to 2026-08, so **3.0%**. **Not used** |
+| 403 | `suginami.geocloud.jp` (すぎナビ, the map open-data list): a bare nginx 403 with no statement of who it is for. The ward describes it as map layers. Not worked around |
+| personal services | none published (no 生活衛生 packages on `t131156`) |
+| route in | a request to 杉並保健所 生活衛生課. Outreach is the owner's act and the last resort: **parked**, and not drafted |
 
 ### Katsushika 葛飾区, 13122 — OFF (re-probed 2026-09-28)
 
