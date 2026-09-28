@@ -94,6 +94,17 @@ Desktop is unaffected — the label is fully visible there.
     handed to Main Build. Three owner calls open in it (buckets as Seoul's;
     동해선, recommended out; stations inside Busan with the Busan–Gimhae LRT
     drawn).
+  - [ ] **🇰🇷 BUSAN - BUILT 2026-09-27 on `worktree-busan` (its own branch, owner; stacked
+    on `worktree-daegu` for the shared Korean module), HELD for the batch: 89,798
+    storefronts, 110 stations, Lines 1–4 and the Busan–Gimhae LRT.** Page 49. Owner calls
+    taken as recommended. Done: steps 1–3, drift baseline, provenance rows, inconsistency
+    rows, privacy verdict, label width (41.9) and placement (below; Daegu's moved to the
+    left), DECISIONS. Still to do:
+    - [ ] At the owner's review: the page prose, blurb and credit notice 49, drafted in
+      chat, and Line 4's darkened blue (#144B7A).
+    - [ ] Then `deploy-verify` ONCE for Daegu and Busan (city-added x2, plus East Asia).
+    - [ ] Publish with the batch: pushing `worktree-busan` carries Daegu too. Retire the
+      `data/` junction and the `busan-static-tmp` entry.
   - [ ] **Band T's group decision**: build trams-only cities, and in what
     order (Nice, Montpellier, Brno and Bergen are the cheapest strong ones).
   - [ ] **Wave 2 held by the owner** (the US; Canada, Brazil and Ireland;

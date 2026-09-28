@@ -845,6 +845,16 @@ Cities built and running end to end (pipeline, map, app page):
   2025-08-31, and the page shows the rows' own date. Line 3 is a monorail,
   matched by route type, never by network.
 
+- **Busan** - Busan Metro Lines 1 to 4 and the Busan-Gimhae LRT, stations
+  inside Busan only; South Korea's third city, on its own branch stacked on
+  Daegu's and held for the same batch. The same register through the city's
+  keyless API, whose two parameters each drop rows silently: a `state`
+  filter loses every permit since 2025-02 (they carry no status code), and an
+  operation's default answer omits types asked for only by id. So every type
+  is pulled in full by `opnSvcId`, and `pipeline/countries/korea.py` does the
+  rest. The feed is frozen at 2026-04-15 and the rows agree. Line 4 is a
+  monorail.
+
 - **Taichung** - Taichung Metro's Green Line, and Taiwan's first city. The
   business leg is the national business tax register, joined to the city's
   own door plates by district, street and number - no geocoder - with two

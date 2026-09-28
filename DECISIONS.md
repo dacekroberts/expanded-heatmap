@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**28 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**29 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Busan built on its own branch, stacked on Daegu's: 89,798 storefronts, 110 stations, Lines 1-4 and the Busan-Gimhae LRT](#2026-09-27---busan-built-on-its-own-branch-stacked-on-daegus-89798-storefronts-110-stations-lines-1-4-and-the-busan-gimhae-lrt)
 - [Busan's brief: the API's state filter drops every permit since February 2025, large stores come only by id, and the frozen snapshot is genuine](#2026-09-27---busans-brief-the-apis-state-filter-drops-every-permit-since-february-2025-large-stores-come-only-by-id-and-the-frozen-snapshot-is-genuine)
 - [Daegu's page, blurb, notice 48 and exclusions section approved and written; deploy-verify held until after Busan (owner)](#2026-09-27---daegus-page-blurb-notice-48-and-exclusions-section-approved-and-written-deploy-verify-held-until-after-busan-owner)
 - [Daegu built on its own branch: 67,212 storefronts, 86 stations, Lines 1-3, through a new shared Korean module](#2026-09-27---daegu-built-on-its-own-branch-67212-storefronts-86-stations-lines-1-3-through-a-new-shared-korean-module)
@@ -61,6 +62,66 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Busan built on its own branch, stacked on Daegu's: 89,798 storefronts, 110 stations, Lines 1-4 and the Busan-Gimhae LRT
+
+- **Where and what (owner, 2026-09-27).** Its own worktree
+  (`worktree-busan`), page 49, held for the batch. It is stacked on
+  `worktree-daegu` rather than cut from master, because the shared Korean
+  module exists only there until Daegu lands (Taichung was stacked on Seoul
+  the same way). The owner took the brief's recommendations: Seoul's buckets;
+  동해선 not drawn on spacing (16 stops in Busan, 2.29 km apart); stations
+  inside Busan only, with the Busan-Gimhae LRT drawn.
+- **The pulls.** The owner OK'd full pulls of the three types Staging had
+  cached only as `state=01` plus since-2025 files: 일반음식점 (129,512 rows,
+  226.7 MB), 휴게음식점 (37,300, 66.2 MB) and 단란주점 (4,887, 5.7 MB). The
+  other eleven are Staging's full pulls, kept with `--resume`. The fetch
+  script never sends `state` (it asserts so), always sends `opnSvcId`, and
+  refuses a pull whose row count or distinct `mgtno` differs from
+  `totalCount`, or which carries another type. The full pull settled the
+  brief's "within a few dozen": 42,476 open restaurants (the brief's 42,420
+  plus 56 of its 58 unknowns) and 11,289 open cafés (11,273 plus 16).
+- **Counts (the drift baseline, `outputs/busan/baseline.json`, 36
+  figures).** 98,620 open rows, 93,404 bucketed. Placement: 92,265 on
+  their own point, 193 by road address and 136 by lot address from another
+  permit at the same building, 810 unplaced (0.9%), 1 outside the sanity
+  box. The control is 0 m at the median, 9 m at the 99th percentile. One pin
+  per premises: Food service 53,388 -> **53,152**, Retail 22,571 ->
+  **20,140** (2,910 convenience stores), Personal services 16,634 ->
+  **16,506**, so **89,798 storefronts**, 66,348 inside a ring (74%). Rail:
+  252 stop nodes, **110 stations** (Lines 1-4 40 / 38 / 17 / 14, the LRT 9),
+  17 outside Busan (5 in Yangsan, 12 in Gimhae), median spacing 791 m.
+  Ten Busan stations are on 동해선 only, and have no ring.
+- **The module took Busan with one change.** The API's lowercase codes are
+  renamed to the published names `korea.FIELDS` resolves
+  (`config.FIELD_RENAME`). Its phone guard matched only 전화, so it could not
+  have seen `sitetel`, and now also catches `...tel` codes. Daegu's drift
+  re-run on this branch after the change: zero drift, 36 figures unchanged.
+  The per-row sub-type rule handles both of the brief's field traps:
+  health-food's channel is in `sntuptaenm`, and salons key on `uptaenm`
+  because their `sntuptaenm` holds combined values. The health-food file is
+  declared masked, as Daegu's is.
+- **Privacy verdict (`check_personal_exposure.py busan`).** No owner field
+  exists. 114 names are withheld (77 inside the rings). A Korean personal
+  name at a residential address that is still shown: **0 of 89,798**. The
+  Latin heuristic's 40 "person's name then a trade name in brackets" are all
+  trade names with a Korean reading ("TRUMAN COFFEE(트루먼커피)",
+  "Pho Trang(퍼짱)"). Published as it stands.
+- **Rail and colours.** Matched on route type and ref, never on network
+  (동해선 is tagged `부산 도시철도`). Line 4 is `route=monorail`. Gate 3 is
+  exact at 40 / 43 / 17 / 14 / 21 whole-line stations, against Korean
+  Wikipedia (secondary, as Daegu's). The operator's Line 4 #217DCB is
+  Delta-E 10.8 from Retail: over the floor, but the same blue at a glance.
+  It is darkened, hue kept, to **#144B7A (31.8)**, level with Daegu's Line 2.
+  **For the owner's visual check at review.**
+- **Front-page labels.** Busan measured 41.9 px, with eight entries
+  reproduced exactly. Daegu's label below its dot and Busan's above each
+  grazed the other's marker in East Asia, and Busan's to the right overlapped
+  Daegu's pill. Settled with **Busan below its dot and Daegu's label moved to
+  the LEFT of its dot** (above it covers Seoul): 0 problems and no near-miss.
+- **Still to do**: the page prose, blurb and credit notice 49 are drafted for
+  the owner; then `deploy-verify` once for Daegu and Busan (held until now,
+  owner), and the batch publish.
 
 ### 2026-09-27 - Busan's brief: the API's state filter drops every permit since February 2025, large stores come only by id, and the frozen snapshot is genuine
 
