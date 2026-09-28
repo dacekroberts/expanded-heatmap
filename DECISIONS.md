@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**108 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**109 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Tokyo landed: city-landed sweep; three cities' in-ring counts corrected in the inconsistency list](#2026-09-28---tokyo-landed-city-landed-sweep-three-cities-in-ring-counts-corrected-in-the-inconsistency-list)
 - [Tokyo's review time: deploy-verify (city-added) found the legend covering 5 labels at the 1000 px frame; fixed, re-checked, published (owner)](#2026-09-28---tokyos-review-time-deploy-verify-city-added-found-the-legend-covering-5-labels-at-the-1000-px-frame-fixed-re-checked-published-owner)
 - [Berlin from the discards to Band B: shops and food on IHK Berlin's register (owner)](#2026-09-28---berlin-from-the-discards-to-band-b-shops-and-food-on-ihk-berlins-register-owner)
 - [Tokyo built: its page, macro-map entry, exclusions and table rows (owner-approved); Japan's sixth and last city, held for review time](#2026-09-28---tokyo-built-its-page-macro-map-entry-exclusions-and-table-rows-owner-approved-japans-sixth-and-last-city-held-for-review-time)
@@ -144,6 +145,33 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Tokyo landed: city-landed sweep; three cities' in-ring counts corrected in the inconsistency list
+
+- **Tokyo's rows held against their files**: 55 stations out
+  (`excluded_stations.csv`), 11,954 / 41,972 / 8,557 in-ring pins (the
+  map's layer menu), 97.6% in-ring (62,483 of 63,989 heat points), 0.6 mi
+  rings. `check_all.py` 23 of 23; `check_stale_claims.py --only E`: 15
+  flags, none made false by Tokyo.
+- **Corrected in `docs/map_inconsistencies.md`, table B and theme 2**: the
+  in-ring counts entered for Sapporo (16,219 / 4,666), Fukuoka (5,184 /
+  14,865) and Kyoto (19,313) did not match their maps' layer menus (16,222
+  / 4,668; 5,185 / 14,867; 19,318), and the menu figures sum exactly to each
+  map's in-ring heat points. The earlier sweep's "27,975 against 27,980"
+  for Kyoto was this. Kyoto's build entry in DECISIONS keeps its 19,313;
+  the map is right.
+- **Tokyo added to the inconsistency themes** (1-5, 7-11 and open question
+  9), including a new theme-5 point: business data for only part of the area
+  drawn (8 of 23 wards, 293 hollow stations). The `japan-city` skill marks
+  the Japanese list complete. `docs/project_context.md` drops two superlatives
+  Tokyo or Seoul had already made false (Osaka's "most lines": Tokyo draws
+  52 to Osaka's 34; Milan's "most registers": Seoul has 17).
+  `docs/japan_city_list.md` and `scripts/japan_ward_table.py`'s STATUS now
+  show Tokyo as built. The generated row was hand-edited to match, because
+  `--write` needs `data/`; regenerate from a worktree with data to prove it.
+- **For the owner:** all six Japanese pages call their layer "the Retail
+  layer", but every Japanese map (and Hong Kong's) labels it "Food shops".
+  Published wording, queued for review time.
 
 ### 2026-09-28 - Tokyo's review time: deploy-verify (city-added) found the legend covering 5 labels at the 1000 px frame; fixed, re-checked, published (owner)
 

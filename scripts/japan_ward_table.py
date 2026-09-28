@@ -56,8 +56,8 @@ STATUS = {
     "fukuoka": ("Fukuoka", "✅ built", "Built 2026-09-28, Japan's fourth. Includes MHLW's addressed rows; about "
                                       "20% of restaurants withhold their address"),
     "kyoto": ("Kyoto", "✅ built", "Built 2026-09-28, Japan's fifth. Rebuilt register: an upper bound"),
-    "tokyo": ("Tokyo (8 wards)", "🟢 A", "Building, the last. 8 food wards on; the 15 without a usable food "
-                                        "list drawn as hollow stations (owner, 2026-09-28)"),
+    "tokyo": ("Tokyo (8 wards)", "✅ built", "Built 2026-09-28, Japan's sixth and last. 8 food wards on; the 15 without "
+                                        "a usable food list drawn as hollow stations (owner)"),
     "hiroshima": ("Hiroshima", "🟣 C", "Food only: no personal-services list is published. Also: the network "
                                      "is streetcars plus the elevated Astram Line, a trams-only edge case (Band T's "
                                      "question), noted under the first-blocker rule"),

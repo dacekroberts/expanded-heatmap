@@ -169,12 +169,14 @@ build (a brief to correct, never a check to relax), in particular:
   or the rule silently compares nothing - then re-run the Minato control.
 - Several still list as open what the owner decided on 2026-09-24 (the
   Shinkansen, 菓子/そうざい, the city-line scope). Mark them decided.
-- None has run the **Economic Census join control** (PLAN, "Join control"),
-  and none of the five built cities (Kobe to Kyoto) has. **The e-Stat download is approved (owner,
+- None has run the **Economic Census join control** (PLAN, "Join control").
+  It has now run for all six built cities (`scripts/japan_census_control.py`,
+  DECISIONS 2026-09-28, "Tokyo's census control, notice and page"); run it for
+  the next one. **The e-Stat download is approved (owner,
   2026-09-28)**: one national per-ward table serves every city; name its
   file, source and size when fetching it.
 
-## The city sheets (Osaka, Sapporo, Fukuoka and Kyoto built; Tokyo to build)
+## The city sheets (Osaka, Sapporo, Fukuoka, Kyoto and Tokyo built)
 
 Sheets from the briefs (line numbers are the brief's), 2026-09-27. Every brief
 has a `brief-checks` block; run it first. What each city needs BEYOND Kobe's
@@ -284,7 +286,7 @@ The sheet as written before the build:
   inconsistent); the Sagano scenic line is left out.
 - Open: same-address successors, the short-term filter, U+E0EE and 三条通大橋東.
 
-**Tokyo** - 🔨 **BUILT on `worktree-japan` 2026-09-28, held for review time**
+**Tokyo** - ✅ **BUILT 2026-09-28, published at that day's review time**
 (63,989 storefronts, 490 stations of which 293 hollow, 52 lines; DECISIONS
 "Tokyo step 2 on the roster" and "Tokyo's rail"). What it left for any big
 Japanese network:
@@ -345,8 +347,9 @@ reproduced the brief's eight shares exactly. Wards without data get hollow
 
 ## Recommending the next city
 
-None in Band A: all six on the owner's order (Osaka → Kobe → Sapporo →
-Fukuoka → Kyoto → Tokyo) are built (2026-09-28). The other Japanese cities
+**The owner's Japanese list is complete**: all six on the owner's order
+(Osaka → Kobe → Sapporo → Fukuoka → Kyoto → Tokyo) are built and published
+(2026-09-28), and none is left in Band A. The other Japanese cities
 wait in their bands (`docs/japan_city_list.md`): Hiroshima food only and on
 streetcars (T), Yokohama personal services only (N), Sendai the city's
 permission (D). A Tokyo ward whose list turns up is the `tokyo-ward` skill.

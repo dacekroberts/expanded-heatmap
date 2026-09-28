@@ -560,7 +560,7 @@ Cities built and running end to end (pipeline, map, app page):
 - **Milan** - Metro M1-M5; the seventeen tram routes are recorded as a costed
   extension rather than a discard. Distinctive in four ways.
 
-  It assembles **six premises registers, the most of any city here**, and its
+  It assembles **six premises registers**, and its
   **taxonomy is keyed on the register rather than on any classification
   field**, because every in-dataset classification is unusable: one carries
   sixty-odd distinct values for what should be three, half of them pure case
@@ -898,8 +898,7 @@ Cities built and running end to end (pipeline, map, app page):
   `japan_step2.py`), so the next Japanese city is mostly a config.
 
 - **Osaka** - Japan's second city, and the proof that Kobe's shared steps
-  carry: a config and three thin steps. It draws the most lines of any map
-  here - Osaka Metro and the New Tram, JR West, Hankyu, Hanshin, Keihan,
+  carry: a config and three thin steps. It draws a dense network - Osaka Metro and the New Tram, JR West, Hankyu, Hanshin, Keihan,
   Kintetsu, Nankai and the Hankai tram, cut at the city line - which took a
   measured colour search and a third, wider label pass in `map_common` (owner).
   N02's legal line filing is split into public lines by branch walks, one of
@@ -926,6 +925,16 @@ Cities built and running end to end (pipeline, map, app page):
   since 2021, so the 2021 list plus every monthly list since, pinned at the
   last day the newest list covers. Closures are unpublished, so the map is an
   upper bound and says so. Its funiculars are left out, as Kobe's are (owner).
+
+- **Tokyo** - the last city on the owner's Japanese order, with no city-wide
+  source: each special ward publishes its own food-permit list or none, so
+  each usable ward list is its own source (the `tokyo-ward` skill), with
+  MHLW's filings added where they help. Wards without a usable food list keep
+  their stations on the map, drawn hollow and without rings (owner). The page
+  states each ward's share of the official restaurant count,
+  read from the build, never typed. JR East is drawn as the services riders
+  use over MLIT's legal lines, and the map labels its lines by the operators'
+  line codes, the full names in the legend (owner).
 
 - **Riga** - Rīgas satiksme's seven tram routes, across the city's 58
   neighbourhoods; Latvia's first city, in Amsterdam's two-layer shape. Food
@@ -1057,7 +1066,8 @@ Taiwan and Japan each get a per-country skill written after their first city.
 Japan's first, Kobe, was built 2026-09-27; the `japan-city` skill was written
 from it, and Osaka, the second, was built on it the same day (held for review
 time). Sapporo, Fukuoka and Kyoto followed on 2026-09-28 and landed together;
-Tokyo (8 wards) is the last in the owner's Japanese order.
+Tokyo (8 wards), the last in the owner's Japanese order, landed the same day,
+which completes the Japanese list and Band A.
 The two renderer fixes Brazil's deploy check found go first: the owner gated
 the next deploy on them. New
 Orleans and Seattle remain deferred, both needing decisions before code. Take
