@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**76 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**77 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Japanese station names: numbers before 丁目 (and a grid's 条) as figures, enforced in step 1; Sapporo's cited override table (owner)](#2026-09-28---japanese-station-names-numbers-before-丁目-and-a-grids-条-as-figures-enforced-in-step-1-sapporos-cited-override-table-owner)
 - [Sapporo's brief corrected before the build; coin laundries count as Personal services (owner)](#2026-09-28---sapporos-brief-corrected-before-the-build-coin-laundries-count-as-personal-services-owner)
 - [One shared Japanese fetch: pipeline/countries/japan_fetch.py, before Sapporo](#2026-09-28---one-shared-japanese-fetch-pipelinecountriesjapan_fetchpy-before-sapporo)
 - [Three review-time calls: Japanese limited-express lines count, the e-Stat download approved, Hong Kong and Riga move to the shared thin() (owner)](#2026-09-28---three-review-time-calls-japanese-limited-express-lines-count-the-e-stat-download-approved-hong-kong-and-riga-move-to-the-shared-thin-owner)
@@ -112,6 +113,35 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Japanese station names: numbers before 丁目 (and a grid's 条) as figures, enforced in step 1; Sapporo's cited override table (owner)
+
+- **Numerals as figures in every Japanese city (owner), enforced by a raising
+  check in `pipeline/countries/japan_step1.py`**: a number before 丁目, in
+  digits or kanji, must appear as that figure in the English name. Found at
+  Sapporo's step 1, where OSM spells 北18条 "Kita juhachi jo" and 西11丁目
+  "Nishi juitchome" beside its own "Kita-13-Jo-Higashi" and "Nango-13-Chome".
+- **条 takes figures only on a numbered street grid, declared per city as
+  `config.JO_IS_GRID` (owner, on the recommendation).** The first version
+  required figures before every 条 and stopped Osaka on 西九条 (Nishikujō)
+  and 九条 (Kujō), which are district names; Kyoto's 四条 / 五条 / 九条 and
+  Tokyo's 十条 are street and place names signed as words. Rejected: figures
+  before every 条, which would misname those stations. Sapporo declares its
+  grid (北18条, 西線9条, 山鼻19条).
+- **Sapporo's `OSM_NAME_EN_OVERRIDES`, a cited table (owner): 29 entries.**
+  18 are the numbered names the check caught; 11 bring OSM's spelled-out
+  lowercase names to the same hyphenated style ("Maruyama koen" ->
+  "Maruyama-Kōen", "Shin Sapporo" -> "Shin-Sapporo"). Each entry's comment is
+  the OSM spelling it replaces. Recommended as "the operators' signs", but
+  the operator's English pages returned 404 and its route maps are images,
+  so the table follows OSM's own majority style in Sapporo rather than cite
+  a source not read. The subway's 新さっぽろ and JR's 新札幌 (125 m apart,
+  separate in N02) now share "Shin-Sapporo" and take operator suffixes, as
+  Sapporo, Kotoni and Shiroishi already did.
+- **Checks**: the step 1 asserts pin 天神橋筋六丁目 -> 6, 二十四軒 -> none,
+  西九条 and 四条 -> none off a grid; `drift_check.py kobe osaka`: zero
+  drift, baselines unchanged; Sapporo step 1: 95 stations, gate 3 exact
+  (16 / 19 / 14). `japan-city` skill updated.
 
 ### 2026-09-28 - Sapporo's brief corrected before the build; coin laundries count as Personal services (owner)
 

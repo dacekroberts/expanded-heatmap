@@ -121,6 +121,52 @@ OSM_NAME_EN_TIES = {}
 # Where OSM's object has NO name:en, the English name taken instead - explicit
 # and cited, never inferred; step 1 still stops on any station missing here.
 OSM_NAME_EN_MISSING = {}
+# Sapporo's 条 is a numbered street grid (北18条, 西線9条, 山鼻19条), so
+# japan_step1 requires its numbers as figures in the English names, as it does
+# every 丁目 (owner 2026-09-28). Off a grid 条 is a name (Osaka's Kujō).
+JO_IS_GRID = True
+# Cited overrides of OSM's name:en (owner 2026-09-28: a cited override table;
+# numerals as figures in every Japanese city, especially before 丁目 / 条, which
+# japan_step1 now enforces). OSM's Sapporo objects mix two styles: hyphenated
+# title case with its own numeral form ("Kita-13-Jo-Higashi", "Nango-13-Chome",
+# "Nakajima-Kōen-Dōri") and spelled-out lowercase ("Kita juhachi jo"). Each
+# entry takes the first style; the comment is the OSM spelling it replaces
+# (osm_station_names.json / osm_tram_stop_names.json, 2026-09-28). The
+# operator's English pages were not reachable (city.sapporo.jp/st/english:
+# 404, 2026-09-28; its route maps are images), so they are not the citation.
+OSM_NAME_EN_OVERRIDES = {
+    # numbers before 条 / 丁目, as figures
+    "北34条": "Kita-34-Jo",                      # Kita sanjuyo jo
+    "北24条": "Kita-24-Jo",                      # Kita nijuyo jo
+    "北18条": "Kita-18-Jo",                      # Kita juhachi jo
+    "北12条": "Kita-12-Jo",                      # Kita juni jo
+    "西28丁目": "Nishi-28-Chome",                # Nishi nijuhatchome
+    "西18丁目": "Nishi-18-Chome",                # Nishi juhatchome
+    "西15丁目": "Nishi-15-Chome",                # Nishi jugo chome
+    "西11丁目": "Nishi-11-Chome",                # Nishi juitchome
+    "西8丁目": "Nishi-8-Chome",                  # Nishi hatchome
+    "西4丁目": "Nishi-4-Chome",                  # Nishi yon chome
+    "南郷7丁目": "Nango-7-Chome",                # Nango nanachome
+    "西線6条": "Nishisen-6-Jo",                  # Nishisen-Roku-Jō
+    "西線9条旭山公園通": "Nishisen-9-Jo Asahiyama-Kōen-Dōri",  # Nishisen-Ku-Jō Asahiyama-Kōen-Dōri
+    "西線11条": "Nishisen-11-Jo",                # Nishisen-Jūichi-Jō
+    "西線14条": "Nishisen-14-Jo",                # Nishisen-Jūyo-Jō
+    "西線16条": "Nishisen-16-Jo",                # Nishisen-Jūroku-Jō
+    "山鼻9条": "Yamahana-9-Jo",                  # Yamahana-Ku-Jō
+    "山鼻19条": "Yamahana-19-Jo",                # Yamahana-Jūku-Jō
+    # spelled-out lowercase, into the same style
+    "円山公園": "Maruyama-Kōen",                 # Maruyama koen
+    "豊水すすきの": "Hōsui-Susukino",            # Hosui Susukino
+    "中央区役所前": "Chūō-Kuyakusho-Mae",        # Chuo kuyakusho mae
+    "東区役所前": "Higashi-Kuyakusho-Mae",       # Higashi kuyakusho mae
+    "環状通東": "Kanjō-Dōri-Higashi",            # Kanjo dori higashi
+    "新道東": "Shindō-Higashi",                  # Shindo higashi
+    "豊平公園": "Toyohira-Kōen",                 # Toyohira koen
+    "東札幌": "Higashi-Sapporo",                 # Higashi Sapporo
+    "新さっぽろ": "Shin-Sapporo",                # Shin Sapporo (the subway's; JR's 新札幌 is Shin-Sapporo too)
+    "中島公園": "Nakajima-Kōen",                 # Nakajima-Koen (its streetcar stop is Nakajima-Kōen-Dōri)
+    "月寒中央": "Tsukisamu-Chūō",                # Tsukisamu-Chuo
+}
 
 # --- Coordinate reference systems -----------------------------------------
 

@@ -68,6 +68,15 @@ the owner reminded Kobe's build that it exists for the cities after it.
   finding for Japanese names; the Japan pass is.
 - **English station names from OSM `name:en`, Japanese beside them** (the
   Seoul / Taichung precedent; 2026-09-27). A missing name stops step 1.
+- **Numerals as figures** (2026-09-28): a number before 丁目 is ALWAYS a
+  figure in the English name ("Nishi-11-Chome", never "Nishi juitchome");
+  before 条 only where the city's 条 is a numbered street grid, declared as
+  `config.JO_IS_GRID` (Sapporo). Elsewhere 条 is part of a name and keeps its
+  signed word (Osaka's Kujō, Kyoto's Shijō, Tokyo's Jūjō). `japan_step1`
+  STOPS on a violation; fix it in `config.OSM_NAME_EN_OVERRIDES`, a cited
+  table ({ja: en}, the OSM spelling replaced in a comment), which is also
+  where OSM's inconsistent romanisations are brought to one style (Sapporo:
+  29 entries, OSM's hyphenated title case).
 - **Sightseeing funiculars are left out** (Kobe's Maya and Rokkō, 2026-09-27),
   and their stations are NOT written to `excluded_stations.csv` (that file is
   for stations cut from a network that IS drawn; `check_scope_disclosure.py`

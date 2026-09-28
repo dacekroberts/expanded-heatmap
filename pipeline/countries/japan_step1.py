@@ -34,6 +34,7 @@ OUTPUTS. Reads the cache and NEVER fetches.
 """
 import collections
 import json
+import re
 import sys
 import unicodedata
 from pathlib import Path
@@ -154,7 +155,67 @@ def english_names(config, groups):
         sys.exit(f"no OSM name:en within {config.OSM_NAME_MATCH_M} m for: {', '.join(missing)}")
     if filled:
         print(f"  English names from config.OSM_NAME_EN_MISSING (OSM has none): {', '.join(filled)}")
+    # The city's cited overrides of OSM's spelling (Sapporo's spelled-out
+    # "Kita juhachi jo" for 北18条; owner 2026-09-28): each replaces what OSM
+    # gave, and one naming no station here is a typo, so it stops.
+    overrides = getattr(config, "OSM_NAME_EN_OVERRIDES", {})
+    by_name = dict(zip(g["group"], g["name_ja"]))
+    unknown = sorted(set(overrides) - set(by_name.values()))
+    if unknown:
+        sys.exit(f"config.OSM_NAME_EN_OVERRIDES names no station in the city: {', '.join(unknown)}")
+    changed = []
+    for gid, name in by_name.items():
+        if name in overrides and out.get(gid) != overrides[name]:
+            changed.append(f"{name}: {out.get(gid)!r} -> {overrides[name]!r}")
+            out[gid] = overrides[name]
+    if changed:
+        print(f"  {len(changed)} English names from config.OSM_NAME_EN_OVERRIDES:")
+        for c in changed:
+            print(f"    {c}")
+    # Numerals as figures (owner 2026-09-28, every Japanese city): a number
+    # before 丁目 in the Japanese name, in digits or kanji, appears as that
+    # figure in the English one ("Nishi-11-Chome", never "Nishi juitchome").
+    # Before 条 only where the city's 条 is a numbered street grid, declared
+    # as config.JO_IS_GRID (Sapporo's 北18条 -> Kita-18-Jo); elsewhere 条 is
+    # part of a name and keeps its signed word (Osaka's Kujō and Nishikujō,
+    # Kyoto's Shijō, Tokyo's Jūjō; owner 2026-09-28).
+    jo_grid = getattr(config, "JO_IS_GRID", False)
+    bad = [f"{by_name[gid]} -> {en!r} (needs {', '.join(map(str, nums))})"
+           for gid, en in out.items()
+           if (nums := block_numbers(by_name[gid], jo_grid))
+           and not all(re.search(rf"(?<!\d){n}(?!\d)", en) for n in nums)]
+    if bad:
+        sys.exit("English names must write a 丁目 / 条 number as a figure (owner 2026-09-28); "
+                 "add config.OSM_NAME_EN_OVERRIDES for:\n  " + "\n  ".join(bad))
     return out
+
+
+_KANJI_DIGIT = dict(zip("〇一二三四五六七八九", range(10)))
+
+
+def kanji_number(s):
+    """A kanji numeral up to 99 (十八, 二十四, 九) as an int; digits pass through."""
+    if s.isdigit():
+        return int(s)
+    tens, _, ones = s.partition("十")
+    if "十" not in s:
+        return _KANJI_DIGIT[s] if len(s) == 1 else int("".join(str(_KANJI_DIGIT[c]) for c in s))
+    return (_KANJI_DIGIT[tens] if tens else 1) * 10 + (_KANJI_DIGIT[ones] if ones else 0)
+
+
+def block_numbers(name, jo_grid=False):
+    """The block numbers a Japanese station name carries: before 丁目 always
+    (天神橋筋六丁目 -> [6]), before 条 only on a numbered street grid
+    (Sapporo's 北18条 -> [18]). A place name that merely contains a numeral
+    (二十四軒, or Osaka's 九条 off a grid) has none."""
+    marker = "丁目|条" if jo_grid else "丁目"
+    return [kanji_number(m) for m in re.findall(rf"(\d+|[〇一二三四五六七八九十]+)(?={marker})", nfkc(name))]
+
+
+assert block_numbers("北18条", jo_grid=True) == [18] and block_numbers("天神橋筋六丁目") == [6]
+assert block_numbers("二十四軒") == [] and block_numbers("南郷十三丁目") == [13]
+assert block_numbers("西線9条旭山公園通", jo_grid=True) == [9] and kanji_number("二十四") == 24
+assert block_numbers("西九条") == [] and block_numbers("四条") == []
 
 
 def _ends(g):
