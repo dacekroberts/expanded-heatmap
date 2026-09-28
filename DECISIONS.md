@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**94 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**95 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Crash 2: the rewritten census control measured at 0.28 GB; the cause stays unproven](#2026-09-28---crash-2-the-rewritten-census-control-measured-at-028-gb-the-cause-stays-unproven)
 - [Worktrees `main-build` and `tokyo-sources` retired (owner)](#2026-09-28---worktrees-main-build-and-tokyo-sources-retired-owner)
 - [Sapporo, Fukuoka and Kyoto landed: city-landed sweep and live check after the reboot pass](#2026-09-28---sapporo-fukuoka-and-kyoto-landed-city-landed-sweep-and-live-check-after-the-reboot-pass)
 - [Review batch verified: the full deploy-verify passes; the macro tooltip becomes a corner panel; East Asia's global-frame label overlaps accepted (owner)](#2026-09-28---review-batch-verified-the-full-deploy-verify-passes-the-macro-tooltip-becomes-a-corner-panel-east-asias-global-frame-label-overlaps-accepted-owner)
@@ -130,6 +131,21 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Crash 2: the rewritten census control measured at 0.28 GB; the cause stays unproven
+
+- **Measured (Tokyo build session, psutil `peak_wset`):** the rewritten
+  `scripts/japan_census_control.py`, which keeps only the city's own N03
+  ward polygons and runs one city at a time, peaked at 0.18 GB on Kobe and
+  0.28 GB across all six Japanese cities, under the cap.
+- **It does not settle crash 2** (the 47 GB `python.exe` at 12:05:04; entry
+  "Two app crashes traced to memory exhaustion", above). What ran then was
+  the earlier version, which dissolved each prefecture's whole N03 file; it
+  is gone and cannot be measured. Of the two suspects it remains the likelier:
+  no drift step measured that day passed 5.43 GB (Oslo), and the census
+  version failed on its first prefecture read 12 s before Windows logged the
+  47 GB process. Recorded as likelier, not proven. The 8 GB cap covers
+  either now.
 
 ### 2026-09-28 - Worktrees `main-build` and `tokyo-sources` retired (owner)
 
