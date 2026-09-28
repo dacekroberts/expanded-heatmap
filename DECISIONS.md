@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**68 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**69 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
@@ -35,6 +35,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 - [Osaka pipeline built on the shared Japanese steps: Japan's second city, the owner's calls, and what the shared code learned](#2026-09-27---osaka-pipeline-built-on-the-shared-japanese-steps-japans-second-city-the-owners-calls-and-what-the-shared-code-learned)
 - [Shared code changed for Osaka: the third label pass, step 1's branches, and the name rule made per-premises](#2026-09-27---shared-code-changed-for-osaka-the-third-label-pass-step-1s-branches-and-the-name-rule-made-per-premises)
+- [One shared thin(): Rome, Amsterdam and Rotterdam ported, measured in the projected CRS; no stop moved](#2026-09-27---one-shared-thin-rome-amsterdam-and-rotterdam-ported-measured-in-the-projected-crs-no-stop-moved)
 - [Tram rescopes, review time: the owner's calls, the page texts written, and the REM's notice renumbered 51](#2026-09-27---tram-rescopes-review-time-the-owners-calls-the-page-texts-written-and-the-rems-notice-renumbered-51)
 - [The REM's licence verdict, and two credits the tram batch cannot publish without (Cleanup's review)](#2026-09-27---the-rems-licence-verdict-and-two-credits-the-tram-batch-cannot-publish-without-cleanups-review)
 - [Worktree `osaka` created for the next build session, branched from worktree-kobe (owner)](#2026-09-27---worktree-osaka-created-for-the-next-build-session-branched-from-worktree-kobe-owner)
@@ -273,6 +274,57 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   - Japan pass: 9 operator's-own trade names in the raw files, 9 pins showing
     their permit type, **0 shown**.
   - Publishable on this measure.
+### 2026-09-27 - One shared thin(): Rome, Amsterdam and Rotterdam ported, measured in the projected CRS; no stop moved
+
+- **The sub-transit-line thinning filter now lives once, as
+  `pipeline/stations.py` `thin()`**, beside `verify_stations`, with a
+  `projected_xy()` helper. It takes ordered stop-name sequences, a name ->
+  projected x/y lookup, the keep-always and interchange sets and a spacing in
+  metres. It returns the kept set and each cut with its nearest kept stop and
+  the metres since it. Rome, Amsterdam and Rotterdam call it; their own
+  copies and both Dutch `haversine_miles` are gone. Three things stayed in the
+  cities, as the handoff asked:
+  - sequence choice (the coverage break);
+  - the reason wording, byte for byte (Dutch `round(mi, 3)`, Rome `:.3f`,
+    "spacing" kept);
+  - each city's post-filter of cuts that another line or direction kept.
+- **Amsterdam and Rotterdam now measure in EPSG:32631, not haversine on
+  lat/lon** (CLAUDE.md: never measure distance in EPSG:4326). This is the
+  drift that "Measured before the shared thin() refactor" (above) predicted,
+  and nothing else changed:
+  - `drift_check.py rome amsterdam rotterdam`: Rome zero drift;
+    `heatmap.html` identical after Folium-id normalisation in all three;
+    baselines unchanged (9, 11, 11 figures).
+  - Amsterdam's and Rotterdam's `excluded_stations.csv` keep the same row
+    count (81 and 75), and their station, lines, latitude and longitude
+    columns are identical.
+  - Only the reason's mileage moved, by 0.001-0.002 mi.
+  - The 62 strings reconcile exactly. Re-run with the old haversine copy
+    beside each shared call, **41 of Amsterdam's 78 and 21 of Rotterdam's 37
+    raw cut entries** differ in the third decimal, and no call's kept or cut
+    set differs. They reach the CSV as **32 and 16 changed rows**, since the
+    CSV keeps one row per station (a stop cut on two lines or directions is
+    one row). No baseline figure moved, so no `--update-baseline` was run.
+- **Found that four more thinning copies exist beyond the three handed over;
+  all left alone, for separate owner calls.** None is measured in the
+  projected CRS:
+  - `pipeline/hong_kong/step1_stations.py` `thin()` (the Light Rail) is the
+    same rule in haversine;
+  - so is Riga's inline loop in `pipeline/riga/step1_stations.py`.
+  - San Francisco's `select_line_stations()` and Boston's copy of it are a
+    VARIANT: they force-keep interchanges AFTER the spacing pass, so an
+    interchange does not reset the count. The shared function resets it, as
+    the Dutch and Rome copies did.
+  Porting any of them would need its own drift measurement first, and the
+  SF/Boston one would change a rule, not just a unit.
+  `docs/sub_transit_line_filters.md` now names the shared function and this
+  difference.
+- **`check_all.py`: 19 of 19 passed**, `check_scope_disclosure.py` included.
+  The handoff `docs/handoff_thin_refactor_2026-09-27.md` was deleted in this
+  commit, as it asked. Files: `pipeline/stations.py`,
+  `pipeline/{rome,amsterdam,rotterdam}/step1_stations.py`,
+  `outputs/{amsterdam,rotterdam}/excluded_stations.csv`,
+  `docs/sub_transit_line_filters.md`.
 
 ### 2026-09-27 - Tram rescopes, review time: the owner's calls, the page texts written, and the REM's notice renumbered 51
 

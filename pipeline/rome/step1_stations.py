@@ -75,28 +75,29 @@ def stop_rows():
 
 
 def thin(st_rows):
-    """San Francisco's filter on each line in config.THINNED_LINES (tram 8).
+    """San Francisco's filter (pipeline/stations.py `thin()`) on each line in
+    config.THINNED_LINES (tram 8).
 
     Walks each direction's relation in stop order, measuring along the line in
     the projected CRS; a stop is kept at each terminus, at each interchange
     (a name another line also serves) and whenever half a mile has run since
     the last kept stop. Returns {name: reason} for the stops cut - worded with
     "spacing", which app/station_scope.py reads as `thinned`.
-    Ported from pipeline/rotterdam/step1_stations.py `thin()`.
     """
     rels = {e["id"]: e for e in rail_elements() if e["type"] == "relation"}
     nodes = {e["id"]: e for e in rail_elements() if e["type"] == "node"}
-    pts = gpd.GeoSeries(gpd.points_from_xy(st_rows["longitude"], st_rows["latitude"]),
-                        index=st_rows["stop_name"], crs=config.CRS_GEOGRAPHIC
-                        ).to_crs(config.CRS_PROJECTED)
+    xy = station_gates.projected_xy(st_rows["stop_name"], st_rows["longitude"],
+                                    st_rows["latitude"], config.CRS_PROJECTED,
+                                    config.CRS_GEOGRAPHIC)
     lines_of = dict(zip(st_rows["stop_name"], st_rows["lines"].str.split()))
+    interchange = {n for n, ls in lines_of.items() if len(ls) > 1}
     kept, cut = set(), {}
     for ln in config.THINNED_LINES:
         # Rotterdam's rule: add a direction only until every stop is covered.
         # Thinning BOTH directions and keeping the union keeps whatever either
         # walk happens to land on, which barely thins (4 of 16 cut, measured).
         names = {n for n, ls in lines_of.items() if ln in ls}
-        covered = set()
+        covered, seqs = set(), []
         for rid in config.LINE_RELATIONS[ln]:
             if covered >= names:
                 break
@@ -108,21 +109,16 @@ def thin(st_rows):
                     if not seq or seq[-1] != nm:
                         seq.append(nm)
             covered |= set(seq)
+            seqs.append(seq)
             print(f"    walking {rid} ({rels[rid]['tags'].get('name')}): {len(seq)} stops")
-            mark = [len(lines_of[n]) > 1 for n in seq]
-            mark[0] = mark[-1] = True
-            since, last = 0.0, seq[0]
-            for i in range(1, len(seq)):
-                since += pts[seq[i - 1]].distance(pts[seq[i]])
-                if mark[i]:
-                    since, last = 0.0, seq[i]
-                elif since >= config.THIN_SPACING_M:
-                    mark[i], since, last = True, 0.0, seq[i]
-                else:
-                    cut.setdefault(seq[i], (
-                        f"spacing filter on {config.LINE_NAMES[ln]}: "
-                        f"{since / 1609.344:.3f} mi after {last}, under 0.5 mi"))
-            kept |= {n for n, k in zip(seq, mark) if k}
+        k, cuts = station_gates.thin(seqs, xy, spacing_m=config.THIN_SPACING_M,
+                                     interchange=interchange)
+        kept |= k
+        for c in cuts:
+            cut.setdefault(c["station"], (
+                f"spacing filter on {config.LINE_NAMES[ln]}: "
+                f"{c['metres_since_kept'] / 1609.344:.3f} mi after {c['nearest_kept']}, "
+                f"under 0.5 mi"))
     cut = {n: why for n, why in cut.items() if n not in kept}
     print(f"\n  thinning ({', '.join(config.LINE_NAMES[l] for l in config.THINNED_LINES)}): "
           f"{len(kept)} kept, {len(cut)} cut")
