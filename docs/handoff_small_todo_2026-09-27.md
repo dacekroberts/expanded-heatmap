@@ -15,28 +15,13 @@ fetch, merge (`scripts/merge_append_only.py DECISIONS.md` on a conflict),
 DECISIONS entry**, and run `scripts/check_master_list_counts.py` after any
 row change.
 
-## The items, cheapest first (each about 2–5% of a 5-hour window)
+## The items
 
-1. **Seoul's Wirye Line (위례선): is it open?** OSM has no route relation for
-   it (checked 2026-09-27). Find the operator's or Seoul's official opening
-   status. If it's open and inside Seoul, it joins the tram rescope list
-   (`docs/tram_rescope_estimate.md`); if not, record "not open" in PLAN's
-   tram item.
-2. **Cablebús Línea 3's stations.** OSM maps only 1 of its stops (L1 6, L2 7,
-   all inside CDMX). Find a station list from CDMX's own open data or STE.
-   Toulouse's drawn Téléo is the precedent for drawing it. Record the count
-   for the rescope.
-3. **Kansas City streetcar frequency** (Band T row). The stub test passed on
-   OSM (18 stops, all in KCMO). Read the RideKC GTFS's streetcar trips for
-   the headway, and note its licence as unread unless you read it (the
-   `licence-read` agent).
-4. **Incheon's address join** (Band C, owner's verdict "probe first").
-   `data.incheon.go.kr` lists carry addresses but no coordinates. Is there a
-   keyless national road-address file with coordinates (juso.go.kr's
-   downloadable address DB, or the building-register points) that a join
-   could use? The `address-join` skill has the method, including a control.
-   **If it needs an account or an API key, stop and report**; do not
-   register.
+1–4. **ALL DONE by Staging 2026-09-27** (DECISIONS, "Four small probes"):
+   the Wirye Line is not open (PLAN's tram item, re-check January 2027);
+   Cablebús L3 has 6 stations, not yet from an official source (PLAN);
+   Kansas City's streetcar runs every ~10 minutes (its master-list row);
+   Incheon's coordinate file needs the owner's application (its row).
 5. **DONE by Staging 2026-09-27: skip it** (13 tram lines, 127 stops; see DECISIONS). (Was: attempted first; its
    boundary query failed on the host; the retry is in
    `docs/handoff_staging_2026-09-27.md`). **Göteborg's rail** (Band T row:
