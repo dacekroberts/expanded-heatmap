@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**35 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**36 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Monterrey (Regional), Daegu and Busan published as one batch at the owner's review; reboot required](#2026-09-27---monterrey-regional-daegu-and-busan-published-as-one-batch-at-the-owners-review-reboot-required)
 - [Ottawa to Band C; the by-country table is now checked; local scratch folders in data/ ignored (owner)](#2026-09-27---ottawa-to-band-c-the-by-country-table-is-now-checked-local-scratch-folders-in-data-ignored-owner)
 - [data_sources.md split by country, landed at the first review time (owner)](#2026-09-27---data_sourcesmd-split-by-country-landed-at-the-first-review-time-owner)
 - [Busan built on its own branch, stacked on Daegu's: 89,798 storefronts, 110 stations, Lines 1-4 and the Busan-Gimhae LRT](#2026-09-27---busan-built-on-its-own-branch-stacked-on-daegus-89798-storefronts-110-stations-lines-1-4-and-the-busan-gimhae-lrt)
@@ -68,6 +69,52 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Monterrey (Regional), Daegu and Busan published as one batch at the owner's review; reboot required
+
+- **The owner called it** ("approved, deploy verify and any other steps to
+  push to live build"), and chose to include Monterrey in the batch. Branch
+  `worktree-busan` carries all three: Busan, stacked on Daegu's branch, with
+  `worktree-monterrey` merged in. Master was merged twice on the way. First
+  the data_sources split: the Korean rows moved to
+  `data_sources/south-korea.md` and Monterrey's to `data_sources/mexico.md`,
+  and notices 48-49 were re-added after 47. Then Ottawa to Band C. The
+  master list ends at **Built 49, Candidates 63 (A 6, C 9, T 38, D 10)**,
+  with a struck-through Band A row for Monterrey, because the counts check
+  reads rows, and the by-country rows for Mexico and South Korea brought
+  current.
+- **The gate, in `publish-city`'s order.**
+  - `check_no_fetch_in_steps.py`: OK.
+  - `drift_check.py --jobs 4`: **zero drift across every city**.
+  - Privacy verdicts for all three are recorded in their build entries, with
+    0 personal names at a home address shown.
+  - `check_provenance.py`, `check_inconsistency_list.py` and the rest of
+    `check_all.py`: 18 of 18.
+  - The brief checks passed at build (Daegu 11/11, Busan 8/8, Monterrey 5/5).
+  - `check_deploy_imports.py --ref HEAD` on the pushed commit's tree:
+    PROBLEMS 0.
+- **`deploy-verify`, scope city-added for all three**, with the Mexico and
+  East Asia macro views at 375, 768 and 1200 px: **all four items PASS**.
+  - Each page renders its lines, labels, legend and OSM credit, with no
+    console errors. Captions: Daegu's is "dated up to 2025-09-02 ...
+    published as the 2026-08 edition"; Busan's is "updated to 2026-04-15".
+  - `check_map_view.js`, `check_map_attribution.js` and `check_map_labels.js`
+    come back clean at five viewport sizes, with 0 corrections on every load.
+  - Notices 48 and 49 render. INEGI's notice now names Monterrey.
+  - The moved pills are clear: Monterrey's west of its dot, Daegu's left of
+    its dot, Busan's below its dot.
+  - Seoul, outside the batch, renders normally.
+- **Noted, not blocking.**
+  - Guadalajara's pill is clipped 9.8 px at 375 in the Mexico view, which is
+    unchanged from master.
+  - Mexico City's pill sits about 0.75 px above the basemap credit at 375.
+    Nothing overlaps, but there is no margin left.
+  - The captions' OSM date is the extract's UTC date (2026-09-28), which
+    reads a day ahead in US time until midnight.
+- **A reboot is required.** The push's `app/` diff against master changes
+  `app/cities.py` and `app/components.py`, not only page files. It is the
+  owner's action; the cities are not live until it happens and the live
+  site is checked.
 
 ### 2026-09-27 - Ottawa to Band C; the by-country table is now checked; local scratch folders in data/ ignored (owner)
 
