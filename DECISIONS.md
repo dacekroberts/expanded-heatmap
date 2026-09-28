@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**77 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**78 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Worktree `japan` created for a fresh session to build Fukuoka, then Kyoto, branched from build-sapporo (owner)](#2026-09-28---worktree-japan-created-for-a-fresh-session-to-build-fukuoka-then-kyoto-branched-from-build-sapporo-owner)
 - [Sapporo's brief corrected before the build; coin laundries count as Personal services (owner)](#2026-09-28---sapporos-brief-corrected-before-the-build-coin-laundries-count-as-personal-services-owner)
 - [One shared Japanese fetch: pipeline/countries/japan_fetch.py, before Sapporo](#2026-09-28---one-shared-japanese-fetch-pipelinecountriesjapan_fetchpy-before-sapporo)
 - [Three review-time calls: Japanese limited-express lines count, the e-Stat download approved, Hong Kong and Riga move to the shared thin() (owner)](#2026-09-28---three-review-time-calls-japanese-limited-express-lines-count-the-e-stat-download-approved-hong-kong-and-riga-move-to-the-shared-thin-owner)
@@ -113,6 +114,19 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Worktree `japan` created for a fresh session to build Fukuoka, then Kyoto, branched from build-sapporo (owner)
+
+- **The owner passed Fukuoka and Kyoto to a new session** and kept this one
+  on Band C's five cities awaiting a verdict. The worktree
+  `.claude/worktrees/japan` (branch `worktree-japan`) was made from
+  `build-sapporo` at `648ec32`, not master, because Sapporo's branch holds the
+  shared changes both cities need (the numeral check and name overrides in
+  `japan_step1`; the coin-laundry and welfare-facility rules in
+  `japan_eigyo`). `data/` and `.venv-lean` are junctions to the main
+  checkout's. Sapporo itself is held for review time on `build-sapporo`
+  (DECISIONS on that branch). The handoff is
+  `docs/handoff_japan_2026-09-28.md`.
 
 ### 2026-09-28 - Sapporo's brief corrected before the build; coin laundries count as Personal services (owner)
 
