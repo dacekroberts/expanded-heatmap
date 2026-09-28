@@ -1098,6 +1098,11 @@ CITIES = [
         "lat": 33.59,
         "lon": 130.4,
         "page": "pages/53_Fukuoka_Heatmap.py",
+        # Macro-map facts (macro-tiers branch, owner-approved 2026-09-28): the
+        # figures are table C's and D's in docs/map_inconsistencies.md.
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (98.1%); ministry coordinates where missed",
+        "data_age": "Permits as of 2026-08-31; ministry filings fetched 2026-09-27",
         "blurb": "Fukuoka City Subway, and JR Kyushu's and Nishitetsu's lines",
         "region": "East Asia",
         "country": "Japan",
@@ -1114,6 +1119,11 @@ CITIES = [
         "lat": 35.01,
         "lon": 135.77,
         "page": "pages/54_Kyoto_Heatmap.py",
+        # Macro-map facts (macro-tiers branch, owner-approved 2026-09-28): the
+        # figures are table C's and D's in docs/map_inconsistencies.md.
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (93.2%)",
+        "data_age": "Rebuilt from permits to 2026-07-31 (an upper bound)",
         "blurb": "Kyoto City Subway, JR West, Keihan, Hankyu, Kintetsu, the Randen and Eiden",
         "region": "East Asia",
         "country": "Japan",

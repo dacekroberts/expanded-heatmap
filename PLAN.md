@@ -353,6 +353,11 @@ evidence section.
   - [ ] At review time: `publish-city` with Sapporo and Fukuoka (a new page,
     `cities.py` with Kyoto's label far above its dot, notice 55 "Kyoto City
     and MLIT"), deploy-verify `scope: city-added`, reboot.
+  - [ ] When `macro-tiers` merges: Fukuoka's and Kyoto's `coverage` /
+    `placement` / `data_age` keys (owner-approved 2026-09-28, already in
+    `cities.py` here) are checked by `scripts/check_macro_facts.py`; run
+    `--write` for their storefront counts in `app/macro_facts.json` (Fukuoka
+    30,062, Kyoto 32,355). Sapporo's keys come with that merge (staging).
   - [ ] When the city publishes its August 2026 list: add its resource to
     `config.PORTAL_RESOURCES`, move `AS_OF` to 2026-08-31, re-run (a rebuilt
     register goes stale by one month a month).
