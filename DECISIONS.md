@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**40 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**41 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
 - [Kansas City's streetcar passes the stub test; the Linz lead is aggregate counts, closed](#2026-09-27---kansas-citys-streetcar-passes-the-stub-test-the-linz-lead-is-aggregate-counts-closed)
+- [Worktrees: monterrey retired, trams created for the next build session, main checkout fast-forwarded (owner)](#2026-09-27---worktrees-monterrey-retired-trams-created-for-the-next-build-session-main-checkout-fast-forwarded-owner)
 - [Four owner calls: Ottawa to Band C, Rijswijk and Delft to T as Den Haag add-ons, the Band C memo's last verdicts accepted, Paris T2/T9 out](#2026-09-27---four-owner-calls-ottawa-to-band-c-rijswijk-and-delft-to-t-as-den-haag-add-ons-the-band-c-memos-last-verdicts-accepted-paris-t2t9-out)
 - [Tram rescopes, light and medium: specs written for five cities, and the D.C. Streetcar dropped because it no longer runs (owner)](#2026-09-27---tram-rescopes-light-and-medium-specs-written-for-five-cities-and-the-dc-streetcar-dropped-because-it-no-longer-runs-owner)
 - [Monterrey (Regional), Daegu and Busan are LIVE: rebooted by the owner, live-checked](#2026-09-27---monterrey-regional-daegu-and-busan-are-live-rebooted-by-the-owner-live-checked)
@@ -89,6 +90,35 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - data.gv.at's own CKAN search API answered non-JSON to every query this
   evening; data.europa.eu was the route.
 
+### 2026-09-27 - Worktrees: monterrey retired, trams created for the next build session, main checkout fast-forwarded (owner)
+
+- **`monterrey` retired (owner; Main Build confirmed it was done).**
+  - `check_worktree_data.py` passed.
+  - The branch was contained in origin/master.
+  - Its one junction, `data/`, was unlinked on its own.
+  - `git worktree remove` ran, and the branch was deleted with `-d` from the
+    cleanup worktree. Main Build pointed out that `-d` judges "merged" against
+    the current checkout, and the main checkout's stale master would have
+    refused.
+  - An empty `monterrey` folder remains, held open by a process.
+  - The `monterrey-static-tmp` launch entry was removed from the main
+    checkout's `.claude/launch.json`.
+- **Correction to the "Ottawa to Band C" entry above:** it said the
+  busan, daegu and monterrey worktrees each held a copy of
+  `data/_staging_scratch_2026-09-27/`. They did not. Each worktree's `data/`
+  was a junction to the main checkout's, so there was only ever one 285 MB
+  copy. The `data/_*/` ignore rule still stands, because git saw the folder
+  through every junction.
+- **`.claude/worktrees/trams` created on `worktree-trams` from origin/master**
+  for the new Main Build session. Its handoff names this worktree for the tram
+  rescope, which is held for review time because it rewrites `outputs/`.
+  - `data/` and `.venv-lean` are junctions to the main checkout's.
+  - Verified: level with master, a clean status, the venv imports streamlit
+    1.64.0, and `check_all.py` passes 19 of 19 from inside it.
+- **Main checkout fast-forwarded from `8f9d118` to `3caebd0`.** It had no
+  tracked changes. A session started there would otherwise have read the
+  rules from before today's changes: the long CLAUDE.md, no pre-push hook and
+  no archive.
 ### 2026-09-27 - Four owner calls: Ottawa to Band C, Rijswijk and Delft to T as Den Haag add-ons, the Band C memo's last verdicts accepted, Paris T2/T9 out
 
 - **Ottawa → Band C** (food only), as recommended. Cleanup had already
