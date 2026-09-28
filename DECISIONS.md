@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**81 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**82 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Fukuoka built on the shared Japanese modules: Japan's fourth city (held for review time)](#2026-09-28---fukuoka-built-on-the-shared-japanese-modules-japans-fourth-city-held-for-review-time)
 - [Fukuoka steps 1-2: the first two-source Japanese city; 業態 read beside the type, MHLW's own point where the block join misses; yatai count (owner)](#2026-09-28---fukuoka-steps-1-2-the-first-two-source-japanese-city-業態-read-beside-the-type-mhlws-own-point-where-the-block-join-misses-yatai-count-owner)
 - [Worktree `japan` created for a fresh session to build Fukuoka, then Kyoto, branched from build-sapporo (owner)](#2026-09-28---worktree-japan-created-for-a-fresh-session-to-build-fukuoka-then-kyoto-branched-from-build-sapporo-owner)
 - [Sapporo built on the shared Japanese modules: Japan's third city (held for review time)](#2026-09-28---sapporo-built-on-the-shared-japanese-modules-japans-third-city-held-for-review-time)
@@ -117,6 +118,46 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Fukuoka built on the shared Japanese modules: Japan's fourth city (held for review time)
+
+- **Built on `worktree-japan`**: 30,062 storefronts (Retail 7,004 · Food
+  service 17,315 · Personal services 5,743), 71 stations on 9 lines; 24,722
+  in a ring (82%). Steps 1-2 in the entry below.
+- **Texts approved by the owner 2026-09-28**, as drafted: the page prose (the
+  owner's "one restaurant in five" wording of 2026-09-24 kept verbatim; it
+  still reads true, 4,203 of 21,895), the blurb, **notice 54 "Fukuoka City,
+  MHLW and MLIT (Fukuoka)"** (BODIK 第７条: each dataset's 作成者, the resource
+  name with its date and the resource URL; MHLW PDL 1.0: the source, processed
+  and by whom, the top page only, no completeness claim), and the
+  excluded-categories section.
+- **Line colours by the search** (sRGB step 8, 3,817 feasible): pins
+  45.0-70.5, closest line pair 18.1, 3:1 on both map pages. No blue clears
+  Retail's pin: the Hakozaki Line teal, Nishitetsu's two lines slate and mauve.
+- **Map checks** (`check_map_labels.js`, `check_map_view.js`): no problems at
+  343, 375 and 1280 px - 9 labels, the right zoom, no corrections, legend and
+  dark toggle working. `check_map_markup.py`, `check_inline_arrays.py` and
+  `check_render_current.py` pass. Drift baseline: 31 figures.
+- **Privacy verdict (`check_personal_exposure.py fukuoka`, Japan pass): 0
+  operator names shown in 30,062 rows; 4 trade names are the operator's own
+  name, shown by permit type on 5 pins.** MHLW's rows cannot be tested (no
+  individual-operator column; owner accepted 2026-09-28). Never selected:
+  phones, 郵便番号, 開設者法人住所, 開設者法人代表者名及び役職, MHLW's 法人名 /
+  法人番号 / 法人住所.
+- **Macro map**: Fukuoka's label measured at 56.8 px in the app's own document
+  (Sapporo, Osaka, Kobe and Busan reproduced exactly), placed below its dot.
+  **Busan's label moved lower left** (`("end", -10, 16)`): below its dot it
+  covered Fukuoka's marker. Of 432 placements of Busan, Daegu and Kobe scored,
+  this is the one clean one that moves a single existing label.
+  `check_macro_labels.py`: 0 problems.
+- **Docs**: data-source rows (the BODIK dataset pages recorded, so
+  `check_provenance.py` names Fukuoka OK), inconsistency rows, README, PLAN,
+  master list (53 built, A 2), the brief corrected (the 2026-08-31 edition,
+  the privacy section superseded by the name rule), the `japan-city` skill's
+  sheet, and the handoff's Fukuoka section deleted.
+- **Not run: the Economic Census join control** (PLAN, "Join control"),
+  approved 2026-09-28 but not yet fetched; it serves every Japanese city at
+  once.
 
 ### 2026-09-28 - Fukuoka steps 1-2: the first two-source Japanese city; 業態 read beside the type, MHLW's own point where the block join misses; yatai count (owner)
 

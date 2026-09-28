@@ -1718,6 +1718,37 @@ route geometry", which stays true.
   2026-09-28: 0 operator names shown, 6 withheld (7 pins). The verdict is in
   `DECISIONS.md`.
 
+**54. Fukuoka City, MHLW and MLIT (Fukuoka) — required, and DISPLAYED** (written
+into `render_site_notices()`; displayed once Fukuoka lands).
+
+- **PERMITTED WITH CONDITIONS**, two licences (read 2026-09-24; BODIK's
+  `package_show` re-read 2026-09-28; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)).
+- **The city's four lists on BODIK are CC BY 4.0** through the city's own terms
+  (`https://odcs.bodik.jp/401307/tos/` 第１条; `package_show` records `cc-by`).
+  **MUST DISPLAY (第７条)**: each dataset's 作成者 as recorded (food 保健医療局
+  食品安全推進課; barber and beauty 福岡市保健福祉局; laundry 保健福祉局 生活衛生課),
+  the resource name with its date, the resource URL, the licence link and that
+  the data was modified. The resource names come from `config.RESOURCE_NAMES`,
+  the files used.
+- **MHLW's open data is PDL 1.0** (the system's site terms §2). **MUST DISPLAY**
+  the source, that it was processed and by whom and how (重要情報 1.1), linking
+  the top page only. **MUST NOT** present it as MHLW's own, use its logo, claim
+  the list complete, or imply accuracy: the notice says it holds only filings
+  whose applicants agreed to publish them. The minor 2)ウ point stays open (the
+  project is non-commercial, fine under both readings).
+- **MLIT's 位置参照情報 and N02** are PDL 1.0, credited as in 50. N03 (CC BY
+  4.0) only picks stations and is **never drawn**.
+- Both cost clauses are the fault-based class the owner accepted 2026-09-24.
+- **MUST NOT**: imply endorsement; use city or ministry logos; call the pins
+  operating businesses.
+- Wording approved by the owner 2026-09-28.
+- **MUST DO:** `check_personal_exposure.py fukuoka` with its Japan pass, run
+  2026-09-28: 0 operator names shown; 4 trade names that are the operator's
+  own name, shown by permit type on 5 pins. MHLW's rows cannot be tested (no
+  individual-operator column; owner accepted 2026-09-28). The verdict is in
+  `DECISIONS.md`.
+
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1
 drawn": ML1 comes from CRTM's `M10_Red` (same licence, same 5 June 2026 edit date).

@@ -1837,6 +1837,51 @@ line.
 - Left out: the stations beyond it, in Tōbetsu, Otaru and Ebetsu.
 - No Shinkansen reaches Sapporo yet.
 
+### Fukuoka - the city's food permits and registers and MHLW's online filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business licence.
+- Food shops that only notify (届出) and did not publish in MHLW's list: the
+  Retail layer is partial.
+- 11,768 MHLW filings published without an address, 4,203 of them restaurants
+  (about one in five).
+- 1,434 rows of food manufacturing and storage other than bakeries and
+  confectioners (菓子) and delis (そうざい).
+- 742 school, hospital, care-home and staff kitchens.
+- 507 vending machines.
+- 2,919 food trucks, festival and event stalls, on-train sales and other rows
+  with no fixed counter.
+- 58 restaurants inside hotels and inns.
+- 62 mail-order and online sellers.
+- 10 karaoke boxes.
+- 111 filings MHLW marks as closed (廃業).
+
+**Counted** - Fukuoka's 81 yatai (屋台, filed as ろ店), which trade nightly at
+fixed street spots under the city's yatai ordinance (owner, 2026-09-28). Also,
+74 of the 2,450 bakery, confectioner and deli rows (3.0%) have a trade name
+that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 297 premises in both food lists are shown once, from
+MHLW's newer filing.
+
+**Not placed** - 88 rows (0.3%), mostly rural addresses and on-train sales.
+Another 537 MHLW filings sit at MHLW's own coordinates, and 29 at their
+town-chōme centre.
+
+**Names not shown** - 4 trade names in the city's own lists are the operator's
+own name; the 5 pins carrying them show their permit type. MHLW's list does not
+say who the operator is, so the rule cannot run on its rows (owner,
+2026-09-28).
+
+**Closed premises** - a dot is a permit on file, not a business open today.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 22 stations beyond it, in Kasuya, Ōnojō, Sue, Shingū, Kasuga,
+  Itoshima, Koga, Umi and Sasaguri.
+- The JR Hakata-Minami line (only Hakata is inside the city).
+- The Shinkansen does not count.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

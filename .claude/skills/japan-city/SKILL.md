@@ -25,8 +25,8 @@ worked example: `pipeline/kobe/config.py` holds every city-specific choice.
 | `pipeline/countries/japan.py` | N02/N03/ISJ URLs and the SHARED cache (`data/japan/raw/`: N02 once, N03 per prefecture); `CITIES` (ward codes, prefecture, EPSG); `city_boundary()` (N03 wards' union - **never drawn**); `stations()` (Shinkansen dropped, platform centroids); `stub_test()` |
 | `pipeline/countries/japan_register.py` | The JOIN: `city_rows()` (CSV / XLSX / zip, any of the four encodings, TSV sniffed), `permits_from_rows()`, `load_city_isj()`, `join_city()` - every normalisation rule, each naming the city that taught it; `kyoto_permit_stream()`; `name_is_operator()` - the owner's name rule |
 | `pipeline/countries/japan_step1.py` | THE step 1: `run(config)`. N02 stations inside the city line → collapse on `N02_005g` → OSM `name:en` → gate 3 → excluded stations named by N03 municipality → a lines GeoJSON keyed by `config.LINES` |
-| `pipeline/countries/japan_step2.py` | THE step 2: `run(config)`. `config.SOURCES` → not-a-premises → `japan_eigyo` → the join (tiers) → one pin per premises and bucket → the name rule → the 菓子/そうざい factory measurement |
-| `pipeline/taxonomies/japan_eigyo.py` | Every permit-type spelling across ten screened lists (289 values); `source` decides Personal services; import-time asserts pin the rule order |
+| `pipeline/countries/japan_step2.py` | THE step 2: `run(config)`. `config.SOURCES` → closed (廃業) out → not-a-premises → `japan_eigyo` → the join (tiers) → the publisher's own point where the block join misses (`OWN_POINT_FALLBACK`, tier `own`) → one premises in two lists once (`SUPERSEDES`) → one pin per premises and bucket → the name rule → the 菓子/そうざい factory measurement. `ADDRESS_BY_CONSENT` counts a withheld address apart from "not a premises". All four optional, all Fukuoka's (2026-09-28) |
+| `pipeline/taxonomies/japan_eigyo.py` | Every permit-type spelling across ten screened lists (289 values); `source` decides Personal services; **`FORM_RULES` read 業態 beside the type** where a list keeps it in its own column (Fukuoka's two; MHLW's everywhere): vehicles, stalls, school kitchens, hotel restaurants out, konbini Retail, yatai in - a form never brings a row in; import-time asserts pin the rule order |
 | `pipeline/countries/japan_fetch.py` | THE fetch (2026-09-28): city files from `config.SOURCE_FILES` ({key: (file, URL, dataset page)}), ISJ per ward, N02/N03 into the shared cache, the OSM names query plus the tram-stop query where the config declares `TRAM_OSM_JSON`; keeps what is on disk and records provenance. A city's `fetch_sources.py` is its docstring and `japan_fetch.main(config, __doc__)` |
 | `pipeline/kobe/step3_map.py` | The template map: `load_geojson_line_shapes` over step 1's GeoJSON, `label_focus=japan.city_boundary(slug)`, **`lang="ja"`** |
 | `scripts/check_personal_exposure.py` | `japan=True` on a city's entry runs the name-rule test on what reached the map (must print 0) |
@@ -211,8 +211,21 @@ config is marked ▶.
 - Notice: 札幌市, both dataset titles and URLs, the CC BY 4.0 link, that it was
   processed; no endorsement, no logos, never "operating".
 
-**Fukuoka** (`fukuoka.md`; 7 wards, **EPSG:32652**) - ▶ the first TWO-SOURCE
-Japanese city.
+**Fukuoka** - ✅ **BUILT 2026-09-28** (30,062 storefronts, 71 stations, 9
+lines; DECISIONS "Fukuoka steps 1-2" and "Fukuoka built"). What it left for
+the cities after it: `FORM_RULES` (業態), `OWN_POINT_FALLBACK`, `SUPERSEDES`,
+`ADDRESS_BY_CONSENT` and `SOURCE_AS_OF` (a per-source as-of in
+`japan_fetch`); `OPERATOR_COLS` gained 営業者氏名 and 開設者法人名（開設者氏名）, now
+REQUIRED_COLUMNS so a renamed column stops the build. Owner's calls: **yatai
+(ろ店 / 定置屋台) count** - read what ろ店 means in Tokyo's MHLW rows before
+trusting the rule there; **MHLW's rows cannot take the name rule** (no
+operator column; accepted); MHLW's point for chōme-tier rows too. OSM had
+TRANSLATED three station names (Kashii Shrine, Kushida Shrine, "Fukuoka
+(Tenjin)"): read every name, not only the numerals. A city list can be
+replaced under the same resource id (Fukuoka's, 2026-09-25): check
+`package_show` against the brief. The sheet as written before the build:
+
+(`fukuoka.md`; 7 wards, **EPSG:32652**) - ▶ the first TWO-SOURCE Japanese city.
 - The city's own BODIK list (`…/r8.7.csv`, 3,977 rows: permits from before
   2021-06 only) PLUS MHLW's online filings (`i2fas.mhlw.go.jp/…/40130_food_business_all.csv`,
   40,390 live rows, 27,815 permits). They overlap 1.3%.

@@ -341,6 +341,12 @@ evidence section.
   28,674 storefronts, 95 stations, 7 lines; texts owner-approved (DECISIONS).
   - [ ] At review time: `publish-city` (a new page, `cities.py` with Osaka's
     label moved right, notice 53 "Sapporo City and MLIT"), deploy-verify `scope: city-added`, reboot.
+- [x] **Fukuoka built 2026-09-28** (`worktree-japan`, held for review time):
+  30,062 storefronts, 71 stations, 9 lines; texts owner-approved (DECISIONS).
+  - [ ] At review time: `publish-city` (a new page, `cities.py` with Busan's
+    label moved lower left, notice 54 "Fukuoka City, MHLW and MLIT"),
+    deploy-verify `scope: city-added`, reboot. `worktree-japan` also carries
+    Sapporo's branch, so the two land together.
 - [ ] **Join control** - like-for-like against the Economic Census per-ward
   飲食店 count (the owner's chosen control) - at build. **Not yet run for
   Kobe or Osaka**. **The e-Stat download is approved (owner, 2026-09-28)**:

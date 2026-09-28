@@ -1018,7 +1018,11 @@ CITIES = [
         # measured 2026-09-27): above it, Busan's pill grazed Daegu's marker,
         # and to its right the two pills overlapped (check_macro_labels.py
         # --verbose). With Daegu's label to its left, neither grazes.
-        "label_offset": ("middle", 0, 22),
+        # LOWER LEFT since 2026-09-28: below the dot, Busan's pill covered
+        # Fukuoka's marker. Of 432 placements of Busan, Daegu and Kobe scored
+        # with Fukuoka's label below its dot, this is the one clean one that
+        # moves a single existing label.
+        "label_offset": ("end", -10, 16),
     },
     {
         # REGIONAL, owner's call 2026-09-27: Línea 2 runs through San Nicolás de
@@ -1088,6 +1092,22 @@ CITIES = [
         # check_macro_labels.py at 375, 768 and 1200 (width 56.9 px,
         # measured 2026-09-28 in the app's own document).
         "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Fukuoka",
+        "lat": 33.59,
+        "lon": 130.4,
+        "page": "pages/53_Fukuoka_Heatmap.py",
+        "blurb": "Fukuoka City Subway, and JR Kyushu's and Nishitetsu's lines",
+        "region": "East Asia",
+        "country": "Japan",
+        "in_default_view": False,
+        # BELOW its dot, over the sea south of Kyushu (width 56.8 px,
+        # measured 2026-09-28 in the app's own document). Above it the pill
+        # met Busan's, Daegu's and Kobe's; Busan's label moved lower left to
+        # clear Fukuoka's marker. Scored clear by check_macro_labels.py at
+        # 375, 768 and 1200.
+        "label_offset": ("middle", 0, 22),
     },
 ]
 
