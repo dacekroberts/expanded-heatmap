@@ -11,8 +11,9 @@ a rule, not before obeying one.
 ## Where to start
 
 - Picking the next city -> `docs/city_master_list.md` (read counts there, never
-  repeat them here); its evidence trail, `docs/global_country_shortlist.md`,
-  wins when they disagree. [#master-list]
+  repeat them here; `check_master_list_counts.py` enforces them, and closed
+  bands live in `city_master_list_evidence.md`); its evidence trail,
+  `docs/global_country_shortlist.md`, wins when they disagree. [#master-list]
 - First city in a new country -> `add-country`, then
   `docs/mexico_retrospective.md` (one national register) or
   `docs/spain_retrospective.md` (bespoke per city; also read it before trusting

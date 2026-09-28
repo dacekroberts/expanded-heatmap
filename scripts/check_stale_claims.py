@@ -127,8 +127,13 @@ EXCLUDE_DIRS = ("docs/build_briefs", "docs/notifications")
 # evidence trails - `CLAUDE.md` calls the first "every probe logged", and the
 # second was relabelled an evidence trail on 2026-09-22. Their counts are dated
 # probe findings, the same case as the retrospectives.
+#
+# `city_master_list_evidence.md` is the master list's own evidence trail, moved
+# out of it on 2026-09-27 word for word: the closed bands, the emptied open gap,
+# the 2026-09-22 tier view. Every count and "now" in it is dated on purpose.
 EXCLUDE_NAMES |= {
     "city_master_list.md",
+    "city_master_list_evidence.md",
     "global_country_shortlist.md",
     "canada_step0_endpoints.md",
 }

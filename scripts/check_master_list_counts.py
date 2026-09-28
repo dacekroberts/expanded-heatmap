@@ -1,0 +1,464 @@
+"""Every count docs/city_master_list.md states agrees with the rows it counts,
+and no city sits in two lists.
+
+    python scripts/check_master_list_counts.py
+    python scripts/check_master_list_counts.py --verbose     # print each list's members
+    python scripts/check_master_list_counts.py --file X.md   # for controls (the self-test)
+
+Exits non-zero naming every disagreement. Read-only, standard library only.
+
+WHY. `CLAUDE.md` sends every session to this file to READ COUNTS OFF, and the
+counts were the part of it that kept going wrong. The efficiency review of
+2026-09-27 (docs/efficiency_review_2026-09-27.md, finding 5) found that 79 of
+its last 149 edits changed a count in a heading or the summary block, and at
+least five commits existed only to fix counts that had drifted. The file
+recorded its own failures and kept repeating them:
+
+  - the summary box read 20 / 33 / 30 from 2026-09-22 while the band sections
+    below it moved on ("the hand-kept summary is the first thing to drift");
+  - the band table read A 9 / B 10 / C 12 / D 2 until 2026-09-23, left
+    standing under two renumbers that updated the headings and not the table;
+  - on 2026-09-27 Band A's figure was "corrected from a stale 10 + 28" and the
+    candidate total "from a stale 24 to 20", both in the same day's edits.
+
+Each count is stated in up to four places - a heading, the summary box, the
+band table, and sometimes a sub-group line - and each place was corrected by
+hand, separately. A person republishing the list in chat is told to "verify the
+band counts sum to the candidate total before sending", because "that
+arithmetic has been wrong twice". That is a check, so it is one now.
+
+It also enforces the owner's rule of 2026-09-27: a city sits in ONE place -
+Built, one band, or the discards - never two. Built cities keep their struck-out
+rows in Band A as the record of what screening promised; those are the one
+sanctioned overlap, and each must really be in the Built table.
+
+WHAT COUNTS AS A MEMBER of a band (between its `## ... Band X` heading and the
+next `##`):
+
+  1. a row of a table whose first column (after an optional `#`) is headed
+     `City` or `Cities` - the first bold name in that cell, or the cell's text;
+  2. a `### <flag> Name - ...` heading (a per-city write-up, as Band C's
+     Singapore); a heading that says "cities" is a group, not a city;
+  3. a `▲ **<flag> Name joined ...**` announcement (Monterrey), names split on
+     commas and "and"; the flag is what separates a city from "Six joined";
+  4. a `**▲ Name** <flag>` paragraph opener (Stockholm and Zurich).
+
+The owner's chat format puts every city in a table row, and the first form is
+the one to use. The other three are recognised because Band A and Band C
+already hold cities written up that way; a city added in a shape none of these
+recognises is reported as a count that disagrees, with the members that WERE
+found listed, so the fix is visible.
+
+A Band A member is BUILT if its row is marked ✅ or struck through, or if its
+name is in the Built table. Names are compared without parentheticals, so
+"Guadalajara" matches "Guadalajara (Regional)".
+
+The Built table is counted by names in each row (` · `-separated); its
+per-country figures are checked against `app/cities.py` separately, by
+`scripts/check_provenance.py` check E. The discard rows' evidence is checked by
+`scripts/check_discard_evidence.py`; this script only counts them.
+"""
+import argparse
+import re
+import sys
+import unicodedata
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+LIST = ROOT / "docs" / "city_master_list.md"
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
+FLAG = "[\U0001F1E6-\U0001F1FF]{2}"
+FLAG_RE = re.compile(FLAG)
+BOLD = re.compile(r"\*\*(.+?)\*\*")
+SEP = re.compile(r"^\|[\s:|-]+\|\s*$")
+BAND_HEAD = re.compile(r"^## .*\bBand ([A-Z])\b")
+
+
+# --- reading the file -------------------------------------------------------
+
+def sections(lines):
+    """[(title, start, end)] for every `## ` section, ending at the next `##`
+    or `#` heading. Line numbers are 0-based indexes into `lines`."""
+    heads = [i for i, l in enumerate(lines) if l.startswith("## ") or l.startswith("# ")]
+    out = []
+    for k, i in enumerate(heads):
+        if lines[i].startswith("## "):
+            end = heads[k + 1] if k + 1 < len(heads) else len(lines)
+            out.append((lines[i], i, end))
+    return out
+
+
+def cells(line):
+    return [c.strip() for c in line.strip().strip("|").split("|")]
+
+
+def tables(lines, start, end):
+    """[(header_cells, [(line_index, row_cells)])] for tables in [start, end)."""
+    out, i = [], start
+    while i < end - 1:
+        if lines[i].startswith("|") and SEP.match(lines[i + 1]):
+            head, rows, i = cells(lines[i]), [], i + 2
+            while i < end and lines[i].startswith("|"):
+                rows.append((i, cells(lines[i])))
+                i += 1
+            out.append((head, rows))
+        else:
+            i += 1
+    return out
+
+
+def clean(text):
+    text = re.sub(r"~~|`|\*", "", text)
+    text = FLAG_RE.sub("", text)
+    return re.sub(r"[▲▼✅↓⇄]", "", text).strip(" \t—-:,")
+
+
+def key(name):
+    """Compare names without parentheticals, case or accents' composition."""
+    name = unicodedata.normalize("NFC", clean(name))
+    name = re.sub(r"\s*\([^)]*\)", "", name)
+    return re.sub(r"\s+", " ", name).strip().lower()
+
+
+def cell_name(cell):
+    m = BOLD.search(cell)
+    return clean(m.group(1) if m else cell)
+
+
+def members(lines, start, end):
+    """{key: (display name, line_index, marked_built)} for one band section."""
+    found = {}
+
+    def add(name, i, marked=False):
+        k = key(name)
+        if k and k not in found:
+            found[k] = (clean(name), i, marked)
+        elif k and marked:
+            found[k] = (found[k][0], found[k][1], True)
+
+    for head, rows in tables(lines, start, end):
+        col = 1 if head and head[0] == "#" and len(head) > 1 else 0
+        if head[col].lower() not in ("city", "cities"):
+            continue
+        for i, row in rows:
+            if len(row) <= col:
+                continue
+            marked = "✅" in row[0] or "~~" in row[col]
+            add(cell_name(row[col]), i, marked)
+
+    for i in range(start, end):
+        line = lines[i]
+        m = re.match(rf"^###\s+[▲▼\s]*({FLAG})\s*(.+?)\s+—\s+(.*)$", line)
+        if m and "cities" not in m.group(3).lower():
+            add(m.group(2), i)
+        for m in re.finditer(r"[▲▼]+\s*\*\*([^*]*?)\s+joined\b", line):
+            if FLAG_RE.search(m.group(1)):
+                for name in re.split(r",\s*|\s+and\s+", clean(m.group(1))):
+                    add(name, i)
+        m = re.match(rf"^\*\*[▲▼]\s*([^*]+?)\*\*\s*{FLAG}", line)
+        if m:
+            add(m.group(1), i)
+    return found
+
+
+def built_table(lines, start, end):
+    """[(line_index, country, stated_count, [names], flags)] from the Built table."""
+    out = []
+    for head, rows in tables(lines, start, end):
+        if [h.lower() for h in head[:2]] != ["country", "cities"]:
+            continue
+        for i, row in rows:
+            country = cell_name(row[0])
+            m = re.search(r"\((\d+)", row[0])
+            names = []
+            for seg in row[1].split(" · "):
+                seg = FLAG_RE.sub("", seg).strip()
+                b = re.match(r"^\*\*(.+?)\*\*", seg)
+                name = b.group(1) if b else re.split(r"\s+\*\(|\s+\(|\s+—\s", seg)[0]
+                if clean(name):
+                    names.append(clean(name))
+            out.append((i, country, int(m.group(1)) if m else None, names,
+                        set(FLAG_RE.findall(row[1]))))
+    return out
+
+
+# --- the check --------------------------------------------------------------
+
+def check(text):
+    """Return (report, problems). `report` is {list name: {key: name}}."""
+    lines = text.splitlines()
+    problems = []
+    secs = sections(lines)
+
+    def find(pred):
+        return [(t, s, e) for t, s, e in secs if pred(t)]
+
+    # ---- Built
+    built_secs = find(lambda t: re.match(r"^## Built\b", t))
+    if not built_secs:
+        return {}, ["no '## Built - N' section"]
+    title, s, e = built_secs[0]
+    rows = built_table(lines, s, e)
+    if not rows:
+        problems.append("the Built section has no '| Country | Cities |' table")
+    built_names = [n for r in rows for n in r[3]]
+    built = {key(n): n for n in built_names}
+    if len(built) != len(built_names):
+        dupes = sorted({n for n in built_names if built_names.count(n) > 1})
+        problems.append(f"the Built table names a city twice: {dupes}")
+    for i, country, stated, names, _ in rows:
+        if stated is not None and stated != len(names):
+            problems.append(f"line {i + 1}: Built row '{country} ({stated})' lists "
+                            f"{len(names)} cities: {' · '.join(names)}")
+    countries = sum(len(f) if f else 1 for *_, f in rows)
+    m = re.match(r"^## Built\s*—\s*(\d+)", title)
+    if not m:
+        problems.append(f"the Built heading states no count: {title!r}")
+    elif int(m.group(1)) != len(built_names):
+        problems.append(f"heading '{title}' but the Built table lists {len(built_names)}")
+
+    # ---- bands
+    bands = {}
+    for t, s, e in secs:
+        m = BAND_HEAD.match(t)
+        if m:
+            bands[m.group(1)] = (t, s, e, members(lines, s, e))
+    if not bands:
+        problems.append("no '## ... Band X' sections found - the file changed shape; "
+                        "update this check rather than let it pass vacuously")
+    ready, built_in_a = {}, {}
+    for letter, (t, s, e, mem) in bands.items():
+        for k, (name, i, marked) in mem.items():
+            if letter == "A" and (marked or k in built):
+                built_in_a[k] = name
+                if k not in built:
+                    problems.append(f"line {i + 1}: Band A marks {name} built, but the "
+                                    f"Built table does not list it")
+            else:
+                ready.setdefault(letter, {})[k] = name
+    actual = {letter: len(ready.get(letter, {})) for letter in bands}
+    for letter in "ABCDT":
+        actual.setdefault(letter, 0)
+
+    for letter, (t, s, e, mem) in bands.items():
+        if letter == "A":
+            m = re.search(r"\((\d+)\s+ready\s*\+\s*(\d+)", t)
+            if not m:
+                problems.append(f"Band A's heading states no 'N ready + N built': {t!r}")
+            else:
+                if int(m.group(1)) != actual["A"]:
+                    problems.append(f"heading '{t}' says {m.group(1)} ready, but Band A "
+                                    f"holds {actual['A']}: {_names(ready.get('A'))}")
+                if int(m.group(2)) != len(built_in_a):
+                    problems.append(f"heading '{t}' says {m.group(2)} built, but Band A "
+                                    f"keeps {len(built_in_a)} built rows")
+        else:
+            m = re.search(r"\((\d+)\s+cit", t)
+            if not m:
+                problems.append(f"Band {letter}'s heading states no '(N cities)': {t!r}")
+            elif int(m.group(1)) != actual[letter]:
+                problems.append(f"heading '{t}' says {m.group(1)}, but Band {letter} "
+                                f"holds {actual[letter]}: {_names(ready.get(letter))}")
+        problems += subgroups(lines, s, e, letter)
+
+    # ---- open gap and discards
+    gap = {}
+    for t, s, e in find(lambda t: "OPEN SCREENING GAP" in t.upper()):
+        gap.update({k: v[0] for k, v in members(lines, s, e).items()})
+    discards = {}
+    disc_secs = find(lambda t: t.startswith("## DISCARDED"))
+    if not disc_secs:
+        problems.append("no '## DISCARDED' section")
+    for t, s, e in disc_secs:
+        for head, rows in tables(lines, s, e):
+            if head and head[0].lower() == "city":
+                for i, row in rows:
+                    discards[key(cell_name(row[0]))] = cell_name(row[0])
+        m = re.match(r"^## DISCARDED\s*—\s*(\d+)", t)
+        if m and int(m.group(1)) != len(discards):
+            problems.append(f"heading '{t}' but the discard table holds {len(discards)}")
+
+    candidates = sum(actual[x] for x in "ABCDT")
+    m = find(lambda t: t.startswith("## Candidates"))
+    if not m:
+        problems.append("no '## Candidates - N' section")
+    else:
+        t, s, e = m[0]
+        h = re.match(r"^## Candidates\s*—\s*(\d+)", t)
+        if h and int(h.group(1)) != candidates:
+            problems.append(f"heading '{t}' but the bands hold {candidates} "
+                            f"({_sum(actual)})")
+        problems += band_table(lines, s, e, actual, candidates, len(gap),
+                               len(discards), len(built_in_a))
+
+    problems += summary(lines, len(built_names), countries, actual, candidates,
+                        len(gap), len(discards))
+
+    # ---- one city, one place
+    lists = {"Built": built, "the open gap": gap, "the discards": discards}
+    for letter in sorted(ready):
+        lists[f"Band {letter}"] = ready[letter]
+    where = {}
+    for label, names in lists.items():
+        for k, name in names.items():
+            where.setdefault(k, []).append((label, name))
+    for k, places in sorted(where.items()):
+        if len(places) > 1:
+            problems.append(f"{places[0][1]} is in " + " AND ".join(p for p, _ in places)
+                            + " - a city sits in Built, one band, or the discards, never two")
+
+    report = dict(lists)
+    report["Band A (built rows kept)"] = built_in_a
+    return report, problems
+
+
+def _names(d):
+    return ", ".join(sorted((d or {}).values())) or "none"
+
+
+def _sum(actual):
+    return " + ".join(f"{x} {actual[x]}" for x in "ACTDB" if actual[x] or x != "B")
+
+
+def subgroups(lines, start, end, letter):
+    """A `**<flag> Country (N)**` line counts the table that follows it."""
+    problems, pending = [], None
+    for i in range(start, end):
+        line = lines[i]
+        if line.startswith("**"):
+            b = BOLD.match(line)
+            groups = re.findall(rf"({FLAG})\s*([^(),*]+?)\s*\((\d+)\)", b.group(1)) if b else []
+            if groups:
+                pending = (i, groups)
+        elif pending and line.startswith("|") and i + 1 < end and SEP.match(lines[i + 1]):
+            j, rows = i + 2, []
+            while j < end and lines[j].startswith("|"):
+                rows.append(lines[j])
+                j += 1
+            at, groups = pending
+            if len(groups) == 1:
+                flag, name, n = groups[0]
+                if int(n) != len(rows):
+                    problems.append(f"line {at + 1}: Band {letter} says '{name.strip()} ({n})', "
+                                    f"the table below it has {len(rows)} rows")
+            else:
+                for flag, name, n in groups:
+                    got = sum(1 for r in rows if flag in cells(r)[0])
+                    if int(n) != got:
+                        problems.append(f"line {at + 1}: Band {letter} says '{name.strip()} "
+                                        f"({n})', the table below it has {got} {flag} rows")
+            pending = None
+    return problems
+
+
+def band_table(lines, start, end, actual, candidates, gap, discards, built_in_a):
+    """The '| Band | ... | Cities |' table in the Candidates section."""
+    problems, seen = [], False
+    for head, rows in tables(lines, start, end):
+        if not head or head[0].lower() != "band":
+            continue
+        seen = True
+        for i, row in rows:
+            first, last = row[0], row[-1]
+            n = re.search(r"(\d+)", last)
+            if not n:
+                continue
+            n = int(n.group(1))
+            letter = re.search(r"\*\*([A-Z])\*\*", first)
+            if letter:
+                x = letter.group(1)
+                if n != actual.get(x, 0):
+                    problems.append(f"line {i + 1}: band table says {x} {n}, the band holds "
+                                    f"{actual.get(x, 0)}")
+                b = re.search(r"\+\s*(\d+)\s*built", last)
+                if x == "A" and b and int(b.group(1)) != built_in_a:
+                    problems.append(f"line {i + 1}: band table says A '+ {b.group(1)} built', "
+                                    f"Band A keeps {built_in_a} built rows")
+            elif "Candidates" in " ".join(row[:2]):
+                if n != candidates:
+                    problems.append(f"line {i + 1}: band table says {n} candidates, the bands "
+                                    f"hold {candidates}")
+            elif "open gap" in first.lower():
+                if n != gap:
+                    problems.append(f"line {i + 1}: band table says open gap {n}, it holds {gap}")
+            elif "discarded" in first.lower():
+                if n != discards:
+                    problems.append(f"line {i + 1}: band table says {n} discarded, the table "
+                                    f"holds {discards}")
+    if not seen:
+        problems.append("the Candidates section has no '| Band | ... | Cities |' table")
+    return problems
+
+
+def summary(lines, built, countries, actual, candidates, gap, discards):
+    """The '> | **Built** | ...' box at the top."""
+    problems = []
+    box = [(i, l) for i, l in enumerate(lines) if l.startswith("> |")]
+    rows = {}
+    for i, l in box:
+        m = re.match(r"^> \|\s*\*\*([^*]+)\*\*\s*\|(.*)$", l)
+        if m:
+            rows[m.group(1).strip().lower()] = (i, m.group(2))
+    if not rows:
+        return ["no summary box ('> | **Built** | ...') found"]
+
+    def first_bold_int(text):
+        m = re.search(r"\*\*(\d+)\*\*", text)
+        return int(m.group(1)) if m else None
+
+    for label, want in (("built", built), ("candidates", candidates),
+                        ("open screening gap", gap), ("discarded", discards)):
+        if label not in rows:
+            problems.append(f"the summary box has no '{label}' row")
+            continue
+        i, text = rows[label]
+        got = first_bold_int(text)
+        if got != want:
+            problems.append(f"line {i + 1}: summary says {label} {got}, the file holds {want}")
+    if "built" in rows:
+        i, text = rows["built"]
+        m = re.search(r"across\s+(\d+)\s+countries", text)
+        if m and int(m.group(1)) != countries:
+            problems.append(f"line {i + 1}: summary says built across {m.group(1)} countries, "
+                            f"the Built table spans {countries}")
+    if "candidates" in rows:
+        i, text = rows["candidates"]
+        head = text.split("*(")[0]
+        for x, n in re.findall(r"(?<!\w)([A-Z]) (\d+)(?![\d,])", head):
+            if int(n) != actual.get(x, 0):
+                problems.append(f"line {i + 1}: summary says {x} {n}, Band {x} holds "
+                                f"{actual.get(x, 0)}")
+    return problems
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--file", type=Path, default=LIST)
+    ap.add_argument("--verbose", action="store_true")
+    args = ap.parse_args()
+    report, problems = check(args.file.read_text(encoding="utf-8"))
+
+    if args.verbose:
+        for label, names in report.items():
+            print(f"{label} ({len(names)}): {', '.join(sorted(names.values()))}")
+        print()
+    if problems:
+        for p in problems:
+            print(f"  PROBLEM  {p}")
+        print(f"\n{len(problems)} problem(s) in {args.file.name}. Fix the COUNT to match the "
+              "rows, or the rows to match the decision - never the reverse of what was "
+              "decided. A city in two lists is a move half made.")
+        return 1
+    bands = {k: len(v) for k, v in report.items() if k.startswith("Band ") and "built" not in k}
+    print(f"OK - {len(report.get('Built', {}))} built, "
+          + ", ".join(f"{k} {v}" for k, v in sorted(bands.items()))
+          + f", {len(report.get('the discards', {}))} discarded; every stated count agrees "
+          "and no city is in two lists")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

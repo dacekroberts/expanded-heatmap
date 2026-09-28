@@ -253,7 +253,8 @@ join, one level coarser. **Block precision is ample for this project's
 ### The machinery to reuse, not copy
 
 The master list's standing warning — *deferring Japan is only cheaper if the
-machinery is built SHARED* — now has something concrete to share:
+machinery is built SHARED* (now in `docs/city_master_list_evidence.md`, the
+2026-09-22 tier view) — now has something concrete to share:
 
 | Reusable piece | Where it is now |
 |---|---|

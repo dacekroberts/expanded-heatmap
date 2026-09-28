@@ -575,7 +575,7 @@ than at a guessed open-data portal — which is where the previous pass failed.
 > metro city.** The data exists where there is no rail; the rail exists where
 > there is no data. Full details, including the Virtuoso timeout ladder and
 > the `dct:spatial`-means-coverage trap, are in `add-country` §3 and in
-> `docs/city_master_list.md`'s Sofia section.
+> `docs/city_master_list_evidence.md`'s Sofia section (moved out of the master list on 2026-09-27).
 
 #### D5 — rail/GIS group: REACHABILITY ONLY, no layer probed (11 cities)
 
