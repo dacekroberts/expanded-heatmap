@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**106 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**107 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Tokyo's review time: deploy-verify (city-added) found the legend covering 5 labels at the 1000 px frame; fixed, re-checked, published (owner)](#2026-09-28---tokyos-review-time-deploy-verify-city-added-found-the-legend-covering-5-labels-at-the-1000-px-frame-fixed-re-checked-published-owner)
 - [Tokyo built: its page, macro-map entry, exclusions and table rows (owner-approved); Japan's sixth and last city, held for review time](#2026-09-28---tokyo-built-its-page-macro-map-entry-exclusions-and-table-rows-owner-approved-japans-sixth-and-last-city-held-for-review-time)
 - [German screen from the large-transit gap: Munich, Frankfurt and Cologne discarded; Berlin's register found (owner)](#2026-09-28---german-screen-from-the-large-transit-gap-munich-frankfurt-and-cologne-discarded-berlins-register-found-owner)
 - [Tokyo's census control, notice and page: the Economic Census control run for all six Japanese cities; zero drift in 55; Tokyo's texts approved (owner)](#2026-09-28---tokyos-census-control-notice-and-page-the-economic-census-control-run-for-all-six-japanese-cities-zero-drift-in-55-tokyos-texts-approved-owner)
@@ -142,6 +143,40 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Tokyo's review time: deploy-verify (city-added) found the legend covering 5 labels at the 1000 px frame; fixed, re-checked, published (owner)
+
+- **The owner called review time for Tokyo.** The gate in `publish-city`'s
+  order: no fetch in any step; drift zero for Tokyo after its last pipeline
+  edits (72 baseline figures unchanged; the other 54 were zero earlier the same
+  day); the exposure pass 0; provenance and the inconsistency tables complete;
+  the brief 7/7; `check_deploy_imports` clean on the pushed commit.
+- **`deploy-verify`, scope `city-added`** (owner asked; the full sweep had
+  just passed the other Japanese cities, and the drift check showed every
+  other map byte-identical). **One blocker**: at the app's 1000 px frame the
+  open legend was 409 px wide and covered 5 labels (JB, TS, KS, KS, HS). The
+  label solver models the open legend as 274 px, which every earlier legend
+  fitted; Tokyo's "code + full name" rows ("JO  JR Yokosuka / Sobu Rapid Line")
+  did not. My own checks ran at 1280 px, where the legend sits further right,
+  and at 343 and 375 px, where it starts collapsed - so they could not see it.
+  Everything else passed: the page and its table, notice 56 (24 links, all
+  resolving), zoom at every width, the OSM credit, the legend rows including
+  the hollow-station row, 293 hollow tooltips each naming its ward, the macro
+  map's dot, label and tooltip, and Kyoto untouched.
+- **Fixed (a repair, not a choice)**: a map that passes `legend_names` caps its
+  legend at the solver's width (`LEGEND_MODEL_W = 274`, now one constant for
+  both) and its long rows wrap. At 1000 x 650: legend 274 px, 0 label problems;
+  also 0 at 1280 and 343; zoom 11 as expected. No other map changes (Kyoto,
+  Osaka, New York zero drift; `check_render_current` OK for all 55). The fix
+  also uncovers 135 px more of Tokyo's map. Not re-run through a full
+  `deploy-verify`: the one defect it found was repaired and re-measured the way
+  it was found (`publish-city`: narrow after a repair).
+- **Notes from the run, not blockers**: at 375 px the Tokyo page's ward table
+  is 469 px wide and the page scrolls sideways (the table's last column is off
+  screen) - PLAN; line codes shared by several lines (SI, TS, KS three times,
+  KK twice) are told apart only by colour and the legend; stations sit under
+  the lines, so not every hollow station can be hovered at the default zoom (as
+  in Kyoto).
 
 ### 2026-09-28 - Tokyo built: its page, macro-map entry, exclusions and table rows (owner-approved); Japan's sixth and last city, held for review time
 

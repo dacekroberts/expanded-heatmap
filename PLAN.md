@@ -25,6 +25,11 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   `gtfs-openov-nl.zip`) and `data/rome/raw/rome_static_gtfs.zip` (46.8 MB,
   downloaded, then not used) may be deleted from the main checkout.
 
+- [ ] **Tokyo's page scrolls sideways on a phone** (deploy-verify at review
+  time, 2026-09-28): at 375 px its ward-share table is 469 px wide in a 343 px
+  column, so the "The list" column is off screen until the reader scrolls. A
+  layout fix for the next `app/` batch (a table that scrolls inside itself, or
+  narrower columns); re-check at 343 and 375.
 - [ ] **Port Hong Kong's Light Rail thinning and Riga's inline loop to
   `pipeline/stations.py` `thin()`** (owner, 2026-09-28). Both measure in
   haversine; each port gets its own drift measurement first. Pipeline only,

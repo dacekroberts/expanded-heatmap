@@ -1551,7 +1551,7 @@ def _layout_labels(points, candidates, labels, n_lines, center, zoom):
     # The legend (open) sits bottom-right; the zoom and layer controls top-left.
     # Capped as _LEGEND_CSS caps it (only a map past ~20 lines reaches it).
     legend_h = min(178 + 19 * n_lines, _MAP_H - 24 - _LEGEND_TOP_CLEAR)
-    obstacles = [(_MAP_W - 24 - 274, _MAP_H - 24 - legend_h, _MAP_W - 24, _MAP_H - 24), (0, 0, 60, 110)]
+    obstacles = [(_MAP_W - 24 - LEGEND_MODEL_W, _MAP_H - 24 - legend_h, _MAP_W - 24, _MAP_H - 24), (0, 0, 60, 110)]
     placed, chosen, unplaced = [], {}, []
     # Longest names first: they have the fewest places they fit.
     for key in sorted(candidates, key=lambda k: -len(labels[k])):
@@ -1910,6 +1910,16 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
     return len(data)
 
 
+# The open legend's width as _layout_labels models it (the obstacle every
+# label is placed around). A legend sizes to its longest row; every map's rows
+# fitted this until Tokyo's "code + full name" rows ("JO  JR Yokosuka / Sobu
+# Rapid Line") made its legend 409 px wide and it covered 5 labels at the 1000
+# px frame (deploy-verify, 2026-09-28). A map with legend_names is therefore
+# capped at this width and its long rows wrap, so the model stays true.
+LEGEND_MODEL_W = 274
+_LEGEND_CAP_STYLE = f"<style>.map-legend {{ max-width: {LEGEND_MODEL_W}px; }}</style>"
+
+
 def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, legend_names=None):
     """Fixed-position legend generated from the buckets actually present
     and the taxonomy's own legend text - nothing taxonomy-specific here.
@@ -1932,7 +1942,7 @@ def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, leg
     # _LEGEND_CSS is prepended AFTER formatting, not concatenated into
     # LEGEND_HTML: .format() would otherwise try to read every CSS brace as a
     # replacement field and raise KeyError on the first selector.
-    return _LEGEND_CSS + LEGEND_HTML.format(
+    return _LEGEND_CSS + (_LEGEND_CAP_STYLE if names else "") + LEGEND_HTML.format(
         category_rows="".join(
             LEGEND_ROW.format(color=color, label=html.escape(legend_label(name)))
             for name, color in bucket_colors
