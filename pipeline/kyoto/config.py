@@ -301,7 +301,9 @@ LINE_NAMES = {k: v["name"] for k, v in LINES.items()}
 #     350 m for the same reason).
 BRANCHES = {
     "JB": {"line": (_JR, "東海道線"), "terminus": "山科", "junction": "京都", "junction_m": 350,
-           "stations": ("山科",), "length_m": (5000, 20000)},
+           # 大津 and 膳所 are beyond the city line, but excluded_stations.csv
+           # names their line: without them there they read as the JR Kyoto Line
+           "stations": ("山科", "大津", "膳所"), "length_m": (5000, 20000)},
 }
 
 # Gate 3: the operators' own station counts for the lines wholly inside the
