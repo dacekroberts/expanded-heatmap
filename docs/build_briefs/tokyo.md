@@ -296,7 +296,7 @@ missing ward follows the table.
 | Chūō | 13102 | **ON** (12%) | 2021-06 to 2022-12 snapshot, share disclosed (owner, 2026-09-24) | Tokyo catalogue, CC BY 4.0 | — |
 | Minato | 13103 | **ON** (31%) | consent-filtered, share disclosed | Tokyo catalogue, CC BY 4.0 | ✓ |
 | Shinjuku | 13104 | **ON** (84%) | 2023-01-01 CSV, vintage disclosed; the 2026 PDF is not permitted | Tokyo catalogue, CC BY 4.0 | — |
-| Bunkyō | 13105 | **OPEN** | none found; re-probe pending (first of three) | — | ✓ |
+| **Bunkyō** | 13105 | **OFF** | **no list exists in any format; MHLW's slice is 2.4% (re-probed 2026-09-28)** | — | ✓ |
 | Taitō | 13106 | **ON** (81%) | opt-outs left out | ward's own, CC BY 4.0 | ✓ |
 | Sumida | 13107 | **OFF** | PDF of new permits only; licence not read unless a full list turns up | not read | — |
 | Kōtō | 13108 | **ON** (9%) | consent-only new permits, share disclosed | Tokyo catalogue, CC BY 4.0 | — |
@@ -316,7 +316,7 @@ missing ward follows the table.
 | Katsushika | 13122 | **OPEN** | none found; re-probe pending | — | ✓ |
 | Edogawa | 13123 | **OFF** | on request only (password after application); parked | — | — |
 
-**Tally, 2026-09-28**: ON 8 · OFF 12 · OPEN 3.
+**Tally, 2026-09-28**: ON 8 · OFF 13 · OPEN 2.
 
 ### Arakawa 荒川区, 13118 — OFF (read 2026-09-28)
 
@@ -333,6 +333,17 @@ missing ward follows the table.
 | join / share | not measured: the list is not used |
 | personal services | 美容所, 理容所 and クリーニング所 台帳 on the Tokyo catalogue (`t131181`), CC BY 4.0: already in the 11-ward layer |
 | route in | permission from 広報・シティプロモーション課 (the channel the copyright clause names), or publication on the ward's catalogue. Outreach is the owner's act and the last resort: **parked** |
+
+### Bunkyō 文京区, 13105 — OFF (re-probed 2026-09-28)
+
+| Field | |
+|---|---|
+| verdict | **OFF**: no food-premises list exists, in any format, current or historical. No page offers one on request, so this is not Chiyoda's shape. The ward is silent |
+| where it was looked for | **The ward's own host**: every page in the food-hygiene block (`/kenkou/seikatsueisei/shokuhineisei/`, `b026/p002876` to `p002934`, and the newer `p0075xx` / `p0076xx` pages) holds forms, plans and leaflets only. **The ward's catalogue** (`b004/p006286.html`, index `documents/6059/metadata.csv`): 69 datasets, none food, and no 自治体標準オープンデータセット bundle. **The Tokyo catalogue** (`t131059`): 57 packages, none food. **BODIK**: no Bunkyō organisation. **Web Archive**: 128 captured URLs under the old `/hoken/seikatsueisei/syokuhin*` tree (2015–2024) and about 16,600 `/documents/` URLs; no premises list among them |
+| the section's other lists | the sibling page `b026/p002833.html` (環境衛生営業施設一覧, as of 2026-08-31) publishes XLSX lists for 理容所, 美容所, クリーニング所, 旅館業, 公衆浴場 and 興行場, with no food counterpart |
+| second shapes | **MHLW 食品衛生申請等システム** (`13105_food_business_all.csv`, PDL 1.0, to 2026-08): 1,100 rows, but only 97 live permits, 88 of them 飲食店営業, so **2.4% of the yearbook's 3,716**. The rest are notifications (office snack freezers, vending machines, canteens). **Not used**. The 食品衛生優良施設 award lists (9 and 8 premises) are negligible |
+| personal services | 美容所 372, 理容所 109, クリーニング所 208 and 旅館 55 on the Tokyo catalogue (`t131059`, CC BY): already in the 11-ward layer. The ledgers carry 営業者氏名 and 法人代表者氏名, never read |
+| route in | a request to 文京保健所生活衛生課食品衛生担当 (03-5803-1228). Outreach is the owner's act and the last resort: **parked**, and not drafted |
 
 ### Ōta 大田区, 13111 — OFF (owner, 2026-09-28)
 

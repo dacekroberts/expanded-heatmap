@@ -121,6 +121,21 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ### 2026-09-28 - Tokyo's missing wards: Arakawa OFF; a ward-by-ward list in the brief (owner)
 
+- **Found that Bunkyō publishes no food-premises list at all, so it is OFF
+  for food** (re-probed with `reprobe-city`, the first of the three
+  none-found wards). The probe asked the ward's own host and read every page
+  in its food-hygiene block: forms and plans only. It enumerated the ward's
+  catalogue (69 datasets, no standard-dataset bundle), the Tokyo catalogue
+  (`t131059`, 57 packages) and BODIK (no organisation). The Web Archive's
+  captures of the old food tree (128 URLs) and about 16,600 `/documents/` URLs
+  held no premises list either. No page offers a list on request, so this is
+  not Chiyoda's shape. The same section publishes its 環境衛生 lists as XLSX
+  and on the catalogue, and has no food counterpart. **Rejected: MHLW's
+  online-filing slice** (`13105_food_business_all.csv`, PDL 1.0). It holds 88
+  live 飲食店営業 permits against the yearbook's 3,716 for FY2024, so 2.4%, and
+  it fails the full-and-current rule. Ward cards now stand at ON 8, OFF 13,
+  OPEN 2 (Suginami and Katsushika next).
+
 - **Ōta is OFF for food (owner, 2026-09-28), on the recommendation, after two
   follow-up checks.** The full list is published (`r0809.zip`, two PDFs as
   at 2026-09-01, 14.6 MB), but as PDF only, and it is on neither the ward's
