@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**63 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**64 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
@@ -28,6 +28,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [kobe and trams worktrees retired after review time landed them](#2026-09-28---kobe-and-trams-worktrees-retired-after-review-time-landed-them)
 - [Wave 2, the US banded: seven cities to T, Baltimore to C, sixteen discards; a Texas register reopens the Dallas question (owner)](#2026-09-28---wave-2-the-us-banded-seven-cities-to-t-baltimore-to-c-sixteen-discards-a-texas-register-reopens-the-dallas-question-owner)
 - [check_map_view.js run live on the review-time batch: Kobe and Paris open at the right zoom](#2026-09-28---check_map_viewjs-run-live-on-the-review-time-batch-kobe-and-paris-open-at-the-right-zoom)
+- [staging worktree retired; its data/ was a real 1.09 GB copy, not a junction](#2026-09-28---staging-worktree-retired-its-data-was-a-real-109-gb-copy-not-a-junction)
 
 **2026-09-27**
 
@@ -2454,3 +2455,27 @@ Recorded by the cleanup session from the Main Building Session's findings of
   `resize_window` (1280x800, or the mobile preset) before loading fixed it,
   even with the pane still hidden. It is worth doing that first on any live
   run.
+
+### 2026-09-28 - staging worktree retired; its data/ was a real 1.09 GB copy, not a junction
+
+- **Confirmed by both:** the owner, and the worktree's own session
+  ("Staging handoff wave 2"). That session was idle and not running; the
+  app still listed it because it had not been archived.
+- **Checks passed:**
+  - the tree was clean;
+  - its tip, 682d95d, is on origin/master;
+  - no `-tmp` launch entry remained;
+  - Staging had copied its scratch to the main checkout's
+    `data/_staging_scratch_2026-09-28/` itself.
+- **Unlike `kobe` and `trams`, its `data/` was a REAL folder**: 115 files,
+  1.09 GB of wave 2's tram-city downloads, with no links inside. It was
+  deleted only after `check_worktree_data.py` passed twice, once when the
+  session confirmed and again immediately before removal. Every file was
+  already in the main checkout's `data/` at the same size.
+- **How it went:**
+  - `git worktree remove` emptied and unregistered the worktree, then got
+    "Permission denied" on the folder itself.
+  - `git branch -d worktree-staging` succeeded.
+  - An EMPTY `staging` folder remains, reported busy, most likely held as
+    the idle session's working directory. Remove it with `rmdir` once that
+    session is archived. The handoff records this.
