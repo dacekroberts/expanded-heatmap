@@ -1049,9 +1049,9 @@ brief names.
 - [x] **An honest efficiency review of the whole PROCESS, the owner's habits included (owner,
   2026-09-24)** DONE 2026-09-27: findings in `docs/efficiency_review_2026-09-27.md`, the
   owner's order in DECISIONS (2026-09-27). Follow-ups, in that order:
-  - [ ] **Change 2 - batch approvals and deploys.** One owner approval review a day for
-    wording, labels and renderer changes, and one `app/` push per batch under one reboot.
-    Owner habit; no code needed.
+  - [x] **Change 2 - batch approvals and deploys.** DONE 2026-09-27: queued for "review time",
+    which only the owner calls; `app/` lands in one batch under one reboot. Rule and reminder
+    threshold in memory (`batched-review-time`) and the `publish-city` skill.
   - [ ] **Change 3 - trim what every session loads.** CLAUDE.md toward ~1,500 words (incident
     history to skills/DECISIONS), a DECISIONS index of the last 7 days, a `plan-trim` pass,
     `check_all.py` as a pre-push hook. Draft each cut for the owner before writing.
