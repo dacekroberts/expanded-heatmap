@@ -252,6 +252,12 @@ REGISTRIES = {
     "seoul": dict(raw=None, trade=None, owner=None,
                   processed="businesses_clean.csv",
                   address=("address",), korean=True, withheld="Name withheld"),
+    # Daegu: Seoul's register and pass through pipeline/countries/korea.py.
+    # The health-food file's addresses are masked by the publisher; the Korean
+    # residence test reads a masked 동/호 unit as a unit (korean_names.py).
+    "daegu": dict(raw=None, trade=None, owner=None,
+                  processed="businesses_clean.csv",
+                  address=("address",), korean=True, withheld="Name withheld"),
     "san_diego": dict(raw="sd_businesses_active_datasd.csv", trade="dba_name",
                       owner="business_owner_name", processed="businesses_clean.csv",
                       address=("address_no", "address_road", "address_suite")),

@@ -27,7 +27,9 @@ TRADE_WORDS = ("헤어샵", "헤어", "네일", "세탁소", "세탁", "미용�
 _NAME = re.compile(
     "^(?:" + "|".join(SURNAMES_2) + "|[" + SURNAMES_1 + "])[가-힣]{2}"
     "(?:" + "|".join(TRADE_WORDS) + ")?$")
-_HOME = re.compile(r"아파트|빌라|맨션|연립|다세대|\d+동\s*\d+호")
+# A 동/호 unit whose digits the publisher masked with * reads as a unit too:
+# Daegu's health-food register masks every house and unit number (2026-09-27).
+_HOME = re.compile(r"아파트|빌라|맨션|연립|다세대|[\d*]+동\s*[\d*]+호")
 _COMMERCIAL = re.compile(r"상가|빌딩|시장|프라자|플라자|타워|센터|오피스텔|스퀘어|몰|쇼핑|상점가")
 
 

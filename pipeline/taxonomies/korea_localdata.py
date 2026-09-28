@@ -46,6 +46,9 @@ FILES = {
 DROP = {
     "OA-16094": {"출장조리", "이동조리", "푸드트럭"},   # catering, mobile cooking, food trucks
     "OA-16095": {"푸드트럭"},
+    # Daegu's bakery register holds one food truck (2026-09-27); Seoul's holds
+    # none, so this changes nothing there.
+    "OA-16084": {"푸드트럭"},
 }
 # Only these sub-types are kept, where most of a file is not a storefront.
 ONLY = {
@@ -100,14 +103,36 @@ KINDS = {
 }
 CONVENIENCE_STORE = "Convenience store"
 
+# The same national permit types keyed by their OWN names, for a city whose
+# registers are not Seoul's OA datasets (Daegu, 2026-09-27, and the cities after
+# it): the `oa` column then holds the permit type, and it resolves to Seoul's
+# key here, so one set of rules serves every city. Seoul's own values are OA ids
+# and pass through unchanged.
+PERMIT_TYPES = {
+    "일반음식점": "OA-16094", "휴게음식점": "OA-16095", "미용업": "OA-16063",
+    "이용업": "OA-16064", "세탁업": "OA-16065", "목욕장업": "OA-16146",
+    "숙박업": "OA-16044", "동물병원": "OA-16007", "제과점영업": "OA-16084",
+    "즉석판매제조가공업": "OA-16085", "식품판매업(기타)": "OA-16080",
+    "축산판매업": "OA-16071", "담배소매업": "OA-16144", "대규모점포": "OA-16096",
+    "건강기능식품일반판매업": "OA-16070", "단란주점영업": "OA-16089",
+    "유흥주점영업": "OA-16090",
+}
+
+
+def key(oa):
+    """Seoul's OA id for a register named either way."""
+    oa = str(oa or "").strip()
+    return PERMIT_TYPES.get(oa, oa)
+
 
 def kind(oa, subtype):
     """The English kind a tooltip shows, from the file and its sub-type."""
+    oa = key(oa)
     return KINDS.get(oa, {}).get((subtype or "").strip(), FILES[oa][1])
 
 
 def classify(row):
-    oa = str(row.get("oa", "")).strip()
+    oa = key(row.get("oa", ""))
     sub = str(row.get("subtype", "")).strip()
     if oa not in FILES:
         return None

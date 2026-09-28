@@ -1,0 +1,222 @@
+{
+  "ilban": {
+    "file": "dg_ilban_202608.xlsx",
+    "permit_type": "일반음식점",
+    "edition": "2026-08",
+    "url": "https://data.daegu.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_000000000033041&fileSn=0",
+    "dataset_page": "https://data.daegu.go.kr/open/data/dataView.do?dataSetId=DMI_0000119607&provdMethod=FILE",
+    "bytes": 25571895,
+    "sha256": "6c41cea567965bd2b481797b78c68e7bfdc61672ad94e3d82f4d2f71ac1b6e19",
+    "rows": 94345,
+    "newest_update": "2025-09-02 02:40:00",
+    "retrieved": "2026-09-27T21:20:01+00:00",
+    "how": "downloaded by this endpoint during screening (kept, --resume)"
+  },
+  "hyuge": {
+    "file": "dg_hyuge_202608.xlsx",
+    "permit_type": "휴게음식점",
+    "edition": "2026-08",
+    "url": "https://data.daegu.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_000000000033040&fileSn=0",
+    "dataset_page": "https://data.daegu.go.kr/open/data/dataView.do?dataSetId=DMI_0000119607&provdMethod=FILE",
+    "bytes": 8040514,
+    "sha256": "7b85070b33408fbb6ac2c55c2d1fe4d1e7d661641f9d032ceb9155d27da03983",
+    "rows": 29379,
+    "newest_update": "2025-09-02 02:40:00",
+    "retrieved": "2026-09-27T21:20:01+00:00",
+    "how": "downloaded by this endpoint during screening (kept, --resume)"
+  },
+  "danran": {
+    "file": "dg_danran_202608.xlsx",
+    "permit_type": "단란주점영업",
+    "edition": "2026-08",
+    "url": "https://data.daegu.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_000000000032961&fileSn=0",
+    "dataset_page": "https://data.daegu.go.kr/open/data/dataView.do?dataSetId=DMI_0000119565&provdMethod=FILE",
+    "bytes": 241509,
+    "sha256": "313d5a030156510be4b92f3282808ec65c0305b6312f9fe36422e67ec0e67fa9",
+    "rows": 906,
+    "newest_update": "2025-08-31 02:40:00",
+    "retrieved": "2026-09-28T00:33:58+00:00",
+    "how": "downloaded by this endpoint during screening (kept, --resume)"
+  },
+  "miyong": {
+    "file": "dg_miyong_202608.xlsx",
+    "permit_type": "미용업",
+    "edition": "2026-08",
+    "url": "https://data.daegu.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_000000000033054&fileSn=0",
+    "dataset_page": "https://data.daegu.go.kr/open/data/dataView.do?dataSetId=DMI_0000119690&provdMethod=FILE",
+    "bytes": 6194417,
+    "sha256": "88bb1f0fd4c9af8009c4d424c9a18b1d4e14aecd58c7c51b1c7ec4c1252c91fe",
+    "rows": 23773,
+    "newest_update": "2025-08-31 02:40:00",
+    "retrieved": "2026-09-27T21:20:01+00:00",
+    "how": "downloaded by this endpoint during screening (kept, --resume)"
+  },
+  "iyong": {
+    "file": "dg_iyong_202608.xlsx",
+    "permit_type": "이용업",
+    "edition": "2026-08",
+    "url": "https://data.daegu.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_000000000032908&fileSn=0",
+    "dataset_page": "https://data.daegu.go.kr/open/data/dataView.do?dataSetId=DMI_0000119503&provdMethod=FILE",
+    "bytes": 830174,
+    "sha256": "fbf8515801f67c7c59b1cef71b8887091896decfa1535e67cbb3fcee93278a96",
+    "rows": 3351,
+    "newest_update": "2025-08-30 02:40:00",
+    "retrieved": "2026-09-28T00:32:59+00:00",
+    "how": "downloaded by this endpoint during screening (kept, --resume)"
+  },
+  "setak": {
+    "file": "dg_setak_202608.xlsx",
+    "permit_type": "세탁업",
+    "edition": "2026-08",
+    "url": "https://data.daegu.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_000000000032906&fileSn=0",
+    "dataset_page": "https://data.daegu.go.kr/open/data/dataView.do?dataSetId=DMI_0000119502&provdMethod=FILE",
+    "bytes": 907219,
+    "sha256": "105d6519dfdee701b9dbcf17e57c1f2c553ba7aad6ed152de5c53fc2dbbb1b2f",
+    "rows": 3577,
+    "newest_update": "2025-08-20 02:40:00",
+    "retrieved": "2026-09-28T00:33:03+00:00",
+    "how": "downloaded by this endpoint during screening (kept, --resume)"
+  },
+  "mogyok": {
+    "file": "dg_mogyok_202608.xlsx",
+    "permit_type": "목욕장업",
+    "edition": "2026-08",
+    "url": "https://data.daegu.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_000000000032951&fileSn=0",
+    "dataset_page": "https://data.daegu.go.kr/open/data/dataView.do?dataSetId=DMI_0000119561&provdMethod=FILE",
+    "bytes": 216864,
+    "sha256": "b17b93b65e5faf0bb61b2ac8cff6231bbdb023e5622c8b647a8e05c3792af6fa",
+    "rows": 835,
+    "newest_update": "2025-08-30 02:40:00",
+    "retrieved": "2026-09-28T00:33:05+00:00",
+    "how": "downloaded by this endpoint during screening (kept, --resume)"
+  },
+  "dambae": {
+    "file": "dg_dambae_202608.xlsx",
+    "permit_type": "담배소매업",
+    "edition": "2026-08",
+    "url": "https://data.daegu.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_000000000033094&fileSn=0",
+    "dataset_page": "https://data.daegu.go.kr/open/data/dataView.do?dataSetId=DMI_0000119695&provdMethod=FILE",
+    "bytes": 6689874,
+    "sha256": "40e96d56404ef2b8d7f5704d81b78e2e73879026b1805caa24c62dcd748a5c93",
+    "rows": 33423,
+    "newest_update": "2025-08-31 00:20:11",
+    "retrieved": "2026-09-27T21:20:01+00:00",
+    "how": "downloaded by this endpoint during screening (kept, --resume)"
+  },
+  "chuksan": {
+    "file": "dg_chuksan_202608.xlsx",
+    "permit_type": "축산판매업",
+    "edition": "2026-08",
+    "url": "https://data.daegu.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_000000000033004&fileSn=0",
+    "dataset_page": "https://data.daegu.go.kr/open/data/dataView.do?dataSetId=DMI_0000119604&provdMethod=FILE",
+    "bytes": 2129472,
+    "sha256": "1a2788a20f6e05324367cb7e55638659502ae5043d86ff137e4aacaff850f816",
+    "rows": 9910,
+    "newest_update": "2025-08-30 02:40:00",
+    "retrieved": "2026-09-28T00:33:21+00:00",
+    "how": "downloaded by this endpoint during screening (kept, --resume)"
+  },
+  "geongi": {
+    "file": "dg_geongi_202608.xlsx",
+    "permit_type": "건강기능식품일반판매업",
+    "edition": "2026-08",
+    "url": "https://data.daegu.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_000000000033013&fileSn=0",
+    "dataset_page": "https://data.daegu.go.kr/open/data/dataView.do?dataSetId=DMI_0000119604&provdMethod=FILE",
+    "bytes": 5271997,
+    "sha256": "8f9a54547c13108a102fd27ccd0af6a8428f70c8806192e31507182c70acecfb",
+    "rows": 19709,
+    "newest_update": "2025-08-31 02:40:00",
+    "retrieved": "2026-09-28T00:33:53+00:00",
+    "how": "downloaded by this endpoint during screening (kept, --resume)"
+  },
+  "daegyumo": {
+    "file": "dg_daegyumo_202608.xlsx",
+    "permit_type": "대규모점포",
+    "edition": "2026-08",
+    "url": "https://data.daegu.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_000000000033024&fileSn=0",
+    "dataset_page": "https://data.daegu.go.kr/open/data/dataView.do?dataSetId=DMI_0000119605&provdMethod=FILE",
+    "bytes": 50041,
+    "sha256": "766f1a778c92fb0517e6c2c505233582dfe7ca7d134a2b6ee66ce24c22298a6f",
+    "rows": 232,
+    "newest_update": "2025-08-27 02:40:00",
+    "retrieved": "2026-09-28T00:33:54+00:00",
+    "how": "downloaded by this endpoint during screening (kept, --resume)"
+  },
+  "jegwa": {
+    "file": "dg_jegwa_202608.xlsx",
+    "permit_type": "제과점영업",
+    "edition": "2026-08",
+    "url": "https://data.daegu.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_000000000033020&fileSn=0",
+    "dataset_page": "https://data.daegu.go.kr/open/data/dataView.do?dataSetId=DMI_0000119604&provdMethod=FILE",
+    "bytes": 1022615,
+    "sha256": "81ef9e9f46683accbcb0f967db9eb78eae4a1c92ad051a7a6b96200cb6e6d582",
+    "rows": 3781,
+    "newest_update": "2025-08-31 02:40:00",
+    "retrieved": "2026-09-28T01:15:22+00:00",
+    "how": "downloaded by this endpoint during screening (kept, --resume)"
+  },
+  "jeuksuk": {
+    "file": "dg_jeuksuk_202608.xlsx",
+    "permit_type": "즉석판매제조가공업",
+    "edition": "2026-08",
+    "url": "https://data.daegu.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_000000000033002&fileSn=0",
+    "dataset_page": "https://data.daegu.go.kr/open/data/dataView.do?dataSetId=DMI_0000119604&provdMethod=FILE",
+    "bytes": 8014411,
+    "sha256": "efa0242eb34ce1b418153dca56c35771f76daf07cc97841cc3b6a8ce210ff65c",
+    "rows": 32455,
+    "newest_update": "2025-09-02 02:40:00",
+    "retrieved": "2026-09-28T01:15:39+00:00",
+    "how": "downloaded by this endpoint during screening (kept, --resume)"
+  },
+  "sikpum": {
+    "file": "dg_sikpum_202608.xlsx",
+    "permit_type": "식품판매업(기타)",
+    "edition": "2026-08",
+    "url": "https://data.daegu.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_000000000032999&fileSn=0",
+    "dataset_page": "https://data.daegu.go.kr/open/data/dataView.do?dataSetId=DMI_0000119604&provdMethod=FILE",
+    "bytes": 193310,
+    "sha256": "011fbd8d30389974a03c0308f92224ceac668709f3b973aedc80667d4cc0b81a",
+    "rows": 685,
+    "newest_update": "2025-08-30 00:20:01",
+    "retrieved": "2026-09-28T01:15:40+00:00",
+    "how": "downloaded by this endpoint during screening (kept, --resume)"
+  },
+  "osm_rail": {
+    "file": "osm_rail_routes.json",
+    "host": "overpass-api.de",
+    "query": "[out:json][timeout:600];(relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|monorail|tram)$\"](35.55,128.35,36.35,128.85);relation[\"type\"=\"route\"][\"route\"=\"train\"][\"ref\"=\"대경\"](35.55,128.35,36.35,128.85);)->.r;.r out geom;node(r.r);out body;",
+    "bytes": 286469,
+    "sha256": "aae21245520c7d154c4775c74b81d26df5e1a02f238788e3b01543cde3161bf8",
+    "elements": {
+      "relation": 8,
+      "node": 203
+    },
+    "osm_base": "2026-09-28T01:22:54Z",
+    "retrieved": "2026-09-28T01:24:48+00:00"
+  },
+  "osm_station_names": {
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "query": "[out:json][timeout:240];(node[\"railway\"=\"station\"](35.55,128.35,36.35,128.85);way[\"railway\"=\"station\"](35.55,128.35,36.35,128.85););out tags center;",
+    "bytes": 52838,
+    "sha256": "449ac043482f2a5e8380a35cd4cd8533eece2aeb0dfc980c3823157c68caa337",
+    "elements": {
+      "node": 109,
+      "way": 1
+    },
+    "osm_base": "2026-09-28T01:22:54Z",
+    "retrieved": "2026-09-28T01:24:49+00:00"
+  },
+  "osm_boundary": {
+    "file": "osm_boundary.json",
+    "host": "overpass-api.de",
+    "query": "[out:json][timeout:240];relation(2395674)[\"name\"=\"대구광역시\"];out geom;",
+    "bytes": 79356,
+    "sha256": "c34274113992a36457dfc4a2308b27ebf4bec752a34791e0143bafffea8ad26b",
+    "elements": {
+      "relation": 1
+    },
+    "osm_base": "2026-09-28T01:23:57Z",
+    "retrieved": "2026-09-28T01:24:54+00:00"
+  }
+}
