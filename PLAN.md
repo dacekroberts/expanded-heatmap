@@ -237,7 +237,10 @@ brief names.
     guarded in `merge_append_only.py`, proven by `archive_decisions_selftest.py`.
     DECISIONS.md 222,930 -> 8,490 words.
   - [ ] **Run `python scripts/archive_decisions.py` at the start of each week** (cleanup
-    session, after the Sunday reset). Next: 2026-10-04.
+    session, after the Sunday reset). Next: 2026-10-04. In the same sitting run
+    `python scripts/efficiency_metrics.py --baseline` and show the owner the table: it is what
+    the owner's session-count decision waits on (baseline in
+    `docs/efficiency_review_2026-09-27.md`).
   - [ ] **The session count** - how many sessions run at once. A separate owner decision.
   - [ ] **The remaining findings, walked through with the owner** (asked 2026-09-27): 5
     (hand-kept documents that churn, e.g. a generated master list), what is left of 4
