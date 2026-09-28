@@ -381,9 +381,9 @@ Desktop is unaffected — the label is fully visible there.
   (France; Czechia, Norway, Denmark, the Netherlands, Latvia; Korea, Taiwan,
   Hong Kong): see `docs/city_master_list.md` and DECISIONS. Open:
   - [x] **Licence reads for Daegu and Busan** (2026-09-27).
-  - [x] **Daegu's brief** (`docs/build_briefs/daegu.md`, 10/10, 2026-09-27),
-    handed to Main Build. Four owner calls open in it (retail without
-    bakeries and delis; buckets as Seoul's; 대경선 out; stations inside Daegu).
+  - [x] **Daegu's brief** (`docs/build_briefs/daegu.md`, 11/11, 2026-09-27,
+    corrected the same evening), handed to Main Build. Three owner calls open
+    in it (buckets as Seoul's; 대경선 out; stations inside Daegu).
   - [ ] **Busan's brief.**
   - [ ] **Band T's group decision**: build trams-only cities, and in what
     order (Nice, Montpellier, Brno and Bergen are the cheapest strong ones).

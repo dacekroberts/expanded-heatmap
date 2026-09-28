@@ -3,48 +3,42 @@
 **Step 0 completed 2026-09-27** (Staging). Run `python scripts/brief_check.py
 daegu` before writing any code. The licence position is already decided (a
 disclosed reasoned position, owner 2026-09-27; `docs/data_sources.md`, "Daegu
-and Busan"). **Four owner calls are open** (below). None needs a probe; each
+and Busan"). **Three owner calls are open** (below). None needs a probe; each
 is a recommendation waiting for a yes.
+
+⚠️ **Corrected the same evening.** The first version of this brief said
+Daegu's publication has no bakeries, delis or other food shops, and
+recommended building with a narrower retail bucket. **That was wrong.** The
+dataset page shows its files **six per page**, and the three types were on
+pages 2–4 of the food-manufacturing group. The check that "confirmed" it read
+page 1 only. The full edition is 195 files, and all three are measured below.
+See DECISIONS, 2026-09-27, "Daegu's brief corrected".
 
 ---
 
 ## The one-line summary
 
-**Seoul's register and schema, one month behind, on a portal that republishes
-only part of it.** Eleven 2026-08 permit files, all 8 districts and 2 counties,
-points on 95.9–100% (one file 72%), no operator column. About **40,400 food
-premises, 12,500 personal services and 12,800 retail permits** before
-de-duplication. Retail is narrower than Seoul's: **no bakeries, delis or other
-food shops**, because the national edition Daegu republishes does not carry
-those permit types. Rail is three OSM lines, **86 stations**, one of them a
-monorail that Seoul's query would drop.
+**Seoul's register and schema, one month behind.** Fourteen 2026-08 permit
+files, all 7 gu and 2 counties, points on 95.9–100% (one file 72%), no
+operator column. About **38,900 food premises, 12,500 personal services and
+18,700 retail permits** before de-duplication, the same types as Seoul's. Rail
+is three OSM lines, **86 stations**, one of them a monorail that Seoul's
+query would drop.
 
 ---
 
 ## Owner calls — open, with recommendations
 
-1. **Retail without bakeries and delis.** Seoul's retail took 20,298 permit
-   rows from 제과점영업, 즉석판매제조가공업 and 식품판매업(기타). None of the three
-   is in Daegu's publication in any month (measured below).
-   - **Recommendation: build, and say so on the page.** Retail still has its
-     broad proxy (tobacco 6,492: convenience stores, corner shops,
-     supermarkets), plus butchers, in-store health-food, convenience stores
-     holding a café permit, and large stores.
-   - The alternative is Band C ("a bucket with a measured gap"). It is not
-     recommended, because the bucket is present and only its composition
-     differs from Seoul's.
-   - A second source may exist: the Ministry of Food and Drug Safety's
-     식품안전나라 carries food-business permits nationally. It is **unprobed**,
-     and not needed to build.
-2. **Buckets otherwise as Seoul's** (owner 2026-09-24): 단란주점 → Food service
-   (457); 유흥주점, lodging and veterinary clinics out. Nothing new to decide
-   unless the owner wants to revisit.
-3. **Rail: draw Lines 1, 2 and 3 only.** 대경선 (Korail's Gumi–Daegu–Gyeongsan
+1. **Buckets as Seoul's** (owner 2026-09-24): 단란주점 → Food service (457);
+   유흥주점, lodging and veterinary clinics out; bakeries, on-site food makers
+   and other food shops → Retail. Nothing new to decide unless the owner wants
+   to revisit.
+2. **Rail: draw Lines 1, 2 and 3 only.** 대경선 (Korail's Gumi–Daegu–Gyeongsan
    metropolitan line, opened 2024-12) has 3 stops inside Daegu, a mean
    **4.08 km** apart. The subway's spacing is 0.77–1.07 km. It fails the
    spacing test as Seoul's 공항철도 (3.37 km) did. Its frequency is **not
    measured** (no GTFS); a cited timetable read goes with the decision.
-4. **Stations inside Daegu only** (Seoul's and Japan's rule). Line 1's Hayang
+3. **Stations inside Daegu only** (Seoul's and Japan's rule). Line 1's Hayang
    extension leaves 2 stops in Gyeongsan, and Line 2 leaves 3. The lines are
    drawn to their ends and the 5 stops are listed as excluded. Line 2 keeps
    26 of 29, so the stub test does not call for a regional scope.
@@ -73,12 +67,19 @@ named only 119600–09 and 119690–95**, and "barbers, laundries and baths are 
 sibling files not yet pulled" was a statement about those two blocks. The
 personal-services and bar files are in the other two.
 
+- 🚨 **A dataset page embeds its files SIX AT A TIME.** The page's own
+  `search` object says so (`"recordCountPerPage":6,"totalRecordCount":23`
+  for the food-manufacturing group). The rest come from the page's own call,
+  `POST /data/rest/getDataSetDetailListInfo.do` with that `search` object and
+  `currentPageNo` = 2, 3, 4. It answers JSON only with the page's `Origin`
+  and `Accept: application/json` headers, and an HTML error page otherwise.
+  **Always compare the files listed against `totalRecordCount`.** Reading
+  page 1 alone is how this brief first recorded bakeries and delis as absent.
+- **The whole edition is 195 files**, the national scheme's full set of permit
+  types, across the 36 group datasets.
 - The listing page's search **works**: `GET /open/data/dataList.do?searchWrd=`
   gives zzzzqqq → 0 and 인허가 → hits. This is unlike Seoul's inert search. It
   embeds only the first page of results.
-- The REST listing endpoint (`POST /data/rest/getDataSetListInfo.do`) returns
-  an HTML error page to a scripted call. Use the dataView pages, which embed
-  each detail's `atchFileId`.
 - The files are named by the national scheme's group codes,
   `6270000_대구광역시_<aa>_<bb>_<cc>_P_<type>.xlsx`.
 
@@ -96,31 +97,14 @@ personal-services and bar files are in the other two.
 | 119695 기타_담배 | 33094 | 담배소매업 | 33,423 | **6,492** | 95.9% |
 | 119604 식품_식품 제조,가공,판매 | 33004 | 축산판매업 | 9,910 | 3,471 | 97.0% |
 | 119604 | 33013 | 건강기능식품일반판매업 | 19,709 | 4,616 | 98.2% |
+| 119604 (page 4) | 33020 | 제과점영업 | 3,781 | 1,020 | 99.1% |
+| 119604 (page 4) | 33002 | 즉석판매제조가공업 | 32,455 | 4,631 | 99.5% |
+| 119604 (page 3) | 32999 | 식품판매업(기타) | 685 | 308 | 99.4% |
 | 119605 생활_유통 | 33024 | 대규모점포 | 232 | 161 | **72.0%** |
 
 File ids are `FILE_0000000000` + the five digits. Also in the edition, **not
 read**: 유흥주점영업 (32962, excluded), 숙박업 (32992, excluded), 동물병원
 (32943, excluded). They are candidates only as coordinate donors.
-
-### What the national edition does NOT carry
-
-**제과점영업, 즉석판매제조가공업 and 식품판매업(기타) are in no file**, in any
-group. Measured three ways:
-- The food-manufacturing group (119604) holds six types in 2026-08, 2026-07
-  (119345) and 2026-02 (118080) alike: 집단급식소식품판매업, the two 건강기능식품
-  types, 축산판매업, 축산가공업 and 식육포장처리업.
-- The restaurant group (119607) holds 관광식당, the two 유흥음식점 types,
-  일반음식점 and 휴게음식점.
-- **Busan's API, the same national register, has the same eleven groups.** Its
-  "식품/제조,가공,판매" operation matches.
-
-Seoul's three came from Seoul's own system, not from this edition. The search
-hits for 제과점 are district datasets (e.g. 달서구_제과점 현황), not citywide.
-
-Group codes also skip 34–42. The sports group (119505) holds 6 of the national
-scheme's sports types, so the gap fits the rest of the sports types (swimming
-pools, gyms). No storefront type is expected there. This is **inferred, not
-read.**
 
 ### Schema — Seoul's columns under different names (🚨 traps)
 
@@ -155,7 +139,7 @@ worse, silently read nothing**:
 - **Columns never to read**: `소재지전화` (phone); `권리주체일련번호` (the
   rights holder's serial, in 축산판매업); `건물소유구분명`, `보증액` and `월세액`
   (tenure and rent, not needed). None is an operator name. **There is no
-  대표자 or 성명 column in any of the eleven.**
+  대표자 or 성명 column in any of the fourteen.**
 
 ### Sub-types (active) — Seoul's `KINDS` mostly carries over
 
@@ -170,6 +154,9 @@ worse, silently read nothing**:
   · 기타 182.
 - **이용업** 848 · **세탁업** 993 (일반세탁업 956, 운동화전문세탁업 19, 빨래방업 3) ·
   **목욕장업** 232 (공동탕업 195, with 찜질 27).
+- **제과점영업**: 1,019, plus **1 푸드트럭 (DROP**: Seoul's `DROP` has no bakery
+  entry, so add one). **즉석판매제조가공업** 4,631 and **식품판매업(기타)** 308 each
+  carry a single sub-type value.
 
 ### Counts, before de-duplication
 
@@ -177,10 +164,10 @@ worse, silently read nothing**:
 |---|---|
 | Food service | 일반음식점 30,491 (less catering) + 휴게음식점 7,945 (less food trucks and the moved rows) + 단란주점 457 = **38,893** |
 | Personal services | 10,475 + 848 + 993 + 232 = **12,548** |
-| Retail | tobacco 6,492 + butchers 2,416 + in-store health-food 2,366 + large stores 161 + moved convenience stores and confectioners 1,344 = **12,779** |
+| Retail | tobacco 6,492 + on-site food makers 4,631 + butchers 2,416 + in-store health-food 2,366 + bakeries 1,019 + other food shops 308 + large stores 161 + moved convenience stores and confectioners 1,344 = **18,737** |
 
-- **Within 966 m of a drawn stop: 47,279 of the 66,697 placed rows** (all
-  eleven files, before bucket rules), 71%.
+- **Within 966 m of a drawn stop: 51,510 of the 72,623 placed rows** (all
+  fourteen files, before bucket rules), 71%.
 - **De-duplication is unmeasured.** Seoul's rule carries over (one pin per
   premises; the five convenience-store brands matched by name). Expect retail
   to fall the most, as in Seoul, where 59,816 permits became 53,215 premises.
@@ -196,8 +183,9 @@ of them.
 ### Privacy
 
 - No operator column (above). `소재지전화` is never read.
-- **`pipeline/korean_names.py` flags 116 open rows** across the eleven files: 미용업
-  63, 일반음식점 23, 건강기능식품 12, 세탁업 6, 담배 6, 휴게음식점 5, 축산 1. The
+- **`pipeline/korean_names.py` flags 123 open rows** across the fourteen files:
+  미용업 63, 일반음식점 23, 건강기능식품 12, 즉석판매제조가공업 7, 세탁업 6, 담배 6,
+  휴게음식점 5, 축산 1. The
   health-food rows are mostly e-commerce, already out by the channel rule.
   Withhold the flagged names, as Seoul does.
 - Run `scripts/check_personal_exposure.py daegu` at build, as for every city.
@@ -238,10 +226,10 @@ name, at **1,495 km²** (with 군위군).
 - De-duplication counts, and the donor join's yield (both measured at build).
 - 대경선's frequency (only if the owner wants it tested rather than excluded on
   spacing).
-- Whether 식품안전나라 could supply bakeries and delis (unprobed; not needed).
-- Downloads: the eleven 2026-08 files are cached in the MAIN checkout's
+- Downloads: the fourteen 2026-08 files are cached in the MAIN checkout's
   `data/daegu/raw/` as `dg_<type>_202608.xlsx` (ilban, hyuge, danran, miyong,
-  iyong, setak, mogyok, dambae, chuksan, geongi, daegyumo). A build's
+  iyong, setak, mogyok, dambae, chuksan, geongi, daegyumo, jegwa, jeuksuk,
+  sikpum). A build's
   `fetch_sources.py` downloads them itself by file id and records sizes and
   hashes.
 
@@ -263,12 +251,19 @@ name, at **1,495 km²** (with 군위군).
     "absent": ["제과점영업"]
   },
   {
-    "id": "daegu-food-manufacturing-lacks-bakeries",
-    "claim": "The 2026-08 food manufacturing/sales group carries 축산판매업 and 건강기능식품일반판매업 but NOT 제과점영업, 즉석판매제조가공업 or 식품판매업(기타) - Daegu's retail is narrower than Seoul's",
+    "id": "daegu-food-manufacturing-pages",
+    "claim": "The 2026-08 food manufacturing/sales group holds 23 files but its page embeds only 6 (butchers and health-food among them); bakeries, on-site food makers and other food shops are on later pages of the detail list. An earlier version of this check asserted them ABSENT from page 1 and passed - a check that could not see past page 1",
     "kind": "http_contains",
     "url": "https://data.daegu.go.kr/open/data/dataView.do?dataSetId=DMI_0000119604&provdMethod=FILE",
-    "present": ["07_22_04_P_축산판매업", "07_22_03_P_건강기능식품일반판매업", "FILE_000000000033004", "FILE_000000000033013"],
-    "absent": ["제과점영업", "즉석판매제조가공업", "식품판매업(기타)"]
+    "present": ["\"recordCountPerPage\":6,\"totalRecordCount\":23", "FILE_000000000033004", "FILE_000000000033013"]
+  },
+  {
+    "id": "daegu-bakery-file",
+    "claim": "제과점영업 is FILE_000000000033020 (page 4 of DMI_0000119604), served keylessly (1,022,615 bytes on 2026-09-27)",
+    "kind": "http_ok",
+    "url": "https://data.daegu.go.kr/cmm/fms/FileDown.do?atchFileId=FILE_000000000033020&fileSn=0",
+    "min_bytes": 900000,
+    "content_type_contains": "msdownload"
   },
   {
     "id": "daegu-barbers-in-the-119500-block",

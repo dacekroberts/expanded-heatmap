@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**414 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**415 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Daegu's brief corrected: bakeries, delis and other food shops ARE published, on later pages of a six-per-page file list](#2026-09-27---daegus-brief-corrected-bakeries-delis-and-other-food-shops-are-published-on-later-pages-of-a-six-per-page-file-list)
 - [UTF-8 console output at every script entry point that lacked it, and in the scaffold's step-3 template (owner)](#2026-09-27---utf-8-console-output-at-every-script-entry-point-that-lacked-it-and-in-the-scaffolds-step-3-template-owner)
 - [Daegu's brief: the national edition has no bakeries or delis, the edition is scattered across four id blocks, and Line 3 is a monorail](#2026-09-27---daegus-brief-the-national-edition-has-no-bakeries-or-delis-the-edition-is-scattered-across-four-id-blocks-and-line-3-is-a-monorail)
 - [Session loose ends closed (owner): Riga on JSON.parse, the main checkout current, UTF-8 output in two tools, and the Czech coordinate control per city](#2026-09-27---session-loose-ends-closed-owner-riga-on-jsonparse-the-main-checkout-current-utf-8-output-in-two-tools-and-the-czech-coordinate-control-per-city)
@@ -462,6 +463,36 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Daegu's brief corrected: bakeries, delis and other food shops ARE published, on later pages of a six-per-page file list
+
+- **The earlier entry today ("Daegu's brief: the national edition has no
+  bakeries or delis…") was wrong on its headline.** 제과점영업 (1,020 open),
+  즉석판매제조가공업 (4,631) and 식품판매업(기타) (308) are in Daegu's 2026-08
+  edition, as files 33020, 33002 and 32999 of the food-manufacturing group,
+  on pages 2–4 of its file list.
+- **How it happened**: a D-데이터허브 dataset page embeds its files six at a
+  time. Its own `search` object said `"totalRecordCount":23` for that group,
+  and the probe never compared the list against that count. Every group read
+  showed at most six files, which was the page size, not the data.
+  - The corroboration was also wrong. "Busan's API has the same eleven
+    groups" compared group NAMES. Busan's food-manufacturing operation holds
+    21 permit types, bakeries included. The profile of Busan's cached pull,
+    started for Busan's brief, is what exposed it.
+  - The brief check written to guard the claim (`absent` on page 1) passed,
+    because it could not see past page 1.
+- **Found the way to read the whole list**: the page's own
+  `getDataSetDetailListInfo.do`, posted with its embedded `search` object and
+  the page's `Origin` and `Accept` headers, answers JSON; without them it
+  answers an HTML error page. Paged through all 36 groups, every one matches
+  its `totalRecordCount`: **195 files**, the national scheme's full set.
+- **Corrected**: the brief (now 11/11, a check pinned to the count and one on
+  the bakery file), its owner calls (the retail call is gone; three remain),
+  Daegu's master-list row and PLAN. Retail is now **18,737** permit rows
+  before de-duplication, against 12,779 before. Seven more names are flagged
+  (123). The three files are cached beside the others.
+- **Main Build was told** the corrected brief supersedes the one handed over
+  an hour earlier.
 
 ### 2026-09-27 - UTF-8 console output at every script entry point that lacked it, and in the scaffold's step-3 template (owner)
 
