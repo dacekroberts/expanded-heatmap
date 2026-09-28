@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**82 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**83 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one heavy job at a time, drift --jobs 2 at most (owner)](#2026-09-28---two-app-crashes-traced-to-memory-exhaustion-python-capped-at-8-gb-a-process-one-heavy-job-at-a-time-drift---jobs-2-at-most-owner)
+- [Handoffs rewritten for the owner's session reorganisation; the large-transit gap saved](#2026-09-28---handoffs-rewritten-for-the-owners-session-reorganisation-the-large-transit-gap-saved)
 - [Macro-map dots coloured by data completeness; storefront count in the tooltip, not the dot size (owner)](#2026-09-28---macro-map-dots-coloured-by-data-completeness-storefront-count-in-the-tooltip-not-the-dot-size-owner)
 - [Band T's EDGE cities grouped at its top; Band T below Band N (owner)](#2026-09-28---band-ts-edge-cities-grouped-at-its-top-band-t-below-band-n-owner)
 - [Band C's last five get verdicts; Band B reopened for the passed, Band N created for no page, Band C closed (owner)](#2026-09-28---band-cs-last-five-get-verdicts-band-b-reopened-for-the-passed-band-n-created-for-no-page-band-c-closed-owner)
@@ -172,6 +173,27 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   11:55-12:20 under `data/` and the worktrees intact (Python compiles, the
   census xlsx passes a zip test, Sapporo's map ends in `</html>`); every
   Claude and project JSON config parses; 17 memory files intact.
+### 2026-09-28 - Handoffs rewritten for the owner's session reorganisation; the large-transit gap saved
+
+- **"Staging and build handoff" hands over both of its roles (owner).** The
+  staging role goes to a fresh staging session
+  (`docs/handoff_staging_2026-09-28.md`); the build role joins the Tokyo build
+  session the owner is forming from the Japan build and Tokyo sources sessions
+  (`docs/handoff_tokyo_build_2026-09-28.md`). The 2026-09-27 staging and build
+  handoffs are deleted, their open items carried into the two new files.
+- **The review batch's state is recorded where it cannot be lost**: branch
+  `review-2026-09-28b` (Sapporo, Fukuoka, Kyoto, the macro-map tiers, the
+  Vancouver wording) pushed to origin as a backup, not to master; every cheap
+  gate green; the full deploy-verify still to run, after Cleanup confirms the
+  memory cap and a clear machine.
+- **`docs/global_transit_gap.md`** saves the owner's list of large-network
+  cities not built (22 discarded, 15 ruled out by country, 11 in a band, 35
+  never screened), with a recommended re-screen order led by London (ruled
+  out partly as food only, before food-only pages passed), Dubai and Manila
+  (ruled out on transit feeds alone) and Istanbul (one ASSERTED dataset).
+- Scratch that would have gone with this session's scratchpad is in
+  `data/_staging_scratch_2026-09-28b/` (the Incheon join and interpolation
+  scripts, the Baltimore listings, the line-colour search).
 
 ### 2026-09-28 - Macro-map dots coloured by data completeness; storefront count in the tooltip, not the dot size (owner)
 
