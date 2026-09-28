@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**95 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**96 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [One handoff for the Tokyo build session (owner)](#2026-09-28---one-handoff-for-the-tokyo-build-session-owner)
 - [Tokyo's groundwork built: the ward roster, hollow no-data stations, per-ward shares measured every build; the seven personal-services-only wards stay hollow (owner); the Tokyo build takes over this worktree](#2026-09-28---tokyos-groundwork-built-the-ward-roster-hollow-no-data-stations-per-ward-shares-measured-every-build-the-seven-personal-services-only-wards-stay-hollow-owner-the-tokyo-build-takes-over-this-worktree)
 - [Review batch verified: the full deploy-verify passes; the macro tooltip becomes a corner panel; East Asia's global-frame label overlaps accepted (owner)](#2026-09-28---review-batch-verified-the-full-deploy-verify-passes-the-macro-tooltip-becomes-a-corner-panel-east-asias-global-frame-label-overlaps-accepted-owner)
 - [Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one heavy job at a time, drift --jobs 2 at most (owner)](#2026-09-28---two-app-crashes-traced-to-memory-exhaustion-python-capped-at-8-gb-a-process-one-heavy-job-at-a-time-drift---jobs-2-at-most-owner)
@@ -131,6 +132,22 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - One handoff for the Tokyo build session (owner)
+
+- **The owner asked for one handoff.** `docs/handoff_tokyo_build_2026-09-28.md`
+  now holds everything the Tokyo build session needs:
+  - the Japan build session's Tokyo plan, until now in
+    `docs/handoff_japan_2026-09-28.md`, which is deleted;
+  - the build role from "Staging and build handoff": the macro-map tiers,
+    the Japan-wide rules and the non-Tokyo queue;
+  - Tokyo sources research's closing note, until now in
+    `docs/handoff_tokyo_sources_2026-09-28.md`, which is deleted.
+- Earlier entries that name the two deleted files describe where things were
+  on the day; the consolidated file supersedes both.
+- The staging role keeps its own handoff.
+- The owner rebooted the app after the review batch landed (`c2864b8`), and
+  `worktree-japan` is merged to master at `9248386`.
 
 ### 2026-09-28 - Tokyo's groundwork built: the ward roster, hollow no-data stations, per-ward shares measured every build; the seven personal-services-only wards stay hollow (owner); the Tokyo build takes over this worktree
 
