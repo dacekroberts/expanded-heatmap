@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**29 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**30 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Ottawa to Band C; the by-country table is now checked; local scratch folders in data/ ignored (owner)](#2026-09-27---ottawa-to-band-c-the-by-country-table-is-now-checked-local-scratch-folders-in-data-ignored-owner)
 - [data_sources.md split by country, landed at the first review time (owner)](#2026-09-27---data_sourcesmd-split-by-country-landed-at-the-first-review-time-owner)
 - [Band T renamed "Contingent on trams" and five cities moved into it from Band C; Stockholm and Bucharest pass the Band C memo (owner)](#2026-09-27---band-t-renamed-contingent-on-trams-and-five-cities-moved-into-it-from-band-c-stockholm-and-bucharest-pass-the-band-c-memo-owner)
 - [Master list after the split: Denver, Dallas and Brampton get discard rows; Ottawa is a data case, not a no-rail one; the by-country table rebuilt (owner, via Cleanup)](#2026-09-27---master-list-after-the-split-denver-dallas-and-brampton-get-discard-rows-ottawa-is-a-data-case-not-a-no-rail-one-the-by-country-table-rebuilt-owner-via-cleanup)
@@ -62,6 +63,41 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Ottawa to Band C; the by-country table is now checked; local scratch folders in data/ ignored (owner)
+
+- **Ottawa placed in Band C (owner: "Ottawa sounds like band c").** Staging
+  had corrected it the same day. It has 6 O-Train light-rail routes and was
+  ruled out on DATA on 2026-09-21: of 697 catalogue entries, the only
+  address-level commercial layer is food-safety inspections. That is Band C's
+  shape, food only like Stockholm, rather than a discard.
+  - It sits under "Still waiting on the Band C memo's verdict", not with the
+    one-bucket pages already passed, because the owner placed it in the band
+    without saying to build it.
+  - C is now 9 and candidates 66.
+- **`check_master_list_counts.py` now checks the "Current by country" table
+  against the bands** (owner's request, suggested by Staging when rebuilding
+  that table).
+  - It checks: the Built and Candidates columns sum to the real totals; the
+    Total row, including its "A n · C n · T n · D n", agrees; each country's
+    Built figure matches the Built table; and a row that names its candidates
+    names as many as it counts, each one in a band its Bands column lists.
+  - Its first run caught exactly what Ottawa's move had left stale: the Canada
+    row still showed no candidates, and the Total row still said 65 and C 8.
+    It reported nothing else.
+  - The self-test grew from 14 to 18 cases, each confirmed to fail.
+- **`data/_*/` is gitignored.** `data/_staging_scratch_2026-09-27/` (285 MB,
+  546 files: Staging's durable scratchpad copy) was untracked and not ignored
+  in four checkouts, because `.gitignore` covered only `data/*/raw/` and
+  `processed/`.
+  - The main checkout's copy stays. The busan, daegu and monterrey copies go
+    when those worktrees are retired.
+  - `opd.pdf` at the main checkout's root is unidentified. It is a
+    Word-produced PDF from 2026-09-25 that no session claims, and the owner is
+    investigating it.
+- **Port 8824:** a network-bound `http.server` turned out to be Main Build's
+  Daegu map preview, not a leftover. The cleanup worktree's launch entry with
+  the same port was unrelated.
 
 ### 2026-09-27 - data_sources.md split by country, landed at the first review time (owner)
 

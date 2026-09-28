@@ -202,6 +202,7 @@ def check(text):
         return {}, ["no '## Built - N' section"]
     title, s, e = built_secs[0]
     rows = built_table(lines, s, e)
+    built_rows = rows          # `rows` is reused for the discard tables below
     if not rows:
         problems.append("the Built section has no '| Country | Cities |' table")
     built_names = [n for r in rows for n in r[3]]
@@ -296,6 +297,8 @@ def check(text):
 
     problems += summary(lines, len(built_names), countries, actual, candidates,
                         len(gap), len(discards))
+    problems += by_country(lines, secs, built_rows, ready, actual, candidates,
+                           len(built_names))
 
     # ---- one city, one place
     lists = {"Built": built, "the open gap": gap, "the discards": discards}
@@ -317,6 +320,90 @@ def check(text):
 
 def _names(d):
     return ", ".join(sorted((d or {}).values())) or "none"
+
+
+def _count(cell):
+    """The leading figure of a 'Built' or 'Candidates' cell; '—' is 0."""
+    m = re.match(r"^\s*\*\*(\d+)\*\*", cell)
+    return int(m.group(1)) if m else (0 if clean(cell) == "" else None)
+
+
+def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
+    """The '## ✅ Current by country' table against the bands (added 2026-09-27).
+
+    That table is a VIEW of the bands, and it went stale for four days before
+    anyone noticed: it said 30 built, listed Brazil as candidates and Japan in
+    Band B (Staging rebuilt it on 2026-09-27 and suggested this check). Checked:
+    the columns sum to the real totals; the Total row, including its
+    'A n · C n · T n · D n', agrees; each country's Built figure matches the
+    Built table; and a row that NAMES its candidates names as many as it
+    counts, each one in a band its Bands column lists.
+    """
+    problems = []
+    sec = [(t, s, e) for t, s, e in secs if re.match(r"^## .*Current by country", t)]
+    if not sec:
+        return ["no '## ... Current by country' section - the file changed shape"]
+    _, s, e = sec[0]
+    table = [(h, r) for h, r in tables(lines, s, e)
+             if [x.lower() for x in h[:3]] == ["country", "built", "candidates"]]
+    if not table:
+        return ["'Current by country' has no '| Country | Built | Candidates |' table"]
+    head, rows = table[0]
+    bands_col = next((j for j, x in enumerate(head) if x.lower() == "bands"), None)
+    band_of = {k: letter for letter, mem in ready.items() for k in mem}
+    built_by_country = {key(c): (n, len(names)) for _, c, n, names, _ in built_rows}
+
+    sum_built = sum_cand = 0
+    total = None
+    for i, row in rows:
+        country = cell_name(row[0])
+        if country.lower() == "total":
+            total = (i, row)
+            continue
+        b, c = _count(row[1]), _count(row[2])
+        if b is None or c is None:
+            problems.append(f"line {i + 1}: '{country}' has a Built or Candidates cell "
+                            f"with no leading **N** or '—': {row[1]!r} / {row[2]!r}")
+            continue
+        sum_built += b
+        sum_cand += c
+        if key(country) in built_by_country and built_by_country[key(country)][1] != b:
+            problems.append(f"line {i + 1}: '{country}' says {b} built, the Built table "
+                            f"lists {built_by_country[key(country)][1]}")
+        named = row[2].split("—", 1)[1] if "—" in row[2] else ""
+        names = [n for n in (clean(x) for x in re.split(r"[,;]", named)) if n]
+        if not names:
+            continue
+        if len(names) != c:
+            problems.append(f"line {i + 1}: '{country}' counts {c} candidates but names "
+                            f"{len(names)}: {', '.join(names)}")
+        listed = set(re.findall(r"\b[ABCDT]\b", row[bands_col])) if bands_col else set()
+        for n in names:
+            letter = band_of.get(key(n))
+            if letter is None:
+                problems.append(f"line {i + 1}: '{country}' names {n}, which is in no band")
+            elif bands_col is not None and letter not in listed:
+                problems.append(f"line {i + 1}: '{country}' names {n} (Band {letter}), but "
+                                f"its Bands column says {row[bands_col]!r}")
+
+    if sum_built != n_built:
+        problems.append(f"'Current by country': the Built column sums to {sum_built}, "
+                        f"the Built table lists {n_built}")
+    if sum_cand != candidates:
+        problems.append(f"'Current by country': the Candidates column sums to {sum_cand}, "
+                        f"the bands hold {candidates} ({_sum(actual)})")
+    if total is None:
+        problems.append("'Current by country' has no Total row")
+    else:
+        i, row = total
+        if _count(row[1]) != n_built or _count(row[2]) != candidates:
+            problems.append(f"line {i + 1}: the Total row says {row[1]} built / {row[2]} "
+                            f"candidates, the file holds {n_built} / {candidates}")
+        for letter, n in re.findall(r"\b([ABCDT]) (\d+)\b", " ".join(row[3:])):
+            if int(n) != actual[letter]:
+                problems.append(f"line {i + 1}: the Total row says {letter} {n}, Band "
+                                f"{letter} holds {actual[letter]}")
+    return problems
 
 
 def _sum(actual):
