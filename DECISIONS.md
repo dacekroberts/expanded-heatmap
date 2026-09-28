@@ -20,11 +20,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**95 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**98 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Crash 2: the rewritten census control measured at 0.28 GB; the cause stays unproven](#2026-09-28---crash-2-the-rewritten-census-control-measured-at-028-gb-the-cause-stays-unproven)
+- [Istanbul's second look run: Band N, pharmacies and opticians only (owner)](#2026-09-28---istanbuls-second-look-run-band-n-pharmacies-and-opticians-only-owner)
+- [Dubai and Manila re-screened from the large-transit gap: Dubai to Band D, Manila discarded (owner)](#2026-09-28---dubai-and-manila-re-screened-from-the-large-transit-gap-dubai-to-band-d-manila-discarded-owner)
+- [London re-screened from the large-transit gap: Band B, food only (owner)](#2026-09-28---london-re-screened-from-the-large-transit-gap-band-b-food-only-owner)
 - [Worktrees `main-build` and `tokyo-sources` retired (owner)](#2026-09-28---worktrees-main-build-and-tokyo-sources-retired-owner)
 - [Sapporo, Fukuoka and Kyoto landed: city-landed sweep and live check after the reboot pass](#2026-09-28---sapporo-fukuoka-and-kyoto-landed-city-landed-sweep-and-live-check-after-the-reboot-pass)
 - [Review batch verified: the full deploy-verify passes; the macro tooltip becomes a corner panel; East Asia's global-frame label overlaps accepted (owner)](#2026-09-28---review-batch-verified-the-full-deploy-verify-passes-the-macro-tooltip-becomes-a-corner-panel-east-asias-global-frame-label-overlaps-accepted-owner)
@@ -147,6 +150,114 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   47 GB process. Recorded as likelier, not proven. The 8 GB cap covers
   either now.
 
+### 2026-09-28 - Istanbul's second look run: Band N, pharmacies and opticians only (owner)
+
+- **Moved Istanbul to Band N (no page for now) rather than discarding it
+  (owner's call).** The 2026-09-21 record ASSERTED from one aggregate dataset
+  that İBB publishes no premises-level source; the shortlist's probe 8 (a
+  second look) had never been run. Run now on light methods only:
+  `data.ibb.gov.tr` lists 564 datasets (557 public, 57 organisations), and
+  every one was searched on titles, notes, tags and resource names. The only
+  licence data is still the aggregate GSM count table. The one premises-level
+  private-business layer is the health-institutions dataset, with 5,806
+  pharmacies, 1,672 opticians and 1,208 medical-supply shops, each with
+  lat/lon and a street address. It is frozen at 2024-03, its notes say it "is
+  subject to a fee and will not be updated", and pharmacy names are often
+  the pharmacist's own. The other premises layers are İBB's own outlets,
+  fuel stations with anonymised names, and whole street markets.
+- **The districts license the storefronts, and none of them publishes a
+  list.** Ordinary shops, restaurants and salons get their işyeri licence
+  from the 39 district municipalities. Kadıköy (160 datasets, CC BY 4.0)
+  publishes counts only and Üsküdar has 7 unrelated datasets. Beşiktaş,
+  Şişli, Beyoğlu, Fatih and Bakırköy have no open-data host, only e-belediye
+  logins and GIS viewers. The Ministry of Agriculture's register sits behind
+  a CAPTCHA. No open address layer exists to join to.
+- **N was chosen over a discard because the row names what would reopen
+  it:** a central district publishing its licence list in bulk. A
+  pharmacy-and-optician map is not a storefront page, the same judgment as
+  Yokohama's personal-services-only row. Rail is strong in OSM: M1A–M11 with
+  177 named stations, T1–T5 with 156 stops, and funiculars F2 and F3; whether
+  to draw Marmaray (tagged train) is a question for a build. Files:
+  `docs/city_master_list.md`, `docs/global_country_shortlist.md` (probe 8,
+  the Istanbul paragraph), `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
+
+### 2026-09-28 - Dubai and Manila re-screened from the large-transit gap: Dubai to Band D, Manila discarded (owner)
+
+- **Found both cities' transit reasons obsolete: OpenStreetMap carries the
+  rail.** Both were ruled out 2026-09-21 on transit feeds alone: Dubai's
+  catalogue feed was a personal GitLab artefact, and Manila's operator typed
+  its lines as commuter rail. The project now builds rail from OSM
+  (Monterrey's precedent). One Overpass query per city found Dubai Metro's
+  Red (two branches) and Green lines, with 64 named subway stations, plus the
+  tram. It found Manila's LRT-1, LRT-2 and MRT-3 with refs and colours, but
+  only 24 of the roughly 50 stations carry a station tag, so a build would
+  take them from the routes' stop members.
+- **Moved Dubai to Band D, in Warsaw's weaker form: blocked before
+  measurement (owner's call).** The 2026-09-21 record found the Department of
+  Economy's licence register (`ded_license_master`, mainland Dubai without
+  the free zones). It left two deciding questions open: whether the rows
+  carry locations, and the dataset licence. Neither can be read from here.
+  `dubaipulse.gov.ae` times out on HTTPS and HTTP, its successor `data.dubai`
+  returns a firewall "Request Rejected" on every path, `dubaidet.gov.ae`
+  answers 403, and the API wants a key. The Dubai Data Law (26/2015) was read
+  and describes open data as disseminated "without restrictions or with the
+  relevant minimum restrictions", deferring to a policy that could not be
+  reached. DMCC's free-zone directory forbids copying. A discard was
+  rejected: nothing behind the block was measured, and the register is the
+  right shape.
+- **Discarded Manila: no business list at any level (owner's call).** Business
+  permits are issued by each city's BPLO. `data.gov.ph`, enumerated in the
+  browser, holds 175 datasets from 17 agencies, none on businesses or
+  permits. Seven of the cities on the lines were read: Makati publishes only
+  an aggregate count, Quezon City's dashboards are login-only, and Pasig,
+  Pasay, Mandaluyong, Marikina and San Juan publish no list.
+  `manila.gov.ph`, Taguig, Caloocan and Parañaque answered 403 and were left
+  alone. DTI's BNRS and the FDA portal are lookups, PSA's establishment list
+  is released only as aggregates, and there is no open address file to join
+  to. Band D was rejected: every central city that could be read was
+  negative, so the 403s were not the only thing stopping it. Files:
+  `docs/city_master_list.md`, `docs/global_country_shortlist.md`,
+  `docs/global_transit_gap.md`, `docs/handoff_staging_2026-09-28.md`.
+
+### 2026-09-28 - London re-screened from the large-transit gap: Band B, food only (owner)
+
+- **Moved London from "Countries ruled out" to Band B, food only, on the FSA
+  food-hygiene register (owner's call).** The UK was ruled out 2026-09-21
+  (`docs/decisions/2026-09-20.md`), partly because the FSA register is food
+  only, before food-only pages passed on 2026-09-27. Re-screened first on
+  `docs/global_transit_gap.md`'s order, on light methods only: the FSA's
+  keyless API gives **81,633** premises across London's 33 authorities. Of
+  those, food storefronts are 40,585 (restaurants and cafés 27,279, takeaways
+  9,441, pubs and bars 3,865) and food retail 19,088 (retailers 16,763,
+  supermarkets 2,325). In a 3,300-row sample (100 per authority), **80.2%**
+  carry coordinates (lowest Merton, 63%) and 2 have no address, so the misses
+  are unmatched geocodes rather than withheld addresses. In every authority,
+  half the sampled ratings date from 2024-04 or later. Nothing was downloaded.
+- **Found the recorded UK reason wrong: the VOA rating list has a
+  description, and what rules it out is its terms.** The 2026-09-21 record
+  said the rating list "carries no category", yet quoted it as holding "a
+  description". The terms page linked from the download page limits use to
+  "Non Domestic Rating (NDR) purposes only" and bars onward disclosure for
+  anything else, so it cannot be published. That page was read, and the
+  terms were not accepted; no formal `licence-read` was run.
+- **Found no second layer that covers central London, so the page stays food
+  only.** Borough NNDR lists carrying the VOA description are published by 4
+  of 33 authorities (Camden, Islington, Barnet, Hounslow), none of them
+  downtown; Westminster refuses its list under FOI. That is Santiago's
+  failure ("coverage fails downtown"). A services layer in four outer
+  boroughs was rejected because it would mislead readers. Special-treatment
+  registers (nails, massage, beauty) are lookup-only in Westminster, Camden,
+  Hackney, Tower Hamlets and Lambeth. The London Datastore (1,303 datasets)
+  holds nothing premises-level for retail or services.
+- **Before a build:** a `licence-read` of the FSA register; placement for the
+  ~20% without coordinates (postcode centroids, with their own
+  `docs/data_sources.md` row); `check_personal_exposure.py` for mobile and
+  home caterers; and a rail-shape decision across the Underground, Overground,
+  DLR, Elizabeth line and Tramlink. Newcastle and Glasgow were not
+  re-screened. Files: `docs/city_master_list.md` (Band B, by country,
+  countries ruled out), `docs/global_country_shortlist.md` (the UK rows),
+  `docs/global_transit_gap.md`, `docs/handoff_staging_2026-09-28.md`.
 ### 2026-09-28 - Worktrees `main-build` and `tokyo-sources` retired (owner)
 
 - **Retired on the owner's word and both sessions' own**, both sessions
