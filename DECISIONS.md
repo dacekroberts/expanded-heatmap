@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**61 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**62 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Wave 2, group 2 banded: Florence and Santa Cruz–La Laguna to T, Palma to C, thirteen discards, five not reached (owner)](#2026-09-28---wave-2-group-2-banded-florence-and-santa-cruzla-laguna-to-t-palma-to-c-thirteen-discards-five-not-reached-owner)
+- [kobe and trams worktrees retired after review time landed them](#2026-09-28---kobe-and-trams-worktrees-retired-after-review-time-landed-them)
 - [Wave 2, the US banded: seven cities to T, Baltimore to C, sixteen discards; a Texas register reopens the Dallas question (owner)](#2026-09-28---wave-2-the-us-banded-seven-cities-to-t-baltimore-to-c-sixteen-discards-a-texas-register-reopens-the-dallas-question-owner)
 
 **2026-09-27**
@@ -2366,6 +2367,25 @@ Recorded by the cleanup session from the Main Building Session's findings of
   Mallorca's and Fuenlabrada's files, copied into the main checkout's `data/`
   (no-clobber).
 
+### 2026-09-28 - kobe and trams worktrees retired after review time landed them
+
+- **Confirmed by both:** the owner, and each worktree's own session ("Kobe
+  build handoff", "Tram rescopes"). Both sessions were closed first.
+- **Checks passed:**
+  - each tree was clean;
+  - each tip is on origin/master (843929c and a66629b);
+  - `check_worktree_data.py` found every data file already in the main
+    checkout;
+  - no `-tmp` launch entries remained.
+- **Removal:** `data/` and `.venv-lean` were junctions, unlinked
+  non-recursively. The main checkout's `data/` and `.venv-lean` were
+  confirmed intact afterwards. Then `git worktree remove` and
+  `git branch -d`.
+- **Monterrey:** "Staging and build handoff" reported a leftover
+  `monterrey` worktree. There is none: no folder, no branch, and it is not in
+  `git worktree list`.
+- **One interruption:** the permission check for commands returned no
+  verdict for several minutes. Nothing was touched until it came back.
 ### 2026-09-28 - Wave 2, the US banded: seven cities to T, Baltimore to C, sixteen discards; a Texas register reopens the Dallas question (owner)
 
 - **The US screened by two agents** (unbuilt metro and light-rail cities;
