@@ -229,6 +229,9 @@ def scan_files():
         for p in sorted(ROOT.glob(g)):
             if not p.is_file() or p.name in EXCLUDE_NAMES:
                 continue
+            # DECISIONS.md's weekly archives (2026-09-27): the same history.
+            if p.parent == ROOT / "docs" / "decisions":
+                continue
             if p.relative_to(ROOT).as_posix() in EXCLUDE_PATHS:
                 continue
             if any(p.match(pat) for pat in EXCLUDE_PATTERNS):

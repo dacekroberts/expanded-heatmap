@@ -33,7 +33,17 @@ Usage, from inside a conflicted merge:
 Then, for DECISIONS.md, run `python scripts/decisions_index.py` before
 committing - the index is generated and this script does not touch it beyond
 keeping both sides' links.
+
+ARCHIVED ENTRIES COUNT AS PRESENT. Since 2026-09-27 older entries move weekly to
+`docs/decisions/` (`scripts/archive_decisions.py`). A branch that forked before
+an archive run still carries those entries in DECISIONS.md, so a union of the
+two sides would put them straight back - the check above would even pass,
+because the union is what it checks. So any heading present in `--archive-glob`
+on EITHER side is dropped from the resolution and from the union, and the
+result is refused if one survives anyway (for example because git merged it
+outside a conflict region).
 """
+import fnmatch
 import argparse
 import pathlib
 import re
@@ -105,9 +115,14 @@ def main():
                          "DECISIONS.md's index). A conflict inside it keeps both "
                          "sides, because the block is rebuilt from the entries "
                          "afterwards and hand-merging it would be busywork.")
+    ap.add_argument("--archive-glob", default=None,
+                    help="files whose entries count as already present (default for "
+                         "DECISIONS.md: docs/decisions/*.md; otherwise none)")
     ap.add_argument("--dry-run", action="store_true",
                     help="report the resolution without writing it")
     args = ap.parse_args()
+    if args.archive_glob is None and pathlib.Path(args.path).name == "DECISIONS.md":
+        args.archive_glob = "docs/decisions/*.md"
 
     path = pathlib.Path(args.path)
     text = path.read_text(encoding="utf-8")
@@ -120,9 +135,22 @@ def main():
     ours_rev, theirs_rev = git("rev-parse", "HEAD").strip(), git("rev-parse", "MERGE_HEAD").strip()
     base_rev = git("merge-base", ours_rev, theirs_rev).strip()
 
+    def archived_at(rev):
+        if not args.archive_glob:
+            return set()
+        folder = args.archive_glob.rsplit("/", 1)[0]
+        names = git("ls-tree", "--name-only", rev, f"{folder}/").split()
+        found = set()
+        for name in names:
+            if fnmatch.fnmatch(name, args.archive_glob):
+                found |= set(re.findall(args.heading, git("show", f"{rev}:{name}"), re.M))
+        return found
+
+    archived = archived_at(ours_rev) | archived_at(theirs_rev)
+
     gen_start, gen_end = (s.strip() for s in args.regenerated_block.split(","))
     regions, tail = split_conflicts(text)
-    rebuilt, pool, ordered, generated = "", {}, [], 0
+    rebuilt, pool, ordered, generated, dropped = "", {}, [], 0, 0
 
     for before, ours, theirs in regions:
         prefix = rebuilt + before
@@ -134,6 +162,14 @@ def main():
 
         ours_s = sections(ours, args.heading, "ours")
         theirs_s = sections(theirs, args.heading, "theirs")
+        if (ours_s or theirs_s) and archived:
+            n = len(ours_s) + len(theirs_s)
+            ours_s = {h: b for h, b in ours_s.items() if h not in archived}
+            theirs_s = {h: b for h, b in theirs_s.items() if h not in archived}
+            dropped += n - len(ours_s) - len(theirs_s)
+            if not ours_s and not theirs_s:
+                rebuilt += before          # the whole region was archived entries
+                continue
         if not ours_s and not theirs_s:
             # No headings in this region: both sides changed the same lines, so
             # this is a REAL disagreement and not an append. Keeping both would
@@ -177,8 +213,14 @@ def main():
         blob = git("show", f"{rev}:{path.as_posix()}")
         return set(re.findall(args.heading, blob, re.M))
 
-    want = headings_of(ours_rev) | headings_of(theirs_rev)
+    want = (headings_of(ours_rev) | headings_of(theirs_rev)) - archived
     got = set(re.findall(args.heading, rebuilt, re.M))
+    back = sorted(got & archived)
+    if back:
+        raise SystemExit(
+            f"{path}: REFUSING TO WRITE - {len(back)} entries already in "
+            f"{args.archive_glob} would be put back (git merged them outside a "
+            f"conflict region). Delete them from {path} by hand: {back[:3]}")
     if got != want:
         missing, extra = sorted(want - got), sorted(got - want)
         raise SystemExit(
@@ -196,6 +238,9 @@ def main():
         print(f"  {side:6} {heading[:72]}")
     print(f"  + {len(want) - len(pool)} entries git merged outside the conflict, "
           f"all verified present")
+    if dropped:
+        print(f"  - {dropped} entries left out because they are already archived "
+              f"in {args.archive_glob}")
 
     if args.dry_run:
         print("\n--dry-run: nothing written")

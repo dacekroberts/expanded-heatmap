@@ -16,6 +16,12 @@ re-run out of reflex at ~186k tokens, and the agent correctly reported "no
 reboot needed" for the three commits it was handed while the actual push
 changed `app/components.py`.
 
+**Deploys are batched (owner, 2026-09-27).** A finished `app/` change waits on
+its branch until the owner calls "review time". Everything queued then lands in
+one push, with one reboot and one live check. Only a broken live site or a
+removal request goes out on its own. Why:
+`docs/efficiency_review_2026-09-27.md`, change 2.
+
 ---
 
 ## The order, and what each step can see that the others cannot

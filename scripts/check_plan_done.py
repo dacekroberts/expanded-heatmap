@@ -74,7 +74,11 @@ def main():
     ap.add_argument("--verbose", action="store_true")
     args = ap.parse_args()
     plan = PLAN.read_text(encoding="utf-8")
-    heads = HEADING.findall(DECISIONS.read_text(encoding="utf-8"))
+    # The live file holds this week only; older entries are in its weekly
+    # archives (docs/decisions/, 2026-09-27), and a done item may cite either.
+    heads = []
+    for f in [DECISIONS] + sorted((ROOT / "docs" / "decisions").glob("*.md")):
+        heads += HEADING.findall(f.read_text(encoding="utf-8"))
     counts = {"REMOVABLE": 0, "CANDIDATE": 0, "KEEP?": 0, "KEEP(open)": 0}
     for line, body in items(plan):
         title = re.sub(r"[*`]", "", body.splitlines()[0][6:]).strip()[:70]

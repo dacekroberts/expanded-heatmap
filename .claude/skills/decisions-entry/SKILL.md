@@ -18,6 +18,12 @@ Newest first under `## Changes`, inside the most recent
 `### YYYY-MM-DD - <label>` dated section; start a new dated section if it's
 the first entry of a new day/session.
 
+Only the current week (Sunday to Saturday) lives in `DECISIONS.md`. Older
+entries are in `docs/decisions/<Sunday>.md`, moved there verbatim by
+`scripts/archive_decisions.py`. To supersede an archived entry, write the new
+entry in `DECISIONS.md` as usual and name the old one's heading and week file.
+Never append to an archive by hand.
+
 ## Format
 
 One entry = one bullet:
