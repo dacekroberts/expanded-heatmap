@@ -305,6 +305,15 @@ brief names.
     (46, heritage cars on a regular route); Fortaleza diesel VLT (11, every 40 min - failed
     the rail test); D.C. Streetcar and Montreal's REM (both silent omissions). **D.C.
     Streetcar: no longer operating** (DDOT ended it 2026-03-31; checked 2026-09-27).
+  - ✅ **Tram list COMPLETE 2026-09-27 (wave 2's first item, run early)**:
+    - **Barcelona TRAM** T1–T6: 9–10 stops inside the city each; all six are
+      one colour (#007165) in OSM, so a rescope needs a colour rule.
+    - **Hong Kong Tramways**: 6 services, up to 54 stops, all in Hong Kong.
+      The owner excluded it 2026-09-24; recommended out.
+    - **Seoul's Wirye Line**: no route relation in OSM, so most likely not
+      open (unconfirmed).
+    - **Cablebús**: L1 6 and L2 7 stations, all in CDMX; L3 is incomplete in
+      OSM (1 stop). No OSM colours.
   - ▶ **IN PROGRESS 2026-09-27 (owner cleared light and medium): specs for REM, Rome 8,
     Madrid ML1, Paris T3a/T3b and SF F Market in `docs/tram_rescope_specs.md`**, handed to
     Main Build to implement on a branch held for review time.
