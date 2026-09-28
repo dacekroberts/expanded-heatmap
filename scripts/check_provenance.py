@@ -137,6 +137,12 @@ LICENCE_DIR = ROOT / "docs" / "licenses"
 # usual reason - it records what a citation said on a date.
 CITATION_GLOBS = ("docs/**/*.md", ".claude/**/*.md", "CLAUDE.md", "PLAN.md")
 CITATION_SKIP = {"DECISIONS.md"}
+
+
+def is_decisions_log(p):
+    """DECISIONS.md or one of its weekly archives (docs/decisions/, 2026-09-27):
+    the same dated record, excluded for the same reason wherever it sits."""
+    return p.name == "DECISIONS.md" or p.parent == ROOT / "docs" / "decisions"
 # The sweep skill quotes the broken citation as a teaching example, and
 # check_provenance's own docstring does the same.
 CITATION_SKIP_PATHS = {
@@ -502,7 +508,7 @@ def check_cited_outputs():
             # DECISIONS.md is excluded everywhere for the same reason; a past
             # entry may name a file that has since been renamed, and that is
             # an accurate record rather than a broken promise.
-            if not q.is_file() or q.name == "DECISIONS.md":
+            if not q.is_file() or is_decisions_log(q):
                 continue
             for m in re.finditer(r"outputs/[A-Za-z0-9_./-]+\.(?:csv|html|json)",
                                  read(q)):
@@ -696,7 +702,7 @@ def check_citations(doc):
     superseded = []
     for g in CITATION_GLOBS:
         for p in sorted(ROOT.glob(g)):
-            if not p.is_file() or not ours(p) or p.name in CITATION_SKIP:
+            if not p.is_file() or not ours(p) or is_decisions_log(p):
                 continue
             rel = p.relative_to(ROOT).as_posix()
             if rel in CITATION_SKIP_PATHS:

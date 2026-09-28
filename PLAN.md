@@ -230,9 +230,16 @@ brief names.
     4,345 -> 1,685 words, history verbatim in `docs/rule_history.md`; PLAN.md 20,675 -> 3,136
     words; `scripts/check_all.py` as `.githooks/pre-push`. The 7-day DECISIONS index was
     dropped (owner).
-  - [ ] **Change 1, half - archive DECISIONS.md by month.** Keep `merge_append_only.py`,
-    `decisions_index.py` and the `decisions-entry` skill working. The session count is a
-    separate owner decision.
+  - [x] **Change 1, half - archive DECISIONS.md.** DONE 2026-09-27, WEEKLY rather than
+    monthly (owner; DECISIONS): `scripts/archive_decisions.py` at the start of each week,
+    guarded in `merge_append_only.py`, proven by `archive_decisions_selftest.py`.
+    DECISIONS.md 222,930 -> 8,490 words.
+  - [ ] **Run `python scripts/archive_decisions.py` at the start of each week** (cleanup
+    session, after the Sunday reset). Next: 2026-10-04.
+  - [ ] **The session count** - how many sessions run at once. A separate owner decision.
+  - [ ] **The remaining findings, walked through with the owner** (asked 2026-09-27): 5
+    (hand-kept documents that churn, e.g. a generated master list), what is left of 4
+    (re-render batching beyond change 2), then 7.
   - Original item, kept for its method: only if the week's budget allows, at the start of a week, as ONE agent in
   its own context. Not a code review: how work gets done, verified, approved and shipped.
   - Evidence, not impressions: git history (`git log --since`, merge counts, files rewritten

@@ -122,8 +122,10 @@ a rule, not before obeying one.
   `pipeline/drift_check.py` diffs against.
 - **Log every judgment call in `DECISIONS.md`** as it's made (`decisions-entry`
   skill). Never edit an old entry; add a new one, then run
-  `python scripts/decisions_index.py` (`--check` fails if stale). Keep
-  `docs/project_context.md` to current state, no counts. [#decisions]
+  `python scripts/decisions_index.py` (`--check` fails if stale). Entries older
+  than the current week (Sunday to Saturday) live in `docs/decisions/<Sunday>.md`,
+  moved verbatim by `scripts/archive_decisions.py` at the start of each week.
+  Keep `docs/project_context.md` to current state, no counts. [#decisions]
 - **Run `python pipeline/drift_check.py` after any pipeline change** - then
   **`git checkout -- outputs/` if it leaves files modified but reported no
   drift** (CRLF and Folium's random ids). Never `git add -A`. [#drift-churn]
@@ -190,7 +192,8 @@ python scripts/check_deploy_imports.py [--ref REF]      # before ANY push touchi
 node scripts/profile_zoom.mjs <baseUrl> <city,city> [reps]   # zoom lag
 node scripts/check_macro_attribution.mjs [baseUrl] [375,768,1200]   # front page OSM credit; live: <app>/~/+
 python scripts/decisions_index.py [--check]
-python scripts/merge_append_only.py DECISIONS.md [--dry-run]
+python scripts/archive_decisions.py [--dry-run]          # start of each week: older entries -> docs/decisions/
+python scripts/merge_append_only.py DECISIONS.md [--dry-run]   # archived entries count as present
 python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon> --region <region> --country <country>   # add --dry-run first
 .venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"
 ```
