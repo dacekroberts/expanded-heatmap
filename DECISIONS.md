@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**28 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**29 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [data_sources.md split by country, landed at the first review time (owner)](#2026-09-27---data_sourcesmd-split-by-country-landed-at-the-first-review-time-owner)
 - [Band T renamed "Contingent on trams" and five cities moved into it from Band C; Stockholm and Bucharest pass the Band C memo (owner)](#2026-09-27---band-t-renamed-contingent-on-trams-and-five-cities-moved-into-it-from-band-c-stockholm-and-bucharest-pass-the-band-c-memo-owner)
 - [Master list after the split: Denver, Dallas and Brampton get discard rows; Ottawa is a data case, not a no-rail one; the by-country table rebuilt (owner, via Cleanup)](#2026-09-27---master-list-after-the-split-denver-dallas-and-brampton-get-discard-rows-ottawa-is-a-data-case-not-a-no-rail-one-the-by-country-table-rebuilt-owner-via-cleanup)
 - [Efficiency findings 4, 5 and 7 acted on: renderer changes batch, the master list split and counted, city_shortlist.md retired, Kansas City to Band T (owner)](#2026-09-27---efficiency-findings-4-5-and-7-acted-on-renderer-changes-batch-the-master-list-split-and-counted-city_shortlistmd-retired-kansas-city-to-band-t-owner)
@@ -62,6 +63,43 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-27 - data_sources.md split by country, landed at the first review time (owner)
+
+- **Per-country source sections moved verbatim to 17 files in
+  `docs/data_sources/` (`b6d70f1`), taking the entry point from 55,151 to
+  14,973 words.** It was the most-read document (58 recent transcripts, about
+  96k tokens), so a session reading about one city loaded every city. The
+  owner approved the split as part of finding 5.
+  - All 2,835 original non-blank lines are present exactly as often as before.
+  - `check_provenance.py` names all 46 cities OK before and after. Tested
+    negatively: removing Ireland's file fails Dublin, an empty folder trips a
+    new guard, and `KNOWN_GAPS` still behaves.
+- **What stayed in the entry point:**
+  - The rules, a country-to-file index, the shared transit and boundary notes,
+    the basemap, the removal-request commitment and the obligations that are
+    not notices.
+  - **The whole numbered notices section with the deploy gate.** At about
+    10.8k words it is most of what remains. Moving it would mean rewriting the
+    notice parser and citation check F, which `app/components.py`'s
+    `_NOTICES` is cross-checked against, and one list is safer than 17.
+  - **The United States stays one file** (10,013 words). Its licence tables
+    name several cities per row, so splitting it would mean re-cutting rows,
+    not moving them.
+  - A Brazilian source filed under Taiwan (CNPJ) moved to Brazil's file.
+- **The About the Data page renders the entry point, then each country file**
+  in alphabetical order. Without that change the live page would have kept the
+  notices and lost every endpoint, so the split had to land together with an
+  `app/` change, which is a deploy.
+  - The owner approved the new published wording (the index paragraph and
+    each file's opening note) and the page order. The owner then called review
+    time for this one item, rather than let it sit while every session kept
+    appending to the old file.
+  - Gate: `check_deploy_imports.py` clean (PROBLEMS 0), then `deploy-verify`
+    `scope: app-deps`. No reboot, because only a page script changed and no
+    imported module did.
+- **Skills now say which file a new row goes in:** read-licence, licence-read,
+  add-city, add-country, multi-source-city and brazil-city. CLAUDE.md gains one
+  clause.
 ### 2026-09-27 - Band T renamed "Contingent on trams" and five cities moved into it from Band C; Stockholm and Bucharest pass the Band C memo (owner)
 
 - **Band T renamed "Contingent on trams" (owner's call).** Five Band C cities

@@ -290,10 +290,15 @@ def check_b(files):
 
 
 def check_c():
-    """A '## Heading (TOKEN)' whose rows do not all mention TOKEN."""
-    p = ROOT / "docs" / "data_sources.md"
-    if not p.exists():
-        return []
+    """A '## Heading (TOKEN)' whose rows do not all mention TOKEN - in
+    data_sources.md and, since the split of 2026-09-27, each per-country file
+    under docs/data_sources/."""
+    files = [ROOT / "docs" / "data_sources.md"] + \
+        sorted((ROOT / "docs" / "data_sources").glob("*.md"))
+    return [h for p in files if p.exists() for h in _check_c_file(p)]
+
+
+def _check_c_file(p):
     hits, heading, token, rows, hline = [], None, None, [], 0
 
     def close():
@@ -426,7 +431,10 @@ def check_d():
 # (91_What_Is_Excluded.py and 90_About_the_Data.py). A universal in a research
 # brief is shorthand between sessions; on a page it is a claim to the public.
 PUBLISHED_PAGES = ("app/Overview.py", "app/pages/*.py")
-PUBLISHED_DOCS = ("docs/excluded_categories.md", "docs/data_sources.md")
+# data_sources/*.md: the per-country files split out of data_sources.md on
+# 2026-09-27, which the About page renders after it. Globs, not paths.
+PUBLISHED_DOCS = ("docs/excluded_categories.md", "docs/data_sources.md",
+                  "docs/data_sources/*.md")
 
 # COMPARISONS ONLY. Every one of the eleven false claims found on 2026-09-23
 # compared a city with the rest - "the only", "no other", "every other", "any
@@ -488,10 +496,7 @@ def _published_texts():
                 if (isinstance(node, ast.Constant) and isinstance(node.value, str)
                         and id(node) not in docstrings):
                     yield p, node.lineno, node.value
-    for rel in PUBLISHED_DOCS:
-        p = ROOT / rel
-        if not p.exists():
-            continue
+    for p in (q for rel in PUBLISHED_DOCS for q in sorted(ROOT.glob(rel))):
         text = re.sub(r"(?ms)^```.*?^```", lambda m: "\n" * m.group(0).count("\n"),
                       p.read_text(encoding="utf-8"))
         line = 1
