@@ -7,15 +7,17 @@ item is done** rather than adding an addendum.
 
 ## Before starting
 
-- **Work in `.claude/worktrees/staging` on `worktree-staging`.** Check
-  `git branch --show-current`. The previous session must be closed first (two
-  sessions in one tree overwrite each other's edits).
+- **Work in your own worktree, `.claude/worktrees/main-build` on
+  `worktree-main-build`** (the owner, 2026-09-28). Check `git branch
+  --show-current`. `worktree-staging` was the previous session's: leave it
+  alone until the owner retires it (Cleanup's `retire-worktrees` scope, after
+  `scripts/check_worktree_data.py`).
 - `git fetch`, `git merge origin/master`, then **`get_usage` before any big
   work**. The owner stops at 98% of the 5-hour window, and the window is
   shared by every session.
 - **Push ritual**: fetch; merge (a `DECISIONS.md` conflict is resolved with
   `python scripts/merge_append_only.py DECISIONS.md`, never by hand); `python
-  scripts/decisions_index.py`; push `HEAD:master` and `HEAD:worktree-staging`.
+  scripts/decisions_index.py`; push `HEAD:master` and `HEAD:worktree-main-build`.
   Re-fetch right before pushing. **A pre-push hook runs
   `scripts/check_all.py`** (19 checks, about 30 s), and a failure refuses the
   push. Two that caught this session: `check_provenance.py` wants a credit
