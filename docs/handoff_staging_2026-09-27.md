@@ -29,7 +29,7 @@ rather than adding an addendum.
 
 | Session | Where | Doing |
 |---|---|---|
-| **Tram rescopes** (build) | `worktree-trams` | `docs/tram_rescope_specs.md`, REM first. Held for review time. It has the owner's Paris T2/T9-out call |
+| **Tram rescopes** (build) | `worktree-trams` (retire it: nothing unmerged since be2e371) | **Light and medium batch LIVE** (below). Next: the shared `thin()` refactor, queued in `docs/handoff_thin_refactor_2026-09-27.md` on `worktree-thin` (`.claude/worktrees/thin`, from d25488c; merge origin/master first) |
 | **Kobe build handoff** (build) | `worktree-kobe` | Kobe. Held for review time |
 | **Cleanup** | `worktree-cleanup` | Consistency role. Owns `scripts/check_*.py` and the master-list split and checks |
 | **The small-research helper** (if the owner started it) | its own worktree | `docs/handoff_small_todo_2026-09-27.md`, items 1-4, from item 1 |
@@ -83,7 +83,24 @@ offline, so check which row is live before sending.
 2. ✅ **Göteborg's rail: done 2026-09-27** (13 tram lines, 127 stops inside the city; master list and DECISIONS).
 3. **Band T's group decision is DEFERRED by the owner** until the tram list
    (done) AND wave 2 are complete. Don't raise it before then.
-4. **Tram rescopes, heavy category (Toronto, Milan, Prague): held.** It
+4. ✅ **Tram rescopes, light and medium batch: LIVE 2026-09-27** (DECISIONS,
+   "Tram rescope 1-5"; every owner call settled; page texts, credits and
+   excluded-categories wording written):
+   - Montréal's REM, drawn as ONE line "REM (A1, A3, A4)", #73A400 from the
+     feed (credit notice 51). English Wikipedia had A3 and A4 swapped; the
+     feed is the authority.
+   - Rome tram 8, thinned to 7 of 16 stops (San Francisco's filter).
+   - Madrid ML1 (ML2 and ML3 are stubs, out); 57 station records, not 56;
+     ML1's colour is ΔE 15.1 from Línea 10 (CRTM notice 20 amended).
+   - Paris T3a and T3b in this project's own colours; T2 and T9 out.
+   - San Francisco's F Market & Wharves, the whole route (owner's call); its
+     ΔE re-measured against the drawn palette, 35.3 from L.
+   - D.C. Streetcar recorded "no longer operating" in
+     `docs/map_inconsistencies.md`.
+   - Queued: the shared `thin()` refactor (above). Measured for it:
+     projected distances move no stop in Rotterdam or Amsterdam, but 62
+     reason strings change by 0.001–0.002 mi.
+5. **Tram rescopes, heavy category (Toronto, Milan, Prague): held.** It
    needs a label and legend rule first, then a Toronto pilot. Barcelona's
    TRAM is also held: all six lines are one OSM colour (#007165). Hong Kong
    Tramways stays out.
@@ -92,7 +109,7 @@ offline, so check which row is live before sending.
 
 - **Lisbon**: the owner is checking a DGAE account. If it is region-locked,
   probe national alternatives.
-- **Tram rescopes beyond the light and medium batch** (above).
+- **Tram rescopes beyond the light and medium batch** (above; that batch is live).
 
 ## What today established (so it isn't re-learned)
 
