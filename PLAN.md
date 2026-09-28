@@ -236,7 +236,18 @@ brief names.
     (`docs/gated_access.md` items 29–32). Not sent, and not the next step.
     The own-time probe round found nothing that fills the gaps openly (DECISIONS).
 - [ ] **PARKED by the owner 2026-09-27 (conserving usage) - come back to it.** **Trams left
-  off built maps - owner decides case by case (listed 2026-09-27, after "trams count").** Read-only list; nothing rescoped. Stops = distinct stop names in scope,
+  off built maps - owner decides case by case (listed 2026-09-27, after "trams count").**
+  **Estimated load and Staging's recommendations, saved for later (owner, 2026-09-27):
+  `docs/tram_rescope_estimate.md`**:
+  - the tram list first (it runs with wave 2);
+  - the light batch yes, REM first, D.C. once its service is verified;
+  - Paris T3 yes;
+  - the heavy three (Toronto, Milan, Prague) not yet: a label and legend
+    rule first, then a Toronto pilot;
+  - Barcelona likely yes, Hong Kong Tramways stays out, Cablebús yes;
+  - one batch overhead. About 55–85% of one 5-hour window in all.
+
+  Read-only list; nothing rescoped. Stops = distinct stop names in scope,
   from cached GTFS/OSM. Rescoping is main's work, city by city, after the owner decides.
   - **Recorded reason was only "not rapid transit / overlay" (reversed by the rule):**
     Toronto streetcars (18 routes, 476 stops); Milan (17 routes, 323 of 341; ATM publishes
