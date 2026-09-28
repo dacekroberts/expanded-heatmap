@@ -19,12 +19,12 @@ negative, kept out.
 "(kn)" marks a network size from general knowledge, not from the record; a
 "subway 35" in the record counts route relations in a feed, not stations.
 
-## Discarded (23) - `docs/city_master_list.md`, DISCARDED
+## Discarded (25) - `docs/city_master_list.md`, DISCARDED
 
 | City | Country | Network | Why not covered (the record's words, short) |
 |---|---|---|---|
+| Munich, Frankfurt, Cologne | DE | 96 / 86 / ~230 stops (kn) | No premises register on a full enumeration of each catalogue, geoportal and chamber (screened 2026-09-28, owner) |
 | Manila | PH | LRT-1, LRT-2, MRT-3 | No business list at any level (re-screened 2026-09-28, owner); the old commuter-rail reason is obsolete |
-| Berlin | DE | U-Bahn 9 lines, ~175 stations (kn) | "`Gaststätten` → 0"; Gewerberegister not open - **two keyword searches only** |
 | Kuala Lumpur | MY | 14 relations | "No register at any level, on three methods" |
 | Santiago | CL | L1-L6, L4A | "Coverage fails downtown": 4 central comunas publish no list |
 | Valencia | ES | metro + tram | "No premises register", 290 packages read |
@@ -59,10 +59,11 @@ negative, kept out.
 | Auckland | NZ | commuter 5 | Commuter only; licensing not municipal |
 | Algiers | DZ | 1 metro line + trams (kn) | Filed under "no urban rail at all" - **wrong**; it has a metro |
 
-## In a band, not built (14)
+## In a band, not built (15)
 
 | City | Country | Network | Band and blocker |
 |---|---|---|---|
+| Berlin | DE | U-Bahn 9 lines, ~175 stations (kn); S-Bahn | B - IHK Berlin's per-premises register, shops and food; personal services missing (from the discards 2026-09-28, owner) |
 | Istanbul | TR | M1A–M11, 177 stations; T1–T5 | N - pharmacies and opticians only; the districts publish no licence lists (re-screened 2026-09-28, owner) |
 | Dubai | AE | Metro Red and Green, 64 stations; tram | D - every host of its licence register refuses this machine (re-screened 2026-09-28, owner) |
 | London | UK | 272 stations (kn) | B - food only on the FSA register (re-screened 2026-09-28, owner); no second layer covers central London |
@@ -78,13 +79,12 @@ negative, kept out.
 | Yokohama | JP | 43 stations | N - no food list in any era |
 | Warsaw | PL | 2 lines (kn) | D - geo-blocked |
 
-## Never screened (35)
+## Never screened (32)
 
 | Cities | Country | Network (kn) | Why not covered |
 |---|---|---|---|
 | Shanghai, Beijing, Guangzhou, Shenzhen, Chengdu, Wuhan, Hangzhou, Chongqing, Nanjing, Xi'an, Tianjin, Suzhou, Zhengzhou, Qingdao | CN | ~150-500 stations each | China is in no file: it was absent from the feed catalogue the 87-country screen started from |
 | Delhi, Mumbai, Bengaluru, Kolkata, Chennai | IN | Delhi ~290; others ~40-80 | Only India's national catalogue was read (counts, not premises); the city hosts were never asked |
-| Munich, Frankfurt, Cologne | DE | 96 / 86 / ~230 stops | Germany is not ruled out; no rows |
 | Tehran | IR | ~150 stations | No record |
 | Bangkok | TH | 4 subway + 5 light-rail relations | The national portal answered 403 on every strategy (2026-09-21); never given a city row |
 | Buenos Aires | AR | Subte, 6 lines | Its feed has no `routes.txt`; business data never probed |
@@ -102,8 +102,8 @@ Recommended first for re-screening (the staging handoff's priority 1):
    (blocked before measurement), Manila discarded (no business list).
 3. ~~**Istanbul**~~ - **done 2026-09-28: Band N** (owner), pharmacies and
    opticians only.
-4. **Berlin** (two keyword searches) and **Munich, Frankfurt, Cologne** (never
-   screened).
+4. ~~**Berlin**, **Munich, Frankfurt, Cologne**~~ - **done 2026-09-28**
+   (owner): the three discarded; Berlin to Band B on its chamber's register.
 5. **Delhi and Mumbai** - only the national catalogue was read.
 6. **China's fourteen** - never looked at; the largest untouched block, with
    access and licensing likely hard.
