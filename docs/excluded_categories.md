@@ -1801,6 +1801,122 @@ line.
   the Umeda freight line's track from the Umekita platforms to Fukushima, which
   only limited expresses use.
 
+### Sapporo - the city's food permits and 環境衛生 registers, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business licence,
+  so none is published.
+- Food businesses that only notify the city (届出).
+- Food manufacturing other than bakeries and confectioners (菓子) and delis
+  (そうざい): 987 rows.
+- 3 vending machines.
+- 983 food trucks, stalls and storeless laundry pick-ups registered to trade
+  anywhere in the city (市内一円) or with no counter.
+- 14 linen-supply laundries (リネンサプライ), industrial rather than counters.
+- 16 barbers and beauty salons inside hospitals and care homes (厚生施設),
+  which serve their residents rather than the public.
+
+**Counted** - coin laundries, as Personal services (owner, 2026-09-28: near
+transit they draw steady short-term customers). And 157 of the 2,151 bakery,
+confectioner and deli rows (7.3%) carry a trade name that reads as a factory
+or central kitchen; they are kept (owner, 2026-09-24).
+
+**Not placed** - 41 rows (0.1%), most of them premises the city registers at
+addresses outside Sapporo. Another 4,101 are placed at their block group's
+(条丁目) centre, which on Sapporo's grid is about one block.
+
+**Names not shown** - 6 premises whose trade name is the operator's own name
+are shown by their permit type. The owner's rule is applied to every permit at
+the premises.
+
+**Closed premises** - the list may keep premises that have closed; a dot is a
+permit on file, not a business open today.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: the stations beyond it, in Tōbetsu, Otaru and Ebetsu.
+- No Shinkansen reaches Sapporo yet.
+
+### Fukuoka - the city's food permits and registers and MHLW's online filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business licence.
+- Food shops that only notify (届出) and did not publish in MHLW's list: the
+  Retail layer is partial.
+- 11,768 MHLW filings published without an address, 4,203 of them restaurants
+  (about one in five).
+- 1,434 rows of food manufacturing and storage other than bakeries and
+  confectioners (菓子) and delis (そうざい).
+- 742 school, hospital, care-home and staff kitchens.
+- 507 vending machines.
+- 2,919 food trucks, festival and event stalls, on-train sales and other rows
+  with no fixed counter.
+- 58 restaurants inside hotels and inns.
+- 62 mail-order and online sellers.
+- 10 karaoke boxes.
+- 111 filings MHLW marks as closed (廃業).
+
+**Counted** - Fukuoka's 81 yatai (屋台, filed as ろ店), which trade nightly at
+fixed street spots under the city's yatai ordinance (owner, 2026-09-28). Also,
+74 of the 2,450 bakery, confectioner and deli rows (3.0%) have a trade name
+that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 297 premises in both food lists are shown once, from
+MHLW's newer filing.
+
+**Not placed** - 88 rows (0.3%), mostly rural addresses and on-train sales.
+Another 537 MHLW filings sit at MHLW's own coordinates, and 29 at their
+town-chōme centre.
+
+**Names not shown** - 4 trade names in the city's own lists are the operator's
+own name; the 5 pins carrying them show their permit type. MHLW's list does not
+say who the operator is, so the rule cannot run on its rows (owner,
+2026-09-28).
+
+**Closed premises** - a dot is a permit on file, not a business open today.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 22 stations beyond it, in Kasuya, Ōnojō, Sue, Shingū, Kasuga,
+  Itoshima, Koga, Umi and Sasaguri.
+- The JR Hakata-Minami line (only Hakata is inside the city).
+- The Shinkansen does not count.
+
+### Kyoto - a food register rebuilt from the city's monthly lists, and its registers, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business licence.
+- Shops that sell only packaged food: a notification since 2021, not in these
+  lists.
+- 1,993 food trucks and other permits with no fixed address.
+- 62 permits for less than a year.
+- 1,144 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい).
+- 166 vending machines.
+
+**Counted** - permits still in their term on 31 July 2026. Closures are not
+published, so this is an upper bound. 1,321 of them share an address and permit
+type with a newer permit under another name; they are probably predecessors
+that closed, but they are kept. Also, 126 of the 3,586 bakery, confectioner and
+deli rows (3.5%) have a trade name that reads as a factory; they are kept
+(owner, 2026-09-24).
+
+**One pin per premises** - 523 repeat permits are shown once.
+
+**Not placed** - 435 rows (1.3%), mostly in town names that occur twice in one
+ward. Another 1,836 sit at their town's centre.
+
+**Names not shown** - 8 pins whose trade name is the operator's own name show
+their permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 25 stations beyond it: 8 in Ōtsu (Shiga), 7 in Uji, 3 each in
+  Mukō and Nagaokakyō, and 2 each in Yawata and Ōyamazaki.
+- The Sagano Scenic Railway and the Eizan and Kurama cable cars are not drawn
+  (owner, 2026-09-28).
+- The Shinkansen does not count.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

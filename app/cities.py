@@ -1018,7 +1018,11 @@ CITIES = [
         # measured 2026-09-27): above it, Busan's pill grazed Daegu's marker,
         # and to its right the two pills overlapped (check_macro_labels.py
         # --verbose). With Daegu's label to its left, neither grazes.
-        "label_offset": ("middle", 0, 22),
+        # LOWER LEFT since 2026-09-28: below the dot, Busan's pill covered
+        # Fukuoka's marker. Of 432 placements of Busan, Daegu and Kobe scored
+        # with Fukuoka's label below its dot, this is the one clean one that
+        # moves a single existing label.
+        "label_offset": ("end", -10, 16),
     },
     {
         # REGIONAL, owner's call 2026-09-27: Línea 2 runs through San Nicolás de
@@ -1070,7 +1074,72 @@ CITIES = [
         # Kobe keeps its label above. Scored clear by check_macro_labels.py at
         # 375, 768 and 1200 (width 40.6 px, measured 2026-09-27 in the app's
         # own document).
+        # RIGHT of its dot since 2026-09-28: Sapporo widened the East Asia
+        # frame, and below the dot Osaka's pill then met Busan's (4.0 x 13.6
+        # px at every width). Kobe's label stays above its own dot.
+        "label_offset": ("start", 10, 8),
+    },
+    {
+        "name": "Sapporo",
+        "lat": 43.0687,
+        "lon": 141.3508,
+        "page": "pages/52_Sapporo_Heatmap.py",
+        # Macro-map facts (macro-tiers branch, owner-approved 2026-09-28): the
+        # figures are table C's and D's in docs/map_inconsistencies.md.
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (86.0%)",
+        "data_age": "Permits as of 2026-03-31",
+        "blurb": "Sapporo Municipal Subway, the streetcar, and JR Hokkaido's lines",
+        "region": "East Asia",
+        "country": "Japan",
+        "in_default_view": False,
+        # ABOVE its dot, alone in the north of the region. Scored clear by
+        # check_macro_labels.py at 375, 768 and 1200 (width 56.9 px,
+        # measured 2026-09-28 in the app's own document).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Fukuoka",
+        "lat": 33.59,
+        "lon": 130.4,
+        "page": "pages/53_Fukuoka_Heatmap.py",
+        # Macro-map facts (macro-tiers branch, owner-approved 2026-09-28): the
+        # figures are table C's and D's in docs/map_inconsistencies.md.
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (98.1%); ministry coordinates where missed",
+        "data_age": "Permits as of 2026-08-31; ministry filings fetched 2026-09-27",
+        "blurb": "Fukuoka City Subway, and JR Kyushu's and Nishitetsu's lines",
+        "region": "East Asia",
+        "country": "Japan",
+        "in_default_view": False,
+        # BELOW its dot, over the sea south of Kyushu (width 56.8 px,
+        # measured 2026-09-28 in the app's own document). Above it the pill
+        # met Busan's, Daegu's and Kobe's; Busan's label moved lower left to
+        # clear Fukuoka's marker. Scored clear by check_macro_labels.py at
+        # 375, 768 and 1200.
         "label_offset": ("middle", 0, 22),
+    },
+    {
+        "name": "Kyoto",
+        "lat": 35.01,
+        "lon": 135.77,
+        "page": "pages/54_Kyoto_Heatmap.py",
+        # Macro-map facts (macro-tiers branch, owner-approved 2026-09-28): the
+        # figures are table C's and D's in docs/map_inconsistencies.md.
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (93.2%)",
+        "data_age": "Rebuilt from permits to 2026-07-31 (an upper bound)",
+        "blurb": "Kyoto City Subway, JR West, Keihan, Hankyu, Kintetsu, the Randen and Eiden",
+        "region": "East Asia",
+        "country": "Japan",
+        "in_default_view": False,
+        # FAR ABOVE its dot (width 40.2 px, measured 2026-09-28 in the app's
+        # own document): at the usual 22 px it met Kobe's label, which sits
+        # above Kobe's dot to the south-west; right of the dot it met Osaka's.
+        # Of 35 Kyoto / Kobe placements scored, 40 px up is the nearest clean
+        # one that moves no existing label. check_macro_labels.py: clear at
+        # 375, 768 and 1200.
+        "label_offset": ("middle", 0, -40),
     },
 ]
 

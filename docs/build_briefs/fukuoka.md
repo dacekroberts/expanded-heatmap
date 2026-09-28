@@ -1,5 +1,12 @@
 # Fukuoka — build brief
 
+**✅ BUILT 2026-09-28** (`worktree-japan`; DECISIONS 2026-09-28, "Fukuoka steps
+1-2" and "Fukuoka built"). Corrected at the build: the city's food list is now
+the **2026-08-31 edition** (`r8.8.csv`, 851,761 B, 3,958 rows; replaced
+2026-09-25 under the same resource id - the figures below from 3,977 rows are
+the July edition's); BODIK's `package_show` answered 2026-09-28. The operator
+columns are read in memory by the owner's name rule (Privacy, below).
+
 **Step 0 measured 2026-09-24 (MHLW's viewer approved by the owner, question
 10).** Run `python scripts/brief_check.py fukuoka` before writing any code.
 Coordinates: the `address-join` skill, measured by
@@ -162,6 +169,14 @@ for sole traders), **開設者法人住所** and phones. **Read only the trade n
 type and premises address** (plus MHLW's lat/lon). Run
 `check_personal_exposure.py`.
 
+**Superseded 2026-09-27 (the owner's name rule, every Japanese city)**: the
+food list's **営業者氏名** and the registers' **開設者法人名（開設者氏名）** are read IN
+MEMORY to compare with the trade name, and never kept (both added to
+`japan_register.OPERATOR_COLS` 2026-09-28). MHLW has no individual-operator
+column, so the rule cannot run on its rows: accepted by the owner 2026-09-28
+(MHLW publishes the trade name only with the filer's consent). Verdict: 0
+operator names shown; 4 trade names withheld on 5 pins.
+
 ## Region
 
 `"region": "East Asia"`. Project to **UTM 52N (EPSG:32652)**.
@@ -169,10 +184,10 @@ type and premises address** (plus MHLW's lat/lon). Run
 ## Still unknown
 
 - ✅ Both licences read: BODIK (CC BY 4.0) and MHLW (PDL 1.0), each PERMITTED WITH CONDITIONS. MHLW has one minor commercial-use OPEN point.
-- ⚠️ **Privacy**: per MHLW's FAQ, sole traders may enter 「個人名及び自宅住所」 as their 屋号 in their account. Whether that reaches `営業施設名称` is unchecked, so `check_personal_exposure.py` must look at trade names that are personal names.
+- ✅ **Privacy** (owner 2026-09-28): per MHLW's FAQ, sole traders may enter 「個人名及び自宅住所」 as their 屋号 in their account. The name rule cannot test MHLW's rows (no operator column) and a name-shape test cannot tell (751 company rows match it); accepted and recorded (Privacy, above).
 - ✅ **The ~20% of restaurants with no published address**: disclosed on the page in the owner's approved wording (2026-09-24, above). Whether they cluster spatially stays unmeasured, and the wording says so.
 - ✅ decided 2026-09-24 (owner): see the block at the top (菓子製造業 / そうざい製造業 count, in Retail).
-- ✅ decided 2026-09-24 (owner): see the block at the top (city line only; Shinkansen out). ⚠️ Still open: N02's line list for Fukuoka.
+- ✅ decided 2026-09-24 (owner): see the block at the top (city line only; Shinkansen out). N02's line list read at the build: 10 lines, the Hakata-Minami line left out, 9 drawn (config.py).
 - ⚠️ The Economic Census food control (the owner's chosen control).
 
 ```brief-checks
@@ -181,7 +196,7 @@ type and premises address** (plus MHLW's lat/lon). Run
     "id": "fukuoka-own-food-live",
     "claim": "Fukuoka City's own food-permit list (permits held since before 2021-06) is keyless and live on BODIK",
     "kind": "http_ok",
-    "url": "https://data.bodik.jp/dataset/5925a9fb-3326-4499-9acd-7b18c03d5e32/resource/70d22acf-2353-4bc1-b45d-f12d45da5216/download/r8.7.csv",
+    "url": "https://data.bodik.jp/dataset/5925a9fb-3326-4499-9acd-7b18c03d5e32/resource/70d22acf-2353-4bc1-b45d-f12d45da5216/download/r8.8.csv",
     "min_bytes": 400000
   },
   {

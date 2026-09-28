@@ -8,7 +8,9 @@ addendum.
 
 - **Build Fukuoka, then Kyoto**, the owner's order after Sapporo (DECISIONS
   2026-09-28, "Next builds"). Tokyo (8 wards) comes after them, and is not in
-  this handoff.
+  this handoff. **Both built 2026-09-28** (DECISIONS "Fukuoka built",
+  "Kyoto built"; held for review time on this branch). What remains here is
+  the queue below.
 - Both are held for the owner's review time: nothing merges to master until
   the owner calls it (`docs/review_time.md`), then `publish-city`.
 - **The `japan-city` skill is the manual.** Its sheets for Fukuoka and Kyoto
@@ -40,41 +42,6 @@ addendum.
   the template it copied.
 - **Pacing:** `get_usage` between steps; at 90% of the 5-hour window finish
   the current step, commit clean and stop with a one-line next action.
-
-## Fukuoka (first)
-
-- **The first TWO-SOURCE Japanese city**: the city's BODIK list (pre-2021-06
-  permits) plus MHLW's online filings. `japan_step2` needs a per-source
-  fallback to **MHLW's own coordinates** where the join misses, and MHLW's
-  notifications as a partial, disclosed food-retail bucket. Put the mechanism
-  in the shared step, naming Fukuoka.
-- BODIK answers 500/502/504: retry with backoff (in `japan_fetch.get` if
-  shared, or Fukuoka's own function).
-- Operator columns: BODIK's 開設者法人名（開設者氏名） must be ADDED to
-  `japan_register.OPERATOR_COLS`, then re-run the Minato control
-  (`scripts/screen_japan_join.py minato`). MHLW's 法人名 / 法人住所 / phones
-  are never selected. MHLW lets a sole trader put their own name in 屋号 -
-  what the name rule is for.
-- Leave out the JR Hakata-Minami line (`LEFT_OUT_LINES`): only Hakata is
-  inside. UTM 52N (EPSG:32652).
-- Notices: MHLW (PDL 1.0: source, processed, by whom; no completeness claim)
-  and BODIK (CC BY 4.0: each dataset's 作成者, resource name with date, URL).
-  **Every URL an explicit markdown link** (bare ones run on into Japanese
-  text: Kobe's and Osaka's notices were fixed for it 2026-09-28). The next
-  notice number is 54 (Sapporo holds 53, on its branch).
-
-## Kyoto (second)
-
-- **A REBUILT register**: `japan_register.kyoto_permit_stream(raw_dir,
-  as_of)` from the 2021 `.xls` and 62 monthly XLSX. **Pin `as_of`.** It is an
-  upper bound (closures unseen): the page says so. The stream must carry
-  `name_is_operator`'s answer (it drops the operator columns today); Kyoto's
-  申請者＿申請者名 / 申請者氏名 go into `OPERATOR_COLS`.
-- Fetch: no API - GET the resource page, POST with the session cookie; check
-  magic bytes, refuse HTML. `data.city.kyoto.lg.jp` only.
-- **Re-ask the owner about Kyoto's two funiculars**: the brief says drawn
-  (decided 2026-09-24), but Kobe's sightseeing funiculars were left out
-  2026-09-27. Recommend, then wait.
 
 ## Owner's calls made 2026-09-28 that bind these builds
 

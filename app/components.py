@@ -1194,6 +1194,73 @@ _NOTICES = [
      "types, placed each premises by its address, and counted them around stations. The lists may "
      "include premises that have closed. Osaka City and MLIT did not make and do not endorse this map.",
      False),
+    # Sapporo (notice 53): both datasets CC BY 4.0 on the city's own CKAN
+    # (read 2026-09-24; the registers' package re-read 2026-09-28). No wording is
+    # prescribed: credit 札幌市, both dataset titles and URLs, the licence link and
+    # that the data was processed (the brief's example form); no endorsement, no
+    # logos, never "operating". MLIT as in Kobe's and Osaka's. URLs are explicit
+    # markdown links: bare ones ran on into the Japanese (fixed 2026-09-28).
+    # Wording approved by the owner 2026-09-28.
+    ("Sapporo City and MLIT (Sapporo)",
+     "Sapporo's businesses: 札幌市『札幌市内の食品営業許可施設一覧』（[https://ckan.pf-sapporo.jp/dataset/sapporo_food_business_licences](https://ckan.pf-sapporo.jp/dataset/sapporo_food_business_licences)）"
+     "『札幌市内の環境衛生営業施設一覧』（[https://ckan.pf-sapporo.jp/dataset/sapporo_environmental_hygiene_services](https://ckan.pf-sapporo.jp/dataset/sapporo_environmental_hygiene_services)）"
+     "（札幌市ICT活用プラットフォーム、[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)）を加工して作成. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). This project selected the storefront permit "
+     "types, placed each premises by its address, and counted them around stations. The lists may "
+     "include premises that have closed. Sapporo City and MLIT did not make and do not endorse this map.",
+     False),
+    # Fukuoka (notice 54): the city's four lists on BODIK are CC BY 4.0 through
+    # the city's own terms (odcs.bodik.jp/401307/tos/ 第７条: each dataset's 作成者,
+    # the resource name with its date, the resource URL, that it was modified);
+    # MHLW's open data is PDL 1.0 (the source, that it was processed and by
+    # whom; its top page only; no completeness claim). MLIT as in Kobe's.
+    # Every URL an explicit markdown link. Wording approved by the owner
+    # 2026-09-28.
+    ("Fukuoka City, MHLW and MLIT (Fukuoka)",
+     "Fukuoka's businesses: 福岡市保健医療局 食品安全推進課「福岡市内飲食店営業等営業許可施設一覧（令和8年8月31日現在）」"
+     "（[https://data.bodik.jp/dataset/5925a9fb-3326-4499-9acd-7b18c03d5e32/resource/70d22acf-2353-4bc1-b45d-f12d45da5216](https://data.bodik.jp/dataset/5925a9fb-3326-4499-9acd-7b18c03d5e32/resource/70d22acf-2353-4bc1-b45d-f12d45da5216)）, "
+     "福岡市保健福祉局「福岡市内理容所検査確認済施設一覧（令和８年８月31日現在）」"
+     "（[https://data.bodik.jp/dataset/5ff384ca-dcc8-401f-9ce6-59d5b139e921/resource/58e0494e-bc04-4298-a031-2caa64c2e254](https://data.bodik.jp/dataset/5ff384ca-dcc8-401f-9ce6-59d5b139e921/resource/58e0494e-bc04-4298-a031-2caa64c2e254)）"
+     "「福岡市内美容所検査確認済施設一覧（令和８年８月31日現在）」"
+     "（[https://data.bodik.jp/dataset/bcfa330c-cfd4-4eaf-9568-52436dc0e20d/resource/f029fc9e-b2f5-46a5-a2b6-e62d8113dbc1](https://data.bodik.jp/dataset/bcfa330c-cfd4-4eaf-9568-52436dc0e20d/resource/f029fc9e-b2f5-46a5-a2b6-e62d8113dbc1)）, "
+     "福岡市保健福祉局 生活衛生課「福岡市内クリーニング所検査確認済施設一覧（令和８年３月31日現在）」"
+     "（[https://data.bodik.jp/dataset/81520f4a-437b-422d-b136-fdf21af38b11/resource/2c00764a-ddfb-4193-aa61-0712d35f325b](https://data.bodik.jp/dataset/81520f4a-437b-422d-b136-fdf21af38b11/resource/2c00764a-ddfb-4193-aa61-0712d35f325b)）"
+     "（[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)）を加工して作成; and "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, showed a premises in both lists "
+     "once, placed each by its address or the ministry's own coordinates, and counted them around "
+     "stations. The ministry's list holds only filings whose applicants agreed to publish them and is "
+     "not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have "
+     "closed. Fukuoka City, MHLW and MLIT did not make and do not endorse this map.",
+     False),
+    # Kyoto (notice 55): the portal's three datasets are CC BY 4.0 with 京都市 as
+    # 著作権者 (read 2026-09-24). MUST DISPLAY 京都市 as creator, the name
+    # 京都市オープンデータ (the portal's terms ask for it), the dataset names and
+    # URLs, the licence link and that the data was processed; never "operating"
+    # (closures are invisible in a rebuilt register). MLIT as in Kobe's. Every
+    # URL an explicit markdown link. Wording approved by the owner 2026-09-28.
+    ("Kyoto City and MLIT (Kyoto)",
+     "Kyoto's businesses: 出典：京都市オープンデータ「食品営業許可施設一覧について」"
+     "（[https://data.city.kyoto.lg.jp/dataset/00414/](https://data.city.kyoto.lg.jp/dataset/00414/)）"
+     "「食品営業許可施設一覧について（令和3年6月以降）」"
+     "（[https://data.city.kyoto.lg.jp/dataset/00541/](https://data.city.kyoto.lg.jp/dataset/00541/)）"
+     "「理容所・美容所・クリーニング所の施設一覧について」"
+     "（[https://data.city.kyoto.lg.jp/dataset/00530/](https://data.city.kyoto.lg.jp/dataset/00530/)）"
+     "（京都市、[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode.ja)）を加工して作成. "
+     "This project rebuilt the food register from the 2021 list and the monthly lists, keeping permits "
+     "in term on 31 July 2026, selected the storefront permit types, placed each premises by its "
+     "address, and counted them around stations. Closures are not published, so the lists may include "
+     "premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Kyoto City and MLIT did not make and do not "
+     "endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

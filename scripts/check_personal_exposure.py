@@ -261,6 +261,20 @@ REGISTRIES = {
     "osaka": dict(raw=None, trade=None, owner=None,
                   processed="businesses_clean.csv",
                   address=("address",), japan=True),
+    "sapporo": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv",
+                    address=("address",), japan=True),
+    # Fukuoka: the pass covers the city's four lists; MHLW's open data has no
+    # individual-operator column, so its rows cannot be tested (owner accepted,
+    # 2026-09-28: MHLW publishes a trade name only with the filer's consent).
+    "fukuoka": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv",
+                    address=("address",), japan=True),
+    # Kyoto: the rebuilt register carries the rule's answer, not the name
+    # (japan_register.kyoto_permit_stream); read through config.source_rows.
+    "kyoto": dict(raw=None, trade=None, owner=None,
+                  processed="businesses_clean.csv",
+                  address=("address",), japan=True),
     # Daegu: Seoul's register and pass through pipeline/countries/korea.py.
     # The health-food file's addresses are masked by the publisher; the Korean
     # residence test reads a masked 동/호 unit as a unit (korean_names.py).
@@ -839,8 +853,10 @@ def check(slug):
         from pipeline.countries import japan_register as jr
         cfg = importlib.import_module(f"pipeline.{slug}.config")
         own = set()
+        from pipeline.countries import japan_step2
         for key in cfg.SOURCES:
-            for r in jr.city_rows(cfg.source_csv(key)):
+            # a rebuilt register (Kyoto's) is read as step 2 reads it
+            for r in japan_step2.source_rows(cfg, key):
                 if jr.name_is_operator(r):
                     own.add(jr._name_key(next((r[c] for c in jr.NAME_COLS if (r.get(c) or "").strip()), "")))
         d = pd.read_csv(proc, dtype=str, low_memory=False).fillna("")

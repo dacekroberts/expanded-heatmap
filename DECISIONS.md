@@ -20,14 +20,20 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**81 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**87 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Kyoto built on the shared Japanese modules: Japan's fifth city (held for review time)](#2026-09-28---kyoto-built-on-the-shared-japanese-modules-japans-fifth-city-held-for-review-time)
+- [Kyoto steps 1-3 on a rebuilt register, pinned at 2026-07-31; its funiculars left out after all (owner)](#2026-09-28---kyoto-steps-1-3-on-a-rebuilt-register-pinned-at-2026-07-31-its-funiculars-left-out-after-all-owner)
 - [Macro-map dots coloured by data completeness; storefront count in the tooltip, not the dot size (owner)](#2026-09-28---macro-map-dots-coloured-by-data-completeness-storefront-count-in-the-tooltip-not-the-dot-size-owner)
 - [Band T's EDGE cities grouped at its top; Band T below Band N (owner)](#2026-09-28---band-ts-edge-cities-grouped-at-its-top-band-t-below-band-n-owner)
+- [Fukuoka built on the shared Japanese modules: Japan's fourth city (held for review time)](#2026-09-28---fukuoka-built-on-the-shared-japanese-modules-japans-fourth-city-held-for-review-time)
 - [Band C's last five get verdicts; Band B reopened for the passed, Band N created for no page, Band C closed (owner)](#2026-09-28---band-cs-last-five-get-verdicts-band-b-reopened-for-the-passed-band-n-created-for-no-page-band-c-closed-owner)
+- [Fukuoka steps 1-2: the first two-source Japanese city; 業態 read beside the type, MHLW's own point where the block join misses; yatai count (owner)](#2026-09-28---fukuoka-steps-1-2-the-first-two-source-japanese-city-業態-read-beside-the-type-mhlws-own-point-where-the-block-join-misses-yatai-count-owner)
 - [Worktree `japan` created for a fresh session to build Fukuoka, then Kyoto, branched from build-sapporo (owner)](#2026-09-28---worktree-japan-created-for-a-fresh-session-to-build-fukuoka-then-kyoto-branched-from-build-sapporo-owner)
+- [Sapporo built on the shared Japanese modules: Japan's third city (held for review time)](#2026-09-28---sapporo-built-on-the-shared-japanese-modules-japans-third-city-held-for-review-time)
+- [Japanese station names: numbers before 丁目 (and a grid's 条) as figures, enforced in step 1; Sapporo's cited override table (owner)](#2026-09-28---japanese-station-names-numbers-before-丁目-and-a-grids-条-as-figures-enforced-in-step-1-sapporos-cited-override-table-owner)
 - [Sapporo's brief corrected before the build; coin laundries count as Personal services (owner)](#2026-09-28---sapporos-brief-corrected-before-the-build-coin-laundries-count-as-personal-services-owner)
 - [One shared Japanese fetch: pipeline/countries/japan_fetch.py, before Sapporo](#2026-09-28---one-shared-japanese-fetch-pipelinecountriesjapan_fetchpy-before-sapporo)
 - [Three review-time calls: Japanese limited-express lines count, the e-Stat download approved, Hong Kong and Riga move to the shared thin() (owner)](#2026-09-28---three-review-time-calls-japanese-limited-express-lines-count-the-e-stat-download-approved-hong-kong-and-riga-move-to-the-shared-thin-owner)
@@ -118,6 +124,87 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-28 - Kyoto built on the shared Japanese modules: Japan's fifth city (held for review time)
+
+- **Texts approved by the owner 2026-09-28**, as drafted: the page prose (the
+  rebuild and its upper bound, the street-corner addresses, twin towns left
+  unplaced), the blurb, **notice 55 "Kyoto City and MLIT (Kyoto)"**
+  (京都市オープンデータ, the three dataset names and URLs, 京都市, CC BY 4.0, that
+  the register was rebuilt and processed) and the excluded-categories section.
+- **Macro map**: Kyoto's label measured at 40.2 px in the app's own document
+  (Fukuoka, Osaka and Kobe reproduced exactly), placed 40 px above its dot:
+  at the usual 22 px it met Kobe's label, to the right Osaka's. Of 35 Kyoto /
+  Kobe placements scored, the nearest clean one that moves no existing label.
+  `check_macro_labels.py`: 0 problems.
+- **A fix before landing**: 大津 and 膳所, beyond the city line on the Biwako
+  side, were filed under the JR Kyoto Line in `excluded_stations.csv`; the
+  branch now lists them.
+- **Docs**: data-source rows, inconsistency rows (in-ring 3,736 / 19,313 /
+  4,926, 86%), README, PLAN (with a standing item: the rebuilt register goes
+  stale a month a month - add each new monthly list and move `AS_OF`), master
+  list (54 built, A 1 - Tokyo), the brief corrected, the `japan-city` skill's
+  Kyoto sheet, and the handoff's Kyoto section deleted.
+- **Not run: the Economic Census join control** (PLAN, "Join control"),
+  approved 2026-09-28; one national table serves all five Japanese cities.
+
+### 2026-09-28 - Kyoto steps 1-3 on a rebuilt register, pinned at 2026-07-31; its funiculars left out after all (owner)
+
+- **Built on `worktree-japan`**: 32,355 storefronts (Retail 4,598 · Food
+  service 22,050 · Personal services 5,707), 117 stations on 18 lines;
+  27,980 in a ring. Nothing new downloaded but the OSM names (owner-approved;
+  the tram-stop query needed six retries against Overpass 504s).
+- **The owner's calls (2026-09-28):**
+  - **Kyoto's two funiculars are LEFT OUT** - the Eizan Cable (京福 鋼索線)
+    and the Kurama Cable (鞍馬山鋼索鉄道) - reversing the brief's call of
+    2026-09-24, for consistency with Kobe's Maya and Rokkō funiculars
+    (2026-09-27). The Sagano scenic line stays out.
+  - **`as_of` pinned at 2026-07-31**, the last day the newest monthly list
+    (July 2026) covers: renewals are visible up to there and no later. On the
+    download day (2026-09-24) the stream would drop 498 permits whose terms end
+    in August or September and whose renewals, if any, sit in lists not yet
+    published. 30,849 permits in term; 62 short-term (under a year) left out.
+- **Shared changes, each naming Kyoto** (Kobe, Osaka, Sapporo and Fukuoka:
+  zero drift, every output identical; Minato control unchanged, 98.0 / 0.2 /
+  1.8; every Japanese screen reproduces its brief):
+  - `kyoto_permit_stream` answers the name rule while the operator column
+    (申請者＿申請者名) is in hand and carries only the yes or no;
+    `name_is_operator` honours it. `OPERATOR_COLS` gains 申請者＿申請者名 and
+    the registers' 申請者氏名. 21 trade names in the raw lists are an
+    operator's own; 8 pins show their permit type instead.
+  - `japan_step2.source_rows`: a source may be rows rather than one file
+    (`config.source_rows`) - the rebuilt register, and each register's
+    complete list plus its months. The privacy check reads the same way.
+  - `japan_fetch.portal_file`: the portal's own download button (GET the
+    resource page, POST its form with the session cookie), magic bytes
+    checked, HTML refused; a file on disk under its id is kept. 79 pinned
+    resources in `config.PORTAL_RESOURCES`.
+  - Ideographic variation selectors stripped before the join (20 rows, 高辻 +
+    U+E0100): 4 more premises placed.
+- **Measured, not dropped (the brief's open item)**: 1,321 permits (4.3%)
+  share an address and permit type with a newer, differently named permit -
+  probably predecessors that closed. The page's upper-bound wording covers
+  them.
+- **The join: 93.2% block, 5.5% town-chōme, 1.3% unplaced** (435; mostly
+  twin-named towns, rule D). 126 of 3,585 菓子 / そうざい rows (3.5%) read as
+  factories: kept.
+- **Step 1**: gate 3 exact on the five lines wholly inside (Karasuma 15,
+  Randen 13 and 10, Eiden 8 and 10). 25 stations excluded (Uji 7, Mukō 3,
+  Nagaokakyō 3, Yawata 2, Ōyamazaki 2). JR's 東海道線 split at Kyoto into
+  the Biwako Line (east) and the JR Kyoto Line (west); the walk needed
+  `junction_m` 350 at Kyoto's long platforms (it ran 32.9 km at 150). JR's
+  Kosei Line keeps one station (山科), a one-station stub kept as cut.
+  西院's operators read it differently (Hankyu Saiin, the Randen Sai):
+  Saiin. 41 cited name overrides into Sapporo's style (42 stations); "Kyoto"
+  keeps its exonym.
+- **Line colours by the search**: pins 45.0-74.8, closest line pair 18.0
+  (Hankyu's two lines), 3:1 on both pages. **Labels**: the Biwako Line's label
+  at its other end clears every overlap at 343, 375 and 1280 px (six variants
+  tried); view right at all three, no corrections. `check_map_markup.py`,
+  `check_inline_arrays.py`, `check_render_current.py` pass.
+- **Privacy verdict (`check_personal_exposure.py kyoto`, Japan pass): 0
+  operator names shown in 32,355 rows.** 申請者＿役職名 and 申請者＿代表者 are
+  never selected.
+
 ### 2026-09-28 - Macro-map dots coloured by data completeness; storefront count in the tooltip, not the dot size (owner)
 
 - **The owner approved three completeness tiers as dot colours**: Full
@@ -161,6 +248,46 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   summary box and the Total row now run A, B, D, N, T. One
   `check_master_list_counts_selftest.py` case aimed at the Total row's order
   was re-aimed at D; 18 of 18 behave.
+
+### 2026-09-28 - Fukuoka built on the shared Japanese modules: Japan's fourth city (held for review time)
+
+- **Built on `worktree-japan`**: 30,062 storefronts (Retail 7,004 · Food
+  service 17,315 · Personal services 5,743), 71 stations on 9 lines; 24,722
+  in a ring (82%). Steps 1-2 in the entry below.
+- **Texts approved by the owner 2026-09-28**, as drafted: the page prose (the
+  owner's "one restaurant in five" wording of 2026-09-24 kept verbatim; it
+  still reads true, 4,203 of 21,895), the blurb, **notice 54 "Fukuoka City,
+  MHLW and MLIT (Fukuoka)"** (BODIK 第７条: each dataset's 作成者, the resource
+  name with its date and the resource URL; MHLW PDL 1.0: the source, processed
+  and by whom, the top page only, no completeness claim), and the
+  excluded-categories section.
+- **Line colours by the search** (sRGB step 8, 3,817 feasible): pins
+  45.0-70.5, closest line pair 18.1, 3:1 on both map pages. No blue clears
+  Retail's pin: the Hakozaki Line teal, Nishitetsu's two lines slate and mauve.
+- **Map checks** (`check_map_labels.js`, `check_map_view.js`): no problems at
+  343, 375 and 1280 px - 9 labels, the right zoom, no corrections, legend and
+  dark toggle working. `check_map_markup.py`, `check_inline_arrays.py` and
+  `check_render_current.py` pass. Drift baseline: 31 figures.
+- **Privacy verdict (`check_personal_exposure.py fukuoka`, Japan pass): 0
+  operator names shown in 30,062 rows; 4 trade names are the operator's own
+  name, shown by permit type on 5 pins.** MHLW's rows cannot be tested (no
+  individual-operator column; owner accepted 2026-09-28). Never selected:
+  phones, 郵便番号, 開設者法人住所, 開設者法人代表者名及び役職, MHLW's 法人名 /
+  法人番号 / 法人住所.
+- **Macro map**: Fukuoka's label measured at 56.8 px in the app's own document
+  (Sapporo, Osaka, Kobe and Busan reproduced exactly), placed below its dot.
+  **Busan's label moved lower left** (`("end", -10, 16)`): below its dot it
+  covered Fukuoka's marker. Of 432 placements of Busan, Daegu and Kobe scored,
+  this is the one clean one that moves a single existing label.
+  `check_macro_labels.py`: 0 problems.
+- **Docs**: data-source rows (the BODIK dataset pages recorded, so
+  `check_provenance.py` names Fukuoka OK), inconsistency rows, README, PLAN,
+  master list (53 built, A 2), the brief corrected (the 2026-08-31 edition,
+  the privacy section superseded by the name rule), the `japan-city` skill's
+  sheet, and the handoff's Fukuoka section deleted.
+- **Not run: the Economic Census join control** (PLAN, "Join control"),
+  approved 2026-09-28 but not yet fetched; it serves every Japanese city at
+  once.
 
 ### 2026-09-28 - Band C's last five get verdicts; Band B reopened for the passed, Band N created for no page, Band C closed (owner)
 
@@ -206,6 +333,75 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   `check_master_list_counts.py` became `LETTERS = "ABCDNT"`, and four
   `check_master_list_counts_selftest.py` cases aimed at Band C's text were
   re-aimed at B and T; 18 of 18 behave. Nothing a check decides was relaxed.
+### 2026-09-28 - Fukuoka steps 1-2: the first two-source Japanese city; 業態 read beside the type, MHLW's own point where the block join misses; yatai count (owner)
+
+- **Two food lists, one shared step 2.** The city's BODIK list (permits from
+  before 2021-06, still held) and MHLW's 食品衛生申請等システム open data (the
+  online filings since), plus the city's barber, beauty and laundry registers.
+  **30,062 storefronts: Food service 17,315 · Retail 7,004 · Personal
+  services 5,743.** Nothing new downloaded but the OSM station names (63 KB,
+  owner-approved): the rest was cached at the screen.
+- **The city replaced its food list on 2026-09-25** with the 2026-08-31
+  edition (`r8.8.csv`, 3,958 rows) under the same resource id; the brief's
+  3,977 rows were the July edition. The file on disk is byte-for-byte the new
+  edition's size (851,761). Barber and beauty are as of 2026-08-31, laundry
+  2026-03-31; MHLW's file states no date (latest permit 2026-08-31).
+  `japan_fetch` takes a per-source as-of (`SOURCE_AS_OF`).
+- **Shared changes, each naming Fukuoka** (Kobe, Osaka and Sapporo: zero
+  drift, every output identical; Minato control unchanged, 98.0 / 0.2 / 1.8):
+  - `OPERATOR_COLS` gains 営業者氏名 (the food list) and
+    開設者法人名（開設者氏名）(the registers). Without them the name rule compared
+    nothing in Fukuoka; with them it flags 4 rows (5 pins withheld after the
+    per-premises spread). Both are REQUIRED_COLUMNS, so a renamed column stops
+    the build instead of silently disabling the rule.
+  - **業態 read beside the type** (`japan_eigyo.FORM_RULES`). Only Fukuoka's two
+    lists keep the form of business in its own column, and only there are
+    vehicles (自動車), stalls (仮設, 短期許可), school and hospital kitchens
+    (給食), staff canteens and hotel restaurants marked. The rules sort the
+    filer's words into the categories the type rules already apply; a form
+    never brings a row in. 460 rows out by form; 505 rows decided Retail by
+    a konbini or supermarket form (Kobe's konbini rule, which also turns a
+    konbini's restaurant permit into a shop).
+  - MHLW's closed rows (許可(廃業) / 届出(廃業), 111) dropped.
+  - `OWN_POINT_FALLBACK`: where the block join misses an MHLW row, MHLW's
+    own point places it (tier `own`): 480 rows the join could not place and
+    163 it placed only at a town-chōme centroid. MHLW's point sits a median
+    36 m from the block point (97.1% within 250 m, 22,376 rows) and a median
+    111 m from the chōme centroid.
+  - `SUPERSEDES`: a premises in both food lists keeps MHLW's (newer) row;
+    297 city-list rows dropped, on the screen's key (ward, town, block, trade
+    name) plus the bucket.
+  - `ADDRESS_BY_CONSENT`: MHLW rows with no address (11,768) are counted apart
+    from "not a premises", for the page's disclosure.
+- **The owner's calls (2026-09-28):**
+  - **Fukuoka's yatai COUNT**, in Food service: 81 stalls filed as ろ店 /
+    定置屋台 at fixed street spots (Nakasu's 清流公園, Tenjin, Nagahama) on
+    permits running to 2032 under the city's yatai ordinance. The taxonomy's
+    露店 exclusion was for festival stalls. Tokyo's MHLW rows must be read
+    before the rule is trusted there.
+  - **MHLW's name-rule gap is accepted and recorded**: MHLW has no column for
+    an individual operator (法人名 is a company's), and its FAQ lets a sole
+    trader enter their own name as the trade name, so the rule cannot run on
+    MHLW's rows. MHLW publishes the trade name only with the filer's
+    per-field consent to open-data publication; in the city's own lists the
+    rule flags 4 of about 9,800 rows. A name-shape test was tried and
+    rejected: 751 company rows match it as well as 486 sole traders' rows.
+  - **MHLW's own point for chōme-tier rows too** (above).
+- **The disclosure still reads true**: 4,203 of 21,895 restaurants (19.2%)
+  publish no address - "about one restaurant in five" (owner-approved
+  2026-09-24).
+- **Step 1**: 71 stations on 9 lines, 22 excluded (粕屋町 6, 大野城市 4, 須恵町
+  3, 新宮町 2, 春日市 2, 糸島市 2, 古賀市, 宇美町, 篠栗町 1 each). Gate 3 exact
+  (Kūkō 13, Hakozaki 7, Nanakuma 18). Widest interchange 博多 213 m.
+  The Hakata-Minami line is left out (only Hakata inside). The JR Sasaguri Line
+  keeps one station (吉塚), a one-station stub kept as cut (Kobe's
+  precedent), drawn under JR Kyushu's signed name, the Fukuhoku Yutaka Line.
+  西鉄千早 / 千早, 28 m apart, are two stations and stay two.
+- **English names**: 20 cited overrides of OSM's name:en into Sapporo's style
+  (hyphenated title case, macrons). OSM had translated three names rather
+  than romanised them (Kashii Shrine, Kushida Shrine, "Fukuoka (Tenjin)" for
+  西鉄福岡) and glossed three in English. No 丁目 or 条 in any name.
+- Line colours are provisional until step 3's search.
 
 ### 2026-09-28 - Worktree `japan` created for a fresh session to build Fukuoka, then Kyoto, branched from build-sapporo (owner)
 
@@ -219,6 +415,87 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   checkout's. Sapporo itself is held for review time on `build-sapporo`
   (DECISIONS on that branch). The handoff is
   `docs/handoff_japan_2026-09-28.md`.
+### 2026-09-28 - Sapporo built on the shared Japanese modules: Japan's third city (held for review time)
+
+- **Sapporo built on `build-sapporo`, almost entirely as a config**: its
+  `fetch_sources.py` is `japan_fetch.main()`, its steps 1 and 2 are the
+  shared ones, its step 3 Osaka's with Sapporo's names. **28,674 storefronts
+  (Retail 2,940 · Food service 19,689 · Personal services 6,045), 95
+  stations on 7 lines.** Nothing new was downloaded: every file was cached at
+  the 2026-09-24 screen except the OSM station and streetcar-stop names.
+- **Rail**: the Sapporo Municipal Subway's three lines, the Sapporo Streetcar
+  (N02's four legal sections, 1条線, 都心線, 山鼻西線 and 山鼻線, drawn as one
+  loop under its public name) and JR Hokkaido's Hakodate Main, Chitose and
+  Gakuen Toshi (札沼線) lines, cut at the city line. **Gate 3 exact**:
+  Namboku 16, Tōzai 19, Tōhō 14 against the operator's numbering; the
+  streetcar collapses to its real 24 stops. 4 stations excluded (Tōbetsu 2,
+  Otaru 1, Ebetsu 1). Widest real interchange 270 m (大通), inside Kobe's
+  300 m limit. English names: 29 cited overrides (the entry above).
+- **Business**: the food list (25,163 rows) and four registers (barber 1,486,
+  beauty 3,838, cleaning 746, coin laundry 254). Out: 983 not a premises
+  (市内一円, storeless pick-ups), 987 manufacturing, 3 vending, 14 linen supply,
+  and **16 salons inside hospitals and care homes (厚生施設理容所 /
+  厚生施設美容所), which serve their residents, not the public** - settled
+  without the owner on the institutional-catering precedent, a new rule in
+  `japan_eigyo` pinned by an assert; recorded here for the owner to overrule.
+  769 repeat permits collapsed to one pin per premises and bucket. 157 of
+  2,151 菓子 / そうざい rows (7.3%) read as factories: kept.
+- **The join: 86.0% block, 13.9% block group, 0.1% unplaced (41)**, a little
+  better than the brief's 84.7 / 15.2 / 0.2. Most unplaced rows are premises
+  the city registers outside Sapporo (Chitose, Ebetsu, Otaru).
+- **Privacy verdict (`check_personal_exposure.py sapporo`, Japan pass): 0
+  operator names shown in 28,674 rows; 6 trade names are the operator's own
+  name, shown by permit type on 7 pins.** 開設者住所, 開設者ﾋﾞﾙ名, 開設者TEL and
+  施設TEL are never selected.
+- **Line colours by Osaka's search** (sRGB step 8, 3,817 feasible): pins
+  45.0-74.8, closest line pair 18.2, 3:1 on both map pages. The streetcar left
+  green for olive and the Gakuen Toshi Line blue for violet to fit.
+- **Map checks** (`check_map_labels.js`, `check_map_view.js`): no problems at
+  343, 375 and 1280 px - 7 labels, the right zoom, legend and dark toggle
+  working. Unlike Osaka, no phone-width overlaps. `check_map_markup.py`,
+  `check_inline_arrays.py` and `check_render_current.py` pass. Drift
+  baseline: 23 figures.
+- **Macro map**: Sapporo's label measured at 56.9 px in the app's own
+  document, with Osaka 40.6 and Kobe 34.2 reproduced. Sapporo widened the East
+  Asia frame, and Osaka's pill below its dot then met Busan's (4.0 x 13.6 px
+  at every width); **Osaka's label moved to the right of its dot**, and
+  `check_macro_labels.py` reports 0 problems in 10 regions at 3 widths.
+- **Owner-approved texts written**: the page prose, notice 53 "Sapporo City
+  and MLIT (Sapporo)" (every URL an explicit link), the `excluded_categories.md`
+  section and the blurb. Data-source rows, notice 53's entry, the four
+  inconsistency rows, README's city list and the master list (52 built; A 3)
+  written. `app/` changes (a new page, `cities.py`, notice 53 in
+  `components.py`) wait for review time: publish through `publish-city`, one
+  deploy-verify (`scope: city-added`), and a reboot.
+
+### 2026-09-28 - Japanese station names: numbers before 丁目 (and a grid's 条) as figures, enforced in step 1; Sapporo's cited override table (owner)
+
+- **Numerals as figures in every Japanese city (owner), enforced by a raising
+  check in `pipeline/countries/japan_step1.py`**: a number before 丁目, in
+  digits or kanji, must appear as that figure in the English name. Found at
+  Sapporo's step 1, where OSM spells 北18条 "Kita juhachi jo" and 西11丁目
+  "Nishi juitchome" beside its own "Kita-13-Jo-Higashi" and "Nango-13-Chome".
+- **条 takes figures only on a numbered street grid, declared per city as
+  `config.JO_IS_GRID` (owner, on the recommendation).** The first version
+  required figures before every 条 and stopped Osaka on 西九条 (Nishikujō)
+  and 九条 (Kujō), which are district names; Kyoto's 四条 / 五条 / 九条 and
+  Tokyo's 十条 are street and place names signed as words. Rejected: figures
+  before every 条, which would misname those stations. Sapporo declares its
+  grid (北18条, 西線9条, 山鼻19条).
+- **Sapporo's `OSM_NAME_EN_OVERRIDES`, a cited table (owner): 29 entries.**
+  18 are the numbered names the check caught; 11 bring OSM's spelled-out
+  lowercase names to the same hyphenated style ("Maruyama koen" ->
+  "Maruyama-Kōen", "Shin Sapporo" -> "Shin-Sapporo"). Each entry's comment is
+  the OSM spelling it replaces. Recommended as "the operators' signs", but
+  the operator's English pages returned 404 and its route maps are images,
+  so the table follows OSM's own majority style in Sapporo rather than cite
+  a source not read. The subway's 新さっぽろ and JR's 新札幌 (125 m apart,
+  separate in N02) now share "Shin-Sapporo" and take operator suffixes, as
+  Sapporo, Kotoni and Shiroishi already did.
+- **Checks**: the step 1 asserts pin 天神橋筋六丁目 -> 6, 二十四軒 -> none,
+  西九条 and 四条 -> none off a grid; `drift_check.py kobe osaka`: zero
+  drift, baselines unchanged; Sapporo step 1: 95 stations, gate 3 exact
+  (16 / 19 / 14). `japan-city` skill updated.
 
 ### 2026-09-28 - Sapporo's brief corrected before the build; coin laundries count as Personal services (owner)
 

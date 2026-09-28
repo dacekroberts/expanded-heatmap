@@ -403,6 +403,9 @@ def kyoto_permit_stream(raw_dir, as_of):
     for f in files:
         for r in workbook_tables(f):
             rec = {k: r.get(v, "") for k, v in KYOTO_COLS.items()}
+            # the owner's name rule, answered here while the operator column is
+            # in hand (2026-09-28): only the yes or no travels on
+            rec["own"] = same_person(rec["name"], (r.get(c) for c in OPERATOR_COLS))
             rec["d_start"], rec["d_end"], rec["d_granted"] = (wareki_date(rec["start"]), wareki_date(rec["end"]),
                                                               wareki_date(rec["granted"]))
             rank = (rec["d_end"] or datetime.date(1900, 1, 1), rec["d_granted"] or datetime.date(1900, 1, 1))
@@ -413,7 +416,7 @@ def kyoto_permit_stream(raw_dir, as_of):
     # restaurants on 2026-09-24), as the rebuild's own count did
     return [{"営業所所在地": rec["a1"] + rec["a2"], "業種": rec["type"], "屋号": rec["name"],
              "許可開始日": rec["d_start"].isoformat() if rec["d_start"] else "",
-             "許可終了日": rec["d_end"].isoformat()}
+             "許可終了日": rec["d_end"].isoformat(), "name_is_operator": rec["own"]}
             for _, rec in best.values() if rec["d_end"] and rec["d_end"] >= as_of]
 
 
@@ -459,12 +462,18 @@ def load_city_permits(path, pref, city):
     return permits_from_rows(city_rows(path), pref, city)
 
 
+VARIATION_SELECTORS = re.compile("[︀-️\U000e0100-\U000e01ef]")
+
+
 def permits_from_rows(rows, pref, city):
     """load_city_permits for rows already read - Kyoto's rebuilt register."""
     out = []
     for r in rows:
         addr = next((r[c] for c in ADDR_COLS if (r.get(c) or "").strip()), "")
         a = unicodedata.normalize("NFKC", addr).replace(" ", "").replace("　", "")
+        # Kyoto's misses (2026-09-28): an ideographic variation selector after a
+        # kanji (高辻 + U+E0100 in 20 rows) picks a glyph, never a different town
+        a = VARIATION_SELECTORS.sub("", a)
         a = re.sub("^" + pref, "", a)
         # Kobe's miss: the city's name can recur INSIDE an address
         # (灘区六甲山町…神戸市立六甲山牧場), so strip it only where no ward precedes it.
@@ -501,6 +510,12 @@ def permits_from_rows(rows, pref, city):
         out.append({"ward": ward, "town": norm_town(town), "block": first_number(tail), "rest": tail,
                     "dir": (d.group(1), d.group(2)) if d else None,
                     "addr": addr, "type": next((r[c] for c in TYPE_COLS if r.get(c)), ""),
+                    # Fukuoka's lists (the city's and MHLW's) carry 業態, the
+                    # form of business, and only there are vehicles, stalls and
+                    # school kitchens marked; japan_eigyo reads it beside the type
+                    "form": (r.get("業態") or "").strip(),
+                    # MHLW keeps closed premises, marked 許可(廃業) / 届出(廃業)
+                    "closed": bool((r.get("廃業年月日") or "").strip()) or "廃業" in (r.get("申請区分") or ""),
                     "name": next((r[c] for c in NAME_COLS if r.get(c)), ""), "pub": pub,
                     # not a premises: vehicles, and 市内一円 / 仙台市内一円 ("anywhere in
                     # the city") - Sendai's festival stalls (仮設, 臨時) are written so -
@@ -574,7 +589,15 @@ def join_city(permits, blocks, chome):
     return permits
 
 
-OPERATOR_COLS = ("営業者名", "開設者名", "申請者名", "代表者名")
+# Each list's own spelling of its operator column. Fukuoka's (2026-09-28): the
+# food list's 営業者氏名 (Tokyo's lists spell it so too) and the registers'
+# 開設者法人名（開設者氏名）- a company's name, or a sole trader's own. Without
+# them the rule compared nothing there. MHLW's open data has NO column for an
+# individual operator (法人名 is a company's), so the rule cannot run on its rows.
+# Kyoto's (2026-09-28): the food lists' 申請者＿申請者名 and the registers'
+# 申請者氏名; kyoto_permit_stream compares them itself and carries only the answer.
+OPERATOR_COLS = ("営業者名", "開設者名", "申請者名", "代表者名", "営業者氏名", "開設者法人名（開設者氏名）",
+                 "申請者＿申請者名", "申請者氏名")
 
 
 def _name_key(s):
@@ -585,10 +608,20 @@ def name_is_operator(row):
     """True when the row's trade name IS its operator's own name - an
     individual's name published as a shop sign. Compared in memory; the
     operator's name is not returned (owner 2026-09-27, see the docstring).
-    A company operator is never an individual: KYOTO_CORP's markers say so."""
-    name = _name_key(next((row[c] for c in NAME_COLS if (row.get(c) or "").strip()), ""))
-    for c in OPERATOR_COLS:
-        op = _name_key(row.get(c))
+    A company operator is never an individual: KYOTO_CORP's markers say so.
+    A rebuilt register (Kyoto's) carries the answer itself, never the name."""
+    if "name_is_operator" in row:
+        return bool(row["name_is_operator"])
+    name = next((row[c] for c in NAME_COLS if (row.get(c) or "").strip()), "")
+    return same_person(name, (row.get(c) for c in OPERATOR_COLS))
+
+
+def same_person(trade_name, operators):
+    """The name rule's comparison: the trade name equals an individual
+    operator's name (a company's never counts)."""
+    name = _name_key(trade_name)
+    for o in operators:
+        op = _name_key(o)
         if op and not KYOTO_CORP.search(op) and name == op:
             return True
     return False

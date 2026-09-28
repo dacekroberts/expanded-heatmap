@@ -29,9 +29,13 @@ import unicodedata
 FIELD_LABEL = "Permit type (営業の種類)"
 VALUE_COLUMN = "permit_type"
 # the 生活衛生 registers carry no food-permit type: `source` names the register
-# ("food", "barber", "beauty", "laundry"), and decides Personal services.
-EXTRA_COLUMNS = ("source",)
-PERSONAL_SOURCES = {"barber", "beauty", "laundry"}
+# ("food", "barber", "beauty", "laundry", "coinlaundry"), and decides Personal
+# services. Coin laundries count (owner 2026-09-28: near transit they draw
+# steady short-term customers); Sapporo is the first city to publish them.
+# `form` is the list's 業態 where it has one (Fukuoka's two lists; empty
+# elsewhere): see FORM_RULES.
+EXTRA_COLUMNS = ("source", "form")
+PERSONAL_SOURCES = {"barber", "beauty", "laundry", "coinlaundry"}
 
 # (rule name, bucket or None, pattern) - searched in the NORMALISED value.
 RULES = [
@@ -61,6 +65,36 @@ RULES = [
 ]
 _COMPILED = [(name, bucket, re.compile(pat)) for name, bucket, pat in RULES]
 
+# 業態, the form of business, read BESIDE the type (Fukuoka, 2026-09-28). The
+# other lists fold it into the type (Kobe's 飲食店営業（旅館・ホテル）); Fukuoka's
+# city list and MHLW's open data keep it in its own column, often free text
+# (607 distinct values in MHLW's Fukuoka file), and only there are vehicles,
+# stalls, school kitchens and staff canteens marked. These rules sort the
+# filer's own words into the categories RULES already applies to types. They
+# run only on a row its type put in a bucket - a form never brings a
+# manufacturing or vending row IN - and the first match wins.
+FORM_RULES = [
+    # Fukuoka's 屋台, filed as ろ店 / 定置屋台: stalls at fixed street spots
+    # (Nakasu's 清流公園, Tenjin, Nagahama) on permits running to 2032 under
+    # the city's 屋台基本条例 - not a festival stall. They COUNT (owner
+    # 2026-09-28; 81 in Fukuoka). Tokyo's MHLW rows: read what ろ店 means there
+    # before trusting this rule.
+    ("yatai: a fixed street stall (Fukuoka's 屋台)", "Food service", r"ろ店|屋台"),
+    ("temporary / mobile", None, r"仮設|臨時|短期|期間限定|季節的|イベント|催事|祭|マルシェ|出店|自動車|キッチンカー|"
+                                 r"移動|行商|列車|屋形船|海の家"),
+    ("institutional catering", None, r"給食|社員食堂|職員食堂|会社食堂|学生食堂|学校食堂|寮食堂|老人ホーム|福祉施設|"
+                                     r"栄養管理室|病院|保育園|幼稚園|小学校"),
+    ("inside accommodation", None, r"旅館|ホテル"),
+    ("entertainment venue", None, r"カラオケ|麻雀|遊技場|ネットカフェ|漫画喫茶"),
+    ("vending machine", None, r"自動販売機|自販機|置き菓子"),
+    ("mail order", None, r"通信販売|訪問販売|ネット販売|インターネット販売|ネットショップ|オンラインショップ"),
+    # Kobe's konbini rule, as a form: a konbini or supermarket holding a
+    # restaurant permit is a shop
+    ("konbini holding a restaurant permit", "Retail", r"コンビニ"),
+    ("department store / supermarket", "Retail", r"百貨店|スーパー"),
+]
+_FORM_COMPILED = [(name, bucket, re.compile(pat)) for name, bucket, pat in FORM_RULES]
+
 
 def normalise(value):
     """NFKC (full-width, circled numbers), no spaces, no leading number."""
@@ -68,13 +102,30 @@ def normalise(value):
     return re.sub(r"^\d+", "", s)
 
 
-def explain(value, source="food"):
+def explain(value, source="food", form=""):
     """(bucket or None, the rule that decided it, or 'no rule')."""
+    bucket, rule = _explain_type(value, source)
+    # a CSV round trip reads an empty form as NaN
+    f = normalise(form) if isinstance(form, str) else ""
+    if bucket is None or not f or source in PERSONAL_SOURCES:
+        return bucket, rule
+    for name, b, pat in _FORM_COMPILED:
+        if pat.search(f):
+            return b, f"{name} (業態)"
+    return bucket, rule
+
+
+def _explain_type(value, source):
     if source in PERSONAL_SOURCES:
         if "無店舗" in str(value or ""):
             return None, "storeless pick-up (not a premises)"
         if "移動" in str(value or ""):  # Kobe's 移動美容室: a salon in a vehicle
             return None, "mobile salon (not a premises)"
+        # Sapporo's 厚生施設理容所 / 厚生施設美容所: a barber or salon inside a
+        # hospital or care home, for its residents - not open to the public,
+        # as institutional catering is not (2026-09-28; 16 rows).
+        if "厚生施設" in str(value or ""):
+            return None, "welfare-facility salon (not open to the public)"
         # Osaka's laundry register: リネンサプライ (towel, oshibori and hospital
         # linen suppliers, many named 工場) is industrial, not a counter; owner
         # 2026-09-27. 一般リネン兼業 (a general laundry that also does linen) stays.
@@ -89,7 +140,7 @@ def explain(value, source="food"):
 
 
 def classify(row):
-    return explain(row.get(VALUE_COLUMN), row.get("source") or "food")[0]
+    return explain(row.get(VALUE_COLUMN), row.get("source") or "food", row.get("form") or "")[0]
 
 
 def legend_label(bucket):
@@ -116,3 +167,14 @@ assert classify({VALUE_COLUMN: "無店舗取次店", "source": "laundry"}) is No
 assert classify({VALUE_COLUMN: "移動美容室", "source": "beauty"}) is None
 assert classify({VALUE_COLUMN: "リネンサプライ", "source": "laundry"}) is None
 assert classify({VALUE_COLUMN: "一般リネン兼業", "source": "laundry"}) == "Personal services"
+assert classify({VALUE_COLUMN: "コインランドリー", "source": "coinlaundry"}) == "Personal services"
+assert classify({VALUE_COLUMN: "厚生施設美容所", "source": "beauty"}) is None
+assert classify({VALUE_COLUMN: "一般理容所", "source": "barber"}) == "Personal services"
+# 業態 (Fukuoka): a form excludes, or makes a restaurant a shop, but never brings a row in
+for _v, _f, _want in (("① 飲食店営業", "自動車200L", None), ("① 飲食店営業", "仮設営業（季節的営業）", None),
+                      ("① 飲食店営業", "学校給食", None), ("① 飲食店営業", "社員食堂", None),
+                      ("飲食店営業", "旅館", None), ("① 飲食店営業", "コンビニエンスストア", "Retail"),
+                      ("① 飲食店営業", "居酒屋", "Food service"), ("① 飲食店営業", float("nan"), "Food service"),
+                      ("⑪ 百貨店、総合スーパー", "ドラッグストア", "Retail"), ("食肉処理業", "スーパー", None),
+                      ("⑤ コップ式自動販売機（自動洗浄・屋内設置）", "カフェ", None)):
+    assert classify({VALUE_COLUMN: _v, "form": _f}) == _want, (_v, _f, classify({VALUE_COLUMN: _v, "form": _f}))

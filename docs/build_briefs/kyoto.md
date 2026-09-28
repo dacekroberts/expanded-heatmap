@@ -1,5 +1,17 @@
 # Kyoto — build brief
 
+**✅ BUILT 2026-09-28** (`worktree-japan`; DECISIONS 2026-09-28, "Kyoto steps
+1-3" and "Kyoto built"). Corrected at the build:
+- **The two funiculars are LEFT OUT** (owner 2026-09-28), reversing the call
+  below of 2026-09-24, for consistency with Kobe's.
+- **`as_of` is 2026-07-31**, the last day the newest monthly list covers (owner
+  2026-09-28), not the download date: 30,849 in term, 62 short-term out.
+- **The operator columns ARE read, in memory** (the owner's name rule of
+  2026-09-27 supersedes "never read" below): the stream answers the rule and
+  carries only the yes or no. 21 raw trade names are an operator's own; 8 pins.
+- Same-address successors measured: 1,321 (4.3%), kept. U+E0100 variation
+  selectors stripped (20 rows). The Economic Census control is still to run.
+
 **Step 0 measured 2026-09-24. Band A by the owner, with disclosures.** Run
 `python scripts/brief_check.py kyoto` before writing any code. Coordinates:
 the `address-join` skill, measured by `scripts/screen_japan_join.py kyoto`

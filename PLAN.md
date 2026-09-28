@@ -369,6 +369,31 @@ evidence section.
   (8 wards); then the additions to built cities** (Belo Horizonte +
   Contagem, Rio + Duque de Caxias, Vancouver (Regional); "Second-city
   screens" below).
+- [x] **Sapporo built 2026-09-28** (`build-sapporo`, held for review time):
+  28,674 storefronts, 95 stations, 7 lines; texts owner-approved (DECISIONS).
+  - [ ] At review time: `publish-city` (a new page, `cities.py` with Osaka's
+    label moved right, notice 53 "Sapporo City and MLIT"), deploy-verify `scope: city-added`, reboot.
+- [x] **Fukuoka built 2026-09-28** (`worktree-japan`, held for review time):
+  30,062 storefronts, 71 stations, 9 lines; texts owner-approved (DECISIONS).
+  - [ ] At review time: `publish-city` (a new page, `cities.py` with Busan's
+    label moved lower left, notice 54 "Fukuoka City, MHLW and MLIT"),
+    deploy-verify `scope: city-added`, reboot. `worktree-japan` also carries
+    Sapporo's branch, so the two land together.
+- [x] **Kyoto built 2026-09-28** (`worktree-japan`, held for review time):
+  32,355 storefronts, 117 stations, 18 lines, a register rebuilt as of
+  2026-07-31; texts owner-approved (DECISIONS).
+  - [ ] At review time: `publish-city` with Sapporo and Fukuoka (a new page,
+    `cities.py` with Kyoto's label far above its dot, notice 55 "Kyoto City
+    and MLIT"), deploy-verify `scope: city-added`, reboot.
+  - [ ] When `macro-tiers` merges: Fukuoka's and Kyoto's `coverage` /
+    `placement` / `data_age` keys (owner-approved 2026-09-28, already in
+    `cities.py` here) are checked by `scripts/check_macro_facts.py`; run
+    `--write` for their storefront counts in `app/macro_facts.json` (Fukuoka
+    30,062, Kyoto 32,355, Sapporo 28,674). Sapporo's keys are here too
+    (owner-approved 2026-09-28), so staging need not add them at the merge.
+  - [ ] When the city publishes its August 2026 list: add its resource to
+    `config.PORTAL_RESOURCES`, move `AS_OF` to 2026-08-31, re-run (a rebuilt
+    register goes stale by one month a month).
 - [ ] **Join control** - like-for-like against the Economic Census per-ward
   飲食店 count (the owner's chosen control) - at build. **Not yet run for
   Kobe or Osaka**. **The e-Stat download is approved (owner, 2026-09-28)**:

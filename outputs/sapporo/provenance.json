@@ -1,0 +1,22 @@
+{
+  "osm_station_names": {
+    "bytes": 50429,
+    "elements": 92,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-09-28T08:51:35Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](42.75,140.95,43.22,141.55);way[\"railway\"=\"station\"](42.75,140.95,43.22,141.55););out tags center;",
+    "retrieved": "2026-09-28T08:53:40+00:00",
+    "sha256": "9f4de8cd8bba73cc2694610f2d26e08c0ea424f89bc252e4cd54182f204283be"
+  },
+  "osm_tram_stop_names": {
+    "bytes": 17851,
+    "elements": 48,
+    "file": "osm_tram_stop_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-09-28T08:54:41Z",
+    "query": "[out:json][timeout:120];node[\"railway\"=\"tram_stop\"](42.75,140.95,43.22,141.55);out body;",
+    "retrieved": "2026-09-28T08:55:56+00:00",
+    "sha256": "7115823dd94ca525efbcea7561678b0e88c5ea0df202a6dd786cf8b99e8d553b"
+  }
+}
