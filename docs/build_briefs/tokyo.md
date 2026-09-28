@@ -308,7 +308,7 @@ missing ward follows the table.
 | Nakano | 13114 | **OFF** | stale, to 2023-06; re-check pending | — | — |
 | Suginami | 13115 | **OPEN** | none found; re-probe pending | — | — |
 | Toshima | 13116 | **OFF** | in-person viewing only; parked | — | ✓ |
-| Kita | 13117 | **OPEN** | PDF, page says "not open data"; confirmation read running | — | — |
+| **Kita** | 13117 | **OFF** | **PDF list "not open data", site terms bar reuse; the CC BY CSV holds 52 permits, 2022–2024 (read 2026-09-28)** | 🚫 not permitted (PDF) | — |
 | **Arakawa** | 13118 | **OFF** | **site terms bar all reuse; no open-data route (read 2026-09-28)** | 🚫 not permitted | ✓ |
 | Itabashi | 13119 | **OFF** | partial, since 2025-04; re-check pending | — | — |
 | Nerima | 13120 | **OFF** | on request only (password after application); parked | — | — |
@@ -316,7 +316,7 @@ missing ward follows the table.
 | Katsushika | 13122 | **OPEN** | none found; re-probe pending | — | ✓ |
 | Edogawa | 13123 | **OFF** | on request only (password after application); parked | — | — |
 
-**Tally, 2026-09-28**: ON 8 · OFF 10 · OPEN 5.
+**Tally, 2026-09-28**: ON 8 · OFF 11 · OPEN 4.
 
 ### Arakawa 荒川区, 13118 — OFF (read 2026-09-28)
 
@@ -333,6 +333,21 @@ missing ward follows the table.
 | join / share | not measured: the list is not used |
 | personal services | 美容所, 理容所 and クリーニング所 台帳 on the Tokyo catalogue (`t131181`), CC BY 4.0: already in the 11-ward layer |
 | route in | permission from 広報・シティプロモーション課 (the channel the copyright clause names), or publication on the ward's catalogue. Outreach is the owner's act and the last resort: **parked** |
+
+### Kita 北区, 13117 — OFF (read 2026-09-28)
+
+| Field | |
+|---|---|
+| verdict | **OFF**: the full list is PDF and "not open data", and the site terms bar reuse. The open CSV is partial and stale |
+| file(s), host, size | page `https://www.city.kita.lg.jp/socialcare-health/hygiene/1009013/1017183.html` (the old `city.kita.tokyo.jp/…/sisetuitiran.html` returns 301 to it; updated 2026-09-11). Full list under `…/_res/projects/default_project/_page_/001/017/183/`: `r8-3-31-shinhou2.pdf` (新法, 2,464,505 B) and `r8-3-31-kyuhou2.pdf` (旧法, 1,589,766 B), probably the 335 + 155 pages. Monthly 新規, 更新 and 廃業 PDFs alongside |
+| format | PDF only for the full list; 12 guessed `.csv` / `.xlsx` / `.xls` names return 404 |
+| as of | 2026-03-31; the monthly lists run to 2026-08 |
+| operator columns | not seen (the PDFs were not opened). The page: an individual operator's address and phone are not published, and operators who asked are omitted |
+| licence | 🚫 **NOT PERMITTED, or ambiguous in a way that matters**. The page: 「このページは、東京都北区情報公開条例に基づいて公開するもので、オープンデータとは異なります。」 The site terms (`/about/1016811.html`) forbid 転載、複製、改変 without permission, beyond 私的使用 and 引用. 北区オープンデータ利用規約 (2020-07-03) says itself that it does not cover the whole site: 「本規約は、北区公式ホームページ掲載の全ての情報に該当するものではありません。」 That is the opposite of Ōta's terms |
+| the open CSV | `15.食品等営業許可・届出一覧.csv` inside the 自治体標準オープンデータセット zip (`…/001/014/461/hyo-jun.zip`, 293,787 B, 2026-08-26), CC BY 4.0, national 34-column format with 緯度/経度. **Only 515 rows**: 届出 459, 許可 52, 届出(廃業) 4; 46 are 飲食店営業; permits dated 2022-04-19 to 2024-10-29. It fails the full-and-current rule: **recorded, not used** |
+| join / share | not measured: the list is not used |
+| personal services | none found on the Tokyo catalogue (`t131172`: 7 packages, none 生活衛生) |
+| route in | permission from 政策経営部広報課 or 保健所生活衛生課; the page itself points to a 情報公開請求 for anything more. Outreach is the owner's act and the last resort: **parked** |
 
 ## ✅ Licences — READ 2026-09-24
 

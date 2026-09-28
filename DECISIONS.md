@@ -121,6 +121,22 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ### 2026-09-28 - Tokyo's missing wards: Arakawa OFF; a ward-by-ward list in the brief (owner)
 
+- **Confirmed Kita OFF for food, under the handoff's standing rule (if "not
+  open data" holds, it is out).** It holds. The food page says:
+  「…東京都北区情報公開条例に基づいて公開するもので、オープンデータとは異なります。」
+  The site terms (`/about/1016811.html`) forbid 転載、複製、改変 without
+  permission. The ward's open-data terms (2020-07-03) exclude the rest of the
+  site in so many words:
+  「本規約は、北区公式ホームページ掲載の全ての情報に該当するものではありません。」
+  The full list is two PDFs as at 2026-03-31 (新法 2,464,505 B and 旧法
+  1,589,766 B). **New find**: a CC BY 4.0 food CSV in the ward's
+  自治体標準オープンデータセット zip (`hyo-jun.zip`, 2026-08-26). It holds only
+  515 rows: 459 届出, 52 許可 and 4 closures. 46 are 飲食店営業, and the permits
+  are dated 2022-04 to 2024-10. It fails the full-and-current rule, so it is
+  recorded, not used. The brief's Kita URL moved to `city.kita.lg.jp`, and
+  the old one returns 301. Kita's card is in the brief's Ward cards section,
+  and its row is in `docs/data_sources/japan.md`.
+
 - **Found Arakawa's food list NOT PERMITTED, so Arakawa is OFF for food: its
   stations are drawn hollow.** The list is full and current (全許可施設リスト,
   as of 2026-03-31, `r08kyokarisuto.pdf`, 55 pages, 1,563,829 B), but PDF
