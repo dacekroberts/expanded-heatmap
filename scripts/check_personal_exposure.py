@@ -264,6 +264,12 @@ REGISTRIES = {
     "sapporo": dict(raw=None, trade=None, owner=None,
                     processed="businesses_clean.csv",
                     address=("address",), japan=True),
+    # Fukuoka: the pass covers the city's four lists; MHLW's open data has no
+    # individual-operator column, so its rows cannot be tested (owner accepted,
+    # 2026-09-28: MHLW publishes a trade name only with the filer's consent).
+    "fukuoka": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv",
+                    address=("address",), japan=True),
     # Daegu: Seoul's register and pass through pipeline/countries/korea.py.
     # The health-food file's addresses are masked by the publisher; the Korean
     # residence test reads a masked 동/호 unit as a unit (korean_names.py).

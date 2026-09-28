@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**80 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**81 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Fukuoka steps 1-2: the first two-source Japanese city; 業態 read beside the type, MHLW's own point where the block join misses; yatai count (owner)](#2026-09-28---fukuoka-steps-1-2-the-first-two-source-japanese-city-業態-read-beside-the-type-mhlws-own-point-where-the-block-join-misses-yatai-count-owner)
 - [Worktree `japan` created for a fresh session to build Fukuoka, then Kyoto, branched from build-sapporo (owner)](#2026-09-28---worktree-japan-created-for-a-fresh-session-to-build-fukuoka-then-kyoto-branched-from-build-sapporo-owner)
 - [Sapporo built on the shared Japanese modules: Japan's third city (held for review time)](#2026-09-28---sapporo-built-on-the-shared-japanese-modules-japans-third-city-held-for-review-time)
 - [Japanese station names: numbers before 丁目 (and a grid's 条) as figures, enforced in step 1; Sapporo's cited override table (owner)](#2026-09-28---japanese-station-names-numbers-before-丁目-and-a-grids-条-as-figures-enforced-in-step-1-sapporos-cited-override-table-owner)
@@ -116,6 +117,76 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Fukuoka steps 1-2: the first two-source Japanese city; 業態 read beside the type, MHLW's own point where the block join misses; yatai count (owner)
+
+- **Two food lists, one shared step 2.** The city's BODIK list (permits from
+  before 2021-06, still held) and MHLW's 食品衛生申請等システム open data (the
+  online filings since), plus the city's barber, beauty and laundry registers.
+  **30,062 storefronts: Food service 17,315 · Retail 7,004 · Personal
+  services 5,743.** Nothing new downloaded but the OSM station names (63 KB,
+  owner-approved): the rest was cached at the screen.
+- **The city replaced its food list on 2026-09-25** with the 2026-08-31
+  edition (`r8.8.csv`, 3,958 rows) under the same resource id; the brief's
+  3,977 rows were the July edition. The file on disk is byte-for-byte the new
+  edition's size (851,761). Barber and beauty are as of 2026-08-31, laundry
+  2026-03-31; MHLW's file states no date (latest permit 2026-08-31).
+  `japan_fetch` takes a per-source as-of (`SOURCE_AS_OF`).
+- **Shared changes, each naming Fukuoka** (Kobe, Osaka and Sapporo: zero
+  drift, every output identical; Minato control unchanged, 98.0 / 0.2 / 1.8):
+  - `OPERATOR_COLS` gains 営業者氏名 (the food list) and
+    開設者法人名（開設者氏名）(the registers). Without them the name rule compared
+    nothing in Fukuoka; with them it flags 4 rows (5 pins withheld after the
+    per-premises spread). Both are REQUIRED_COLUMNS, so a renamed column stops
+    the build instead of silently disabling the rule.
+  - **業態 read beside the type** (`japan_eigyo.FORM_RULES`). Only Fukuoka's two
+    lists keep the form of business in its own column, and only there are
+    vehicles (自動車), stalls (仮設, 短期許可), school and hospital kitchens
+    (給食), staff canteens and hotel restaurants marked. The rules sort the
+    filer's words into the categories the type rules already apply; a form
+    never brings a row in. 460 rows out by form; 505 rows decided Retail by
+    a konbini or supermarket form (Kobe's konbini rule, which also turns a
+    konbini's restaurant permit into a shop).
+  - MHLW's closed rows (許可(廃業) / 届出(廃業), 111) dropped.
+  - `OWN_POINT_FALLBACK`: where the block join misses an MHLW row, MHLW's
+    own point places it (tier `own`): 480 rows the join could not place and
+    163 it placed only at a town-chōme centroid. MHLW's point sits a median
+    36 m from the block point (97.1% within 250 m, 22,376 rows) and a median
+    111 m from the chōme centroid.
+  - `SUPERSEDES`: a premises in both food lists keeps MHLW's (newer) row;
+    297 city-list rows dropped, on the screen's key (ward, town, block, trade
+    name) plus the bucket.
+  - `ADDRESS_BY_CONSENT`: MHLW rows with no address (11,768) are counted apart
+    from "not a premises", for the page's disclosure.
+- **The owner's calls (2026-09-28):**
+  - **Fukuoka's yatai COUNT**, in Food service: 81 stalls filed as ろ店 /
+    定置屋台 at fixed street spots (Nakasu's 清流公園, Tenjin, Nagahama) on
+    permits running to 2032 under the city's yatai ordinance. The taxonomy's
+    露店 exclusion was for festival stalls. Tokyo's MHLW rows must be read
+    before the rule is trusted there.
+  - **MHLW's name-rule gap is accepted and recorded**: MHLW has no column for
+    an individual operator (法人名 is a company's), and its FAQ lets a sole
+    trader enter their own name as the trade name, so the rule cannot run on
+    MHLW's rows. MHLW publishes the trade name only with the filer's
+    per-field consent to open-data publication; in the city's own lists the
+    rule flags 4 of about 9,800 rows. A name-shape test was tried and
+    rejected: 751 company rows match it as well as 486 sole traders' rows.
+  - **MHLW's own point for chōme-tier rows too** (above).
+- **The disclosure still reads true**: 4,203 of 21,895 restaurants (19.2%)
+  publish no address - "about one restaurant in five" (owner-approved
+  2026-09-24).
+- **Step 1**: 71 stations on 9 lines, 22 excluded (粕屋町 6, 大野城市 4, 須恵町
+  3, 新宮町 2, 春日市 2, 糸島市 2, 古賀市, 宇美町, 篠栗町 1 each). Gate 3 exact
+  (Kūkō 13, Hakozaki 7, Nanakuma 18). Widest interchange 博多 213 m.
+  The Hakata-Minami line is left out (only Hakata inside). The JR Sasaguri Line
+  keeps one station (吉塚), a one-station stub kept as cut (Kobe's
+  precedent), drawn under JR Kyushu's signed name, the Fukuhoku Yutaka Line.
+  西鉄千早 / 千早, 28 m apart, are two stations and stay two.
+- **English names**: 20 cited overrides of OSM's name:en into Sapporo's style
+  (hyphenated title case, macrons). OSM had translated three names rather
+  than romanised them (Kashii Shrine, Kushida Shrine, "Fukuoka (Tenjin)" for
+  西鉄福岡) and glossed three in English. No 丁目 or 条 in any name.
+- Line colours are provisional until step 3's search.
 
 ### 2026-09-28 - Worktree `japan` created for a fresh session to build Fukuoka, then Kyoto, branched from build-sapporo (owner)
 

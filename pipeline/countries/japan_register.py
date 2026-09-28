@@ -501,6 +501,12 @@ def permits_from_rows(rows, pref, city):
         out.append({"ward": ward, "town": norm_town(town), "block": first_number(tail), "rest": tail,
                     "dir": (d.group(1), d.group(2)) if d else None,
                     "addr": addr, "type": next((r[c] for c in TYPE_COLS if r.get(c)), ""),
+                    # Fukuoka's lists (the city's and MHLW's) carry 業態, the
+                    # form of business, and only there are vehicles, stalls and
+                    # school kitchens marked; japan_eigyo reads it beside the type
+                    "form": (r.get("業態") or "").strip(),
+                    # MHLW keeps closed premises, marked 許可(廃業) / 届出(廃業)
+                    "closed": bool((r.get("廃業年月日") or "").strip()) or "廃業" in (r.get("申請区分") or ""),
                     "name": next((r[c] for c in NAME_COLS if r.get(c)), ""), "pub": pub,
                     # not a premises: vehicles, and 市内一円 / 仙台市内一円 ("anywhere in
                     # the city") - Sendai's festival stalls (仮設, 臨時) are written so -
@@ -574,7 +580,12 @@ def join_city(permits, blocks, chome):
     return permits
 
 
-OPERATOR_COLS = ("営業者名", "開設者名", "申請者名", "代表者名")
+# Each list's own spelling of its operator column. Fukuoka's (2026-09-28): the
+# food list's 営業者氏名 (Tokyo's lists spell it so too) and the registers'
+# 開設者法人名（開設者氏名）- a company's name, or a sole trader's own. Without
+# them the rule compared nothing there. MHLW's open data has NO column for an
+# individual operator (法人名 is a company's), so the rule cannot run on its rows.
+OPERATOR_COLS = ("営業者名", "開設者名", "申請者名", "代表者名", "営業者氏名", "開設者法人名（開設者氏名）")
 
 
 def _name_key(s):

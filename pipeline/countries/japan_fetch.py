@@ -10,7 +10,8 @@ declares in its config:
                   entry per register; SOURCES ({key: file}) and source_csv()
                   as japan_step2 reads them; REQUIRED_COLUMNS per key;
   * FOOD_AS_OF    the food list's as-of date, and REGISTERS_AS_OF for the
-                  others where the city states one (Kobe's do not);
+                  others where the city states one (Kobe's do not); or
+                  SOURCE_AS_OF {key: date} where each list has its own;
   * ISJ_DIR, STATION_OSM_JSON, OSM_BBOX, OUTPUTS, PROVENANCE_JSON;
   * TRAM_OSM_JSON only if N02 draws a tram there: OSM tags its stops
     railway=tram_stop, which the station query does not take (Osaka's Hankai
@@ -83,6 +84,16 @@ def when(path):
     return datetime.fromtimestamp(path.stat().st_mtime, timezone.utc).isoformat(timespec="seconds")
 
 
+def as_of(config, key):
+    """A source's as-of date: config.SOURCE_AS_OF where a city's lists each
+    state their own (Fukuoka's four carry three dates), else FOOD_AS_OF for the
+    food list and REGISTERS_AS_OF for the rest."""
+    per = getattr(config, "SOURCE_AS_OF", {})
+    if key in per:
+        return per[key]
+    return config.FOOD_AS_OF if key == "food" else getattr(config, "REGISTERS_AS_OF", None)
+
+
 def fetch_city(config, force):
     for key, (name, url, page) in config.SOURCE_FILES.items():
         dest = config.source_csv(key)
@@ -94,7 +105,7 @@ def fetch_city(config, force):
         print(f"  {dest.name:22s} {dest.stat().st_size:>10,} bytes {len(rows):>7,} rows  ({how})")
         record(config, f"city_{key}", file=dest.name, url=url, dataset_page=page,
                bytes=dest.stat().st_size, sha256=sha256(dest), rows=len(rows),
-               as_of=config.FOOD_AS_OF if key == "food" else getattr(config, "REGISTERS_AS_OF", None),
+               as_of=as_of(config, key),
                retrieved=when(dest), how=how)
 
 
