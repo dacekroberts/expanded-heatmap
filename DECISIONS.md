@@ -197,6 +197,34 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   scripts, the Baltimore listings, the line-colour search).
 ### 2026-09-28 - Tokyo's missing wards: Arakawa OFF; a ward-by-ward list in the brief (owner)
 
+- **Found that Katsushika publishes no food-premises list at all, so it is
+  OFF for food** (re-probed the same way as Bunkyō). The probe covered:
+  - the whole food-hygiene block on the ward's own host (90 pages and 72
+    files: leaflets and forms);
+  - the ward's statement that its open data is on the Tokyo catalogue only;
+  - the Tokyo catalogue (`t131229`: 32 packages, none food; the gaps in the
+    ID series return 404) and BODIK (none);
+  - the Web Archive, which never captured a food list on the host.
+
+  No page offers a list on request. The same 生活衛生課 publishes seven monthly
+  環境衛生 PDFs and has no food counterpart. **Rejected: MHLW's slice**
+  (`13122_food_business_all.csv`), with 161 live 飲食店営業 permits dated
+  2021-10 to 2026-08, **3.5%** of the yearbook's 4,599.
+- **Re-checked the stale and partial wards for a newer full list: none has
+  one.** Nakano is still stale to 2023-06-27. Shinagawa is still partial
+  (since 2024-04) and Itabashi still new-only (since 2025-04). Shinjuku has no
+  post-2023 CSV. Sumida and Adachi still publish new-permit PDFs only, so
+  their licences stay unread. Every ward's Tokyo catalogue organisation was
+  listed in full, and its own pages and indexes read. **Two traps for the
+  build, both dates that do not mean new data**:
+  - wagmap now labels Nakano's file データ作成基準日 2026/6/30, while the file
+    is unchanged (Last-Modified 2023-10-04, permits to 2023-06-27);
+  - Shinjuku's server re-stamped `000399975.csv` Last-Modified 2026-08-31
+    over the same 2023 content.
+
+  Read a list's own permit dates, never a label or a header. Ward cards now
+  stand at ON 8, OFF 14, OPEN 1 (Suginami).
+
 - **Found that Bunkyō publishes no food-premises list at all, so it is OFF
   for food** (re-probed with `reprobe-city`, the first of the three
   none-found wards). The probe asked the ward's own host and read every page

@@ -295,28 +295,28 @@ missing ward follows the table.
 | Chiyoda | 13101 | **OFF** | on request only; request parked (`gated_access.md` 22) | — | ✓ |
 | Chūō | 13102 | **ON** (12%) | 2021-06 to 2022-12 snapshot, share disclosed (owner, 2026-09-24) | Tokyo catalogue, CC BY 4.0 | — |
 | Minato | 13103 | **ON** (31%) | consent-filtered, share disclosed | Tokyo catalogue, CC BY 4.0 | ✓ |
-| Shinjuku | 13104 | **ON** (84%) | 2023-01-01 CSV, vintage disclosed; the 2026 PDF is not permitted | Tokyo catalogue, CC BY 4.0 | — |
+| Shinjuku | 13104 | **ON** (84%) | 2023-01-01 CSV, vintage disclosed; the 2026 PDF is not permitted. Re-checked 2026-09-28: no newer CSV (the server re-stamped the 2023 file 2026-08-31; the content is unchanged) | Tokyo catalogue, CC BY 4.0 | — |
 | **Bunkyō** | 13105 | **OFF** | **no list exists in any format; MHLW's slice is 2.4% (re-probed 2026-09-28)** | — | ✓ |
 | Taitō | 13106 | **ON** (81%) | opt-outs left out | ward's own, CC BY 4.0 | ✓ |
-| Sumida | 13107 | **OFF** | PDF of new permits only; licence not read unless a full list turns up | not read | — |
+| Sumida | 13107 | **OFF** | PDF of new permits only (FY R5 to R8.8); re-checked 2026-09-28: no full list anywhere, so the licence is not read | not read | — |
 | Kōtō | 13108 | **ON** (9%) | consent-only new permits, share disclosed | Tokyo catalogue, CC BY 4.0 | — |
-| Shinagawa | 13109 | **OFF** | partial, since 2024-04; re-check for a full list pending | — | ✓ |
+| Shinagawa | 13109 | **OFF** | partial, since 2024-04 (the page still says so); re-checked 2026-09-28: no full list anywhere | — | ✓ |
 | Meguro | 13110 | **ON** (52%) | first permits only, the accepted exception | BODIK, CC BY 4.0 | ✓ (BODIK) |
 | **Ōta** | 13111 | **OFF** | **full list is PDF only and not open data; the site policy bars reuse (owner, 2026-09-28)** | 🚫 not permitted | ✓ |
 | Setagaya | 13112 | **ON** (63%) | opt-outs left out | ward's own, CC BY 4.0 | — |
 | Shibuya | 13113 | **ON** (101%) | the ward's own register | ward's own, CC BY 4.0 | ✓ |
-| Nakano | 13114 | **OFF** | stale, to 2023-06; re-check pending | — | — |
+| Nakano | 13114 | **OFF** | stale, to 2023-06-27; re-checked 2026-09-28: unchanged. ⚠️ wagmap now labels it データ作成基準日 2026/6/30, but the file is still the 2023 one (Last-Modified 2023-10-04) | — | — |
 | Suginami | 13115 | **OPEN** | none found; re-probe pending | — | — |
 | Toshima | 13116 | **OFF** | in-person viewing only; parked | — | ✓ |
 | **Kita** | 13117 | **OFF** | **PDF list "not open data", site terms bar reuse; the CC BY CSV holds 52 permits, 2022–2024 (read 2026-09-28)** | 🚫 not permitted (PDF) | — |
 | **Arakawa** | 13118 | **OFF** | **site terms bar all reuse; no open-data route (read 2026-09-28)** | 🚫 not permitted | ✓ |
-| Itabashi | 13119 | **OFF** | partial, since 2025-04; re-check pending | — | — |
+| Itabashi | 13119 | **OFF** | partial, new permits since 2025-04; re-checked 2026-09-28: no full list anywhere | — | — |
 | Nerima | 13120 | **OFF** | on request only (password after application); parked | — | — |
-| Adachi | 13121 | **OFF** | PDF of new permits only; licence not read unless a full list turns up | not read | — |
-| Katsushika | 13122 | **OPEN** | none found; re-probe pending | — | ✓ |
+| Adachi | 13121 | **OFF** | PDF of new permits only (R7.4 to R8.8); re-checked 2026-09-28: no full list anywhere (catalogue: 2,435 entries), so the licence is not read | not read | — |
+| **Katsushika** | 13122 | **OFF** | **no list exists in any format; MHLW's slice is 3.5% (re-probed 2026-09-28)** | — | ✓ |
 | Edogawa | 13123 | **OFF** | on request only (password after application); parked | — | — |
 
-**Tally, 2026-09-28**: ON 8 · OFF 13 · OPEN 2.
+**Tally, 2026-09-28**: ON 8 · OFF 14 · OPEN 1.
 
 ### Arakawa 荒川区, 13118 — OFF (read 2026-09-28)
 
@@ -344,6 +344,17 @@ missing ward follows the table.
 | second shapes | **MHLW 食品衛生申請等システム** (`13105_food_business_all.csv`, PDL 1.0, to 2026-08): 1,100 rows, but only 97 live permits, 88 of them 飲食店営業, so **2.4% of the yearbook's 3,716**. The rest are notifications (office snack freezers, vending machines, canteens). **Not used**. The 食品衛生優良施設 award lists (9 and 8 premises) are negligible |
 | personal services | 美容所 372, 理容所 109, クリーニング所 208 and 旅館 55 on the Tokyo catalogue (`t131059`, CC BY): already in the 11-ward layer. The ledgers carry 営業者氏名 and 法人代表者氏名, never read |
 | route in | a request to 文京保健所生活衛生課食品衛生担当 (03-5803-1228). Outreach is the owner's act and the last resort: **parked**, and not drafted |
+
+### Katsushika 葛飾区, 13122 — OFF (re-probed 2026-09-28)
+
+| Field | |
+|---|---|
+| verdict | **OFF**: no food-premises list exists, in any format, current or historical, and no page offers one on request. The ward is silent |
+| where it was looked for | **The ward's own host** (`www.city.katsushika.lg.jp`): the whole food-hygiene block (`/kenkou/1030184/1001799/`, 90 pages and 72 files) and the food download block (`/online/…/1007410/`, 12 pages). They hold leaflets, newsletters and forms, and no list. **Catalogues**: the ward has none of its own; its page says its open data is on the Tokyo catalogue only. Tokyo catalogue `t131229`: 32 packages, none food, and the gaps in the ID series return 404. BODIK: none. **Web Archive**: no food list ever captured on the host |
+| the section's other lists | 環境衛生関係施設一覧表 (`/online/1007359/1030292/1007374/1007411/1026096.html`): seven monthly PDFs as of 2026-08-31 (理容所 to 住宅宿泊事業), with no food counterpart |
+| second shapes | **MHLW 食品衛生申請等システム** (`13122_food_business_all.csv`, PDL 1.0): 1,282 rows, 161 live 飲食店営業 permits dated 2021-10 to 2026-08, so **3.5% of the yearbook's 4,599**. **Not used**. 「かつしかの元気食堂」 (a certification list of about 150 shops, PDF, 2026-05-20) is not a permit register |
+| personal services | クリーニング所, 理容所, 美容所 and 旅館 台帳 on the Tokyo catalogue (`t131229`, CC BY): already in the 11-ward layer |
+| route in | a 情報公開請求 for the 食品営業許可台帳, via 生活衛生課. Outreach is the owner's act and the last resort: **parked**, and not drafted |
 
 ### Ōta 大田区, 13111 — OFF (owner, 2026-09-28)
 
