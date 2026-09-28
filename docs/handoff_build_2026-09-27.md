@@ -93,6 +93,32 @@ than adding an addendum.
   - the Taipei PDF in `data/taipei/raw` ("leave pdf")
   - the two personal files in the home directory
 
+## If the owner asks for a summary of a past day's work
+
+Sources, most authoritative first:
+
+- `DECISIONS.md`'s dated sections (118 for 2026-09-24 alone)
+- `git log --all --since=... --until=...` (191 commits that day)
+- PLAN's ticked items and the dated `docs/handoff_*.md` files (in git history)
+- the raw session transcripts: `.jsonl` files under `~/.claude/projects/`, one
+  folder per worktree, searchable with the app's transcript tools
+
+Three caveats:
+
+1. **A date is several sessions.** Build, staging and cleanup run in parallel,
+   so a summary by date combines them unless the owner names one ("the build
+   session's 9/24 work", "Riga's build"). Ask which, or say that it combines
+   them.
+2. **Hand the reading to a subagent and keep only its summary.** A day can be
+   100+ DECISIONS sections and ~200 commits, and a transcript is far larger.
+   Reading that in the main session spends the context the builds need. Have
+   an `Explore` or `general-purpose` agent read the sources and return a
+   summary with citations. Go to the transcripts only when the owner wants the
+   conversation itself, not the decisions.
+3. **Cite, so it can be checked.** DECISIONS and git are the record;
+   transcripts are raw. Every claim in a summary names the DECISIONS entry or
+   commit behind it.
+
 ## A correction for other handoffs
 
 This session has no live Riga work. The `riga` worktree was removed on
