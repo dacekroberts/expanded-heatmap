@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**43 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**44 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Worktree `osaka` created for the next build session, branched from worktree-kobe (owner)](#2026-09-27---worktree-osaka-created-for-the-next-build-session-branched-from-worktree-kobe-owner)
 - [The japan-city skill written from Kobe; Osaka recommended next](#2026-09-27---the-japan-city-skill-written-from-kobe-osaka-recommended-next)
 - [Kobe's page, notice and docs approved by the owner; Taoyuan's macro label moved; the funicular stations out of the excluded file](#2026-09-27---kobes-page-notice-and-docs-approved-by-the-owner-taoyuans-macro-label-moved-the-funicular-stations-out-of-the-excluded-file)
 - [Kobe pipeline built: the first Japanese city, on shared Japanese steps 1 and 2 (owner calls on rail and names)](#2026-09-27---kobe-pipeline-built-the-first-japanese-city-on-shared-japanese-steps-1-and-2-owner-calls-on-rail-and-names)
@@ -76,6 +77,18 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Worktree `osaka` created for the next build session, branched from worktree-kobe (owner)
+
+- **`.claude/worktrees/osaka` (branch `worktree-osaka`) was made from
+  `worktree-kobe` at `843929c`, not from `origin/master`** (owner's request,
+  after the japan-city skill recommended Osaka). The shared Japanese steps
+  exist only on the Kobe branch until review time lands it. So Osaka merges
+  `origin/master` once Kobe is there, and publishes after Kobe or with it.
+  - `data/` and `.venv-lean` are junctions to the main checkout's.
+  - The handoff is `docs/handoff_osaka_2026-09-27.md`.
+  - Osaka's cache was on disk from screening. The OSM station-name query is
+    its one remaining download and waits for the owner's OK.
 
 ### 2026-09-27 - The japan-city skill written from Kobe; Osaka recommended next
 
