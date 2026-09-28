@@ -280,6 +280,128 @@ publishes none. MHLW's open data does not fill them (Chiyoda 291 restaurants,
 26% addressed). **The scope is the owner's call**: the 8 wards as a stated
 "core wards" map with the centre missing, or wait for a request to Chiyoda.
 
+## Ward cards — all 23 wards, food leg (from 2026-09-28)
+
+**ON** = full, current, permitted food list: the ward is built. **OFF** = not
+built, for the reason given: its stations are drawn hollow and labelled "no
+business data" (owner, 2026-09-28). **OPEN** = not yet decided, with what is
+still unknown. Personal services (生活衛生 registers, Tokyo catalogue, CC BY
+4.0) are listed separately, because a ward can be OFF for food and still have
+them. Updated as each ward is settled; the detailed card for each settled
+missing ward follows the table.
+
+| Ward | Code | Food | Why / next step | Licence | Personal services |
+|---|---|---|---|---|---|
+| Chiyoda | 13101 | **OFF** | on request only; request parked (`gated_access.md` 22) | — | ✓ |
+| Chūō | 13102 | **ON** (12%) | 2021-06 to 2022-12 snapshot, share disclosed (owner, 2026-09-24) | Tokyo catalogue, CC BY 4.0 | — |
+| Minato | 13103 | **ON** (31%) | consent-filtered, share disclosed | Tokyo catalogue, CC BY 4.0 | ✓ |
+| Shinjuku | 13104 | **ON** (84%) | 2023-01-01 CSV, vintage disclosed; the 2026 PDF is not permitted. Re-checked 2026-09-28: no newer CSV (the server re-stamped the 2023 file 2026-08-31; the content is unchanged) | Tokyo catalogue, CC BY 4.0 | — |
+| **Bunkyō** | 13105 | **OFF** | **no list exists in any format; MHLW's slice is 2.4% (re-probed 2026-09-28)** | — | ✓ |
+| Taitō | 13106 | **ON** (81%) | opt-outs left out | ward's own, CC BY 4.0 | ✓ |
+| Sumida | 13107 | **OFF** | PDF of new permits only (FY R5 to R8.8); re-checked 2026-09-28: no full list anywhere, so the licence is not read | not read | — |
+| Kōtō | 13108 | **ON** (9%) | consent-only new permits, share disclosed | Tokyo catalogue, CC BY 4.0 | — |
+| Shinagawa | 13109 | **OFF** | partial, since 2024-04 (the page still says so); re-checked 2026-09-28: no full list anywhere | — | ✓ |
+| Meguro | 13110 | **ON** (52%) | first permits only, the accepted exception | BODIK, CC BY 4.0 | ✓ (BODIK) |
+| **Ōta** | 13111 | **OFF** | **full list is PDF only and not open data; the site policy bars reuse (owner, 2026-09-28)** | 🚫 not permitted | ✓ |
+| Setagaya | 13112 | **ON** (63%) | opt-outs left out | ward's own, CC BY 4.0 | — |
+| Shibuya | 13113 | **ON** (101%) | the ward's own register | ward's own, CC BY 4.0 | ✓ |
+| Nakano | 13114 | **OFF** | stale, to 2023-06-27; re-checked 2026-09-28: unchanged. ⚠️ wagmap now labels it データ作成基準日 2026/6/30, but the file is still the 2023 one (Last-Modified 2023-10-04) | — | — |
+| **Suginami** | 13115 | **OFF** | **no list exists in any format; MHLW's slice is 3.0% (re-probed 2026-09-28)** | — | — |
+| Toshima | 13116 | **OFF** | in-person viewing only; parked | — | ✓ |
+| **Kita** | 13117 | **OFF** | **PDF list "not open data", site terms bar reuse; the CC BY CSV holds 52 permits, 2022–2024 (read 2026-09-28)** | 🚫 not permitted (PDF) | — |
+| **Arakawa** | 13118 | **OFF** | **site terms bar all reuse; no open-data route (read 2026-09-28)** | 🚫 not permitted | ✓ |
+| Itabashi | 13119 | **OFF** | partial, new permits since 2025-04; re-checked 2026-09-28: no full list anywhere | — | — |
+| Nerima | 13120 | **OFF** | on request only (password after application); parked | — | — |
+| Adachi | 13121 | **OFF** | PDF of new permits only (R7.4 to R8.8); re-checked 2026-09-28: no full list anywhere (catalogue: 2,435 entries), so the licence is not read | not read | — |
+| **Katsushika** | 13122 | **OFF** | **no list exists in any format; MHLW's slice is 3.5% (re-probed 2026-09-28)** | — | ✓ |
+| Edogawa | 13123 | **OFF** | on request only (password after application); parked | — | — |
+
+**Tally, 2026-09-28 — every ward settled**: ON 8 · OFF 15 · OPEN 0. No
+missing ward can join the map from its own publications. The ways in are all
+requests (`docs/gated_access.md` and each card's "route in"), and all are
+parked.
+
+### Arakawa 荒川区, 13118 — OFF (read 2026-09-28)
+
+| Field | |
+|---|---|
+| verdict | **OFF**: the site terms bar reuse, and no open-data route reaches the list |
+| file(s), host, size | page `https://www.city.arakawa.tokyo.jp/a032/jigyousha/toroku/syokuhinnshisetu.html` (ID 4207, updated 2026-09-15). Full list `…/documents/4207/r08kyokarisuto.pdf`, 1,563,829 B, 55 pages. New permits: `r7sinnki.pdf`, `r8sinnki.pdf`. Closures: `r7haigyou.pdf`, `r8haigyou.pdf` |
+| format | PDF only. The ward says there is no CSV or Excel version because names use characters outside Shift_JIS (注釈2); `.csv`, `.xlsx` and `.xls` all return 404. Address layout: 町名 / 丁番号 / 所在地 / ﾋﾞﾙ名 |
+| as of | 2026-03-31 (full list, updated each 4月15日); the new-permit and closure lists are updated monthly |
+| closures | none in the full list; separate closure PDFs. The page warns closed premises may be included (注釈1) |
+| operator columns | 営業者氏名, 営業者住所, 住所電話, which are unmasked (注釈2) |
+| own coordinates | none |
+| licence | 🚫 **NOT PERMITTED, or ambiguous in a way that matters**. 著作権について (`/a004/aboutwebsite/tyosakuken.html`): 「本サイト上の文書・画像等の各ファイルの無断使用・転載・引用は禁じます」. That covers the files and their contents, and is stricter than Shinjuku's (it bars even 引用). 荒川区オープンデータ利用規約 (CC BY 4.0) covers only the catalogue at `/opendata/index.php`: 204 items, none of them food. The Tokyo catalogue (`t131181`, 33 packages) and BODIK hold no food list either. The facts-are-not-copyrightable reading is not relied on (the Shinjuku precedent) |
+| join / share | not measured: the list is not used |
+| personal services | 美容所, 理容所 and クリーニング所 台帳 on the Tokyo catalogue (`t131181`), CC BY 4.0: already in the 11-ward layer |
+| route in | permission from 広報・シティプロモーション課 (the channel the copyright clause names), or publication on the ward's catalogue. Outreach is the owner's act and the last resort: **parked** |
+
+### Bunkyō 文京区, 13105 — OFF (re-probed 2026-09-28)
+
+| Field | |
+|---|---|
+| verdict | **OFF**: no food-premises list exists, in any format, current or historical. No page offers one on request, so this is not Chiyoda's shape. The ward is silent |
+| where it was looked for | **The ward's own host**: every page in the food-hygiene block (`/kenkou/seikatsueisei/shokuhineisei/`, `b026/p002876` to `p002934`, and the newer `p0075xx` / `p0076xx` pages) holds forms, plans and leaflets only. **The ward's catalogue** (`b004/p006286.html`, index `documents/6059/metadata.csv`): 69 datasets, none food, and no 自治体標準オープンデータセット bundle. **The Tokyo catalogue** (`t131059`): 57 packages, none food. **BODIK**: no Bunkyō organisation. **Web Archive**: 128 captured URLs under the old `/hoken/seikatsueisei/syokuhin*` tree (2015–2024) and about 16,600 `/documents/` URLs; no premises list among them |
+| the section's other lists | the sibling page `b026/p002833.html` (環境衛生営業施設一覧, as of 2026-08-31) publishes XLSX lists for 理容所, 美容所, クリーニング所, 旅館業, 公衆浴場 and 興行場, with no food counterpart |
+| second shapes | **MHLW 食品衛生申請等システム** (`13105_food_business_all.csv`, PDL 1.0, to 2026-08): 1,100 rows, but only 97 live permits, 88 of them 飲食店営業, so **2.4% of the yearbook's 3,716**. The rest are notifications (office snack freezers, vending machines, canteens). **Not used**. The 食品衛生優良施設 award lists (9 and 8 premises) are negligible |
+| personal services | 美容所 372, 理容所 109, クリーニング所 208 and 旅館 55 on the Tokyo catalogue (`t131059`, CC BY): already in the 11-ward layer. The ledgers carry 営業者氏名 and 法人代表者氏名, never read |
+| route in | a request to 文京保健所生活衛生課食品衛生担当 (03-5803-1228). Outreach is the owner's act and the last resort: **parked**, and not drafted |
+
+### Suginami 杉並区, 13115 — OFF (re-probed 2026-09-28)
+
+| Field | |
+|---|---|
+| verdict | **OFF**: no food-premises list exists, in any format, current or historical, and no page offers one on request |
+| where it was looked for | **The ward's own host**: all 16 pages of the 食品の衛生 block (`/kenkou/eisei/shokuhineisei/`), which hold guides and leaflets only. **The ward's catalogue** (`/opendata/index.php`): 5,988 files on 519 dataset pages, none food, and no 生活衛生課 among its 19 departments. Its index `documents/8444/open-data-list.csv` has 142 titles. The only ZIP is a GTFS feed. **The Tokyo catalogue** (`t131156`): 103 packages, none food. BODIK: none. **Web Archive**: 372 archived documents under the old food and hygiene pages, none of them a list |
+| the section's other lists | 旅館業営業許可施設一覧 (`/documents/870/ryokan202608.pdf`) and the 民泊 届出住宅 list (`/documents/871/todokede.pdf`, with a no-commercial-use request). No food, barber, beauty or laundry list |
+| control | the ward's own statistics table 10-12 (`/documents/25287/r7-10-12-01.csv`): 飲食店営業 3,631 new-law + 2,221 old-law = **5,852** at FY2024 end, the same as the yearbook |
+| second shapes | **MHLW 食品衛生申請等システム** (`13115_food_business_all.csv`): 1,246 rows, 175 live 飲食店営業 permits dated 2022-02 to 2026-08, so **3.0%**. **Not used** |
+| 403 | `suginami.geocloud.jp` (すぎナビ, the map open-data list): a bare nginx 403 with no statement of who it is for. The ward describes it as map layers. Not worked around |
+| personal services | none published (no 生活衛生 packages on `t131156`) |
+| route in | a request to 杉並保健所 生活衛生課. Outreach is the owner's act and the last resort: **parked**, and not drafted |
+
+### Katsushika 葛飾区, 13122 — OFF (re-probed 2026-09-28)
+
+| Field | |
+|---|---|
+| verdict | **OFF**: no food-premises list exists, in any format, current or historical, and no page offers one on request. The ward is silent |
+| where it was looked for | **The ward's own host** (`www.city.katsushika.lg.jp`): the whole food-hygiene block (`/kenkou/1030184/1001799/`, 90 pages and 72 files) and the food download block (`/online/…/1007410/`, 12 pages). They hold leaflets, newsletters and forms, and no list. **Catalogues**: the ward has none of its own; its page says its open data is on the Tokyo catalogue only. Tokyo catalogue `t131229`: 32 packages, none food, and the gaps in the ID series return 404. BODIK: none. **Web Archive**: no food list ever captured on the host |
+| the section's other lists | 環境衛生関係施設一覧表 (`/online/1007359/1030292/1007374/1007411/1026096.html`): seven monthly PDFs as of 2026-08-31 (理容所 to 住宅宿泊事業), with no food counterpart |
+| second shapes | **MHLW 食品衛生申請等システム** (`13122_food_business_all.csv`, PDL 1.0): 1,282 rows, 161 live 飲食店営業 permits dated 2021-10 to 2026-08, so **3.5% of the yearbook's 4,599**. **Not used**. 「かつしかの元気食堂」 (a certification list of about 150 shops, PDF, 2026-05-20) is not a permit register |
+| personal services | クリーニング所, 理容所, 美容所 and 旅館 台帳 on the Tokyo catalogue (`t131229`, CC BY): already in the 11-ward layer |
+| route in | a 情報公開請求 for the 食品営業許可台帳, via 生活衛生課. Outreach is the owner's act and the last resort: **parked**, and not drafted |
+
+### Ōta 大田区, 13111 — OFF (owner, 2026-09-28)
+
+| Field | |
+|---|---|
+| verdict | **OFF**: the full list is PDF only and on no open-data list, so the site policy governs it and bars reuse. The open-data terms' site-wide preamble is not relied on |
+| file(s), host, size | page `https://www.city.ota.tokyo.jp/seikatsu/hoken/eisei/shokuhin/ippan/syokuhinsisetuitiran.html` (updated 2026-09-02; the host is `city.ota.tokyo.jp`, not `.lg.jp`). Full list `…/syokuhinsisetuitiran.files/r0809.zip`, 14,650,229 B, holding `新法施設一覧（2026年9月1日現在）.pdf` (35.8 MB) and `旧法施設一覧（2026年9月1日現在）.pdf` (5.3 MB), probably the 93 + 16 pages. Monthly new-premises PDFs `r0709.pdf` to `r0808.pdf` |
+| format | PDF only (in a ZIP); `.csv` / `.xlsx` siblings return 404. Address layout: 町名 / 番 / 号 / ビル名 |
+| as of | 2026-09-01; updated monthly (by the 10th). Includes 届出 premises |
+| closures | none; the page says closures after compilation are not reflected |
+| operator columns | 申請者氏名 (unmasked), 所在地電話番号 (from the monthly PDF; the ZIP's PDFs unverified) |
+| licence | 🚫 **NOT PERMITTED, or ambiguous in a way that matters**. The site policy (`/aboutweb/policy.html`) bars 無断での使用・転載、二次利用, except for 「大田区がオープンデータとして公開しているもの」. The open-data terms (`/kuseijoho/opendata/open-data.files/riyoukiyaku.pdf`, 政府標準利用規約 2.0, adopted about 2021-09-28) literally cover the whole site. **Why OFF**: the policy's exception dates from 2019-05, when open data meant the Tokyo catalogue, and was left unwidened in the 2021-09-26 and 2025-11-27 edits. The terms are framed around downloaded data. No page carries a site-wide badge. The same 生活衛生課 put its barber, beauty, laundry and inn registers on the Tokyo catalogue as CC BY CSV, and left the food list as PDF. The ward's own definition of open data requires 機械判読. Not on the ward's list (175 rows) or the Tokyo catalogue (`t131113`, 280 packages) |
+| join / share | not measured: the list is not used |
+| personal services | 美容所, 理容所, クリーニング所 and 旅館 台帳 on the Tokyo catalogue (`t131113`), CC BY 4.0: already in the 11-ward layer |
+| route in | permission from 生活衛生課 食品衛生 (03-5764-0697), or publication on the catalogue. Outreach is the owner's act and the last resort: **parked** |
+
+### Kita 北区, 13117 — OFF (read 2026-09-28)
+
+| Field | |
+|---|---|
+| verdict | **OFF**: the full list is PDF and "not open data", and the site terms bar reuse. The open CSV is partial and stale |
+| file(s), host, size | page `https://www.city.kita.lg.jp/socialcare-health/hygiene/1009013/1017183.html` (the old `city.kita.tokyo.jp/…/sisetuitiran.html` returns 301 to it; updated 2026-09-11). Full list under `…/_res/projects/default_project/_page_/001/017/183/`: `r8-3-31-shinhou2.pdf` (新法, 2,464,505 B) and `r8-3-31-kyuhou2.pdf` (旧法, 1,589,766 B), probably the 335 + 155 pages. Monthly 新規, 更新 and 廃業 PDFs alongside |
+| format | PDF only for the full list; 12 guessed `.csv` / `.xlsx` / `.xls` names return 404 |
+| as of | 2026-03-31; the monthly lists run to 2026-08 |
+| operator columns | not seen (the PDFs were not opened). The page: an individual operator's address and phone are not published, and operators who asked are omitted |
+| licence | 🚫 **NOT PERMITTED, or ambiguous in a way that matters**. The page: 「このページは、東京都北区情報公開条例に基づいて公開するもので、オープンデータとは異なります。」 The site terms (`/about/1016811.html`) forbid 転載、複製、改変 without permission, beyond 私的使用 and 引用. 北区オープンデータ利用規約 (2020-07-03) says itself that it does not cover the whole site: 「本規約は、北区公式ホームページ掲載の全ての情報に該当するものではありません。」 That is the opposite of Ōta's terms |
+| the open CSV | `15.食品等営業許可・届出一覧.csv` inside the 自治体標準オープンデータセット zip (`…/001/014/461/hyo-jun.zip`, 293,787 B, 2026-08-26), CC BY 4.0, national 34-column format with 緯度/経度. **Only 515 rows**: 届出 459, 許可 52, 届出(廃業) 4; 46 are 飲食店営業; permits dated 2022-04-19 to 2024-10-29. It fails the full-and-current rule: **recorded, not used** |
+| join / share | not measured: the list is not used |
+| personal services | none found on the Tokyo catalogue (`t131172`: 7 packages, none 生活衛生) |
+| route in | permission from 政策経営部広報課 or 保健所生活衛生課; the page itself points to a 情報公開請求 for anything more. Outreach is the owner's act and the last resort: **parked** |
+
 ## ✅ Licences — READ 2026-09-24
 
 - **MLIT 位置参照情報 — PERMITTED WITH CONDITIONS** (PDL 1.0 via the site

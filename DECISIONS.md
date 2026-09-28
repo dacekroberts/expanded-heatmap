@@ -20,13 +20,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**93 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**94 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Review batch verified: the full deploy-verify passes; the macro tooltip becomes a corner panel; East Asia's global-frame label overlaps accepted (owner)](#2026-09-28---review-batch-verified-the-full-deploy-verify-passes-the-macro-tooltip-becomes-a-corner-panel-east-asias-global-frame-label-overlaps-accepted-owner)
 - [Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one heavy job at a time, drift --jobs 2 at most (owner)](#2026-09-28---two-app-crashes-traced-to-memory-exhaustion-python-capped-at-8-gb-a-process-one-heavy-job-at-a-time-drift---jobs-2-at-most-owner)
 - [Handoffs rewritten for the owner's session reorganisation; the large-transit gap saved](#2026-09-28---handoffs-rewritten-for-the-owners-session-reorganisation-the-large-transit-gap-saved)
+- [Tokyo's missing wards: Arakawa OFF; a ward-by-ward list in the brief (owner)](#2026-09-28---tokyos-missing-wards-arakawa-off-a-ward-by-ward-list-in-the-brief-owner)
 - [Vancouver's exclusion sentence no longer says "as in every city here" (owner)](#2026-09-28---vancouvers-exclusion-sentence-no-longer-says-as-in-every-city-here-owner)
 - [Before Tokyo: a ward-source skill and share check here, a research worktree for the missing wards, hollow stations where a ward has no data (owner)](#2026-09-28---before-tokyo-a-ward-source-skill-and-share-check-here-a-research-worktree-for-the-missing-wards-hollow-stations-where-a-ward-has-no-data-owner)
 - [Kyoto built on the shared Japanese modules: Japan's fifth city (held for review time)](#2026-09-28---kyoto-built-on-the-shared-japanese-modules-japans-fifth-city-held-for-review-time)
@@ -234,6 +235,154 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - Scratch that would have gone with this session's scratchpad is in
   `data/_staging_scratch_2026-09-28b/` (the Incheon join and interpolation
   scripts, the Baltimore listings, the line-colour search).
+### 2026-09-28 - Tokyo's missing wards: Arakawa OFF; a ward-by-ward list in the brief (owner)
+
+- **Found that Suginami publishes no food-premises list at all, so it is OFF,
+  and every one of Tokyo's 23 wards is now settled: ON 8, OFF 15.** For
+  Suginami the probe read:
+  - all 16 pages of the ward's food block;
+  - the ward's whole catalogue (5,988 files on 519 dataset pages, none food,
+    and no 生活衛生課 among its departments);
+  - the Tokyo catalogue (`t131156`: 103 packages) and BODIK (none);
+  - 372 archived documents under the old food pages.
+
+  No page offers a list on request. The ward publishes lodging lists (旅館業,
+  民泊) as PDFs, but nothing for food. **Rejected: MHLW's slice**, with 175 live
+  飲食店営業 permits, **3.0%** of the ward's own count of 5,852 (statistics
+  table 10-12, the same as the yearbook). `suginami.geocloud.jp` answers 403
+  with no statement of who it is for; it was not worked around.
+
+  **The conclusion of the round**: none of the 15 missing wards can join the
+  map from its own publications. Four release theirs only on request, three
+  are PDF under terms that bar reuse, three publish nothing, and five are
+  stale, partial or new-only. Every way in is a request, which is the owner's
+  act and parked. Tokyo builds its 8 wards, and the other stations are drawn
+  hollow (owner, 2026-09-28).
+- **Lesson: WebFetch on a PDF or ZIP saves the binary** in the session's
+  `tool-results` folder under the home directory. That is outside the
+  repository and not caught by `check_stray_downloads.py`. The probe agents
+  kept to files under 5 MB, and one agent deleted its cached 2.3 MB guide.
+
+- **Found that Katsushika publishes no food-premises list at all, so it is
+  OFF for food** (re-probed the same way as Bunkyō). The probe covered:
+  - the whole food-hygiene block on the ward's own host (90 pages and 72
+    files: leaflets and forms);
+  - the ward's statement that its open data is on the Tokyo catalogue only;
+  - the Tokyo catalogue (`t131229`: 32 packages, none food; the gaps in the
+    ID series return 404) and BODIK (none);
+  - the Web Archive, which never captured a food list on the host.
+
+  No page offers a list on request. The same 生活衛生課 publishes seven monthly
+  環境衛生 PDFs and has no food counterpart. **Rejected: MHLW's slice**
+  (`13122_food_business_all.csv`), with 161 live 飲食店営業 permits dated
+  2021-10 to 2026-08, **3.5%** of the yearbook's 4,599.
+- **Re-checked the stale and partial wards for a newer full list: none has
+  one.** Nakano is still stale to 2023-06-27. Shinagawa is still partial
+  (since 2024-04) and Itabashi still new-only (since 2025-04). Shinjuku has no
+  post-2023 CSV. Sumida and Adachi still publish new-permit PDFs only, so
+  their licences stay unread. Every ward's Tokyo catalogue organisation was
+  listed in full, and its own pages and indexes read. **Two traps for the
+  build, both dates that do not mean new data**:
+  - wagmap now labels Nakano's file データ作成基準日 2026/6/30, while the file
+    is unchanged (Last-Modified 2023-10-04, permits to 2023-06-27);
+  - Shinjuku's server re-stamped `000399975.csv` Last-Modified 2026-08-31
+    over the same 2023 content.
+
+  Read a list's own permit dates, never a label or a header. Ward cards now
+  stand at ON 8, OFF 14, OPEN 1 (Suginami).
+
+- **Found that Bunkyō publishes no food-premises list at all, so it is OFF
+  for food** (re-probed with `reprobe-city`, the first of the three
+  none-found wards). The probe asked the ward's own host and read every page
+  in its food-hygiene block: forms and plans only. It enumerated the ward's
+  catalogue (69 datasets, no standard-dataset bundle), the Tokyo catalogue
+  (`t131059`, 57 packages) and BODIK (no organisation). The Web Archive's
+  captures of the old food tree (128 URLs) and about 16,600 `/documents/` URLs
+  held no premises list either. No page offers a list on request, so this is
+  not Chiyoda's shape. The same section publishes its 環境衛生 lists as XLSX
+  and on the catalogue, and has no food counterpart. **Rejected: MHLW's
+  online-filing slice** (`13105_food_business_all.csv`, PDL 1.0). It holds 88
+  live 飲食店営業 permits against the yearbook's 3,716 for FY2024, so 2.4%, and
+  it fails the full-and-current rule. Ward cards now stand at ON 8, OFF 13,
+  OPEN 2 (Suginami and Katsushika next).
+
+- **Ōta is OFF for food (owner, 2026-09-28), on the recommendation, after two
+  follow-up checks.** The full list is published (`r0809.zip`, two PDFs as
+  at 2026-09-01, 14.6 MB), but as PDF only, and it is on neither the ward's
+  open-data list nor the Tokyo catalogue (`t131113`). Two ward documents
+  conflict:
+  - The site policy bars reuse except for
+    「大田区がオープンデータとして公開しているもの」.
+  - The open-data terms (政府標準利用規約 2.0) name the whole 公式ホームページ.
+
+  The terms' literal scope was **rejected** as the governing reading, for
+  five reasons:
+  - The policy's exception dates from 2019-05, when the ward's open data meant
+    the Tokyo catalogue.
+  - The exception was left unwidened when the policy was edited on
+    2021-09-26, two days before the terms, and again on 2025-11-27.
+  - The terms are framed around downloaded data.
+  - No page carries a site-wide licence badge or statement.
+  - The same 生活衛生課 put its 生活衛生 registers on the catalogue as CC BY
+    CSV and left the food list as PDF. The ward's own definition of open data
+    also requires 機械判読.
+
+  This follows the Shinjuku precedent (an ambiguity that matters is not
+  resolved in the project's favour). It is closer than Shinjuku, Arakawa or
+  Kita, because one ward text does point to ON. The list also carries
+  unmasked 申請者氏名. Ōta keeps its personal-services registers. Ward cards
+  now stand at ON 8, OFF 12, OPEN 3 (Bunkyō, Suginami and Katsushika, re-probes
+  next). The two stray PDFs were moved to the Recycle Bin at the owner's
+  word, since neither belonged in `docs/licenses/` or `data/`.
+- **Rule recorded: no hand-written PDF decoder.** A licence agent's scratch
+  CMap and stream decoder drove python.exe to 47 GB committed memory on the
+  16 GB machine and crashed the app (the cleanup session's finding). PDFs are
+  read with `pdftotext` or `pypdf`, page by page, with memory measured on one
+  page first. The handoff carries the rule until the `pdf-register` skill
+  does.
+
+- **Confirmed Kita OFF for food, under the handoff's standing rule (if "not
+  open data" holds, it is out).** It holds. The food page says:
+  「…東京都北区情報公開条例に基づいて公開するもので、オープンデータとは異なります。」
+  The site terms (`/about/1016811.html`) forbid 転載、複製、改変 without
+  permission. The ward's open-data terms (2020-07-03) exclude the rest of the
+  site in so many words:
+  「本規約は、北区公式ホームページ掲載の全ての情報に該当するものではありません。」
+  The full list is two PDFs as at 2026-03-31 (新法 2,464,505 B and 旧法
+  1,589,766 B). **New find**: a CC BY 4.0 food CSV in the ward's
+  自治体標準オープンデータセット zip (`hyo-jun.zip`, 2026-08-26). It holds only
+  515 rows: 459 届出, 52 許可 and 4 closures. 46 are 飲食店営業, and the permits
+  are dated 2022-04 to 2024-10. It fails the full-and-current rule, so it is
+  recorded, not used. The brief's Kita URL moved to `city.kita.lg.jp`, and
+  the old one returns 301. Kita's card is in the brief's Ward cards section,
+  and its row is in `docs/data_sources/japan.md`.
+
+- **Found Arakawa's food list NOT PERMITTED, so Arakawa is OFF for food: its
+  stations are drawn hollow.** The list is full and current (全許可施設リスト,
+  as of 2026-03-31, `r08kyokarisuto.pdf`, 55 pages, 1,563,829 B), but PDF
+  only. The ward says there is no CSV or Excel version because names use
+  characters outside Shift_JIS. The site's 著作権について forbids
+  「各ファイルの無断使用・転載・引用」, which reaches the files' contents and
+  even quotation, so it is stricter than Shinjuku's. 荒川区オープンデータ利用規約
+  (CC BY 4.0) covers only catalogue items: 204, none of them food. Neither the
+  Tokyo catalogue (`t131181`, 33 packages) nor BODIK holds a food list. The
+  permitting reading that premises facts are not 著作物 was not relied on,
+  following the Shinjuku precedent (2026-09-24). The list also carries
+  unmasked 営業者氏名, 営業者住所 and 住所電話. Asking the ward for permission
+  is the owner's act and the last resort, so it is parked. Arakawa keeps its
+  personal-services registers (Tokyo catalogue, CC BY 4.0). Read by the
+  `licence-read` agent.
+- **Recorded every ward's state in one list, at the owner's request**: a
+  "Ward cards" section in `docs/build_briefs/tokyo.md`, with ON / OFF / OPEN
+  for all 23 wards (ON 8, OFF 10, OPEN 5 on 2026-09-28), a personal-services
+  column, and a detailed card for each settled missing ward, starting with
+  Arakawa. The row for Arakawa is in `docs/data_sources/japan.md`.
+- **Two stray downloads**: the licence reads opened PDF URLs in the Browser
+  pane, and the ward servers sent them as downloads that were saved at the
+  main checkout's root. They are `r08kyokarisuto.pdf` (Arakawa's full list)
+  and `ota data.pdf` (Ōta's August 2026 new-permits PDF, 331,986 B). Both hold
+  operators' names and are awaiting the owner's call. Later licence reads are
+  told never to open a PDF in the browser: HEAD and WebFetch only.
 ### 2026-09-28 - Vancouver's exclusion sentence no longer says "as in every city here" (owner)
 
 - **`docs/excluded_categories.md`, Vancouver: "Also excluded, as in every city
