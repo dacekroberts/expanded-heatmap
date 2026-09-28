@@ -20,10 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**44 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**47 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [The japan-city skill written from Kobe; Osaka recommended next](#2026-09-27---the-japan-city-skill-written-from-kobe-osaka-recommended-next)
+- [Kobe's page, notice and docs approved by the owner; Taoyuan's macro label moved; the funicular stations out of the excluded file](#2026-09-27---kobes-page-notice-and-docs-approved-by-the-owner-taoyuans-macro-label-moved-the-funicular-stations-out-of-the-excluded-file)
+- [Kobe pipeline built: the first Japanese city, on shared Japanese steps 1 and 2 (owner calls on rail and names)](#2026-09-27---kobe-pipeline-built-the-first-japanese-city-on-shared-japanese-steps-1-and-2-owner-calls-on-rail-and-names)
 - [Göteborg's rail measured: 13 tram lines and 127 stops inside the city](#2026-09-27---göteborgs-rail-measured-13-tram-lines-and-127-stops-inside-the-city)
 - [Kansas City's streetcar passes the stub test; the Linz lead is aggregate counts, closed](#2026-09-27---kansas-citys-streetcar-passes-the-stub-test-the-linz-lead-is-aggregate-counts-closed)
 - [Worktrees: monterrey retired, trams created for the next build session, main checkout fast-forwarded (owner)](#2026-09-27---worktrees-monterrey-retired-trams-created-for-the-next-build-session-main-checkout-fast-forwarded-owner)
@@ -78,6 +81,174 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-27 - The japan-city skill written from Kobe; Osaka recommended next
+
+- **`.claude/skills/japan-city/SKILL.md` was written before any other Japanese
+  city starts**, per the owner's standing rule. It covers:
+  - the shared modules (`japan_step1`, `japan_step2`, `japan_register`, the
+    taxonomy, the Japan privacy pass);
+  - the owner's standing calls;
+  - twelve traps Kobe measured;
+  - the notice pattern;
+  - a sheet per remaining city, from its brief (read by a subagent, with line
+    numbers).
+  - `CLAUDE.md` now routes a Japanese city to it.
+- **Found while writing the sheets:**
+  - **All five remaining briefs say never to read the operator columns.**
+    The owner's name rule of 2026-09-27, made for every Japanese city,
+    supersedes that, and the skill says so. Three cities spell the operator
+    column in ways `japan_register.OPERATOR_COLS` does not yet list (Tokyo
+    営業者氏名, Fukuoka 開設者法人名（開設者氏名）, Kyoto 申請者＿申請者名), so each
+    build must add its spelling, or the rule compares nothing.
+  - Kyoto's rebuilt stream drops those columns today.
+  - Kyoto's brief draws its two funiculars, where Kobe left its two out. The
+    skill flags it for the owner.
+- **Recommended next: Osaka**, first in the owner's 2026-09-24 order.
+  - It has one city file and a 99.1% block join, checked against the city's
+    own coordinates.
+  - It needs no new mechanism in `japan_step2`.
+  - Its one hard question, the list at 67% of MHLW's count, already has
+    owner-approved wording.
+  - Sapporo would follow. Fukuoka, Kyoto and Tokyo each need a step 2
+    extension: a second source, the rebuilt stream, and per-ward files.
+
+### 2026-09-27 - Kobe's page, notice and docs approved by the owner; Taoyuan's macro label moved; the funicular stations out of the excluded file
+
+- **Owner, 2026-09-27: all five drafts approved as written.** They are:
+  - the Kobe page prose (`app/pages/50_Kobe_Heatmap.py`);
+  - the switcher blurb;
+  - notice **50**, "City of Kobe and MLIT (Kobe)" (`app/components.py`
+    `_NOTICES` and `docs/data_sources.md`). It carries Kobe's prescribed 出典
+    line with 「…を加工して作成」, the CC BY 2.1 JP link, MLIT's two PDL credit
+    lines and N03 credited as not drawn, and says neither that the premises
+    are open nor that the city made the map;
+  - Kobe's section in `docs/excluded_categories.md`;
+  - **the 115 factory-like 菓子 / そうざい pins are kept** (0.4% of all pins),
+    the recommendation. Dropping names matching 工場 / センター / 本社 was
+    rejected because real shops are named …センター.
+- **Correction to the entry below: the four funicular stations are NOT in
+  `excluded_stations.csv`.** `check_scope_disclosure.py` failed on their
+  reason, which is neither a boundary nor a spacing filter. The file records
+  stations cut from a network that IS mapped, as Taipei's undrawn Maokong
+  Gondola is absent from its file. So `japan_step1` prints a left-out line's
+  stations and does not write them: Kobe's file has **32** rows (was 36), and
+  the baseline was updated. The page and `excluded_categories.md` disclose the
+  cable cars. Changing `app/station_scope.py` to read a new category was the
+  rejected alternative.
+- **Taoyuan's macro-map label moved above its dot.** Kobe widened the East
+  Asia frame, and at the lower zoom Taoyuan's west-side pill covered
+  Taichung's marker and overlapped Hong Kong's pill at all three widths. A
+  search over the five East Asia labels (four positions each), with
+  `check_macro_labels.py`'s own scoring, found 48 clean layouts. Moving
+  Taoyuan above is the only one that changes a single label. Kobe's width,
+  34.2 px, was measured in the app's own document, with Busan 41.9 and
+  Taichung 61.7 reproduced exactly. PROBLEMS 0.
+- **Recorded for Kobe:**
+  - `docs/data_sources/japan.md` gained business, rail and boundary rows;
+  - `docs/city_master_list.md`: Built 50 across 17 countries, Band A 5,
+    candidates 62;
+  - `docs/map_inconsistencies.md` gained all four rows, plus Kobe under
+    themes 2 (food-only Retail) and 8 (type in place of a name). In rings:
+    Retail 2,619, Food service 16,980, Personal services 4,186 (87% of
+    27,251);
+  - `check_all.py`: 19 of 19. One local render of the page: prose, map and
+    notice present.
+
+### 2026-09-27 - Kobe pipeline built: the first Japanese city, on shared Japanese steps 1 and 2 (owner calls on rail and names)
+
+- **Kobe's pipeline was built on the brief, with `brief_check.py kobe` passing 4/4 first.**
+  Per-step counts, the baseline for `drift_check.py`:
+  - Step 1 (MLIT N02): 177 line-station rows within 3 km of the city ->
+    153 stations by group code -> **121 inside the city line**; 36 excluded
+    (明石市 16, 三木市 6, 芦屋市 4, 三田市 3, 宝塚市 1, 播磨町 1, 西宮市 1, and
+    the 4 funicular stations).
+  - Gate 3 held on every line wholly inside the city: Seishin-Yamate 16,
+    Kaigan 10, Hokushin 2, Port Liner 12, Rokkō Liner 6, Shintetsu Arima 15.
+    Station median nearest-neighbour 568 m.
+  - Step 2: 31,736 rows (food 26,704, barber 883, beauty 3,324, laundry 825).
+    1,982 were not premises, 1,943 of them food businesses registered at
+    市内一円 (26,704 − 1,943 = the brief's 24,761 fixed premises). 1,235 were
+    not storefronts (879 manufacturing types, 194 institutional catering,
+    153 vending machines, 8 temporary, 1 mobile salon). That left 28,519.
+  - The join: block 27,750, town-chōme 684, unplaced 85 (0.3%, Rokkō-san
+    and hill addresses, as the brief said). 1,183 repeat permits at one
+    premises and bucket were dropped, leaving **27,251 storefronts**: Food
+    service 19,024, Retail 3,292, Personal services 4,935.
+  - Step 3: 23,785 pins within a ring across 121 stations.
+- **Stations collapse on N02's station-group code (`N02_005g`), not the name.**
+  The name would merge two 長田 1.5 km apart (the subway's and Kobe
+  Electric's), two 御影 1.1 km apart (Hankyu's and Hanshin's) and two 住吉 751 m
+  apart. The group code merges only real interchanges; the widest is 三宮 at
+  273 m.
+  - Ten stations under 200 m from another are different-named stations of
+    different operators that MLIT keeps apart (Tarumi / Sanyo Tarumi 29 m).
+    They were left separate.
+- **Owner, 2026-09-27: the Maya and Rokkō funiculars are left out.** They are
+  sightseeing lines whose upper stations are mountain-tops with near-empty
+  rings. All four stations are listed in `excluded_stations.csv`. Drawing
+  them, the Barcelona precedent, was the rejected alternative.
+- **Owner, 2026-09-27: English station names from OpenStreetMap's name:en.**
+  N02 carries Japanese names only. One Overpass query for station names in
+  the city's box (197 objects, 196 with name:en) was downloaded with the
+  owner's OK.
+  - A station with no match stops step 1. None failed.
+  - One tie (神戸三宮: "Kobe-Sannomiya" / "Kobe Sannomiya") is settled in
+    config as the hyphenated form both railways sign.
+  - Five English names are shared by different stations, and those take
+    their operators: Mikage (Hankyu) / Mikage (Hanshin), Nagata (Subway) /
+    Nagata (Shintetsu)...
+  - Japanese-only names were the rejected alternative.
+- **Owner, 2026-09-27: the lines the city line cuts stay as cut**, including
+  the JR Takarazuka Line's one in-city station (道場, 1 of 30) and Kobe
+  Electric's Ao Line (8 of 20).
+- **15 lines are drawn under their public names.** N02 files a line under its
+  legal sections, so the Seishin-Yamate Line is 山手線 + 西神線 + 西神延伸線.
+  - The Wadamisaki Line is split off JR's 山陽線 by walking the track graph
+    from 和田岬 (2 sections, 2,060 m).
+  - The Kobe Kōsoku Line is the tunnel N02 files under Hankyu, Hanshin and
+    Kobe Electric.
+- **Line colours are the project's own, hue-matched to each operator's
+  branding.** Each is readable at 3:1 against both map pages and clears
+  Delta-E 45 against the pins and 18 against every other line, except the
+  Hanshin Main Line (35.3 against Retail blue; no readable blue clears 45).
+  A first pass that cleared the pins only made JR, the subway and Hankyu too
+  dark to see on the dark basemap. It was measured in the browser and
+  replaced. See `pipeline/kobe/config.py`.
+- **Owner, 2026-09-27, for every Japanese city: a trade name that IS the
+  operator's own name is withheld, and the pin shows its permit type.**
+  `japan_register.name_is_operator()` reads the operator column in memory to
+  compare, and returns only a yes or no. The operator's name is never kept,
+  written or shown. This amends the module's "never selected" promise, and
+  its docstring says so.
+  - Kobe: 14 such rows in the raw files; **10 withheld** on the map.
+  - The ~109 names that embed the operator's full name with a business word
+    (<name>商店) are kept (Taiwan's marker rule). Withholding them too was the
+    rejected alternative.
+  - `check_personal_exposure.py` gained a Japan pass that tests the rule on
+    what reached the map. **Kobe: 0 shown (should be 0).** The Latin
+    heuristic's 0 is not a finding for Japanese names.
+- **The 菓子 / そうざい factory share was measured, as the owner asked
+  (2026-09-24): 115 of 2,362 rows (4.9%) have a trade name that reads as a
+  factory or central kitchen** (工場, センター, 本社...), such as a
+  confectioner's 神戸工場. They are kept and measured, not filtered. Whether
+  to drop them before publishing is still open.
+- **Shared Japanese steps, not Kobe's own.** Following the owner's reminder
+  that this build is for the Japanese cities after it, the new code is in
+  `pipeline/countries/`, as Taiwan's step 2 is:
+  - `japan_step1.py`: N02 stations and lines, the group-code collapse,
+    OSM English names, branches;
+  - `japan_step2.py`: sources, taxonomy, join, one pin per premises, the
+    name rule, the factory measurement.
+  - Kobe's step files are thin callers. Other additions:
+    `japan_eigyo` drops 移動美容室 (a salon in a vehicle).
+- **Fixed in `japan_register.permits_from_rows`: a city's name inside an
+  address (灘区六甲山町…神戸市立六甲山牧場) was cut there, losing the ward.**
+  The city's name is now stripped only where no ward precedes it.
+  - The Minato control reproduced unchanged (block 98.0%), as did every
+    screen but one.
+  - Hiroshima rose (block 96.0% -> 96.3%, unplaced 2.3% -> 2.0%), the same
+    pattern with 広島市立.
+  - Kobe's screen is unchanged at 97.1 / 2.6 / 0.3.
 ### 2026-09-27 - Göteborg's rail measured: 13 tram lines and 127 stops inside the city
 
 - **The Band T row carried "Trams, no metro - INHERITED, not measured" since

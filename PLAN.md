@@ -248,8 +248,19 @@ Ten cities; JR and private railways INCLUDED (owner, 2026-09-24). Measurement:
 `scripts/screen_japan_join.py`. Deferred downloads are listed by domain in the
 evidence section.
 
+- [x] **Kobe built 2026-09-27** (`worktree-kobe`, held for review time):
+  27,251 storefronts, 121 stations, on the shared Japanese steps. Publish
+  through `publish-city` at review time (`app/` changes: a new page, notice
+  50, Taoyuan's macro label).
+- [x] **The `japan-city` skill**, written from Kobe 2026-09-27
+  (`.claude/skills/japan-city/SKILL.md`): shared modules, standing calls,
+  twelve traps, notices, and a sheet per remaining city. Next city
+  recommended: Osaka.
 - [ ] **Join control** - like-for-like against the Economic Census per-ward
-  飲食店 count (the owner's chosen control) - at build.
+  飲食店 count (the owner's chosen control) - at build. **Not yet run for
+  Kobe**: it needs an e-Stat download (the owner's OK first). Kobe's join was
+  checked instead against the Minato control and every screen, and a GSI
+  sample in the brief.
 - [ ] **Rail** - whether lines served only by limited-express trains count was
   never ruled on (the Shinkansen is out, owner 2026-09-24). **Owner, once for all five.**
 

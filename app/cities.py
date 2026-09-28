@@ -971,10 +971,12 @@ CITIES = [
         "region": "East Asia",
         "country": "Taiwan",
         "in_default_view": False,
-        # WEST of its dot: Taipei (Regional)'s dot sits a few pixels east of
-        # Taoyuan's at the East Asia zoom, so the two names split west/east.
-        # Scored by check_macro_labels.py (width 57.4 px, measured 2026-09-25).
-        "label_offset": ("end", -10, 0),
+        # ABOVE its dot since 2026-09-27: Kobe widened the East Asia frame, and at
+        # the lower zoom the west-side pill covered Taichung's marker and overlapped
+        # Hong Kong's pill at every width. Above, with Taipei (Regional) still east,
+        # is the one-change layout check_macro_labels.py scores clean (searched over
+        # the five East Asia labels). Width 57.4 px, measured 2026-09-25.
+        "label_offset": ("middle", 0, -22),
     },
     {
         "name": "Taipei (Regional)",
@@ -1039,6 +1041,20 @@ CITIES = [
         # Guadalajara's and Mexico City's pills by one joint search (see
         # theirs), confirmed by check_macro_labels.py.
         "label_offset": ("end", -12, 4),
+    },
+    {
+        "name": "Kobe",
+        "lat": 34.69,
+        "lon": 135.195,
+        "page": "pages/50_Kobe_Heatmap.py",
+        "blurb": "Kobe's subway, the Port and Rokkō Liners, and JR and private railways",
+        "region": "East Asia",
+        "country": "Japan",
+        "in_default_view": False,
+        # Above its dot, the default: alone at the east edge of East Asia.
+        # Scored clear by check_macro_labels.py at 375, 768 and 1200 (width
+        # 34.2 px, measured 2026-09-27 in the app's own document).
+        "label_offset": ("middle", 0, -22),
     },
 ]
 

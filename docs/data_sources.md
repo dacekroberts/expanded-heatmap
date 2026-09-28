@@ -1647,6 +1647,20 @@ describe-the-changes line and a non-endorsement line. Wording approved by the ow
 `check_personal_exposure.py busan`, run 2026-09-27 (the verdict is in `DECISIONS.md`). Any
 objection from Busan is honoured, not argued.
 
+**50. City of Kobe and MLIT (Kobe) — required, and DISPLAYED.**
+
+**PERMITTED WITH CONDITIONS** (read 2026-09-24; the Japan rows in
+[`data_sources/japan.md`](data_sources/japan.md)). Kobe City's lists are **CC BY 2.1 JP**:
+the prescribed `出典：「生活衛生関係許可施設等の情報提供」（神戸市）（https://www.city.kobe.lg.jp/a99427/kenko/health/hygiene/dataset.html）`,
+`…を加工して作成`, the licence link and © City of Kobe. MLIT's 位置参照情報 and N02 are **PDL
+1.0**, each with its own credit line. N03 (CC BY 4.0) is credited although it is only used to
+pick stations and is **never drawn** (the Survey Act). **MUST NOT**: look as if the city made the
+map; use city logos; say the pins are businesses open now (the city's page warns closed premises
+remain). **If the city asks, remove its credit** (CC BY 2.1 JP art. 5). Wording approved by the
+owner 2026-09-27. **MUST DO:** `check_personal_exposure.py kobe` with its Japan pass (the
+operator's own name is never shown as a trade name), run 2026-09-27; the verdict is in
+`DECISIONS.md`.
+
 What has grown instead is the pile of **permission questions**, now four: three
 "what does silence mean?" calls and the route-colour one. They are questions
 about permission rather than implementation, and they are the only items of

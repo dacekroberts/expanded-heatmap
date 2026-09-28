@@ -252,6 +252,12 @@ REGISTRIES = {
     "seoul": dict(raw=None, trade=None, owner=None,
                   processed="businesses_clean.csv",
                   address=("address",), korean=True, withheld="Name withheld"),
+    # Japan: each city's own permit list carries an operator column beside the
+    # trade name. Step 2 never keeps the operator column; `japan` runs the
+    # owner's rule test (a trade name that IS the operator's name is withheld).
+    "kobe": dict(raw=None, trade=None, owner=None,
+                 processed="businesses_clean.csv",
+                 address=("address",), japan=True),
     # Daegu: Seoul's register and pass through pipeline/countries/korea.py.
     # The health-food file's addresses are masked by the publisher; the Korean
     # residence test reads a masked 동/호 unit as a unit (korean_names.py).
@@ -815,6 +821,32 @@ def check(slug):
               f"{int((sole & shown).sum()):,}, industry shown on {int((sole & ~shown).sum()):,}")
         print(f"    SOLE PROPRIETOR NAME SHOWN WITHOUT A BUSINESS MARKER: {sum(breach):,} "
               f"(should be 0)  [Taiwan rule]")
+
+    # THE JAPAN PASS. Japan's permit lists carry the operator's name (営業者名 /
+    # 開設者名) beside the trade name (屋号 / 施設名称), and the Latin heuristic
+    # cannot read Japanese. The owner's rule (2026-09-27, Kobe): where the trade
+    # name IS the operator's own name, the pin shows the permit type instead
+    # (japan_register.name_is_operator). This tests the RULE on what reached the
+    # map: re-reads the city's raw files, collects the trade names that are an
+    # operator's name, and counts pins still showing one - should be ZERO. The
+    # operator names are compared in memory and never printed.
+    if spec.get("japan") and proc.exists():
+        sys.path.insert(0, str(ROOT))
+        import importlib
+        from pipeline.countries import japan_register as jr
+        cfg = importlib.import_module(f"pipeline.{slug}.config")
+        own = set()
+        for key in cfg.SOURCES:
+            for r in jr.city_rows(cfg.source_csv(key)):
+                if jr.name_is_operator(r):
+                    own.add(jr._name_key(next((r[c] for c in jr.NAME_COLS if (r.get(c) or "").strip()), "")))
+        d = pd.read_csv(proc, dtype=str, low_memory=False).fillna("")
+        shown = d.business_name.map(jr._name_key).isin(own)
+        withheld = (d.business_name == d.permit_type).sum()
+        print(f"  trade names that ARE an operator's own name, in the raw files: {len(own):,}")
+        print(f"  pins showing their permit type instead of a name: {int(withheld):,}")
+        print(f"    OPERATOR'S OWN NAME SHOWN AS A TRADE NAME: {int(shown.sum()):,} of {len(d):,} "
+              f"rows (should be 0)  [Japan rule]")
 
     # Where the registry records the entity type itself, report that first: it
     # is what the publisher asserts, not what a regex guesses.

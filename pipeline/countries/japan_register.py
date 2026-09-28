@@ -30,7 +30,14 @@ and is checked against publisher coordinates and GSI: see join_city.
 **Privacy by construction.** The loaders read the premises columns BY NAME
 (address, trade name, type, the publisher's lat/lon). The operator columns
 these files carry (営業者名, 申請者名, 開設者名 and 開設者住所, 代表者名, phones)
-are never selected.
+are never selected into a permit.
+
+**One exception, the owner's (2026-09-27, Kobe): `name_is_operator()` reads the
+operator's name IN MEMORY to compare it with the trade name**, and returns only
+a yes or no. Kobe publishes 14 premises whose trade name IS the operator's own
+name; the privacy check cannot read Japanese names, so this comparison is the
+only way to see them. Where it says yes, the map shows the permit type instead
+(Taiwan's name rule). The operator's name is never stored, written or shown.
 """
 import collections
 import csv
@@ -459,7 +466,11 @@ def permits_from_rows(rows, pref, city):
         addr = next((r[c] for c in ADDR_COLS if (r.get(c) or "").strip()), "")
         a = unicodedata.normalize("NFKC", addr).replace(" ", "").replace("　", "")
         a = re.sub("^" + pref, "", a)
-        a = a.split(city, 1)[-1]
+        # Kobe's miss: the city's name can recur INSIDE an address
+        # (灘区六甲山町…神戸市立六甲山牧場), so strip it only where no ward precedes it.
+        i = a.find(city)
+        if i >= 0 and "区" not in a[:i]:
+            a = a[i + len(city):]
         if city == "京都市":
             a = a.translate(KYOTO_GAIJI)
         if city.endswith("区"):
@@ -561,6 +572,26 @@ def join_city(permits, blocks, chome):
             # rule D: a twin town (an ambiguous 地番 falls through to here too)
             p["tier"], p["twin"] = "none", True
     return permits
+
+
+OPERATOR_COLS = ("営業者名", "開設者名", "申請者名", "代表者名")
+
+
+def _name_key(s):
+    return re.sub(r"[\s・]", "", unicodedata.normalize("NFKC", s or ""))
+
+
+def name_is_operator(row):
+    """True when the row's trade name IS its operator's own name - an
+    individual's name published as a shop sign. Compared in memory; the
+    operator's name is not returned (owner 2026-09-27, see the docstring).
+    A company operator is never an individual: KYOTO_CORP's markers say so."""
+    name = _name_key(next((row[c] for c in NAME_COLS if (row.get(c) or "").strip()), ""))
+    for c in OPERATOR_COLS:
+        op = _name_key(row.get(c))
+        if op and not KYOTO_CORP.search(op) and name == op:
+            return True
+    return False
 
 
 def haversine_m(a, b):

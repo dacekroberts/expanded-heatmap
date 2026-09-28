@@ -7,6 +7,27 @@ moved verbatim under the same headings. The numbered notices this project must
 display, the removal-request commitment and the deploy gate are in the entry
 point, not here.
 
+## Business registries
+
+| City | Source | Provides | Endpoint | Filter at download | Retrieved |
+|---|---|---|---|---|---|
+| Kobe | **Kobe City's 生活衛生関係許可施設等の情報提供**: the food-permit list (all permits in force at the end of 2026-03; cp932 CSV) and the barber (理容所), beauty (美容所) and laundry (クリーニング所) registers (UTF-16 LE, TAB-separated despite `.csv`), JOINED to MLIT's 位置参照情報 by `pipeline/countries/japan_register.py` | Food service, food-only Retail (菓子, そうざい, 食肉, 魚介類), Personal services | `https://www.city.kobe.lg.jp/documents/6359/` + `20260407150739.csv`, `r7_riyousho.csv`, `r7_biyousho.csv`, `r7_cleaning.csv` (page: `https://www.city.kobe.lg.jp/a99427/kenko/health/hygiene/dataset.html`). The stale 2021 list `r30531_all_.csv` beside them is not used | None at download (whole files; the columns carry operator names and phones, which step 2 never keeps: only 屋号 / 施設名称, the type and the address are read, and the operator's name is compared in memory for the owner's name rule) | Screen, 2026-09-24; recorded by `fetch_sources.py` 2026-09-27 |
+| Kobe (support) | **MLIT 位置参照情報** for the 9 wards (28101, 28102, 28105-28111): block level (24.0a) and town-chōme level (19.0b) - the address JOIN, never drawn | Coordinates | `https://nlftp.mlit.go.jp/isj/dls/data/24.0a/{code}-24.0a.zip`, `https://nlftp.mlit.go.jp/isj/dls/data/19.0b/{code}-19.0b.zip` | None | 2026-09-24 |
+
+## Transit feeds
+
+### Rail geometry that is not a GTFS feed
+
+| City | System / operator | Endpoint | Retrieved | Note |
+|---|---|---|---|---|
+| Kobe | **MLIT 国土数値情報 N02 鉄道データ (N02-24)**: every line with a station in the city - Kobe Municipal Subway, Kobe New Transit, JR West, Hankyu, Hanshin, Sanyō, Kobe Electric and the Kobe Kōsoku Line - the Shinkansen and the Maya and Rokkō funiculars left out; stations are platform LineStrings, centroided and collapsed on the station-group code `N02_005g` | `https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-24/N02-24_GML.zip` (shared cache `data/japan/raw/`) | 2026-09-21 (screen) | PDL 1.0. English station names from **OpenStreetMap** (`name:en` of `railway=station` and `railway=halt` in the city's box, one Overpass query through `pipeline/osm.py`, cached as `data/kobe/raw/osm_station_names.json`; ODbL, credited by the map's OSM notice) |
+
+## Boundary layers
+
+| City | Layer | Endpoint | Filtered to |
+|---|---|---|---|
+| Kobe | **MLIT 国土数値情報 N03 行政区域 (N03-2025), Hyōgo** - PICKS stations and anchors labels; **never drawn** (the Survey Act) | `https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_28_GML.zip` (shared cache `data/japan/raw/`) | `N03_007` in the 9 ward codes (union); the neighbouring municipalities name the excluded stations |
+
 ## Licences and terms of use
 
 ### Explicit and permissive — confirmed

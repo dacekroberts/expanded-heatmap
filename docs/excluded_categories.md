@@ -1727,6 +1727,32 @@ market's plate), rural addresses and intersections.
 15 stations in Taoyuan are left out here and counted on Taoyuan's page. Not drawn: Taiwan
 Railway, high-speed rail and the Maokong Gondola.
 
+### Kobe - the city's food permits and 生活衛生 registers, joined to MLIT's address blocks
+
+**Left out** - every shop that is not a food shop (Japan has no general business licence, so none
+is published); food businesses that only notify the city (届出: many convenience stores and
+greengrocers); food manufacturing other than bakeries and confectioners (菓子) and delis
+(そうざい), 879 rows; 153 vending machines; 194 institutional caterers; 1,943 food trucks and
+stalls registered to trade anywhere in the city (市内一円); storeless laundry pick-ups; mobile
+salons.
+
+**Counted, and measured** - 115 of the 2,362 bakery, confectioner and deli rows (4.9%) carry a
+trade name that reads as a factory or central kitchen (工場, センター, 本社); they are kept (owner,
+2026-09-27).
+
+**Not placed** - 85 rows (0.3%): Rokkō-san's mountain addresses and a few hill and park
+addresses. Another 684 are placed at their district's centre rather than their block.
+
+**Names not shown** - 10 premises whose trade name is the operator's own name are shown by their
+permit type (owner's rule).
+
+**Closed premises** - the city's list may keep premises that have closed; a dot is a permit on
+file, not a business open today.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city line: the stations
+beyond it, in Akashi, Miki, Ashiya, Sanda, Takarazuka, Harima and Nishinomiya, are left out. Not
+drawn: the Shinkansen (Shin-Kobe is kept as a subway station) and the Maya and Rokkō cable cars.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

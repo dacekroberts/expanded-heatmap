@@ -887,6 +887,16 @@ Cities built and running end to end (pipeline, map, app page):
   station is in. The line misses the city's largest centre, so most storefronts
   lie outside the rings.
 
+- **Kobe** - Japan's first city: the subway, the Port and Rokkō Liners, and
+  the JR and private railways, cut at the city line, from MLIT's national
+  railway data rather than a feed, with English station names from
+  OpenStreetMap. The business leg is the city's own food-permit list and its
+  barber, beauty and laundry registers, joined to MLIT's address blocks - no
+  geocoder. Retail is food retail only, because Japan licenses no other shop.
+  A trade name that is the operator's own name shows the permit type (owner).
+  It built the shared Japanese steps (`pipeline/countries/japan_step1.py`,
+  `japan_step2.py`), so the next Japanese city is mostly a config.
+
 - **Riga** - Rīgas satiksme's seven tram routes, across the city's 58
   neighbourhoods; Latvia's first city, in Amsterdam's two-layer shape. Food
   service is the State Revenue Service's excise-licence register - the premises
@@ -1014,6 +1024,8 @@ that came Hong Kong, Riga and Seoul (the owner built Hong Kong first on 2026-09-
 so the week's remaining budget held a whole city; the order before that was
 Rotterdam, then Taiwan).
 Taiwan and Japan each get a per-country skill written after their first city.
+Japan's first, Kobe, was built 2026-09-27 (held for review time); the
+`japan-city` skill is written from it before any other Japanese city starts.
 The two renderer fixes Brazil's deploy check found go first: the owner gated
 the next deploy on them. New
 Orleans and Seattle remain deferred, both needing decisions before code. Take

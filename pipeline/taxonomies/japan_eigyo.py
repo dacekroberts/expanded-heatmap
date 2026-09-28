@@ -73,6 +73,8 @@ def explain(value, source="food"):
     if source in PERSONAL_SOURCES:
         if "無店舗" in str(value or ""):
             return None, "storeless pick-up (not a premises)"
+        if "移動" in str(value or ""):  # Kobe's 移動美容室: a salon in a vehicle
+            return None, "mobile salon (not a premises)"
         return "Personal services", f"{source} register"
     v = normalise(value)
     for name, bucket, pat in _COMPILED:
@@ -106,3 +108,4 @@ for _v, _want in (("飲食店営業", "Food service"), ("① 飲食店営業", "
     assert classify({VALUE_COLUMN: _v}) == _want, (_v, classify({VALUE_COLUMN: _v}), _want)
 assert classify({VALUE_COLUMN: "取次所", "source": "laundry"}) == "Personal services"
 assert classify({VALUE_COLUMN: "無店舗取次店", "source": "laundry"}) is None
+assert classify({VALUE_COLUMN: "移動美容室", "source": "beauty"}) is None
