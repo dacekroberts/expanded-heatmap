@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**95 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**96 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Dubai and Manila re-screened from the large-transit gap: Dubai to Band D, Manila discarded (owner)](#2026-09-28---dubai-and-manila-re-screened-from-the-large-transit-gap-dubai-to-band-d-manila-discarded-owner)
 - [London re-screened from the large-transit gap: Band B, food only (owner)](#2026-09-28---london-re-screened-from-the-large-transit-gap-band-b-food-only-owner)
 - [Worktrees `main-build` and `tokyo-sources` retired (owner)](#2026-09-28---worktrees-main-build-and-tokyo-sources-retired-owner)
 - [Sapporo, Fukuoka and Kyoto landed: city-landed sweep and live check after the reboot pass](#2026-09-28---sapporo-fukuoka-and-kyoto-landed-city-landed-sweep-and-live-check-after-the-reboot-pass)
@@ -131,6 +132,44 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Dubai and Manila re-screened from the large-transit gap: Dubai to Band D, Manila discarded (owner)
+
+- **Found both cities' transit reasons obsolete: OpenStreetMap carries the
+  rail.** Both were ruled out 2026-09-21 on transit feeds alone: Dubai's
+  catalogue feed was a personal GitLab artefact, and Manila's operator typed
+  its lines as commuter rail. The project now builds rail from OSM
+  (Monterrey's precedent). One Overpass query per city found Dubai Metro's
+  Red (two branches) and Green lines, with 64 named subway stations, plus the
+  tram. It found Manila's LRT-1, LRT-2 and MRT-3 with refs and colours, but
+  only 24 of the roughly 50 stations carry a station tag, so a build would
+  take them from the routes' stop members.
+- **Moved Dubai to Band D, in Warsaw's weaker form: blocked before
+  measurement (owner's call).** The 2026-09-21 record found the Department of
+  Economy's licence register (`ded_license_master`, mainland Dubai without
+  the free zones). It left two deciding questions open: whether the rows
+  carry locations, and the dataset licence. Neither can be read from here.
+  `dubaipulse.gov.ae` times out on HTTPS and HTTP, its successor `data.dubai`
+  returns a firewall "Request Rejected" on every path, `dubaidet.gov.ae`
+  answers 403, and the API wants a key. The Dubai Data Law (26/2015) was read
+  and describes open data as disseminated "without restrictions or with the
+  relevant minimum restrictions", deferring to a policy that could not be
+  reached. DMCC's free-zone directory forbids copying. A discard was
+  rejected: nothing behind the block was measured, and the register is the
+  right shape.
+- **Discarded Manila: no business list at any level (owner's call).** Business
+  permits are issued by each city's BPLO. `data.gov.ph`, enumerated in the
+  browser, holds 175 datasets from 17 agencies, none on businesses or
+  permits. Seven of the cities on the lines were read: Makati publishes only
+  an aggregate count, Quezon City's dashboards are login-only, and Pasig,
+  Pasay, Mandaluyong, Marikina and San Juan publish no list.
+  `manila.gov.ph`, Taguig, Caloocan and Parañaque answered 403 and were left
+  alone. DTI's BNRS and the FDA portal are lookups, PSA's establishment list
+  is released only as aggregates, and there is no open address file to join
+  to. Band D was rejected: every central city that could be read was
+  negative, so the 403s were not the only thing stopping it. Files:
+  `docs/city_master_list.md`, `docs/global_country_shortlist.md`,
+  `docs/global_transit_gap.md`, `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - London re-screened from the large-transit gap: Band B, food only (owner)
 

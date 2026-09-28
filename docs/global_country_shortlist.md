@@ -2091,8 +2091,8 @@ before the next country is profiled.
 | **Jakarta** | **No MRT Jakarta or LRT Jakarta feed anywhere.** Transjakarta is BRT | MEASURED |
 | **Rio de Janeiro** | **No MetrôRio or SuperVia feed anywhere** | MEASURED |
 | **Kuala Lumpur, Tel Aviv, Lima, Medellín, Bogotá** | No metro operator feed anywhere in the catalogue | MEASURED |
-| **Dubai** | The catalogue's feed is an **anonymous personal GitLab job artefact** returning a non-zip; the transitland fallback 404s | MEASURED |
-| **Manila** | The LRTA feed codes its four rail lines as **commuter rail (type 2)**, which this project excludes. A coding question, but it fails as published | MEASURED |
+| **Dubai** | The catalogue's feed is an **anonymous personal GitLab job artefact** returning a non-zip; the transitland fallback 404s. ▼ **2026-09-28: rail from OSM instead (Metro and tram), and the register's hosts refuse this machine; Band D (owner). See the probe list's item 7** | MEASURED |
+| **Manila** | The LRTA feed codes its four rail lines as **commuter rail (type 2)**, which this project excludes. A coding question, but it fails as published. ▼ **2026-09-28: the rail reason is obsolete (OSM carries LRT-1, LRT-2 and MRT-3 with refs and colours), and the business side fails instead.** `data.gov.ph` holds 175 datasets from 17 agencies, none on businesses; none of the cities on the lines publishes a permit or business list (Makati an aggregate count, Quezon City's dashboards login-only; `manila.gov.ph`, Taguig, Caloocan and Parañaque 403); DTI's BNRS and the FDA portal are lookups; no open address file. **Discarded (owner)** | MEASURED |
 | **Belgium** | Establishment units exist; **bulk access requires application and payment** | MEASURED |
 | **Australia, New Zealand** | Auckland is commuter-only. **Melbourne's PTV feed is a nested zip** the screen cannot read, so its rail is *unverified rather than absent*. Business licensing is not municipal — **ASSERTED** | MIXED |
 | **Russia, Ukraine** | Access and conflict, not data | — |
@@ -3288,7 +3288,14 @@ it to dominate the cost of any European profile.
    first.** The catalogue's Dubai feed is an anonymous personal GitLab
    repository returning a non-zip, and the transitland fallback 404s. The
    business register may well be excellent; there is no agency feed to pair it
-   with until one is found.
+   with until one is found. ▼ **2026-09-28: reopened and blocked.** Rail
+   comes from OpenStreetMap now (Metro Red and Green, 64 named stations, and
+   the tram), so the transit reason is obsolete. But every host of the register
+   refuses this machine: `dubaipulse.gov.ae` times out on HTTPS and HTTP,
+   `data.dubai` (its successor) returns a firewall "Request Rejected" on every
+   path, `dubaidet.gov.ae` 403, and the API wants a key. The location fields and
+   the dataset licence are still unread. Dubai to Band D (owner's call), in
+   Warsaw's shape: a read from inside the UAE first.
 7b. **Barcelona's real rail feed.** TMB was never tested — the catalogue's
    Barcelona entry is a bus operator. This is the single cheapest check that
    could promote Spain to Tier 1, since its business leg is already measured.
