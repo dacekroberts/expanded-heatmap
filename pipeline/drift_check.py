@@ -255,6 +255,43 @@ def resolve_changed(ref: str, all_cities) -> list:
     return sorted(cities)
 
 
+LOCK_OFFSET = 1 << 20  # lock a byte past the text, so a waiter can read who holds it
+
+
+def hold_machine_lock():
+    """One drift check at a time on this machine, across every worktree.
+
+    On 2026-09-28 heavy jobs from several sessions overlapped and the machine
+    ran out of memory twice, closing the Claude app (DECISIONS). The lock file
+    sits in the git directory every worktree shares, and the lock is the
+    operating system's: it dies with the process, so a crash leaves nothing
+    stale to clear. Returns the open file; the lock lasts while it is open.
+    """
+    common = subprocess.run(["git", "rev-parse", "--git-common-dir"], cwd=ROOT,
+                            capture_output=True, text=True).stdout.strip()
+    path = (ROOT / common).resolve() / "drift_check.lock"
+    path.touch(exist_ok=True)
+    fh = open(path, "r+", encoding="utf-8")
+    try:
+        fh.seek(LOCK_OFFSET)
+        if os.name == "nt":
+            import msvcrt
+            msvcrt.locking(fh.fileno(), msvcrt.LK_NBLCK, 1)
+        else:
+            import fcntl
+            fcntl.lockf(fh, fcntl.LOCK_EX | fcntl.LOCK_NB, 1, LOCK_OFFSET)
+    except OSError:
+        fh.seek(0)
+        holder = fh.readline().strip() or "holder unknown"
+        sys.exit(f"Another drift check is running on this machine ({holder}). "
+                 "One at a time: wait for it to finish, then run this again.")
+    fh.seek(0)
+    fh.write(f"pid {os.getpid()} in {ROOT.name}, since "
+             f"{datetime.datetime.now():%Y-%m-%d %H:%M:%S}".ljust(120) + "\n")
+    fh.flush()
+    return fh
+
+
 def main():
     # Steps print place and business names (Czech, Korean, Chinese...), and a
     # Windows console defaults to cp1252: `drift_check.py prague` raised
@@ -308,6 +345,7 @@ def main():
         print("\n".join(requested))
         sys.exit(0)
 
+    lock = hold_machine_lock()  # noqa: F841 - held until the process exits
     all_clean = True
     if jobs == 1:
         # The default path, unchanged: print straight to stdout as it goes, so

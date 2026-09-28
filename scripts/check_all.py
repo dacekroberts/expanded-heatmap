@@ -57,6 +57,7 @@ CHECKS = [
     ["scripts/check_stray_bullets_selftest.py"],
     ["scripts/check_theme_sync.py"],
     ["scripts/decisions_index.py", "--check"],
+    ["scripts/python_memcap.py", "--check"],
     ["scripts/readme_cities.py", "--check"],
     ["scripts/archive_decisions_selftest.py"],
 ]

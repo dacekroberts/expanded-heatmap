@@ -491,6 +491,24 @@ reader had already found and immediately found five more.
   the union of both sides' full stages. Run `scripts/decisions_index.py`
   afterwards.
 
+<a id="memory"></a>
+### The memory cap
+
+- **Every Python process is capped at 8 GB, 12 GB with its children, and
+  one drift check runs on the machine at a time.** On 2026-09-28 a licence
+  agent's scratch script decoded a ward's PDF by hand, expanding every
+  character range in its font tables into a dict entry and holding every
+  stream at once. One `python.exe` reached 47 GB on a 16 GB machine (commit
+  limit 29 GB). Windows logged "low virtual memory" at 11:59:37 and closed
+  the Claude app a minute later; a second 47 GB process at 12:05:04 closed it
+  again, with a four-job drift check, a census join and a `deploy-verify`
+  in flight (which of them grew is unproven). Every session lost its turn and the desktop shell had to be
+  restarted. `scripts/python_memcap.py`, installed as `usercustomize.py`,
+  puts each process in a Windows job object, so a runaway gets a
+  `MemoryError` of its own. `drift_check.py` takes an operating-system lock
+  in the shared git directory, which dies with the process. The cap does
+  not reach `.venv-lean`, which skips the user site.
+
 ## Commands
 
 <a id="commands"></a>
@@ -526,6 +544,7 @@ python scripts/check_deploy_imports.py [--ref REF]      # clean clone + lean ven
 node scripts/profile_zoom.mjs <baseUrl> <city,city> [reps]   # wheel/click/cluster zoom lag, headless Edge, trusted input
 node scripts/check_macro_attribution.mjs [baseUrl] [375,768,1200]   # the front page's OSM credit is painted ON TOP of the city dots; live: <app>/~/+
 python scripts/decisions_index.py [--check]             # refresh DECISIONS.md's index
+python scripts/python_memcap.py [--install|--check|--selftest]   # every Python process capped at 8 GB (12 with children); --install with each Python the sessions use
 python scripts/merge_append_only.py DECISIONS.md [--dry-run]   # resolve an append-only merge conflict
 python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon> --region <region> --country <country>   # add --dry-run first
 .venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"

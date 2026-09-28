@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**81 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**82 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one drift check at a time (owner)](#2026-09-28---two-app-crashes-traced-to-memory-exhaustion-python-capped-at-8-gb-a-process-one-drift-check-at-a-time-owner)
 - [Macro-map dots coloured by data completeness; storefront count in the tooltip, not the dot size (owner)](#2026-09-28---macro-map-dots-coloured-by-data-completeness-storefront-count-in-the-tooltip-not-the-dot-size-owner)
 - [Band T's EDGE cities grouped at its top; Band T below Band N (owner)](#2026-09-28---band-ts-edge-cities-grouped-at-its-top-band-t-below-band-n-owner)
 - [Band C's last five get verdicts; Band B reopened for the passed, Band N created for no page, Band C closed (owner)](#2026-09-28---band-cs-last-five-get-verdicts-band-b-reopened-for-the-passed-band-n-created-for-no-page-band-c-closed-owner)
@@ -117,6 +118,49 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one drift check at a time (owner)
+
+- **Found: both crashes were the machine running out of commit, not a
+  graphics fault.** Windows' Resource-Exhaustion-Detector (System log, id
+  2004) logged "low virtual memory" at 11:59:37 (python.exe PID 13360,
+  47.34 GB) and 12:05:04 (PID 18300, 47.11 GB) on a 15.9 GB machine whose
+  commit limit is 29.2 GB. `claude.exe` was closed as hung at 12:00:38 and
+  12:15:43 (Application Hang 1002).
+  - The first process was Tokyo sources research's Ōta licence agent
+    running a hand-written PDF text decoder (`pdfscan.py`, started 18:57:30
+    UTC, backgrounded at 18:59:32, ended in MemoryError). It expanded each
+    ToUnicode `bfrange` into one dict entry per code and held every stream at
+    once.
+  - The second is unproven. In flight: the Japan session's four-job drift
+    check (started 67 s before, ended in MemoryError) and its census control
+    (12 s before, MemoryError), beside staging's `deploy-verify`. Staging's
+    identical four-job drift check had finished clean at 11:54, so no city
+    step needs 47 GB on its own.
+- **Decided (owner): cap every Python process at 8 GB, 12 GB with its
+  children.** `scripts/python_memcap.py`, installed as `usercustomize.py` in
+  the user site, puts each process in a Windows job object at start-up, so a
+  runaway gets its own MemoryError. Tested before install with a 0.5 GB test
+  cap: 100 MB allocates, 1 GB is a MemoryError, a child inherits the cap.
+  `HEATMAP_MEMCAP_TEST_GB` can only lower it. `--check` joins
+  `check_all.py`. Measured legitimate peaks during the Japan session's
+  one-job drift re-run: 1.79 GB at most (Fukuoka step 1).
+  - Rejected: a project-only cap through `.claude/settings.json`
+    (sessions already open stay uncovered until they restart). Not covered:
+    `.venv-lean`, which skips the user site.
+  - The install was refused by auto mode as persistence; the owner runs it.
+- **Decided (owner): one `drift_check.py` on the machine at a time.** It takes
+  an operating-system lock in the shared git directory (dies with the
+  process, so a crash leaves nothing stale); a second run exits naming the
+  holder. Tested: free, held (refused with the holder's pid), released.
+- **Decided (owner): never hand-write a PDF or font decoder**; `pdftotext` or
+  `pypdf`, one page first. CLAUDE.md working rule `[#memory]`.
+- **Checked for crash damage: none.** `git fsck` clean; no stale `.lock`
+  in `.git`; every worktree's tracked files clean except the Japan session's
+  running drift re-render and cleanup's own edits; every file written
+  11:55-12:20 under `data/` and the worktrees intact (Python compiles, the
+  census xlsx passes a zip test, Sapporo's map ends in `</html>`); every
+  Claude and project JSON config parses; 17 memory files intact.
 
 ### 2026-09-28 - Macro-map dots coloured by data completeness; storefront count in the tooltip, not the dot size (owner)
 
