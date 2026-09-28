@@ -56,6 +56,15 @@ unless this session finds the data.
   first-permits list is the one accepted exception, at its measured share).
 - **The COVID-era lists are not used** (2026-09-24), whatever their licence.
 - **Downloads need the owner's OK**: name the file, source and size first.
+  **Never open a PDF or ZIP URL in the Browser pane**: the ward servers send
+  it as a download, and it lands at the checkout root (it happened twice on
+  2026-09-28). Use HEAD requests and WebFetch.
+- **Never hand-write a PDF decoder** (a ToUnicode / CMap or stream parser).
+  One built every stream in memory, and a dict entry for every code in each
+  bfrange. It drove python.exe to 47 GB committed on this 16 GB machine and
+  crashed the app (2026-09-28, found by the cleanup session). Use `pdftotext`
+  or `pypdf`, page by page, and measure memory on ONE page before running a
+  whole file. The `pdf-register` skill must carry this rule.
 - Published prose waits for the owner; so do judgment calls (recommend, then
   wait).
 
