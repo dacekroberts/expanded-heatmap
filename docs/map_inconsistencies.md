@@ -14,7 +14,7 @@ step files, `docs/excluded_categories.md` (EC), `docs/data_sources.md` (DS), the
 build briefs, a grep of `DECISIONS.md` (DEC), and the committed maps. Several
 columns come from parsing each committed `outputs/<slug>/heatmap.html`: the legend
 rows, the layer-control names (the ring edges and the per-bucket pin counts; those
-counts cover pins **inside the rings only**, per `pipeline/map_common.py:2026-2042`),
+counts cover pins **inside the rings only**, per `pipeline/map_common.py` `add_pin_layer()`),
 and the two heat layers' point arrays (inside the rings, and all mapped
 storefronts). Where no file says something, the cell reads **UNKNOWN**. Where a
 dimension does not apply, it reads **—**.
@@ -46,7 +46,10 @@ dense-looking city may simply have more complete records.
   nine Brazilian cities (IBGE's 2022 census walk).
 - **National statistical or establishment registers:** Mexico City, Guadalajara and
   Monterrey (INEGI DENUE), the five French cities (SIRENE), Oslo (Enhetsregisteret sub-units),
-  Copenhagen (CVR production units), Prague (ROS02 with RES).
+  Copenhagen (CVR production units), Prague (ROS02 with RES); Taichung, Taoyuan
+  and Taipei (the national business tax register, FIA).
+- **Excise licences plus a cadastre:** Riga (VID's alcohol and tobacco licences for
+  food; VZD's premise groups for shops and services).
 - **Property or building registers:** Dublin (rateable valuation list); Amsterdam
   and Rotterdam for shops (BAG shop-use units).
 - **Permit lists:** Amsterdam's food layer (hospitality permits); Rotterdam's food
@@ -54,8 +57,9 @@ dense-looking city may simply have more complete records.
 - **A food-premises licence register only:** Hong Kong (FEHD's registers, which
   license restaurants and food shops and nothing else a storefront needs).
 - **Reason:** each country and city publishes what it publishes. The pages for
-  Montréal, Mexico City, Guadalajara, Monterrey, Madrid and Barcelona already say their density
-  is "not comparable" with licence-register cities.
+  Mexico City, Guadalajara, Monterrey, Madrid and Barcelona already say their density
+  is "not comparable" with licence-register cities; Montréal's makes the point without
+  those words (checked 2026-09-28).
 
 ### 2. Some maps have only two categories, and some have a thin one
 **Reader sentence:** Most maps colour businesses as Retail, Food service and Personal
@@ -144,7 +148,7 @@ are drawn on the line but get no ring. Some cover several municipalities because
 register covers them all, or because the rail network only makes sense that way.
 - **Labelled "(Regional)":** Miami (Miami-Dade County), Vancouver (with Surrey),
   Guadalajara (4 municipios), Monterrey (4 municipios), Lille (11 communes), Fortaleza (4), Porto Alegre (6),
-  Recife (4), Santos (with São Vicente).
+  Recife (4), Santos (with São Vicente), Taipei (with New Taipei).
 - **Cover more than one municipality but are not labelled:** Montréal (the
   agglomeration: 19 boroughs and 15 related municipalities), Dublin (four local
   authorities), Copenhagen (with Frederiksberg), Tokyo (the 23 special wards, each
@@ -203,6 +207,11 @@ name at their home.
   Fukuoka (5, on the city's lists only: MHLW publishes no operator column to test),
   Tokyo (2, on the lists that name their operators only: most name only companies,
   and two wards withhold individuals' names themselves).
+- **"Name withheld" in place of a personal name:** Seoul (138 pins), Daegu (113),
+  Busan (114).
+- **Line of business in place of an unmarked sole proprietor's name:** Taichung
+  (11,907 pins), Taoyuan (7,230), Taipei (17,890).
+- **"No shop sign":** Hong Kong (308 pins, where the licence records none).
 - **Reason:** the source has no name column, or a privacy rule.
 
 ### 9. The data dates from different years, and not every page says when
@@ -220,8 +229,8 @@ a few sources are older: a 2022 census, a 2022 street survey, a July 2025 regist
   2023 snapshot, the other five run to 2026; `pipeline/tokyo/config.py`
   `_FOOD_AS_OF`).
 - **Date of the business data shown on the page:** Barcelona, Copenhagen, Prague,
-  Amsterdam, Rome, the Brazilian cities, Rotterdam, Daegu, Busan, the six Japanese
-  cities.
+  Amsterdam, Rome, the Brazilian cities, Rotterdam, Hong Kong, Riga, Seoul, Daegu,
+  Busan, Taichung, Taoyuan, Taipei, the six Japanese cities.
 - **Only the transit date shown:** Paris, Marseille, Toulouse, Lille, Rennes, Oslo.
 - **No date shown:** the nine US cities, the five Canadian, the three Mexican, Madrid,
   Dublin, Milan.
@@ -400,7 +409,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Vancouver (Regional) | 2 licence registers | Vancouver licences; Surrey directory | Own types (both) | 1,847 / 1,867 / 954 | — |
 | Montréal | Street survey | Locaux commerciaux (annual) | NAICS (SCIAN = NAICS) | 4,852 / 4,070 / 1,499 | Edge municipalities thinner in the survey |
 | Calgary | Licence register | Business Licences | Own licencetypes | 1,977 / 2,869 / 1,325 | Food over Retail (dual-licence rule) |
-| Edmonton | Licence register | Business Licences | Own licence categories | 1,034 / 922 / 416 | Personal services overstated (clinics) |
+| Edmonton | Licence register | Business Licences | Own licence categories | 1,039 / 924 / 417 | Personal services overstated (clinics) |
 | Toronto | Licence register | MLS licences | Own MLS category | 328 / 6,461 / 1,950 | Retail = regulated slice only |
 | **Mexico** | | | | | |
 | Mexico City | National statistical register | INEGI DENUE | SCIAN | 94,642 / 24,938 / 13,782 | Street stalls excluded |
@@ -485,7 +494,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Monterrey (Regional) | Source coordinates | Street stalls not shown | Same as Mexico City; 22 located outside the four municipios dropped |
 | **Spain** | | | |
 | Madrid | Source coordinates; 9.2% zero, dropped | 1 premises in 11 cannot be placed | Accommodation, wholesale, repair, no-shopfront |
-| Barcelona | Source coordinates; zeros dropped (count UNKNOWN) | Survey is 2022 | Vacant units (1 in 9), hotels, 458 mixed rows |
+| Barcelona | Source coordinates; no zero-coordinate rows (`baseline.json`: 0 of 58,908) | Survey is 2022 | Vacant units (1 in 9), hotels, 458 mixed rows |
 | **Ireland** | | | |
 | Dublin | Source coordinates (ITM) | Large areas with no rail | No names published at all |
 | **Italy** | | | |
@@ -552,8 +561,8 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Edmonton | UNKNOWN (2026-09-21) | — | 0.6 mi | Yes | 22% | Business name |
 | Toronto | Current licences (2026-09-21) | — | 0.6 mi | Yes | 48% | Operating name |
 | **Mexico** | | | | | | |
-| Mexico City | UNKNOWN edition (2026-09-22) | — | 0.6 mi | Yes (restored 2026-09-27) | 47% | Shop sign |
-| Guadalajara (Regional) | UNKNOWN edition (2026-09-22) | — | 0.6 mi | Yes (restored 2026-09-27) | 31% | Shop sign |
+| Mexico City | DENUE 05_2026 (2026-09-22) | — | 0.6 mi | Yes (restored 2026-09-27) | 47% | Shop sign |
+| Guadalajara (Regional) | DENUE 05_2026 (2026-09-22) | — | 0.6 mi | Yes (restored 2026-09-27) | 31% | Shop sign |
 | Monterrey (Regional) | DENUE 05_2026 (2026-09-27) | — | 0.6 mi | Yes | 25% | Shop sign |
 | **Spain** | | | | | | |
 | Madrid | Portal refreshed daily (2026-09-22) | — | 0.6 mi | Yes | 95% | Trade name |
@@ -566,9 +575,9 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | **France** | | | | | | |
 | Paris | SIRENE monthly; month UNKNOWN (2026-09-22) | T | 0.3 mi | Yes | 98% | Sign/usual name (about 40%), else address |
 | Marseille | same (2026-09-23) | T | 0.3 mi | Yes | 55% | same (43% named) |
-| Toulouse | same (2026-09-23) | T | 0.3 mi | Yes | 64% | same (share UNKNOWN) |
-| Lille (Regional) | same (2026-09-23) | T | 0.3 mi | Yes | 61% | same (share UNKNOWN) |
-| Rennes | same (2026-09-23) | T | 0.3 mi | Yes | 68% | same (share UNKNOWN) |
+| Toulouse | same (2026-09-23) | T | 0.3 mi | Yes | 64% | same (about half show an address, per the page) |
+| Lille (Regional) | same (2026-09-23) | T | 0.3 mi | Yes | 61% | same (about half show an address, per the page) |
+| Rennes | same (2026-09-23) | T | 0.3 mi | Yes | 68% | same (about two in five show an address, per the page) |
 | **Norway** | | | | | | |
 | Oslo | UNKNOWN (2026-09-24) | T | 0.3 mi | Yes | 76% | Name; address for sole traders |
 | **Denmark** | | | | | | |
@@ -732,14 +741,17 @@ wording lands at review time.
     that happens to agree. EC's per-category counts just above that sentence
     (`SECOND HAND SHOP` 1,806 and so on, summing to 3,475) were from that
     pre-cancellation stage too; they now come from the drawn pins and sum to
-    759. Both EC changes are on branch `review-toronto-q18` until review time.
+    759. Both EC changes are now on master (EC quotes 759 of 18,186; checked
+    2026-09-28).
 19. **Stale counts in EC:** the header says "Business counts are from the 2026-09-21
     rebuild", but more than half the cities were built from 2026-09-22 to 09-24; line
     1540 compares New York with "the other four cities".
-20. **Data dates on pages.** Nineteen pages show no date for their business data
-    (theme 9). Is a uniform "data as of" line wanted? Several sources' own as-of dates
-    are not recorded anywhere read: the DENUE edition, the SIRENE release month,
-    Dublin's valuation list date, Milan's registers.
+20. **Data dates on pages.** Twenty pages show no date for their business data
+    (theme 9; Monterrey was added). Is a uniform "data as of" line wanted? Several
+    sources' own as-of dates are not recorded anywhere read: the SIRENE release month,
+    Dublin's valuation list date, Milan's registers. (The DENUE edition is 05_2026,
+    `docs/data_sources/mexico.md`, found 2026-09-28; `app/cities.py` `data_age` still
+    says "no source date" for Mexico City and Guadalajara, queued for review time.)
 21. **Guadalajara and Lille have no `excluded_stations.csv`.** They carry
     `station_municipios.csv` and `served_communes.csv` instead. Check that the
     generated station table on the "What is excluded" page renders them rather than

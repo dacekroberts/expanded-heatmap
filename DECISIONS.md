@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**111 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**112 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- ["Why the maps differ" page: shape decided (owner); the inconsistency list re-checked before drafting](#2026-09-28---why-the-maps-differ-page-shape-decided-owner-the-inconsistency-list-re-checked-before-drafting)
 - [Tokyo landed: city-landed sweep; three cities' in-ring counts corrected in the inconsistency list](#2026-09-28---tokyo-landed-city-landed-sweep-three-cities-in-ring-counts-corrected-in-the-inconsistency-list)
 - [Tokyo live after the owner's reboot, checked on the live URL](#2026-09-28---tokyo-live-after-the-owners-reboot-checked-on-the-live-url)
 - [Tokyo landed on master; the build queue wiped for two new frontrunners, Berlin then London (owner)](#2026-09-28---tokyo-landed-on-master-the-build-queue-wiped-for-two-new-frontrunners-berlin-then-london-owner)
@@ -147,6 +148,49 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - "Why the maps differ" page: shape decided (owner); the inconsistency list re-checked before drafting
+
+- **The page's shape, owner's yes to all three recommendations.** Placement:
+  its own page beside "About the Data" and "What Is Excluded", linked from
+  `render_site_notices()` in `app/components.py`, which every page already
+  calls; rejected a front-page section (pushes the map down, and a reader
+  arriving on a city page never sees it) and merging into "What Is
+  Excluded" (already long, and most differences are not exclusions).
+  Text: eleven themes (theme 12 is resolved), each a heading and two to four
+  sentences with one to three named examples and no count that grows with
+  the city list. Tables: A-D stay internal as the evidence; the page carries
+  one generated per-city summary table built from `app/cities.py` and the
+  committed outputs, shown with `st.dataframe` so it does not scroll the page
+  sideways at 375 px, and `check_inconsistency_list.py` extended so a city
+  that lands without the new fields fails the hook. Rejected publishing A-D
+  cleaned up: 220 rows of method notes that go stale by hand, as the re-check
+  below shows they already had. All of it is `app/` and lands at review time;
+  the eleven themes are drafted in chat first.
+- **Why names, not lists:** five of the six stale spots the re-check found
+  were hand-written city lists that missed a later city, the sixth a count
+  ("nineteen" pages without a date, now twenty after Monterrey).
+- **Re-checked against the repository (an agent parsed all 55 committed
+  maps):** in-ring shares, ring sizes and out/thinned station counts 55 of 55
+  match; table B's in-ring pins match except Edmonton, 1,034 / 922 / 416 in
+  the file against 1,039 / 924 / 417 in the map's layer menu (the
+  2026-09-25 `AS_OF_DATE` rebuild, c958057, missed by the sweeps since).
+- **Corrected in `docs/map_inconsistencies.md`:** Edmonton's counts; Taipei
+  added to theme 5's "(Regional)" list (ten maps now, not nine); Riga and the
+  three Taiwanese cities added to theme 1; Korea's "Name withheld", Taiwan's
+  line of business and Hong Kong's "No shop sign" added to theme 8; six
+  cities added to theme 9's "date shown" list; Montréal dropped from theme
+  1's "not comparable" pages (its page makes the point without the words);
+  open question 18's branch note (the Toronto EC change is on master) and
+  question 20's count and DENUE edition; the stale `map_common.py` line
+  reference replaced by `add_pin_layer()`. Four UNKNOWN cells filled:
+  Barcelona 0 zero-coordinate rows of 58,908 (`baseline.json`), Mexico City
+  and Guadalajara DENUE 05_2026 (`docs/data_sources/mexico.md`), and the
+  Toulouse, Lille and Rennes address shares from their own pages.
+- **Queued for review time:** `app/cities.py` `data_age` still says "no
+  source date" for Mexico City and Guadalajara; "What Is Excluded" says
+  "Commuter rail is excluded everywhere" (`app/pages/91_What_Is_Excluded.py`
+  L78), which eleven maps contradict.
 
 ### 2026-09-28 - Tokyo landed: city-landed sweep; three cities' in-ring counts corrected in the inconsistency list
 
