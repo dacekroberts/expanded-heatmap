@@ -40,8 +40,8 @@ item is done** rather than adding an addendum.
 | **Project cleanup session** | `worktree-cleanup` | Consistency role. Owns `scripts/check_*.py` and the master-list checks |
 
 Kobe and the tram rescopes' light and medium batch are merged (review time,
-af8b949). **The owner's app reboot for that batch was still pending** at
-handover (Cleanup, 2026-09-28). `worktree-trams` holds nothing unmerged.
+af8b949). **The owner started the app reboot for that batch on 2026-09-28**;
+its live check is Cleanup's. `worktree-trams` holds nothing unmerged.
 Address peers by the name `ListAgents` prints; names change.
 
 ## Where the state lives
