@@ -1294,6 +1294,29 @@ CITIES = [
         # 375, 768 and 1200.
         "label_offset": ("middle", 0, -40),
     },
+    {
+        "name": "Tokyo",
+        "lat": 35.68,
+        "lon": 139.77,
+        "page": "pages/55_Tokyo_Heatmap.py",
+        # Macro-map facts (owner-approved 2026-09-28): the figures are table
+        # C's and D's in docs/map_inconsistencies.md.
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (99.7%)",
+        "data_age": "Ward lists dated 2022-11-30 to 2026-09-02",
+        "blurb": "JR East, Tokyo Metro, Toei, Tokyu, Keio, Odakyu, Seibu, Tobu, Keisei, Keikyu and five more; "
+                 "business data for 8 of the 23 wards",
+        "region": "East Asia",
+        "country": "Japan",
+        "in_default_view": False,
+        # RIGHT of its dot, a little up (width 40.5 px, measured 2026-09-28 in
+        # the app's own document): at the usual 22 px below it met Osaka's
+        # label, which the East Asia frame draws close by; above, Kobe's and
+        # Kyoto's. Of nine placements scored, this and 40 px below were clean,
+        # and this sits nearer its dot. check_macro_labels.py: clear at 375,
+        # 768 and 1200.
+        "label_offset": ("start", 12, -14),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

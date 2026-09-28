@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**98 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**99 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Tokyo built: its page, macro-map entry, exclusions and table rows (owner-approved); Japan's sixth and last city, held for review time](#2026-09-28---tokyo-built-its-page-macro-map-entry-exclusions-and-table-rows-owner-approved-japans-sixth-and-last-city-held-for-review-time)
 - [Tokyo's census control, notice and page: the Economic Census control run for all six Japanese cities; zero drift in 55; Tokyo's texts approved (owner)](#2026-09-28---tokyos-census-control-notice-and-page-the-economic-census-control-run-for-all-six-japanese-cities-zero-drift-in-55-tokyos-texts-approved-owner)
 - [Tokyo's rail: JR East drawn as nine public services over N02's legal lines, 52 lines, 490 stations (293 hollow); station names in signage style; the name rule's gap accepted (owner)](#2026-09-28---tokyos-rail-jr-east-drawn-as-nine-public-services-over-n02s-legal-lines-52-lines-490-stations-293-hollow-station-names-in-signage-style-the-name-rules-gap-accepted-owner)
 - [Tokyo step 2 on the roster: 63,989 storefronts from 25 sources, 99.7% block; a source's key split from its kind; the registers read for the first time](#2026-09-28---tokyo-step-2-on-the-roster-63989-storefronts-from-25-sources-997-block-a-sources-key-split-from-its-kind-the-registers-read-for-the-first-time)
@@ -134,6 +135,35 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Tokyo built: its page, macro-map entry, exclusions and table rows (owner-approved); Japan's sixth and last city, held for review time
+
+- **Approved (owner) and written**: Tokyo's section in
+  `docs/excluded_categories.md` (both scopes: the fifteen wards and every
+  left-out category with its count; the 55 stations beyond the ward line, 40
+  in neighbouring prefectures and 15 in the Tama area); its rows in tables A-D
+  of `docs/map_inconsistencies.md` (pins in rings R / F / P 11,954 / 41,972 /
+  8,557, 97.6% of storefronts); and its `app/cities.py` entry - tier
+  **narrowed**, placement "Joined to address blocks (99.7%)", data age "Ward
+  lists dated 2022-11-30 to 2026-09-02", the blurb naming ten operators "and
+  five more; business data for 8 of the 23 wards". `check_macro_facts.py
+  --write` agrees (tiers with table B, phrases with C and D).
+- **Its macro-map label sits right of the dot, a little up**
+  (`("start", 12, -14)`): Tokyo's label width, 40.5 px, was measured in the
+  app's own document with Kobe, Osaka and Kyoto reproduced exactly; at the
+  usual 22 px below, it met Osaka's label in the East Asia frame, and above,
+  Kobe's and Kyoto's. Of nine placements scored at 375, 768 and 1200 px, two
+  were clean, and this one sits nearer its dot.
+- **Recorded**: Tokyo's rows in the three provenance tables of
+  `docs/data_sources/japan.md` (its 46 endpoints generated from the roster),
+  the master list (built 55, Band A empty, candidates 69), the README list.
+  23 of 23 checks pass; `check_stale_claims.py --only E` names no Japanese
+  claim.
+- **One quick render of the page** in the lean app: the approved text, the
+  share table read from the build, the map embedded at 650 px, notice 56
+  displayed. The full deploy-verify waits for review time.
+- **Held for review time**: nothing of Tokyo is on master. `app/` landing is
+  deploying, and the owner calls it.
 
 ### 2026-09-28 - Tokyo's census control, notice and page: the Economic Census control run for all six Japanese cities; zero drift in 55; Tokyo's texts approved (owner)
 

@@ -1917,6 +1917,54 @@ line.
   (owner, 2026-09-28).
 - The Shinkansen does not count.
 
+### Tokyo - eight wards' own food lists, national filings for four, and four wards' registers, joined to MLIT's address blocks
+
+**Left out**
+- The fifteen wards with no usable food-permit list: Chiyoda, Bunkyo, Sumida,
+  Shinagawa, Ota, Nakano, Suginami, Toshima, Kita, Arakawa, Itabashi, Nerima,
+  Adachi, Katsushika and Edogawa. Their stations are drawn hollow and nothing
+  there is counted. Seven of them publish barber, beauty and laundry
+  registers, which are not used: a ward's stations are not counted from those
+  alone.
+- Every shop that is not a food shop: Japan has no general business licence.
+- Shops that sell only packaged food, except where a list includes
+  notifications.
+- 1,086 food trucks, stalls and other permits with no fixed address.
+- 8,973 national filings whose applicants did not publish an address.
+- 1,728 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい).
+- 1,718 vending machines, 1,042 school, hospital and staff canteens, 515
+  temporary and mobile permits, 276 premises inside hotels and inns, 133
+  entertainment venues, 71 mail-order businesses, 2 linen suppliers and 2
+  salons inside welfare facilities.
+- 22,368 closed premises, which Shibuya's list and the national filings keep,
+  marked.
+
+**Counted** - each ward's list as the ward publishes it; the page gives each
+one's share of the official count (9% to 101%). 114 of the 4,385 bakery,
+confectioner and deli rows (2.6%) have a trade name that reads as a factory;
+they are kept.
+
+**One pin per premises** - 2,500 repeat permits are shown once, and 1,016
+national filings for a premises already in its ward's list.
+
+**Not placed** - 33 rows. Another 158 sit at their town's centre, and 35
+national filings at their own coordinates.
+
+**Names not shown** - 2 pins whose trade name is the operator's own name show
+their permit type. Only the lists that name their operators can be checked.
+
+**Stations.** Every line with a station in the 23 wards is drawn, cut at the
+ward line.
+- 293 stations in the fifteen wards without data are drawn hollow.
+- Left out: 55 stations beyond the ward line: 40 in neighbouring prefectures,
+  and 15 in the Tama area (5 in Nishitokyo, 4 in Chofu, 2 each in Mitaka and
+  Komae, 1 each in Higashikurume and Musashino).
+- The Narita Sky Access and the Saitama Railway are not drawn (one station each
+  in the wards, served by other lines); the Tokaido and Shonan-Shinjuku lines
+  are not drawn on their own.
+- The Shinkansen does not count.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found

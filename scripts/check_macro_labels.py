@@ -170,6 +170,9 @@ TEXT_WIDTH = {
     # Kyoto measured 2026-09-28 the same way, with Fukuoka 56.8, Osaka 40.6 and
     # Kobe 34.2 reproduced exactly in the same run.
     "Kyoto": 40.2,
+    # Tokyo measured 2026-09-28 the same way, with Kobe 34.2, Osaka 40.6 and
+    # Kyoto 40.2 reproduced exactly in the same run.
+    "Tokyo": 40.5,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,
