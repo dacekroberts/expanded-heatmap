@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**58 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**59 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
@@ -82,6 +82,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Four small probes: Wirye Line not open, Cablebús L3 has 6 stations, the KC streetcar runs every 10 minutes, Incheon's coordinates need an application](#2026-09-27---four-small-probes-wirye-line-not-open-cablebús-l3-has-6-stations-the-kc-streetcar-runs-every-10-minutes-incheons-coordinates-need-an-application)
 - [Review-time batch published: Kobe, the tram rescope of five cities and Toronto's retail wording, in one push under one reboot](#2026-09-27---review-time-batch-published-kobe-the-tram-rescope-of-five-cities-and-torontos-retail-wording-in-one-push-under-one-reboot)
 - [Wave 2, group 1 banded: Kitchener–Waterloo to T, eleven discards, Contagem and Duque de Caxias as regional add-ons (owner)](#2026-09-27---wave-2-group-1-banded-kitchenerwaterloo-to-t-eleven-discards-contagem-and-duque-de-caxias-as-regional-add-ons-owner)
+- [Review-time batch live after the owner's reboot: Kobe, Montréal, Madrid and the untouched control checked on the live URL](#2026-09-27---review-time-batch-live-after-the-owners-reboot-kobe-montréal-madrid-and-the-untouched-control-checked-on-the-live-url)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -2297,3 +2298,22 @@ Recorded by the cleanup session from the Main Building Session's findings of
 - **Downloads**: five CNEFE zips (30.8 MB) and RideKC's GTFS, copied into
   the main checkout's `data/` (no-clobber). Ireland's OSM cross-check failed
   on both mirrors and was not used as evidence.
+
+### 2026-09-27 - Review-time batch live after the owner's reboot: Kobe, Montréal, Madrid and the untouched control checked on the live URL
+
+- **The owner rebooted the app** after the push of af8b949.
+- **Checked on the live URL**, in the page and inside the map frame:
+  - **Kobe:** the page and map render, with tiles loaded. The line names
+    appear in the legend, and both the City of Kobe/MLIT credit and the OSM
+    credit show.
+  - **Montréal:** the "REM (A1, A3, A4)" label and the REM credit (notice
+    51) show.
+  - **Madrid:** the "Metro Ligero ML1" label shows, and the amended CRTM
+    credit names Metro Ligero, with "Powered by CRTM" intact.
+  - **Chicago (untouched control):** its map, tiles and OSM credit render,
+    and Kobe is in its Cities dropdown, so `cities.py` was reloaded.
+
+  No page showed a traceback.
+- Rome, Paris and San Francisco were not opened live. `deploy-verify`
+  passed them locally on the same commit, and they share Madrid's and
+  Montréal's code path.
