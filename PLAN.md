@@ -366,9 +366,8 @@ brief names.
   - Deliverable, drafted for the owner: a ranked list (finding, evidence, estimated saving,
     whose habit - owner, session or structure), the top three changes, and a rough weekly
     saving for each. The owner decides.
-- [ ] **Toronto's per-category retail counts** (`docs/map_inconsistencies.md` Q18, the part
-  still open): EC's `SECOND HAND SHOP` 1,806 and the rest predate dropping cancelled
-  licences; the drawn pins give 219, 351 and so on. Published wording: owner.
+- [ ] **Land branch `review-toronto-q18` at review time** (Q18's EC wording, owner-approved
+  2026-09-27; the app renders `docs/excluded_categories.md`). Delete the branch after.
 
 **Not ready for main:**
 - **Band C (7)** — one owner decision moves all seven: does a single-bucket

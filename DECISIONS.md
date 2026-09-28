@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**42 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**43 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
@@ -66,6 +66,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Trams count; Band T (trams only) created; first blocker wins, universally (owner)](#2026-09-27---trams-count-band-t-trams-only-created-first-blocker-wins-universally-owner)
 - [iPhone blank maps: the cause is a per-literal compile limit, not memory; which layer trips it per city, and why Seoul's layer drop bought nothing](#2026-09-27---iphone-blank-maps-the-cause-is-a-per-literal-compile-limit-not-memory-which-layer-trips-it-per-city-and-why-seouls-layer-drop-bought-nothing)
 - [Toronto's retail share settled (Q18): EC quotes the pins the map draws, 759 of 18,186 (owner-approved wording)](#2026-09-27---torontos-retail-share-settled-q18-ec-quotes-the-pins-the-map-draws-759-of-18186-owner-approved-wording)
+- [Toronto's per-category retail counts now come from the drawn pins and sum to 759 (owner-approved wording)](#2026-09-27---torontos-per-category-retail-counts-now-come-from-the-drawn-pins-and-sum-to-759-owner-approved-wording)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -1673,4 +1674,22 @@ Recorded by the cleanup session from the Main Building Session's findings of
 - **Still open:** EC's per-category counts (`SECOND HAND SHOP` 1,806 and the
   rest, summing to 3,475) predate dropping cancelled licences. They are in
   PLAN.md as published wording for the owner.
+
+### 2026-09-27 - Toronto's per-category retail counts now come from the drawn pins and sum to 759 (owner-approved wording)
+
+- **Replaces the one item the Q18 entry above left open.** The eight counts
+  are now taken from `data/toronto/processed/businesses_geocoded.csv`:
+  vape 351, second-hand 219, precious metal 85, pawn 41, smoke 28, pet 20,
+  salvage 10 and fireworks 5.
+  - They sum to 759, the retail figure in the next sentence. So the paragraph
+    counts one set of pins throughout.
+- **The list is still ordered by count**, so vape now leads instead of
+  second-hand.
+- **Why the fall is steep** (3,475 to 759): it is almost all cancelled
+  licences leaving the count (3,475 to 870). Dropping nameless, addressless
+  and duplicate rows, and addresses the geocoder could not place, removes
+  111 more (870 to 759).
+- **Where it is:** on branch `review-toronto-q18`, beside the sentence change,
+  because the app renders `docs/excluded_categories.md`. It lands at review
+  time; PLAN.md carries that item.
 

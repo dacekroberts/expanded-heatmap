@@ -539,8 +539,8 @@ in 19, the stale "2026-09-21 rebuild" header and "the other four cities". The
 rest of 2 (the NY config's "THE ONE CITY" comment) and everything from 9 on
 remain open.
 
-**Resolved 2026-09-27** (owner-approved wording, see DECISIONS): 18, except
-the per-category counts noted in it.
+**Resolved 2026-09-27** (owner-approved wording, see DECISIONS): 18; the
+wording lands at review time.
 
 1. **The spacing filter "applies to three cities"** (EC, lines 118–121: SF,
    Philadelphia, Boston). Amsterdam (59 stops) and Rotterdam (23) now use it too,
@@ -621,9 +621,10 @@ the per-category counts noted in it.
     quotes the pins the map draws (`businesses_geocoded.csv`): 759 of 18,186
     retail (4.2%), 13,385 food service, 4,042 personal services. The 4.2% in
     `__init__.py` is a third stage (before cancelled licences were dropped)
-    that happens to agree. **Still open:** EC's per-category counts just above
-    that sentence (`SECOND HAND SHOP` 1,806 and so on, summing to 3,475) are
-    from that pre-cancellation stage too.
+    that happens to agree. EC's per-category counts just above that sentence
+    (`SECOND HAND SHOP` 1,806 and so on, summing to 3,475) were from that
+    pre-cancellation stage too; they now come from the drawn pins and sum to
+    759. Both EC changes are on branch `review-toronto-q18` until review time.
 19. **Stale counts in EC:** the header says "Business counts are from the 2026-09-21
     rebuild", but more than half the cities were built from 2026-09-22 to 09-24; line
     1540 compares New York with "the other four cities".
