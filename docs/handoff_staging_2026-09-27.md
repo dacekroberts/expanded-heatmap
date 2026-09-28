@@ -87,7 +87,7 @@ offline, so check which row is live before sending.
    "Tram rescope 1-5"; every owner call settled; page texts, credits and
    excluded-categories wording written):
    - Montréal's REM, drawn as ONE line "REM (A1, A3, A4)", #73A400 from the
-     feed (credit notice 51). English Wikipedia had A3 and A4 swapped; the
+     feed (credit notice 51, Réseau express métropolitain). English Wikipedia had A3 and A4 swapped; the
      feed is the authority.
    - Rome tram 8, thinned to 7 of 16 stops (San Francisco's filter).
    - Madrid ML1 (ML2 and ML3 are stubs, out); 57 station records, not 56;
