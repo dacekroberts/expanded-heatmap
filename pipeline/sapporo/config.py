@@ -200,27 +200,31 @@ COLLAPSE_MAX_SPREAD_M = 300
 # legal sections - 1条線, 都心線, 山鼻西線, 山鼻線 - drawn here as one line under
 # its public name (Kobe's trap 2). 札沼線 is JR Hokkaido's Gakuen Toshi Line.
 #
-# COLOURS: provisional (the operators' hues) until step 3's search, Kobe's and
-# Osaka's rule: 3:1 on both map pages, CIE76 >= 45 from every pin, >= 18
-# between lines, nearest the operator's hue.
+# COLOURS: the project's own, not the operators' (Kobe's and Osaka's rule;
+# 2026-09-28). A search over the sRGB cube (step 8; 3,817 feasible colours):
+# 3:1 against BOTH map pages (#0B1220 and #ffffff), CIE76 >= 45 against every
+# category pin, >= 18 between lines, each nearest its operator's hue
+# (lightness weighted half). Result: pins 45.0-74.8, closest line pair 18.2
+# (the Tozai Line and JR Chitose, both orange). The streetcar left green for
+# olive (#586818) and the Gakuen Toshi Line blue for violet (#8858F0) to fit.
 _JR, _SC, _STR = "北海道旅客鉄道", "札幌市", "一般社団法人札幌市交通事業振興公社"
 LINES = {
     # Sapporo Municipal Subway (札幌市交通局)
-    "N": {"n02": [(_SC, "南北線")], "name": "Namboku Line", "name_ja": "南北線", "colour": "#008000",
+    "N": {"n02": [(_SC, "南北線")], "name": "Namboku Line", "name_ja": "南北線", "colour": "#40A800",
           "short": "Subway"},
-    "T": {"n02": [(_SC, "東西線")], "name": "Tōzai Line", "name_ja": "東西線", "colour": "#FF8000",
+    "T": {"n02": [(_SC, "東西線")], "name": "Tōzai Line", "name_ja": "東西線", "colour": "#E87000",
           "short": "Subway"},
-    "H": {"n02": [(_SC, "東豊線")], "name": "Tōhō Line", "name_ja": "東豊線", "colour": "#0080FF",
+    "H": {"n02": [(_SC, "東豊線")], "name": "Tōhō Line", "name_ja": "東豊線", "colour": "#0050F0",
           "short": "Subway"},
     # The streetcar
     "SC": {"n02": [(_STR, "1条線"), (_STR, "都心線"), (_STR, "山鼻西線"), (_STR, "山鼻線")],
-           "name": "Sapporo Streetcar", "name_ja": "札幌市電", "colour": "#2E8B57", "short": "Streetcar"},
+           "name": "Sapporo Streetcar", "name_ja": "札幌市電", "colour": "#586818", "short": "Streetcar"},
     # JR Hokkaido (北海道旅客鉄道)
-    "JH": {"n02": [(_JR, "函館線")], "name": "JR Hakodate Main Line", "name_ja": "函館本線", "colour": "#9ACD32",
+    "JH": {"n02": [(_JR, "函館線")], "name": "JR Hakodate Main Line", "name_ja": "函館本線", "colour": "#70A000",
            "short": "JR"},
-    "JC": {"n02": [(_JR, "千歳線")], "name": "JR Chitose Line", "name_ja": "千歳線", "colour": "#FF8C00",
+    "JC": {"n02": [(_JR, "千歳線")], "name": "JR Chitose Line", "name_ja": "千歳線", "colour": "#D08000",
            "short": "JR"},
-    "JG": {"n02": [(_JR, "札沼線")], "name": "JR Gakuen Toshi Line", "name_ja": "学園都市線", "colour": "#1E90FF",
+    "JG": {"n02": [(_JR, "札沼線")], "name": "JR Gakuen Toshi Line", "name_ja": "学園都市線", "colour": "#8858F0",
            "short": "JR"},
 }
 LINE_ORDER = list(LINES)
