@@ -20,10 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**69 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**71 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Next builds: Band A's Japanese cities, ending with Tokyo, then the additions to built cities (owner)](#2026-09-28---next-builds-band-as-japanese-cities-ending-with-tokyo-then-the-additions-to-built-cities-owner)
+- [Osaka and the shared thin() refactor landed at review time; two defects found, one fixed before the push (owner)](#2026-09-28---osaka-and-the-shared-thin-refactor-landed-at-review-time-two-defects-found-one-fixed-before-the-push-owner)
 - [Osaka's page, notice 52 and scope section written as approved (owner)](#2026-09-28---osakas-page-notice-52-and-scope-section-written-as-approved-owner)
 - [Wave 2, group 2 banded: Florence and Santa Cruz–La Laguna to T, Palma to C, thirteen discards, five not reached (owner)](#2026-09-28---wave-2-group-2-banded-florence-and-santa-cruzla-laguna-to-t-palma-to-c-thirteen-discards-five-not-reached-owner)
 - [kobe and trams worktrees retired after review time landed them](#2026-09-28---kobe-and-trams-worktrees-retired-after-review-time-landed-them)
@@ -105,6 +107,58 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Next builds: Band A's Japanese cities, ending with Tokyo, then the additions to built cities (owner)
+
+- **The owner set the build order after reading the master list: Band A's
+  Japanese cities first, Tokyo (8 wards) last among them, then the additions
+  to built cities.** That makes the order Sapporo, Fukuoka, Kyoto, Tokyo,
+  then the regional add-ons in PLAN (Belo Horizonte + Contagem, Rio + Duque
+  de Caxias after its shuttle rail test, Vancouver (Regional) after its
+  probes). Sapporo was already next in the Japanese order; sharing
+  `fetch_sources.py` across the Japanese cities comes before it (PLAN,
+  "Japan"). Band T's group decision, recommended at this review time, is not
+  taken by this order and stays open. `PLAN.md`.
+
+### 2026-09-28 - Osaka and the shared thin() refactor landed at review time; two defects found, one fixed before the push (owner)
+
+- **Osaka (Japan's second city) and the shared thin() refactor were merged
+  into `worktree-main-build` and pushed to master as one batch, at the
+  owner's review time.** A DECISIONS conflict with each branch was resolved
+  with `merge_append_only.py`. The master list's four count conflicts were
+  resolved by combining both sides: Osaka built (51 built, Band A 4) on top
+  of wave 2's bands (C 9, T 50, D 10), so **73 candidates**, and
+  `check_master_list_counts.py` agrees.
+- **Gates, all on 3181eb0 before the fix below:** no step fetches (157 step
+  files); `check_render_current.py` OK on 51 maps; privacy 0 operator names
+  shown in 72,999 rows (9 permit-type substitutions); provenance names Osaka
+  OK; inconsistency rows for all 51; `brief_check.py osaka` 4/4;
+  **`drift_check.py --jobs 4`: zero drift in all 51 cities** (the churn it
+  left was checked out); `check_deploy_imports.py` PROBLEMS 0.
+- **`deploy-verify`, `scope: city-added` (Osaka): PASS on the map, the zoom
+  at every width (0 guard corrections), the OSM credit at three viewport
+  sizes, 34 labels and 34 legend rows, Osaka's macro label clear of Kobe's,
+  navigation, and Kobe as the untouched city.** Two defects:
+  - **Notice 52's links were wrong, and Kobe's live notice 50 had the same
+    fault.** The app's auto-linker ran each bare URL on into the Japanese
+    that follows it, so targets ended in 「）を加工して作成」 and Osaka's three
+    city URLs merged into one link. **Fixed before the push (owner: "fix and
+    land")**: all six URLs in the two notices wrapped as explicit markdown
+    links in `app/components.py`. The visible text is unchanged character for
+    character, so the owner-approved wording stands. One local render
+    confirmed all six targets resolve to the right pages; provenance still
+    passes. Rejected: landing with broken links, since the source link is
+    part of the CC BY credit.
+  - **Osaka's line labels overlap at phone width: 22 pairs at 343 px (the
+    frame on a 375 phone), 12 at 375, none at 854 or desktop**, and "Hankyu
+    Takarazuka Line" starts 11 px under the layer-control button. The project
+    total at 343 was cut to 2 on 2026-09-20; Kobe has 0. **Landed anyway
+    (owner) and queued in PLAN** as the next renderer item: the fix is in the
+    shared label code, so it batches with a full re-render at a later review
+    time, and holding Osaka would not bring it sooner.
+- **Reboot required**: the push changes `app/cities.py`, `app/components.py`
+  and adds `app/pages/51_Osaka_Heatmap.py`. The owner's action; Osaka is not
+  live until it is confirmed.
 
 ### 2026-09-28 - Osaka's page, notice 52 and scope section written as approved (owner)
 
