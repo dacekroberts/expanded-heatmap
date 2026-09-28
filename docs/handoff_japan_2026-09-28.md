@@ -123,7 +123,10 @@ rather than adding an addendum.**
   the share check, hollow no-data stations in `japan_step1` and
   `map_common`, `japan_official.py` and the census reader. The last
   all-city drift check was zero drift in 54 cities. `data/` and `.venv-lean`
-  are junctions to the main checkout's; never stage `data/`.
+  are junctions to the main checkout's; never stage `data/`. **Master is
+  merged to `c2864b8`** (the review batch landed); `git fetch` and merge
+  `origin/master` first if it has moved (staging's handoff edit was
+  `5e3be82`).
 - **The research is merged in** (branch `worktree-tokyo-sources`, 36eb5d7):
   the Ward cards, the Tokyo rows of `docs/data_sources/japan.md`, and its
   DECISIONS entries. Its closing note, `docs/handoff_tokyo_sources_2026-09-28.md`,
