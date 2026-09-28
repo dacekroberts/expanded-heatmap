@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**92 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**93 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [London re-screened from the large-transit gap: Band B, food only (owner)](#2026-09-28---london-re-screened-from-the-large-transit-gap-band-b-food-only-owner)
 - [Review batch verified: the full deploy-verify passes; the macro tooltip becomes a corner panel; East Asia's global-frame label overlaps accepted (owner)](#2026-09-28---review-batch-verified-the-full-deploy-verify-passes-the-macro-tooltip-becomes-a-corner-panel-east-asias-global-frame-label-overlaps-accepted-owner)
 - [Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one heavy job at a time, drift --jobs 2 at most (owner)](#2026-09-28---two-app-crashes-traced-to-memory-exhaustion-python-capped-at-8-gb-a-process-one-heavy-job-at-a-time-drift---jobs-2-at-most-owner)
 - [Handoffs rewritten for the owner's session reorganisation; the large-transit gap saved](#2026-09-28---handoffs-rewritten-for-the-owners-session-reorganisation-the-large-transit-gap-saved)
@@ -128,6 +129,45 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - London re-screened from the large-transit gap: Band B, food only (owner)
+
+- **Moved London from "Countries ruled out" to Band B, food only, on the FSA
+  food-hygiene register (owner's call).** The UK was ruled out 2026-09-21
+  (`docs/decisions/2026-09-20.md`), partly because the FSA register is food
+  only, before food-only pages passed on 2026-09-27. Re-screened first on
+  `docs/global_transit_gap.md`'s order, on light methods only: the FSA's
+  keyless API gives **81,633** premises across London's 33 authorities. Of
+  those, food storefronts are 40,585 (restaurants and cafés 27,279, takeaways
+  9,441, pubs and bars 3,865) and food retail 19,088 (retailers 16,763,
+  supermarkets 2,325). In a 3,300-row sample (100 per authority), **80.2%**
+  carry coordinates (lowest Merton, 63%) and 2 have no address, so the misses
+  are unmatched geocodes rather than withheld addresses. In every authority,
+  half the sampled ratings date from 2024-04 or later. Nothing was downloaded.
+- **Found the recorded UK reason wrong: the VOA rating list has a
+  description, and what rules it out is its terms.** The 2026-09-21 record
+  said the rating list "carries no category", yet quoted it as holding "a
+  description". The terms page linked from the download page limits use to
+  "Non Domestic Rating (NDR) purposes only" and bars onward disclosure for
+  anything else, so it cannot be published. That page was read, and the
+  terms were not accepted; no formal `licence-read` was run.
+- **Found no second layer that covers central London, so the page stays food
+  only.** Borough NNDR lists carrying the VOA description are published by 4
+  of 33 authorities (Camden, Islington, Barnet, Hounslow), none of them
+  downtown; Westminster refuses its list under FOI. That is Santiago's
+  failure ("coverage fails downtown"). A services layer in four outer
+  boroughs was rejected because it would mislead readers. Special-treatment
+  registers (nails, massage, beauty) are lookup-only in Westminster, Camden,
+  Hackney, Tower Hamlets and Lambeth. The London Datastore (1,303 datasets)
+  holds nothing premises-level for retail or services.
+- **Before a build:** a `licence-read` of the FSA register; placement for the
+  ~20% without coordinates (postcode centroids, with their own
+  `docs/data_sources.md` row); `check_personal_exposure.py` for mobile and
+  home caterers; and a rail-shape decision across the Underground, Overground,
+  DLR, Elizabeth line and Tramlink. Newcastle and Glasgow were not
+  re-screened. Files: `docs/city_master_list.md` (Band B, by country,
+  countries ruled out), `docs/global_country_shortlist.md` (the UK rows),
+  `docs/global_transit_gap.md`, `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - Review batch verified: the full deploy-verify passes; the macro tooltip becomes a corner panel; East Asia's global-frame label overlaps accepted (owner)
 

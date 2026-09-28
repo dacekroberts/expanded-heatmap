@@ -41,7 +41,8 @@ then follow the pointers. **Delete a section when its item is done.**
   sub-group** (11 cities) · **C closed**. Section order A, B, D, N, T. The chat
   republish format is in the owner's memory (`feedback_master_list_format.md`).
 - **`docs/global_transit_gap.md`**: every large-network city not built (22
-  discarded, 15 ruled out by country, 11 in a band, 35 never screened) with
+  discarded, 14 ruled out by country, 12 in a band, 35 never screened;
+  London re-screened to Band B 2026-09-28) with
   the record's reason and a recommended re-screen order.
 - **`PLAN.md`**: "Second-city screens" (wave-2 follow-ups, regional add-ons,
   watch items) and the parked per-city prose review.
@@ -59,9 +60,6 @@ then follow the pointers. **Delete a section when its item is done.**
    at a time, light methods only. The owner asked for the list 2026-09-28 and
    is likely to steer here before the small tram and one-bucket builds.
    Propose each screen and its cost before running it. Recommended order:
-   - **London**: ruled out partly as food only, before food-only pages passed
-     (Band B). Measure the FSA food register for London's boroughs and look
-     again for a second layer.
    - **Dubai, Manila**: ruled out on transit feeds only; screen the business
      side, and the rail from OpenStreetMap (Monterrey's precedent).
    - **Istanbul**: run the shortlist's never-run "second look" (open probe 8).

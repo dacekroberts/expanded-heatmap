@@ -46,12 +46,12 @@ negative, kept out.
 | Medellín | CO | 6 relations | "Three closed doors" |
 | Honolulu | US | Skyline (small) | No premises register |
 
-## Country ruled out (15) - "Countries ruled out" and the shortlist
+## Country ruled out (14) - "Countries ruled out" and the shortlist
 
 | City | Country | Network | Why not covered |
 |---|---|---|---|
 | Moscow, St Petersburg | RU | 250+ / 72 stations (kn) | Excluded: sanctions and access |
-| London, Newcastle, Glasgow | UK | 272 / 60 / 15 stations (kn) | Business rates (NNDR) carry no category; the national food register (FSA) is "food only" |
+| Newcastle, Glasgow | UK | 60 / 15 stations (kn) | Recorded as "NNDR carries no category"; **wrong** (London's re-screen, 2026-09-28): the VOA list has a description and is ruled out by its terms. The FSA food register is untested for either city |
 | Istanbul | TR | 200+ stations (kn) | Aggregate counts per district, **ASSERTED on one dataset** |
 | Melbourne, Sydney, Perth | AU | ~220 / 170+ / 80 stations (kn) | Licensing not municipal, **ASSERTED** |
 | Brussels | BE | 69 stations (kn) | Bulk access paid |
@@ -61,10 +61,11 @@ negative, kept out.
 | Auckland | NZ | commuter 5 | Commuter only; licensing not municipal |
 | Algiers | DZ | 1 metro line + trams (kn) | Filed under "no urban rail at all" - **wrong**; it has a metro |
 
-## In a band, not built (11)
+## In a band, not built (12)
 
 | City | Country | Network | Band and blocker |
 |---|---|---|---|
+| London | UK | 272 stations (kn) | B - food only on the FSA register (re-screened 2026-09-28, owner); no second layer covers central London |
 | Tokyo (8 wards) | JP | 330 stations | A - the Tokyo build session; only Shibuya's list is complete, Chiyoda's ledger requested |
 | Stockholm | SE | T-bana, 92 stations | B - passed, food only |
 | Singapore | SG | MRT 21 relations | N - the food register is a 2016 snapshot |
@@ -95,9 +96,8 @@ negative, kept out.
 
 Recommended first for re-screening (the staging handoff's priority 1):
 
-1. **London** - ruled out 2026-09-21 partly because the UK's food register is
-   food only, before the owner passed food-only pages (Stockholm and
-   Bucharest, 2026-09-27). By today's rules it may be a Band B candidate.
+1. ~~**London**~~ - **done 2026-09-28: Band B, food only** (owner). See the
+   master list's Band B and the shortlist's United Kingdom row.
 2. **Dubai and Manila** - ruled out on transit feeds alone; the project now
    builds rail from OpenStreetMap, the reason Monterrey's rail-only negative
    was called obsolete.
