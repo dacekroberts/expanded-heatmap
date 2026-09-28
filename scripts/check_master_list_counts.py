@@ -410,7 +410,7 @@ def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
 
 
 def _sum(actual):
-    return " + ".join(f"{x} {actual[x]}" for x in "ABCTDN" if actual[x] or x == "A")
+    return " + ".join(f"{x} {actual[x]}" for x in "ABCDNT" if actual[x] or x == "A")
 
 
 def subgroups(lines, start, end, letter):

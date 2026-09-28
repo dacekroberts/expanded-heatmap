@@ -222,7 +222,7 @@ CASES = [
      by_country_bump(1, "says {new} built, the Built table lists {old}"), None),
 
     ("by country: the Total row's band figure drifted",
-     bump(r"^\| \*\*Total\*\*.*· T (\d+) ·", "the Total row says T {new}"), None),
+     bump(r"^\| \*\*Total\*\*.*· D (\d+) ·", "the Total row says D {new}"), None),
 
     ("by country: a named city is not in the band its row lists",
      wrong_band, "its Bands column says"),
