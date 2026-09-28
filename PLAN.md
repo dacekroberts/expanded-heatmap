@@ -77,7 +77,10 @@ Desktop is unaffected — the label is fully visible there.
   - [x] **Daegu's brief** (`docs/build_briefs/daegu.md`, 11/11, 2026-09-27,
     corrected the same evening), handed to Main Build. Three owner calls open
     in it (buckets as Seoul's; 대경선 out; stations inside Daegu).
-  - [ ] **Busan's brief.**
+  - [x] **Busan's brief** (`docs/build_briefs/busan.md`, 8/8, 2026-09-27),
+    handed to Main Build. Three owner calls open in it (buckets as Seoul's;
+    동해선, recommended out; stations inside Busan with the Busan–Gimhae LRT
+    drawn).
   - [ ] **Band T's group decision**: build trams-only cities, and in what
     order (Nice, Montpellier, Brno and Bergen are the cheapest strong ones).
   - [ ] **Wave 2 held by the owner** (the US; Canada, Brazil and Ireland;

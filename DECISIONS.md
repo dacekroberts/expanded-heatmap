@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**25 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**26 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
 - [Efficiency findings 4, 5 and 7 acted on: renderer changes batch, the master list split and counted, city_shortlist.md retired, Kansas City to Band T (owner)](#2026-09-27---efficiency-findings-4-5-and-7-acted-on-renderer-changes-batch-the-master-list-split-and-counted-city_shortlistmd-retired-kansas-city-to-band-t-owner)
+- [Busan's brief: the API's state filter drops every permit since February 2025, large stores come only by id, and the frozen snapshot is genuine](#2026-09-27---busans-brief-the-apis-state-filter-drops-every-permit-since-february-2025-large-stores-come-only-by-id-and-the-frozen-snapshot-is-genuine)
 - [The pre-push hook's first run broke the shared git config; restored by the owner, and every check now runs without git's hook variables](#2026-09-27---the-pre-push-hooks-first-run-broke-the-shared-git-config-restored-by-the-owner-and-every-check-now-runs-without-gits-hook-variables)
 - [Daegu's brief corrected: bakeries, delis and other food shops ARE published, on later pages of a six-per-page file list](#2026-09-27---daegus-brief-corrected-bakeries-delis-and-other-food-shops-are-published-on-later-pages-of-a-six-per-page-file-list)
 - [DECISIONS.md archived weekly, not monthly, with a merge guard (owner)](#2026-09-27---decisionsmd-archived-weekly-not-monthly-with-a-merge-guard-owner)
@@ -122,6 +123,41 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   no urban rail, although it has 6 light-rail routes and was ruled out on data.
   Separately, the list's "Current by country" table is stale (30 built, Brazil
   as candidates, Japan in Band B), and no check covers it.
+### 2026-09-27 - Busan's brief: the API's state filter drops every permit since February 2025, large stores come only by id, and the frozen snapshot is genuine
+
+- **Wrote `docs/build_briefs/busan.md`** (8/8 checks live) and handed it to
+  Main Build. Three owner calls are open in it: buckets as Seoul's; 동해선
+  recommended out; stations inside Busan, with the Busan–Gimhae LRT drawn.
+- **Found that `state=01` silently drops the newest premises.** Rows permitted
+  after 2025-01-31 carry no status code, so the state filter cannot select
+  them, while it still returns older rows that have since closed.
+  - The `state=01` pull cached by the screen showed openings stopping dead at
+    2025-01 while closures continued: it looked like a register dying 14½
+    months before its snapshot.
+  - A permit-date query with no state filter returned the missing openings:
+    3,746 restaurants, 2,879 of them open, every month to 2026-04. Across the
+    fourteen types, **8,804 of 98,548 open premises (9%)** were permitted
+    after 2025-01.
+  - **So the owner's accepted snapshot date (2026-04-15) is genuine**, unlike
+    Daegu's "26년08월" label, whose rows end 2025-08-29.
+- **Found that an operation's default output omits types it documents.**
+  대규모점포 (91 rows, 78 open) comes only by asking `LocalDstrb` for
+  `opnSvcId=08_25_01_P`, and none of its rows carries a state code.
+  `LocalBtyIndst` answers a permit-date filter with an error. The brief's rule
+  is to pull every type in full, by id, without `state`.
+- **Measured**: food 53,596, personal services 16,697 and retail 23,039
+  permit rows before de-duplication, under Seoul's rules. Points on
+  94.4–99.5%; 97,260 inside OSM's 부산광역시 and 2 outside (EPSG:5174
+  confirmed). `korean_names.py` flags 152. The health-food file masks every
+  house number, as Daegu's does.
+- **Rail**: Lines 1–3 subway, Line 4 OSM `route=monorail` (Daegu's trap
+  again), the LRT with 9 of 21 stops in Busan: 110 stations. 동해선 has 16
+  stops in Busan at a mean 2.29 km, between Seoul's drawn Korail lines
+  (1.25–1.39) and its excluded 공항철도 (3.37). Frequency unmeasured.
+- About 150k rows were pulled (11 types in full, keyless, one operation at a
+  time with backoff) into the main checkout's `data/busan/raw/`. Only field
+  names and counts were read; `sitetel` was never read, and no row was
+  printed.
 
 ### 2026-09-27 - The pre-push hook's first run broke the shared git config; restored by the owner, and every check now runs without git's hook variables
 
