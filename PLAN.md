@@ -357,7 +357,8 @@ evidence section.
     `placement` / `data_age` keys (owner-approved 2026-09-28, already in
     `cities.py` here) are checked by `scripts/check_macro_facts.py`; run
     `--write` for their storefront counts in `app/macro_facts.json` (Fukuoka
-    30,062, Kyoto 32,355). Sapporo's keys come with that merge (staging).
+    30,062, Kyoto 32,355, Sapporo 28,674). Sapporo's keys are here too
+    (owner-approved 2026-09-28), so staging need not add them at the merge.
   - [ ] When the city publishes its August 2026 list: add its resource to
     `config.PORTAL_RESOURCES`, move `AS_OF` to 2026-08-31, re-run (a rebuilt
     register goes stale by one month a month).

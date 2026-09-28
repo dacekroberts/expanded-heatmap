@@ -1084,6 +1084,11 @@ CITIES = [
         "lat": 43.0687,
         "lon": 141.3508,
         "page": "pages/52_Sapporo_Heatmap.py",
+        # Macro-map facts (macro-tiers branch, owner-approved 2026-09-28): the
+        # figures are table C's and D's in docs/map_inconsistencies.md.
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (86.0%)",
+        "data_age": "Permits as of 2026-03-31",
         "blurb": "Sapporo Municipal Subway, the streetcar, and JR Hokkaido's lines",
         "region": "East Asia",
         "country": "Japan",
