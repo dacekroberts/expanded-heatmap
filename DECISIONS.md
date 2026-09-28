@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**79 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**80 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Band T's EDGE cities grouped at its top; Band T below Band N (owner)](#2026-09-28---band-ts-edge-cities-grouped-at-its-top-band-t-below-band-n-owner)
 - [Band C's last five get verdicts; Band B reopened for the passed, Band N created for no page, Band C closed (owner)](#2026-09-28---band-cs-last-five-get-verdicts-band-b-reopened-for-the-passed-band-n-created-for-no-page-band-c-closed-owner)
 - [Worktree `japan` created for a fresh session to build Fukuoka, then Kyoto, branched from build-sapporo (owner)](#2026-09-28---worktree-japan-created-for-a-fresh-session-to-build-fukuoka-then-kyoto-branched-from-build-sapporo-owner)
 - [Sapporo's brief corrected before the build; coin laundries count as Personal services (owner)](#2026-09-28---sapporos-brief-corrected-before-the-build-coin-laundries-count-as-personal-services-owner)
@@ -115,6 +116,25 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Band T's EDGE cities grouped at its top; Band T below Band N (owner)
+
+- **The 11 EDGE cities of Band T now sit in one group at the band's top
+  (owner, on the recommendation)**: Buffalo, Ottawa, Nice, Rouen, Den Haag,
+  Utrecht, Bergen, Aarhus, Kitchener–Waterloo, Pittsburgh and Hiroshima. EDGE
+  (2026-09-27) marks light rail built partly to metro standard; grouping them
+  lets the deferred trams decision take that slice first in one line.
+  Rejected: a summary line only, which would leave the rows spread over seven
+  country tables. Each row keeps its flag, its build-time call and any bucket
+  gap (six carry one); France's rows were folded into the group's four
+  columns. The country groups now count France 19, Denmark and Latvia 3, the
+  US 6, and Canada's group became a pointer (both its cities are EDGE); each
+  points to the group. Gimhae (D) and Gimpo (B) stay where their first
+  blocker put them.
+- **Band T moved below Band N (owner)**: sections, the band table, the
+  summary box and the Total row now run A, B, D, N, T. One
+  `check_master_list_counts_selftest.py` case aimed at the Total row's order
+  was re-aimed at D; 18 of 18 behave.
 
 ### 2026-09-28 - Band C's last five get verdicts; Band B reopened for the passed, Band N created for no page, Band C closed (owner)
 

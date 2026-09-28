@@ -738,7 +738,36 @@ in from Band C.
   - Hiroshima's Astram Line, an elevated automated line beside the
     streetcars.
 
+### EDGE — light rail built partly to metro standard (11 cities; grouped 2026-09-28)
+
+**Grouped by the owner 2026-09-28**, so that the trams decision can take this
+slice first. EDGE (the owner's call, 2026-09-27) marks light rail that runs in
+tunnels, on its own right-of-way or on converted railway: between a tram and a
+metro, tagged rather than promoted to Band A. Each row keeps its country flag
+and its build-time call, and the country groups below point here. **Six also
+carry a bucket gap** (Hiroshima, Utrecht, Den Haag, Kitchener–Waterloo, Ottawa,
+Pittsburgh), named in the last column. Two EDGE cities sit elsewhere, placed by
+their first blocker: Gimhae in Band D, Gimpo in Band B's Gyeonggi entry.
+Ordered roughly from the most metro-like (Buffalo, mostly underground) to the
+least.
+
+| City | Network | Business | Gap, or build-time calls |
+|---|---|---|---|
+| **Buffalo** 🇺🇸 (EDGE: mostly underground, surface-running in the downtown transit mall) | Metro Rail, one line, **about 13 stations, all in the city** (from knowledge, not measured). **In T, not A (owner's call)**: the edge rule that kept Nice here | New York's multi-source pattern: the city's Business Licenses (`qcyy-feh8`, public domain, 12,131 active, lat/lon) + NYS retail food (`9a8c-vfzj`) + NYS salons (`y3u4-jbgh`), NYS licences already read: **~900 / ~1,500 / 374** | Scope the NYS rows by point-in-boundary; drop elevator and fuel-device certificates; the rail and OSM density to measure |
+| **Ottawa** 🇨🇦 (EDGE: O-Train Line 1 is grade-separated light rail with a downtown tunnel) | O-Train light rail, 6 routes (stations unmeasured) | Food-safety inspections only: the one address-level commercial layer among 697 catalogue entries scanned 2026-09-21 (`docs/canada_retrospective.md`) | **Food only** (a bucket gap): no retail or personal-services source. **Moved from Band C 2026-09-28 (owner)**: light rail with no metro, so trams are its first blocker, as for Kitchener–Waterloo |
+| **Nice** 🇫🇷 (EDGE: L2 in a 6.4 km tunnel) | Tram L1–L3, plus a route "B" (Aéroport T2 – CADAM, 6 stations) not yet identified; stations in the commune / total: 47 / 47 (every line whole) | SIRENE, R / F / P 4,230 / 3,544 / 2,372 (2.85×; personal 6.4×); stores near stations 9,379 | None on scope. Personal services lean on beauty (96.02B, 1,026 over 810 hairdressers): a composition and personal-exposure item |
+| **Rouen** 🇫🇷 (EDGE: the "métro", a light rail with a central tunnel) | 2 branches; stations in the commune / total: 10 / 31 (32%) | SIRENE, R / F / P 1,505 / 1,190 / 512 (1.73×); stores near stations 2,868; 3,634 over 5 communes | **Regional scope**; Astuce's own host timed out, so rail from the Normandie regional feed |
+| **Den Haag** 🇳🇱 (EDGE) | 14 HTM lines plus RandstadRail E: 172 stop places; worst line tram 1, 20 of 37 (a regional scope makes every line 94–100% whole) | BAG shop units 6,560 (1.75× OSM) | **Gap:** **No current food source**: the city's register froze at the end of 2020, and its Gemeenteblad carries 321 applications and no decisions |
+| **Utrecht** 🇳🇱 (EDGE) | Trams 20–22: 16 stops (line 21 keeps 57%); 32 with Nieuwegein and IJsselstein | BAG shop units 3,461 (1.73×) | **Gap:** **Food partial**: rebuilt from Gemeenteblad notices, 822 premises (0.78× OSM), no expiry rule. **What would move it**: the owner accepting a disclosed partial food layer, to Band T. `open.utrecht.nl` answered 403 and was left alone, so "no register" there is unmeasured |
+| **Bergen** 🇳🇴 (EDGE: Bybanen street-runs in the centre, segregated beyond) | Lines 1 and 2, **34 stations, all inside the kommune**; 5- and 7-minute headways. Skyss GTFS, NLOD (read for Oslo) | Oslo's modules unchanged: 2,195 / 658 / 762 = **3,615** placed; join **96.2%** | **None** — the cheapest non-French build |
+| **Aarhus** 🇩🇰 (EDGE: 19 of its 39 stations are on converted single-track regional railway at 2 an hour) | Letbane L1 and L2, **39 stations in the kommune**; L1 keeps 19 → 11 | CVR production units: 3,122 / 1,220 / 941 = **5,283** | All 39 stations or the 20 on new tramway (the screen leans to 39, headway disclosed); one OSM colour for both lines; ~44% personally owned (Copenhagen 39%) |
+| **Kitchener–Waterloo (Regional)** 🇨🇦 (EDGE: ION runs in reserved lanes and off-road corridors, at grade, with a tunnel and bridges) | ION light rail, one line, **19 stops: Kitchener 11, Waterloo 8**. Either city alone is a stub; the pair keeps every stop. Every 10 min, 06:00–22:00 on weekdays. GTFS from the Region (GRT), Region of Waterloo Open Data Licence v2.0 (declared) | The Region's public-health inspection layers: food "General" **2,008** (2.0× OSM), personal services **about 636** (2.7×), points on 100%. **No retail**: grocery and convenience stores sit inside food with no field to split them. Same licence, which requires the wording "Contains information provided by the Regional Municipality of Waterloo under licence" | The regional pair as the scope; filter by boundary polygon, not `SiteCity` (about 60 spellings); the personal-services layer holds home-based operators, so `check_personal_exposure.py` first; the grocery share of food. Neither city publishes a general licence register (all three hub catalogues enumerated) |
+| **Pittsburgh** 🇺🇸 (EDGE: the T, with a downtown subway) | The T, 3 lines; **stub test unmeasured** (much of the network is suburban) | Allegheny County's Geocoded Food Facilities (CC0, 32,245 county-wide; `municipal` = Pittsburgh wards; x/y): food, plus grocery and convenience stores as retail (New York's precedent, owner 2026-09-28) | **No personal-services source** (a Band C gap); the city's own licences are signs, amusements and peddlers (729 active); the food file last modified 2025-08-27 |
+| **Hiroshima** 🇯🇵 | Hiroden streetcars, plus the Astram Line (EDGE) | 7,479 + 5,195 restaurants on two lists, joined 96.0% / 95.0%; PDL 1.0 | **Gap:** **No personal-services list** (PDFs only); food retail only as MHLW's opt-in slice |
+
 ### ▲ Five moved from Band C 2026-09-27 (owner's call): contingent on trams, with a bucket gap as well
+
+*Hiroshima, Utrecht and Den Haag, three of the seven below when they moved, are EDGE networks and are in the EDGE group above, with their gaps.*
 
 Each needs two yeses: trams-only maps (this band) and the Band C memo's
 verdict for its gap. Rows as they stood in Band C; the write-ups follow,
@@ -748,9 +777,6 @@ verbatim.
 |---|---|---|---|
 | **Zurich** 🇨🇭 | 18 tram refs, all coloured, plus the Forchbahn (S18); no metro | `Gastwirtschaftsbetriebe`, 3,488 food premises, CC0 | **Food only**: no second register in 1,128 catalogue names; STATENT is aggregate |
 | **Göteborg** 🇸🇪 | **Measured 2026-09-27 (OSM)**: 13 tram lines (1–13, Göteborgs Spårvägar), **127 distinct stops inside Göteborgs Stad**; lines 4 and 12 run on into Mölndal. Each line has its own OSM colour except 11 ("black"); the heritage Lisebergslinjen is out. No metro | `Livsmedelsverksamheter`, 5,063 active food businesses, CC0, daily | **Food only**: `handel`, `butik`, `företag` and `frisör` all return 0 on a filtering search |
-| **Hiroshima** 🇯🇵 | Hiroden streetcars, plus the Astram Line (EDGE) | 7,479 + 5,195 restaurants on two lists, joined 96.0% / 95.0%; PDL 1.0 | **No personal-services list** (PDFs only); food retail only as MHLW's opt-in slice |
-| **Utrecht** 🇳🇱 (EDGE) | Trams 20–22: 16 stops (line 21 keeps 57%); 32 with Nieuwegein and IJsselstein | BAG shop units 3,461 (1.73×) | **Food partial**: rebuilt from Gemeenteblad notices, 822 premises (0.78× OSM), no expiry rule. **What would move it**: the owner accepting a disclosed partial food layer, to Band T. `open.utrecht.nl` answered 403 and was left alone, so "no register" there is unmeasured |
-| **Den Haag** 🇳🇱 (EDGE) | 14 HTM lines plus RandstadRail E: 172 stop places; worst line tram 1, 20 of 37 (a regional scope makes every line 94–100% whole) | BAG shop units 6,560 (1.75× OSM) | **No current food source**: the city's register froze at the end of 2020, and its Gemeenteblad carries 321 applications and no decisions |
 | **Rijswijk** 🇳🇱 | Trams-only, 17 stop places | BAG shop units | No food source. **A Den Haag add-on** (owner 2026-09-27): a candidate for a Den Haag (Regional) scope, not a page of its own |
 | **Delft** 🇳🇱 | Trams-only, 12 stop places | BAG shop units | No food source. **A Den Haag add-on** (owner 2026-09-27): a candidate for a Den Haag (Regional) scope, not a page of its own |
 
@@ -821,7 +847,9 @@ France's own config (a 483 m outer ring, Lambert-93), so the build recounts.
 **Build-time calls are listed per row** and put when each brief is written, not
 before.
 
-**🇫🇷 France (21)** — SIRENE through the built cities' step-2 chain, which
+*Nice and Rouen (EDGE) are in the EDGE group above.*
+
+**🇫🇷 France (19)** — SIRENE through the built cities' step-2 chain, which
 reproduced Rennes (3,479) and Toulouse (8,635) exactly as the control. Most
 feeds are Licence Ouverte 2.0; Montpellier, Grenoble, Angers and Le Havre
 ODbL. **Mode flags are unreliable** (Reims' feed types its tram as metro), so
@@ -829,13 +857,11 @@ the mode is decided per city.
 
 | City | Network | Stations in the commune / total (worst line) | R / F / P (× OSM) | Stores near stations | Build-time calls |
 |---|---|---|---|---|---|
-| **Nice** (EDGE: L2 in a 6.4 km tunnel) | Tram L1–L3, plus a route "B" (Aéroport T2 – CADAM, 6 stations) not yet identified | 47 / 47 (every line whole) | 4,230 / 3,544 / 2,372 (2.85×; personal 6.4×) | 9,379 | None on scope. Personal services lean on beauty (96.02B, 1,026 over 810 hairdressers): a composition and personal-exposure item |
 | **Montpellier** | Tram 1–5 | 87 / 112 (line 2: 54%) | 2,484 / 2,622 / 1,193 (1.93×) | 6,179 | 54% matches Toulouse's T1 precedent |
 | **Strasbourg** | Tram A–F (short Rotonde and Halles tunnels) | 66 / 94, plus 3 in Kehl, Germany (B: 52%) | 2,385 / 2,244 / 1,020 (2.11×) | 5,482 | Commune or regional |
 | **Bordeaux** | Tram A–F | 53 / 135 (A: 35%) | 3,167 / 3,018 / 1,224 (1.84×) | 6,889; **10,754 over 14 communes** | **Regional scope** (Lille-style); TBM's Licence Ouverte **1.0** never read |
 | **Nantes** | Tram 1–3 | 56 / 84 (line 3: 48%) | 2,105 / 1,844 / 852 (1.39×) | 4,341; 5,383 regional | Commune or regional (48% is just under Toulouse's line) |
 | **Grenoble** | Tram A–E | 36 / 81 (C and D: 36%) | 1,541 / 1,601 / 598 (1.51×) | 3,716; 5,455 over 12 communes | **Regional scope** |
-| **Rouen** (EDGE: the "métro", a light rail with a central tunnel) | 2 branches | 10 / 31 (32%) | 1,505 / 1,190 / 512 (1.73×) | 2,868; 3,634 over 5 communes | **Regional scope**; Astuce's own host timed out, so rail from the Normandie regional feed |
 | Saint-Étienne | T1–T3 | 35 / 40 (81%) | 1,333 / 1,164 / 531 (1.71×) | 2,523 | — |
 | Angers | A–C | 36 / 42 (76%) | 1,183 / 876 / 493 (1.48×) | 2,380 | — |
 | Dijon | T1–T2 | 28 / 34 (82%) | 1,192 / 968 / 532 (1.50×) | 2,358 | — |
@@ -865,17 +891,19 @@ Cleanup 2026-09-27).
 | **Liberec** | 34 stations alone (line 11 keeps 21 → 15); 41 with Jablonec, every line whole. DPMLJ's GTFS resets the connection, so OSM | 1,880 alone; **2,498 with Jablonec**; 2.45× | With Jablonec or without |
 | **Most + Litvínov** | Joint scope 27 stations, every line whole. **Most alone fails the stub test** (lines keep 6 of 18, 9 of 21, 12 of 24) | 429 / 267 / 334 = 1,030; 3.71× | Joint scope is required; low value |
 
-**🇳🇴 Norway (1), 🇩🇰 Denmark (2), 🇱🇻 Latvia (2)**
+*Bergen (Norway) and Aarhus (EDGE) are in the EDGE group above.*
+
+**🇩🇰 Denmark (1), 🇱🇻 Latvia (2)**
 
 | City | Network | Business | Build-time calls |
 |---|---|---|---|
-| **Bergen** 🇳🇴 (EDGE: Bybanen street-runs in the centre, segregated beyond) | Lines 1 and 2, **34 stations, all inside the kommune**; 5- and 7-minute headways. Skyss GTFS, NLOD (read for Oslo) | Oslo's modules unchanged: 2,195 / 658 / 762 = **3,615** placed; join **96.2%** | **None** — the cheapest non-French build |
-| **Aarhus** 🇩🇰 (EDGE: 19 of its 39 stations are on converted single-track regional railway at 2 an hour) | Letbane L1 and L2, **39 stations in the kommune**; L1 keeps 19 → 11 | CVR production units: 3,122 / 1,220 / 941 = **5,283** | All 39 stations or the 20 on new tramway (the screen leans to 39, headway disclosed); one OSM colour for both lines; ~44% personally owned (Copenhagen 39%) |
 | **Odense** 🇩🇰 | Letbane, one line, 24 stops in OSM against the operator's 26; every 7.5 min | 1,629 / 649 / 612 = **2,890** | — |
 | **Daugavpils** 🇱🇻 | Routes 1–5, **38 stop names**, all inside; route 1 every 10 min, the others about hourly | Riga's two layers: food 98 (95.9% placed), shops and services 722 (100%); 81.5% within 483 m | Rail from OSM (the GTFS declares no licence); VZD's address file `aw_eka.csv` (CC BY 4.0) is a new source needing its own `data_sources.md` row |
 | **Liepāja** 🇱🇻 | One line, **18 stop names**, about every 7 min | Food 131 (93.9%), shops and services 583 (100%); 69.7% within 483 m | As Daugavpils |
 
-**🇺🇸 United States (8)** — Kansas City moved here from DISCARDED on 2026-09-27
+*Buffalo and Pittsburgh (EDGE) are in the EDGE group above.*
+
+**🇺🇸 United States (6)** — Kansas City moved here from DISCARDED on 2026-09-27
 (owner's call: "Kansas City trams okay"; discarded 2026-09-21 for "too little
 rail", before the owner ruled that trams count). **Seven joined 2026-09-28 from
 wave 2's US screen (owner's calls)**: New Orleans and Tucson on three buckets;
@@ -890,18 +918,9 @@ personal services).
 | **Tucson** 🇺🇸 | Sun Link, **21 stops, all inside**; every 10 min on weekdays 07–18, 20 in evenings and at weekends | The city's BUSLIC layer (`gis.tucsonaz.gov`, 34,764 active of 93,483, updated 2026-09-22), NAICS, active and not home-based: **4,056 / 2,011 / 1,245** (2.7× / 2.2× / 6.3×), points; terms an "as is" disclaimer, no licence named | A licence read; about 6,250 active licences are individuals' (privacy check); `naics.py` fits unchanged; the daytime-only 10-minute service disclosed |
 | **Houston** 🇺🇸 | METRORail Red, Green and Purple, all inside the city (**from knowledge, not measured**: Overpass failed during the screen) | **The Texas Comptroller's "Active Sales Tax Permit Holders"** (`jrea-zgmq`, public domain, updated 2026-09-26; a NEW source): 79,097 outlets flagged inside city limits, `outlet_naics_code`: **28,368 / 11,870 / 2,057** | **Addresses only: an address join** (`address-join`); online and home sellers inflate retail, salons appear only if they sell taxable goods; 14,879 sole owners (privacy); rail and OSM density to measure. The Comptroller's `3kx8-uryv` (with out-of-business dates) is the alternative |
 | **Sacramento** 🇺🇸 | SacRT light rail: **41 stations inside** (Blue 30 → 28, Gold 30 → 18, Green 9 → 9; OSM) | Business Operation Tax (the city's item `f4ee567a…`, 13,385 active in the city, 148 local descriptions): **~1,300 / ~1,010 / ~950** (1.7× / 1.1× / 6×; 241 independent stylists) | **Addresses only: an address join**; no licence declared; 5,724 rows with Location_City "ON FILE"; exclude `Principal_Owner_*`, `Primary_Phone_number`, `Mail_*` |
-| **Buffalo** 🇺🇸 (EDGE: mostly underground, surface-running in the downtown transit mall) | Metro Rail, one line, **about 13 stations, all in the city** (from knowledge, not measured). **In T, not A (owner's call)**: the edge rule that kept Nice here | New York's multi-source pattern: the city's Business Licenses (`qcyy-feh8`, public domain, 12,131 active, lat/lon) + NYS retail food (`9a8c-vfzj`) + NYS salons (`y3u4-jbgh`), NYS licences already read: **~900 / ~1,500 / 374** | Scope the NYS rows by point-in-boundary; drop elevator and fuel-device certificates; the rail and OSM density to measure |
-| **Pittsburgh** 🇺🇸 (EDGE: the T, with a downtown subway) | The T, 3 lines; **stub test unmeasured** (much of the network is suburban) | Allegheny County's Geocoded Food Facilities (CC0, 32,245 county-wide; `municipal` = Pittsburgh wards; x/y): food, plus grocery and convenience stores as retail (New York's precedent, owner 2026-09-28) | **No personal-services source** (a Band C gap); the city's own licences are signs, amusements and peddlers (729 active); the food file last modified 2025-08-27 |
 | **Minneapolis** 🇺🇸 | METRO Blue and Green (from knowledge, not measured) | Food inspections (CC0 waiver, 47,959 violation rows 2023–26, lat/lon): restaurants, plus grocery as retail (owner 2026-09-28) | **No personal-services source and no licence register** (a Band C gap); an inspection table, so de-duplicate to premises; the stub test to measure |
 
-**🇨🇦 Canada (2)** — Kitchener–Waterloo joined 2026-09-27 from wave 2's screen, and Ottawa moved in from Band C 2026-09-28 (owner). **In T, not A
-(owner's call)**: ION has no metro, the shape of Bergen's and Aarhus's light
-rail, which are here too. It also carries a Band C gap (no retail).
-
-| City | Network | Business | Build-time calls |
-|---|---|---|---|
-| **Kitchener–Waterloo (Regional)** 🇨🇦 (EDGE: ION runs in reserved lanes and off-road corridors, at grade, with a tunnel and bridges) | ION light rail, one line, **19 stops: Kitchener 11, Waterloo 8**. Either city alone is a stub; the pair keeps every stop. Every 10 min, 06:00–22:00 on weekdays. GTFS from the Region (GRT), Region of Waterloo Open Data Licence v2.0 (declared) | The Region's public-health inspection layers: food "General" **2,008** (2.0× OSM), personal services **about 636** (2.7×), points on 100%. **No retail**: grocery and convenience stores sit inside food with no field to split them. Same licence, which requires the wording "Contains information provided by the Regional Municipality of Waterloo under licence" | The regional pair as the scope; filter by boundary polygon, not `SiteCity` (about 60 spellings); the personal-services layer holds home-based operators, so `check_personal_exposure.py` first; the grocery share of food. Neither city publishes a general licence register (all three hub catalogues enumerated) |
-| **Ottawa** 🇨🇦 (EDGE: O-Train Line 1 is grade-separated light rail with a downtown tunnel) | O-Train light rail, 6 routes (stations unmeasured) | Food-safety inspections only: the one address-level commercial layer among 697 catalogue entries scanned 2026-09-21 (`docs/canada_retrospective.md`) | **Food only** (a bucket gap): no retail or personal-services source. **Moved from Band C 2026-09-28 (owner)**: light rail with no metro, so trams are its first blocker, as for Kitchener–Waterloo |
+*🇨🇦 Canada: Kitchener–Waterloo (Regional) (joined 2026-09-27 from wave 2) and Ottawa (moved in from Band C 2026-09-28) are both EDGE, and both are in the EDGE group above.*
 
 **🇮🇹 Italy (1), 🇪🇸 Spain (1)** — joined 2026-09-28 from wave 2's second group
 (owner's calls). Both trams-only, both with coordinates on every row.
