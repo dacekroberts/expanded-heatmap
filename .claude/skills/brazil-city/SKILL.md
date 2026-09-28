@@ -40,7 +40,7 @@ pipeline/<slug>/build_check.py       São Paulo's, pointed at this config
 
 Plus a `REGISTRIES` entry in `scripts/check_personal_exposure.py` (São Paulo's:
 no raw file, no trade or owner column, `address=None`), rows in
-`docs/data_sources.md`, and - at the end of the batch - the app entries.
+`docs/data_sources/brazil.md`, and - at the end of the batch - the app entries.
 
 **Write the generic OSM step 1 ONCE, as `pipeline/countries/brazil_rail.py`,
 before the second OSM city** (osm-rail's meta-lesson: a lesson in one city's

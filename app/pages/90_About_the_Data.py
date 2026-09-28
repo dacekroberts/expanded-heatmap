@@ -1,4 +1,5 @@
-"""Where this data comes from - renders docs/data_sources.md in the app.
+"""Where this data comes from - renders docs/data_sources.md in the app, then
+each per-country file in docs/data_sources/.
 
 WHY THIS PAGE EXISTS, AND WHY IT BLOCKS PUBLISHING. Three separate obligations
 converge on it:
@@ -36,6 +37,11 @@ from components import (  # noqa: E402
 )
 
 DOC = Path(__file__).parent.parent.parent / "docs" / "data_sources.md"
+# Split by country on 2026-09-27: the entry point above keeps the notices and
+# the gate, and each country's sources moved verbatim to docs/data_sources/.
+# Both are the provenance record, so the page renders both - the entry point
+# alone would publish the notices and drop every endpoint.
+COUNTRY_DOCS = sorted((DOC.parent / "data_sources").glob("*.md"))
 
 st.set_page_config(page_title=f"Where this data comes from — {SITE_NAME}",
                    page_icon="\U0001f5fa️", layout="wide")
@@ -69,5 +75,11 @@ if DOC.exists():
     st.markdown(DOC.read_text(encoding="utf-8"))
 else:
     st.warning(f"{DOC.name} is missing from this checkout.")
+if not COUNTRY_DOCS:
+    st.warning("The per-country files in docs/data_sources/ are missing from "
+               "this checkout.")
+for country_doc in COUNTRY_DOCS:
+    st.divider()
+    st.markdown(country_doc.read_text(encoding="utf-8"))
 
 render_site_notices(show_links=False)

@@ -104,7 +104,8 @@ a rule, not before obeying one.
   in `docs/data_sources.md` (a naming layer, a parcel layer, a geocoder), with
   its own licence and any notice it requires. [#support-sources]
 - **Record a new data source's licence when you add it**, in
-  `docs/data_sources.md`, using the **`read-licence` skill**. A government
+  `docs/data_sources.md` (per-country sections live in
+  `docs/data_sources/<country>.md`), using the **`read-licence` skill**. A government
   portal is a reason to expect permissive terms, not evidence; check what a
   dataset page incorporates by reference. [#licence]
 - **A removal request is honoured, not argued** - from a publisher, a business

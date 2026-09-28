@@ -82,7 +82,7 @@ do not assume a city has the equivalent.
 
 **This is the step that gets skipped, and every added source multiplies it.**
 Four sources means four licence positions, four sets of terms, and up to four
-notices the site must display. Record each in `docs/data_sources.md` as you
+notices the site must display. Record each in `docs/data_sources/<country>.md` as you
 verify it, per `add-city` Step 0 item 4 - a city is not done until its terms
 are recorded, because afterwards an unrecorded gap looks exactly like a
 checked one.
@@ -211,7 +211,8 @@ that page was a choice and this was not.
 - [ ] Individual/renter licence types dropped in favour of business ones
 - [ ] State sources scoped by boundary polygon, not city name
 - [ ] **Licence, terms and any required notice recorded per source** in
-      `docs/data_sources.md`; clauses needing a decision raised, not resolved
+      `docs/data_sources/<country>.md` (notices in `docs/data_sources.md`'s
+      gate); clauses needing a decision raised, not resolved
       generously
 - [ ] Dispatching taxonomy with `EXTRA_COLUMNS = ("source",)`; `map_common.py`
       untouched
