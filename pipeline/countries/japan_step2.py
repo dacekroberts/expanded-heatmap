@@ -28,7 +28,7 @@ city's step 2 calls run(config).
 
 Config needs: SOURCES, source_csv(), REQUIRED_COLUMNS, ISJ_DIR, PREFECTURE,
 MUNICIPALITY, CITY_BBOX, TAXONOMY_SYSTEM, BUSINESSES_CLEAN_CSV, SLUG. Optional,
-each named where it is defined: source_rows, SOURCE_MUNICIPALITY,
+each named where it is defined: source_rows, SOURCE_MUNICIPALITY, SOURCE_KIND,
 ADDRESS_BY_CONSENT, OWN_POINT_FALLBACK, SUPERSEDES. Reads the cache and NEVER
 fetches.
 """
@@ -74,6 +74,17 @@ def municipality(config, key):
     its own - Tokyo's special wards, each its own publisher, where the WARD is
     the municipality (港区, 渋谷区) and an address may start at the town (Taitō)."""
     return getattr(config, "SOURCE_MUNICIPALITY", {}).get(key, config.MUNICIPALITY)
+
+
+def kind(config, key):
+    """What a source IS, as japan_eigyo reads it ("food", "mhlw", "barber",
+    "beauty", "laundry"): the key itself, or config.SOURCE_KIND[key] where a
+    city has several sources of one kind - Tokyo's wards, each with its own
+    food list and registers (food_13103, barber_13103; 2026-09-28). The KEY
+    names a source in SUPERSEDES, SHARE_SKIP, ADDRESS_BY_CONSENT and
+    OWN_POINT_FALLBACK; the KIND decides its bucket and is the output's
+    `source` column."""
+    return getattr(config, "SOURCE_KIND", {}).get(key, key)
 
 
 def key_addr(a):
@@ -124,7 +135,7 @@ def official_shares(config, df):
     codes = getattr(config, "MUNICIPALITY_CODES", {})
     # config.SHARE_SKIP: sources left out of the share - Tokyo's MHLW slices,
     # since the page states each ward's share of its OWN list (owner 2026-09-28)
-    food = df[~df["source"].isin(japan_eigyo.PERSONAL_SOURCES) & ~df["closed"]
+    food = df[~df["kind"].isin(japan_eigyo.PERSONAL_SOURCES) & ~df["closed"]
               & ~df["source"].isin(getattr(config, "SHARE_SKIP", ()))
               & df["type"].fillna("").str.contains("飲食")]
     rows = food["muni"].value_counts()
@@ -206,6 +217,7 @@ def run(config, write=True):
         ps = jr.permits_from_rows(rows, config.PREFECTURE, municipality(config, key))
         for p, f in zip(ps, flags):
             p["source"], p["name_is_operator"], p["muni"] = key, f, municipality(config, key)
+            p["kind"] = kind(config, key)
         permits += ps
         emit(f"rows_{key}", len(ps))
         print(f"  {key:8} {len(ps):>7,} rows")
@@ -247,7 +259,7 @@ def run(config, write=True):
     print(f"  not a premises (vehicle, stall, 一円, storeless): {int((mobile & ~noaddr).sum()):,}")
     emit("not_a_premises", int((mobile & ~noaddr).sum()))
     df = df[~mobile].copy()
-    decided = [japan_eigyo.explain(t, s, f) for t, s, f in zip(df["type"], df["source"], df["form"])]
+    decided = [japan_eigyo.explain(t, s, f) for t, s, f in zip(df["type"], df["kind"], df["form"])]
     df["bucket"] = [b for b, _ in decided]
     df["rule"] = [r for _, r in decided]
     out = df[df["bucket"].isna()]
@@ -293,7 +305,7 @@ def run(config, write=True):
 
     # --- the name rule --------------------------------------------------------------
     hidden = df["name_is_operator"]
-    df["permit_type"] = [REGISTER_TYPE.get(s, t) for s, t in zip(df["source"], df["type"])]
+    df["permit_type"] = [REGISTER_TYPE.get(s, t) for s, t in zip(df["kind"], df["type"])]
     df["business_name"] = df["name"].where(~hidden, df["permit_type"])
     print(f"  names withheld (the trade name IS the operator's own name): {int(hidden.sum())}; "
           f"shown as their permit type")
@@ -307,8 +319,8 @@ def run(config, write=True):
     emit("sweets_deli_rows", int(made.sum()))
     emit("sweets_deli_factory_like", int(fac.sum()))
 
-    out = df[["business_name", "permit_type", "source", "form", "latitude", "longitude", "addr", "tier"]].rename(
-        columns={"addr": "address"})
+    out = df[["business_name", "permit_type", "kind", "form", "latitude", "longitude", "addr", "tier"]].rename(
+        columns={"addr": "address", "kind": "source"})
     kept = filter_to_storefront(out, config.TAXONOMY_SYSTEM)
     if len(kept) != len(out):
         sys.exit("filter_to_storefront dropped rows the buckets already decided")

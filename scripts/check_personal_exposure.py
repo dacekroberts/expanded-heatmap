@@ -275,6 +275,14 @@ REGISTRIES = {
     "kyoto": dict(raw=None, trade=None, owner=None,
                   processed="businesses_clean.csv",
                   address=("address",), japan=True),
+    # Tokyo: every ward a source (pipeline/tokyo/wards.py). The pass covers the
+    # lists that carry an operator column (Taitō, Meguro, Setagaya; the Taitō,
+    # Meguro and Shibuya registers). The national-schema food lists (Chūō,
+    # Minato, Shinjuku, Kōtō, Shibuya), Minato's registers and MHLW's slices
+    # carry none, so their rows cannot be tested (2026-09-28).
+    "tokyo": dict(raw=None, trade=None, owner=None,
+                  processed="businesses_clean.csv",
+                  address=("address",), japan=True),
     # Daegu: Seoul's register and pass through pipeline/countries/korea.py.
     # The health-food file's addresses are masked by the publisher; the Korean
     # residence test reads a masked 동/호 unit as a unit (korean_names.py).

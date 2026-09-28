@@ -74,14 +74,16 @@ _COMPILED = [(name, bucket, re.compile(pat)) for name, bucket, pat in RULES]
 # run only on a row its type put in a bucket - a form never brings a
 # manufacturing or vending row IN - and the first match wins.
 FORM_RULES = [
+    # A temporary stall is not a yatai: Tokyo's MHLW rows file a festival
+    # stall as 臨時設置屋台 (亀戸, 2026-09-28), so the temporary words win.
+    ("temporary / mobile", None, r"仮設|臨時|短期|期間限定|季節的|イベント|催事|祭|マルシェ|出店|自動車|キッチンカー|"
+                                 r"移動|行商|列車|屋形船|海の家"),
     # Fukuoka's 屋台, filed as ろ店 / 定置屋台: stalls at fixed street spots
     # (Nakasu's 清流公園, Tenjin, Nagahama) on permits running to 2032 under
     # the city's 屋台基本条例 - not a festival stall. They COUNT (owner
-    # 2026-09-28; 81 in Fukuoka). Tokyo's MHLW rows: read what ろ店 means there
-    # before trusting this rule.
+    # 2026-09-28; 81 in Fukuoka). Tokyo has no ろ店; its two 屋台 rows are
+    # fixed bento stalls in office plazas (京橋, 六本木; MHLW, 2026-09-28).
     ("yatai: a fixed street stall (Fukuoka's 屋台)", "Food service", r"ろ店|屋台"),
-    ("temporary / mobile", None, r"仮設|臨時|短期|期間限定|季節的|イベント|催事|祭|マルシェ|出店|自動車|キッチンカー|"
-                                 r"移動|行商|列車|屋形船|海の家"),
     ("institutional catering", None, r"給食|社員食堂|職員食堂|会社食堂|学生食堂|学校食堂|寮食堂|老人ホーム|福祉施設|"
                                      r"栄養管理室|病院|保育園|幼稚園|小学校"),
     ("inside accommodation", None, r"旅館|ホテル"),
@@ -123,13 +125,15 @@ def _explain_type(value, source):
             return None, "mobile salon (not a premises)"
         # Sapporo's 厚生施設理容所 / 厚生施設美容所: a barber or salon inside a
         # hospital or care home, for its residents - not open to the public,
-        # as institutional catering is not (2026-09-28; 16 rows).
-        if "厚生施設" in str(value or ""):
+        # as institutional catering is not (2026-09-28; 16 rows). Meguro's
+        # register spells it 厚生 alone in 施設（種別）等 (Tokyo, 2 rows).
+        if "厚生施設" in str(value or "") or normalise(value) == "厚生":
             return None, "welfare-facility salon (not open to the public)"
         # Osaka's laundry register: リネンサプライ (towel, oshibori and hospital
         # linen suppliers, many named 工場) is industrial, not a counter; owner
         # 2026-09-27. 一般リネン兼業 (a general laundry that also does linen) stays.
-        if source == "laundry" and normalise(value).startswith("リネンサプライ"):
+        # Taitō's register spells it リネン alone (Tokyo, 1 row).
+        if source == "laundry" and normalise(value).startswith("リネン"):
             return None, "linen supply (industrial, not a counter)"
         return "Personal services", f"{source} register"
     v = normalise(value)
@@ -169,6 +173,8 @@ assert classify({VALUE_COLUMN: "リネンサプライ", "source": "laundry"}) is
 assert classify({VALUE_COLUMN: "一般リネン兼業", "source": "laundry"}) == "Personal services"
 assert classify({VALUE_COLUMN: "コインランドリー", "source": "coinlaundry"}) == "Personal services"
 assert classify({VALUE_COLUMN: "厚生施設美容所", "source": "beauty"}) is None
+assert classify({VALUE_COLUMN: "厚生", "source": "barber"}) is None
+assert classify({VALUE_COLUMN: "リネン", "source": "laundry"}) is None
 assert classify({VALUE_COLUMN: "一般理容所", "source": "barber"}) == "Personal services"
 # 業態 (Fukuoka): a form excludes, or makes a restaurant a shop, but never brings a row in
 for _v, _f, _want in (("① 飲食店営業", "自動車200L", None), ("① 飲食店営業", "仮設営業（季節的営業）", None),

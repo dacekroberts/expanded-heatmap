@@ -24,7 +24,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 **2026-09-28**
 
-- [One handoff for the Tokyo build session (owner)](#2026-09-28---one-handoff-for-the-tokyo-build-session-owner)
+- [Tokyo step 2 on the roster: 63,989 storefronts from 25 sources, 99.7% block; a source's key split from its kind; the registers read for the first time](#2026-09-28---tokyo-step-2-on-the-roster-63989-storefronts-from-25-sources-997-block-a-sources-key-split-from-its-kind-the-registers-read-for-the-first-time)
 - [Tokyo's groundwork built: the ward roster, hollow no-data stations, per-ward shares measured every build; the seven personal-services-only wards stay hollow (owner); the Tokyo build takes over this worktree](#2026-09-28---tokyos-groundwork-built-the-ward-roster-hollow-no-data-stations-per-ward-shares-measured-every-build-the-seven-personal-services-only-wards-stay-hollow-owner-the-tokyo-build-takes-over-this-worktree)
 - [Review batch verified: the full deploy-verify passes; the macro tooltip becomes a corner panel; East Asia's global-frame label overlaps accepted (owner)](#2026-09-28---review-batch-verified-the-full-deploy-verify-passes-the-macro-tooltip-becomes-a-corner-panel-east-asias-global-frame-label-overlaps-accepted-owner)
 - [Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one heavy job at a time, drift --jobs 2 at most (owner)](#2026-09-28---two-app-crashes-traced-to-memory-exhaustion-python-capped-at-8-gb-a-process-one-heavy-job-at-a-time-drift---jobs-2-at-most-owner)
@@ -133,7 +133,85 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
-### 2026-09-28 - One handoff for the Tokyo build session (owner)
+### 2026-09-28 - Tokyo step 2 on the roster: 63,989 storefronts from 25 sources, 99.7% block; a source's key split from its kind; the registers read for the first time
+
+- **Tokyo's config is built from the roster** (`pipeline/tokyo/config.py`, from
+  `pipeline/tokyo/wards.py`): 25 sources - 8 ward food lists, the 12
+  registers of Minato, Taitō, Meguro and Shibuya, and 4 MHLW slices - each
+  keyed `<kind>_<ward code>` (`food_13103`, `barber_13106`, `mhlw_13104`)
+  with its ward as its municipality. `SUPERSEDES` keeps the ward's row where a
+  premises is in both its list and MHLW's (Chūō 204, Minato 249, Shinjuku 211,
+  Kōtō 352 MHLW rows dropped); `SHARE_SKIP`, `ADDRESS_BY_CONSENT` and
+  `OWN_POINT_FALLBACK` name the four MHLW slices. The brief check passed 7/7
+  first.
+- **Each file's URL and dataset page now sits in the roster** (`wards.URLS`),
+  and `check()` refuses an active file without one, so a ward switched on
+  carries its credit's source. The URLs came from the 2026-09-24 screen's
+  records and the Tokyo catalogue's API (`resource_search`); Meguro's BODIK
+  food dataset now answers at `131105_food_business`. All 43 files are
+  recorded in `outputs/tokyo/provenance.json` as kept; nothing was
+  downloaded. The eight active wards' address files were copied, not
+  fetched, into one directory (`data/tokyo/raw/isj/`), which `load_city_isj`
+  reads.
+- **Step 2 separates a source's KEY from its KIND** (`japan_step2.kind`,
+  `config.SOURCE_KIND`). The taxonomy decides Personal services from the
+  `source` value (`barber`, `beauty`, `laundry`), and `SUPERSEDES` and the
+  others name sources by key. Tokyo has eight food lists and three registers
+  of each kind, so the two could no longer be one string. The kind is the
+  output's `source` column. Rejected: stripping a suffix inside the taxonomy,
+  which would have made every classifier depend on a naming convention. For
+  every other city the key is the kind.
+- **The groundwork's eight-ward test was food only; the registers had never
+  been through the shared step.** Found and fixed, each naming Tokyo:
+  - Taitō's and Shibuya's registers name the premises `名称`, which no reader
+    knew, so every row had an empty name: added last to `NAME_COLS`.
+  - Their laundry kind is `営業形態`, and Minato's `施設種別`: added to
+    `TYPE_COLS`, so 無店舗取次店 (storeless pick-ups: Taitō 2, Meguro 9,
+    Shibuya 11) are caught as not a premises.
+  - Meguro spells its two welfare-facility barbers `厚生` alone, and Taitō
+    its one linen supplier `リネン`: `japan_eigyo` now takes both (the
+    owner's 厚生施設 and linen-supply calls), with asserts.
+  - `法人代表者氏名` (a company's representative, in Taitō's and Shibuya's
+    registers) joins `OPERATOR_COLS`, as `代表者名` is already there.
+- **A temporary stall is not a yatai** (the handoff's trap): the yatai form
+  rule ran before the temporary one, so MHLW's `臨時設置屋台` at 亀戸3-6-1 (a
+  shrine's festival stall) counted. The temporary rule now runs first. Tokyo
+  holds no ろ店; its two remaining 屋台 rows are fixed bento stalls in office
+  plazas (京橋3-1-1, and 六本木3-2-1 filed 屋台販売（常設）), kept by the
+  owner's yatai rule as Food service.
+- **Measured**: 99.7% block (67,313 of 67,539 storefront rows), 158 chōme,
+  35 at MHLW's own point, 33 unplaced (the 丁目-building-name trap among
+  them: 新宿1-3-12 壱丁目参番館, 新宿2-11-10 二丁目センタービル). Where a list
+  carries its own coordinates, the block point sits a median 27 m away (33,512
+  rows, 99.1% within 250 m). 22,368 closed rows out, 8,973 MHLW rows with no
+  published address, 1,086 not a premises, 5,486 not a storefront (1,728 of
+  them manufacturing types with no rule: ice cream, coffee roasting, noodles,
+  tofu), 2,500 repeat permits. 菓子 / そうざい 4,385 rows, 114 (2.6%)
+  factory-like, kept. **Storefronts 63,989: Food service 42,894, Retail
+  12,315, Personal services 8,780.**
+- **The eight shares reproduce the brief exactly** (Shibuya 100.8, Shinjuku
+  83.9, Taitō 80.5, Setagaya 62.9, Meguro 52.2, Minato 30.7, Chūō 11.9, Kōtō
+  9.3; `outputs/tokyo/official_shares.json`).
+- **As-of dates read from the permits, never a portal's label**: Chūō
+  2022-12-28, Minato 2026-07-31, Shinjuku 2023-01-01 (its stated snapshot),
+  Taitō 2026-03-31, Kōtō 2022-11-30, Meguro 2026-04-01 (its stated date),
+  Setagaya 2026-03-31 (its file's own date; 188 permits start 2026-04-01 to
+  05-01), Shibuya 2026-09-02 (its newest 廃業日; the item says 2026-09-09).
+  Meguro's registers are dated in their file names (2026-03-31); the
+  catalogue registers and MHLW's slices state no date.
+- **The name rule has little to compare in Tokyo; for the owner.** It runs
+  only on the lists with an operator column: Taitō's, Meguro's and Setagaya's
+  food lists and the Taitō, Meguro and Shibuya registers. Taitō and Setagaya
+  mask individual operators at source (2,738 and 2,169 rows), and so does
+  Shibuya's barber register (181 of 182). The national-schema food lists
+  (Chūō, Minato, Shinjuku, Kōtō, Shibuya: 64,057 rows), Minato's registers and
+  MHLW's slices carry no individual's name at all. 2 names are withheld on the
+  map. `check_personal_exposure.py` gained a Tokyo entry saying so; its pass
+  runs once the map is rendered.
+- **Zero drift in the five built Japanese cities** (Kobe 22, Osaka 26,
+  Sapporo 23, Fukuoka 31, Kyoto 24 baseline figures unchanged; `--jobs 2`,
+  announced), so none of the reader, step or taxonomy changes moved a built
+  city. The Minato control holds at 98.0 / 0.2 / 1.8.
 
 - **The owner asked for one handoff.** `docs/handoff_tokyo_build_2026-09-28.md`
   now holds everything the Tokyo build session needs:

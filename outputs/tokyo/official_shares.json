@@ -1,0 +1,66 @@
+[
+  {
+    "municipality": "中央区",
+    "code": "13102",
+    "rows": 1319,
+    "official": 11056,
+    "share_pct": 11.9,
+    "source": "Tokyo statistical yearbook, table 19-8 (飲食店営業, FY2024)"
+  },
+  {
+    "municipality": "港区",
+    "code": "13103",
+    "rows": 4892,
+    "official": 15939,
+    "share_pct": 30.7,
+    "source": "Tokyo statistical yearbook, table 19-8 (飲食店営業, FY2024)"
+  },
+  {
+    "municipality": "新宿区",
+    "code": "13104",
+    "rows": 12888,
+    "official": 15356,
+    "share_pct": 83.9,
+    "source": "Tokyo statistical yearbook, table 19-8 (飲食店営業, FY2024)"
+  },
+  {
+    "municipality": "台東区",
+    "code": "13106",
+    "rows": 6533,
+    "official": 8112,
+    "share_pct": 80.5,
+    "source": "Tokyo statistical yearbook, table 19-8 (飲食店営業, FY2024)"
+  },
+  {
+    "municipality": "江東区",
+    "code": "13108",
+    "rows": 570,
+    "official": 6102,
+    "share_pct": 9.3,
+    "source": "Tokyo statistical yearbook, table 19-8 (飲食店営業, FY2024)"
+  },
+  {
+    "municipality": "目黒区",
+    "code": "13110",
+    "rows": 2279,
+    "official": 4370,
+    "share_pct": 52.2,
+    "source": "Tokyo statistical yearbook, table 19-8 (飲食店営業, FY2024)"
+  },
+  {
+    "municipality": "世田谷区",
+    "code": "13112",
+    "rows": 5845,
+    "official": 9291,
+    "share_pct": 62.9,
+    "source": "Tokyo statistical yearbook, table 19-8 (飲食店営業, FY2024)"
+  },
+  {
+    "municipality": "渋谷区",
+    "code": "13113",
+    "rows": 10887,
+    "official": 10798,
+    "share_pct": 100.8,
+    "source": "Tokyo statistical yearbook, table 19-8 (飲食店営業, FY2024)"
+  }
+]

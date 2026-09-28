@@ -1,0 +1,421 @@
+{
+  "city_barber_13103": {
+    "as_of": null,
+    "bytes": 32104,
+    "dataset_page": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131032d0000000231",
+    "file": "riyou.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:06+00:00",
+    "rows": 205,
+    "sha256": "b6272e50328e3d42b9cc7303b0d51a977a44f71aaf054ee98b2d657a56498410",
+    "url": "https://opendata.city.minato.tokyo.jp/dataset/639a0ed3-b705-410b-85a9-63cbe58f62e3/resource/08c8b473-766c-4a9c-9082-4154212e176a/download/riyou.csv"
+  },
+  "city_barber_13106": {
+    "as_of": null,
+    "bytes": 32206,
+    "dataset_page": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131067d2025000006",
+    "file": "131067_taitoku_riyousyo.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:12+00:00",
+    "rows": 188,
+    "sha256": "fb749bfa4270ae9fd45b25162fcf137e3bedf77a4265216a44bd3352a701c6e7",
+    "url": "https://www.opendata.metro.tokyo.lg.jp/taito/131067_taitoku_riyousyo.csv"
+  },
+  "city_barber_13110": {
+    "as_of": "2026-03-31",
+    "bytes": 27140,
+    "dataset_page": "https://data.bodik.jp/dataset/131105_barber",
+    "file": "131105_barber_20260331.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:54:05+00:00",
+    "rows": 143,
+    "sha256": "18df8cde03f56bcdc88a9913fdc6ca645713fe4eeb10fe42a659c6c37ff555b9",
+    "url": "https://data.bodik.jp/dataset/4461b352-4ce7-451a-bfba-e2320c887530/resource/ba2a6afb-2b61-4bbd-833a-e52d4262a838/download/131105_barber_20260331.csv"
+  },
+  "city_barber_13113": {
+    "as_of": null,
+    "bytes": 62055,
+    "dataset_page": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131130d2025000006",
+    "file": "131130_shibuyaku_riyousyo.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:22+00:00",
+    "rows": 182,
+    "sha256": "640051b790458c11233b5cc7c9de138d05bf50b9b8a1e13539c8caa9c47a7e23",
+    "url": "https://www.opendata.metro.tokyo.lg.jp/shibuya/131130_shibuyaku_riyousyo.csv"
+  },
+  "city_beauty_13103": {
+    "as_of": null,
+    "bytes": 298625,
+    "dataset_page": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131032d0000000232",
+    "file": "biyou.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:05+00:00",
+    "rows": 1819,
+    "sha256": "0f608cd830efbe1b86e94229c6a6c5142b911047f90b713054b5475947b7e660",
+    "url": "https://opendata.city.minato.tokyo.jp/dataset/8fc687e5-d711-4f28-bbf3-403366192ee8/resource/94524ff8-962a-42d6-8b79-e06114345cc3/download/biyou.csv"
+  },
+  "city_beauty_13106": {
+    "as_of": null,
+    "bytes": 112292,
+    "dataset_page": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131067d2025000007",
+    "file": "131067_taitoku_biyousyo.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:12+00:00",
+    "rows": 594,
+    "sha256": "9834bbd8ff381a61a6d97e0e32703ad6d501c0ad6caf2ba246859d488a9e6349",
+    "url": "https://www.opendata.metro.tokyo.lg.jp/taito/131067_taitoku_biyousyo.csv"
+  },
+  "city_beauty_13110": {
+    "as_of": "2026-03-31",
+    "bytes": 225168,
+    "dataset_page": "https://data.bodik.jp/dataset/131105_hairdressingshop",
+    "file": "131105_hairdressingshop_20260331.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:54:06+00:00",
+    "rows": 1076,
+    "sha256": "139eb01cd63a15d4969be12700ff9c8e8521e03e2790d6dbc8baa7368aef22a0",
+    "url": "https://data.bodik.jp/dataset/f5569102-a9da-435f-aa43-d95c21dcd3c3/resource/bb9172ca-9ef5-41a0-b31f-032a0d26e6e9/download/131105_hairdressingshop_20260331.csv"
+  },
+  "city_beauty_13113": {
+    "as_of": null,
+    "bytes": 1127916,
+    "dataset_page": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131130d2025000007",
+    "file": "131130_shibuyaku_biyousyo.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:21+00:00",
+    "rows": 3429,
+    "sha256": "eee9ce200c03cfe3dcbb99bae1b9708537233272a57b89d8f0d902e3d773bda5",
+    "url": "https://www.opendata.metro.tokyo.lg.jp/shibuya/131130_shibuyaku_biyousyo.csv"
+  },
+  "city_food_13102": {
+    "as_of": "2022-12-28",
+    "bytes": 513187,
+    "dataset_page": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131024d0000000037",
+    "file": "syokuhineigyoukyoka.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:04+00:00",
+    "rows": 2548,
+    "sha256": "06613acd53287c57b87522945e81de1e50b1f351f3207a336547dbdb91ef8735",
+    "url": "https://www.city.chuo.lg.jp/documents/984/syokuhineigyoukyoka.csv"
+  },
+  "city_food_13103": {
+    "as_of": "2026-07-31",
+    "bytes": 2332997,
+    "dataset_page": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131032d0000000244",
+    "file": "food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:45:56+00:00",
+    "rows": 5722,
+    "sha256": "daef1080441460642ace43aaba88496c95cb6060a937c0b2eae2c57ad21a6d2e",
+    "url": "https://opendata.city.minato.tokyo.jp/dataset/54d8c582-00e2-4730-a23f-4a5befec9ae5/resource/c9d0299e-8e05-4317-877f-83055709e41f/download/food_business_all.csv"
+  },
+  "city_food_13104": {
+    "as_of": "2023-01-01",
+    "bytes": 4445074,
+    "dataset_page": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131041d0000000124",
+    "file": "000399975.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:08+00:00",
+    "rows": 14727,
+    "sha256": "111a899e252bf9991dcc4e4cc768ca11453edcdf2c9c552f5423cccff49fe2b7",
+    "url": "https://www.city.shinjuku.lg.jp/content/000399975.csv"
+  },
+  "city_food_13106": {
+    "as_of": "2026-03-31",
+    "bytes": 1585447,
+    "dataset_page": "https://www.city.taito.lg.jp/kenkohukusi/kenkokikikanrieisei/food/syokuhin-sisetu/index.html",
+    "file": "2026ALL-IND-CSV.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:51+00:00",
+    "rows": 7676,
+    "sha256": "7463fb2fbd4bb52e9537254e4b8a2758d96bdbf3ee4e2c05fd7c2c89462f4fc9",
+    "url": "https://www.city.taito.lg.jp/kenkohukusi/kenkokikikanrieisei/food/syokuhin-sisetu/index.files/2026ALL-IND-CSV.csv"
+  },
+  "city_food_13108": {
+    "as_of": "2022-11-30",
+    "bytes": 867166,
+    "dataset_page": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131083d0000000028",
+    "file": "131083_015_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:15+00:00",
+    "rows": 1756,
+    "sha256": "157119b63b9877871aa0e95eab1c4b682ac4abec4f886fd449508bb942f01847",
+    "url": "https://www.opendata.metro.tokyo.lg.jp/koto/131083_015_food_business_all.csv"
+  },
+  "city_food_13110_1": {
+    "as_of": "2026-04-01",
+    "bytes": 578781,
+    "dataset_page": "https://data.bodik.jp/dataset/131105_food_business",
+    "file": "all_new_8.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:51:55+00:00",
+    "rows": 2495,
+    "sha256": "e5bfc2f01a3ce3c06d320dcc9eb26139f79d5751dbcf3b61447a9fa271e8463a",
+    "url": "https://data.bodik.jp/dataset/dbbf7d8e-519d-4ce2-b789-f122b7003644/resource/86b9102a-7a87-4b9f-9223-f2544aa43976/download/all_new_8.csv"
+  },
+  "city_food_13110_2": {
+    "as_of": "2026-04-01",
+    "bytes": 244444,
+    "dataset_page": "https://data.bodik.jp/dataset/131105_food_business",
+    "file": "all_old_8.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:51:53+00:00",
+    "rows": 1087,
+    "sha256": "81f59e3c1a9714a7062db9900c277bffef5de24c8ba7040c3f9067d2405b4541",
+    "url": "https://data.bodik.jp/dataset/dbbf7d8e-519d-4ce2-b789-f122b7003644/resource/28f8dcc4-13a5-403f-a04a-700c97eb1769/download/all_old_8.csv"
+  },
+  "city_food_13112": {
+    "as_of": "2026-03-31",
+    "bytes": 1321218,
+    "dataset_page": "https://www.city.setagaya.lg.jp/02245/online_tetsuzuki/3246.html",
+    "file": "zenkenr080331.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:51:30+00:00",
+    "rows": 7428,
+    "sha256": "fc598c91816966034283ba0b7b8b2b1ee914f0e8aadcd132aade0602f4c70c26",
+    "url": "https://www.city.setagaya.lg.jp/documents/3246/zenkenr080331.csv"
+  },
+  "city_food_13113": {
+    "as_of": "2026-09-02",
+    "bytes": 22159635,
+    "dataset_page": "https://city-shibuya-data.opendata.arcgis.com/datasets/e68f41ebfa5f4ea490ca9af701d44e02_0/about",
+    "file": "131130_food_businesses_list.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:50:21+00:00",
+    "rows": 39304,
+    "sha256": "6b466817ebf61902204c0a85a691f37ee17acd28798c594c57ca05a5ac544188",
+    "url": "https://city-shibuya-data.opendata.arcgis.com/api/download/v1/items/e68f41ebfa5f4ea490ca9af701d44e02/csv?layers=0"
+  },
+  "city_laundry_13103": {
+    "as_of": null,
+    "bytes": 89075,
+    "dataset_page": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131032d0000000233",
+    "file": "cleaning.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:04+00:00",
+    "rows": 552,
+    "sha256": "76d3c87b74c12b86a30f3e8886b37c1439d3da64ba2b95e722894bb95c233582",
+    "url": "https://opendata.city.minato.tokyo.jp/dataset/ab904f07-bdaa-4e81-85e9-c6743d9dd336/resource/6a431a5c-c4b4-42a0-8d33-85f2f6dd2552/download/cleaning.csv"
+  },
+  "city_laundry_13106": {
+    "as_of": null,
+    "bytes": 59721,
+    "dataset_page": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131067d2025000005",
+    "file": "131067_taitoku_cleaning.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:13+00:00",
+    "rows": 266,
+    "sha256": "c7b741231e8f2ab2b0da4062c87b45f0a30cbe81c11309e262069b6d4626c93a",
+    "url": "https://www.opendata.metro.tokyo.lg.jp/taito/131067_taitoku_cleaning.csv"
+  },
+  "city_laundry_13110": {
+    "as_of": "2026-03-31",
+    "bytes": 41628,
+    "dataset_page": "https://data.bodik.jp/dataset/131105_cleaning_shop",
+    "file": "131105_cleaning_20260331.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:54:07+00:00",
+    "rows": 202,
+    "sha256": "e9784d03344d4d039c1d27bac5221eabc41df5bb58680c6347c1fba0dd9d2d3e",
+    "url": "https://data.bodik.jp/dataset/b9878f76-8b29-418d-997b-01960ac0527a/resource/5c6f6f98-d9f0-407a-9b95-661b03fb53f2/download/131105_cleaning_20260331.csv"
+  },
+  "city_laundry_13113": {
+    "as_of": null,
+    "bytes": 97618,
+    "dataset_page": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131130d2025000005",
+    "file": "131130_shibuyaku_cleaning.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:23+00:00",
+    "rows": 273,
+    "sha256": "bf2e75204cdcda0620d47730fb114b9bb51fee9fbbc8aced8212f796e29d0e1a",
+    "url": "https://www.opendata.metro.tokyo.lg.jp/shibuya/131130_shibuyaku_cleaning.csv"
+  },
+  "city_mhlw_13102": {
+    "as_of": null,
+    "bytes": 659975,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "13102_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:54:39+00:00",
+    "rows": 2315,
+    "sha256": "f4ea5ec67972ff976cf2487cf1ac906f436287868f547f4ac0d7f5a24ef39cd9",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=13102_food_business_all.csv"
+  },
+  "city_mhlw_13103": {
+    "as_of": null,
+    "bytes": 1319533,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "13103_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:50:27+00:00",
+    "rows": 4836,
+    "sha256": "349fc195c061d2aacc6265cd8a2b22b5bb1af2eaee6d4bb5b99d938f578b455a",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=13103_food_business_all.csv"
+  },
+  "city_mhlw_13104": {
+    "as_of": null,
+    "bytes": 1065149,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "13104_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:54:39+00:00",
+    "rows": 3420,
+    "sha256": "215f65e0c4ff1d135d8bf3e30dbc7a04e17aefbb39921d9d6ecb75743aa6f386",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=13104_food_business_all.csv"
+  },
+  "city_mhlw_13108": {
+    "as_of": null,
+    "bytes": 1049227,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "13108_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:54:40+00:00",
+    "rows": 3209,
+    "sha256": "d4ecae8e176f44520d23b8ce4a33c1b2123c00992a254d68993216814467dc46",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=13108_food_business_all.csv"
+  },
+  "isj_13102_block": {
+    "bytes": 40470,
+    "file": "13102-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:33+00:00",
+    "sha256": "217e429bafda00f34b173548881d2fbf2201d38bd98374211156a25bc7ccc96d",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/13102-24.0a.zip"
+  },
+  "isj_13102_chome": {
+    "bytes": 6129,
+    "file": "13102-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:34+00:00",
+    "sha256": "3f72a71916d453e4d9d5dede9b5f31397a407187017ae207f7ed8e3d556ecb19",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/13102-19.0b.zip"
+  },
+  "isj_13103_block": {
+    "bytes": 50539,
+    "file": "13103-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:45:58+00:00",
+    "sha256": "b19c8d5839cab3246233f28cfc1bf81dd16c30074d23a9e8659bcde8f651dd9e",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/13103-24.0a.zip"
+  },
+  "isj_13103_chome": {
+    "bytes": 6358,
+    "file": "13103-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:45:59+00:00",
+    "sha256": "ae885d398c33180f477b0a6aa16c39c3bb256cab68b0e374f5a48f3aa46a0b4b",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/13103-19.0b.zip"
+  },
+  "isj_13104_block": {
+    "bytes": 69435,
+    "file": "13104-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:34+00:00",
+    "sha256": "3b2fe8c46a1b981f9b05d661921f8f06a12bf1da98742eb54c502f7277f00337",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/13104-24.0a.zip"
+  },
+  "isj_13104_chome": {
+    "bytes": 7106,
+    "file": "13104-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:35+00:00",
+    "sha256": "6ca76903b159868914e7dc4a8f55f1a81fac8df87a240aaf6d61c98680e367b3",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/13104-19.0b.zip"
+  },
+  "isj_13106_block": {
+    "bytes": 58842,
+    "file": "13106-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:37+00:00",
+    "sha256": "16a2c59cae13d24c8331d6efb24b0b53b69fe1780691a10cb1db6b1f1cf7c59f",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/13106-24.0a.zip"
+  },
+  "isj_13106_chome": {
+    "bytes": 6219,
+    "file": "13106-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:38+00:00",
+    "sha256": "dc1dcd9e6ef779012d1fd3133308a2a149b448871b041f1f56f31084ca22d4ea",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/13106-19.0b.zip"
+  },
+  "isj_13108_block": {
+    "bytes": 75575,
+    "file": "13108-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:39+00:00",
+    "sha256": "0051b1c837356082e0abb7c508434ab068bbfcb135bfb3f603b320dc0636d15b",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/13108-24.0a.zip"
+  },
+  "isj_13108_chome": {
+    "bytes": 7045,
+    "file": "13108-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:39+00:00",
+    "sha256": "54774429491c6854c9ce4bbcee039640d63370a17be778b94af67db257232493",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/13108-19.0b.zip"
+  },
+  "isj_13110_block": {
+    "bytes": 59789,
+    "file": "13110-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:02+00:00",
+    "sha256": "330fda6e6861fb2e1c27fd6d8f3f61c1a2a4d59f585535d3c3c7096dc3ead4c0",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/13110-24.0a.zip"
+  },
+  "isj_13110_chome": {
+    "bytes": 5976,
+    "file": "13110-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:04+00:00",
+    "sha256": "45ad3b7a306c0d37d257d6de62d6bc41c6913424fb453bf011aa2abb78a8f027",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/13110-19.0b.zip"
+  },
+  "isj_13112_block": {
+    "bytes": 212747,
+    "file": "13112-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:01+00:00",
+    "sha256": "11d75541be67f862689a7845b26e6c00bd26bfceefa02af3c5267553059b686e",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/13112-24.0a.zip"
+  },
+  "isj_13112_chome": {
+    "bytes": 8783,
+    "file": "13112-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:02+00:00",
+    "sha256": "75349fcd28187afc5d3ab084e7c90c5d9d7156634a1af668e54abe38712120a6",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/13112-19.0b.zip"
+  },
+  "isj_13113_block": {
+    "bytes": 61896,
+    "file": "13113-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:43+00:00",
+    "sha256": "4bec81eb43a97a08780658df4eb1da3d1e306174c2f9d8a01d68defb1a2c2d15",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/13113-24.0a.zip"
+  },
+  "isj_13113_chome": {
+    "bytes": 5894,
+    "file": "13113-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:46:44+00:00",
+    "sha256": "19c1b7388e585ddf393495e0d31d98a122f38b5a73204b36aa2d1819b8081c1e",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/13113-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 12718026,
+    "file": "data/japan/raw/N02-24_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:06+00:00",
+    "sha256": "504eefd4411cd0fd3ad9a50f35da2f5da07949d5144ded7630df0972f8deaac7",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-24/N02-24_GML.zip"
+  },
+  "n03": {
+    "bytes": 11595541,
+    "file": "data/japan/raw/N03-20250101_13_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:08+00:00",
+    "sha256": "e73a70ca903c5a37daba66158ee5de7c48bb7cd7d45f31f7fa4a178c9456702f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_13_GML.zip"
+  }
+}
