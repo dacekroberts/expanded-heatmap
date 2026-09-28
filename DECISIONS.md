@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**93 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**94 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Worktrees `main-build` and `tokyo-sources` retired (owner)](#2026-09-28---worktrees-main-build-and-tokyo-sources-retired-owner)
 - [Sapporo, Fukuoka and Kyoto landed: city-landed sweep and live check after the reboot pass](#2026-09-28---sapporo-fukuoka-and-kyoto-landed-city-landed-sweep-and-live-check-after-the-reboot-pass)
 - [Review batch verified: the full deploy-verify passes; the macro tooltip becomes a corner panel; East Asia's global-frame label overlaps accepted (owner)](#2026-09-28---review-batch-verified-the-full-deploy-verify-passes-the-macro-tooltip-becomes-a-corner-panel-east-asias-global-frame-label-overlaps-accepted-owner)
 - [Two app crashes traced to memory exhaustion; Python capped at 8 GB a process, one heavy job at a time, drift --jobs 2 at most (owner)](#2026-09-28---two-app-crashes-traced-to-memory-exhaustion-python-capped-at-8-gb-a-process-one-heavy-job-at-a-time-drift---jobs-2-at-most-owner)
@@ -129,6 +130,25 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Worktrees `main-build` and `tokyo-sources` retired (owner)
+
+- **Retired on the owner's word and both sessions' own**, both sessions
+  closed and off the active list. Order, so a removal could not reach the
+  main checkout's data through a link: each worktree's `data/` and
+  `.venv-lean` were junctions to the main checkout's and were unlinked
+  alone (`[System.IO.Directory]::Delete(path, $false)`), after which the
+  main checkout's `data/japan/raw` and `.venv-lean` python were confirmed
+  present; `check_worktree_data.py` passed on both ("no data/ folder");
+  neither held anything else but `__pycache__`; `git worktree remove`
+  without force.
+- **Local branches deleted with `-d` only**: `worktree-main-build`,
+  `worktree-tokyo-sources` (its 9 commits are in `origin/worktree-japan`),
+  and, after the main checkout was fast-forwarded to `origin/master` (it
+  had no tracked changes), `review-2026-09-28b`, `macro-tiers` and
+  `build-sapporo`. Also the stale `worktree-seoul` and `worktree-taichung`,
+  both fully in master. Their GitHub copies stay until the owner deletes
+  them; auto mode refuses a remote branch delete.
 
 ### 2026-09-28 - Sapporo, Fukuoka and Kyoto landed: city-landed sweep and live check after the reboot pass
 
