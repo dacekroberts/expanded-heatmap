@@ -42,6 +42,29 @@ CRTM_TRAMOS_LAYER = 4     # M4_Tramos    - 560 polyline records
 STATIONS_RAW_JSON = DATA_RAW / "crtm_m4_estaciones.json"
 TRAMOS_RAW_JSON = DATA_RAW / "crtm_m4_tramos.json"
 
+# METRO LIGERO (the tram rescope, 2026-09-27): CRTM's M10 service, same host,
+# same schema, same licence as the Metro layers above. 57 station-per-line
+# records and 100 tramos when first fetched.
+CRTM_LIGERO_SERVICE = (
+    "https://services5.arcgis.com/UxADft6QPcvFyDU1/arcgis/rest/services"
+    "/M10_Red/FeatureServer"
+)
+LIGERO_STATIONS_RAW_JSON = DATA_RAW / "crtm_m10_estaciones.json"
+LIGERO_TRAMOS_RAW_JSON = DATA_RAW / "crtm_m10_tramos.json"
+# ML1 ONLY (owner, 2026-09-27). Inside Madrid: ML1's 9 stations; ML2 reaches 2
+# (Estación de Aravaca, and Colonia Jardín, already Metro Línea 10's), ML3
+# only Colonia Jardín, and ML4 (the Parla tram, codes 4-1/4-2) none - so ML2
+# and ML3 are stubs and ML4 is another town's network. `LINEAS` on a station
+# and `NUMEROLINEAUSUARIO` on a tramo carry the bare number.
+LIGERO_DRAWN = {"1": "ML1"}
+LIGERO_LEFT_OUT = {"2": "ML2 - a stub inside Madrid (owner, 2026-09-27)",
+                   "3": "ML3 - a stub inside Madrid",
+                   # Parla's STATIONS say "4"; its tramos "4-1"/"4-2" (a
+                   # circular in two codes, like Metro lines 6 and 12).
+                   "4": "ML4, the Parla tram - outside Madrid",
+                   "4-1": "ML4, the Parla tram - outside Madrid",
+                   "4-2": "ML4, the Parla tram - outside Madrid"}
+
 # THE BUSINESS DOWNLOAD URL ROTS - it embeds a build timestamp
 # (`200085_20260922_053829.csv`) that changes on every refresh, so it is
 # resolved at fetch time from package_show by RESOURCE ID, which is stable.
@@ -89,11 +112,12 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 
 # --- Station scope ----------------------------------------------------------
 #
-# Metro de Madrid only. CRTM also publishes Metro Ligero (tram, `M10_Red`) and
-# Cercanías (commuter rail); Cercanías is excluded for the reason every city
-# here excludes commuter rail, and Metro Ligero is left out of this first build
-# so the city ships one agency's rail system, as San Diego and Chicago do.
-# Both are a layer away if that is ever revisited.
+# Metro de Madrid, and from 2026-09-27 Metro Ligero ML1 (see
+# CRTM_LIGERO_SERVICE above). Cercanías (commuter rail) is excluded for the
+# reason every city here excludes commuter rail. Metro Ligero was left out of
+# the first build "so the city ships one agency's rail system"; the tram
+# rescope reversed that because ML1 reaches Sanchinarro and Las Tablas, which
+# the Metro does not (DECISIONS 2026-09-27).
 #
 # EIGHTEEN LINE CODES, THIRTEEN LINES, AND THE COLLAPSE IS NOT UNIFORM. This is
 # the trap that lost Guadalajara a whole line, in its third form. A naive
@@ -133,6 +157,7 @@ LINE_NAMES = {
     "5": "Línea 5", "6": "Línea 6", "7": "Línea 7", "8": "Línea 8",
     "9": "Línea 9", "10": "Línea 10", "11": "Línea 11", "12": "Línea 12",
     "R": "Ramal Ópera–Príncipe Pío",
+    "ML1": "Metro Ligero ML1",
 }
 
 # Metro de Madrid's official livery, used so the map's line colours come from
@@ -150,6 +175,11 @@ LINE_COLOURS = {
     "5": "#98C93C", "6": "#9C9E9F", "7": "#F0821F", "8": "#EC82B1",
     "9": "#95217C", "10": "#003DA5", "11": "#00843D", "12": "#A49A00",
     "R": "#0079C2",
+    # CRTM's own colour for ML1, from the M10_Lineas service's renderer
+    # (rgb 39, 84, 211; read 2026-09-27) - the station layer carries none.
+    # Delta-E 15.1 from Línea 10 (#003DA5), which meets it at Las Tablas, and
+    # 28.0 from the Retail pin: clears the floor, below the preferred 45.
+    "ML1": "#2754D3",
 }
 
 # The operator's own municipality code for Madrid, used to CROSS-CHECK the

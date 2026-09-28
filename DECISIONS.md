@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**41 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**42 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Tram rescope 3 of 5: Madrid's Metro Ligero ML1 drawn from CRTM's M10 layers; ML2 and ML3 left out as stubs (owner; held for review time)](#2026-09-27---tram-rescope-3-of-5-madrids-metro-ligero-ml1-drawn-from-crtms-m10-layers-ml2-and-ml3-left-out-as-stubs-owner-held-for-review-time)
 - [Tram rescope 2 of 5: Rome's tram 8 drawn (the base service, Casaletto - Venezia) and thinned to 7 of its 16 stops (held for review time)](#2026-09-27---tram-rescope-2-of-5-romes-tram-8-drawn-the-base-service-casaletto---venezia-and-thinned-to-7-of-its-16-stops-held-for-review-time)
 - [Tram rescope 1 of 5: Montréal's REM drawn as one line, from the operator's own feed (held for review time)](#2026-09-27---tram-rescope-1-of-5-montréals-rem-drawn-as-one-line-from-the-operators-own-feed-held-for-review-time)
 - [Four owner calls: Ottawa to Band C, Rijswijk and Delft to T as Den Haag add-ons, the Band C memo's last verdicts accepted, Paris T2/T9 out](#2026-09-27---four-owner-calls-ottawa-to-band-c-rijswijk-and-delft-to-t-as-den-haag-add-ons-the-band-c-memos-last-verdicts-accepted-paris-t2t9-out)
@@ -74,6 +75,45 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Tram rescope 3 of 5: Madrid's Metro Ligero ML1 drawn from CRTM's M10 layers; ML2 and ML3 left out as stubs (owner; held for review time)
+
+- **ML1 is drawn, from CRTM's `M10_Red` feature services, the Metro layers'
+  sibling under the same terms.** The ArcGIS item declares the same
+  `crtm.es/licencia-de-uso` and "© CRTM" as `M4_Red` and was last edited the
+  same day (2026-06-05), so the existing CRTM notice and its date cover it.
+  Cached `crtm_m10_estaciones.json` (86,277 B, 57 records) and
+  `crtm_m10_tramos.json` (233,439 B, 100 tramos); the owner OK'd the
+  download. This supersedes the first build's reason for leaving Metro Ligero
+  out ("so the city ships one agency's rail system", `pipeline/madrid/
+  config.py`), which was never the tram test: ML1 reaches Sanchinarro and Las
+  Tablas, which the Metro does not.
+- **ML2 and ML3 are left out as stubs (owner's call, as recommended).**
+  Inside Madrid ML2 has 2 of its 13 stations (Estación de Aravaca, and Colonia
+  Jardín, already Metro Línea 10's) and ML3 only Colonia Jardín; ML4 is
+  Parla's tram. The spec's "11 of 56 inside Madrid" was 12 records of 57,
+  i.e. 11 names with Colonia Jardín counted once per line. ML2's CRTM colour
+  #7B1265 is also Delta-E 9.5 from Línea 9, under the floor, so drawing it
+  would have meant this project's own shade. Every undrawn code is named in
+  `config.LIGERO_LEFT_OUT`; an unrecorded one stops step 1, which caught that
+  Parla's stations say `LINEAS` "4" while its tramos say "4-1"/"4-2".
+- **Colour #2754D3, CRTM's own** (the `M10_Lineas` renderer, rgb 39, 84, 211;
+  the station layer carries none). Delta-E 15.1 from Línea 10 (#003DA5),
+  which it meets at Las Tablas, and 28.0 from the Retail pin: clears the
+  floor, below the preferred 45, recorded. Not the "light blue near Línea 1"
+  the spec feared: 51.6+ from Línea 1.
+- **Stations 193 -> 200.** ML1's records join the Metro's before the name
+  collapse, so Pinar de Chamartín and Las Tablas average over every line's
+  point as Metro interchanges already do, and move slightly; 7 new stations.
+  Polygon and CODIGOMUNICIPIO agree on all 200; excluded unchanged at 49.
+  ML1 averages about 670 m between stops, so no thinning (San Diego's shape).
+  Premises within a ring 50,497 of 53,355. Baseline recorded; drift
+  `heatmap.html` only. `check_map_view.js` 11.25 = expected, 0 corrections;
+  markup, inline arrays, scope disclosure and provenance pass. The page text
+  still describes the Metro only: a draft for the owner's review. Files:
+  `pipeline/madrid/{config, fetch_sources, step1_stations, step3_map}.py`,
+  `outputs/madrid/{baseline.json, heatmap.html}`,
+  `docs/data_sources/spain.md`, `docs/map_inconsistencies.md`.
 
 ### 2026-09-27 - Tram rescope 2 of 5: Rome's tram 8 drawn (the base service, Casaletto - Venezia) and thinned to 7 of its 16 stops (held for review time)
 

@@ -111,7 +111,7 @@ def main():
         output_path=HEATMAP_HTML,
         map_title="Madrid - storefront density around Metro stations",
         city_name="Madrid",
-        system_name="Metro de Madrid",
+        system_name="Metro de Madrid and Metro Ligero",
         stations=stations,
         businesses=businesses,
         taxonomy_system=TAXONOMY_SYSTEM,

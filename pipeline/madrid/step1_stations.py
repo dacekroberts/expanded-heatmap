@@ -41,6 +41,10 @@ from pipeline.madrid.config import (  # noqa: E402
     DATA_PROCESSED,
     DATA_RAW,
     EXCLUDED_STATIONS_CSV,
+    LIGERO_DRAWN,
+    LIGERO_LEFT_OUT,
+    LIGERO_STATIONS_RAW_JSON,
+    LIGERO_TRAMOS_RAW_JSON,
     LINE_NAMES,
     LINE_OF_CODE,
     LINE_SHAPES_GEOJSON,
@@ -160,6 +164,38 @@ def main():
     print(f"  {len(st)} station-per-line records fetched")
     emit("station_line_records", len(st))
 
+    # METRO LIGERO ML1 (2026-09-27): its station-per-line records join the
+    # Metro's here, BEFORE the name collapse below, so an interchange (Pinar de
+    # Chamartín, Las Tablas) averages over every line's point exactly as a
+    # Metro interchange does. Only config.LIGERO_DRAWN lines are read; every
+    # other code must be named in LIGERO_LEFT_OUT, so a new line stops the run.
+    print("\nStations - CRTM M10_Estaciones (Metro Ligero)")
+    ligero = fetch_layer(CRTM_STATIONS_LAYER, LIGERO_STATIONS_RAW_JSON)
+    ml_rows, left = [], {}
+    for f in ligero["features"]:
+        a, g = f["attributes"], f.get("geometry") or {}
+        code = (a.get("LINEAS") or "").strip()
+        if code not in LIGERO_DRAWN:
+            if code not in LIGERO_LEFT_OUT:
+                raise SystemExit(f"Metro Ligero line {code!r} is neither drawn nor "
+                                 "recorded in config.LIGERO_LEFT_OUT")
+            left[code] = left.get(code, 0) + 1
+            continue
+        if g.get("x") is None or not (a.get("DENOMINACION") or "").strip():
+            raise SystemExit(f"ML{code} record {a.get('CODIGOESTACION')} has no "
+                             "geometry or no name")
+        ml_rows.append({"name": a["DENOMINACION"].strip(),
+                        "codigo": a.get("CODIGOESTACION"),
+                        "municipio_code": a.get("CODIGOMUNICIPIO"),
+                        "x": g["x"], "y": g["y"]})
+    ml = pd.DataFrame(ml_rows)
+    shared = sorted(set(ml["name"]) & set(st["name"]))
+    print(f"  {len(ml)} ML1 records; interchanges with the Metro by name: {shared}")
+    for code, n in sorted(left.items()):
+        print(f"  left out: {n:>2} record(s) of {LIGERO_LEFT_OUT[code]}")
+    emit("ligero_ml1_records", len(ml))
+    st = pd.concat([st, ml], ignore_index=True)
+
     # THE UNNAMED RECORDS, handled explicitly rather than dropped by a filter
     # that does not mention them. Two rows (CODIGOESTACION 347, 348, both added
     # 2025-05-20) carry no DENOMINACION at all. A station with no name cannot
@@ -255,6 +291,22 @@ def main():
     if len(segs) != 13:
         raise SystemExit(f"expected 13 Metro lines, collapsed to {len(segs)} - "
                          "the GTFS and OSM screens both say 13")
+
+    print("\nLine geometry - CRTM M10_Tramos (Metro Ligero)")
+    for f in fetch_layer(CRTM_TRAMOS_LAYER, LIGERO_TRAMOS_RAW_JSON)["features"]:
+        a, g = f["attributes"], f.get("geometry") or {}
+        code = (a.get("NUMEROLINEAUSUARIO") or "").strip()
+        if code not in LIGERO_DRAWN:
+            if code not in LIGERO_LEFT_OUT:
+                raise SystemExit(f"Metro Ligero tramo code {code!r} unrecorded")
+            continue
+        for path in g.get("paths", []):
+            if len(path) >= 2:
+                segs.setdefault(LIGERO_DRAWN[code], []).append(LineString(path))
+    for line in LIGERO_DRAWN.values():
+        if line not in segs:
+            raise SystemExit(f"{LINE_NAMES[line]} has no tramos - nothing to draw")
+        print(f"  {LINE_NAMES[line]}: {len(segs[line])} tramos")
 
     lines = gpd.GeoDataFrame(
         [{"line": k, "name": LINE_NAMES[k], "segments": len(v)} for k, v in segs.items()],

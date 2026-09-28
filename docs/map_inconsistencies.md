@@ -98,7 +98,8 @@ run on top of a metro network.
   REM, an automated light metro; from 2026-09-27, on its branch until review time).
 - **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Toronto's 18 streetcar routes, Milan (17 routes), Barcelona,
   Paris, Prague, Rome (all but tram 8, drawn and thinned from 2026-09-27 on the
-  tram-rescope branch), Madrid (Metro Ligero), Copenhagen (the Letbane has no stop in
+  tram-rescope branch), Madrid (Metro Ligero ML2 and ML3, stubs; ML1 drawn from
+  2026-09-27 on the tram-rescope branch), Copenhagen (the Letbane has no stop in
   scope).
 - **Other modes on the map:** Toulouse's Téléo cable car, Barcelona's two
   funiculars, São Paulo's Linha 15 monorail, Miami's Metromover (automated people
@@ -267,7 +268,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Guadalajara (Regional) | Tren Ligero L1–L4 | — | OpenStreetMap (only GTFS expired 2023, lacks L4) | 4 municipios; Tonalá out | no CSV (all in scope) / 0 |
 | Monterrey (Regional) | Metrorrey L1–L3 | Líneas 4 and 6 (monorail, under construction) | OpenStreetMap (no agency data published); L3 in the operator's red | 4 municipios, by INEGI code | no CSV (all in scope) / 0 |
 | **Spain** | | | | | |
-| Madrid | Metro L1–L12 + Ramal | Cercanías; Metro Ligero | CRTM ArcGIS layers | Municipio | 49 / 0 |
+| Madrid | Metro L1–L12 + Ramal + Metro Ligero ML1 | Cercanías; Metro Ligero ML2, ML3 (stubs), ML4 (Parla) | CRTM ArcGIS layers | Municipio | 49 / 0 |
 | Barcelona | Metro L1–L12 (TMB+FGC) + 2 funiculars | Trams | OpenStreetMap | Municipi | 50 / 0 |
 | **Ireland** | | | | | |
 | Dublin | Luas Red, Green + DART | Commuter, InterCity | NTA national GTFS | 4 local authorities | 2 / 0 |
@@ -583,7 +584,9 @@ remain open.
     spacing filter. Should one sentence govern all three?
 11. **Madrid's Metro Ligero** is left out "so the city ships one agency's rail
     system" (`pipeline/madrid/config.py:92–96`). That is not the tram test, and it
-    appears neither on the Madrid page nor in EC.
+    appears neither on the Madrid page nor in EC. *(2026-09-27: ML1 is now drawn,
+    on the tram-rescope branch; ML2 and ML3 are left out as stubs, owner's call.
+    The page and EC still need the sentence.)*
 12. **Cable cars and unmentioned systems.** Toulouse establishes that "cable car" is
     not a reason to exclude. Mexico City's Cablebús and Tren Suburbano, and
     Montréal's REM and exo, are not mentioned in any file read. Unknown whether they
