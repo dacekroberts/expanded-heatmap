@@ -287,7 +287,11 @@ def run(config):
     groups["name_ja"] = groups["group"].map(names.map(lambda v: v[0]))
     groups["lines"] = groups["group"].map(rows.groupby("group")["line"].agg(
         lambda s: " ".join(k for k in config.LINE_ORDER if k in set(s))))
-    groups["inside"] = groups.geometry.within(city)
+    # A station counts when ANY of its platforms is inside the city line, not
+    # its centroid: Osaka's 太子橋今市 has its Tanimachi platform in Asahi-ku
+    # and its Imazatosuji platform in Moriguchi, and the centroid falls outside
+    # (owner 2026-09-27: keep it). Kobe has no such station.
+    groups["inside"] = groups["group"].map(platforms.groupby("group")["inside"].any())
     lines_of = groups.set_index("group")["lines"]
     print(f"\n  {len(platforms)} line-station rows within {DRAW_BEYOND_M / 1000:.0f} km -> "
           f"{len(groups)} stations by group code; widest:")

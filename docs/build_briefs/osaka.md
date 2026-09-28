@@ -85,6 +85,8 @@ measure puts Kobe, Sapporo, Fukuoka, Kyoto, Hiroshima and Sendai at 93–101%.
   counts but does not list, some of them short-lived event permits. The city
   has not confirmed either." The 2,149 permits with no fixed address are not
   mapped.
+  - ✅ **Re-measured at the build (2026-09-27): 2,150** food rows are 市内一円
+    or vehicles, as L102 says; the 2,149 above was stale.
   - It replaces the first draft, whose "not to restaurants missing from the
     list" became stronger than the evidence once the new-law part (about 11%
     of the count) proved undetermined.
@@ -113,7 +115,7 @@ measure puts Kobe, Sapporo, Fukuoka, Kyoto, Hiroshima and Sendai at 93–101%.
 |---|---|
 | Food service | 飲食店営業 **52,140** |
 | Food retail (permit types) | 食肉販売業 1,682 · 魚介類販売業 1,457 |
-| Decide at build (`premises-taxonomy`) | 菓子製造業 3,580 · そうざい製造業 1,209 — manufacturing permits that are often counter shops (bakeries, delis) |
+| ✅ Retail (owner, 2026-09-24; see the top) | 菓子製造業 3,580 · そうざい製造業 1,209 — manufacturing permits that are often counter shops (bakeries, delis). The factory-like share is measured at build and kept: 151 of 4,227 rows, 3.6% (2026-09-27) |
 | Out | 食肉処理業, 麺類 / 水産製品 / 漬物 / 添加物 manufacturing, vending machines, 食品の小分け業 |
 
 **No general retail** — Japan's ceiling; stated on the page.
@@ -145,8 +147,8 @@ malls (梅田地下街, アベノ地下街) — premises with no block number.
 
 `https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-24/N02-24_GML.zip`: Osaka Metro,
 JR West, and the private railways (Hankyu, Hanshin, Keihan, Kintetsu, Nankai)
-are all in it. ⚠️ Stations are LineStrings — centroid them. ⚠️ Open: intercity-only
-services (Shinkansen). See `docs/commuter_rail_list.md`.
+are all in it. ⚠️ Stations are LineStrings — centroid them. ✅ The Shinkansen is
+out (owner, 2026-09-24; see the top). See `docs/commuter_rail_list.md`.
 
 **✅ Stub test, measured 2026-09-24** (`pipeline/countries/japan.py` `stub_test()`: N02 stations, Shinkansen excluded, against the city's N03 ward polygons): **PASSES.** Osaka Metro keeps 80–100% of each line's stations (Midōsuji 16 of 20, Tanimachi 23 of 26, Chūō 12 of 14; Sakaisuji, Yotsubashi, Sennichimae and the New Tram 100%). The Hankai tram keeps 17 of 32 (it runs into Sakai): half a line, not a stub. JR and the private railways are cut at the line, as the owner's scope intends (Hankyu Kōbe 5 of 17, Keihan 8 of 41, the Loop Line 19 of 19).
 
@@ -156,6 +158,9 @@ services (Shinkansen). See `docs/commuter_rail_list.md`.
 neighbouring cities (Sakai, Higashiōsaka, Moriguchi…) and the private
 railways run far beyond — check which stations fall outside at build; the
 Oslo *kommune only* precedent or a regional scope is the owner's call.
+✅ **Decided 2026-09-24 (owner): the city line only** (see the top). Built
+2026-09-27: 216 stations inside, 76 beyond it, named in
+`outputs/osaka/excluded_stations.csv`.
 
 ## ✅ Licences — READ 2026-09-24
 
@@ -186,6 +191,10 @@ Oslo *kommune only* precedent or a regional scope is the owner's call.
 The list carries **営業者名 — individuals' names** (e.g. a café's owner) and
 the barber / beauty lists an operator-name column. **Read only 屋号,
 業種分類 and 営業所所在地**; never 営業者名. Run `check_personal_exposure.py`.
+✅ **Superseded 2026-09-27 by the owner's name rule** (every Japanese city;
+the `japan-city` skill): 営業者名, in all four files, is read IN MEMORY to
+withhold a trade name that IS the operator's own name, and never kept. At the
+build: 9 premises withheld, 0 shown (`check_personal_exposure.py osaka`).
 
 ## Region
 

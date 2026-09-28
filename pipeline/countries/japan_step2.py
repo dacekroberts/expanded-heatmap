@@ -106,6 +106,21 @@ def run(config, write=True):
     del rows  # the raw rows carry the operator columns; nothing below may see them
 
     df = pd.DataFrame(permits)
+    # THE NAME RULE HOLDS PER PREMISES, not per row (Osaka, 2026-09-27): one
+    # premises' second permit may record its operator differently, and the
+    # one-pin-per-premises step below can keep that unflagged row - Osaka showed
+    # an operator's own name on 2 pins that way (a restaurant's two food permits;
+    # a salon registered as both barber and beauty). Any flagged row withholds
+    # every row sharing its trade name and its block - the join's own key
+    # (ward, town, block), since the salon's two registers spell the building
+    # and floor differently - across registers.
+    prem = pd.Series(list(zip(df["ward"], df["town"], df["block"].fillna(""), df["name"].map(jr._name_key))),
+                     index=df.index)
+    flagged = set(prem[df["name_is_operator"]])
+    spread = prem.isin(flagged) & ~df["name_is_operator"]
+    df["name_is_operator"] = df["name_is_operator"] | prem.isin(flagged)
+    print(f"  name rule by premises: {int(spread.sum())} more row(s) share a flagged row's block and trade name")
+    emit("name_rule_spread_rows", int(spread.sum()))
     mobile = df["mobile"]
     print(f"  not a premises (vehicle, stall, 一円, storeless): {int(mobile.sum()):,}")
     emit("not_a_premises", int(mobile.sum()))

@@ -289,13 +289,25 @@ evidence section.
   (`.claude/skills/japan-city/SKILL.md`): shared modules, standing calls,
   twelve traps, notices, and a sheet per remaining city. Next city
   recommended: Osaka.
+- [x] **Osaka built 2026-09-27** (`worktree-osaka`, held for review time;
+  publishes after Kobe or with it): 72,999 storefronts, 216 stations, 34
+  lines, on the shared steps. Still to land at review time: the page prose,
+  the notice (52), the `excluded_categories.md` section and the inconsistency
+  rows - drafted for the owner - then `publish-city` (`app/` changes: a new
+  page, notice 52, Osaka's macro label below its dot).
 - [ ] **Join control** - like-for-like against the Economic Census per-ward
   飲食店 count (the owner's chosen control) - at build. **Not yet run for
-  Kobe**: it needs an e-Stat download (the owner's OK first). Kobe's join was
-  checked instead against the Minato control and every screen, and a GSI
-  sample in the brief.
+  Kobe or Osaka**: it needs an e-Stat download (the owner's OK first). Kobe's
+  join was checked instead against the Minato control and every screen, and a
+  GSI sample in the brief; Osaka's against the list's own coordinates (median
+  38 m).
 - [ ] **Rail** - whether lines served only by limited-express trains count was
-  never ruled on (the Shinkansen is out, owner 2026-09-24). **Owner, once for all five.**
+  never ruled on as a rule (the Shinkansen is out, owner 2026-09-24). One case
+  is decided: Osaka's Umekita → 福島 track, limited expresses only, is left out
+  (owner 2026-09-27). **Owner, once for the rest.**
+- [ ] **Share `fetch_sources.py` across Japanese cities.** Osaka's is Kobe's
+  with a per-source URL map; Sapporo would be a third copy. Move it to
+  `pipeline/countries/japan_fetch.py` before Sapporo.
 
 ### ▶ Handoff to main — the Band A candidates, 2026-09-24
 

@@ -897,6 +897,16 @@ Cities built and running end to end (pipeline, map, app page):
   It built the shared Japanese steps (`pipeline/countries/japan_step1.py`,
   `japan_step2.py`), so the next Japanese city is mostly a config.
 
+- **Osaka** - Japan's second city, and the proof that Kobe's shared steps
+  carry: a config and three thin steps. It draws the most lines of any map
+  here - Osaka Metro and the New Tram, JR West, Hankyu, Hanshin, Keihan,
+  Kintetsu, Nankai and the Hankai tram, cut at the city line - which took a
+  measured colour search and a third, wider label pass in `map_common` (owner).
+  N02's legal line filing is split into public lines by branch walks, one of
+  them left out as limited-express-only track (owner). The join is checked
+  against the coordinates the city publishes beside each permit. The name rule
+  now holds per premises across registers. Publishes after Kobe.
+
 - **Riga** - Rīgas satiksme's seven tram routes, across the city's 58
   neighbourhoods; Latvia's first city, in Amsterdam's two-layer shape. Food
   service is the State Revenue Service's excise-licence register - the premises
@@ -1024,8 +1034,9 @@ that came Hong Kong, Riga and Seoul (the owner built Hong Kong first on 2026-09-
 so the week's remaining budget held a whole city; the order before that was
 Rotterdam, then Taiwan).
 Taiwan and Japan each get a per-country skill written after their first city.
-Japan's first, Kobe, was built 2026-09-27 (held for review time); the
-`japan-city` skill is written from it before any other Japanese city starts.
+Japan's first, Kobe, was built 2026-09-27; the `japan-city` skill was written
+from it, and Osaka, the second, was built on it the same day (held for review
+time). Sapporo is next in the owner's Japanese order.
 The two renderer fixes Brazil's deploy check found go first: the owner gated
 the next deploy on them. New
 Orleans and Seattle remain deferred, both needing decisions before code. Take

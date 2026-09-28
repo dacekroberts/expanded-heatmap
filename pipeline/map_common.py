@@ -1444,6 +1444,13 @@ _ALONG_FRACTIONS = (0.06, 0.12, 0.18, 0.25, 0.32, 0.40, 0.48)
 # and one label was drawn unreadable. Standing it off the ring clears it while
 # it stays anchored to a point on its own line.
 _LABEL_CLEARANCES = (22.0, 44.0)
+# A THIRD tier, reached only by a THIRD view search that runs only when the
+# second still leaves a label unplaceable - so no city that already placed
+# every label can move (the two-pass argument in _choose_view, one pass on).
+# Osaka forced it (2026-09-27, owner): 34 lines, and the Osaka Loop, JR Hanwa
+# and JR Kobe lines' whole in-city track lies in the densest core, where no
+# spot within 44 px of the line is free in any of 55 views.
+_LABEL_WIDE_CLEARANCES = (66.0, 88.0)
 
 
 def _project_px(lat, lon, zoom):
@@ -1494,7 +1501,7 @@ def _label_candidates(coords, tip):
     total = cum[-1]
     if total <= 0:
         return cands + [(c[0], c[1], c[2], c[3], clear)
-                        for clear in _LABEL_CLEARANCES for c in cands]
+                        for clear in _LABEL_CLEARANCES + _LABEL_WIDE_CLEARANCES for c in cands]
     for f in _ALONG_FRACTIONS:
         i = int(np.searchsorted(cum, f * total))
         i = min(max(i, 1), len(pts) - 2)
@@ -1502,8 +1509,9 @@ def _label_candidates(coords, tip):
         n = float(np.hypot(tx, ty)) or 1.0
         for sign in (1, -1):
             cands.append((pts[i][0], pts[i][1], -ty / n * sign, tx / n * sign, 0.0))
+    # the wide tier last: appended, never inserted (the order contract above)
     return cands + [(c[0], c[1], c[2], c[3], clear)
-                    for clear in _LABEL_CLEARANCES for c in cands]
+                    for clear in _LABEL_CLEARANCES + _LABEL_WIDE_CLEARANCES for c in cands]
 
 
 def _layout_labels(points, candidates, labels, n_lines, center, zoom):
@@ -1615,9 +1623,17 @@ def _choose_view(points, candidates, labels, n_lines, center=None, zoom=None):
     # never be changed by anything pass 2 does.
     best = search({k: [c for c in v if _clearance(c) == 0] for k, v in candidates.items()})
     if best is not None and best[0]:
-        relaxed = search(candidates)
+        # Pass 2: exactly the candidates it always had (no wide tier), so a
+        # city it rescued before the wide tier existed is rescued identically.
+        relaxed = search({k: [c for c in v if _clearance(c) not in _LABEL_WIDE_CLEARANCES]
+                          for k, v in candidates.items()})
         if relaxed is not None and relaxed[0] < best[0]:
             best = relaxed
+    if best is not None and best[0]:
+        # Pass 3 (Osaka): a label may stand up to 88 px off its line.
+        wide = search(candidates)
+        if wide is not None and wide[0] < best[0]:
+            best = wide
     if best is None:   # nothing fits with every station on screen: keep the fit as is
         return center, zoom, first
 

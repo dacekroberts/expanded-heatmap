@@ -25,8 +25,9 @@ from pipeline.osaka import config  # noqa: E402
 
 SYSTEM_NAME = "Osaka rail"
 # Per-line label end override ("start" / "end"); automatic unless a rendered
-# map shows a label landing badly.
-LINE_LABEL_ENDS = {}
+# map shows a label landing badly. Keihan Main: its automatic tail lands in the
+# core; its start places it (measured 2026-09-27, every end combination tried).
+LINE_LABEL_ENDS = {"KM": "start"}
 
 LINE_SPECS = {
     key: (key, spec["colour"], spec["name"], LINE_LABEL_ENDS.get(key))

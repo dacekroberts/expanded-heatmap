@@ -273,11 +273,13 @@ BRANCHES = {
 # to M27 Abiko; Tanimachi T13 Taishibashi-Imaichi to T35 Nagahara; Yotsubashi
 # Y11-Y21; Chūō C10 Cosmosquare to C21 Fukaebashi; Sennichimae S11-S24; Sakaisuji
 # K11-K20; Nagahori Tsurumi-ryokuchi N11 Taishō to N26 Yokozutsumi; Imazatosuji
-# I11 Itakano to I21 Imazato less I14, whose platform is in Moriguchi; New Tram
-# P09-P18) and JR West's Loop Line numbering (O01-O19). The lines the city
-# line cuts elsewhere have no published in-city count; step 1 lists them.
+# I11 Itakano to I21 Imazato; New Tram P09-P18) and JR West's Loop Line
+# numbering (O01-O19). 太子橋今市 (T13 / I14) straddles the city line and counts
+# on both lines, since its Tanimachi platform is inside (owner 2026-09-27). The
+# lines the city line cuts elsewhere have no published in-city count; step 1
+# lists them.
 GATE3 = {"source": "operators' station numbering (Osaka Metro M/T/Y/C/S/K/N/I/P; JR West O01-O19)",
-         "lines": {"M": 16, "T": 23, "Y": 11, "C": 12, "S": 14, "K": 10, "N": 16, "I": 10, "P": 10, "JO": 19}}
+         "lines": {"M": 16, "T": 23, "Y": 11, "C": 12, "S": 14, "K": 10, "N": 16, "I": 11, "P": 10, "JO": 19}}
 
 # --- Business filtering ------------------------------------------------
 
