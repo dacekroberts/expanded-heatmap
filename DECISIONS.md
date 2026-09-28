@@ -20,7 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**59 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**62 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-09-28**
+
+- [Wave 2, group 2 banded: Florence and Santa Cruz–La Laguna to T, Palma to C, thirteen discards, five not reached (owner)](#2026-09-28---wave-2-group-2-banded-florence-and-santa-cruzla-laguna-to-t-palma-to-c-thirteen-discards-five-not-reached-owner)
+- [kobe and trams worktrees retired after review time landed them](#2026-09-28---kobe-and-trams-worktrees-retired-after-review-time-landed-them)
+- [Wave 2, the US banded: seven cities to T, Baltimore to C, sixteen discards; a Texas register reopens the Dallas question (owner)](#2026-09-28---wave-2-the-us-banded-seven-cities-to-t-baltimore-to-c-sixteen-discards-a-texas-register-reopens-the-dallas-question-owner)
 
 **2026-09-27**
 
@@ -2317,3 +2323,117 @@ Recorded by the cleanup session from the Main Building Session's findings of
 - Rome, Paris and San Francisco were not opened live. `deploy-verify`
   passed them locally on the same commit, and they share Madrid's and
   Montréal's code path.
+
+### 2026-09-28 - Wave 2, group 2 banded: Florence and Santa Cruz–La Laguna to T, Palma to C, thirteen discards, five not reached (owner)
+
+- **Spain and Italy screened by two agents** on the wave-2 brief, then banded
+  on the owner's calls, each as recommended. Candidates 63 → 66 (C 7 → 8,
+  T 41 → 43), discards 51 → 64. **Load: about 15% of the 5-hour window**
+  (24% → 39%), under half the 25–35% estimate.
+- **Florence to T.** Tramvia T1 and T2, 39 stations inside the comune. The
+  Comune's own layers (dati.toscana.it, declared CC BY 4.0) give 7,355 /
+  3,024 / 1,673 with coordinates on every row and no names. Open at build:
+  639 exempt-category food rows (Milan's *fuori piano* question) and
+  Scandicci's 4 stops.
+- **Santa Cruz–La Laguna (Regional) to T, currency first.** Either
+  municipality alone cuts a Metrotenerife line to a stub; together they keep
+  every stop. The Cabildo's layers give 3,786 / 2,528 / 494 with coordinates,
+  but they are a directory from about 2016. The owner took T over a discard:
+  Dallas's precedent (a four-year-old snapshot cannot be disclosed away) is
+  the first thing the brief must answer, and the Cabildo's current hostelería
+  register (addresses only) is the likely food fix.
+- **Palma to C**: a metro, but food only (Mallorca's register, 4,375), and
+  13% of it placed.
+- **Zaragoza discarded on placement (owner's call).** Aragón's register has no
+  coordinates, a bare street name on 61% of rows, no closure field, and a
+  food list with no bars. The rejected alternative was a weak T with about 64%
+  of pins at street level. `zaragoza.es` refused every connection, so the
+  city's own layer, read in the owner's browser, is what could reopen it.
+- **Bologna discarded for now, revisit spring 2027 (owner's call).** Its SUAP
+  lists are among the best screened anywhere; the Linea Rossa is not yet in
+  service. Brampton's row is the shape.
+- **Twelve more discards**: Genoa, Palermo, Bergamo, Sassari, Vitoria-Gasteiz,
+  Murcia and Granada (no premises register, each city's own host asked);
+  Padua and Venice-Mestre (Translohr guided buses, Clermont-Ferrand's rule);
+  Jaén (the tram is in driver training); Fuenlabrada (a real register with no
+  house numbers). Valencia, Bilbao, Málaga and Sevilla stay out on data.
+- **Five not reached, no row (owner's call)**: Brescia and Catania (both
+  metro), Cagliari, Alicante and Alcobendas. Their own hosts refused or never
+  answered, and `check_discard_evidence.py` refuses an absence row without
+  them. Each waits on a read from the owner's browser.
+- **Suburbs of Milan, Madrid and Barcelona**: no register in any, recorded in
+  one sentence rather than rows.
+- **Downloads**: Florence's four layers, Tenerife's five, Aragón's two,
+  Mallorca's and Fuenlabrada's files, copied into the main checkout's `data/`
+  (no-clobber).
+
+### 2026-09-28 - kobe and trams worktrees retired after review time landed them
+
+- **Confirmed by both:** the owner, and each worktree's own session ("Kobe
+  build handoff", "Tram rescopes"). Both sessions were closed first.
+- **Checks passed:**
+  - each tree was clean;
+  - each tip is on origin/master (843929c and a66629b);
+  - `check_worktree_data.py` found every data file already in the main
+    checkout;
+  - no `-tmp` launch entries remained.
+- **Removal:** `data/` and `.venv-lean` were junctions, unlinked
+  non-recursively. The main checkout's `data/` and `.venv-lean` were
+  confirmed intact afterwards. Then `git worktree remove` and
+  `git branch -d`.
+- **Monterrey:** "Staging and build handoff" reported a leftover
+  `monterrey` worktree. There is none: no folder, no branch, and it is not in
+  `git worktree list`.
+- **One interruption:** the permission check for commands returned no
+  verdict for several minutes. Nothing was touched until it came back.
+### 2026-09-28 - Wave 2, the US banded: seven cities to T, Baltimore to C, sixteen discards; a Texas register reopens the Dallas question (owner)
+
+- **The US screened by two agents** (unbuilt metro and light-rail cities;
+  streetcar cities and the suburbs of built maps), then banded on the
+  owner's eight calls, each as recommended. Candidates 66 → 74 (C 8 → 9,
+  T 43 → 50), discards 64 → 80. **Load: about 14%** (39% → 53%). **Wave 2
+  in all came to about 44% of one 5-hour window**, against the 80–130%
+  estimate: the screens stopped each city at its first clear blocker.
+- **To T, on three buckets**: New Orleans (CC0 occupational licences, 110
+  streetcar stops all inside) and Tucson (the city's NAICS licence layer,
+  Sun Link's 21 stops).
+- **To T with a gap**, trams being the first blocker (D → T → C):
+  - Houston and Sacramento need an address join.
+  - Pittsburgh and Minneapolis have no personal-services source. Grocery
+    rows count as retail only where the source separates them (New York's
+    precedent, owner's call).
+- **Buffalo to T as EDGE, not A (owner's call).** Its Metro Rail is mostly
+  underground, but the edge rule kept Nice here; the tag lets it be pulled
+  up. Its business leg is New York's pattern, all three buckets.
+- **Baltimore to C**: a metro, a restaurants layer only.
+- **Sixteen discards**:
+  - No register: Portland, Cleveland, Salt Lake City, Phoenix, Mesa,
+    Honolulu, St. Paul, Oklahoma City and El Paso.
+  - Atlanta on currency, Dallas's precedent: licences 2019–22, last edited
+    2023.
+  - Norfolk: a stream of new licences, not a register (Nagoya's defect).
+  - Milwaukee, Detroit and Tampa: too thin, a reversible judgement
+    (Aubagne's). The alternative was three more food-only entries in T.
+  - Cincinnati (every 20–25 minutes) and Berkeley (3 BART stations; no built
+    map draws BART) on rail.
+- **The Texas Comptroller's sales-tax permit file is a new source** that the
+  2026-09-18..21 screens never found: NAICS, an inside-city-limits flag,
+  updated daily. It carries Houston, and it undercuts the premise of the
+  Dallas discard ("Texas has no general city business licence"). **The owner
+  approved a re-screen of Dallas, Fort Worth and Austin on it**; handed to
+  the next Staging session with the other wave-2 follow-ups (PLAN).
+- **Regional add-ons queued (owner's calls)**: Long Beach for Los Angeles
+  (8 A Line stations, a licence read first) and Arlington for D.C. (its
+  dataset needs the owner's browser). No add-on for Cambridge and Somerville
+  (food only beside Boston's three buckets).
+- **Not reached**: Tempe (403 to scripts) and St. Louis (an untested permit
+  API).
+- **A third privacy slip, on file.** Guessing Arlington's API paths, the
+  screen printed one sample row of the county's public Trade Names register,
+  including one person's name (a registered agent). Nothing was stored.
+- **A 228 MB Florida cosmetology file was deleted (owner's permission).** It
+  held 1.18M individual licensees, not salons, so it could not give Tampa a
+  personal bucket; only aggregate code columns were read.
+- **Overpass failed for most of the screen** (URLError and 504s with two
+  agents querying), so rail marked "from knowledge" is unmeasured, and a
+  quiet-hour re-run is queued.

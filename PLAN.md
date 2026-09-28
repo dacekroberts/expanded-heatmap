@@ -166,8 +166,36 @@ Desktop is unaffected — the label is fully visible there.
       discards. **Actual load: about 15% of the 5-hour window** (1% → 16%),
       the bottom of its range. Rescaled: Spain and Italy about 25–35%, the US
       about 25–40%.
-    - [ ] **Group 2 (Spain, Italy) RUNNING 2026-09-27** (Staging).
-    - [ ] **Group 3 (the US)**: after group 2's cost is read.
+    - [x] **Group 2 (Spain, Italy) DONE 2026-09-28**, banded on the owner's
+      calls (DECISIONS): Florence and Santa Cruz–La Laguna (Regional) to T,
+      Palma to C, thirteen discards, five not reached. **Load: about 15%**
+      (24% → 39%). Watch: Bologna's Linea Rossa (spring 2027), Jaén's tram
+      ("autumn 2026"), Florence's T3 (end of 2026). **Owner's-browser reads
+      that could reopen a city**: Zaragoza (`zaragoza.es`), Brescia,
+      Catania, Cagliari, Alicante, Alcobendas.
+    - [x] **Group 3 (the US) DONE 2026-09-28**, banded on the owner's calls
+      (DECISIONS): seven to T, Baltimore to C, sixteen discards. **Load:
+      about 14%** (39% → 53%). **Wave 2 in all: about 44% of one window**,
+      against the 80–130% estimate.
+    - [ ] **Wave-2 follow-ups, handed to the next Staging session (owner,
+      2026-09-28)**:
+      - **Probes a session can run**: (1) re-screen **Dallas, Fort Worth and
+        Austin** on the Texas Comptroller's "Active Sales Tax Permit Holders"
+        (`jrea-zgmq`, public domain; `3kx8-uryv` has out-of-business dates) -
+        owner-approved; (2) **St. Louis**'s Building Division Commercial
+        Occupancy Permits API (live, fields undocumented); (3) a quiet-hour
+        **Overpass re-run**: stub tests for Pittsburgh, St. Louis and
+        Minneapolis, rail and OSM density for Buffalo and Houston; (4)
+        **Richmond**'s licence read and **New Westminster**'s address join
+        (Vancouver's rescope); (5) **Rio's Gramacho–Saracuruna shuttle**
+        rail test (Duque de Caxias); (6) **Long Beach**'s licence read (its
+        terms reserve the right to restrict access) for "Los Angeles
+        (Regional)": 8 A Line stations, active licences ~1,590 / 1,464 /
+        920, a `FULLNAME` column (privacy).
+      - **Reads from the owner's own browser**: Burnaby (Vancouver's
+        rescope), Tempe, **Arlington** (its "Active Business Licenses" for a
+        D.C. add-on: 11 of D.C.'s 32 excluded Virginia stations), Zaragoza,
+        Brescia, Catania, Cagliari, Alicante, Alcobendas.
     - [ ] **Regional add-ons to built cities (owner, 2026-09-27)**, main's
       work on a branch held for review time:
       - **Rio + Duque de Caxias**: SuperVia Saracuruna's three excluded
