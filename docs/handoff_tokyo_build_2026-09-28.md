@@ -27,6 +27,18 @@ This session builds Tokyo, then carries the BUILD role (section 7).
 
 ## 2. Where things stand
 
+- **Tokyo is BUILT on `worktree-japan` and held for review time** (2026-09-28;
+  pushed to origin at `52c9334`, master merged in; nothing of Tokyo is on
+  master). 63,989 storefronts, 490 stations (293 hollow), 52 lines labelled by
+  line code; every text owner-approved; 23 of 23 checks, zero drift in 55
+  cities. What it built and decided: DECISIONS 2026-09-28, the four "Tokyo"
+  entries; what it left the next city: the `japan-city` skill's Tokyo sheet.
+  **At review time**: the full deploy-verify (scope `city-added`, Tokyo is the
+  only new city; `map_common` and `components.py` changed, so the other maps'
+  legends and the notices list are worth a `map-chrome` look), `publish-city`,
+  and the reboot (`app/cities.py` and `components.py` change).
+- The earlier state, kept for the build role:
+
 - **Worktree** `.claude/worktrees/japan`, branch `worktree-japan`. **This
   session takes it over** from "Fukuoka handoff", which closes first. It
   holds:
@@ -105,71 +117,6 @@ This session builds Tokyo, then carries the BUILD role (section 7).
   - The COVID-era lists are never used.
   - Operator columns are read in memory for the name rule and never kept.
 
-## 4. The Tokyo build, in order
-
-1. **Config on the roster** (`pipeline/tokyo/config.py`, following Kyoto's
-   and Fukuoka's):
-   - `source_rows` from `wards.py`;
-   - `SOURCE_MUNICIPALITY` and `MUNICIPALITY_CODES` per ward;
-   - `SOURCE_ENCODING`;
-   - the four `mhlw_<code>` sources, each in `ADDRESS_BY_CONSENT`,
-     `OWN_POINT_FALLBACK`, `SUPERSEDES` and `SHARE_SKIP`;
-   - `OFFICIAL_SHARES = True`;
-   - `NO_DATA_WARDS` from the roster.
-
-   The eight wards already ran through the shared step 2 from a scratch
-   config: 99.7% block, and the shares reproduce the brief exactly. Add each
-   ward's operator-column spelling to `japan_register.OPERATOR_COLS`, then
-   re-run the Minato control (98.0 / 0.2 / 1.8) and
-   `check_personal_exposure.py tokyo`.
-2. **Rail, the biggest piece** (N02; the brief's "Rail"):
-   - **Legal lines to service lines.** N02 records JR East's legal lines,
-     but riders know the services. The Yamanote loop runs over 山手線,
-     東海道線 and 東北線, and 東北線 also carries the Keihin-Tōhoku and
-     others. `BRANCHES` (Osaka, Kyoto) only splits one line in two; Tokyo
-     needs a table mapping legal sections to the public service lines that
-     share the track. Write it per operator (JR East, Tokyo Metro
-     through-running, Toei) before any line config. Make it an `n02-services`
-     skill if it generalises. Recommend the table to the owner first.
-   - **About 50 lines.** Osaka's 34 already sat at the colour search's limit
-     (closest pair 18.0). Make the search spatial: only lines that come
-     within about 500 m of each other must differ by ΔE 18. Keep 3:1 on both
-     pages, ΔE ≥ 45 from the pins, and nearest the operator's hue. The
-     search is `data/_staging_scratch_2026-09-28b/colour_search.py`.
-   - **A label budget at phone width.** Every line needs a permanent label
-     and a legend entry. Kyoto showed that moving one label reshuffles three
-     others, so run `check_map_labels.js` at 343 px early, not last.
-3. **Credits built from config**, with a check that every source has a
-   credit (extending `check_provenance.py`):
-   - Shibuya prescribes its own credit.
-   - Taitō: four elements, including a no-warranty sentence.
-   - Setagaya: its 「…改変して利用しています」 form.
-   - Meguro: a labelled BODIK link.
-   - The catalogue wards (Chūō, Minato, Shinjuku, Kōtō) share one combined
-     notice, which carries a DATE OF USE and says the data was processed.
-   - The MLIT ISJ and N02 lines are as for every Japanese city.
-4. **The Economic Census join control**: restaurants on the map per ward,
-   against the 2021 census's 飲食店 establishments (the owner's control).
-   - The file is cached at `data/japan/raw/estat_census_r3_b1_009_1a.xlsx`
-     (6.4 MB) and read by `japan_official.census()`.
-   - **It has never run.** The first script dissolved each prefecture's
-     whole N03 file and died with a MemoryError while a drift check ran
-     beside it.
-   - Write a lighter one: points to wards through the stations' ward, or
-     through a single ward's polygons.
-   - It is still a heavy job: announce it. Run it for all six Japanese
-     cities.
-5. **The page and texts, drafted in chat for the owner:**
-   - a per-ward share table read from `official_shares.json`;
-   - the hollow stations explained, with the missing wards named;
-   - the notices;
-   - `excluded_categories.md` (both scopes);
-   - the blurb;
-   - the macro-map fields (section 5) and label.
-6. **The gates**: drift, `check_all.py`, provenance, scope disclosure, the
-   inconsistency tables, brief checks, and DECISIONS entries as you go. Tokyo
-   is held for review time; then `publish-city`.
-
 ## 5. The macro-map tiers - what every new city needs
 
 - **Every `app/cities.py` entry carries three fields**, inserted before
@@ -190,27 +137,6 @@ This session builds Tokyo, then carries the BUILD role (section 7).
 - **The macro tooltip is a panel in the map's bottom-left corner**
   (`app/components.py` CSS, in the landed batch). Keep that in mind when
   touching `components.py`.
-
-## 6. Known small issues and traps
-
-- **A building name holding 丁目 is read as the town** (`新宿1-3-12
-  壱丁目参番館`): 4 of the 33 unplaced rows. Fix it in `permits_from_rows`
-  (with the Minato control) only if the build finds more.
-- **Fukuoka's yatai rule (ろ店 counts) runs in Tokyo too**: check what ろ店
-  means in Tokyo's rows before trusting it; a festival stall is not a yatai.
-- **Read permit dates, never labels or headers.** Nakano's portal labels its
-  file 2026/6/30, but the permits end 2023-06-27. Shinjuku's server
-  re-stamped its 2023 CSV as Last-Modified 2026-08-31.
-- **Ward servers send a PDF or ZIP as a download.** Never open one in the
-  Browser pane, where it lands at the checkout root (it happened twice); use
-  HEAD and WebFetch. **WebFetch on a binary saves it** under the home
-  directory, in the session's `tool-results` folder, where
-  `check_stray_downloads.py` does not look.
-- **Not done by the research, because nothing qualified**:
-  - no `pdf-register` skill: whoever writes it must carry the `[#memory]`
-    rule;
-  - no new keys in `scripts/screen_japan_join.py`;
-  - no outreach drafted.
 
 ## 7. The build role's queue after Tokyo (owner-approved, in PLAN)
 
