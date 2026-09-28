@@ -20,6 +20,7 @@ onwards; the early ones are split by phase rather than by hour.
 
 **2026-09-27**
 
+- [Daegu's brief: the national edition has no bakeries or delis, the edition is scattered across four id blocks, and Line 3 is a monorail](#2026-09-27---daegus-brief-the-national-edition-has-no-bakeries-or-delis-the-edition-is-scattered-across-four-id-blocks-and-line-3-is-a-monorail)
 - [Session loose ends closed (owner): Riga on JSON.parse, the main checkout current, UTF-8 output in two tools, and the Czech coordinate control per city](#2026-09-27---session-loose-ends-closed-owner-riga-on-jsonparse-the-main-checkout-current-utf-8-output-in-two-tools-and-the-czech-coordinate-control-per-city)
 - [Daegu's and Busan's licences read: Busan permitted with a credit, Daegu on a reasoned position after the national route failed (owner)](#2026-09-27---daegus-and-busans-licences-read-busan-permitted-with-a-credit-daegu-on-a-reasoned-position-after-the-national-route-failed-owner)
 - [Wave-1 second-city screens banded: 43 candidates added, 32 of them trams-only; edge networks stay in T, Band C widened (owner)](#2026-09-27---wave-1-second-city-screens-banded-43-candidates-added-32-of-them-trams-only-edge-networks-stay-in-t-band-c-widened-owner)
@@ -461,6 +462,46 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Daegu's brief: the national edition has no bakeries or delis, the edition is scattered across four id blocks, and Line 3 is a monorail
+
+- **Wrote `docs/build_briefs/daegu.md`** (10/10 checks live) and handed it to
+  Main Build. Four owner calls are open in it, each with a recommendation.
+- **Found that the 2026-08 edition is 36 group datasets in four id blocks**
+  (DMI_0000119500–09, 119560–69, 119600–09 and 119690–95). The screen had
+  recorded only the last two, so its "barbers, laundries and baths are in
+  sibling files not yet pulled" was a statement about two blocks. They were
+  in the other two. Every id between the blocks is a "page not found" stub
+  under every `provdMethod`.
+- **Found that 제과점영업, 즉석판매제조가공업 and 식품판매업(기타) are in no Daegu
+  file, in any month read** (2026-02, 07, 08). Busan's API, the same national
+  register, has the same eleven groups. Seoul's 20,298 retail permit rows of
+  those types came from Seoul's own system. **Recommended: build with the
+  narrower retail, disclosed on the page, and not to Band C**, because the
+  retail bucket is present (tobacco 6,492, butchers 2,416, in-store
+  health-food 2,366, large stores 161, 1,344 convenience stores and
+  confectioners holding café permits). The owner's call.
+- **Measured the files a build reads**: food 38,893, personal 12,548 and
+  retail 12,779 permit rows before de-duplication. Points on 95.9–100%
+  (large stores 72.0%). 66,697 land inside OSM's 대구광역시 and 11 outside.
+  `korean_names.py` flags 116. There is no operator column.
+- **Four traps recorded for the build**, each silent in Seoul's code as
+  written:
+  - The columns are renamed (`좌표정보X(EPSG5174)`, `도로명전체주소`,
+    `소재지전체주소`, phone `소재지전화`).
+  - The health-food channel is in `위생업태명` while `업태구분명` is present
+    and blank, so Seoul's rule would drop every health-food row.
+  - Seoul's address regexes need `[구군]` for 달성군 and 군위군.
+  - Line 3 is OSM `route=monorail`, which Seoul's rail query does not ask
+    for.
+- **대경선 recommended out on spacing**: 3 stops inside Daegu at a mean 4.08
+  km, against the subway's 0.77–1.07 km (Seoul's 공항철도 was 3.37 km).
+  Frequency unmeasured.
+- The eleven files (9.6 MB added today) are in the main checkout's
+  `data/daegu/raw/`. A control re-download of the restaurant file was
+  byte-identical. Column names and counts only were read; no row was printed.
+- `scripts/brief_check.py` crashes printing a Korean claim to a cp1252
+  console; `PYTHONIOENCODING=utf-8` works around it. Not fixed here.
 
 ### 2026-09-27 - Session loose ends closed (owner): Riga on JSON.parse, the main checkout current, UTF-8 output in two tools, and the Czech coordinate control per city
 

@@ -380,8 +380,11 @@ Desktop is unaffected — the label is fully visible there.
 - [ ] **Second-city screens, 2026-09-27 (Staging).** Wave 1 done and banded
   (France; Czechia, Norway, Denmark, the Netherlands, Latvia; Korea, Taiwan,
   Hong Kong): see `docs/city_master_list.md` and DECISIONS. Open:
-  - [ ] **Licence reads for Daegu and Busan**, then their briefs. Daegu is the
-    recommended next Korean city. Held to save usage for main's builds.
+  - [x] **Licence reads for Daegu and Busan** (2026-09-27).
+  - [x] **Daegu's brief** (`docs/build_briefs/daegu.md`, 10/10, 2026-09-27),
+    handed to Main Build. Four owner calls open in it (retail without
+    bakeries and delis; buckets as Seoul's; 대경선 out; stations inside Daegu).
+  - [ ] **Busan's brief.**
   - [ ] **Band T's group decision**: build trams-only cities, and in what
     order (Nice, Montpellier, Brno and Bergen are the cheapest strong ones).
   - [ ] **Wave 2 held by the owner** (the US; Canada, Brazil and Ireland;
