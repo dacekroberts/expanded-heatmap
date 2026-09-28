@@ -57,6 +57,33 @@ def key_addr(a):
     return re.sub(r"[‐‑‒–—―−ｰー－]", "-", unicodedata.normalize("NFKC", a or "").replace(" ", "").replace("　", ""))
 
 
+def own_coordinates_check(config, df):
+    """Where a list carries its OWN coordinates (Osaka's swapped 経度 / 緯度;
+    japan_register.permits_from_rows swaps them back), measure the join against
+    them: an independent check, never the map's source. Printed and emitted
+    per tier; a list without coordinates (Kobe's) prints nothing. Distances in
+    the city's projected CRS, never in degrees."""
+    has = df[df["pub"].notna()]
+    if has.empty:
+        return
+    import geopandas as gpd
+
+    def proj(lats, lons):
+        return gpd.GeoSeries(gpd.points_from_xy(lons, lats), crs=config.CRS_GEOGRAPHIC).to_crs(config.CRS_PROJECTED)
+
+    d = proj(has["latitude"].values, has["longitude"].values).distance(
+        proj([p[0] for p in has["pub"]], [p[1] for p in has["pub"]]), align=False)
+    d.index = has.index
+    print(f"  the list's own coordinates against the join ({len(has):,} of {len(df):,} placed rows carry them):")
+    for tier in ("block", "chome"):
+        t = d[has["tier"] == tier]
+        if len(t):
+            print(f"    {tier:6} {len(t):>7,}  median {t.median():>5.0f} m   within 250 m {(t <= 250).mean():.1%}   "
+                  f"over 1 km {int((t > 1000).sum()):,}")
+            emit(f"own_coords_{tier}_median_m", int(round(t.median())))
+            emit(f"own_coords_{tier}_within_250m_pct", round(100 * (t <= 250).mean(), 1))
+
+
 def run(config, write=True):
     sys.stdout.reconfigure(encoding="utf-8")
     need(config.ISJ_DIR, config.SLUG)
@@ -79,6 +106,21 @@ def run(config, write=True):
     del rows  # the raw rows carry the operator columns; nothing below may see them
 
     df = pd.DataFrame(permits)
+    # THE NAME RULE HOLDS PER PREMISES, not per row (Osaka, 2026-09-27): one
+    # premises' second permit may record its operator differently, and the
+    # one-pin-per-premises step below can keep that unflagged row - Osaka showed
+    # an operator's own name on 2 pins that way (a restaurant's two food permits;
+    # a salon registered as both barber and beauty). Any flagged row withholds
+    # every row sharing its trade name and its block - the join's own key
+    # (ward, town, block), since the salon's two registers spell the building
+    # and floor differently - across registers.
+    prem = pd.Series(list(zip(df["ward"], df["town"], df["block"].fillna(""), df["name"].map(jr._name_key))),
+                     index=df.index)
+    flagged = set(prem[df["name_is_operator"]])
+    spread = prem.isin(flagged) & ~df["name_is_operator"]
+    df["name_is_operator"] = df["name_is_operator"] | prem.isin(flagged)
+    print(f"  name rule by premises: {int(spread.sum())} more row(s) share a flagged row's block and trade name")
+    emit("name_rule_spread_rows", int(spread.sum()))
     mobile = df["mobile"]
     print(f"  not a premises (vehicle, stall, 一円, storeless): {int(mobile.sum()):,}")
     emit("not_a_premises", int(mobile.sum()))
@@ -107,6 +149,7 @@ def run(config, write=True):
     df = joined[joined["tier"] != "none"].copy()
     df["latitude"] = [p[0] for p in df["pt"]]
     df["longitude"] = [p[1] for p in df["pt"]]
+    own_coordinates_check(config, df)
     bb = config.CITY_BBOX
     inb = df["latitude"].between(bb["lat_min"], bb["lat_max"]) & df["longitude"].between(bb["lon_min"], bb["lon_max"])
     if not inb.all():

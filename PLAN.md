@@ -309,21 +309,40 @@ Ten cities; JR and private railways INCLUDED (owner, 2026-09-24). Measurement:
 `scripts/screen_japan_join.py`. Deferred downloads are listed by domain in the
 evidence section.
 
-- [x] **Kobe built 2026-09-27** (`worktree-kobe`, held for review time):
-  27,251 storefronts, 121 stations, on the shared Japanese steps. Publish
-  through `publish-city` at review time (`app/` changes: a new page, notice
-  50, Taoyuan's macro label).
+- [x] **Kobe built 2026-09-27, LIVE 2026-09-28** (the owner's reboot;
+  Cleanup's live zoom check passed): 27,251 storefronts, 121 stations, on
+  the shared Japanese steps.
 - [x] **The `japan-city` skill**, written from Kobe 2026-09-27
   (`.claude/skills/japan-city/SKILL.md`): shared modules, standing calls,
   twelve traps, notices, and a sheet per remaining city. Next city
   recommended: Osaka.
+- [x] **Osaka built 2026-09-27, pushed at review time 2026-09-28**:
+  72,999 storefronts, 216 stations, 34 lines, on the shared steps. Notices 50
+  and 52 had their links fixed before the push (DECISIONS).
+  - [ ] **Owner: reboot the deployed app** (`cities.py`, `components.py`
+    changed), then the live check.
+- [ ] **Osaka's line labels overlap at phone width** (deploy-verify
+  2026-09-28): 22 pairs at 343 px, 12 at 375, none at 854 or desktop;
+  "Hankyu Takarazuka Line" starts 11 px under the layer-control button. The
+  project total at 343 was 2 (2026-09-20); Kobe has 0. A shared-label-code
+  fix, so it batches with a full re-render at a review time.
+- **Build order (owner, 2026-09-28): Sapporo, Fukuoka, Kyoto, then Tokyo
+  (8 wards); then the additions to built cities** (Belo Horizonte +
+  Contagem, Rio + Duque de Caxias, Vancouver (Regional); "Second-city
+  screens" below).
 - [ ] **Join control** - like-for-like against the Economic Census per-ward
   飲食店 count (the owner's chosen control) - at build. **Not yet run for
-  Kobe**: it needs an e-Stat download (the owner's OK first). Kobe's join was
-  checked instead against the Minato control and every screen, and a GSI
-  sample in the brief.
+  Kobe or Osaka**: it needs an e-Stat download (the owner's OK first). Kobe's
+  join was checked instead against the Minato control and every screen, and a
+  GSI sample in the brief; Osaka's against the list's own coordinates (median
+  38 m).
 - [ ] **Rail** - whether lines served only by limited-express trains count was
-  never ruled on (the Shinkansen is out, owner 2026-09-24). **Owner, once for all five.**
+  never ruled on as a rule (the Shinkansen is out, owner 2026-09-24). One case
+  is decided: Osaka's Umekita → 福島 track, limited expresses only, is left out
+  (owner 2026-09-27). **Owner, once for the rest.**
+- [ ] **Share `fetch_sources.py` across Japanese cities.** Osaka's is Kobe's
+  with a per-source URL map; Sapporo would be a third copy. Move it to
+  `pipeline/countries/japan_fetch.py` before Sapporo.
 
 ### ▶ Handoff to main — the Band A candidates, 2026-09-24
 

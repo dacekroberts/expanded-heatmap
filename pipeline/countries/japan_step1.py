@@ -21,7 +21,9 @@ one copy. A city's step 1 calls run(config).
     sections (Kobe's Seishin-Yamate Line is 山手線 + 西神線 + 西神延伸線), so
     config.LINES maps each drawn line to its (operator, line) pairs. A branch
     with its own public name inside one N02 line (Kobe's Wadamisaki Line in
-    JR's 山陽線) is config.BRANCHES, split off by walking the track graph.
+    JR's 山陽線) is config.BRANCHES, split off by walking the track graph. A
+    branch may instead be drawn as another line (`draw_as`) or left out
+    (`draw_as: None`) - Osaka's Umeda freight track in 東海道線.
   * Excluded: the drawn lines' stations beyond the city line, named by their N03
     municipality. A left-out line's stations are printed, not written there.
 
@@ -59,19 +61,42 @@ def nfkc(s):
     return unicodedata.normalize("NFKC", s or "").strip()
 
 
+def draw_key(key, b):
+    """The drawn line a branch's track belongs to: its own key (Kobe's
+    Wadamisaki Line), another line's (`draw_as`: Osaka's Umekita track is drawn
+    as the Osaka Higashi Line, whose trains run on it), or None - left out
+    (Osaka's Umekita-Fukushima track, limited expresses only)."""
+    return b.get("draw_as", key)
+
+
+def branch_only(config):
+    """LINES keys drawn only from a branch walk, never from their N02 line."""
+    return {k for k, b in config.BRANCHES.items() if draw_key(k, b) == k}
+
+
+def left_out(config, op, line, name):
+    """A station row on a left-out line, or one of a left-out branch's own."""
+    return (op, line) in config.LEFT_OUT_LINES or any(
+        (op, line) == b["line"] and draw_key(k, b) is None and name in b["stations"]
+        for k, b in config.BRANCHES.items())
+
+
 def line_keys(config, op, line, name):
     """The drawn line(s) a N02 station row belongs to; () for a left-out line."""
-    if (op, line) in config.LEFT_OUT_LINES:
+    if left_out(config, op, line, name):
         return ()
     branch_keys = set()
     for bkey, b in config.BRANCHES.items():
-        if (op, line) == b["line"]:
+        draw = draw_key(bkey, b)
+        if (op, line) == b["line"] and draw:
             if name in b["stations"]:
-                return (bkey,)
-            if name == b["junction"]:
-                branch_keys.add(bkey)
-    keys = tuple(k for k, v in config.LINES.items() if (op, line) in v["n02"] and k not in config.BRANCHES)
-    return keys + tuple(sorted(branch_keys))
+                return (draw,)
+            # the junction serves both lines; `shared` names every station a
+            # branch shares with its N02 line (Osaka's Umekita track: 大阪, 新大阪)
+            if name in b.get("shared", (b["junction"],)):
+                branch_keys.add(draw)
+    keys = tuple(k for k, v in config.LINES.items() if (op, line) in v["n02"] and k not in branch_only(config))
+    return keys + tuple(sorted(branch_keys - set(keys)))
 
 
 def n03_municipalities(config):
@@ -83,24 +108,35 @@ def n03_municipalities(config):
 
 
 def english_names(config, groups):
-    path = config.STATION_OSM_JSON
-    if not path.exists():
-        sys.exit(f"missing {path}\nRun: python pipeline/{config.SLUG}/fetch_sources.py osm")
+    # the station query's file, and - in a city with a tram - the tram-stop
+    # query's (Osaka's Hankai stops; japan.osm_tram_stop_query)
+    paths = [config.STATION_OSM_JSON] + ([config.TRAM_OSM_JSON] if hasattr(config, "TRAM_OSM_JSON") else [])
     rows = []
-    for el in json.loads(path.read_text(encoding="utf-8"))["elements"]:
-        t = el.get("tags") or {}
-        lat, lon = (el["lat"], el["lon"]) if el["type"] == "node" else (el["center"]["lat"], el["center"]["lon"])
-        rows.append({"name": nfkc(t.get("name")), "en": (t.get("name:en") or "").strip(),
-                     "geometry": Point(lon, lat)})
+    for path in paths:
+        if not path.exists():
+            sys.exit(f"missing {path}\nRun: python pipeline/{config.SLUG}/fetch_sources.py osm")
+        for el in json.loads(path.read_text(encoding="utf-8"))["elements"]:
+            t = el.get("tags") or {}
+            lat, lon = (el["lat"], el["lon"]) if el["type"] == "node" else (el["center"]["lat"], el["center"]["lon"])
+            rows.append({"name": nfkc(t.get("name")), "en": (t.get("name:en") or "").strip(),
+                         "geometry": Point(lon, lat)})
     osm = gpd.GeoDataFrame(rows, crs=config.CRS_GEOGRAPHIC).to_crs(config.CRS_PROJECTED)
     osm = osm[osm["en"] != ""]
     g = groups.to_crs(config.CRS_PROJECTED)
     aliases = getattr(config, "OSM_NAME_ALIASES", {})
-    out, missing = {}, []
+    # Where OSM's object has no name:en at all, the city's config may name it,
+    # explicitly and with its evidence (Osaka's JR 平野); used ONLY when no
+    # object in range carries a name:en.
+    no_en = getattr(config, "OSM_NAME_EN_MISSING", {})
+    out, missing, filled = {}, [], []
     for gid, name, pt in zip(g["group"], g["name_ja"], g.geometry):
         want = nfkc(aliases.get(name, name))
         near = osm[(osm["name"] == want) & (osm.distance(pt) <= config.OSM_NAME_MATCH_M)]
         votes = collections.Counter(near["en"])
+        if not votes and name in no_en:
+            out[gid] = no_en[name]
+            filled.append(f"{name} -> {no_en[name]}")
+            continue
         if not votes:
             missing.append(f"{name} (group {gid})")
             continue
@@ -116,6 +152,8 @@ def english_names(config, groups):
         out[gid] = en
     if missing:
         sys.exit(f"no OSM name:en within {config.OSM_NAME_MATCH_M} m for: {', '.join(missing)}")
+    if filled:
+        print(f"  English names from config.OSM_NAME_EN_MISSING (OSM has none): {', '.join(filled)}")
     return out
 
 
@@ -124,15 +162,35 @@ def _ends(g):
     return (round(c[0][0]), round(c[0][1])), (round(c[-1][0]), round(c[-1][1]))
 
 
-def branch_split(config, key, sections):
+def _platform_at(config, st, name, at):
+    """A named platform's point: the only one, or - where N02 has several under
+    one name (Osaka's 大阪: four main-line platforms and the Umekita one) - the
+    one within 50 m of `at` (lat, lon), which the config takes from N02."""
+    rows = st[st["N02_005"] == name]
+    if at is None:
+        return rows.geometry.iloc[0]
+    p = gpd.GeoSeries([Point(at[1], at[0])], crs=config.CRS_GEOGRAPHIC).to_crs(config.CRS_PROJECTED).iloc[0]
+    d = rows.distance(p)
+    if not len(d) or d.min() > 50:
+        sys.exit(f"no {name} platform within 50 m of {at}")
+    return p
+
+
+def branch_split(config, key, sections, claimed=()):
     """Index of the N02 sections reachable from the branch's terminus without
-    passing its junction station."""
+    passing its junction station. Sections an earlier branch `claimed` are not
+    walked, so BRANCHES' ORDER matters (Osaka: the left-out Umekita-Fukushima
+    track first, then the Umekita track the Osaka Higashi Line runs on)."""
     b = config.BRANCHES[key]
     st = japan.stations()
     st = st[(st["N02_004"] == b["line"][0]) & (st["N02_003"] == b["line"][1])].to_crs(config.CRS_PROJECTED)
-    term = st[st["N02_005"] == b["terminus"]].geometry.iloc[0]
-    junc = unary_union(list(st[st["N02_005"] == b["junction"]].geometry)).centroid
-    sec = sections.to_crs(config.CRS_PROJECTED)
+    term = _platform_at(config, st, b["terminus"], b.get("terminus_at"))
+    if "junction_at" in b:
+        junc = _platform_at(config, st, b["junction"], b["junction_at"])
+    else:
+        junc = unary_union(list(st[st["N02_005"] == b["junction"]].geometry)).centroid
+    junction_m = b.get("junction_m", JUNCTION_M)
+    sec = sections.drop(index=list(claimed), errors="ignore").to_crs(config.CRS_PROJECTED)
     by_node = collections.defaultdict(set)
     for i, g in zip(sec.index, sec.geometry):
         for n in _ends(g):
@@ -144,14 +202,16 @@ def branch_split(config, key, sections):
             continue
         seen.add(i)
         for n in _ends(sec.geometry[i]):
-            if Point(n).distance(junc) > JUNCTION_M:
+            if Point(n).distance(junc) > junction_m:
                 todo.extend(by_node[n] - seen)
     length = sum(sec.geometry[i].length for i in seen)
     lo, hi = b["length_m"]
+    label = b.get("label") or config.LINE_NAMES[key]
     if not lo <= length <= hi:
-        sys.exit(f"the {config.LINE_NAMES[key]} walked to {length:.0f} m of track, outside {lo}-{hi} m - "
-                 "read the section graph")
-    print(f"  {config.LINE_NAMES[key]}: {len(seen)} N02 sections, {length:.0f} m, split off {b['line'][1]}")
+        sys.exit(f"the {label} walked to {length:.0f} m of track, outside {lo}-{hi} m - read the section graph")
+    draw = draw_key(key, b)
+    how = "left out" if draw is None else ("drawn as the " + config.LINE_NAMES[draw]) if draw != key else "drawn"
+    print(f"  {label}: {len(seen)} N02 sections, {length:.0f} m, split off {b['line'][1]}; {how}")
     return sorted(seen)
 
 
@@ -160,14 +220,20 @@ def write_lines(config, near):
     sec = sec[sec["N02_002"] != japan.SHINKANSEN]
     sec = sec[sec.geometry.intersects(near)]
     pair = pd.Series(list(zip(sec["N02_004"], sec["N02_003"])), index=sec.index)
-    branch = {k: branch_split(config, k, sec[pair == b["line"]]) for k, b in config.BRANCHES.items()}
-    in_branch = {i for idx in branch.values() for i in idx}
+    branch, in_branch = {}, set()
+    for k, b in config.BRANCHES.items():
+        branch[k] = branch_split(config, k, sec[pair == b["line"]], in_branch)
+        in_branch |= set(branch[k])
+    only = branch_only(config)
     feats = []
     for key, spec in config.LINES.items():
-        if key in branch:
-            parts = sec.loc[branch[key]]
+        if key in only:
+            idx = set(branch[key])
         else:
-            parts = sec[pair.isin(spec["n02"]) & ~sec.index.isin(in_branch)]
+            idx = set(sec.index[pair.isin(spec["n02"]) & ~sec.index.isin(in_branch)])
+        # a branch drawn as this line (Osaka's Umekita track, the Osaka Higashi Line's)
+        idx |= {i for k, b in config.BRANCHES.items() if k not in only and draw_key(k, b) == key for i in branch[k]}
+        parts = sec.loc[sorted(idx)]
         if parts.empty:
             sys.exit(f"no N02 track for the {spec['name']}")
         feats.append({"type": "Feature", "properties": {"line": key},
@@ -194,14 +260,14 @@ def run(config):
     st = st[st.geometry.within(near)].copy()
     st["inside"] = st.geometry.within(city)
     st["keys"] = [line_keys(config, o, ln, nm) for o, ln, nm in zip(st["N02_004"], st["N02_003"], st["N02_005"])]
-    pair = pd.Series(list(zip(st["N02_004"], st["N02_003"])), index=st.index)
-    left = pair.isin(list(config.LEFT_OUT_LINES))
+    left = pd.Series([left_out(config, o, ln, nm) for o, ln, nm in zip(st["N02_004"], st["N02_003"], st["N02_005"])],
+                     index=st.index)
     unnamed = st[(st["keys"].map(len) == 0) & ~left & st["inside"]]
     if len(unnamed):
         sys.exit("N02 lines with stations in the city that config.LINES does not name: "
                  f"{sorted(set(zip(unnamed['N02_004'], unnamed['N02_003'])))}")
-    left_out = st[left & st["inside"]]
-    print(f"  left out inside the city: {len(left_out)} stations of {sorted(set(left_out['N02_003']))}")
+    gone = st[left & st["inside"]]
+    print(f"  left out inside the city: {len(gone)} station rows of {sorted(set(gone['N02_003']))}")
     st = st[st["keys"].map(len) > 0].copy()
 
     # --- collapse on the station-group code ------------------------------------
@@ -221,7 +287,11 @@ def run(config):
     groups["name_ja"] = groups["group"].map(names.map(lambda v: v[0]))
     groups["lines"] = groups["group"].map(rows.groupby("group")["line"].agg(
         lambda s: " ".join(k for k in config.LINE_ORDER if k in set(s))))
-    groups["inside"] = groups.geometry.within(city)
+    # A station counts when ANY of its platforms is inside the city line, not
+    # its centroid: Osaka's 太子橋今市 has its Tanimachi platform in Asahi-ku
+    # and its Imazatosuji platform in Moriguchi, and the centroid falls outside
+    # (owner 2026-09-27: keep it). Kobe has no such station.
+    groups["inside"] = groups["group"].map(platforms.groupby("group")["inside"].any())
     lines_of = groups.set_index("group")["lines"]
     print(f"\n  {len(platforms)} line-station rows within {DRAW_BEYOND_M / 1000:.0f} km -> "
           f"{len(groups)} stations by group code; widest:")

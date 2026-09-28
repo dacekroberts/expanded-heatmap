@@ -20,10 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**65 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**72 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Next builds: Band A's Japanese cities, ending with Tokyo, then the additions to built cities (owner)](#2026-09-28---next-builds-band-as-japanese-cities-ending-with-tokyo-then-the-additions-to-built-cities-owner)
+- [Osaka and the shared thin() refactor landed at review time; two defects found, one fixed before the push (owner)](#2026-09-28---osaka-and-the-shared-thin-refactor-landed-at-review-time-two-defects-found-one-fixed-before-the-push-owner)
+- [Osaka's page, notice 52 and scope section written as approved (owner)](#2026-09-28---osakas-page-notice-52-and-scope-section-written-as-approved-owner)
 - [Wave 2, group 2 banded: Florence and Santa Cruz–La Laguna to T, Palma to C, thirteen discards, five not reached (owner)](#2026-09-28---wave-2-group-2-banded-florence-and-santa-cruzla-laguna-to-t-palma-to-c-thirteen-discards-five-not-reached-owner)
 - [kobe and trams worktrees retired after review time landed them](#2026-09-28---kobe-and-trams-worktrees-retired-after-review-time-landed-them)
 - [Wave 2, the US banded: seven cities to T, Baltimore to C, sixteen discards; a Texas register reopens the Dallas question (owner)](#2026-09-28---wave-2-the-us-banded-seven-cities-to-t-baltimore-to-c-sixteen-discards-a-texas-register-reopens-the-dallas-question-owner)
@@ -33,8 +36,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 **2026-09-27**
 
+- [Osaka pipeline built on the shared Japanese steps: Japan's second city, the owner's calls, and what the shared code learned](#2026-09-27---osaka-pipeline-built-on-the-shared-japanese-steps-japans-second-city-the-owners-calls-and-what-the-shared-code-learned)
+- [Shared code changed for Osaka: the third label pass, step 1's branches, and the name rule made per-premises](#2026-09-27---shared-code-changed-for-osaka-the-third-label-pass-step-1s-branches-and-the-name-rule-made-per-premises)
+- [One shared thin(): Rome, Amsterdam and Rotterdam ported, measured in the projected CRS; no stop moved](#2026-09-27---one-shared-thin-rome-amsterdam-and-rotterdam-ported-measured-in-the-projected-crs-no-stop-moved)
 - [Tram rescopes, review time: the owner's calls, the page texts written, and the REM's notice renumbered 51](#2026-09-27---tram-rescopes-review-time-the-owners-calls-the-page-texts-written-and-the-rems-notice-renumbered-51)
 - [The REM's licence verdict, and two credits the tram batch cannot publish without (Cleanup's review)](#2026-09-27---the-rems-licence-verdict-and-two-credits-the-tram-batch-cannot-publish-without-cleanups-review)
+- [Worktree `osaka` created for the next build session, branched from worktree-kobe (owner)](#2026-09-27---worktree-osaka-created-for-the-next-build-session-branched-from-worktree-kobe-owner)
 - [Measured before the shared thin() refactor: haversine vs projected moves no stop in Rotterdam or Amsterdam, but 62 reason strings change](#2026-09-27---measured-before-the-shared-thin-refactor-haversine-vs-projected-moves-no-stop-in-rotterdam-or-amsterdam-but-62-reason-strings-change)
 - [The japan-city skill written from Kobe; Osaka recommended next](#2026-09-27---the-japan-city-skill-written-from-kobe-osaka-recommended-next)
 - [Kobe's page, notice and docs approved by the owner; Taoyuan's macro label moved; the funicular stations out of the excluded file](#2026-09-27---kobes-page-notice-and-docs-approved-by-the-owner-taoyuans-macro-label-moved-the-funicular-stations-out-of-the-excluded-file)
@@ -101,6 +108,278 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Next builds: Band A's Japanese cities, ending with Tokyo, then the additions to built cities (owner)
+
+- **The owner set the build order after reading the master list: Band A's
+  Japanese cities first, Tokyo (8 wards) last among them, then the additions
+  to built cities.** That makes the order Sapporo, Fukuoka, Kyoto, Tokyo,
+  then the regional add-ons in PLAN (Belo Horizonte + Contagem, Rio + Duque
+  de Caxias after its shuttle rail test, Vancouver (Regional) after its
+  probes). Sapporo was already next in the Japanese order; sharing
+  `fetch_sources.py` across the Japanese cities comes before it (PLAN,
+  "Japan"). Band T's group decision, recommended at this review time, is not
+  taken by this order and stays open. `PLAN.md`.
+
+### 2026-09-28 - Osaka and the shared thin() refactor landed at review time; two defects found, one fixed before the push (owner)
+
+- **Osaka (Japan's second city) and the shared thin() refactor were merged
+  into `worktree-main-build` and pushed to master as one batch, at the
+  owner's review time.** A DECISIONS conflict with each branch was resolved
+  with `merge_append_only.py`. The master list's four count conflicts were
+  resolved by combining both sides: Osaka built (51 built, Band A 4) on top
+  of wave 2's bands (C 9, T 50, D 10), so **73 candidates**, and
+  `check_master_list_counts.py` agrees.
+- **Gates, all on 3181eb0 before the fix below:** no step fetches (157 step
+  files); `check_render_current.py` OK on 51 maps; privacy 0 operator names
+  shown in 72,999 rows (9 permit-type substitutions); provenance names Osaka
+  OK; inconsistency rows for all 51; `brief_check.py osaka` 4/4;
+  **`drift_check.py --jobs 4`: zero drift in all 51 cities** (the churn it
+  left was checked out); `check_deploy_imports.py` PROBLEMS 0.
+- **`deploy-verify`, `scope: city-added` (Osaka): PASS on the map, the zoom
+  at every width (0 guard corrections), the OSM credit at three viewport
+  sizes, 34 labels and 34 legend rows, Osaka's macro label clear of Kobe's,
+  navigation, and Kobe as the untouched city.** Two defects:
+  - **Notice 52's links were wrong, and Kobe's live notice 50 had the same
+    fault.** The app's auto-linker ran each bare URL on into the Japanese
+    that follows it, so targets ended in 「）を加工して作成」 and Osaka's three
+    city URLs merged into one link. **Fixed before the push (owner: "fix and
+    land")**: all six URLs in the two notices wrapped as explicit markdown
+    links in `app/components.py`. The visible text is unchanged character for
+    character, so the owner-approved wording stands. One local render
+    confirmed all six targets resolve to the right pages; provenance still
+    passes. Rejected: landing with broken links, since the source link is
+    part of the CC BY credit.
+  - **Osaka's line labels overlap at phone width: 22 pairs at 343 px (the
+    frame on a 375 phone), 12 at 375, none at 854 or desktop**, and "Hankyu
+    Takarazuka Line" starts 11 px under the layer-control button. The project
+    total at 343 was cut to 2 on 2026-09-20; Kobe has 0. **Landed anyway
+    (owner) and queued in PLAN** as the next renderer item: the fix is in the
+    shared label code, so it batches with a full re-render at a later review
+    time, and holding Osaka would not bring it sooner.
+- **Reboot required**: the push changes `app/cities.py`, `app/components.py`
+  and adds `app/pages/51_Osaka_Heatmap.py`. The owner's action; Osaka is not
+  live until it is confirmed.
+
+### 2026-09-28 - Osaka's page, notice 52 and scope section written as approved (owner)
+
+- **The owner approved Osaka's write-ups as drafted.** Four went in:
+  - **The page prose** (`app/pages/51_Osaka_Heatmap.py`). Its 70% paragraph
+    is the owner's 2026-09-24 wording, verbatim. The draft dropped that
+    wording's last sentence ("The 2,149 permits with no fixed address are not
+    mapped"): the count was stale (2,150), and the food-truck sentence already
+    says it without a number.
+  - **Notice 52, "Osaka City and MLIT (Osaka)"** (`app/components.py`,
+    `docs/data_sources.md`). It names the city's three pages by their own
+    titles, re-read live 2026-09-27: 食品営業許可施設一覧,
+    理容所及び美容所の開設施設一覧 and クリーニング所の開設施設一覧. It is in
+    the city's example form, with CC BY 4.0 linked and the MLIT credits as in
+    Kobe's notice 50.
+  - **The `excluded_categories.md` section.**
+  - **The `cities.py` blurb.**
+  The master-list move and the inconsistency rows land in the same commit.
+- **Checks: `check_all.py` 19 of 19** after regenerating README's city list.
+  The scope disclosure, provenance (52 numbered) and registry checks pass, the
+  lean-venv import check is clean, and no TODOs are left. One local render
+  shows the page prose, the Osaka credit in the notices and the map frame. Its
+  first load missed the new notice because Streamlit cached `components.py`
+  from before the edit; after a server restart it was there. That is the
+  deploy's own reboot rule, seen locally.
+
+### 2026-09-27 - Osaka pipeline built on the shared Japanese steps: Japan's second city, the owner's calls, and what the shared code learned
+
+- **Osaka built as a config plus three thin steps, on Kobe's shared modules**
+  (`pipeline/osaka/`). Per step:
+  - Step 1: 366 N02 line-station rows within 3 km, collapsed on `N02_005g` to
+    292 stations. 216 are inside the city line and 76 beyond it, in 13
+    municipalities (Sakai-ku 17, Higashiōsaka 13, Suita 8, …), all written to
+    `excluded_stations.csv`. 34 lines are drawn.
+  - Gate 3 is exact against the operators' numbering on ten lines: Osaka
+    Metro's eight, the New Tram and JR's Loop Line.
+  - Step 2 read 63,902 food rows and 2,273 barber, 10,598 beauty and 2,911
+    laundry rows. Not a premises: 2,157. Not a storefront: 1,678 (1,502
+    manufacturing and catch-alls, 138 vending machines, 38 linen supply).
+    75,849 storefront rows remain.
+  - The join placed 75,199 at block level (99.1%) and 637 at the chōme centre
+    (0.8%); 13 are unplaced (上町Ａ/Ｂ/Ｃ番's lettered blocks and two that name
+    no real block).
+  - Of the placed rows, 2,837 repeat permits were dropped and 9 names
+    withheld. 151 of 4,227 菓子/そうざい rows (3.6%) read as factories and are
+    kept.
+  - 72,999 storefronts: Food service 50,961, Retail 6,587, Personal services
+    15,451. Of these, 71,672 lie within a ring.
+  - The screen's independent check reproduces: against the list's own (swapped)
+    coordinates, the block point sits a median 38 m away, with 98.7% within
+    250 m, on 59,551 rows. The screen had 38 m and 98.6%.
+  - The brief's two mobile-row counts were re-measured: 2,150 food rows, as
+    L102 had it. L86's 2,149 was stale, and the brief is corrected.
+- **The owner's calls, 2026-09-27** (each asked with a recommendation first):
+  - **The Umeda freight track is split at Umekita.** N02 files it under
+    東海道線. Its 新大阪 → Umekita stretch carries the Osaka Higashi Line's
+    local trains, so it is drawn as that line. The Umekita → 福島 stretch
+    carries only the Haruka and Kuroshio limited expresses and has no
+    station, so it is left out. This is the first ruling under PLAN's open
+    "lines served only by limited-express trains" question, and it covers
+    one stretch only.
+  - **Linen-supply laundries are out** (リネンサプライ, 38 rows): towel,
+    oshibori and hospital-linen suppliers, many named 工場.
+  - **The Hankai stops got a second OSM query.** OSM tags them
+    `railway=tram_stop`, which the approved station query does not take. The
+    new query returned 73 objects, of which 49 carry `name:en`.
+  - **Two English names come from config where OSM has none**
+    (`OSM_NAME_EN_MISSING`): JR 平野 → Hirano (OSM node 1727925081 has no
+    `name:en`) and 天王寺駅前 → Tennoji-ekimae (no OSM object at all). Each
+    is the operator's signed name.
+  - **太子橋今市 is kept.** Its Tanimachi platform is in Asahi-ku and its
+    Imazatosuji platform in Moriguchi, so a station now counts when ANY
+    platform is inside, not its centroid. Gate 3 then matches: Tanimachi 23,
+    Imazatosuji 11.
+  - **Label density: a third label pass**, rather than Osaka Metro's line
+    letters on the map. Details are in the next entry.
+- **Judgment calls settled without the owner, each on a measurement:**
+  - The collapse limit is 400 m, not Kobe's 300. Osaka's real interchanges are
+    wider: Kyōbashi's five platforms span 387 m, Hommachi 358 m, Shin-Osaka
+    347 m. A wrong name merge in Kobe was 750-1,500 m.
+  - Five `name:en` splits were settled by the operators' signs, as Kobe
+    settled 神戸三宮: Tenjinbashisuji 6-chome, Minami-Morimachi, Nishikujo,
+    Ebisucho and Matsudacho.
+  - Keihan Main's label is forced to its start, the only end combination that
+    places it.
+- **Line colours: a search over the sRGB cube, not an eyeballed palette.**
+  - The feasible set was 16,512 colours: 3:1 on both map pages and CIE76 ≥ 45
+    from every pin.
+  - Without the hue pull, the best pairwise floor for 34 colours from that set
+    is ~19.7 (a farthest-point bound). With it, each line took the feasible
+    colour nearest its operator's hue (lightness weighted half), holding every
+    other line ≥ 18 away.
+  - Result: no line below 45 against the pins, and the closest pairs at 18.0.
+    Several lines left their operator's hue to fit (the Chūō Line olive, JR
+    Kyoto slate). The alternative, keeping operator hues with recorded
+    exceptions, failed hard: Midōsuji and the Loop at 2.5 from each other,
+    the Chūō Line at 7.7 from Personal services.
+
+### 2026-09-27 - Shared code changed for Osaka: the third label pass, step 1's branches, and the name rule made per-premises
+
+- **`map_common`: a third label view search, with stand-off tiers of 66 and
+  88 px** (`_LABEL_WIDE_CLEARANCES`; owner 2026-09-27).
+  - 30 of Osaka's 34 labels placed in pass 1 or 2. Keihan Main placed once
+    forced to its start.
+  - The Osaka Loop, JR Hanwa and JR Kobe lines placed in none of 55 views
+    under any combination of label ends. They are short names placed last,
+    whose in-city track lies wholly in the densest core.
+  - The legend was ruled out as the cause: the solve failed identically with
+    the legend obstacle sized for 0 rows. Dropping " Line" from every name
+    still left the Loop Line.
+  - Pass 3 runs only when pass 2 leaves a label unplaceable, and pass 2 now
+    filters the wide tier out. Every city that renders today therefore
+    renders identically by construction; the all-city drift check is recorded
+    below.
+  - Rejected: Osaka Metro's signage letters as on-map labels. They would
+    relax the "real public name on the map" invariant for nine lines.
+  - Cost, seen in the preview the owner approved: the core is busy, and a
+    few labels stand well off their lines, with no leader line.
+- **`japan_step1`**:
+  - Branches can be drawn as another line (`draw_as`) or left out
+    (`draw_as: None`), choose between same-named platforms by coordinate
+    (`terminus_at` / `junction_at`), take a per-branch `junction_m`, and never
+    walk track an earlier branch claimed.
+  - English names read a second OSM file (`TRAM_OSM_JSON`) and
+    `OSM_NAME_EN_MISSING`.
+  - A station counts when any of its platforms is inside.
+  - The OSM queries are now shared builders in `japan.py`, with
+    `osm_tram_stop_query()` for Sapporo's streetcar and Tokyo's Arakawa Line.
+    Its first version (`out tags`) returned tram stops without coordinates;
+    it now uses `out body`.
+  - Kobe's config means exactly what it meant. Kobe showed zero drift after
+    the branch, tram-query and own-coordinates changes; the later changes are
+    covered by the all-city drift check below.
+- **`japan_step2`: the name rule now holds per premises, not per row.** The
+  bug: `check_personal_exposure.py osaka` found 2 pins showing an operator's
+  own name, against the 0 required.
+  - One was a restaurant holding two food permits, of which only one row
+    names the trade name as its operator; the one-pin-per-premises step kept
+    the other row.
+  - The other was a salon registered as both barber and beauty, flagged only
+    in the barber register, whose address strings differ in building and
+    floor.
+  - A flagged row now withholds every row sharing its trade name and block,
+    the join's own key (ward, town, block). An address-string key fixed only
+    the first case.
+  - Osaka moved from 2 shown to 0 shown (9 withheld; 2 rows reached by the
+    spread).
+  - Also added: the list's own coordinates measured against the join, where a
+    list carries them (`own_coordinates_check`). Kobe's lists carry none.
+  - `japan_register.py` is untouched, so the Minato control was not needed.
+- **`japan_eigyo`: laundry-register リネンサプライ → not a storefront** (owner),
+  with import-time asserts. 一般リネン兼業 stays.
+- **Verification: all-city drift check (`drift_check.py --jobs 4`) after every
+  change above: zero drift in the 50 other cities.**
+  - Every baseline figure is unchanged and every output identical (HTML after
+    Folium-id normalization), including Madrid and the other cities whose
+    labels needed pass 2.
+  - Kobe's outputs are identical; its only difference is the new step 2
+    counter `name_rule_spread_rows`, not yet in its baseline.
+  - The one DRIFT line is Osaka's own `excluded_stations.csv`, from the
+    太子橋今市 rule, not yet committed when the check ran.
+  - A first run's log was truncated to its tail and could not name cities, so
+    the check was re-run with the full log kept.
+- **Privacy verdict, Osaka (`check_personal_exposure.py osaka`)**:
+  - 71,672 pins; no registrant-name fallback exists.
+  - 0 contact details, 0 surname-first names, 0 heuristic person names.
+  - Japan pass: 9 operator's-own trade names in the raw files, 9 pins showing
+    their permit type, **0 shown**.
+  - Publishable on this measure.
+### 2026-09-27 - One shared thin(): Rome, Amsterdam and Rotterdam ported, measured in the projected CRS; no stop moved
+
+- **The sub-transit-line thinning filter now lives once, as
+  `pipeline/stations.py` `thin()`**, beside `verify_stations`, with a
+  `projected_xy()` helper. It takes ordered stop-name sequences, a name ->
+  projected x/y lookup, the keep-always and interchange sets and a spacing in
+  metres. It returns the kept set and each cut with its nearest kept stop and
+  the metres since it. Rome, Amsterdam and Rotterdam call it; their own
+  copies and both Dutch `haversine_miles` are gone. Three things stayed in the
+  cities, as the handoff asked:
+  - sequence choice (the coverage break);
+  - the reason wording, byte for byte (Dutch `round(mi, 3)`, Rome `:.3f`,
+    "spacing" kept);
+  - each city's post-filter of cuts that another line or direction kept.
+- **Amsterdam and Rotterdam now measure in EPSG:32631, not haversine on
+  lat/lon** (CLAUDE.md: never measure distance in EPSG:4326). This is the
+  drift that "Measured before the shared thin() refactor" (above) predicted,
+  and nothing else changed:
+  - `drift_check.py rome amsterdam rotterdam`: Rome zero drift;
+    `heatmap.html` identical after Folium-id normalisation in all three;
+    baselines unchanged (9, 11, 11 figures).
+  - Amsterdam's and Rotterdam's `excluded_stations.csv` keep the same row
+    count (81 and 75), and their station, lines, latitude and longitude
+    columns are identical.
+  - Only the reason's mileage moved, by 0.001-0.002 mi.
+  - The 62 strings reconcile exactly. Re-run with the old haversine copy
+    beside each shared call, **41 of Amsterdam's 78 and 21 of Rotterdam's 37
+    raw cut entries** differ in the third decimal, and no call's kept or cut
+    set differs. They reach the CSV as **32 and 16 changed rows**, since the
+    CSV keeps one row per station (a stop cut on two lines or directions is
+    one row). No baseline figure moved, so no `--update-baseline` was run.
+- **Found that four more thinning copies exist beyond the three handed over;
+  all left alone, for separate owner calls.** None is measured in the
+  projected CRS:
+  - `pipeline/hong_kong/step1_stations.py` `thin()` (the Light Rail) is the
+    same rule in haversine;
+  - so is Riga's inline loop in `pipeline/riga/step1_stations.py`.
+  - San Francisco's `select_line_stations()` and Boston's copy of it are a
+    VARIANT: they force-keep interchanges AFTER the spacing pass, so an
+    interchange does not reset the count. The shared function resets it, as
+    the Dutch and Rome copies did.
+  Porting any of them would need its own drift measurement first, and the
+  SF/Boston one would change a rule, not just a unit.
+  `docs/sub_transit_line_filters.md` now names the shared function and this
+  difference.
+- **`check_all.py`: 19 of 19 passed**, `check_scope_disclosure.py` included.
+  The handoff `docs/handoff_thin_refactor_2026-09-27.md` was deleted in this
+  commit, as it asked. Files: `pipeline/stations.py`,
+  `pipeline/{rome,amsterdam,rotterdam}/step1_stations.py`,
+  `outputs/{amsterdam,rotterdam}/excluded_stations.csv`,
+  `docs/sub_transit_line_filters.md`.
 
 ### 2026-09-27 - Tram rescopes, review time: the owner's calls, the page texts written, and the REM's notice renumbered 51
 
@@ -169,6 +448,17 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   out `outputs/montreal/{excluded_stations.csv, heatmap.html}`; both are in
   `c8c1c53`.
 
+### 2026-09-27 - Worktree `osaka` created for the next build session, branched from worktree-kobe (owner)
+
+- **`.claude/worktrees/osaka` (branch `worktree-osaka`) was made from
+  `worktree-kobe` at `843929c`, not from `origin/master`** (owner's request,
+  after the japan-city skill recommended Osaka). The shared Japanese steps
+  exist only on the Kobe branch until review time lands it. So Osaka merges
+  `origin/master` once Kobe is there, and publishes after Kobe or with it.
+  - `data/` and `.venv-lean` are junctions to the main checkout's.
+  - The handoff is `docs/handoff_osaka_2026-09-27.md`.
+  - Osaka's cache was on disk from screening. The OSM station-name query is
+    its one remaining download and waits for the owner's OK.
 ### 2026-09-27 - Measured before the shared thin() refactor: haversine vs projected moves no stop in Rotterdam or Amsterdam, but 62 reason strings change
 
 - **Switching the tram thinning filter from haversine on lat/lon to the
