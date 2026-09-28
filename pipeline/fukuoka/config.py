@@ -226,31 +226,37 @@ COLLAPSE_MAX_SPREAD_M = 300
 # (English, then Japanese), and its colour. 篠栗線 is signed 福北ゆたか線 by JR
 # Kyushu (the Sapporo and Osaka precedent: the name on the signs).
 #
-# COLOURS: provisional until step 3's search (Sapporo's method: 3:1 against both
-# map pages, CIE76 >= 45 against every category pin, >= 18 between lines, each
-# nearest its operator's hue).
+# COLOURS: the project's own, not the operators' (Kobe's, Osaka's and Sapporo's
+# rule). A search over the sRGB cube (step 8; 3,817 feasible colours): 3:1
+# against BOTH map pages (#0B1220 and #ffffff), CIE76 >= 45 against every
+# category pin, >= 18 between lines, each nearest its operator's hue family
+# (lightness weighted half) in the order below: the subway's orange, blue and
+# green, JR Kyushu's red, Nishitetsu's blue. Result: pins 45.0-70.5, closest
+# line pair 18.1 (the Kagoshima Main and Chikuhi lines, both red). No blue
+# clears Retail's pin: the Hakozaki Line went teal, Nishitetsu's lines slate
+# and mauve.
 _SUB, _JR, _NNR = "福岡市", "九州旅客鉄道", "西日本鉄道"
 LINES = {
     # Fukuoka City Subway (福岡市交通局)
-    "K": {"n02": [(_SUB, "1号線(空港線)")], "name": "Kūkō Line", "name_ja": "空港線", "colour": "#F07000",
+    "K": {"n02": [(_SUB, "1号線(空港線)")], "name": "Kūkō Line", "name_ja": "空港線", "colour": "#E07800",
           "short": "Subway"},
-    "H": {"n02": [(_SUB, "2号線(箱崎線)")], "name": "Hakozaki Line", "name_ja": "箱崎線", "colour": "#1060E0",
+    "H": {"n02": [(_SUB, "2号線(箱崎線)")], "name": "Hakozaki Line", "name_ja": "箱崎線", "colour": "#007890",
           "short": "Subway"},
-    "N": {"n02": [(_SUB, "3号線(七隈線)")], "name": "Nanakuma Line", "name_ja": "七隈線", "colour": "#30A000",
+    "N": {"n02": [(_SUB, "3号線(七隈線)")], "name": "Nanakuma Line", "name_ja": "七隈線", "colour": "#28A800",
           "short": "Subway"},
     # JR Kyushu (九州旅客鉄道)
-    "JK": {"n02": [(_JR, "鹿児島線")], "name": "JR Kagoshima Main Line", "name_ja": "鹿児島本線", "colour": "#C03030",
+    "JK": {"n02": [(_JR, "鹿児島線")], "name": "JR Kagoshima Main Line", "name_ja": "鹿児島本線", "colour": "#E80010",
            "short": "JR"},
-    "JC": {"n02": [(_JR, "筑肥線")], "name": "JR Chikuhi Line", "name_ja": "筑肥線", "colour": "#008080",
+    "JC": {"n02": [(_JR, "筑肥線")], "name": "JR Chikuhi Line", "name_ja": "筑肥線", "colour": "#F05030",
            "short": "JR"},
-    "JS": {"n02": [(_JR, "篠栗線")], "name": "JR Fukuhoku Yutaka Line", "name_ja": "福北ゆたか線", "colour": "#806000",
+    "JS": {"n02": [(_JR, "篠栗線")], "name": "JR Fukuhoku Yutaka Line", "name_ja": "福北ゆたか線", "colour": "#F86000",
            "short": "JR"},
-    "JH": {"n02": [(_JR, "香椎線")], "name": "JR Kashii Line", "name_ja": "香椎線", "colour": "#9050C0",
+    "JH": {"n02": [(_JR, "香椎線")], "name": "JR Kashii Line", "name_ja": "香椎線", "colour": "#B03800",
            "short": "JR"},
     # Nishitetsu (西日本鉄道)
     "NT": {"n02": [(_NNR, "天神大牟田線")], "name": "Nishitetsu Tenjin Ōmuta Line", "name_ja": "天神大牟田線",
-           "colour": "#D04080", "short": "Nishitetsu"},
-    "NK": {"n02": [(_NNR, "貝塚線")], "name": "Nishitetsu Kaizuka Line", "name_ja": "貝塚線", "colour": "#A07050",
+           "colour": "#688090", "short": "Nishitetsu"},
+    "NK": {"n02": [(_NNR, "貝塚線")], "name": "Nishitetsu Kaizuka Line", "name_ja": "貝塚線", "colour": "#786078",
            "short": "Nishitetsu"},
 }
 LINE_ORDER = list(LINES)
