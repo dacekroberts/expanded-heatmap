@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**413 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**414 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Efficiency change 3 done: CLAUDE.md 4,345 -> 1,685 words, PLAN.md 20,675 -> 3,136, check_all.py as a pre-push hook (owner)](#2026-09-27---efficiency-change-3-done-claudemd-4345---1685-words-planmd-20675---3136-check_allpy-as-a-pre-push-hook-owner)
 - [Process efficiency review: batch approvals first, then trim what loads, then archive DECISIONS by month (owner)](#2026-09-27---process-efficiency-review-batch-approvals-first-then-trim-what-loads-then-archive-decisions-by-month-owner)
 - [Session loose ends closed (owner): Riga on JSON.parse, the main checkout current, UTF-8 output in two tools, and the Czech coordinate control per city](#2026-09-27---session-loose-ends-closed-owner-riga-on-jsonparse-the-main-checkout-current-utf-8-output-in-two-tools-and-the-czech-coordinate-control-per-city)
 - [Daegu's and Busan's licences read: Busan permitted with a credit, Daegu on a reasoned position after the national route failed (owner)](#2026-09-27---daegus-and-busans-licences-read-busan-permitted-with-a-credit-daegu-on-a-reasoned-position-after-the-national-route-failed-owner)
@@ -461,6 +462,52 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Efficiency change 3 done: CLAUDE.md 4,345 -> 1,685 words, PLAN.md 20,675 -> 3,136, check_all.py as a pre-push hook (owner)
+
+- **CLAUDE.md was cut to 1,685 words (`54fc57a`).** Each rule keeps its
+  instruction and an `[#anchor]` into `docs/rule_history.md`, which holds the
+  full original wording, copied by line range so it is verbatim.
+  - A sentence-level check of all 209 units of the old file found none lost.
+  - The owner approved the 1,630-word draft with three additions: the clause
+    that the OSM credit stays clear only because `app/pages/*.py` embeds each
+    map at its own height; "deliberately not named `step*.py`" in the no-fetch
+    rule; and `check_all.py` with the hook setup in Commands.
+  - The draft stopped short of the ~1,500 target. The rules left are already a
+    clause or two long, and rewording them was judged worse than 130 words.
+- **PLAN.md was trimmed from 20,675 to 3,136 words.** A `cleanup-sweep`
+  `plan-trim` pass sorted every item:
+  - 93 done items removed, each with its outcome already recorded in
+    DECISIONS, a skill or a doc.
+  - 11 items cut to one line each, because they held something recorded
+    nowhere else (for example the private-repo route and the smoke re-fetch
+    idea).
+  - The Japanese build order kept whole.
+  - About 42 open items that were done or overtaken removed.
+  - The owner's corrections: Mexico City's and Guadalajara's whole-city
+    layers were not left as an open decision (restored in `62857d1`); Japan's
+    limited-express-only lines and the Overview colour contrast check stay as
+    one open line each; "Vancouver (Regional)" at 375px and "adopt
+    safe-rename" stay open.
+  - The auto-mode classifier refused the rewrite when the agent ran it. The
+    owner then approved it explicitly and it ran in the main session.
+  - The handoff's pointer to the deleted Seoul section now reads it from
+    `git show 937edf1:PLAN.md`.
+- **`scripts/check_all.py` became the pre-push hook (`937edf1`).** It runs 15
+  pass/fail checks in parallel in about 25 seconds, called from
+  `.githooks/pre-push` and enabled with `core.hooksPath`. It was tested to exit
+  0 on a clean tree and 1 on a stale index.
+  - Left out: `check_stray_downloads.py`, which inspects every checkout, so one
+    session's stray file would block another's push; `drift_check.py` and
+    `check_deploy_imports.py`, which take minutes; and the report-only,
+    argument-taking and browser checks.
+- **The 7-day DECISIONS index was dropped (owner).** `drift_check.py` tells a
+  session to find "the latest baseline entry" through the index, and some
+  cities' baselines are older than seven days. The monthly archive (change 1)
+  shrinks the index instead.
+- **Found, not fixed:** `docs/data_sources.md:1716` calls the tile provider "a
+  decision already open in `PLAN.md`". PLAN had marked it decided on
+  2026-09-21, before the trim, so that sentence was already stale.
 
 ### 2026-09-27 - Process efficiency review: batch approvals first, then trim what loads, then archive DECISIONS by month (owner)
 
