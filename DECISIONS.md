@@ -66,6 +66,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Every map ships its heat points and business dots as JSON.parse("..."): no inline literal over 20,000 elements remains, 190.1 MB to 171.1 MB, and a check keeps it so](#2026-09-27---every-map-ships-its-heat-points-and-business-dots-as-jsonparse-no-inline-literal-over-20000-elements-remains-1901-mb-to-1711-mb-and-a-check-keeps-it-so)
 - [Trams count; Band T (trams only) created; first blocker wins, universally (owner)](#2026-09-27---trams-count-band-t-trams-only-created-first-blocker-wins-universally-owner)
 - [iPhone blank maps: the cause is a per-literal compile limit, not memory; which layer trips it per city, and why Seoul's layer drop bought nothing](#2026-09-27---iphone-blank-maps-the-cause-is-a-per-literal-compile-limit-not-memory-which-layer-trips-it-per-city-and-why-seouls-layer-drop-bought-nothing)
+- [Toronto's retail share settled (Q18): EC quotes the pins the map draws, 759 of 18,186 (owner-approved wording)](#2026-09-27---torontos-retail-share-settled-q18-ec-quotes-the-pins-the-map-draws-759-of-18186-owner-approved-wording)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -1661,4 +1662,30 @@ Recorded by the cleanup session from the Main Building Session's findings of
 - **Where the open work lives**: PLAN.md, the same item - the fix, the
   threshold test, the browser matrix, the fix's downsides, the reversals
   and the whole-city audit.
+
+### 2026-09-27 - Toronto's retail share settled (Q18): EC quotes the pins the map draws, 759 of 18,186 (owner-approved wording)
+
+- **Why there were two figures.** `pipeline/toronto/step2_clean_businesses.py`
+  counts its buckets (lines 116-120) before it drops nameless, addressless and
+  duplicate rows (126-156). So `outputs/toronto/baseline.json`'s buckets
+  (870 / 14,408 / 4,297, summing to 19,575) do not sum to its own
+  `storefront_rows` (19,384).
+- **The low share is the source, not a mis-mapping.** Toronto licenses eight
+  regulated retail trades and no general retail; the taxonomy has no
+  catch-all and raises on an unknown category.
+- **Measured in the drawn pins** (`data/toronto/processed/businesses_geocoded.csv`):
+  759 retail of 18,186 (4.2%), 13,385 food service, 4,042 personal services.
+- **Wording, not the pipeline** (owner approved). Moving the bucket count
+  after de-duplication would make the baseline agree with itself (814 of
+  19,384), but still not with the pins drawn, for a pipeline change and a
+  drift check.
+- **Changed:**
+  - `docs/excluded_categories.md` now quotes the drawn pins. The app renders
+    this file, so the commit waits for review time before it reaches master.
+  - `docs/project_context.md` loses its count and points to EC, since that
+    file carries no counts.
+  - Q18 is marked resolved in `docs/map_inconsistencies.md`.
+- **Still open:** EC's per-category counts (`SECOND HAND SHOP` 1,806 and the
+  rest, summing to 3,475) predate dropping cancelled licences. They are in
+  PLAN.md as published wording for the owner.
 

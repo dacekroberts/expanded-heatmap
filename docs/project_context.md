@@ -393,8 +393,8 @@ Cities built and running end to end (pipeline, map, app page):
   **General retail is ABSENT, not thin**, and it is the most severe coverage gap
   on the site. Toronto licenses no grocer, clothing shop, pharmacy or hardware
   store, so the Retail bucket holds the *regulated* slice alone - second-hand,
-  pawn, precious metal, smoke, vape, pet, salvage and permanent fireworks - which
-  is **870 of 19,575 storefront rows**. The bucket is drawn and disclosed rather
+  pawn, precious metal, smoke, vape, pet, salvage and permanent fireworks (its
+  share is in `excluded_categories.md`). The bucket is drawn and disclosed rather
   than omitted (the owner's call, and New York's treatment); the city page and
   `excluded_categories.md` both say what it does and does not contain.
 

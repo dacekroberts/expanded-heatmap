@@ -366,9 +366,9 @@ brief names.
   - Deliverable, drafted for the owner: a ranked list (finding, evidence, estimated saving,
     whose habit - owner, session or structure), the top three changes, and a rough weekly
     saving for each. The owner decides.
-- [ ] **Toronto's retail share** (`docs/map_inconsistencies.md` Q18): the baseline's buckets
-  (870 of 19,575) and the cleaned rows the map draws (814 of 19,384) are both real. Settle by
-  reading Toronto's step 2, not by editing a number.
+- [ ] **Toronto's per-category retail counts** (`docs/map_inconsistencies.md` Q18, the part
+  still open): EC's `SECOND HAND SHOP` 1,806 and the rest predate dropping cancelled
+  licences; the drawn pins give 219, 351 and so on. Published wording: owner.
 
 **Not ready for main:**
 - **Band C (7)** — one owner decision moves all seven: does a single-bucket
