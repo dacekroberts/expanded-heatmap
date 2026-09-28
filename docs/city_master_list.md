@@ -38,7 +38,7 @@ search keywords. Both are written up in `.claude/skills/add-country/`
 > | **Built** | **46** across 16 countries *(Seoul, Taichung, Taoyuan and Taipei (Regional), 2026-09-25; Riga, Hong Kong and Rotterdam, 2026-09-24; Toulouse, Lille (Regional) and Rennes, 2026-09-23; Oslo, Copenhagen, Prague, Amsterdam and Rome, 2026-09-24; Brazil's nine cities as one batch, 2026-09-24)* |
 > | **Candidates** | **65**, all at least partially viable — A 9 · B 0 (closed) · C 13 · T 33 · D 10 *(**the 2026-09-27 second-city screens, owner's calls**: Daegu and Busan to A, reopened on their cities' own portals; **32 trams-only cities to T** (France 21, Czechia 6, Denmark 2, Latvia 2, Norway 1), edge networks tagged rather than promoted; Den Haag, Utrecht, Rijswijk, Delft, Incheon and the Gyeonggi satellites to C, whose caption widened to buckets with a measured gap; Daejeon, Gwangju and Gimhae to D; **Monterrey (Regional) to A 2026-09-27**, Mexico's third city, screened on DENUE and OSM rail, its old rail-only negative obsolete; **Band T, trams only, created by the owner 2026-09-27, with the first-blocker rule made universal**; **Seoul, Taichung, Taoyuan and Taipei (Regional) built 2026-09-25**, leaving Band A; **the open gap emptied 2026-09-24 after a final re-probe, owner's calls**: Riga to A (tram rings, scoped vacancy disclosure), Yokohama to C (personal services only, no page for now), Lisbon, Helsinki and Tallinn to D, Vienna, Santiago and Nagoya to the discards; **Hong Kong, Rotterdam and Brazil's nine built 2026-09-24**, leaving Band A by being built; Kyoto from the open gap to A 2026-09-24 — its register rebuilt from the permit stream, owner's call; **Japan re-banded 2026-09-24 and the geocoding band closed** — Tokyo (8 wards), Osaka, Kobe, Sapporo and Fukuoka to A, Hiroshima to C, Sendai to D, Yokohama, Nagoya and Kyoto to the open gap; Rotterdam from the open gap to A; all owner's calls; Warsaw and Hyderabad to D 2026-09-24 from the open gap, owner's calls — each geo-blocked before measurement; Copenhagen, Prague, Amsterdam and Rome built 2026-09-24; Amsterdam to A 2026-09-24 — permits + BAG shop units, both licences read, owner's call; Amsterdam from the discards to C earlier the same night; Rome to A 2026-09-24 — SUAP premises joined to ANNCSU, owner's call with a build check; Prague back to A 2026-09-24 on open data — ROS02 establishments + RES; Kaohsiung moved from B to a reopened access-blocked band D 2026-09-23, owner's call; Brazil re-screened 2026-09-23: +7 cities, and São Paulo and Rio moved from B to A; Taipei (Regional), Taoyuan and Taichung moved from B to A the same evening; Rennes built; Prague paused to the open gap 2026-09-24)* |
 > | **Open screening gap** | **0** — **emptied 2026-09-24** by a final re-probe of its last eight, each given a verdict (owner's calls) *(before that: Kyoto out again to A later the same day, on a rebuilt register; Yokohama, Nagoya and Kyoto in, Rotterdam out to A, 2026-09-24; ten left 2026-09-24 on the owner's calls after their re-probes: eight to the discards, Warsaw and Hyderabad to D)* |
-> | **Discarded** | **37**, each naming its evidence *(San Jose, Fort Worth, Austin and Charlotte, moved in from the retired `docs/city_shortlist.md` 2026-09-27, with Kansas City, which went on to Band T the same day; Tainan, Hsinchu, Trondheim, Aubagne, Clermont-Ferrand and Saint-Louis from the 2026-09-27 second-city screens, on rail; Vienna, Santiago and Nagoya from the open gap 2026-09-24 after the final re-probe, owner's calls; Kuala Lumpur, Athens, Poznań, Bratislava, Hamburg, Naples, Lima and Messina from the open gap 2026-09-24, owner's calls after their re-probes; an audit moved 12 single-method rows to the open gap and Amsterdam to Band C, 2026-09-24; the evidence check moved 5 more the same night)* |
+> | **Discarded** | **40**, each naming its evidence *(Denver, Dallas and Brampton 2026-09-27, whose discards were recorded only in the archived DECISIONS; San Jose, Fort Worth, Austin and Charlotte, moved in from the retired `docs/city_shortlist.md` 2026-09-27, with Kansas City, which went on to Band T the same day; Tainan, Hsinchu, Trondheim, Aubagne, Clermont-Ferrand and Saint-Louis from the 2026-09-27 second-city screens, on rail; Vienna, Santiago and Nagoya from the open gap 2026-09-24 after the final re-probe, owner's calls; Kuala Lumpur, Athens, Poznań, Bratislava, Hamburg, Naples, Lima and Messina from the open gap 2026-09-24, owner's calls after their re-probes; an audit moved 12 single-method rows to the open gap and Amsterdam to Band C, 2026-09-24; the evidence check moved 5 more the same night)* |
 >
 > *Counts corrected 2026-09-23. This box had read 20 / 33 / 30 since
 > 2026-09-22 while the sections below moved on — **the hand-kept summary is
@@ -123,7 +123,7 @@ yet* with *we looked at everything and this is what is there*.
 | 🔴 **D** | **Access blocked by the publisher.** Screening complete, the file exists and is measured; the publisher's own access control is the only thing stopping it, so it is unblocked by ASKING, not by probing *(Warsaw and Hyderabad, 2026-09-24: blocked before measurement — a read from inside the country first; Sendai, 2026-09-24: the city's permission; Lisbon, Helsinki and Tallinn, 2026-09-24: a free account, and two geo-blocks; Tallinn also trams only; Daejeon, Gwangju and Gimhae, 2026-09-27: no city portal, and the national one behind a residency and CAPTCHA wall)* | **10** |
 | | **Candidates** | **65** *(corrected 2026-09-27 from a stale 24 to 20, then Monterrey added; 43 more from the second-city screens the same day; Kansas City from the discards)* |
 | *Open gap* | Unscreened — a row resting on an absence, so not a discard | *0 (emptied 2026-09-24)* |
-| *Discarded* | Measured negative, evidence named | *37* |
+| *Discarded* | Measured negative, evidence named | *40* |
 
 *Band A's caption briefly said "brief written" (2026-09-23, morning). That was
 wrong by `CLAUDE.md`'s own rule — **a brief is a cache, not a prerequisite** —
@@ -576,7 +576,7 @@ wrong band since its own screening finished.**
 | ⚠️ **Primary portal still dead** | `data.gov.ro` resolves to 85.120.75.35 and **blackholes on 443 and 80**, now **two days running** — which weakens the original "outage, not refusal" reading. Its catalogue was read from the Internet Archive instead |
 
 **Bucharest is the strongest-RAILED city in this band** — a real five-line
-metro against Stockholm's, Zurich's and Göteborg's trams — and the
+metro against Zurich's and Göteborg's trams (Stockholm has a metro too) — and the
 weakest on access. **The opposite trade from Göteborg**, which has the best
 licence and the weakest map.
 
@@ -824,7 +824,7 @@ left it once they were.
 
 *Closed bands (formerly G, B, D-c and D-d), kept in full: see [city_master_list_evidence.md#closed-bands](city_master_list_evidence.md#closed-bands).*
 
-## DISCARDED — 37 cities, each naming its evidence
+## DISCARDED — 40 cities, each naming its evidence
 
 ▼ **2026-09-24 (evening) — the open gap's last three discards, on the owner's calls after a final re-probe**: Vienna (absence, now on the city's own hosts twice over), Santiago (coverage: four central comunas publish no current list) and Nagoya (the published permit stream carries only half the permits issued, so no rebuild can work).
 
@@ -899,10 +899,14 @@ open screening gap's table.
 | **Aubagne** 🇫🇷 | rail | measured AMP Agglobus's GTFS (one line, 7 stations, about 2.5 km) · measured ring coverage (526 storefronts within 966 m) | yes — the operator's feed | **Too thin — 2026-09-27, a judgement and reversible.** Less than a sixth of Rennes (3,479), the smallest French build. The line is not cut short; the Val'Tram extension is in OSM only, untagged |
 | **Clermont-Ferrand** 🇫🇷 | rail | read T2C's GTFS (`route_type` 0) · read OSM's ways (`railway=tram`, no guidance tag) | yes — the operator's feed | **A rubber-tyred guided bus (Translohr), not rail — 2026-09-27.** Both sources call it a tram and neither can tell; the mode is known, not read, which is why the row says so. 2,565 storefronts near its 30 stations would otherwise pass |
 | **Saint-Louis** 🇫🇷 | rail | measured Distribus's GTFS · read OSM route membership (4 of Basel BVB tram 3's 26 stops are in France) | yes — the local feed | **The short end of a Swiss line — 2026-09-27.** 274 storefronts near 4 stops. Annemasse (Geneva 17: 1 stop in the town), Leymen (Basel 10: 1 stop) and Sarreguemines (Saarbahn S1: 1 stop) are the same shape and never reached a row |
+| **Brampton** 🇨🇦 | rail | measured the agencies' own `routes.txt` (no urban rail reaches Brampton; only GO commuter rail, excluded everywhere) · measured the city's business directory (6,059 rows, X/Y on 100%, `NAICS_DETAIL` on 97.3%) | yes — the city's directory | **Blocked on rail, not on data — recorded 2026-09-21 (`docs/canada_retrospective.md`; row added 2026-09-27).** Its data is better than most US cities'. Miami's regional precedent does not rescue it: Metrorail runs into Hialeah, but TTC Line 2 ends at Kipling inside Toronto. **Revisit mid-2027 for the Hurontario LRT**, asking "has an opening date been announced?" rather than "is it open?" |
 
-▼ **2026-09-27: five United States rows, moved here from
-`docs/city_shortlist.md` when that file was retired.** They were screened on
-2026-09-18 and 2026-09-21, before this table had evidence columns. Each
+▼ **2026-09-27: United States rows, moved here from
+`docs/city_shortlist.md` when that file was retired** (San Jose, Fort Worth,
+Austin, Charlotte; Kansas City moved on to Band T, owner's call), **plus
+Denver and Dallas, whose discards were recorded only in the archived
+DECISIONS** (rows added the same day). They were screened on 2026-09-18 to
+2026-09-21, before this table had evidence columns. Each
 method is written as it was recorded at the time. Where the record does not
 say a whole catalogue was read, the method is marked `search`. The fuller
 record is in `docs/decisions/2026-09-13.md` (2026-09-18, "Live check of
@@ -915,14 +919,28 @@ and `docs/us_build_retrospective_addendum.md`.
 | **Fort Worth** 🇺🇸 | rail | measured the Certificates of Occupancy table (ArcGIS `CFW_Open_Data_Certificates_of_Occupancy_Table_view`, table 0: 72,065 rows, `JobUse` with 48 values) · search-level rail (TEXRail and the Trinity Railway Express; their GTFS not read) | yes | **The data is workable, the rail is not. Live-verified 2026-09-18.** The certificates run from about 2002 and are current through 2026. But 13,343 rows (about 19%) have no coordinates, the city and address fields are null on most rows, and a business that relocates appears more than once: it is a history of certificates, not a register. Revisit if the rail expands or a thin-network map becomes acceptable |
 | **Austin** 🇺🇸 | absence | measured "Certificates Of Occupancy" (Socrata `f9mz-m6dy`, 291,759 rows) · search the city's Socrata for business sets (Active Credit Access Business Licenses `3buj-7jze`, 64 rows; vendor lists) | yes | **No business register. Live-verified 2026-09-18.** The dataset titled "Certificates Of Occupancy" is construction permits with a yes/no flag: no business name and no classification. The business sets found are small. The rail is one MetroRail line (from memory, not checked) |
 | **Charlotte** 🇺🇸 | absence | read the city hub `data.charlottenc.gov` · read Mecklenburg County's GIS open-data page | yes | **No business or licence dataset. Live-verified 2026-09-18.** The city hub holds zoning, permit-review and planning layers, plus hand-curated point sets (grocery stores, pharmacies, medical facilities). The county page lists none. The rail is the LYNX Blue Line plus a streetcar (from memory, not checked) |
+| **Denver** 🇺🇸 | measured | measured "Active Business Licenses" on the city's ArcGIS hub and on the Colorado Information Marketplace mirror (7 columns: `License_Num, License_Type, License_Sub_Type, License_Status, Entity_Name, Trade_Name, Expiration_Date`) · search the city's 347 catalogue datasets for an alternative | yes — the city's hub | **No address, no classification, no geometry — live-verified 2026-09-18** (`docs/decisions/2026-09-13.md`, "Ruled out Denver on live-verified data"). The "Business License Data Explorer" the first pass cited was Anaheim's. With San Jose, the case that made live verification a rule |
+| **Dallas** 🇺🇸 | measured | measured `9qet-qt9e` (certificates of occupancy, PDDL, 23,731 rows, issued 2018-01-02 to 2022-11-15, last changed 2022-11-16) · read `ync5-xnfn` (a dashboard, not a dataset: HTTP 403, 0 columns) · measured `dri5-wcct` (food, 2016–2024, no licence, no business name) · enumerated the domain's 1,087 assets | yes — `dallasopendata.com` | **Stopped publishing: ruled out on currency, 2026-09-21** (`docs/decisions/2026-09-20.md`, "Dallas ruled out, on currency rather than schema"). Texas has no general city business licence, so the certificate of occupancy is Dallas's register, and it ends in 2022. A four-year-old snapshot cannot be disclosed away on a page |
 
 Plus the 2026-09-27 second-city screens' no-urban-rail set (Toulon; Nancy,
 now a trolleybus; Metz, Nîmes, Amiens and Pau, bus rapid transit; Aalborg's
 +BUS; Kristiansand's amusement-park tram; Carcassonne and Réunion's CIREST,
 whose feeds flag school buses as tram), and the earlier one (Winnipeg, Hamilton, Québec City, Halifax,
-Mississauga, Ottawa, ~30 single-feed countries) and access-not-data
-(Russia, Ukraine). There is also the 2026-09-18 US screen's rail set, which
-was **search-level and never live-verified**: San Antonio and Columbus (no
+Mississauga, ~30 single-feed countries) and access-not-data
+(Russia, Ukraine).
+
+⚠️ **Ottawa is NOT a no-rail city** (corrected 2026-09-27): it has 6 light-rail
+routes (O-Train) and was ruled out on DATA on 2026-09-21. 697 catalogue
+entries were scanned, and the only address-level commercial data is
+food-safety inspections (`docs/canada_retrospective.md`). **That is Band C's
+shape today (food only, like Stockholm), not a discard.** It has no row here
+pending the owner's call: to Band C, or a discard row.
+
+**Houston** was ruled out beside Dallas "for the same structural reason (zero
+results)" on 2026-09-21. That is one search, which cannot carry a row here, so
+it sits with the search-level screen-outs. There is also the 2026-09-18 US
+screen's rail set, which was **search-level and never live-verified**: San
+Antonio and Columbus (no
 rail), Oklahoma City and El Paso (a streetcar only, so trams-only in shape
 if a data screen ever passed), Nashville (one commuter line), Indianapolis
 (bus rapid transit only), Jacksonville (a 2.5-mile people mover) and Las
@@ -946,46 +964,46 @@ dataset title**.
 
 # BY COUNTRY — for country-by-country implementation
 
-## ✅ Current by country — 2026-09-23
+## ✅ Current by country — 2026-09-27
 
-**This table is current. The Tier sections below it are the 2026-09-22 view,
-retained as evidence and NOT current** — they still say Spain is in progress,
-that Taiwan's geocoder is keyless, and that Hong Kong is blocked, all of which
-changed. When a tier below disagrees with this table or with the bands above,
-the tier is stale.
+**Rebuilt 2026-09-27 from the band tables above** (the 2026-09-23 version
+showed 30 built, Brazil as candidates and Japan in Band B). **The bands are
+the source; this table is a view of them.** When they disagree, the bands win
+and this table is stale. The Tier sections this table once replaced are in
+the evidence file.
 
-| Country | Built | Candidates | Band | What stands between it and the next city |
+| Country | Built | Candidates | Bands | What stands between it and the next city |
 |---|---|---|---|---|
-| 🇺🇸 United States | **9** | — | — | Complete for now |
-| 🇨🇦 Canada | **5** | — | — | **Complete** — the rest have no urban rail |
-| 🇲🇽 Mexico | **2** | — | — | Complete |
-| 🇪🇸 Spain | **2** | — | — | **Complete** — Valencia, Bilbao, Málaga, Sevilla measured out |
+| 🇺🇸 United States | **9** | **1** — Kansas City | T | Kansas City waits on Band T's group decision (deferred by the owner until the full tram list and the second-wave screens). Wave 2 re-screens the US |
+| 🇨🇦 Canada | **5** | — | — | Complete. Brampton waits on the Hurontario LRT (revisit mid-2027); Ottawa's food-only register is an open owner's call (Band C or discard) |
+| 🇲🇽 Mexico | **2** | **1** — Monterrey (Regional) | A | **Built on `worktree-monterrey`, unpushed**, for the owner's batch publish |
+| 🇪🇸 Spain | **2** | — | — | Complete — Valencia, Bilbao, Málaga, Sevilla measured out |
 | 🇮🇪 Ireland | **1** | — | — | Complete |
-| 🇮🇹 Italy | **2** | — | — | **Rome built 2026-09-24**, beside Milan; bespoke per city (a SUAP premises register and the national ANNCSU join). Turin discarded (its series stops in 2019); Naples and Messina in the open gap |
-| 🇫🇷 France | **5** | — | — | **Complete** — Rennes built 2026-09-23. Lyon discarded |
-| 🇨🇿 Czechia | **1** | — | — | **Prague built 2026-09-24**; the national modules (ROS02, RES, the CZ-NACE 2025 prefix taxonomy, the RUIAN join) are ready for a second city |
-| 🇩🇰 Denmark | **1** | — | — | **Copenhagen built 2026-09-24**; the national modules are ready for a second city. ✅ **Closed out**: published, and the Datafordeler account closed after publish (2026-09-24) |
-| 🇭🇰 Hong Kong | **1** | — | ✅ | Built 2026-09-24: FEHD's registers at FEHD's own CSDI points; the East Asia region |
-| 🇳🇴 Norway | **1** | — | — | **Oslo built 2026-09-24**; the national modules are ready for a second city |
-| 🇰🇷 South Korea | **1** | — | ✅ | Built 2026-09-25: seventeen citywide permit registers, the register's own building points, a Korean personal-name pass (`seoul.md`) |
-| 🇧🇷 Brazil | — | **9** — São Paulo, Rio, Salvador, Fortaleza, Belo Horizonte, Brasília, Recife, Porto Alegre, Santos | A | **Nothing but the builds** — one national source (IBGE CNEFE 2022), no geocoder. Briefs next, São Paulo and Rio first |
-| 🇹🇼 Taiwan | **3** | **1** — Kaohsiung | D | **Taichung, Taoyuan and Taipei (Regional) built 2026-09-25** (the national modules, the shared step 2, the `taiwan-city` skill). **No geocoder** — a door-plate JOIN at 91.8–95.5%. Nothing left build-ready; **Kaohsiung's address file is geo-blocked to Taiwan** |
-| 🇯🇵 Japan | — | **10** | B | The hardest geocode; **decided: last** |
-| 🇸🇪 Sweden | — | **2** — Stockholm, Göteborg | C | One owner decision (food-only pages) |
-| 🇨🇭 Switzerland | — | **1** — Zurich | C | The same decision |
-| 🇷🇴 Romania | — | **1** — Bucharest | C | The same decision, plus a browser-assisted fetch |
-| 🇸🇬 Singapore | — | **1** | C | **Parked on one fact** — NEA refreshing its 2016 register; indemnity held |
-| 🇳🇱 Netherlands | **1** | — | — | **Amsterdam built 2026-09-24** on the city's own API (permits + BAG shop units); a second Dutch city needs its own permit register - the BAG layer is national, the food layer is municipal |
-| 🇪🇬 Egypt | — | — | — | Cairo discarded 2026-09-24: no register at any level |
-| 🇵🇱 Poland | — | **1** — Warsaw | D | Geo-blocked before measurement; a read from inside Poland first (owner's call 2026-09-24) |
-| 🇮🇳 India | — | **1** — Hyderabad | D | Geo-blocked before measurement (owner's call 2026-09-24) |
-| 🇱🇻 Latvia | **1** — Riga | — | ✅ | Built 2026-09-24: excise food layer, cadastre shops and services, 7 tram routes, scoped vacancy disclosure; Europe keeps its zoom (owner) |
-| 🇵🇹 Portugal | — | **1** — Lisbon | D | The DGAE account (gated item 28); Porto would follow |
+| 🇮🇹 Italy | **2** | — | — | Milan and Rome, bespoke per city. Turin, Naples and Messina discarded |
+| 🇫🇷 France | **5** | **21** | T | Every one trams-only; waits on Band T's group decision. Lyon discarded |
+| 🇨🇿 Czechia | **1** | **6** — Brno, Ostrava, Plzeň, Olomouc, Liberec, Most + Litvínov | T | Band T's decision; `czechia_register.ruian()`'s coordinate control is per city now |
+| 🇩🇰 Denmark | **1** | **2** — Aarhus, Odense | T | Band T's decision; placement through OSM's DAR address points |
+| 🇳🇴 Norway | **1** | **1** — Bergen | T | Band T's decision; Oslo's modules unchanged, no other calls |
+| 🇱🇻 Latvia | **1** | **2** — Daugavpils, Liepāja | T | Band T's decision; VZD's address file needs its licence row |
+| 🇳🇱 Netherlands | **2** | **4** — Den Haag, Utrecht, Rijswijk, Delft | C | No current food register in any of the four (Utrecht's is partial); the Band C memo is with the owner |
+| 🇭🇰 Hong Kong | **1** | — | — | Built; the East Asia region |
+| 🇰🇷 South Korea | **1** | **7** — Daegu, Busan; Incheon, Gyeonggi satellites; Daejeon, Gwangju, Gimhae | A · C · D | **Daegu and Busan briefed 2026-09-27** and with Main Build, owner calls open in each. Incheon needs an address join; Gyeonggi's café file is unusable; the other three have no city portal |
+| 🇹🇼 Taiwan | **3** | **1** — Kaohsiung | D | Its door-plate file is geo-blocked to Taiwan |
+| 🇯🇵 Japan | — | **9** — Tokyo (8 wards), Osaka, Kobe, Sapporo, Fukuoka, Kyoto; Hiroshima, Yokohama; Sendai | A · C · D | Six build-ready on the block-level JOIN, each with a brief. Hiroshima food only, Yokohama personal services only, Sendai the city's permission |
+| 🇧🇷 Brazil | **9** | — | — | Built 2026-09-24 as one batch. Wave 2 re-screens the rest |
+| 🇸🇪 Sweden | — | **2** — Stockholm, Göteborg | C | Food only; the Band C memo |
+| 🇨🇭 Switzerland | — | **1** — Zurich | C | Food only; also trams only |
+| 🇷🇴 Romania | — | **1** — Bucharest | C | Food only, plus a browser-assisted fetch |
+| 🇸🇬 Singapore | — | **1** | C | Its food register is a 2016 snapshot |
+| 🇵🇱 Poland | — | **1** — Warsaw | D | Geo-blocked before measurement; a read from inside Poland first |
+| 🇮🇳 India | — | **1** — Hyderabad | D | Geo-blocked before measurement |
+| 🇵🇹 Portugal | — | **1** — Lisbon | D | The DGAE account (the owner is checking it); Porto would follow |
 | 🇫🇮 Finland | — | **1** — Helsinki | D | Geo-blocked; a read from inside Europe |
-| 🇪🇪 Estonia | — | **1** — Tallinn | D | Food register geo-blocked; the EHR order (gated item 23) |
-| 🇦🇹 Austria | — | — | — | Vienna discarded 2026-09-24 (no premises register at any level) |
-| 🇨🇱 Chile | — | — | — | Santiago discarded 2026-09-24 (coverage fails downtown) |
-| **Total** | **30** | **32** | | *(the open gap emptied 2026-09-24. ⚠️ Several rows above predate that day's builds and re-bands, Brazil and Japan among them, so this table is for the consistency sweep to refresh: trust the bands)* |
+| 🇪🇪 Estonia | — | **1** — Tallinn | D | Food register geo-blocked; the EHR order |
+| 🇦🇹 Austria | — | — | — | Vienna discarded (no premises register at any level). **Lead, unprobed: Linz publishes trade licences** (carried from Vienna's old open-gap row); Linz runs trams, so it would be Band T's shape |
+| 🇪🇬 Egypt | — | — | — | Cairo discarded (no register at any level) |
+| 🇨🇱 Chile | — | — | — | Santiago discarded (coverage fails downtown) |
+| **Total** | **46** | **65** | | A 9 · C 13 · T 33 · D 10. Sums checked against the band tables 2026-09-27 |
 
 ---
 

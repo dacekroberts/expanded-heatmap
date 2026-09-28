@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**26 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**27 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Master list after the split: Denver, Dallas and Brampton get discard rows; Ottawa is a data case, not a no-rail one; the by-country table rebuilt (owner, via Cleanup)](#2026-09-27---master-list-after-the-split-denver-dallas-and-brampton-get-discard-rows-ottawa-is-a-data-case-not-a-no-rail-one-the-by-country-table-rebuilt-owner-via-cleanup)
 - [Efficiency findings 4, 5 and 7 acted on: renderer changes batch, the master list split and counted, city_shortlist.md retired, Kansas City to Band T (owner)](#2026-09-27---efficiency-findings-4-5-and-7-acted-on-renderer-changes-batch-the-master-list-split-and-counted-city_shortlistmd-retired-kansas-city-to-band-t-owner)
 - [Busan's brief: the API's state filter drops every permit since February 2025, large stores come only by id, and the frozen snapshot is genuine](#2026-09-27---busans-brief-the-apis-state-filter-drops-every-permit-since-february-2025-large-stores-come-only-by-id-and-the-frozen-snapshot-is-genuine)
 - [The pre-push hook's first run broke the shared git config; restored by the owner, and every check now runs without git's hook variables](#2026-09-27---the-pre-push-hooks-first-run-broke-the-shared-git-config-restored-by-the-owner-and-every-check-now-runs-without-gits-hook-variables)
@@ -59,6 +60,37 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Master list after the split: Denver, Dallas and Brampton get discard rows; Ottawa is a data case, not a no-rail one; the by-country table rebuilt (owner, via Cleanup)
+
+- **Three discard rows added from the archived record** (Cleanup's review
+  list, on the owner's instruction). Each passes `check_discard_evidence.py`:
+  - **Denver**: `measured`, no address, classification or geometry (2026-09-18).
+  - **Dallas**: `measured`, its only register stops in 2022 (2026-09-21).
+  - **Brampton**: `rail`, only GO commuter rail reaches it. Revisit mid-2027
+    for the Hurontario LRT.
+
+  Discards 37 → 40.
+- **Houston gets no row.** Its record is one line, "the same structural reason
+  (zero results)", which is a single search, so it sits with the search-level
+  screen-outs in prose.
+- **Ottawa was listed among the no-rail cities; it has 6 light-rail routes**
+  and was ruled out on data (food-safety inspections only, 697 catalogue
+  entries scanned). **That is Band C's food-only shape today**, since Band C was
+  created a day after Ottawa's ruling. So it gets no discard row: the owner
+  decides between Band C and a discard.
+- **"Current by country" rebuilt from the band tables**: 46 built, 65
+  candidates (A 9 · C 13 · T 33 · D 10), each country's row per band. It had
+  shown 30 built, Brazil as candidates and Japan in Band B. `check_master_list_counts.py`
+  does not read this table yet; suggested to Cleanup.
+- **The Linz lead** ("Linz publishes trade licences", unprobed) moved from the
+  evidence file into Austria's row. Linz is a tram city, so Band T's shape.
+- **Fixed a stale line**: Bucharest's section set its metro "against
+  Stockholm's … trams"; Stockholm has a metro (8 subway lines in the
+  kommune).
+- **Band T's group decision deferred by the owner** until the full tram list
+  exists and the second-wave screens are done (PLAN). The screens wait for
+  the 10pm reset or later, because wave 1 was very load-intensive.
 
 ### 2026-09-27 - Efficiency findings 4, 5 and 7 acted on: renderer changes batch, the master list split and counted, city_shortlist.md retired, Kansas City to Band T (owner)
 
