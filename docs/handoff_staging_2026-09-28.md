@@ -41,8 +41,9 @@ then follow the pointers. **Delete a section when its item is done.**
   sub-group** (11 cities) · **C closed**. Section order A, B, D, N, T. The chat
   republish format is in the owner's memory (`feedback_master_list_format.md`).
 - **`docs/global_transit_gap.md`**: every large-network city not built (23
-  discarded, 12 ruled out by country, 13 in a band, 35 never screened;
-  re-screened 2026-09-28: London to B, Dubai to D, Manila discarded) with
+  discarded, 11 ruled out by country, 14 in a band, 35 never screened;
+  re-screened 2026-09-28: London to B, Dubai to D, Manila discarded,
+  Istanbul to N) with
   the record's reason and a recommended re-screen order.
 - **`PLAN.md`**: "Second-city screens" (wave-2 follow-ups, regional add-ons,
   watch items) and the parked per-city prose review.
@@ -60,7 +61,6 @@ then follow the pointers. **Delete a section when its item is done.**
    at a time, light methods only. The owner asked for the list 2026-09-28 and
    is likely to steer here before the small tram and one-bucket builds.
    Propose each screen and its cost before running it. Recommended order:
-   - **Istanbul**: run the shortlist's never-run "second look" (open probe 8).
    - **Berlin; Munich, Frankfurt, Cologne**: enumerate the catalogues (Berlin
      rests on two keyword searches).
    - **Delhi, Mumbai**: ask the city hosts, not the national catalogue.

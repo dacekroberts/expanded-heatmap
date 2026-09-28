@@ -3181,7 +3181,9 @@ of first-class non-food establishments … on a district and sector basis"** —
 Economic Census: a statistic, not a register. Turkey has 24 feeds and Istanbul
 has one of the largest metro networks in Europe, so if a premises-level source
 exists elsewhere on that portal this flips — **ASSERTED that it does not**,
-based on one dataset.
+based on one dataset. ▼ **2026-09-28: now MEASURED across the whole
+catalogue and seven central districts; Band N (owner). See the probe list's
+item 8.**
 
 **Has a metro and feeds, business data unprobed:**
 
@@ -3305,7 +3307,16 @@ it to dominate the cost of any European profile.
    its own, but CDMX is the prize.
 8. **Istanbul, second look.** One dataset was aggregate; İBB's portal is large
    enough that a premises-level source may exist, and Istanbul's metro would
-   make it a strong candidate if one does.
+   make it a strong candidate if one does. ▼ **Run 2026-09-28: Band N
+   (owner).** All 557 public datasets on `data.ibb.gov.tr` were searched: the
+   only licence data is still the aggregate GSM table, and the one
+   premises-level private-business layer is the health-institutions dataset
+   (5,806 pharmacies, 1,672 opticians, 1,208 medical-supply shops, lat/lon),
+   frozen at 2024-03 and noted as "subject to a fee". Shops, restaurants and
+   salons are licensed by the 39 districts: Kadıköy (160 datasets) publishes
+   counts only, Üsküdar 7 unrelated datasets, and Beşiktaş, Şişli, Beyoğlu,
+   Fatih and Bakırköy have no open-data host. No open address layer. Rail
+   is strong in OSM (M1A–M11, 177 named stations; T1–T5).
 9. **Chile's municipal portals directly**, rather than the national
    aggregator — Santiago's national-portal copy is a decade stale, which says
    nothing about what the municipality publishes today.

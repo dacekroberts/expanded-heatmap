@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**96 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**97 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Istanbul's second look run: Band N, pharmacies and opticians only (owner)](#2026-09-28---istanbuls-second-look-run-band-n-pharmacies-and-opticians-only-owner)
 - [Dubai and Manila re-screened from the large-transit gap: Dubai to Band D, Manila discarded (owner)](#2026-09-28---dubai-and-manila-re-screened-from-the-large-transit-gap-dubai-to-band-d-manila-discarded-owner)
 - [London re-screened from the large-transit gap: Band B, food only (owner)](#2026-09-28---london-re-screened-from-the-large-transit-gap-band-b-food-only-owner)
 - [Worktrees `main-build` and `tokyo-sources` retired (owner)](#2026-09-28---worktrees-main-build-and-tokyo-sources-retired-owner)
@@ -132,6 +133,38 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Istanbul's second look run: Band N, pharmacies and opticians only (owner)
+
+- **Moved Istanbul to Band N (no page for now) rather than discarding it
+  (owner's call).** The 2026-09-21 record ASSERTED from one aggregate dataset
+  that İBB publishes no premises-level source; the shortlist's probe 8 (a
+  second look) had never been run. Run now on light methods only:
+  `data.ibb.gov.tr` lists 564 datasets (557 public, 57 organisations), and
+  every one was searched on titles, notes, tags and resource names. The only
+  licence data is still the aggregate GSM count table. The one premises-level
+  private-business layer is the health-institutions dataset, with 5,806
+  pharmacies, 1,672 opticians and 1,208 medical-supply shops, each with
+  lat/lon and a street address. It is frozen at 2024-03, its notes say it "is
+  subject to a fee and will not be updated", and pharmacy names are often
+  the pharmacist's own. The other premises layers are İBB's own outlets,
+  fuel stations with anonymised names, and whole street markets.
+- **The districts license the storefronts, and none of them publishes a
+  list.** Ordinary shops, restaurants and salons get their işyeri licence
+  from the 39 district municipalities. Kadıköy (160 datasets, CC BY 4.0)
+  publishes counts only and Üsküdar has 7 unrelated datasets. Beşiktaş,
+  Şişli, Beyoğlu, Fatih and Bakırköy have no open-data host, only e-belediye
+  logins and GIS viewers. The Ministry of Agriculture's register sits behind
+  a CAPTCHA. No open address layer exists to join to.
+- **N was chosen over a discard because the row names what would reopen
+  it:** a central district publishing its licence list in bulk. A
+  pharmacy-and-optician map is not a storefront page, the same judgment as
+  Yokohama's personal-services-only row. Rail is strong in OSM: M1A–M11 with
+  177 named stations, T1–T5 with 156 stops, and funiculars F2 and F3; whether
+  to draw Marmaray (tagged train) is a question for a build. Files:
+  `docs/city_master_list.md`, `docs/global_country_shortlist.md` (probe 8,
+  the Istanbul paragraph), `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - Dubai and Manila re-screened from the large-transit gap: Dubai to Band D, Manila discarded (owner)
 

@@ -47,23 +47,23 @@ negative, kept out.
 | Medellín | CO | 6 relations | "Three closed doors" |
 | Honolulu | US | Skyline (small) | No premises register |
 
-## Country ruled out (12) - "Countries ruled out" and the shortlist
+## Country ruled out (11) - "Countries ruled out" and the shortlist
 
 | City | Country | Network | Why not covered |
 |---|---|---|---|
 | Moscow, St Petersburg | RU | 250+ / 72 stations (kn) | Excluded: sanctions and access |
 | Newcastle, Glasgow | UK | 60 / 15 stations (kn) | Recorded as "NNDR carries no category"; **wrong** (London's re-screen, 2026-09-28): the VOA list has a description and is ruled out by its terms. The FSA food register is untested for either city |
-| Istanbul | TR | 200+ stations (kn) | Aggregate counts per district, **ASSERTED on one dataset** |
 | Melbourne, Sydney, Perth | AU | ~220 / 170+ / 80 stations (kn) | Licensing not municipal, **ASSERTED** |
 | Brussels | BE | 69 stations (kn) | Bulk access paid |
 | Kyiv | UA | 52 stations (kn) | Excluded for now: active war |
 | Auckland | NZ | commuter 5 | Commuter only; licensing not municipal |
 | Algiers | DZ | 1 metro line + trams (kn) | Filed under "no urban rail at all" - **wrong**; it has a metro |
 
-## In a band, not built (13)
+## In a band, not built (14)
 
 | City | Country | Network | Band and blocker |
 |---|---|---|---|
+| Istanbul | TR | M1A–M11, 177 stations; T1–T5 | N - pharmacies and opticians only; the districts publish no licence lists (re-screened 2026-09-28, owner) |
 | Dubai | AE | Metro Red and Green, 64 stations; tram | D - every host of its licence register refuses this machine (re-screened 2026-09-28, owner) |
 | London | UK | 272 stations (kn) | B - food only on the FSA register (re-screened 2026-09-28, owner); no second layer covers central London |
 | Tokyo (8 wards) | JP | 330 stations | A - the Tokyo build session; only Shibuya's list is complete, Chiyoda's ledger requested |
@@ -100,8 +100,8 @@ Recommended first for re-screening (the staging handoff's priority 1):
    master list's Band B and the shortlist's United Kingdom row.
 2. ~~**Dubai and Manila**~~ - **done 2026-09-28** (owner): Dubai to Band D
    (blocked before measurement), Manila discarded (no business list).
-3. **Istanbul** - rests on one dataset marked ASSERTED; the shortlist's own
-   "second look" (open probe 8) was never run.
+3. ~~**Istanbul**~~ - **done 2026-09-28: Band N** (owner), pharmacies and
+   opticians only.
 4. **Berlin** (two keyword searches) and **Munich, Frankfurt, Cologne** (never
    screened).
 5. **Delhi and Mumbai** - only the national catalogue was read.
