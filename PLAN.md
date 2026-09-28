@@ -96,6 +96,8 @@ Desktop is unaffected — the label is fully visible there.
     `pipeline.osm.fetch`**, not the scratch `ovp.py`: since 2040dfc it refuses
     an all-zero `out count` answer, which the wave-1 scratch fetcher accepted
     (Amstelveen's density is still unmeasured for that reason).
+    - **Both load tables, as republished, are saved in
+      `docs/load_estimates.md`** (tram rescopes and wave 2).
     - **Estimated load (2026-09-27, judgement; wave 1's cost was never
       recorded)**: about **80–130% of one 5-hour window** (roughly 10–16% of
       the weekly limit), so probably more than one window. The 5-hour window
