@@ -32,7 +32,9 @@ dense-looking city may simply have more complete records.
   Chicago, Philadelphia, Miami, Washington D.C., Vancouver/Surrey, Calgary, Edmonton,
   Toronto, Milan (six premises registers), Rome (SUAP authorisations).
 - **Assembled from several activity-specific registers:** New York (4), Boston (3),
-  and the Korean permit registers: Seoul (17 types), Daegu (14), Busan (14).
+  and the Korean permit registers: Seoul (17 types), Daegu (14), Busan (14). The
+  Japanese cities too: Kobe and Osaka each join the city's food-permit list to its
+  barber, beauty-salon and laundry registers (4).
 - **Street surveys or censuses of premises:** Montréal, Madrid, Barcelona, and the
   nine Brazilian cities (IBGE's 2022 census walk).
 - **National statistical or establishment registers:** Mexico City, Guadalajara and
@@ -77,7 +79,9 @@ the city, they run like a metro: stations about a kilometre apart, frequent trai
 and districts no metro reaches.
 - **Included:** Dublin (DART), Copenhagen (S-tog, 7 lines), Rome (the Roma–Viterbo
   line's urban section), São Paulo (CPTM Linha 9), Rio de Janeiro (SuperVia's Deodoro
-  and Saracuruna lines).
+  and Saracuruna lines), Kobe and Osaka (JR and the private railways, cut at the
+  city line; an owner call of 2026-09-24, recorded in the `japan-city` skill, not
+  the line-by-line test below).
 - **Excluded by name:** BART and Caltrain, Metra, Metrolink, Coaster/Sprinter, SEPTA
   Regional Rail, MBTA Commuter Rail, Tri-Rail, GO Transit, West Coast Express,
   Cercanías, Milan's Passante and Trenord, Iarnród Éireann Commuter/InterCity, RER and
@@ -100,7 +104,8 @@ run on top of a metro network.
   Marseille, Toulouse, Lille, Oslo, Amsterdam, Rotterdam, Rio (VLT), Santos (VLT),
   Hong Kong (Light Rail), Riga (its trams are the whole network), Montréal (the
   REM, an automated light metro), Rome (tram 8, thinned), Madrid (Metro Ligero
-  ML1), Paris (T3a and T3b); these last four from 2026-09-27.
+  ML1), Paris (T3a and T3b); these last four from 2026-09-27. Osaka (the Hankai
+  tram, Hankai and Uemachi lines).
 - **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Toronto's 18 streetcar routes, Milan (17 routes), Barcelona,
   Paris (all but T3a and T3b; T2 and T9 are stubs), Prague, Rome (all but tram
   8), Madrid (Metro Ligero ML2 and ML3, stubs), Copenhagen (the Letbane has no stop in
@@ -108,7 +113,9 @@ run on top of a metro network.
 - **Other modes on the map:** Toulouse's Téléo cable car, Barcelona's two
   funiculars, São Paulo's Linha 15 monorail, Miami's Metromover (automated people
   mover), Daegu's Line 3 monorail, Busan's Line 4 (a rubber-tyred light metro, which
-  OSM tags `route=monorail`) and the Busan–Gimhae LRT (an automated light metro).
+  OSM tags `route=monorail`) and the Busan–Gimhae LRT (an automated light metro),
+  Kobe's Port Liner and Rokkō Liner and Osaka's New Tram (automated guideway lines).
+  Kobe's Maya and Rokkō cable cars are not drawn.
 - **Reason:** "is the tram the rapid-transit system, or an overlay on one?", later
   widened to "does it serve corridors the metro does not?" (DEC, Oslo and Rotterdam
   entries). See Open questions 9 and 10: the stated reasons differ between cities.
@@ -125,7 +132,8 @@ register covers them all, or because the rail network only makes sense that way.
   authorities), Copenhagen (with Frederiksberg).
 - **Regional maps that count a municipality with no station:** Fortaleza (Caucaia),
   Recife (Cabo de Santo Agostinho). Guadalajara leaves out Tonalá for having none.
-- **Lose the most stations to the boundary:** Paris (76), Copenhagen (59), Washington
+- **Lose the most stations to the boundary:** Seoul (223), Paris (76), Osaka (76),
+  Copenhagen (59), Washington
   D.C. (58), Los Angeles (54), Rotterdam (52), Barcelona (50), Madrid (49), Boston (43).
 - **Reason:** a register covers one jurisdiction, so rings outside it would read as
   empty. The French cities keep to the commune so that they stay comparable with one
@@ -145,11 +153,11 @@ other cities.
 **Reader sentence:** On some maps nearly every shop is inside a station ring; on
 others most of the city is beyond walking distance of the network. That depends on
 how far the network reaches, not on the data.
-- **90% or more inside the rings:** Barcelona 100%, Paris 98%, Amsterdam 96%, Madrid
-  95%, Copenhagen 94%, Rotterdam 93%.
-- **Under 25%:** Miami 13%, Brasília 14%, Fortaleza 14%, Belo Horizonte 18%, Salvador
-  19%, Porto Alegre 20%, Edmonton 22%, São Paulo 23%, Recife 23%, Los Angeles 24%,
-  San Diego 24%.
+- **90% or more inside the rings:** Barcelona 100%, Paris 98%, Osaka 98%, Amsterdam
+  96%, Madrid 95%, Copenhagen 94%, Seoul 94%, Rotterdam 93%, Hong Kong 91%.
+- **Under 25%:** Taoyuan 12%, Miami 13%, Brasília 14%, Fortaleza 14%, Belo Horizonte
+  18%, Salvador 19%, Taichung 19%, Porto Alegre 20%, Edmonton 22%, São Paulo 23%,
+  Recife 23%, Los Angeles 24%, San Diego 24%.
 - **Reason:** network extent against the area in scope. Share = in-ring heat points ÷
   all-storefront heat points in each committed map.
 
@@ -176,9 +184,11 @@ a few sources are older: a 2022 census, a 2022 street survey, a July 2025 regist
 - **Older as-of dates:** the nine Brazilian cities (2022 census fieldwork), Barcelona
   (2022 survey; the 2024 survey is incomplete), Montréal (2025 survey), Rome (July
   2025 file, the newest published), Prague (establishments as of 2026-08-31), Daegu
-  (a 2026-08 edition whose rows end 2025-08-31), Busan (the feed froze 2026-04-15).
+  (a 2026-08 edition whose rows end 2025-08-31), Busan (the feed froze 2026-04-15),
+  Kobe (permits in force 2026-03-31), Osaka (food permits 2026-06-30, the other
+  registers 2026-03-31).
 - **Date of the business data shown on the page:** Barcelona, Copenhagen, Prague,
-  Amsterdam, Rome, the Brazilian cities, Rotterdam, Daegu, Busan.
+  Amsterdam, Rome, the Brazilian cities, Rotterdam, Daegu, Busan, Kobe, Osaka.
 - **Only the transit date shown:** Paris, Marseille, Toulouse, Lille, Rennes, Oslo.
 - **No date shown:** the nine US cities, the five Canadian, the three Mexican, Madrid,
   Dublin, Milan.
@@ -197,13 +207,15 @@ really shopfronts. Several pages say which way their map leans.
   (4.3% unmatched); Riga's food layer (only premises licensed to sell alcohol or tobacco); Prague (about 57,000 establishments whose owner's main activity is
   something else); Miami (repair and service premises); Mexico City, Guadalajara and
   Monterrey (street stalls); Copenhagen (tattoo studios); Chicago (licences with no
-  coordinates).
+  coordinates); Kobe and Osaka (food businesses that only notify the city hold no
+  permit and are absent; Osaka's list holds about 70% of the restaurant permits
+  Osaka reports nationally).
 - **Overcounts, or best read as upper bounds:** Milan (the six registers are not
   merged, so a business can count twice); Rome and Rotterdam (no closing dates, or a
   five-year permit window); Riga's shops (the cadastre records use, not occupancy); the SIRENE, Oslo, Copenhagen and Prague registers
   (registered premises that may have no shopfront, including web shops); Edmonton
   (about 1 in 16 Personal services pins is a clinic); Amsterdam and Rotterdam (empty
-  shop units cannot be removed).
+  shop units cannot be removed); Kobe and Osaka (closed premises may remain listed).
 - **Undisclosed on the city page:** San Francisco (only about 37% of rows carry a
   NAICS code) and Los Angeles (about 9% carry none), so both are floors. San Diego
   undercounts neighbourhoods registered under their own name. All three are open
@@ -223,7 +235,8 @@ classifies or licenses them.
 - **Adult premises:** body-rub and similar premises are excluded on sensitivity in
   Calgary, Edmonton, Toronto and Vancouver. UNKNOWN for other cities.
 - **Street stalls:** excluded in Mexico City, Guadalajara and Monterrey; market-stall trading is
-  excluded by code in France.
+  excluded by code in France; food trucks and stalls (permits valid city-wide) are
+  excluded in Kobe and Osaka.
 - **Web shops:** excluded by code in France; cannot be excluded in Oslo, Copenhagen or
   Prague.
 - **One premises with several licences:** counted once almost everywhere; counted
@@ -329,7 +342,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 |---|---|---|---|---|---|
 | **United States** | | | | | |
 | San Diego | Tax register | Business Tax Certificates | NAICS | 1,079 / 655 / 843 | Undercount: neighbourhoods registered under own name (PLAN) |
-| San Francisco | Licence register | Registered Business Locations | NAICS | 4,855 / 5,403 / 2,118 | Floor: about 37% of rows have NAICS (DEC) |
+| San Francisco | Licence register | Registered Business Locations | NAICS | 5,065 / 5,568 / 2,159 | Floor: about 37% of rows have NAICS (DEC) |
 | Los Angeles | Tax register | Listing of Active Businesses | NAICS | 8,069 / 3,922 / 2,028 | Floor: about 9% of rows lack NAICS (DEC) |
 | Chicago | Licence register | Business Licenses | Own licence types | 5,461 / 4,196 / 2,139 | — |
 | New York | 4 activity registers | DOHMH, NYS food stores, NYS salons, DCWP | Per-source dispatch | 14,822 / 22,060 / 7,478 | Retail thin |
@@ -339,7 +352,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Washington D.C. | Licence register | Basic Business License | Own BUSINESSACTIVITY | 897 / 2,603 / 360 | "Delicatessen" (1,065) ambiguous, counted as Food |
 | **Canada** | | | | | |
 | Vancouver (Regional) | 2 licence registers | Vancouver licences; Surrey directory | Own types (both) | 1,847 / 1,867 / 954 | — |
-| Montréal | Street survey | Locaux commerciaux (annual) | NAICS (SCIAN = NAICS) | 4,481 / 3,856 / 1,396 | Edge municipalities thinner in the survey |
+| Montréal | Street survey | Locaux commerciaux (annual) | NAICS (SCIAN = NAICS) | 4,852 / 4,070 / 1,499 | Edge municipalities thinner in the survey |
 | Calgary | Licence register | Business Licences | Own licencetypes | 1,977 / 2,869 / 1,325 | Food over Retail (dual-licence rule) |
 | Edmonton | Licence register | Business Licences | Own licence categories | 1,034 / 922 / 416 | Personal services overstated (clinics) |
 | Toronto | Licence register | MLS licences | Own MLS category | 328 / 6,461 / 1,950 | Retail = regulated slice only |
@@ -348,15 +361,15 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Guadalajara (Regional) | National statistical register | INEGI DENUE | SCIAN | 26,341 / 6,723 / 3,861 | Street stalls excluded |
 | Monterrey (Regional) | National statistical register | INEGI DENUE | SCIAN | 10,164 / 3,108 / 1,516 | Street stalls excluded |
 | **Spain** | | | | | |
-| Madrid | Premises census | Censo de locales | Own epígrafe | 26,109 / 16,151 / 8,032 | — |
+| Madrid | Premises census | Censo de locales | Own epígrafe | 26,189 / 16,238 / 8,070 | — |
 | Barcelona | Street survey (2022) | Cens de locals en planta baixa | Own 4-level scheme (finest level) | 20,287 / 9,976 / 5,673 | 458 mixed retail/wholesale rows dropped |
 | **Ireland** | | | | | |
 | Dublin | Property register | Rateable valuation list | Register's own "Uses" | 5,338 / 1,703 / 554 | — |
 | **Italy** | | | | | |
 | Milan | 6 licence registers | Comune di Milano premises registers | Register = category | 24,793 / 11,738 / 4,979 | Canteens and clubs partly left in Food |
-| Rome | Authorisation register | SUAP | Own authorisation types | 32,915 / 12,690 / 7,290 | Workshops with no trade missing |
+| Rome | Authorisation register | SUAP | Own authorisation types | 38,121 / 14,534 / 8,084 | Workshops with no trade missing |
 | **France** | | | | | |
-| Paris | National establishment register | SIRENE + INSEE geolocation | NAF rév. 2 (sous-classe) | 40,233 / 32,281 / 11,611 | — |
+| Paris | National establishment register | SIRENE + INSEE geolocation | NAF rév. 2 (sous-classe) | 40,771 / 32,871 / 11,859 | — |
 | Marseille | same | same | same | 4,558 / 3,852 / 1,603 | — |
 | Toulouse | same | same | same | 2,438 / 2,162 / 953 | — |
 | Lille (Regional) | same | same | same | 3,166 / 2,942 / 1,097 | — |
@@ -550,7 +563,8 @@ project-chosen), Edmonton (darkened), Toronto (Line 2 darkened), Oslo (two light
 tram 15 assigned), Copenhagen (A and F lightened), Prague (A lightened), Amsterdam
 (5 tram lines adjusted), Rome (B1 lightened), Lille (Tram T darkened), Rio (a few
 lightened), Rotterdam (trams 1 and 11 separated), Salvador (colours from line names;
-OSM has none). Source: each page's prose.
+OSM has none), Paris (T3a and T3b lightened), Kobe and Osaka (all project-chosen).
+Source: each page's prose.
 
 ---
 
@@ -610,8 +624,8 @@ wording lands at review time.
 11. **Madrid's Metro Ligero** is left out "so the city ships one agency's rail
     system" (`pipeline/madrid/config.py:92–96`). That is not the tram test, and it
     appears neither on the Madrid page nor in EC. *(2026-09-27: ML1 is now drawn;
-    ML2 and ML3 are left out as stubs, owner's call. The page and EC still need
-    the sentence.)*
+    ML2 and ML3 are left out as stubs, owner's call. The page now says so;
+    checked 2026-09-28, EC still does not name ML2 or ML3.)*
 12. **Cable cars and unmentioned systems.** Toulouse establishes that "cable car" is
     not a reason to exclude. Mexico City's Cablebús and Tren Suburbano, and
     Montréal's REM and exo, are not mentioned in any file read. Unknown whether they
