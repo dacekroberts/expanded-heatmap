@@ -1675,6 +1675,28 @@ stations outside the agglomeration removed, two merged with same-named Métro
 stations) and disclaims endorsement. The STM credit beside it (13) still reads "Métro
 route geometry", which stays true.
 
+**52. Osaka City and MLIT (Osaka) — required, and DISPLAYED** (written into
+`render_site_notices()`; displayed once Osaka lands, after Kobe).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-09-24; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)).
+- **Osaka City's lists are CC BY 4.0.** Each of the three source pages says
+  「CC-BY4.0で提供いたします。」, re-read 2026-09-27. The city's terms are
+  政府標準利用規約 2.0, usable equally under CC BY 4.0.
+- **The credit** uses the city's example form, one title per page:
+  `「食品営業許可施設一覧」（大阪市）（…/0000575579.html）`,
+  `「理容所及び美容所の開設施設一覧」（大阪市）（…/0000431136.html）` and
+  `「クリーニング所の開設施設一覧」（大阪市）（…/0000552712.html）`, then
+  `を加工して作成`, with the licence linked.
+- **MLIT's 位置参照情報 and N02** are PDL 1.0, credited as in 50. N03 (CC BY
+  4.0) only picks stations and is **never drawn**.
+- **MUST NOT**: present the map as the city's own; use city logos; say the pins
+  are businesses open now.
+- Wording approved by the owner 2026-09-28.
+- **MUST DO:** `check_personal_exposure.py osaka` with its Japan pass, run
+  2026-09-27: 0 operator names shown, 9 withheld. The verdict is in
+  `DECISIONS.md`.
+
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1
 drawn": ML1 comes from CRTM's `M10_Red` (same licence, same 5 June 2026 edit date).

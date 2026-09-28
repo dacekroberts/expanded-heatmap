@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**61 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**62 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-09-28**
+
+- [Osaka's page, notice 52 and scope section written as approved (owner)](#2026-09-28---osakas-page-notice-52-and-scope-section-written-as-approved-owner)
 
 **2026-09-27**
 
@@ -94,6 +98,31 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Osaka's page, notice 52 and scope section written as approved (owner)
+
+- **The owner approved Osaka's write-ups as drafted.** Four went in:
+  - **The page prose** (`app/pages/51_Osaka_Heatmap.py`). Its 70% paragraph
+    is the owner's 2026-09-24 wording, verbatim. The draft dropped that
+    wording's last sentence ("The 2,149 permits with no fixed address are not
+    mapped"): the count was stale (2,150), and the food-truck sentence already
+    says it without a number.
+  - **Notice 52, "Osaka City and MLIT (Osaka)"** (`app/components.py`,
+    `docs/data_sources.md`). It names the city's three pages by their own
+    titles, re-read live 2026-09-27: 食品営業許可施設一覧,
+    理容所及び美容所の開設施設一覧 and クリーニング所の開設施設一覧. It is in
+    the city's example form, with CC BY 4.0 linked and the MLIT credits as in
+    Kobe's notice 50.
+  - **The `excluded_categories.md` section.**
+  - **The `cities.py` blurb.**
+  The master-list move and the inconsistency rows land in the same commit.
+- **Checks: `check_all.py` 19 of 19** after regenerating README's city list.
+  The scope disclosure, provenance (52 numbered) and registry checks pass, the
+  lean-venv import check is clean, and no TODOs are left. One local render
+  shows the page prose, the Osaka credit in the notices and the map frame. Its
+  first load missed the new notice because Streamlit cached `components.py`
+  from before the edit; after a server restart it was there. That is the
+  deploy's own reboot rule, seen locally.
 
 ### 2026-09-27 - Osaka pipeline built on the shared Japanese steps: Japan's second city, the owner's calls, and what the shared code learned
 

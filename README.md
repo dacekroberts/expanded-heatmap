@@ -32,7 +32,7 @@ Mapped so far:
 - **Latvia:** Riga
 - **South Korea:** Seoul, Daegu, Busan
 - **Taiwan:** Taichung, Taoyuan, Taipei (Regional)
-- **Japan:** Kobe
+- **Japan:** Kobe, Osaka
 <!-- CITIES:END -->
 
 The list the app itself reads is `app/cities.py`.

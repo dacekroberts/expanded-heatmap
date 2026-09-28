@@ -1177,6 +1177,23 @@ _NOTICES = [
      "around stations. The list may include premises that have closed. The City of Kobe and MLIT "
      "did not make and do not endorse this map.",
      False),
+    # Osaka (notice 52): the city's three lists are CC BY 4.0 (each source page:
+    # 「CC-BY4.0で提供いたします。」, read 2026-09-24 and again 2026-09-27), in
+    # the city's prescribed 「…」（大阪市）（URL）を加工して作成 form, one title per
+    # page; MLIT as in Kobe's. The map must not look like the city's own.
+    # Wording approved by the owner 2026-09-28.
+    ("Osaka City and MLIT (Osaka)",
+     "Osaka's businesses: 「食品営業許可施設一覧」（大阪市）"
+     "（https://www.city.osaka.lg.jp/kenko/page/0000575579.html）、「理容所及び美容所の開設施設一覧」"
+     "（大阪市）（https://www.city.osaka.lg.jp/kenko/page/0000431136.html）、「クリーニング所の開設施設一覧」"
+     "（大阪市）（https://www.city.osaka.lg.jp/kenko/page/0000552712.html）を加工して作成 "
+     "([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). Their locations: "
+     "出典：位置参照情報ダウンロードサービス（国土交通省）（https://nlftp.mlit.go.jp/isj/）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). This project selected the storefront permit "
+     "types, placed each premises by its address, and counted them around stations. The lists may "
+     "include premises that have closed. Osaka City and MLIT did not make and do not endorse this map.",
+     False),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

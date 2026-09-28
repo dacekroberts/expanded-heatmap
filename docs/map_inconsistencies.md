@@ -65,6 +65,7 @@ services. A few cannot, because the local records never cover that trade.
   Kobe: Retail is food retail only (bakeries and confectioners, delis, butchers,
   fishmongers), because Japan licenses no other shop - 2,619 pins inside the rings
   against 16,980 Food service; food businesses that only notify the city are absent too.
+  Osaka the same: 6,418 Retail pins inside the rings against 50,109 Food service.
 - **Retail and Personal services merged into "Shops and services":** Amsterdam,
   Rotterdam, Riga. The building register records a unit's intended use, not its trade.
 - **Reason:** the city does not license that trade, or the source cannot tell the two
@@ -165,7 +166,8 @@ name at their home.
 - **Brazil:** the census enumerator's description, not a trade name; only the category
   where the address is also a home (35–69% of dots, by city).
 - **Type in place of a personal name:** Vancouver/Surrey (88 pins). Kobe (10 pins: a
-  trade name that is the operator's own name shows its permit type).
+  trade name that is the operator's own name shows its permit type). Osaka (9 pins,
+  the same rule, applied to every permit at the premises).
 - **Reason:** the source has no name column, or a privacy rule.
 
 ### 9. The data dates from different years, and not every page says when
@@ -318,6 +320,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Taipei (Regional) | Taipei Metro 5 lines + 2 branches, Circular, Sanying, Danhai and Ankeng LRT, Airport MRT | Taiwan Railway, high-speed rail, Maokong Gondola | OpenStreetMap (gate 3 exact on Taipei Metro's lines) | Two cities | 15 / 0 |
 | **Japan** | | | | | |
 | Kobe | Subway (Seishin-Yamate, Hokushin, Kaigan), Port Liner, Rokkō Liner, JR Kobe / Wadamisaki / Takarazuka, Hankyu Kobe, Hanshin Main, Sanyō Main, Kobe Kōsoku, Kobe Electric Arima / Sanda / Ao (15 lines) | Shinkansen, Maya and Rokkō cable cars | MLIT N02 railway data, collapsed on its station-group code; English names from OSM (gate 3 exact on the six in-city lines) | City (JR and private railways cut at the city line) | 32 / 0 |
+| Osaka | Osaka Metro (Midōsuji, Tanimachi, Yotsubashi, Chūō, Sennichimae, Sakaisuji, Nagahori Tsurumi-ryokuchi, Imazatosuji), New Tram, JR Osaka Loop / Kyoto / Kobe / Tōzai / Gakkentoshi / Osaka Higashi / Yumesaki / Yamatoji / Hanwa, Hankyu Kobe / Takarazuka / Kyoto / Senri, Hanshin Main / Namba, Keihan Main / Nakanoshima, Kintetsu Namba / Osaka / Minami-Osaka, Nankai Main / Kōya / Shiomibashi, Hankai tram Hankai / Uemachi (34 lines) | Shinkansen; the Umeda freight track from Umekita to Fukushima (limited expresses only) | MLIT N02 railway data, collapsed on its station-group code and split into public lines by branch walks; English names from OSM, two from the operators' signs (gate 3 exact on ten lines) | City (JR and private railways cut at the city line; a station straddling it counts if any platform is inside) | 76 / 0 |
 
 ### B. Business data (dimensions 4–6)
 
@@ -390,6 +393,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Taipei (Regional) | National tax register | FIA business tax register | Industry code division | 55,274 / 35,125 / 13,188 | Market stalls unplaced (about 3,600) |
 | **Japan** | | | | | |
 | Kobe | Permit register | City food-permit list + barber, beauty and laundry registers | Permit type (営業の種類) | 2,619 / 16,980 / 4,186 | Retail is food only (no general licence in Japan); notification-only food businesses (届出) absent |
+| Osaka | Permit register | City food-permit list + barber, beauty and laundry registers | Permit type (業種分類) | 6,418 / 50,109 / 15,145 | Retail is food only (no general licence in Japan); notification-only food businesses (届出) absent; the list holds about 70% of the restaurant permits Osaka reports nationally (disclosed, owner-approved wording) |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -454,6 +458,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Taipei (Regional) | Address join to each city's door plates (Taipei 91.8%, New Taipei 95.0%) | Market and viaduct stalls unplaced | Online shopping; office-like head offices; unmarked sole proprietors shown by industry |
 | **Japan** | | | |
 | Kobe | Address join to MLIT's address blocks (97.3% block, 2.4% district centre; 85 unplaced) | Rokkō-san mountain addresses unplaced; closed premises may remain listed | Food trucks and stalls (市内一円); manufacturing except 菓子 / そうざい; vending; institutional catering; a trade name that is the operator's own name shown by permit type |
+| Osaka | Address join to MLIT's address blocks (99.1% block, 0.8% district centre; 13 unplaced), checked against the list's own coordinates (median 38 m) | 上町's lettered blocks unplaced; closed premises may remain listed | Food trucks and stalls (市内一円); manufacturing except 菓子 / そうざい; vending; linen-supply laundries; a trade name that is the operator's own name shown by permit type, per premises |
 
 ### D. Vintage and map features (dimensions 10–11, plus two added)
 
@@ -529,6 +534,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Taipei (Regional) | Register daily, dated 2026-09-25; door plates 2026-09 editions (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 78% | Trade name in Chinese, or the line of business (17,890) |
 | **Japan** | | | | | | |
 | Kobe | Permits in force 2026-03-31 (fetched 2026-09-24) | B (in the prose) | 0.6 mi | Yes | 87% | Trade name in Japanese, or the permit type (10) |
+| Osaka | Food permits as of 2026-06-30, registers 2026-03-31 (fetched 2026-09-24) | B (in the prose) | 0.6 mi | Yes | 98% | Trade name in Japanese, or the permit type (9) |
 
 Features every map shares, so not a difference: permanent line labels and a legend
 entry for every line; rings start switched off; OSM basemap credit; the site-wide

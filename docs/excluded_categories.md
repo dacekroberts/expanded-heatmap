@@ -1755,6 +1755,52 @@ file, not a business open today.
 beyond it, in Akashi, Miki, Ashiya, Sanda, Takarazuka, Harima and Nishinomiya, are left out. Not
 drawn: the Shinkansen (Shin-Kobe is kept as a subway station) and the Maya and Rokkō cable cars.
 
+### Osaka - the city's food permits and 生活衛生 registers, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business licence,
+  so none is published.
+- Food businesses that only notify the city (届出: many convenience stores and
+  greengrocers).
+- Food manufacturing other than bakeries and confectioners (菓子) and delis
+  (そうざい): 1,502 rows.
+- 138 vending machines.
+- 2,157 food trucks, stalls and mobile salons registered to trade anywhere in
+  the city (市内一円).
+- 38 linen-supply laundries (リネンサプライ), industrial rather than counters
+  (owner, 2026-09-27).
+
+**Counted, and measured** - 151 of the 4,227 bakery, confectioner and deli rows
+(3.6%) carry a trade name that reads as a factory or central kitchen; they are
+kept (owner, 2026-09-24).
+
+**Not placed** - 13 rows (0.02%): addresses in 上町's lettered blocks, and two
+that name no real block. Another 637 are placed at their district's centre.
+Against the coordinates the city publishes beside each permit, the block point
+sits a median 38 m away, and 98.7% sit within 250 m.
+
+**Names not shown** - 9 premises whose trade name is the operator's own name
+are shown by their permit type. The owner's rule is applied to every permit at
+the premises.
+
+**The list against national statistics** - Osaka City's published list holds
+about 70% of the restaurant permits Osaka reports to national statistics; the
+page gives the owner-approved explanation.
+
+**Closed premises** - the list may keep premises that have closed; a dot is a
+permit on file, not a business open today.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: the stations beyond it, in Sakai, Higashiōsaka, Suita, Yao,
+  Moriguchi, Kadoma, Matsubara, Toyonaka, Settsu, Habikino, Daitō and
+  Fujiidera.
+- Kept: Taishibashi-Imaichi, whose Tanimachi Line platform is in the city and
+  whose Imazatosuji Line platform is in Moriguchi (owner).
+- Not drawn: the Shinkansen (Shin-Osaka is kept as a JR and Metro station), and
+  the Umeda freight line's track from the Umekita platforms to Fukushima, which
+  only limited expresses use.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found
