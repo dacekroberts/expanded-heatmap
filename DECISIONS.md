@@ -16,10 +16,11 @@ onwards; the early ones are split by phase rather than by hour.
 
 ## Index
 
-**413 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**414 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [UTF-8 console output at every script entry point that lacked it, and in the scaffold's step-3 template (owner)](#2026-09-27---utf-8-console-output-at-every-script-entry-point-that-lacked-it-and-in-the-scaffolds-step-3-template-owner)
 - [Daegu's brief: the national edition has no bakeries or delis, the edition is scattered across four id blocks, and Line 3 is a monorail](#2026-09-27---daegus-brief-the-national-edition-has-no-bakeries-or-delis-the-edition-is-scattered-across-four-id-blocks-and-line-3-is-a-monorail)
 - [Session loose ends closed (owner): Riga on JSON.parse, the main checkout current, UTF-8 output in two tools, and the Czech coordinate control per city](#2026-09-27---session-loose-ends-closed-owner-riga-on-jsonparse-the-main-checkout-current-utf-8-output-in-two-tools-and-the-czech-coordinate-control-per-city)
 - [Daegu's and Busan's licences read: Busan permitted with a credit, Daegu on a reasoned position after the national route failed (owner)](#2026-09-27---daegus-and-busans-licences-read-busan-permitted-with-a-credit-daegu-on-a-reasoned-position-after-the-national-route-failed-owner)
@@ -461,6 +462,36 @@ onwards; the early ones are split by phase rather than by hour.
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - UTF-8 console output at every script entry point that lacked it, and in the scaffold's step-3 template (owner)
+
+- **The defect**: `scripts/brief_check.py daegu` raised `UnicodeEncodeError`
+  printing a Korean claim, because a Windows console defaults to cp1252. It is
+  the defect fixed the same day in `drift_check.py` and
+  `check_personal_exposure.py`, one script at a time.
+- **Fixed at 32 entry points in one pass** (owner's call, "fix scripts for
+  asian characters"), each with the same block under its
+  `if __name__ == "__main__":`:
+  - 21 files in `scripts/`: every one that printed without it;
+  - the step and fetch files of the built cities whose names fall outside
+    cp1252: Hong Kong and Taipei (Han), Prague and Riga (Czech, Latvian).
+    Seoul, Taichung and Taoyuan already had it;
+  - `scaffold_city.py`'s generated `step3_map.py`, so every future city
+    inherits it.
+- **Rejected: one fix in `pipeline/__init__.py`.** Every step imports the
+  package, but so does the deployed app (`app/components.py`, every page's
+  config import), so it would change the live app's process and put a reboot
+  question on a console fix.
+- **Checked**: all 32 compile; the diff is additions only, every added line
+  one of the block's; `brief_check.py daegu` and `seoul` run without
+  `PYTHONIOENCODING`; both selftests and `check_no_fetch_in_steps.py` pass; a
+  scaffold dry-run with a Korean name completes. **The drift check could not
+  run** for the four cities from the staging worktree, which holds no raw
+  data. The change re-encodes the console only, and no step writes a file
+  through stdout.
+- **One `brief_check.py daegu` run of four reported 9/10.** The failing claim
+  was not captured, and three re-runs passed 10/10, so it reads as a transient
+  host. It is recorded, not diagnosed.
 
 ### 2026-09-27 - Daegu's brief: the national edition has no bakeries or delis, the edition is scattered across four id blocks, and Line 3 is a monorail
 
