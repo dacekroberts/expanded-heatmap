@@ -80,7 +80,9 @@ and districts no metro reaches.
   Transilien, the TER around Marseille, CPTM Linhas 7, 8 and 10–13, SuperVia's other
   three lines, Fortaleza's and Recife's diesel lines, Korail's Daegyeong Line (Daegu)
   and Donghae Line (Busan).
-- **Not mentioned either way:** Montréal (REM, exo), Mexico City (Tren Suburbano).
+- **Not mentioned either way:** Montréal (exo), Mexico City (Tren Suburbano).
+  Montréal's REM is drawn from 2026-09-27 (the tram rescope, on its branch until
+  review time).
 - **Reason:** a spacing, frequency and coverage test, applied line by line (EC
   "Which stations these maps are drawn around").
 
@@ -92,7 +94,8 @@ run on top of a metro network.
   Philadelphia (trolleys), Boston (Green Line, Mattapan), Calgary, Edmonton, Toronto
   (Lines 5 and 6 only), Mexico City (Tren Ligero), Guadalajara, Dublin (Luas),
   Marseille, Toulouse, Lille, Oslo, Amsterdam, Rotterdam, Rio (VLT), Santos (VLT),
-  Hong Kong (Light Rail), Riga (its trams are the whole network).
+  Hong Kong (Light Rail), Riga (its trams are the whole network), Montréal (the
+  REM, an automated light metro; from 2026-09-27, on its branch until review time).
 - **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Toronto's 18 streetcar routes, Milan (17 routes), Barcelona,
   Paris, Prague, Rome, Madrid (Metro Ligero), Copenhagen (the Letbane has no stop in
   scope).
@@ -251,10 +254,10 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Philadelphia | MFL, BSL + subway-surface and Girard trolleys | Regional Rail; NHSL, Media–Sharon Hill (outside city) | SEPTA GTFS | City | 6 / 161 |
 | Miami (Regional) | Metrorail + 2 Metromover loops | Tri-Rail; MIA people mover | Miami-Dade Transit GTFS | County (6 municipalities have stations) | 0 / 0 |
 | Boston | Red, Orange, Blue + Green, Mattapan | Commuter Rail, ferries | MBTA GTFS | City | 43 / 25 |
-| Washington D.C. | Metrorail, 6 lines | — (MARC/VRE are separate systems) | WMATA GTFS (API key) | District | 58 / 0 |
+| Washington D.C. | Metrorail, 6 lines | DC Streetcar no longer operating (ended 2026-03-31); MARC/VRE are separate systems | WMATA GTFS (API key) | District | 58 / 0 |
 | **Canada** | | | | | |
 | Vancouver (Regional) | SkyTrain Expo, Millennium, Canada | West Coast Express, SeaBus | TransLink GTFS | Vancouver + Surrey | 30 / 0 |
-| Montréal | Métro, 4 lines | not stated (REM, exo) | STM GTFS | Agglomeration (island) | 4 / 0 |
+| Montréal | Métro, 4 lines + REM (A1, A3, A4) | not stated (exo) | STM GTFS + the REM's own GTFS | Agglomeration (island) | 11 / 0 |
 | Calgary | CTrain Red, Blue (light rail) | — | Calgary Transit GTFS | City | 0 / 0 |
 | Edmonton | LRT Capital, Metro, Valley | 3 non-revenue stops | ETS GTFS | City | 0 / 0 |
 | Toronto | Subway 1, 2, 4 + LRT 5, 6 | 18 streetcar routes; GO | TTC GTFS (City CKAN) | City | 2 / 0 |
@@ -583,7 +586,8 @@ remain open.
 12. **Cable cars and unmentioned systems.** Toulouse establishes that "cable car" is
     not a reason to exclude. Mexico City's Cablebús and Tren Suburbano, and
     Montréal's REM and exo, are not mentioned in any file read. Unknown whether they
-    were considered.
+    were considered. *(2026-09-27: the REM is now drawn, on the tram-rescope
+    branch; exo, Cablebús and the Tren Suburbano remain open.)*
 13. **Undisclosed floors in the first US cities.** San Francisco (about 37% of rows
     have NAICS) and Los Angeles (about 9% have none), from DEC's 2026-09-18/19
     entries, and San Diego's neighbourhood undercount (La Jolla). All three are open

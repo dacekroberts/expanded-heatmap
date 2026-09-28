@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**39 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**40 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-27**
 
+- [Tram rescope 1 of 5: Montréal's REM drawn as one line, from the operator's own feed (held for review time)](#2026-09-27---tram-rescope-1-of-5-montréals-rem-drawn-as-one-line-from-the-operators-own-feed-held-for-review-time)
 - [Four owner calls: Ottawa to Band C, Rijswijk and Delft to T as Den Haag add-ons, the Band C memo's last verdicts accepted, Paris T2/T9 out](#2026-09-27---four-owner-calls-ottawa-to-band-c-rijswijk-and-delft-to-t-as-den-haag-add-ons-the-band-c-memos-last-verdicts-accepted-paris-t2t9-out)
 - [Tram rescopes, light and medium: specs written for five cities, and the D.C. Streetcar dropped because it no longer runs (owner)](#2026-09-27---tram-rescopes-light-and-medium-specs-written-for-five-cities-and-the-dc-streetcar-dropped-because-it-no-longer-runs-owner)
 - [Monterrey (Regional), Daegu and Busan are LIVE: rebooted by the owner, live-checked](#2026-09-27---monterrey-regional-daegu-and-busan-are-live-rebooted-by-the-owner-live-checked)
@@ -72,6 +73,51 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-27 - Tram rescope 1 of 5: Montréal's REM drawn as one line, from the operator's own feed (held for review time)
+
+- **The REM is drawn on Montréal's map, from its operator's own GTFS, as ONE
+  line labelled "REM (A1, A3, A4)" (owner's call on the label).** Source
+  `https://gtfs.gpmmom.ca/gtfs/gtfs.zip` (287,495 B, Last-Modified
+  2026-05-25, valid 2026-05-19 to 2026-12-31; the owner OK'd the download),
+  the feed Transitland indexes for the REM. STM's feed carries only the
+  Métro. The zip bundles `__Licence.txt`, the unmodified CC BY 4.0 legal code;
+  the `licence-read` verdict and the `docs/data_sources/` row are still
+  pending, and `check_provenance.py` names Montréal FAILED until the row
+  lands. **One line, not three**: A1, A3 and A4 share one colour,
+  `pipeline/linecolour.py` refuses two drawn lines under Delta-E 10 apart, and
+  three invented shades would misstate the branding. It is New York's
+  shared-trunk tuple (shapes S10014 and S30008, the most-run shape per branch).
+  Colour #73A400, the feed's own `route_color` rather than OSM's #84BD00:
+  Delta-E 29.8 from Ligne Verte, 48.5 from the Personal services pin.
+- **The numbering came from the feed, and English Wikipedia had it wrong.**
+  `routes.txt`: "A4 - Deux-Montagnes / A1 - Brossard" and "A3 -
+  Anse-à-l'Orme / A1 - Brossard". English Wikipedia swapped A3 and A4 on
+  2026-09-27; French Wikipedia agreed with the feed. The spec's warning (check
+  the operator before labelling) was the right one.
+- **Stations 64 -> 78; excluded 4 -> 11.** 23 REM stations; 16 are inside the
+  agglomeration. Two collapse into Métro stations BY NAME (Copenhagen's rule),
+  keeping the Métro's point: McGill (spread 180 m) and Édouard-Montpetit
+  (26 m); a spread past 250 m stops the run. Gare Centrale stays its own
+  station, 222 m from Bonaventure under a different name, now the tightest
+  pair on the map (no thinning; nearest-station assignment). Excluded: Brossard
+  (7,298 m outside), Du Quartier, Panama (South Shore), and Sainte-Dorothée
+  (402 m), Île-Bigras, Grand-Moulin and Deux-Montagnes (Laval / North Shore),
+  with the line drawn to its ends.
+- **The spatial cut is cross-checked against the REM's own fare zone**, as the
+  Métro's is against STM's " -Zone B" suffix: `zone_id` 1 (ARTM zone A) agrees
+  on all 17 zoned stations. The four West Island stations opened 2026-05-18
+  carry no zone in this feed version (20260520) and are checked spatially only.
+- **Storefronts within a ring: 10,421 of 17,231** (step 2 unchanged at
+  17,231; Retail 8,283, Food service 6,117, Personal services 2,831).
+  Drift: `excluded_stations.csv` and `heatmap.html` only, as intended.
+  `check_map_view.js` zoom 11.5 = expected, 0 corrections;
+  `check_map_markup.py`, `check_inline_arrays.py`, `check_scope_disclosure.py`
+  and `check_no_fetch_in_steps.py` pass. The page text, the city blurb and the
+  map title still say Métro only: drafts for the owner's review, with the
+  `excluded_categories.md` line. Files: `pipeline/montreal/{config,
+  fetch_sources,step1_stations,step3_map}.py`, `docs/map_inconsistencies.md`
+  (Montréal rows, and the D.C. Streetcar "no longer operating").
 
 ### 2026-09-27 - Four owner calls: Ottawa to Band C, Rijswijk and Delft to T as Den Haag add-ons, the Band C memo's last verdicts accepted, Paris T2/T9 out
 

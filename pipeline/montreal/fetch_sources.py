@@ -46,6 +46,8 @@ from pipeline.montreal.config import (  # noqa: E402
     GTFS_FEED_INFO_MEMBER,
     GTFS_URL,
     GTFS_ZIP,
+    REM_GTFS_URL,
+    REM_GTFS_ZIP,
     SOURCE_DELIMITER,
 )
 
@@ -132,6 +134,11 @@ def main():
     get(GTFS_URL, GTFS_ZIP, force=args.force, label="gtfs",
         min_bytes=1_000_000)
     check_feed_window(GTFS_ZIP)
+
+    print("\nTransit (the REM's own feed; STM's carries only the Métro):")
+    get(REM_GTFS_URL, REM_GTFS_ZIP, force=args.force, label="rem gtfs",
+        min_bytes=100_000)
+    check_feed_window(REM_GTFS_ZIP)
 
     print(f"\nBusiness (CKAN package {BUSINESS_PACKAGE!r}):")
     path = get(BUSINESS_URL, BUSINESSES_RAW_CSV, force=args.force,

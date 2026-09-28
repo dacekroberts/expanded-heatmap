@@ -47,6 +47,7 @@ BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 # --- Raw inputs (see pipeline/montreal/fetch_sources.py) ------------------
 
 GTFS_ZIP = DATA_RAW / "gtfs.zip"
+REM_GTFS_ZIP = DATA_RAW / "rem_gtfs.zip"
 BUSINESSES_RAW_CSV = DATA_RAW / "occupation_commerciale.csv"
 CITY_BOUNDARY_GEOJSON = DATA_RAW / "agglomeration.geojson"
 
@@ -84,6 +85,12 @@ BUSINESS_NEEDS_BROWSER_HEADERS = True
 GTFS_URL = "https://www.stm.info/sites/default/files/gtfs/gtfs_stm.zip"
 GTFS_FEED_INFO_MEMBER = "feed_info.txt"
 GTFS_CHECK_FEED_WINDOW = True
+
+# THE REM'S OWN FEED, a second GTFS: STM's carries only the Métro. Added
+# 2026-09-27 for the tram rescope. The host is the one Transitland indexes for
+# the REM (287,495 B, Last-Modified 2026-05-25 when first fetched); its terms
+# are in docs/data_sources/ (Canada), read before anything published.
+REM_GTFS_URL = "https://gtfs.gpmmom.ca/gtfs/gtfs.zip"
 
 # --- Coordinate reference systems -----------------------------------------
 
@@ -136,6 +143,47 @@ LINE_SHAPES = {
 
 LINE_LABEL_ENDS = {}
 
+# --- The REM (added 2026-09-27, the tram rescope) ----------------------------
+
+# THE REM IS ONE DRAWN LINE, NOT THREE (owner, 2026-09-27). Its services A1
+# (Brossard - Gare Centrale), A3 (Gare Centrale - Anse-à-l'Orme) and A4 (Gare
+# Centrale - Deux-Montagnes) share ONE colour, and pipeline/linecolour.py
+# refuses two drawn lines under Delta-E 10 apart - three same-green keys would
+# fail the render, and three invented shades would misstate the branding. So
+# it is New York's shared-trunk pattern: one key, one label naming the
+# services, one legend entry.
+#
+# THE NUMBERING IS THE OPERATOR'S FEED, checked because the spec warned OSM
+# might lag: routes.txt reads "A4 - Deux-Montagnes / A1 - Brossard" and "A3 -
+# Anse-à-l'Orme / A1 - Brossard". English Wikipedia had A3 and A4 SWAPPED on
+# 2026-09-27; French Wikipedia agreed with the feed.
+#
+# Routes S1 (A4-A1), S2 (the A1 short turn to Bois-Franc) and S3 (A3-A1), all
+# route_type 0 in this feed although the REM is an automated light metro.
+REM_ROUTE_IDS = ["S1", "S2", "S3"]
+REM_LINE_KEY = "REM"
+REM_LINE_NAME = "REM (A1, A3, A4)"
+# The feed's route_color on S1 and S3 (S2 reads 72A300, one step off). OSM's
+# #84BD00 is not used: the operator's own value wins. Measured: Delta-E 29.8
+# from Ligne Verte, 48.5 from the Personal services pin.
+REM_LINE_COLOUR = "#73A400"
+# The most-run shape of each branch, Brossard outwards; together they cover
+# every REM stop. S2's shapes are a subset of S1's.
+REM_SHAPES = ("S10014", "S30008")
+
+# THE REM'S FARE ZONE CROSS-CHECKS THE SPATIAL CUT, as STM's " -Zone B" suffix
+# does for the Métro: `zone_id` 1 is ARTM zone A, the island. The four West
+# Island stations that opened 2026-05-18 carry NO zone in this feed (version
+# 20260520), so the check covers the zoned stations and prints the rest.
+REM_ISLAND_ZONE = "1"
+REM_STATION_NAME_STRIP_PREFIX = "Station "
+
+# Interchanges with the Métro collapse BY NAME, Copenhagen's rule, and step 1
+# prints each one's spread: Édouard-Montpetit (29 m) and McGill (167 m).
+# Gare Centrale is NOT Bonaventure (206 m, a different name) and stays its own
+# station. A collapse wider than this is refused rather than trusted.
+INTERCHANGE_MAX_SPREAD_M = 250.0
+
 # Platforms collapse via `parent_station`, which is populated on all 72 served
 # stops, so there is no suffix regex and no alias dict - Vancouver needed both.
 #
@@ -184,7 +232,8 @@ BOUNDARY_AREA_KM2_MIN = 450.0
 # its fare zone, and Zone B is exactly the off-island network. Step 1 asserts
 # the two agree, so a silent change in either is caught.
 OFF_ISLAND_FARE_ZONE_SUFFIX = " -Zone B"
-IN_CITY_STATIONS_EXPECTED = 64
+# 64 Métro + 16 REM - 2 interchanges that collapse (2026-09-27; 64 before).
+IN_CITY_STATIONS_EXPECTED = 78
 
 # --- Business filtering ------------------------------------------------
 
