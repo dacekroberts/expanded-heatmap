@@ -809,7 +809,7 @@ little rail", before the owner ruled that trams count.
 
 | City | Network | Business | Build-time calls |
 |---|---|---|---|
-| **Kansas City** 🇺🇸 | The KC Streetcar, **one line**, search-level only (its GTFS not read) | "KCMO Business License Holders" (Socrata `kkhs-93m4`): **15,895 rows**, geocoded, all three buckets in readable categories (Beauty Salons 662, Barber Shops 146, Clothing Retailers 192, Supermarkets 154); explicitly PUBLIC_DOMAIN | Read the streetcar's GTFS and run the stub test on one line; `dba_name` is often a person ("HARRIS GREGORY J") - a privacy filter; `business_type` mixes fee codes ("Flat Rate 16", "Misc Rate 129") with activities |
+| **Kansas City** 🇺🇸 | The KC Streetcar, **one line**. **Measured 2026-09-27 from OSM** (relations 7825409/7825410, Riverfront–UMKC with the Main Street extension): **18 stops, all inside Kansas City, Missouri**, about 9.6 km at a mean 0.56 km. It passes the stub test; OSM carries no colour; frequency unread | "KCMO Business License Holders" (Socrata `kkhs-93m4`): **15,895 rows**, geocoded, all three buckets in readable categories (Beauty Salons 662, Barber Shops 146, Clothing Retailers 192, Supermarkets 154); explicitly PUBLIC_DOMAIN | Read the streetcar's GTFS for frequency (the stub test passed on OSM); pick a colour (OSM has none); `dba_name` is often a person ("HARRIS GREGORY J") - a privacy filter; `business_type` mixes fee codes ("Flat Rate 16", "Misc Rate 129") with activities |
 
 **Denmark's placement (owner's call 2026-09-27): OSM's imported DAR address
 points**, whose `osak:identifier` is the DAR Husnummer id (95% of central
@@ -1048,7 +1048,7 @@ the evidence file.
 | 🇵🇹 Portugal | — | **1** — Lisbon | D | The DGAE account (the owner is checking it); Porto would follow |
 | 🇫🇮 Finland | — | **1** — Helsinki | D | Geo-blocked; a read from inside Europe |
 | 🇪🇪 Estonia | — | **1** — Tallinn | D | Food register geo-blocked; the EHR order |
-| 🇦🇹 Austria | — | — | — | Vienna discarded (no premises register at any level). **Lead, unprobed: Linz publishes trade licences** (carried from Vienna's old open-gap row); Linz runs trams, so it would be Band T's shape |
+| 🇦🇹 Austria | — | — | — | Vienna discarded (no premises register at any level). **The Linz lead is closed (2026-09-27)**: its "Gewerbeberechtigungen" (CC BY 4.0, from the central trade register) is annual AGGREGATE counts by trade type, about 200 bytes a year, and ends in 2014. No premises and no addresses. A premises register for Linz is still unprobed on the city's own host |
 | 🇪🇬 Egypt | — | — | — | Cairo discarded (no register at any level) |
 | 🇨🇱 Chile | — | — | — | Santiago discarded (coverage fails downtown) |
 | **Total** | **49** | **63** | | A 6 · C 7 · T 40 · D 10. Checked against the band tables by `scripts/check_master_list_counts.py` |
