@@ -389,6 +389,15 @@ bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
   map_inconsistencies tables A-D and excluded_categories (Bergen before
   Oslo). The build session stays open until the batch is live: send it
   questions during the merge and a notice when live.
+- **Copenhagen re-render (from the Aarhus branch):** an owner privacy rule
+  of 2026-09-29 (`STORE_NUMBER_NAME` in the shared `denmark.py` /
+  `denmark_register.py`) changes how a discount-supermarket P-unit named
+  "Person Name, NNN Place" (a franchisee's name plus store number) is shown,
+  in both Danish cities. Copenhagen has 33 such pins live, and the Aarhus
+  branch does not re-run Copenhagen. **After merging aarhus, run Copenhagen's
+  step 2 and step 3**, then `check_personal_exposure.py copenhagen`
+  (DECISIONS verdict), `drift_check --update-baseline`, macro_facts and
+  ring_shares.
 - **The category-fix batch** (`category-continuity`, 17 taxonomies and their
   re-renders, owner-approved) bases its Stockholm fix on `stockholm-catering`:
   land it after, or in one merge.
