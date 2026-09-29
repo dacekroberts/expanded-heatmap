@@ -13,7 +13,7 @@ whose "Active" means nothing.** Every one of the city's 12,131 licences says
 `Active`, and **42.8% of the rows in the bucket codes are past their expiry
 date**. Chicago's precedent, dropping expired rows at the fetch date, halves
 the screen's food figure. What is left is a thin map, with an honest 22% of
-storefronts inside the rings. The build has no blocker.
+storefronts inside the rings. No blocker: one owner call, the rail source, has a recommended way round.
 
 | | |
 |---|---|
@@ -48,8 +48,38 @@ feed by then.
 - **Name**: "Metro Rail" is its public name. The legend and label read
   **"NFTA Metro Rail"**, and the page calls it light rail, never metro or
   subway, **with the 20-minute service disclosed** (owner, 2026-09-29).
-- **Licence**: ⏳ **being read** (the `licence-read` agent, 2026-09-29;
-  result to be recorded here and in `docs/data_sources/united-states.md`).
+- **Licence: READ 2026-09-29 (the `licence-read` agent) — PERMITTED WITH
+  CONDITIONS, and one condition is an owner call.** NFTA's "General Transit
+  Feed Specification (GTFS) License Agreement" at
+  `https://metro.nfta.com/about/developer-tools` grants "non-exclusive,
+  limited, and revocable rights to use, reproduce, and redistribute NFTA
+  Data". It is accepted by use, with no click-through. **Nothing must be
+  displayed and nothing must be done.** It has an as-is disclaimer,
+  revocable-at-any-time and entire-agreement clauses, and New York law.
+  `feed_info` declares no licence; the Mobility Database (tld-6748) and
+  Transitland both point back to this page.
+  - 🟠 **The trademark clause**: *"NFTA trademarks and copyrighted
+    materials, including any confusingly similar variants, may not be used
+    in association with the Data."* It names no marks. **The reading that
+    permits us**: the line's public name and NFTA as the credited source are
+    the Data's own text (`route_long_name` "Metro Rail", `agency_name` "NFTA -
+    Metro"), not branding, so no logos and no official look. **The reading
+    that does not**: if "NFTA" or "Metro Rail" are marks, a permanent
+    "NFTA Metro Rail" label beside the drawn Data is literally that use, and
+    the project's invariant requires that label. The agent did not settle
+    which marks NFTA claims (no USPTO search; the unincorporated
+    `branding_guidelines.pdf` was not opened). **This is Angers's shape, in a
+    milder form.**
+  - **The way around it: draw the rail from OpenStreetMap** (the `osm-rail`
+    skill; Copenhagen's and Aarhus's precedent). OSM's two relations
+    (3517747, 11364343) carry the geometry, the 14 stops (609 m median, the
+    light-rail test's read) and the name "NFTA Metro Rail" under ODbL, so the
+    NFTA agreement never binds the map. The feed is then only the frequency
+    source for the page's 20-minute disclosure. **Recommended**: it removes
+    the call rather than deciding it. The owner may instead accept the
+    permissive reading and use the feed.
+  - Re-read the page before each republish: the agreement is revocable and
+    can change "at any time".
 - **Boundary**: the city's own `p4ak-r4fg` "City Boundary" (Socrata, public
   domain), one feature, **104.6 km²** in UTM 17N.
 
@@ -156,6 +186,8 @@ the page says so.
 
 ## Build-time calls
 
+0. 🟠 **The owner's, before step 1: rail from OSM (recommended) or from
+   NFTA's feed** under the permissive reading of its trademark clause (above).
 1. **Expiry at the fetch date** (Chicago's rule, recommended), or a grace
    window (a departure; the owner's call).
 2. **The dedupe key** across the three sources.
@@ -167,7 +199,7 @@ light-rail network colour.
 
 ## Still unknown
 
-- ⏳ NFTA's GTFS licence (being read).
+- Which marks NFTA claims (only if the owner prefers the feed to OSM).
 - OSM storefront density, queued since wave 2, is no longer needed: the
   registers answer every bucket.
 
