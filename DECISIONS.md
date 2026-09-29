@@ -20,10 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**112 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**114 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Berlin's rail scope: U-Bahn and S-Bahn, no trams; the U6's Tegel branch drawn as the timetable runs (owner); steps 1 and 2 green](#2026-09-28---berlins-rail-scope-u-bahn-and-s-bahn-no-trams-the-u6s-tegel-branch-drawn-as-the-timetable-runs-owner-steps-1-and-2-green)
+- [Berlin's calls: 47122 excluded, Personal services drawn as a partial bucket, trams on ring numbers, both downloads approved (owner)](#2026-09-28---berlins-calls-47122-excluded-personal-services-drawn-as-a-partial-bucket-trams-on-ring-numbers-both-downloads-approved-owner)
 - [Berlin's brief written: both licences read, the register is NACE Rev. 2.1, personal services partial, four calls for the owner](#2026-09-28---berlins-brief-written-both-licences-read-the-register-is-nace-rev-21-personal-services-partial-four-calls-for-the-owner)
 - [Tokyo landed: city-landed sweep; three cities' in-ring counts corrected in the inconsistency list](#2026-09-28---tokyo-landed-city-landed-sweep-three-cities-in-ring-counts-corrected-in-the-inconsistency-list)
 - [Tokyo live after the owner's reboot, checked on the live URL](#2026-09-28---tokyo-live-after-the-owners-reboot-checked-on-the-live-url)
@@ -148,6 +150,73 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Berlin's rail scope: U-Bahn and S-Bahn, no trams; the U6's Tegel branch drawn as the timetable runs (owner); steps 1 and 2 green
+
+- **Trams are left out (owner)**, on the ring numbers from the cached register
+  and VBB's GTFS (966 m rings, trams unthinned, so an upper bound): U-Bahn only
+  170 stations, 22.1% of the Land, 65.0% of storefronts; **U + S 275 stations,
+  42.1%, 82.0%** (retail 79.4%, food 87.9%, personal 82.0%); U + S + trams 793
+  stations, 54.2%, 88.9%. Precedent is a full metro beside trams (Paris,
+  Barcelona, Milan, Toronto), not trams as the core network (Amsterdam,
+  Rotterdam, Oslo, Riga). The scope disclosure names the trams.
+- **The U6's Tegel branch is drawn as the timetable runs (owner)**: gate 3
+  found 170 U-Bahn stations in the feed against BVG's 175, and the five
+  missing are Scharnweberstr., Otisstraße, Holzhauser Str., Borsigwerke and
+  Alt-Tegel - closed for works since November 2022, replacement buses until
+  about August 2027 (BVG, "U6-Nord Streckensanierung"). The alternative, the
+  permanent network from OSM, was rejected: it would draw a service that does
+  not run. `config.CLOSED_FOR_WORKS` lists them; step 1 records them as
+  excluded and **stops if the feed serves any again**, so the reopening is a
+  re-run rather than a silent change.
+- **Step 1 (`pipeline/berlin/step1_stations.py`)**: VBB's GTFS (calendar
+  2026-09-24 to 2026-12-12, no `feed_info.txt`); lines matched on route type,
+  agency and short name, never `route_id` (the S-Bahn's 16 lines carry 45
+  route_ids, and each line's replacement buses share its short name under type
+  700). 746 platforms -> 311 stations (median 780 m); gate 3 U-Bahn 170 = 175 -
+  5 closed, S-Bahn 168 = 168 (BVG "BVG in Zahlen" 31.12.2024; S-Bahn Berlin "at
+  a glance"). **275 inside the Land**, 36 in Brandenburg and 5 closed ->
+  `outputs/berlin/excluded_stations.csv`; in-Land median spacing 702 m. Two
+  pairs under 200 m are differently named interchanges (Rathaus Spandau U7 /
+  Spandau S, 159 m; Charlottenburg S / Wilmersdorfer Str. U7, 216 m), kept
+  apart as the operators name them.
+- **Step 2 (`pipeline/berlin/step2_clean_businesses.py`)**: the CSV has
+  368,841 rows (the WFS 367,575 the same day; the CSV is the newer monthly
+  cut), no duplicate ids, `city` "Berlin" on every row. 82,718 storefront rows
+  after the WZ filter (structural exclusions 479, 5612, 562, 564, 964, 9691) ->
+  drop `nace_id` 969* 10,210 and `ihk_branch_id` 47122 12,194 (EXACT match: a
+  prefix match also caught department stores, `471221`, which stay) -> 60,314
+  -> 1 outside the Land polygon -> **60,313 storefronts: retail 38,844, food
+  17,618, personal services 3,851**. Measured, never written out: 57.9% report
+  0 employees (food 45.3%, retail 61.6%, personal services 77.7%).
+- **The taxonomy is `ihk_wz2025`**, named for the source kind rather than the
+  country: WZ 2025 is national, but the missing crafts are a property of any
+  IHK register, and the legend has to say so. Its Personal services legend
+  text is a DRAFT for the owner. A pin's title is IHK's branch label (São
+  Paulo's precedent for a register with no names).
+
+### 2026-09-28 - Berlin's calls: 47122 excluded, Personal services drawn as a partial bucket, trams on ring numbers, both downloads approved (owner)
+
+- **Decided (owner), all as the brief recommended**:
+  - **IHK's `47122` is Berlin's retail catch-all verdict and is excluded**
+    (12,141 rows, 24% of retail), departing from the Rev. 2.1 precedent of
+    keeping 47.12 (Oslo, Copenhagen, Prague, France) on Berlin's own numbers:
+    91% zero-employee, and a 30 m OSM-shop match (63%) at office level
+    (62-77%) rather than the rest of retail's (81%). `47121` and its siblings
+    stay.
+  - **Personal services is drawn as a partial bucket**, its legend and
+    disclosure saying hairdressers and laundries are not in it (they are
+    Handwerkskammer members). This supersedes the Band B row's "personal
+    services missing" (2026-09-28, "Berlin from the discards to Band B").
+  - **Trams are decided on the ring-coverage numbers**, measured once the
+    register is cached.
+  - **Both downloads approved**: IHK's CSV (126,348,283 bytes, GitHub LFS)
+    and VBB's GTFS (78,379,003 bytes, `www.vbb.de/gtfs`).
+  - **Berlin's `record_kind` is "Chamber of commerce register"**, a new
+    value (Cleanup added it to `check_inconsistency_list.py` on
+    `worktree-cleanup`, `62e6288`).
+- `9699` is excluded class-wide, as in Oslo and Copenhagen (the brief's
+  proposal; prostitution and escort go with it).
 
 ### 2026-09-28 - Berlin's brief written: both licences read, the register is NACE Rev. 2.1, personal services partial, four calls for the owner
 
