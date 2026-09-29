@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**139 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**140 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Review-time batch published: Berlin, London, "Why the maps differ", Tokyo's table, the Japanese wording (owner called it)](#2026-09-28---review-time-batch-published-berlin-london-why-the-maps-differ-tokyos-table-the-japanese-wording-owner-called-it)
 - [Bands restructured: N retooled as C, D split into D (owner can act) and R (restricted) (owner)](#2026-09-28---bands-restructured-n-retooled-as-c-d-split-into-d-owner-can-act-and-r-restricted-owner)
 - [London's unplaced storefronts placed at postcode centroids (owner): 2,349 more, notice 58 for Ordnance Survey, the credit in the repository too](#2026-09-28---londons-unplaced-storefronts-placed-at-postcode-centroids-owner-2349-more-notice-58-for-ordnance-survey-the-credit-in-the-repository-too)
 - [Summary-table values for Berlin and London; "Food licences only" renamed "Food premises only" (owner)](#2026-09-28---summary-table-values-for-berlin-and-london-food-licences-only-renamed-food-premises-only-owner)
@@ -175,6 +176,56 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Review-time batch published: Berlin, London, "Why the maps differ", Tokyo's table, the Japanese wording (owner called it)
+
+- **Merged into `worktree-cleanup` as real merges**: `worktree-london`
+  (e084a5e, which carried master b3a9bc4), then `worktree-berlin` (bb9876d),
+  then master's band restructure (611a8f5). The build session froze both
+  branches first. It confirmed in its own session, where the data is, that
+  each city's data-bound gate steps had passed: drift check zero, the
+  personal-exposure verdict in DECISIONS, and `brief_check` 11/11 for Berlin
+  and 4/4 for London.
+- **Conflicts:**
+  - 13 files in the Berlin merge, every one both cities adding at the same
+    point. Both were kept, Berlin first (built first; Germany precedes the
+    United Kingdom in country order). Berlin's "London next" item in
+    `PLAN.md` was dropped as obsolete.
+  - `docs/city_master_list.md` took master's restructured bands (A 1 · B 10
+    · C 7 · D 6 · R 12 · T 51, 55 built). London's and Berlin's moves to
+    Built were then re-applied on top: 57 built across 19 countries, 85
+    candidates, B 8. `check_master_list_counts.py` agrees.
+  - `DECISIONS.md` was resolved with `merge_append_only.py` each time.
+- **Notices:** both branches had numbered their first notice 57. Berlin's VBB
+  keeps 57, and London's are renumbered 58 (Food Standards Agency) and 59
+  (Ordnance Survey), in `docs/data_sources.md`, `docs/data_sources/united-kingdom.md`
+  and `app/components.py`'s comments. `check_provenance.py` passes.
+- **Also in the batch:**
+  - Tokyo's ward table now scrolls inside its own box
+    (`components.scroll_table`, which page 92's table now also uses).
+  - The six Japanese pages say "the Food shops layer", as their legends do
+    (owner-approved wording).
+  - `app/ring_shares.json` was regenerated for 57 cities; Berlin is 82% and
+    London 74%.
+- **Gate:**
+  - `check_all.py` 24/24 on the merged commit, `check_deploy_imports.py`
+    clean, and `check_macro_labels.py` PROBLEMS 0 across 10 regions × 3
+    widths.
+  - `deploy-verify` ran `scope: city-added` for Berlin and London, not
+    `full`. The only changed outputs were `berlin/` and `london/`, so every
+    other map was byte-identical to maps already passed. The added extras:
+    page 92 at 375 px and desktop (57 rows, no page-level sideways scroll,
+    dark mode), page 91's "Closed for works" table, the footer link on
+    Overview, Chicago and Madrid, page 90's links, Tokyo at 375 and 343 px,
+    and the DENUE tooltips.
+  - All passed at 482ede1. The Japanese wording commit came after; it swaps
+    two words on six pages, and the files compile.
+- **Noticed, not changed:** Monterrey's tooltip reads "DENUE May 2026,
+  fetched 2026-09-27", without "edition", unlike Mexico City and Guadalajara.
+  This is published wording and is left for the owner.
+- **Next:** the owner reboots (the batch changes `app/cities.py`,
+  `app/components.py` and `app/station_scope.py`), then the live site is
+  checked, including one city nobody touched.
 
 ### 2026-09-28 - Bands restructured: N retooled as C, D split into D (owner can act) and R (restricted) (owner)
 
