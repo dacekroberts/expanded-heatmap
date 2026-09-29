@@ -3,7 +3,7 @@
 This project scopes each city twice - which rail network its map is drawn
 around, and which businesses are counted near it - and both are invisible from
 the map. `docs/excluded_categories.md` is where a reader is told, and
-`app/pages/91_What_Is_Excluded.py` renders it with a generated station table
+`app/pages/201_What_Is_Excluded.py` renders it with a generated station table
 spliced in.
 
 The gap this closes is the one that prompted it: a reader asked whether BART
@@ -86,7 +86,7 @@ def main():
         problems.append(
             f"docs/excluded_categories.md: the heading the station table is "
             f"spliced at appears {seen} times, expected exactly 1 "
-            f"({BUSINESS_HEADING!r}). app/pages/91_What_Is_Excluded.py "
+            f"({BUSINESS_HEADING!r}). app/pages/201_What_Is_Excluded.py "
             f"splits the document on it.")
 
     # B - the station section.
@@ -116,7 +116,7 @@ def main():
         if not city_dir.is_dir():
             problems.append(
                 f"{name}: no outputs/{city_dir.name}/ directory, so its row in "
-                f"the station table on 91_What_Is_Excluded.py renders empty. "
+                f"the station table on 201_What_Is_Excluded.py renders empty. "
                 f"The slug is derived from {entry['page']!r}.")
         else:
             # E - the file classifies into a shape the page understands.

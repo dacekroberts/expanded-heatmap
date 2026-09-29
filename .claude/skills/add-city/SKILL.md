@@ -616,7 +616,7 @@ right.
   renamed, update its `page` path in `cities.py`.
 - **Give the entry its three summary fields** (owner, 2026-09-28): the city's
   row in the table on the "Why the maps differ" page
-  (`app/pages/92_Why_the_Maps_Differ.py`) is built from them.
+  (`app/pages/202_Why_the_Maps_Differ.py`) is built from them.
   - `rail_extra`: what the map draws beyond the metro. `"Trams"` (light rail
     counts; a light metro such as Montréal's REM does not), `"Suburban rail"`,
     `"Both"` or `"—"`.

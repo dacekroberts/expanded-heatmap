@@ -375,7 +375,15 @@ def load_station_scope(root):
 
 def next_page_number(pages_dir):
     nums = [int(m.group(1)) for p in pages_dir.glob("*_Heatmap.py") if (m := re.match(r"(\d+)_", p.name))]
-    return max(nums, default=0) + 1
+    n = max(nums, default=0) + 1
+    # The info pages start at 200 (renumbered from 90 on 2026-09-29, when
+    # the city list outgrew 89 slots). A city page must never take one.
+    info = [int(m.group(1)) for p in pages_dir.glob("*.py")
+            if not p.name.endswith("_Heatmap.py") and (m := re.match(r"(\d+)_", p.name))]
+    if info and n >= min(info):
+        sys.exit(f"next city page would be {n}, at or past the first info page "
+                 f"({min(info)}); renumber the info pages higher first")
+    return n
 
 
 def region_order(text):
