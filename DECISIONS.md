@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**165 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**166 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-09-29**
+
+- [Gyeonggi's portal licence read: the datasets are permissive, but the portal's terms bar commercial use and possibly processing without approval; the national source recommended instead](#2026-09-29---gyeonggis-portal-licence-read-the-datasets-are-permissive-but-the-portals-terms-bar-commercial-use-and-possibly-processing-without-approval-the-national-source-recommended-instead)
 
 **2026-09-28**
 
@@ -201,6 +205,33 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Gyeonggi's portal licence read: the datasets are permissive, but the portal's terms bar commercial use and possibly processing without approval; the national source recommended instead
+
+- **`licence-read` of 경기데이터드림 (data.gg.go.kr): AMBIGUOUS.** Every
+  declaration is permissive:
+  - the portal's 14 dataset pages: "commercial use and modification
+    allowed";
+  - data.go.kr's 17 Gyeonggi listings and the Ministry's national
+    listings: "제한 없음";
+  - the provincial ordinance 제4조③, which bars restricting even
+    commercial use.
+
+  But the portal's 이용약관 제12조⑥ and 제14조②9 bar commercial use
+  ("processing and selling" given as examples) and profit-making without
+  Gyeonggi's approval. Read one way, a non-commercial map is outside the
+  bar; read the other, processing alone needs approval. The terms'
+  effective date is a blank placeholder.
+- **Recommended, not decided: build from the Ministry's national
+  local-licence files, as Busan does.** Most portal files name the
+  Ministry as provider, and the national files declare "제한 없음", so the
+  portal's terms never apply. They may also close the café and takeaway
+  gaps: the read found the portal's café metadata listing an address and
+  lat/lon. That is to be checked before the page's gap is written. The
+  alternative is to accept the permissive reading of the portal's terms.
+- **Never published:** phone numbers, deposit and rent, and the
+  rights-holder and livestock identifiers. No owner-name column was found.
+- Files: `docs/build_briefs/gyeonggi.md`.
 
 ### 2026-09-28 - Incheon's licences read: the permit lists and the KESA lift-building file both permitted with conditions; the website copyright terms judged not to reach them (owner); personal services shown from 2021, dated (owner)
 

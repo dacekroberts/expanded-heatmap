@@ -112,10 +112,60 @@ network.
 
 ---
 
-## Licence
+## Licence — read 2026-09-29 (`licence-read`): AMBIGUOUS on the portal; clean on the national source
 
-_(The read of 경기데이터드림's terms is running 2026-09-28; filled in when it
-reports.)_
+**The datasets are permissive everywhere they are declared:**
+- data.gg.go.kr's 14 dataset pages: "상업적이용허용 및 콘텐츠변경허용"
+  (commercial use and modification allowed), the portal's own scheme, not
+  KOGL.
+- data.go.kr's 17 Gyeonggi listings and the Ministry's national listings
+  (행정안전부, 15154916, 15096283): "이용허락범위 제한 없음".
+- The provincial ordinance (경기도 공공데이터 조례 제4조③) forbids
+  restricting even commercial use.
+
+**The portal's own terms of use diverge:**
+- 이용약관 제12조⑥: no commercial use of material, "such as processing and
+  selling", without Gyeonggi's express approval.
+- 제14조②9: no profit-making activity without prior consent.
+- On the permissive reading (only commercial use is barred), a
+  non-commercial map is outside both clauses. On the restrictive reading
+  (가공, processing, is barred by itself), publishing waits on approval.
+- The terms' effective date is a blank placeholder ("2026년 00월 00일"),
+  apparently from the portal's 2026-05-29 relaunch.
+
+**On the portal, the duties would be:**
+- a credit to the author and source (제12조③);
+- a statement that the page uses Gyeonggi public data (제12조⑤; no form
+  set);
+- nothing implying acting for Gyeonggi (제14조②7);
+- nothing presented as Gyeonggi's own figures (FAQ #7).
+
+The purpose-of-use question on download is a mandatory survey, not a
+condition; answer it honestly.
+
+🟢 **Recommended route: take the build's data from the national source, not
+the portal.**
+- Most portal files name the Ministry (행정안전부) as provider, sourced from
+  공공데이터포털.
+- Busan's build already uses the Ministry's national local-licence files
+  (`data/busan/raw/Local*_P_all.json`).
+- Those declare "제한 없음", so the portal's terms never apply, and one
+  source serves Busan and Gyeonggi alike.
+- **The national files may also close the café and takeaway gaps.** The
+  read found the portal's café metadata listing an address and lat/lon, so
+  "no location" may be the portal's export and not the data. To be checked
+  on the national file, before the page's gap is written.
+- The downloaded portal files stay as a scratch cross-check.
+- **An owner call.** The alternative is to accept the permissive reading and
+  use the portal files as they are.
+
+**Never publish** phone numbers (소재지시설전화번호), deposit or rent
+(보증액, 월세액), or the rights-holder and livestock identifiers
+(권리주체고유번호, 축산고유번호). None of the checked files has an owner-name
+column.
+
+**Portal access for checks**: a bare user agent is blocked, and dataset
+pages render only with `Accept-Language: ko-KR`.
 
 ---
 
@@ -135,7 +185,11 @@ the city boundary.
 
 ## Still unknown
 
-- ⚠️ **The licence read** of the portal.
+- 🟡 **The source (owner)**: the Ministry's national local-licence files
+  (recommended; "제한 없음", Busan's source) or the portal's files under
+  its ambiguous terms.
+- ⚠️ **The café and takeaway gaps on the national files**: they may carry
+  a name, location and status that the portal's exports lack.
 - ⚠️ **The satellites and the page shape** (owner).
 - ⚠️ **Takeaway and barbers**: out, or partly in by permit date.
 - ⚠️ **The TM projection** of the X/Y files.
