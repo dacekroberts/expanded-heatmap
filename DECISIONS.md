@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**172 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**173 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Band T audited: light rail leaves for A and C on a three-part test, Band T moves to its own tram list (owner)](#2026-09-29---band-t-audited-light-rail-leaves-for-a-and-c-on-a-three-part-test-band-t-moves-to-its-own-tram-list-owner)
 - [Exclusions batch: the owner's eight follow-ups, wording approved, handed to a fresh session](#2026-09-29---exclusions-batch-the-owners-eight-follow-ups-wording-approved-handed-to-a-fresh-session)
 - [Funeral exclusions coded; fringe-category audit and the owner's rules; one combined exclusions batch](#2026-09-29---funeral-exclusions-coded-fringe-category-audit-and-the-owners-rules-one-combined-exclusions-batch)
 - [Staging handed off for the tram question: a preliminary yes for scoping and filtering Band T only, the final call after an audit (owner)](#2026-09-29---staging-handed-off-for-the-tram-question-a-preliminary-yes-for-scoping-and-filtering-band-t-only-the-final-call-after-an-audit-owner)
@@ -212,6 +213,92 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-29 - Band T audited: light rail leaves for A and C on a three-part test, Band T moves to its own tram list (owner)
+
+- **Light rail is not a trams question (owner).** San Diego (47 stations,
+  median gap 851 m), Calgary (45, 1,020 m) and Edmonton (30, 631 m) were built
+  on light rail with no metro and no tram decision, so Band T was holding two
+  kinds of network: light rail, decided by precedent, and street trams (Riga
+  360 m, Amsterdam 390 m), the only kind the trams decision is about. Spacing
+  alone was rejected as the test (the owner asked whether distance "absolutely
+  means light rail"): it moves with the scope (ION 558 m in Kitchener, 749 m
+  in Waterloo), with platform naming (Ottawa read 10 m until platforms within
+  150 m were merged, then 884 m), and a street tram can clear it (the Luas,
+  575 m).
+- **The three-part light-rail test (owner): track, frequency, spacing, read
+  against San Diego, Calgary and Edmonton.** Track: the share of route in
+  tunnel or on bridges, and whether OSM maps the rest `light_rail` or `tram`
+  (precedents 13–23% and 72–87% light rail; Riga 2% and 98% tram). Mappers tag
+  the kind of system, not where it runs: Houston's street-running line reads
+  94% light rail, as San Diego's C Street does. Frequency: 15 minutes or
+  better by day, **a gate only on converted railway; on purpose-built track a
+  slower timetable is disclosed, not disqualifying** (the owner, on Buffalo:
+  "should probably get moved then right? even with the timing threshold").
+  Spacing: about 550 m or more, supporting evidence only.
+- **Ten left Band T (owner's yes).** Measured 2026-09-29 (OSM route relations;
+  each operator's GTFS, worst daytime hour at the median stop):
+  - **To A**: Buffalo (80% tunnel or bridge; a flat 20 minutes 06–23,
+    disclosed), Houston (6–12 min; an address join), Sacramento (763 m;
+    frequency unread, the SacRT feed host's certificate has expired, so read
+    at build), Aarhus (L2 every 15 min, L1 every 30 on converted railway: the
+    20-or-39-station call its row already carried now leans to 20) and Bergen
+    (40% tunnel or bridge, every 7–8 min).
+  - **To C, each on a bucket gap with no verdict yet**: Ottawa (food only),
+    Minneapolis and Pittsburgh (no personal services), Kitchener–Waterloo (no
+    retail), and Hiroshima, which was never trams-contingent: MLIT N02 × N03
+    puts the Astram Line (22 stations, an automated guideway as Kobe's drawn
+    Port Liner) and JR (39) inside the city, drawn under Japan's standing rule.
+  - **Pittsburgh was first proposed to stay** (Red every 20 minutes, Blue and
+    Silver part-day, 437 m with suburban street stops), then moved for
+    consistency once the Buffalo rule was agreed: 30% of its track is in
+    tunnel or on bridges.
+  - **Santa Cruz–La Laguna stays**: 96.5% of its track mapped tram, Riga's
+    shape, although its spacing (510–549 m) sits between the tiers.
+  - This moves cities to A before the owner's final call on trams-only maps,
+    which the handoff's framing ("nothing is built or promoted to A or B on
+    the preliminary yes") would otherwise forbid; the moves rest on the
+    light-rail precedent, not on the preliminary yes.
+- **Commuter rail checked in the tram cities; none of it changes a band.**
+  Zurich's S-Bahn (23 stations, 707 m; transport.opendata.ch stationboards
+  for Tuesday 2026-10-06) is metro-grade on the trunk (Hauptbahnhof 18–22
+  S-trains an hour each way) and every 20–30 minutes line by line, but **fails
+  on coverage**: 21 of 23 stations stand within 800 m of a tram stop, and the
+  two that do not (Affoltern, Leimbach) run every 20–30 minutes, Seoul's AREX
+  case. So Zurich is a tram map with the S-Bahn named as excluded. Den Haag's
+  NS Sprinters are all within 178 m of a tram stop, and RET metro E keeps 4 of
+  its 23 stops in the city (a stub); Utrecht's Sprinters are 2.2 km apart;
+  Brno's and Ostrava's train stations 2.0 and 2.4 km; Göteborg has 4 train
+  stations in the city.
+- **Band T moved to its own file, `docs/tram_city_list.md` (owner: "remove
+  the tram cities from currently published band list and create a new
+  secondary band list")**, in two tiers (owner's choice over a country-only
+  grouping): **T1**, ready if trams-only maps are approved (35: France 21
+  with Nice and Rouen flagged EDGE, Czechia 6, Odense, Daugavpils, Liepāja,
+  Kansas City, New Orleans, Tucson, Florence, Santa Cruz–La Laguna) and
+  **T2**, trams plus a bucket gap (6: Zurich, Göteborg, Utrecht, Den Haag,
+  Rijswijk, Delft). The master list keeps a pointer section, and T still
+  counts toward its 80 candidates.
+  - `scripts/check_master_list_counts.py` reads Band T's members from the
+    tram list when the master list's Band T points to it, requires that
+    section to hold no city rows, checks the tram list's title, tier headings,
+    tier table and country sub-groups, and keeps the one-place rule across
+    both files. Its selftest gained seven tram-list cases, and the three it
+    had aimed at Band T rows were re-aimed (24 of 24 pass). The script change
+    was made on staging, which otherwise pushes docs only (owner: "checker
+    here while cleanup is busy").
+  - `check_stale_claims.py` excludes the tram list, as it does the master
+    list; `check_provenance.py` check I renders its tables.
+- **Detroit, Milwaukee and four others stay discarded (owner)**, and are named
+  in the tram list's "Revisit if trams-only maps are approved" note with what
+  actually blocks each: Aubagne (size: 526 storefronts), Trondheim (reach:
+  3.7% within 483 m until the St. Olavs section returns), Tampa, Cincinnati,
+  Detroit (food only; its People Mover, an automated loop like Kobe's Port
+  Liner, was never counted) and Milwaukee. None is reopened by trams alone.
+- **State after:** 62 built; A 5 · B 4 · C 13 · D 0 · R 17 · T 41 = 80
+  candidates (T1 35, T2 6); 91 discards. The master list's first-blocker
+  section was brought current as well (Tallinn is in R; Rijswijk and Delft
+  left C for T on 2026-09-27). Measuring scripts and caches in
+  `data/_staging_scratch_2026-09-29/band_t_audit/`.
 ### 2026-09-29 - Exclusions batch: the owner's eight follow-ups, wording approved, handed to a fresh session
 
 - **Follow-ups on the measured counts (owner):**

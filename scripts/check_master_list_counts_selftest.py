@@ -1,4 +1,4 @@
-"""Watch scripts/check_master_list_counts.py fail, seventeen ways.
+"""Watch scripts/check_master_list_counts.py fail, twenty-three ways.
 
     python scripts/check_master_list_counts_selftest.py
 
@@ -155,6 +155,39 @@ def rename_into(src, dst):
     return apply
 
 
+def tram_into(dst):
+    """A tram-list row renamed to a city already in master-list Band `dst`: a
+    city in two lists ACROSS the two files. Needs both texts."""
+    def apply(text, other):
+        lines, main = text.split("\n"), other.split("\n")
+        rows = {}
+        for t, s, e in M.sections(lines):
+            if M.TIER_HEAD.match(t):
+                rows.update(M.members(lines, s, e))
+        row = _table_row(rows, lines)
+        hit = _table_row(_bands(main).get(dst, {}), main)
+        if not row or not hit:
+            return None
+        apply.expect = f"{hit[0]} is in Band {dst} AND Band T"
+        out = list(lines)
+        out[row[1]] = out[row[1]].replace(row[0], hit[0], 1)
+        return "\n".join(out)
+    apply.two = True
+    return apply
+
+
+def row_left_in_band_t(text):
+    """A city row left behind in the master list's Band T section after the
+    move to the tram list - a move half made."""
+    lines = text.split("\n")
+    for t, s, e in M.sections(lines):
+        if M.BAND_HEAD.match(t) and M.BAND_HEAD.match(t).group(1) == "T":
+            out = lines[:s + 1] + ["", "| City | Note |", "|---|---|",
+                                   "| **Selftestville** | left behind |", ""] + lines[s + 1:]
+            return "\n".join(out)
+    return None
+
+
 def wrong_band(text):
     """A by-country row naming its cities, whose Bands column holds one letter,
     changed to a letter none of them is in."""
@@ -215,8 +248,10 @@ CASES = [
     ("a Built row's per-country count drifted",
      bump(r"^\| \*\*[^*|]+\*\* \((\d+)", "lists {old} cities"), None),
 
-    ("a sub-group count drifted (the first one-country sub-group, +1)",
-     bump(r"^\*\*\S+ [^*(,]+ \((\d+)\)\*\*", "the table below it has {old}"), None),
+    # Re-aimed at the tram list 2026-09-29: Band T's country sub-groups moved
+    # there with its rows, and the master list kept none.
+    ("a sub-group count drifted (the tram list's first one-country sub-group, +1)",
+     bump(r"^\*\*\S+ [^*(,]+ \((\d+)\)\*\*", "the table below it has {old}"), None, "tram"),
 
     ("by country: a row's Candidates figure drifted",
      by_country_bump(2, "the Candidates column sums to"), None),
@@ -231,26 +266,60 @@ CASES = [
      wrong_band, "its Bands column says"),
 
     # Aimed at Band R since 2026-09-28, when D emptied (its rows moved to R and C).
-    ("a city in two bands (a Band R row renamed to a Band T city)",
-     rename_into("R", "T"), None),
+    # Re-aimed from Band T to Band C 2026-09-29, when Band T's rows moved to the
+    # tram list and the master list's Band T section stopped holding any.
+    ("a city in two bands (a Band R row renamed to a Band C city)",
+     rename_into("R", "C"), None),
 
-    ("a built city still listed in a band (a Band T row renamed to a built city)",
-     rename_into("T", None), None),
+    ("a built city still listed in a band (a Band C row renamed to a built city)",
+     rename_into("C", None), None),
 
     ("no band recognised at all - the vacuous pass",
      drop_bands, "no '## ... Band X' sections"),
+
+    # The tram list (docs/tram_city_list.md, 2026-09-29): its own counts, and
+    # the one-place rule across the two files. The 4th field is the file the
+    # mutation edits; "missing" leaves the tram list out of the copy.
+    ("tram list: a tier heading's count drifted (T1, +1)",
+     bump(r"^## 🟤 T1 —[^\n]*?\((\d+) cities", "T1 holds"), None, "tram"),
+
+    ("tram list: the title's count drifted",
+     bump(r"^# [^\n]*— (\d+) cities", "but the tiers hold {old}"), None, "tram"),
+
+    ("tram list: the tier table's count drifted (T2, +1)",
+     bump(r"^\| 🟤 \*\*T2\*\* \|.*\| \*\*(\d+)\*\*", "tier table says T2 {new}"), None, "tram"),
+
+    ("tram list: a city in two lists across the files (a tram row renamed to a Band C city)",
+     tram_into("C"), None, "tram"),
+
+    ("tram list: a city row left behind in the master list's Band T section",
+     row_left_in_band_t, "a move half made", "main"),
+
+    ("tram list: the file is missing while Band T points to it",
+     lambda text: text, "which was not found beside", "missing"),
 ]
 
 
-def case(label, mutate, expect_in, text, tmp):
-    changed = mutate(text)
-    if changed is None or changed == text:
+def case(label, mutate, expect_in, text, tram, tmp, which="main"):
+    target = tram if which == "tram" else text
+    if which == "tram" and tram is None:
+        changed = None
+    elif getattr(mutate, "two", False):
+        changed = mutate(target, text)
+    else:
+        changed = mutate(target)
+    if which != "missing" and (changed is None or changed == target):
         print(f"BROKEN TEST  {label}\n      the mutation matched nothing in the live "
               f"file, so this case proves nothing - re-aim it")
         return False
     expect_in = getattr(mutate, "expect", None) or expect_in
     path = Path(tmp) / "city_master_list.md"
-    path.write_text(changed, encoding="utf-8", newline="\n")
+    tpath = Path(tmp) / M.TRAM_NAME
+    path.write_text(changed if which in ("main", "missing") else text,
+                    encoding="utf-8", newline="\n")
+    tpath.unlink(missing_ok=True)
+    if tram is not None and which != "missing":
+        tpath.write_text(changed if which == "tram" else tram, encoding="utf-8", newline="\n")
     code, out = run(path)
     hit = [ln for ln in out.splitlines() if expect_in in ln]
     ok = code == 1 and bool(hit)
@@ -263,13 +332,17 @@ def case(label, mutate, expect_in, text, tmp):
 def main():
     print(f"Self-test for {CHECK.relative_to(ROOT).as_posix()}\n")
     text = LIST.read_text(encoding="utf-8")
+    tram_path = LIST.parent / M.TRAM_NAME
+    tram = tram_path.read_text(encoding="utf-8") if tram_path.exists() else None
     with tempfile.TemporaryDirectory() as tmp:
-        results = [case(*c, text, tmp) for c in CASES]
+        results = [case(c[0], c[1], c[2], text, tram, tmp, *c[3:]) for c in CASES]
 
         # THE POSITIVE CONTROL: an unmodified copy must pass. Without it, a
         # check that fails on everything would pass every case above.
         path = Path(tmp) / "city_master_list.md"
         path.write_text(text, encoding="utf-8", newline="\n")
+        if tram is not None:
+            (Path(tmp) / M.TRAM_NAME).write_text(tram, encoding="utf-8", newline="\n")
         code, out = run(path)
     clean = code == 0
     print(f"\n{'PASS' if clean else 'FAIL'}  an unmodified copy passes (exit {code})")

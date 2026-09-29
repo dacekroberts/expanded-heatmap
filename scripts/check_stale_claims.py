@@ -131,8 +131,11 @@ EXCLUDE_DIRS = ("docs/build_briefs", "docs/notifications")
 # `city_master_list_evidence.md` is the master list's own evidence trail, moved
 # out of it on 2026-09-27 word for word: the closed bands, the emptied open gap,
 # the 2026-09-22 tier view. Every count and "now" in it is dated on purpose.
+# `tram_city_list.md` is Band T moved out of the master list on 2026-09-29, and
+# check_master_list_counts.py checks its counts the same way.
 EXCLUDE_NAMES |= {
     "city_master_list.md",
+    "tram_city_list.md",
     "city_master_list_evidence.md",
     "global_country_shortlist.md",
     "canada_step0_endpoints.md",
