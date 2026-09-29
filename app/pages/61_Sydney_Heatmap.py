@@ -54,8 +54,9 @@ placed per building, so the shops in a shopping centre share one point.
 
 Shops, food and personal services are all shown; car and fuel retailers count
 as shops, as in the other cities. Left out: parking, catering firms, funeral
-services, religious and membership organisations, licensed members' clubs, and
-brothels.
+services, religious and membership organisations, licensed members' clubs,
+brothels, and the survey's "other personal services" class, which in
+Melbourne's census holds mostly consultancies in office suites.
 
 **About five storefronts in six sit within a station ring.**
 

@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**155 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**156 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Melbourne built on the City of Melbourne's land-use census, by Metro Trains line group; 9539 excluded in Melbourne and Sydney (owner)](#2026-09-28---melbourne-built-on-the-city-of-melbournes-land-use-census-by-metro-trains-line-group-9539-excluded-in-melbourne-and-sydney-owner)
 - [Sydney built on the City of Sydney's floor-space survey: light rail out, a new Oceania region, catering, funerals and clubs out (owner)](#2026-09-28---sydney-built-on-the-city-of-sydneys-floor-space-survey-light-rail-out-a-new-oceania-region-catering-funerals-and-clubs-out-owner)
 - [Funeral services come off every map (owner); audit and plan](#2026-09-28---funeral-services-come-off-every-map-owner-audit-and-plan)
 - [Bucharest's DSVSA files fetched by the owner in their browser: about 19,000 active storefronts, not 31,299 - a quarter of the rows are cancelled registrations](#2026-09-28---bucharests-dsvsa-files-fetched-by-the-owner-in-their-browser-about-19000-active-storefronts-not-31299---a-quarter-of-the-rows-are-cancelled-registrations)
@@ -191,6 +192,79 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Melbourne built on the City of Melbourne's land-use census, by Metro Trains line group; 9539 excluded in Melbourne and Sydney (owner)
+
+- **ANZSIC 9539 "Other Personal Services n.e.c." excluded in both Australian
+  cities (owner), superseding the same day's keep in Sydney** (the entry
+  "Sydney built on the City of Sydney's floor-space survey"). Sydney's survey
+  has no names, so the class could not be sampled there; Melbourne's census
+  names it: 214 of its 279 rows are upper-floor suites, mostly migration and
+  education consultancies ("Suite 1008, Level 10, 365 Little Collins
+  Street"), with a few tattoo studios. Sydney re-rendered on this branch:
+  7,328 -> **7,074** storefronts, Personal services 1,003 -> 749, 83.5% ->
+  83.4% in the rings. Rejected: excluding it in Melbourne only (two maps
+  differing on one class), keeping it in both.
+- **Trains drawn by Metro Trains' line group (owner)**: inside the
+  municipality each group's lines share one track (the Burnley group's four to
+  Richmond), so 16 line labels would stack. Six groups, from the colours OSM's
+  relations carry (Burnley, Clifton Hill, Northern, Cross City, Frankston,
+  Metro Tunnel; Sandringham shares Cross City's colour, so the seven proposed
+  became six), each labelled on the map with its lines named in the legend.
+  Each of the 119 relations is assigned by the line name before the colon in
+  its `name`; one matching no group stops step 1. **Left out (owner)**: the
+  Flemington Racecourse line (event days only; its Showgrounds and Flemington
+  Racecourse stations with it) and the City Circle (OSM's own description:
+  "Not a usual service"). Rejected: 16 separate lines; the racecourse line in.
+- **Trams left out, and the page says what they would add (owner)**: 96.0%
+  of storefronts in a ring with trains, 99.1% with trams (the brief's
+  measure). Sydney's light-rail treatment.
+- **The credit is the licence read's draft (owner), notice 65**: "Business
+  establishments: City of Melbourne, Census of Land Use and Employment (CLUE)
+  2024", the dataset and CC BY 4.0 linked, "Filtered, categorised and
+  aggregated by this project", no endorsement.
+- **Richmond is out, on the boundary rule this build wrote**: a station is in
+  when the centre of its platforms (its stop nodes) is inside the LGA;
+  Richmond's is just outside on Punt Road, though OSM's station node is
+  inside. The brief measured the coverage difference at 0.0 points.
+- **Built** (`worktree-melbourne`, stacked on `worktree-sydney` for the shared
+  taxonomy, the Oceania region and `docs/data_sources/australia.md`; lands
+  after Sydney):
+  - Census: the 2024 export only (3,842,307 bytes, 19,672 rows, count
+    asserted; owner's OK, against the whole table's 413,550 rows and about 85
+    MB). `anzsic_fes` gains CLUE's six finer retail classes (4111 convenience
+    stores, 4254-4258 clothing and footwear by wearer), found by the step's
+    stop on an undecided class. **4,959 storefronts** (Retail 1,852, Food
+    service 2,646, Personal services 461), every one inside the LGA. 1,840
+    distinct points (the property's), the largest 219; 434 upper-floor or
+    suite tenancies kept and reported.
+  - Rail: six groups merged by London's branch rule and clipped to the LGA;
+    colours from `line_colour_search.py` (closest pair within 500 m 36.6).
+    **17 stations**, gate 3 exact against the brief's list less the racecourse
+    line's two and Richmond.
+  - Boundary: OSM relation 2404870, 37.7 km² in UTM 55S.
+  - **4,760 storefronts in the rings (96.0%).**
+  - Macro label 72.4 px (measured with Sydney's); PROBLEMS 0 in 11 regions,
+    Sydney and Melbourne together in Oceania.
+- **Exposure (`check_personal_exposure.py melbourne`)**: CLUE's trading name
+  is the only name, no fallback; 0 contact details. The heuristic's 27.7% is
+  trade names on a 50-name sample ("Grossi Florentino", "Mister Munro"); one
+  storefront sits at an "Apartment" address, under a trade name. The census
+  covers non-residential floor space.
+- **Verified**: `brief_check.py melbourne` 4/4; `drift_check.py melbourne` and
+  `sydney` zero drift against 226b783; `check_inconsistency_list.py`,
+  `check_macro_facts.py`, `check_scope_disclosure.py` and
+  `check_master_list_counts.py` OK; the map rendered at 1000x650 with six
+  labels, the legend and the OSM credit (the legend covers the east edge; it
+  has a Hide control). `app/macro_facts.json` keeps this branch's London count
+  (56,589): the shared `data/` folder now holds the flat-rule London that
+  lands with Glasgow.
+- Files: `pipeline/melbourne/`, `pipeline/taxonomies/anzsic_fes.py`,
+  `app/pages/62_Melbourne_Heatmap.py`, `app/pages/61_Sydney_Heatmap.py`,
+  `app/components.py` (notice 65), `app/cities.py`, `docs/data_sources.md`,
+  `docs/data_sources/australia.md`, `docs/excluded_categories.md`,
+  `docs/map_inconsistencies.md`, `docs/city_master_list.md`, both briefs,
+  `outputs/sydney/heatmap.html`.
 
 ### 2026-09-28 - Sydney built on the City of Sydney's floor-space survey: light rail out, a new Oceania region, catering, funerals and clubs out (owner)
 

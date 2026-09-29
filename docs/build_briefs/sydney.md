@@ -19,6 +19,9 @@ Sydney", and "Melbourne and Sydney briefs written".
 > - **7,328 storefronts** (Retail 3,091, Food service 3,234, Personal services
 >   1,003) after 27 points outside OSM's LGA polygon; 5,218 distinct points.
 >   **83.5% within a ring** (6,120).
+> - **Superseded the same day (owner, on Melbourne's evidence)**: 9539 other
+>   personal services n.e.c. excluded, so **7,074 storefronts** (Personal
+>   services 749), **83.4% within a ring**.
 > - **Stations**: OSM's stop names spell the platform three ways ("Central,
 >   Platform 16", "Campbelltown Platform 2", "Gadigal 1"); normalised, the
 >   route-membership stations inside the LGA are exactly the brief's 16.

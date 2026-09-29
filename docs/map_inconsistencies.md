@@ -43,8 +43,9 @@ dense-looking city may simply have more complete records.
   barber, beauty and laundry registers of four), so the other fifteen have no data
   at all.
 - **Street surveys or censuses of premises:** Montréal, Madrid, Barcelona, the
-  nine Brazilian cities (IBGE's 2022 census walk), and Sydney (the City of
-  Sydney's 2022 floor-space survey, one council only).
+  nine Brazilian cities (IBGE's 2022 census walk), Sydney (the City of
+  Sydney's 2022 floor-space survey, one council only) and Melbourne (the City
+  of Melbourne's 2024 land-use census, one council only).
 - **National statistical or establishment registers:** Mexico City, Guadalajara and
   Monterrey (INEGI DENUE), the five French cities (SIRENE), Oslo (Enhetsregisteret sub-units),
   Copenhagen (CVR production units), Prague (ROS02 with RES); Taichung, Taoyuan
@@ -117,8 +118,10 @@ and districts no metro reaches.
   owner call of 2026-09-24, recorded in the `japan-city`
   skill, not the line-by-line test below), Berlin (the S-Bahn's 16 lines, the
   Ring among them, cut at the Land boundary), London (the Elizabeth line and the
-  six London Overground lines, cut at Greater London) and Sydney (Sydney Trains'
-  six lines through the City of Sydney, where they run as a metro).
+  six London Overground lines, cut at Greater London), Sydney (Sydney Trains'
+  six lines through the City of Sydney, where they run as a metro) and
+  Melbourne (Metro Trains' six line groups through the City Loop and the Metro
+  Tunnel).
 - **Excluded by name:** BART and Caltrain, Metra, Metrolink, Coaster/Sprinter, SEPTA
   Regional Rail, MBTA Commuter Rail, Tri-Rail, GO Transit, West Coast Express,
   Cercanías, Milan's Passante and Trenord, Iarnród Éireann Commuter/InterCity, RER and
@@ -438,6 +441,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Buenos Aires | Subte Líneas A–E and H | Premetro, heritage tramway, commuter railways | SBASE's station and track layers (BA Data); names from OpenStreetMap; gate 3 exact on six lines against SBASE and OSM | Ciudad Autónoma (all 89 stations inside) | 0 / 0 |
 | **Australia** | | | | | |
 | Sydney | Sydney Trains T1, T2, T3, T4, T8 and T9 and Sydney Metro M1 (7 lines, refs on the map, full names in the legend) | Light rail L1-L3 (22 stops in the LGA), NSW TrainLink, ferries | OpenStreetMap route relations (Transport for NSW's GTFS needs an API key); gate 3 exact on the 16 stations inside the LGA | The City of Sydney LGA (lines cut at the boundary) | 157 / 0 |
+| Melbourne | Metro Trains Melbourne by line group: Burnley, Clifton Hill, Northern, Cross City, Frankston, Metro Tunnel (6 lines, the group on the map, its lines in the legend) | Trams (22 routes, 155 stops in the LGA), the event-day Flemington Racecourse line, the City Circle, V/Line | OpenStreetMap route relations (119, assigned to groups by line name); gate 3 exact on the 17 stations inside the LGA | The City of Melbourne LGA (lines cut at the boundary) | 199 / 0 |
 
 ### B. Business data (dimensions 4–6)
 
@@ -524,7 +528,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Argentina** | | | | | |
 | Buenos Aires | Street survey (2022–2024) | The city's Relevamiento Usos del Suelo (BA Data; no names) | Survey's own use subtypes (385, enumerated) | 30,586 / 6,987 / 4,697 | Malls and arcades not itemised (593 left out); unidentified shopfronts (6,243, 7.2%) dropped |
 | **Australia** | | | | | |
-| Sydney | Street survey or census | The City of Sydney's Floor Space and Employment Survey, 2022 (FES Industry of occupation; no names) | ANZSIC 2006 class | 2,490 / 2,768 / 861 | One council, the City of Sydney; points per building; religious and membership organisations, parking, clubs, catering, funerals and brothels excluded by class |
+| Sydney | Street survey or census | The City of Sydney's Floor Space and Employment Survey, 2022 (FES Industry of occupation; no names) | ANZSIC 2006 class | 2,490 / 2,768 / 642 | One council, the City of Sydney; points per building; religious and membership organisations, parking, clubs, catering, funerals, brothels and other personal services n.e.c. excluded by class |
+| Melbourne | Street survey or census | The City of Melbourne's Census of Land Use and Employment, 2024 (CLUE; trading names) | ANZSIC 2006 class | 1,768 / 2,546 / 446 | One council, the City of Melbourne; points per property; the same class exclusions as Sydney |
 
 ### C. Location, coverage and city-specific exclusions (dimensions 7–9)
 
@@ -603,7 +608,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Argentina** | | | |
 | Buenos Aires | Parcel centres (99.8%) and block centres (0.1%), a join to the city's Parcelas on the survey's parcel key; 3 not placed | Each block surveyed once, 2022–2024; unidentified shopfronts 7.2% (32% in Villa Riachuelo); malls not itemised; businesses in one building share a point | Homes with a business inside (filed as housing); car repair, finance, lottery, health and veterinary, offices, wholesale by use |
 | **Australia** | | | |
-| Sydney | Census coordinates (per building; 5,218 distinct points for 7,328 storefronts) | The City of Sydney LGA only; a five-yearly survey (2022); no names | Parking, non-store retail, organisations, licensed members' clubs, catering, funerals and brothels by class; two n.e.c. catch-alls kept |
+| Sydney | Census coordinates (per building; 5,054 distinct points for 7,074 storefronts) | The City of Sydney LGA only; a five-yearly survey (2022); no names | Parking, non-store retail, organisations, licensed members' clubs, catering, funerals, brothels and other personal services n.e.c. by class; one n.e.c. catch-all kept |
+| Melbourne | Census coordinates (per property; 1,840 distinct points for 4,959 storefronts) | The City of Melbourne LGA; upper-floor tenancies kept | Parking, non-store retail, organisations, licensed members' clubs, catering, funerals, brothels and other personal services n.e.c. by class; one n.e.c. catch-all kept |
 
 ### D. Vintage and map features (dimensions 10–11, plus two added)
 
@@ -693,7 +699,8 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | **Argentina** | | | | | | |
 | Buenos Aires | Surveyed 2022–2024, published October 2025 (2026-09-28) | B (prose) | 0.6 mi | Yes | 66% | Street address + use (the survey has no names) |
 | **Australia** | | | | | | |
-| Sydney | Survey of 2022 (layer last edited 2025-02-12; fetched 2026-09-28) | B | 0.6 mi | Yes | 84% | Kind of business (the survey has no names) |
+| Sydney | Survey of 2022 (layer last edited 2025-02-12; fetched 2026-09-28) | B | 0.6 mi | Yes | 83% | Kind of business (the survey has no names) |
+| Melbourne | Census of 2024 (dataset modified 2021-11-02 per its metadata; fetched 2026-09-28) | B | 0.6 mi | Yes | 96% | Registered name (the trading name) |
 
 Features every map shares, so not a difference: permanent line labels and a legend
 entry for every line; rings start switched off; OSM basemap credit; the site-wide

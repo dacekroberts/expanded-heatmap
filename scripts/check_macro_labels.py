@@ -200,6 +200,9 @@ TEXT_WIDTH = {
     # measureText after document.fonts.load, Space Grotesk loaded; Prague 47.3,
     # Tokyo 40.5 and London 50.9 reproduced exactly in the same run.
     "Sydney": 51.4,
+    # Melbourne: measured in the same run as Sydney (2026-09-28, the deployed
+    # app's own frame; Prague, Tokyo and London reproduced).
+    "Melbourne": 72.4,
     "Guadalajara (Regional)": 152.7, "Los Angeles": 80.8, "Madrid": 47.2,
     "Mexico City": 80.0,
     "Miami (Regional)": 112.6, "Montréal": 60.8, "New York": 61.4,
