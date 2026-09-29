@@ -1445,6 +1445,11 @@ Nicaragua, Ethiopia, Albania, Ghana, Côte d'Ivoire, Tunisia, Rwanda, DR Congo,
 South Africa, Costa Rica, Bolivia, Algeria, Mali, Sierra Leone, Uganda, Kenya,
 Dominican Republic, Zimbabwe, Nigeria, Uruguay, Sri Lanka
 
+▼ **2026-09-28: Algeria was misfiled here.** Algiers has a metro (Line 1,
+Grande Poste to El Harrach and extensions) and a tramway; the single-feed
+catalogue simply did not carry them. Screened the same day on the business
+side and discarded (owner): see Tier 4, Algeria.
+
 **Access and geopolitics, not data**
 Russia · Ukraine
 
@@ -2097,6 +2102,7 @@ before the next country is profiled.
 | **Belgium** | Establishment units exist; **bulk access requires application and payment** | MEASURED |
 | **Australia, New Zealand** | Auckland is commuter-only. **Melbourne's PTV feed is a nested zip** the screen cannot read, so its rail is *unverified rather than absent*. Business licensing is not municipal — **ASSERTED** | MIXED |
 | **Russia, Ukraine** | Access and conflict, not data | — |
+| **Algeria** | **Algiers screened 2026-09-28 and discarded (owner)**, after the "no urban rail" misfiling was corrected. CNRC's Sidjilcom (`sidjilcom.cnrc.dz`) is a paid per-trader lookup (5,000-20,000 DZA a semester), with no bulk or open offer. ONS's register of natural-person businesses (`Prsphys_S2_2023.pdf`, as of 2023-12-31) is counts by wilaya × NAA section only. The wilaya's downloads are weapons forms; the Algiers Direction du Commerce (`dcwalger.dz`) returns a MySQL error. The only name-and-address lists are the Ministry of Commerce's holiday duty rosters (traders' personal names, NRC numbers, free-text addresses, no licence). No `data.gov.dz` exists (DNS) | MEASURED |
 | **Iran, Belarus** | **Left out like Russia, for wartime concerns (owner, 2026-09-28)**: Tehran (~150 stations) and Minsk (~37 stations) are not screened. Not a data finding | — |
 
 ### Japan's rail data is solved, and not by GTFS

@@ -19,10 +19,11 @@ negative, kept out.
 "(kn)" marks a network size from general knowledge, not from the record; a
 "subway 35" in the record counts route relations in a feed, not stations.
 
-## Discarded (26) - `docs/city_master_list.md`, DISCARDED
+## Discarded (27) - `docs/city_master_list.md`, DISCARDED
 
 | City | Country | Network | Why not covered (the record's words, short) |
 |---|---|---|---|
+| Algiers | DZ | 1 metro line + trams (kn) | No premises list at any level (screened 2026-09-28, owner); its "no urban rail" misfiling corrected |
 | Mumbai | IN | Metro 1, 2A, 7, 3; Monorail (kn) | No storefront list on the city's or state's reachable hosts (screened 2026-09-28, owner) |
 | Munich, Frankfurt, Cologne | DE | 96 / 86 / ~230 stops (kn) | No premises register on a full enumeration of each catalogue, geoportal and chamber (screened 2026-09-28, owner) |
 | Manila | PH | LRT-1, LRT-2, MRT-3 | No business list at any level (re-screened 2026-09-28, owner); the old commuter-rail reason is obsolete |
@@ -48,7 +49,7 @@ negative, kept out.
 | Medellín | CO | 6 relations | "Three closed doors" |
 | Honolulu | US | Skyline (small) | No premises register |
 
-## Country ruled out (27) - "Countries ruled out" and the shortlist
+## Country ruled out (26) - "Countries ruled out" and the shortlist
 
 | City | Country | Network | Why not covered |
 |---|---|---|---|
@@ -60,7 +61,6 @@ negative, kept out.
 | Brussels | BE | 69 stations (kn) | Bulk access paid |
 | Kyiv | UA | 52 stations (kn) | Excluded for now: active war |
 | Auckland | NZ | commuter 5 | Commuter only; licensing not municipal |
-| Algiers | DZ | 1 metro line + trams (kn) | Filed under "no urban rail at all" - **wrong**; it has a metro |
 
 ## In a band, not built (15)
 
@@ -110,4 +110,6 @@ Recommended first for re-screening (the staging handoff's priority 1):
    and left the band table.
 6. ~~**China's fourteen**~~ - **done 2026-09-28**: ruled out as a country
    (owner), Hangzhou's opening noted.
-7. **Algiers** - misfiled as having no urban rail.
+7. ~~**Algiers**~~ - **done 2026-09-28**: misfiling corrected, then
+   discarded (owner). **Buenos Aires** probed the same day (never-screened
+   list): see DECISIONS.

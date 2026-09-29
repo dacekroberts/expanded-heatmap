@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**115 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**116 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Algiers: the "no urban rail" misfiling corrected, then discarded (owner)](#2026-09-28---algiers-the-no-urban-rail-misfiling-corrected-then-discarded-owner)
 - [Tehran and Minsk left out like Russia, for wartime concerns (owner)](#2026-09-28---tehran-and-minsk-left-out-like-russia-for-wartime-concerns-owner)
 - [China ruled out as a country after a feasibility gate; Hangzhou's opening noted, legal barriers high (owner)](#2026-09-28---china-ruled-out-as-a-country-after-a-feasibility-gate-hangzhous-opening-noted-legal-barriers-high-owner)
 - [Berlin's personal-services gap corrected: only hairdressers and laundries are missing](#2026-09-28---berlins-personal-services-gap-corrected-only-hairdressers-and-laundries-are-missing)
@@ -151,6 +152,24 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Algiers: the "no urban rail" misfiling corrected, then discarded (owner)
+
+- **Corrected Algeria's filing: Algiers has a metro and a tramway.** The
+  87-country screen put Algeria under "no urban rail at all" from a
+  single-feed catalogue that did not carry either; the shortlist now says so
+  beside the old list.
+- **Discarded Algiers on its business side (owner's call).** CNRC's Sidjilcom
+  is a paid per-trader lookup (5,000-20,000 DZA a semester), with no bulk or
+  open offer. ONS's register of natural-person businesses (as of 2023-12-31)
+  is published as counts by wilaya × NAA section only. The wilaya's
+  downloads are weapons forms, and the Algiers Direction du Commerce's pages
+  return a database error. The only name-and-address lists are the Ministry
+  of Commerce's holiday duty rosters, which carry traders' personal names,
+  no coordinates and no licence. `data.gov.dz` does not exist (DNS). Files:
+  `docs/city_master_list.md` (DISCARDED), `docs/global_country_shortlist.md`
+  (the no-rail list and Tier 4), `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - Tehran and Minsk left out like Russia, for wartime concerns (owner)
 
