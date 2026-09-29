@@ -1293,28 +1293,29 @@ So:
 A city is never listed in two bands. The same rule governs the Japan list
 (`scripts/japan_ward_table.py`) and every chat republish.
 
-**A source must be current, and what "current" means depends on its kind
-(owner, 2026-09-29).** Read the latest date IN THE DATA, never the
-catalogue's description or its re-stamp: Stockholm's layer read "daily" while
-frozen, and Tenerife's catalogue was re-stamped 2026-05-31 with no row
-changed. Judge a directory of mixed ages by its median row, not its newest.
-1. **A complete census or survey** (every premises observed at one time:
-   Brazil's CNEFE, Barcelona's ground-floor census, Sydney's floor-space
-   survey, Buenos Aires' land-use survey, Melbourne's CLUE) **stands while its
-   fieldwork is under five years old**, with its date on the page. Brazil's
-   and Barcelona's 2022 fieldwork come up for re-check in 2027; Hamburg's
-   2016 retail survey failed.
-2. **A register or directory** (a list someone maintains) **must still be
-   maintained: its newest update in the data within 18 months of the
-   screen**, and its data date on the page if it has stopped. Stockholm
-   (frozen 11 months at build) and Kansas City (8.5 months) pass; Atlanta
-   (last edited 2023-04) and Santa Cruz–La Laguna's directory (newest
-   2023-11, median row 2016-11) fail.
-3. **A stream of events** (permits, certificates, notices) records openings,
-   not closings, so it needs a closure field or a stated expiry window, and
-   events within the last 18 months. Dallas's certificates of occupancy failed
-   both: no closure, and nothing after 2022-11-15. Rotterdam's permit notices
-   pass on a five-year window.
+**A source must be current: one clock for every kind of source (owner,
+2026-09-29).** It replaces the same day's three clocks (five years for a
+census, 18 months for a register), which were fitted to earlier calls rather
+than derived; a register frozen at a date is a snapshot as of that date, just
+as a census is.
+1. **It must be able to drop closed businesses**: a complete snapshot (a
+   census, a survey, a register kept up to its last update), a validity year,
+   a closure field, or an expiry window. A source that only records openings
+   fails at any age: Dallas's certificates of occupancy (issued on move-in,
+   never withdrawn) and Santa Cruz–La Laguna's retail and services directory
+   (rows aged in place, no closure field, median last update 2016-11).
+2. **Its age is the date it last showed what was open, read in the rows**,
+   never the catalogue's description or its re-stamp: Stockholm's layer read
+   "daily" while frozen, and Tenerife's catalogue was re-stamped 2026-05-31
+   with no row changed. For a validity-year source, the latest year held in
+   full. Look for a newer layer from the same publisher before dating a
+   city: Atlanta's 2019–22 layer hid its 2024 one.
+3. **The ceiling is five years, and the date is on the page.** Five is what
+   the site already publishes: Brazil's census and Barcelona's and Sydney's
+   surveys are 2022 fieldwork, up for re-check in 2027. Density ages more
+   slowly than any one pin, since a closed storefront often reopens as
+   another business. Stockholm (2025-10), Kansas City (2025's licences) and
+   Atlanta (2024's) pass; Hamburg's 2016 survey fails.
 
 **A frozen part may sit beside a current whole**, its date on the page:
 Tokyo's Koto, Chuo and Shinjuku lists end 2022-11 to 2023-01, with current

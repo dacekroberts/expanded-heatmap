@@ -91,13 +91,13 @@ schema verification. Do this for every candidate before scaffolding:
    (Van Nuys, San Pedro...), so an exact match keeps about half the city;
    find the authoritative in-city marker (LA's `council_district`) instead.
    **Then date it from the rows, never the catalogue** (the currency rule in
-   `docs/city_master_list.md`, "Five rules", owner 2026-09-29): the max of
-   the data's own update or validity column, and for a directory its median
-   row too. A census or survey passes while its fieldwork is under five
-   years old; a register or directory needs an update within 18 months; a
-   stream of permits or notices needs a closure field or an expiry window.
-   Kansas City's licence register had no update since January, and its
-   rows, grouped by licence year, showed the year it froze.
+   `docs/city_master_list.md`, "Five rules", owner 2026-09-29): the source
+   must be able to drop closed businesses (a snapshot, a validity year, a
+   closure field or an expiry window), and the date it last showed what
+   was open must be under five years old. List the publisher's other
+   layers first: Atlanta's 2019-22 licence layer, screened alone, hid a
+   2024 one. Kansas City's rows, grouped by licence year, showed the year
+   its register froze.
 2. **Transit data.** Find the real GTFS feed URL and confirm it downloads
    and unzips (`curl -sL <url> -o gtfs.zip`). A URL from search can still
    time out or 404 - San Francisco's official feed host timed out from this

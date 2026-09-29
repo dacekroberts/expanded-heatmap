@@ -20,10 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**176 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**178 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Atlanta's 2024 licence layer is not a publication to build on: it carries per-business revenue, likely confidential under Georgia law, and no licence; Atlanta stays discarded pending the owner](#2026-09-29---atlantas-2024-licence-layer-is-not-a-publication-to-build-on-it-carries-per-business-revenue-likely-confidential-under-georgia-law-and-no-licence-atlanta-stays-discarded-pending-the-owner)
+- [The currency rule rewritten as one clock: the source must drop closures, its as-of date under five years (owner); Atlanta's 2024 layer found](#2026-09-29---the-currency-rule-rewritten-as-one-clock-the-source-must-drop-closures-its-as-of-date-under-five-years-owner-atlantas-2024-layer-found)
 - [Incheon built on SEMAS's national storefront register (owner); the LOCALDATA API found closed by an identity check; cross-city category rules made a step every build passes through (owner)](#2026-09-29---incheon-built-on-semass-national-storefront-register-owner-the-localdata-api-found-closed-by-an-identity-check-cross-city-category-rules-made-a-step-every-build-passes-through-owner)
 - [Santa Cruz–La Laguna back from the discards to T2, food only on the Cabildo's current register (owner)](#2026-09-29---santa-cruzla-laguna-back-from-the-discards-to-t2-food-only-on-the-cabildos-current-register-owner)
 - [A currency rule by kind of source: census five years, register 18 months, event streams need a closure (owner)](#2026-09-29---a-currency-rule-by-kind-of-source-census-five-years-register-18-months-event-streams-need-a-closure-owner)
@@ -215,6 +217,77 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Atlanta's 2024 licence layer is not a publication to build on: it carries per-business revenue, likely confidential under Georgia law, and no licence; Atlanta stays discarded pending the owner
+
+- **The licence read (`licence-read` agent) found no grant and a likely
+  unintended exposure.** `BusinessLicenses_2024_Revenue` (item 1d0c61a4…)
+  declares nothing: `licenseInfo`, `accessInformation`, `copyrightText`,
+  `useLimit` and the item description are all blank; its service description
+  reads "Business Licenses for 2024. Source: Office of Revenue". It is shared
+  to Everyone but sits in no group and is **not in the city's open-data hub**
+  (group b3b5baff…, 57 items, none on businesses; the hub's DCAT-US feed
+  lists 59 datasets, none business-related). No City open-data policy was
+  found. Esri's help page says public sharing grants use "subject to any use
+  constraints", but the binding Master Agreement (E204CW §2.4(c)) only
+  describes redistribution "through Online Services", which a static map on
+  this site is not.
+- **The layer carries `PREVIOUS_YEAR_REPORTED_REVENUE` (on 19,264 of 19,297
+  rows) and an employee count.** O.C.G.A. § 48-13-15(a) makes gross-receipts
+  information given to a local government for occupation tax confidential,
+  its disclosure a misdemeanour under (b), with no public-release exception
+  in (c). A layer that appears to breach that statute reads as an accident,
+  not a publication, and the City could withdraw it at any time. **Rejected:
+  building on it with the revenue columns dropped**, because it still rests on
+  that exposure and on no licence. Revenue and employee figures are never
+  published from any source. The agent printed five sample revenue values to
+  its own stdout while describing fields and saved none; this session's
+  scripts read only counts, licence years, NAICS, geocode quality and points.
+- **Atlanta stays in the discards; its row's ground is now terms, not
+  currency** (the owner to confirm). The same account's 2019–2023 yearly
+  layers carry the same revenue fields; the 2019–22 `GBL_WFL1` layer is
+  unread for fields and licence. Untested routes: the Atlanta Regional
+  Commission's portal, which lists City licence extracts (each needs its own
+  read), or asking the City, the last resort. Whether to tell the City its
+  revenue figures are publicly exposed is the owner's decision; the contacts
+  the agent saw (not tested) are `gis-team@atlantaga.gov` and the hub's
+  named contact.
+
+### 2026-09-29 - The currency rule rewritten as one clock: the source must drop closures, its as-of date under five years (owner); Atlanta's 2024 layer found
+
+- **Supersedes the same day's "A currency rule by kind of source" (owner).**
+  Its separate clocks (five years for a census, 18 months for a register)
+  were fitted to earlier calls, not derived, and the owner asked why the
+  periods differed. They should not: a register kept up until it froze is a
+  snapshot as of its freeze, as a census is. What separated the good calls
+  from the bad was whether the source ever showed closures. The rule now has
+  one test and one clock: (1) the source can drop closed businesses (a
+  complete snapshot, a validity year, a closure field or an expiry window),
+  (2) its age is the date it last showed what was open, read in the rows,
+  and (3) the ceiling is five years with the date on the page. Five is what
+  the site already publishes (Brazil, Barcelona, Sydney: 2022 fieldwork); a
+  three-year ceiling was the alternative, and would put those 12 cities up
+  for review now. Dallas and Santa Cruz–La Laguna's directory fail part 1
+  at any age; Hamburg's 2016 survey fails part 3. `docs/city_master_list.md`
+  ("Five rules") and `add-city` Step 0 carry it.
+- **Atlanta's discard was measured on the wrong layer.** The 2026-09-28
+  screen read "Revenue Department - List of Business Licenses" (`GBL_WFL1`,
+  26,643 rows, licence years 2019–22, last edited 2023-04-24). The same
+  account (`gpickren2`, the city's planning GIS) also publishes
+  **`BusinessLicenses_2024_Revenue`** (item 1d0c61a4…, last edited
+  2024-08-15): **19,297 licences**, 14,591 for licence year 2024 (2,373
+  for 2023, 2,333 for 2022), NAICS codes, geocoded (PointAddress 11,223,
+  Subaddress 5,854, StreetAddress 2,022), **99.3% inside the city limits**
+  (the city's own boundary layer). Buckets by NAICS: **retail 44–45 2,944,
+  food 722 2,141, personal 8121/8123 1,306**. Also found: yearly layers
+  2019–2023 (16,022 for 2023) and a 2026 layer for the Main Street districts
+  only. **MARTA: 23 of the 38 rail stations** in the city GIS's station
+  layer (dated 2019) are inside the city limits; outside are the Red and
+  Gold lines' northern and southern ends and the Blue line's eastern end, so
+  a per-line stub test is due at build. The item declares no licence; a
+  licence read is under way, and Atlanta is banded on its verdict. Scripts:
+  `data/_staging_scratch_2026-09-29/band_t_audit/atl_find.py`,
+  `atl_2024.py`, `atl_stations.py`.
 
 ### 2026-09-29 - Incheon built on SEMAS's national storefront register (owner); the LOCALDATA API found closed by an identity check; cross-city category rules made a step every build passes through (owner)
 
