@@ -68,6 +68,22 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     precision and data age. Each city's tier is a `cities.py` field backed by
     a check, never hand-kept. Per-city tiers go to the owner first. An `app/`
     change: review time, `map-chrome` deploy-verify, reboot.
+  - [ ] **SUPERSEDED IN PART 2026-09-29 (owner): dot COLOUR becomes network
+    type** (teal metro, a new hue each for light rail and tram), and
+    completeness moves to the FILL: solid = full, a ring with a pale centre
+    (the pill surface colour; ~2 px stroke) = narrowed, a half-filled circle
+    = one category (build when the first one ships). Mode = the highest-order
+    drawn mode, a new `cities.py` field backed by a check; Dublin is tram.
+    Two-key legend; re-run `validate_palette.js`; re-measure the east-coast
+    cluster if the dot grows a pixel. Review time, `map-chrome`
+    deploy-verify, reboot. (DECISIONS "Yes to trams-only maps".)
+  - [ ] **Macro-map label tiers (owner 2026-09-29)**: minor cities get no
+    name pill outside their own region, only the hover tooltip; anchors keep
+    theirs. Europe and East Asia become composites of their sub-regions.
+    **Pilot: the Seoul Capital Area** (minor: Incheon, Goyang, Seongnam,
+    Yongin). France and Czechia after their first tram builds, once
+    `check_macro_labels.py` has scored a placeholder France view at 375, 768
+    and 1200 px. Same review-time route.
 
 - [ ] ⏰ **Prague: Flora reopens around December 2026**: when PID's feed serves
   it again, step 1 STOPS the build on purpose - remove the override then.

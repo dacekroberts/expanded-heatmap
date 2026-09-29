@@ -51,9 +51,9 @@ item is done.**
 
 ## Priority 1 - the tram question: Phases 3-4 on the tram list (41 cities)
 
-**The owner's framing (2026-09-29): a preliminary yes, for scoping and
-filtering the list only.** The owner makes the final call on trams-only maps
-after the audit; nothing on the tram list is built before it.
+**DECIDED 2026-09-29: yes to trams-only maps (owner)**, with the macro-map
+changes alongside (label tiers with Seoul as the pilot; dots coloured by network
+type, completeness by fill; PLAN, under the completeness tiers).
 
 **Done 2026-09-29 (commit 350ce29; DECISIONS "Band T audited")**:
 - **Phase 1, "is it really trams-only?"**: a three-part light-rail test
@@ -76,20 +76,20 @@ after the audit; nothing on the tram list is built before it.
    Santa Cruz–La Laguna's stale directory dropped and the city moved to T2 as
    food only; Kansas City kept in T1 with its data date on the page (both
    owner). The currency rule is in the master list's "Five rules". About 2% of a 5-hour window.
-2. **Phase 3 - the design memo, measured on precedents that already exist**:
-   - **Rings**: Riga is live trams-only with a 0.5-mile spacing filter (15
-     stops out, 108 kept, in-ring share 77.9%); Amsterdam 95.5%, Rotterdam
-     92.8%, Oslo 75.6% already draw trams. Question for the owner: does every
-     tram city get Riga's filter, and what in-ring share would T1's biggest
-     (Brno, Bordeaux, Montpellier) land at? `app/ring_shares.json` has the
-     built figures.
-   - **Labels**: Amsterdam draws 16 tram lines plus 5 metro, each labelled
-     with a legend entry; T1's densest are Brno (11 lines, 146 stops) and
-     Zurich (18 refs).
-   - **Macro map and "Network type"**: read how Riga is labelled now.
-   - **Build cost by pipeline**.
-3. **Phase 4 - the memo, published** as an artifact so the owner can decide;
-   draft its prose in chat first.
+2. **Phases 3-4 - DONE 2026-09-29, the memo published** ("The Tram
+   Question", https://claude.ai/artifact/UQ7Lsdu23HPfuZ1JFxoaxo, private;
+   DECISIONS "Tram audit Phases 3-4"). Owner calls made: no thinning, ring
+   size reduced per city as needed.
+
+**Still open with the owner** (the yes itself is decided):
+- **The ring rule**: French tram cities on France's 0.3 mi rings; others at
+  0.6, down to 0.3 where 0.6 passes about 95%.
+- **Build order**: France, Czechia, Odense and Latvia, the US three and
+  Florence; T2 after its gap verdicts.
+- **Atlanta**: its discard ground from currency to terms (recommended), and
+  whether to tell the City its 2024 layer exposes reported revenue
+  (DECISIONS "Atlanta's 2024 licence layer").
+- **A date check on the published cities** (offered; Milan and Dublin first).
 
 **Stale in the handoff above, corrected**: the tram rescopes are NOT the only
 precedents for drawing trams (Riga, Amsterdam, Rotterdam, Oslo, Dublin's Luas).

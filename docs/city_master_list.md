@@ -865,10 +865,9 @@ precedent.
 
 **Created by the owner 2026-09-27** as "trams only", the same day the owner
 ruled that trams count as rail for this project ("count trams"), and renamed
-"Contingent on trams" the same evening. **The owner's framing (2026-09-29): a
-preliminary yes, for scoping and filtering the list only**; the final call on
-trams-only maps comes after the audit, and nothing on the tram list is built
-before it.
+"Contingent on trams" the same evening. **The owner said yes to trams-only
+maps on 2026-09-29**, after the audit (a preliminary yes for scoping came
+first, the same day); T1 can now be briefed and built.
 
 
 ## DISCARDED — 91 cities, each naming its evidence
