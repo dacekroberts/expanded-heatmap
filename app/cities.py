@@ -1338,7 +1338,7 @@ CITIES = [
         "page": "pages/47_Monterrey_Heatmap.py",
         "coverage": "full",
         "placement": "Register coordinates",
-        "data_age": "DENUE May 2026, fetched 2026-09-27",
+        "data_age": "DENUE May 2026 edition, fetched 2026-09-27",
         "rail_extra": "—",
         "record_kind": "National register",
         "categories": "All three",
