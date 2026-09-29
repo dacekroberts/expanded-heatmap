@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**175 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**176 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [The currency rule rewritten as one clock: the source must drop closures, its as-of date under five years (owner); Atlanta's 2024 layer found](#2026-09-29---the-currency-rule-rewritten-as-one-clock-the-source-must-drop-closures-its-as-of-date-under-five-years-owner-atlantas-2024-layer-found)
 - [Santa Cruz–La Laguna back from the discards to T2, food only on the Cabildo's current register (owner)](#2026-09-29---santa-cruzla-laguna-back-from-the-discards-to-t2-food-only-on-the-cabildos-current-register-owner)
 - [A currency rule by kind of source: census five years, register 18 months, event streams need a closure (owner)](#2026-09-29---a-currency-rule-by-kind-of-source-census-five-years-register-18-months-event-streams-need-a-closure-owner)
 - [The tram list's data re-checked for currency: Santa Cruz–La Laguna discarded, Kansas City kept with its data date (owner)](#2026-09-29---the-tram-lists-data-re-checked-for-currency-santa-cruzla-laguna-discarded-kansas-city-kept-with-its-data-date-owner)
@@ -214,6 +215,42 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - The currency rule rewritten as one clock: the source must drop closures, its as-of date under five years (owner); Atlanta's 2024 layer found
+
+- **Supersedes the same day's "A currency rule by kind of source" (owner).**
+  Its separate clocks (five years for a census, 18 months for a register)
+  were fitted to earlier calls, not derived, and the owner asked why the
+  periods differed. They should not: a register kept up until it froze is a
+  snapshot as of its freeze, as a census is. What separated the good calls
+  from the bad was whether the source ever showed closures. The rule now has
+  one test and one clock: (1) the source can drop closed businesses (a
+  complete snapshot, a validity year, a closure field or an expiry window),
+  (2) its age is the date it last showed what was open, read in the rows,
+  and (3) the ceiling is five years with the date on the page. Five is what
+  the site already publishes (Brazil, Barcelona, Sydney: 2022 fieldwork); a
+  three-year ceiling was the alternative, and would put those 12 cities up
+  for review now. Dallas and Santa Cruz–La Laguna's directory fail part 1
+  at any age; Hamburg's 2016 survey fails part 3. `docs/city_master_list.md`
+  ("Five rules") and `add-city` Step 0 carry it.
+- **Atlanta's discard was measured on the wrong layer.** The 2026-09-28
+  screen read "Revenue Department - List of Business Licenses" (`GBL_WFL1`,
+  26,643 rows, licence years 2019–22, last edited 2023-04-24). The same
+  account (`gpickren2`, the city's planning GIS) also publishes
+  **`BusinessLicenses_2024_Revenue`** (item 1d0c61a4…, last edited
+  2024-08-15): **19,297 licences**, 14,591 for licence year 2024 (2,373
+  for 2023, 2,333 for 2022), NAICS codes, geocoded (PointAddress 11,223,
+  Subaddress 5,854, StreetAddress 2,022), **99.3% inside the city limits**
+  (the city's own boundary layer). Buckets by NAICS: **retail 44–45 2,944,
+  food 722 2,141, personal 8121/8123 1,306**. Also found: yearly layers
+  2019–2023 (16,022 for 2023) and a 2026 layer for the Main Street districts
+  only. **MARTA: 23 of the 38 rail stations** in the city GIS's station
+  layer (dated 2019) are inside the city limits; outside are the Red and
+  Gold lines' northern and southern ends and the Blue line's eastern end, so
+  a per-line stub test is due at build. The item declares no licence; a
+  licence read is under way, and Atlanta is banded on its verdict. Scripts:
+  `data/_staging_scratch_2026-09-29/band_t_audit/atl_find.py`,
+  `atl_2024.py`, `atl_stations.py`.
 
 ### 2026-09-29 - Santa Cruz–La Laguna back from the discards to T2, food only on the Cabildo's current register (owner)
 
