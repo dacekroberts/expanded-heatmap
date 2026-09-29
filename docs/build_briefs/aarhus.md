@@ -175,7 +175,7 @@ the rail.
 |---|---|---|
 | CVR (Datafordeler) | CC BY 4.0 | 30 (Copenhagen's) |
 | DAR Adresse / Husnummer (Datafordeler), credit Klimadatastyrelsen | CC BY 4.0 | 31 |
-| OSM rail, boundary and address points | ODbL 1.0 | notice 1 and the rail-geometry notice |
+| OpenStreetMap rail, boundary and address points | ODbL 1.0 | OpenStreetMap's notice 1 and the rail-geometry notice |
 
 ---
 
