@@ -75,9 +75,11 @@ FLAG_RE = re.compile(FLAG)
 BOLD = re.compile(r"\*\*(.+?)\*\*")
 SEP = re.compile(r"^\|[\s:|-]+\|\s*$")
 BAND_HEAD = re.compile(r"^## .*\bBand ([A-Z])\b")
-# Every band letter a candidate can sit in. N (no page for now) was created
-# and B reopened (passed: narrower pages) by the owner 2026-09-28, when C closed.
-LETTERS = "ABCDNT"
+# Every band letter a candidate can sit in. B reopened (passed: narrower
+# pages) and N created (no page for now) by the owner 2026-09-28, when C
+# closed; later the same day N was retooled as C (closer to a page) and D
+# split into D (blocked, the owner can act) and R (restricted).
+LETTERS = "ABCDRT"
 
 
 # --- reading the file -------------------------------------------------------
@@ -410,7 +412,7 @@ def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
 
 
 def _sum(actual):
-    return " + ".join(f"{x} {actual[x]}" for x in "ABCDNT" if actual[x] or x == "A")
+    return " + ".join(f"{x} {actual[x]}" for x in LETTERS if actual[x] or x == "A")
 
 
 def subgroups(lines, start, end, letter):
