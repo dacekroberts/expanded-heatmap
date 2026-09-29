@@ -948,6 +948,266 @@ LABEL_CLAMP_SCRIPT = """
 })();
 </script>
 """
+# A SECOND, WIDER PHONE PLACER, for a map whose desktop layout already needed
+# the wide label tier (_LABEL_WIDE_CLEARANCES). Added 2026-09-29.
+#
+# LABEL_CLAMP_SCRIPT re-places a colliding label among 15 spots around its own
+# tip, which is enough for every map but one: Osaka's 34 labels had 22
+# overlapping pairs at 343px and 12 at 375px (the 2026-09-29 full
+# deploy-verify, scripts/check_map_labels.js). At the phone fit - zoom 10.75
+# on a 343 x 650 frame - the labels cover 43% of the frame and most start in
+# one knot of line tips, so every spot beside a tip is taken.
+#
+# So after the clamp has run, this moves ONLY a label that still overlaps
+# another label or a control, measured with no margin (a label 1px clear of
+# its neighbour is readable and stays put; with a margin, a desktop Osaka
+# label moved), in two steps:
+#   1. the nearest spot that collides less, from a grid of about a thousand
+#      around its tip - the tip under the box or beside it, the box level with
+#      the tip or in rows above and below - never more than __LABEL_REACH__ px
+#      from the tip, the widest stand-off the desktop layout itself allows
+#      (owner, 2026-09-27);
+#   2. if it still overlaps, a spot blocked only by one or two labels that
+#      each have a clean spot of their own to move to - all or nothing.
+# Measured on Osaka: 22 -> 0 overlaps at 343px, 12 -> 0 at 375px, no label
+# moved at 854 or 1280, about 20 ms a run on the dev machine (the clamp itself
+# takes 35-70). The first version took 240 ms; the cutoffs in hits() and
+# clean() are what brought it down, and it runs on every moveend.
+#
+# INJECTED ONLY WHERE THE WIDE TIER WAS USED, so no other map changes by a
+# byte - the third label pass's argument, one block on. Written into
+# LABEL_CLAMP_SCRIPT it would have changed every committed map and failed
+# check_render_current.py until a full re-render. On 2026-09-29 Osaka was the
+# only one of 68 committed maps with a wide-tier label. It also clears
+# Madrid's one 343px overlap (measured by injecting it); reaching Madrid is a
+# change to the trigger in render_heatmap() plus Madrid's re-render.
+#
+# It runs after the clamp on every event the clamp listens to - a timeout puts
+# it after every synchronous handler, whichever registered first - and undoes
+# its own last move when the clamp has not reset the label since.
+DENSE_LABEL_SCRIPT = """
+<script>
+(function () {
+    var NAME = "__MAP_NAME__";
+    var MARGIN = 6;     // as LABEL_CLAMP_SCRIPT: px from the frame edge
+    var CLEAR = 2;      // as LABEL_CLAMP_SCRIPT: px from a button, control or legend
+    var GAP = 4;        // px between a label and its line's tip
+    var REACH = __LABEL_REACH__;   // px: no label box further than this from its own tip
+    var STEP_X = 8, STEP_Y = 6;
+    var PASSES = 8;
+    var tries = 0, waits = 0;
+
+    function box(x0, y0, x1, y1) { return {x0: x0, y0: y0, x1: x1, y1: y1}; }
+    function shift(b, sx, sy) { return box(b.x0 + sx, b.y0 + sy, b.x1 + sx, b.y1 + sy); }
+    function area(a, b) {
+        var w = Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0);
+        var h = Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0);
+        return w > 0 && h > 0 ? w * h : 0;
+    }
+    function reach(b, p) {
+        var dx = Math.max(b.x0 - p.x, 0, p.x - b.x1);
+        var dy = Math.max(b.y0 - p.y, 0, p.y - b.y1);
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    function place(m) {
+        var size = m.getSize();
+        if (!size.x || !size.y) return;
+        var c = m.getContainer(), mr = c.getBoundingClientRect();
+        var att = c.querySelector(".leaflet-control-attribution");
+        var bottom = size.y - MARGIN - (att ? att.getBoundingClientRect().height : 0);
+        function inside(b) {
+            var dx = Math.max(0, MARGIN - b.x0) - Math.max(0, b.x1 - (size.x - MARGIN));
+            var dy = Math.max(0, MARGIN - b.y0) - Math.max(0, b.y1 - bottom);
+            return shift(b, dx, dy);
+        }
+        var obs = [], bare = [];
+        function add(el) {
+            if (!el) return;
+            var r = el.getBoundingClientRect();
+            if (r.width && r.height) {
+                obs.push(box(r.left - mr.left - CLEAR, r.top - mr.top - CLEAR,
+                             r.right - mr.left + CLEAR, r.bottom - mr.top + CLEAR));
+                bare.push(box(r.left - mr.left, r.top - mr.top,
+                              r.right - mr.left, r.bottom - mr.top));
+            }
+        }
+        add(document.getElementById("map-actions"));
+        var legend = document.querySelector("details.map-legend");
+        if (legend && !legend.open) add(legend);
+        c.querySelectorAll(".leaflet-top.leaflet-left .leaflet-control").forEach(add);
+
+        // Every label where LABEL_CLAMP_SCRIPT left it. Undo this script's own
+        // last move first if the clamp has not re-run since (its handler
+        // resets every label to its baked transform, ours then appends).
+        var labels = [], early = false;
+        m.eachLayer(function (layer) {
+            if (!layer._icon || !layer.getLatLng) return;
+            var d = layer._icon.querySelector(".hm-line-label");
+            if (!d) return;
+            if (d.dataset.base === undefined) early = true;
+            if (d.dataset.dense !== undefined && d.style.transform === d.dataset.dense) {
+                d.style.transform = d.dataset.preDense;
+            }
+            var i = layer._icon.getBoundingClientRect();
+            var r = d.getBoundingClientRect();
+            if (!r.width) return;
+            var p = m.latLngToContainerPoint(layer.getLatLng());
+            if (p.x < 0 || p.y < 0 || p.x > size.x || p.y > size.y) return;
+            var b = box(p.x + (r.left - i.left), p.y + (r.top - i.top),
+                        p.x + (r.right - i.left), p.y + (r.bottom - i.top));
+            labels.push({d: d, p: p, b0: b, b: b});
+        });
+        // LABEL_CLAMP_SCRIPT has not placed the labels yet (it records each
+        // baked transform as data-base on its first run): wait for it, or it
+        // would record this script's move as the baked position.
+        if (early) {
+            if (waits++ < 50) setTimeout(function () { place(m); }, 100);
+            return;
+        }
+
+        // How much of box b is covered by other labels (each with a pixel of
+        // margin) and obstacles - summed only until it reaches `upto`, since a
+        // spot that bad is rejected whatever the rest adds.
+        function hits(L, b, upto) {
+            var k = 0, i, o, w, h;
+            upto = upto === undefined ? Infinity : upto;
+            for (i = 0; i < obs.length && k < upto; i++) k += area(b, obs[i]);
+            for (i = 0; i < labels.length && k < upto; i++) {
+                o = labels[i];
+                if (o === L) continue;
+                w = Math.min(b.x1, o.b.x1 + 1) - Math.max(b.x0, o.b.x0 - 1);
+                h = Math.min(b.y1, o.b.y1 + 1) - Math.max(b.y0, o.b.y0 - 1);
+                if (w > 0 && h > 0) k += w * h;
+            }
+            return k;
+        }
+        // hits(L, b) === 0, stopping at the first collision: step 2 asks it of
+        // every spot a blocker might move to, and most collide.
+        function clean(L, b) {
+            var i, o;
+            for (i = 0; i < obs.length; i++) if (area(b, obs[i])) return false;
+            for (i = 0; i < labels.length; i++) {
+                o = labels[i];
+                if (o !== L && o.b.x0 - 1 < b.x1 && b.x0 < o.b.x1 + 1 &&
+                    o.b.y0 - 1 < b.y1 && b.y0 < o.b.y1 + 1) return false;
+            }
+            return true;
+        }
+        // Whether a label really overlaps something, with no margin. Only such
+        // a label moves: the margins in hits() choose between spots, but a
+        // label 1 px clear of its neighbour is readable and stays put (a
+        // desktop Osaka label did move, before this).
+        function overlapped(L) {
+            return labels.some(function (o) { return o !== L && area(L.b, o.b); }) ||
+                   bare.some(function (o) { return area(L.b, o); });
+        }
+        // Spots for the label's box, nearest its own tip first: the tip under
+        // the box anywhere along its width, or the box beside the tip; the box
+        // level with the tip or in rows above and below it - never further
+        // from the tip than REACH.
+        function spots(L) {
+            if (!L.spots) L.spots = spotsFor(L);
+            return L.spots;
+        }
+        function spotsFor(L) {
+            var w = L.b0.x1 - L.b0.x0, h = L.b0.y1 - L.b0.y0, p = L.p;
+            var xs = [], ys = [], out = [], f, d;
+            for (f = 0; f <= 8; f++) xs.push(p.x - f / 8 * w);
+            for (d = GAP; d <= REACH; d += STEP_X) xs.push(p.x + d, p.x - w - d);
+            for (f = -2; f <= 2; f++) ys.push(p.y - h / 2 + f / 4 * h);
+            for (d = GAP; d <= REACH; d += STEP_Y) ys.push(p.y + d, p.y - h - d);
+            xs.forEach(function (x) {
+                ys.forEach(function (y) {
+                    var b = inside(box(x, y, x + w, y + h));
+                    var r = reach(b, p);
+                    if (r <= REACH) out.push({b: b, r: r});
+                });
+            });
+            out.sort(function (a, b) { return a.r - b.r; });
+            return out;
+        }
+
+        // 1. A label that still overlaps something takes the nearest spot that
+        //    collides less, the most-crowded label first.
+        for (var pass = 0; pass < PASSES; pass++) {
+            var moved = false;
+            labels.slice().sort(function (a, b) { return hits(b, b.b) - hits(a, a.b); })
+                .forEach(function (L) {
+                    if (!overlapped(L)) return;
+                    var best = hits(L, L.b), to = null;
+                    spots(L).some(function (s) {
+                        var k = hits(L, s.b, best);
+                        if (k < best) { best = k; to = s.b; }
+                        return !best;
+                    });
+                    if (to) { L.b = to; moved = true; }
+                });
+            if (!moved) break;
+        }
+
+        // 2. A label still colliding may make room: it takes a spot blocked
+        //    only by one or two other labels, if each of those has a clean spot
+        //    of its own to move to. All or nothing.
+        labels.filter(overlapped)
+            .sort(function (a, b) { return (b.b0.x1 - b.b0.x0) - (a.b0.x1 - a.b0.x0); })
+            .forEach(function (L) {
+                if (!overlapped(L)) return;
+                spots(L).some(function (s) {
+                    var blockers = labels.filter(function (o) {
+                        return o !== L && area(s.b, box(o.b.x0 - 1, o.b.y0 - 1, o.b.x1 + 1, o.b.y1 + 1));
+                    });
+                    if (!blockers.length || blockers.length > 2) return false;
+                    if (obs.some(function (o) { return area(s.b, o); })) return false;
+                    var was = [L.b].concat(blockers.map(function (o) { return o.b; }));
+                    L.b = s.b;
+                    var ok = blockers.every(function (o) {
+                        var hold = o.b;
+                        o.b = box(-1e6, -1e6, -1e6, -1e6);   // out of its own way
+                        var to = null;
+                        spots(o).some(function (t) {
+                            if (clean(o, t.b)) { to = t.b; return true; }
+                            return false;
+                        });
+                        o.b = to || hold;
+                        return !!to;
+                    });
+                    if (ok && clean(L, L.b)) return true;
+                    L.b = was[0];
+                    blockers.forEach(function (o, n) { o.b = was[n + 1]; });
+                    return false;
+                });
+            });
+
+        labels.forEach(function (L) {
+            var sx = L.b.x0 - L.b0.x0, sy = L.b.y0 - L.b0.y0;
+            if (!sx && !sy) return;
+            L.d.dataset.preDense = L.d.style.transform;
+            L.d.style.transform += " translate(" + sx.toFixed(1) + "px, " + sy.toFixed(1) + "px)";
+            L.d.dataset.dense = L.d.style.transform;
+        });
+    }
+
+    function start() {
+        var m = window[NAME];
+        if (!m || !m.getSize) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        var later = function () { setTimeout(function () { place(m); }, 0); };
+        m.on("moveend zoomend resize viewreset", later);
+        var legend = document.querySelector("details.map-legend");
+        if (legend) legend.addEventListener("toggle", later);
+        later();
+    }
+    start();
+})();
+</script>
+"""
+# Blocks render_heatmap() injects into SOME maps only. check_render_current.py
+# holds a map that carries one to its current version, and does not ask for it
+# in a map that has none.
+CONDITIONAL_BLOCKS = ("DENSE_LABEL_SCRIPT",)
 # Mouse-wheel zoom. Measured 2026-09-23 on Paris and Toulouse (headless Edge,
 # trusted input over CDP, median of three fresh loads; DECISIONS.md has the
 # tables). The wheel felt laggier than +/- for a reason that was not speed:
@@ -2302,6 +2562,13 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # sliding it, not by zooming. See LABEL_CLAMP_SCRIPT.
     m.get_root().html.add_child(folium.Element(
         LABEL_CLAMP_SCRIPT.replace("__MAP_NAME__", m.get_name())))
+    # A map that needed labels standing in the wide tier on the desktop gets
+    # the wider phone placer too - and only such a map, so no other changes.
+    # See DENSE_LABEL_SCRIPT.
+    if any(_clearance(t) in _LABEL_WIDE_CLEARANCES for t in tips.values()):
+        m.get_root().html.add_child(folium.Element(
+            DENSE_LABEL_SCRIPT.replace("__MAP_NAME__", m.get_name())
+            .replace("__LABEL_REACH__", f"{max(_LABEL_WIDE_CLEARANCES):g}")))
     # Mouse-wheel zoom that neither drops notches nor moves less than a click.
     # See WHEEL_ZOOM_SCRIPT.
     m.get_root().html.add_child(folium.Element(
