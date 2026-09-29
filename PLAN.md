@@ -38,8 +38,8 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   pass) until the owner decides.
 
 - [ ] ⏸ **Per-city restriction disclosures, on every city's page (owner,
-  2026-09-28). WAITS until every Japanese city is built** (Fukuoka, Kyoto,
-  Tokyo); the prose edits come then, drafted in chat for the owner. **Before
+  2026-09-28). UNBLOCKED 2026-09-28: every Japanese city is built** (Tokyo
+  landed); the prose edits are drafted in chat for the owner. **Before
   any drafting, the owner looks over the live pages and gives general advice
   first (owner 2026-09-28): ask for it, then wait.** Four
   facts per city, which the macro map's tooltip may also carry:
@@ -437,7 +437,8 @@ brief names.
   densest, and it benefits most from a Japan skill written off the first four.
   Kyoto sits after Fukuoka, before Tokyo (owner, 2026-09-24): Japan's first
   rebuilt register benefits from the join being settled on four cities first.
-- [ ] **Tokyo — the missing wards as a planned project, before its build.**
+- [ ] **Tokyo — the missing wards as a planned project.** Tokyo was built
+  2026-09-28 with 8 of the 23 wards; this item now adds wards to a live map.
   Chiyoda alone lifts urban station coverage from 45% to 56%; Chiyoda,
   Toshima and Bunkyō reach 67%; all 23 wards reach 98% (`tokyo.md`).
   Routes: request Chiyoda's ledger (owner, gated item 22); extract Ōta's,
@@ -619,6 +620,11 @@ every key, account and letter:
   whether to include them.
 - [ ] San Francisco: only ~37% of rows carry a NAICS code; consider whether
   the caveat needs to be visible on the city page.
+- These three are the only maps whose lean the city page does not state
+  (`docs/map_inconsistencies.md` theme 10). The "Why the maps differ" page
+  (page 92) hedges around them: "Where it is known, each city's page says
+  which way its map leans." Once all three pages carry their caveat, that
+  sentence can drop its hedge (published wording: owner's call).
 
 ## Later / maybe
 

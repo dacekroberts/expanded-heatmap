@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**114 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**115 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Cleanup follow-ups: two wordings approved, the japan worktree retired, the Japan list proved](#2026-09-28---cleanup-follow-ups-two-wordings-approved-the-japan-worktree-retired-the-japan-list-proved)
 - ["Chamber of commerce register" added to the summary table's record kinds (owner)](#2026-09-28---chamber-of-commerce-register-added-to-the-summary-tables-record-kinds-owner)
 - ["Why the maps differ" built (page 92), waiting for review time](#2026-09-28---why-the-maps-differ-built-page-92-waiting-for-review-time)
 - ["Why the maps differ" page: shape decided (owner); the inconsistency list re-checked before drafting](#2026-09-28---why-the-maps-differ-page-shape-decided-owner-the-inconsistency-list-re-checked-before-drafting)
@@ -150,6 +151,36 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Cleanup follow-ups: two wordings approved, the japan worktree retired, the Japan list proved
+
+- **Two wordings approved by the owner.** The note under page 92's city table
+  stands as built. Mexico City's and Guadalajara's `data_age` in
+  `app/cities.py` now read "DENUE May 2026 edition, fetched 2026-09-22", not
+  "Fetched 2026-09-22 (no source date)". The edition is DENUE 05_2026
+  (`docs/data_sources/mexico.md`, the Monterrey row). `check_macro_facts.py`
+  passes, and the phrase's figures appear in table D. Lands at review time
+  with page 92.
+- **`docs/japan_city_list.md` proved.** `scripts/japan_ward_table.py --write`
+  reproduced the committed file exactly, so the hand-edited Tokyo row matches
+  the script. It ran against the shared `data/` in the main checkout, with the
+  eight Japanese folders (`japan`, `mhlw` and the six cities) junctioned into
+  this worktree's own real `data/` for the run (53 s) and unlinked
+  afterwards, and was announced to Berlin build and Staging as a heavy job.
+  This worktree's `data/` is a real folder without them.
+- **The `japan` worktree retired, with the owner's word** (its sessions were
+  closed; none was listed). `worktree-japan` was fully on master
+  (`af68a82`, 0 commits ahead). Its `data/` and `.venv-lean` junctions were
+  unlinked non-recursively, `check_worktree_data.py` found nothing to lose,
+  and it was removed with `git worktree remove` and `git branch -d`. The
+  shared `data/` was checked intact afterwards. Its GitHub branch stays until
+  the owner deletes it.
+- **`PLAN.md` corrected:** the per-city restriction disclosures item is
+  unblocked (every Japanese city is built; the owner's general advice still
+  comes first), and the Tokyo missing-wards item no longer says "before its
+  build". San Francisco's, Los Angeles's and San Diego's undisclosed leans
+  were already open items. They are now tied to page 92's "Where it is
+  known" hedge, which can drop once those pages carry their caveats.
 
 ### 2026-09-28 - "Chamber of commerce register" added to the summary table's record kinds (owner)
 
