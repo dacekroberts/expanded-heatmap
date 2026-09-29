@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**113 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**114 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [China ruled out as a country after a feasibility gate; Hangzhou's opening noted, legal barriers high (owner)](#2026-09-28---china-ruled-out-as-a-country-after-a-feasibility-gate-hangzhous-opening-noted-legal-barriers-high-owner)
 - [Berlin's personal-services gap corrected: only hairdressers and laundries are missing](#2026-09-28---berlins-personal-services-gap-corrected-only-hairdressers-and-laundries-are-missing)
 - [Delhi and Mumbai re-screened on their city hosts: Delhi to Band D, Mumbai discarded (owner)](#2026-09-28---delhi-and-mumbai-re-screened-on-their-city-hosts-delhi-to-band-d-mumbai-discarded-owner)
 - [Tokyo landed: city-landed sweep; three cities' in-ring counts corrected in the inconsistency list](#2026-09-28---tokyo-landed-city-landed-sweep-three-cities-in-ring-counts-corrected-in-the-inconsistency-list)
@@ -149,6 +150,41 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - China ruled out as a country after a feasibility gate; Hangzhou's opening noted, legal barriers high (owner)
+
+- **Ruled out mainland China as a country (owner's call), on a feasibility
+  gate rather than fourteen city screens, with Hangzhou's narrow opening
+  recorded.** China was in no file; the owner asked whether it was open
+  enough to screen at all before spending on a bulk screen, and to read the
+  licences first. Four platforms were tried.
+  - **Shanghai** answers HTTPS 412 behind a JS anti-bot challenge, and a
+    real browser gets a blank page.
+  - **Beijing**'s file links redirect to the city's unified identity login.
+    Its terms are permissive (可自由利用、自由传播与分享) with a 备案 duty.
+  - **Shenzhen** needs real-name verification to download, and its terms
+    forbid passing on any data (用户不得有偿或无偿转让…任何数据资源; no
+    mirrors, 包括全部或局部), despite 2,228,174 food-licence rows marked
+    无条件开放.
+  - **Hangzhou** is the near-opening. Dataset 12747 (杭州食品经营许可证,
+    54,100 rows, premises addresses, no coordinates) is behind a
+    click-through agreement with no login, and its terms allow free copying,
+    publishing and dissemination with a credit and the download date. But
+    they also oblige a 备案 filing that needs a 浙里办 real-name account,
+    which this project does not create.
+  - **Placement fails everywhere.** There is no open address-point file,
+    Amap and Baidu return GCJ-02 / BD-09 and their terms forbid this use,
+    and Tianditu needs a key.
+  - **Map publishing is regulated** (审图号 review and GCJ-02 for maps
+    published in China; ASSERTED), which the owner weighed as a high legal
+    barrier for any Chinese city.
+- **A per-city screen, or Hangzhou in Band D, was rejected.** Hangzhou's
+  blockers are a real-name filing duty and missing coordinates, neither of
+  which an ask could clear. The agent ran over its step budget (about 100
+  steps against about 30), mostly on the licence reading done first. Files:
+  `docs/city_master_list.md` (Countries ruled out),
+  `docs/global_country_shortlist.md` (Tier 4, China),
+  `docs/global_transit_gap.md`, `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - Berlin's personal-services gap corrected: only hairdressers and laundries are missing
 

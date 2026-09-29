@@ -48,10 +48,11 @@ negative, kept out.
 | Medellín | CO | 6 relations | "Three closed doors" |
 | Honolulu | US | Skyline (small) | No premises register |
 
-## Country ruled out (11) - "Countries ruled out" and the shortlist
+## Country ruled out (25) - "Countries ruled out" and the shortlist
 
 | City | Country | Network | Why not covered |
 |---|---|---|---|
+| Shanghai, Beijing, Guangzhou, Shenzhen, Chengdu, Wuhan, Hangzhou, Chongqing, Nanjing, Xi'an, Tianjin, Suzhou, Zhengzhou, Qingdao | CN | ~150-500 stations each (kn) | **Ruled out 2026-09-28 (owner), high legal barriers**: anti-bot (Shanghai), real-name accounts (Beijing, Shenzhen), terms forbidding redistribution (Shenzhen), no open coordinates, regulated map publishing. Hangzhou's food-licence list is a narrow opening, blocked by a real-name filing duty and placement |
 | Moscow, St Petersburg | RU | 250+ / 72 stations (kn) | Excluded: sanctions and access |
 | Newcastle, Glasgow | UK | 60 / 15 stations (kn) | Recorded as "NNDR carries no category"; **wrong** (London's re-screen, 2026-09-28): the VOA list has a description and is ruled out by its terms. The FSA food register is untested for either city |
 | Melbourne, Sydney, Perth | AU | ~220 / 170+ / 80 stations (kn) | Licensing not municipal, **ASSERTED** |
@@ -80,11 +81,10 @@ negative, kept out.
 | Yokohama | JP | 43 stations | N - no food list in any era |
 | Warsaw | PL | 2 lines (kn) | D - geo-blocked |
 
-## Never screened (30)
+## Never screened (16)
 
 | Cities | Country | Network (kn) | Why not covered |
 |---|---|---|---|
-| Shanghai, Beijing, Guangzhou, Shenzhen, Chengdu, Wuhan, Hangzhou, Chongqing, Nanjing, Xi'an, Tianjin, Suzhou, Zhengzhou, Qingdao | CN | ~150-500 stations each | China is in no file: it was absent from the feed catalogue the 87-country screen started from |
 | Bengaluru, Kolkata, Chennai | IN | ~40-80 each | Only India's national catalogue was read (counts, not premises); the city hosts were never asked. Delhi and Mumbai were asked 2026-09-28 (D, discarded) |
 | Tehran | IR | ~150 stations | No record |
 | Bangkok | TH | 4 subway + 5 light-rail relations | The national portal answered 403 on every strategy (2026-09-21); never given a city row |
@@ -108,6 +108,6 @@ Recommended first for re-screening (the staging handoff's priority 1):
 5. ~~**Delhi and Mumbai**~~ - **done 2026-09-28** (owner): Delhi to Band D
    (a CAPTCHA and geo-blocks), Mumbai discarded. Tokyo was built the same day
    and left the band table.
-6. **China's fourteen** - never looked at; the largest untouched block, with
-   access and licensing likely hard.
+6. ~~**China's fourteen**~~ - **done 2026-09-28**: ruled out as a country
+   (owner), Hangzhou's opening noted.
 7. **Algiers** - misfiled as having no urban rail.

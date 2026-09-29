@@ -1256,7 +1256,19 @@ the open gap (the Netherlands' Amsterdam now in Band A). A country is not ruled
 out by its national portal's first page.*
 
 🇦🇺 **Australia**, 🇳🇿 **New Zealand** *(licensing is not municipal)* ·
-🇧🇪 **Belgium** *(bulk access paid)*
+🇧🇪 **Belgium** *(bulk access paid)* · 🇨🇳 **China** *(accounts, terms and
+mapping law; 2026-09-28, owner)*
+
+*🇨🇳 **China joined this list on 2026-09-28** (owner), from a feasibility gate
+rather than fourteen city screens. Shanghai's platform is behind an anti-bot
+challenge; Beijing's and Shenzhen's downloads need real-name accounts, and
+Shenzhen's terms forbid passing on any data. **Hangzhou is a narrow opening,
+noted**: its food-business licence list (54,100 rows, premises addresses, no
+coordinates) is keyless under terms that allow republishing, but the terms
+oblige a filing (备案) that needs a real-name Zhejiang account, and no open
+address or coordinate file exists to place it. **The legal barriers stay high
+for any Chinese city**: publishing map data of China is regulated (map review,
+GCJ-02 coordinates), and the geocoders' terms forbid this use.*
 
 *🇦🇪 **Dubai left this list on 2026-09-28** for Band D: "no agency feed" is
 obsolete now rail comes from OpenStreetMap, and its register's hosts refuse
