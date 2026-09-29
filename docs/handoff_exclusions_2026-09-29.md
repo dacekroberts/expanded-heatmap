@@ -303,6 +303,18 @@ In "Kept, and why", replace "**San Diego's personal services.** San Diego shows 
 
 ## Next review time
 
+**When (owner, 2026-09-29):** after the last light-rail builds are on their
+branches: Bergen, then Houston, Sacramento, Buffalo and Aarhus. That review is
+a deliberate stopping point for builds; the owner's remaining edits before the
+tram cities are mostly prose. If the light-rail builds slip past 2026-10-01,
+run the review with what is ready. Every queued branch stays off master, is
+pushed to its own origin branch as a backup, and sends the cleanup session a
+READY notice (commit, counts it assumes, exposure verdict). The shared counts
+(Built, Band A, notices, page numbers) are reconciled once, in the review
+merge. Suggested order: stockholm-catering, category-continuity, suwon,
+bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
+`full`, one push, one reboot.
+
 - **`stockholm-catering`** (origin, one commit on master; owner-approved):
   the name filter now also drops caterers and mobile units, 5,262 -> 5,218
   placed (85 unplaced). The committed map, macro_facts and ring_shares already
