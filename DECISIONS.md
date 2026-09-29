@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**177 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**178 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Tram audit Phases 3-4: rings measured, no thinning and rings sized per city (owner), the decision memo published](#2026-09-29---tram-audit-phases-3-4-rings-measured-no-thinning-and-rings-sized-per-city-owner-the-decision-memo-published)
 - [Atlanta's 2024 licence layer is not a publication to build on: it carries per-business revenue, likely confidential under Georgia law, and no licence; Atlanta stays discarded pending the owner](#2026-09-29---atlantas-2024-licence-layer-is-not-a-publication-to-build-on-it-carries-per-business-revenue-likely-confidential-under-georgia-law-and-no-licence-atlanta-stays-discarded-pending-the-owner)
 - [The currency rule rewritten as one clock: the source must drop closures, its as-of date under five years (owner); Atlanta's 2024 layer found](#2026-09-29---the-currency-rule-rewritten-as-one-clock-the-source-must-drop-closures-its-as-of-date-under-five-years-owner-atlantas-2024-layer-found)
 - [Santa Cruz–La Laguna back from the discards to T2, food only on the Cabildo's current register (owner)](#2026-09-29---santa-cruzla-laguna-back-from-the-discards-to-t2-food-only-on-the-cabildos-current-register-owner)
@@ -216,6 +217,41 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Tram audit Phases 3-4: rings measured, no thinning and rings sized per city (owner), the decision memo published
+
+- **No stop thinning on the tram list, and ring size may be reduced per
+  city as needed (owner).** Riga's 0.5-mile spacing filter is not carried
+  over. Measured on the screens' own inputs with every stop kept
+  (`data/_staging_scratch_2026-09-29/band_t_audit/p3_french_rings.py`,
+  `p3_brno_rings.py`): at the 0.6-mile rings 55 of 62 built maps use, the 21
+  French T1 cities put 68.7% (Avignon) to 99.3% (Grenoble) of storefronts
+  in-ring, 19 of them at 84% or more; at France's 0.3-mile rings (the five
+  built French cities) they spread to 25.3–92.6%. Thinning cost up to 25
+  points at 0.3 miles and under 3 at 0.6 in most cities, so with every stop
+  kept it is moot. Brno, on OpenStreetMap shops and restaurants as a stand-in
+  for the register (the screen kept counts only; rebuilding the points reads
+  RES's 543 MB file), reads 76.8 / 83.2 / 89.4 / 92.2% at 0.2 / 0.3 / 0.45 /
+  0.6 miles over 147 stop names in Brno's 230.1 km²; the stand-in was checked
+  on Montpellier, where it reads 98.6% against SIRENE's 98.1% at 0.6 miles
+  and 89.6% against 86.6% at 0.3, up to 3 points high.
+- **Recommended, parked for the owner**: French tram cities use France's
+  0.3-mile rings; every other tram city starts at 0.6 and drops to 0.3 where
+  0.6 would pass about 95% (Brno would stay at 0.6); build order France →
+  Czechia → Odense and Latvia → the US three and Florence, T2 after its gap
+  verdicts. Built tram maps for comparison: Oslo 75.6%, Riga 77.9%,
+  Rotterdam 92.8%, Amsterdam 95.5% (`app/ring_shares.json`).
+- **Nothing new on the site is needed for trams**: 22 built cities already
+  read `Trams` in `rail_extra` and 7 `Both`; the "Why the Maps Differ" page
+  already says trams are drawn "where they are the city's rapid transit, as
+  in Calgary or Riga". Amsterdam labels 21 lines with legend entries, more
+  than Zurich (18) or Brno (11) would need.
+- **The memo** ("The Tram Question", a private artifact,
+  https://claude.ai/artifact/UQ7Lsdu23HPfuZ1JFxoaxo) carries the
+  recommendation (yes to trams-only maps, T1 first) and every open call,
+  Atlanta's included. Its prose was drafted in chat first; the owner had
+  said to continue through the phases unattended, so it was published
+  without a read-back, and nothing was pushed to master.
 
 ### 2026-09-29 - Atlanta's 2024 licence layer is not a publication to build on: it carries per-business revenue, likely confidential under Georgia law, and no licence; Atlanta stays discarded pending the owner
 

@@ -76,20 +76,23 @@ after the audit; nothing on the tram list is built before it.
    Santa Cruz–La Laguna's stale directory dropped and the city moved to T2 as
    food only; Kansas City kept in T1 with its data date on the page (both
    owner). The currency rule is in the master list's "Five rules". About 2% of a 5-hour window.
-2. **Phase 3 - the design memo, measured on precedents that already exist**:
-   - **Rings**: Riga is live trams-only with a 0.5-mile spacing filter (15
-     stops out, 108 kept, in-ring share 77.9%); Amsterdam 95.5%, Rotterdam
-     92.8%, Oslo 75.6% already draw trams. Question for the owner: does every
-     tram city get Riga's filter, and what in-ring share would T1's biggest
-     (Brno, Bordeaux, Montpellier) land at? `app/ring_shares.json` has the
-     built figures.
-   - **Labels**: Amsterdam draws 16 tram lines plus 5 metro, each labelled
-     with a legend entry; T1's densest are Brno (11 lines, 146 stops) and
-     Zurich (18 refs).
-   - **Macro map and "Network type"**: read how Riga is labelled now.
-   - **Build cost by pipeline**.
-3. **Phase 4 - the memo, published** as an artifact so the owner can decide;
-   draft its prose in chat first.
+2. **Phases 3-4 - DONE 2026-09-29, the memo published** ("The Tram
+   Question", https://claude.ai/artifact/UQ7Lsdu23HPfuZ1JFxoaxo, private;
+   DECISIONS "Tram audit Phases 3-4"). Owner calls made: no thinning, ring
+   size reduced per city as needed.
+
+**PARKED for the owner (the owner was away; nothing guessed):**
+- **Trams-only maps: yes or no** (recommended yes, T1 first).
+- **The ring rule**: French tram cities on France's 0.3 mi rings; others at
+  0.6, down to 0.3 where 0.6 passes about 95%.
+- **Build order**: France, Czechia, Odense and Latvia, the US three and
+  Florence; T2 after its gap verdicts.
+- **Atlanta**: its discard ground from currency to terms (recommended), and
+  whether to tell the City its 2024 layer exposes reported revenue
+  (DECISIONS "Atlanta's 2024 licence layer").
+- **A date check on the published cities** (offered; Milan and Dublin first).
+- **Push to master**: the commits after 49e6e24's successor ba4534c are on
+  `worktree-staging` only (unattended rule); run the push ritual when back.
 
 **Stale in the handoff above, corrected**: the tram rescopes are NOT the only
 precedents for drawing trams (Riga, Amsterdam, Rotterdam, Oslo, Dublin's Luas).
