@@ -112,6 +112,22 @@ Access Point's *published interpretation*, which filed *"calcul de la distance
 no resharing required. **ODbL has no equivalent**, and the standard text is
 stricter.
 
+⚠️ **CORRECTED 2026-09-29: there IS a gloss.** The National Access Point's ODbL page
+applies *Conditions Particulières d'utilisation* to **every** ODbL dataset it presents
+(« L'ensemble des données sous licence ODbL présenté sur le Point d'accès national se voit
+appliqué les conditions particulières susmentionnées à l'exception des données issues
+d'OpenStreetMap »), Tisséo's and STAR's included. They narrow share-alike (§4.4) to data
+« de même nature, de même granularité, de même conditions temporelles et de même emprise
+géographique », file the shops-to-nearest-stop calculation under **Non**, and exempt trivial
+changes that add no information. **They also move the re-share destination**: a qualifying
+derived database « doit être publiée sur le Point d'accès national … dans le format
+d'origine » (GTFS, a community resource, which needs a data.gouv.fr account), and correcting
+or adding stop coordinates or names is filed under **Oui**. Found by five licence reads for
+the tram list (Bordeaux, Montpellier, Grenoble, Angers, Le Havre; DECISIONS "French tram
+feeds read"). The cheap discharge below still stands; whether Toulouse's and Rennes'
+step 1 merges platforms into new station points (a possible « ajout de coordonnées ») is
+unchecked.
+
 **Cheap discharge, and it is recommended**: put an ODbL notice on the station
 CSV in `outputs/<city>/` for these two cities. It costs one line, it moots the
 question, and it is the same move taken for Paris (republishing the derived
@@ -223,4 +239,4 @@ barred, which `contactopendata@tcl.fr` can authorise cheaply.
 | Offer the method | yes (Art. 5.8) | **yes (§4.6(b))** |
 | Notice wording | prescribed, French | **prescribed, English safe harbour** |
 | Snapshot date required | **yes** (Art. 5.7) | **no** |
-| Publisher gloss on derivatives | **yes**, NAP's | **none** |
+| Publisher gloss on derivatives | **yes**, NAP's | **yes, the NAP's Conditions Particulières** (this row read "none" until 2026-09-29) |

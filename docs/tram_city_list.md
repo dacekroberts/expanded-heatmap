@@ -136,23 +136,23 @@ own config (a 483 m outer ring, Lambert-93), so the build recounts.
 **🇫🇷 France (21)** — SIRENE through the built cities' step-2 chain, which
 reproduced Rennes (3,479) and Toulouse (8,635) exactly as the control. Most
 feeds are Licence Ouverte 2.0; Montpellier, Grenoble, Angers and Le Havre
-ODbL. **Mode flags are unreliable** (Reims' feed types its tram as metro), so
+ODbL, under the national portal's Conditions Particulières (read 2026-09-29). **Mode flags are unreliable** (Reims' feed types its tram as metro), so
 the mode is decided per city. TER is excluded in every built French city.
 
 | City | Network | Stations in the commune / total (worst line) | R / F / P (× OSM) | Stores near stations | Build-time calls |
 |---|---|---|---|---|---|
-| **Montpellier** | Tram 1–5 | 87 / 112 (line 2: 54%) | 2,484 / 2,622 / 1,193 (1.93×) | 6,179 | 54% matches Toulouse's T1 precedent |
+| **Montpellier** | Tram 1–5 | 87 / 112 (line 2: 54%) | 2,484 / 2,622 / 1,193 (1.93×) | 6,179 | 54% matches Toulouse's T1 precedent; **Licence read 2026-09-29: ODbL, permitted with the notice; no `shapes.txt`, geometry from another source.** |
 | **Nice** (EDGE: L2 in a 6.4 km tunnel) | Tram L1–L3, plus a route "B" (Aéroport T2 – CADAM, 6 stations) not yet identified | 47 / 47 (every line whole) | 4,230 / 3,544 / 2,372 (2.85×; personal 6.4×) | **9,379** | Personal services lean on beauty (96.02B, 1,026 over 810 hairdressers): a composition and personal-exposure item |
 | **Strasbourg** | Tram A–F (short Rotonde and Halles tunnels) | 66 / 94, plus 3 in Kehl, Germany (B: 52%) | 2,385 / 2,244 / 1,020 (2.11×) | 5,482 | Commune or regional |
-| **Bordeaux** | Tram A–F | 53 / 135 (A: 35%) | 3,167 / 3,018 / 1,224 (1.84×) | 6,889; **10,754 over 14 communes** | **Regional scope** (Lille-style); TBM's Licence Ouverte **1.0** never read |
+| **Bordeaux** | Tram A–F | 53 / 135 (A: 35%) | 3,167 / 3,018 / 1,224 (1.84×) | 6,889; **10,754 over 14 communes** | **Regional scope** (Lille-style); TBM's Licence Ouverte **1.0** never read; **Licence read 2026-09-29: LO 1.0, credit Bordeaux Métropole and the feed's date.** |
 | **Nantes** | Tram 1–3 | 56 / 84 (line 3: 48%) | 2,105 / 1,844 / 852 (1.39×) | 4,341; 5,383 regional | Commune or regional (48% is just under Toulouse's line) |
-| **Grenoble** | Tram A–E | 36 / 81 (C and D: 36%) | 1,541 / 1,601 / 598 (1.51×) | 3,716; 5,455 over 12 communes | **Regional scope** |
+| **Grenoble** | Tram A–E | 36 / 81 (C and D: 36%) | 1,541 / 1,601 / 598 (1.51×) | 3,716; 5,455 over 12 communes | **Regional scope**; **Licence read 2026-09-29: ODbL, permitted with the notice.** |
 | **Rouen** (EDGE: the "métro", a light rail with a central tunnel) | 2 branches | 10 / 31 (32%) | 1,505 / 1,190 / 512 (1.73×) | 2,868; 3,634 over 5 communes | **Regional scope**; Astuce's own host timed out, so rail from the Normandie regional feed |
 | Saint-Étienne | T1–T3 | 35 / 40 (81%) | 1,333 / 1,164 / 531 (1.71×) | 2,523 | — |
-| Angers | A–C | 36 / 42 (76%) | 1,183 / 876 / 493 (1.48×) | 2,380 | — |
+| Angers | A–C | 36 / 42 (76%) | 1,183 / 876 / 493 (1.48×) | 2,380 | **HELD (owner, 2026-09-29) until the other 20 French cities are built**: the Métropole bars naming IRIGO or its other marks without consent (licence read 2026-09-29). |
 | Dijon | T1–T2 | 28 / 34 (82%) | 1,192 / 968 / 532 (1.50×) | 2,358 | — |
 | Tours | A | 22 / 29 (76%) | 1,244 / 925 / 492 (1.52×) | 2,335 | — |
-| Le Havre | A, B (Jenner tunnel) | 22 / 23 | 1,027 / 880 / 552 (1.95×) | 2,143 | Line C is in OSM only, not in service |
+| Le Havre | A, B (Jenner tunnel) | 22 / 23 | 1,027 / 880 / 552 (1.95×) | 2,143 | Line C is in OSM only, not in service; **Licence read 2026-09-29: ODbL, permitted; no shapes and no colours in the feed.** |
 | Mulhouse | Tram 1–3 | 28 / 29 | 969 / 748 / 456 (3.66×, OSM thin) | 2,121 | The tram-train fails the rail test (30-minute midday headway) |
 | Reims | 1 line, 2 branches | 22 / 24 | 1,167 / 927 / 598 (2.25×) | 1,947 | The feed types it `route_type` 1; it is a tram |
 | Caen | T1–T3 (a real tram since 2019) | 29 / 38 (76%) | 986 / 833 / 420 (1.47×) | 1,881 | No feed of its own: the Normandie regional feed, agency Twisto |

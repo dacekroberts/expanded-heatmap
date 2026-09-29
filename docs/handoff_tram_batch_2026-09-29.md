@@ -18,6 +18,11 @@ https://claude.ai/artifact/UQ7Lsdu23HPfuZ1JFxoaxo, and PLAN's macro-map items.
 - **Macro map**: minor cities get no pill outside their own region; dots are
   coloured by network type (Dublin tram), completeness by fill (solid, ring,
   half-filled).
+- **Station tables are pure extracts for every French ODbL feed** (owner):
+  the feed's own `parent_station` and coordinates; without one, the first
+  platform's coordinates, never a mean; names unchanged. No data.gouv.fr
+  account. **Angers is held** (owner) until the other 20 are built: the
+  France batch is 20 cities.
 - **The currency rule**: the source must drop closed businesses and its
   newest row date must be under five years; the date goes on the page.
 
@@ -47,23 +52,64 @@ The 21 French T1 cities, on one register already cached nationally
 - Feeds are rolling (earliest end Avignon 2026-10-18): fetch at build, never
   cache a feed across weeks.
 
-## 2. Licence reads - STAGING, in progress 2026-09-29
+## 2. Licence reads - the five French ones DONE 2026-09-29
 
-The five French feeds whose licence differs from LO 2.0 were sent to the
-`licence-read` agent the same day: Bordeaux (LO 1.0), Montpellier,
-Grenoble, Angers, Le Havre (ODbL). Their verdicts are in DECISIONS once
-back. Still to read, nearer their builds: Plzeň's and Olomouc's GTFS,
-Tucson's BUSLIC terms, RideKC's GTFS, Florence's four layers, VZD's address
-file (Daugavpils, Liepāja). Each notice goes in `docs/data_sources/` before
-its page exists.
+DECISIONS "French tram feeds read" has each verdict. In short: **Bordeaux**
+(LO 1.0) credit Bordeaux Métropole and the feed's own date; **Montpellier,
+Grenoble, Le Havre** (ODbL) the §4.3 notice naming the producer;
+**Montpellier and Le Havre have no `shapes.txt`** (geometry from another
+source, which needs its own read) and **Le Havre has no colours** (choose
+them; never from transports-lia.fr). **Angers bars "Irigo" and its other
+marks without consent: an owner call before its build.** **Every French ODbL
+feed carries the national portal's Conditions Particulières**: keep station
+tables as pure extracts (nothing renamed or merged) unless the owner creates
+a data.gouv.fr account to re-share. Still to read, nearer their builds:
+Plzeň's and Olomouc's GTFS, Tucson's BUSLIC terms, RideKC's GTFS, Florence's
+four layers, VZD's address file, and the geometry source for Montpellier and
+Le Havre. Each notice goes in `docs/data_sources/` before its page exists.
 
-## 3. Page text by template - STAGING drafts, the owner approves once
+## 3. Page text by template - APPROVED by the owner 2026-09-29
 
-A French tram-city paragraph set was drafted in chat 2026-09-29 for the
-owner's approval (see that session's last messages). Once approved, it lives
-in the skill; per-city facts fill it.
+The French tram-city page text, approved word for word ("approved"). It goes
+into the `france-tram-city` skill; braces are per-city facts, filled at each
+build from that city's own measurements. The controls paragraph and the
+heat-layer caveat stay exactly as on Rennes's page
+(`app/pages/25_Rennes_Heatmap.py`), and so does the transit caption, with the
+operator's credit and any notice its licence read requires.
 
-## 4. Macro-map changes - the APP/CHROME role (an `app/` branch, review time)
+> {N} {operator} tram lines are drawn, **{lines}**, each labelled on the map
+> and in the legend, from the operator's own published timetable feed. {City}
+> has no metro: its trams are its rapid transit, as Riga's are, so every tram
+> stop gets rings.
+>
+> The map covers the **{commune of City / N communes of the Métropole}**.
+> {Where a line runs past it: which stops are left out and why, as Rennes's
+> page does.}
+>
+> Businesses come from **SIRENE**, France's national register of
+> établissements, joined to INSEE's geolocation file, the same sources as
+> Paris, Marseille, Toulouse, Lille and Rennes. {Share} of active
+> establishments here are marked non-diffusible by INSEE, which withholds
+> their name, address and coordinates together, so they never reach this map.
+> Where SIRENE records no shop sign or trading name, the dot shows the address
+> instead.
+>
+> **Read the density as a register, not a street survey.** {Same paragraph as
+> Rennes, with this city's ratio to OpenStreetMap's restaurants.}
+>
+> **Tram stops sit closer together than metro stations**, a median of
+> {spacing} m here, so the rings are drawn at half the usual size (0.05 to
+> 0.3 mi), as on the other French maps. **About {share} of storefronts sit
+> within a ring.**
+
+A city whose median stop gap is over about 550 m keeps the standard rings and
+drops the last paragraph's first sentence (none in France is expected to).
+
+## 4. Macro-map changes - the APP/CHROME role (an `app/` branch, review time) - HELD
+
+**HELD (owner, 2026-09-29) until the France kit has made real progress.**
+The cleanup session is to claim this role (sections 4 and 5) and was told to
+wait; the owner or staging says when to start.
 
 PLAN, under "Macro-map completeness tiers", holds both items. **Measured
 2026-09-29 for the France view** (scratch

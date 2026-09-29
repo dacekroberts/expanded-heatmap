@@ -20,10 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**193 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**196 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Angers held; French ODbL station tables stay pure extracts (owner)](#2026-09-29---angers-held-french-odbl-station-tables-stay-pure-extracts-owner)
+- [French tram feeds read: four permitted with conditions, Angers bars naming its network without consent; the national portal's ODbL conditions found, correcting Toulouse's and Rennes' record](#2026-09-29---french-tram-feeds-read-four-permitted-with-conditions-angers-bars-naming-its-network-without-consent-the-national-portals-odbl-conditions-found-correcting-toulouses-and-rennes-record)
+- [The French tram-city page text approved as a template (owner)](#2026-09-29---the-french-tram-city-page-text-approved-as-a-template-owner)
 - [The tram batch's groundwork started (owner: all six items); a France macro view measured, and a North/South split recommended](#2026-09-29---the-tram-batchs-groundwork-started-owner-all-six-items-a-france-macro-view-measured-and-a-northsouth-split-recommended)
 - [Published cities' data dates checked: San Francisco maps closed locations, Dublin keeps vacant premises, three sources cannot be dated from their rows](#2026-09-29---published-cities-data-dates-checked-san-francisco-maps-closed-locations-dublin-keeps-vacant-premises-three-sources-cannot-be-dated-from-their-rows)
 - [Tram cities use the existing spacing rule for ring size (owner); the 95% coverage rule withdrawn](#2026-09-29---tram-cities-use-the-existing-spacing-rule-for-ring-size-owner-the-95-coverage-rule-withdrawn)
@@ -232,6 +235,97 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Angers held; French ODbL station tables stay pure extracts (owner)
+
+- **Angers is held (owner)** until the other 20 French tram cities are
+  built, rather than seeking the Métropole's consent (a reCAPTCHA form, and
+  outreach is the last resort) or labelling its lines without the brand (an
+  arguable reading of « toute autre marque »). It stays in T1 with the hold
+  on its row; the France batch is 20 cities.
+- **The pure-extract rule for every French ODbL feed (owner).** A station
+  table is the feed's own stops, filtered, never renamed, re-geocoded or
+  given new coordinates, so it adds nothing and the national portal's
+  Conditions Particulières ask for no re-share; no data.gouv.fr account is
+  created. In practice: a station is the feed's own `parent_station` with its
+  own coordinates; where a feed sets none, the first platform's coordinates
+  stand, **never a mean of several** (a mean is a new coordinate, which the
+  portal files under « ajout de coordonnées »). Names are the feed's. Line
+  geometry from another source (Montpellier, Le Havre) is a separate
+  database with its own read and is not written into the station table.
+- **Toulouse's and Rennes' step 1 fall back to exactly that mean** where a
+  feed sets no `parent_station` (`pipeline/toulouse/step1_stations.py`
+  lines 118–135, `pipeline/rennes/step1_stations.py` 117–134). Whether the
+  fallback fired for either is not recorded; PLAN carries the check, and a
+  fix is build-session work at review time.
+
+### 2026-09-29 - French tram feeds read: four permitted with conditions, Angers bars naming its network without consent; the national portal's ODbL conditions found, correcting Toulouse's and Rennes' record
+
+- **Five `licence-read` calls, one per feed whose licence differs from
+  LO 2.0** (the groundwork's item 2). Each verdict with its quoted terms is in
+  the agents' reports; the essentials:
+  - **Bordeaux (TBM, Licence Ouverte 1.0): permitted with conditions.**
+    Credit **Bordeaux Métropole** as producer (not TBM, Keolis or the feed's
+    exporter Mecatran) with the feed's own last-update date, captured at
+    fetch; nothing implying endorsement; colours may be restyled (LO 1.0
+    grants adapting and modifying). Take nothing from infotbm.com, whose
+    terms claim its marks.
+  - **Montpellier (TaM, ODbL): permitted with conditions.** The §4.3 notice
+    ("Contains information from Réseau urbain TaM, …"), linked, naming
+    Montpellier Méditerranée Métropole and TaM. **The feed has no
+    `shapes.txt`**: line geometry needs another source and its own read. No
+    TaM logo.
+  - **Grenoble (TAG / M, ODbL): permitted with conditions.** The §4.3 notice
+    naming SMMAG ("M"); SMMAG adopted the same narrowing on its own licence
+    page (its live copy is now empty; read from the Wayback copy of
+    2025-03-15).
+  - **Le Havre (LiA, ODbL): permitted with conditions.** The §4.3 notice
+    naming Le Havre Seine Métropole. **No `shapes.txt` and no `route_color`
+    on any route**; LiA's website terms claim its colour scheme, so the
+    colours are the project's own (Riga's precedent), never read off
+    transports-lia.fr.
+  - **Angers (Irigo, ODbL): permitted, but the Métropole's terms say the
+    IRIGO marks "and any other mark" of the service may not be « utilisés ou
+    mentionnés » in anything built from the data without its prior
+    agreement.** That meets the invariant that every drawn line carries its
+    real public name, and the §4.3 notice, whose database title contains
+    "Irigo". ODbL §2.3(c) leaves marks outside the licence. The consent
+    channel is a reCAPTCHA form (the owner's to send, and outreach is the
+    last resort). **An owner call**: seek consent, label lines "Tram A/B/C"
+    with a mark-free notice (arguable against "toute autre marque"), or hold
+    Angers.
+- **Found in all three ODbL reads that looked: the National Access Point's
+  *Conditions Particulières* apply to every ODbL dataset it presents**. They
+  narrow share-alike to same-nature, same-granularity data, file
+  "distance from shops to the nearest stop" under **Non**, and exempt changes
+  that add no information, so the maps owe only the §4.3 notice. But **a
+  qualifying derived database must be re-shared on the portal as GTFS**, and
+  correcting or adding stop coordinates or names is filed under **Oui**:
+  whether merging platforms into one station point counts is open. This
+  corrects `docs/licenses/odbl-toulouse-rennes.md` and notice 25 in
+  `docs/data_sources.md`, which said ODbL had "no publisher gloss"; both now
+  carry the correction, and the ODbL notice on the station CSV remains the
+  cheap discharge. **An owner call, once for every French ODbL feed**: keep
+  the station tables as pure extracts (nothing renamed or merged), or create
+  a data.gouv.fr account to re-share.
+- **Unchanged and still open**: whether France's annual déclaration de
+  conformité (Code des transports L.1115-5) reaches this project
+  (`docs/licenses/france-required-notices.md` item d); the reads add evidence
+  both ways, and Légifrance was CAPTCHA-walled, so the article itself is
+  unread. It does not block publication.
+
+### 2026-09-29 - The French tram-city page text approved as a template (owner)
+
+- **One set of paragraphs for all 21 French tram pages, approved once
+  (owner: "approved")**, so the batch's page text needs no per-city prose
+  sitting. Built from Rennes's page: the drawn lines and why trams get rings
+  (Riga's precedent), the scope and any stops left out, SIRENE and INSEE's
+  non-diffusible share, "read the density as a register", and the half-size
+  rings with the city's median stop gap and in-ring share. Per-city facts
+  fill the braces from each city's own measurements; the controls paragraph,
+  heat caveat and transit caption stay as Rennes has them. The text is in
+  `docs/handoff_tram_batch_2026-09-29.md` section 3 until the
+  `france-tram-city` skill carries it.
 
 ### 2026-09-29 - The tram batch's groundwork started (owner: all six items); a France macro view measured, and a North/South split recommended
 
