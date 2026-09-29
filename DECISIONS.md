@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**199 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**200 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Light-rail briefs: the last four calls answered, all five ready (owner)](#2026-09-29---light-rail-briefs-the-last-four-calls-answered-all-five-ready-owner)
 - [Light-rail briefs: the owner's calls, and two timetables read (staging)](#2026-09-29---light-rail-briefs-the-owners-calls-and-two-timetables-read-staging)
 - [Light-rail build briefs: Buffalo, Houston and Sacramento (staging)](#2026-09-29---light-rail-build-briefs-buffalo-houston-and-sacramento-staging)
 - [Light-rail build briefs: Bergen and Aarhus (staging)](#2026-09-29---light-rail-build-briefs-bergen-and-aarhus-staging)
@@ -238,6 +239,24 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Light-rail briefs: the last four calls answered, all five ready (owner)
+
+- **Aarhus is scoped to the 20 new-tramway stations (owner, confirmed)**, the
+  answer the light-rail test gives on Midttrafik's timetables, with halved
+  rings (499 m median).
+- **Houston is built as scoped, at about 7% of storefronts in the rings, and
+  the page states the share (owner, on the recommendation).** Reconsidering
+  its place in Band A was the rejected alternative: the project scopes by
+  municipality, and a stated low share is honest where a narrowed scope
+  would not be. Its lines are labelled "Red Line", "Green Line" and "Purple
+  Line" (owner), the lowest-risk wording METRO's licence read named, on
+  OSM's rail.
+- **Sacramento's "Request permission to use" is read as Esri's label for an
+  empty licence field, not a term (owner)**, since the City's Open Data Terms
+  grant use and promise to mark any rights claimed on the dataset page.
+- **All five light-rail cities are ready to build.** The one build-time
+  check left is whether SacRT's Green Line still runs.
 
 ### 2026-09-29 - Light-rail briefs: the owner's calls, and two timetables read (staging)
 

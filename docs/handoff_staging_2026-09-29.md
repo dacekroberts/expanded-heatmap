@@ -72,12 +72,12 @@ settled most of the rest (DECISIONS "Light-rail briefs: the owner's calls"):
 Rejseplanen not used (Aarhus's frequency read from Midttrafik's own
 timetables); rail from OSM for Buffalo and Houston; Sacramento's indemnity
 accepted and its addresses through the Census geocoder; SacRT's timetable
-read in the browser. **Still open**:
-- **Aarhus**: confirm the 20-station scope the owner's test gives.
-- **Houston**: build at ~7% in-ring (recommended) or reconsider; the
-  line-label wording.
-- **Sacramento**: the Hub's "Request permission to use" label (lean: Esri
-  boilerplate); whether the Green Line still runs (a build-time check).
+read in the browser. **Then all four remaining calls were answered
+(owner, 2026-09-29)**: Aarhus's 20-station scope confirmed; Houston built as
+scoped at ~7% in-ring with the share stated, lines labelled Red / Green /
+Purple Line; Sacramento's "Request permission to use" read as Esri
+boilerplate. **All five cities are ready to build**; the one build-time
+check left is whether SacRT's Green Line still runs.
 
 **Still open with the owner** (none blocks the France kit):
 - **Build order** beyond France: Czechia, Odense and Latvia, the US three

@@ -163,9 +163,8 @@ attribution clause and nothing to display.
 
 1. ✅ **The indemnity: ACCEPTED (owner, 2026-09-29)**, as Hong Kong's was.
    Recorded in `docs/data_sources.md` beside Hong Kong's.
-2. 🟠 **"Request permission to use"**: not yet answered. The lean is to read
-   it as Esri's label for an empty licence field, since the City's own Terms
-   grant use.
+2. ✅ **"Request permission to use" is Esri's label for an empty licence
+   field, not a term (owner, 2026-09-29)**: the City's own Terms grant use.
 3. ✅ **Address source: the US Census Bureau batch geocoder (owner,
    2026-09-29)**, `pipeline/census_geocoder.py`. The City's All Addresses
    layer is not used. Measure the match rate at build and apply the bounds

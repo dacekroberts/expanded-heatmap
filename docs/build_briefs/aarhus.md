@@ -27,7 +27,7 @@ licence is read. The rail is OSM's, as Copenhagen's is.
 
 ---
 
-## 🟠 THE SCOPE — 20 stations by the owner's test (to confirm)
+## ✅ THE SCOPE — 20 stations (owner, confirmed 2026-09-29)
 
 Measured 2026-09-29 from OSM's six Letbane route relations (7463675,
 8603279, 9907095, 9907096, 14973317, 14973318) against Aarhus Kommune's OSM
@@ -62,8 +62,8 @@ both linked from `midttrafik.dk/rejsemuligheder/?search=L2` and `?search=L1`.
 
 **By the owner's test, the scope is the 20 stations on the new tramway**,
 with the halved rings its 499 m median gap takes. That is the lean the
-master row carried before this read. **Owner to confirm** (a
-measurement applying the owner's rule, not a new rule).
+master row carried before this read. **Confirmed by the owner,
+2026-09-29.**
 
 | Scope | Median gap | Rings (spacing rule) | Within the outer ring |
 |---|---|---|---|
@@ -182,7 +182,7 @@ the rail.
 ## Build-time calls
 
 1. **Scope: 20 stations**, the answer the owner's test gives on Midttrafik's
-   own timetables (above), with the halved rings. **Owner to confirm.**
+   own timetables (above), with the halved rings. **Confirmed by the owner, 2026-09-29.**
    Record the timetable read on the page as the reason the converted
    railways are not drawn.
 2. **Line colours** through `linecolour.py` (both lines are `#30556E` in OSM).
