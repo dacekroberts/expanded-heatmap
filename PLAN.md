@@ -378,6 +378,23 @@ evidence section.
   the Hong Kong / Riga `thin()` port - is OFF the queue; its items stay below,
   measured and unqueued, until the owner puts any back. (Before: Sapporo,
   Fukuoka, Kyoto, then Tokyo - all built.)
+- [x] **Berlin built 2026-09-28** (`worktree-berlin`, held for review time):
+  60,313 storefronts, 275 stations, 25 lines; texts owner-approved (DECISIONS).
+  - [ ] At review time: `publish-city` (a new page; `cities.py`; notice 57
+    "VBB"; `app/station_scope.py` and page 91's "Closed for works" column),
+    deploy-verify `scope: city-added` plus page 91, reboot. Cleanup's "Why the
+    maps differ" batch must carry "Personal services thin" in its allowed
+    categories (sent to Cleanup 2026-09-28), and `check_ring_shares.py
+    --write` runs after the merge.
+  - [ ] **When the U6 reopens to Alt-Tegel (about August 2027)**: step 1 stops
+    on the refetch that serves it; take the five stations out of
+    `config.CLOSED_FOR_WORKS` and re-run steps 1-3.
+  - [ ] Monthly: IHK updates the register on the 1st; VBB's calendar ends
+    2026-12-12, so refetch before then.
+- [ ] **London next** (owner, 2026-09-28): brief `docs/build_briefs/london.md`
+  (staging, 4/4). Open owner calls: the Overground and Elizabeth line; placing
+  the ~20% without FSA coordinates by postcode centroid or dropping them; the
+  download OK for the 33 authority XML files.
 - [x] **Sapporo built 2026-09-28** (`build-sapporo`, held for review time):
   28,674 storefronts, 95 stations, 7 lines; texts owner-approved (DECISIONS).
   - [ ] At review time: `publish-city` (a new page, `cities.py` with Osaka's
