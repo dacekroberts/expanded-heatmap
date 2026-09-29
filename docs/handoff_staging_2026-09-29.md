@@ -35,12 +35,12 @@ item is done.**
 - **`docs/city_master_list.md`**: read the counts off it, and run
   `python scripts/check_master_list_counts.py` after any row change. At
   2026-09-29 (after the Band T audit's first half): **62 built; A 5 · B 4 ·
-  C 13 · D 0 · R 17 · T 41 = 80 candidates; 91 discards.** The band scheme
+  C 13 · D 0 · R 17 · T 40 = 79 candidates; 92 discards** (Phase 2 of the tram audit). The band scheme
   and the chat format are in the owner's memory
   (`feedback_master_list_format.md`): A, B, C (closer to a page), D (blocked,
   but the owner can act alone), R (restricted or request only; every future
   request-only city goes here), T. **Band T lives in its own file,
-  `docs/tram_city_list.md`** (T1 35, T2 6), and the count checker reads both.
+  `docs/tram_city_list.md`** (T1 34, T2 6), and the count checker reads both.
 - **Band B is fully briefed and queued** with the Stockholm build session:
   **Stockholm → Bucharest → Incheon → Gyeonggi** (owner, 2026-09-28; "Bucharest
   before Incheon" supersedes an earlier entry). Each brief carries its owner
@@ -49,7 +49,7 @@ item is done.**
   re-screen, the band restructure, and the Band B briefs' measurements and
   owner calls.
 
-## Priority 1 - the tram question: Phases 2-4 on the tram list (41 cities)
+## Priority 1 - the tram question: Phases 3-4 on the tram list (40 cities)
 
 **The owner's framing (2026-09-29): a preliminary yes, for scoping and
 filtering the list only.** The owner makes the final call on trams-only maps
@@ -71,15 +71,10 @@ after the audit; nothing on the tram list is built before it.
   `zurich_sbahn2.py`, `spacing_bandt.py`, the Overpass caches).
 
 **Next, in order** (the owner said "next step sounds good when appropriate"):
-1. **Phase 2 - does each tram city's data still stand?** Row count, the
-   register's LATEST DATE (not its description: Stockholm's lesson), feed
-   expiry (Brest's ends 2026-12-20), and whether its licence is read. Group by
-   source, 12 checks for 41 cities: SIRENE once for France's 21; ROS/RES
-   once for Czechia's 6; BAG once for the four Dutch; CVR (Odense); Latvia's
-   two layers once; then Kansas City, New Orleans, Tucson, Florence, Santa
-   Cruz–La Laguna (currency first: a 2015–2022 directory), Zurich, Göteborg.
-   Flag unread licences; read only one that could decide keep or drop.
-   Estimated 12–20% of a 5-hour window.
+1. **Phase 2 - DONE 2026-09-29** (DECISIONS "The tram list's data re-checked
+   for currency"; the tram list's "Data currency" section): 39 of 41 stood;
+   Santa Cruz–La Laguna discarded on currency, Kansas City kept in T1 with its
+   data date on the page (both owner). About 2% of a 5-hour window.
 2. **Phase 3 - the design memo, measured on precedents that already exist**:
    - **Rings**: Riga is live trams-only with a 0.5-mile spacing filter (15
      stops out, 108 kept, in-ring share 77.9%); Amsterdam 95.5%, Rotterdam

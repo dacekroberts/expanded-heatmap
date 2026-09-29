@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**172 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**173 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [The tram list's data re-checked for currency: Santa Cruz–La Laguna discarded, Kansas City kept with its data date (owner)](#2026-09-29---the-tram-lists-data-re-checked-for-currency-santa-cruzla-laguna-discarded-kansas-city-kept-with-its-data-date-owner)
 - [Band T audited: light rail leaves for A and C on a three-part test, Band T moves to its own tram list (owner)](#2026-09-29---band-t-audited-light-rail-leaves-for-a-and-c-on-a-three-part-test-band-t-moves-to-its-own-tram-list-owner)
 - [Funeral exclusions coded; fringe-category audit and the owner's rules; one combined exclusions batch](#2026-09-29---funeral-exclusions-coded-fringe-category-audit-and-the-owners-rules-one-combined-exclusions-batch)
 - [Staging handed off for the tram question: a preliminary yes for scoping and filtering Band T only, the final call after an audit (owner)](#2026-09-29---staging-handed-off-for-the-tram-question-a-preliminary-yes-for-scoping-and-filtering-band-t-only-the-final-call-after-an-audit-owner)
@@ -211,6 +212,45 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - The tram list's data re-checked for currency: Santa Cruz–La Laguna discarded, Kansas City kept with its data date (owner)
+
+- **Every tram city's source was re-read for its latest date, not its
+  description (the audit's Phase 2), and 39 of 41 stand.** One check per
+  source: SIRENE's parquets are the 2026-09-01 and 2026-09-21 editions, and
+  the cache is byte-identical (2,210,114,710 and 810,724,417 B); ROS02
+  (2026-09-01) and RES (2026-09-17) likewise; Latvia's excise and cadastre
+  layers are daily (2026-09-29, 09-28); New Orleans' `iqay-p646` was updated
+  2026-09-29 (16,507 rows against the screen's 16,481); Tucson's newest
+  `DT_START` is 2026-09-12 (93,483 rows, unchanged); Florence's four layers
+  2026-09-10 to 09-29; Zurich and Göteborg 2026-09-28; Odense's CVR cache is
+  generation 505 (2026-09-24); BAG is live. The 19 French city feeds are all
+  live and republished on a rolling basis (earliest end Avignon 2026-10-18),
+  so a feed's end date is a fetch-at-build item, not a screen failure.
+  Scripts: `data/_staging_scratch_2026-09-29/band_t_audit/phase2_france.py`,
+  `phase2_rest.py`, `kc_years.py`, `kc_catalog.py`.
+- **Santa Cruz–La Laguna discarded on currency (owner), Dallas's and
+  Atlanta's precedent.** The Cabildo de Tenerife's four layers hold 7,644
+  rows in the two municipalities; the newest `fecha_actualizacion` is
+  2023-11-13, none is later than that, and most rows were last touched
+  2015–2018, while the catalogue was re-stamped 2026-05-31 with no row
+  changed. The alternative, T2 with "retail and services stale" as its gap,
+  was rejected because only a republication closes it; the Cabildo's current
+  hostelería register (2026-08-31) is food only and addresses only. The tram
+  itself passed (96.5% mapped as tram). A discard row with its evidence, and a
+  revisit row on the tram list.
+- **Kansas City stays in T1, with its data date on the page (owner),
+  Stockholm's precedent.** `kkhs-93m4` (and its parent `pnm4-68wg`) last
+  changed 2026-01-15: 13,058 of 15,895 rows are licences valid for 2025,
+  1,978 for 2024 and 859 for 2026, and the domain's catalogue holds nothing
+  newer (its food permits stop in 2017). The previous update was 2023-12, so
+  the register reads as a yearly snapshot taken at the renewal, 8.5 months
+  old, where Stockholm's froze 11 months before its build.
+- **Counts: T 41 → 40 (T1 34, T2 6); candidates 80 → 79; discards 91 → 92.**
+  `docs/tram_city_list.md` gained a "Data currency" section and the licences
+  still unread (none deciding keep or drop); `docs/city_master_list.md` the
+  discard row and the Spain row. `check_master_list_counts.py` and
+  `check_discard_evidence.py` pass.
 
 ### 2026-09-29 - Band T audited: light rail leaves for A and C on a three-part test, Band T moves to its own tram list (owner)
 
