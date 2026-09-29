@@ -346,9 +346,17 @@ bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
   with master's copies in `master_processed/` beside them (585 MB, local
   only). Swap them in for `check_macro_facts.py --write`, swap master's back,
   and swap in again at the push. Branch at 41b44cf; exposure verdicts clean
-  for all 32 moved cities (DECISIONS "Category fix batch re-run"). Its
-  per-city `docs/excluded_categories.md` wording still needs the owner's
-  approval.
+  for all 32 moved cities (DECISIONS "Category fix batch re-run"). Final at
+  fdaa57a on origin/category-continuity, with its per-city
+  `docs/excluded_categories.md` wording owner-approved.
+- **Refresh the Brazilian "Excluded by what the enumerator wrote" counts** in
+  `docs/excluded_categories.md` from the step-2 logs, AFTER category-continuity
+  merges (its re-run moved all nine Brazilian cities). They were already
+  stale: São Paulo's vehicle-and-repair reads 40,992 against 41,122 in the
+  log, likely the FUNELARIA tie rule moving body shops into repair. Read the
+  figures from `data/_review_category-continuity_2026-09-29/logs/<city>.log`
+  (the branch's full drift runs; São Paulo's table near lines 84-105). Owner
+  approval for the new figures only if the wording changes.
 - The Stockholm worktree was removed 2026-09-29 (owner); `stockholm-catering`
   is kept, locally and on origin.
 - **`suwon`** (page 69; 33,433 storefronts, 14 stations) and **`bucheon`**
@@ -362,6 +370,39 @@ bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
   TEXT_WIDTH and `check_personal_exposure.py` REGISTRIES take both. `bucheon`
   also moves Incheon's macro label below its dot. Re-run
   `check_macro_labels.py` with both merged.
+- **`bergen`** (origin at bf1f5b4, READY final 2026-09-29; page 71; 3,597 storefronts, 33
+  stations, 58.5% in a ring; exposure clean): cut from master, so it counts
+  Built 69, Band A 4, Europe (23), Norway 2, Candidates 76. With suwon and
+  bucheon merged, Built becomes 71 before the light-rail four (reconcile each
+  count once, after all city branches are in). Widens notices 27
+  (Brønnøysundregistrene), 28 (Kartverket) and 29 (Entur, adding Skyss) to
+  "(Oslo, Bergen)"; the OSM rail-geometry notice names Bybanen line 1's
+  colour (owner-approved text). Macro label 48.3 px, above the dot. For the
+  held macro-map work: Bergen takes the light-rail colour (rail_extra
+  "Trams", as Calgary). Aarhus onward is built in a fresh session from
+  `docs/handoff_light_rail_2026-09-29.md` (Aarhus, Buffalo, Sacramento,
+  Houston; pages 72-75; each READY to the cleanup session). suwon, bucheon
+  and bergen append after the same anchors: expect conflicts in
+  `app/cities.py`, `check_macro_labels.py` TEXT_WIDTH (Suwon 45.3, Bucheon
+  60.1, Bergen 48.3), `check_personal_exposure.py` REGISTRIES, macro_facts,
+  ring_shares (re-run `--write`), README, DECISIONS, the master list,
+  map_inconsistencies tables A-D and excluded_categories (Bergen before
+  Oslo). The build session stays open until the batch is live: send it
+  questions during the merge and a notice when live.
+- **Copenhagen re-render (from the Aarhus branch):** an owner privacy rule
+  of 2026-09-29 (`STORE_NUMBER_NAME` in the shared `denmark.py` /
+  `denmark_register.py`) changes how a discount-supermarket P-unit named
+  "Person Name, NNN Place" (a franchisee's name plus store number) is shown,
+  in both Danish cities. Copenhagen has 33 such pins live, and the Aarhus
+  branch does not re-run Copenhagen. **After merging aarhus, run Copenhagen's
+  step 2 and step 3**, then `check_personal_exposure.py copenhagen`
+  (DECISIONS verdict), `drift_check --update-baseline`, macro_facts and
+  ring_shares.
+- **`aarhus` adds a fifth station-scope class, "infrequent"** (owner-approved):
+  `app/station_scope.py`'s `counts_for` returns a 5-tuple,
+  `app/pages/201_What_Is_Excluded.py` gains a "Too infrequent" column, and
+  the "Three things remove a station" list in `docs/excluded_categories.md`
+  changes. Watch those three files for conflicts with the other branches.
 - **The category-fix batch** (`category-continuity`, 17 taxonomies and their
   re-renders, owner-approved) bases its Stockholm fix on `stockholm-catering`:
   land it after, or in one merge.

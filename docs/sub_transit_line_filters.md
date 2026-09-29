@@ -40,6 +40,28 @@ everything, filter to city limits" pattern already fits those correctly,
 and this pattern's extra machinery would be solving a problem that doesn't
 exist there.
 
+## Cities that cut stops by spacing
+
+Eight cities, in build order. "Stops cut" counts the rows of the city's
+committed `outputs/<city>/excluded_stations.csv` whose reason mentions
+spacing (`app/station_scope.py`'s `thinned` class), read 2026-09-29 on master
+a828317 and checked the same day by a second session.
+
+| City | Lines thinned | Stops cut |
+|---|---|---|
+| San Francisco | Muni Metro and the F Market & Wharves | 85 |
+| Philadelphia | SEPTA Metro trolleys | 161 |
+| Boston | Green Line surface branches | 25 |
+| Amsterdam | trams | 59 |
+| Rome | Tram 8 | 9 |
+| Rotterdam | trams | 23 |
+| Hong Kong | Light Rail | 17 |
+| Riga | trams | 15 |
+
+Stops dropped by a frequency test (a light-rail stretch under the 15-minute
+test, Aarhus's "infrequent" class) are not this filter and are not counted
+here.
+
 ## The four filters, in order
 
 Applied per line, to that line's own real, in-order stop sequence (from
