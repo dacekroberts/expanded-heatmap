@@ -114,6 +114,22 @@ Desktop is unaffected — the label is fully visible there.
     `check_macro_facts.py --write`.
   - The `docs/excluded_categories.md` wording goes to the owner first; a
     full `deploy-verify` runs at review time.
+- [ ] **Next cross-city discrepancy audits (owner, 2026-09-29), AFTER the
+  exclusions batch lands.** Each is read-only and runs one at a time; each ends in rules
+  for the owner to decide, as the fringe-category audit did.
+  1. **The same trade in different buckets.** Trace about 10 common trades
+     (bakeries, delis, coffee shops, convenience stores, pharmacies, dry
+     cleaners...) through every taxonomy.
+  2. **Records that may not be trading.** Classify each source as
+     active-only, carries closing dates, or neither; estimate the inflation
+     where a sample allows (Kyoto, Rome, the permit registers).
+  3. **Home-based and one-person registrations.** Measure, per register-based
+     city, the share of pins with no employees and no premises name (the
+     French car-dealer finding); a privacy risk as well as inflation.
+  Then, as disclosures in `docs/map_inconsistencies.md` rather than rules:
+  4. placement precision and stacking; 5. one premises counted once or
+  several times (Milan twice, Calgary merged); 6. upper-floor and office
+  premises.
 - [x] **Put the cross-city inconsistency list on the site** (owner, 2026-09-24).
   LIVE 2026-09-28 (checked on the live URL after the owner's reboot): page 92 "Why
   the maps differ", linked from every page's footer; the owner's shape and
