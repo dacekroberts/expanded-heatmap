@@ -16,8 +16,23 @@
 >   and the layer was last edited 2025-10-22 (the Hub feed's `modified` says
 >   the same). There are no rows since. Every storefront-typed premises was
 >   last inspected in 2024 or 2025, so the snapshot is recent but frozen.
->   The page states the data date. **Building on a register frozen for 11
->   months is an owner call.** Singapore's 2016 snapshot sits in C.
+>   The page states the data date. ~~Building on a register frozen for 11
+>   months is an owner call.~~ **Decided (owner, 2026-09-28): build on it as
+>   it stands.**
+> - **The untyped premises are the ones not inspected since 2023.** The type
+>   field arrived with the 2024 inspections: every typed premises was last
+>   inspected in 2024-25, every untyped one in 2023 or earlier.
+>   - By name, the 1,391 are institutions 522, unidentifiable 501,
+>     pharmacies 117, and **storefronts 251** (134 food service, 117 food
+>     shops).
+>   - The name rules, tested on typed premises, are right **96.9%** of the
+>     time when they say "storefront".
+>   - **Proposed (awaiting the owner):** add the 225 of those 251 last
+>     inspected in 2022-23, flagged as classified from the name, which gives
+>     about 5,996 storefronts.
+>   - The measurement script is `sthlm_untyped.py` (session scratch). The
+>     build writes the rules into its taxonomy, with the same validation as
+>     a check.
 > - **`VerksamhetsTyp` types each premises** (the screen said nothing of it):
 >   | Type | Premises |
 >   |---|---|

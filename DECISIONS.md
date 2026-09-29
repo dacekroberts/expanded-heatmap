@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**161 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**162 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Second review-time batch published: Buenos Aires, Glasgow, Newcastle, Sydney, Melbourne; London's flat rule; Monterrey's wording (owner called it)](#2026-09-28---second-review-time-batch-published-buenos-aires-glasgow-newcastle-sydney-melbourne-londons-flat-rule-monterreys-wording-owner-called-it)
+- [Stockholm is built on its register as frozen on 2025-10-21 (owner); the 1,391 untyped premises measured, a by-name recovery proposed](#2026-09-28---stockholm-is-built-on-its-register-as-frozen-on-2025-10-21-owner-the-1391-untyped-premises-measured-a-by-name-recovery-proposed)
 - [Melbourne built on the City of Melbourne's land-use census, by Metro Trains line group; 9539 excluded in Melbourne and Sydney (owner)](#2026-09-28---melbourne-built-on-the-city-of-melbournes-land-use-census-by-metro-trains-line-group-9539-excluded-in-melbourne-and-sydney-owner)
 - [Bucharest's names: the company name without its legal form, sole traders by category (owner); Bucharest builds after Incheon (owner)](#2026-09-28---bucharests-names-the-company-name-without-its-legal-form-sole-traders-by-category-owner-bucharest-builds-after-incheon-owner)
 - [Bucharest to be built with its unplaced share disclosed; canteens and pastry labs left out (owner)](#2026-09-28---bucharest-to-be-built-with-its-unplaced-share-disclosed-canteens-and-pastry-labs-left-out-owner)
@@ -247,6 +248,32 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
     scope), all fixed above. The label fixes were re-scored by the check,
     and page 91 was re-measured in the lean venv.
 
+### 2026-09-28 - Stockholm is built on its register as frozen on 2025-10-21 (owner); the 1,391 untyped premises measured, a by-name recovery proposed
+
+- **Decided (owner): Stockholm uses the Livsmedelstillsyn register as it
+  stands**, with no rows since 2025-10-21. The page gives the data date.
+- **Measured: the type field arrived with the 2024 inspections.** Every
+  typed premises was last inspected in 2024 or 2025: 2,204 in 2024 and
+  4,551 in 2025, 6,755 in all, of which 5,967 are storefronts by type.
+  Every one of the 1,391 untyped premises was last inspected in 2023 or
+  earlier: 968 in 2023, 304 in 2022, 119 before. They are premises not
+  inspected since, which includes low-risk shops on long cycles (risk
+  classes 7-8 are 778 of them) and closures.
+- **The untyped premises, by name:**
+  - institutions (preschools, schools, home care, head offices): 522
+  - unidentifiable: 501
+  - pharmacies: 117
+  - storefronts: **251** (134 food service, 117 food shops)
+- **The name rules were validated on the typed premises.** Where they call
+  a premises a storefront, the type agrees **96.9%** of the time (the
+  bucket 91.2%). They recognise only about half of all storefronts, so they
+  are precise, not complete.
+- **Proposed, awaiting the owner:** add the 225 storefronts by name that
+  were last inspected in 2022 or 2023, disclosed as classified from the
+  name. The 26 older ones stay out as likely closed, as do the pharmacies
+  (not food shops) and the rest. That gives about 5,996 placed
+  storefronts.
+- Files: `docs/build_briefs/stockholm.md`.
 ### 2026-09-28 - Melbourne built on the City of Melbourne's land-use census, by Metro Trains line group; 9539 excluded in Melbourne and Sydney (owner)
 
 - **ANZSIC 9539 "Other Personal Services n.e.c." excluded in both Australian
