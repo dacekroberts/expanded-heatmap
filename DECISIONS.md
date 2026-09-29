@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**148 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**149 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Bucharest's DSVSA files fetched by the owner in their browser: about 19,000 active storefronts, not 31,299 - a quarter of the rows are cancelled registrations](#2026-09-28---bucharests-dsvsa-files-fetched-by-the-owner-in-their-browser-about-19000-active-storefronts-not-31299---a-quarter-of-the-rows-are-cancelled-registrations)
 - [Stockholm and Bucharest briefs brought up to build: Stockholm's register frozen since 2025-10-21, its premises key and types found; Bucharest's columns were already known; Glasgow's Govan claim withdrawn](#2026-09-28---stockholm-and-bucharest-briefs-brought-up-to-build-stockholms-register-frozen-since-2025-10-21-its-premises-key-and-types-found-bucharests-columns-were-already-known-glasgows-govan-claim-withdrawn)
 - [Melbourne and Sydney briefs written: both licences read (CC BY 4.0, permitted with conditions), stations and ring coverage measured](#2026-09-28---melbourne-and-sydney-briefs-written-both-licences-read-cc-by-40-permitted-with-conditions-stations-and-ring-coverage-measured)
 - [Newcastle and Glasgow briefs written: the FSA per-type split measured, Govan missing from OSM's Subway, Scotland's licence left for the build](#2026-09-28---newcastle-and-glasgow-briefs-written-the-fsa-per-type-split-measured-govan-missing-from-osms-subway-scotlands-licence-left-for-the-build)
@@ -184,6 +185,38 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Bucharest's DSVSA files fetched by the owner in their browser: about 19,000 active storefronts, not 31,299 - a quarter of the rows are cancelled registrations
+
+- **The owner fetched eight files** from the registered retail units of
+  animal origin, in their own browser past the site's challenge. That is
+  Bucharest's memo condition, and no session was replayed. The files total
+  9,319,353 bytes, all dated 25.08.2026, and are in `data/bucharest/raw/`
+  (hashes in `docs/build_briefs/bucharest.md`).
+  - **Chosen as storefronts:** 01 pork butcher, 02 butcher, 11 fishmonger,
+    16 honey shop, 19 public food service, 20 pizzeria, 23 confectioner and
+    pastry shop, 25 food shop.
+  - **Still to come:** 26 hyper- and supermarkets; the site timed out on
+    the owner's retry.
+  - **Left out:** canteens (21) and pastry labs (22) are recommended out,
+    for the owner to confirm. Catering, local producers, internet-only
+    sales, mobile stalls, vending machines, warehouses, fairs, farms and
+    processing are left out as non-storefronts.
+  - The files had been saved to the main checkout's root, and were moved
+    into `data/bucharest/raw/`. `check_stray_downloads.py` is clean.
+- **Found that each file lists cancelled registrations below an "ANULATE"
+  row.** They are printed red on yellow and carry the cancelling decision;
+  the sheet is named "Active și desființate". There is no status column.
+  - **Active: 19,017 of 26,763 rows**, with 7,746 cancelled.
+  - The screen's 31,299 had counted both.
+  - Food service (19) has 9,915 active; food shops (25) have 7,540.
+  - Step 2 must cut at the ANULATE row, and parse by section, since one
+    row in file 19 has only two filled cells.
+- **Names are legal entities, and sole traders appear under their own
+  names** ("ÎNTREPRINDERE INDIVIDUALĂ", PFA, II). The personal-information
+  rule applies: those units show a category only.
+- **Still undecided:** Bucharest's buildability, which rests on the OSM
+  address hit rate over the active rows. The addresses are free text.
 
 ### 2026-09-28 - Stockholm and Bucharest briefs brought up to build: Stockholm's register frozen since 2025-10-21, its premises key and types found; Bucharest's columns were already known; Glasgow's Govan claim withdrawn
 
