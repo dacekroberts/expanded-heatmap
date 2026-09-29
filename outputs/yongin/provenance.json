@@ -1,0 +1,45 @@
+{
+  "semas": {
+    "file": "sbiz_15083033.zip",
+    "page": "https://www.data.go.kr/data/15083033/fileData.do",
+    "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003695831&fileDetailSn=1&insertDataPrcus=N",
+    "bytes": 352699739,
+    "sha256": "57aa361544108ff4fc73334f87d2ced61e41fe8638dd70bcd842930f865d2386",
+    "retrieved": "2026-09-29T09:34:52+00:00",
+    "edition": "2026-06-30"
+  },
+  "osm_rail": {
+    "file": "osm_rail_routes.json",
+    "host": "overpass-api.de",
+    "query": "[out:json][timeout:600];(relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|monorail|tram)$\"](37.06,127.0,37.39,127.45);relation[\"type\"=\"route\"][\"route\"=\"train\"][\"ref\"~\"^(수인·분당|경의·중앙|경강|서해|GTX-A|경춘)$\"](37.06,127.0,37.39,127.45);)->.r;.r out geom;node(r.r);out body;",
+    "bytes": 2442789,
+    "sha256": "9a86bca083d296b5e7cd2205a4e9a124b001e6aa8c7e35c027d8fa570c3062cb",
+    "elements": {
+      "relation": 58,
+      "node": 367
+    },
+    "osm_base": "2026-09-29T09:55:59Z"
+  },
+  "osm_station_names": {
+    "file": "osm_station_names.json",
+    "host": "overpass.kumi.systems",
+    "query": "[out:json][timeout:240];(node[\"railway\"=\"station\"](37.06,127.0,37.39,127.45);way[\"railway\"=\"station\"](37.06,127.0,37.39,127.45););out tags center;",
+    "bytes": 35597,
+    "sha256": "37599e414d469aab7e011ced24e5f8001024017a087a5a61b9033c695fac2d5e",
+    "elements": {
+      "node": 56
+    },
+    "osm_base": "2026-05-31T22:37:44Z"
+  },
+  "osm_boundary": {
+    "file": "osm_boundary.json",
+    "host": "overpass.kumi.systems",
+    "query": "[out:json][timeout:240];relation(2409189)[\"name\"=\"용인시\"];out geom;",
+    "bytes": 153281,
+    "sha256": "1512ad3fb4f51cff3fd864da9a4e857b90781e922300aead055fd214d78f4eea",
+    "elements": {
+      "relation": 1
+    },
+    "osm_base": "2026-07-28T02:16:18Z"
+  }
+}

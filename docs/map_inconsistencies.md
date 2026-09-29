@@ -47,8 +47,8 @@ dense-looking city may simply have more complete records.
   2022–2024 land-use survey, every ground floor on every block), Sydney (the City of
   Sydney's 2022 floor-space survey, one council only) and Melbourne (the City
   of Melbourne's 2024 land-use census, one council only).
-- **National statistical or establishment registers:** Incheon (SEMAS's
-  national storefront register, 상가(상권)정보), Mexico City, Guadalajara and
+- **National statistical or establishment registers:** Incheon, Goyang, Seongnam
+  and Yongin (SEMAS's national storefront register, 상가(상권)정보), Mexico City, Guadalajara and
   Monterrey (INEGI DENUE), the five French cities (SIRENE), Oslo (Enhetsregisteret sub-units),
   Copenhagen (CVR production units), Prague (ROS02 with RES); Taichung, Taoyuan
   and Taipei (the national business tax register, FIA).
@@ -449,6 +449,9 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Daegu | Daegu Metro Lines 1–3 (Line 3 a monorail) | 대경선 (Korail, on spacing) | OpenStreetMap (gate 3 against Korean Wikipedia; operator unreachable) | City | 5 / 0 |
 | Busan | Busan Metro Lines 1–4 (Line 4 a rubber-tyred light metro) and the Busan–Gimhae LRT | 동해선 (Korail, on spacing) | OpenStreetMap (gate 3 against Korean Wikipedia) | City | 17 / 0 |
 | Incheon | Incheon Lines 1 and 2, Line 1, Line 7, Suin–Bundang Line | AREX, the airport maglev, the Wolmi Sea Train | OpenStreetMap (gate 3 against English Wikipedia; Line 1 not gated) | City | 151 / 0 |
+| Goyang | Line 3, Gyeongui–Jungang Line | Seohae Line (same track), GTX-A | OpenStreetMap (gate 3 on Line 3) | City | 76 / 0 |
+| Seongnam | Line 8, Suin–Bundang, Shinbundang, Gyeonggang Lines | GTX-A | OpenStreetMap (gate 3 on two lines) | City | 91 / 0 |
+| Yongin | EverLine, Suin–Bundang, Shinbundang Lines | GTX-A | OpenStreetMap (gate 3 on all three) | City | 67 / 0 |
 | **Taiwan** | | | | | |
 | Taichung | Taichung Metro Green Line | Taiwan Railway, high-speed rail | Operator's station table + OpenStreetMap route (gate 3 exact) | City | 0 / 0 |
 | Taoyuan | Taoyuan Airport MRT (line A) | Taiwan Railway, high-speed rail | National station layer + OSM route (gate 3 exact, one dated addition) | City | 7 / 0 |
@@ -538,6 +541,9 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Daegu | Permit registers (14 types) | Daegu's republication of the national LOCALDATA registers (D-데이터허브) | Local (permit type) | 11,031 / 27,271 / 9,422 | Retail only the licensed trades; no general retail |
 | Busan | Permit registers (14 types) | Busan's LOCALDATA API (the national permit registers) | Local (permit type) | 14,330 / 39,487 / 12,531 | Retail only the licensed trades; no general retail |
 | Incheon | National register | SEMAS's 상가(상권)정보 (the national storefront register) | SEMAS's own (소분류) | 21,719 / 25,983 / 8,724 | — |
+| Goyang | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 7,358 / 8,243 / 2,918 | — |
+| Seongnam | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 7,487 / 8,982 / 2,949 | — |
+| Yongin | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 4,991 / 6,052 / 1,960 | — |
 | **Taiwan** | | | | | |
 | Taichung | National tax register | FIA business tax register | Industry code division | 6,307 / 4,145 / 2,136 | One line in a large city: 19% of storefronts in a ring |
 | Taoyuan | National tax register | FIA business tax register | Industry code division | 2,465 / 1,854 / 907 | The airport line misses the city's largest centre: 12% in a ring |
@@ -619,6 +625,9 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Daegu | Source building points, gaps filled from other permits at the same building (99% placed; 612 unplaced) | Retail thin (licensed trades only) | Lodging, vets, hostess bars, food trucks, wholesale and online sellers; 113 personal names withheld; phone never read; health-food addresses masked by the publisher |
 | Busan | Source building points, gaps filled from other permits at the same building (99% placed; 810 unplaced) | Retail thin (licensed trades only) | Lodging, vets, hostess bars, food trucks, wholesale and online sellers; 114 personal names withheld; phone never read; health-food addresses masked by the publisher |
 | Incheon | Register coordinates (100%) | None: the register holds every storefront with a point | Offices, education, health, estate agents, lodging, recreation, repairs, funeral, wedding halls, hostess bars, staff canteens, fuel dealers; 107 personal names withheld |
+| Goyang | Register coordinates (100%) | None | Incheon's; 9 personal names withheld |
+| Seongnam | Register coordinates (100%) | None | Incheon's; 30 personal names withheld |
+| Yongin | Register coordinates (100%) | None | Incheon's; 16 personal names withheld |
 | **Taiwan** | | | |
 | Taichung | Address join to the city's door plates (92.2%; 5,599 unplaced) | Stalls unplaced; a department store is one point | Online shopping; office-like head offices; unmarked sole proprietors shown by industry |
 | Taoyuan | Address join to the city's door plates (93.6%; 3,097 unplaced) | Stalls and rural addresses unplaced | Online shopping; office-like head offices; unmarked sole proprietors shown by industry |
@@ -711,6 +720,9 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Daegu | Edition 2026-08, but its rows end 2025-08-31 (fetched 2026-09-27) | Yes (snapshot caption, the rows' own date) | 0.6 mi | Yes | 71% | Trade name in Korean (113 show "Name withheld") |
 | Busan | Frozen 2026-04-15, the rows agree (fetched 2026-09-27) | Yes (snapshot caption) | 0.6 mi | Yes | 74% | Trade name in Korean (114 show "Name withheld") |
 | Incheon | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 68% | Trade name in Korean, with the branch (107 show "Name withheld") |
+| Goyang | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 67% | Trade name in Korean, with the branch |
+| Seongnam | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 76% | Trade name in Korean, with the branch |
+| Yongin | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 55% | Trade name in Korean, with the branch |
 | **Taiwan** | | | | | | |
 | Taichung | Register daily, dated 2026-09-25; door plates August 2026 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 19% | Trade name in Chinese, or the line of business (11,907) |
 | Taoyuan | Register daily, dated 2026-09-25; door plates August 2026 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 12% | Trade name in Chinese, or the line of business (7,230) |

@@ -95,7 +95,7 @@ together, so a row in either counts and a row in neither still fails.
 | Latvia | [`data_sources/latvia.md`](data_sources/latvia.md) | Riga |
 | Brazil | [`data_sources/brazil.md`](data_sources/brazil.md) | São Paulo, Rio de Janeiro, Belo Horizonte, Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional) |
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
-| South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon |
+| South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
 | Japan | [`data_sources/japan.md`](data_sources/japan.md) | candidate cities' licence reads |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
@@ -2038,7 +2038,7 @@ Aires's, Glasgow's and Newcastle's, each on its own branch - recheck at merge).
   `DECISIONS.md`.
 - **Melbourne's rail is OpenStreetMap data** (ODbL, notice 1).
 
-**66. Small Enterprise and Market Service (Incheon) — required, and DISPLAYED**
+**66. Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin) — required, and DISPLAYED**
 (written into `render_site_notices()`; displayed once Incheon lands).
 *Numbered 66 on branch `incheon`, which carries neither Stockholm's nor
 Bucharest's notice; renumber at merge (68 if both land first). The Gyeonggi

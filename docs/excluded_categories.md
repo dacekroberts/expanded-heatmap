@@ -2270,6 +2270,31 @@ name at an address that reads residential (Seoul's rule).
   `outputs/incheon/excluded_stations.csv`; the lines are drawn to their ends.
 - AREX, the suspended airport maglev and the Wolmi Sea Train are not drawn.
 
+### Goyang, Seongnam and Yongin - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules** (the section above): SEMAS's 상가(상권)정보,
+edition 2026-06-30, every storefront on its own point, classified by
+`pipeline/taxonomies/korea_sbiz.py` and aligned with `docs/category_rules.md`.
+
+**Out by name**, per city (Goyang / Seongnam / Yongin): hostess bars (110 /
+273 / 188), dance halls (8 / 21 / 4), staff canteens (48 / 138 / 161),
+household fuel dealers (24 / 16 / 65); and, as in Incheon, offices,
+education, health, estate agents, lodging, recreation, repairs, funeral
+services, wedding halls and matchmaking.
+
+**Names withheld** - 9 / 30 / 16 storefronts whose registered name is a bare
+personal name at an address that reads residential.
+
+**Stations**, each city cut at its own boundary (the lines drawn to their
+ends; stations outside in each city's `excluded_stations.csv`):
+- Goyang: Line 3 and the Gyeongui-Jungang Line, 20 stations. The Seohae Line
+  (on the Gyeongui-Jungang track through the same stations) and GTX-A (its
+  Kintex stop) are not drawn.
+- Seongnam: Line 8, the Suin-Bundang, Shinbundang and Gyeonggang Lines, 18
+  stations. GTX-A is not drawn.
+- Yongin: the EverLine, the Suin-Bundang and Shinbundang Lines, 24 stations.
+  GTX-A (its Guseong stop) is not drawn.
+
 ## Kept, and why
 
 - **Miscellaneous retail (NAICS 459999).** Another catch-all, but a sample found
