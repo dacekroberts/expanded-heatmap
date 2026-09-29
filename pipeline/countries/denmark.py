@@ -120,6 +120,15 @@ SOLE_TRADER_FORMS = ("10", "15", "30")
 # form 10, and the rest on partnerships and foreign firms the form test misses.
 SOLE_TRADER_MARKER = r"(?i)(?:^|[\s,])v/"
 
+# A FRANCHISEE'S OWN NAME AS THE STORE'S NAME: "Jacob Albertsen, 870 Sabro" -
+# a person, a three-digit store number, a place. Discount-supermarket
+# franchises register each store's P-unit that way (29 in Aarhus, 33 in
+# Copenhagen, 2026-09-29) under a COMPANY parent, so the form guard never
+# fires. ✅ Owner, 2026-09-29: shown by the address, in both cities. Exactly
+# three digits and none before the comma, so "VIN OG TOBAK, 1001 NAT" and
+# "365discount Åbyhøj, Silkeborgvej 340" keep their names.
+STORE_NUMBER_NAME = r"^[^\d,]+,\s*\d{3}\s+\D"
+
 # Legal-form tails stripped from a displayed trade name ("PAW SOCIETY ApS" ->
 # "PAW SOCIETY"). Only as a WHOLE final token.
 LEGAL_FORM_SUFFIXES = ("APS", "A/S", "I/S", "IVS", "K/S", "P/S", "SMBA", "AMBA",
@@ -146,6 +155,16 @@ DAR_STATUS_RANK = {"3": 0, "2": 1, "4": 2, "5": 3}
 # lies in zone 33 - the object catalogue's example is POINT(552412.26
 # 6179535.68). Read the CRS off the data, never off the city's zone.
 DAR_CRS = "EPSG:25832"
+
+# --- Placement: WHERE THE HUSNUMMER'S POINT COMES FROM ----------------------
+# A city's config chooses (`PLACEMENT`; absent means DAR):
+#   * DAR's own Adressepunkt files, per kommune, through the owner's
+#     Datafordeler key - Copenhagen's, 98.3%;
+#   * OSM's imported address points, whose `osak:identifier` IS the DAR
+#     Husnummer id (DECISIONS 2026-09-27; median 0.03 m from DAR's own point on
+#     a central-Copenhagen control) - keyless, ODbL; Aarhus's, owner 2026-09-27.
+PLACEMENT_DAR = "dar_adressepunkt"
+PLACEMENT_OSM_OSAK = "osm_osak"
 
 # --- OSM kommune boundaries ------------------------------------------------
 # Danish kommuner are admin_level 7 in OSM and carry the kommunekode as `ref`,

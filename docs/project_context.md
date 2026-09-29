@@ -745,6 +745,18 @@ Cities built and running end to end (pipeline, map, app page):
   users not to change the data. The Datafordeler account is the owner's and
   closes after publish.
 
+- **Aarhus** - the Letbane's L2 on the city tramway, inside Aarhus Kommune;
+  Denmark's second city, on Copenhagen's register and shared step 2, held for
+  the batch review. Three things are its own. **Scope is a section of the
+  network**: the two converted railway lines the Letbane runs onto fail the
+  owner's 15-minute light-rail test on Midttrafik's own timetables, so their
+  stops are excluded, their track is not drawn, and L2 is cut at Aarhus H.
+  **The coordinates are keyless**: each premises' DAR Husnummer id is joined
+  to the OpenStreetMap address point carrying it as `osak:identifier`, a
+  second placement path in `denmark_register.py`. And **a franchisee's own
+  name with a store number shows the address**, a rule that now covers
+  Copenhagen too (owner).
+
 - **Prague** - Metro A, B and C, all inside the city. Czechia's first city, and
   the third built off a register of PREMISES - after its pause, when the
   business register it started from turned out to record where companies are

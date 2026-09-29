@@ -268,6 +268,11 @@ REGISTRIES = {
     "copenhagen": dict(raw=None, trade=None, owner=None,
                        processed="businesses_clean.csv",
                        address=("business_name",)),
+    # Aarhus: Copenhagen's register, step 2 and personal-owner rule
+    # (denmark_register.py); placed on OSM's DAR address points instead.
+    "aarhus": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv",
+                   address=("business_name",)),
     # Amsterdam, the first Dutch city, two layers. The BAG shop units carry NO
     # name at all - the pin shows the unit's address - and a unit also
     # registered as a dwelling is not on the map. The hospitality permits show

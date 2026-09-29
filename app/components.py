@@ -709,6 +709,8 @@ _NOTICES = [
      "geometry of Lille's two métro lines, the per-line colours of "
      "Oslo's T-bane and tram lines, and Copenhagen's Metro and S-tog lines "
      "and stations and the municipal boundaries used to select them, "
+     "Aarhus's Letbane L2 line and its stops, the municipal boundaries used to "
+     "select them and the address points used to place its businesses, "
      "Rome's metro and Roma–Viterbo urban lines and their stations, "
      "the metro, VLT and suburban lines and stations of São Paulo (with its "
      "CPTM Linha 9), Rio de Janeiro (its VLT and SuperVia lines), Belo "
@@ -925,10 +927,11 @@ _NOTICES = [
     # prescribed, the wording is not, so this string is this project's own;
     # its second sentence is CC BY 4.0 3(a)(1)'s modification duty. Wording
     # approved by the owner 2026-09-24.
-    ("Det Centrale Virksomhedsregister (Copenhagen)",
+    # Aarhus added 2026-09-29, owner-approved: the same register and cache.
+    ("Det Centrale Virksomhedsregister (Copenhagen, Aarhus)",
      "Contains data from Det Centrale Virksomhedsregister (CVR), distributed by "
      "Datafordeler under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). "
-     "Copenhagen's business premises are selected, classified and placed by this "
+     "Copenhagen's and Aarhus's business premises are selected, classified and placed by this "
      "project, and a personally owned business is shown by its address rather "
      "than its name; the categories and densities are this project's own work "
      "and are not produced or endorsed by Erhvervsstyrelsen.",
@@ -938,11 +941,14 @@ _NOTICES = [
     # licence-read agent). Named with the register as well, since Datafordeler's
     # general terms ask for "the responsible register". Wording approved by the
     # owner 2026-09-24.
-    ("Klimadatastyrelsen (Copenhagen)",
+    # Aarhus added 2026-09-29, owner-approved: it reads DAR's Adresse and
+    # Husnummer, and takes the point from OSM's copy (osak:identifier).
+    ("Klimadatastyrelsen (Copenhagen, Aarhus)",
      "Contains data from Klimadatastyrelsen, Danmarks Adresseregister (DAR), via "
      "Datafordeler under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). "
-     "This project joins the register's address points to the business register "
-     "to place each premises.",
+     "This project joins the register's addresses and address points to the "
+     "business register to place each premises; in Aarhus the points are "
+     "OpenStreetMap's copies of them.",
      False),
     # ČSÚ - Prague's activity, form and name data (RES). CC BY 4.0 for the web
     # pages, and the DATA paragraph ("Další podmínky použití dat ČSÚ") adds two

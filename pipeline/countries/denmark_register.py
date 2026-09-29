@@ -168,6 +168,8 @@ def _coordinates(df, cfg):
               lambda c: c[DK.DAR_ID].isin(set(a[DK.DAR_ADRESSE_HUSNUMMER])) & _dar_current(c))
     h = _one_per_id(h)
     print(f"  Husnummer: {len(h):,} found for {a[DK.DAR_ADRESSE_HUSNUMMER].nunique():,} asked")
+    if getattr(cfg, "PLACEMENT", DK.PLACEMENT_DAR) == DK.PLACEMENT_OSM_OSAK:
+        return _place_on_osak(df, a, h, cfg)
     pts = pd.concat([_read(_need(DK.DAR_DIR / f"Adressepunkt_{k}.csv", cfg),
                            cols + (DK.DAR_POSITION,),
                            lambda c: c[DK.DAR_ID].isin(set(h[DK.DAR_HUSNUMMER_POINT]))
@@ -186,6 +188,52 @@ def _coordinates(df, cfg):
                  columns={DK.DAR_ID: DK.DAR_ADRESSE_HUSNUMMER}), on=DK.DAR_ADRESSE_HUSNUMMER)
              .merge(pts[[DK.DAR_ID, "latitude", "longitude"]].rename(
                  columns={DK.DAR_ID: DK.DAR_HUSNUMMER_POINT}), on=DK.DAR_HUSNUMMER_POINT))
+    df = df.merge(chain[[DK.DAR_ID, "latitude", "longitude"]].rename(
+        columns={DK.DAR_ID: DK.ADR_DAR_ID}), on=DK.ADR_DAR_ID, how="left")
+    placed = df["latitude"].notna()
+    print(f"  placed {int(placed.sum()):,} of {len(df):,} ({placed.mean():.1%}); "
+          f"unplaced {int((~placed).sum()):,} - no address id "
+          f"{int(df[DK.ADR_DAR_ID].isna().sum()):,}, id not resolved "
+          f"{int((df[DK.ADR_DAR_ID].notna() & ~placed).sum()):,}")
+    if (~placed).any():
+        print(f"  unplaced are personally owned {df.loc[~placed, 'personal_form'].mean():.1%} "
+              f"vs {df['personal_form'].mean():.1%} overall")
+    return df[placed].copy()
+
+
+def _place_on_osak(df, a, h, cfg):
+    """Aarhus's placement: the Husnummer id -> OSM's address point whose
+    `osak:identifier` equals it (keyless, ODbL; owner 2026-09-27).
+
+    ⚠ THE KEY IS THE HUSNUMMER'S OWN id, NEVER ITS `adgangspunkt`. The two
+    coincide on most rows, so the wrong key still places four storefronts in
+    five (80.1% against 97.0% on Aarhus's screen) - a plausible-looking
+    number, which is why the count is printed both ways."""
+    pts = pd.read_csv(_need(cfg.OSM_ADDRESS_POINTS_TSV, cfg), sep="\t", dtype=str,
+                      quoting=3, keep_default_na=False, na_values=[""])
+    if list(pts.columns) != ["@id", "@lat", "@lon", "osak:identifier"]:
+        sys.exit(f"{cfg.OSM_ADDRESS_POINTS_TSV.name}: unexpected columns {list(pts.columns)}")
+    pts = pts.dropna(subset=["osak:identifier", "@lat", "@lon"])
+    pts["osak"] = pts["osak:identifier"].str.strip().str.lower()
+    dup = pts["osak"].duplicated(keep=False)
+    print(f"  OSM address points: {len(pts):,} with osak:identifier "
+          f"({pts['osak'].nunique():,} distinct; {int(dup.sum()):,} rows share an id)")
+    # One point per id: where OSM carries an id twice (a node and a building
+    # both tagged), the lowest OSM id - deterministic across drift checks.
+    pts = (pts.assign(_n=pd.to_numeric(pts["@id"]))
+              .sort_values("_n").drop_duplicates("osak"))
+    pts = pts.assign(latitude=pts["@lat"].astype(float),
+                     longitude=pts["@lon"].astype(float))
+
+    hn = h[[DK.DAR_ID, DK.DAR_HUSNUMMER_POINT]].assign(
+        hid=h[DK.DAR_ID].str.lower(), apid=h[DK.DAR_HUSNUMMER_POINT].str.lower())
+    wrong = int(hn["apid"].isin(set(pts["osak"])).sum())
+    right = int(hn["hid"].isin(set(pts["osak"])).sum())
+    print(f"  Husnummer ids found as osak:identifier: {right:,} of {len(hn):,} "
+          f"(on the adgangspunkt id instead: {wrong:,} - the key NOT used)")
+    chain = (a[[DK.DAR_ID, DK.DAR_ADRESSE_HUSNUMMER]]
+             .assign(hid=a[DK.DAR_ADRESSE_HUSNUMMER].str.lower())
+             .merge(pts[["osak", "latitude", "longitude"]], left_on="hid", right_on="osak"))
     df = df.merge(chain[[DK.DAR_ID, "latitude", "longitude"]].rename(
         columns={DK.DAR_ID: DK.ADR_DAR_ID}), on=DK.ADR_DAR_ID, how="left")
     placed = df["latitude"].notna()
@@ -261,12 +309,17 @@ def build_storefronts(cfg, bbox):
                  + df["CVRAdresse_husnummerFra"].fillna("").str.strip()).str.strip()
     trade = df["navn"].map(_clean_trade_name)
     marker = df["navn"].fillna("").str.contains(DK.SOLE_TRADER_MARKER, regex=True)
-    df["name_is_address"] = df["personal_form"] | marker | (trade == "")
+    # A franchisee's own name with a store number (denmark.STORE_NUMBER_NAME).
+    store_no = df["navn"].fillna("").str.match(DK.STORE_NUMBER_NAME)
+    df["name_is_address"] = df["personal_form"] | marker | store_no | (trade == "")
     df["business_name"] = trade.where(~df["name_is_address"], addr_text)
     print(f"\n  trade name shown on {int((~df['name_is_address']).sum()):,} rows "
           f"({(~df['name_is_address']).mean():.1%}); the address on the rest - "
           f"personally owned {int(df['personal_form'].sum()):,}, the v/ marker on a "
-          f"company form {int((marker & ~df['personal_form']).sum()):,}")
+          f"company form {int((marker & ~df['personal_form']).sum()):,}, a franchisee's "
+          f"name with a store number {int((store_no & ~df['personal_form'] & ~marker).sum()):,}")
+    for n in sorted(df.loc[store_no & ~df["personal_form"] & ~marker, "navn"])[:5]:
+        print(f"      e.g. {n}")
 
     emit("storefronts_placed", len(df))
     emit("name_shown", int((~df["name_is_address"]).sum()))

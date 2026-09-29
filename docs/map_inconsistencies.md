@@ -50,7 +50,7 @@ dense-looking city may simply have more complete records.
 - **National statistical or establishment registers:** Incheon, Goyang, Seongnam
   and Yongin (SEMAS's national storefront register, 상가(상권)정보), Mexico City, Guadalajara and
   Monterrey (INEGI DENUE), the five French cities (SIRENE), Oslo (Enhetsregisteret sub-units),
-  Copenhagen (CVR production units), Prague (ROS02 with RES); Taichung, Taoyuan
+  Copenhagen and Aarhus (CVR production units), Prague (ROS02 with RES); Taichung, Taoyuan
   and Taipei (the national business tax register, FIA).
 - **Excise licences plus a cadastre:** Riga (VID's alcohol and tobacco licences for
   food; VZD's premise groups for shops and services).
@@ -250,7 +250,7 @@ name at their home.
 - **Mostly addresses:** Milan (a shop sign on about 1 pin in 7), Amsterdam's shop
   layer, the French cities where SIRENE has no sign or usual name (only about 40% of
   Paris rows and 43% of Marseille rows are named, per the Marseille brief).
-- **Address in place of a sole trader's name:** Oslo, Copenhagen, Prague.
+- **Address in place of a sole trader's name:** Oslo, Copenhagen, Aarhus (and a franchisee's own name with a store number, Denmark's two cities), Prague.
 - **Brazil:** the census enumerator's description, not a trade name; only the category
   where the address is also a home (35–69% of dots, by city).
 - **Type in place of a personal name:** Vancouver/Surrey (88 pins). Kobe (10 pins: a
@@ -516,6 +516,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Stockholm | Tunnelbana: Gröna, Röda and Blå linjen (routes T10–T19), one label per line | Pendeltåg, Roslagsbanan, Saltsjöbanan, trams; the unopened Yellow line | OpenStreetMap route relations (SL's GTFS needs a key); gate 3 exact on 100 | Kommune | 18 / 0 |
 | **Denmark** | | | | | |
 | Copenhagen | Metro M1–M4 + S-tog (7 lines) | Regional/InterCity; Letbane | OpenStreetMap | Copenhagen + Frederiksberg | 59 / 0 |
+| Aarhus | Letbane L2 on the city tramway (light rail) | Odderbanen and Grenaabanen (under the 15-minute test); L1 not drawn | OpenStreetMap | Kommune | 30 / 0 |
 | **Czechia** | | | | | |
 | Prague | Metro A, B, C | Trams, funicular, ferries, suburban | PID GTFS | City | 0 / 0 |
 | **Netherlands** | | | | | |
@@ -615,6 +616,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Bucharest | Food hygiene register | DSVSA București's registers of food units (17 category files, active rows only) | The file (the unit category), with the category text for exceptions | 5,250 / 5,994 / — | No Personal services; Retail = food shops only ("Food shops"); a quarter of premises unplaced |
 | **Denmark** | | | | | |
 | Copenhagen | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 7,061 / 4,333 / 2,708 | Tattoo studios lost with the catch-all |
+| Aarhus | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 636 / 450 / 214 | Tattoo studios lost with the catch-all |
 | **Czechia** | | | | | |
 | Prague | National registers (location + activity) | ROS02 + RES | CZ-NACE 2025 (owner's activity) | 6,027 / 5,464 / 6,122 | About 57,000 establishments of other-activity owners missing |
 | **Netherlands** | | | | | |
@@ -711,6 +713,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Stockholm | Register coordinates (96.2%); 209 not placed | Food only; frozen register; untyped premises before 2024 recovered by name only for 2022-23 (flagged); office canteens under company names not separated | Institutional kitchens (preschools, schools, care) and pharmacies by name; wholesale, production and "Övrigt" by type |
 | **Denmark** | | | |
 | Copenhagen | Address join to DAR (98.3%) | Tattoo studios lost; web shops | Same 8 kinds + laundries, 969900; personal owners' names withheld |
+| Aarhus | Address join to DAR, points from OpenStreetMap's copy (97.1%) | Tattoo studios lost; web shops | Same 8 kinds + laundries, 969900; personal owners' and franchisees' names withheld |
 | **Czechia** | | | |
 | Prague | Address join to RÚIAN (99.99%) | Owner's activity only; web shops | Home-address sole traders (1,500) dropped; names withheld |
 | **Netherlands** | | | |
@@ -802,6 +805,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Stockholm | Inspections to 2025-10-21, layer edited 2025-10-22 (fetched 2026-09-29) | B | 0.6 mi | Yes | 89% | Premises name |
 | **Denmark** | | | | | | |
 | Copenhagen | Weekly extract (2026-09-24) | B | 0.6 mi | Yes | 94% | Name; address for personal owners |
+| Aarhus | Weekly extract (2026-09-24) | B | 0.3 mi | Yes | 25% | Name; address for personal owners and franchisees |
 | **Czechia** | | | | | | |
 | Prague | 2026-08-31 (ROS02) | B | 0.6 mi | Yes | 70% | Name; address for persons/partnerships |
 | **Netherlands** | | | | | | |

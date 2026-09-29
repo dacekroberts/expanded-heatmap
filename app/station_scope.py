@@ -42,7 +42,8 @@ def slug(page):
 
 
 def classify(reason, city):
-    """One of 'thinned', 'outside', 'closed' or 'other' for a `reason` cell.
+    """One of 'thinned', 'infrequent', 'outside', 'closed' or 'other' for a
+    `reason` cell.
 
     `outside` covers two things a reader sees as one: a station standing in
     another municipality, and a line in the same feed that belongs to a
@@ -57,6 +58,10 @@ def classify(reason, city):
     text = (reason or "").lower()
     if "spacing" in text:
         return "thinned"
+    # `infrequent`: a stop on a light-rail stretch that runs less often than
+    # the 15-minute test (Aarhus's converted railways, 2026-09-29, owner).
+    if "15-minute" in text:
+        return "infrequent"
     if "closed for works" in text:
         return "closed"
     if "outside" in text or f"not {city.lower()}'s" in text:
@@ -65,8 +70,9 @@ def classify(reason, city):
 
 
 def counts_for(csv_path, city):
-    """(outside, thinned, other, closed) for one city's file, or None if there
-    is none. `closed` is last so the first three keep their positions."""
+    """(outside, thinned, other, closed, infrequent) for one city's file, or
+    None if there is none. Each later category is appended, so the earlier
+    ones keep their positions."""
     if not csv_path.exists():
         return None
     with open(csv_path, encoding="utf-8-sig", newline="") as handle:
@@ -74,13 +80,14 @@ def counts_for(csv_path, city):
         columns = set(reader.fieldnames or ())
         rows = list(reader)
     if "reason" in columns:
-        tally = {"outside": 0, "thinned": 0, "other": 0, "closed": 0}
+        tally = {"outside": 0, "thinned": 0, "other": 0, "closed": 0, "infrequent": 0}
         for row in rows:
             tally[classify(row.get("reason"), city)] += 1
-        return tally["outside"], tally["thinned"], tally["other"], tally["closed"]
+        return (tally["outside"], tally["thinned"], tally["other"], tally["closed"],
+                tally["infrequent"])
     if BOUNDARY_COLUMNS & columns:
-        return len(rows), 0, 0, 0
-    return 0, 0, len(rows), 0
+        return len(rows), 0, 0, 0, 0
+    return 0, 0, len(rows), 0, 0
 
 
 def scope_rows(root, cities):

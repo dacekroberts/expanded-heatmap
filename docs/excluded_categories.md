@@ -92,7 +92,7 @@ station within walking distance.
 
 ### Stations left out of a network that IS mapped
 
-Two things remove a station from a network this project maps. Both are recorded
+Three things remove a station from a network this project maps. All are recorded
 station by station in `outputs/<city>/excluded_stations.csv`, committed to the
 repository, and every one of them is counted in the table on this page.
 
@@ -124,6 +124,11 @@ repository, and every one of them is counted in the table on this page.
   trolleys, the Boston Green Line's surface branches, the trams of Amsterdam and
   Rotterdam, Rome's tram 8, and Hong Kong's Light Rail. The reasoning is in
   `docs/sub_transit_line_filters.md`.
+- **It is on a stretch that runs too rarely.** Light rail is drawn only where
+  it runs at least every 15 minutes by day. Aarhus's Letbane runs every 7 to 8
+  minutes on its city tramway but every 30 minutes on the two converted railway
+  lines it continues onto, to Odder and to Grenaa, so their stops inside the
+  city are left out and those lines are not drawn.
 
 **A thinned stop does not leave a hole in the map.** Stops are thinned to half a
 mile apart and the outermost ring reaches 0.6 miles, so the stations that were
@@ -1278,6 +1283,31 @@ withheld.
 branches of lines 2, 3 and 5, and are listed with their municipality in
 `outputs/oslo/excluded_stations.csv`. **Ferries are not drawn**, as in
 Marseille.
+
+### Aarhus - Copenhagen's register and rules, and a city tramway without its railways
+
+**Copenhagen's rules, unchanged** (the section below): production units at their
+own location address, the eight structural kinds of work plus industrial
+laundries (465 rows here: contract catering and canteens 173, event catering
+166, retail agents 45, mobile food stalls 34, funeral services 29,
+personal-service agents 7, home services 6, industrial laundries 3, catering
+agents 2), and a personally owned business shown by its address. **`969900`
+excluded on Aarhus's own numbers**: 165 rows (3.0%), 78% personally owned
+against 45% overall; tattoo studios are lost with it, as in Copenhagen. **A
+supermarket registered under its franchisee's own name and a store number**
+("Name, 870 Place") shows its address too: 29 premises (owner, 2026-09-29; the
+same rule now applies to Copenhagen's 33). **Left off because they could not be
+placed**: 152 premises (2.9%), 131 with no address id and 21 whose address has
+no point in OpenStreetMap.
+
+**Stations**: the Letbane's 20 stops on the city tramway, Aarhus H to Lystrup
+and Lisbjergskolen. **Nineteen Letbane stops inside the municipality are
+excluded**, 12 on Odderbanen and 7 on Grenaabanen. Both are converted railway
+lines running every 30 minutes by day, under this site's 15-minute test for
+light rail (Midttrafik's timetables, read 2026-09-29). So are the 11 stops beyond
+the municipality (Odder 3, Syddjurs 5, Norddjurs 3). All are listed in
+`outputs/aarhus/excluded_stations.csv`. Regional and InterCity trains are not
+drawn.
 
 ### Copenhagen - production units, two municipalities, and a personal owner's name kept off the map
 
