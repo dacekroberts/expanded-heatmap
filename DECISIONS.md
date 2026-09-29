@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**113 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**114 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- ["Chamber of commerce register" added to the summary table's record kinds (owner)](#2026-09-28---chamber-of-commerce-register-added-to-the-summary-tables-record-kinds-owner)
 - ["Why the maps differ" built (page 92), waiting for review time](#2026-09-28---why-the-maps-differ-built-page-92-waiting-for-review-time)
 - ["Why the maps differ" page: shape decided (owner); the inconsistency list re-checked before drafting](#2026-09-28---why-the-maps-differ-page-shape-decided-owner-the-inconsistency-list-re-checked-before-drafting)
 - [Tokyo landed: city-landed sweep; three cities' in-ring counts corrected in the inconsistency list](#2026-09-28---tokyo-landed-city-landed-sweep-three-cities-in-ring-counts-corrected-in-the-inconsistency-list)
@@ -149,6 +150,18 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - "Chamber of commerce register" added to the summary table's record kinds (owner)
+
+- **Added `"Chamber of commerce register"` to `record_kind`'s allowed values**
+  in `scripts/check_inconsistency_list.py`, for Berlin, on the owner's
+  approval of the wording. The Berlin build session reported that IHK
+  Berlin's Gewerbedaten is the chamber of commerce's membership list,
+  published as premises points. It is not a licence, permit, national, tax
+  or property register, so none of the existing values fit. Rejected: forcing
+  it into "National register" or "Licence register", which would misdescribe
+  Berlin's map on the public "Why the maps differ" table. No city uses the
+  value yet.
 
 ### 2026-09-28 - "Why the maps differ" built (page 92), waiting for review time
 

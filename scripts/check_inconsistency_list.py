@@ -55,7 +55,10 @@ FIELDS = {
     "record_kind": {"Licence register", "Permit registers", "Street survey or census",
                     "National register", "Tax register", "Property register",
                     "Food licences", "Property register and permits",
-                    "Property register and licences"},
+                    "Property register and licences",
+                    # Berlin: IHK Berlin's Gewerbedaten, the chamber's membership
+                    # list as premises points (owner, 2026-09-28).
+                    "Chamber of commerce register"},
     "categories": {"All three", "Two", "Merged", "Retail thin", "Food licences only"},
 }
 # The coverage tier each `categories` value needs; absent means either.
