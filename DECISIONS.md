@@ -20,10 +20,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**175 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**179 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [The currency rule rewritten as one clock: the source must drop closures, its as-of date under five years (owner); Atlanta's 2024 layer found](#2026-09-29---the-currency-rule-rewritten-as-one-clock-the-source-must-drop-closures-its-as-of-date-under-five-years-owner-atlantas-2024-layer-found)
+- [Santa Cruz–La Laguna back from the discards to T2, food only on the Cabildo's current register (owner)](#2026-09-29---santa-cruzla-laguna-back-from-the-discards-to-t2-food-only-on-the-cabildos-current-register-owner)
+- [A currency rule by kind of source: census five years, register 18 months, event streams need a closure (owner)](#2026-09-29---a-currency-rule-by-kind-of-source-census-five-years-register-18-months-event-streams-need-a-closure-owner)
+- [The tram list's data re-checked for currency: Santa Cruz–La Laguna discarded, Kansas City kept with its data date (owner)](#2026-09-29---the-tram-lists-data-re-checked-for-currency-santa-cruzla-laguna-discarded-kansas-city-kept-with-its-data-date-owner)
 - [Exclusions batch re-run: 41 cities re-rendered; Brazil's funilaria misspelling fixed; Chicago's funeral disclosure rewritten (owner)](#2026-09-29---exclusions-batch-re-run-41-cities-re-rendered-brazils-funilaria-misspelling-fixed-chicagos-funeral-disclosure-rewritten-owner)
 - [Information pages renumbered 90-92 -> 200-202 (owner)](#2026-09-29---information-pages-renumbered-90-92---200-202-owner)
 - [Band T audited: light rail leaves for A and C on a three-part test, Band T moves to its own tram list (owner)](#2026-09-29---band-t-audited-light-rail-leaves-for-a-and-c-on-a-three-part-test-band-t-moves-to-its-own-tram-list-owner)
@@ -215,6 +219,142 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Changes
 
+### 2026-09-29 - The currency rule rewritten as one clock: the source must drop closures, its as-of date under five years (owner); Atlanta's 2024 layer found
+
+- **Supersedes the same day's "A currency rule by kind of source" (owner).**
+  Its separate clocks (five years for a census, 18 months for a register)
+  were fitted to earlier calls, not derived, and the owner asked why the
+  periods differed. They should not: a register kept up until it froze is a
+  snapshot as of its freeze, as a census is. What separated the good calls
+  from the bad was whether the source ever showed closures. The rule now has
+  one test and one clock: (1) the source can drop closed businesses (a
+  complete snapshot, a validity year, a closure field or an expiry window),
+  (2) its age is the date it last showed what was open, read in the rows,
+  and (3) the ceiling is five years with the date on the page. Five is what
+  the site already publishes (Brazil, Barcelona, Sydney: 2022 fieldwork); a
+  three-year ceiling was the alternative, and would put those 12 cities up
+  for review now. Dallas and Santa Cruz–La Laguna's directory fail part 1
+  at any age; Hamburg's 2016 survey fails part 3. `docs/city_master_list.md`
+  ("Five rules") and `add-city` Step 0 carry it.
+- **Atlanta's discard was measured on the wrong layer.** The 2026-09-28
+  screen read "Revenue Department - List of Business Licenses" (`GBL_WFL1`,
+  26,643 rows, licence years 2019–22, last edited 2023-04-24). The same
+  account (`gpickren2`, the city's planning GIS) also publishes
+  **`BusinessLicenses_2024_Revenue`** (item 1d0c61a4…, last edited
+  2024-08-15): **19,297 licences**, 14,591 for licence year 2024 (2,373
+  for 2023, 2,333 for 2022), NAICS codes, geocoded (PointAddress 11,223,
+  Subaddress 5,854, StreetAddress 2,022), **99.3% inside the city limits**
+  (the city's own boundary layer). Buckets by NAICS: **retail 44–45 2,944,
+  food 722 2,141, personal 8121/8123 1,306**. Also found: yearly layers
+  2019–2023 (16,022 for 2023) and a 2026 layer for the Main Street districts
+  only. **MARTA: 23 of the 38 rail stations** in the city GIS's station
+  layer (dated 2019) are inside the city limits; outside are the Red and
+  Gold lines' northern and southern ends and the Blue line's eastern end, so
+  a per-line stub test is due at build. The item declares no licence; a
+  licence read is under way, and Atlanta is banded on its verdict. Scripts:
+  `data/_staging_scratch_2026-09-29/band_t_audit/atl_find.py`,
+  `atl_2024.py`, `atl_stations.py`.
+
+### 2026-09-29 - Santa Cruz–La Laguna back from the discards to T2, food only on the Cabildo's current register (owner)
+
+- **Supersedes the same day's discard in "The tram list's data re-checked
+  for currency" (owner).** The discard was right about the Cabildo's
+  retail and services directory (no update since 2023-11-13, median row
+  2016-11), and wrong to set aside the Cabildo's hostelería register as
+  "food only, addresses only": food only is Zurich's and Göteborg's shape,
+  and both sit in T2. Measured the same day on the cached file: **3,658
+  restaurants** in the two municipalities (Santa Cruz 1,993, La Laguna
+  1,665), updated 2026-08-31, trade names on every row, 90.3% of addresses
+  with a house number (5.3% "S/N"), a postcode on all. It passes the
+  currency rule as a register. The directory is dropped, not used as a
+  partial layer.
+- **The gap noted in T2**: food only, and no coordinates, so placement is an
+  address join still to measure (Zaragoza was discarded at 36% with a house
+  number; this reads 90.3%). The register's licence is not read. The tram
+  passed Phase 1 unchanged.
+- **Counts: T 40 → 41 (T1 34, T2 7); candidates 79 → 80; discards 92 → 91.**
+  The discard row and its note are removed from `docs/city_master_list.md`;
+  the tram list's revisit row becomes a T2 row. `check_master_list_counts.py`
+  and `check_discard_evidence.py` pass.
+
+### 2026-09-29 - A currency rule by kind of source: census five years, register 18 months, event streams need a closure (owner)
+
+- **Written down because the discards and the published cities disagreed
+  (owner).** Santa Cruz–La Laguna was discarded on data whose newest update
+  is 2023-11-13, and Dallas on certificates ending 2022-11-15, while 16
+  published cities rest wholly or partly on older-dated business data: the
+  nine Brazilian cities on the 2022 census, Barcelona and Sydney on 2022
+  surveys, Buenos Aires in part (2022–2024), and Tokyo's Koto, Chuo and
+  Shinjuku ward lists (2022-11-30 to 2023-01-01). Dallas's row said "a
+  four-year-old snapshot cannot be disclosed away on a page", which Brazil's
+  census now matches in age. The ages were not the difference; the kind of
+  source was.
+- **The rule** (`docs/city_master_list.md`, "Five rules"; a pointer in
+  `add-city` Step 0): the date is read in the data, never the catalogue; a
+  directory of mixed ages is judged by its median row. A complete census or
+  survey stands while its fieldwork is under five years old; a register or
+  directory must have an update within 18 months of the screen; a stream of
+  permits, certificates or notices needs a closure field or an expiry window
+  and events within 18 months. A frozen part may sit beside a current whole
+  with its date disclosed (Tokyo's three wards). Every date is on the page.
+- **Why these lines.** Five years matches Sydney's survey cycle and keeps
+  every published census inside it; the alternative, "until the next
+  edition", would carry Brazil's decennial census to 2032. Eighteen months
+  keeps Stockholm (11 months frozen at build) and Kansas City (8.5) and
+  excludes Atlanta (2023-04) and Santa Cruz's directory. Measured by row, not
+  by its newest date, that directory's median update is 2016-11, with 83.7%
+  of dated rows last touched 2015–2018 and 10.7% in 2022 or later; the newest
+  date first quoted to the owner made it look closer to Brazil than it is.
+- **What it re-decides: nothing yet.** Dallas and Atlanta still fail (a
+  stream with no closure; a register not updated since 2023). Hamburg's 2016
+  survey still fails. Brazil's and Barcelona's 2022 fieldwork fall due for
+  re-check in 2027. Santa Cruz–La Laguna's current food register (3,658
+  restaurants in the two municipalities, updated 2026-08-31, trade names,
+  90.3% of addresses with a house number, no coordinates) would pass as a
+  register, so moving the city to T2 as food-only (Zurich's shape) is open
+  for the owner, not decided here. The published cities with no source date
+  recorded (17, "Fetched … (no source date)"; Milan and Dublin never read)
+  are measured against the rule by a date check, and none leaves the site on
+  it without the owner's call.
+
+### 2026-09-29 - The tram list's data re-checked for currency: Santa Cruz–La Laguna discarded, Kansas City kept with its data date (owner)
+
+- **Every tram city's source was re-read for its latest date, not its
+  description (the audit's Phase 2), and 39 of 41 stand.** One check per
+  source: SIRENE's parquets are the 2026-09-01 and 2026-09-21 editions, and
+  the cache is byte-identical (2,210,114,710 and 810,724,417 B); ROS02
+  (2026-09-01) and RES (2026-09-17) likewise; Latvia's excise and cadastre
+  layers are daily (2026-09-29, 09-28); New Orleans' `iqay-p646` was updated
+  2026-09-29 (16,507 rows against the screen's 16,481); Tucson's newest
+  `DT_START` is 2026-09-12 (93,483 rows, unchanged); Florence's four layers
+  2026-09-10 to 09-29; Zurich and Göteborg 2026-09-28; Odense's CVR cache is
+  generation 505 (2026-09-24); BAG is live. The 19 French city feeds are all
+  live and republished on a rolling basis (earliest end Avignon 2026-10-18),
+  so a feed's end date is a fetch-at-build item, not a screen failure.
+  Scripts: `data/_staging_scratch_2026-09-29/band_t_audit/phase2_france.py`,
+  `phase2_rest.py`, `kc_years.py`, `kc_catalog.py`.
+- **Santa Cruz–La Laguna discarded on currency (owner), Dallas's and
+  Atlanta's precedent.** The Cabildo de Tenerife's four layers hold 7,644
+  rows in the two municipalities; the newest `fecha_actualizacion` is
+  2023-11-13, none is later than that, and most rows were last touched
+  2015–2018, while the catalogue was re-stamped 2026-05-31 with no row
+  changed. The alternative, T2 with "retail and services stale" as its gap,
+  was rejected because only a republication closes it; the Cabildo's current
+  hostelería register (2026-08-31) is food only and addresses only. The tram
+  itself passed (96.5% mapped as tram). A discard row with its evidence, and a
+  revisit row on the tram list.
+- **Kansas City stays in T1, with its data date on the page (owner),
+  Stockholm's precedent.** `kkhs-93m4` (and its parent `pnm4-68wg`) last
+  changed 2026-01-15: 13,058 of 15,895 rows are licences valid for 2025,
+  1,978 for 2024 and 859 for 2026, and the domain's catalogue holds nothing
+  newer (its food permits stop in 2017). The previous update was 2023-12, so
+  the register reads as a yearly snapshot taken at the renewal, 8.5 months
+  old, where Stockholm's froze 11 months before its build.
+- **Counts: T 41 → 40 (T1 34, T2 6); candidates 80 → 79; discards 91 → 92.**
+  `docs/tram_city_list.md` gained a "Data currency" section and the licences
+  still unread (none deciding keep or drop); `docs/city_master_list.md` the
+  discard row and the Spain row. `check_master_list_counts.py` and
+  `check_discard_evidence.py` pass.
 ### 2026-09-29 - Exclusions batch re-run: 41 cities re-rendered; Brazil's funilaria misspelling fixed; Chicago's funeral disclosure rewritten (owner)
 
 - **All 41 cities re-rendered, one at a time, with master's shared processed
