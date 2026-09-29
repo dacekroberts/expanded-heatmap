@@ -400,7 +400,7 @@ bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
   ring_shares.
 - **`aarhus`** (origin at 53eda32, READY 2026-09-29; page 72; 5,102
   storefronts, 20 stations, 25.5% in a ring; TEXT_WIDTH 46.9, label ("end",
-  -11, 10); rail_extra "Trams"). **No `outputs/aarhus/baseline.json` yet:
+  -11, 10); rail_extra "Trams"). **Aarhus has no stored baseline yet:
   run `drift_check.py aarhus --update-baseline` at review (a heavy job,
   about 5 GB read).** It widens notices 30 (Det Centrale Virksomhedsregister)
   and 31 (Klimadatastyrelsen) to "(Copenhagen, Aarhus)" and edits
