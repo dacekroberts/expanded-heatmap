@@ -45,6 +45,14 @@ on a schedule; sessions remind the owner once work has built up.
 4. One push, **one reboot**, one live check. The `publish-city` skill has the
    gate in order.
 
+**Landing the tram batch (owner, 2026-09-29)**: about 41 cities on top of 68,
+so a `full` sweep (about 30 minutes at 68 cities, growing with each) is not run
+per sitting. The batch lands in **landing groups**, one per sitting, each a
+country pipeline or part of one (France's 21 may take two or three sittings).
+Each group gets one `city-added` deploy-verify naming exactly that group's
+cities, plus `map-chrome` only when the same sitting changes the macro map. A
+`full` sweep runs once, after the last group lands.
+
 ## Reminders
 
 A session reminds the owner once, at the end of a reply, when any of these is

@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**192 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**193 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [The tram batch's groundwork started (owner: all six items); a France macro view measured, and a North/South split recommended](#2026-09-29---the-tram-batchs-groundwork-started-owner-all-six-items-a-france-macro-view-measured-and-a-northsouth-split-recommended)
 - [Published cities' data dates checked: San Francisco maps closed locations, Dublin keeps vacant premises, three sources cannot be dated from their rows](#2026-09-29---published-cities-data-dates-checked-san-francisco-maps-closed-locations-dublin-keeps-vacant-premises-three-sources-cannot-be-dated-from-their-rows)
 - [Tram cities use the existing spacing rule for ring size (owner); the 95% coverage rule withdrawn](#2026-09-29---tram-cities-use-the-existing-spacing-rule-for-ring-size-owner-the-95-coverage-rule-withdrawn)
 - [Atlanta's discard ground changed from currency to terms (owner)](#2026-09-29---atlantas-discard-ground-changed-from-currency-to-terms-owner)
@@ -231,6 +232,31 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - The tram batch's groundwork started (owner: all six items); a France macro view measured, and a North/South split recommended
+
+- **The owner approved all six groundwork items and left the "how" to
+  staging.** Split by `docs/session_roles.md`: staging does the licence
+  reads (five French feeds sent to `licence-read`), the review-time note, the
+  French page-text template (drafted in chat for approval) and a scratch
+  measurement of the France view; the France batch kit (a
+  `france-tram-city` skill, a batch scaffold script, 21 briefs) goes to a
+  FRESH staging session, because this one was at 440k tokens of context; the
+  macro-map code and the Streamlit measurement go to the app/chrome role.
+  All of it is in `docs/handoff_tram_batch_2026-09-29.md`.
+- **A single France region cannot carry 26 labels at the site's fitted
+  zoom.** Scored with `check_macro_labels.py`'s own projection and pill
+  maths, text widths estimated at 7 px a character (the measured table runs
+  6.6–7.6): at zoom 3.52 (about 9.5 km a pixel, the same at every width
+  because `fit_view` pins zoom to a 320 px reference) 12 of 26 labels have
+  no free position among above, below, left and right; at 4.5, 3; at 5.0,
+  none, but 3 cities fall off a 1200 px canvas. **Split at latitude 46.5,
+  France North (18) and France South (8) at zoom 5.0 place every label with
+  nothing off-canvas at 768 or 1200 px** (5 and 1 a pan away at 375).
+  Recommended to the owner as the France shape; the `REGIONS` `zoom` field
+  exists for this and is unused today.
+- `docs/review_time.md` gains "Landing the tram batch": one `city-added`
+  deploy-verify per landing group, one `full` after the last.
 
 ### 2026-09-29 - Published cities' data dates checked: San Francisco maps closed locations, Dublin keeps vacant premises, three sources cannot be dated from their rows
 
