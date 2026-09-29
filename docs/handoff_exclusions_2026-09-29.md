@@ -370,8 +370,9 @@ bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
   to "(Oslo, Bergen)"; the OSM rail-geometry notice names Bybanen line 1's
   colour (owner-approved text). Macro label 48.3 px, above the dot. For the
   held macro-map work: Bergen takes the light-rail colour (rail_extra
-  "Trams", as Calgary). Aarhus onward is built in a fresh session from a
-  written handoff.
+  "Trams", as Calgary). Aarhus onward is built in a fresh session from
+  `docs/handoff_light_rail_2026-09-29.md` (Aarhus, Buffalo, Sacramento,
+  Houston; pages 72-75; each READY to the cleanup session).
 - **The category-fix batch** (`category-continuity`, 17 taxonomies and their
   re-renders, owner-approved) bases its Stockholm fix on `stockholm-catering`:
   land it after, or in one merge.
