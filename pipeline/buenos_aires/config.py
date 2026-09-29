@@ -31,6 +31,8 @@ HEATMAP_HTML = OUTPUTS / "heatmap.html"
 EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"
 
 STATIONS_CSV = DATA_PROCESSED / "stations.csv"
+# Each line's SBASE track dissolved to one geometry; step 1 writes, step 3 reads.
+LINES_GEOJSON = DATA_PROCESSED / "lines.geojson"
 BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 
 # --- Raw inputs -----------------------------------------------------------
@@ -51,6 +53,20 @@ PARCELS_SHA256 = "f3debefdaccc02e59f0d417e60531ad95c9adefbe301c91ae9ca39099e5d70
 # its accented vowels were damaged before encoding - see ba_usos_suelo.repair.
 SOURCE_ENCODING = "utf-8"
 SURVEY_YEARS = (2022, 2023, 2024)
+
+# THE RAIL SOURCE: SBASE's own layers (Subterráneos de Buenos Aires, the city
+# company that owns the Subte), on BA Data's `subte-estaciones` dataset,
+# CC BY 2.5 AR as the survey. Agency GIS layers rank ahead of OSM (osm-rail);
+# OSM stays as the cross-check and for the Premetro, which these layers omit.
+# Owner's download OK 2026-09-28 (17,133 and 40,850 bytes).
+_SBASE = "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/sbase/subte-estaciones"
+SBASE_STATIONS_URL = f"{_SBASE}/estaciones_de_subte.geojson"
+SBASE_LINES_URL = f"{_SBASE}/red_subte.geojson"
+SBASE_STATIONS_GEOJSON = DATA_RAW / "estaciones_de_subte.geojson"
+SBASE_LINES_GEOJSON = DATA_RAW / "red_subte.geojson"
+# Recorded after the first download; None until then.
+SBASE_STATIONS_SHA256 = None
+SBASE_LINES_SHA256 = None
 
 OSM_STATIONS_JSON = DATA_RAW / "osm_stations.json"
 OSM_ROUTES_JSON = DATA_RAW / "osm_routes.json"

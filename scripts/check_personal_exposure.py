@@ -195,6 +195,15 @@ REGISTRIES = {
     # address is carried to the map, so the unit check is skipped.
     "london": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv", address=None),
+    # Buenos Aires is Dublin's case: a land-use survey records USES, not
+    # businesses, and carries no name column of any kind. The pin reads as the
+    # street address (owner, 2026-09-28). The risk is a pin on a home, and the
+    # survey files homes with an economic activity under RESIDENCIAL, which
+    # step 2's TIPO1 filter excludes; 34 UNICOMERCIAL rows typed RESIDENCIAL
+    # are excluded by the taxonomy too.
+    "buenos_aires": dict(raw=None, trade=None, owner=None, name_is_address=True,
+                         processed="businesses_clean.csv",
+                         address=("business_name",)),
     # Every other Brazilian city reads CNEFE through the same national reader,
     # so São Paulo's structural answer holds for each; measured per city.
     "belo_horizonte": dict(raw=None, trade=None, owner=None,

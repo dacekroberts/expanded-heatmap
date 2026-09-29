@@ -29,6 +29,12 @@ from pipeline.buenos_aires.config import (
     PARCELS_CSV,
     PARCELS_SHA256,
     PARCELS_URL,
+    SBASE_LINES_GEOJSON,
+    SBASE_LINES_SHA256,
+    SBASE_LINES_URL,
+    SBASE_STATIONS_GEOJSON,
+    SBASE_STATIONS_SHA256,
+    SBASE_STATIONS_URL,
     SURVEY_CSV,
     SURVEY_SHA256,
     SURVEY_URL,
@@ -75,7 +81,8 @@ def download(url, path, expected_sha, what, force):
     with a range request - the parcel download dropped once at 183 MB."""
     if path.exists() and not force:
         got = sha256(path)
-        note = "matches the recorded hash" if got == expected_sha else f"NEW HASH {got}"
+        note = ("matches the recorded hash" if got == expected_sha
+                else f"sha256 {got}" if expected_sha is None else f"NEW HASH {got}")
         print(f"  cached {path.name} ({path.stat().st_size:,} bytes; {note})")
         return
     print(f"  downloading {what}: {url}")
@@ -103,11 +110,11 @@ def download(url, path, expected_sha, what, force):
     with open(part, "rb") as f:
         head = f.read(64)
     if head.lstrip().startswith(b"<"):
-        raise SystemExit(f"{what} is HTML, not CSV (first bytes {head[:16]!r}).")
+        raise SystemExit(f"{what} is HTML, not data (first bytes {head[:16]!r}).")
     part.replace(path)
     got = sha256(path)
     print(f"  wrote {path.name} ({path.stat().st_size:,} bytes, sha256 {got})")
-    if got != expected_sha:
+    if expected_sha is not None and got != expected_sha:
         print("  NOTE: a new release - the recorded hash in config.py is the build's "
               "baseline; update it and re-measure before rebuilding.")
 
@@ -121,6 +128,8 @@ def main():
     print("BA Data (CDN):")
     download(SURVEY_URL, SURVEY_CSV, SURVEY_SHA256, "land-use survey 2022-2024", args.force)
     download(PARCELS_URL, PARCELS_CSV, PARCELS_SHA256, "Parcelas", args.force)
+    download(SBASE_STATIONS_URL, SBASE_STATIONS_GEOJSON, SBASE_STATIONS_SHA256, "SBASE Subte stations", args.force)
+    download(SBASE_LINES_URL, SBASE_LINES_GEOJSON, SBASE_LINES_SHA256, "SBASE Subte lines", args.force)
 
     print("\nOpenStreetMap:")
     failed = []
