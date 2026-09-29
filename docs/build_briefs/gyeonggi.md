@@ -156,8 +156,7 @@ the portal.**
   "no location" may be the portal's export and not the data. To be checked
   on the national file, before the page's gap is written.
 - The downloaded portal files stay as a scratch cross-check.
-- **An owner call.** The alternative is to accept the permissive reading and
-  use the portal files as they are.
+- ~~An owner call~~ **Decided (owner, 2026-09-29): the national files.**
 
 **Never publish** phone numbers (소재지시설전화번호), deposit or rent
 (보증액, 월세액), or the rights-holder and livestock identifiers
@@ -185,9 +184,10 @@ the city boundary.
 
 ## Still unknown
 
-- 🟡 **The source (owner)**: the Ministry's national local-licence files
-  (recommended; "제한 없음", Busan's source) or the portal's files under
-  its ambiguous terms.
+- ~~The source~~ **Decided (owner, 2026-09-29): the Ministry's national
+  local-licence files** ("제한 없음", Busan's source). The portal's files
+  are a scratch cross-check only, and the portal's terms do not apply.
+  **The download needs the owner's OK** (size to state at the build).
 - ⚠️ **The café and takeaway gaps on the national files**: they may carry
   a name, location and status that the portal's exports lack.
 - ⚠️ **The satellites and the page shape** (owner).

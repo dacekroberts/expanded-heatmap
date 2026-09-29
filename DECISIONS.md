@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**167 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**168 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Gyeonggi is built from the Ministry's national local-licence files (owner)](#2026-09-29---gyeonggi-is-built-from-the-ministrys-national-local-licence-files-owner)
 - [Gyeonggi's portal licence read: the datasets are permissive, but the portal's terms bar commercial use and possibly processing without approval; the national source recommended instead](#2026-09-29---gyeonggis-portal-licence-read-the-datasets-are-permissive-but-the-portals-terms-bar-commercial-use-and-possibly-processing-without-approval-the-national-source-recommended-instead)
 
 **2026-09-28**
@@ -206,6 +207,21 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Gyeonggi is built from the Ministry's national local-licence files (owner)
+
+- **Decided (owner), as recommended: the Gyeonggi satellites' business data
+  comes from the Ministry of the Interior's national local-licence files**,
+  the source Busan's build uses. They declare "이용허락범위 제한 없음", so
+  the 경기데이터드림 portal's ambiguous terms (entry below) do not apply.
+  - The portal files already in `data/gyeonggi/raw/` stay as a scratch
+    cross-check, and nothing from them is published.
+  - The national files need the owner's download OK at the build.
+  - Whether they carry the café file's name, location and status (and the
+    takeaway file's status) is checked before the page's gap is written.
+    The per-city counts in the brief came from the portal files and are
+    re-measured on the national ones.
+- Files: `docs/build_briefs/gyeonggi.md`.
 
 ### 2026-09-29 - Gyeonggi's portal licence read: the datasets are permissive, but the portal's terms bar commercial use and possibly processing without approval; the national source recommended instead
 
