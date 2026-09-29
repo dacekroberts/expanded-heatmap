@@ -276,7 +276,7 @@ In "Kept, and why", replace "**San Diego's personal services.** San Diego shows 
   `pages/90_...`, which no longer exists, so every info-page link would break
   on the live site. If the owner cannot reboot, hold the push.
 - **Later the same day:** Incheon and the Gyeonggi satellites (Goyang,
-  Seongnam, Yongin) merged too (SEMAS notice 68, the Seoul Capital Area
+  Seongnam, Yongin) merged too (the Small Enterprise and Market Service's notice 68, the Seoul Capital Area
   region, 68 built / B 1 / 77 candidates); `app/macro_facts.json` written with
   the new processed files swapped in and master's restored; PLAN ticked; the
   full `deploy-verify` PASSED on c50615b (68 maps at five sizes, the app, the
