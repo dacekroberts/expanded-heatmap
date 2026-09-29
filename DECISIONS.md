@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**186 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**187 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Review batch live after the owner's reboot: exclusions batch and six cities, 68 built](#2026-09-29---review-batch-live-after-the-owners-reboot-exclusions-batch-and-six-cities-68-built)
 - [Review batch assembled ahead of review time: exclusions, Stockholm and Bucharest on one local branch; the push waits for a reboot (owner)](#2026-09-29---review-batch-assembled-ahead-of-review-time-exclusions-stockholm-and-bucharest-on-one-local-branch-the-push-waits-for-a-reboot-owner)
 - [Goyang, Seongnam and Yongin built on SEMAS's register, one page each (owner); a Seoul Capital Area macro-map region (owner)](#2026-09-29---goyang-seongnam-and-yongin-built-on-semass-register-one-page-each-owner-a-seoul-capital-area-macro-map-region-owner)
 - [Atlanta's 2024 licence layer is not a publication to build on: it carries per-business revenue, likely confidential under Georgia law, and no licence; Atlanta stays discarded pending the owner](#2026-09-29---atlantas-2024-licence-layer-is-not-a-publication-to-build-on-it-carries-per-business-revenue-likely-confidential-under-georgia-law-and-no-licence-atlanta-stays-discarded-pending-the-owner)
@@ -225,6 +226,23 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Review batch live after the owner's reboot: exclusions batch and six cities, 68 built
+
+- **Pushed as 95e04c4** (`review-2026-09-29` -> master, pre-push hook 24/24)
+  after the full `deploy-verify` passed on c50615b; the 41 cities' re-run
+  processed files were swapped into the shared data first, and are master's
+  state from here on.
+- **Checked on the live URL after the owner's reboot** (the first reboot had
+  run before the push, so a second one was needed): the Overview shows 68
+  cities in 12 regions with Seoul Capital Area (5); Stockholm and Incheon
+  render their 650 px maps with their notices (Stockholms stad; the Small
+  Enterprise and Market Service) and the OSM credit; What Is Excluded loads
+  at its unchanged URL with the batch's wording (the five kinds, Chicago's
+  35, Brazil's 558, Los Angeles's 3,145, Stockholm's caterers); Boston, the
+  unchanged control, renders; no `stException` anywhere. The only console
+  errors are the deep-link `_stcore/health` and `host-config` 404s every page
+  logs, Boston's included.
 
 ### 2026-09-29 - Review batch assembled ahead of review time: exclusions, Stockholm and Bucharest on one local branch; the push waits for a reboot (owner)
 
