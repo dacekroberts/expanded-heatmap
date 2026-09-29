@@ -198,6 +198,22 @@ the page says so.
 **Flag for the cleanup role (held macro-map work)**: Buffalo takes the
 light-rail network colour.
 
+## ✅ Built 2026-09-29 — what the build corrected
+
+- **The boundary is NOT the City's `p4ak-r4fg`.** The licence read found it
+  is Erie County's municipal-boundary geometry, labelled "U.S. Census Bureau"
+  in error, so the City's public-domain dedication may not cover it. The
+  build uses the Census TIGERweb place polygon (GEOID 3611000, owner). The
+  check below still describes `p4ak-r4fg`'s area truthfully and stays.
+- **Caterers are out** (category_rules R1), not food.
+- **Cross-source grocers match on house number and street, not the full
+  address**: the City writes "442 WILLIAM", the State "442 WILLIAM ST"; 186
+  merged.
+- **The State's salon names are often the licensee's own**: 42 show the
+  licence type, 3 at an apartment are left off (owner).
+- 1,564 storefronts (Retail 728, Food 549, Personal 287); 376 (24.1%) in the
+  rings.
+
 ## Still unknown
 
 - Which marks NFTA claims (only if the owner prefers the feed to OSM).

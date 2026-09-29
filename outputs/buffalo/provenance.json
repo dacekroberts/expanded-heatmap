@@ -1,0 +1,44 @@
+{
+  "written_utc": "2026-09-29T21:35:20+00:00",
+  "osm_host": "overpass.kumi.systems",
+  "osm_bbox": [
+    42.82,
+    -78.95,
+    42.97,
+    -78.79
+  ],
+  "as_of_date": "2026-09-29",
+  "files_utc": {
+    "osm_rail.json": "2026-09-29T21:17:20+00:00",
+    "city_boundary_tiger.geojson": "2026-09-29T21:35:20+00:00",
+    "city_licences.csv": "2026-09-29T21:15:48+00:00",
+    "nys_retail_food_stores.csv": "2026-09-29T21:15:48+00:00",
+    "nys_appearance_enhancement.csv": "2026-09-29T21:15:49+00:00"
+  },
+  "sources": {
+    "city": {
+      "endpoint": "https://data.buffalony.gov/resource/qcyy-feh8.csv",
+      "query": {
+        "$select": "uniqkey,licenseno,businessname,dbaname,code,descript,licstatus,licensedttm,issdttm,expdttm,prclid,address,city,zip,latitude,longitude",
+        "$where": "descript in('Restaurant','Restaurant Take Out','Restaurant / Dance','Bakers and Confectioners','Caterer','Food Store','Meat Fish & Poultry','Used Car Dealer','Second Hand Dealer','Tobacco Hookah Vaping','Pawnbroker','Pet Shop','Self-Srv Laundry / Dry Cleaner','Clothes-Dry Cleaners Permit','Sidewalk Cafe')",
+        "$limit": "50000"
+      }
+    },
+    "nys_store": {
+      "endpoint": "https://data.ny.gov/resource/9a8c-vfzj.csv",
+      "query": {
+        "$select": "license_number,operation_type,estab_type,entity_name,dba_name,street_number,street_name,address_line_2,city,zip_code,county,georeference",
+        "$where": "upper(city)='BUFFALO'",
+        "$limit": "50000"
+      }
+    },
+    "nys_salon": {
+      "endpoint": "https://data.ny.gov/resource/y3u4-jbgh.csv",
+      "query": {
+        "$select": "license_number,license_type,business_name,business_address_1,business_address_2,business_city,business_zip,georeference",
+        "$where": "upper(business_city)='BUFFALO'",
+        "$limit": "50000"
+      }
+    }
+  }
+}

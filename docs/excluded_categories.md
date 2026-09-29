@@ -261,6 +261,33 @@ shop — about 5,000 of the latter statewide. They are not a separate storefront
 and counting them would both double-count the shop and put an individual on the
 map. Only the business licences are used.
 
+### Buffalo — three registers, expired licences, and salon names
+
+**Missing, not excluded: general retail.** Buffalo licenses no clothing shop,
+bookshop or hardware store, so Retail holds only grocers (the State's
+food-store licences) and the City's regulated slice.
+
+**Left out of the City's file**: licences past their expiry date, 1,173 of the
+2,737 in the storefront codes, although every one is marked Active; caterers
+(23), which have no counter of their own; and sidewalk-café permits (137), a
+restaurant's permission to use the pavement rather than a premises. The City's
+other licence types (elevators, fuel devices, amusement shows and the like) are
+regulated activities, not storefronts.
+
+**Left out of the State's salon file**: chair and room renters (65),
+individuals working inside another licensee's shop, and 3 salons at an
+apartment address, as homes. 42 salons licensed under a person's own name are
+shown by their licence type instead of the name.
+
+**Outside the city**: 162 of the State's food stores and 92 of its salons carry
+a Buffalo postal address but lie outside the city limits, in Cheektowaga,
+Amherst and neighbouring towns, and are not counted.
+
+**Counted once**: 186 City grocery licences at the same street address as a
+State food store are merged into the State's row.
+
+**Stations**: all fourteen NFTA Metro Rail stations, every one inside the city.
+
 ### Chicago — non-storefront licence types
 
 Chicago classifies by licence type rather than NAICS, so its exclusions are

@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**203 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**204 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Buffalo built: NFTA Metro Rail, three registers, a Census boundary](#2026-09-29---buffalo-built-nfta-metro-rail-three-registers-a-census-boundary)
 - [Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)](#2026-09-29---rule-1-of-the-reduced-bucket-bar-amended-yokohama-to-b-personal-services-only-owner)
 - [The Band C audit: a reduced-bucket bar; Hiroshima, Kitchener–Waterloo and Baltimore to B, Palma reopened (owner)](#2026-09-29---the-band-c-audit-a-reduced-bucket-bar-hiroshima-kitchenerwaterloo-and-baltimore-to-b-palma-reopened-owner)
 - [Portland re-probed at the owner's request: still no classified register](#2026-09-29---portland-re-probed-at-the-owners-request-still-no-classified-register)
@@ -242,6 +243,96 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Buffalo built: NFTA Metro Rail, three registers, a Census boundary
+
+- **Buffalo built on New York's multi-source shape, 1,564 storefronts around 14
+  stations, branch `buffalo` (page 73, held for the batch review).** Rail from
+  OpenStreetMap (owner): relations 3517747 and 11364343, the only two in the
+  box; 28 stop positions -> 14 stations by name, **gate 3 exact** against
+  NFTA's 14, 608 m median gap (standard rings), all inside the city. The line
+  is written from track ways only, because each relation also lists 6
+  `platform` ways that a whole-relation draw would add as outlines; it goes
+  through step 1's GeoJSON and `load_geojson_line_shapes`. Businesses, with
+  their own dispatching taxonomy `pipeline/taxonomies/buffalo.py`:
+  - **The City's Business Licenses**: 2,737 rows in 15 codes, all "Active".
+    1,564 were unexpired on 2026-09-29 (Chicago's rule); 1,173 had expired.
+    Caterer and Sidewalk Cafe (160) are never a pin. That leaves 1,403 with a
+    point, all inside the city.
+  - **NYS food stores**: 596 with postal city BUFFALO, 584 with a point, 422
+    inside.
+  - **NYS salon businesses**: 440 rows; renters (65) and 3 at an apartment
+    dropped; 277 inside.
+  - **Dedup**: address + name (New York's key) takes 2,102 rows to 1,750;
+    the grocer pass then merges 186 more.
+  - **Result**: Retail 728, Food 549, Personal 287. In rings 376 (24.1%):
+    Retail 113, Food 188, Personal 75.
+- **Caterers are left out of Buffalo's food count, on `docs/category_rules.md`
+  R1**: event caterers have no counter of their own. The brief had counted
+  Caterer (23 unexpired) as food, a departure it did not flag; the precedent
+  was followed. Pawnbrokers are kept (R5) and used-car dealers too (R4), as
+  the brief had them.
+- **Grocers that both the City and the State license are merged on house
+  number and street core, not the full address.** New York's address + name
+  key missed them because the registers write one address differently: the
+  City writes "442 WILLIAM" and "1281 DELAVAN EAST", the State "442 WILLIAM
+  ST" and "1281 E DELAVAN AVE". The City's name is also often the company
+  where the State's is the shop ("SHERAWALI INC." against "DOWNTOWN FOOD
+  MART"). 257 of the City's 331 grocery licences had a State food store
+  within 50 m, and only 4 shared an exact address. The second pass is
+  restricted to the grocery trade, keeps the State's row, and merged 186. The
+  rest are left as under-merge, the safer error, which the page states.
+- **A State salon licensed under a person's own name shows its licence type,
+  and a salon at an apartment unit is left off (owner, on the
+  recommendation).** In Buffalo, the NYS register's `business_name` is often
+  the licensee's own name ("Julia Wachna", "Luis A Aviles"), mostly in
+  salon-suite buildings such as 2658 Delaware Ave. 42 of 267 salons read as a
+  person's by `pipeline/residence.looks_personal`, and the replacement runs
+  after the dedup so two named suites stay two pins. 3 salons with an "Apt"
+  unit were dropped as homes. New York shows this register's names as is,
+  and the rule was not extended to it. The rejected alternatives were keeping
+  the names (New York) and replacing the names while keeping the apartment
+  rows.
+- **Buffalo's boundary is the Census TIGERweb place polygon (GEOID 3611000),
+  not the City's "City Boundary" layer (owner, on the recommendation).** The
+  licence read found `p4ak-r4fg` is Erie County's municipal-boundary
+  geometry: vertices on Erie's layer at a median 0.0 m, Erie's schema, and
+  "Managed/Owned by Erie County" on the City's own GIS server. Its "U.S.
+  Census Bureau" and "Public Domain U.S. Government" labels are therefore
+  wrong, and the City's public-domain dedication may not reach a County work
+  whose owner states no terms. TIGER's polygon is federal and public domain.
+  Its extra 31.3 km² is Lake Erie and Niagara River water: one more State
+  food store fell inside (421 -> 422) and nothing else moved. Recorded in
+  `docs/data_sources/united-states.md` as deliberately not used.
+- **Open Data Buffalo's Business Licenses: PERMITTED, nothing to display or
+  do** (licence read, 2026-09-29), on the portal's own FAQ: "All data
+  available on the portal is licensed in the public domain". Its disclaimer
+  says the data are not the City's official records, and the page never
+  calls them that.
+- **Buffalo privacy verdict: publishable.** `check_personal_exposure.py
+  buffalo`, with its REGISTRIES entry measuring the NYS store
+  `dba_name`/`entity_name` fallback: 0 blank trade names, so 0 fallback pins;
+  0 contact details; 0 person-like names at a residential unit. The 41
+  remaining person-like hits were read: restaurant and shop trade names
+  ("JIM'S STEAK-OUT", "TIM HORTON'S"). The dataset's own column notes call
+  `businessname` the legal name. The rows show the reverse, which is why the
+  owner chose it.
+- **Buffalo is not in the macro map's default frame, and its label sits high
+  above-left: `("end", -11, -46)`.** At 42.89 N it is north of every built US
+  city, so joining `IN_DEFAULT_VIEW` would re-fit the pinned 1.4525 zoom that
+  every offset was measured at. It is still labelled in Global, United
+  States and United States East. Buffalo's dot is ~2 px from Toronto's, so
+  the names stack. `check_macro_labels.py` passes dy -40 to -50, with -46 the
+  middle; PROBLEMS 0 at 375, 768 and 1200. **A measurement trap found on the
+  way**: rewriting `app/cities.py` to a same-length offset inside one second
+  reuses the stale `.pyc`, so each sweep result lagged one run behind. Sweeps
+  are now read with `python -B`. The Aarhus entry's "passes dy 6 to 16" was
+  swept that way; its chosen 10 was scored fresh.
+- **Line colour `#004990`**, OSM's: 21.7 against Retail, below the preferred
+  45, recorded.
+- **Text approved by the owner 2026-09-29**: the page, Buffalo added to the
+  OpenStreetMap rail-geometry notice, and the Buffalo section of
+  `docs/excluded_categories.md`.
 
 ### 2026-09-29 - Rule 1 of the reduced-bucket bar amended; Yokohama to B, personal services only (owner)
 
