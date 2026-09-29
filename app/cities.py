@@ -1806,6 +1806,29 @@ CITIES = [
         # 375, 768 and 1200 with PROBLEMS 0.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Bergen",
+        "lat": 60.3913,
+        "lon": 5.3221,
+        "page": "pages/71_Bergen_Heatmap.py",
+        "coverage": "full",
+        "placement": "Joined by address (96.2%)",
+        "data_age": "Register 2026-09-23; transit fetched 2026-09-27 (no source date)",
+        "rail_extra": "Trams",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Skyss Bybanen lines 1 and 2 (light rail)",
+        "region": "Europe",
+        "country": "Norway",
+        "in_default_view": False,
+        # Above the dot, and SCORED: width 48.3 px measured in the local app's
+        # own document (2026-09-29, five entries reproduced, Oslo's included).
+        # Bergen is now the Europe frame's northernmost city, Oslo's position
+        # when its label hid under the "Light mode" button; at 375 px Bergen
+        # sits far enough west that its label clears the button (seen in the
+        # browser, 2026-09-29). check_macro_labels.py: PROBLEMS 0.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

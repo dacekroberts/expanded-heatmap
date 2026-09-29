@@ -174,6 +174,10 @@ REGISTRIES = {
     "oslo": dict(raw=None, trade=None, owner=None,
                  processed="businesses_clean.csv",
                  address=("business_name",)),
+    # Bergen: Oslo's register, step 2 and ENK rule (norway_register.py).
+    "bergen": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv",
+                   address=("business_name",)),
     # Rennes, the fifth and last French city on the same shared step 2: the
     # same structural guarantee. Its premises-name rate is the best of the
     # five at 59.1%.

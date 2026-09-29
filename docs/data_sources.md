@@ -88,7 +88,7 @@ together, so a row in either counts and a row in neither still fails.
 | Ireland | [`data_sources/ireland.md`](data_sources/ireland.md) | Dublin |
 | Italy | [`data_sources/italy.md`](data_sources/italy.md) | Milan, Rome |
 | France | [`data_sources/france.md`](data_sources/france.md) | Paris, Marseille, Toulouse, Lille (Regional), Rennes |
-| Norway | [`data_sources/norway.md`](data_sources/norway.md) | Oslo |
+| Norway | [`data_sources/norway.md`](data_sources/norway.md) | Oslo, Bergen |
 | Romania | [`data_sources/romania.md`](data_sources/romania.md) | Bucharest |
 | Sweden | [`data_sources/sweden.md`](data_sources/sweden.md) | Stockholm |
 | Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen |
@@ -1376,7 +1376,7 @@ naming *STAR* on the map is not barred. Watched by the brief check
 `outputs/rennes/excluded_stations.csv` is left in the same state as Toulouse's,
 and the same cheap discharge is available if the question is ever pressed.
 
-**27. Brønnøysundregistrene (Oslo) — required, and DISPLAYED.**
+**27. Brønnøysundregistrene (Oslo, Bergen) — required, and DISPLAYED.**
 
 **NLOD 2.0**, declared in the Enhetsregisteret API documentation's header
 ("License: Norsk lisens for offentlige data (NLOD)"). §5: *"The licensee shall
@@ -1391,7 +1391,7 @@ with the licence linked, and §5's second duty - *"If the information has been
 changed, the licensee must clearly indicate that changes have been made by the
 licensee"* - met in the notice's next sentence. **MUST DO: nothing.**
 
-**28. Kartverket (Oslo) — required, and DISPLAYED.**
+**28. Kartverket (Oslo, Bergen) — required, and DISPLAYED.**
 
 **CC BY 4.0**, for both Kartverket datasets Oslo reads - the address register
 (the coordinate join) and the kommune boundaries (scope and naming). Kartverket's
@@ -1404,7 +1404,7 @@ nothing, so it is included rather than argued. ⚠️ The API's own 2019 service
 record says "no conditions apply"; the dataset record and the terms page say
 CC BY 4.0, and the stricter reading governs.
 
-**29. Entur (Oslo) — required, and DISPLAYED, with its logo.**
+**29. Entur (Oslo, Bergen) — required, and DISPLAYED, with its logo.** Bergen (2026-09-29) adds Skyss's feed through the same host and licence, and its page shows the same logo beside the same credit.
 
 **NLOD 2.0**: *"Data provided by Entur AS from API or published data files can be
 used under the Norwegian Licence for Open Government Data (NLOD)"*

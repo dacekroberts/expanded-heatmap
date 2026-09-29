@@ -23,7 +23,7 @@ Mapped so far:
 - **Ireland:** Dublin
 - **Italy:** Milan, Rome
 - **France:** Paris, Marseille, Toulouse, Lille (Regional), Rennes
-- **Norway:** Oslo
+- **Norway:** Oslo, Bergen
 - **Denmark:** Copenhagen
 - **Czechia:** Prague
 - **Netherlands:** Amsterdam, Rotterdam
