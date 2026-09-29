@@ -38,6 +38,8 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 CHECKS = [
+    ["scripts/check_category_continuity.py"],
+    ["scripts/check_category_continuity.py", "--selftest"],
     ["scripts/check_city_registry.py"],
     ["scripts/check_discard_evidence.py"],
     ["scripts/check_inconsistency_list.py"],

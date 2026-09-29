@@ -17,6 +17,14 @@ rule by what the premises IS, not by the register's word for it.
    "It seems risky" is not a reason; "the register names it as adult" is.
 4. When the owner makes a new cross-city call, add a row here in the same
    change as its DECISIONS entry.
+5. **`python scripts/check_category_continuity.py` enforces this table**
+   (it runs in `check_all.py`). Its table,
+   `scripts/category_continuity_table.py`, locates each rule's trade in
+   every taxonomy and asserts `classify()` reaches the rule's verdict. A new
+   row here, or a new taxonomy, fails the check until every taxonomy has
+   answered it. A departure is listed there as a DECISIONS-backed exception
+   or as pending for the owner, never fixed to make the check pass.
+   `--matrix` prints the rule-by-taxonomy grid.
 
 Why this file exists (2026-09-29): Korea's SEMAS taxonomy was first proposed
 with massage left out, which would have made Korea the only country to drop

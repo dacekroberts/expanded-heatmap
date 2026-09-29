@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**196 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**197 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [The cross-city category rules made a check; 45 departures found and left for the owner; two claims in category_rules.md out of date](#2026-09-29---the-cross-city-category-rules-made-a-check-45-departures-found-and-left-for-the-owner-two-claims-in-category_rulesmd-out-of-date)
 - [Angers held; French ODbL station tables stay pure extracts (owner)](#2026-09-29---angers-held-french-odbl-station-tables-stay-pure-extracts-owner)
 - [French tram feeds read: four permitted with conditions, Angers bars naming its network without consent; the national portal's ODbL conditions found, correcting Toulouse's and Rennes' record](#2026-09-29---french-tram-feeds-read-four-permitted-with-conditions-angers-bars-naming-its-network-without-consent-the-national-portals-odbl-conditions-found-correcting-toulouses-and-rennes-record)
 - [The French tram-city page text approved as a template (owner)](#2026-09-29---the-french-tram-city-page-text-approved-as-a-template-owner)
@@ -235,6 +236,100 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - The cross-city category rules made a check; 45 departures found and left for the owner; two claims in category_rules.md out of date
+
+- **`scripts/check_category_continuity.py` checks every taxonomy against
+  `docs/category_rules.md`.** Its table, `scripts/category_continuity_table.py`,
+  holds 28 rules: the document's 20 rows, split where one row carries more
+  than one verdict (funeral goods, tattoo, vehicle repair, a food-only
+  register's pharmacies, out-of-store health food). It has a column for each
+  of the 37 registered taxonomies. Each cell takes one of five forms:
+  - locator rows, passed to the module's own `classify()`. For Brazil they go
+    to `classify_description()`, where step 2 decides.
+  - a declared exception, citing a DECISIONS heading that must exist.
+  - a pending departure.
+  - an `outside()` token for a step-2 or config filter.
+  - `absent(reason)`, checked against the module's own string constants.
+
+  Result: 488 cells located, 294 absent, 32 decided outside `classify()`,
+  18 exceptions. The check runs in 0.4 s. `--selftest` breaks a copy in 11
+  ways plus a positive control, in 1.6 s. Both are in `check_all.py`.
+  `--matrix` prints the rule-by-taxonomy grid. The rows were drafted by five
+  read-only agents that ran `classify()` on each one. Where a row failed, the
+  table was corrected, never a taxonomy.
+- **Departures without an owner decision are PENDING, not failures.**
+  Failing on them would block every session's pre-push hook until the owner
+  rules. Instead they print on every run and `--strict` fails them. A row
+  that comes back into line fails the check until it is made a locator
+  (`check_provenance.py`'s KNOWN_GAPS convention). Rejected: leaving them out
+  of the table, which would have hidden them.
+- **One convention, for the owner to confirm: pawnbrokers.**
+  - A pawnbroker filed under a mixed credit code is recorded as absent,
+    because none can be kept without every other lender. Those codes are
+    NAICS 522298/522299, where San Francisco has 20 rows, San Diego 10 and
+    Los Angeles 6, and NAF and Rev. 2.1's 64.92.
+  - A pawnbroker with its own code that is dropped anyway is pending: SCIAN
+    522452 "casas de empeño" (381 in Mexico City's file), Berlin's Leihhäuser
+    (35), Taiwan's 649611 and D.C.'s licence.
+- **The 45 pending rows, by theme** (the check lists each):
+  - *Nonstore trades inside retail.*
+    - NAICS 2022 moved vending-machine operators to 445132 (Los Angeles 52,
+      San Francisco 29 raw rows) and fuel dealers to 457210 (San Francisco
+      15, Los Angeles 1). Both land in Retail, while their 2017 codes are
+      excluded.
+    - Heating-fuel dealers are kept in France (47.78B) and Berlin (477893,
+      36), and bottled gas and kerosene in Taiwan.
+  - *Nightclubs out:* Madrid's discos and dance halls (233), Taiwan's 夜店
+    and dance halls, Brazil's BOATE, and Boston's General On Premise licences
+    (not measured).
+  - *Petrol stations out:*
+    - Buenos Aires' 266 active stations are their own survey type, which step
+      2's UNICOMERCIAL filter drops.
+    - Riga drops them by name.
+    - Philadelphia's type merges repair with fuel and goes whole.
+    - Dublin drops forecourts with no shop.
+  - *Repairs in:* Barcelona's Arranjaments (649) and Riga's workshops by name.
+    - Chicago's alterations (2026-09-19) and Dublin's and Buenos Aires' shoe
+      repair and alterations (the 2026-09-28 Buenos Aires entry) are declared
+      exceptions.
+    - Each has a DECISIONS entry behind it, but all predate the document's
+      repairs row, which names alterations as out.
+  - *Canteens, stalls and mobile food in:*
+    - Brazil: CANTINA ESCOLAR and RESTAURANTE INDUSTRIAL.
+    - Madrid: the situados (about 163) and mobile food (21).
+    - Japan: 露店 as a 業態 (about 34 rows).
+    - Also Seoul's registered markets (시장), Riga's markets, seven Bucharest
+      trailers and one Stockholm market-square stall.
+  - *Other:*
+    - Prague's 21 bare "969" rows are on the map, because its catch-all
+      exclusion is an exact match.
+    - Berlin's tattoo studios (1,262) go with the 969 prefix: an owner call of
+      2026-09-28, the day before R2 said tattoo stays where it has its own
+      code.
+    - Taiwan's shoe-shine (969014) is kept.
+    - Brazil drops ESTUDIO DE TATUAGEM (while STUDIO is kept) and keeps LOJA
+      VIRTUAL.
+    - Melbourne's opticians (8532, 33) sit in health and are out.
+    - The FSA cities keep their pharmacies (about 489 London names), against
+      the food-only row.
+    - Dublin's generic SHOP use rescues gyms and a snooker hall (5 pins), and
+      its internet cafés (27) are Food service.
+  - Stockholm's caterer and food-truck rows are pending on
+    `stockholm-catering`. When that branch lands they turn stale and the
+    check fails until each becomes a locator, a one-line change apiece.
+- **Two claims in `docs/category_rules.md` contradict later owner calls**
+  (DECISIONS "Exclusions batch: the owner's eight follow-ups"):
+  - Its car-dealer row says "France aligned 2026-09-29"; follow-up 1
+    reversed that.
+  - Its vet row says "Barcelona aligned"; follow-up 5 left Barcelona's vets
+    in and disclosed them.
+
+  The table encodes both cities as exceptions. The document's wording is
+  left for the owner.
+- No taxonomy's behaviour changed. Files: `scripts/check_category_continuity.py`,
+  `scripts/category_continuity_table.py`, `scripts/check_all.py`, and
+  `docs/category_rules.md` (a pointer to the check).
 
 ### 2026-09-29 - Angers held; French ODbL station tables stay pure extracts (owner)
 
