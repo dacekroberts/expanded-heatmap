@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**111 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**112 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Berlin's brief written: both licences read, the register is NACE Rev. 2.1, personal services partial, four calls for the owner](#2026-09-28---berlins-brief-written-both-licences-read-the-register-is-nace-rev-21-personal-services-partial-four-calls-for-the-owner)
 - [Tokyo landed: city-landed sweep; three cities' in-ring counts corrected in the inconsistency list](#2026-09-28---tokyo-landed-city-landed-sweep-three-cities-in-ring-counts-corrected-in-the-inconsistency-list)
 - [Tokyo live after the owner's reboot, checked on the live URL](#2026-09-28---tokyo-live-after-the-owners-reboot-checked-on-the-live-url)
 - [Tokyo landed on master; the build queue wiped for two new frontrunners, Berlin then London (owner)](#2026-09-28---tokyo-landed-on-master-the-build-queue-wiped-for-two-new-frontrunners-berlin-then-london-owner)
@@ -147,6 +148,54 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Berlin's brief written: both licences read, the register is NACE Rev. 2.1, personal services partial, four calls for the owner
+
+- **Wrote `docs/build_briefs/berlin.md`; `brief_check.py berlin` holds 11/11
+  live.** Germany's `add-country` profile is a section of the brief, not a
+  `germany_step0_endpoints.md`: Berlin is the country's only viable city
+  (Munich, Frankfurt, Cologne and Hamburg discarded 2026-09-24 and 2026-09-28),
+  so a country file would serve no second city. Every number came from WFS
+  `RESULTTYPE=hits` counts, spread samples and Overpass reads; nothing large was
+  downloaded. Controls: a nonsense code returns 0, an unknown field errors, each
+  code level's children sum to their parent.
+- **Found `nace_id` to be NACE Rev. 2.1 / WZ 2025 classes at 4 digits, not WZ
+  2008 subclasses**: `5610` has 0 rows and `5611` (56.11 Restaurants, a Rev. 2.1
+  class) 14,962. The finer code is IHK's own `ihk_branch_id` (5-6 digits). So
+  Oslo's, Copenhagen's and Prague's Rev. 2.1 consequences hold: car retail sits
+  in 47, and online shops cannot be excluded by code (no branch label names mail
+  order or online retail). The taxonomy becomes a national
+  `germany_wz2025.py` shaped on `czech_nace2025.py`. Staging corrected its
+  master-list row the same day on this finding.
+- **Found personal services partial, not missing**: beauty 9622 1,792 and
+  spa/sauna/massage 9623 1,595 are IHK members and match OSM shops closely;
+  only hairdressers 9621 (180) and laundries 9610 (215) are missing
+  (Handwerkskammer members). The catch-all 9699 (10,170) is mostly
+  non-premises (trade-fair hosts 1,275, hospitality services 1,630, residual
+  4,419) and holds prostitution 16 and escort 148; excluding it as a class
+  follows Oslo and Copenhagen.
+- **Measured the retail catch-all `47122` (12,141, 24% of retail)**: 91%
+  zero-employee against 57-69% for the rest of retail, evenly spread over the
+  12 Bezirke, and within 30 m of an OSM shop 63% of the time in four station
+  boxes, against 81% for the rest of retail and 62-77% for office controls
+  (divisions 62, 68, 70, 73). Precedent keeps the Rev. 2.1 retail catch-all; the
+  brief recommends excluding it in Berlin on these numbers, as the owner's call.
+- **Licence reads (`licence-read`, one source each)**: IHK's Gewerbedaten is
+  PERMITTED with nothing to display or do (CSV and CKAN CC0 1.0, WFS
+  dl-de/zero-2.0; CC0 releases no trademark, so no IHK logo). VBB's GTFS is
+  PERMITTED WITH CONDITIONS under CC BY 4.0, per VBB's own dataset page (CKAN's
+  `cc-by` is unversioned): the credit "VBB Verkehrsverbund
+  Berlin-Brandenburg GmbH", the licence and source linked, a statement that the
+  data was modified, a reference to VBB's disclaimer, and no implied
+  endorsement. VBB's Linienfarben CSV is under the same grant. Neither source
+  has a `data_sources` row yet; those come with the build.
+- **Rail read from OSM**: U1-U9, the S-Bahn's 16 lines and BVG's 22 tram lines,
+  all with refs. The S-Bahn is drawn on Copenhagen's and Dublin's
+  spacing-and-frequency precedent, cut at the Land border (the register stops
+  there). Trams wait on a ring-coverage measurement.
+- **Open for the owner (brief, "Calls for the owner")**: `47122`; a partial
+  Personal services bucket; trams; and the two downloads (the register CSV,
+  126,348,283 bytes, and VBB's GTFS, 78,379,003 bytes).
 
 ### 2026-09-28 - Tokyo landed: city-landed sweep; three cities' in-ring counts corrected in the inconsistency list
 
