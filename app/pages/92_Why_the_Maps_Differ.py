@@ -217,8 +217,9 @@ Mexico.
 st.subheader("Every city in one row")
 st.markdown(table_html(rows), unsafe_allow_html=True)
 st.caption(
-    "\"Trams\" includes light rail. \"Retail thin\" means the Retail layer holds "
-    "only the trades the city licenses. \"Storefronts near a station\" is the "
+    "\"Trams\" includes light rail. \"Retail thin\" or \"Personal services thin\" "
+    "means that layer holds only part of its trades, such as the ones the city "
+    "licenses. \"Storefronts near a station\" is the "
     "share of the map's storefronts inside its station rings."
 )
 

@@ -622,9 +622,10 @@ right.
     `"Both"` or `"—"`.
   - `record_kind`: what the businesses come from, e.g. `"Licence register"`,
     `"Permit registers"`, `"National register"`, `"Tax register"`.
-  - `categories`: `"All three"`, `"Two"`, `"Merged"`, `"Retail thin"` or
-    `"Food licences only"`. It must agree with `coverage`: "All three" is a
-    `full` city; a missing, merged or food-only layer is `narrowed`.
+  - `categories`: `"All three"`, `"Two"`, `"Merged"`, `"Retail thin"`,
+    `"Personal services thin"` or `"Food premises only"`. It must agree with
+    `coverage`: "All three" is a `full` city; a missing, merged, food-only or
+    thin Personal services layer is `narrowed`. "Retail thin" may be either.
 
   The allowed values are `FIELDS` in `scripts/check_inconsistency_list.py`,
   which refuses a missing field or a value not on the list. A genuinely new

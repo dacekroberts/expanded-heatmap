@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**115 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**116 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Summary-table values for Berlin and London; "Food licences only" renamed "Food premises only" (owner)](#2026-09-28---summary-table-values-for-berlin-and-london-food-licences-only-renamed-food-premises-only-owner)
 - [Cleanup follow-ups: two wordings approved, the japan worktree retired, the Japan list proved](#2026-09-28---cleanup-follow-ups-two-wordings-approved-the-japan-worktree-retired-the-japan-list-proved)
 - ["Chamber of commerce register" added to the summary table's record kinds (owner)](#2026-09-28---chamber-of-commerce-register-added-to-the-summary-tables-record-kinds-owner)
 - ["Why the maps differ" built (page 92), waiting for review time](#2026-09-28---why-the-maps-differ-built-page-92-waiting-for-review-time)
@@ -151,6 +152,27 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Summary-table values for Berlin and London; "Food licences only" renamed "Food premises only" (owner)
+
+- **Three changes to the allowed values in `scripts/check_inconsistency_list.py`,
+  on the owner's yes in this session.** The build session had relayed the
+  first two as owner-approved there; they were confirmed here before
+  anything was added, because a peer's report is not the owner's approval.
+  - **`"Personal services thin"`** (categories, needs `narrowed`), for Berlin.
+    IHK Berlin's register draws all three categories, but it has no crafts,
+    so hairdressers and laundries are missing. The note under page 92's
+    table now reads: "'Retail thin' or 'Personal services thin' means that
+    layer holds only part of its trades, such as the ones the city licenses"
+    (owner-approved wording).
+  - **`"Food hygiene register"`** (record kind), for London: the FSA's food
+    hygiene rating register, which records inspections, not licences.
+  - **`"Food licences only"` renamed `"Food premises only"`**, in the check,
+    in Hong Kong's `app/cities.py` entry and in the `add-city` skill. London's
+    register is not a licence list, so the old label would have misdescribed
+    it. Rejected: keeping the old label and accepting the loose fit for London.
+- Berlin's and London's branches must use `"Personal services thin"` and
+  `"Food premises only"`. The build session was told. Both land at review time.
 
 ### 2026-09-28 - Cleanup follow-ups: two wordings approved, the japan worktree retired, the Japan list proved
 

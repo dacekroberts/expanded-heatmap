@@ -58,12 +58,20 @@ FIELDS = {
                     "Property register and licences",
                     # Berlin: IHK Berlin's Gewerbedaten, the chamber's membership
                     # list as premises points (owner, 2026-09-28).
-                    "Chamber of commerce register"},
-    "categories": {"All three", "Two", "Merged", "Retail thin", "Food licences only"},
+                    "Chamber of commerce register",
+                    # London: the FSA's food hygiene rating (inspection) register
+                    # (owner, 2026-09-28).
+                    "Food hygiene register"},
+    # "Food premises only" was "Food licences only" until London, whose register
+    # is inspections, not licences; renamed for Hong Kong too (owner, 2026-09-28).
+    # "Personal services thin": Berlin, whose chamber register has no crafts
+    # (owner, 2026-09-28).
+    "categories": {"All three", "Two", "Merged", "Retail thin",
+                   "Personal services thin", "Food premises only"},
 }
 # The coverage tier each `categories` value needs; absent means either.
 TIER_OF = {"All three": "full", "Two": "narrowed", "Merged": "narrowed",
-           "Food licences only": "narrowed"}
+           "Food premises only": "narrowed", "Personal services thin": "narrowed"}
 
 
 def field_problems(cities):

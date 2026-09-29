@@ -1161,7 +1161,7 @@ CITIES = [
         "data_age": "Registers of 2026-09-25",
         "rail_extra": "Trams",
         "record_kind": "Food licences",
-        "categories": "Food licences only",
+        "categories": "Food premises only",
         "blurb": "MTR's eight urban lines and the Light Rail",
         "region": "East Asia",
         # Grouping only - the switcher and the Overview list order by it and
