@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**117 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**118 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [London started on its own branch: the FSA files downloaded, placement measured, ring coverage by rail tier, the FSA licence read (owner calls pending)](#2026-09-28---london-started-on-its-own-branch-the-fsa-files-downloaded-placement-measured-ring-coverage-by-rail-tier-the-fsa-licence-read-owner-calls-pending)
 - [Buenos Aires to Band A, Melbourne (City of Melbourne) to Band B; Sydney queued for a re-probe (owner)](#2026-09-28---buenos-aires-to-band-a-melbourne-city-of-melbourne-to-band-b-sydney-queued-for-a-re-probe-owner)
 - [Algiers: the "no urban rail" misfiling corrected, then discarded (owner)](#2026-09-28---algiers-the-no-urban-rail-misfiling-corrected-then-discarded-owner)
 - [Tehran and Minsk left out like Russia, for wartime concerns (owner)](#2026-09-28---tehran-and-minsk-left-out-like-russia-for-wartime-concerns-owner)
@@ -153,6 +154,39 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - London started on its own branch: the FSA files downloaded, placement measured, ring coverage by rail tier, the FSA licence read (owner calls pending)
+
+- **London is built on `worktree-london`, cut from origin/master `e3a48bc`
+  (owner)**, so Berlin's branch stays untouched for its review time. London's
+  page is numbered 57, since Berlin holds 56 on its own branch.
+- **Downloaded (owner's OK)**: the FSA's 33 London authority XMLs, 80,367,855
+  bytes, published 2026-09-17, read from the FSA's own authority list
+  (`pipeline/london/fetch_sources.py`; each file must parse and carry its own
+  authority code). 81,529 rows.
+- **Placement is a smaller question than screened**: the brief's ~20% without
+  coordinates is across every type; the five storefront types (Restaurant/
+  Cafe/Canteen, Takeaway, Pub/bar, Retailers - other, supermarkets) are
+  59,610 rows and **91.0% carry the FSA's own point**. 2,764 have neither
+  point nor postcode. Placed share by borough runs from 74% (Richmond) to 98%
+  (Brent). The FSA point is not a postcode centroid (14.0% of 6,523 postcodes
+  with 3+ storefronts put them on one point). Owner: placement is decided when
+  it comes up.
+- **Ring coverage by rail tier** (OSM route relations' stop nodes inside
+  Greater London, relation 175342, 1,595.5 km²; 0.6 mi): Underground 57.8%, +
+  DLR 59.9%, + Elizabeth line 64.6%, + Overground 73.9%, + Tramlink 74.9%.
+  OSM tags the Elizabeth line and most of the Overground `network=National
+  Rail`, which is why the screen's network filter found 2 of 6 Overground
+  lines; they are selected by name.
+- **The FSA licence read (`licence-read`)**: OGL v3, **PERMITTED WITH
+  CONDITIONS** - "Contains public sector information licensed under the Open
+  Government Licence v3.0." linked, the data date shown, no endorsement, no FSA
+  logo or imagery. Two points for the owner: the FSA's privacy notice treats a
+  business's name and address as personal data and the OGL does not license
+  personal data (sole traders, home caterers); and "the FHRS name" may not be
+  used outside its imagery without permission, so the credit should read "Food
+  Standards Agency, UK food hygiene rating data". Private-address records
+  carry only an outward postcode.
 
 ### 2026-09-28 - Buenos Aires to Band A, Melbourne (City of Melbourne) to Band B; Sydney queued for a re-probe (owner)
 
