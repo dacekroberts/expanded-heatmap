@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**121 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**122 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Kolkata and Chennai discarded; the large-transit gap's never-screened list is empty (owner)](#2026-09-28---kolkata-and-chennai-discarded-the-large-transit-gaps-never-screened-list-is-empty-owner)
 - [Glasgow to Band B, food only; Bengaluru to Band D (owner)](#2026-09-28---glasgow-to-band-b-food-only-bengaluru-to-band-d-owner)
 - [Six small networks screened: Tashkent, Hanoi and Ho Chi Minh City to Band D; Baku, Panama City and Caracas discarded (owner)](#2026-09-28---six-small-networks-screened-tashkent-hanoi-and-ho-chi-minh-city-to-band-d-baku-panama-city-and-caracas-discarded-owner)
 - [Perth and Ankara to Band N (owner)](#2026-09-28---perth-and-ankara-to-band-n-owner)
@@ -157,6 +158,33 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Kolkata and Chennai discarded; the large-transit gap's never-screened list is empty (owner)
+
+- **Discarded Kolkata and Chennai (owner's calls): each corporation publishes
+  licence procedures and a per-licence lookup, never a list.**
+  - **Kolkata:** `www.kmcgov.in` has Certificate of Enlistment procedures,
+    forms and a "View CE Information" lookup keyed on a certificate number
+    (not queried). Its KMC 2.0 RTI portal (`kmc.wb.gov.in`) timed out.
+  - **Chennai:** `chennaicorporation.gov.in/gcc/`'s Trade Licence page links
+    a status lookup (on `erp.chennaicorporation.gov.in`, which timed out), a
+    login-only application and a fee PDF. Its RTI and Public Information
+    pages carry no register.
+  - Same basis as Mumbai's discard.
+- **Every city in `docs/global_transit_gap.md` has now been screened or
+  ruled out.** Today's re-screen, from London to here, moved:
+  - A +1 (Buenos Aires), while Tokyo left A by being built.
+  - B 4 → 10 (London, Berlin, Melbourne, Sydney, Newcastle, Glasgow).
+  - D 10 → 18 (Dubai, Delhi, Bangkok, Riyadh, Tashkent, Hanoi, Ho Chi Minh
+    City, Bengaluru).
+  - N 4 → 7 (Istanbul, Perth, Ankara).
+  - Discards 80 → 91: +12 (Manila, Munich, Frankfurt, Cologne, Mumbai,
+    Algiers, Doha, Baku, Panama City, Caracas, Kolkata, Chennai) and −1
+    (Berlin, out to B).
+  - China, Iran and Belarus were ruled out. The master list stands at 55 built, 87 candidates and 91
+  discards. Files: `docs/city_master_list.md`,
+  `docs/global_country_shortlist.md`, `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - Glasgow to Band B, food only; Bengaluru to Band D (owner)
 

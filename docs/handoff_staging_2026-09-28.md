@@ -40,8 +40,9 @@ then follow the pointers. **Delete a section when its item is done.**
   Yokohama, Palma, Baltimore) · T contingent on trams, **opening with its EDGE
   sub-group** (11 cities) · **C closed**. Section order A, B, D, N, T. The chat
   republish format is in the owner's memory (`feedback_master_list_format.md`).
-- **`docs/global_transit_gap.md`**: every large-network city not built (28
-  discarded, 21 ruled out by country, 28 in a band, 2 never screened;
+- **`docs/global_transit_gap.md`**: every large-network city not built (33
+  discarded, 21 ruled out by country, 28 in a band, 0 never screened;
+  Kolkata and Chennai discarded 2026-09-28: the never-screened list is empty;
   Glasgow to B and Bengaluru to D 2026-09-28;
   Tashkent, Hanoi and HCMC to D, Baku, Panama City and Caracas discarded 2026-09-28;
   Perth and Ankara to N 2026-09-28;
