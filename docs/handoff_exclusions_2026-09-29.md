@@ -407,6 +407,20 @@ bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
   `app/components.py` NOTICES near Bergen's OpenStreetMap rail-geometry edit.
   Its full list of shared files is in its READY message; it matches the other
   city branches' list, plus `docs/project_context.md` and the Danish modules.
+- **`buffalo`** (origin at 3c2d4bf, READY 2026-09-29; page 73; 1,564
+  storefronts, 14 stations, 24.1% in a ring; TEXT_WIDTH 48.8, label ("end",
+  -11, -46); rail_extra "Trams"; thins nothing). **Kept OUT of
+  IN_DEFAULT_VIEW:** at 42.89 N it would re-fit the pinned 1.4525 zoom; its
+  dot sits about 2 px from Toronto's. Adds `pipeline/taxonomies/buffalo.py`
+  (registered in `__init__.py`) and REGISTRIES "buffalo". Its OpenStreetMap
+  rail-geometry notice clause goes after Copenhagen's, where aarhus and
+  bergen also insert. No new numbered notice. Owner calls: a State salon
+  named like a person shows its licence type (42 of 267); 3 salons at an
+  "Apt" unit are left off (Buffalo only, New York unchanged); the boundary
+  is Census TIGERweb place 3611000. DECISIONS "Buffalo built: NFTA Metro
+  Rail...". **Trap:** when sweeping label offsets, run
+  `python -B scripts/check_macro_labels.py`, because a same-length rewrite of
+  `app/cities.py` within a second reuses the stale .pyc.
 - **Copenhagen, the store-number rule:** matching pins keep their place and
   show the street address in place of the name (`name_is_address`); no pin
   is removed. Expect 33 changes, all discount supermarkets, the storefront
