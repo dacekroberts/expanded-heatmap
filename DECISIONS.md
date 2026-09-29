@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**145 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**146 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Newcastle and Glasgow briefs written: the FSA per-type split measured, Govan missing from OSM's Subway, Scotland's licence left for the build](#2026-09-28---newcastle-and-glasgow-briefs-written-the-fsa-per-type-split-measured-govan-missing-from-osms-subway-scotlands-licence-left-for-the-build)
 - [Lisbon from D to R: DGAE's register is public on its map, but accounts are for institutions only; a request is drafted (owner)](#2026-09-28---lisbon-from-d-to-r-dgaes-register-is-public-on-its-map-but-accounts-are-for-institutions-only-a-request-is-drafted-owner)
 - [Review-time batch live after the owner's reboot, checked on the live URL](#2026-09-28---review-time-batch-live-after-the-owners-reboot-checked-on-the-live-url)
 - [Delhi from D to R: MCD's licences carry no street address, and the CAPTCHA does not load for the owner (owner)](#2026-09-28---delhi-from-d-to-r-mcds-licences-carry-no-street-address-and-the-captcha-does-not-load-for-the-owner-owner)
@@ -181,6 +182,42 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Newcastle and Glasgow briefs written: the FSA per-type split measured, Govan missing from OSM's Subway, Scotland's licence left for the build
+
+- **Measured the per-type split the screens could not get** (the FSA API
+  answered this time; each authority's 14 types sum to its total).
+  - **Tyne and Wear, 5 authorities:** 6,673 food storefronts of 9,211
+    premises (food service 4,236, food shops 2,437). A page-1 sample of 2,290
+    storefront rows found 85.0% with the FSA's point, 10.3% with a full
+    postcode only and 4.4% with an outward code only (private addresses,
+    never placed). London had 91.0% with a point at its build. Newcastle upon
+    Tyne is lowest, at 77.8%.
+  - **Glasgow City:** 4,958 of 6,632 (food service 3,655, food shops 1,303),
+    99.0% with a point (495 of 500).
+  - Bulk files, by HEAD request: Tyne and Wear's five XMLs total 9,248,845
+    bytes; Glasgow's is 6,028,925. Neither is downloaded; each needs the
+    owner's OK.
+- **Rail, from OSM.**
+  - **Tyne and Wear Metro:** four `light_rail` relations, refs Green and
+    Yellow, 60 stations. The stop names give 61, one a duplicate spelling of
+    St James.
+  - **Glasgow Subway:** two `subway` relations (the Inner and Outer Circle),
+    ref "Subway". Their stop members name **14 of 15 stations; Govan is
+    missing**, so it is to be added from its station node, London's
+    precedent.
+- **Left for the builds, as recommendations:**
+  - Newcastle: keep the Sunderland branch. Its page name, "Newcastle" or
+    "Newcastle (Regional)", is the owner's call.
+  - Newcastle: select authorities by code, not region. The five sit in the
+    FSA's wider North East region.
+  - Glasgow: the `licence-read` must add Food Standards Scotland's FHIS
+    pages and settle the credit wording. The FHRS terms name the OGL and
+    mention Scotland, but not FHIS.
+  - Both: lifting London's FSA code into a shared module is the build
+    session's call.
+- Files: `docs/build_briefs/newcastle.md` and `docs/build_briefs/glasgow.md`
+  (4/4 each), and the two Band B rows in `docs/city_master_list.md`.
 
 ### 2026-09-28 - Lisbon from D to R: DGAE's register is public on its map, but accounts are for institutions only; a request is drafted (owner)
 
