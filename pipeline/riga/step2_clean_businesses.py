@@ -161,7 +161,7 @@ def cadastre_layer():
     print("  by name: " + ", ".join(f"{k} {v:,}" for k, v in pg["cls"].value_counts().items()))
     emit("trade_premise_groups", len(pg))
     pg = pg[pg["cls"].isin(config.NAME_KEEP)].copy()
-    print(f"  kept (shop_retail + personal_service): {len(pg):,}")
+    print(f"  kept ({' + '.join(config.NAME_KEEP)}): {len(pg):,}")
     emit("shops_and_services_named", len(pg))
 
     kk = zipfile.ZipFile(need("0001000_kk_shp.zip"))
@@ -191,7 +191,7 @@ def cadastre_layer():
         "business_name": pts["name"].str.capitalize(),
         "address": "floor " + pts["floor"].fillna("?"),
         "latitude": pts.geometry.y, "longitude": pts.geometry.x,
-        "activity": pts["cls"].map({"shop_retail": "Shop", "personal_service": "Service"}),
+        "activity": pts["cls"].map(config.NAME_KIND),
     })
 
 

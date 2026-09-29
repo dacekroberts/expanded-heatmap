@@ -69,7 +69,9 @@ _RETAIL = {
 # --- Food service: NAICS 722 ------------------------------------------------
 _FOOD = {
     "RESTAURANT", "RESTAURANT (DRIVE THRU)", "PUB", "CAFE", "COFFEE SHOP",
-    "TAKE AWAY", "INDIAN TAKE AWAY", "SANDWICH / JUICE BAR", "INTERNET CAFE",
+    "TAKE AWAY", "INDIAN TAKE AWAY", "SANDWICH / JUICE BAR",
+    # INTERNET CAFE left on 2026-09-29: a PC room, which is recreation in every
+    # city (owner, DECISIONS "Category check: the owner's calls").
     # NAICS 7224 drinking places. A nightclub sells drink on the premises;
     # CASINO does not and is excluded below as NAICS 713 gambling.
     "NIGHT CLUB / DISCOTHEQUE",
@@ -82,17 +84,16 @@ _FOOD = {
 # photofinishing). 8122 is carved out, as naics.py does: funeral services off
 # every map (owner, 2026-09-28).
 #
-# TWO DELIBERATE DEPARTURES, both toward the everyday meaning of a high street:
-#   - SHOE REPAIR / KEY CUT, ALTERATIONS and TAILORING are NAICS 811 (repair),
-#     not 812. They are included because they are services on personal effects
-#     and read as personal services to any reader of the map. Excluding them
-#     would be defensible; it is the arbitrariness that would not be.
-#   - KENNELS is 812910 pet care and included; PET SHOP is 453910 and retail.
+# SHOE REPAIR / KEY CUT, ALTERATIONS and TAILORING were a deliberate departure
+# until 2026-09-29, counted as personal services "toward the everyday meaning
+# of a high street". They are NAICS 811 repair, and repairs are out in every
+# city (owner, 2026-09-29, DECISIONS "Category check: the owner's calls"), so
+# they are now listed with the repair uses below.
+# KENNELS is 812910 pet care and included; PET SHOP is 453910 and retail.
 _PERSONAL = {
     "HAIRDRESSING SALON", "BARBER", "BEAUTY SALON / MASSAGE", "TATTOO PARLOUR",
     "DRY CLEANERS / LAUNDERETTE", "LAUNDRY",
-    "PHOTO PROCESSING SHOP", "SHOE REPAIR / KEY CUT", "ALTERATIONS",
-    "TAILORING", "KENNELS",
+    "PHOTO PROCESSING SHOP", "KENNELS",
 }
 
 # --- The two generic segments, resolved by `Category` -----------------------
@@ -119,9 +120,16 @@ _RETAIL_CATEGORIES = {"RETAIL (SHOPS)", "RETAIL (WAREHOUSE)"}
 # A second SPECIFIC use still classifies ("AMUSEMENT CENTRE, ELECTRICAL /
 # ELECTRONIC" is an electronics shop) - the module's own rule that the
 # specific activity wins.
+#   - Recreation and repair (owner, 2026-09-29, DECISIONS "Category check: the
+#     owner's calls"): a gym, snooker hall or repair shop beside a generic
+#     SHOP segment is still a gym, snooker hall or repair shop.
 _OVERRIDES_GENERIC = {
     "BETTING SHOP", "CASINO", "AMUSEMENT CENTRE", "BINGO HALL",   # (owner, 2026-09-29) R5
     "MARKET",                                                    # (owner, 2026-09-29) R1
+    "GYMNASIUM / FITNESS CENTRE", "SNOOKER HALL", "BOWLING-ALLEY", "SQUASH COURT",
+    "SWIMMING POOL", "SPORTS & LEISURE CENTRE", "CINEMA", "DANCE STUDIO",
+    "INTERNET CAFE",                                             # recreation
+    "REPAIRS", "SHOE REPAIR / KEY CUT", "ALTERATIONS", "TAILORING",   # repair
 }
 
 # --- Explicitly not storefront ---------------------------------------------
@@ -176,6 +184,8 @@ _NOT_STOREFRONT = {
     "HERITAGE / INTERPRETATIVE CENTRE", "CEMETERY OR CREMATORIUM",
     # Repair, industry, utilities, infrastructure.
     "GARAGE", "MOTOR WASH", "VEHICLE TEST CENTRE", "VEHICLE HIRE", "REPAIRS",
+    "SHOE REPAIR / KEY CUT", "ALTERATIONS", "TAILORING",   # (owner, 2026-09-29) repairs out
+    "INTERNET CAFE",                                        # (owner, 2026-09-29) a PC room
     "CAR VALET AREA (NO BUILDINGS)", "SERVICE STATION (NO SHOP)",
     "DATA CENTRE", "PRINTING WORKS", "CONCRETE WORKS", "ASHPHALT PLANT",
     "DISTILLERY", "BREWERY", "FOOD PREPARATION", "COLD STORE", "CHILL STORE",
@@ -290,7 +300,12 @@ for _uses, _want in [("-, BETTING SHOP", None), ("SHOP, BETTING SHOP", None),
                      ("PHOTO PROCESSING SHOP, KIOSK", "Personal services"),
                      ("-, NEWSAGENT", "Retail"), ("SHOP, -", "Retail"),
                      ("-, ADULT SHOP", "Retail"),
-                     ("NIGHT CLUB / DISCOTHEQUE", "Food service")]:
+                     ("NIGHT CLUB / DISCOTHEQUE", "Food service"),
+                     ("GYMNASIUM / FITNESS CENTRE, SHOP", None), ("SHOP, SNOOKER HALL", None),
+                     ("INTERNET CAFE, -", None), ("-, SHOE REPAIR / KEY CUT", None),
+                     ("-, TAILORING, ALTERATIONS, REPAIRS", None),
+                     ("SHOP, FUNERAL HOME", "Retail"),      # owner-accepted edge case
+                     ("DRY CLEANERS / LAUNDERETTE, ALTERATIONS", "Personal services")]:
     assert classify({VALUE_COLUMN: _uses, "Category": _SHOPS}) == _want, (_uses, _want)
 for _s in _OVERRIDES_GENERIC:
     assert is_known(_s) and bucket_for_segment(_s, _SHOPS) is None, _s

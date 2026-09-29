@@ -122,13 +122,23 @@ TRADE_USE_KIND = "1230"
 # "frizētava" a service. Kept: shop_retail and personal_service ("Shops and
 # services"). Dropped: fuel, wholesale and storage, food (the excise register is
 # the food layer), gambling, offices, residential, ancillary and generic names.
+# Three changes on 2026-09-29 (owner, DECISIONS "Category check: the owner's
+# calls"): fuel stations are KEPT (R4 keeps them everywhere; they were dropped
+# with no stated reason); repair workshops, shoe and key repair and sewing
+# (remont, darbnīc, apavu, atslēg, šūšan) moved out of personal_service into
+# a dropped class of their own (repairs are out everywhere); and stands
+# (stends, ^lete) moved out of shop_retail into a dropped class ahead of it -
+# a stand is a stall. Market pavilions (tirgus, paviljon) and kiosks stay:
+# buildings of fixed shops, and small walk-in shops.
 NAME_RULES = [
     ("fuel", r"degviel|uzpild|dus\b|gāzes"),
     ("wholesale_storage", r"noliktav|^vairumtirdzniecība$|^vairumtirdzniecības (bāze|noliktava)|sklad|glabātuv|angār"),
     ("food_service", r"kafej|restorān|bār(s|a)\b|ēdnīc|picērij|bistro|krog|ēdināš|kafetēr|konditorej|ceptuv"),
-    ("personal_service", r"frizētav|frizier|skaistumkop|kosmēt|solārij|pirt|sauna|masāž|nagu|manikīr|salons? ?- ?frizētava|veļas|tīrītav|ķīmisk|foto|šūšan|remont|darbnīc|apavu|atslēg|lombard|spa\b"),
+    ("repair", r"šūšan|remont|darbnīc|apavu|atslēg"),
+    ("personal_service", r"frizētav|frizier|skaistumkop|kosmēt|solārij|pirt|sauna|masāž|nagu|manikīr|salons? ?- ?frizētava|veļas|tīrītav|ķīmisk|foto|lombard|spa\b"),
     ("gambling", r"spēļu|azart|kazino|loto"),
-    ("shop_retail", r"veikal|tirdzniec|aptiek|kiosk|paviljon|salon|mazumtirdz|tirgus|tirdzn|autosalon|grāmat|zied|optik|pārtik|preču|butik|magazin|stends|^lete"),
+    ("stall", r"stends|^lete"),
+    ("shop_retail", r"veikal|tirdzniec|aptiek|kiosk|paviljon|salon|mazumtirdz|tirgus|tirdzn|autosalon|grāmat|zied|optik|pārtik|preču|butik|magazin"),
     ("office", r"birojs|biroj|administrat"),
     ("generic_nonres", r"nedzīvojam|neapdzīvoj"),
     ("residential", r"dzīvok|dzīvojam"),
@@ -136,6 +146,8 @@ NAME_RULES = [
     ("technical_or_ancillary", r"tehnisk|pagrab|saimniecīb|nojume|garāž|palīgtelp|koridor|kāpņ|sanmezgl|katlu|tualet|ventkamer"),
     ("generic_commercial", r"komerc|nedzīvojam|neapdzīvoj|telpu grupa|telpas$|telpa$|kompleks|vairumtirdzniecības un mazumtirdzniecības"),
 ]
-NAME_KEEP = ("shop_retail", "personal_service")
+NAME_KEEP = ("shop_retail", "personal_service", "fuel")
+# The kind each kept class shows as (the tooltip's "Kind").
+NAME_KIND = {"shop_retail": "Shop", "personal_service": "Service", "fuel": "Fuel station"}
 
 RIGA_BBOX = {"lat_min": 56.85, "lat_max": 57.09, "lon_min": 23.93, "lon_max": 24.33}

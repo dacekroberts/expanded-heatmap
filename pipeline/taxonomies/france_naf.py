@@ -119,6 +119,10 @@ NOT_PREMISES = {
     "47.91B": "vente à distance - no premises",
     "47.99A": "vente à domicile - no premises",
     "47.99B": "automates / hors magasin - no premises",
+    # Heating-fuel dealers deliver coal and fuel oil: nonstore fuel dealers,
+    # out in every city (owner, 2026-09-29, DECISIONS "Category check: the
+    # owner's calls"). 47.30Z (fuel at a station) stays.
+    "47.78B": "charbons et combustibles - fuel dealers, nonstore",
 
     # Market stalls. "sur éventaires et marchés" is the publisher saying the
     # trade happens on a pitch rather than in a shop, so the registered

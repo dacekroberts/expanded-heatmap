@@ -453,8 +453,10 @@ def selftest():
 
     # D. A pending departure the code has since brought into line.
     t, cols = fresh()
-    first(cols, "naics", "nonstore", "pending").row = "454210"
-    case("D  a pending departure now resolved fails (make it a loc)", check(t), "D naics: rule nonstore")
+    first(cols, "boston_licensecat", "nightclub", "pending").row = {"source": "isd_food",
+                                                                    "business_category": "FS"}
+    case("D  a pending departure now resolved fails (make it a loc)", check(t),
+         "D boston_licensecat: rule nightclub")
 
     # E. An outside() entry whose token has gone from its file.
     t, cols = fresh()

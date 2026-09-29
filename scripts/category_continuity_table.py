@@ -87,6 +87,12 @@ def pending(row, label, result, since, note, path=None, token=None):
                   path=path, token=token)
 
 
+def fixed(row, label, _was_result, fixed_on, note, **_):
+    """A pending departure whose fix has landed: a loc(), with its history kept.
+    `fixed_on` is the date the owner approved it (the pending row's `since`)."""
+    return _Entry("loc", row=row, label=f"{label} [fixed, approved {fixed_on}]", note=note)
+
+
 def outside(path, token, what):
     return _Entry("outside", path=path, token=token, what=what)
 
@@ -248,11 +254,11 @@ COLUMNS["naics"] = {
     "nonstore": [
         loc("454110", "electronic shopping (2017)"), loc("454210", "vending machine operators (2017)"),
         loc("454310", "fuel dealers (2017)"), loc("454390", "other direct selling (2017)"),
-        pending("445132", "vending machine operators (NAICS 2022)", "Retail", "2026-09-29",
+        fixed("445132", "vending machine operators (NAICS 2022)", "Retail", "2026-09-29",
                 "NAICS 2022 moved vending-machine operators from 454210 into 445132, inside the "
                 "Retail prefix; 454 excludes the 2017 code only. Los Angeles 52, San Francisco 29 "
                 "rows in the raw files."),
-        pending("457210", "fuel dealers (NAICS 2022)", "Retail", "2026-09-29",
+        fixed("457210", "fuel dealers (NAICS 2022)", "Retail", "2026-09-29",
                 "NAICS 2022 moved fuel dealers from 454310 into 457210, inside the Retail prefix. "
                 "San Francisco 15, Los Angeles 1 rows in the raw files.")],
     "parking": [loc("812930", "parking lots and garages")],
@@ -302,7 +308,7 @@ COLUMNS["scian"] = {
                        loc("811121", "hojalatería y pintura")],
     "gambling": [loc("713291", "billetes de lotería y pronósticos deportivos"),
                  loc("713299", "otros juegos de azar")],
-    "pawnbroker": [pending("522452", "casas de empeño", None, "2026-09-29",
+    "pawnbroker": [fixed("522452", "casas de empeño", None, "2026-09-29",
                            "DENUE names pawnshops with a code of their own, in credit (5224), so "
                            "SCIAN's 46 prefix never reaches them: 381 in Mexico City's file. The rule "
                            "keeps pawnbrokers; only New York and Chicago are declared exceptions.")],
@@ -353,7 +359,7 @@ COLUMNS["chicago_license"] = {
     "repair": [
         loc({"license_description": LBL, "business_activity": "Repair of Electronics"},
             "an unmatched repair activity"),
-        pending({"license_description": LBL, "business_activity": "Clothing Alterations"},
+        fixed({"license_description": LBL, "business_activity": "Clothing Alterations"},
                 "clothing alterations", "Personal services", "2026-09-29",
                 "approved as a personal service before the build (2026-09-19); the repairs rule "
                 "(NAICS 811, alterations included) came later, and the owner chose to align")],
@@ -613,7 +619,7 @@ COLUMNS["dc_businessactivity"] = {
     "petrol_station": [loc("Gasoline Dealer", "gasoline dealer")],
     "vehicle_repair": [loc("Consumer Goods (Auto Repair)", "auto repair"), loc("Auto Wash", "car wash")],
     "gambling": absent("no betting, lottery, casino or bingo type"),
-    "pawnbroker": [pending("Pawnbroker", "pawnbroker", None, "2026-09-29",
+    "pawnbroker": [fixed("Pawnbroker", "pawnbroker", None, "2026-09-29",
                            "left out as 'NAICS 522299 lending, as in the NAICS cities'; the rule keeps "
                            "pawnbrokers and names only New York and Chicago as exceptions")],
     "nightclub": absent("no nightclub type: nightlife is alcohol-licensed outside this register"),
@@ -735,22 +741,22 @@ COLUMNS["dublin_uses"] = {
     "nonstore": absent("a valuation register lists rated premises only"),
     "parking": [loc(_dub("CAR PARK", "MISCELLANEOUS"), "car park")],
     "repair": [loc(_dub("-, REPAIRS"), "repairs"),
-               pending(_dub("-, SHOE REPAIR / KEY CUT"), "shoe repair and key cutting",
+               fixed(_dub("-, SHOE REPAIR / KEY CUT"), "shoe repair and key cutting",
                        "Personal services", "2026-09-29",
                        "'Dublin's two departures' (shoe repair and key cutting, garment alterations), "
                        "which Buenos Aires followed; the owner chose to align with the repairs rule"),
-               pending(_dub("-, ALTERATIONS"), "alterations", "Personal services", "2026-09-29",
+               fixed(_dub("-, ALTERATIONS"), "alterations", "Personal services", "2026-09-29",
                        "as shoe repair"),
-               pending(_dub("-, TAILORING"), "tailoring", "Personal services", "2026-09-29",
+               fixed(_dub("-, TAILORING"), "tailoring", "Personal services", "2026-09-29",
                        "as shoe repair")],
     "lodging": [loc(_dub("HOTEL", "HOSPITALITY"), "hotel"), loc(_dub("-, GUESTHOUSE"), "guesthouse")],
     "recreation": [loc(_dub("-, GYMNASIUM / FITNESS CENTRE"), "gym"), loc(_dub("-, CINEMA"), "cinema"),
-                   pending(_dub("GYMNASIUM / FITNESS CENTRE, SHOP"), "gym beside a generic shop use",
+                   fixed(_dub("GYMNASIUM / FITNESS CENTRE, SHOP"), "gym beside a generic shop use",
                            "Retail", "2026-09-29",
                            "a generic SHOP segment rescues any use the override list does not name "
                            "(4 gyms and 1 snooker hall on the map); betting, casino, amusement, bingo "
                            "and market are named, recreation is not"),
-                   pending(_dub("INTERNET CAFE, -"), "internet cafe", "Food service", "2026-09-29",
+                   fixed(_dub("INTERNET CAFE, -"), "internet cafe", "Food service", "2026-09-29",
                            "a PC room by another name (27 pins); the rule puts PC rooms in recreation, "
                            "and the module gives no reason")],
     "pharmacy": [loc(_dub("-, PHARMACY"), "pharmacy")],
@@ -761,7 +767,7 @@ COLUMNS["dublin_uses"] = {
                               "Dublin's kiosks kept as small walk-in shops (follow-up 4)")],
 }
 
-BA_FILTER = "df[TAX.TYPE_COLUMN].eq(TAX.TYPE_VALUE)"
+BA_FILTER = "df[TAX.TYPE_COLUMN].isin(TAX.STOREFRONT_TYPE_VALUES)"
 BA_STEP2 = "pipeline/buenos_aires/step2_clean_businesses.py"
 COLUMNS["ba_usos_suelo"] = {
     "funeral": [loc("SEPELIOS", "funeral services"), loc("VELATORIO", "wake parlour"),
@@ -777,11 +783,10 @@ COLUMNS["ba_usos_suelo"] = {
     "massage_regulated": [loc("KINESIOLOGIA", "physiotherapy")],
     "car_dealer": [loc("CONCESIONARIA AUTOMOTORES", "car dealership"),
                    loc("MOTOS, REPUESTOS Y ACCESORIOS", "motorcycles")],
-    "petrol_station": [pending(None, "TIPO1 ESTACION DE SERVICIO (266 active)", None, "2026-09-29",
-                               "petrol stations are their own survey type, not UNICOMERCIAL, and step 2 "
-                               "keeps UNICOMERCIAL only, so every station is off the map; neither the "
-                               "module nor the owner's 2026-09-28 calls mention it",
-                               path=BA_STEP2, token=BA_FILTER)],
+    "petrol_station": [loc("ESTACION DE SERVICIO", "service stations, their own survey type (266) "
+                           "[fixed, approved 2026-09-29]"),
+                       outside(BA_STEP2, "TAX.STATION_TYPE_VALUE",
+                               "step 2 admits the station type and names its use for classify()")],
     "vehicle_repair": [loc("TALLER MECANICO DE AUTOMOTORES", "car workshop"), loc("LAVADERO DE AUTOS", "car wash")],
     "gambling": [loc("LOTERIA", "lottery agency"), loc("SALON DE JUEGOS RECREATIVOS", "arcade")],
     "pawnbroker": absent("no pawnbroker subtype"),
@@ -792,11 +797,13 @@ COLUMNS["ba_usos_suelo"] = {
                 outside(BA_STEP2, BA_FILTER, "commercial garages (GARAGE COMERCIAL) dropped before classify()")],
     "repair": [loc("REPARACION CELULARES", "phone repair"),
                loc("REPARACION DE ELECTRODOMESTICOS", "appliance repair"),
-               pending("COMPOSTURA DE CALZADO", "shoe repair", "Personal services", "2026-09-29",
+               fixed("COMPOSTURA DE CALZADO", "shoe repair", "Personal services", "2026-09-29",
                        "Dublin's two departures, followed; the owner chose to align with the repairs rule"),
-               pending("ARREGLO DE ROPA", "clothing alterations", "Personal services", "2026-09-29",
+               fixed("ARREGLO DE ROPA", "clothing alterations", "Personal services", "2026-09-29",
                        "as shoe repair"),
-               pending("SASTRERIA", "tailor", "Personal services", "2026-09-29", "as shoe repair")],
+               fixed("SASTRERIA", "tailor", "Personal services", "2026-09-29", "as shoe repair"),
+               fixed("CERRAJERIA", "locksmith and key cutting", "Personal services", "2026-09-29",
+                       "as Dublin's key cutting (owner, 2026-09-29)")],
     "lodging": [outside(BA_STEP2, BA_FILTER, "hotels (EQUIPAMIENTO) dropped before classify()")],
     "recreation": [loc("GIMNASIO", "gym"), loc("SALON DE BAILE", "dance hall")],
     "pharmacy": [loc("FARMACIA Y PERFUMERIA", "pharmacy")],
@@ -820,16 +827,16 @@ COLUMNS["brazil_cnefe"] = {
         loc(_br("BUFFET INFANTIL"), "party buffet"), loc(_br("EVENTOS"), "events"),
         loc(_br("REFEITORIO"), "refectory"), loc(_br("FEIRA"), "street market"),
         exception(_br("BARRACA DE PASTEL"), "pastry stall", "Food service", FOLLOWUPS, BR_TRUCKS),
-        pending(_br("CANTINA ESCOLAR"), "school canteen", "Food service", "2026-09-29",
+        fixed(_br("CANTINA ESCOLAR"), "school canteen", "Food service", "2026-09-29",
                 "the head noun CANTINA is a Food service word; the rule takes canteens out where "
                 "the register names them. Not measured."),
-        pending(_br("RESTAURANTE INDUSTRIAL"), "staff canteen", "Food service", "2026-09-29",
+        fixed(_br("RESTAURANTE INDUSTRIAL"), "staff canteen", "Food service", "2026-09-29",
                 "an industrial restaurant is a staff canteen; RESTAURANTE wins as the head noun. "
                 "Not measured.")],
     "personal_catchall": [loc(_br("SALAO DE FESTAS"), "party hall"), loc(_br("CARTOMANTE"), "card reader"),
                           loc(_br("AGENCIA DE CASAMENTO"), "marriage agency")],
     "tattoo": [loc(_br("TATUAGEM"), "tattoo"), loc(_br("STUDIO DE TATUAGEM"), "tattoo studio"),
-               pending(_br("ESTUDIO DE TATUAGEM"), "tattoo studio, Portuguese spelling", None, "2026-09-29",
+               fixed(_br("ESTUDIO DE TATUAGEM"), "tattoo studio, Portuguese spelling", None, "2026-09-29",
                        "the civic rule's ESTUDIO has no tattoo lookahead, where STUDIO has one; "
                        "looks unintended. Not measured.")],
     "adult_hostess": [loc(_br("PRIVE"), "privé"), loc(_br("CASA NOTURNA"), "night house")],
@@ -845,12 +852,12 @@ COLUMNS["brazil_cnefe"] = {
     "gambling": [loc(_br("LOTERICA"), "lottery agency"), loc(_br("JOGO DO BICHO"), "jogo do bicho"),
                  loc(_br("CASA DE APOSTAS"), "betting house")],
     "pawnbroker": absent("pawn lending is Caixa Econômica Federal's monopoly; no pawnshop trade"),
-    "nightclub": [pending(_br("BOATE"), "nightclub", None, "2026-09-29",
+    "nightclub": [fixed(_br("BOATE"), "nightclub", None, "2026-09-29",
                           "filed with CASA DE SHOW under public and civic, with no reason given; the "
                           "rule keeps nightclubs as Food service. Not measured.")],
     "vet": [loc(_br("CLINICA VETERINARIA"), "veterinary clinic")],
     "nonstore": [loc(_br("DISTRIBUIDORA DE GAS"), "bottled-gas dealer"), loc(_br("REVENDA DE GAS"), "gas reseller"),
-                 pending(_br("LOJA VIRTUAL"), "online shop", "Retail", "2026-09-29",
+                 fixed(_br("LOJA VIRTUAL"), "online shop", "Retail", "2026-09-29",
                          "the LOJA pattern takes it as a shop; an online shop is nonstore. Not measured.")],
     "parking": [loc(_br("ESTACIONAMENTO"), "car park")],
     "repair": [loc(_br("ASSISTENCIA TECNICA"), "repair service"), loc(_br("SAPATEIRO"), "cobbler"),
@@ -876,7 +883,7 @@ COLUMNS["japan_eigyo"] = {
         exception({"permit_type": "① 飲食店営業", "form": "ろ店"}, "Fukuoka's yatai", "Food service",
                   "Fukuoka steps 1-2: the first two-source Japanese city",
                   "Fukuoka's yatai count: 81 fixed stalls under the city's yatai ordinance (owner)"),
-        pending({"permit_type": "① 飲食店営業", "form": "露店"}, "street stall (露店) as a 業態",
+        fixed({"permit_type": "① 飲食店営業", "form": "露店"}, "street stall (露店) as a 業態",
                 "Food service", "2026-09-29",
                 "the form rules' temporary words miss 露店, so a restaurant permit with that form "
                 "stays Food service (about 34 rows across the MHLW, Fukuoka and Tokyo files); the "
@@ -994,7 +1001,7 @@ COLUMNS["taiwan_fia"] = {
                         loc("561200", "餐食攤販 food stalls"), loc("486111", "食品零售攤販 food retail stalls")],
     "personal_catchall": [loc("969099", "未分類其他個人服務"), loc("969019", "算命卜卦 fortune-telling"),
                           loc("969023", "婚姻介紹服務 marriage introduction"),
-                          pending("969014", "擦皮鞋 shoe-shine", "Personal services", "2026-09-29",
+                          fixed("969014", "擦皮鞋 shoe-shine", "Personal services", "2026-09-29",
                                   "the rule's catch-all row names shoe-shine stands (Mexico's 812130 went "
                                   "out); Taiwan's own code for them stays Personal services, unaddressed")],
     "tattoo": [loc("969017", "紋身、紋眉服務 tattoo")],
@@ -1009,20 +1016,20 @@ COLUMNS["taiwan_fia"] = {
     "vehicle_repair": [loc("951199", "其他汽車維修 car repair"), loc("465111", "全新汽車批發 wholesale")],
     "gambling": [loc("920011", "彩券銷售 lottery"), loc("920012", "博弈場經營 casinos"),
                  loc("932412", "小鋼珠店 pachinko")],
-    "pawnbroker": [pending("649611", "典當服務 pawnbrokers", None, "2026-09-29",
+    "pawnbroker": [fixed("649611", "典當服務 pawnbrokers", None, "2026-09-29",
                            "division 64 (finance) is not bucketed, so pawnbrokers are off the map with "
                            "no stated reason; the rule keeps them")],
-    "nightclub": [pending("932918", "夜店 nightclubs", None, "2026-09-29",
+    "nightclub": [fixed("932918", "夜店 nightclubs", None, "2026-09-29",
                           "division 93 (recreation) is not bucketed; the rule keeps non-adult "
                           "nightclubs as Food service (Toronto and Edmonton aligned)"),
-                  pending("932917", "無侍者陪伴之舞場 dance halls without hostesses", None, "2026-09-29",
+                  fixed("932917", "無侍者陪伴之舞場 dance halls without hostesses", None, "2026-09-29",
                           "as 夜店")],
     "vet": [loc("750000", "獸醫服務 veterinary")],
     "nonstore": [loc("487111", "經營郵購 mail order"), loc("487911", "自動販賣機 vending"),
-                 pending("482912", "桶裝瓦斯零售 bottled-gas retail", "Retail", "2026-09-29",
+                 fixed("482912", "桶裝瓦斯零售 bottled-gas retail", "Retail", "2026-09-29",
                          "cylinder-gas dealers deliver from a shop; Korea (가정용 연료 소매업) and Brazil "
                          "(DISTRIBUIDORA DE GAS) take the same trade out as nonstore fuel dealers"),
-                 pending("482911", "煤油零售 kerosene retail", "Retail", "2026-09-29", "as bottled gas")],
+                 fixed("482911", "煤油零售 kerosene retail", "Retail", "2026-09-29", "as bottled gas")],
     "parking": [loc("524100", "停車場管理 parking")],
     "repair": [loc("952312", "家用電器維修 appliance repair"), loc("959913", "鞋、皮革品修理 shoe repair"),
                loc("959916", "衣服修改 alterations")],
@@ -1097,7 +1104,7 @@ COLUMNS["france_naf"] = {
     "vet": [loc("75.00Z", "activités vétérinaires")],
     "nonstore": [loc("47.91A", "vente à distance, catalogue général"), loc("47.99A", "vente à domicile"),
                  loc("47.99B", "vente par automates"),
-                 pending("47.78B", "commerces de charbons et combustibles", "Retail", "2026-09-29", FUEL_DEALERS)],
+                 fixed("47.78B", "commerces de charbons et combustibles", "Retail", "2026-09-29", FUEL_DEALERS)],
     "parking": [loc("52.21Z", "services auxiliaires des transports terrestres")],
     "repair": [loc("95.12Z", "réparation d'équipements de communication"),
                loc("95.23Z", "réparation de chaussures"), loc("95.29Z", "retouches")],
@@ -1150,13 +1157,11 @@ COLUMNS["norway_sn2025"] = _rev21(lambda d: d + "0", "pipeline/oslo/config.py",
 COLUMNS["denmark_db25"] = _rev21(lambda d: d.replace(".", "") + "00", "pipeline/copenhagen/config.py",
                                  'CATCH_ALL_EXCLUDE = ("969900",)', "Copenhagen")
 COLUMNS["czech_nace2025"] = _rev21(lambda d: d.replace(".", "") + "0", "pipeline/prague/config.py",
-                                   'CATCH_ALL_EXCLUDE = ("96990",)', "Prague")
+                                   'CATCH_ALL_EXCLUDE = ("96990", "969")', "Prague")
 COLUMNS["czech_nace2025"]["personal_catchall"] = [
-    outside("pipeline/prague/config.py", 'CATCH_ALL_EXCLUDE = ("96990",)', "96990 dropped in step 2"),
-    pending(None, "bare three-digit 969 rows", "Personal services", "2026-09-29",
-            "the catch-all exclusion is an exact match on 96990, but the register is ragged, so the 21 "
-            "rows filed at 969 are on Prague's map; Berlin drops the same shape by prefix",
-            path="pipeline/prague/config.py", token='CATCH_ALL_EXCLUDE = ("96990",)')]
+    outside("pipeline/prague/config.py", 'CATCH_ALL_EXCLUDE = ("96990", "969")',
+            "96990 and the bare 969 group (21 rows, the ragged register) dropped in step 2 "
+            "[the 969 row fixed, approved 2026-09-29]")]
 
 BERLIN_CFG = "pipeline/berlin/config.py"
 BERLIN_969 = '"nace_id": ("969",)'
@@ -1186,16 +1191,15 @@ COLUMNS["ihk_wz2025"] = {
                        loc(_ihk("4671", "46711"), "Großhandel mit Kraftwagen")],
     "gambling": [loc(_ihk("9200", "920042"), "Wettbüro"), loc(_ihk("9200", "920041"), "Lotto-Annahmestelle"),
                  loc(_ihk("9200", "920011"), "Spielhallen")],
-    "pawnbroker": [pending(_ihk("6492", "64922"), "Leihhäuser (35)", None, "2026-09-29",
+    "pawnbroker": [fixed(_ihk("6492", "64922"), "Leihhäuser (35)", None, "2026-09-29",
                            "pawnshops have their own IHK branch, but classify() reads the 4-digit class, "
                            "credit granting, which is not a bucket; the rule keeps pawnbrokers")],
     "nightclub": [loc(_ihk("5630", "56302"), "Diskotheken und Tanzlokale")],
     "vet": [loc(_ihk("7500", "75001"), "Tierärztliche Praxen")],
     "nonstore": [loc(_ihk("4791", "47911"), "Versteigerungsgewerbe"), loc(_ihk("4792", "47922"), "Vermittlung"),
-                 outside(BERLIN_CFG, '"ihk_branch_id": ("47122",)',
-                         "general non-food retail with no premises (47122) dropped in step 2"),
-                 pending(_ihk("4778", "477893"), "Einzelhandel mit Brennstoffen (36)", "Retail", "2026-09-29",
-                         FUEL_DEALERS)],
+                 outside(BERLIN_CFG, '"ihk_branch_id": ("47122", "477893")',
+                         "general non-food retail with no premises (47122) and Einzelhandel mit "
+                         "Brennstoffen (477893, 36; fixed, approved 2026-09-29) dropped in step 2")],
     "parking": [loc(_ihk("5221", "52211"), "Parkhäuser und Parkplätze")],
     "repair": [loc(_ihk("9510", "95102"), "Reparatur von Telekommunikationsgeräten"),
                loc(_ihk("9523", "95230"), "Schuhreparatur"), loc(_ihk("9529", "952903"), "Änderungsschneiderei")],
@@ -1228,7 +1232,7 @@ COLUMNS["madrid_epigrafe"] = {
             "school canteens"),
         loc(_mad(FOOD_DIV, "SALONES DE BANQUETES Y PROVISION COMIDAS PARA EVENTOS"), "banquets and caterers"),
         loc(_mad(RETAIL_DIV, "COMERCIO AL POR MENOR EN PUESTOS DE VENTA Y EN MERCADILLOS"), "market stalls"),
-        pending(_mad(RETAIL_DIV, "SITUADOS: CHURROS Y FREIDURIAS SIN NINGIN TIPO DE RELLENO"),
+        fixed(_mad(RETAIL_DIV, "SITUADOS: CHURROS Y FREIDURIAS SIN NINGIN TIPO DE RELLENO"),
                 "street pitch (situado), churros", "Retail", "2026-09-29",
                 MAD_MOBILE + " (about 163 situados in all)")],
     "personal_catchall": [loc(_mad("OTROS SERVICIOS PERSONALES",
@@ -1252,7 +1256,7 @@ COLUMNS["madrid_epigrafe"] = {
                      "bingos and casinos")],
     "pawnbroker": absent("no pawnbroker epígrafe: pawnshops sit with other lenders or second-hand shops"),
     "nightclub": [loc(_mad(FOOD_DIV, "BAR ESPECIAL CON ACTUACIONES"), "late bar with acts"),
-                  pending(_mad(REC_DIV, "DISCOTECAS Y SALAS DE BAILE"), "discos and dance halls (233)",
+                  fixed(_mad(REC_DIV, "DISCOTECAS Y SALAS DE BAILE"), "discos and dance halls (233)",
                           None, "2026-09-29",
                           "their division is recreation, which is not a bucket; the rule keeps "
                           "non-adult nightclubs as Food service (Toronto and Edmonton aligned)")],
@@ -1267,9 +1271,9 @@ COLUMNS["madrid_epigrafe"] = {
     "pharmacy": [loc(_mad(RETAIL_DIV, "FARMACIA"), "pharmacy")],
     "optician": [loc(_mad(RETAIL_DIV, "COMERCIO AL POR MENOR DE MATERIAL DE OPTICA"), "optical goods")],
     "health_food": [loc(_mad(RETAIL_DIV, "COMERCIO AL POR MENOR DE PRODUCTOS DE HERBOLARIO"), "herbalist")],
-    "mobile_unit": [pending(_mad(FOOD_DIV, "ESTABLECIMIENTO DE RESTAURACION MOVIL"), "mobile food outlet (18)",
+    "mobile_unit": [fixed(_mad(FOOD_DIV, "ESTABLECIMIENTO DE RESTAURACION MOVIL"), "mobile food outlet (18)",
                             "Food service", "2026-09-29", MAD_MOBILE),
-                    pending(_mad(FOOD_DIV, "VENDEDOR AMBULANTE DE ALIMENTOS PREPARADOS PARA SU CONSUMO INMEDIATO"),
+                    fixed(_mad(FOOD_DIV, "VENDEDOR AMBULANTE DE ALIMENTOS PREPARADOS PARA SU CONSUMO INMEDIATO"),
                             "street food vendor (3)", "Food service", "2026-09-29", MAD_MOBILE)],
 }
 
@@ -1303,7 +1307,7 @@ COLUMNS["barcelona_activitat"] = {
     "parking": [loc(_bcn("Pàrquings i garatges", "Altres", "Serveis"), "car parks")],
     "repair": [loc(_bcn("Reparacions (Electrodomèstics i automòbils)",
                         "Reparacions (Electrodomèstics i automòbils)", "Serveis"), "appliance repair"),
-               pending(_bcn("Arranjaments", "Altres", "Serveis"), "garment repair and alterations (649)",
+               fixed(_bcn("Arranjaments", "Altres", "Serveis"), "garment repair and alterations (649)",
                        "Personal services", "2026-09-29",
                        "counted as a personal service ('NAICS 812's shape') with no DECISIONS entry; "
                        "the repairs rule names clothing alterations as out")],
@@ -1422,21 +1426,17 @@ COLUMNS["riga_source"] = {
     "no_counter_food": [exception(None, "market pavilions kept as shops ('tirgus', 'paviljon')", "Retail",
                                   RULED, "a market pavilion is a building of fixed shops, not stalls",
                                   path=RIGA_CFG, token="tirgus"),
-                        pending(None, "stands kept as shops ('stends', '^lete')", "Retail", "2026-09-29",
-                                "a stand is a stall; the rule takes street and market stalls out",
-                                path=RIGA_CFG, token="stends")],
+                        outside(RIGA_CFG, '("stall", r"stends|^lete")',
+                                "stands dropped by name, as stalls [fixed, approved 2026-09-29]")],
     "sex_shop": [outside(RIGA_CFG, "veikal", "sex shops kept as shops by name")],
     "massage_commercial": [outside(RIGA_CFG, "masāž", "massage kept as a personal service by name")],
     "car_dealer": [outside(RIGA_CFG, "autosalon", "car showrooms kept as shops by name")],
-    "petrol_station": [pending(None, "fuel stations dropped by name", None, "2026-09-29",
-                               "the 'fuel' name class is dropped with no stated reason; the rule keeps "
-                               "petrol stations (R4)", path=RIGA_CFG, token='("fuel", r"degviel')],
-    "vehicle_repair": [pending(None, "workshops kept by name ('remont', 'darbnīc')", "Retail", "2026-09-29",
-                               "repair workshops, vehicle ones included, match the personal-service name "
-                               "rule and stay on the map as 'Shops and services'; the rule takes repair out",
-                               path=RIGA_CFG, token="remont|darbnīc|apavu|atslēg")],
-    "repair": [pending(None, "shoe, sewing and key repair kept by name", "Retail", "2026-09-29",
-                       "as vehicle workshops", path=RIGA_CFG, token="remont|darbnīc|apavu|atslēg")],
+    "petrol_station": [outside(RIGA_CFG, 'NAME_KEEP = ("shop_retail", "personal_service", "fuel")',
+                               "fuel stations kept by name [fixed, approved 2026-09-29]")],
+    "vehicle_repair": [outside(RIGA_CFG, '("repair", r"šūšan|remont|darbnīc|apavu|atslēg")',
+                               "workshops dropped by name [fixed, approved 2026-09-29]")],
+    "repair": [outside(RIGA_CFG, '("repair", r"šūšan|remont|darbnīc|apavu|atslēg")',
+                       "shoe, sewing and key repair dropped by name [fixed, approved 2026-09-29]")],
     "gambling": [outside(RIGA_CFG, '("gambling", r"', "gambling premises dropped by name")],
     "pawnbroker": [outside(RIGA_CFG, "lombard", "pawnbrokers kept by name")],
     "nightclub": [outside(RIGA_CFG, "FOOD_RE", "excise-register clubs kept as food service")],
@@ -1464,7 +1464,7 @@ COLUMNS["romania_dsvsa"] = {
     "nonstore": absent("registered food units only; internet-sales units are shops that also sell online",
                        ignore=()),
     "mobile_unit": [loc(_ro("toneta", "A25"), "kiosk cart"), loc(_ro("automat inghetata", "N24"), "vending"),
-                    pending(_ro("fast food (rulota)"), "fast food in a trailer", "Food service", "2026-09-29",
+                    fixed(_ro("fast food (rulota)"), "fast food in a trailer", "Food service", "2026-09-29",
                             "seven A19 units whose category says trailer or mobile unit stay Food service; "
                             "neither the category rule nor step 2's sector test catches 'rulota'")],
 }
@@ -1570,7 +1570,8 @@ AWAITING_OWNER = {
 }
 QUEUED = "fix approved (owner, 2026-09-29), queued: docs/handoff_category_fixes_2026-09-29.md"
 QUEUED_ELSEWHERE = {
-    ("sweden_livsmedel", "no_counter_food"): "the caterer row is fixed on branch stockholm-catering",
+    ("sweden_livsmedel", "no_counter_food"): "caterer: fixed on branch stockholm-catering; the "
+                                             "torghandel stall: a name rule after that branch lands",
     ("sweden_livsmedel", "mobile_unit"): "fixed on branch stockholm-catering",
 }
 for _system, _col in COLUMNS.items():

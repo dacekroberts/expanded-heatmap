@@ -57,7 +57,8 @@ def main():
         sys.exit(f"  {len(other)} rows with city != {config.CITY_KEEP!r}: {other['city'].unique()[:5]}")
 
     df = filter_to_storefront(df, config.TAXONOMY_SYSTEM)
-    df = df.assign(bucket=[TAX.classify({"nace_id": c}) for c in df["nace_id"]])
+    df = df.assign(bucket=[TAX.classify({"nace_id": c, "ihk_branch_id": b})
+                           for c, b in zip(df["nace_id"], df["ihk_branch_id"])])
     print(f"  {len(df):,} storefront rows after filter_to_storefront()")
     print("    " + ", ".join(f"{b} {n:,}" for b, n in df["bucket"].value_counts().items()))
 

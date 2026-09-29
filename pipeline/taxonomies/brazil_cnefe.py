@@ -164,14 +164,27 @@ RULES = [
                                             "BIBLIOTECA", "MUSEU", "TEATRO",
                                             "EXPLICADORA", "REFORCO ESCOLAR",
                                             "PILATES", "DETRAN", "MACUMBA",
-                                            "CINEMA", "ACADEMIA", "ESTUDIO",
+                                            "CINEMA", "ACADEMIA",
+                                            # both spellings exempt a tattoo or
+                                            # beauty studio (2026-09-29: ESTUDIO
+                                            # had no exemption)
+                                            "ESTUDIO(?! DE (TATUAGEM|BELEZA))",
                                             "STUDIO(?! DE (TATUAGEM|BELEZA))",
-                                            "BOATE", "CASA DE SHOW",
+                                            # BOATE moved to food service on
+                                            # 2026-09-29 (owner: nightclubs kept)
+                                            "CASA DE SHOW",
                                             "SUBESTACAO", "TORRE", "ANTENA",
                                             "CAIXA ELETRONICO")),
+    # Food with no counter of its own, and nonstore retail (owner, 2026-09-29,
+    # DECISIONS "Category check: the owner's calls"). Ahead of the buckets,
+    # so a tie at the head noun (CANTINA ESCOLAR, LOJA VIRTUAL) goes here.
+    ("institutional canteen", None, rx("CANTINA ESCOLAR", "CANTINA DA ESCOLA",
+                                       "CANTINA DO COLEGIO", "RESTAURANTE INDUSTRIAL",
+                                       "COZINHA INDUSTRIAL", "REFEITORIO")),
+    ("online shop", None, rx("LOJA VIRTUAL", "LOJA ONLINE")),
     # --- the three buckets ---
     ("food service", "Food service", rx(
-        r"BAR\b", "BARES", "BARZINHO", "BIROSCA", "BOTEQUIM", "BOTECO",
+        r"BAR\b", "BARES", "BOATE", "BARZINHO", "BIROSCA", "BOTEQUIM", "BOTECO",
         "QUIOSQUE DE (PRAIA|COCO|LANCHE)", "LANCHONETE", "LANCHES",
         "LANCHE", "RESTAURANTE", "PIZZARIA", r"CAFE\b", "CAFETERIA",
         "SORVETERIA", "SORVETE", "CHURRASCARIA", "CHURRASQUINHO", "PASTELARIA",
@@ -353,7 +366,16 @@ for _d, _want in [("BAR DO CLUBE", "food service"),
                   ("CASA DE CARNES", "retail"), ("CASA", "not premises"),
                   ("FUNERARIA", "funeral services"),
                   ("VELORIO MUNICIPAL", "funeral services"),
-                  ("ARTIGOS FUNERARIOS", "retail")]:
+                  ("ARTIGOS FUNERARIOS", "retail"),
+                  # (owner, 2026-09-29) the category check's fixes
+                  ("CANTINA ESCOLAR", "institutional canteen"),
+                  ("RESTAURANTE INDUSTRIAL", "institutional canteen"),
+                  ("CANTINA", "food service"), ("RESTAURANTE", "food service"),
+                  ("BOATE", "food service"), ("LOJA VIRTUAL", "online shop"),
+                  ("LOJA DE ROUPAS", "retail"),
+                  ("ESTUDIO DE TATUAGEM", "personal services"),
+                  ("STUDIO DE TATUAGEM", "personal services"),
+                  ("ESTUDIO DE GRAVACAO", "public / civic / education")]:
     assert classify_text(_d)[0] == _want, (_d, classify_text(_d), _want)
 # The FUNILARIA/FUNERARIA tie in fuzzy_fix, both ways (measured 2026-09-29).
 for _d, _want in [("FUNELARIA E PINTURA", "auto / repair"),

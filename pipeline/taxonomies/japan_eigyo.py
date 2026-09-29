@@ -90,8 +90,11 @@ _COMPILED = [(name, bucket, re.compile(pat)) for name, bucket, pat in RULES]
 FORM_RULES = [
     # A temporary stall is not a yatai: Tokyo's MHLW rows file a festival
     # stall as 臨時設置屋台 (亀戸, 2026-09-28), so the temporary words win.
+    # 露店 (a street stall) joined on 2026-09-29: RULES already excluded it as a
+    # type, and about 34 restaurant permits carried it as their form (owner,
+    # DECISIONS "Category check: the owner's calls"). Fukuoka's ろ店 is not it.
     ("temporary / mobile", None, r"仮設|臨時|短期|期間限定|季節的|イベント|催事|祭|マルシェ|出店|自動車|キッチンカー|"
-                                 r"移動|行商|列車|屋形船|海の家"),
+                                 r"移動|行商|列車|屋形船|海の家|露店"),
     # Fukuoka's 屋台, filed as ろ店 / 定置屋台: stalls at fixed street spots
     # (Nakasu's 清流公園, Tenjin, Nagahama) on permits running to 2032 under
     # the city's 屋台基本条例 - not a festival stall. They COUNT (owner
@@ -210,5 +213,8 @@ for _v, _f, _want in (("飲食店営業（バー・キャバレー）", "", None
                       ("飲食仕出", "", None), ("飲食店営業", "仕出し・定期", None),
                       ("飲食店営業", "バー", "Food service"), ("① 飲食店営業", "ワインバー", "Food service"),
                       ("飲食バー", "", "Food service"), ("飲食店営業", "一般・食堂", "Food service"),
-                      ("菓子製造業", "スナック菓子", "Retail"), ("菓子製造業（スナック菓子）", "", "Retail")):
+                      ("菓子製造業", "スナック菓子", "Retail"), ("菓子製造業（スナック菓子）", "", "Retail"),
+                      # (owner, 2026-09-29) a 露店 form is a street stall; Fukuoka's ろ店 yatai stay
+                      ("① 飲食店営業", "露店", None), ("① 飲食店営業", "ろ店", "Food service"),
+                      ("① 飲食店営業", "定置屋台", "Food service")):
     assert classify({VALUE_COLUMN: _v, "form": _f}) == _want, (_v, _f, classify({VALUE_COLUMN: _v, "form": _f}))
