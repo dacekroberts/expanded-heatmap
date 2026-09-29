@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**118 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**119 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [London's licence calls: the existing personal-information rule, and the credit "Food Standards Agency, UK food hygiene rating data" (owner)](#2026-09-28---londons-licence-calls-the-existing-personal-information-rule-and-the-credit-food-standards-agency-uk-food-hygiene-rating-data-owner)
 - [London started on its own branch: the FSA files downloaded, placement measured, ring coverage by rail tier, the FSA licence read (owner calls pending)](#2026-09-28---london-started-on-its-own-branch-the-fsa-files-downloaded-placement-measured-ring-coverage-by-rail-tier-the-fsa-licence-read-owner-calls-pending)
 - [Buenos Aires to Band A, Melbourne (City of Melbourne) to Band B; Sydney queued for a re-probe (owner)](#2026-09-28---buenos-aires-to-band-a-melbourne-city-of-melbourne-to-band-b-sydney-queued-for-a-re-probe-owner)
 - [Algiers: the "no urban rail" misfiling corrected, then discarded (owner)](#2026-09-28---algiers-the-no-urban-rail-misfiling-corrected-then-discarded-owner)
@@ -154,6 +155,27 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - London's licence calls: the existing personal-information rule, and the credit "Food Standards Agency, UK food hygiene rating data" (owner)
+
+- **The project's existing rule applies to the FSA register (owner)**: a trade
+  name is shown, never a person's own name at what looks like their home.
+  Concretely: "Other catering premises" and "Mobile caterer", where home
+  caterers sit, stay out of scope (`pipeline/taxonomies/fsa_businesstype.py`);
+  a private-address record, which the FSA publishes with no point and only an
+  outward postcode, is never placed; `check_personal_exposure.py london` runs
+  on what remains. This answers the licence read's point that the FSA treats a
+  name and address as personal data and the OGL does not license it.
+- **The credit reads "Food Standards Agency, UK food hygiene rating data"
+  (owner)**, the FSA's own dataset title on data.gov.uk, with the OGL v3
+  statement linked and the data date: the FSA's terms bar "the FHRS name"
+  outside its rating imagery without permission.
+- **The taxonomy `fsa_businesstype` maps all 14 types** (five storefronts, nine
+  excluded, a new type fails in step 2). Food retail's legend reads "Food
+  shops", the Japanese cities' precedent for a food-only retail layer.
+- The rail tier (the recommendation: Underground, DLR, Elizabeth line and the
+  Overground, without Tramlink - 73.9% of storefronts in the rings) is not yet
+  decided.
 
 ### 2026-09-28 - London started on its own branch: the FSA files downloaded, placement measured, ring coverage by rail tier, the FSA licence read (owner calls pending)
 

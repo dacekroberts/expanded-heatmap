@@ -37,6 +37,13 @@ FSA_RAW_DIR = DATA_RAW / "fsa"
 FSA_AUTHORITIES_JSON = DATA_RAW / "fsa_authorities.json"
 GTFS_ZIP = DATA_RAW / "gtfs.zip"   # TODO: rail source (TfL publishes no GTFS; OSM or TfL's API)
 CITY_BOUNDARY_GEOJSON = DATA_RAW / "city_boundary.geojson"
+# Greater London - the 32 boroughs and the City, exactly the FSA's 33 "London"
+# authorities. OSM relation 175342 (admin_level 5), polygonised from its outer
+# ways; 1,595.5 km2 in UTM 30N on 2026-09-28, gated so a truncated Overpass
+# answer cannot pass.
+BOUNDARY_OSM_RELATION = 175342
+BOUNDARY_OSM_CACHE = DATA_RAW / "osm_greater_london.json"
+BOUNDARY_AREA_KM2 = (1560, 1620)
 PROVENANCE_JSON = OUTPUTS / "provenance.json"
 
 # --- Coordinate reference systems -----------------------------------------
@@ -66,19 +73,21 @@ LINE_NAMES = {}  # route_id -> real public name, e.g. {"801": "A Line"}
 
 # --- Business filtering ------------------------------------------------
 
-# TODO: how in-city rows are identified: the dataset's own city field (check
-# what it really holds) or an authoritative district field.
-CITY_KEEP = "LONDON"
+# In-city rows: the 33 authority files ARE Greater London (fetch_sources.py
+# asserts 33 in the FSA's "London" region); the polygon then drops any point
+# geocoded outside it. CITY_KEEP is kept for the scaffold's templates.
+CITY_KEEP = "London"
 
 TAXONOMY_SYSTEM = "fsa_businesstype"
 # Already the taxonomy's VALUE_COLUMN, so step 2's rename is a no-op.
 RAW_CLASSIFICATION_COLUMN = "BusinessType"
 
-# Sanity bounds for the supplied lat/lng. TODO: tighten to the city's real
-# extent once the boundary is known (this box is a wide starting guess).
+# Sanity bounds: Greater London's polygon extent (51.2868-51.6919 N,
+# -0.5104-0.3340 E, measured 2026-09-28) plus ~0.02 deg. The polygon does the
+# filtering; this catches a CRS or axis error.
 LONDON_BBOX = {
-    "lat_min": 51.11,
-    "lat_max": 51.91,
-    "lon_min": -0.63,
-    "lon_max": 0.37,
+    "lat_min": 51.26,
+    "lat_max": 51.72,
+    "lon_min": -0.54,
+    "lon_max": 0.36,
 }

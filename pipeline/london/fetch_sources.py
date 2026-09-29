@@ -43,6 +43,33 @@ def authorities():
     return [{k: a.get(k) for k in keep} for a in rows]
 
 
+def fetch_boundary(force):
+    """Greater London (OSM relation 175342), polygonised from its outer ways -
+    Prague's method - and gated on its area, so a partial answer cannot pass."""
+    from shapely.geometry import LineString, MultiLineString, mapping
+    from shapely.ops import linemerge, polygonize, unary_union
+    import geopandas as gpd
+    from pipeline import osm
+
+    if config.CITY_BOUNDARY_GEOJSON.exists() and not force:
+        print(f"  {'city_boundary':28} cached")
+        return
+    els, host = osm.fetch(f"[out:json][timeout:180];rel({config.BOUNDARY_OSM_RELATION});out geom;",
+                          config.BOUNDARY_OSM_CACHE, force=force)
+    lines = [LineString([(p["lon"], p["lat"]) for p in m["geometry"]])
+             for e in els for m in e.get("members", [])
+             if m.get("type") == "way" and m.get("role") == "outer"]
+    poly = unary_union(list(polygonize(linemerge(MultiLineString(lines)))))
+    km2 = gpd.GeoSeries([poly], crs=config.CRS_GEOGRAPHIC).to_crs(config.CRS_PROJECTED).area.iloc[0] / 1e6
+    lo, hi = config.BOUNDARY_AREA_KM2
+    if not lo <= km2 <= hi:
+        sys.exit(f"  Greater London polygon is {km2:.1f} km2, outside {lo}-{hi}: a partial answer?")
+    config.CITY_BOUNDARY_GEOJSON.write_text(json.dumps(
+        {"type": "Feature", "geometry": mapping(poly),
+         "properties": {"osm_relation": config.BOUNDARY_OSM_RELATION}}), encoding="utf-8")
+    print(f"  {'city_boundary':28} {km2:.1f} km2 (via {host})")
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--force", action="store_true")
@@ -68,6 +95,8 @@ if __name__ == "__main__":
         total += len(body)
         print(f"  {a['Name']:<28} {len(body):>11,} bytes  published {a['LastPublishedDate'][:10]}")
     print(f"  {len(auths)} authority files, {total:,} bytes in {config.FSA_RAW_DIR.relative_to(config.ROOT)}")
+
+    fetch_boundary(args.force)
 
     prov = {"fetched_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "fsa_authorities_url": config.FSA_AUTHORITIES_URL,
