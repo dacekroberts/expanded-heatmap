@@ -79,8 +79,11 @@ def main():
             sys.exit(f"no feasible colour for {k} ({config.LINE_NAMES[k]}) with {len(near[k])} lines near it")
         chosen[k] = min(ok, key=lambda c: pull(c[1], target))[0]
 
-    worst_near = min((lc.delta_e(chosen[a], chosen[b]), a, b) for a in keys for b in near[a])
-    worst_all = min((lc.delta_e(chosen[a], chosen[b]), a, b) for i, a in enumerate(keys) for b in keys[i + 1:])
+    # A one-line city (Glasgow's Subway) has no pair: report none, not a crash.
+    none = (float("nan"), "-", "-")
+    worst_near = min(((lc.delta_e(chosen[a], chosen[b]), a, b) for a in keys for b in near[a]), default=none)
+    worst_all = min(((lc.delta_e(chosen[a], chosen[b]), a, b) for i, a in enumerate(keys) for b in keys[i + 1:]),
+                    default=none)
     print(f"\n{'key':4} {'operator hue':12} {'chosen':8} {'pins':>5} {'near':>5} {'dark':>5} {'light':>5}  line")
     for k in keys:
         pin = min(lc.delta_e(chosen[k], p) for p in pins)

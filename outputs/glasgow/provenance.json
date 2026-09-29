@@ -1,0 +1,9 @@
+{
+  "fetched_utc": "2026-09-29T04:47:28+00:00",
+  "fsa_file_url": "https://ratings.food.gov.uk/OpenDataFiles/FHRS776en-GB.xml",
+  "fsa_authority": {
+    "code": "776",
+    "name": "Glasgow City"
+  },
+  "fsa_extract_date": "2026-09-14"
+}

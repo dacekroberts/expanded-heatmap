@@ -20,13 +20,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**152 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**153 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Funeral services come off every map (owner); audit and plan](#2026-09-28---funeral-services-come-off-every-map-owner-audit-and-plan)
 - [Bucharest's DSVSA files fetched by the owner in their browser: about 19,000 active storefronts, not 31,299 - a quarter of the rows are cancelled registrations](#2026-09-28---bucharests-dsvsa-files-fetched-by-the-owner-in-their-browser-about-19000-active-storefronts-not-31299---a-quarter-of-the-rows-are-cancelled-registrations)
 - [Stockholm and Bucharest briefs brought up to build: Stockholm's register frozen since 2025-10-21, its premises key and types found; Bucharest's columns were already known; Glasgow's Govan claim withdrawn](#2026-09-28---stockholm-and-bucharest-briefs-brought-up-to-build-stockholms-register-frozen-since-2025-10-21-its-premises-key-and-types-found-bucharests-columns-were-already-known-glasgows-govan-claim-withdrawn)
+- [Glasgow built on Scotland's FHIS register, food only; the flat and childminder rules added for Glasgow and London (owner)](#2026-09-28---glasgow-built-on-scotlands-fhis-register-food-only-the-flat-and-childminder-rules-added-for-glasgow-and-london-owner)
 - [Melbourne and Sydney briefs written: both licences read (CC BY 4.0, permitted with conditions), stations and ring coverage measured](#2026-09-28---melbourne-and-sydney-briefs-written-both-licences-read-cc-by-40-permitted-with-conditions-stations-and-ring-coverage-measured)
 - [Newcastle and Glasgow briefs written: the FSA per-type split measured, Govan missing from OSM's Subway, Scotland's licence left for the build](#2026-09-28---newcastle-and-glasgow-briefs-written-the-fsa-per-type-split-measured-govan-missing-from-osms-subway-scotlands-licence-left-for-the-build)
 - [Buenos Aires built: the land-use survey at parcel centres, the Subte from SBASE's own layers (owner)](#2026-09-28---buenos-aires-built-the-land-use-survey-at-parcel-centres-the-subte-from-sbases-own-layers-owner)
@@ -310,6 +311,81 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - Files: `docs/build_briefs/stockholm.md` (6/6), `docs/build_briefs/bucharest.md`
   (2/2), and three rows of `docs/city_master_list.md`.
 
+### 2026-09-28 - Glasgow built on Scotland's FHIS register, food only; the flat and childminder rules added for Glasgow and London (owner)
+
+- **A storefront whose address line starts "Flat" is never placed, in Glasgow
+  and London alike (owner).** Glasgow City publishes home bakers and cooks as
+  Restaurant/Cafe/Canteen at their tenement flat WITH the FSA's point ("Flat
+  2/1", a few under a person's own name): 185 of 4,958 storefronts (130 upper
+  floor, 23 ground floor, 32 other). London's structural guard (a private
+  address gets no point and an outward postcode only) catches none of them,
+  and the same test found 99 in London's files, 98 of them on the live map.
+  Rejected: upper floors only (keeps 23 ground-floor flats, some of them
+  tenement shops but others home kitchens), and Glasgow only (leaves London's
+  98 standing). A few real ground-floor shops are lost; disclosed.
+- **A storefront named as a childminder is never placed (owner).** Five in
+  Glasgow, listed as cafés at a house, three under the childminder's own name
+  ("Andrea Stewart - Childminder"); none in London. Not a food storefront and
+  home-based by definition. No "home bakery" rule: in Scotland that names a
+  kind of shop (Newlands Home Bakery, Clarkston Road), and "Homemade By
+  Fiona" is a trade name, which the existing rule allows.
+- **Both rules live in a new shared module, `pipeline/fsa.py`** (the build
+  session's call, which the briefs left open): London's FSA reader, the
+  trading-as rule and the Code-Point loader, lifted out of London's step 2 so
+  that Newcastle, the third FSA city, passes through the rules. London's step
+  2 now uses it. Its CSV lost exactly the 98 placed flat rows (93 at the FSA
+  point, 5 at a postcode centroid), and every other row is byte-identical to
+  the old step 2's output: 56,590 -> 56,492 storefronts, 41,574 in the rings (73.6%).
+- **Glasgow's credit reads "Food Standards Scotland, Food Hygiene Information
+  Scheme data, via the Food Standards Agency" (owner), notice 61**, with the
+  OGL v3 statement linked and the extract date (2026-09-14). The `licence-read`
+  found the FSA's terms put the whole file, FHIS records included, under the
+  OGL, and that FSS publishes the same council's data itself under OGL v3. It
+  also found that London's credit ("UK food hygiene rating data") would
+  describe FHIS wrongly: FHIS gives Pass or Improvement Required, not a rating.
+  Rejected: FSS alone (the file is the FSA's), and extending notice 58. Notice
+  58 and London's page are amended for the flat rule (owner-approved wording).
+- **No postcode centroids for Glasgow (owner).** 55 of the storefronts left
+  after the two rules (1.2%) have no FSA point, 22 of them with a full postcode.
+  Centroids would place those 22 (about 0.4%) at the cost of Ordnance Survey's
+  notice on the page; left unplaced and disclosed.
+- **Built** (`worktree-glasgow`, from origin/master ff761b2):
+  - Register: authority 776's file (6,028,925 bytes, owner's OK), 6,632 rows,
+    all FHIS; 4,958 storefronts -> 185 flats, 5 childminders, 55 without a
+    point, 5 outside Glasgow City -> **4,708** (food service 3,438, food shops
+    1,270). 2 trading-as names. Canteens by name at least 1.7% of
+    Restaurant/Cafe/Canteen, not separated (London's precedent).
+  - Rail: the Subway's two OSM relations, drawn once from the Outer Circle
+    (11.2 km) in #F86000 (SPT's orange, the nearest feasible colour, 65.3 from
+    every pin). **15 stations, gate 3 exact.** The brief's "Govan missing" was
+    wrong: Govan is the loop's start and end, a `stop_entry_only` and a
+    `stop_exit_only` member, and a count of `stop` roles gives 14. No station
+    was added by hand. "St Georges Cross" shown as "St George's Cross".
+  - Boundary: OSM relation 1906767, 176.3 km² in UTM 30N.
+  - **1,993 storefronts in the rings (42.3%)**, stated on the page.
+  - Macro label: 56.8 px, measured in the deployed app's frame (Prague 47.3,
+    Tokyo 40.5, London 50.9 reproduced); `check_macro_labels.py` PROBLEMS 0 at
+    the starting offset, above the dot.
+- **Exposure (`check_personal_exposure.py glasgow`)**: no fallback name exists;
+  0 emails or phone numbers. The person-name heuristic's 26.0% of all placed
+  storefronts is trade names on a 50-name sample (Starbucks Coffee, Waxy
+  O'Connors). The 26 "person then bracket" names are contract caterers and
+  canteens ("Sodexo Ltd (Diageo Canteen)"), except one childminder, which the
+  childminder rule removes. The flat rule is the structural guard, and this
+  check cannot see it.
+- **Verified**: `brief_check.py glasgow` 4/4; `drift_check.py glasgow` and
+  `london`, zero drift against 57c9355; `check_provenance.py` names Glasgow
+  OK once committed; `check_scope_disclosure.py`,
+  `check_inconsistency_list.py` and `check_master_list_counts.py` OK; the map
+  rendered in a browser, one line labelled "Subway", the legend "Glasgow
+  Subway", the OSM credit visible. `line_colour_search.py` no longer crashes
+  on a one-line city.
+- Files: `pipeline/fsa.py`, `pipeline/glasgow/`, `pipeline/london/step2_clean_businesses.py`,
+  `app/pages/59_Glasgow_Heatmap.py`, `app/components.py` (notice 61, 58
+  amended), `app/pages/57_London_Heatmap.py`, `app/cities.py`,
+  `docs/data_sources.md`, `docs/data_sources/united-kingdom.md`,
+  `docs/excluded_categories.md`, `docs/map_inconsistencies.md`,
+  `docs/city_master_list.md`, `docs/build_briefs/glasgow.md`.
 ### 2026-09-28 - Melbourne and Sydney briefs written: both licences read (CC BY 4.0, permitted with conditions), stations and ring coverage measured
 
 - **Licence reads (`licence-read`, one per source), both PERMITTED WITH

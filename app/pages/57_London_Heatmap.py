@@ -53,7 +53,8 @@ listed until the borough removes it. Most premises sit at the register's own
 map point. Where it gives none, a business with a full postcode is placed at
 the centre of its postcode, usually within a few dozen metres of its door.
 About one food storefront in twenty has neither and is not shown, mostly in
-outer boroughs. A business run from a private address is never placed. Names are
+outer boroughs. A business run from a private address, or registered at a flat,
+is never placed. Names are
 shown as registered; where a business is registered "trading as" another name,
 the name on the shop is shown.
 

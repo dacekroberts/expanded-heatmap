@@ -1919,6 +1919,42 @@ lands).
   points; the credit says so.
 - Wording approved by the owner 2026-09-28.
 
+**61. Food Standards Scotland (Glasgow) — required, and DISPLAYED** (written into
+`render_site_notices()`; displayed once Glasgow lands; 60 is Buenos Aires's, on
+its own branch - recheck both at merge).
+
+- **PERMITTED WITH CONDITIONS** (`licence-read` 2026-09-28; the Glasgow rows in
+  [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md)). Glasgow
+  City Council runs Scotland's **Food Hygiene Information Scheme** (FHIS), not
+  England's FHRS. The FSA's terms put the whole open-data file, FHIS records
+  included, under the **Open Government Licence**, and Food Standards Scotland
+  publishes the same council's data itself under "Open Government Licence
+  (v3)". The OGL statement with a link to the licence; the date the information
+  was updated (the file's extract date, 2026-09-14). No result ("Pass",
+  "Improvement Required"), logo or imagery is shown.
+- **Credit wording (owner, 2026-09-28)**: "Food Standards Scotland, Food Hygiene
+  Information Scheme data, via the Food Standards Agency" - FSS runs the scheme
+  and licenses its own copy, the FSA distributes the file this project reads.
+  **Never "FHRS"** for Scotland: it is a different scheme, and the FSA's terms
+  bar "the FHRS name" outside its imagery.
+- **Personal data (owner, 2026-09-28)**: FSS's FHIS privacy notice counts the
+  operator's name and address as personal information, and the OGL does not
+  license it. Glasgow City lists home bakers and cooks as cafés at their flat,
+  with a point, so two rules were added to London's (`pipeline/fsa.py`): a
+  storefront at a "Flat" address is never placed (185), nor one named as a
+  childminder (5). London's map applies the flat rule too (the Food Standards
+  Agency's notice 58, amended).
+- **MUST NOT**: imply official status or endorsement by FSS or the FSA (OGL);
+  use either body's logo; display a result.
+- Wording approved by the owner 2026-09-28.
+- **MUST DO:** `check_personal_exposure.py glasgow`, run 2026-09-28: no
+  fallback name exists, 0 contact details; the verdict is in `DECISIONS.md`.
+- **Glasgow's rail is OpenStreetMap data** (ODbL, notice 1).
+
+**58 (Food Standards Agency, London) amended the same day (owner, 2026-09-28)**: its "Modified by this project"
+adds "premises at a flat address left out" - London's map applies the flat rule
+(98 storefronts).
+
 **20 amended in the same change.** Its text now reads "Metro de Madrid and Metro
 Ligero", and its "datos explotados" disclosure adds "of Metro Ligero only line ML1
 drawn": ML1 comes from CRTM's `M10_Red` (same licence, same 5 June 2026 edit date).

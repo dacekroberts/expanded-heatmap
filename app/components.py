@@ -1347,8 +1347,9 @@ _NOTICES = [
      "data, extracted between 2026-09-09 and 2026-09-16. Contains public sector information "
      "licensed under the [Open Government Licence v3.0]"
      "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
-     "this project: storefront types selected, premises without a location placed at their "
-     "postcode's centre, or left out where they have no full postcode, and trade "
+     "this project: storefront types selected, premises at a flat address left out, premises "
+     "without a location placed at their postcode's centre, or left out where they have no "
+     "full postcode, and trade "
      "names shown where a business is registered under another name. No hygiene rating is "
      "shown. The Food Standards Agency does not endorse this map.",
      False),
@@ -1383,6 +1384,20 @@ _NOTICES = [
      "storefronts, grouped into three categories, and placed at the centre of each parcel, or "
      "of its block where the parcel is not listed; station names follow OpenStreetMap's "
      "spelling. The Gobierno de la Ciudad de Buenos Aires does not endorse this map.",
+     False),
+    # Glasgow (notice 61): Scotland's FHIS data, run by Food Standards Scotland and
+    # published in the FSA's open-data files, under OGL v3 (FSS states v3 itself) - the
+    # OGL statement linked, the extract date, what was modified, no endorsement by either
+    # body. Never "FHRS": FHIS is a separate scheme. Wording approved by the owner 2026-09-28.
+    ("Food Standards Scotland (Glasgow)",
+     "Glasgow's food businesses are from Food Standards Scotland, Food Hygiene Information "
+     "Scheme data, via the Food Standards Agency, extracted on 2026-09-14. Contains public "
+     "sector information licensed under the [Open Government Licence v3.0]"
+     "(https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/). Modified by "
+     "this project: storefront types selected; premises without a location, at a flat address "
+     "or registered as a childminder left out; trade names shown where a business is "
+     "registered under another name. No inspection result is shown. Neither Food Standards "
+     "Scotland nor the Food Standards Agency endorses this map.",
      False),
 ]
 

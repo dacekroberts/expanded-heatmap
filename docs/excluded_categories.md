@@ -2020,10 +2020,13 @@ event kitchens sit; mobile caterers (2,595); hospitals, childcare and care homes
 (972); manufacturers and packers (1,136); distributors and transporters (669);
 importers and exporters (278); farmers and growers (33).
 
-**Placed at their postcode's centre** - 2,349 food storefronts the register
+**Not placed: flats** - 99 food storefronts registered at a flat address,
+where home businesses register (the flat rule, owner 2026-09-28).
+
+**Placed at their postcode's centre** - 2,344 food storefronts the register
 gives no location but a full postcode (Ordnance Survey's postcode data).
 
-**Not placed** - 3,001 food storefronts (5.0%) with neither a location nor a
+**Not placed** - 3,000 food storefronts (5.0%) with neither a location nor a
 full postcode, most in outer boroughs (23% of Redbridge's, 18% of Havering's).
 A business run from a private address is published without a location or a
 full postcode and is never placed.
@@ -2074,6 +2077,43 @@ street address.
 - Not drawn: the Premetro (18 stops in the south-west; it would add about 750
   storefronts, 1.2%, in Villa Lugano, Villa Soldati and Villa Riachuelo), the
   heritage tramway, and the commuter railways.
+
+### Glasgow - the food hygiene register, food only
+
+**Only food is on this map.** Glasgow City Council's entries in Scotland's Food
+Hygiene Information Scheme list the premises the council inspects for food
+hygiene; no open register of other shops or of personal services covers
+Glasgow, so clothes shops, hairdressers and the like are missing rather than
+excluded. Food shops (grocers, off-licences, bakers, butchers, newsagents
+selling food, supermarkets) are a category of their own.
+
+**Excluded by type** - mobile caterers (425); other catering premises (348),
+where home caterers and event kitchens sit; hospitals, childcare and care homes
+(342); schools, colleges and universities (202); manufacturers and packers
+(139); hotels and guest houses (110); distributors and transporters (84);
+importers and exporters (23); farmers and growers (1).
+
+**Not placed: flats and childminders** - 185 food storefronts registered at a
+flat, mostly home bakers and cooks listed as cafés (the flat rule, owner
+2026-09-28), and 5 childminders listed as cafés, three under the childminder's
+own name (the childminder rule, the same day).
+
+**Not placed** - 55 food storefronts (1.2%) the register gives no location. 22
+have a full postcode; they are not placed at its centre, which would add about
+one storefront in two hundred at the cost of a second data source.
+
+**Shown under its trade name** - 2 businesses registered "trading as" another
+name show the name on the shop.
+
+**Left off because they are outside the city** - 5 whose location lies outside
+Glasgow City.
+
+**Not measured: canteens.** Workplace canteens registered as restaurants or
+cafés are shown; at least 1.7% of that type read as one by name.
+
+**Stations.** The Glasgow Subway's 15 stations, all inside Glasgow City.
+- Suburban and national rail (the Argyle and North Clyde lines and the rest) is
+  not drawn.
 
 ## Kept, and why
 

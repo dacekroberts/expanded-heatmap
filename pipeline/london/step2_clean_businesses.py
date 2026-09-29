@@ -3,21 +3,22 @@ placed inside Greater London.
 
     python pipeline/london/step2_clean_businesses.py
 
-Reads the cache only (pipeline/london/fetch_sources.py downloads). What a
-reader should know before trusting the counts printed below:
+Reads the cache only (pipeline/london/fetch_sources.py downloads). The FSA
+reader and its rules are shared (pipeline/fsa.py). What a reader should know
+before trusting the counts printed below:
 
-  * only the fields in READ are ever read - never the rating, scores, phone
-    or the authority's contact details; the page shows no rating (the FSA's
-    conditions attach to a displayed rating);
-  * a premises is placed at the FSA's OWN point or not at all (owner,
-    2026-09-28: placement of the rest is decided later). A private-address
-    record carries no point and only an outward postcode, so it is never
-    placed - the owner's rule that a person's name is never shown at what
-    looks like their home;
+  * only pipeline/fsa.py's READ fields are ever read - never the rating,
+    scores, phone or the authority's contact details; the page shows no
+    rating (the FSA's conditions attach to a displayed rating);
+  * a storefront at a "Flat" address is never placed (the flat rule, owner
+    2026-09-28, found on Glasgow's file: home bakers listed as restaurants);
+  * a premises is placed at the FSA's OWN point, else its full postcode's
+    centroid (owner, 2026-09-28). A private-address record carries no point
+    and only an outward postcode, so it is never placed - the owner's rule
+    that a person's name is never shown at what looks like their home;
   * a business type the taxonomy does not know stops the step.
 """
 import sys
-import xml.etree.ElementTree as ET
 from pathlib import Path
 
 import geopandas as gpd
@@ -25,37 +26,18 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
+from pipeline import fsa  # noqa: E402
 from pipeline.london import config  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # noqa: E402
 
 TAX = load_taxonomy_module(config.TAXONOMY_SYSTEM)
-READ = ("FHRSID", "BusinessName", "BusinessType", "PostCode", "LocalAuthorityName")
-# "T/A", "t/a", "Also T/A", "(Trading as ...)", "trading as" - a whole word, so
-# "Ta Va" (a restaurant) is untouched.
-TRADING_AS = r"(?i)\s*\(?\b(?:also\s+)?(?:t/a|trading\s+as)\b\s*"
-FULL_POSTCODE = r"^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$"
-OUTWARD_POSTCODE = r"^[A-Z]{1,2}\d[A-Z\d]?$"
 
 
 def codepoint():
-    """Greater London's postcode centroids from OS Code-Point Open, WGS84,
-    indexed by postcode without spaces. Only units whose district is a London
-    borough (E09) - the same 33 authorities as the FSA's region."""
-    import io
-    import zipfile
-    from pyproj import Transformer
-    if not config.CODEPOINT_ZIP.exists():
-        sys.exit(f"missing {config.CODEPOINT_ZIP.name}: run python pipeline/london/fetch_sources.py")
-    cols = ["pc", "pq", "e", "n", "cy", "rh", "lh", "cc", "dc", "wc"]
-    z = zipfile.ZipFile(config.CODEPOINT_ZIP)
-    parts = [pd.read_csv(io.BytesIO(z.read(n)), header=None, names=cols, dtype=str)
-             for n in z.namelist() if n.startswith("Data/CSV/") and n.endswith(".csv")]
-    cp = pd.concat(parts)
-    cp = cp[cp["dc"].fillna("").str.startswith("E09")]
-    t = Transformer.from_crs(config.CODEPOINT_CRS, config.CRS_GEOGRAPHIC, always_xy=True)
-    lon, lat = t.transform(cp["e"].astype(float).to_numpy(), cp["n"].astype(float).to_numpy())
-    cp = cp.assign(latitude=lat, longitude=lon, key=cp["pc"].str.replace(r"\s+", "", regex=True))
-    return cp.drop_duplicates("key").set_index("key")
+    """Greater London's postcode centroids: only units whose district is a
+    London borough (E09) - the same 33 authorities as the FSA's region."""
+    return fsa.codepoint(config.CODEPOINT_ZIP, "E09", config.CODEPOINT_CRS,
+                         config.CRS_GEOGRAPHIC, "python pipeline/london/fetch_sources.py")
 
 
 def load():
@@ -63,14 +45,7 @@ def load():
     if len(files) != config.FSA_AUTHORITY_COUNT:
         sys.exit(f"{len(files)} authority files in {config.FSA_RAW_DIR}, expected "
                  f"{config.FSA_AUTHORITY_COUNT}: run python pipeline/london/fetch_sources.py")
-    rows = []
-    for f in files:
-        for e in ET.parse(f).getroot().iter("EstablishmentDetail"):
-            r = {k: (e.findtext(k) or "").strip() for k in READ}
-            r["longitude"] = e.findtext("Geocode/Longitude") or ""
-            r["latitude"] = e.findtext("Geocode/Latitude") or ""
-            rows.append(r)
-    return pd.DataFrame(rows)
+    return fsa.load(files)
 
 
 def main():
@@ -86,6 +61,7 @@ def main():
     df = filter_to_storefront(df, config.TAXONOMY_SYSTEM)
     print(f"  {len(df):,} storefront rows after filter_to_storefront()")
     print("    " + ", ".join(f"{t} {n:,}" for t, n in df["BusinessType"].value_counts().items()))
+    df = fsa.drop_home_premises(df)
 
     lat = pd.to_numeric(df["latitude"], errors="coerce")
     lon = pd.to_numeric(df["longitude"], errors="coerce")
@@ -97,14 +73,14 @@ def main():
     # postcode only. A private address has no postcode or an outward code
     # ("E1") and is never placed (owner, 2026-09-28).
     pc = df["PostCode"].str.upper().str.strip()
-    full = pc.str.match(FULL_POSTCODE)
+    full = pc.str.match(fsa.FULL_POSTCODE)
     cp = codepoint()
     key = pc.str.replace(r"\s+", "", regex=True)
     joinable = no_point & full & key.isin(cp.index)
     ll = cp.loc[key[joinable], ["latitude", "longitude"]].to_numpy()
     df.loc[joinable, ["latitude", "longitude"]] = ll
     df.loc[joinable, "placement"] = "postcode_centroid"
-    outward = no_point & pc.str.match(OUTWARD_POSTCODE)
+    outward = no_point & pc.str.match(fsa.OUTWARD_POSTCODE)
     print(f"    placed at their postcode's centroid: {int(joinable.sum()):,}")
     print(f"    full postcode not in Code-Point (left unplaced): {int((no_point & full & ~joinable).sum()):,}")
     print(f"    outward code only - a private address, never placed: {int(outward.sum()):,}")
@@ -128,15 +104,7 @@ def main():
     print(f"  {int((~inside).sum()):,} outside Greater London, dropped")
     df = df[inside]
 
-    # The name on the shop: "Skinner Stores T/A Londis" and "Lydia Oduro
-    # Enterprise Trading as LO" show what follows the trading-as marker - the
-    # trade name, which is also what keeps a sole trader's own name off the map
-    # where they registered both (the owner's rule, 2026-09-28).
-    tas = df["BusinessName"].str.split(TRADING_AS, n=1, regex=True)
-    has = tas.str.len() == 2
-    shown = tas.str[-1].str.strip().str.strip("()").str.strip()
-    df = df.assign(BusinessName=df["BusinessName"].where(~has | (shown == ""), shown))
-    print(f"  {int(has.sum()):,} names carry a trading-as marker; the trade name after it is shown")
+    df = fsa.trade_names(df)
 
     out = df.rename(columns={"FHRSID": "fhrsid", "BusinessName": "business_name",
                              "LocalAuthorityName": "authority"})[
