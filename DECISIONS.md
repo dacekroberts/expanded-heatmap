@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**187 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**188 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Yes to trams-only maps (owner), with the macro map re-planned: minor cities labelled only in their own region, dots coloured by network type, completeness by fill](#2026-09-29---yes-to-trams-only-maps-owner-with-the-macro-map-re-planned-minor-cities-labelled-only-in-their-own-region-dots-coloured-by-network-type-completeness-by-fill)
 - [Tram audit Phases 3-4: rings measured, no thinning and rings sized per city (owner), the decision memo published](#2026-09-29---tram-audit-phases-3-4-rings-measured-no-thinning-and-rings-sized-per-city-owner-the-decision-memo-published)
 - [Review batch assembled ahead of review time: exclusions, Stockholm and Bucharest on one local branch; the push waits for a reboot (owner)](#2026-09-29---review-batch-assembled-ahead-of-review-time-exclusions-stockholm-and-bucharest-on-one-local-branch-the-push-waits-for-a-reboot-owner)
 - [Goyang, Seongnam and Yongin built on SEMAS's register, one page each (owner); a Seoul Capital Area macro-map region (owner)](#2026-09-29---goyang-seongnam-and-yongin-built-on-semass-register-one-page-each-owner-a-seoul-capital-area-macro-map-region-owner)
@@ -226,6 +227,58 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Yes to trams-only maps (owner), with the macro map re-planned: minor cities labelled only in their own region, dots coloured by network type, completeness by fill
+
+- **The owner's final call on the tram list: yes**, after the audit and its
+  memo ("The Tram Question"). It ends the 2026-09-29 framing of a
+  preliminary yes for scoping only. The tram list's 34 T1 cities can now be
+  briefed and built; T2 still needs each gap's verdict. The memo's ring rule
+  (French tram cities on France's 0.3 mi rings, others at 0.6, down to 0.3
+  where 0.6 passes about 95%) and build order (France, Czechia, Odense and
+  Latvia, the US three and Florence) were not separately answered and stay
+  recommendations; the owner's own calls stand: no thinning, rings sized per
+  city as needed.
+- **Label tiers on the macro map (owner).** France's and Czechia's tram
+  cities, and the Seoul Capital Area's satellites (Incheon, Goyang,
+  Seongnam, Yongin; not Seoul), show no name pill in the parent views: a dot
+  with the hover tooltip only. Their own regional view labels every city.
+  Planned as a per-city tier (minor or anchor), with Europe and East Asia
+  becoming composites of their sub-regions, as "United States" is of West and
+  East, so the Europe view labels Paris, Marseille, Toulouse, Lille, Rennes
+  and Prague but not Nice or Brno, East Asia gets Seoul's label back (today
+  it labels none of the five), and Global labels only anchors. Every dot
+  stays drawn. **Seoul is the pilot** (its cities exist); France and Czechia
+  follow their first builds. **Risks named to the owner**: at 375 px a
+  country-zoom France view puts 1 px at about 3 km against 60-100 px labels,
+  so the dense north (Lille and Valenciennes 45 km apart) may not fit without
+  per-city offsets, a closer zoom or a split, to be measured with
+  `check_macro_labels.py` on placeholder entries first; phones have no
+  hover, so a tap on a minor dot goes straight to its page (the regional
+  view and the list below the map cover it); and minor cities lose the
+  clickable pill outside their own view.
+- **Dot colour now means network type, not completeness (owner).** Teal stays
+  metro, with a new hue each for light rail and tram. It supersedes the
+  2026-09-28 completeness colours (Full teal, Narrowed #9333EA, One bucket
+  #C2410C). The alternative, a six-colour legend of network × completeness,
+  was rejected: two variables in one channel at a 10 px dot, and a
+  colour-blind reader loses one. **Completeness moves to the fill**: a solid
+  dot for full data, a ring in the network colour with a pale centre (the
+  label pill's surface colour, so the whole dot stays clickable and reads on
+  both basemaps) for narrowed, about a 2 px stroke; **a half-filled circle
+  for one category only** (owner), built when the first one-category city
+  ships, since none exists today. The owner's slash-through-a-ring idea was
+  set aside on the owner's agreement: it reads as "none" and cannot be drawn
+  at about 6 px. The legend becomes two short keys. The new hues are
+  re-validated with `validate_palette.js`.
+- **A city's colour is its highest-order drawn mode**: metro if any metro is
+  drawn (Amsterdam, Oslo, Hong Kong), else light rail (San Diego, Calgary,
+  Edmonton), else tram (Riga). **Dublin is tram-coloured**: the Luas measured
+  5.7% grade-separated and 94.3% mapped as tram over 85.4 km (OSM,
+  2026-09-29; Santa Cruz–La Laguna's profile), and the DART is suburban rail,
+  drawn as an extra the way Copenhagen's S-tog is, never a metro. The mode is
+  a new `cities.py` field backed by a check. All of this is an `app/` change:
+  review time, a `map-chrome` deploy-verify, a reboot (PLAN).
 
 ### 2026-09-29 - Tram audit Phases 3-4: rings measured, no thinning and rings sized per city (owner), the decision memo published
 

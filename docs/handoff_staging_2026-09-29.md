@@ -51,9 +51,9 @@ item is done.**
 
 ## Priority 1 - the tram question: Phases 3-4 on the tram list (41 cities)
 
-**The owner's framing (2026-09-29): a preliminary yes, for scoping and
-filtering the list only.** The owner makes the final call on trams-only maps
-after the audit; nothing on the tram list is built before it.
+**DECIDED 2026-09-29: yes to trams-only maps (owner)**, with the macro-map
+changes alongside (label tiers with Seoul as the pilot; dots coloured by network
+type, completeness by fill; PLAN, under the completeness tiers).
 
 **Done 2026-09-29 (commit 350ce29; DECISIONS "Band T audited")**:
 - **Phase 1, "is it really trams-only?"**: a three-part light-rail test
@@ -81,8 +81,7 @@ after the audit; nothing on the tram list is built before it.
    DECISIONS "Tram audit Phases 3-4"). Owner calls made: no thinning, ring
    size reduced per city as needed.
 
-**PARKED for the owner (the owner was away; nothing guessed):**
-- **Trams-only maps: yes or no** (recommended yes, T1 first).
+**Still open with the owner** (the yes itself is decided):
 - **The ring rule**: French tram cities on France's 0.3 mi rings; others at
   0.6, down to 0.3 where 0.6 passes about 95%.
 - **Build order**: France, Czechia, Odense and Latvia, the US three and
@@ -91,8 +90,6 @@ after the audit; nothing on the tram list is built before it.
   whether to tell the City its 2024 layer exposes reported revenue
   (DECISIONS "Atlanta's 2024 licence layer").
 - **A date check on the published cities** (offered; Milan and Dublin first).
-- **Push to master**: the commits after 49e6e24's successor ba4534c are on
-  `worktree-staging` only (unattended rule); run the push ritual when back.
 
 **Stale in the handoff above, corrected**: the tram rescopes are NOT the only
 precedents for drawing trams (Riga, Amsterdam, Rotterdam, Oslo, Dublin's Luas).

@@ -12,12 +12,11 @@ screening, or passes with a bucket gap (T2). A city blocked on access first
 stays in D or R (Tallinn); a city whose rail passes the light-rail test below
 belongs in the master list's bands, not here.
 
-**The owner's framing (2026-09-29): a preliminary yes, for scoping and
-filtering this list only.** Nothing is built, and no city leaves for Band A or
-B, until the owner's final call on trams-only maps. **Riga** (built
-2026-09-24 on seven tram routes, stops thinned by a 0.5-mile spacing filter)
-is the live precedent; Amsterdam (16 tram lines beside the metro), Rotterdam,
-Oslo and Dublin (Luas) also draw trams.
+**The owner's final call (2026-09-29): yes to trams-only maps**, after
+the audit and its memo ("The Tram Question"). T1 can be briefed and
+built; T2 still needs each gap's verdict. Rings are sized per city and no
+stops are thinned (owner); the macro map gets label tiers and
+network-type colours (DECISIONS "Yes to trams-only maps").
 
 | Tier | What these cities ARE | Cities |
 |---|---|---|
