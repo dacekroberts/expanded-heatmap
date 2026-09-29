@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**183 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**184 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
 - [Review batch assembled ahead of review time: exclusions, Stockholm and Bucharest on one local branch; the push waits for a reboot (owner)](#2026-09-29---review-batch-assembled-ahead-of-review-time-exclusions-stockholm-and-bucharest-on-one-local-branch-the-push-waits-for-a-reboot-owner)
+- [Atlanta's 2024 licence layer is not a publication to build on: it carries per-business revenue, likely confidential under Georgia law, and no licence; Atlanta stays discarded pending the owner](#2026-09-29---atlantas-2024-licence-layer-is-not-a-publication-to-build-on-it-carries-per-business-revenue-likely-confidential-under-georgia-law-and-no-licence-atlanta-stays-discarded-pending-the-owner)
 - [The currency rule rewritten as one clock: the source must drop closures, its as-of date under five years (owner); Atlanta's 2024 layer found](#2026-09-29---the-currency-rule-rewritten-as-one-clock-the-source-must-drop-closures-its-as-of-date-under-five-years-owner-atlantas-2024-layer-found)
 - [Santa Cruz–La Laguna back from the discards to T2, food only on the Cabildo's current register (owner)](#2026-09-29---santa-cruzla-laguna-back-from-the-discards-to-t2-food-only-on-the-cabildos-current-register-owner)
 - [A currency rule by kind of source: census five years, register 18 months, event streams need a closure (owner)](#2026-09-29---a-currency-rule-by-kind-of-source-census-five-years-register-18-months-event-streams-need-a-closure-owner)
@@ -250,6 +251,40 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   200-202 in this batch, and a deployed app that is not rebooted keeps its
   imported `components.py`, whose page constants would then name files that
   no longer exist.
+### 2026-09-29 - Atlanta's 2024 licence layer is not a publication to build on: it carries per-business revenue, likely confidential under Georgia law, and no licence; Atlanta stays discarded pending the owner
+
+- **The licence read (`licence-read` agent) found no grant and a likely
+  unintended exposure.** `BusinessLicenses_2024_Revenue` (item 1d0c61a4…)
+  declares nothing: `licenseInfo`, `accessInformation`, `copyrightText`,
+  `useLimit` and the item description are all blank; its service description
+  reads "Business Licenses for 2024. Source: Office of Revenue". It is shared
+  to Everyone but sits in no group and is **not in the city's open-data hub**
+  (group b3b5baff…, 57 items, none on businesses; the hub's DCAT-US feed
+  lists 59 datasets, none business-related). No City open-data policy was
+  found. Esri's help page says public sharing grants use "subject to any use
+  constraints", but the binding Master Agreement (E204CW §2.4(c)) only
+  describes redistribution "through Online Services", which a static map on
+  this site is not.
+- **The layer carries `PREVIOUS_YEAR_REPORTED_REVENUE` (on 19,264 of 19,297
+  rows) and an employee count.** O.C.G.A. § 48-13-15(a) makes gross-receipts
+  information given to a local government for occupation tax confidential,
+  its disclosure a misdemeanour under (b), with no public-release exception
+  in (c). A layer that appears to breach that statute reads as an accident,
+  not a publication, and the City could withdraw it at any time. **Rejected:
+  building on it with the revenue columns dropped**, because it still rests on
+  that exposure and on no licence. Revenue and employee figures are never
+  published from any source. The agent printed five sample revenue values to
+  its own stdout while describing fields and saved none; this session's
+  scripts read only counts, licence years, NAICS, geocode quality and points.
+- **Atlanta stays in the discards; its row's ground is now terms, not
+  currency** (the owner to confirm). The same account's 2019–2023 yearly
+  layers carry the same revenue fields; the 2019–22 `GBL_WFL1` layer is
+  unread for fields and licence. Untested routes: the Atlanta Regional
+  Commission's portal, which lists City licence extracts (each needs its own
+  read), or asking the City, the last resort. Whether to tell the City its
+  revenue figures are publicly exposed is the owner's decision; the contacts
+  the agent saw (not tested) are `gis-team@atlantaga.gov` and the hub's
+  named contact.
 
 ### 2026-09-29 - The currency rule rewritten as one clock: the source must drop closures, its as-of date under five years (owner); Atlanta's 2024 layer found
 
