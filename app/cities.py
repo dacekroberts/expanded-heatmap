@@ -1070,7 +1070,10 @@ CITIES = [
         # Up and right since Buenos Aires joined the region (2026-09-28): the
         # wider view put the above-dot pill under the zoom buttons at 375 px,
         # and right or below met Recife. Scored PROBLEMS 0 at 375, 768, 1200.
-        "label_offset": ("start", 12, -10),
+        # Left of its dot (deploy-verify, review time 2026-09-28): right of it,
+        # the South America view's right edge cut the name by 35% at 375 px once
+        # Buenos Aires widened the view. Left of it: PROBLEMS 0 and nothing clipped.
+        "label_offset": ("end", -12, -10),
     },
     {
         "name": "Porto Alegre (Regional)",
@@ -1596,7 +1599,10 @@ CITIES = [
         # and check_macro_labels.py passes every region at 375, 768 and 1200
         # with PROBLEMS 0. Nothing else is near it on the Europe view.
         # Beside its dot, not above: see Newcastle (Regional)'s note.
-        "label_offset": ("end", -10, -8),
+        # Right of its dot after all (deploy-verify, review time 2026-09-28): left
+        # of it, the Europe view's left edge cut the name to "sgow" at 375 px
+        # (41% clipped). Right of it: PROBLEMS 0 and nothing clipped.
+        "label_offset": ("start", 12, -4),
     },
     {
         "name": "Newcastle (Regional)",

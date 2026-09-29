@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**160 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**161 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Second review-time batch published: Buenos Aires, Glasgow, Newcastle, Sydney, Melbourne; London's flat rule; Monterrey's wording (owner called it)](#2026-09-28---second-review-time-batch-published-buenos-aires-glasgow-newcastle-sydney-melbourne-londons-flat-rule-monterreys-wording-owner-called-it)
 - [Melbourne built on the City of Melbourne's land-use census, by Metro Trains line group; 9539 excluded in Melbourne and Sydney (owner)](#2026-09-28---melbourne-built-on-the-city-of-melbournes-land-use-census-by-metro-trains-line-group-9539-excluded-in-melbourne-and-sydney-owner)
 - [Bucharest's names: the company name without its legal form, sole traders by category (owner); Bucharest builds after Incheon (owner)](#2026-09-28---bucharests-names-the-company-name-without-its-legal-form-sole-traders-by-category-owner-bucharest-builds-after-incheon-owner)
 - [Bucharest to be built with its unplaced share disclosed; canteens and pastry labs left out (owner)](#2026-09-28---bucharest-to-be-built-with-its-unplaced-share-disclosed-canteens-and-pastry-labs-left-out-owner)
@@ -196,6 +197,55 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Second review-time batch published: Buenos Aires, Glasgow, Newcastle, Sydney, Melbourne; London's flat rule; Monterrey's wording (owner called it)
+
+- **Merged into `worktree-cleanup` in land order:** Buenos Aires (77da039),
+  Glasgow (46163e3), Newcastle (4b45cda), Sydney (bdaa8b8), then Melbourne
+  (5a2e8d8, stacked on Sydney), plus master's latest.
+  - Each city's data-bound gate steps passed in its build session: zero
+    drift, the personal-exposure verdict in DECISIONS, and `brief_check`.
+  - Notices 60 to 65, pages 58 to 62.
+  - The master list re-applied each city's move to Built on master's bands:
+    62 built across 21 countries, 80 candidates, Band B 4.
+    `check_master_list_counts.py` agrees.
+  - The United Kingdom row of the data-sources index now names all three UK
+    cities.
+- **Changed with the batch:**
+  - London's flat rule (owner): 56,590 to 56,492 processed rows, 56,491
+    storefronts.
+  - Sydney's ANZSIC 9539 exclusion (owner): 7,328 to 7,074 storefronts.
+  - The new Oceania region.
+- **Merge fixes:**
+  - **Glasgow and Newcastle** were each scored without the other, and
+    Newcastle's label covered Glasgow's marker at 1200 px. The owner chose
+    Newcastle lifted 48 px, after a search of 48 offset pairs.
+    `deploy-verify` then found Glasgow's name, placed left of its dot, cut
+    to "sgow" at the Europe view's left edge at 375 px. It was moved right
+    of its dot: PROBLEMS 0, nothing clipped.
+  - **Fortaleza's label** (moved right by the Buenos Aires branch) was cut
+    35% at the South America view's right edge at 375 px. It was moved left
+    of its dot: PROBLEMS 0, nothing clipped.
+  - **Page 91's station table** widened the page to 518 px at 375. It was
+    moved to `components.scroll_table`. Measured afterwards: document 375
+    px, the table 440 px in a 343 px box, 62 rows.
+  - **A notice 58 citation** that a line break split was rewrapped, so
+    `check_provenance.py` can read it.
+- **London's shared processed data.** Cleanup first re-ran London's step 2
+  well before the push, which broke `check_macro_facts.py` in every other
+  session's hook (Staging caught it). Master's file was restored by running
+  master's own step 2 from a temporary detached checkout. The flat-rule
+  version was re-run only immediately before the push. The handoff now says
+  so.
+- **Gate:**
+  - `check_all.py` 24/24, `check_deploy_imports.py` clean, and
+    `check_macro_labels.py` PROBLEMS 0 across 11 regions × 3 widths.
+  - `deploy-verify` ran `scope: city-added` for the five cities, plus London,
+    Sydney's re-render, the labels, pages 91 and 92, and Monterrey. The only
+    changed outputs were those six cities'.
+  - Every item passed except the two label clips and page 91 (outside the
+    scope), all fixed above. The label fixes were re-scored by the check,
+    and page 91 was re-measured in the lean venv.
 
 ### 2026-09-28 - Melbourne built on the City of Melbourne's land-use census, by Metro Trains line group; 9539 excluded in Melbourne and Sydney (owner)
 

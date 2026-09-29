@@ -44,6 +44,7 @@ from components import (  # noqa: E402
     OVERVIEW_PAGE,
     SITE_NAME,
     render_site_notices,
+    scroll_table,
     set_base_font,
 )
 from station_scope import scope_rows  # noqa: E402
@@ -103,14 +104,16 @@ argued about.
 
 @st.cache_data(show_spinner=False)
 def station_table():
-    """The markdown table, and the three totals the paragraph above it uses."""
+    """The table's header and rows, and the totals the paragraph above it uses."""
     rows = scope_rows(ROOT, CITIES)
     outside = sum(r["counts"][0] for r in rows if r["counts"])
     thinned = sum(r["counts"][1] for r in rows if r["counts"])
     other = sum(r["counts"][2] for r in rows if r["counts"])
     closed = sum(r["counts"][3] for r in rows if r["counts"])
 
-    # A MARKDOWN TABLE, NOT st.dataframe. The grid widget renders collapsed
+    # components.scroll_table since 2026-09-28: as a markdown table it widened
+    # this page to 518 px at 375 (deploy-verify, review time). And NOT
+    # st.dataframe: the grid widget renders collapsed
     # here - 52 px wide with no canvas at all, measured 2026-09-23 in the lean
     # venv - and even working it would be the only interactive element on a
     # page that is otherwise a document: no sorting worth doing on 22 rows, and
@@ -123,21 +126,19 @@ def station_table():
     if closed:
         columns.append(("Closed for works", 3))
     header = ["City", "Network mapped"] + [c for c, _ in columns]
-    lines = ["| " + " | ".join(header) + " |",
-             "|" + "|".join("---" if i < 2 else "--:"
-                            for i, _ in enumerate(header)) + "|"]
+    body = []
     for row in rows:
         cells = [row["name"], row["network"]]
         if row["counts"] is None:
             cells += ["—"] * len(columns)
         else:
             cells += [f"{row['counts'][i]:,}" for _, i in columns]
-        lines.append("| " + " | ".join(cells) + " |")
-    return "\n".join(lines), outside, thinned, other, closed
+        body.append(cells)
+    return header, body, outside, thinned, other, closed
 
 
 if DOC.exists():
-    table, outside, thinned, other, closed = station_table()
+    header, body, outside, thinned, other, closed = station_table()
     text = DOC.read_text(encoding="utf-8")
     head, marker, tail = text.partition(BUSINESS_HEADING)
     st.markdown(head)
@@ -151,7 +152,7 @@ closer together than the rings, and {closed:,} closed for works. Every one of
 them is named in its city's `excluded_stations.csv`.
 """
     )
-    st.markdown(table)
+    scroll_table(header, body, right=header[2:])
     st.caption(
         "A dash is a city with no excluded-stations file: every station of "
         "its network is on its map."
