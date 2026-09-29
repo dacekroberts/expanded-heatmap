@@ -614,6 +614,12 @@ every key, account and letter:
 
 ## Data quality follow-ups
 
+- [ ] **Gambling is bucketed inconsistently across taxonomies** (owner,
+  2026-09-28, at Buenos Aires' LOTERIA call): Buenos Aires, Brazil and Berlin
+  exclude lottery and betting premises (NAICS 7132, WZ 92), but
+  `dublin_uses` counts BETTING SHOP as Retail. Decide one rule and sweep
+  every taxonomy for it, with a drift measurement per city changed.
+
 - [ ] Los Angeles: ~9% of registry rows have no NAICS code; consider whether
   the caveat needs to be visible on the city page.
 

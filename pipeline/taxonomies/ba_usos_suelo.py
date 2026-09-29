@@ -59,7 +59,6 @@ _FOOD = {
     "HELADERIA",                                    #   779  ice-cream parlour, 722515
     "COMIDA RAPIDA",                                #   462
     "EMPANADAS",                                    #   388  takeaway empanada shops
-    "CONFITERIA",                                   #   379  OWNER CALL: café-tearoom here
     "PARRILLA",                                     #   333
     "ROTISERIA",                                    #   304  hot takeaway meals
     "CERVECERIA",                                   #   244  beer bar
@@ -77,6 +76,10 @@ _RETAIL = {
     "ALMACEN", "FIAMBRERIA Y QUESERIA", "DIETETICA", "GRANJA", "PESCADERIA",
     "VINOS (VENTA)", "BEBIDAS ALCOHOLICAS", "GOLOSINAS", "BOMBONES Y AFINES",
     "FABRICA DE PASTAS",        # fresh-pasta shop, sold over the counter
+    # Neighbourhood confiterias are mostly pastry shops, like the facturas and
+    # cake shops beside them; the classic cafe-tearooms file as CAFÉ (owner
+    # 2026-09-28)
+    "CONFITERIA",
     "MEDIALUNAS/FACTURAS", "TORTAS", "GALLETITAS", "MIEL", "HERBORISTERIA",
     "VENTA DE CAFÉ (PRODUCTOS)", "PASTILLAS PARA DEPORTES",
     "VENTA POR VENTANA",        # window-counter sales, the kiosk format

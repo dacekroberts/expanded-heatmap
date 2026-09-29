@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**122 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**123 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Buenos Aires taxonomy: 385 survey subtypes mapped, five scope calls (owner)](#2026-09-28---buenos-aires-taxonomy-385-survey-subtypes-mapped-five-scope-calls-owner)
 - [Kolkata and Chennai discarded; the large-transit gap's never-screened list is empty (owner)](#2026-09-28---kolkata-and-chennai-discarded-the-large-transit-gaps-never-screened-list-is-empty-owner)
 - [Glasgow to Band B, food only; Bengaluru to Band D (owner)](#2026-09-28---glasgow-to-band-b-food-only-bengaluru-to-band-d-owner)
 - [Six small networks screened: Tashkent, Hanoi and Ho Chi Minh City to Band D; Baku, Panama City and Caracas discarded (owner)](#2026-09-28---six-small-networks-screened-tashkent-hanoi-and-ho-chi-minh-city-to-band-d-baku-panama-city-and-caracas-discarded-owner)
@@ -158,6 +159,40 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Buenos Aires taxonomy: 385 survey subtypes mapped, five scope calls (owner)
+
+- **Mapped every `TIPO2` among Buenos Aires' 87,028 active UNICOMERCIAL
+  survey rows into the three buckets: Retail 46,479, Food service 10,127,
+  Personal services 6,993, excluded 23,429.** `pipeline/taxonomies/ba_usos_suelo.py`
+  enumerates all 385 values (none unmapped, none stale), following the two
+  survey precedents, `dublin_uses` and `barcelona_activitat`, and NAICS where
+  they agree: food shops are retail, repair and vehicle workshops (811) are
+  out, and Dublin's two departures (shoe repair and key cutting, garment
+  alterations) are personal services. The published CSV stores accented
+  vowels as cp437 mojibake (`CAFÉ` is `CAF├ë`), contrary to the brief, which
+  said UTF-8; the module repairs before lookup and keys on the repaired form,
+  and the brief was corrected.
+- **Owner's calls, each on a recommendation:** MULTICOMERCIAL (615 malls and
+  arcades whose shops are not itemised) left out and disclosed, since one pin
+  per mall would weigh a shopping centre like a kiosk; the 6,243 active "SIN
+  IDENTIFICAR" shopfronts dropped and disclosed, since drawing them needs a
+  fourth bucket and Dublin and Barcelona both drop their no-use rows;
+  VETERINARIA (ATENCION) (656) excluded as professional services (541940),
+  with Korea and Brazil against Barcelona; CONFITERIA (379) moved from Food
+  service to Retail, as neighbourhood confiterias are mostly pastry shops
+  beside the facturas and cake shops already in Retail.
+- **LOTERIA (1,106) excluded as gambling (NAICS 7132), following the regional
+  precedent (Brazil excludes lotericas).** The owner asked for the
+  discrepancy to be noted for a later uniformity pass: Berlin agrees (its WZ
+  mapping never reaches division 92), but **Dublin counts BETTING SHOP as
+  Retail**, the one taxonomy that buckets gambling. Added to `PLAN.md`.
+- **The Premetro is left out unless it covers new areas well (owner),
+  pending a measurement:** storefronts inside a Premetro stop's outer ring
+  (0.6 mi) and outside every Subte station's. OSM carries it as four
+  `route=tram` relations, ref P, colour #F38733, network "Subte de Buenos
+  Aires". The count needs the parcel join and waits for the machine's heavy
+  job to end. The Tramway Historico (heritage) is out regardless.
 
 ### 2026-09-28 - Kolkata and Chennai discarded; the large-transit gap's never-screened list is empty (owner)
 
