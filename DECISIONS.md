@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**140 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**141 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
 - [Review-time batch published: Berlin, London, "Why the maps differ", Tokyo's table, the Japanese wording (owner called it)](#2026-09-28---review-time-batch-published-berlin-london-why-the-maps-differ-tokyos-table-the-japanese-wording-owner-called-it)
+- [Request-only cities move to Band R, renamed "restricted or request only"; Kaohsiung, Tallinn and Sendai moved (owner)](#2026-09-28---request-only-cities-move-to-band-r-renamed-restricted-or-request-only-kaohsiung-tallinn-and-sendai-moved-owner)
 - [Bands restructured: N retooled as C, D split into D (owner can act) and R (restricted) (owner)](#2026-09-28---bands-restructured-n-retooled-as-c-d-split-into-d-owner-can-act-and-r-restricted-owner)
 - [London's unplaced storefronts placed at postcode centroids (owner): 2,349 more, notice 58 for Ordnance Survey, the credit in the repository too](#2026-09-28---londons-unplaced-storefronts-placed-at-postcode-centroids-owner-2349-more-notice-58-for-ordnance-survey-the-credit-in-the-repository-too)
 - [Summary-table values for Berlin and London; "Food licences only" renamed "Food premises only" (owner)](#2026-09-28---summary-table-values-for-berlin-and-london-food-licences-only-renamed-food-premises-only-owner)
@@ -226,6 +227,22 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - **Next:** the owner reboots (the batch changes `app/cities.py`,
   `app/components.py` and `app/station_scope.py`), then the live site is
   checked, including one city nobody touched.
+### 2026-09-28 - Request-only cities move to Band R, renamed "restricted or request only"; Kaohsiung, Tallinn and Sendai moved (owner)
+
+- **Moved Kaohsiung, Tallinn and Sendai from D to R, and renamed R
+  "restricted or request only" (owner's call).** Each waits on an
+  institution's reply: Kaohsiung on a request to the city's civil affairs
+  bureau for its door-plate file, Tallinn on an emailed order for the
+  building register (its food file is also geo-blocked), and Sendai on the
+  city's permission. The owner's reasoning: waiting on a bureaucratic
+  response takes the push past the block out of the owner's hands, as a
+  geo-block does. **Standing rule: every future request-only city goes to
+  R, not D.**
+- **Band D is now only what the owner can clear alone:** Lisbon (a free
+  account), Delhi (a CAPTCHA on MCD's register), and Ho Chi Minh City (a
+  CAPTCHA on the catalogue). Counts: A 1 · B 10 · C 7 · D 3 · R 15 · T 51 =
+  87. Files: `docs/city_master_list.md`, `docs/global_transit_gap.md`,
+  `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - Bands restructured: N retooled as C, D split into D (owner can act) and R (restricted) (owner)
 
