@@ -20,12 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**208 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**209 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
 - [Stations closed for works: drawn as the timetable runs, in every city (owner)](#2026-09-29---stations-closed-for-works-drawn-as-the-timetable-runs-in-every-city-owner)
 - [Thinned lines must be named where a reader can find them (owner)](#2026-09-29---thinned-lines-must-be-named-where-a-reader-can-find-them-owner)
+- [Build briefs for six Band B cities; Baltimore's register found stale (staging)](#2026-09-29---build-briefs-for-six-band-b-cities-baltimores-register-found-stale-staging)
 - [Band C closed: its last five to the discards (owner)](#2026-09-29---band-c-closed-its-last-five-to-the-discards-owner)
 - [Minneapolis and Pittsburgh to B, their worst lines accepted; St. Paul re-checked, still no register (owner)](#2026-09-29---minneapolis-and-pittsburgh-to-b-their-worst-lines-accepted-st-paul-re-checked-still-no-register-owner)
 - [The Band C measurements: Ottawa and Palma to B; Minneapolis and Pittsburgh pass on data, rail to the owner; Yokohama's count corrected](#2026-09-29---the-band-c-measurements-ottawa-and-palma-to-b-minneapolis-and-pittsburgh-pass-on-data-rail-to-the-owner-yokohamas-count-corrected)
@@ -293,6 +294,46 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   rejected: the rule as given is either, and the page is where a reader of
   that one city looks. The self-test gains a case that strips both places
   from Riga (10 of 10), and its fixture now copies `app/pages/`.
+
+### 2026-09-29 - Build briefs for six Band B cities; Baltimore's register found stale (staging)
+
+- **Briefs written in the owner's order**: Minneapolis, Pittsburgh (US),
+  Ottawa, Kitchener–Waterloo (Canada), Palma, Yokohama. Every checks block
+  passes; Overpass and WPRDC timeouts pass on re-run.
+  - **Minneapolis**: 16 light-rail stations inside (the stub test's 19
+    counted the airport people mover), 618 m, standard rings; 2,104 premises
+    (inspected within two years), 37.1% within 0.6 mi.
+  - **Pittsburgh**: 20 stations at a **445 m median gap, so halved rings**
+    by the spacing rule. 2,086 active premises; 26.8% within the 0.3 mi
+    outer ring. Status 7 (3,855 rows, undocumented) is to read in WPRDC's
+    dictionary before the build.
+  - **Ottawa**: 25 stations (the raw OSM names give 38 at a 12 m gap, as
+    platforms differ by direction); ~5,300 food premises, 30.8% within
+    0.6 mi. The feed is licensed under the **Open Government Licence – City
+    of Ottawa v2.0** (read), with a prescribed credit. The item says it
+    "will be retired in Q1 2026" yet is still updated daily, so it should be
+    cached early.
+  - **Kitchener–Waterloo**: the Region's two inspection layers found
+    (MapServer 17 and 18: 3,750 food and 998 personal region-wide); ION 19
+    stops, 613 m.
+  - **Palma**: the full join places **74.0%** (581 own coordinates plus
+    2,655 via Catastro). About 16 stations inside, 583 m; 37.3% within
+    0.6 mi. **Three owner calls from the licence reads**:
+    - GOIB's "no alteration" clause (Barcelona's reading);
+    - an uncapped indemnity (Hong Kong's shape);
+    - Catastro's older 2016 licence PDF against its current CC BY 4.0.
+  - **Yokohama**: 138 stations inside across seven operators, 836 m; 7,896
+    premises, 82.1% within 0.6 mi.
+- **Baltimore's brief was not written: its register fails the one-clock
+  rule on inspection.** Every one of the Restaurants layer's 1,327 rows
+  carries `EDIT_DATE` 2008-06-22. The item was republished 2025-12-04, and
+  its description says it "has not been updated since 2022". Read from the
+  rows, the list is 18 years old; read from the publisher's note, 4 years,
+  with no way to drop a closed restaurant. The licence read found it
+  permitted (the City Code's open-data ordinance, § 9-8(b)). **The currency
+  verdict is the owner's**: back to the discards on currency (Singapore's
+  ground), or keep it on the publisher's 2022 note with the date disclosed.
+  The Band C audit passed it without having read the rows' dates.
 
 ### 2026-09-29 - Band C closed: its last five to the discards (owner)
 
