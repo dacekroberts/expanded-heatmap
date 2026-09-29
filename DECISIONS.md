@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**119 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**120 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-28**
 
+- [Six small networks screened: Tashkent, Hanoi and Ho Chi Minh City to Band D; Baku, Panama City and Caracas discarded (owner)](#2026-09-28---six-small-networks-screened-tashkent-hanoi-and-ho-chi-minh-city-to-band-d-baku-panama-city-and-caracas-discarded-owner)
 - [Perth and Ankara to Band N (owner)](#2026-09-28---perth-and-ankara-to-band-n-owner)
 - [Sydney found on a re-probe and Newcastle, both to Band B; Bangkok and Riyadh to Band D; Doha discarded (owner)](#2026-09-28---sydney-found-on-a-re-probe-and-newcastle-both-to-band-b-bangkok-and-riyadh-to-band-d-doha-discarded-owner)
 - [Buenos Aires to Band A, Melbourne (City of Melbourne) to Band B; Sydney queued for a re-probe (owner)](#2026-09-28---buenos-aires-to-band-a-melbourne-city-of-melbourne-to-band-b-sydney-queued-for-a-re-probe-owner)
@@ -155,6 +156,42 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-28 - Six small networks screened: Tashkent, Hanoi and Ho Chi Minh City to Band D; Baku, Panama City and Caracas discarded (owner)
+
+- **Moved Tashkent, Hanoi and Ho Chi Minh City into Band D (owner's calls),
+  blocked before measurement.**
+  - **Tashkent:** `data.egov.uz` refuses TCP, while other .uz hosts connect.
+    Tashkent's open-data and map portals answer 403 "Your country is United
+    States… not allowed". The Statistics Committee's register sits behind
+    OneID, and the licence register's API behind a Turnstile token.
+  - **Hanoi:** the city's hosts time out, and `data.gov.vn` does not resolve.
+    The only reachable list is an opt-in food list with no licence.
+  - **Ho Chi Minh City:** the open-data catalogue serves a CAPTCHA on every
+    path, Daejeon's shape.
+  - A discard was rejected for these three because the discard check counts
+    a blocked host as no method.
+- **Discarded Baku, Panama City and Caracas (owner's calls).**
+  - **Baku:** `opendata.az` (886 datasets) holds counts. Its "objects and
+    places" layer is OSM re-exported under a CC-BY label, and the food
+    register is CAPTCHA-gated and "all rights reserved".
+  - **Panama City:** `datosabiertos.gob.pa` (5,753 packages) has no MICI or
+    MINSA datasets. The Municipio de Panamá's 131 are aggregates, and Panamá
+    Emprende times out.
+  - **Caracas:** there is no open-data portal (`datos.gob.ve` times out,
+    `datosabiertos.gob.ve` does not resolve). The city, INE and Chacao sites
+    publish no premises list.
+  - One agent read Chacao's 1,549-building inspection map whole into memory
+    (it printed 3 rows and saved nothing), past the five-row sampling rule.
+- **Glasgow and the Indian three, measured the same day, not yet banded.**
+  - **Glasgow City:** 6,632 FSA premises under FHIS, republished 2026-09-15.
+    The per-type split still times out on the FSA's side, whose API failed
+    for most of the evening.
+  - **Indian hosts:** Bengaluru's BBMP hosts time out, as Delhi's did, but
+    Kolkata's (`www.kmcgov.in`) and Chennai's (`chennaicorporation.gov.in`)
+    answer 200.
+  - Files: `docs/city_master_list.md`, `docs/global_country_shortlist.md`,
+    `docs/global_transit_gap.md`, `docs/handoff_staging_2026-09-28.md`.
 
 ### 2026-09-28 - Perth and Ankara to Band N (owner)
 

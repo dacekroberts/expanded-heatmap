@@ -41,7 +41,8 @@ then follow the pointers. **Delete a section when its item is done.**
   sub-group** (11 cities) · **C closed**. Section order A, B, D, N, T. The chat
   republish format is in the owner's memory (`feedback_master_list_format.md`).
 - **`docs/global_transit_gap.md`**: every large-network city not built (28
-  discarded, 22 ruled out by country, 23 in a band, 9 never screened;
+  discarded, 22 ruled out by country, 26 in a band, 3 never screened;
+  Tashkent, Hanoi and HCMC to D, Baku, Panama City and Caracas discarded 2026-09-28;
   Perth and Ankara to N 2026-09-28;
   Sydney and Newcastle to B, Bangkok and Riyadh to D, Doha discarded 2026-09-28;
   Delhi to D, Mumbai and Algiers discarded, Buenos Aires to A, Melbourne to B
