@@ -398,6 +398,31 @@ bucheon, bergen, then the four light-rail cities; one `deploy-verify` scope
   step 2 and step 3**, then `check_personal_exposure.py copenhagen`
   (DECISIONS verdict), `drift_check --update-baseline`, macro_facts and
   ring_shares.
+- **`aarhus`** (origin at 53eda32, READY 2026-09-29; page 72; 5,102
+  storefronts, 20 stations, 25.5% in a ring; TEXT_WIDTH 46.9, label ("end",
+  -11, 10); rail_extra "Trams"). **Aarhus has no stored baseline yet:
+  run `drift_check.py aarhus --update-baseline` at review (a heavy job,
+  about 5 GB read).** It widens notices 30 (Det Centrale Virksomhedsregister)
+  and 31 (Klimadatastyrelsen) to "(Copenhagen, Aarhus)" and edits
+  `app/components.py` NOTICES near Bergen's OpenStreetMap rail-geometry edit.
+  Its full list of shared files is in its READY message; it matches the other
+  city branches' list, plus `docs/project_context.md` and the Danish modules.
+- **Copenhagen, the store-number rule:** matching pins keep their place and
+  show the street address in place of the name (`name_is_address`); no pin
+  is removed. Expect 33 changes, all discount supermarkets, the storefront
+  count unchanged, and the name_shown baseline down 33. Owner-approved
+  wording: on `app/pages/27_Copenhagen_Heatmap.py`, after "...because such
+  businesses are usually registered under the owners' own names." add "So
+  does a supermarket registered under its franchisee's own name."; in
+  `docs/excluded_categories.md`, Copenhagen's "Shown, but not named"
+  paragraph, after '...marker "v/" ("by").' add "So does a supermarket
+  registered under its franchisee's own name and a store number (33
+  premises, owner 2026-09-29)." (DECISIONS "A Danish store registered as a
+  franchisee's own name...").
+- **Riga in the spacing-filter sentence** (owner, 2026-09-29, at review):
+  in `docs/excluded_categories.md`, make it "...the trams of Amsterdam,
+  Rotterdam and Riga, Rome's tram 8, and Hong Kong's Light Rail." The
+  internal list is in `docs/sub_transit_line_filters.md`.
 - **`aarhus` adds a fifth station-scope class, "infrequent"** (owner-approved):
   `app/station_scope.py`'s `counts_for` returns a 5-tuple,
   `app/pages/201_What_Is_Excluded.py` gains a "Too infrequent" column, and

@@ -30,6 +30,13 @@ Property E rides along with C: every committed `excluded_stations.csv` must
 classify into a shape the page understands, so a city arriving with a new
 schema shows up here rather than as a wrong number on the live site.
 
+Property F rides along with E: a city whose file thins stops by spacing must
+say so where a reader can find it - on its own page, or by name in the
+document's spacing-filter paragraph (owner, 2026-09-29). The station table
+gives only a count, so without one of the two a reader cannot tell which
+lines were thinned. A city that passes on its page alone is printed as a NOTE,
+since the document's list is then incomplete.
+
   python scripts/check_scope_disclosure.py [--root DIR]
 
 Exit 0 if every property holds.
@@ -37,6 +44,7 @@ Exit 0 if every property holds.
 
 import argparse
 import csv
+import re
 import sys
 from pathlib import Path
 
@@ -55,6 +63,13 @@ KNOWN_GAPS = {}
 
 BUSINESS_HEADING = "## Which businesses are counted"
 STATION_HEADING = "## Which stations these maps are drawn around"
+
+# F - the paragraph that names the thinned lines, and the wording a city page
+# uses to say its stops were thinned ("thinned", or Amsterdam's, Rotterdam's
+# and Riga's "one stop per half mile is drawn").
+SPACING_PARAGRAPH = "**Its stops are too close together"
+THINNING_WORDS = re.compile(r"thinn|one (?:stop|station) per half[- ]mile",
+                            re.IGNORECASE)
 
 
 def load_app(root):
@@ -97,6 +112,8 @@ def main():
 
     cities, station_scope = load_app(root)
     business_half = doc.partition(BUSINESS_HEADING)[2]
+    spacing_list = doc.partition(SPACING_PARAGRAPH)[2].split("\n\n", 1)[0]
+    unlisted = []
 
     # A LOOP OVER NOTHING SATISFIES EVERY ASSERTION IN IT. Properties C, D and
     # E are all per-city, so an empty list would print OK having examined
@@ -139,6 +156,26 @@ def main():
                             f"count them under 'Other'; describe the new "
                             f"category in the document and teach "
                             f"app/station_scope.py to read it.")
+                    # F - a thinned city says so on its page or in the list.
+                    thinned = sum(
+                        1 for r in rows
+                        if station_scope.classify(r.get("reason"), base)
+                        == "thinned")
+                    page = root / "app" / entry["page"]
+                    page_text = (page.read_text(encoding="utf-8")
+                                 if page.exists() else "")
+                    on_page = bool(THINNING_WORDS.search(page_text))
+                    in_list = base in spacing_list
+                    if thinned and not (on_page or in_list):
+                        problems.append(
+                            f"{name}: {thinned} stop(s) thinned by spacing in "
+                            f"{csv_path.name}, but neither {entry['page']} nor "
+                            f"the spacing-filter paragraph of "
+                            f"docs/excluded_categories.md says which lines. "
+                            f"Name them on the page, or add the city to that "
+                            f"paragraph.")
+                    elif thinned and not in_list:
+                        unlisted.append(base)
                 elif not (station_scope.BOUNDARY_COLUMNS & columns) and rows:
                     problems.append(
                         f"{name}: {csv_path.name} has neither a 'reason' "
@@ -164,6 +201,10 @@ def main():
 
     for line in problems:
         print(f"FAIL  {line}")
+    if unlisted:
+        print(f"NOTE  thinned and said so on their own page, but not named in "
+              f"the spacing-filter paragraph of docs/excluded_categories.md: "
+              f"{', '.join(unlisted)}")
     if KNOWN_GAPS:
         print(f"\n{len(KNOWN_GAPS)} city/cities are a DATED GAP rather than a "
               f"pass: " + ", ".join(f"{c} (since {d})"
