@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**193 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**194 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [Osaka's phone-width label overlaps fixed by a second placer injected only into wide-tier maps; no other map changed](#2026-09-29---osakas-phone-width-label-overlaps-fixed-by-a-second-placer-injected-only-into-wide-tier-maps-no-other-map-changed)
 - [The tram batch's groundwork started (owner: all six items); a France macro view measured, and a North/South split recommended](#2026-09-29---the-tram-batchs-groundwork-started-owner-all-six-items-a-france-macro-view-measured-and-a-northsouth-split-recommended)
 - [Published cities' data dates checked: San Francisco maps closed locations, Dublin keeps vacant premises, three sources cannot be dated from their rows](#2026-09-29---published-cities-data-dates-checked-san-francisco-maps-closed-locations-dublin-keeps-vacant-premises-three-sources-cannot-be-dated-from-their-rows)
 - [Tram cities use the existing spacing rule for ring size (owner); the 95% coverage rule withdrawn](#2026-09-29---tram-cities-use-the-existing-spacing-rule-for-ring-size-owner-the-95-coverage-rule-withdrawn)
@@ -232,6 +233,55 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - Osaka's phone-width label overlaps fixed by a second placer injected only into wide-tier maps; no other map changed
+
+- **Osaka's 34 labels had 22 overlapping pairs at 343 px and 12 at 375**
+  (`scripts/check_map_labels.js`, reproduced from the 2026-09-29 full
+  deploy-verify), none at 854 or 1280. The cause was shared, not Osaka's
+  config: `LABEL_CLAMP_SCRIPT` re-places a colliding label among 15 spots
+  around its own tip, and at the phone fit (zoom 10.75 on a 343 x 650 frame)
+  the labels cover 43% of the frame with most tips in one knot, so every spot
+  beside a tip was taken. Area alone showed a clean layout was possible.
+- **Added `DENSE_LABEL_SCRIPT` to `pipeline/map_common.py`: a second placer
+  that runs after the clamp and moves only a label that still overlaps**
+  something with no margin. It takes the nearest less-crowded spot from a
+  grid of about a thousand around the tip, never more than 88 px from it
+  (`max(_LABEL_WIDE_CLEARANCES)`, the stand-off the owner approved for the
+  desktop's third pass on 2026-09-27). A label still stuck may displace one
+  or two neighbours that each have a clean spot of their own, all or nothing.
+  The first version used a 1 px margin to decide what moves and moved one
+  desktop Osaka label sitting 1.2 px from another; the no-margin trigger
+  fixed that. It took 240 ms a run at first, ~20 ms after early-exit cost
+  functions (the clamp itself takes 35-70), and it runs on every `moveend`.
+- **Injected only where the desktop layout used the wide tier, so no other
+  map changes by a byte** - the third label pass's argument, one block on.
+  Rejected: editing `LABEL_CLAMP_SCRIPT`, which is embedded in every map and
+  which `check_render_current.py` (in `check_all.py`, the pre-push gate)
+  checks, so every other map would have failed until a full re-render. Backing the stand-off out of
+  every committed map's baked label offsets found Osaka the only one of 68
+  with a wide-tier label (5 labels at 66 px; Tokyo's 52 are all at tier 0).
+  `check_render_current.py` now reads `map_common.CONDITIONAL_BLOCKS`: such a
+  block must be current where present and is not demanded where absent. A
+  negative control (one line of the block edited in a copy of Osaka's map)
+  fails as it should. What it cannot see is a map that should carry the block
+  and was rendered before it existed; today that set is empty.
+- **Osaka re-rendered (step 3 only): 218 lines added to `heatmap.html`, none
+  removed** after Folium-id normalisation. `check_map_labels.js`: no problems
+  at 343, 375, 854 or 1280, with no label moved at 1280; "Hankyu Takarazuka
+  Line" is no longer under the layer control; no console errors; stable over
+  zooming in and out. `check_all.py` 24 of 24. `drift_check.py osaka`: zero
+  drift, 26 baseline figures unchanged. Step 2 re-wrote
+  `data/osaka/processed/` byte-identically (hashes checked), and the backup
+  was restored anyway.
+- **Not fixed here:** Madrid's one 343 px touch ("Línea 5" / "Ramal
+  Ópera–Príncipe Pío") clears with the same block, measured by injecting it
+  into the committed map, but Madrid used only the 22/44 px tiers, so reaching
+  it means widening the trigger and re-rendering Madrid. That is an owner
+  call and unqueued in PLAN. Oslo's "T-bane 2" a few px under the open legend
+  at 1024x768 standalone is a different cause (the open legend is not an
+  obstacle to either placer, by design, and cannot occur in the app's 650 px
+  embed).
 
 ### 2026-09-29 - The tram batch's groundwork started (owner: all six items); a France macro view measured, and a North/South split recommended
 
