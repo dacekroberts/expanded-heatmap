@@ -1595,7 +1595,8 @@ CITIES = [
         # the deployed app's own frame (2026-09-28, three entries reproduced),
         # and check_macro_labels.py passes every region at 375, 768 and 1200
         # with PROBLEMS 0. Nothing else is near it on the Europe view.
-        "label_offset": ("middle", 0, -22),
+        # Beside its dot, not above: see Newcastle (Regional)'s note.
+        "label_offset": ("end", -10, -8),
     },
     {
         "name": "Newcastle (Regional)",
@@ -1620,7 +1621,12 @@ CITIES = [
         # reproduced), and check_macro_labels.py passes every region at 375,
         # 768 and 1200 with PROBLEMS 0 - scored WITHOUT Glasgow, which is on
         # its own branch; re-score when both have landed.
-        "label_offset": ("middle", 0, -22),
+        # Glasgow and Newcastle together (review time 2026-09-28, owner): each was
+        # scored without the other, and above-the-dot Newcastle covered Glasgow's
+        # marker at 1200 px. A search of 48 pairs passed only with Newcastle lifted
+        # 48 px and Glasgow's name beside its dot. The owner accepted the drift
+        # a 48 px lift costs when zoomed in; check_macro_labels.py PROBLEMS 0.
+        "label_offset": ("middle", 0, -48),
     },
     {
         "name": "Sydney",
