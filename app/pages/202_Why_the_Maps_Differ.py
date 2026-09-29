@@ -183,8 +183,10 @@ its map leans.
 meant to mean the same thing everywhere, but national classifications and
 local rules move some businesses at the edges. Car dealers count as Retail in
 most cities but not in France. Massage is a Personal service in Alberta but is
-left out as health care in British Columbia. Street stalls are left out in
-Mexico.
+left out as health care in British Columbia. Funeral homes, caterers, food
+trucks and market stalls, gambling, and the "other personal services"
+catch-all are left out wherever a register names them; where one files them
+under an ordinary label, they stay on the map.
 """
 )
 
