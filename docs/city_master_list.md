@@ -1257,7 +1257,7 @@ known to exist and only the bulk route is missing.
 
 ---
 
-## Four rules this list is maintained by
+## Five rules this list is maintained by
 
 **A row reading "not reached", "unprobed" or a regional pattern is not a
 discard.** Eleven cities were once sitting in the discard list on exactly those
@@ -1295,6 +1295,35 @@ So:
 
 A city is never listed in two bands. The same rule governs the Japan list
 (`scripts/japan_ward_table.py`) and every chat republish.
+
+**A source must be current, and what "current" means depends on its kind
+(owner, 2026-09-29).** Read the latest date IN THE DATA, never the
+catalogue's description or its re-stamp: Stockholm's layer read "daily" while
+frozen, and Tenerife's catalogue was re-stamped 2026-05-31 with no row
+changed. Judge a directory of mixed ages by its median row, not its newest.
+1. **A complete census or survey** (every premises observed at one time:
+   Brazil's CNEFE, Barcelona's ground-floor census, Sydney's floor-space
+   survey, Buenos Aires' land-use survey, Melbourne's CLUE) **stands while its
+   fieldwork is under five years old**, with its date on the page. Brazil's
+   and Barcelona's 2022 fieldwork come up for re-check in 2027; Hamburg's
+   2016 retail survey failed.
+2. **A register or directory** (a list someone maintains) **must still be
+   maintained: its newest update in the data within 18 months of the
+   screen**, and its data date on the page if it has stopped. Stockholm
+   (frozen 11 months at build) and Kansas City (8.5 months) pass; Atlanta
+   (last edited 2023-04) and Santa Cruz–La Laguna's directory (newest
+   2023-11, median row 2016-11) fail.
+3. **A stream of events** (permits, certificates, notices) records openings,
+   not closings, so it needs a closure field or a stated expiry window, and
+   events within the last 18 months. Dallas's certificates of occupancy failed
+   both: no closure, and nothing after 2022-11-15. Rotterdam's permit notices
+   pass on a five-year window.
+
+**A frozen part may sit beside a current whole**, its date on the page:
+Tokyo's Koto, Chuo and Shinjuku lists end 2022-11 to 2023-01, with current
+national filings layered on (owner's call at build). Published cities are
+measured against this rule by a date check; none leaves the site on it
+without the owner's call.
 
 ## Before building any city on this list
 

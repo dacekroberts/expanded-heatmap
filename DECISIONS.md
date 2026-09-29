@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**173 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**174 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-09-29**
 
+- [A currency rule by kind of source: census five years, register 18 months, event streams need a closure (owner)](#2026-09-29---a-currency-rule-by-kind-of-source-census-five-years-register-18-months-event-streams-need-a-closure-owner)
 - [The tram list's data re-checked for currency: Santa Cruz–La Laguna discarded, Kansas City kept with its data date (owner)](#2026-09-29---the-tram-lists-data-re-checked-for-currency-santa-cruzla-laguna-discarded-kansas-city-kept-with-its-data-date-owner)
 - [Band T audited: light rail leaves for A and C on a three-part test, Band T moves to its own tram list (owner)](#2026-09-29---band-t-audited-light-rail-leaves-for-a-and-c-on-a-three-part-test-band-t-moves-to-its-own-tram-list-owner)
 - [Funeral exclusions coded; fringe-category audit and the owner's rules; one combined exclusions batch](#2026-09-29---funeral-exclusions-coded-fringe-category-audit-and-the-owners-rules-one-combined-exclusions-batch)
@@ -212,6 +213,46 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-09-29 - A currency rule by kind of source: census five years, register 18 months, event streams need a closure (owner)
+
+- **Written down because the discards and the published cities disagreed
+  (owner).** Santa Cruz–La Laguna was discarded on data whose newest update
+  is 2023-11-13, and Dallas on certificates ending 2022-11-15, while 16
+  published cities rest wholly or partly on older-dated business data: the
+  nine Brazilian cities on the 2022 census, Barcelona and Sydney on 2022
+  surveys, Buenos Aires in part (2022–2024), and Tokyo's Koto, Chuo and
+  Shinjuku ward lists (2022-11-30 to 2023-01-01). Dallas's row said "a
+  four-year-old snapshot cannot be disclosed away on a page", which Brazil's
+  census now matches in age. The ages were not the difference; the kind of
+  source was.
+- **The rule** (`docs/city_master_list.md`, "Five rules"; a pointer in
+  `add-city` Step 0): the date is read in the data, never the catalogue; a
+  directory of mixed ages is judged by its median row. A complete census or
+  survey stands while its fieldwork is under five years old; a register or
+  directory must have an update within 18 months of the screen; a stream of
+  permits, certificates or notices needs a closure field or an expiry window
+  and events within 18 months. A frozen part may sit beside a current whole
+  with its date disclosed (Tokyo's three wards). Every date is on the page.
+- **Why these lines.** Five years matches Sydney's survey cycle and keeps
+  every published census inside it; the alternative, "until the next
+  edition", would carry Brazil's decennial census to 2032. Eighteen months
+  keeps Stockholm (11 months frozen at build) and Kansas City (8.5) and
+  excludes Atlanta (2023-04) and Santa Cruz's directory. Measured by row, not
+  by its newest date, that directory's median update is 2016-11, with 83.7%
+  of dated rows last touched 2015–2018 and 10.7% in 2022 or later; the newest
+  date first quoted to the owner made it look closer to Brazil than it is.
+- **What it re-decides: nothing yet.** Dallas and Atlanta still fail (a
+  stream with no closure; a register not updated since 2023). Hamburg's 2016
+  survey still fails. Brazil's and Barcelona's 2022 fieldwork fall due for
+  re-check in 2027. Santa Cruz–La Laguna's current food register (3,658
+  restaurants in the two municipalities, updated 2026-08-31, trade names,
+  90.3% of addresses with a house number, no coordinates) would pass as a
+  register, so moving the city to T2 as food-only (Zurich's shape) is open
+  for the owner, not decided here. The published cities with no source date
+  recorded (17, "Fetched … (no source date)"; Milan and Dublin never read)
+  are measured against the rule by a date check, and none leaves the site on
+  it without the owner's call.
 
 ### 2026-09-29 - The tram list's data re-checked for currency: Santa Cruz–La Laguna discarded, Kansas City kept with its data date (owner)
 
